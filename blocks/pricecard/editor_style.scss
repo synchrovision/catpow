@@ -1,0 +1,20 @@
+@import 'admin_style_config.scss';
+
+ul.wp-block-catpow-pricecard{
+	li.item{
+		.itemControl{
+			@include bnd((p:a,t:.5rem,r:.5rem));
+		}
+		.link{
+			@include bnd((p:r));
+			.components-base-control{
+				@include bnd((p:a,b:-4rem,l:0,r:0,mg:a));
+				@include txt((c:t));
+			}
+		}
+	}
+	&.edit{}
+	&.isSelected{
+		
+	}
+}

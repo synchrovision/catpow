@@ -1,0 +1,33 @@
+@import 'config/style_config.scss';
+
+.reference{
+	@include bnd((w:a,mgr:20));
+	h2{
+		
+	}
+	article{
+		h1{
+			@include bnd((pdb:10,mg:30 0 10));
+			@include bdr((p:b,s:s,w:1,c:m));
+			@include txt((p:24,c:m,s:b,f:g));
+		}
+		h2{
+			@include bnd((pdb:5,mg:20 10 5));
+			@include bdr((p:b,s:s,w:1,c:t 30));
+			@include txt((p:15,c:t,s:b,f:g));
+		}
+		ul{
+			@include bnd((mg:5 20));
+			li{
+				h3{
+					small{
+						@include bnd((d:ib,mgl:10));
+					}
+				}
+				p{
+					@include bnd((mg:5 10));
+				}
+			}
+		}
+	}
+}

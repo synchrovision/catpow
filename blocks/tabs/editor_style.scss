@@ -1,0 +1,24 @@
+@import 'admin_style_config.scss';
+
+div.wp-block-catpow-tabs{
+	[data-type="catpow/tabscontent"]{@include bnd((d:n));}
+	@for $i from 0 through 10{
+		&[data-current-index="#{$i}"]{
+			[data-type="catpow/tabscontent"]:nth-of-type(#{$i + 1}){
+				@include bnd((d:b));
+			}
+		}
+	}
+	&>ul.tab{
+		@include bnd((pd:0,mg:0));
+		li.item{
+			@include bnd((p:r));
+			.itemControl{
+				@include bnd((w:7rem,p:a,t:-2rem,l:0,r:0,mg:a));
+			}
+		}
+	}
+	&>.contents{
+		@include bnd((o:h));
+	}
+}

@@ -1,0 +1,8 @@
+@import 'admin_style_config.scss';
+
+
+div.TimeSelect{
+	select{
+		@include bnd((mg:0 .5em));
+	}
+}

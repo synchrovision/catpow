@@ -1,0 +1,1 @@
+個別ページでOGPを出力します。各ページのOGPの出力は<a href="https://developers.facebook.com/tools/debug/sharing/" target="_blank">Facebookシェアデバッガー</a> および<a href="https://cards-dev.twitter.com/validator" target="_blank">Twitter Card validator</a>で確認できます。

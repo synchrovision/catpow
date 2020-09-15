@@ -1,0 +1,1 @@
+window.Catpow = window.Catpow || {};

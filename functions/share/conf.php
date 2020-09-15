@@ -1,0 +1,17 @@
+<?php
+$conf=[
+	'cat'=>'sns',
+	'meta'=>[
+		'config'=>['type'=>'data','meta'=>[
+			'target'=>['type'=>'checkbox','value'=>[
+				'Twitter'=>'tw',
+				'Facebook'=>'fb',
+				'Line'=>'ln',
+				'Hatena'=>'ht',
+				'Pintarest'=>'pn',
+				'Pocket'=>'pk',
+				'RSS'=>'rss'
+			]]
+		]]
+	]
+];

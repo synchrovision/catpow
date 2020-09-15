@@ -1,0 +1,19 @@
+@import 'admin_style_config.scss';
+
+ul.wp-block-catpow-banners{
+	li.item{
+		@include bnd((p:r));
+		.itemControl{
+			@include bnd((p:a,t:.5rem,r:.5rem));
+		}
+		&>.link{
+			@include bnd((p:a,l:0,b:0));
+			@include bg((c:b 1 .8));
+			@include shd((b:1));
+			p{
+				@include bnd((mg:0,pd:.2rem));
+				@include txt((p:1rem));
+			}
+		}
+	}
+}

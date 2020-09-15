@@ -1,0 +1,55 @@
+@charset "utf-8";
+@import "catpow.scss";
+
+$selectors:(
+	m:'body .site_main .page_main .page_content',
+	e:'body.mce-content-body,.gutenberg .editor-block-list__layout',
+	u:'#profile-page,#cpcf_custom_box .inside'
+);
+
+$st:60;
+$lt:60;
+
+$colors:(
+	1:hsl(0,$st,$lt),
+	2:hsl(30,$st,$lt),
+	3:hsl(60,$st,$lt),
+	4:hsl(90,$st,$lt),
+	5:hsl(120,$st,$lt),
+	6:hsl(150,$st,$lt),
+	7:hsl(180,$st,$lt),
+	8:hsl(210,$st,$lt),
+	9:hsl(240,$st,$lt),
+	10:hsl(270,$st,$lt),
+	11:hsl(300,$st,$lt),
+	12:hsl(330,$st,$lt),
+	a:#F80,
+	m:#321,
+	b:#ffe,
+	t:#876,
+	shd:rgba(0,0,0,.3),
+	n:transparent
+);
+
+$images:(
+	logo:'images/logo.png',
+	bg:'images/bg.png',
+);
+
+$fonts:(
+	g:$gothic,
+	m:$mincho,
+	e:'times'
+);
+
+$sizes:(
+);
+
+$breakpoints:(
+	1:'min-width:640px',
+	2:'min-width:960px',
+	3:'min-width:1600px',
+	-1:'max-width:639px',
+	-2:'max-width:959px',
+	-3:'max-width:1599px',
+);

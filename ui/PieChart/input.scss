@@ -1,0 +1,9 @@
+@import 'admin_style_config.scss';
+
+
+div.PieChart{
+	@include bnd((w:30rem));
+	svg{
+		rect.control{@include svg((f:n));@include usr((c:p));}
+	}
+}

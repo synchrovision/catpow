@@ -1,0 +1,88 @@
+@import "config/style_config.scss";
+
+body{
+	table{
+		&.wp-block-catpow-datatable{
+			&.spec{
+				@include tbl(());
+				@include bnd((w:95%,mg:50 a));
+				thead{
+					th,td{
+						@include bnd((pd:1rem));
+						@include txt((a:c,p:1.2rem,h:1.5em,f:g));
+						@include bdr((p:b,s:s,w:1,c:t 1 .7));
+					}
+				}
+				tbody{
+					tr{
+						th,td{
+							@include bnd((p:r,pd:1rem));
+							@include txt((a:c,p:1.2rem,h:1.5em,f:g));
+							@include bdr((p:b,s:s,w:1,c:t 1 .3));
+						}
+					}
+				}
+			}
+			&.sheet{
+				@include tbl(());
+				@include bnd((w:95%,mg:50 a));
+				thead{
+					th{
+						@include bnd((pd:1rem));
+						@include txt((a:c,p:1.2rem,h:1.5em,f:g));
+						@include bg((c:m 1 .1));
+						@include bdr((s:s,w:1,c:t 1 .5));
+					}
+				}
+				tbody{
+					tr{
+						th,td{
+							@include bnd((p:r,pd:1rem));
+							@include txt((a:l,p:1.2rem,h:1.5em,f:g));
+							@include bdr((s:s,w:1,c:t 1 .5));
+						}
+						th{
+							@include bg((c:m 1 .1));
+							@include txt((a:c));
+						}
+						td{
+							@include bg((c:b));
+						}
+						&:nth-of-type(2n){
+							td{@include bg((c:m 1 .1));}
+						}
+					}
+				}
+			}
+			&.plan{
+				@include tbl(());
+				@include bnd((w:95%,mg:50 a));
+				thead{
+					th{
+						@include bnd((pd:1rem));
+						@include txt((a:c,p:1.2rem,h:1.5em,f:g,c:i));
+						@include bg((c:m));
+					}
+				}
+				tbody{
+					tr{
+						th,td{
+							@include bnd((p:r,pd:1rem));
+							@include txt((a:c,p:1.2rem,h:1.5em,f:g));
+						}
+						th{
+							@include bg((c:m));
+							@include txt((c:i));
+						}
+						td{
+							@include bg((c:b));
+						}
+						&:nth-of-type(2n){
+							td{@include bg((c:m 1 .1));}
+						}
+					}
+				}
+			}
+		}
+	}
+}

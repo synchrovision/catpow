@@ -1,0 +1,17 @@
+@import "config/style_config.scss";
+
+div.wp-block-catpow-sidebar{
+    @include flx((w:w));
+    div.wp-block-catpow-maincolumn{
+        @include bnd((f:10 10 30rem));
+    }
+    div.wp-block-catpow-sidecolumn{
+        @include bnd((f:1 1 30rem,pd:1rem,bs:b));
+        @media(#{bp(2)}){
+            @include bnd((f:0 0 24rem));
+        }
+    }
+    &.left{
+        @include flx((d:rr));
+    }
+}

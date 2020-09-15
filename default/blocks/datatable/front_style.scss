@@ -1,0 +1,11 @@
+@import 'admin_style_config.scss';
+
+table.wp-block-catpow-simpletable{
+	tbody{
+		tr{
+			th,td{
+				white-space: pre-line;
+			}
+		}
+	}
+}

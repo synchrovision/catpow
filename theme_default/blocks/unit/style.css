@@ -1,0 +1,27 @@
+@charset "utf-8";
+body div.wp-block-catpow-unit {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-items: center;
+  align-items: center;
+  margin: 5rem auto; }
+  body div.wp-block-catpow-unit > .image {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 30rem;
+    padding: 2rem 1rem; }
+    body div.wp-block-catpow-unit > .image img, body div.wp-block-catpow-unit > .image video {
+      width: 100%;
+      height: auto; }
+  body div.wp-block-catpow-unit > .content {
+    -webkit-box-flex: 2;
+    flex-grow: 2;
+    flex-shrink: 2;
+    flex-basis: 30rem;
+    padding: 2rem 1rem;
+    text-align: justify; }

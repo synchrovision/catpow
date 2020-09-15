@@ -1,0 +1,250 @@
+@import 'admin_style_config.scss';
+@include wp_admin_color(b,m,a,t);
+
+body.wp-admin{
+	&::after{
+		content: '　';
+		@include bnd((d:b,p:f,w:f,h:f,t:0,l:0,z:10000));
+		@include bg((c:#000,i:'images/spin.gif',p:50% 50%,s:40 40,r:n));
+		@include usr((e:n));
+		@include trn((t:.5s,o:0));
+	}
+	&.busy_mode:after{
+		@include usr((e:a));
+		@include trn((o:.4));
+	}
+	&.login{
+		@include bg((c:b));
+		#login{
+			h1{
+				a{
+					@include bnd((w:a));
+					@include bg((i:logo,s:80% a,p:c));
+				}
+			}
+		}
+	}
+	#adminmenumain{
+		#adminmenuback{
+			@include shd((b:3));
+		}
+	}
+	#wpcontent{
+		@include bp((
+			-2:(bnd:(pd:10))
+		));
+		#wpadminbar{
+			@include shd((b:3));
+		}
+		#editor{
+			@include bg((c:b));
+			.edit-post-header,.edit-post-sidebar{
+				@include shd((b:3));
+			}
+			.editor-post-title__block .editor-post-title__input{
+				@include txt((c:t));
+			}
+			.edit-post-visual-editor{
+				.editor-post-title__block,.editor-block-list__block{
+					@include bnd((w:a 960));
+				}
+			}
+			.edit-post-layout__metaboxes{
+				@include bdr((c:t 1 .5));
+			}
+		}
+		#cpcf_custom_box{
+			@include bg((c:b));
+			&>h2{
+				@include txt((c:t));
+				@include bdr((c:t 1 .3));
+			}
+			.inside{
+				@include bnd((pd:1rem,mg:0));
+				@include bdr((s:n));
+			}
+		}
+		form#cp_search{
+			#cpcf_custom_box_button{
+				@include bnd((p:f,z:10001,b:.5em,r:.5em,h:a,pd:1em));
+				@include bg((c:m));
+				@include bdr((p:t l,s:s,w:1,c:m,r:2em));
+				@include txt((a:c,p:1.5rem,h:1em,f:g,w:m,c:i));
+				@include usr((c:p));
+				&::before{
+					@include ico('search');
+				}
+			}
+			#cpcf_custom_box{
+				@include bg((c:n));
+				.inside{
+					@include bnd((p:f,z:10000,b:0,r:0));
+					@include bg((c:b));
+					@include bdr((p:t l,s:s,w:1,c:m,r:1rem 0 0 0));
+					@include shd((b:5));
+					@include usr((e:n));
+					@include trn((t:.5s,y:100vh,o:0));
+				}
+				&.active{
+					.inside{
+						@include usr((e:a));
+						@include trn((y:0,o:1));
+					}
+				}
+			}
+		}
+		form#posts-filter{
+			div.tablenav.top{
+				.actions{
+					@include bnd((o:v));
+					div.search_condition{
+						@include bnd((d:ib,p:r,mg:0 5));
+						.button{
+							&::before{
+								@include ico('search');
+								@include bnd((d:ib,mgr:10));
+							}
+						}
+						div.inputs{
+							@include bnd((d:b,p:a,pd:20,w:600,t:40,l:-200,z:10000));
+							@include bg((c:b));
+							@include bdr((s:s,w:1,c:m,r:10));
+							@include shd((b:3));
+							@include trn((t:.5s,o:0,y:-10));
+							@include usr((e:n));
+							&::before{
+								content: ' ';
+								@include bnd((d:b,w:1,h:1,p:a,t:-21,l:220));
+								@include bdr((s:s,w:10,c:n));
+								@include bdr((p:b,c:m));
+							}
+							&.active{
+								@include trn((o:1,y:0));
+								@include usr((e:a));
+							}
+							table.inputs{
+								@include bnd((w:f));
+								@include tbl(());
+								th,td{
+									@include bnd((pd:5 10));
+									@include bdr((s:s,w:1,c:t 30));
+									@include txt((a:l,p:12,h:12,f:g,s:r,c:t 80));
+								}
+								th{
+									@include bg((c:m 1 .1));
+								}
+								td{
+									label{
+										@include bnd((d:ib,mg:5));
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		.cp_form_section{
+			@include bnd((pd:2rem));
+			@include bg((c:b));
+		}
+		.wp-list-table{
+			a.pdf{
+				@include bnd((d:ib,w:80,h:115,o:h));
+				object{
+					@include bnd((w:400%,h:400%));
+					@include trn((s:.25,to:0 0 0));
+				}
+			}
+		}
+		.cp_admin{
+			div{
+				&.checkbox.cp-meta-item-use_functions{
+					label.checkbox{
+						.image{
+							@include bnd((d:ib,w:8rem,mgr:1rem));
+						}
+						.text{
+							@include bnd((p:r));
+							h3{
+								@include txt((a:c,p:1.3rem,f:g,w:m,c:t));
+							}
+							p{
+								@include bnd((d:b,p:a,w:14em,pd:1em,mg:0 a,l:-10em,r:-10em,z:1));
+								@include bg((c:m 90));
+								@include bdr((r:1em));
+								@include txt((a:j,p:1.1rem,w:r,c:i));
+								@include shd((b:2));
+								@include trn((t:.5s,y:1em,o:0));
+								@include usr((e:n));
+								&::before{
+									content: ' ';
+									@include bnd((w:1,h:1,p:a,t:-1em,mg:0 a,l:0,r:0));
+									@include bdr((s:s,w:.5em,c:n));
+									@include bdr((p:b,c:m 90));
+								}
+							}
+							&:hover{
+								p{
+									@include trn((y:0,o:1));
+								}
+							}
+						}
+					}
+				}
+			}
+			ul.functions{
+				@include bnd((pd:1rem));
+				@include bdr((r:1rem));
+				@include shd((b:5));
+				@include flx((w:w));
+				&>li{
+					@include bnd((mg:0));
+					@include trn((t:.5s));
+					&,&>.cp_form_section{
+						&>h2{
+							@include bnd((d:b,p:r,pd:5,mg:10));
+							@include txt((a:c,p:2rem,h:1em,f:'Raleway',c:t));
+							@include bdr((p:b,s:s,w:1));
+						}
+						.image{
+							@include bnd((mg:5));
+							@include bg((c:#fff));
+							@include bdr((r:10));
+							@include shd((b:-3));
+						}
+						.desc{
+							@include bnd((pd:5 10));
+							@include txt((a:j,p:1rem,h:1.5em,f:$gothic,s:r,c:t));
+						}
+						.control{
+							@include bnd((mg:10 20));
+						}
+					}
+				}
+				&.active{
+					&>li{
+						@include bnd((f:1 1 200px));
+						&.item{
+							&>.cp_form_section{
+							}
+						}
+					}
+				}
+				&.inactive{
+					&>li{
+						@include bnd((f:1 1 150px));
+						&.item{
+							&>h2{
+								@include txt((p:1.5rem));
+							}
+							.desc{
+								@include txt((p:.8rem));
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

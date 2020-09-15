@@ -1,0 +1,42 @@
+@import 'admin_style_config.scss';
+
+
+div.CalendarSelect{
+	&>table{
+		@include bnd((d:ib));
+		@include tbl(());
+		@include usr((c:p));
+		@include txt((p:1.5rem));
+		caption{
+			@include bnd((p:r));
+			span.current{
+				@include bnd((d:ib,mg:0 1em));
+				@include txt((p:2em,h:1em,v:b));
+			}
+			span.prev{
+				@include bnd((p:a,b:0,l:0));
+				&::before{
+					content:'＜';
+					@include bnd((d:ib,mgr:.5em));
+				}
+			}
+			span.next{
+				@include bnd((p:a,b:0,r:0));
+				&::after{
+					content:'＞';
+					@include bnd((d:ib,mgl:.5em));
+				}
+			}
+		}
+		th,td{
+			@include bnd((h:2em,w:2em,pd:.25em));
+			@include txt((a:c));
+		}
+		td.active{
+			@include bg((c:m 1 .2));
+		}
+		td.disable{
+			@include bg((c:t 10));
+		}
+	}
+}

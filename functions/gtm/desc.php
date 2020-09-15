@@ -1,0 +1,1 @@
+GoogleTagManagerのタグを出力します。

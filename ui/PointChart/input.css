@@ -1,0 +1,27 @@
+@charset "utf-8";
+div.PointChart {
+  width: 30rem; }
+  div.PointChart svg rect.control {
+    fill: transparent;
+    cursor: pointer; }
+  div.PointChart svg .valLine {
+    stroke: rgba(68, 68, 68, 0.3);
+    stroke-width: 1px; }
+    div.PointChart svg .base rect.bg {
+      stroke: transparent;
+      fill: rgba(68, 68, 68, 0.1); }
+    div.PointChart svg .base line.baseLine {
+      stroke: #444;
+      stroke-width: 1px; }
+      div.PointChart svg .base text.label.left {
+        text-anchor: end;
+        dominant-baseline: middle; }
+      div.PointChart svg .base text.label.right {
+        text-anchor: start;
+        dominant-baseline: middle; }
+      div.PointChart svg .base text.label.top {
+        text-anchor: middle;
+        dominant-baseline: baseline; }
+      div.PointChart svg .base text.label.bottom {
+        text-anchor: middle;
+        dominant-baseline: hanging; }

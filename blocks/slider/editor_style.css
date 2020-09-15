@@ -1,0 +1,92 @@
+@charset "utf-8";
+div.wp-block-catpow-slider {
+  position: relative;
+  z-index: 1; }
+  div.wp-block-catpow-slider > .controls {
+    pointer-events: none; }
+    div.wp-block-catpow-slider > .controls > * {
+      pointer-events: auto; }
+  div.wp-block-catpow-slider ul.contents li {
+    position: relative; }
+    div.wp-block-catpow-slider ul.contents li div.itemControl {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem; }
+  div.wp-block-catpow-slider.edit {
+    padding: 2rem;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(68, 68, 68, 0.5);
+    border-radius: 1rem;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    background-color: #fefefe; }
+    div.wp-block-catpow-slider.edit ul.contents li {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-lines: multiple;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+      border-bottom-color: rgba(68, 68, 68, 0.5); }
+      div.wp-block-catpow-slider.edit ul.contents li div.slide {
+        position: relative;
+        width: auto;
+        height: auto;
+        padding: 1rem;
+        -webkit-box-flex: 0;
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 15rem; }
+        div.wp-block-catpow-slider.edit ul.contents li div.slide img, div.wp-block-catpow-slider.edit ul.contents li div.slide video {
+          width: 100%;
+          height: auto;
+          box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3); }
+      div.wp-block-catpow-slider.edit ul.contents li div.image {
+        padding: 1rem;
+        -webkit-box-flex: 0;
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 15rem; }
+        div.wp-block-catpow-slider.edit ul.contents li div.image img, div.wp-block-catpow-slider.edit ul.contents li div.image video {
+          width: 100%;
+          height: auto;
+          box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3); }
+      div.wp-block-catpow-slider.edit ul.contents li div.text {
+        padding: 1rem;
+        -webkit-box-flex: 1;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 20rem; }
+        div.wp-block-catpow-slider.edit ul.contents li div.text h3 {
+          text-align: left;
+          font-size: 2rem;
+          font-weight: 400;
+          color: #444; }
+        div.wp-block-catpow-slider.edit ul.contents li div.text h4 {
+          text-align: left;
+          font-size: 1.5rem;
+          font-weight: 400;
+          color: #444; }
+        div.wp-block-catpow-slider.edit ul.contents li div.text p {
+          text-align: justify;
+          font-size: 1.2rem;
+          font-weight: 400;
+          color: #444; }
+      div.wp-block-catpow-slider.edit ul.contents li div.background {
+        position: relative;
+        width: auto;
+        height: auto;
+        padding: 1rem;
+        -webkit-box-flex: 0;
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 15rem; }
+        div.wp-block-catpow-slider.edit ul.contents li div.background img, div.wp-block-catpow-slider.edit ul.contents li div.background video {
+          width: 100%;
+          height: auto; }
+        div.wp-block-catpow-slider.edit ul.contents li div.background::before, div.wp-block-catpow-slider.edit ul.contents li div.background::after {
+          display: none; }
+    div.wp-block-catpow-slider.edit div.controls {
+      position: relative; }

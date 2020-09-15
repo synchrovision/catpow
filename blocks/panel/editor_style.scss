@@ -1,0 +1,69 @@
+@import 'admin_style_config.scss';
+
+ul.wp-block-catpow-panel{
+	li.item{
+		@include bnd((p:r));
+		.itemControl{
+			@include bnd((p:a,t:.5rem,r:.5rem));
+		}
+	}
+	&.edit{
+		@include bnd((pd:2rem));
+		@include bdr((s:s,w:1,c:t 1 .5,r:1rem));
+		@include shd((b:3));
+		@include bg((c:b));
+		@include txt((l:n));
+		li.item{
+			@include flx((w:w));
+			div.image{
+				@include bnd((pd:1rem,f:0 0 10rem));
+				img,video{
+					@include bnd((w:f,h:a));
+				}
+			}
+			div.text{
+				@include bnd((pd:1rem,f:1 1 15rem));
+				.icon{
+					@include bnd((d:ib,w:8rem,h:8rem));
+					@include bg((c:#ccc));
+					img{
+						@include bnd((w:f,h:a));
+					}
+				}
+				h3{
+					@include bnd((pdb:.5rem,mgb:.5rem));
+					@include bdr((p:b,s:d,w:1,c:t));
+					@include txt((a:l,p:1.5rem,w:r,c:t));
+				}
+				p{@include txt((a:j,p:1.2rem,w:r,c:t));}
+				.link{
+					@include bnd((p:r));
+					a{
+						@include bnd((d:b,mg:1rem a));
+						@include txt((p:1.2rem,h:1em,c:t));
+						&::before{
+							@include ico('chevron-right');
+							@include bnd((d:ib,mgr:.5em));
+						}
+					}
+					input{
+						@include txt((c:t));
+					}
+				}
+			}
+		}
+	}
+	&.panel{
+		li.item{
+			.text{
+				.link{
+					@include usr((e:n));
+					input.components-text-control__input{
+						@include bnd((d:b,p:a,b:5,l:5,z:1));
+						@include usr((e:a));
+					}
+				}
+			}
+		}
+	}
+}

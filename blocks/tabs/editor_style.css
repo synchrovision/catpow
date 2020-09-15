@@ -1,0 +1,39 @@
+@charset "utf-8";
+div.wp-block-catpow-tabs [data-type="catpow/tabscontent"] {
+  display: none; }
+  div.wp-block-catpow-tabs[data-current-index="0"] [data-type="catpow/tabscontent"]:nth-of-type(1) {
+    display: block; }
+div.wp-block-catpow-tabs[data-current-index="1"] [data-type="catpow/tabscontent"]:nth-of-type(2) {
+  display: block; }
+div.wp-block-catpow-tabs[data-current-index="2"] [data-type="catpow/tabscontent"]:nth-of-type(3) {
+  display: block; }
+div.wp-block-catpow-tabs[data-current-index="3"] [data-type="catpow/tabscontent"]:nth-of-type(4) {
+  display: block; }
+div.wp-block-catpow-tabs[data-current-index="4"] [data-type="catpow/tabscontent"]:nth-of-type(5) {
+  display: block; }
+div.wp-block-catpow-tabs[data-current-index="5"] [data-type="catpow/tabscontent"]:nth-of-type(6) {
+  display: block; }
+div.wp-block-catpow-tabs[data-current-index="6"] [data-type="catpow/tabscontent"]:nth-of-type(7) {
+  display: block; }
+div.wp-block-catpow-tabs[data-current-index="7"] [data-type="catpow/tabscontent"]:nth-of-type(8) {
+  display: block; }
+div.wp-block-catpow-tabs[data-current-index="8"] [data-type="catpow/tabscontent"]:nth-of-type(9) {
+  display: block; }
+div.wp-block-catpow-tabs[data-current-index="9"] [data-type="catpow/tabscontent"]:nth-of-type(10) {
+  display: block; }
+div.wp-block-catpow-tabs[data-current-index="10"] [data-type="catpow/tabscontent"]:nth-of-type(11) {
+  display: block; }
+div.wp-block-catpow-tabs > ul.tab {
+  padding: 0px;
+  margin: 0px; }
+  div.wp-block-catpow-tabs > ul.tab li.item {
+    position: relative; }
+    div.wp-block-catpow-tabs > ul.tab li.item .itemControl {
+      width: 7rem;
+      position: absolute;
+      top: -2rem;
+      left: 0px;
+      right: 0px;
+      margin: auto; }
+div.wp-block-catpow-tabs > .contents {
+  overflow: hidden; }

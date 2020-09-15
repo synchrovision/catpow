@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="レイヤー_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" viewBox="0 0 600 400" style="enable-background:new 0 0 600 400;" xml:space="preserve">
+<style type="text/css">
+	.st0{clip-path:url(#SVGID_2_);}
+	.st1{fill:none;stroke:#A1D6E6;stroke-width:20;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#A1D6E6;stroke-width:20;stroke-miterlimit:10;stroke-dasharray:11.6222,11.6222;}
+	.st3{fill:#A1D6E6;}
+	.st4{fill:none;stroke:#A1D6E6;stroke-width:40;stroke-miterlimit:10;}
+	.st5{fill:none;stroke:#A1D6E6;stroke-width:60;stroke-miterlimit:10;}
+	.st6{clip-path:url(#SVGID_2_);fill:none;}
+</style>
+<title>csv</title>
+<g>
+	<defs>
+		<polyline id="SVGID_1_" points="600,0 600,400 0,400 0,0 		"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<g class="st0">
+		<g>
+			<g>
+				<g>
+					<path class="st1" d="M391.1,122.4c1.4,1.4,2.8,2.9,4.1,4.3"/>
+					<path class="st2" d="M402.7,135.7c38.8,50.9,34.9,123.9-11.6,170.5c-21.5,21.5-48.6,33.8-76.5,37.1"/>
+					<path class="st1" d="M308.8,343.8c-2,0.1-4,0.2-6,0.3"/>
+				</g>
+			</g>
+		</g>
+		<g>
+			<circle class="st3" cx="299.2" cy="214.3" r="56"/>
+		</g>
+		<g>
+			<polyline class="st4" points="300.3,362.8 300.3,215.3 404.2,111.4 			"/>
+		</g>
+		<g>
+			
+				<rect x="452.5" y="-16.1" transform="matrix(0.7071 -0.7071 0.7071 0.7071 122.2592 351.4276)" class="st3" width="65.7" height="88.5"/>
+		</g>
+		<g>
+			
+				<rect x="430.1" y="37.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 89.8619 338.0048)" class="st3" width="45.7" height="45.7"/>
+		</g>
+		<g>
+			<circle class="st5" cx="300.3" cy="215.3" r="188.7"/>
+		</g>
+	</g>
+	<polyline class="st6" points="600,0 600,400 0,400 0,0 	"/>
+	<polyline class="st6" points="600,0 600,400 0,400 0,0 	"/>
+	<polyline class="st6" points="600,0 600,400 0,400 0,0 	"/>
+</g>
+</svg>

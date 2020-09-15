@@ -1,0 +1,17 @@
+@import 'admin_style_config.scss';
+
+
+div.DateSelect{
+	.value{
+		@include bnd((d:ib,mg:0 .5em,pd:.5rem));
+		@include bdr((s:s,w:1,c:t 50,r:.5rem));
+		@include usr((c:p));
+		@include txt((a:c,p:1.5rem));
+		&.year{
+			@include bnd((w:4ch));
+		}
+		&.month,&.date{
+			@include bnd((w:2ch));
+		}
+	}
+}

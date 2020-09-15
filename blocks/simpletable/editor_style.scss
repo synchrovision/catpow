@@ -1,0 +1,13 @@
+@import 'admin_style_config.scss';
+
+table.wp-block-catpow-simpletable{
+	@include bnd((w:f));
+	tbody{
+		tr{
+			@include bnd((p:r));
+			.itemControl{
+				@include bnd((p:a,r:.5rem));
+			}
+		}
+	}
+}

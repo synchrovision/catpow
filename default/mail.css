@@ -1,0 +1,92 @@
+/* =========================================================
+　メール対応用デフォルトスタイル
+========================================================= */
+
+body {
+  width: 100% !important;
+  min-width: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td {
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+  border-collapse: collapse !important;
+}
+
+table, tr,
+  td {
+  padding: 0;
+  vertical-align: top;
+  text-align: left;
+}
+
+img {
+  outline: none;
+  text-decoration: none;
+  -ms-interpolation-mode: bicubic;
+  width: auto;
+  clear: both;
+  display: block;
+}
+a {
+  img {
+    outline: none;
+    text-decoration: none;
+    -ms-interpolation-mode: bicubic;
+    width: auto;
+    clear: both;
+    display: block;
+    border: none;
+  }
+}
+
+/* =========================================================
+ outlook対策
+========================================================= */
+
+#outlook a {
+  padding: 0;
+}
+
+body.outlook p {
+  display: inline !important;
+}
+
+/* =========================================================
+ ホットメールで画面いっぱいに表示ようにする
+========================================================= */
+
+.ReadMsgBody {
+  width: 100%;
+}
+.ExternalClass{
+  width:100%;
+}
+
+.ExternalClass,
+.ExternalClass p,
+.ExternalClass span,
+.ExternalClass font,
+.ExternalClass td,
+.ExternalClass div{
+  line-height: 100%;
+}
+
+#backgroundTable {
+  margin: 0;
+  Margin: 0;
+  padding: 0;
+  width: 100% !important;
+  line-height: 100% !important;
+}

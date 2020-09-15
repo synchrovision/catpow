@@ -1,0 +1,18 @@
+@import 'admin_style_config.scss';
+
+ul.wp-block-catpow-buttons{
+	li.item{
+		@include txt((l:n));
+		.itemControl{
+			@include bnd((p:a,t:-2rem,r:0));
+		}
+		div.button{
+			@include bnd((h:a a a));
+			.url{
+				@include bnd((d:b,p:a,t:f,l:0,r:0,mg:a,pd:3));
+				@include txt((p:11,h:1em,t:0,c:t));
+				@include shd((b:1));
+			}
+		}
+	}
+}

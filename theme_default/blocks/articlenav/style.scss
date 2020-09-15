@@ -1,0 +1,41 @@
+@import "config/style_config.scss";
+
+body{
+	div{
+		&.wp-block-catpow-articlenav{
+			@include bnd((pd:2rem));
+			ul.article_nav{
+				@include txt((l:n));
+				li{
+					h3{
+						@include bnd((p:r,pd:.5rem,pdl:2rem));
+						@include txt((a:l,p:1.3rem));
+						@include usr((c:p));
+					}
+					ul{
+						@include bnd((d:n,pd:.5rem));
+						@include txt((l:n));
+					}
+					&.active{
+						&>h3{
+							@include txt((c:a));
+							&::before{
+								@include bnd((p:a,t:.8rem,l:0));
+								@include ico('chevron-right');
+							}
+						}
+						ul{
+							@include bnd((d:b));
+						}
+					}
+				}
+				&>li{
+					&>h3{
+						@include txt((p:1.5rem));
+					}
+				}
+			}
+					
+		}
+	}
+}

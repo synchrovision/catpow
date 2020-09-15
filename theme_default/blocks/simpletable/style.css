@@ -1,0 +1,32 @@
+@charset "utf-8";
+body table.wp-block-catpow-simpletable {
+  border-collapse: collapse;
+  border-spacing: 0px;
+  width: 95%;
+  margin: 50px auto; }
+  body table.wp-block-catpow-simpletable tbody tr th, body table.wp-block-catpow-simpletable tbody tr td {
+    padding: 10px;
+    text-align: left;
+    font-size: 1.2rem;
+    line-height: 1.5em;
+    font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(136, 119, 102, .2); }
+    body table.wp-block-catpow-simpletable tbody tr th {
+      width: 180px; }
+  @media (max-width:639px) {
+      body table.wp-block-catpow-simpletable tbody {
+        display: block; }
+        body table.wp-block-catpow-simpletable tbody tr {
+          display: block;
+          padding: 10px 0px;
+          border-bottom-style: solid;
+          border-bottom-width: 1px;
+          border-bottom-color: rgba(136, 119, 102, .2); }
+          body table.wp-block-catpow-simpletable tbody tr th, body table.wp-block-catpow-simpletable tbody tr td {
+            display: block;
+            padding: 5px;
+            border-bottom-style: none; }
+          body table.wp-block-catpow-simpletable tbody tr th {
+            width: auto; } }

@@ -1,0 +1,1 @@
+Facebookの各種ボタン、およびFacebookアカウントでログイン

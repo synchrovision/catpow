@@ -1,0 +1,18 @@
+@charset "utf-8";
+ul.wp-block-catpow-pricelist li.item {
+  position: relative; }
+  ul.wp-block-catpow-pricelist li.item .itemControl {
+    position: absolute;
+    top: 1rem;
+    right: -8rem; }
+  ul.wp-block-catpow-pricelist li.item > .link {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-top: auto;
+    height: 2em; }
+    ul.wp-block-catpow-pricelist li.item > .link input {
+      margin: 0px auto;
+      color: #444; }

@@ -1,0 +1,1 @@
+WordPressのaction実行時間をログに出力

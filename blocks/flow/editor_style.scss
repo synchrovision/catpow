@@ -1,0 +1,74 @@
+@import 'admin_style_config.scss';
+
+ul.wp-block-catpow-flow{
+	li.item{
+		@include bnd((p:r));
+		.itemControl{
+			@include bnd((p:a,t:.5rem,r:.5rem));
+		}
+		&>.link{
+			@include bnd((p:r));
+			input{
+				@include bnd((mg:1rem a));
+				@include txt((c:t));
+			}
+		}
+	}
+	&.edit{
+		@include bnd((pd:2rem));
+		@include bdr((s:s,w:1,c:t 1 .5,r:1rem));
+		@include shd((b:3));
+		@include bg((c:b));
+		li.item{
+			@include flx((w:w));
+			&>.image{
+				@include bnd((pd:.5rem,f:0 0 10rem));
+				img,video{
+					@include bnd((w:f,h:a));
+				}
+			}
+			&>header{
+				@include bnd((f:1 1 20rem));
+				@include flx((w:w,a:c,v:m));
+				div.counter{
+					@include bnd((f:1 1 90%,pd:.5rem));
+					@include txt((a:c));
+					span{
+						@include txt((p:1.1rem,h:1em,w:r,c:a));
+						&.number{
+							@include bnd((d:ib,mg:0 0.5rem));
+							@include txt((p:1.5em));
+						}
+					}
+				}
+				div.image{
+					@include bnd((pd:.5rem,f:0 0 5rem));
+					img,video{
+						@include bnd((d:b,w:a,h:4rem,mg:0 a));
+					}
+				}
+				div.text{
+					@include bnd((pd:.5rem,f:1 1 10rem));
+					h3{
+						@include bnd((pd:.5rem,mg:0));
+						@include txt((a:l,p:2rem,w:r,c:a));
+					}
+					p{
+						@include bnd((pd:1rem,mgt:1rem));
+						@include bdr((p:t,s:s,w:1,c:i));
+						@include txt((a:j,p:1.2rem,w:r,c:m));
+					}
+				}
+			}
+			&>.text{
+				@include bnd((pd:1rem,f:1 1 30rem));
+				h4{
+					@include bnd((pdb:.5rem,mgb:.5rem));
+					@include bdr((p:b,s:d,w:1,c:t));
+					@include txt((a:l,p:1.5rem,w:r,c:t));
+				}
+				p{@include txt((a:j,p:1.2rem,w:r,c:t));}
+			}
+		}
+	}
+}

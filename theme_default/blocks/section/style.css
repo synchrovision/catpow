@@ -1,0 +1,520 @@
+@charset "utf-8";
+body section.wp-block-catpow-section {
+  display: block;
+  margin: 0px auto; }
+  body section.wp-block-catpow-section.intro {
+    position: relative;
+    padding: 10rem 0px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-lines: multiple;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-flex-direction: column-reverse;
+    flex-direction: column-reverse; }
+    @media (min-width:960px) {
+      body section.wp-block-catpow-section.intro.left {
+        padding-right: 40%; }
+
+      body section.wp-block-catpow-section.intro.right {
+        padding-left: 40%; }
+
+      body section.wp-block-catpow-section.intro.center {
+        padding-left: 20%;
+        padding-right: 20%; } }
+    body section.wp-block-catpow-section.intro > .image {
+      display: block;
+      position: relative;
+      margin: 2rem auto;
+      max-width: 64rem;
+      width: 80%;
+      z-index: 1; }
+      body section.wp-block-catpow-section.intro > .image img, body section.wp-block-catpow-section.intro > .image video {
+        width: 100%;
+        height: auto; }
+    body section.wp-block-catpow-section.intro > .contents {
+      position: relative;
+      padding: 2rem;
+      margin: 0px auto;
+      max-width: 64rem;
+      width: 80%;
+      z-index: 1; }
+      body section.wp-block-catpow-section.intro > .contents > header .image {
+        display: block;
+        text-align: center; }
+        body section.wp-block-catpow-section.intro > .contents > header .image img {
+          width: auto;
+          height: 8rem;
+          object-fit: cover;
+          object-position: center; }
+        body section.wp-block-catpow-section.intro > .contents > header h2 {
+          margin-bottom: 3rem;
+          padding-bottom: 1rem;
+          border-bottom-style: dotted;
+          border-bottom-width: 2px;
+          border-bottom-color: #876;
+          text-align: center;
+          font-size: 6rem;
+          line-height: 1.5em;
+          font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
+          font-weight: 400;
+          color: #f80; }
+        body section.wp-block-catpow-section.intro > .contents > header p {
+          text-align: justify;
+          font-size: 1.8rem;
+          line-height: 2em;
+          font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
+          font-weight: 300;
+          color: #876; }
+      body section.wp-block-catpow-section.intro > .background {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        overflow: hidden; }
+      body section.wp-block-catpow-section.intro > .background img {
+        width: 100%;
+        max-height: 125vh;
+        height: 150%;
+        object-fit: cover;
+        object-position: center; }
+    body section.wp-block-catpow-section.intro.color1 > .contents > header h2 {
+      color: #f20d0d; }
+    body section.wp-block-catpow-section.intro.color2 > .contents > header h2 {
+      color: #f2800d; }
+    body section.wp-block-catpow-section.intro.color3 > .contents > header h2 {
+      color: #f2f20d; }
+    body section.wp-block-catpow-section.intro.color4 > .contents > header h2 {
+      color: #80f20d; }
+    body section.wp-block-catpow-section.intro.color5 > .contents > header h2 {
+      color: #0df20d; }
+    body section.wp-block-catpow-section.intro.color6 > .contents > header h2 {
+      color: #0df280; }
+    body section.wp-block-catpow-section.intro.color7 > .contents > header h2 {
+      color: #0df2f2; }
+    body section.wp-block-catpow-section.intro.color8 > .contents > header h2 {
+      color: #0d80f2; }
+    body section.wp-block-catpow-section.intro.color9 > .contents > header h2 {
+      color: #0d0df2; }
+    body section.wp-block-catpow-section.intro.color10 > .contents > header h2 {
+      color: #800df2; }
+    body section.wp-block-catpow-section.intro.color11 > .contents > header h2 {
+      color: #f20df2; }
+    body section.wp-block-catpow-section.intro.color12 > .contents > header h2 {
+      color: #f20d80; }
+  body section.wp-block-catpow-section.scene {
+    position: relative;
+    background-color: #ffe; }
+    body section.wp-block-catpow-section.scene.left, body section.wp-block-catpow-section.scene.right {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-lines: multiple;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -webkit-align-items: stretch;
+      align-items: stretch; }
+      body section.wp-block-catpow-section.scene.left > .image, body section.wp-block-catpow-section.scene.right > .image {
+        -webkit-box-flex: 1;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 20rem; }
+      body section.wp-block-catpow-section.scene.left > .contents, body section.wp-block-catpow-section.scene.right > .contents {
+        -webkit-box-flex: 8;
+        flex-grow: 8;
+        flex-shrink: 8;
+        flex-basis: 30rem; }
+    body section.wp-block-catpow-section.scene.right {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-direction: reverse;
+      -webkit-box-orient: horizontal;
+      -webkit-flex-direction: row-reverse;
+      flex-direction: row-reverse; }
+    body section.wp-block-catpow-section.scene > .image {
+      min-height: 50vh;
+      height: auto;
+      overflow: hidden; }
+      body section.wp-block-catpow-section.scene > .image img, body section.wp-block-catpow-section.scene > .image video {
+        width: 100%;
+        max-height: 125vh;
+        height: 125%;
+        object-fit: cover;
+        object-position: center; }
+    body section.wp-block-catpow-section.scene > .contents {
+      position: relative;
+      z-index: 1; }
+      body section.wp-block-catpow-section.scene > .contents > header {
+        padding: 6rem 2rem;
+        background-color: #321; }
+        body section.wp-block-catpow-section.scene > .contents > header .image {
+          display: block;
+          text-align: center; }
+        body section.wp-block-catpow-section.scene > .contents > header .image img {
+          width: auto;
+          height: 8rem;
+          object-fit: cover;
+          object-position: center; }
+        body section.wp-block-catpow-section.scene > .contents > header h2 {
+          padding: 2rem 1rem;
+          position: relative;
+          text-align: center;
+          font-size: 5rem;
+          font-weight: 300;
+          color: #ffe;
+          word-break: keep-all; }
+        body section.wp-block-catpow-section.scene > .contents > header p {
+          padding: 2rem 1rem;
+          position: relative;
+          text-align: center;
+          font-size: 2rem;
+          font-weight: 300;
+          color: #ffe; }
+      body section.wp-block-catpow-section.scene > .contents > .text {
+        text-align: center; }
+        body section.wp-block-catpow-section.scene > .contents > .text p {
+          font-size: 1.4rem;
+          line-height: 2em;
+          font-weight: 300;
+          color: #876; }
+    body section.wp-block-catpow-section.scene.color1 > .image::after {
+      background-color: rgba(242, 13, 13, .8); }
+      body section.wp-block-catpow-section.scene.color1 > .contents > header {
+        background-color: #f20d0d; }
+    body section.wp-block-catpow-section.scene.color2 > .image::after {
+      background-color: rgba(242, 128, 13, .8); }
+      body section.wp-block-catpow-section.scene.color2 > .contents > header {
+        background-color: #f2800d; }
+    body section.wp-block-catpow-section.scene.color3 > .image::after {
+      background-color: rgba(242, 242, 13, .8); }
+      body section.wp-block-catpow-section.scene.color3 > .contents > header {
+        background-color: #f2f20d; }
+    body section.wp-block-catpow-section.scene.color4 > .image::after {
+      background-color: rgba(128, 242, 13, .8); }
+      body section.wp-block-catpow-section.scene.color4 > .contents > header {
+        background-color: #80f20d; }
+    body section.wp-block-catpow-section.scene.color5 > .image::after {
+      background-color: rgba(13, 242, 13, .8); }
+      body section.wp-block-catpow-section.scene.color5 > .contents > header {
+        background-color: #0df20d; }
+    body section.wp-block-catpow-section.scene.color6 > .image::after {
+      background-color: rgba(13, 242, 128, .8); }
+      body section.wp-block-catpow-section.scene.color6 > .contents > header {
+        background-color: #0df280; }
+    body section.wp-block-catpow-section.scene.color7 > .image::after {
+      background-color: rgba(13, 242, 242, .8); }
+      body section.wp-block-catpow-section.scene.color7 > .contents > header {
+        background-color: #0df2f2; }
+    body section.wp-block-catpow-section.scene.color8 > .image::after {
+      background-color: rgba(13, 128, 242, .8); }
+      body section.wp-block-catpow-section.scene.color8 > .contents > header {
+        background-color: #0d80f2; }
+    body section.wp-block-catpow-section.scene.color9 > .image::after {
+      background-color: rgba(13, 13, 242, .8); }
+      body section.wp-block-catpow-section.scene.color9 > .contents > header {
+        background-color: #0d0df2; }
+    body section.wp-block-catpow-section.scene.color10 > .image::after {
+      background-color: rgba(128, 13, 242, .8); }
+      body section.wp-block-catpow-section.scene.color10 > .contents > header {
+        background-color: #800df2; }
+    body section.wp-block-catpow-section.scene.color11 > .image::after {
+      background-color: rgba(242, 13, 242, .8); }
+      body section.wp-block-catpow-section.scene.color11 > .contents > header {
+        background-color: #f20df2; }
+    body section.wp-block-catpow-section.scene.color12 > .image::after {
+      background-color: rgba(242, 13, 128, .8); }
+      body section.wp-block-catpow-section.scene.color12 > .contents > header {
+        background-color: #f20d80; }
+  body section.wp-block-catpow-section.chapter {
+    position: relative;
+    width: 100%;
+    margin: 0px auto;
+    padding: 0px; }
+    body section.wp-block-catpow-section.chapter.left, body section.wp-block-catpow-section.chapter.right {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-lines: multiple;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -webkit-align-items: stretch;
+      align-items: stretch; }
+      body section.wp-block-catpow-section.chapter.left > .image, body section.wp-block-catpow-section.chapter.right > .image {
+        -webkit-box-flex: 1;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 30rem; }
+      body section.wp-block-catpow-section.chapter.left > .contents, body section.wp-block-catpow-section.chapter.right > .contents {
+        -webkit-box-flex: 1;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 30rem; }
+    body section.wp-block-catpow-section.chapter.right {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-direction: reverse;
+      -webkit-box-orient: horizontal;
+      -webkit-flex-direction: row-reverse;
+      flex-direction: row-reverse; }
+    body section.wp-block-catpow-section.chapter > .image {
+      position: relative;
+      width: 100%;
+      min-height: 40vh;
+      height: auto;
+      overflow: hidden; }
+      body section.wp-block-catpow-section.chapter > .image img, body section.wp-block-catpow-section.chapter > .image video {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        max-height: 125vh;
+        height: 125%;
+        object-fit: cover;
+        object-position: center; }
+    body section.wp-block-catpow-section.chapter > .contents {
+      position: relative;
+      z-index: 1;
+      padding: 1rem 0px; }
+      body section.wp-block-catpow-section.chapter > .contents > header .prefix {
+        display: inline-block;
+        min-width: 3em;
+        width: auto;
+        padding: 0.5rem 1rem;
+        margin: 0px 2rem;
+        background-color: #f80;
+        text-align: center;
+        font-size: 1.2rem;
+        line-height: 1em;
+        font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
+        font-weight: bold;
+        color: #ffe; }
+        body section.wp-block-catpow-section.chapter > .contents > header h2 {
+          padding: 1rem 2rem;
+          position: relative;
+          border-bottom-style: solid;
+          border-bottom-width: 1px;
+          border-bottom-color: #f80;
+          text-align: left;
+          font-size: 3rem;
+          font-weight: 300;
+          color: #f80;
+          word-break: keep-all; }
+        body section.wp-block-catpow-section.chapter > .contents > header p {
+          padding: 1rem 2rem;
+          text-align: justify;
+          font-size: 1.3rem;
+          font-weight: 300;
+          color: #876; }
+      body section.wp-block-catpow-section.chapter > .contents > .text {
+        padding: 1rem 2rem; }
+        body section.wp-block-catpow-section.chapter > .contents > .text p {
+          text-align: justify;
+          font-size: 1.2rem;
+          line-height: 1.5em;
+          color: #876; }
+        body section.wp-block-catpow-section.chapter > .contents > .text ul:not([class]) {
+          padding: 2rem 1rem;
+          list-style: none; }
+        body section.wp-block-catpow-section.chapter > .contents > .text ul:not([class]) li {
+          position: relative;
+          padding: 1rem;
+          padding-left: 3rem;
+          text-align: left;
+          font-size: 1.2rem;
+          line-height: 1.5em;
+          font-weight: normal;
+          color: #876; }
+          body section.wp-block-catpow-section.chapter > .contents > .text ul:not([class]) li::before {
+            content: " \f054";
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 1.25rem;
+            left: 1rem;
+            color: #f80; }
+  body section.wp-block-catpow-section.article {
+    max-width: 120rem;
+    width: 100%;
+    margin: 5rem auto;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-lines: multiple;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap; }
+    body section.wp-block-catpow-section.article > .image {
+      -webkit-box-flex: 1;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 20rem;
+      padding: 1rem 0px; }
+      body section.wp-block-catpow-section.article > .image img, body section.wp-block-catpow-section.article > .image video {
+        width: 100%;
+        height: auto; }
+    body section.wp-block-catpow-section.article > .contents {
+      -webkit-box-flex: 2;
+      flex-grow: 2;
+      flex-shrink: 2;
+      flex-basis: 40rem;
+      padding: 1rem; }
+      body section.wp-block-catpow-section.article > .contents > header h2 {
+        padding: 1rem 0px;
+        position: relative;
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+        border-bottom-color: #f80;
+        text-align: left;
+        font-size: 2rem;
+        font-weight: 400;
+        color: #f80;
+        word-break: keep-all; }
+        body section.wp-block-catpow-section.article > .contents > header p {
+          padding: 1rem 2rem;
+          text-align: justify;
+          font-size: 1.4rem;
+          font-weight: 400;
+          color: #876; }
+      body section.wp-block-catpow-section.article > .contents > .text {
+        padding: 1rem; }
+        body section.wp-block-catpow-section.article > .contents > .text > p {
+          text-align: justify;
+          font-size: 1.3rem;
+          line-height: 2em;
+          color: #876; }
+        body section.wp-block-catpow-section.article > .contents > .text > ol {
+          padding: 2rem;
+          padding-left: 5rem; }
+        body section.wp-block-catpow-section.article > .contents > .text > ol li {
+          padding: 1rem;
+          text-align: left;
+          font-size: 1.3rem;
+          line-height: 1.5em;
+          font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
+          font-weight: normal;
+          color: #876; }
+  body section.wp-block-catpow-section.column {
+    max-width: 120rem;
+    width: auto;
+    margin: 2rem auto;
+    overflow: hidden;
+    background-color: #ffe;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, .2);
+    border-style: solid;
+    border-width: 1px;
+    border-color: #c2bdb8;
+    border-radius: 10px; }
+    body section.wp-block-catpow-section.column.left, body section.wp-block-catpow-section.column.right {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-lines: multiple;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -webkit-align-items: stretch;
+      align-items: stretch; }
+      body section.wp-block-catpow-section.column.left > .image, body section.wp-block-catpow-section.column.right > .image {
+        -webkit-box-flex: 1;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 15rem; }
+      body section.wp-block-catpow-section.column.left > .contents, body section.wp-block-catpow-section.column.right > .contents {
+        -webkit-box-flex: 8;
+        flex-grow: 8;
+        flex-shrink: 8;
+        flex-basis: 30rem; }
+    body section.wp-block-catpow-section.column.right {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-direction: reverse;
+      -webkit-box-orient: horizontal;
+      -webkit-flex-direction: row-reverse;
+      flex-direction: row-reverse; }
+    body section.wp-block-catpow-section.column > .image {
+      min-height: 40vh;
+      height: auto;
+      overflow: hidden; }
+      body section.wp-block-catpow-section.column > .image img, body section.wp-block-catpow-section.column > .image video {
+        width: 100%;
+        max-height: 125vh;
+        height: 125%;
+        object-fit: cover;
+        object-position: center; }
+    body section.wp-block-catpow-section.column > .contents {
+      padding: 2rem;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 1; }
+      body section.wp-block-catpow-section.column > .contents > header {
+        padding: 3rem auto; }
+        body section.wp-block-catpow-section.column > .contents > header h2 {
+          padding: 1rem 1rem;
+          margin-bottom: 6rem;
+          position: relative;
+          border-bottom-style: solid;
+          border-bottom-width: 1px;
+          border-bottom-color: #f80;
+          text-align: center;
+          font-size: 2rem;
+          font-weight: 300;
+          color: #f80;
+          word-break: keep-all; }
+        body section.wp-block-catpow-section.column > .contents > header p {
+          padding: 3rem 1rem;
+          position: relative;
+          text-align: center;
+          font-size: 1.5rem;
+          font-weight: 300;
+          color: #876; }
+      body section.wp-block-catpow-section.column > .contents > .text {
+        text-align: center; }
+        body section.wp-block-catpow-section.column > .contents > .text p {
+          font-size: 1.4rem;
+          line-height: 2em;
+          font-weight: 300;
+          color: #876; }
+  body section.wp-block-catpow-section.notice {
+    max-width: 120rem;
+    width: auto;
+    margin: 2rem auto;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(136, 119, 102, .5);
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 238, .8); }
+    body section.wp-block-catpow-section.notice > .contents {
+      width: auto;
+      margin: 0px;
+      padding: 1rem 2rem; }
+      body section.wp-block-catpow-section.notice > .contents > header h2 {
+        margin: 0.5rem 0px;
+        padding: 0.5rem 0px;
+        font-size: 1.5rem; }
+    body section.wp-block-catpow-section.notice.color1 {
+      background-color: #fccfcf; }
+    body section.wp-block-catpow-section.notice.color2 {
+      background-color: #fce6cf; }
+    body section.wp-block-catpow-section.notice.color3 {
+      background-color: #fcfccf; }
+    body section.wp-block-catpow-section.notice.color4 {
+      background-color: #e6fccf; }
+    body section.wp-block-catpow-section.notice.color5 {
+      background-color: #cffccf; }
+    body section.wp-block-catpow-section.notice.color6 {
+      background-color: #cffce6; }
+    body section.wp-block-catpow-section.notice.color7 {
+      background-color: #cffcfc; }
+    body section.wp-block-catpow-section.notice.color8 {
+      background-color: #cfe6fc; }
+    body section.wp-block-catpow-section.notice.color9 {
+      background-color: #cfcffc; }
+    body section.wp-block-catpow-section.notice.color10 {
+      background-color: #e6cffc; }
+    body section.wp-block-catpow-section.notice.color11 {
+      background-color: #fccffc; }
+    body section.wp-block-catpow-section.notice.color12 {
+      background-color: #fccfe6; }

@@ -1,0 +1,42 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+1p:400,500,700,800,900');
+/*
+ a:#0d3,
+ m:#8b7,
+ b:#eed,
+ t:#543,
+ i:#ffe,
+ */
+div.wp-block-catpow-sidebar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap; }
+  div.wp-block-catpow-sidebar div.wp-block-catpow-maincolumn {
+    -webkit-box-flex: 10;
+    flex-grow: 10;
+    flex-shrink: 10;
+    flex-basis: 30rem; }
+  div.wp-block-catpow-sidebar div.wp-block-catpow-sidecolumn {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 30rem;
+    padding: 1rem;
+    box-sizing: border-box; }
+    @media (min-width:960px) {
+  div.wp-block-catpow-sidebar div.wp-block-catpow-sidecolumn {
+    -webkit-box-flex: 0;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 24rem; } }
+  div.wp-block-catpow-sidebar.left {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: horizontal;
+    -webkit-flex-direction: row-reverse;
+    flex-direction: row-reverse; }

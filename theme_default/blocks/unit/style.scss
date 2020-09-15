@@ -1,0 +1,20 @@
+@import "config/style_config.scss";
+
+body{
+	div{
+		&.wp-block-catpow-unit{
+			@include flx((w:w,a:c));
+			@include bnd((mg:5rem a));
+			&>.image{
+				@include bnd((f:1 1 30rem,pd:2rem 1rem));
+				img,video{
+					@include bnd((w:f,h:a));
+				}
+			}
+			&>.content{
+				@include bnd((f:2 2 30rem,pd:2rem 1rem));
+				@include txt((a:j));
+			}
+		}
+	}
+}

@@ -1,0 +1,33 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-graphics{
+	.item{
+		.pos,.del,.dup,.bnd{
+			@include bnd((d:b,p:a,t:-10,w:20,h:20,z:1,bs:c));
+			@include txt((c:m));
+			svg{
+				@include usr((e:n));
+			}
+		}
+		.pos,.bnd{
+			@include bdr((r:15,s:s,w:1,c:m));
+			@include bg((c:b));
+		}
+		.pos{
+			@include bnd((l:-15));
+		}
+		.del{
+			@include bnd((l:10));
+		}
+		.dup{
+			@include bnd((l:30));
+		}
+		.bnd{
+			@include bnd((r:-15));
+		}
+	}
+	&.sp{
+		@include bnd((mg:0 a));
+		@include bdr((s:s,w:1,c:t 10));
+	}
+}

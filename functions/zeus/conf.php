@@ -1,0 +1,9 @@
+<?php
+$conf=[
+	'cat'=>'payment',
+	'meta'=>[
+		'cp_zeus_keys'=>['type'=>'options','option'=>'cp_zeus_keys','meta'=>[
+			'ipcode'=>['type'=>'text','label'=>'IPコード']
+		]]
+	]
+];

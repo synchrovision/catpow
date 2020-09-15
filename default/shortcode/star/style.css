@@ -1,0 +1,16 @@
+@charset "utf-8";
+span.star {
+  display: inline-block;
+  width: 7.5rem;
+  height: 1.5rem;
+  background-image: url('images/star_g.svg');
+  background-size: 1.5rem auto;
+  background-position: 0% 50%;
+  background-repeat: repeat-x; }
+  span.star .value {
+    display: block;
+    height: 100%;
+    background-image: url('images/star.svg');
+    background-size: 1.5rem auto;
+    background-position: 0% 50%;
+    background-repeat: repeat-x; }

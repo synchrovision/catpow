@@ -1,0 +1,728 @@
+@import "config/style_config.scss";
+
+body{
+	ul{
+		&.wp-block-catpow-listed{
+			&.flowchart{
+				@include bnd((mg:6rem a));
+				@include txt((l:n));
+				li.item{
+					@include bnd((p:r,pd:1rem,pdl:5rem,mg:0 a,bs:b,w:a 80rem));
+					&>header{
+						@include flx((w:w));
+						.counter{
+							@include bnd((mgr:2rem));
+							@include flx((w:w,a:c));
+							@include txt((a:c,p:4rem,h:1em,f:e,s:r,c:m));
+							.prefix{
+								@include txt((a:c,p:2rem,h:1em,c:m,f:g,v:m));
+							}
+							.number{
+								@include bnd((d:ib,mg:0 .5rem));
+								@include txt((a:c,p:4rem,c:m,f:e,v:m));
+							}
+						}
+						.text{
+							h3{
+								@include txt((a:l,p:2rem,h:1.5em,f:g,w:b,c:a,b:w));
+							}
+							p{
+								@include txt((a:l,p:1.2rem,h:1.5em,f:g));
+							}
+						}
+					}
+					.contents{
+						@include bnd((pd:1rem,h:16rem a));
+						@include flx((w:w));
+						.image{
+							@include bnd((f:1 1 15rem,pd:1rem,bs:b));
+							img{
+								@include bnd((w:f,h:a));
+							}
+						}
+						.text{
+							@include bnd((f:3 3 20rem,pd:1rem,bs:b));
+							@include txt((a:j,p:1.3rem,h:1.5em,f:g,s:r,c:t));
+						}
+					}
+					&::before{
+						content: '';
+						@include bnd((d:b,p:a,w:2rem,h:2rem,t:2rem,l:0rem,z:1));
+						@include bg((c:b));
+						@include bdr((s:s,w:2,c:t,r:2rem));
+					}
+					&:not(:last-of-type)::after{
+						content:'';
+						@include bnd((d:b,p:a,t:0,b:-2rem,l:1.1rem,mgt:2rem));
+						@include bdr((p:l,s:s,w:1,c:t 1 .5));
+					}
+				}
+				li.spacer{
+					@include bnd((f:1 1 20rem));
+				}
+			}
+			&.articles{
+				@include bnd((d:b,w:f 96rem,mg:5rem a,pd:0 2rem,bs:b));
+				@include txt((l:n));
+				li.item{
+					@include bnd((p:r,pd:3rem 0));
+					header{
+						.counter{
+							@include flx((w:w,a:c));
+							@include txt((a:c,p:8rem,h:1em,f:e,s:r,c:a));
+							@media(#{bp(2)}){
+								@include bnd((p:a,t:2rem,l:0));
+							}
+							.prefix{
+								@include txt((a:c,p:3rem,h:1em,c:a,f:g,v:m));
+							}
+							.number{
+								@include bnd((d:ib,mg:0 .5rem));
+								@include txt((a:c,p:8rem,c:a,f:e,v:m));
+							}
+						}
+						.text{
+							h3{
+								@include bnd((pd:1rem 0));
+								@include bdr((p:b,s:s,w:1,c:a));
+								@include txt((a:l,p:3rem,w:r,c:a,b:k));
+							}
+							p{
+								@include bnd((pd:1rem));
+								@include txt((a:l,p:1.5rem,h:1.5em,f:g));
+							}
+						}
+					}
+					.contents{
+						@include bnd((pd:1rem));
+						@include flx((w:w));
+						.image{
+							@include bnd((f:1 1 20rem,pd:1rem,bs:b));
+							img{
+								@include bnd((w:f,h:a));
+							}
+						}
+						.text{
+							@include bnd((f:3 3 25rem,pd:1rem,bs:b));
+							@include txt((a:j,p:1.3rem,h:1.5em,f:g,s:r,c:t));
+						}
+					}
+				}
+				&.hasCounter{
+					li.item{
+						@media(#{bp(2)}){
+							@include bnd((pdl:12rem));
+						}
+					}
+				}
+			}
+			&.faq{
+				@include bnd((d:b,w:f 96rem,mg:3rem a));
+				@include txt((l:n));
+				li.item{
+					@include bnd((pd:.5rem,bs:b));
+					header{
+						@include bnd((p:r,pd:1rem 5rem 1rem 6rem));
+						@include flx((w:w));
+						@include bg((c:m));
+						@include usr((c:p));
+						&::before{
+							content: 'Q';
+							@include bnd((d:ib,p:a,t:1rem,l:2rem));
+							@include txt((a:c,p:4rem,h:1em,f:e,c:i));
+						}
+						&::after{
+							content: '+';
+							@include bnd((d:ib,w:2rem,h:2rem,p:a,t:0,r:1rem,b:0,mg:a,pd:.5rem));
+							@include bdr((r:3rem));
+							@include bg((c:i 1 .5));
+							@include txt((a:c,p:2rem,h:1.75rem,f:g,c:m));
+						}
+						.counter{
+							@include bnd((pd:.5rem 1rem 0 0));
+							.prefix,.suffix{
+								@include bnd((d:ib));
+								@include txt((p:4rem,h:1em,f:e,c:i));
+							}
+							.prefix{
+								@include bnd((mgr:.5rem));
+							}
+							.suffix{
+								@include bnd((mgl:.5rem));
+							}
+							.number{
+								@include txt((p:4rem,h:1em,f:e,c:i));
+							}
+						}
+						.image{
+							@include bnd((f:0 0 3rem,pd:0 1rem));
+							img{
+								@include bnd((w:f,h:a));
+								@include txt((v:m));
+							}
+						}
+						.text{
+							h3{
+								@include bnd((pd:1rem 0,mg:0));
+								@include txt((a:l,p:1.5rem,h:1.5em,f:g,c:i));
+							}
+							p{
+								@include bnd((pd:0,mg:0));
+								@include txt((a:l,p:1.2rem,h:1.5em,f:g,c:i));
+							}
+						}
+						&.active{
+							&::after{
+								content: '-';
+							}
+						}
+					}
+					.contents{
+						@include bnd((p:r,pd:2rem,pdl:7rem));
+						@include flx((w:w));
+						&::before{
+							content: 'A';
+							@include txt((p:3rem,f:e));
+							@include bnd((p:a,t:2rem,l:2rem));
+						}
+						.image{
+							@include bnd((pd:1rem 2rem,bs:b,f:1 1 16rem));
+							img{@include bnd((w:f,h:a));}
+						}
+						.text{
+							@include bnd((pd:1rem 2rem,bs:b,f:2 2 24rem));
+							h4{
+								@include bnd((mgb:.5em,pdb:.5em));
+								@include bdr((p:b,s:d,w:1,c:t));
+								@include txt((a:j,p:1.5rem,h:1.5em,f:g,s:b,c:t));
+							}
+							p{
+								@include txt((a:j,p:1.4rem,h:1.5em,f:g,s:r,c:t));
+							}
+						}
+					}
+					&:nth-child(odd){
+						.contents{
+							@include flx((d:rr));
+						}
+					}
+				}
+				
+			}
+			&.dialog{
+				@include bnd((d:b,w:f 96rem,mg:3rem a));
+				@include txt((l:n));
+				li.item{
+					@include bnd((pd:.5rem,bs:b));
+					@include flx((w:w,pd:3rem 2rem));
+					header{
+						@include bnd((p:r,pd:1rem,f:0 0 10rem));
+						.counter{
+							@include bnd((p:a,t:0));
+							.number{
+								@include txt((p:2rem,h:1em,f:e));
+							}
+						}
+						.image{
+							@include bnd((pd:1rem,bs:b,f:0 0 10rem));
+							img{
+								@include bnd((w:8rem,h:8rem,of:cvr,op:c));
+								@include bdr((r:5rem));
+							}
+						}
+						.text{
+							h3{
+								@include bnd((d:ib,w:10rem));
+								@include txt((a:c,p:1.3rem,h:1.5em,f:g,c:t));
+							}
+						}
+					}
+					.contents{
+						@include bnd((p:r,mg:1rem,pd:1rem,bs:b,f:1 1 15rem));
+						@include bg((c:m 30));
+						@include bdr((r:1rem));
+						@include flx((w:w));
+						&::before{
+							content: ' ';
+							@include bnd((p:a,d:b,w:0,h:0,t:2rem,l:-2rem));
+							@include bdr((s:s,w:1.1rem,c:n));
+							@include bdr((p:r,c:m 30));
+						}
+						&::after{
+							content: ' ';
+							@include bnd((p:a,d:b,w:0,h:0,t:2rem,r:-2rem));
+							@include bdr((s:s,w:1.1rem,c:n));
+							@include bdr((p:l,c:m 30));
+						}
+						.image{
+							@include bnd((f:1 1 15rem,o:h));
+							@include bdr((r:1rem));
+							img{
+								@include bnd((w:f,h:f,of:c,op:c));
+							}
+						}
+						.text{
+							@include bnd((f:3 3 30rem,pd:1rem));
+							h4{
+								@include bnd((mgb:.5em,pdb:.5em));
+								@include bdr((p:b,s:d,w:1,c:t));
+								@include txt((a:j,p:1.5rem,h:1.5em,f:g,s:b,c:t));
+							}
+							p{
+								@include txt((a:j,p:1.4rem,h:1.5em,f:g,s:r,c:t));
+							}
+						}
+					}
+					&.left{
+						header{
+							@include txt((a:l));
+							.counter{
+								@include bnd((l:0));
+							}
+						}
+						.contents{
+							@include flx((d:rr));
+							&::after{
+								@include bnd((d:n));
+							}
+						}
+					}
+					&.right{
+						header{
+							@include txt((a:r));
+							.counter{
+								@include bnd((r:0));
+							}
+						}
+						@include flx((d:rr));
+						.contents{
+							&::before{
+								@include bnd((d:n));
+							}
+						}
+					}
+					@media(#{bp(2)}){
+						&.left{
+							.contents{
+								@include bnd((mgr:13rem));
+							}
+						}
+						&.right{
+							.contents{
+								@include bnd((mgl:13rem));
+							}
+						}
+					}
+						
+					@for $i from 1 through 12{
+						&.color#{$i}{
+							.contents{
+								@include bg((c:$i 50));
+								&::before{@include bdr((p:r,c:$i 50));}
+								&::after{@include bdr((p:l,c:$i 50));}
+							}
+						}
+					}
+				}
+				
+			}
+			&.news{
+				@include bnd((d:b,p:r,c:40rem));
+				@include txt((l:n));
+				li{
+					@include bnd((pd:0 1rem,bi:a));
+					.contents{
+						.text{
+							@include bnd((pd:1rem 0));
+							@include bdr((p:b,s:s,w:1,c:#666));
+							@include flx((w:w));
+							h4{
+								@include bnd((mg:0,pd:0,f:1 1 10rem));
+								@include txt((a:l,p:1.3rem,h:1.5em,f:g,s:r,c:t));
+							}
+							p{
+								@include bnd((mg:0,pd:0,f:3 3 30rem));
+								@include txt((a:l,p:1.3rem,h:1.5em,f:g,s:r,c:t));
+							}
+						}
+					}
+				}
+			}
+			&.spec{
+				@include bnd((d:b,p:r,c:40rem));
+				@include txt((l:n));
+				li{
+					@include bnd((pd:0 1rem,bi:a));
+					.contents{
+						.text{
+							@include bnd((pd:1rem 0));
+							@include bdr((p:b,s:s,w:1,c:#666));
+							@include flx((w:w));
+							h4{
+								@include bnd((mg:0,pd:0,f:1 1 10rem));
+								@include txt((a:l,p:1.3rem,h:1.5em,f:g,s:r,c:t));
+							}
+							p{
+								@include bnd((mg:0,pd:0,f:3 3 30rem));
+								@include txt((a:l,p:1.3rem,h:1.5em,f:g,s:r,c:t));
+							}
+						}
+					}
+				}
+			}
+			&.index{
+				@include bnd((d:b,w:f 96rem,mg:3rem a,c:40rem));
+				@include txt((l:n));
+				li.item{
+					@include bnd((pd:.5rem,bs:b));
+					@include flx((w:w));
+					&>header{
+						@include bnd((f:1 1 20rem,pd:.5rem));
+						@include flx((w:n,a:c));
+						.counter{
+							@include bnd((d:b,f:0 0 5rem));
+							@include txt((a:c));
+							@include flx((w:w,a:c,v:m));
+							.prefix,.suffix{
+								@include bnd((d:b,f:1 1 90%));
+								@include txt((a:c,p:1rem,h:1em,f:g,w:b,c:t));
+							}
+							.number{
+								@include bnd((d:b,f:1 1 90%));
+								@include txt((a:c,p:3rem,h:1em,f:g,w:b,c:t));
+							}
+						}
+						.image{
+							@include bnd((mgr:.5em));
+							img{
+								@include bnd((w:a,h:3rem));
+							}
+						}
+						.text{
+							@include bnd((f:0 0 auto));
+							h3{
+								@include txt((a:l,p:1.5rem,h:1.5em,f:g,fw:900,c:t));
+							}
+						}
+						&::after{
+							content: '';
+							@include bnd((f:1 1 a,mg:1rem));
+							@include bdr((p:b,s:d,w:2,c:t 1 .5));
+						}
+					}
+					.contents{
+						@include bnd((f:0 0 a));
+						@include flx((w:w,a:c));
+						.image{
+							@include bnd((pd:0 1rem,bs:b,f:0 0 5rem));
+							img{@include bnd((w:f,h:a));}
+						}
+						.text{
+							@include flx((w:n,a:c));
+							h4{
+								@include bnd((mg:0 .5em));
+								@include txt((a:j,p:1.4rem,h:1.5em,f:g,s:b,c:t));
+							}
+							p{
+								@include txt((a:j,p:1.3rem,h:1.5em,f:g,s:r,c:t));
+								a{
+									@include bnd((d:ib,pd:.2rem 1rem,mg:0 .5rem));
+									@include bg((c:m));
+									@include bdr((r:1em));
+									@include txt((h:1em,w:b,c:i));
+									&::before{
+										@include ico('chevron-right');
+										@include bnd((d:ib,mgr:.5em));
+									}
+								}
+							}
+							.link{
+								a{
+									@include bnd((d:ib,p:r,mg:0 .5rem));
+									@include txt((a:l,p:1.3rem,h:1em,f:g,s:r,c:m));
+									&::before{
+										@include bnd((d:ib,mgr:.5em));
+										@include ico('chevron-right');
+									}
+								}
+							}
+						}
+					}
+				}
+				
+			}
+			&.menu{
+				@include bnd((d:b,w:f 96rem,mg:3rem a));
+				@include flx((w:w));
+				@include txt((l:n));
+				li.item{
+					@include bnd((pd:1rem .5rem,bs:b,f:1 1 20rem));
+					&>header{
+						@include bnd((pd:1rem));
+						@include flx((w:n));
+						.counter{
+							@include bnd((d:b,f:0 0 5rem));
+							@include txt((a:c));
+							@include flx((w:w,a:c,v:m));
+							.prefix,.suffix{
+								@include bnd((d:b,f:1 1 90%));
+								@include txt((a:c,p:1rem,h:1em,f:g,w:b,c:m));
+							}
+							.number{
+								@include bnd((d:b,f:1 1 90%));
+								@include txt((a:c,p:3rem,h:1em,f:g,w:b,c:m));
+							}
+						}
+						.image{
+							@include bnd((f:0 0 5rem));
+							img{
+								@include bnd((w:4rem,h:a));
+							}
+						}
+						.text{
+							@include bnd((f:1 1 20rem));
+							h3{
+								@include txt((a:l,p:2.5rem,h:1.5em,f:g,fw:900,c:m));
+							}
+						}
+					}
+					.contents{
+						@include flx((w:w));
+						.image{
+							@include bnd((pd:1rem .5rem,bs:b,f:1 1 10rem));
+							img{@include bnd((w:f,h:a));}
+						}
+						.text{
+							@include bnd((pd:2rem,bs:b,f:2 2 16rem));
+							h4{
+								@include bnd((mgb:.5em,pdb:.5em));
+								@include bdr((p:b,s:d,w:1,c:t));
+								@include txt((a:j,p:1.4rem,h:1.5em,f:g,s:b,c:t));
+							}
+							p{
+								@include txt((a:j,p:1.3rem,h:1.5em,f:g,s:r,c:t));
+								a{
+									@include bnd((d:ib,pd:.2rem 1rem,mg:0 .5rem));
+									@include bg((c:m));
+									@include bdr((r:1em));
+									@include txt((h:1em,w:b,c:i));
+									&::before{
+										@include ico('chevron-right');
+										@include bnd((d:ib,mgr:.5em));
+									}
+								}
+							}
+							.link{
+								a{
+									@include bnd((d:ib,p:r,mg:1rem .5rem,pd:.5rem 1rem));
+									@include bg((c:m));
+									@include bdr((r:1rem));
+									@include txt((a:l,p:1.2rem,h:1em,f:g,s:r,c:#fff));
+									&::before{
+										@include bnd((d:ib,mgr:.5em));
+										@include ico('chevron-circle-right');
+									}
+								}
+							}
+						}
+					}
+				}
+				li.spacer{
+					@include bnd((f:1 1 20rem));
+				}
+			}
+			&.panel{
+				@include bnd((d:b,pd:0,mg:5rem 0));
+				@include bg((c:b 1 .9));
+				@include flx((w:w));
+				@include txt((l:n));
+				@include bdr((p:t l,s:s,w:1,c:t 1 .7));
+				li.item{
+					@include bnd((pd:0,bs:b,f:1 1 24rem));
+					@include bdr((p:b r,s:s,w:1,c:t 1 .7));
+					&>header{
+						@include bnd((pd:1rem));
+						@include bg((c:m 1 .5));
+						.counter{
+							@include txt((a:c));
+							.prefix{
+								@include bnd((mgr:.5em));
+								@include txt((a:c,p:2rem,h:1.5em,f:g,w:b,c:i));
+							}
+							.number{@include txt((a:c,p:3rem,h:1.5em,f:g,w:b,c:i));}
+						}
+						h3{
+							@include txt((a:c,p:2rem,h:1.5em,f:g,fw:900,c:i));
+						}
+						p{
+							@include txt((a:c,p:1.4rem,h:1.5em,f:g,w:r,c:i));
+						}
+						
+					}
+					.contents{
+						@include bnd((pd:0));
+						@include flx((w:w));
+						.image{
+							@include bnd((pd:0,bs:b,f:1 1 25rem));
+							img{@include bnd((w:f,h:a));}
+						}
+						.text{
+							@include bnd((pd:1rem,bs:b,f:1 1 25rem));
+							h4{
+								@include bnd((mgb:.5em,pdb:.5em));
+								@include bdr((p:b,s:d,w:1,c:t));
+								@include txt((a:j,p:1.3rem,h:1.5em,f:g,s:b,c:t));
+							}
+							p{
+								@include txt((a:j,p:1.2rem,h:1.5em,f:g,s:r,c:t));
+							}
+							.link{
+								a{
+									@include bnd((d:ib,p:r,mg:1rem .5rem,pd:.5rem 1rem));
+									@include bg((c:m));
+									@include bdr((r:1rem));
+									@include txt((a:l,p:1.2rem,h:1em,f:g,s:r,c:#fff));
+									&::before{
+										@include bnd((d:ib,mgr:.5em));
+										@include ico('chevron-circle-right');
+									}
+								}
+							}
+						}
+					}
+					@for $i from 1 through 12{
+						&.color#{$i}{
+							&>header{
+								@include bg((c:$i 1 .8));
+							}
+						}
+					}
+				}
+				li.spacer{
+					@include bnd((f:1 1 24rem));
+				}
+			}
+			&.sphere{
+				@include bnd((d:b,w:f 96rem,mg:3rem a));
+				@include txt((a:c,l:n));
+				li.item{
+					@include bnd((d:ib,pd:1rem));
+					@include txt((v:m));
+					header{
+						h3{}
+					}
+					.contents{
+						@include bnd((w:15rem,h:15rem,p:r,o:h));
+						@include bdr((r:10rem));
+						@include flx((w:w,a:c,v:c));
+						@include bg((c:a));
+						.image{
+							@include bnd((p:a,w:15rem,h:15rem));
+							img{@include bnd((w:f,h:f,of:c,op:c));}
+						}
+						.text{
+							@include bnd((pd:.5rem,bs:b,f:2 2 16rem,p:r,z:1));
+							h4{
+								@include bnd((mgb:.5em,pdb:.5em));
+								@include bdr((p:b,s:d,w:1,c:i));
+								@include txt((a:c,p:2rem,h:1.5em,f:g,s:b,c:i));
+							}
+							p{
+								@include txt((a:c,p:1.5rem,h:1.5em,f:g,s:r,c:i));
+							}
+						}
+					}
+					@for $i from 1 through 12{
+						&.color#{$i}{
+							.contents{
+								@include bg((g:g $i));
+								@include shd((b:2));
+							}
+						}
+					}
+				}
+				&.small{
+					li.item{
+						.contents{
+							@include bnd((w:8rem,h:8rem));
+							.image{
+								@include bnd((w:8rem,h:8rem));
+							}
+						}
+					}
+				}
+			}
+			&.listed{
+				@include bnd((d:b,p:r,mg:0,pd:10));
+				@include txt((l:n));
+				li.item{
+					@include bnd((d:b,p:r,mg:1rem 0,pd:0 0 0 2rem));
+					@include txt((a:j,p:1.2rem,h:1.5em,f:g,s:r,c:t));
+					header{
+						@include flx((w:w));
+						@include txt((p:1.3rem,h:1.5em,c:t));
+						.counter{
+							.prefix,.suffix{
+								@include txt((p:1.3rem,h:1.5em,c:t));
+								
+							}
+							.number{
+								@include txt((p:1.3rem,h:1.5em,c:t));
+							}
+						}
+						.image{
+							@include bnd((f:0 0 3rem,pd:0 1rem));
+							img{
+								@include bnd((w:f,h:a));
+								@include txt((v:m));
+							}
+						}
+						.text{
+							@include bnd((f:1 1 20rem));
+							h3{
+								@include bnd((mg:0,pd:0));
+								@include txt((p:1.5rem,h:1.5em));
+							}
+							p{
+								@include txt((p:1.3rem,h:1.5em));
+							}
+						}
+					}
+					.contents{
+						@include bnd((pd:1rem 0));
+						@include flx((w:w));
+						.image{
+							@include bnd((f:0 0 8rem));
+							img{
+								@include bnd((w:f,h:a));
+								@include txt((v:m));
+							}
+						}
+						.text{
+							@include bnd((f:1 1 16rem,pd:0 1rem));
+							h4{
+								@include bnd((mg:0,pd:0));
+								@include txt((p:1.3rem,h:1.5em));
+							}
+							p{
+								@include txt((p:1.3rem,h:1.5em));
+							}
+						}
+					}
+					&::before{
+						@include ico('check-circle');
+						@include bnd((d:b,p:a,t:0,l:0));
+					}
+				}
+				&.annotation li.item::before{content:'※';}
+				&.circle li.item::before{@include ico('circle');}
+				&.caret li.item::before{@include ico('caret-right');}
+				&.square li.item::before{@include ico('square');}
+				&.star li.item::before{@include ico('star');}
+				&.check li.item::before{@include ico('check');}
+				&.alert li.item::before{@include ico('exclamation-circle');}
+				&.caution li.item::before{@include ico('exclamation-triangle');}
+			}
+		}
+	}
+}

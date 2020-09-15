@@ -1,0 +1,25 @@
+@import 'admin_style_config.scss';
+
+div.wp-block-catpow-sidebar{
+	&>.editor-inner-blocks{
+		@include bnd((f:1 1 60rem));
+		&>.editor-block-list__layout{
+			@include flx((w:w));
+			&>.editor-block-list__block{
+				&[data-type="catpow/maincolumn"]{
+					@include bnd((f:10 10 30rem));
+				}
+				&[data-type="catpow/sidecolumn"]{
+					@include bnd((f:0 0 24rem));
+				}
+			}
+		}
+	}
+	&.left{
+		&>.editor-inner-blocks{
+			&>.editor-block-list__layout{
+				@include flx((d:rr));
+			}
+		}
+	}
+}

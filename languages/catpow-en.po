@@ -1,0 +1,383 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: catpow\n"
+"POT-Creation-Date: 2020-07-30 14:58+0900\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4\n"
+"X-Poedit-KeywordsList: _;_e;__\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: lib\n"
+"X-Poedit-SearchPathExcluded-1: jsx_compiler\n"
+"X-Poedit-SearchPathExcluded-2: **/node_modules\n"
+"X-Poedit-SearchPathExcluded-3: **/vendor\n"
+
+#: action/admin_init-edit.php:73 action/admin_init-users.php:47
+#: default/config/template/manage/sec_search.php:25
+msgid "検索"
+msgstr "search"
+
+#: action/admin_init-edit.php:86 action/admin_init-edit.php:98
+msgid "変更日"
+msgstr "modified"
+
+#: action/admin_menu.php:101
+msgid "再利用可能ブロック"
+msgstr "reusable blocks"
+
+#: action/admin_notices.php:3
+msgid ""
+"設定ファイルが更新されています　サイトを更新してください"
+msgstr "Config was updated. Update site"
+
+#: action/rest_api_init.php:31
+msgid "無効なリクエストです"
+msgstr "ineffective request"
+
+#: blocks/_init/format.js:15
+msgid "ルビをつけたいテキストを選択してください"
+msgstr "Select text to add ruby"
+
+#: blocks/_init/format.js:17
+msgid "ルビを入力"
+msgstr "input ruby"
+
+#: blocks/_init/format.js:280
+msgid "クラスを入力"
+msgstr "input class"
+
+#: classes/cpdb.php:231 classes/cpdb.php:294
+#, php-format
+msgid "%sへのinsertにparent_idは必須です"
+msgstr "insertion to %s require parent_id"
+
+#: classes/meta/gmap.php:17
+msgid "gmapを使うにはGoogleAPIキーが必要です"
+msgstr "gmap neeeds GoogleAPI key"
+
+#: classes/meta/link.php:12
+msgid "テキスト"
+msgstr "text"
+
+#: classes/meta/link.php:13
+msgid "URL"
+msgstr "URL"
+
+#: classes/meta/mail.php:14
+msgid "お名前"
+msgstr "name"
+
+#: classes/meta/mail.php:15
+msgid "メールアドレス"
+msgstr "mail address"
+
+#: classes/meta/media_set.php:60
+msgid "PC"
+msgstr "PC"
+
+#: classes/meta/media_set.php:61
+msgid "SP"
+msgstr "SP"
+
+#: classes/meta/orders.php:10
+msgid "購入者"
+msgstr "customer"
+
+#: classes/meta/orders.php:11
+msgid "金額"
+msgstr "price"
+
+#: classes/meta/orders.php:12
+msgid "支払い方法"
+msgstr "payment type"
+
+#: classes/meta/orders.php:13
+msgid "進捗"
+msgstr "phase"
+
+#: classes/meta/wares.php:15
+msgid "品名"
+msgstr "name"
+
+#: classes/meta/wares.php:16
+msgid "価格"
+msgstr "price"
+
+#: classes/meta/wares.php:18
+msgid "数量"
+msgstr "amount"
+
+#: classes/meta/wares.php:19
+msgid "販売期限"
+msgstr "expire"
+
+#: classes/meta/wares.php:20 classes/meta/wares.php:23
+msgid "保管場所"
+msgstr "storage"
+
+#: classes/meta/wares.php:22
+msgid "注文情報"
+msgstr "orders"
+
+#: classes/template_type/access.php:11
+msgid "アクセス"
+msgstr "access"
+
+#: classes/template_type/contact.php:11
+msgid "連絡先"
+msgstr "contact"
+
+#: classes/validation/color.php:8
+msgid "色指定をHEX値で入力して下さい"
+msgstr "input color value with HEX"
+
+#: classes/validation/date.php:13
+msgid "日付として読み取れませんでした"
+msgstr "invalid date"
+
+#: classes/validation/email.php:8
+msgid "メールアドレスを入力してください"
+msgstr "input valid mailaddress"
+
+#: classes/validation/hankaku.php:8
+msgid "半角英数で入力してください"
+msgstr "input alphanumeric"
+
+#: classes/validation/hankaku_length.php:11
+#, php-format
+msgid "%d文字の半角英数で入力してください"
+msgstr "input  %d alphanumeric charactors"
+
+#: classes/validation/hiragana.php:8
+msgid "ひらがなで入力してください"
+msgstr "input with ひらがな"
+
+#: classes/validation/html.php:15
+msgid "HTML構文にエラーがあります"
+msgstr "html has syntax error"
+
+#: classes/validation/katakana.php:8
+msgid "カタカナで入力してください"
+msgstr "input with カタカナ"
+
+#: classes/validation/number.php:8
+msgid "数字で入力してください"
+msgstr "input with numeric"
+
+#: classes/validation/number_length.php:12
+#, php-format
+msgid "%d桁の数字で入力してください"
+msgstr "input %d numeric"
+
+#: classes/validation/number_range.php:12
+#, php-format
+msgid "%d〜%dの数値で入力してください"
+msgstr "input %d ~ %d numeric"
+
+#: classes/validation/numeric.php:8
+msgid "数値で入力してください"
+msgstr "input with numeric"
+
+#: classes/validation/pattern.php:10
+msgid "入力形式が正しくありません"
+msgstr "invalid input pattern"
+
+#: classes/validation/phone_number.php:8
+msgid "電話番号が正しくありません"
+msgstr "input phonenumber"
+
+#: classes/validation/post_exists.php:10
+msgid "投稿が存在しません"
+msgstr "article not exists"
+
+#: classes/validation/required.php:9
+msgid "入力して下さい"
+msgstr "required"
+
+#: classes/validation/selection.php:19
+msgid "選択項目にない値です"
+msgstr "out of selection"
+
+#: classes/validation/text.php:10
+msgid "不正な値です"
+msgstr "invalid input"
+
+#: classes/validation/text_length.php:11
+#, php-format
+msgid "%d文字で入力してください"
+msgstr "input  %d charactors"
+
+#: classes/validation/text_maxlength.php:11
+#, php-format
+msgid "%d文字以内で入力してください"
+msgstr "input less than %d charactors"
+
+#: classes/validation/unique.php:16
+msgid "この値はすでに使われています"
+msgstr "already used"
+
+#: classes/validation/user_email.php:16
+msgid "このメールアドレスはすでに使われています"
+msgstr "the mail address is already used"
+
+#: classes/validation/validation.php:33
+#, php-format
+msgid "%sの入力が正しくありません"
+msgstr "%s is invalid"
+
+#: classes/validation/zip.php:7
+msgid "郵便番号を入力してください（半角数字）"
+msgstr "invalid zip code (alphanumeric)"
+
+#: core/user.php:57
+msgid "ゲスト"
+msgstr "guest"
+
+#: default/classes/template_type/mail.php:10
+msgid "メールフォーム"
+msgstr "mail form"
+
+#: default/classes/template_type/menu.php:9
+msgid "メニュー"
+msgstr "menu"
+
+#: default/classes/template_type/news.php:9
+msgid "ニュース"
+msgstr "news"
+
+#: default/classes/template_type/shop.php:13
+#: default/classes/template_type/simple_shop.php:16
+msgid "ショップ"
+msgstr "shop"
+
+#: default/classes/template_type/shop.php:14
+#: default/classes/template_type/simple_shop.php:16
+msgid "カート"
+msgstr "cart"
+
+#: default/classes/template_type/simple_shop.php:15
+msgid "商品"
+msgstr "products"
+
+#: default/classes/template_type/thread.php:10
+msgid "スレッド"
+msgstr "thread"
+
+#: default/config/template/config/sec_inputs.php:44
+msgid "送信"
+msgstr "send"
+
+#: default/config/template/mailconf/admin.php:8
+msgid "送信・返信メール設定"
+msgstr "mail config"
+
+#: default/config/template/manage/sec_manage_item-edit.php:12
+msgid "削除"
+msgstr "delete"
+
+#: default/config/template/manage/sec_manage_item-edit.php:13
+msgid "更新"
+msgstr "update"
+
+#: default/config/template/manage/sec_manage_item.php:12
+msgid "編集"
+msgstr "edit"
+
+#: default/config/template/manage/sec_search-results.php:16
+msgid "操作"
+msgstr "control"
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:14
+msgid "支払方法に問題があるようです"
+msgstr "invalide payment method"
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:15
+msgid "Amazonがオーソリを拒否しました"
+msgstr "Amazon rejected the authorization"
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:16
+msgid "内部処理エラーです"
+msgstr "transaction error"
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:17
+msgid "処理がタイムアウトしました"
+msgstr "transaction was timeout"
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:19
+msgid "支払いに同意していません"
+msgstr ""
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:20
+msgid "金額がセットされていません"
+msgstr "amount is not set"
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:21
+msgid "販売者は購入できません"
+msgstr "seller can not be buyer"
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:22
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:28
+msgid "この支払い方法は選択できません"
+msgstr "invalid payment method"
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:23
+msgid "この支払い方法は削除されました"
+msgstr "the payment method was deleted"
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:24
+msgid "この支払い方法は期限切れです"
+msgstr "the payment method was expired"
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:25
+msgid "支払い方法を選択してください"
+msgstr "select payment method"
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:26
+msgid "配送先がを選択してください"
+msgstr "select destination"
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:27
+msgid "選択した配送先は削除されています"
+msgstr "the destination was deleted"
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:30
+msgid "注文IDがセットされていません"
+msgstr "OrderID was not set"
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:31
+msgid "決済IDがセットされていません"
+msgstr "AuthorizationID was not set"
+
+#: functions/facebook/functions.php:29
+msgid "Facebookでログイン"
+msgstr "login with FaceBook"
+
+#: functions/gauth/desc.php:2
+msgid ""
+"Googleの各種APIを利用するための認証情報を登録します。gmap,"
+"gcalで必要になります。"
+msgstr ""
+
+#: functions/gauth/functions.php:19
+msgid "Googleでログイン"
+msgstr "login with Google"
+
+#: functions/gtranslate/conf.php:5
+msgid "表示"
+msgstr "show"
+
+#: functions/gtranslate/conf.php:5
+msgid "非表示"
+msgstr "hide"
+
+#~ msgid "不正なリクエストです"
+#~ msgstr "invalid request"
+
+#~ msgid "catpow"
+#~ msgstr "catpow"

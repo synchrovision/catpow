@@ -1,0 +1,133 @@
+@charset "utf-8";
+ul.wp-block-catpow-lightbox li.item {
+  position: relative; }
+  ul.wp-block-catpow-lightbox li.item .itemControl {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem; }
+  ul.wp-block-catpow-lightbox li.item > .link {
+    position: relative; }
+    ul.wp-block-catpow-lightbox li.item > .link input {
+      margin: 1rem auto;
+      color: #444; }
+ul.wp-block-catpow-lightbox.edit {
+  padding: 2rem;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(68, 68, 68, 0.5);
+  border-radius: 1rem;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  background-color: #fefefe; }
+  ul.wp-block-catpow-lightbox.edit li.item {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-lines: multiple;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap; }
+    ul.wp-block-catpow-lightbox.edit li.item > .image {
+      padding: 0.5rem;
+      -webkit-box-flex: 0;
+      flex-grow: 0;
+      flex-shrink: 0;
+      flex-basis: 10rem; }
+      ul.wp-block-catpow-lightbox.edit li.item > .image img, ul.wp-block-catpow-lightbox.edit li.item > .image video {
+        width: 100%;
+        height: auto; }
+    ul.wp-block-catpow-lightbox.edit li.item > header {
+      -webkit-box-flex: 1;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 20rem;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-lines: multiple;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -webkit-align-items: center;
+      align-items: center; }
+      ul.wp-block-catpow-lightbox.edit li.item > header div.counter {
+        -webkit-box-flex: 1;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 90%;
+        padding: 0.5rem;
+        text-align: center; }
+        ul.wp-block-catpow-lightbox.edit li.item > header div.counter span {
+          font-size: 1.1rem;
+          line-height: 1em;
+          font-weight: 400;
+          color: #36c; }
+          ul.wp-block-catpow-lightbox.edit li.item > header div.counter span.number {
+            display: inline-block;
+            margin: 0px 0.5rem;
+            font-size: 1.5em; }
+      ul.wp-block-catpow-lightbox.edit li.item > header div.image {
+        padding: 0.5rem;
+        -webkit-box-flex: 0;
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 5rem; }
+        ul.wp-block-catpow-lightbox.edit li.item > header div.image img, ul.wp-block-catpow-lightbox.edit li.item > header div.image video {
+          display: block;
+          width: auto;
+          height: 4rem;
+          margin: 0px auto; }
+      ul.wp-block-catpow-lightbox.edit li.item > header div.text {
+        padding: 0.5rem;
+        -webkit-box-flex: 1;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 10rem; }
+        ul.wp-block-catpow-lightbox.edit li.item > header div.text h3 {
+          padding: 0.5rem;
+          margin: 0px;
+          text-align: left;
+          font-size: 2rem;
+          font-weight: 400;
+          color: #36c; }
+        ul.wp-block-catpow-lightbox.edit li.item > header div.text p {
+          padding: 1rem;
+          margin-top: 1rem;
+          border-top-style: solid;
+          border-top-width: 1px;
+          border-top-color: #fff;
+          text-align: justify;
+          font-size: 1.2rem;
+          font-weight: 400;
+          color: #007cba; }
+    ul.wp-block-catpow-lightbox.edit li.item > .text {
+      padding: 1rem;
+      -webkit-box-flex: 1;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 30rem; }
+      ul.wp-block-catpow-lightbox.edit li.item > .text h4 {
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.5rem;
+        border-bottom-style: dotted;
+        border-bottom-width: 1px;
+        border-bottom-color: #444;
+        text-align: left;
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #444; }
+      ul.wp-block-catpow-lightbox.edit li.item > .text p {
+        text-align: justify;
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: #444; }
+
+div.lightbox_preview {
+  position: relative;
+  height: 50vw;
+  z-index: 1; }
+  div.lightbox_preview #cp_lightbox.active {
+    position: relative;
+    width: 160%;
+    height: 160%;
+    -webkit-transform-origin: top left;
+    transform-origin: top left;
+    transform: -webkit- scale(0.625);
+    transform: scale(0.625); }

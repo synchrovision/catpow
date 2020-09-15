@@ -1,0 +1,14 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-honeycomb{
+	.item{
+		.handlers{
+			@include bnd((d:b,p:a,t:-2rem,l:0rem,z:100));
+			.handler{
+				@include bnd((d:ib));
+				@include txt((c:m));
+				@include usr((s:n));
+			}
+		}
+	}
+}

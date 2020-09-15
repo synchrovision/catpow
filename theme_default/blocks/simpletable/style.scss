@@ -1,0 +1,38 @@
+@import "config/style_config.scss";
+
+body{
+	table{
+		&.wp-block-catpow-simpletable{
+			@include tbl(());
+			@include bnd((w:95%,mg:50 a));
+			tbody{
+				tr{
+					th,td{
+						@include bnd((pd:10));
+						@include txt((a:l,p:1.2rem,h:1.5em,f:g));
+						@include bdr((p:b,s:s,w:1,c:t 1 .2));
+					}
+					th{
+						@include bnd((w:180));
+					}
+				}
+			}
+			@media(#{bp(-1)}){
+				tbody{
+					@include bnd((d:b));
+					tr{
+						@include bnd((d:b,pd:10 0));
+						@include bdr((p:b,s:s,w:1,c:t 1 .2));
+						th,td{
+							@include bnd((d:b,pd:5));
+							@include bdr((p:b,s:n));
+						}
+						th{
+							@include bnd((w:a));
+						}
+					}
+				}
+			}
+		}
+	}
+}

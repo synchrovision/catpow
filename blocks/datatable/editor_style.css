@@ -1,0 +1,17 @@
+@charset "utf-8";
+body table.wp-block-catpow-datatable {
+  width: 100%; }
+  body table.wp-block-catpow-datatable thead tr th, body table.wp-block-catpow-datatable tbody tr th, body table.wp-block-catpow-datatable thead tr td, body table.wp-block-catpow-datatable tbody tr td {
+    position: relative; }
+    body table.wp-block-catpow-datatable thead tr th div.itemControl, body table.wp-block-catpow-datatable tbody tr th div.itemControl, body table.wp-block-catpow-datatable thead tr td div.itemControl, body table.wp-block-catpow-datatable tbody tr td div.itemControl {
+      width: 7rem; }
+      body table.wp-block-catpow-datatable thead tr th div.itemControl.columnControl, body table.wp-block-catpow-datatable tbody tr th div.itemControl.columnControl, body table.wp-block-catpow-datatable thead tr td div.itemControl.columnControl, body table.wp-block-catpow-datatable tbody tr td div.itemControl.columnControl {
+        position: absolute;
+        bottom: -2rem;
+        left: 0px;
+        right: 0px;
+        margin: auto; }
+      body table.wp-block-catpow-datatable thead tr th div.itemControl.rowControl, body table.wp-block-catpow-datatable tbody tr th div.itemControl.rowControl, body table.wp-block-catpow-datatable thead tr td div.itemControl.rowControl, body table.wp-block-catpow-datatable tbody tr td div.itemControl.rowControl {
+        position: absolute;
+        top: 0px;
+        right: -6rem; }

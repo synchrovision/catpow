@@ -1,0 +1,229 @@
+@charset "utf-8";
+@mixin cal_large($clr1:#080,$event_colors:()){
+	table.calendar{
+		width:100%;border-collapse:collapse;vertical-align:top;
+		*{@include text-shadow(none);margin:0;padding:0;border:none;}
+		caption{
+			position:relative;
+			*{color:$clr1;}
+			.seireki{font-size:14px;position:absolute;left:5px;bottom:4px;}
+			.wareki{display:none;}
+			.month{font-size:24px;}
+			.month_en{display:none;}
+			.month_ja{display:none;}
+		}
+		thead{
+			th,td{
+				vertical-align:central;border:solid #aaa 1px;
+				p{
+					font-size:10px;padding:2px 5px;margin:0 auto;
+					text-align:center;
+				}
+			}
+		}
+		tbody{
+			th,td{
+				width:14.2%;height:75px;overflow:visible;text-align:left;vertical-align:top;border:solid #aaa 1px;padding:3px;
+				position:relative;
+				p.holiday{position:absolute;top:3px;right:3px;color:red;font-size:9px;}
+				div.events{
+					div.event label{
+						padding:2px 3px;margin:1px;text-align:center;cursor:pointer;
+						@include border-radius(10px);@include text_style(10px,#fff,bold,gothic);
+						width:auto;height:auto;display:block;overflow:hidden;text-indent:0;
+					}
+				}
+			}
+		}
+		&.single tbody,&.multi tbody{
+			th,td{
+				div.events{
+					div.event{
+						label{background-color:$clr1;}
+						@if length($event_colors)>0{@each $list in $event_colors{
+							&.#{nth($list,1)}{
+								label{
+									background-color:nth($list,2);
+								}
+							}
+						}}
+					}
+				}
+			}
+		}
+		&.input-single tbody,&.input-multi tbody{
+			td{
+				background:#eee;
+				&.event{
+					background:#fff;
+					div.events div.event{
+						display:none;margin-bottom:3px;
+						label{background:tint($clr1,30%);input{display:none;}}
+						@if length($event_colors)>0{@each $list in $event_colors{
+							&.#{nth($list,1)}{
+								label{
+									background-color:tint(nth($list,2),15%);
+									&:hover{background-color:tint(nth($list,2),50%);}
+								}
+							}
+						}}
+						&.active{
+							display:block;
+							label{background-color:$clr1;}
+							@if length($event_colors)>0{@each $list in $event_colors{
+								&.#{nth($list,1)}{
+									label{background-color:nth($list,2);}
+								}
+							}}
+						}
+					}
+					&:hover{
+						cursor:pointer;
+						background:tint($clr1,20%);
+						div.events{
+							background-color:#fff;display:block;width:120px;
+							left:50%;top:30px;margin-left:-65px;position:absolute;z-index:9999;padding:5px;@include box-shadow;
+							div.event{display:block;}
+						}
+					}
+				}
+			}
+		}
+	}
+	ul.legend{display:none;}
+}
+
+@mixin cal_mini($clr1:#080,$event_colors:()){
+	table.calendar{
+		width:100%;border-collapse:collapse;vertical-align:top;
+		*{@include text-shadow(none);margin:0;padding:0;border:none;}
+		caption{
+			position:relative;padding:2px 5px;
+			*{color:$clr1;}
+			.seireki{font-size:10px;position:absolute;left:5px;bottom:4px;}
+			.wareki{display:none;}
+			.month{font-size:15px;}
+			.month_en{display:none;}
+			.month_ja{display:none;}
+		}
+		thead{
+			th,td{
+				vertical-align:central;border:solid #aaa;border-width:1px 0;
+				p{
+					font-size:10px;padding:2px;margin:0 auto;
+					text-align:center;
+				}
+			}
+		}
+		tbody{
+			th,td{
+				width:20px;height:20px;overflow:visible;text-align:left;vertical-align:top;padding:1px;
+				position:relative;
+				p.date{padding:2px;margin:0;@include text_style(11px,#666,normal,gothic);text-align:center;}
+				&.holiday p.date,&.Sunday p.date{color:#cc4444;}
+				p.holiday{display:none;}
+				div.events{display:none;}
+				&:hover{
+					cursor:pointer;
+					p.holiday{
+						background-color:red;display:block;@include text_style(12px,#fff,bold,gothic);text-align:center;
+						left:50%;top:-18px;margin-left:-50px;width:80px;position:absolute;
+						z-index:999;padding:2px 10px;@include box-shadow;@include border-radius(10px);
+					}
+					div.events{
+						background-color:#fff;display:block;@include border-radius(10px);
+						left:50%;top:20px;margin-left:-65px;width:120px;position:absolute;z-index:999;padding:5px;@include box-shadow;
+						div.event{
+							margin-bottom:3px;
+							label{
+								background-color:tint($clr1,30%);@include text_style(12px,#fff,bold,gothic);text-align:center;
+								width:110px;height:auto;padding:2px 3px;display:block;overflow:hidden;text-indent:0;@include border-radius(10px);
+							}
+						}
+					}
+				}
+			}
+		}
+		&.single tbody,&.multi tbody{
+			td{
+				&.event{
+					p.date{background:tint($clr1,80%);color:#fff;@include border-radius(10px);margin:2px;}
+					@if length($event_colors)>0{@each $list in $event_colors{
+						&.#{nth($list,1)}{
+							p.date{background:nth($list,2);}
+						}
+					}}
+				}
+				&.event:hover{
+					div.events div.event{
+						label{background-color:$clr1;}
+						@if length($event_colors)>0{@each $list in $event_colors{
+							&.#{nth($list,1)}{
+								label{background-color:nth($list,2);}
+							}
+						}}
+					}
+				}
+			}
+		}
+		&.input-single tbody,&.input-multi tbody{
+			td{
+				background:#eee;
+				&.event{
+					background:#fff;
+					div.events div.event{
+						label{
+							background:tint($clr1,30%);
+							input{display:none;}
+						}
+						@if length($event_colors)>0{@each $list in $event_colors{
+							&.#{nth($list,1)}{
+								label{background-color:tint(nth($list,2),15%);}
+							}
+						}}
+						&.active,&:hover{
+							label{background-color:$clr1;}
+							@if length($event_colors)>0{@each $list in $event_colors{
+								&.#{nth($list,1)}{
+									label{background-color:nth($list,2);}
+								}
+							}}
+						}
+					}
+				}
+				&.event.active{
+					background:$clr1;
+					@if length($event_colors)>0{@each $list in $event_colors{
+						&.#{nth($list,1)}{
+							background-color:nth($list,2);
+						}
+					}}
+					p.date{color:#fff;}
+				}
+				&.event:hover{
+					cursor:pointer;
+					background:tint($clr1,80%);
+					@if length($event_colors)>0{@each $list in $event_colors{
+						&.#{nth($list,1)}{
+							background-color:tint(nth($list,2),80%);
+						}
+					}}
+					p.date{color:#fff;}
+				}
+			}
+		}
+	}
+	ul.legend{
+		display:block;list-style: none;
+		padding:5px 15px; margin:15px 5px;
+		border:1px solid #666;
+		li{
+			@include text_style(10px,#666,normal,$gothic);
+			display:inline-block;margin-right:10px;width:120px;padding:2px 5px;
+			&:before{content:'■';margin-right:5px;color:$clr1;}
+			@if length($event_colors)>0{@each $list in $event_colors{
+				&.#{nth($list,1)}:before{color:nth($list,2);}
+			}}
+		}
+	}
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="レイヤー_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" viewBox="0 0 600 400" style="enable-background:new 0 0 600 400;" xml:space="preserve">
+<style type="text/css">
+	.st0{clip-path:url(#SVGID_2_);}
+	.st1{fill:#A1E6C7;}
+	.st2{clip-path:url(#SVGID_2_);fill:none;stroke:#A1E6C7;stroke-width:18;stroke-miterlimit:10;}
+</style>
+<g>
+	<defs>
+		<rect id="SVGID_1_" width="600" height="400"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<g class="st0">
+		<rect x="24.3" y="23.7" class="st1" width="96.2" height="63.1"/>
+		<rect x="24.9" y="94.8" class="st1" width="202.1" height="94.2"/>
+		<rect x="130.2" y="23.7" class="st1" width="96.2" height="13.4"/>
+		<rect x="130.2" y="48.3" class="st1" width="96.2" height="13.4"/>
+		<rect x="130.2" y="72.8" class="st1" width="96.2" height="13.4"/>
+	</g>
+	<g class="st0">
+		<rect x="335.9" y="23.7" class="st1" width="96.2" height="63.1"/>
+		<rect x="336.4" y="94.8" class="st1" width="202.1" height="94.2"/>
+		<rect x="441.7" y="23.7" class="st1" width="96.2" height="13.4"/>
+		<rect x="441.7" y="48.3" class="st1" width="96.2" height="13.4"/>
+		<rect x="441.7" y="72.8" class="st1" width="96.2" height="13.4"/>
+	</g>
+	<g class="st0">
+		<rect x="335.9" y="210.3" class="st1" width="96.2" height="63.1"/>
+		<rect x="336.4" y="281.4" class="st1" width="202.1" height="94.2"/>
+		<rect x="441.7" y="210.3" class="st1" width="96.2" height="13.4"/>
+		<rect x="441.7" y="234.9" class="st1" width="96.2" height="13.4"/>
+		<rect x="441.7" y="259.5" class="st1" width="96.2" height="13.4"/>
+	</g>
+	<polyline class="st2" points="278,105.5 278,294.5 321.2,294.5 	"/>
+	<line class="st2" x1="236.5" y1="105" x2="321.2" y2="105"/>
+</g>
+</svg>

@@ -1,0 +1,29 @@
+@charset "utf-8";
+body div.wp-block-catpow-articlenav {
+  padding: 2rem; }
+  body div.wp-block-catpow-articlenav ul.article_nav {
+    list-style: none; }
+    body div.wp-block-catpow-articlenav ul.article_nav li h3 {
+      position: relative;
+      padding: 0.5rem;
+      padding-left: 2rem;
+      text-align: left;
+      font-size: 1.3rem;
+      cursor: pointer; }
+      body div.wp-block-catpow-articlenav ul.article_nav li ul {
+        display: none;
+        padding: 0.5rem;
+        list-style: none; }
+      body div.wp-block-catpow-articlenav ul.article_nav li.active > h3 {
+        color: #f80; }
+        body div.wp-block-catpow-articlenav ul.article_nav li.active > h3::before {
+          position: absolute;
+          top: 0.8rem;
+          left: 0px;
+          content: " \f054";
+          font-family: 'Font Awesome 5 Free';
+          font-weight: 900; }
+        body div.wp-block-catpow-articlenav ul.article_nav li.active ul {
+          display: block; }
+    body div.wp-block-catpow-articlenav ul.article_nav > li > h3 {
+      font-size: 1.5rem; }

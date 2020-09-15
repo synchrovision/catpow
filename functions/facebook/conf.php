@@ -1,0 +1,9 @@
+<?php
+$conf=[
+	'cat'=>'sns',
+	'meta'=>[
+		'fb_app_id'=>['type'=>'options','option'=>'fb_app_id','size'=>50],
+		'fb_app_secret'=>['type'=>'options','option'=>'fb_app_secret','size'=>50],
+		'fb_access_token'=>['type'=>'options','option'=>'fb_access_token','size'=>50]
+	]
+];

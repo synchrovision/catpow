@@ -1,0 +1,54 @@
+@charset "utf-8";
+div.WeeklySchedule {
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none; }
+  div.WeeklySchedule table.grid {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    color: #c7c7c7;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-spacing: 0px; }
+    div.WeeklySchedule table.grid td, div.WeeklySchedule table.grid th {
+      height: 2rem;
+      box-sizing: border-box; }
+      div.WeeklySchedule table.grid tbody td {
+        border-style: solid;
+        border-width: 1px;
+        border-color: #c7c7c7; }
+  div.WeeklySchedule .DrawArea {
+    position: absolute;
+    top: 2rem;
+    bottom: 0px;
+    left: 12.5%;
+    right: 0px; }
+    div.WeeklySchedule .DrawArea:hover {
+      cursor: grab; }
+    div.WeeklySchedule .DrawArea .base {
+      position: absolute;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
+      right: 0px; }
+    div.WeeklySchedule .DrawArea .rect {
+      background-color: rgba(0, 124, 186, 0.5); }
+      div.WeeklySchedule .DrawArea .rect .handler.moveStart {
+        position: absolute;
+        height: 6px;
+        top: -3px;
+        left: 0px;
+        right: 0px;
+        cursor: row-resize; }
+      div.WeeklySchedule .DrawArea .rect .handler.moveEnd {
+        position: absolute;
+        height: 6px;
+        bottom: -3px;
+        left: 0px;
+        right: 0px;
+        cursor: row-resize; }

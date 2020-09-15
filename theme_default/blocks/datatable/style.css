@@ -1,0 +1,84 @@
+@charset "utf-8";
+body table.wp-block-catpow-datatable.spec {
+  border-collapse: collapse;
+  border-spacing: 0px;
+  width: 95%;
+  margin: 50px auto; }
+  body table.wp-block-catpow-datatable.spec thead th, body table.wp-block-catpow-datatable.spec thead td {
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.5em;
+    font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(136, 119, 102, .7); }
+  body table.wp-block-catpow-datatable.spec tbody tr th, body table.wp-block-catpow-datatable.spec tbody tr td {
+    position: relative;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.5em;
+    font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(136, 119, 102, .3); }
+  body table.wp-block-catpow-datatable.sheet {
+    border-collapse: collapse;
+    border-spacing: 0px;
+    width: 95%;
+    margin: 50px auto; }
+  body table.wp-block-catpow-datatable.sheet thead th {
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.5em;
+    font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
+    background-color: rgba(51, 34, 17, .1);
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(136, 119, 102, .5); }
+  body table.wp-block-catpow-datatable.sheet tbody tr th, body table.wp-block-catpow-datatable.sheet tbody tr td {
+    position: relative;
+    padding: 1rem;
+    text-align: left;
+    font-size: 1.2rem;
+    line-height: 1.5em;
+    font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(136, 119, 102, .5); }
+    body table.wp-block-catpow-datatable.sheet tbody tr th {
+      background-color: rgba(51, 34, 17, .1);
+      text-align: center; }
+    body table.wp-block-catpow-datatable.sheet tbody tr td {
+      background-color: #ffe; }
+    body table.wp-block-catpow-datatable.sheet tbody tr:nth-of-type(2n) td {
+      background-color: rgba(51, 34, 17, .1); }
+  body table.wp-block-catpow-datatable.plan {
+    border-collapse: collapse;
+    border-spacing: 0px;
+    width: 95%;
+    margin: 50px auto; }
+  body table.wp-block-catpow-datatable.plan thead th {
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.5em;
+    font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
+    color: #ffe;
+    background-color: #321; }
+  body table.wp-block-catpow-datatable.plan tbody tr th, body table.wp-block-catpow-datatable.plan tbody tr td {
+    position: relative;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.5em;
+    font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif; }
+    body table.wp-block-catpow-datatable.plan tbody tr th {
+      background-color: #321;
+      color: #ffe; }
+    body table.wp-block-catpow-datatable.plan tbody tr td {
+      background-color: #ffe; }
+    body table.wp-block-catpow-datatable.plan tbody tr:nth-of-type(2n) td {
+      background-color: rgba(51, 34, 17, .1); }

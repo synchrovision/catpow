@@ -1,0 +1,13 @@
+<?php
+$conf=[
+	'cat'=>'optimize',
+	'meta'=>[
+		'cp_smtp'=>['type'=>'options','option'=>'cp_smtp','meta'=>[
+			'host'=>['type'=>'text','label'=>'ホスト'],
+			'user'=>['type'=>'text','label'=>'ユーザー'],
+			'pass'=>['type'=>'text','label'=>'パスワード'],
+			'ssl'=>['type'=>'radio','label'=>'SSL','value'=>['不使用'=>0,'使用'=>1]],
+			'port'=>['type'=>'number','label'=>'ポート'],
+		]],
+	]
+];

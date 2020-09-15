@@ -1,0 +1,37 @@
+@import 'admin_style_config.scss';
+
+div.WeeklySchedule{
+	@include bnd((p:r));
+	@include usr((s:n));
+	table.grid{
+		@include bnd((p:r,w:100%));
+		@include txt((a:c,p:1rem,c:t 30));
+		@include tbl((l:f));
+		td,th{@include bnd((h:2rem,bs:b));}
+		tbody{
+			td{
+				@include bdr((s:s,w:1,c:t 30));
+			}
+		}
+	}
+	.DrawArea{
+		@include bnd((p:a,t:2rem,b:0,l:12.5%,r:0));
+		&:hover{@include usr((c:grab));}
+		.base{
+			@include bnd((p:a,t:0,b:0,l:0,r:0));
+		}
+		.rect{
+			@include bg((c:m 1 .5));
+			.handler{
+				&.moveStart{
+					@include bnd((p:a,h:6,t:-3,l:0,r:0));
+					@include usr((c:row-resize));
+				}
+				&.moveEnd{
+					@include bnd((p:a,h:6,b:-3,l:0,r:0));
+					@include usr((c:row-resize));
+				}
+			}
+		}
+	}
+}

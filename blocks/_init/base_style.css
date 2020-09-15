@@ -1,0 +1,187 @@
+@charset "utf-8";
+div.itemControl {
+  padding: 2px 5px;
+  position: relative;
+  z-index: 1000;
+  text-align: center;
+  font-size: 12px;
+  line-height: 10px;
+  background-color: #fefefe;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: space-around;
+  justify-content: space-around; }
+  div.itemControl div.btn {
+    display: inline-block;
+    margin: 2px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 10px;
+    color: #444;
+    cursor: pointer;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    opacity: 0.7; }
+    div.itemControl div.btn.delete::before {
+      content: "\f068";
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900; }
+    div.itemControl div.btn.clone::before {
+      content: "\f067";
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900; }
+    div.itemControl div.btn.up::before {
+      content: "\f139";
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900; }
+    div.itemControl div.btn.down::before {
+      content: "\f13a";
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900; }
+    div.itemControl div.btn.left::before {
+      content: "\f137";
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900; }
+    div.itemControl div.btn.right::before {
+      content: "\f138";
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900; }
+    div.itemControl div.btn.edit::before {
+      content: "\f304";
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900; }
+    div.itemControl div.btn:hover {
+      opacity: 1; }
+  div.itemControl div.inputs {
+    display: block;
+    position: absolute;
+    width: 200px;
+    padding: 10px;
+    top: 100%;
+    right: 0px;
+    margin: 0px auto;
+    z-index: 1001;
+    background-color: #fefefe;
+    border-radius: 5px;
+    text-align: left;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    opacity: 0;
+    transform: -webkit- translateY(-10px);
+    transform: translateY(-10px);
+    pointer-events: none; }
+    div.itemControl div.inputs div.sub {
+      padding-left: 10px;
+      margin-bottom: 20px;
+      border-left-style: solid;
+      border-left-width: 5px;
+      border-left-color: #eee; }
+  div.itemControl.open {
+    z-index: 1001; }
+    div.itemControl.open div.btn.edit {
+      opacity: 1; }
+    div.itemControl.open div.inputs {
+      display: block;
+      opacity: 0.8;
+      transform: -webkit- translateY(0px);
+      transform: translateY(0px);
+      pointer-events: auto; }
+
+div.components-panel div.sub {
+  padding-left: 10px;
+  margin-bottom: 20px;
+  border-left-style: solid;
+  border-left-width: 5px;
+  border-left-color: #eee; }
+div.components-panel img.selectImage {
+  width: 100px;
+  height: auto; }
+
+div.embedded_content {
+  position: relative;
+  min-height: 5rem;
+  height: auto;
+  padding-top: 2rem; }
+  div.embedded_content div.label {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    padding: 0.5rem 1rem;
+    z-index: 10;
+    background-color: #fefefe;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 10px;
+    font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+    font-weight: 400;
+    color: #444;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+
+table.selectPosition {
+  border-collapse: collapse;
+  border-spacing: 0px; }
+  table.selectPosition td {
+    width: 2rem;
+    height: 2rem;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #dadada; }
+    table.selectPosition td.active {
+      background-color: #007cba; }
+    table.selectPosition td.disable {
+      background-color: #ececec; }
+
+ul.selectColor {
+  list-style: none; }
+  ul.selectColor li {
+    display: inline-block;
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    margin: 0.5rem;
+    border-radius: 2rem;
+    cursor: pointer; }
+    ul.selectColor li.fillColor0 {
+      background-color: #ececec; }
+    ul.selectColor li::after {
+      content: ' ';
+      display: block;
+      position: absolute;
+      top: 1px;
+      bottom: 1px;
+      left: 1px;
+      right: 1px;
+      border-radius: 2rem;
+      background-color: #fefefe; }
+    ul.selectColor li.active::after {
+      display: none; }
+
+ul.selectPreparedImage {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  background-color: #dadada;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ececec; }
+  ul.selectPreparedImage .item {
+    -webkit-box-flex: 0;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 20%;
+    box-sizing: border-box;
+    cursor: pointer; }
+    ul.selectPreparedImage .item img {
+      width: 100%;
+      height: auto; }
+    ul.selectPreparedImage .item.active {
+      background-color: #007cba; }

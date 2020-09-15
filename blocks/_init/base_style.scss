@@ -1,0 +1,129 @@
+@import 'admin_style_config.scss';
+
+div.itemControl{
+	@include bnd((pd:2 5,p:r,z:1000));
+	@include txt((a:c,p:12,h:10));
+	@include bg((c:b));
+	@include bdr((r:1rem));
+	@include shd((b:1));
+	@include flx((w:n,j:a));
+	div.btn{
+		@include bnd((d:ib,mg:2));
+		@include txt((a:c,p:12,h:10,c:t));
+		@include usr((c:p));
+		@include trn((t:.5s,o:.7));
+		&.delete::before{
+			@include ico('minus');
+		}
+		&.clone::before{
+			@include ico('plus');
+		}
+		&.up::before{
+			@include ico('chevron-circle-up');
+		}
+		&.down::before{
+			@include ico('chevron-circle-down');
+		}
+		&.left::before{
+			@include ico('chevron-circle-left');
+		}
+		&.right::before{
+			@include ico('chevron-circle-right');
+		}
+		&.edit::before{
+			@include ico('pen');
+		}
+		&:hover{
+			@include trn((o:1));
+		}
+	}
+	div.inputs{
+		@include bnd((d:b,p:a,w:200,pd:10,t:f,r:0,mg:0 a,z:1001));
+		@include bg((c:b));
+		@include bdr((r:5));
+		@include txt((a:l));
+		@include trn((t:.5s,o:0,y:-10));
+		@include usr((e:n));
+		div.sub{
+			@include bnd((pdl:10,mgb:20));
+			@include bdr((p:l,s:s,w:5,c:#eee));
+		}
+	}
+	&.open{
+		@include bnd((z:1001));
+		div.btn{
+			&.edit{@include trn((o:1));}
+		}
+		div.inputs{
+			@include bnd((d:b));
+			@include trn((o:.8,y:0));
+			@include usr((e:a));
+		}
+	}
+}
+
+div.components-panel{
+	div.sub{
+		@include bnd((pdl:10,mgb:20));
+		@include bdr((p:l,s:s,w:5,c:#eee));
+	}
+	img.selectImage{
+		@include bnd((w:100,h:a));
+	}
+}
+
+div.embedded_content{
+	@include bnd((p:r,h:5rem a,pdt:2rem));
+	div.label{
+		@include bnd((p:a,r:0,t:0,pd:.5rem 1rem,z:10));
+		@include bg((c:b));
+		@include txt((a:c,p:1rem,h:10,f:g,w:r,c:t));
+		@include shd((b:1));
+	}
+}
+table.selectPosition{
+	@include tbl(());
+	td{
+		@include bnd((w:2rem,h:2rem));
+		@include bdr((s:s,w:1,c:t 20));
+		&.active{
+			@include bg((c:m));
+		}
+		&.disable{
+			@include bg((c:t 10));
+		}
+	}
+}
+ul.selectColor{
+	@include txt((l:n));
+	li{
+		@include bnd((d:ib,p:r,w:2rem,h:2rem,mg:.5rem));
+		@include bdr((r:2rem));
+		@include usr((c:p));
+		&.fillColor0{
+			@include bg((c:t 10));
+		}
+		&::after{
+			content: ' ';
+			@include bnd((d:b,p:a,t:1,b:1,l:1,r:1));
+			@include bdr((r:2rem));
+			@include bg((c:b));
+		}
+		&.active::after{@include bnd((d:n));}
+	}
+}
+ul.selectPreparedImage{
+	@include flx((w:w));
+	@include bg((c:t 20));
+	@include bdr((s:s,w:1,c:t 10));
+	.item{
+		@include bnd((f:0 0 20%,bs:b));
+		@include usr((c:p));
+		img{
+			@include bnd((w:f,h:a));
+		}
+		&.active{
+			@include bg((c:m));
+		}
+	}
+}

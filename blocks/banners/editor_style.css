@@ -1,0 +1,17 @@
+@charset "utf-8";
+ul.wp-block-catpow-banners li.item {
+  position: relative; }
+  ul.wp-block-catpow-banners li.item .itemControl {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem; }
+  ul.wp-block-catpow-banners li.item > .link {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    background-color: rgba(254, 254, 254, 0.8);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+    ul.wp-block-catpow-banners li.item > .link p {
+      margin: 0px;
+      padding: 0.2rem;
+      font-size: 1rem; }

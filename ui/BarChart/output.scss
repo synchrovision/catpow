@@ -1,0 +1,16 @@
+@import 'admin_style_config.scss';
+
+div.BarChart{
+	svg{
+		@include bnd((w:f 30rem,mg:0 a));
+		.graph{
+			rect{
+				@for $i from 1 through 12{
+					&.color#{$i}{
+						@include svg((f:$i));
+					}
+				}
+			}
+		}
+	}
+}

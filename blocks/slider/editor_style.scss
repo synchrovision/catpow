@@ -1,0 +1,61 @@
+@import 'admin_style_config.scss';
+
+div.wp-block-catpow-slider{
+	@include bnd((p:r,z:1));
+	&>.controls{
+		@include usr((e:n));
+		&>*{@include usr((e:a));}
+	}
+	ul.contents{
+		li{
+			@include bnd((p:r));
+			div.itemControl{
+				@include bnd((p:a,t:.5rem,r:.5rem));
+			}
+		}
+	}
+	&.edit{
+		@include bnd((pd:2rem));
+		@include bdr((s:s,w:1,c:t 1 .5,r:1rem));
+		@include shd((b:3));
+		@include bg((c:b));
+		ul.contents{
+			li{
+				@include flx((w:w));
+				@include bdr((p:b,s:s,w:1,c:t 1 .5));
+				div.slide{
+					@include bnd((p:r,w:a,h:a,pd:1rem,f:0 0 15rem));
+					img,video{
+						@include bnd((w:f,h:a));
+						@include shd((b:3));
+					}
+				}
+				div.image{
+					@include bnd((pd:1rem,f:0 0 15rem));
+					img,video{
+						@include bnd((w:f,h:a));
+						@include shd((b:3));
+					}
+				}
+				div.text{
+					@include bnd((pd:1rem,f:1 1 20rem));
+					h3{@include txt((a:l,p:2rem,w:r,c:t));}
+					h4{@include txt((a:l,p:1.5rem,w:r,c:t));}
+					p{@include txt((a:j,p:1.2rem,w:r,c:t));}
+				}
+				div.background{
+					@include bnd((p:r,w:a,h:a,pd:1rem,f:0 0 15rem));
+					img,video{
+						@include bnd((w:f,h:a));
+					}
+					&::before,&::after{
+						@include bnd((d:n));
+					}
+				}
+			}
+		}
+		div.controls{
+			@include bnd((p:r));
+		}
+	}
+}

@@ -1,0 +1,30 @@
+@import 'admin_style_config.scss';
+
+
+table.SelectTable{
+	@include bnd((w:f));
+	@include tbl((l:f));
+	&.hasLargeFontSize{
+		@include txt((p:2rem));
+	}
+	&.hasRegularFontSize{
+		@include txt((p:1.2rem));
+	}
+	&.hasSmallFontSize{
+		@include txt((p:0.8rem));
+	}
+	tbody{
+		tr{
+			td{
+				@include bnd((pd:1rem 0));
+				@include bdr((s:s,w:1,c:t 50));
+				@include txt((a:c));
+				@include usr((c:p));
+				&.active,&:hover{
+					@include bg((c:m));
+					@include txt((c:b));
+				}
+			}
+		}
+	}
+}

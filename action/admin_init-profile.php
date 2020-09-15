@@ -1,0 +1,1 @@
+<?php include __DIR__.'/admin_init-user-edit.php';

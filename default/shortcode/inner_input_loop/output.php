@@ -1,0 +1,1 @@
+<?php include dirname(__DIR__).'/input_loop/output.php';

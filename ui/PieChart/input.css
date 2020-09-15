@@ -1,0 +1,6 @@
+@charset "utf-8";
+div.PieChart {
+  width: 30rem; }
+  div.PieChart svg rect.control {
+    fill: transparent;
+    cursor: pointer; }

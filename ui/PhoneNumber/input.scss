@@ -1,0 +1,8 @@
+@import 'admin_style_config.scss';
+
+
+div.PhoneNumber{
+	input{
+		@include bnd((w:5ch));
+	}
+}

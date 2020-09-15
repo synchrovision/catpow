@@ -1,0 +1,59 @@
+@import 'admin_style_config.scss';
+
+#AmazonPayButtonContainer{
+	@include bnd((pd:1rem));
+	@include txt((a:c));
+}
+.amazonPayPopup{
+	@include bnd((p:f,t:0,b:0,l:0,r:0,z:10000));
+	@include bg((c:rgba(0,0,0,.8)));
+	@include trn((t:1s,o:1));
+	&:not(.open){
+		@include trn((o:0));
+		@include usr((e:n));
+	}
+	.amazonPayPopupContent{
+		@include bnd((p:f,t:50%,l:50%));
+		@include bg((c:b));
+		@include trn((x:-50%,y:-50%));
+		.amazonPayWidget{
+			@include bnd((w:300,h:228,mg:1rem));
+			@media(#{bp(1)}){
+				@include bnd((w:400));
+			}
+		}
+		.amazonPayError{
+			@include bnd((d:b,p:r,mg:1rem,pd:.5rem));
+			@include bdr((r:.3rem));
+			@include bg((c:#e4b33c));
+			@include txt((a:c,p:1.4rem,h:1em,f:g,c:b));
+		}
+		.amazonPayCheckoutButton{
+			@include bnd((d:b,w:20rem,h:a,mg:1rem a,pd:1rem));
+			@include txt((a:c,p:2rem,h:1em,f:g,w:b,c:#000));
+			@include bg((g:g #e4b33c));
+			@include bdr((r:.5rem));
+			&:not(.active){
+				@include bg((g:g #ccc));
+				@include txt((c:#888));
+			}
+		}
+		.amazonPayPopupClose{
+			@include bnd((p:a,t:-2rem,r:-2rem,w:3rem,h:3rem,z:20));
+			@include bg((c:t 1 .8));
+			@include bdr((r:2rem));
+			@include shd((b:1));
+			&::before,&::after{
+				content:'';
+				@include bnd((d:b,p:a,w:2rem,h:.2rem,t:1.4rem,l:.5rem));
+				@include bg((c:b));
+			}
+			&::before{
+				@include trn((r:45deg));
+			}
+			&::after{
+				@include trn((r:-45deg));
+			}
+		}
+	}
+}

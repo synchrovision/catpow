@@ -1,0 +1,289 @@
+@import "config/style_config.scss";
+
+body{
+	section{
+		&.wp-block-catpow-section{
+			@include bnd((d:b,mg:0 a));
+			&.intro{
+				@include bnd((p:r,pd:10rem 0));
+				@include flx((w:w,d:cr));
+				@media(#{bp(2)}){
+					&.left{@include bnd((pdr:40%));}
+					&.right{@include bnd((pdl:40%));}
+					&.center{@include bnd((pdl:20%,pdr:20%));}
+				}
+				&>.image{
+					@include bnd((d:b,p:r,mg:2rem a,w:80% 64rem,z:1));
+					img,video{
+						@include bnd((w:f,h:a));
+					}
+				}
+				&>.contents{
+					@include bnd((p:r,pd:2rem,mg:0 a,w:80% 64rem,z:1));
+					&>header{
+						.image{
+							@include bnd((d:b));
+							@include txt((a:c));
+							img{
+								@include bnd((w:a,h:8rem,of:c,op:c));
+							}
+						}
+						h2{
+							@include bnd((mgb:3rem,pdb:1rem));
+							@include bdr((p:b,s:d,w:2,c:t));
+							@include txt((a:c,p:6rem,h:1.5em,f:g,w:r,c:a));
+						}
+						p{
+							@include txt((a:j,p:1.8rem,h:2em,f:g,w:l,c:t));
+						}
+					}
+					&>.text{
+					}
+				}
+				&>.background{
+					@include bnd((p:a,l:0,t:0,w:f,h:f,o:h));
+					img{
+						@include bnd((w:f,h:150% 125vh,of:c,op:c));
+					}
+				}
+				@for $i from 1 through 12{
+					&.color#{$i}{
+						&>.contents{
+							&>header{
+								h2{
+									@include txt((c:$i));
+								}
+							}
+						}
+					}
+				}
+			}
+			&.scene{
+				@include bnd((p:r));
+				@include bg((c:b));
+				&.left,&.right{
+					@include flx((w:w,a:f));
+					&>.image{
+						@include bnd((f:1 1 20rem));
+					}
+					&>.contents{
+						@include bnd((f:8 8 30rem));
+					}
+				}
+				&.right{
+					@include flx((d:rr));
+				}
+				&>.image{
+					@include bnd((h:50vh a,o:h));
+					img,video{
+						@include bnd((w:f,h:125% 125vh,of:c,op:c));
+					}
+				}
+				&>.contents{
+					@include bnd((p:r,z:1));
+					&>header{
+						@include bnd((pd:6rem 2rem));
+						@include bg((c:m));
+						.image{
+							@include bnd((d:b));
+							@include txt((a:c));
+							img{
+								@include bnd((w:a,h:8rem,of:c,op:c));
+							}
+						}
+						h2{
+							@include bnd((pd:2rem 1rem,p:r));
+							@include txt((a:c,p:5rem,w:l,c:i,b:k));
+						}
+						p{
+							@include bnd((pd:2rem 1rem,p:r));
+							@include txt((a:c,p:2rem,w:l,c:i));
+						}
+					}
+					&>.text{
+						@include txt((a:c));
+						p{
+							@include txt((p:1.4rem,h:2em,w:l,c:t));
+						}
+					}
+				}
+				@for $i from 1 through 12{
+					&.color#{$i}{
+						&>.image{
+							&::after{
+								@include bg((c:$i 1 .8));
+							}
+						}
+						&>.contents{
+							&>header{
+								@include bg((c:$i));
+							}
+						}
+					}
+				}
+			}
+			&.chapter{
+				@include bnd((p:r,w:f,mg:0 a,pd:0));
+				&.left,&.right{
+					@include flx((w:w,a:f));
+					&>.image{
+						@include bnd((f:1 1 30rem));
+					}
+					&>.contents{
+						@include bnd((f:1 1 30rem));
+					}
+				}
+				&.right{
+					@include flx((d:rr));
+				}
+				&>.image{
+					@include bnd((p:r,w:f,h:40vh a,o:h));
+					img,video{
+						@include bnd((p:a,l:0,t:0,w:f,h:125% 125vh,of:c,op:c));
+					}
+				}
+				&>.contents{
+					@include bnd((p:r,z:1,pd:1rem 0));
+					&>header{
+						.prefix{
+							@include bnd((d:ib,w:3em a,pd:.5rem 1rem,mg:0 2rem));
+							@include bg((c:a));
+							@include txt((a:c,p:1.2rem,h:1em,f:g,s:b,c:i));
+						}
+						h2{
+							@include bnd((pd:1rem 2rem,p:r));
+							@include bdr((p:b,s:s,w:1,c:a));
+							@include txt((a:l,p:3rem,w:l,c:a,b:k));
+						}
+						p{
+							@include bnd((pd:1rem 2rem));
+							@include txt((a:j,p:1.3rem,w:l,c:t));
+						}
+					}
+					&>.text{
+						@include bnd((pd:1rem 2rem));
+						p{
+							@include txt((a:j,p:1.2rem,h:1.5em,c:t));
+						}
+						ul:not([class]){
+							@include bnd((pd:2rem 1rem));
+							@include txt((l:n));
+							li{
+								@include bnd((p:r,pd:1rem,pdl:3rem));
+								@include txt((a:l,p:1.2rem,h:1.5em,s:r,c:t));
+								&::before{
+									@include ico('chevron-right');
+									@include bnd((p:a,t:1.25rem,l:1rem));
+									@include txt((c:a));
+								}
+							}
+						}
+					}
+				}
+			}
+			&.article{
+				@include bnd((w:f 120rem,mg:5rem a));
+				@include flx((w:w));
+				&>.image{
+					@include bnd((f:1 1 20rem,pd:1rem 0));
+					img,video{
+						@include bnd((w:f,h:a));
+					}
+				}
+				&>.contents{
+					@include bnd((f:2 2 40rem,pd:1rem));
+					&>header{
+						h2{
+							@include bnd((pd:1rem 0,p:r));
+							@include bdr((p:b,s:s,w:1,c:a));
+							@include txt((a:l,p:2rem,w:r,c:a,b:k));
+						}
+						p{
+							@include bnd((pd:1rem 2rem));
+							@include txt((a:j,p:1.4rem,w:r,c:t));
+						}
+					}
+					&>.text{
+						@include bnd((pd:1rem));
+						&>p{
+							@include txt((a:j,p:1.3rem,h:2em,c:t));
+						}
+						&>ol{
+							@include bnd((pd:2rem,pdl:5rem));
+							li{
+								@include bnd((pd:1rem));
+								@include txt((a:l,p:1.3rem,h:1.5em,f:g,s:r,c:t));
+							}
+						}
+					}
+				}
+				
+			}
+			&.column{
+				@include bnd((w:a 120rem,mg:2rem a,o:h));
+				@include bg((c:b));
+				@include shd((b:3));
+				@include bdr((s:s,w:1,c:m 30,r:10));
+				&.left,&.right{
+					@include flx((w:w,a:f));
+					&>.image{
+						@include bnd((f:1 1 15rem));
+					}
+					&>.contents{
+						@include bnd((f:8 8 30rem));
+					}
+				}
+				&.right{
+					@include flx((d:rr));
+				}
+				&>.image{
+					@include bnd((h:40vh a,o:h));
+					img,video{
+						@include bnd((w:f,h:125% 125vh,of:c,op:c));
+					}
+				}
+				&>.contents{
+					@include bnd((pd:2rem,bs:b,p:r,z:1));
+					&>header{
+						@include bnd((pd:3rem a));
+						h2{
+							@include bnd((pd:1rem 1rem,mgb:6rem,p:r));
+							@include bdr((p:b,s:s,w:1,c:a));
+							@include txt((a:c,p:2rem,w:l,c:a,b:k));
+						}
+						p{
+							@include bnd((pd:3rem 1rem,p:r));
+							@include txt((a:c,p:1.5rem,w:l,c:t));
+						}
+					}
+					&>.text{
+						@include txt((a:c));
+						p{
+							@include txt((p:1.4rem,h:2em,w:l,c:t));
+						}
+					}
+				}
+			
+			}
+			&.notice{
+				@include bnd((w:a 120rem,mg:2rem a));
+				@include bdr((s:s,w:1,c:t 1 .5,r:1rem));
+				@include bg((c:b 1 .8));
+				&>.contents{
+					@include bnd((w:a,mg:0,pd:1rem 2rem));
+					&>header{
+						h2{
+							@include bnd((mg:.5rem 0,pd:.5rem 0));
+							@include txt((p:1.5rem));
+						}
+					}
+				}
+				@for $i from 1 through 12{
+					&.color#{$i}{
+						@include bg((c:$i 20));
+					}
+				}
+			}
+		}
+	}
+}

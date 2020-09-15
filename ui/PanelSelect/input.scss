@@ -1,0 +1,11 @@
+@import 'admin_style_config.scss';
+
+.PanelSelect{
+	@include flx((w:w));
+	&>.item,&>.spacer{
+		@include bnd((f:1 1 20rem,bs:b));
+	}
+	&>.item{
+		
+	}
+}
