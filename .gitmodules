@@ -1,0 +1,3 @@
+[submodule "scss"]
+	path = scss
+	url = https://github.com/synchrovision/cawpow-scss.git
