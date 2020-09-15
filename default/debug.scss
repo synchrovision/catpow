@@ -1,42 +1,38 @@
-@import 'config/style_config.scss';
-html{
-	body{
-		#cp_log{
-			@include bnd((d:b,p:f,b:10,r:10,pd:10,z:100000,h:a a 90%,w:a a 90%,oy:a));
-			@include txt((a:l));
-			@include bg((c:b));
-			@include trn((o:.9));
-			small{
-				@include txt((c:t));
-			}
-			table{
-				@include tbl(());
-				tr{
-					th,td{
-						@include bnd((pd:5));
-						@include bdr((s:s,w:1,c:t 1 .5));
-						@include txt((a:l,h:100%,c:t 1 .8));
+@import 'admin_style_config.scss';
+#cp_log{
+	@include bnd((d:b,p:f,b:10,r:10,pd:10,z:100000,h:a a 90%,w:a a 90%,oy:a));
+	@include txt((a:l));
+	@include bg((c:b));
+	@include trn((o:.9));
+	small{
+		@include txt((c:t));
+	}
+	table{
+		@include tbl(());
+		tr{
+			th,td{
+				@include bnd((pd:5));
+				@include bdr((s:s,w:1,c:t 1 .5));
+				@include txt((a:l,h:100%,c:t 1 .8));
 
-					}
-					th{
-						@include txt((p:10,s:b,v:t));
-						@include bg((c:m 1 .1));
-						@include usr((c:p));
-						.type{
-							@include bnd((d:b));
-							@include txt((p:8,s:r));
-						}
-					}
-					td{
-						@include txt((p:8,v:m));
-						@include trn((t:.5s));
-					}
-					&.close{
-						td{
-							&::before{content: '…';}
-							table{@include bnd((d:n));}
-						}
-					}
+			}
+			th{
+				@include txt((p:10,s:b,v:t));
+				@include bg((c:m 1 .1));
+				@include usr((c:p));
+				.type{
+					@include bnd((d:b));
+					@include txt((p:8,s:r));
+				}
+			}
+			td{
+				@include txt((p:8,v:m));
+				@include trn((t:.5s));
+			}
+			&.close{
+				td{
+					&::before{content: '…';}
+					table{@include bnd((d:n));}
 				}
 			}
 		}

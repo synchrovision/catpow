@@ -1,5 +1,5 @@
 @charset "utf-8";
-html body #cp_log {
+#cp_log {
   display: block;
   position: fixed;
   bottom: 10px;
@@ -14,37 +14,37 @@ html body #cp_log {
   width: auto;
   overflow-y: auto;
   text-align: left;
-  background-color: #fff;
+  background-color: #fefefe;
   opacity: 0.9; }
-  html body #cp_log small {
-    color: #666; }
-  html body #cp_log table {
+  #cp_log small {
+    color: #444; }
+  #cp_log table {
     border-collapse: collapse;
     border-spacing: 0px; }
-    html body #cp_log table tr th, html body #cp_log table tr td {
+    #cp_log table tr th, #cp_log table tr td {
       padding: 5px;
       border-style: solid;
       border-width: 1px;
-      border-color: rgba(102, 102, 102, 0.5);
+      border-color: rgba(68, 68, 68, 0.5);
       text-align: left;
       line-height: 100%;
-      color: rgba(102, 102, 102, 0.8); }
-    html body #cp_log table tr th {
+      color: rgba(68, 68, 68, 0.8); }
+    #cp_log table tr th {
       font-size: 10px;
       font-weight: bold;
       vertical-align: top;
-      background-color: rgba(34, 34, 34, 0.1);
+      background-color: rgba(0, 124, 186, 0.1);
       cursor: pointer; }
-      html body #cp_log table tr th .type {
+      #cp_log table tr th .type {
         display: block;
         font-size: 8px;
         font-weight: normal; }
-    html body #cp_log table tr td {
+    #cp_log table tr td {
       font-size: 8px;
       vertical-align: middle;
       -webkit-transition: 0.5s;
       transition: 0.5s; }
-      html body #cp_log table tr.close td::before {
+      #cp_log table tr.close td::before {
         content: '…'; }
-      html body #cp_log table tr.close td table {
+      #cp_log table tr.close td table {
         display: none; }
