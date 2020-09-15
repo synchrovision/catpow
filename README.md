@@ -1,11 +1,19 @@
 # Catpow
 
-![catpow](https://raw.githubusercontent.com/synchrovision/catpow/master/catpow/theme_default/screenshot.png)
+![catpow](https://raw.githubusercontent.com/synchrovision/catpow/master/theme_default/screenshot.png)
 
 CatpowはWordPressでオリジナルCMSを作成するためのフレームワークのプラグインです。
 
 WordPress: 5.2〜
 PHP:7.0〜
+
+
+WordPressのフォルダをgitのリポジトリとしている場合は以下のコマンドでcatpowをプラグインに追加してください。
+※ このプラグインのフォルダ名は「catpow」である必要があります。
+
+```command
+git submodule add https://github.com/synchrovision/cawpow.git wp-content/plugins/catpow
+```
 
 このプラグインはアルファ版であり未完成を含む開発途中の機能を多く含んでおり仕様変更も頻繁に行います
 ご使用はテストに留めてください
