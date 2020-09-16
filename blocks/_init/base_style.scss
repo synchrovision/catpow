@@ -127,3 +127,24 @@ ul.selectPreparedImage{
 		}
 	}
 }
+table.editItemsTable{
+	@include tbl(());
+	@include bnd((mg:2rem a));
+	th,td{
+		@include bnd((pd:.5em,w:a 30em));
+		@include bdr((s:s,w:1,c:t 50));
+		@include txt((p:1.2rem));
+	}
+	thead{
+		th{
+			@include bg((c:t 5));
+		}
+	}
+	tbody{
+		td{
+			img{
+				@include bnd((w:6em,h:a));
+			}
+		}
+	}
+}

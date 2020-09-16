@@ -1217,6 +1217,70 @@ const SelectBreakPointToolbar=(props)=>{
 	);
 }
 
+const EditItemsTable=(props)=>{
+	const {set,attr,itemsKey='items',columns}=props;
+	const items=attr[itemsKey];
+	const save=()=>{
+		set({[itemsKey]:JSON.parse(JSON.stringify(items))});	
+	};
+	return (
+		<table className="editItemsTable">
+			<thead>
+				<tr>
+					{columns.map((col)=>(col.cond?<th>{col.label || col.key}</th>:false))}
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{items.map((item,index)=>{
+					const propsForControl={tag:'tr',set,itemsKey,items,index};
+					return (
+						<tr>
+							{columns.map((col)=>{
+								if(!col.cond){return false;}
+								switch(col.type){
+									case 'text':
+										return (
+											<td>
+												<RichText
+													value={item[col.key]}
+													onChange={(value)=>{
+														item[col.key]=value;
+														save();
+													}}
+												/>
+											</td>
+										);
+									case 'image':
+										return (
+											<td>
+												<SelectResponsiveImage
+													attr={attr}
+													set={set}
+													keys={{items:itemsKey,...col.keys}}
+													index={index}
+													size={col.size || 'vga'}
+												/>
+											</td>
+										);
+								}
+							})}
+							<td>
+								<div className='itemControl'>
+									<div className='btn delete' onClick={(e)=>CP.deleteItem(propsForControl)}></div>
+									<div className='btn clone' onClick={(e)=>CP.cloneItem(propsForControl)}></div>
+									<div className='btn up' onClick={(e)=>CP.upItem(propsForControl)}></div>
+									<div className='btn down' onClick={(e)=>CP.downItem(propsForControl)}></div>
+								</div>
+							</td>
+						</tr>
+					);
+				})}
+			</tbody>
+		</table>
+	);
+}
+
 const DummyImage=({text})=>{
 	return <img src={cp.plugins_url+'/catpow/callee/dummy_image.php?text='+text}/>
 }

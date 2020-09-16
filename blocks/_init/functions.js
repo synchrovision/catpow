@@ -1615,6 +1615,101 @@ var SelectBreakPointToolbar = function SelectBreakPointToolbar(props) {
 	});
 };
 
+var EditItemsTable = function EditItemsTable(props) {
+	var set = props.set,
+	    attr = props.attr,
+	    _props$itemsKey = props.itemsKey,
+	    itemsKey = _props$itemsKey === undefined ? 'items' : _props$itemsKey,
+	    columns = props.columns;
+
+	var items = attr[itemsKey];
+	var save = function save() {
+		set(babelHelpers.defineProperty({}, itemsKey, JSON.parse(JSON.stringify(items))));
+	};
+	return wp.element.createElement(
+		'table',
+		{ className: 'editItemsTable' },
+		wp.element.createElement(
+			'thead',
+			null,
+			wp.element.createElement(
+				'tr',
+				null,
+				columns.map(function (col) {
+					return col.cond ? wp.element.createElement(
+						'th',
+						null,
+						col.label || col.key
+					) : false;
+				}),
+				wp.element.createElement('th', null)
+			)
+		),
+		wp.element.createElement(
+			'tbody',
+			null,
+			items.map(function (item, index) {
+				var propsForControl = { tag: 'tr', set: set, itemsKey: itemsKey, items: items, index: index };
+				return wp.element.createElement(
+					'tr',
+					null,
+					columns.map(function (col) {
+						if (!col.cond) {
+							return false;
+						}
+						switch (col.type) {
+							case 'text':
+								return wp.element.createElement(
+									'td',
+									null,
+									wp.element.createElement(RichText, {
+										value: item[col.key],
+										onChange: function onChange(value) {
+											item[col.key] = value;
+											save();
+										}
+									})
+								);
+							case 'image':
+								return wp.element.createElement(
+									'td',
+									null,
+									wp.element.createElement(SelectResponsiveImage, {
+										attr: attr,
+										set: set,
+										keys: babelHelpers.extends({ items: itemsKey }, col.keys),
+										index: index,
+										size: col.size || 'vga'
+									})
+								);
+						}
+					}),
+					wp.element.createElement(
+						'td',
+						null,
+						wp.element.createElement(
+							'div',
+							{ className: 'itemControl' },
+							wp.element.createElement('div', { className: 'btn delete', onClick: function onClick(e) {
+									return CP.deleteItem(propsForControl);
+								} }),
+							wp.element.createElement('div', { className: 'btn clone', onClick: function onClick(e) {
+									return CP.cloneItem(propsForControl);
+								} }),
+							wp.element.createElement('div', { className: 'btn up', onClick: function onClick(e) {
+									return CP.upItem(propsForControl);
+								} }),
+							wp.element.createElement('div', { className: 'btn down', onClick: function onClick(e) {
+									return CP.downItem(propsForControl);
+								} })
+						)
+					)
+				);
+			})
+		)
+	);
+};
+
 var DummyImage = function DummyImage(_ref23) {
 	var text = _ref23.text;
 

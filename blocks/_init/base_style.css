@@ -185,3 +185,21 @@ ul.selectPreparedImage {
       height: auto; }
     ul.selectPreparedImage .item.active {
       background-color: #007cba; }
+
+table.editItemsTable {
+  border-collapse: collapse;
+  border-spacing: 0px;
+  margin: 2rem auto; }
+  table.editItemsTable th, table.editItemsTable td {
+    padding: 0.5em;
+    max-width: 30em;
+    width: auto;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #a2a2a2;
+    font-size: 1.2rem; }
+    table.editItemsTable thead th {
+      background-color: #f6f6f6; }
+  table.editItemsTable tbody td img {
+    width: 6em;
+    height: auto; }
