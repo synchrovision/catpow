@@ -9,7 +9,7 @@ registerBlockType('catpow/buttons', {
 	category: 'catpow',
 	attributes: {
 		version: { type: 'number', default: 0 },
-		classes: { source: 'attribute', selector: 'ul', attribute: 'class', default: 'wp-block-catpow-buttons buttons' },
+		classes: { source: 'attribute', selector: 'ul', attribute: 'class', default: 'wp-block-catpow-buttons buttons m' },
 		items: {
 			source: 'query',
 			selector: 'li.item',
