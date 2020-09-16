@@ -561,7 +561,8 @@ var SelectResponsiveImage = function SelectResponsiveImage(_ref18) {
 	    sizes = _ref18.sizes,
 	    size = _ref18.size,
 	    ofSP = _ref18.ofSP,
-	    otherProps = babelHelpers.objectWithoutProperties(_ref18, ['className', 'attr', 'set', 'keys', 'index', 'sizes', 'size', 'ofSP']);
+	    isTemplate = _ref18.isTemplate,
+	    otherProps = babelHelpers.objectWithoutProperties(_ref18, ['className', 'attr', 'set', 'keys', 'index', 'sizes', 'size', 'ofSP', 'isTemplate']);
 
 	var type = void 0,
 	    onClick = void 0,
@@ -608,6 +609,9 @@ var SelectResponsiveImage = function SelectResponsiveImage(_ref18) {
 				return CP.selectImage(keys, set, size);
 			};
 		}
+	}
+	if (isTemplate && keys.code && item[keys.code]) {
+		return wp.element.createElement(DummyImage, { text: item[keys.code] });
 	}
 	if (item[keys.mime]) {
 		type = item[keys.mime].split('/')[0];
@@ -1620,7 +1624,8 @@ var EditItemsTable = function EditItemsTable(props) {
 	    attr = props.attr,
 	    _props$itemsKey = props.itemsKey,
 	    itemsKey = _props$itemsKey === undefined ? 'items' : _props$itemsKey,
-	    columns = props.columns;
+	    columns = props.columns,
+	    isTemplate = props.isTemplate;
 
 	var items = attr[itemsKey];
 	var save = function save() {
@@ -1679,7 +1684,8 @@ var EditItemsTable = function EditItemsTable(props) {
 										set: set,
 										keys: babelHelpers.extends({ items: itemsKey }, col.keys),
 										index: index,
-										size: col.size || 'vga'
+										size: col.size || 'vga',
+										isTemplate: isTemplate
 									})
 								);
 						}

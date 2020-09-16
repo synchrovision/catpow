@@ -370,7 +370,7 @@
 		return rtn;
 	}
 };
-const SelectResponsiveImage=({className,attr,set,keys,index,sizes,size,ofSP,...otherProps})=>{
+const SelectResponsiveImage=({className,attr,set,keys,index,sizes,size,ofSP,isTemplate,...otherProps})=>{
 	let type,onClick,item;
 	keys=keys || {};
 	if(ofSP){
@@ -403,6 +403,9 @@ const SelectResponsiveImage=({className,attr,set,keys,index,sizes,size,ofSP,...o
 			item=attr;
 			onClick=(e)=>CP.selectImage(keys,set,size);
 		}
+	}
+	if(isTemplate && keys.code && item[keys.code]){
+		return <DummyImage text={item[keys.code]}/>;
 	}
 	if(item[keys.mime]){type=item[keys.mime].split('/')[0];}
 	else{type='image';}
@@ -1218,7 +1221,7 @@ const SelectBreakPointToolbar=(props)=>{
 }
 
 const EditItemsTable=(props)=>{
-	const {set,attr,itemsKey='items',columns}=props;
+	const {set,attr,itemsKey='items',columns,isTemplate}=props;
 	const items=attr[itemsKey];
 	const save=()=>{
 		set({[itemsKey]:JSON.parse(JSON.stringify(items))});	
@@ -1260,6 +1263,7 @@ const EditItemsTable=(props)=>{
 													keys={{items:itemsKey,...col.keys}}
 													index={index}
 													size={col.size || 'vga'}
+													isTemplate={isTemplate}
 												/>
 											</td>
 										);
