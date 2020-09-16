@@ -24,10 +24,10 @@ registerBlockType('catpow/banners', {
 				src: { source: 'attribute', selector: '[src]', attribute: 'src' },
 				srcset: { source: 'attribute', selector: '[src]', attribute: 'srcset' },
 				alt: { source: 'attribute', selector: '[src]', attribute: 'alt' },
+				imageCode: { source: 'text', selector: 'a' },
 				linkUrl: { source: 'attribute', selector: 'a', attribute: 'href' },
 				target: { source: 'attribute', selector: 'a', attribute: 'target' },
-				event: { source: 'attribute', selector: 'a', attribute: 'data-event' },
-				loopImage: { source: 'text', selector: 'a' }
+				event: { source: 'attribute', selector: 'a', attribute: 'data-event' }
 			},
 			default: [].concat(babelHelpers.toConsumableArray(Array(3))).map(function () {
 				return {
@@ -36,7 +36,7 @@ registerBlockType('catpow/banners', {
 					src: cp.theme_url + '/images/dummy.jpg',
 					alt: 'dummy',
 					linkUrl: cp.home_url,
-					loopImage: '[output image]'
+					imageCode: '[output image]'
 				};
 			})
 		},
@@ -52,7 +52,7 @@ registerBlockType('catpow/banners', {
 		var items = attributes.items,
 		    classes = attributes.classes,
 		    loopCount = attributes.loopCount,
-		    loopImage = attributes.loopImage;
+		    imageCode = attributes.imageCode;
 
 		var primaryClass = 'wp-block-catpow-banners';
 		var classArray = _.uniq((className + ' ' + classes).split(' '));
@@ -60,7 +60,7 @@ registerBlockType('catpow/banners', {
 
 		var states = CP.wordsToFlags(classes);
 		var imageKeys = {
-			image: { src: "src", srcset: "srcset", alt: "alt", items: "items" }
+			image: { src: "src", srcset: "srcset", alt: "alt", code: 'imageCode', items: "items" }
 		};
 
 		var selectiveClasses = [{ label: 'サイズ', values: ['small', 'medium', 'large'] }, { label: 'タイトル', values: 'hasTitle' }, {
@@ -69,15 +69,15 @@ registerBlockType('catpow/banners', {
 			sub: [{ label: 'ループ', values: 'doLoop', sub: [{ label: 'パラメータ', input: 'text', key: 'loopParam' }, { label: 'ループ数', input: 'range', key: 'loopCount', min: 1, max: 16 }] }]
 		}];
 		var selectiveItemClasses = [{ input: 'image', label: 'PC版画像', keys: imageKeys.image }, { input: 'image', label: 'SP版画像', keys: imageKeys.image, ofSP: true, sizes: '480px' }, { input: 'text', label: 'alt', key: 'alt' }, { input: 'text', label: 'target', key: 'target' }, 'event'];
-		var itemTemplateSelectiveClasses = [{ input: 'text', label: '画像', key: 'loopImage' }];
+		var itemTemplateSelectiveClasses = [{ input: 'text', label: '画像', key: 'imageCode' }];
 
-		var itemsCopy = items.map(function (obj) {
-			return jQuery.extend(true, {}, obj);
-		});
+		var save = function save() {
+			setAttibutes({ items: JSON.parse(JSON.stringify(items)) });
+		};
 
 		var rtn = [];
 
-		itemsCopy.map(function (item, index) {
+		items.map(function (item, index) {
 			if (!item.controlClasses) {
 				item.controlClasses = 'control';
 			}
@@ -87,7 +87,7 @@ registerBlockType('catpow/banners', {
 					tag: 'li',
 					set: setAttributes,
 					attr: attributes,
-					items: itemsCopy,
+					items: items,
 					index: index,
 					isSelected: isSelected
 				},
@@ -95,8 +95,8 @@ registerBlockType('catpow/banners', {
 					'h3',
 					null,
 					wp.element.createElement(RichText, {
-						onChange: function onChange(text) {
-							itemsCopy[index].title = text;setAttributes({ items: itemsCopy });
+						onChange: function onChange(title) {
+							item.title = title;save();
 						},
 						value: item.title
 					})
@@ -104,12 +104,13 @@ registerBlockType('catpow/banners', {
 				wp.element.createElement(
 					'a',
 					null,
-					states.isTemplate ? wp.element.createElement(DummyImage, { text: item.loopImage }) : wp.element.createElement(SelectResponsiveImage, {
+					wp.element.createElement(SelectResponsiveImage, {
 						attr: attributes,
 						set: setAttributes,
 						keys: imageKeys.image,
 						index: index,
-						size: 'vga'
+						size: 'vga',
+						isTemplate: states.isTemplate
 					})
 				),
 				isSelected && wp.element.createElement(
@@ -120,8 +121,8 @@ registerBlockType('catpow/banners', {
 						{
 							contentEditable: true,
 							onBlur: function onBlur(e) {
-								itemsCopy[index].linkUrl = e.currentTarget.innerHTML;
-								setAttributes({ items: itemsCopy });
+								item.linkUrl = e.currentTarget.innerHTML;
+								save();
 							}
 						},
 						item.linkUrl
@@ -167,7 +168,7 @@ registerBlockType('catpow/banners', {
 				icon: 'edit',
 				set: setAttributes,
 				attr: attributes,
-				items: itemsCopy,
+				items: items,
 				index: attributes.currentItemIndex,
 				itemClasses: itemTemplateSelectiveClasses,
 				filters: CP.filters.banners || {}
@@ -176,7 +177,7 @@ registerBlockType('catpow/banners', {
 				icon: 'edit',
 				set: setAttributes,
 				attr: attributes,
-				items: itemsCopy,
+				items: items,
 				index: attributes.currentItemIndex,
 				itemClasses: selectiveItemClasses,
 				filters: CP.filters.banners || {}
@@ -198,7 +199,7 @@ registerBlockType('catpow/banners', {
 
 		var states = CP.wordsToFlags(classes);
 		var imageKeys = {
-			image: { src: "src", srcset: "srcset", alt: "alt", items: "items" }
+			image: { src: "src", srcset: "srcset", alt: "alt", code: 'imageCode', items: "items" }
 		};
 
 		return wp.element.createElement(
@@ -217,10 +218,11 @@ registerBlockType('catpow/banners', {
 					wp.element.createElement(
 						'a',
 						{ href: item.linkUrl, target: item.target, 'data-event': item.event, rel: item.target ? 'noopener noreferrer' : '' },
-						states.isTemplate ? item.loopImage : wp.element.createElement(ResponsiveImage, {
+						wp.element.createElement(ResponsiveImage, {
 							attr: attributes,
 							keys: imageKeys.image,
-							index: index
+							index: index,
+							isTemplate: states.isTemplate
 						})
 					)
 				);

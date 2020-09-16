@@ -26,10 +26,10 @@
 				src:{source:'attribute',selector:'[src]',attribute:'src'},
 				srcset:{source:'attribute',selector:'[src]',attribute:'srcset'},
 				alt:{source:'attribute',selector:'[src]',attribute:'alt'},
+				imageCode:{source:'text',selector:'a'},
 				linkUrl:{source:'attribute',selector:'a',attribute:'href'},
 				target:{source:'attribute',selector:'a',attribute:'target'},
-				event:{source:'attribute',selector:'a',attribute:'data-event'},
-				loopImage:{source:'text',selector:'a'}
+				event:{source:'attribute',selector:'a',attribute:'data-event'}
 			},
 			default:[...Array(3)].map(()=>{
 				return {
@@ -38,7 +38,7 @@
 					src:cp.theme_url+'/images/dummy.jpg',
 					alt:'dummy',
 					linkUrl:cp.home_url,
-					loopImage:'[output image]'
+					imageCode:'[output image]'
 				}
 			})
 		},
@@ -47,14 +47,14 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {items,classes,loopCount,loopImage}=attributes;
+		const {items,classes,loopCount,imageCode}=attributes;
 		const primaryClass='wp-block-catpow-banners';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
 		
 		var states=CP.wordsToFlags(classes);
 		const imageKeys={
-			image:{src:"src",srcset:"srcset",alt:"alt",items:"items"}
+			image:{src:"src",srcset:"srcset",alt:"alt",code:'imageCode',items:"items"}
 		};
         
 		var selectiveClasses=[
@@ -79,52 +79,51 @@
 			'event'
 		];
 		const itemTemplateSelectiveClasses=[
-			{input:'text',label:'画像',key:'loopImage'}
+			{input:'text',label:'画像',key:'imageCode'}
 		];
 		
-		let itemsCopy=items.map((obj)=>jQuery.extend(true,{},obj));
+		const save=()=>{
+			setAttibutes({items:JSON.parse(JSON.stringify(items))});
+		};
 		
 		let rtn=[];
 
-		itemsCopy.map((item,index)=>{
+		items.map((item,index)=>{
 			if(!item.controlClasses){item.controlClasses='control';}
 			rtn.push(
 				<Item
 					tag='li'
 					set={setAttributes}
 					attr={attributes}
-					items={itemsCopy}
+					items={items}
 					index={index}
 					isSelected={isSelected}
 				>
 					{states.hasTitle &&
 						<h3>
 							<RichText
-								onChange={(text)=>{itemsCopy[index].title=text;setAttributes({items:itemsCopy});}}
+								onChange={(title)=>{item.title=title;save();}}
 								value={item.title}
 							/>
 						</h3>
 					}
 					<a>
-						{states.isTemplate?(
-							<DummyImage text={item.loopImage}/>
-						):(
-							<SelectResponsiveImage
-								attr={attributes}
-								set={setAttributes}
-								keys={imageKeys.image}
-								index={index}
-								size='vga'
-							/>
-						)}
+						<SelectResponsiveImage
+							attr={attributes}
+							set={setAttributes}
+							keys={imageKeys.image}
+							index={index}
+							size='vga'
+							isTemplate={states.isTemplate}
+						/>
 					</a>
 					{isSelected &&
 						<div className='link'>
 							<p
 								contentEditable
 								onBlur={(e)=>{
-									itemsCopy[index].linkUrl=e.currentTarget.innerHTML;
-									setAttributes({items:itemsCopy});
+									item.linkUrl=e.currentTarget.innerHTML;
+									save();
 								}}
 							>{item.linkUrl}</p>
 						</div>
@@ -164,7 +163,7 @@
 						icon='edit'
 						set={setAttributes}
 						attr={attributes}
-						items={itemsCopy}
+						items={items}
 						index={attributes.currentItemIndex}
 						itemClasses={itemTemplateSelectiveClasses}
 						filters={CP.filters.banners || {}}
@@ -175,7 +174,7 @@
 						icon='edit'
 						set={setAttributes}
 						attr={attributes}
-						items={itemsCopy}
+						items={items}
 						index={attributes.currentItemIndex}
 						itemClasses={selectiveItemClasses}
 						filters={CP.filters.banners || {}}
@@ -191,7 +190,7 @@
 		
 		var states=CP.wordsToFlags(classes);
 		const imageKeys={
-			image:{src:"src",srcset:"srcset",alt:"alt",items:"items"}
+			image:{src:"src",srcset:"srcset",alt:"alt",code:'imageCode',items:"items"}
 		};
 		
 		return (
@@ -203,15 +202,12 @@
 							<li className={item.classes}>
 								{states.hasTitle && <h3><RichText.Content value={item.title}/></h3>}
 								<a href={item.linkUrl} target={item.target} data-event={item.event} rel={item.target?'noopener noreferrer':''}>
-									{states.isTemplate?(
-										item.loopImage
-									):(
-										<ResponsiveImage
-											attr={attributes}
-											keys={imageKeys.image}
-											index={index}
-										/>
-									)}
+									<ResponsiveImage
+										attr={attributes}
+										keys={imageKeys.image}
+										index={index}
+										isTemplate={states.isTemplate}
+									/>
 								</a>
 							</li>
 						);
