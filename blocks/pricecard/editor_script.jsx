@@ -25,7 +25,7 @@
 				
 				specLabels:{source:'query',selector:'dl.spec dt',query:{text:{source:'children'}}},
 				specValues:{source:'query',selector:'dl.spec dd',query:{text:{source:'children'}}},
-				linkUrl:{source:'attribute',selector:'.link a',attribute:'href'},
+				linkUrl:{source:'attribute',selector:'.link',attribute:'href'},
 			},
 			default:[...Array(3)].map(()=>{
 				return {
