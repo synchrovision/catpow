@@ -36,14 +36,17 @@
 				subTitle:{source:'children',selector:'.text h4'},
 				src:{source:'attribute',selector:'.image [src]',attribute:'src'},
 				alt:{source:'attribute',selector:'.image [src]',attribute:'alt'},
+				imageCode:{source:'text',selector:'.image'},
 				slideSrc:{source:'attribute',selector:'.slide [src]',attribute:'src'},
 				slideAlt:{source:'attribute',selector:'.slide [src]',attribute:'alt'},
 				slideSrcset:{source:'attribute',selector:'.slide [src]',attribute:'srcset'},
+				slideCode:{source:'text',selector:'.slide'},
 				text:{source:'children',selector:'.text p'},
 				linkUrl:{source:'attribute',selector:'a',attribute:'href'},
 				backgroundImageSrc:{source:'attribute',selector:'.background [src]',attribute:'src'},
 				backgroundImageAlt:{source:'attribute',selector:'.background [src]',attribute:'alt'},
-				backgroundImageSrcset:{source:'attribute',selector:'.background [src]',attribute:'srcset'}
+				backgroundImageSrcset:{source:'attribute',selector:'.background [src]',attribute:'srcset'},
+				backgroundImageCode:{source:'text',selector:'.background'}
 			},
 			default:[
 				{
@@ -60,7 +63,9 @@
 				}
 			]
 		},
-		blockState:{type:'object',default:{enableBlockFormat:false}}
+		blockState:{type:'object',default:{enableBlockFormat:false}},
+		loopParam:{type:'text',default:''},
+		loopCount:{type:'number',default:1}
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
@@ -72,9 +77,9 @@
 		
 		
 		const imageKeys={
-			image:{src:"src",alt:"alt",items:"items"},
-			slide:{src:"slideSrc",alt:"slideAlt",srscet:"slideSrcset",items:"items"},
-			backgroundImage:{src:"backgroundImageSrc",alt:"backgroundImageAlt",srcset:"backgroundImageSrcset",items:"items"}
+			image:{src:"src",alt:"alt",code:'imageCode',items:"items"},
+			slide:{src:"slideSrc",alt:"slideAlt",srscet:"slideSrcset",code:'slideCode',items:"items"},
+			backgroundImage:{src:"backgroundImageSrc",alt:"backgroundImageAlt",srcset:"backgroundImageSrcset",code:'backgroundImageCode',items:"items"}
 		};
 		const imageSizes={
 			image:'vga'
@@ -166,10 +171,22 @@
 						{input:'image',label:'SP版背景画像',keys:imageKeys.backgroundImage,ofSP:true,sizes:'480px'}
 					]
 				}
+			},
+			{
+				label:'テンプレート',
+				values:'isTemplate',
+				sub:[
+					{label:'ループ',values:'doLoop',sub:[
+						{label:'パラメータ',input:'text',key:'loopParam'},
+						{label:'ループ数',input:'range',key:'loopCount',min:1,max:16}
+					]}
+				]
 			}
 		];
 		
-		let itemsCopy=items.map((obj)=>jQuery.extend(true,{},obj));
+		const save=()=>{
+			setAttibutes({items:JSON.parse(JSON.stringify(items))});
+		};
 
 		
 		var rtn=[];
@@ -207,7 +224,7 @@
 					className={itemClass}
 					set={setAttributes}
 					attr={attributes}
-					items={itemsCopy}
+					items={items}
 					index={index}
 				>
 					{states.hasSlide &&
@@ -217,6 +234,7 @@
 								set={setAttributes}
 								keys={imageKeys.slide}
 								index={index}
+								isTemplate={states.isTemplate}
 							/>
 						</div>
 					}
@@ -227,6 +245,7 @@
 								set={setAttributes}
 								keys={imageKeys.image}
 								index={index}
+								isTemplate={states.isTemplate}
 							/>
 						</div>
 					}
@@ -235,7 +254,7 @@
 							{states.hasTitle && 
 								<h3>
 									<RichText
-										onChange={(text)=>{itemsCopy[index].title=text;setAttributes({items:itemsCopy});}}
+										onChange={(title)=>{item.title=title;save();}}
 										value={item.title}
 									/>
 								</h3>
@@ -243,7 +262,7 @@
 							{states.hasSubTitle &&
 								<h4>
 									<RichText
-										onChange={(subTitle)=>{itemsCopy[index].subTitle=subTitle;setAttributes({items:itemsCopy});}}
+										onChange={(subTitle)=>{item.subTitle=subTitle;save();}}
 										value={item.subTitle}
 									/>
 								</h4>
@@ -251,7 +270,7 @@
 							{states.hasText &&
 								<p>
 									<RichText
-										onChange={(text)=>{itemsCopy[index].text=text;setAttributes({items:itemsCopy});}}
+										onChange={(text)=>{item.text=text;save();}}
 										value={item.text}
 									/>
 								</p>
@@ -265,15 +284,17 @@
 								set={setAttributes}
 								keys={imageKeys.backgroundImage}
 								index={index}
+								isTemplate={states.isTemplate}
 							/>
 						</div>
 					}
 					{states.hasLink &&
 						<div className='link'>
-							<TextControl onChange={(linkUrl)=>{
-								itemsCopy[index].linkUrl=linkUrl;
-								setAttributes({items:itemsCopy});
-							}} value={item.linkUrl} placeholder='URLを入力'/>
+							<TextControl
+								onChange={(linkUrl)=>{item.linkUrl=linkUrl;save();}}
+								value={item.linkUrl}
+								placeholder='URLを入力'
+							/>
 						</div>
 					}
 				</Item>
@@ -281,7 +302,13 @@
 			if(states.hasImage && states.hasThumbnail){
 				thumbs.push(
 					<li class={'item '+posClass+' thumb'+imageIndex} onClick={()=>gotoItem(index)}>
-						<img src={item.src} alt={item.alt}/>
+						<SelectResponsiveImage
+							attr={attributes}
+							set={setAttributes}
+							keys={imageKeys.image}
+							index={index}
+							isTemplate={states.isTemplate}
+						/>
 					</li>
 				);
 			}
@@ -355,7 +382,7 @@
 						icon='edit'
 						set={setAttributes}
 						attr={attributes}
-						items={itemsCopy}
+						items={items}
 						index={attributes.currentItemIndex}
 						triggerClasses={selectiveClasses[0]}
 						filters={CP.filters.slider || {}}
@@ -368,13 +395,17 @@
 						attr={attributes}
 						columns={[
 							{type:'image',label:'slide',keys:imageKeys.slide,cond:states.hasSlide},
+							{type:'text',key:'slideCode',cond:states.isTemplate && states.hasSlide},
 							{type:'image',label:'image',keys:imageKeys.image,cond:states.hasImage},
+							{type:'text',key:'imageCode',cond:states.isTemplate && states.hasImage},
 							{type:'image',label:'bg',keys:imageKeys.backgroundImage,cond:states.hasBackgroundImage},
+							{type:'text',key:'backgroundImageCode',cond:states.isTemplate && states.hasBackgroundImage},
 							{type:'text',key:'title',cond:states.hasTitle},
 							{type:'text',key:'subTitle',cond:states.hasSubTitle},
 							{type:'text',key:'text',cond:states.hasText},
 							{type:'text',key:'linkUrl',cond:states.hasLink}
 						]}
+						isTemplate={states.isTemplate}
 					/>
 				):(
 					<div className={classes}>
@@ -398,9 +429,9 @@
 		var states=CP.wordsToFlags(classes);
 		
 		const imageKeys={
-			image:{src:"src",alt:"alt",items:"items"},
-			slide:{src:"slideSrc",alt:"slideAlt",srscet:"slideSrcset",items:"items"},
-			backgroundImage:{src:"backgroundImageSrc",alt:"backgroundImageAlt",srcset:"backgroundImageSrcset",items:"items"}
+			image:{src:"src",alt:"alt",code:'imageCode',items:"items"},
+			slide:{src:"slideSrc",alt:"slideAlt",srscet:"slideSrcset",code:'slideCode',items:"items"},
+			backgroundImage:{src:"backgroundImageSrc",alt:"backgroundImageAlt",srcset:"backgroundImageSrcset",code:'backgroundImageCode',items:"items"}
 		};
 		
 		var rtn=[];
@@ -414,12 +445,18 @@
 								attr={attributes}
 								keys={imageKeys.slide}
 								index={index}
+								isTemplate={states.isTemplate}
 							/>
 						</div>
 					}
 					{states.hasImage &&
 						<div className='image'>
-							<img src={item.src} alt={item.alt}/>
+							<ResponsiveImage
+								attr={attributes}
+								keys={imageKeys.image}
+								index={index}
+								isTemplate={states.isTemplate}
+							/>
 						</div>
 					}
 					{(states.hasTitle || states.hasSubTitle || states.hasText) && 
@@ -435,6 +472,7 @@
 								attr={attributes}
 								keys={imageKeys.backgroundImage}
 								index={index}
+								isTemplate={states.isTemplate}
 							/>
 						</div>
 					}
@@ -444,14 +482,23 @@
 			if(states.hasImage && states.hasThumbnail){
 				thumbs.push(
 					<li class={item.classes}>
-						<img src={item.src} alt={item.alt}/>
+						<ResponsiveImage
+							attr={attributes}
+							keys={imageKeys.image}
+							index={index}
+							isTemplate={states.isTemplate}
+						/>
 					</li>
 				);
 			}
 		});
 		
 		return <div className={classes}>
-			<ul class="contents">{rtn}</ul>
+			<ul class="contents">
+				{states.doLoop && '[loop_template '+(loopParam || '')+']'}
+				{rtn}
+				{states.doLoop && '[/loop_template]'}
+			</ul>
 			<div className={controlClasses} data-config={config}>
 				{states.hasArrows && <div class='arrow prev'> </div>}
 				{states.hasImage && states.hasThumbnail && <ul class="thumbnail">{thumbs}</ul>}
