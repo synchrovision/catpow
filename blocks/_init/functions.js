@@ -657,7 +657,8 @@ var ResponsiveImage = function ResponsiveImage(_ref21) {
 	    attr = _ref21.attr,
 	    keys = _ref21.keys,
 	    index = _ref21.index,
-	    sizes = _ref21.sizes;
+	    sizes = _ref21.sizes,
+	    isTemplate = _ref21.isTemplate;
 
 	var type = void 0,
 	    item = void 0;
@@ -665,6 +666,9 @@ var ResponsiveImage = function ResponsiveImage(_ref21) {
 		item = attr[keys.items][index];
 	} else {
 		item = attr;
+	}
+	if (isTemplate && keys.code && item[keys.code]) {
+		return item[keys.code];
 	}
 	if (item[keys.mime]) {
 		type = item[keys.mime].split('/')[0];

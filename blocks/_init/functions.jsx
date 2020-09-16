@@ -450,10 +450,13 @@ const SelectResponsiveImage=({className,attr,set,keys,index,sizes,size,ofSP,isTe
 		/>
 	);
 };
-const ResponsiveImage=({className,attr,keys,index,sizes})=>{
+const ResponsiveImage=({className,attr,keys,index,sizes,isTemplate})=>{
 	let type,item;
 	if(keys.items){item=attr[keys.items][index];}
 	else{item=attr;}
+	if(isTemplate && keys.code && item[keys.code]){
+		return item[keys.code];
+	}
 	if(item[keys.mime]){type=item[keys.mime].split('/')[0];}
 	else{type='image';}
 	if(type=='audio'){
