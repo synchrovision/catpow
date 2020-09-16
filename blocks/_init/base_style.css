@@ -192,6 +192,7 @@ table.editItemsTable {
   margin: 2rem auto; }
   table.editItemsTable th, table.editItemsTable td {
     padding: 0.5em;
+    min-width: 6em;
     max-width: 30em;
     width: auto;
     border-style: solid;
