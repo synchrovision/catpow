@@ -1,5 +1,6 @@
 @charset "utf-8";
 ul.wp-block-catpow-buttons li.item {
+  position: relative;
   list-style: none; }
   ul.wp-block-catpow-buttons li.item .itemControl {
     position: absolute;
