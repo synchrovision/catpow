@@ -240,61 +240,80 @@
 			}
 		}
 		
-        return [
-			<BlockControls>
-				<Toolbar
-					controls={[
-						{
-							icon: 'edit',
-							title: 'EditMode',
-							isActive: attributes.EditMode,
-							onClick: () => setAttributes({EditMode:!attributes.EditMode})
-						}
-					]}
-				/>
-			</BlockControls>,
-			<InspectorControls>
-				<SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters.pricecard || {}}
-				/>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label='クラス'
-						onChange={(clss)=>setAttributes({classes:clss})}
-						value={classArray.join(' ')}
+        return (
+			<Fragment>
+				<BlockControls>
+					<Toolbar
+						controls={[
+							{
+								icon: 'edit',
+								title: 'EditMode',
+								isActive: attributes.EditMode,
+								onClick: () => setAttributes({EditMode:!attributes.EditMode})
+							}
+						]}
 					/>
-				</PanelBody>
-				<SelectItemClassPanel
-					title='アイテム'
-					icon='edit'
-					set={setAttributes}
-					attr={attributes}
-					items={items}
-					index={attributes.currentItemIndex}
-					itemClasses={itemSelectiveClasses}
-					filters={CP.filters.pricecard || {}}
-				/>
-				{states.isTemplate &&
+				</BlockControls>
+				<InspectorControls>
+					<SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+						filters={CP.filters.pricecard || {}}
+					/>
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label='クラス'
+							onChange={(clss)=>setAttributes({classes:clss})}
+							value={classArray.join(' ')}
+						/>
+					</PanelBody>
 					<SelectItemClassPanel
-						title='テンプレート'
+						title='アイテム'
 						icon='edit'
 						set={setAttributes}
 						attr={attributes}
 						items={items}
 						index={attributes.currentItemIndex}
-						itemClasses={itemTemplateSelectiveClasses}
+						itemClasses={itemSelectiveClasses}
 						filters={CP.filters.pricecard || {}}
 					/>
-				}
-				<ItemControlInfoPanel/>
-			</InspectorControls>,
-			<ul className={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>
-        ];
+					{states.isTemplate &&
+						<SelectItemClassPanel
+							title='テンプレート'
+							icon='edit'
+							set={setAttributes}
+							attr={attributes}
+							items={items}
+							index={attributes.currentItemIndex}
+							itemClasses={itemTemplateSelectiveClasses}
+							filters={CP.filters.pricecard || {}}
+						/>
+					}
+					<ItemControlInfoPanel/>
+				</InspectorControls>
+				{attributes.EditMode?(
+					<EditItemsTable
+						set={setAttributes}
+						attr={attributes}
+						columns={[
+							{type:'text',key:'title',cond:states.hasTitle},
+							{type:'text',key:'titleCaption',cond:states.hasTitleCaption},
+							{type:'image',keys:imageKeys.image,cond:states.hasImage},
+							{type:'text',key:'subTitle',cond:states.hasSubTitle},
+							{type:'text',key:'text',cond:states.hasText},
+							{type:'text',key:'listPrice'},
+							{type:'text',key:'price'},
+							{type:'text',key:'linkUrl',cond:states.hasLink}
+						]}
+					/>
+				 ):(
+					<ul className={classes}>{rtn}</ul>
+				 )}
+			</Fragment>
+       );
     },
 	save({attributes,className}){
 		const {items,classes,priceUnit,priceCaption,linkText,loopCount}=attributes;

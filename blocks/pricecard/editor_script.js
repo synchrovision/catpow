@@ -275,67 +275,77 @@ registerBlockType('catpow/pricecard', {
 			}
 		}
 
-		return [wp.element.createElement(
-			BlockControls,
+		return wp.element.createElement(
+			Fragment,
 			null,
-			wp.element.createElement(Toolbar, {
-				controls: [{
-					icon: 'edit',
-					title: 'EditMode',
-					isActive: attributes.EditMode,
-					onClick: function onClick() {
-						return setAttributes({ EditMode: !attributes.EditMode });
-					}
-				}]
-			})
-		), wp.element.createElement(
-			InspectorControls,
-			null,
-			wp.element.createElement(SelectClassPanel, {
-				title: '\u30AF\u30E9\u30B9',
-				icon: 'art',
-				set: setAttributes,
-				attr: attributes,
-				selectiveClasses: selectiveClasses,
-				filters: CP.filters.pricecard || {}
-			}),
 			wp.element.createElement(
-				PanelBody,
-				{ title: 'CLASS', icon: 'admin-generic', initialOpen: false },
-				wp.element.createElement(TextareaControl, {
-					label: '\u30AF\u30E9\u30B9',
-					onChange: function onChange(clss) {
-						return setAttributes({ classes: clss });
-					},
-					value: classArray.join(' ')
+				BlockControls,
+				null,
+				wp.element.createElement(Toolbar, {
+					controls: [{
+						icon: 'edit',
+						title: 'EditMode',
+						isActive: attributes.EditMode,
+						onClick: function onClick() {
+							return setAttributes({ EditMode: !attributes.EditMode });
+						}
+					}]
 				})
 			),
-			wp.element.createElement(SelectItemClassPanel, {
-				title: '\u30A2\u30A4\u30C6\u30E0',
-				icon: 'edit',
+			wp.element.createElement(
+				InspectorControls,
+				null,
+				wp.element.createElement(SelectClassPanel, {
+					title: '\u30AF\u30E9\u30B9',
+					icon: 'art',
+					set: setAttributes,
+					attr: attributes,
+					selectiveClasses: selectiveClasses,
+					filters: CP.filters.pricecard || {}
+				}),
+				wp.element.createElement(
+					PanelBody,
+					{ title: 'CLASS', icon: 'admin-generic', initialOpen: false },
+					wp.element.createElement(TextareaControl, {
+						label: '\u30AF\u30E9\u30B9',
+						onChange: function onChange(clss) {
+							return setAttributes({ classes: clss });
+						},
+						value: classArray.join(' ')
+					})
+				),
+				wp.element.createElement(SelectItemClassPanel, {
+					title: '\u30A2\u30A4\u30C6\u30E0',
+					icon: 'edit',
+					set: setAttributes,
+					attr: attributes,
+					items: items,
+					index: attributes.currentItemIndex,
+					itemClasses: itemSelectiveClasses,
+					filters: CP.filters.pricecard || {}
+				}),
+				states.isTemplate && wp.element.createElement(SelectItemClassPanel, {
+					title: '\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8',
+					icon: 'edit',
+					set: setAttributes,
+					attr: attributes,
+					items: items,
+					index: attributes.currentItemIndex,
+					itemClasses: itemTemplateSelectiveClasses,
+					filters: CP.filters.pricecard || {}
+				}),
+				wp.element.createElement(ItemControlInfoPanel, null)
+			),
+			attributes.EditMode ? wp.element.createElement(EditItemsTable, {
 				set: setAttributes,
 				attr: attributes,
-				items: items,
-				index: attributes.currentItemIndex,
-				itemClasses: itemSelectiveClasses,
-				filters: CP.filters.pricecard || {}
-			}),
-			states.isTemplate && wp.element.createElement(SelectItemClassPanel, {
-				title: '\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8',
-				icon: 'edit',
-				set: setAttributes,
-				attr: attributes,
-				items: items,
-				index: attributes.currentItemIndex,
-				itemClasses: itemTemplateSelectiveClasses,
-				filters: CP.filters.pricecard || {}
-			}),
-			wp.element.createElement(ItemControlInfoPanel, null)
-		), wp.element.createElement(
-			'ul',
-			{ className: attributes.EditMode ? primaryClass + ' edit' : classes },
-			rtn
-		)];
+				columns: [{ type: 'text', key: 'title', cond: states.hasTitle }, { type: 'text', key: 'titleCaption', cond: states.hasTitleCaption }, { type: 'image', keys: imageKeys.image, cond: states.hasImage }, { type: 'text', key: 'subTitle', cond: states.hasSubTitle }, { type: 'text', key: 'text', cond: states.hasText }, { type: 'text', key: 'listPrice' }, { type: 'text', key: 'price' }, { type: 'text', key: 'linkUrl', cond: states.hasLink }]
+			}) : wp.element.createElement(
+				'ul',
+				{ className: classes },
+				rtn
+			)
+		);
 	},
 	save: function save(_ref2) {
 		var attributes = _ref2.attributes,
