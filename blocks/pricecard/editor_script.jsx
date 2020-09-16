@@ -18,6 +18,7 @@
 				titleCaption:{source:'children',selector:'header .text p'},
 				src:{source:'attribute',selector:'li>.image [src]',attribute:'src'},
 				alt:{source:'attribute',selector:'li>.image [src]',attribute:'alt'},
+				imageCode:{source:'text',selector:'li>.image'},
 				subTitle:{source:'children',selector:'.contents h4'},
 				text:{source:'children',selector:'.contents p'},
 				listPrice:{source:'text',selector:'span.listPrice .number'},
@@ -84,17 +85,12 @@
 			'color',
 			{label:'タイプ',values:{'normal':"通常",'recommended':"おすすめ",'deprecated':"非推奨",'cheap':"安価",'expensive':"高級"}},
 			{label:'値引き',values:'discount'},
-		];
-		const itemTemplateSelectiveClasses=[
-			{label:'画像',values:'loopImage',sub:[
-				{label:'src',input:'text',key:'src'},
-				{label:'alt',input:'text',key:'alt'},
-			]}
+			{label:'画像コード',input:'text',key:'imageCode',cond:states.isTemplate}
 		];
 		
 		let rtn=[];
 		const imageKeys={
-			image:{src:"src",alt:"alt",items:"items"}
+			image:{src:"src",alt:"alt",code:'imageCode',items:"items"}
 		};
 		const save=()=>{
 			setAttibutes({items:JSON.parse(JSON.stringify(items))});
@@ -119,6 +115,7 @@
 								keys={imageKeys.image}
 								index={index}
 								size='vga'
+								isTemplate={states.isTemplate}
 							/>
 						</div>
 					}
@@ -280,18 +277,6 @@
 						itemClasses={itemSelectiveClasses}
 						filters={CP.filters.pricecard || {}}
 					/>
-					{states.isTemplate &&
-						<SelectItemClassPanel
-							title='テンプレート'
-							icon='edit'
-							set={setAttributes}
-							attr={attributes}
-							items={items}
-							index={attributes.currentItemIndex}
-							itemClasses={itemTemplateSelectiveClasses}
-							filters={CP.filters.pricecard || {}}
-						/>
-					}
 					<ItemControlInfoPanel/>
 				</InspectorControls>
 				{attributes.EditMode?(
@@ -302,12 +287,14 @@
 							{type:'text',key:'title',cond:states.hasTitle},
 							{type:'text',key:'titleCaption',cond:states.hasTitleCaption},
 							{type:'image',keys:imageKeys.image,cond:states.hasImage},
+							{type:'text',key:'imageCode',cond:states.hasImage && states.isTemplate},
 							{type:'text',key:'subTitle',cond:states.hasSubTitle},
 							{type:'text',key:'text',cond:states.hasText},
 							{type:'text',key:'listPrice'},
 							{type:'text',key:'price'},
 							{type:'text',key:'linkUrl',cond:states.hasLink}
 						]}
+						isTemplate={states.isTemplate}
 					/>
 				 ):(
 					<ul className={classes}>{rtn}</ul>
@@ -325,7 +312,7 @@
 		
 		let rtn=[];
 		const imageKeys={
-			image:{src:"src",alt:"alt",items:"items"}
+			image:{src:"src",alt:"alt",code:'imageCode',items:"items"}
 		};
 		items.map((item,index)=>{
 			if(!item.controlClasses){item.controlClasses='control';}
@@ -338,6 +325,7 @@
 								keys={imageKeys.image}
 								index={index}
 								size='vga'
+								isTemplate={states.isTemplate}
 							/>
 						</div>
 					}

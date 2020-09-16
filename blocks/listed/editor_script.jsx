@@ -44,6 +44,7 @@
 
 				backgroundImageSrc:{source:'attribute',selector:'.background [src]',attribute:'src',default:cp.theme_url+'/images/dummy_bg.jpg'},
 				backgroundImageSrcset:{source:'attribute',selector:'.background [src]',attribute:'srcset'},
+				backgroundImageCode:{source:'text',selector:'.background'},
 			},
 			default:[...Array(3)].map(()=>{
 				return {
@@ -160,40 +161,39 @@
 			}
 		];
 		
-		let itemsCopy=items.map((obj)=>jQuery.extend(true,{},obj));
+		const save=()=>{
+			setAttibutes({items:JSON.parse(JSON.stringify(items))});
+		};
 		
 		let rtn=[];
 		const imageKeys={
-			image:{src:"src",alt:"alt",items:"items"},
-			headerImage:{src:"headerImageSrc",alt:"headerImageAlt",items:"items"},
-			subImage:{src:"subImageSrc",alt:"subImageAlt",items:"items"},
-			backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset",items:"items"},
+			image:{src:"src",alt:"alt",code:"imageCode",items:"items"},
+			headerImage:{src:"headerImageSrc",alt:"headerImageAlt",code:"headerImageCode",items:"items"},
+			subImage:{src:"subImageSrc",alt:"subImageAlt",code:"subImageCode",items:"items"},
+			backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset",code:"backgroundImageCode",items:"items"},
 		};
 
-		itemsCopy.map((item,index)=>{
+		items.map((item,index)=>{
 			if(!item.controlClasses){item.controlClasses='control';}
 			rtn.push(
 				<Item
 					tag='li'
 					set={setAttributes}
 					attr={attributes}
-					items={itemsCopy}
+					items={items}
 					index={index}
 					isSelected={isSelected}
 				>
 					{states.hasImage && 
 						<div class="image">
-							{(states.isTemplate && item.imageCode)?(
-								<DummyImage text={item.imageCode}/>
-							):(
-								<SelectResponsiveImage
-									attr={attributes}
-									set={setAttributes}
-									keys={imageKeys.image}
-									index={index}
-									size='vga'
-								/>
-							)}
+							<SelectResponsiveImage
+								attr={attributes}
+								set={setAttributes}
+								keys={imageKeys.image}
+								index={index}
+								size='vga'
+								isTemplate={states.isTemplate}
+							/>
 						</div>
 					}
 					{states.hasHeader &&
@@ -207,24 +207,21 @@
 							}
 							{states.hasHeaderImage && 
 								<div class="image">
-									{(states.isTemplate && item.headerImageCode)?(
-										<DummyImage text={item.headerImageCode}/>
-									):(
-										<SelectResponsiveImage
-											attr={attributes}
-											set={setAttributes}
-											keys={imageKeys.headerImage}
-											index={index}
-											size='thumbnail'
-										/>
-									)}
+									<SelectResponsiveImage
+										attr={attributes}
+										set={setAttributes}
+										keys={imageKeys.headerImage}
+										index={index}
+										size='thumbnail'
+										isTemplate={states.isTemplate}
+									/>
 								</div>
 							}
 							<div className='text'>
 								{states.hasTitle &&
 									<h3>
 										<RichText
-											onChange={(text)=>{itemsCopy[index].title=text;setAttributes({items:itemsCopy});}}
+											onChange={(title)=>{item.title=title;save();}}
 											value={item.title}
 										/>
 									</h3>
@@ -232,7 +229,7 @@
 								{states.hasTitle && states.hasTitleCaption && 
 									<p>
 										<RichText
-											onChange={(text)=>{itemsCopy[index].titleCaption=text;setAttributes({items:itemsCopy});}}
+											onChange={(titleCaption)=>{item.titleCaption=titleCaption;save();}}
 											value={item.titleCaption}
 										/>
 									</p>
@@ -251,23 +248,20 @@
 							}
 							{states.hasSubImage && 
 								<div class="image">
-									{(states.isTemplate && item.subImageCode)?(
-										<DummyImage text={item.subImageCode}/>
-									):(
-										<SelectResponsiveImage
-											attr={attributes}
-											set={setAttributes}
-											keys={imageKeys.subImage}
-											index={index}
-											size='medium'
-										/>
-									)}
+									<SelectResponsiveImage
+										attr={attributes}
+										set={setAttributes}
+										keys={imageKeys.subImage}
+										index={index}
+										size='medium'
+										isTemplate={states.isTemplate}
+									/>
 								</div>
 							}
 							{states.hasSubTitle &&
 								<h4>
 									<RichText
-										onChange={(subTitle)=>{itemsCopy[index].subTitle=subTitle;setAttributes({items:itemsCopy});}}
+										onChange={(subTitle)=>{item.subTitle=subTitle;save();}}
 										value={item.subTitle}
 										placeholder='SubTitle'
 									/>
@@ -276,7 +270,7 @@
 							{states.hasText && 
 								<p>
 									<RichText
-										onChange={(text)=>{itemsCopy[index].text=text;setAttributes({items:itemsCopy});}}
+										onChange={(text)=>{item.text=text;save();}}
 										value={item.text}
 									/>
 								</p>
@@ -290,6 +284,7 @@
 								set={setAttributes}
 								keys={imageKeys.backgroundImage}
 								index={index}
+								isTemplate={states.isTemplate}
 							/>
 						</div>
 					}
@@ -298,8 +293,8 @@
 							<p
 								contentEditable
 								onBlur={(e)=>{
-									itemsCopy[index].linkUrl=e.currentTarget.innerHTML;
-									setAttributes({items:itemsCopy});
+									item.linkUrl=e.currentTarget.innerHTML;
+									save();
 								}}
 							>{item.linkUrl}</p>
 						</div>
@@ -316,61 +311,86 @@
 			}
 		}
 		
-        return [
-			<BlockControls>
-				<Toolbar
-					controls={[
-						{
-							icon: 'edit',
-							title: 'EditMode',
-							isActive: attributes.EditMode,
-							onClick: () => setAttributes({EditMode:!attributes.EditMode})
-						}
-					]}
-				/>
-			</BlockControls>,
-			<InspectorControls>
-				<SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters.listed || {}}
-				/>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label='クラス'
-						onChange={(clss)=>setAttributes({classes:clss})}
-						value={classArray.join(' ')}
+        return (
+			<Fragment>
+				<BlockControls>
+					<Toolbar
+						controls={[
+							{
+								icon: 'edit',
+								title: 'EditMode',
+								isActive: attributes.EditMode,
+								onClick: () => setAttributes({EditMode:!attributes.EditMode})
+							}
+						]}
 					/>
-				</PanelBody>
-				<SelectItemClassPanel
-					title='リストアイテム'
-					icon='edit'
-					set={setAttributes}
-					attr={attributes}
-					items={itemsCopy}
-					index={attributes.currentItemIndex}
-					triggerClasses={selectiveClasses[0]}
-					filters={CP.filters.listed || {}}
-				/>
-				{states.isTemplate &&
+				</BlockControls>
+				<InspectorControls>
+					<SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+						filters={CP.filters.listed || {}}
+					/>
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label='クラス'
+							onChange={(clss)=>setAttributes({classes:clss})}
+							value={classArray.join(' ')}
+						/>
+					</PanelBody>
 					<SelectItemClassPanel
-						title='テンプレート'
+						title='リストアイテム'
 						icon='edit'
 						set={setAttributes}
 						attr={attributes}
-						items={itemsCopy}
+						items={items}
 						index={attributes.currentItemIndex}
-						itemClasses={itemTemplateSelectiveClasses}
+						triggerClasses={selectiveClasses[0]}
 						filters={CP.filters.listed || {}}
 					/>
-				}
-				<ItemControlInfoPanel/>
-			</InspectorControls>,
-			<ul className={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>
-        ];
+					{states.isTemplate &&
+						<SelectItemClassPanel
+							title='テンプレート'
+							icon='edit'
+							set={setAttributes}
+							attr={attributes}
+							items={items}
+							index={attributes.currentItemIndex}
+							itemClasses={itemTemplateSelectiveClasses}
+							filters={CP.filters.listed || {}}
+						/>
+					}
+					<ItemControlInfoPanel/>
+				</InspectorControls>
+				{attributes.EditMode?(
+					<EditItemsTable
+						set={setAttributes}
+						attr={attributes}
+						columns={[
+							{type:'image',label:'image',keys:imageKeys.image,cond:states.hasImage},
+							{type:'text',key:'imageCode',cond:states.isTemplate && states.hasImage},
+							{type:'image',label:'sub',keys:imageKeys.subImage,cond:states.hasSubImage},
+							{type:'text',key:'subImageCode',cond:states.isTemplate && states.hasSubImage},
+							{type:'image',label:'header',keys:imageKeys.headerImage,cond:states.hasHeaderImage},
+							{type:'text',key:'headerImageCode',cond:states.isTemplate && states.hasHeaderImage},
+							{type:'image',label:'bg',keys:imageKeys.backgroundImage,cond:states.hasBackgroundImage},
+							{type:'text',key:'backgroundImageCode',cond:states.isTemplate && states.hasBackgroundImage},
+							{type:'text',key:'title',cond:states.hasTitle},
+							{type:'text',key:'titleCaption',cond:states.hasTitleCaption},
+							{type:'text',key:'subTitle',cond:states.hasSubTitle},
+							{type:'text',key:'text',cond:states.hasText},
+							{type:'text',key:'linkUrl',cond:states.hasLink}
+						]}
+						isTemplate={states.isTemplate}
+					/>
+				):(
+					<ul className={classes}>{rtn}</ul>
+				)}
+			</Fragment>
+        );
     },
 	save({attributes,className}){
 		const {items,classes,countPrefix,countSuffix,subCountPrefix,subCountSuffix,linkUrl,linkText,loopParam}=attributes;
@@ -379,17 +399,25 @@
 		var states=CP.wordsToFlags(classes);
 		
 		
+		const imageKeys={
+			image:{src:"src",alt:"alt",code:"imageCode",items:"items"},
+			headerImage:{src:"headerImageSrc",alt:"headerImageAlt",code:"headerImageCode",items:"items"},
+			subImage:{src:"subImageSrc",alt:"subImageAlt",code:"subImageCode",items:"items"},
+			backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset",code:"backgroundImageCode",items:"items"},
+		};
+		
 		let rtn=[];
 		items.map((item,index)=>{
 			rtn.push(
 				<li className={item.classes}>
 					{states.hasImage &&
 						<div className='image'>
-							{(states.isTemplate && item.imageCode)?(
-								item.imageCode
-							):(
-								<img src={item.src} alt={item.alt}/>
-							)}
+							<ResponsiveImage
+								attr={attributes}
+								keys={imageKeys.image}
+								index={index}
+								isTemplate={states.isTemplate}
+							/>
 						</div>
 					}
 					{states.hasHeader &&
@@ -403,11 +431,12 @@
 							}
 							{states.hasHeaderImage &&
 								<div className='image'>
-									{(states.isTemplate && item.headerImageCode)?(
-										item.headerImageCode
-									):(
-										<img src={item.headerImageSrc} alt={item.headerImageAlt}/>
-									)}
+									<ResponsiveImage
+										attr={attributes}
+										keys={imageKeys.headerImage}
+										index={index}
+										isTemplate={states.isTemplate}
+									/>
 								</div>
 							}
 							<div className='text'>
@@ -427,11 +456,12 @@
 							}
 							{states.hasSubImage &&
 								<div className='image'>
-									{(states.isTemplate && item.subImageCode)?(
-										item.subImageCode
-									):(
-										<img src={item.subImageSrc} alt={item.subImageAlt}/>
-									)}
+									<ResponsiveImage
+										attr={attributes}
+										keys={imageKeys.subImage}
+										index={index}
+										isTemplate={states.isTemplate}
+									/>
 								</div>
 							}
 							{states.hasSubTitle && <h4><RichText.Content value={item.subTitle}/></h4>}
@@ -440,7 +470,12 @@
 					}
 					{states.hasBackgroundImage && 
 						<div className='background'>
-							<img src={item.backgroundImageSrc} srcset={item.backgroundImageSrcset}/>
+							<ResponsiveImage
+								attr={attributes}
+								keys={imageKeys.backgroundImage}
+								index={index}
+								isTemplate={states.isTemplate}
+							/>
 						</div>
 					}
 					{states.hasLink && item.linkUrl && <div className='link'><a href={item.linkUrl}> </a></div>}

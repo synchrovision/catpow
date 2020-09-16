@@ -18,6 +18,7 @@ registerBlockType('catpow/pricecard', {
 				titleCaption: { source: 'children', selector: 'header .text p' },
 				src: { source: 'attribute', selector: 'li>.image [src]', attribute: 'src' },
 				alt: { source: 'attribute', selector: 'li>.image [src]', attribute: 'alt' },
+				imageCode: { source: 'text', selector: 'li>.image' },
 				subTitle: { source: 'children', selector: '.contents h4' },
 				text: { source: 'children', selector: '.contents p' },
 				listPrice: { source: 'text', selector: 'span.listPrice .number' },
@@ -75,12 +76,11 @@ registerBlockType('catpow/pricecard', {
 			values: 'isTemplate',
 			sub: [{ label: 'ループ', values: 'doLoop', sub: [{ label: 'パラメータ', input: 'text', key: 'loopParam' }, { label: 'ループ数', input: 'range', key: 'loopCount', min: 1, max: 16 }] }]
 		}];
-		var itemSelectiveClasses = ['color', { label: 'タイプ', values: { 'normal': "通常", 'recommended': "おすすめ", 'deprecated': "非推奨", 'cheap': "安価", 'expensive': "高級" } }, { label: '値引き', values: 'discount' }];
-		var itemTemplateSelectiveClasses = [{ label: '画像', values: 'loopImage', sub: [{ label: 'src', input: 'text', key: 'src' }, { label: 'alt', input: 'text', key: 'alt' }] }];
+		var itemSelectiveClasses = ['color', { label: 'タイプ', values: { 'normal': "通常", 'recommended': "おすすめ", 'deprecated': "非推奨", 'cheap': "安価", 'expensive': "高級" } }, { label: '値引き', values: 'discount' }, { label: '画像コード', input: 'text', key: 'imageCode', cond: states.isTemplate }];
 
 		var rtn = [];
 		var imageKeys = {
-			image: { src: "src", alt: "alt", items: "items" }
+			image: { src: "src", alt: "alt", code: 'imageCode', items: "items" }
 		};
 		var save = function save() {
 			setAttibutes({ items: JSON.parse(JSON.stringify(items)) });
@@ -108,7 +108,8 @@ registerBlockType('catpow/pricecard', {
 						set: setAttributes,
 						keys: imageKeys.image,
 						index: index,
-						size: 'vga'
+						size: 'vga',
+						isTemplate: states.isTemplate
 					})
 				),
 				wp.element.createElement(
@@ -324,22 +325,13 @@ registerBlockType('catpow/pricecard', {
 					itemClasses: itemSelectiveClasses,
 					filters: CP.filters.pricecard || {}
 				}),
-				states.isTemplate && wp.element.createElement(SelectItemClassPanel, {
-					title: '\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8',
-					icon: 'edit',
-					set: setAttributes,
-					attr: attributes,
-					items: items,
-					index: attributes.currentItemIndex,
-					itemClasses: itemTemplateSelectiveClasses,
-					filters: CP.filters.pricecard || {}
-				}),
 				wp.element.createElement(ItemControlInfoPanel, null)
 			),
 			attributes.EditMode ? wp.element.createElement(EditItemsTable, {
 				set: setAttributes,
 				attr: attributes,
-				columns: [{ type: 'text', key: 'title', cond: states.hasTitle }, { type: 'text', key: 'titleCaption', cond: states.hasTitleCaption }, { type: 'image', keys: imageKeys.image, cond: states.hasImage }, { type: 'text', key: 'subTitle', cond: states.hasSubTitle }, { type: 'text', key: 'text', cond: states.hasText }, { type: 'text', key: 'listPrice' }, { type: 'text', key: 'price' }, { type: 'text', key: 'linkUrl', cond: states.hasLink }]
+				columns: [{ type: 'text', key: 'title', cond: states.hasTitle }, { type: 'text', key: 'titleCaption', cond: states.hasTitleCaption }, { type: 'image', keys: imageKeys.image, cond: states.hasImage }, { type: 'text', key: 'imageCode', cond: states.hasImage && states.isTemplate }, { type: 'text', key: 'subTitle', cond: states.hasSubTitle }, { type: 'text', key: 'text', cond: states.hasText }, { type: 'text', key: 'listPrice' }, { type: 'text', key: 'price' }, { type: 'text', key: 'linkUrl', cond: states.hasLink }],
+				isTemplate: states.isTemplate
 			}) : wp.element.createElement(
 				'ul',
 				{ className: classes },
@@ -364,7 +356,7 @@ registerBlockType('catpow/pricecard', {
 
 		var rtn = [];
 		var imageKeys = {
-			image: { src: "src", alt: "alt", items: "items" }
+			image: { src: "src", alt: "alt", code: 'imageCode', items: "items" }
 		};
 		items.map(function (item, index) {
 			if (!item.controlClasses) {
@@ -380,7 +372,8 @@ registerBlockType('catpow/pricecard', {
 						attr: attributes,
 						keys: imageKeys.image,
 						index: index,
-						size: 'vga'
+						size: 'vga',
+						isTemplate: states.isTemplate
 					})
 				),
 				wp.element.createElement(
