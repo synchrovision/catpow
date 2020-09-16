@@ -252,109 +252,119 @@ registerBlockType('catpow/slider', {
 			attributes.EditMode = false;
 		}
 
-		return [wp.element.createElement(
-			BlockControls,
+		return wp.element.createElement(
+			Fragment,
 			null,
-			wp.element.createElement(Toolbar, {
-				controls: [{
-					icon: 'edit',
-					title: 'EditMode',
-					isActive: attributes.EditMode,
-					onClick: function onClick() {
-						return setAttributes({ EditMode: !attributes.EditMode });
-					}
-				}]
-			})
-		), wp.element.createElement(
-			InspectorControls,
-			null,
-			wp.element.createElement(SelectClassPanel, {
-				title: '\u30AF\u30E9\u30B9',
-				icon: 'art',
-				set: setAttributes,
-				attr: attributes,
-				selectiveClasses: selectiveClasses,
-				filters: CP.filters.slider || {}
-			}),
-			wp.element.createElement(SelectClassPanel, {
-				title: '\u8868\u793A\u8A2D\u5B9A',
-				icon: 'admin-appearance',
-				set: setAttributes,
-				attr: attributes,
-				selectiveClasses: statesClasses,
-				filters: CP.filters.slider || {}
-			}),
-			wp.element.createElement(SelectClassPanel, {
-				title: '\u30A2\u30CB\u30E1\u30FC\u30B7\u30E7\u30F3\u8A2D\u5B9A',
-				icon: 'video-alt3',
-				set: setAttributes,
-				attr: attributes,
-				selectiveClasses: animateClasses,
-				filters: CP.filters.slider || {}
-			}),
-			wp.element.createElement(SelectClassPanel, {
-				title: '\u64CD\u4F5C\u8A2D\u5B9A',
-				icon: 'universal-access',
-				set: setAttributes,
-				attr: attributes,
-				selectiveClasses: controllerClasses,
-				filters: CP.filters.slider || {}
-			}),
 			wp.element.createElement(
-				PanelBody,
-				{ title: 'CLASS', icon: 'admin-generic', initialOpen: false },
-				wp.element.createElement(TextareaControl, {
-					label: '\u30AF\u30E9\u30B9',
-					onChange: function onChange(clss) {
-						return setAttributes({ classes: clss });
-					},
-					value: classArray.join(' ')
+				BlockControls,
+				null,
+				wp.element.createElement(Toolbar, {
+					controls: [{
+						icon: 'edit',
+						title: 'EditMode',
+						isActive: attributes.EditMode,
+						onClick: function onClick() {
+							return setAttributes({ EditMode: !attributes.EditMode });
+						}
+					}]
 				})
 			),
-			wp.element.createElement(SelectItemClassPanel, {
-				title: '\u30B9\u30E9\u30A4\u30C9',
-				icon: 'edit',
+			wp.element.createElement(
+				InspectorControls,
+				null,
+				wp.element.createElement(SelectClassPanel, {
+					title: '\u30AF\u30E9\u30B9',
+					icon: 'art',
+					set: setAttributes,
+					attr: attributes,
+					selectiveClasses: selectiveClasses,
+					filters: CP.filters.slider || {}
+				}),
+				wp.element.createElement(SelectClassPanel, {
+					title: '\u8868\u793A\u8A2D\u5B9A',
+					icon: 'admin-appearance',
+					set: setAttributes,
+					attr: attributes,
+					selectiveClasses: statesClasses,
+					filters: CP.filters.slider || {}
+				}),
+				wp.element.createElement(SelectClassPanel, {
+					title: '\u30A2\u30CB\u30E1\u30FC\u30B7\u30E7\u30F3\u8A2D\u5B9A',
+					icon: 'video-alt3',
+					set: setAttributes,
+					attr: attributes,
+					selectiveClasses: animateClasses,
+					filters: CP.filters.slider || {}
+				}),
+				wp.element.createElement(SelectClassPanel, {
+					title: '\u64CD\u4F5C\u8A2D\u5B9A',
+					icon: 'universal-access',
+					set: setAttributes,
+					attr: attributes,
+					selectiveClasses: controllerClasses,
+					filters: CP.filters.slider || {}
+				}),
+				wp.element.createElement(
+					PanelBody,
+					{ title: 'CLASS', icon: 'admin-generic', initialOpen: false },
+					wp.element.createElement(TextareaControl, {
+						label: '\u30AF\u30E9\u30B9',
+						onChange: function onChange(clss) {
+							return setAttributes({ classes: clss });
+						},
+						value: classArray.join(' ')
+					})
+				),
+				wp.element.createElement(SelectItemClassPanel, {
+					title: '\u30B9\u30E9\u30A4\u30C9',
+					icon: 'edit',
+					set: setAttributes,
+					attr: attributes,
+					items: itemsCopy,
+					index: attributes.currentItemIndex,
+					triggerClasses: selectiveClasses[0],
+					filters: CP.filters.slider || {}
+				}),
+				wp.element.createElement(ItemControlInfoPanel, null)
+			),
+			attributes.EditMode ? wp.element.createElement(EditItemsTable, {
 				set: setAttributes,
 				attr: attributes,
-				items: itemsCopy,
-				index: attributes.currentItemIndex,
-				triggerClasses: selectiveClasses[0],
-				filters: CP.filters.slider || {}
-			}),
-			wp.element.createElement(ItemControlInfoPanel, null)
-		), wp.element.createElement(
-			'div',
-			{ className: attributes.EditMode ? primaryClass + ' edit' : classes },
-			wp.element.createElement(
-				'ul',
-				{ 'class': 'contents' },
-				rtn
-			),
-			wp.element.createElement(
+				columns: [{ type: 'image', label: 'slide', keys: imageKeys.slide, cond: states.hasSlide }, { type: 'image', label: 'image', keys: imageKeys.image, cond: states.hasImage }, { type: 'image', label: 'bg', keys: imageKeys.backgroundImage, cond: states.hasBackgroundImage }, { type: 'text', key: 'title', cond: states.hasTitle }, { type: 'text', key: 'subTitle', cond: states.hasSubTitle }, { type: 'text', key: 'text', cond: states.hasText }, { type: 'text', key: 'linkUrl', cond: states.hasLink }]
+			}) : wp.element.createElement(
 				'div',
-				{ className: controlClasses, 'data-config': config },
-				states.hasArrows && wp.element.createElement(
-					'div',
-					{ 'class': 'arrow prev', onClick: prevItem },
-					' '
-				),
-				states.hasImage && states.hasThumbnail && wp.element.createElement(
+				{ className: classes },
+				wp.element.createElement(
 					'ul',
-					{ 'class': 'thumbnail' },
-					thumbs
+					{ 'class': 'contents' },
+					rtn
 				),
-				states.hasDots && wp.element.createElement(
-					'ul',
-					{ 'class': 'dots' },
-					dots
-				),
-				states.hasArrows && wp.element.createElement(
+				wp.element.createElement(
 					'div',
-					{ 'class': 'arrow next', onClick: nextItem },
-					' '
+					{ className: controlClasses, 'data-config': config },
+					states.hasArrows && wp.element.createElement(
+						'div',
+						{ 'class': 'arrow prev', onClick: prevItem },
+						' '
+					),
+					states.hasImage && states.hasThumbnail && wp.element.createElement(
+						'ul',
+						{ 'class': 'thumbnail' },
+						thumbs
+					),
+					states.hasDots && wp.element.createElement(
+						'ul',
+						{ 'class': 'dots' },
+						dots
+					),
+					states.hasArrows && wp.element.createElement(
+						'div',
+						{ 'class': 'arrow next', onClick: nextItem },
+						' '
+					)
 				)
 			)
-		)];
+		);
 	},
 	save: function save(_ref2) {
 		var attributes = _ref2.attributes,

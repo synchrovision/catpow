@@ -296,81 +296,99 @@
 		if(attributes.EditMode===undefined){attributes.EditMode=false;}
 		
 		
-		return [
-			<BlockControls>
-				<Toolbar
-					controls={[
-						{
-							icon: 'edit',
-							title: 'EditMode',
-							isActive: attributes.EditMode,
-							onClick: () => setAttributes({EditMode:!attributes.EditMode})
-						}
-					]}
-				/>
-			</BlockControls>,
-			<InspectorControls>
-				<SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters.slider || {}}
-				/>
-				<SelectClassPanel
-					title='表示設定'
-					icon='admin-appearance'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={statesClasses}
-					filters={CP.filters.slider || {}}
-				/>
-				<SelectClassPanel
-					title='アニメーション設定'
-					icon='video-alt3'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={animateClasses}
-					filters={CP.filters.slider || {}}
-				/>
-				<SelectClassPanel
-					title='操作設定'
-					icon='universal-access'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={controllerClasses}
-					filters={CP.filters.slider || {}}
-				/>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label='クラス'
-						onChange={(clss)=>setAttributes({classes:clss})}
-						value={classArray.join(' ')}
+		return (
+			<Fragment>
+				<BlockControls>
+					<Toolbar
+						controls={[
+							{
+								icon: 'edit',
+								title: 'EditMode',
+								isActive: attributes.EditMode,
+								onClick: () => setAttributes({EditMode:!attributes.EditMode})
+							}
+						]}
 					/>
-				</PanelBody>
-				<SelectItemClassPanel
-					title='スライド'
-					icon='edit'
-					set={setAttributes}
-					attr={attributes}
-					items={itemsCopy}
-					index={attributes.currentItemIndex}
-					triggerClasses={selectiveClasses[0]}
-					filters={CP.filters.slider || {}}
-				/>
-				<ItemControlInfoPanel/>
-			</InspectorControls>,
-			<div className={attributes.EditMode?(primaryClass+' edit'):classes}>
-				<ul class="contents">{rtn}</ul>
-				<div className={controlClasses} data-config={config}>
-					{states.hasArrows && <div class='arrow prev' onClick={prevItem}> </div>}
-					{states.hasImage && states.hasThumbnail && <ul class="thumbnail">{thumbs}</ul>}
-					{states.hasDots && <ul class="dots">{dots}</ul>}
-					{states.hasArrows && <div class='arrow next' onClick={nextItem}> </div>}
-				</div>
-			</div>
-		];
+				</BlockControls>
+				<InspectorControls>
+					<SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+						filters={CP.filters.slider || {}}
+					/>
+					<SelectClassPanel
+						title='表示設定'
+						icon='admin-appearance'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={statesClasses}
+						filters={CP.filters.slider || {}}
+					/>
+					<SelectClassPanel
+						title='アニメーション設定'
+						icon='video-alt3'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={animateClasses}
+						filters={CP.filters.slider || {}}
+					/>
+					<SelectClassPanel
+						title='操作設定'
+						icon='universal-access'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={controllerClasses}
+						filters={CP.filters.slider || {}}
+					/>
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label='クラス'
+							onChange={(clss)=>setAttributes({classes:clss})}
+							value={classArray.join(' ')}
+						/>
+					</PanelBody>
+					<SelectItemClassPanel
+						title='スライド'
+						icon='edit'
+						set={setAttributes}
+						attr={attributes}
+						items={itemsCopy}
+						index={attributes.currentItemIndex}
+						triggerClasses={selectiveClasses[0]}
+						filters={CP.filters.slider || {}}
+					/>
+					<ItemControlInfoPanel/>
+				</InspectorControls>
+				{attributes.EditMode?(
+					<EditItemsTable
+						set={setAttributes}
+						attr={attributes}
+						columns={[
+							{type:'image',label:'slide',keys:imageKeys.slide,cond:states.hasSlide},
+							{type:'image',label:'image',keys:imageKeys.image,cond:states.hasImage},
+							{type:'image',label:'bg',keys:imageKeys.backgroundImage,cond:states.hasBackgroundImage},
+							{type:'text',key:'title',cond:states.hasTitle},
+							{type:'text',key:'subTitle',cond:states.hasSubTitle},
+							{type:'text',key:'text',cond:states.hasText},
+							{type:'text',key:'linkUrl',cond:states.hasLink}
+						]}
+					/>
+				):(
+					<div className={classes}>
+						<ul class="contents">{rtn}</ul>
+						<div className={controlClasses} data-config={config}>
+							{states.hasArrows && <div class='arrow prev' onClick={prevItem}> </div>}
+							{states.hasImage && states.hasThumbnail && <ul class="thumbnail">{thumbs}</ul>}
+							{states.hasDots && <ul class="dots">{dots}</ul>}
+							{states.hasArrows && <div class='arrow next' onClick={nextItem}> </div>}
+						</div>
+					</div>
+				)}
+			</Fragment>
+		);
 	},
 	save({attributes,className}){
 		const {classes,controlClasses,config,items}=attributes;
