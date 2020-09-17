@@ -91,6 +91,26 @@ trait formTrait{
 			$action,$this->button_attr($action,$callback,$param,$target,$ignore_message),$content
 		);
 	}
+	public function fill_buttons($content){
+		return preg_replace_callback(
+			'/(?:data\-action="(?P<action>[\w_\-]+)")(?:'.
+				'(?: data\-callback="(?P<callback>[\w_\-]+)")|'.
+				'(?: data\-param="(?P<param>[\w_\-]+)")|'.
+				'(?: data\-target="(?P<target>[\w_\-]+)")|'.
+				'(?: ignore\-message="(?P<ignoreMessage>1)")'.
+			')*/',
+			function($matches){
+				return $this->button_attr(
+					$matches['action'],
+					$matches['callback']??null,
+					$matches['param']??null,
+					$matches['target']??null,
+					$matches['ignoreMessage']??null
+				);
+			},
+			$content
+		);
+	}
 	public function button_attr($action=false,$callback=null,$param=null,$target=null,$ignore_message=null){
 		if(is_null($target)){$target=!empty($param)?'action':(is_a($this,form_section::class)?'section':'form');}
 		if(is_null($ignore_message)){$ignore_message=in_array($action,['close','cancel','back','prev','reset']);}
