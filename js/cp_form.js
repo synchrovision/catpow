@@ -206,7 +206,7 @@ function cp_form_submit($item,action,callback,param){
 					}
                     if($msgBox.find('.task').length){$msgBox.addClass('has_task');}
                 });
-                //$('html,body').animate({scrollTop:$form.find('.message').offset().top-100},500);
+                if(data.scroll)$('html,body').animate({scrollTop:$form.find('.message').offset().top-100},500);
                 $form.trigger('update');
                 return true;
             },
@@ -250,7 +250,7 @@ function cp_form_submit($item,action,callback,param){
 					else{$tgt.html(data.html)}
 				}
 				$tgt.trigger('replace');
-				return $('html,body').animate({scrollTop:$tgt.offset().top-100},500).promise();
+				if(data.scroll)return $('html,body').animate({scrollTop:$tgt.offset().top-100},500).promise();
             },
             insert:function($item,data){
 				var $form,$tgt;
@@ -261,7 +261,7 @@ function cp_form_submit($item,action,callback,param){
 				if(data.position===undefined){data.position='before';}
 				var $new=$tgt[data.position](data.html);
 				$form.trigger('update');
-                return $('html,body').animate({scrollTop:$new.offset().top-100},500).promise();
+                if(data.scroll)return $('html,body').animate({scrollTop:$new.offset().top-100},500).promise();
             },
             remove:function($form,data){
 				var $tgt;
