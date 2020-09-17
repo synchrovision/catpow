@@ -268,7 +268,7 @@
 					</thead>
 				}
 				<tbody>
-					{states.doLoop && '[template_loop '+(loopParam || '')+']'}
+					{states.doLoop && '[loop_template '+(loopParam || '')+']'}
                     {rows.map((row,index)=>{
 						if(states.hasHeaderRow && index==0){return false;}
                         return <tr>
@@ -281,7 +281,7 @@
                             })}
                         </tr>
                     })}
-					{states.doLoop && '[/template_loop]'}
+					{states.doLoop && '[/loop_template]'}
                 </tbody>
 			</table>
 		);

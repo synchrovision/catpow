@@ -301,7 +301,7 @@ registerBlockType('catpow/datatable', {
 			wp.element.createElement(
 				'tbody',
 				null,
-				states.doLoop && '[template_loop ' + (loopParam || '') + ']',
+				states.doLoop && '[loop_template ' + (loopParam || '') + ']',
 				rows.map(function (row, index) {
 					if (states.hasHeaderRow && index == 0) {
 						return false;
@@ -314,7 +314,7 @@ registerBlockType('catpow/datatable', {
 						})
 					);
 				}),
-				states.doLoop && '[/template_loop]'
+				states.doLoop && '[/loop_template]'
 			)
 		);
 	}
