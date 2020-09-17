@@ -15,7 +15,9 @@
   overflow-y: auto;
   text-align: left;
   background-color: #fefefe;
-  opacity: 0.9; }
+  opacity: 0.9;
+  transform: -webkit- translateZ(100px);
+  transform: translateZ(100px); }
   #cp_log small {
     color: #444; }
   #cp_log table {

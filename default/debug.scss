@@ -3,7 +3,7 @@
 	@include bnd((d:b,p:f,b:10,r:10,pd:10,z:100000,h:a a 90%,w:a a 90%,oy:a));
 	@include txt((a:l));
 	@include bg((c:b));
-	@include trn((o:.9));
+	@include trn((o:.9,z:100px));
 	small{
 		@include txt((c:t));
 	}
