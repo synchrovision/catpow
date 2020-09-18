@@ -258,7 +258,7 @@
 								{states.hasTitle &&
 									<div className='text'>
 										<h3><RichText.Content value={item.title}/></h3>
-										{tates.hasTitleCaption && <p><RichText.Content value={item.titleCaption}/></p>}
+										{states.hasTitleCaption && <p><RichText.Content value={item.titleCaption}/></p>}
 									</div>
 								}
 							</header>

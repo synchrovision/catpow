@@ -322,7 +322,7 @@ registerBlockType('catpow/lightbox', {
 								null,
 								wp.element.createElement(RichText.Content, { value: item.title })
 							),
-							tates.hasTitleCaption && wp.element.createElement(
+							states.hasTitleCaption && wp.element.createElement(
 								'p',
 								null,
 								wp.element.createElement(RichText.Content, { value: item.titleCaption })
