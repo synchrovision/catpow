@@ -663,7 +663,32 @@ const SelectClassPanel=(props)=>{
                             />
                         );
                         break;
-                        
+					case 'bool':
+                        rtn.push(
+                            <ToggleControl
+                                label={prm.label}
+                                checked={JSON.parse(props.attr[prm.json])[prm.key]}
+                                onChange={(val)=>{CP.setJsonValue(props,prm.json,prm.key,val);}}
+                            />
+                        );
+						break;
+					case 'flag':
+						let value=CP.getJsonValue(props,prm.json,prm.key) || 0;
+						if(prm.label){rtn.push(<h5>{prm.label}</h5>);}
+						Object.keys(prm.values).map((key)=>{
+							rtn.push(
+								<CheckboxControl
+									label={key}
+									onChange={(flag)=>{
+										value |= prm.values[key];
+										if(!flag){value^=prm.values[key];}
+										CP.setJsonValue(props,prm.json,prm.key,value);
+									}}
+									checked={value & prm.values[key]}
+								/>
+							);
+						});
+						break;
                 }
             }
             else if(_.isObject(prm.values)){
@@ -878,7 +903,7 @@ const SelectClassPanel=(props)=>{
 		return rtn;
 	};
 	return (
-		<PanelBody title={props.title} initialOpen={false} icon={props.icon}>
+		<PanelBody title={props.title} initialOpen={props.initialOpen || false} icon={props.icon}>
 			{props.selectiveClasses.map(SelectClass)}
 		</PanelBody>
 	)
@@ -1090,7 +1115,7 @@ const SelectItemClassPanel=(props)=>{
 
 	if(!itemClasses){return false;}
 	return (
-		<PanelBody title={props.title} initialOpen={false} icon={props.icon}>
+		<PanelBody title={props.title} initialOpen={props.initialOpen || false} icon={props.icon}>
 			{itemClasses.map(selectItemClass)}
 		</PanelBody>
 	)

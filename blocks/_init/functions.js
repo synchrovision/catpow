@@ -968,7 +968,38 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							step: prm.step
 						}));
 						break;
-
+					case 'bool':
+						rtn.push(wp.element.createElement(ToggleControl, {
+							label: prm.label,
+							checked: JSON.parse(props.attr[prm.json])[prm.key],
+							onChange: function onChange(val) {
+								CP.setJsonValue(props, prm.json, prm.key, val);
+							}
+						}));
+						break;
+					case 'flag':
+						var value = CP.getJsonValue(props, prm.json, prm.key) || 0;
+						if (prm.label) {
+							rtn.push(wp.element.createElement(
+								'h5',
+								null,
+								prm.label
+							));
+						}
+						Object.keys(prm.values).map(function (key) {
+							rtn.push(wp.element.createElement(CheckboxControl, {
+								label: key,
+								onChange: function onChange(flag) {
+									value |= prm.values[key];
+									if (!flag) {
+										value ^= prm.values[key];
+									}
+									CP.setJsonValue(props, prm.json, prm.key, value);
+								},
+								checked: value & prm.values[key]
+							}));
+						});
+						break;
 				}
 			} else if (_.isObject(prm.values)) {
 				var options = void 0,
@@ -1193,7 +1224,7 @@ var SelectClassPanel = function SelectClassPanel(props) {
 	};
 	return wp.element.createElement(
 		PanelBody,
-		{ title: props.title, initialOpen: false, icon: props.icon },
+		{ title: props.title, initialOpen: props.initialOpen || false, icon: props.icon },
 		props.selectiveClasses.map(SelectClass)
 	);
 };
@@ -1445,7 +1476,7 @@ var SelectItemClassPanel = function SelectItemClassPanel(props) {
 	}
 	return wp.element.createElement(
 		PanelBody,
-		{ title: props.title, initialOpen: false, icon: props.icon },
+		{ title: props.title, initialOpen: props.initialOpen || false, icon: props.icon },
 		itemClasses.map(selectItemClass)
 	);
 };
