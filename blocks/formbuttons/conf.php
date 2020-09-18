@@ -1,7 +1,7 @@
 <?php
 $attributes=[
 	'className'=>['type'=>'string'],
-	'classes'=>['source'=>'attribute','selector'=>'ul','attribute'=>'class','default'=>'wp-block-catpow-formbuttons buttons m'],
+	'classes'=>['source'=>'attribute','selector'=>'ul','attribute'=>'class','default'=>'wp-block-catpow-formbuttons buttons m center'],
 	'items'=>[
 		'source'=>'query',
 		'selector'=>'li.item',
