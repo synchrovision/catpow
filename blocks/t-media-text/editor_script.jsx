@@ -7,12 +7,12 @@
 		classes:{source:'attribute',selector:'table',attribute:'class',default:'wp-block-catpow-t-media-text'},
 		src:{source:'attribute',selector:'[src]',attribute:'src',default:cp.theme_url+'/images/dummy.jpg'},
 		alt:{source:'attribute',selector:'[src]',attribute:'alt'},
-		loopImage:{source:'text',selector:'td.imageCell',default:cp.theme_url+'/images/dummy.jpg'},
+		imageCode:{source:'text',selector:'td.imageCell',default:cp.theme_url+'/images/dummy.jpg'},
 		width:{source:'attribute',selector:'td.imageCell',attribute:'width',default:'200'},
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
-        const {classes,src,alt,loopImage,width}=attributes;
+        const {classes,src,alt,imageCode,width}=attributes;
 		const primaryClass='wp-block-catpow-t-media-text';
 		var states=CP.wordsToFlags(classes);
 		
@@ -21,7 +21,7 @@
 				label:'テンプレート',
 				values:'isTemplate',
 				sub:[
-					{label:'画像出力コード',input:'text',key:'loopImage'},
+					{label:'画像出力コード',input:'text',key:'imageCode'},
 				]
 			},
 			{input:'range',label:'画像の幅',key:'width',min:50,max:400,step:10}
@@ -32,22 +32,15 @@
 				<tbody>
 					<tr>
 						<td className="imageCell" width={width}>
-							{states.isTemplate?(
-								<img
-									src={cp.plugins_url+'/catpow/callee/dummy_image.php?text='+loopImage}
-									width="100%"
-									height="auto"
-								/>
-							):(
-								<SelectResponsiveImage
-									set={setAttributes}
-									attr={attributes}
-									keys={{src:'src',alt:'alt'}}
-									size="large"
-									width="100%"
-									height="auto"
-								/>
-							)}
+							<SelectResponsiveImage
+								set={setAttributes}
+								attr={attributes}
+								keys={{src:'src',alt:'alt',code:'imageCode'}}
+								size="large"
+								width="100%"
+								height="auto"
+								isTemplate={states.isTemplate}
+							/>
 						</td>
 						<td className="spacerCell"></td>
 						<td className="textCell">
@@ -81,7 +74,7 @@
 
 
 	save({attributes,className,setAttributes}){
-        const {classes,src,alt,loopImage,width}=attributes;
+        const {classes,src,alt,imageCode,width}=attributes;
 		const primaryClass='wp-block-catpow-t-media-text';
 		var states=CP.wordsToFlags(classes);
 		return (
@@ -89,11 +82,14 @@
 				<tbody>
 					<tr>
 						<td className="imageCell" width={width}>
-							{states.isTemplate?(
-								loopImage
-							):(
-								<img width="100%" height="auto" src={src} alt={alt}/>
-							)}
+							<ResponsiveImage
+								attr={attributes}
+								keys={{src:'src',alt:'alt',code:'imageCode'}}
+								size="large"
+								width="100%"
+								height="auto"
+								isTemplate={states.isTemplate}
+							/>
 						</td>
 						<td className="spacerCell"></td>
 						<td className="textCell">

@@ -7,7 +7,7 @@ registerBlockType('catpow/t-media-text', {
 		classes: { source: 'attribute', selector: 'table', attribute: 'class', default: 'wp-block-catpow-t-media-text' },
 		src: { source: 'attribute', selector: '[src]', attribute: 'src', default: cp.theme_url + '/images/dummy.jpg' },
 		alt: { source: 'attribute', selector: '[src]', attribute: 'alt' },
-		loopImage: { source: 'text', selector: 'td.imageCell', default: cp.theme_url + '/images/dummy.jpg' },
+		imageCode: { source: 'text', selector: 'td.imageCell', default: cp.theme_url + '/images/dummy.jpg' },
 		width: { source: 'attribute', selector: 'td.imageCell', attribute: 'width', default: '200' }
 	},
 	example: CP.example,
@@ -18,7 +18,7 @@ registerBlockType('catpow/t-media-text', {
 		var classes = attributes.classes,
 		    src = attributes.src,
 		    alt = attributes.alt,
-		    loopImage = attributes.loopImage,
+		    imageCode = attributes.imageCode,
 		    width = attributes.width;
 
 		var primaryClass = 'wp-block-catpow-t-media-text';
@@ -27,7 +27,7 @@ registerBlockType('catpow/t-media-text', {
 		var selectiveClasses = [{
 			label: 'テンプレート',
 			values: 'isTemplate',
-			sub: [{ label: '画像出力コード', input: 'text', key: 'loopImage' }]
+			sub: [{ label: '画像出力コード', input: 'text', key: 'imageCode' }]
 		}, { input: 'range', label: '画像の幅', key: 'width', min: 50, max: 400, step: 10 }];
 
 		return [wp.element.createElement(
@@ -42,17 +42,14 @@ registerBlockType('catpow/t-media-text', {
 					wp.element.createElement(
 						'td',
 						{ className: 'imageCell', width: width },
-						states.isTemplate ? wp.element.createElement('img', {
-							src: cp.plugins_url + '/catpow/callee/dummy_image.php?text=' + loopImage,
-							width: '100%',
-							height: 'auto'
-						}) : wp.element.createElement(SelectResponsiveImage, {
+						wp.element.createElement(SelectResponsiveImage, {
 							set: setAttributes,
 							attr: attributes,
-							keys: { src: 'src', alt: 'alt' },
+							keys: { src: 'src', alt: 'alt', code: 'imageCode' },
 							size: 'large',
 							width: '100%',
-							height: 'auto'
+							height: 'auto',
+							isTemplate: states.isTemplate
 						})
 					),
 					wp.element.createElement('td', { className: 'spacerCell' }),
@@ -98,7 +95,7 @@ registerBlockType('catpow/t-media-text', {
 		var classes = attributes.classes,
 		    src = attributes.src,
 		    alt = attributes.alt,
-		    loopImage = attributes.loopImage,
+		    imageCode = attributes.imageCode,
 		    width = attributes.width;
 
 		var primaryClass = 'wp-block-catpow-t-media-text';
@@ -115,7 +112,14 @@ registerBlockType('catpow/t-media-text', {
 					wp.element.createElement(
 						'td',
 						{ className: 'imageCell', width: width },
-						states.isTemplate ? loopImage : wp.element.createElement('img', { width: '100%', height: 'auto', src: src, alt: alt })
+						wp.element.createElement(ResponsiveImage, {
+							attr: attributes,
+							keys: { src: 'src', alt: 'alt', code: 'imageCode' },
+							size: 'large',
+							width: '100%',
+							height: 'auto',
+							isTemplate: states.isTemplate
+						})
 					),
 					wp.element.createElement('td', { className: 'spacerCell' }),
 					wp.element.createElement(
