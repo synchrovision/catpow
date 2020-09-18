@@ -60,6 +60,7 @@ class user extends query{
 			if(is_array($val)){return reset($val);}
 			return $val;
 		},$object_data);
+		if(in_array($object_data['role'],['guest','common'])){unset($object_data['role']);}
 		return wp_update_user($object_data);
 	}
 	public static function delete($data_name,$data_id){
