@@ -14,7 +14,7 @@ registerBlockType('catpow/widget',{
         let statesClasses,panels;
 
         if(func){
-            statesClasses=cpwidgetdablesTree.widget[func].conf.map((conf)=>{
+            statesClasses=cpEmbeddablesTree.widget[func].conf.map((conf)=>{
                 conf.json='param';
                 return conf;
             });
@@ -31,7 +31,7 @@ registerBlockType('catpow/widget',{
 					<TreeSelect
 						label='path'
 						selectedId={func}
-						tree={cpwidgetdablesTree.widget}
+						tree={cpEmbeddablesTree.widget}
 						onChange={(func)=>{setAttributes({func:func});}}
 					/>
 				</PanelBody>

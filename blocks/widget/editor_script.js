@@ -20,7 +20,7 @@ registerBlockType('catpow/widget', {
 		    panels = void 0;
 
 		if (func) {
-			statesClasses = cpwidgetdablesTree.widget[func].conf.map(function (conf) {
+			statesClasses = cpEmbeddablesTree.widget[func].conf.map(function (conf) {
 				conf.json = 'param';
 				return conf;
 			});
@@ -44,7 +44,7 @@ registerBlockType('catpow/widget', {
 				wp.element.createElement(TreeSelect, {
 					label: 'path',
 					selectedId: func,
-					tree: cpwidgetdablesTree.widget,
+					tree: cpEmbeddablesTree.widget,
 					onChange: function onChange(func) {
 						setAttributes({ func: func });
 					}
