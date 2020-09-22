@@ -7,6 +7,3 @@ div.wp-block-catpow-div.block {
   border-color: transparent;
   -webkit-transition: 0.5s;
   transition: 0.5s; }
-  div.wp-block-catpow-div.block:hover {
-    border-color: #888;
-    background-color: rgba(0, 255, 255, 0.1); }

@@ -6,9 +6,5 @@ div.wp-block-catpow-div{
 		@include bg((c:rgba(0,255,255,0)));
 		@include bdr((s:s,w:1,c:n));
 		@include trn((t:.5s));
-		&:hover{
-			@include bdr((c:#888));
-			@include bg((c:rgba(0,255,255,.1)));
-		}
 	}
 }

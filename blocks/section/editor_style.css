@@ -6,6 +6,3 @@ section.wp-block-catpow-section.article {
   border-color: transparent;
   -webkit-transition: 0.5s;
   transition: 0.5s; }
-  section.wp-block-catpow-section.article:hover {
-    border-color: #888;
-    background-color: rgba(0, 255, 255, 0.1); }
