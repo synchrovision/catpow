@@ -34,6 +34,19 @@ class cond{
 		}
 		return !$flag;
 	}
+	public function test_content($content){
+		$flag=$this->relation==='OR';
+		foreach($this->lines as $line){
+			$values=\cp::get_the_meta_value($content->the_data_path.'/'.$line['key']);
+			if(empty($values)){
+				if(in_array($line['compare'],['!=','NOT LIKE','NOT IN','NOT EXISTS'])===$flag){return $flag;}
+			}
+			else{
+				if(self::test_values($line,$values)===$flag){return $flag;}
+			}
+		}
+		return !$flag;
+	}
 	public static function parse_line($line){
 		if(preg_match(self::$cond_line_regex,$line,$matches)){
 			switch($matches['compare']){
