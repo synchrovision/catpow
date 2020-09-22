@@ -7,12 +7,16 @@ registerBlockType('catpow/formblock', {
 	edit: function edit(_ref) {
 		var attributes = _ref.attributes,
 		    setAttributes = _ref.setAttributes,
-		    className = _ref.className;
+		    className = _ref.className,
+		    isSelected = _ref.isSelected,
+		    clientId = _ref.clientId;
 		var content_path = attributes.content_path,
 		    inputs = attributes.inputs,
 		    data_id = attributes.data_id,
 		    values = attributes.values,
-		    actions = attributes.actions;
+		    actions = attributes.actions,
+		    _attributes$EditMode = attributes.EditMode,
+		    EditMode = _attributes$EditMode === undefined ? false : _attributes$EditMode;
 
 
 		var postDataSelection = false;
@@ -31,8 +35,22 @@ registerBlockType('catpow/formblock', {
 			Fragment,
 			null,
 			wp.element.createElement(
+				BlockControls,
+				null,
+				wp.element.createElement(Toolbar, {
+					controls: [{
+						icon: 'edit',
+						title: 'EditMode',
+						isActive: EditMode,
+						onClick: function onClick() {
+							return setAttributes({ EditMode: !EditMode });
+						}
+					}]
+				})
+			),
+			wp.element.createElement(
 				'div',
-				{ 'class': 'embedded_content' },
+				{ 'class': "formBlock embedded_content" + (EditMode ? ' editMode' : '') },
 				wp.element.createElement(
 					'div',
 					{ 'class': 'label' },
@@ -53,6 +71,11 @@ registerBlockType('catpow/formblock', {
 						selectedId: content_path,
 						tree: cpEmbeddablesTree.formblock,
 						onChange: function onChange(content_path) {
+							var path = content_path.substr(0, content_path.lastIndexOf('/'));
+							wp.apiFetch({ path: 'cp/v1/' + path + '/template' }).then(function (template) {
+								console.log(template);
+								wp.data.dispatch('core/block-editor').replaceInnerBlocks(clientId, CP.createBlocks(template));
+							});
 							setAttributes({ content_path: content_path, actions: null });
 						}
 					})

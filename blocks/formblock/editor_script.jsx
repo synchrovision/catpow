@@ -4,8 +4,8 @@
 	icon: 'editor-code',
 	category: 'catpow-embed',
 	example:CP.example,
-	edit({attributes,setAttributes,className}){
-        const {content_path,inputs,data_id,values,actions}=attributes;
+	edit({attributes,setAttributes,className,isSelected,clientId}){
+        const {content_path,inputs,data_id,values,actions,EditMode=false}=attributes;
 		
 		let postDataSelection=false;
 		
@@ -16,10 +16,22 @@
 				setAttributes({actions});
 			});
 		}
-
+		
         return (
 			<Fragment>
-				<div class="embedded_content">
+				<BlockControls>
+					<Toolbar
+						controls={[
+							{
+								icon: 'edit',
+								title: 'EditMode',
+								isActive: EditMode,
+								onClick: () => setAttributes({EditMode:!EditMode})
+							}
+						]}
+					/>
+				</BlockControls>
+				<div class={"formBlock embedded_content"+(EditMode?' editMode':'')}>
 					<div class="label">{content_path || 'not selected'}</div>
 					<InnerBlocks
 						allowedBlocks={['catpow/formblockcontent']}
@@ -32,6 +44,14 @@
 							selectedId={content_path}
 							tree={cpEmbeddablesTree.formblock}
 							onChange={(content_path)=>{
+								const path=content_path.substr(0,content_path.lastIndexOf('/'));
+								wp.apiFetch({path:'cp/v1/'+path+'/template'}).then((template)=>{
+									console.log(template);
+									wp.data.dispatch('core/block-editor').replaceInnerBlocks(
+										clientId,
+										CP.createBlocks(template)
+									);
+								});
 								setAttributes({content_path,actions:null});
 							}}
 						/>

@@ -1,0 +1,12 @@
+@charset "utf-8";
+.formBlock:not(.editMode) > .block-editor-inner-blocks .formBlockContent > .label {
+  display: none; }
+  .formBlock:not(.editMode) > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block:not(:first-child) {
+    display: none; }
+.formBlock.editMode {
+  padding: 10px;
+  background-color: #ececec; }
+  .formBlock.editMode > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block {
+    padding-bottom: 5px;
+    background-color: #fefefe;
+    box-shadow: 0 4px 9px rgba(0, 0, 0, 0.3); }

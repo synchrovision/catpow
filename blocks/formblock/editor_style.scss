@@ -1,0 +1,29 @@
+@import 'admin_style_config.scss';
+
+.formBlock{
+	&:not(.editMode)>.block-editor-inner-blocks{
+		.formBlockContent>.label{
+			@include bnd((d:n));
+		}
+		&>.block-editor-block-list__layout{
+			&>.block-editor-block-list__block{
+				&:not(:first-child){
+					@include bnd((d:n));
+				}
+			}
+		}
+	}
+	&.editMode{
+		@include bnd((pd:10));
+		@include bg((c:t 10));
+		&>.block-editor-inner-blocks{
+			&>.block-editor-block-list__layout{
+				&>.block-editor-block-list__block{
+					@include bnd((pdb:5));
+					@include bg((c:b));
+					@include shd((b:4));
+				}
+			}
+		}
+	}
+}
