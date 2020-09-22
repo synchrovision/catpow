@@ -368,6 +368,13 @@
 		var rtn={};
 		words.split(' ').map((word)=>{rtn[word]=true;});
 		return rtn;
+	},
+	
+	createBlocks:(blocks)=>{
+		return blocks.map((block)=>{
+			if(block[2]){block[2]=CP.createBlocks(block[2]);}
+			return createBlock(...block);
+		});
 	}
 };
 const SelectResponsiveImage=({className,attr,set,keys,index,sizes,size,ofSP,isTemplate,...otherProps})=>{

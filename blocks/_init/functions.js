@@ -550,6 +550,15 @@ var CP = {
 			rtn[word] = true;
 		});
 		return rtn;
+	},
+
+	createBlocks: function createBlocks(blocks) {
+		return blocks.map(function (block) {
+			if (block[2]) {
+				block[2] = CP.createBlocks(block[2]);
+			}
+			return createBlock.apply(undefined, babelHelpers.toConsumableArray(block));
+		});
 	}
 };
 var SelectResponsiveImage = function SelectResponsiveImage(_ref18) {
