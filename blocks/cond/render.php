@@ -16,9 +16,17 @@ do{
 			if(!current_user_can($cap)){break 2;}
 		}
 	}
+	if($attr['user_value']){
+		$cond=new util\cond($attr['user_value']);
+		if(empty(this()) || $cond->test_content(this()->user())===false){break;}
+	}
 	if($attr['input_value']){
 		$cond=new util\cond($attr['input_value']);
 		if(empty(form()) || $cond->test(form()->get_the_data())===false){break;}
+	}
+	if($attr['content_value']){
+		$cond=new util\cond($attr['content_value']);
+		if(empty(this()) || $cond->test_content(this())===false){break;}
 	}
 	echo $content;
 }while(false);

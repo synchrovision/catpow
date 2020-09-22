@@ -48,19 +48,37 @@ registerBlockType('catpow/cond', {
 					value: attributes.is_user_logged_in,
 					options: [{ label: 'していない', value: '-1' }, { label: 'どちらでも', value: '0' }, { label: 'している', value: '1' }]
 				}),
-				attributes.is_user_logged_in == '1' && wp.element.createElement(TextareaControl, {
-					label: '\u6A29\u9650',
-					onChange: function onChange(current_user_can) {
-						return setAttributes({ current_user_can: current_user_can });
-					},
-					value: attributes.current_user_can
-				}),
+				attributes.is_user_logged_in == '1' && wp.element.createElement(
+					'div',
+					{ className: 'sub' },
+					wp.element.createElement(TextareaControl, {
+						label: '\u6A29\u9650',
+						onChange: function onChange(current_user_can) {
+							return setAttributes({ current_user_can: current_user_can });
+						},
+						value: attributes.current_user_can
+					}),
+					wp.element.createElement(TextareaControl, {
+						label: '\u30E6\u30FC\u30B6\u30FC\u60C5\u5831',
+						onChange: function onChange(user_value) {
+							return setAttributes({ user_value: user_value });
+						},
+						value: attributes.user_value
+					})
+				),
 				wp.element.createElement(TextareaControl, {
 					label: '\u30D5\u30A9\u30FC\u30E0\u5165\u529B\u5024',
 					onChange: function onChange(input_value) {
 						return setAttributes({ input_value: input_value });
 					},
 					value: attributes.input_value
+				}),
+				wp.element.createElement(TextareaControl, {
+					label: '\u30B3\u30F3\u30C6\u30F3\u30C4\u60C5\u5831',
+					onChange: function onChange(content_value) {
+						return setAttributes({ content_value: content_value });
+					},
+					value: attributes.content_value
 				})
 			)
 		)];

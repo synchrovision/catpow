@@ -39,16 +39,28 @@
 						]}
 					/>
 					{attributes.is_user_logged_in == '1' &&
-						<TextareaControl
-							label='権限'
-							onChange={(current_user_can)=>setAttributes({current_user_can})}
-							value={attributes.current_user_can}
-						/>
+						<div className="sub">
+							<TextareaControl
+								label='権限'
+								onChange={(current_user_can)=>setAttributes({current_user_can})}
+								value={attributes.current_user_can}
+							/>
+							<TextareaControl
+								label='ユーザー情報'
+								onChange={(user_value)=>setAttributes({user_value})}
+								value={attributes.user_value}
+							/>
+						</div>
 					}
 					<TextareaControl
 						label='フォーム入力値'
 						onChange={(input_value)=>setAttributes({input_value})}
 						value={attributes.input_value}
+					/>
+					<TextareaControl
+						label='コンテンツ情報'
+						onChange={(content_value)=>setAttributes({content_value})}
+						value={attributes.content_value}
 					/>
 				</PanelBody>
 			</InspectorControls>
