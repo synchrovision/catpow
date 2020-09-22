@@ -85,8 +85,8 @@ class cond{
 			case 'NOT IN':return !in_array($value,$line['value']);
 			case 'BETWEEN':return $value>=$line['value'][0] && $value<=$line['value'][1];
 			case 'NOT BETWEEN':return $value<$line['value'][0] || $value>$line['value'][1];
-			case 'EXISTS':isset($value);
-			case 'NOT EXISTS':!isset($value);
+			case 'EXISTS':return isset($value);
+			case 'NOT EXISTS':return !isset($value);
 			
 		}
 	}
