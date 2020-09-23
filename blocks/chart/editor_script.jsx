@@ -80,7 +80,7 @@
 				filter:'type',
 				values:{
 					BarChart:'棒グラフ',
-					PieChat:'円グラフ',
+					PieChart:'円グラフ',
 					LineChart:'折れ線グラフ',
 					RadarChart:'レーダーチャート'
 				}
@@ -165,7 +165,6 @@
 			);
 		}
 		
-		
         return [
 			<InspectorControls>
 				<SelectClassPanel
@@ -186,8 +185,7 @@
 			</InspectorControls>,
 			<div className={classes}>
 				{el(Catpow[type+'Output'],graphCopy)}
-			</div>,
-			//isSelected?DataTable():''
+			</div>
         ];
     },
 	save({attributes,className}){
@@ -217,7 +215,6 @@
 		
 		const hasClass=(cls)=>(classArray.indexOf(cls)!==-1);
 		Object.keys(states).forEach(function(key){this[key]=hasClass(key);},states);
-		
 		return (
 			<div className={classes}>
 				{el(Catpow[type+'Output'],graph[0])}

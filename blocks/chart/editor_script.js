@@ -77,7 +77,7 @@ registerBlockType('catpow/chart', {
 			filter: 'type',
 			values: {
 				BarChart: '棒グラフ',
-				PieChat: '円グラフ',
+				PieChart: '円グラフ',
 				LineChart: '折れ線グラフ',
 				RadarChart: 'レーダーチャート'
 			}
@@ -239,7 +239,6 @@ registerBlockType('catpow/chart', {
 		Object.keys(states).forEach(function (key) {
 			this[key] = hasClass(key);
 		}, states);
-
 		return wp.element.createElement(
 			'div',
 			{ className: classes },
