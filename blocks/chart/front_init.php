@@ -1,5 +1,6 @@
 <?php
-cp::enqueue_style('ui/BarChart/output.css');
-cp::enqueue_style('ui/PieChart/output.css');
-cp::enqueue_style('ui/LineChart/output.css');
-cp::enqueue_style('ui/RadarChart/output.css');
+cp::use_ui_output('ChartText');
+cp::use_ui_output('BarChart');
+cp::use_ui_output('PieChart');
+cp::use_ui_output('LineChart');
+cp::use_ui_output('RadarChart');
