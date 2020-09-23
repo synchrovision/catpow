@@ -1,4 +1,4 @@
-Catpow.ChartTextOutput = function (props) {
+Catpow.ChartText = function (props) {
 	var keys = ['title', 'unit', 'rowTitle', 'rowUnit', 'colTitle', 'colUnit'];
 	var ds = ['row', 'col'];
 

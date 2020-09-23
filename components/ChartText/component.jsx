@@ -1,4 +1,4 @@
-﻿Catpow.ChartTextOutput=function(props){
+﻿Catpow.ChartText=function(props){
 	const keys=['title','unit','rowTitle','rowUnit','colTitle','colUnit'];
 	const ds=['row','col'];
 	
