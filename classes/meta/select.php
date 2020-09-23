@@ -9,10 +9,10 @@ class select extends meta{
 		foreach($sels as $key=>$val){
 			if(is_array($val)){
 				foreach($val as $k=>$s){
-					if($s==$v){return is_int($k)?$s:$k;}
+					if($s==$v){return '<span class="select_item">'.(is_int($k)?$s:$k).'</span>';}
 				}
 			}
-			elseif($val==$v){return is_int($key)?$val:$key;}
+			elseif($val==$v){return '<span class="select_item">'.(is_int($key)?$val:$key).'</span>';}
 		}
 	}
 	public static function input($meta,$prm){

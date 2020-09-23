@@ -16,7 +16,7 @@ class select_post_datas extends meta{
 				case 'content':
 					return str_replace(']]>',']]&gt;',apply_filters('the_content',$post_data['post_content']));
 				default:
-					return $post_data['post_title'];
+					return '<span class="select_item">'.$post_data['post_title'].'</span>';
 			}
 
 		}
