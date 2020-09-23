@@ -158,5 +158,66 @@ registerBlockType('catpow/formbuttons', {
 			{ className: classes },
 			rtn
 		);
-	}
+	},
+
+	deprecated: [{
+		attributes: {
+			version: { type: 'number', default: 0 },
+			classes: { source: 'attribute', selector: 'ul', attribute: 'class', default: 'wp-block-catpow-formbuttons buttons' },
+			items: {
+				source: 'query',
+				selector: 'li.item',
+				query: {
+					classes: { source: 'attribute', attribute: 'class' },
+					event: { source: 'attribute', attribute: 'data-event' },
+					button: { source: 'text' }
+				},
+				default: [{ classes: 'item', button: '[button 送信 send]' }]
+			}
+		},
+		save: function save(_ref3) {
+			var attributes = _ref3.attributes,
+			    className = _ref3.className;
+			var items = attributes.items,
+			    classes = attributes.classes;
+
+			var classArray = _.uniq(attributes.classes.split(' '));
+
+			var rtn = [];
+			items.map(function (item, index) {
+				rtn.push(wp.element.createElement(
+					'li',
+					{ className: item.classes, 'data-event': item.event },
+					item.button
+				));
+			});
+			return wp.element.createElement(
+				'ul',
+				{ className: classes },
+				rtn
+			);
+		},
+		migrate: function migrate(attributes) {
+			var items = attributes.items;
+
+			var parseButtonShortCode = function parseButtonShortCode(code) {
+				var matches = code.match(/^\[button ([^ ]+) ([^ ]+)( ignore_message\=1)?\]$/);
+				if (matches) {
+					var rtn = { content: matches[1], action: matches[2] };
+					if (matches[3]) {
+						rtn.ignore_message = 1;
+					}
+					return rtn;
+				}
+				return { content: '送信' };
+			};
+			items.map(function (item) {
+				var buttonData = parseButtonShortCode(item.button);
+				item.action = buttonData.action;
+				item.text = buttonData.content;
+				item.ignore_message = buttonData.ignore_message;
+			});
+			return attributes;
+		}
+	}]
 });

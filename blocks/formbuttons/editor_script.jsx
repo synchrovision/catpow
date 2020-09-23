@@ -129,4 +129,55 @@
 		});
 		return <ul className={classes}>{rtn}</ul>;
 	},
+	deprecated:[
+		{
+			attributes:{
+				version:{type:'number',default:0},
+				classes:{source:'attribute',selector:'ul',attribute:'class',default:'wp-block-catpow-formbuttons buttons'},
+				items:{
+					source:'query',
+					selector:'li.item',
+					query:{
+						classes:{source:'attribute',attribute:'class'},
+						event:{source:'attribute',attribute:'data-event'},
+						button:{source:'text'}
+					},
+					default:[
+						{classes:'item',button:'[button 送信 send]'}
+					]
+				}
+			},
+			save({attributes,className}){
+				const {items,classes}=attributes;
+				var classArray=_.uniq(attributes.classes.split(' '));
+
+				let rtn=[];
+				items.map((item,index)=>{
+					rtn.push(
+						<li className={item.classes} data-event={item.event}>{item.button}</li>
+					);
+				});
+				return <ul className={classes}>{rtn}</ul>;
+			},
+			migrate(attributes){
+				const {items}=attributes;
+				const parseButtonShortCode=(code)=>{
+					let matches=code.match(/^\[button ([^ ]+) ([^ ]+)( ignore_message\=1)?\]$/);
+					if(matches){
+						let rtn={content:matches[1],action:matches[2]};
+						if(matches[3]){rtn.ignore_message=1;}
+						return rtn;
+					}
+					return {content:'送信'}
+				};
+				items.map((item)=>{
+					const buttonData=parseButtonShortCode(item.button);
+					item.action=buttonData.action;
+					item.text=buttonData.content;
+					item.ignore_message=buttonData.ignore_message;
+				});
+				return attributes;
+			}
+		}
+	]
 });
