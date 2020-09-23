@@ -1,6 +1,9 @@
-# Catpow
+<p align="center">
+  <img src="https://raw.githubusercontent.com/synchrovision/catpow/master/theme_default/images/logo.png">
+</p>
 
-![catpow](https://raw.githubusercontent.com/synchrovision/catpow/master/theme_default/screenshot.png)
+![PHP7.2](https://img.shields.io/badge/PHP-7.2-45A?logo=php)
+![WordPress5.5](https://img.shields.io/badge/WordPress-5.5-blue?logo=wordpress)
 
 CatpowはWordPressでオリジナルCMSを作成するためのフレームワークのプラグインです。
 
