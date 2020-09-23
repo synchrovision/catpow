@@ -10,14 +10,14 @@ ul.wp-block-catpow-listed li.item {
     ul.wp-block-catpow-listed li.item > .link input {
       margin: 1rem auto;
       color: #444; }
-  ul.wp-block-catpow-listed.edit {
-    padding: 2rem;
-    border-style: solid;
-    border-width: 1px;
-    border-color: rgba(68, 68, 68, 0.5);
-    border-radius: 1rem;
-    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-    background-color: #fefefe; }
+ul.wp-block-catpow-listed.edit {
+  padding: 2rem;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(68, 68, 68, 0.5);
+  border-radius: 1rem;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  background-color: #fefefe; }
   ul.wp-block-catpow-listed.edit li.item {
     display: -webkit-box;
     display: -webkit-flex;
