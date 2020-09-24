@@ -30,7 +30,8 @@ wp_localize_script('catpow','cp',array(
 	'upload_url'=>admin_url().'async-upload.php',
 	'home_url'=>home_url(),
 	'theme_url'=>get_stylesheet_directory_uri(),
-	'use_functions'=>cp::$use_functions
+	'use_functions'=>cp::$use_functions,
+	'wp_rest_nonce'=>wp_create_nonce('wp_rest')
 ));
 
 /*add_image_size*/
