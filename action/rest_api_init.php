@@ -16,6 +16,12 @@ register_rest_route(
 			)){
 				return include $f;
 			}
+			elseif($f=cp::get_file_path(
+				$req['content_path'].'/api-permission.php',
+				cp::FROM_THEME|cp::FROM_CONFIG
+			)){
+				return include $f;
+			}
 			return true;
 		},
 		'callback'=>function($req){
