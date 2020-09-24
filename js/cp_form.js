@@ -88,12 +88,14 @@ function cp_form_submit($item,action,callback,param){
         if(action){fd.append('cp_form_action',action);}
         if(param){$.each(param,function(key,val){fd.append(key,val);});}
         var prm={
-            url:cp.ajax_url,
+            url:cp.rest_url+'cp/v1/form/post',
             type:'post',
-            dataType:'jsonp',
             data:fd,
             processData:false,
             contentType:false,
+			headers:{
+				'X-WP-Nonce':cp.wp_rest_nonce
+			}
         };
         $('body').addClass('busy_mode');
         $.ajax(prm).done(function(res){
