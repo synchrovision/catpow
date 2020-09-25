@@ -1,0 +1,9 @@
+@import 'admin_style_config.scss';
+
+
+.ChartText{
+	@include txt((p:12,f:g));
+	.title{@include svg((ta:c));@include txt((p:18));}
+	.val{@include svg((ta:c,db:m,f:b));}
+	.ledgendText{@include svg((db:m));}
+}
