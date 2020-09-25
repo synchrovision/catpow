@@ -7,13 +7,27 @@ registerBlockType('catpow/app', {
 	icon: 'editor-code',
 	category: 'catpow-embed',
 	example: CP.example,
+	supports: {
+		customClassName: false
+	},
 	edit: function edit(_ref) {
 		var attributes = _ref.attributes,
 		    setAttributes = _ref.setAttributes,
 		    className = _ref.className;
 		var content_path = attributes.content_path,
-		    query = attributes.query;
+		    props = attributes.props,
+		    config = attributes.config;
 
+
+		if (!config && content_path) {
+			var path = content_path.substr(0, content_path.lastIndexOf('/'));
+			wp.apiFetch({ path: 'cp/v1/' + path + '/config' }).then(function (config) {
+				Object.keys(config).map(function (key) {
+					return config[key].json = 'props';
+				});
+				setAttributes({ config: config });
+			});
+		}
 
 		return [wp.element.createElement(
 			'div',
@@ -35,15 +49,19 @@ registerBlockType('catpow/app', {
 					selectedId: content_path,
 					tree: cpEmbeddablesTree.app,
 					onChange: function onChange(content_path) {
-						setAttributes({ content_path: content_path });
-						/*
-      wp.apiFetch({path:'cp/v1/'+content_path}).then(res=>{
-      	setAttributes({content_path:content_path,props:res});
-      });
-      */
+						var path = content_path.substr(0, content_path.lastIndexOf('/'));
+						setAttributes({ content_path: content_path, config: false, props: JSON.stringify({ path: path }) });
 					}
 				})
-			)
+			),
+			config && wp.element.createElement(SelectClassPanel, {
+				title: '\u8A2D\u5B9A',
+				icon: 'edit',
+				set: setAttributes,
+				attr: attributes,
+				selectiveClasses: config,
+				initialOpen: true
+			})
 		)];
 	},
 	save: function save(_ref2) {

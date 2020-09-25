@@ -7,8 +7,19 @@ registerBlockType('catpow/app',{
 	icon: 'editor-code',
 	category: 'catpow-embed',
 	example:CP.example,
+	supports:{
+		customClassName:false,
+	},
 	edit({attributes,setAttributes,className}){
-        const {content_path,query}=attributes;
+        const {content_path,props,config}=attributes;
+		
+		if(!config && content_path){
+			const path=content_path.substr(0,content_path.lastIndexOf('/'));
+			wp.apiFetch({path:'cp/v1/'+path+'/config'}).then((config)=>{
+				Object.keys(config).map((key)=>config[key].json='props');
+				setAttributes({config});
+			});
+		}
 		
         return [
 			<div class="embedded_content">
@@ -22,15 +33,21 @@ registerBlockType('catpow/app',{
 						selectedId={content_path}
 						tree={cpEmbeddablesTree.app}
 						onChange={(content_path)=>{
-							setAttributes({content_path:content_path});
-							/*
-							wp.apiFetch({path:'cp/v1/'+content_path}).then(res=>{
-								setAttributes({content_path:content_path,props:res});
-							});
-							*/
+							const path=content_path.substr(0,content_path.lastIndexOf('/'));
+							setAttributes({content_path,config:false,props:JSON.stringify({path})});
 						}}
 					/>
 				</PanelBody>
+				{config &&
+					<SelectClassPanel
+						title='設定'
+						icon='edit'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={config}
+						initialOpen={true}
+					/>
+				}
 			</InspectorControls>
         ];
     },
