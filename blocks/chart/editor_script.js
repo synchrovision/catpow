@@ -9,12 +9,10 @@ registerBlockType('catpow/chart', {
 			source: 'query',
 			selector: 'svg',
 			query: {
-				title: { source: 'text', selector: 'g.texts text.title' },
-				unit: { source: 'text', selector: 'g.texts text.unit' },
-				rowTitle: { source: 'text', selector: 'g.texts text.rowTitle' },
-				rowUnit: { source: 'text', selector: 'g.texts text.rowUnit' },
-				colTitle: { source: 'text', selector: 'g.texts text.colTitle' },
-				colUnit: { source: 'text', selector: 'g.texts text.colUnit' },
+				title: { source: 'text', selector: 'g.ChartText text.title' },
+				unit: { source: 'text', selector: 'g.ChartText text.unit' },
+				rowTitle: { source: 'text', selector: 'g.ChartText text.rowTitle' },
+				rowUnit: { source: 'text', selector: 'g.ChartText text.rowUnit' },
 				total: { source: 'attribute', selector: 'data-total' },
 				rows: {
 					source: 'query',
@@ -43,12 +41,10 @@ registerBlockType('catpow/chart', {
 			default: [{
 				title: '男女比',
 				unit: '%',
-				rowTitle: '性別',
-				rowUnit: '',
-				colTitle: '日数',
-				colUnit: '日',
-				rows: [{ classes: 'row weak', label: '1', vals: [{ value: 80 }, { value: 20 }] }, { classes: 'row normal', label: '2', vals: [{ value: 50 }, { value: 50 }] }, { classes: 'row strong', label: '3', vals: [{ value: 20 }, { value: 80 }] }],
-				cols: [{ classes: 'col color1', label: '男' }, { classes: 'col color2', label: '女' }]
+				rowTitle: '日数',
+				rowUnit: '日',
+				rows: [{ classes: 'row weak', label: '1', vals: [{ value: 30 }, { value: 40 }] }, { classes: 'row normal', label: '2', vals: [{ value: 40 }, { value: 60 }] }, { classes: 'row strong', label: '3', vals: [{ value: 50 }, { value: 80 }] }, { classes: 'row strong', label: '4', vals: [{ value: 60 }, { value: 100 }] }],
+				cols: [{ classes: 'col color1', label: '男性' }, { classes: 'col color2', label: '女性' }]
 			}]
 		}
 	},
