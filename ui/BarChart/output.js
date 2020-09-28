@@ -2,18 +2,16 @@ Catpow.BarChartOutput = function (props) {
 	var colsSvg = [],
 	    rowsSvg = [],
 	    textsSvg = [];
+	var rows = props.rows,
+	    cols = props.cols,
+	    _props$width = props.width,
+	    width = _props$width === undefined ? 300 : _props$width,
+	    _props$height = props.height,
+	    height = _props$height === undefined ? 300 : _props$height,
+	    _props$padding = props.padding,
+	    padding = _props$padding === undefined ? 50 : _props$padding,
+	    total = props.total;
 
-	var _Object$assign = Object.assign({
-		width: 300,
-		height: 300,
-		padding: 50
-	}, props),
-	    rows = _Object$assign.rows,
-	    cols = _Object$assign.cols,
-	    width = _Object$assign.width,
-	    height = _Object$assign.height,
-	    padding = _Object$assign.padding,
-	    total = _Object$assign.total;
 
 	if (!total) {
 		var n;
@@ -32,22 +30,28 @@ Catpow.BarChartOutput = function (props) {
 	    graphOrg = { x: padding, y: height - padding };
 
 	var rowStep = graphWidth / rows.length,
-	    barWidth = rowStep / 2,
-	    barMargin = rowStep / 4,
+	    barWidth = rowStep / 4 * 3,
+	    barMargin = rowStep / 8,
 	    coef = graphHeight / total;
 	var pos, h;
 
 	colsSvg = cols.map(function (col, r) {
 		return wp.element.createElement('g', { className: col.classes, 'data-label': col.label });
 	});
+	var valPos = [];
 	rowsSvg = rows.map(function (row, r) {
 		var pos = { x: r * rowStep + graphOrg.x + barMargin, y: graphOrg.y };
+		valPos[r] = [];
 		return wp.element.createElement(
 			'g',
 			{ className: row.classes, 'data-label': row.label },
 			row.vals.map(function (val, c) {
 				h = val.value * coef;
 				pos.y -= h;
+				valPos[r][c] = {
+					x: r * rowStep + rowStep / 2 + padding,
+					y: pos.y + h / 2
+				};
 				return wp.element.createElement('rect', {
 					className: cols[c].classes.replace('col', 'val'),
 					'data-value': val.value,
@@ -59,13 +63,18 @@ Catpow.BarChartOutput = function (props) {
 			})
 		);
 	});
+	props.pos = {
+		val: function val(r, c) {
+			return valPos[r][c];
+		}
+	};
 
 	return wp.element.createElement(
 		'div',
 		{ className: 'BarChart' },
 		wp.element.createElement(
 			'svg',
-			{ viewBox: '0 0 300 300' },
+			{ viewBox: "0 0 " + width + " " + height },
 			wp.element.createElement(
 				'g',
 				{ 'class': 'graph' },

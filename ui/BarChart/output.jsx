@@ -1,11 +1,6 @@
-﻿Catpow.BarChartOutput=function(props){
+﻿Catpow.BarChartOutput=(props)=>{
 	var colsSvg=[],rowsSvg=[],textsSvg=[];
-	
-	var {rows,cols,width,height,padding,total}=Object.assign({
-		width:300,
-		height:300,
-		padding:50
-	},props);
+	var {rows,cols,width=300,height=300,padding=50,total}=props;
 	
 	if(!total){
 		var n;
@@ -20,7 +15,7 @@
 	
 	var graphHeight=height-padding*2, graphWidth=width-padding*2,graphOrg={x:padding,y:height-padding};
 	
-	var rowStep=graphWidth/rows.length,barWidth=rowStep/2,barMargin=rowStep/4,coef=graphHeight/total;
+	var rowStep=graphWidth/rows.length,barWidth=rowStep/4*3,barMargin=rowStep/8,coef=graphHeight/total;
 	var pos,h;
 	
 	colsSvg=cols.map((col,r)=>{
@@ -28,13 +23,19 @@
 			<g className={col.classes} data-label={col.label}></g>
 		);
 	});
+	var valPos=[];
 	rowsSvg=rows.map((row,r)=>{
 		var pos={x:r*rowStep+graphOrg.x+barMargin,y:graphOrg.y};
+		valPos[r]=[];
 		return(
 			<g className={row.classes} data-label={row.label}>
 				{row.vals.map((val,c)=>{
 					h=val.value*coef;
 					pos.y-=h;
+					valPos[r][c]={
+						x:r*rowStep+rowStep/2+padding,
+						y:pos.y+h/2
+					};
 					return (
 						<rect
 							className={cols[c].classes.replace('col','val')}
@@ -49,10 +50,13 @@
 			</g>
 		);
 	});
+	props.pos={
+		val:(r,c)=>{return valPos[r][c]},
+	};
 
 	return (
 		<div className={'BarChart'}>
-			<svg viewBox="0 0 300 300">
+			<svg viewBox={"0 0 "+width+" "+height}>
 				<g class="graph">
 					<g class="cols">{colsSvg}</g>
 					<g class="rows">{rowsSvg}</g>

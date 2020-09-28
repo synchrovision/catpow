@@ -1,29 +1,30 @@
 @charset "utf-8";
-div.BarChart svg {
+.BarChart svg {
+  display: block;
   max-width: 30rem;
   width: 100%;
   margin: 0px auto; }
-  div.BarChart svg .graph rect.color1 {
+  .BarChart svg rect.color1 {
     fill: #d65c5c; }
-  div.BarChart svg .graph rect.color2 {
+  .BarChart svg rect.color2 {
     fill: #d6995c; }
-  div.BarChart svg .graph rect.color3 {
+  .BarChart svg rect.color3 {
     fill: #d6d65c; }
-  div.BarChart svg .graph rect.color4 {
+  .BarChart svg rect.color4 {
     fill: #99d65c; }
-  div.BarChart svg .graph rect.color5 {
+  .BarChart svg rect.color5 {
     fill: #5cd65c; }
-  div.BarChart svg .graph rect.color6 {
+  .BarChart svg rect.color6 {
     fill: #5cd699; }
-  div.BarChart svg .graph rect.color7 {
+  .BarChart svg rect.color7 {
     fill: #5cd6d6; }
-  div.BarChart svg .graph rect.color8 {
+  .BarChart svg rect.color8 {
     fill: #5c99d6; }
-  div.BarChart svg .graph rect.color9 {
+  .BarChart svg rect.color9 {
     fill: #5c5cd6; }
-  div.BarChart svg .graph rect.color10 {
+  .BarChart svg rect.color10 {
     fill: #995cd6; }
-  div.BarChart svg .graph rect.color11 {
+  .BarChart svg rect.color11 {
     fill: #d65cd6; }
-  div.BarChart svg .graph rect.color12 {
+  .BarChart svg rect.color12 {
     fill: #d65c99; }
