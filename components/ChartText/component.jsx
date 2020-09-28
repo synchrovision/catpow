@@ -58,22 +58,27 @@
 					);
 				})}
 			</g>
-			<g className="vals">
-				{props.rows.map((row,r)=>{
-					return row.vals.map((val,c)=>{
-						let pos=props.pos['val'](r,c);
-						return (
-							<text
-								className={row.classes.replace('row','')+' '+props.cols[c].classes.replace('col','val')}
-								x={pos.x}
-								y={pos.y}
-							>
-								{val.value}
-							</text>
-						);
-					});
-				})}
-			</g>
+			{props.hasValue && 
+				<g className="vals">
+					{props.rows.map((row,r)=>{
+						return row.vals.map((val,c)=>{
+							let pos=props.pos['val'](r,c);
+							return (
+								<text
+									className={row.classes.replace('row','')+' '+props.cols[c].classes.replace('col','val')}
+									x={pos.x}
+									y={pos.y}
+								>
+									{val.value}
+									{props.hasUnit && 
+										<tspan className="unit">{props.unit}</tspan>
+									}
+								</text>
+							);
+						});
+					})}
+				</g>
+			}
 		</g>
 	);
 }

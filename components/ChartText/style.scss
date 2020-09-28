@@ -4,6 +4,11 @@
 .ChartText{
 	@include txt((p:12,f:g));
 	.title{@include svg((ta:c));@include txt((p:18));}
-	.val{@include svg((ta:c,db:m,f:b));}
+	.val{
+		@include svg((ta:c,db:m,f:b));
+		.unit{
+			@include svg((db:m));
+		}
+	}
 	.ledgendText{@include svg((db:m));}
 }

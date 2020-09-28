@@ -99,7 +99,7 @@ Catpow.ChartText = function (props) {
 				);
 			})
 		),
-		wp.element.createElement(
+		props.hasValue && wp.element.createElement(
 			'g',
 			{ className: 'vals' },
 			props.rows.map(function (row, r) {
@@ -112,7 +112,12 @@ Catpow.ChartText = function (props) {
 							x: pos.x,
 							y: pos.y
 						},
-						val.value
+						val.value,
+						props.hasUnit && wp.element.createElement(
+							'tspan',
+							{ className: 'unit' },
+							props.unit
+						)
 					);
 				});
 			})
