@@ -1,51 +1,61 @@
-﻿Catpow.PieChartOutput=class extends wp.element.Component{
-	constructor(props) {
-		super(props);
-		var {value,total}=props;
-		var press=false;
-		
-		if(undefined===total){total=100;}
-		
-		this.bodyBnd={ox:150,oy:150,r:100};
-		this.total=total;
-		
-		this.state={value,press};
-	}
+﻿Catpow.PieChartOutput=(props)=>{
+	const {useState}=wp.element;
+	var {rows,cols,width=300,height=300,padding=50}=props;
 	
-	render(){
-		var {value,press}=this.state;
-		
-		const val2pos=(v)=>{
-			var rad=v/this.total*Math.PI*2-Math.PI/2;
-			return {
-				x:Math.cos(rad)*this.bodyBnd.r+this.bodyBnd.ox,
-				y:Math.sin(rad)*this.bodyBnd.r+this.bodyBnd.oy
-			};
-		}
-		
-		var i,d,crrVal,crrPos,pies=[];
-		
-		crrVal=0;
-		crrPos=val2pos(0);
-		for(i=0;i<4;i++){
-			d='M '+this.bodyBnd.ox+' '+this.bodyBnd.oy+' L '+crrPos.x+' '+crrPos.y;
-			var v=Math.random()*80;
-			crrVal+=Math.floor(v);
-			if(crrVal>this.total){break;}
-			crrPos=val2pos(crrVal);
-			d+=' A '+this.bodyBnd.r+' '+this.bodyBnd.r+' 0 '+((v*2>this.total)?'1':'0')+' 1 '+crrPos.x+' '+crrPos.y;
-			d+=' L '+this.bodyBnd.ox+' '+this.bodyBnd.oy;
-			pies.push(
-				<path d={d} stroke="red"/>
-			);
-		}
-		
-		return (
-			<div className={'PieChart'}>
-				<svg viewBox="0 0 300 300">
-					{pies}
-				</svg>
-			</div>
-		);
+	const total=rows[0].vals.reduce((v,val)=>v+parseInt(val.value),0);
+	const r=(width-padding*2)/2,ox=width/2,oy=height/2;
+		console.log(total);
+
+	const val2pos=(v,coef=1)=>{
+		var rad=v/total*Math.PI*2-Math.PI/2;
+		return {
+			x:Math.cos(rad)*r*coef+ox,
+			y:Math.sin(rad)*r*coef+oy
+		};
 	}
+
+	var i,d,crrVal=0,crrPos=val2pos(0),pies=[];
+
+	var valPos=[];
+	rows[0].vals.map((val,c)=>{
+		const v=val.value;
+		d='M '+ox+' '+oy+' L '+crrPos.x+' '+crrPos.y;
+		valPos[c]=val2pos(crrVal+Math.floor(val.value/2),5/8);
+		crrVal+=Math.floor(val.value);
+		crrPos=val2pos(crrVal);
+		d+=' A '+r+' '+r+' 0 '+((v*2>total)?'1':'0')+' 1 '+crrPos.x+' '+crrPos.y;
+		d+=' L '+ox+' '+oy;
+		pies.push(
+			<path
+				className={cols[c].classes.replace('col','val')}
+				data-value={v}
+				d={d}
+			/>
+		);
+	});
+	
+		
+	return (
+		<div className={'PieChart'}>
+			<svg viewBox={"0 0 "+width+" "+height}>
+				<g class="graph">
+					<g className={rows[0].classes} data-label={rows[0].label}>
+						{pies}
+					</g>
+				</g>
+				{el(Catpow.ChartText,{
+					...props,
+					rowTitle:false,
+					rowUnit:false,
+					rows:[{
+						classes:props.rows[0].classes,
+						vals:props.rows[0].vals
+					}],
+					pos:{
+						val:(r,c)=>{return valPos[c]},
+					}
+				})}
+			</svg>
+		</div>
+	);
 }

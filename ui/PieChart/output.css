@@ -1,0 +1,30 @@
+@charset "utf-8";
+.PieChart svg {
+  display: block;
+  max-width: 30rem;
+  width: 100%;
+  margin: 0px auto; }
+  .PieChart svg path.color1, .PieChart svg rect.color1 {
+    fill: #d65c5c; }
+  .PieChart svg path.color2, .PieChart svg rect.color2 {
+    fill: #d6995c; }
+  .PieChart svg path.color3, .PieChart svg rect.color3 {
+    fill: #d6d65c; }
+  .PieChart svg path.color4, .PieChart svg rect.color4 {
+    fill: #99d65c; }
+  .PieChart svg path.color5, .PieChart svg rect.color5 {
+    fill: #5cd65c; }
+  .PieChart svg path.color6, .PieChart svg rect.color6 {
+    fill: #5cd699; }
+  .PieChart svg path.color7, .PieChart svg rect.color7 {
+    fill: #5cd6d6; }
+  .PieChart svg path.color8, .PieChart svg rect.color8 {
+    fill: #5c99d6; }
+  .PieChart svg path.color9, .PieChart svg rect.color9 {
+    fill: #5c5cd6; }
+  .PieChart svg path.color10, .PieChart svg rect.color10 {
+    fill: #995cd6; }
+  .PieChart svg path.color11, .PieChart svg rect.color11 {
+    fill: #d65cd6; }
+  .PieChart svg path.color12, .PieChart svg rect.color12 {
+    fill: #d65c99; }

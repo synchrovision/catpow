@@ -1,0 +1,14 @@
+@import 'admin_style_config.scss';
+
+.PieChart{
+	svg{
+		@include bnd((d:b,w:f 30rem,mg:0 a));
+		path,rect{
+			@for $i from 1 through 12{
+				&.color#{$i}{
+					@include svg((f:$i));
+				}
+			}
+		}
+	}
+}
