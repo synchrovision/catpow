@@ -39,12 +39,12 @@ registerBlockType('catpow/chart', {
 				}
 			},
 			default: [{
-				title: '男女比',
-				unit: '%',
+				title: 'ステータス',
+				unit: 'pt',
 				rowTitle: '日数',
 				rowUnit: '日',
-				rows: [{ classes: 'row weak', label: '1', vals: [{ value: 30 }, { value: 40 }] }, { classes: 'row normal', label: '2', vals: [{ value: 40 }, { value: 60 }] }, { classes: 'row strong', label: '3', vals: [{ value: 50 }, { value: 80 }] }, { classes: 'row strong', label: '4', vals: [{ value: 60 }, { value: 100 }] }],
-				cols: [{ classes: 'col color1', label: '男性' }, { classes: 'col color2', label: '女性' }]
+				rows: [{ classes: 'row weak', label: '1', vals: [{ value: 30 }, { value: 40 }, { value: 40 }, { value: 40 }, { value: 40 }] }, { classes: 'row normal', label: '2', vals: [{ value: 40 }, { value: 60 }, { value: 30 }, { value: 20 }, { value: 50 }] }, { classes: 'row strong', label: '3', vals: [{ value: 50 }, { value: 80 }, { value: 20 }, { value: 30 }, { value: 60 }] }],
+				cols: [{ classes: 'col color1', label: 'VIT' }, { classes: 'col color2', label: 'STR' }, { classes: 'col color3', label: 'AGR' }, { classes: 'col color4', label: 'INT' }, { classes: 'col color5', label: 'MND' }]
 			}]
 		}
 	},
@@ -55,18 +55,13 @@ registerBlockType('catpow/chart', {
 		    setAttributes = _ref.setAttributes,
 		    isSelected = _ref.isSelected;
 		var classes = attributes.classes,
-		    graph = attributes.graph;
+		    graph = attributes.graph,
+		    _attributes$EditMode = attributes.EditMode,
+		    EditMode = _attributes$EditMode === undefined ? false : _attributes$EditMode;
 
 		var primaryClass = 'wp-block-catpow-chart';
 		var classArray = _.uniq((className + ' ' + classes).split(' '));
 		var classNameArray = className.split(' ');
-
-		var states = {
-			hasTitle: false,
-			hasTitleCaption: false,
-			hasText: false,
-			hasBackgroundImage: false
-		};
 
 		var selectiveClasses = [{
 			label: 'タイプ',
@@ -77,17 +72,13 @@ registerBlockType('catpow/chart', {
 				LineChart: '折れ線グラフ',
 				RadarChart: 'レーダーチャート'
 			}
-		}];
+		}, { label: '値を表示', values: 'hasValue', sub: [{ label: '単位を表示', values: 'hasUnit' }] }, { label: '枠線を表示', values: 'hasFrame' }, { label: '罫線を表示', values: 'hasGrid' }];
 		var type = CP.getSelectiveClass({ attr: attributes }, selectiveClasses[0].values);
 
-		var graphCopy = jQuery.extend(true, {}, graph[0]);
-
-		var hasClass = function hasClass(cls) {
-			return classArray.indexOf(cls) !== -1;
+		var states = CP.wordsToFlags(classes);
+		var save = function save() {
+			setAttributes({ graph: JSON.parse(JSON.stringify(graph)) });
 		};
-		Object.keys(states).forEach(function (key) {
-			this[key] = hasClass(key);
-		}, states);
 
 		var DataTable = function DataTable() {
 			return wp.element.createElement(
@@ -104,13 +95,13 @@ registerBlockType('catpow/chart', {
 							null,
 							wp.element.createElement(
 								'th',
-								{ colSpan: graphCopy.cols.length + 1 },
+								{ colSpan: graph[0].cols.length + 1 },
 								wp.element.createElement(TextControl, {
 									onChange: function onChange(label) {
-										graphCopy.label = label;
-										setAttributes({ graph: graphCopy });
+										graph[0].label = label;
+										save();
 									},
-									value: graphCopy.label,
+									value: graph[0].label,
 									placeholder: '\u30BF\u30A4\u30C8\u30EB'
 								})
 							)
@@ -119,14 +110,14 @@ registerBlockType('catpow/chart', {
 							'tr',
 							null,
 							wp.element.createElement('th', null),
-							graphCopy.cols.map(function (col, c) {
+							graph[0].cols.map(function (col, c) {
 								return wp.element.createElement(
 									'th',
 									null,
 									wp.element.createElement(TextControl, {
 										onChange: function onChange(label) {
 											col.label = label;
-											setAttributes({ graph: graphCopy });
+											save();
 										},
 										value: col.label,
 										placeholder: '項目' + (c + 1)
@@ -138,7 +129,7 @@ registerBlockType('catpow/chart', {
 					wp.element.createElement(
 						'tbody',
 						null,
-						graphCopy.rows.map(function (row, r) {
+						graph[0].rows.map(function (row, r) {
 							return wp.element.createElement(
 								'tr',
 								null,
@@ -148,7 +139,7 @@ registerBlockType('catpow/chart', {
 									wp.element.createElement(TextControl, {
 										onChange: function onChange(label) {
 											row.label = label;
-											setAttributes({ graph: graphCopy });
+											save();
 										},
 										value: row.label,
 										placeholder: '項目' + (r + 1)
@@ -159,9 +150,9 @@ registerBlockType('catpow/chart', {
 										'td',
 										null,
 										wp.element.createElement(TextControl, {
-											onChange: function onChange(val) {
-												val.value = val;
-												setAttributes({ graph: graphCopy });
+											onChange: function onChange(value) {
+												val.value = value;
+												save();
 											},
 											value: val.value,
 											placeholder: '値' + (c + 1)
@@ -175,33 +166,52 @@ registerBlockType('catpow/chart', {
 			);
 		};
 
-		return [wp.element.createElement(
-			InspectorControls,
+		return wp.element.createElement(
+			Fragment,
 			null,
-			wp.element.createElement(SelectClassPanel, {
-				title: '\u30AF\u30E9\u30B9',
-				icon: 'art',
-				set: setAttributes,
-				attr: attributes,
-				selectiveClasses: selectiveClasses,
-				filters: CP.filters.chart || {}
-			}),
 			wp.element.createElement(
-				PanelBody,
-				{ title: 'CLASS', icon: 'admin-generic', initialOpen: false },
-				wp.element.createElement(TextareaControl, {
-					label: '\u30AF\u30E9\u30B9',
-					onChange: function onChange(clss) {
-						return setAttributes({ classes: clss });
-					},
-					value: classArray.join(' ')
+				BlockControls,
+				null,
+				wp.element.createElement(Toolbar, {
+					controls: [{
+						icon: 'edit',
+						title: 'EditMode',
+						isActive: EditMode,
+						onClick: function onClick() {
+							return setAttributes({ EditMode: !EditMode });
+						}
+					}]
 				})
+			),
+			wp.element.createElement(
+				InspectorControls,
+				null,
+				wp.element.createElement(SelectClassPanel, {
+					title: '\u30AF\u30E9\u30B9',
+					icon: 'art',
+					set: setAttributes,
+					attr: attributes,
+					selectiveClasses: selectiveClasses,
+					filters: CP.filters.chart || {}
+				}),
+				wp.element.createElement(
+					PanelBody,
+					{ title: 'CLASS', icon: 'admin-generic', initialOpen: false },
+					wp.element.createElement(TextareaControl, {
+						label: '\u30AF\u30E9\u30B9',
+						onChange: function onChange(clss) {
+							return setAttributes({ classes: clss });
+						},
+						value: classArray.join(' ')
+					})
+				)
+			),
+			EditMode ? DataTable() : wp.element.createElement(
+				'div',
+				{ className: classes },
+				el(Catpow[type + 'Output'], babelHelpers.extends({}, states, graph[0]))
 			)
-		), wp.element.createElement(
-			'div',
-			{ className: classes },
-			el(Catpow[type + 'Output'], graphCopy)
-		)];
+		);
 	},
 	save: function save(_ref2) {
 		var attributes = _ref2.attributes,
@@ -221,24 +231,12 @@ registerBlockType('catpow/chart', {
 			}
 		}];
 		var type = CP.getSelectiveClass({ attr: attributes }, selectiveClasses[0].values);
+		var states = CP.wordsToFlags(classes);
 
-		var states = {
-			hasTitle: false,
-			hasTitleCaption: false,
-			hasText: false,
-			hasBackgroundImage: false
-		};
-
-		var hasClass = function hasClass(cls) {
-			return classArray.indexOf(cls) !== -1;
-		};
-		Object.keys(states).forEach(function (key) {
-			this[key] = hasClass(key);
-		}, states);
 		return wp.element.createElement(
 			'div',
 			{ className: classes },
-			el(Catpow[type + 'Output'], graph[0])
+			el(Catpow[type + 'Output'], babelHelpers.extends({}, states, graph[0]))
 		);
 	}
 });
