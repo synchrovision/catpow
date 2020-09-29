@@ -1,0 +1,7 @@
+{
+    "require": {
+        "laminas/laminas-mvc": "^3.1",
+        "laminas/laminas-code": "^3.4",
+        "laminas/laminas-mail": "^2.12"
+    }
+}
