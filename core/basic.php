@@ -72,7 +72,7 @@ function array_isset($arr,$names){
 	}
 	return true;
 }
-function is_hash(&$array){
+function is_hash($array){
 	$i=0;
 	if(!is_array($array))return false;
 	foreach($array as $key=>$val)if($key!==$i++)return true;
