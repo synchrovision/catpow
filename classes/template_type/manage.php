@@ -7,6 +7,7 @@ namespace Catpow\template_type;
 
 class manage extends template_type{
 	public static function get_menus($conf_data){
+		if(empty($conf_data['show_in_menu'])){return [];}
 		return [
 			'top'=>[
 				$conf_data['label']=>$conf_data['alias_path']
