@@ -84,7 +84,7 @@ class cpdb extends query{
 		
 		$rows=$this->rows;
 		$class_name=\cp::get_class_name('data_type','cpdb');
-		foreach($rows as $id=>$row){
+		foreach($rows??[] as $id=>$row){
 			yield $id=>new $class_name($table,$row);
 		}
 	}
