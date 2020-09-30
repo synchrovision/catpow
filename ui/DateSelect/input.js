@@ -20,12 +20,12 @@ Catpow.DateSelect = function (_wp$element$Component) {
 		if (props.min) {
 			min = new Date(props.min);
 		} else {
-			min = new Date(Date.now() - 1000 * 3600 * 24 * 100);
+			min = new Date(Date.now() - 1000 * 3600 * 24 * 3000);
 		}
 		if (props.max) {
 			max = new Date(props.max);
 		} else {
-			max = new Date(Date.now() + 1000 * 3600 * 24 * 100);
+			max = new Date(Date.now() + 1000 * 3600 * 24 * 3000);
 		}
 
 		selections = {
