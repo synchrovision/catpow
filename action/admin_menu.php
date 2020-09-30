@@ -41,9 +41,8 @@ function add_menus($path_data,$conf_data,$menus){
 }
 /**
 * add_menu_page　add_submenu_pageの引数として用いる値を取得する
-* @param string $data_type 
-* @param string $data_name 
 * @param string $slug 規定値またはcontent_path
+* @param array $path_data 
 * @return string|array リンクの識別子、または[識別子=>コールバック]のペアの配列
 */
 function get_menu_link($slug,$path_data){
