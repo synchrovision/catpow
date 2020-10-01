@@ -90,34 +90,31 @@
 		const DataTable=()=>{
 			return (
 			 <div className="dataTable">
-				 <table>
+				 <table className="editItemsTable">
 					 <thead>
 						 <tr>
-							 <th colSpan={graph[0].cols.length+1}>
-								<TextControl
-									onChange={(label)=>{
-										graph[0].label=label;
-										save();
-									}}
-									value={graph[0].label}
-									placeholder='タイトル'
-								/>
-							 </th>
+							<th
+								align="center"
+								onBlur={(e)=>{
+									graph[0].title=e.currentTarget.innerHTML;
+									save();
+								}}
+								contentEditable={true}
+								colSpan={graph[0].cols.length+1}
+							>{graph[0].title}</th>
 						 </tr>
 						 <tr>
 							 <th></th>
 							 {graph[0].cols.map((col,c)=>{
 								 return (
-									 <th>
-										<TextControl
-											onChange={(label)=>{
-												col.label=label;
-												save();
-											}}
-											value={col.label}
-											placeholder={'項目'+(c+1)}
-										/>
-									 </th>
+									<th
+										align="center"
+										onBlur={(e)=>{
+											col.label=e.currentTarget.innerHTML;
+											save();
+										}}
+										contentEditable={true}
+									>{col.label}</th>
 								 );
 							 })}
 						 </tr>
@@ -126,28 +123,24 @@
 					 {graph[0].rows.map((row,r)=>{
 						 return (
 							<tr>
-								 <th>
-									<TextControl
-										onChange={(label)=>{
-											row.label=label
-											save();
-										}}
-										value={row.label}
-										placeholder={'項目'+(r+1)}
-									/>
-								 </th>
+								<th
+									align="center"
+									onBlur={(e)=>{
+										row.label=e.currentTarget.innerHTML;
+										save();
+									}}
+									contentEditable={true}
+									>{row.label}</th>
 								 {row.vals.map((val,c)=>{
 									 return (
-										 <td>
-											<TextControl
-												onChange={(value)=>{
-													val.value=value;
-													save();
-												}}
-												value={val.value}
-												placeholder={'値'+(c+1)}
-											/>
-										 </td>
+										<td
+											align="center"
+											onBlur={(e)=>{
+												val.value=e.currentTarget.innerHTML;
+												save();
+											}}
+											contentEditable={true}
+										>{val.value}</td>
 									 );
 								 })}
 							</tr>

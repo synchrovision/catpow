@@ -86,7 +86,7 @@ registerBlockType('catpow/chart', {
 				{ className: 'dataTable' },
 				wp.element.createElement(
 					'table',
-					null,
+					{ className: 'editItemsTable' },
 					wp.element.createElement(
 						'thead',
 						null,
@@ -95,15 +95,16 @@ registerBlockType('catpow/chart', {
 							null,
 							wp.element.createElement(
 								'th',
-								{ colSpan: graph[0].cols.length + 1 },
-								wp.element.createElement(TextControl, {
-									onChange: function onChange(label) {
-										graph[0].label = label;
+								{
+									align: 'center',
+									onBlur: function onBlur(e) {
+										graph[0].title = e.currentTarget.innerHTML;
 										save();
 									},
-									value: graph[0].label,
-									placeholder: '\u30BF\u30A4\u30C8\u30EB'
-								})
+									contentEditable: true,
+									colSpan: graph[0].cols.length + 1
+								},
+								graph[0].title
 							)
 						),
 						wp.element.createElement(
@@ -113,15 +114,15 @@ registerBlockType('catpow/chart', {
 							graph[0].cols.map(function (col, c) {
 								return wp.element.createElement(
 									'th',
-									null,
-									wp.element.createElement(TextControl, {
-										onChange: function onChange(label) {
-											col.label = label;
+									{
+										align: 'center',
+										onBlur: function onBlur(e) {
+											col.label = e.currentTarget.innerHTML;
 											save();
 										},
-										value: col.label,
-										placeholder: '項目' + (c + 1)
-									})
+										contentEditable: true
+									},
+									col.label
 								);
 							})
 						)
@@ -135,28 +136,28 @@ registerBlockType('catpow/chart', {
 								null,
 								wp.element.createElement(
 									'th',
-									null,
-									wp.element.createElement(TextControl, {
-										onChange: function onChange(label) {
-											row.label = label;
+									{
+										align: 'center',
+										onBlur: function onBlur(e) {
+											row.label = e.currentTarget.innerHTML;
 											save();
 										},
-										value: row.label,
-										placeholder: '項目' + (r + 1)
-									})
+										contentEditable: true
+									},
+									row.label
 								),
 								row.vals.map(function (val, c) {
 									return wp.element.createElement(
 										'td',
-										null,
-										wp.element.createElement(TextControl, {
-											onChange: function onChange(value) {
-												val.value = value;
+										{
+											align: 'center',
+											onBlur: function onBlur(e) {
+												val.value = e.currentTarget.innerHTML;
 												save();
 											},
-											value: val.value,
-											placeholder: '値' + (c + 1)
-										})
+											contentEditable: true
+										},
+										val.value
 									);
 								})
 							);
