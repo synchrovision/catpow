@@ -13,7 +13,7 @@ class mailform extends article_type{
 		$mailconf_post_type=$conf_data['data_name'].'_mail';
 		return [
 			'sub'=>[
-				'受信メール'=>$conf_data['meta']['mail']['alias_path'],
+				'受信メール'=>$conf_data['meta']['mail']['alias_path'].'/manage',
 				'メール設定'=>$mailconf_post_type
 			]
 		];
@@ -22,6 +22,7 @@ class mailform extends article_type{
 		$mailconf_post_type=$conf_data['data_name'].'_mail';
 		$conf_data=array_merge([
 			'label'=>'お問い合わせ',
+			'menu_icon'=>'dashicons-email-alt',
 			'public'=>false,
 			'hierarchical'=>true
 		],$conf_data);
