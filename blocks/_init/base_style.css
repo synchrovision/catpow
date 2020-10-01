@@ -201,6 +201,8 @@ table.editItemsTable {
     font-size: 1.2rem; }
     table.editItemsTable thead th {
       background-color: #f6f6f6; }
-  table.editItemsTable tbody td img {
-    width: 6em;
-    height: auto; }
+  table.editItemsTable tbody th {
+    background-color: #f9f9f9; }
+    table.editItemsTable tbody td img {
+      width: 6em;
+      height: auto; }

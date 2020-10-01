@@ -141,6 +141,9 @@ table.editItemsTable{
 		}
 	}
 	tbody{
+		th{
+			@include bg((c:t 3));
+		}
 		td{
 			img{
 				@include bnd((w:6em,h:a));
