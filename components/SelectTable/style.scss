@@ -12,6 +12,7 @@ table.SelectTable{
 	}
 	&.hasSmallFontSize{
 		@include txt((p:0.8rem));
+		@include bp(2){@include txt((p:1.2rem));}
 	}
 	tbody{
 		tr{
