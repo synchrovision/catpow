@@ -363,7 +363,7 @@ var CP = {
 			}
 		}
 		items[index].classes = classArray.join(' ');
-		set(babelHelpers.defineProperty({}, itemsKey, items));
+		set(babelHelpers.defineProperty({}, itemsKey, JSON.parse(JSON.stringify(items))));
 	},
 	getItemPattern: function getItemPattern(_ref11) {
 		var items = _ref11.items,

@@ -242,7 +242,7 @@
 		if(i===-1){if(pattern){classArray.push('pattern'+pattern);}}
 		else{if(pattern){classArray.splice(i,1,'pattern'+pattern);}else{classArray.splice(i,1)}}
 		items[index].classes=classArray.join(' ');
-		set({[itemsKey]:items});
+		set({[itemsKey]:JSON.parse(JSON.stringify(items))});
 	},
 	getItemPattern:({items,index})=>{
 		let p=items[index].classes.split(' ').find(cls=>(cls.substr(0,7)==='pattern'));
