@@ -1,0 +1,14 @@
+@charset "utf-8";
+.SelectPreparedImage ul {
+  display: block;
+  width: 30rem;
+  background-color: #dadada; }
+  .SelectPreparedImage ul .item {
+    display: inline-block;
+    width: 10%;
+    cursor: pointer; }
+    .SelectPreparedImage ul .item img {
+      width: 100%;
+      height: auto; }
+    .SelectPreparedImage ul .item.active {
+      background-color: #007cba; }

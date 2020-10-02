@@ -1,0 +1,18 @@
+@import 'admin_style_config.scss';
+
+.SelectPreparedImage{
+	ul{
+		@include bnd((d:b,w:30rem));
+		@include bg((c:t 20));
+		.item{
+			@include bnd((d:ib,w:10%));
+			@include usr((c:p));
+			img{
+				@include bnd((w:f,h:a));
+			}
+			&.active{
+				@include bg((c:m));
+			}
+		}
+	}
+}
