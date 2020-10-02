@@ -11,5 +11,6 @@ switch($prm[0]){
 	case 'date':the_date();break;
 	case 'author':the_author();break;
 	case 'url':the_permalink();break;
+	case 'class':echo get_post_class();break;
 	default: echo $GLOBALS['post']->{$prm[0]};
 }
