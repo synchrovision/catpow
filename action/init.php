@@ -387,6 +387,12 @@ add_filter('redirect_canonical',function($redirect_url,$request_url){
 	}
 	return $redirect_url;
 },10,2);
+add_filter('nav_menu_css_class',function($classes,$item,$args,$depth){
+	if($post_class=get_post_meta($item->ID,'post_class')){
+		$classes+=$post_class;
+	}
+	return $classes;
+},100,4);
 add_filter('nav_menu_link_attributes',function($atts,$item,$args,$depth){
 	static $crr_url,$crr_url_len;
 	if(!isset($crr_url)){
