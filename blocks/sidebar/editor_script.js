@@ -67,6 +67,7 @@ registerBlockType('catpow/sidecolumn', {
 		    className = _ref3.className,
 		    setAttributes = _ref3.setAttributes;
 
+		console.log('catpow/sidecolumn edit render');
 		return [wp.element.createElement(
 			'div',
 			{ className: 'column column_side' },
@@ -151,7 +152,22 @@ registerBlockType('catpow/articlenav', {
 	edit: function edit(_ref8) {
 		var attributes = _ref8.attributes,
 		    className = _ref8.className,
-		    setAttributes = _ref8.setAttributes;
+		    setAttributes = _ref8.setAttributes,
+		    clientId = _ref8.clientId;
+		var useEffect = wp.element.useEffect;
+
+
+		var parentClientId = wp.data.select('core/block-editor').getBlockParentsByBlockName(clientId, 'catpow/sidebar')[0];
+		var mainContents = wp.data.select('core/block-editor').getBlock(parentClientId).innerBlocks[0].innerBlocks;
+
+		var getSectionTitles = function getSectionTitles(innerBlocks) {
+			return innerBlocks.filter(function (block) {
+				return block.name == 'catpow/section';
+			}).map(function (block) {
+				return block.attributes.title;
+			});
+		};
+		console.log(getSectionTitles(mainContents));
 
 		return [wp.element.createElement(
 			'div',
@@ -159,15 +175,17 @@ registerBlockType('catpow/articlenav', {
 			wp.element.createElement(
 				'ul',
 				{ 'class': 'article_nav' },
-				wp.element.createElement(
-					'li',
-					null,
-					wp.element.createElement(
-						'h3',
+				getSectionTitles(mainContents).map(function (title) {
+					return wp.element.createElement(
+						'li',
 						null,
-						'[ArticleNav]'
-					)
-				)
+						wp.element.createElement(
+							'h3',
+							null,
+							wp.element.createElement(RichText.Content, { value: title })
+						)
+					);
+				})
 			)
 		)];
 	},

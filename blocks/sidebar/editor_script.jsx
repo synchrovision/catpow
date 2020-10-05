@@ -54,6 +54,7 @@ registerBlockType('catpow/sidecolumn',{
 	category:'catpow',
     parent:['catpow/sidebar'],
 	edit({attributes,className,setAttributes}){
+		console.log('catpow/sidecolumn edit render');
         return [
 			<div className={'column column_side'}>
 				<div class="column_side_container">
@@ -96,7 +97,7 @@ registerBlockType('catpow/maincolumn',{
 	edit({attributes,className,setAttributes}){
         return [
 			<div className={'column column_main'}>
-				<InnerBlocks template={[['catpow/section']]} templateLock={false}/>
+				<InnerBlocks template={[['catpow/section']]} templateLock={false} />
 			</div>
         ];
     },
@@ -114,13 +115,25 @@ registerBlockType('catpow/articlenav',{
 	icon:'editor-ul',
 	category:'catpow',
     parent:['catpow/sidecolumn'],
-	edit({attributes,className,setAttributes}){
+	edit({attributes,className,setAttributes,clientId}){
+		const {useEffect}=wp.element;
+		
+		const parentClientId=wp.data.select('core/block-editor').getBlockParentsByBlockName(clientId,'catpow/sidebar')[0];
+		const mainContents=wp.data.select('core/block-editor').getBlock(parentClientId).innerBlocks[0].innerBlocks;
+		
+		const getSectionTitles=(innerBlocks)=>{
+			return innerBlocks.filter((block)=>block.name=='catpow/section').map((block)=>{
+				return block.attributes.title;
+			});
+		}
+		console.log(getSectionTitles(mainContents));
+		
         return [
 			<div className={className}>
                 <ul class="article_nav">
-					<li>
-						<h3>[ArticleNav]</h3>
-					</li>
+					{getSectionTitles(mainContents).map((title)=>{
+						return <li><h3><RichText.Content value={title}/></h3></li>;
+					})}
 				</ul>
 			</div>
         ];
