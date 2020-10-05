@@ -278,7 +278,7 @@ registerBlockType('catpow/section', {
 		    className = _ref2.className,
 		    setAttributes = _ref2.setAttributes;
 		var id = attributes.id,
-		    icon = attributes.icon,
+		    navIcon = attributes.navIcon,
 		    classes = attributes.classes,
 		    prefix = attributes.prefix,
 		    title = attributes.title,
@@ -302,7 +302,7 @@ registerBlockType('catpow/section', {
 		var level = CP.getNumberClass({ attr: attributes }, 'level');
 
 		var imageKeys = {
-			icon: { src: "icon" },
+			navIcon: { src: "icon" },
 			image: { mime: "imageMime", src: "imageSrc", alt: "imageAlt", srcset: "imageSrcset" },
 			headerImage: { mime: "headerImageMime", src: "headerImageSrc", alt: "headerImageAlt", srcset: "headerImageSrcset" },
 			headerBackgroundImage: { mime: "headerBackgroundImageMime", src: "headerBackgroundImageSrc", alt: "headerBackgroundImageAlt", srcset: "headerBackgroundImageSrcset" },
@@ -311,7 +311,7 @@ registerBlockType('catpow/section', {
 
 		return wp.element.createElement(
 			'section',
-			{ id: id, className: classes, 'data-icon': icon },
+			{ id: id, className: classes, 'data-icon': navIcon },
 			states.hasImage && wp.element.createElement(
 				'div',
 				{ 'class': 'image' },

@@ -329,7 +329,7 @@
     },
 	save({attributes,className,setAttributes}){
         const {
-			id,icon,classes,prefix,title,read,
+			id,navIcon,classes,prefix,title,read,
 			headerImageSrc,headerImageSrcset,headerImageAlt,headerImageCode,
 			headerBackgroundImageCode,
 			imageSrc,imageSrcset,imageAlt,imageCode,
@@ -341,7 +341,7 @@
 		var level=CP.getNumberClass({attr:attributes},'level');
 		
 		const imageKeys={
-			icon:{src:"icon"},
+			navIcon:{src:"icon"},
 			image:{mime:"imageMime",src:"imageSrc",alt:"imageAlt",srcset:"imageSrcset"},
 			headerImage:{mime:"headerImageMime",src:"headerImageSrc",alt:"headerImageAlt",srcset:"headerImageSrcset"},
 			headerBackgroundImage:{mime:"headerBackgroundImageMime",src:"headerBackgroundImageSrc",alt:"headerBackgroundImageAlt",srcset:"headerBackgroundImageSrcset"},
@@ -349,7 +349,7 @@
 		};
 		
 		return (
-			<section id={id} className={classes} data-icon={icon}>
+			<section id={id} className={classes} data-icon={navIcon}>
 				{states.hasImage && 
 					<div class="image">
 						{(states.isTemplate && imageCode)?(
