@@ -80,15 +80,12 @@ window.Catpow=window.Catpow || {};
 			offset=offset?offset:0;
 			if(offset instanceof jQuery){offsetObject=offset.get(0);}
 			else if(offset instanceof HTMLElement){offsetObject=offset;}
-			var $parent=$(this).parent();
-			var $control=$(this);
-			var $window=$(window);
-			var s=$window.scrollTop();
-			var ts=0;
-			var ty=0;
-			var winh;
+			var $parent=$(this).parent(),$control=$(this),$window=$(window);
+			var s=$window.scrollTop(),ts=0,ty=0,winh;
 			$control.init=function(){
 				if($parent.css('position')==='static'){$parent.css({"position":"relative"});}
+				$(this).css({position:'static',width:'auto'});
+				$(this).width($(this).width());
 				$control.update();
 			}
 			$control.update=function(){
