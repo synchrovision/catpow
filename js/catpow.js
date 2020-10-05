@@ -1,3 +1,4 @@
+/* global console */
 jQuery.catpow=jQuery.catpow || {};
 window.Catpow=window.Catpow || {};
 
@@ -75,7 +76,10 @@ window.Catpow=window.Catpow || {};
 
 		//親要素内でスクロールフィックス、offset値だけ上にマージンをとる
 		cp_scrollfix:function(offset){
+			var offsetObject;
 			offset=offset?offset:0;
+			if(offset instanceof jQuery){offsetObject=offset.get(0);}
+			else if(offset instanceof HTMLElement){offsetObject=offset;}
 			var $parent=$(this).parent();
 			var $control=$(this);
 			var $window=$(window);
@@ -83,19 +87,15 @@ window.Catpow=window.Catpow || {};
 			var ts=0;
 			var ty=0;
 			var winh;
-			if($parent.css('position')==='static'){$parent.css({"position":"relative"});}
 			$control.init=function(){
-				winh=window.innerHeight;
-				$control.each(function(){
-					$(this).css({transform:'translate3d(0,0,0)'});
-					this.o=this.parentNode.getBoundingClientRect().top-this.getBoundingClientRect().top;
-				});
+				if($parent.css('position')==='static'){$parent.css({"position":"relative"});}
 				$control.update();
 			}
 			$control.update=function(){
 				winh=window.innerHeight;
 				ts=$window.scrollTop()-s;
 				s=$window.scrollTop();
+				if(offsetObject){offset=offsetObject.getBoundingClientRect().bottom;}
 				$control.each(function(){
 					var bnd1=this.getBoundingClientRect();
 					var bnd2=this.parentNode.getBoundingClientRect();

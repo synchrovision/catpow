@@ -1,0 +1,25 @@
+@charset "utf-8";
+.SelectColor ul {
+  list-style: none; }
+  .SelectColor ul li {
+    display: inline-block;
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    margin: 0.5rem;
+    border-radius: 2rem;
+    cursor: pointer; }
+    .SelectColor ul li.fillColor0 {
+      background-color: #ececec; }
+    .SelectColor ul li::after {
+      content: ' ';
+      display: block;
+      position: absolute;
+      top: 1px;
+      bottom: 1px;
+      left: 1px;
+      right: 1px;
+      border-radius: 2rem;
+      background-color: #fefefe; }
+    .SelectColor ul li.active::after {
+      display: none; }
