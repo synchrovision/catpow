@@ -13,5 +13,6 @@ switch($prm[0]){
 	case 'url':the_permalink();break;
 	case 'href':echo substr(get_the_permalink(),strpos(get_the_permalink(),'://')+3);break;
 	case 'class':echo get_post_class();break;
+	case 'thumbnail':the_post_thumbnail();break;
 	default: echo $GLOBALS['post']->{$prm[0]};
 }
