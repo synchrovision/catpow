@@ -13,8 +13,8 @@ class icon extends \Catpow\api{
 				$size=getimagesize($image_file);
 				$data[]=[
 					'url'=>$dir_url.'/'.basename($image_file),
-					'width'=>$size[0],
-					'height'=>$size[1],
+					'width'=>$size[0]??false,
+					'height'=>$size[1]??false,
 					'alt'=>substr(basename($image_file),0,-4)
 				];
 			}
