@@ -10,7 +10,7 @@ class gmap extends data{
 		static $token,$mapOptions_default,$markerOptions_default,$is_called;
 		
 		if($prm === 'url'){
-			return 'google.com/maps/search/?api=1&query='.$val[0]['address'][0];
+			return 'google.com/maps/search/?api=1&query='.($val[0]['address'][0]??'');
 		}
 		
 		wp_enqueue_script('cp_gmap');
