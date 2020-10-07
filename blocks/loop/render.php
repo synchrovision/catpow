@@ -10,7 +10,13 @@ else{
 		$query=$matches[1](shortcode_parse_atts($matches[3]));
 	}
 	else{
-		$query=wp_parse_args($attr['query']);
+		$cond=new util\cond($data['query']);
+		$query=[
+			'relation'=>$cond->relation,
+			'meta_query'=>$cond->lines,
+			'orderby'=>$cond->orderby,
+			'limit'=>$cond->limit
+		];
 	}
 }
 Catpow\loop($attr['content_path'],$query,['content'=>$content]);
