@@ -10,14 +10,21 @@
 namespace Catpow\util;
 class cond{
 	public static
-		$cond_line_regex='/^(?P<key>\w+)\s*(?P<compare>(?:=|!=|>|>=|<|<=|LIKE|NOT LIKE|IN|NOT IN|BETWEEN|NOT BETWEEN|EXISTS|NOT EXISTS))\s*(?P<value>.*)$/';
-	public $relation,$lines=[];
+		$cond_line_regex='/^(?P<key>\w+)(?:\:(?P<name>\w+))?\s*(?P<compare>(?:=|!=|>|>=|<|<=|LIKE|NOT LIKE|IN|NOT IN|BETWEEN|NOT BETWEEN|EXISTS|NOT EXISTS))\s*(?P<value>.*)$/',
+		$orderby_line_regex='/^ORDERBY (?P<orderby>\w+)(?: (?P<order>ASC|DESC))?$/i',
+		$limit_line_regex='/^LIMIT (?P<limit>\-?\d+)$/i';
+	public $relation,$lines=[],$orderby,$limit;
 	public function __construct($data){
 		if(is_string($data)){$data=explode("\n",$data);}
 		foreach($data as $line){
 			if($line==='[OR]'){$this->relation='OR';continue;}
+			if(preg_match(self::$orderby_line_regex,$line,$matches)){
+				$this->orderby[$matches['orderby']]=$matches['order']??'ASC';continue;
+			}
+			if(preg_match(self::$limit_line_regex,$line,$matches)){$this->limit=$matches['limit'];continue;}
 			if($line=self::parse_line($line)){
-				$this->lines[]=$line;
+				if(empty($line['name'])){$this->lines[]=$line;}
+				else{$this->lines[$line['name']]=$line;}
 			}
 		}
 		if(empty($this->relation)){$this->relation='AND';}
@@ -61,7 +68,7 @@ class cond{
 					unset($matches['value']);
 					break;
 			}
-			return array_intersect_key($matches,['key'=>0,'compare'=>0,'value'=>0]);
+			return array_intersect_key($matches,['key'=>0,'compare'=>0,'value'=>0,'name'=>0]);
 		}
 		return false;
 	}
