@@ -10,7 +10,7 @@ else{
 		$query=$matches[1](shortcode_parse_atts($matches[3]));
 	}
 	else{
-		$cond=new util\cond($data['query']);
+		$cond=new Catpow\util\cond($data['query']);
 		$query=[
 			'relation'=>$cond->relation,
 			'meta_query'=>$cond->lines,
