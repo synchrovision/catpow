@@ -13,59 +13,6 @@ registerBlockType('catpow/listed', {
 			}
 		}]
 	},
-	attributes: {
-		version: { type: 'number', default: 0 },
-		classes: { source: 'attribute', selector: 'ul', attribute: 'class', default: 'wp-block-catpow-listed menu medium hasHeader hasTitle hasTitleCaption hasImage hasText' },
-		items: {
-			source: 'query',
-			selector: 'li.item',
-			query: {
-				classes: { source: 'attribute', attribute: 'class' },
-				title: { source: 'children', selector: 'header .text h3' },
-				titleCaption: { source: 'children', selector: 'header .text p' },
-
-				headerImageSrc: { source: 'attribute', selector: 'header .image [src]', attribute: 'src' },
-				headerImageAlt: { source: 'attribute', selector: 'header .image [src]', attribute: 'alt' },
-				headerImageCode: { source: 'text', selector: 'header .image' },
-
-				subImageSrc: { source: 'attribute', selector: '.contents .image [src]', attribute: 'src' },
-				subImageAlt: { source: 'attribute', selector: '.contents .image [src]', attribute: 'alt' },
-				subImageCode: { source: 'text', selector: '.contents .image' },
-
-				src: { source: 'attribute', selector: 'li>.image [src]', attribute: 'src' },
-				alt: { source: 'attribute', selector: 'li>.image [src]', attribute: 'alt' },
-				imageCode: { source: 'text', selector: 'li>.image' },
-
-				subTitle: { source: 'children', selector: '.contents h4' },
-				text: { source: 'children', selector: '.contents p' },
-				linkUrl: { source: 'attribute', selector: '.link a', attribute: 'href' },
-
-				backgroundImageSrc: { source: 'attribute', selector: '.background [src]', attribute: 'src', default: cp.theme_url + '/images/dummy_bg.jpg' },
-				backgroundImageSrcset: { source: 'attribute', selector: '.background [src]', attribute: 'srcset' },
-				backgroundImageCode: { source: 'text', selector: '.background' }
-			},
-			default: [].concat(babelHelpers.toConsumableArray(Array(3))).map(function () {
-				return {
-					classes: 'item',
-					title: ['Title'],
-					titleCaption: ['Caption'],
-					headerImageSrc: cp.theme_url + '/images/dummy.jpg',
-					headerImageAlt: 'dummy',
-					subTitle: ['SubTitle'],
-					src: cp.theme_url + '/images/dummy.jpg',
-					alt: 'dummy',
-					text: ['Text'],
-					linkUrl: cp.home_url
-				};
-			})
-		},
-		countPrefix: { source: 'text', selector: '.counter .prefix', default: '' },
-		countSuffix: { source: 'text', selector: '.counter .suffix', default: '' },
-		subCountPrefix: { source: 'text', selector: '.subcounter .prefix', default: '' },
-		subCountSuffix: { source: 'text', selector: '.subcounter .suffix', default: '' },
-		loopParam: { type: 'text', default: '' },
-		loopCount: { type: 'number', default: 1 }
-	},
 	example: CP.example,
 	edit: function edit(_ref) {
 		var attributes = _ref.attributes,
@@ -116,7 +63,7 @@ registerBlockType('catpow/listed', {
 		}, {
 			label: 'テンプレート',
 			values: 'isTemplate',
-			sub: [{ label: 'ループ', values: 'doLoop', sub: [{ label: 'パラメータ', input: 'text', key: 'loopParam' }, { label: 'ループ数', input: 'range', key: 'loopCount', min: 1, max: 16 }] }]
+			sub: [{ input: 'bool', label: 'ループ', key: 'doLoop', sub: [{ label: 'content path', input: 'text', key: 'content_path' }, { label: 'query', input: 'textarea', key: 'query' }, { label: 'プレビューループ数', input: 'range', key: 'loopCount', min: 1, max: 16 }] }]
 		}];
 		var itemTemplateSelectiveClasses = [{
 			input: 'text',
@@ -411,7 +358,8 @@ registerBlockType('catpow/listed', {
 		    subCountSuffix = attributes.subCountSuffix,
 		    linkUrl = attributes.linkUrl,
 		    linkText = attributes.linkText,
-		    loopParam = attributes.loopParam;
+		    loopParam = attributes.loopParam,
+		    doLoop = attributes.doLoop;
 
 		var classArray = _.uniq(attributes.classes.split(' '));
 
@@ -553,9 +501,179 @@ registerBlockType('catpow/listed', {
 		return wp.element.createElement(
 			'ul',
 			{ className: classes },
-			states.doLoop && '[loop_template ' + (loopParam || '') + ']',
-			rtn,
-			states.doLoop && '[/loop_template]'
+			doLoop ? wp.element.createElement(
+				'loopBlockContent',
+				null,
+				rtn
+			) : rtn
 		);
-	}
+	},
+
+	deprecated: [{
+		save: function save(_ref3) {
+			var attributes = _ref3.attributes,
+			    className = _ref3.className;
+			var items = attributes.items,
+			    classes = attributes.classes,
+			    countPrefix = attributes.countPrefix,
+			    countSuffix = attributes.countSuffix,
+			    subCountPrefix = attributes.subCountPrefix,
+			    subCountSuffix = attributes.subCountSuffix,
+			    linkUrl = attributes.linkUrl,
+			    linkText = attributes.linkText,
+			    loopParam = attributes.loopParam;
+
+			var classArray = _.uniq(attributes.classes.split(' '));
+
+			var states = CP.wordsToFlags(classes);
+
+			var imageKeys = {
+				image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
+				headerImage: { src: "headerImageSrc", alt: "headerImageAlt", code: "headerImageCode", items: "items" },
+				subImage: { src: "subImageSrc", alt: "subImageAlt", code: "subImageCode", items: "items" },
+				backgroundImage: { src: "backgroundImageSrc", srcset: "backgroundImageSrcset", code: "backgroundImageCode", items: "items" }
+			};
+
+			var rtn = [];
+			items.map(function (item, index) {
+				rtn.push(wp.element.createElement(
+					'li',
+					{ className: item.classes },
+					states.hasImage && wp.element.createElement(
+						'div',
+						{ className: 'image' },
+						wp.element.createElement(ResponsiveImage, {
+							attr: attributes,
+							keys: imageKeys.image,
+							index: index,
+							isTemplate: states.isTemplate
+						})
+					),
+					states.hasHeader && wp.element.createElement(
+						'header',
+						null,
+						states.hasCounter && wp.element.createElement(
+							'div',
+							{ className: 'counter' },
+							countPrefix && wp.element.createElement(
+								'span',
+								{ 'class': 'prefix' },
+								countPrefix
+							),
+							wp.element.createElement(
+								'span',
+								{ className: 'number' },
+								index + 1
+							),
+							countSuffix && wp.element.createElement(
+								'span',
+								{ 'class': 'suffix' },
+								countSuffix
+							)
+						),
+						states.hasHeaderImage && wp.element.createElement(
+							'div',
+							{ className: 'image' },
+							wp.element.createElement(ResponsiveImage, {
+								attr: attributes,
+								keys: imageKeys.headerImage,
+								index: index,
+								isTemplate: states.isTemplate
+							})
+						),
+						wp.element.createElement(
+							'div',
+							{ className: 'text' },
+							states.hasTitle && wp.element.createElement(
+								'h3',
+								null,
+								wp.element.createElement(RichText.Content, { value: item.title })
+							),
+							states.hasTitle && states.hasTitleCaption && wp.element.createElement(
+								'p',
+								null,
+								wp.element.createElement(RichText.Content, { value: item.titleCaption })
+							)
+						)
+					),
+					(states.hasSubImage || states.hasSubTitle || states.hasText) && wp.element.createElement(
+						'div',
+						{ 'class': 'contents' },
+						states.hasSubCounter && wp.element.createElement(
+							'div',
+							{ className: 'subcounter' },
+							subCountPrefix && wp.element.createElement(
+								'span',
+								{ 'class': 'prefix' },
+								subCountPrefix
+							),
+							wp.element.createElement(
+								'span',
+								{ className: 'number' },
+								index + 1
+							),
+							subCountSuffix && wp.element.createElement(
+								'span',
+								{ 'class': 'suffix' },
+								subCountSuffix
+							)
+						),
+						states.hasSubImage && wp.element.createElement(
+							'div',
+							{ className: 'image' },
+							wp.element.createElement(ResponsiveImage, {
+								attr: attributes,
+								keys: imageKeys.subImage,
+								index: index,
+								isTemplate: states.isTemplate
+							})
+						),
+						states.hasSubTitle && wp.element.createElement(
+							'h4',
+							null,
+							wp.element.createElement(RichText.Content, { value: item.subTitle })
+						),
+						states.hasText && wp.element.createElement(
+							'p',
+							null,
+							wp.element.createElement(RichText.Content, { value: item.text })
+						)
+					),
+					states.hasBackgroundImage && wp.element.createElement(
+						'div',
+						{ className: 'background' },
+						wp.element.createElement(ResponsiveImage, {
+							attr: attributes,
+							keys: imageKeys.backgroundImage,
+							index: index,
+							isTemplate: states.isTemplate
+						})
+					),
+					states.hasLink && item.linkUrl && wp.element.createElement(
+						'div',
+						{ className: 'link' },
+						wp.element.createElement(
+							'a',
+							{ href: item.linkUrl },
+							' '
+						)
+					)
+				));
+			});
+			return wp.element.createElement(
+				'ul',
+				{ className: classes },
+				state.doLoop && '[loop_template ' + (loopParam || '') + ']',
+				rtn,
+				state.doLoop && '[/loop_template]'
+			);
+		},
+		migrate: function migrate(attributes) {
+			var states = CP.wordsToFlags(classes);
+			attributes.content_path = attributes.loopParam.split(' ')[0];
+			attributes.query = attributes.loopParam.split(' ').slice(1).join("\n");
+			attributes.doLoop = states.doLoop;
+			return attributes;
+		}
+	}]
 });

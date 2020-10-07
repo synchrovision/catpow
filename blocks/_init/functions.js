@@ -985,6 +985,19 @@ var SelectClassPanel = function SelectClassPanel(props) {
 								CP.setJsonValue(props, prm.json, prm.key, val);
 							}
 						}));
+						if (prm.sub) {
+							if (JSON.parse(props.attr[prm.json])[prm.key]) {
+								var sub = [];
+								prm.sub.map(function (prm) {
+									sub.push(SelectClass(prm));
+								});
+								rtn.push(wp.element.createElement(
+									'div',
+									{ className: 'sub' },
+									sub
+								));
+							}
+						}
 						break;
 					case 'flag':
 						var value = CP.getJsonValue(props, prm.json, prm.key) || 0;
@@ -1077,6 +1090,15 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							}
 						}));
 						break;
+					case 'textarea':
+						rtn.push(wp.element.createElement(TextareaControl, {
+							label: prm.label,
+							value: props.attr[prm.key],
+							onChange: function onChange(val) {
+								var data = {};data[prm.key] = val;props.set(data);
+							}
+						}));
+						break;
 					case 'range':
 						if (!prm.coef) {
 							prm.coef = 1;
@@ -1091,6 +1113,28 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							max: prm.max,
 							step: prm.step
 						}));
+						break;
+					case 'bool':
+						rtn.push(wp.element.createElement(ToggleControl, {
+							label: prm.label,
+							checked: props.attr[prm.key],
+							onChange: function onChange(val) {
+								props.set(babelHelpers.defineProperty({}, prm.key, val));
+							}
+						}));
+						if (prm.sub) {
+							if (props.attr[prm.key]) {
+								var _sub = [];
+								prm.sub.map(function (prm) {
+									_sub.push(SelectClass(prm));
+								});
+								rtn.push(wp.element.createElement(
+									'div',
+									{ className: 'sub' },
+									_sub
+								));
+							}
+						}
 						break;
 					case 'image':
 						if (prm.label) {
@@ -1195,14 +1239,14 @@ var SelectClassPanel = function SelectClassPanel(props) {
 				if (prm.sub) {
 					var currentClass = CP.getSelectiveClass(props, prm.values, prm.key);
 					if (currentClass && prm.sub[currentClass]) {
-						var sub = [];
+						var _sub2 = [];
 						prm.sub[currentClass].map(function (prm) {
-							sub.push(SelectClass(prm));
+							_sub2.push(SelectClass(prm));
 						});
 						rtn.push(wp.element.createElement(
 							'div',
 							{ className: 'sub' },
-							sub
+							_sub2
 						));
 					}
 				}
@@ -1216,14 +1260,14 @@ var SelectClassPanel = function SelectClassPanel(props) {
 				}));
 				if (prm.sub) {
 					if (CP.hasClass(props, prm.values, prm.key)) {
-						var _sub = [];
+						var _sub3 = [];
 						prm.sub.map(function (prm) {
-							_sub.push(SelectClass(prm));
+							_sub3.push(SelectClass(prm));
 						});
 						rtn.push(wp.element.createElement(
 							'div',
 							{ className: 'sub' },
-							_sub
+							_sub3
 						));
 					}
 				}
@@ -1465,14 +1509,14 @@ var SelectItemClassPanel = function SelectItemClassPanel(props) {
 			}));
 			if (prm.sub) {
 				if (CP.hasItemClass(props, prm.values)) {
-					var _sub2 = [];
+					var _sub4 = [];
 					prm.sub.map(function (prm) {
-						_sub2.push(selectItemClass(prm));
+						_sub4.push(selectItemClass(prm));
 					});
 					rtn.push(wp.element.createElement(
 						'div',
 						{ className: 'sub' },
-						_sub2
+						_sub4
 					));
 				}
 			}

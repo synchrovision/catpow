@@ -678,6 +678,13 @@ const SelectClassPanel=(props)=>{
                                 onChange={(val)=>{CP.setJsonValue(props,prm.json,prm.key,val);}}
                             />
                         );
+						if(prm.sub){
+							if(JSON.parse(props.attr[prm.json])[prm.key]){
+								let sub=[];
+								prm.sub.map((prm)=>{sub.push(SelectClass(prm))});
+								rtn.push(<div className="sub">{sub}</div>);
+							}
+						}
 						break;
 					case 'flag':
 						let value=CP.getJsonValue(props,prm.json,prm.key) || 0;
@@ -768,6 +775,15 @@ const SelectClassPanel=(props)=>{
                             />
                         );
                         break;
+                    case 'textarea':
+                        rtn.push(
+                            <TextareaControl
+                                label={prm.label}
+                                value={props.attr[prm.key]}
+                                onChange={(val)=>{let data={};data[prm.key]=val;props.set(data);}}
+                            />
+                        );
+                        break;
                     case 'range':
                         if(!prm.coef){prm.coef=1;}
                         rtn.push(
@@ -781,6 +797,22 @@ const SelectClassPanel=(props)=>{
                             />
                         );
                         break;
+					case 'bool':
+                        rtn.push(
+                            <ToggleControl
+                                label={prm.label}
+                                checked={props.attr[prm.key]}
+                                onChange={(val)=>{props.set({[prm.key]:val});}}
+                            />
+                        );
+						if(prm.sub){
+							if(props.attr[prm.key]){
+								let sub=[];
+								prm.sub.map((prm)=>{sub.push(SelectClass(prm))});
+								rtn.push(<div className="sub">{sub}</div>);
+							}
+						}
+						break;
                     case 'image':
 						if(prm.label){
 							rtn.push(<h5>{prm.label}</h5>);

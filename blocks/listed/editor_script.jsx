@@ -15,59 +15,6 @@
 			},
 		]
 	},
-	attributes:{
-		version:{type:'number',default:0},
-		classes:{source:'attribute',selector:'ul',attribute:'class',default:'wp-block-catpow-listed menu medium hasHeader hasTitle hasTitleCaption hasImage hasText'},
-		items:{
-			source:'query',
-			selector:'li.item',
-			query:{
-				classes:{source:'attribute',attribute:'class'},
-				title:{source:'children',selector:'header .text h3'},
-				titleCaption:{source:'children',selector:'header .text p'},
-				
-				headerImageSrc:{source:'attribute',selector:'header .image [src]',attribute:'src'},
-				headerImageAlt:{source:'attribute',selector:'header .image [src]',attribute:'alt'},
-				headerImageCode:{source:'text',selector:'header .image'},
-				
-				subImageSrc:{source:'attribute',selector:'.contents .image [src]',attribute:'src'},
-				subImageAlt:{source:'attribute',selector:'.contents .image [src]',attribute:'alt'},
-				subImageCode:{source:'text',selector:'.contents .image'},
-				
-				src:{source:'attribute',selector:'li>.image [src]',attribute:'src'},
-				alt:{source:'attribute',selector:'li>.image [src]',attribute:'alt'},
-				imageCode:{source:'text',selector:'li>.image'},
-				
-				subTitle:{source:'children',selector:'.contents h4'},
-				text:{source:'children',selector:'.contents p'},
-				linkUrl:{source:'attribute',selector:'.link a',attribute:'href'},
-
-				backgroundImageSrc:{source:'attribute',selector:'.background [src]',attribute:'src',default:cp.theme_url+'/images/dummy_bg.jpg'},
-				backgroundImageSrcset:{source:'attribute',selector:'.background [src]',attribute:'srcset'},
-				backgroundImageCode:{source:'text',selector:'.background'},
-			},
-			default:[...Array(3)].map(()=>{
-				return {
-					classes:'item',
-					title:['Title'],
-					titleCaption:['Caption'],
-					headerImageSrc:cp.theme_url+'/images/dummy.jpg',
-					headerImageAlt:'dummy',
-					subTitle:['SubTitle'],
-					src:cp.theme_url+'/images/dummy.jpg',
-					alt:'dummy',
-					text:['Text'],
-					linkUrl:cp.home_url
-				}
-			})
-		},
-		countPrefix:{source:'text',selector:'.counter .prefix',default:''},
-		countSuffix:{source:'text',selector:'.counter .suffix',default:''},
-		subCountPrefix:{source:'text',selector:'.subcounter .prefix',default:''},
-		subCountSuffix:{source:'text',selector:'.subcounter .suffix',default:''},
-		loopParam:{type:'text',default:''},
-		loopCount:{type:'number',default:1}
-	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {items,classes,countPrefix,countSuffix,subCountPrefix,subCountSuffix,loopCount}=attributes;
@@ -133,9 +80,10 @@
 				label:'テンプレート',
 				values:'isTemplate',
 				sub:[
-					{label:'ループ',values:'doLoop',sub:[
-						{label:'パラメータ',input:'text',key:'loopParam'},
-						{label:'ループ数',input:'range',key:'loopCount',min:1,max:16}
+					{input:'bool',label:'ループ',key:'doLoop',sub:[
+						{label:'content path',input:'text',key:'content_path'},
+						{label:'query',input:'textarea',key:'query'},
+						{label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
 					]}
 				]
 			}
@@ -393,7 +341,7 @@
         );
     },
 	save({attributes,className}){
-		const {items,classes,countPrefix,countSuffix,subCountPrefix,subCountSuffix,linkUrl,linkText,loopParam}=attributes;
+		const {items,classes,countPrefix,countSuffix,subCountPrefix,subCountSuffix,linkUrl,linkText,loopParam,doLoop}=attributes;
 		var classArray=_.uniq(attributes.classes.split(' '));
 		
 		var states=CP.wordsToFlags(classes);
@@ -484,10 +432,119 @@
 		});
 		return (
 			<ul className={classes}>
-				{states.doLoop && '[loop_template '+(loopParam || '')+']'}
-				{rtn}
-				{states.doLoop && '[/loop_template]'}
+				{doLoop?(
+					<loopBlockContent>{rtn}</loopBlockContent>
+				):(rtn)}
 			</ul>
 		);
 	},
+	deprecated:[
+		{
+			save({attributes,className}){
+				const {items,classes,countPrefix,countSuffix,subCountPrefix,subCountSuffix,linkUrl,linkText,loopParam}=attributes;
+				var classArray=_.uniq(attributes.classes.split(' '));
+
+				var states=CP.wordsToFlags(classes);
+
+
+				const imageKeys={
+					image:{src:"src",alt:"alt",code:"imageCode",items:"items"},
+					headerImage:{src:"headerImageSrc",alt:"headerImageAlt",code:"headerImageCode",items:"items"},
+					subImage:{src:"subImageSrc",alt:"subImageAlt",code:"subImageCode",items:"items"},
+					backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset",code:"backgroundImageCode",items:"items"},
+				};
+
+				let rtn=[];
+				items.map((item,index)=>{
+					rtn.push(
+						<li className={item.classes}>
+							{states.hasImage &&
+								<div className='image'>
+									<ResponsiveImage
+										attr={attributes}
+										keys={imageKeys.image}
+										index={index}
+										isTemplate={states.isTemplate}
+									/>
+								</div>
+							}
+							{states.hasHeader &&
+								<header>
+									{states.hasCounter &&
+										<div className='counter'>
+											{countPrefix && <span class="prefix">{countPrefix}</span>}
+											<span className="number">{index+1}</span>
+											{countSuffix && <span class="suffix">{countSuffix}</span>}
+										</div>
+									}
+									{states.hasHeaderImage &&
+										<div className='image'>
+											<ResponsiveImage
+												attr={attributes}
+												keys={imageKeys.headerImage}
+												index={index}
+												isTemplate={states.isTemplate}
+											/>
+										</div>
+									}
+									<div className='text'>
+										{states.hasTitle && <h3><RichText.Content value={item.title}/></h3>}
+										{states.hasTitle && states.hasTitleCaption && <p><RichText.Content value={item.titleCaption}/></p>}
+									</div>
+								</header>
+							}
+							{(states.hasSubImage || states.hasSubTitle || states.hasText) && 
+								<div class="contents">
+									{states.hasSubCounter &&
+										<div className='subcounter'>
+											{subCountPrefix && <span class="prefix">{subCountPrefix}</span>}
+											<span className="number">{index+1}</span>
+											{subCountSuffix && <span class="suffix">{subCountSuffix}</span>}
+										</div>
+									}
+									{states.hasSubImage &&
+										<div className='image'>
+											<ResponsiveImage
+												attr={attributes}
+												keys={imageKeys.subImage}
+												index={index}
+												isTemplate={states.isTemplate}
+											/>
+										</div>
+									}
+									{states.hasSubTitle && <h4><RichText.Content value={item.subTitle}/></h4>}
+									{states.hasText && <p><RichText.Content value={item.text}/></p>}
+								</div>
+							}
+							{states.hasBackgroundImage && 
+								<div className='background'>
+									<ResponsiveImage
+										attr={attributes}
+										keys={imageKeys.backgroundImage}
+										index={index}
+										isTemplate={states.isTemplate}
+									/>
+								</div>
+							}
+							{states.hasLink && item.linkUrl && <div className='link'><a href={item.linkUrl}> </a></div>}
+						</li>
+					);
+				});
+				return (
+					<ul className={classes}>
+						{state.doLoop && '[loop_template '+(loopParam || '')+']'}
+						{rtn}
+						{state.doLoop && '[/loop_template]'}
+					</ul>
+				);
+			},
+			migrate(attributes){
+				var states=CP.wordsToFlags(classes);
+				attributes.content_path=attributes.loopParam.split(' ')[0];
+				attributes.query=attributes.loopParam.split(' ').slice(1).join("\n");
+				attributes.doLoop=states.doLoop;
+				return attributes;
+			}
+		}
+	]
 });

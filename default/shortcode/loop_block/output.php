@@ -23,7 +23,6 @@ else{
 			'limit'=>$cond->limit
 		];
 	}
-	error_log(var_export($query,1).__FILE__.__LINE__);
 }
 
 if(cp::$content){
