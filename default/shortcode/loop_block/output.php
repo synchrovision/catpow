@@ -16,7 +16,6 @@ else{
 	}
 	else{
 		$cond=new util\cond($data['query']);
-		_d($cond->get_query($data['path']));
 		$query=$cond->get_query($data['path']);
 	}
 }
