@@ -26,7 +26,26 @@ else{
 }
 
 if(cp::$content){
-	foreach(loop($data['path'],$query) as $obj){
-		echo do_shortcode($data['content']);
+	$path=$data['path'];
+	if(!empty($path)){
+		if(strpos($path,'/')===false){
+			$loop=\cp::$content->meta($path,$query);
+		}
+		else{
+			if(substr_count($path,'/')==1){$path.='/default';}
+			$loop=\cp::$content->query($path,$query);
+		}
+	}
+	else{$loop=\cp::$content;}
+	
+	if($loop->query->is_empty()){
+		echo $data['on_empty']??'';
+	}
+	else{
+		echo $data['before_loop']??'';
+		foreach($loop->loop() as $obj){
+			echo do_shortcode($data['content']);
+		}
+		echo $data['after_loop']??'';
 	}
 }

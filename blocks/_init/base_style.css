@@ -108,7 +108,7 @@ div.embedded_content {
   min-height: 5rem;
   height: auto;
   padding-top: 2rem; }
-  div.embedded_content div.label {
+  div.embedded_content > .label {
     position: absolute;
     right: 0px;
     top: 0px;
@@ -121,6 +121,29 @@ div.embedded_content {
     font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
     font-weight: 400;
     color: #444;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+
+div.alt_content {
+  position: relative;
+  min-height: 5rem;
+  height: auto;
+  padding-top: 2rem;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #a2a2a2; }
+  div.alt_content > .label {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    padding: 0.25em;
+    z-index: 10;
+    background-color: #007cba;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 10px;
+    font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+    font-weight: 400;
+    color: #fefefe;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
 
 table.selectPosition {

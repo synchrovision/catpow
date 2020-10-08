@@ -17,7 +17,7 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {items,classes,countPrefix,countSuffix,subCountPrefix,subCountSuffix,loopCount}=attributes;
+		const {items,classes,countPrefix,countSuffix,subCountPrefix,subCountSuffix,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-listed';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
@@ -251,7 +251,6 @@
 			);
 		});
 		
-		if(attributes.EditMode===undefined){attributes.EditMode=false;}
 		if(rtn.length<loopCount){
 			let len=rtn.length;
 			while(rtn.length<loopCount){
@@ -262,16 +261,30 @@
         return (
 			<Fragment>
 				<BlockControls>
-					<Toolbar
-						controls={[
-							{
-								icon: 'edit',
-								title: 'EditMode',
-								isActive: attributes.EditMode,
-								onClick: () => setAttributes({EditMode:!attributes.EditMode})
-							}
-						]}
-					/>
+					{!AltMode && 
+						<Toolbar
+							controls={[
+								{
+									icon: 'edit',
+									title: 'EditMode',
+									isActive: EditMode,
+									onClick: () => setAttributes({EditMode:!EditMode})
+								}
+							]}
+						/>
+					}
+					{(!EditMode && doLoop) && 
+						<Toolbar
+							controls={[
+								{
+									icon: 'welcome-comments',
+									title: 'AltMode',
+									isActive: AltMode,
+									onClick: () => setAttributes({AltMode:!AltMode})
+								}
+							]}
+						/>
+					}
 				</BlockControls>
 				<InspectorControls>
 					<SelectClassPanel
@@ -313,29 +326,45 @@
 					}
 					<ItemControlInfoPanel/>
 				</InspectorControls>
-				{attributes.EditMode?(
-					<EditItemsTable
-						set={setAttributes}
-						attr={attributes}
-						columns={[
-							{type:'image',label:'image',keys:imageKeys.image,cond:states.hasImage},
-							{type:'text',key:'imageCode',cond:states.isTemplate && states.hasImage},
-							{type:'image',label:'sub',keys:imageKeys.subImage,cond:states.hasSubImage},
-							{type:'text',key:'subImageCode',cond:states.isTemplate && states.hasSubImage},
-							{type:'image',label:'header',keys:imageKeys.headerImage,cond:states.hasHeaderImage},
-							{type:'text',key:'headerImageCode',cond:states.isTemplate && states.hasHeaderImage},
-							{type:'image',label:'bg',keys:imageKeys.backgroundImage,cond:states.hasBackgroundImage},
-							{type:'text',key:'backgroundImageCode',cond:states.isTemplate && states.hasBackgroundImage},
-							{type:'text',key:'title',cond:states.hasTitle},
-							{type:'text',key:'titleCaption',cond:states.hasTitleCaption},
-							{type:'text',key:'subTitle',cond:states.hasSubTitle},
-							{type:'text',key:'text',cond:states.hasText},
-							{type:'text',key:'linkUrl',cond:states.hasLink}
-						]}
-						isTemplate={states.isTemplate}
-					/>
+				{EditMode?(
+					<div className="alt_content">
+						<div class="label">
+							<Icon icon="edit"/>
+						</div>
+						<EditItemsTable
+							set={setAttributes}
+							attr={attributes}
+							columns={[
+								{type:'image',label:'image',keys:imageKeys.image,cond:states.hasImage},
+								{type:'text',key:'imageCode',cond:states.isTemplate && states.hasImage},
+								{type:'image',label:'sub',keys:imageKeys.subImage,cond:states.hasSubImage},
+								{type:'text',key:'subImageCode',cond:states.isTemplate && states.hasSubImage},
+								{type:'image',label:'header',keys:imageKeys.headerImage,cond:states.hasHeaderImage},
+								{type:'text',key:'headerImageCode',cond:states.isTemplate && states.hasHeaderImage},
+								{type:'image',label:'bg',keys:imageKeys.backgroundImage,cond:states.hasBackgroundImage},
+								{type:'text',key:'backgroundImageCode',cond:states.isTemplate && states.hasBackgroundImage},
+								{type:'text',key:'title',cond:states.hasTitle},
+								{type:'text',key:'titleCaption',cond:states.hasTitleCaption},
+								{type:'text',key:'subTitle',cond:states.hasSubTitle},
+								{type:'text',key:'text',cond:states.hasText},
+								{type:'text',key:'linkUrl',cond:states.hasLink}
+							]}
+							isTemplate={states.isTemplate}
+						/>
+					</div>
 				):(
-					<ul className={classes}>{rtn}</ul>
+					<Fragment>
+						{(AltMode && doLoop)?(
+							<div className="alt_content">
+								<div class="label">
+									<Icon icon="welcome-comments"/>
+								</div>
+								<InnerBlocks/>
+							</div>
+						):(
+							<ul className={classes}>{rtn}</ul>
+						)}
+					</Fragment>
 				)}
 			</Fragment>
         );
@@ -431,11 +460,12 @@
 			);
 		});
 		return (
-			<ul className={classes}>
-				{doLoop?(
-					<loopBlockContent>{rtn}</loopBlockContent>
-				):(rtn)}
-			</ul>
+			<Fragment>
+				<ul className={classes}>
+					{rtn}
+				</ul>
+				{doLoop && <onEmpty><InnerBlocks.Content/></onEmpty>}
+			</Fragment>
 		);
 	},
 	deprecated:[

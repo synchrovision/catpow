@@ -25,7 +25,12 @@ registerBlockType('catpow/listed', {
 		    countSuffix = attributes.countSuffix,
 		    subCountPrefix = attributes.subCountPrefix,
 		    subCountSuffix = attributes.subCountSuffix,
-		    loopCount = attributes.loopCount;
+		    loopCount = attributes.loopCount,
+		    doLoop = attributes.doLoop,
+		    _attributes$EditMode = attributes.EditMode,
+		    EditMode = _attributes$EditMode === undefined ? false : _attributes$EditMode,
+		    _attributes$AltMode = attributes.AltMode,
+		    AltMode = _attributes$AltMode === undefined ? false : _attributes$AltMode;
 
 		var primaryClass = 'wp-block-catpow-listed';
 		var classArray = _.uniq((className + ' ' + classes).split(' '));
@@ -264,9 +269,6 @@ registerBlockType('catpow/listed', {
 			));
 		});
 
-		if (attributes.EditMode === undefined) {
-			attributes.EditMode = false;
-		}
 		if (rtn.length < loopCount) {
 			var len = rtn.length;
 			while (rtn.length < loopCount) {
@@ -280,13 +282,23 @@ registerBlockType('catpow/listed', {
 			wp.element.createElement(
 				BlockControls,
 				null,
-				wp.element.createElement(Toolbar, {
+				!AltMode && wp.element.createElement(Toolbar, {
 					controls: [{
 						icon: 'edit',
 						title: 'EditMode',
-						isActive: attributes.EditMode,
+						isActive: EditMode,
 						onClick: function onClick() {
-							return setAttributes({ EditMode: !attributes.EditMode });
+							return setAttributes({ EditMode: !EditMode });
+						}
+					}]
+				}),
+				!EditMode && doLoop && wp.element.createElement(Toolbar, {
+					controls: [{
+						icon: 'welcome-comments',
+						title: 'AltMode',
+						isActive: AltMode,
+						onClick: function onClick() {
+							return setAttributes({ AltMode: !AltMode });
 						}
 					}]
 				})
@@ -335,15 +347,37 @@ registerBlockType('catpow/listed', {
 				}),
 				wp.element.createElement(ItemControlInfoPanel, null)
 			),
-			attributes.EditMode ? wp.element.createElement(EditItemsTable, {
-				set: setAttributes,
-				attr: attributes,
-				columns: [{ type: 'image', label: 'image', keys: imageKeys.image, cond: states.hasImage }, { type: 'text', key: 'imageCode', cond: states.isTemplate && states.hasImage }, { type: 'image', label: 'sub', keys: imageKeys.subImage, cond: states.hasSubImage }, { type: 'text', key: 'subImageCode', cond: states.isTemplate && states.hasSubImage }, { type: 'image', label: 'header', keys: imageKeys.headerImage, cond: states.hasHeaderImage }, { type: 'text', key: 'headerImageCode', cond: states.isTemplate && states.hasHeaderImage }, { type: 'image', label: 'bg', keys: imageKeys.backgroundImage, cond: states.hasBackgroundImage }, { type: 'text', key: 'backgroundImageCode', cond: states.isTemplate && states.hasBackgroundImage }, { type: 'text', key: 'title', cond: states.hasTitle }, { type: 'text', key: 'titleCaption', cond: states.hasTitleCaption }, { type: 'text', key: 'subTitle', cond: states.hasSubTitle }, { type: 'text', key: 'text', cond: states.hasText }, { type: 'text', key: 'linkUrl', cond: states.hasLink }],
-				isTemplate: states.isTemplate
-			}) : wp.element.createElement(
-				'ul',
-				{ className: classes },
-				rtn
+			EditMode ? wp.element.createElement(
+				'div',
+				{ className: 'alt_content' },
+				wp.element.createElement(
+					'div',
+					{ 'class': 'label' },
+					wp.element.createElement(Icon, { icon: 'edit' })
+				),
+				wp.element.createElement(EditItemsTable, {
+					set: setAttributes,
+					attr: attributes,
+					columns: [{ type: 'image', label: 'image', keys: imageKeys.image, cond: states.hasImage }, { type: 'text', key: 'imageCode', cond: states.isTemplate && states.hasImage }, { type: 'image', label: 'sub', keys: imageKeys.subImage, cond: states.hasSubImage }, { type: 'text', key: 'subImageCode', cond: states.isTemplate && states.hasSubImage }, { type: 'image', label: 'header', keys: imageKeys.headerImage, cond: states.hasHeaderImage }, { type: 'text', key: 'headerImageCode', cond: states.isTemplate && states.hasHeaderImage }, { type: 'image', label: 'bg', keys: imageKeys.backgroundImage, cond: states.hasBackgroundImage }, { type: 'text', key: 'backgroundImageCode', cond: states.isTemplate && states.hasBackgroundImage }, { type: 'text', key: 'title', cond: states.hasTitle }, { type: 'text', key: 'titleCaption', cond: states.hasTitleCaption }, { type: 'text', key: 'subTitle', cond: states.hasSubTitle }, { type: 'text', key: 'text', cond: states.hasText }, { type: 'text', key: 'linkUrl', cond: states.hasLink }],
+					isTemplate: states.isTemplate
+				})
+			) : wp.element.createElement(
+				Fragment,
+				null,
+				AltMode && doLoop ? wp.element.createElement(
+					'div',
+					{ className: 'alt_content' },
+					wp.element.createElement(
+						'div',
+						{ 'class': 'label' },
+						wp.element.createElement(Icon, { icon: 'welcome-comments' })
+					),
+					wp.element.createElement(InnerBlocks, null)
+				) : wp.element.createElement(
+					'ul',
+					{ className: classes },
+					rtn
+				)
 			)
 		);
 	},
@@ -499,13 +533,18 @@ registerBlockType('catpow/listed', {
 			));
 		});
 		return wp.element.createElement(
-			'ul',
-			{ className: classes },
-			doLoop ? wp.element.createElement(
-				'loopBlockContent',
-				null,
+			Fragment,
+			null,
+			wp.element.createElement(
+				'ul',
+				{ className: classes },
 				rtn
-			) : rtn
+			),
+			doLoop && wp.element.createElement(
+				'onEmpty',
+				null,
+				wp.element.createElement(InnerBlocks.Content, null)
+			)
 		);
 	},
 

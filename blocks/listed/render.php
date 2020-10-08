@@ -1,18 +1,21 @@
 <?php
 if($attr['doLoop']){
-	$content=preg_replace_callback(
-		'|<loopBlockContent>(?P<content>.*?)</loopBlockContent>|',
-		function($matches)use($attr){
-			$id=uniqid();
-			$GLOBALS['loop_block_data'][$id]=[
-				'path'=>$attr['content_path'],
-				'query'=>$attr['query'],
-				'content'=>$matches['content']
-			];
-			return "[loop_block {$id}]";
-		},
-		$content
+	$id=uniqid();
+	preg_match(
+		'|(?P<before_loop><ul class=".+?">)(?P<content>.*?)(?P<after_loop></ul>)<onEmpty>(?P<on_empty>.+)</onEmpty>|s',
+		$content,
+		$matches
 	);
+	$GLOBALS['loop_block_data'][$id]=[
+		'path'=>$attr['content_path'],
+		'query'=>$attr['query'],
+		'before_loop'=>$matches['before_loop'],
+		'content'=>$matches['content'],
+		'after_loop'=>$matches['after_loop'],
+		'on_empty'=>$matches['on_empty'],
+	];
+	echo "[loop_block {$id}]";
 }
-
-echo $content;
+else{
+	echo $content;
+}

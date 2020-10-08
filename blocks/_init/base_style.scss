@@ -74,10 +74,20 @@ div.components-panel{
 
 div.embedded_content{
 	@include bnd((p:r,h:5rem a,pdt:2rem));
-	div.label{
+	&>.label{
 		@include bnd((p:a,r:0,t:0,pd:.5rem 1rem,z:10));
 		@include bg((c:b));
 		@include txt((a:c,p:1rem,h:10,f:g,w:r,c:t));
+		@include shd((b:1));
+	}
+}
+div.alt_content{
+	@include bnd((p:r,h:5rem a,pdt:2rem));
+	@include bdr((s:s,w:1,c:t 50));
+	&>.label{
+		@include bnd((p:a,l:0,t:0,pd:.25em,z:10));
+		@include bg((c:m));
+		@include txt((a:c,p:1.2rem,h:10,f:g,w:r,c:b));
 		@include shd((b:1));
 	}
 }
