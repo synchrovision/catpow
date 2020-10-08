@@ -54,6 +54,37 @@ class cond{
 		}
 		return !$flag;
 	}
+	public function get_query($path){
+		$rtn=['relation'=>$this->relation,'orderby'=>$this->orderby,'limit'=>$this->limit];
+		$path_data=\cp::parse_content_path($path);
+		
+		$data_type=$path_data['data_type'];
+		$data_name=$path_data['data_name'];
+		$id=$path_data['data_id']??'s';
+		
+		$query_class_name=\cp::get_class_name('query',$data_type);
+		
+		$metas=\cp::get_conf_data($path)['meta'];
+		foreach($this->lines as $line){
+			$name=$line['key'];
+			if(isset($metas[$name])){
+				if(empty($line['name'])){unset($line['name']);}
+				if(empty($line['type'])){unset($line['type']);}
+				$line['value']=(array)$line['value'];
+				$conf=$metas[$name];
+				$class_name=\cp::get_class_name('meta',$conf['type']);
+				if($class_name::$can_search){
+					$class_name::reflect_to_query($rtn,$data_type,$data_name,$name,$id,$line,$conf);
+				}
+			}
+			elseif(isset($query_class_name::$search_keys[$name])){
+				if($query_class_name::$search_keys[$name]){$rtn[$name]=$line['value'];}
+				else{$rtn[$name]=is_array($line['value'])?reset($line['value']):$line['value'];}
+			}
+		}
+		return $rtn;
+	}
+	
 	public static function parse_line($line){
 		if(preg_match(self::$cond_line_regex,$line,$matches)){
 			switch($matches['compare']){
