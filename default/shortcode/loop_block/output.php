@@ -16,12 +16,8 @@ else{
 	}
 	else{
 		$cond=new util\cond($data['query']);
-		$query=[
-			'relation'=>$cond->relation,
-			'meta_query'=>$cond->lines,
-			'orderby'=>$cond->orderby,
-			'limit'=>$cond->limit
-		];
+		_d($cond->get_query($data['path']));
+		$query=$cond->get_query($data['path']);
 	}
 }
 

@@ -2,7 +2,11 @@
 namespace Catpow\meta;
 
 class DateSelect extends UI{
-	public static $output_type='date';
+	public static
+		$value_type='DATE',
+		$output_type='date',
+		$can_search_with_range=true;
+	
 	public static function fill_param($prm,$meta){
 		$prm=(array)$prm;
 		if(isset($meta->conf['min'])){$prm['min']=date('Y-m-d',strtotime($meta->conf['min']));}
