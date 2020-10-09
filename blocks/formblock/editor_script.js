@@ -73,7 +73,6 @@ registerBlockType('catpow/formblock', {
 						onChange: function onChange(content_path) {
 							var path = content_path.substr(0, content_path.lastIndexOf('/'));
 							wp.apiFetch({ path: 'cp/v1/' + path + '/template' }).then(function (template) {
-								console.log(template);
 								wp.data.dispatch('core/block-editor').replaceInnerBlocks(clientId, CP.createBlocks(template));
 							});
 							setAttributes({ content_path: content_path, actions: null });
