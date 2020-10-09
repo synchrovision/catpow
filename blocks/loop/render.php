@@ -1,22 +1,12 @@
 <?php
-if(empty($attr['query'])){
-	$query=null;
+$id=uniqid();
+$GLOBALS['loop_block_data'][$id]=[
+	'path'=>dirname($attr['content_path']),
+	'file'=>basename($attr['content_path']),
+	'query'=>$attr['query'],
+	'vars'=>['content'=>$content]
+];
+if($is_preview){
+	echo do_shortcode("[loop_block {$id}]");
 }
-else{
-	if($attr['query'][0]==='{'){
-		$query=json_decode($attr['query'],1)?:null;
-	}
-	elseif($attr['query'][0]==='[' && preg_match('/^\[([\w_\\\:]+)(\s(.+))?\]$/',$attr['query'],$matches)){
-		$query=$matches[1](shortcode_parse_atts($matches[3]));
-	}
-	else{
-		$cond=new Catpow\util\cond($data['query']);
-		$query=[
-			'relation'=>$cond->relation,
-			'meta_query'=>$cond->lines,
-			'orderby'=>$cond->orderby,
-			'limit'=>$cond->limit
-		];
-	}
-}
-Catpow\loop($attr['content_path'],$query,['content'=>$content]);
+else{echo "[loop_block {$id}]";}
