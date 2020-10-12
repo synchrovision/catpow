@@ -863,22 +863,23 @@ window.Catpow=window.Catpow || {};
 		},
 		//小要素にaccordionを適用、かつ一つ以上が開かれないようにする
 		cp_accordion_group:function(){
-			$(this).children(':even').each(function(){
-				$(this).next().hide();
-				$(this).click(
-				function(){
-					$(this).parent().children(':odd:visible').stop().slideUp();
-					if($(this).hasClass('active')){
-						$(this).next().stop().slideUp();
-						$(this).parent().children(':even').removeClass('active');
-					}else{
-						$(this).next().stop().slideDown();
-						$(this).parent().children(':even').removeClass('active');
-						$(this).addClass('active');
-					}
-				});
+			var $group=$(this);
+			$group.labels=$group.children(':even');
+			$group.contents=$group.children(':odd');
+			$group.contents.hide();
+			$group.labels.click(function(){
+				if($(this).hasClass('active')){
+					$group.contents.stop().slideUp();
+					$group.labels.removeClass('active');
+				}
+				else{
+					$group.contents.not($(this).next()).slideUp();
+					$(this).next().stop().slideDown();
+					$group.labels.removeClass('active');
+					$(this).addClass('active');
+				}
 			});
-			return this;
+			return $group;
 		},
 		//子要素クリックでターゲット（無指定なら次要素）の対応する子要素を表示切り替え、クリックされた子要素にactiveクラスを付加
 		//あらかじめ子要素にactiveクラスを付加しておくと初期でそのタブを開きます
