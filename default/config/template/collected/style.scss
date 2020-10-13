@@ -1,0 +1,42 @@
+@import "config/style_config.scss";
+
+.collected{
+	@include bnd((w:a 96rem,mg:0 a,pd:2rem,bs:b));
+	&_group{
+		@include txt((l:n));
+	}
+	&_label{
+		@include bnd((pdb:.5em,mgb:.5em));
+		@include bdr((p:b,s:s,w:1,c:t 50));
+		@include txt((p:2rem));
+		@include usr((c:p));
+		&::before{
+			content:'';
+			@include bnd((d:ib,w:1,h:1,mg:0 .5em));
+			@include bdr((s:s,w:.4em,c:n));
+			@include bdr((p:l,c:t 30));
+			@include trn((t:.5s,r:0deg,to:0% 50%));
+		}
+		&.active::before{
+			@include trn((r:90deg));
+		}
+	}
+	&_items{
+		@include bnd((pd:1em));
+		@include flx((w:w));
+	}
+	&_item{
+		@include bnd((f:1 1 40rem,pd:1em));
+		@include txt((l:n));
+		&_text{
+		}
+		&_title{
+			@include bnd((pdb:.5em,mgb:.5em));
+			@include bdr((p:b,s:s,w:1,c:t 50));
+			@include txt((p:1.5rem));
+		}
+		&_desc{
+
+		}
+	}
+}
