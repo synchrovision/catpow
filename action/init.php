@@ -97,7 +97,7 @@ if(function_exists('register_block_type')){
 		}
 		foreach(glob($block_dir.'/*/editor_script.js') as $editor_script){
 			$block_name=basename(dirname($editor_script));
-			if(!in_array($block_name,cp::$use_blocks)){continue;}
+			if(cp::$use_blocks && !in_array($block_name,cp::$use_blocks)){continue;}
 			$block_style_names[]='blocks/'.$block_name.'/editor_style';
 			$block_style_names[]='blocks/'.$block_name.'/style';
 			unset($attributes);
