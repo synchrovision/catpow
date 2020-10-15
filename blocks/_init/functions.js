@@ -787,11 +787,11 @@ var Item = function Item(props) {
 		classes += ' ' + props.className;
 	}
 
-	if (attr.currentItemIndex === undefined) {
-		attr.currentItemIndex = -1;
-	}
+	var _attr$currentItemInde = attr.currentItemIndex,
+	    currentItemIndex = _attr$currentItemInde === undefined ? 0 : _attr$currentItemInde;
 
-	var isSelected = props.isSelected === undefined ? index == attr.currentItemIndex : props.isSelected;
+
+	var isSelected = props.isSelected === undefined ? index == currentItemIndex : props.isSelected;
 
 	return wp.element.createElement(tag, {
 		className: classes,
@@ -1705,6 +1705,46 @@ var SelectBreakPointToolbar = function SelectBreakPointToolbar(props) {
 			};
 		})
 	});
+};
+var SelectModeToolbar = function SelectModeToolbar(props) {
+	var set = props.set,
+	    attr = props.attr,
+	    _props$modes = props.modes,
+	    modes = _props$modes === undefined ? ['EditMode', 'AltMode'] : _props$modes;
+
+	var SomeMode = modes.some(function (mode) {
+		return attr[mode];
+	});
+	var icons = {
+		EditMode: 'edit',
+		OpenMode: 'video-alt3',
+		AltMode: 'welcome-comments'
+	};
+	var cond = {
+		AltMode: 'doLoop'
+	};
+	return wp.element.createElement(
+		BlockControls,
+		null,
+		modes.map(function (mode) {
+			if (!attr[mode] && SomeMode) {
+				return false;
+			}
+			if (cond[mode] && !attr[cond[mode]]) {
+				return false;
+			}
+			return wp.element.createElement(Toolbar, {
+				controls: [{
+					icon: icons[mode],
+					title: mode,
+					isActive: attr[mode],
+					onClick: function onClick() {
+						return set(babelHelpers.defineProperty({}, mode, !attr[mode]));
+					}
+				}]
+			});
+		})
+	);
 };
 
 var EditItemsTable = function EditItemsTable(props) {

@@ -547,9 +547,9 @@ const Item=(props)=>{
 	let classes=items[index].classes;
 	if(props.className){classes+=' '+props.className;}
 	
-	if(attr.currentItemIndex===undefined){attr.currentItemIndex=-1;}
+	const {currentItemIndex=0}=attr;
 	
-	const isSelected=(props.isSelected === undefined)?(index==attr.currentItemIndex):props.isSelected;
+	const isSelected=(props.isSelected === undefined)?(index==currentItemIndex):props.isSelected;
 	
 	return wp.element.createElement(
 		tag,
@@ -1284,6 +1284,38 @@ const SelectBreakPointToolbar=(props)=>{
 				};
 			})}
 		/>
+	);
+}
+const SelectModeToolbar=(props)=>{
+	const {set,attr,modes=['EditMode','AltMode']}=props;
+	const SomeMode=modes.some((mode)=>attr[mode]);
+	const icons={
+		EditMode:'edit',
+		OpenMode:'video-alt3',
+		AltMode:'welcome-comments'
+	};
+	const cond={
+		AltMode:'doLoop'
+	};
+	return (
+		<BlockControls>
+			{modes.map((mode)=>{
+				if(!attr[mode] && SomeMode){return false;}
+				if(cond[mode] && !attr[cond[mode]]){return false;}
+				return (
+					<Toolbar
+						controls={[
+							{
+								icon:icons[mode],
+								title:mode,
+								isActive:attr[mode],
+								onClick:()=>set({[mode]:!attr[mode]})
+							}
+						]}
+					/>
+				);
+			})}
+		</BlockControls>
 	);
 }
 
