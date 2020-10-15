@@ -3,55 +3,6 @@ registerBlockType('catpow/pricecard', {
 	description: 'サービス・商品情報の一覧ブロックです。',
 	icon: 'index-card',
 	category: 'catpow',
-	attributes: {
-		version: { type: 'number', default: 0 },
-		classes: { source: 'attribute', selector: 'ul', attribute: 'class', default: 'wp-block-catpow-pricecard hasImage hasTitle hasSpec unitBefore' },
-		priceUnit: { source: 'text', selector: 'span.price .unit', default: '¥' },
-		priceCaption: { source: 'children', selector: 'span.priceCaption', default: ['（税込）'] },
-		linkText: { source: 'text', selector: '.link', default: 'more info' },
-		items: {
-			source: 'query',
-			selector: 'li.item',
-			query: {
-				classes: { source: 'attribute', attribute: 'class' },
-				title: { source: 'children', selector: 'header .text h3' },
-				titleCaption: { source: 'children', selector: 'header .text p' },
-				src: { source: 'attribute', selector: 'li>.image [src]', attribute: 'src' },
-				alt: { source: 'attribute', selector: 'li>.image [src]', attribute: 'alt' },
-				imageCode: { source: 'text', selector: 'li>.image' },
-				subTitle: { source: 'children', selector: '.contents h4' },
-				text: { source: 'children', selector: '.contents p' },
-				listPrice: { source: 'text', selector: 'span.listPrice .number' },
-				price: { source: 'text', selector: 'span.price .number' },
-
-				specLabels: { source: 'query', selector: 'dl.spec dt', query: { text: { source: 'children' } } },
-				specValues: { source: 'query', selector: 'dl.spec dd', query: { text: { source: 'children' } } },
-				linkUrl: { source: 'attribute', selector: '.link', attribute: 'href' }
-			},
-			default: [].concat(babelHelpers.toConsumableArray(Array(3))).map(function () {
-				return {
-					classes: 'item',
-					title: ['Title'],
-					titleCaption: ['Caption'],
-					src: cp.theme_url + '/images/dummy.jpg',
-					alt: 'dummy',
-					subTitle: ['SubTitle'],
-					text: ['Text'],
-					listPrice: '0,000',
-					price: '0,000',
-					specLabels: [].concat(babelHelpers.toConsumableArray(Array(3))).map(function () {
-						return { text: ['label'] };
-					}),
-					specValues: [].concat(babelHelpers.toConsumableArray(Array(3))).map(function () {
-						return { text: ['value'] };
-					}),
-					linkUrl: cp.home_url
-				};
-			})
-		},
-		loopParam: { type: 'text', default: '' },
-		loopCount: { type: 'number', default: 1 }
-	},
 	example: CP.example,
 	edit: function edit(_ref) {
 		var attributes = _ref.attributes,
@@ -63,7 +14,12 @@ registerBlockType('catpow/pricecard', {
 		    priceUnit = attributes.priceUnit,
 		    priceCaption = attributes.priceCaption,
 		    linkText = attributes.linkText,
-		    loopCount = attributes.loopCount;
+		    loopCount = attributes.loopCount,
+		    doLoop = attributes.doLoop,
+		    _attributes$EditMode = attributes.EditMode,
+		    EditMode = _attributes$EditMode === undefined ? false : _attributes$EditMode,
+		    _attributes$AltMode = attributes.AltMode,
+		    AltMode = _attributes$AltMode === undefined ? false : _attributes$AltMode;
 
 		var primaryClass = 'wp-block-catpow-pricecard';
 		var classArray = _.uniq((className + ' ' + classes).split(' '));
@@ -74,7 +30,7 @@ registerBlockType('catpow/pricecard', {
 		var selectiveClasses = [{ input: 'text', label: '価格単位', key: 'priceUnit' }, { type: 'radio', label: '単位の位置', values: { "unitBefore": "前", "unitAfter": "後" } }, { label: 'タイトル', values: 'hasTitle' }, { label: 'キャプション', values: 'hasTitleCaption' }, { label: 'リンク', values: 'hasLink', sub: [{ input: 'text', label: 'リンク文字列', key: 'linkText' }] }, { label: '画像', values: 'hasImage' }, { label: 'サブタイトル', values: 'hasSubTitle' }, { label: 'テキスト', values: 'hasText' }, { label: 'スペック', values: 'hasSpec' }, {
 			label: 'テンプレート',
 			values: 'isTemplate',
-			sub: [{ label: 'ループ', values: 'doLoop', sub: [{ label: 'パラメータ', input: 'text', key: 'loopParam' }, { label: 'ループ数', input: 'range', key: 'loopCount', min: 1, max: 16 }] }]
+			sub: [{ input: 'bool', label: 'ループ', key: 'doLoop', sub: [{ label: 'content path', input: 'text', key: 'content_path' }, { label: 'query', input: 'textarea', key: 'query' }, { label: 'プレビューループ数', input: 'range', key: 'loopCount', min: 1, max: 16 }] }]
 		}];
 		var itemSelectiveClasses = ['color', { label: 'タイプ', values: { 'normal': "通常", 'recommended': "おすすめ", 'deprecated': "非推奨", 'cheap': "安価", 'expensive': "高級" } }, { label: '値引き', values: 'discount' }, { label: '画像コード', input: 'text', key: 'imageCode', cond: states.isTemplate }];
 
@@ -279,20 +235,10 @@ registerBlockType('catpow/pricecard', {
 		return wp.element.createElement(
 			Fragment,
 			null,
-			wp.element.createElement(
-				BlockControls,
-				null,
-				wp.element.createElement(Toolbar, {
-					controls: [{
-						icon: 'edit',
-						title: 'EditMode',
-						isActive: attributes.EditMode,
-						onClick: function onClick() {
-							return setAttributes({ EditMode: !attributes.EditMode });
-						}
-					}]
-				})
-			),
+			wp.element.createElement(SelectModeToolbar, {
+				set: setAttributes,
+				attr: attributes
+			}),
 			wp.element.createElement(
 				InspectorControls,
 				null,
@@ -330,12 +276,25 @@ registerBlockType('catpow/pricecard', {
 			attributes.EditMode ? wp.element.createElement(EditItemsTable, {
 				set: setAttributes,
 				attr: attributes,
-				columns: [{ type: 'text', key: 'title', cond: states.hasTitle }, { type: 'text', key: 'titleCaption', cond: states.hasTitleCaption }, { type: 'image', keys: imageKeys.image, cond: states.hasImage }, { type: 'text', key: 'imageCode', cond: states.hasImage && states.isTemplate }, { type: 'text', key: 'subTitle', cond: states.hasSubTitle }, { type: 'text', key: 'text', cond: states.hasText }, { type: 'text', key: 'listPrice' }, { type: 'text', key: 'price' }, { type: 'text', key: 'linkUrl', cond: states.hasLink }],
+				columns: [{ type: 'text', key: 'title', cond: states.hasTitle }, { type: 'text', key: 'titleCaption', cond: states.hasTitleCaption }, { type: 'image', keys: imageKeys.image, cond: states.hasImage }, { type: 'text', key: 'imageCode', cond: states.hasImage && states.isTemplate }, { type: 'text', key: 'subTitle', cond: states.hasSubTitle }, { type: 'text', key: 'text', cond: states.hasText }, { type: 'text', key: 'listPrice', cond: true }, { type: 'text', key: 'price', cond: true }, { type: 'text', key: 'linkUrl', cond: states.hasLink }],
 				isTemplate: states.isTemplate
 			}) : wp.element.createElement(
-				'ul',
-				{ className: classes },
-				rtn
+				Fragment,
+				null,
+				AltMode && doLoop ? wp.element.createElement(
+					'div',
+					{ className: 'alt_content' },
+					wp.element.createElement(
+						'div',
+						{ 'class': 'label' },
+						wp.element.createElement(Icon, { icon: 'welcome-comments' })
+					),
+					wp.element.createElement(InnerBlocks, null)
+				) : wp.element.createElement(
+					'ul',
+					{ className: classes },
+					rtn
+				)
 			)
 		);
 	},
@@ -347,7 +306,8 @@ registerBlockType('catpow/pricecard', {
 		    priceUnit = attributes.priceUnit,
 		    priceCaption = attributes.priceCaption,
 		    linkText = attributes.linkText,
-		    loopCount = attributes.loopCount;
+		    loopCount = attributes.loopCount,
+		    doLoop = attributes.doLoop;
 
 		var primaryClass = 'wp-block-catpow-pricecard';
 		var classArray = _.uniq(attributes.classes.split(' '));
@@ -478,11 +438,174 @@ registerBlockType('catpow/pricecard', {
 			));
 		});
 		return wp.element.createElement(
-			'ul',
-			{ className: classes },
-			states.doLoop && '[loop_template ' + (loopParam || '') + ']',
-			rtn,
-			states.doLoop && '[/loop_template]'
+			Fragment,
+			null,
+			wp.element.createElement(
+				'ul',
+				{ className: classes },
+				rtn
+			),
+			doLoop && wp.element.createElement(
+				'onEmpty',
+				null,
+				wp.element.createElement(InnerBlocks.Content, null)
+			)
 		);
-	}
+	},
+
+	deprecated: [{
+		save: function save(_ref3) {
+			var attributes = _ref3.attributes,
+			    className = _ref3.className;
+			var items = attributes.items,
+			    classes = attributes.classes,
+			    priceUnit = attributes.priceUnit,
+			    priceCaption = attributes.priceCaption,
+			    linkText = attributes.linkText,
+			    loopCount = attributes.loopCount;
+
+			var primaryClass = 'wp-block-catpow-pricecard';
+			var classArray = _.uniq(attributes.classes.split(' '));
+
+			var states = CP.wordsToFlags(classes);
+
+			var rtn = [];
+			var imageKeys = {
+				image: { src: "src", alt: "alt", code: 'imageCode', items: "items" }
+			};
+			items.map(function (item, index) {
+				if (!item.controlClasses) {
+					item.controlClasses = 'control';
+				}
+				rtn.push(wp.element.createElement(
+					'li',
+					{ className: item.classes },
+					states.hasImage && wp.element.createElement(
+						'div',
+						{ className: 'image' },
+						wp.element.createElement(ResponsiveImage, {
+							attr: attributes,
+							keys: imageKeys.image,
+							index: index,
+							size: 'vga',
+							isTemplate: states.isTemplate
+						})
+					),
+					wp.element.createElement(
+						'header',
+						null,
+						wp.element.createElement(
+							'div',
+							{ className: 'text' },
+							states.hasTitle && wp.element.createElement(
+								'h3',
+								null,
+								wp.element.createElement(RichText.Content, { value: item.title })
+							),
+							states.hasTitle && states.hasTitleCaption && wp.element.createElement(
+								'p',
+								null,
+								wp.element.createElement(RichText.Content, { value: item.titleCaption })
+							),
+							wp.element.createElement(
+								'div',
+								{ 'class': 'price' },
+								wp.element.createElement(
+									'span',
+									{ 'class': 'listPrice' },
+									states.unitBefore && wp.element.createElement(
+										'span',
+										{ 'class': 'unit' },
+										priceUnit
+									),
+									wp.element.createElement(
+										'span',
+										{ 'class': 'number' },
+										item.listPrice
+									),
+									states.unitAfter && wp.element.createElement(
+										'span',
+										{ 'class': 'unit' },
+										priceUnit
+									)
+								),
+								wp.element.createElement(
+									'span',
+									{ 'class': 'price' },
+									states.unitBefore && wp.element.createElement(
+										'span',
+										{ 'class': 'unit' },
+										priceUnit
+									),
+									wp.element.createElement(
+										'span',
+										{ 'class': 'number' },
+										item.price
+									),
+									states.unitAfter && wp.element.createElement(
+										'span',
+										{ 'class': 'unit' },
+										priceUnit
+									)
+								),
+								wp.element.createElement(
+									'span',
+									{ 'class': 'priceCaption' },
+									wp.element.createElement(RichText.Content, { value: priceCaption })
+								)
+							)
+						)
+					),
+					(states.hasSubTitle || states.hasText || states.hasSpec || states.hasLink) && wp.element.createElement(
+						'div',
+						{ 'class': 'contents' },
+						states.hasSubTitle && wp.element.createElement(
+							'h4',
+							null,
+							wp.element.createElement(RichText.Content, { value: item.subTitle })
+						),
+						states.hasText && wp.element.createElement(
+							'p',
+							null,
+							wp.element.createElement(RichText.Content, { value: item.text })
+						),
+						states.hasSpec && wp.element.createElement(
+							'dl',
+							{ className: 'spec' },
+							item.specLabels.map(function (label, specIndex) {
+								return [wp.element.createElement(
+									'dt',
+									null,
+									wp.element.createElement(RichText.Content, { value: items[index].specLabels[specIndex].text })
+								), wp.element.createElement(
+									'dd',
+									null,
+									wp.element.createElement(RichText.Content, { value: items[index].specValues[specIndex].text })
+								)];
+							})
+						),
+						states.hasLink && wp.element.createElement(
+							'a',
+							{ className: 'link', href: item.linkUrl },
+							linkText
+						)
+					)
+				));
+			});
+			return wp.element.createElement(
+				'ul',
+				{ className: classes },
+				states.doLoop && '[loop_template ' + (loopParam || '') + ']',
+				rtn,
+				states.doLoop && '[/loop_template]'
+			);
+		},
+		migrate: function migrate(attributes) {
+			var states = CP.wordsToFlags(classes);
+			attributes.content_path = attributes.loopParam.split(' ')[0];
+			attributes.query = attributes.loopParam.split(' ').slice(1).join("\n");
+			attributes.doLoop = states.doLoop;
+			return attributes;
+		}
+	}]
 });

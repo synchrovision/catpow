@@ -279,30 +279,10 @@ registerBlockType('catpow/listed', {
 		return wp.element.createElement(
 			Fragment,
 			null,
-			wp.element.createElement(
-				BlockControls,
-				null,
-				!AltMode && wp.element.createElement(Toolbar, {
-					controls: [{
-						icon: 'edit',
-						title: 'EditMode',
-						isActive: EditMode,
-						onClick: function onClick() {
-							return setAttributes({ EditMode: !EditMode });
-						}
-					}]
-				}),
-				!EditMode && doLoop && wp.element.createElement(Toolbar, {
-					controls: [{
-						icon: 'welcome-comments',
-						title: 'AltMode',
-						isActive: AltMode,
-						onClick: function onClick() {
-							return setAttributes({ AltMode: !AltMode });
-						}
-					}]
-				})
-			),
+			wp.element.createElement(SelectModeToolbar, {
+				set: setAttributes,
+				attr: attributes
+			}),
 			wp.element.createElement(
 				InspectorControls,
 				null,

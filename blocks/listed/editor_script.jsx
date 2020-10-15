@@ -260,32 +260,10 @@
 		
         return (
 			<Fragment>
-				<BlockControls>
-					{!AltMode && 
-						<Toolbar
-							controls={[
-								{
-									icon: 'edit',
-									title: 'EditMode',
-									isActive: EditMode,
-									onClick: () => setAttributes({EditMode:!EditMode})
-								}
-							]}
-						/>
-					}
-					{(!EditMode && doLoop) && 
-						<Toolbar
-							controls={[
-								{
-									icon: 'welcome-comments',
-									title: 'AltMode',
-									isActive: AltMode,
-									onClick: () => setAttributes({AltMode:!AltMode})
-								}
-							]}
-						/>
-					}
-				</BlockControls>
+				<SelectModeToolbar
+					set={setAttributes}
+					attr={attributes}
+				/>
 				<InspectorControls>
 					<SelectClassPanel
 						title='クラス'

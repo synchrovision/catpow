@@ -15,39 +15,9 @@
 			}
 		]
 	},
-	attributes:{
-		classes:{source:'attribute',selector:'ul',attribute:'class',default:'wp-block-catpow-banners medium hasTitle'},
-		items:{
-			source:'query',
-			selector:'li.item',
-			query:{
-				classes:{source:'attribute',attribute:'class'},
-				title:{source:'children',selector:'h3'},
-				src:{source:'attribute',selector:'[src]',attribute:'src'},
-				srcset:{source:'attribute',selector:'[src]',attribute:'srcset'},
-				alt:{source:'attribute',selector:'[src]',attribute:'alt'},
-				imageCode:{source:'text',selector:'a'},
-				linkUrl:{source:'attribute',selector:'a',attribute:'href'},
-				target:{source:'attribute',selector:'a',attribute:'target'},
-				event:{source:'attribute',selector:'a',attribute:'data-event'}
-			},
-			default:[...Array(3)].map(()=>{
-				return {
-					classes:'item',
-					title:['Title'],
-					src:cp.theme_url+'/images/dummy.jpg',
-					alt:'dummy',
-					linkUrl:cp.home_url,
-					imageCode:'[output image]'
-				}
-			})
-		},
-		loopParam:{type:'text',default:''},
-		loopCount:{type:'number',default:1}
-	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {items,classes,loopCount,imageCode}=attributes;
+		const {items,classes,loopCount,imageCode,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-banners';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
@@ -64,9 +34,10 @@
 				label:'テンプレート',
 				values:'isTemplate',
 				sub:[
-					{label:'ループ',values:'doLoop',sub:[
-						{label:'パラメータ',input:'text',key:'loopParam'},
-						{label:'ループ数',input:'range',key:'loopCount',min:1,max:16}
+					{input:'bool',label:'ループ',key:'doLoop',sub:[
+						{label:'content path',input:'text',key:'content_path'},
+						{label:'query',input:'textarea',key:'query'},
+						{label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
 					]}
 				]
 			}
@@ -140,53 +111,91 @@
 			}
 		}
 		
-        return [
-			<InspectorControls>
-				<SelectClassPanel
-					title='クラス'
-					icon='art'
+        return (
+			<Fragment>
+				<SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters.banners || {}}
 				/>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label='クラス'
-						onChange={(clss)=>setAttributes({classes:clss})}
-						value={classArray.join(' ')}
-					/>
-				</PanelBody>
-				{states.isTemplate?(
-					<SelectItemClassPanel
-						title='テンプレート'
-						icon='edit'
+				<InspectorControls>
+					<SelectClassPanel
+						title='クラス'
+						icon='art'
 						set={setAttributes}
 						attr={attributes}
-						items={items}
-						index={attributes.currentItemIndex}
-						itemClasses={itemTemplateSelectiveClasses}
+						selectiveClasses={selectiveClasses}
 						filters={CP.filters.banners || {}}
 					/>
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label='クラス'
+							onChange={(clss)=>setAttributes({classes:clss})}
+							value={classArray.join(' ')}
+						/>
+					</PanelBody>
+					{states.isTemplate?(
+						<SelectItemClassPanel
+							title='テンプレート'
+							icon='edit'
+							set={setAttributes}
+							attr={attributes}
+							items={items}
+							index={attributes.currentItemIndex}
+							itemClasses={itemTemplateSelectiveClasses}
+							filters={CP.filters.banners || {}}
+						/>
+					):(
+						<SelectItemClassPanel
+							title='バナー'
+							icon='edit'
+							set={setAttributes}
+							attr={attributes}
+							items={items}
+							index={attributes.currentItemIndex}
+							itemClasses={selectiveItemClasses}
+							filters={CP.filters.banners || {}}
+						/>
+					)}
+					<ItemControlInfoPanel/>
+				</InspectorControls>
+				
+				{EditMode?(
+					<div className="alt_content">
+						<div class="label">
+							<Icon icon="edit"/>
+						</div>
+						<EditItemsTable
+							set={setAttributes}
+							attr={attributes}
+							columns={[
+								{type:'text',key:'title',cond:states.hasTitle},
+								{type:'image',label:'image',keys:imageKeys.image,cond:true},
+								{type:'text',key:'imageCode',cond:states.isTemplate},
+								{type:'text',key:'linkUrl',cond:true},
+								{type:'text',key:'target',cond:true},
+							]}
+							isTemplate={states.isTemplate}
+						/>
+					</div>
 				):(
-					<SelectItemClassPanel
-						title='バナー'
-						icon='edit'
-						set={setAttributes}
-						attr={attributes}
-						items={items}
-						index={attributes.currentItemIndex}
-						itemClasses={selectiveItemClasses}
-						filters={CP.filters.banners || {}}
-					/>
+					<Fragment>
+						{(AltMode && doLoop)?(
+							<div className="alt_content">
+								<div class="label">
+									<Icon icon="welcome-comments"/>
+								</div>
+								<InnerBlocks/>
+							</div>
+						):(
+							<ul className={classes}>{rtn}</ul>
+						)}
+					</Fragment>
 				)}
-				<ItemControlInfoPanel/>
-			</InspectorControls>,
-			<ul className={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>
-        ];
+			</Fragment>
+        );
     },
 	save({attributes,className}){
-		const {items,classes,loopParam}=attributes;
+		const {items,classes,loopParam,doLoop}=attributes;
 		
 		var states=CP.wordsToFlags(classes);
 		const imageKeys={
@@ -194,27 +203,71 @@
 		};
 		
 		return (
-			<ul className={classes}>
-				{states.doLoop && '[loop_template '+loopParam+']'}
-				{
-					items.map((item,index)=>{
-						return (
-							<li className={item.classes}>
-								{states.hasTitle && <h3><RichText.Content value={item.title}/></h3>}
-								<a href={item.linkUrl} target={item.target} data-event={item.event} rel={item.target?'noopener noreferrer':''}>
-									<ResponsiveImage
-										attr={attributes}
-										keys={imageKeys.image}
-										index={index}
-										isTemplate={states.isTemplate}
-									/>
-								</a>
-							</li>
-						);
-					})
-				}
-				{states.doLoop && '[/loop_template]'}
-			</ul>
+			<Fragment>
+				<ul className={classes}>
+					{
+						items.map((item,index)=>{
+							return (
+								<li className={item.classes}>
+									{states.hasTitle && <h3><RichText.Content value={item.title}/></h3>}
+									<a href={item.linkUrl} target={item.target} data-event={item.event} rel={item.target?'noopener noreferrer':''}>
+										<ResponsiveImage
+											attr={attributes}
+											keys={imageKeys.image}
+											index={index}
+											isTemplate={states.isTemplate}
+										/>
+									</a>
+								</li>
+							);
+						})
+					}
+				</ul>
+				{doLoop && <onEmpty><InnerBlocks.Content/></onEmpty>}
+			</Fragment>
 		);
 	},
+	deprecated:[
+		{
+			save({attributes,className}){
+				const {items,classes,loopParam}=attributes;
+
+				var states=CP.wordsToFlags(classes);
+				const imageKeys={
+					image:{src:"src",srcset:"srcset",alt:"alt",code:'imageCode',items:"items"}
+				};
+
+				return (
+					<ul className={classes}>
+						{states.doLoop && '[loop_template '+loopParam+']'}
+						{
+							items.map((item,index)=>{
+								return (
+									<li className={item.classes}>
+										{states.hasTitle && <h3><RichText.Content value={item.title}/></h3>}
+										<a href={item.linkUrl} target={item.target} data-event={item.event} rel={item.target?'noopener noreferrer':''}>
+											<ResponsiveImage
+												attr={attributes}
+												keys={imageKeys.image}
+												index={index}
+												isTemplate={states.isTemplate}
+											/>
+										</a>
+									</li>
+								);
+							})
+						}
+						{states.doLoop && '[/loop_template]'}
+					</ul>
+				);
+			},
+			migrate(attributes){
+				var states=CP.wordsToFlags(classes);
+				attributes.content_path=attributes.loopParam.split(' ')[0];
+				attributes.query=attributes.loopParam.split(' ').slice(1).join("\n");
+				attributes.doLoop=states.doLoop;
+				return attributes;
+			}
+		}
+	]
 });

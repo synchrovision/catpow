@@ -18,58 +18,9 @@
 		]
 	},
 	
-	attributes:{
-		classes:{source:'attribute',selector:'div',attribute:'class',default:'wp-block-catpow-slider story hasTitle hasText hasImage'},
-		controlClasses:{source:'attribute',selector:'div.controls',attribute:'class',default:'controls loop autoplay flickable'},
-		config:{
-			source:'attribute',
-			selector:'div.controls',
-			attribute:'data-config',
-			default:'{}'
-		},
-		items:{
-			source:'query',
-			selector:'ul.contents li.item',
-			query:{
-				classes:{source:'attribute',attribute:'class'},
-				title:{source:'children',selector:'.text h3'},
-				subTitle:{source:'children',selector:'.text h4'},
-				src:{source:'attribute',selector:'.image [src]',attribute:'src'},
-				alt:{source:'attribute',selector:'.image [src]',attribute:'alt'},
-				imageCode:{source:'text',selector:'.image'},
-				slideSrc:{source:'attribute',selector:'.slide [src]',attribute:'src'},
-				slideAlt:{source:'attribute',selector:'.slide [src]',attribute:'alt'},
-				slideSrcset:{source:'attribute',selector:'.slide [src]',attribute:'srcset'},
-				slideCode:{source:'text',selector:'.slide'},
-				text:{source:'children',selector:'.text p'},
-				linkUrl:{source:'attribute',selector:'a',attribute:'href'},
-				backgroundImageSrc:{source:'attribute',selector:'.background [src]',attribute:'src'},
-				backgroundImageAlt:{source:'attribute',selector:'.background [src]',attribute:'alt'},
-				backgroundImageSrcset:{source:'attribute',selector:'.background [src]',attribute:'srcset'},
-				backgroundImageCode:{source:'text',selector:'.background'}
-			},
-			default:[
-				{
-					classes:'item',
-					title:['Title'],
-					subTitle:['SubTitle'],
-					src:cp.theme_url+'/images/dummy.jpg',
-					alt:'dummy',
-					text:['Text'],
-					linkUrl:'https://',
-					backgroundImageSrc:cp.theme_url+'/images/dummy_bg.jpg',
-					backgroundImageAlt:'dummy',
-					backgroundImageSrcset:null
-				}
-			]
-		},
-		blockState:{type:'object',default:{enableBlockFormat:false}},
-		loopParam:{type:'text',default:''},
-		loopCount:{type:'number',default:1}
-	},
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
-		const {classes,controlClasses,config,items}=attributes;
+		const {classes,controlClasses,config,items,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-slider';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var controlClassArray=_.uniq(attributes.controlClasses.split(' '));
@@ -176,9 +127,10 @@
 				label:'テンプレート',
 				values:'isTemplate',
 				sub:[
-					{label:'ループ',values:'doLoop',sub:[
-						{label:'パラメータ',input:'text',key:'loopParam'},
-						{label:'ループ数',input:'range',key:'loopCount',min:1,max:16}
+					{input:'bool',label:'ループ',key:'doLoop',sub:[
+						{label:'content path',input:'text',key:'content_path'},
+						{label:'query',input:'textarea',key:'query'},
+						{label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
 					]}
 				]
 			}
@@ -325,18 +277,10 @@
 		
 		return (
 			<Fragment>
-				<BlockControls>
-					<Toolbar
-						controls={[
-							{
-								icon: 'edit',
-								title: 'EditMode',
-								isActive: attributes.EditMode,
-								onClick: () => setAttributes({EditMode:!attributes.EditMode})
-							}
-						]}
-					/>
-				</BlockControls>
+				<SelectModeToolbar
+					set={setAttributes}
+					attr={attributes}
+				/>
 				<InspectorControls>
 					<SelectClassPanel
 						title='クラス'
@@ -408,21 +352,32 @@
 						isTemplate={states.isTemplate}
 					/>
 				):(
-					<div className={classes}>
-						<ul class="contents">{rtn}</ul>
-						<div className={controlClasses} data-config={config}>
-							{states.hasArrows && <div class='arrow prev' onClick={prevItem}> </div>}
-							{states.hasImage && states.hasThumbnail && <ul class="thumbnail">{thumbs}</ul>}
-							{states.hasDots && <ul class="dots">{dots}</ul>}
-							{states.hasArrows && <div class='arrow next' onClick={nextItem}> </div>}
-						</div>
-					</div>
+					<Fragment>
+						{(AltMode && doLoop)?(
+							<div className="alt_content">
+								<div class="label">
+									<Icon icon="welcome-comments"/>
+								</div>
+								<InnerBlocks/>
+							</div>
+						):(
+							<div className={classes}>
+								<ul class="contents">{rtn}</ul>
+								<div className={controlClasses} data-config={config}>
+									{states.hasArrows && <div class='arrow prev' onClick={prevItem}> </div>}
+									{states.hasImage && states.hasThumbnail && <ul class="thumbnail">{thumbs}</ul>}
+									{states.hasDots && <ul class="dots">{dots}</ul>}
+									{states.hasArrows && <div class='arrow next' onClick={nextItem}> </div>}
+								</div>
+							</div>
+						)}
+					</Fragment>
 				)}
 			</Fragment>
 		);
 	},
 	save({attributes,className}){
-		const {classes,controlClasses,config,items}=attributes;
+		const {classes,controlClasses,config,items,doLoop}=attributes;
 		var classArray=_.uniq(attributes.classes.split(' '));
 		var controlClassArray=_.uniq(attributes.controlClasses.split(' '));
 		
@@ -493,19 +448,22 @@
 			}
 		});
 		
-		return <div className={classes}>
-			<ul class="contents">
-				{states.doLoop && '[loop_template '+(loopParam || '')+']'}
-				{rtn}
-				{states.doLoop && '[/loop_template]'}
-			</ul>
-			<div className={controlClasses} data-config={config}>
-				{states.hasArrows && <div class='arrow prev'> </div>}
-				{states.hasImage && states.hasThumbnail && <ul class="thumbnail">{thumbs}</ul>}
-				{states.hasDots && <ul class="dots"><li class="dot"> </li></ul>}
-				{states.hasArrows && <div class='arrow next'> </div>}
-			</div>
-		</div>;
+		return (
+			<Fragment>
+				<div className={classes}>
+					<ul class="contents">
+						{rtn}
+					</ul>
+					<div className={controlClasses} data-config={config}>
+						{states.hasArrows && <div class='arrow prev'> </div>}
+						{states.hasImage && states.hasThumbnail && <ul class="thumbnail">{thumbs}</ul>}
+						{states.hasDots && <ul class="dots"><li class="dot"> </li></ul>}
+						{states.hasArrows && <div class='arrow next'> </div>}
+					</div>
+				</div>
+				{doLoop && <onEmpty><InnerBlocks.Content/></onEmpty>}
+			</Fragment>
+		);
 	},
 	deprecated:[
 		{
@@ -614,6 +572,101 @@
 					</div>
 				</div>;
 			},
+		},
+		{
+			save({attributes,className}){
+				const {classes,controlClasses,config,items}=attributes;
+				var classArray=_.uniq(attributes.classes.split(' '));
+				var controlClassArray=_.uniq(attributes.controlClasses.split(' '));
+
+				var states=CP.wordsToFlags(classes);
+
+				const imageKeys={
+					image:{src:"src",alt:"alt",code:'imageCode',items:"items"},
+					slide:{src:"slideSrc",alt:"slideAlt",srscet:"slideSrcset",code:'slideCode',items:"items"},
+					backgroundImage:{src:"backgroundImageSrc",alt:"backgroundImageAlt",srcset:"backgroundImageSrcset",code:'backgroundImageCode',items:"items"}
+				};
+
+				var rtn=[];
+				var thumbs=[];
+				items.map(function(item,index){
+					rtn.push(
+						<li className={item.classes}>
+							{states.hasSlide &&
+								<div className='slide'>
+									<ResponsiveImage
+										attr={attributes}
+										keys={imageKeys.slide}
+										index={index}
+										isTemplate={states.isTemplate}
+									/>
+								</div>
+							}
+							{states.hasImage &&
+								<div className='image'>
+									<ResponsiveImage
+										attr={attributes}
+										keys={imageKeys.image}
+										index={index}
+										isTemplate={states.isTemplate}
+									/>
+								</div>
+							}
+							{(states.hasTitle || states.hasSubTitle || states.hasText) && 
+								<div class="text">
+									{states.hasTitle && <h3><RichText.Content value={item.title}/></h3>}
+									{states.hasSubTitle && <h4><RichText.Content value={item.subTitle}/></h4>}
+									{states.hasText && <p><RichText.Content value={item.text}/></p>}
+								</div>
+							}
+							{states.hasBackgroundImage &&
+								<div className='background'>
+									<ResponsiveImage
+										attr={attributes}
+										keys={imageKeys.backgroundImage}
+										index={index}
+										isTemplate={states.isTemplate}
+									/>
+								</div>
+							}
+							{states.hasLink && <div className='link'><a href={item.linkUrl}> </a></div>}
+						</li>
+					);
+					if(states.hasImage && states.hasThumbnail){
+						thumbs.push(
+							<li class={item.classes}>
+								<ResponsiveImage
+									attr={attributes}
+									keys={imageKeys.image}
+									index={index}
+									isTemplate={states.isTemplate}
+								/>
+							</li>
+						);
+					}
+				});
+
+				return <div className={classes}>
+					<ul class="contents">
+						{states.doLoop && '[loop_template '+(loopParam || '')+']'}
+						{rtn}
+						{states.doLoop && '[/loop_template]'}
+					</ul>
+					<div className={controlClasses} data-config={config}>
+						{states.hasArrows && <div class='arrow prev'> </div>}
+						{states.hasImage && states.hasThumbnail && <ul class="thumbnail">{thumbs}</ul>}
+						{states.hasDots && <ul class="dots"><li class="dot"> </li></ul>}
+						{states.hasArrows && <div class='arrow next'> </div>}
+					</div>
+				</div>;
+			},
+			migrate(attributes){
+				var states=CP.wordsToFlags(classes);
+				attributes.content_path=attributes.loopParam.split(' ')[0];
+				attributes.query=attributes.loopParam.split(' ').slice(1).join("\n");
+				attributes.doLoop=states.doLoop;
+				return attributes;
+			}
 		}
 	]
 });

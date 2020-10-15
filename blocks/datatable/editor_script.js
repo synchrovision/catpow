@@ -48,30 +48,6 @@ registerBlockType('catpow/datatable', {
 			}
 		}]
 	},
-	attributes: {
-		classes: { source: 'attribute', selector: 'table', attribute: 'class', default: 'wp-block-catpow-datatable spec hasHeaderRow hasHeaderColumn' },
-
-		rows: {
-			source: 'query',
-			selector: 'table tr',
-			query: {
-				classes: { source: 'attribute', attribute: 'class' },
-				cells: {
-					source: 'query',
-					selector: 'th,td',
-					query: {
-						text: { source: 'children' },
-						classes: { source: 'attribute', attribute: 'class' },
-						style: { source: 'attribute', attribute: 'style' }
-					}
-				}
-			},
-			default: [{ classes: '', cells: [{ text: [''], classes: 'spacer' }, { text: ['Title'], classes: '' }, { text: ['Title'], classes: '' }] }, { classes: '', cells: [{ text: ['Title'], classes: '' }, { text: ['Content'], classes: '' }, { text: ['Content'], classes: '' }] }, { classes: '', cells: [{ text: ['Title'], classes: '' }, { text: ['Content'], classes: '' }, { text: ['Content'], classes: '' }] }]
-		},
-		file: { type: 'object' },
-		blockState: { type: 'object', default: { enableBlockFormat: true } },
-		loopParam: { type: 'text', default: '' }
-	},
 	example: CP.example,
 	edit: function edit(_ref) {
 		var attributes = _ref.attributes,
@@ -79,7 +55,10 @@ registerBlockType('catpow/datatable', {
 		    setAttributes = _ref.setAttributes,
 		    isSelected = _ref.isSelected;
 		var classes = attributes.classes,
-		    rows = attributes.rows;
+		    rows = attributes.rows,
+		    doLoop = attributes.doLoop,
+		    _attributes$AltMode = attributes.AltMode,
+		    AltMode = _attributes$AltMode === undefined ? false : _attributes$AltMode;
 
 		var primaryClass = 'wp-block-catpow-datatable';
 		var classArray = _.uniq((className + ' ' + classes).split(' '));
@@ -107,7 +86,7 @@ registerBlockType('catpow/datatable', {
 		}
 
 		var statesClasses = [{ label: 'ヘッダ行', values: 'hasHeaderRow' }, { label: 'ヘッダ列', values: 'hasHeaderColumn' }];
-		var selectiveClasses = [{ label: 'タイプ', filter: 'type', values: ['spec', 'sheet', 'plan'] }, 'color', { label: 'ループ', values: 'doLoop', sub: [{ label: 'パラメータ', input: 'text', key: 'loopParam' }] }];
+		var selectiveClasses = [{ label: 'タイプ', filter: 'type', values: ['spec', 'sheet', 'plan'] }, 'color', { input: 'bool', label: 'ループ', key: 'doLoop', sub: [{ label: 'content path', input: 'text', key: 'content_path' }, { label: 'query', input: 'textarea', key: 'query' }] }];
 
 		var saveItems = function saveItems() {
 			setAttributes({ rows: JSON.parse(JSON.stringify(rows)) });
@@ -155,167 +134,257 @@ registerBlockType('catpow/datatable', {
 			saveItems();
 		};
 
-		return [wp.element.createElement(
-			'table',
-			{ className: classes },
-			states.hasHeaderRow && wp.element.createElement(
-				'thead',
+		return wp.element.createElement(
+			Fragment,
+			null,
+			wp.element.createElement(SelectModeToolbar, {
+				set: setAttributes,
+				attr: attributes,
+				modes: ['AltMode']
+			}),
+			wp.element.createElement(
+				Fragment,
 				null,
-				wp.element.createElement(
-					'tr',
-					null,
-					rows[0].cells.map(function (cell, index) {
-						if (index === 0) {
-							if (states.hasHeaderColumn && cell.text.length === 0) {
-								cell.classes = 'spacer';
-							} else if (cell.classes == 'spacer') {
-								cell.classes = '';
+				AltMode && doLoop ? wp.element.createElement(
+					'div',
+					{ className: 'alt_content' },
+					wp.element.createElement(
+						'div',
+						{ 'class': 'label' },
+						wp.element.createElement(Icon, { icon: 'welcome-comments' })
+					),
+					wp.element.createElement(InnerBlocks, null)
+				) : wp.element.createElement(
+					'table',
+					{ className: classes },
+					states.hasHeaderRow && wp.element.createElement(
+						'thead',
+						null,
+						wp.element.createElement(
+							'tr',
+							null,
+							rows[0].cells.map(function (cell, index) {
+								if (index === 0) {
+									if (states.hasHeaderColumn && cell.text.length === 0) {
+										cell.classes = 'spacer';
+									} else if (cell.classes == 'spacer') {
+										cell.classes = '';
+									}
+								}
+								return wp.element.createElement(
+									'th',
+									{ className: cell.classes },
+									wp.element.createElement(RichText, { onChange: function onChange(text) {
+											cell.text = text;saveItems();
+										}, value: cell.text })
+								);
+							})
+						)
+					),
+					wp.element.createElement(
+						'tbody',
+						null,
+						rows.map(function (row, index) {
+							if (states.hasHeaderRow && index == 0) {
+								return false;
 							}
-						}
-						return wp.element.createElement(
-							'th',
-							{ className: cell.classes },
-							wp.element.createElement(RichText, { onChange: function onChange(text) {
-									cell.text = text;saveItems();
-								}, value: cell.text })
-						);
-					})
+							return wp.element.createElement(
+								'tr',
+								null,
+								row.cells.map(function (cell, columnIndex) {
+									var children = [wp.element.createElement(RichText, { onChange: function onChange(text) {
+											cell.text = text;saveItems();
+										}, value: cell.text })];
+									if (isSelected && columnIndex == row.cells.length - 1) {
+										children.push(wp.element.createElement(
+											'div',
+											{ 'class': 'itemControl rowControl' },
+											wp.element.createElement('div', { className: 'btn up', onClick: function onClick() {
+													return downRow(index);
+												} }),
+											wp.element.createElement('div', { className: 'btn delete', onClick: function onClick() {
+													return deleteRow(index);
+												} }),
+											wp.element.createElement('div', { className: 'btn clone', onClick: function onClick() {
+													return addRow(index);
+												} }),
+											wp.element.createElement('div', { className: 'btn down', onClick: function onClick() {
+													return upRow(index);
+												} })
+										));
+									}
+									if (isSelected && index == rows.length - 1) {
+										children.push(wp.element.createElement(
+											'div',
+											{ 'class': 'itemControl columnControl' },
+											wp.element.createElement('div', { className: 'btn left', onClick: function onClick() {
+													return downColumn(columnIndex);
+												} }),
+											wp.element.createElement('div', { className: 'btn delete', onClick: function onClick() {
+													return deleteColumn(columnIndex);
+												} }),
+											wp.element.createElement('div', { className: 'btn clone', onClick: function onClick() {
+													return addColumn(columnIndex);
+												} }),
+											wp.element.createElement('div', { className: 'btn right', onClick: function onClick() {
+													return upColumn(columnIndex);
+												} })
+										));
+									}
+									return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? 'th' : 'td', { className: cell.classes }, children);
+								})
+							);
+						})
+					)
 				)
 			),
 			wp.element.createElement(
-				'tbody',
+				InspectorControls,
 				null,
-				rows.map(function (row, index) {
-					if (states.hasHeaderRow && index == 0) {
-						return false;
-					}
-					return wp.element.createElement(
-						'tr',
-						null,
-						row.cells.map(function (cell, columnIndex) {
-							var children = [wp.element.createElement(RichText, { onChange: function onChange(text) {
-									cell.text = text;saveItems();
-								}, value: cell.text })];
-							if (isSelected && columnIndex == row.cells.length - 1) {
-								children.push(wp.element.createElement(
-									'div',
-									{ 'class': 'itemControl rowControl' },
-									wp.element.createElement('div', { className: 'btn up', onClick: function onClick() {
-											return downRow(index);
-										} }),
-									wp.element.createElement('div', { className: 'btn delete', onClick: function onClick() {
-											return deleteRow(index);
-										} }),
-									wp.element.createElement('div', { className: 'btn clone', onClick: function onClick() {
-											return addRow(index);
-										} }),
-									wp.element.createElement('div', { className: 'btn down', onClick: function onClick() {
-											return upRow(index);
-										} })
-								));
-							}
-							if (isSelected && index == rows.length - 1) {
-								children.push(wp.element.createElement(
-									'div',
-									{ 'class': 'itemControl columnControl' },
-									wp.element.createElement('div', { className: 'btn left', onClick: function onClick() {
-											return downColumn(columnIndex);
-										} }),
-									wp.element.createElement('div', { className: 'btn delete', onClick: function onClick() {
-											return deleteColumn(columnIndex);
-										} }),
-									wp.element.createElement('div', { className: 'btn clone', onClick: function onClick() {
-											return addColumn(columnIndex);
-										} }),
-									wp.element.createElement('div', { className: 'btn right', onClick: function onClick() {
-											return upColumn(columnIndex);
-										} })
-								));
-							}
-							return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? 'th' : 'td', { className: cell.classes }, children);
-						})
-					);
-				})
+				wp.element.createElement(SelectClassPanel, {
+					title: '\u8868\u793A\u8A2D\u5B9A',
+					icon: 'admin-appearance',
+					set: setAttributes,
+					attr: attributes,
+					selectiveClasses: statesClasses,
+					filters: CP.filters.datatable || {}
+				}),
+				wp.element.createElement(SelectClassPanel, {
+					title: '\u30AF\u30E9\u30B9',
+					icon: 'art',
+					set: setAttributes,
+					attr: attributes,
+					selectiveClasses: selectiveClasses,
+					filters: CP.filters.datatable || {}
+				}),
+				wp.element.createElement(
+					PanelBody,
+					{ title: 'CLASS', icon: 'admin-generic', initialOpen: false },
+					wp.element.createElement(TextareaControl, {
+						label: '\u30AF\u30E9\u30B9',
+						onChange: function onChange(clss) {
+							return setAttributes({ classes: clss });
+						},
+						value: classArray.join(' ')
+					})
+				)
 			)
-		), wp.element.createElement(
-			InspectorControls,
-			null,
-			wp.element.createElement(SelectClassPanel, {
-				title: '\u8868\u793A\u8A2D\u5B9A',
-				icon: 'admin-appearance',
-				set: setAttributes,
-				attr: attributes,
-				selectiveClasses: statesClasses,
-				filters: CP.filters.datatable || {}
-			}),
-			wp.element.createElement(SelectClassPanel, {
-				title: '\u30AF\u30E9\u30B9',
-				icon: 'art',
-				set: setAttributes,
-				attr: attributes,
-				selectiveClasses: selectiveClasses,
-				filters: CP.filters.datatable || {}
-			}),
-			wp.element.createElement(
-				PanelBody,
-				{ title: 'CLASS', icon: 'admin-generic', initialOpen: false },
-				wp.element.createElement(TextareaControl, {
-					label: '\u30AF\u30E9\u30B9',
-					onChange: function onChange(clss) {
-						return setAttributes({ classes: clss });
-					},
-					value: classArray.join(' ')
-				})
-			)
-		)];
+		);
 	},
 	save: function save(_ref2) {
 		var attributes = _ref2.attributes,
 		    className = _ref2.className;
 		var classes = attributes.classes,
 		    rows = attributes.rows,
-		    loopParam = attributes.loopParam;
+		    loopParam = attributes.loopParam,
+		    doLoop = attributes.doLoop;
 
 		var classArray = classes.split(' ');
 
 		var states = CP.wordsToFlags(classes);
 
 		return wp.element.createElement(
-			'table',
-			{ className: classes },
-			states.hasHeaderRow && wp.element.createElement(
-				'thead',
-				null,
-				wp.element.createElement(
-					'tr',
+			Fragment,
+			null,
+			wp.element.createElement(
+				'table',
+				{ className: classes },
+				states.hasHeaderRow && wp.element.createElement(
+					'thead',
 					null,
-					rows[0].cells.map(function (cell, index) {
+					wp.element.createElement(
+						'tr',
+						null,
+						rows[0].cells.map(function (cell, index) {
+							return wp.element.createElement(
+								'th',
+								{ className: cell.classes },
+								wp.element.createElement(RichText.Content, { value: cell.text })
+							);
+						})
+					)
+				),
+				wp.element.createElement(
+					'tbody',
+					null,
+					rows.map(function (row, index) {
+						if (states.hasHeaderRow && index == 0) {
+							return false;
+						}
 						return wp.element.createElement(
-							'th',
-							{ className: cell.classes },
-							wp.element.createElement(RichText.Content, { value: cell.text })
+							'tr',
+							null,
+							row.cells.map(function (cell, columnIndex) {
+								return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? 'th' : 'td', { className: cell.classes }, cell.text);
+							})
 						);
 					})
 				)
 			),
-			wp.element.createElement(
-				'tbody',
+			doLoop && wp.element.createElement(
+				'onEmpty',
 				null,
-				states.doLoop && '[loop_template ' + (loopParam || '') + ']',
-				rows.map(function (row, index) {
-					if (states.hasHeaderRow && index == 0) {
-						return false;
-					}
-					return wp.element.createElement(
-						'tr',
-						null,
-						row.cells.map(function (cell, columnIndex) {
-							return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? 'th' : 'td', { className: cell.classes }, cell.text);
-						})
-					);
-				}),
-				states.doLoop && '[/loop_template]'
+				wp.element.createElement(InnerBlocks.Content, null)
 			)
 		);
-	}
+	},
+
+	deprecated: [{
+		save: function save(_ref3) {
+			var attributes = _ref3.attributes,
+			    className = _ref3.className;
+			var classes = attributes.classes,
+			    rows = attributes.rows,
+			    loopParam = attributes.loopParam;
+
+			var classArray = classes.split(' ');
+
+			var states = CP.wordsToFlags(classes);
+
+			return wp.element.createElement(
+				'table',
+				{ className: classes },
+				states.hasHeaderRow && wp.element.createElement(
+					'thead',
+					null,
+					wp.element.createElement(
+						'tr',
+						null,
+						rows[0].cells.map(function (cell, index) {
+							return wp.element.createElement(
+								'th',
+								{ className: cell.classes },
+								wp.element.createElement(RichText.Content, { value: cell.text })
+							);
+						})
+					)
+				),
+				wp.element.createElement(
+					'tbody',
+					null,
+					states.doLoop && '[loop_template ' + (loopParam || '') + ']',
+					rows.map(function (row, index) {
+						if (states.hasHeaderRow && index == 0) {
+							return false;
+						}
+						return wp.element.createElement(
+							'tr',
+							null,
+							row.cells.map(function (cell, columnIndex) {
+								return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? 'th' : 'td', { className: cell.classes }, cell.text);
+							})
+						);
+					}),
+					states.doLoop && '[/loop_template]'
+				)
+			);
+		},
+		migrate: function migrate(attributes) {
+			var states = CP.wordsToFlags(classes);
+			attributes.content_path = attributes.loopParam.split(' ')[0];
+			attributes.query = attributes.loopParam.split(' ').slice(1).join("\n");
+			attributes.doLoop = states.doLoop;
+			return attributes;
+		}
+	}]
 });

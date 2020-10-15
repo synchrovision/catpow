@@ -3,54 +3,9 @@
 	description:'サービス・商品情報の一覧ブロックです。',
 	icon: 'index-card',
 	category: 'catpow',
-	attributes:{
-		version:{type:'number',default:0},
-		classes:{source:'attribute',selector:'ul',attribute:'class',default:'wp-block-catpow-pricecard hasImage hasTitle hasSpec unitBefore'},
-		priceUnit:{source:'text',selector:'span.price .unit',default:'¥'},
-		priceCaption:{source:'children',selector:'span.priceCaption',default:['（税込）']},
-		linkText:{source:'text',selector:'.link',default:'more info'},
-		items:{
-			source:'query',
-			selector:'li.item',
-			query:{
-				classes:{source:'attribute',attribute:'class'},
-				title:{source:'children',selector:'header .text h3'},
-				titleCaption:{source:'children',selector:'header .text p'},
-				src:{source:'attribute',selector:'li>.image [src]',attribute:'src'},
-				alt:{source:'attribute',selector:'li>.image [src]',attribute:'alt'},
-				imageCode:{source:'text',selector:'li>.image'},
-				subTitle:{source:'children',selector:'.contents h4'},
-				text:{source:'children',selector:'.contents p'},
-				listPrice:{source:'text',selector:'span.listPrice .number'},
-				price:{source:'text',selector:'span.price .number'},
-				
-				specLabels:{source:'query',selector:'dl.spec dt',query:{text:{source:'children'}}},
-				specValues:{source:'query',selector:'dl.spec dd',query:{text:{source:'children'}}},
-				linkUrl:{source:'attribute',selector:'.link',attribute:'href'},
-			},
-			default:[...Array(3)].map(()=>{
-				return {
-					classes:'item',
-					title:['Title'],
-					titleCaption:['Caption'],
-					src:cp.theme_url+'/images/dummy.jpg',
-					alt:'dummy',
-					subTitle:['SubTitle'],
-					text:['Text'],
-					listPrice:'0,000',
-					price:'0,000',
-					specLabels:[...Array(3)].map(()=>{return {text:['label']};}),
-					specValues:[...Array(3)].map(()=>{return {text:['value']};}),
-					linkUrl:cp.home_url
-				}
-			})
-		},
-		loopParam:{type:'text',default:''},
-		loopCount:{type:'number',default:1}
-	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {items,classes,priceUnit,priceCaption,linkText,loopCount}=attributes;
+		const {items,classes,priceUnit,priceCaption,linkText,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-pricecard';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
@@ -74,9 +29,10 @@
 				label:'テンプレート',
 				values:'isTemplate',
 				sub:[
-					{label:'ループ',values:'doLoop',sub:[
-						{label:'パラメータ',input:'text',key:'loopParam'},
-						{label:'ループ数',input:'range',key:'loopCount',min:1,max:16}
+					{input:'bool',label:'ループ',key:'doLoop',sub:[
+						{label:'content path',input:'text',key:'content_path'},
+						{label:'query',input:'textarea',key:'query'},
+						{label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
 					]}
 				]
 			}
@@ -239,18 +195,10 @@
 		
         return (
 			<Fragment>
-				<BlockControls>
-					<Toolbar
-						controls={[
-							{
-								icon: 'edit',
-								title: 'EditMode',
-								isActive: attributes.EditMode,
-								onClick: () => setAttributes({EditMode:!attributes.EditMode})
-							}
-						]}
-					/>
-				</BlockControls>
+				<SelectModeToolbar
+					set={setAttributes}
+					attr={attributes}
+				/>
 				<InspectorControls>
 					<SelectClassPanel
 						title='クラス'
@@ -290,20 +238,31 @@
 							{type:'text',key:'imageCode',cond:states.hasImage && states.isTemplate},
 							{type:'text',key:'subTitle',cond:states.hasSubTitle},
 							{type:'text',key:'text',cond:states.hasText},
-							{type:'text',key:'listPrice'},
-							{type:'text',key:'price'},
+							{type:'text',key:'listPrice',cond:true},
+							{type:'text',key:'price',cond:true},
 							{type:'text',key:'linkUrl',cond:states.hasLink}
 						]}
 						isTemplate={states.isTemplate}
 					/>
 				 ):(
-					<ul className={classes}>{rtn}</ul>
+					<Fragment>
+						{(AltMode && doLoop)?(
+							<div className="alt_content">
+								<div class="label">
+									<Icon icon="welcome-comments"/>
+								</div>
+								<InnerBlocks/>
+							</div>
+						):(
+							<ul className={classes}>{rtn}</ul>
+						)}
+					</Fragment>
 				 )}
 			</Fragment>
        );
     },
 	save({attributes,className}){
-		const {items,classes,priceUnit,priceCaption,linkText,loopCount}=attributes;
+		const {items,classes,priceUnit,priceCaption,linkText,loopCount,doLoop}=attributes;
 		const primaryClass='wp-block-catpow-pricecard';
 		var classArray=_.uniq(attributes.classes.split(' '));
 		
@@ -381,11 +340,109 @@
 			);
 		});
 		return (
-			<ul className={classes}>
-				{states.doLoop && '[loop_template '+(loopParam || '')+']'}
-				{rtn}
-				{states.doLoop && '[/loop_template]'}
-			</ul>
+			<Fragment>
+				<ul className={classes}>
+					{rtn}
+				</ul>
+				{doLoop && <onEmpty><InnerBlocks.Content/></onEmpty>}
+			</Fragment>
 		);
 	},
+	deprecated:[
+		{
+			save({attributes,className}){
+				const {items,classes,priceUnit,priceCaption,linkText,loopCount}=attributes;
+				const primaryClass='wp-block-catpow-pricecard';
+				var classArray=_.uniq(attributes.classes.split(' '));
+
+				var states=CP.wordsToFlags(classes);
+
+
+				let rtn=[];
+				const imageKeys={
+					image:{src:"src",alt:"alt",code:'imageCode',items:"items"}
+				};
+				items.map((item,index)=>{
+					if(!item.controlClasses){item.controlClasses='control';}
+					rtn.push(
+						<li className={item.classes}>
+							{states.hasImage &&
+								<div className='image'>
+									<ResponsiveImage
+										attr={attributes}
+										keys={imageKeys.image}
+										index={index}
+										size='vga'
+										isTemplate={states.isTemplate}
+									/>
+								</div>
+							}
+							<header>
+								<div className='text'>
+									{states.hasTitle &&
+										<h3><RichText.Content value={item.title}/></h3>
+									}
+									{states.hasTitle && states.hasTitleCaption && 
+										<p><RichText.Content value={item.titleCaption}/></p>
+									}
+									<div class="price">
+										<span class="listPrice">
+											{states.unitBefore && <span class="unit">{priceUnit}</span>}
+											<span class="number">{item.listPrice}</span>
+											{states.unitAfter && <span class="unit">{priceUnit}</span>}
+										</span>
+										<span class="price">
+											{states.unitBefore && <span class="unit">{priceUnit}</span>}
+											<span class="number">{item.price}</span>
+											{states.unitAfter && <span class="unit">{priceUnit}</span>}
+										</span>
+										<span class="priceCaption"><RichText.Content value={priceCaption}/></span>
+									</div>
+								</div>
+							</header>
+							{(states.hasSubTitle || states.hasText || states.hasSpec || states.hasLink) && 
+								<div class="contents">
+									{states.hasSubTitle &&
+										<h4><RichText.Content value={item.subTitle}/></h4>
+									}
+									{states.hasText && 
+										<p><RichText.Content value={item.text}/></p>
+									}
+									{states.hasSpec && 
+										<dl className="spec">
+											{item.specLabels.map((label,specIndex)=>{
+												return [
+													<dt><RichText.Content value={items[index].specLabels[specIndex].text}/></dt>,
+													<dd><RichText.Content value={items[index].specValues[specIndex].text}/></dd>
+												];
+											})}
+										</dl>
+									}
+									{states.hasLink &&
+										<a className='link' href={item.linkUrl}>
+											{linkText}
+										</a>
+									}
+								</div>
+							}
+						</li>
+					);
+				});
+				return (
+					<ul className={classes}>
+						{states.doLoop && '[loop_template '+(loopParam || '')+']'}
+						{rtn}
+						{states.doLoop && '[/loop_template]'}
+					</ul>
+				);
+			},
+			migrate(attributes){
+				var states=CP.wordsToFlags(classes);
+				attributes.content_path=attributes.loopParam.split(' ')[0];
+				attributes.query=attributes.loopParam.split(' ').slice(1).join("\n");
+				attributes.doLoop=states.doLoop;
+				return attributes;
+			}
+		}
+	]
 });

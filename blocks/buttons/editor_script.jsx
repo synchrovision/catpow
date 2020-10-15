@@ -8,34 +8,14 @@
 		</svg>
 	),
 	category: 'catpow',
-	attributes:{
-		version:{type:'number',default:0},
-		classes:{source:'attribute',selector:'ul',attribute:'class',default:'wp-block-catpow-buttons buttons m'},
-		items:{
-			source:'query',
-			selector:'li.item',
-			query:{
-				classes:{source:'attribute',attribute:'class'},
-				event:{source:'attribute',selector:'.button',attribute:'data-event'},
-				text:{source:'text',selector:'.button'},
-				url:{source:'attribute',selector:'.button',attribute:'href'},
-				iconSrc:{source:'attribute',selector:'.icon img',attribute:'src'},
-				iconAlt:{source:'attribute',selector:'.icon img',attribute:'alt'},
-			},
-			default:[
-				{classes:'item mail primary',event:'',text:'お問合せ',url:'[home_url]/contact'}
-			]
-		},
-		loopParam:{type:'text'},
-		loopCount:{type:'number',default:1}
-	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {items,classes,loopCount}=attributes;
+		const {items,classes,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-buttons';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
 		
+		const states=CP.wordsToFlags(classes);
         
 		var selectiveClasses=[
 			{label:'サイズ',filter:'size',values:{l:'大',m:'中',s:'小',ss:'極小'}},
@@ -44,9 +24,10 @@
 				label:'テンプレート',
 				values:'isTemplate',
 				sub:[
-					{label:'ループ',values:'doLoop',sub:[
-						{label:'パラメータ',input:'text',key:'loopParam'},
-						{label:'ループ数',input:'range',key:'loopCount',min:1,max:16}
+					{input:'bool',label:'ループ',key:'doLoop',sub:[
+						{label:'content path',input:'text',key:'content_path'},
+						{label:'query',input:'textarea',key:'query'},
+						{label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
 					]}
 				]
 			}
@@ -112,43 +93,79 @@
 			}
 		}
 		
-        return [
-			<ul className={classes}>{rtn}</ul>,
-			<InspectorControls>
-				<SelectClassPanel
-					title='クラス'
-					icon='art'
+        return (
+			<Fragment>
+				<BlockControls>
+					<AlignClassToolbar set={setAttributes} attr={attributes}/>
+				</BlockControls>
+				<SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters.buttons || {}}
 				/>
-				<SelectItemClassPanel
-					title='ボタン'
-					icon='edit'
-					set={setAttributes}
-					attr={attributes}
-					items={items}
-					index={attributes.currentItemIndex}
-					itemClasses={itemClasses}
-					filters={CP.filters.buttons || {}}
-				/>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label='クラス'
-						onChange={(clss)=>setAttributes({classes:clss})}
-						value={classArray.join(' ')}
+				<InspectorControls>
+					<SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+						filters={CP.filters.buttons || {}}
 					/>
-				</PanelBody>
-				<ItemControlInfoPanel/>
-			</InspectorControls>,
-			<BlockControls>
-				<AlignClassToolbar set={setAttributes} attr={attributes}/>
-			</BlockControls>
-        ];
+					<SelectItemClassPanel
+						title='ボタン'
+						icon='edit'
+						set={setAttributes}
+						attr={attributes}
+						items={items}
+						index={attributes.currentItemIndex}
+						itemClasses={itemClasses}
+						filters={CP.filters.buttons || {}}
+					/>
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label='クラス'
+							onChange={(clss)=>setAttributes({classes:clss})}
+							value={classArray.join(' ')}
+						/>
+					</PanelBody>
+					<ItemControlInfoPanel/>
+				</InspectorControls>
+				<Fragment>
+					{EditMode?(
+						<div className="alt_content">
+							<div class="label">
+								<Icon icon="edit"/>
+							</div>
+							<EditItemsTable
+								set={setAttributes}
+								attr={attributes}
+								columns={[
+									{type:'text',key:'text',cond:true},
+									{type:'text',key:'url',cond:true},
+								]}
+								isTemplate={states.isTemplate}
+							/>
+						</div>
+					 ):(
+						<Fragment>
+							{(AltMode && doLoop)?(
+								<div className="alt_content">
+									<div class="label">
+										<Icon icon="welcome-comments"/>
+									</div>
+									<InnerBlocks/>
+								</div>
+							):(
+								<ul className={classes}>{rtn}</ul>
+							)}
+						</Fragment>
+					 )}
+				</Fragment>
+			</Fragment>
+        );
     },
 	save({attributes,className}){
-		const {items,classes,loopParam}=attributes;
+		const {items,classes,loopParam,doLoop}=attributes;
 		const states=CP.wordsToFlags(classes);
 		
 		let rtn=[];
@@ -172,11 +189,55 @@
 			);
 		});
 		return (
-			<ul className={classes}>
-				{states.doLoop && '[loop_template '+loopParam+']'}
-				{rtn}
-				{states.doLoop && '[/loop_template]'}
-			</ul>
+			<Fragment>
+				<ul className={classes}>
+					{rtn}
+				</ul>
+				{doLoop && <onEmpty><InnerBlocks.Content/></onEmpty>}
+			</Fragment>
 		);
 	},
+	deprecated:[
+		{
+			save({attributes,className}){
+				const {items,classes,loopParam}=attributes;
+				const states=CP.wordsToFlags(classes);
+
+				let rtn=[];
+				items.map((item,index)=>{
+					const itemStates=CP.wordsToFlags(item.classes);
+					rtn.push(
+						<li className={item.classes}>
+							<a
+								href={item.url}
+								className='button'
+								data-event={item.event}
+							>
+								{itemStates.hasIcon && 
+									<span className="icon">
+										<img src={item.iconSrc} alt={item.iconAlt}/>
+									</span>
+								}
+								{item.text}
+							</a>
+						</li>
+					);
+				});
+				return (
+					<ul className={classes}>
+						{states.doLoop && '[loop_template '+loopParam+']'}
+						{rtn}
+						{states.doLoop && '[/loop_template]'}
+					</ul>
+				);
+			},
+			migrate(attributes){
+				var states=CP.wordsToFlags(classes);
+				attributes.content_path=attributes.loopParam.split(' ')[0];
+				attributes.query=attributes.loopParam.split(' ').slice(1).join("\n");
+				attributes.doLoop=states.doLoop;
+				return attributes;
+			}
+		}
+	]
 });
