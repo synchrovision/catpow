@@ -19,17 +19,17 @@ Catpow.DateTimeSelect = function (_wp$element$Component) {
 		if (props.min) {
 			min = new Date(props.min);
 		} else {
-			min = new Date(Date.now() - 1000 * 3600 * 24 * 100);
+			min = new Date(Date.now() - 1000 * 3600 * 24 * 3000);
 		}
 		if (props.max) {
 			max = new Date(props.max);
 		} else {
-			max = new Date(Date.now() + 1000 * 3600 * 24 * 100);
+			max = new Date(Date.now() + 1000 * 3600 * 24 * 3000);
 		}
 		if (props.step) {
 			step = props.step;
 		} else {
-			step = 15;
+			step = 5;
 		}
 
 		selections = {
@@ -240,7 +240,7 @@ Catpow.DateTimeSelect = function (_wp$element$Component) {
 					wp.element.createElement(Catpow.SelectTable, {
 						selections: this.state.selections.minutes,
 						value: getDate('i'),
-						col: 2,
+						col: 4,
 						onChange: function onChange(label) {
 							setDate('i', label);
 							_this2.setState({ minutesSelecting: false });

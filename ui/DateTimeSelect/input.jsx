@@ -10,11 +10,11 @@
 		else if(props.default){date=new Date(props.default);}
 		else{date=false;}
 		if(props.min){min=new Date(props.min);}
-		else{min=new Date(Date.now()-1000*3600*24*100);}
+		else{min=new Date(Date.now()-1000*3600*24*3000);}
 		if(props.max){max=new Date(props.max);}
-		else{max=new Date(Date.now()+1000*3600*24*100);}
+		else{max=new Date(Date.now()+1000*3600*24*3000);}
 		if(props.step){step=props.step;}
-		else{step=15;}
+		else{step=5;}
 		
 		selections={
 			year:[],
@@ -137,7 +137,7 @@
 					<Catpow.SelectTable
 						selections={this.state.selections.minutes}
 						value={getDate('i')}
-						col={2}
+						col={4}
 						onChange={(label)=>{
 							setDate('i',label);
 							this.setState({minutesSelecting:false});
