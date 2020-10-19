@@ -4,7 +4,7 @@ namespace Catpow\meta;
 class DateTimeSelect extends UI{
 	public static
 		$data_type='datetime',
-		$defaultParam=['step'=>15];
+		$defaultParam=['step'=>5];
 	
 	public static function output($meta,$prm){
 		$val=$meta->value;
