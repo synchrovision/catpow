@@ -726,7 +726,7 @@ class CP{
 				foreach($conf_data['children'] as $child_page_name=>$child_page_conf){
 					$child_page_conf['page_name']=$child_page_name;
 					$child_page_conf['parent']=$conf_data['page_path'];
-					$child_data_name=$data_name.'--'.$child_page_name;
+					$child_data_name=$data_name.'-'.$child_page_name;
 					$GLOBALS['static_pages'][$child_data_name]=$child_page_conf;
 					self::fill_conf_data($data_type,$child_data_name,$GLOBALS['static_pages'][$child_data_name]);
 				}
@@ -797,8 +797,9 @@ class CP{
 		if($data_type==='post'){
 			switch($data_name){
 				case 'page':
-					if(isset($GLOBALS['static_pages'][$object->post_name])){
-						$data_type='page';$data_name=$object->post_name;
+					$page_name=str_replace('/','-',get_page_uri($object));
+					if(isset($GLOBALS['static_pages'][$page_name])){
+						$data_type='page';$data_name=$page_name;
 					}
 					break;
 				case 'nav_menu_item':$data_type='nav';$data_name=get_menu_location($object->ID,true);break;
