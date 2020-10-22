@@ -67,7 +67,7 @@ $nav_datas=[
 $user_datas=[
 	'guest'=>[
 		'meta'=>[],
-		'template'=>['single','search','register','edit']
+		'template'=>['single','search','register']
 	]
 ];
 /*サイト情報の設定*/
