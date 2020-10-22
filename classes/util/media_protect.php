@@ -7,36 +7,58 @@ namespace Catpow\util;
 class media_protect{
 	public static function protect($id){
 		$metadata=get_post_meta($id,'_wp_attachment_metadata',true);
+		if(!empty($metadata['protected'])){return;}
+		
 		$metadata['protected']=true;
-		update_post_meta($id,'_wp_attachment_metadata',$metadata);
-		foreach(media::get_all_attachment_files($id) as $file){
-			chmod($file,0600);
+		$metadata['file']="catpow/p{$id}/".$metadata['file'];
+		
+		$basedir=wp_get_upload_dir()['basedir'];
+		$dir=$basedir.'/'.dirname($metadata['file']);
+		$depth=substr_count($basedir,'/',strpos($basedir,'wp-content/uploads'));
+		
+		$files=media::get_all_attachment_files($id);
+		
+		if(!is_dir($dir)){mkdir($dir,0777,true);}
+		if(!file_exists($htaccess_file=$basedir.'/catpow/.htaccess')){
+			$subdir=substr($basedir,strpos($basedir,'/uploads')+9);
+			if(!empty($subdir)){$subdir.='/';}
+			error_log(var_export($var,1).__FILE__.__LINE__);
+			file_put_contents(
+				$htaccess_file,
+				"RewriteEngine on\n".
+				"RewriteRule (.+) ".str_repeat('../',$depth+1)."plugins/catpow/callee/protected_media.php?path={$subdir}catpow/$1 [L,QSA]"
+			);
 		}
+		foreach($files as $file){
+			if(file_exists($file)){rename($file,$dir.'/'.basename($file));}
+		}
+		update_post_meta($id,'_wp_attachment_metadata',$metadata);
+		update_post_meta($id,'_wp_attached_file',$metadata['file']);
 	}
 	public static function unprotect($id){
 		$metadata=get_post_meta($id,'_wp_attachment_metadata',true);
+		if(empty($metadata['protected'])){return;}
+		
 		unset($metadata['protected']);
-		update_post_meta($id,'_wp_attachment_metadata',$metadata);
-		foreach(media::get_all_attachment_files($id) as $file){
-			chmod($file,0644);
+		$metadata['file']=preg_replace('|^catpow/p\d+/|','',$metadata['file']);
+		
+		$basedir=wp_get_upload_dir()['basedir'];
+		$dir=$basedir.'/'.dirname($metadata['file']);
+		
+		$files=media::get_all_attachment_files($id);
+		if(!is_dir($dir)){mkdir($dir,0777,true);}
+		foreach($files as $file){
+			if(file_exists($file)){rename($file,$dir.'/'.basename($file));}
 		}
+		dir::delete($basedir."/catpow/p{$id}");
+		update_post_meta($id,'_wp_attachment_metadata',$metadata);
+		update_post_meta($id,'_wp_attached_file',$metadata['file']);
 	}
 	public static function allow($id){
-		if(empty(\cp::$data['allowed_protected_media'][$id])){
-			$upload_dir=wp_get_upload_dir();
-			$primary_file=get_post_meta($id,'_wp_attached_file',true);
-			\cp::$data['allowed_protected_media'][$id]=[
-				'path'=>$upload_dir['basedir'].'/'.dirname($primary_file)
-			];
-		}
+		\cp::$data['allowed_protected_media'][get_current_blog_id()][$id]=true;
 	}
-	public static function filter_wp_get_attachment_url($url,$id){
-		$metadata=get_post_meta($id,'_wp_attachment_metadata',true);
-		if(!empty($metadata['protected'])){
-			$file=basename($url);
-			return plugins_url()."/catpow/callee/protected_media.php?path={$id}/{$file}";
-		}
-		return $url;
+	public static function clear_allowed(){
+		unset(\cp::$data['allowed_protected_media'][get_current_blog_id()]);
 	}
 }
 
