@@ -311,9 +311,6 @@ add_filter('wp_prepare_attachment_for_js',function($response,$attachment,$meta){
 	return $response;
 },10,3);
 
-/*protect media*/
-add_filter('wp_get_attachment_url',[\cp::get_class_name('util','media_protect'),'filter_wp_get_attachment_url'],10,2);
-
 /*avatar*/
 add_filter('get_avatar_url',function($url,$id_or_email,$args){
 	if(!is_numeric($id_or_email)){
