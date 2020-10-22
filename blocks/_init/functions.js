@@ -76,7 +76,7 @@ var CP = {
 		var set = _ref.set,
 		    attr = _ref.attr;
 
-		var classArray = attr.classes.split(' ');
+		var classArray = (attr.classes || '').split(' ');
 		var i = classArray.findIndex(function (cls) {
 			return cls.substr(0, label.length) === label;
 		});
@@ -96,7 +96,7 @@ var CP = {
 	getNumberClass: function getNumberClass(_ref2, label) {
 		var attr = _ref2.attr;
 
-		var value = attr.classes.split(' ').find(function (cls) {
+		var value = (attr.classes || '').split(' ').find(function (cls) {
 			return cls.substr(0, label.length) === label;
 		});
 		if (!value) {
@@ -546,6 +546,9 @@ var CP = {
 
 	wordsToFlags: function wordsToFlags(words) {
 		var rtn = {};
+		if (undefined === words) {
+			return {};
+		}
 		words.split(' ').map(function (word) {
 			rtn[word] = true;
 		});

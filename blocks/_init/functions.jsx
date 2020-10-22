@@ -63,14 +63,14 @@
 	},
 	
 	switchNumberClass:({set,attr},label,value)=>{
-		let classArray=attr.classes.split(' ');
+		let classArray=(attr.classes || '').split(' ');
 		let i=classArray.findIndex(cls=>(cls.substr(0,label.length)===label));
 		if(i===-1){if(value){classArray.push(label+value);}}
 		else{if(value){classArray.splice(i,1,label+value);}else{classArray.splice(i,1)}}
 		set({classes:classArray.join(' ')});
 	},
 	getNumberClass:({attr},label)=>{
-		let value=attr.classes.split(' ').find(cls=>(cls.substr(0,label.length)===label));
+		let value=(attr.classes || '').split(' ').find(cls=>(cls.substr(0,label.length)===label));
 		if(!value){return 0;}
 		return parseInt(value.substr(label.length));
 	},
@@ -366,6 +366,7 @@
 	
 	wordsToFlags:(words)=>{
 		var rtn={};
+		if(undefined === words){return {};}
 		words.split(' ').map((word)=>{rtn[word]=true;});
 		return rtn;
 	},
