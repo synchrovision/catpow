@@ -717,6 +717,7 @@ class CP{
 		if(!isset($conf_data['label'])){$conf_data['label']=$data_name;}
 		if($data_type==='page'){
 			if(isset($conf_data['parent'])){
+				if(empty($conf_data['page_name'])){$conf_data['page_name']=$data_name;}
 				$conf_data['page_path']=$conf_data['parent'].'/'.$conf_data['page_name'];
 			}
 			else{
@@ -1316,17 +1317,8 @@ class CP{
 		if($path_data['data_type']==='post'){
 			switch($path_data['data_name']){
 				case 'page':
-					global $static_pages;
-					$data_name=$post->post_name;
-					if($post->post_parent>0){
-						$data_name=$post->post_name;
-						foreach($post->ancestors as $parent){
-							$parent=get_post($parent);
-							if($parent && $parent->post_name){
-								$data_name=$parent->post_name.'--'.$data_name;
-							}
-						}
-					}
+					global $static_pages,$post;
+					$data_name=str_replace('/','-',get_page_uri($post));
 					if(
 						isset($static_pages[$data_name]) && 
 						in_array('single',$static_pages[$data_name]['template'])
