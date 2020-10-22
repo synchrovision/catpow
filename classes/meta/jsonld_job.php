@@ -7,7 +7,7 @@ class jsonld_job extends jsonld{
 		$conf['meta']=array_merge([
 			'datePosted'=>['type'=>'DateTimeSelect','label'=>'掲載日'],
 			'validThrough'=>['type'=>'DateTimeSelect','label'=>'掲載期限'],
-			'title'=>['type'=>'text','label'=>'タイトル'],
+			'title'=>['type'=>'text','label'=>'職務の名称','size'=>40],
 			'hiringOrganization'=>['type'=>'data','label'=>'企業情報','@type'=>'Organization','meta'=>[
 				'name'=>['type'=>'text','label'=>'企業名'],
 				'sameAs'=>['type'=>'text','label'=>'HP'],
