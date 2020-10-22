@@ -418,5 +418,139 @@
 				}
 			</section>
 		);
-	}
+	},
+	deprecated:[
+		{
+			attributes:{
+				id:{source:'attribute',selector:'section',attribute:'id'},
+				classes:{source:'attribute',selector:'section',attribute:'class',default:'wp-block-catpow-section article level3 center catch'},
+				navIcon:{source:'attribute',selector:'section',attribute:'data-icon'},
+
+				prefix:{source:'children',selector:'header div.prefix'},
+				title:{type:'array',source:'children',selector:'header h2,header .heading',default:['Title']},
+				read:{type:'array',source:'children',selector:'header p'},
+
+				headerImageMime:{source:'attribute',selector:'header .image [src]',attribute:'data-mime'},
+				headerImageSrc:{source:'attribute',selector:'header .image [src]',attribute:'src',default:cp.theme_url+'/images/dummy.jpg'},
+				headerImageSrcset:{source:'attribute',selector:'header .image [src]',attribute:'srcset'},
+				headerImageAlt:{source:'attribute',selector:'header .image [src]',attribute:'alt'},
+				headerImageCode:{source:'text',selector:'header .image'},
+
+				headerBackgroundImageMime:{source:'attribute',selector:'header .background [src]',attribute:'data-mime'},
+				headerBackgroundImageSrc:{source:'attribute',selector:'header .background [src]',attribute:'src',default:cp.theme_url+'/images/dummy_bg.jpg'},
+				headerBackgroundImageSrcset:{source:'attribute',selector:'header .background [src]',attribute:'srcset'},
+				headerBackgroundImageAlt:{source:'attribute',selector:'header .background [src]',attribute:'alt'},
+				headerBackgroundImageCode:{source:'text',selector:'header .background'},
+
+				imageMime:{source:'attribute',selector:'.image [src]',attribute:'data-mime'},
+				imageSrc:{source:'attribute',selector:'.image [src]',attribute:'src',default:cp.theme_url+'/images/dummy.jpg'},
+				imageSrcset:{source:'attribute',selector:'.image [src]',attribute:'srcset'},
+				imageAlt:{source:'attribute',selector:'.image [src]',attribute:'alt'},
+				imageCode:{source:'text',selector:'.image'},
+
+				backgroundImageSrc:{source:'attribute',selector:'.wp-block-catpow-section>.background [src]',attribute:'src',default:cp.theme_url+'/images/dummy_bg.jpg'},
+				backgroundImageSrcset:{source:'attribute',selector:'.wp-block-catpow-section>.background [src]',attribute:'srcset'},
+				backgroundImageCode:{source:'text',selector:'.wp-block-catpow-section>.background'},
+
+				iconSrc:{source:'attribute',selector:'.icon [src]',attribute:'src',default:cp.theme_url+'/images/dummy_icon.svg'},
+				iconAlt:{source:'attribute',selector:'.icon [src]',attribute:'alt'},
+			},
+			save({attributes,className}){
+				const {
+					id,navIcon,classes,prefix,title,read,
+					headerImageSrc,headerImageSrcset,headerImageAlt,headerImageCode,
+					headerBackgroundImageCode,
+					imageSrc,imageSrcset,imageAlt,imageCode,
+					backgroundImageSrc,backgroundImageCode,
+					iconSrc,iconAlt
+				}=attributes;
+
+				var states=CP.wordsToFlags(classes);
+				var level=CP.getNumberClass({attr:attributes},'level');
+
+				const imageKeys={
+					navIcon:{src:"icon"},
+					image:{mime:"imageMime",src:"imageSrc",alt:"imageAlt",srcset:"imageSrcset"},
+					headerImage:{mime:"headerImageMime",src:"headerImageSrc",alt:"headerImageAlt",srcset:"headerImageSrcset"},
+					headerBackgroundImage:{mime:"headerBackgroundImageMime",src:"headerBackgroundImageSrc",alt:"headerBackgroundImageAlt",srcset:"headerBackgroundImageSrcset"},
+					backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset"}
+				};
+
+				return (
+					<section id={id} className={classes} data-icon={navIcon}>
+						{states.hasImage && 
+							<div class="image">
+								{(states.isTemplate && imageCode)?(
+									imageCode
+								):(
+									<ResponsiveImage
+										attr={attributes}
+										keys={imageKeys.image}
+										size='medium_large'
+									/>
+								)}
+							</div>
+						}
+						<div class="contents">
+							<header>
+								<div class="title">
+									{states.hasIcon && 
+										<div class="icon">
+											<img src={iconSrc} alt={iconAlt}/>
+										</div>
+									}
+									{states.hasPrefix && 
+										<div class="prefix"><RichText.Content value={prefix}/></div>
+									}
+									{states.hasHeaderImage &&
+										<div class="image">
+											{(states.isTemplate && headerImageCode)?(
+												headerImageCode
+											):(
+												<ResponsiveImage
+													attr={attributes}
+													keys={imageKeys.headerImage}
+												/>
+											)}
+										</div>
+									}
+									<h2>{title}</h2>
+									{states.hasRead && <p><RichText.Content value={read}/></p>}
+								</div>
+								{states.hasHeaderBackgroundImage &&
+									<div class="background">
+										{(states.isTemplate && headerBackgroundImageCode)?(
+											headerBackgroundImageCode
+										):(
+											<ResponsiveImage
+												attr={attributes}
+												keys={imageKeys.headerBackgroundImage}
+											/>
+										)}
+									</div>
+								}
+							</header>
+							<div class="text"><InnerBlocks.Content/></div>
+						</div>
+						{states.hasBackgroundImage && 
+							<div class="background">
+								{(states.isTemplate && backgroundImageCode)?(
+									backgroundImageCode
+								):(
+									<ResponsiveImage
+										attr={attributes}
+										keys={imageKeys.backgroundImage}
+									/>
+								)}
+							</div>
+						}
+					</section>
+				);
+			},
+			migrate(attributes){
+				attributes.classes+=' level2';
+				return attributes;
+			}
+		}
+	]
 });
