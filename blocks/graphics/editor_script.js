@@ -48,16 +48,18 @@ registerBlockType('catpow/graphics', {
 		    setAttributes = _ref.setAttributes,
 		    isSelected = _ref.isSelected;
 		var id = attributes.id,
-		    classes = attributes.classes,
+		    _attributes$classes = attributes.classes,
+		    classes = _attributes$classes === undefined ? '' : _attributes$classes,
 		    src = attributes.src,
 		    srcset = attributes.srcset,
 		    alt = attributes.alt,
 		    height = attributes.height,
 		    heightSP = attributes.heightSP,
-		    items = attributes.items;
+		    _attributes$items = attributes.items,
+		    items = _attributes$items === undefined ? [] : _attributes$items;
 
 		var primaryClass = 'wp-block-catpow-graphics';
-		var classArray = classes.split(' ');
+		var classArray = (classes || '').split(' ');
 
 		if (!id) {
 			setAttributes({ id: 'g' + new Date().getTime().toString(16) });
@@ -439,9 +441,10 @@ registerBlockType('catpow/graphics', {
 		    classes = attributes.classes,
 		    height = attributes.height,
 		    heightSP = attributes.heightSP,
-		    items = attributes.items;
+		    _attributes$items2 = attributes.items,
+		    items = _attributes$items2 === undefined ? [] : _attributes$items2;
 
-		var classArray = classes.split(' ');
+		var classArray = (classes || '').split(' ');
 
 		var cssData = {},
 		    cssDataSP = {};

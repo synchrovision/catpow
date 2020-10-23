@@ -222,7 +222,7 @@
 	
 	switchItemColor:({items,index,set},color,itemsKey)=>{
 		if(itemsKey === undefined){itemsKey='items';}
-		let classArray=items[index].classes.split(' ');
+		let classArray=(items[index].classes || '').split(' ');
 		let i=classArray.findIndex(cls=>(cls.substr(0,5)==='color'));
 		if(i===-1){if(color){classArray.push('color'+color);}}
 		else{if(color){classArray.splice(i,1,'color'+color);}else{classArray.splice(i,1)}}
@@ -230,14 +230,14 @@
 		set({[itemsKey]:JSON.parse(JSON.stringify(items))});
 	},
 	getItemColor:({items,index})=>{
-		let c=items[index].classes.split(' ').find(cls=>(cls.substr(0,5)==='color'));
+		let c=(items[index].classes || '').split(' ').find(cls=>(cls.substr(0,5)==='color'));
 		if(!c){return 0;}
 		return parseInt(c.substr(5));
 	},
 	
 	switchItemPattern:({items,index,set},pattern,itemsKey)=>{
 		if(itemsKey === undefined){itemsKey='items';}
-		let classArray=items[index].classes.split(' ');
+		let classArray=(items[index].classes || '').split(' ');
 		let i=classArray.findIndex(cls=>(cls.substr(0,7)==='pattern'));
 		if(i===-1){if(pattern){classArray.push('pattern'+pattern);}}
 		else{if(pattern){classArray.splice(i,1,'pattern'+pattern);}else{classArray.splice(i,1)}}
@@ -245,14 +245,14 @@
 		set({[itemsKey]:JSON.parse(JSON.stringify(items))});
 	},
 	getItemPattern:({items,index})=>{
-		let p=items[index].classes.split(' ').find(cls=>(cls.substr(0,7)==='pattern'));
+		let p=(items[index].classes || '').split(' ').find(cls=>(cls.substr(0,7)==='pattern'));
 		if(!p){return 0;}
 		return parseInt(p.substr(7));
 	},
 	
 	switchItemSelectiveClass:({items,index,set},values,value,itemsKey)=>{
 		if(itemsKey === undefined){itemsKey='items';}
-		let classArray=items[index].classes.split(' ');
+		let classArray=(items[index].classes || '').split(' ');
 		if(!Array.isArray(values) && _.isObject(values)){values=Object.keys(values);}
 		classArray=_.difference(classArray,values);
         if(Array.isArray(value)){classArray=classArray.concat(value);}
@@ -262,14 +262,14 @@
 	},
 	getItemSelectiveClass:({items,index},values)=>{
 		if(!items[index].classes){return false;}
-		let classArray=items[index].classes.split(' ');
+		let classArray=(items[index].classes || '').split(' ');
 		if(!Array.isArray(values) && _.isObject(values)){values=Object.keys(values);}
 		return _.intersection(classArray,values).shift();
 	},
 	
 	toggleItemClass:({items,index,set},value,itemsKey)=>{
 		if(itemsKey === undefined){itemsKey='items';}
-		let classArray=items[index].classes.split(' ');
+		let classArray=(items[index].classes || '').split(' ');
 		let i=classArray.indexOf(value);
 		if(i===-1){classArray.push(value);}
 		else{classArray.splice(i,1);}
@@ -277,7 +277,7 @@
 		set({[itemsKey]:JSON.parse(JSON.stringify(items))});
 	},
 	hasItemClass:({items,index},value)=>{
-		let classArray=items[index].classes.split(' ');
+		let classArray=(items[index].classes || '').split(' ');
 		return classArray.indexOf(value)!==-1;
 	},
     
@@ -1322,7 +1322,7 @@ const SelectModeToolbar=(props)=>{
 
 const EditItemsTable=(props)=>{
 	const {set,attr,itemsKey='items',columns,isTemplate}=props;
-	const items=attr[itemsKey];
+	const items=attr[itemsKey] || [];
 	const save=()=>{
 		set({[itemsKey]:JSON.parse(JSON.stringify(items))});	
 	};

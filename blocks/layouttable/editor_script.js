@@ -64,7 +64,8 @@ registerBlockType('catpow/layouttable', {
 		    className = _ref.className,
 		    setAttributes = _ref.setAttributes,
 		    isSelected = _ref.isSelected;
-		var classes = attributes.classes,
+		var _attributes$classes = attributes.classes,
+		    classes = _attributes$classes === undefined ? '' : _attributes$classes,
 		    rows = attributes.rows;
 
 		var primaryClass = 'wp-block-catpow-layouttable';
@@ -273,7 +274,7 @@ registerBlockType('catpow/layouttable', {
 			}
 
 			selectedCells.map(function (cell) {
-				var classArray = cell.classes.split(' ');
+				var classArray = (cell.classes || '').split(' ');
 				classArray = _.difference(classArray, values);
 				if (Array.isArray(value)) {
 					classArray = classArray.concat(value);
@@ -290,7 +291,7 @@ registerBlockType('catpow/layouttable', {
 				values = [values];
 			}
 			selectedCells.map(function (cell) {
-				var classArray = cell.classes ? cell.classes.split(' ') : [];
+				var classArray = (cell.classes || '').split(' ');
 				classArray = _.difference(classArray, values);
 				classArray = classArray.concat(values);
 				cell.classes = classArray.join(' ');
@@ -302,7 +303,7 @@ registerBlockType('catpow/layouttable', {
 				values = [values];
 			}
 			selectedCells.map(function (cell) {
-				var classArray = cell.classes ? cell.classes.split(' ') : [];
+				var classArray = (cell.classes || '').split(' ');
 				classArray = _.difference(classArray, values);
 				cell.classes = classArray.join(' ');
 			});
@@ -312,7 +313,7 @@ registerBlockType('catpow/layouttable', {
 			if (!selectedCells[0] || !selectedCells[0].classes) {
 				return [];
 			}
-			var rtn = selectedCells[0].classes.split(' ');
+			var rtn = (selectedCells[0].classes || '').split(' ');
 			for (var i = 1; i < selectedCells.length; i++) {
 				if (rtn.length < 1) {
 					return [];
@@ -320,7 +321,7 @@ registerBlockType('catpow/layouttable', {
 				if (!selectedCells[i].classes) {
 					return [];
 				}
-				rtn = _.intersection(rtn, selectedCells[i].classes.split(' '));
+				rtn = _.intersection((rtn, selectedCells[i].classes || '').split(' '));
 			}
 			return rtn;
 		};

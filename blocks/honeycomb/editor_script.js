@@ -44,7 +44,8 @@ registerBlockType('catpow/honeycomb', {
 		    isSelected = _ref.isSelected;
 		var id = attributes.id,
 		    classes = attributes.classes,
-		    items = attributes.items;
+		    _attributes$items = attributes.items,
+		    items = _attributes$items === undefined ? [] : _attributes$items;
 		var breakpoints = attributes.breakpoints,
 		    grid = attributes.grid;
 
@@ -263,7 +264,8 @@ registerBlockType('catpow/honeycomb', {
 		    setAttributes = _ref2.setAttributes;
 		var id = attributes.id,
 		    classes = attributes.classes,
-		    items = attributes.items;
+		    _attributes$items2 = attributes.items,
+		    items = _attributes$items2 === undefined ? [] : _attributes$items2;
 		var breakpoints = attributes.breakpoints,
 		    grid = attributes.grid;
 

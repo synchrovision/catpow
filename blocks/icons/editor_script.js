@@ -41,7 +41,8 @@ registerBlockType('catpow/icons', {
 		    className = _ref.className,
 		    setAttributes = _ref.setAttributes,
 		    isSelected = _ref.isSelected;
-		var items = attributes.items,
+		var _attributes$items = attributes.items,
+		    items = _attributes$items === undefined ? [] : _attributes$items,
 		    classes = attributes.classes,
 		    countPrefix = attributes.countPrefix,
 		    countSuffix = attributes.countSuffix;
@@ -137,7 +138,8 @@ registerBlockType('catpow/icons', {
 	save: function save(_ref2) {
 		var attributes = _ref2.attributes,
 		    className = _ref2.className;
-		var items = attributes.items,
+		var _attributes$items2 = attributes.items,
+		    items = _attributes$items2 === undefined ? [] : _attributes$items2,
 		    classes = attributes.classes,
 		    countPrefix = attributes.countPrefix,
 		    countSuffix = attributes.countSuffix;

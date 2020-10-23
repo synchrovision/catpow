@@ -51,7 +51,8 @@ registerBlockType('catpow/aquarium', {
 		    className = _ref.className,
 		    setAttributes = _ref.setAttributes;
 		var classes = attributes.classes,
-		    layers = attributes.layers;
+		    _attributes$layers = attributes.layers,
+		    layers = _attributes$layers === undefined ? [] : _attributes$layers;
 
 		var primaryClass = 'wp-block-catpow-aquarium';
 		var classArray = _.uniq((className + ' ' + classes).split(' '));
@@ -119,7 +120,8 @@ registerBlockType('catpow/aquarium', {
 		    className = _ref2.className,
 		    setAttributes = _ref2.setAttributes;
 		var classes = attributes.classes,
-		    layers = attributes.layers;
+		    _attributes$layers2 = attributes.layers,
+		    layers = _attributes$layers2 === undefined ? [] : _attributes$layers2;
 
 
 		return wp.element.createElement(

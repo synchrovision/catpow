@@ -220,7 +220,7 @@ registerBlockType('catpow/chart', {
 		var classes = attributes.classes,
 		    graph = attributes.graph;
 
-		var classArray = _.uniq(attributes.classes.split(' '));
+		var classArray = _.uniq((attributes.classes || '').split(' '));
 
 		var selectiveClasses = [{
 			label: 'タイプ',

@@ -112,7 +112,7 @@
 
 
 	save({attributes,className,setAttributes}){
-        const {classes}=attributes;
+        const {classes=''}=attributes;
 		
 		var classArray=classes.split(' ');
 		const hasClass=(cls)=>(classArray.indexOf(cls)!==-1);

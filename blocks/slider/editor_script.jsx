@@ -20,10 +20,10 @@
 	
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
-		const {classes,controlClasses,config,items,doLoop,EditMode=false,AltMode=false}=attributes;
+		const {classes='',controlClasses='',config,items,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-slider';
 		var classArray=_.uniq((className+' '+classes).split(' '));
-		var controlClassArray=_.uniq(attributes.controlClasses.split(' '));
+		var controlClassArray=_.uniq(controlClasses.split(' '));
 		var classNameArray=className.split(' ');
 		
 		
@@ -377,9 +377,9 @@
 		);
 	},
 	save({attributes,className}){
-		const {classes,controlClasses,config,items,doLoop}=attributes;
-		var classArray=_.uniq(attributes.classes.split(' '));
-		var controlClassArray=_.uniq(attributes.controlClasses.split(' '));
+		const {classes='',controlClasses='',config,items=[],doLoop}=attributes;
+		var classArray=_.uniq(classes.split(' '));
+		var controlClassArray=_.uniq(controlClasses.split(' '));
 		
 		var states=CP.wordsToFlags(classes);
 		
@@ -503,9 +503,9 @@
 			},
 			
 			save({attributes,className}){
-				const {classes,controlClasses,config,items}=attributes;
-				var classArray=_.uniq(attributes.classes.split(' '));
-				var controlClassArray=_.uniq(attributes.controlClasses.split(' '));
+				const {classes='',controlClasses='',config,items=[]}=attributes;
+				var classArray=_.uniq(classes.split(' '));
+				var controlClassArray=_.uniq(controlClasses.split(' '));
 				var states={
 					hasArrows:false,
 					hasDots:false,
@@ -575,9 +575,9 @@
 		},
 		{
 			save({attributes,className}){
-				const {classes,controlClasses,config,items}=attributes;
-				var classArray=_.uniq(attributes.classes.split(' '));
-				var controlClassArray=_.uniq(attributes.controlClasses.split(' '));
+				const {classes='',controlClasses='',config,items=[]}=attributes;
+				var classArray=_.uniq(classes.split(' '));
+				var controlClassArray=_.uniq(controlClasses.split(' '));
 
 				var states=CP.wordsToFlags(classes);
 

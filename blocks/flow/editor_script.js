@@ -55,7 +55,8 @@ registerBlockType('catpow/flow', {
 		    className = _ref.className,
 		    setAttributes = _ref.setAttributes,
 		    isSelected = _ref.isSelected;
-		var items = attributes.items,
+		var _attributes$items = attributes.items,
+		    items = _attributes$items === undefined ? [] : _attributes$items,
 		    classes = attributes.classes,
 		    countPrefix = attributes.countPrefix,
 		    countSuffix = attributes.countSuffix;
@@ -256,12 +257,14 @@ registerBlockType('catpow/flow', {
 	save: function save(_ref2) {
 		var attributes = _ref2.attributes,
 		    className = _ref2.className;
-		var items = attributes.items,
-		    classes = attributes.classes,
+		var _attributes$items2 = attributes.items,
+		    items = _attributes$items2 === undefined ? [] : _attributes$items2,
+		    _attributes$classes = attributes.classes,
+		    classes = _attributes$classes === undefined ? '' : _attributes$classes,
 		    countPrefix = attributes.countPrefix,
 		    countSuffix = attributes.countSuffix;
 
-		var classArray = _.uniq(attributes.classes.split(' '));
+		var classArray = _.uniq(classes.split(' '));
 
 		var states = {
 			hasImage: false,
@@ -392,12 +395,14 @@ registerBlockType('catpow/flow', {
 		save: function save(_ref3) {
 			var attributes = _ref3.attributes,
 			    className = _ref3.className;
-			var items = attributes.items,
-			    classes = attributes.classes,
+			var _attributes$items3 = attributes.items,
+			    items = _attributes$items3 === undefined ? [] : _attributes$items3,
+			    _attributes$classes2 = attributes.classes,
+			    classes = _attributes$classes2 === undefined ? '' : _attributes$classes2,
 			    countPrefix = attributes.countPrefix,
 			    countSuffix = attributes.countSuffix;
 
-			var classArray = _.uniq(attributes.classes.split(' '));
+			var classArray = _.uniq(classes.split(' '));
 
 			var states = {
 				hasImage: false,

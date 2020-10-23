@@ -9,8 +9,10 @@ registerBlockType('catpow/formbuttons', {
 		    className = _ref.className,
 		    setAttributes = _ref.setAttributes,
 		    isSelected = _ref.isSelected;
-		var items = attributes.items,
-		    classes = attributes.classes;
+		var _attributes$items = attributes.items,
+		    items = _attributes$items === undefined ? [] : _attributes$items,
+		    _attributes$classes = attributes.classes,
+		    classes = _attributes$classes === undefined ? '' : _attributes$classes;
 
 		var primaryClass = 'wp-block-catpow-formbuttons';
 		var classArray = _.uniq((className + ' ' + classes).split(' '));
@@ -124,10 +126,12 @@ registerBlockType('catpow/formbuttons', {
 	save: function save(_ref2) {
 		var attributes = _ref2.attributes,
 		    className = _ref2.className;
-		var items = attributes.items,
-		    classes = attributes.classes;
+		var _attributes$items2 = attributes.items,
+		    items = _attributes$items2 === undefined ? [] : _attributes$items2,
+		    _attributes$classes2 = attributes.classes,
+		    classes = _attributes$classes2 === undefined ? '' : _attributes$classes2;
 
-		var classArray = _.uniq(attributes.classes.split(' '));
+		var classArray = _.uniq(classes.split(' '));
 
 		var rtn = [];
 		items.map(function (item, index) {
@@ -178,10 +182,12 @@ registerBlockType('catpow/formbuttons', {
 		save: function save(_ref3) {
 			var attributes = _ref3.attributes,
 			    className = _ref3.className;
-			var items = attributes.items,
-			    classes = attributes.classes;
+			var _attributes$items3 = attributes.items,
+			    items = _attributes$items3 === undefined ? [] : _attributes$items3,
+			    _attributes$classes3 = attributes.classes,
+			    classes = _attributes$classes3 === undefined ? '' : _attributes$classes3;
 
-			var classArray = _.uniq(attributes.classes.split(' '));
+			var classArray = _.uniq(classes.split(' '));
 
 			var rtn = [];
 			items.map(function (item, index) {
@@ -198,7 +204,8 @@ registerBlockType('catpow/formbuttons', {
 			);
 		},
 		migrate: function migrate(attributes) {
-			var items = attributes.items;
+			var _attributes$items4 = attributes.items,
+			    items = _attributes$items4 === undefined ? [] : _attributes$items4;
 
 			var parseButtonShortCode = function parseButtonShortCode(code) {
 				var matches = code.match(/^\[button ([^ ]+) ([^ ]+)( ignore_message\=1)?\]$/);

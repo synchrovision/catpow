@@ -46,7 +46,7 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {items,classes,countPrefix,countSuffix}=attributes;
+		const {items=[],classes='',countPrefix,countSuffix}=attributes;
 		const primaryClass='wp-block-catpow-sphere';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
@@ -165,8 +165,8 @@
         ];
     },
 	save({attributes,className}){
-		const {items,classes,countPrefix,countSuffix}=attributes;
-		var classArray=_.uniq(attributes.classes.split(' '));
+		const {items=[],classes='',countPrefix,countSuffix}=attributes;
+		var classArray=_.uniq(classes.split(' '));
 		
 		var states={
 			hasSubImage:false,

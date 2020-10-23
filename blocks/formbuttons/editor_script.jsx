@@ -5,7 +5,7 @@
 	category: 'catpow',
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {items,classes}=attributes;
+		const {items=[],classes=''}=attributes;
 		const primaryClass='wp-block-catpow-formbuttons';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
@@ -101,8 +101,8 @@
         ];
     },
 	save({attributes,className}){
-		const {items,classes}=attributes;
-		var classArray=_.uniq(attributes.classes.split(' '));
+		const {items=[],classes=''}=attributes;
+		var classArray=_.uniq(classes.split(' '));
 		
 		
 		let rtn=[];
@@ -148,8 +148,8 @@
 				}
 			},
 			save({attributes,className}){
-				const {items,classes}=attributes;
-				var classArray=_.uniq(attributes.classes.split(' '));
+				const {items=[],classes=''}=attributes;
+				var classArray=_.uniq(classes.split(' '));
 
 				let rtn=[];
 				items.map((item,index)=>{
@@ -160,7 +160,7 @@
 				return <ul className={classes}>{rtn}</ul>;
 			},
 			migrate(attributes){
-				const {items}=attributes;
+				const {items=[]}=attributes;
 				const parseButtonShortCode=(code)=>{
 					let matches=code.match(/^\[button ([^ ]+) ([^ ]+)( ignore_message\=1)?\]$/);
 					if(matches){

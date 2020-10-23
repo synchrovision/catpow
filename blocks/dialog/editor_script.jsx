@@ -17,7 +17,7 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {items,classes,countPrefix,countSuffix,subCountPrefix,subCountSuffix,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
+		const {items=[],classes='',countPrefix,countSuffix,subCountPrefix,subCountSuffix,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-dialog';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
@@ -171,8 +171,8 @@
         );
     },
 	save({attributes,className}){
-		const {items,classes,countPrefix,countSuffix,subCountPrefix,subCountSuffix,linkUrl,linkText,loopParam,doLoop}=attributes;
-		var classArray=_.uniq(attributes.classes.split(' '));
+		const {items=[],classes='',countPrefix,countSuffix,subCountPrefix,subCountSuffix,linkUrl,linkText,loopParam,doLoop}=attributes;
+		var classArray=_.uniq(classes.split(' '));
 		
 		var states=CP.wordsToFlags(classes);
 		const imageKeys={
@@ -214,8 +214,8 @@
 	deprecated:[
 		{
 			save({attributes,className}){
-				const {items,classes,countPrefix,countSuffix,subCountPrefix,subCountSuffix,linkUrl,linkText,loopParam}=attributes;
-				var classArray=_.uniq(attributes.classes.split(' '));
+				const {items=[],classes='',countPrefix,countSuffix,subCountPrefix,subCountSuffix,linkUrl,linkText,loopParam}=attributes;
+				var classArray=_.uniq(classes.split(' '));
 
 				var states=CP.wordsToFlags(classes);
 

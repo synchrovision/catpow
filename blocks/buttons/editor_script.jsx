@@ -10,7 +10,7 @@
 	category: 'catpow',
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {items,classes,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
+		const {items=[],classes,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-buttons';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
@@ -165,7 +165,7 @@
         );
     },
 	save({attributes,className}){
-		const {items,classes,loopParam,doLoop}=attributes;
+		const {items=[],classes,loopParam,doLoop}=attributes;
 		const states=CP.wordsToFlags(classes);
 		
 		let rtn=[];
@@ -200,7 +200,7 @@
 	deprecated:[
 		{
 			save({attributes,className}){
-				const {items,classes,loopParam}=attributes;
+				const {items=[],classes,loopParam}=attributes;
 				const states=CP.wordsToFlags(classes);
 
 				let rtn=[];

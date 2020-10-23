@@ -5,7 +5,7 @@
 	category: 'catpow',
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {items,classes,loopParam,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
+		const {items=[],classes,loopParam,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-pricelist';
 		
 		var states=CP.wordsToFlags(classes);
@@ -171,8 +171,8 @@
         );
     },
 	save({attributes,className}){
-		const {items,classes,loopParam,loopCount,doLoop}=attributes;
-		var classArray=_.uniq(attributes.classes.split(' '));
+		const {items=[],classes='',loopParam,loopCount,doLoop}=attributes;
+		var classArray=_.uniq(classes.split(' '));
 		
 		var states=CP.wordsToFlags(classes);
 		
@@ -218,8 +218,8 @@
 	deprecated:[
 		{
 			save({attributes,className}){
-				const {items,classes,loopParam,loopCount}=attributes;
-				var classArray=_.uniq(attributes.classes.split(' '));
+				const {items=[],classes='',loopParam,loopCount}=attributes;
+				var classArray=_.uniq(classes.split(' '));
 
 				var states=CP.wordsToFlags(classes);
 

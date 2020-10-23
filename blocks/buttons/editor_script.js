@@ -13,7 +13,8 @@ registerBlockType('catpow/buttons', {
 		    className = _ref.className,
 		    setAttributes = _ref.setAttributes,
 		    isSelected = _ref.isSelected;
-		var items = attributes.items,
+		var _attributes$items = attributes.items,
+		    items = _attributes$items === undefined ? [] : _attributes$items,
 		    classes = attributes.classes,
 		    loopCount = attributes.loopCount,
 		    doLoop = attributes.doLoop,
@@ -188,7 +189,8 @@ registerBlockType('catpow/buttons', {
 	save: function save(_ref2) {
 		var attributes = _ref2.attributes,
 		    className = _ref2.className;
-		var items = attributes.items,
+		var _attributes$items2 = attributes.items,
+		    items = _attributes$items2 === undefined ? [] : _attributes$items2,
 		    classes = attributes.classes,
 		    loopParam = attributes.loopParam,
 		    doLoop = attributes.doLoop;
@@ -237,7 +239,8 @@ registerBlockType('catpow/buttons', {
 		save: function save(_ref3) {
 			var attributes = _ref3.attributes,
 			    className = _ref3.className;
-			var items = attributes.items,
+			var _attributes$items3 = attributes.items,
+			    items = _attributes$items3 === undefined ? [] : _attributes$items3,
 			    classes = attributes.classes,
 			    loopParam = attributes.loopParam;
 

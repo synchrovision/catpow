@@ -41,7 +41,7 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-        const {id,classes,items}=attributes;
+        const {id,classes,items=[]}=attributes;
         let {breakpoints,grid}=attributes;
 		
 		if(!id){
@@ -229,7 +229,7 @@
         ];
     },
 	save({attributes,className,setAttributes}){
-        const {id,classes,items}=attributes;
+        const {id,classes,items=[]}=attributes;
         let {breakpoints,grid}=attributes;
 		
 		breakpoints=breakpoints.split(',');

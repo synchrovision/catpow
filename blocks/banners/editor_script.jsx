@@ -17,7 +17,7 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {items,classes,loopCount,imageCode,doLoop,EditMode=false,AltMode=false}=attributes;
+		const {items=[],classes,loopCount,imageCode,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-banners';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
@@ -195,7 +195,7 @@
         );
     },
 	save({attributes,className}){
-		const {items,classes,loopParam,doLoop}=attributes;
+		const {items=[],classes,loopParam,doLoop}=attributes;
 		
 		var states=CP.wordsToFlags(classes);
 		const imageKeys={
@@ -230,7 +230,7 @@
 	deprecated:[
 		{
 			save({attributes,className}){
-				const {items,classes,loopParam}=attributes;
+				const {items=[],classes,loopParam}=attributes;
 
 				var states=CP.wordsToFlags(classes);
 				const imageKeys={

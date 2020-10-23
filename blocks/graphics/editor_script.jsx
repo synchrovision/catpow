@@ -45,9 +45,9 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-        const {id,classes,src,srcset,alt,height,heightSP,items}=attributes;
+        const {id,classes='',src,srcset,alt,height,heightSP,items=[]}=attributes;
 		const primaryClass='wp-block-catpow-graphics';
-		var classArray=classes.split(' ');
+		var classArray=(classes || '').split(' ');
 		
 		if(!id){
 			setAttributes({id:'g'+(new Date().getTime().toString(16))})
@@ -409,8 +409,8 @@
         ];
     },
 	save({attributes,className,setAttributes}){
-        const {id,classes,height,heightSP,items}=attributes;
-		var classArray=classes.split(' ');
+        const {id,classes,height,heightSP,items=[]}=attributes;
+		var classArray=(classes || '').split(' ');
 		
 		var cssData={},cssDataSP={};
 		

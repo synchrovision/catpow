@@ -195,7 +195,7 @@
     },
 	save({attributes,className}){
 		const {classes,graph}=attributes;
-		var classArray=_.uniq(attributes.classes.split(' '));
+		var classArray=_.uniq((attributes.classes || '').split(' '));
 		
 		var selectiveClasses=[
 			{

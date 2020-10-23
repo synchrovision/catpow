@@ -115,7 +115,7 @@
         ];
     },
 	save({attributes,className,setAttributes}){
-        const {classes,labelText}=attributes;
+        const {classes='',labelText}=attributes;
 		
 		var classArray=classes.split(' ');
 		

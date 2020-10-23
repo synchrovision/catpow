@@ -5,7 +5,7 @@
 	category: 'catpow',
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {items,classes,priceUnit,priceCaption,linkText,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
+		const {items=[],classes='',priceUnit,priceCaption,linkText,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-pricecard';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
@@ -262,9 +262,9 @@
        );
     },
 	save({attributes,className}){
-		const {items,classes,priceUnit,priceCaption,linkText,loopCount,doLoop}=attributes;
+		const {items=[],classes='',priceUnit,priceCaption,linkText,loopCount,doLoop}=attributes;
 		const primaryClass='wp-block-catpow-pricecard';
-		var classArray=_.uniq(attributes.classes.split(' '));
+		var classArray=_.uniq(classes.split(' '));
 		
 		var states=CP.wordsToFlags(classes);
 		
@@ -351,9 +351,9 @@
 	deprecated:[
 		{
 			save({attributes,className}){
-				const {items,classes,priceUnit,priceCaption,linkText,loopCount}=attributes;
+				const {items=[],classes='',priceUnit,priceCaption,linkText,loopCount}=attributes;
 				const primaryClass='wp-block-catpow-pricecard';
-				var classArray=_.uniq(attributes.classes.split(' '));
+				var classArray=_.uniq(classes.split(' '));
 
 				var states=CP.wordsToFlags(classes);
 

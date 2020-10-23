@@ -25,8 +25,10 @@ registerBlockType('catpow/slider', {
 		var attributes = _ref.attributes,
 		    className = _ref.className,
 		    setAttributes = _ref.setAttributes;
-		var classes = attributes.classes,
-		    controlClasses = attributes.controlClasses,
+		var _attributes$classes = attributes.classes,
+		    classes = _attributes$classes === undefined ? '' : _attributes$classes,
+		    _attributes$controlCl = attributes.controlClasses,
+		    controlClasses = _attributes$controlCl === undefined ? '' : _attributes$controlCl,
 		    config = attributes.config,
 		    items = attributes.items,
 		    doLoop = attributes.doLoop,
@@ -37,7 +39,7 @@ registerBlockType('catpow/slider', {
 
 		var primaryClass = 'wp-block-catpow-slider';
 		var classArray = _.uniq((className + ' ' + classes).split(' '));
-		var controlClassArray = _.uniq(attributes.controlClasses.split(' '));
+		var controlClassArray = _.uniq(controlClasses.split(' '));
 		var classNameArray = className.split(' ');
 
 		var imageKeys = {
@@ -352,14 +354,17 @@ registerBlockType('catpow/slider', {
 	save: function save(_ref2) {
 		var attributes = _ref2.attributes,
 		    className = _ref2.className;
-		var classes = attributes.classes,
-		    controlClasses = attributes.controlClasses,
+		var _attributes$classes2 = attributes.classes,
+		    classes = _attributes$classes2 === undefined ? '' : _attributes$classes2,
+		    _attributes$controlCl2 = attributes.controlClasses,
+		    controlClasses = _attributes$controlCl2 === undefined ? '' : _attributes$controlCl2,
 		    config = attributes.config,
-		    items = attributes.items,
+		    _attributes$items = attributes.items,
+		    items = _attributes$items === undefined ? [] : _attributes$items,
 		    doLoop = attributes.doLoop;
 
-		var classArray = _.uniq(attributes.classes.split(' '));
-		var controlClassArray = _.uniq(attributes.controlClasses.split(' '));
+		var classArray = _.uniq(classes.split(' '));
+		var controlClassArray = _.uniq(controlClasses.split(' '));
 
 		var states = CP.wordsToFlags(classes);
 
@@ -533,13 +538,16 @@ registerBlockType('catpow/slider', {
 		save: function save(_ref3) {
 			var attributes = _ref3.attributes,
 			    className = _ref3.className;
-			var classes = attributes.classes,
-			    controlClasses = attributes.controlClasses,
+			var _attributes$classes3 = attributes.classes,
+			    classes = _attributes$classes3 === undefined ? '' : _attributes$classes3,
+			    _attributes$controlCl3 = attributes.controlClasses,
+			    controlClasses = _attributes$controlCl3 === undefined ? '' : _attributes$controlCl3,
 			    config = attributes.config,
-			    items = attributes.items;
+			    _attributes$items2 = attributes.items,
+			    items = _attributes$items2 === undefined ? [] : _attributes$items2;
 
-			var classArray = _.uniq(attributes.classes.split(' '));
-			var controlClassArray = _.uniq(attributes.controlClasses.split(' '));
+			var classArray = _.uniq(classes.split(' '));
+			var controlClassArray = _.uniq(controlClasses.split(' '));
 			var states = {
 				hasArrows: false,
 				hasDots: false,
@@ -661,13 +669,16 @@ registerBlockType('catpow/slider', {
 		save: function save(_ref4) {
 			var attributes = _ref4.attributes,
 			    className = _ref4.className;
-			var classes = attributes.classes,
-			    controlClasses = attributes.controlClasses,
+			var _attributes$classes4 = attributes.classes,
+			    classes = _attributes$classes4 === undefined ? '' : _attributes$classes4,
+			    _attributes$controlCl4 = attributes.controlClasses,
+			    controlClasses = _attributes$controlCl4 === undefined ? '' : _attributes$controlCl4,
 			    config = attributes.config,
-			    items = attributes.items;
+			    _attributes$items3 = attributes.items,
+			    items = _attributes$items3 === undefined ? [] : _attributes$items3;
 
-			var classArray = _.uniq(attributes.classes.split(' '));
-			var controlClassArray = _.uniq(attributes.controlClasses.split(' '));
+			var classArray = _.uniq(classes.split(' '));
+			var controlClassArray = _.uniq(controlClasses.split(' '));
 
 			var states = CP.wordsToFlags(classes);
 

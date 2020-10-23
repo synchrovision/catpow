@@ -17,7 +17,7 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {items,classes,boxClasses,blockState,loopCount,doLoop,EditMode=false,AltMode=false,OpenMode=false,currentItemIndex=0}=attributes;
+		const {items=[],classes,boxClasses,blockState,loopCount,doLoop,EditMode=false,AltMode=false,OpenMode=false,currentItemIndex=0}=attributes;
 		const primaryClass='wp-block-catpow-lightbox';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
@@ -288,8 +288,8 @@
         );
     },
 	save({attributes,className}){
-		const {items,classes,boxClasses,blockState,doLoop}=attributes;
-		var classArray=_.uniq(attributes.classes.split(' '));
+		const {items=[],classes='',boxClasses,blockState,doLoop}=attributes;
+		var classArray=_.uniq(classes.split(' '));
 		
 		var states=CP.wordsToFlags(classes);
 		

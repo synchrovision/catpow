@@ -77,7 +77,7 @@ registerBlockType('catpow/layouttable',{
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {classes,rows}=attributes;
+		const {classes='',rows}=attributes;
 		const primaryClass='wp-block-catpow-layouttable';
 		
 		if(attributes.file){
@@ -265,7 +265,7 @@ registerBlockType('catpow/layouttable',{
 			if(!Array.isArray(values) && _.isObject(values)){values=Object.keys(values);}
 			
             selectedCells.map((cell)=>{
-				let classArray=cell.classes.split(' ');
+				let classArray=(cell.classes || '').split(' ');
 				classArray=_.difference(classArray,values);
 				if(Array.isArray(value)){classArray=classArray.concat(value);}
 				else{classArray.push(value);}
@@ -277,7 +277,7 @@ registerBlockType('catpow/layouttable',{
 		const addCellClasses=(values)=>{
 			if(!Array.isArray(values)){values=[values];}
             selectedCells.map((cell)=>{
-				let classArray=cell.classes?cell.classes.split(' '):[];
+				let classArray=(cell.classes || '').split(' ');
 				classArray=_.difference(classArray,values);
 				classArray=classArray.concat(values);
 				cell.classes=classArray.join(' ')
@@ -287,7 +287,7 @@ registerBlockType('catpow/layouttable',{
 		const removeCellClasses=(values)=>{
 			if(!Array.isArray(values)){values=[values];}
             selectedCells.map((cell)=>{
-				let classArray=cell.classes?cell.classes.split(' '):[];
+				let classArray=(cell.classes || '').split(' ');
 				classArray=_.difference(classArray,values);
 				cell.classes=classArray.join(' ')
 			});
@@ -295,11 +295,11 @@ registerBlockType('catpow/layouttable',{
 		}
 		const getCellClasses=()=>{
 			if(!selectedCells[0] || !selectedCells[0].classes){return [];}
-			var rtn=selectedCells[0].classes.split(' ');
+			var rtn=(selectedCells[0].classes || '').split(' ');
 			for(var i=1;i<selectedCells.length;i++){
 				if(rtn.length<1){return [];}
 				if(!selectedCells[i].classes){return [];}
-				rtn=_.intersection(rtn,selectedCells[i].classes.split(' '));
+				rtn=_.intersection((rtn,selectedCells[i].classes || '').split(' '));
 			}
 			return rtn;
 		}

@@ -19,7 +19,8 @@ registerBlockType('catpow/lightbox', {
 		    className = _ref.className,
 		    setAttributes = _ref.setAttributes,
 		    isSelected = _ref.isSelected;
-		var items = attributes.items,
+		var _attributes$items = attributes.items,
+		    items = _attributes$items === undefined ? [] : _attributes$items,
 		    classes = attributes.classes,
 		    boxClasses = attributes.boxClasses,
 		    blockState = attributes.blockState,
@@ -321,13 +322,15 @@ registerBlockType('catpow/lightbox', {
 	save: function save(_ref2) {
 		var attributes = _ref2.attributes,
 		    className = _ref2.className;
-		var items = attributes.items,
-		    classes = attributes.classes,
+		var _attributes$items2 = attributes.items,
+		    items = _attributes$items2 === undefined ? [] : _attributes$items2,
+		    _attributes$classes = attributes.classes,
+		    classes = _attributes$classes === undefined ? '' : _attributes$classes,
 		    boxClasses = attributes.boxClasses,
 		    blockState = attributes.blockState,
 		    doLoop = attributes.doLoop;
 
-		var classArray = _.uniq(attributes.classes.split(' '));
+		var classArray = _.uniq(classes.split(' '));
 
 		var states = CP.wordsToFlags(classes);
 

@@ -39,7 +39,7 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {items,classes,countPrefix,countSuffix}=attributes;
+		const {items=[],classes,countPrefix,countSuffix}=attributes;
 		const primaryClass='wp-block-catpow-icons';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
@@ -125,7 +125,7 @@
         ];
     },
 	save({attributes,className}){
-		const {items,classes,countPrefix,countSuffix}=attributes;
+		const {items=[],classes,countPrefix,countSuffix}=attributes;
 		
 		let rtn=[];
 		items.map((item,index)=>{

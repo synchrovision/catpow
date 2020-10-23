@@ -40,7 +40,8 @@ registerBlockType('catpow/panel', {
 		    setAttributes = _ref.setAttributes,
 		    isSelected = _ref.isSelected;
 		var classes = attributes.classes,
-		    items = attributes.items;
+		    _attributes$items = attributes.items,
+		    items = _attributes$items === undefined ? [] : _attributes$items;
 
 		var primaryClass = 'wp-block-catpow-panel';
 		var classArray = _.uniq(classes.split(' '));
@@ -100,7 +101,7 @@ registerBlockType('catpow/panel', {
 				hasLink: false,
 				linkExternal: false
 			};
-			var itemClassArray = item.classes.split(' ');
+			var itemClassArray = (item.classes || '').split(' ');
 			Object.keys(itemStates).forEach(function (key) {
 				this[key] = itemClassArray.indexOf(key) !== -1;
 			}, itemStates);
@@ -241,8 +242,10 @@ registerBlockType('catpow/panel', {
 	save: function save(_ref2) {
 		var attributes = _ref2.attributes,
 		    className = _ref2.className;
-		var classes = attributes.classes,
-		    items = attributes.items;
+		var _attributes$classes = attributes.classes,
+		    classes = _attributes$classes === undefined ? '' : _attributes$classes,
+		    _attributes$items2 = attributes.items,
+		    items = _attributes$items2 === undefined ? [] : _attributes$items2;
 
 		var rtn = [];
 		items.map(function (item, index) {
@@ -254,7 +257,7 @@ registerBlockType('catpow/panel', {
 				hasLink: false,
 				linkExternal: false
 			};
-			var itemClassArray = item.classes.split(' ');
+			var itemClassArray = (item.classes || '').split(' ');
 			Object.keys(itemStates).forEach(function (key) {
 				this[key] = itemClassArray.indexOf(key) !== -1;
 			}, itemStates);

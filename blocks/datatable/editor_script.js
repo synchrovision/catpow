@@ -274,7 +274,8 @@ registerBlockType('catpow/datatable', {
 	save: function save(_ref2) {
 		var attributes = _ref2.attributes,
 		    className = _ref2.className;
-		var classes = attributes.classes,
+		var _attributes$classes = attributes.classes,
+		    classes = _attributes$classes === undefined ? '' : _attributes$classes,
 		    rows = attributes.rows,
 		    loopParam = attributes.loopParam,
 		    doLoop = attributes.doLoop;
@@ -333,7 +334,8 @@ registerBlockType('catpow/datatable', {
 		save: function save(_ref3) {
 			var attributes = _ref3.attributes,
 			    className = _ref3.className;
-			var classes = attributes.classes,
+			var _attributes$classes2 = attributes.classes,
+			    classes = _attributes$classes2 === undefined ? '' : _attributes$classes2,
 			    rows = attributes.rows,
 			    loopParam = attributes.loopParam;
 

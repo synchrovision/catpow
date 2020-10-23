@@ -35,7 +35,7 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {classes,items}=attributes;
+		const {classes,items=[]}=attributes;
 		const primaryClass='wp-block-catpow-panel';
 		var classArray=_.uniq((classes).split(' '));
 		
@@ -124,7 +124,7 @@
 				hasLink:false,
 				linkExternal:false
 			}
-			var itemClassArray=item.classes.split(' ');
+			var itemClassArray=(item.classes || '').split(' ');
 			Object.keys(itemStates).forEach(function(key){this[key]=itemClassArray.indexOf(key)!==-1;},itemStates);
 			
 			totalGrid+=
@@ -240,7 +240,7 @@
         ];
     },
 	save({attributes,className}){
-		const {classes,items}=attributes;
+		const {classes='',items=[]}=attributes;
 		let rtn=[];
 		items.map((item,index)=>{
 			var itemStates={
@@ -251,7 +251,7 @@
 				hasLink:false,
 				linkExternal:false
 			}
-			var itemClassArray=item.classes.split(' ');
+			var itemClassArray=(item.classes || '').split(' ');
 			Object.keys(itemStates).forEach(function(key){this[key]=itemClassArray.indexOf(key)!==-1;},itemStates);
 		
 			

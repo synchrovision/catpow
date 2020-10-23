@@ -108,7 +108,8 @@ registerBlockType('catpow/div', {
 		var attributes = _ref2.attributes,
 		    className = _ref2.className,
 		    setAttributes = _ref2.setAttributes;
-		var classes = attributes.classes;
+		var _attributes$classes = attributes.classes,
+		    classes = _attributes$classes === undefined ? '' : _attributes$classes;
 
 
 		var classArray = classes.split(' ');

@@ -308,7 +308,7 @@ var CP = {
 		if (itemsKey === undefined) {
 			itemsKey = 'items';
 		}
-		var classArray = items[index].classes.split(' ');
+		var classArray = (items[index].classes || '').split(' ');
 		var i = classArray.findIndex(function (cls) {
 			return cls.substr(0, 5) === 'color';
 		});
@@ -330,7 +330,7 @@ var CP = {
 		var items = _ref9.items,
 		    index = _ref9.index;
 
-		var c = items[index].classes.split(' ').find(function (cls) {
+		var c = (items[index].classes || '').split(' ').find(function (cls) {
 			return cls.substr(0, 5) === 'color';
 		});
 		if (!c) {
@@ -347,7 +347,7 @@ var CP = {
 		if (itemsKey === undefined) {
 			itemsKey = 'items';
 		}
-		var classArray = items[index].classes.split(' ');
+		var classArray = (items[index].classes || '').split(' ');
 		var i = classArray.findIndex(function (cls) {
 			return cls.substr(0, 7) === 'pattern';
 		});
@@ -369,7 +369,7 @@ var CP = {
 		var items = _ref11.items,
 		    index = _ref11.index;
 
-		var p = items[index].classes.split(' ').find(function (cls) {
+		var p = (items[index].classes || '').split(' ').find(function (cls) {
 			return cls.substr(0, 7) === 'pattern';
 		});
 		if (!p) {
@@ -386,7 +386,7 @@ var CP = {
 		if (itemsKey === undefined) {
 			itemsKey = 'items';
 		}
-		var classArray = items[index].classes.split(' ');
+		var classArray = (items[index].classes || '').split(' ');
 		if (!Array.isArray(values) && _.isObject(values)) {
 			values = Object.keys(values);
 		}
@@ -406,7 +406,7 @@ var CP = {
 		if (!items[index].classes) {
 			return false;
 		}
-		var classArray = items[index].classes.split(' ');
+		var classArray = (items[index].classes || '').split(' ');
 		if (!Array.isArray(values) && _.isObject(values)) {
 			values = Object.keys(values);
 		}
@@ -421,7 +421,7 @@ var CP = {
 		if (itemsKey === undefined) {
 			itemsKey = 'items';
 		}
-		var classArray = items[index].classes.split(' ');
+		var classArray = (items[index].classes || '').split(' ');
 		var i = classArray.indexOf(value);
 		if (i === -1) {
 			classArray.push(value);
@@ -435,7 +435,7 @@ var CP = {
 		var items = _ref15.items,
 		    index = _ref15.index;
 
-		var classArray = items[index].classes.split(' ');
+		var classArray = (items[index].classes || '').split(' ');
 		return classArray.indexOf(value) !== -1;
 	},
 
@@ -1758,7 +1758,7 @@ var EditItemsTable = function EditItemsTable(props) {
 	    columns = props.columns,
 	    isTemplate = props.isTemplate;
 
-	var items = attr[itemsKey];
+	var items = attr[itemsKey] || [];
 	var save = function save() {
 		set(babelHelpers.defineProperty({}, itemsKey, JSON.parse(JSON.stringify(items))));
 	};
