@@ -21,6 +21,20 @@ add_action('admin_bar_menu',function($wp_admin_bar){
 			'href'=>add_query_arg(['post'=>$prev_post_id])
 		]);
 	}
+	$wp_admin_bar->add_menu([
+		'id'=>'select_post_edit',
+		'title'=>$post->post_title
+	]);
+	foreach(get_posts(['post_type'=>$post->post_type,'posts_per_page'=>20]) as $sibling_post){
+		$wp_admin_bar->add_node(
+			array(
+				'parent'=>'select_post_edit',
+				'id'=>'select_post_edit-'.$sibling_post->ID,
+				'title'=>$sibling_post->post_title,
+				'href'=>add_query_arg(['post'=>$sibling_post->ID])
+			)
+		);
+	}
 	if(isset($next_post_id)){
 		$wp_admin_bar->add_menu([
 			'id'=>'next_post_edit',
