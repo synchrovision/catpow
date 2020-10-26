@@ -55,9 +55,9 @@ class select_terms extends meta{
 						$term->slug,$term->taxonomy,$term->name
 					);
 				case 'link':
-					return vsprintf(
-						'<a class="term_link %s" href="%s">%s</a>',
-						[$term->taxonomy,get_term_link($term),$term->name]
+					return sprintf(
+						'<a class="term_link %s %s" href="%s">%s</a>',
+						$term->slug,$term->taxonomy,get_term_link($term),$term->name
 					);
 				case 'url':
 					return get_term_link($term);
