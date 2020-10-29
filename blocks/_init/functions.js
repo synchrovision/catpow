@@ -1,6 +1,7 @@
 var CP = {
 	filters: {},
 	cache: {},
+	config: {},
 
 	listedConvertibles: ['catpow/listed', 'catpow/flow', 'catpow/faq', 'catpow/ranking', 'catpow/dialog', 'catpow/sphere', 'catpow/slider', 'catpow/banners', 'catpow/lightbox'],
 	tableConvertibles: ['catpow/simpletable', 'catpow/datatable', 'catpow/layouttable'],
@@ -21,7 +22,7 @@ var CP = {
 		}]
 	},
 
-	selectImage: function selectImage(keys, set, size) {
+	selectImage: function selectImage(keys, set, size, devices) {
 		if (CP.uploder === undefined) {
 			CP.uploader = wp.media({
 				title: 'Select Image',
@@ -43,9 +44,20 @@ var CP = {
 			} else {
 				data[keys.src] = image.url;
 			}
-			console.log(image.sizes);
+			if (keys.sources && image.sizes) {
+				devices = devices || ['sp'];
+				data[keys.sources] = devices.map(function (device) {
+					var sizeData = CP.devices[device];
+					return { srcset: image.sizes[sizeData.media_size].url, device: device };
+				});
+			}
 			if (keys.srcset && image.sizes) {
-				data[keys.srcset] = image.sizes.medium_large.url + ' 480w,' + image.url;
+				devices = devices || ['sp', 'pc'];
+				data[keys.srcset] = '';
+				devices.map(function (device) {
+					var sizeData = CP.devices[device];
+					data[keys.srcset] += image.sizes[sizeData.media_size].url + sizeData.rep;
+				});
 			}
 			set(data);
 		}).open();
@@ -562,6 +574,65 @@ var CP = {
 			}
 			return createBlock.apply(undefined, babelHelpers.toConsumableArray(block));
 		});
+	},
+
+	devices: {
+		sp: {
+			icon: 'smartphone',
+			media_query: '(max-width:640px)',
+			sizes: '(max-width:640px) 480px',
+			sizes_value: '480px',
+			media_size: 'medium_large',
+			reg: /[^,]+ 480w,/,
+			rep: ' 480w,'
+		},
+		tb: {
+			icon: 'tablet',
+			media_query: '(max-width:1280px)',
+			sizes: '(max-width:1280px) 960px',
+			sizes_value: '960px',
+			media_size: 'full',
+			reg: /[^,]+ 960w,/,
+			rep: ' 960w,'
+		},
+		lt: {
+			icon: 'laptop',
+			media_query: '(max-width:1920px)',
+			sizes: '(max-width:1920px) 1440px',
+			sizes_value: '1440px',
+			media_size: 'full',
+			reg: /[^,]+ 1440w,/,
+			rep: ' 1440w,'
+		},
+		pc: {
+			icon: 'desktop',
+			media_query: false,
+			sizes: '100vw',
+			sizes_value: '100vw',
+			media_size: 'full',
+			reg: /[^,]+$/,
+			rep: ''
+		}
+	},
+	getImageSizesForDevices: function getImageSizesForDevices(devices) {
+		return Object.keys(CP.devices).filter(function (device) {
+			return devices.includes(device);
+		}).map(function (device) {
+			return CP.devices[device].sizes;
+		}).join(',');
+	},
+	getPictureSoucesAttributesForDevices: function getPictureSoucesAttributesForDevices(devices) {
+		return {
+			source: 'query',
+			selector: 'picture source',
+			query: {
+				srcset: { source: 'attribute', attribute: 'srcset' },
+				device: { source: 'attribute', 'attribute': 'data-device' }
+			},
+			default: devices.map(function (device) {
+				return { srcset: cp.theme_url + '/images/dummy.jpg', device: device };
+			})
+		};
 	}
 };
 var SelectResponsiveImage = function SelectResponsiveImage(_ref18) {
@@ -572,9 +643,11 @@ var SelectResponsiveImage = function SelectResponsiveImage(_ref18) {
 	    index = _ref18.index,
 	    sizes = _ref18.sizes,
 	    size = _ref18.size,
+	    devices = _ref18.devices,
+	    device = _ref18.device,
 	    ofSP = _ref18.ofSP,
 	    isTemplate = _ref18.isTemplate,
-	    otherProps = babelHelpers.objectWithoutProperties(_ref18, ['className', 'attr', 'set', 'keys', 'index', 'sizes', 'size', 'ofSP', 'isTemplate']);
+	    otherProps = babelHelpers.objectWithoutProperties(_ref18, ['className', 'attr', 'set', 'keys', 'index', 'sizes', 'size', 'devices', 'device', 'ofSP', 'isTemplate']);
 
 	var type = void 0,
 	    onClick = void 0,
@@ -602,6 +675,47 @@ var SelectResponsiveImage = function SelectResponsiveImage(_ref18) {
 				}, size || 'medium_large');
 			};
 		}
+	} else if (device) {
+		var sizeData = CP.devices[device];
+		if (keys.items) {
+			item = attr[keys.items][index];
+			onClick = function onClick(e) {
+				return CP.selectImage({ src: 'src' }, function (_ref21) {
+					var src = _ref21.src;
+
+					var newItems = JSON.parse(JSON.stringify(attr[keys.items]));
+					if (keys.sources) {
+						newItems[index][keys.sources].map(function (source) {
+							if (source.device === device) {
+								source.srcset = src;
+							}
+							return source;
+						});
+					} else {
+						newItems[index][keys.srcset] = newItems[index][keys.srcset].replace(sizeData.reg, src + sizeData.rep);
+					}
+					set(babelHelpers.defineProperty({}, keys.items, newItems));
+				}, sizeData.media_size);
+			};
+		} else {
+			item = attr;
+			onClick = function onClick(e) {
+				return CP.selectImage({ src: 'src' }, function (_ref22) {
+					var src = _ref22.src;
+
+					if (keys.sources) {
+						set(babelHelpers.defineProperty({}, keys.sources, item[keys.sources].map(function (source) {
+							if (source.device === device) {
+								source.srcset = src;
+							}
+							return source;
+						})));
+					} else {
+						set(babelHelpers.defineProperty({}, keys.srcset, item[keys.srcset].replace(sizeData.reg, src + sizeData.rep)));
+					}
+				}, sizeData.media_size);
+			};
+		}
 	} else {
 		if (keys.items) {
 			item = attr[keys.items][index];
@@ -613,12 +727,12 @@ var SelectResponsiveImage = function SelectResponsiveImage(_ref18) {
 					});
 					rusult[keys.items][index] = jQuery.extend({}, item, data);
 					set(rusult);
-				}, size);
+				}, size, devices);
 			};
 		} else {
 			item = attr;
 			onClick = function onClick(e) {
-				return CP.selectImage(keys, set, size);
+				return CP.selectImage(keys, set, size, devices);
 			};
 		}
 	}
@@ -639,7 +753,11 @@ var SelectResponsiveImage = function SelectResponsiveImage(_ref18) {
 		}, otherProps));
 	}
 	if (item[keys.srcset] && !sizes) {
-		sizes = '(max-width:640px) 480px,100vw';
+		if (device) {
+			sizes = CP.devices[device].sizes_value;
+		} else {
+			sizes = CP.getImageSizesForDevices(devices || ['sp', 'pc']);
+		}
 	}
 	if (type == 'video') {
 		return wp.element.createElement('video', babelHelpers.extends({
@@ -654,6 +772,40 @@ var SelectResponsiveImage = function SelectResponsiveImage(_ref18) {
 		}, otherProps));
 	}
 	var src = CP.imageSrcOrDummy(item[keys.src]);
+	if (keys.sources) {
+		if (device) {
+			var source = item[keys.sources].find(function (source) {
+				return source.device === device;
+			});
+			return wp.element.createElement(
+				'picture',
+				babelHelpers.extends({
+					className: 'selectImage ' + className,
+					sizes: sizes,
+					onClick: onClick
+				}, otherProps),
+				wp.element.createElement('img', {
+					src: source.srcset,
+					alt: item[keys.alt]
+				})
+			);
+		}
+		return wp.element.createElement(
+			'picture',
+			babelHelpers.extends({
+				className: 'selectImage ' + className,
+				sizes: sizes,
+				onClick: onClick
+			}, otherProps),
+			item[keys.sources].map(function (source) {
+				return wp.element.createElement('source', { srcset: source.srcset, media: CP.devices[source.device].media_query, 'data-device': source.device });
+			}),
+			wp.element.createElement('img', {
+				src: src,
+				alt: item[keys.alt]
+			})
+		);
+	}
 	return wp.element.createElement('img', babelHelpers.extends({
 		className: 'selectImage ' + className,
 		src: src,
@@ -664,13 +816,14 @@ var SelectResponsiveImage = function SelectResponsiveImage(_ref18) {
 		onClick: onClick
 	}, otherProps));
 };
-var ResponsiveImage = function ResponsiveImage(_ref21) {
-	var className = _ref21.className,
-	    attr = _ref21.attr,
-	    keys = _ref21.keys,
-	    index = _ref21.index,
-	    sizes = _ref21.sizes,
-	    isTemplate = _ref21.isTemplate;
+var ResponsiveImage = function ResponsiveImage(_ref23) {
+	var className = _ref23.className,
+	    attr = _ref23.attr,
+	    keys = _ref23.keys,
+	    index = _ref23.index,
+	    sizes = _ref23.sizes,
+	    devices = _ref23.devices,
+	    isTemplate = _ref23.isTemplate;
 
 	var type = void 0,
 	    item = void 0;
@@ -694,7 +847,8 @@ var ResponsiveImage = function ResponsiveImage(_ref21) {
 		});
 	}
 	if (item[keys.srcset] && !sizes) {
-		sizes = '(max-width:640px) 480px,100vw';
+		devices = devices || ['sp', 'pc'];
+		sizes = CP.getImageSizesForDevices(devices);
 	}
 	if (type == 'video') {
 		return wp.element.createElement('video', {
@@ -709,6 +863,22 @@ var ResponsiveImage = function ResponsiveImage(_ref21) {
 			muted: 1
 		});
 	}
+	if (keys.sources) {
+		return wp.element.createElement(
+			'picture',
+			{
+				className: 'selectImage ' + className,
+				sizes: sizes
+			},
+			item[keys.sources].map(function (source) {
+				return wp.element.createElement('source', { srcset: source.srcset, media: CP.devices[source.device].media_query, 'data-device': source.device });
+			}),
+			wp.element.createElement('img', {
+				src: item[keys.src],
+				alt: item[keys.alt]
+			})
+		);
+	}
 	return wp.element.createElement('img', {
 		className: className,
 		src: item[keys.src],
@@ -719,14 +889,14 @@ var ResponsiveImage = function ResponsiveImage(_ref21) {
 	});
 };
 
-var SelectPreparedImage = function SelectPreparedImage(_ref22) {
-	var className = _ref22.className,
-	    attr = _ref22.attr,
-	    set = _ref22.set,
-	    name = _ref22.name,
-	    keys = _ref22.keys,
-	    index = _ref22.index,
-	    otherProps = babelHelpers.objectWithoutProperties(_ref22, ['className', 'attr', 'set', 'name', 'keys', 'index']);
+var SelectPreparedImage = function SelectPreparedImage(_ref24) {
+	var className = _ref24.className,
+	    attr = _ref24.attr,
+	    set = _ref24.set,
+	    name = _ref24.name,
+	    keys = _ref24.keys,
+	    index = _ref24.index,
+	    otherProps = babelHelpers.objectWithoutProperties(_ref24, ['className', 'attr', 'set', 'name', 'keys', 'index']);
 
 	var onClick = void 0;
 
@@ -747,9 +917,9 @@ var SelectPreparedImage = function SelectPreparedImage(_ref22) {
 	} else {
 		item = attr;
 		onClick = function onClick(e) {
-			var _set9;
+			var _set12;
 
-			return set((_set9 = {}, babelHelpers.defineProperty(_set9, keys.src, e.currentTarget.src), babelHelpers.defineProperty(_set9, keys.alt, e.currentTarget.alt), _set9));
+			return set((_set12 = {}, babelHelpers.defineProperty(_set12, keys.src, e.currentTarget.src), babelHelpers.defineProperty(_set12, keys.alt, e.currentTarget.alt), _set12));
 		};
 	}
 	return wp.element.createElement(
@@ -1153,7 +1323,9 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							keys: prm.keys,
 							size: prm.size,
 							sizes: prm.sizes,
-							ofSP: prm.ofSP
+							ofSP: prm.ofSP,
+							device: prm.device,
+							devices: prm.devices
 						}));
 						break;
 					case 'position':
@@ -1430,7 +1602,9 @@ var SelectItemClassPanel = function SelectItemClassPanel(props) {
 						index: index,
 						size: prm.size,
 						sizes: prm.sizes,
-						ofSP: prm.ofSP
+						ofSP: prm.ofSP,
+						device: prm.device,
+						devices: prm.devices
 					}));
 					break;
 				case 'icon':
@@ -1750,6 +1924,34 @@ var SelectModeToolbar = function SelectModeToolbar(props) {
 	);
 };
 
+var SelectDeviceToolbar = function SelectDeviceToolbar(props) {
+	var set = props.set,
+	    attr = props.attr,
+	    _props$devices = props.devices,
+	    devices = _props$devices === undefined ? ['sp', 'pc'] : _props$devices;
+
+	return wp.element.createElement(
+		BlockControls,
+		null,
+		devices.map(function (device) {
+			return wp.element.createElement(Toolbar, {
+				controls: [{
+					icon: CP.devices[device].icon,
+					title: device,
+					isActive: attr.device === device,
+					onClick: function onClick() {
+						if (attr.device === device) {
+							set({ device: null });
+						} else {
+							set({ device: device });
+						}
+					}
+				}]
+			});
+		})
+	);
+};
+
 var EditItemsTable = function EditItemsTable(props) {
 	var set = props.set,
 	    attr = props.attr,
@@ -1847,8 +2049,8 @@ var EditItemsTable = function EditItemsTable(props) {
 	);
 };
 
-var DummyImage = function DummyImage(_ref23) {
-	var text = _ref23.text;
+var DummyImage = function DummyImage(_ref25) {
+	var text = _ref25.text;
 
 	return wp.element.createElement('img', { src: cp.plugins_url + '/catpow/callee/dummy_image.php?text=' + text });
 };

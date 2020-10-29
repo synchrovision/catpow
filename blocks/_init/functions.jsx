@@ -1,6 +1,7 @@
 ﻿const CP={
 	filters:{},
 	cache:{},
+	config:{},
 	
 	listedConvertibles:['catpow/listed','catpow/flow','catpow/faq','catpow/ranking','catpow/dialog','catpow/sphere','catpow/slider','catpow/banners','catpow/lightbox'],
 	tableConvertibles:['catpow/simpletable','catpow/datatable','catpow/layouttable'],
@@ -24,7 +25,7 @@
 		]
 	},
 	
-	selectImage:(keys,set,size)=>{
+	selectImage:(keys,set,size,devices)=>{
 		if(CP.uploder===undefined){
 			CP.uploader=wp.media({
 				title:'Select Image',
@@ -39,9 +40,20 @@
 			if(keys.alt){data[keys.alt]=image.alt;}
 			if(size && image.sizes && image.sizes[size]){data[keys.src]=image.sizes[size].url;}
 			else{data[keys.src]=image.url;}
-			console.log(image.sizes);
+			if(keys.sources && image.sizes){
+				devices=devices || ['sp'];
+				data[keys.sources]=devices.map((device)=>{
+					const sizeData=CP.devices[device];
+					return {srcset:image.sizes[sizeData.media_size].url,device};
+				});
+			}
 			if(keys.srcset && image.sizes){
-				data[keys.srcset]=image.sizes.medium_large.url+' 480w,'+image.url;
+				devices=devices || ['sp','pc'];
+				data[keys.srcset]='';
+				devices.map((device)=>{
+					const sizeData=CP.devices[device];
+					data[keys.srcset]+=image.sizes[sizeData.media_size].url+sizeData.rep;
+				});
 			}
 			set(data);
 		}).open();
@@ -376,9 +388,63 @@
 			if(block[2]){block[2]=CP.createBlocks(block[2]);}
 			return createBlock(...block);
 		});
+	},
+	
+	devices:{
+		sp:{
+			icon:'smartphone',
+			media_query:'(max-width:640px)',
+			sizes:'(max-width:640px) 480px',
+			sizes_value:'480px',
+			media_size:'medium_large',
+			reg:/[^,]+ 480w,/,
+			rep:' 480w,'
+		},
+		tb:{
+			icon:'tablet',
+			media_query:'(max-width:1280px)',
+			sizes:'(max-width:1280px) 960px',
+			sizes_value:'960px',
+			media_size:'full',
+			reg:/[^,]+ 960w,/,
+			rep:' 960w,'
+		},
+		lt:{
+			icon:'laptop',
+			media_query:'(max-width:1920px)',
+			sizes:'(max-width:1920px) 1440px',
+			sizes_value:'1440px',
+			media_size:'full',
+			reg:/[^,]+ 1440w,/,
+			rep:' 1440w,'
+		},
+		pc:{
+			icon:'desktop',
+			media_query:false,
+			sizes:'100vw',
+			sizes_value:'100vw',
+			media_size:'full',
+			reg:/[^,]+$/,
+			rep:''
+		}
+	},
+	getImageSizesForDevices:(devices)=>{
+		return Object.keys(CP.devices).filter((device=>devices.includes(device)))
+			.map((device)=>CP.devices[device].sizes).join(',');
+	},
+	getPictureSoucesAttributesForDevices:(devices)=>{
+		return {
+			source:'query',
+			selector:'picture source',
+			query:{
+				srcset:{source:'attribute',attribute:'srcset'},
+				device:{source:'attribute','attribute':'data-device'}
+			},
+			default:devices.map((device)=>({srcset:cp.theme_url+'/images/dummy.jpg',device}))
+		}
 	}
 };
-const SelectResponsiveImage=({className,attr,set,keys,index,sizes,size,ofSP,isTemplate,...otherProps})=>{
+const SelectResponsiveImage=({className,attr,set,keys,index,sizes,size,devices,device,ofSP,isTemplate,...otherProps})=>{
 	let type,onClick,item;
 	keys=keys || {};
 	if(ofSP){
@@ -397,6 +463,39 @@ const SelectResponsiveImage=({className,attr,set,keys,index,sizes,size,ofSP,isTe
 			},size || 'medium_large');
 		}
 	}
+	else if(device){
+		const sizeData=CP.devices[device];
+		if(keys.items){
+			item=attr[keys.items][index];
+			onClick=(e)=>CP.selectImage({src:'src'},function({src}){
+				var newItems=JSON.parse(JSON.stringify(attr[keys.items]));
+				if(keys.sources){
+					newItems[index][keys.sources].map((source)=>{
+						if(source.device===device){source.srcset=src;}
+						return source;
+					});
+				}
+				else{
+					newItems[index][keys.srcset]=newItems[index][keys.srcset].replace(sizeData.reg,src+sizeData.rep);
+				}
+				set({[keys.items]:newItems});
+			},sizeData.media_size);
+		}
+		else{
+			item=attr;
+			onClick=(e)=>CP.selectImage({src:'src'},function({src}){
+				if(keys.sources){
+					set({[keys.sources]:item[keys.sources].map((source)=>{
+						if(source.device===device){source.srcset=src;}
+						return source;
+					})});
+				}
+				else{
+					set({[keys.srcset]:item[keys.srcset].replace(sizeData.reg,src+sizeData.rep)});
+				}
+			},sizeData.media_size);
+		}
+	}
 	else{
 		if(keys.items){
 			item=attr[keys.items][index];
@@ -405,11 +504,11 @@ const SelectResponsiveImage=({className,attr,set,keys,index,sizes,size,ofSP,isTe
 				rusult[keys.items]=attr[keys.items].map((obj)=>jQuery.extend(true,{},obj));
 				rusult[keys.items][index]=jQuery.extend({},item,data);
 				set(rusult);
-			},size);
+			},size,devices);
 		}
 		else{
 			item=attr;
-			onClick=(e)=>CP.selectImage(keys,set,size);
+			onClick=(e)=>CP.selectImage(keys,set,size,devices);
 		}
 	}
 	if(isTemplate && keys.code && item[keys.code]){
@@ -428,7 +527,14 @@ const SelectResponsiveImage=({className,attr,set,keys,index,sizes,size,ofSP,isTe
 				></audio>
 		);
 	}
-	if(item[keys.srcset] && !sizes){sizes='(max-width:640px) 480px,100vw';}
+	if(item[keys.srcset] && !sizes){
+		if(device){
+			sizes=CP.devices[device].sizes_value;
+		}
+		else{
+			sizes=CP.getImageSizesForDevices(devices || ['sp','pc']);
+		}
+	}
 	if(type=='video'){
 		return (
 			<video
@@ -445,6 +551,40 @@ const SelectResponsiveImage=({className,attr,set,keys,index,sizes,size,ofSP,isTe
 		);
 	}
 	var src=CP.imageSrcOrDummy(item[keys.src]);
+	if(keys.sources){
+		if(device){
+			const source=item[keys.sources].find((source)=>source.device===device);
+			return (
+				<picture
+					className={'selectImage '+className}
+					sizes={sizes}
+					onClick={onClick}
+					{...otherProps}
+				>
+					<img
+						src={source.srcset}
+						alt={item[keys.alt]}
+					/>
+				</picture>
+			);
+		}
+		return (
+			<picture
+				className={'selectImage '+className}
+				sizes={sizes}
+				onClick={onClick}
+				{...otherProps}
+			>
+				{item[keys.sources].map((source)=>(
+					<source srcset={source.srcset} media={CP.devices[source.device].media_query} data-device={source.device}/>
+				))}
+				<img
+					src={src}
+					alt={item[keys.alt]}
+				/>
+			</picture>
+		);
+	}
 	return (
 		<img
 			className={'selectImage '+className}
@@ -458,7 +598,7 @@ const SelectResponsiveImage=({className,attr,set,keys,index,sizes,size,ofSP,isTe
 		/>
 	);
 };
-const ResponsiveImage=({className,attr,keys,index,sizes,isTemplate})=>{
+const ResponsiveImage=({className,attr,keys,index,sizes,devices,isTemplate})=>{
 	let type,item;
 	if(keys.items){item=attr[keys.items][index];}
 	else{item=attr;}
@@ -475,7 +615,10 @@ const ResponsiveImage=({className,attr,keys,index,sizes,isTemplate})=>{
 				></audio>
 		);
 	}
-	if(item[keys.srcset] && !sizes){sizes='(max-width:640px) 480px,100vw';}
+	if(item[keys.srcset] && !sizes){
+		devices=devices || ['sp','pc'];
+		sizes=CP.getImageSizesForDevices(devices);
+	}
 	if(type=='video'){
 		return (
 			<video
@@ -489,6 +632,22 @@ const ResponsiveImage=({className,attr,keys,index,sizes,isTemplate})=>{
 				playsinline={1}
 				muted={1}
 				></video>
+		);
+	}
+	if(keys.sources){
+		return (
+			<picture
+				className={'selectImage '+className}
+				sizes={sizes}
+			>
+				{item[keys.sources].map((source)=>(
+					<source srcset={source.srcset} media={CP.devices[source.device].media_query} data-device={source.device}/>
+				))}
+				<img
+					src={item[keys.src]}
+					alt={item[keys.alt]}
+				/>
+			</picture>
 		);
 	}
 	return (
@@ -826,6 +985,8 @@ const SelectClassPanel=(props)=>{
                                 size={prm.size}
 								sizes={prm.sizes}
 								ofSP={prm.ofSP}
+								device={prm.device}
+								devices={prm.devices}
                             />
                         );
                         break;
@@ -1071,6 +1232,8 @@ const SelectItemClassPanel=(props)=>{
 							size={prm.size}
 							sizes={prm.sizes}
 							ofSP={prm.ofSP}
+							device={prm.device}
+							devices={prm.devices}
 						/>
 					);
 					break;
@@ -1311,6 +1474,33 @@ const SelectModeToolbar=(props)=>{
 								title:mode,
 								isActive:attr[mode],
 								onClick:()=>set({[mode]:!attr[mode]})
+							}
+						]}
+					/>
+				);
+			})}
+		</BlockControls>
+	);
+}
+
+const SelectDeviceToolbar=(props)=>{
+	const {set,attr,devices=['sp','pc']}=props;
+	return (
+		<BlockControls>
+			{devices.map((device)=>{
+				return (
+					<Toolbar
+						controls={[
+							{
+								icon:CP.devices[device].icon,
+								title:device,
+								isActive:attr.device===device,
+								onClick:()=>{
+									if(attr.device===device){
+										set({device:null});
+									}
+									else{set({device});}
+								}
 							}
 						]}
 					/>
