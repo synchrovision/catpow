@@ -82,7 +82,7 @@ div.embedded_content{
 	}
 }
 div.alt_content{
-	@include bnd((p:r,h:5rem a,pdt:2rem));
+	@include bnd((p:r,h:5rem a,pdt:2rem,mg:0 a));
 	@include bdr((s:s,w:1,c:t 50));
 	&>.label{
 		@include bnd((p:a,r:0,t:0,pd:.25em,z:10));
