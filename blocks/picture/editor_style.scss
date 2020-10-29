@@ -1,0 +1,16 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-picture{
+	&.alt_content{
+		@include bnd((pdt:0));
+		&.sp{
+			@include bnd((w:375));
+		}
+		&.tb{
+			@include bnd((w:f 750));
+		}
+		&.lt{
+			@include bnd((w:f 1125));
+		}
+	}
+}
