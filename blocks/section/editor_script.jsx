@@ -1,4 +1,18 @@
-﻿registerBlockType('catpow/section',{
+﻿CP.config.section={
+	imageKeys:{
+		navIcon:{src:"navIcon"},
+		image:{mime:"imageMime",src:"imageSrc",alt:"imageAlt",srcset:"imageSrcset"},
+		headerImage:{mime:"headerImageMime",src:"headerImageSrc",alt:"headerImageAlt",srcset:"headerImageSrcset"},
+		headerBackgroundImage:{mime:"headerBackgroundImageMime",src:"headerBackgroundImageSrc",alt:"headerBackgroundImageAlt",srcset:"headerBackgroundImageSrcset"},
+		backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset"}
+	},
+	imageSizes:{
+		image:'medium',
+		headerImage:'medium_large'
+	}
+};
+
+registerBlockType('catpow/section',{
 	title: '🐾 Section',
 	description:'見出しと内容のまとまりを表すセクションのブロックです。',
 	icon: 'id-alt',
@@ -47,22 +61,9 @@
 			backgroundImageSrc,backgroundImageCode,
 			iconSrc,iconAlt
 		}=attributes;
-		const primaryClass='wp-block-catpow-section';
-		var classArray=_.uniq((className+' '+classes).split(' '));
 		
-		var states=CP.wordsToFlags(classes);
-		
-		const imageKeys={
-			navIcon:{src:"navIcon"},
-			image:{mime:"imageMime",src:"imageSrc",alt:"imageAlt",srcset:"imageSrcset"},
-			headerImage:{mime:"headerImageMime",src:"headerImageSrc",alt:"headerImageAlt",srcset:"headerImageSrcset"},
-			headerBackgroundImage:{mime:"headerBackgroundImageMime",src:"headerBackgroundImageSrc",alt:"headerBackgroundImageAlt",srcset:"headerBackgroundImageSrcset"},
-			backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset"}
-		};
-		const imageSizes={
-			image:'medium',
-			headerImage:'medium_large'
-		};
+		const states=CP.wordsToFlags(classes);
+		const {imageKeys,imageSizes}=CP.config.section;
 		
 		const selectiveClasses=[
 			{
@@ -223,7 +224,7 @@
 			<BlockControls>
 				<AlignClassToolbar set={setAttributes} attr={attributes}/>
 			</BlockControls>,
-			<section id={id} className={classArray.join(' ')}>
+			<section id={id} className={classes}>
 				{states.hasImage && 
 					<div class="image">
 						{(states.isTemplate && imageCode)?(
@@ -320,8 +321,8 @@
 				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 					<TextareaControl
 						label='クラス'
-						onChange={(clss)=>setAttributes({classes:clss})}
-						value={classArray.join(' ')}
+						onChange={(classes)=>setAttributes({classes})}
+						value={classes}
 					/>
 				</PanelBody>
 			</InspectorControls>
@@ -337,16 +338,10 @@
 			iconSrc,iconAlt
 		}=attributes;
 		
-		var states=CP.wordsToFlags(classes);
 		var level=CP.getNumberClass({attr:attributes},'level');
 		
-		const imageKeys={
-			navIcon:{src:"icon"},
-			image:{mime:"imageMime",src:"imageSrc",alt:"imageAlt",srcset:"imageSrcset"},
-			headerImage:{mime:"headerImageMime",src:"headerImageSrc",alt:"headerImageAlt",srcset:"headerImageSrcset"},
-			headerBackgroundImage:{mime:"headerBackgroundImageMime",src:"headerBackgroundImageSrc",alt:"headerBackgroundImageAlt",srcset:"headerBackgroundImageSrcset"},
-			backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset"}
-		};
+		const states=CP.wordsToFlags(classes);
+		const {imageKeys,imageSizes}=CP.config.section;
 		
 		return (
 			<section id={id} className={classes} data-icon={navIcon}>

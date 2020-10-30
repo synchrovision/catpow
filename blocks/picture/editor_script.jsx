@@ -24,9 +24,8 @@ registerBlockType('catpow/picture',{
 	edit({attributes,className,setAttributes,isSelected}){
         const {classes,sources,src,srcset,alt,code,device}=attributes;
 		
+		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.picture;
-		
-		var states=CP.wordsToFlags(classes);
 		
 		const selectiveClasses=[
 			{input:'image',label:'画像',keys:imageKeys.image,device,devices,isTemplate:states.isTemplate},
@@ -78,7 +77,7 @@ registerBlockType('catpow/picture',{
 	save({attributes,className,setAttributes}){
         const {classes,srouces,src,srcset,alt,code}=attributes;
 		
-		var states=CP.wordsToFlags(classes);
+		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.picture;
 		
 		return (

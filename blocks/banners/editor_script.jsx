@@ -1,4 +1,10 @@
-﻿registerBlockType('catpow/banners',{
+﻿CP.config.banners={
+	imageKeys:{
+		image:{src:"src",srcset:"srcset",alt:"alt",code:'imageCode',items:"items"}
+	}
+};
+
+registerBlockType('catpow/banners',{
 	title: '🐾 Banners',
 	description:'リンク付きのバナー画像を並べて表示するブロックです。',
 	icon: 'images-alt',
@@ -18,14 +24,9 @@
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {items=[],classes,loopCount,imageCode,doLoop,EditMode=false,AltMode=false}=attributes;
-		const primaryClass='wp-block-catpow-banners';
-		var classArray=_.uniq((className+' '+classes).split(' '));
-		var classNameArray=className.split(' ');
 		
-		var states=CP.wordsToFlags(classes);
-		const imageKeys={
-			image:{src:"src",srcset:"srcset",alt:"alt",code:'imageCode',items:"items"}
-		};
+		const states=CP.wordsToFlags(classes);
+		const {imageKeys}=CP.config.banners;
         
 		var selectiveClasses=[
 			{label:'サイズ',values:['small','medium','large']},
@@ -53,11 +54,10 @@
 			{input:'text',label:'画像',key:'imageCode'}
 		];
 		
+		let rtn=[];
 		const save=()=>{
 			setAttibutes({items:JSON.parse(JSON.stringify(items))});
 		};
-		
-		let rtn=[];
 
 		items.map((item,index)=>{
 			if(!item.controlClasses){item.controlClasses='control';}
@@ -129,8 +129,8 @@
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl
 							label='クラス'
-							onChange={(clss)=>setAttributes({classes:clss})}
-							value={classArray.join(' ')}
+							onChange={(classes)=>setAttributes({classes})}
+							value={classes}
 						/>
 					</PanelBody>
 					{states.isTemplate?(
@@ -197,10 +197,8 @@
 	save({attributes,className}){
 		const {items=[],classes,loopParam,doLoop}=attributes;
 		
-		var states=CP.wordsToFlags(classes);
-		const imageKeys={
-			image:{src:"src",srcset:"srcset",alt:"alt",code:'imageCode',items:"items"}
-		};
+		const states=CP.wordsToFlags(classes);
+		const {imageKeys}=CP.config.banners;
 		
 		return (
 			<Fragment>

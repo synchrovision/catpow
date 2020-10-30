@@ -1,4 +1,13 @@
-﻿registerBlockType('catpow/sticky',{
+﻿CP.config.sticky={
+	imageKeys:{
+		openButtonImage:{src:"openButtonImageSrc"},
+		closeButtonImage:{src:"closeButtonImageSrc"}
+	},
+	imageSizes:{
+		image:'vga'
+	}
+};
+registerBlockType('catpow/sticky',{
 	title:'🐾 Sticky',
 	description:'スクロールに追従するコンテンツを配置します。',
 	icon:'menu',
@@ -14,21 +23,9 @@
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
         const {classes,labelText}=attributes;
-		const primaryClass='wp-block-catpow-sticky';
-		var classArray=_.uniq((className+' '+classes).split(' '));
 		
-		var states={
-			container:false,
-			label:false,
-			collapsible:false,
-			labelButton:false,
-			imageButton:false
-		}
-		
-		const imageKeys={
-			openButtonImage:{src:"openButtonImageSrc"},
-			closeButtonImage:{src:"closeButtonImageSrc"}
-		};
+		const states=CP.wordsToFlags(classes);
+		const {imageKeys}=CP.config.sticky;
 		
 		var selectiveClasses=[
 			{label:'位置',input:'position',disable:['left','center','right']},
@@ -57,9 +54,6 @@
 				}
 			}
 		];
-		
-		const hasClass=(cls)=>(classArray.indexOf(cls)!==-1);
-		Object.keys(states).forEach(function(key){this[key]=hasClass(key);},states);
 		
         return [
 			<div className={classes}>
@@ -107,8 +101,8 @@
 				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 					<TextareaControl
 						label='クラス'
-						onChange={(clss)=>setAttributes({classes:clss})}
-						value={classArray.join(' ')}
+						onChange={(classes)=>setAttributes({classes})}
+						value={classes}
 					/>
 				</PanelBody>
 			</InspectorControls>
@@ -117,21 +111,8 @@
 	save({attributes,className,setAttributes}){
         const {classes='',labelText}=attributes;
 		
-		var classArray=classes.split(' ');
-		
-		var states={
-			container:false,
-			label:false,
-			collapsible:false,
-			labelButton:false,
-			imageButton:false
-		}
-		const imageKeys={
-			openButtonImage:{src:"openButtonImageSrc"},
-			closeButtonImage:{src:"closeButtonImageSrc"}
-		};
-		const hasClass=(cls)=>(classArray.indexOf(cls)!==-1);
-		Object.keys(states).forEach(function(key){this[key]=hasClass(key);},states);
+		const states=CP.wordsToFlags(classes);
+		const {imageKeys}=CP.config.sticky;
 		
 		return (
 			<div className={classes}>

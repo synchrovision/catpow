@@ -1,3 +1,8 @@
+CP.config.sphere = {
+	imageKeys: {
+		image: { src: "src", alt: "alt", items: "items" }
+	}
+};
 registerBlockType('catpow/sphere', {
 	title: '🐾 Sphere',
 	description: 'ログイン中のユーザーの情報を表示するためのコンテナです。',
@@ -56,78 +61,63 @@ registerBlockType('catpow/sphere', {
 		    countSuffix = attributes.countSuffix;
 
 		var primaryClass = 'wp-block-catpow-sphere';
-		var classArray = _.uniq((className + ' ' + classes).split(' '));
-		var classNameArray = className.split(' ');
 
-		var states = {
-			hasSubImage: false,
-			hasSubTitle: false,
-			hasText: false
-		};
+		var states = CP.wordsToFlags(classes);
+		var imageKeys = CP.config.sphere.imageKeys;
+
 
 		var selectiveClasses = [{ label: 'サイズ', filter: 'size', values: ['small', 'medium', 'large'] }, { label: '画像', values: 'hasSubImage' }, { label: 'タイトル', values: 'hasSubTitle' }, { label: 'テキスト', values: 'hasText' }];
 
-		var itemsCopy = items.map(function (obj) {
-			return jQuery.extend(true, {}, obj);
-		});
-
-		var hasClass = function hasClass(cls) {
-			return classArray.indexOf(cls) !== -1;
-		};
-		Object.keys(states).forEach(function (key) {
-			this[key] = hasClass(key);
-		}, states);
-
 		var rtn = [];
-		var imageKeys = {
-			image: { src: "src", alt: "alt", items: "items" }
+		var save = function save() {
+			setAttibutes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
-		itemsCopy.map(function (item, index) {
+		items.map(function (item, index) {
 			if (!item.controlClasses) {
 				item.controlClasses = 'control';
 			}
 			rtn.push(wp.element.createElement(
 				Item,
 				{
-					tag: 'li',
+					tag: "li",
 					set: setAttributes,
 					attr: attributes,
-					items: itemsCopy,
+					items: items,
 					index: index,
 					isSelected: isSelected
 				},
 				wp.element.createElement(
-					'div',
-					{ 'class': 'contents' },
+					"div",
+					{ "class": "contents" },
 					states.hasSubImage && wp.element.createElement(
-						'div',
-						{ className: 'image' },
+						"div",
+						{ className: "image" },
 						wp.element.createElement(SelectResponsiveImage, {
 							attr: attributes,
 							set: setAttributes,
 							keys: imageKeys.subImage,
 							index: index,
-							size: 'medium'
+							size: "medium"
 						})
 					),
 					states.hasSubTitle && wp.element.createElement(
-						'h4',
+						"h4",
 						null,
 						wp.element.createElement(RichText, {
 							onChange: function onChange(subTitle) {
-								itemsCopy[index].subTitle = subTitle;setAttributes({ items: itemsCopy });
+								items[index].subTitle = subTitle;save();
 							},
 							value: item.subTitle,
-							placeholder: 'SubTitle'
+							placeholder: "SubTitle"
 						})
 					),
 					states.hasText && wp.element.createElement(
-						'p',
+						"p",
 						null,
 						wp.element.createElement(RichText, {
 							onChange: function onChange(text) {
-								itemsCopy[index].text = text;setAttributes({ items: itemsCopy });
+								items[index].text = text;save();
 							},
 							value: item.text
 						})
@@ -157,35 +147,35 @@ registerBlockType('catpow/sphere', {
 			InspectorControls,
 			null,
 			wp.element.createElement(SelectClassPanel, {
-				title: '\u30AF\u30E9\u30B9',
-				icon: 'art',
+				title: "\u30AF\u30E9\u30B9",
+				icon: "art",
 				set: setAttributes,
 				attr: attributes,
 				selectiveClasses: selectiveClasses
 			}),
 			wp.element.createElement(
 				PanelBody,
-				{ title: 'CLASS', icon: 'admin-generic', initialOpen: false },
+				{ title: "CLASS", icon: "admin-generic", initialOpen: false },
 				wp.element.createElement(TextareaControl, {
-					label: '\u30AF\u30E9\u30B9',
-					onChange: function onChange(clss) {
-						return setAttributes({ classes: clss });
+					label: "\u30AF\u30E9\u30B9",
+					onChange: function onChange(classes) {
+						return setAttributes({ classes: classes });
 					},
-					value: classArray.join(' ')
+					value: classes
 				})
 			),
 			wp.element.createElement(SelectItemClassPanel, {
-				title: '\u30A2\u30A4\u30C6\u30E0',
-				icon: 'edit',
+				title: "\u30A2\u30A4\u30C6\u30E0",
+				icon: "edit",
 				set: setAttributes,
 				attr: attributes,
-				items: itemsCopy,
+				items: items,
 				index: attributes.currentItemIndex,
 				itemClasses: ['color']
 			}),
 			wp.element.createElement(ItemControlInfoPanel, null)
 		), wp.element.createElement(
-			'ul',
+			"ul",
 			{ className: attributes.EditMode ? primaryClass + ' edit' : classes },
 			rtn
 		)];
@@ -200,40 +190,31 @@ registerBlockType('catpow/sphere', {
 		    countPrefix = attributes.countPrefix,
 		    countSuffix = attributes.countSuffix;
 
-		var classArray = _.uniq(classes.split(' '));
 
-		var states = {
-			hasSubImage: false,
-			hasSubTitle: false,
-			hasText: false
-		};
-		var hasClass = function hasClass(cls) {
-			return classArray.indexOf(cls) !== -1;
-		};
-		Object.keys(states).forEach(function (key) {
-			this[key] = hasClass(key);
-		}, states);
+		var states = CP.wordsToFlags(classes);
+		var imageKeys = CP.config.sphere.imageKeys;
+
 
 		var rtn = [];
 		items.map(function (item, index) {
 			rtn.push(wp.element.createElement(
-				'li',
+				"li",
 				{ className: item.classes },
 				wp.element.createElement(
-					'div',
-					{ 'class': 'contents' },
+					"div",
+					{ "class": "contents" },
 					states.hasSubImage && wp.element.createElement(
-						'div',
-						{ className: 'image' },
-						wp.element.createElement('img', { src: item.subImageSrc, alt: item.subImageAlt })
+						"div",
+						{ className: "image" },
+						wp.element.createElement("img", { src: item.subImageSrc, alt: item.subImageAlt })
 					),
 					states.hasSubTitle && wp.element.createElement(
-						'h4',
+						"h4",
 						null,
 						wp.element.createElement(RichText.Content, { value: item.subTitle })
 					),
 					states.hasText && wp.element.createElement(
-						'p',
+						"p",
 						null,
 						wp.element.createElement(RichText.Content, { value: item.text })
 					)
@@ -241,7 +222,7 @@ registerBlockType('catpow/sphere', {
 			));
 		});
 		return wp.element.createElement(
-			'ul',
+			"ul",
 			{ className: classes },
 			rtn
 		);

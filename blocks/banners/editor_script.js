@@ -1,3 +1,9 @@
+CP.config.banners = {
+	imageKeys: {
+		image: { src: "src", srcset: "srcset", alt: "alt", code: 'imageCode', items: "items" }
+	}
+};
+
 registerBlockType('catpow/banners', {
 	title: '🐾 Banners',
 	description: 'リンク付きのバナー画像を並べて表示するブロックです。',
@@ -30,14 +36,10 @@ registerBlockType('catpow/banners', {
 		    _attributes$AltMode = attributes.AltMode,
 		    AltMode = _attributes$AltMode === undefined ? false : _attributes$AltMode;
 
-		var primaryClass = 'wp-block-catpow-banners';
-		var classArray = _.uniq((className + ' ' + classes).split(' '));
-		var classNameArray = className.split(' ');
 
 		var states = CP.wordsToFlags(classes);
-		var imageKeys = {
-			image: { src: "src", srcset: "srcset", alt: "alt", code: 'imageCode', items: "items" }
-		};
+		var imageKeys = CP.config.banners.imageKeys;
+
 
 		var selectiveClasses = [{ label: 'サイズ', values: ['small', 'medium', 'large'] }, { label: 'タイトル', values: 'hasTitle' }, {
 			label: 'テンプレート',
@@ -47,11 +49,10 @@ registerBlockType('catpow/banners', {
 		var selectiveItemClasses = [{ input: 'image', label: 'PC版画像', keys: imageKeys.image }, { input: 'image', label: 'SP版画像', keys: imageKeys.image, ofSP: true, sizes: '480px' }, { input: 'text', label: 'alt', key: 'alt' }, { input: 'text', label: 'target', key: 'target' }, 'event'];
 		var itemTemplateSelectiveClasses = [{ input: 'text', label: '画像', key: 'imageCode' }];
 
+		var rtn = [];
 		var save = function save() {
 			setAttibutes({ items: JSON.parse(JSON.stringify(items)) });
 		};
-
-		var rtn = [];
 
 		items.map(function (item, index) {
 			if (!item.controlClasses) {
@@ -60,7 +61,7 @@ registerBlockType('catpow/banners', {
 			rtn.push(wp.element.createElement(
 				Item,
 				{
-					tag: 'li',
+					tag: "li",
 					set: setAttributes,
 					attr: attributes,
 					items: items,
@@ -68,7 +69,7 @@ registerBlockType('catpow/banners', {
 					isSelected: isSelected
 				},
 				states.hasTitle && wp.element.createElement(
-					'h3',
+					"h3",
 					null,
 					wp.element.createElement(RichText, {
 						onChange: function onChange(title) {
@@ -78,22 +79,22 @@ registerBlockType('catpow/banners', {
 					})
 				),
 				wp.element.createElement(
-					'a',
+					"a",
 					null,
 					wp.element.createElement(SelectResponsiveImage, {
 						attr: attributes,
 						set: setAttributes,
 						keys: imageKeys.image,
 						index: index,
-						size: 'vga',
+						size: "vga",
 						isTemplate: states.isTemplate
 					})
 				),
 				isSelected && wp.element.createElement(
-					'div',
-					{ className: 'link' },
+					"div",
+					{ className: "link" },
 					wp.element.createElement(
-						'p',
+						"p",
 						{
 							contentEditable: true,
 							onBlur: function onBlur(e) {
@@ -128,8 +129,8 @@ registerBlockType('catpow/banners', {
 				InspectorControls,
 				null,
 				wp.element.createElement(SelectClassPanel, {
-					title: '\u30AF\u30E9\u30B9',
-					icon: 'art',
+					title: "\u30AF\u30E9\u30B9",
+					icon: "art",
 					set: setAttributes,
 					attr: attributes,
 					selectiveClasses: selectiveClasses,
@@ -137,18 +138,18 @@ registerBlockType('catpow/banners', {
 				}),
 				wp.element.createElement(
 					PanelBody,
-					{ title: 'CLASS', icon: 'admin-generic', initialOpen: false },
+					{ title: "CLASS", icon: "admin-generic", initialOpen: false },
 					wp.element.createElement(TextareaControl, {
-						label: '\u30AF\u30E9\u30B9',
-						onChange: function onChange(clss) {
-							return setAttributes({ classes: clss });
+						label: "\u30AF\u30E9\u30B9",
+						onChange: function onChange(classes) {
+							return setAttributes({ classes: classes });
 						},
-						value: classArray.join(' ')
+						value: classes
 					})
 				),
 				states.isTemplate ? wp.element.createElement(SelectItemClassPanel, {
-					title: '\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8',
-					icon: 'edit',
+					title: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
+					icon: "edit",
 					set: setAttributes,
 					attr: attributes,
 					items: items,
@@ -156,8 +157,8 @@ registerBlockType('catpow/banners', {
 					itemClasses: itemTemplateSelectiveClasses,
 					filters: CP.filters.banners || {}
 				}) : wp.element.createElement(SelectItemClassPanel, {
-					title: '\u30D0\u30CA\u30FC',
-					icon: 'edit',
+					title: "\u30D0\u30CA\u30FC",
+					icon: "edit",
 					set: setAttributes,
 					attr: attributes,
 					items: items,
@@ -168,12 +169,12 @@ registerBlockType('catpow/banners', {
 				wp.element.createElement(ItemControlInfoPanel, null)
 			),
 			EditMode ? wp.element.createElement(
-				'div',
-				{ className: 'alt_content' },
+				"div",
+				{ className: "alt_content" },
 				wp.element.createElement(
-					'div',
-					{ 'class': 'label' },
-					wp.element.createElement(Icon, { icon: 'edit' })
+					"div",
+					{ "class": "label" },
+					wp.element.createElement(Icon, { icon: "edit" })
 				),
 				wp.element.createElement(EditItemsTable, {
 					set: setAttributes,
@@ -185,16 +186,16 @@ registerBlockType('catpow/banners', {
 				Fragment,
 				null,
 				AltMode && doLoop ? wp.element.createElement(
-					'div',
-					{ className: 'alt_content' },
+					"div",
+					{ className: "alt_content" },
 					wp.element.createElement(
-						'div',
-						{ 'class': 'label' },
-						wp.element.createElement(Icon, { icon: 'welcome-comments' })
+						"div",
+						{ "class": "label" },
+						wp.element.createElement(Icon, { icon: "welcome-comments" })
 					),
 					wp.element.createElement(InnerBlocks, null)
 				) : wp.element.createElement(
-					'ul',
+					"ul",
 					{ className: classes },
 					rtn
 				)
@@ -212,28 +213,27 @@ registerBlockType('catpow/banners', {
 
 
 		var states = CP.wordsToFlags(classes);
-		var imageKeys = {
-			image: { src: "src", srcset: "srcset", alt: "alt", code: 'imageCode', items: "items" }
-		};
+		var imageKeys = CP.config.banners.imageKeys;
+
 
 		return wp.element.createElement(
 			Fragment,
 			null,
 			wp.element.createElement(
-				'ul',
+				"ul",
 				{ className: classes },
 				items.map(function (item, index) {
 					return wp.element.createElement(
-						'li',
+						"li",
 						{ className: item.classes },
 						states.hasTitle && wp.element.createElement(
-							'h3',
+							"h3",
 							null,
 							wp.element.createElement(RichText.Content, { value: item.title })
 						),
 						wp.element.createElement(
-							'a',
-							{ href: item.linkUrl, target: item.target, 'data-event': item.event, rel: item.target ? 'noopener noreferrer' : '' },
+							"a",
+							{ href: item.linkUrl, target: item.target, "data-event": item.event, rel: item.target ? 'noopener noreferrer' : '' },
 							wp.element.createElement(ResponsiveImage, {
 								attr: attributes,
 								keys: imageKeys.image,
@@ -245,7 +245,7 @@ registerBlockType('catpow/banners', {
 				})
 			),
 			doLoop && wp.element.createElement(
-				'onEmpty',
+				"onEmpty",
 				null,
 				wp.element.createElement(InnerBlocks.Content, null)
 			)
@@ -268,21 +268,21 @@ registerBlockType('catpow/banners', {
 			};
 
 			return wp.element.createElement(
-				'ul',
+				"ul",
 				{ className: classes },
 				states.doLoop && '[loop_template ' + loopParam + ']',
 				items.map(function (item, index) {
 					return wp.element.createElement(
-						'li',
+						"li",
 						{ className: item.classes },
 						states.hasTitle && wp.element.createElement(
-							'h3',
+							"h3",
 							null,
 							wp.element.createElement(RichText.Content, { value: item.title })
 						),
 						wp.element.createElement(
-							'a',
-							{ href: item.linkUrl, target: item.target, 'data-event': item.event, rel: item.target ? 'noopener noreferrer' : '' },
+							"a",
+							{ href: item.linkUrl, target: item.target, "data-event": item.event, rel: item.target ? 'noopener noreferrer' : '' },
 							wp.element.createElement(ResponsiveImage, {
 								attr: attributes,
 								keys: imageKeys.image,

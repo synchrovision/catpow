@@ -1,4 +1,15 @@
-﻿registerBlockType('catpow/slider',{
+﻿CP.config.slider={
+	imageKeys:{
+		image:{src:"src",alt:"alt",code:'imageCode',items:"items"},
+		slide:{src:"slideSrc",alt:"slideAlt",srscet:"slideSrcset",code:'slideCode',items:"items"},
+		backgroundImage:{src:"backgroundImageSrc",alt:"backgroundImageAlt",srcset:"backgroundImageSrcset",code:'backgroundImageCode',items:"items"}
+	},
+	imageSizes:{
+		image:'vga'
+	}
+};
+
+registerBlockType('catpow/slider',{
 	title: '🐾 Slider',
 	description:'スライダーのブロックです。',
 	icon:'video-alt3',
@@ -21,22 +32,10 @@
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
 		const {classes='',controlClasses='',config,items,doLoop,EditMode=false,AltMode=false}=attributes;
-		const primaryClass='wp-block-catpow-slider';
-		var classArray=_.uniq((className+' '+classes).split(' '));
-		var controlClassArray=_.uniq(controlClasses.split(' '));
-		var classNameArray=className.split(' ');
 		
+		const states=CP.wordsToFlags(classes);
+		const {imageKeys,imageSizes}=CP.config.slider;
 		
-		const imageKeys={
-			image:{src:"src",alt:"alt",code:'imageCode',items:"items"},
-			slide:{src:"slideSrc",alt:"slideAlt",srscet:"slideSrcset",code:'slideCode',items:"items"},
-			backgroundImage:{src:"backgroundImageSrc",alt:"backgroundImageAlt",srcset:"backgroundImageSrcset",code:'backgroundImageCode',items:"items"}
-		};
-		const imageSizes={
-			image:'vga'
-		};
-		
-		var states=CP.wordsToFlags(classes);
 		var statesClasses=[
 			{label:'アロー',values:'hasArrows'},
 			{label:'ドット',values:'hasDots'},
@@ -317,8 +316,8 @@
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl
 							label='クラス'
-							onChange={(clss)=>setAttributes({classes:clss})}
-							value={classArray.join(' ')}
+							onChange={(classes)=>setAttributes({classes})}
+							value={classes}
 						/>
 					</PanelBody>
 					<SelectItemClassPanel
@@ -378,16 +377,9 @@
 	},
 	save({attributes,className}){
 		const {classes='',controlClasses='',config,items=[],doLoop}=attributes;
-		var classArray=_.uniq(classes.split(' '));
-		var controlClassArray=_.uniq(controlClasses.split(' '));
 		
-		var states=CP.wordsToFlags(classes);
-		
-		const imageKeys={
-			image:{src:"src",alt:"alt",code:'imageCode',items:"items"},
-			slide:{src:"slideSrc",alt:"slideAlt",srscet:"slideSrcset",code:'slideCode',items:"items"},
-			backgroundImage:{src:"backgroundImageSrc",alt:"backgroundImageAlt",srcset:"backgroundImageSrcset",code:'backgroundImageCode',items:"items"}
-		};
+		const states=CP.wordsToFlags(classes);
+		const {imageKeys,imageSizes}=CP.config.slider;
 		
 		var rtn=[];
 		var thumbs=[];

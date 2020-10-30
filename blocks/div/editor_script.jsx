@@ -1,4 +1,10 @@
-﻿registerBlockType('catpow/div',{
+﻿CP.config.div={
+	imageKeys:{
+		iconImage:{src:"iconImageSrc"},
+		backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset"}
+	}
+};
+registerBlockType('catpow/div',{
 	title:'🐾 Div',
 	description:'コンテンツを枠で囲んだりレイアウト調整をするためのコンテナです。',
 	icon:'editor-code',
@@ -25,18 +31,9 @@
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
         const {classes}=attributes;
-		const primaryClass='wp-block-catpow-div';
-		var classArray=_.uniq((className+' '+classes).split(' '));
 		
-		var states={
-			hasIcon:false,
-			hasBackgroundImage:false
-		}
-		
-		const imageKeys={
-			iconImage:{src:"iconImageSrc"},
-			backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset"}
-		};
+		const states=CP.wordsToFlags(classes);
+		const {imageKeys}=CP.config.div;
 		
 		var selectiveClasses=[
 			{
@@ -63,9 +60,6 @@
 			]},
 			{label:'余白','values':{noPad:'なし',thinPad:'極細',lightPad:'細',mediumPad:'中',boldPad:'太',heavyPad:'極太'}}
 		];
-		
-		const hasClass=(cls)=>(classArray.indexOf(cls)!==-1);
-		Object.keys(states).forEach(function(key){this[key]=hasClass(key);},states);
 		
         return [
 			<div className={classes}>
@@ -102,8 +96,8 @@
 				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 					<TextareaControl
 						label='クラス'
-						onChange={(clss)=>setAttributes({classes:clss})}
-						value={classArray.join(' ')}
+						onChange={(classes)=>setAttributes({classes})}
+						value={classes}
 					/>
 				</PanelBody>
 			</InspectorControls>
@@ -114,19 +108,12 @@
 	save({attributes,className,setAttributes}){
         const {classes=''}=attributes;
 		
-		var classArray=classes.split(' ');
-		const hasClass=(cls)=>(classArray.indexOf(cls)!==-1);
-		var hasIcon=hasClass('hasIcon');
-		var hasBackgroundImage=hasClass('hasBackgroundImage');
-		
-		const imageKeys={
-			iconImage:{src:"iconImageSrc"},
-			backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset"}
-		};
+		const states=CP.wordsToFlags(classes);
+		const {imageKeys}=CP.config.div;
 		
 		return (
 			<div className={classes}>
-				{hasIcon && 
+				{states.hasIcon && 
 					<div class="icon">
 						<ResponsiveImage
 							attr={attributes}
@@ -134,7 +121,7 @@
 						/>
 					</div>
 				}
-				{hasBackgroundImage && 
+				{states.hasBackgroundImage && 
 					<div class="background">
 						<ResponsiveImage
 							attr={attributes}

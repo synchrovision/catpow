@@ -1,3 +1,9 @@
+CP.config.div = {
+	imageKeys: {
+		iconImage: { src: "iconImageSrc" },
+		backgroundImage: { src: "backgroundImageSrc", srcset: "backgroundImageSrcset" }
+	}
+};
 registerBlockType('catpow/div', {
 	title: '🐾 Div',
 	description: 'コンテンツを枠で囲んだりレイアウト調整をするためのコンテナです。',
@@ -27,18 +33,10 @@ registerBlockType('catpow/div', {
 		    setAttributes = _ref.setAttributes;
 		var classes = attributes.classes;
 
-		var primaryClass = 'wp-block-catpow-div';
-		var classArray = _.uniq((className + ' ' + classes).split(' '));
 
-		var states = {
-			hasIcon: false,
-			hasBackgroundImage: false
-		};
+		var states = CP.wordsToFlags(classes);
+		var imageKeys = CP.config.div.imageKeys;
 
-		var imageKeys = {
-			iconImage: { src: "iconImageSrc" },
-			backgroundImage: { src: "backgroundImageSrc", srcset: "backgroundImageSrcset" }
-		};
 
 		var selectiveClasses = [{
 			label: 'タイプ',
@@ -50,29 +48,22 @@ registerBlockType('catpow/div', {
 			}
 		}, { label: '背景画像', values: 'hasBackgroundImage', sub: [{ input: 'image', label: 'PC版背景画像', keys: imageKeys.backgroundImage }, { input: 'image', label: 'SP版背景画像', keys: imageKeys.backgroundImage, ofSP: true, sizes: '480px' }] }, { label: '余白', 'values': { noPad: 'なし', thinPad: '極細', lightPad: '細', mediumPad: '中', boldPad: '太', heavyPad: '極太' } }];
 
-		var hasClass = function hasClass(cls) {
-			return classArray.indexOf(cls) !== -1;
-		};
-		Object.keys(states).forEach(function (key) {
-			this[key] = hasClass(key);
-		}, states);
-
 		return [wp.element.createElement(
-			'div',
+			"div",
 			{ className: classes },
 			states.hasIcon && wp.element.createElement(
-				'div',
-				{ 'class': 'icon' },
+				"div",
+				{ "class": "icon" },
 				wp.element.createElement(SelectResponsiveImage, {
 					set: setAttributes,
 					attr: attributes,
 					keys: imageKeys.iconImage,
-					size: 'middle'
+					size: "middle"
 				})
 			),
 			states.hasBackgroundImage && wp.element.createElement(
-				'div',
-				{ 'class': 'background' },
+				"div",
+				{ "class": "background" },
 				wp.element.createElement(ResponsiveImage, {
 					set: setAttributes,
 					attr: attributes,
@@ -84,8 +75,8 @@ registerBlockType('catpow/div', {
 			InspectorControls,
 			null,
 			wp.element.createElement(SelectClassPanel, {
-				title: '\u30AF\u30E9\u30B9',
-				icon: 'art',
+				title: "\u30AF\u30E9\u30B9",
+				icon: "art",
 				set: setAttributes,
 				attr: attributes,
 				selectiveClasses: selectiveClasses,
@@ -93,13 +84,13 @@ registerBlockType('catpow/div', {
 			}),
 			wp.element.createElement(
 				PanelBody,
-				{ title: 'CLASS', icon: 'admin-generic', initialOpen: false },
+				{ title: "CLASS", icon: "admin-generic", initialOpen: false },
 				wp.element.createElement(TextareaControl, {
-					label: '\u30AF\u30E9\u30B9',
-					onChange: function onChange(clss) {
-						return setAttributes({ classes: clss });
+					label: "\u30AF\u30E9\u30B9",
+					onChange: function onChange(classes) {
+						return setAttributes({ classes: classes });
 					},
-					value: classArray.join(' ')
+					value: classes
 				})
 			)
 		)];
@@ -112,32 +103,24 @@ registerBlockType('catpow/div', {
 		    classes = _attributes$classes === undefined ? '' : _attributes$classes;
 
 
-		var classArray = classes.split(' ');
-		var hasClass = function hasClass(cls) {
-			return classArray.indexOf(cls) !== -1;
-		};
-		var hasIcon = hasClass('hasIcon');
-		var hasBackgroundImage = hasClass('hasBackgroundImage');
+		var states = CP.wordsToFlags(classes);
+		var imageKeys = CP.config.div.imageKeys;
 
-		var imageKeys = {
-			iconImage: { src: "iconImageSrc" },
-			backgroundImage: { src: "backgroundImageSrc", srcset: "backgroundImageSrcset" }
-		};
 
 		return wp.element.createElement(
-			'div',
+			"div",
 			{ className: classes },
-			hasIcon && wp.element.createElement(
-				'div',
-				{ 'class': 'icon' },
+			states.hasIcon && wp.element.createElement(
+				"div",
+				{ "class": "icon" },
 				wp.element.createElement(ResponsiveImage, {
 					attr: attributes,
 					keys: imageKeys.iconImage
 				})
 			),
-			hasBackgroundImage && wp.element.createElement(
-				'div',
-				{ 'class': 'background' },
+			states.hasBackgroundImage && wp.element.createElement(
+				"div",
+				{ "class": "background" },
 				wp.element.createElement(ResponsiveImage, {
 					attr: attributes,
 					keys: imageKeys.backgroundImage

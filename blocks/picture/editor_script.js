@@ -33,12 +33,13 @@ registerBlockType('catpow/picture', {
 		    alt = attributes.alt,
 		    code = attributes.code,
 		    device = attributes.device;
+
+
+		var states = CP.wordsToFlags(classes);
 		var _CP$config$picture = CP.config.picture,
 		    devices = _CP$config$picture.devices,
 		    imageKeys = _CP$config$picture.imageKeys;
 
-
-		var states = CP.wordsToFlags(classes);
 
 		var selectiveClasses = [{ input: 'image', label: '画像', keys: imageKeys.image, device: device, devices: devices, isTemplate: states.isTemplate }, {
 			label: 'テンプレート',

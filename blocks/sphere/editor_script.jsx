@@ -1,4 +1,9 @@
-﻿registerBlockType('catpow/sphere',{
+﻿CP.config.sphere={
+	imageKeys:{
+		image:{src:"src",alt:"alt",items:"items"}
+	}
+};
+registerBlockType('catpow/sphere',{
 	title: '🐾 Sphere',
 	description:'ログイン中のユーザーの情報を表示するためのコンテナです。',
 	icon: 'image-filter',
@@ -48,15 +53,9 @@
 	edit({attributes,className,setAttributes,isSelected}){
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
 		const primaryClass='wp-block-catpow-sphere';
-		var classArray=_.uniq((className+' '+classes).split(' '));
-		var classNameArray=className.split(' ');
 		
-		var states={
-			hasSubImage:false,
-			hasSubTitle:false,
-			hasText:false
-		}
-		
+		const states=CP.wordsToFlags(classes);
+		const {imageKeys}=CP.config.sphere;
         
 		var selectiveClasses=[
 			{label:'サイズ',filter:'size',values:['small','medium','large']},
@@ -65,24 +64,19 @@
 			{label:'テキスト',values:'hasText'}
 		];
 		
-		let itemsCopy=items.map((obj)=>jQuery.extend(true,{},obj));
-		
-		const hasClass=(cls)=>(classArray.indexOf(cls)!==-1);
-		Object.keys(states).forEach(function(key){this[key]=hasClass(key);},states);
-		
 		let rtn=[];
-		const imageKeys={
-			image:{src:"src",alt:"alt",items:"items"}
+		const save=()=>{
+			setAttibutes({items:JSON.parse(JSON.stringify(items))});
 		};
 
-		itemsCopy.map((item,index)=>{
+		items.map((item,index)=>{
 			if(!item.controlClasses){item.controlClasses='control';}
 			rtn.push(
 				<Item
 					tag='li'
 					set={setAttributes}
 					attr={attributes}
-					items={itemsCopy}
+					items={items}
 					index={index}
 					isSelected={isSelected}
 				>
@@ -101,7 +95,7 @@
 						{states.hasSubTitle &&
 							<h4>
 								<RichText
-									onChange={(subTitle)=>{itemsCopy[index].subTitle=subTitle;setAttributes({items:itemsCopy});}}
+									onChange={(subTitle)=>{items[index].subTitle=subTitle;save();}}
 									value={item.subTitle}
 									placeholder='SubTitle'
 								/>
@@ -110,7 +104,7 @@
 						{states.hasText &&
 							<p>
 								<RichText
-									onChange={(text)=>{itemsCopy[index].text=text;setAttributes({items:itemsCopy});}}
+									onChange={(text)=>{items[index].text=text;save();}}
 									value={item.text}
 								/>
 							</p>
@@ -146,8 +140,8 @@
 				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 					<TextareaControl
 						label='クラス'
-						onChange={(clss)=>setAttributes({classes:clss})}
-						value={classArray.join(' ')}
+						onChange={(classes)=>setAttributes({classes})}
+						value={classes}
 					/>
 				</PanelBody>
 				<SelectItemClassPanel
@@ -155,7 +149,7 @@
 					icon='edit'
 					set={setAttributes}
 					attr={attributes}
-					items={itemsCopy}
+					items={items}
 					index={attributes.currentItemIndex}
 					itemClasses={['color']}
 				/>
@@ -166,15 +160,9 @@
     },
 	save({attributes,className}){
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
-		var classArray=_.uniq(classes.split(' '));
 		
-		var states={
-			hasSubImage:false,
-			hasSubTitle:false,
-			hasText:false
-		}
-		const hasClass=(cls)=>(classArray.indexOf(cls)!==-1);
-		Object.keys(states).forEach(function(key){this[key]=hasClass(key);},states);
+		const states=CP.wordsToFlags(classes);
+		const {imageKeys}=CP.config.sphere;
 		
 		let rtn=[];
 		items.map((item,index)=>{

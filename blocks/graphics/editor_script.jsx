@@ -1,4 +1,11 @@
-﻿registerBlockType('catpow/graphics',{
+﻿CP.config.graphics={
+	imageKeys:{
+		base:{src:"src",srcset:"srcset",alt:"alt"},
+		image:{src:"src",srcset:"srcset",alt:"alt",items:"items"},
+	}
+};
+
+registerBlockType('catpow/graphics',{
 	title: '🐾 graphics',
 	description:'画像を自由にレイアウトします。',
 	icon:'format-image',
@@ -46,8 +53,6 @@
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
         const {id,classes='',src,srcset,alt,height,heightSP,items=[]}=attributes;
-		const primaryClass='wp-block-catpow-graphics';
-		var classArray=(classes || '').split(' ');
 		
 		if(!id){
 			setAttributes({id:'g'+(new Date().getTime().toString(16))})
@@ -58,11 +63,9 @@
 		
 		var cssData={},cssDataSP={};
 		
-		var states=CP.wordsToFlags(classes);
-		const imageKeys={
-			base:{src:"src",srcset:"srcset",alt:"alt"},
-			image:{src:"src",srcset:"srcset",alt:"alt",items:"items"},
-		};
+		const states=CP.wordsToFlags(classes);
+		const {imageKeys}=CP.config.graphics;
+		
 		const selectiveClasses=[
 			{
 				label:'ベース画像',
@@ -410,15 +413,11 @@
     },
 	save({attributes,className,setAttributes}){
         const {id,classes,height,heightSP,items=[]}=attributes;
-		var classArray=(classes || '').split(' ');
 		
 		var cssData={},cssDataSP={};
 		
-		var states=CP.wordsToFlags(classes);
-		const imageKeys={
-			base:{src:"src",srcset:"srcset",alt:"alt"},
-			image:{src:"src",srcset:"srcset",alt:"alt",items:"items"},
-		};
+		const states=CP.wordsToFlags(classes);
+		const {imageKeys}=CP.config.graphics;
 		
 		if(!states.hasBaseImage){
 			cssData['#'+id+' .base']={'padding-top':height+'%'};

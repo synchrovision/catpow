@@ -1,4 +1,9 @@
-﻿registerBlockType('catpow/flow',{
+﻿CP.config.flow={
+	imageKeys:{
+		image:{src:"src",alt:"alt",items:"items"}
+	}
+};
+registerBlockType('catpow/flow',{
 	title: '🐾 Flow',
 	description:'手順や順番の一覧ブロックです。',
 	icon: 'editor-ol',
@@ -54,16 +59,9 @@
 		const {items=[],classes,countPrefix,countSuffix}=attributes;
 		const primaryClass='wp-block-catpow-flow';
 		var classArray=_.uniq((className+' '+classes).split(' '));
-		var classNameArray=className.split(' ');
 		
-		var states={
-			hasImage:false,
-			hasCounter:false,
-			hasTitleCaption:false,
-			hasSubTitle:false,
-			hasLink:false,
-		}
-		
+		const states=CP.wordsToFlags(classes);
+		const {imageKeys}=CP.config.flow;
         
 		var selectiveClasses=[
 			{label:'番号',values:'hasCounter',sub:[
@@ -77,24 +75,19 @@
 			{label:'リンク',values:'hasLink'}
 		];
 		
-		let itemsCopy=items.map((obj)=>jQuery.extend(true,{},obj));
-		
-		const hasClass=(cls)=>(classArray.indexOf(cls)!==-1);
-		Object.keys(states).forEach(function(key){this[key]=hasClass(key);},states);
-		
 		let rtn=[];
-		const imageKeys={
-			image:{src:"src",alt:"alt",items:"items"}
+		const save=()=>{
+			setAttibutes({items:JSON.parse(JSON.stringify(items))});
 		};
 
-		itemsCopy.map((item,index)=>{
+		items.map((item,index)=>{
 			if(!item.controlClasses){item.controlClasses='control';}
 			rtn.push(
 				<Item
 					tag='li'
 					set={setAttributes}
 					attr={attributes}
-					items={itemsCopy}
+					items={items}
 					index={index}
 					isSelected={isSelected}
 				>
@@ -120,14 +113,14 @@
 						<div className='text'>
 							<h3>
 								<RichText
-									onChange={(text)=>{itemsCopy[index].title=text;setAttributes({items:itemsCopy});}}
+									onChange={(text)=>{items[index].title=text;save();}}
 									value={item.title}
 								/>
 							</h3>
 							{states.hasTitleCaption && 
 								<p>
 									<RichText
-										onChange={(text)=>{itemsCopy[index].titleCaption=text;setAttributes({items:itemsCopy});}}
+										onChange={(text)=>{items[index].titleCaption=text;save();}}
 										value={item.titleCaption}
 									/>
 								</p>
@@ -138,7 +131,7 @@
 						{states.hasSubTitle &&
 							<h4 onFocus={()=>{attributes.blockState.enableBlockFormat=false;}}>
 								<RichText
-									onChange={(subTitle)=>{itemsCopy[index].subTitle=subTitle;setAttributes({items:itemsCopy});}}
+									onChange={(subTitle)=>{items[index].subTitle=subTitle;save();}}
 									value={item.subTitle}
 									placeholder='SubTitle'
 									onFocus={()=>{attributes.blockState.enableBlockFormat=false;}}
@@ -147,7 +140,7 @@
 						}
 						<div className="text" onFocus={()=>{attributes.blockState.enableBlockFormat=true;}}>
 							<RichText
-								onChange={(text)=>{itemsCopy[index].text=text;setAttributes({items:itemsCopy});}}
+								onChange={(text)=>{items[index].text=text;save();}}
 								value={item.text}
 							/>
 						</div>
@@ -155,8 +148,8 @@
 					{states.hasLink &&
 						<div className='link'>
 							<TextControl onChange={(linkUrl)=>{
-								itemsCopy[index].linkUrl=linkUrl;
-								setAttributes({items:itemsCopy});
+								items[index].linkUrl=linkUrl;
+								save();
 							}} value={item.linkUrl} placeholder='URLを入力'/>
 						</div>
 					}
@@ -191,8 +184,8 @@
 				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 					<TextareaControl
 						label='クラス'
-						onChange={(clss)=>setAttributes({classes:clss})}
-						value={classArray.join(' ')}
+						onChange={(classes)=>setAttributes({classes})}
+						value={classes}
 					/>
 				</PanelBody>
 				<ItemControlInfoPanel/>
@@ -204,15 +197,8 @@
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
 		var classArray=_.uniq(classes.split(' '));
 		
-		var states={
-			hasImage:false,
-			hasCounter:false,
-			hasTitleCaption:false,
-			hasSubTitle:false,
-			hasLink:false,
-		}
-		const hasClass=(cls)=>(classArray.indexOf(cls)!==-1);
-		Object.keys(states).forEach(function(key){this[key]=hasClass(key);},states);
+		const states=CP.wordsToFlags(classes);
+		const {imageKeys}=CP.config.flow;
 		
 		let rtn=[];
 		items.map((item,index)=>{
