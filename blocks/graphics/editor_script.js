@@ -1,7 +1,52 @@
 CP.config.graphics = {
+	devices: ['sp', 'tb'],
+	devicesForCss: ['pc', 'tb', 'sp'],
 	imageKeys: {
-		base: { src: "src", srcset: "srcset", alt: "alt" },
-		image: { src: "src", srcset: "srcset", alt: "alt", items: "items" }
+		base: { src: "src", srcset: "srcset", sources: 'sources', alt: "alt" },
+		image: { src: "src", srcset: "srcset", sources: 'sources', alt: "alt", items: "items" }
+	},
+	getCssDatas: function getCssDatas(attr, states) {
+		var id = attr.id,
+		    items = attr.items,
+		    heights = attr.heights;
+		var devicesForCss = CP.config.graphics.devicesForCss;
+
+		var rtn = {};
+		devicesForCss.map(function (device) {
+			rtn[device] = {};
+		});
+		if (!states.hasBaseImage) {
+			heights.split(',').map(function (height, deviceIndex) {
+				rtn[devicesForCss[deviceIndex]]['#' + id + ' .base'] = { 'padding-top': height + '%' };
+			});
+		}
+		items.map(function (item, index) {
+			item.rect.split(',').map(function (rect, deviceIndex) {
+				var bnd = rect.split(' ').map(function (val) {
+					return val + '%';
+				});
+				rtn[devicesForCss[deviceIndex]]['#' + id + '_item_' + index] = { left: bnd[0], top: bnd[1], width: bnd[2] };
+			});
+		});
+		return rtn;
+	},
+	renderCssDatas: function renderCssDatas(cssDatas) {
+		return CP.config.graphics.devicesForCss.map(function (device) {
+			if (device === 'pc') {
+				return CP.createStyleCode(cssDatas[device]);
+			}
+			return '@media' + CP.devices[device].media_query + '{' + CP.createStyleCode(cssDatas[device]) + '}';
+		}).join('');
+	},
+	parseRectAttr: function parseRectAttr(rect) {
+		return rect.split(',').map(function (rect) {
+			return rect.split(' ');
+		});
+	},
+	getRectAttr: function getRectAttr(rectDatas) {
+		return rectDatas.map(function (rectData) {
+			return rectData.join(' ');
+		}).join(',');
 	}
 };
 
@@ -16,8 +61,8 @@ registerBlockType('catpow/graphics', {
 		src: { source: 'attribute', selector: '[src]', attribute: 'src', default: cp.theme_url + '/images/dummy_bg.jpg' },
 		srcset: { source: 'attribute', selector: '[src]', attribute: 'srcset' },
 		alt: { source: 'attribute', selector: '[src]', attribute: 'alt' },
-		height: { source: 'attribute', selector: '.wp-block-catpow-graphics', 'attribute': 'data-height', default: '60' },
-		heightSP: { source: 'attribute', selector: '.wp-block-catpow-graphics', 'attribute': 'data-height-sp', default: '120' },
+		sources: CP.getPictureSoucesAttributesForDevices(CP.config.graphics.devices, '.base picture', 'dummy_bg.jpg'),
+		height: { source: 'attribute', selector: '.wp-block-catpow-graphics', 'attribute': 'data-heights', default: '120,80,60' },
 		items: {
 			source: 'query',
 			selector: '.item',
@@ -28,6 +73,7 @@ registerBlockType('catpow/graphics', {
 				src: { source: 'attribute', selector: '[src]', attribute: 'src' },
 				srcset: { source: 'attribute', selector: '[src]', attribute: 'srcset' },
 				alt: { source: 'attribute', selector: '[src]', attribute: 'alt' },
+				sources: CP.getPictureSoucesAttributes(),
 				title: { source: 'children', selector: '.title' },
 				lead: { source: 'children', selector: '.lead' },
 				text: { source: 'children', selector: '.text' },
@@ -36,11 +82,11 @@ registerBlockType('catpow/graphics', {
 			default: [{
 				id: 'graphics_image1',
 				classes: 'item isImage',
-				rect: '25 25 50',
-				rectSP: '25 25 50',
+				rect: '25 25 50,25 25 50,25 25 50',
 				src: cp.theme_url + '/images/dummy.jpg',
 				srcset: '',
 				alt: '',
+				sources: CP.getPictureSoucesAttributesDefaultValueForDevices(CP.config.graphics.devices),
 				title: ['Title'],
 				lead: ['Lead'],
 				text: ['Text'],
@@ -60,10 +106,10 @@ registerBlockType('catpow/graphics', {
 		    src = attributes.src,
 		    srcset = attributes.srcset,
 		    alt = attributes.alt,
-		    height = attributes.height,
-		    heightSP = attributes.heightSP,
+		    heights = attributes.heights,
 		    _attributes$items = attributes.items,
-		    items = _attributes$items === undefined ? [] : _attributes$items;
+		    items = _attributes$items === undefined ? [] : _attributes$items,
+		    device = attributes.device;
 
 
 		if (!id) {
@@ -73,22 +119,25 @@ registerBlockType('catpow/graphics', {
 		attributes.EditMode = attributes.EditMode || 'pc';
 		var isModeSP = attributes.EditMode == 'sp';
 
-		var cssData = {},
-		    cssDataSP = {};
-
 		var states = CP.wordsToFlags(classes);
-		var imageKeys = CP.config.graphics.imageKeys;
+		var _CP$config$graphics = CP.config.graphics,
+		    devices = _CP$config$graphics.devices,
+		    devicesForCss = _CP$config$graphics.devicesForCss,
+		    imageKeys = _CP$config$graphics.imageKeys,
+		    getCssDatas = _CP$config$graphics.getCssDatas,
+		    renderCssDatas = _CP$config$graphics.renderCssDatas,
+		    parseRectAttr = _CP$config$graphics.parseRectAttr,
+		    getRectAttr = _CP$config$graphics.getRectAttr;
 
+		var cssDatas = getCssDatas(attributes, states);
 
 		var selectiveClasses = [{
 			label: 'ベース画像',
 			values: 'hasBaseImage',
-			sub: [{ input: 'image', label: '画像', keys: imageKeys.base, ofSP: isModeSP, sizes: isModeSP ? '480px' : false }]
-		}];
-		selectiveClasses.push({ label: '高さ', input: 'text', key: 'height' });
-		selectiveClasses.push({ label: 'SP版高さ', input: 'text', key: 'heightSP' });
+			sub: [{ input: 'picture', keys: imageKeys.base, devices: devices }]
+		}, { label: '高さ', input: 'text', key: 'heights' }];
 		var selectiveItemClasses = [{ label: 'タイプ', filter: 'type', values: { isImage: '画像', isText: 'テキスト' }, sub: {
-				isImage: [{ label: 'タイプ', filter: 'imageType', values: ['type1', 'type2', 'type3'] }, { input: 'text', label: '代替テキスト', key: 'alt' }, { input: 'text', label: 'リンク', key: 'link' }],
+				isImage: [{ label: 'タイプ', filter: 'imageType', values: ['type1', 'type2', 'type3'] }, { input: 'text', label: '代替テキスト', key: 'alt' }, { input: 'text', label: 'リンク', key: 'link' }, { input: 'picture', label: '画像', keys: imageKeys.image, devices: devices }],
 				isText: [{ label: 'タイプ', filter: 'textType', values: ['type1', 'type2', 'type3'] }, 'color', { label: 'ヌキ文字', values: 'inverse' }, { label: '見出し', values: 'hasTitle' }, { label: 'リード', values: 'hasLead' }, { label: 'テキスト', values: 'hasText' }]
 			} }, { label: 'フェードイン', values: 'fadeIn' }, { label: 'スライドイン', values: 'slideIn', sub: [{ type: 'radio', filer: 'slideIn', label: '方向', values: {
 					slideInLeft: '左',
@@ -103,11 +152,6 @@ registerBlockType('catpow/graphics', {
 					hoverLift: 'リフト',
 					hoverJump: 'ジャンプ'
 				} }] }];
-
-		if (!states.hasBaseImage) {
-			cssData['#' + id + ' .base'] = { 'padding-top': height + '%' };
-			cssDataSP['#' + id + ' .base'] = { 'padding-top': heightSP + '%' };
-		}
 
 		var tgtItem = false;
 
@@ -159,28 +203,30 @@ registerBlockType('catpow/graphics', {
 			if (tgtItem) {
 				var bnd = e.currentTarget.getBoundingClientRect();
 				var i = tgtItem.node.dataset.index;
-				var rectKey = 'rect' + (isModeSP ? 'SP' : '');
-				var rectDate = items[i][rectKey].split(' ');
+				var rectDatas = parseRectAttr(items[i].rect);
+				var deviceIndex = device ? devicesForCss.indexOf(device) : 0;
+				var rectData = rectDatas[deviceIndex];
+
 				if (tgtItem.type === 'pos') {
 					if (e.altKey) {
 						items.splice(i, 0, JSON.parse(JSON.stringify(items[i])));
 					}
-					rectDate[0] = parseInt((e.clientX - bnd.left) / bnd.width * 1000) / 10;
-					rectDate[1] = parseInt((e.clientY - bnd.top) / bnd.height * 1000) / 10;
-					items[i][rectKey] = rectDate.join(' ');
+					rectData[0] = parseInt((e.clientX - bnd.left) / bnd.width * 1000) / 10;
+					rectData[1] = parseInt((e.clientY - bnd.top) / bnd.height * 1000) / 10;
+					items[i].rect = getRectAttr(rectDatas);
 					tgtItem.node.style.left = '';
 					tgtItem.node.style.top = '';
 				} else if (tgtItem.type === 'del') {
 					items.splice(i, 1);
 				} else if (tgtItem.type === 'dup') {
 					items.splice(i, 0, JSON.parse(JSON.stringify(items[i])));
-					rectDate[0] = parseFloat(rectDate[0]) + 1;
-					rectDate[1] = parseFloat(rectDate[1]) + 1;
-					items[i][rectKey] = rectDate.join(' ');
+					rectData[0] = parseFloat(rectData[0]) + 1;
+					rectData[1] = parseFloat(rectData[1]) + 1;
+					items[i].rect = getRectAttr(rectDatas);
 				} else if (tgtItem.type === 'bnd') {
 					var tgtBnd = tgtItem.node.getBoundingClientRect();
-					rectDate[2] = parseInt((e.clientX - tgtBnd.left) / bnd.width * 1000) / 10;
-					items[i][rectKey] = rectDate.join(' ');
+					rectData[2] = parseInt((e.clientX - tgtBnd.left) / bnd.width * 1000) / 10;
+					items[i].rect = getRectAttr(rectDatas);
 					tgtItem.node.style.width = '';
 				}
 				tgtItem.node.style.animation = '';
@@ -192,250 +238,217 @@ registerBlockType('catpow/graphics', {
 		};
 		var onDoubleClick = function onDoubleClick(e) {
 			var tgt = e.target;
-			if (tgt.classList.contains('pos')) {
-				if (isModeSP) {
-					var item = items[tgt.parentNode.dataset.index];
-					item['rectSP'] = item['rect'];
-					tgtItem = false;
-					save();
-				}
-			} else if (tgt.classList.contains('bnd')) {
-				var item = items[tgt.parentNode.dataset.index];
-				var rectKey = 'rect' + (isModeSP ? 'SP' : '');
-			}
 		};
 
-		return [wp.element.createElement(
-			BlockControls,
+		return wp.element.createElement(
+			Fragment,
 			null,
-			wp.element.createElement(Toolbar, {
-				controls: [{
-					icon: 'desktop',
-					title: 'PC',
-					isActive: !isModeSP,
-					onClick: function onClick() {
-						return setAttributes({ EditMode: 'pc' });
-					}
-				}]
-			}),
-			wp.element.createElement(Toolbar, {
-				controls: [{
-					icon: 'smartphone',
-					title: 'SP',
-					isActive: isModeSP,
-					onClick: function onClick() {
-						return setAttributes({ EditMode: 'sp' });
-					}
-				}]
-			})
-		), wp.element.createElement(
-			"div",
-			{
-				id: id,
-				className: classes + (isModeSP ? ' sp' : ' pc'),
-				onMouseDown: onMouseDown,
-				onMouseMove: onMouseMove,
-				onMouseUp: onMouseUp,
-				onDoubleClick: onDoubleClick
-			},
+			wp.element.createElement(SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices: devices }),
 			wp.element.createElement(
-				"div",
-				{ "class": "base" },
-				states.hasBaseImage && wp.element.createElement("img", { src: src, srcset: srcset, alt: alt, sizes: isModeSP ? '480px' : false })
-			),
-			items.map(function (item, index) {
-				var bnd = item.rect.split(' ').map(function (val) {
-					return val + '%';
-				});
-				var bndSP = item.rectSP.split(' ').map(function (val) {
-					return val + '%';
-				});
-				var itemID = id + '_item_' + index;
-				var itemStates = CP.wordsToFlags(item.classes);
-				var itemClasses = item.classes;
-				var itemSelected = attributes.currentItemIndex == index;
-				if (isSelected) {
-					itemClasses += ' visible active actived';
-				}
-				if (itemSelected) {
-					itemClasses += ' selected';
-				}
-				cssData['#' + itemID] = { left: bnd[0], top: bnd[1], width: bnd[2] };
-				cssDataSP['#' + itemID] = { left: bndSP[0], top: bndSP[1], width: bndSP[2] };
-
-				var itemBody = function itemBody() {
+				'div',
+				{
+					id: id,
+					className: classes + (device ? ' alt_content ' + device : ''),
+					onMouseDown: onMouseDown,
+					onMouseMove: onMouseMove,
+					onMouseUp: onMouseUp,
+					onDoubleClick: onDoubleClick
+				},
+				device && wp.element.createElement(
+					'div',
+					{ 'class': 'label' },
+					wp.element.createElement(Icon, { icon: CP.devices[device].icon })
+				),
+				wp.element.createElement(
+					'div',
+					{ 'class': 'base' },
+					states.hasBaseImage && wp.element.createElement(ResponsiveImage, {
+						attr: attributes,
+						keys: imageKeys.base,
+						devices: devices,
+						device: device
+					})
+				),
+				items.map(function (item, index) {
+					var itemStates = CP.wordsToFlags(item.classes);
+					var itemClasses = item.classes;
+					var itemSelected = attributes.currentItemIndex == index;
+					if (isSelected) {
+						itemClasses += ' visible active actived';
+					}
 					if (itemSelected) {
+						itemClasses += ' selected';
+					}
+
+					var itemBody = function itemBody() {
+						if (itemSelected) {
+							if (itemStates.isText) {
+								return wp.element.createElement(
+									Fragment,
+									null,
+									itemStates.hasTitle && wp.element.createElement(
+										'h3',
+										{ className: 'title' },
+										wp.element.createElement(RichText, {
+											placeholder: 'Title',
+											onChange: function onChange(title) {
+												console.log(title);item.title = title;save();
+											},
+											value: item.title
+										})
+									),
+									itemStates.hasLead && wp.element.createElement(
+										'h4',
+										{ className: 'lead' },
+										wp.element.createElement(RichText, {
+											placeholder: 'Lead',
+											onChange: function onChange(lead) {
+												item.lead = lead;save();
+											},
+											value: item.lead
+										})
+									),
+									itemStates.hasText && wp.element.createElement(
+										'p',
+										{ className: 'text' },
+										wp.element.createElement(RichText, {
+											placeholder: 'Text',
+											onChange: function onChange(text) {
+												item.text = text;save();
+											},
+											value: item.text
+										})
+									)
+								);
+							}
+							return wp.element.createElement(SelectResponsiveImage, {
+								attr: attributes,
+								set: setAttributes,
+								devices: devices,
+								device: device,
+								keys: imageKeys.image,
+								index: index
+							});
+						}
 						if (itemStates.isText) {
 							return wp.element.createElement(
 								Fragment,
 								null,
 								itemStates.hasTitle && wp.element.createElement(
-									"h3",
-									{ className: "title" },
-									wp.element.createElement(RichText, {
-										placeholder: "Title",
-										onChange: function onChange(title) {
-											console.log(title);item.title = title;save();
-										},
-										value: item.title
-									})
+									'h3',
+									{ className: 'title' },
+									wp.element.createElement(RichText.Content, { value: item.title })
 								),
 								itemStates.hasLead && wp.element.createElement(
-									"h4",
-									{ className: "lead" },
-									wp.element.createElement(RichText, {
-										placeholder: "Lead",
-										onChange: function onChange(lead) {
-											item.lead = lead;save();
-										},
-										value: item.lead
-									})
+									'h4',
+									{ className: 'lead' },
+									wp.element.createElement(RichText.Content, { value: item.lead })
 								),
 								itemStates.hasText && wp.element.createElement(
-									"p",
-									{ className: "text" },
-									wp.element.createElement(RichText, {
-										placeholder: "Text",
-										onChange: function onChange(text) {
-											item.text = text;save();
-										},
-										value: item.text
-									})
+									'p',
+									{ className: 'text' },
+									wp.element.createElement(RichText.Content, { value: item.text })
 								)
 							);
 						}
-						return wp.element.createElement(SelectResponsiveImage, {
+						return wp.element.createElement(ResponsiveImage, {
 							attr: attributes,
-							set: function set(data) {
-								if (isModeSP) {
-									Object.assign(data.items[index], {
-										src: item.src,
-										srcset: data.items[index].src + ' 480w,' + item.src
-									});
-								}
-								setAttributes(data);
-							},
-							sizes: isModeSP ? '480px' : false,
 							keys: imageKeys.image,
+							devices: devices,
+							device: device,
 							index: index
 						});
-					}
-					if (itemStates.isText) {
-						return wp.element.createElement(
-							Fragment,
-							null,
-							itemStates.hasTitle && wp.element.createElement(
-								"h3",
-								{ className: "title" },
-								wp.element.createElement(RichText.Content, { value: item.title })
-							),
-							itemStates.hasLead && wp.element.createElement(
-								"h4",
-								{ className: "lead" },
-								wp.element.createElement(RichText.Content, { value: item.lead })
-							),
-							itemStates.hasText && wp.element.createElement(
-								"p",
-								{ className: "text" },
-								wp.element.createElement(RichText.Content, { value: item.text })
-							)
-						);
-					}
-					return wp.element.createElement(ResponsiveImage, {
-						attr: attributes,
-						sizes: isModeSP ? '480px' : false,
-						keys: imageKeys.image,
-						index: index
-					});
-				};
+					};
 
-				return el('span', {
-					id: itemID,
-					className: itemClasses,
-					'data-index': index,
-					'data-rect': item.rect,
-					'data-rect-sp': item.rectSP
-				}, wp.element.createElement(
-					Fragment,
-					null,
-					itemBody(),
-					isSelected && itemSelected && wp.element.createElement(
-						"div",
-						{ className: "control" },
-						wp.element.createElement(
-							"div",
-							{ className: "pos" },
-							wp.element.createElement(Icon, { icon: "move" })
-						),
-						wp.element.createElement(
-							"div",
-							{ className: "del" },
-							wp.element.createElement(Icon, { icon: "dismiss" })
-						),
-						wp.element.createElement(
-							"div",
-							{ className: "dup" },
-							wp.element.createElement(Icon, { icon: "plus-alt" })
-						),
-						wp.element.createElement(
-							"div",
-							{ className: "bnd" },
-							wp.element.createElement(Icon, { icon: "leftright" })
+					return el('span', {
+						id: id + '_item_' + index,
+						className: itemClasses,
+						'data-index': index,
+						'data-rect': item.rect
+					}, wp.element.createElement(
+						Fragment,
+						null,
+						itemBody(),
+						isSelected && itemSelected && wp.element.createElement(
+							'div',
+							{ className: 'control' },
+							wp.element.createElement(
+								'div',
+								{ className: 'pos' },
+								wp.element.createElement(Icon, { icon: 'move' })
+							),
+							wp.element.createElement(
+								'div',
+								{ className: 'del' },
+								wp.element.createElement(Icon, { icon: 'dismiss' })
+							),
+							wp.element.createElement(
+								'div',
+								{ className: 'dup' },
+								wp.element.createElement(Icon, { icon: 'plus-alt' })
+							),
+							wp.element.createElement(
+								'div',
+								{ className: 'bnd' },
+								wp.element.createElement(Icon, { icon: 'leftright' })
+							)
 						)
-					)
-				));
-			}),
+					));
+				}),
+				wp.element.createElement(
+					'style',
+					null,
+					device ? CP.createStyleCode(cssDatas[device]) : renderCssDatas(cssDatas)
+				)
+			),
+			',',
 			wp.element.createElement(
-				"style",
+				InspectorControls,
 				null,
-				CP.createStyleCode(isModeSP ? cssDataSP : cssData)
+				wp.element.createElement(SelectClassPanel, {
+					title: '\u30AF\u30E9\u30B9',
+					icon: 'art',
+					set: setAttributes,
+					attr: attributes,
+					selectiveClasses: selectiveClasses,
+					filters: CP.filters.graphics || {}
+				}),
+				wp.element.createElement(
+					PanelBody,
+					{ title: 'ID', icon: 'admin-links', initialOpen: false },
+					wp.element.createElement(TextControl, {
+						label: 'ID',
+						onChange: function onChange(id) {
+							setAttributes({ id: id });
+						},
+						value: id
+					})
+				),
+				wp.element.createElement(SelectItemClassPanel, {
+					title: '\u30A2\u30A4\u30C6\u30E0',
+					icon: 'edit',
+					set: setAttributes,
+					attr: attributes,
+					items: items,
+					index: attributes.currentItemIndex,
+					itemClasses: selectiveItemClasses,
+					filters: CP.filters.graphics || {}
+				}),
+				items[attributes.currentItemIndex] && wp.element.createElement(
+					PanelBody,
+					{ title: 'ITEM CLASS', icon: 'admin-generic', initialOpen: false },
+					wp.element.createElement(TextareaControl, {
+						label: '\u30AF\u30E9\u30B9',
+						onChange: function onChange(classes) {
+							items[attributes.currentItemIndex].classes = classes;
+							save();
+						},
+						value: items[attributes.currentItemIndex].classes
+					})
+				),
+				wp.element.createElement(ItemControlInfoPanel, null)
 			)
-		), wp.element.createElement(
-			InspectorControls,
-			null,
-			wp.element.createElement(SelectClassPanel, {
-				title: "\u30AF\u30E9\u30B9",
-				icon: "art",
-				set: setAttributes,
-				attr: attributes,
-				selectiveClasses: selectiveClasses,
-				filters: CP.filters.graphics || {}
-			}),
-			wp.element.createElement(
-				PanelBody,
-				{ title: "ID", icon: "admin-links", initialOpen: false },
-				wp.element.createElement(TextControl, {
-					label: "ID",
-					onChange: function onChange(id) {
-						setAttributes({ id: id });
-					},
-					value: id
-				})
-			),
-			wp.element.createElement(SelectItemClassPanel, {
-				title: "\u30A2\u30A4\u30C6\u30E0",
-				icon: "edit",
-				set: setAttributes,
-				attr: attributes,
-				items: items,
-				index: attributes.currentItemIndex,
-				itemClasses: selectiveItemClasses,
-				filters: CP.filters.graphics || {}
-			}),
-			items[attributes.currentItemIndex] && wp.element.createElement(
-				PanelBody,
-				{ title: "ITEM CLASS", icon: "admin-generic", initialOpen: false },
-				wp.element.createElement(TextareaControl, {
-					label: "\u30AF\u30E9\u30B9",
-					onChange: function onChange(classes) {
-						items[attributes.currentItemIndex].classes = classes;
-						save();
-					},
-					value: items[attributes.currentItemIndex].classes
-				})
-			),
-			wp.element.createElement(ItemControlInfoPanel, null)
-		)];
+		);
 	},
 	save: function save(_ref2) {
 		var attributes = _ref2.attributes,
@@ -443,65 +456,54 @@ registerBlockType('catpow/graphics', {
 		    setAttributes = _ref2.setAttributes;
 		var id = attributes.id,
 		    classes = attributes.classes,
-		    height = attributes.height,
+		    heights = attributes.heights,
 		    heightSP = attributes.heightSP,
 		    _attributes$items2 = attributes.items,
 		    items = _attributes$items2 === undefined ? [] : _attributes$items2;
 
 
-		var cssData = {},
-		    cssDataSP = {};
-
 		var states = CP.wordsToFlags(classes);
-		var imageKeys = CP.config.graphics.imageKeys;
+		var _CP$config$graphics2 = CP.config.graphics,
+		    devices = _CP$config$graphics2.devices,
+		    imageKeys = _CP$config$graphics2.imageKeys,
+		    getCssDatas = _CP$config$graphics2.getCssDatas,
+		    renderCssDatas = _CP$config$graphics2.renderCssDatas;
 
 
-		if (!states.hasBaseImage) {
-			cssData['#' + id + ' .base'] = { 'padding-top': height + '%' };
-			cssDataSP['#' + id + ' .base'] = { 'padding-top': heightSP + '%' };
-		}
+		var cssDatas = getCssDatas(attributes, states);
 
 		return wp.element.createElement(
-			"div",
-			{ id: id, className: classes, "data-height": height, "data-height-sp": heightSP },
+			'div',
+			{ id: id, className: classes, 'data-heights': heights },
 			wp.element.createElement(
-				"div",
-				{ "class": "base" },
+				'div',
+				{ 'class': 'base' },
 				states.hasBaseImage && wp.element.createElement(ResponsiveImage, {
 					attr: attributes,
-					keys: imageKeys.base
+					keys: imageKeys.base,
+					devices: devices
 				})
 			),
 			items.map(function (item, index) {
-				var bnd = item.rect.split(' ').map(function (val) {
-					return val + '%';
-				});
-				var bndSP = item.rectSP.split(' ').map(function (val) {
-					return val + '%';
-				});
-				var itemID = id + '_item_' + index;
 				var itemStates = CP.wordsToFlags(item.classes);
-				cssData['#' + itemID] = { left: bnd[0], top: bnd[1], width: bnd[2] };
-				cssDataSP['#' + itemID] = { left: bndSP[0], top: bndSP[1], width: bndSP[2] };
-
 				var itemBody = function itemBody() {
 					if (itemStates.isText) {
 						return wp.element.createElement(
 							Fragment,
 							null,
 							itemStates.hasTitle && wp.element.createElement(
-								"h3",
-								{ className: "title" },
+								'h3',
+								{ className: 'title' },
 								wp.element.createElement(RichText.Content, { value: item.title })
 							),
 							itemStates.hasLead && wp.element.createElement(
-								"h4",
-								{ className: "lead" },
+								'h4',
+								{ className: 'lead' },
 								wp.element.createElement(RichText.Content, { value: item.lead })
 							),
 							itemStates.hasText && wp.element.createElement(
-								"p",
-								{ className: "text" },
+								'p',
+								{ className: 'text' },
 								wp.element.createElement(RichText.Content, { value: item.text })
 							)
 						);
@@ -509,23 +511,22 @@ registerBlockType('catpow/graphics', {
 					return wp.element.createElement(ResponsiveImage, {
 						attr: attributes,
 						keys: imageKeys.image,
-						index: index
+						index: index,
+						devices: devices
 					});
 				};
 
 				return el(item.link ? 'a' : 'span', {
-					id: itemID,
+					id: id + '_item_' + index,
 					className: item.classes,
 					href: item.link,
-					'data-rect': item.rect,
-					'data-rect-sp': item.rectSP
+					'data-rect': item.rect
 				}, itemBody());
 			}),
 			wp.element.createElement(
-				"style",
+				'style',
 				null,
-				CP.createStyleCode(cssData),
-				'@media(max-width:768px){' + CP.createStyleCode(cssDataSP) + '}'
+				renderCssDatas(cssDatas)
 			)
 		);
 	}

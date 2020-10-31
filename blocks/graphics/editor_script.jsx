@@ -1,7 +1,39 @@
 ﻿CP.config.graphics={
+	devices:['sp','tb'],
+	devicesForCss:['pc','tb','sp'],
 	imageKeys:{
-		base:{src:"src",srcset:"srcset",alt:"alt"},
-		image:{src:"src",srcset:"srcset",alt:"alt",items:"items"},
+		base:{src:"src",srcset:"srcset",sources:'sources',alt:"alt"},
+		image:{src:"src",srcset:"srcset",sources:'sources',alt:"alt",items:"items"},
+	},
+	getCssDatas:(attr,states)=>{
+		const {id,items,heights}=attr;
+		const {devicesForCss}=CP.config.graphics;
+		let rtn={};
+		devicesForCss.map((device)=>{rtn[device]={};});
+		if(!states.hasBaseImage){
+			heights.split(',').map((height,deviceIndex)=>{
+				rtn[devicesForCss[deviceIndex]]['#'+id+' .base']={'padding-top':height+'%'};
+			});
+		}
+		items.map((item,index)=>{
+			item.rect.split(',').map((rect,deviceIndex)=>{
+				const bnd=rect.split(' ').map((val)=>val+'%');
+				rtn[devicesForCss[deviceIndex]]['#'+id+'_item_'+index]={left:bnd[0],top:bnd[1],width:bnd[2]};
+			});
+		});
+		return rtn;
+	},
+	renderCssDatas:(cssDatas)=>{
+		return CP.config.graphics.devicesForCss.map((device)=>{
+			if(device==='pc'){return CP.createStyleCode(cssDatas[device]);}
+			return '@media'+CP.devices[device].media_query+'{'+CP.createStyleCode(cssDatas[device])+'}';
+		}).join('');
+	},
+	parseRectAttr:(rect)=>{
+		return rect.split(',').map((rect)=>rect.split(' '));
+	},
+	getRectAttr:(rectDatas)=>{
+		return rectDatas.map((rectData)=>rectData.join(' ')).join(',');
 	}
 };
 
@@ -16,8 +48,8 @@ registerBlockType('catpow/graphics',{
 		src:{source:'attribute',selector:'[src]',attribute:'src',default:cp.theme_url+'/images/dummy_bg.jpg'},
 		srcset:{source:'attribute',selector:'[src]',attribute:'srcset'},
 		alt:{source:'attribute',selector:'[src]',attribute:'alt'},
-		height:{source:'attribute',selector:'.wp-block-catpow-graphics','attribute':'data-height',default:'60'},
-		heightSP:{source:'attribute',selector:'.wp-block-catpow-graphics','attribute':'data-height-sp',default:'120'},
+		sources:CP.getPictureSoucesAttributesForDevices(CP.config.graphics.devices,'.base picture','dummy_bg.jpg'),
+		height:{source:'attribute',selector:'.wp-block-catpow-graphics','attribute':'data-heights',default:'120,80,60'},
 		items:{
 			source:'query',
 			selector:'.item',
@@ -28,6 +60,7 @@ registerBlockType('catpow/graphics',{
 				src:{source:'attribute',selector:'[src]',attribute:'src'},
 				srcset:{source:'attribute',selector:'[src]',attribute:'srcset'},
 				alt:{source:'attribute',selector:'[src]',attribute:'alt'},
+				sources:CP.getPictureSoucesAttributes(),
 				title:{source:'children',selector:'.title'},
 				lead:{source:'children',selector:'.lead'},
 				text:{source:'children',selector:'.text'},
@@ -37,11 +70,11 @@ registerBlockType('catpow/graphics',{
 				{
 					id:'graphics_image1',
 					classes:'item isImage',
-					rect:'25 25 50',
-					rectSP:'25 25 50',
+					rect:'25 25 50,25 25 50,25 25 50',
 					src:cp.theme_url+'/images/dummy.jpg',
 					srcset:'',
 					alt:'',
+					sources:CP.getPictureSoucesAttributesDefaultValueForDevices(CP.config.graphics.devices),
 					title:['Title'],
 					lead:['Lead'],
 					text:['Text'],
@@ -52,7 +85,7 @@ registerBlockType('catpow/graphics',{
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-        const {id,classes='',src,srcset,alt,height,heightSP,items=[]}=attributes;
+        const {id,classes='',src,srcset,alt,heights,items=[],device}=attributes;
 		
 		if(!id){
 			setAttributes({id:'g'+(new Date().getTime().toString(16))})
@@ -61,28 +94,27 @@ registerBlockType('catpow/graphics',{
 		attributes.EditMode=attributes.EditMode || 'pc';
 		var isModeSP=attributes.EditMode=='sp';
 		
-		var cssData={},cssDataSP={};
-		
 		const states=CP.wordsToFlags(classes);
-		const {imageKeys}=CP.config.graphics;
+		const {devices,devicesForCss,imageKeys,getCssDatas,renderCssDatas,parseRectAttr,getRectAttr}=CP.config.graphics;
+		const cssDatas=getCssDatas(attributes,states);
 		
 		const selectiveClasses=[
 			{
 				label:'ベース画像',
 				values:'hasBaseImage',
 			 	sub:[
-					{input:'image',label:'画像',keys:imageKeys.base,ofSP:isModeSP,sizes:isModeSP?'480px':false}
+					{input:'picture',keys:imageKeys.base,devices}
 				]
-			}
+			},
+			{label:'高さ',input:'text',key:'heights'}
 		];
-		selectiveClasses.push({label:'高さ',input:'text',key:'height'});
-		selectiveClasses.push({label:'SP版高さ',input:'text',key:'heightSP'});
 		const selectiveItemClasses=[
 			{label:'タイプ',filter:'type',values:{isImage:'画像',isText:'テキスト'},sub:{
 				isImage:[
 					{label:'タイプ',filter:'imageType',values:['type1','type2','type3']},
 					{input:'text',label:'代替テキスト',key:'alt'},
-					{input:'text',label:'リンク',key:'link'}
+					{input:'text',label:'リンク',key:'link'},
+					{input:'picture',label:'画像',keys:imageKeys.image,devices}
 				],
 				isText:[
 					{label:'タイプ',filter:'textType',values:['type1','type2','type3']},
@@ -119,10 +151,6 @@ registerBlockType('catpow/graphics',{
 			]}
 		];
 		
-		if(!states.hasBaseImage){
-			cssData['#'+id+' .base']={'padding-top':height+'%'};
-			cssDataSP['#'+id+' .base']={'padding-top':heightSP+'%'};
-		}
 		
 		var tgtItem=false;
 		
@@ -164,15 +192,17 @@ registerBlockType('catpow/graphics',{
 			if(tgtItem){
 				var bnd=e.currentTarget.getBoundingClientRect();
 				var i=tgtItem.node.dataset.index;
-				var rectKey='rect'+(isModeSP?'SP':'');
-				var rectDate=items[i][rectKey].split(' ');
+				let rectDatas=parseRectAttr(items[i].rect);
+				const deviceIndex=device?devicesForCss.indexOf(device):0;
+				let rectData=rectDatas[deviceIndex];
+					
 				if(tgtItem.type==='pos'){
 					if(e.altKey){
 						items.splice(i,0,JSON.parse(JSON.stringify(items[i])));
 					}
-					rectDate[0]=parseInt((e.clientX-bnd.left)/bnd.width*1000)/10;
-					rectDate[1]=parseInt((e.clientY-bnd.top)/bnd.height*1000)/10;
-					items[i][rectKey]=rectDate.join(' ');
+					rectData[0]=parseInt((e.clientX-bnd.left)/bnd.width*1000)/10;
+					rectData[1]=parseInt((e.clientY-bnd.top)/bnd.height*1000)/10;
+					items[i].rect=getRectAttr(rectDatas);
 					tgtItem.node.style.left='';
 					tgtItem.node.style.top='';
 				}
@@ -181,14 +211,14 @@ registerBlockType('catpow/graphics',{
 				}
 				else if(tgtItem.type==='dup'){
 					items.splice(i,0,JSON.parse(JSON.stringify(items[i])));
-					rectDate[0]=parseFloat(rectDate[0])+1;
-					rectDate[1]=parseFloat(rectDate[1])+1;
-					items[i][rectKey]=rectDate.join(' ');
+					rectData[0]=parseFloat(rectData[0])+1;
+					rectData[1]=parseFloat(rectData[1])+1;
+					items[i].rect=getRectAttr(rectDatas);
 				}
 				else if(tgtItem.type==='bnd'){
 					var tgtBnd=tgtItem.node.getBoundingClientRect();
-					rectDate[2]=parseInt((e.clientX-tgtBnd.left)/bnd.width*1000)/10;
-					items[i][rectKey]=rectDate.join(' ');
+					rectData[2]=parseInt((e.clientX-tgtBnd.left)/bnd.width*1000)/10;
+					items[i].rect=getRectAttr(rectDatas);
 					tgtItem.node.style.width='';
 				}
 				tgtItem.node.style.animation='';
@@ -200,249 +230,209 @@ registerBlockType('catpow/graphics',{
 		};
 		const onDoubleClick=(e)=>{
 			var tgt=e.target;
-			if(tgt.classList.contains('pos')){
-				if(isModeSP){
-					var item=items[tgt.parentNode.dataset.index];
-					item['rectSP']=item['rect'];
-					tgtItem=false;
-					save();
-				}
-			}
-			else if(tgt.classList.contains('bnd')){
-				var item=items[tgt.parentNode.dataset.index];
-				var rectKey='rect'+(isModeSP?'SP':'');
-			}
 		};
 		
-        return [
-			<BlockControls>
-				<Toolbar
-					controls={[
-						{
-							icon: 'desktop',
-							title: 'PC',
-							isActive: !isModeSP,
-							onClick: () => setAttributes({EditMode:'pc'})
-						}
-					]}
-				/>
-				<Toolbar
-					controls={[
-						{
-							icon: 'smartphone',
-							title: 'SP',
-							isActive: isModeSP,
-							onClick: () => setAttributes({EditMode:'sp'})
-						}
-					]}
-				/>
-			</BlockControls>,
-			<div
-				id={id}
-				className={classes+(isModeSP?' sp':' pc')}
-				onMouseDown={onMouseDown}
-				onMouseMove={onMouseMove}
-				onMouseUp={onMouseUp}
-				onDoubleClick={onDoubleClick}
-			>
-				<div class="base">
-					{states.hasBaseImage && 
-						<img src={src} srcset={srcset} alt={alt} sizes={isModeSP?'480px':false}/>
+        return (
+			<Fragment>
+				<SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices}/>
+				<div
+					id={id}
+					className={classes+(device?' alt_content '+device:'')}
+					onMouseDown={onMouseDown}
+					onMouseMove={onMouseMove}
+					onMouseUp={onMouseUp}
+					onDoubleClick={onDoubleClick}
+				>
+					{device &&
+						<div class="label">
+							<Icon icon={CP.devices[device].icon}/>
+						</div>
 					}
-				</div>
-				{items.map((item,index)=>{
-					var bnd=item.rect.split(' ').map((val)=>val+'%');
-					var bndSP=item.rectSP.split(' ').map((val)=>val+'%');
-					var itemID=id+'_item_'+index;
-					var itemStates=CP.wordsToFlags(item.classes);
-					var itemClasses=item.classes;
-					var itemSelected=attributes.currentItemIndex==index;
-					if(isSelected){itemClasses+=' visible active actived';}
-					if(itemSelected){itemClasses+=' selected';}
-					cssData['#'+itemID]={left:bnd[0],top:bnd[1],width:bnd[2]};
-					cssDataSP['#'+itemID]={left:bndSP[0],top:bndSP[1],width:bndSP[2]};
-					
-					const itemBody=()=>{
-						if(itemSelected){
+					<div class="base">
+						{states.hasBaseImage && 
+							<ResponsiveImage
+								attr={attributes}
+								keys={imageKeys.base}
+								devices={devices}
+								device={device}
+							/>
+						}
+					</div>
+					{items.map((item,index)=>{
+						var itemStates=CP.wordsToFlags(item.classes);
+						var itemClasses=item.classes;
+						var itemSelected=attributes.currentItemIndex==index;
+						if(isSelected){itemClasses+=' visible active actived';}
+						if(itemSelected){itemClasses+=' selected';}
+
+						const itemBody=()=>{
+							if(itemSelected){
+								if(itemStates.isText){
+									return (
+										<Fragment>
+											{itemStates.hasTitle && 
+												<h3 className="title">
+													<RichText
+														placeholder='Title'
+														onChange={(title)=>{console.log(title);item.title=title;save();}}
+														value={item.title}
+													/>
+												 </h3>
+											}
+											{itemStates.hasLead && 
+												<h4 className="lead">
+													<RichText
+														placeholder='Lead'
+														onChange={(lead)=>{item.lead=lead;save();}}
+														value={item.lead}
+													/>
+												 </h4>
+											}
+											{itemStates.hasText && 
+												<p className="text">
+													<RichText
+														placeholder='Text'
+														onChange={(text)=>{item.text=text;save();}}
+														value={item.text}
+													/>
+												 </p>
+											}
+										</Fragment>
+									);
+								}
+								return (
+									<SelectResponsiveImage
+										attr={attributes}
+										set={setAttributes}
+										devices={devices}
+										device={device}
+										keys={imageKeys.image}
+										index={index}
+									/>
+								);
+							}
 							if(itemStates.isText){
 								return (
 									<Fragment>
-										{itemStates.hasTitle && 
-											<h3 className="title">
-												<RichText
-													placeholder='Title'
-													onChange={(title)=>{console.log(title);item.title=title;save();}}
-													value={item.title}
-												/>
-											 </h3>
-										}
-										{itemStates.hasLead && 
-											<h4 className="lead">
-												<RichText
-													placeholder='Lead'
-													onChange={(lead)=>{item.lead=lead;save();}}
-													value={item.lead}
-												/>
-											 </h4>
-										}
-										{itemStates.hasText && 
-											<p className="text">
-												<RichText
-													placeholder='Text'
-													onChange={(text)=>{item.text=text;save();}}
-													value={item.text}
-												/>
-											 </p>
-										}
+										{itemStates.hasTitle && <h3 className="title"><RichText.Content value={item.title}/></h3>}
+										{itemStates.hasLead && <h4 className="lead"><RichText.Content value={item.lead}/></h4>}
+										{itemStates.hasText && <p className="text"><RichText.Content value={item.text}/></p>}
 									</Fragment>
 								);
 							}
 							return (
-								<SelectResponsiveImage
+								<ResponsiveImage
 									attr={attributes}
-									set={(data)=>{
-										if(isModeSP){
-											Object.assign(data.items[index],{
-												src:item.src,
-												srcset:data.items[index].src+' 480w,'+item.src,
-											});
-										}
-										setAttributes(data);
-									}}
-									sizes={isModeSP?'480px':false}
 									keys={imageKeys.image}
+									devices={devices}
+									device={device}
 									index={index}
 								/>
 							);
-						}
-						if(itemStates.isText){
-							return (
-								<Fragment>
-									{itemStates.hasTitle && <h3 className="title"><RichText.Content value={item.title}/></h3>}
-									{itemStates.hasLead && <h4 className="lead"><RichText.Content value={item.lead}/></h4>}
-									{itemStates.hasText && <p className="text"><RichText.Content value={item.text}/></p>}
-								</Fragment>
-							);
-						}
-						return (
-							<ResponsiveImage
-								attr={attributes}
-								sizes={isModeSP?'480px':false}
-								keys={imageKeys.image}
-								index={index}
-							/>
+
+						};
+
+						return el(
+							'span',
+							{
+								id:id+'_item_'+index,
+								className:itemClasses,
+								'data-index':index,
+								'data-rect':item.rect
+							},
+							<Fragment>
+								{itemBody()}
+								{isSelected && itemSelected && 
+									<div className="control">
+										<div className="pos">
+											<Icon icon="move"/>
+										</div>
+										<div className="del">
+											<Icon icon="dismiss"/>
+										</div>
+										<div className="dup">
+											<Icon icon="plus-alt"/>
+										</div>
+										<div className="bnd">
+											<Icon icon="leftright"/>
+										</div>
+									</div>
+								}
+							</Fragment>
 						);
-						
-					};
-					
-					return el(
-						'span',
-						{
-							id:itemID,
-							className:itemClasses,
-							'data-index':index,
-							'data-rect':item.rect,
-							'data-rect-sp':item.rectSP
-						},
-						<Fragment>
-							{itemBody()}
-							{isSelected && itemSelected && 
-								<div className="control">
-									<div className="pos">
-										<Icon icon="move"/>
-									</div>
-									<div className="del">
-										<Icon icon="dismiss"/>
-									</div>
-									<div className="dup">
-										<Icon icon="plus-alt"/>
-									</div>
-									<div className="bnd">
-										<Icon icon="leftright"/>
-									</div>
-								</div>
-							}
-						</Fragment>
-					);
-				})}
-				<style>
-					{CP.createStyleCode(isModeSP?cssDataSP:cssData)}
-				</style>
-			</div>,
-			<InspectorControls>
-				<SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters.graphics || {}}
-				/>
-				<PanelBody title="ID" icon="admin-links" initialOpen={false}>
-					<TextControl
-						label='ID'
-						onChange={(id)=>{setAttributes({id:id});}}
-						value={id}
+					})}
+					<style>
+						{device?(
+							CP.createStyleCode(cssDatas[device])
+						):(
+							renderCssDatas(cssDatas)
+						)}
+					</style>
+				</div>,
+				<InspectorControls>
+					<SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+						filters={CP.filters.graphics || {}}
 					/>
-				</PanelBody>
-				<SelectItemClassPanel
-					title='アイテム'
-					icon='edit'
-					set={setAttributes}
-					attr={attributes}
-					items={items}
-					index={attributes.currentItemIndex}
-					itemClasses={selectiveItemClasses}
-					filters={CP.filters.graphics || {}}
-				/>
-				{items[attributes.currentItemIndex] && 
-					<PanelBody title="ITEM CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl
-							label='クラス'
-							onChange={(classes)=>{
-								items[attributes.currentItemIndex].classes=classes;
-								save();
-							}}
-							value={items[attributes.currentItemIndex].classes}
+					<PanelBody title="ID" icon="admin-links" initialOpen={false}>
+						<TextControl
+							label='ID'
+							onChange={(id)=>{setAttributes({id:id});}}
+							value={id}
 						/>
 					</PanelBody>
-				}
-				<ItemControlInfoPanel/>
-			</InspectorControls>
-        ];
+					<SelectItemClassPanel
+						title='アイテム'
+						icon='edit'
+						set={setAttributes}
+						attr={attributes}
+						items={items}
+						index={attributes.currentItemIndex}
+						itemClasses={selectiveItemClasses}
+						filters={CP.filters.graphics || {}}
+					/>
+					{items[attributes.currentItemIndex] && 
+						<PanelBody title="ITEM CLASS" icon="admin-generic" initialOpen={false}>
+							<TextareaControl
+								label='クラス'
+								onChange={(classes)=>{
+									items[attributes.currentItemIndex].classes=classes;
+									save();
+								}}
+								value={items[attributes.currentItemIndex].classes}
+							/>
+						</PanelBody>
+					}
+					<ItemControlInfoPanel/>
+				</InspectorControls>
+			</Fragment>
+        );
     },
 	save({attributes,className,setAttributes}){
-        const {id,classes,height,heightSP,items=[]}=attributes;
-		
-		var cssData={},cssDataSP={};
+        const {id,classes,heights,heightSP,items=[]}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
-		const {imageKeys}=CP.config.graphics;
+		const {devices,imageKeys,getCssDatas,renderCssDatas}=CP.config.graphics;
 		
-		if(!states.hasBaseImage){
-			cssData['#'+id+' .base']={'padding-top':height+'%'};
-			cssDataSP['#'+id+' .base']={'padding-top':heightSP+'%'};
-		}
+		const cssDatas=getCssDatas(attributes,states);
 		
 		return (
-			<div id={id} className={classes} data-height={height} data-height-sp={heightSP}>
+			<div id={id} className={classes} data-heights={heights}>
 				<div class="base">
 					{states.hasBaseImage && 
 						<ResponsiveImage
 							attr={attributes}
 							keys={imageKeys.base}
+							devices={devices}
 						/>
 					}
 				</div>
 				{items.map((item,index)=>{
-					var bnd=item.rect.split(' ').map((val)=>val+'%');
-					var bndSP=item.rectSP.split(' ').map((val)=>val+'%');
-					var itemID=id+'_item_'+index;
 					var itemStates=CP.wordsToFlags(item.classes);
-					cssData['#'+itemID]={left:bnd[0],top:bnd[1],width:bnd[2]};
-					cssDataSP['#'+itemID]={left:bndSP[0],top:bndSP[1],width:bndSP[2]};
-					
-					
 					const itemBody=()=>{
 						if(itemStates.isText){
 							return (
@@ -458,6 +448,7 @@ registerBlockType('catpow/graphics',{
 								attr={attributes}
 								keys={imageKeys.image}
 								index={index}
+								devices={devices}
 							/>
 						);
 					};
@@ -465,19 +456,15 @@ registerBlockType('catpow/graphics',{
 					return el(
 						item.link?'a':'span',
 						{
-							id:itemID,
+							id:id+'_item_'+index,
 							className:item.classes,
 							href:item.link,
-							'data-rect':item.rect,
-							'data-rect-sp':item.rectSP
+							'data-rect':item.rect
 						},
 						itemBody()
 					);
 				})}
-				<style>
-					{CP.createStyleCode(cssData)}
-					{'@media(max-width:768px){'+CP.createStyleCode(cssDataSP)+'}'}
-				</style>
+				<style>{renderCssDatas(cssDatas)}</style>
 			</div>
 		);
 	}
