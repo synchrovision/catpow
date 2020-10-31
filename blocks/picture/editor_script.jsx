@@ -28,7 +28,7 @@ registerBlockType('catpow/picture',{
 		const {devices,imageKeys}=CP.config.picture;
 		
 		const selectiveClasses=[
-			{input:'image',label:'画像',keys:imageKeys.image,device,devices,isTemplate:states.isTemplate},
+			{input:'picture',label:'画像',keys:imageKeys.image,devices,isTemplate:states.isTemplate},
 			{
 				label:'テンプレート',
 				values:'isTemplate',
@@ -55,10 +55,10 @@ registerBlockType('catpow/picture',{
 					<SelectResponsiveImage
 						attr={attributes}
 						set={setAttributes}
+						keys={imageKeys.image}
 						device={device}
 						devices={devices}
 						isTemplate={states.isTemplate}
-						keys={imageKeys.image}
 					/>
 				</div>
 				<InspectorControls>

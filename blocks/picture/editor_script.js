@@ -41,7 +41,7 @@ registerBlockType('catpow/picture', {
 		    imageKeys = _CP$config$picture.imageKeys;
 
 
-		var selectiveClasses = [{ input: 'image', label: '画像', keys: imageKeys.image, device: device, devices: devices, isTemplate: states.isTemplate }, {
+		var selectiveClasses = [{ input: 'picture', label: '画像', keys: imageKeys.image, devices: devices, isTemplate: states.isTemplate }, {
 			label: 'テンプレート',
 			values: 'isTemplate',
 			sub: [{
@@ -67,10 +67,10 @@ registerBlockType('catpow/picture', {
 				wp.element.createElement(SelectResponsiveImage, {
 					attr: attributes,
 					set: setAttributes,
+					keys: imageKeys.image,
 					device: device,
 					devices: devices,
-					isTemplate: states.isTemplate,
-					keys: imageKeys.image
+					isTemplate: states.isTemplate
 				})
 			),
 			wp.element.createElement(
