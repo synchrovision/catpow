@@ -432,15 +432,29 @@
 		return Object.keys(CP.devices).filter((device=>devices.includes(device)))
 			.map((device)=>CP.devices[device].sizes).join(',');
 	},
-	getPictureSoucesAttributesForDevices:(devices)=>{
+	getPictureSoucesAttributesForDevices:(devices,selector)=>{
 		return {
 			source:'query',
-			selector:'picture source',
+			selector:(selector || 'picture')+' source',
 			query:{
 				srcset:{source:'attribute',attribute:'srcset'},
 				device:{source:'attribute','attribute':'data-device'}
 			},
 			default:devices.map((device)=>({srcset:cp.theme_url+'/images/dummy.jpg',device}))
+		}
+	},
+	
+	selectiveClassesPreset:{
+		isTempate:{
+			label:'テンプレート',
+			values:'isTemplate',
+			sub:[
+				{input:'bool',label:'ループ',key:'doLoop',sub:[
+					{label:'content path',input:'text',key:'content_path'},
+					{label:'query',input:'textarea',key:'query'},
+					{label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
+				]}
+			]
 		}
 	}
 };
@@ -557,7 +571,6 @@ const SelectResponsiveImage=({className,attr,set,keys,index,sizes,size,devices,d
 			return (
 				<picture
 					className={'selectImage '+className}
-					sizes={sizes}
 					onClick={onClick}
 					{...otherProps}
 				>
@@ -571,7 +584,6 @@ const SelectResponsiveImage=({className,attr,set,keys,index,sizes,size,devices,d
 		return (
 			<picture
 				className={'selectImage '+className}
-				sizes={sizes}
 				onClick={onClick}
 				{...otherProps}
 			>
@@ -634,12 +646,9 @@ const ResponsiveImage=({className,attr,keys,index,sizes,devices,isTemplate})=>{
 				></video>
 		);
 	}
-	if(keys.sources){
+	if(keys.sources && item[keys.sources].length){
 		return (
-			<picture
-				className={'selectImage '+className}
-				sizes={sizes}
-			>
+			<picture className={'selectImage '+className}>
 				{item[keys.sources].map((source)=>(
 					<source srcset={source.srcset} media={CP.devices[source.device].media_query} data-device={source.device}/>
 				))}
@@ -661,6 +670,34 @@ const ResponsiveImage=({className,attr,keys,index,sizes,devices,isTemplate})=>{
 		/>
 	);
 }
+
+const SelectPictureSources=(props)=>{
+	const {devices}=props;
+	return (
+		<table className="SelectPictureSources">
+			<tbody>
+				<tr>
+					<td colspan={devices.length}>
+						<SelectResponsiveImage {...props}/>
+					</td>
+				</tr>
+				<tr>
+				{devices.map((device)=>(
+					<td>
+						<div className="label">
+							<Icon icon={CP.devices[device].icon}/>
+						</div>
+						<SelectResponsiveImage
+							device={device}
+							{...props}
+						/>
+					</td>
+				))}
+				</tr>
+			</tbody>
+		</table>
+	);
+};
 
 const SelectPreparedImage=({className,attr,set,name,keys,index,...otherProps})=>{
 	let onClick;
@@ -987,9 +1024,25 @@ const SelectClassPanel=(props)=>{
 								ofSP={prm.ofSP}
 								device={prm.device}
 								devices={prm.devices}
+								isTemplate={prm.isTemplate}
                             />
                         );
                         break;
+					case 'picture':
+						if(prm.label){
+							rtn.push(<h5>{prm.label}</h5>);
+						}
+						rtn.push(
+							<SelectPictureSources
+								set={props.set}
+								attr={props.attr}
+								keys={prm.keys}
+								sizes={prm.sizes}
+								devices={prm.devices}
+								isTemplate={prm.isTemplate}
+							/>
+						);
+						break;
 					case 'position':
 						rtn.push(
 							<SelectPositionClass
@@ -1111,11 +1164,10 @@ const SelectClassPanel=(props)=>{
 }
 const SelectItemClassPanel=(props)=>{
 	const {items,index,set,attr,triggerClasses}=props;
-	let {itemsKey,itemClasses}=props;
+	let {itemsKey='items',itemClasses}=props;
 
 	if(!items[index]){return false;}
 	
-	itemsKey=itemsKey || 'items';
 	if(!items[index].classes){items[index].classes='item';}
 	else if(items[index].classes.search(/\bitem\b/)===-1){items[index].classes+=' item';}
 	let classes=items[index].classes;
@@ -1234,6 +1286,24 @@ const SelectItemClassPanel=(props)=>{
 							ofSP={prm.ofSP}
 							device={prm.device}
 							devices={prm.devices}
+							isTemplate={prm.isTemplate}
+						/>
+					);
+					break;
+				case 'picture':
+					prm.keys.items=prm.keys.items || itemsKey;
+					if(prm.label){
+						rtn.push(<h5>{prm.label}</h5>);
+					}
+					rtn.push(
+						<SelectPictureSources
+							set={props.set}
+							attr={props.attr}
+							keys={prm.keys}
+							index={index}
+							sizes={prm.sizes}
+							devices={prm.devices}
+							isTemplate={prm.isTemplate}
 						/>
 					);
 					break;

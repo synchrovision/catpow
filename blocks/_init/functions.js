@@ -621,10 +621,10 @@ var CP = {
 			return CP.devices[device].sizes;
 		}).join(',');
 	},
-	getPictureSoucesAttributesForDevices: function getPictureSoucesAttributesForDevices(devices) {
+	getPictureSoucesAttributesForDevices: function getPictureSoucesAttributesForDevices(devices, selector) {
 		return {
 			source: 'query',
-			selector: 'picture source',
+			selector: (selector || 'picture') + ' source',
 			query: {
 				srcset: { source: 'attribute', attribute: 'srcset' },
 				device: { source: 'attribute', 'attribute': 'data-device' }
@@ -633,6 +633,14 @@ var CP = {
 				return { srcset: cp.theme_url + '/images/dummy.jpg', device: device };
 			})
 		};
+	},
+
+	selectiveClassesPreset: {
+		isTempate: {
+			label: 'テンプレート',
+			values: 'isTemplate',
+			sub: [{ input: 'bool', label: 'ループ', key: 'doLoop', sub: [{ label: 'content path', input: 'text', key: 'content_path' }, { label: 'query', input: 'textarea', key: 'query' }, { label: 'プレビューループ数', input: 'range', key: 'loopCount', min: 1, max: 16 }] }]
+		}
 	}
 };
 var SelectResponsiveImage = function SelectResponsiveImage(_ref18) {
@@ -781,7 +789,6 @@ var SelectResponsiveImage = function SelectResponsiveImage(_ref18) {
 				'picture',
 				babelHelpers.extends({
 					className: 'selectImage ' + className,
-					sizes: sizes,
 					onClick: onClick
 				}, otherProps),
 				wp.element.createElement('img', {
@@ -794,7 +801,6 @@ var SelectResponsiveImage = function SelectResponsiveImage(_ref18) {
 			'picture',
 			babelHelpers.extends({
 				className: 'selectImage ' + className,
-				sizes: sizes,
 				onClick: onClick
 			}, otherProps),
 			item[keys.sources].map(function (source) {
@@ -863,13 +869,10 @@ var ResponsiveImage = function ResponsiveImage(_ref23) {
 			muted: 1
 		});
 	}
-	if (keys.sources) {
+	if (keys.sources && item[keys.sources].length) {
 		return wp.element.createElement(
 			'picture',
-			{
-				className: 'selectImage ' + className,
-				sizes: sizes
-			},
+			{ className: 'selectImage ' + className },
 			item[keys.sources].map(function (source) {
 				return wp.element.createElement('source', { srcset: source.srcset, media: CP.devices[source.device].media_query, 'data-device': source.device });
 			}),
@@ -887,6 +890,46 @@ var ResponsiveImage = function ResponsiveImage(_ref23) {
 		sizes: sizes,
 		'data-mime': item[keys.mime]
 	});
+};
+
+var SelectPictureSources = function SelectPictureSources(props) {
+	var devices = props.devices;
+
+	return wp.element.createElement(
+		'table',
+		{ className: 'SelectPictureSources' },
+		wp.element.createElement(
+			'tbody',
+			null,
+			wp.element.createElement(
+				'tr',
+				null,
+				wp.element.createElement(
+					'td',
+					{ colspan: devices.length },
+					wp.element.createElement(SelectResponsiveImage, props)
+				)
+			),
+			wp.element.createElement(
+				'tr',
+				null,
+				devices.map(function (device) {
+					return wp.element.createElement(
+						'td',
+						null,
+						wp.element.createElement(
+							'div',
+							{ className: 'label' },
+							wp.element.createElement(Icon, { icon: CP.devices[device].icon })
+						),
+						wp.element.createElement(SelectResponsiveImage, babelHelpers.extends({
+							device: device
+						}, props))
+					);
+				})
+			)
+		)
+	);
 };
 
 var SelectPreparedImage = function SelectPreparedImage(_ref24) {
@@ -1325,7 +1368,25 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							sizes: prm.sizes,
 							ofSP: prm.ofSP,
 							device: prm.device,
-							devices: prm.devices
+							devices: prm.devices,
+							isTemplate: prm.isTemplate
+						}));
+						break;
+					case 'picture':
+						if (prm.label) {
+							rtn.push(wp.element.createElement(
+								'h5',
+								null,
+								prm.label
+							));
+						}
+						rtn.push(wp.element.createElement(SelectPictureSources, {
+							set: props.set,
+							attr: props.attr,
+							keys: prm.keys,
+							sizes: prm.sizes,
+							devices: prm.devices,
+							isTemplate: prm.isTemplate
 						}));
 						break;
 					case 'position':
@@ -1462,7 +1523,8 @@ var SelectItemClassPanel = function SelectItemClassPanel(props) {
 	    set = props.set,
 	    attr = props.attr,
 	    triggerClasses = props.triggerClasses;
-	var itemsKey = props.itemsKey,
+	var _props$itemsKey = props.itemsKey,
+	    itemsKey = _props$itemsKey === undefined ? 'items' : _props$itemsKey,
 	    itemClasses = props.itemClasses;
 
 
@@ -1470,7 +1532,6 @@ var SelectItemClassPanel = function SelectItemClassPanel(props) {
 		return false;
 	}
 
-	itemsKey = itemsKey || 'items';
 	if (!items[index].classes) {
 		items[index].classes = 'item';
 	} else if (items[index].classes.search(/\bitem\b/) === -1) {
@@ -1604,7 +1665,27 @@ var SelectItemClassPanel = function SelectItemClassPanel(props) {
 						sizes: prm.sizes,
 						ofSP: prm.ofSP,
 						device: prm.device,
-						devices: prm.devices
+						devices: prm.devices,
+						isTemplate: prm.isTemplate
+					}));
+					break;
+				case 'picture':
+					prm.keys.items = prm.keys.items || itemsKey;
+					if (prm.label) {
+						rtn.push(wp.element.createElement(
+							'h5',
+							null,
+							prm.label
+						));
+					}
+					rtn.push(wp.element.createElement(SelectPictureSources, {
+						set: props.set,
+						attr: props.attr,
+						keys: prm.keys,
+						index: index,
+						sizes: prm.sizes,
+						devices: prm.devices,
+						isTemplate: prm.isTemplate
 					}));
 					break;
 				case 'icon':
@@ -1955,8 +2036,8 @@ var SelectDeviceToolbar = function SelectDeviceToolbar(props) {
 var EditItemsTable = function EditItemsTable(props) {
 	var set = props.set,
 	    attr = props.attr,
-	    _props$itemsKey = props.itemsKey,
-	    itemsKey = _props$itemsKey === undefined ? 'items' : _props$itemsKey,
+	    _props$itemsKey2 = props.itemsKey,
+	    itemsKey = _props$itemsKey2 === undefined ? 'items' : _props$itemsKey2,
 	    columns = props.columns,
 	    isTemplate = props.isTemplate;
 

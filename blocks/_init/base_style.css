@@ -161,6 +161,25 @@ table.selectPosition {
     table.selectPosition td.disable {
       background-color: #ececec; }
 
+table.SelectPictureSources {
+  width: 100%; }
+  table.SelectPictureSources td {
+    position: relative; }
+    table.SelectPictureSources td > .label {
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      padding: 0.25em;
+      z-index: 10;
+      background-color: #007cba;
+      text-align: center;
+      font-size: 1.2rem;
+      line-height: 10px;
+      font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+      font-weight: 400;
+      color: #fefefe;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+
 ul.selectColor {
   list-style: none; }
   ul.selectColor li {
