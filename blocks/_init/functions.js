@@ -636,7 +636,7 @@ var CP = {
 	},
 
 	selectiveClassesPreset: {
-		isTempate: {
+		isTemplate: {
 			label: 'テンプレート',
 			values: 'isTemplate',
 			sub: [{ input: 'bool', label: 'ループ', key: 'doLoop', sub: [{ label: 'content path', input: 'text', key: 'content_path' }, { label: 'query', input: 'textarea', key: 'query' }, { label: 'プレビューループ数', input: 'range', key: 'loopCount', min: 1, max: 16 }] }]

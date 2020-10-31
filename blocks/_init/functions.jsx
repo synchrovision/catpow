@@ -445,7 +445,7 @@
 	},
 	
 	selectiveClassesPreset:{
-		isTempate:{
+		isTemplate:{
 			label:'テンプレート',
 			values:'isTemplate',
 			sub:[
