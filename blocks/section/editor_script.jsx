@@ -39,7 +39,7 @@ registerBlockType('catpow/section',{
 		headerBackgroundImageAlt:{source:'attribute',selector:'header .background [src]',attribute:'alt'},
 		headerBackgroundImageCode:{source:'text',selector:'header .background'},
 		headerBackgroundImageSources:CP.getPictureSoucesAttributesForDevices(
-			CP.config.section.devices,'header .background picture'
+			CP.config.section.devices,'header .background picture','dummy_bg.jpg'
 		),
 
 		imageMime:{source:'attribute',selector:'.image [src]',attribute:'data-mime'},
@@ -52,7 +52,7 @@ registerBlockType('catpow/section',{
 		backgroundImageSrcset:{source:'attribute',selector:'.wp-block-catpow-section>.background [src]',attribute:'srcset'},
 		backgroundImageCode:{source:'text',selector:'.wp-block-catpow-section>.background'},
 		backgroundImageSources:CP.getPictureSoucesAttributesForDevices(
-			CP.config.section.devices,'.wp-block-catpow-section>.background picture'
+			CP.config.section.devices,'.wp-block-catpow-section>.background picture','dummy_bg.jpg'
 		),
 		
 		iconSrc:{source:'attribute',selector:'.icon [src]',attribute:'src',default:cp.theme_url+'/images/dummy_icon.svg'},
@@ -142,15 +142,7 @@ registerBlockType('catpow/section',{
 						]},
 						{label:'リード',values:'hasRead'},
 						{label:'背景画像',values:'hasBackgroundImage',sub:[
-							{
-								input:'image',label:'PC版背景画像',keys:imageKeys.backgroundImage,
-								cond:(!states.isTemplate || !backgroundImageCode)
-							},
-							{
-								input:'image',label:'SP版背景画像',keys:imageKeys.backgroundImage,
-								ofSP:true,sizes:'480px',
-								cond:(!states.isTemplate || !backgroundImageCode)
-							},
+							{input:'picture',keys:imageKeys.backgroundImage,devices,cond:(!states.isTemplate || !backgroundImageCode)},
 							{label:'薄く',values:'paleBG'}
 						]},
 						{label:'背景色',values:'hasBackgroundColor'},
@@ -186,8 +178,7 @@ registerBlockType('catpow/section',{
 							{input:'image',keys:imageKeys.image}
 						]},
 						{label:'背景画像',values:'hasBackgroundImage',sub:[
-							{input:'image',label:'PC版背景画像',keys:imageKeys.backgroundImage},
-							{input:'image',label:'SP版背景画像',keys:imageKeys.backgroundImage,ofSP:true,sizes:'480px'},
+							{input:'picture',keys:imageKeys.backgroundImage,devices,cond:(!states.isTemplate || !backgroundImageCode)},
 							{label:'薄く',values:'paleBG'}
 						]},
 						{label:'線',values:{no_border:'なし',thin_border:'細',bold_border:'太'}},
