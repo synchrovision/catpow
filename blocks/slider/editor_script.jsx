@@ -1,8 +1,9 @@
 ﻿CP.config.slider={
+	devices:['sp','tb'],
 	imageKeys:{
 		image:{src:"src",alt:"alt",code:'imageCode',items:"items"},
-		slide:{src:"slideSrc",alt:"slideAlt",srscet:"slideSrcset",code:'slideCode',items:"items"},
-		backgroundImage:{src:"backgroundImageSrc",alt:"backgroundImageAlt",srcset:"backgroundImageSrcset",code:'backgroundImageCode',items:"items"}
+		slide:{src:"slideSrc",alt:"slideAlt",srscet:"slideSrcset",code:'slideCode',sources:'slideSources',items:"items"},
+		backgroundImage:{src:"backgroundImageSrc",alt:"backgroundImageAlt",srcset:"backgroundImageSrcset",code:'backgroundImageCode',sources:'backgroundImageSources',items:"items"}
 	},
 	imageSizes:{
 		image:'vga'
@@ -31,10 +32,10 @@ registerBlockType('catpow/slider',{
 	
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
-		const {classes='',controlClasses='',config,items,doLoop,EditMode=false,AltMode=false}=attributes;
+		const {classes='',controlClasses='',config,items,doLoop,EditMode=false,AltMode=false,device}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
-		const {imageKeys,imageSizes}=CP.config.slider;
+		const {devices,imageKeys,imageSizes}=CP.config.slider;
 		
 		var statesClasses=[
 			{label:'アロー',values:'hasArrows'},
@@ -56,6 +57,7 @@ registerBlockType('catpow/slider',{
 			{label:'スクロール操作',values:'scrollable',key:'controlClasses'},
 			{label:'閉じる操作',values:'closable',key:'controlClasses'}
 		];
+		
 		var selectiveClasses=[
 			{
 				label:'タイプ',values:['visual','story','articles','index'],
@@ -111,14 +113,13 @@ registerBlockType('catpow/slider',{
 					visual:[
 						'color',
 						'pattern',
-						{input:'image',label:'PC版背景画像',keys:imageKeys.backgroundImage},
-						{input:'image',label:'SP版背景画像',keys:imageKeys.backgroundImage,ofSP:true,sizes:'480px'}
+						{input:'picture',label:'スライド画像',keys:imageKeys.slide,devices,cond:states.hasSlide},
+						{input:'picture',label:'背景画像',keys:imageKeys.backgroundImage,devices,cond:states.hasBackgroundImage}
 					],
 					story:[
 						'color',
 						'pattern',
-						{input:'image',label:'PC版背景画像',keys:imageKeys.backgroundImage},
-						{input:'image',label:'SP版背景画像',keys:imageKeys.backgroundImage,ofSP:true,sizes:'480px'}
+						{input:'picture',label:'背景画像',keys:imageKeys.backgroundImage,devices,cond:states.hasBackgroundImage}
 					]
 				}
 			},
@@ -184,6 +185,8 @@ registerBlockType('catpow/slider',{
 								attr={attributes}
 								set={setAttributes}
 								keys={imageKeys.slide}
+								devices={devices}
+								device={device}
 								index={index}
 								isTemplate={states.isTemplate}
 							/>
@@ -276,6 +279,7 @@ registerBlockType('catpow/slider',{
 		
 		return (
 			<Fragment>
+				<SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices}/>
 				<SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
@@ -379,7 +383,7 @@ registerBlockType('catpow/slider',{
 		const {classes='',controlClasses='',config,items=[],doLoop}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
-		const {imageKeys,imageSizes}=CP.config.slider;
+		const {devices,imageKeys,imageSizes}=CP.config.slider;
 		
 		var rtn=[];
 		var thumbs=[];
@@ -391,6 +395,7 @@ registerBlockType('catpow/slider',{
 							<ResponsiveImage
 								attr={attributes}
 								keys={imageKeys.slide}
+								devices={devices}
 								index={index}
 								isTemplate={states.isTemplate}
 							/>
