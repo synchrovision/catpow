@@ -1,6 +1,6 @@
 ﻿CP.config.banners={
 	imageKeys:{
-		image:{src:"src",srcset:"srcset",alt:"alt",code:'imageCode',items:"items"}
+		image:{src:"src",alt:"alt",code:'imageCode',items:"items"}
 	}
 };
 
@@ -31,21 +31,10 @@ registerBlockType('catpow/banners',{
 		var selectiveClasses=[
 			{label:'サイズ',values:['small','medium','large']},
 			{label:'タイトル',values:'hasTitle'},
-			{
-				label:'テンプレート',
-				values:'isTemplate',
-				sub:[
-					{input:'bool',label:'ループ',key:'doLoop',sub:[
-						{label:'content path',input:'text',key:'content_path'},
-						{label:'query',input:'textarea',key:'query'},
-						{label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
-					]}
-				]
-			}
+			CP.selectiveClassesPreset.isTemplate
 		];
 		const selectiveItemClasses=[
-			{input:'image',label:'PC版画像',keys:imageKeys.image},
-			{input:'image',label:'SP版画像',keys:imageKeys.image,ofSP:true,sizes:'480px'},
+			{input:'image',label:'画像',keys:imageKeys.image},
 			{input:'text',label:'alt',key:'alt'},
 			{input:'text',label:'target',key:'target'},
 			'event'
@@ -84,7 +73,7 @@ registerBlockType('catpow/banners',{
 							set={setAttributes}
 							keys={imageKeys.image}
 							index={index}
-							size='vga'
+							size='medium-large'
 							isTemplate={states.isTemplate}
 						/>
 					</a>
