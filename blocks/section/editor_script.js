@@ -1,10 +1,11 @@
 CP.config.section = {
+	devices: ['sp', 'tb'],
 	imageKeys: {
 		navIcon: { src: "navIcon" },
 		image: { mime: "imageMime", src: "imageSrc", alt: "imageAlt", srcset: "imageSrcset" },
 		headerImage: { mime: "headerImageMime", src: "headerImageSrc", alt: "headerImageAlt", srcset: "headerImageSrcset" },
-		headerBackgroundImage: { mime: "headerBackgroundImageMime", src: "headerBackgroundImageSrc", alt: "headerBackgroundImageAlt", srcset: "headerBackgroundImageSrcset" },
-		backgroundImage: { src: "backgroundImageSrc", srcset: "backgroundImageSrcset" }
+		headerBackgroundImage: { mime: "headerBackgroundImageMime", src: "headerBackgroundImageSrc", alt: "headerBackgroundImageAlt", srcset: "headerBackgroundImageSrcset", sources: "headerBackgroundImageSources" },
+		backgroundImage: { src: "backgroundImageSrc", srcset: "backgroundImageSrcset", sources: "backgroundImageSources" }
 	},
 	imageSizes: {
 		image: 'medium',
@@ -37,6 +38,7 @@ registerBlockType('catpow/section', {
 		headerBackgroundImageSrcset: { source: 'attribute', selector: 'header .background [src]', attribute: 'srcset' },
 		headerBackgroundImageAlt: { source: 'attribute', selector: 'header .background [src]', attribute: 'alt' },
 		headerBackgroundImageCode: { source: 'text', selector: 'header .background' },
+		headerBackgroundImageSources: CP.getPictureSoucesAttributesForDevices(CP.config.section.devices, 'header .background picture'),
 
 		imageMime: { source: 'attribute', selector: '.image [src]', attribute: 'data-mime' },
 		imageSrc: { source: 'attribute', selector: '.image [src]', attribute: 'src', default: cp.theme_url + '/images/dummy.jpg' },
@@ -47,6 +49,7 @@ registerBlockType('catpow/section', {
 		backgroundImageSrc: { source: 'attribute', selector: '.wp-block-catpow-section>.background [src]', attribute: 'src', default: cp.theme_url + '/images/dummy_bg.jpg' },
 		backgroundImageSrcset: { source: 'attribute', selector: '.wp-block-catpow-section>.background [src]', attribute: 'srcset' },
 		backgroundImageCode: { source: 'text', selector: '.wp-block-catpow-section>.background' },
+		backgroundImageSources: CP.getPictureSoucesAttributesForDevices(CP.config.section.devices, '.wp-block-catpow-section>.background picture'),
 
 		iconSrc: { source: 'attribute', selector: '.icon [src]', attribute: 'src', default: cp.theme_url + '/images/dummy_icon.svg' },
 		iconAlt: { source: 'attribute', selector: '.icon [src]', attribute: 'alt' }
@@ -80,6 +83,7 @@ registerBlockType('catpow/section', {
 
 		var states = CP.wordsToFlags(classes);
 		var _CP$config$section = CP.config.section,
+		    devices = _CP$config$section.devices,
 		    imageKeys = _CP$config$section.imageKeys,
 		    imageSizes = _CP$config$section.imageSizes;
 
@@ -89,7 +93,7 @@ registerBlockType('catpow/section', {
 			filter: 'type',
 			values: ['scene', 'article', 'column'],
 			sub: {
-				scene: ['color', 'pattern', { label: 'プレフィクス', values: 'hasPrefix' }, { label: 'ヘッダ画像', values: 'hasHeaderImage', sub: [{ input: 'image', keys: imageKeys.headerImage, size: imageSizes.headerImage }] }, { label: 'ヘッダ背景画像', values: 'hasHeaderBackgroundImage', sub: [{ input: 'image', label: 'PC版背景画像', keys: imageKeys.headerBackgroundImage }, { input: 'image', label: 'SP版背景画像', keys: imageKeys.headerBackgroundImage, ofSP: true, sizes: '480px' }, { label: '薄く', values: 'paleHeaderBG' }] }, { label: '抜き色文字', values: 'inverseText', sub: [{ label: 'ヘッダ背景色', values: 'hasHeaderBackgroundColor' }] }, { label: 'リード', values: 'hasRead' }, { label: '背景画像', values: 'hasBackgroundImage', sub: [{ input: 'image', label: 'PC版背景画像', keys: imageKeys.backgroundImage }, { input: 'image', label: 'SP版背景画像', keys: imageKeys.backgroundImage, ofSP: true, sizes: '480px' }, { label: '薄く', values: 'paleBG' }] }, { label: '背景色', values: 'hasBackgroundColor' }, { label: 'メニューアイコン', values: 'hasNavIcon', sub: [{ input: 'image', label: 'アイコン', keys: imageKeys.navIcon, size: 'thumbnail' }] }, {
+				scene: ['color', 'pattern', { label: 'プレフィクス', values: 'hasPrefix' }, { label: 'ヘッダ画像', values: 'hasHeaderImage', sub: [{ input: 'image', keys: imageKeys.headerImage, size: imageSizes.headerImage }] }, { label: 'ヘッダ背景画像', values: 'hasHeaderBackgroundImage', sub: [{ input: 'picture', label: '背景画像', keys: imageKeys.headerBackgroundImage, devices: devices }, { label: '薄く', values: 'paleHeaderBG' }] }, { label: '抜き色文字', values: 'inverseText', sub: [{ label: 'ヘッダ背景色', values: 'hasHeaderBackgroundColor' }] }, { label: 'リード', values: 'hasRead' }, { label: '背景画像', values: 'hasBackgroundImage', sub: [{ input: 'picture', label: '背景画像', keys: imageKeys.backgroundImage, devices: devices }, { label: '薄く', values: 'paleBG' }] }, { label: '背景色', values: 'hasBackgroundColor' }, { label: 'メニューアイコン', values: 'hasNavIcon', sub: [{ input: 'image', label: 'アイコン', keys: imageKeys.navIcon, size: 'thumbnail' }] }, {
 					label: 'テンプレート',
 					values: 'isTemplate',
 					sub: [{
@@ -163,11 +167,11 @@ registerBlockType('catpow/section', {
 			null,
 			wp.element.createElement(AlignClassToolbar, { set: setAttributes, attr: attributes })
 		), wp.element.createElement(
-			"section",
+			'section',
 			{ id: id, className: classes },
 			states.hasImage && wp.element.createElement(
-				"div",
-				{ "class": "image" },
+				'div',
+				{ 'class': 'image' },
 				states.isTemplate && imageCode ? wp.element.createElement(DummyImage, { text: imageCode }) : wp.element.createElement(SelectResponsiveImage, {
 					attr: attributes,
 					set: setAttributes,
@@ -176,29 +180,29 @@ registerBlockType('catpow/section', {
 				})
 			),
 			wp.element.createElement(
-				"div",
-				{ "class": "contents" },
+				'div',
+				{ 'class': 'contents' },
 				wp.element.createElement(
-					"header",
+					'header',
 					null,
 					wp.element.createElement(
-						"div",
-						{ "class": "title" },
+						'div',
+						{ 'class': 'title' },
 						states.hasIcon && wp.element.createElement(
-							"div",
-							{ "class": "icon" },
-							wp.element.createElement("img", { src: iconSrc, alt: iconAlt })
+							'div',
+							{ 'class': 'icon' },
+							wp.element.createElement('img', { src: iconSrc, alt: iconAlt })
 						),
 						states.hasPrefix && wp.element.createElement(
-							"div",
-							{ "class": "prefix" },
-							wp.element.createElement(RichText, { tagName: "div", value: prefix, onChange: function onChange(prefix) {
+							'div',
+							{ 'class': 'prefix' },
+							wp.element.createElement(RichText, { tagName: 'div', value: prefix, onChange: function onChange(prefix) {
 									return setAttributes({ prefix: prefix });
 								} })
 						),
 						states.hasHeaderImage && wp.element.createElement(
-							"div",
-							{ "class": "image" },
+							'div',
+							{ 'class': 'image' },
 							states.isTemplate && headerImageCode ? wp.element.createElement(DummyImage, { text: headerImageCode }) : wp.element.createElement(SelectResponsiveImage, {
 								set: setAttributes,
 								attr: attributes,
@@ -206,20 +210,20 @@ registerBlockType('catpow/section', {
 								size: imageSizes.headerImage
 							})
 						),
-						el('h' + level, { className: 'heading' }, wp.element.createElement(RichText, { tagName: "div", value: title, onChange: function onChange(title) {
+						el('h' + level, { className: 'heading' }, wp.element.createElement(RichText, { tagName: 'div', value: title, onChange: function onChange(title) {
 								return setAttributes({ title: title });
 							} })),
 						states.hasRead && wp.element.createElement(
-							"p",
+							'p',
 							null,
-							wp.element.createElement(RichText, { tagName: "div", value: read, onChange: function onChange(read) {
+							wp.element.createElement(RichText, { tagName: 'div', value: read, onChange: function onChange(read) {
 									return setAttributes({ read: read });
 								} })
 						)
 					),
 					states.hasHeaderBackgroundImage && wp.element.createElement(
-						"div",
-						{ "class": "background" },
+						'div',
+						{ 'class': 'background' },
 						states.isTemplate && headerBackgroundImageCode ? wp.element.createElement(DummyImage, { text: headerBackgroundImageCode }) : wp.element.createElement(SelectResponsiveImage, {
 							set: setAttributes,
 							attr: attributes,
@@ -228,14 +232,14 @@ registerBlockType('catpow/section', {
 					)
 				),
 				wp.element.createElement(
-					"div",
-					{ "class": "text" },
+					'div',
+					{ 'class': 'text' },
 					wp.element.createElement(InnerBlocks, null)
 				)
 			),
 			states.hasBackgroundImage && wp.element.createElement(
-				"div",
-				{ "class": "background" },
+				'div',
+				{ 'class': 'background' },
 				states.isTemplate && backgroundImageCode ? wp.element.createElement(DummyImage, { text: backgroundImageCode }) : wp.element.createElement(SelectResponsiveImage, {
 					set: setAttributes,
 					attr: attributes,
@@ -246,8 +250,8 @@ registerBlockType('catpow/section', {
 			InspectorControls,
 			null,
 			wp.element.createElement(SelectClassPanel, {
-				title: "\u30AF\u30E9\u30B9",
-				icon: "art",
+				title: '\u30AF\u30E9\u30B9',
+				icon: 'art',
 				set: setAttributes,
 				attr: attributes,
 				selectiveClasses: selectiveClasses,
@@ -255,9 +259,9 @@ registerBlockType('catpow/section', {
 			}),
 			wp.element.createElement(
 				PanelBody,
-				{ title: "ID", icon: "admin-links", initialOpen: false },
+				{ title: 'ID', icon: 'admin-links', initialOpen: false },
 				wp.element.createElement(TextControl, {
-					label: "ID",
+					label: 'ID',
 					onChange: function onChange(id) {
 						setAttributes({ id: id });
 					},
@@ -266,9 +270,9 @@ registerBlockType('catpow/section', {
 			),
 			wp.element.createElement(
 				PanelBody,
-				{ title: "CLASS", icon: "admin-generic", initialOpen: false },
+				{ title: 'CLASS', icon: 'admin-generic', initialOpen: false },
 				wp.element.createElement(TextareaControl, {
-					label: "\u30AF\u30E9\u30B9",
+					label: '\u30AF\u30E9\u30B9',
 					onChange: function onChange(classes) {
 						return setAttributes({ classes: classes });
 					},
@@ -306,44 +310,45 @@ registerBlockType('catpow/section', {
 
 		var states = CP.wordsToFlags(classes);
 		var _CP$config$section2 = CP.config.section,
+		    devices = _CP$config$section2.devices,
 		    imageKeys = _CP$config$section2.imageKeys,
 		    imageSizes = _CP$config$section2.imageSizes;
 
 
 		return wp.element.createElement(
-			"section",
-			{ id: id, className: classes, "data-icon": navIcon },
+			'section',
+			{ id: id, className: classes, 'data-icon': navIcon },
 			states.hasImage && wp.element.createElement(
-				"div",
-				{ "class": "image" },
+				'div',
+				{ 'class': 'image' },
 				states.isTemplate && imageCode ? imageCode : wp.element.createElement(ResponsiveImage, {
 					attr: attributes,
 					keys: imageKeys.image,
-					size: "medium_large"
+					size: 'medium_large'
 				})
 			),
 			wp.element.createElement(
-				"div",
-				{ "class": "contents" },
+				'div',
+				{ 'class': 'contents' },
 				wp.element.createElement(
-					"header",
+					'header',
 					null,
 					wp.element.createElement(
-						"div",
-						{ "class": "title" },
+						'div',
+						{ 'class': 'title' },
 						states.hasIcon && wp.element.createElement(
-							"div",
-							{ "class": "icon" },
-							wp.element.createElement("img", { src: iconSrc, alt: iconAlt })
+							'div',
+							{ 'class': 'icon' },
+							wp.element.createElement('img', { src: iconSrc, alt: iconAlt })
 						),
 						states.hasPrefix && wp.element.createElement(
-							"div",
-							{ "class": "prefix" },
+							'div',
+							{ 'class': 'prefix' },
 							wp.element.createElement(RichText.Content, { value: prefix })
 						),
 						states.hasHeaderImage && wp.element.createElement(
-							"div",
-							{ "class": "image" },
+							'div',
+							{ 'class': 'image' },
 							states.isTemplate && headerImageCode ? headerImageCode : wp.element.createElement(ResponsiveImage, {
 								attr: attributes,
 								keys: imageKeys.headerImage
@@ -351,32 +356,34 @@ registerBlockType('catpow/section', {
 						),
 						el('h' + level, { className: 'heading' }, title),
 						states.hasRead && wp.element.createElement(
-							"p",
+							'p',
 							null,
 							wp.element.createElement(RichText.Content, { value: read })
 						)
 					),
 					states.hasHeaderBackgroundImage && wp.element.createElement(
-						"div",
-						{ "class": "background" },
+						'div',
+						{ 'class': 'background' },
 						states.isTemplate && headerBackgroundImageCode ? headerBackgroundImageCode : wp.element.createElement(ResponsiveImage, {
 							attr: attributes,
-							keys: imageKeys.headerBackgroundImage
+							keys: imageKeys.headerBackgroundImage,
+							devices: devices
 						})
 					)
 				),
 				wp.element.createElement(
-					"div",
-					{ "class": "text" },
+					'div',
+					{ 'class': 'text' },
 					wp.element.createElement(InnerBlocks.Content, null)
 				)
 			),
 			states.hasBackgroundImage && wp.element.createElement(
-				"div",
-				{ "class": "background" },
+				'div',
+				{ 'class': 'background' },
 				states.isTemplate && backgroundImageCode ? backgroundImageCode : wp.element.createElement(ResponsiveImage, {
 					attr: attributes,
-					keys: imageKeys.backgroundImage
+					keys: imageKeys.backgroundImage,
+					devices: devices
 				})
 			)
 		);
@@ -453,58 +460,58 @@ registerBlockType('catpow/section', {
 			};
 
 			return wp.element.createElement(
-				"section",
-				{ id: id, className: classes, "data-icon": navIcon },
+				'section',
+				{ id: id, className: classes, 'data-icon': navIcon },
 				states.hasImage && wp.element.createElement(
-					"div",
-					{ "class": "image" },
+					'div',
+					{ 'class': 'image' },
 					states.isTemplate && imageCode ? imageCode : wp.element.createElement(ResponsiveImage, {
 						attr: attributes,
 						keys: imageKeys.image,
-						size: "medium_large"
+						size: 'medium_large'
 					})
 				),
 				wp.element.createElement(
-					"div",
-					{ "class": "contents" },
+					'div',
+					{ 'class': 'contents' },
 					wp.element.createElement(
-						"header",
+						'header',
 						null,
 						wp.element.createElement(
-							"div",
-							{ "class": "title" },
+							'div',
+							{ 'class': 'title' },
 							states.hasIcon && wp.element.createElement(
-								"div",
-								{ "class": "icon" },
-								wp.element.createElement("img", { src: iconSrc, alt: iconAlt })
+								'div',
+								{ 'class': 'icon' },
+								wp.element.createElement('img', { src: iconSrc, alt: iconAlt })
 							),
 							states.hasPrefix && wp.element.createElement(
-								"div",
-								{ "class": "prefix" },
+								'div',
+								{ 'class': 'prefix' },
 								wp.element.createElement(RichText.Content, { value: prefix })
 							),
 							states.hasHeaderImage && wp.element.createElement(
-								"div",
-								{ "class": "image" },
+								'div',
+								{ 'class': 'image' },
 								states.isTemplate && headerImageCode ? headerImageCode : wp.element.createElement(ResponsiveImage, {
 									attr: attributes,
 									keys: imageKeys.headerImage
 								})
 							),
 							wp.element.createElement(
-								"h2",
+								'h2',
 								null,
 								title
 							),
 							states.hasRead && wp.element.createElement(
-								"p",
+								'p',
 								null,
 								wp.element.createElement(RichText.Content, { value: read })
 							)
 						),
 						states.hasHeaderBackgroundImage && wp.element.createElement(
-							"div",
-							{ "class": "background" },
+							'div',
+							{ 'class': 'background' },
 							states.isTemplate && headerBackgroundImageCode ? headerBackgroundImageCode : wp.element.createElement(ResponsiveImage, {
 								attr: attributes,
 								keys: imageKeys.headerBackgroundImage
@@ -512,14 +519,14 @@ registerBlockType('catpow/section', {
 						)
 					),
 					wp.element.createElement(
-						"div",
-						{ "class": "text" },
+						'div',
+						{ 'class': 'text' },
 						wp.element.createElement(InnerBlocks.Content, null)
 					)
 				),
 				states.hasBackgroundImage && wp.element.createElement(
-					"div",
-					{ "class": "background" },
+					'div',
+					{ 'class': 'background' },
 					states.isTemplate && backgroundImageCode ? backgroundImageCode : wp.element.createElement(ResponsiveImage, {
 						attr: attributes,
 						keys: imageKeys.backgroundImage

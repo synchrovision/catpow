@@ -1,10 +1,11 @@
 ﻿CP.config.section={
+	devices:['sp','tb'],
 	imageKeys:{
 		navIcon:{src:"navIcon"},
 		image:{mime:"imageMime",src:"imageSrc",alt:"imageAlt",srcset:"imageSrcset"},
 		headerImage:{mime:"headerImageMime",src:"headerImageSrc",alt:"headerImageAlt",srcset:"headerImageSrcset"},
-		headerBackgroundImage:{mime:"headerBackgroundImageMime",src:"headerBackgroundImageSrc",alt:"headerBackgroundImageAlt",srcset:"headerBackgroundImageSrcset"},
-		backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset"}
+		headerBackgroundImage:{mime:"headerBackgroundImageMime",src:"headerBackgroundImageSrc",alt:"headerBackgroundImageAlt",srcset:"headerBackgroundImageSrcset",sources:"headerBackgroundImageSources"},
+		backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset",sources:"backgroundImageSources"}
 	},
 	imageSizes:{
 		image:'medium',
@@ -37,6 +38,9 @@ registerBlockType('catpow/section',{
 		headerBackgroundImageSrcset:{source:'attribute',selector:'header .background [src]',attribute:'srcset'},
 		headerBackgroundImageAlt:{source:'attribute',selector:'header .background [src]',attribute:'alt'},
 		headerBackgroundImageCode:{source:'text',selector:'header .background'},
+		headerBackgroundImageSources:CP.getPictureSoucesAttributesForDevices(
+			CP.config.section.devices,'header .background picture'
+		),
 
 		imageMime:{source:'attribute',selector:'.image [src]',attribute:'data-mime'},
 		imageSrc:{source:'attribute',selector:'.image [src]',attribute:'src',default:cp.theme_url+'/images/dummy.jpg'},
@@ -47,6 +51,9 @@ registerBlockType('catpow/section',{
 		backgroundImageSrc:{source:'attribute',selector:'.wp-block-catpow-section>.background [src]',attribute:'src',default:cp.theme_url+'/images/dummy_bg.jpg'},
 		backgroundImageSrcset:{source:'attribute',selector:'.wp-block-catpow-section>.background [src]',attribute:'srcset'},
 		backgroundImageCode:{source:'text',selector:'.wp-block-catpow-section>.background'},
+		backgroundImageSources:CP.getPictureSoucesAttributesForDevices(
+			CP.config.section.devices,'.wp-block-catpow-section>.background picture'
+		),
 		
 		iconSrc:{source:'attribute',selector:'.icon [src]',attribute:'src',default:cp.theme_url+'/images/dummy_icon.svg'},
 		iconAlt:{source:'attribute',selector:'.icon [src]',attribute:'alt'},
@@ -63,7 +70,7 @@ registerBlockType('catpow/section',{
 		}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
-		const {imageKeys,imageSizes}=CP.config.section;
+		const {devices,imageKeys,imageSizes}=CP.config.section;
 		
 		const selectiveClasses=[
 			{
@@ -83,8 +90,7 @@ registerBlockType('catpow/section',{
 							{input:'image',keys:imageKeys.headerImage,size:imageSizes.headerImage}
 						]},
 						{label:'ヘッダ背景画像',values:'hasHeaderBackgroundImage',sub:[
-							{input:'image',label:'PC版背景画像',keys:imageKeys.headerBackgroundImage},
-							{input:'image',label:'SP版背景画像',keys:imageKeys.headerBackgroundImage,ofSP:true,sizes:'480px'},
+							{input:'picture',label:'背景画像',keys:imageKeys.headerBackgroundImage,devices},
 							{label:'薄く',values:'paleHeaderBG'}
 						]},
 						{label:'抜き色文字',values:'inverseText',sub:[
@@ -92,8 +98,7 @@ registerBlockType('catpow/section',{
 						]},
 						{label:'リード',values:'hasRead'},
 						{label:'背景画像',values:'hasBackgroundImage',sub:[
-							{input:'image',label:'PC版背景画像',keys:imageKeys.backgroundImage},
-							{input:'image',label:'SP版背景画像',keys:imageKeys.backgroundImage,ofSP:true,sizes:'480px'},
+							{input:'picture',label:'背景画像',keys:imageKeys.backgroundImage,devices},
 							{label:'薄く',values:'paleBG'}
 						]},
 						{label:'背景色',values:'hasBackgroundColor'},
@@ -341,7 +346,7 @@ registerBlockType('catpow/section',{
 		var level=CP.getNumberClass({attr:attributes},'level');
 		
 		const states=CP.wordsToFlags(classes);
-		const {imageKeys,imageSizes}=CP.config.section;
+		const {devices,imageKeys,imageSizes}=CP.config.section;
 		
 		return (
 			<section id={id} className={classes} data-icon={navIcon}>
@@ -392,6 +397,7 @@ registerBlockType('catpow/section',{
 									<ResponsiveImage
 										attr={attributes}
 										keys={imageKeys.headerBackgroundImage}
+										devices={devices}
 									/>
 								)}
 							</div>
@@ -407,6 +413,7 @@ registerBlockType('catpow/section',{
 							<ResponsiveImage
 								attr={attributes}
 								keys={imageKeys.backgroundImage}
+								devices={devices}
 							/>
 						)}
 					</div>
