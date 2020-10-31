@@ -621,18 +621,25 @@ var CP = {
 			return CP.devices[device].sizes;
 		}).join(',');
 	},
-	getPictureSoucesAttributesForDevices: function getPictureSoucesAttributesForDevices(devices, selector) {
+	getPictureSoucesAttributes: function getPictureSoucesAttributes(selector) {
 		return {
 			source: 'query',
 			selector: (selector || 'picture') + ' source',
 			query: {
 				srcset: { source: 'attribute', attribute: 'srcset' },
 				device: { source: 'attribute', 'attribute': 'data-device' }
-			},
-			default: devices.map(function (device) {
-				return { srcset: cp.theme_url + '/images/dummy.jpg', device: device };
-			})
+			}
 		};
+	},
+	getPictureSoucesAttributesForDevices: function getPictureSoucesAttributesForDevices(devices, selector, image) {
+		var attr = CP.getPictureSoucesAttributes(selector);
+		attr.default = CP.getPictureSoucesAttributesDefaultValueForDevices(devices, image);
+		return attr;
+	},
+	getPictureSoucesAttributesDefaultValueForDevices: function getPictureSoucesAttributesDefaultValueForDevices(devices, image) {
+		return devices.map(function (device) {
+			return { srcset: cp.theme_url + '/images/' + (image || 'dummy.jpg'), device: device };
+		});
 	},
 
 	selectiveClassesPreset: {
@@ -829,6 +836,7 @@ var ResponsiveImage = function ResponsiveImage(_ref23) {
 	    index = _ref23.index,
 	    sizes = _ref23.sizes,
 	    devices = _ref23.devices,
+	    device = _ref23.device,
 	    isTemplate = _ref23.isTemplate;
 
 	var type = void 0,
@@ -870,6 +878,19 @@ var ResponsiveImage = function ResponsiveImage(_ref23) {
 		});
 	}
 	if (keys.sources && item[keys.sources].length) {
+		if (device) {
+			var source = item[keys.sources].find(function (source) {
+				return source.device === device;
+			});
+			return wp.element.createElement(
+				'picture',
+				{ className: 'selectImage ' + className },
+				wp.element.createElement('img', {
+					src: source.srcset,
+					alt: item[keys.alt]
+				})
+			);
+		}
 		return wp.element.createElement(
 			'picture',
 			{ className: 'selectImage ' + className },

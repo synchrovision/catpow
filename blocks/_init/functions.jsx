@@ -432,16 +432,23 @@
 		return Object.keys(CP.devices).filter((device=>devices.includes(device)))
 			.map((device)=>CP.devices[device].sizes).join(',');
 	},
-	getPictureSoucesAttributesForDevices:(devices,selector)=>{
+	getPictureSoucesAttributes:(selector)=>{
 		return {
 			source:'query',
 			selector:(selector || 'picture')+' source',
 			query:{
 				srcset:{source:'attribute',attribute:'srcset'},
 				device:{source:'attribute','attribute':'data-device'}
-			},
-			default:devices.map((device)=>({srcset:cp.theme_url+'/images/dummy.jpg',device}))
+			}
 		}
+	},
+	getPictureSoucesAttributesForDevices:(devices,selector,image)=>{
+		let attr=CP.getPictureSoucesAttributes(selector);
+		attr.default=CP.getPictureSoucesAttributesDefaultValueForDevices(devices,image);
+		return attr;
+	},
+	getPictureSoucesAttributesDefaultValueForDevices:(devices,image)=>{
+		return devices.map((device)=>({srcset:cp.theme_url+'/images/'+(image || 'dummy.jpg'),device}));
 	},
 	
 	selectiveClassesPreset:{
@@ -610,7 +617,7 @@ const SelectResponsiveImage=({className,attr,set,keys,index,sizes,size,devices,d
 		/>
 	);
 };
-const ResponsiveImage=({className,attr,keys,index,sizes,devices,isTemplate})=>{
+const ResponsiveImage=({className,attr,keys,index,sizes,devices,device,isTemplate})=>{
 	let type,item;
 	if(keys.items){item=attr[keys.items][index];}
 	else{item=attr;}
@@ -647,6 +654,17 @@ const ResponsiveImage=({className,attr,keys,index,sizes,devices,isTemplate})=>{
 		);
 	}
 	if(keys.sources && item[keys.sources].length){
+		if(device){
+			const source=item[keys.sources].find((source)=>source.device===device);
+			return (
+				<picture className={'selectImage '+className}>
+					<img
+						src={source.srcset}
+						alt={item[keys.alt]}
+					/>
+				</picture>
+			);
+		}
 		return (
 			<picture className={'selectImage '+className}>
 				{item[keys.sources].map((source)=>(
