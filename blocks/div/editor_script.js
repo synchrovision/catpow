@@ -1,7 +1,8 @@
 CP.config.div = {
+	devices: ['sp', 'tb'],
 	imageKeys: {
 		iconImage: { src: "iconImageSrc" },
-		backgroundImage: { src: "backgroundImageSrc", srcset: "backgroundImageSrcset" }
+		backgroundImage: { src: "backgroundImageSrc", sources: "backgroundImageSources" }
 	}
 };
 registerBlockType('catpow/div', {
@@ -24,7 +25,7 @@ registerBlockType('catpow/div', {
 		iconImageSrc: { source: 'attribute', selector: '.wp-block-catpow-div>.icon [src]', attribute: 'src', default: cp.theme_url + '/images/dummy_icon.svg' },
 
 		backgroundImageSrc: { source: 'attribute', selector: '.wp-block-catpow-div>.background [src]', attribute: 'src', default: cp.theme_url + '/images/dummy_bg.jpg' },
-		backgroundImageSrcset: { source: 'attribute', selector: '.wp-block-catpow-div>.background [src]', attribute: 'srcset' }
+		backgroundImageSources: CP.getPictureSoucesAttributesForDevices(CP.config.div.devices, '.wp-block-catpow-div>.background picture', 'dummy_bg.jpg')
 	},
 	example: CP.example,
 	edit: function edit(_ref) {
@@ -35,7 +36,9 @@ registerBlockType('catpow/div', {
 
 
 		var states = CP.wordsToFlags(classes);
-		var imageKeys = CP.config.div.imageKeys;
+		var _CP$config$div = CP.config.div,
+		    devices = _CP$config$div.devices,
+		    imageKeys = _CP$config$div.imageKeys;
 
 
 		var selectiveClasses = [{
@@ -46,28 +49,29 @@ registerBlockType('catpow/div', {
 				frame: [{ label: '色', values: 'hasColor', sub: ['color'] }, { label: 'パターン', values: 'hasPattern', sub: ['pattern'] }, { label: 'アイコン', values: 'hasIcon' }, { label: '線', values: { noBorder: 'なし', thinBorder: '細', boldBorder: '太' } }, { label: '角丸', values: 'round' }, { label: '影', values: 'shadow', sub: [{ label: '内側', values: 'inset' }] }],
 				columns: [{ label: '幅', values: { narrow: '狭い', regular: '普通', wide: '広い' } }]
 			}
-		}, { label: '背景画像', values: 'hasBackgroundImage', sub: [{ input: 'image', label: 'PC版背景画像', keys: imageKeys.backgroundImage }, { input: 'image', label: 'SP版背景画像', keys: imageKeys.backgroundImage, ofSP: true, sizes: '480px' }] }, { label: '余白', 'values': { noPad: 'なし', thinPad: '極細', lightPad: '細', mediumPad: '中', boldPad: '太', heavyPad: '極太' } }];
+		}, { label: '背景画像', values: 'hasBackgroundImage', sub: [{ input: 'picture', label: '背景画像', keys: imageKeys.backgroundImage, devices: devices }] }, { label: '余白', 'values': { noPad: 'なし', thinPad: '極細', lightPad: '細', mediumPad: '中', boldPad: '太', heavyPad: '極太' } }];
 
 		return [wp.element.createElement(
-			"div",
+			'div',
 			{ className: classes },
 			states.hasIcon && wp.element.createElement(
-				"div",
-				{ "class": "icon" },
+				'div',
+				{ 'class': 'icon' },
 				wp.element.createElement(SelectResponsiveImage, {
 					set: setAttributes,
 					attr: attributes,
 					keys: imageKeys.iconImage,
-					size: "middle"
+					size: 'middle'
 				})
 			),
 			states.hasBackgroundImage && wp.element.createElement(
-				"div",
-				{ "class": "background" },
+				'div',
+				{ 'class': 'background' },
 				wp.element.createElement(ResponsiveImage, {
 					set: setAttributes,
 					attr: attributes,
-					keys: imageKeys.backgroundImage
+					keys: imageKeys.backgroundImage,
+					devices: devices
 				})
 			),
 			wp.element.createElement(InnerBlocks, null)
@@ -75,8 +79,8 @@ registerBlockType('catpow/div', {
 			InspectorControls,
 			null,
 			wp.element.createElement(SelectClassPanel, {
-				title: "\u30AF\u30E9\u30B9",
-				icon: "art",
+				title: '\u30AF\u30E9\u30B9',
+				icon: 'art',
 				set: setAttributes,
 				attr: attributes,
 				selectiveClasses: selectiveClasses,
@@ -84,9 +88,9 @@ registerBlockType('catpow/div', {
 			}),
 			wp.element.createElement(
 				PanelBody,
-				{ title: "CLASS", icon: "admin-generic", initialOpen: false },
+				{ title: 'CLASS', icon: 'admin-generic', initialOpen: false },
 				wp.element.createElement(TextareaControl, {
-					label: "\u30AF\u30E9\u30B9",
+					label: '\u30AF\u30E9\u30B9',
 					onChange: function onChange(classes) {
 						return setAttributes({ classes: classes });
 					},
@@ -104,26 +108,29 @@ registerBlockType('catpow/div', {
 
 
 		var states = CP.wordsToFlags(classes);
-		var imageKeys = CP.config.div.imageKeys;
+		var _CP$config$div2 = CP.config.div,
+		    devices = _CP$config$div2.devices,
+		    imageKeys = _CP$config$div2.imageKeys;
 
 
 		return wp.element.createElement(
-			"div",
+			'div',
 			{ className: classes },
 			states.hasIcon && wp.element.createElement(
-				"div",
-				{ "class": "icon" },
+				'div',
+				{ 'class': 'icon' },
 				wp.element.createElement(ResponsiveImage, {
 					attr: attributes,
 					keys: imageKeys.iconImage
 				})
 			),
 			states.hasBackgroundImage && wp.element.createElement(
-				"div",
-				{ "class": "background" },
+				'div',
+				{ 'class': 'background' },
 				wp.element.createElement(ResponsiveImage, {
 					attr: attributes,
-					keys: imageKeys.backgroundImage
+					keys: imageKeys.backgroundImage,
+					devices: devices
 				})
 			),
 			wp.element.createElement(InnerBlocks.Content, null)

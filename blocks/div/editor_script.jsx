@@ -1,7 +1,8 @@
 ﻿CP.config.div={
+	devices:['sp','tb'],
 	imageKeys:{
 		iconImage:{src:"iconImageSrc"},
-		backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset"}
+		backgroundImage:{src:"backgroundImageSrc",sources:"backgroundImageSources"}
 	}
 };
 registerBlockType('catpow/div',{
@@ -26,14 +27,14 @@ registerBlockType('catpow/div',{
 		iconImageSrc:{source:'attribute',selector:'.wp-block-catpow-div>.icon [src]',attribute:'src',default:cp.theme_url+'/images/dummy_icon.svg'},
 		
 		backgroundImageSrc:{source:'attribute',selector:'.wp-block-catpow-div>.background [src]',attribute:'src',default:cp.theme_url+'/images/dummy_bg.jpg'},
-		backgroundImageSrcset:{source:'attribute',selector:'.wp-block-catpow-div>.background [src]',attribute:'srcset'},
+		backgroundImageSources:CP.getPictureSoucesAttributesForDevices(CP.config.div.devices,'.wp-block-catpow-div>.background picture','dummy_bg.jpg'),
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
         const {classes}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
-		const {imageKeys}=CP.config.div;
+		const {devices,imageKeys}=CP.config.div;
 		
 		var selectiveClasses=[
 			{
@@ -55,8 +56,7 @@ registerBlockType('catpow/div',{
 				}
 			},
 			{label:'背景画像',values:'hasBackgroundImage',sub:[
-				{input:'image',label:'PC版背景画像',keys:imageKeys.backgroundImage},
-				{input:'image',label:'SP版背景画像',keys:imageKeys.backgroundImage,ofSP:true,sizes:'480px'}
+				{input:'picture',label:'背景画像',keys:imageKeys.backgroundImage,devices}
 			]},
 			{label:'余白','values':{noPad:'なし',thinPad:'極細',lightPad:'細',mediumPad:'中',boldPad:'太',heavyPad:'極太'}}
 		];
@@ -79,6 +79,7 @@ registerBlockType('catpow/div',{
 							set={setAttributes}
 							attr={attributes}
 							keys={imageKeys.backgroundImage}
+							devices={devices}
 						/>
 					</div>
 				}
@@ -109,7 +110,7 @@ registerBlockType('catpow/div',{
         const {classes=''}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
-		const {imageKeys}=CP.config.div;
+		const {devices,imageKeys}=CP.config.div;
 		
 		return (
 			<div className={classes}>
@@ -126,6 +127,7 @@ registerBlockType('catpow/div',{
 						<ResponsiveImage
 							attr={attributes}
 							keys={imageKeys.backgroundImage}
+							devices={devices}
 						/>
 					</div>
 				}
