@@ -165,6 +165,9 @@ table.SelectPictureSources {
   width: 100%; }
   table.SelectPictureSources td {
     position: relative; }
+    table.SelectPictureSources td img.selectImage {
+      width: 100%;
+      height: auto; }
     table.SelectPictureSources td > .label {
       position: absolute;
       right: 0px;
