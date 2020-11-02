@@ -208,7 +208,7 @@ registerBlockType('catpow/section',{
 					]
 				},
 				bind:{
-					scene:['level1'],
+					scene:['level2'],
 					column:['level3']
 				}
 			}
