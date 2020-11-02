@@ -1579,7 +1579,7 @@ var SelectItemClassPanel = function SelectItemClassPanel(props) {
 			props.filters[prm.filter](prm);
 		}
 		if (prm === 'color') {
-			rtn.push(wp.element.createElement(SelectItemColorClass, {
+			rtn.push(wp.element.createElement(SelectColorClass, {
 				label: '\u8272',
 				set: set,
 				attr: attr,
@@ -1835,41 +1835,11 @@ var VerticalAlignClassToolbar = function VerticalAlignClassToolbar(props) {
 };
 var SelectColorClass = function SelectColorClass(props) {
 	var label = props.label,
-	    help = props.help;
-
-
-	var color = CP.getColor(props);
-	var items = Array.from(Array(13), function (v, i) {
-		var classes = 'fillColor' + i;
-		if (color == i) {
-			classes += ' active';
-		}
-		return wp.element.createElement(
-			'li',
-			{ className: classes, onClick: function onClick() {
-					CP.switchColor(props, i);
-				} },
-			' '
-		);
-	});;
-
-	return wp.element.createElement(
-		BaseControl,
-		{ label: label, help: help },
-		wp.element.createElement(
-			'ul',
-			{ 'class': 'selectColor' },
-			items
-		)
-	);
-};
-var SelectItemColorClass = function SelectItemColorClass(props) {
-	var label = props.label,
 	    help = props.help,
 	    itemsKey = props.itemsKey;
 
 
-	var color = CP.getItemColor(props);
+	var color = itemsKey ? CP.getItemColor(props) : CP.getColor(props);
 	var items = Array.from(Array(13), function (v, i) {
 		var classes = 'fillColor' + i;
 		if (color == i) {
@@ -1877,9 +1847,16 @@ var SelectItemColorClass = function SelectItemColorClass(props) {
 		}
 		return wp.element.createElement(
 			'li',
-			{ className: classes, onClick: function onClick() {
-					CP.switchItemColor(props, i, itemsKey);
-				} },
+			{
+				className: classes,
+				onClick: function onClick() {
+					if (itemsKey) {
+						CP.switchItemColor(props, i, itemsKey);
+					} else {
+						CP.switchColor(props, i);
+					}
+				}
+			},
 			' '
 		);
 	});;

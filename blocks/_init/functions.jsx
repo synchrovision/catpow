@@ -1207,7 +1207,7 @@ const SelectItemClassPanel=(props)=>{
 		}
 		if(prm === 'color'){
 			rtn.push(
-				<SelectItemColorClass
+				<SelectColorClass
 					label='色'
 					set={set}
 					attr={attr}
@@ -1433,32 +1433,24 @@ const VerticalAlignClassToolbar=(props)=>{
 	);
 }
 const SelectColorClass=(props)=>{
-	const {label,help}=props;
-	
-	var color=CP.getColor(props);
-	var items=Array.from(Array(13),(v,i)=>{
-		var classes='fillColor'+i;
-		if(color==i){classes+=' active';}
-		return (
-			<li className={classes} onClick={()=>{CP.switchColor(props,i);}}> </li>
-		);
-	});;
-	
-	return (
-		<BaseControl label={label} help={help}>
-			<ul class="selectColor">{items}</ul>
-		</BaseControl>
-	);
-}
-const SelectItemColorClass=(props)=>{
 	const {label,help,itemsKey}=props;
 	
-	var color=CP.getItemColor(props);
+	var color=itemsKey?CP.getItemColor(props):CP.getColor(props);
 	var items=Array.from(Array(13),(v,i)=>{
 		var classes='fillColor'+i;
 		if(color==i){classes+=' active';}
 		return (
-			<li className={classes} onClick={()=>{CP.switchItemColor(props,i,itemsKey);}}> </li>
+			<li
+				className={classes}
+				onClick={()=>{
+					if(itemsKey){
+						CP.switchItemColor(props,i,itemsKey);
+					}
+					else{
+						CP.switchColor(props,i);
+					}
+				}}
+			> </li>
 		);
 	});;
 	
