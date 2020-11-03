@@ -368,7 +368,7 @@ registerBlockType('catpow/graphics',{
 							renderCssDatas(cssDatas)
 						)}
 					</style>
-				</div>,
+				</div>
 				<InspectorControls>
 					<SelectClassPanel
 						title='クラス'

@@ -401,7 +401,6 @@ registerBlockType('catpow/graphics', {
 					device ? CP.createStyleCode(cssDatas[device]) : renderCssDatas(cssDatas)
 				)
 			),
-			',',
 			wp.element.createElement(
 				InspectorControls,
 				null,
