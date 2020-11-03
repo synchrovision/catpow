@@ -76,7 +76,7 @@ registerBlockType('catpow/ranking', {
 
 		var rtn = [];
 		var save = function save() {
-			setAttibutes({ items: JSON.parse(JSON.stringify(items)) });
+			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
 		items.map(function (item, index) {

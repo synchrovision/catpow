@@ -99,7 +99,7 @@
 					selectiveClasses={selectiveClasses}
 					filters={CP.filters.simpletable || {}}
 				/>
-				<SelectItemClassPanel
+				<SelectClassPanel
 					title='行'
 					icon='edit'
 					set={setAttributes}

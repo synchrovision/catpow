@@ -566,6 +566,23 @@ var CP = {
 		});
 		return rtn;
 	},
+	flagsToWords: function flagsToWords(flags) {
+		if (undefined === flags) {
+			return '';
+		}
+		return Object.keys(flags).filter(function (word) {
+			return flags[word];
+		}).join(' ');
+	},
+
+	filterFlags: function filterFlags(flags, callback) {
+		Object.keys(flags).map(function (key) {
+			if (!callback(key)) {
+				delete flags[key];
+			}
+		});
+		return flags;
+	},
 
 	createBlocks: function createBlocks(blocks) {
 		return blocks.map(function (block) {
@@ -650,106 +667,71 @@ var CP = {
 		}
 	}
 };
-var SelectResponsiveImage = function SelectResponsiveImage(_ref18) {
-	var className = _ref18.className,
-	    attr = _ref18.attr,
-	    set = _ref18.set,
-	    keys = _ref18.keys,
-	    index = _ref18.index,
-	    sizes = _ref18.sizes,
-	    size = _ref18.size,
-	    devices = _ref18.devices,
-	    device = _ref18.device,
-	    ofSP = _ref18.ofSP,
-	    isTemplate = _ref18.isTemplate,
-	    otherProps = babelHelpers.objectWithoutProperties(_ref18, ['className', 'attr', 'set', 'keys', 'index', 'sizes', 'size', 'devices', 'device', 'ofSP', 'isTemplate']);
+var SelectResponsiveImage = function SelectResponsiveImage(props) {
+	var className = props.className,
+	    attr = props.attr,
+	    set = props.set,
+	    _props$keys = props.keys,
+	    keys = _props$keys === undefined ? {} : _props$keys,
+	    index = props.index,
+	    size = props.size,
+	    devices = props.devices,
+	    device = props.device,
+	    isTemplate = props.isTemplate,
+	    otherProps = babelHelpers.objectWithoutProperties(props, ['className', 'attr', 'set', 'keys', 'index', 'size', 'devices', 'device', 'isTemplate']);
+	var sizes = props.sizes;
 
 	var type = void 0,
 	    onClick = void 0,
-	    item = void 0;
-	keys = keys || {};
-	if (ofSP) {
-		if (keys.items) {
-			item = attr[keys.items][index];
-			onClick = function onClick(e) {
-				return CP.selectImage({ src: 'src' }, function (_ref19) {
-					var src = _ref19.src;
-
-					var newItems = JSON.parse(JSON.stringify(attr[keys.items]));
-					newItems[index][keys.srcset] = newItems[index][keys.srcset].replace(/[^,]+ 480w,/, src + ' 480w,');
-					set(babelHelpers.defineProperty({}, keys.items, newItems));
-				}, size || 'medium_large');
-			};
+	    item = void 0,
+	    items = void 0;
+	if (keys.items) {
+		items = attr[keys.items];
+		if (keys.subItems) {
+			item = items[index][keys.subItems][subIndex];
 		} else {
-			item = attr;
-			onClick = function onClick(e) {
-				return CP.selectImage({ src: 'src' }, function (_ref20) {
-					var src = _ref20.src;
-
-					set(babelHelpers.defineProperty({}, keys.srcset, item[keys.srcset].replace(/[^,]+ 480w,/, src + ' 480w,')));
-				}, size || 'medium_large');
-			};
+			item = items[index];
 		}
-	} else if (device) {
+	} else {
+		item = attr;
+	}
+	if (device) {
 		var sizeData = CP.devices[device];
-		if (keys.items) {
-			item = attr[keys.items][index];
-			onClick = function onClick(e) {
-				return CP.selectImage({ src: 'src' }, function (_ref21) {
-					var src = _ref21.src;
-
-					var newItems = JSON.parse(JSON.stringify(attr[keys.items]));
-					if (keys.sources) {
-						newItems[index][keys.sources].map(function (source) {
-							if (source.device === device) {
-								source.srcset = src;
-							}
-							return source;
-						});
+		onClick = function onClick(e) {
+			return CP.selectImage({ src: 'src' }, function (data) {
+				if (keys.sources) {
+					item[keys.sources].map(function (source) {
+						if (source.device === device) {
+							source.srcset = src;
+						}
+						return source;
+					});
+					if (items) {
+						set(babelHelpers.defineProperty({}, keys.items, JSON.parse(JSON.stringify(items))));
 					} else {
-						newItems[index][keys.srcset] = newItems[index][keys.srcset].replace(sizeData.reg, src + sizeData.rep);
+						set(babelHelpers.defineProperty({}, keys.sources, JSON.parse(JSON.stringify(item[keys.sources]))));
 					}
-					set(babelHelpers.defineProperty({}, keys.items, newItems));
-				}, sizeData.media_size);
-			};
-		} else {
-			item = attr;
-			onClick = function onClick(e) {
-				return CP.selectImage({ src: 'src' }, function (_ref22) {
-					var src = _ref22.src;
-
-					if (keys.sources) {
-						set(babelHelpers.defineProperty({}, keys.sources, item[keys.sources].map(function (source) {
-							if (source.device === device) {
-								source.srcset = src;
-							}
-							return source;
-						})));
+				} else {
+					if (items) {
+						item[keys.srcset] = item[keys.srcset].replace(sizeData.reg, src + sizeData.rep);
+						set(babelHelpers.defineProperty({}, keys.items, JSON.parse(JSON.stringify(items))));
 					} else {
 						set(babelHelpers.defineProperty({}, keys.srcset, item[keys.srcset].replace(sizeData.reg, src + sizeData.rep)));
 					}
-				}, sizeData.media_size);
-			};
-		}
+				}
+			}, sizeData.media_size);
+		};
 	} else {
-		if (keys.items) {
-			item = attr[keys.items][index];
-			onClick = function onClick(e) {
-				return CP.selectImage(keys, function (data) {
-					var rusult = {};
-					rusult[keys.items] = attr[keys.items].map(function (obj) {
-						return jQuery.extend(true, {}, obj);
-					});
-					rusult[keys.items][index] = jQuery.extend({}, item, data);
-					set(rusult);
-				}, size, devices);
-			};
-		} else {
-			item = attr;
-			onClick = function onClick(e) {
-				return CP.selectImage(keys, set, size, devices);
-			};
-		}
+		onClick = function onClick(e) {
+			return CP.selectImage(keys, function (data) {
+				if (keys.items) {
+					Object.assign(item, data);
+					set(babelHelpers.defineProperty({}, keys.items, JSON.parse(JSON.stringify(items))));
+				} else {
+					set(data);
+				}
+			}, size, devices);
+		};
 	}
 	if (isTemplate && keys.code && item[keys.code]) {
 		return wp.element.createElement(DummyImage, { text: item[keys.code] });
@@ -789,9 +771,10 @@ var SelectResponsiveImage = function SelectResponsiveImage(_ref18) {
 	var src = CP.imageSrcOrDummy(item[keys.src]);
 	if (keys.sources) {
 		if (device) {
+			console.log(item[keys.sources]);
 			var source = item[keys.sources].find(function (source) {
 				return source.device === device;
-			});
+			}) || { srcset: cp.theme_url + '/images/dummy.jpg' };
 			return wp.element.createElement(
 				'picture',
 				babelHelpers.extends({
@@ -829,15 +812,15 @@ var SelectResponsiveImage = function SelectResponsiveImage(_ref18) {
 		onClick: onClick
 	}, otherProps));
 };
-var ResponsiveImage = function ResponsiveImage(_ref23) {
-	var className = _ref23.className,
-	    attr = _ref23.attr,
-	    keys = _ref23.keys,
-	    index = _ref23.index,
-	    sizes = _ref23.sizes,
-	    devices = _ref23.devices,
-	    device = _ref23.device,
-	    isTemplate = _ref23.isTemplate;
+var ResponsiveImage = function ResponsiveImage(_ref18) {
+	var className = _ref18.className,
+	    attr = _ref18.attr,
+	    keys = _ref18.keys,
+	    index = _ref18.index,
+	    sizes = _ref18.sizes,
+	    devices = _ref18.devices,
+	    device = _ref18.device,
+	    isTemplate = _ref18.isTemplate;
 
 	var type = void 0,
 	    item = void 0;
@@ -953,14 +936,14 @@ var SelectPictureSources = function SelectPictureSources(props) {
 	);
 };
 
-var SelectPreparedImage = function SelectPreparedImage(_ref24) {
-	var className = _ref24.className,
-	    attr = _ref24.attr,
-	    set = _ref24.set,
-	    name = _ref24.name,
-	    keys = _ref24.keys,
-	    index = _ref24.index,
-	    otherProps = babelHelpers.objectWithoutProperties(_ref24, ['className', 'attr', 'set', 'name', 'keys', 'index']);
+var SelectPreparedImage = function SelectPreparedImage(_ref19) {
+	var className = _ref19.className,
+	    attr = _ref19.attr,
+	    set = _ref19.set,
+	    name = _ref19.name,
+	    keys = _ref19.keys,
+	    index = _ref19.index,
+	    otherProps = babelHelpers.objectWithoutProperties(_ref19, ['className', 'attr', 'set', 'name', 'keys', 'index']);
 
 	var onClick = void 0;
 
@@ -1179,6 +1162,49 @@ var EditItems = function EditItems(props) {
 };
 
 var SelectClassPanel = function SelectClassPanel(props) {
+	var _props$key = props.key,
+	    key = _props$key === undefined ? 'classes' : _props$key,
+	    items = props.items,
+	    index = props.index,
+	    subItemsKey = props.subItemsKey,
+	    subIndex = props.subIndex,
+	    set = props.set,
+	    attr = props.attr,
+	    triggerClasses = props.triggerClasses;
+	var itemsKey = props.itemsKey,
+	    itemClasses = props.itemClasses;
+
+	var item = void 0;
+	if (items) {
+		itemsKey = itemsKey || 'items';
+		if (subItemsKey) {
+			if (!items[index]) {
+				return false;
+			}
+			item = items[index][subItemsKey][subIndex];
+		} else {
+			item = items[index];
+		}
+
+		if (!item) {
+			return false;
+		}
+	} else {
+		item = attr;
+	}
+	var states = CP.wordsToFlags(item[key]);
+
+	var save = function save(data) {
+		if (items) {
+			Object.assign(item, data);
+			set(babelHelpers.defineProperty({}, itemsKey, JSON.parse(JSON.stringify(items))));
+		} else {
+			set(data);
+		}
+	};
+	var saveClasses = function saveClasses() {
+		save(babelHelpers.defineProperty({}, key, CP.flagsToWords(states)));
+	};
 	var SelectClass = function SelectClass(prm) {
 		if (prm.hasOwnProperty('cond') && !prm.cond) {
 			return false;
@@ -1187,6 +1213,15 @@ var SelectClassPanel = function SelectClassPanel(props) {
 		if (prm.filter && props.filters && props.filters[prm.filter]) {
 			props.filters[prm.filter](prm);
 		}
+		if (prm.keys) {
+			if (items) {
+				prm.keys.items = prm.keys.items || itemsKey;
+				if (subItemsKey) {
+					prm.keys.subItems = prm.keys.subItems || subItemsKey;
+				}
+			}
+		}
+
 		if (prm.json) {
 			if (prm.input) {
 				switch (prm.input) {
@@ -1304,35 +1339,101 @@ var SelectClassPanel = function SelectClassPanel(props) {
 				rtn.push(wp.element.createElement(SelectColorClass, {
 					label: '\u8272',
 					set: props.set,
-					attr: props.attr
+					attr: props.attr,
+					selected: Object.keys(states).find(function (key) {
+						return (/^color\d+/.test(key)
+						);
+					}),
+					onChange: function onChange(color) {
+						CP.filterFlags(states, function (key) {
+							return !/^color\d+/.test(key);
+						});
+						states[color] = true;
+						saveClasses();
+					}
 				}));
 			} else if (prm === 'pattern') {
-				rtn.push(wp.element.createElement(RangeControl, {
+				rtn.push(wp.element.createElement(SelectPatternClass, {
 					label: '\u30D1\u30BF\u30FC\u30F3',
-					onChange: function onChange(clr) {
-						return CP.switchPattern(props, clr);
-					},
-					value: CP.getPattern(props),
-					min: 0,
-					max: 5
+					set: props.set,
+					attr: props.attr,
+					selected: Object.keys(states).find(function (key) {
+						return (/^pattern\d+/.test(key)
+						);
+					}),
+					onChange: function onChange(pattern) {
+						CP.filterFlags(states, function (key) {
+							return !/^pattern\d+/.test(key);
+						});
+						states[pattern] = true;
+						saveClasses();
+					}
 				}));
+			} else if (prm === 'cond') {
+				rtn.push(wp.element.createElement(TextareaControl, {
+					label: '\u8868\u793A\u6761\u4EF6',
+					value: item['cond'],
+					onChange: function onChange(cond) {
+						return save({ cond: cond });
+					}
+				}));
+			} else if (prm === 'event') {
+				if (cp.use_functions.indexOf('ga') > -1) {
+					var _window$Catpow$ga = window.Catpow.ga,
+					    parseEventString = _window$Catpow$ga.parseEventString,
+					    createEventString = _window$Catpow$ga.createEventString;
+
+					var event = parseEventString(item['event']);
+					var params = { event: 'イベント', action: 'アクション', category: 'カテゴリ', label_name: 'ラベル名', label: 'ラベル', value: '値' };
+					rtn.push(wp.element.createElement(
+						BaseControl,
+						{ label: 'Google Analitics Event' },
+						wp.element.createElement(
+							'table',
+							null,
+							Object.keys(params).map(function (key) {
+								return wp.element.createElement(
+									'tr',
+									null,
+									wp.element.createElement(
+										'th',
+										{ width: '80' },
+										params[key]
+									),
+									wp.element.createElement(
+										'td',
+										null,
+										wp.element.createElement(TextControl, {
+											value: event[key],
+											type: key == 'value' ? 'number' : 'text',
+											onChange: function onChange(val) {
+												event[key] = val;
+												save({ event: createEventString(event) });
+											}
+										})
+									)
+								);
+							})
+						)
+					));
+				}
 			} else if (prm.input) {
 				switch (prm.input) {
 					case 'text':
 						rtn.push(wp.element.createElement(TextControl, {
 							label: prm.label,
-							value: props.attr[prm.key],
+							value: item[prm.key],
 							onChange: function onChange(val) {
-								var data = {};data[prm.key] = val;props.set(data);
+								save(babelHelpers.defineProperty({}, prm.key, val));
 							}
 						}));
 						break;
 					case 'textarea':
 						rtn.push(wp.element.createElement(TextareaControl, {
 							label: prm.label,
-							value: props.attr[prm.key],
+							value: item[prm.key],
 							onChange: function onChange(val) {
-								var data = {};data[prm.key] = val;props.set(data);
+								save(babelHelpers.defineProperty({}, prm.key, val));
 							}
 						}));
 						break;
@@ -1342,9 +1443,9 @@ var SelectClassPanel = function SelectClassPanel(props) {
 						}
 						rtn.push(wp.element.createElement(RangeControl, {
 							label: prm.label,
-							value: props.attr[prm.key] / prm.coef,
+							value: item[prm.key] / prm.coef,
 							onChange: function onChange(val) {
-								var data = {};data[prm.key] = val * prm.coef;props.set(data);
+								save(babelHelpers.defineProperty({}, prm.key, val * prm.coef));
 							},
 							min: prm.min,
 							max: prm.max,
@@ -1354,13 +1455,13 @@ var SelectClassPanel = function SelectClassPanel(props) {
 					case 'bool':
 						rtn.push(wp.element.createElement(ToggleControl, {
 							label: prm.label,
-							checked: props.attr[prm.key],
+							checked: item[prm.key],
 							onChange: function onChange(val) {
-								props.set(babelHelpers.defineProperty({}, prm.key, val));
+								save(babelHelpers.defineProperty({}, prm.key, val));
 							}
 						}));
 						if (prm.sub) {
-							if (props.attr[prm.key]) {
+							if (item[prm.key]) {
 								var _sub = [];
 								prm.sub.map(function (prm) {
 									_sub.push(SelectClass(prm));
@@ -1382,12 +1483,12 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							));
 						}
 						rtn.push(wp.element.createElement(SelectResponsiveImage, {
+							index: index,
 							set: props.set,
 							attr: props.attr,
 							keys: prm.keys,
 							size: prm.size,
 							sizes: prm.sizes,
-							ofSP: prm.ofSP,
 							device: prm.device,
 							devices: prm.devices,
 							isTemplate: prm.isTemplate
@@ -1402,6 +1503,7 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							));
 						}
 						rtn.push(wp.element.createElement(SelectPictureSources, {
+							index: index,
 							set: props.set,
 							attr: props.attr,
 							keys: prm.keys,
@@ -1417,7 +1519,9 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							label: prm.label,
 							key: prm.key,
 							help: prm.help,
-							disable: prm.disable
+							disable: prm.disable,
+							itemsKey: itemsKey,
+							index: index
 						}));
 					case 'icon':
 					case 'symbol':
@@ -1432,12 +1536,13 @@ var SelectClassPanel = function SelectClassPanel(props) {
 								prm.label
 							));
 						}
-						rtn.push(wp.element.createElement(SelectPreparedImage, {
+						rtn.push(wp.element.createElement(SelectPreparedImage, babelHelpers.defineProperty({
+							index: index,
 							set: props.set,
 							attr: props.attr,
 							name: prm.input,
 							keys: prm.keys
-						}));
+						}, 'index', index)));
 						break;
 				}
 			} else if (_.isObject(prm.values)) {
@@ -1457,22 +1562,41 @@ var SelectClassPanel = function SelectClassPanel(props) {
 						return { label: prm.values[cls], value: cls };
 					});
 				}
+				var currentClass = _values.find(function (value) {
+					return states[value];
+				});
 
-				var onChangeCB = function onChangeCB(cls) {
-					var prevCls = CP.getSelectiveClass(props, prm.values, prm.key);
-					var sels = [];
-					if (prevCls) {
-						if (subClasses[prevCls]) {
-							sels = sels.concat(subClasses[prevCls]);
+				var onChangeCB = function onChangeCB(newClass) {
+					if (currentClass) {
+						states[currentClass] = false;
+
+						var currentSels = [];
+						if (subClasses[currentClass]) {
+							currentSels = currentSels.concat(subClasses[currentClass]);
 						}
-						if (bindClasses[prevCls]) {
-							sels = sels.concat(bindClasses[prevCls]);
+						if (bindClasses[currentClass]) {
+							currentSels = currentSels.concat(bindClasses[currentClass]);
 						}
-						sels = _.difference(sels, subClasses[cls]);
+
+						var newSels = [];
+						if (subClasses[newClass]) {
+							newSels = newSels.concat(subClasses[newClass]);
+						}
+						if (bindClasses[newClass]) {
+							newSels = newSels.concat(bindClasses[newClass]);
+						}
+						currentSels.map(function (value) {
+							if (!newSels.includes(value)) {
+								states[value] = false;
+							}
+						});
 					}
-					sels = sels.concat(_values);
+					bindClasses[newClass].map(function (value) {
+						states[value] = true;
+					});
+					states[newClass] = true;
 
-					CP.switchSelectiveClass(props, sels, bindClasses[cls].concat([cls]), prm.key);
+					saveClasses();
 				};
 
 				switch (prm.type) {
@@ -1480,7 +1604,7 @@ var SelectClassPanel = function SelectClassPanel(props) {
 						rtn.push(wp.element.createElement(RadioControl, {
 							label: prm.label,
 							onChange: onChangeCB,
-							selected: CP.getSelectiveClass(props, prm.values, prm.key),
+							selected: currentClass,
 							options: _options
 						}));
 						break;
@@ -1488,16 +1612,16 @@ var SelectClassPanel = function SelectClassPanel(props) {
 						rtn.push(wp.element.createElement(SelectControl, {
 							label: prm.label,
 							onChange: onChangeCB,
-							value: CP.getSelectiveClass(props, prm.values, prm.key),
+							value: currentClass,
 							options: _options
 						}));
 				}
 
 				if (prm.sub) {
-					var currentClass = CP.getSelectiveClass(props, prm.values, prm.key);
-					if (currentClass && prm.sub[currentClass]) {
+					var _currentClass = CP.getSelectiveClass(props, prm.values, prm.key);
+					if (_currentClass && prm.sub[_currentClass]) {
 						var _sub2 = [];
-						prm.sub[currentClass].map(function (prm) {
+						prm.sub[_currentClass].map(function (prm) {
 							_sub2.push(SelectClass(prm));
 						});
 						rtn.push(wp.element.createElement(
@@ -1511,12 +1635,13 @@ var SelectClassPanel = function SelectClassPanel(props) {
 				rtn.push(wp.element.createElement(CheckboxControl, {
 					label: prm.label,
 					onChange: function onChange() {
-						CP.toggleClass(props, prm.values, prm.key);
+						states[prm.values] = !states[prm.values];
+						saveClasses();
 					},
-					checked: CP.hasClass(props, prm.values, prm.key)
+					checked: states[prm.values]
 				}));
 				if (prm.sub) {
-					if (CP.hasClass(props, prm.values, prm.key)) {
+					if (states[prm.values]) {
 						var _sub3 = [];
 						prm.sub.map(function (prm) {
 							_sub3.push(SelectClass(prm));
@@ -1532,284 +1657,24 @@ var SelectClassPanel = function SelectClassPanel(props) {
 		}
 		return rtn;
 	};
+	if (triggerClasses && triggerClasses.item) {
+		var blockStates = CP.wordsToFlags(attr.classes);
+		itemClasses = triggerClasses.item[Object.keys(triggerClasses.item).find(function (value) {
+			return blockStates[value];
+		})];
+		if (!itemClasses || Array.isArray(itemClasses) && itemClasses.length === 0) {
+			return false;
+		}
+		return wp.element.createElement(
+			PanelBody,
+			{ title: props.title, initialOpen: props.initialOpen || false, icon: props.icon },
+			itemClasses.map(SelectClass)
+		);
+	}
 	return wp.element.createElement(
 		PanelBody,
 		{ title: props.title, initialOpen: props.initialOpen || false, icon: props.icon },
 		props.selectiveClasses.map(SelectClass)
-	);
-};
-var SelectItemClassPanel = function SelectItemClassPanel(props) {
-	var items = props.items,
-	    index = props.index,
-	    set = props.set,
-	    attr = props.attr,
-	    triggerClasses = props.triggerClasses;
-	var _props$itemsKey = props.itemsKey,
-	    itemsKey = _props$itemsKey === undefined ? 'items' : _props$itemsKey,
-	    itemClasses = props.itemClasses;
-
-
-	if (!items[index]) {
-		return false;
-	}
-
-	if (!items[index].classes) {
-		items[index].classes = 'item';
-	} else if (items[index].classes.search(/\bitem\b/) === -1) {
-		items[index].classes += ' item';
-	}
-	var classes = items[index].classes;
-	if (props.className) {
-		classes += ' ' + props.className;
-	}
-
-	if (triggerClasses && triggerClasses.item) {
-		itemClasses = triggerClasses.item[CP.getSelectiveClass(props, triggerClasses.values)];
-		if (Array.isArray(itemClasses) && itemClasses.length === 0) {
-			itemClasses = false;
-		}
-	}
-
-	var selectItemClass = function selectItemClass(prm) {
-		if (prm.hasOwnProperty('cond') && !prm.cond) {
-			return false;
-		}
-		var rtn = [];
-		if (prm.filter && props.filters && props.filters[prm.filter]) {
-			props.filters[prm.filter](prm);
-		}
-		if (prm === 'color') {
-			rtn.push(wp.element.createElement(SelectColorClass, {
-				label: '\u8272',
-				set: set,
-				attr: attr,
-				items: items,
-				index: index,
-				itemsKey: itemsKey
-			}));
-		} else if (prm === 'pattern') {
-			rtn.push(wp.element.createElement(RangeControl, {
-				label: '\u30D1\u30BF\u30FC\u30F3',
-				onChange: function onChange(clr) {
-					return CP.switchItemPattern(props, clr, itemsKey);
-				},
-				value: CP.getItemPattern(props),
-				min: 0,
-				max: 5
-			}));
-		} else if (prm === 'cond') {
-			rtn.push(wp.element.createElement(TextareaControl, {
-				label: '\u8868\u793A\u6761\u4EF6',
-				value: items[index]['cond'],
-				onChange: function onChange(cond) {
-					items[index]['cond'] = cond;
-					if (itemsKey === undefined) {
-						set({ items: items });
-					} else {
-						set(babelHelpers.defineProperty({}, itemsKey, items));
-					}
-				}
-			}));
-		} else if (prm === 'event') {
-			if (cp.use_functions.indexOf('ga') > -1) {
-				var _window$Catpow$ga = window.Catpow.ga,
-				    parseEventString = _window$Catpow$ga.parseEventString,
-				    createEventString = _window$Catpow$ga.createEventString;
-
-				var eventData = parseEventString(items[index]['event']);
-				var params = { event: 'イベント', action: 'アクション', category: 'カテゴリ', label_name: 'ラベル名', label: 'ラベル', value: '値' };
-				rtn.push(wp.element.createElement(
-					BaseControl,
-					{ label: 'Google Analitics Event' },
-					wp.element.createElement(
-						'table',
-						null,
-						Object.keys(params).map(function (key) {
-							return wp.element.createElement(
-								'tr',
-								null,
-								wp.element.createElement(
-									'th',
-									{ width: '80' },
-									params[key]
-								),
-								wp.element.createElement(
-									'td',
-									null,
-									wp.element.createElement(TextControl, {
-										value: eventData[key],
-										type: key == 'value' ? 'number' : 'text',
-										onChange: function onChange(val) {
-											eventData[key] = val;
-											items[index]['event'] = createEventString(eventData);
-											if (itemsKey === undefined) {
-												set({ items: items });
-											} else {
-												set(babelHelpers.defineProperty({}, itemsKey, items));
-											}
-										}
-									})
-								)
-							);
-						})
-					)
-				));
-			}
-		} else if (prm.input) {
-			switch (prm.input) {
-				case 'text':
-					rtn.push(wp.element.createElement(TextControl, {
-						label: prm.label,
-						value: items[index][prm.key],
-						onChange: function onChange(val) {
-							var newItems = JSON.parse(JSON.stringify(items));
-							newItems[index][prm.key] = val;
-							set(babelHelpers.defineProperty({}, itemsKey, newItems));
-						}
-					}));
-					break;
-				case 'image':
-					prm.keys.items = prm.keys.items || itemsKey;
-					if (prm.label) {
-						rtn.push(wp.element.createElement(
-							'h5',
-							null,
-							prm.label
-						));
-					}
-					rtn.push(wp.element.createElement(SelectResponsiveImage, {
-						set: props.set,
-						attr: props.attr,
-						keys: prm.keys,
-						index: index,
-						size: prm.size,
-						sizes: prm.sizes,
-						ofSP: prm.ofSP,
-						device: prm.device,
-						devices: prm.devices,
-						isTemplate: prm.isTemplate
-					}));
-					break;
-				case 'picture':
-					prm.keys.items = prm.keys.items || itemsKey;
-					if (prm.label) {
-						rtn.push(wp.element.createElement(
-							'h5',
-							null,
-							prm.label
-						));
-					}
-					rtn.push(wp.element.createElement(SelectPictureSources, {
-						set: props.set,
-						attr: props.attr,
-						keys: prm.keys,
-						index: index,
-						sizes: prm.sizes,
-						devices: prm.devices,
-						isTemplate: prm.isTemplate
-					}));
-					break;
-				case 'icon':
-				case 'symbol':
-				case 'pattern':
-					prm.keys = prm.keys || {};
-					prm.keys.items = prm.keys.items || itemsKey;
-					prm.keys.src = prm.keys.src || prm.input + 'Src';
-					prm.keys.alt = prm.keys.alt || prm.input + 'Alt';
-					if (prm.label) {
-						rtn.push(wp.element.createElement(
-							'h5',
-							null,
-							prm.label
-						));
-					}
-					rtn.push(wp.element.createElement(SelectPreparedImage, {
-						set: props.set,
-						attr: props.attr,
-						name: prm.input,
-						keys: prm.keys,
-						index: index
-					}));
-					break;
-			}
-		} else if (_.isObject(prm.values)) {
-			var options = void 0;
-			if (Array.isArray(prm.values)) {
-				options = prm.values.map(function (cls) {
-					return { label: cls, value: cls };
-				});
-			} else {
-				options = Object.keys(prm.values).map(function (cls) {
-					return { label: prm.values[cls], value: cls };
-				});
-			}
-			switch (prm.type) {
-				case 'radio':
-					rtn.push(wp.element.createElement(RadioControl, {
-						label: prm.label,
-						onChange: function onChange(cls) {
-							return CP.switchItemSelectiveClass(props, prm.values, cls, itemsKey);
-						},
-						selected: CP.getItemSelectiveClass(props, prm.values),
-						options: options
-					}));
-					break;
-				default:
-					rtn.push(wp.element.createElement(SelectControl, {
-						label: prm.label,
-						onChange: function onChange(cls) {
-							return CP.switchItemSelectiveClass(props, prm.values, cls, itemsKey);
-						},
-						value: CP.getItemSelectiveClass(props, prm.values),
-						options: options
-					}));
-			}
-			if (prm.sub) {
-				var currentClass = CP.getItemSelectiveClass(props, prm.values);
-				if (currentClass && prm.sub[currentClass]) {
-					var sub = [];
-					prm.sub[currentClass].map(function (prm) {
-						sub.push(selectItemClass(prm));
-					});
-					rtn.push(wp.element.createElement(
-						'div',
-						{ className: 'sub' },
-						sub
-					));
-				}
-			}
-		} else {
-			rtn.push(wp.element.createElement(CheckboxControl, {
-				label: prm.label,
-				onChange: function onChange() {
-					CP.toggleItemClass(props, prm.values, itemsKey);
-				},
-				checked: CP.hasItemClass(props, prm.values)
-			}));
-			if (prm.sub) {
-				if (CP.hasItemClass(props, prm.values)) {
-					var _sub4 = [];
-					prm.sub.map(function (prm) {
-						_sub4.push(selectItemClass(prm));
-					});
-					rtn.push(wp.element.createElement(
-						'div',
-						{ className: 'sub' },
-						_sub4
-					));
-				}
-			}
-		}
-		return rtn;
-	};
-
-	if (!itemClasses) {
-		return false;
-	}
-	return wp.element.createElement(
-		PanelBody,
-		{ title: props.title, initialOpen: props.initialOpen || false, icon: props.icon },
-		itemClasses.map(selectItemClass)
 	);
 };
 
@@ -1836,13 +1701,14 @@ var VerticalAlignClassToolbar = function VerticalAlignClassToolbar(props) {
 var SelectColorClass = function SelectColorClass(props) {
 	var label = props.label,
 	    help = props.help,
-	    itemsKey = props.itemsKey;
+	    selected = props.selected,
+	    onChange = props.onChange;
 
 
-	var color = itemsKey ? CP.getItemColor(props) : CP.getColor(props);
 	var items = Array.from(Array(13), function (v, i) {
 		var classes = 'fillColor' + i;
-		if (color == i) {
+		var value = 'color' + i;
+		if (value == selected) {
 			classes += ' active';
 		}
 		return wp.element.createElement(
@@ -1850,16 +1716,12 @@ var SelectColorClass = function SelectColorClass(props) {
 			{
 				className: classes,
 				onClick: function onClick() {
-					if (itemsKey) {
-						CP.switchItemColor(props, i, itemsKey);
-					} else {
-						CP.switchColor(props, i);
-					}
+					return onChange(value);
 				}
 			},
 			' '
 		);
-	});;
+	});
 
 	return wp.element.createElement(
 		BaseControl,
@@ -1871,16 +1733,52 @@ var SelectColorClass = function SelectColorClass(props) {
 		)
 	);
 };
+var SelectPatternClass = function SelectPatternClass(props) {
+	var label = props.label,
+	    help = props.help,
+	    selected = props.selected,
+	    onChange = props.onChange;
+
+
+	var items = Array.from(Array(6), function (v, i) {
+		var classes = 'bgPattern' + i;
+		var value = 'pattern' + i;
+		if (value == selected) {
+			classes += ' active';
+		}
+		return wp.element.createElement(
+			'li',
+			{
+				className: classes,
+				onClick: function onClick() {
+					return onChange(value);
+				}
+			},
+			' '
+		);
+	});
+
+	return wp.element.createElement(
+		BaseControl,
+		{ label: label, help: help },
+		wp.element.createElement(
+			'ul',
+			{ 'class': 'selectPattern' },
+			items
+		)
+	);
+};
 
 var SelectPositionClass = function SelectPositionClass(props) {
 	var rows = [['topLeft', 'top', 'topRight'], ['left', 'center', 'right'], ['bottomLeft', 'bottom', 'bottomRight']];
 	var values = _.flatten(rows);
-	var value = CP.getSelectiveClass(props, values);
-
 	var label = props.label,
 	    help = props.help,
+	    itemsKey = props.itemsKey,
+	    index = props.index,
 	    disable = props.disable;
 
+	var value = itemsKey ? CP.getItemSelectiveClass(props, values) : CP.getSelectiveClass(props, values);
 
 	return wp.element.createElement(
 		BaseControl,
@@ -1909,7 +1807,11 @@ var SelectPositionClass = function SelectPositionClass(props) {
 								{
 									className: isChecked ? "active" : "",
 									onClick: function onClick() {
-										CP.switchSelectiveClass(props, values, col, props.key);
+										if (itemsKey) {
+											CP.switchItemSelectiveClass(props, values, col, props.key);
+										} else {
+											CP.switchSelectiveClass(props, values, col, props.key);
+										}
 									}
 								},
 								' '
@@ -2034,8 +1936,8 @@ var SelectDeviceToolbar = function SelectDeviceToolbar(props) {
 var EditItemsTable = function EditItemsTable(props) {
 	var set = props.set,
 	    attr = props.attr,
-	    _props$itemsKey2 = props.itemsKey,
-	    itemsKey = _props$itemsKey2 === undefined ? 'items' : _props$itemsKey2,
+	    _props$itemsKey = props.itemsKey,
+	    itemsKey = _props$itemsKey === undefined ? 'items' : _props$itemsKey,
 	    columns = props.columns,
 	    isTemplate = props.isTemplate;
 
@@ -2069,7 +1971,11 @@ var EditItemsTable = function EditItemsTable(props) {
 				var propsForControl = { tag: 'tr', set: set, itemsKey: itemsKey, items: items, index: index };
 				return wp.element.createElement(
 					'tr',
-					null,
+					{
+						onClick: function onClick(e) {
+							set({ currentItemIndex: index });
+						}
+					},
 					columns.map(function (col) {
 						if (!col.cond) {
 							return false;
@@ -2128,8 +2034,8 @@ var EditItemsTable = function EditItemsTable(props) {
 	);
 };
 
-var DummyImage = function DummyImage(_ref25) {
-	var text = _ref25.text;
+var DummyImage = function DummyImage(_ref20) {
+	var text = _ref20.text;
 
 	return wp.element.createElement('img', { src: cp.plugins_url + '/catpow/callee/dummy_image.php?text=' + text });
 };

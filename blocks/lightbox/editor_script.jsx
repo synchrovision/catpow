@@ -1,4 +1,11 @@
-﻿registerBlockType('catpow/lightbox',{
+﻿CP.config.lightbox={
+	imageKeys:{
+		image:{src:"src",alt:"alt",code:"imageCode",items:"items"},
+		headerImage:{src:"headerImageSrc",alt:"headerImageAlt",code:"headerImageCode",items:"items"}
+	}
+};
+
+registerBlockType('catpow/lightbox',{
 	title: '🐾 Lightbox',
 	description:'クリックでポップアップ表示する画像です。',
 	icon: 'editor-ul',
@@ -18,9 +25,7 @@
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {items=[],classes,boxClasses,blockState,loopCount,doLoop,EditMode=false,AltMode=false,OpenMode=false,currentItemIndex=0}=attributes;
-		const primaryClass='wp-block-catpow-lightbox';
-		var classArray=_.uniq((className+' '+classes).split(' '));
-		var classNameArray=className.split(' ');
+		const {imageKeys}=CP.config.lightbox;
 		
 		var states=CP.wordsToFlags(classes);
         
@@ -45,32 +50,27 @@
 				]
 			}
 		];
-		const itemTemplateSelectiveClasses=[
+		const itemSelectiveClasses=[
+			{input:'image',label:'画像',keys:imageKeys.image,cond:states.hasImage,isTemplate:states.isTemplate},
 			{
 				input:'text',
 				label:'画像コード',
 				key:'imageCode',
-				cond:states.hasImage
+				cond:states.hasImage && states.isTemplate
 			},
+			{input:'image',label:'サムネール画像',keys:imageKeys.headerImage,cond:states.hasHeaderImage,isTemplate:states.isTemplate},
 			{
 				input:'text',
-				label:'ヘッダ画像コード',
+				label:'サムネール画像コード',
 				key:'headerImageCode',
-				cond:states.hasHeaderImage
+				cond:states.hasHeaderImage && states.isTemplate
 			}
 		];
 		const save=()=>{
-			setAttibutes({items:JSON.parse(JSON.stringify(items))});
+			setAttributes({items:JSON.parse(JSON.stringify(items))});
 		};
 		
-		let rtn=[];
-		const imageKeys={
-			image:{src:"src",alt:"alt",code:"imageCode",items:"items"},
-			headerImage:{src:"headerImageSrc",alt:"headerImageAlt",code:"headerImageCode",items:"items"}
-		};
-		
-		const AnyMode=AltMode || EditMode || OpenMode;
-		
+		let rtn=[];		
 		
 		items.map((item,index)=>{
 			rtn.push(
@@ -143,37 +143,25 @@
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl
 							label='クラス'
-							onChange={(clss)=>setAttributes({classes:clss})}
-							value={classArray.join(' ')}
+							onChange={(classes)=>setAttributes({classes})}
+							value={classes}
 						/>
 						<TextareaControl
 							label='ボックスクラス'
-							onChange={(clss)=>setAttributes({boxClasses:clss})}
+							onChange={(boxClasses)=>setAttributes({boxClasses})}
 							value={boxClasses}
 						/>
 					</PanelBody>
-					<SelectItemClassPanel
+					<SelectClassPanel
 						title='リストアイテム'
 						icon='edit'
 						set={setAttributes}
 						attr={attributes}
 						items={items}
 						index={attributes.currentItemIndex}
-						triggerClasses={selectiveClasses[0]}
+						selectiveClasses={itemSelectiveClasses}
 						filters={CP.filters.lightbox || {}}
 					/>
-					{states.isTemplate &&
-						<SelectItemClassPanel
-							title='テンプレート'
-							icon='edit'
-							set={setAttributes}
-							attr={attributes}
-							items={items}
-							index={attributes.currentItemIndex}
-							itemClasses={itemTemplateSelectiveClasses}
-							filters={CP.filters.lightbox || {}}
-						/>
-					}
 					<ItemControlInfoPanel/>
 				</InspectorControls>
 				{!OpenMode?(
@@ -289,15 +277,10 @@
     },
 	save({attributes,className}){
 		const {items=[],classes='',boxClasses,blockState,doLoop}=attributes;
-		var classArray=_.uniq(classes.split(' '));
 		
 		var states=CP.wordsToFlags(classes);
 		
-		const imageKeys={
-			image:{src:"src",alt:"alt",code:"imageCode",items:"items"},
-			headerImage:{src:"headerImageSrc",alt:"headerImageAlt",code:"headerImageCode",items:"items"}
-		};
-		
+		const {imageKeys}=CP.config.lightbox;
 		
 		return (
 			<Fragment>

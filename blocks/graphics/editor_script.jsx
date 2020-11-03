@@ -385,14 +385,14 @@ registerBlockType('catpow/graphics',{
 							value={id}
 						/>
 					</PanelBody>
-					<SelectItemClassPanel
+					<SelectClassPanel
 						title='アイテム'
 						icon='edit'
 						set={setAttributes}
 						attr={attributes}
 						items={items}
 						index={attributes.currentItemIndex}
-						itemClasses={selectiveItemClasses}
+						selectiveClasses={selectiveItemClasses}
 						filters={CP.filters.graphics || {}}
 					/>
 					{items[attributes.currentItemIndex] && 

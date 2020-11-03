@@ -125,14 +125,14 @@ registerBlockType('catpow/buttons', {
 					selectiveClasses: selectiveClasses,
 					filters: CP.filters.buttons || {}
 				}),
-				wp.element.createElement(SelectItemClassPanel, {
+				wp.element.createElement(SelectClassPanel, {
 					title: '\u30DC\u30BF\u30F3',
 					icon: 'edit',
 					set: setAttributes,
 					attr: attributes,
 					items: items,
 					index: attributes.currentItemIndex,
-					itemClasses: itemClasses,
+					selectiveClasses: itemClasses,
 					filters: CP.filters.buttons || {}
 				}),
 				wp.element.createElement(

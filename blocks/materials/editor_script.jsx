@@ -1,12 +1,12 @@
-﻿registerBlockType('catpow/pricelist',{
-	title: '🐾 PriceList',
+﻿registerBlockType('catpow/materials',{
+	title: '🐾 Materials',
 	description:'価格表のブロックです。',
 	icon: 'editor-ul',
 	category: 'catpow',
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {items=[],classes,loopParam,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
-		const primaryClass='wp-block-catpow-pricelist';
+		const primaryClass='wp-block-catpow-materials';
 		
 		var states=CP.wordsToFlags(classes);
 		
@@ -112,7 +112,7 @@
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.pricelist || {}}
+						filters={CP.filters.materials || {}}
 					/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl
@@ -129,7 +129,7 @@
 						items={items}
 						index={attributes.currentItemIndex}
 						selectiveClasses={itemSelectiveClasses}
-						filters={CP.filters.pricelist || {}}
+						filters={CP.filters.materials || {}}
 					/>
 					<ItemControlInfoPanel/>
 				</InspectorControls>
@@ -214,60 +214,5 @@
 				{doLoop && <onEmpty><InnerBlocks.Content/></onEmpty>}
 			</Fragment>
 		);
-	},
-	deprecated:[
-		{
-			save({attributes,className}){
-				const {items=[],classes='',loopParam,loopCount}=attributes;
-				var classArray=_.uniq(classes.split(' '));
-
-				var states=CP.wordsToFlags(classes);
-
-				const imageKeys={
-					image:{src:"imageSrc",alt:"imageAlt",items:"items"}
-				};
-
-				let rtn=[];
-				items.map((item,index)=>{
-					const itemStates=CP.wordsToFlags(item.classes);
-					rtn.push(
-						<li className={item.classes}>
-							{itemStates.hasImage &&
-								<div className='image'>
-									<ResponsiveImage
-										attr={attributes}
-										keys={imageKeys.image}
-									/>
-								</div>
-							}
-							<div className='title'><RichText.Content value={item.title}/></div>
-							{!itemStates.isHeading &&
-								<Fragment>
-									<div className="line"></div>
-									<div className='price'><RichText.Content value={item.price}/></div>
-								</Fragment>
-							}
-							{itemStates.hasCaption &&
-								<div className='caption'><RichText.Content value={item.caption}/></div>
-							}
-						</li>
-					);
-				});
-				return (
-					<ul className={classes}>
-						{states.doLoop && '[loop_template '+(loopParam || '')+']'}
-						{rtn}
-						{states.doLoop && '[/loop_template]'}
-					</ul>
-				);
-			},
-			migrate(attributes){
-				var states=CP.wordsToFlags(classes);
-				attributes.content_path=attributes.loopParam.split(' ')[0];
-				attributes.query=attributes.loopParam.split(' ').slice(1).join("\n");
-				attributes.doLoop=states.doLoop;
-				return attributes;
-			}
-		}
-	]
+	}
 });

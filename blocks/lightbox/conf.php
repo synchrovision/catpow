@@ -1,6 +1,6 @@
 <?php
 $attributes=[
-	"classes"=>["source"=>'attribute',"selector"=>'ul',"attribute"=>'class',"default"=>'wp-block-catpow-lightbox medium hasTitle hasImage hasText'],
+	"classes"=>["source"=>'attribute',"selector"=>'ul',"attribute"=>'class',"default"=>'wp-block-catpow-lightbox medium hasTitle hasImage hasText hasHeaderImage'],
 	"boxClasses"=>["source"=>'attribute',"selector"=>'.contents',"attribute"=>'class',"default"=>'contents'],
 	"items"=>[
 		"source"=>'query',

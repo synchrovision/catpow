@@ -59,8 +59,8 @@ registerBlockType('catpow/slider', {
 
 
 		var statesClasses = [{ label: 'アロー', values: 'hasArrows' }, { label: 'ドット', values: 'hasDots' }, { input: 'range', label: '表示スライド', json: 'config', key: 'initialSlide', min: 0, max: items.length - 1 }];
-		var animateClasses = [{ label: 'ループ', values: 'loop', key: 'controlClasses', sub: [{ label: 'アイテムを反復', key: 'controlClasses', values: 'loopItems' }] }, { label: '自動再生', values: 'autoplay', key: 'controlClasses', sub: [{ input: 'range', label: '自動再生間隔（単位:0.1秒）', json: 'config', key: 'interval', coef: 100, min: 0, max: 100 }, { input: 'range', label: '操作停止時間（単位:0.1秒）', json: 'config', key: 'wait', coef: 100, min: 0, max: 100 }, { label: 'ホバーで停止', values: 'stopbyhover', key: 'controlClasses' }] }];
-		var controllerClasses = [{ label: 'フリック操作', values: 'flickable', key: 'controlClasses' }, { label: 'スクロール操作', values: 'scrollable', key: 'controlClasses' }, { label: '閉じる操作', values: 'closable', key: 'controlClasses' }];
+		var animateClasses = [{ label: 'ループ', values: 'loop', sub: [{ label: 'アイテムを反復', values: 'loopItems' }] }, { label: '自動再生', values: 'autoplay', sub: [{ input: 'range', label: '自動再生間隔（単位:0.1秒）', json: 'config', key: 'interval', coef: 100, min: 0, max: 100 }, { input: 'range', label: '操作停止時間（単位:0.1秒）', json: 'config', key: 'wait', coef: 100, min: 0, max: 100 }, { label: 'ホバーで停止', values: 'stopbyhover' }] }];
+		var controllerClasses = [{ label: 'フリック操作', values: 'flickable' }, { label: 'スクロール操作', values: 'scrollable' }, { label: '閉じる操作', values: 'closable' }];
 
 		var selectiveClasses = [{
 			label: 'タイプ', values: ['visual', 'story', 'articles', 'index'],
@@ -86,7 +86,7 @@ registerBlockType('catpow/slider', {
 		}];
 
 		var save = function save() {
-			setAttibutes({ items: JSON.parse(JSON.stringify(items)) });
+			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
 		var rtn = [];
@@ -245,7 +245,6 @@ registerBlockType('catpow/slider', {
 		return wp.element.createElement(
 			Fragment,
 			null,
-			wp.element.createElement(SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices: devices }),
 			wp.element.createElement(SelectModeToolbar, {
 				set: setAttributes,
 				attr: attributes
@@ -270,6 +269,7 @@ registerBlockType('catpow/slider', {
 					filters: CP.filters.slider || {}
 				}),
 				wp.element.createElement(SelectClassPanel, {
+					key: 'controlClasses',
 					title: '\u30A2\u30CB\u30E1\u30FC\u30B7\u30E7\u30F3\u8A2D\u5B9A',
 					icon: 'video-alt3',
 					set: setAttributes,
@@ -278,6 +278,7 @@ registerBlockType('catpow/slider', {
 					filters: CP.filters.slider || {}
 				}),
 				wp.element.createElement(SelectClassPanel, {
+					key: 'controlClasses',
 					title: '\u64CD\u4F5C\u8A2D\u5B9A',
 					icon: 'universal-access',
 					set: setAttributes,
@@ -296,7 +297,7 @@ registerBlockType('catpow/slider', {
 						value: classes
 					})
 				),
-				wp.element.createElement(SelectItemClassPanel, {
+				wp.element.createElement(SelectClassPanel, {
 					title: '\u30B9\u30E9\u30A4\u30C9',
 					icon: 'edit',
 					set: setAttributes,

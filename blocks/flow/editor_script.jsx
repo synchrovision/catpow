@@ -77,7 +77,7 @@ registerBlockType('catpow/flow',{
 		
 		let rtn=[];
 		const save=()=>{
-			setAttibutes({items:JSON.parse(JSON.stringify(items))});
+			setAttributes({items:JSON.parse(JSON.stringify(items))});
 		};
 
 		items.map((item,index)=>{

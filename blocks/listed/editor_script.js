@@ -1,3 +1,12 @@
+CP.config.listed = {
+	imageKeys: {
+		image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
+		headerImage: { src: "headerImageSrc", alt: "headerImageAlt", code: "headerImageCode", items: "items" },
+		subImage: { src: "subImageSrc", alt: "subImageAlt", code: "subImageCode", items: "items" },
+		backgroundImage: { src: "backgroundImageSrc", srcset: "backgroundImageSrcset", code: "backgroundImageCode", items: "items" }
+	}
+};
+
 registerBlockType('catpow/listed', {
 	title: '🐾 Listed',
 	description: '目次やお知らせなどの一覧ブロックです。',
@@ -90,16 +99,12 @@ registerBlockType('catpow/listed', {
 		}];
 
 		var save = function save() {
-			setAttibutes({ items: JSON.parse(JSON.stringify(items)) });
+			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
 		var rtn = [];
-		var imageKeys = {
-			image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
-			headerImage: { src: "headerImageSrc", alt: "headerImageAlt", code: "headerImageCode", items: "items" },
-			subImage: { src: "subImageSrc", alt: "subImageAlt", code: "subImageCode", items: "items" },
-			backgroundImage: { src: "backgroundImageSrc", srcset: "backgroundImageSrcset", code: "backgroundImageCode", items: "items" }
-		};
+		var imageKeys = CP.config.listed.imageKeys;
+
 
 		items.map(function (item, index) {
 			if (!item.controlClasses) {
@@ -108,7 +113,7 @@ registerBlockType('catpow/listed', {
 			rtn.push(wp.element.createElement(
 				Item,
 				{
-					tag: 'li',
+					tag: "li",
 					set: setAttributes,
 					attr: attributes,
 					items: items,
@@ -116,56 +121,56 @@ registerBlockType('catpow/listed', {
 					isSelected: isSelected
 				},
 				states.hasImage && wp.element.createElement(
-					'div',
-					{ 'class': 'image' },
+					"div",
+					{ "class": "image" },
 					wp.element.createElement(SelectResponsiveImage, {
 						attr: attributes,
 						set: setAttributes,
 						keys: imageKeys.image,
 						index: index,
-						size: 'vga',
+						size: "vga",
 						isTemplate: states.isTemplate
 					})
 				),
 				states.hasHeader && wp.element.createElement(
-					'header',
+					"header",
 					null,
 					states.hasCounter && wp.element.createElement(
-						'div',
-						{ className: 'counter' },
+						"div",
+						{ className: "counter" },
 						countPrefix && wp.element.createElement(
-							'span',
-							{ 'class': 'prefix' },
+							"span",
+							{ "class": "prefix" },
 							countPrefix
 						),
 						wp.element.createElement(
-							'span',
-							{ className: 'number' },
+							"span",
+							{ className: "number" },
 							index + 1
 						),
 						countSuffix && wp.element.createElement(
-							'span',
-							{ 'class': 'suffix' },
+							"span",
+							{ "class": "suffix" },
 							countSuffix
 						)
 					),
 					states.hasHeaderImage && wp.element.createElement(
-						'div',
-						{ 'class': 'image' },
+						"div",
+						{ "class": "image" },
 						wp.element.createElement(SelectResponsiveImage, {
 							attr: attributes,
 							set: setAttributes,
 							keys: imageKeys.headerImage,
 							index: index,
-							size: 'thumbnail',
+							size: "thumbnail",
 							isTemplate: states.isTemplate
 						})
 					),
 					wp.element.createElement(
-						'div',
-						{ className: 'text' },
+						"div",
+						{ className: "text" },
 						states.hasTitle && wp.element.createElement(
-							'h3',
+							"h3",
 							null,
 							wp.element.createElement(RichText, {
 								onChange: function onChange(title) {
@@ -175,7 +180,7 @@ registerBlockType('catpow/listed', {
 							})
 						),
 						states.hasTitle && states.hasTitleCaption && wp.element.createElement(
-							'p',
+							"p",
 							null,
 							wp.element.createElement(RichText, {
 								onChange: function onChange(titleCaption) {
@@ -187,52 +192,52 @@ registerBlockType('catpow/listed', {
 					)
 				),
 				(states.hasSubImage || states.hasSubTitle || states.hasText) && wp.element.createElement(
-					'div',
-					{ 'class': 'contents' },
+					"div",
+					{ "class": "contents" },
 					states.hasSubCounter && wp.element.createElement(
-						'div',
-						{ className: 'subcounter' },
+						"div",
+						{ className: "subcounter" },
 						subCountPrefix && wp.element.createElement(
-							'span',
-							{ 'class': 'prefix' },
+							"span",
+							{ "class": "prefix" },
 							subCountPrefix
 						),
 						wp.element.createElement(
-							'span',
-							{ className: 'number' },
+							"span",
+							{ className: "number" },
 							index + 1
 						),
 						subCountSuffix && wp.element.createElement(
-							'span',
-							{ 'class': 'suffix' },
+							"span",
+							{ "class": "suffix" },
 							subCountSuffix
 						)
 					),
 					states.hasSubImage && wp.element.createElement(
-						'div',
-						{ 'class': 'image' },
+						"div",
+						{ "class": "image" },
 						wp.element.createElement(SelectResponsiveImage, {
 							attr: attributes,
 							set: setAttributes,
 							keys: imageKeys.subImage,
 							index: index,
-							size: 'medium',
+							size: "medium",
 							isTemplate: states.isTemplate
 						})
 					),
 					states.hasSubTitle && wp.element.createElement(
-						'h4',
+						"h4",
 						null,
 						wp.element.createElement(RichText, {
 							onChange: function onChange(subTitle) {
 								item.subTitle = subTitle;save();
 							},
 							value: item.subTitle,
-							placeholder: 'SubTitle'
+							placeholder: "SubTitle"
 						})
 					),
 					states.hasText && wp.element.createElement(
-						'p',
+						"p",
 						null,
 						wp.element.createElement(RichText, {
 							onChange: function onChange(text) {
@@ -243,8 +248,8 @@ registerBlockType('catpow/listed', {
 					)
 				),
 				states.hasBackgroundImage && wp.element.createElement(
-					'div',
-					{ className: 'background' },
+					"div",
+					{ className: "background" },
 					wp.element.createElement(SelectResponsiveImage, {
 						attr: attributes,
 						set: setAttributes,
@@ -254,10 +259,10 @@ registerBlockType('catpow/listed', {
 					})
 				),
 				states.hasLink && isSelected && wp.element.createElement(
-					'div',
-					{ className: 'link' },
+					"div",
+					{ className: "link" },
 					wp.element.createElement(
-						'p',
+						"p",
 						{
 							contentEditable: true,
 							onBlur: function onBlur(e) {
@@ -289,8 +294,8 @@ registerBlockType('catpow/listed', {
 				InspectorControls,
 				null,
 				wp.element.createElement(SelectClassPanel, {
-					title: '\u30AF\u30E9\u30B9',
-					icon: 'art',
+					title: "\u30AF\u30E9\u30B9",
+					icon: "art",
 					set: setAttributes,
 					attr: attributes,
 					selectiveClasses: selectiveClasses,
@@ -298,18 +303,18 @@ registerBlockType('catpow/listed', {
 				}),
 				wp.element.createElement(
 					PanelBody,
-					{ title: 'CLASS', icon: 'admin-generic', initialOpen: false },
+					{ title: "CLASS", icon: "admin-generic", initialOpen: false },
 					wp.element.createElement(TextareaControl, {
-						label: '\u30AF\u30E9\u30B9',
+						label: "\u30AF\u30E9\u30B9",
 						onChange: function onChange(clss) {
 							return setAttributes({ classes: clss });
 						},
 						value: classArray.join(' ')
 					})
 				),
-				wp.element.createElement(SelectItemClassPanel, {
-					title: '\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0',
-					icon: 'edit',
+				wp.element.createElement(SelectClassPanel, {
+					title: "\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0",
+					icon: "edit",
 					set: setAttributes,
 					attr: attributes,
 					items: items,
@@ -317,25 +322,25 @@ registerBlockType('catpow/listed', {
 					triggerClasses: selectiveClasses[0],
 					filters: CP.filters.listed || {}
 				}),
-				states.isTemplate && wp.element.createElement(SelectItemClassPanel, {
-					title: '\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8',
-					icon: 'edit',
+				states.isTemplate && wp.element.createElement(SelectClassPanel, {
+					title: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
+					icon: "edit",
 					set: setAttributes,
 					attr: attributes,
 					items: items,
 					index: attributes.currentItemIndex,
-					itemClasses: itemTemplateSelectiveClasses,
+					selectiveClasses: itemTemplateSelectiveClasses,
 					filters: CP.filters.listed || {}
 				}),
 				wp.element.createElement(ItemControlInfoPanel, null)
 			),
 			EditMode ? wp.element.createElement(
-				'div',
-				{ className: 'alt_content' },
+				"div",
+				{ className: "alt_content" },
 				wp.element.createElement(
-					'div',
-					{ 'class': 'label' },
-					wp.element.createElement(Icon, { icon: 'edit' })
+					"div",
+					{ "class": "label" },
+					wp.element.createElement(Icon, { icon: "edit" })
 				),
 				wp.element.createElement(EditItemsTable, {
 					set: setAttributes,
@@ -347,16 +352,16 @@ registerBlockType('catpow/listed', {
 				Fragment,
 				null,
 				AltMode && doLoop ? wp.element.createElement(
-					'div',
-					{ className: 'alt_content' },
+					"div",
+					{ className: "alt_content" },
 					wp.element.createElement(
-						'div',
-						{ 'class': 'label' },
-						wp.element.createElement(Icon, { icon: 'welcome-comments' })
+						"div",
+						{ "class": "label" },
+						wp.element.createElement(Icon, { icon: "welcome-comments" })
 					),
 					wp.element.createElement(InnerBlocks, null)
 				) : wp.element.createElement(
-					'ul',
+					"ul",
 					{ className: classes },
 					rtn
 				)
@@ -379,25 +384,18 @@ registerBlockType('catpow/listed', {
 		    loopParam = attributes.loopParam,
 		    doLoop = attributes.doLoop;
 
-		var classArray = _.uniq(classes.split(' '));
-
 		var states = CP.wordsToFlags(classes);
+		var imageKeys = CP.config.listed.imageKeys;
 
-		var imageKeys = {
-			image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
-			headerImage: { src: "headerImageSrc", alt: "headerImageAlt", code: "headerImageCode", items: "items" },
-			subImage: { src: "subImageSrc", alt: "subImageAlt", code: "subImageCode", items: "items" },
-			backgroundImage: { src: "backgroundImageSrc", srcset: "backgroundImageSrcset", code: "backgroundImageCode", items: "items" }
-		};
 
 		var rtn = [];
 		items.map(function (item, index) {
 			rtn.push(wp.element.createElement(
-				'li',
+				"li",
 				{ className: item.classes },
 				states.hasImage && wp.element.createElement(
-					'div',
-					{ className: 'image' },
+					"div",
+					{ className: "image" },
 					wp.element.createElement(ResponsiveImage, {
 						attr: attributes,
 						keys: imageKeys.image,
@@ -406,30 +404,30 @@ registerBlockType('catpow/listed', {
 					})
 				),
 				states.hasHeader && wp.element.createElement(
-					'header',
+					"header",
 					null,
 					states.hasCounter && wp.element.createElement(
-						'div',
-						{ className: 'counter' },
+						"div",
+						{ className: "counter" },
 						countPrefix && wp.element.createElement(
-							'span',
-							{ 'class': 'prefix' },
+							"span",
+							{ "class": "prefix" },
 							countPrefix
 						),
 						wp.element.createElement(
-							'span',
-							{ className: 'number' },
+							"span",
+							{ className: "number" },
 							index + 1
 						),
 						countSuffix && wp.element.createElement(
-							'span',
-							{ 'class': 'suffix' },
+							"span",
+							{ "class": "suffix" },
 							countSuffix
 						)
 					),
 					states.hasHeaderImage && wp.element.createElement(
-						'div',
-						{ className: 'image' },
+						"div",
+						{ className: "image" },
 						wp.element.createElement(ResponsiveImage, {
 							attr: attributes,
 							keys: imageKeys.headerImage,
@@ -438,45 +436,45 @@ registerBlockType('catpow/listed', {
 						})
 					),
 					wp.element.createElement(
-						'div',
-						{ className: 'text' },
+						"div",
+						{ className: "text" },
 						states.hasTitle && wp.element.createElement(
-							'h3',
+							"h3",
 							null,
 							wp.element.createElement(RichText.Content, { value: item.title })
 						),
 						states.hasTitle && states.hasTitleCaption && wp.element.createElement(
-							'p',
+							"p",
 							null,
 							wp.element.createElement(RichText.Content, { value: item.titleCaption })
 						)
 					)
 				),
 				(states.hasSubImage || states.hasSubTitle || states.hasText) && wp.element.createElement(
-					'div',
-					{ 'class': 'contents' },
+					"div",
+					{ "class": "contents" },
 					states.hasSubCounter && wp.element.createElement(
-						'div',
-						{ className: 'subcounter' },
+						"div",
+						{ className: "subcounter" },
 						subCountPrefix && wp.element.createElement(
-							'span',
-							{ 'class': 'prefix' },
+							"span",
+							{ "class": "prefix" },
 							subCountPrefix
 						),
 						wp.element.createElement(
-							'span',
-							{ className: 'number' },
+							"span",
+							{ className: "number" },
 							index + 1
 						),
 						subCountSuffix && wp.element.createElement(
-							'span',
-							{ 'class': 'suffix' },
+							"span",
+							{ "class": "suffix" },
 							subCountSuffix
 						)
 					),
 					states.hasSubImage && wp.element.createElement(
-						'div',
-						{ className: 'image' },
+						"div",
+						{ className: "image" },
 						wp.element.createElement(ResponsiveImage, {
 							attr: attributes,
 							keys: imageKeys.subImage,
@@ -485,19 +483,19 @@ registerBlockType('catpow/listed', {
 						})
 					),
 					states.hasSubTitle && wp.element.createElement(
-						'h4',
+						"h4",
 						null,
 						wp.element.createElement(RichText.Content, { value: item.subTitle })
 					),
 					states.hasText && wp.element.createElement(
-						'p',
+						"p",
 						null,
 						wp.element.createElement(RichText.Content, { value: item.text })
 					)
 				),
 				states.hasBackgroundImage && wp.element.createElement(
-					'div',
-					{ className: 'background' },
+					"div",
+					{ className: "background" },
 					wp.element.createElement(ResponsiveImage, {
 						attr: attributes,
 						keys: imageKeys.backgroundImage,
@@ -506,12 +504,12 @@ registerBlockType('catpow/listed', {
 					})
 				),
 				states.hasLink && item.linkUrl && wp.element.createElement(
-					'div',
-					{ className: 'link' },
+					"div",
+					{ className: "link" },
 					wp.element.createElement(
-						'a',
+						"a",
 						{ href: item.linkUrl },
-						' '
+						" "
 					)
 				)
 			));
@@ -520,12 +518,12 @@ registerBlockType('catpow/listed', {
 			Fragment,
 			null,
 			wp.element.createElement(
-				'ul',
+				"ul",
 				{ className: classes },
 				rtn
 			),
 			doLoop && wp.element.createElement(
-				'onEmpty',
+				"onEmpty",
 				null,
 				wp.element.createElement(InnerBlocks.Content, null)
 			)
@@ -562,11 +560,11 @@ registerBlockType('catpow/listed', {
 			var rtn = [];
 			items.map(function (item, index) {
 				rtn.push(wp.element.createElement(
-					'li',
+					"li",
 					{ className: item.classes },
 					states.hasImage && wp.element.createElement(
-						'div',
-						{ className: 'image' },
+						"div",
+						{ className: "image" },
 						wp.element.createElement(ResponsiveImage, {
 							attr: attributes,
 							keys: imageKeys.image,
@@ -575,30 +573,30 @@ registerBlockType('catpow/listed', {
 						})
 					),
 					states.hasHeader && wp.element.createElement(
-						'header',
+						"header",
 						null,
 						states.hasCounter && wp.element.createElement(
-							'div',
-							{ className: 'counter' },
+							"div",
+							{ className: "counter" },
 							countPrefix && wp.element.createElement(
-								'span',
-								{ 'class': 'prefix' },
+								"span",
+								{ "class": "prefix" },
 								countPrefix
 							),
 							wp.element.createElement(
-								'span',
-								{ className: 'number' },
+								"span",
+								{ className: "number" },
 								index + 1
 							),
 							countSuffix && wp.element.createElement(
-								'span',
-								{ 'class': 'suffix' },
+								"span",
+								{ "class": "suffix" },
 								countSuffix
 							)
 						),
 						states.hasHeaderImage && wp.element.createElement(
-							'div',
-							{ className: 'image' },
+							"div",
+							{ className: "image" },
 							wp.element.createElement(ResponsiveImage, {
 								attr: attributes,
 								keys: imageKeys.headerImage,
@@ -607,45 +605,45 @@ registerBlockType('catpow/listed', {
 							})
 						),
 						wp.element.createElement(
-							'div',
-							{ className: 'text' },
+							"div",
+							{ className: "text" },
 							states.hasTitle && wp.element.createElement(
-								'h3',
+								"h3",
 								null,
 								wp.element.createElement(RichText.Content, { value: item.title })
 							),
 							states.hasTitle && states.hasTitleCaption && wp.element.createElement(
-								'p',
+								"p",
 								null,
 								wp.element.createElement(RichText.Content, { value: item.titleCaption })
 							)
 						)
 					),
 					(states.hasSubImage || states.hasSubTitle || states.hasText) && wp.element.createElement(
-						'div',
-						{ 'class': 'contents' },
+						"div",
+						{ "class": "contents" },
 						states.hasSubCounter && wp.element.createElement(
-							'div',
-							{ className: 'subcounter' },
+							"div",
+							{ className: "subcounter" },
 							subCountPrefix && wp.element.createElement(
-								'span',
-								{ 'class': 'prefix' },
+								"span",
+								{ "class": "prefix" },
 								subCountPrefix
 							),
 							wp.element.createElement(
-								'span',
-								{ className: 'number' },
+								"span",
+								{ className: "number" },
 								index + 1
 							),
 							subCountSuffix && wp.element.createElement(
-								'span',
-								{ 'class': 'suffix' },
+								"span",
+								{ "class": "suffix" },
 								subCountSuffix
 							)
 						),
 						states.hasSubImage && wp.element.createElement(
-							'div',
-							{ className: 'image' },
+							"div",
+							{ className: "image" },
 							wp.element.createElement(ResponsiveImage, {
 								attr: attributes,
 								keys: imageKeys.subImage,
@@ -654,19 +652,19 @@ registerBlockType('catpow/listed', {
 							})
 						),
 						states.hasSubTitle && wp.element.createElement(
-							'h4',
+							"h4",
 							null,
 							wp.element.createElement(RichText.Content, { value: item.subTitle })
 						),
 						states.hasText && wp.element.createElement(
-							'p',
+							"p",
 							null,
 							wp.element.createElement(RichText.Content, { value: item.text })
 						)
 					),
 					states.hasBackgroundImage && wp.element.createElement(
-						'div',
-						{ className: 'background' },
+						"div",
+						{ className: "background" },
 						wp.element.createElement(ResponsiveImage, {
 							attr: attributes,
 							keys: imageKeys.backgroundImage,
@@ -675,18 +673,18 @@ registerBlockType('catpow/listed', {
 						})
 					),
 					states.hasLink && item.linkUrl && wp.element.createElement(
-						'div',
-						{ className: 'link' },
+						"div",
+						{ className: "link" },
 						wp.element.createElement(
-							'a',
+							"a",
 							{ href: item.linkUrl },
-							' '
+							" "
 						)
 					)
 				));
 			});
 			return wp.element.createElement(
-				'ul',
+				"ul",
 				{ className: classes },
 				states.doLoop && '[loop_template ' + (loopParam || '') + ']',
 				rtn,

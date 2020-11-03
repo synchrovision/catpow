@@ -424,14 +424,14 @@ registerBlockType('catpow/graphics', {
 						value: id
 					})
 				),
-				wp.element.createElement(SelectItemClassPanel, {
+				wp.element.createElement(SelectClassPanel, {
 					title: '\u30A2\u30A4\u30C6\u30E0',
 					icon: 'edit',
 					set: setAttributes,
 					attr: attributes,
 					items: items,
 					index: attributes.currentItemIndex,
-					itemClasses: selectiveItemClasses,
+					selectiveClasses: selectiveItemClasses,
 					filters: CP.filters.graphics || {}
 				}),
 				items[attributes.currentItemIndex] && wp.element.createElement(

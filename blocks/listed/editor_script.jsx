@@ -1,4 +1,13 @@
-﻿registerBlockType('catpow/listed',{
+﻿CP.config.listed={
+	imageKeys:{
+		image:{src:"src",alt:"alt",code:"imageCode",items:"items"},
+		headerImage:{src:"headerImageSrc",alt:"headerImageAlt",code:"headerImageCode",items:"items"},
+		subImage:{src:"subImageSrc",alt:"subImageAlt",code:"subImageCode",items:"items"},
+		backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset",code:"backgroundImageCode",items:"items"},
+	}
+};
+
+registerBlockType('catpow/listed',{
 	title: '🐾 Listed',
 	description:'目次やお知らせなどの一覧ブロックです。',
 	icon: 'editor-ul',
@@ -110,16 +119,11 @@
 		];
 		
 		const save=()=>{
-			setAttibutes({items:JSON.parse(JSON.stringify(items))});
+			setAttributes({items:JSON.parse(JSON.stringify(items))});
 		};
 		
 		let rtn=[];
-		const imageKeys={
-			image:{src:"src",alt:"alt",code:"imageCode",items:"items"},
-			headerImage:{src:"headerImageSrc",alt:"headerImageAlt",code:"headerImageCode",items:"items"},
-			subImage:{src:"subImageSrc",alt:"subImageAlt",code:"subImageCode",items:"items"},
-			backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset",code:"backgroundImageCode",items:"items"},
-		};
+		const {imageKeys}=CP.config.listed;
 
 		items.map((item,index)=>{
 			if(!item.controlClasses){item.controlClasses='control';}
@@ -280,7 +284,7 @@
 							value={classArray.join(' ')}
 						/>
 					</PanelBody>
-					<SelectItemClassPanel
+					<SelectClassPanel
 						title='リストアイテム'
 						icon='edit'
 						set={setAttributes}
@@ -291,14 +295,14 @@
 						filters={CP.filters.listed || {}}
 					/>
 					{states.isTemplate &&
-						<SelectItemClassPanel
+						<SelectClassPanel
 							title='テンプレート'
 							icon='edit'
 							set={setAttributes}
 							attr={attributes}
 							items={items}
 							index={attributes.currentItemIndex}
-							itemClasses={itemTemplateSelectiveClasses}
+							selectiveClasses={itemTemplateSelectiveClasses}
 							filters={CP.filters.listed || {}}
 						/>
 					}
@@ -349,17 +353,8 @@
     },
 	save({attributes,className}){
 		const {items=[],classes='',countPrefix,countSuffix,subCountPrefix,subCountSuffix,linkUrl,linkText,loopParam,doLoop}=attributes;
-		var classArray=_.uniq(classes.split(' '));
-		
-		var states=CP.wordsToFlags(classes);
-		
-		
-		const imageKeys={
-			image:{src:"src",alt:"alt",code:"imageCode",items:"items"},
-			headerImage:{src:"headerImageSrc",alt:"headerImageAlt",code:"headerImageCode",items:"items"},
-			subImage:{src:"subImageSrc",alt:"subImageAlt",code:"subImageCode",items:"items"},
-			backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset",code:"backgroundImageCode",items:"items"},
-		};
+		const states=CP.wordsToFlags(classes);
+		const {imageKeys}=CP.config.listed;
 		
 		let rtn=[];
 		items.map((item,index)=>{

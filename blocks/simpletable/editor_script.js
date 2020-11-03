@@ -82,7 +82,7 @@ registerBlockType('catpow/simpletable', {
 				selectiveClasses: selectiveClasses,
 				filters: CP.filters.simpletable || {}
 			}),
-			wp.element.createElement(SelectItemClassPanel, {
+			wp.element.createElement(SelectClassPanel, {
 				title: '\u884C',
 				icon: 'edit',
 				set: setAttributes,

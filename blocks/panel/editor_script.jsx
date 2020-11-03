@@ -216,7 +216,7 @@
 					attr={attributes}
 					selectiveClasses={selectiveClasses}
 				/>
-				<SelectItemClassPanel
+				<SelectClassPanel
 					title='パネル'
 					icon='edit'
 					set={setAttributes}

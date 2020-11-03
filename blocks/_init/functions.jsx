@@ -382,6 +382,17 @@
 		words.split(' ').map((word)=>{rtn[word]=true;});
 		return rtn;
 	},
+	flagsToWords:(flags)=>{
+		if(undefined === flags){return '';}
+		return Object.keys(flags).filter((word)=>flags[word]).join(' ');
+	},
+	
+	filterFlags:(flags,callback)=>{
+		Object.keys(flags).map((key)=>{
+			if(!callback(key)){delete(flags[key]);}
+		});
+		return flags;
+	},
 	
 	createBlocks:(blocks)=>{
 		return blocks.map((block)=>{
@@ -465,72 +476,58 @@
 		}
 	}
 };
-const SelectResponsiveImage=({className,attr,set,keys,index,sizes,size,devices,device,ofSP,isTemplate,...otherProps})=>{
-	let type,onClick,item;
-	keys=keys || {};
-	if(ofSP){
-		if(keys.items){
-			item=attr[keys.items][index];
-			onClick=(e)=>CP.selectImage({src:'src'},function({src}){
-				var newItems=JSON.parse(JSON.stringify(attr[keys.items]));
-				newItems[index][keys.srcset]=newItems[index][keys.srcset].replace(/[^,]+ 480w,/,src+' 480w,');
-				set({[keys.items]:newItems});
-			},size || 'medium_large');
+const SelectResponsiveImage=(props)=>{
+	const {className,attr,set,keys={},index,size,devices,device,isTemplate,...otherProps}=props;
+	let {sizes}=props;
+	let type,onClick,item,items;
+	if(keys.items){
+		items=attr[keys.items];
+		if(keys.subItems){
+			item=items[index][keys.subItems][subIndex];
 		}
 		else{
-			item=attr;
-			onClick=(e)=>CP.selectImage({src:'src'},function({src}){
-				set({[keys.srcset]:item[keys.srcset].replace(/[^,]+ 480w,/,src+' 480w,')});
-			},size || 'medium_large');
+			item=items[index];
 		}
 	}
-	else if(device){
+	else{
+		item=attr;
+	}
+	if(device){
 		const sizeData=CP.devices[device];
-		if(keys.items){
-			item=attr[keys.items][index];
-			onClick=(e)=>CP.selectImage({src:'src'},function({src}){
-				var newItems=JSON.parse(JSON.stringify(attr[keys.items]));
-				if(keys.sources){
-					newItems[index][keys.sources].map((source)=>{
-						if(source.device===device){source.srcset=src;}
-						return source;
-					});
+		onClick=(e)=>CP.selectImage({src:'src'},function(data){
+			if(keys.sources){
+				item[keys.sources].map((source)=>{
+					if(source.device===device){source.srcset=src;}
+					return source;
+				});
+				if(items){
+					set({[keys.items]:JSON.parse(JSON.stringify(items))});
 				}
 				else{
-					newItems[index][keys.srcset]=newItems[index][keys.srcset].replace(sizeData.reg,src+sizeData.rep);
+					set({[keys.sources]:JSON.parse(JSON.stringify(item[keys.sources]))});
 				}
-				set({[keys.items]:newItems});
-			},sizeData.media_size);
-		}
-		else{
-			item=attr;
-			onClick=(e)=>CP.selectImage({src:'src'},function({src}){
-				if(keys.sources){
-					set({[keys.sources]:item[keys.sources].map((source)=>{
-						if(source.device===device){source.srcset=src;}
-						return source;
-					})});
+			}
+			else{
+				if(items){
+					item[keys.srcset]=item[keys.srcset].replace(sizeData.reg,src+sizeData.rep);
+					set({[keys.items]:JSON.parse(JSON.stringify(items))});
 				}
 				else{
 					set({[keys.srcset]:item[keys.srcset].replace(sizeData.reg,src+sizeData.rep)});
 				}
-			},sizeData.media_size);
-		}
+			}
+		},sizeData.media_size);
 	}
 	else{
-		if(keys.items){
-			item=attr[keys.items][index];
-			onClick=(e)=>CP.selectImage(keys,function(data){
-				let rusult={};
-				rusult[keys.items]=attr[keys.items].map((obj)=>jQuery.extend(true,{},obj));
-				rusult[keys.items][index]=jQuery.extend({},item,data);
-				set(rusult);
-			},size,devices);
-		}
-		else{
-			item=attr;
-			onClick=(e)=>CP.selectImage(keys,set,size,devices);
-		}
+		onClick=(e)=>CP.selectImage(keys,function(data){
+			if(keys.items){
+				Object.assign(item,data);
+				set({[keys.items]:JSON.parse(JSON.stringify(items))});
+			}
+			else{
+				set(data);
+			}
+		},size,devices);
 	}
 	if(isTemplate && keys.code && item[keys.code]){
 		return <DummyImage text={item[keys.code]}/>;
@@ -574,7 +571,8 @@ const SelectResponsiveImage=({className,attr,set,keys,index,sizes,size,devices,d
 	var src=CP.imageSrcOrDummy(item[keys.src]);
 	if(keys.sources){
 		if(device){
-			const source=item[keys.sources].find((source)=>source.device===device);
+			console.log(item[keys.sources]);
+			const source=item[keys.sources].find((source)=>source.device===device) || {srcset:cp.theme_url+'/images/dummy.jpg'};
 			return (
 				<picture
 					className={'selectImage '+className}
@@ -852,6 +850,38 @@ const EditItems=(props)=>{
 }
 
 const SelectClassPanel=(props)=>{
+	const {key='classes',items,index,subItemsKey,subIndex,set,attr,triggerClasses}=props;
+	let {itemsKey,itemClasses}=props;
+	let item;
+	if(items){
+		itemsKey=itemsKey || 'items';
+		if(subItemsKey){
+			if(!items[index]){return false;}
+			item=items[index][subItemsKey][subIndex];
+		}
+		else{
+			item=items[index];
+		}
+		
+		if(!item){return false;}
+	}
+	else{
+		item=attr;
+	}
+	let states=CP.wordsToFlags(item[key]);
+	
+	const save=(data)=>{
+		if(items){
+			Object.assign(item,data);
+			set({[itemsKey]:JSON.parse(JSON.stringify(items))});
+		}
+		else{
+			set(data);
+		}
+	}
+	const saveClasses=()=>{
+		save({[key]:CP.flagsToWords(states)});
+	}
 	const SelectClass=(prm)=>{
 		if(prm.hasOwnProperty('cond') && !prm.cond){
 			return false;
@@ -860,6 +890,15 @@ const SelectClassPanel=(props)=>{
 		if(prm.filter && props.filters && props.filters[prm.filter]){
 			props.filters[prm.filter](prm);
 		}
+		if(prm.keys){
+			if(items){
+				prm.keys.items=prm.keys.items || itemsKey;
+				if(subItemsKey){
+					prm.keys.subItems=prm.keys.subItems || subItemsKey;
+				}
+			}
+		}
+					
         if(prm.json){
             if(prm.input){
                 switch(prm.input){
@@ -965,28 +1004,77 @@ const SelectClassPanel=(props)=>{
                         label='色'
                         set={props.set}
                         attr={props.attr}
+						selected={Object.keys(states).find(key=>/^color\d+/.test(key))}
+						onChange={(color)=>{
+							CP.filterFlags(states,(key)=>!(/^color\d+/.test(key)));
+							states[color]=true;
+							saveClasses();
+						}}
                     />
                 );
             }
             else if(prm === 'pattern'){
                 rtn.push(
-                    <RangeControl
+                    <SelectPatternClass
                         label='パターン'
-                        onChange={(clr)=>CP.switchPattern(props,clr)}
-                        value={CP.getPattern(props)}
-                        min={0}
-                        max={5}
+                        set={props.set}
+                        attr={props.attr}
+						selected={Object.keys(states).find(key=>/^pattern\d+/.test(key))}
+						onChange={(pattern)=>{
+							CP.filterFlags(states,(key)=>!(/^pattern\d+/.test(key)));
+							states[pattern]=true;
+							saveClasses();
+						}}
                     />
                 );
             }
+			else if(prm === 'cond'){
+				rtn.push(
+					<TextareaControl
+						label='表示条件'
+						value={item['cond']}
+						onChange={(cond)=>save({cond})}
+					/>
+				);
+			}
+			else if(prm === 'event'){
+				if(cp.use_functions.indexOf('ga')>-1){
+					var {parseEventString,createEventString}=window.Catpow.ga;
+					var event=parseEventString(item['event']);
+					var params={event:'イベント',action:'アクション',category:'カテゴリ',label_name:'ラベル名',label:'ラベル',value:'値'};
+					rtn.push(
+						<BaseControl label="Google Analitics Event">
+							<table>
+								{Object.keys(params).map((key)=>{
+									return (
+										<tr>
+											<th width="80">{params[key]}</th>
+											<td>
+												<TextControl
+													value={event[key]}
+													type={key=='value'?'number':'text'}
+													onChange={(val)=>{
+														event[key]=val;
+														save({event:createEventString(event)});
+													}}
+												/>
+											</td>
+										</tr>
+									);
+								})}
+							</table>
+						</BaseControl>
+					);
+				}
+			}
             else if(prm.input){
                 switch(prm.input){
                     case 'text':
                         rtn.push(
                             <TextControl
                                 label={prm.label}
-                                value={props.attr[prm.key]}
-                                onChange={(val)=>{let data={};data[prm.key]=val;props.set(data);}}
+                                value={item[prm.key]}
+                                onChange={(val)=>{save({[prm.key]:val});}}
                             />
                         );
                         break;
@@ -994,8 +1082,8 @@ const SelectClassPanel=(props)=>{
                         rtn.push(
                             <TextareaControl
                                 label={prm.label}
-                                value={props.attr[prm.key]}
-                                onChange={(val)=>{let data={};data[prm.key]=val;props.set(data);}}
+                                value={item[prm.key]}
+                                onChange={(val)=>{save({[prm.key]:val});}}
                             />
                         );
                         break;
@@ -1004,8 +1092,8 @@ const SelectClassPanel=(props)=>{
                         rtn.push(
                             <RangeControl
                                 label={prm.label}
-                                value={props.attr[prm.key]/prm.coef}
-                                onChange={(val)=>{let data={};data[prm.key]=val*prm.coef;props.set(data);}}
+                                value={item[prm.key]/prm.coef}
+                                onChange={(val)=>{save({[prm.key]:val*prm.coef});}}
                                 min={prm.min}
                                 max={prm.max}
                                 step={prm.step}
@@ -1016,12 +1104,12 @@ const SelectClassPanel=(props)=>{
                         rtn.push(
                             <ToggleControl
                                 label={prm.label}
-                                checked={props.attr[prm.key]}
-                                onChange={(val)=>{props.set({[prm.key]:val});}}
+                                checked={item[prm.key]}
+                                onChange={(val)=>{save({[prm.key]:val});}}
                             />
                         );
 						if(prm.sub){
-							if(props.attr[prm.key]){
+							if(item[prm.key]){
 								let sub=[];
 								prm.sub.map((prm)=>{sub.push(SelectClass(prm))});
 								rtn.push(<div className="sub">{sub}</div>);
@@ -1034,12 +1122,12 @@ const SelectClassPanel=(props)=>{
 						}
                         rtn.push(
                             <SelectResponsiveImage
+								index={index}
                                 set={props.set}
                                 attr={props.attr}
                                 keys={prm.keys}
                                 size={prm.size}
 								sizes={prm.sizes}
-								ofSP={prm.ofSP}
 								device={prm.device}
 								devices={prm.devices}
 								isTemplate={prm.isTemplate}
@@ -1052,6 +1140,7 @@ const SelectClassPanel=(props)=>{
 						}
 						rtn.push(
 							<SelectPictureSources
+								index={index}
 								set={props.set}
 								attr={props.attr}
 								keys={prm.keys}
@@ -1070,6 +1159,8 @@ const SelectClassPanel=(props)=>{
                                 key={prm.key}
 								help={prm.help}
 								disable={prm.disable}
+								itemsKey={itemsKey}
+								index={index}
 							/>
 						);
 					case 'icon':
@@ -1083,10 +1174,12 @@ const SelectClassPanel=(props)=>{
 						}
 						rtn.push(
 							<SelectPreparedImage
+								index={index}
 								set={props.set}
 								attr={props.attr}
 								name={prm.input}
 								keys={prm.keys}
+								index={index}
 							/>
 						);
 						break;
@@ -1105,23 +1198,39 @@ const SelectClassPanel=(props)=>{
                     values=Object.keys(prm.values);
                     options=values.map((cls)=>{return {label:prm.values[cls],value:cls};});
                 }
+				const currentClass=values.find((value)=>states[value]);
 				
-				let onChangeCB=(cls)=>{
-					let prevCls=CP.getSelectiveClass(props,prm.values,prm.key);
-					let sels=[];
-					if(prevCls){
-						if(subClasses[prevCls]){sels=sels.concat(subClasses[prevCls]);}
-						if(bindClasses[prevCls]){sels=sels.concat(bindClasses[prevCls]);}
-						sels=_.difference(sels,subClasses[cls]);
+				let onChangeCB=(newClass)=>{
+					if(currentClass){
+						states[currentClass]=false;
+						
+						let currentSels=[];
+						if(subClasses[currentClass]){
+							currentSels=currentSels.concat(subClasses[currentClass]);
+						}
+						if(bindClasses[currentClass]){
+							currentSels=currentSels.concat(bindClasses[currentClass]);
+						}
+						
+						let newSels=[];
+						if(subClasses[newClass]){
+							newSels=newSels.concat(subClasses[newClass]);
+						}
+						if(bindClasses[newClass]){
+							newSels=newSels.concat(bindClasses[newClass]);
+						}
+						currentSels.map((value)=>{
+							if(!newSels.includes(value)){states[value]=false;}
+						});
 					}
-					sels=sels.concat(values);
-
-					CP.switchSelectiveClass(
-						props,sels,
-						bindClasses[cls].concat([cls]),
-						prm.key
-					);
+					bindClasses[newClass].map((value)=>{
+						states[value]=true;
+					});
+					states[newClass]=true;
+					
+					saveClasses();
 				};
+				
 				
 				switch(prm.type){
 					case 'radio':
@@ -1129,7 +1238,7 @@ const SelectClassPanel=(props)=>{
 							<RadioControl
 								label={prm.label}
 								onChange={onChangeCB}
-								selected={CP.getSelectiveClass(props,prm.values,prm.key)}
+								selected={currentClass}
 								options={options}
 							/>
 						);
@@ -1139,7 +1248,7 @@ const SelectClassPanel=(props)=>{
 							<SelectControl
 								label={prm.label}
 								onChange={onChangeCB}
-								value={CP.getSelectiveClass(props,prm.values,prm.key)}
+								value={currentClass}
 								options={options}
 							/>
 						);
@@ -1159,12 +1268,15 @@ const SelectClassPanel=(props)=>{
                 rtn.push(
                     <CheckboxControl
                         label={prm.label}
-                        onChange={()=>{CP.toggleClass(props,prm.values,prm.key);}}
-                        checked={CP.hasClass(props,prm.values,prm.key)}
+                        onChange={()=>{
+							states[prm.values]=!states[prm.values];
+							saveClasses();
+						}}
+                        checked={states[prm.values]}
                     />
                 );
                 if(prm.sub){
-                    if(CP.hasClass(props,prm.values,prm.key)){
+                    if(states[prm.values]){
                         let sub=[];
                         prm.sub.map((prm)=>{sub.push(SelectClass(prm))});
                         rtn.push(<div className="sub">{sub}</div>);
@@ -1174,242 +1286,21 @@ const SelectClassPanel=(props)=>{
         }
 		return rtn;
 	};
+	if(triggerClasses && triggerClasses.item){
+		const blockStates=CP.wordsToFlags(attr.classes);
+		itemClasses=triggerClasses.item[Object.keys(triggerClasses.item).find((value)=>blockStates[value])];
+		if(!itemClasses || Array.isArray(itemClasses) && itemClasses.length===0){return false;}
+		return (
+			<PanelBody title={props.title} initialOpen={props.initialOpen || false} icon={props.icon}>
+				{itemClasses.map(SelectClass)}
+			</PanelBody>
+		);
+	}
 	return (
 		<PanelBody title={props.title} initialOpen={props.initialOpen || false} icon={props.icon}>
 			{props.selectiveClasses.map(SelectClass)}
 		</PanelBody>
-	)
-}
-const SelectItemClassPanel=(props)=>{
-	const {items,index,set,attr,triggerClasses}=props;
-	let {itemsKey='items',itemClasses}=props;
-
-	if(!items[index]){return false;}
-	
-	if(!items[index].classes){items[index].classes='item';}
-	else if(items[index].classes.search(/\bitem\b/)===-1){items[index].classes+=' item';}
-	let classes=items[index].classes;
-	if(props.className){classes+=' '+props.className;}
-	
-	if(triggerClasses && triggerClasses.item){
-		itemClasses=triggerClasses.item[CP.getSelectiveClass(props,triggerClasses.values)];
-		if(Array.isArray(itemClasses) && itemClasses.length===0){itemClasses=false;}
-	}
-	
-
-	const selectItemClass=(prm)=>{
-		if(prm.hasOwnProperty('cond') && !prm.cond){
-			return false;
-		}
-		let rtn=[];
-		if(prm.filter && props.filters && props.filters[prm.filter]){
-			props.filters[prm.filter](prm);
-		}
-		if(prm === 'color'){
-			rtn.push(
-				<SelectColorClass
-					label='色'
-					set={set}
-					attr={attr}
-					items={items}
-					index={index}
-					itemsKey={itemsKey}
-				/>
-			);
-		}
-		else if(prm === 'pattern'){
-			rtn.push(
-				<RangeControl
-					label='パターン'
-					onChange={(clr)=>CP.switchItemPattern(props,clr,itemsKey)}
-					value={CP.getItemPattern(props)}
-					min={0}
-					max={5}
-				/>
-			);
-		}
-		else if(prm === 'cond'){
-			rtn.push(
-				<TextareaControl
-					label='表示条件'
-					value={items[index]['cond']}
-					onChange={(cond)=>{
-						items[index]['cond']=cond;
-						if(itemsKey===undefined){set({items});}
-						else{set({[itemsKey]:items})}
-					}}
-				/>
-			);
-		}
-		else if(prm === 'event'){
-			if(cp.use_functions.indexOf('ga')>-1){
-				var {parseEventString,createEventString}=window.Catpow.ga;
-				var eventData=parseEventString(items[index]['event']);
-				var params={event:'イベント',action:'アクション',category:'カテゴリ',label_name:'ラベル名',label:'ラベル',value:'値'};
-				rtn.push(
-					<BaseControl label="Google Analitics Event">
-						<table>
-							{Object.keys(params).map((key)=>{
-								return (
-									<tr>
-										<th width="80">{params[key]}</th>
-										<td>
-											<TextControl
-												value={eventData[key]}
-												type={key=='value'?'number':'text'}
-												onChange={(val)=>{
-													eventData[key]=val;
-													items[index]['event']=createEventString(eventData);
-													if(itemsKey===undefined){set({items});}
-													else{set({[itemsKey]:items})}
-												}}
-											/>
-										</td>
-									</tr>
-								);
-							})}
-						</table>
-					</BaseControl>
-				);
-			}
-		}
-		else if(prm.input){
-			switch(prm.input){
-				case 'text':
-					rtn.push(
-						<TextControl
-							label={prm.label}
-							value={items[index][prm.key]}
-							onChange={(val)=>{
-								let newItems=JSON.parse(JSON.stringify(items));
-								newItems[index][prm.key]=val;
-								set({[itemsKey]:newItems});
-							}}
-						/>
-					);
-					break;
-				case 'image':
-					prm.keys.items=prm.keys.items || itemsKey;
-					if(prm.label){
-						rtn.push(<h5>{prm.label}</h5>);
-					}
-					rtn.push(
-						<SelectResponsiveImage
-							set={props.set}
-							attr={props.attr}
-							keys={prm.keys}
-							index={index}
-							size={prm.size}
-							sizes={prm.sizes}
-							ofSP={prm.ofSP}
-							device={prm.device}
-							devices={prm.devices}
-							isTemplate={prm.isTemplate}
-						/>
-					);
-					break;
-				case 'picture':
-					prm.keys.items=prm.keys.items || itemsKey;
-					if(prm.label){
-						rtn.push(<h5>{prm.label}</h5>);
-					}
-					rtn.push(
-						<SelectPictureSources
-							set={props.set}
-							attr={props.attr}
-							keys={prm.keys}
-							index={index}
-							sizes={prm.sizes}
-							devices={prm.devices}
-							isTemplate={prm.isTemplate}
-						/>
-					);
-					break;
-				case 'icon':
-				case 'symbol':
-				case 'pattern':
-					prm.keys=prm.keys || {};
-					prm.keys.items=prm.keys.items || itemsKey;
-					prm.keys.src=prm.keys.src || prm.input+'Src';
-					prm.keys.alt=prm.keys.alt || prm.input+'Alt';
-					if(prm.label){
-						rtn.push(<h5>{prm.label}</h5>);
-					}
-					rtn.push(
-						<SelectPreparedImage
-							set={props.set}
-							attr={props.attr}
-							name={prm.input}
-							keys={prm.keys}
-							index={index}
-						/>
-					);
-					break;
-			}
-		}
-		else if(_.isObject(prm.values)){
-			let options;
-			if(Array.isArray(prm.values)){
-				options=prm.values.map(cls=>{return {label:cls,value:cls};});
-			}
-			else{
-				options=Object.keys(prm.values).map((cls)=>{return {label:prm.values[cls],value:cls};});
-			}
-			switch(prm.type){
-				case 'radio':
-					rtn.push(
-						<RadioControl
-							label={prm.label}
-							onChange={(cls)=>CP.switchItemSelectiveClass(props,prm.values,cls,itemsKey)}
-							selected={CP.getItemSelectiveClass(props,prm.values)}
-							options={options}
-						/>
-					);
-					break;
-				default:
-					rtn.push(
-						<SelectControl
-							label={prm.label}
-							onChange={(cls)=>CP.switchItemSelectiveClass(props,prm.values,cls,itemsKey)}
-							value={CP.getItemSelectiveClass(props,prm.values)}
-							options={options}
-						/>
-					);
-			}
-			if(prm.sub){
-				let currentClass=CP.getItemSelectiveClass(props,prm.values);
-				if(currentClass && prm.sub[currentClass]){
-					let sub=[];
-					prm.sub[currentClass].map((prm)=>{sub.push(selectItemClass(prm))});
-					rtn.push(<div className="sub">{sub}</div>);
-				}
-			}
-		}
-		else{
-			rtn.push(
-				<CheckboxControl
-					label={prm.label}
-					onChange={()=>{CP.toggleItemClass(props,prm.values,itemsKey);}}
-					checked={CP.hasItemClass(props,prm.values)}
-				/>
-			);
-			if(prm.sub){
-				if(CP.hasItemClass(props,prm.values)){
-					let sub=[];
-					prm.sub.map((prm)=>{sub.push(selectItemClass(prm))});
-					rtn.push(<div className="sub">{sub}</div>);
-				}
-			}
-		}
-		return rtn;
-	};
-
-	if(!itemClasses){return false;}
-	return (
-		<PanelBody title={props.title} initialOpen={props.initialOpen || false} icon={props.icon}>
-			{itemClasses.map(selectItemClass)}
-		</PanelBody>
-	)
+	);
 }
 
 const AlignClassToolbar=(props)=>{
@@ -1433,30 +1324,44 @@ const VerticalAlignClassToolbar=(props)=>{
 	);
 }
 const SelectColorClass=(props)=>{
-	const {label,help,itemsKey}=props;
+	const {label,help,selected,onChange}=props;
 	
-	var color=itemsKey?CP.getItemColor(props):CP.getColor(props);
 	var items=Array.from(Array(13),(v,i)=>{
 		var classes='fillColor'+i;
-		if(color==i){classes+=' active';}
+		const value='color'+i;
+		if(value==selected){classes+=' active';}
 		return (
 			<li
 				className={classes}
-				onClick={()=>{
-					if(itemsKey){
-						CP.switchItemColor(props,i,itemsKey);
-					}
-					else{
-						CP.switchColor(props,i);
-					}
-				}}
+				onClick={()=>onChange(value)}
 			> </li>
 		);
-	});;
+	});
 	
 	return (
 		<BaseControl label={label} help={help}>
 			<ul class="selectColor">{items}</ul>
+		</BaseControl>
+	);
+}
+const SelectPatternClass=(props)=>{
+	const {label,help,selected,onChange}=props;
+	
+	var items=Array.from(Array(6),(v,i)=>{
+		var classes='bgPattern'+i;
+		const value='pattern'+i;
+		if(value==selected){classes+=' active';}
+		return (
+			<li
+				className={classes}
+				onClick={()=>onChange(value)}
+			> </li>
+		);
+	});
+	
+	return (
+		<BaseControl label={label} help={help}>
+			<ul class="selectPattern">{items}</ul>
 		</BaseControl>
 	);
 }
@@ -1468,9 +1373,8 @@ const SelectPositionClass=(props)=>{
 		['bottomLeft','bottom','bottomRight'],	
 	];
 	const values=_.flatten(rows);
-	let value=CP.getSelectiveClass(props,values);
-	
-	const {label,help,disable}=props;
+	const {label,help,itemsKey,index,disable}=props;
+	let value=itemsKey?CP.getItemSelectiveClass(props,values):CP.getSelectiveClass(props,values);
 	
 	return (
 		<BaseControl label={label} help={help}>
@@ -1484,7 +1388,14 @@ const SelectPositionClass=(props)=>{
 						return (
 							<td
 								className={isChecked?"active":""}
-								onClick={()=>{CP.switchSelectiveClass(props,values,col,props.key)}}
+								onClick={()=>{
+									if(itemsKey){
+										CP.switchItemSelectiveClass(props,values,col,props.key)
+									}
+									else{
+										CP.switchSelectiveClass(props,values,col,props.key)
+									}
+								}}
 							> </td>
 						);
 					})}
@@ -1608,7 +1519,11 @@ const EditItemsTable=(props)=>{
 				{items.map((item,index)=>{
 					const propsForControl={tag:'tr',set,itemsKey,items,index};
 					return (
-						<tr>
+						<tr
+							onClick={(e)=>{
+								set({currentItemIndex:index});
+							}}
+						>
 							{columns.map((col)=>{
 								if(!col.cond){return false;}
 								switch(col.type){

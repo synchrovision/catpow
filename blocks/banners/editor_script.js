@@ -47,7 +47,7 @@ registerBlockType('catpow/banners', {
 
 		var rtn = [];
 		var save = function save() {
-			setAttibutes({ items: JSON.parse(JSON.stringify(items)) });
+			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
 		items.map(function (item, index) {
@@ -143,23 +143,23 @@ registerBlockType('catpow/banners', {
 						value: classes
 					})
 				),
-				states.isTemplate ? wp.element.createElement(SelectItemClassPanel, {
+				states.isTemplate ? wp.element.createElement(SelectClassPanel, {
 					title: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
 					icon: "edit",
 					set: setAttributes,
 					attr: attributes,
 					items: items,
 					index: attributes.currentItemIndex,
-					itemClasses: itemTemplateSelectiveClasses,
+					selectiveClasses: itemTemplateSelectiveClasses,
 					filters: CP.filters.banners || {}
-				}) : wp.element.createElement(SelectItemClassPanel, {
+				}) : wp.element.createElement(SelectClassPanel, {
 					title: "\u30D0\u30CA\u30FC",
 					icon: "edit",
 					set: setAttributes,
 					attr: attributes,
 					items: items,
 					index: attributes.currentItemIndex,
-					itemClasses: selectiveItemClasses,
+					selectiveClasses: selectiveItemClasses,
 					filters: CP.filters.banners || {}
 				}),
 				wp.element.createElement(ItemControlInfoPanel, null)

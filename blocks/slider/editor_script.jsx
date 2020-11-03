@@ -43,19 +43,19 @@ registerBlockType('catpow/slider',{
 			{input:'range',label:'表示スライド',json:'config',key:'initialSlide',min:0,max:items.length-1}
 		];
 		var animateClasses=[
-			{label:'ループ',values:'loop',key:'controlClasses',sub:[
-				{label:'アイテムを反復',key:'controlClasses',values:'loopItems'}
+			{label:'ループ',values:'loop',sub:[
+				{label:'アイテムを反復',values:'loopItems'}
 			]},
-			{label:'自動再生',values:'autoplay',key:'controlClasses',sub:[
+			{label:'自動再生',values:'autoplay',sub:[
 				{input:'range',label:'自動再生間隔（単位:0.1秒）',json:'config',key:'interval',coef:100,min:0,max:100},
 				{input:'range',label:'操作停止時間（単位:0.1秒）',json:'config',key:'wait',coef:100,min:0,max:100},
-				{label:'ホバーで停止',values:'stopbyhover',key:'controlClasses'}
+				{label:'ホバーで停止',values:'stopbyhover'}
 			]}
 		];
 		var controllerClasses=[
-			{label:'フリック操作',values:'flickable',key:'controlClasses'},
-			{label:'スクロール操作',values:'scrollable',key:'controlClasses'},
-			{label:'閉じる操作',values:'closable',key:'controlClasses'}
+			{label:'フリック操作',values:'flickable'},
+			{label:'スクロール操作',values:'scrollable'},
+			{label:'閉じる操作',values:'closable'}
 		];
 		
 		var selectiveClasses=[
@@ -137,7 +137,7 @@ registerBlockType('catpow/slider',{
 		];
 		
 		const save=()=>{
-			setAttibutes({items:JSON.parse(JSON.stringify(items))});
+			setAttributes({items:JSON.parse(JSON.stringify(items))});
 		};
 
 		
@@ -279,7 +279,6 @@ registerBlockType('catpow/slider',{
 		
 		return (
 			<Fragment>
-				<SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices}/>
 				<SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
@@ -302,6 +301,7 @@ registerBlockType('catpow/slider',{
 						filters={CP.filters.slider || {}}
 					/>
 					<SelectClassPanel
+						key='controlClasses'
 						title='アニメーション設定'
 						icon='video-alt3'
 						set={setAttributes}
@@ -310,6 +310,7 @@ registerBlockType('catpow/slider',{
 						filters={CP.filters.slider || {}}
 					/>
 					<SelectClassPanel
+						key='controlClasses'
 						title='操作設定'
 						icon='universal-access'
 						set={setAttributes}
@@ -324,7 +325,7 @@ registerBlockType('catpow/slider',{
 							value={classes}
 						/>
 					</PanelBody>
-					<SelectItemClassPanel
+					<SelectClassPanel
 						title='スライド'
 						icon='edit'
 						set={setAttributes}

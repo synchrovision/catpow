@@ -122,14 +122,14 @@
 						selectiveClasses={selectiveClasses}
 						filters={CP.filters.banners || {}}
 					/>
-					<SelectItemClassPanel
+					<SelectClassPanel
 						title='リストアイテム'
 						icon='edit'
 						set={setAttributes}
 						attr={attributes}
 						items={itemsCopy}
 						index={attributes.currentItemIndex}
-						itemClasses={itemClasses}
+						selectiveClasses={itemClasses}
 						filters={CP.filters.dialog || {}}
 					/>
 					<ItemControlInfoPanel/>

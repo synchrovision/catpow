@@ -45,7 +45,7 @@ registerBlockType('catpow/banners',{
 		
 		let rtn=[];
 		const save=()=>{
-			setAttibutes({items:JSON.parse(JSON.stringify(items))});
+			setAttributes({items:JSON.parse(JSON.stringify(items))});
 		};
 
 		items.map((item,index)=>{
@@ -123,25 +123,25 @@ registerBlockType('catpow/banners',{
 						/>
 					</PanelBody>
 					{states.isTemplate?(
-						<SelectItemClassPanel
+						<SelectClassPanel
 							title='テンプレート'
 							icon='edit'
 							set={setAttributes}
 							attr={attributes}
 							items={items}
 							index={attributes.currentItemIndex}
-							itemClasses={itemTemplateSelectiveClasses}
+							selectiveClasses={itemTemplateSelectiveClasses}
 							filters={CP.filters.banners || {}}
 						/>
 					):(
-						<SelectItemClassPanel
+						<SelectClassPanel
 							title='バナー'
 							icon='edit'
 							set={setAttributes}
 							attr={attributes}
 							items={items}
 							index={attributes.currentItemIndex}
-							itemClasses={selectiveItemClasses}
+							selectiveClasses={selectiveItemClasses}
 							filters={CP.filters.banners || {}}
 						/>
 					)}

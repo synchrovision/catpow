@@ -208,6 +208,27 @@ ul.selectColor {
     ul.selectColor li.active::after {
       display: none; }
 
+ul.selectPattern {
+  list-style: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap; }
+  ul.selectPattern li {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 30%;
+    padding-top: 30%;
+    margin: 0px;
+    background-color: #a2a2a2;
+    background-size: 50% auto;
+    cursor: pointer; }
+    ul.selectPattern li.active {
+      background-color: #007cba; }
+
 ul.selectPreparedImage {
   display: -webkit-box;
   display: -webkit-flex;

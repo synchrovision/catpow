@@ -206,7 +206,7 @@ registerBlockType('catpow/panel', {
 				attr: attributes,
 				selectiveClasses: selectiveClasses
 			}),
-			wp.element.createElement(SelectItemClassPanel, {
+			wp.element.createElement(SelectClassPanel, {
 				title: '\u30D1\u30CD\u30EB',
 				icon: 'edit',
 				set: setAttributes,

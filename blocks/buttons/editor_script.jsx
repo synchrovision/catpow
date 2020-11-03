@@ -111,14 +111,14 @@
 						selectiveClasses={selectiveClasses}
 						filters={CP.filters.buttons || {}}
 					/>
-					<SelectItemClassPanel
+					<SelectClassPanel
 						title='ボタン'
 						icon='edit'
 						set={setAttributes}
 						attr={attributes}
 						items={items}
 						index={attributes.currentItemIndex}
-						itemClasses={itemClasses}
+						selectiveClasses={itemClasses}
 						filters={CP.filters.buttons || {}}
 					/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>

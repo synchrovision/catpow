@@ -137,6 +137,16 @@ ul.selectColor{
 		&.active::after{@include bnd((d:n));}
 	}
 }
+ul.selectPattern{
+	@include txt((l:n));
+	@include flx((w:w));
+	li{
+		@include bnd((f:1 1 30%,pdt:30%,mg:0));
+		@include bg((c:t 50,s:50% a));
+		@include usr((c:p));
+		&.active{@include bg((c:m));}
+	}
+}
 ul.selectPreparedImage{
 	@include flx((w:w));
 	@include bg((c:t 20));

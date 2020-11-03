@@ -49,7 +49,7 @@
 			image:{src:"src",alt:"alt",code:'imageCode',items:"items"}
 		};
 		const save=()=>{
-			setAttibutes({items:JSON.parse(JSON.stringify(items))});
+			setAttributes({items:JSON.parse(JSON.stringify(items))});
 		};
 
 		items.map((item,index)=>{
@@ -215,14 +215,14 @@
 							value={classArray.join(' ')}
 						/>
 					</PanelBody>
-					<SelectItemClassPanel
+					<SelectClassPanel
 						title='アイテム'
 						icon='edit'
 						set={setAttributes}
 						attr={attributes}
 						items={items}
 						index={attributes.currentItemIndex}
-						itemClasses={itemSelectiveClasses}
+						selectiveClasses={itemSelectiveClasses}
 						filters={CP.filters.pricecard || {}}
 					/>
 					<ItemControlInfoPanel/>

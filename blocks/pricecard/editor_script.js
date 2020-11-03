@@ -41,7 +41,7 @@ registerBlockType('catpow/pricecard', {
 			image: { src: "src", alt: "alt", code: 'imageCode', items: "items" }
 		};
 		var save = function save() {
-			setAttibutes({ items: JSON.parse(JSON.stringify(items)) });
+			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
 		items.map(function (item, index) {
@@ -263,14 +263,14 @@ registerBlockType('catpow/pricecard', {
 						value: classArray.join(' ')
 					})
 				),
-				wp.element.createElement(SelectItemClassPanel, {
+				wp.element.createElement(SelectClassPanel, {
 					title: '\u30A2\u30A4\u30C6\u30E0',
 					icon: 'edit',
 					set: setAttributes,
 					attr: attributes,
 					items: items,
 					index: attributes.currentItemIndex,
-					itemClasses: itemSelectiveClasses,
+					selectiveClasses: itemSelectiveClasses,
 					filters: CP.filters.pricecard || {}
 				}),
 				wp.element.createElement(ItemControlInfoPanel, null)

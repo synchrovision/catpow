@@ -152,14 +152,14 @@ registerBlockType('catpow/dialog', {
 					selectiveClasses: selectiveClasses,
 					filters: CP.filters.banners || {}
 				}),
-				wp.element.createElement(SelectItemClassPanel, {
+				wp.element.createElement(SelectClassPanel, {
 					title: '\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0',
 					icon: 'edit',
 					set: setAttributes,
 					attr: attributes,
 					items: itemsCopy,
 					index: attributes.currentItemIndex,
-					itemClasses: itemClasses,
+					selectiveClasses: itemClasses,
 					filters: CP.filters.dialog || {}
 				}),
 				wp.element.createElement(ItemControlInfoPanel, null)

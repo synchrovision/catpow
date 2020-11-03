@@ -1,5 +1,5 @@
-registerBlockType('catpow/pricelist', {
-	title: '🐾 PriceList',
+registerBlockType('catpow/materials', {
+	title: '🐾 Materials',
 	description: '価格表のブロックです。',
 	icon: 'editor-ul',
 	category: 'catpow',
@@ -20,7 +20,7 @@ registerBlockType('catpow/pricelist', {
 		    _attributes$AltMode = attributes.AltMode,
 		    AltMode = _attributes$AltMode === undefined ? false : _attributes$AltMode;
 
-		var primaryClass = 'wp-block-catpow-pricelist';
+		var primaryClass = 'wp-block-catpow-materials';
 
 		var states = CP.wordsToFlags(classes);
 
@@ -129,7 +129,7 @@ registerBlockType('catpow/pricelist', {
 					set: setAttributes,
 					attr: attributes,
 					selectiveClasses: selectiveClasses,
-					filters: CP.filters.pricelist || {}
+					filters: CP.filters.materials || {}
 				}),
 				wp.element.createElement(
 					PanelBody,
@@ -150,7 +150,7 @@ registerBlockType('catpow/pricelist', {
 					items: items,
 					index: attributes.currentItemIndex,
 					selectiveClasses: itemSelectiveClasses,
-					filters: CP.filters.pricelist || {}
+					filters: CP.filters.materials || {}
 				}),
 				wp.element.createElement(ItemControlInfoPanel, null)
 			),
@@ -261,77 +261,5 @@ registerBlockType('catpow/pricelist', {
 				wp.element.createElement(InnerBlocks.Content, null)
 			)
 		);
-	},
-
-	deprecated: [{
-		save: function save(_ref3) {
-			var attributes = _ref3.attributes,
-			    className = _ref3.className;
-			var _attributes$items3 = attributes.items,
-			    items = _attributes$items3 === undefined ? [] : _attributes$items3,
-			    _attributes$classes2 = attributes.classes,
-			    classes = _attributes$classes2 === undefined ? '' : _attributes$classes2,
-			    loopParam = attributes.loopParam,
-			    loopCount = attributes.loopCount;
-
-			var classArray = _.uniq(classes.split(' '));
-
-			var states = CP.wordsToFlags(classes);
-
-			var imageKeys = {
-				image: { src: "imageSrc", alt: "imageAlt", items: "items" }
-			};
-
-			var rtn = [];
-			items.map(function (item, index) {
-				var itemStates = CP.wordsToFlags(item.classes);
-				rtn.push(wp.element.createElement(
-					'li',
-					{ className: item.classes },
-					itemStates.hasImage && wp.element.createElement(
-						'div',
-						{ className: 'image' },
-						wp.element.createElement(ResponsiveImage, {
-							attr: attributes,
-							keys: imageKeys.image
-						})
-					),
-					wp.element.createElement(
-						'div',
-						{ className: 'title' },
-						wp.element.createElement(RichText.Content, { value: item.title })
-					),
-					!itemStates.isHeading && wp.element.createElement(
-						Fragment,
-						null,
-						wp.element.createElement('div', { className: 'line' }),
-						wp.element.createElement(
-							'div',
-							{ className: 'price' },
-							wp.element.createElement(RichText.Content, { value: item.price })
-						)
-					),
-					itemStates.hasCaption && wp.element.createElement(
-						'div',
-						{ className: 'caption' },
-						wp.element.createElement(RichText.Content, { value: item.caption })
-					)
-				));
-			});
-			return wp.element.createElement(
-				'ul',
-				{ className: classes },
-				states.doLoop && '[loop_template ' + (loopParam || '') + ']',
-				rtn,
-				states.doLoop && '[/loop_template]'
-			);
-		},
-		migrate: function migrate(attributes) {
-			var states = CP.wordsToFlags(classes);
-			attributes.content_path = attributes.loopParam.split(' ')[0];
-			attributes.query = attributes.loopParam.split(' ').slice(1).join("\n");
-			attributes.doLoop = states.doLoop;
-			return attributes;
-		}
-	}]
+	}
 });

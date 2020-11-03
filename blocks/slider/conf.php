@@ -46,7 +46,7 @@ $attributes=[
 				"slideAlt"=>'dummy',
 				
 				"text"=>['Text'],
-				"linkUrl"=>'"https"=>//',
+				"linkUrl"=>'https://',
 				"backgroundImageSrc"=>cp::get_file_url('/images/dummy_bg.jpg'),
 				"backgroundImageAlt"=>'dummy',
 				"backgroundImageSrcset"=>null,

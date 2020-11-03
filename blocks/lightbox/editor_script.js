@@ -1,3 +1,10 @@
+CP.config.lightbox = {
+	imageKeys: {
+		image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
+		headerImage: { src: "headerImageSrc", alt: "headerImageAlt", code: "headerImageCode", items: "items" }
+	}
+};
+
 registerBlockType('catpow/lightbox', {
 	title: '🐾 Lightbox',
 	description: 'クリックでポップアップ表示する画像です。',
@@ -34,10 +41,8 @@ registerBlockType('catpow/lightbox', {
 		    OpenMode = _attributes$OpenMode === undefined ? false : _attributes$OpenMode,
 		    _attributes$currentIt = attributes.currentItemIndex,
 		    currentItemIndex = _attributes$currentIt === undefined ? 0 : _attributes$currentIt;
+		var imageKeys = CP.config.lightbox.imageKeys;
 
-		var primaryClass = 'wp-block-catpow-lightbox';
-		var classArray = _.uniq((className + ' ' + classes).split(' '));
-		var classNameArray = className.split(' ');
 
 		var states = CP.wordsToFlags(classes);
 
@@ -46,59 +51,53 @@ registerBlockType('catpow/lightbox', {
 			values: 'isTemplate',
 			sub: [{ input: 'bool', label: 'ループ', key: 'doLoop', sub: [{ label: 'content path', input: 'text', key: 'content_path' }, { label: 'query', input: 'textarea', key: 'query' }, { label: 'プレビューループ数', input: 'range', key: 'loopCount', min: 1, max: 16 }] }]
 		}];
-		var itemTemplateSelectiveClasses = [{
+		var itemSelectiveClasses = [{ input: 'image', label: '画像', keys: imageKeys.image, cond: states.hasImage, isTemplate: states.isTemplate }, {
 			input: 'text',
 			label: '画像コード',
 			key: 'imageCode',
-			cond: states.hasImage
-		}, {
+			cond: states.hasImage && states.isTemplate
+		}, { input: 'image', label: 'サムネール画像', keys: imageKeys.headerImage, cond: states.hasHeaderImage, isTemplate: states.isTemplate }, {
 			input: 'text',
-			label: 'ヘッダ画像コード',
+			label: 'サムネール画像コード',
 			key: 'headerImageCode',
-			cond: states.hasHeaderImage
+			cond: states.hasHeaderImage && states.isTemplate
 		}];
 		var save = function save() {
-			setAttibutes({ items: JSON.parse(JSON.stringify(items)) });
+			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
 		var rtn = [];
-		var imageKeys = {
-			image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
-			headerImage: { src: "headerImageSrc", alt: "headerImageAlt", code: "headerImageCode", items: "items" }
-		};
-
-		var AnyMode = AltMode || EditMode || OpenMode;
 
 		items.map(function (item, index) {
 			rtn.push(wp.element.createElement(
 				Item,
 				{
-					tag: 'li',
+					tag: "li",
 					set: setAttributes,
 					attr: attributes,
 					items: items,
 					index: index
 				},
 				wp.element.createElement(
-					'header',
+					"header",
 					null,
 					states.hasHeaderImage && wp.element.createElement(
-						'div',
-						{ className: 'image' },
+						"div",
+						{ className: "image" },
 						wp.element.createElement(SelectResponsiveImage, {
 							attr: attributes,
 							set: setAttributes,
 							keys: imageKeys.headerImage,
 							index: index,
-							size: 'vga',
+							size: "vga",
 							isTemplate: states.isTemplate
 						})
 					),
 					states.hasTitle && wp.element.createElement(
-						'div',
-						{ className: 'text' },
+						"div",
+						{ className: "text" },
 						wp.element.createElement(
-							'h3',
+							"h3",
 							null,
 							wp.element.createElement(RichText, {
 								onChange: function onChange(text) {
@@ -108,7 +107,7 @@ registerBlockType('catpow/lightbox', {
 							})
 						),
 						states.hasTitleCaption && wp.element.createElement(
-							'p',
+							"p",
 							null,
 							wp.element.createElement(RichText, {
 								onChange: function onChange(text) {
@@ -141,8 +140,8 @@ registerBlockType('catpow/lightbox', {
 				InspectorControls,
 				null,
 				wp.element.createElement(SelectClassPanel, {
-					title: '\u30AF\u30E9\u30B9',
-					icon: 'art',
+					title: "\u30AF\u30E9\u30B9",
+					icon: "art",
 					set: setAttributes,
 					attr: attributes,
 					selectiveClasses: selectiveClasses,
@@ -150,40 +149,30 @@ registerBlockType('catpow/lightbox', {
 				}),
 				wp.element.createElement(
 					PanelBody,
-					{ title: 'CLASS', icon: 'admin-generic', initialOpen: false },
+					{ title: "CLASS", icon: "admin-generic", initialOpen: false },
 					wp.element.createElement(TextareaControl, {
-						label: '\u30AF\u30E9\u30B9',
-						onChange: function onChange(clss) {
-							return setAttributes({ classes: clss });
+						label: "\u30AF\u30E9\u30B9",
+						onChange: function onChange(classes) {
+							return setAttributes({ classes: classes });
 						},
-						value: classArray.join(' ')
+						value: classes
 					}),
 					wp.element.createElement(TextareaControl, {
-						label: '\u30DC\u30C3\u30AF\u30B9\u30AF\u30E9\u30B9',
-						onChange: function onChange(clss) {
-							return setAttributes({ boxClasses: clss });
+						label: "\u30DC\u30C3\u30AF\u30B9\u30AF\u30E9\u30B9",
+						onChange: function onChange(boxClasses) {
+							return setAttributes({ boxClasses: boxClasses });
 						},
 						value: boxClasses
 					})
 				),
-				wp.element.createElement(SelectItemClassPanel, {
-					title: '\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0',
-					icon: 'edit',
+				wp.element.createElement(SelectClassPanel, {
+					title: "\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0",
+					icon: "edit",
 					set: setAttributes,
 					attr: attributes,
 					items: items,
 					index: attributes.currentItemIndex,
-					triggerClasses: selectiveClasses[0],
-					filters: CP.filters.lightbox || {}
-				}),
-				states.isTemplate && wp.element.createElement(SelectItemClassPanel, {
-					title: '\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8',
-					icon: 'edit',
-					set: setAttributes,
-					attr: attributes,
-					items: items,
-					index: attributes.currentItemIndex,
-					itemClasses: itemTemplateSelectiveClasses,
+					selectiveClasses: itemSelectiveClasses,
 					filters: CP.filters.lightbox || {}
 				}),
 				wp.element.createElement(ItemControlInfoPanel, null)
@@ -192,12 +181,12 @@ registerBlockType('catpow/lightbox', {
 				Fragment,
 				null,
 				EditMode ? wp.element.createElement(
-					'div',
-					{ className: 'alt_content' },
+					"div",
+					{ className: "alt_content" },
 					wp.element.createElement(
-						'div',
-						{ 'class': 'label' },
-						wp.element.createElement(Icon, { icon: 'edit' })
+						"div",
+						{ "class": "label" },
+						wp.element.createElement(Icon, { icon: "edit" })
 					),
 					wp.element.createElement(EditItemsTable, {
 						set: setAttributes,
@@ -209,75 +198,75 @@ registerBlockType('catpow/lightbox', {
 					Fragment,
 					null,
 					AltMode && doLoop ? wp.element.createElement(
-						'div',
-						{ className: 'alt_content' },
+						"div",
+						{ className: "alt_content" },
 						wp.element.createElement(
-							'div',
-							{ 'class': 'label' },
-							wp.element.createElement(Icon, { icon: 'welcome-comments' })
+							"div",
+							{ "class": "label" },
+							wp.element.createElement(Icon, { icon: "welcome-comments" })
 						),
 						wp.element.createElement(InnerBlocks, null)
 					) : wp.element.createElement(
-						'ul',
+						"ul",
 						{ className: classes },
 						rtn
 					)
 				)
 			) : wp.element.createElement(
-				'div',
-				{ className: 'lightbox_preview' },
+				"div",
+				{ className: "lightbox_preview" },
 				wp.element.createElement(
-					'div',
-					{ id: 'cp_lightbox', className: 'cp_lightbox_container active' },
+					"div",
+					{ id: "cp_lightbox", className: "cp_lightbox_container active" },
 					wp.element.createElement(
-						'div',
-						{ 'class': 'cp_lightbox_content' },
+						"div",
+						{ "class": "cp_lightbox_content" },
 						wp.element.createElement(
-							'div',
-							{ 'class': 'group active' },
+							"div",
+							{ "class": "group active" },
 							wp.element.createElement(
-								'ul',
-								{ 'class': 'items' },
+								"ul",
+								{ "class": "items" },
 								items.map(function (item, index) {
 									var isActive = currentItemIndex == index;
 									return wp.element.createElement(
-										'li',
+										"li",
 										{ className: isActive ? 'item active' : 'item' },
 										wp.element.createElement(
-											'div',
+											"div",
 											{ className: boxClasses },
 											states.hasSubTitle && wp.element.createElement(
-												'header',
-												{ className: 'title' },
+												"header",
+												{ className: "title" },
 												wp.element.createElement(
-													'h4',
+													"h4",
 													null,
 													wp.element.createElement(RichText, {
 														onChange: function onChange(subTitle) {
 															items[index].subTitle = subTitle;setAttributes({ items: items });
 														},
 														value: item.subTitle,
-														placeholder: 'SubTitle'
+														placeholder: "SubTitle"
 													})
 												)
 											),
 											states.hasImage && wp.element.createElement(
-												'div',
-												{ className: 'image' },
+												"div",
+												{ className: "image" },
 												wp.element.createElement(SelectResponsiveImage, {
 													attr: attributes,
 													set: setAttributes,
 													keys: imageKeys.image,
 													index: index,
-													size: 'full',
+													size: "full",
 													isTemplate: states.isTemplate
 												})
 											),
 											states.hasText && wp.element.createElement(
-												'div',
-												{ className: 'text' },
+												"div",
+												{ className: "text" },
 												wp.element.createElement(
-													'div',
+													"div",
 													{
 														onFocus: function onFocus() {
 															blockState.enableBlockFormat = true;
@@ -299,19 +288,19 @@ registerBlockType('catpow/lightbox', {
 								})
 							),
 							wp.element.createElement(
-								'div',
-								{ 'class': 'cp_lightbox_control' },
-								wp.element.createElement('div', { className: 'prev active' }),
+								"div",
+								{ "class": "cp_lightbox_control" },
+								wp.element.createElement("div", { className: "prev active" }),
 								wp.element.createElement(
-									'ul',
-									{ className: 'dots active' },
+									"ul",
+									{ className: "dots active" },
 									items.map(function (item, index) {
 										var isActive = currentItemIndex == index;
-										return wp.element.createElement('li', { className: isActive ? 'dot active' : 'dot', 'data-index': index });
+										return wp.element.createElement("li", { className: isActive ? 'dot active' : 'dot', "data-index": index });
 									})
 								),
-								wp.element.createElement('div', { className: 'next active' }),
-								wp.element.createElement('div', { className: 'close' })
+								wp.element.createElement("div", { className: "next active" }),
+								wp.element.createElement("div", { className: "close" })
 							)
 						)
 					)
@@ -330,31 +319,28 @@ registerBlockType('catpow/lightbox', {
 		    blockState = attributes.blockState,
 		    doLoop = attributes.doLoop;
 
-		var classArray = _.uniq(classes.split(' '));
 
 		var states = CP.wordsToFlags(classes);
 
-		var imageKeys = {
-			image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
-			headerImage: { src: "headerImageSrc", alt: "headerImageAlt", code: "headerImageCode", items: "items" }
-		};
+		var imageKeys = CP.config.lightbox.imageKeys;
+
 
 		return wp.element.createElement(
 			Fragment,
 			null,
 			wp.element.createElement(
-				'ul',
+				"ul",
 				{ className: classes },
 				items.map(function (item, index) {
 					return wp.element.createElement(
-						'li',
+						"li",
 						{ className: item.classes },
 						wp.element.createElement(
-							'header',
+							"header",
 							null,
 							states.hasHeaderImage && wp.element.createElement(
-								'div',
-								{ className: 'image' },
+								"div",
+								{ className: "image" },
 								wp.element.createElement(ResponsiveImage, {
 									attr: attributes,
 									keys: imageKeys.headerImage,
@@ -363,35 +349,35 @@ registerBlockType('catpow/lightbox', {
 								})
 							),
 							states.hasTitle && wp.element.createElement(
-								'div',
-								{ className: 'text' },
+								"div",
+								{ className: "text" },
 								wp.element.createElement(
-									'h3',
+									"h3",
 									null,
 									wp.element.createElement(RichText.Content, { value: item.title })
 								),
 								states.hasTitleCaption && wp.element.createElement(
-									'p',
+									"p",
 									null,
 									wp.element.createElement(RichText.Content, { value: item.titleCaption })
 								)
 							)
 						),
 						wp.element.createElement(
-							'div',
-							{ 'class': boxClasses },
+							"div",
+							{ "class": boxClasses },
 							states.hasSubTitle && wp.element.createElement(
-								'header',
-								{ className: 'title' },
+								"header",
+								{ className: "title" },
 								wp.element.createElement(
-									'h4',
+									"h4",
 									null,
 									wp.element.createElement(RichText.Content, { value: item.subTitle })
 								)
 							),
 							states.hasImage && wp.element.createElement(
-								'div',
-								{ className: 'image' },
+								"div",
+								{ className: "image" },
 								wp.element.createElement(ResponsiveImage, {
 									attr: attributes,
 									keys: imageKeys.image,
@@ -400,8 +386,8 @@ registerBlockType('catpow/lightbox', {
 								})
 							),
 							states.hasText && wp.element.createElement(
-								'div',
-								{ className: 'text' },
+								"div",
+								{ className: "text" },
 								wp.element.createElement(RichText.Content, { value: item.text })
 							)
 						)
@@ -409,7 +395,7 @@ registerBlockType('catpow/lightbox', {
 				})
 			),
 			doLoop && wp.element.createElement(
-				'onEmpty',
+				"onEmpty",
 				null,
 				wp.element.createElement(InnerBlocks.Content, null)
 			)

@@ -119,14 +119,14 @@ registerBlockType('catpow/icons', {
 					value: classArray.join(' ')
 				})
 			),
-			wp.element.createElement(SelectItemClassPanel, {
+			wp.element.createElement(SelectClassPanel, {
 				title: '\u30A2\u30A4\u30C6\u30E0',
 				icon: 'edit',
 				set: setAttributes,
 				attr: attributes,
 				items: items,
 				index: attributes.currentItemIndex,
-				itemClasses: [{ input: 'image', keys: { src: 'src', alt: 'alt' }, size: 'thumbnail' }, { input: 'text', key: 'href', label: 'リンク' }, 'color']
+				selectiveClasses: [{ input: 'image', keys: { src: 'src', alt: 'alt' }, size: 'thumbnail' }, { input: 'text', key: 'href', label: 'リンク' }, 'color']
 			}),
 			wp.element.createElement(ItemControlInfoPanel, null)
 		), wp.element.createElement(

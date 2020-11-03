@@ -106,14 +106,14 @@
 						value={classArray.join(' ')}
 					/>
 				</PanelBody>
-				<SelectItemClassPanel
+				<SelectClassPanel
 					title='アイテム'
 					icon='edit'
 					set={setAttributes}
 					attr={attributes}
 					items={items}
 					index={attributes.currentItemIndex}
-					itemClasses={[
+					selectiveClasses={[
 						{input:'image',keys:{src:'src',alt:'alt'},size:'thumbnail'},
 						{input:'text',key:'href',label:'リンク'},
 						'color'

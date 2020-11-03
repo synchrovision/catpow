@@ -66,7 +66,7 @@ registerBlockType('catpow/sphere',{
 		
 		let rtn=[];
 		const save=()=>{
-			setAttibutes({items:JSON.parse(JSON.stringify(items))});
+			setAttributes({items:JSON.parse(JSON.stringify(items))});
 		};
 
 		items.map((item,index)=>{
@@ -144,14 +144,14 @@ registerBlockType('catpow/sphere',{
 						value={classes}
 					/>
 				</PanelBody>
-				<SelectItemClassPanel
+				<SelectClassPanel
 					title='アイテム'
 					icon='edit'
 					set={setAttributes}
 					attr={attributes}
 					items={items}
 					index={attributes.currentItemIndex}
-					itemClasses={['color']}
+					selectiveClasses={['color']}
 				/>
 				<ItemControlInfoPanel/>
 			</InspectorControls>,

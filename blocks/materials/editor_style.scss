@@ -1,0 +1,19 @@
+@import 'admin_style_config.scss';
+
+ul.wp-block-catpow-pricelist{
+	li.item{
+		@include bnd((p:r));
+		.itemControl{
+			@include bnd((p:a,t:1rem,r:-8rem));
+		}
+		&>.link{
+			@include bnd((p:a,t:0,b:0,l:0,r:0,mgt:a,h:2em));
+			input{
+				@include bnd((mg:0 a));
+				@include txt((c:t));
+			}
+		}
+	}
+	&.edit{
+	}
+}
