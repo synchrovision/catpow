@@ -1,6 +1,6 @@
 registerBlockType('catpow/materials', {
 	title: '🐾 Materials',
-	description: '価格表のブロックです。',
+	description: '材料・成分一覧のブロックです。',
 	icon: 'editor-ul',
 	category: 'catpow',
 	example: CP.example,
@@ -18,7 +18,8 @@ registerBlockType('catpow/materials', {
 		    _attributes$EditMode = attributes.EditMode,
 		    EditMode = _attributes$EditMode === undefined ? false : _attributes$EditMode,
 		    _attributes$AltMode = attributes.AltMode,
-		    AltMode = _attributes$AltMode === undefined ? false : _attributes$AltMode;
+		    AltMode = _attributes$AltMode === undefined ? false : _attributes$AltMode,
+		    currentItemIndex = attributes.currentItemIndex;
 
 		var primaryClass = 'wp-block-catpow-materials';
 
@@ -29,7 +30,7 @@ registerBlockType('catpow/materials', {
 			values: 'isTemplate',
 			sub: [{ input: 'bool', label: 'ループ', key: 'doLoop', sub: [{ label: 'content path', input: 'text', key: 'content_path' }, { label: 'query', input: 'textarea', key: 'query' }, { label: 'プレビューループ数', input: 'range', key: 'loopCount', min: 1, max: 16 }] }]
 		}];
-		var itemSelectiveClasses = [{ label: '見出し', values: 'isHeading' }, { label: 'レベル', values: { level1: '1', level2: '2', level3: '3' } }, { label: '画像', values: 'hasImage' }, { label: 'キャプション', values: 'hasCaption' }];
+		var itemSelectiveClasses = ['color', { label: 'ラベル', values: 'hasLabel' }];
 
 		var rtn = [];
 		var imageKeys = {
@@ -52,52 +53,72 @@ registerBlockType('catpow/materials', {
 					attr: attributes,
 					items: items,
 					index: index,
-					isSelected: isSelected
+					isSelected: isSelected && currentItemIndex == index
 				},
-				itemStates.hasImage && wp.element.createElement(
+				itemStates.hasLabel && wp.element.createElement(
 					'div',
-					{ className: 'image' },
-					wp.element.createElement(SelectResponsiveImage, {
-						attr: attributes,
-						set: setAttributes,
-						keys: imageKeys.image,
-						index: index,
-						size: 'vga'
+					{ className: 'label' },
+					wp.element.createElement(RichText, {
+						onChange: function onChange(label) {
+							item.label = label;save();
+						},
+						value: item.label
 					})
 				),
 				wp.element.createElement(
-					'div',
-					{ className: 'title' },
-					wp.element.createElement(RichText, {
-						onChange: function onChange(title) {
-							item.title = title;save();
-						},
-						value: item.title
-					})
-				),
-				!itemStates.isHeading && wp.element.createElement(
-					Fragment,
-					null,
-					wp.element.createElement('div', { className: 'line' }),
-					wp.element.createElement(
-						'div',
-						{ className: 'price' },
-						wp.element.createElement(RichText, {
-							onChange: function onChange(price) {
-								item.price = price;save();
+					'ul',
+					{ className: 'items' },
+					item.items.map(function (subItem, subIndex) {
+						var subItemStates = CP.wordsToFlags(subItem.classes);
+						return wp.element.createElement(
+							Item,
+							{
+								tag: 'li',
+								set: function set() {
+									item.currentItemIndex = subIndex;
+									save();
+								},
+								attr: item,
+								items: item.items,
+								index: subIndex,
+								isSelected: isSelected && currentItemIndex == index && item.currentItemIndex == subIndex
 							},
-							value: item.price
-						})
-					)
-				),
-				itemStates.hasCaption && wp.element.createElement(
-					'div',
-					{ className: 'caption' },
-					wp.element.createElement(RichText, {
-						onChange: function onChange(caption) {
-							item.caption = caption;save();
-						},
-						value: item.caption
+							wp.element.createElement(
+								'div',
+								{ 'class': 'text' },
+								wp.element.createElement(
+									'div',
+									{ className: 'title' },
+									wp.element.createElement(RichText, {
+										onChange: function onChange(title) {
+											subItem.title = title;save();
+										},
+										value: subItem.title
+									})
+								),
+								wp.element.createElement('div', { className: 'line' }),
+								wp.element.createElement(
+									'div',
+									{ className: 'amount' },
+									wp.element.createElement(RichText, {
+										onChange: function onChange(amount) {
+											subItem.amount = amount;save();
+										},
+										value: subItem.amount
+									})
+								),
+								subItemStates.hasCaption && wp.element.createElement(
+									'div',
+									{ className: 'caption' },
+									wp.element.createElement(RichText, {
+										onChange: function onChange(caption) {
+											subItem.caption = caption;save();
+										},
+										value: subItem.caption
+									})
+								)
+							)
+						);
 					})
 				)
 			));
@@ -168,7 +189,7 @@ registerBlockType('catpow/materials', {
 					wp.element.createElement(EditItemsTable, {
 						set: setAttributes,
 						attr: attributes,
-						columns: [{ type: 'image', label: 'image', keys: imageKeys.image, cond: states.hasImage }, { type: 'text', key: 'imageCode', cond: states.isTemplate && states.hasImage }, { type: 'text', key: 'title', cond: true }, { type: 'text', key: 'caption', cond: true }, { type: 'text', key: 'price', cond: true }],
+						columns: [{ type: 'text', key: 'label', cond: true }, { type: 'items', key: 'items', columns: [{ type: 'text', key: 'title', cond: true }, { type: 'text', key: 'amount', cond: true }, { type: 'text', key: 'caption', cond: true }], cond: true }],
 						isTemplate: states.isTemplate
 					})
 				) : wp.element.createElement(
@@ -207,43 +228,47 @@ registerBlockType('catpow/materials', {
 
 		var states = CP.wordsToFlags(classes);
 
-		var imageKeys = {
-			image: { src: "imageSrc", alt: "imageAlt", items: "items" }
-		};
-
 		var rtn = [];
 		items.map(function (item, index) {
 			var itemStates = CP.wordsToFlags(item.classes);
 			rtn.push(wp.element.createElement(
 				'li',
 				{ className: item.classes },
-				itemStates.hasImage && wp.element.createElement(
+				itemStates.hasLabel && wp.element.createElement(
 					'div',
-					{ className: 'image' },
-					wp.element.createElement(ResponsiveImage, {
-						attr: attributes,
-						keys: imageKeys.image
-					})
+					{ className: 'label' },
+					wp.element.createElement(RichText.Content, { value: item.label })
 				),
 				wp.element.createElement(
-					'div',
-					{ className: 'title' },
-					wp.element.createElement(RichText.Content, { value: item.title })
-				),
-				!itemStates.isHeading && wp.element.createElement(
-					Fragment,
-					null,
-					wp.element.createElement('div', { className: 'line' }),
-					wp.element.createElement(
-						'div',
-						{ className: 'price' },
-						wp.element.createElement(RichText.Content, { value: item.price })
-					)
-				),
-				itemStates.hasCaption && wp.element.createElement(
-					'div',
-					{ className: 'caption' },
-					wp.element.createElement(RichText.Content, { value: item.caption })
+					'ul',
+					{ className: 'items' },
+					item.items.map(function (subItem, subIndex) {
+						var subItemStates = CP.wordsToFlags(subItem.classes);
+						return wp.element.createElement(
+							'li',
+							{ className: subItem.classes },
+							wp.element.createElement(
+								'div',
+								{ 'class': 'text' },
+								wp.element.createElement(
+									'div',
+									{ className: 'title' },
+									wp.element.createElement(RichText.Content, { value: subItem.title })
+								),
+								wp.element.createElement('div', { className: 'line' }),
+								wp.element.createElement(
+									'div',
+									{ className: 'amount' },
+									wp.element.createElement(RichText.Content, { value: subItem.amount })
+								),
+								subItemStates.hasCaption && wp.element.createElement(
+									'div',
+									{ className: 'caption' },
+									wp.element.createElement(RichText.Content, { value: subItem.caption })
+								)
+							)
+						);
+					})
 				)
 			));
 		});
