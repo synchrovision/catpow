@@ -143,7 +143,47 @@ registerBlockType('catpow/sticky',{
 				</div>
 			</div>
 		);
-	}
+	},
+	deplicated:[
+		{
+			save({attributes,className,setAttributes}){
+				const {classes='',labelText}=attributes;
+
+				const states=CP.wordsToFlags(classes);
+				const {imageKeys}=CP.config.sticky;
+
+				return (
+					<div className={classes}>
+						{states.collapsible && 
+							<div class="stickyMenuButton">
+								<div class="stickyMenuButtonIcon">
+									{states.labelButton &&
+										<div className='label'><RichText.Content value={labelText}/></div>
+									}
+									{states.imageButton && [
+										<ResponsiveImage
+											className='open'
+											attr={attributes}
+											keys={imageKeys.openButtonImage}
+										/>,
+										<ResponsiveImage
+											className='close'
+											attr={attributes}
+											keys={imageKeys.closeButtonImage}
+										/>
+									]}
+								</div>
+							</div>
+						}
+						<div class="content">
+							{states.label && <div className="label"><RichText.Content value={labelText}/></div>}
+							{(states.container || states.collapsible) && <InnerBlocks.Content/>}
+						</div>
+					</div>
+				);
+			},
+		}
+	]
 });
 
 registerBlockType('catpow/stickycontent',{

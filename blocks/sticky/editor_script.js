@@ -161,7 +161,60 @@ registerBlockType('catpow/sticky', {
 				(states.container || states.collapsible) && wp.element.createElement(InnerBlocks.Content, null)
 			)
 		);
-	}
+	},
+
+	deplicated: [{
+		save: function save(_ref3) {
+			var attributes = _ref3.attributes,
+			    className = _ref3.className,
+			    setAttributes = _ref3.setAttributes;
+			var _attributes$classes2 = attributes.classes,
+			    classes = _attributes$classes2 === undefined ? '' : _attributes$classes2,
+			    labelText = attributes.labelText;
+
+
+			var states = CP.wordsToFlags(classes);
+			var imageKeys = CP.config.sticky.imageKeys;
+
+
+			return wp.element.createElement(
+				"div",
+				{ className: classes },
+				states.collapsible && wp.element.createElement(
+					"div",
+					{ "class": "stickyMenuButton" },
+					wp.element.createElement(
+						"div",
+						{ "class": "stickyMenuButtonIcon" },
+						states.labelButton && wp.element.createElement(
+							"div",
+							{ className: "label" },
+							wp.element.createElement(RichText.Content, { value: labelText })
+						),
+						states.imageButton && [wp.element.createElement(ResponsiveImage, {
+							className: "open",
+							attr: attributes,
+							keys: imageKeys.openButtonImage
+						}), wp.element.createElement(ResponsiveImage, {
+							className: "close",
+							attr: attributes,
+							keys: imageKeys.closeButtonImage
+						})]
+					)
+				),
+				wp.element.createElement(
+					"div",
+					{ "class": "content" },
+					states.label && wp.element.createElement(
+						"div",
+						{ className: "label" },
+						wp.element.createElement(RichText.Content, { value: labelText })
+					),
+					(states.container || states.collapsible) && wp.element.createElement(InnerBlocks.Content, null)
+				)
+			);
+		}
+	}]
 });
 
 registerBlockType('catpow/stickycontent', {
@@ -169,10 +222,10 @@ registerBlockType('catpow/stickycontent', {
 	icon: 'editor-code',
 	category: 'catpow',
 	parent: ['catpow/sticky'],
-	edit: function edit(_ref3) {
-		var attributes = _ref3.attributes,
-		    className = _ref3.className,
-		    setAttributes = _ref3.setAttributes;
+	edit: function edit(_ref4) {
+		var attributes = _ref4.attributes,
+		    className = _ref4.className,
+		    setAttributes = _ref4.setAttributes;
 
 		return [wp.element.createElement(
 			"div",
@@ -180,10 +233,10 @@ registerBlockType('catpow/stickycontent', {
 			wp.element.createElement(InnerBlocks, { template: [['core/paragraph']], templateLock: false })
 		)];
 	},
-	save: function save(_ref4) {
-		var attributes = _ref4.attributes,
-		    className = _ref4.className,
-		    setAttributes = _ref4.setAttributes;
+	save: function save(_ref5) {
+		var attributes = _ref5.attributes,
+		    className = _ref5.className,
+		    setAttributes = _ref5.setAttributes;
 
 		return wp.element.createElement(
 			"div",
