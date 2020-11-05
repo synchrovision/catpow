@@ -3,7 +3,7 @@ var CP = {
 	cache: {},
 	config: {},
 
-	listedConvertibles: ['catpow/listed', 'catpow/flow', 'catpow/faq', 'catpow/ranking', 'catpow/dialog', 'catpow/sphere', 'catpow/slider', 'catpow/banners', 'catpow/lightbox'],
+	listedConvertibles: ['catpow/listed', 'catpow/flow', 'catpow/faq', 'catpow/ranking', 'catpow/dialog', 'catpow/sphere', 'catpow/slider', 'catpow/banners', 'catpow/lightbox', 'catpow/panes'],
 	tableConvertibles: ['catpow/simpletable', 'catpow/datatable', 'catpow/layouttable'],
 
 	example: {
@@ -860,7 +860,7 @@ var ResponsiveImage = function ResponsiveImage(_ref18) {
 			muted: 1
 		});
 	}
-	if (keys.sources && item[keys.sources].length) {
+	if (keys.sources && item[keys.sources] && item[keys.sources].length) {
 		if (device) {
 			var source = item[keys.sources].find(function (source) {
 				return source.device === device;
@@ -2003,6 +2003,25 @@ var EditItemsTable = function EditItemsTable(props) {
 										keys: babelHelpers.extends({ items: itemsKey }, col.keys),
 										index: index,
 										size: col.size || 'vga',
+										isTemplate: isTemplate
+									})
+								);
+							case 'items':
+								col.columns.map(function (subCol) {
+									if (subCol.keys) {
+										subCol.keys.subItems = col.key;
+									}
+								});
+								return wp.element.createElement(
+									'td',
+									null,
+									wp.element.createElement(EditItemsTable, {
+										set: function set() {
+											save();
+										},
+										attr: item,
+										itemsKey: col.itemsKey,
+										columns: col.columns,
 										isTemplate: isTemplate
 									})
 								);

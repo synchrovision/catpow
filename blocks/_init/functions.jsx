@@ -3,7 +3,7 @@
 	cache:{},
 	config:{},
 	
-	listedConvertibles:['catpow/listed','catpow/flow','catpow/faq','catpow/ranking','catpow/dialog','catpow/sphere','catpow/slider','catpow/banners','catpow/lightbox'],
+	listedConvertibles:['catpow/listed','catpow/flow','catpow/faq','catpow/ranking','catpow/dialog','catpow/sphere','catpow/slider','catpow/banners','catpow/lightbox','catpow/panes'],
 	tableConvertibles:['catpow/simpletable','catpow/datatable','catpow/layouttable'],
 	
 	example:{
@@ -651,7 +651,7 @@ const ResponsiveImage=({className,attr,keys,index,sizes,devices,device,isTemplat
 				></video>
 		);
 	}
-	if(keys.sources && item[keys.sources].length){
+	if(keys.sources && item[keys.sources] && item[keys.sources].length){
 		if(device){
 			const source=item[keys.sources].find((source)=>source.device===device);
 			return (
@@ -1548,6 +1548,23 @@ const EditItemsTable=(props)=>{
 													keys={{items:itemsKey,...col.keys}}
 													index={index}
 													size={col.size || 'vga'}
+													isTemplate={isTemplate}
+												/>
+											</td>
+										);
+									case 'items':
+										col.columns.map((subCol)=>{
+											if(subCol.keys){subCol.keys.subItems=col.key;}
+										});
+										return (
+											<td>
+												<EditItemsTable
+													set={()=>{
+														save();
+													}}
+													attr={item}
+													itemsKey={col.itemsKey}
+													columns={col.columns}
 													isTemplate={isTemplate}
 												/>
 											</td>
