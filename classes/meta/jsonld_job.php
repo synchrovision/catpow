@@ -23,6 +23,19 @@ class jsonld_job extends jsonld{
 				'日雇い'=>"PER_DIEM",
 				'その他'=>"OTHER"
 			]],
+			"baseSalary"=>['type'=>'data','label'=>'給与','@type'=>'MonetaryAmount','multiple'=>1,'meta'=>[
+				'currency'=>['type'=>'select_json','label'=>'通貨','value'=>'currency'],
+				'value'=>['type'=>'data','label'=>'額面','@type'=>'QuantitativeValue','multiple'=>1,'meta'=>[
+					"type"=>['type'=>'select','label'=>'タイプ','value'=>[
+						'時給'=>"HOUR",
+						'日給'=>"DAY",
+						'週給'=>"WEEK",
+						'月給'=>"MONTH",
+						'年収'=>"YEAR",
+					]],
+					"value"=>['type'=>'number','label'=>'価格']
+				]]
+			]],
 			'description'=>['type'=>'textarea','label'=>'説明文','rows'=>20,'cols'=>50],
 			'jobLocation'=>['type'=>'data','label'=>'勤務地','@type'=>'Place','multiple'=>1,'meta'=>[
 				'address'=>['type'=>'data','label'=>'住所','@type'=>'PostalAddress','meta'=>[
