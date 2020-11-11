@@ -28,8 +28,6 @@
 		]
 	},
 	merge(attributes,attributesToMerge) {
-		console.log(attributes);
-		console.log(attributesToMerge);
 		return {
 			title:
 				(attributes.title || '')+

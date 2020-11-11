@@ -25,8 +25,6 @@ registerBlockType('catpow/t-paragraph', {
 		}]
 	},
 	merge: function merge(attributes, attributesToMerge) {
-		console.log(attributes);
-		console.log(attributesToMerge);
 		return {
 			text: (attributes.text || '') + (attributesToMerge.text || '')
 		};
