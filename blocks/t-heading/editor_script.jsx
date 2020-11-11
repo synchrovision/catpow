@@ -27,12 +27,21 @@
 			},
 		]
 	},
+	merge(attributes,attributesToMerge) {
+		console.log(attributes);
+		console.log(attributesToMerge);
+		return {
+			title:
+				(attributes.title || '')+
+				(attributesToMerge.title || '')
+		};
+	},
 	attributes:{
 		classes:{source:'attribute',selector:'table',attribute:'class',default:'wp-block-catpow-t-heading header medium center'},
 		title:{source:'children',selector:'tbody td',default:'Title'}
 	},
 	example:CP.example,
-	edit({attributes,className,setAttributes}){
+	edit({attributes,className,setAttributes,onReplace,mergeBlocks}){
         const {classes,title}=attributes;
 		const primaryClass='wp-block-catpow-t-heading';
 		var states=CP.wordsToFlags(classes);
@@ -49,6 +58,22 @@
 					<tr>
 						<td>
 							<RichText
+								identifier="content"
+								onMerge={mergeBlocks}
+								multiline={false}
+								onSplit={(val)=>{
+									if(!val){
+										return createBlock('catpow/t-paragraph',{
+											classes:'wp-block-catpow-t-paragraph left medium'
+										});
+									}
+									return createBlock('catpow/t-heading',{
+										...attributes,
+										title:val
+									});
+								}}
+								onReplace={onReplace}
+								onRemove={()=>onReplace([])}
 								onChange={(title)=>{setAttributes({title});}}
 								value={title}
 							/>

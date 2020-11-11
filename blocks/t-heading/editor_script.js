@@ -24,6 +24,14 @@ registerBlockType('catpow/t-heading', {
 			}
 		}]
 	},
+	merge: function merge(attributes, attributesToMerge) {
+		console.log(attributes);
+		console.log(attributesToMerge);
+		return {
+			title: (attributes.title || '') + (attributesToMerge.title || '')
+		};
+	},
+
 	attributes: {
 		classes: { source: 'attribute', selector: 'table', attribute: 'class', default: 'wp-block-catpow-t-heading header medium center' },
 		title: { source: 'children', selector: 'tbody td', default: 'Title' }
@@ -32,7 +40,9 @@ registerBlockType('catpow/t-heading', {
 	edit: function edit(_ref) {
 		var attributes = _ref.attributes,
 		    className = _ref.className,
-		    setAttributes = _ref.setAttributes;
+		    setAttributes = _ref.setAttributes,
+		    onReplace = _ref.onReplace,
+		    mergeBlocks = _ref.mergeBlocks;
 		var classes = attributes.classes,
 		    title = attributes.title;
 
@@ -54,6 +64,23 @@ registerBlockType('catpow/t-heading', {
 						'td',
 						null,
 						wp.element.createElement(RichText, {
+							identifier: 'content',
+							onMerge: mergeBlocks,
+							multiline: false,
+							onSplit: function onSplit(val) {
+								if (!val) {
+									return createBlock('catpow/t-paragraph', {
+										classes: 'wp-block-catpow-t-paragraph left medium'
+									});
+								}
+								return createBlock('catpow/t-heading', babelHelpers.extends({}, attributes, {
+									title: val
+								}));
+							},
+							onReplace: onReplace,
+							onRemove: function onRemove() {
+								return onReplace([]);
+							},
 							onChange: function onChange(title) {
 								setAttributes({ title: title });
 							},

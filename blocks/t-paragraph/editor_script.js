@@ -24,6 +24,14 @@ registerBlockType('catpow/t-paragraph', {
 			}
 		}]
 	},
+	merge: function merge(attributes, attributesToMerge) {
+		console.log(attributes);
+		console.log(attributesToMerge);
+		return {
+			text: (attributes.text || '') + (attributesToMerge.text || '')
+		};
+	},
+
 	attributes: {
 		classes: { source: 'attribute', selector: 'table', attribute: 'class', default: 'wp-block-catpow-t-paragraph medium' },
 		text: { source: 'children', selector: 'tbody td', default: 'text' }
@@ -32,7 +40,9 @@ registerBlockType('catpow/t-paragraph', {
 	edit: function edit(_ref) {
 		var attributes = _ref.attributes,
 		    className = _ref.className,
-		    setAttributes = _ref.setAttributes;
+		    setAttributes = _ref.setAttributes,
+		    onReplace = _ref.onReplace,
+		    mergeBlocks = _ref.mergeBlocks;
 		var classes = attributes.classes,
 		    text = attributes.text;
 
@@ -54,6 +64,22 @@ registerBlockType('catpow/t-paragraph', {
 						'td',
 						null,
 						wp.element.createElement(RichText, {
+							identifier: 'content',
+							onMerge: mergeBlocks,
+							onSplit: function onSplit(val) {
+								if (!val) {
+									return createBlock('catpow/t-paragraph', {
+										classes: 'wp-block-catpow-t-paragraph left medium'
+									});
+								}
+								return createBlock('catpow/t-paragraph', babelHelpers.extends({}, attributes, {
+									text: val
+								}));
+							},
+							onReplace: onReplace,
+							onRemove: function onRemove() {
+								return onReplace([]);
+							},
 							onChange: function onChange(text) {
 								setAttributes({ text: text });
 							},
