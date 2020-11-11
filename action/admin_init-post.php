@@ -70,12 +70,6 @@ add_action('cp_save_post',function($id,$post){
 		}
 	}
 },10,2);
-add_filter('user_can_richedit',function($can_richedit){
-	if(isset($GLOBALS['post_types'][get_post_type()]['richedit'])){
-		return $GLOBALS['post_types'][get_post_type()]['richedit'];
-	}
-	return $can_richedit;
-});
 add_filter('use_block_editor_for_post',function($use_block_editor,$post){
 	if($post->post_type==='page'){
 		global $static_pages;
@@ -84,5 +78,5 @@ add_filter('use_block_editor_for_post',function($use_block_editor,$post){
 			return false;
 		}
 	}
-	return $use_block_editor;
-},10,2);
+	return $GLOBALS['post_types'][$post->post_type]['richedit']??$use_block_editor;
+},11,2);
