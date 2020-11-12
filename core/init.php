@@ -76,6 +76,11 @@ add_action('delete_blog',function($blog_id, $drop){
 },10,2);
 
 
+/*メール*/
+add_action('phpmailer_init',function($phpmailer){
+	cp::include_plugin_files('action/phpmailer_init',compact(['phpmailer']));
+});
+
 /*cronアクション*/
 add_action('cp_cron_every_minutes',function(){
 	cp::include_plugin_files('action/cron_every_minutes');
