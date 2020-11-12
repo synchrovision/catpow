@@ -103,7 +103,7 @@
 		var states=CP.wordsToFlags(classes);
 		return (
 			<Fragment>
-				<textmail>{textMail}</textmail>
+				{textMail && <textmail>{textMail}</textmail>}
 				<table width="100%" align="center" valign="top" className={classes}>
 					{states.hasHeader &&
 						<thead>

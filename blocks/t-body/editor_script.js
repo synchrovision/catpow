@@ -142,7 +142,7 @@ registerBlockType('catpow/t-body', {
 		return wp.element.createElement(
 			Fragment,
 			null,
-			wp.element.createElement(
+			textMail && wp.element.createElement(
 				'textmail',
 				null,
 				textMail
