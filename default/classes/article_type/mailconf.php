@@ -34,6 +34,9 @@ class mailconf extends article_type{
 				'name'=>['type'=>'post_name','label'=>'名前'],
 				'to'=>['type'=>'text','label'=>'送信先','size'=>30],
 				'from'=>['type'=>'text','label'=>'送信元','size'=>30]
+			],
+			'default_content'=>[
+				['catpow/t-body']
 			]
 		],$conf_data);
 	}
