@@ -29,6 +29,7 @@
 					<TextareaControl
 						value={textMail}
 						onChange={(textMail)=>setAttributes({textMail})}
+						rows={20}
 					/>
 				 ):(
 					<div className={"mail_body "+body_class}>

@@ -35,7 +35,8 @@ registerBlockType('catpow/t-body', {
 				value: textMail,
 				onChange: function onChange(textMail) {
 					return setAttributes({ textMail: textMail });
-				}
+				},
+				rows: 20
 			}) : wp.element.createElement(
 				'div',
 				{ className: "mail_body " + body_class },
