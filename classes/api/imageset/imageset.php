@@ -17,12 +17,13 @@ class imageset extends \Catpow\api{
 						$image_file=$set_dir_path.'/'.$image_file_name;
 						if($image_file_name==='default' || !file_exists($image_file)){continue;}
 						$size=getimagesize($image_file);
-						$data[$set][]=array_merge($conf['default']??[],$image_conf,[
+						$data[$set][]=[
 							'url'=>$dir_url.'/'.$set.'/'.$image_file_name,
 							'width'=>$size[0]??false,
 							'height'=>$size[1]??false,
 							'alt'=>substr($image_file_name,0,-4),
-						]);
+							'conf'=>array_merge($conf['default']??[],$image_conf),
+						];
 					}
 				}
 			}
@@ -33,12 +34,13 @@ class imageset extends \Catpow\api{
 		foreach($posts as $post){
 			$image=wp_get_attachment_image_src($post->ID,'full');
 			$set=get_post_meta($post->ID,'imageset',true);
-			$data[$set][]=array_merge(get_post_meta($post->ID,'conf',true)?:[],[
+			$data[$set][]=[
 				'url'=>$image[0],
 				'width'=>$image[1],
 				'height'=>$image[2],
 				'alt'=>get_post_meta($post->ID,'_wp_attachment_image_alt',true),
-			]);
+				'conf'=>array_merge(get_post_meta($post->ID,'conf',true)?:[])
+			];
 		}
 		$res->set_data($data);
 	}
