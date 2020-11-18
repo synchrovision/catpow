@@ -610,6 +610,18 @@ class CP{
 		$name=implode('\\',array_filter(func_get_args()));
 		return '\\Catpow\\'.$name;
 	}
+	public static function get_preserved_class_names($path){
+		$dirs=self::get_file_paths('classes/'.$path);
+		$rtn=[];
+		foreach($dirs as $dir){
+			foreach(scandir($dir) as $f){
+				if(substr($f,-4)==='.php'){
+					$rtn[]=substr($f,0,-4);
+				}
+			}
+		}
+		return $rtn;
+	}
 	
 	/*設定データ取得*/
 	public static function get_the_conf_data($content_path){
