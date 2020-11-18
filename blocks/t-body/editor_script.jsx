@@ -3,6 +3,9 @@
 	description:'HTMLメールのベースとなるヘッダ・フッタのブロックです。',
 	icon:'editor-code',
 	category:'catpow-mail',
+	supports:{
+		multiple: false
+	},
 	attributes:{
 		classes:{source:'attribute',selector:'table',attribute:'class',default:'wp-block-catpow-t-body hasHeader hasFooter'},
 		headerText:{source:'children',selector:'thead th',default:['Title']},
