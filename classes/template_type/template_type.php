@@ -77,6 +77,10 @@ abstract class template_type{
 					$rep.="&cp_token_key=\$matches[{$matches_index}]";
 					$matches_index++;
 					break;
+				case 'finder':
+					$reg.=$path_data['data_name'];
+					$rep.="&cp_page_type=finder&cp_data_name={$path_data['data_name']}";
+					break;
 				case 'single':
 					$reg.=$path_data['data_name'];
 					if($tmp_name!=='single'){$reg.='/'.$tmp_name;}
@@ -104,6 +108,13 @@ abstract class template_type{
 						$matches_index++;
 					}
 				}
+			}
+			switch($link_data[0]){
+				case 'finder':
+					$reg.="/{$tmp_name}(/.*)?";
+					$rep.="&cp_finder_path=\$matches[{$matches_index}]";
+					$matches_index++;
+					break;
 			}
 			if(isset($link_data[1])){
 				$reg.='/'.$link_data[1];

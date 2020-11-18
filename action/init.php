@@ -351,6 +351,7 @@ add_filter('query_vars', function($vars){
 		'cp_tmp_slug','cp_tmp_folder',
 		'cp_file_slug',
 		'meta_path',
+		'cp_finder_path',
 		'cp_token','cp_token_key',
 		'cp_callee'
 	));
