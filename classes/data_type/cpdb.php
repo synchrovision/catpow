@@ -4,9 +4,16 @@ namespace Catpow\data_type;
 class cpdb extends data_type{
 	public static
 		$data_type='cpdb',
-		$default_template=[];
+		$default_template=[],
+		$key_translation=['id'=>'meta_id'];
 	public $table_name,$data;
 	
+	public static function get_title($obj){
+		return $obj->title??$obj->name??reset($obj->data);
+	}
+	public static function get_content($obj){
+		return apply_filters('the_content',$obj->content??$obj->desc??$obj->text??reset($obj->data));
+	}
 	public static function get_meta($data_name,$data_id,$meta_name,$single=false){
 		static $cache;
 		global $cpdb;
