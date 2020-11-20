@@ -253,6 +253,30 @@ ul.selectPreparedImage {
     ul.selectPreparedImage .item.active {
       background-color: #007cba; }
 
+ul.selectPreparedImageSet {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  background-color: #dadada;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ececec; }
+  ul.selectPreparedImageSet .item {
+    -webkit-box-flex: 0;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 10%;
+    box-sizing: border-box;
+    cursor: pointer; }
+    ul.selectPreparedImageSet .item img {
+      width: 100%;
+      height: auto; }
+    ul.selectPreparedImageSet .item.active {
+      background-color: #007cba; }
+
 table.editItemsTable {
   border-collapse: collapse;
   border-spacing: 0px;
