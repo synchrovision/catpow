@@ -6,11 +6,17 @@ abstract class data_type{
 	public static function get_id($obj){
 		return $obj->{static::$key_translation['id']};
 	}
+	public static function get_name($obj){
+		return $obj->{static::$key_translation['name']};
+	}
 	public static function get_title($obj){
 		return $obj->{static::$key_translation['title']};
 	}
 	public static function get_content($obj){
 		return apply_filters('the_content',$obj->{static::$key_translation['content']});
+	}
+	public static function get_uri($obj){
+		return static::get_name($obj);
 	}
 	public static function get_meta($data_name,$data_id,$meta_name,$single=false){
 		return get_metadata(static::$data_type,$data_id,$meta_name,$single);
