@@ -5,6 +5,8 @@ namespace Catpow\api\imageset;
 */
 
 class imageset extends \Catpow\api{
+	public static $param_pattern='(?P<repeat>s|r)?(?P<slice>\d+(_\d+)*)',$param_default=['set'=>null,'device'=>'pc','repeat'=>'round','width'=>null,'slice'=>null];
+	
 	public static function call($req,$res){
 		$data=[];
 		$data_name=static::get_data_name();
@@ -33,16 +35,26 @@ class imageset extends \Catpow\api{
 		]]);
 		foreach($posts as $post){
 			$image=wp_get_attachment_image_src($post->ID,'full');
-			$set=get_post_meta($post->ID,'imageset',true);
+			$conf=get_post_meta($post->ID,'conf',true);
+			$set=$conf['set'];
 			$data[$set][]=[
 				'url'=>$image[0],
 				'width'=>$image[1],
 				'height'=>$image[2],
 				'alt'=>get_post_meta($post->ID,'_wp_attachment_image_alt',true),
-				'conf'=>array_merge(get_post_meta($post->ID,'conf',true)?:[])
+				'conf'=>$conf
 			];
 		}
+		$data=static::fill_data($data);
 		$res->set_data($data);
+	}
+	public static function parse_file_name($name){
+		$reg='/^((?P<type>'.static::get_data_name().')(?:\-'.static::$param_pattern.')?\-)?(?P<set>.+)(?:\-(?P<device>pc|lt|tb|sp))?(?P<ext>\.\w+)$/';
+		preg_match($reg,$name,$matches);
+		return array_merge(static::$param_default,array_filter(array_intersect_key($matches,static::$param_default)));
+	}
+	public static function fill_data($data){
+		return $data;
 	}
 }
 
