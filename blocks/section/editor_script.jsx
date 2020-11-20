@@ -55,6 +55,9 @@ registerBlockType('catpow/section',{
 			CP.config.section.devices,'.wp-block-catpow-section>.background picture','dummy_bg.jpg'
 		),
 		
+		frameImageCss:{source:'text',selector:'style.frameImageCss'},
+		borderImageCss:{source:'text',selector:'style.borderImageCss'},
+		
 		iconSrc:{source:'attribute',selector:'.icon [src]',attribute:'src',default:cp.theme_url+'/images/dummy_icon.svg'},
 		iconAlt:{source:'attribute',selector:'.icon [src]',attribute:'alt'},
 	},
@@ -66,8 +69,13 @@ registerBlockType('catpow/section',{
 			headerBackgroundImageCode,
 			imageMime,imageSrc,imageSrcset,imageAlt,imageCode,
 			backgroundImageSrc,backgroundImageCode,
+			frameImageCss,borderImageCss,
 			iconSrc,iconAlt
 		}=attributes;
+		
+		if(!id){
+			setAttributes({id:'s'+(new Date().getTime().toString(16))})
+		}
 		
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys,imageSizes}=CP.config.section;
@@ -149,6 +157,12 @@ registerBlockType('catpow/section',{
 						{label:'メニューアイコン',values:'hasNavIcon',sub:[
 							{input:'image',label:'アイコン',keys:imageKeys.navIcon,size:'thumbnail'}
 						]},
+						{label:'フレーム画像',values:'hasFrameImage',sub:[
+							{input:'frame',css:'frameImageCss',sel:'#'+id},
+						]},
+						{label:'ボーダー画像',values:'hasBorderImage',sub:[
+							{input:'border',css:'borderImageCss',sel:'#'+id+' > .contents'},
+						]},
 						{
 							label:'テンプレート',
 							values:'isTemplate',
@@ -186,6 +200,9 @@ registerBlockType('catpow/section',{
 						{label:'影',values:'shadow',sub:[{label:'内側',values:'inset'}]},
 						{label:'メニューアイコン',values:'hasNavIcon',sub:[
 							{input:'image',label:'アイコン',keys:imageKeys.navIcon,size:'thumbnail'}
+						]},
+						{label:'ボーダー画像',values:'hasBorderImage',sub:[
+							{input:'border',css:'borderImageCss',sel:'#'+id+' > .contents'},
 						]},
 						{
 							label:'テンプレート',
@@ -297,6 +314,12 @@ registerBlockType('catpow/section',{
 						)}
 					</div>
 				}
+				{states.hasBorderImage && (
+					<style>{borderImageCss}</style>
+				)}
+				{states.hasFrameImage && (
+					<style>{frameImageCss}</style>
+				)}
 			</section>,
 			<InspectorControls>
 				<SelectClassPanel
@@ -331,6 +354,7 @@ registerBlockType('catpow/section',{
 			headerBackgroundImageCode,
 			imageSrc,imageSrcset,imageAlt,imageCode,
 			backgroundImageSrc,backgroundImageCode,
+			frameImageCss,borderImageCss,
 			iconSrc,iconAlt
 		}=attributes;
 		
@@ -409,6 +433,12 @@ registerBlockType('catpow/section',{
 						)}
 					</div>
 				}
+				{states.hasBorderImage && (
+					<style className="borderImageCss">{borderImageCss}</style>
+				)}
+				{states.hasFrameImage && (
+					<style className="frameImageCss">{frameImageCss}</style>
+				)}
 			</section>
 		);
 	},
