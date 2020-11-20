@@ -3,8 +3,15 @@ namespace Catpow;
 
 add_action("add_attachment",function($id){
 	$default_actions=[
-		'/^(?P<type>icon|symbol|pattern)\-(?P<name>[^\.]+)/'=>function($post,$matches){
+		'/^(?P<type>'.implode('|',CP::get_preserved_class_names('api/images')).')\-(?P<name>[^\.]+)/'=>function($post,$matches){
 			add_post_meta($post->ID,'is_'.$matches['type'],1);
+			$class_name=CP::get_class_name('api','images',$matches['type']);
+			add_post_meta($post->ID,'conf',$class_name::parse_file_name(basename($post->guid)));
+		},
+		'/^(?P<type>'.implode('|',CP::get_preserved_class_names('api/imageset')).')\-(?P<name>[^\.]+)/'=>function($post,$matches){
+			add_post_meta($post->ID,'is_'.$matches['type'],1,true);
+			$class_name=CP::get_class_name('api','imageset',$matches['type']);
+			add_post_meta($post->ID,'conf',$class_name::parse_file_name(basename($post->guid)));
 		}
 	];
 	$actions=array_merge($default_actions,$GLOBALS['post_types']['attachment']['bind']??[]);
