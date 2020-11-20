@@ -37,7 +37,7 @@ registerBlockType('catpow/buttons', {
 		var itemClasses = ['color', { label: '属性', filter: 'rank', values: ['default', 'primary', 'negative', 'danger', 'secure'] }, { label: 'アイコン', values: 'hasIcon', sub: [{ input: 'icon' }] }, 'event'];
 
 		var saveItems = function saveItems() {
-			setAttributes({ rows: JSON.parse(JSON.stringify(rows)) });
+			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
 		var rtn = [];

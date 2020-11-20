@@ -42,7 +42,7 @@
 		];
 		
 		const saveItems=()=>{
-			setAttributes({rows:JSON.parse(JSON.stringify(rows))});
+			setAttributes({items:JSON.parse(JSON.stringify(items))});
 		}
 		
 		let rtn=[];
