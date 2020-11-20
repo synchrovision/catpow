@@ -59,6 +59,9 @@ var CP = {
 					data[keys.srcset] += image.sizes[sizeData.media_size].url + sizeData.rep;
 				});
 			}
+			if (keys.data) {
+				data[keys.data] = image;
+			}
 			set(data);
 		}).open();
 	},
@@ -499,8 +502,11 @@ var CP = {
 		}
 		var obj = {};
 		css.split(';').map(function (pair) {
-			pair = pair.split(':');
-			obj[pair[0]] = pair[1];
+			var match = pair.match(/^([^:]+?):(.+)$/);
+			if (!match) {
+				return;
+			}
+			obj[match[1]] = match[2];
 		});
 		return obj;
 	},
@@ -512,12 +518,74 @@ var CP = {
 			return key + ':' + data[key] + ';';
 		}).join('');
 	},
+	parseStyleCode: function parseStyleCode(code) {
+		var rtn = {};
+		var _iteratorNormalCompletion = true;
+		var _didIteratorError = false;
+		var _iteratorError = undefined;
+
+		try {
+			for (var _iterator = code.matchAll(/(\S.+?){([^}]+)}/g)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+				var match = _step.value;
+
+				rtn[match[1]] = CP.parseStyleString(match[2]);
+			}
+		} catch (err) {
+			_didIteratorError = true;
+			_iteratorError = err;
+		} finally {
+			try {
+				if (!_iteratorNormalCompletion && _iterator.return) {
+					_iterator.return();
+				}
+			} finally {
+				if (_didIteratorError) {
+					throw _iteratorError;
+				}
+			}
+		}
+
+		return rtn;
+	},
 	createStyleCode: function createStyleCode(data) {
 		if (!data) {
 			return '';
 		}
 		return Object.keys(data).map(function (sel) {
 			return sel + '{' + CP.createStyleString(data[sel]) + '}';
+		}).join('');
+	},
+	parseStyleCodeWithMediaQuery: function parseStyleCodeWithMediaQuery(code) {
+		if (!code) {
+			return {};
+		}
+		var rtn = {};
+		var reg = /@media\s*\((.+?)\)\s*{([^}]+})\s*}/;
+		var defaultCode = code.replaceAll(new RegExp(reg, 'g'), function (str) {
+			var matches = str.match(reg);
+			rtn[matches[1]] = CP.parseStyleCode(matches[2]);
+			return '';
+		});
+		rtn['default'] = CP.parseStyleCode(defaultCode);
+		return rtn;
+	},
+	createStyleCodeWithMediaQuery: function createStyleCodeWithMediaQuery(data) {
+		var rtn = '';
+		return Object.keys(data).map(function (media) {
+			if (media === 'default') {
+				return { p: -10000, media: media };
+			}
+			var matches = media.match(/(min|max)\-width:(\d+)px/);
+			return { p: parseInt(matches[2]) * { min: 1, max: -1 }[matches[1]], media: media };
+		}).sort(function (a, b) {
+			return a.p - b.p;
+		}).map(function (d) {
+			return d.media;
+		}).map(function (media) {
+			if (media === 'default') {
+				return CP.createStyleCode(data[media]);
+			}
+			return '@media(' + media + '){' + CP.createStyleCode(data[media]) + '}';
 		}).join('');
 	},
 
@@ -596,6 +664,7 @@ var CP = {
 	devices: {
 		sp: {
 			icon: 'smartphone',
+			width: 480,
 			media_query: '(max-width:640px)',
 			sizes: '(max-width:640px) 480px',
 			sizes_value: '480px',
@@ -605,6 +674,7 @@ var CP = {
 		},
 		tb: {
 			icon: 'tablet',
+			width: 960,
 			media_query: '(max-width:1280px)',
 			sizes: '(max-width:1280px) 960px',
 			sizes_value: '960px',
@@ -614,6 +684,7 @@ var CP = {
 		},
 		lt: {
 			icon: 'laptop',
+			width: 1440,
 			media_query: '(max-width:1920px)',
 			sizes: '(max-width:1920px) 1440px',
 			sizes_value: '1440px',
@@ -623,6 +694,7 @@ var CP = {
 		},
 		pc: {
 			icon: 'desktop',
+			width: 1920,
 			media_query: false,
 			sizes: '100vw',
 			sizes_value: '100vw',
@@ -657,6 +729,12 @@ var CP = {
 		return devices.map(function (device) {
 			return { srcset: cp.theme_url + '/images/' + (image || 'dummy.jpg'), device: device };
 		});
+	},
+	getMediaQueryKeyForDevice: function getMediaQueryKeyForDevice(device) {
+		if (!CP.devices[device].media_query) {
+			return 'default';
+		}
+		return CP.devices[device].media_query.slice(1, -1);
 	},
 
 	selectiveClassesPreset: {
@@ -938,48 +1016,91 @@ var SelectPictureSources = function SelectPictureSources(props) {
 
 var SelectPreparedImage = function SelectPreparedImage(_ref19) {
 	var className = _ref19.className,
-	    attr = _ref19.attr,
-	    set = _ref19.set,
 	    name = _ref19.name,
-	    keys = _ref19.keys,
-	    index = _ref19.index,
-	    otherProps = babelHelpers.objectWithoutProperties(_ref19, ['className', 'attr', 'set', 'name', 'keys', 'index']);
+	    value = _ref19.value,
+	    onChange = _ref19.onChange,
+	    otherProps = babelHelpers.objectWithoutProperties(_ref19, ['className', 'name', 'value', 'onChange']);
 
 	var onClick = void 0;
 
-	var _wp$element$useState = wp.element.useState([]),
+	var _wp$element$useState = wp.element.useState(null),
 	    _wp$element$useState2 = babelHelpers.slicedToArray(_wp$element$useState, 2),
 	    images = _wp$element$useState2[0],
 	    setImages = _wp$element$useState2[1];
 
-	wp.apiFetch({ path: 'cp/v1/images/' + name }).then(setImages);
-	if (keys.items) {
-		item = attr[keys.items][index];
-		onClick = function onClick(e) {
-			var items = JSON.parse(JSON.stringify(attr[keys.items]));
-			items[index][keys.src] = e.currentTarget.src;
-			items[index][keys.alt] = e.currentTarget.alt;
-			set(babelHelpers.defineProperty({}, keys.items, items));
-		};
-	} else {
-		item = attr;
-		onClick = function onClick(e) {
-			var _set12;
+	CP.cache.PreparedImage = CP.cache.PreparedImage || {};
 
-			return set((_set12 = {}, babelHelpers.defineProperty(_set12, keys.src, e.currentTarget.src), babelHelpers.defineProperty(_set12, keys.alt, e.currentTarget.alt), _set12));
-		};
+	if (images === null) {
+		if (CP.cache.PreparedImage[name]) {
+			setImages(CP.cache.PreparedImage[name]);
+		} else {
+			wp.apiFetch({ path: 'cp/v1/images/' + name }).then(function (data) {
+				CP.cache.PreparedImage[name] = data;
+				setImages(data);
+			});
+		}
+		return false;
 	}
+
 	return wp.element.createElement(
 		'ul',
 		babelHelpers.extends({ className: 'selectPreparedImage ' + name + ' ' + className }, otherProps),
 		images.map(function (image) {
 			return wp.element.createElement(
 				'li',
-				{ className: 'item ' + (item[keys.src] == image.url ? 'active' : '') },
+				{ className: 'item ' + (value == image.url ? 'active' : '') },
 				wp.element.createElement('img', {
 					src: image.url,
 					alt: image.alt,
-					onClick: onClick
+					onClick: function onClick() {
+						return onChange(image);
+					}
+				})
+			);
+		})
+	);
+};
+var SelectPreparedImageSet = function SelectPreparedImageSet(_ref20) {
+	var className = _ref20.className,
+	    name = _ref20.name,
+	    value = _ref20.value,
+	    onChange = _ref20.onChange,
+	    otherProps = babelHelpers.objectWithoutProperties(_ref20, ['className', 'name', 'value', 'onChange']);
+
+	var onClick = void 0;
+
+	var _wp$element$useState3 = wp.element.useState(null),
+	    _wp$element$useState4 = babelHelpers.slicedToArray(_wp$element$useState3, 2),
+	    imagesets = _wp$element$useState4[0],
+	    setImagesets = _wp$element$useState4[1];
+
+	CP.cache.PreparedImageSets = CP.cache.PreparedImageSets || {};
+
+	if (imagesets === null) {
+		if (CP.cache.PreparedImageSets[name]) {
+			setImagesets(CP.cache.PreparedImageSets[name]);
+		} else {
+			wp.apiFetch({ path: 'cp/v1/imageset/' + name }).then(function (data) {
+				CP.cache.PreparedImageSets[name] = data;
+				setImagesets(data);
+			});
+		}
+		return false;
+	}
+	return wp.element.createElement(
+		'ul',
+		babelHelpers.extends({ className: 'selectPreparedImageSet ' + name + ' ' + className }, otherProps),
+		Object.keys(imagesets).map(function (key) {
+			var imageset = imagesets[key];
+			return wp.element.createElement(
+				'li',
+				{ className: 'item ' + (value == imageset[0].url ? 'active' : '') },
+				wp.element.createElement('img', {
+					src: imageset[0].url,
+					alt: imageset[0].alt,
+					onClick: function onClick() {
+						return onChange(imageset);
+					}
 				})
 			);
 		})
@@ -1193,6 +1314,7 @@ var SelectClassPanel = function SelectClassPanel(props) {
 		item = attr;
 	}
 	var states = CP.wordsToFlags(item[key]);
+	var styleDatas = {};
 
 	var save = function save(data) {
 		if (items) {
@@ -1204,6 +1326,9 @@ var SelectClassPanel = function SelectClassPanel(props) {
 	};
 	var saveClasses = function saveClasses() {
 		save(babelHelpers.defineProperty({}, key, CP.flagsToWords(states)));
+	};
+	var saveCss = function saveCss(cssKey) {
+		set(babelHelpers.defineProperty({}, cssKey, CP.createStyleCodeWithMediaQuery(styleDatas[cssKey])));
 	};
 	var SelectClass = function SelectClass(prm) {
 		if (prm.hasOwnProperty('cond') && !prm.cond) {
@@ -1331,6 +1456,68 @@ var SelectClassPanel = function SelectClassPanel(props) {
 					value: JSON.parse(props.attr[prm.json])[prm.key],
 					onChange: function onChange(val) {
 						CP.setJsonValue(props, prm.json, prm.key, val);
+					}
+				}));
+			}
+		} else if (prm.css) {
+			if (!styleDatas[prm.css]) {
+				styleDatas[prm.css] = CP.parseStyleCodeWithMediaQuery(attr[prm.css]);
+			}
+			var _prm$device = prm.device,
+			    device = _prm$device === undefined ? 'pc' : _prm$device;
+
+			var media = CP.getMediaQueryKeyForDevice(device);
+			styleDatas[prm.css][media] = styleDatas[prm.css][media] || {};
+			styleDatas[prm.css][media][prm.sel] = styleDatas[prm.css][media][prm.sel] || {};
+			var tgt = styleDatas[prm.css][media][prm.sel];
+			if (prm.input) {
+				switch (prm.input) {
+					case 'border':
+						rtn.push(wp.element.createElement(SelectPreparedImage, {
+							name: 'border',
+							value: tgt['border-image'] && tgt['border-image'].match(/url\((.+?)\)/)[1] || false,
+							onChange: function onChange(image) {
+								var _image$conf = image.conf,
+								    slice = _image$conf.slice,
+								    width = _image$conf.width,
+								    repeat = _image$conf.repeat;
+
+								tgt['border-style'] = 'solid';
+								tgt['border-image'] = 'url(' + image.url + ') fill ' + slice + ' / ' + width + ' ' + repeat;
+								saveCss(prm.css);
+							}
+						}));
+						break;
+					case 'frame':
+						rtn.push(wp.element.createElement(SelectPreparedImageSet, {
+							name: 'frame',
+							value: tgt['border-image'] && tgt['border-image'].match(/url\((.+?)\)/)[1] || false,
+							onChange: function onChange(imageset) {
+								imageset.map(function (image) {
+									var _image$conf2 = image.conf,
+									    device = _image$conf2.device,
+									    slice = _image$conf2.slice,
+									    width = _image$conf2.width,
+									    repeat = _image$conf2.repeat;
+
+									var media = CP.getMediaQueryKeyForDevice(device);
+									styleDatas[prm.css][media] = styleDatas[prm.css][media] || {};
+									styleDatas[prm.css][media][prm.sel] = styleDatas[prm.css][media][prm.sel] || {};
+									styleDatas[prm.css][media][prm.sel]['border-style'] = 'solid';
+									styleDatas[prm.css][media][prm.sel]['border-image'] = 'url(' + image.url + ') fill ' + slice + ' / ' + width + ' ' + repeat;
+								});
+								saveCss(prm.css);
+							}
+						}));
+						break;
+				}
+			} else {
+				rtn.push(wp.element.createElement(TextControl, {
+					label: prm.label,
+					value: tgt[prm.attr],
+					onChange: function onChange(val) {
+						tgt[prm.attr] = val;
+						saveCss(prm.css);
 					}
 				}));
 			}
@@ -1536,13 +1723,16 @@ var SelectClassPanel = function SelectClassPanel(props) {
 								prm.label
 							));
 						}
-						rtn.push(wp.element.createElement(SelectPreparedImage, babelHelpers.defineProperty({
-							index: index,
-							set: props.set,
-							attr: props.attr,
+						console.log('icon');
+						rtn.push(wp.element.createElement(SelectPreparedImage, {
 							name: prm.input,
-							keys: prm.keys
-						}, 'index', index)));
+							value: item[prm.keys.src],
+							onChange: function onChange(image) {
+								var _save6;
+
+								save((_save6 = {}, babelHelpers.defineProperty(_save6, prm.keys.src, image.url), babelHelpers.defineProperty(_save6, prm.keys.alt, image.alt), _save6));
+							}
+						}));
 						break;
 				}
 			} else if (_.isObject(prm.values)) {
@@ -1876,7 +2066,8 @@ var SelectModeToolbar = function SelectModeToolbar(props) {
 	var icons = {
 		EditMode: 'edit',
 		OpenMode: 'video-alt3',
-		AltMode: 'welcome-comments'
+		AltMode: 'welcome-comments',
+		TextMode: 'media-text'
 	};
 	var cond = {
 		AltMode: 'doLoop'
@@ -2053,8 +2244,8 @@ var EditItemsTable = function EditItemsTable(props) {
 	);
 };
 
-var DummyImage = function DummyImage(_ref20) {
-	var text = _ref20.text;
+var DummyImage = function DummyImage(_ref21) {
+	var text = _ref21.text;
 
 	return wp.element.createElement('img', { src: cp.plugins_url + '/catpow/callee/dummy_image.php?text=' + text });
 };

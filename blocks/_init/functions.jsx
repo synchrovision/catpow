@@ -55,6 +55,9 @@
 					data[keys.srcset]+=image.sizes[sizeData.media_size].url+sizeData.rep;
 				});
 			}
+			if(keys.data){
+				data[keys.data]=image;
+			}
 			set(data);
 		}).open();
 	},
@@ -318,13 +321,15 @@
         CP.setJsonValue(prop,json,key,values);
     },
 	
+	
 	parseStyleString:(css)=>{
 		if(css instanceof Object){return css;}
 		if(!css){return {};}
 		var obj={}
 		css.split(';').map((pair)=>{
-			pair=pair.split(':');
-			obj[pair[0]]=pair[1];
+			const match=pair.match(/^([^:]+?):(.+)$/);
+			if(!match){return;}
+			obj[match[1]]=match[2];
 		});
 		return obj;
 	},
@@ -334,10 +339,40 @@
 			return key+':'+data[key]+';';
 		}).join('');
 	},
+	parseStyleCode:(code)=>{
+		let rtn={};
+		for(const match of code.matchAll(/(\S.+?){([^}]+)}/g)){
+			rtn[match[1]]=CP.parseStyleString(match[2]);
+		}
+		return rtn;
+	},
 	createStyleCode:(data)=>{
 		if(!data){return '';}
 		return Object.keys(data).map((sel)=>{
 			return sel+'{'+CP.createStyleString(data[sel])+'}';
+		}).join('');
+	},
+	parseStyleCodeWithMediaQuery:(code)=>{
+		if(!code){return {};}
+		var rtn={};
+		const reg=/@media\s*\((.+?)\)\s*{([^}]+})\s*}/;
+		const defaultCode=code.replaceAll(new RegExp(reg,'g'),(str)=>{
+			const matches=str.match(reg);
+			rtn[matches[1]]=CP.parseStyleCode(matches[2]);
+			return '';
+		});
+		rtn['default']=CP.parseStyleCode(defaultCode);
+		return rtn;
+	},
+	createStyleCodeWithMediaQuery:(data)=>{
+		var rtn='';
+		return Object.keys(data).map((media)=>{
+			if(media==='default'){return {p:-10000,media};}
+			const matches=media.match(/(min|max)\-width:(\d+)px/);
+			return {p:parseInt(matches[2])*{min:1,max:-1}[matches[1]],media};
+		}).sort((a,b)=>a.p-b.p).map((d)=>d.media).map((media)=>{
+			if(media==='default'){return CP.createStyleCode(data[media]);}
+			return '@media('+media+'){'+CP.createStyleCode(data[media])+'}';
 		}).join('');
 	},
 	
@@ -404,6 +439,7 @@
 	devices:{
 		sp:{
 			icon:'smartphone',
+			width:480,
 			media_query:'(max-width:640px)',
 			sizes:'(max-width:640px) 480px',
 			sizes_value:'480px',
@@ -413,6 +449,7 @@
 		},
 		tb:{
 			icon:'tablet',
+			width:960,
 			media_query:'(max-width:1280px)',
 			sizes:'(max-width:1280px) 960px',
 			sizes_value:'960px',
@@ -422,6 +459,7 @@
 		},
 		lt:{
 			icon:'laptop',
+			width:1440,
 			media_query:'(max-width:1920px)',
 			sizes:'(max-width:1920px) 1440px',
 			sizes_value:'1440px',
@@ -431,6 +469,7 @@
 		},
 		pc:{
 			icon:'desktop',
+			width:1920,
 			media_query:false,
 			sizes:'100vw',
 			sizes_value:'100vw',
@@ -460,6 +499,10 @@
 	},
 	getPictureSoucesAttributesDefaultValueForDevices:(devices,image)=>{
 		return devices.map((device)=>({srcset:cp.theme_url+'/images/'+(image || 'dummy.jpg'),device}));
+	},
+	getMediaQueryKeyForDevice:(device)=>{
+		if(!CP.devices[device].media_query){return 'default';}
+		return CP.devices[device].media_query.slice(1,-1);
 	},
 	
 	selectiveClassesPreset:{
@@ -715,35 +758,67 @@ const SelectPictureSources=(props)=>{
 	);
 };
 
-const SelectPreparedImage=({className,attr,set,name,keys,index,...otherProps})=>{
+const SelectPreparedImage=({className,name,value,onChange,...otherProps})=>{
 	let onClick;
-	const [images,setImages]=wp.element.useState([]);
-	wp.apiFetch({path:'cp/v1/images/'+name}).then(setImages);
-	if(keys.items){
-		item=attr[keys.items][index];
-		onClick=(e)=>{
-			let items=JSON.parse(JSON.stringify(attr[keys.items]));
-			items[index][keys.src]=e.currentTarget.src;
-			items[index][keys.alt]=e.currentTarget.alt;
-			set({[keys.items]:items});
-		};
+	const [images,setImages]=wp.element.useState(null);
+	CP.cache.PreparedImage=CP.cache.PreparedImage || {};
+	
+	if(images===null){
+		if(CP.cache.PreparedImage[name]){
+			setImages(CP.cache.PreparedImage[name]);
+		}
+		else{
+			wp.apiFetch({path:'cp/v1/images/'+name}).then((data)=>{
+				CP.cache.PreparedImage[name]=data;
+				setImages(data);
+			});
+		}
+		return false;
 	}
-	else{
-		item=attr;
-		onClick=(e)=>set({
-			[keys.src]:e.currentTarget.src,
-			[keys.alt]:e.currentTarget.alt
-		});
-	}
+	
 	return (
 		<ul className={'selectPreparedImage '+name+' '+className} {...otherProps}>
 			{images.map((image)=>{
 				return (
-					<li className={'item '+((item[keys.src]==image.url)?'active':'')}>
+					<li className={'item '+((value==image.url)?'active':'')}>
 						<img
 							src={image.url}
 							alt={image.alt}
-							onClick={onClick}
+							onClick={()=>onChange(image)}
+						/>
+					</li>
+				);
+			})}
+		</ul>
+	);
+}
+const SelectPreparedImageSet=({className,name,value,onChange,...otherProps})=>{
+	let onClick;
+	const [imagesets,setImagesets]=wp.element.useState(null);
+	CP.cache.PreparedImageSets=CP.cache.PreparedImageSets || {};
+	
+	if(imagesets===null){
+		if(CP.cache.PreparedImageSets[name]){
+			setImagesets(CP.cache.PreparedImageSets[name]);
+		}
+		else{
+			wp.apiFetch({path:'cp/v1/imageset/'+name}).then((data)=>{
+				CP.cache.PreparedImageSets[name]=data;
+				setImagesets(data);
+			});
+		}
+		return false;
+	}
+	return (
+		<ul className={'selectPreparedImageSet '+name+' '+className} {...otherProps}>
+			{Object.keys(imagesets).map((key)=>{
+				const imageset=imagesets[key];
+				return (
+					<li className={'item '+((value==imageset[0].url)?'active':'')}>
+						<img
+							src={imageset[0].url}
+							alt={imageset[0].alt}
+							onClick={()=>onChange(imageset)}
 						/>
 					</li>
 				);
@@ -869,6 +944,7 @@ const SelectClassPanel=(props)=>{
 		item=attr;
 	}
 	let states=CP.wordsToFlags(item[key]);
+	let styleDatas={};
 	
 	const save=(data)=>{
 		if(items){
@@ -881,6 +957,9 @@ const SelectClassPanel=(props)=>{
 	}
 	const saveClasses=()=>{
 		save({[key]:CP.flagsToWords(states)});
+	}
+	const saveCss=(cssKey)=>{
+		set({[cssKey]:CP.createStyleCodeWithMediaQuery(styleDatas[cssKey])});
 	}
 	const SelectClass=(prm)=>{
 		if(prm.hasOwnProperty('cond') && !prm.cond){
@@ -997,6 +1076,65 @@ const SelectClassPanel=(props)=>{
                 );
             }
         }
+		else if(prm.css){
+			if(!styleDatas[prm.css]){
+				styleDatas[prm.css]=CP.parseStyleCodeWithMediaQuery(attr[prm.css]);
+			}
+			const {device='pc'}=prm;
+			const media=CP.getMediaQueryKeyForDevice(device);
+			styleDatas[prm.css][media]=styleDatas[prm.css][media] || {};
+			styleDatas[prm.css][media][prm.sel]=styleDatas[prm.css][media][prm.sel] || {};
+			const tgt=styleDatas[prm.css][media][prm.sel];
+            if(prm.input){
+				switch(prm.input){
+					case 'border':
+						rtn.push(
+							<SelectPreparedImage
+								name="border"
+								value={tgt['border-image'] && tgt['border-image'].match(/url\((.+?)\)/)[1] || false}
+								onChange={(image)=>{
+									const {slice,width,repeat}=image.conf;
+									tgt['border-style']='solid';
+									tgt['border-image']='url('+image.url+') fill '+slice+' / '+width+' '+repeat;
+									saveCss(prm.css);
+								}}
+							/>
+						);
+						break;
+					case 'frame':
+						rtn.push(
+							<SelectPreparedImageSet
+								name="frame"
+								value={tgt['border-image'] && tgt['border-image'].match(/url\((.+?)\)/)[1] || false}
+								onChange={(imageset)=>{
+									imageset.map((image)=>{
+										const {device,slice,width,repeat}=image.conf;
+										const media=CP.getMediaQueryKeyForDevice(device);
+										styleDatas[prm.css][media] = styleDatas[prm.css][media] || {};
+										styleDatas[prm.css][media][prm.sel] = styleDatas[prm.css][media][prm.sel] || {};
+										styleDatas[prm.css][media][prm.sel]['border-style']='solid';
+										styleDatas[prm.css][media][prm.sel]['border-image']='url('+image.url+') fill '+slice+' / '+width+' '+repeat;
+									});
+									saveCss(prm.css);
+								}}
+							/>
+						);
+						break;
+				}
+			}
+			else{
+                rtn.push(
+                    <TextControl
+                        label={prm.label}
+                        value={tgt[prm.attr]}
+                        onChange={(val)=>{
+							tgt[prm.attr]=val;
+							saveCss(prm.css);
+						}}
+                    />
+                );
+			}
+		}
         else{
             if(prm === 'color'){
                 rtn.push(
@@ -1172,14 +1310,17 @@ const SelectClassPanel=(props)=>{
 						if(prm.label){
 							rtn.push(<h5>{prm.label}</h5>);
 						}
+						console.log('icon');
 						rtn.push(
 							<SelectPreparedImage
-								index={index}
-								set={props.set}
-								attr={props.attr}
 								name={prm.input}
-								keys={prm.keys}
-								index={index}
+								value={item[prm.keys.src]}
+								onChange={(image)=>{
+									save({
+										[prm.keys.src]:image.url,
+										[prm.keys.alt]:image.alt,
+									});
+								}}
 							/>
 						);
 						break;
@@ -1447,7 +1588,8 @@ const SelectModeToolbar=(props)=>{
 	const icons={
 		EditMode:'edit',
 		OpenMode:'video-alt3',
-		AltMode:'welcome-comments'
+		AltMode:'welcome-comments',
+		TextMode:'media-text'
 	};
 	const cond={
 		AltMode:'doLoop'
