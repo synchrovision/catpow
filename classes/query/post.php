@@ -91,7 +91,7 @@ class post extends query{
 		return $this->query->found_posts;
 	}
 	public function loop(){
-		$org_post=$GLOBALS['post'];
+		$org_post=$GLOBALS['post']??null;
 		if(isset($this->objects)){
 			foreach($this->objects as $GLOBALS['post']){
 				yield $GLOBALS['post']->ID=>$GLOBALS['post'];
