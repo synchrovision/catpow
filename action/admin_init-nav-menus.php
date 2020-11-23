@@ -1,27 +1,14 @@
 <?php
 namespace Catpow;
 
-global $post_types;
-foreach($post_types as $post_type_name=>$post_type_data){
-	foreach(array('検索'=>'search','メールフォーム'=>'mail','投稿フォーム'=>'post') as $tmp_label=>$tmp_name){
-		if(isset($post_type_data['template']) and in_array($tmp_name,$post_type_data['template'])){
-			add_filter("nav_menu_items_{$post_type_name}",function($posts,$args,$post_type)use($tmp_label,$tmp_name){
-				array_unshift($posts,(object)array(
-					'db_id'=>null,
-					'menu_item_parent'=>null,
-					'target'=>null,
-					'attr_title'=>null,
-					'classes'=>array(),
-					'xfn'=>null,
-					'title'=>$post_type->label.":{$tmp_label}",
-					'object_id'=>$tmp_name.'_'.$args['post_type'],
-					'object'=>$args['post_type'],
-					'type'=>'custom',
-					'url'=>home_url("/{$args['post_type']}/{$tmp_name}/")
-				));
-				return $posts;
-			},10,3);
-			add_filter('nav_menu_items_page',function($posts)use($tmp_label,$tmp_name,$post_type_name,$post_type_data){
+CP::conf_data_walk(function($data_type,$data_name,&$conf_data){
+	if(empty($conf_data['template'])){return;}
+	foreach($conf_data['template'] as $template){
+		$class_name=CP::get_class_name('template_type',$template);
+		foreach($class_name::get_nav_menu_items($conf_data) as $label=>$uri){
+			$menu_items_name=$data_type=='post'?$data_name:'page';
+			error_log(var_export($menu_items_name,1).__FILE__.__LINE__);
+			add_filter("nav_menu_items_{$menu_items_name}",function($posts)use($data_name,$template,$label,$uri){
 				array_unshift($posts,(object)array(
 					'ID'=>null,
 					'db_id'=>null,
@@ -30,41 +17,17 @@ foreach($post_types as $post_type_name=>$post_type_data){
 					'attr_title'=>null,
 					'classes'=>array(),
 					'xfn'=>null,
-					'title'=>$post_type_data['label'].":{$tmp_label}",
-					'object_id'=>"{$tmp_name}_{$post_type_name}",
-					'object'=>$post_type_name,
+					'title'=>$label,
+					'object_id'=>$template.'_'.$data_name,
+					'object'=>$data_name,
 					'type'=>'custom',
-					'url'=>home_url("/{$post_type_name}/{$tmp_name}/")
+					'url'=>home_url($uri)
 				));
 				return $posts;
-			},10,3);
+			},10);
 		}
 	}
-}
-global $user_datas;
-foreach((array)$user_datas as $user_data_name=>$user_data){
-	foreach(array('マイページ'=>'me','検索'=>'search','登録'=>'register') as $tmp_label=>$tmp_name){
-		if(isset($user_data['template']) and in_array($tmp_name,$user_data['template'])){
-			add_filter('nav_menu_items_page',function($posts)use($tmp_label,$tmp_name,$user_data_name,$user_data){
-				array_unshift($posts,(object)array(
-					'ID'=>null,
-					'db_id'=>null,
-					'menu_item_parent'=>null,
-					'target'=>null,
-					'attr_title'=>null,
-					'classes'=>array(),
-					'xfn'=>null,
-					'title'=>$user_data['label'].":{$tmp_label}",
-					'object_id'=>"{$tmp_name}_{$user_data_name}",
-					'object'=>$user_data_name,
-					'type'=>'custom',
-					'url'=>home_url("/{$user_data_name}/{$tmp_name}/")
-				));
-				return $posts;
-			},10,3);
-		}
-	}
-}
+});
 
 add_filter('wp_edit_nav_menu_walker',function(){return 'Catpow\\Walker_Nav_Menu_Edit_With_Meta';});
 
