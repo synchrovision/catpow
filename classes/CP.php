@@ -788,6 +788,14 @@ class CP{
 		$class_name::fill_conf($conf);
 		if(!isset($conf['label']))$conf['label']=$conf['name'];
 		if(substr($conf['label'],-1)=='*')$conf['required']=true;
+		if(!empty($conf['show_in_rest'])){
+			$path_data=self::parse_conf_data_path($path);
+			register_meta($path_data['data_type'],$conf['name'],[
+				'object_subtype'=>$path_data['data_name'],
+				'single'=>empty($conf['multiple'])?:$class_name::$is_bulk_input,
+				'show_in_rest'=>true,
+			]);
+		}
 		if($class_name::$has_children){
 			self::fill_confs($conf['meta'],$conf['path']);
 		}
