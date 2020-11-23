@@ -10,6 +10,12 @@ class register extends template_type{
 	public static function get_embeddables($conf_data){
 		return ['form'=>['登録'=>'form.php']];
 	}
+	
+	public static function get_nav_menu_items($conf_data){
+		return [
+			$conf_data['label'].'  登録'=>$conf_data['name'].'/register'
+		];
+	}
 	public static function get_menus($conf_data){
 		return [
 			'sub'=>[
@@ -63,46 +69,6 @@ class register extends template_type{
 			'register_mail/confirm-'.$name=>['post_title'=>$conf_data['label'].'登録確認'],
 			'register_mail/thanks-'.$name=>['post_title'=>$conf_data['label'].'登録完了'],
 			'register_mail/notice-'.$name=>['post_title'=>$conf_data['label'].'登録通知'],
-		];
-	}
-	public static function get_template_files($conf_data){
-		$name=basename($conf_data['path']);
-		return [
-			'index.php'=>['',[
-				'php',
-				'namespace Catpow;',
-				"§form();"
-			]],
-			'form.php'=>['',[
-				'php',
-				'namespace Catpow;',
-				'global $res;',
-				"\$path='register_form/form-{$name}';",
-				"if(!empty(\$action) && \$action !== 'form'){\$path.='/'.\$action;}",
-				'$post_data=cp::get_post_data($path);',
-				"if(\$post_data['meta']['receive'][0]==1){receive();}",
-				"if(\$post_data['meta']['push'][0]==1){push();}",
-				"if(!empty(\$post_data['meta']['send_mail'])){cp::send_mails(\$post_data['meta']['send_mail']);}",
-				"if(isset(\$post_data['meta']['clear'])){clear(array_sum(\$post_data['meta']['clear']));}",
-				'content($path);'
-			]],
-			'task.php'=>['',[
-				'php',
-				'namespace Catpow;',
-				'global $res;',
-				"\$path='register_form/task-{$name}';",
-				"if(!empty(\$action) && \$action !== 'form'){\$path.='/'.\$action;}",
-				'$post_data=cp::get_post_data($path);',
-				"if(\$post_data['meta']['receive'][0]==1){receive();}",
-				"if(\$post_data['meta']['push'][0]==1){push();}",
-				"if(!empty(\$post_data['meta']['send_mail'])){cp::send_mails(\$post_data['meta']['send_mail']);}",
-				"if(isset(\$post_data['meta']['clear'])){clear(array_sum(\$post_data['meta']['clear']));}",
-				'content($path);'
-			]],
-			'header.php'=>['','@catpow','@page_header'],
-			'footer.php'=>['','@catpow','@page_footer'],
-			'style.scss'=>['@config'],
-			'script.js'=>[],
 		];
 	}
 	public static function get_form_type($file){

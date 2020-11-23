@@ -10,18 +10,9 @@ class search extends template_type{
 	public static function get_embeddables($conf_data){
 		return ['form'=>['検索フォーム'=>'form.php']];
 	}
-	public static function get_template_files($conf_data){
+	public static function get_nav_menu_items($conf_data){
 		return [
-			'index.php'=>['','@catpow'],
-			'form.php'=>['','@catpow'],
-			'results.php'=>['','@catpow'],
-			'loop_item.php'=>['','@catpow'],
-			'sec_search.php'=>['','@catpow'],
-			'header.php'=>['','@catpow'],
-			'footer.php'=>['','@catpow'],
-			'sidebar.php'=>['','@catpow'],
-			'style.scss'=>[],
-			'script.js'=>[],
+			$conf_data['label'].'  検索'=>$conf_data['name'].'/search'
 		];
 	}
 }
