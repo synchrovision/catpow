@@ -21,6 +21,8 @@ while($fname = $cpjs_dir->read()){
 
 
 wp_enqueue_style('font_awesome','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css');
+wp_register_script('urljs','https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.19.2/URI.min.js');
+wp_register_script('axios','https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js');
 
 wp_enqueue_script('catpow');
 wp_localize_script('catpow','cp',array(
@@ -351,7 +353,7 @@ add_filter('query_vars', function($vars){
 		'cp_tmp_slug','cp_tmp_folder',
 		'cp_file_slug',
 		'meta_path',
-		'cp_finder_path',
+		'cp_finder_path','q',
 		'cp_token','cp_token_key',
 		'cp_callee'
 	));
