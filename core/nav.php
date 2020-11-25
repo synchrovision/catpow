@@ -34,6 +34,7 @@ function get_menu_location($menu_item_id,$single=false){
 	static $menu_location;
 	if(empty($menu_location)){
 		$menu_location=array();
+		if(get_theme_mod('nav_menu_locations')===false){return false;}
 		foreach(get_theme_mod('nav_menu_locations') as $location_name=>$menu_id){
 			if(is_wp_error($menu_id))continue;
 			if(empty($menu_location[$menu_id])){
