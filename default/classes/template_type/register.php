@@ -13,7 +13,7 @@ class register extends template_type{
 	
 	public static function get_nav_menu_items($conf_data){
 		return [
-			$conf_data['label'].'  登録'=>$conf_data['name'].'/register'
+			$conf_data['label'].'  登録'=>$conf_data['data_name'].'/register'
 		];
 	}
 	public static function get_menus($conf_data){

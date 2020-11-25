@@ -12,7 +12,7 @@ class search extends template_type{
 	}
 	public static function get_nav_menu_items($conf_data){
 		return [
-			$conf_data['label'].'  検索'=>$conf_data['name'].'/search'
+			$conf_data['label'].'  検索'=>$conf_data['data_name'].'/search'
 		];
 	}
 }
