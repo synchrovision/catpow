@@ -4,10 +4,9 @@ namespace Catpow;
 CP::conf_data_walk(function($data_type,$data_name,&$conf_data){
 	if(empty($conf_data['template'])){return;}
 	foreach($conf_data['template'] as $template){
-		$class_name=CP::get_class_name('template_type',$template);
+		$class_name=CP::get_class_name('template_type',explode('-',$template)[0]);
 		foreach($class_name::get_nav_menu_items($conf_data) as $label=>$uri){
 			$menu_items_name=$data_type=='post'?$data_name:'page';
-			error_log(var_export($menu_items_name,1).__FILE__.__LINE__);
 			add_filter("nav_menu_items_{$menu_items_name}",function($posts)use($data_name,$template,$label,$uri){
 				array_unshift($posts,(object)array(
 					'ID'=>null,
