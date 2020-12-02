@@ -465,6 +465,9 @@ class CP{
 		$done[$name]=1;
 		return true;
 	}
+	public static function use_components($names){
+		foreach($names as $name){self::use_component($name);}
+	}
 	public static function use_component($name){
 		static $done=[];
 		if(isset($done[$name])){return false;}
