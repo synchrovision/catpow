@@ -2,13 +2,16 @@ Catpow.Contents = function (props) {
 	var _wp$element = wp.element,
 	    useEffect = _wp$element.useEffect,
 	    useRef = _wp$element.useRef;
-	var deps = props.contents.deps;
+	var _props$className = props.className,
+	    className = _props$className === undefined ? 'contents' : _props$className,
+	    deps = props.deps,
+	    html = props.html;
 
 
 	var ref = useRef({});
 
 	useEffect(function () {
-		ref.current.innerHTML = props.contents.html;
+		ref.current.innerHTML = html;
 		if (deps.styles) {
 			deps.styles.filter(function (href) {
 				for (var i = 0; i < document.styleSheets.length; i++) {
@@ -39,7 +42,7 @@ Catpow.Contents = function (props) {
 				document.body.appendChild(el);
 			});
 		}
-	}, []);
+	}, [html, deps]);
 
-	return wp.element.createElement('div', { className: 'contents', ref: ref });
+	return wp.element.createElement('div', { className: className, ref: ref });
 };

@@ -1,11 +1,11 @@
 ﻿Catpow.Contents=(props)=>{
 	const {useEffect,useRef}=wp.element;
-	const {deps}=props.contents;
+	const {className='contents',deps,html}=props;
 	
 	const ref=useRef({});
 	
 	useEffect(()=>{
-		ref.current.innerHTML=props.contents.html;
+		ref.current.innerHTML=html;
 		if(deps.styles){
 			deps.styles.filter((href)=>{
 				for(let i=0;i<document.styleSheets.length;i++){
@@ -32,9 +32,9 @@
 				document.body.appendChild(el);
 			});
 		}
-	},[]);
+	},[html,deps]);
 	
 	return (
-		<div className="contents" ref={ref}/>
+		<div className={className} ref={ref}/>
 	);
 }
