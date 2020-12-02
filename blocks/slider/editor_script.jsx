@@ -237,6 +237,8 @@ registerBlockType('catpow/slider',{
 								attr={attributes}
 								set={setAttributes}
 								keys={imageKeys.backgroundImage}
+								devices={devices}
+								device={device}
 								index={index}
 								isTemplate={states.isTemplate}
 							/>
@@ -342,11 +344,11 @@ registerBlockType('catpow/slider',{
 						set={setAttributes}
 						attr={attributes}
 						columns={[
-							{type:'image',label:'slide',keys:imageKeys.slide,cond:states.hasSlide},
+							{type:'picture',label:'slide',keys:imageKeys.slide,devices,cond:states.hasSlide},
 							{type:'text',key:'slideCode',cond:states.isTemplate && states.hasSlide},
 							{type:'image',label:'image',keys:imageKeys.image,cond:states.hasImage},
 							{type:'text',key:'imageCode',cond:states.isTemplate && states.hasImage},
-							{type:'image',label:'bg',keys:imageKeys.backgroundImage,cond:states.hasBackgroundImage},
+							{type:'picture',label:'bg',keys:imageKeys.backgroundImage,devices,cond:states.hasBackgroundImage},
 							{type:'text',key:'backgroundImageCode',cond:states.isTemplate && states.hasBackgroundImage},
 							{type:'text',key:'title',cond:states.hasTitle},
 							{type:'text',key:'subTitle',cond:states.hasSubTitle},
@@ -424,6 +426,7 @@ registerBlockType('catpow/slider',{
 							<ResponsiveImage
 								attr={attributes}
 								keys={imageKeys.backgroundImage}
+								devices={devices}
 								index={index}
 								isTemplate={states.isTemplate}
 							/>

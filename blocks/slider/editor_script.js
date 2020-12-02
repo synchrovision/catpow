@@ -195,6 +195,8 @@ registerBlockType('catpow/slider', {
 						attr: attributes,
 						set: setAttributes,
 						keys: imageKeys.backgroundImage,
+						devices: devices,
+						device: device,
 						index: index,
 						isTemplate: states.isTemplate
 					})
@@ -312,7 +314,7 @@ registerBlockType('catpow/slider', {
 			attributes.EditMode ? wp.element.createElement(EditItemsTable, {
 				set: setAttributes,
 				attr: attributes,
-				columns: [{ type: 'image', label: 'slide', keys: imageKeys.slide, cond: states.hasSlide }, { type: 'text', key: 'slideCode', cond: states.isTemplate && states.hasSlide }, { type: 'image', label: 'image', keys: imageKeys.image, cond: states.hasImage }, { type: 'text', key: 'imageCode', cond: states.isTemplate && states.hasImage }, { type: 'image', label: 'bg', keys: imageKeys.backgroundImage, cond: states.hasBackgroundImage }, { type: 'text', key: 'backgroundImageCode', cond: states.isTemplate && states.hasBackgroundImage }, { type: 'text', key: 'title', cond: states.hasTitle }, { type: 'text', key: 'subTitle', cond: states.hasSubTitle }, { type: 'text', key: 'text', cond: states.hasText }, { type: 'text', key: 'linkUrl', cond: states.hasLink }],
+				columns: [{ type: 'picture', label: 'slide', keys: imageKeys.slide, devices: devices, cond: states.hasSlide }, { type: 'text', key: 'slideCode', cond: states.isTemplate && states.hasSlide }, { type: 'image', label: 'image', keys: imageKeys.image, cond: states.hasImage }, { type: 'text', key: 'imageCode', cond: states.isTemplate && states.hasImage }, { type: 'picture', label: 'bg', keys: imageKeys.backgroundImage, devices: devices, cond: states.hasBackgroundImage }, { type: 'text', key: 'backgroundImageCode', cond: states.isTemplate && states.hasBackgroundImage }, { type: 'text', key: 'title', cond: states.hasTitle }, { type: 'text', key: 'subTitle', cond: states.hasSubTitle }, { type: 'text', key: 'text', cond: states.hasText }, { type: 'text', key: 'linkUrl', cond: states.hasLink }],
 				isTemplate: states.isTemplate
 			}) : wp.element.createElement(
 				Fragment,
@@ -434,6 +436,7 @@ registerBlockType('catpow/slider', {
 					wp.element.createElement(ResponsiveImage, {
 						attr: attributes,
 						keys: imageKeys.backgroundImage,
+						devices: devices,
 						index: index,
 						isTemplate: states.isTemplate
 					})
