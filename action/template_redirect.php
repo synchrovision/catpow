@@ -12,10 +12,7 @@ if(get_query_var('cp_page_type')==='file'){
 	if($file=cp::get_file_path($path,cp::FROM_THEME|cp::FROM_CONFIG)){
 		Catpow\util\response::output($file);
 	}
-	if($file=cp::get_file_path($path.'.php',cp::FROM_THEME|cp::FROM_CONFIG)){
-		include $file;
-		exit;
-	}
+	if(cp::get_template_part($path.'.php')){exit;}
 	header('HTTP/1.0 404 NotFound');
 	exit;
 }
