@@ -961,11 +961,19 @@ class CP{
 		if(isset($path_datas[$path]))return $path_datas[$path];
 		self::sanitize_path($path);
 		$path_data=self::parse_content_path(dirname($path));
-		if(preg_match('/^([\w_]+)(\-[\w\-_]+)?((\.\w+)?\.\w+)?$/',basename($path),$matches)){
+		if(preg_match('/^([\w_]+)(\-[\w\-_]+)?(\.\w+)?(\.\w+)?$/',basename($path),$matches)){
 			$path_data['file_name']=$matches[1];
 			if(!empty($matches[2])){$path_data['file_slug']=substr($matches[2],1);}
-			if(empty($matches[3])){$path_data['file_type']='php';}
-			else{$path_data['file_type']=substr($matches[3],1);}
+			if(empty($matches[3])){
+				$path_data['file_type']='php';
+			}
+			elseif(empty($matches[4])){
+				$path_data['file_type']=substr($matches[3],1);
+			}
+			else{
+				$path_data['file_sub_type']=substr($matches[3],1);
+				$path_data['file_type']=substr($matches[4],1);
+			}
 			$path_datas[$path]=$path_data;
 		}
 		return $path_data;
@@ -974,6 +982,7 @@ class CP{
 		$rtn=self::create_content_path($path_data);
 		if(isset($path_data['file_name'])){$rtn.='/'.$path_data['file_name'];}
 		if(isset($path_data['file_slug'])){$rtn.='-'.$path_data['file_slug'];}
+		if(isset($path_data['file_sub_type'])){$rtn.='.'.$path_data['file_sub_type'];}
 		if(isset($path_data['file_type'])){$rtn.='.'.$path_data['file_type'];}
 		self::sanitize_path($rtn);
 		return $rtn;
