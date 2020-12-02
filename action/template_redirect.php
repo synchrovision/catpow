@@ -10,9 +10,7 @@ if(get_query_var('cp_page_type')==='file'){
 		exit;
 	}
 	if($file=cp::get_file_path($path,cp::FROM_THEME|cp::FROM_CONFIG)){
-		header('Content-type: '.mime_content_type($file));
-		readfile($file);
-		exit;
+		Catpow\util\response::output($file);
 	}
 	if($file=cp::get_file_path($path.'.php',cp::FROM_THEME|cp::FROM_CONFIG)){
 		include $file;
