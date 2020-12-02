@@ -195,8 +195,11 @@ table.editItemsTable{
 			@include bg((c:t 3));
 		}
 		td{
-			img{
+			&>img{
 				@include bnd((w:6em,h:a));
+			}
+			.SelectPictureSources{
+				@include bnd((w:10rem));
 			}
 		}
 	}

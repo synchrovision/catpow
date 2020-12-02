@@ -2197,6 +2197,20 @@ var EditItemsTable = function EditItemsTable(props) {
 										isTemplate: isTemplate
 									})
 								);
+							case 'picture':
+								return wp.element.createElement(
+									'td',
+									null,
+									wp.element.createElement(SelectPictureSources, {
+										index: index,
+										attr: attr,
+										set: set,
+										keys: babelHelpers.extends({ items: itemsKey }, col.keys),
+										sizes: col.sizes,
+										devices: col.devices,
+										isTemplate: isTemplate
+									})
+								);
 							case 'items':
 								col.columns.map(function (subCol) {
 									if (subCol.keys) {

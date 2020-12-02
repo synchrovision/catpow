@@ -294,6 +294,8 @@ table.editItemsTable {
       background-color: #f6f6f6; }
   table.editItemsTable tbody th {
     background-color: #f9f9f9; }
-    table.editItemsTable tbody td img {
+    table.editItemsTable tbody td > img {
       width: 6em;
       height: auto; }
+    table.editItemsTable tbody td .SelectPictureSources {
+      width: 10rem; }

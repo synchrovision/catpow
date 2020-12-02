@@ -1694,6 +1694,20 @@ const EditItemsTable=(props)=>{
 												/>
 											</td>
 										);
+									case 'picture':
+										return (
+											<td>
+												<SelectPictureSources
+													index={index}
+													attr={attr}
+													set={set}
+													keys={{items:itemsKey,...col.keys}}
+													sizes={col.sizes}
+													devices={col.devices}
+													isTemplate={isTemplate}
+												/>
+											</td>
+										);
 									case 'items':
 										col.columns.map((subCol)=>{
 											if(subCol.keys){subCol.keys.subItems=col.key;}
