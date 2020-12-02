@@ -1,0 +1,34 @@
+@import "config/style_config.scss";
+
+.finder{
+	@include bnd((w:a 96rem,mg:2rem a,pd:2rem));
+	@include flx((w:w));
+	@include shd((b:2));
+	&_tags{
+		@include bnd((f:1 1 f,pd:1rem));
+		&_item{
+			@include bnd((d:ib,pd:.5rem 1rem,mg:.5rem));
+			@include bdr((s:s,w:1,c:t,r:2rem));
+			@include usr((c:p));
+			@include trn((t:.5s,o:1));
+			&.active{
+				@include bg((c:m));
+				@include txt((c:b));
+			}
+			&.empty{
+				@include trn((o:.5));
+			}
+		}
+	}
+	&_items{
+		@include bnd((f:1 1 20rem,h:a 80vh,oy:a));
+		&_item{
+			@include bnd((pd:1rem));
+			@include bdr((s:s,w:1,c:t 10));
+			@include usr((c:p));
+		}
+	}
+	&_contents{
+		@include bnd((f:1 1 60rem));
+	}
+}

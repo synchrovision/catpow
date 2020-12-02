@@ -1,0 +1,55 @@
+@charset "utf-8";
+.finder {
+  max-width: 96rem;
+  width: auto;
+  margin: 2rem auto;
+  padding: 2rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); }
+  .finder_tags {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 100%;
+    padding: 1rem; }
+    .finder_tags_item {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      margin: 0.5rem;
+      border-style: solid;
+      border-width: 1px;
+      border-color: #666;
+      border-radius: 2rem;
+      cursor: pointer;
+      -webkit-transition: 0.5s;
+      transition: 0.5s;
+      opacity: 1; }
+      .finder_tags_item.active {
+        background-color: #E87700;
+        color: #fff; }
+      .finder_tags_item.empty {
+        opacity: 0.5; }
+  .finder_items {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 20rem;
+    max-height: 80vh;
+    height: auto;
+    overflow-y: auto; }
+    .finder_items_item {
+      padding: 1rem;
+      border-style: solid;
+      border-width: 1px;
+      border-color: #f0f0f0;
+      cursor: pointer; }
+  .finder_contents {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 60rem; }
