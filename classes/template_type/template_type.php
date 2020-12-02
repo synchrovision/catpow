@@ -78,10 +78,6 @@ abstract class template_type{
 					$rep.="&cp_token_key=\$matches[{$matches_index}]";
 					$matches_index++;
 					break;
-				case 'finder':
-					$reg.=$path_data['data_name'];
-					$rep.="&cp_page_type=finder&cp_data_name={$path_data['data_name']}";
-					break;
 				case 'single':
 					$reg.=$path_data['data_name'];
 					if($tmp_name!=='single'){$reg.='/'.$tmp_name;}
@@ -89,10 +85,12 @@ abstract class template_type{
 					$rep.="&cp_page_type=single&cp_data_name={$path_data['data_name']}&cp_data_id=\$matches[{$matches_index}]";
 					$matches_index++;
 					break;
+				case 'file':
+				case 'finder':
 				case 'archive':
 					$reg.=$path_data['data_name'];
 					if($tmp_name!=='archive'){$reg.='/'.$tmp_name;}
-					$rep.="&cp_page_type=archive&cp_data_name={$path_data['data_name']}";
+					$rep.="&cp_page_type={$link_data[0]}&cp_data_name={$path_data['data_name']}";
 					break;
 				default:
 					$rep.="&cp_page_type=me";
@@ -110,16 +108,21 @@ abstract class template_type{
 					}
 				}
 			}
-			switch($link_data[0]){
-				case 'finder':
-					$reg.="/{$tmp_name}(/.*)?";
-					$rep.="&cp_finder_path=\$matches[{$matches_index}]";
-					$matches_index++;
-					break;
-			}
 			if(isset($link_data[1])){
 				$reg.='/'.$link_data[1];
 				$rep.='&cp_file_slug='.$link_data[1];
+			}
+			switch($link_data[0]){
+				case 'file':
+					$reg.="/([\w\-_\/]*\.\w{2,4})?";
+					$rep.="&cp_file_path=\$matches[{$matches_index}]";
+					$matches_index++;
+					break;
+				case 'finder':
+					$reg.="(/.*)?";
+					$rep.="&cp_finder_path=\$matches[{$matches_index}]";
+					$matches_index++;
+					break;
 			}
 			$rtn[]=compact('reg','rep');
 			if($link_data[0]==='archive'){
