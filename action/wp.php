@@ -8,5 +8,3 @@ if(current_user_can('edit_themes')){
 		cp::get_the_content_path().'/mail'
 	));
 }
-/*ページinit*/
-get_template_part(cp::get_the_content_path().'/init');
