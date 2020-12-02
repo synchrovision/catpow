@@ -961,7 +961,7 @@ class CP{
 		if(isset($path_datas[$path]))return $path_datas[$path];
 		self::sanitize_path($path);
 		$path_data=self::parse_content_path(dirname($path));
-		if(preg_match('/^([\w_]+)(\-[\w\-_]+)?(\.\w+)?$/',basename($path),$matches)){
+		if(preg_match('/^([\w_]+)(\-[\w\-_]+)?((\.\w+)?\.\w+)?$/',basename($path),$matches)){
 			$path_data['file_name']=$matches[1];
 			if(!empty($matches[2])){$path_data['file_slug']=substr($matches[2],1);}
 			if(empty($matches[3])){$path_data['file_type']='php';}
