@@ -8,6 +8,21 @@ class response{
 	/*ファイル出力*/
 	public static function output($file){
 		$mime=mime_content_type($file);
+		if($mime==='text/plain'){
+			$ext=substr($file,strrpos($file,'.')+1);
+			$ext_mime=[
+				'js'=>'text/javascript',
+				'json'=>'application/json',
+				'css'=>'text/css',
+				'html'=>'text/html',
+				'htm'=>'text/html',
+				'xml'=>'text/xml',
+				'csv'=>'text/csv',
+			];
+			if(!empty($ext_mime[$ext])){
+				$mime=$ext_mime[$ext];
+			}
+		}
 		$type=substr($mime,0,strpos($mime,'/'));
 		header('Content-type: '.$mime);
 		switch($type){
