@@ -776,7 +776,9 @@ var SelectResponsiveImage = function SelectResponsiveImage(props) {
 	if (device) {
 		var sizeData = CP.devices[device];
 		onClick = function onClick(e) {
-			return CP.selectImage({ src: 'src' }, function (data) {
+			return CP.selectImage({ src: 'src' }, function (_ref18) {
+				var src = _ref18.src;
+
 				if (keys.sources) {
 					item[keys.sources].map(function (source) {
 						if (source.device === device) {
@@ -849,7 +851,6 @@ var SelectResponsiveImage = function SelectResponsiveImage(props) {
 	var src = CP.imageSrcOrDummy(item[keys.src]);
 	if (keys.sources) {
 		if (device) {
-			console.log(item[keys.sources]);
 			var source = item[keys.sources].find(function (source) {
 				return source.device === device;
 			}) || { srcset: cp.theme_url + '/images/dummy.jpg' };
@@ -890,15 +891,15 @@ var SelectResponsiveImage = function SelectResponsiveImage(props) {
 		onClick: onClick
 	}, otherProps));
 };
-var ResponsiveImage = function ResponsiveImage(_ref18) {
-	var className = _ref18.className,
-	    attr = _ref18.attr,
-	    keys = _ref18.keys,
-	    index = _ref18.index,
-	    sizes = _ref18.sizes,
-	    devices = _ref18.devices,
-	    device = _ref18.device,
-	    isTemplate = _ref18.isTemplate;
+var ResponsiveImage = function ResponsiveImage(_ref19) {
+	var className = _ref19.className,
+	    attr = _ref19.attr,
+	    keys = _ref19.keys,
+	    index = _ref19.index,
+	    sizes = _ref19.sizes,
+	    devices = _ref19.devices,
+	    device = _ref19.device,
+	    isTemplate = _ref19.isTemplate;
 
 	var type = void 0,
 	    item = void 0;
@@ -1014,12 +1015,12 @@ var SelectPictureSources = function SelectPictureSources(props) {
 	);
 };
 
-var SelectPreparedImage = function SelectPreparedImage(_ref19) {
-	var className = _ref19.className,
-	    name = _ref19.name,
-	    value = _ref19.value,
-	    onChange = _ref19.onChange,
-	    otherProps = babelHelpers.objectWithoutProperties(_ref19, ['className', 'name', 'value', 'onChange']);
+var SelectPreparedImage = function SelectPreparedImage(_ref20) {
+	var className = _ref20.className,
+	    name = _ref20.name,
+	    value = _ref20.value,
+	    onChange = _ref20.onChange,
+	    otherProps = babelHelpers.objectWithoutProperties(_ref20, ['className', 'name', 'value', 'onChange']);
 
 	var onClick = void 0;
 
@@ -1060,12 +1061,12 @@ var SelectPreparedImage = function SelectPreparedImage(_ref19) {
 		})
 	);
 };
-var SelectPreparedImageSet = function SelectPreparedImageSet(_ref20) {
-	var className = _ref20.className,
-	    name = _ref20.name,
-	    value = _ref20.value,
-	    onChange = _ref20.onChange,
-	    otherProps = babelHelpers.objectWithoutProperties(_ref20, ['className', 'name', 'value', 'onChange']);
+var SelectPreparedImageSet = function SelectPreparedImageSet(_ref21) {
+	var className = _ref21.className,
+	    name = _ref21.name,
+	    value = _ref21.value,
+	    onChange = _ref21.onChange,
+	    otherProps = babelHelpers.objectWithoutProperties(_ref21, ['className', 'name', 'value', 'onChange']);
 
 	var onClick = void 0;
 
@@ -2258,8 +2259,8 @@ var EditItemsTable = function EditItemsTable(props) {
 	);
 };
 
-var DummyImage = function DummyImage(_ref21) {
-	var text = _ref21.text;
+var DummyImage = function DummyImage(_ref22) {
+	var text = _ref22.text;
 
 	return wp.element.createElement('img', { src: cp.plugins_url + '/catpow/callee/dummy_image.php?text=' + text });
 };

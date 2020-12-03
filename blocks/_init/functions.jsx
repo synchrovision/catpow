@@ -537,7 +537,7 @@ const SelectResponsiveImage=(props)=>{
 	}
 	if(device){
 		const sizeData=CP.devices[device];
-		onClick=(e)=>CP.selectImage({src:'src'},function(data){
+		onClick=(e)=>CP.selectImage({src:'src'},function({src}){
 			if(keys.sources){
 				item[keys.sources].map((source)=>{
 					if(source.device===device){source.srcset=src;}
@@ -614,7 +614,6 @@ const SelectResponsiveImage=(props)=>{
 	var src=CP.imageSrcOrDummy(item[keys.src]);
 	if(keys.sources){
 		if(device){
-			console.log(item[keys.sources]);
 			const source=item[keys.sources].find((source)=>source.device===device) || {srcset:cp.theme_url+'/images/dummy.jpg'};
 			return (
 				<picture
