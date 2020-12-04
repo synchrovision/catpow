@@ -2,7 +2,7 @@
 namespace Catpow\validation;
 
 class html extends validation{
-	public static function is_valid(&$val,$conf){
+	public static function is_valid(&$val,$conf,$input_id){
 		return true;
 		libxml_use_internal_errors(true);
 		$doc=new \DOMDocument();
