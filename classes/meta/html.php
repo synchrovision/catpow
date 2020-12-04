@@ -9,7 +9,7 @@ class html extends meta{
 		$path=$meta->the_data_path;
 		$setting=array('textarea_name'=>\cp::get_input_name($path));
 		ob_start();
-		wp_editor($meta->value,\cp::get_input_id($path),$setting);
+		wp_editor($meta->value,\cp::get_input_id($path).'_editor',$setting);
 		$rtn=ob_get_clean();
 		return $rtn;
 	}
