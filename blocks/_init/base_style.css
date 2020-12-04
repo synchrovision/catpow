@@ -268,7 +268,7 @@ ul.selectPreparedImageSet {
     -webkit-box-flex: 0;
     flex-grow: 0;
     flex-shrink: 0;
-    flex-basis: 10%;
+    flex-basis: 33%;
     box-sizing: border-box;
     cursor: pointer; }
     ul.selectPreparedImageSet .item img {

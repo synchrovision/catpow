@@ -167,7 +167,7 @@ ul.selectPreparedImageSet{
 	@include bg((c:t 20));
 	@include bdr((s:s,w:1,c:t 10));
 	.item{
-		@include bnd((f:0 0 10%,bs:b));
+		@include bnd((f:0 0 33%,bs:b));
 		@include usr((c:p));
 		img{
 			@include bnd((w:f,h:a));
