@@ -284,9 +284,9 @@ function page_header_bg_style(){
 }
 function site_main_class(){
 	echo 'site_main';
-	if(is_home()){echo ' home';}
-	if(is_front_page()){echo ' front';}
-	echo ' '.cp::get_the_path_data()['tmp_name'];
+	if(is_home()){echo ' site_main-home';}
+	if(is_front_page()){echo ' site_main-front';}
+	echo ' site_main-'.cp::get_the_path_data()['tmp_name'];
 }
 
 /*content*/
