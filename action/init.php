@@ -389,6 +389,7 @@ add_filter('redirect_canonical',function($redirect_url,$request_url){
 	if(!empty($wp_query->query_vars['cp_tmp_slug'])){
 		return $request_url;
 	}
+	if(strrpos(basename($request_url),'.')!==false){return rtrim($redirect_url,'/');}
 	return $redirect_url;
 },10,2);
 add_filter('nav_menu_css_class',function($classes,$item,$args,$depth){
