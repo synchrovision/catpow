@@ -408,8 +408,8 @@ class CP{
 	}
 	public static function enqueue_style($src=false,$deps=array(),$flag=0733,$ver=false,$media=false){
 		static $missed=[];
-		if(wp_script_is($src) || isset($missed[$src])){return false;}
-		if(wp_script_is($src,'registered')){wp_enqueue_style($src);return true;}
+		if(wp_style_is($src) || isset($missed[$src])){return false;}
+		if(wp_style_is($src,'registered')){wp_enqueue_style($src);return true;}
 		if(empty($file=self::get_file_path_url($src,$flag))){$missed[$src]=1;return false;}
 		self::scss_compile([substr($src,0,-4)]);
 		if(empty($ver)){$ver=filemtime(key($file));}
@@ -485,7 +485,6 @@ class CP{
 			if(!empty($useStyles)){
 				foreach($useStyles as $useStyle){
 					self::enqueue_style($useStyle);
-					$deps[]=$useStyle;
 				}
 			}
 			if(!empty($useComponents)){
