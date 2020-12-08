@@ -561,7 +561,7 @@ var CP = {
 		}
 		var rtn = {};
 		var reg = /@media\s*\((.+?)\)\s*{([^}]+})\s*}/;
-		var defaultCode = code.replaceAll(new RegExp(reg, 'g'), function (str) {
+		var defaultCode = code.replace(new RegExp(reg, 'g'), function (str) {
 			var matches = str.match(reg);
 			rtn[matches[1]] = CP.parseStyleCode(matches[2]);
 			return '';

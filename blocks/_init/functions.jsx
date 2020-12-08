@@ -356,7 +356,7 @@
 		if(!code){return {};}
 		var rtn={};
 		const reg=/@media\s*\((.+?)\)\s*{([^}]+})\s*}/;
-		const defaultCode=code.replaceAll(new RegExp(reg,'g'),(str)=>{
+		const defaultCode=code.replace(new RegExp(reg,'g'),(str)=>{
 			const matches=str.match(reg);
 			rtn[matches[1]]=CP.parseStyleCode(matches[2]);
 			return '';
