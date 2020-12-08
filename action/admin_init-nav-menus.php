@@ -28,25 +28,17 @@ CP::conf_data_walk(function($data_type,$data_name,&$conf_data){
 	}
 });
 
-add_filter('wp_edit_nav_menu_walker',function(){return 'Catpow\\Walker_Nav_Menu_Edit_With_Meta';});
-
-require_once( ABSPATH . 'wp-admin/includes/nav-menu.php' );
-class Walker_Nav_Menu_Edit_With_Meta extends \Walker_Nav_Menu_Edit{
-	public function start_el( &$output, $item, $depth=0, $args=array(),$id=0){
-		parent::start_el($output,$item,$depth,$args,$id);
-
-		foreach((array)get_menu_location($item->ID) as $i=>$location_name){
-			if(empty($location_name) || empty($GLOBALS['nav_datas'][$location_name]['meta'])){continue;}
-			ob_start();
-			echo("<div class=\"menu-item-settings wp-clearfix {$location_name}\">");
-			$sec=\cp::$content->sec('nav/'.$location_name.'/admin/form.php',$item->ID);
-			printf('<input type="hidden" name="cp_form_section_ids[]" value="%s"/>',$sec->form_id);
-			$sec->render();
-			echo('</div>');
-			$output.=ob_get_clean();
-		}
+add_action('wp_nav_menu_item_custom_fields',function($item_id,$item,$depth,$args,$id){
+	foreach((array)get_menu_location($item->ID) as $i=>$location_name){
+		if(empty($location_name) || empty($GLOBALS['nav_datas'][$location_name]['meta'])){continue;}
+		echo("<div class=\"wp_nav_menu_item_custom_fields wp-clearfix {$location_name}\">");
+		$sec=\cp::$content->sec('nav/'.$location_name.'/admin/form.php',$item->ID);
+		printf('<input type="hidden" name="cp_form_section_ids[]" value="%s"/>',$sec->form_id);
+		$sec->render();
+		echo('</div>');
 	}
-}
+},10,5);
+
 add_action('wp_update_nav_menu_item',function($menu_id,$menu_item_db_id,$args){
 	if(empty($_REQUEST['cp_form_section_ids'])){return;}
 	foreach((array)$_REQUEST['cp_form_section_ids'] as $sec_id){
