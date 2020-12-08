@@ -400,6 +400,7 @@ class CP{
 	public static function enqueue_script($src=false,$deps=array(),$flag=0733,$ver=false,$in_footer=true){
 		static $missed=[];
 		if(wp_script_is($src) || isset($missed[$src])){return false;}
+		if(wp_script_is($src,'registered')){wp_enqueue_script($src);return true;}
 		if(empty($file=self::get_file_path_url($src,$flag))){$missed[$src]=1;return false;}
 		if(empty($ver)){$ver=filemtime(key($file));}
 		wp_enqueue_script($src,reset($file),$deps,$ver,$in_footer);
@@ -408,6 +409,7 @@ class CP{
 	public static function enqueue_style($src=false,$deps=array(),$flag=0733,$ver=false,$media=false){
 		static $missed=[];
 		if(wp_script_is($src) || isset($missed[$src])){return false;}
+		if(wp_script_is($src,'registered')){wp_enqueue_style($src);return true;}
 		if(empty($file=self::get_file_path_url($src,$flag))){$missed[$src]=1;return false;}
 		self::scss_compile([substr($src,0,-4)]);
 		if(empty($ver)){$ver=filemtime(key($file));}
@@ -474,12 +476,29 @@ class CP{
 		$deps=['wp-i18n','wp-api-fetch','wp-element','babelHelpers'];
 		if($f=self::get_file_path('components/'.$name.'/deps.php')){
 			include $f;
+			if(!empty($useScripts)){
+				foreach($useScripts as $useScript){
+					self::enqueue_script($useScript);
+					$deps[]=$useScript;
+				}
+			}
+			if(!empty($useStyles)){
+				foreach($useStyles as $useStyle){
+					self::enqueue_style($useStyle);
+					$deps[]=$useStyle;
+				}
+			}
 			if(!empty($useComponents)){
 				foreach($useComponents as $useComponent){
 					self::use_component($useComponent);
 					$deps[]='components/'.$useComponent.'/component.js';
 				}
 			}
+		}
+		if(strpos($name,'/')>0){
+			$useComponent=dirname($name);
+			self::use_component($useComponent);
+			$deps[]='components/'.$useComponent.'/component.js';
 		}
 		self::enqueue_script('components/'.$name.'/component.js',$deps);
 		self::enqueue_style('components/'.$name.'/style.css');
