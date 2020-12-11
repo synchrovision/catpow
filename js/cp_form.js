@@ -1,4 +1,4 @@
-var cp=cp;
+/* global cp*/
 
 jQuery(function($){
 	$.catpow.forms=[];
