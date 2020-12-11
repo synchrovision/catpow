@@ -87,7 +87,7 @@ if(function_exists('register_block_type')){
 		foreach(glob($block_dir.'/_init/*.js') as $format_script){
 			$fname=basename($format_script);
 			$code_name='cp_blocks_init_'.substr($fname,0,-3);
-			wp_register_script($code_name,$block_url.'/_init/'.$fname,['wp-blocks','wp-i18n','wp-element','wp-editor']);
+			wp_register_script($code_name,$block_url.'/_init/'.$fname,['wp-blocks','wp-i18n','wp-element','wp-editor','catpow']);
 			$deps['editor_script'][]=$code_name;
 		}
 		foreach(glob($block_dir.'/_init/*.css') as $format_style){
