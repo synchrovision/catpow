@@ -1,4 +1,4 @@
-/* global console */
+/* global console Catpow */
 jQuery.catpow=jQuery.catpow || {};
 window.Catpow=window.Catpow || {};
 
@@ -1124,6 +1124,61 @@ window.Catpow=window.Catpow || {};
 	});
 })(jQuery);
 
+Catpow.util={
+	devices:{
+		sp:{
+			icon:'smartphone',
+			width:480,
+			media_query:'(max-width:640px)',
+			sizes:'(max-width:640px) 480px',
+			sizes_value:'480px',
+			media_size:'medium_large',
+			reg:/[^,]+ 480w,/,
+			rep:' 480w,'
+		},
+		tb:{
+			icon:'tablet',
+			width:960,
+			media_query:'(max-width:1280px)',
+			sizes:'(max-width:1280px) 960px',
+			sizes_value:'960px',
+			media_size:'full',
+			reg:/[^,]+ 960w,/,
+			rep:' 960w,'
+		},
+		lt:{
+			icon:'laptop',
+			width:1440,
+			media_query:'(max-width:1920px)',
+			sizes:'(max-width:1920px) 1440px',
+			sizes_value:'1440px',
+			media_size:'full',
+			reg:/[^,]+ 1440w,/,
+			rep:' 1440w,'
+		},
+		pc:{
+			icon:'desktop',
+			width:1920,
+			media_query:false,
+			sizes:'100vw',
+			sizes_value:'100vw',
+			media_size:'full',
+			reg:/[^,]+$/,
+			rep:''
+		}
+	},
+	getDevice:function(){
+		var rtn='pc';
+		Object.keys(Catpow.util.devices).some(function(device){
+			if(Catpow.util.devices[device].width>=window.innerWidth){rtn=device;return true;}
+			return false;
+		});
+		return rtn;
+	},
+	getDeviceData:function(){
+		return Catpow.util.devices[Catpow.util.getDevice()];
+	}
+};
 
 //浮動小数点問題対策のmath
 Math.sum=function(){
