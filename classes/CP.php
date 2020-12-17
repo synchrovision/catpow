@@ -1652,11 +1652,11 @@ class CP{
 	}
 	
 	/*メール*/
-	public static function send_mails($confs){
+	public static function send_mails($confs,$override=null){
 		if(empty($confs)){return false;}
-		foreach($confs as $conf){self::send_mail($conf);}
+		foreach($confs as $conf){self::send_mail($conf,$override);}
 	}
-	public static function send_mail($conf){
+	public static function send_mail($conf,$override=null){
 		if(!is_array($conf)){
 			$meta_keys=['to','from','cc','bcc','type'];
 			if(is_numeric($conf)){$post=get_post($conf);}
@@ -1729,6 +1729,9 @@ class CP{
 			'charset'=>'UTF-8',
 			'type'=>'plain'
 		],(array)$conf);
+		if(isset($override) && is_array($override)){
+			$conf=array_merge($conf,$override);
+		}
 		$h=[];
 		foreach($conf as $key=>$val){
 			if($key==='reply_to'){$key='reply-to';}
