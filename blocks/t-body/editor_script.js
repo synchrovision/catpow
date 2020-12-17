@@ -48,7 +48,7 @@ registerBlockType('catpow/t-body', {
 					{ width: '100%', align: 'center', valign: 'top', className: classes },
 					states.hasHeader && wp.element.createElement(
 						'thead',
-						null,
+						{ className: 'wp-block-catpow-t-body__header' },
 						wp.element.createElement(
 							'tr',
 							null,
@@ -66,7 +66,7 @@ registerBlockType('catpow/t-body', {
 					),
 					wp.element.createElement(
 						'tbody',
-						null,
+						{ className: 'wp-block-catpow-t-body__body' },
 						wp.element.createElement(
 							'tr',
 							null,
@@ -74,8 +74,8 @@ registerBlockType('catpow/t-body', {
 								'td',
 								null,
 								wp.element.createElement(
-									'center',
-									null,
+									'div',
+									{ className: 'wp-block-catpow-t-body__body__contents' },
 									wp.element.createElement(InnerBlocks, null)
 								)
 							)
@@ -83,7 +83,7 @@ registerBlockType('catpow/t-body', {
 					),
 					states.hasFooter && wp.element.createElement(
 						'tfoot',
-						null,
+						{ className: 'wp-block-catpow-t-body__footer' },
 						wp.element.createElement(
 							'tr',
 							null,
@@ -152,10 +152,10 @@ registerBlockType('catpow/t-body', {
 			),
 			wp.element.createElement(
 				'table',
-				{ width: '100%', align: 'center', valign: 'top', className: classes },
+				{ width: '100%', align: 'center', className: classes },
 				states.hasHeader && wp.element.createElement(
 					'thead',
-					null,
+					{ className: 'wp-block-catpow-t-body__header' },
 					wp.element.createElement(
 						'tr',
 						null,
@@ -168,7 +168,7 @@ registerBlockType('catpow/t-body', {
 				),
 				wp.element.createElement(
 					'tbody',
-					null,
+					{ className: 'wp-block-catpow-t-body__body' },
 					wp.element.createElement(
 						'tr',
 						null,
@@ -176,8 +176,8 @@ registerBlockType('catpow/t-body', {
 							'td',
 							null,
 							wp.element.createElement(
-								'center',
-								null,
+								'div',
+								{ className: 'wp-block-catpow-t-body__body__contents' },
 								wp.element.createElement(InnerBlocks.Content, null)
 							)
 						)
@@ -185,7 +185,7 @@ registerBlockType('catpow/t-body', {
 				),
 				states.hasFooter && wp.element.createElement(
 					'tfoot',
-					null,
+					{ className: 'wp-block-catpow-t-body__footer' },
 					wp.element.createElement(
 						'tr',
 						null,

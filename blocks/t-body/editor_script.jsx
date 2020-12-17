@@ -38,7 +38,7 @@
 					<div className={"mail_body "+body_class}>
 						<table width="100%" align="center" valign="top" className={classes}>
 							{states.hasHeader &&
-								<thead>
+								<thead className="wp-block-catpow-t-body__header">
 									<tr>
 										<th>
 											<RichText
@@ -49,17 +49,17 @@
 									</tr>
 								</thead>
 							}
-							<tbody>
+							<tbody className="wp-block-catpow-t-body__body">
 								<tr>
 									<td>
-										<center>
+										<div className="wp-block-catpow-t-body__body__contents">
 											<InnerBlocks/>
-										</center>
+										</div>
 									</td>
 								</tr>
 							</tbody>
 							{states.hasFooter &&
-								<tfoot>
+								<tfoot className="wp-block-catpow-t-body__footer">
 									<tr>
 										<td>
 											<RichText
@@ -107,25 +107,25 @@
 		return (
 			<Fragment>
 				{textMail && <textmail>{textMail}</textmail>}
-				<table width="100%" align="center" valign="top" className={classes}>
+				<table width="100%" align="center" className={classes}>
 					{states.hasHeader &&
-						<thead>
+						<thead className="wp-block-catpow-t-body__header">
 							<tr>
 								<th><RichText.Content value={headerText}/></th>
 							</tr>
 						</thead>
 					}
-					<tbody>
+					<tbody className="wp-block-catpow-t-body__body">
 						<tr>
 							<td>
-								<center>
+								<div className="wp-block-catpow-t-body__body__contents">
 									<InnerBlocks.Content/>
-								</center>
+								</div>
 							</td>
 						</tr>
 					</tbody>
 					{states.hasFooter &&
-						<tfoot>
+						<tfoot className="wp-block-catpow-t-body__footer">
 							<tr>
 								<td><RichText.Content value={footerText}/></td>
 							</tr>
