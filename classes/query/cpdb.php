@@ -11,7 +11,7 @@ class cpdb extends query{
 		$query_class=false,
 		$united=true,
 		$is_meta=true,
-		$search_keys=['join'=>1,'orderby'=>1,'limit'=>0,'paged'=>0],
+		$search_keys=['join'=>1,'orderby'=>1,'limit'=>0,'paged'=>0,'parent'=>1,'root_object'=>1],
 		$q_default=['table'=>false,'where'=>false,'orderby'=>false,'join'=>false,'limit'=>false,'offset'=>false,'paged'=>false];
 	public $table,$path,$columns,$rows,$where,$orderby,$join,$limit;
 	
@@ -49,6 +49,8 @@ class cpdb extends query{
 				$q['where'][$meta_query['key']][$meta_query['compare']]=$meta_query['value'];
 			}
 		}
+		if(isset($q['parent'])){$q['where']['parent_id']=$q['parent'];}
+		if(isset($q['root_object'])){$q['where']['root_object_id']=$q['root_object'];}
 		if(isset($q['include'])){$q['meta_id']=$q['include'];}
 		return $q;
 	}
