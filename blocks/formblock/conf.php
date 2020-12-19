@@ -1,4 +1,8 @@
 <?php
+add_filter('wp_kses_allowed_html',function($allowedposttags){
+	$allowedposttags['formBlockContent']=['name'=>true,'action'=>true];
+	return $allowedposttags;
+});
 $attributes=[
 	'className'=>['type'=>'string'],
 	'content_path'=>['type'=>'string'],
