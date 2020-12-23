@@ -1,0 +1,9 @@
+@import 'admin_style_config.scss';
+
+
+.Parallax{
+	@include bnd((p:a,t:0,b:0,l:0,r:0,z:0,o:h));
+	&__contents{
+		@include bnd((p:a,t:0,l:0,r:0,h:120vh));
+	}
+}
