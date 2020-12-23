@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Poedit-KeywordsList: _;_e;__\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -311,7 +311,7 @@ msgstr "transaction was timeout"
 
 #: functions/amazonpay/classes/amazonpay/PaymentException.php:19
 msgid "支払いに同意していません"
-msgstr ""
+msgstr "not agreed to the payment"
 
 #: functions/amazonpay/classes/amazonpay/PaymentException.php:20
 msgid "金額がセットされていません"
@@ -363,6 +363,8 @@ msgid ""
 "Googleの各種APIを利用するための認証情報を登録します。gmap,"
 "gcalで必要になります。"
 msgstr ""
+"Register your credentials to use Google's various APIs. It "
+"is required by gmap,gcal."
 
 #: functions/gauth/functions.php:19
 msgid "Googleでログイン"
