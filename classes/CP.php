@@ -1886,7 +1886,10 @@ class CP{
 			else{$admin_config_filemtime=filemtime($admin_config_file);}
 		}
 		foreach($scss_names as $scss_base_name){
-			if($f=self::get_file_path($scss_base_name.'.scss',0733)){$scss_name=substr($f,0,-5);}
+			if($f=self::get_file_path_url($scss_base_name.'.scss',0733)){
+				$scss_name=substr(key($f),0,-5);
+				$scss_url=substr(reset($f),0,-5);
+			}
 			else{continue;}
 			$css_files[]=$scss_name.'.css';
 			$is_theme_file=strpos($scss_name,'/wp-content/themes/')!==false;
@@ -1910,10 +1913,18 @@ class CP{
 						$scssc->addImportPath(WP_PLUGIN_DIR.'/'.$extension.'/default/');
 					}
 					$scssc->addImportPath(WP_PLUGIN_DIR.'/catpow/default/');
+					$scssc->setSourceMap(\ScssPhp\ScssPhp\Compiler::SOURCE_MAP_FILE);
 				}
 				try{
 					error_log('SCSS compile '.$scss_name);
-					$css=$scssc->compile(file_get_contents($scss_name.'.scss'));
+					$scssc->setSourceMapOptions([
+						'sourceMapWriteTo'=>$scss_name.'.css.map',
+						'sourceMapURL'=>$scss_url.'.css.map',
+						'sourceMapFilename'=>basename($scss_name).'.css.map',
+						'sourceMapBasepath'=>$_SERVER['DOCUMENT_ROOT'],
+						'sourceRoot'=>'/'
+					]);
+					$css=$scssc->compile(file_get_contents($scss_name.'.scss'),$scss_name.'.scss');
 				}catch(Exception $e){
 					error_log('%s:%s;',$scss_name,$e->getMessage());
 					die;
