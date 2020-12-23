@@ -5,41 +5,11 @@ window.Catpow=window.Catpow || {};
 (function($){
 	//指定のcssがdocumentになければ読み込み
 	$.cp_require_styles=function(styles){
-		var i;
-		if(!window.Catpow.styleFiles){
-			window.Catpow.styleFiles={};
-			var styleElements=document.querySelectorAll('link[rel="stylesheet"]');
-			for(i=0;i<styleElements.length;i++){
-				window.Catpow.styleFiles[styleElements[i].href.split('?')[0]]=true;
-			}
-		}
-		for(i=0;i<styles.length;i++){
-			if(window.Catpow.styleFiles[styles[i]]){continue;}
-			$('<link rel="stylesheet" href="'+styles[i]+'"/>').appendTo(document.head);
-		}
+		Catpow.util.requireStyles(styles);
 	}
 	//指定のjsがdocumentになければ読み込み
 	$.cp_require_scripts=function(scripts){
-		var js,dfr=new $.Deferred();
-		if(!window.Catpow.scriptFiles){
-			window.Catpow.scriptFiles={};
-			var i,scriptElements=document.getElementsByTagName('script');
-			for(i=0;i<scriptElements.length;i++){
-				if(scriptElements[i].src){window.Catpow.scriptFiles[scriptElements[i].src.split('?')[0]]=true;}
-			}
-		}
-		var cb=function(){
-			if(scripts.length===0){dfr.resolve();return dfr;}
-			js=scripts.shift();
-			if(/jquery(\.min)?\.js$/.test(js)){return cb();}
-			if(window.Catpow.scriptFiles[js]){return cb();}
-			window.Catpow.scriptFiles[js]=true;
-			$.getScript(js,cb).fail(function(xhr,setting,error){
-				window.console.error({js:js,xhr:xhr,setting:setting,error:error});
-			});
-		}
-		cb();
-		return dfr.promise();
+		return Catpow.util.requireScripts(scripts);
 	}
 	$.fn.extend({
 		//activateイベントをキック及びactiveクラスを付与しinactiveクラスを除去するcatpow.js汎用関数
@@ -1177,6 +1147,43 @@ Catpow.util={
 	},
 	getDeviceData:function(){
 		return Catpow.util.devices[Catpow.util.getDevice()];
+	},
+	requireStyles:function(styles){
+		styles.filter((href)=>{
+			for(let i=0;i<document.styleSheets.length;i++){
+				if(document.styleSheets[i].href===href){return false;}
+			}
+			return true;
+		}).map((href)=>{
+			const el=document.createElement('link');
+			el.setAttribute('rel','stylesheet');
+			el.setAttribute('href',href);
+			document.head.appendChild(el);
+		});
+	},
+	requireScripts:function(scripts){
+		var dfr=new jQuery.Deferred();
+		var scriptsFlag={};
+		for(let i=0;i<document.scripts.length;i++){
+			scriptsFlag[document.scripts[i].src.split('?')[0]]=true;
+		}
+		jQuery.when.apply(null,scripts.filter((src)=>{
+			return !scriptsFlag[src];
+		}).map((src)=>{
+			const dfr=new jQuery.Deferred();
+			const el=document.createElement('script');
+			el.setAttribute('type','text/javascript');
+			el.setAttribute('src',src);
+			document.body.appendChild(el);
+			el.onload = el.onreadystatechange = function( _, isAbort ) {
+				if(isAbort || !el.readyState || /loaded|complete/.test(el.readyState) ) {
+					el.onload = el.onreadystatechange = null;
+					if(!isAbort) { dfr.resolve(); }
+				}
+			};
+			return dfr.promise();
+		})).then(function(){dfr.resolve();});
+		return dfr.promise();
 	}
 };
 
