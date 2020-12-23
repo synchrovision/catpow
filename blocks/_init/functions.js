@@ -1243,8 +1243,8 @@ var EditItems = function EditItems(props) {
 };
 
 var SelectClassPanel = function SelectClassPanel(props) {
-	var _props$key = props.key,
-	    key = _props$key === undefined ? 'classes' : _props$key,
+	var _props$classKey = props.classKey,
+	    classKey = _props$classKey === undefined ? 'classes' : _props$classKey,
 	    items = props.items,
 	    index = props.index,
 	    subItemsKey = props.subItemsKey,
@@ -1273,7 +1273,7 @@ var SelectClassPanel = function SelectClassPanel(props) {
 	} else {
 		item = attr;
 	}
-	var states = CP.wordsToFlags(item[key]);
+	var states = CP.wordsToFlags(item[classKey]);
 	var styleDatas = {};
 
 	var save = function save(data) {
@@ -1285,7 +1285,7 @@ var SelectClassPanel = function SelectClassPanel(props) {
 		}
 	};
 	var saveClasses = function saveClasses() {
-		save(babelHelpers.defineProperty({}, key, CP.flagsToWords(states)));
+		save(babelHelpers.defineProperty({}, classKey, CP.flagsToWords(states)));
 	};
 	var saveCss = function saveCss(cssKey) {
 		set(babelHelpers.defineProperty({}, cssKey, CP.createStyleCodeWithMediaQuery(styleDatas[cssKey])));
@@ -1402,6 +1402,20 @@ var SelectClassPanel = function SelectClassPanel(props) {
 					},
 					options: options
 				}));
+				if (prm.sub) {
+					var currentValue = CP.getJsonValue(props, prm.json, prm.key);
+					if (currentValue && prm.sub[currentValue]) {
+						var _sub = [];
+						prm.sub[currentValue].map(function (prm) {
+							_sub.push(SelectClass(prm));
+						});
+						rtn.push(wp.element.createElement(
+							'div',
+							{ className: 'sub' },
+							_sub
+						));
+					}
+				}
 			} else if (prm.values) {
 				rtn.push(wp.element.createElement(CheckboxControl, {
 					label: prm.label,
@@ -1410,6 +1424,19 @@ var SelectClassPanel = function SelectClassPanel(props) {
 					},
 					checked: CP.hasJsonValue(props, prm.json, prm.key, prm.values)
 				}));
+				if (prm.sub) {
+					if (CP.getJsonValue(props, prm.json, prm.key)) {
+						var _sub2 = [];
+						prm.sub.map(function (prm) {
+							_sub2.push(SelectClass(prm));
+						});
+						rtn.push(wp.element.createElement(
+							'div',
+							{ className: 'sub' },
+							_sub2
+						));
+					}
+				}
 			} else {
 				rtn.push(wp.element.createElement(TextControl, {
 					label: prm.label,
@@ -1609,14 +1636,14 @@ var SelectClassPanel = function SelectClassPanel(props) {
 						}));
 						if (prm.sub) {
 							if (item[prm.key]) {
-								var _sub = [];
+								var _sub3 = [];
 								prm.sub.map(function (prm) {
-									_sub.push(SelectClass(prm));
+									_sub3.push(SelectClass(prm));
 								});
 								rtn.push(wp.element.createElement(
 									'div',
 									{ className: 'sub' },
-									_sub
+									_sub3
 								));
 							}
 						}
@@ -1770,14 +1797,14 @@ var SelectClassPanel = function SelectClassPanel(props) {
 				if (prm.sub) {
 					var _currentClass = CP.getSelectiveClass(props, prm.values, prm.key);
 					if (_currentClass && prm.sub[_currentClass]) {
-						var _sub2 = [];
+						var _sub4 = [];
 						prm.sub[_currentClass].map(function (prm) {
-							_sub2.push(SelectClass(prm));
+							_sub4.push(SelectClass(prm));
 						});
 						rtn.push(wp.element.createElement(
 							'div',
 							{ className: 'sub' },
-							_sub2
+							_sub4
 						));
 					}
 				}
@@ -1792,14 +1819,14 @@ var SelectClassPanel = function SelectClassPanel(props) {
 				}));
 				if (prm.sub) {
 					if (states[prm.values]) {
-						var _sub3 = [];
+						var _sub5 = [];
 						prm.sub.map(function (prm) {
-							_sub3.push(SelectClass(prm));
+							_sub5.push(SelectClass(prm));
 						});
 						rtn.push(wp.element.createElement(
 							'div',
 							{ className: 'sub' },
-							_sub3
+							_sub5
 						));
 					}
 				}

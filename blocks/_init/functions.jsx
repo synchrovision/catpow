@@ -883,7 +883,7 @@ const EditItems=(props)=>{
 }
 
 const SelectClassPanel=(props)=>{
-	const {key='classes',items,index,subItemsKey,subIndex,set,attr,triggerClasses}=props;
+	const {classKey='classes',items,index,subItemsKey,subIndex,set,attr,triggerClasses}=props;
 	let {itemsKey,itemClasses}=props;
 	let item;
 	if(items){
@@ -901,7 +901,7 @@ const SelectClassPanel=(props)=>{
 	else{
 		item=attr;
 	}
-	let states=CP.wordsToFlags(item[key]);
+	let states=CP.wordsToFlags(item[classKey]);
 	let styleDatas={};
 	
 	const save=(data)=>{
@@ -914,7 +914,7 @@ const SelectClassPanel=(props)=>{
 		}
 	}
 	const saveClasses=()=>{
-		save({[key]:CP.flagsToWords(states)});
+		save({[classKey]:CP.flagsToWords(states)});
 	}
 	const saveCss=(cssKey)=>{
 		set({[cssKey]:CP.createStyleCodeWithMediaQuery(styleDatas[cssKey])});
@@ -1014,6 +1014,14 @@ const SelectClassPanel=(props)=>{
                         options={options}
                     />
                 );
+                if(prm.sub){
+                    let currentValue=CP.getJsonValue(props,prm.json,prm.key);
+                    if(currentValue && prm.sub[currentValue]){
+                        let sub=[];
+                        prm.sub[currentValue].map((prm)=>{sub.push(SelectClass(prm))});
+                        rtn.push(<div className="sub">{sub}</div>);
+                    }
+                }
             }
             else if(prm.values){
                 rtn.push(
@@ -1023,6 +1031,13 @@ const SelectClassPanel=(props)=>{
                         checked={CP.hasJsonValue(props,prm.json,prm.key,prm.values)}
                     />
                 );
+                if(prm.sub){
+                    if(CP.getJsonValue(props,prm.json,prm.key)){
+                        let sub=[];
+                        prm.sub.map((prm)=>{sub.push(SelectClass(prm))});
+                        rtn.push(<div className="sub">{sub}</div>);
+                    }
+                }
             }
             else{
                 rtn.push(
