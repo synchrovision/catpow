@@ -1914,6 +1914,12 @@ class CP{
 					}
 					$scssc->addImportPath(WP_PLUGIN_DIR.'/catpow/default/');
 					$scssc->setSourceMap(\ScssPhp\ScssPhp\Compiler::SOURCE_MAP_FILE);
+					$scssc->setVariables([
+						'header_image'=>get_header_image(),
+						'background_image'=>get_background_image(),
+						'header_textcolor'=>get_header_textcolor(),
+						'background_color'=>get_background_color()
+					]);
 				}
 				try{
 					error_log('SCSS compile '.$scss_name);
