@@ -13,24 +13,35 @@ class data extends meta{
 		$has_children=true;
 	
 	public static function output($meta,$prm){
-		$val=$meta->value;
+		$format=$meta->conf['output-item-format']??$meta->conf['item-format']??null;
+		$inputs=[];
+		
+		foreach((array)$meta->conf['meta'] as $name=>$child_meta){
+			$inputs[$name]=$meta->meta($name)->get_output();
+		}
+		if(isset($format)){
+			return vsprintf($format,$inputs);
+		}
 		$rtn='<table class="inputs"><tbody>';
-		foreach((array)$meta->conf['meta'] as $n=>$child_meta){
-			$rtn.='<tr><th>'.$child_meta['label'].'</th><td>';
-			$rtn.=$meta->meta($n)->get_output();
-			$rtn.='</td></tr>';
+		foreach($inputs as $name=>$input){
+			$rtn.='<tr><th>'.$meta->conf['meta'][$name]['label'].'</th><td>'.$input.'</td></tr>';
 		}
 		$rtn.='</tbody></table>';
 		return $rtn;
 	}
 	public static function input($meta,$prm){
-		$path=$meta->the_data_path;
-		$val=(array)$meta->value;
+		$format=$meta->conf['input-item-format']??$meta->conf['item-format']??null;
+		$inputs=[];
+		
+		foreach((array)$meta->conf['meta'] as $name=>$child_meta){
+			$inputs[$name]=$meta->meta($name)->get_input();
+		}
+		if(isset($format)){
+			return vsprintf($format,$inputs);
+		}
 		$rtn='<table class="inputs"><tbody>';
-		foreach((array)$meta->conf['meta'] as $n=>$child_meta){
-			$rtn.='<tr><th>'.$child_meta['label'].'</th><td>';
-			$rtn.=$meta->meta($n)->get_input();
-			$rtn.='</td></tr>';
+		foreach($inputs as $name=>$input){
+			$rtn.='<tr><th>'.$meta->conf['meta'][$name]['label'].'</th><td>'.$input.'</td></tr>';
 		}
 		$rtn.='</tbody></table>';
 		return $rtn;
