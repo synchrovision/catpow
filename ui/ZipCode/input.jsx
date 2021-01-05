@@ -1,6 +1,6 @@
 ﻿jQuery(function($){if(!("AjaxZip3" in window)){$.getScript("https://ajaxzip3.github.io/ajaxzip3.js");}});
 
-Catpow.ZipCode=class extends wp.element.Component{
+Catpow.UI.ZipCode=class extends wp.element.Component{
 	constructor(props) {
 		super(props);
 		this.secs0=React.createRef();
@@ -58,7 +58,7 @@ Catpow.ZipCode=class extends wp.element.Component{
 				<span class="sep">-</span>
 				{input(1)}
 
-				<Catpow.HiddenValues
+				<Catpow.UI.HiddenValues
 					name={this.props.name}
 					value={value}
 				/>

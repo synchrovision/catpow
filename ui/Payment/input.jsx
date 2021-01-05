@@ -1,4 +1,4 @@
-﻿Catpow.Payment=class extends wp.element.Component{
+﻿Catpow.UI.Payment=class extends wp.element.Component{
 	constructor(props) {
 		/*
 		購入しようとしている商品の内容と価格
@@ -12,7 +12,7 @@
 		return (
 			<div className={'Payment'}>
 				
-				<Catpow.HiddenValues
+				<Catpow.UI.HiddenValues
 					name={this.props.name}
 					value={this.state.value}
 				/>

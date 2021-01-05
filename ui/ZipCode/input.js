@@ -4,7 +4,7 @@ jQuery(function ($) {
 	}
 });
 
-Catpow.ZipCode = function (_wp$element$Component) {
+Catpow.UI.ZipCode = function (_wp$element$Component) {
 	babelHelpers.inherits(_class, _wp$element$Component);
 
 	function _class(props) {
@@ -80,7 +80,7 @@ Catpow.ZipCode = function (_wp$element$Component) {
 					"-"
 				),
 				input(1),
-				wp.element.createElement(Catpow.HiddenValues, {
+				wp.element.createElement(Catpow.UI.HiddenValues, {
 					name: this.props.name,
 					value: value
 				})

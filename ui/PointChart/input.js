@@ -1,4 +1,4 @@
-Catpow.PointChart = function (_wp$element$Component) {
+Catpow.UI.PointChart = function (_wp$element$Component) {
 	babelHelpers.inherits(_class, _wp$element$Component);
 
 	function _class(props) {
@@ -119,7 +119,7 @@ Catpow.PointChart = function (_wp$element$Component) {
 						}
 					})
 				),
-				wp.element.createElement(Catpow.HiddenValues, {
+				wp.element.createElement(Catpow.UI.HiddenValues, {
 					name: this.props.name,
 					value: value
 				})

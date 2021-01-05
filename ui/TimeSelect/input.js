@@ -1,4 +1,4 @@
-Catpow.TimeSelect = function (_wp$element$Component) {
+Catpow.UI.TimeSelect = function (_wp$element$Component) {
 	babelHelpers.inherits(_class, _wp$element$Component);
 
 	function _class(props) {
@@ -76,7 +76,7 @@ Catpow.TimeSelect = function (_wp$element$Component) {
 						}, value: vals[1] },
 					this.state.selections.minit
 				),
-				wp.element.createElement(Catpow.HiddenValues, {
+				wp.element.createElement(Catpow.UI.HiddenValues, {
 					name: this.props.name,
 					value: this.state.value
 				})

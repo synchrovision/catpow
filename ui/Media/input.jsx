@@ -1,4 +1,4 @@
-﻿Catpow.Media=class extends wp.element.Component{
+﻿Catpow.UI.Media=class extends wp.element.Component{
 	constructor(props) {
 		super(props);
 		this.state={value:props.value};
@@ -34,7 +34,7 @@
 		return (
 			<div className={'Media'}>
 				{el(type,{src,className:'preview',onClick:selectMedia})}
-				<Catpow.HiddenValues
+				<Catpow.UI.HiddenValues
 					name={this.props.name}
 					value={value}
 				/>

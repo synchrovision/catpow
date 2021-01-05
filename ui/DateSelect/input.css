@@ -1,16 +1,22 @@
 @charset "utf-8";
-div.DateSelect .value {
+.DateSelect > .inputs {
   display: inline-block;
   margin: 0px 0.5em;
   padding: 0.5rem;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #a2a2a2;
-  border-radius: 0.5rem;
   cursor: pointer;
   text-align: center;
   font-size: 1.5rem; }
-  div.DateSelect .value.year {
-    width: 4ch; }
-  div.DateSelect .value.month, div.DateSelect .value.date {
-    width: 2ch; }
+  .DateSelect > .inputs .input {
+    text-align: right; }
+    .DateSelect > .inputs .input.year {
+      width: 7ch; }
+    .DateSelect > .inputs .input.month, .DateSelect > .inputs .input.date {
+      width: 5ch; }
+  .DateSelect > .inputs .btn {
+    display: inline-block;
+    margin-left: 0.5em;
+    vertical-align: middle; }
+    .DateSelect > .inputs .btn::before {
+      content: '\f508';
+      font-family: dashicons; }
+/*# sourceMappingURL=http://localhost:8888/catpow/fns/wp-content/plugins/catpow/ui/DateSelect/input.css.map */

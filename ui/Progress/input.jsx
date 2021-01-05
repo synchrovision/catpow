@@ -1,5 +1,5 @@
 ﻿
-Catpow.Progress=({name,value,max=100,step=1})=>{
+Catpow.UI.Progress=({name,value,max=100,step=1})=>{
 	const {useState}=wp.element;
 	const [val,setVal]=useState(value);
 	const [drawing,setDrawing]=useState(false);
@@ -28,7 +28,7 @@ Catpow.Progress=({name,value,max=100,step=1})=>{
 				size={3}
 				step={step}
 			/>
-			<Catpow.HiddenValues name={name} value={val}/>
+			<Catpow.UI.HiddenValues name={name} value={val}/>
 		</div>
 	);
 }

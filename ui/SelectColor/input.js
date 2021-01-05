@@ -1,4 +1,4 @@
-Catpow.SelectColor = function (props) {
+Catpow.UI.SelectColor = function (props) {
 	var _wp$element = wp.element,
 	    useState = _wp$element.useState,
 	    useEffect = _wp$element.useEffect;
@@ -32,6 +32,6 @@ Catpow.SelectColor = function (props) {
 			null,
 			items
 		),
-		wp.element.createElement(Catpow.HiddenValues, { name: name, value: value })
+		wp.element.createElement(Catpow.UI.HiddenValues, { name: name, value: value })
 	);
 };

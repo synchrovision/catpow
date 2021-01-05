@@ -2,7 +2,7 @@
 絞り込み選択のUI
 
 */
-Catpow.TreeSelect=class extends wp.element.Component{
+Catpow.UI.TreeSelect=class extends wp.element.Component{
 	constructor(props) {
 		super(props);
 		var currentLabel,openPath=[],depth,focus;
@@ -110,7 +110,7 @@ Catpow.TreeSelect=class extends wp.element.Component{
 				<Catpow.Popup open={this.state.selecting} onClose={()=>this.setState({selecting:false})}>
 					<div className="selectBoxes">{items}</div>
 				</Catpow.Popup>
-				<Catpow.HiddenValues name={this.props.name} value={this.state.value}/>
+				<Catpow.UI.HiddenValues name={this.props.name} value={this.state.value}/>
 			</div>
 		);
 	}

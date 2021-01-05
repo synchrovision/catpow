@@ -1,4 +1,4 @@
-Catpow.PhoneNumber = function (_wp$element$Component) {
+Catpow.UI.PhoneNumber = function (_wp$element$Component) {
 	babelHelpers.inherits(_class, _wp$element$Component);
 
 	function _class(props) {
@@ -86,7 +86,7 @@ Catpow.PhoneNumber = function (_wp$element$Component) {
 					'-'
 				),
 				input(2),
-				wp.element.createElement(Catpow.HiddenValues, {
+				wp.element.createElement(Catpow.UI.HiddenValues, {
 					name: this.props.name,
 					value: value
 				})

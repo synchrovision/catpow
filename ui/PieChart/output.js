@@ -1,4 +1,4 @@
-Catpow.PieChartOutput = function (props) {
+Catpow.UI.PieChartOutput = function (props) {
 	var useState = wp.element.useState;
 	var rows = props.rows,
 	    cols = props.cols,

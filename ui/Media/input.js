@@ -1,4 +1,4 @@
-Catpow.Media = function (_wp$element$Component) {
+Catpow.UI.Media = function (_wp$element$Component) {
 	babelHelpers.inherits(_class, _wp$element$Component);
 
 	function _class(props) {
@@ -55,7 +55,7 @@ Catpow.Media = function (_wp$element$Component) {
 				'div',
 				{ className: 'Media' },
 				el(type, { src: src, className: 'preview', onClick: selectMedia }),
-				wp.element.createElement(Catpow.HiddenValues, {
+				wp.element.createElement(Catpow.UI.HiddenValues, {
 					name: this.props.name,
 					value: value
 				})

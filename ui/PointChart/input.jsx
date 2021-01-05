@@ -1,4 +1,4 @@
-﻿Catpow.PointChart=class extends wp.element.Component{
+﻿Catpow.UI.PointChart=class extends wp.element.Component{
 	constructor(props) {
 		super(props);
 		var bnd={},labels,value=Object.assign({x:0,y:0},props.value),press=false;
@@ -75,7 +75,7 @@
 						}}
 					></rect>
 				</svg>
-				<Catpow.HiddenValues
+				<Catpow.UI.HiddenValues
 					name={this.props.name}
 					value={value}
 				/>

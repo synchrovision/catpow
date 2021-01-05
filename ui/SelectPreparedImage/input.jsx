@@ -2,7 +2,7 @@
 絞り込み選択のUI
 
 */
-Catpow.SelectPreparedImage=(props)=>{
+Catpow.UI.SelectPreparedImage=(props)=>{
 	const {useState,useEffect}=wp.element;
 	const {name}=props;
 	const [value,setValue]=useState(props.value);
@@ -27,7 +27,7 @@ Catpow.SelectPreparedImage=(props)=>{
 					);
 				})}
 			</ul>
-			<Catpow.HiddenValues name={name} value={value}/>
+			<Catpow.UI.HiddenValues name={name} value={value}/>
 		</div>
 	);
 }

@@ -1,4 +1,4 @@
-﻿Catpow.PieChartOutput=(props)=>{
+﻿Catpow.UI.PieChartOutput=(props)=>{
 	const {useState}=wp.element;
 	var {rows,cols,width=300,height=300,padding=50}=props;
 	

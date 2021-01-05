@@ -1,5 +1,5 @@
 
-Catpow.Progress = function (_ref) {
+Catpow.UI.Progress = function (_ref) {
 	var name = _ref.name,
 	    value = _ref.value,
 	    _ref$max = _ref.max,
@@ -57,6 +57,6 @@ Catpow.Progress = function (_ref) {
 			size: 3,
 			step: step
 		}),
-		wp.element.createElement(Catpow.HiddenValues, { name: name, value: val })
+		wp.element.createElement(Catpow.UI.HiddenValues, { name: name, value: val })
 	);
 };

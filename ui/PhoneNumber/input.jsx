@@ -1,4 +1,4 @@
-﻿Catpow.PhoneNumber=class extends wp.element.Component{
+﻿Catpow.UI.PhoneNumber=class extends wp.element.Component{
 	constructor(props) {
 		super(props);
 		this.secs0=React.createRef();
@@ -64,7 +64,7 @@
 				<span class="sep">-</span>
 				{input(2)}
 
-				<Catpow.HiddenValues
+				<Catpow.UI.HiddenValues
 					name={this.props.name}
 					value={value}
 				/>

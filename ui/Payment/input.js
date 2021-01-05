@@ -1,4 +1,4 @@
-Catpow.Payment = function (_wp$element$Component) {
+Catpow.UI.Payment = function (_wp$element$Component) {
 	babelHelpers.inherits(_class, _wp$element$Component);
 
 	function _class(props) {
@@ -22,7 +22,7 @@ Catpow.Payment = function (_wp$element$Component) {
 			return wp.element.createElement(
 				'div',
 				{ className: 'Payment' },
-				wp.element.createElement(Catpow.HiddenValues, {
+				wp.element.createElement(Catpow.UI.HiddenValues, {
 					name: this.props.name,
 					value: this.state.value
 				})

@@ -1,7 +1,7 @@
 /*
 絞り込み選択のUI
 */
-Catpow.SearchSelect = function (_wp$element$Component) {
+Catpow.UI.SearchSelect = function (_wp$element$Component) {
 	babelHelpers.inherits(_class, _wp$element$Component);
 
 	function _class(props) {
@@ -133,7 +133,7 @@ Catpow.SearchSelect = function (_wp$element$Component) {
 						})
 					)
 				),
-				wp.element.createElement(Catpow.HiddenValues, { name: this.props.name, value: this.state.value })
+				wp.element.createElement(Catpow.UI.HiddenValues, { name: this.props.name, value: this.state.value })
 			);
 		}
 	}]);

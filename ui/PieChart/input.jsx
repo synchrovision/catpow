@@ -1,4 +1,4 @@
-﻿Catpow.PieChart=class extends wp.element.Component{
+﻿Catpow.UI.PieChart=class extends wp.element.Component{
 	constructor(props) {
 		super(props);
 		var {value,total}=props;
@@ -65,7 +65,7 @@
 						}}
 					></rect>
 				</svg>
-				<Catpow.HiddenValues
+				<Catpow.UI.HiddenValues
 					name={this.props.name}
 					value={value}
 				/>

@@ -2,7 +2,7 @@
 絞り込み選択のUI
 
 */
-Catpow.PanelSelect=(props)=>{
+Catpow.UI.PanelSelect=(props)=>{
 	var classes='PanelSelect';
 	const {useState}=wp.element;
 	const [value,setValue]=useState(props.value);
@@ -16,7 +16,7 @@ Catpow.PanelSelect=(props)=>{
 
 				})}
 			</ul>
-			<Catpow.HiddenValues name={props.name} value={value}/>
+			<Catpow.UI.HiddenValues name={props.name} value={value}/>
 		</div>
 	);
 }

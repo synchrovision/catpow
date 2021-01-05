@@ -2,7 +2,7 @@
 絞り込み選択のUI
 
 */
-Catpow.SearchSelect=class extends wp.element.Component{
+Catpow.UI.SearchSelect=class extends wp.element.Component{
 	constructor(props) {
 		super(props);
 		this.flatSelections={};
@@ -95,7 +95,7 @@ Catpow.SearchSelect=class extends wp.element.Component{
 						/>
 					</div>
 				</Catpow.Popup>
-				<Catpow.HiddenValues name={this.props.name} value={this.state.value}/>
+				<Catpow.UI.HiddenValues name={this.props.name} value={this.state.value}/>
 			</div>
 		);
 	}

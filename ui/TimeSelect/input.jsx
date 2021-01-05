@@ -1,4 +1,4 @@
-﻿Catpow.TimeSelect=class extends wp.element.Component{
+﻿Catpow.UI.TimeSelect=class extends wp.element.Component{
 	constructor(props) {
 		super(props);
 		var selections,value,step,i,ii;
@@ -41,7 +41,7 @@
 					{this.state.selections.minit}
 				</select>
 
-				<Catpow.HiddenValues
+				<Catpow.UI.HiddenValues
 					name={this.props.name}
 					value={this.state.value}
 				/>

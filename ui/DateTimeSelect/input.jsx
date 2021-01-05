@@ -1,4 +1,4 @@
-﻿Catpow.DateTimeSelect=class extends wp.element.Component{
+﻿Catpow.UI.DateTimeSelect=class extends wp.element.Component{
 	constructor(props) {
 		super(props);
 		var date,min,max,step,selections,i;
@@ -146,16 +146,9 @@
 				</Catpow.Popup>
 				<span class="unit">分</span>
 
-				{date!==false && <Catpow.HiddenValues
+				{date!==false && <Catpow.UI.HiddenValues
 					name={this.props.name}
-					value={
-						date.getFullYear()+'-'+
-						(date.getMonth()+1)+'-'+
-						date.getDate()+' '+
-						date.getHours()+':'+
-						date.getMinutes()+':'+
-						date.getSeconds()
-					}
+					value={Catpow.util.getDateTimeValue(date)}
 				/>}
 			</div>
 		);

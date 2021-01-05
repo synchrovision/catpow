@@ -1,7 +1,7 @@
 /*
 絞り込み選択のUI
 */
-Catpow.TreeSelect = function (_wp$element$Component) {
+Catpow.UI.TreeSelect = function (_wp$element$Component) {
 	babelHelpers.inherits(_class, _wp$element$Component);
 
 	function _class(props) {
@@ -152,7 +152,7 @@ Catpow.TreeSelect = function (_wp$element$Component) {
 						items
 					)
 				),
-				wp.element.createElement(Catpow.HiddenValues, { name: this.props.name, value: this.state.value })
+				wp.element.createElement(Catpow.UI.HiddenValues, { name: this.props.name, value: this.state.value })
 			);
 		}
 	}]);

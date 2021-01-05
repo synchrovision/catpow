@@ -1,118 +1,76 @@
-﻿Catpow.DateSelect=class extends wp.element.Component{
-	constructor(props) {
-		super(props);
-		var date,min,max,selections,i;
-		
-		if(props.value){
-			var dateArr=props.value.split('-');
-			dateArr[1]--;
-			date=new Date(dateArr[0],dateArr[1],dateArr[2]);
+﻿Catpow.UI.DateSelect=(props)=>{
+	const {min=false,max=false}=props;
+	const {useState,useReducer,useMemo}=wp.element;
+	const [open,setOpen]=useState(false);
+	const minTime=min?Catpow.util.getDateObject(min).getTime():-Number.MAX_VALUE;
+	const maxTime=max?Catpow.util.getDateObject(max).getTime():Number.MAX_VALUE;
+	
+	const d=Catpow.util.getDateObject(props.value,new Date());
+	
+	const [state,dispatch]=useReducer((state,action)=>{
+		console.log(state,action);
+		switch(action.type){
+			case 'update':
+				const d=action.value?(
+					Catpow.util.getDateObject(action.value)
+				):(
+					new Date(
+						action.year || state.year,
+						(action.month || state.month)-1,
+						action.date || state.date,
+					)
+				);
+				const t=d.getTime();
+				if(t<minTime){d.setTime(minTime);}
+				if(t>maxTime){d.setTime(maxTime);}
+				
+				return {
+					value:Catpow.util.getDateValue(d),
+					year:d.getFullYear(),
+					month:d.getMonth()+1,
+					date:d.getDate()
+				};
 		}
-		else if(props.default){date=new Date(props.default);}
-		else{date=false;}
-		if(props.min){min=new Date(props.min);}
-		else{min=new Date(Date.now()-1000*3600*24*3000);}
-		if(props.max){max=new Date(props.max);}
-		else{max=new Date(Date.now()+1000*3600*24*3000);}
-		
-		selections={
-			year:[],
-			month:[],
-			date:[]
-		}
-		for(i=min.getFullYear();i<=max.getFullYear();i++){
-			selections.year.push(i);
-		}
-		for(i=1;i<=12;i++){
-			selections.month.push(i);
-		}
-		for(i=1;i<=31;i++){
-			selections.date.push(i);
-		}
-		this.state={date,selections,min,max};
-	}
-	render(){
-		var {date,min,max}=this.state;
-		if(date!==false){
-			if(min>date){date=new Date(min);}
-			else if(max<date){date=new Date(max);}
-			else{date=new Date(date);}
-		}
-		
-		const nameInFunction={
-			Y:'FullYear',
-			m:'Month',
-			d:'Date',
-			w:'Day'
-		};
-		const setDate=(key,val)=>{
-			if(val==-1){
-				date=false;
-			}
-			else{
-				if(date===false){date=new Date();}
-				val=parseInt(val);
-				if(key==='m'){val--;}
-				date['set'+nameInFunction[key]](val);
-			}
-			this.setState({date});
-		};
-		const getDate=(key)=>{
-			if(date===false){return '−';}
-			var val=date['get'+nameInFunction[key]]();
-			if(key==='m'){val++}
-			return val;
-		};
-		
-		return (
-			<div className={'DateSelect'}>
-				<div class="value year" onClick={()=>{this.setState({yearSelecting:true})}}>{getDate('Y')}</div>
-				<Catpow.Popup open={this.state.yearSelecting} onClose={()=>this.setState({yearSelecting:false})}>
-					<Catpow.SelectTable
-						selections={this.state.selections.year}
-						value={getDate('Y')}
-						col={10}
-						spacer={this.state.selections.year[0]%10}
-						onChange={(label)=>{
-							setDate('Y',label);
-							this.setState({yearSelecting:false});
-						}}
-					/>
-				</Catpow.Popup>
-				<span class="unit">年</span>
-				<div class="value month" onClick={()=>{this.setState({monthSelecting:true})}}>{getDate('m')}</div>
-				<Catpow.Popup open={this.state.monthSelecting} onClose={()=>this.setState({monthSelecting:false})}>
-					<Catpow.SelectTable
-						selections={this.state.selections.month}
-						value={getDate('m')}
-						col={6}
-						onChange={(label)=>{
-							setDate('m',label);
-							this.setState({monthSelecting:false});
-						}}
-					/>
-				</Catpow.Popup>
-				<span class="unit">月</span>
-				<div class="value date" onClick={()=>{this.setState({dateSelecting:true})}}>{getDate('d')}</div>
-				<Catpow.Popup open={this.state.dateSelecting} onClose={()=>this.setState({dateSelecting:false})}>
-					<Catpow.SelectTable
-						selections={this.state.selections.date}
-						value={getDate('d')}
-						col={7}
-						spacer={(getDate('w')-getDate('d')+35)%7}
-						onChange={(label)=>{
-							setDate('d',label);
-							this.setState({dateSelecting:false});
-						}}
-					/>
-				</Catpow.Popup>
-				<span class="unit">日</span>
-
-				{date!==false && <Catpow.HiddenValues
-					name={this.props.name}
-					value={date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()}
-				/>}
+		return state;
+	},{
+		value:props.value,
+		year:d.getFullYear(),
+		month:d.getMonth()+1,
+		date:d.getDate()
+	});
+	
+	return (
+		<div className='DateSelect'>
+			<div className="inputs">
+				<input className="input year" type="number" size="4" value={state.year} onInput={(e)=>{dispatch({type:'update',year:e.currentTarget.value})}}/>
+				<span className="unit">年</span>
+				<input className="input month" type="number" size="2" value={state.month} onInput={(e)=>{dispatch({type:'update',month:e.currentTarget.value})}}/>
+				<span className="unit">月</span>
+				<input className="input date"  type="number" size="2" value={state.date} onInput={(e)=>{dispatch({type:'update',date:e.currentTarget.value})}}/>
+				<span className="unit">日</span>
+				<span className="btn calendar" onClick={()=>setOpen(true)}></span>
 			</div>
-		);
-	}
+			<Catpow.Popup open={open} onClose={()=>setOpen(false)} closeButton={true}>
+				<Catpow.Calendar
+					className='medium'
+					year={state.year}
+					month={state.month}
+					showControl={true}
+					values={
+						state.value?{[state.value]:true}:{}
+					}
+					onSelect={(value)=>{
+						setOpen(false);
+						dispatch({type:'update',value})
+					}}
+				/>
+			</Catpow.Popup>
+			{state.value &&
+				<Catpow.UI.HiddenValues
+					name={props.name}
+					value={state.value}
+				/>
+			}
+		</div>
+	);
 }

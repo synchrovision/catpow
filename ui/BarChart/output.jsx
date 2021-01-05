@@ -1,4 +1,4 @@
-﻿Catpow.BarChartOutput=(props)=>{
+﻿Catpow.UI.BarChartOutput=(props)=>{
 	var colsSvg=[],rowsSvg=[],textsSvg=[];
 	var {rows,cols,width=300,height=300,padding=50,total}=props;
 	

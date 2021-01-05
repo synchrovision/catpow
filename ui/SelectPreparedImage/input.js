@@ -1,7 +1,7 @@
 /*
 絞り込み選択のUI
 */
-Catpow.SelectPreparedImage = function (props) {
+Catpow.UI.SelectPreparedImage = function (props) {
 	var _wp$element = wp.element,
 	    useState = _wp$element.useState,
 	    useEffect = _wp$element.useEffect;
@@ -42,6 +42,6 @@ Catpow.SelectPreparedImage = function (props) {
 				);
 			})
 		),
-		wp.element.createElement(Catpow.HiddenValues, { name: name, value: value })
+		wp.element.createElement(Catpow.UI.HiddenValues, { name: name, value: value })
 	);
 };

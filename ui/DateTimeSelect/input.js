@@ -1,4 +1,4 @@
-Catpow.DateTimeSelect = function (_wp$element$Component) {
+Catpow.UI.DateTimeSelect = function (_wp$element$Component) {
 	babelHelpers.inherits(_class, _wp$element$Component);
 
 	function _class(props) {
@@ -252,9 +252,9 @@ Catpow.DateTimeSelect = function (_wp$element$Component) {
 					{ 'class': 'unit' },
 					'\u5206'
 				),
-				date !== false && wp.element.createElement(Catpow.HiddenValues, {
+				date !== false && wp.element.createElement(Catpow.UI.HiddenValues, {
 					name: this.props.name,
-					value: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+					value: Catpow.util.getDateTimeValue(date)
 				})
 			);
 		}

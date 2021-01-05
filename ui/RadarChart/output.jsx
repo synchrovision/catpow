@@ -1,4 +1,4 @@
-﻿Catpow.RadarChartOutput=class extends wp.element.Component{
+﻿Catpow.UI.RadarChartOutput=class extends wp.element.Component{
 	constructor(props) {
 		super(props);
 		var {value,total}=props;

@@ -1,4 +1,4 @@
-﻿Catpow.SelectColor=(props)=>{
+﻿Catpow.UI.SelectColor=(props)=>{
 	const {useState,useEffect}=wp.element;
 	const {name}=props;
 	const [value,setValue]=useState(props.value);
@@ -15,7 +15,7 @@
 	return (
 		<div className="SelectColor">
 			<ul>{items}</ul>
-			<Catpow.HiddenValues name={name} value={value}/>
+			<Catpow.UI.HiddenValues name={name} value={value}/>
 		</div>
 	);
 }

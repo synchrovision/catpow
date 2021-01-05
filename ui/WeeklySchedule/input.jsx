@@ -2,7 +2,7 @@
 * 週間スケジュール
 * 
 */
-Catpow.WeeklySchedule=class extends wp.element.Component{
+Catpow.UI.WeeklySchedule=class extends wp.element.Component{
 	constructor(props) {
 		super(props);
 		let {value,step,range,dayLabels}=props;
@@ -170,7 +170,7 @@ Catpow.WeeklySchedule=class extends wp.element.Component{
 					<div className="item base" data-drawaction="add"></div>
 					{events}
 				</Catpow.DrawArea>
-				<Catpow.HiddenValues name={this.props.name} value={value}/>
+				<Catpow.UI.HiddenValues name={this.props.name} value={value}/>
 			</div>
 		);
 	}

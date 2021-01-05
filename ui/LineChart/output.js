@@ -1,4 +1,4 @@
-Catpow.LineChartOutput = function (_wp$element$Component) {
+Catpow.UI.LineChartOutput = function (_wp$element$Component) {
 	babelHelpers.inherits(_class, _wp$element$Component);
 
 	function _class(props) {

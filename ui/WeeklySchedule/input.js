@@ -2,7 +2,7 @@
 * 週間スケジュール
 * 
 */
-Catpow.WeeklySchedule = function (_wp$element$Component) {
+Catpow.UI.WeeklySchedule = function (_wp$element$Component) {
 	babelHelpers.inherits(_class, _wp$element$Component);
 
 	function _class(props) {
@@ -248,7 +248,7 @@ Catpow.WeeklySchedule = function (_wp$element$Component) {
 					wp.element.createElement('div', { className: 'item base', 'data-drawaction': 'add' }),
 					events
 				),
-				wp.element.createElement(Catpow.HiddenValues, { name: this.props.name, value: value })
+				wp.element.createElement(Catpow.UI.HiddenValues, { name: this.props.name, value: value })
 			);
 		}
 	}]);
