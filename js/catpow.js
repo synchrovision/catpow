@@ -1,6 +1,6 @@
 /* global console Catpow */
 jQuery.catpow=jQuery.catpow || {};
-window.Catpow=window.Catpow || {};
+window.Catpow=window.Catpow || {UI:{}};
 
 (function($){
 	//指定のcssがdocumentになければ読み込み
@@ -1184,6 +1184,31 @@ Catpow.util={
 			return dfr.promise();
 		})).then(function(){dfr.resolve();});
 		return dfr.promise();
+	},
+	getDateValue:function(dateObj){
+		return dateObj.getFullYear()+'-'+ (dateObj.getMonth()+1)+'-'+ dateObj.getDate();
+	},
+	getDateObject:function(dateValue,defaultValue){
+		var d=dateValue.match(/^(\d+)\-(\d+)\-(\d+)$/);
+		if(d){return new Date(d[1],d[2]-1,d[3]);}
+		if(defaultValue){return defaultValue;}
+		return false;
+	},
+	getDateTimeValue:function(dateTimeObj){
+		return (
+			dateTimeObj.getFullYear()+'-'+ 
+			(dateTimeObj.getMonth()+1)+'-'+
+			dateTimeObj.getDate()+' '+
+			dateTimeObj.getHours()+':'+
+			dateTimeObj.getMinutes()+':'+
+			dateTimeObj.getSeconds()
+		);
+	},
+	getDateTimeObject:function(dateTimeValue,defaultValue){
+		var dt=dateTimeValue.match(/^(\d+)\-(\d+)\-(\d+) (\d+):(\d+):(\d+)$/);
+		if(dt){return new Date(dt[1],dt[2]-1,dt[3],dt[4],dt[5],dt[6]);}
+		if(defaultValue){return defaultValue;}
+		return false;
 	}
 };
 
