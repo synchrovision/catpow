@@ -56,7 +56,7 @@ class UI extends meta{
 					window.Catpow.uiProps['<?=$id?>']=<?=json_encode($prm)?>;
 					wp.element.render(
 						wp.element.createElement(
-							Catpow.<?=$ui?>Output,
+							Catpow.UI.<?=$ui?>Output,
 							window.Catpow.uiProps['<?=$id?>']
 						),
 						document.getElementById("<?=$id?>")
@@ -81,7 +81,7 @@ class UI extends meta{
 					window.Catpow.uiProps['<?=$id?>']=<?=json_encode($prm)?>;
 					wp.element.render(
 						wp.element.createElement(
-							Catpow.<?=$ui?>,
+							Catpow.UI.<?=$ui?>,
 							window.Catpow.uiProps['<?=$id?>']
 						),
 						document.getElementById("<?=$id?>")
