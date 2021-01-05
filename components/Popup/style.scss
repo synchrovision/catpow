@@ -1,7 +1,7 @@
 @import 'admin_style_config.scss';
 
 
-div.Popup{
+.Popup{
 	@include bnd((d:i,p:r,z:10000));
 	&.open{
 		@include anm((a:PopupOpen .5s a 1 f));
@@ -19,7 +19,7 @@ div.Popup{
 		@include bg((c:shd));
 	}
 	.PopupBody{
-		@include bnd((d:b,w:90vw 64rem,h:a 90vh,p:f,l:0,r:0,t:50%,mg:a));
+		@include bnd((d:b,w:fit 64rem,h:a 90vh,p:f,l:0,r:0,t:50%,mg:a));
 		@include bdr((r:1rem));
 		@include bg((c:b));
 		@include shd((b:2));
@@ -28,11 +28,11 @@ div.Popup{
 		}
 		.PopupControl{
 			.close{
-				@include bnd((p:a,w:3rem,h:3rem,t:1rem,r:1rem));
+				@include bnd((p:a,w:3rem,h:3rem,t:-4rem,r:1rem));
 				&::before,&::after{
 					content:'';
 					@include bnd((p:a,t:1.5rem,w:3rem,h:1));
-					@include bg((c:t));
+					@include bg((c:b));
 				}
 				&::before{
 					@include trn((r:45deg));

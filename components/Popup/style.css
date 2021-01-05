@@ -1,16 +1,16 @@
 @charset "utf-8";
-div.Popup {
+.Popup {
   display: inline;
   position: relative;
   z-index: 10000; }
-  div.Popup.open {
+  .Popup.open {
     animation: PopupOpen 0.5s alternate 1 forwards; }
-  div.Popup.close {
+  .Popup.close {
     animation: PopupClose 0.5s alternate 1 forwards; }
-  div.Popup.closed {
+  .Popup.closed {
     display: none;
     pointer-events: none; }
-  div.Popup .PopupBG {
+  .Popup .PopupBG {
     content: '';
     display: block;
     position: fixed;
@@ -19,10 +19,10 @@ div.Popup {
     left: 0px;
     right: 0px;
     background-color: rgba(0, 0, 0, 0.3); }
-  div.Popup .PopupBody {
+  .Popup .PopupBody {
     display: block;
     max-width: 64rem;
-    width: 90vw;
+    width: fit-content;
     max-height: 90vh;
     height: auto;
     position: fixed;
@@ -35,23 +35,23 @@ div.Popup {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     transform: -webkit- translateY(-50%);
     transform: translateY(-50%); }
-    div.Popup .PopupBody .PopupControl .close {
+    .Popup .PopupBody .PopupControl .close {
       position: absolute;
       width: 3rem;
       height: 3rem;
-      top: 1rem;
+      top: -4rem;
       right: 1rem; }
-      div.Popup .PopupBody .PopupControl .close::before, div.Popup .PopupBody .PopupControl .close::after {
+      .Popup .PopupBody .PopupControl .close::before, .Popup .PopupBody .PopupControl .close::after {
         content: '';
         position: absolute;
         top: 1.5rem;
         width: 3rem;
         height: 1px;
-        background-color: #444; }
-      div.Popup .PopupBody .PopupControl .close::before {
+        background-color: #fefefe; }
+      .Popup .PopupBody .PopupControl .close::before {
         transform: -webkit- rotateZ(45deg);
         transform: rotateZ(45deg); }
-      div.Popup .PopupBody .PopupControl .close::after {
+      .Popup .PopupBody .PopupControl .close::after {
         transform: -webkit- rotateZ(-45deg);
         transform: rotateZ(-45deg); }
 
@@ -65,3 +65,4 @@ div.Popup {
     opacity: 1; }
   100% {
     opacity: 0; } }
+/*# sourceMappingURL=http://localhost:8888/catpow/fns/wp-content/plugins/catpow/components/Popup/style.css.map */
