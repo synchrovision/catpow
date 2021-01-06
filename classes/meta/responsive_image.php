@@ -39,8 +39,8 @@ class responsive_image extends media{
 	public static function fill_conf(&$conf){
 		if(empty($conf['meta'])){
 			$conf['meta']=[
-				0=>[],
-				-640=>['size'=>'medium_large']
+				0=>['label'=>'PC版画像'],
+				-640=>['label'=>'SP版画像','size'=>'medium_large']
 			];
 		}
 		foreach($conf['meta'] as $bp=>$child_meta){
