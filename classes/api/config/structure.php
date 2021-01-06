@@ -10,6 +10,7 @@ class structure extends \Catpow\api{
 		\cp::conf_data_walk(function($data_type,$data_name,$conf_data)use(&$data){
 			$data[$data_type][]=[
 				'name'=>$data_name,
+				'label'=>$conf_data['label'],
 				'meta'=>self::get_structure($conf_data)
 			];
 		});
