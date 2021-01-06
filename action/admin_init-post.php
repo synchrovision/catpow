@@ -4,6 +4,11 @@ namespace Catpow;
 
 add_action('admin_bar_menu',function($wp_admin_bar){
 	global $wpdb,$post;
+	$wp_admin_bar->add_menu([
+		'id'=>'clone_post',
+		'title'=>'<span class="ab-icon"></span><span class="ad-label">'._('複製').'</span>',
+		'href'=>add_query_arg(['action'=>'clone'])
+	]);
 	$prev_post_id=$wpdb->get_var("SELECT MAX(ID) FROM $wpdb->posts WHERE post_type = '$post->post_type' AND post_status = 'publish' AND ID < $post->ID");
 	$next_post_id=$wpdb->get_var("SELECT MIN(ID) FROM $wpdb->posts WHERE post_type = '$post->post_type' AND post_status = 'publish' AND ID > $post->ID");
 	if(isset($prev_post_id)){
@@ -51,6 +56,14 @@ add_action('admin_bar_menu',function($wp_admin_bar){
 		}
 	}
 },100);
+add_action("post_action_clone",function($post_id){
+	$query=new query\post($post_id);
+	$data=$query->export()[0];
+	unset($data['ID']);
+	$new_post_id=query\post::import([$data])[0];
+	wp_redirect(admin_url(sprintf('post.php?post=%d&action=edit',$new_post_id)));
+	exit;
+});
 add_action('save_post', function($id,$post,$update){do_action('cp_save_post',$id,$post);},10,3);
 add_action('attachment_updated',function($id,$post_after,$post_before){do_action('cp_save_post',$id,$post_after);},10,3);
 add_action('cp_save_post',function($id,$post){
