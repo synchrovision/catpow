@@ -73,7 +73,7 @@ class post extends query{
 	}
 	
 	public static function fill_query_vars($q){
-		if(is_numeric($q)){$q=['p'=>$q];}
+		if(is_numeric($q)){$q=['p'=>$q,'post_type'=>get_post_type($q)];}
 		if(isset($q['data_name'])){$q['post_type']=$q['data_name'];}
 		if(isset($q['limit'])){
 			if(empty($q['limit'])){$q['nopaging']=true;}
