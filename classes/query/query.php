@@ -79,7 +79,7 @@ abstract class query{
 		$datas=[];
 		$name_key=static::$data_keys[0];
 		$tmp=array_flip(static::$data_keys);
-		$data_type=array_pop(explode('\\',static::class));
+		$data_type=substr(static::class,strrpos(static::class,'\\')+1);
 		$conf_data_name=\cp::get_conf_data_name($data_type);
 		foreach($this->loop() as $id=>$obj){
 			if(is_object($obj)){
@@ -105,16 +105,18 @@ abstract class query{
 		return $datas;
 	}
 	public static function import($datas){
+		$inserted_ids=[];
 		$name_key=static::$data_keys[0];
 		$primary_key=static::$data_keys[1];
 		$tmp=array_flip(static::$data_keys);
-		$data_type=array_pop(explode('\\',static::class));
+		$data_type=substr(static::class,strrpos(static::class,'\\')+1);
 		$conf_data_name=\cp::get_conf_data_name($data_type);
 		foreach($datas as $data){
 			$object_data=array_intersect_key($data,$tmp);
 			$data_name=$object_data[$name_key];
 			$conf=$GLOBALS[$conf_data_name][$object_data[$name_key]];
 			$id=static::insert($data);
+			$inserted_ids[]=$id;
 			if(!empty($conf['meta'])){
 				foreach($conf['meta'] as $meta_name=>$meta_conf){
 					if(isset($data[$meta_name])){
@@ -126,6 +128,7 @@ abstract class query{
 				}
 			}
 		}
+		return $inserted_ids;
 	}
 	
 	/*magic method*/
