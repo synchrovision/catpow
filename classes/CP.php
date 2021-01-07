@@ -2014,7 +2014,10 @@ class CP{
 	public static function is_child_theme(){
 		static $is_child_theme;
 		if(isset($is_child_theme)){return $is_child_theme;}
-		return $is_child_theme=get_template_directory()!==get_stylesheet_directory();
+		if(did_action('template_redirect')){
+			return $is_child_theme=get_template_directory()!==get_stylesheet_directory();
+		}
+		return get_template_directory()!==get_stylesheet_directory();
 	}
 	
 	/*接続情報*/
