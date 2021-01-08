@@ -1925,7 +1925,7 @@ class CP{
 					error_log('SCSS compile '.$scss_name);
 					$scssc->setSourceMapOptions([
 						'sourceMapWriteTo'=>$scss_name.'.css.map',
-						'sourceMapURL'=>$scss_url.'.css.map',
+						'sourceMapURL'=>'./'.basename($scss_name).'.css.map',
 						'sourceMapFilename'=>basename($scss_name).'.css.map',
 						'sourceMapBasepath'=>$_SERVER['DOCUMENT_ROOT'],
 						'sourceRoot'=>'/'
