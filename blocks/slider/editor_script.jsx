@@ -340,23 +340,28 @@ registerBlockType('catpow/slider',{
 					<ItemControlInfoPanel/>
 				</InspectorControls>
 				{attributes.EditMode?(
-					<EditItemsTable
-						set={setAttributes}
-						attr={attributes}
-						columns={[
-							{type:'picture',label:'slide',keys:imageKeys.slide,devices,cond:states.hasSlide},
-							{type:'text',key:'slideCode',cond:states.isTemplate && states.hasSlide},
-							{type:'image',label:'image',keys:imageKeys.image,cond:states.hasImage},
-							{type:'text',key:'imageCode',cond:states.isTemplate && states.hasImage},
-							{type:'picture',label:'bg',keys:imageKeys.backgroundImage,devices,cond:states.hasBackgroundImage},
-							{type:'text',key:'backgroundImageCode',cond:states.isTemplate && states.hasBackgroundImage},
-							{type:'text',key:'title',cond:states.hasTitle},
-							{type:'text',key:'subTitle',cond:states.hasSubTitle},
-							{type:'text',key:'text',cond:states.hasText},
-							{type:'text',key:'linkUrl',cond:states.hasLink}
-						]}
-						isTemplate={states.isTemplate}
-					/>
+					<div className="alt_content">
+						<div class="label">
+							<Icon icon="edit"/>
+						</div>
+						<EditItemsTable
+							set={setAttributes}
+							attr={attributes}
+							columns={[
+								{type:'picture',label:'slide',keys:imageKeys.slide,devices,cond:states.hasSlide},
+								{type:'text',key:'slideCode',cond:states.isTemplate && states.hasSlide},
+								{type:'image',label:'image',keys:imageKeys.image,cond:states.hasImage},
+								{type:'text',key:'imageCode',cond:states.isTemplate && states.hasImage},
+								{type:'picture',label:'bg',keys:imageKeys.backgroundImage,devices,cond:states.hasBackgroundImage},
+								{type:'text',key:'backgroundImageCode',cond:states.isTemplate && states.hasBackgroundImage},
+								{type:'text',key:'title',cond:states.hasTitle},
+								{type:'text',key:'subTitle',cond:states.hasSubTitle},
+								{type:'text',key:'text',cond:states.hasText},
+								{type:'text',key:'linkUrl',cond:states.hasLink}
+							]}
+							isTemplate={states.isTemplate}
+						/>
+					</div>
 				):(
 					<Fragment>
 						{(AltMode && doLoop)?(

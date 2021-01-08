@@ -311,12 +311,21 @@ registerBlockType('catpow/slider', {
 				}),
 				wp.element.createElement(ItemControlInfoPanel, null)
 			),
-			attributes.EditMode ? wp.element.createElement(EditItemsTable, {
-				set: setAttributes,
-				attr: attributes,
-				columns: [{ type: 'picture', label: 'slide', keys: imageKeys.slide, devices: devices, cond: states.hasSlide }, { type: 'text', key: 'slideCode', cond: states.isTemplate && states.hasSlide }, { type: 'image', label: 'image', keys: imageKeys.image, cond: states.hasImage }, { type: 'text', key: 'imageCode', cond: states.isTemplate && states.hasImage }, { type: 'picture', label: 'bg', keys: imageKeys.backgroundImage, devices: devices, cond: states.hasBackgroundImage }, { type: 'text', key: 'backgroundImageCode', cond: states.isTemplate && states.hasBackgroundImage }, { type: 'text', key: 'title', cond: states.hasTitle }, { type: 'text', key: 'subTitle', cond: states.hasSubTitle }, { type: 'text', key: 'text', cond: states.hasText }, { type: 'text', key: 'linkUrl', cond: states.hasLink }],
-				isTemplate: states.isTemplate
-			}) : wp.element.createElement(
+			attributes.EditMode ? wp.element.createElement(
+				'div',
+				{ className: 'alt_content' },
+				wp.element.createElement(
+					'div',
+					{ 'class': 'label' },
+					wp.element.createElement(Icon, { icon: 'edit' })
+				),
+				wp.element.createElement(EditItemsTable, {
+					set: setAttributes,
+					attr: attributes,
+					columns: [{ type: 'picture', label: 'slide', keys: imageKeys.slide, devices: devices, cond: states.hasSlide }, { type: 'text', key: 'slideCode', cond: states.isTemplate && states.hasSlide }, { type: 'image', label: 'image', keys: imageKeys.image, cond: states.hasImage }, { type: 'text', key: 'imageCode', cond: states.isTemplate && states.hasImage }, { type: 'picture', label: 'bg', keys: imageKeys.backgroundImage, devices: devices, cond: states.hasBackgroundImage }, { type: 'text', key: 'backgroundImageCode', cond: states.isTemplate && states.hasBackgroundImage }, { type: 'text', key: 'title', cond: states.hasTitle }, { type: 'text', key: 'subTitle', cond: states.hasSubTitle }, { type: 'text', key: 'text', cond: states.hasText }, { type: 'text', key: 'linkUrl', cond: states.hasLink }],
+					isTemplate: states.isTemplate
+				})
+			) : wp.element.createElement(
 				Fragment,
 				null,
 				AltMode && doLoop ? wp.element.createElement(
