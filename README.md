@@ -74,9 +74,7 @@ git submodule add https://github.com/synchrovision/cawpow.git wp-content/plugins
 1. 各テンプレートファイルを編集
 
 というのがCatpowにおける最も基本的なテーマ作成の流れになります
-（このリポジトリ全体ではなくcatpowフォルダがプラグインのフォルダになります
-catpow-*の各フォルダは追加機能・後方互換のための拡張プラグインです）
 
 system_config.phpで指定可能なカスタムフィールドタイプやテンプレートの種類
 テンプレートファイルの編集で使用できる関数やクラス
-同梱されるjqueryやscssのライブラリに関する情報は公式サイトにて提供する予定です
+同梱されるjqueryやscssのライブラリに関する情報は[公式サイト](https://catpow.info)にて提供する予定です
