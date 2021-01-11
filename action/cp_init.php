@@ -36,6 +36,7 @@ if(!empty($auth_ip)){
 if(defined('MAINTENANCE_MODE') && MAINTENANCE_MODE){
 	add_action('wp',function(){if(!current_user_can('edit_pages')){get_template_part('maintenance');exit;}});
 }
+define('CONCATENATE_SCRIPTS',false);
 
 add_filter('option_home',function($url){
 	static $cache;

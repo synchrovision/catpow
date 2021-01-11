@@ -1,5 +1,4 @@
 <?php
-define('CONCATENATE_SCRIPTS',true);
 define('COMPRESS_SCRIPTS',true);
 define('COMPRESS_CSS',true);
 define('ENFORCE_GZIP',true);
