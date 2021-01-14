@@ -139,7 +139,7 @@ if(function_exists('register_block_type')){
 							if(isset($attributes)){$param['attributes']=$attributes;}
 						}
 						elseif($fname === 'render'){
-							$param['render_callback']=function($attr,$content=null)use($file_path){
+							$param['render_callback']=function($attr,$content=null,$block=null)use($file_path){
 								$is_preview=
 									!empty(!empty($GLOBALS['wp']->query_vars['rest_route'])) &&
 									strpos($GLOBALS['wp']->query_vars['rest_route'],'block-renderer') > 0;
