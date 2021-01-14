@@ -28,7 +28,7 @@ add_action('admin_bar_menu',function($wp_admin_bar){
 	}
 	$wp_admin_bar->add_menu([
 		'id'=>'select_post_edit',
-		'title'=>$post->post_title
+		'title'=>'・・・'
 	]);
 	foreach(get_posts(['post_type'=>$post->post_type,'posts_per_page'=>20]) as $sibling_post){
 		$wp_admin_bar->add_node(
