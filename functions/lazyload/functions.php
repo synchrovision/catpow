@@ -1,7 +1,9 @@
 <?php
 add_filter('the_content',function($content){
 	$img=cp::get_file_url('images/spacer.gif');
-	return str_replace(' srcset=',' data-srcset=',str_replace(' src=',' src="'.$img.'" data-src=',$content));
+	return preg_replace_callback('/<img (.+?)\/>/',function($matches)use($img){
+		return preg_replace('/(src(set)?)=/','\1="'.$img.'" data-\1=',$matches[0]);
+	},$content);
 },100);
 add_action('wp_print_footer_scripts',function(){
 ?>
