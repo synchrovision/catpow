@@ -624,6 +624,26 @@ var CP = {
 		return rtn;
 	},
 
+	parseGradientStyleValue: function parseGradientStyleValue(gradient) {
+		var match = gradient.match(/^(linear|radial)\-gradient\((\d+deg),(.+)\)$/);
+		return {
+			type: match[1],
+			angle: match[2],
+			colors: match[3].match(/rgba?\([\d,]+?\) \d+%/g).map(function (color) {
+				var match = color.match(/((rgba?)\((\d+),(\d+),(\d+)(,(\d+))?\)) (\d+%)/);
+				return {
+					color: match[1],
+					type: match[2],
+					r: match[3],
+					g: match[4],
+					b: match[5],
+					a: match[7] === undefined ? 1 : match[7],
+					position: match[8]
+				};
+			})
+		};
+	},
+
 	wordsToFlags: function wordsToFlags(words) {
 		var rtn = {};
 		if (undefined === words) {
@@ -702,6 +722,66 @@ var CP = {
 			values: 'isTemplate',
 			sub: [{ input: 'bool', label: 'ループ', key: 'doLoop', sub: [{ label: 'content path', input: 'text', key: 'content_path' }, { label: 'query', input: 'textarea', key: 'query' }, { label: 'プレビューループ数', input: 'range', key: 'loopCount', min: 1, max: 16 }] }]
 		}
+	},
+
+	/*compornents*/
+	SelectColors: function SelectColors(props) {
+		var _wp$element = wp.element,
+		    useState = _wp$element.useState,
+		    useRef = _wp$element.useRef;
+		var _wp$components = wp.components,
+		    ColorPicker = _wp$components.ColorPicker,
+		    ColorPalette = _wp$components.ColorPalette,
+		    Popover = _wp$components.Popover;
+		var onChange = props.onChange;
+
+		var _useState = useState(-1),
+		    _useState2 = babelHelpers.slicedToArray(_useState, 2),
+		    index = _useState2[0],
+		    setIndex = _useState2[1];
+
+		var colorValues = props.colors.map(function (color) {
+			if (typeof color === 'string') {
+				return color;
+			}
+			if ('h' in color) {
+				if ('a' in color) {
+					return 'hsla(' + color.h + ',' + color.s + ',' + color.l + ',' + color.a + ')';
+				}
+				return 'hsl(' + color.h + ',' + color.s + ',' + color.l + ')';
+			}
+			if ('a' in color) {
+				return 'rgba(' + color.r + ',' + color.g + ',' + color.b + ',' + color.a + ')';
+			}
+			return 'rgba(' + color.r + ',' + color.g + ',' + color.b + ')';
+		});
+		var colors = colorValues.map(function (color) {
+			return { name: color, color: color };
+		});
+
+		return wp.element.createElement(
+			'div',
+			null,
+			wp.element.createElement(ColorPalette, {
+				colors: colors,
+				color: index > -1 && colors[index].color,
+				onChange: function onChange(colorValue) {
+					setIndex(colorValues.indexOf(colorValue));
+				}
+			}),
+			index > -1 && wp.element.createElement(
+				Popover,
+				null,
+				wp.element.createElement(ColorPicker, {
+					color: colors[index].color,
+					onChangeComplete: function onChangeComplete(value) {
+						console.log(value);
+						colors[index].color = value.hex;
+						onChange(index, value);
+					}
+				})
+			)
+		);
 	}
 };
 var SelectResponsiveImage = function SelectResponsiveImage(props) {
@@ -1243,6 +1323,9 @@ var EditItems = function EditItems(props) {
 };
 
 var SelectClassPanel = function SelectClassPanel(props) {
+	var _wp$components2 = wp.components,
+	    ColorPicker = _wp$components2.ColorPicker,
+	    GradientPicker = _wp$components2.__experimentalGradientPicker;
 	var _props$classKey = props.classKey,
 	    classKey = _props$classKey === undefined ? 'classes' : _props$classKey,
 	    items = props.items,
@@ -1378,6 +1461,52 @@ var SelectClassPanel = function SelectClassPanel(props) {
 								checked: value & prm.values[key]
 							}));
 						});
+						break;
+					case 'color':
+						if (prm.label) {
+							rtn.push(wp.element.createElement(
+								'h5',
+								null,
+								prm.label
+							));
+						}
+						rtn.push(wp.element.createElement(ColorPicker, {
+							color: CP.getJsonValue(props, prm.json, prm.key) || '#FFFFFF',
+							onChangeComplete: function onChangeComplete(value) {
+								console.log(value);
+								CP.setJsonValue(props, prm.json, prm.key, value.hex);
+							}
+						}));
+						break;
+					case 'colors':
+						if (prm.label) {
+							rtn.push(wp.element.createElement(
+								'h5',
+								null,
+								prm.label
+							));
+						}
+						rtn.push(wp.element.createElement(CP.SelectColors, {
+							colors: CP.getJsonValue(props, prm.json, prm.key) || [{ h: '40', s: '80%', l: '50%' }, { h: '60', s: '80%', l: '50%' }],
+							onChange: function onChange(colors) {
+								console.log(colors);
+								CP.setJsonValue(props, prm.json, prm.key, colors);
+							}
+						}));
+						break;
+					case 'gradient':
+						if (prm.label) {
+							rtn.push(wp.element.createElement(
+								'h5',
+								null,
+								prm.label
+							));
+						}
+						rtn.push(wp.element.createElement(GradientPicker, {
+							onChange: function onChange(value) {
+								console.log(CP.parseGradientStyleValue(value));
+							}
+						}));
 						break;
 				}
 			} else if (_.isObject(prm.values)) {
@@ -2133,7 +2262,7 @@ var EditItemsTable = function EditItemsTable(props) {
 				'tr',
 				null,
 				columns.map(function (col) {
-					return col.cond ? wp.element.createElement(
+					return !('cond' in col) || col.cond ? wp.element.createElement(
 						'th',
 						null,
 						col.label || col.key
@@ -2155,7 +2284,7 @@ var EditItemsTable = function EditItemsTable(props) {
 						}
 					},
 					columns.map(function (col) {
-						if (!col.cond) {
+						if ('cond' in col && !col.cond) {
 							return false;
 						}
 						switch (col.type) {
@@ -2178,7 +2307,7 @@ var EditItemsTable = function EditItemsTable(props) {
 									wp.element.createElement(SelectResponsiveImage, {
 										attr: attr,
 										set: set,
-										keys: babelHelpers.extends({ items: itemsKey }, col.keys),
+										keys: babelHelpers.extends({ items: itemsKey, src: col.key }, col.keys),
 										index: index,
 										size: col.size || 'vga',
 										isTemplate: isTemplate

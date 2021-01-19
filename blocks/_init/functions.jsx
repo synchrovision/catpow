@@ -411,6 +411,26 @@
 		return rtn;
 	},
 	
+	parseGradientStyleValue:(gradient)=>{
+		const match=gradient.match(/^(linear|radial)\-gradient\((\d+deg),(.+)\)$/);
+		return {
+			type:match[1],
+			angle:match[2],
+			colors:match[3].match(/rgba?\([\d,]+?\) \d+%/g).map((color)=>{
+				const match=color.match(/((rgba?)\((\d+),(\d+),(\d+)(,(\d+))?\)) (\d+%)/);
+				return {
+					color:match[1],
+					type:match[2],
+					r:match[3],
+					g:match[4],
+					b:match[5],
+					a:(match[7]===undefined)?1:match[7],
+					position:match[8]
+				}
+			})
+		};
+	},
+	
 	wordsToFlags:(words)=>{
 		var rtn={};
 		if(undefined === words){return {};}
@@ -476,6 +496,53 @@
 				]}
 			]
 		}
+	},
+	
+	/*compornents*/
+	SelectColors:(props)=>{
+		const {useState,useRef}=wp.element;
+		const {ColorPicker,ColorPalette,Popover}=wp.components;
+		const {onChange}=props;
+		const [index,setIndex]=useState(-1);
+		
+		const colorValues=props.colors.map((color)=>{
+			if(typeof color === 'string'){
+				return color;
+			}
+			if('h' in color){
+				if('a' in color){return `hsla(${color.h},${color.s},${color.l},${color.a})`;}
+				return `hsl(${color.h},${color.s},${color.l})`;
+			}
+			if('a' in color){return `rgba(${color.r},${color.g},${color.b},${color.a})`;}
+			return `rgba(${color.r},${color.g},${color.b})`;
+		});
+		const colors=colorValues.map((color)=>{
+			return {name:color,color};
+		});
+		
+		return (
+			<div>
+				<ColorPalette
+					colors={colors}
+					color={index>-1 && colors[index].color}
+					onChange={(colorValue)=>{
+						setIndex(colorValues.indexOf(colorValue));
+					}}
+				/>
+				{index>-1 && (
+					<Popover>
+						<ColorPicker
+							color={colors[index].color}
+							onChangeComplete={(value)=>{
+								console.log(value);
+								colors[index].color=value.hex;
+								onChange(index,value);
+							}}
+						/>
+					</Popover>
+				)}
+			</div>
+		);
 	}
 };
 const SelectResponsiveImage=(props)=>{
@@ -883,6 +950,7 @@ const EditItems=(props)=>{
 }
 
 const SelectClassPanel=(props)=>{
+	const {ColorPicker,__experimentalGradientPicker:GradientPicker}=wp.components;
 	const {classKey='classes',items,index,subItemsKey,subIndex,set,attr,triggerClasses}=props;
 	let {itemsKey,itemClasses}=props;
 	let item;
@@ -993,6 +1061,40 @@ const SelectClassPanel=(props)=>{
 								/>
 							);
 						});
+						break;
+					case 'color':
+						if(prm.label){rtn.push(<h5>{prm.label}</h5>);}
+						rtn.push(
+							<ColorPicker
+								color={CP.getJsonValue(props,prm.json,prm.key) || '#FFFFFF'}
+								onChangeComplete={(value)=>{
+									console.log(value);
+									CP.setJsonValue(props,prm.json,prm.key,value.hex);
+								}}
+							/>
+						);
+						break;
+					case 'colors':
+						if(prm.label){rtn.push(<h5>{prm.label}</h5>);}
+						rtn.push(
+							<CP.SelectColors
+								colors={CP.getJsonValue(props,prm.json,prm.key) || [{h:'40',s:'80%',l:'50%'},{h:'60',s:'80%',l:'50%'}]}
+								onChange={(colors)=>{
+									console.log(colors);
+									CP.setJsonValue(props,prm.json,prm.key,colors);
+								}}
+							/>
+						);
+						break;
+					case 'gradient':
+						if(prm.label){rtn.push(<h5>{prm.label}</h5>);}
+						rtn.push(
+							<GradientPicker
+								onChange={(value)=>{
+									console.log(CP.parseGradientStyleValue(value));
+								}}
+							/>
+						);
 						break;
                 }
             }
@@ -1626,7 +1728,7 @@ const EditItemsTable=(props)=>{
 		<table className="editItemsTable">
 			<thead>
 				<tr>
-					{columns.map((col)=>(col.cond?<th>{col.label || col.key}</th>:false))}
+					{columns.map((col)=>((!('cond' in col) || col.cond)?<th>{col.label || col.key}</th>:false))}
 					<th></th>
 				</tr>
 			</thead>
@@ -1640,7 +1742,7 @@ const EditItemsTable=(props)=>{
 							}}
 						>
 							{columns.map((col)=>{
-								if(!col.cond){return false;}
+								if('cond' in col && !col.cond){return false;}
 								switch(col.type){
 									case 'text':
 										return (
@@ -1660,7 +1762,7 @@ const EditItemsTable=(props)=>{
 												<SelectResponsiveImage
 													attr={attr}
 													set={set}
-													keys={{items:itemsKey,...col.keys}}
+													keys={{items:itemsKey,src:col.key,...col.keys}}
 													index={index}
 													size={col.size || 'vga'}
 													isTemplate={isTemplate}
