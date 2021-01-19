@@ -1,0 +1,56 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-accordion{
+	@include bnd((pd:1rem,mg:0 a,w:a 96rem));
+	&>.header{
+		@include bnd((p:r,pd:1rem 2rem,pdr:5rem));
+		@include bg((c:m));
+		@include bdr((r:1rem));
+		@include usr((c:p));
+		.title{
+			@include bnd((pd:0,mg:0));
+			@include txt((a:l,p:2rem,h:1em,f:g,w:b,c:b));
+		}
+		.icon{
+			&::before,&::after{
+				content:'';
+				@include bnd((d:b,p:a,w:2rem,h:1,t:0,b:0,r:1rem,mg:a));
+				@include bg((c:b));
+			}
+			&::before{
+				@include trn((t:.5s,r:180deg));
+			}
+			&::after{
+				@include trn((t:.5s,r:90deg));
+			}
+		}
+	}
+	&.hasImage>.header{
+		@include bnd((pdl:5rem));
+		.image{
+			@include bnd((d:b,w:4rem,h:4rem,p:a,t:0,l:0));
+			img,picture,video{
+				@include bnd((d:b,w:f,h:f,op:c,of:c));
+			}
+		}
+	}
+	&.open>.header{
+		.icon{
+			&::after,&::before{
+				@include trn((r:0deg));
+			}
+		}
+	}
+	&>.container{
+		@include bnd((o:h));
+		@include trn((t:.75s));
+		&>.contents{
+			@include bnd((pd:2rem));
+		}
+	}
+	@include clr(){
+		&>.header{
+			@include bg((c:$i));
+		}
+	}
+}

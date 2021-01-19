@@ -1,0 +1,10 @@
+@import 'admin_style_config.scss';
+
+section.wp-block-catpow-section{
+	&.article{
+		@include bg((c:rgba(0,0,0,0)));
+		@include bdr((s:s,w:1,c:n));
+		@include trn((t:.5s));
+	}
+}
+
