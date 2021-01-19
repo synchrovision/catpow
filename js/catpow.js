@@ -831,7 +831,7 @@ window.Catpow=window.Catpow || {UI:{}};
 			});
 			return this;
 		},
-		//小要素にaccordionを適用、かつ一つ以上が開かれないようにする
+		//子要素にaccordionを適用、かつ一つ以上が開かれないようにする
 		cp_accordion_group:function(){
 			var $group=$(this);
 			$group.labels=$group.children(':even');
