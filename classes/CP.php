@@ -14,7 +14,7 @@ class CP{
 		FROM_STYLESHEET_CONFIG=0100,FROM_TEMPLATE_CONFIG=0200,FROM_THEME_CONFIG=0300,FROM_DEFAULT_CONFIG=0400,FROM_CONFIG=0700;
 	
 	public static
-		$cp,$id,$extensions,$data_types,$content,$content_path,$inputs,$forms,$form,$data,
+		$cp,$id,$extensions,$data_types,$content,$content_path,$inputs,$forms,$form,$data,$vars=[],
 		$core_functions=[
 			'init',
 			'basic',
@@ -1878,11 +1878,11 @@ class CP{
 		static $scssc,$admin_config_filemtime,$config_filemtime;
 		$css_files=[];
 		if(empty($config_filemtime)){
-			if(empty($config_file=self::get_file_path('config/style_config.scss',6))){$config_filemtime=0;}
+			if(empty($config_file=self::get_file_path('config/style_config.scss',self::FROM_THEME))){$config_filemtime=0;}
 			else{$config_filemtime=filemtime($config_file);}
 		}
 		if(empty($admin_config_filemtime)){
-			if(empty($admin_config_file=self::get_file_path('scss/admin_style_config.scss',1))){$admin_config_filemtime=0;}
+			if(empty($admin_config_file=self::get_file_path('scss/admin_style_config.scss',self::FROM_PLUGIN))){$admin_config_filemtime=0;}
 			else{$admin_config_filemtime=filemtime($admin_config_file);}
 		}
 		foreach($scss_names as $scss_base_name){
