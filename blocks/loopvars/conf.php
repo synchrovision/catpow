@@ -1,0 +1,13 @@
+<?php
+$attributes=[
+	'columns'=>['type'=>'array','default'=>[
+		['type'=>'text','key'=>'classes'],
+		['type'=>'text','key'=>'title'],
+		['type'=>'text','key'=>'text']
+	]],
+	'items'=>['type'=>'array','default'=>[
+		['classes'=>'color1','title'=>'Title1','text'=>'Text1'],
+		['classes'=>'color2','title'=>'Title2','text'=>'Text2'],
+		['classes'=>'color3','title'=>'Title3','text'=>'Text3'],
+	]]
+];
