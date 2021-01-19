@@ -67,7 +67,6 @@ registerBlockType('catpow/sidecolumn', {
 		    className = _ref3.className,
 		    setAttributes = _ref3.setAttributes;
 
-		console.log('catpow/sidecolumn edit render');
 		return [wp.element.createElement(
 			'div',
 			{ className: 'column column_side' },

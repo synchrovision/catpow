@@ -54,7 +54,6 @@ registerBlockType('catpow/sidecolumn',{
 	category:'catpow',
     parent:['catpow/sidebar'],
 	edit({attributes,className,setAttributes}){
-		console.log('catpow/sidecolumn edit render');
         return [
 			<div className={'column column_side'}>
 				<div class="column_side_container">
