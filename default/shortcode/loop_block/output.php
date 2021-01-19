@@ -6,6 +6,15 @@ $data=$GLOBALS['loop_block_data'][$prm[0]];
 
 if(cp::$content){
 	$path=$data['path'];
+	if($data['values']){
+		$org_vars=cp::$vars;
+		foreach($data['values'] as $values){
+			cp::$vars=array_merge(cp::$vars,$values);
+			echo do_shortcode($data['content']);
+		}
+		cp::$vars=$org_vars;
+		return;
+	}
 	if(empty($data['query'])){
 		$query=null;
 	}
