@@ -88,10 +88,11 @@ class cond{
 	public static function parse_line($line){
 		if(preg_match(self::$cond_line_regex,$line,$matches)){
 			switch($matches['compare']){
-				case 'IN':
-				case 'NOT IN':
 				case 'BETWEEN':
 				case 'NOT BETWEEN':
+					$matches['value']=str_replace(['〜','~'],',',$matches['value']);
+				case 'IN':
+				case 'NOT IN':
 					$matches['value']=explode(',',$matches['value']);
 					break;
 				case 'EXISTS':
