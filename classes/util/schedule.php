@@ -74,6 +74,7 @@ class schedule{
 		if(preg_match('/(sun|mon|tue|wed|thu|fri|sat)/',$line)){return 'weekly';}
 		if(preg_match('/\d[:：]\d{2}/',$line)){return 'daily';}
 		if(preg_match('/\d+/',$line)){return 'monthly';}
+		return 'invalid';
 	}
 	
 	public static function parse_periods_line($line){
@@ -172,6 +173,9 @@ class schedule{
 			}
 		}
 		return $periods;
+	}
+	public static function parse_invalid_line($line){
+		return false;
 	}
 	
 	public static function normalize_line_text($line){
