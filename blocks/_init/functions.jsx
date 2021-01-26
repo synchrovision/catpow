@@ -6,23 +6,11 @@
 	listedConvertibles:['catpow/listed','catpow/flow','catpow/faq','catpow/ranking','catpow/dialog','catpow/sphere','catpow/slider','catpow/banners','catpow/lightbox','catpow/panes'],
 	tableConvertibles:['catpow/simpletable','catpow/datatable','catpow/layouttable'],
 	
-	example:{
-		attributes:{
-			title:['吾輩は猫である。'],
-			headerText:['吾輩は猫である。'],
-			footerText:['『吾輩は猫である』（わがはいはねこである）　夏目漱石　著'],
-			read:['名前はまだない。どこで生れたか頓と見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。'],
-			text:['名前はまだない。どこで生れたか頓と見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。この書生というのは時々我々を捕えて煮て食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。'],
-		},
-		innerBlocks: [
-			{
-				name: 'core/paragraph',
-				attributes:{
-					content: 
-						'名前はまだない。どこで生れたか頓と見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。この書生というのは時々我々を捕えて煮て食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。'
-				}
-			}
-		]
+	dummyText:{
+		title:'吾輩は猫である。',
+		lead:'名前はまだない。どこで生れたか頓と見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。',
+		text:'名前はまだない。どこで生れたか頓と見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。この書生というのは時々我々を捕えて煮て食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。',
+		footer:'『吾輩は猫である』（わがはいはねこである）　夏目漱石　著'
 	},
 	
 	selectImage:(keys,set,size,devices)=>{
@@ -545,6 +533,25 @@
 		);
 	}
 };
+CP.example={
+	attributes:{
+		title:[CP.dummyText.title],
+		headerText:[CP.dummyText.title],
+		footerText:[CP.dummyText.footer],
+		read:[CP.dummyText.lead],
+		text:[CP.dummyText.text],
+	},
+	innerBlocks: [
+		{
+			name: 'core/paragraph',
+			attributes:{
+				content: CP.dummyText.text
+			}
+		}
+	]
+};
+
+
 const SelectResponsiveImage=(props)=>{
 	const {className,attr,set,keys={},index,size,devices,device,isTemplate,...otherProps}=props;
 	let {sizes}=props;
@@ -1282,6 +1289,25 @@ const SelectClassPanel=(props)=>{
 			}
             else if(prm.input){
                 switch(prm.input){
+					case 'select':
+						let options,values;
+						if(Array.isArray(prm.values)){
+							values=prm.values;
+							options=prm.values.map(cls=>{return {label:cls,value:cls};});
+						}
+						else{
+							values=Object.keys(prm.values);
+							options=values.map((cls)=>{return {label:prm.values[cls],value:cls};});
+						}
+						rtn.push(
+							<SelectControl
+								label={prm.label}
+                                onChange={(val)=>{save({[prm.key]:val});}}
+                                value={item[prm.key]}
+								options={options}
+							/>
+						);
+						break;
                     case 'text':
                         rtn.push(
                             <TextControl

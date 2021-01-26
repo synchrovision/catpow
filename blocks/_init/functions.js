@@ -6,20 +6,11 @@ var CP = {
 	listedConvertibles: ['catpow/listed', 'catpow/flow', 'catpow/faq', 'catpow/ranking', 'catpow/dialog', 'catpow/sphere', 'catpow/slider', 'catpow/banners', 'catpow/lightbox', 'catpow/panes'],
 	tableConvertibles: ['catpow/simpletable', 'catpow/datatable', 'catpow/layouttable'],
 
-	example: {
-		attributes: {
-			title: ['吾輩は猫である。'],
-			headerText: ['吾輩は猫である。'],
-			footerText: ['『吾輩は猫である』（わがはいはねこである）　夏目漱石　著'],
-			read: ['名前はまだない。どこで生れたか頓と見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。'],
-			text: ['名前はまだない。どこで生れたか頓と見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。この書生というのは時々我々を捕えて煮て食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。']
-		},
-		innerBlocks: [{
-			name: 'core/paragraph',
-			attributes: {
-				content: '名前はまだない。どこで生れたか頓と見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。この書生というのは時々我々を捕えて煮て食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。'
-			}
-		}]
+	dummyText: {
+		title: '吾輩は猫である。',
+		lead: '名前はまだない。どこで生れたか頓と見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。',
+		text: '名前はまだない。どこで生れたか頓と見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。この書生というのは時々我々を捕えて煮て食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。',
+		footer: '『吾輩は猫である』（わがはいはねこである）　夏目漱石　著'
 	},
 
 	selectImage: function selectImage(keys, set, size, devices) {
@@ -784,6 +775,22 @@ var CP = {
 		);
 	}
 };
+CP.example = {
+	attributes: {
+		title: [CP.dummyText.title],
+		headerText: [CP.dummyText.title],
+		footerText: [CP.dummyText.footer],
+		read: [CP.dummyText.lead],
+		text: [CP.dummyText.text]
+	},
+	innerBlocks: [{
+		name: 'core/paragraph',
+		attributes: {
+			content: CP.dummyText.text
+		}
+	}]
+};
+
 var SelectResponsiveImage = function SelectResponsiveImage(props) {
 	var className = props.className,
 	    attr = props.attr,
@@ -1722,6 +1729,29 @@ var SelectClassPanel = function SelectClassPanel(props) {
 				}
 			} else if (prm.input) {
 				switch (prm.input) {
+					case 'select':
+						var _options = void 0,
+						    _values = void 0;
+						if (Array.isArray(prm.values)) {
+							_values = prm.values;
+							_options = prm.values.map(function (cls) {
+								return { label: cls, value: cls };
+							});
+						} else {
+							_values = Object.keys(prm.values);
+							_options = _values.map(function (cls) {
+								return { label: prm.values[cls], value: cls };
+							});
+						}
+						rtn.push(wp.element.createElement(SelectControl, {
+							label: prm.label,
+							onChange: function onChange(val) {
+								save(babelHelpers.defineProperty({}, prm.key, val));
+							},
+							value: item[prm.key],
+							options: _options
+						}));
+						break;
 					case 'text':
 						rtn.push(wp.element.createElement(TextControl, {
 							label: prm.label,
@@ -1844,9 +1874,9 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							name: prm.input,
 							value: item[prm.keys.src],
 							onChange: function onChange(image) {
-								var _save6;
+								var _save7;
 
-								save((_save6 = {}, babelHelpers.defineProperty(_save6, prm.keys.src, image.url), babelHelpers.defineProperty(_save6, prm.keys.alt, image.alt), _save6));
+								save((_save7 = {}, babelHelpers.defineProperty(_save7, prm.keys.src, image.url), babelHelpers.defineProperty(_save7, prm.keys.alt, image.alt), _save7));
 							}
 						}));
 						break;
@@ -1855,20 +1885,20 @@ var SelectClassPanel = function SelectClassPanel(props) {
 				var subClasses = CP.getSubClasses(prm);
 				var bindClasses = CP.getBindClasses(prm);
 
-				var _options = void 0,
-				    _values = void 0;
+				var _options2 = void 0,
+				    _values2 = void 0;
 				if (Array.isArray(prm.values)) {
-					_values = prm.values;
-					_options = prm.values.map(function (cls) {
+					_values2 = prm.values;
+					_options2 = prm.values.map(function (cls) {
 						return { label: cls, value: cls };
 					});
 				} else {
-					_values = Object.keys(prm.values);
-					_options = _values.map(function (cls) {
+					_values2 = Object.keys(prm.values);
+					_options2 = _values2.map(function (cls) {
 						return { label: prm.values[cls], value: cls };
 					});
 				}
-				var currentClass = _values.find(function (value) {
+				var currentClass = _values2.find(function (value) {
 					return states[value];
 				});
 
@@ -1911,7 +1941,7 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							label: prm.label,
 							onChange: onChangeCB,
 							selected: currentClass,
-							options: _options
+							options: _options2
 						}));
 						break;
 					default:
@@ -1919,7 +1949,7 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							label: prm.label,
 							onChange: onChangeCB,
 							value: currentClass,
-							options: _options
+							options: _options2
 						}));
 				}
 
