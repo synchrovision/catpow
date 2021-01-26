@@ -1,0 +1,70 @@
+@charset "utf-8";
+.switcherEdit {
+  position: relative;
+  padding-top: 3rem; }
+  .switcherEdit > .tabs {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    margin: 0px;
+    padding: 0px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-lines: single;
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap; }
+    .switcherEdit > .tabs > .tab {
+      -webkit-box-flex: 1;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: auto;
+      padding: 1rem;
+      margin: 0px;
+      border-style: solid;
+      border-width: 1px;
+      border-color: #444;
+      border-radius: 1rem 1rem 0px 0px;
+      background-color: #ececec;
+      text-align: center;
+      font-size: 1.5rem;
+      line-height: 1em;
+      font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+      list-style: none;
+      cursor: pointer; }
+      .switcherEdit > .tabs > .tab.active {
+        background-color: #fefefe;
+        border-bottom-style: none; }
+  .switcherEdit > .contents {
+    margin: 0px;
+    padding: 5rem 0px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #444;
+    border-top-style: none; }
+  .switcherEdit [data-type="catpow/switchercontent"] {
+    display: none; }
+    .switcherEdit[data-current-index="0"] [data-type="catpow/switchercontent"]:nth-of-type(1) {
+      display: block; }
+  .switcherEdit[data-current-index="1"] [data-type="catpow/switchercontent"]:nth-of-type(2) {
+    display: block; }
+.switcherEdit[data-current-index="2"] [data-type="catpow/switchercontent"]:nth-of-type(3) {
+  display: block; }
+.switcherEdit[data-current-index="3"] [data-type="catpow/switchercontent"]:nth-of-type(4) {
+  display: block; }
+.switcherEdit[data-current-index="4"] [data-type="catpow/switchercontent"]:nth-of-type(5) {
+  display: block; }
+.switcherEdit[data-current-index="5"] [data-type="catpow/switchercontent"]:nth-of-type(6) {
+  display: block; }
+.switcherEdit[data-current-index="6"] [data-type="catpow/switchercontent"]:nth-of-type(7) {
+  display: block; }
+.switcherEdit[data-current-index="7"] [data-type="catpow/switchercontent"]:nth-of-type(8) {
+  display: block; }
+.switcherEdit[data-current-index="8"] [data-type="catpow/switchercontent"]:nth-of-type(9) {
+  display: block; }
+.switcherEdit[data-current-index="9"] [data-type="catpow/switchercontent"]:nth-of-type(10) {
+  display: block; }
+.switcherEdit[data-current-index="10"] [data-type="catpow/switchercontent"]:nth-of-type(11) {
+  display: block; }
+/*# sourceMappingURL=./editor_style.css.map */

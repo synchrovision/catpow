@@ -1,0 +1,33 @@
+@import 'admin_style_config.scss';
+
+.switcherEdit{
+	@include bnd((p:r,pdt:3rem));
+	&>.tabs{
+		@include bnd((p:a,t:0,l:0,r:0,mg:0,pd:0));
+		@include flx((w:n));
+		&>.tab{
+			@include bnd((f:1 1 a,pd:1rem,mg:0));
+			@include bdr((s:s,w:1,c:t,r:1rem 1rem 0 0));
+			@include bg((c:t 10));
+			@include txt((a:c,p:1.5rem,h:1em,f:g,l:n));
+			@include usr((c:p));
+			&.active{
+				@include bg((c:b));
+				@include bdr((p:b,s:n));
+			}
+		}
+	}
+	&>.contents{
+		@include bnd((mg:0,pd:5rem 0));
+		@include bdr((s:s,w:1,c:t));
+		@include bdr((p:t,s:n));
+	}
+	[data-type="catpow/switchercontent"]{@include bnd((d:n));}
+	@for $i from 0 through 10{
+		&[data-current-index="#{$i}"]{
+			[data-type="catpow/switchercontent"]:nth-of-type(#{$i + 1}){
+				@include bnd((d:b));
+			}
+		}
+	}
+}
