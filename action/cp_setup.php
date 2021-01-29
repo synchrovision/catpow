@@ -10,42 +10,6 @@ $post_types,$taxonomies,$static_pages,$comment_datas,
 $menu_datas,$user_datas,$site_datas,$view_datas,$sidebar_datas,$use_widgets,
 $wp_query,$cp_mode,$catpow_extensions;
 
-
-array_walk($post_types,function(&$post_type_data,$post_type_name){
-	global $taxonomies,$comment_datas;
-	$post_type_data['name']=$post_type_name;
-	if(isset($post_type_data['taxonomies'])){
-		foreach($post_type_data['taxonomies'] as $key => $val){
-			$tax_name=is_string($val)?$val:$key;
-			if(isset($taxonomies[$tax_name])){
-				if(!isset($taxonomies[$tax_name]['post_type']))$taxonomies[$tax_name]['post_type']=array();
-				$taxonomies[$tax_name]['post_type'][]=$post_type_name;
-			}else{
-				$taxonomies[$tax_name]=array('post_type'=>array($post_type_name));
-			}
-			if(is_array($val)){
-				$taxonomies[$tax_name]=array_merge($val,$taxonomies[$tax_name]);
-			}
-		}
-	}
-	$post_type_data['taxonomies']=array();
-	if(isset($post_type_data['comments'])){
-		foreach($post_type_data['comments'] as $key => $val){
-			$comment_data_type=is_string($val)?$val:$key;
-			if(isset($comment_datas[$comment_data_type])){
-				if(!isset($comment_datas[$comment_data_type]['post_type']))$comment_datas[$comment_data_type]['post_type']=array();
-				$comment_datas[$comment_data_type]['post_type'][]=$post_type_name;
-			}else{
-				$comment_datas[$comment_data_type]=array('post_type'=>array($post_type_name));
-			}
-			if(is_array($val)){
-				$comment_datas[$comment_data_type]=array_merge($val,$comment_datas[$comment_data_type]);
-			}
-		}
-	}
-	$post_type_data['comments']=array();
-});
-
 cp::conf_data_walk(function($data_type,$data_name,&$conf_data){
 	cp::fill_conf_data($data_type,$data_name,$conf_data);
 });

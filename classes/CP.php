@@ -748,7 +748,41 @@ class CP{
 			self::fill_confs($conf_data['meta'],$conf_data['path']);
 		}
 		if(!isset($conf_data['label'])){$conf_data['label']=$data_name;}
-		if($data_type==='page'){
+		if($data_type==='post'){
+			global $taxonomies,$comment_datas;
+			$conf_data['name']=$data_name;
+			if(isset($conf_data['taxonomies'])){
+				foreach($conf_data['taxonomies'] as $key => $val){
+					$tax_name=is_string($val)?$val:$key;
+					if(isset($taxonomies[$tax_name])){
+						if(!isset($taxonomies[$tax_name]['post_type']))$taxonomies[$tax_name]['post_type']=[];
+						$taxonomies[$tax_name]['post_type'][]=$data_name;
+					}else{
+						$taxonomies[$tax_name]=['post_type'=>[$data_name]];
+					}
+					if(is_array($val)){
+						$taxonomies[$tax_name]=array_merge($val,$taxonomies[$tax_name]);
+					}
+				}
+			}
+			$conf_data['taxonomies']=[];
+			if(isset($conf_data['comments'])){
+				foreach($conf_data['comments'] as $key => $val){
+					$comment_data_type=is_string($val)?$val:$key;
+					if(isset($comment_datas[$comment_data_type])){
+						if(!isset($comment_datas[$comment_data_type]['post_type']))$comment_datas[$comment_data_type]['post_type']=[];
+						$comment_datas[$comment_data_type]['post_type'][]=$post_type_name;
+					}else{
+						$comment_datas[$comment_data_type]=['post_type'=>[$data_name]];
+					}
+					if(is_array($val)){
+						$comment_datas[$comment_data_type]=array_merge($val,$comment_datas[$comment_data_type]);
+					}
+				}
+			}
+			$conf_data['comments']=[];
+		}
+		elseif($data_type==='page'){
 			if(isset($conf_data['parent'])){
 				if(empty($conf_data['page_name'])){$conf_data['page_name']=$data_name;}
 				$conf_data['page_path']=$conf_data['parent'].'/'.$conf_data['page_name'];
