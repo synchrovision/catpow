@@ -9,8 +9,8 @@ if($is_preview){
 $id=uniqid('app-');
 if($f=cp::get_file_path($path.'/init.php',cp::FROM_THEME|cp::FROM_CONFIG)){include $f;}
 $appFile=\cp::get_file_path($path.'/app.js',cp::FROM_THEME|cp::FROM_CONFIG);
-cp::use_component('AppManger');
-\cp::enqueue_style($path.'/style.css');
+cp::use_component('AppManager');
+cp::enqueue_style($path.'/style.css');
 ?>
 <div id="<?=$id?>"></div>
 <script type="text/javascript">
