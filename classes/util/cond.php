@@ -77,9 +77,12 @@ class cond{
 					$class_name::reflect_to_query($rtn,$data_type,$data_name,$name,$id,$line,$conf);
 				}
 			}
-			elseif(isset($query_class_name::$search_keys[$name])){
-				if($query_class_name::$search_keys[$name]){$rtn[$name]=$line['value'];}
-				else{$rtn[$name]=is_array($line['value'])?reset($line['value']):$line['value'];}
+			else{
+				$name=$query_class_name::$key_translation[$name]??$name;
+				if(isset($query_class_name::$search_keys[$name])){
+					if($query_class_name::$search_keys[$name]){$rtn[$name]=$line['value'];}
+					else{$rtn[$name]=is_array($line['value'])?reset($line['value']):$line['value'];}
+				}
 			}
 		}
 		return $rtn;
