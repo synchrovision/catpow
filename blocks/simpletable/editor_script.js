@@ -18,7 +18,7 @@ registerBlockType('catpow/simpletable', {
 		}]
 	},
 	attributes: {
-		classes: { source: 'attribute', selector: 'table', attribute: 'class', default: 'wp-block-catpow-simpletable spec' },
+		classes: { source: 'attribute', selector: 'table', attribute: 'class', default: 'wp-block-catpow-simpletable color0 spec' },
 		rows: {
 			source: 'query',
 			selector: 'table tr',
@@ -66,7 +66,7 @@ registerBlockType('catpow/simpletable', {
 						readonly: '固定'
 					} }, 'cond']
 			}
-		}];
+		}, 'color'];
 
 		var saveItems = function saveItems() {
 			setAttributes({ rows: JSON.parse(JSON.stringify(rows)) });
