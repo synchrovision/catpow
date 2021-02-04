@@ -22,7 +22,6 @@ class media_protect{
 		if(!file_exists($htaccess_file=$basedir.'/catpow/.htaccess')){
 			$subdir=substr($basedir,strpos($basedir,'/uploads')+9);
 			if(!empty($subdir)){$subdir.='/';}
-			error_log(var_export($var,1).__FILE__.__LINE__);
 			file_put_contents(
 				$htaccess_file,
 				"RewriteEngine on\n".
