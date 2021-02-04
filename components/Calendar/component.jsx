@@ -71,7 +71,7 @@
 		const msOfDay=86400000;
 		const firstDay=new Date(state.year,state.month-1,1);
 		const lastDay=new Date(state.year,state.month,0);
-		var d=-firstDay.getDay();
+		var d=-firstDay.getDay()+1;
 		for(var r=0;r<6;r++){
 			days=[];
 			for(c=1;c<=7;c++){
