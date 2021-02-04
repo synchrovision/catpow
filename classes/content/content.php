@@ -52,7 +52,7 @@ class content{
 	public function query($path,$q=null){
 		if(is_null($q)){$q=[];}
 		$path_data=\cp::parse_content_path($path);
-		$class_name=\cp::get_class_name('query',$path_data['data_type']);
+		$class_name=\cp::get_class_name('query',$path_data['data_type']??'post');
 		if(is_array($q)){
 			if(is_object(reset($q))){return new loop(['path'=>$path,'parent'=>$this,'objects'=>$q]);}
 			$q=array_merge($q,$path_data);
