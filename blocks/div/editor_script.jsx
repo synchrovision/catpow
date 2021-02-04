@@ -1,7 +1,7 @@
 ﻿CP.config.div={
 	devices:['sp','tb'],
 	imageKeys:{
-		iconImage:{src:"iconImageSrc"},
+		iconImage:{src:"iconImageSrc",alt:"iconImageAlt"},
 		backgroundImage:{src:"backgroundImageSrc",sources:"backgroundImageSources"}
 	}
 };
@@ -25,6 +25,7 @@ registerBlockType('catpow/div',{
 		classes:{source:'attribute',selector:'div',attribute:'class',default:'wp-block-catpow-div frame thinBorder'},
 		
 		iconImageSrc:{source:'attribute',selector:'.wp-block-catpow-div>.icon [src]',attribute:'src',default:cp.theme_url+'/images/dummy_icon.svg'},
+		iconImageAlt:{source:'attribute',selector:'.wp-block-catpow-div>.icon [src]',attribute:'alt'},
 		
 		backgroundImageSrc:{source:'attribute',selector:'.wp-block-catpow-div>.background [src]',attribute:'src',default:cp.theme_url+'/images/dummy_bg.jpg'},
 		backgroundImageSources:CP.getPictureSoucesAttributesForDevices(CP.config.div.devices,'.wp-block-catpow-div>.background picture','dummy_bg.jpg'),
@@ -45,7 +46,9 @@ registerBlockType('catpow/div',{
 					frame:[
 						{label:'色',values:'hasColor',sub:['color']},
 						{label:'パターン',values:'hasPattern',sub:['pattern']},
-						{label:'アイコン',values:'hasIcon'},
+						{label:'アイコン',values:'hasIcon',sub:[
+							{input:'icon',label:'アイコン',keys:imageKeys.iconImage}
+						]},
 						{label:'線',values:{noBorder:'なし',thinBorder:'細',boldBorder:'太'}},
 						{label:'角丸',values:'round'},
 						{label:'影',values:'shadow',sub:[{label:'内側',values:'inset'}]}
@@ -83,7 +86,7 @@ registerBlockType('catpow/div',{
 						/>
 					</div>
 				}
-				<InnerBlocks/>
+				<InnerBlocks template={[['core/paragraph',{content:CP.dummyText.text}]]} templateLock={false}/>
 			</div>,
 			<InspectorControls>
 				<SelectClassPanel
