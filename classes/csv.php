@@ -46,6 +46,13 @@ class CSV{
 		$c=new self($csv);
 		foreach($csv->select($where) as $i=>$row){yield $i=>$row;}
 	}
+	public static function get_csvs($dir=null,$fill_column=false){
+		if(is_null($dir)){$dir=$_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['SCRIPT_NAME']).'/csv';}
+		foreach(glob($dir.'/*.csv') as $csv_file){
+			$csvs[mb_substr(basename($csv_file),0,-4)]=new CSV($csv_file,$fill_column);
+		}
+		return $csvs;
+	}
 	
 	public function __get($name){
 		if($name=='keys')return $this->data[0];
@@ -112,7 +119,7 @@ class CSV{
 		if($limit>0){return array_slice($rtn,0,$limit);}
 		return $rtn;
 	}
-	public function collect($collect_by=0){
+	public function collect($collect_by=0,$fill_key_column=true){
 		$rtn=[];
 		$keys=$this->data[0];
 		if(is_numeric($collect_by)){$collect_by=range(0,$collect_by);}
@@ -122,11 +129,16 @@ class CSV{
 				if(!is_numeric($key)){$key=array_search($key,$this->data[0]);}
 			}
 		}
+		$current_keys=[];
 		for($r=1,$l=count($this->data);$r<$l;$r++){
 			$row=[];
 			$sel='';
 			foreach($collect_by as $i){
-				$sel.="['{$this->data[$r][$i]}']";
+				if($fill_key_column){
+					if(!empty($this->data[$r][$i])){$current_keys[$i]=$this->data[$r][$i];}
+					$sel.="['{$current_keys[$i]}']";
+				}
+				else{$sel.="['{$this->data[$r][$i]}']";}
 			}
 			foreach($keys as $i=>$key){
 				$row[$key]=&$this->data[$r][$i];
