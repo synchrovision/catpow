@@ -437,6 +437,19 @@
 		return flags;
 	},
 	
+	parseSelections:(sels)=>{
+		let options,values;
+		if(Array.isArray(sels)){
+			values=sels;
+			options=sels.map(cls=>{return {label:cls,value:cls};});
+		}
+		else{
+			values=Object.keys(sels);
+			options=values.map((cls)=>{return {label:sels[cls],value:cls};});
+		}
+		return {options,values};
+	},
+	
 	createBlocks:(blocks)=>{
 		return blocks.map((block)=>{
 			if(block[2]){block[2]=CP.createBlocks(block[2]);}
@@ -530,6 +543,23 @@
 					</Popover>
 				)}
 			</div>
+		);
+	},
+	SelectButtons:(props)=>{
+		const {Button,ButtonGroup}=wp.components;
+		return (
+			<BaseControl label={props.label} help={props.help}>
+				<div>
+					<ButtonGroup>
+						{props.options.map((option)=>(
+							<Button
+								onClick={()=>props.onChange(option.value)}
+								isPrimary={props.selected===option.value}
+							>{option.label}</Button>
+						))}
+					</ButtonGroup>
+				</div>
+			</BaseControl>
 		);
 	}
 };
@@ -1106,15 +1136,7 @@ const SelectClassPanel=(props)=>{
                 }
             }
             else if(_.isObject(prm.values)){
-                let options,values;
-                if(Array.isArray(prm.values)){
-                    values=prm.values;
-                    options=prm.values.map(cls=>{return {label:cls,value:cls};});
-                }
-                else{
-                    values=Object.keys(prm.values);
-                    options=values.map((cls)=>{return {label:prm.values[cls],value:cls};});
-                }
+                let {options,values}=CP.parseSelections(prm.values);
                 rtn.push(
                     <SelectControl
                         label={prm.label}
@@ -1290,20 +1312,23 @@ const SelectClassPanel=(props)=>{
             else if(prm.input){
                 switch(prm.input){
 					case 'select':
-						let options,values;
-						if(Array.isArray(prm.values)){
-							values=prm.values;
-							options=prm.values.map(cls=>{return {label:cls,value:cls};});
-						}
-						else{
-							values=Object.keys(prm.values);
-							options=values.map((cls)=>{return {label:prm.values[cls],value:cls};});
-						}
+						var {options,values}=CP.parseSelections(prm.values);
 						rtn.push(
 							<SelectControl
 								label={prm.label}
                                 onChange={(val)=>{save({[prm.key]:val});}}
                                 value={item[prm.key]}
+								options={options}
+							/>
+						);
+						break;
+					case 'buttons':
+						var {options,values}=CP.parseSelections(prm.values);
+						rtn.push(
+							<CP.SelectButtons
+								label={prm.label}
+                                onChange={(val)=>{save({[prm.key]:val});}}
+                                selected={item[prm.key]}
 								options={options}
 							/>
 						);
@@ -1431,15 +1456,7 @@ const SelectClassPanel=(props)=>{
                 let subClasses=CP.getSubClasses(prm);
                 let bindClasses=CP.getBindClasses(prm);
 
-                let options,values;
-                if(Array.isArray(prm.values)){
-                    values=prm.values;
-                    options=prm.values.map(cls=>{return {label:cls,value:cls};});
-                }
-                else{
-                    values=Object.keys(prm.values);
-                    options=values.map((cls)=>{return {label:prm.values[cls],value:cls};});
-                }
+                var {options,values}=CP.parseSelections(prm.values);
 				const currentClass=values.find((value)=>states[value]);
 				
 				let onChangeCB=(newClass)=>{
@@ -1478,6 +1495,16 @@ const SelectClassPanel=(props)=>{
 					case 'radio':
 						rtn.push(
 							<RadioControl
+								label={prm.label}
+								onChange={onChangeCB}
+								selected={currentClass}
+								options={options}
+							/>
+						);
+						break;
+					case 'buttons':
+						rtn.push(
+							<CP.SelectButtons
 								label={prm.label}
 								onChange={onChangeCB}
 								selected={currentClass}

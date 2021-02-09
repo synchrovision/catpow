@@ -663,6 +663,23 @@ var CP = {
 		return flags;
 	},
 
+	parseSelections: function parseSelections(sels) {
+		var options = void 0,
+		    values = void 0;
+		if (Array.isArray(sels)) {
+			values = sels;
+			options = sels.map(function (cls) {
+				return { label: cls, value: cls };
+			});
+		} else {
+			values = Object.keys(sels);
+			options = values.map(function (cls) {
+				return { label: sels[cls], value: cls };
+			});
+		}
+		return { options: options, values: values };
+	},
+
 	createBlocks: function createBlocks(blocks) {
 		return blocks.map(function (block) {
 			if (block[2]) {
@@ -771,6 +788,36 @@ var CP = {
 						onChange(index, value);
 					}
 				})
+			)
+		);
+	},
+	SelectButtons: function SelectButtons(props) {
+		var _wp$components2 = wp.components,
+		    Button = _wp$components2.Button,
+		    ButtonGroup = _wp$components2.ButtonGroup;
+
+		return wp.element.createElement(
+			BaseControl,
+			{ label: props.label, help: props.help },
+			wp.element.createElement(
+				'div',
+				null,
+				wp.element.createElement(
+					ButtonGroup,
+					null,
+					props.options.map(function (option) {
+						return wp.element.createElement(
+							Button,
+							{
+								onClick: function onClick() {
+									return props.onChange(option.value);
+								},
+								isPrimary: props.selected === option.value
+							},
+							option.label
+						);
+					})
+				)
 			)
 		);
 	}
@@ -1330,9 +1377,9 @@ var EditItems = function EditItems(props) {
 };
 
 var SelectClassPanel = function SelectClassPanel(props) {
-	var _wp$components2 = wp.components,
-	    ColorPicker = _wp$components2.ColorPicker,
-	    GradientPicker = _wp$components2.__experimentalGradientPicker;
+	var _wp$components3 = wp.components,
+	    ColorPicker = _wp$components3.ColorPicker,
+	    GradientPicker = _wp$components3.__experimentalGradientPicker;
 	var _props$classKey = props.classKey,
 	    classKey = _props$classKey === undefined ? 'classes' : _props$classKey,
 	    items = props.items,
@@ -1517,26 +1564,17 @@ var SelectClassPanel = function SelectClassPanel(props) {
 						break;
 				}
 			} else if (_.isObject(prm.values)) {
-				var options = void 0,
-				    values = void 0;
-				if (Array.isArray(prm.values)) {
-					values = prm.values;
-					options = prm.values.map(function (cls) {
-						return { label: cls, value: cls };
-					});
-				} else {
-					values = Object.keys(prm.values);
-					options = values.map(function (cls) {
-						return { label: prm.values[cls], value: cls };
-					});
-				}
+				var _CP$parseSelections = CP.parseSelections(prm.values),
+				    _options = _CP$parseSelections.options,
+				    _values = _CP$parseSelections.values;
+
 				rtn.push(wp.element.createElement(SelectControl, {
 					label: prm.label,
 					value: CP.getJsonValue(props, prm.json, prm.key),
 					onChange: function onChange(val) {
 						CP.setJsonValue(props, prm.json, prm.key, val);
 					},
-					options: options
+					options: _options
 				}));
 				if (prm.sub) {
 					var currentValue = CP.getJsonValue(props, prm.json, prm.key);
@@ -1730,26 +1768,31 @@ var SelectClassPanel = function SelectClassPanel(props) {
 			} else if (prm.input) {
 				switch (prm.input) {
 					case 'select':
-						var _options = void 0,
-						    _values = void 0;
-						if (Array.isArray(prm.values)) {
-							_values = prm.values;
-							_options = prm.values.map(function (cls) {
-								return { label: cls, value: cls };
-							});
-						} else {
-							_values = Object.keys(prm.values);
-							_options = _values.map(function (cls) {
-								return { label: prm.values[cls], value: cls };
-							});
-						}
+						var _CP$parseSelections2 = CP.parseSelections(prm.values),
+						    options = _CP$parseSelections2.options,
+						    values = _CP$parseSelections2.values;
+
 						rtn.push(wp.element.createElement(SelectControl, {
 							label: prm.label,
 							onChange: function onChange(val) {
 								save(babelHelpers.defineProperty({}, prm.key, val));
 							},
 							value: item[prm.key],
-							options: _options
+							options: options
+						}));
+						break;
+					case 'buttons':
+						var _CP$parseSelections3 = CP.parseSelections(prm.values),
+						    options = _CP$parseSelections3.options,
+						    values = _CP$parseSelections3.values;
+
+						rtn.push(wp.element.createElement(CP.SelectButtons, {
+							label: prm.label,
+							onChange: function onChange(val) {
+								save(babelHelpers.defineProperty({}, prm.key, val));
+							},
+							selected: item[prm.key],
+							options: options
 						}));
 						break;
 					case 'text':
@@ -1874,9 +1917,9 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							name: prm.input,
 							value: item[prm.keys.src],
 							onChange: function onChange(image) {
-								var _save7;
+								var _save8;
 
-								save((_save7 = {}, babelHelpers.defineProperty(_save7, prm.keys.src, image.url), babelHelpers.defineProperty(_save7, prm.keys.alt, image.alt), _save7));
+								save((_save8 = {}, babelHelpers.defineProperty(_save8, prm.keys.src, image.url), babelHelpers.defineProperty(_save8, prm.keys.alt, image.alt), _save8));
 							}
 						}));
 						break;
@@ -1885,20 +1928,11 @@ var SelectClassPanel = function SelectClassPanel(props) {
 				var subClasses = CP.getSubClasses(prm);
 				var bindClasses = CP.getBindClasses(prm);
 
-				var _options2 = void 0,
-				    _values2 = void 0;
-				if (Array.isArray(prm.values)) {
-					_values2 = prm.values;
-					_options2 = prm.values.map(function (cls) {
-						return { label: cls, value: cls };
-					});
-				} else {
-					_values2 = Object.keys(prm.values);
-					_options2 = _values2.map(function (cls) {
-						return { label: prm.values[cls], value: cls };
-					});
-				}
-				var currentClass = _values2.find(function (value) {
+				var _CP$parseSelections4 = CP.parseSelections(prm.values),
+				    options = _CP$parseSelections4.options,
+				    values = _CP$parseSelections4.values;
+
+				var currentClass = values.find(function (value) {
 					return states[value];
 				});
 
@@ -1941,7 +1975,15 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							label: prm.label,
 							onChange: onChangeCB,
 							selected: currentClass,
-							options: _options2
+							options: options
+						}));
+						break;
+					case 'buttons':
+						rtn.push(wp.element.createElement(CP.SelectButtons, {
+							label: prm.label,
+							onChange: onChangeCB,
+							selected: currentClass,
+							options: options
 						}));
 						break;
 					default:
@@ -1949,7 +1991,7 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							label: prm.label,
 							onChange: onChangeCB,
 							value: currentClass,
-							options: _options2
+							options: options
 						}));
 				}
 
