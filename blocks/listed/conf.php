@@ -1,13 +1,17 @@
 <?php
 $attributes=[
 	"classes"=>["source"=>'attribute',"selector"=>'ul',"attribute"=>'class',"default"=>'wp-block-catpow-listed menu medium hasHeader hasTitle hasTitleCaption hasImage hasText'],
+	
+	'TitleTag'=>['type'=>'text','default'=>'h3'],
+	'SubTitleTag'=>['type'=>'text','default'=>'h4'],
+	
 	"items"=>[
 		"source"=>'query',
 		"selector"=>'li.item',
 		"query"=>[
 			"classes"=>["source"=>'attribute',"attribute"=>'class'],
-			"title"=>["source"=>'children',"selector"=>'header .text h3'],
-			"titleCaption"=>["source"=>'children',"selector"=>'header .text p'],
+			"title"=>["source"=>'children',"selector"=>'header .text h3,.header .text .title'],
+			"titleCaption"=>["source"=>'children',"selector"=>'header .text p,.header .text .titlecaption'],
 
 			"headerImageSrc"=>["source"=>'attribute',"selector"=>'header .image [src]',"attribute"=>'src'],
 			"headerImageAlt"=>["source"=>'attribute',"selector"=>'header .image [src]',"attribute"=>'alt'],
@@ -21,8 +25,8 @@ $attributes=[
 			"alt"=>["source"=>'attribute',"selector"=>'li>.image [src]',"attribute"=>'alt'],
 			"imageCode"=>["source"=>'text',"selector"=>'li>.image'],
 
-			"subTitle"=>["source"=>'children',"selector"=>'.contents h4'],
-			"text"=>["source"=>'children',"selector"=>'.contents p'],
+			"subTitle"=>["source"=>'children',"selector"=>'.contents h4,.contents .subtitle'],
+			"text"=>["source"=>'children',"selector"=>'.contents p','.contents .text'],
 			"linkUrl"=>["source"=>'attribute',"selector"=>'.link a',"attribute"=>'href'],
 
 			"backgroundImageSrc"=>["source"=>'attribute',"selector"=>'.background [src]',"attribute"=>'src',"default"=>cp::get_file_url('/images/dummy_bg.jpg')],

@@ -19,12 +19,15 @@ registerBlockType('catpow/section',{
 	icon: 'id-alt',
 	category: 'catpow',
 	attributes:{
-		id:{source:'attribute',selector:'section',attribute:'id'},
-		classes:{source:'attribute',selector:'section',attribute:'class',default:'wp-block-catpow-section article level3 center catch'},
-		navIcon:{source:'attribute',selector:'section',attribute:'data-icon'},
+		id:{source:'attribute',selector:'.wp-block-catpow-section',attribute:'id'},
+		classes:{source:'attribute',selector:'.wp-block-catpow-section',attribute:'class',default:'wp-block-catpow-section article level3 center catch'},
+		navIcon:{source:'attribute',selector:'.wp-block-catpow-section',attribute:'data-icon'},
+		
+		SectionTag:{type:'text',default:'section'},
+		HeadingTag:{type:'text',default:'h2'},
 
 		prefix:{source:'children',selector:'header div.prefix'},
-		title:{type:'array',source:'children',selector:'header h2,header .heading',default:['Title']},
+		title:{type:'array',source:'children',selector:'header h2,.header .heading',default:['Title']},
 		read:{type:'array',source:'children',selector:'header p'},
 
 		headerImageMime:{source:'attribute',selector:'header .image [src]',attribute:'data-mime'},
@@ -64,6 +67,7 @@ registerBlockType('catpow/section',{
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
         const {
+			SectionTag,HeadingTag,
 			id,classes,prefix,title,read,
 			headerImageMime,headerImageSrc,headerImageSrcset,headerImageAlt,headerImageCode,
 			headerBackgroundImageCode,
@@ -81,9 +85,12 @@ registerBlockType('catpow/section',{
 		const {devices,imageKeys,imageSizes}=CP.config.section;
 		
 		const selectiveClasses=[
+			{input:'buttons',filter:'sectionTag',key:'SectionTag',label:'セクションタグ',values:['article','section','aside','div']},
+			{input:'buttons',filter:'headingTag',key:'HeadingTag',label:'見出しタグ',values:['h1','h2','h3','h4']},
 			{
 				label:'タイプ',
 				filter:'type',
+				type:'gridbuttons',
 				values:[
 					'scene',
 					'article',
@@ -233,11 +240,12 @@ registerBlockType('catpow/section',{
 		
 		var level=CP.getNumberClass({attr:attributes},'level');
 		
+		
         return [
 			<BlockControls>
 				<AlignClassToolbar set={setAttributes} attr={attributes}/>
 			</BlockControls>,
-			<section id={id} className={classes}>
+			<SectionTag id={id} className={classes}>
 				{states.hasImage && 
 					<div class="image">
 						{(states.isTemplate && imageCode)?(
@@ -279,7 +287,9 @@ registerBlockType('catpow/section',{
 									)}
 								</div>
 							}
-							{el('h'+level,{className:'heading'},<RichText tagName="div" value={title} onChange={(title)=>setAttributes({title:title})}/>)}
+							<HeadingTag className="heading">
+								<RichText tagName="div" value={title} onChange={(title)=>setAttributes({title:title})}/>
+							</HeadingTag>
 							{states.hasRead && 
 								<p><RichText tagName="div" value={read} onChange={(read)=>setAttributes({read:read})}/></p>
 							}
@@ -320,7 +330,7 @@ registerBlockType('catpow/section',{
 				{states.hasFrameImage && (
 					<style>{frameImageCss}</style>
 				)}
-			</section>,
+			</SectionTag>,
 			<InspectorControls>
 				<SelectClassPanel
 					title='クラス'
@@ -349,6 +359,7 @@ registerBlockType('catpow/section',{
     },
 	save({attributes,className,setAttributes}){
         const {
+			SectionTag,HeadingTag,
 			id,navIcon,classes,prefix,title,read,
 			headerImageSrc,headerImageSrcset,headerImageAlt,headerImageCode,
 			headerBackgroundImageCode,
@@ -364,7 +375,7 @@ registerBlockType('catpow/section',{
 		const {devices,imageKeys,imageSizes}=CP.config.section;
 		
 		return (
-			<section id={id} className={classes} data-icon={navIcon}>
+			<SectionTag id={id} className={classes} data-icon={navIcon}>
 				{states.hasImage && 
 					<div class="image">
 						{(states.isTemplate && imageCode)?(
@@ -401,7 +412,9 @@ registerBlockType('catpow/section',{
 									)}
 								</div>
 							}
-							{el('h'+level,{className:'heading'},title)}
+							<HeadingTag className="heading">
+								<RichText.Content value={title}/>
+							</HeadingTag>
 							{states.hasRead && <p><RichText.Content value={read}/></p>}
 						</div>
 						{states.hasHeaderBackgroundImage &&
@@ -439,7 +452,7 @@ registerBlockType('catpow/section',{
 				{states.hasFrameImage && (
 					<style className="frameImageCss">{frameImageCss}</style>
 				)}
-			</section>
+			</SectionTag>
 		);
 	},
 	deprecated:[

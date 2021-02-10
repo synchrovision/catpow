@@ -19,12 +19,15 @@ registerBlockType('catpow/section', {
 	icon: 'id-alt',
 	category: 'catpow',
 	attributes: {
-		id: { source: 'attribute', selector: 'section', attribute: 'id' },
-		classes: { source: 'attribute', selector: 'section', attribute: 'class', default: 'wp-block-catpow-section article level3 center catch' },
-		navIcon: { source: 'attribute', selector: 'section', attribute: 'data-icon' },
+		id: { source: 'attribute', selector: '.wp-block-catpow-section', attribute: 'id' },
+		classes: { source: 'attribute', selector: '.wp-block-catpow-section', attribute: 'class', default: 'wp-block-catpow-section article level3 center catch' },
+		navIcon: { source: 'attribute', selector: '.wp-block-catpow-section', attribute: 'data-icon' },
+
+		SectionTag: { type: 'text', default: 'section' },
+		HeadingTag: { type: 'text', default: 'h2' },
 
 		prefix: { source: 'children', selector: 'header div.prefix' },
-		title: { type: 'array', source: 'children', selector: 'header h2,header .heading', default: ['Title'] },
+		title: { type: 'array', source: 'children', selector: 'header h2,.header .heading', default: ['Title'] },
 		read: { type: 'array', source: 'children', selector: 'header p' },
 
 		headerImageMime: { source: 'attribute', selector: 'header .image [src]', attribute: 'data-mime' },
@@ -62,7 +65,9 @@ registerBlockType('catpow/section', {
 		var attributes = _ref.attributes,
 		    className = _ref.className,
 		    setAttributes = _ref.setAttributes;
-		var id = attributes.id,
+		var SectionTag = attributes.SectionTag,
+		    HeadingTag = attributes.HeadingTag,
+		    id = attributes.id,
 		    classes = attributes.classes,
 		    prefix = attributes.prefix,
 		    title = attributes.title,
@@ -97,9 +102,10 @@ registerBlockType('catpow/section', {
 		    imageSizes = _CP$config$section.imageSizes;
 
 
-		var selectiveClasses = [{
+		var selectiveClasses = [{ input: 'buttons', filter: 'sectionTag', key: 'SectionTag', label: 'セクションタグ', values: ['article', 'section', 'aside', 'div'] }, { input: 'buttons', filter: 'headingTag', key: 'HeadingTag', label: '見出しタグ', values: ['h1', 'h2', 'h3', 'h4'] }, {
 			label: 'タイプ',
 			filter: 'type',
+			type: 'gridbuttons',
 			values: ['scene', 'article', 'column'],
 			sub: {
 				scene: ['color', 'pattern', { label: 'プレフィクス', values: 'hasPrefix' }, { label: 'ヘッダ画像', values: 'hasHeaderImage', sub: [{ input: 'image', keys: imageKeys.headerImage, size: imageSizes.headerImage }] }, { label: 'ヘッダ背景画像', values: 'hasHeaderBackgroundImage', sub: [{ input: 'picture', label: '背景画像', keys: imageKeys.headerBackgroundImage, devices: devices }, { label: '薄く', values: 'paleHeaderBG' }] }, { label: '抜き色文字', values: 'inverseText', sub: [{ label: 'ヘッダ背景色', values: 'hasHeaderBackgroundColor' }] }, { label: 'リード', values: 'hasRead' }, { label: '背景画像', values: 'hasBackgroundImage', sub: [{ input: 'picture', label: '背景画像', keys: imageKeys.backgroundImage, devices: devices }, { label: '薄く', values: 'paleBG' }] }, { label: '背景色', values: 'hasBackgroundColor' }, { label: 'メニューアイコン', values: 'hasNavIcon', sub: [{ input: 'image', label: 'アイコン', keys: imageKeys.navIcon, size: 'thumbnail' }] }, {
@@ -169,7 +175,7 @@ registerBlockType('catpow/section', {
 			null,
 			wp.element.createElement(AlignClassToolbar, { set: setAttributes, attr: attributes })
 		), wp.element.createElement(
-			'section',
+			SectionTag,
 			{ id: id, className: classes },
 			states.hasImage && wp.element.createElement(
 				'div',
@@ -212,9 +218,13 @@ registerBlockType('catpow/section', {
 								size: imageSizes.headerImage
 							})
 						),
-						el('h' + level, { className: 'heading' }, wp.element.createElement(RichText, { tagName: 'div', value: title, onChange: function onChange(title) {
-								return setAttributes({ title: title });
-							} })),
+						wp.element.createElement(
+							HeadingTag,
+							{ className: 'heading' },
+							wp.element.createElement(RichText, { tagName: 'div', value: title, onChange: function onChange(title) {
+									return setAttributes({ title: title });
+								} })
+						),
 						states.hasRead && wp.element.createElement(
 							'p',
 							null,
@@ -297,7 +307,9 @@ registerBlockType('catpow/section', {
 		var attributes = _ref2.attributes,
 		    className = _ref2.className,
 		    setAttributes = _ref2.setAttributes;
-		var id = attributes.id,
+		var SectionTag = attributes.SectionTag,
+		    HeadingTag = attributes.HeadingTag,
+		    id = attributes.id,
 		    navIcon = attributes.navIcon,
 		    classes = attributes.classes,
 		    prefix = attributes.prefix,
@@ -330,7 +342,7 @@ registerBlockType('catpow/section', {
 
 
 		return wp.element.createElement(
-			'section',
+			SectionTag,
 			{ id: id, className: classes, 'data-icon': navIcon },
 			states.hasImage && wp.element.createElement(
 				'div',
@@ -368,7 +380,11 @@ registerBlockType('catpow/section', {
 								keys: imageKeys.headerImage
 							})
 						),
-						el('h' + level, { className: 'heading' }, title),
+						wp.element.createElement(
+							HeadingTag,
+							{ className: 'heading' },
+							wp.element.createElement(RichText.Content, { value: title })
+						),
 						states.hasRead && wp.element.createElement(
 							'p',
 							null,

@@ -26,7 +26,7 @@ registerBlockType('catpow/listed',{
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {items=[],classes='',countPrefix,countSuffix,subCountPrefix,subCountSuffix,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
+		const {items=[],TitleTag,SubTitleTag,classes='',countPrefix,countSuffix,subCountPrefix,subCountSuffix,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-listed';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
@@ -35,6 +35,8 @@ registerBlockType('catpow/listed',{
 		
         
 		var selectiveClasses=[
+			{input:'buttons',filter:'titleTag',key:'TitleTag',label:'タイトルタグ',values:['h1','h2','h3','h4']},
+			{input:'buttons',filter:'subTitleTag',key:'SubTitleTag',label:'サブタイトルタグ',values:['h1','h2','h3','h4'],cond:states.hasSubTitle},
 			{
 				label:'タイプ',
 				filter:'type',
@@ -149,7 +151,7 @@ registerBlockType('catpow/listed',{
 						</div>
 					}
 					{states.hasHeader &&
-						<header>
+						<header className="header">
 							{states.hasCounter &&
 								<div className='counter'>
 									{countPrefix && <span class="prefix">{countPrefix}</span>}
@@ -171,15 +173,15 @@ registerBlockType('catpow/listed',{
 							}
 							<div className='text'>
 								{states.hasTitle &&
-									<h3>
+									<TitleTag className="title">
 										<RichText
 											onChange={(title)=>{item.title=title;save();}}
 											value={item.title}
 										/>
-									</h3>
+									</TitleTag>
 								}
 								{states.hasTitle && states.hasTitleCaption && 
-									<p>
+									<p className="titlecaption">
 										<RichText
 											onChange={(titleCaption)=>{item.titleCaption=titleCaption;save();}}
 											value={item.titleCaption}
@@ -211,16 +213,16 @@ registerBlockType('catpow/listed',{
 								</div>
 							}
 							{states.hasSubTitle &&
-								<h4>
+								<SubTitleTag className="subtitle">
 									<RichText
 										onChange={(subTitle)=>{item.subTitle=subTitle;save();}}
 										value={item.subTitle}
 										placeholder='SubTitle'
 									/>
-								</h4>
+								</SubTitleTag>
 							}
 							{states.hasText && 
-								<p>
+								<p className="text">
 									<RichText
 										onChange={(text)=>{item.text=text;save();}}
 										value={item.text}
@@ -291,7 +293,7 @@ registerBlockType('catpow/listed',{
 						attr={attributes}
 						items={items}
 						index={attributes.currentItemIndex}
-						triggerClasses={selectiveClasses[0]}
+						triggerClasses={selectiveClasses[2]}
 						filters={CP.filters.listed || {}}
 					/>
 					{states.isTemplate &&
@@ -352,7 +354,7 @@ registerBlockType('catpow/listed',{
         );
     },
 	save({attributes,className}){
-		const {items=[],classes='',countPrefix,countSuffix,subCountPrefix,subCountSuffix,linkUrl,linkText,loopParam,doLoop}=attributes;
+		const {items=[],TitleTag,SubTitleTag,classes='',countPrefix,countSuffix,subCountPrefix,subCountSuffix,linkUrl,linkText,loopParam,doLoop}=attributes;
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.listed;
 		
@@ -371,7 +373,7 @@ registerBlockType('catpow/listed',{
 						</div>
 					}
 					{states.hasHeader &&
-						<header>
+						<header className="header">
 							{states.hasCounter &&
 								<div className='counter'>
 									{countPrefix && <span class="prefix">{countPrefix}</span>}
@@ -390,8 +392,8 @@ registerBlockType('catpow/listed',{
 								</div>
 							}
 							<div className='text'>
-								{states.hasTitle && <h3><RichText.Content value={item.title}/></h3>}
-								{states.hasTitle && states.hasTitleCaption && <p><RichText.Content value={item.titleCaption}/></p>}
+								{states.hasTitle && <TitleTag className="title"><RichText.Content value={item.title}/></TitleTag>}
+								{states.hasTitle && states.hasTitleCaption && <p className="titlecaption"><RichText.Content value={item.titleCaption}/></p>}
 							</div>
 						</header>
 					}
@@ -414,8 +416,8 @@ registerBlockType('catpow/listed',{
 									/>
 								</div>
 							}
-							{states.hasSubTitle && <h4><RichText.Content value={item.subTitle}/></h4>}
-							{states.hasText && <p><RichText.Content value={item.text}/></p>}
+							{states.hasSubTitle && <SubTitleTag className="subtitle"><RichText.Content value={item.subTitle}/></SubTitleTag>}
+							{states.hasText && <p className="text"><RichText.Content value={item.text}/></p>}
 						</div>
 					}
 					{states.hasBackgroundImage && 

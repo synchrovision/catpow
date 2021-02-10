@@ -30,6 +30,8 @@ registerBlockType('catpow/listed', {
 		    isSelected = _ref.isSelected;
 		var _attributes$items = attributes.items,
 		    items = _attributes$items === undefined ? [] : _attributes$items,
+		    TitleTag = attributes.TitleTag,
+		    SubTitleTag = attributes.SubTitleTag,
 		    _attributes$classes = attributes.classes,
 		    classes = _attributes$classes === undefined ? '' : _attributes$classes,
 		    countPrefix = attributes.countPrefix,
@@ -49,7 +51,7 @@ registerBlockType('catpow/listed', {
 
 		var states = CP.wordsToFlags(classes);
 
-		var selectiveClasses = [{
+		var selectiveClasses = [{ input: 'buttons', filter: 'titleTag', key: 'TitleTag', label: 'タイトルタグ', values: ['h1', 'h2', 'h3', 'h4'] }, { input: 'buttons', filter: 'subTitleTag', key: 'SubTitleTag', label: 'サブタイトルタグ', values: ['h1', 'h2', 'h3', 'h4'], cond: states.hasSubTitle }, {
 			label: 'タイプ',
 			filter: 'type',
 			values: {
@@ -134,7 +136,7 @@ registerBlockType('catpow/listed', {
 				),
 				states.hasHeader && wp.element.createElement(
 					"header",
-					null,
+					{ className: "header" },
 					states.hasCounter && wp.element.createElement(
 						"div",
 						{ className: "counter" },
@@ -170,8 +172,8 @@ registerBlockType('catpow/listed', {
 						"div",
 						{ className: "text" },
 						states.hasTitle && wp.element.createElement(
-							"h3",
-							null,
+							TitleTag,
+							{ className: "title" },
 							wp.element.createElement(RichText, {
 								onChange: function onChange(title) {
 									item.title = title;save();
@@ -181,7 +183,7 @@ registerBlockType('catpow/listed', {
 						),
 						states.hasTitle && states.hasTitleCaption && wp.element.createElement(
 							"p",
-							null,
+							{ className: "titlecaption" },
 							wp.element.createElement(RichText, {
 								onChange: function onChange(titleCaption) {
 									item.titleCaption = titleCaption;save();
@@ -226,8 +228,8 @@ registerBlockType('catpow/listed', {
 						})
 					),
 					states.hasSubTitle && wp.element.createElement(
-						"h4",
-						null,
+						SubTitleTag,
+						{ className: "subtitle" },
 						wp.element.createElement(RichText, {
 							onChange: function onChange(subTitle) {
 								item.subTitle = subTitle;save();
@@ -238,7 +240,7 @@ registerBlockType('catpow/listed', {
 					),
 					states.hasText && wp.element.createElement(
 						"p",
-						null,
+						{ className: "text" },
 						wp.element.createElement(RichText, {
 							onChange: function onChange(text) {
 								item.text = text;save();
@@ -319,7 +321,7 @@ registerBlockType('catpow/listed', {
 					attr: attributes,
 					items: items,
 					index: attributes.currentItemIndex,
-					triggerClasses: selectiveClasses[0],
+					triggerClasses: selectiveClasses[2],
 					filters: CP.filters.listed || {}
 				}),
 				states.isTemplate && wp.element.createElement(SelectClassPanel, {
@@ -373,6 +375,8 @@ registerBlockType('catpow/listed', {
 		    className = _ref2.className;
 		var _attributes$items2 = attributes.items,
 		    items = _attributes$items2 === undefined ? [] : _attributes$items2,
+		    TitleTag = attributes.TitleTag,
+		    SubTitleTag = attributes.SubTitleTag,
 		    _attributes$classes2 = attributes.classes,
 		    classes = _attributes$classes2 === undefined ? '' : _attributes$classes2,
 		    countPrefix = attributes.countPrefix,
@@ -405,7 +409,7 @@ registerBlockType('catpow/listed', {
 				),
 				states.hasHeader && wp.element.createElement(
 					"header",
-					null,
+					{ className: "header" },
 					states.hasCounter && wp.element.createElement(
 						"div",
 						{ className: "counter" },
@@ -439,13 +443,13 @@ registerBlockType('catpow/listed', {
 						"div",
 						{ className: "text" },
 						states.hasTitle && wp.element.createElement(
-							"h3",
-							null,
+							TitleTag,
+							{ className: "title" },
 							wp.element.createElement(RichText.Content, { value: item.title })
 						),
 						states.hasTitle && states.hasTitleCaption && wp.element.createElement(
 							"p",
-							null,
+							{ className: "titlecaption" },
 							wp.element.createElement(RichText.Content, { value: item.titleCaption })
 						)
 					)
@@ -483,13 +487,13 @@ registerBlockType('catpow/listed', {
 						})
 					),
 					states.hasSubTitle && wp.element.createElement(
-						"h4",
-						null,
+						SubTitleTag,
+						{ className: "subtitle" },
 						wp.element.createElement(RichText.Content, { value: item.subTitle })
 					),
 					states.hasText && wp.element.createElement(
 						"p",
-						null,
+						{ className: "text" },
 						wp.element.createElement(RichText.Content, { value: item.text })
 					)
 				),
