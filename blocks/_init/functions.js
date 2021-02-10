@@ -820,6 +820,32 @@ var CP = {
 				)
 			)
 		);
+	},
+	SelectGridButtons: function SelectGridButtons(props) {
+		var maxStrlen = props.options.reduce(function (acc, cur) {
+			return Math.max(acc, cur.label.length);
+		}, 1);
+		var colNum = Math.floor(30 / (maxStrlen + 2));
+		return wp.element.createElement(
+			BaseControl,
+			{ label: props.label, help: props.help },
+			wp.element.createElement(
+				'ul',
+				{ className: "selectGridButtons col" + colNum },
+				props.options.map(function (option) {
+					return wp.element.createElement(
+						'li',
+						{
+							onClick: function onClick() {
+								return props.onChange(option.value);
+							},
+							className: 'item' + (props.selected === option.value ? ' active' : '')
+						},
+						option.label
+					);
+				})
+			)
+		);
 	}
 };
 CP.example = {
@@ -1795,6 +1821,20 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							options: options
 						}));
 						break;
+					case 'gridbuttons':
+						var _CP$parseSelections4 = CP.parseSelections(prm.values),
+						    options = _CP$parseSelections4.options,
+						    values = _CP$parseSelections4.values;
+
+						rtn.push(wp.element.createElement(CP.SelectGridButtons, {
+							label: prm.label,
+							onChange: function onChange(val) {
+								save(babelHelpers.defineProperty({}, prm.key, val));
+							},
+							selected: item[prm.key],
+							options: options
+						}));
+						break;
 					case 'text':
 						rtn.push(wp.element.createElement(TextControl, {
 							label: prm.label,
@@ -1917,9 +1957,9 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							name: prm.input,
 							value: item[prm.keys.src],
 							onChange: function onChange(image) {
-								var _save8;
+								var _save9;
 
-								save((_save8 = {}, babelHelpers.defineProperty(_save8, prm.keys.src, image.url), babelHelpers.defineProperty(_save8, prm.keys.alt, image.alt), _save8));
+								save((_save9 = {}, babelHelpers.defineProperty(_save9, prm.keys.src, image.url), babelHelpers.defineProperty(_save9, prm.keys.alt, image.alt), _save9));
 							}
 						}));
 						break;
@@ -1928,9 +1968,9 @@ var SelectClassPanel = function SelectClassPanel(props) {
 				var subClasses = CP.getSubClasses(prm);
 				var bindClasses = CP.getBindClasses(prm);
 
-				var _CP$parseSelections4 = CP.parseSelections(prm.values),
-				    options = _CP$parseSelections4.options,
-				    values = _CP$parseSelections4.values;
+				var _CP$parseSelections5 = CP.parseSelections(prm.values),
+				    options = _CP$parseSelections5.options,
+				    values = _CP$parseSelections5.values;
 
 				var currentClass = values.find(function (value) {
 					return states[value];
@@ -1980,6 +2020,14 @@ var SelectClassPanel = function SelectClassPanel(props) {
 						break;
 					case 'buttons':
 						rtn.push(wp.element.createElement(CP.SelectButtons, {
+							label: prm.label,
+							onChange: onChangeCB,
+							selected: currentClass,
+							options: options
+						}));
+						break;
+					case 'gridbuttons':
+						rtn.push(wp.element.createElement(CP.SelectGridButtons, {
 							label: prm.label,
 							onChange: onChangeCB,
 							selected: currentClass,

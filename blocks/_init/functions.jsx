@@ -561,6 +561,23 @@
 				</div>
 			</BaseControl>
 		);
+	},
+	SelectGridButtons:(props)=>{
+		const maxStrlen=props.options.reduce((acc,cur)=>Math.max(acc,cur.label.length),1);
+		const colNum=Math.floor(30/(maxStrlen+2));
+		return (
+			<BaseControl label={props.label} help={props.help}>
+				<ul className={"selectGridButtons col"+colNum}>
+					{props.options.map((option)=>(
+						<li
+							onClick={()=>props.onChange(option.value)}
+							className={'item'+((props.selected===option.value)?' active':'')}
+						>{option.label}</li>
+					))}
+				</ul>
+			</BaseControl>
+		);
+	
 	}
 };
 CP.example={
@@ -1333,6 +1350,17 @@ const SelectClassPanel=(props)=>{
 							/>
 						);
 						break;
+					case 'gridbuttons':
+						var {options,values}=CP.parseSelections(prm.values);
+						rtn.push(
+							<CP.SelectGridButtons
+								label={prm.label}
+                                onChange={(val)=>{save({[prm.key]:val});}}
+                                selected={item[prm.key]}
+								options={options}
+							/>
+						);
+						break;
                     case 'text':
                         rtn.push(
                             <TextControl
@@ -1505,6 +1533,16 @@ const SelectClassPanel=(props)=>{
 					case 'buttons':
 						rtn.push(
 							<CP.SelectButtons
+								label={prm.label}
+								onChange={onChangeCB}
+								selected={currentClass}
+								options={options}
+							/>
+						);
+						break;
+					case 'gridbuttons':
+						rtn.push(
+							<CP.SelectGridButtons
 								label={prm.label}
 								onChange={onChangeCB}
 								selected={currentClass}

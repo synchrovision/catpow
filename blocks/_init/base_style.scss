@@ -177,6 +177,24 @@ ul.selectPreparedImageSet{
 		}
 	}
 }
+ul.selectGridButtons{
+	@for $c from 2 through 6{
+		&.col#{$c}{
+			@include flx((w:w,c:$c));
+		}
+	}
+	.item{
+		@include bnd((pd:1rem .5rem,mg:0 0 -1 -1,bs:b));
+		@include bdr((s:s,w:1,c:t));
+		@include txt((a:c,p:13,h:1em,c:t));
+		@include usr((c:p));
+		&.active{
+			@include bg((c:m));
+			@include txt((c:b));
+		}
+	}
+}
+
 table.editItemsTable{
 	@include tbl(());
 	@include bnd((mg:2rem a));
