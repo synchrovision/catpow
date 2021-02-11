@@ -51,9 +51,14 @@ registerBlockType('catpow/listed', {
 
 		var states = CP.wordsToFlags(classes);
 
-		var selectiveClasses = [{ input: 'buttons', filter: 'titleTag', key: 'TitleTag', label: 'タイトルタグ', values: ['h1', 'h2', 'h3', 'h4'] }, { input: 'buttons', filter: 'subTitleTag', key: 'SubTitleTag', label: 'サブタイトルタグ', values: ['h1', 'h2', 'h3', 'h4'], cond: states.hasSubTitle }, {
+		var selectiveClasses = [{ input: 'buttons', filter: 'titleTag', key: 'TitleTag', label: 'タイトルタグ', values: ['h2', 'h3', 'h4'], effect: function effect(val) {
+				if (/^h\d$/.test(val)) {
+					setAttributes({ SubTitleTag: 'h' + (parseInt(val[1]) + 1) });
+				}
+			} }, { input: 'buttons', filter: 'subTitleTag', key: 'SubTitleTag', label: 'サブタイトルタグ', values: ['h3', 'h4', 'h5'], cond: states.hasSubTitle }, {
 			label: 'タイプ',
 			filter: 'type',
+			type: 'gridbuttons',
 			values: {
 				orderd: '連番リスト',
 				news: 'お知らせ',
