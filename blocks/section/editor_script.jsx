@@ -27,7 +27,7 @@ registerBlockType('catpow/section',{
 		HeadingTag:{type:'text',default:'h2'},
 
 		prefix:{source:'children',selector:'header div.prefix'},
-		title:{type:'array',source:'children',selector:'header h2,.header .heading',default:['Title']},
+		title:{type:'array',source:'children',selector:'header h2,header .heading',default:['Title']},
 		read:{type:'array',source:'children',selector:'header p'},
 
 		headerImageMime:{source:'attribute',selector:'header .image [src]',attribute:'data-mime'},
@@ -86,7 +86,13 @@ registerBlockType('catpow/section',{
 		
 		const selectiveClasses=[
 			{input:'buttons',filter:'sectionTag',key:'SectionTag',label:'セクションタグ',values:['article','section','aside','div']},
-			{input:'buttons',filter:'headingTag',key:'HeadingTag',label:'見出しタグ',values:['h1','h2','h3','h4']},
+			{input:'buttons',filter:'headingTag',key:'HeadingTag',label:'見出しタグ',values:['h2','h3','h4'],effect:(val)=>{
+				for(const key in states){
+					if(key.substr(0,5)==='level'){states[key]=false;}
+				}
+				if(/^h\d$/.test(val)){states['level'+val[1]]=true;}
+				setAttributes({classes:CP.flagsToWords(states)});
+			}},
 			{
 				label:'タイプ',
 				filter:'type',
@@ -147,8 +153,8 @@ registerBlockType('catpow/section',{
 					],
 					article:[
 						'color',
-						{label:'レベル',values:{level2:'2',level3:'3',level4:'4'}},
-						{label:'見出しタイプ',filter:'heading_type',values:{header:'ヘッダ',headline:'ヘッドライン',catch:'キャッチ'}},
+						{type:'buttons',label:'レベル',values:{level2:'2',level3:'3',level4:'4'}},
+						{type:'gridbuttons',label:'見出しタイプ',filter:'heading_type',values:['header','headline','catch']},
 						{label:'ヘッダ画像',values:'hasHeaderImage',sub:[
 							{
 								input:'image',keys:imageKeys.headerImage,size:imageSizes.headerImage,
