@@ -823,9 +823,9 @@ var CP = {
 	},
 	SelectGridButtons: function SelectGridButtons(props) {
 		var maxStrlen = props.options.reduce(function (acc, cur) {
-			return Math.max(acc, cur.label.length);
-		}, 1);
-		var colNum = Math.floor(30 / (maxStrlen + 2));
+			return Math.max(acc, cur.label.length + cur.label.replace(/[ -~]+/, '').length);
+		}, 3);
+		var colNum = Math.floor(36 / (maxStrlen + 2));
 		return wp.element.createElement(
 			BaseControl,
 			{ label: props.label, help: props.help },
@@ -1802,6 +1802,9 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							label: prm.label,
 							onChange: function onChange(val) {
 								save(babelHelpers.defineProperty({}, prm.key, val));
+								if (prm.effect) {
+									prm.effect(val);
+								}i;
 							},
 							value: item[prm.key],
 							options: options
@@ -1816,6 +1819,9 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							label: prm.label,
 							onChange: function onChange(val) {
 								save(babelHelpers.defineProperty({}, prm.key, val));
+								if (prm.effect) {
+									prm.effect(val);
+								}
 							},
 							selected: item[prm.key],
 							options: options
@@ -1830,6 +1836,9 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							label: prm.label,
 							onChange: function onChange(val) {
 								save(babelHelpers.defineProperty({}, prm.key, val));
+								if (prm.effect) {
+									prm.effect(val);
+								}
 							},
 							selected: item[prm.key],
 							options: options
@@ -1841,6 +1850,9 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							value: item[prm.key],
 							onChange: function onChange(val) {
 								save(babelHelpers.defineProperty({}, prm.key, val));
+								if (prm.effect) {
+									prm.effect(val);
+								}
 							}
 						}));
 						break;
@@ -1850,6 +1862,9 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							value: item[prm.key],
 							onChange: function onChange(val) {
 								save(babelHelpers.defineProperty({}, prm.key, val));
+								if (prm.effect) {
+									prm.effect(val);
+								}
 							}
 						}));
 						break;
@@ -1861,7 +1876,11 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							label: prm.label,
 							value: item[prm.key] / prm.coef,
 							onChange: function onChange(val) {
-								save(babelHelpers.defineProperty({}, prm.key, val * prm.coef));
+								val *= prm.coef;
+								save(babelHelpers.defineProperty({}, prm.key, val));
+								if (prm.effect) {
+									prm.effect(val);
+								}
 							},
 							min: prm.min,
 							max: prm.max,
@@ -1874,6 +1893,9 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							checked: item[prm.key],
 							onChange: function onChange(val) {
 								save(babelHelpers.defineProperty({}, prm.key, val));
+								if (prm.effect) {
+									prm.effect(val);
+								}
 							}
 						}));
 						if (prm.sub) {
@@ -2007,6 +2029,9 @@ var SelectClassPanel = function SelectClassPanel(props) {
 					states[newClass] = true;
 
 					saveClasses();
+					if (prm.effect) {
+						prm.effect(currentClass, newClass);
+					}
 				};
 
 				switch (prm.type) {

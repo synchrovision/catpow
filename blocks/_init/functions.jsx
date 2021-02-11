@@ -563,8 +563,8 @@
 		);
 	},
 	SelectGridButtons:(props)=>{
-		const maxStrlen=props.options.reduce((acc,cur)=>Math.max(acc,cur.label.length),1);
-		const colNum=Math.floor(30/(maxStrlen+2));
+		const maxStrlen=props.options.reduce((acc,cur)=>Math.max(acc,cur.label.length+cur.label.replace(/[ -~]+/,'').length),3);
+		const colNum=Math.floor(36/(maxStrlen+2));
 		return (
 			<BaseControl label={props.label} help={props.help}>
 				<ul className={"selectGridButtons col"+colNum}>
@@ -1333,7 +1333,10 @@ const SelectClassPanel=(props)=>{
 						rtn.push(
 							<SelectControl
 								label={prm.label}
-                                onChange={(val)=>{save({[prm.key]:val});}}
+                                onChange={(val)=>{
+									save({[prm.key]:val});
+									if(prm.effect){prm.effect(val);}i
+								}}
                                 value={item[prm.key]}
 								options={options}
 							/>
@@ -1344,7 +1347,10 @@ const SelectClassPanel=(props)=>{
 						rtn.push(
 							<CP.SelectButtons
 								label={prm.label}
-                                onChange={(val)=>{save({[prm.key]:val});}}
+                                onChange={(val)=>{
+									save({[prm.key]:val});
+									if(prm.effect){prm.effect(val);}
+								}}
                                 selected={item[prm.key]}
 								options={options}
 							/>
@@ -1355,7 +1361,10 @@ const SelectClassPanel=(props)=>{
 						rtn.push(
 							<CP.SelectGridButtons
 								label={prm.label}
-                                onChange={(val)=>{save({[prm.key]:val});}}
+                                onChange={(val)=>{
+									save({[prm.key]:val});
+									if(prm.effect){prm.effect(val);}
+								}}
                                 selected={item[prm.key]}
 								options={options}
 							/>
@@ -1366,7 +1375,10 @@ const SelectClassPanel=(props)=>{
                             <TextControl
                                 label={prm.label}
                                 value={item[prm.key]}
-                                onChange={(val)=>{save({[prm.key]:val});}}
+                                onChange={(val)=>{
+									save({[prm.key]:val});
+									if(prm.effect){prm.effect(val);}
+								}}
                             />
                         );
                         break;
@@ -1375,7 +1387,10 @@ const SelectClassPanel=(props)=>{
                             <TextareaControl
                                 label={prm.label}
                                 value={item[prm.key]}
-                                onChange={(val)=>{save({[prm.key]:val});}}
+                                onChange={(val)=>{
+									save({[prm.key]:val});
+									if(prm.effect){prm.effect(val);}
+								}}
                             />
                         );
                         break;
@@ -1385,7 +1400,11 @@ const SelectClassPanel=(props)=>{
                             <RangeControl
                                 label={prm.label}
                                 value={item[prm.key]/prm.coef}
-                                onChange={(val)=>{save({[prm.key]:val*prm.coef});}}
+                                onChange={(val)=>{
+									val*=prm.coef;
+									save({[prm.key]:val});
+									if(prm.effect){prm.effect(val);}
+								}}
                                 min={prm.min}
                                 max={prm.max}
                                 step={prm.step}
@@ -1397,7 +1416,10 @@ const SelectClassPanel=(props)=>{
                             <ToggleControl
                                 label={prm.label}
                                 checked={item[prm.key]}
-                                onChange={(val)=>{save({[prm.key]:val});}}
+                                onChange={(val)=>{
+									save({[prm.key]:val});
+									if(prm.effect){prm.effect(val);}
+								}}
                             />
                         );
 						if(prm.sub){
@@ -1516,6 +1538,7 @@ const SelectClassPanel=(props)=>{
 					states[newClass]=true;
 					
 					saveClasses();
+					if(prm.effect){prm.effect(currentClass,newClass);}
 				};
 				
 				
