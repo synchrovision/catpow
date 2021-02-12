@@ -798,7 +798,7 @@ var CP = {
 
 		return wp.element.createElement(
 			BaseControl,
-			{ label: props.label, help: props.help },
+			{ label: props.label, help: props.help, id: 'CP-SelectButtons-' + wp.compose.useInstanceId(CP.SelectButtons) },
 			wp.element.createElement(
 				'div',
 				null,
@@ -828,7 +828,7 @@ var CP = {
 		var colNum = Math.floor(36 / (maxStrlen + 2));
 		return wp.element.createElement(
 			BaseControl,
-			{ label: props.label, help: props.help },
+			{ label: props.label, help: props.help, id: 'CP-SelectGridButtons-' + wp.compose.useInstanceId(CP.SelectGridButtons) },
 			wp.element.createElement(
 				'ul',
 				{ className: "selectGridButtons col" + colNum },

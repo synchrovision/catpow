@@ -178,6 +178,7 @@ ul.selectPreparedImageSet{
 	}
 }
 ul.selectGridButtons{
+	@include bnd((mg:0));
 	@for $c from 2 through 6{
 		&.col#{$c}{
 			@include flx((w:w,c:$c));

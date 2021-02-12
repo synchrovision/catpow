@@ -548,7 +548,7 @@
 	SelectButtons:(props)=>{
 		const {Button,ButtonGroup}=wp.components;
 		return (
-			<BaseControl label={props.label} help={props.help}>
+			<BaseControl label={props.label} help={props.help} id={'CP-SelectButtons-'+wp.compose.useInstanceId(CP.SelectButtons)}>
 				<div>
 					<ButtonGroup>
 						{props.options.map((option)=>(
@@ -566,7 +566,7 @@
 		const maxStrlen=props.options.reduce((acc,cur)=>Math.max(acc,cur.label.length+cur.label.replace(/[ -~]+/,'').length),3);
 		const colNum=Math.floor(36/(maxStrlen+2));
 		return (
-			<BaseControl label={props.label} help={props.help}>
+			<BaseControl label={props.label} help={props.help} id={'CP-SelectGridButtons-'+wp.compose.useInstanceId(CP.SelectGridButtons)}>
 				<ul className={"selectGridButtons col"+colNum}>
 					{props.options.map((option)=>(
 						<li
