@@ -54,6 +54,8 @@ registerBlockType('catpow/section', {
 		backgroundImageCode: { source: 'text', selector: '.wp-block-catpow-section>.background' },
 		backgroundImageSources: CP.getPictureSoucesAttributesForDevices(CP.config.section.devices, '.wp-block-catpow-section>.background picture', 'dummy_bg.jpg'),
 
+		patternImageCss: { source: 'text', selector: 'style.patternImageCss' },
+		headerPatternImageCss: { source: 'text', selector: 'style.headerPatternImageCss' },
 		frameImageCss: { source: 'text', selector: 'style.frameImageCss' },
 		borderImageCss: { source: 'text', selector: 'style.borderImageCss' },
 
@@ -85,6 +87,8 @@ registerBlockType('catpow/section', {
 		    imageCode = attributes.imageCode,
 		    backgroundImageSrc = attributes.backgroundImageSrc,
 		    backgroundImageCode = attributes.backgroundImageCode,
+		    headerPatternImageCss = attributes.headerPatternImageCss,
+		    patternImageCss = attributes.patternImageCss,
 		    frameImageCss = attributes.frameImageCss,
 		    borderImageCss = attributes.borderImageCss,
 		    iconSrc = attributes.iconSrc,
@@ -118,7 +122,7 @@ registerBlockType('catpow/section', {
 			type: 'gridbuttons',
 			values: ['scene', 'article', 'column'],
 			sub: {
-				scene: ['color', 'pattern', { label: 'プレフィクス', values: 'hasPrefix' }, { label: 'ヘッダ画像', values: 'hasHeaderImage', sub: [{ input: 'image', keys: imageKeys.headerImage, size: imageSizes.headerImage }] }, { label: 'ヘッダ背景画像', values: 'hasHeaderBackgroundImage', sub: [{ input: 'picture', label: '背景画像', keys: imageKeys.headerBackgroundImage, devices: devices }, { label: '薄く', values: 'paleHeaderBG' }] }, { label: '抜き色文字', values: 'inverseText', sub: [{ label: 'ヘッダ背景色', values: 'hasHeaderBackgroundColor' }] }, { label: 'リード', values: 'hasRead' }, { label: '背景画像', values: 'hasBackgroundImage', sub: [{ input: 'picture', label: '背景画像', keys: imageKeys.backgroundImage, devices: devices }, { label: '薄く', values: 'paleBG' }] }, { label: '背景色', values: 'hasBackgroundColor' }, { label: 'メニューアイコン', values: 'hasNavIcon', sub: [{ input: 'image', label: 'アイコン', keys: imageKeys.navIcon, size: 'thumbnail' }] }, {
+				scene: ['color', { label: 'プレフィクス', values: 'hasPrefix' }, { label: 'ヘッダ画像', values: 'hasHeaderImage', sub: [{ input: 'image', keys: imageKeys.headerImage, size: imageSizes.headerImage }] }, { label: 'ヘッダ背景画像', values: 'hasHeaderBackgroundImage', sub: [{ input: 'picture', label: '背景画像', keys: imageKeys.headerBackgroundImage, devices: devices }, { label: '薄く', values: 'paleHeaderBG' }] }, { label: '抜き色文字', values: 'inverseText', sub: [{ label: 'ヘッダ背景色', values: 'hasHeaderBackgroundColor', sub: [{ label: 'パターン画像', values: 'hasHeaderPatternImage', sub: [{ input: 'pattern', css: 'headerPatternImageCss', sel: '#' + id + ' > .contents > .header' }] }] }] }, { label: 'リード', values: 'hasRead' }, { label: '背景画像', values: 'hasBackgroundImage', sub: [{ input: 'picture', label: '背景画像', keys: imageKeys.backgroundImage, devices: devices }, { label: '薄く', values: 'paleBG' }] }, { label: '背景色', values: 'hasBackgroundColor' }, { label: 'メニューアイコン', values: 'hasNavIcon', sub: [{ input: 'image', label: 'アイコン', keys: imageKeys.navIcon, size: 'thumbnail' }] }, {
 					label: 'テンプレート',
 					values: 'isTemplate',
 					sub: [{
@@ -141,7 +145,7 @@ registerBlockType('catpow/section', {
 				article: ['color', { type: 'buttons', label: 'レベル', values: { level2: '2', level3: '3', level4: '4' } }, { type: 'gridbuttons', label: '見出しタイプ', filter: 'heading_type', values: ['header', 'headline', 'catch'] }, { label: 'ヘッダ画像', values: 'hasHeaderImage', sub: [{
 						input: 'image', keys: imageKeys.headerImage, size: imageSizes.headerImage,
 						cond: !states.isTemplate || !headerImageCode
-					}] }, { label: 'リード', values: 'hasRead' }, { label: '背景画像', values: 'hasBackgroundImage', sub: [{ input: 'picture', keys: imageKeys.backgroundImage, devices: devices, cond: !states.isTemplate || !backgroundImageCode }, { label: '薄く', values: 'paleBG' }] }, { label: '背景色', values: 'hasBackgroundColor' }, { label: 'メニューアイコン', values: 'hasNavIcon', sub: [{ input: 'image', label: 'アイコン', keys: imageKeys.navIcon, size: 'thumbnail' }] }, { label: 'フレーム画像', values: 'hasFrameImage', sub: [{ input: 'frame', css: 'frameImageCss', sel: '#' + id }] }, { label: 'ボーダー画像', values: 'hasBorderImage', sub: [{ input: 'border', css: 'borderImageCss', sel: '#' + id + ' > .contents' }] }, {
+					}] }, { label: 'リード', values: 'hasRead' }, { label: '背景画像', values: 'hasBackgroundImage', sub: [{ input: 'picture', keys: imageKeys.backgroundImage, devices: devices, cond: !states.isTemplate || !backgroundImageCode }, { label: '薄く', values: 'paleBG' }] }, { label: '背景色', values: 'hasBackgroundColor' }, { label: 'メニューアイコン', values: 'hasNavIcon', sub: [{ input: 'image', label: 'アイコン', keys: imageKeys.navIcon, size: 'thumbnail' }] }, { label: 'パターン画像', values: 'hasPatternImage', sub: [{ input: 'pattern', css: 'patternImageCss', sel: '#' + id }] }, { label: 'フレーム画像', values: 'hasFrameImage', sub: [{ input: 'frame', css: 'frameImageCss', sel: '#' + id }] }, { label: 'ボーダー画像', values: 'hasBorderImage', sub: [{ input: 'border', css: 'borderImageCss', sel: '#' + id + ' > .contents' }] }, {
 					label: 'テンプレート',
 					values: 'isTemplate',
 					sub: [{
@@ -202,7 +206,7 @@ registerBlockType('catpow/section', {
 				{ 'class': 'contents' },
 				wp.element.createElement(
 					'header',
-					null,
+					{ 'class': 'header' },
 					wp.element.createElement(
 						'div',
 						{ 'class': 'title' },
@@ -267,6 +271,16 @@ registerBlockType('catpow/section', {
 					attr: attributes,
 					keys: imageKeys.backgroundImage
 				})
+			),
+			states.hasPatternImage && wp.element.createElement(
+				'style',
+				null,
+				patternImageCss
+			),
+			states.hasHeaderPatternImage && wp.element.createElement(
+				'style',
+				null,
+				headerPatternImageCss
 			),
 			states.hasBorderImage && wp.element.createElement(
 				'style',
@@ -336,6 +350,8 @@ registerBlockType('catpow/section', {
 		    imageCode = attributes.imageCode,
 		    backgroundImageSrc = attributes.backgroundImageSrc,
 		    backgroundImageCode = attributes.backgroundImageCode,
+		    headerPatternImageCss = attributes.headerPatternImageCss,
+		    patternImageCss = attributes.patternImageCss,
 		    frameImageCss = attributes.frameImageCss,
 		    borderImageCss = attributes.borderImageCss,
 		    iconSrc = attributes.iconSrc,
@@ -368,7 +384,7 @@ registerBlockType('catpow/section', {
 				{ 'class': 'contents' },
 				wp.element.createElement(
 					'header',
-					null,
+					{ 'class': 'header' },
 					wp.element.createElement(
 						'div',
 						{ 'class': 'title' },
@@ -425,6 +441,16 @@ registerBlockType('catpow/section', {
 					keys: imageKeys.backgroundImage,
 					devices: devices
 				})
+			),
+			states.hasPatternImage && wp.element.createElement(
+				'style',
+				{ className: 'patternImageCss' },
+				patternImageCss
+			),
+			states.hasHeaderPatternImage && wp.element.createElement(
+				'style',
+				{ className: 'headerPatternImageCss' },
+				headerPatternImageCss
 			),
 			states.hasBorderImage && wp.element.createElement(
 				'style',

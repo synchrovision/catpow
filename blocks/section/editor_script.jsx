@@ -58,6 +58,8 @@ registerBlockType('catpow/section',{
 			CP.config.section.devices,'.wp-block-catpow-section>.background picture','dummy_bg.jpg'
 		),
 		
+		patternImageCss:{source:'text',selector:'style.patternImageCss'},
+		headerPatternImageCss:{source:'text',selector:'style.headerPatternImageCss'},
 		frameImageCss:{source:'text',selector:'style.frameImageCss'},
 		borderImageCss:{source:'text',selector:'style.borderImageCss'},
 		
@@ -73,7 +75,7 @@ registerBlockType('catpow/section',{
 			headerBackgroundImageCode,
 			imageMime,imageSrc,imageSrcset,imageAlt,imageCode,
 			backgroundImageSrc,backgroundImageCode,
-			frameImageCss,borderImageCss,
+			headerPatternImageCss,patternImageCss,frameImageCss,borderImageCss,
 			iconSrc,iconAlt
 		}=attributes;
 		
@@ -105,7 +107,6 @@ registerBlockType('catpow/section',{
 				sub:{
 					scene:[
 						'color',
-						'pattern',
 						{label:'プレフィクス',values:'hasPrefix'},
 						{label:'ヘッダ画像',values:'hasHeaderImage',sub:[
 							{input:'image',keys:imageKeys.headerImage,size:imageSizes.headerImage}
@@ -115,7 +116,11 @@ registerBlockType('catpow/section',{
 							{label:'薄く',values:'paleHeaderBG'}
 						]},
 						{label:'抜き色文字',values:'inverseText',sub:[
-							{label:'ヘッダ背景色',values:'hasHeaderBackgroundColor'}
+							{label:'ヘッダ背景色',values:'hasHeaderBackgroundColor',sub:[
+								{label:'パターン画像',values:'hasHeaderPatternImage',sub:[
+									{input:'pattern',css:'headerPatternImageCss',sel:'#'+id+' > .contents > .header'},
+								]}
+							]}
 						]},
 						{label:'リード',values:'hasRead'},
 						{label:'背景画像',values:'hasBackgroundImage',sub:[
@@ -169,6 +174,9 @@ registerBlockType('catpow/section',{
 						{label:'背景色',values:'hasBackgroundColor'},
 						{label:'メニューアイコン',values:'hasNavIcon',sub:[
 							{input:'image',label:'アイコン',keys:imageKeys.navIcon,size:'thumbnail'}
+						]},
+						{label:'パターン画像',values:'hasPatternImage',sub:[
+							{input:'pattern',css:'patternImageCss',sel:'#'+id},
 						]},
 						{label:'フレーム画像',values:'hasFrameImage',sub:[
 							{input:'frame',css:'frameImageCss',sel:'#'+id},
@@ -267,7 +275,7 @@ registerBlockType('catpow/section',{
 					</div>
 				}
 				<div class='contents'>
-					<header>
+					<header class='header'>
 						<div class="title">
 							{states.hasIcon && 
 								<div class="icon">
@@ -330,6 +338,12 @@ registerBlockType('catpow/section',{
 						)}
 					</div>
 				}
+				{states.hasPatternImage && (
+					<style>{patternImageCss}</style>
+				)}
+				{states.hasHeaderPatternImage && (
+					<style>{headerPatternImageCss}</style>
+				)}
 				{states.hasBorderImage && (
 					<style>{borderImageCss}</style>
 				)}
@@ -371,7 +385,7 @@ registerBlockType('catpow/section',{
 			headerBackgroundImageCode,
 			imageSrc,imageSrcset,imageAlt,imageCode,
 			backgroundImageSrc,backgroundImageCode,
-			frameImageCss,borderImageCss,
+			headerPatternImageCss,patternImageCss,frameImageCss,borderImageCss,
 			iconSrc,iconAlt
 		}=attributes;
 		
@@ -396,7 +410,7 @@ registerBlockType('catpow/section',{
 					</div>
 				}
 				<div class="contents">
-					<header>
+					<header class='header'>
 						<div class="title">
 							{states.hasIcon && 
 								<div class="icon">
@@ -452,6 +466,12 @@ registerBlockType('catpow/section',{
 						)}
 					</div>
 				}
+				{states.hasPatternImage && (
+					<style className="patternImageCss">{patternImageCss}</style>
+				)}
+				{states.hasHeaderPatternImage && (
+					<style className="headerPatternImageCss">{headerPatternImageCss}</style>
+				)}
 				{states.hasBorderImage && (
 					<style className="borderImageCss">{borderImageCss}</style>
 				)}
