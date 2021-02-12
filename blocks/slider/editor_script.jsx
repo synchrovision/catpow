@@ -62,6 +62,7 @@ registerBlockType('catpow/slider',{
 			{
 				label:'タイプ',values:['visual','story','articles','index'],
 				filter:'type',
+				type:'gridbuttons',
 				sub:{
 					visual:[
 						{label:'見出し',values:'hasTitle',sub:[
