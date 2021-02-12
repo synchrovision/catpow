@@ -34,10 +34,10 @@ class CP{
 		
 		if($f=\cp::get_file_path('config/catpow/config.php',\cp::FROM_THEME)){
 			include $f;
-			self::$use_functions=array_merge(['catpow','config','blocks'],$value['use_functions']);
+			self::$use_functions=array_merge(['catpow'],$value['use_functions']);
 		}
 		else{
-			self::$use_functions=['catpow','config','blocks'];
+			self::$use_functions=['catpow'];
 		}
 		if($f=\cp::get_file_path('config/catpow/blocks.php',\cp::FROM_THEME)){
 			include $f;
@@ -922,7 +922,7 @@ class CP{
 	}
 	public static function get_meta($data_type,$data_name,$id,$meta_name,$single=false){
 		$conf=self::get_conf_data([$data_type,$data_name,$meta_name]);
-		$class_name=self::get_class_name('meta',$conf['type']?:'text');
+		$class_name=self::get_class_name('meta',!empty($conf['type'])?$conf['type']:'text');
 		$vals=$class_name::get($data_type,$data_name,$id,$meta_name,$conf);
 		if(empty($vals)){return null;}
 		if($single){return reset($vals);}
