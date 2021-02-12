@@ -1161,7 +1161,6 @@ var SelectPreparedImage = function SelectPreparedImage(_ref20) {
 		}
 		return false;
 	}
-
 	return wp.element.createElement(
 		'ul',
 		babelHelpers.extends({ className: 'selectPreparedImage ' + name + ' ' + className }, otherProps),
@@ -1553,7 +1552,6 @@ var SelectClassPanel = function SelectClassPanel(props) {
 						rtn.push(wp.element.createElement(ColorPicker, {
 							color: CP.getJsonValue(props, prm.json, prm.key) || '#FFFFFF',
 							onChangeComplete: function onChangeComplete(value) {
-								console.log(value);
 								CP.setJsonValue(props, prm.json, prm.key, value.hex);
 							}
 						}));
@@ -1675,17 +1673,34 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							}
 						}));
 						break;
+					case 'pattern':
+						rtn.push(wp.element.createElement(SelectPreparedImage, {
+							name: 'pattern',
+							value: tgt['background-image'] && tgt['background-image'].match(/url\((.+?)\)/)[1] || false,
+							onChange: function onChange(image) {
+								var _image$conf2 = image.conf,
+								    width = _image$conf2.width,
+								    height = _image$conf2.height;
+
+								tgt['background-image'] = 'url(' + image.url + ')';
+								if (width && height) {
+									tgt['background-size'] = width / 2 + 'px ' + height / 2 + 'px';
+								}
+								saveCss(prm.css);
+							}
+						}));
+						break;
 					case 'frame':
 						rtn.push(wp.element.createElement(SelectPreparedImageSet, {
 							name: 'frame',
 							value: tgt['border-image'] && tgt['border-image'].match(/url\((.+?)\)/)[1] || false,
 							onChange: function onChange(imageset) {
 								imageset.map(function (image) {
-									var _image$conf2 = image.conf,
-									    device = _image$conf2.device,
-									    slice = _image$conf2.slice,
-									    width = _image$conf2.width,
-									    repeat = _image$conf2.repeat;
+									var _image$conf3 = image.conf,
+									    device = _image$conf3.device,
+									    slice = _image$conf3.slice,
+									    width = _image$conf3.width,
+									    repeat = _image$conf3.repeat;
 
 									var media = CP.getMediaQueryKeyForDevice(device);
 									styleDatas[prm.css][media] = styleDatas[prm.css][media] || {};
@@ -1974,7 +1989,6 @@ var SelectClassPanel = function SelectClassPanel(props) {
 								prm.label
 							));
 						}
-						console.log('icon');
 						rtn.push(wp.element.createElement(SelectPreparedImage, {
 							name: prm.input,
 							value: item[prm.keys.src],

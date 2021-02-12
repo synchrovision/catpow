@@ -854,7 +854,6 @@ const SelectPreparedImage=({className,name,value,onChange,...otherProps})=>{
 		}
 		return false;
 	}
-	
 	return (
 		<ul className={'selectPreparedImage '+name+' '+className} {...otherProps}>
 			{images.map((image)=>{
@@ -1122,7 +1121,6 @@ const SelectClassPanel=(props)=>{
 							<ColorPicker
 								color={CP.getJsonValue(props,prm.json,prm.key) || '#FFFFFF'}
 								onChangeComplete={(value)=>{
-									console.log(value);
 									CP.setJsonValue(props,prm.json,prm.key,value.hex);
 								}}
 							/>
@@ -1217,6 +1215,20 @@ const SelectClassPanel=(props)=>{
 									const {slice,width,repeat}=image.conf;
 									tgt['border-style']='solid';
 									tgt['border-image']='url('+image.url+') fill '+slice+' / '+width+' '+repeat;
+									saveCss(prm.css);
+								}}
+							/>
+						);
+						break;
+					case 'pattern':
+						rtn.push(
+							<SelectPreparedImage
+								name="pattern"
+								value={tgt['background-image'] && tgt['background-image'].match(/url\((.+?)\)/)[1] || false}
+								onChange={(image)=>{
+									const {width,height}=image.conf;
+									tgt['background-image']='url('+image.url+')';
+									if(width && height){tgt['background-size']=width/2+'px '+height/2+'px';}
 									saveCss(prm.css);
 								}}
 							/>
@@ -1486,7 +1498,6 @@ const SelectClassPanel=(props)=>{
 						if(prm.label){
 							rtn.push(<h5>{prm.label}</h5>);
 						}
-						console.log('icon');
 						rtn.push(
 							<SelectPreparedImage
 								name={prm.input}
