@@ -701,7 +701,7 @@ class CP{
 		$data_name=array_shift($path_arr);
 		$conf_data_name=self::get_conf_data_name($data_type);
 		if($data_type==='catpow' && !isset($GLOBALS[$conf_data_name][$data_name])){
-			if($f=self::get_file_path('functions/'.$data_name.'/conf.php',self::FROM_THEME)){
+			if($f=self::get_file_path('functions/'.$data_name.'/conf.php',self::FROM_PLUGIN)){
 				include $f;
 				$GLOBALS[$conf_data_name][$data_name]=$conf;
 				if(isset($conf['meta'])){
@@ -1722,8 +1722,9 @@ class CP{
 			else{
 				return false;
 			}
+			if(is_array($conf['type'])){$conf['type']=reset($conf['type']);}
 			
-			if(get_post_type_object($post_type)->show_in_rest===true){
+			if($conf['type']==='html'){
 				$front_styles=[self::get_file_path('mail.css',0733)=>true];
 				$body_class='';
 				$GLOBALS['wp_filter']['render_block']->callbacks[10]['collect_front_styles']=[
@@ -1753,7 +1754,6 @@ class CP{
 					'</head>'.
 					'<body class="mail_body '.$body_class.'">'.$body.'</body>'.
 					'</html>';
-				$conf['type']='html';
 			}
 		}
 		$conf=array_merge([
@@ -1811,8 +1811,10 @@ class CP{
 		}
 		
 		$h['Content-type'].='charset='.$h['text_charset'];
-		
 		foreach($h as $k=>&$v){$v=$k.':'.$v;}
+		if($conf['type']==='plain'){
+			$message=preg_replace("/\r\n|\r|\n/","\r\n",strip_tags($message));
+		}
 		wp_mail($to,$subject,$message,$h);
 	}
 	public static function send_notice($user_id,$notice_type,$vars=null){

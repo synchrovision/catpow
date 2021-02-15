@@ -7,6 +7,8 @@ registerBlockType('catpow/t-body', {
 		multiple: false
 	},
 	attributes: {
+		type: { type: 'string', source: 'meta', meta: 'type', default: 'html' },
+		isHtmlMail: { type: 'boolean', default: false },
 		classes: { source: 'attribute', selector: 'table', attribute: 'class', default: 'wp-block-catpow-t-body hasHeader hasFooter' },
 		headerText: { source: 'children', selector: 'thead th', default: ['Title'] },
 		footerText: { source: 'children', selector: 'tfoot td', default: ['caption'] },
@@ -18,7 +20,9 @@ registerBlockType('catpow/t-body', {
 		var attributes = _ref.attributes,
 		    className = _ref.className,
 		    setAttributes = _ref.setAttributes;
-		var classes = attributes.classes,
+		var type = attributes.type,
+		    isHtmlMail = attributes.isHtmlMail,
+		    classes = attributes.classes,
 		    headerText = attributes.headerText,
 		    footerText = attributes.footerText,
 		    body_class = attributes.body_class,
@@ -29,12 +33,16 @@ registerBlockType('catpow/t-body', {
 		var primaryClass = 'wp-block-catpow-t-body';
 		var states = CP.wordsToFlags(classes);
 
-		var selectiveClasses = ['color', { label: 'ヘッダ', values: 'hasHeader' }, { label: 'フッタ', values: 'hasFooter' }, { label: '背景色', values: ['white', 'gray', 'black'], key: 'body_class' }];
+		var selectiveClasses = [{ input: 'buttons', label: 'メールタイプ', key: 'type', values: ['plain', 'html'], sub: {
+				html: [{ input: 'bool', label: 'テキストメール編集モード', key: 'TextMode' }, 'color', { label: 'ヘッダ', values: 'hasHeader' }, { label: 'フッタ', values: 'hasFooter' }, { type: 'buttons', label: '背景色', values: ['white', 'gray', 'black'], key: 'body_class' }]
+			}, effect: function effect(val) {
+				setAttributes({ isHtmlMail: val === 'html' });
+			} }];
 
 		return wp.element.createElement(
 			Fragment,
 			null,
-			TextMode ? wp.element.createElement(TextareaControl, {
+			!isHtmlMail || TextMode ? wp.element.createElement(TextareaControl, {
 				value: textMail,
 				onChange: function onChange(textMail) {
 					return setAttributes({ textMail: textMail });
@@ -104,11 +112,20 @@ registerBlockType('catpow/t-body', {
 			wp.element.createElement(
 				InspectorControls,
 				null,
-				wp.element.createElement(SelectModeToolbar, {
-					set: setAttributes,
-					attr: attributes,
-					modes: ['TextMode']
-				}),
+				wp.element.createElement(
+					BlockControls,
+					null,
+					wp.element.createElement(Toolbar, {
+						controls: [{
+							icon: 'media-text',
+							label: 'テキストメール',
+							isActive: TextMode,
+							onClick: function onClick() {
+								return setAttributes({ TextMode: !TextMode });
+							}
+						}]
+					})
+				),
 				wp.element.createElement(SelectClassPanel, {
 					title: '\u30AF\u30E9\u30B9',
 					icon: 'art',
@@ -135,7 +152,9 @@ registerBlockType('catpow/t-body', {
 		var attributes = _ref2.attributes,
 		    className = _ref2.className,
 		    setAttributes = _ref2.setAttributes;
-		var classes = attributes.classes,
+		var type = attributes.type,
+		    isHtmlMail = attributes.isHtmlMail,
+		    classes = attributes.classes,
 		    headerText = attributes.headerText,
 		    textMail = attributes.textMail,
 		    footerText = attributes.footerText;
@@ -145,12 +164,12 @@ registerBlockType('catpow/t-body', {
 		return wp.element.createElement(
 			Fragment,
 			null,
-			textMail && wp.element.createElement(
+			(!isHtmlMail || textMail) && wp.element.createElement(
 				'textmail',
 				null,
 				textMail
 			),
-			wp.element.createElement(
+			isHtmlMail && wp.element.createElement(
 				'table',
 				{ width: '100%', align: 'center', className: classes },
 				states.hasHeader && wp.element.createElement(
