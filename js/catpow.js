@@ -1,6 +1,7 @@
 /* global console Catpow */
 jQuery.catpow=jQuery.catpow || {};
-window.Catpow=window.Catpow || {UI:{}};
+window.Catpow=window.Catpow || {};
+window.Catpow.UI=window.Catpow.UI || {};
 
 (function($){
 	//指定のcssがdocumentになければ読み込み
