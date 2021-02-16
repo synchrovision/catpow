@@ -7,6 +7,7 @@ namespace Catpow\query;
 abstract class query{
 	public static
 		$data_type,
+		$data_name=null,
 		$data_type_name,
 		$data_id_name='ID',
 		$query_class,
@@ -60,7 +61,7 @@ abstract class query{
 	public static function fill_object_data($object_data,$path_data){
 		if(empty($path_data)){return $object_data;}
 		if(empty($object_data[static::$data_type_name])){
-			$object_data[static::$data_type_name]=$path_data['data_name'];
+			$object_data[static::$data_type_name]=static::$data_name??$path_data['data_name'];
 		}
 		if(static::is_available_id($path_data['data_id'])){
 			$object_data[static::$data_id_name]=$path_data['data_id'];

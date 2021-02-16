@@ -2,6 +2,8 @@
 namespace Catpow\query;
 
 class nav extends post{
+	public static
+		$data_name='nav_menu_item';
 	public static function fill_query_vars($q){
 		$q['post_type']='nav_menu_item';
 		if(isset($q['data_name'])){
