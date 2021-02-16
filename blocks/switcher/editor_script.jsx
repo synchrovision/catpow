@@ -28,7 +28,7 @@
 			},
 			{
 				label:'比較',
-				input:'select',
+				input:'buttons',
 				key:'compare',
 				values:['=','IN','BETWEEN'],
 				cond:['user_value','input_value','content_value'].indexOf(attributes.factor) >-1
