@@ -3,6 +3,7 @@ registerBlockType('catpow/t-button', {
 	description: 'HTMLメール用のテーブルレイアウトのボタンです。',
 	icon: 'editor-code',
 	category: 'catpow-mail',
+	parent: ['catpow/t-body', 'catpow/t-box', 'catpow/t-loop'],
 	attributes: {
 		classes: { source: 'attribute', selector: 'a', attribute: 'class', default: 'wp-block-catpow-t-button medium' },
 		title: { source: 'children', selector: 'tbody td', default: 'Title' },

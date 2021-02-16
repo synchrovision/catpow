@@ -3,6 +3,7 @@ registerBlockType('catpow/t-heading', {
 	description: 'HTMLメール用の見出しブロックです。',
 	icon: 'editor-code',
 	category: 'catpow-mail',
+	parent: ['catpow/t-body', 'catpow/t-box', 'catpow/t-loop'],
 	transforms: {
 		from: [{
 			type: 'block',

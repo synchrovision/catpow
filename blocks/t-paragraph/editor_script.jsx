@@ -3,6 +3,7 @@
 	description:'HTMLメール用の段落ブロックです。',
 	icon:'editor-code',
 	category:'catpow-mail',
+    parent:['catpow/t-body','catpow/t-box','catpow/t-loop'],
 	transforms:{
 		from: [
 			{
