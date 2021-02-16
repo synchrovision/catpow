@@ -1913,19 +1913,6 @@ var SelectClassPanel = function SelectClassPanel(props) {
 								}
 							}
 						}));
-						if (prm.sub) {
-							if (item[prm.key]) {
-								var _sub3 = [];
-								prm.sub.map(function (prm) {
-									_sub3.push(SelectClass(prm));
-								});
-								rtn.push(wp.element.createElement(
-									'div',
-									{ className: 'sub' },
-									_sub3
-								));
-							}
-						}
 						break;
 					case 'image':
 						if (prm.label) {
@@ -1998,6 +1985,36 @@ var SelectClassPanel = function SelectClassPanel(props) {
 								save((_save9 = {}, babelHelpers.defineProperty(_save9, prm.keys.src, image.url), babelHelpers.defineProperty(_save9, prm.keys.alt, image.alt), _save9));
 							}
 						}));
+						break;
+				}
+				switch (prm.input) {
+					case 'select':
+					case 'buttons':
+					case 'gridbuttons':
+						if (prm.sub && prm.sub[item[prm.key]]) {
+							var _sub3 = [];
+							prm.sub[item[prm.key]].map(function (prm) {
+								_sub3.push(SelectClass(prm));
+							});
+							rtn.push(wp.element.createElement(
+								'div',
+								{ className: 'sub' },
+								_sub3
+							));
+						}
+						break;
+					case 'bool':
+						if (prm.sub && item[prm.key]) {
+							var _sub4 = [];
+							prm.sub.map(function (prm) {
+								_sub4.push(SelectClass(prm));
+							});
+							rtn.push(wp.element.createElement(
+								'div',
+								{ className: 'sub' },
+								_sub4
+							));
+						}
 						break;
 				}
 			} else if (_.isObject(prm.values)) {
@@ -2085,14 +2102,14 @@ var SelectClassPanel = function SelectClassPanel(props) {
 				if (prm.sub) {
 					var _currentClass = CP.getSelectiveClass(props, prm.values, prm.key);
 					if (_currentClass && prm.sub[_currentClass]) {
-						var _sub4 = [];
+						var _sub5 = [];
 						prm.sub[_currentClass].map(function (prm) {
-							_sub4.push(SelectClass(prm));
+							_sub5.push(SelectClass(prm));
 						});
 						rtn.push(wp.element.createElement(
 							'div',
 							{ className: 'sub' },
-							_sub4
+							_sub5
 						));
 					}
 				}
@@ -2107,14 +2124,14 @@ var SelectClassPanel = function SelectClassPanel(props) {
 				}));
 				if (prm.sub) {
 					if (states[prm.values]) {
-						var _sub5 = [];
+						var _sub6 = [];
 						prm.sub.map(function (prm) {
-							_sub5.push(SelectClass(prm));
+							_sub6.push(SelectClass(prm));
 						});
 						rtn.push(wp.element.createElement(
 							'div',
 							{ className: 'sub' },
-							_sub5
+							_sub6
 						));
 					}
 				}

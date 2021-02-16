@@ -1434,13 +1434,6 @@ const SelectClassPanel=(props)=>{
 								}}
                             />
                         );
-						if(prm.sub){
-							if(item[prm.key]){
-								let sub=[];
-								prm.sub.map((prm)=>{sub.push(SelectClass(prm))});
-								rtn.push(<div className="sub">{sub}</div>);
-							}
-						}
 						break;
                     case 'image':
 						if(prm.label){
@@ -1512,6 +1505,25 @@ const SelectClassPanel=(props)=>{
 						);
 						break;
                 }
+                switch(prm.input){
+					case 'select':
+					case 'buttons':
+					case 'gridbuttons':
+						if(prm.sub && prm.sub[item[prm.key]]){
+							let sub=[];
+							prm.sub[item[prm.key]].map((prm)=>{sub.push(SelectClass(prm))});
+							rtn.push(<div className="sub">{sub}</div>);
+						}
+						break;
+					case 'bool':
+						if(prm.sub && item[prm.key]){
+							let sub=[];
+							prm.sub.map((prm)=>{sub.push(SelectClass(prm))});
+							rtn.push(<div className="sub">{sub}</div>);
+						}
+						break;
+				}
+						
             }
             else if(_.isObject(prm.values)){
                 let subClasses=CP.getSubClasses(prm);
