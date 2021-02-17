@@ -43,6 +43,11 @@ foreach($post_types as $type=>&$type_vals){
 					return $labels;
 				});
 			}
+			foreach($supports as $feature){
+				if(empty($GLOBALS['_wp_post_type_features'][$type][$feature])){
+					$GLOBALS['_wp_post_type_features'][$type][$feature]=true;
+				}
+			}
 			$wp_post_types[$type]->has_archive=in_array('archive',$type_vals['template']);
 			break;
 		default:
