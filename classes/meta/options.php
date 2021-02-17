@@ -5,10 +5,13 @@ class options extends meta{
 	public static $can_search=false;
 	
 	public static function get($data_type,$data_name,$id,$meta_name,$conf){
+		if(empty($conf['multiple'])){
+			return [get_option($conf['option']??$meta_name)];
+		}
 		return get_option($conf['option']??$meta_name);
 	}
 	public static function set($data_type,$data_name,$id,$meta_name,$vals,$conf){
-		update_option($conf['option']??$meta_name,$vals);
+		update_option($conf['option']??$meta_name,empty($conf['multiple'])?reset($vals):$vals);
 	}
 	
 	public static function output($meta,$prm){
