@@ -1911,15 +1911,16 @@ class CP{
 	public static function scss_compile($scss_names){
 		if(!current_user_can('edit_themes'))return;
 		if(version_compare(PHP_VERSION, '5.4')<0)return;
-		static $scssc,$admin_config_filemtime,$config_filemtime;
+		static $scssc,$admin_style_config_modified_time,$style_config_modified_time;
 		$css_files=[];
-		if(empty($config_filemtime)){
-			if(empty($config_file=self::get_file_path('config/style_config.scss',self::FROM_THEME))){$config_filemtime=0;}
-			else{$config_filemtime=filemtime($config_file);}
+		if(empty($style_config_modified_time)){
+			if(empty($config_file=self::get_file_path('config/style_config.scss',self::FROM_THEME))){$style_config_modified_time=0;}
+			else{$style_config_modified_time=filemtime($config_file);}
+			$style_config_modified_time=max((int)get_option('cp_style_config_modified_time',0),$style_config_modified_time);
 		}
-		if(empty($admin_config_filemtime)){
-			if(empty($admin_config_file=self::get_file_path('scss/admin_style_config.scss',self::FROM_PLUGIN))){$admin_config_filemtime=0;}
-			else{$admin_config_filemtime=filemtime($admin_config_file);}
+		if(empty($admin_style_config_modified_time)){
+			if(empty($admin_config_file=self::get_file_path('scss/admin_style_config.scss',self::FROM_PLUGIN))){$admin_style_config_modified_time=0;}
+			else{$admin_style_config_modified_time=filemtime($admin_config_file);}
 		}
 		foreach($scss_names as $scss_base_name){
 			if($f=self::get_file_path_url($scss_base_name.'.scss',0733)){
@@ -1933,7 +1934,7 @@ class CP{
 				!file_exists($scss_name.'.css') or
 				filemtime($scss_name.'.css') < max(
 					filemtime($scss_name.'.scss')+10,
-					$is_theme_file?$config_filemtime:$admin_config_filemtime
+					$is_theme_file?$style_config_modified_time:$admin_style_config_modified_time
 				)
 			){
 				if(empty($scssc)){
@@ -1956,6 +1957,7 @@ class CP{
 						'header_textcolor'=>get_header_textcolor(),
 						'background_color'=>get_background_color()
 					]);
+					do_action('cp_scss_compiler_init',$scssc);
 				}
 				try{
 					error_log('SCSS compile '.$scss_name);
