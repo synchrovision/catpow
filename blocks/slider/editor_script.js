@@ -157,10 +157,10 @@ registerBlockType('catpow/slider', {
 				),
 				(states.hasTitle || states.hasSubTitle || states.hasText) && wp.element.createElement(
 					'div',
-					{ 'class': 'text' },
+					{ 'class': 'texts' },
 					states.hasTitle && wp.element.createElement(
 						'h3',
-						null,
+						{ className: 'title' },
 						wp.element.createElement(RichText, {
 							onChange: function onChange(title) {
 								item.title = title;save();
@@ -170,7 +170,7 @@ registerBlockType('catpow/slider', {
 					),
 					states.hasSubTitle && wp.element.createElement(
 						'h4',
-						null,
+						{ className: 'subtitle' },
 						wp.element.createElement(RichText, {
 							onChange: function onChange(subTitle) {
 								item.subTitle = subTitle;save();
@@ -180,7 +180,7 @@ registerBlockType('catpow/slider', {
 					),
 					states.hasText && wp.element.createElement(
 						'p',
-						null,
+						{ className: 'text' },
 						wp.element.createElement(RichText, {
 							onChange: function onChange(text) {
 								item.text = text;save();
@@ -423,20 +423,20 @@ registerBlockType('catpow/slider', {
 				),
 				(states.hasTitle || states.hasSubTitle || states.hasText) && wp.element.createElement(
 					'div',
-					{ 'class': 'text' },
+					{ 'class': 'texts' },
 					states.hasTitle && wp.element.createElement(
 						'h3',
-						null,
+						{ className: 'title' },
 						wp.element.createElement(RichText.Content, { value: item.title })
 					),
 					states.hasSubTitle && wp.element.createElement(
 						'h4',
-						null,
+						{ className: 'subtitle' },
 						wp.element.createElement(RichText.Content, { value: item.subTitle })
 					),
 					states.hasText && wp.element.createElement(
 						'p',
-						null,
+						{ className: 'text' },
 						wp.element.createElement(RichText.Content, { value: item.text })
 					)
 				),

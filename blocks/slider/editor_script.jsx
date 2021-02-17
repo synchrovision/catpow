@@ -205,9 +205,9 @@ registerBlockType('catpow/slider',{
 						</div>
 					}
 					{(states.hasTitle || states.hasSubTitle || states.hasText) && 
-						<div class="text">
+						<div class="texts">
 							{states.hasTitle && 
-								<h3>
+								<h3 className="title">
 									<RichText
 										onChange={(title)=>{item.title=title;save();}}
 										value={item.title}
@@ -215,7 +215,7 @@ registerBlockType('catpow/slider',{
 								</h3>
 							}
 							{states.hasSubTitle &&
-								<h4>
+								<h4 className="subtitle">
 									<RichText
 										onChange={(subTitle)=>{item.subTitle=subTitle;save();}}
 										value={item.subTitle}
@@ -223,7 +223,7 @@ registerBlockType('catpow/slider',{
 								</h4>
 							}
 							{states.hasText &&
-								<p>
+								<p className="text">
 									<RichText
 										onChange={(text)=>{item.text=text;save();}}
 										value={item.text}
@@ -421,10 +421,10 @@ registerBlockType('catpow/slider',{
 						</div>
 					}
 					{(states.hasTitle || states.hasSubTitle || states.hasText) && 
-						<div class="text">
-							{states.hasTitle && <h3><RichText.Content value={item.title}/></h3>}
-							{states.hasSubTitle && <h4><RichText.Content value={item.subTitle}/></h4>}
-							{states.hasText && <p><RichText.Content value={item.text}/></p>}
+						<div class="texts">
+							{states.hasTitle && <h3 className="title"><RichText.Content value={item.title}/></h3>}
+							{states.hasSubTitle && <h4 className="subtitle"><RichText.Content value={item.subTitle}/></h4>}
+							{states.hasText && <p className="text"><RichText.Content value={item.text}/></p>}
 						</div>
 					}
 					{states.hasBackgroundImage &&
