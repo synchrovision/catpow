@@ -7,6 +7,7 @@ abstract class meta{
 		$input_type='text',
 		$validation=[],
 		$has_children=false,
+		$can_edit=true,
 		$can_search=true,
 		$can_search_with_range=false,
 		$is_database=false,
