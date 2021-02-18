@@ -1,6 +1,6 @@
 <?php namespace Catpow; ?>
 <table class="manage">
-	<!--meta-->
+	<!--meta:can_edit-->
 	<tr>
 		<th><!--label--></th>
 		<td><?php input('<!--name-->'); ?></td>
