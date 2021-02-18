@@ -9,12 +9,12 @@ if(!empty($attr['values'])){
 		$values=json_decode($attr['values'],1)?:null;
 	}
 	else{
-		$values=wp_parse_args($attr['values']);
+		$values=Catpow\util\dict::parse(do_shortcode($attr['values']));
 	}
 	$data_path=$form->the_data_path;
 	foreach($values as $key=>$val){
 		if(strpos($key,'/')){$form->inputs->set($data_path.'/'.dirname($key),$val,basename($key));}
-		else{$form->inputs->set($data_path.'/'.$key,$val);}
+		else{$form->inputs->set($data_path.'/'.$key,(array)$val);}
 	}
 }
 $form->render(null,['content'=>$content,'post_data_path'=>$attr['post_data_path']??false,'is_preview'=>$is_preview]);
