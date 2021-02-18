@@ -374,11 +374,9 @@ window.Catpow.UI=window.Catpow.UI || {};
 			if(thr instanceof jQuery){
 				var wh,wc,bnd,t,b,rmv,add;
 				thr=thr.get(0);
-				$(window).on('load resize',function(){
-					wh=$(this).height();
-					wc=wh/2;
-				});
 				$(window).on('load scroll',function(){
+					wh=window.innerWidth;
+					wc=wh/2;
 					bnd=thr.getBoundingClientRect();
 					t=bnd.top;
 					b=bnd.bottom;
