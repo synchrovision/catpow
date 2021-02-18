@@ -1,7 +1,7 @@
 <?php
 add_action('cp_setup',function(){
 	if($cp_ga_code=get_option('cp_ga_code')){
-		$cp_ga_code=reset($cp_ga_code);
+		if(is_array($cp_ga_code)){$cp_ga_code=reset($cp_ga_code);}
 		add_action('wp_head',function()use($cp_ga_code){
 			$conf=[
 				'costom_map'=>apply_filters('cpga_dimensions',[])
