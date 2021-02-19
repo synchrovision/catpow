@@ -16,7 +16,7 @@ class analyze extends meta{
 		return false;
 	}
 	public static function output($meta,$prm){
-		if($meta->conf['output_type']){
+		if(isset($meta->conf['output_type'])){
 			return call_user_func(["\\Catpow\\meta\\{$meta->conf['output_type']}",'output'],$meta,$prm);
 		}
 		return $meta->value;
