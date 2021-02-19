@@ -181,14 +181,17 @@ class content{
 		return $this->data_path;
 	}
 	public function get_the_data($name=null){
-		if(!is_null($this->form)){
-			if(!empty($val=$this->form->inputs->get($this->get_the_data_path($name)))){return $val;}
-		}
 		if(isset($name)){
 			if(!isset($this->loop_id)){return null;}
+			if(strpos($name,'->')!==false){
+				list($name,$relkey)=explode('->',$name);
+				$class_name=\cp::get_class_name('meta',$this->conf['meta'][$name]['type']??'text');
+				return $class_name::get_rel_data_value($relkey,static::get_the_data($name),$this->conf['meta'][$name]);
+			}
 			if(isset($this->data[$this->loop_id][$name])){return $this->data[$this->loop_id][$name];}
-			
-			$id=$this->data_id??$this->loop_id;
+			if(!is_null($this->form)){
+				if(!empty($val=$this->form->inputs->get($this->get_the_data_path($name)))){return $val;}
+			}
 			
 			if($vals=\cp::get_the_meta_value($this->the_data_path.'/'.$name,$this->tmp_name)){return $vals;}
 			
@@ -196,6 +199,9 @@ class content{
 			return (array)$class_name::default_value($this->conf['meta'][$name]??[]);
 		}
 		else{
+			if(!is_null($this->form)){
+				if(!empty($val=$this->form->inputs->get($this->get_the_data_path()))){return $val;}
+			}
 			$class_name=\cp::get_class_name('meta',$this->conf['type']??'text');
 			if(isset($this->object)){return $this->object;}
 			if(is_null($this->loop_id)){if(!empty($this->data)){return $this->data;}}
