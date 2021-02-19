@@ -13,6 +13,7 @@ class picture extends responsive_image{
 		uksort($vals,function($a,$b){if($a==0)return 1;if($b==0)return -1;return $b-$a;});
 		foreach($vals as $bp=>$vs){
 			$img_data=wp_get_attachment_image_src(reset($vs),$meta->conf['meta'][$bp]['size']??'full');
+			if(empty($img_data)){continue;}
 			if($bp!=0){
 				$rtn.=sprintf(
 					'<source srcset="%s" media="(%s-width:%dpx)"/>',
