@@ -10,7 +10,7 @@
 namespace Catpow\util;
 class cond{
 	public static
-		$cond_line_regex='/^(?P<key>\w+)(?:\:(?P<type>\w+))?(?:\((?P<name>\w+)\))?\s*(?P<compare>(?:=|!=|>|>=|<|<=|LIKE|NOT LIKE|IN|NOT IN|BETWEEN|NOT BETWEEN|EXISTS|NOT EXISTS))\s*(?P<value>.*)$/',
+		$cond_line_regex='/^(?P<key>\w+(?:\->(?P<relkey>\w+))?)(?:\:(?P<type>\w+))?(?:\((?P<name>\w+)\))?\s*(?P<compare>(?:=|!=|>|>=|<|<=|LIKE|NOT LIKE|IN|NOT IN|BETWEEN|NOT BETWEEN|EXISTS|NOT EXISTS))\s*(?P<value>.*)$/',
 		$orderby_line_regex='/^ORDERBY (?P<orderby>\w+)(?: (?P<order>ASC|DESC))?$/i',
 		$limit_line_regex='/^LIMIT (?P<limit>\-?\d+)$/i';
 	public $relation,$lines=[],$orderby,$limit;
@@ -44,7 +44,7 @@ class cond{
 	public function test_content($content){
 		$flag=$this->relation==='OR';
 		foreach($this->lines as $line){
-			$values=\cp::get_the_meta_value($content->the_data_path.'/'.$line['key']);
+			$values=$content->get_the_data($line['key']);
 			if(empty($values)){
 				if(in_array($line['compare'],['!=','NOT LIKE','NOT IN','NOT EXISTS'])===$flag){return $flag;}
 			}
@@ -103,7 +103,7 @@ class cond{
 					unset($matches['value']);
 					break;
 			}
-			return array_intersect_key($matches,['key'=>0,'compare'=>0,'value'=>0,'name'=>0,'type'=>0]);
+			return array_intersect_key($matches,['key'=>0,'relkey'=>0,'compare'=>0,'value'=>0,'name'=>0,'type'=>0]);
 		}
 		return false;
 	}
