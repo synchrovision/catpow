@@ -891,23 +891,30 @@ class CP{
 		$data_path=trim($data_path,'/');
 		if(substr_count($data_path,'/')<3){return null;}
 		if(substr_count($data_path,'/')===3){
+			if(strpos($data_path,'->')!==false){
+				list($data_path,$relkey)=explode('->',$data_path);
+			}
+			$path_data=self::parse_data_path($data_path);
 			if(isset($tmp)){
-				$path_data=self::parse_data_path($data_path);
 				$path_data['tmp_name']=$tmp;
 				$conf=self::get_the_conf_data(self::create_content_path($path_data));
-				if(empty($conf['type'])){return null;}
-				$class_name=self::get_class_name('meta',$conf['type']);
-				return $cache[$data_path][$tmp]=$class_name::get(
-					$path_data['data_type'],
-					$path_data['data_name'],
-					$path_data['data_id'],
-					$path_data['meta_path'][0]['meta_name'],
-					$conf
-				);
 			}
 			else{
-				return $cache[$data_path][$tmp]=call_user_func_array([self::class,'get_meta'],explode('/',$data_path));
+				$conf=self::get_conf_data($path_data);
 			}
+			if(empty($conf['type'])){return null;}
+			$class_name=self::get_class_name('meta',$conf['type']);
+			$values=$cache[$data_path][$tmp]=$class_name::get(
+				$path_data['data_type'],
+				$path_data['data_name'],
+				$path_data['data_id'],
+				$path_data['meta_path'][0]['meta_name'],
+				$conf
+			);
+			if(isset($relkey)){
+				return $cache[$data_path.'->'.$relkey][$tmp]=$class_name::get_rel_data_value($values,$relkey,$conf);
+			}
+			return $values;
 		}
 		return $cache[$data_path][$tmp]=self::get_the_meta_value(dirname($data_path),$tmp)[basename($data_path)]??null;
 	}
@@ -1135,12 +1142,12 @@ class CP{
 	public static function get_input_attr($path,$conf,$io='input'){
 		$rtn=' id="'.self::get_input_id($path).'"';
 		$classes=isset($conf['class'])?is_string($conf['class'])?explode(' ',$conf['class']):$conf['class']:[];
-		$classes[]=$conf[$io.'-type']??$conf['type'];
+		$classes[]=$conf[$io.'-type']??$conf['type']??'text';
 		$rtn.=' class="'.implode(' ',$classes).'"';
 		foreach(['placeholder','size','rows','cols','maxlength','autocomplete','min','max','step','pattern'] as $i=>$attr_name){
 			if(isset($conf[$attr_name]))$rtn.=' '.$attr_name.'="'.$conf[$attr_name].'"';
 		}
-		if(!isset($conf['placeholder']))$rtn.=' placeholder="'.$conf['label'].'"';
+		if(!isset($conf['placeholder']))$rtn.=' placeholder="'.($conf['label']??'').'"';
 		if(isset($conf['attr'])){
 			foreach($conf['attr'] as $attr_name=>$attr_val){
 				$rtn.=' '.$attr_name.'="'.(is_array($attr_val)?implode(' ',$attr_val):$attr_val).'"';
@@ -1176,7 +1183,7 @@ class CP{
 		$attr=sprintf(
 			' id="%1$s" class="cp-meta-item %2$s cp-meta-item-%3$s %4$s" data-meta_name="%3$s" data-role="cp-meta-item" data-meta_type="%2$s"',
 			self::get_input_id($data_path),
-			$conf['type'],
+			$conf['type']??'text',
 			$path_data['meta_path']?end($path_data['meta_path'])['meta_name']:'',
 			empty($conf['multiple'])?'single-item':'multiple-item'
 		);
@@ -1954,8 +1961,8 @@ class CP{
 					$scssc->setVariables([
 						'header_image'=>get_header_image(),
 						'background_image'=>get_background_image(),
-						'header_textcolor'=>get_header_textcolor(),
-						'background_color'=>get_background_color()
+						'header_textcolor'=>'#'.get_header_textcolor(),
+						'background_color'=>'#'.get_background_color()
 					]);
 					do_action('cp_scss_compiler_init',$scssc);
 				}
