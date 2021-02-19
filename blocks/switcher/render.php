@@ -32,7 +32,7 @@ switch($attr['factor']){
 	case 'input_value':
 		$cond_cb=function($value)use($attr){
 			$cond=new util\cond($attr['field'].' '.$attr['compare'].' '.$value);
-			return !empty(form()) && $cond->test(form()->get_the_data());
+			return !empty(form()) && $cond->test_content(form());
 		};
 		break;
 	case 'content_value':

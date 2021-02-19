@@ -22,7 +22,7 @@ do{
 	}
 	if($attr['input_value']){
 		$cond=new util\cond($attr['input_value']);
-		if(empty(form()) || $cond->test(form()->get_the_data())===false){break;}
+		if(empty(form()) || $cond->test_content(form())===false){break;}
 	}
 	if($attr['content_value']){
 		$cond=new util\cond($attr['content_value']);
