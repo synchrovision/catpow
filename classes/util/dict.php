@@ -11,7 +11,7 @@ class dict{
 		if(is_string($data)){$data=self::parse($data);}
 		$this->data=$data;
 	}
-	public function parse($str){
+	public static function parse($str){
 		$data=[];
 		$lines=explode("\n",$str);
 		foreach($lines as $line){
