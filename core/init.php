@@ -55,6 +55,9 @@ add_action('admin_notices',function(){
 add_action('admin_menu',function(){
 	cp::include_plugin_files('action/admin_menu');
 },20);
+add_action('customize_register',function($wp_customize){
+	cp::include_plugin_files('action/customize_register',compact(['wp_customize']));
+},20);
 
 /*ページ出力時アクション*/
 add_action('wp',function(){

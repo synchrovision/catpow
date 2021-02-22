@@ -1958,11 +1958,14 @@ class CP{
 					}
 					$scssc->addImportPath(WP_PLUGIN_DIR.'/catpow/default/');
 					$scssc->setSourceMap(\ScssPhp\ScssPhp\Compiler::SOURCE_MAP_FILE);
+					$color_roles=util\style_config::get_color_roles();
 					$scssc->setVariables([
 						'header_image'=>get_header_image(),
 						'background_image'=>get_background_image(),
-						'header_textcolor'=>'#'.get_header_textcolor(),
-						'background_color'=>'#'.get_background_color()
+						'background_color'=>'#'.get_background_color(),
+						'main_color'=>get_theme_mod('main_color',$color_roles['main_color']['default']),
+						'accent_color'=>get_theme_mod('accent_color',$color_roles['accent_color']['default']),
+						'text_color'=>get_theme_mod('text_color',$color_roles['text_color']['default'])
 					]);
 					do_action('cp_scss_compiler_init',$scssc);
 				}
