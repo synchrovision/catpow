@@ -15,7 +15,7 @@ class inputs extends \Catpow\template_item\php{
 		$rtn=['table.wp-block-catpow-simpletable.inputs'];
 		foreach($conf_data['meta'] as $name=>$conf){
 			$class_name=\cp::get_class_name('meta',$conf['type']);
-			if(!class_exists($class_name)){continue;}
+			if(!class_exists($class_name) || !$class_name::$can_edit){continue;}
 			if(!$class_name::$has_parent && !($param&1)){continue;}
 			if($class_name::$is_database && !($param&2)){continue;}
 			if($class_name::$has_children && !$class_name::$is_bulk_input && !$class_name::$is_unit_input){$input=static::get_table_code_data($conf,$param);}
@@ -31,7 +31,7 @@ class inputs extends \Catpow\template_item\php{
 		$table=['tag'=>'table.wp-block-catpow-simpletable.inputs'];
 		foreach($conf_data['meta'] as $name=>$conf){
 			$class_name=\cp::get_class_name('meta',$conf['type']);
-			if(!class_exists($class_name)){continue;}
+			if(!class_exists($class_name) || !$class_name::$can_edit){continue;}
 			if(!$class_name::$has_parent && !($param&1)){continue;}
 			if($class_name::$is_database && !($param&2)){continue;}
 			if($class_name::$has_children && !$class_name::$is_unit_input){$input=static::get_table_code_data($conf,$param);}
