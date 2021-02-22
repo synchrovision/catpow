@@ -18,7 +18,13 @@
 	edit({attributes,className,setAttributes}){
         return [
 			<div className="embedded_content">
-				<div class="label">表示条件</div>
+				<div class="label">
+					表示条件：
+					{attributes.schedule}
+					{attributes.is_user_logged_in!=0 && 'ログイン'+(attributes.is_user_logged_in==1?'している':'していない')}
+					{attributes.input_value}
+					{attributes.content_value}
+				</div>
 				<InnerBlocks/>
 			</div>,
 			<InspectorControls>

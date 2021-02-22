@@ -24,7 +24,11 @@ registerBlockType('catpow/cond', {
 			wp.element.createElement(
 				'div',
 				{ 'class': 'label' },
-				'\u8868\u793A\u6761\u4EF6'
+				'\u8868\u793A\u6761\u4EF6\uFF1A',
+				attributes.schedule,
+				attributes.is_user_logged_in != 0 && 'ログイン' + (attributes.is_user_logged_in == 1 ? 'している' : 'していない'),
+				attributes.input_value,
+				attributes.content_value
 			),
 			wp.element.createElement(InnerBlocks, null)
 		), wp.element.createElement(
