@@ -20,7 +20,7 @@ add_action('wp_head',function(){
 
 add_action('cp_scss_compiler_init',function($scssc){
 	$vars=[];
-	foreach(style_config::$font_roles as $role=>$conf){
+	foreach(style_config::get_font_roles() as $role=>$conf){
 		$vars["{$role}_font"]=get_option("cp_adobe_fonts_{$role}_font",$conf['default']);
 	}
 	$scssc->setVariables($vars);
