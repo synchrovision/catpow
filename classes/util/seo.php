@@ -19,8 +19,8 @@ class seo{
 			global $post_types;
 			$post_type_data=$post_types[get_post_type()];
 			if(isset($post_type_data['meta']['image'])){
-				if($image=wp_get_attachment_image_src(get_post_meta(get_the_ID(),'image',true),'vga')['url']){
-					return $image;
+				if($image_data=wp_get_attachment_image_src(get_post_meta(get_the_ID(),'image',true),'vga')){
+					return $image=$image_data['url'];
 				}
 			}
 			if(has_post_thumbnail()){return $image=get_the_post_thumbnail_url();}
