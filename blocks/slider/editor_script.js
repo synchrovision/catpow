@@ -272,7 +272,7 @@ registerBlockType('catpow/slider', {
 					filters: CP.filters.slider || {}
 				}),
 				wp.element.createElement(SelectClassPanel, {
-					key: 'controlClasses',
+					classKey: 'controlClasses',
 					title: '\u30A2\u30CB\u30E1\u30FC\u30B7\u30E7\u30F3\u8A2D\u5B9A',
 					icon: 'video-alt3',
 					set: setAttributes,
@@ -281,7 +281,7 @@ registerBlockType('catpow/slider', {
 					filters: CP.filters.slider || {}
 				}),
 				wp.element.createElement(SelectClassPanel, {
-					key: 'controlClasses',
+					classKey: 'controlClasses',
 					title: '\u64CD\u4F5C\u8A2D\u5B9A',
 					icon: 'universal-access',
 					set: setAttributes,
@@ -298,6 +298,13 @@ registerBlockType('catpow/slider', {
 							return setAttributes({ classes: classes });
 						},
 						value: classes
+					}),
+					wp.element.createElement(TextareaControl, {
+						label: '\u30B3\u30F3\u30C8\u30ED\u30FC\u30E9\u30FC\u30AF\u30E9\u30B9',
+						onChange: function onChange(controlClasses) {
+							return setAttributes({ controlClasses: controlClasses });
+						},
+						value: controlClasses
 					})
 				),
 				wp.element.createElement(SelectClassPanel, {

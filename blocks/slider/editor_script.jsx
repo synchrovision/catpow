@@ -304,7 +304,7 @@ registerBlockType('catpow/slider',{
 						filters={CP.filters.slider || {}}
 					/>
 					<SelectClassPanel
-						key='controlClasses'
+						classKey='controlClasses'
 						title='アニメーション設定'
 						icon='video-alt3'
 						set={setAttributes}
@@ -313,7 +313,7 @@ registerBlockType('catpow/slider',{
 						filters={CP.filters.slider || {}}
 					/>
 					<SelectClassPanel
-						key='controlClasses'
+						classKey='controlClasses'
 						title='操作設定'
 						icon='universal-access'
 						set={setAttributes}
@@ -326,6 +326,11 @@ registerBlockType('catpow/slider',{
 							label='クラス'
 							onChange={(classes)=>setAttributes({classes})}
 							value={classes}
+						/>
+						<TextareaControl
+							label='コントローラークラス'
+							onChange={(controlClasses)=>setAttributes({controlClasses})}
+							value={controlClasses}
 						/>
 					</PanelBody>
 					<SelectClassPanel
