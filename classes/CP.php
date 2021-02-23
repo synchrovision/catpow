@@ -66,23 +66,25 @@ class CP{
 			self::include_plugin_files('functions/'.$n.'/functions');
 			self::include_template_files('functions/'.$n.'/functions');
 		}
-		session_start();
 		foreach(self::get_file_paths('languages/'.determine_locale().'.mo',1) as $mo_file){
 			load_textdomain('catpow',$mo_file);
 		}
 		if($mo_file=self::get_file_path('languages/'.determine_locale().'.mo',030)){load_textdomain('catpow',$mo_file);}
 		
-		if(!isset($_SESSION['catpow'])){
-			$_SESSION['catpow']=new self();
-		}
 		self::$data_types==apply_filters('cp_data_types',[
 			'catpow','post','page','nav','term','comment','user','site','view','task'
 		]);
+		do_action('cp_setup');
+	}
+	public static function session_start(){
+		if(session_status() !== \PHP_SESSION_ACTIVE){session_start();}
+		if(!isset($_SESSION['catpow'])){
+			$_SESSION['catpow']=new self();
+		}
 		self::$id=&$_SESSION['catpow']->stock['id'];
 		self::$inputs=&$_SESSION['catpow']->stock['inputs'];
 		self::$forms=&$_SESSION['catpow']->stock['forms'];
 		self::$data=&$_SESSION['catpow']->stock['data'];
-		do_action('cp_setup');
 	}
 	
 	

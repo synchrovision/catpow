@@ -5,6 +5,7 @@ register_rest_route(
 	[
 		'methods'=>WP_REST_Server::ALLMETHODS,
 		'permission_callback'=>function($req){
+			cp::session_start();
 			$api_class=cp::get_class_name('api',$req['data_type'],$req['data_name']);
 			if(class_exists($api_class)){
 				return $api_class::permission($req);
@@ -22,9 +23,11 @@ register_rest_route(
 			)){
 				return include $f;
 			}
+			session_write_close();
 			return true;
 		},
 		'callback'=>function($req){
+			cp::session_start();
 			$res=new WP_REST_Response([],200);
 			try{
 				if(!empty($req['tmp'])){
@@ -48,6 +51,7 @@ register_rest_route(
 			catch(Exception $e){
 				return new WP_REST_Response(['message'=>$e->getMessage()],500);
 			}
+			session_write_close();
 			return new WP_REST_Response(['message'=>__('無効なリクエストです','catpow')],404);
 		}
 	]
