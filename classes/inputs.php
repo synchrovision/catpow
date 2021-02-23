@@ -78,12 +78,15 @@ class inputs{
 	}
 	
 	public static function selector_from_path($data_path,$key='value'){
-		$path_arr=explode('/',$data_path);
+		$path_arr=explode('/',self::sanitize_path($data_path));
 		if(isset($path_arr[3])){array_splice($path_arr,4,0,$key);}
 		return '$this->data["'.implode('"]["',$path_arr).'"]';
 	}
 	public static function selector_from_id($input_id){
-		return '$this->data["'.str_replace(\cp::INPUT_ID_DELIMITER,'"]["',$input_id).'"]';
+		return '$this->data["'.str_replace(\cp::INPUT_ID_DELIMITER,'"]["',self::sanitize_path($input_id)).'"]';
+	}
+	public static function sanitize_path($path){
+		return preg_replace('/[^\w\-\/]/','',$path);
 	}
 }
 
