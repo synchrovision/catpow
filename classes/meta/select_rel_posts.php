@@ -9,7 +9,7 @@ class select_rel_posts extends meta{
 	public static function get_rel_data_value($relkey,$vals,$conf){
 		$values=[];
 		foreach($vals as $id){
-			$values[]=\cp::get_the_meta_value("post/".get_post_type($id)."/{$id}/{$relkey}");
+			$values[]=\cp::get_the_meta_value("post/".get_post_type($id)."/{$id}/{$relkey}")?:[];
 		}
 		return call_user_func_array('array_merge',$values);
 	}
