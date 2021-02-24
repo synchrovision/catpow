@@ -72,9 +72,10 @@
 						}}
 					],
 					inputs:[
-						{label:'種別',values:{
+						{label:'種別',type:'buttons',values:{
 							normal:'なし',
 							required:'必須',
+							recommended:'推奨',
 							optional:'任意',
 							readonly:'固定'
 						}},

@@ -59,9 +59,10 @@ registerBlockType('catpow/simpletable', {
 						important: '重要',
 						caution: '注意'
 					} }],
-				inputs: [{ label: '種別', values: {
+				inputs: [{ label: '種別', type: 'buttons', values: {
 						normal: 'なし',
 						required: '必須',
+						recommended: '推奨',
 						optional: '任意',
 						readonly: '固定'
 					} }, 'cond']
