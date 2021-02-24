@@ -41,6 +41,7 @@ registerBlockType('catpow/div',{
 			{
 				label:'タイプ',
 				filter:'type',
+				type:'buttons',
 				values:['block','frame','columns'],
 				sub:{
 					frame:[
