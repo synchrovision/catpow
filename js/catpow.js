@@ -563,7 +563,7 @@ window.Catpow.UI=window.Catpow.UI || {};
 			};
 			conf=$(this).attr('data-config');
 			if(conf){prm=$.extend(prm_default,JSON.parse(conf));}
-			prm=Object.assign(prm_default,prm);
+			prm=$.extend(prm_default,prm);
 			crr=-1;
 			if($(this).is('.tab')){$thumb=$(this);}
 			else{$thumb=$(this).find('.thumb,.thumbnail');}
@@ -1148,12 +1148,12 @@ Catpow.util={
 		return Catpow.util.devices[Catpow.util.getDevice()];
 	},
 	requireStyles:function(styles){
-		styles.filter((href)=>{
+		styles.filter(function(href){
 			for(let i=0;i<document.styleSheets.length;i++){
 				if(document.styleSheets[i].href===href){return false;}
 			}
 			return true;
-		}).map((href)=>{
+		}).map(function(href){
 			const el=document.createElement('link');
 			el.setAttribute('rel','stylesheet');
 			el.setAttribute('href',href);
@@ -1166,9 +1166,9 @@ Catpow.util={
 		for(let i=0;i<document.scripts.length;i++){
 			scriptsFlag[document.scripts[i].src.split('?')[0]]=true;
 		}
-		jQuery.when.apply(null,scripts.filter((src)=>{
+		jQuery.when.apply(null,scripts.filter(function(src){
 			return !scriptsFlag[src];
-		}).map((src)=>{
+		}).map(function(src){
 			const dfr=new jQuery.Deferred();
 			const el=document.createElement('script');
 			el.setAttribute('type','text/javascript');
