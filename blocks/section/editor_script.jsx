@@ -28,7 +28,7 @@ registerBlockType('catpow/section',{
 
 		prefix:{source:'children',selector:'header div.prefix'},
 		title:{type:'array',source:'children',selector:'header h2,header .heading',default:['Title']},
-		read:{type:'array',source:'children',selector:'header p'},
+		lead:{type:'array',source:'children',selector:'header p,header .lead'},
 
 		headerImageMime:{source:'attribute',selector:'header .image [src]',attribute:'data-mime'},
 		headerImageSrc:{source:'attribute',selector:'header .image [src]',attribute:'src',default:cp.theme_url+'/images/dummy.jpg'},
@@ -70,7 +70,7 @@ registerBlockType('catpow/section',{
 	edit({attributes,className,setAttributes}){
         const {
 			SectionTag,HeadingTag,
-			id,classes,prefix,title,read,
+			id,classes,prefix,title,lead,
 			headerImageMime,headerImageSrc,headerImageSrcset,headerImageAlt,headerImageCode,
 			headerBackgroundImageCode,
 			imageMime,imageSrc,imageSrcset,imageAlt,imageCode,
@@ -122,7 +122,7 @@ registerBlockType('catpow/section',{
 								]}
 							]}
 						]},
-						{label:'リード',values:'hasRead'},
+						{label:'リード',values:'hasLead'},
 						{label:'背景画像',values:'hasBackgroundImage',sub:[
 							{input:'picture',label:'背景画像',keys:imageKeys.backgroundImage,devices},
 							{label:'薄く',values:'paleBG'}
@@ -166,7 +166,7 @@ registerBlockType('catpow/section',{
 								cond:(!states.isTemplate || !headerImageCode)
 							}
 						]},
-						{label:'リード',values:'hasRead'},
+						{label:'リード',values:'hasLead'},
 						{label:'背景画像',values:'hasBackgroundImage',sub:[
 							{input:'picture',keys:imageKeys.backgroundImage,devices,cond:(!states.isTemplate || !backgroundImageCode)},
 							{label:'薄く',values:'paleBG'}
@@ -284,7 +284,7 @@ registerBlockType('catpow/section',{
 							}
 							{states.hasPrefix && 
 								<div class="prefix">
-									<RichText tagName="div" value={prefix} onChange={(prefix)=>setAttributes({prefix:prefix})}/>
+									<RichText tagName="div" value={prefix} onChange={(prefix)=>setAttributes({prefix})}/>
 								</div>
 							}
 							{states.hasHeaderImage &&
@@ -302,10 +302,10 @@ registerBlockType('catpow/section',{
 								</div>
 							}
 							<HeadingTag className="heading">
-								<RichText tagName="div" value={title} onChange={(title)=>setAttributes({title:title})}/>
+								<RichText tagName="div" value={title} onChange={(title)=>setAttributes({title})}/>
 							</HeadingTag>
-							{states.hasRead && 
-								<p><RichText tagName="div" value={read} onChange={(read)=>setAttributes({read:read})}/></p>
+							{states.hasLead && 
+								<p className="lead"><RichText tagName="div" value={lead} onChange={(lead)=>setAttributes({lead})}/></p>
 							}
 						</div>
 						
@@ -380,7 +380,7 @@ registerBlockType('catpow/section',{
 	save({attributes,className,setAttributes}){
         const {
 			SectionTag,HeadingTag,
-			id,navIcon,classes,prefix,title,read,
+			id,navIcon,classes,prefix,title,lead,
 			headerImageSrc,headerImageSrcset,headerImageAlt,headerImageCode,
 			headerBackgroundImageCode,
 			imageSrc,imageSrcset,imageAlt,imageCode,
@@ -435,7 +435,7 @@ registerBlockType('catpow/section',{
 							<HeadingTag className="heading">
 								<RichText.Content value={title}/>
 							</HeadingTag>
-							{states.hasRead && <p><RichText.Content value={read}/></p>}
+							{states.hasLead && <p className="lead"><RichText.Content value={lead}/></p>}
 						</div>
 						{states.hasHeaderBackgroundImage &&
 							<div class="background">
