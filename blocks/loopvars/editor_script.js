@@ -14,8 +14,6 @@ registerBlockType('catpow/loopvars', {
 		    EditMode = _attributes$EditMode === undefined ? false : _attributes$EditMode;
 
 
-		console.log(columns);
-
 		return wp.element.createElement(
 			Fragment,
 			null,

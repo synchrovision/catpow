@@ -7,8 +7,6 @@
 	edit({attributes,setAttributes,className}){
         const {items,columns,EditMode=false}=attributes;
 		
-		console.log(columns);
-		
         return (
 			<Fragment>
 				<SelectModeToolbar
