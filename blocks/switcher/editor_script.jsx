@@ -5,7 +5,9 @@
 	category:'catpow-functional',
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected,clientId}){
+		const {useEffect,useRef}=wp.element;
 		const {currentIndex=0}=attributes;
+		const blocksToReplace=useRef([]);
 		const selectiveClasses=[
 			{
 				label:'ファクター',
@@ -37,10 +39,29 @@
 				label:'値',
 				input:'textarea',
 				key:'values',
-				cond:['schedule','current_user_can','user_value','input_value','content_value'].indexOf(attributes.factor) >-1
+				cond:['schedule','current_user_can','user_value','input_value','content_value'].indexOf(attributes.factor) >-1,
+				effect:(values)=>{
+					const editor=wp.data.dispatch('core/block-editor');
+					const blocks=wp.data.select('core/block-editor').getBlock(clientId).innerBlocks;
+					values=values.split("\n");
+					const newBlocks=values.map((cond,index)=>{
+						if(undefined === blocks[index]){
+							return wp.blocks.createBlock('catpow/switchercontent',{cond});
+						}
+						editor.updateBlockAttributes(blocks[index].clientId,{cond});
+						return blocks[index];
+					});
+					if(blocks.length!==values.lenght){blocksToReplace.current=newBlocks;}
+				}
 			}
 		];
 		const values=attributes.values.split("\n");
+		useEffect(()=>{
+			if(blocksToReplace.current.length>0){
+				wp.data.dispatch('core/block-editor').replaceInnerBlocks(clientId,blocksToReplace.current);
+				blocksToReplace.current=[];
+			}
+		},[currentIndex]);
         return (
 			<Fragment>
 				<div className="switcherEdit" data-current-index={currentIndex}>
@@ -54,8 +75,8 @@
 					</ul>
 					<div className="contents">
 						<InnerBlocks
-							template={values.map((cond)=>['catpow/switchercontent',{cond}])} 
-							templateLock='all'
+							template={values.map((cond)=>['catpow/switchercontent',{cond}])}
+							allowedBlocks={['catpow/switchercontent']}
 						/>
 					</div>
 				</div>
@@ -68,6 +89,7 @@
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
 						filters={CP.filters.switcher || {}}
+						initialOpen={true}
 					/>
 				</InspectorControls>
 			</Fragment>

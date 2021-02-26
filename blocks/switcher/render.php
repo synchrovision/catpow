@@ -26,7 +26,7 @@ switch($attr['factor']){
 	case 'user_value':
 		$cond_cb=function($value)use($attr){
 			$cond=new util\cond($attr['field'].' '.$attr['compare'].' '.$value);
-			return !empty(this()) || $cond->test_content(this()->user());
+			return !empty(this()) && $cond->test_content(this()->user());
 		};
 		break;
 	case 'input_value':
@@ -38,7 +38,7 @@ switch($attr['factor']){
 	case 'content_value':
 		$cond_cb=function($value)use($attr){
 			$cond=new util\cond($attr['field'].' '.$attr['compare'].' '.$value);
-			return !empty(this()) || $cond->test_content(this());
+			return !empty(this()) && $cond->test_content(this());
 		};
 		break;
 	default:return;

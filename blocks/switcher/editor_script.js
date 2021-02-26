@@ -10,9 +10,13 @@ registerBlockType('catpow/switcher', {
 		    setAttributes = _ref.setAttributes,
 		    isSelected = _ref.isSelected,
 		    clientId = _ref.clientId;
+		var _wp$element = wp.element,
+		    useEffect = _wp$element.useEffect,
+		    useRef = _wp$element.useRef;
 		var _attributes$currentIn = attributes.currentIndex,
 		    currentIndex = _attributes$currentIn === undefined ? 0 : _attributes$currentIn;
 
+		var blocksToReplace = useRef([]);
 		var selectiveClasses = [{
 			label: 'ファクター',
 			input: 'select',
@@ -40,9 +44,30 @@ registerBlockType('catpow/switcher', {
 			label: '値',
 			input: 'textarea',
 			key: 'values',
-			cond: ['schedule', 'current_user_can', 'user_value', 'input_value', 'content_value'].indexOf(attributes.factor) > -1
+			cond: ['schedule', 'current_user_can', 'user_value', 'input_value', 'content_value'].indexOf(attributes.factor) > -1,
+			effect: function effect(values) {
+				var editor = wp.data.dispatch('core/block-editor');
+				var blocks = wp.data.select('core/block-editor').getBlock(clientId).innerBlocks;
+				values = values.split("\n");
+				var newBlocks = values.map(function (cond, index) {
+					if (undefined === blocks[index]) {
+						return wp.blocks.createBlock('catpow/switchercontent', { cond: cond });
+					}
+					editor.updateBlockAttributes(blocks[index].clientId, { cond: cond });
+					return blocks[index];
+				});
+				if (blocks.length !== values.lenght) {
+					blocksToReplace.current = newBlocks;
+				}
+			}
 		}];
 		var values = attributes.values.split("\n");
+		useEffect(function () {
+			if (blocksToReplace.current.length > 0) {
+				wp.data.dispatch('core/block-editor').replaceInnerBlocks(clientId, blocksToReplace.current);
+				blocksToReplace.current = [];
+			}
+		}, [currentIndex]);
 		return wp.element.createElement(
 			Fragment,
 			null,
@@ -72,7 +97,7 @@ registerBlockType('catpow/switcher', {
 						template: values.map(function (cond) {
 							return ['catpow/switchercontent', { cond: cond }];
 						}),
-						templateLock: 'all'
+						allowedBlocks: ['catpow/switchercontent']
 					})
 				)
 			),
@@ -86,7 +111,8 @@ registerBlockType('catpow/switcher', {
 					set: setAttributes,
 					attr: attributes,
 					selectiveClasses: selectiveClasses,
-					filters: CP.filters.switcher || {}
+					filters: CP.filters.switcher || {},
+					initialOpen: true
 				})
 			)
 		);
