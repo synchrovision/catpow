@@ -33,6 +33,11 @@ class select_rel_posts extends meta{
 						'<a class="post_link %s" href="%s">%s</a>',
 						[get_post_type($val),get_permalink($val),get_the_title($val)]
 					);
+				case 'tag':
+					return vsprintf(
+						'<a class="tag %s" href="%s">%s</a>',
+						[implode(' ',get_post_meta($val,'post_class')?:[]),get_permalink($val),get_the_title($val)]
+					);
 				case 'url':
 					return get_permalink($val);
 				default:
