@@ -41,6 +41,75 @@ class CSV{
 			}
 		}
 	}
+	public function is_flat(){
+		foreach($this->data as $row){
+			foreach($row as $val){
+				if(is_array($val)){return false;}
+			}
+		}
+		return true;
+	}
+	public function is_flatten(){
+		foreach(reset($this->data) as $key){
+			if(strpos($key,'/')!==false){return true;}
+		}
+		return false;
+	}
+	public function flatten(){
+		if($this->is_flat()){return $this;}
+		$flatten_datas=[];
+		foreach($this->select() as $data){
+			$flatten_datas[]=self::flatten_data($data);
+		}
+		$data_template=self::flatten_data(self::unflatten_data(call_user_func_array('array_merge',$flatten_datas)));
+		foreach($data_template as $key=>$val){$data_template[$key]='';}
+		$this->data=[array_keys($data_template)];
+		foreach($flatten_datas as $data){
+			$this->data[]=array_values(array_merge($data_template,$data));
+		}
+		return $this;
+	}
+	public static function flatten_data($data){
+		$flatten_data=[];
+		foreach($data as $key=>$val){
+			if(is_array($val)){
+				$val=self::flatten_data($val);
+				foreach($val as $k=>$v){
+					$flatten_data[$key.'/'.$k]=$v;
+				}
+			}
+			else{
+				$flatten_data[$key]=[$val];
+			}
+		}
+		return $flatten_data;
+	}
+	public function unflatten(){
+		if(!$this->is_flatten()){return $this;}
+		$unflatten_datas=[];
+		foreach($this->select() as $data){
+			$unflatten_datas[]=self::unflatten_data($data);
+		}
+		$data_template=[];
+		foreach($unflatten_datas[0] as $key=>$val){$data_template[$key]='';}
+		$this->data=[array_keys($data_template)];
+		foreach($unflatten_datas as $data){
+			$this->data[]=array_values(array_merge($data_template,$data));
+		}
+		return $this;
+	}
+	public static function unflatten_data($data){
+		$unflatten_data=[];
+		foreach($data as $key=>$val){
+			if(strpos($key,'/')!==false){
+				eval('$unflatten_data[\''.str_replace(["'",'/'],["\'","']['"],$key).'\']=$val;');
+			}
+			else{
+				$unflatten_data[$key]=$val;
+			}
+		}
+		return $unflatten_data;
+	}
 	
 	public static function loop($csv,$where=[]){
 		$c=new self($csv);
