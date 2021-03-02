@@ -732,7 +732,44 @@ var CP = {
 		}
 	},
 
+	/*richtext helper*/
+	getSelecedFormatElement: function getSelecedFormatElement() {
+		var sel = window.getSelection();
+		if (!sel.rangeCount) return null;
+		var con = sel.getRangeAt(0).startContainer;
+		return con.nextElementSibling || con.parentElement;
+	},
+
 	/*compornents*/
+	SelectThemeColor: function SelectThemeColor(props) {
+		var selected = props.selected,
+		    onChange = props.onChange;
+
+
+		var items = Array.from(Array(13), function (v, i) {
+			var classes = 'fillColor' + i;
+			var value = 'color' + i;
+			if (value == selected) {
+				classes += ' active';
+			}
+			return wp.element.createElement(
+				'li',
+				{
+					className: classes,
+					onClick: function onClick() {
+						return onChange(value);
+					}
+				},
+				' '
+			);
+		});
+
+		return wp.element.createElement(
+			'ul',
+			{ 'class': 'selectColor' },
+			items
+		);
+	},
 	SelectColors: function SelectColors(props) {
 		var _wp$element = wp.element,
 		    useState = _wp$element.useState,
@@ -2182,37 +2219,16 @@ var VerticalAlignClassToolbar = function VerticalAlignClassToolbar(props) {
 };
 var SelectColorClass = function SelectColorClass(props) {
 	var label = props.label,
-	    help = props.help,
-	    selected = props.selected,
-	    onChange = props.onChange;
+	    help = props.help;
 
-
-	var items = Array.from(Array(13), function (v, i) {
-		var classes = 'fillColor' + i;
-		var value = 'color' + i;
-		if (value == selected) {
-			classes += ' active';
-		}
-		return wp.element.createElement(
-			'li',
-			{
-				className: classes,
-				onClick: function onClick() {
-					return onChange(value);
-				}
-			},
-			' '
-		);
-	});
 
 	return wp.element.createElement(
 		BaseControl,
 		{ label: label, help: help },
-		wp.element.createElement(
-			'ul',
-			{ 'class': 'selectColor' },
-			items
-		)
+		wp.element.createElement(CP.SelectThemeColor, {
+			onChange: props.onChange,
+			selected: props.selected
+		})
 	);
 };
 var SelectPatternClass = function SelectPatternClass(props) {

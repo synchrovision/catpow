@@ -499,7 +499,34 @@
 		}
 	},
 	
+	/*richtext helper*/
+	getSelecedFormatElement:()=>{
+		const sel=window.getSelection();
+		if(!sel.rangeCount)return null;
+		const con=sel.getRangeAt(0).startContainer;
+		return con.nextElementSibling || con.parentElement;
+	},
+	
 	/*compornents*/
+	SelectThemeColor:(props)=>{
+		const {selected,onChange}=props;
+
+		var items=Array.from(Array(13),(v,i)=>{
+			var classes='fillColor'+i;
+			const value='color'+i;
+			if(value==selected){classes+=' active';}
+			return (
+				<li
+					className={classes}
+					onClick={()=>onChange(value)}
+				> </li>
+			);
+		});
+
+		return (
+			<ul class="selectColor">{items}</ul>
+		);
+	},
 	SelectColors:(props)=>{
 		const {useState,useRef}=wp.element;
 		const {ColorPicker,ColorPalette,Popover}=wp.components;
@@ -1677,23 +1704,14 @@ const VerticalAlignClassToolbar=(props)=>{
 	);
 }
 const SelectColorClass=(props)=>{
-	const {label,help,selected,onChange}=props;
-	
-	var items=Array.from(Array(13),(v,i)=>{
-		var classes='fillColor'+i;
-		const value='color'+i;
-		if(value==selected){classes+=' active';}
-		return (
-			<li
-				className={classes}
-				onClick={()=>onChange(value)}
-			> </li>
-		);
-	});
+	const {label,help}=props;
 	
 	return (
 		<BaseControl label={label} help={help}>
-			<ul class="selectColor">{items}</ul>
+			<CP.SelectThemeColor
+				onChange={props.onChange}
+				selected={props.selected}
+			/>
 		</BaseControl>
 	);
 }
