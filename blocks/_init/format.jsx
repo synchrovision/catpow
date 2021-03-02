@@ -87,13 +87,95 @@ registerFormatType('catpow/small',{
 	}
 });
 
+
+registerFormatType('catpow/title',{
+	title:'Title',
+	tagName:'span',
+	className:'ititle',
+	attributes:{
+		type:'class'
+	},
+	edit(props){
+		const {isActive,value,onChange,activeAttributes}=props;
+		const {Popover,Card,CardBody}=wp.components;
+		const {useMemo,useCallback}=wp.element;
+		const {applyFormat}=wp.richText;
+		
+		const onToggle=()=>{
+			return onChange(toggleFormat(value,{type:'catpow/title',attributes:{type:'iheader'}}));
+		}
+		const el=useMemo(CP.getSelecedFormatElement,[isActive,value.start,value.end]);
+		const setAttributes=useCallback((attr)=>{
+			onChange(applyFormat(value,{type:'catpow/title',attributes:Object.assign(activeAttributes,attr)}));
+		},[value,activeAttributes]);
+		
+		const icon=(
+			<svg role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
+				<g>
+					<path d="M6.9,15.9V2.6h2.7v5.2h5.3V2.6h2.7v13.3h-2.7v-5.8H9.6v5.8H6.9z"/>
+				</g>
+				<rect x="1" y="1" width="4" height="18"/>
+				<rect x="5" y="18" width="14" height="1"/>
+			</svg>
+		);
+		
+		return [
+			<Fragment>
+				{isActive && (
+					<Popover getAnchorRect={()=>el.getBoundingClientRect()} position='bottom left' focusOnMount={false}>
+						<Card size="small">
+							<CardBody>
+								<CP.SelectButtons
+									options={[
+										{label:'header',value:'iheader'},
+										{label:'headline',value:'iheadline'},
+										{label:'catch',value:'icatch'}
+									]}
+									selected={activeAttributes['type']}
+									onChange={(type)=>setAttributes({type})}
+								/>
+							</CardBody>
+						</Card>
+					</Popover>
+				)}
+				<BlockControls>
+					<Toolbar
+						controls={[
+							{icon,onClick:onToggle,isActive}
+						]}
+					/>
+				</BlockControls>
+				<RichTextToolbarButton
+					icon={icon}
+					title={'Title'}
+					onClick={onToggle}
+					isActive={isActive}
+				/>
+			</Fragment>
+		];
+	}
+});
 registerFormatType('catpow/mark',{
 	title:'Mark',
 	tagName:'mark',
-	className:null,
-	edit({isActive,value,onChange}){
-		const onToggle=()=>onChange(toggleFormat(value,{type:'catpow/mark'}))
-
+	className:'mark',
+	attributes:{
+		color:'class'
+	},
+	edit(props){
+		const {isActive,value,onChange,activeAttributes}=props;
+		const {Popover,Card,CardBody}=wp.components;
+		const {useMemo,useCallback}=wp.element;
+		const {applyFormat}=wp.richText;
+		
+		const onToggle=()=>{
+			return onChange(toggleFormat(value,{type:'catpow/mark',attributes:{color:'color0'}}));
+		}
+		const el=useMemo(CP.getSelecedFormatElement,[isActive,value.start,value.end]);
+		const setAttributes=useCallback((attr)=>{
+			onChange(applyFormat(value,{type:'catpow/mark',attributes:Object.assign(activeAttributes,attr)}));
+		},[value,activeAttributes]);
+		
 		const icon=(
 			<svg role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
 				<polygon points="7.9,10.8 12.1,10.8 10,5.3 	"/>
@@ -103,66 +185,90 @@ registerFormatType('catpow/mark',{
 		
 		return [
 			<Fragment>
-				<RichTextShortcut
-					type={'primary'}
-					character={'m'}
-					onUse={onToggle}
-				/>
+				{isActive && (
+					<Popover getAnchorRect={()=>el.getBoundingClientRect()} position='bottom center' focusOnMount={false}>
+						<Card size="small">
+							<CardBody>
+								<CP.SelectThemeColor
+									onChange={(color)=>setAttributes({color})}
+									selected={activeAttributes['color']}
+								/>
+							</CardBody>
+						</Card>
+					</Popover>
+				)}
+				<BlockControls>
+					<Toolbar
+						controls={[
+							{icon,onClick:onToggle,isActive}
+						]}
+					/>
+				</BlockControls>
 				<RichTextToolbarButton
 					icon={icon}
 					title={'Mark'}
 					onClick={onToggle}
 					isActive={isActive}
-					shortcutType={'primary'}
-					shortcutCharacter={'m'}
 				/>
 			</Fragment>
 		];
 	}
 });
-registerFormatType('catpow/q',{
-	title:'Quote',
-	tagName:'q',
-	className:null,
-	edit({isActive,value,onChange}){
-		const onToggle=()=>onChange(toggleFormat(value,{type:'catpow/q'}))
-
+registerFormatType('catpow/large',{
+	title:'Large',
+	tagName:'strong',
+	className:'large',
+	attributes:{
+		color:'class'
+	},
+	edit(props){
+		const {isActive,value,onChange,activeAttributes}=props;
+		const {Popover,Card,CardBody}=wp.components;
+		const {useMemo,useCallback}=wp.element;
+		const {applyFormat}=wp.richText;
+		
+		const onToggle=()=>{
+			return onChange(toggleFormat(value,{type:'catpow/large',attributes:{color:'color0'}}));
+		}
+		const el=useMemo(CP.getSelecedFormatElement,[isActive,value.start,value.end]);
+		const setAttributes=useCallback((attr)=>{
+			onChange(applyFormat(value,{type:'catpow/large',attributes:Object.assign(activeAttributes,attr)}));
+		},[value,activeAttributes]);
+		
 		const icon=(
 			<svg role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
-				<path d="M0.8,17V9.6c0-5.7,4.6-6.1,7.5-6.2v3.1c-3.6,0.1-3.6,1.6-3.6,3h3.6V17H0.8z M11.4,17V9.6c0-5.8,4.6-6.1,7.4-6.2v3.1
-		c-3.6,0.1-3.6,1.6-3.6,3h3.6V17H11.4z"/>
+				<path d="M4.8,0.5h5c1.6,0,2.8,0.1,3.6,0.4c0.8,0.2,1.5,0.7,2,1.5c0.5,0.8,0.8,2,0.8,3.6c0,1.1-0.2,1.9-0.5,2.4
+		c-0.4,0.4-1.1,0.8-2.1,1c1.2,0.3,1.9,0.7,2.4,1.3c0.4,0.6,0.6,1.5,0.6,2.8v1.8c0,1.3-0.1,2.3-0.4,2.9c-0.3,0.6-0.8,1.1-1.4,1.3
+		c-0.7,0.2-2,0.3-4,0.3H4.8V0.5z M9.8,3.8v4.3c0.2,0,0.4,0,0.5,0c0.5,0,0.8-0.1,0.9-0.4c0.1-0.2,0.2-0.9,0.2-2.1
+		c0-0.6-0.1-1-0.2-1.3s-0.3-0.4-0.4-0.5C10.7,3.8,10.4,3.8,9.8,3.8z M9.8,11.1v5.4c0.7,0,1.2-0.1,1.4-0.3c0.2-0.2,0.3-0.7,0.3-1.5
+		v-1.8c0-0.8-0.1-1.3-0.3-1.5C11.1,11.2,10.6,11.1,9.8,11.1z"/>
 			</svg>
 		);
 		
 		return [
 			<Fragment>
+				{isActive && (
+					<Popover getAnchorRect={()=>el.getBoundingClientRect()} position='bottom center' focusOnMount={false}>
+						<Card size="small">
+							<CardBody>
+								<CP.SelectThemeColor
+									onChange={(color)=>setAttributes({color})}
+									selected={activeAttributes['color']}
+								/>
+							</CardBody>
+						</Card>
+					</Popover>
+				)}
+				<BlockControls>
+					<Toolbar
+						controls={[
+							{icon,onClick:onToggle,isActive}
+						]}
+					/>
+				</BlockControls>
 				<RichTextToolbarButton
 					icon={icon}
-					title={'Quote'}
-					onClick={onToggle}
-					isActive={isActive}
-				/>
-			</Fragment>
-		];
-	}
-});
-registerFormatType('catpow/dfn',{
-	title:'Define',
-	tagName:'dfn',
-	className:null,
-	edit({isActive,value,onChange}){
-		const onToggle=()=>onChange(toggleFormat(value,{type:'catpow/dfn'}))
-		const icon=(
-			<svg role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
-				<path d="M11.6,1.6v3.7H8V1.6H11.6z M11.6,14.7v3.7H8v-3.7H11.6z"/>
-			</svg>
-		);
-
-		return [
-			<Fragment>
-				<RichTextToolbarButton
-					icon={icon}
-					title={'Define'}
+					title={'Large'}
 					onClick={onToggle}
 					isActive={isActive}
 				/>
@@ -171,30 +277,61 @@ registerFormatType('catpow/dfn',{
 	}
 });
 
-registerFormatType('catpow/span',{
-	title:'span',
-	tagName:'span',
-	className:'custom',
-	edit({isActive,value,onChange}){
+registerFormatType('catpow/tag',{
+	title:'tag',
+	tagName:'a',
+	className:'tag',
+	attributes:{
+		url:'href',
+		color:'class'
+	},
+	edit(props){
+		const {isActive,value,onChange,onFocus,activeAttributes,activeObject}=props;
+		const {Popover,BaseControle,TextControl,Card,CardBody}=wp.components;
+		const {useState,useMemo,useCallback}=wp.element;
+		const {removeFormat,applyFormat,insert,create,slice}=wp.richText;
 		
 		const onToggle=()=>{
-			const {removeFormat,insert,create,slice}=wp.richText;
-			if(isActive){onChange(toggleFormat(value,{type:'catpow/span'}));}
-			let cls=prompt(__('クラスを入力'));
-			
-			return onChange(insert(
-				value,
-				create({html:'<span class="'+cls+'">'+slice(value).text+'</span>'}),
-				value.start,
-				value.end
-			));
+			return onChange(toggleFormat(value,{type:'catpow/tag',attributes:{class:'color0'}}));
 		}
+		const el=useMemo(CP.getSelecedFormatElement,[isActive,value.start,value.end]);
+		const setAttributes=useCallback((attr)=>{
+			onChange(applyFormat(value,{type:'catpow/tag',attributes:Object.assign(activeAttributes,attr)}));
+		},[value,activeAttributes]);
 
 		return [
 			<Fragment>
+				{isActive && (
+					<Popover getAnchorRect={()=>el.getBoundingClientRect()} position='bottom center' focusOnMount={false}>
+						<Card>
+							<CardBody>
+								<TextControl
+									label='URL'
+									value={activeAttributes['url']}
+									onChange={(url)=>setAttributes({url})}
+								/>
+							</CardBody>
+						</Card>
+						<Card size="small">
+							<CardBody>
+								<CP.SelectThemeColor
+									onChange={(color)=>setAttributes({color})}
+									selected={activeAttributes['color']}
+								/>
+							</CardBody>
+						</Card>
+					</Popover>
+				)}
+				<BlockControls>
+					<Toolbar
+						controls={[
+							{icon:'tag',onClick:onToggle,isActive}
+						]}
+					/>
+				</BlockControls>
 				<RichTextToolbarButton
-					icon={'editor-code'}
-					title={'span'}
+					icon={'tag'}
+					title={'tag'}
 					onClick={onToggle}
 					isActive={isActive}
 				/>
@@ -202,156 +339,6 @@ registerFormatType('catpow/span',{
 		];
 	}
 });
-
-
-const currentBlockCanInsertBlockFormat=()=>{
-	var atts=wp.data.select('core/block-editor').getSelectedBlock().attributes;
-	return atts.blockState && atts.blockState.enableBlockFormat;
-};
-
-
-registerFormatType('catpow/ul',{
-	title:'ul',
-	tagName:'ul',
-	className:null,
-	edit({isActive,value,onChange}){
-		if(!currentBlockCanInsertBlockFormat()){return '';}
-		const onToggle=()=>{
-			const {removeFormat,insert,create,slice}=wp.richText;
-			if(isActive){
-				return onChange(create({html:value.text}));
-			}
-			const marks={
-				'*':'annotation',
-				'※':'annotation',
-				'！':'caution',
-				'!':'caution',
-				'●':'circle',
-				'・':'circle',
-				'■':'square',
-				'★':'star',
-				'▶︎':'caret',
-			};
-			var str=slice(value).text;
-			
-			if(cls=marks[str[0]]){
-				rsl=str.substring(1).split("\n"+str[0]);
-			}
-			else{
-				rsl=str.split("\n");
-			}
-			
-			return onChange(insert(
-				value,
-				create({html:'<ul class="'+cls+'"><li>'+rsl.join('</li> <li>')+'</li></ul>'}),
-				value.start,
-				value.end
-			));
-		}
-		
-
-		return [
-			<Fragment>
-				<RichTextToolbarButton
-					icon={'editor-ul'}
-					title={'ul'}
-					onClick={onToggle}
-					isActive={isActive}
-				/>
-			</Fragment>
-		];
-	}
-});
-registerFormatType('catpow/ol',{
-	title:'ol',
-	tagName:'ol',
-	className:null,
-	edit({isActive,value,onChange}){
-		if(!currentBlockCanInsertBlockFormat()){return '';}
-		const onToggle=()=>{
-			const {removeFormat,insert,create,slice}=wp.richText;
-			if(isActive){
-				return onChange(insert(
-					value,
-					create({html:slice(value).text}),
-					value.start,
-					value.end
-				));
-			}
-			return onChange(insert(
-				value,
-				create({html:'<ol><li>'+slice(value).text.split("\n").join('</li> <li>')+'</li></ol>'}),
-				value.start,
-				value.end
-			));
-		}
-		
-
-		return [
-			<Fragment>
-				<RichTextToolbarButton
-					icon={'editor-ol'}
-					title={'ol'}
-					onClick={onToggle}
-					isActive={isActive}
-				/>
-			</Fragment>
-		];
-	}
-});
-registerFormatType('catpow/li',{
-	title:'li',
-	tagName:'li',
-	className:null
-});
-
-registerFormatType('catpow/dl',{
-	title:'dl',
-	tagName:'dl',
-	className:null,
-	edit({isActive,value,onChange}){
-		if(!currentBlockCanInsertBlockFormat()){return '';}
-		const onToggle=()=>{
-			const {removeFormat,insert,create,slice}=wp.richText;
-			if(isActive){
-				return onChange(create({html:value.text}));
-			}
-			
-			return onChange(insert(
-				value,
-				create({html:'<dl>'+slice(value).text.split("\n").map((str)=>{
-					if(!/[:：]/.test(str)){return '<dd>'+str+'</dd>';}
-					return str.replace(/^(.+?)[:：](.+)$/,'<dt>$1</dt><dd>$2</dd>');
-				}).join('')+'</dl>'}),
-				value.start,
-				value.end
-			));
-		}
-		
-
-		return [
-			<Fragment>
-				<RichTextToolbarButton
-					icon={'editor-ul'}
-					title={'dl'}
-					onClick={onToggle}
-					isActive={isActive}
-				/>
-			</Fragment>
-		];
-	}
-});
-registerFormatType('catpow/dt',{
-	title:'dt',
-	tagName:'dt',
-	className:null
-});
-registerFormatType('catpow/dd',{
-	title:'dd',
-	tagName:'dd',
-	className:null
-});
-
 
 registerFormatType('catpow/clear',{
 	title:'clear',

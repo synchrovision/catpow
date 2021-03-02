@@ -91,18 +91,117 @@ registerFormatType('catpow/small', {
 	}
 });
 
+registerFormatType('catpow/title', {
+	title: 'Title',
+	tagName: 'span',
+	className: 'ititle',
+	attributes: {
+		type: 'class'
+	},
+	edit: function edit(props) {
+		var isActive = props.isActive,
+		    value = props.value,
+		    onChange = props.onChange,
+		    activeAttributes = props.activeAttributes;
+		var _wp$components = wp.components,
+		    Popover = _wp$components.Popover,
+		    Card = _wp$components.Card,
+		    CardBody = _wp$components.CardBody;
+		var _wp$element = wp.element,
+		    useMemo = _wp$element.useMemo,
+		    useCallback = _wp$element.useCallback;
+		var applyFormat = wp.richText.applyFormat;
+
+
+		var onToggle = function onToggle() {
+			return onChange(toggleFormat(value, { type: 'catpow/title', attributes: { type: 'iheader' } }));
+		};
+		var el = useMemo(CP.getSelecedFormatElement, [isActive, value.start, value.end]);
+		var setAttributes = useCallback(function (attr) {
+			onChange(applyFormat(value, { type: 'catpow/title', attributes: Object.assign(activeAttributes, attr) }));
+		}, [value, activeAttributes]);
+
+		var icon = wp.element.createElement(
+			'svg',
+			{ role: 'img', focusable: 'false', xmlns: 'http://www.w3.org/2000/svg', width: '20', height: '20', viewBox: '0 0 20 20', 'aria-hidden': 'true' },
+			wp.element.createElement(
+				'g',
+				null,
+				wp.element.createElement('path', { d: 'M6.9,15.9V2.6h2.7v5.2h5.3V2.6h2.7v13.3h-2.7v-5.8H9.6v5.8H6.9z' })
+			),
+			wp.element.createElement('rect', { x: '1', y: '1', width: '4', height: '18' }),
+			wp.element.createElement('rect', { x: '5', y: '18', width: '14', height: '1' })
+		);
+
+		return [wp.element.createElement(
+			Fragment,
+			null,
+			isActive && wp.element.createElement(
+				Popover,
+				{ getAnchorRect: function getAnchorRect() {
+						return el.getBoundingClientRect();
+					}, position: 'bottom left', focusOnMount: false },
+				wp.element.createElement(
+					Card,
+					{ size: 'small' },
+					wp.element.createElement(
+						CardBody,
+						null,
+						wp.element.createElement(CP.SelectButtons, {
+							options: [{ label: 'header', value: 'iheader' }, { label: 'headline', value: 'iheadline' }, { label: 'catch', value: 'icatch' }],
+							selected: activeAttributes['type'],
+							onChange: function onChange(type) {
+								return setAttributes({ type: type });
+							}
+						})
+					)
+				)
+			),
+			wp.element.createElement(
+				BlockControls,
+				null,
+				wp.element.createElement(Toolbar, {
+					controls: [{ icon: icon, onClick: onToggle, isActive: isActive }]
+				})
+			),
+			wp.element.createElement(RichTextToolbarButton, {
+				icon: icon,
+				title: 'Title',
+				onClick: onToggle,
+				isActive: isActive
+			})
+		)];
+	}
+});
 registerFormatType('catpow/mark', {
 	title: 'Mark',
 	tagName: 'mark',
-	className: null,
-	edit: function edit(_ref3) {
-		var isActive = _ref3.isActive,
-		    value = _ref3.value,
-		    onChange = _ref3.onChange;
+	className: 'mark',
+	attributes: {
+		color: 'class'
+	},
+	edit: function edit(props) {
+		var isActive = props.isActive,
+		    value = props.value,
+		    onChange = props.onChange,
+		    activeAttributes = props.activeAttributes;
+		var _wp$components2 = wp.components,
+		    Popover = _wp$components2.Popover,
+		    Card = _wp$components2.Card,
+		    CardBody = _wp$components2.CardBody;
+		var _wp$element2 = wp.element,
+		    useMemo = _wp$element2.useMemo,
+		    useCallback = _wp$element2.useCallback;
+		var applyFormat = wp.richText.applyFormat;
+
 
 		var onToggle = function onToggle() {
-			return onChange(toggleFormat(value, { type: 'catpow/mark' }));
+			return onChange(toggleFormat(value, { type: 'catpow/mark', attributes: { color: 'color0' } }));
 		};
+		var el = useMemo(CP.getSelecedFormatElement, [isActive, value.start, value.end]);
+		var setAttributes = useCallback(function (attr) {
+			onChange(applyFormat(value, { type: 'catpow/mark', attributes: Object.assign(activeAttributes, attr) }));
+		}, [value, activeAttributes]);
 
 		var icon = wp.element.createElement(
 			'svg',
@@ -114,288 +213,222 @@ registerFormatType('catpow/mark', {
 		return [wp.element.createElement(
 			Fragment,
 			null,
-			wp.element.createElement(RichTextShortcut, {
-				type: 'primary',
-				character: 'm',
-				onUse: onToggle
-			}),
+			isActive && wp.element.createElement(
+				Popover,
+				{ getAnchorRect: function getAnchorRect() {
+						return el.getBoundingClientRect();
+					}, position: 'bottom center', focusOnMount: false },
+				wp.element.createElement(
+					Card,
+					{ size: 'small' },
+					wp.element.createElement(
+						CardBody,
+						null,
+						wp.element.createElement(CP.SelectThemeColor, {
+							onChange: function onChange(color) {
+								return setAttributes({ color: color });
+							},
+							selected: activeAttributes['color']
+						})
+					)
+				)
+			),
+			wp.element.createElement(
+				BlockControls,
+				null,
+				wp.element.createElement(Toolbar, {
+					controls: [{ icon: icon, onClick: onToggle, isActive: isActive }]
+				})
+			),
 			wp.element.createElement(RichTextToolbarButton, {
 				icon: icon,
 				title: 'Mark',
 				onClick: onToggle,
-				isActive: isActive,
-				shortcutType: 'primary',
-				shortcutCharacter: 'm'
+				isActive: isActive
 			})
 		)];
 	}
 });
-registerFormatType('catpow/q', {
-	title: 'Quote',
-	tagName: 'q',
-	className: null,
-	edit: function edit(_ref4) {
-		var isActive = _ref4.isActive,
-		    value = _ref4.value,
-		    onChange = _ref4.onChange;
+registerFormatType('catpow/large', {
+	title: 'Large',
+	tagName: 'strong',
+	className: 'large',
+	attributes: {
+		color: 'class'
+	},
+	edit: function edit(props) {
+		var isActive = props.isActive,
+		    value = props.value,
+		    onChange = props.onChange,
+		    activeAttributes = props.activeAttributes;
+		var _wp$components3 = wp.components,
+		    Popover = _wp$components3.Popover,
+		    Card = _wp$components3.Card,
+		    CardBody = _wp$components3.CardBody;
+		var _wp$element3 = wp.element,
+		    useMemo = _wp$element3.useMemo,
+		    useCallback = _wp$element3.useCallback;
+		var applyFormat = wp.richText.applyFormat;
+
 
 		var onToggle = function onToggle() {
-			return onChange(toggleFormat(value, { type: 'catpow/q' }));
+			return onChange(toggleFormat(value, { type: 'catpow/large', attributes: { color: 'color0' } }));
 		};
+		var el = useMemo(CP.getSelecedFormatElement, [isActive, value.start, value.end]);
+		var setAttributes = useCallback(function (attr) {
+			onChange(applyFormat(value, { type: 'catpow/large', attributes: Object.assign(activeAttributes, attr) }));
+		}, [value, activeAttributes]);
 
 		var icon = wp.element.createElement(
 			'svg',
 			{ role: 'img', focusable: 'false', xmlns: 'http://www.w3.org/2000/svg', width: '20', height: '20', viewBox: '0 0 20 20', 'aria-hidden': 'true' },
-			wp.element.createElement('path', { d: 'M0.8,17V9.6c0-5.7,4.6-6.1,7.5-6.2v3.1c-3.6,0.1-3.6,1.6-3.6,3h3.6V17H0.8z M11.4,17V9.6c0-5.8,4.6-6.1,7.4-6.2v3.1 c-3.6,0.1-3.6,1.6-3.6,3h3.6V17H11.4z' })
+			wp.element.createElement('path', { d: 'M4.8,0.5h5c1.6,0,2.8,0.1,3.6,0.4c0.8,0.2,1.5,0.7,2,1.5c0.5,0.8,0.8,2,0.8,3.6c0,1.1-0.2,1.9-0.5,2.4 c-0.4,0.4-1.1,0.8-2.1,1c1.2,0.3,1.9,0.7,2.4,1.3c0.4,0.6,0.6,1.5,0.6,2.8v1.8c0,1.3-0.1,2.3-0.4,2.9c-0.3,0.6-0.8,1.1-1.4,1.3 c-0.7,0.2-2,0.3-4,0.3H4.8V0.5z M9.8,3.8v4.3c0.2,0,0.4,0,0.5,0c0.5,0,0.8-0.1,0.9-0.4c0.1-0.2,0.2-0.9,0.2-2.1 c0-0.6-0.1-1-0.2-1.3s-0.3-0.4-0.4-0.5C10.7,3.8,10.4,3.8,9.8,3.8z M9.8,11.1v5.4c0.7,0,1.2-0.1,1.4-0.3c0.2-0.2,0.3-0.7,0.3-1.5 v-1.8c0-0.8-0.1-1.3-0.3-1.5C11.1,11.2,10.6,11.1,9.8,11.1z' })
 		);
 
 		return [wp.element.createElement(
 			Fragment,
 			null,
+			isActive && wp.element.createElement(
+				Popover,
+				{ getAnchorRect: function getAnchorRect() {
+						return el.getBoundingClientRect();
+					}, position: 'bottom center', focusOnMount: false },
+				wp.element.createElement(
+					Card,
+					{ size: 'small' },
+					wp.element.createElement(
+						CardBody,
+						null,
+						wp.element.createElement(CP.SelectThemeColor, {
+							onChange: function onChange(color) {
+								return setAttributes({ color: color });
+							},
+							selected: activeAttributes['color']
+						})
+					)
+				)
+			),
+			wp.element.createElement(
+				BlockControls,
+				null,
+				wp.element.createElement(Toolbar, {
+					controls: [{ icon: icon, onClick: onToggle, isActive: isActive }]
+				})
+			),
 			wp.element.createElement(RichTextToolbarButton, {
 				icon: icon,
-				title: 'Quote',
+				title: 'Large',
 				onClick: onToggle,
 				isActive: isActive
 			})
 		)];
 	}
 });
-registerFormatType('catpow/dfn', {
-	title: 'Define',
-	tagName: 'dfn',
-	className: null,
-	edit: function edit(_ref5) {
-		var isActive = _ref5.isActive,
-		    value = _ref5.value,
-		    onChange = _ref5.onChange;
+
+registerFormatType('catpow/tag', {
+	title: 'tag',
+	tagName: 'a',
+	className: 'tag',
+	attributes: {
+		url: 'href',
+		color: 'class'
+	},
+	edit: function edit(props) {
+		var isActive = props.isActive,
+		    value = props.value,
+		    onChange = props.onChange,
+		    onFocus = props.onFocus,
+		    activeAttributes = props.activeAttributes,
+		    activeObject = props.activeObject;
+		var _wp$components4 = wp.components,
+		    Popover = _wp$components4.Popover,
+		    BaseControle = _wp$components4.BaseControle,
+		    TextControl = _wp$components4.TextControl,
+		    Card = _wp$components4.Card,
+		    CardBody = _wp$components4.CardBody;
+		var _wp$element4 = wp.element,
+		    useState = _wp$element4.useState,
+		    useMemo = _wp$element4.useMemo,
+		    useCallback = _wp$element4.useCallback;
+		var _wp$richText = wp.richText,
+		    removeFormat = _wp$richText.removeFormat,
+		    applyFormat = _wp$richText.applyFormat,
+		    insert = _wp$richText.insert,
+		    create = _wp$richText.create,
+		    slice = _wp$richText.slice;
+
 
 		var onToggle = function onToggle() {
-			return onChange(toggleFormat(value, { type: 'catpow/dfn' }));
+			return onChange(toggleFormat(value, { type: 'catpow/tag', attributes: { class: 'color0' } }));
 		};
-		var icon = wp.element.createElement(
-			'svg',
-			{ role: 'img', focusable: 'false', xmlns: 'http://www.w3.org/2000/svg', width: '20', height: '20', viewBox: '0 0 20 20', 'aria-hidden': 'true' },
-			wp.element.createElement('path', { d: 'M11.6,1.6v3.7H8V1.6H11.6z M11.6,14.7v3.7H8v-3.7H11.6z' })
-		);
+		var el = useMemo(CP.getSelecedFormatElement, [isActive, value.start, value.end]);
+		var setAttributes = useCallback(function (attr) {
+			onChange(applyFormat(value, { type: 'catpow/tag', attributes: Object.assign(activeAttributes, attr) }));
+		}, [value, activeAttributes]);
 
 		return [wp.element.createElement(
 			Fragment,
 			null,
+			isActive && wp.element.createElement(
+				Popover,
+				{ getAnchorRect: function getAnchorRect() {
+						return el.getBoundingClientRect();
+					}, position: 'bottom center', focusOnMount: false },
+				wp.element.createElement(
+					Card,
+					null,
+					wp.element.createElement(
+						CardBody,
+						null,
+						wp.element.createElement(TextControl, {
+							label: 'URL',
+							value: activeAttributes['url'],
+							onChange: function onChange(url) {
+								return setAttributes({ url: url });
+							}
+						})
+					)
+				),
+				wp.element.createElement(
+					Card,
+					{ size: 'small' },
+					wp.element.createElement(
+						CardBody,
+						null,
+						wp.element.createElement(CP.SelectThemeColor, {
+							onChange: function onChange(color) {
+								return setAttributes({ color: color });
+							},
+							selected: activeAttributes['color']
+						})
+					)
+				)
+			),
+			wp.element.createElement(
+				BlockControls,
+				null,
+				wp.element.createElement(Toolbar, {
+					controls: [{ icon: 'tag', onClick: onToggle, isActive: isActive }]
+				})
+			),
 			wp.element.createElement(RichTextToolbarButton, {
-				icon: icon,
-				title: 'Define',
+				icon: 'tag',
+				title: 'tag',
 				onClick: onToggle,
 				isActive: isActive
 			})
 		)];
 	}
-});
-
-registerFormatType('catpow/span', {
-	title: 'span',
-	tagName: 'span',
-	className: 'custom',
-	edit: function edit(_ref6) {
-		var isActive = _ref6.isActive,
-		    value = _ref6.value,
-		    onChange = _ref6.onChange;
-
-
-		var onToggle = function onToggle() {
-			var _wp$richText = wp.richText,
-			    removeFormat = _wp$richText.removeFormat,
-			    insert = _wp$richText.insert,
-			    create = _wp$richText.create,
-			    slice = _wp$richText.slice;
-
-			if (isActive) {
-				onChange(toggleFormat(value, { type: 'catpow/span' }));
-			}
-			var cls = prompt(__('クラスを入力'));
-
-			return onChange(insert(value, create({ html: '<span class="' + cls + '">' + slice(value).text + '</span>' }), value.start, value.end));
-		};
-
-		return [wp.element.createElement(
-			Fragment,
-			null,
-			wp.element.createElement(RichTextToolbarButton, {
-				icon: 'editor-code',
-				title: 'span',
-				onClick: onToggle,
-				isActive: isActive
-			})
-		)];
-	}
-});
-
-var currentBlockCanInsertBlockFormat = function currentBlockCanInsertBlockFormat() {
-	var atts = wp.data.select('core/block-editor').getSelectedBlock().attributes;
-	return atts.blockState && atts.blockState.enableBlockFormat;
-};
-
-registerFormatType('catpow/ul', {
-	title: 'ul',
-	tagName: 'ul',
-	className: null,
-	edit: function edit(_ref7) {
-		var isActive = _ref7.isActive,
-		    value = _ref7.value,
-		    onChange = _ref7.onChange;
-
-		if (!currentBlockCanInsertBlockFormat()) {
-			return '';
-		}
-		var onToggle = function onToggle() {
-			var _wp$richText2 = wp.richText,
-			    removeFormat = _wp$richText2.removeFormat,
-			    insert = _wp$richText2.insert,
-			    create = _wp$richText2.create,
-			    slice = _wp$richText2.slice;
-
-			if (isActive) {
-				return onChange(create({ html: value.text }));
-			}
-			var marks = {
-				'*': 'annotation',
-				'※': 'annotation',
-				'！': 'caution',
-				'!': 'caution',
-				'●': 'circle',
-				'・': 'circle',
-				'■': 'square',
-				'★': 'star',
-				'▶︎': 'caret'
-			};
-			var str = slice(value).text;
-
-			if (cls = marks[str[0]]) {
-				rsl = str.substring(1).split("\n" + str[0]);
-			} else {
-				rsl = str.split("\n");
-			}
-
-			return onChange(insert(value, create({ html: '<ul class="' + cls + '"><li>' + rsl.join('</li> <li>') + '</li></ul>' }), value.start, value.end));
-		};
-
-		return [wp.element.createElement(
-			Fragment,
-			null,
-			wp.element.createElement(RichTextToolbarButton, {
-				icon: 'editor-ul',
-				title: 'ul',
-				onClick: onToggle,
-				isActive: isActive
-			})
-		)];
-	}
-});
-registerFormatType('catpow/ol', {
-	title: 'ol',
-	tagName: 'ol',
-	className: null,
-	edit: function edit(_ref8) {
-		var isActive = _ref8.isActive,
-		    value = _ref8.value,
-		    onChange = _ref8.onChange;
-
-		if (!currentBlockCanInsertBlockFormat()) {
-			return '';
-		}
-		var onToggle = function onToggle() {
-			var _wp$richText3 = wp.richText,
-			    removeFormat = _wp$richText3.removeFormat,
-			    insert = _wp$richText3.insert,
-			    create = _wp$richText3.create,
-			    slice = _wp$richText3.slice;
-
-			if (isActive) {
-				return onChange(insert(value, create({ html: slice(value).text }), value.start, value.end));
-			}
-			return onChange(insert(value, create({ html: '<ol><li>' + slice(value).text.split("\n").join('</li> <li>') + '</li></ol>' }), value.start, value.end));
-		};
-
-		return [wp.element.createElement(
-			Fragment,
-			null,
-			wp.element.createElement(RichTextToolbarButton, {
-				icon: 'editor-ol',
-				title: 'ol',
-				onClick: onToggle,
-				isActive: isActive
-			})
-		)];
-	}
-});
-registerFormatType('catpow/li', {
-	title: 'li',
-	tagName: 'li',
-	className: null
-});
-
-registerFormatType('catpow/dl', {
-	title: 'dl',
-	tagName: 'dl',
-	className: null,
-	edit: function edit(_ref9) {
-		var isActive = _ref9.isActive,
-		    value = _ref9.value,
-		    onChange = _ref9.onChange;
-
-		if (!currentBlockCanInsertBlockFormat()) {
-			return '';
-		}
-		var onToggle = function onToggle() {
-			var _wp$richText4 = wp.richText,
-			    removeFormat = _wp$richText4.removeFormat,
-			    insert = _wp$richText4.insert,
-			    create = _wp$richText4.create,
-			    slice = _wp$richText4.slice;
-
-			if (isActive) {
-				return onChange(create({ html: value.text }));
-			}
-
-			return onChange(insert(value, create({ html: '<dl>' + slice(value).text.split("\n").map(function (str) {
-					if (!/[:：]/.test(str)) {
-						return '<dd>' + str + '</dd>';
-					}
-					return str.replace(/^(.+?)[:：](.+)$/, '<dt>$1</dt><dd>$2</dd>');
-				}).join('') + '</dl>' }), value.start, value.end));
-		};
-
-		return [wp.element.createElement(
-			Fragment,
-			null,
-			wp.element.createElement(RichTextToolbarButton, {
-				icon: 'editor-ul',
-				title: 'dl',
-				onClick: onToggle,
-				isActive: isActive
-			})
-		)];
-	}
-});
-registerFormatType('catpow/dt', {
-	title: 'dt',
-	tagName: 'dt',
-	className: null
-});
-registerFormatType('catpow/dd', {
-	title: 'dd',
-	tagName: 'dd',
-	className: null
 });
 
 registerFormatType('catpow/clear', {
 	title: 'clear',
 	tagName: 'div',
 	className: null,
-	edit: function edit(_ref10) {
-		var isActive = _ref10.isActive,
-		    value = _ref10.value,
-		    onChange = _ref10.onChange;
+	edit: function edit(_ref3) {
+		var isActive = _ref3.isActive,
+		    value = _ref3.value,
+		    onChange = _ref3.onChange;
 		var create = wp.richText.create;
 
 		return [wp.element.createElement(RichTextToolbarButton, {
