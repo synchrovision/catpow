@@ -1969,6 +1969,17 @@ class CP{
 						'accent_color'=>get_theme_mod('accent_color',$color_roles['accent_color']['default']),
 						'text_color'=>get_theme_mod('text_color',$color_roles['text_color']['default'])
 					]);
+					$scssc->registerFunction('export_colors',function($args)use($scssc){
+						if(empty($args[0]) || $args[0][0]!=='map'){return false;}
+						$data=array_combine(
+							array_map([$scssc,'compileValue'],$args[0][1]),
+							array_map([$scssc,'compileValue'],$args[0][2])
+						);
+						$dir=get_stylesheet_directory().'/json';
+						if(!is_dir($dir)){mkdir($dir,0777,true);}
+						file_put_contents($dir.'/colors.json',json_encode($data,0500));
+						return true;
+					});
 					do_action('cp_scss_compiler_init',$scssc);
 				}
 				try{
