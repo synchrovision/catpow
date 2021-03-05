@@ -7,7 +7,7 @@ $svg=file_get_contents($_GET['file']);
 
 if(!empty($_GET['color'])){
 	if(preg_match('/^#([a-fA-f0-9]{3}){1,2}$/',$_GET['color'])){
-		$svg=str_replace('<svg ',"<svg fill='{$_GET['color']}' ",$svg);
+		$svg=str_replace('<svg ',"<svg color='{$_GET['color']} fill='currentcolor' ",$svg);
 	}
 }
 elseif(!empty($_GET['c'])){
@@ -19,7 +19,7 @@ elseif(!empty($_GET['c'])){
 			$json=preg_replace('@(/wp-content/(themes/[\w\-]+|plugins/catpow/default)/).+$@','$1json/colors.json',$_GET['file']);
 		}
 		if(file_exists($json) && ($colors=json_decode(file_get_contents($json),true)) && $c=$colors[$_GET['c']]??null){
-			if(isset($c))$svg=str_replace('<svg ',"<svg fill='{$c}' ",$svg);
+			if(isset($c))$svg=str_replace('<svg ',"<svg color='{$c}' fill='currentcolor' ",$svg);
 		}
 	}
 }
