@@ -19,6 +19,7 @@ registerBlockType('catpow/section',{
 	icon: 'id-alt',
 	category: 'catpow',
 	attributes:{
+		color:{default:"0"},
 		id:{source:'attribute',selector:'.wp-block-catpow-section',attribute:'id'},
 		classes:{source:'attribute',selector:'.wp-block-catpow-section',attribute:'class',default:'wp-block-catpow-section article level3 center catch'},
 		navIcon:{source:'attribute',selector:'.wp-block-catpow-section',attribute:'data-icon'},
@@ -66,11 +67,14 @@ registerBlockType('catpow/section',{
 		iconSrc:{source:'attribute',selector:'.icon [src]',attribute:'src',default:cp.theme_url+'/images/dummy_icon.svg'},
 		iconAlt:{source:'attribute',selector:'.icon [src]',attribute:'alt'},
 	},
+	providesContext:{'catpow/color':'color'},
+	usesContext:['catpow/color'],
 	example:CP.example,
-	edit({attributes,className,setAttributes}){
+	edit(props){
+		const {attributes,className,setAttributes}=props;
         const {
 			SectionTag,HeadingTag,
-			id,classes,prefix,title,lead,
+			color,id,classes,prefix,title,lead,
 			headerImageMime,headerImageSrc,headerImageSrcset,headerImageAlt,headerImageCode,
 			headerBackgroundImageCode,
 			imageMime,imageSrc,imageSrcset,imageAlt,imageCode,
@@ -85,6 +89,8 @@ registerBlockType('catpow/section',{
 		
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys,imageSizes}=CP.config.section;
+		
+		CP.inheritColor(props,['iconSrc','patternImageCss','headerPatternImageCss','frameImageCss','borderImageCss']);
 		
 		const selectiveClasses=[
 			{input:'buttons',filter:'sectionTag',key:'SectionTag',label:'セクションタグ',values:['article','section','aside','div']},
@@ -176,13 +182,13 @@ registerBlockType('catpow/section',{
 							{input:'image',label:'アイコン',keys:imageKeys.navIcon,size:'thumbnail'}
 						]},
 						{label:'パターン画像',values:'hasPatternImage',sub:[
-							{input:'pattern',css:'patternImageCss',sel:'#'+id},
+							{input:'pattern',css:'patternImageCss',sel:'#'+id,color},
 						]},
 						{label:'フレーム画像',values:'hasFrameImage',sub:[
-							{input:'frame',css:'frameImageCss',sel:'#'+id},
+							{input:'frame',css:'frameImageCss',sel:'#'+id,color},
 						]},
 						{label:'ボーダー画像',values:'hasBorderImage',sub:[
-							{input:'border',css:'borderImageCss',sel:'#'+id+' > .contents'},
+							{input:'border',css:'borderImageCss',sel:'#'+id+' > .contents',color},
 						]},
 						{
 							label:'テンプレート',
@@ -223,7 +229,7 @@ registerBlockType('catpow/section',{
 							{input:'image',label:'アイコン',keys:imageKeys.navIcon,size:'thumbnail'}
 						]},
 						{label:'ボーダー画像',values:'hasBorderImage',sub:[
-							{input:'border',css:'borderImageCss',sel:'#'+id+' > .contents'},
+							{input:'border',css:'borderImageCss',sel:'#'+id+' > .contents',color},
 						]},
 						{
 							label:'テンプレート',

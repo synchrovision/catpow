@@ -18,7 +18,7 @@
 		const states=CP.wordsToFlags(classes);
         
 		var selectiveClasses=[
-			{label:'サイズ',filter:'size',values:{l:'大',m:'中',s:'小',ss:'極小'}},
+			{type:'buttons',label:'サイズ',filter:'size',values:{l:'大',m:'中',s:'小',ss:'極小'}},
 			{label:'インライン',values:'i'},
 			{
 				label:'テンプレート',

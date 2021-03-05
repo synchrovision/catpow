@@ -19,6 +19,7 @@ registerBlockType('catpow/section', {
 	icon: 'id-alt',
 	category: 'catpow',
 	attributes: {
+		color: { default: "0" },
 		id: { source: 'attribute', selector: '.wp-block-catpow-section', attribute: 'id' },
 		classes: { source: 'attribute', selector: '.wp-block-catpow-section', attribute: 'class', default: 'wp-block-catpow-section article level3 center catch' },
 		navIcon: { source: 'attribute', selector: '.wp-block-catpow-section', attribute: 'data-icon' },
@@ -62,13 +63,16 @@ registerBlockType('catpow/section', {
 		iconSrc: { source: 'attribute', selector: '.icon [src]', attribute: 'src', default: cp.theme_url + '/images/dummy_icon.svg' },
 		iconAlt: { source: 'attribute', selector: '.icon [src]', attribute: 'alt' }
 	},
+	providesContext: { 'catpow/color': 'color' },
+	usesContext: ['catpow/color'],
 	example: CP.example,
-	edit: function edit(_ref) {
-		var attributes = _ref.attributes,
-		    className = _ref.className,
-		    setAttributes = _ref.setAttributes;
+	edit: function edit(props) {
+		var attributes = props.attributes,
+		    className = props.className,
+		    setAttributes = props.setAttributes;
 		var SectionTag = attributes.SectionTag,
 		    HeadingTag = attributes.HeadingTag,
+		    color = attributes.color,
 		    id = attributes.id,
 		    classes = attributes.classes,
 		    prefix = attributes.prefix,
@@ -105,6 +109,8 @@ registerBlockType('catpow/section', {
 		    imageKeys = _CP$config$section.imageKeys,
 		    imageSizes = _CP$config$section.imageSizes;
 
+
+		CP.inheritColor(props, ['iconSrc', 'patternImageCss', 'headerPatternImageCss', 'frameImageCss', 'borderImageCss']);
 
 		var selectiveClasses = [{ input: 'buttons', filter: 'sectionTag', key: 'SectionTag', label: 'セクションタグ', values: ['article', 'section', 'aside', 'div'] }, { input: 'buttons', filter: 'headingTag', key: 'HeadingTag', label: '見出しタグ', values: ['h2', 'h3', 'h4'], effect: function effect(val) {
 				for (var key in states) {
@@ -145,7 +151,7 @@ registerBlockType('catpow/section', {
 				article: ['color', { type: 'buttons', label: 'レベル', values: { level2: '2', level3: '3', level4: '4' } }, { type: 'gridbuttons', label: '見出しタイプ', filter: 'heading_type', values: ['header', 'headline', 'catch'] }, { label: 'ヘッダ画像', values: 'hasHeaderImage', sub: [{
 						input: 'image', keys: imageKeys.headerImage, size: imageSizes.headerImage,
 						cond: !states.isTemplate || !headerImageCode
-					}] }, { label: 'リード', values: 'hasLead' }, { label: '背景画像', values: 'hasBackgroundImage', sub: [{ input: 'picture', keys: imageKeys.backgroundImage, devices: devices, cond: !states.isTemplate || !backgroundImageCode }, { label: '薄く', values: 'paleBG' }] }, { label: '背景色', values: 'hasBackgroundColor' }, { label: 'メニューアイコン', values: 'hasNavIcon', sub: [{ input: 'image', label: 'アイコン', keys: imageKeys.navIcon, size: 'thumbnail' }] }, { label: 'パターン画像', values: 'hasPatternImage', sub: [{ input: 'pattern', css: 'patternImageCss', sel: '#' + id }] }, { label: 'フレーム画像', values: 'hasFrameImage', sub: [{ input: 'frame', css: 'frameImageCss', sel: '#' + id }] }, { label: 'ボーダー画像', values: 'hasBorderImage', sub: [{ input: 'border', css: 'borderImageCss', sel: '#' + id + ' > .contents' }] }, {
+					}] }, { label: 'リード', values: 'hasLead' }, { label: '背景画像', values: 'hasBackgroundImage', sub: [{ input: 'picture', keys: imageKeys.backgroundImage, devices: devices, cond: !states.isTemplate || !backgroundImageCode }, { label: '薄く', values: 'paleBG' }] }, { label: '背景色', values: 'hasBackgroundColor' }, { label: 'メニューアイコン', values: 'hasNavIcon', sub: [{ input: 'image', label: 'アイコン', keys: imageKeys.navIcon, size: 'thumbnail' }] }, { label: 'パターン画像', values: 'hasPatternImage', sub: [{ input: 'pattern', css: 'patternImageCss', sel: '#' + id, color: color }] }, { label: 'フレーム画像', values: 'hasFrameImage', sub: [{ input: 'frame', css: 'frameImageCss', sel: '#' + id, color: color }] }, { label: 'ボーダー画像', values: 'hasBorderImage', sub: [{ input: 'border', css: 'borderImageCss', sel: '#' + id + ' > .contents', color: color }] }, {
 					label: 'テンプレート',
 					values: 'isTemplate',
 					sub: [{
@@ -160,7 +166,7 @@ registerBlockType('catpow/section', {
 						cond: states.hasBackgroundImage
 					}]
 				}],
-				column: ['color', 'pattern', { label: 'アイコン', values: 'hasIcon', sub: [{ input: 'icon' }] }, { label: '画像', values: 'hasImage', sub: [{ input: 'image', keys: imageKeys.image }] }, { label: '背景画像', values: 'hasBackgroundImage', sub: [{ input: 'picture', keys: imageKeys.backgroundImage, devices: devices, cond: !states.isTemplate || !backgroundImageCode }, { label: '薄く', values: 'paleBG' }] }, { label: '線', values: { no_border: 'なし', thin_border: '細', bold_border: '太' } }, { label: '角丸', values: 'round' }, { label: '影', values: 'shadow', sub: [{ label: '内側', values: 'inset' }] }, { label: 'メニューアイコン', values: 'hasNavIcon', sub: [{ input: 'image', label: 'アイコン', keys: imageKeys.navIcon, size: 'thumbnail' }] }, { label: 'ボーダー画像', values: 'hasBorderImage', sub: [{ input: 'border', css: 'borderImageCss', sel: '#' + id + ' > .contents' }] }, {
+				column: ['color', 'pattern', { label: 'アイコン', values: 'hasIcon', sub: [{ input: 'icon' }] }, { label: '画像', values: 'hasImage', sub: [{ input: 'image', keys: imageKeys.image }] }, { label: '背景画像', values: 'hasBackgroundImage', sub: [{ input: 'picture', keys: imageKeys.backgroundImage, devices: devices, cond: !states.isTemplate || !backgroundImageCode }, { label: '薄く', values: 'paleBG' }] }, { label: '線', values: { no_border: 'なし', thin_border: '細', bold_border: '太' } }, { label: '角丸', values: 'round' }, { label: '影', values: 'shadow', sub: [{ label: '内側', values: 'inset' }] }, { label: 'メニューアイコン', values: 'hasNavIcon', sub: [{ input: 'image', label: 'アイコン', keys: imageKeys.navIcon, size: 'thumbnail' }] }, { label: 'ボーダー画像', values: 'hasBorderImage', sub: [{ input: 'border', css: 'borderImageCss', sel: '#' + id + ' > .contents', color: color }] }, {
 					label: 'テンプレート',
 					values: 'isTemplate',
 					sub: [{
@@ -327,10 +333,10 @@ registerBlockType('catpow/section', {
 			)
 		)];
 	},
-	save: function save(_ref2) {
-		var attributes = _ref2.attributes,
-		    className = _ref2.className,
-		    setAttributes = _ref2.setAttributes;
+	save: function save(_ref) {
+		var attributes = _ref.attributes,
+		    className = _ref.className,
+		    setAttributes = _ref.setAttributes;
 		var SectionTag = attributes.SectionTag,
 		    HeadingTag = attributes.HeadingTag,
 		    id = attributes.id,
@@ -500,9 +506,9 @@ registerBlockType('catpow/section', {
 			iconSrc: { source: 'attribute', selector: '.icon [src]', attribute: 'src', default: cp.theme_url + '/images/dummy_icon.svg' },
 			iconAlt: { source: 'attribute', selector: '.icon [src]', attribute: 'alt' }
 		},
-		save: function save(_ref3) {
-			var attributes = _ref3.attributes,
-			    className = _ref3.className;
+		save: function save(_ref2) {
+			var attributes = _ref2.attributes,
+			    className = _ref2.className;
 			var id = attributes.id,
 			    navIcon = attributes.navIcon,
 			    classes = attributes.classes,

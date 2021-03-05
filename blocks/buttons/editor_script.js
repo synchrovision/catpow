@@ -29,7 +29,7 @@ registerBlockType('catpow/buttons', {
 
 		var states = CP.wordsToFlags(classes);
 
-		var selectiveClasses = [{ label: 'サイズ', filter: 'size', values: { l: '大', m: '中', s: '小', ss: '極小' } }, { label: 'インライン', values: 'i' }, {
+		var selectiveClasses = [{ type: 'buttons', label: 'サイズ', filter: 'size', values: { l: '大', m: '中', s: '小', ss: '極小' } }, { label: 'インライン', values: 'i' }, {
 			label: 'テンプレート',
 			values: 'isTemplate',
 			sub: [{ input: 'bool', label: 'ループ', key: 'doLoop', sub: [{ label: 'content path', input: 'text', key: 'content_path' }, { label: 'query', input: 'textarea', key: 'query' }, { label: 'プレビューループ数', input: 'range', key: 'loopCount', min: 1, max: 16 }] }]

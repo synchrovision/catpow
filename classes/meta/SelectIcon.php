@@ -2,7 +2,7 @@
 namespace Catpow\meta;
 
 class SelectIcon extends UI{
-	static $ui='SelectPreparedImage';
+	static $ui='SelectPreparedImage',$defaultParam=['color'=>'i'];
 	public static function output($meta,$prm){
 		$val=$meta->value;
 		if($prm=='url'){return $val;}
