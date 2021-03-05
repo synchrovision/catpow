@@ -1208,7 +1208,37 @@ Catpow.util={
 		if(dt){return new Date(dt[1],dt[2]-1,dt[3],dt[4],dt[5],dt[6]);}
 		if(defaultValue){return defaultValue;}
 		return false;
-	}
+	},
+	/*url*/
+	getURLparam:function(url,key){
+		const reg=new RegExp(`(&amp;|&|\\?)${key}=([^&]+)`);
+		const m=url.match(reg);
+		return m?m[2]:null;
+	},
+	setURLparams:function(url,params){
+		if(!url){return '';}
+		for(const key in params){
+			url=Catpow.util.setURLparam(url,key,params[key]);
+		}
+		return url;
+	},
+	setURLparam:function(url,key,val){
+		if(!url){return '';}
+		if(url.indexOf('?')===-1){
+			return `${url}?${key}=${val}`;
+		}
+		const reg=new RegExp(`((&amp;|&|\\?)${key}=)([^&]+)`);
+		if(reg.test(url)){
+			return url.replace(reg,'$1'+val);
+		}
+		return `${url}&${key}=${val}`;
+	},
+	removeURLparam:(url,key)=>{
+		if(!url){return '';}
+		if(url.indexOf('?')===-1){return url;}
+		const reg=new RegExp(`(&amp;|&|\\?)${key}=[^&]+(&amp;|&)?`);
+		return url.replace(reg,(m,p1,p2)=>p2?p1:'');
+	},
 };
 
 //浮動小数点問題対策のmath
