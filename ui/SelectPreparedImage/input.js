@@ -2,10 +2,13 @@
 絞り込み選択のUI
 */
 Catpow.UI.SelectPreparedImage = function (props) {
+	var setURLparams = Catpow.util.setURLparams;
 	var _wp$element = wp.element,
 	    useState = _wp$element.useState,
 	    useEffect = _wp$element.useEffect;
-	var name = props.name;
+	var name = props.name,
+	    _props$color = props.color,
+	    color = _props$color === undefined ? 'i' : _props$color;
 
 	var _useState = useState(props.value),
 	    _useState2 = babelHelpers.slicedToArray(_useState, 2),
@@ -31,11 +34,12 @@ Catpow.UI.SelectPreparedImage = function (props) {
 			'ul',
 			null,
 			images.map(function (image) {
+				var url = setURLparams(image.url, { c: color, theme: cp.theme });
 				return wp.element.createElement(
 					'li',
-					{ className: 'item ' + (value == image.url ? 'active' : '') },
+					{ className: 'item ' + (value == url ? 'active' : '') },
 					wp.element.createElement('img', {
-						src: image.url,
+						src: url,
 						alt: image.alt,
 						onClick: onClick
 					})

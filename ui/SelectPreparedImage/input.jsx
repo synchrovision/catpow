@@ -3,8 +3,9 @@
 
 */
 Catpow.UI.SelectPreparedImage=(props)=>{
+	const {setURLparams}=Catpow.util;
 	const {useState,useEffect}=wp.element;
-	const {name}=props;
+	const {name,color='i'}=props;
 	const [value,setValue]=useState(props.value);
 	const [images,setImages]=useState([]);
 	useEffect(()=>{
@@ -16,10 +17,11 @@ Catpow.UI.SelectPreparedImage=(props)=>{
 		<div className="SelectPreparedImage">
 			<ul>
 				{images.map((image)=>{
+					const url=setURLparams(image.url,{c:color,theme:cp.theme});
 					return (
-						<li className={'item '+((value==image.url)?'active':'')}>
+						<li className={'item '+((value==url)?'active':'')}>
 							<img
-								src={image.url}
+								src={url}
 								alt={image.alt}
 								onClick={onClick}
 							/>
