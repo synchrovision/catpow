@@ -22,6 +22,7 @@ registerBlockType('catpow/div',{
 		]
 	},
 	attributes:{
+		color:{default:"0"},
 		classes:{source:'attribute',selector:'div',attribute:'class',default:'wp-block-catpow-div frame thinBorder'},
 		
 		iconImageSrc:{source:'attribute',selector:'.wp-block-catpow-div>.icon [src]',attribute:'src',default:cp.theme_url+'/images/dummy_icon.svg'},
@@ -30,12 +31,18 @@ registerBlockType('catpow/div',{
 		backgroundImageSrc:{source:'attribute',selector:'.wp-block-catpow-div>.background [src]',attribute:'src',default:cp.theme_url+'/images/dummy_bg.jpg'},
 		backgroundImageSources:CP.getPictureSoucesAttributesForDevices(CP.config.div.devices,'.wp-block-catpow-div>.background picture','dummy_bg.jpg'),
 	},
+	providesContext:{'catpow/color':'color'},
+	usesContext:['catpow/color'],
 	example:CP.example,
-	edit({attributes,className,setAttributes}){
-        const {classes}=attributes;
+	edit(props){
+		const {attributes,className,setAttributes,context}=props;
+        const {classes,color}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.div;
+		
+		CP.inheritColor(props,['iconImageSrc']);
+		
 		
 		var selectiveClasses=[
 			{
@@ -45,12 +52,10 @@ registerBlockType('catpow/div',{
 				values:['block','frame','columns'],
 				sub:{
 					frame:[
-						{label:'色',values:'hasColor',sub:['color']},
-						{label:'パターン',values:'hasPattern',sub:['pattern']},
 						{label:'アイコン',values:'hasIcon',sub:[
-							{input:'icon',label:'アイコン',keys:imageKeys.iconImage}
+							{input:'icon',label:'アイコン',keys:imageKeys.iconImage,color}
 						]},
-						{label:'線',values:{noBorder:'なし',thinBorder:'細',boldBorder:'太'}},
+						{type:'buttons',label:'線',values:{noBorder:'なし',thinBorder:'細',boldBorder:'太'}},
 						{label:'角丸',values:'round'},
 						{label:'影',values:'shadow',sub:[{label:'内側',values:'inset'}]}
 					],
@@ -59,10 +64,16 @@ registerBlockType('catpow/div',{
 					]
 				}
 			},
-			{label:'背景画像',values:'hasBackgroundImage',sub:[
-				{input:'picture',label:'背景画像',keys:imageKeys.backgroundImage,devices}
-			]},
-			{label:'余白','values':{noPad:'なし',thinPad:'極細',lightPad:'細',mediumPad:'中',boldPad:'太',heavyPad:'極太'}}
+			'color',
+			{type:'buttons',label:'背景',values:{noBackground:'なし',hasBackgroundColor:'色',hasBackgroundImage:'画像'},sub:{
+				hasBackgroundColor:[
+					{label:'パターン',values:'hasPattern',sub:['pattern']}
+				],
+				hasBackgroundImage:[
+					{input:'picture',label:'背景画像',keys:imageKeys.backgroundImage,devices}
+				]
+			}},
+			{type:'buttons',label:'余白','values':{noPad:'なし',thinPad:'極細',lightPad:'細',mediumPad:'中',boldPad:'太',heavyPad:'極太'}}
 		];
 		
         return [
@@ -111,7 +122,7 @@ registerBlockType('catpow/div',{
 
 
 	save({attributes,className,setAttributes}){
-        const {classes=''}=attributes;
+        const {classes='',color}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.div;

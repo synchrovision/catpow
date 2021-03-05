@@ -20,6 +20,7 @@ registerBlockType('catpow/div', {
 		}]
 	},
 	attributes: {
+		color: { default: "0" },
 		classes: { source: 'attribute', selector: 'div', attribute: 'class', default: 'wp-block-catpow-div frame thinBorder' },
 
 		iconImageSrc: { source: 'attribute', selector: '.wp-block-catpow-div>.icon [src]', attribute: 'src', default: cp.theme_url + '/images/dummy_icon.svg' },
@@ -28,12 +29,16 @@ registerBlockType('catpow/div', {
 		backgroundImageSrc: { source: 'attribute', selector: '.wp-block-catpow-div>.background [src]', attribute: 'src', default: cp.theme_url + '/images/dummy_bg.jpg' },
 		backgroundImageSources: CP.getPictureSoucesAttributesForDevices(CP.config.div.devices, '.wp-block-catpow-div>.background picture', 'dummy_bg.jpg')
 	},
+	providesContext: { 'catpow/color': 'color' },
+	usesContext: ['catpow/color'],
 	example: CP.example,
-	edit: function edit(_ref) {
-		var attributes = _ref.attributes,
-		    className = _ref.className,
-		    setAttributes = _ref.setAttributes;
-		var classes = attributes.classes;
+	edit: function edit(props) {
+		var attributes = props.attributes,
+		    className = props.className,
+		    setAttributes = props.setAttributes,
+		    context = props.context;
+		var classes = attributes.classes,
+		    color = attributes.color;
 
 
 		var states = CP.wordsToFlags(classes);
@@ -42,16 +47,21 @@ registerBlockType('catpow/div', {
 		    imageKeys = _CP$config$div.imageKeys;
 
 
+		CP.inheritColor(props, ['iconImageSrc']);
+
 		var selectiveClasses = [{
 			label: 'タイプ',
 			filter: 'type',
 			type: 'buttons',
 			values: ['block', 'frame', 'columns'],
 			sub: {
-				frame: [{ label: '色', values: 'hasColor', sub: ['color'] }, { label: 'パターン', values: 'hasPattern', sub: ['pattern'] }, { label: 'アイコン', values: 'hasIcon', sub: [{ input: 'icon', label: 'アイコン', keys: imageKeys.iconImage }] }, { label: '線', values: { noBorder: 'なし', thinBorder: '細', boldBorder: '太' } }, { label: '角丸', values: 'round' }, { label: '影', values: 'shadow', sub: [{ label: '内側', values: 'inset' }] }],
+				frame: [{ label: 'アイコン', values: 'hasIcon', sub: [{ input: 'icon', label: 'アイコン', keys: imageKeys.iconImage, color: color }] }, { type: 'buttons', label: '線', values: { noBorder: 'なし', thinBorder: '細', boldBorder: '太' } }, { label: '角丸', values: 'round' }, { label: '影', values: 'shadow', sub: [{ label: '内側', values: 'inset' }] }],
 				columns: [{ label: '幅', values: { narrow: '狭い', regular: '普通', wide: '広い' } }]
 			}
-		}, { label: '背景画像', values: 'hasBackgroundImage', sub: [{ input: 'picture', label: '背景画像', keys: imageKeys.backgroundImage, devices: devices }] }, { label: '余白', 'values': { noPad: 'なし', thinPad: '極細', lightPad: '細', mediumPad: '中', boldPad: '太', heavyPad: '極太' } }];
+		}, 'color', { type: 'buttons', label: '背景', values: { noBackground: 'なし', hasBackgroundColor: '色', hasBackgroundImage: '画像' }, sub: {
+				hasBackgroundColor: [{ label: 'パターン', values: 'hasPattern', sub: ['pattern'] }],
+				hasBackgroundImage: [{ input: 'picture', label: '背景画像', keys: imageKeys.backgroundImage, devices: devices }]
+			} }, { type: 'buttons', label: '余白', 'values': { noPad: 'なし', thinPad: '極細', lightPad: '細', mediumPad: '中', boldPad: '太', heavyPad: '極太' } }];
 
 		return [wp.element.createElement(
 			'div',
@@ -101,12 +111,13 @@ registerBlockType('catpow/div', {
 			)
 		)];
 	},
-	save: function save(_ref2) {
-		var attributes = _ref2.attributes,
-		    className = _ref2.className,
-		    setAttributes = _ref2.setAttributes;
+	save: function save(_ref) {
+		var attributes = _ref.attributes,
+		    className = _ref.className,
+		    setAttributes = _ref.setAttributes;
 		var _attributes$classes = attributes.classes,
-		    classes = _attributes$classes === undefined ? '' : _attributes$classes;
+		    classes = _attributes$classes === undefined ? '' : _attributes$classes,
+		    color = attributes.color;
 
 
 		var states = CP.wordsToFlags(classes);
