@@ -1,14 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="レイヤー_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-	 y="0px" viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:none;}
-	.st1{fill:#FFFFFF;}
-</style>
-<rect class="st0" width="20" height="20"/>
-<g>
-	<path class="st1" d="M10,17.1c3.3-1.4,5.7-3.8,7-6.2c1.3-2.4,1.5-4.8,0.3-6.2c-1-1.3-2.4-1.8-3.7-1.7S11,3.6,10,4.4
-		C9.1,3.6,7.7,3,6.4,2.9S3.7,3.4,2.6,4.7c-1.1,1.4-1,3.8,0.3,6.2C4.3,13.3,6.7,15.7,10,17.1z"/>
-</g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><rect x="0" fill="none" width="20" height="20"/><g><path d="M10 17.12c3.33-1.4 5.74-3.79 7.04-6.21 1.28-2.41 1.46-4.81.32-6.25-1.03-1.29-2.37-1.78-3.73-1.74s-2.68.63-3.63 1.46c-.95-.83-2.27-1.42-3.63-1.46s-2.7.45-3.73 1.74c-1.14 1.44-.96 3.84.34 6.25 1.28 2.42 3.69 4.81 7.02 6.21z"/></g></svg>

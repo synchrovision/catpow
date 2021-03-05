@@ -1,15 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="レイヤー_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-	 y="0px" viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:none;}
-	.st1{fill:#FFFFFF;}
-</style>
-<rect class="st0" width="20" height="20"/>
-<g>
-	<path class="st1" d="M17,8h1v11H2V8h1V6c0-2.8,2.2-5,5-5c0.7,0,1.4,0.1,2,0.4C10.6,1.1,11.3,1,12,1c2.8,0,5,2.2,5,5V8z M5,6v2h2V6
-		c0-1.1,0.4-2.2,1-3h0C6.3,3,5,4.3,5,6z M15,8V6c0-1.7-1.4-3-3-3h0c0.6,0.8,1,1.9,1,3v2H15z M10,3.8C9.4,4.3,9,5.1,9,6v2h2V6
-		C11,5.1,10.6,4.3,10,3.8z"/>
-</g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><rect x="0" fill="none" width="20" height="20"/><g><path d="M17 8h1v11H2V8h1V6c0-2.76 2.24-5 5-5 .71 0 1.39.15 2 .42.61-.27 1.29-.42 2-.42 2.76 0 5 2.24 5 5v2zM5 6v2h2V6c0-1.13.39-2.16 1.02-3H8C6.35 3 5 4.35 5 6zm10 2V6c0-1.65-1.35-3-3-3h-.02c.63.84 1.02 1.87 1.02 3v2h2zm-5-4.22C9.39 4.33 9 5.12 9 6v2h2V6c0-.88-.39-1.67-1-2.22z"/></g></svg>
