@@ -10,7 +10,8 @@ class html extends meta{
 		add_editor_style('content.css');
 		$setting=[
 			'textarea_name'=>\cp::get_input_name($path),
-			'tinymce'=>['body_class'=>'cp_html']
+			'tinymce'=>['body_class'=>'cp_html'],
+			'wpautop'=>false
 		];
 		ob_start();
 		wp_editor($meta->value,\cp::get_input_id($path).'_editor',$setting);
