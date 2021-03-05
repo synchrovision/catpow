@@ -65,8 +65,8 @@ registerBlockType('catpow/listed',{
 						{label:'レベル','values':['level0','level1','level2','level3']}
 					],
 					menu:[
-						{label:'サイズ',values:['small','medium','large']},
-						{label:'画像',values:{noImage:'なし',hasImage:'大',hasHeaderImage:'小'}},
+						{type:'buttons',label:'サイズ',values:['small','medium','large']},
+						{type:'buttons',label:'画像',values:{noImage:'なし',hasImage:'大',hasHeaderImage:'小'}},
 						{label:'背景画像',values:'hasBackgroundImage',sub:[
 							{label:'薄く',values:'paleBG'}
 						]},
