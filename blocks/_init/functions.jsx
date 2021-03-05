@@ -313,8 +313,8 @@
 	parseStyleString:(css)=>{
 		if(css instanceof Object){return css;}
 		if(!css){return {};}
-		var obj={}
-		css.split(';').map((pair)=>{
+		var obj={};
+		css.replace('&amp;','&').split(';').map((pair)=>{
 			const match=pair.match(/^([^:]+?):(.+)$/);
 			if(!match){return;}
 			obj[match[1]]=match[2];
@@ -397,6 +397,13 @@
 			rtn["-ms-grid-row-span"]=bnd[3];
 		}
 		return rtn;
+	},
+	
+	getUrlInStyleCode:(code)=>{
+		if(!code || code.indexOf('url(')===-1){return false;}
+		console.log(code);
+		const m=code.match(/url\((.+?)\)/);
+		return m?m[1]:'';
 	},
 	
 	parseGradientStyleValue:(gradient)=>{
@@ -485,6 +492,25 @@
 		return CP.devices[device].media_query.slice(1,-1);
 	},
 	
+	translateCssVal:(type,val)=>{
+		switch(type){
+			case 'background-size':
+				switch(val){
+					case 'c':return 'cover';
+					case 'i':return 'contain';
+					case 'f':return '100% 100%';
+					default:return val;
+				}
+			case 'background-repeat':
+				switch(val){
+					case 'n':return 'no-repeat';
+					case 'x':
+					case 'y':return 'repeat-'+val;
+					default:return val;
+				}
+		}
+	},
+	
 	selectiveClassesPreset:{
 		isTemplate:{
 			label:'テンプレート',
@@ -505,6 +531,36 @@
 		if(!sel.rangeCount)return null;
 		const con=sel.getRangeAt(0).startContainer;
 		return con.nextElementSibling || con.parentElement;
+	},
+	
+	/*color inherit*/
+	inheritColor:(props,images)=>{
+		const {attributes,className,setAttributes,context}=props;
+		const {setURLparams}=Catpow.util;
+		const {classes,color,inheritColor}=attributes;
+		const {useEffect}=wp.element;
+		if(undefined === inheritColor){
+			setAttributes({inheritColor:color === "0" || context['catpow/color'] === color})
+		}
+		wp.element.useEffect(()=>{
+			if(inheritColor && context['catpow/color']!=="0"){setAttributes({color:context['catpow/color']});}
+			setAttributes({inheritColor:color === context['catpow/color']});
+		},[context['catpow/color']]);
+		wp.element.useEffect(()=>{
+			const atts={
+				inheritColor:color==context['catpow/color'],
+				classes:classes.replace(/color\d+\s*/,'')+' color'+color
+			};
+			images.map((key)=>{
+				if(!attributes[key]){return;}
+				if(attributes[key].indexOf('url(')!==-1){
+					atts[key]=attributes[key].replace(/url\((.+?)\)/,(m,p1)=>'url('+setURLparams(p1,{c:color,theme:cp.theme})+')');
+					return;
+				}
+				atts[key]=setURLparams(attributes[key],{c:color,theme:cp.theme});
+			});
+			setAttributes(atts);
+		},[color]);
 	},
 	
 	/*compornents*/
@@ -864,32 +920,50 @@ const SelectPictureSources=(props)=>{
 	);
 };
 
-const SelectPreparedImage=({className,name,value,onChange,...otherProps})=>{
+const SelectPreparedImage=({className,name,value,color,onChange,...otherProps})=>{
 	let onClick;
-	const [images,setImages]=wp.element.useState(null);
+	const {getURLparam,setURLparam,setURLparams,removeURLparam}=Catpow.util;
+	const [state,dispatch]=wp.element.useReducer((state,action)=>{
+		switch(action.type){
+			case 'nextPage':state.page--;break;
+			case 'prevPage':state.page++;break;
+			case 'gotoPage':state.page=action.page;break;
+			case 'update':
+				if(action.images){
+					state.images=action.images;
+					const bareURL=removeURLparam(value,'c');
+					state.image=state.images.find((image)=>image.url===bareURL);
+				}
+				if(action.image){state.image=action.image;}
+				onChange({...state.image,url:setURLparams(state.image?state.image.url:value,{c:color,theme:cp.theme})});
+		}
+		return {...state};
+	},{page:0,images:null,image:null});
+	
 	CP.cache.PreparedImage=CP.cache.PreparedImage || {};
 	
-	if(images===null){
+	if(state.images===null){
 		if(CP.cache.PreparedImage[name]){
-			setImages(CP.cache.PreparedImage[name]);
+			dispatch({type:'update',images:CP.cache.PreparedImage[name]});
 		}
 		else{
-			wp.apiFetch({path:'cp/v1/images/'+name}).then((data)=>{
-				CP.cache.PreparedImage[name]=data;
-				setImages(data);
+			wp.apiFetch({path:'cp/v1/images/'+name}).then((images)=>{
+				CP.cache.PreparedImage[name]=images;
+				dispatch({type:'update',images});
 			});
 		}
 		return false;
 	}
 	return (
 		<ul className={'selectPreparedImage '+name+' '+className} {...otherProps}>
-			{images.map((image)=>{
+			{state.images.map((image)=>{
+				const url=setURLparams(image.url,{c:color,theme:cp.theme});
 				return (
-					<li className={'item '+((value==image.url)?'active':'')}>
+					<li className={'item '+((value==url)?'active':'')}>
 						<img
-							src={image.url}
+							src={url}
 							alt={image.alt}
-							onClick={()=>onChange(image)}
+							onClick={()=>dispatch({type:'update',image})}
 						/>
 					</li>
 				);
@@ -1237,8 +1311,10 @@ const SelectClassPanel=(props)=>{
 						rtn.push(
 							<SelectPreparedImage
 								name="border"
-								value={tgt['border-image'] && tgt['border-image'].match(/url\((.+?)\)/)[1] || false}
+								value={CP.getUrlInStyleCode(tgt['border-image'])}
+								color={prm.color || 0}
 								onChange={(image)=>{
+									if(!image.conf){return;}
 									const {slice,width,repeat}=image.conf;
 									tgt['border-style']='solid';
 									tgt['border-image']='url('+image.url+') fill '+slice+' / '+width+' '+repeat;
@@ -1251,11 +1327,19 @@ const SelectClassPanel=(props)=>{
 						rtn.push(
 							<SelectPreparedImage
 								name="pattern"
-								value={tgt['background-image'] && tgt['background-image'].match(/url\((.+?)\)/)[1] || false}
+								value={CP.getUrlInStyleCode(tgt['background-image'])}
+								color={prm.color || 0}
 								onChange={(image)=>{
-									const {width,height}=image.conf;
+									if(!image.conf){return;}
+									const {size,width,height,repeat,x,y}=image.conf;
 									tgt['background-image']='url('+image.url+')';
-									if(width && height){tgt['background-size']=width/2+'px '+height/2+'px';}
+									if(width && height){tgt['background-size']=width+'px '+height+'px';}
+									else if(size){tgt['background-size']=CP.translateCssVal('background-size',size);}
+									else{delete tgt['background-size'];}
+									if(repeat){tgt['background-repeat']=CP.translateCssVal('background-repeat',repeat);}
+									else{delete tgt['background-repeat'];}
+									if(x && y){tgt['background-position']=x+'% '+y+'%';}
+									else{delete tgt['background-position'];}
 									saveCss(prm.css);
 								}}
 							/>
@@ -1265,9 +1349,10 @@ const SelectClassPanel=(props)=>{
 						rtn.push(
 							<SelectPreparedImageSet
 								name="frame"
-								value={tgt['border-image'] && tgt['border-image'].match(/url\((.+?)\)/)[1] || false}
+								value={CP.getUrlInStyleCode(tgt['border-image'])}
 								onChange={(imageset)=>{
 									imageset.map((image)=>{
+										if(!image.conf){return;}
 										const {device,slice,width,repeat}=image.conf;
 										const media=CP.getMediaQueryKeyForDevice(device);
 										styleDatas[prm.css][media] = styleDatas[prm.css][media] || {};
@@ -1306,6 +1391,7 @@ const SelectClassPanel=(props)=>{
 						onChange={(color)=>{
 							CP.filterFlags(states,(key)=>!(/^color\d+/.test(key)));
 							states[color]=true;
+							if(!items){set({color:color.substr(5)});}
 							saveClasses();
 						}}
                     />
@@ -1522,6 +1608,7 @@ const SelectClassPanel=(props)=>{
 							<SelectPreparedImage
 								name={prm.input}
 								value={item[prm.keys.src]}
+								color={prm.color || 0}
 								onChange={(image)=>{
 									save({
 										[prm.keys.src]:image.url,

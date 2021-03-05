@@ -492,7 +492,7 @@ var CP = {
 			return {};
 		}
 		var obj = {};
-		css.split(';').map(function (pair) {
+		css.replace('&amp;', '&').split(';').map(function (pair) {
 			var match = pair.match(/^([^:]+?):(.+)$/);
 			if (!match) {
 				return;
@@ -615,6 +615,15 @@ var CP = {
 		return rtn;
 	},
 
+	getUrlInStyleCode: function getUrlInStyleCode(code) {
+		if (!code || code.indexOf('url(') === -1) {
+			return false;
+		}
+		console.log(code);
+		var m = code.match(/url\((.+?)\)/);
+		return m ? m[1] : '';
+	},
+
 	parseGradientStyleValue: function parseGradientStyleValue(gradient) {
 		var match = gradient.match(/^(linear|radial)\-gradient\((\d+deg),(.+)\)$/);
 		return {
@@ -724,6 +733,32 @@ var CP = {
 		return CP.devices[device].media_query.slice(1, -1);
 	},
 
+	translateCssVal: function translateCssVal(type, val) {
+		switch (type) {
+			case 'background-size':
+				switch (val) {
+					case 'c':
+						return 'cover';
+					case 'i':
+						return 'contain';
+					case 'f':
+						return '100% 100%';
+					default:
+						return val;
+				}
+			case 'background-repeat':
+				switch (val) {
+					case 'n':
+						return 'no-repeat';
+					case 'x':
+					case 'y':
+						return 'repeat-' + val;
+					default:
+						return val;
+				}
+		}
+	},
+
 	selectiveClassesPreset: {
 		isTemplate: {
 			label: 'テンプレート',
@@ -738,6 +773,48 @@ var CP = {
 		if (!sel.rangeCount) return null;
 		var con = sel.getRangeAt(0).startContainer;
 		return con.nextElementSibling || con.parentElement;
+	},
+
+	/*color inherit*/
+	inheritColor: function inheritColor(props, images) {
+		var attributes = props.attributes,
+		    className = props.className,
+		    setAttributes = props.setAttributes,
+		    context = props.context;
+		var setURLparams = Catpow.util.setURLparams;
+		var classes = attributes.classes,
+		    color = attributes.color,
+		    inheritColor = attributes.inheritColor;
+		var useEffect = wp.element.useEffect;
+
+		if (undefined === inheritColor) {
+			setAttributes({ inheritColor: color === "0" || context['catpow/color'] === color });
+		}
+		wp.element.useEffect(function () {
+			if (inheritColor && context['catpow/color'] !== "0") {
+				setAttributes({ color: context['catpow/color'] });
+			}
+			setAttributes({ inheritColor: color === context['catpow/color'] });
+		}, [context['catpow/color']]);
+		wp.element.useEffect(function () {
+			var atts = {
+				inheritColor: color == context['catpow/color'],
+				classes: classes.replace(/color\d+\s*/, '') + ' color' + color
+			};
+			images.map(function (key) {
+				if (!attributes[key]) {
+					return;
+				}
+				if (attributes[key].indexOf('url(') !== -1) {
+					atts[key] = attributes[key].replace(/url\((.+?)\)/, function (m, p1) {
+						return 'url(' + setURLparams(p1, { c: color, theme: cp.theme }) + ')';
+					});
+					return;
+				}
+				atts[key] = setURLparams(attributes[key], { c: color, theme: cp.theme });
+			});
+			setAttributes(atts);
+		}, [color]);
 	},
 
 	/*compornents*/
@@ -1175,25 +1252,53 @@ var SelectPreparedImage = function SelectPreparedImage(_ref20) {
 	var className = _ref20.className,
 	    name = _ref20.name,
 	    value = _ref20.value,
+	    color = _ref20.color,
 	    onChange = _ref20.onChange,
-	    otherProps = babelHelpers.objectWithoutProperties(_ref20, ['className', 'name', 'value', 'onChange']);
+	    otherProps = babelHelpers.objectWithoutProperties(_ref20, ['className', 'name', 'value', 'color', 'onChange']);
 
 	var onClick = void 0;
+	var _Catpow$util = Catpow.util,
+	    getURLparam = _Catpow$util.getURLparam,
+	    setURLparam = _Catpow$util.setURLparam,
+	    setURLparams = _Catpow$util.setURLparams,
+	    removeURLparam = _Catpow$util.removeURLparam;
 
-	var _wp$element$useState = wp.element.useState(null),
-	    _wp$element$useState2 = babelHelpers.slicedToArray(_wp$element$useState, 2),
-	    images = _wp$element$useState2[0],
-	    setImages = _wp$element$useState2[1];
+	var _wp$element$useReduce = wp.element.useReducer(function (state, action) {
+		switch (action.type) {
+			case 'nextPage':
+				state.page--;break;
+			case 'prevPage':
+				state.page++;break;
+			case 'gotoPage':
+				state.page = action.page;break;
+			case 'update':
+				if (action.images) {
+					state.images = action.images;
+					var bareURL = removeURLparam(value, 'c');
+					state.image = state.images.find(function (image) {
+						return image.url === bareURL;
+					});
+				}
+				if (action.image) {
+					state.image = action.image;
+				}
+				onChange(babelHelpers.extends({}, state.image, { url: setURLparams(state.image ? state.image.url : value, { c: color, theme: cp.theme }) }));
+		}
+		return babelHelpers.extends({}, state);
+	}, { page: 0, images: null, image: null }),
+	    _wp$element$useReduce2 = babelHelpers.slicedToArray(_wp$element$useReduce, 2),
+	    state = _wp$element$useReduce2[0],
+	    dispatch = _wp$element$useReduce2[1];
 
 	CP.cache.PreparedImage = CP.cache.PreparedImage || {};
 
-	if (images === null) {
+	if (state.images === null) {
 		if (CP.cache.PreparedImage[name]) {
-			setImages(CP.cache.PreparedImage[name]);
+			dispatch({ type: 'update', images: CP.cache.PreparedImage[name] });
 		} else {
-			wp.apiFetch({ path: 'cp/v1/images/' + name }).then(function (data) {
-				CP.cache.PreparedImage[name] = data;
-				setImages(data);
+			wp.apiFetch({ path: 'cp/v1/images/' + name }).then(function (images) {
+				CP.cache.PreparedImage[name] = images;
+				dispatch({ type: 'update', images: images });
 			});
 		}
 		return false;
@@ -1201,15 +1306,16 @@ var SelectPreparedImage = function SelectPreparedImage(_ref20) {
 	return wp.element.createElement(
 		'ul',
 		babelHelpers.extends({ className: 'selectPreparedImage ' + name + ' ' + className }, otherProps),
-		images.map(function (image) {
+		state.images.map(function (image) {
+			var url = setURLparams(image.url, { c: color, theme: cp.theme });
 			return wp.element.createElement(
 				'li',
-				{ className: 'item ' + (value == image.url ? 'active' : '') },
+				{ className: 'item ' + (value == url ? 'active' : '') },
 				wp.element.createElement('img', {
-					src: image.url,
+					src: url,
 					alt: image.alt,
 					onClick: function onClick() {
-						return onChange(image);
+						return dispatch({ type: 'update', image: image });
 					}
 				})
 			);
@@ -1225,10 +1331,10 @@ var SelectPreparedImageSet = function SelectPreparedImageSet(_ref21) {
 
 	var onClick = void 0;
 
-	var _wp$element$useState3 = wp.element.useState(null),
-	    _wp$element$useState4 = babelHelpers.slicedToArray(_wp$element$useState3, 2),
-	    imagesets = _wp$element$useState4[0],
-	    setImagesets = _wp$element$useState4[1];
+	var _wp$element$useState = wp.element.useState(null),
+	    _wp$element$useState2 = babelHelpers.slicedToArray(_wp$element$useState, 2),
+	    imagesets = _wp$element$useState2[0],
+	    setImagesets = _wp$element$useState2[1];
 
 	CP.cache.PreparedImageSets = CP.cache.PreparedImageSets || {};
 
@@ -1697,8 +1803,12 @@ var SelectClassPanel = function SelectClassPanel(props) {
 					case 'border':
 						rtn.push(wp.element.createElement(SelectPreparedImage, {
 							name: 'border',
-							value: tgt['border-image'] && tgt['border-image'].match(/url\((.+?)\)/)[1] || false,
+							value: CP.getUrlInStyleCode(tgt['border-image']),
+							color: prm.color || 0,
 							onChange: function onChange(image) {
+								if (!image.conf) {
+									return;
+								}
 								var _image$conf = image.conf,
 								    slice = _image$conf.slice,
 								    width = _image$conf.width,
@@ -1713,15 +1823,37 @@ var SelectClassPanel = function SelectClassPanel(props) {
 					case 'pattern':
 						rtn.push(wp.element.createElement(SelectPreparedImage, {
 							name: 'pattern',
-							value: tgt['background-image'] && tgt['background-image'].match(/url\((.+?)\)/)[1] || false,
+							value: CP.getUrlInStyleCode(tgt['background-image']),
+							color: prm.color || 0,
 							onChange: function onChange(image) {
+								if (!image.conf) {
+									return;
+								}
 								var _image$conf2 = image.conf,
+								    size = _image$conf2.size,
 								    width = _image$conf2.width,
-								    height = _image$conf2.height;
+								    height = _image$conf2.height,
+								    repeat = _image$conf2.repeat,
+								    x = _image$conf2.x,
+								    y = _image$conf2.y;
 
 								tgt['background-image'] = 'url(' + image.url + ')';
 								if (width && height) {
-									tgt['background-size'] = width / 2 + 'px ' + height / 2 + 'px';
+									tgt['background-size'] = width + 'px ' + height + 'px';
+								} else if (size) {
+									tgt['background-size'] = CP.translateCssVal('background-size', size);
+								} else {
+									delete tgt['background-size'];
+								}
+								if (repeat) {
+									tgt['background-repeat'] = CP.translateCssVal('background-repeat', repeat);
+								} else {
+									delete tgt['background-repeat'];
+								}
+								if (x && y) {
+									tgt['background-position'] = x + '% ' + y + '%';
+								} else {
+									delete tgt['background-position'];
 								}
 								saveCss(prm.css);
 							}
@@ -1730,9 +1862,12 @@ var SelectClassPanel = function SelectClassPanel(props) {
 					case 'frame':
 						rtn.push(wp.element.createElement(SelectPreparedImageSet, {
 							name: 'frame',
-							value: tgt['border-image'] && tgt['border-image'].match(/url\((.+?)\)/)[1] || false,
+							value: CP.getUrlInStyleCode(tgt['border-image']),
 							onChange: function onChange(imageset) {
 								imageset.map(function (image) {
+									if (!image.conf) {
+										return;
+									}
 									var _image$conf3 = image.conf,
 									    device = _image$conf3.device,
 									    slice = _image$conf3.slice,
@@ -1775,6 +1910,9 @@ var SelectClassPanel = function SelectClassPanel(props) {
 							return !/^color\d+/.test(key);
 						});
 						states[color] = true;
+						if (!items) {
+							set({ color: color.substr(5) });
+						}
 						saveClasses();
 					}
 				}));
@@ -2016,6 +2154,7 @@ var SelectClassPanel = function SelectClassPanel(props) {
 						rtn.push(wp.element.createElement(SelectPreparedImage, {
 							name: prm.input,
 							value: item[prm.keys.src],
+							color: prm.color || 0,
 							onChange: function onChange(image) {
 								var _save9;
 
