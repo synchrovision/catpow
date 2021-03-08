@@ -62,9 +62,9 @@ registerBlockType('catpow/accordion',{
 						{states.hasImage &&
 							<div className="image">
 								{(states.isTemplate && imageCode)?(
-									<DummyImage text={imageCode}/>
+									<CP.DummyImage text={imageCode}/>
 								):(
-									<SelectResponsiveImage
+									<CP.SelectResponsiveImage
 										set={setAttributes}
 										attr={attributes}
 										keys={imageKeys.image}
@@ -81,7 +81,7 @@ registerBlockType('catpow/accordion',{
 					</div>
 				</div>
 				<InspectorControls>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='クラス'
 						icon='art'
 						set={setAttributes}
@@ -117,7 +117,7 @@ registerBlockType('catpow/accordion',{
 								{(states.isTemplate && imageCode)?(
 									imageCode
 								):(
-									<ResponsiveImage
+									<CP.ResponsiveImage
 										attr={attributes}
 										keys={imageKeys.image}
 										size='medium_large'

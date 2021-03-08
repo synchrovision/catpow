@@ -26,7 +26,7 @@ registerBlockType('catpow/sidebar', {
 		), wp.element.createElement(
 			BlockControls,
 			null,
-			wp.element.createElement(AlignClassToolbar, { set: setAttributes, attr: attributes })
+			wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })
 		), wp.element.createElement(
 			InspectorControls,
 			null,

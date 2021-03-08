@@ -95,7 +95,7 @@
 		
         return [
 			<BlockControls>
-				<SelectBreakPointToolbar
+				<CP.SelectBreakPointToolbar
 					breakpoints={breakpoints}
 					value={attributes.bp}
 					onChange={(bp)=>setAttributes({bp})}
@@ -202,7 +202,7 @@
 						value={id}
 					/>
 				</PanelBody>
-				<SelectClassPanel
+				<CP.SelectClassPanel
 					title='アイテム'
 					icon='edit'
 					set={setAttributes}
@@ -224,7 +224,7 @@
 						/>
 					</PanelBody>
 				}
-				<ItemControlInfoPanel/>
+				<CP.ItemControlInfoPanel/>
 			</InspectorControls>
         ];
     },

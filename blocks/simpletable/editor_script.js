@@ -75,7 +75,7 @@ registerBlockType('catpow/simpletable', {
 		return [wp.element.createElement(
 			InspectorControls,
 			null,
-			wp.element.createElement(SelectClassPanel, {
+			wp.element.createElement(CP.SelectClassPanel, {
 				title: '\u30AF\u30E9\u30B9',
 				icon: 'art',
 				set: setAttributes,
@@ -83,7 +83,7 @@ registerBlockType('catpow/simpletable', {
 				selectiveClasses: selectiveClasses,
 				filters: CP.filters.simpletable || {}
 			}),
-			wp.element.createElement(SelectClassPanel, {
+			wp.element.createElement(CP.SelectClassPanel, {
 				title: '\u884C',
 				icon: 'edit',
 				set: setAttributes,
@@ -93,7 +93,7 @@ registerBlockType('catpow/simpletable', {
 				triggerClasses: selectiveClasses[0],
 				filters: CP.filters.simpletable || {}
 			}),
-			wp.element.createElement(ItemControlInfoPanel, null)
+			wp.element.createElement(CP.ItemControlInfoPanel, null)
 		), wp.element.createElement(
 			'table',
 			{ className: classes },
@@ -102,7 +102,7 @@ registerBlockType('catpow/simpletable', {
 				null,
 				rows.map(function (row, index) {
 					return wp.element.createElement(
-						Item,
+						CP.Item,
 						{
 							tag: 'tr',
 							set: setAttributes,

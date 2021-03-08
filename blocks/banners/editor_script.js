@@ -55,7 +55,7 @@ registerBlockType('catpow/banners', {
 				item.controlClasses = 'control';
 			}
 			rtn.push(wp.element.createElement(
-				Item,
+				CP.Item,
 				{
 					tag: "li",
 					set: setAttributes,
@@ -77,7 +77,7 @@ registerBlockType('catpow/banners', {
 				wp.element.createElement(
 					"a",
 					null,
-					wp.element.createElement(SelectResponsiveImage, {
+					wp.element.createElement(CP.SelectResponsiveImage, {
 						attr: attributes,
 						set: setAttributes,
 						keys: imageKeys.image,
@@ -117,14 +117,14 @@ registerBlockType('catpow/banners', {
 		return wp.element.createElement(
 			Fragment,
 			null,
-			wp.element.createElement(SelectModeToolbar, {
+			wp.element.createElement(CP.SelectModeToolbar, {
 				set: setAttributes,
 				attr: attributes
 			}),
 			wp.element.createElement(
 				InspectorControls,
 				null,
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: "\u30AF\u30E9\u30B9",
 					icon: "art",
 					set: setAttributes,
@@ -143,7 +143,7 @@ registerBlockType('catpow/banners', {
 						value: classes
 					})
 				),
-				states.isTemplate ? wp.element.createElement(SelectClassPanel, {
+				states.isTemplate ? wp.element.createElement(CP.SelectClassPanel, {
 					title: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
 					icon: "edit",
 					set: setAttributes,
@@ -152,7 +152,7 @@ registerBlockType('catpow/banners', {
 					index: attributes.currentItemIndex,
 					selectiveClasses: itemTemplateSelectiveClasses,
 					filters: CP.filters.banners || {}
-				}) : wp.element.createElement(SelectClassPanel, {
+				}) : wp.element.createElement(CP.SelectClassPanel, {
 					title: "\u30D0\u30CA\u30FC",
 					icon: "edit",
 					set: setAttributes,
@@ -162,7 +162,7 @@ registerBlockType('catpow/banners', {
 					selectiveClasses: selectiveItemClasses,
 					filters: CP.filters.banners || {}
 				}),
-				wp.element.createElement(ItemControlInfoPanel, null)
+				wp.element.createElement(CP.ItemControlInfoPanel, null)
 			),
 			EditMode ? wp.element.createElement(
 				"div",
@@ -172,7 +172,7 @@ registerBlockType('catpow/banners', {
 					{ "class": "label" },
 					wp.element.createElement(Icon, { icon: "edit" })
 				),
-				wp.element.createElement(EditItemsTable, {
+				wp.element.createElement(CP.EditItemsTable, {
 					set: setAttributes,
 					attr: attributes,
 					columns: [{ type: 'text', key: 'title', cond: states.hasTitle }, { type: 'image', label: 'image', keys: imageKeys.image, cond: true }, { type: 'text', key: 'imageCode', cond: states.isTemplate }, { type: 'text', key: 'linkUrl', cond: true }, { type: 'text', key: 'target', cond: true }],
@@ -230,7 +230,7 @@ registerBlockType('catpow/banners', {
 						wp.element.createElement(
 							"a",
 							{ href: item.linkUrl, target: item.target, "data-event": item.event, rel: item.target ? 'noopener noreferrer' : '' },
-							wp.element.createElement(ResponsiveImage, {
+							wp.element.createElement(CP.ResponsiveImage, {
 								attr: attributes,
 								keys: imageKeys.image,
 								index: index,
@@ -279,7 +279,7 @@ registerBlockType('catpow/banners', {
 						wp.element.createElement(
 							"a",
 							{ href: item.linkUrl, target: item.target, "data-event": item.event, rel: item.target ? 'noopener noreferrer' : '' },
-							wp.element.createElement(ResponsiveImage, {
+							wp.element.createElement(CP.ResponsiveImage, {
 								attr: attributes,
 								keys: imageKeys.image,
 								index: index,

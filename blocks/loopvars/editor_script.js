@@ -17,7 +17,7 @@ registerBlockType('catpow/loopvars', {
 		return wp.element.createElement(
 			Fragment,
 			null,
-			wp.element.createElement(SelectModeToolbar, {
+			wp.element.createElement(CP.SelectModeToolbar, {
 				set: setAttributes,
 				attr: attributes
 			}),
@@ -29,7 +29,7 @@ registerBlockType('catpow/loopvars', {
 					{ 'class': 'label' },
 					wp.element.createElement(Icon, { icon: 'edit' })
 				),
-				wp.element.createElement(EditItemsTable, {
+				wp.element.createElement(CP.EditItemsTable, {
 					set: setAttributes,
 					attr: attributes,
 					columns: columns
@@ -50,7 +50,7 @@ registerBlockType('catpow/loopvars', {
 				wp.element.createElement(
 					PanelBody,
 					{ title: '\u5909\u6570' },
-					wp.element.createElement(EditItemsTable, {
+					wp.element.createElement(CP.EditItemsTable, {
 						set: setAttributes,
 						attr: attributes,
 						itemsKey: 'columns',

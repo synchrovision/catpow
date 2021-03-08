@@ -49,7 +49,7 @@ registerBlockType('catpow/pricecard', {
 				item.controlClasses = 'control';
 			}
 			rtn.push(wp.element.createElement(
-				Item,
+				CP.Item,
 				{
 					tag: 'li',
 					set: setAttributes,
@@ -61,7 +61,7 @@ registerBlockType('catpow/pricecard', {
 				states.hasImage && wp.element.createElement(
 					'div',
 					{ className: 'image' },
-					wp.element.createElement(SelectResponsiveImage, {
+					wp.element.createElement(CP.SelectResponsiveImage, {
 						attr: attributes,
 						set: setAttributes,
 						keys: imageKeys.image,
@@ -237,14 +237,14 @@ registerBlockType('catpow/pricecard', {
 		return wp.element.createElement(
 			Fragment,
 			null,
-			wp.element.createElement(SelectModeToolbar, {
+			wp.element.createElement(CP.SelectModeToolbar, {
 				set: setAttributes,
 				attr: attributes
 			}),
 			wp.element.createElement(
 				InspectorControls,
 				null,
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: '\u30AF\u30E9\u30B9',
 					icon: 'art',
 					set: setAttributes,
@@ -263,7 +263,7 @@ registerBlockType('catpow/pricecard', {
 						value: classArray.join(' ')
 					})
 				),
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: '\u30A2\u30A4\u30C6\u30E0',
 					icon: 'edit',
 					set: setAttributes,
@@ -273,9 +273,9 @@ registerBlockType('catpow/pricecard', {
 					selectiveClasses: itemSelectiveClasses,
 					filters: CP.filters.pricecard || {}
 				}),
-				wp.element.createElement(ItemControlInfoPanel, null)
+				wp.element.createElement(CP.ItemControlInfoPanel, null)
 			),
-			attributes.EditMode ? wp.element.createElement(EditItemsTable, {
+			attributes.EditMode ? wp.element.createElement(CP.EditItemsTable, {
 				set: setAttributes,
 				attr: attributes,
 				columns: [{ type: 'text', key: 'title', cond: states.hasTitle }, { type: 'text', key: 'titleCaption', cond: states.hasTitleCaption }, { type: 'image', keys: imageKeys.image, cond: states.hasImage }, { type: 'text', key: 'imageCode', cond: states.hasImage && states.isTemplate }, { type: 'text', key: 'subTitle', cond: states.hasSubTitle }, { type: 'text', key: 'text', cond: states.hasText }, { type: 'text', key: 'listPrice', cond: true }, { type: 'text', key: 'price', cond: true }, { type: 'text', key: 'linkUrl', cond: states.hasLink }],
@@ -332,7 +332,7 @@ registerBlockType('catpow/pricecard', {
 				states.hasImage && wp.element.createElement(
 					'div',
 					{ className: 'image' },
-					wp.element.createElement(ResponsiveImage, {
+					wp.element.createElement(CP.ResponsiveImage, {
 						attr: attributes,
 						keys: imageKeys.image,
 						index: index,
@@ -489,7 +489,7 @@ registerBlockType('catpow/pricecard', {
 					states.hasImage && wp.element.createElement(
 						'div',
 						{ className: 'image' },
-						wp.element.createElement(ResponsiveImage, {
+						wp.element.createElement(CP.ResponsiveImage, {
 							attr: attributes,
 							keys: imageKeys.image,
 							index: index,

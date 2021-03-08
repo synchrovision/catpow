@@ -69,7 +69,7 @@ registerBlockType('catpow/panes', {
 				item.controlClasses = 'control';
 			}
 			rtn.push(wp.element.createElement(
-				Item,
+				CP.Item,
 				{
 					tag: "li",
 					set: setAttributes,
@@ -81,7 +81,7 @@ registerBlockType('catpow/panes', {
 				wp.element.createElement(
 					"div",
 					{ "class": "image" },
-					wp.element.createElement(SelectResponsiveImage, {
+					wp.element.createElement(CP.SelectResponsiveImage, {
 						attr: attributes,
 						set: setAttributes,
 						keys: imageKeys.image,
@@ -99,7 +99,7 @@ registerBlockType('catpow/panes', {
 						states.hasSymbol && wp.element.createElement(
 							"div",
 							{ className: "symbol" },
-							wp.element.createElement(ResponsiveImage, {
+							wp.element.createElement(CP.ResponsiveImage, {
 								attr: attributes,
 								keys: imageKeys.symbol,
 								index: index,
@@ -157,14 +157,14 @@ registerBlockType('catpow/panes', {
 		return wp.element.createElement(
 			Fragment,
 			null,
-			wp.element.createElement(SelectModeToolbar, {
+			wp.element.createElement(CP.SelectModeToolbar, {
 				set: setAttributes,
 				attr: attributes
 			}),
 			wp.element.createElement(
 				InspectorControls,
 				null,
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: "\u30AF\u30E9\u30B9",
 					icon: "art",
 					set: setAttributes,
@@ -183,7 +183,7 @@ registerBlockType('catpow/panes', {
 						value: classes
 					})
 				),
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: "\u30A2\u30A4\u30C6\u30E0",
 					icon: "edit",
 					set: setAttributes,
@@ -193,7 +193,7 @@ registerBlockType('catpow/panes', {
 					selectiveClasses: itemSelectiveClasses,
 					filters: CP.filters.panes || {}
 				}),
-				wp.element.createElement(ItemControlInfoPanel, null)
+				wp.element.createElement(CP.ItemControlInfoPanel, null)
 			),
 			EditMode ? wp.element.createElement(
 				"div",
@@ -203,7 +203,7 @@ registerBlockType('catpow/panes', {
 					{ "class": "label" },
 					wp.element.createElement(Icon, { icon: "edit" })
 				),
-				wp.element.createElement(EditItemsTable, {
+				wp.element.createElement(CP.EditItemsTable, {
 					set: setAttributes,
 					attr: attributes,
 					columns: [{ type: 'image', label: 'image', keys: imageKeys.image, cond: true }, { type: 'text', key: 'imageCode', cond: states.isTemplate }, { type: 'text', key: 'title', cond: states.hasTitle }, { type: 'text', key: 'titleCaption', cond: states.hasTitleCaption }, { type: 'text', key: 'linkUrl', cond: states.hasLink }],
@@ -252,7 +252,7 @@ registerBlockType('catpow/panes', {
 				wp.element.createElement(
 					"div",
 					{ className: "image" },
-					wp.element.createElement(ResponsiveImage, {
+					wp.element.createElement(CP.ResponsiveImage, {
 						attr: attributes,
 						keys: imageKeys.image,
 						index: index,
@@ -268,7 +268,7 @@ registerBlockType('catpow/panes', {
 						states.hasSymbol && wp.element.createElement(
 							"div",
 							{ className: "symbol" },
-							wp.element.createElement(ResponsiveImage, {
+							wp.element.createElement(CP.ResponsiveImage, {
 								attr: attributes,
 								keys: imageKeys.symbol,
 								index: index,

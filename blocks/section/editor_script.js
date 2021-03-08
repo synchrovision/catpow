@@ -190,14 +190,14 @@ registerBlockType('catpow/section', {
 		return [wp.element.createElement(
 			BlockControls,
 			null,
-			wp.element.createElement(AlignClassToolbar, { set: setAttributes, attr: attributes })
+			wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })
 		), wp.element.createElement(
 			SectionTag,
 			{ id: id, className: classes },
 			states.hasImage && wp.element.createElement(
 				'div',
 				{ 'class': 'image' },
-				states.isTemplate && imageCode ? wp.element.createElement(DummyImage, { text: imageCode }) : wp.element.createElement(SelectResponsiveImage, {
+				states.isTemplate && imageCode ? wp.element.createElement(CP.DummyImage, { text: imageCode }) : wp.element.createElement(CP.SelectResponsiveImage, {
 					attr: attributes,
 					set: setAttributes,
 					keys: imageKeys.image,
@@ -228,7 +228,7 @@ registerBlockType('catpow/section', {
 						states.hasHeaderImage && wp.element.createElement(
 							'div',
 							{ 'class': 'image' },
-							states.isTemplate && headerImageCode ? wp.element.createElement(DummyImage, { text: headerImageCode }) : wp.element.createElement(SelectResponsiveImage, {
+							states.isTemplate && headerImageCode ? wp.element.createElement(CP.DummyImage, { text: headerImageCode }) : wp.element.createElement(CP.SelectResponsiveImage, {
 								set: setAttributes,
 								attr: attributes,
 								keys: imageKeys.headerImage,
@@ -253,7 +253,7 @@ registerBlockType('catpow/section', {
 					states.hasHeaderBackgroundImage && wp.element.createElement(
 						'div',
 						{ 'class': 'background' },
-						states.isTemplate && headerBackgroundImageCode ? wp.element.createElement(DummyImage, { text: headerBackgroundImageCode }) : wp.element.createElement(SelectResponsiveImage, {
+						states.isTemplate && headerBackgroundImageCode ? wp.element.createElement(CP.DummyImage, { text: headerBackgroundImageCode }) : wp.element.createElement(CP.SelectResponsiveImage, {
 							set: setAttributes,
 							attr: attributes,
 							keys: imageKeys.headerBackgroundImage
@@ -269,7 +269,7 @@ registerBlockType('catpow/section', {
 			states.hasBackgroundImage && wp.element.createElement(
 				'div',
 				{ 'class': 'background' },
-				states.isTemplate && backgroundImageCode ? wp.element.createElement(DummyImage, { text: backgroundImageCode }) : wp.element.createElement(SelectResponsiveImage, {
+				states.isTemplate && backgroundImageCode ? wp.element.createElement(CP.DummyImage, { text: backgroundImageCode }) : wp.element.createElement(CP.SelectResponsiveImage, {
 					set: setAttributes,
 					attr: attributes,
 					keys: imageKeys.backgroundImage
@@ -298,7 +298,7 @@ registerBlockType('catpow/section', {
 		), wp.element.createElement(
 			InspectorControls,
 			null,
-			wp.element.createElement(SelectClassPanel, {
+			wp.element.createElement(CP.SelectClassPanel, {
 				title: '\u30AF\u30E9\u30B9',
 				icon: 'art',
 				set: setAttributes,
@@ -376,7 +376,7 @@ registerBlockType('catpow/section', {
 			states.hasImage && wp.element.createElement(
 				'div',
 				{ 'class': 'image' },
-				states.isTemplate && imageCode ? imageCode : wp.element.createElement(ResponsiveImage, {
+				states.isTemplate && imageCode ? imageCode : wp.element.createElement(CP.ResponsiveImage, {
 					attr: attributes,
 					keys: imageKeys.image,
 					size: 'medium_large'
@@ -404,7 +404,7 @@ registerBlockType('catpow/section', {
 						states.hasHeaderImage && wp.element.createElement(
 							'div',
 							{ 'class': 'image' },
-							states.isTemplate && headerImageCode ? headerImageCode : wp.element.createElement(ResponsiveImage, {
+							states.isTemplate && headerImageCode ? headerImageCode : wp.element.createElement(CP.ResponsiveImage, {
 								attr: attributes,
 								keys: imageKeys.headerImage
 							})
@@ -423,7 +423,7 @@ registerBlockType('catpow/section', {
 					states.hasHeaderBackgroundImage && wp.element.createElement(
 						'div',
 						{ 'class': 'background' },
-						states.isTemplate && headerBackgroundImageCode ? headerBackgroundImageCode : wp.element.createElement(ResponsiveImage, {
+						states.isTemplate && headerBackgroundImageCode ? headerBackgroundImageCode : wp.element.createElement(CP.ResponsiveImage, {
 							attr: attributes,
 							keys: imageKeys.headerBackgroundImage,
 							devices: devices
@@ -439,7 +439,7 @@ registerBlockType('catpow/section', {
 			states.hasBackgroundImage && wp.element.createElement(
 				'div',
 				{ 'class': 'background' },
-				states.isTemplate && backgroundImageCode ? backgroundImageCode : wp.element.createElement(ResponsiveImage, {
+				states.isTemplate && backgroundImageCode ? backgroundImageCode : wp.element.createElement(CP.ResponsiveImage, {
 					attr: attributes,
 					keys: imageKeys.backgroundImage,
 					devices: devices
@@ -544,7 +544,7 @@ registerBlockType('catpow/section', {
 				states.hasImage && wp.element.createElement(
 					'div',
 					{ 'class': 'image' },
-					states.isTemplate && imageCode ? imageCode : wp.element.createElement(ResponsiveImage, {
+					states.isTemplate && imageCode ? imageCode : wp.element.createElement(CP.ResponsiveImage, {
 						attr: attributes,
 						keys: imageKeys.image,
 						size: 'medium_large'
@@ -572,7 +572,7 @@ registerBlockType('catpow/section', {
 							states.hasHeaderImage && wp.element.createElement(
 								'div',
 								{ 'class': 'image' },
-								states.isTemplate && headerImageCode ? headerImageCode : wp.element.createElement(ResponsiveImage, {
+								states.isTemplate && headerImageCode ? headerImageCode : wp.element.createElement(CP.ResponsiveImage, {
 									attr: attributes,
 									keys: imageKeys.headerImage
 								})
@@ -591,7 +591,7 @@ registerBlockType('catpow/section', {
 						states.hasHeaderBackgroundImage && wp.element.createElement(
 							'div',
 							{ 'class': 'background' },
-							states.isTemplate && headerBackgroundImageCode ? headerBackgroundImageCode : wp.element.createElement(ResponsiveImage, {
+							states.isTemplate && headerBackgroundImageCode ? headerBackgroundImageCode : wp.element.createElement(CP.ResponsiveImage, {
 								attr: attributes,
 								keys: imageKeys.headerBackgroundImage
 							})
@@ -606,7 +606,7 @@ registerBlockType('catpow/section', {
 				states.hasBackgroundImage && wp.element.createElement(
 					'div',
 					{ 'class': 'background' },
-					states.isTemplate && backgroundImageCode ? backgroundImageCode : wp.element.createElement(ResponsiveImage, {
+					states.isTemplate && backgroundImageCode ? backgroundImageCode : wp.element.createElement(CP.ResponsiveImage, {
 						attr: attributes,
 						keys: imageKeys.backgroundImage
 					})

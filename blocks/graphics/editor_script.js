@@ -243,7 +243,7 @@ registerBlockType('catpow/graphics', {
 		return wp.element.createElement(
 			Fragment,
 			null,
-			wp.element.createElement(SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices: devices }),
+			wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices: devices }),
 			wp.element.createElement(
 				'div',
 				{
@@ -262,7 +262,7 @@ registerBlockType('catpow/graphics', {
 				wp.element.createElement(
 					'div',
 					{ 'class': 'base' },
-					states.hasBaseImage && wp.element.createElement(ResponsiveImage, {
+					states.hasBaseImage && wp.element.createElement(CP.ResponsiveImage, {
 						attr: attributes,
 						keys: imageKeys.base,
 						devices: devices,
@@ -321,7 +321,7 @@ registerBlockType('catpow/graphics', {
 									)
 								);
 							}
-							return wp.element.createElement(SelectResponsiveImage, {
+							return wp.element.createElement(CP.SelectResponsiveImage, {
 								attr: attributes,
 								set: setAttributes,
 								devices: devices,
@@ -351,7 +351,7 @@ registerBlockType('catpow/graphics', {
 								)
 							);
 						}
-						return wp.element.createElement(ResponsiveImage, {
+						return wp.element.createElement(CP.ResponsiveImage, {
 							attr: attributes,
 							keys: imageKeys.image,
 							devices: devices,
@@ -404,7 +404,7 @@ registerBlockType('catpow/graphics', {
 			wp.element.createElement(
 				InspectorControls,
 				null,
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: '\u30AF\u30E9\u30B9',
 					icon: 'art',
 					set: setAttributes,
@@ -423,7 +423,7 @@ registerBlockType('catpow/graphics', {
 						value: id
 					})
 				),
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: '\u30A2\u30A4\u30C6\u30E0',
 					icon: 'edit',
 					set: setAttributes,
@@ -445,7 +445,7 @@ registerBlockType('catpow/graphics', {
 						value: items[attributes.currentItemIndex].classes
 					})
 				),
-				wp.element.createElement(ItemControlInfoPanel, null)
+				wp.element.createElement(CP.ItemControlInfoPanel, null)
 			)
 		);
 	},
@@ -477,7 +477,7 @@ registerBlockType('catpow/graphics', {
 			wp.element.createElement(
 				'div',
 				{ 'class': 'base' },
-				states.hasBaseImage && wp.element.createElement(ResponsiveImage, {
+				states.hasBaseImage && wp.element.createElement(CP.ResponsiveImage, {
 					attr: attributes,
 					keys: imageKeys.base,
 					devices: devices
@@ -507,7 +507,7 @@ registerBlockType('catpow/graphics', {
 							)
 						);
 					}
-					return wp.element.createElement(ResponsiveImage, {
+					return wp.element.createElement(CP.ResponsiveImage, {
 						attr: attributes,
 						keys: imageKeys.image,
 						index: index,

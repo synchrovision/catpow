@@ -83,7 +83,7 @@ registerBlockType('catpow/div', {
 			states.hasIcon && wp.element.createElement(
 				'div',
 				{ 'class': 'icon' },
-				wp.element.createElement(SelectResponsiveImage, {
+				wp.element.createElement(CP.SelectResponsiveImage, {
 					set: setAttributes,
 					attr: attributes,
 					keys: imageKeys.iconImage,
@@ -93,7 +93,7 @@ registerBlockType('catpow/div', {
 			states.hasBackgroundImage && wp.element.createElement(
 				'div',
 				{ 'class': 'background' },
-				wp.element.createElement(ResponsiveImage, {
+				wp.element.createElement(CP.ResponsiveImage, {
 					set: setAttributes,
 					attr: attributes,
 					keys: imageKeys.backgroundImage,
@@ -119,7 +119,7 @@ registerBlockType('catpow/div', {
 		), wp.element.createElement(
 			InspectorControls,
 			null,
-			wp.element.createElement(SelectClassPanel, {
+			wp.element.createElement(CP.SelectClassPanel, {
 				title: '\u30AF\u30E9\u30B9',
 				icon: 'art',
 				set: setAttributes,
@@ -165,7 +165,7 @@ registerBlockType('catpow/div', {
 			states.hasIcon && wp.element.createElement(
 				'div',
 				{ 'class': 'icon' },
-				wp.element.createElement(ResponsiveImage, {
+				wp.element.createElement(CP.ResponsiveImage, {
 					attr: attributes,
 					keys: imageKeys.iconImage
 				})
@@ -173,7 +173,7 @@ registerBlockType('catpow/div', {
 			states.hasBackgroundImage && wp.element.createElement(
 				'div',
 				{ 'class': 'background' },
-				wp.element.createElement(ResponsiveImage, {
+				wp.element.createElement(CP.ResponsiveImage, {
 					attr: attributes,
 					keys: imageKeys.backgroundImage,
 					devices: devices

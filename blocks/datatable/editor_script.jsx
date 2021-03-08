@@ -126,7 +126,7 @@
 		
 		return (
 			<Fragment>
-				<SelectModeToolbar
+				<CP.SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
 					modes={['AltMode']}
@@ -197,7 +197,7 @@
 					)}
 				</Fragment>
 				<InspectorControls>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='表示設定'
 						icon='admin-appearance'
 						set={setAttributes}
@@ -205,7 +205,7 @@
 						selectiveClasses={statesClasses}
 						filters={CP.filters.datatable || {}}
 					/>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='クラス'
 						icon='art'
 						set={setAttributes}

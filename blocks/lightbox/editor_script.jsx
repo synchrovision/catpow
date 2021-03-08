@@ -74,7 +74,7 @@ registerBlockType('catpow/lightbox',{
 		
 		items.map((item,index)=>{
 			rtn.push(
-				<Item
+				<CP.Item
 					tag='li'
 					set={setAttributes}
 					attr={attributes}
@@ -84,7 +84,7 @@ registerBlockType('catpow/lightbox',{
 					<header>
 						{states.hasHeaderImage &&
 							<div className='image'>
-								<SelectResponsiveImage
+								<CP.SelectResponsiveImage
 									attr={attributes}
 									set={setAttributes}
 									keys={imageKeys.headerImage}
@@ -113,7 +113,7 @@ registerBlockType('catpow/lightbox',{
 							</div>
 						}
 					</header>
-				</Item>
+				</CP.Item>
 			);
 		});
 		
@@ -126,13 +126,13 @@ registerBlockType('catpow/lightbox',{
 		
         return (
 			<Fragment>
-				<SelectModeToolbar
+				<CP.SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
 					modes={['EditMode','AltMode','OpenMode']}
 				/>
 				<InspectorControls>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='クラス'
 						icon='art'
 						set={setAttributes}
@@ -152,7 +152,7 @@ registerBlockType('catpow/lightbox',{
 							value={boxClasses}
 						/>
 					</PanelBody>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='リストアイテム'
 						icon='edit'
 						set={setAttributes}
@@ -162,7 +162,7 @@ registerBlockType('catpow/lightbox',{
 						selectiveClasses={itemSelectiveClasses}
 						filters={CP.filters.lightbox || {}}
 					/>
-					<ItemControlInfoPanel/>
+					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
 				{!OpenMode?(
 					<Fragment>
@@ -171,7 +171,7 @@ registerBlockType('catpow/lightbox',{
 								<div class="label">
 									<Icon icon="edit"/>
 								</div>
-								<EditItemsTable
+								<CP.EditItemsTable
 									set={setAttributes}
 									attr={attributes}
 									columns={[
@@ -226,7 +226,7 @@ registerBlockType('catpow/lightbox',{
 													}
 													{states.hasImage &&
 														<div className='image'>
-															<SelectResponsiveImage
+															<CP.SelectResponsiveImage
 																attr={attributes}
 																set={setAttributes}
 																keys={imageKeys.image}
@@ -291,7 +291,7 @@ registerBlockType('catpow/lightbox',{
 								<header>
 									{states.hasHeaderImage && 
 										<div className='image'>
-											<ResponsiveImage
+											<CP.ResponsiveImage
 												attr={attributes}
 												keys={imageKeys.headerImage}
 												index={index}
@@ -310,7 +310,7 @@ registerBlockType('catpow/lightbox',{
 									{states.hasSubTitle && <header className="title"><h4><RichText.Content value={item.subTitle}/></h4></header>}
 									{states.hasImage &&
 										<div className='image'>
-											<ResponsiveImage
+											<CP.ResponsiveImage
 												attr={attributes}
 												keys={imageKeys.image}
 												index={index}

@@ -68,7 +68,7 @@ registerBlockType('catpow/accordion', {
 					states.hasImage && wp.element.createElement(
 						'div',
 						{ className: 'image' },
-						states.isTemplate && imageCode ? wp.element.createElement(DummyImage, { text: imageCode }) : wp.element.createElement(SelectResponsiveImage, {
+						states.isTemplate && imageCode ? wp.element.createElement(CP.DummyImage, { text: imageCode }) : wp.element.createElement(CP.SelectResponsiveImage, {
 							set: setAttributes,
 							attr: attributes,
 							keys: imageKeys.image,
@@ -97,7 +97,7 @@ registerBlockType('catpow/accordion', {
 			wp.element.createElement(
 				InspectorControls,
 				null,
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: '\u30AF\u30E9\u30B9',
 					icon: 'art',
 					set: setAttributes,
@@ -149,7 +149,7 @@ registerBlockType('catpow/accordion', {
 					states.hasImage && wp.element.createElement(
 						'div',
 						{ 'class': 'image' },
-						states.isTemplate && imageCode ? imageCode : wp.element.createElement(ResponsiveImage, {
+						states.isTemplate && imageCode ? imageCode : wp.element.createElement(CP.ResponsiveImage, {
 							attr: attributes,
 							keys: imageKeys.image,
 							size: 'medium_large'

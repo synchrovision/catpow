@@ -132,7 +132,7 @@
 				(CP.getNumberClass({attr:item},'cspan') || 1);
 			
 			rtn.push(
-				<Item
+				<CP.Item
 					tag='li'
 					set={setAttributes}
 					attr={attributes}
@@ -142,7 +142,7 @@
 				>
 					{itemStates.hasImage &&
 						<div className='image'>
-							<SelectResponsiveImage
+							<CP.SelectResponsiveImage
 								attr={attributes}
 								set={setAttributes}
 								keys={imageKeys.image}
@@ -154,7 +154,7 @@
 					<div class="text">
 						{itemStates.hasIcon &&
 							<div className='icon'>
-								<SelectResponsiveImage
+								<CP.SelectResponsiveImage
 									attr={attributes}
 									set={setAttributes}
 									keys={imageKeys.icon}
@@ -188,7 +188,7 @@
 							</div>
 						}
 					</div>
-				</Item>
+				</CP.Item>
 			);
 		});
 		
@@ -209,14 +209,14 @@
 			</BlockControls>,
 			<ul class={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>,
 			<InspectorControls>
-				<SelectClassPanel
+				<CP.SelectClassPanel
 					title='クラス'
 					icon='art'
 					set={setAttributes}
 					attr={attributes}
 					selectiveClasses={selectiveClasses}
 				/>
-				<SelectClassPanel
+				<CP.SelectClassPanel
 					title='パネル'
 					icon='edit'
 					set={setAttributes}
@@ -235,7 +235,7 @@
 						value={classArray.join(' ')}
 					/>
 				</PanelBody>
-				<ItemControlInfoPanel/>
+				<CP.ItemControlInfoPanel/>
 			</InspectorControls>
         ];
     },

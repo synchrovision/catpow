@@ -60,7 +60,7 @@ registerBlockType('catpow/dialog', {
 				item.controlClasses = 'control';
 			}
 			rtn.push(wp.element.createElement(
-				Item,
+				CP.Item,
 				{
 					tag: 'li',
 					set: setAttributes,
@@ -75,7 +75,7 @@ registerBlockType('catpow/dialog', {
 					wp.element.createElement(
 						'div',
 						{ className: 'image' },
-						wp.element.createElement(SelectResponsiveImage, {
+						wp.element.createElement(CP.SelectResponsiveImage, {
 							attr: attributes,
 							set: setAttributes,
 							keys: imageKeys.headerImage,
@@ -126,7 +126,7 @@ registerBlockType('catpow/dialog', {
 		return wp.element.createElement(
 			Fragment,
 			null,
-			wp.element.createElement(SelectModeToolbar, {
+			wp.element.createElement(CP.SelectModeToolbar, {
 				set: setAttributes,
 				attr: attributes
 			}),
@@ -144,7 +144,7 @@ registerBlockType('catpow/dialog', {
 						value: classArray.join(' ')
 					})
 				),
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: '\u30AF\u30E9\u30B9',
 					icon: 'art',
 					set: setAttributes,
@@ -152,7 +152,7 @@ registerBlockType('catpow/dialog', {
 					selectiveClasses: selectiveClasses,
 					filters: CP.filters.banners || {}
 				}),
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: '\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0',
 					icon: 'edit',
 					set: setAttributes,
@@ -162,7 +162,7 @@ registerBlockType('catpow/dialog', {
 					selectiveClasses: itemClasses,
 					filters: CP.filters.dialog || {}
 				}),
-				wp.element.createElement(ItemControlInfoPanel, null)
+				wp.element.createElement(CP.ItemControlInfoPanel, null)
 			),
 			wp.element.createElement(
 				Fragment,
@@ -175,7 +175,7 @@ registerBlockType('catpow/dialog', {
 						{ 'class': 'label' },
 						wp.element.createElement(Icon, { icon: 'edit' })
 					),
-					wp.element.createElement(EditItemsTable, {
+					wp.element.createElement(CP.EditItemsTable, {
 						set: setAttributes,
 						attr: attributes,
 						columns: [{ type: 'image', label: 'header', keys: imageKeys.headerImage, cond: true }, { type: 'text', key: 'headerImageCode', cond: states.isTemplate }, { type: 'text', key: 'title', cond: true }, { type: 'text', key: 'text', cond: true }],
@@ -236,7 +236,7 @@ registerBlockType('catpow/dialog', {
 					wp.element.createElement(
 						'div',
 						{ 'class': 'image' },
-						wp.element.createElement(ResponsiveImage, {
+						wp.element.createElement(CP.ResponsiveImage, {
 							attr: attributes,
 							keys: imageKeys.headerImage,
 							index: index,

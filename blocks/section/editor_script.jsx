@@ -260,15 +260,15 @@ registerBlockType('catpow/section',{
 		
         return [
 			<BlockControls>
-				<AlignClassToolbar set={setAttributes} attr={attributes}/>
+				<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
 			</BlockControls>,
 			<SectionTag id={id} className={classes}>
 				{states.hasImage && 
 					<div class="image">
 						{(states.isTemplate && imageCode)?(
-							<DummyImage text={imageCode}/>
+							<CP.DummyImage text={imageCode}/>
 						):(
-							<SelectResponsiveImage
+							<CP.SelectResponsiveImage
 								attr={attributes}
 								set={setAttributes}
 								keys={imageKeys.image}
@@ -293,9 +293,9 @@ registerBlockType('catpow/section',{
 							{states.hasHeaderImage &&
 								<div class="image">
 									{(states.isTemplate && headerImageCode)?(
-										<DummyImage text={headerImageCode}/>
+										<CP.DummyImage text={headerImageCode}/>
 									):(
-										<SelectResponsiveImage
+										<CP.SelectResponsiveImage
 											set={setAttributes}
 											attr={attributes}
 											keys={imageKeys.headerImage}
@@ -315,9 +315,9 @@ registerBlockType('catpow/section',{
 						{states.hasHeaderBackgroundImage && 
 							<div class="background">
 								{(states.isTemplate && headerBackgroundImageCode)?(
-									<DummyImage text={headerBackgroundImageCode}/>
+									<CP.DummyImage text={headerBackgroundImageCode}/>
 								):(
-									<SelectResponsiveImage
+									<CP.SelectResponsiveImage
 										set={setAttributes}
 										attr={attributes}
 										keys={imageKeys.headerBackgroundImage}
@@ -331,9 +331,9 @@ registerBlockType('catpow/section',{
 				{states.hasBackgroundImage && 
 					<div class="background">
 						{(states.isTemplate && backgroundImageCode)?(
-							<DummyImage text={backgroundImageCode}/>
+							<CP.DummyImage text={backgroundImageCode}/>
 						):(
-							<SelectResponsiveImage
+							<CP.SelectResponsiveImage
 								set={setAttributes}
 								attr={attributes}
 								keys={imageKeys.backgroundImage}
@@ -355,7 +355,7 @@ registerBlockType('catpow/section',{
 				)}
 			</SectionTag>,
 			<InspectorControls>
-				<SelectClassPanel
+				<CP.SelectClassPanel
 					title='クラス'
 					icon='art'
 					set={setAttributes}
@@ -404,7 +404,7 @@ registerBlockType('catpow/section',{
 						{(states.isTemplate && imageCode)?(
 							imageCode
 						):(
-							<ResponsiveImage
+							<CP.ResponsiveImage
 								attr={attributes}
 								keys={imageKeys.image}
 								size='medium_large'
@@ -428,7 +428,7 @@ registerBlockType('catpow/section',{
 									{(states.isTemplate && headerImageCode)?(
 										headerImageCode
 									):(
-										<ResponsiveImage
+										<CP.ResponsiveImage
 											attr={attributes}
 											keys={imageKeys.headerImage}
 										/>
@@ -445,7 +445,7 @@ registerBlockType('catpow/section',{
 								{(states.isTemplate && headerBackgroundImageCode)?(
 									headerBackgroundImageCode
 								):(
-									<ResponsiveImage
+									<CP.ResponsiveImage
 										attr={attributes}
 										keys={imageKeys.headerBackgroundImage}
 										devices={devices}
@@ -461,7 +461,7 @@ registerBlockType('catpow/section',{
 						{(states.isTemplate && backgroundImageCode)?(
 							backgroundImageCode
 						):(
-							<ResponsiveImage
+							<CP.ResponsiveImage
 								attr={attributes}
 								keys={imageKeys.backgroundImage}
 								devices={devices}
@@ -548,7 +548,7 @@ registerBlockType('catpow/section',{
 								{(states.isTemplate && imageCode)?(
 									imageCode
 								):(
-									<ResponsiveImage
+									<CP.ResponsiveImage
 										attr={attributes}
 										keys={imageKeys.image}
 										size='medium_large'
@@ -572,7 +572,7 @@ registerBlockType('catpow/section',{
 											{(states.isTemplate && headerImageCode)?(
 												headerImageCode
 											):(
-												<ResponsiveImage
+												<CP.ResponsiveImage
 													attr={attributes}
 													keys={imageKeys.headerImage}
 												/>
@@ -587,7 +587,7 @@ registerBlockType('catpow/section',{
 										{(states.isTemplate && headerBackgroundImageCode)?(
 											headerBackgroundImageCode
 										):(
-											<ResponsiveImage
+											<CP.ResponsiveImage
 												attr={attributes}
 												keys={imageKeys.headerBackgroundImage}
 											/>
@@ -602,7 +602,7 @@ registerBlockType('catpow/section',{
 								{(states.isTemplate && backgroundImageCode)?(
 									backgroundImageCode
 								):(
-									<ResponsiveImage
+									<CP.ResponsiveImage
 										attr={attributes}
 										keys={imageKeys.backgroundImage}
 									/>

@@ -234,7 +234,7 @@ registerBlockType('catpow/graphics',{
 		
         return (
 			<Fragment>
-				<SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices}/>
+				<CP.SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices}/>
 				<div
 					id={id}
 					className={classes+(device?' alt_content '+device:'')}
@@ -250,7 +250,7 @@ registerBlockType('catpow/graphics',{
 					}
 					<div class="base">
 						{states.hasBaseImage && 
-							<ResponsiveImage
+							<CP.ResponsiveImage
 								attr={attributes}
 								keys={imageKeys.base}
 								devices={devices}
@@ -301,7 +301,7 @@ registerBlockType('catpow/graphics',{
 									);
 								}
 								return (
-									<SelectResponsiveImage
+									<CP.SelectResponsiveImage
 										attr={attributes}
 										set={setAttributes}
 										devices={devices}
@@ -321,7 +321,7 @@ registerBlockType('catpow/graphics',{
 								);
 							}
 							return (
-								<ResponsiveImage
+								<CP.ResponsiveImage
 									attr={attributes}
 									keys={imageKeys.image}
 									devices={devices}
@@ -370,7 +370,7 @@ registerBlockType('catpow/graphics',{
 					</style>
 				</div>
 				<InspectorControls>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='クラス'
 						icon='art'
 						set={setAttributes}
@@ -385,7 +385,7 @@ registerBlockType('catpow/graphics',{
 							value={id}
 						/>
 					</PanelBody>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='アイテム'
 						icon='edit'
 						set={setAttributes}
@@ -407,7 +407,7 @@ registerBlockType('catpow/graphics',{
 							/>
 						</PanelBody>
 					}
-					<ItemControlInfoPanel/>
+					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
 			</Fragment>
         );
@@ -424,7 +424,7 @@ registerBlockType('catpow/graphics',{
 			<div id={id} className={classes} data-heights={heights}>
 				<div class="base">
 					{states.hasBaseImage && 
-						<ResponsiveImage
+						<CP.ResponsiveImage
 							attr={attributes}
 							keys={imageKeys.base}
 							devices={devices}
@@ -444,7 +444,7 @@ registerBlockType('catpow/graphics',{
 							);
 						}
 						return (
-							<ResponsiveImage
+							<CP.ResponsiveImage
 								attr={attributes}
 								keys={imageKeys.image}
 								index={index}

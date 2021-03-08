@@ -38,7 +38,7 @@
 									height="auto"
 								/>
 							):(
-								<SelectResponsiveImage
+								<CP.SelectResponsiveImage
 									set={setAttributes}
 									attr={attributes}
 									keys={{src:'src',alt:'alt'}}
@@ -52,7 +52,7 @@
 				</tbody>
 			</table>,
 			<InspectorControls>
-				<SelectClassPanel
+				<CP.SelectClassPanel
 					title='クラス'
 					icon='art'
 					set={setAttributes}

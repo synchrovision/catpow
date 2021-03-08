@@ -81,10 +81,10 @@
 				</tbody>
 			</table>,
 			<BlockControls>
-				<AlignClassToolbar set={setAttributes} attr={attributes}/>
+				<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
 			</BlockControls>,
 			<InspectorControls>
-				<SelectClassPanel
+				<CP.SelectClassPanel
 					title='クラス'
 					icon='art'
 					set={setAttributes}

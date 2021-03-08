@@ -43,7 +43,7 @@ registerBlockType('catpow/tabs', {
 		itemsCopy.map(function (item, index) {
 			var className = currentIndex == index ? 'active' : currentIndex > index ? 'before' : 'after';
 			rtn.push(wp.element.createElement(
-				Item,
+				CP.Item,
 				{
 					tag: 'li',
 					className: className,

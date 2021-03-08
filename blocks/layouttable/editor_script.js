@@ -528,7 +528,7 @@ registerBlockType('catpow/layouttable', {
 		), wp.element.createElement(
 			InspectorControls,
 			null,
-			wp.element.createElement(SelectClassPanel, {
+			wp.element.createElement(CP.SelectClassPanel, {
 				title: '\u30AF\u30E9\u30B9',
 				icon: 'art',
 				set: setAttributes,

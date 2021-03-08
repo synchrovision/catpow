@@ -85,7 +85,7 @@ registerBlockType('catpow/motiongraphic', {
 			wp.element.createElement(
 				InspectorControls,
 				null,
-				selections && wp.element.createElement(SelectClassPanel, {
+				selections && wp.element.createElement(CP.SelectClassPanel, {
 					classKey: 'component',
 					title: '\u8A2D\u5B9A',
 					icon: 'edit',

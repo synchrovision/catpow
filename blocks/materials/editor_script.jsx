@@ -41,7 +41,7 @@
 			if(!item.controlClasses){item.controlClasses='control';}
 			const itemStates=CP.wordsToFlags(item.classes);
 			rtn.push(
-				<Item
+				<CP.Item
 					tag='li'
 					set={setAttributes}
 					attr={attributes}
@@ -61,7 +61,7 @@
 					{item.items.map((subItem,subIndex)=>{
 						const subItemStates=CP.wordsToFlags(subItem.classes);
 						return (
-							<Item
+							<CP.Item
 								tag='li'
 								set={()=>{
 									item.currentItemIndex=subIndex;
@@ -95,11 +95,11 @@
 										</div>
 									}
 								</div>
-							</Item>
+							</CP.Item>
 						);
 					})}
 					</ul>
-				</Item>
+				</CP.Item>
 			);
 		});
 		
@@ -113,12 +113,12 @@
 		
         return (
 			<Fragment>
-				<SelectModeToolbar
+				<CP.SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
 				/>
 				<InspectorControls>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='クラス'
 						icon='art'
 						set={setAttributes}
@@ -133,7 +133,7 @@
 							value={classes}
 						/>
 					</PanelBody>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='リストアイテム'
 						icon='edit'
 						set={setAttributes}
@@ -143,7 +143,7 @@
 						selectiveClasses={itemSelectiveClasses}
 						filters={CP.filters.materials || {}}
 					/>
-					<ItemControlInfoPanel/>
+					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
 				<Fragment>
 					{EditMode?(
@@ -151,7 +151,7 @@
 							<div class="label">
 								<Icon icon="edit"/>
 							</div>
-							<EditItemsTable
+							<CP.EditItemsTable
 								set={setAttributes}
 								attr={attributes}
 								columns={[

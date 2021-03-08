@@ -122,7 +122,7 @@ registerBlockType('catpow/slider', {
 			}
 			itemClass = posClass + ' image' + imageIndex + ' thumb' + imageIndex;
 			rtn.push(wp.element.createElement(
-				Item,
+				CP.Item,
 				{
 					tag: 'li',
 					className: itemClass,
@@ -134,7 +134,7 @@ registerBlockType('catpow/slider', {
 				states.hasSlide && wp.element.createElement(
 					'div',
 					{ className: 'slide' },
-					wp.element.createElement(SelectResponsiveImage, {
+					wp.element.createElement(CP.SelectResponsiveImage, {
 						attr: attributes,
 						set: setAttributes,
 						keys: imageKeys.slide,
@@ -147,7 +147,7 @@ registerBlockType('catpow/slider', {
 				states.hasImage && wp.element.createElement(
 					'div',
 					{ className: 'image' },
-					wp.element.createElement(SelectResponsiveImage, {
+					wp.element.createElement(CP.SelectResponsiveImage, {
 						attr: attributes,
 						set: setAttributes,
 						keys: imageKeys.image,
@@ -192,7 +192,7 @@ registerBlockType('catpow/slider', {
 				states.hasBackgroundImage && wp.element.createElement(
 					'div',
 					{ className: 'background' },
-					wp.element.createElement(SelectResponsiveImage, {
+					wp.element.createElement(CP.SelectResponsiveImage, {
 						attr: attributes,
 						set: setAttributes,
 						keys: imageKeys.backgroundImage,
@@ -220,7 +220,7 @@ registerBlockType('catpow/slider', {
 					{ 'class': 'item ' + posClass + ' thumb' + imageIndex, onClick: function onClick() {
 							return gotoItem(index);
 						} },
-					wp.element.createElement(SelectResponsiveImage, {
+					wp.element.createElement(CP.SelectResponsiveImage, {
 						attr: attributes,
 						set: setAttributes,
 						keys: imageKeys.image,
@@ -248,14 +248,14 @@ registerBlockType('catpow/slider', {
 		return wp.element.createElement(
 			Fragment,
 			null,
-			wp.element.createElement(SelectModeToolbar, {
+			wp.element.createElement(CP.SelectModeToolbar, {
 				set: setAttributes,
 				attr: attributes
 			}),
 			wp.element.createElement(
 				InspectorControls,
 				null,
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: '\u30AF\u30E9\u30B9',
 					icon: 'art',
 					set: setAttributes,
@@ -263,7 +263,7 @@ registerBlockType('catpow/slider', {
 					selectiveClasses: selectiveClasses,
 					filters: CP.filters.slider || {}
 				}),
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: '\u8868\u793A\u8A2D\u5B9A',
 					icon: 'admin-appearance',
 					set: setAttributes,
@@ -271,7 +271,7 @@ registerBlockType('catpow/slider', {
 					selectiveClasses: statesClasses,
 					filters: CP.filters.slider || {}
 				}),
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					classKey: 'controlClasses',
 					title: '\u30A2\u30CB\u30E1\u30FC\u30B7\u30E7\u30F3\u8A2D\u5B9A',
 					icon: 'video-alt3',
@@ -280,7 +280,7 @@ registerBlockType('catpow/slider', {
 					selectiveClasses: animateClasses,
 					filters: CP.filters.slider || {}
 				}),
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					classKey: 'controlClasses',
 					title: '\u64CD\u4F5C\u8A2D\u5B9A',
 					icon: 'universal-access',
@@ -307,7 +307,7 @@ registerBlockType('catpow/slider', {
 						value: controlClasses
 					})
 				),
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: '\u30B9\u30E9\u30A4\u30C9',
 					icon: 'edit',
 					set: setAttributes,
@@ -317,7 +317,7 @@ registerBlockType('catpow/slider', {
 					triggerClasses: selectiveClasses[0],
 					filters: CP.filters.slider || {}
 				}),
-				wp.element.createElement(ItemControlInfoPanel, null)
+				wp.element.createElement(CP.ItemControlInfoPanel, null)
 			),
 			attributes.EditMode ? wp.element.createElement(
 				'div',
@@ -327,7 +327,7 @@ registerBlockType('catpow/slider', {
 					{ 'class': 'label' },
 					wp.element.createElement(Icon, { icon: 'edit' })
 				),
-				wp.element.createElement(EditItemsTable, {
+				wp.element.createElement(CP.EditItemsTable, {
 					set: setAttributes,
 					attr: attributes,
 					columns: [{ type: 'picture', label: 'slide', keys: imageKeys.slide, devices: devices, cond: states.hasSlide }, { type: 'text', key: 'slideCode', cond: states.isTemplate && states.hasSlide }, { type: 'image', label: 'image', keys: imageKeys.image, cond: states.hasImage }, { type: 'text', key: 'imageCode', cond: states.isTemplate && states.hasImage }, { type: 'picture', label: 'bg', keys: imageKeys.backgroundImage, devices: devices, cond: states.hasBackgroundImage }, { type: 'text', key: 'backgroundImageCode', cond: states.isTemplate && states.hasBackgroundImage }, { type: 'text', key: 'title', cond: states.hasTitle }, { type: 'text', key: 'subTitle', cond: states.hasSubTitle }, { type: 'text', key: 'text', cond: states.hasText }, { type: 'text', key: 'linkUrl', cond: states.hasLink }],
@@ -410,7 +410,7 @@ registerBlockType('catpow/slider', {
 				states.hasSlide && wp.element.createElement(
 					'div',
 					{ className: 'slide' },
-					wp.element.createElement(ResponsiveImage, {
+					wp.element.createElement(CP.ResponsiveImage, {
 						attr: attributes,
 						keys: imageKeys.slide,
 						devices: devices,
@@ -421,7 +421,7 @@ registerBlockType('catpow/slider', {
 				states.hasImage && wp.element.createElement(
 					'div',
 					{ className: 'image' },
-					wp.element.createElement(ResponsiveImage, {
+					wp.element.createElement(CP.ResponsiveImage, {
 						attr: attributes,
 						keys: imageKeys.image,
 						index: index,
@@ -450,7 +450,7 @@ registerBlockType('catpow/slider', {
 				states.hasBackgroundImage && wp.element.createElement(
 					'div',
 					{ className: 'background' },
-					wp.element.createElement(ResponsiveImage, {
+					wp.element.createElement(CP.ResponsiveImage, {
 						attr: attributes,
 						keys: imageKeys.backgroundImage,
 						devices: devices,
@@ -472,7 +472,7 @@ registerBlockType('catpow/slider', {
 				thumbs.push(wp.element.createElement(
 					'li',
 					{ 'class': item.classes },
-					wp.element.createElement(ResponsiveImage, {
+					wp.element.createElement(CP.ResponsiveImage, {
 						attr: attributes,
 						keys: imageKeys.image,
 						index: index,
@@ -726,7 +726,7 @@ registerBlockType('catpow/slider', {
 					states.hasSlide && wp.element.createElement(
 						'div',
 						{ className: 'slide' },
-						wp.element.createElement(ResponsiveImage, {
+						wp.element.createElement(CP.ResponsiveImage, {
 							attr: attributes,
 							keys: imageKeys.slide,
 							index: index,
@@ -736,7 +736,7 @@ registerBlockType('catpow/slider', {
 					states.hasImage && wp.element.createElement(
 						'div',
 						{ className: 'image' },
-						wp.element.createElement(ResponsiveImage, {
+						wp.element.createElement(CP.ResponsiveImage, {
 							attr: attributes,
 							keys: imageKeys.image,
 							index: index,
@@ -765,7 +765,7 @@ registerBlockType('catpow/slider', {
 					states.hasBackgroundImage && wp.element.createElement(
 						'div',
 						{ className: 'background' },
-						wp.element.createElement(ResponsiveImage, {
+						wp.element.createElement(CP.ResponsiveImage, {
 							attr: attributes,
 							keys: imageKeys.backgroundImage,
 							index: index,
@@ -786,7 +786,7 @@ registerBlockType('catpow/slider', {
 					thumbs.push(wp.element.createElement(
 						'li',
 						{ 'class': item.classes },
-						wp.element.createElement(ResponsiveImage, {
+						wp.element.createElement(CP.ResponsiveImage, {
 							attr: attributes,
 							keys: imageKeys.image,
 							index: index,

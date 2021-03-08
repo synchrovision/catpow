@@ -50,7 +50,7 @@ registerBlockType('catpow/widget', {
 					}
 				})
 			),
-			statesClasses && wp.element.createElement(SelectClassPanel, {
+			statesClasses && wp.element.createElement(CP.SelectClassPanel, {
 				title: '\u8A2D\u5B9A',
 				icon: 'admin-appearance',
 				set: setAttributes,

@@ -133,7 +133,7 @@ registerBlockType('catpow/listed',{
 		items.map((item,index)=>{
 			if(!item.controlClasses){item.controlClasses='control';}
 			rtn.push(
-				<Item
+				<CP.Item
 					tag='li'
 					set={setAttributes}
 					attr={attributes}
@@ -143,7 +143,7 @@ registerBlockType('catpow/listed',{
 				>
 					{states.hasImage && 
 						<div class="image">
-							<SelectResponsiveImage
+							<CP.SelectResponsiveImage
 								attr={attributes}
 								set={setAttributes}
 								keys={imageKeys.image}
@@ -164,7 +164,7 @@ registerBlockType('catpow/listed',{
 							}
 							{states.hasHeaderImage && 
 								<div class="image">
-									<SelectResponsiveImage
+									<CP.SelectResponsiveImage
 										attr={attributes}
 										set={setAttributes}
 										keys={imageKeys.headerImage}
@@ -205,7 +205,7 @@ registerBlockType('catpow/listed',{
 							}
 							{states.hasSubImage && 
 								<div class="image">
-									<SelectResponsiveImage
+									<CP.SelectResponsiveImage
 										attr={attributes}
 										set={setAttributes}
 										keys={imageKeys.subImage}
@@ -236,7 +236,7 @@ registerBlockType('catpow/listed',{
 					}
 					{states.hasBackgroundImage &&
 						<div className='background'>
-							<SelectResponsiveImage
+							<CP.SelectResponsiveImage
 								attr={attributes}
 								set={setAttributes}
 								keys={imageKeys.backgroundImage}
@@ -256,7 +256,7 @@ registerBlockType('catpow/listed',{
 							>{item.linkUrl}</p>
 						</div>
 					}
-				</Item>
+				</CP.Item>
 			);
 		});
 		
@@ -269,12 +269,12 @@ registerBlockType('catpow/listed',{
 		
         return (
 			<Fragment>
-				<SelectModeToolbar
+				<CP.SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
 				/>
 				<InspectorControls>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='クラス'
 						icon='art'
 						set={setAttributes}
@@ -289,7 +289,7 @@ registerBlockType('catpow/listed',{
 							value={classArray.join(' ')}
 						/>
 					</PanelBody>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='リストアイテム'
 						icon='edit'
 						set={setAttributes}
@@ -300,7 +300,7 @@ registerBlockType('catpow/listed',{
 						filters={CP.filters.listed || {}}
 					/>
 					{states.isTemplate &&
-						<SelectClassPanel
+						<CP.SelectClassPanel
 							title='テンプレート'
 							icon='edit'
 							set={setAttributes}
@@ -311,14 +311,14 @@ registerBlockType('catpow/listed',{
 							filters={CP.filters.listed || {}}
 						/>
 					}
-					<ItemControlInfoPanel/>
+					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
 				{EditMode?(
 					<div className="alt_content">
 						<div class="label">
 							<Icon icon="edit"/>
 						</div>
-						<EditItemsTable
+						<CP.EditItemsTable
 							set={setAttributes}
 							attr={attributes}
 							columns={[
@@ -367,7 +367,7 @@ registerBlockType('catpow/listed',{
 				<li className={item.classes}>
 					{states.hasImage &&
 						<div className='image'>
-							<ResponsiveImage
+							<CP.ResponsiveImage
 								attr={attributes}
 								keys={imageKeys.image}
 								index={index}
@@ -386,7 +386,7 @@ registerBlockType('catpow/listed',{
 							}
 							{states.hasHeaderImage &&
 								<div className='image'>
-									<ResponsiveImage
+									<CP.ResponsiveImage
 										attr={attributes}
 										keys={imageKeys.headerImage}
 										index={index}
@@ -411,7 +411,7 @@ registerBlockType('catpow/listed',{
 							}
 							{states.hasSubImage &&
 								<div className='image'>
-									<ResponsiveImage
+									<CP.ResponsiveImage
 										attr={attributes}
 										keys={imageKeys.subImage}
 										index={index}
@@ -425,7 +425,7 @@ registerBlockType('catpow/listed',{
 					}
 					{states.hasBackgroundImage && 
 						<div className='background'>
-							<ResponsiveImage
+							<CP.ResponsiveImage
 								attr={attributes}
 								keys={imageKeys.backgroundImage}
 								index={index}
@@ -468,7 +468,7 @@ registerBlockType('catpow/listed',{
 						<li className={item.classes}>
 							{states.hasImage &&
 								<div className='image'>
-									<ResponsiveImage
+									<CP.ResponsiveImage
 										attr={attributes}
 										keys={imageKeys.image}
 										index={index}
@@ -487,7 +487,7 @@ registerBlockType('catpow/listed',{
 									}
 									{states.hasHeaderImage &&
 										<div className='image'>
-											<ResponsiveImage
+											<CP.ResponsiveImage
 												attr={attributes}
 												keys={imageKeys.headerImage}
 												index={index}
@@ -512,7 +512,7 @@ registerBlockType('catpow/listed',{
 									}
 									{states.hasSubImage &&
 										<div className='image'>
-											<ResponsiveImage
+											<CP.ResponsiveImage
 												attr={attributes}
 												keys={imageKeys.subImage}
 												index={index}
@@ -526,7 +526,7 @@ registerBlockType('catpow/listed',{
 							}
 							{states.hasBackgroundImage && 
 								<div className='background'>
-									<ResponsiveImage
+									<CP.ResponsiveImage
 										attr={attributes}
 										keys={imageKeys.backgroundImage}
 										index={index}

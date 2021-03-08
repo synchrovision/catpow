@@ -78,7 +78,7 @@ registerBlockType('catpow/sphere', {
 				item.controlClasses = 'control';
 			}
 			rtn.push(wp.element.createElement(
-				Item,
+				CP.Item,
 				{
 					tag: "li",
 					set: setAttributes,
@@ -93,7 +93,7 @@ registerBlockType('catpow/sphere', {
 					states.hasSubImage && wp.element.createElement(
 						"div",
 						{ className: "image" },
-						wp.element.createElement(SelectResponsiveImage, {
+						wp.element.createElement(CP.SelectResponsiveImage, {
 							attr: attributes,
 							set: setAttributes,
 							keys: imageKeys.subImage,
@@ -146,7 +146,7 @@ registerBlockType('catpow/sphere', {
 		), wp.element.createElement(
 			InspectorControls,
 			null,
-			wp.element.createElement(SelectClassPanel, {
+			wp.element.createElement(CP.SelectClassPanel, {
 				title: "\u30AF\u30E9\u30B9",
 				icon: "art",
 				set: setAttributes,
@@ -164,7 +164,7 @@ registerBlockType('catpow/sphere', {
 					value: classes
 				})
 			),
-			wp.element.createElement(SelectClassPanel, {
+			wp.element.createElement(CP.SelectClassPanel, {
 				title: "\u30A2\u30A4\u30C6\u30E0",
 				icon: "edit",
 				set: setAttributes,
@@ -173,7 +173,7 @@ registerBlockType('catpow/sphere', {
 				index: attributes.currentItemIndex,
 				selectiveClasses: ['color']
 			}),
-			wp.element.createElement(ItemControlInfoPanel, null)
+			wp.element.createElement(CP.ItemControlInfoPanel, null)
 		), wp.element.createElement(
 			"ul",
 			{ className: attributes.EditMode ? primaryClass + ' edit' : classes },

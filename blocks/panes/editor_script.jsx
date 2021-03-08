@@ -71,7 +71,7 @@ registerBlockType('catpow/panes',{
 		items.map((item,index)=>{
 			if(!item.controlClasses){item.controlClasses='control';}
 			rtn.push(
-				<Item
+				<CP.Item
 					tag='li'
 					set={setAttributes}
 					attr={attributes}
@@ -80,7 +80,7 @@ registerBlockType('catpow/panes',{
 					isSelected={isSelected}
 				>
 					<div class="image">
-						<SelectResponsiveImage
+						<CP.SelectResponsiveImage
 							attr={attributes}
 							set={setAttributes}
 							keys={imageKeys.image}
@@ -93,7 +93,7 @@ registerBlockType('catpow/panes',{
 						<div className='text'>
 							{states.hasSymbol &&
 								<div className="symbol">
-									<ResponsiveImage
+									<CP.ResponsiveImage
 										attr={attributes}
 										keys={imageKeys.symbol}
 										index={index}
@@ -127,7 +127,7 @@ registerBlockType('catpow/panes',{
 							>{item.linkUrl}</p>
 						</div>
 					}
-				</Item>
+				</CP.Item>
 			);
 		});
 		
@@ -140,12 +140,12 @@ registerBlockType('catpow/panes',{
 		
         return (
 			<Fragment>
-				<SelectModeToolbar
+				<CP.SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
 				/>
 				<InspectorControls>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='クラス'
 						icon='art'
 						set={setAttributes}
@@ -160,7 +160,7 @@ registerBlockType('catpow/panes',{
 							value={classes}
 						/>
 					</PanelBody>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='アイテム'
 						icon='edit'
 						set={setAttributes}
@@ -170,14 +170,14 @@ registerBlockType('catpow/panes',{
 						selectiveClasses={itemSelectiveClasses}
 						filters={CP.filters.panes || {}}
 					/>
-					<ItemControlInfoPanel/>
+					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
 				{EditMode?(
 					<div className="alt_content">
 						<div class="label">
 							<Icon icon="edit"/>
 						</div>
-						<EditItemsTable
+						<CP.EditItemsTable
 							set={setAttributes}
 							attr={attributes}
 							columns={[
@@ -217,7 +217,7 @@ registerBlockType('catpow/panes',{
 			rtn.push(
 				<li className={item.classes}>
 					<div className='image'>
-						<ResponsiveImage
+						<CP.ResponsiveImage
 							attr={attributes}
 							keys={imageKeys.image}
 							index={index}
@@ -228,7 +228,7 @@ registerBlockType('catpow/panes',{
 						<div className='text'>
 							{states.hasSymbol &&
 								<div className="symbol">
-									<ResponsiveImage
+									<CP.ResponsiveImage
 										attr={attributes}
 										keys={imageKeys.symbol}
 										index={index}

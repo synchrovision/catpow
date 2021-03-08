@@ -53,7 +53,7 @@
 		itemsCopy.map((item,index)=>{
 			if(!item.controlClasses){item.controlClasses='control';}
 			rtn.push(
-				<Item
+				<CP.Item
 					tag='li'
 					set={setAttributes}
 					attr={attributes}
@@ -63,7 +63,7 @@
 				>
 					<header>
 						<div className='image'>
-							<SelectResponsiveImage
+							<CP.SelectResponsiveImage
 								attr={attributes}
 								set={setAttributes}
 								keys={imageKeys.headerImage}
@@ -89,7 +89,7 @@
 							/>
 						</p>
 					</div>
-				</Item>
+				</CP.Item>
 			);
 		});
 		
@@ -102,7 +102,7 @@
 		
         return (
 			<Fragment>
-				<SelectModeToolbar
+				<CP.SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
 				/>
@@ -114,7 +114,7 @@
 							value={classArray.join(' ')}
 						/>
 					</PanelBody>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='クラス'
 						icon='art'
 						set={setAttributes}
@@ -122,7 +122,7 @@
 						selectiveClasses={selectiveClasses}
 						filters={CP.filters.banners || {}}
 					/>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='リストアイテム'
 						icon='edit'
 						set={setAttributes}
@@ -132,7 +132,7 @@
 						selectiveClasses={itemClasses}
 						filters={CP.filters.dialog || {}}
 					/>
-					<ItemControlInfoPanel/>
+					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
 				<Fragment>
 					{EditMode?(
@@ -140,7 +140,7 @@
 							<div class="label">
 								<Icon icon="edit"/>
 							</div>
-							<EditItemsTable
+							<CP.EditItemsTable
 								set={setAttributes}
 								attr={attributes}
 								columns={[
@@ -185,7 +185,7 @@
 				<li className={item.classes}>
 					<header>
 						<div class='image'>
-							<ResponsiveImage
+							<CP.ResponsiveImage
 								attr={attributes}
 								keys={imageKeys.headerImage}
 								index={index}

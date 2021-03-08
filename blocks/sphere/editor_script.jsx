@@ -72,7 +72,7 @@ registerBlockType('catpow/sphere',{
 		items.map((item,index)=>{
 			if(!item.controlClasses){item.controlClasses='control';}
 			rtn.push(
-				<Item
+				<CP.Item
 					tag='li'
 					set={setAttributes}
 					attr={attributes}
@@ -83,7 +83,7 @@ registerBlockType('catpow/sphere',{
 					<div class="contents">
 						{states.hasSubImage &&
 							<div className='image'>
-								<SelectResponsiveImage
+								<CP.SelectResponsiveImage
 									attr={attributes}
 									set={setAttributes}
 									keys={imageKeys.subImage}
@@ -110,7 +110,7 @@ registerBlockType('catpow/sphere',{
 							</p>
 						}
 					</div>
-				</Item>
+				</CP.Item>
 			);
 		});
 		
@@ -130,7 +130,7 @@ registerBlockType('catpow/sphere',{
 				/>
 			</BlockControls>,
 			<InspectorControls>
-				<SelectClassPanel
+				<CP.SelectClassPanel
 					title='クラス'
 					icon='art'
 					set={setAttributes}
@@ -144,7 +144,7 @@ registerBlockType('catpow/sphere',{
 						value={classes}
 					/>
 				</PanelBody>
-				<SelectClassPanel
+				<CP.SelectClassPanel
 					title='アイテム'
 					icon='edit'
 					set={setAttributes}
@@ -153,7 +153,7 @@ registerBlockType('catpow/sphere',{
 					index={attributes.currentItemIndex}
 					selectiveClasses={['color']}
 				/>
-				<ItemControlInfoPanel/>
+				<CP.ItemControlInfoPanel/>
 			</InspectorControls>,
 			<ul className={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>
         ];

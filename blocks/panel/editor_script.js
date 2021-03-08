@@ -109,7 +109,7 @@ registerBlockType('catpow/panel', {
 			totalGrid += (CP.getNumberClass({ attr: item }, 'rspan') || 1) * (CP.getNumberClass({ attr: item }, 'cspan') || 1);
 
 			rtn.push(wp.element.createElement(
-				Item,
+				CP.Item,
 				{
 					tag: 'li',
 					set: setAttributes,
@@ -121,7 +121,7 @@ registerBlockType('catpow/panel', {
 				itemStates.hasImage && wp.element.createElement(
 					'div',
 					{ className: 'image' },
-					wp.element.createElement(SelectResponsiveImage, {
+					wp.element.createElement(CP.SelectResponsiveImage, {
 						attr: attributes,
 						set: setAttributes,
 						keys: imageKeys.image,
@@ -135,7 +135,7 @@ registerBlockType('catpow/panel', {
 					itemStates.hasIcon && wp.element.createElement(
 						'div',
 						{ className: 'icon' },
-						wp.element.createElement(SelectResponsiveImage, {
+						wp.element.createElement(CP.SelectResponsiveImage, {
 							attr: attributes,
 							set: setAttributes,
 							keys: imageKeys.icon,
@@ -199,14 +199,14 @@ registerBlockType('catpow/panel', {
 		), wp.element.createElement(
 			InspectorControls,
 			null,
-			wp.element.createElement(SelectClassPanel, {
+			wp.element.createElement(CP.SelectClassPanel, {
 				title: '\u30AF\u30E9\u30B9',
 				icon: 'art',
 				set: setAttributes,
 				attr: attributes,
 				selectiveClasses: selectiveClasses
 			}),
-			wp.element.createElement(SelectClassPanel, {
+			wp.element.createElement(CP.SelectClassPanel, {
 				title: '\u30D1\u30CD\u30EB',
 				icon: 'edit',
 				set: setAttributes,
@@ -236,7 +236,7 @@ registerBlockType('catpow/panel', {
 					value: classArray.join(' ')
 				})
 			),
-			wp.element.createElement(ItemControlInfoPanel, null)
+			wp.element.createElement(CP.ItemControlInfoPanel, null)
 		)];
 	},
 	save: function save(_ref2) {

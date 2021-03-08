@@ -33,7 +33,7 @@ registerBlockType('catpow/formbuttons', {
 			}
 			var itemStates = CP.wordsToFlags(item.classes);
 			rtn.push(wp.element.createElement(
-				Item,
+				CP.Item,
 				{
 					tag: 'li',
 					set: setAttributes,
@@ -87,7 +87,7 @@ registerBlockType('catpow/formbuttons', {
 		), wp.element.createElement(
 			InspectorControls,
 			null,
-			wp.element.createElement(SelectClassPanel, {
+			wp.element.createElement(CP.SelectClassPanel, {
 				title: '\u30AF\u30E9\u30B9',
 				icon: 'art',
 				set: setAttributes,
@@ -95,7 +95,7 @@ registerBlockType('catpow/formbuttons', {
 				selectiveClasses: selectiveClasses,
 				filters: CP.filters.buttons || {}
 			}),
-			wp.element.createElement(SelectClassPanel, {
+			wp.element.createElement(CP.SelectClassPanel, {
 				title: '\u30DC\u30BF\u30F3',
 				icon: 'edit',
 				set: setAttributes,
@@ -116,11 +116,11 @@ registerBlockType('catpow/formbuttons', {
 					value: classArray.join(' ')
 				})
 			),
-			wp.element.createElement(ItemControlInfoPanel, null)
+			wp.element.createElement(CP.ItemControlInfoPanel, null)
 		), wp.element.createElement(
 			BlockControls,
 			null,
-			wp.element.createElement(AlignClassToolbar, { set: setAttributes, attr: attributes })
+			wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })
 		)];
 	},
 	save: function save(_ref2) {

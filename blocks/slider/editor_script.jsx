@@ -172,7 +172,7 @@ registerBlockType('catpow/slider',{
 			}
 			itemClass=posClass+' image'+imageIndex+' thumb'+imageIndex;
 			rtn.push(
-				<Item
+				<CP.Item
 					tag='li'
 					className={itemClass}
 					set={setAttributes}
@@ -182,7 +182,7 @@ registerBlockType('catpow/slider',{
 				>
 					{states.hasSlide &&
 						<div className='slide'>
-							<SelectResponsiveImage
+							<CP.SelectResponsiveImage
 								attr={attributes}
 								set={setAttributes}
 								keys={imageKeys.slide}
@@ -195,7 +195,7 @@ registerBlockType('catpow/slider',{
 					}
 					{states.hasImage &&
 						<div className='image'>
-							<SelectResponsiveImage
+							<CP.SelectResponsiveImage
 								attr={attributes}
 								set={setAttributes}
 								keys={imageKeys.image}
@@ -234,7 +234,7 @@ registerBlockType('catpow/slider',{
 					}
 					{states.hasBackgroundImage &&
 						<div className='background'>
-							<SelectResponsiveImage
+							<CP.SelectResponsiveImage
 								attr={attributes}
 								set={setAttributes}
 								keys={imageKeys.backgroundImage}
@@ -254,12 +254,12 @@ registerBlockType('catpow/slider',{
 							/>
 						</div>
 					}
-				</Item>
+				</CP.Item>
 			);
 			if(states.hasImage && states.hasThumbnail){
 				thumbs.push(
 					<li class={'item '+posClass+' thumb'+imageIndex} onClick={()=>gotoItem(index)}>
-						<SelectResponsiveImage
+						<CP.SelectResponsiveImage
 							attr={attributes}
 							set={setAttributes}
 							keys={imageKeys.image}
@@ -282,12 +282,12 @@ registerBlockType('catpow/slider',{
 		
 		return (
 			<Fragment>
-				<SelectModeToolbar
+				<CP.SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
 				/>
 				<InspectorControls>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='クラス'
 						icon='art'
 						set={setAttributes}
@@ -295,7 +295,7 @@ registerBlockType('catpow/slider',{
 						selectiveClasses={selectiveClasses}
 						filters={CP.filters.slider || {}}
 					/>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='表示設定'
 						icon='admin-appearance'
 						set={setAttributes}
@@ -303,7 +303,7 @@ registerBlockType('catpow/slider',{
 						selectiveClasses={statesClasses}
 						filters={CP.filters.slider || {}}
 					/>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						classKey='controlClasses'
 						title='アニメーション設定'
 						icon='video-alt3'
@@ -312,7 +312,7 @@ registerBlockType('catpow/slider',{
 						selectiveClasses={animateClasses}
 						filters={CP.filters.slider || {}}
 					/>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						classKey='controlClasses'
 						title='操作設定'
 						icon='universal-access'
@@ -333,7 +333,7 @@ registerBlockType('catpow/slider',{
 							value={controlClasses}
 						/>
 					</PanelBody>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='スライド'
 						icon='edit'
 						set={setAttributes}
@@ -343,14 +343,14 @@ registerBlockType('catpow/slider',{
 						triggerClasses={selectiveClasses[0]}
 						filters={CP.filters.slider || {}}
 					/>
-					<ItemControlInfoPanel/>
+					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
 				{attributes.EditMode?(
 					<div className="alt_content">
 						<div class="label">
 							<Icon icon="edit"/>
 						</div>
-						<EditItemsTable
+						<CP.EditItemsTable
 							set={setAttributes}
 							attr={attributes}
 							columns={[
@@ -406,7 +406,7 @@ registerBlockType('catpow/slider',{
 				<li className={item.classes}>
 					{states.hasSlide &&
 						<div className='slide'>
-							<ResponsiveImage
+							<CP.ResponsiveImage
 								attr={attributes}
 								keys={imageKeys.slide}
 								devices={devices}
@@ -417,7 +417,7 @@ registerBlockType('catpow/slider',{
 					}
 					{states.hasImage &&
 						<div className='image'>
-							<ResponsiveImage
+							<CP.ResponsiveImage
 								attr={attributes}
 								keys={imageKeys.image}
 								index={index}
@@ -434,7 +434,7 @@ registerBlockType('catpow/slider',{
 					}
 					{states.hasBackgroundImage &&
 						<div className='background'>
-							<ResponsiveImage
+							<CP.ResponsiveImage
 								attr={attributes}
 								keys={imageKeys.backgroundImage}
 								devices={devices}
@@ -449,7 +449,7 @@ registerBlockType('catpow/slider',{
 			if(states.hasImage && states.hasThumbnail){
 				thumbs.push(
 					<li class={item.classes}>
-						<ResponsiveImage
+						<CP.ResponsiveImage
 							attr={attributes}
 							keys={imageKeys.image}
 							index={index}
@@ -606,7 +606,7 @@ registerBlockType('catpow/slider',{
 						<li className={item.classes}>
 							{states.hasSlide &&
 								<div className='slide'>
-									<ResponsiveImage
+									<CP.ResponsiveImage
 										attr={attributes}
 										keys={imageKeys.slide}
 										index={index}
@@ -616,7 +616,7 @@ registerBlockType('catpow/slider',{
 							}
 							{states.hasImage &&
 								<div className='image'>
-									<ResponsiveImage
+									<CP.ResponsiveImage
 										attr={attributes}
 										keys={imageKeys.image}
 										index={index}
@@ -633,7 +633,7 @@ registerBlockType('catpow/slider',{
 							}
 							{states.hasBackgroundImage &&
 								<div className='background'>
-									<ResponsiveImage
+									<CP.ResponsiveImage
 										attr={attributes}
 										keys={imageKeys.backgroundImage}
 										index={index}
@@ -647,7 +647,7 @@ registerBlockType('catpow/slider',{
 					if(states.hasImage && states.hasThumbnail){
 						thumbs.push(
 							<li class={item.classes}>
-								<ResponsiveImage
+								<CP.ResponsiveImage
 									attr={attributes}
 									keys={imageKeys.image}
 									index={index}

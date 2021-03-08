@@ -65,7 +65,7 @@ registerBlockType('catpow/motiongraphic',{
 				</div>
 				<InspectorControls>
 					{selections &&
-						<SelectClassPanel
+						<CP.SelectClassPanel
 							classKey='component'
 							title='設定'
 							icon='edit'

@@ -80,7 +80,7 @@ registerBlockType('catpow/unit',{
 				</div>
 			</div>,
 			<InspectorControls>
-				<SelectClassPanel
+				<CP.SelectClassPanel
 					title='クラス'
 					icon='art'
 					set={setAttributes}

@@ -45,7 +45,7 @@ registerBlockType('catpow/t-image', {
 							src: cp.plugins_url + '/catpow/callee/dummy_image.php?text=' + loopImage,
 							width: '100%',
 							height: 'auto'
-						}) : wp.element.createElement(SelectResponsiveImage, {
+						}) : wp.element.createElement(CP.SelectResponsiveImage, {
 							set: setAttributes,
 							attr: attributes,
 							keys: { src: 'src', alt: 'alt' },
@@ -59,7 +59,7 @@ registerBlockType('catpow/t-image', {
 		), wp.element.createElement(
 			InspectorControls,
 			null,
-			wp.element.createElement(SelectClassPanel, {
+			wp.element.createElement(CP.SelectClassPanel, {
 				title: '\u30AF\u30E9\u30B9',
 				icon: 'art',
 				set: setAttributes,

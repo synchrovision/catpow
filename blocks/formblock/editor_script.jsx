@@ -113,7 +113,7 @@ registerBlockType('catpow/formblockcontent',{
 						/>
 					</PanelBody>
 					{actions &&
-						<SelectClassPanel
+						<CP.SelectClassPanel
 							title='アクション'
 							icon='edit'
 							set={setAttributes}

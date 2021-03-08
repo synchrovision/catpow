@@ -39,7 +39,7 @@ registerBlockType('catpow/app',{
 					/>
 				</PanelBody>
 				{config &&
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='設定'
 						icon='edit'
 						set={setAttributes}

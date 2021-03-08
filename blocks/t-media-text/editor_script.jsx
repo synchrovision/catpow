@@ -33,7 +33,7 @@
 				<tbody>
 					<tr>
 						<td className="imageCell" width={width}>
-							<SelectResponsiveImage
+							<CP.SelectResponsiveImage
 								set={setAttributes}
 								attr={attributes}
 								keys={{src:'src',alt:'alt',code:'imageCode'}}
@@ -51,10 +51,10 @@
 				</tbody>
 			</table>,
 			<BlockControls>
-				<VerticalAlignClassToolbar set={setAttributes} attr={attributes}/>
+				<CP.VerticalAlignClassToolbar set={setAttributes} attr={attributes}/>
 			</BlockControls>,
 			<InspectorControls>
-				<SelectClassPanel
+				<CP.SelectClassPanel
 					title='クラス'
 					icon='art'
 					set={setAttributes}
@@ -83,7 +83,7 @@
 				<tbody>
 					<tr>
 						<td className="imageCell" width={width}>
-							<ResponsiveImage
+							<CP.ResponsiveImage
 								attr={attributes}
 								keys={{src:'src',alt:'alt',code:'imageCode'}}
 								size="large"

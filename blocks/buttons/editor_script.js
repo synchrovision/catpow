@@ -45,7 +45,7 @@ registerBlockType('catpow/buttons', {
 		items.map(function (item, index) {
 			var itemStates = CP.wordsToFlags(item.classes);
 			rtn.push(wp.element.createElement(
-				Item,
+				CP.Item,
 				{
 					tag: 'li',
 					set: setAttributes,
@@ -108,16 +108,16 @@ registerBlockType('catpow/buttons', {
 			wp.element.createElement(
 				BlockControls,
 				null,
-				wp.element.createElement(AlignClassToolbar, { set: setAttributes, attr: attributes })
+				wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })
 			),
-			wp.element.createElement(SelectModeToolbar, {
+			wp.element.createElement(CP.SelectModeToolbar, {
 				set: setAttributes,
 				attr: attributes
 			}),
 			wp.element.createElement(
 				InspectorControls,
 				null,
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: '\u30AF\u30E9\u30B9',
 					icon: 'art',
 					set: setAttributes,
@@ -125,7 +125,7 @@ registerBlockType('catpow/buttons', {
 					selectiveClasses: selectiveClasses,
 					filters: CP.filters.buttons || {}
 				}),
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: '\u30DC\u30BF\u30F3',
 					icon: 'edit',
 					set: setAttributes,
@@ -146,7 +146,7 @@ registerBlockType('catpow/buttons', {
 						value: classArray.join(' ')
 					})
 				),
-				wp.element.createElement(ItemControlInfoPanel, null)
+				wp.element.createElement(CP.ItemControlInfoPanel, null)
 			),
 			wp.element.createElement(
 				Fragment,
@@ -159,7 +159,7 @@ registerBlockType('catpow/buttons', {
 						{ 'class': 'label' },
 						wp.element.createElement(Icon, { icon: 'edit' })
 					),
-					wp.element.createElement(EditItemsTable, {
+					wp.element.createElement(CP.EditItemsTable, {
 						set: setAttributes,
 						attr: attributes,
 						columns: [{ type: 'text', key: 'text', cond: true }, { type: 'text', key: 'url', cond: true }],

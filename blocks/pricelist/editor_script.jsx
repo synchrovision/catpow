@@ -43,7 +43,7 @@
 			if(!item.controlClasses){item.controlClasses='control';}
 			const itemStates=CP.wordsToFlags(item.classes);
 			rtn.push(
-				<Item
+				<CP.Item
 					tag='li'
 					set={setAttributes}
 					attr={attributes}
@@ -53,7 +53,7 @@
 				>
 					{itemStates.hasImage &&
 						<div className='image'>
-							<SelectResponsiveImage
+							<CP.SelectResponsiveImage
 								attr={attributes}
 								set={setAttributes}
 								keys={imageKeys.image}
@@ -87,7 +87,7 @@
 							/>
 						</div>
 					}
-				</Item>
+				</CP.Item>
 			);
 		});
 		
@@ -101,12 +101,12 @@
 		
         return (
 			<Fragment>
-				<SelectModeToolbar
+				<CP.SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
 				/>
 				<InspectorControls>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='クラス'
 						icon='art'
 						set={setAttributes}
@@ -121,7 +121,7 @@
 							value={classes}
 						/>
 					</PanelBody>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='リストアイテム'
 						icon='edit'
 						set={setAttributes}
@@ -131,7 +131,7 @@
 						selectiveClasses={itemSelectiveClasses}
 						filters={CP.filters.pricelist || {}}
 					/>
-					<ItemControlInfoPanel/>
+					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
 				<Fragment>
 					{EditMode?(
@@ -139,7 +139,7 @@
 							<div class="label">
 								<Icon icon="edit"/>
 							</div>
-							<EditItemsTable
+							<CP.EditItemsTable
 								set={setAttributes}
 								attr={attributes}
 								columns={[
@@ -187,7 +187,7 @@
 				<li className={item.classes}>
 					{itemStates.hasImage &&
 						<div className='image'>
-							<ResponsiveImage
+							<CP.ResponsiveImage
 								attr={attributes}
 								keys={imageKeys.image}
 							/>
@@ -234,7 +234,7 @@
 						<li className={item.classes}>
 							{itemStates.hasImage &&
 								<div className='image'>
-									<ResponsiveImage
+									<CP.ResponsiveImage
 										attr={attributes}
 										keys={imageKeys.image}
 									/>

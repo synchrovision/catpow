@@ -999,8 +999,1753 @@ var CP = {
 				})
 			)
 		);
+	},
+
+	SelectResponsiveImage: function SelectResponsiveImage(props) {
+		var className = props.className,
+		    attr = props.attr,
+		    set = props.set,
+		    _props$keys = props.keys,
+		    keys = _props$keys === undefined ? {} : _props$keys,
+		    index = props.index,
+		    size = props.size,
+		    devices = props.devices,
+		    device = props.device,
+		    isTemplate = props.isTemplate,
+		    otherProps = babelHelpers.objectWithoutProperties(props, ['className', 'attr', 'set', 'keys', 'index', 'size', 'devices', 'device', 'isTemplate']);
+		var sizes = props.sizes;
+
+		var type = void 0,
+		    onClick = void 0,
+		    item = void 0,
+		    items = void 0;
+		if (keys.items) {
+			items = attr[keys.items];
+			if (keys.subItems) {
+				item = items[index][keys.subItems][subIndex];
+			} else {
+				item = items[index];
+			}
+		} else {
+			item = attr;
+		}
+		if (device) {
+			var sizeData = CP.devices[device];
+			onClick = function onClick(e) {
+				return CP.selectImage({ src: 'src' }, function (_ref18) {
+					var src = _ref18.src;
+
+					if (keys.sources) {
+						item[keys.sources].map(function (source) {
+							if (source.device === device) {
+								source.srcset = src;
+							}
+							return source;
+						});
+						if (items) {
+							set(babelHelpers.defineProperty({}, keys.items, JSON.parse(JSON.stringify(items))));
+						} else {
+							set(babelHelpers.defineProperty({}, keys.sources, JSON.parse(JSON.stringify(item[keys.sources]))));
+						}
+					} else {
+						if (items) {
+							item[keys.srcset] = item[keys.srcset].replace(sizeData.reg, src + sizeData.rep);
+							set(babelHelpers.defineProperty({}, keys.items, JSON.parse(JSON.stringify(items))));
+						} else {
+							set(babelHelpers.defineProperty({}, keys.srcset, item[keys.srcset].replace(sizeData.reg, src + sizeData.rep)));
+						}
+					}
+				}, sizeData.media_size);
+			};
+		} else {
+			onClick = function onClick(e) {
+				return CP.selectImage(keys, function (data) {
+					if (keys.items) {
+						Object.assign(item, data);
+						set(babelHelpers.defineProperty({}, keys.items, JSON.parse(JSON.stringify(items))));
+					} else {
+						set(data);
+					}
+				}, size, devices);
+			};
+		}
+		if (isTemplate && keys.code && item[keys.code]) {
+			return wp.element.createElement(CP.DummyImage, { text: item[keys.code] });
+		}
+		if (item[keys.mime]) {
+			type = item[keys.mime].split('/')[0];
+		} else {
+			type = 'image';
+		}
+		if (type == 'audio') {
+			return wp.element.createElement('audio', babelHelpers.extends({
+				className: 'selectImage ' + className,
+				src: item[keys.src],
+				'data-mime': item[keys.mime],
+				onClick: onClick
+			}, otherProps));
+		}
+		if (item[keys.srcset] && !sizes) {
+			if (device) {
+				sizes = CP.devices[device].sizes_value;
+			} else {
+				sizes = CP.getImageSizesForDevices(devices || ['sp', 'pc']);
+			}
+		}
+		if (type == 'video') {
+			return wp.element.createElement('video', babelHelpers.extends({
+				className: 'selectImage ' + className,
+				src: item[keys.src],
+				'data-mime': item[keys.mime],
+				onClick: onClick,
+				autoplay: 1,
+				loop: 1,
+				playsinline: 1,
+				muted: 1
+			}, otherProps));
+		}
+		var src = CP.imageSrcOrDummy(item[keys.src]);
+		if (keys.sources) {
+			if (device) {
+				var source = item[keys.sources].find(function (source) {
+					return source.device === device;
+				}) || { srcset: cp.theme_url + '/images/dummy.jpg' };
+				return wp.element.createElement(
+					'picture',
+					babelHelpers.extends({
+						className: 'selectImage ' + className,
+						onClick: onClick
+					}, otherProps),
+					wp.element.createElement('img', {
+						src: source.srcset,
+						alt: item[keys.alt]
+					})
+				);
+			}
+			return wp.element.createElement(
+				'picture',
+				babelHelpers.extends({
+					className: 'selectImage ' + className,
+					onClick: onClick
+				}, otherProps),
+				item[keys.sources].map(function (source) {
+					return wp.element.createElement('source', { srcset: source.srcset, media: CP.devices[source.device].media_query, 'data-device': source.device });
+				}),
+				wp.element.createElement('img', {
+					src: src,
+					alt: item[keys.alt]
+				})
+			);
+		}
+		return wp.element.createElement('img', babelHelpers.extends({
+			className: 'selectImage ' + className,
+			src: src,
+			alt: item[keys.alt],
+			srcset: item[keys.srcset],
+			sizes: sizes,
+			'data-mime': item[keys.mime],
+			onClick: onClick
+		}, otherProps));
+	},
+	ResponsiveImage: function ResponsiveImage(_ref19) {
+		var className = _ref19.className,
+		    attr = _ref19.attr,
+		    keys = _ref19.keys,
+		    index = _ref19.index,
+		    sizes = _ref19.sizes,
+		    devices = _ref19.devices,
+		    device = _ref19.device,
+		    isTemplate = _ref19.isTemplate;
+
+		var type = void 0,
+		    item = void 0;
+		if (keys.items) {
+			item = attr[keys.items][index];
+		} else {
+			item = attr;
+		}
+		if (isTemplate && keys.code && item[keys.code]) {
+			return item[keys.code];
+		}
+		if (item[keys.mime]) {
+			type = item[keys.mime].split('/')[0];
+		} else {
+			type = 'image';
+		}
+		if (type == 'audio') {
+			return wp.element.createElement('audio', {
+				src: item[keys.src],
+				'data-mime': item[keys.mime]
+			});
+		}
+		if (item[keys.srcset] && !sizes) {
+			devices = devices || ['sp', 'pc'];
+			sizes = CP.getImageSizesForDevices(devices);
+		}
+		if (type == 'video') {
+			return wp.element.createElement('video', {
+				className: className,
+				src: item[keys.src],
+				srcset: item[keys.srcset],
+				sizes: sizes,
+				'data-mime': item[keys.mime],
+				autoplay: 1,
+				loop: 1,
+				playsinline: 1,
+				muted: 1
+			});
+		}
+		if (keys.sources && item[keys.sources] && item[keys.sources].length) {
+			if (device) {
+				var source = item[keys.sources].find(function (source) {
+					return source.device === device;
+				});
+				return wp.element.createElement(
+					'picture',
+					{ className: 'selectImage ' + className },
+					wp.element.createElement('img', {
+						src: source.srcset,
+						alt: item[keys.alt]
+					})
+				);
+			}
+			return wp.element.createElement(
+				'picture',
+				{ className: 'selectImage ' + className },
+				item[keys.sources].map(function (source) {
+					return wp.element.createElement('source', { srcset: source.srcset, media: CP.devices[source.device].media_query, 'data-device': source.device });
+				}),
+				wp.element.createElement('img', {
+					src: item[keys.src],
+					alt: item[keys.alt]
+				})
+			);
+		}
+		return wp.element.createElement('img', {
+			className: className,
+			src: item[keys.src],
+			alt: item[keys.alt],
+			srcset: item[keys.srcset],
+			sizes: sizes,
+			'data-mime': item[keys.mime]
+		});
+	},
+	SelectPictureSources: function SelectPictureSources(props) {
+		var devices = props.devices;
+
+		return wp.element.createElement(
+			'table',
+			{ className: 'SelectPictureSources' },
+			wp.element.createElement(
+				'tbody',
+				null,
+				wp.element.createElement(
+					'tr',
+					null,
+					wp.element.createElement(
+						'td',
+						{ colspan: devices.length },
+						wp.element.createElement(CP.SelectResponsiveImage, props)
+					)
+				),
+				wp.element.createElement(
+					'tr',
+					null,
+					devices.map(function (device) {
+						return wp.element.createElement(
+							'td',
+							null,
+							wp.element.createElement(
+								'div',
+								{ className: 'label' },
+								wp.element.createElement(Icon, { icon: CP.devices[device].icon })
+							),
+							wp.element.createElement(CP.SelectResponsiveImage, babelHelpers.extends({
+								device: device
+							}, props))
+						);
+					})
+				)
+			)
+		);
+	},
+
+	SelectPreparedImage: function SelectPreparedImage(_ref20) {
+		var className = _ref20.className,
+		    name = _ref20.name,
+		    value = _ref20.value,
+		    color = _ref20.color,
+		    onChange = _ref20.onChange,
+		    otherProps = babelHelpers.objectWithoutProperties(_ref20, ['className', 'name', 'value', 'color', 'onChange']);
+
+		var onClick = void 0;
+		var _Catpow$util = Catpow.util,
+		    getURLparam = _Catpow$util.getURLparam,
+		    setURLparam = _Catpow$util.setURLparam,
+		    setURLparams = _Catpow$util.setURLparams,
+		    removeURLparam = _Catpow$util.removeURLparam;
+
+		var _wp$element$useReduce = wp.element.useReducer(function (state, action) {
+			switch (action.type) {
+				case 'nextPage':
+					state.page--;break;
+				case 'prevPage':
+					state.page++;break;
+				case 'gotoPage':
+					state.page = action.page;break;
+				case 'update':
+					if (action.images) {
+						state.images = action.images;
+						var bareURL = removeURLparam(value, 'c');
+						state.image = state.images.find(function (image) {
+							return image.url === bareURL;
+						});
+					}
+					if (action.image) {
+						state.image = action.image;
+					}
+					onChange(babelHelpers.extends({}, state.image, { url: setURLparams(state.image ? state.image.url : value, { c: color, theme: cp.theme }) }));
+			}
+			return babelHelpers.extends({}, state);
+		}, { page: 0, images: null, image: null }),
+		    _wp$element$useReduce2 = babelHelpers.slicedToArray(_wp$element$useReduce, 2),
+		    state = _wp$element$useReduce2[0],
+		    dispatch = _wp$element$useReduce2[1];
+
+		CP.cache.PreparedImage = CP.cache.PreparedImage || {};
+
+		if (state.images === null) {
+			if (CP.cache.PreparedImage[name]) {
+				dispatch({ type: 'update', images: CP.cache.PreparedImage[name] });
+			} else {
+				wp.apiFetch({ path: 'cp/v1/images/' + name }).then(function (images) {
+					CP.cache.PreparedImage[name] = images;
+					dispatch({ type: 'update', images: images });
+				});
+			}
+			return false;
+		}
+		return wp.element.createElement(
+			'ul',
+			babelHelpers.extends({ className: 'selectPreparedImage ' + name + ' ' + className }, otherProps),
+			state.images.map(function (image) {
+				var url = setURLparams(image.url, { c: color, theme: cp.theme });
+				return wp.element.createElement(
+					'li',
+					{ className: 'item ' + (value == url ? 'active' : '') },
+					wp.element.createElement('img', {
+						src: url,
+						alt: image.alt,
+						onClick: function onClick() {
+							return dispatch({ type: 'update', image: image });
+						}
+					})
+				);
+			})
+		);
+	},
+	SelectPreparedImageSet: function SelectPreparedImageSet(_ref21) {
+		var className = _ref21.className,
+		    name = _ref21.name,
+		    value = _ref21.value,
+		    color = _ref21.color,
+		    onChange = _ref21.onChange,
+		    otherProps = babelHelpers.objectWithoutProperties(_ref21, ['className', 'name', 'value', 'color', 'onChange']);
+
+		var onClick = void 0;
+		var _Catpow$util2 = Catpow.util,
+		    getURLparam = _Catpow$util2.getURLparam,
+		    setURLparam = _Catpow$util2.setURLparam,
+		    setURLparams = _Catpow$util2.setURLparams,
+		    removeURLparam = _Catpow$util2.removeURLparam;
+
+		var _wp$element$useReduce3 = wp.element.useReducer(function (state, action) {
+			switch (action.type) {
+				case 'update':
+					if (action.imagesets) {
+						state.imagesets = action.imagesets;
+						var bareURL = removeURLparam(value, 'c');
+						for (var key in state.imagesets) {
+							if (state.imagesets[key].url === bareURL) {
+								state.imageset = state.imagesets[key];
+								break;
+							}
+						}
+					}
+					if (action.imageset) {
+						state.imageset = action.imageset;
+					}
+					if (state.imageset) {
+						onChange(state.imageset.map(function (item) {
+							return babelHelpers.extends({}, item, { url: setURLparams(item.url, { c: color, theme: cp.theme }) });
+						}));
+					}
+			}
+			return babelHelpers.extends({}, state);
+		}, { page: 0, imagesets: null, imageset: null }),
+		    _wp$element$useReduce4 = babelHelpers.slicedToArray(_wp$element$useReduce3, 2),
+		    state = _wp$element$useReduce4[0],
+		    dispatch = _wp$element$useReduce4[1];
+
+		CP.cache.PreparedImageSets = CP.cache.PreparedImageSets || {};
+
+		if (state.imagesets === null) {
+			if (CP.cache.PreparedImageSets[name]) {
+				dispatch({ type: 'update', imagesets: CP.cache.PreparedImageSets[name] });
+			} else {
+				wp.apiFetch({ path: 'cp/v1/imageset/' + name }).then(function (imagesets) {
+					CP.cache.PreparedImageSets[name] = imagesets;
+					dispatch({ type: 'update', imagesets: imagesets });
+				});
+			}
+			return false;
+		}
+		return wp.element.createElement(
+			'ul',
+			babelHelpers.extends({ className: 'selectPreparedImageSet ' + name + ' ' + className }, otherProps),
+			Object.keys(state.imagesets).map(function (key) {
+				var imageset = state.imagesets[key];
+				var url = setURLparams(imageset[0].url, { c: color, theme: cp.theme });
+				return wp.element.createElement(
+					'li',
+					{ className: 'item ' + (value == url ? 'active' : '') },
+					wp.element.createElement('img', {
+						src: url,
+						alt: imageset[0].alt,
+						onClick: function onClick() {
+							return dispatch({ type: 'update', imageset: imageset });
+						}
+					})
+				);
+			})
+		);
+	},
+
+	Item: function Item(props) {
+		var tag = props.tag,
+		    items = props.items,
+		    itemsKey = props.itemsKey,
+		    index = props.index,
+		    set = props.set,
+		    attr = props.attr,
+		    triggerClasses = props.triggerClasses,
+		    children = props.children;
+		var itemClasses = props.itemClasses;
+
+		if (!items[index].classes) {
+			items[index].classes = 'item';
+		} else if (items[index].classes.search(/\bitem\b/) === -1) {
+			items[index].classes += ' item';
+		}
+		var classes = items[index].classes;
+		if (props.className) {
+			classes += ' ' + props.className;
+		}
+
+		var _attr$currentItemInde = attr.currentItemIndex,
+		    currentItemIndex = _attr$currentItemInde === undefined ? 0 : _attr$currentItemInde;
+
+
+		var isSelected = props.isSelected === undefined ? index == currentItemIndex : props.isSelected;
+
+		return wp.element.createElement(tag, {
+			className: classes,
+			"data-index": index,
+			"data-refine-cond": items[index]['cond'],
+			onKeyDown: function onKeyDown(e) {
+				if (e.ctrlKey || e.metaKey) {
+					switch (e.key) {
+						case 's':
+							CP.saveItem(props);e.preventDefault();break;
+						case 'd':
+							CP.cloneItem(props);e.preventDefault();break;
+						case 'Backspace':
+							CP.deleteItem(props);e.preventDefault();break;
+						case 'ArrowUp':
+							CP.upItem(props);e.preventDefault();break;
+						case 'ArrowDown':
+							CP.downItem(props);e.preventDefault();break;
+					}
+				}
+			},
+			onClick: function onClick(e) {
+				set({ currentItemIndex: index });
+			}
+		}, wp.element.createElement(
+			Fragment,
+			null,
+			children,
+			isSelected && wp.element.createElement(
+				'div',
+				{ className: 'itemControl' },
+				wp.element.createElement('div', { className: 'btn delete', onClick: function onClick(e) {
+						return CP.deleteItem(props);
+					} }),
+				wp.element.createElement('div', { className: 'btn clone', onClick: function onClick(e) {
+						return CP.cloneItem(props);
+					} }),
+				wp.element.createElement('div', { className: 'btn up', onClick: function onClick(e) {
+						return CP.upItem(props);
+					} }),
+				wp.element.createElement('div', { className: 'btn down', onClick: function onClick(e) {
+						return CP.downItem(props);
+					} })
+			)
+		));
+	},
+	ItemControlInfoPanel: function ItemControlInfoPanel() {
+		return wp.element.createElement(
+			PanelBody,
+			{ title: '\u64CD\u4F5C', initialOpen: false, icon: 'info' },
+			wp.element.createElement(
+				'table',
+				null,
+				wp.element.createElement(
+					'tbody',
+					null,
+					wp.element.createElement(
+						'tr',
+						null,
+						wp.element.createElement(
+							'th',
+							null,
+							'\u2318/Ctrl + S'
+						),
+						wp.element.createElement(
+							'td',
+							null,
+							'\u4FDD\u5B58'
+						)
+					),
+					wp.element.createElement(
+						'tr',
+						null,
+						wp.element.createElement(
+							'th',
+							null,
+							'\u2318/Ctrl + D'
+						),
+						wp.element.createElement(
+							'td',
+							null,
+							'\u8907\u88FD'
+						)
+					),
+					wp.element.createElement(
+						'tr',
+						null,
+						wp.element.createElement(
+							'th',
+							null,
+							'\u2318/Ctrl + delete'
+						),
+						wp.element.createElement(
+							'td',
+							null,
+							'\u524A\u9664'
+						)
+					),
+					wp.element.createElement(
+						'tr',
+						null,
+						wp.element.createElement(
+							'th',
+							null,
+							'\u2318/Ctrl + \u2191'
+						),
+						wp.element.createElement(
+							'td',
+							null,
+							'\u524D\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048'
+						)
+					),
+					wp.element.createElement(
+						'tr',
+						null,
+						wp.element.createElement(
+							'th',
+							null,
+							'\u2318/Ctrl + \u2193'
+						),
+						wp.element.createElement(
+							'td',
+							null,
+							'\u6B21\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048'
+						)
+					)
+				)
+			)
+		);
+	},
+
+	SelectClassPanel: function SelectClassPanel(props) {
+		var _wp$components3 = wp.components,
+		    ColorPicker = _wp$components3.ColorPicker,
+		    GradientPicker = _wp$components3.__experimentalGradientPicker;
+		var _props$classKey = props.classKey,
+		    classKey = _props$classKey === undefined ? 'classes' : _props$classKey,
+		    items = props.items,
+		    index = props.index,
+		    subItemsKey = props.subItemsKey,
+		    subIndex = props.subIndex,
+		    set = props.set,
+		    attr = props.attr,
+		    triggerClasses = props.triggerClasses;
+		var itemsKey = props.itemsKey,
+		    itemClasses = props.itemClasses;
+
+		var item = void 0;
+		if (items) {
+			itemsKey = itemsKey || 'items';
+			if (subItemsKey) {
+				if (!items[index]) {
+					return false;
+				}
+				item = items[index][subItemsKey][subIndex];
+			} else {
+				item = items[index];
+			}
+
+			if (!item) {
+				return false;
+			}
+		} else {
+			item = attr;
+		}
+		var states = CP.wordsToFlags(item[classKey]);
+		var styleDatas = attr.styleDatas;
+
+
+		var save = function save(data) {
+			if (items) {
+				Object.assign(item, data);
+				set(babelHelpers.defineProperty({}, itemsKey, JSON.parse(JSON.stringify(items))));
+			} else {
+				set(data);
+			}
+		};
+		var saveClasses = function saveClasses() {
+			save(babelHelpers.defineProperty({}, classKey, CP.flagsToWords(states)));
+		};
+		var saveCss = function saveCss(cssKey) {
+			set(babelHelpers.defineProperty({}, cssKey, CP.createStyleCodeWithMediaQuery(styleDatas[cssKey])));
+		};
+
+		var SelectClass = function SelectClass(prm) {
+			if (prm.hasOwnProperty('cond') && !prm.cond) {
+				return false;
+			}
+			var rtn = [];
+			if (prm.filter && props.filters && props.filters[prm.filter]) {
+				props.filters[prm.filter](prm);
+			}
+			if (prm.keys) {
+				if (items) {
+					prm.keys.items = prm.keys.items || itemsKey;
+					if (subItemsKey) {
+						prm.keys.subItems = prm.keys.subItems || subItemsKey;
+					}
+				}
+			}
+
+			if (prm.json) {
+				if (prm.input) {
+					switch (prm.input) {
+						case 'text':
+							rtn.push(wp.element.createElement(TextControl, {
+								label: prm.label,
+								value: JSON.parse(props.attr[prm.json])[prm.key],
+								onChange: function onChange(val) {
+									CP.setJsonValue(props, prm.json, prm.key, val);
+								}
+							}));
+							break;
+						case 'range':
+							if (!prm.coef) {
+								prm.coef = 1;
+							}
+							rtn.push(wp.element.createElement(RangeControl, {
+								label: prm.label,
+								value: CP.getJsonValue(props, prm.json, prm.key) / prm.coef,
+								onChange: function onChange(val) {
+									CP.setJsonValue(props, prm.json, prm.key, val * prm.coef);
+								},
+								min: prm.min,
+								max: prm.max,
+								step: prm.step
+							}));
+							break;
+						case 'bool':
+							rtn.push(wp.element.createElement(ToggleControl, {
+								label: prm.label,
+								checked: JSON.parse(props.attr[prm.json])[prm.key],
+								onChange: function onChange(val) {
+									CP.setJsonValue(props, prm.json, prm.key, val);
+								}
+							}));
+							if (prm.sub) {
+								if (JSON.parse(props.attr[prm.json])[prm.key]) {
+									var sub = [];
+									prm.sub.map(function (prm) {
+										sub.push(SelectClass(prm));
+									});
+									rtn.push(wp.element.createElement(
+										'div',
+										{ className: 'sub' },
+										sub
+									));
+								}
+							}
+							break;
+						case 'flag':
+							var value = CP.getJsonValue(props, prm.json, prm.key) || 0;
+							if (prm.label) {
+								rtn.push(wp.element.createElement(
+									'h5',
+									null,
+									prm.label
+								));
+							}
+							Object.keys(prm.values).map(function (key) {
+								rtn.push(wp.element.createElement(CheckboxControl, {
+									label: key,
+									onChange: function onChange(flag) {
+										value |= prm.values[key];
+										if (!flag) {
+											value ^= prm.values[key];
+										}
+										CP.setJsonValue(props, prm.json, prm.key, value);
+									},
+									checked: value & prm.values[key]
+								}));
+							});
+							break;
+						case 'color':
+							if (prm.label) {
+								rtn.push(wp.element.createElement(
+									'h5',
+									null,
+									prm.label
+								));
+							}
+							rtn.push(wp.element.createElement(ColorPicker, {
+								color: CP.getJsonValue(props, prm.json, prm.key) || '#FFFFFF',
+								onChangeComplete: function onChangeComplete(value) {
+									CP.setJsonValue(props, prm.json, prm.key, value.hex);
+								}
+							}));
+							break;
+						case 'colors':
+							if (prm.label) {
+								rtn.push(wp.element.createElement(
+									'h5',
+									null,
+									prm.label
+								));
+							}
+							rtn.push(wp.element.createElement(CP.SelectColors, {
+								colors: CP.getJsonValue(props, prm.json, prm.key) || [{ h: '40', s: '80%', l: '50%' }, { h: '60', s: '80%', l: '50%' }],
+								onChange: function onChange(colors) {
+									CP.setJsonValue(props, prm.json, prm.key, colors);
+								}
+							}));
+							break;
+						case 'gradient':
+							if (prm.label) {
+								rtn.push(wp.element.createElement(
+									'h5',
+									null,
+									prm.label
+								));
+							}
+							rtn.push(wp.element.createElement(GradientPicker, {
+								onChange: function onChange(value) {
+									console.log(CP.parseGradientStyleValue(value));
+								}
+							}));
+							break;
+					}
+				} else if (_.isObject(prm.values)) {
+					var _CP$parseSelections = CP.parseSelections(prm.values),
+					    _options = _CP$parseSelections.options,
+					    _values = _CP$parseSelections.values;
+
+					rtn.push(wp.element.createElement(SelectControl, {
+						label: prm.label,
+						value: CP.getJsonValue(props, prm.json, prm.key),
+						onChange: function onChange(val) {
+							CP.setJsonValue(props, prm.json, prm.key, val);
+						},
+						options: _options
+					}));
+					if (prm.sub) {
+						var currentValue = CP.getJsonValue(props, prm.json, prm.key);
+						if (currentValue && prm.sub[currentValue]) {
+							var _sub = [];
+							prm.sub[currentValue].map(function (prm) {
+								_sub.push(SelectClass(prm));
+							});
+							rtn.push(wp.element.createElement(
+								'div',
+								{ className: 'sub' },
+								_sub
+							));
+						}
+					}
+				} else if (prm.values) {
+					rtn.push(wp.element.createElement(CheckboxControl, {
+						label: prm.label,
+						onChange: function onChange() {
+							CP.switchJsonValue(props, prm.json, prm.key, prm.values);
+						},
+						checked: CP.hasJsonValue(props, prm.json, prm.key, prm.values)
+					}));
+					if (prm.sub) {
+						if (CP.getJsonValue(props, prm.json, prm.key)) {
+							var _sub2 = [];
+							prm.sub.map(function (prm) {
+								_sub2.push(SelectClass(prm));
+							});
+							rtn.push(wp.element.createElement(
+								'div',
+								{ className: 'sub' },
+								_sub2
+							));
+						}
+					}
+				} else {
+					rtn.push(wp.element.createElement(TextControl, {
+						label: prm.label,
+						value: JSON.parse(props.attr[prm.json])[prm.key],
+						onChange: function onChange(val) {
+							CP.setJsonValue(props, prm.json, prm.key, val);
+						}
+					}));
+				}
+			} else if (prm.css) {
+				var _prm$device = prm.device,
+				    device = _prm$device === undefined ? 'pc' : _prm$device;
+
+				var media = CP.getMediaQueryKeyForDevice(device);
+				styleDatas[prm.css] = styleDatas[prm.css] || {};
+				styleDatas[prm.css][media] = styleDatas[prm.css][media] || {};
+				styleDatas[prm.css][media][prm.sel] = styleDatas[prm.css][media][prm.sel] || {};
+				var tgt = styleDatas[prm.css][media][prm.sel];
+				if (prm.input) {
+					switch (prm.input) {
+						case 'border':
+							rtn.push(wp.element.createElement(CP.SelectPreparedImage, {
+								name: 'border',
+								value: CP.getUrlInStyleCode(tgt['border-image']),
+								color: prm.color || 0,
+								onChange: function onChange(image) {
+									if (!image.conf) {
+										return;
+									}
+									var _image$conf = image.conf,
+									    slice = _image$conf.slice,
+									    width = _image$conf.width,
+									    repeat = _image$conf.repeat;
+
+									tgt['border-style'] = 'solid';
+									tgt['border-image'] = 'url(' + image.url + ') fill ' + slice + ' / ' + width + ' ' + repeat;
+									saveCss(prm.css);
+								}
+							}));
+							break;
+						case 'pattern':
+							rtn.push(wp.element.createElement(CP.SelectPreparedImage, {
+								name: 'pattern',
+								value: CP.getUrlInStyleCode(tgt['background-image']),
+								color: prm.color || 0,
+								onChange: function onChange(image) {
+									if (!image.conf) {
+										return;
+									}
+									var _image$conf2 = image.conf,
+									    size = _image$conf2.size,
+									    width = _image$conf2.width,
+									    height = _image$conf2.height,
+									    repeat = _image$conf2.repeat,
+									    x = _image$conf2.x,
+									    y = _image$conf2.y;
+
+									tgt['background-image'] = 'url(' + image.url + ')';
+									if (width && height) {
+										tgt['background-size'] = width + 'px ' + height + 'px';
+									} else if (size) {
+										tgt['background-size'] = CP.translateCssVal('background-size', size);
+									} else {
+										delete tgt['background-size'];
+									}
+									if (repeat) {
+										tgt['background-repeat'] = CP.translateCssVal('background-repeat', repeat);
+									} else {
+										delete tgt['background-repeat'];
+									}
+									if (x && y) {
+										tgt['background-position'] = x + '% ' + y + '%';
+									} else {
+										delete tgt['background-position'];
+									}
+									saveCss(prm.css);
+								}
+							}));
+							break;
+						case 'frame':
+							rtn.push(wp.element.createElement(CP.SelectPreparedImageSet, {
+								name: 'frame',
+								value: CP.getUrlInStyleCode(tgt['border-image']),
+								color: prm.color || 0,
+								onChange: function onChange(imageset) {
+									imageset.map(function (image) {
+										if (!image.conf) {
+											return;
+										}
+										var _image$conf3 = image.conf,
+										    device = _image$conf3.device,
+										    slice = _image$conf3.slice,
+										    width = _image$conf3.width,
+										    repeat = _image$conf3.repeat;
+
+										var media = CP.getMediaQueryKeyForDevice(device);
+										styleDatas[prm.css][media] = styleDatas[prm.css][media] || {};
+										styleDatas[prm.css][media][prm.sel] = styleDatas[prm.css][media][prm.sel] || {};
+										styleDatas[prm.css][media][prm.sel]['border-style'] = 'solid';
+										styleDatas[prm.css][media][prm.sel]['border-image'] = 'url(' + image.url + ') fill ' + slice + ' / ' + width + ' ' + repeat;
+									});
+									saveCss(prm.css);
+								}
+							}));
+							break;
+					}
+				} else {
+					rtn.push(wp.element.createElement(TextControl, {
+						label: prm.label,
+						value: tgt[prm.attr],
+						onChange: function onChange(val) {
+							tgt[prm.attr] = val;
+							saveCss(prm.css);
+						}
+					}));
+				}
+			} else {
+				if (prm === 'color') {
+					rtn.push(wp.element.createElement(CP.SelectColorClass, {
+						label: '\u8272',
+						set: props.set,
+						attr: props.attr,
+						selected: Object.keys(states).find(function (key) {
+							return (/^color\d+/.test(key)
+							);
+						}),
+						onChange: function onChange(color) {
+							CP.filterFlags(states, function (key) {
+								return !/^color\d+/.test(key);
+							});
+							states[color] = true;
+							if (!items) {
+								set({ color: color.substr(5) });
+							}
+							saveClasses();
+						}
+					}));
+				} else if (prm === 'pattern') {
+					rtn.push(wp.element.createElement(CP.SelectPatternClass, {
+						label: '\u30D1\u30BF\u30FC\u30F3',
+						set: props.set,
+						attr: props.attr,
+						selected: Object.keys(states).find(function (key) {
+							return (/^pattern\d+/.test(key)
+							);
+						}),
+						onChange: function onChange(pattern) {
+							CP.filterFlags(states, function (key) {
+								return !/^pattern\d+/.test(key);
+							});
+							states[pattern] = true;
+							saveClasses();
+						}
+					}));
+				} else if (prm === 'cond') {
+					rtn.push(wp.element.createElement(TextareaControl, {
+						label: '\u8868\u793A\u6761\u4EF6',
+						value: item['cond'],
+						onChange: function onChange(cond) {
+							return save({ cond: cond });
+						}
+					}));
+				} else if (prm === 'event') {
+					if (cp.use_functions.indexOf('ga') > -1) {
+						var _window$Catpow$ga = window.Catpow.ga,
+						    parseEventString = _window$Catpow$ga.parseEventString,
+						    createEventString = _window$Catpow$ga.createEventString;
+
+						var event = parseEventString(item['event']);
+						var params = { event: 'イベント', action: 'アクション', category: 'カテゴリ', label_name: 'ラベル名', label: 'ラベル', value: '値' };
+						rtn.push(wp.element.createElement(
+							BaseControl,
+							{ label: 'Google Analitics Event' },
+							wp.element.createElement(
+								'table',
+								null,
+								Object.keys(params).map(function (key) {
+									return wp.element.createElement(
+										'tr',
+										null,
+										wp.element.createElement(
+											'th',
+											{ width: '80' },
+											params[key]
+										),
+										wp.element.createElement(
+											'td',
+											null,
+											wp.element.createElement(TextControl, {
+												value: event[key],
+												type: key == 'value' ? 'number' : 'text',
+												onChange: function onChange(val) {
+													event[key] = val;
+													save({ event: createEventString(event) });
+												}
+											})
+										)
+									);
+								})
+							)
+						));
+					}
+				} else if (prm.input) {
+					switch (prm.input) {
+						case 'select':
+							var _CP$parseSelections2 = CP.parseSelections(prm.values),
+							    options = _CP$parseSelections2.options,
+							    values = _CP$parseSelections2.values;
+
+							rtn.push(wp.element.createElement(SelectControl, {
+								label: prm.label,
+								onChange: function onChange(val) {
+									save(babelHelpers.defineProperty({}, prm.key, val));
+									if (prm.effect) {
+										prm.effect(val);
+									}i;
+								},
+								value: item[prm.key],
+								options: options
+							}));
+							break;
+						case 'buttons':
+							var _CP$parseSelections3 = CP.parseSelections(prm.values),
+							    options = _CP$parseSelections3.options,
+							    values = _CP$parseSelections3.values;
+
+							rtn.push(wp.element.createElement(CP.SelectButtons, {
+								label: prm.label,
+								onChange: function onChange(val) {
+									save(babelHelpers.defineProperty({}, prm.key, val));
+									if (prm.effect) {
+										prm.effect(val);
+									}
+								},
+								selected: item[prm.key],
+								options: options
+							}));
+							break;
+						case 'gridbuttons':
+							var _CP$parseSelections4 = CP.parseSelections(prm.values),
+							    options = _CP$parseSelections4.options,
+							    values = _CP$parseSelections4.values;
+
+							rtn.push(wp.element.createElement(CP.SelectGridButtons, {
+								label: prm.label,
+								onChange: function onChange(val) {
+									save(babelHelpers.defineProperty({}, prm.key, val));
+									if (prm.effect) {
+										prm.effect(val);
+									}
+								},
+								selected: item[prm.key],
+								options: options
+							}));
+							break;
+						case 'text':
+							rtn.push(wp.element.createElement(TextControl, {
+								label: prm.label,
+								value: item[prm.key],
+								onChange: function onChange(val) {
+									save(babelHelpers.defineProperty({}, prm.key, val));
+									if (prm.effect) {
+										prm.effect(val);
+									}
+								}
+							}));
+							break;
+						case 'textarea':
+							rtn.push(wp.element.createElement(TextareaControl, {
+								label: prm.label,
+								value: item[prm.key],
+								onChange: function onChange(val) {
+									save(babelHelpers.defineProperty({}, prm.key, val));
+									if (prm.effect) {
+										prm.effect(val);
+									}
+								}
+							}));
+							break;
+						case 'range':
+							if (!prm.coef) {
+								prm.coef = 1;
+							}
+							rtn.push(wp.element.createElement(RangeControl, {
+								label: prm.label,
+								value: item[prm.key] / prm.coef,
+								onChange: function onChange(val) {
+									val *= prm.coef;
+									save(babelHelpers.defineProperty({}, prm.key, val));
+									if (prm.effect) {
+										prm.effect(val);
+									}
+								},
+								min: prm.min,
+								max: prm.max,
+								step: prm.step
+							}));
+							break;
+						case 'bool':
+							rtn.push(wp.element.createElement(ToggleControl, {
+								label: prm.label,
+								checked: item[prm.key],
+								onChange: function onChange(val) {
+									save(babelHelpers.defineProperty({}, prm.key, val));
+									if (prm.effect) {
+										prm.effect(val);
+									}
+								}
+							}));
+							break;
+						case 'image':
+							if (prm.label) {
+								rtn.push(wp.element.createElement(
+									'h5',
+									null,
+									prm.label
+								));
+							}
+							rtn.push(wp.element.createElement(CP.SelectResponsiveImage, {
+								index: index,
+								set: props.set,
+								attr: props.attr,
+								keys: prm.keys,
+								size: prm.size,
+								sizes: prm.sizes,
+								device: prm.device,
+								devices: prm.devices,
+								isTemplate: prm.isTemplate
+							}));
+							break;
+						case 'picture':
+							if (prm.label) {
+								rtn.push(wp.element.createElement(
+									'h5',
+									null,
+									prm.label
+								));
+							}
+							rtn.push(wp.element.createElement(CP.SelectPictureSources, {
+								index: index,
+								set: props.set,
+								attr: props.attr,
+								keys: prm.keys,
+								sizes: prm.sizes,
+								devices: prm.devices,
+								isTemplate: prm.isTemplate
+							}));
+							break;
+						case 'position':
+							rtn.push(wp.element.createElement(CP.SelectPositionClass, {
+								set: props.set,
+								attr: props.attr,
+								label: prm.label,
+								key: prm.key,
+								help: prm.help,
+								disable: prm.disable,
+								itemsKey: itemsKey,
+								index: index
+							}));
+						case 'icon':
+						case 'symbol':
+						case 'pattern':
+							prm.keys = prm.keys || {};
+							prm.keys.src = prm.keys.src || prm.input + 'Src';
+							prm.keys.alt = prm.keys.alt || prm.input + 'Alt';
+							if (prm.label) {
+								rtn.push(wp.element.createElement(
+									'h5',
+									null,
+									prm.label
+								));
+							}
+							rtn.push(wp.element.createElement(CP.SelectPreparedImage, {
+								name: prm.input,
+								value: item[prm.keys.src],
+								color: prm.color || 0,
+								onChange: function onChange(image) {
+									var _save9;
+
+									save((_save9 = {}, babelHelpers.defineProperty(_save9, prm.keys.src, image.url), babelHelpers.defineProperty(_save9, prm.keys.alt, image.alt), _save9));
+								}
+							}));
+							break;
+					}
+					switch (prm.input) {
+						case 'select':
+						case 'buttons':
+						case 'gridbuttons':
+							if (prm.sub && prm.sub[item[prm.key]]) {
+								var _sub3 = [];
+								prm.sub[item[prm.key]].map(function (prm) {
+									_sub3.push(SelectClass(prm));
+								});
+								rtn.push(wp.element.createElement(
+									'div',
+									{ className: 'sub' },
+									_sub3
+								));
+							}
+							break;
+						case 'bool':
+							if (prm.sub && item[prm.key]) {
+								var _sub4 = [];
+								prm.sub.map(function (prm) {
+									_sub4.push(SelectClass(prm));
+								});
+								rtn.push(wp.element.createElement(
+									'div',
+									{ className: 'sub' },
+									_sub4
+								));
+							}
+							break;
+					}
+				} else if (_.isObject(prm.values)) {
+					var subClasses = CP.getSubClasses(prm);
+					var bindClasses = CP.getBindClasses(prm);
+
+					var _CP$parseSelections5 = CP.parseSelections(prm.values),
+					    options = _CP$parseSelections5.options,
+					    values = _CP$parseSelections5.values;
+
+					var currentClass = values.find(function (value) {
+						return states[value];
+					});
+
+					var onChangeCB = function onChangeCB(newClass) {
+						if (currentClass) {
+							states[currentClass] = false;
+
+							var currentSels = [];
+							if (subClasses[currentClass]) {
+								currentSels = currentSels.concat(subClasses[currentClass]);
+							}
+							if (bindClasses[currentClass]) {
+								currentSels = currentSels.concat(bindClasses[currentClass]);
+							}
+
+							var newSels = [];
+							if (subClasses[newClass]) {
+								newSels = newSels.concat(subClasses[newClass]);
+							}
+							if (bindClasses[newClass]) {
+								newSels = newSels.concat(bindClasses[newClass]);
+							}
+							currentSels.map(function (value) {
+								if (!newSels.includes(value)) {
+									states[value] = false;
+								}
+							});
+						}
+						bindClasses[newClass].map(function (value) {
+							states[value] = true;
+						});
+						states[newClass] = true;
+
+						saveClasses();
+						if (prm.effect) {
+							prm.effect(currentClass, newClass);
+						}
+					};
+
+					switch (prm.type) {
+						case 'radio':
+							rtn.push(wp.element.createElement(RadioControl, {
+								label: prm.label,
+								onChange: onChangeCB,
+								selected: currentClass,
+								options: options
+							}));
+							break;
+						case 'buttons':
+							rtn.push(wp.element.createElement(CP.SelectButtons, {
+								label: prm.label,
+								onChange: onChangeCB,
+								selected: currentClass,
+								options: options
+							}));
+							break;
+						case 'gridbuttons':
+							rtn.push(wp.element.createElement(CP.SelectGridButtons, {
+								label: prm.label,
+								onChange: onChangeCB,
+								selected: currentClass,
+								options: options
+							}));
+							break;
+						default:
+							rtn.push(wp.element.createElement(SelectControl, {
+								label: prm.label,
+								onChange: onChangeCB,
+								value: currentClass,
+								options: options
+							}));
+					}
+
+					if (prm.sub) {
+						var _currentClass = CP.getSelectiveClass(props, prm.values, prm.key);
+						if (_currentClass && prm.sub[_currentClass]) {
+							var _sub5 = [];
+							prm.sub[_currentClass].map(function (prm) {
+								_sub5.push(SelectClass(prm));
+							});
+							rtn.push(wp.element.createElement(
+								'div',
+								{ className: 'sub' },
+								_sub5
+							));
+						}
+					}
+				} else {
+					rtn.push(wp.element.createElement(CheckboxControl, {
+						label: prm.label,
+						onChange: function onChange() {
+							states[prm.values] = !states[prm.values];
+							saveClasses();
+						},
+						checked: states[prm.values]
+					}));
+					if (prm.sub) {
+						if (states[prm.values]) {
+							var _sub6 = [];
+							prm.sub.map(function (prm) {
+								_sub6.push(SelectClass(prm));
+							});
+							rtn.push(wp.element.createElement(
+								'div',
+								{ className: 'sub' },
+								_sub6
+							));
+						}
+					}
+				}
+			}
+			return rtn;
+		};
+		if (triggerClasses && triggerClasses.item) {
+			var blockStates = CP.wordsToFlags(attr.classes);
+			itemClasses = triggerClasses.item[Object.keys(triggerClasses.item).find(function (value) {
+				return blockStates[value];
+			})];
+			if (!itemClasses || Array.isArray(itemClasses) && itemClasses.length === 0) {
+				return false;
+			}
+			return wp.element.createElement(
+				PanelBody,
+				{ title: props.title, initialOpen: props.initialOpen || false, icon: props.icon },
+				itemClasses.map(SelectClass)
+			);
+		}
+		return wp.element.createElement(
+			PanelBody,
+			{ title: props.title, initialOpen: props.initialOpen || false, icon: props.icon },
+			props.selectiveClasses.map(SelectClass)
+		);
+	},
+
+	AlignClassToolbar: function AlignClassToolbar(props) {
+		var aligns = ['left', 'center', 'right'];
+		return wp.element.createElement(BlockAlignmentToolbar, {
+			value: CP.getSelectiveClass(props, aligns),
+			controls: props.aligns || aligns,
+			onChange: function onChange(align) {
+				CP.switchSelectiveClass(props, aligns, align, props.key);
+			}
+		});
+	},
+	VerticalAlignClassToolbar: function VerticalAlignClassToolbar(props) {
+		var aligns = ['top', 'center', 'bottom'];
+		return wp.element.createElement(BlockVerticalAlignmentToolbar, {
+			value: CP.getSelectiveClass(props, aligns),
+			controls: props.aligns || aligns,
+			onChange: function onChange(align) {
+				CP.switchSelectiveClass(props, aligns, align, props.key);
+			}
+		});
+	},
+	SelectColorClass: function SelectColorClass(props) {
+		var label = props.label,
+		    help = props.help;
+
+
+		return wp.element.createElement(
+			BaseControl,
+			{ label: label, help: help },
+			wp.element.createElement(CP.SelectThemeColor, {
+				onChange: props.onChange,
+				selected: props.selected
+			})
+		);
+	},
+	SelectPatternClass: function SelectPatternClass(props) {
+		var label = props.label,
+		    help = props.help,
+		    selected = props.selected,
+		    onChange = props.onChange;
+
+
+		var items = Array.from(Array(6), function (v, i) {
+			var classes = 'bgPattern' + i;
+			var value = 'pattern' + i;
+			if (value == selected) {
+				classes += ' active';
+			}
+			return wp.element.createElement(
+				'li',
+				{
+					className: classes,
+					onClick: function onClick() {
+						return onChange(value);
+					}
+				},
+				' '
+			);
+		});
+
+		return wp.element.createElement(
+			BaseControl,
+			{ label: label, help: help },
+			wp.element.createElement(
+				'ul',
+				{ 'class': 'selectPattern' },
+				items
+			)
+		);
+	},
+
+	SelectPositionClass: function SelectPositionClass(props) {
+		var rows = [['topLeft', 'top', 'topRight'], ['left', 'center', 'right'], ['bottomLeft', 'bottom', 'bottomRight']];
+		var values = _.flatten(rows);
+		var label = props.label,
+		    help = props.help,
+		    itemsKey = props.itemsKey,
+		    index = props.index,
+		    disable = props.disable;
+
+		var value = itemsKey ? CP.getItemSelectiveClass(props, values) : CP.getSelectiveClass(props, values);
+
+		return wp.element.createElement(
+			BaseControl,
+			{ label: label, help: help },
+			wp.element.createElement(
+				'table',
+				{ className: 'selectPosition' },
+				wp.element.createElement(
+					'tbody',
+					null,
+					rows.map(function (cols) {
+						return wp.element.createElement(
+							'tr',
+							null,
+							cols.map(function (col) {
+								var isChecked = value == col;
+								if (disable && disable.includes(col)) {
+									return wp.element.createElement(
+										'td',
+										{ className: 'disable' },
+										' '
+									);
+								}
+								return wp.element.createElement(
+									'td',
+									{
+										className: isChecked ? "active" : "",
+										onClick: function onClick() {
+											if (itemsKey) {
+												CP.switchItemSelectiveClass(props, values, col, props.key);
+											} else {
+												CP.switchSelectiveClass(props, values, col, props.key);
+											}
+										}
+									},
+									' '
+								);
+							})
+						);
+					})
+				)
+			)
+		);
+	},
+
+	ImporterCSVPanel: function ImporterCSVPanel(props) {
+		var reader = new FileReader();
+		reader.onload = function (e) {
+			props.callback(CP.parseCSV(e.target.result));
+		};
+		return wp.element.createElement(
+			PanelBody,
+			{ title: props.title, initialOpen: false, icon: props.icon },
+			wp.element.createElement(FormFileUpload, {
+				label: 'CSV',
+				accept: 'text/csv',
+				onChange: function onChange(e) {
+					reader.readAsText(e.target.files[0]);
+				}
+			})
+		);
+	},
+
+	SelectBreakPointToolbar: function SelectBreakPointToolbar(props) {
+		return wp.element.createElement(Toolbar, {
+			controls: props.breakpoints.map(function (bp) {
+				var title = bp == "0" ? 'ー' : bp;
+				return {
+					icon: wp.element.createElement(
+						'svg',
+						{ viewBox: '0 0 100 100' },
+						wp.element.createElement(
+							'text',
+							{ style: { "font-size": "50px" }, x: 50, y: 50, textAnchor: 'middle', dominantBaseline: 'middle' },
+							title
+						)
+					),
+					isActive: props.value == bp,
+					onClick: function onClick() {
+						return props.onChange(bp);
+					}
+				};
+			})
+		});
+	},
+	SelectModeToolbar: function SelectModeToolbar(props) {
+		var set = props.set,
+		    attr = props.attr,
+		    _props$modes = props.modes,
+		    modes = _props$modes === undefined ? ['EditMode', 'AltMode'] : _props$modes;
+
+		var SomeMode = modes.some(function (mode) {
+			return attr[mode];
+		});
+		var icons = {
+			EditMode: 'edit',
+			OpenMode: 'video-alt3',
+			AltMode: 'welcome-comments',
+			TextMode: 'media-text'
+		};
+		var cond = {
+			AltMode: 'doLoop'
+		};
+		return wp.element.createElement(
+			BlockControls,
+			null,
+			modes.map(function (mode) {
+				if (!attr[mode] && SomeMode) {
+					return false;
+				}
+				if (cond[mode] && !attr[cond[mode]]) {
+					return false;
+				}
+				return wp.element.createElement(Toolbar, {
+					controls: [{
+						icon: icons[mode],
+						title: mode,
+						isActive: attr[mode],
+						onClick: function onClick() {
+							return set(babelHelpers.defineProperty({}, mode, !attr[mode]));
+						}
+					}]
+				});
+			})
+		);
+	},
+
+	SelectDeviceToolbar: function SelectDeviceToolbar(props) {
+		var set = props.set,
+		    attr = props.attr,
+		    _props$devices = props.devices,
+		    devices = _props$devices === undefined ? ['sp', 'pc'] : _props$devices;
+
+		return wp.element.createElement(
+			BlockControls,
+			null,
+			devices.map(function (device) {
+				return wp.element.createElement(Toolbar, {
+					controls: [{
+						icon: CP.devices[device].icon,
+						title: device,
+						isActive: attr.device === device,
+						onClick: function onClick() {
+							if (attr.device === device) {
+								set({ device: null });
+							} else {
+								set({ device: device });
+							}
+						}
+					}]
+				});
+			})
+		);
+	},
+
+	EditItemsTable: function EditItemsTable(props) {
+		var set = props.set,
+		    attr = props.attr,
+		    _props$itemsKey = props.itemsKey,
+		    itemsKey = _props$itemsKey === undefined ? 'items' : _props$itemsKey,
+		    columns = props.columns,
+		    isTemplate = props.isTemplate;
+
+		var items = attr[itemsKey] || [];
+		var save = function save() {
+			set(babelHelpers.defineProperty({}, itemsKey, JSON.parse(JSON.stringify(items))));
+		};
+		return wp.element.createElement(
+			'table',
+			{ className: 'editItemsTable' },
+			wp.element.createElement(
+				'thead',
+				null,
+				wp.element.createElement(
+					'tr',
+					null,
+					columns.map(function (col) {
+						return !('cond' in col) || col.cond ? wp.element.createElement(
+							'th',
+							null,
+							col.label || col.key
+						) : false;
+					}),
+					wp.element.createElement('th', null)
+				)
+			),
+			wp.element.createElement(
+				'tbody',
+				null,
+				items.map(function (item, index) {
+					var propsForControl = { tag: 'tr', set: set, itemsKey: itemsKey, items: items, index: index };
+					return wp.element.createElement(
+						'tr',
+						{
+							onClick: function onClick(e) {
+								set({ currentItemIndex: index });
+							}
+						},
+						columns.map(function (col) {
+							if ('cond' in col && !col.cond) {
+								return false;
+							}
+							switch (col.type) {
+								case 'text':
+									return wp.element.createElement(
+										'td',
+										null,
+										wp.element.createElement(RichText, {
+											value: item[col.key],
+											onChange: function onChange(value) {
+												item[col.key] = value;
+												save();
+											}
+										})
+									);
+								case 'image':
+									return wp.element.createElement(
+										'td',
+										null,
+										wp.element.createElement(CP.SelectResponsiveImage, {
+											attr: attr,
+											set: set,
+											keys: babelHelpers.extends({ items: itemsKey, src: col.key }, col.keys),
+											index: index,
+											size: col.size || 'vga',
+											isTemplate: isTemplate
+										})
+									);
+								case 'picture':
+									return wp.element.createElement(
+										'td',
+										null,
+										wp.element.createElement(CP.SelectPictureSources, {
+											index: index,
+											attr: attr,
+											set: set,
+											keys: babelHelpers.extends({ items: itemsKey }, col.keys),
+											sizes: col.sizes,
+											devices: col.devices,
+											isTemplate: isTemplate
+										})
+									);
+								case 'items':
+									col.columns.map(function (subCol) {
+										if (subCol.keys) {
+											subCol.keys.subItems = col.key;
+										}
+									});
+									return wp.element.createElement(
+										'td',
+										null,
+										wp.element.createElement(CP.EditItemsTable, {
+											set: function set() {
+												save();
+											},
+											attr: item,
+											itemsKey: col.itemsKey,
+											columns: col.columns,
+											isTemplate: isTemplate
+										})
+									);
+							}
+						}),
+						wp.element.createElement(
+							'td',
+							null,
+							wp.element.createElement(
+								'div',
+								{ className: 'itemControl' },
+								wp.element.createElement('div', { className: 'btn delete', onClick: function onClick(e) {
+										return CP.deleteItem(propsForControl);
+									} }),
+								wp.element.createElement('div', { className: 'btn clone', onClick: function onClick(e) {
+										return CP.cloneItem(propsForControl);
+									} }),
+								wp.element.createElement('div', { className: 'btn up', onClick: function onClick(e) {
+										return CP.upItem(propsForControl);
+									} }),
+								wp.element.createElement('div', { className: 'btn down', onClick: function onClick(e) {
+										return CP.downItem(propsForControl);
+									} })
+							)
+						)
+					);
+				})
+			)
+		);
+	},
+
+	DummyImage: function DummyImage(_ref22) {
+		var text = _ref22.text;
+
+		return wp.element.createElement('img', { src: cp.plugins_url + '/catpow/callee/dummy_image.php?text=' + text });
 	}
 };
+
 CP.example = {
 	attributes: {
 		title: [CP.dummyText.title],
@@ -1015,1767 +2760,4 @@ CP.example = {
 			content: CP.dummyText.text
 		}
 	}]
-};
-
-var SelectResponsiveImage = function SelectResponsiveImage(props) {
-	var className = props.className,
-	    attr = props.attr,
-	    set = props.set,
-	    _props$keys = props.keys,
-	    keys = _props$keys === undefined ? {} : _props$keys,
-	    index = props.index,
-	    size = props.size,
-	    devices = props.devices,
-	    device = props.device,
-	    isTemplate = props.isTemplate,
-	    otherProps = babelHelpers.objectWithoutProperties(props, ['className', 'attr', 'set', 'keys', 'index', 'size', 'devices', 'device', 'isTemplate']);
-	var sizes = props.sizes;
-
-	var type = void 0,
-	    onClick = void 0,
-	    item = void 0,
-	    items = void 0;
-	if (keys.items) {
-		items = attr[keys.items];
-		if (keys.subItems) {
-			item = items[index][keys.subItems][subIndex];
-		} else {
-			item = items[index];
-		}
-	} else {
-		item = attr;
-	}
-	if (device) {
-		var sizeData = CP.devices[device];
-		onClick = function onClick(e) {
-			return CP.selectImage({ src: 'src' }, function (_ref18) {
-				var src = _ref18.src;
-
-				if (keys.sources) {
-					item[keys.sources].map(function (source) {
-						if (source.device === device) {
-							source.srcset = src;
-						}
-						return source;
-					});
-					if (items) {
-						set(babelHelpers.defineProperty({}, keys.items, JSON.parse(JSON.stringify(items))));
-					} else {
-						set(babelHelpers.defineProperty({}, keys.sources, JSON.parse(JSON.stringify(item[keys.sources]))));
-					}
-				} else {
-					if (items) {
-						item[keys.srcset] = item[keys.srcset].replace(sizeData.reg, src + sizeData.rep);
-						set(babelHelpers.defineProperty({}, keys.items, JSON.parse(JSON.stringify(items))));
-					} else {
-						set(babelHelpers.defineProperty({}, keys.srcset, item[keys.srcset].replace(sizeData.reg, src + sizeData.rep)));
-					}
-				}
-			}, sizeData.media_size);
-		};
-	} else {
-		onClick = function onClick(e) {
-			return CP.selectImage(keys, function (data) {
-				if (keys.items) {
-					Object.assign(item, data);
-					set(babelHelpers.defineProperty({}, keys.items, JSON.parse(JSON.stringify(items))));
-				} else {
-					set(data);
-				}
-			}, size, devices);
-		};
-	}
-	if (isTemplate && keys.code && item[keys.code]) {
-		return wp.element.createElement(DummyImage, { text: item[keys.code] });
-	}
-	if (item[keys.mime]) {
-		type = item[keys.mime].split('/')[0];
-	} else {
-		type = 'image';
-	}
-	if (type == 'audio') {
-		return wp.element.createElement('audio', babelHelpers.extends({
-			className: 'selectImage ' + className,
-			src: item[keys.src],
-			'data-mime': item[keys.mime],
-			onClick: onClick
-		}, otherProps));
-	}
-	if (item[keys.srcset] && !sizes) {
-		if (device) {
-			sizes = CP.devices[device].sizes_value;
-		} else {
-			sizes = CP.getImageSizesForDevices(devices || ['sp', 'pc']);
-		}
-	}
-	if (type == 'video') {
-		return wp.element.createElement('video', babelHelpers.extends({
-			className: 'selectImage ' + className,
-			src: item[keys.src],
-			'data-mime': item[keys.mime],
-			onClick: onClick,
-			autoplay: 1,
-			loop: 1,
-			playsinline: 1,
-			muted: 1
-		}, otherProps));
-	}
-	var src = CP.imageSrcOrDummy(item[keys.src]);
-	if (keys.sources) {
-		if (device) {
-			var source = item[keys.sources].find(function (source) {
-				return source.device === device;
-			}) || { srcset: cp.theme_url + '/images/dummy.jpg' };
-			return wp.element.createElement(
-				'picture',
-				babelHelpers.extends({
-					className: 'selectImage ' + className,
-					onClick: onClick
-				}, otherProps),
-				wp.element.createElement('img', {
-					src: source.srcset,
-					alt: item[keys.alt]
-				})
-			);
-		}
-		return wp.element.createElement(
-			'picture',
-			babelHelpers.extends({
-				className: 'selectImage ' + className,
-				onClick: onClick
-			}, otherProps),
-			item[keys.sources].map(function (source) {
-				return wp.element.createElement('source', { srcset: source.srcset, media: CP.devices[source.device].media_query, 'data-device': source.device });
-			}),
-			wp.element.createElement('img', {
-				src: src,
-				alt: item[keys.alt]
-			})
-		);
-	}
-	return wp.element.createElement('img', babelHelpers.extends({
-		className: 'selectImage ' + className,
-		src: src,
-		alt: item[keys.alt],
-		srcset: item[keys.srcset],
-		sizes: sizes,
-		'data-mime': item[keys.mime],
-		onClick: onClick
-	}, otherProps));
-};
-var ResponsiveImage = function ResponsiveImage(_ref19) {
-	var className = _ref19.className,
-	    attr = _ref19.attr,
-	    keys = _ref19.keys,
-	    index = _ref19.index,
-	    sizes = _ref19.sizes,
-	    devices = _ref19.devices,
-	    device = _ref19.device,
-	    isTemplate = _ref19.isTemplate;
-
-	var type = void 0,
-	    item = void 0;
-	if (keys.items) {
-		item = attr[keys.items][index];
-	} else {
-		item = attr;
-	}
-	if (isTemplate && keys.code && item[keys.code]) {
-		return item[keys.code];
-	}
-	if (item[keys.mime]) {
-		type = item[keys.mime].split('/')[0];
-	} else {
-		type = 'image';
-	}
-	if (type == 'audio') {
-		return wp.element.createElement('audio', {
-			src: item[keys.src],
-			'data-mime': item[keys.mime]
-		});
-	}
-	if (item[keys.srcset] && !sizes) {
-		devices = devices || ['sp', 'pc'];
-		sizes = CP.getImageSizesForDevices(devices);
-	}
-	if (type == 'video') {
-		return wp.element.createElement('video', {
-			className: className,
-			src: item[keys.src],
-			srcset: item[keys.srcset],
-			sizes: sizes,
-			'data-mime': item[keys.mime],
-			autoplay: 1,
-			loop: 1,
-			playsinline: 1,
-			muted: 1
-		});
-	}
-	if (keys.sources && item[keys.sources] && item[keys.sources].length) {
-		if (device) {
-			var source = item[keys.sources].find(function (source) {
-				return source.device === device;
-			});
-			return wp.element.createElement(
-				'picture',
-				{ className: 'selectImage ' + className },
-				wp.element.createElement('img', {
-					src: source.srcset,
-					alt: item[keys.alt]
-				})
-			);
-		}
-		return wp.element.createElement(
-			'picture',
-			{ className: 'selectImage ' + className },
-			item[keys.sources].map(function (source) {
-				return wp.element.createElement('source', { srcset: source.srcset, media: CP.devices[source.device].media_query, 'data-device': source.device });
-			}),
-			wp.element.createElement('img', {
-				src: item[keys.src],
-				alt: item[keys.alt]
-			})
-		);
-	}
-	return wp.element.createElement('img', {
-		className: className,
-		src: item[keys.src],
-		alt: item[keys.alt],
-		srcset: item[keys.srcset],
-		sizes: sizes,
-		'data-mime': item[keys.mime]
-	});
-};
-
-var SelectPictureSources = function SelectPictureSources(props) {
-	var devices = props.devices;
-
-	return wp.element.createElement(
-		'table',
-		{ className: 'SelectPictureSources' },
-		wp.element.createElement(
-			'tbody',
-			null,
-			wp.element.createElement(
-				'tr',
-				null,
-				wp.element.createElement(
-					'td',
-					{ colspan: devices.length },
-					wp.element.createElement(SelectResponsiveImage, props)
-				)
-			),
-			wp.element.createElement(
-				'tr',
-				null,
-				devices.map(function (device) {
-					return wp.element.createElement(
-						'td',
-						null,
-						wp.element.createElement(
-							'div',
-							{ className: 'label' },
-							wp.element.createElement(Icon, { icon: CP.devices[device].icon })
-						),
-						wp.element.createElement(SelectResponsiveImage, babelHelpers.extends({
-							device: device
-						}, props))
-					);
-				})
-			)
-		)
-	);
-};
-
-var SelectPreparedImage = function SelectPreparedImage(_ref20) {
-	var className = _ref20.className,
-	    name = _ref20.name,
-	    value = _ref20.value,
-	    color = _ref20.color,
-	    onChange = _ref20.onChange,
-	    otherProps = babelHelpers.objectWithoutProperties(_ref20, ['className', 'name', 'value', 'color', 'onChange']);
-
-	var onClick = void 0;
-	var _Catpow$util = Catpow.util,
-	    getURLparam = _Catpow$util.getURLparam,
-	    setURLparam = _Catpow$util.setURLparam,
-	    setURLparams = _Catpow$util.setURLparams,
-	    removeURLparam = _Catpow$util.removeURLparam;
-
-	var _wp$element$useReduce = wp.element.useReducer(function (state, action) {
-		switch (action.type) {
-			case 'nextPage':
-				state.page--;break;
-			case 'prevPage':
-				state.page++;break;
-			case 'gotoPage':
-				state.page = action.page;break;
-			case 'update':
-				if (action.images) {
-					state.images = action.images;
-					var bareURL = removeURLparam(value, 'c');
-					state.image = state.images.find(function (image) {
-						return image.url === bareURL;
-					});
-				}
-				if (action.image) {
-					state.image = action.image;
-				}
-				onChange(babelHelpers.extends({}, state.image, { url: setURLparams(state.image ? state.image.url : value, { c: color, theme: cp.theme }) }));
-		}
-		return babelHelpers.extends({}, state);
-	}, { page: 0, images: null, image: null }),
-	    _wp$element$useReduce2 = babelHelpers.slicedToArray(_wp$element$useReduce, 2),
-	    state = _wp$element$useReduce2[0],
-	    dispatch = _wp$element$useReduce2[1];
-
-	CP.cache.PreparedImage = CP.cache.PreparedImage || {};
-
-	if (state.images === null) {
-		if (CP.cache.PreparedImage[name]) {
-			dispatch({ type: 'update', images: CP.cache.PreparedImage[name] });
-		} else {
-			wp.apiFetch({ path: 'cp/v1/images/' + name }).then(function (images) {
-				CP.cache.PreparedImage[name] = images;
-				dispatch({ type: 'update', images: images });
-			});
-		}
-		return false;
-	}
-	return wp.element.createElement(
-		'ul',
-		babelHelpers.extends({ className: 'selectPreparedImage ' + name + ' ' + className }, otherProps),
-		state.images.map(function (image) {
-			var url = setURLparams(image.url, { c: color, theme: cp.theme });
-			return wp.element.createElement(
-				'li',
-				{ className: 'item ' + (value == url ? 'active' : '') },
-				wp.element.createElement('img', {
-					src: url,
-					alt: image.alt,
-					onClick: function onClick() {
-						return dispatch({ type: 'update', image: image });
-					}
-				})
-			);
-		})
-	);
-};
-var SelectPreparedImageSet = function SelectPreparedImageSet(_ref21) {
-	var className = _ref21.className,
-	    name = _ref21.name,
-	    value = _ref21.value,
-	    color = _ref21.color,
-	    onChange = _ref21.onChange,
-	    otherProps = babelHelpers.objectWithoutProperties(_ref21, ['className', 'name', 'value', 'color', 'onChange']);
-
-	var onClick = void 0;
-	var _Catpow$util2 = Catpow.util,
-	    getURLparam = _Catpow$util2.getURLparam,
-	    setURLparam = _Catpow$util2.setURLparam,
-	    setURLparams = _Catpow$util2.setURLparams,
-	    removeURLparam = _Catpow$util2.removeURLparam;
-
-	var _wp$element$useReduce3 = wp.element.useReducer(function (state, action) {
-		switch (action.type) {
-			case 'update':
-				if (action.imagesets) {
-					state.imagesets = action.imagesets;
-					var bareURL = removeURLparam(value, 'c');
-					for (var key in state.imagesets) {
-						if (state.imagesets[key].url === bareURL) {
-							state.imageset = state.imagesets[key];
-							break;
-						}
-					}
-				}
-				if (action.imageset) {
-					state.imageset = action.imageset;
-				}
-				if (state.imageset) {
-					onChange(state.imageset.map(function (item) {
-						return babelHelpers.extends({}, item, { url: setURLparams(item.url, { c: color, theme: cp.theme }) });
-					}));
-				}
-		}
-		return babelHelpers.extends({}, state);
-	}, { page: 0, imagesets: null, imageset: null }),
-	    _wp$element$useReduce4 = babelHelpers.slicedToArray(_wp$element$useReduce3, 2),
-	    state = _wp$element$useReduce4[0],
-	    dispatch = _wp$element$useReduce4[1];
-
-	CP.cache.PreparedImageSets = CP.cache.PreparedImageSets || {};
-
-	if (state.imagesets === null) {
-		if (CP.cache.PreparedImageSets[name]) {
-			dispatch({ type: 'update', imagesets: CP.cache.PreparedImageSets[name] });
-		} else {
-			wp.apiFetch({ path: 'cp/v1/imageset/' + name }).then(function (imagesets) {
-				CP.cache.PreparedImageSets[name] = imagesets;
-				dispatch({ type: 'update', imagesets: imagesets });
-			});
-		}
-		return false;
-	}
-	return wp.element.createElement(
-		'ul',
-		babelHelpers.extends({ className: 'selectPreparedImageSet ' + name + ' ' + className }, otherProps),
-		Object.keys(state.imagesets).map(function (key) {
-			var imageset = state.imagesets[key];
-			var url = setURLparams(imageset[0].url, { c: color, theme: cp.theme });
-			return wp.element.createElement(
-				'li',
-				{ className: 'item ' + (value == url ? 'active' : '') },
-				wp.element.createElement('img', {
-					src: url,
-					alt: imageset[0].alt,
-					onClick: function onClick() {
-						return dispatch({ type: 'update', imageset: imageset });
-					}
-				})
-			);
-		})
-	);
-};
-
-var Item = function Item(props) {
-	var tag = props.tag,
-	    items = props.items,
-	    itemsKey = props.itemsKey,
-	    index = props.index,
-	    set = props.set,
-	    attr = props.attr,
-	    triggerClasses = props.triggerClasses,
-	    children = props.children;
-	var itemClasses = props.itemClasses;
-
-	if (!items[index].classes) {
-		items[index].classes = 'item';
-	} else if (items[index].classes.search(/\bitem\b/) === -1) {
-		items[index].classes += ' item';
-	}
-	var classes = items[index].classes;
-	if (props.className) {
-		classes += ' ' + props.className;
-	}
-
-	var _attr$currentItemInde = attr.currentItemIndex,
-	    currentItemIndex = _attr$currentItemInde === undefined ? 0 : _attr$currentItemInde;
-
-
-	var isSelected = props.isSelected === undefined ? index == currentItemIndex : props.isSelected;
-
-	return wp.element.createElement(tag, {
-		className: classes,
-		"data-index": index,
-		"data-refine-cond": items[index]['cond'],
-		onKeyDown: function onKeyDown(e) {
-			if (e.ctrlKey || e.metaKey) {
-				switch (e.key) {
-					case 's':
-						CP.saveItem(props);e.preventDefault();break;
-					case 'd':
-						CP.cloneItem(props);e.preventDefault();break;
-					case 'Backspace':
-						CP.deleteItem(props);e.preventDefault();break;
-					case 'ArrowUp':
-						CP.upItem(props);e.preventDefault();break;
-					case 'ArrowDown':
-						CP.downItem(props);e.preventDefault();break;
-				}
-			}
-		},
-		onClick: function onClick(e) {
-			set({ currentItemIndex: index });
-		}
-	}, wp.element.createElement(
-		Fragment,
-		null,
-		children,
-		isSelected && wp.element.createElement(
-			'div',
-			{ className: 'itemControl' },
-			wp.element.createElement('div', { className: 'btn delete', onClick: function onClick(e) {
-					return CP.deleteItem(props);
-				} }),
-			wp.element.createElement('div', { className: 'btn clone', onClick: function onClick(e) {
-					return CP.cloneItem(props);
-				} }),
-			wp.element.createElement('div', { className: 'btn up', onClick: function onClick(e) {
-					return CP.upItem(props);
-				} }),
-			wp.element.createElement('div', { className: 'btn down', onClick: function onClick(e) {
-					return CP.downItem(props);
-				} })
-		)
-	));
-};
-var ItemControlInfoPanel = function ItemControlInfoPanel() {
-	return wp.element.createElement(
-		PanelBody,
-		{ title: '\u64CD\u4F5C', initialOpen: false, icon: 'info' },
-		wp.element.createElement(
-			'table',
-			null,
-			wp.element.createElement(
-				'tbody',
-				null,
-				wp.element.createElement(
-					'tr',
-					null,
-					wp.element.createElement(
-						'th',
-						null,
-						'\u2318/Ctrl + S'
-					),
-					wp.element.createElement(
-						'td',
-						null,
-						'\u4FDD\u5B58'
-					)
-				),
-				wp.element.createElement(
-					'tr',
-					null,
-					wp.element.createElement(
-						'th',
-						null,
-						'\u2318/Ctrl + D'
-					),
-					wp.element.createElement(
-						'td',
-						null,
-						'\u8907\u88FD'
-					)
-				),
-				wp.element.createElement(
-					'tr',
-					null,
-					wp.element.createElement(
-						'th',
-						null,
-						'\u2318/Ctrl + delete'
-					),
-					wp.element.createElement(
-						'td',
-						null,
-						'\u524A\u9664'
-					)
-				),
-				wp.element.createElement(
-					'tr',
-					null,
-					wp.element.createElement(
-						'th',
-						null,
-						'\u2318/Ctrl + \u2191'
-					),
-					wp.element.createElement(
-						'td',
-						null,
-						'\u524D\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048'
-					)
-				),
-				wp.element.createElement(
-					'tr',
-					null,
-					wp.element.createElement(
-						'th',
-						null,
-						'\u2318/Ctrl + \u2193'
-					),
-					wp.element.createElement(
-						'td',
-						null,
-						'\u6B21\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048'
-					)
-				)
-			)
-		)
-	);
-};
-
-var EditItems = function EditItems(props) {
-	var atts = props.atts,
-	    set = props.set;
-
-	var key = props.key || 'item';
-	var items = atts[key];
-	var save = function save() {
-		set(babelHelpers.defineProperty({}, key, JSON.parse(JSON.stringify(items))));
-	};
-	return wp.element.createElement(
-		'ul',
-		{ className: 'EditItems' },
-		props.items.map(function (item) {
-			return wp.element.createElement('li', { className: 'item' });
-		})
-	);
-};
-
-var SelectClassPanel = function SelectClassPanel(props) {
-	var _wp$components3 = wp.components,
-	    ColorPicker = _wp$components3.ColorPicker,
-	    GradientPicker = _wp$components3.__experimentalGradientPicker;
-	var _props$classKey = props.classKey,
-	    classKey = _props$classKey === undefined ? 'classes' : _props$classKey,
-	    items = props.items,
-	    index = props.index,
-	    subItemsKey = props.subItemsKey,
-	    subIndex = props.subIndex,
-	    set = props.set,
-	    attr = props.attr,
-	    triggerClasses = props.triggerClasses;
-	var itemsKey = props.itemsKey,
-	    itemClasses = props.itemClasses;
-
-	var item = void 0;
-	if (items) {
-		itemsKey = itemsKey || 'items';
-		if (subItemsKey) {
-			if (!items[index]) {
-				return false;
-			}
-			item = items[index][subItemsKey][subIndex];
-		} else {
-			item = items[index];
-		}
-
-		if (!item) {
-			return false;
-		}
-	} else {
-		item = attr;
-	}
-	var states = CP.wordsToFlags(item[classKey]);
-	var styleDatas = attr.styleDatas;
-
-
-	var save = function save(data) {
-		if (items) {
-			Object.assign(item, data);
-			set(babelHelpers.defineProperty({}, itemsKey, JSON.parse(JSON.stringify(items))));
-		} else {
-			set(data);
-		}
-	};
-	var saveClasses = function saveClasses() {
-		save(babelHelpers.defineProperty({}, classKey, CP.flagsToWords(states)));
-	};
-	var saveCss = function saveCss(cssKey) {
-		set(babelHelpers.defineProperty({}, cssKey, CP.createStyleCodeWithMediaQuery(styleDatas[cssKey])));
-	};
-
-	var SelectClass = function SelectClass(prm) {
-		if (prm.hasOwnProperty('cond') && !prm.cond) {
-			return false;
-		}
-		var rtn = [];
-		if (prm.filter && props.filters && props.filters[prm.filter]) {
-			props.filters[prm.filter](prm);
-		}
-		if (prm.keys) {
-			if (items) {
-				prm.keys.items = prm.keys.items || itemsKey;
-				if (subItemsKey) {
-					prm.keys.subItems = prm.keys.subItems || subItemsKey;
-				}
-			}
-		}
-
-		if (prm.json) {
-			if (prm.input) {
-				switch (prm.input) {
-					case 'text':
-						rtn.push(wp.element.createElement(TextControl, {
-							label: prm.label,
-							value: JSON.parse(props.attr[prm.json])[prm.key],
-							onChange: function onChange(val) {
-								CP.setJsonValue(props, prm.json, prm.key, val);
-							}
-						}));
-						break;
-					case 'range':
-						if (!prm.coef) {
-							prm.coef = 1;
-						}
-						rtn.push(wp.element.createElement(RangeControl, {
-							label: prm.label,
-							value: CP.getJsonValue(props, prm.json, prm.key) / prm.coef,
-							onChange: function onChange(val) {
-								CP.setJsonValue(props, prm.json, prm.key, val * prm.coef);
-							},
-							min: prm.min,
-							max: prm.max,
-							step: prm.step
-						}));
-						break;
-					case 'bool':
-						rtn.push(wp.element.createElement(ToggleControl, {
-							label: prm.label,
-							checked: JSON.parse(props.attr[prm.json])[prm.key],
-							onChange: function onChange(val) {
-								CP.setJsonValue(props, prm.json, prm.key, val);
-							}
-						}));
-						if (prm.sub) {
-							if (JSON.parse(props.attr[prm.json])[prm.key]) {
-								var sub = [];
-								prm.sub.map(function (prm) {
-									sub.push(SelectClass(prm));
-								});
-								rtn.push(wp.element.createElement(
-									'div',
-									{ className: 'sub' },
-									sub
-								));
-							}
-						}
-						break;
-					case 'flag':
-						var value = CP.getJsonValue(props, prm.json, prm.key) || 0;
-						if (prm.label) {
-							rtn.push(wp.element.createElement(
-								'h5',
-								null,
-								prm.label
-							));
-						}
-						Object.keys(prm.values).map(function (key) {
-							rtn.push(wp.element.createElement(CheckboxControl, {
-								label: key,
-								onChange: function onChange(flag) {
-									value |= prm.values[key];
-									if (!flag) {
-										value ^= prm.values[key];
-									}
-									CP.setJsonValue(props, prm.json, prm.key, value);
-								},
-								checked: value & prm.values[key]
-							}));
-						});
-						break;
-					case 'color':
-						if (prm.label) {
-							rtn.push(wp.element.createElement(
-								'h5',
-								null,
-								prm.label
-							));
-						}
-						rtn.push(wp.element.createElement(ColorPicker, {
-							color: CP.getJsonValue(props, prm.json, prm.key) || '#FFFFFF',
-							onChangeComplete: function onChangeComplete(value) {
-								CP.setJsonValue(props, prm.json, prm.key, value.hex);
-							}
-						}));
-						break;
-					case 'colors':
-						if (prm.label) {
-							rtn.push(wp.element.createElement(
-								'h5',
-								null,
-								prm.label
-							));
-						}
-						rtn.push(wp.element.createElement(CP.SelectColors, {
-							colors: CP.getJsonValue(props, prm.json, prm.key) || [{ h: '40', s: '80%', l: '50%' }, { h: '60', s: '80%', l: '50%' }],
-							onChange: function onChange(colors) {
-								CP.setJsonValue(props, prm.json, prm.key, colors);
-							}
-						}));
-						break;
-					case 'gradient':
-						if (prm.label) {
-							rtn.push(wp.element.createElement(
-								'h5',
-								null,
-								prm.label
-							));
-						}
-						rtn.push(wp.element.createElement(GradientPicker, {
-							onChange: function onChange(value) {
-								console.log(CP.parseGradientStyleValue(value));
-							}
-						}));
-						break;
-				}
-			} else if (_.isObject(prm.values)) {
-				var _CP$parseSelections = CP.parseSelections(prm.values),
-				    _options = _CP$parseSelections.options,
-				    _values = _CP$parseSelections.values;
-
-				rtn.push(wp.element.createElement(SelectControl, {
-					label: prm.label,
-					value: CP.getJsonValue(props, prm.json, prm.key),
-					onChange: function onChange(val) {
-						CP.setJsonValue(props, prm.json, prm.key, val);
-					},
-					options: _options
-				}));
-				if (prm.sub) {
-					var currentValue = CP.getJsonValue(props, prm.json, prm.key);
-					if (currentValue && prm.sub[currentValue]) {
-						var _sub = [];
-						prm.sub[currentValue].map(function (prm) {
-							_sub.push(SelectClass(prm));
-						});
-						rtn.push(wp.element.createElement(
-							'div',
-							{ className: 'sub' },
-							_sub
-						));
-					}
-				}
-			} else if (prm.values) {
-				rtn.push(wp.element.createElement(CheckboxControl, {
-					label: prm.label,
-					onChange: function onChange() {
-						CP.switchJsonValue(props, prm.json, prm.key, prm.values);
-					},
-					checked: CP.hasJsonValue(props, prm.json, prm.key, prm.values)
-				}));
-				if (prm.sub) {
-					if (CP.getJsonValue(props, prm.json, prm.key)) {
-						var _sub2 = [];
-						prm.sub.map(function (prm) {
-							_sub2.push(SelectClass(prm));
-						});
-						rtn.push(wp.element.createElement(
-							'div',
-							{ className: 'sub' },
-							_sub2
-						));
-					}
-				}
-			} else {
-				rtn.push(wp.element.createElement(TextControl, {
-					label: prm.label,
-					value: JSON.parse(props.attr[prm.json])[prm.key],
-					onChange: function onChange(val) {
-						CP.setJsonValue(props, prm.json, prm.key, val);
-					}
-				}));
-			}
-		} else if (prm.css) {
-			var _prm$device = prm.device,
-			    device = _prm$device === undefined ? 'pc' : _prm$device;
-
-			var media = CP.getMediaQueryKeyForDevice(device);
-			styleDatas[prm.css] = styleDatas[prm.css] || {};
-			styleDatas[prm.css][media] = styleDatas[prm.css][media] || {};
-			styleDatas[prm.css][media][prm.sel] = styleDatas[prm.css][media][prm.sel] || {};
-			var tgt = styleDatas[prm.css][media][prm.sel];
-			if (prm.input) {
-				switch (prm.input) {
-					case 'border':
-						rtn.push(wp.element.createElement(SelectPreparedImage, {
-							name: 'border',
-							value: CP.getUrlInStyleCode(tgt['border-image']),
-							color: prm.color || 0,
-							onChange: function onChange(image) {
-								if (!image.conf) {
-									return;
-								}
-								var _image$conf = image.conf,
-								    slice = _image$conf.slice,
-								    width = _image$conf.width,
-								    repeat = _image$conf.repeat;
-
-								tgt['border-style'] = 'solid';
-								tgt['border-image'] = 'url(' + image.url + ') fill ' + slice + ' / ' + width + ' ' + repeat;
-								saveCss(prm.css);
-							}
-						}));
-						break;
-					case 'pattern':
-						rtn.push(wp.element.createElement(SelectPreparedImage, {
-							name: 'pattern',
-							value: CP.getUrlInStyleCode(tgt['background-image']),
-							color: prm.color || 0,
-							onChange: function onChange(image) {
-								if (!image.conf) {
-									return;
-								}
-								var _image$conf2 = image.conf,
-								    size = _image$conf2.size,
-								    width = _image$conf2.width,
-								    height = _image$conf2.height,
-								    repeat = _image$conf2.repeat,
-								    x = _image$conf2.x,
-								    y = _image$conf2.y;
-
-								tgt['background-image'] = 'url(' + image.url + ')';
-								if (width && height) {
-									tgt['background-size'] = width + 'px ' + height + 'px';
-								} else if (size) {
-									tgt['background-size'] = CP.translateCssVal('background-size', size);
-								} else {
-									delete tgt['background-size'];
-								}
-								if (repeat) {
-									tgt['background-repeat'] = CP.translateCssVal('background-repeat', repeat);
-								} else {
-									delete tgt['background-repeat'];
-								}
-								if (x && y) {
-									tgt['background-position'] = x + '% ' + y + '%';
-								} else {
-									delete tgt['background-position'];
-								}
-								saveCss(prm.css);
-							}
-						}));
-						break;
-					case 'frame':
-						rtn.push(wp.element.createElement(SelectPreparedImageSet, {
-							name: 'frame',
-							value: CP.getUrlInStyleCode(tgt['border-image']),
-							color: prm.color || 0,
-							onChange: function onChange(imageset) {
-								imageset.map(function (image) {
-									if (!image.conf) {
-										return;
-									}
-									var _image$conf3 = image.conf,
-									    device = _image$conf3.device,
-									    slice = _image$conf3.slice,
-									    width = _image$conf3.width,
-									    repeat = _image$conf3.repeat;
-
-									var media = CP.getMediaQueryKeyForDevice(device);
-									styleDatas[prm.css][media] = styleDatas[prm.css][media] || {};
-									styleDatas[prm.css][media][prm.sel] = styleDatas[prm.css][media][prm.sel] || {};
-									styleDatas[prm.css][media][prm.sel]['border-style'] = 'solid';
-									styleDatas[prm.css][media][prm.sel]['border-image'] = 'url(' + image.url + ') fill ' + slice + ' / ' + width + ' ' + repeat;
-								});
-								saveCss(prm.css);
-							}
-						}));
-						break;
-				}
-			} else {
-				rtn.push(wp.element.createElement(TextControl, {
-					label: prm.label,
-					value: tgt[prm.attr],
-					onChange: function onChange(val) {
-						tgt[prm.attr] = val;
-						saveCss(prm.css);
-					}
-				}));
-			}
-		} else {
-			if (prm === 'color') {
-				rtn.push(wp.element.createElement(SelectColorClass, {
-					label: '\u8272',
-					set: props.set,
-					attr: props.attr,
-					selected: Object.keys(states).find(function (key) {
-						return (/^color\d+/.test(key)
-						);
-					}),
-					onChange: function onChange(color) {
-						CP.filterFlags(states, function (key) {
-							return !/^color\d+/.test(key);
-						});
-						states[color] = true;
-						if (!items) {
-							set({ color: color.substr(5) });
-						}
-						saveClasses();
-					}
-				}));
-			} else if (prm === 'pattern') {
-				rtn.push(wp.element.createElement(SelectPatternClass, {
-					label: '\u30D1\u30BF\u30FC\u30F3',
-					set: props.set,
-					attr: props.attr,
-					selected: Object.keys(states).find(function (key) {
-						return (/^pattern\d+/.test(key)
-						);
-					}),
-					onChange: function onChange(pattern) {
-						CP.filterFlags(states, function (key) {
-							return !/^pattern\d+/.test(key);
-						});
-						states[pattern] = true;
-						saveClasses();
-					}
-				}));
-			} else if (prm === 'cond') {
-				rtn.push(wp.element.createElement(TextareaControl, {
-					label: '\u8868\u793A\u6761\u4EF6',
-					value: item['cond'],
-					onChange: function onChange(cond) {
-						return save({ cond: cond });
-					}
-				}));
-			} else if (prm === 'event') {
-				if (cp.use_functions.indexOf('ga') > -1) {
-					var _window$Catpow$ga = window.Catpow.ga,
-					    parseEventString = _window$Catpow$ga.parseEventString,
-					    createEventString = _window$Catpow$ga.createEventString;
-
-					var event = parseEventString(item['event']);
-					var params = { event: 'イベント', action: 'アクション', category: 'カテゴリ', label_name: 'ラベル名', label: 'ラベル', value: '値' };
-					rtn.push(wp.element.createElement(
-						BaseControl,
-						{ label: 'Google Analitics Event' },
-						wp.element.createElement(
-							'table',
-							null,
-							Object.keys(params).map(function (key) {
-								return wp.element.createElement(
-									'tr',
-									null,
-									wp.element.createElement(
-										'th',
-										{ width: '80' },
-										params[key]
-									),
-									wp.element.createElement(
-										'td',
-										null,
-										wp.element.createElement(TextControl, {
-											value: event[key],
-											type: key == 'value' ? 'number' : 'text',
-											onChange: function onChange(val) {
-												event[key] = val;
-												save({ event: createEventString(event) });
-											}
-										})
-									)
-								);
-							})
-						)
-					));
-				}
-			} else if (prm.input) {
-				switch (prm.input) {
-					case 'select':
-						var _CP$parseSelections2 = CP.parseSelections(prm.values),
-						    options = _CP$parseSelections2.options,
-						    values = _CP$parseSelections2.values;
-
-						rtn.push(wp.element.createElement(SelectControl, {
-							label: prm.label,
-							onChange: function onChange(val) {
-								save(babelHelpers.defineProperty({}, prm.key, val));
-								if (prm.effect) {
-									prm.effect(val);
-								}i;
-							},
-							value: item[prm.key],
-							options: options
-						}));
-						break;
-					case 'buttons':
-						var _CP$parseSelections3 = CP.parseSelections(prm.values),
-						    options = _CP$parseSelections3.options,
-						    values = _CP$parseSelections3.values;
-
-						rtn.push(wp.element.createElement(CP.SelectButtons, {
-							label: prm.label,
-							onChange: function onChange(val) {
-								save(babelHelpers.defineProperty({}, prm.key, val));
-								if (prm.effect) {
-									prm.effect(val);
-								}
-							},
-							selected: item[prm.key],
-							options: options
-						}));
-						break;
-					case 'gridbuttons':
-						var _CP$parseSelections4 = CP.parseSelections(prm.values),
-						    options = _CP$parseSelections4.options,
-						    values = _CP$parseSelections4.values;
-
-						rtn.push(wp.element.createElement(CP.SelectGridButtons, {
-							label: prm.label,
-							onChange: function onChange(val) {
-								save(babelHelpers.defineProperty({}, prm.key, val));
-								if (prm.effect) {
-									prm.effect(val);
-								}
-							},
-							selected: item[prm.key],
-							options: options
-						}));
-						break;
-					case 'text':
-						rtn.push(wp.element.createElement(TextControl, {
-							label: prm.label,
-							value: item[prm.key],
-							onChange: function onChange(val) {
-								save(babelHelpers.defineProperty({}, prm.key, val));
-								if (prm.effect) {
-									prm.effect(val);
-								}
-							}
-						}));
-						break;
-					case 'textarea':
-						rtn.push(wp.element.createElement(TextareaControl, {
-							label: prm.label,
-							value: item[prm.key],
-							onChange: function onChange(val) {
-								save(babelHelpers.defineProperty({}, prm.key, val));
-								if (prm.effect) {
-									prm.effect(val);
-								}
-							}
-						}));
-						break;
-					case 'range':
-						if (!prm.coef) {
-							prm.coef = 1;
-						}
-						rtn.push(wp.element.createElement(RangeControl, {
-							label: prm.label,
-							value: item[prm.key] / prm.coef,
-							onChange: function onChange(val) {
-								val *= prm.coef;
-								save(babelHelpers.defineProperty({}, prm.key, val));
-								if (prm.effect) {
-									prm.effect(val);
-								}
-							},
-							min: prm.min,
-							max: prm.max,
-							step: prm.step
-						}));
-						break;
-					case 'bool':
-						rtn.push(wp.element.createElement(ToggleControl, {
-							label: prm.label,
-							checked: item[prm.key],
-							onChange: function onChange(val) {
-								save(babelHelpers.defineProperty({}, prm.key, val));
-								if (prm.effect) {
-									prm.effect(val);
-								}
-							}
-						}));
-						break;
-					case 'image':
-						if (prm.label) {
-							rtn.push(wp.element.createElement(
-								'h5',
-								null,
-								prm.label
-							));
-						}
-						rtn.push(wp.element.createElement(SelectResponsiveImage, {
-							index: index,
-							set: props.set,
-							attr: props.attr,
-							keys: prm.keys,
-							size: prm.size,
-							sizes: prm.sizes,
-							device: prm.device,
-							devices: prm.devices,
-							isTemplate: prm.isTemplate
-						}));
-						break;
-					case 'picture':
-						if (prm.label) {
-							rtn.push(wp.element.createElement(
-								'h5',
-								null,
-								prm.label
-							));
-						}
-						rtn.push(wp.element.createElement(SelectPictureSources, {
-							index: index,
-							set: props.set,
-							attr: props.attr,
-							keys: prm.keys,
-							sizes: prm.sizes,
-							devices: prm.devices,
-							isTemplate: prm.isTemplate
-						}));
-						break;
-					case 'position':
-						rtn.push(wp.element.createElement(SelectPositionClass, {
-							set: props.set,
-							attr: props.attr,
-							label: prm.label,
-							key: prm.key,
-							help: prm.help,
-							disable: prm.disable,
-							itemsKey: itemsKey,
-							index: index
-						}));
-					case 'icon':
-					case 'symbol':
-					case 'pattern':
-						prm.keys = prm.keys || {};
-						prm.keys.src = prm.keys.src || prm.input + 'Src';
-						prm.keys.alt = prm.keys.alt || prm.input + 'Alt';
-						if (prm.label) {
-							rtn.push(wp.element.createElement(
-								'h5',
-								null,
-								prm.label
-							));
-						}
-						rtn.push(wp.element.createElement(SelectPreparedImage, {
-							name: prm.input,
-							value: item[prm.keys.src],
-							color: prm.color || 0,
-							onChange: function onChange(image) {
-								var _save9;
-
-								save((_save9 = {}, babelHelpers.defineProperty(_save9, prm.keys.src, image.url), babelHelpers.defineProperty(_save9, prm.keys.alt, image.alt), _save9));
-							}
-						}));
-						break;
-				}
-				switch (prm.input) {
-					case 'select':
-					case 'buttons':
-					case 'gridbuttons':
-						if (prm.sub && prm.sub[item[prm.key]]) {
-							var _sub3 = [];
-							prm.sub[item[prm.key]].map(function (prm) {
-								_sub3.push(SelectClass(prm));
-							});
-							rtn.push(wp.element.createElement(
-								'div',
-								{ className: 'sub' },
-								_sub3
-							));
-						}
-						break;
-					case 'bool':
-						if (prm.sub && item[prm.key]) {
-							var _sub4 = [];
-							prm.sub.map(function (prm) {
-								_sub4.push(SelectClass(prm));
-							});
-							rtn.push(wp.element.createElement(
-								'div',
-								{ className: 'sub' },
-								_sub4
-							));
-						}
-						break;
-				}
-			} else if (_.isObject(prm.values)) {
-				var subClasses = CP.getSubClasses(prm);
-				var bindClasses = CP.getBindClasses(prm);
-
-				var _CP$parseSelections5 = CP.parseSelections(prm.values),
-				    options = _CP$parseSelections5.options,
-				    values = _CP$parseSelections5.values;
-
-				var currentClass = values.find(function (value) {
-					return states[value];
-				});
-
-				var onChangeCB = function onChangeCB(newClass) {
-					if (currentClass) {
-						states[currentClass] = false;
-
-						var currentSels = [];
-						if (subClasses[currentClass]) {
-							currentSels = currentSels.concat(subClasses[currentClass]);
-						}
-						if (bindClasses[currentClass]) {
-							currentSels = currentSels.concat(bindClasses[currentClass]);
-						}
-
-						var newSels = [];
-						if (subClasses[newClass]) {
-							newSels = newSels.concat(subClasses[newClass]);
-						}
-						if (bindClasses[newClass]) {
-							newSels = newSels.concat(bindClasses[newClass]);
-						}
-						currentSels.map(function (value) {
-							if (!newSels.includes(value)) {
-								states[value] = false;
-							}
-						});
-					}
-					bindClasses[newClass].map(function (value) {
-						states[value] = true;
-					});
-					states[newClass] = true;
-
-					saveClasses();
-					if (prm.effect) {
-						prm.effect(currentClass, newClass);
-					}
-				};
-
-				switch (prm.type) {
-					case 'radio':
-						rtn.push(wp.element.createElement(RadioControl, {
-							label: prm.label,
-							onChange: onChangeCB,
-							selected: currentClass,
-							options: options
-						}));
-						break;
-					case 'buttons':
-						rtn.push(wp.element.createElement(CP.SelectButtons, {
-							label: prm.label,
-							onChange: onChangeCB,
-							selected: currentClass,
-							options: options
-						}));
-						break;
-					case 'gridbuttons':
-						rtn.push(wp.element.createElement(CP.SelectGridButtons, {
-							label: prm.label,
-							onChange: onChangeCB,
-							selected: currentClass,
-							options: options
-						}));
-						break;
-					default:
-						rtn.push(wp.element.createElement(SelectControl, {
-							label: prm.label,
-							onChange: onChangeCB,
-							value: currentClass,
-							options: options
-						}));
-				}
-
-				if (prm.sub) {
-					var _currentClass = CP.getSelectiveClass(props, prm.values, prm.key);
-					if (_currentClass && prm.sub[_currentClass]) {
-						var _sub5 = [];
-						prm.sub[_currentClass].map(function (prm) {
-							_sub5.push(SelectClass(prm));
-						});
-						rtn.push(wp.element.createElement(
-							'div',
-							{ className: 'sub' },
-							_sub5
-						));
-					}
-				}
-			} else {
-				rtn.push(wp.element.createElement(CheckboxControl, {
-					label: prm.label,
-					onChange: function onChange() {
-						states[prm.values] = !states[prm.values];
-						saveClasses();
-					},
-					checked: states[prm.values]
-				}));
-				if (prm.sub) {
-					if (states[prm.values]) {
-						var _sub6 = [];
-						prm.sub.map(function (prm) {
-							_sub6.push(SelectClass(prm));
-						});
-						rtn.push(wp.element.createElement(
-							'div',
-							{ className: 'sub' },
-							_sub6
-						));
-					}
-				}
-			}
-		}
-		return rtn;
-	};
-	if (triggerClasses && triggerClasses.item) {
-		var blockStates = CP.wordsToFlags(attr.classes);
-		itemClasses = triggerClasses.item[Object.keys(triggerClasses.item).find(function (value) {
-			return blockStates[value];
-		})];
-		if (!itemClasses || Array.isArray(itemClasses) && itemClasses.length === 0) {
-			return false;
-		}
-		return wp.element.createElement(
-			PanelBody,
-			{ title: props.title, initialOpen: props.initialOpen || false, icon: props.icon },
-			itemClasses.map(SelectClass)
-		);
-	}
-	return wp.element.createElement(
-		PanelBody,
-		{ title: props.title, initialOpen: props.initialOpen || false, icon: props.icon },
-		props.selectiveClasses.map(SelectClass)
-	);
-};
-
-var AlignClassToolbar = function AlignClassToolbar(props) {
-	var aligns = ['left', 'center', 'right'];
-	return wp.element.createElement(BlockAlignmentToolbar, {
-		value: CP.getSelectiveClass(props, aligns),
-		controls: props.aligns || aligns,
-		onChange: function onChange(align) {
-			CP.switchSelectiveClass(props, aligns, align, props.key);
-		}
-	});
-};
-var VerticalAlignClassToolbar = function VerticalAlignClassToolbar(props) {
-	var aligns = ['top', 'center', 'bottom'];
-	return wp.element.createElement(BlockVerticalAlignmentToolbar, {
-		value: CP.getSelectiveClass(props, aligns),
-		controls: props.aligns || aligns,
-		onChange: function onChange(align) {
-			CP.switchSelectiveClass(props, aligns, align, props.key);
-		}
-	});
-};
-var SelectColorClass = function SelectColorClass(props) {
-	var label = props.label,
-	    help = props.help;
-
-
-	return wp.element.createElement(
-		BaseControl,
-		{ label: label, help: help },
-		wp.element.createElement(CP.SelectThemeColor, {
-			onChange: props.onChange,
-			selected: props.selected
-		})
-	);
-};
-var SelectPatternClass = function SelectPatternClass(props) {
-	var label = props.label,
-	    help = props.help,
-	    selected = props.selected,
-	    onChange = props.onChange;
-
-
-	var items = Array.from(Array(6), function (v, i) {
-		var classes = 'bgPattern' + i;
-		var value = 'pattern' + i;
-		if (value == selected) {
-			classes += ' active';
-		}
-		return wp.element.createElement(
-			'li',
-			{
-				className: classes,
-				onClick: function onClick() {
-					return onChange(value);
-				}
-			},
-			' '
-		);
-	});
-
-	return wp.element.createElement(
-		BaseControl,
-		{ label: label, help: help },
-		wp.element.createElement(
-			'ul',
-			{ 'class': 'selectPattern' },
-			items
-		)
-	);
-};
-
-var SelectPositionClass = function SelectPositionClass(props) {
-	var rows = [['topLeft', 'top', 'topRight'], ['left', 'center', 'right'], ['bottomLeft', 'bottom', 'bottomRight']];
-	var values = _.flatten(rows);
-	var label = props.label,
-	    help = props.help,
-	    itemsKey = props.itemsKey,
-	    index = props.index,
-	    disable = props.disable;
-
-	var value = itemsKey ? CP.getItemSelectiveClass(props, values) : CP.getSelectiveClass(props, values);
-
-	return wp.element.createElement(
-		BaseControl,
-		{ label: label, help: help },
-		wp.element.createElement(
-			'table',
-			{ className: 'selectPosition' },
-			wp.element.createElement(
-				'tbody',
-				null,
-				rows.map(function (cols) {
-					return wp.element.createElement(
-						'tr',
-						null,
-						cols.map(function (col) {
-							var isChecked = value == col;
-							if (disable && disable.includes(col)) {
-								return wp.element.createElement(
-									'td',
-									{ className: 'disable' },
-									' '
-								);
-							}
-							return wp.element.createElement(
-								'td',
-								{
-									className: isChecked ? "active" : "",
-									onClick: function onClick() {
-										if (itemsKey) {
-											CP.switchItemSelectiveClass(props, values, col, props.key);
-										} else {
-											CP.switchSelectiveClass(props, values, col, props.key);
-										}
-									}
-								},
-								' '
-							);
-						})
-					);
-				})
-			)
-		)
-	);
-};
-
-var ImporterCSVPanel = function ImporterCSVPanel(props) {
-	var reader = new FileReader();
-	reader.onload = function (e) {
-		props.callback(CP.parseCSV(e.target.result));
-	};
-	return wp.element.createElement(
-		PanelBody,
-		{ title: props.title, initialOpen: false, icon: props.icon },
-		wp.element.createElement(FormFileUpload, {
-			label: 'CSV',
-			accept: 'text/csv',
-			onChange: function onChange(e) {
-				reader.readAsText(e.target.files[0]);
-			}
-		})
-	);
-};
-
-var SelectBreakPointToolbar = function SelectBreakPointToolbar(props) {
-	return wp.element.createElement(Toolbar, {
-		controls: props.breakpoints.map(function (bp) {
-			var title = bp == "0" ? 'ー' : bp;
-			return {
-				icon: wp.element.createElement(
-					'svg',
-					{ viewBox: '0 0 100 100' },
-					wp.element.createElement(
-						'text',
-						{ style: { "font-size": "50px" }, x: 50, y: 50, textAnchor: 'middle', dominantBaseline: 'middle' },
-						title
-					)
-				),
-				isActive: props.value == bp,
-				onClick: function onClick() {
-					return props.onChange(bp);
-				}
-			};
-		})
-	});
-};
-var SelectModeToolbar = function SelectModeToolbar(props) {
-	var set = props.set,
-	    attr = props.attr,
-	    _props$modes = props.modes,
-	    modes = _props$modes === undefined ? ['EditMode', 'AltMode'] : _props$modes;
-
-	var SomeMode = modes.some(function (mode) {
-		return attr[mode];
-	});
-	var icons = {
-		EditMode: 'edit',
-		OpenMode: 'video-alt3',
-		AltMode: 'welcome-comments',
-		TextMode: 'media-text'
-	};
-	var cond = {
-		AltMode: 'doLoop'
-	};
-	return wp.element.createElement(
-		BlockControls,
-		null,
-		modes.map(function (mode) {
-			if (!attr[mode] && SomeMode) {
-				return false;
-			}
-			if (cond[mode] && !attr[cond[mode]]) {
-				return false;
-			}
-			return wp.element.createElement(Toolbar, {
-				controls: [{
-					icon: icons[mode],
-					title: mode,
-					isActive: attr[mode],
-					onClick: function onClick() {
-						return set(babelHelpers.defineProperty({}, mode, !attr[mode]));
-					}
-				}]
-			});
-		})
-	);
-};
-
-var SelectDeviceToolbar = function SelectDeviceToolbar(props) {
-	var set = props.set,
-	    attr = props.attr,
-	    _props$devices = props.devices,
-	    devices = _props$devices === undefined ? ['sp', 'pc'] : _props$devices;
-
-	return wp.element.createElement(
-		BlockControls,
-		null,
-		devices.map(function (device) {
-			return wp.element.createElement(Toolbar, {
-				controls: [{
-					icon: CP.devices[device].icon,
-					title: device,
-					isActive: attr.device === device,
-					onClick: function onClick() {
-						if (attr.device === device) {
-							set({ device: null });
-						} else {
-							set({ device: device });
-						}
-					}
-				}]
-			});
-		})
-	);
-};
-
-var EditItemsTable = function EditItemsTable(props) {
-	var set = props.set,
-	    attr = props.attr,
-	    _props$itemsKey = props.itemsKey,
-	    itemsKey = _props$itemsKey === undefined ? 'items' : _props$itemsKey,
-	    columns = props.columns,
-	    isTemplate = props.isTemplate;
-
-	var items = attr[itemsKey] || [];
-	var save = function save() {
-		set(babelHelpers.defineProperty({}, itemsKey, JSON.parse(JSON.stringify(items))));
-	};
-	return wp.element.createElement(
-		'table',
-		{ className: 'editItemsTable' },
-		wp.element.createElement(
-			'thead',
-			null,
-			wp.element.createElement(
-				'tr',
-				null,
-				columns.map(function (col) {
-					return !('cond' in col) || col.cond ? wp.element.createElement(
-						'th',
-						null,
-						col.label || col.key
-					) : false;
-				}),
-				wp.element.createElement('th', null)
-			)
-		),
-		wp.element.createElement(
-			'tbody',
-			null,
-			items.map(function (item, index) {
-				var propsForControl = { tag: 'tr', set: set, itemsKey: itemsKey, items: items, index: index };
-				return wp.element.createElement(
-					'tr',
-					{
-						onClick: function onClick(e) {
-							set({ currentItemIndex: index });
-						}
-					},
-					columns.map(function (col) {
-						if ('cond' in col && !col.cond) {
-							return false;
-						}
-						switch (col.type) {
-							case 'text':
-								return wp.element.createElement(
-									'td',
-									null,
-									wp.element.createElement(RichText, {
-										value: item[col.key],
-										onChange: function onChange(value) {
-											item[col.key] = value;
-											save();
-										}
-									})
-								);
-							case 'image':
-								return wp.element.createElement(
-									'td',
-									null,
-									wp.element.createElement(SelectResponsiveImage, {
-										attr: attr,
-										set: set,
-										keys: babelHelpers.extends({ items: itemsKey, src: col.key }, col.keys),
-										index: index,
-										size: col.size || 'vga',
-										isTemplate: isTemplate
-									})
-								);
-							case 'picture':
-								return wp.element.createElement(
-									'td',
-									null,
-									wp.element.createElement(SelectPictureSources, {
-										index: index,
-										attr: attr,
-										set: set,
-										keys: babelHelpers.extends({ items: itemsKey }, col.keys),
-										sizes: col.sizes,
-										devices: col.devices,
-										isTemplate: isTemplate
-									})
-								);
-							case 'items':
-								col.columns.map(function (subCol) {
-									if (subCol.keys) {
-										subCol.keys.subItems = col.key;
-									}
-								});
-								return wp.element.createElement(
-									'td',
-									null,
-									wp.element.createElement(EditItemsTable, {
-										set: function set() {
-											save();
-										},
-										attr: item,
-										itemsKey: col.itemsKey,
-										columns: col.columns,
-										isTemplate: isTemplate
-									})
-								);
-						}
-					}),
-					wp.element.createElement(
-						'td',
-						null,
-						wp.element.createElement(
-							'div',
-							{ className: 'itemControl' },
-							wp.element.createElement('div', { className: 'btn delete', onClick: function onClick(e) {
-									return CP.deleteItem(propsForControl);
-								} }),
-							wp.element.createElement('div', { className: 'btn clone', onClick: function onClick(e) {
-									return CP.cloneItem(propsForControl);
-								} }),
-							wp.element.createElement('div', { className: 'btn up', onClick: function onClick(e) {
-									return CP.upItem(propsForControl);
-								} }),
-							wp.element.createElement('div', { className: 'btn down', onClick: function onClick(e) {
-									return CP.downItem(propsForControl);
-								} })
-						)
-					)
-				);
-			})
-		)
-	);
-};
-
-var DummyImage = function DummyImage(_ref22) {
-	var text = _ref22.text;
-
-	return wp.element.createElement('img', { src: cp.plugins_url + '/catpow/callee/dummy_image.php?text=' + text });
 };

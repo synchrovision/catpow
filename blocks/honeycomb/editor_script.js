@@ -104,7 +104,7 @@ registerBlockType('catpow/honeycomb', {
 		return [wp.element.createElement(
 			BlockControls,
 			null,
-			wp.element.createElement(SelectBreakPointToolbar, {
+			wp.element.createElement(CP.SelectBreakPointToolbar, {
 				breakpoints: breakpoints,
 				value: attributes.bp,
 				onChange: function onChange(bp) {
@@ -233,7 +233,7 @@ registerBlockType('catpow/honeycomb', {
 					value: id
 				})
 			),
-			wp.element.createElement(SelectClassPanel, {
+			wp.element.createElement(CP.SelectClassPanel, {
 				title: '\u30A2\u30A4\u30C6\u30E0',
 				icon: 'edit',
 				set: setAttributes,
@@ -255,7 +255,7 @@ registerBlockType('catpow/honeycomb', {
 					value: items[attributes.currentItemIndex].classes
 				})
 			),
-			wp.element.createElement(ItemControlInfoPanel, null)
+			wp.element.createElement(CP.ItemControlInfoPanel, null)
 		)];
 	},
 	save: function save(_ref2) {

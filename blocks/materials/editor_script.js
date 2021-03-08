@@ -46,7 +46,7 @@ registerBlockType('catpow/materials', {
 			}
 			var itemStates = CP.wordsToFlags(item.classes);
 			rtn.push(wp.element.createElement(
-				Item,
+				CP.Item,
 				{
 					tag: 'li',
 					set: setAttributes,
@@ -71,7 +71,7 @@ registerBlockType('catpow/materials', {
 					item.items.map(function (subItem, subIndex) {
 						var subItemStates = CP.wordsToFlags(subItem.classes);
 						return wp.element.createElement(
-							Item,
+							CP.Item,
 							{
 								tag: 'li',
 								set: function set() {
@@ -137,14 +137,14 @@ registerBlockType('catpow/materials', {
 		return wp.element.createElement(
 			Fragment,
 			null,
-			wp.element.createElement(SelectModeToolbar, {
+			wp.element.createElement(CP.SelectModeToolbar, {
 				set: setAttributes,
 				attr: attributes
 			}),
 			wp.element.createElement(
 				InspectorControls,
 				null,
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: '\u30AF\u30E9\u30B9',
 					icon: 'art',
 					set: setAttributes,
@@ -163,7 +163,7 @@ registerBlockType('catpow/materials', {
 						value: classes
 					})
 				),
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: '\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0',
 					icon: 'edit',
 					set: setAttributes,
@@ -173,7 +173,7 @@ registerBlockType('catpow/materials', {
 					selectiveClasses: itemSelectiveClasses,
 					filters: CP.filters.materials || {}
 				}),
-				wp.element.createElement(ItemControlInfoPanel, null)
+				wp.element.createElement(CP.ItemControlInfoPanel, null)
 			),
 			wp.element.createElement(
 				Fragment,
@@ -186,7 +186,7 @@ registerBlockType('catpow/materials', {
 						{ 'class': 'label' },
 						wp.element.createElement(Icon, { icon: 'edit' })
 					),
-					wp.element.createElement(EditItemsTable, {
+					wp.element.createElement(CP.EditItemsTable, {
 						set: setAttributes,
 						attr: attributes,
 						columns: [{ type: 'text', key: 'label', cond: true }, { type: 'items', key: 'items', columns: [{ type: 'text', key: 'title', cond: true }, { type: 'text', key: 'amount', cond: true }, { type: 'text', key: 'caption', cond: true }], cond: true }],

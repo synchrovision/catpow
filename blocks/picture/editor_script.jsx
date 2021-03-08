@@ -45,14 +45,14 @@ registerBlockType('catpow/picture',{
 		
         return (
 			<Fragment>
-				<SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices}/>
+				<CP.SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices}/>
 				<div className={classes+(device?' alt_content '+device:'')}>
 					{device &&
 						<div class="label">
 							<Icon icon={CP.devices[device].icon}/>
 						</div>
 					}
-					<SelectResponsiveImage
+					<CP.SelectResponsiveImage
 						attr={attributes}
 						set={setAttributes}
 						keys={imageKeys.image}
@@ -62,7 +62,7 @@ registerBlockType('catpow/picture',{
 					/>
 				</div>
 				<InspectorControls>
-					<SelectClassPanel
+					<CP.SelectClassPanel
 						title='クラス'
 						icon='art'
 						set={setAttributes}
@@ -82,7 +82,7 @@ registerBlockType('catpow/picture',{
 		
 		return (
 			<div className={classes}>
-				<ResponsiveImage
+				<CP.ResponsiveImage
 					attr={attributes}
 					keys={imageKeys.image}
 					devices={devices}

@@ -9,7 +9,7 @@
 		
         return (
 			<Fragment>
-				<SelectModeToolbar
+				<CP.SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
 				/>
@@ -18,7 +18,7 @@
 						<div class="label">
 							<Icon icon="edit"/>
 						</div>
-						<EditItemsTable
+						<CP.EditItemsTable
 							set={setAttributes}
 							attr={attributes}
 							columns={columns}
@@ -36,7 +36,7 @@
 				)}
 				<InspectorControls>
 					<PanelBody title="変数">
-						<EditItemsTable
+						<CP.EditItemsTable
 							set={setAttributes}
 							attr={attributes}
 							itemsKey='columns'

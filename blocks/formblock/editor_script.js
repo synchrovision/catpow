@@ -164,7 +164,7 @@ registerBlockType('catpow/formblockcontent', {
 						}
 					})
 				),
-				actions && wp.element.createElement(SelectClassPanel, {
+				actions && wp.element.createElement(CP.SelectClassPanel, {
 					title: '\u30A2\u30AF\u30B7\u30E7\u30F3',
 					icon: 'edit',
 					set: setAttributes,

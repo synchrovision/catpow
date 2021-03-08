@@ -55,7 +55,7 @@ registerBlockType('catpow/picture', {
 		return wp.element.createElement(
 			Fragment,
 			null,
-			wp.element.createElement(SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices: devices }),
+			wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices: devices }),
 			wp.element.createElement(
 				'div',
 				{ className: classes + (device ? ' alt_content ' + device : '') },
@@ -64,7 +64,7 @@ registerBlockType('catpow/picture', {
 					{ 'class': 'label' },
 					wp.element.createElement(Icon, { icon: CP.devices[device].icon })
 				),
-				wp.element.createElement(SelectResponsiveImage, {
+				wp.element.createElement(CP.SelectResponsiveImage, {
 					attr: attributes,
 					set: setAttributes,
 					keys: imageKeys.image,
@@ -76,7 +76,7 @@ registerBlockType('catpow/picture', {
 			wp.element.createElement(
 				InspectorControls,
 				null,
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: '\u30AF\u30E9\u30B9',
 					icon: 'art',
 					set: setAttributes,
@@ -108,7 +108,7 @@ registerBlockType('catpow/picture', {
 		return wp.element.createElement(
 			'div',
 			{ className: classes },
-			wp.element.createElement(ResponsiveImage, {
+			wp.element.createElement(CP.ResponsiveImage, {
 				attr: attributes,
 				keys: imageKeys.image,
 				devices: devices,

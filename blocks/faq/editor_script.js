@@ -81,7 +81,7 @@ registerBlockType('catpow/faq', {
 				item.controlClasses = 'control';
 			}
 			rtn.push(wp.element.createElement(
-				Item,
+				CP.Item,
 				{
 					tag: "li",
 					set: setAttributes,
@@ -93,7 +93,7 @@ registerBlockType('catpow/faq', {
 				states.hasImage && wp.element.createElement(
 					"div",
 					{ className: "image" },
-					wp.element.createElement(SelectResponsiveImage, {
+					wp.element.createElement(CP.SelectResponsiveImage, {
 						attr: attributes,
 						set: setAttributes,
 						keys: imageKeys.image,
@@ -204,7 +204,7 @@ registerBlockType('catpow/faq', {
 		), wp.element.createElement(
 			InspectorControls,
 			null,
-			wp.element.createElement(SelectClassPanel, {
+			wp.element.createElement(CP.SelectClassPanel, {
 				title: "\u30AF\u30E9\u30B9",
 				icon: "art",
 				set: setAttributes,
@@ -223,7 +223,7 @@ registerBlockType('catpow/faq', {
 					value: classes
 				})
 			),
-			wp.element.createElement(ItemControlInfoPanel, null)
+			wp.element.createElement(CP.ItemControlInfoPanel, null)
 		), wp.element.createElement(
 			"ul",
 			{ className: attributes.EditMode ? primaryClass + ' edit' : classes },

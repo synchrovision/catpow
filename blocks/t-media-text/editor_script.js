@@ -43,7 +43,7 @@ registerBlockType('catpow/t-media-text', {
 					wp.element.createElement(
 						'td',
 						{ className: 'imageCell', width: width },
-						wp.element.createElement(SelectResponsiveImage, {
+						wp.element.createElement(CP.SelectResponsiveImage, {
 							set: setAttributes,
 							attr: attributes,
 							keys: { src: 'src', alt: 'alt', code: 'imageCode' },
@@ -64,11 +64,11 @@ registerBlockType('catpow/t-media-text', {
 		), wp.element.createElement(
 			BlockControls,
 			null,
-			wp.element.createElement(VerticalAlignClassToolbar, { set: setAttributes, attr: attributes })
+			wp.element.createElement(CP.VerticalAlignClassToolbar, { set: setAttributes, attr: attributes })
 		), wp.element.createElement(
 			InspectorControls,
 			null,
-			wp.element.createElement(SelectClassPanel, {
+			wp.element.createElement(CP.SelectClassPanel, {
 				title: '\u30AF\u30E9\u30B9',
 				icon: 'art',
 				set: setAttributes,
@@ -113,7 +113,7 @@ registerBlockType('catpow/t-media-text', {
 					wp.element.createElement(
 						'td',
 						{ className: 'imageCell', width: width },
-						wp.element.createElement(ResponsiveImage, {
+						wp.element.createElement(CP.ResponsiveImage, {
 							attr: attributes,
 							keys: { src: 'src', alt: 'alt', code: 'imageCode' },
 							size: 'large',

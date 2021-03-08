@@ -23,7 +23,7 @@
                 />
 			</div>,
 			<BlockControls>
-				<AlignClassToolbar set={setAttributes} attr={attributes}/>
+				<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
 			</BlockControls>,
 			<InspectorControls>
 				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>

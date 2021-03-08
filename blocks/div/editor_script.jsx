@@ -97,7 +97,7 @@ registerBlockType('catpow/div',{
 			<div id={id} className={classes}>
 				{states.hasIcon && 
 					<div class="icon">
-						<SelectResponsiveImage
+						<CP.SelectResponsiveImage
 							set={setAttributes}
 							attr={attributes}
 							keys={imageKeys.iconImage}
@@ -107,7 +107,7 @@ registerBlockType('catpow/div',{
 				}
 				{states.hasBackgroundImage && 
 					<div class="background">
-						<ResponsiveImage
+						<CP.ResponsiveImage
 							set={setAttributes}
 							attr={attributes}
 							keys={imageKeys.backgroundImage}
@@ -127,7 +127,7 @@ registerBlockType('catpow/div',{
 				)}
 			</div>,
 			<InspectorControls>
-				<SelectClassPanel
+				<CP.SelectClassPanel
 					title='クラス'
 					icon='art'
 					set={setAttributes}
@@ -157,7 +157,7 @@ registerBlockType('catpow/div',{
 			<div id={id} className={classes}>
 				{states.hasIcon && 
 					<div class="icon">
-						<ResponsiveImage
+						<CP.ResponsiveImage
 							attr={attributes}
 							keys={imageKeys.iconImage}
 						/>
@@ -165,7 +165,7 @@ registerBlockType('catpow/div',{
 				}
 				{states.hasBackgroundImage && 
 					<div class="background">
-						<ResponsiveImage
+						<CP.ResponsiveImage
 							attr={attributes}
 							keys={imageKeys.backgroundImage}
 							devices={devices}

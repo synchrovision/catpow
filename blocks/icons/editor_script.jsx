@@ -57,7 +57,7 @@
 		items.map((item,index)=>{
 			if(!item.controlClasses){item.controlClasses='control';}
 			rtn.push(
-				<Item
+				<CP.Item
 					tag='li'
 					set={setAttributes}
 					attr={attributes}
@@ -68,7 +68,7 @@
 					<a>
 						<img src={item.src} alt={item.alt}/>
 					</a>
-				</Item>
+				</CP.Item>
 			);
 		});
 		
@@ -86,13 +86,13 @@
 						}
 					]}
 				/>
-				<AlignClassToolbar
+				<CP.AlignClassToolbar
 					set={setAttributes}
 					attr={attributes}
 				/>
 			</BlockControls>,
 			<InspectorControls>
-				<SelectClassPanel
+				<CP.SelectClassPanel
 					title='クラス'
 					icon='art'
 					set={setAttributes}
@@ -106,7 +106,7 @@
 						value={classArray.join(' ')}
 					/>
 				</PanelBody>
-				<SelectClassPanel
+				<CP.SelectClassPanel
 					title='アイテム'
 					icon='edit'
 					set={setAttributes}
@@ -119,7 +119,7 @@
 						'color'
 					]}
 				/>
-				<ItemControlInfoPanel/>
+				<CP.ItemControlInfoPanel/>
 			</InspectorControls>,
 			<ul className={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>
         ];

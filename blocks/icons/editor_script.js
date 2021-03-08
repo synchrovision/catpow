@@ -60,7 +60,7 @@ registerBlockType('catpow/icons', {
 				item.controlClasses = 'control';
 			}
 			rtn.push(wp.element.createElement(
-				Item,
+				CP.Item,
 				{
 					tag: 'li',
 					set: setAttributes,
@@ -94,14 +94,14 @@ registerBlockType('catpow/icons', {
 					}
 				}]
 			}),
-			wp.element.createElement(AlignClassToolbar, {
+			wp.element.createElement(CP.AlignClassToolbar, {
 				set: setAttributes,
 				attr: attributes
 			})
 		), wp.element.createElement(
 			InspectorControls,
 			null,
-			wp.element.createElement(SelectClassPanel, {
+			wp.element.createElement(CP.SelectClassPanel, {
 				title: '\u30AF\u30E9\u30B9',
 				icon: 'art',
 				set: setAttributes,
@@ -119,7 +119,7 @@ registerBlockType('catpow/icons', {
 					value: classArray.join(' ')
 				})
 			),
-			wp.element.createElement(SelectClassPanel, {
+			wp.element.createElement(CP.SelectClassPanel, {
 				title: '\u30A2\u30A4\u30C6\u30E0',
 				icon: 'edit',
 				set: setAttributes,
@@ -128,7 +128,7 @@ registerBlockType('catpow/icons', {
 				index: attributes.currentItemIndex,
 				selectiveClasses: [{ input: 'image', keys: { src: 'src', alt: 'alt' }, size: 'thumbnail' }, { input: 'text', key: 'href', label: 'リンク' }, 'color']
 			}),
-			wp.element.createElement(ItemControlInfoPanel, null)
+			wp.element.createElement(CP.ItemControlInfoPanel, null)
 		), wp.element.createElement(
 			'ul',
 			{ className: attributes.EditMode ? primaryClass + ' edit' : classes },

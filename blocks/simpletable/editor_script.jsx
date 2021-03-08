@@ -93,7 +93,7 @@
 		;
 		return [
 			<InspectorControls>
-				<SelectClassPanel
+				<CP.SelectClassPanel
 					title='クラス'
 					icon='art'
 					set={setAttributes}
@@ -101,7 +101,7 @@
 					selectiveClasses={selectiveClasses}
 					filters={CP.filters.simpletable || {}}
 				/>
-				<SelectClassPanel
+				<CP.SelectClassPanel
 					title='行'
 					icon='edit'
 					set={setAttributes}
@@ -111,13 +111,13 @@
 					triggerClasses={selectiveClasses[0]}
 					filters={CP.filters.simpletable || {}}
 				/>
-				<ItemControlInfoPanel/>
+				<CP.ItemControlInfoPanel/>
 			</InspectorControls>,
 			<table className={classes}>
 				<tbody>
 				{rows.map((row,index)=>{
 					return (
-						<Item
+						<CP.Item
 							tag='tr'
 							set={setAttributes}
 							attr={attributes}
@@ -138,7 +138,7 @@
 									value={row.cells[1].text}
 								/>
 							</td>
-						</Item>
+						</CP.Item>
 					);
 				})}
 				</tbody>

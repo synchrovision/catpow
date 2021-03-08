@@ -34,7 +34,7 @@
 			if(!item.controlClasses){item.controlClasses='control';}
 			const itemStates=CP.wordsToFlags(item.classes);
 			rtn.push(
-				<Item
+				<CP.Item
 					tag='li'
 					set={setAttributes}
 					attr={attributes}
@@ -59,7 +59,7 @@
 							contentEditable="true"
 						>{item.action}</span>
 					</div>
-				</Item>
+				</CP.Item>
 			);
 		});
 		
@@ -68,7 +68,7 @@
         return [
 			<ul className={classes}>{rtn}</ul>,
 			<InspectorControls>
-				<SelectClassPanel
+				<CP.SelectClassPanel
 					title='クラス'
 					icon='art'
 					set={setAttributes}
@@ -76,7 +76,7 @@
 					selectiveClasses={selectiveClasses}
 					filters={CP.filters.buttons || {}}
 				/>
-				<SelectClassPanel
+				<CP.SelectClassPanel
 					title='ボタン'
 					icon='edit'
 					set={setAttributes}
@@ -93,10 +93,10 @@
 						value={classArray.join(' ')}
 					/>
 				</PanelBody>
-				<ItemControlInfoPanel/>
+				<CP.ItemControlInfoPanel/>
 			</InspectorControls>,
 			<BlockControls>
-				<AlignClassToolbar set={setAttributes} attr={attributes}/>
+				<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
 			</BlockControls>
         ];
     },

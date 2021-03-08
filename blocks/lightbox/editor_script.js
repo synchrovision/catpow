@@ -70,7 +70,7 @@ registerBlockType('catpow/lightbox', {
 
 		items.map(function (item, index) {
 			rtn.push(wp.element.createElement(
-				Item,
+				CP.Item,
 				{
 					tag: "li",
 					set: setAttributes,
@@ -84,7 +84,7 @@ registerBlockType('catpow/lightbox', {
 					states.hasHeaderImage && wp.element.createElement(
 						"div",
 						{ className: "image" },
-						wp.element.createElement(SelectResponsiveImage, {
+						wp.element.createElement(CP.SelectResponsiveImage, {
 							attr: attributes,
 							set: setAttributes,
 							keys: imageKeys.headerImage,
@@ -131,7 +131,7 @@ registerBlockType('catpow/lightbox', {
 		return wp.element.createElement(
 			Fragment,
 			null,
-			wp.element.createElement(SelectModeToolbar, {
+			wp.element.createElement(CP.SelectModeToolbar, {
 				set: setAttributes,
 				attr: attributes,
 				modes: ['EditMode', 'AltMode', 'OpenMode']
@@ -139,7 +139,7 @@ registerBlockType('catpow/lightbox', {
 			wp.element.createElement(
 				InspectorControls,
 				null,
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: "\u30AF\u30E9\u30B9",
 					icon: "art",
 					set: setAttributes,
@@ -165,7 +165,7 @@ registerBlockType('catpow/lightbox', {
 						value: boxClasses
 					})
 				),
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: "\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0",
 					icon: "edit",
 					set: setAttributes,
@@ -175,7 +175,7 @@ registerBlockType('catpow/lightbox', {
 					selectiveClasses: itemSelectiveClasses,
 					filters: CP.filters.lightbox || {}
 				}),
-				wp.element.createElement(ItemControlInfoPanel, null)
+				wp.element.createElement(CP.ItemControlInfoPanel, null)
 			),
 			!OpenMode ? wp.element.createElement(
 				Fragment,
@@ -188,7 +188,7 @@ registerBlockType('catpow/lightbox', {
 						{ "class": "label" },
 						wp.element.createElement(Icon, { icon: "edit" })
 					),
-					wp.element.createElement(EditItemsTable, {
+					wp.element.createElement(CP.EditItemsTable, {
 						set: setAttributes,
 						attr: attributes,
 						columns: [{ type: 'image', label: 'image', keys: imageKeys.image, cond: states.hasImage }, { type: 'text', key: 'imageCode', cond: states.isTemplate && states.hasImage }, { type: 'image', label: 'header', keys: imageKeys.headerImage, cond: states.hasHeaderImage }, { type: 'text', key: 'headerImageCode', cond: states.isTemplate && states.hasHeaderImage }, { type: 'text', key: 'title', cond: states.hasTitle }, { type: 'text', key: 'titleCaption', cond: states.hasTitleCaption }, { type: 'text', key: 'subTitle', cond: states.hasSubTitle }, { type: 'text', key: 'text', cond: states.hasText }],
@@ -253,7 +253,7 @@ registerBlockType('catpow/lightbox', {
 											states.hasImage && wp.element.createElement(
 												"div",
 												{ className: "image" },
-												wp.element.createElement(SelectResponsiveImage, {
+												wp.element.createElement(CP.SelectResponsiveImage, {
 													attr: attributes,
 													set: setAttributes,
 													keys: imageKeys.image,
@@ -341,7 +341,7 @@ registerBlockType('catpow/lightbox', {
 							states.hasHeaderImage && wp.element.createElement(
 								"div",
 								{ className: "image" },
-								wp.element.createElement(ResponsiveImage, {
+								wp.element.createElement(CP.ResponsiveImage, {
 									attr: attributes,
 									keys: imageKeys.headerImage,
 									index: index,
@@ -378,7 +378,7 @@ registerBlockType('catpow/lightbox', {
 							states.hasImage && wp.element.createElement(
 								"div",
 								{ className: "image" },
-								wp.element.createElement(ResponsiveImage, {
+								wp.element.createElement(CP.ResponsiveImage, {
 									attr: attributes,
 									keys: imageKeys.image,
 									index: index,

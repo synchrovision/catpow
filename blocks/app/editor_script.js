@@ -54,7 +54,7 @@ registerBlockType('catpow/app', {
 					}
 				})
 			),
-			config && wp.element.createElement(SelectClassPanel, {
+			config && wp.element.createElement(CP.SelectClassPanel, {
 				title: '\u8A2D\u5B9A',
 				icon: 'edit',
 				set: setAttributes,

@@ -137,7 +137,7 @@ registerBlockType('catpow/datatable', {
 		return wp.element.createElement(
 			Fragment,
 			null,
-			wp.element.createElement(SelectModeToolbar, {
+			wp.element.createElement(CP.SelectModeToolbar, {
 				set: setAttributes,
 				attr: attributes,
 				modes: ['AltMode']
@@ -241,7 +241,7 @@ registerBlockType('catpow/datatable', {
 			wp.element.createElement(
 				InspectorControls,
 				null,
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: '\u8868\u793A\u8A2D\u5B9A',
 					icon: 'admin-appearance',
 					set: setAttributes,
@@ -249,7 +249,7 @@ registerBlockType('catpow/datatable', {
 					selectiveClasses: statesClasses,
 					filters: CP.filters.datatable || {}
 				}),
-				wp.element.createElement(SelectClassPanel, {
+				wp.element.createElement(CP.SelectClassPanel, {
 					title: '\u30AF\u30E9\u30B9',
 					icon: 'art',
 					set: setAttributes,

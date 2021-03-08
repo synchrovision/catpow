@@ -36,7 +36,7 @@ registerBlockType('catpow/widget',{
 					/>
 				</PanelBody>
                 {statesClasses && 
-                    <SelectClassPanel
+                    <CP.SelectClassPanel
                         title='設定'
                         icon='admin-appearance'
                         set={setAttributes}

@@ -91,11 +91,11 @@ registerBlockType('catpow/t-heading', {
 		), wp.element.createElement(
 			BlockControls,
 			null,
-			wp.element.createElement(AlignClassToolbar, { set: setAttributes, attr: attributes })
+			wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })
 		), wp.element.createElement(
 			InspectorControls,
 			null,
-			wp.element.createElement(SelectClassPanel, {
+			wp.element.createElement(CP.SelectClassPanel, {
 				title: '\u30AF\u30E9\u30B9',
 				icon: 'art',
 				set: setAttributes,

@@ -34,7 +34,7 @@
 		itemsCopy.map((item,index)=>{
 			var className=(currentIndex==index)?'active':(currentIndex>index)?'before':'after';
 			rtn.push(
-				<Item
+				<CP.Item
 					tag='li'
 					className={className}
 					set={setAttributes}
@@ -49,7 +49,7 @@
 							value={item.title}
 						/>
 					</h3>
-				</Item>
+				</CP.Item>
 			)
 		});
 		

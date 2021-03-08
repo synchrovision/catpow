@@ -76,7 +76,7 @@ registerBlockType('catpow/faq',{
 		items.map((item,index)=>{
 			if(!item.controlClasses){item.controlClasses='control';}
 			rtn.push(
-				<Item
+				<CP.Item
 					tag='li'
 					set={setAttributes}
 					attr={attributes}
@@ -86,7 +86,7 @@ registerBlockType('catpow/faq',{
 				>
 					{states.hasImage &&
 						<div className='image'>
-							<SelectResponsiveImage
+							<CP.SelectResponsiveImage
 								attr={attributes}
 								set={setAttributes}
 								keys={imageKeys.image}
@@ -145,7 +145,7 @@ registerBlockType('catpow/faq',{
 							}} value={item.linkUrl} placeholder='URLを入力'/>
 						</div>
 					}
-				</Item>
+				</CP.Item>
 			);
 		});
 		
@@ -165,7 +165,7 @@ registerBlockType('catpow/faq',{
 				/>
 			</BlockControls>,
 			<InspectorControls>
-				<SelectClassPanel
+				<CP.SelectClassPanel
 					title='クラス'
 					icon='art'
 					set={setAttributes}
@@ -180,7 +180,7 @@ registerBlockType('catpow/faq',{
 						value={classes}
 					/>
 				</PanelBody>
-				<ItemControlInfoPanel/>
+				<CP.ItemControlInfoPanel/>
 			</InspectorControls>,
 			<ul className={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>
         ];
