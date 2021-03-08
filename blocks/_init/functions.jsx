@@ -401,7 +401,6 @@
 	
 	getUrlInStyleCode:(code)=>{
 		if(!code || code.indexOf('url(')===-1){return false;}
-		console.log(code);
 		const m=code.match(/url\((.+?)\)/);
 		return m?m[1]:'';
 	},
@@ -563,6 +562,38 @@
 		},[color]);
 	},
 	
+	/*id reflection*/
+	manageStyleData:(props,csss)=>{
+		const {attributes,className,setAttributes}=props;
+		const {id,prevId,styleDatas}=attributes;
+		const {useEffect}=wp.element;
+		
+		if(!id){setAttributes({id:'s'+(new Date().getTime().toString(16))})}
+		if(undefined === styleDatas){
+			const styleDatas={};
+			csss.map((key)=>{
+				styleDatas[key]=CP.parseStyleCodeWithMediaQuery(attributes[key]);
+			});
+			setAttributes({styleDatas});
+		}
+		wp.element.useEffect(()=>{
+			if(id && id.length>2){
+				if(document.querySelectorAll('#'+id).length>1){
+					setAttributes({id:'s'+(new Date().getTime().toString(16))})
+				}
+				const atts={};
+				atts.prevId=id;
+				atts.styleDatas={};
+				csss.map((key)=>{
+					if(!attributes[key]){return;}
+					atts[key]=attributes[key].replace('#'+prevId,'#'+id);
+					atts.styleDatas[key]=CP.parseStyleCodeWithMediaQuery(atts[key]);
+				});
+				setAttributes(atts);
+			}
+		},[id]);
+	},
+	
 	/*compornents*/
 	SelectThemeColor:(props)=>{
 		const {selected,onChange}=props;
@@ -618,7 +649,6 @@
 						<ColorPicker
 							color={colors[index].color}
 							onChangeComplete={(value)=>{
-								console.log(value);
 								colors[index].color=value.hex;
 								onChange(index,value);
 							}}
@@ -971,33 +1001,57 @@ const SelectPreparedImage=({className,name,value,color,onChange,...otherProps})=
 		</ul>
 	);
 }
-const SelectPreparedImageSet=({className,name,value,onChange,...otherProps})=>{
+const SelectPreparedImageSet=({className,name,value,color,onChange,...otherProps})=>{
 	let onClick;
-	const [imagesets,setImagesets]=wp.element.useState(null);
+	const {getURLparam,setURLparam,setURLparams,removeURLparam}=Catpow.util;
+	const [state,dispatch]=wp.element.useReducer((state,action)=>{
+		switch(action.type){
+			case 'update':
+				if(action.imagesets){
+					state.imagesets=action.imagesets;
+					const bareURL=removeURLparam(value,'c');
+					for(const key in state.imagesets){
+						if(state.imagesets[key].url===bareURL){
+							state.imageset=state.imagesets[key];
+							break;
+						}
+					}
+				}
+				if(action.imageset){state.imageset=action.imageset;}
+				if(state.imageset){
+					onChange(state.imageset.map((item)=>{
+						return {...item,url:setURLparams(item.url,{c:color,theme:cp.theme})};
+					}));
+				}
+		}
+		return {...state};
+	},{page:0,imagesets:null,imageset:null});
+	
 	CP.cache.PreparedImageSets=CP.cache.PreparedImageSets || {};
 	
-	if(imagesets===null){
+	if(state.imagesets===null){
 		if(CP.cache.PreparedImageSets[name]){
-			setImagesets(CP.cache.PreparedImageSets[name]);
+			dispatch({type:'update',imagesets:CP.cache.PreparedImageSets[name]});
 		}
 		else{
-			wp.apiFetch({path:'cp/v1/imageset/'+name}).then((data)=>{
-				CP.cache.PreparedImageSets[name]=data;
-				setImagesets(data);
+			wp.apiFetch({path:'cp/v1/imageset/'+name}).then((imagesets)=>{
+				CP.cache.PreparedImageSets[name]=imagesets;
+				dispatch({type:'update',imagesets});
 			});
 		}
 		return false;
 	}
 	return (
 		<ul className={'selectPreparedImageSet '+name+' '+className} {...otherProps}>
-			{Object.keys(imagesets).map((key)=>{
-				const imageset=imagesets[key];
+			{Object.keys(state.imagesets).map((key)=>{
+				const imageset=state.imagesets[key];
+				const url=setURLparams(imageset[0].url,{c:color,theme:cp.theme});
 				return (
-					<li className={'item '+((value==imageset[0].url)?'active':'')}>
+					<li className={'item '+((value==url)?'active':'')}>
 						<img
-							src={imageset[0].url}
+							src={url}
 							alt={imageset[0].alt}
-							onClick={()=>onChange(imageset)}
+							onClick={()=>dispatch({type:'update',imageset})}
 						/>
 					</li>
 				);
@@ -1124,7 +1178,7 @@ const SelectClassPanel=(props)=>{
 		item=attr;
 	}
 	let states=CP.wordsToFlags(item[classKey]);
-	let styleDatas={};
+	const {styleDatas}=attr;
 	
 	const save=(data)=>{
 		if(items){
@@ -1141,6 +1195,7 @@ const SelectClassPanel=(props)=>{
 	const saveCss=(cssKey)=>{
 		set({[cssKey]:CP.createStyleCodeWithMediaQuery(styleDatas[cssKey])});
 	}
+	
 	const SelectClass=(prm)=>{
 		if(prm.hasOwnProperty('cond') && !prm.cond){
 			return false;
@@ -1233,7 +1288,6 @@ const SelectClassPanel=(props)=>{
 							<CP.SelectColors
 								colors={CP.getJsonValue(props,prm.json,prm.key) || [{h:'40',s:'80%',l:'50%'},{h:'60',s:'80%',l:'50%'}]}
 								onChange={(colors)=>{
-									console.log(colors);
 									CP.setJsonValue(props,prm.json,prm.key,colors);
 								}}
 							/>
@@ -1297,11 +1351,9 @@ const SelectClassPanel=(props)=>{
             }
         }
 		else if(prm.css){
-			if(!styleDatas[prm.css]){
-				styleDatas[prm.css]=CP.parseStyleCodeWithMediaQuery(attr[prm.css]);
-			}
 			const {device='pc'}=prm;
 			const media=CP.getMediaQueryKeyForDevice(device);
+			styleDatas[prm.css]=styleDatas[prm.css] || {};
 			styleDatas[prm.css][media]=styleDatas[prm.css][media] || {};
 			styleDatas[prm.css][media][prm.sel]=styleDatas[prm.css][media][prm.sel] || {};
 			const tgt=styleDatas[prm.css][media][prm.sel];
@@ -1350,6 +1402,7 @@ const SelectClassPanel=(props)=>{
 							<SelectPreparedImageSet
 								name="frame"
 								value={CP.getUrlInStyleCode(tgt['border-image'])}
+								color={prm.color || 0}
 								onChange={(imageset)=>{
 									imageset.map((image)=>{
 										if(!image.conf){return;}

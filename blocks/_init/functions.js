@@ -619,7 +619,6 @@ var CP = {
 		if (!code || code.indexOf('url(') === -1) {
 			return false;
 		}
-		console.log(code);
 		var m = code.match(/url\((.+?)\)/);
 		return m ? m[1] : '';
 	},
@@ -817,6 +816,47 @@ var CP = {
 		}, [color]);
 	},
 
+	/*id reflection*/
+	manageStyleData: function manageStyleData(props, csss) {
+		var attributes = props.attributes,
+		    className = props.className,
+		    setAttributes = props.setAttributes;
+		var id = attributes.id,
+		    prevId = attributes.prevId,
+		    styleDatas = attributes.styleDatas;
+		var useEffect = wp.element.useEffect;
+
+
+		if (!id) {
+			setAttributes({ id: 's' + new Date().getTime().toString(16) });
+		}
+		if (undefined === styleDatas) {
+			var _styleDatas = {};
+			csss.map(function (key) {
+				_styleDatas[key] = CP.parseStyleCodeWithMediaQuery(attributes[key]);
+			});
+			setAttributes({ styleDatas: _styleDatas });
+		}
+		wp.element.useEffect(function () {
+			if (id && id.length > 2) {
+				if (document.querySelectorAll('#' + id).length > 1) {
+					setAttributes({ id: 's' + new Date().getTime().toString(16) });
+				}
+				var atts = {};
+				atts.prevId = id;
+				atts.styleDatas = {};
+				csss.map(function (key) {
+					if (!attributes[key]) {
+						return;
+					}
+					atts[key] = attributes[key].replace('#' + prevId, '#' + id);
+					atts.styleDatas[key] = CP.parseStyleCodeWithMediaQuery(atts[key]);
+				});
+				setAttributes(atts);
+			}
+		}, [id]);
+	},
+
 	/*compornents*/
 	SelectThemeColor: function SelectThemeColor(props) {
 		var selected = props.selected,
@@ -897,7 +937,6 @@ var CP = {
 				wp.element.createElement(ColorPicker, {
 					color: colors[index].color,
 					onChangeComplete: function onChangeComplete(value) {
-						console.log(value);
 						colors[index].color = value.hex;
 						onChange(index, value);
 					}
@@ -1326,25 +1365,54 @@ var SelectPreparedImageSet = function SelectPreparedImageSet(_ref21) {
 	var className = _ref21.className,
 	    name = _ref21.name,
 	    value = _ref21.value,
+	    color = _ref21.color,
 	    onChange = _ref21.onChange,
-	    otherProps = babelHelpers.objectWithoutProperties(_ref21, ['className', 'name', 'value', 'onChange']);
+	    otherProps = babelHelpers.objectWithoutProperties(_ref21, ['className', 'name', 'value', 'color', 'onChange']);
 
 	var onClick = void 0;
+	var _Catpow$util2 = Catpow.util,
+	    getURLparam = _Catpow$util2.getURLparam,
+	    setURLparam = _Catpow$util2.setURLparam,
+	    setURLparams = _Catpow$util2.setURLparams,
+	    removeURLparam = _Catpow$util2.removeURLparam;
 
-	var _wp$element$useState = wp.element.useState(null),
-	    _wp$element$useState2 = babelHelpers.slicedToArray(_wp$element$useState, 2),
-	    imagesets = _wp$element$useState2[0],
-	    setImagesets = _wp$element$useState2[1];
+	var _wp$element$useReduce3 = wp.element.useReducer(function (state, action) {
+		switch (action.type) {
+			case 'update':
+				if (action.imagesets) {
+					state.imagesets = action.imagesets;
+					var bareURL = removeURLparam(value, 'c');
+					for (var key in state.imagesets) {
+						if (state.imagesets[key].url === bareURL) {
+							state.imageset = state.imagesets[key];
+							break;
+						}
+					}
+				}
+				if (action.imageset) {
+					state.imageset = action.imageset;
+				}
+				if (state.imageset) {
+					onChange(state.imageset.map(function (item) {
+						return babelHelpers.extends({}, item, { url: setURLparams(item.url, { c: color, theme: cp.theme }) });
+					}));
+				}
+		}
+		return babelHelpers.extends({}, state);
+	}, { page: 0, imagesets: null, imageset: null }),
+	    _wp$element$useReduce4 = babelHelpers.slicedToArray(_wp$element$useReduce3, 2),
+	    state = _wp$element$useReduce4[0],
+	    dispatch = _wp$element$useReduce4[1];
 
 	CP.cache.PreparedImageSets = CP.cache.PreparedImageSets || {};
 
-	if (imagesets === null) {
+	if (state.imagesets === null) {
 		if (CP.cache.PreparedImageSets[name]) {
-			setImagesets(CP.cache.PreparedImageSets[name]);
+			dispatch({ type: 'update', imagesets: CP.cache.PreparedImageSets[name] });
 		} else {
-			wp.apiFetch({ path: 'cp/v1/imageset/' + name }).then(function (data) {
-				CP.cache.PreparedImageSets[name] = data;
-				setImagesets(data);
+			wp.apiFetch({ path: 'cp/v1/imageset/' + name }).then(function (imagesets) {
+				CP.cache.PreparedImageSets[name] = imagesets;
+				dispatch({ type: 'update', imagesets: imagesets });
 			});
 		}
 		return false;
@@ -1352,16 +1420,17 @@ var SelectPreparedImageSet = function SelectPreparedImageSet(_ref21) {
 	return wp.element.createElement(
 		'ul',
 		babelHelpers.extends({ className: 'selectPreparedImageSet ' + name + ' ' + className }, otherProps),
-		Object.keys(imagesets).map(function (key) {
-			var imageset = imagesets[key];
+		Object.keys(state.imagesets).map(function (key) {
+			var imageset = state.imagesets[key];
+			var url = setURLparams(imageset[0].url, { c: color, theme: cp.theme });
 			return wp.element.createElement(
 				'li',
-				{ className: 'item ' + (value == imageset[0].url ? 'active' : '') },
+				{ className: 'item ' + (value == url ? 'active' : '') },
 				wp.element.createElement('img', {
-					src: imageset[0].url,
+					src: url,
 					alt: imageset[0].alt,
 					onClick: function onClick() {
-						return onChange(imageset);
+						return dispatch({ type: 'update', imageset: imageset });
 					}
 				})
 			);
@@ -1579,7 +1648,8 @@ var SelectClassPanel = function SelectClassPanel(props) {
 		item = attr;
 	}
 	var states = CP.wordsToFlags(item[classKey]);
-	var styleDatas = {};
+	var styleDatas = attr.styleDatas;
+
 
 	var save = function save(data) {
 		if (items) {
@@ -1595,6 +1665,7 @@ var SelectClassPanel = function SelectClassPanel(props) {
 	var saveCss = function saveCss(cssKey) {
 		set(babelHelpers.defineProperty({}, cssKey, CP.createStyleCodeWithMediaQuery(styleDatas[cssKey])));
 	};
+
 	var SelectClass = function SelectClass(prm) {
 		if (prm.hasOwnProperty('cond') && !prm.cond) {
 			return false;
@@ -1710,7 +1781,6 @@ var SelectClassPanel = function SelectClassPanel(props) {
 						rtn.push(wp.element.createElement(CP.SelectColors, {
 							colors: CP.getJsonValue(props, prm.json, prm.key) || [{ h: '40', s: '80%', l: '50%' }, { h: '60', s: '80%', l: '50%' }],
 							onChange: function onChange(colors) {
-								console.log(colors);
 								CP.setJsonValue(props, prm.json, prm.key, colors);
 							}
 						}));
@@ -1788,13 +1858,11 @@ var SelectClassPanel = function SelectClassPanel(props) {
 				}));
 			}
 		} else if (prm.css) {
-			if (!styleDatas[prm.css]) {
-				styleDatas[prm.css] = CP.parseStyleCodeWithMediaQuery(attr[prm.css]);
-			}
 			var _prm$device = prm.device,
 			    device = _prm$device === undefined ? 'pc' : _prm$device;
 
 			var media = CP.getMediaQueryKeyForDevice(device);
+			styleDatas[prm.css] = styleDatas[prm.css] || {};
 			styleDatas[prm.css][media] = styleDatas[prm.css][media] || {};
 			styleDatas[prm.css][media][prm.sel] = styleDatas[prm.css][media][prm.sel] || {};
 			var tgt = styleDatas[prm.css][media][prm.sel];
@@ -1863,6 +1931,7 @@ var SelectClassPanel = function SelectClassPanel(props) {
 						rtn.push(wp.element.createElement(SelectPreparedImageSet, {
 							name: 'frame',
 							value: CP.getUrlInStyleCode(tgt['border-image']),
+							color: prm.color || 0,
 							onChange: function onChange(imageset) {
 								imageset.map(function (image) {
 									if (!image.conf) {
