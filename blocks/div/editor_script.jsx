@@ -23,6 +23,7 @@ registerBlockType('catpow/div',{
 	},
 	attributes:{
 		color:{default:"0"},
+		id:{source:'attribute',selector:'.wp-block-catpow-div',attribute:'id'},
 		classes:{source:'attribute',selector:'div',attribute:'class',default:'wp-block-catpow-div frame thinBorder'},
 		
 		iconImageSrc:{source:'attribute',selector:'.wp-block-catpow-div>.icon [src]',attribute:'src',default:cp.theme_url+'/images/dummy_icon.svg'},
@@ -30,18 +31,23 @@ registerBlockType('catpow/div',{
 		
 		backgroundImageSrc:{source:'attribute',selector:'.wp-block-catpow-div>.background [src]',attribute:'src',default:cp.theme_url+'/images/dummy_bg.jpg'},
 		backgroundImageSources:CP.getPictureSoucesAttributesForDevices(CP.config.div.devices,'.wp-block-catpow-div>.background picture','dummy_bg.jpg'),
+		
+		patternImageCss:{source:'text',selector:'style.patternImageCss'},
+		frameImageCss:{source:'text',selector:'style.frameImageCss'},
+		borderImageCss:{source:'text',selector:'style.borderImageCss'},
 	},
 	providesContext:{'catpow/color':'color'},
 	usesContext:['catpow/color'],
 	example:CP.example,
 	edit(props){
 		const {attributes,className,setAttributes,context}=props;
-        const {classes,color}=attributes;
+        const {id,classes,color,patternImageCss,frameImageCss,borderImageCss}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.div;
 		
-		CP.inheritColor(props,['iconImageSrc']);
+		CP.inheritColor(props,['iconImageSrc','patternImageCss','frameImageCss','borderImageCss']);
+		CP.manageStyleData(props,['patternImageCss','frameImageCss','borderImageCss']);
 		
 		
 		var selectiveClasses=[
@@ -65,19 +71,30 @@ registerBlockType('catpow/div',{
 				}
 			},
 			'color',
-			{type:'buttons',label:'背景',values:{noBackground:'なし',hasBackgroundColor:'色',hasBackgroundImage:'画像'},sub:{
+			{type:'buttons',label:'背景',values:{noBackground:'なし',hasBackgroundColor:'色',hasBackgroundImage:'画像',hasPatternImage:'パターン'},sub:{
 				hasBackgroundColor:[
 					{label:'パターン',values:'hasPattern',sub:['pattern']}
 				],
 				hasBackgroundImage:[
 					{input:'picture',label:'背景画像',keys:imageKeys.backgroundImage,devices}
+				],
+				hasPatternImage:[
+					{input:'pattern',css:'patternImageCss',sel:'#'+id,color},
+				]
+			}},
+			{type:'buttons',label:'ボーダー画像',values:{noBorder:'なし',hasFrameImage:'フレーム',hasBorderImage:'ボーダー'},sub:{
+				hasFrameImage:[
+					{input:'frame',css:'frameImageCss',sel:'#'+id,color}
+				],
+				hasBorderImage:[
+					{input:'border',css:'borderImageCss',sel:'#'+id,color}
 				]
 			}},
 			{type:'buttons',label:'余白','values':{noPad:'なし',thinPad:'極細',lightPad:'細',mediumPad:'中',boldPad:'太',heavyPad:'極太'}}
 		];
 		
         return [
-			<div className={classes}>
+			<div id={id} className={classes}>
 				{states.hasIcon && 
 					<div class="icon">
 						<SelectResponsiveImage
@@ -99,6 +116,15 @@ registerBlockType('catpow/div',{
 					</div>
 				}
 				<InnerBlocks template={[['core/paragraph',{content:CP.dummyText.text}]]} templateLock={false}/>
+				{states.hasPatternImage && (
+					<style className="patternImageCss">{patternImageCss}</style>
+				)}
+				{states.hasBorderImage && (
+					<style className="borderImageCss">{borderImageCss}</style>
+				)}
+				{states.hasFrameImage && (
+					<style className="frameImageCss">{frameImageCss}</style>
+				)}
 			</div>,
 			<InspectorControls>
 				<SelectClassPanel
@@ -122,13 +148,13 @@ registerBlockType('catpow/div',{
 
 
 	save({attributes,className,setAttributes}){
-        const {classes='',color}=attributes;
+        const {id,classes='',color,patternImageCss,frameImageCss,borderImageCss}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.div;
 		
 		return (
-			<div className={classes}>
+			<div id={id} className={classes}>
 				{states.hasIcon && 
 					<div class="icon">
 						<ResponsiveImage
@@ -147,6 +173,15 @@ registerBlockType('catpow/div',{
 					</div>
 				}
 				<InnerBlocks.Content/>
+				{states.hasPatternImage && (
+					<style className="patternImageCss">{patternImageCss}</style>
+				)}
+				{states.hasBorderImage && (
+					<style className="borderImageCss">{borderImageCss}</style>
+				)}
+				{states.hasFrameImage && (
+					<style className="frameImageCss">{frameImageCss}</style>
+				)}
 			</div>
 		);
 	}
