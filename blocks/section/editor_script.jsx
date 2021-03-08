@@ -83,14 +83,11 @@ registerBlockType('catpow/section',{
 			iconSrc,iconAlt
 		}=attributes;
 		
-		if(!id){
-			setAttributes({id:'s'+(new Date().getTime().toString(16))})
-		}
-		
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys,imageSizes}=CP.config.section;
 		
 		CP.inheritColor(props,['iconSrc','patternImageCss','headerPatternImageCss','frameImageCss','borderImageCss']);
+		CP.manageStyleData(props,['patternImageCss','headerPatternImageCss','frameImageCss','borderImageCss']);
 		
 		const selectiveClasses=[
 			{input:'buttons',filter:'sectionTag',key:'SectionTag',label:'セクションタグ',values:['article','section','aside','div']},
@@ -213,7 +210,7 @@ registerBlockType('catpow/section',{
 						'color',
 						'pattern',
 						{label:'アイコン',values:'hasIcon',sub:[
-							{input:'icon'}
+							{input:'icon',color}
 						]},
 						{label:'画像',values:'hasImage',sub:[
 							{input:'image',keys:imageKeys.image}

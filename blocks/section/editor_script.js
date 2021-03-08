@@ -99,10 +99,6 @@ registerBlockType('catpow/section', {
 		    iconAlt = attributes.iconAlt;
 
 
-		if (!id) {
-			setAttributes({ id: 's' + new Date().getTime().toString(16) });
-		}
-
 		var states = CP.wordsToFlags(classes);
 		var _CP$config$section = CP.config.section,
 		    devices = _CP$config$section.devices,
@@ -111,6 +107,7 @@ registerBlockType('catpow/section', {
 
 
 		CP.inheritColor(props, ['iconSrc', 'patternImageCss', 'headerPatternImageCss', 'frameImageCss', 'borderImageCss']);
+		CP.manageStyleData(props, ['patternImageCss', 'headerPatternImageCss', 'frameImageCss', 'borderImageCss']);
 
 		var selectiveClasses = [{ input: 'buttons', filter: 'sectionTag', key: 'SectionTag', label: 'セクションタグ', values: ['article', 'section', 'aside', 'div'] }, { input: 'buttons', filter: 'headingTag', key: 'HeadingTag', label: '見出しタグ', values: ['h2', 'h3', 'h4'], effect: function effect(val) {
 				for (var key in states) {
@@ -166,7 +163,7 @@ registerBlockType('catpow/section', {
 						cond: states.hasBackgroundImage
 					}]
 				}],
-				column: ['color', 'pattern', { label: 'アイコン', values: 'hasIcon', sub: [{ input: 'icon' }] }, { label: '画像', values: 'hasImage', sub: [{ input: 'image', keys: imageKeys.image }] }, { label: '背景画像', values: 'hasBackgroundImage', sub: [{ input: 'picture', keys: imageKeys.backgroundImage, devices: devices, cond: !states.isTemplate || !backgroundImageCode }, { label: '薄く', values: 'paleBG' }] }, { label: '線', values: { no_border: 'なし', thin_border: '細', bold_border: '太' } }, { label: '角丸', values: 'round' }, { label: '影', values: 'shadow', sub: [{ label: '内側', values: 'inset' }] }, { label: 'メニューアイコン', values: 'hasNavIcon', sub: [{ input: 'image', label: 'アイコン', keys: imageKeys.navIcon, size: 'thumbnail' }] }, { label: 'ボーダー画像', values: 'hasBorderImage', sub: [{ input: 'border', css: 'borderImageCss', sel: '#' + id + ' > .contents', color: color }] }, {
+				column: ['color', 'pattern', { label: 'アイコン', values: 'hasIcon', sub: [{ input: 'icon', color: color }] }, { label: '画像', values: 'hasImage', sub: [{ input: 'image', keys: imageKeys.image }] }, { label: '背景画像', values: 'hasBackgroundImage', sub: [{ input: 'picture', keys: imageKeys.backgroundImage, devices: devices, cond: !states.isTemplate || !backgroundImageCode }, { label: '薄く', values: 'paleBG' }] }, { label: '線', values: { no_border: 'なし', thin_border: '細', bold_border: '太' } }, { label: '角丸', values: 'round' }, { label: '影', values: 'shadow', sub: [{ label: '内側', values: 'inset' }] }, { label: 'メニューアイコン', values: 'hasNavIcon', sub: [{ input: 'image', label: 'アイコン', keys: imageKeys.navIcon, size: 'thumbnail' }] }, { label: 'ボーダー画像', values: 'hasBorderImage', sub: [{ input: 'border', css: 'borderImageCss', sel: '#' + id + ' > .contents', color: color }] }, {
 					label: 'テンプレート',
 					values: 'isTemplate',
 					sub: [{
