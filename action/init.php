@@ -453,6 +453,7 @@ if($pagenow=='options-permalink.php'){
 		'index.php?cp_callee=$matches[1]',
 		'top'
 	);
+	Catpow\util\htaccess::update();
 }
 
 
