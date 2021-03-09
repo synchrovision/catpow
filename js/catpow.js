@@ -1190,8 +1190,7 @@ Catpow.util={
 	getDateObject:function(dateValue,defaultValue){
 		var d=dateValue.match(/^(\d+)\-(\d+)\-(\d+)$/);
 		if(d){return new Date(d[1],d[2]-1,d[3]);}
-		if(defaultValue){return defaultValue;}
-		return false;
+		return Catpow.util.getRelativeDateTimeObject(dateValue,defaultValue);
 	},
 	getDateTimeValue:function(dateTimeObj){
 		return (
@@ -1206,6 +1205,25 @@ Catpow.util={
 	getDateTimeObject:function(dateTimeValue,defaultValue){
 		var dt=dateTimeValue.match(/^(\d+)\-(\d+)\-(\d+) (\d+):(\d+):(\d+)$/);
 		if(dt){return new Date(dt[1],dt[2]-1,dt[3],dt[4],dt[5],dt[6]);}
+		return Catpow.util.getRelativeDateTimeObject(dateTimeValue,defaultValue);
+	},
+	getRelativeDateTimeObject:function(dateTimeValue,defaultValue){
+		if(dateTimeValue==='now'){return new Date();}
+		var r=dateTimeValue.match(/^([+\-]\d+)\s+(year|week|month|day|hour|minute|second)s?/);
+		if(r){
+			var d=new Date();
+			var rv=parseInt(r[1]);
+			switch(r[2]){
+				case 'year':d.setFullYear(d.getFullYear()+rv);break;
+				case 'week':d.setDate(d.getDate()+rv*7);break;
+				case 'month':d.setMonth(d.getMonth()+rv);break;
+				case 'day':d.setDate(d.getDate()+rv);break;
+				case 'hour':d.setHours(d.getHours()+rv);break;
+				case 'minute':d.setMinutes(d.getMinutes()+rv);break;
+				case 'second':d.setSeconds(d.getSeconds()+rv);break;
+			}
+			return d;
+		}
 		if(defaultValue){return defaultValue;}
 		return false;
 	},

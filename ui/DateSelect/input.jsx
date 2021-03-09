@@ -2,13 +2,14 @@
 	const {min=false,max=false}=props;
 	const {useState,useReducer,useMemo}=wp.element;
 	const [open,setOpen]=useState(false);
-	const minTime=min?Catpow.util.getDateObject(min).getTime():-Number.MAX_VALUE;
-	const maxTime=max?Catpow.util.getDateObject(max).getTime():Number.MAX_VALUE;
+	const minDate=Catpow.util.getDateObject(min || '-5 month');
+	const maxDate=Catpow.util.getDateObject(max || '+5 month');
+	const minTime=minDate.getTime();
+	const maxTime=maxDate.getTime();
 	
 	const d=Catpow.util.getDateObject(props.value,new Date());
 	
 	const [state,dispatch]=useReducer((state,action)=>{
-		console.log(state,action);
 		switch(action.type){
 			case 'update':
 				const d=action.value?(
@@ -42,11 +43,11 @@
 	return (
 		<div className='DateSelect'>
 			<div className="inputs">
-				<input className="input year" type="number" size="4" value={state.year} onInput={(e)=>{dispatch({type:'update',year:e.currentTarget.value})}}/>
+				<Catpow.SelectNumber min={minDate.getFullYear()} max={maxDate.getFullYear()} value={state.year} onChange={(year)=>{dispatch({type:'update',year})}}/>
 				<span className="unit">年</span>
-				<input className="input month" type="number" size="2" value={state.month} onInput={(e)=>{dispatch({type:'update',month:e.currentTarget.value})}}/>
+				<Catpow.SelectNumber min={1} max={12} value={state.month} onChange={(month)=>{dispatch({type:'update',month})}}/>
 				<span className="unit">月</span>
-				<input className="input date"  type="number" size="2" value={state.date} onInput={(e)=>{dispatch({type:'update',date:e.currentTarget.value})}}/>
+				<Catpow.SelectNumber min={1} max={31} value={state.date} onChange={(date)=>{dispatch({type:'update',date})}}/>
 				<span className="unit">日</span>
 				<span className="btn calendar" onClick={()=>setOpen(true)}></span>
 			</div>

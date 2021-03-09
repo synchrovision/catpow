@@ -43,7 +43,6 @@ switch($attr['factor']){
 		break;
 	default:return;
 }
-
 foreach($contents as $value=>$data){
 	if($cond_cb($value)){echo $data['content'];return;}
 }
