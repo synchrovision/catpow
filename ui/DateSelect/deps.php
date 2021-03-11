@@ -1,2 +1,2 @@
 <?php
-$useComponents=['Popup','Calendar'];
+$useComponents=['Popup','Calendar','SelectNumber'];

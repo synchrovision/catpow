@@ -1,53 +1,73 @@
 Catpow.UI.DateSelect = function (props) {
-	var _props$min = props.min,
-	    min = _props$min === undefined ? false : _props$min,
-	    _props$max = props.max,
-	    max = _props$max === undefined ? false : _props$max;
 	var _wp$element = wp.element,
 	    useState = _wp$element.useState,
 	    useReducer = _wp$element.useReducer,
-	    useMemo = _wp$element.useMemo;
+	    useMemo = _wp$element.useMemo,
+	    useCallback = _wp$element.useCallback;
 
 	var _useState = useState(false),
 	    _useState2 = babelHelpers.slicedToArray(_useState, 2),
 	    open = _useState2[0],
 	    setOpen = _useState2[1];
 
-	var minTime = min ? Catpow.util.getDateObject(min).getTime() : -Number.MAX_VALUE;
-	var maxTime = max ? Catpow.util.getDateObject(max).getTime() : Number.MAX_VALUE;
-
-	var d = Catpow.util.getDateObject(props.value, new Date());
-
 	var _useReducer = useReducer(function (state, action) {
-		console.log(state, action);
 		switch (action.type) {
+			case 'init':
+				state.min = Catpow.util.getDateObject(props.min || '-80 year');
+				state.max = Catpow.util.getDateObject(props.max || '+1 year');
+				state.minTime = state.min.getTime();
+				state.maxTime = state.max.getTime();
+				state.minYear = state.min.getFullYear();
+				state.maxYear = state.max.getFullYear();
+				action.value = props.value || 'now';
 			case 'update':
-				var _d = action.value ? Catpow.util.getDateObject(action.value) : new Date(action.year || state.year, (action.month || state.month) - 1, action.date || state.date);
-				var t = _d.getTime();
-				if (t < minTime) {
-					_d.setTime(minTime);
+				var d = action.value ? Catpow.util.getDateObject(action.value) : new Date(action.year || state.year, (action.month || state.month) - 1, action.date || state.date);
+				var t = d.getTime();
+				if (t < state.minTime) {
+					d.setTime(state.minTime);
 				}
-				if (t > maxTime) {
-					_d.setTime(maxTime);
+				if (t > state.maxTime) {
+					d.setTime(state.maxTime);
 				}
 
-				return {
-					value: Catpow.util.getDateValue(_d),
-					year: _d.getFullYear(),
-					month: _d.getMonth() + 1,
-					date: _d.getDate()
-				};
+				state.value = Catpow.util.getDateValue(d);
+				state.year = d.getFullYear();
+				state.month = d.getMonth() + 1;
+				state.date = d.getDate();
+
+				if (d.getFullYear() === state.minYear) {
+					state.minMonth = state.min.getMonth() + 1;
+					if (d.getMonth() === state.minMonth - 1) {
+						state.minDate = state.min.getDate();
+					} else {
+						state.minDate = 1;
+					}
+				} else {
+					state.minMonth = 1;
+					state.minDate = 1;
+				}
+				if (d.getFullYear() === state.maxYear) {
+					state.maxMonth = state.max.getMonth() + 1;
+					if (d.getMonth() === state.maxMonth - 1) {
+						state.maxDate = state.max.getDate();
+					} else {
+						state.maxDate = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+					}
+				} else {
+					state.maxMonth = 12;
+					state.maxDate = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+				}
+				return babelHelpers.extends({}, state);
 		}
 		return state;
-	}, {
-		value: props.value,
-		year: d.getFullYear(),
-		month: d.getMonth() + 1,
-		date: d.getDate()
-	}),
+	}, {}),
 	    _useReducer2 = babelHelpers.slicedToArray(_useReducer, 2),
 	    state = _useReducer2[0],
 	    dispatch = _useReducer2[1];
+
+	if (undefined === state.value) {
+		dispatch({ type: 'init' });
+	}
 
 	return wp.element.createElement(
 		'div',
@@ -55,24 +75,24 @@ Catpow.UI.DateSelect = function (props) {
 		wp.element.createElement(
 			'div',
 			{ className: 'inputs' },
-			wp.element.createElement('input', { className: 'input year', type: 'number', size: '4', value: state.year, onInput: function onInput(e) {
-					dispatch({ type: 'update', year: e.currentTarget.value });
+			wp.element.createElement(Catpow.SelectNumber, { min: state.minYear, max: state.maxYear, value: state.year, onChange: function onChange(year) {
+					dispatch({ type: 'update', year: year });
 				} }),
 			wp.element.createElement(
 				'span',
 				{ className: 'unit' },
 				'\u5E74'
 			),
-			wp.element.createElement('input', { className: 'input month', type: 'number', size: '2', value: state.month, onInput: function onInput(e) {
-					dispatch({ type: 'update', month: e.currentTarget.value });
+			wp.element.createElement(Catpow.SelectNumber, { min: state.minMonth, max: state.maxMonth, value: state.month, onChange: function onChange(month) {
+					dispatch({ type: 'update', month: month });
 				} }),
 			wp.element.createElement(
 				'span',
 				{ className: 'unit' },
 				'\u6708'
 			),
-			wp.element.createElement('input', { className: 'input date', type: 'number', size: '2', value: state.date, onInput: function onInput(e) {
-					dispatch({ type: 'update', date: e.currentTarget.value });
+			wp.element.createElement(Catpow.SelectNumber, { min: state.minDate, max: state.maxDate, value: state.date, onChange: function onChange(date) {
+					dispatch({ type: 'update', date: date });
 				} }),
 			wp.element.createElement(
 				'span',
@@ -93,6 +113,8 @@ Catpow.UI.DateSelect = function (props) {
 				year: state.year,
 				month: state.month,
 				showControl: true,
+				min: props.min,
+				max: props.max,
 				values: state.value ? babelHelpers.defineProperty({}, state.value, true) : {},
 				onSelect: function onSelect(value) {
 					setOpen(false);
