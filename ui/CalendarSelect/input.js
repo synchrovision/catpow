@@ -28,6 +28,8 @@ Catpow.UI.CalendarSelect = function (props) {
 			className: 'medium',
 			year: year,
 			month: month,
+			min: props.min,
+			max: props.max,
 			values: value ? babelHelpers.defineProperty({}, value, true) : {},
 			onSelect: setValue
 		}),

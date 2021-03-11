@@ -11,6 +11,8 @@
 				className='medium'
 				year={year}
 				month={month}
+				min={props.min}
+				max={props.max}
 				values={
 					value?{[value]:true}:{}
 				}
