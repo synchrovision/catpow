@@ -1,26 +1,34 @@
 @import 'admin_style_config.scss';
 
 .switcherEdit{
-	@include bnd((p:r,pdt:3rem));
+	@include bnd((p:r,pdt:2em));
 	&>.tabs{
-		@include bnd((p:a,t:0,l:0,r:0,mg:0,pd:0));
-		@include flx((w:n));
+		@include bnd((p:a,t:0,r:0,mg:0,pd:0,z:10));
+		@include flx((w:n,j:r));
+		@include bg((c:b));
+		@include shd((b:1));
 		&>.tab{
-			@include bnd((f:1 1 a,pd:1rem,mg:0));
-			@include bdr((s:s,w:1,c:t,r:1rem 1rem 0 0));
-			@include bg((c:t 10));
-			@include txt((a:c,p:1.5rem,h:1em,f:g,l:n));
+			@include bnd((f:0 0 a,pd:.5rem 1rem,mg:0));
+			@include txt((a:c,p:1.2rem,h:1em,f:g,l:n));
 			@include usr((c:p));
+			&.icon{
+				@include bnd((pd:.25rem .5rem));
+				.dashicon{
+					@include bnd((w:1.5rem,h:1.5rem));
+					@include txt((p:1.5rem));
+				}
+			}
+			&+.tab{
+				@include bdr((p:l,s:s,w:1,c:shd));
+			}
 			&.active{
-				@include bg((c:b));
-				@include bdr((p:b,s:n));
+				@include bg((c:m));
+				@include txt((c:i));
 			}
 		}
 	}
 	&>.contents{
-		@include bnd((mg:0,pd:5rem 0));
-		@include bdr((s:s,w:1,c:t));
-		@include bdr((p:t,s:n));
+		@include bnd((mg:0,pd:0));
 	}
 	[data-type="catpow/switchercontent"]{@include bnd((d:n));}
 	@for $i from 0 through 10{

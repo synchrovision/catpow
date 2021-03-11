@@ -1,13 +1,29 @@
 ﻿registerBlockType('catpow/switcher',{
 	title:'🐾 Switcher',
 	description:'日時やログインユーザーによってコンテンツの内容が切り替わるコンテナです。',
-	icon:'editor-code',
+	icon:'networking',
 	category:'catpow-functional',
 	example:CP.example,
-	edit({attributes,className,setAttributes,isSelected,clientId}){
-		const {useEffect,useRef}=wp.element;
+	edit(props){
+		const {attributes,className,setAttributes,isSelected,clientId}=props;
+		const {useState,useEffect,useRef,useCallback}=wp.element;
 		const {currentIndex=0}=attributes;
-		const blocksToReplace=useRef([]);
+		const [newBlocks,setNewBlocks]=useState(false);
+		const delayUpdateBlocks=useCallback((values)=>{
+			const editor=wp.data.dispatch('core/block-editor');
+			const blocks=wp.data.select('core/block-editor').getBlock(clientId).innerBlocks;
+			values=values.split("\n");
+			const newBlocks=values.map((cond,index)=>{
+				if(undefined === blocks[index]){
+					return wp.blocks.createBlock('catpow/switchercontent',{cond});
+				}
+				editor.updateBlockAttributes(blocks[index].clientId,{cond});
+				return blocks[index];
+			});
+			if(blocks.length!==newBlocks.length){
+				setNewBlocks(newBlocks);
+			}
+		},[props]);
 		const selectiveClasses=[
 			{
 				label:'ファクター',
@@ -40,38 +56,34 @@
 				input:'textarea',
 				key:'values',
 				cond:['schedule','current_user_can','user_value','input_value','content_value'].indexOf(attributes.factor) >-1,
-				effect:(values)=>{
-					const editor=wp.data.dispatch('core/block-editor');
-					const blocks=wp.data.select('core/block-editor').getBlock(clientId).innerBlocks;
-					values=values.split("\n");
-					const newBlocks=values.map((cond,index)=>{
-						if(undefined === blocks[index]){
-							return wp.blocks.createBlock('catpow/switchercontent',{cond});
-						}
-						editor.updateBlockAttributes(blocks[index].clientId,{cond});
-						return blocks[index];
-					});
-					if(blocks.length!==values.lenght){blocksToReplace.current=newBlocks;}
-				}
+				effect:delayUpdateBlocks
 			}
 		];
 		const values=attributes.values.split("\n");
 		useEffect(()=>{
-			if(blocksToReplace.current.length>0){
-				wp.data.dispatch('core/block-editor').replaceInnerBlocks(clientId,blocksToReplace.current);
-				blocksToReplace.current=[];
+			if(newBlocks){
+				const editor=wp.data.dispatch('core/block-editor');
+				editor.replaceInnerBlocks(clientId,newBlocks);
+				const blocks=wp.data.select('core/block-editor').getBlock(clientId).innerBlocks;
+				values.map((cond,index)=>{
+					editor.updateBlockAttributes(blocks[index].clientId,{cond});
+				});
+				setNewBlocks(false);
 			}
 		},[currentIndex]);
         return (
 			<Fragment>
 				<div className="switcherEdit" data-current-index={currentIndex}>
 					<ul className="tabs">
-					{values.map((cond,index)=>(
-						<li
-							className={"tab"+(index===currentIndex?' active':'')}
-							onClick={()=>{setAttributes({currentIndex:index})}}
-						>{cond}</li>
-					))}
+						<li className="tab icon">
+							<Icon icon="networking"/>
+						</li>
+						{values.map((cond,index)=>(
+							<li
+								className={"tab"+(index===currentIndex?' active':'')}
+								onClick={()=>{setAttributes({currentIndex:index})}}
+							>{cond}</li>
+						))}
 					</ul>
 					<div className="contents">
 						<InnerBlocks
@@ -107,7 +119,7 @@ registerBlockType('catpow/switchercontent',{
 	category:'catpow',
     parent:['catpow/switcher'],
 	attributes:{
-		cond:{type:'attribute',label:'条件',selector:'switcherContent',attribute:'cond',default:'content'},
+		cond:{source:'attribute',label:'条件',selector:'switcherContent',attribute:'cond',default:'content'},
 	},
 	edit({attributes,className,setAttributes,clientId}){
 		const {cond}=attributes;

@@ -1,22 +1,43 @@
 registerBlockType('catpow/switcher', {
 	title: '🐾 Switcher',
 	description: '日時やログインユーザーによってコンテンツの内容が切り替わるコンテナです。',
-	icon: 'editor-code',
+	icon: 'networking',
 	category: 'catpow-functional',
 	example: CP.example,
-	edit: function edit(_ref) {
-		var attributes = _ref.attributes,
-		    className = _ref.className,
-		    setAttributes = _ref.setAttributes,
-		    isSelected = _ref.isSelected,
-		    clientId = _ref.clientId;
+	edit: function edit(props) {
+		var attributes = props.attributes,
+		    className = props.className,
+		    setAttributes = props.setAttributes,
+		    isSelected = props.isSelected,
+		    clientId = props.clientId;
 		var _wp$element = wp.element,
+		    useState = _wp$element.useState,
 		    useEffect = _wp$element.useEffect,
-		    useRef = _wp$element.useRef;
+		    useRef = _wp$element.useRef,
+		    useCallback = _wp$element.useCallback;
 		var _attributes$currentIn = attributes.currentIndex,
 		    currentIndex = _attributes$currentIn === undefined ? 0 : _attributes$currentIn;
 
-		var blocksToReplace = useRef([]);
+		var _useState = useState(false),
+		    _useState2 = babelHelpers.slicedToArray(_useState, 2),
+		    newBlocks = _useState2[0],
+		    setNewBlocks = _useState2[1];
+
+		var delayUpdateBlocks = useCallback(function (values) {
+			var editor = wp.data.dispatch('core/block-editor');
+			var blocks = wp.data.select('core/block-editor').getBlock(clientId).innerBlocks;
+			values = values.split("\n");
+			var newBlocks = values.map(function (cond, index) {
+				if (undefined === blocks[index]) {
+					return wp.blocks.createBlock('catpow/switchercontent', { cond: cond });
+				}
+				editor.updateBlockAttributes(blocks[index].clientId, { cond: cond });
+				return blocks[index];
+			});
+			if (blocks.length !== newBlocks.length) {
+				setNewBlocks(newBlocks);
+			}
+		}, [props]);
 		var selectiveClasses = [{
 			label: 'ファクター',
 			input: 'select',
@@ -45,27 +66,18 @@ registerBlockType('catpow/switcher', {
 			input: 'textarea',
 			key: 'values',
 			cond: ['schedule', 'current_user_can', 'user_value', 'input_value', 'content_value'].indexOf(attributes.factor) > -1,
-			effect: function effect(values) {
-				var editor = wp.data.dispatch('core/block-editor');
-				var blocks = wp.data.select('core/block-editor').getBlock(clientId).innerBlocks;
-				values = values.split("\n");
-				var newBlocks = values.map(function (cond, index) {
-					if (undefined === blocks[index]) {
-						return wp.blocks.createBlock('catpow/switchercontent', { cond: cond });
-					}
-					editor.updateBlockAttributes(blocks[index].clientId, { cond: cond });
-					return blocks[index];
-				});
-				if (blocks.length !== values.lenght) {
-					blocksToReplace.current = newBlocks;
-				}
-			}
+			effect: delayUpdateBlocks
 		}];
 		var values = attributes.values.split("\n");
 		useEffect(function () {
-			if (blocksToReplace.current.length > 0) {
-				wp.data.dispatch('core/block-editor').replaceInnerBlocks(clientId, blocksToReplace.current);
-				blocksToReplace.current = [];
+			if (newBlocks) {
+				var editor = wp.data.dispatch('core/block-editor');
+				editor.replaceInnerBlocks(clientId, newBlocks);
+				var blocks = wp.data.select('core/block-editor').getBlock(clientId).innerBlocks;
+				values.map(function (cond, index) {
+					editor.updateBlockAttributes(blocks[index].clientId, { cond: cond });
+				});
+				setNewBlocks(false);
 			}
 		}, [currentIndex]);
 		return wp.element.createElement(
@@ -77,6 +89,11 @@ registerBlockType('catpow/switcher', {
 				wp.element.createElement(
 					'ul',
 					{ className: 'tabs' },
+					wp.element.createElement(
+						'li',
+						{ className: 'tab icon' },
+						wp.element.createElement(Icon, { icon: 'networking' })
+					),
 					values.map(function (cond, index) {
 						return wp.element.createElement(
 							'li',
@@ -117,10 +134,10 @@ registerBlockType('catpow/switcher', {
 			)
 		);
 	},
-	save: function save(_ref2) {
-		var attributes = _ref2.attributes,
-		    className = _ref2.className,
-		    setAttributes = _ref2.setAttributes;
+	save: function save(_ref) {
+		var attributes = _ref.attributes,
+		    className = _ref.className,
+		    setAttributes = _ref.setAttributes;
 
 		return wp.element.createElement(InnerBlocks.Content, null);
 	}
@@ -132,13 +149,13 @@ registerBlockType('catpow/switchercontent', {
 	category: 'catpow',
 	parent: ['catpow/switcher'],
 	attributes: {
-		cond: { type: 'attribute', label: '条件', selector: 'switcherContent', attribute: 'cond', default: 'content' }
+		cond: { source: 'attribute', label: '条件', selector: 'switcherContent', attribute: 'cond', default: 'content' }
 	},
-	edit: function edit(_ref3) {
-		var attributes = _ref3.attributes,
-		    className = _ref3.className,
-		    setAttributes = _ref3.setAttributes,
-		    clientId = _ref3.clientId;
+	edit: function edit(_ref2) {
+		var attributes = _ref2.attributes,
+		    className = _ref2.className,
+		    setAttributes = _ref2.setAttributes,
+		    clientId = _ref2.clientId;
 		var cond = attributes.cond;
 
 
@@ -148,10 +165,10 @@ registerBlockType('catpow/switchercontent', {
 			wp.element.createElement(InnerBlocks, { template: [['core/paragraph']], templateLock: false })
 		);
 	},
-	save: function save(_ref4) {
-		var attributes = _ref4.attributes,
-		    className = _ref4.className,
-		    setAttributes = _ref4.setAttributes;
+	save: function save(_ref3) {
+		var attributes = _ref3.attributes,
+		    className = _ref3.className,
+		    setAttributes = _ref3.setAttributes;
 		var cond = attributes.cond;
 
 		return wp.element.createElement(

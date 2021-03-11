@@ -1,48 +1,51 @@
 @charset "utf-8";
 .switcherEdit {
   position: relative;
-  padding-top: 3rem; }
+  padding-top: 2em; }
   .switcherEdit > .tabs {
     position: absolute;
     top: 0px;
-    left: 0px;
     right: 0px;
     margin: 0px;
     padding: 0px;
+    z-index: 10;
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
     -webkit-box-lines: single;
     -webkit-flex-wrap: nowrap;
-    flex-wrap: nowrap; }
+    flex-wrap: nowrap;
+    background-color: #fefefe;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
     .switcherEdit > .tabs > .tab {
-      -webkit-box-flex: 1;
-      flex-grow: 1;
-      flex-shrink: 1;
+      -webkit-box-flex: 0;
+      flex-grow: 0;
+      flex-shrink: 0;
       flex-basis: auto;
-      padding: 1rem;
+      padding: 0.5rem 1rem;
       margin: 0px;
-      border-style: solid;
-      border-width: 1px;
-      border-color: #444;
-      border-radius: 1rem 1rem 0px 0px;
-      background-color: #ececec;
       text-align: center;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       line-height: 1em;
       font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
       list-style: none;
       cursor: pointer; }
+      .switcherEdit > .tabs > .tab.icon {
+        padding: 0.25rem 0.5rem; }
+        .switcherEdit > .tabs > .tab.icon .dashicon {
+          width: 1.5rem;
+          height: 1.5rem;
+          font-size: 1.5rem; }
+      .switcherEdit > .tabs > .tab + .tab {
+        border-left-style: solid;
+        border-left-width: 1px;
+        border-left-color: rgba(0, 0, 0, 0.3); }
       .switcherEdit > .tabs > .tab.active {
-        background-color: #fefefe;
-        border-bottom-style: none; }
+        background-color: #007cba;
+        color: #fff; }
   .switcherEdit > .contents {
     margin: 0px;
-    padding: 5rem 0px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #444;
-    border-top-style: none; }
+    padding: 0px; }
   .switcherEdit [data-type="catpow/switchercontent"] {
     display: none; }
     .switcherEdit[data-current-index="0"] [data-type="catpow/switchercontent"]:nth-of-type(1) {
