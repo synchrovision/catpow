@@ -512,12 +512,16 @@ class CP{
 		list(,$post_type,$page_path)=$matches;
 		return get_page_by_path($page_path,OBJECT,$post_type);
 	}
-	public static function get_post_data($path){
+	public static function get_post_data($path,$names=null){
 		if(!preg_match('/^([^\/]+)\/(.+)$/',rtrim($path,'/'),$matches)){return false;}
 		list(,$post_type,$page_path)=$matches;
-		if($post_data=get_page_by_path($page_path,ARRAY_A,$post_type)){
-			$post_data['meta']=get_post_custom($post_data['ID']);
-			return $post_data;
+		$names=(array)$names;
+		$names[]=false;
+		foreach($names as $name){
+			if($post_data=get_page_by_path($page_path.($name?'-'.$name:''),ARRAY_A,$post_type)){
+				$post_data['meta']=get_post_custom($post_data['ID']);
+				return $post_data;
+			}
 		}
 		return self::get_default_post_data($path);
 	}
