@@ -6,24 +6,9 @@
 	example:CP.example,
 	edit(props){
 		const {attributes,className,setAttributes,isSelected,clientId}=props;
-		const {useState,useEffect,useRef,useCallback}=wp.element;
+		const {useState,useEffect,useMemo,useCallback}=wp.element;
 		const {currentIndex=0}=attributes;
 		const [newBlocks,setNewBlocks]=useState(false);
-		const delayUpdateBlocks=useCallback((values)=>{
-			const editor=wp.data.dispatch('core/block-editor');
-			const blocks=wp.data.select('core/block-editor').getBlock(clientId).innerBlocks;
-			values=values.split("\n");
-			const newBlocks=values.map((cond,index)=>{
-				if(undefined === blocks[index]){
-					return wp.blocks.createBlock('catpow/switchercontent',{cond});
-				}
-				editor.updateBlockAttributes(blocks[index].clientId,{cond});
-				return blocks[index];
-			});
-			if(blocks.length!==newBlocks.length){
-				setNewBlocks(newBlocks);
-			}
-		},[props]);
 		const selectiveClasses=[
 			{
 				label:'ファクター',
@@ -55,11 +40,24 @@
 				label:'値',
 				input:'textarea',
 				key:'values',
-				cond:['schedule','current_user_can','user_value','input_value','content_value'].indexOf(attributes.factor) >-1,
-				effect:delayUpdateBlocks
+				cond:['schedule','current_user_can','user_value','input_value','content_value'].indexOf(attributes.factor) >-1
 			}
 		];
-		const values=attributes.values.split("\n");
+		const values=useMemo(()=>attributes.values.split("\n"),[attributes.values]);
+		useEffect(()=>{
+			const editor=wp.data.dispatch('core/block-editor');
+			const blocks=wp.data.select('core/block-editor').getBlock(clientId).innerBlocks;
+			const newBlocks=values.map((cond,index)=>{
+				if(undefined === blocks[index]){
+					return wp.blocks.createBlock('catpow/switchercontent',{cond});
+				}
+				editor.updateBlockAttributes(blocks[index].clientId,{cond});
+				return blocks[index];
+			});
+			if(blocks.length!==newBlocks.length){
+				setNewBlocks(newBlocks);
+			}
+		},[values]);
 		useEffect(()=>{
 			if(newBlocks){
 				const editor=wp.data.dispatch('core/block-editor');
@@ -71,6 +69,13 @@
 				setNewBlocks(false);
 			}
 		},[currentIndex]);
+		useEffect(()=>{
+			switch(attributes.factor){
+				case 'schedule':setAttributes({values:"0:00~6:00\n6:00~12:00\n12:00~18:00\n18:00~24:00"});break;
+				case 'is_user_logged_in':setAttributes({values:"out\nin"});break;
+				case 'current_user_can':setAttributes({values:"administrator\neditor\nauthor\ncontributor\nsubscriber"});break;
+			}
+		},[attributes.factor]);
         return (
 			<Fragment>
 				<div className="switcherEdit" data-current-index={currentIndex}>

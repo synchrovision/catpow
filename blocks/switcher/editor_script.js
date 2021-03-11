@@ -13,7 +13,7 @@ registerBlockType('catpow/switcher', {
 		var _wp$element = wp.element,
 		    useState = _wp$element.useState,
 		    useEffect = _wp$element.useEffect,
-		    useRef = _wp$element.useRef,
+		    useMemo = _wp$element.useMemo,
 		    useCallback = _wp$element.useCallback;
 		var _attributes$currentIn = attributes.currentIndex,
 		    currentIndex = _attributes$currentIn === undefined ? 0 : _attributes$currentIn;
@@ -23,21 +23,6 @@ registerBlockType('catpow/switcher', {
 		    newBlocks = _useState2[0],
 		    setNewBlocks = _useState2[1];
 
-		var delayUpdateBlocks = useCallback(function (values) {
-			var editor = wp.data.dispatch('core/block-editor');
-			var blocks = wp.data.select('core/block-editor').getBlock(clientId).innerBlocks;
-			values = values.split("\n");
-			var newBlocks = values.map(function (cond, index) {
-				if (undefined === blocks[index]) {
-					return wp.blocks.createBlock('catpow/switchercontent', { cond: cond });
-				}
-				editor.updateBlockAttributes(blocks[index].clientId, { cond: cond });
-				return blocks[index];
-			});
-			if (blocks.length !== newBlocks.length) {
-				setNewBlocks(newBlocks);
-			}
-		}, [props]);
 		var selectiveClasses = [{
 			label: 'ファクター',
 			input: 'select',
@@ -65,10 +50,25 @@ registerBlockType('catpow/switcher', {
 			label: '値',
 			input: 'textarea',
 			key: 'values',
-			cond: ['schedule', 'current_user_can', 'user_value', 'input_value', 'content_value'].indexOf(attributes.factor) > -1,
-			effect: delayUpdateBlocks
+			cond: ['schedule', 'current_user_can', 'user_value', 'input_value', 'content_value'].indexOf(attributes.factor) > -1
 		}];
-		var values = attributes.values.split("\n");
+		var values = useMemo(function () {
+			return attributes.values.split("\n");
+		}, [attributes.values]);
+		useEffect(function () {
+			var editor = wp.data.dispatch('core/block-editor');
+			var blocks = wp.data.select('core/block-editor').getBlock(clientId).innerBlocks;
+			var newBlocks = values.map(function (cond, index) {
+				if (undefined === blocks[index]) {
+					return wp.blocks.createBlock('catpow/switchercontent', { cond: cond });
+				}
+				editor.updateBlockAttributes(blocks[index].clientId, { cond: cond });
+				return blocks[index];
+			});
+			if (blocks.length !== newBlocks.length) {
+				setNewBlocks(newBlocks);
+			}
+		}, [values]);
 		useEffect(function () {
 			if (newBlocks) {
 				var editor = wp.data.dispatch('core/block-editor');
@@ -80,6 +80,16 @@ registerBlockType('catpow/switcher', {
 				setNewBlocks(false);
 			}
 		}, [currentIndex]);
+		useEffect(function () {
+			switch (attributes.factor) {
+				case 'schedule':
+					setAttributes({ values: "0:00~6:00\n6:00~12:00\n12:00~18:00\n18:00~24:00" });break;
+				case 'is_user_logged_in':
+					setAttributes({ values: "out\nin" });break;
+				case 'current_user_can':
+					setAttributes({ values: "administrator\neditor\nauthor\ncontributor\nsubscriber" });break;
+			}
+		}, [attributes.factor]);
 		return wp.element.createElement(
 			Fragment,
 			null,

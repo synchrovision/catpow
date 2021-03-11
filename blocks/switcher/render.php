@@ -17,7 +17,7 @@ switch($attr['factor']){
 		break;
 	case 'is_user_logged_in':
 		$cond_cb=function($value){
-			return is_user_logged_in() === ($value == 1);
+			return is_user_logged_in() === in_array($value,[1,'in','true']);
 		};
 		break;
 	case 'current_user_can':
