@@ -77,18 +77,18 @@
 			@include bdr((s:s,w:1,c:t 20));
 			@include txt((a:c));
 		}
-		td.active{
+		.day{
+			&.active{
 			@include bg((c:m 1 .2));
 		}
-		td.outMonth{
-			@include txt((c:t 10));
-		}
-		.day.inMonth{
 			&.sunday{
 				@include txt((c:1));
 			}
 			&.saturday{
 				@include txt((c:8));
+			}
+			&.outMonth,&.disabled{
+				@include txt((c:t 10));
 			}
 		}
 	}

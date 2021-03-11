@@ -77,14 +77,14 @@
     border-width: 1px;
     border-color: #dadada;
     text-align: center; }
-  .Calendar > table td.active {
-    background-color: rgba(0, 124, 186, 0.2); }
-  .Calendar > table td.outMonth {
-    color: #ececec; }
-    .Calendar > table .day.inMonth.sunday {
+    .Calendar > table .day.active {
+      background-color: rgba(0, 124, 186, 0.2); }
+    .Calendar > table .day.sunday {
       color: #d65c5c; }
-    .Calendar > table .day.inMonth.saturday {
+    .Calendar > table .day.saturday {
       color: #5c99d6; }
+    .Calendar > table .day.outMonth, .Calendar > table .day.disabled {
+      color: #ececec; }
   .Calendar.small {
     font-size: 1rem; }
   .Calendar.medium {
@@ -100,4 +100,4 @@
       vertical-align: top; }
       .Calendar.large .day .date {
         display: block; }
-/*# sourceMappingURL=http://localhost:8888/catpow/fns/wp-content/plugins/catpow/default/components/Calendar/style.css.map */
+/*# sourceMappingURL=./style.css.map */
