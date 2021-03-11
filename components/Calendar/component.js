@@ -51,6 +51,11 @@ Catpow.Calendar = function (props) {
 					year: action.year,
 					month: action.month
 				};
+			case 'reset':
+				return {
+					year: props.year,
+					month: props.month
+				};
 			case 'prevYear':
 				return {
 					year: state.year - 1,
@@ -134,7 +139,9 @@ Catpow.Calendar = function (props) {
 			null,
 			wp.element.createElement(
 				'caption',
-				null,
+				{ onDoubleClick: function onDoubleClick() {
+						return dispatch({ type: 'reset' });
+					} },
 				showYear && wp.element.createElement(
 					'div',
 					{ className: 'year' },

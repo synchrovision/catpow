@@ -23,6 +23,11 @@
 					year:action.year,
 					month:action.month
 				};
+			case 'reset':
+				return {
+					year:props.year,
+					month:props.month
+				};
 			case 'prevYear':
 				return {
 					year:state.year-1,
@@ -98,7 +103,7 @@
 	return (
 		<div className={'Calendar '+className}>
 			<table>
-				<caption>
+				<caption onDoubleClick={()=>dispatch({type:'reset'})}>
 					{showYear && (
 						<div className="year">
 							{showControl && (
