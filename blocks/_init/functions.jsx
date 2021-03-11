@@ -2075,6 +2075,27 @@
 
 	DummyImage:({text})=>{
 		return <img src={cp.plugins_url+'/catpow/callee/dummy_image.php?text='+text}/>
+	},
+	
+	DataStructure:(props)=>{
+		return (
+			<ul className="dataStructure">{props.children}</ul>
+		);
+	},
+	DataStructureItem:(props)=>{
+		const {useState}=wp.element;
+		const [open,setOpen]=useState(false);
+		return (
+			<li className={"item "+(props.children?'hasChildren '+(open?'open':'close'):'noChildren')}>
+				<h5 className="title" onClick={()=>setOpen(!open)}>
+					{props.title}
+					{undefined!==props.name && (<span className="name">{props.name}</span>)}
+				</h5>
+				{!!open && !!props.children &&(
+					<div className="children">{props.children}</div>
+				)}
+			</li>
+		);
 	}
 };
 

@@ -2743,6 +2743,44 @@ var CP = {
 		var text = _ref22.text;
 
 		return wp.element.createElement('img', { src: cp.plugins_url + '/catpow/callee/dummy_image.php?text=' + text });
+	},
+
+	DataStructure: function DataStructure(props) {
+		return wp.element.createElement(
+			'ul',
+			{ className: 'dataStructure' },
+			props.children
+		);
+	},
+	DataStructureItem: function DataStructureItem(props) {
+		var useState = wp.element.useState;
+
+		var _useState3 = useState(false),
+		    _useState4 = babelHelpers.slicedToArray(_useState3, 2),
+		    open = _useState4[0],
+		    setOpen = _useState4[1];
+
+		return wp.element.createElement(
+			'li',
+			{ className: "item " + (props.children ? 'hasChildren ' + (open ? 'open' : 'close') : 'noChildren') },
+			wp.element.createElement(
+				'h5',
+				{ className: 'title', onClick: function onClick() {
+						return setOpen(!open);
+					} },
+				props.title,
+				undefined !== props.name && wp.element.createElement(
+					'span',
+					{ className: 'name' },
+					props.name
+				)
+			),
+			!!open && !!props.children && wp.element.createElement(
+				'div',
+				{ className: 'children' },
+				props.children
+			)
+		);
 	}
 };
 

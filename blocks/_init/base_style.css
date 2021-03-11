@@ -402,20 +402,33 @@ table.editItemsTable {
     table.editItemsTable tbody td .SelectPictureSources {
       width: 10rem; }
 
-.dataStructure__item {
+.dataStructure .item {
   padding: 0px;
   margin: 0px; }
-  .dataStructure__item__title {
-    padding: 0px;
-    margin: 0px; }
-    .dataStructure__item__title__name {
+  .dataStructure .item .title {
+    padding: 0.25em 0px;
+    padding-left: 1.5em;
+    position: relative;
+    margin: 0px;
+    font-size: 1.4rem;
+    font-weight: 400;
+    cursor: pointer; }
+    .dataStructure .item .title .name {
       display: inline-block;
       margin-left: 1em;
       color: #a2a2a2; }
-  .dataStructure__item__sub {
-    margin-left: 4px;
-    padding-left: 4px;
-    border-left-style: solid;
-    border-left-width: 2px;
-    border-left-color: #ececec; }
+  .dataStructure .item.hasChildren > .title::before {
+    content: '▶︎';
+    display: block;
+    position: absolute;
+    top: 0.2em;
+    bottom: 0px;
+    left: 0px;
+    margin: auto;
+    color: #a2a2a2; }
+.dataStructure .item.hasChildren.open > .title::before {
+  transform: -webkit- rotateZ(90deg);
+  transform: rotateZ(90deg); }
+.dataStructure .item .children {
+  padding-left: 0.5em; }
 /*# sourceMappingURL=./base_style.css.map */

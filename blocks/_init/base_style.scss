@@ -224,18 +224,35 @@ table.editItemsTable{
 	}
 }
 .dataStructure{
-	&__item{
+	.item{
 		@include bnd((pd:0,mg:0));
-		&__title{
-			@include bnd((pd:0,mg:0));
-			&__name{
+		.title{
+			@include bnd((pd:.25em 0,pdl:1.5em,p:r,mg:0));
+			@include txt((p:1.4rem,w:r));
+			@include usr((c:p));
+			.name{
 				@include bnd((d:ib,mgl:1em));
 				@include txt((c:t 50));
 			}
 		}
-		&__sub{
-			@include bnd((mgl:4,pdl:4));
-			@include bdr((p:l,s:s,w:2,c:t 10));
+		&.hasChildren{
+			&>.title{
+				&::before{
+					content:'▶︎';
+					@include bnd((d:b,p:a,t:.2em,b:0,l:0,mg:a));
+					@include txt((c:t 50));
+				}
+			}
+			&.open{
+				&>.title{
+					&::before{
+						@include trn((r:90deg));
+					}
+				}
+			}
+		}
+		.children{
+			@include bnd((pdl:.5em));
 		}
 	}
 }
