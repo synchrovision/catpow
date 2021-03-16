@@ -40,7 +40,7 @@ class select extends meta{
 			\cp::get_tabindex(),
 			\cp::get_input_attr($path,$conf)
 		);
-		$rtn.=sprintf('<option>%s</option>',$conf['defaultLabel']??'---');
+		$rtn.=sprintf('<option value="0">%s</option>',$conf['defaultLabel']??'---');
 		foreach($sels as $i=>$s){
 			if(is_array($s)){
 				$rtn.=sprintf('<optgroup label="%s">',$i);
