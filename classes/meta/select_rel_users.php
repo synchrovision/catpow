@@ -62,7 +62,7 @@ class select_rel_users extends meta{
 		return select::get_input($meta->the_data_path,$meta->conf,$sels,$meta->value);
 	}
 	public static function get_selections($meta){
-		$q=is_callable($meta->conf['value'])?$meta->conf['value']():$meta->conf['value'];
+		$q=empty($meta->conf['value'])?false:(is_callable($meta->conf['value'])?$meta->conf['value']():$meta->conf['value']);
 		$rtn=array();
 		if(empty($q)){$q=new \WP_User_Query(['exclude'=>0]);}
 		elseif(is_string($q)){$q=new \WP_User_Query(array('role'=>$q));}
