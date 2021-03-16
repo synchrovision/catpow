@@ -42,10 +42,10 @@ if(cp::$content){
 	}
 	else{$loop=\cp::$content;}
 
-	if(empty($loop->query)){return;}
+	if(is_null($loop->query)){return;}
 
 	if(empty($data['file'])){
-		if($loop->query->is_empty()){
+		if($loop->is_empty()){
 			echo $data['on_empty']??'';
 		}
 		else{
