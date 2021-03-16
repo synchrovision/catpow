@@ -293,6 +293,12 @@ class content{
 		return null;
 	}
 	
+	public function is_empty(){
+		if(is_a($this,loop::class)){return $this->query->is_empty();}
+		if(is_a($this,meta::class)){return empty(array_filter($this->data)) && empty(\cp::get_the_meta_value($this->data_path,$this->tmp_name));}
+		if(is_a($this,form::class)){return empty($this->form->inputs->get($this->data_path));}
+	}
+	
 	/*magic method*/
 	public function __get($name){
 		if(isset($this->path_data[$name])){return $this->path_data[$name];}
