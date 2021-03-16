@@ -94,7 +94,7 @@ trait formTrait{
 	public function fill_buttons($content){
 		return preg_replace_callback(
 			'/(?:data\-action="(?P<action>[\w_\-]+)")(?:'.
-				'(?: data\-callback="(?P<callback>[\w_\-]+)")|'.
+				'(?: data\-callback="(?P<callback>[\w_\-,]+)")|'.
 				'(?: data\-param="(?P<param>[\w_\-]+)")|'.
 				'(?: data\-target="(?P<target>[\w_\-]+)")|'.
 				'(?: ignore\-message="(?P<ignoreMessage>1)")'.
