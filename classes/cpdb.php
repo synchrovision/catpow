@@ -436,7 +436,7 @@ class cpdb{
 			foreach($this->select($table_name,$where) as $id=>$row){
 				foreach($child_tables as $child_table_name){
 					if($this->structure[$child_table_name]['has_parent']){
-						$this->delete($$child_table_name,$row['meta_id']);
+						$this->delete($child_table_name,$row['meta_id']);
 					}
 				}
 			}
