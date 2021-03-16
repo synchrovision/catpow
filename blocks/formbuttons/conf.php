@@ -9,6 +9,7 @@ $attributes=[
 			'classes'=>['source'=>'attribute','attribute'=>'class'],
 			'event'=>['source'=>'attribute','selector'=>'.button','attribute'=>'data-event'],
 			'action'=>['source'=>'attribute','selector'=>'.button','attribute'=>'data-action'],
+			'callback'=>['source'=>'attribute','selector'=>'.button','attribute'=>'data-callback'],
 			'target'=>['source'=>'attribute','selector'=>'.button','attribute'=>'data-target'],
 			'ignoreMessage'=>['source'=>'attribute','selector'=>'.button','attribute'=>'ignore-message'],
 			'text'=>['source'=>'text','selector'=>'.button'],

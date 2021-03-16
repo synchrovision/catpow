@@ -113,6 +113,7 @@
 					<div
 						className="button"
 						data-action={item.action}
+						data-callback={item.callback}
 						data-target={item.target}
 						ignore-message={item.ignoreMessage}
 						data-event={item.event}
