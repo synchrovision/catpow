@@ -153,9 +153,9 @@ class calendar{
 			if($month!=$crr_month){
 				$crr_month=$month;
 				$is_new_month=true;
-				$rtn.=sprintf('<span class="month_sep"></span><span class="month">%s</span><span class="month_unit">月</span>'.chr(10),$month);
+				$rtn.=sprintf('<span class="month_sep"></span><span class="month">%s</span><span class="month_unit">月</span>',$month);
 			}
-			if(!$is_new_month)$rtn.='<span class="date_sep">、</span>'.chr(10);
+			if(!$is_new_month)$rtn.='<span class="date_sep">、</span>';
 			$rtn.=sprintf('<span class="date">%s</span><span class="date_unit">日</span><span class="week">（%s）</span>',$date,$week_arr[$week]);
 		}
 		return $rtn;
