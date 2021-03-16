@@ -13,18 +13,22 @@ jQuery(function($){
 
 function reset_multiple_input_attr($input_item){
 	$input_item.children('[data-role="cp-meta-unit"]').each(function(i){
-		var path=this.id.split('--');
-		var n=path.pop();
-		if(n==i){return;}
+		if(document.getElementById(this.id)===this)return;
+		var orgID=this.id;
+		var path=orgID.split('--');
+		var n=parseInt(path.pop());
+		var m=n+1;
 		var baseID=path.join('--');
-		var orgID=baseID+'--'+n;
-		var newID=baseID+'--'+i;
+		var newID=baseID+'--'+m;
+		while(document.getElementById(newID)){m++;newID=baseID+'--'+m;}
 		var baseName=path[0]+'['+path.slice(1).join('][')+']';
 		var orgName=baseName+'['+n+']';
-		var newName=baseName+'['+i+']';
+		var newName=baseName+'['+m+']';
 		this.id=newID;
-		jQuery(this).find(':input').each(function(){
-			this.name=this.name.replace(orgName,newName);
+		jQuery(this).find(':input,[id^="'+orgID+'"]').each(function(){
+			if(this.name){
+				this.name=this.name.replace(orgName,newName);
+			}
 			if(this.id){
 				this.id=this.id.replace(orgID,newID);
 				var $label=jQuery(this).closest('label');
