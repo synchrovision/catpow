@@ -66,7 +66,7 @@ registerBlockType('catpow/sphere', {
 		var imageKeys = CP.config.sphere.imageKeys;
 
 
-		var selectiveClasses = [{ label: 'サイズ', filter: 'size', values: ['small', 'medium', 'large'] }, { label: '画像', values: 'hasSubImage' }, { label: 'タイトル', values: 'hasSubTitle' }, { label: 'テキスト', values: 'hasText' }];
+		var selectiveClasses = [{ type: 'buttons', label: 'サイズ', filter: 'size', values: ['small', 'medium', 'large'] }, { label: '画像', values: 'hasSubImage' }, { label: 'タイトル', values: 'hasSubTitle' }, { label: 'テキスト', values: 'hasText' }];
 
 		var rtn = [];
 		var save = function save() {
