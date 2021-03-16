@@ -17,12 +17,16 @@ class database extends data{
 	}
 	public static function set($data_type,$data_name,$id,$meta_name,$vals,$conf){
 		global $cpdb;
+		$org_vals=static::get($data_type,$data_name,$id,$meta_name,$conf);
+		foreach($org_vals as $meta_id=>$org_val){
+			if(isset($vals[$meta_id])){$vals[$meta_id]['meta_id']=$meta_id;}
+		}
 		if($data_type=='cpdb'){
 			if(!static::$has_parent){foreach($vals as &$val){$val['parent_id']=$id;}}
 			return $cpdb->update($cpdb->structure[\cpdb::get_table_name($data_name)]['children'][$meta_name],$vals);
 		}
 		if(static::$has_parent){foreach($vals as &$val){$val['root_object_id']=$val['parent_id']=$id;}}
-		return $cpdb->update([$data_type,$data_name,$meta_name],$vals,true);
+		return $cpdb->update([$data_type,$data_name,$meta_name],$vals,true,true);
 	}
 	public static function add($data_type,$data_name,$id,$meta_name,$vals,$conf){
 		global $cpdb;
