@@ -14,7 +14,7 @@ class button extends \Catpow\template_item\php{
 			$label=array_shift($prm);
 			if(empty($prm)){$prm='';}
 			else{$prm=",'".implode("','",$prm)."'";}
-			$btns[]=['li.'.$btn_class,sprintf("<?php button(_('%s')%s);?>",$label,$prm)];
+			$btns[]=['li.item.'.$btn_class,sprintf("<?php button(_('%s')%s);?>",$label,$prm)];
 		}
 		return $btns;
 	}

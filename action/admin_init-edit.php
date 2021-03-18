@@ -70,7 +70,7 @@ add_action('admin_notices',function($wp_admin_bar)use($post_type){
 				<div class="inside">
 					<?= $content ?>
 					<ul class="buttons center">
-						<li><button class="button"><?=__('検索','catpow')?></button></li>
+						<li class="item"><div class="button"><?=__('検索','catpow')?></div></li>
 					</ul>
 				</div>
 			</div>
