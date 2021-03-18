@@ -1025,7 +1025,8 @@ window.Catpow.UI=window.Catpow.UI || {};
 		cp_cling:function($to){
 			if(!('cp_cling' in $.catpow)){
 				$.catpow.cp_cling={
-					timer:setInterval(function(){
+					timer:setInterval(function(){$.catpow.cp_cling.tick();},30),
+					tick:function(){
 						$.catpow.cp_cling.target.forEach(function(e,i){
 							if(e.cling_to.is(':visible')){
 								if(e.is(':hidden')){e.show();}
@@ -1052,7 +1053,7 @@ window.Catpow.UI=window.Catpow.UI || {};
 							}
 							if(!e.is('body *')){delete ($.catpow.cp_cling.target[i]);}
 						});
-					},30),
+					},
 					target:[]
 				};
 			}
