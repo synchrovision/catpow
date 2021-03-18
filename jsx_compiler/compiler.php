@@ -13,7 +13,7 @@ function get_jsx_files(){
 	$jsx_files=[];
     $wp_content_dir=dirname(__DIR__,3).'/';
 	
-	foreach(glob($wp_content_dir.'{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{blocks,ui,components,*/*}/*/*.jsx',GLOB_BRACE) as $jsx_file){
+	foreach(glob($wp_content_dir.'{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{blocks,ui,components,store,*/*}/*/*.jsx',GLOB_BRACE) as $jsx_file){
 		$jsx_files[]=$jsx_file;
 	}
 	return $jsx_files;

@@ -31,7 +31,7 @@ class primary extends template_type{
 						'<?php wp_head(); ?>',
 				 	],
 				 	['body/[<?php body_class(\'base\') ?>]',
-					 	'<?php do_action(\'body_start\'); ?>',
+					 	'<?php wp_body_open(); ?>',
 					 	['header.site_header',
 						 	[
 								'div.contents',
