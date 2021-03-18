@@ -14,7 +14,8 @@ abstract class query{
 		$united=false,
 		$is_meta=false,
 		$search_keys=[],
-		$key_translation=[];
+		$key_translation=[],
+		$data_keys=[];
 	public $q,$query,$objects,$base_path;
 	
 	public function __construct($q){
