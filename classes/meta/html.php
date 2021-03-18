@@ -3,6 +3,7 @@ namespace Catpow\meta;
 
 class html extends meta{
 	public static
+		$can_search=false,
 		$validation=['html'];
 	
 	public static function input($meta,$prm){
