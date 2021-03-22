@@ -400,6 +400,7 @@ function init($data){
 
 /*loop*/
 function loop($name=null,$prm=null,$vars=null){
+	if(empty(\cp::$content)){\cp::$content=new content\loop(['parent'=>false]);}
 	if(!empty($name)){
 		if(strpos($name,'/')===false){
 			return \cp::$content->meta($name,$prm)->loop();
