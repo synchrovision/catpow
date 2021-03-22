@@ -438,6 +438,12 @@ class CP{
 					$deps[]='components/'.$useComponent.'/component.js';
 				}
 			}
+			if(!empty($useStores)){
+				foreach($useStores as $useStore){
+					self::use_store($useStore);
+					$deps[]='stores/'.$useStore.'/store.js';
+				}
+			}
 		}
 		self::enqueue_script('ui/'.$name.'/input.js',$deps);
 		if($f=self::get_file_path('ui/'.$name.'/inputInit.php')){include $f;}
@@ -461,6 +467,12 @@ class CP{
 				foreach($useComponents as $useComponent){
 					self::use_component($useComponent);
 					$deps[]='components/'.$useComponent.'/component.js';
+				}
+			}
+			if(!empty($useStores)){
+				foreach($useStores as $useStore){
+					self::use_store($useStore);
+					$deps[]='stores/'.$useStore.'/store.js';
 				}
 			}
 		}
@@ -495,6 +507,12 @@ class CP{
 					$deps[]='components/'.$useComponent.'/component.js';
 				}
 			}
+			if(!empty($useStores)){
+				foreach($useStores as $useStore){
+					self::use_store($useStore);
+					$deps[]='stores/'.$useStore.'/store.js';
+				}
+			}
 		}
 		if(strpos($name,'/')>0){
 			$useComponent=dirname($name);
@@ -503,6 +521,22 @@ class CP{
 		}
 		self::enqueue_script('components/'.$name.'/component.js',$deps);
 		self::enqueue_style('components/'.$name.'/style.css');
+		$done[$name]=1;
+	}
+	public static function use_store($name){
+		static $done=[];
+		if(isset($done[$name])){return false;}
+		$deps=['wp-data','wp-api-fetch','babelHelpers'];
+		if($f=self::get_file_path('stores/'.$name.'/deps.php')){
+			include $f;
+			if(!empty($useScripts)){
+				foreach($useScripts as $useScript){
+					self::enqueue_script($useScript);
+					$deps[]=$useScript;
+				}
+			}
+		}
+		self::enqueue_script('stores/'.$name.'/store.js',$deps);
 		$done[$name]=1;
 	}
 	
