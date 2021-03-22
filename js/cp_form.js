@@ -1,4 +1,4 @@
-/* global cp*/
+/* global cp Catpow*/
 
 jQuery(function($){
 	$.catpow.forms=[];
@@ -417,16 +417,7 @@ function cp_form_submit($item,action,callback,param){
                 return true;
             },
             download:function($form,data){
-                var blob=new Blob([data.html],{type:data.type||'text/plain'});
-                var url = window.URL || window.webkitURL;
-                var blobURL = url.createObjectURL(blob);
-
-                var a = document.createElement('a');
-                a.download = data.name||'undefined.txt';
-                a.href = blobURL;
-                a.click();
-                a.remove();
-                return true;
+				return Catpow.util.download(data.html,data.name,data.type);
             },
 
             submit_again:function($item,data){

@@ -1258,6 +1258,19 @@ Catpow.util={
 		const reg=new RegExp(`(&amp;|&|\\?)${key}=[^&]+(&amp;|&)?`);
 		return url.replace(reg,(m,p1,p2)=>p2?p1:'');
 	},
+	/*file*/
+	download:function(data,name,type){
+		var blob=new Blob([data],{type:type||'text/plain'});
+		var url = window.URL || window.webkitURL;
+		var blobURL = url.createObjectURL(blob);
+
+		var a = document.createElement('a');
+		a.download = name||'undefined.txt';
+		a.href = blobURL;
+		a.click();
+		a.remove();
+		return true;
+	}
 };
 
 //浮動小数点問題対策のmath
