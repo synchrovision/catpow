@@ -218,6 +218,7 @@ class cpdb{
 				}
 			}
 			if(empty($sths[$sql])){$sths[$sql]=$this->prepare($sql);}
+			$vals=array_map(function($val){return ($val==='')?null:$val;},$vals);
 			$sths[$sql]->execute($vals);
 			return $sths[$sql];
 		}
