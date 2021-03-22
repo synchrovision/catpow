@@ -106,13 +106,14 @@ class cpdb extends query{
 				$meta_class=\cp::get_class_name('meta',$meta_conf['type']);
 				if(empty($meta_conf['multiple']) && !$meta_class::$is_bulk_input){$row[$meta_name]=reset($row[$meta_name]);}
 			}
-			$datas[]=array_merge(['table'=>$this->table],$row);
+			$datas[]=array_merge(['data_type'=>'cpdb','table'=>$this->table],$row);
 		}
 		return $datas;
 	}
 	public static function import($datas){
+		global $cpdb;
 		foreach($datas as $row){
-			$conf=$GLOBALS['cpdb_datas'][$row['table']];
+			$conf=$GLOBALS['cpdb_datas'][$cpdb->structure[$row['table']]['alias']];
 			foreach($conf['meta'] as $meta_name=>$meta_conf){
 				if(!isset($row[$meta_name])){continue;}
 				$meta_class=\cp::get_class_name('meta',$meta_conf['type']);
