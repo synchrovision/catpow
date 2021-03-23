@@ -2,6 +2,8 @@
 namespace Catpow\meta;
 
 class select_post_datas extends meta{
+	public static
+		$input_type='select';
 	
 	public static function output($meta,$prm){
 		$val=$meta->value;

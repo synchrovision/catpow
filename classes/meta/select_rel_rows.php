@@ -3,6 +3,7 @@ namespace Catpow\meta;
 
 class select_rel_rows extends meta{
 	public static
+		$input_type='select',
 		$value_type='NUMERIC',
 		$data_type='bigint(20)';
 	

@@ -9,6 +9,7 @@ namespace Catpow\meta;
 class data extends meta{
 	
 	public static
+		$input_type='group',
 		$can_search=false,
 		$has_children=true;
 	

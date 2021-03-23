@@ -158,6 +158,7 @@ abstract class meta{
 	public static function fill_conf(&$conf){
 		
 	}
+	public static function resolve_conf($conf){return $conf;}
 	
 	public static function default_value($conf){
 		if(empty($conf['default'])){return '';}

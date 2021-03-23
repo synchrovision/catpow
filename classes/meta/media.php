@@ -3,6 +3,7 @@ namespace Catpow\meta;
 
 class media extends meta{
 	public static
+		$input_type='file',
 		$value_type='NUMERIC',
 		$data_type='bigint(20)',
 		$can_search=false;

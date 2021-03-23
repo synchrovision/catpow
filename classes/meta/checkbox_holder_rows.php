@@ -3,6 +3,7 @@ namespace Catpow\meta;
 
 class checkbox_holder_rows extends select_holder_rows{
 	public static
+		$input_type='checkbox',
 		$is_bulk_input=true;
 	
 	public static function input($meta,$prm){

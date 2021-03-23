@@ -2,6 +2,8 @@
 namespace Catpow\meta;
 
 class select extends meta{
+	public static
+		$input_type='select';
 	
 	public static function output($meta,$prm){
 		$sels=static::get_selections($meta);

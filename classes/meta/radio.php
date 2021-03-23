@@ -2,6 +2,8 @@
 namespace Catpow\meta;
 
 class radio extends select{
+	public static
+		$input_type='radio';
 	public static function input($meta,$prm){
 		$sels=self::get_selections($meta);
 		return self::get_input($meta->the_data_path,$meta->conf,$sels,$meta->value);

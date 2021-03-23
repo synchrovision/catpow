@@ -36,7 +36,7 @@ class checksheet extends database{
 	}
 	public static function add($data_type,$data_name,$id,$meta_name,$vals,$conf){
 		global $cpdb;
-		$conf=get_checksheet_conf($data_type,$data_name,$id);
+		$conf=static::get_checksheet_conf($data_type,$data_name,$id);
 		$cpdb->insert([$data_type,$data_name,$meta_name],[
 			'root_object_id'=>$id,
 			'parent_id'=>$id,
@@ -45,12 +45,12 @@ class checksheet extends database{
 		],true);
 	}
 	public static function output($meta,$prm){
-		$conf=get_checksheet_conf($meta->data_type,$meta->data_name,$meta->data_id);
+		$conf=static::get_checksheet_conf($meta->data_type,$meta->data_name,$meta->data_id);
 		$meta_class=\cp::get_class_name('meta',$conf['checksheet_type']);
 		$meta_class::output($meta->mod($conf),$prm);
 	}
 	public static function input($meta,$prm){
-		$conf=get_checksheet_conf($meta->data_type,$meta->data_name,$meta->data_id);
+		$conf=static::get_checksheet_conf($meta->data_type,$meta->data_name,$meta->data_id);
 		$meta_class=\cp::get_class_name('meta',$conf['checksheet_type']);
 		$meta_class::input($meta->mod($conf),$prm);
 	}

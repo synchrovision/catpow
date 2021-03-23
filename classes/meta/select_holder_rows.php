@@ -7,6 +7,7 @@ namespace Catpow\meta;
 
 class select_holder_rows extends select_rel_rows{
 	public static
+		$input_type='select',
 		$value_type='NUMERIC',
 		$data_type='bigint(20)';
 	

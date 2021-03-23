@@ -2,6 +2,8 @@
 namespace Catpow\meta;
 
 class submit extends select{
+	public static
+		$input_type='submit';
 	
 	public static function input($meta,$prm){
 		$sels=self::get_selections($meta);

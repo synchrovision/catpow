@@ -3,6 +3,7 @@ namespace Catpow\meta;
 
 class checkbox_rel_posts extends select_rel_posts{
 	public static
+		$input_type='checkbox',
 		$is_bulk_input=true;
 	
 	public static function input($meta,$prm){

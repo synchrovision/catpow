@@ -2,6 +2,8 @@
 namespace Catpow\meta;
 
 class select_json extends meta{
+	public static
+		$input_type='select';
 	
 	public static function output($meta,$prm){
 		$sels=self::get_selections($meta);

@@ -3,6 +3,7 @@ namespace Catpow\meta;
 
 class checkbox_json extends select_json{
 	public static
+		$input_type='checkbox',
 		$is_bulk_input=true;
 	
 	public static function input($meta,$prm){
