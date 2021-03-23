@@ -3,7 +3,8 @@
 function _a($check,$message){
 	if(false===$check)throw new Exception($message);
 }
-function _d($val){
+function _d($val,$cap='administrator'){
+	if(!current_user_can($cap)){return;}
 	static $is_first=true;
 	if($is_first){
 		printf('<link rel="stylesheet" href="%s"/>',cp::get_file_url('debug.css'));
