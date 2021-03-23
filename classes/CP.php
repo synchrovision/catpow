@@ -1775,6 +1775,7 @@ class CP{
 			else{
 				return false;
 			}
+			if(empty($conf['type'])){$conf['type']='plain';}
 			if(is_array($conf['type'])){$conf['type']=reset($conf['type']);}
 			
 			if($conf['type']==='html'){

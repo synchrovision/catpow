@@ -35,7 +35,7 @@ add_action('cp_setup',function(){
 							});
 						});
 					});
-					document.querySelectorAll('.cp_form').forEach(function(node){o.observe(node);});
+					document.querySelectorAll('.cp_form').forEach(function(node){o.observe(node,{childList:true,subtree:true});});
 				});
 			</script>
 			<?php
