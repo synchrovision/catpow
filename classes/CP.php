@@ -881,6 +881,7 @@ class CP{
 		$conf['path']=$path;
 		$class_name=self::get_class_name('meta',$conf['type']);
 		$class_name::fill_conf($conf);
+		$conf['input_type']=$class_name::$input_type;
 		if(!isset($conf['label']))$conf['label']=$conf['name'];
 		if(substr($conf['label'],-1)=='*')$conf['required']=true;
 		if(!empty($conf['show_in_rest'])){
@@ -901,6 +902,11 @@ class CP{
 			$cpdb_datas[$alias_name]=&$conf;
 		}
 		$conf['is_filled']=true;
+	}
+	public static function resolve_conf($conf){
+		if(empty($conf['type'])){return $conf;}
+		$class_name=self::get_class_name('meta',$conf['type']);
+		return $class_name::resolve_conf($conf);
 	}
 	
 	/*データ解析*/
