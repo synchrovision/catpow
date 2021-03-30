@@ -11,5 +11,9 @@ class SearchSelect extends UI{
 	public static function get_selections($meta){
 		return ('Catpow\\meta\\'.static::$output_type)::get_selections($meta);
 	}
+	public static function resolve_conf($conf){
+		$conf['value']=static::get_selections(new \Catpow\content\meta(['conf'=>$conf]));
+		return $conf;
+	}
 }
 ?>

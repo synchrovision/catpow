@@ -92,5 +92,9 @@ class UI extends meta{
 		<?php
 		return ob_get_clean();
 	}
+	public static function resolve_conf($conf){
+		if(empty($conf['ui'])){$conf['ui']=static::$ui??static::get_type();}
+		return $conf;
+	}
 }
 ?>
