@@ -1,9 +1,8 @@
 <?php
 namespace Catpow\meta;
 
-class select_holders extends meta{
+class select_holders extends select{
 	public static
-		$input_type='select',
 		$value_type='NUMERIC',
 		$data_type='bigint(20)';
 	
@@ -18,11 +17,6 @@ class select_holders extends meta{
 	public static function add($data_type,$data_name,$id,$meta_name,$vals,$conf){
 		$holder=$conf['holder'];
 		return \cp::add_holders($holder[0],$holder[1],$holder[2],$vals,$id);
-	}
-	
-	public static function input($meta,$prm){
-		$sels=self::get_selections($meta->conf);
-		return select::get_input($meta->the_data_path,$meta->conf,$sels,$meta->value);
 	}
 	
 	public static function fill_conf(&$conf){

@@ -1,9 +1,8 @@
 <?php
 namespace Catpow\meta;
 
-class select_rel_posts extends meta{
+class select_rel_posts extends select{
 	public static
-		$input_type='select',
 		$value_type='NUMERIC',
 		$data_type='bigint(20)';
 	
@@ -61,11 +60,6 @@ class select_rel_posts extends meta{
 			if(empty($val))$val=0;
 			return array_key_exists($val,$addition)?$addition[$val]:reset($addition);
 		}
-	}
-	
-	public static function input($meta,$prm){
-		$sels=self::get_selections($meta);
-		return select::get_input($meta->the_data_path,$meta->conf,$sels,$meta->value);
 	}
 	
 	public static function get_selections($meta){

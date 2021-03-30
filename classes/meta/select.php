@@ -57,5 +57,10 @@ class select extends meta{
 		$rtn.='</select>';
 		return $rtn;
 	}
+	
+	public static function resolve_conf($conf){
+		$conf['value']=static::get_selections(new \Catpow\content\meta(['conf'=>$conf]));
+		return $conf;
+	}
 }
 ?>

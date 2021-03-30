@@ -1,9 +1,8 @@
 <?php
 namespace Catpow\meta;
 
-class select_rel_users extends meta{
+class select_rel_users extends select{
 	public static
-		$input_type='select',
 		$value_type='NUMERIC',
 		$data_type='bigint(20)';
 	
@@ -57,10 +56,6 @@ class select_rel_users extends meta{
 		elseif($addition){
 			return isset($addition[$val])?$addition[$val]:reset($addition);
 		}
-	}
-	public static function input($meta,$prm){
-		$sels=self::get_selections($meta);
-		return select::get_input($meta->the_data_path,$meta->conf,$sels,$meta->value);
 	}
 	public static function get_selections($meta){
 		$q=empty($meta->conf['value'])?false:(is_callable($meta->conf['value'])?$meta->conf['value']():$meta->conf['value']);
