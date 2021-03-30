@@ -1,8 +1,8 @@
 <?php
-
 putenv('PATH='.getenv('PATH').':'.__DIR__.':'.__DIR__.'/node_modules/.bin');
 putenv('NODE_PATH='.getenv('NODE_PATH').':'.__DIR__.'/node_modules');
-passthru('cd '.__DIR__);
+chdir(__DIR__);
+if(!file_exists(__DIR__.'/node_modules')){passthru('npm install');}
 
 while(true){
 	$jsx_files=get_jsx_files();
