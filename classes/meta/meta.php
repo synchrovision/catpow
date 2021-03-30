@@ -5,6 +5,7 @@ abstract class meta{
 		$value_type='CHAR',
 		$data_type='longtext',
 		$input_type='text',
+		$output_type=null,
 		$validation=[],
 		$has_children=false,
 		$can_edit=true,

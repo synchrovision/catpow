@@ -882,6 +882,7 @@ class CP{
 		$class_name=self::get_class_name('meta',$conf['type']);
 		$class_name::fill_conf($conf);
 		$conf['input_type']=$class_name::$input_type;
+		$conf['output_type']=$class_name::$output_type??$conf['input_type'];
 		if(!isset($conf['label']))$conf['label']=$conf['name'];
 		if(substr($conf['label'],-1)=='*')$conf['required']=true;
 		if(!empty($conf['show_in_rest'])){
