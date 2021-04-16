@@ -3,7 +3,7 @@ namespace Catpow\meta;
 
 class SelectIcon extends UI{
 	public static
-		$input_type='select';
+		$output_type='select';
 	static $ui='SelectPreparedImage',$defaultParam=['color'=>'i'];
 	public static function output($meta,$prm){
 		$val=$meta->value;
