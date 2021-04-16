@@ -2039,7 +2039,7 @@ class CP{
 					]);
 					$css=$scssc->compile(file_get_contents($scss_name.'.scss'),$scss_name.'.scss');
 				}catch(\Exception $e){
-					error_log('%s:%s;',$scss_name,$e->getMessage());
+					error_log(sprintf('%s:%s;',$scss_name,$e->getMessage()));
 				}
 				file_put_contents($scss_name.'.css',$css);
 			}
