@@ -1,0 +1,80 @@
+@charset "utf-8";
+.transition {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  position: relative;
+  overflow: hidden;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  perspective: 200vw; }
+  .transition_prev {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    pointer-events: none; }
+    .transition-init .transition_current-from {
+      opacity: 0;
+      transform: -webkit- scale(0.9);
+      transform: scale(0.9); }
+    .transition-init .transition_current-to {
+      -webkit-transition: 0.5s;
+      transition: 0.5s;
+      opacity: 1;
+      transform: -webkit- scale(1);
+      transform: scale(1); }
+  .transition-init .transition_prev-from {
+    opacity: 1;
+    transform: -webkit- scale(1);
+    transform: scale(1); }
+  .transition-init .transition_prev-to {
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    opacity: 0;
+    transform: -webkit- scale(1.1);
+    transform: scale(1.1); }
+.transition-prev .transition_current-from {
+  position: relative;
+  left: -100%; }
+.transition-prev .transition_current-to {
+  position: relative;
+  left: 0px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s; }
+.transition-prev .transition_prev-from {
+  position: absolute;
+  left: 0px; }
+.transition-prev .transition_prev-to {
+  left: 100%;
+  -webkit-transition: 0.5s;
+  transition: 0.5s; }
+.transition-next .transition_current-from {
+  position: relative;
+  left: 100%; }
+.transition-next .transition_current-to {
+  position: relative;
+  left: 0px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s; }
+.transition-next .transition_prev-from {
+  position: absolute;
+  left: 0px; }
+.transition-next .transition_prev-to {
+  left: -100%;
+  -webkit-transition: 0.5s;
+  transition: 0.5s; }
+.transition-mod .transition_current-from {
+  opacity: 0; }
+.transition-mod .transition_current-to {
+  -webkit-transition: 1s;
+  transition: 1s;
+  opacity: 1; }
+.transition-mod .transition_prev-from {
+  opacity: 1; }
+.transition-mod .transition_prev-to {
+  -webkit-transition: 1s;
+  transition: 1s;
+  opacity: 0; }
+/*# sourceMappingURL=./style.css.map */

@@ -1,0 +1,87 @@
+@import 'admin_style_config.scss';
+
+
+.transition{
+	@include bnd((f:1 1 a,p:r,o:h));
+	@include trn((t:.5s,p:200vw));
+	&_prev{
+		@include bnd((p:a,t:0,l:0,r:0));
+		@include usr((e:n));
+	}
+	&-init &{
+		&_current{
+			&-from{
+				@include trn((s:.9,o:0));
+			}
+			&-to{
+				@include trn((t:.5s,s:1,o:1));
+			}
+		}
+		&_prev{
+			&-from{
+				@include trn((s:1,o:1));
+			}
+			&-to{
+				@include trn((t:.5s,s:1.1,o:0));
+			}
+		}
+	}
+	&-prev &{
+		&_current{
+			&-from{
+				@include bnd((p:r,l:-100%));
+			}
+			&-to{
+				@include bnd((p:r,l:0));
+				@include trn((t:.5s));
+			}
+		}
+		&_prev{
+			&-from{
+				@include bnd((p:a,l:0));
+			}
+			&-to{
+				@include bnd((l:100%));
+				@include trn((t:.5s));
+			}
+		}
+	}
+	&-next &{
+		&_current{
+			&-from{
+				@include bnd((p:r,l:100%));
+			}
+			&-to{
+				@include bnd((p:r,l:0));
+				@include trn((t:.5s));
+			}
+		}
+		&_prev{
+			&-from{
+				@include bnd((p:a,l:0));
+			}
+			&-to{
+				@include bnd((l:-100%));
+				@include trn((t:.5s));
+			}
+		}
+	}
+	&-mod &{
+		&_current{
+			&-from{
+				@include trn((o:0));
+			}
+			&-to{
+				@include trn((t:1s,o:1));
+			}
+		}
+		&_prev{
+			&-from{
+				@include trn((o:1));
+			}
+			&-to{
+				@include trn((t:1s,o:0));
+			}
+		}
+	}
+}
