@@ -1,6 +1,8 @@
 <?php
 putenv('PATH='.getenv('PATH').':'.__DIR__.':'.__DIR__.'/node_modules/.bin');
 putenv('NODE_PATH='.getenv('NODE_PATH').':'.__DIR__.'/node_modules');
+chdir(dirname(__DIR__));
+passthru('git submodule update --init --recursive');
 chdir(__DIR__);
 if(!file_exists(__DIR__.'/node_modules')){passthru('npm install');}
 
