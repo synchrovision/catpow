@@ -12,7 +12,7 @@ CatpowはWordPressでオリジナルCMSを作成するためのフレームワ�
 WordPressのフォルダに移動し下記コマンドでプラグインを追加します。
 
 ```command
-git clone https://github.com/synchrovision/cawpow.git wp-content/plugins/catpow
+git clone --recursive https://github.com/synchrovision/cawpow.git wp-content/plugins/catpow
 ```
 
 WordPressのフォルダをgitのリポジトリとしている場合は以下のコマンドでcatpowをプラグインに追加してください。
