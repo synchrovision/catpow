@@ -6,7 +6,7 @@ div.itemControl {
   text-align: center;
   font-size: 12px;
   line-height: 10px;
-  background-color: #fefefe;
+  background-color: #f8f8f8;
   border-radius: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   display: -webkit-box;
@@ -67,7 +67,7 @@ div.itemControl {
     right: 0px;
     margin: 0px auto;
     z-index: 1001;
-    background-color: #fefefe;
+    background-color: #f8f8f8;
     border-radius: 5px;
     text-align: left;
     -webkit-transition: 0.5s;
@@ -114,7 +114,7 @@ div.embedded_content {
     top: 0px;
     padding: 0.5rem 1rem;
     z-index: 10;
-    background-color: #fefefe;
+    background-color: #f8f8f8;
     text-align: center;
     font-size: 1rem;
     line-height: 10px;
@@ -144,7 +144,7 @@ div.alt_content {
     line-height: 10px;
     font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
     font-weight: 400;
-    color: #fefefe;
+    color: #f8f8f8;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
 
 table.selectPosition {
@@ -180,7 +180,7 @@ table.SelectPictureSources {
       line-height: 10px;
       font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
       font-weight: 400;
-      color: #fefefe;
+      color: #f8f8f8;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
 
 ul.selectColor {
@@ -204,7 +204,7 @@ ul.selectColor {
       left: 1px;
       right: 1px;
       border-radius: 2rem;
-      background-color: #fefefe; }
+      background-color: #f8f8f8; }
     ul.selectColor li.active::after {
       display: none; }
 
@@ -377,7 +377,7 @@ ul.selectGridButtons .item {
   cursor: pointer; }
   ul.selectGridButtons .item.active {
     background-color: #007cba;
-    color: #fefefe; }
+    color: #f8f8f8; }
 
 table.editItemsTable {
   border-collapse: collapse;

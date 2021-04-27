@@ -12,7 +12,7 @@
   -webkit-transition: 0.5s;
   transition: 0.5s;
   cursor: pointer;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2) inset, -1px -1px 1px rgba(0, 0, 0, 0.2), -1px -1px 1px rgba(255, 255, 255, 0.7) inset, 1px 1px 1px rgba(255, 255, 255, 0.7); }
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset, -1px -1px 1px rgba(0, 0, 0, 0.1), -1px -1px 1px rgba(255, 255, 255, 0.8) inset, 1px 1px 1px rgba(255, 255, 255, 0.8); }
   .CheckBox .icon {
     display: block;
     position: absolute;
@@ -25,7 +25,7 @@
     border-radius: 3px;
     -webkit-transition: 0.5s;
     transition: 0.5s;
-    box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.7) inset, -1px -1px 1px rgba(0, 0, 0, 0.2), -1px -1px 1px rgba(0, 0, 0, 0.2) inset, 1px 1px 1px rgba(255, 255, 255, 0.7); }
+    box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8) inset, -1px -1px 1px rgba(0, 0, 0, 0.1), -1px -1px 1px rgba(0, 0, 0, 0.1) inset, 1px 1px 1px rgba(255, 255, 255, 0.8); }
     .CheckBox .icon::before {
       content: '';
       display: block;
@@ -47,7 +47,7 @@
       transition: width 0s 0.2s, height 0s 0.2s, opacity 0.2s; }
   .CheckBox.selected {
     color: #444;
-    box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.7) inset, -1px -1px 1px rgba(255, 255, 255, 0.7), -1px -1px 1px rgba(0, 0, 0, 0.2) inset, 1px 1px 1px rgba(0, 0, 0, 0.2); }
+    box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8) inset, -1px -1px 1px rgba(255, 255, 255, 0.8), -1px -1px 1px rgba(0, 0, 0, 0.1) inset, 1px 1px 1px rgba(0, 0, 0, 0.1); }
     .CheckBox.selected .icon::before {
       width: 1.5rem;
       height: 0.75rem;

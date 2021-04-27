@@ -15,7 +15,7 @@
     -webkit-box-lines: single;
     -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
-    background-color: #fefefe;
+    background-color: #f8f8f8;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
     .switcherEdit > .tabs > .tab {
       -webkit-box-flex: 0;

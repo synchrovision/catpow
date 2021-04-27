@@ -20,7 +20,7 @@ div.wp-block-catpow-sidebar {
     box-sizing: border-box;
     border-right-style: solid;
     border-right-width: 1px;
-    border-right-color: #cdcdcd; }
+    border-right-color: #dbd6d1; }
   div.wp-block-catpow-sidebar.left {
     display: -webkit-box;
     display: -webkit-flex;
@@ -35,3 +35,4 @@ div.wp-block-catpow-sidebar {
       flex-grow: 0;
       flex-shrink: 0;
       flex-basis: 24rem; } }
+/*# sourceMappingURL=./front_style.css.map */
