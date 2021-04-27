@@ -5,16 +5,25 @@ Catpow.CheckBox = function (props) {
 	var useState = wp.element.useState;
 
 
+	if (label) {
+		return wp.element.createElement(
+			'div',
+			{ className: "CheckBox" + (selected ? ' selected' : ''), onClick: function onClick(e) {
+					onChange(!selected);
+				} },
+			wp.element.createElement(
+				'div',
+				{ className: "CheckBoxIcon" + (selected ? ' selected' : '') },
+				' '
+			),
+			label
+		);
+	}
 	return wp.element.createElement(
 		'div',
-		{ className: "CheckBox" + (selected ? ' selected' : ''), onClick: function onClick(e) {
+		{ className: "CheckBoxIcon" + (selected ? ' selected' : ''), onClick: function onClick(e) {
 				onChange(!selected);
 			} },
-		wp.element.createElement(
-			'div',
-			{ 'class': 'icon' },
-			' '
-		),
-		label
+		' '
 	);
 };
