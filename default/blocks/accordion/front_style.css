@@ -19,7 +19,7 @@
       line-height: 1em;
       font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
       font-weight: 700;
-      color: #fefefe; }
+      color: #f8f8f8; }
       .wp-block-catpow-accordion > .header .icon::before, .wp-block-catpow-accordion > .header .icon::after {
         content: '';
         display: block;
@@ -30,7 +30,7 @@
         bottom: 0px;
         right: 1rem;
         margin: auto;
-        background-color: #fefefe; }
+        background-color: #f8f8f8; }
       .wp-block-catpow-accordion > .header .icon::before {
         -webkit-transition: 0.5s;
         transition: 0.5s;
