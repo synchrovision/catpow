@@ -129,6 +129,9 @@ if(function_exists('register_block_type')){
 				switch($ext){
 					case 'js':
 						wp_register_script($code_name,$file_url,$deps[$fname]);
+						if($fname === 'editor_script'){
+							wp_set_script_translations($code_name,'catpow',$block_dir.'/'.$block_name.'/languages');
+						}
 						$param[$fname]=$code_name;
 						break;
 					case 'css':
