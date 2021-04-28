@@ -38,6 +38,15 @@ wp_localize_script('catpow','cp',array(
 	'wp_rest_nonce'=>wp_create_nonce('wp_rest')
 ));
 
+/* script translation */
+add_filter('load_script_translation_file',function($file,$handle,$domain){
+	if($domain==='catpow' && substr($handle,-3)==='.js'){
+		$locale = determine_locale();
+		return \cp::get_file_path(dirname($handle).'/languages/'.substr(basename($handle),0,-3).'-'.$locale.'.json');
+	}
+	return $file;
+},10,3);
+
 /*add_image_size*/
 add_image_size('vga',640,480,1);
 
@@ -125,18 +134,16 @@ if(function_exists('register_block_type')){
 					if(!file_exists($file_path=$block_dir.'/'.$file_name)){continue;}
 					$file_url=$block_url.'/'.$file_name;
 				}
-				$code_name='cp_blocks_'.$fname.'_'.$block_name;
+				$handle='blocks/'.$block_name.'/'.$fname.'.'.$ext;
 				switch($ext){
 					case 'js':
-						wp_register_script($code_name,$file_url,$deps[$fname]);
-						if($fname === 'editor_script'){
-							wp_set_script_translations($code_name,'catpow',$block_dir.'/'.$block_name.'/languages');
-						}
-						$param[$fname]=$code_name;
+						wp_register_script($handle,$file_url,$deps[$fname]);
+						\cp::set_script_translations($handle);
+						$param[$fname]=$handle;
 						break;
 					case 'css':
-						wp_register_style($code_name,$file_url,$deps[$fname]);
-						$param[$fname]=$code_name;
+						wp_register_style($handle,$file_url,$deps[$fname]);
+						$param[$fname]=$handle;
 						break;
 					case 'php':
 						if($fname === 'conf'){

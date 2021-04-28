@@ -42,10 +42,8 @@ function get_po_files(){
 	$po_files=[];
     $wp_content_dir=dirname(__DIR__,3).'/';
 	
-	foreach(glob($wp_content_dir.'plugins/catpow{,-*}/blocks/*/languages/*.po',GLOB_BRACE) as $po_file){
-		$handle='cp_blocks_editor_script_'.basename(dirname(dirname($po_file)));
-		$jed_file=substr($po_file,0,-3).'-'.$handle.'.json';
-		$po_files[$po_file]=$jed_file;
+	foreach(glob($wp_content_dir.'{plugins,themes}/catpow{,-*}/{blocks,components,ui}/*/languages/*.po',GLOB_BRACE) as $po_file){
+		$po_files[$po_file]=substr($po_file,0,-3).'.json';
 	}
 	return $po_files;
 }
