@@ -39,5 +39,9 @@ class zip extends meta{
 			implode("','",$adrs),\cp::get_input_attr($path,$meta->conf)
 		);
 	}
+	public static function resolve_conf($conf){
+		if(empty($conf['role'])){$conf['role']='zip';}
+		return $conf;
+	}
 }
 ?>

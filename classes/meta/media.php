@@ -92,6 +92,10 @@ class media extends meta{
 		(empty($prm['preload'])?'':' preload').
 		(empty($prm['loop'])?'':' loop');
 	}
+	public static function resolve_conf($conf){
+		if(empty($conf['role'])){$conf['role']='image';}
+		return $conf;
+	}
 }
 
 ?>

@@ -94,6 +94,10 @@ class UI extends meta{
 	}
 	public static function resolve_conf($conf){
 		if(empty($conf['ui'])){$conf['ui']=static::$ui??static::get_type();}
+		if(!empty(static::$output_type)){
+			$class_name=\cp::get_class_name('meta',static::$output_type);
+			return $class_name::resolve_conf($conf);
+		}
 		return $conf;
 	}
 }

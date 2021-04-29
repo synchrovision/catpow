@@ -19,5 +19,9 @@ class textarea extends meta{
 			$meta->value
 		);
 	}
+	public static function resolve_conf($conf){
+		if(empty($conf['role'])){$conf['role']='contents';}
+		return $conf;
+	}
 }
 ?>

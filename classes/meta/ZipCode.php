@@ -2,7 +2,7 @@
 namespace Catpow\meta;
 
 class ZipCode extends UI{
-	public static $output_type='text';
+	public static $output_type='zip';
 	
 	public static function input($meta,$prm){
 		$prm=array_merge((array)$prm,['value'=>$meta->value,'name'=>\cp::get_input_name($meta->the_data_path)]);
