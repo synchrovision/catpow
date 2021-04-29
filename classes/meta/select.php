@@ -61,7 +61,12 @@ class select extends meta{
 	public static function resolve_conf($conf){
 		$conf['value']=static::get_selections(new \Catpow\content\meta(['conf'=>$conf]));
 		if(empty($conf['role'])){
-			$conf['role']=(!empty($conf['multiple'])||static::$is_bulk_input)?'tag':'group';
+			if(!empty($conf['multiple']) || static::$is_bulk_input){
+				$conf['role']='tag';
+			}
+			else{
+				$conf['role']=($conf['name']==='status')?'status':'group';
+			}
 		}
 		return $conf;
 	}
