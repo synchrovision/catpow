@@ -9,6 +9,9 @@ class text extends meta{
 	public static function resolve_conf($conf){
 		if(empty($conf['role'])){
 			$conf['role']=[
+				'name'=>'name',
+				'simei'=>'name',
+				'namae'=>'name',
 				'tel'=>'tel',
 				'fax'=>'fax',
 				'desc'=>'desc',
