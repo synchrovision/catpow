@@ -20,6 +20,7 @@
 		[ "transform-react-jsx", {
 			"pragma": "wp.element.createElement"
 		} ],
-		"transform-object-rest-spread"
+		"transform-object-rest-spread",
+		"transform-object-assign"
 	]
 }
