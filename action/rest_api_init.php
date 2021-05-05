@@ -24,7 +24,7 @@ register_rest_route(
 				return include $f;
 			}
 			session_write_close();
-			return true;
+			return wp_verify_nonce($_SERVER['HTTP_X_WP_NONCE'], 'wp_rest');
 		},
 		'callback'=>function($req){
 			cp::session_start();
