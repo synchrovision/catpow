@@ -1,0 +1,9 @@
+@import 'admin_style_config.scss';
+
+.SelectBox{
+	&,.wp-core-ui &{
+		@include bnd((ap:n,pd:0 .5em,mg:0 .5em));
+		@include bdr((s:s,w:1,c:t 50,r:5));
+		@include bg((i:n,c:b));
+	}
+}
