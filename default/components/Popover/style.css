@@ -1,0 +1,88 @@
+@charset "utf-8";
+.Popover {
+  display: block;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 10000;
+  pointer-events: none; }
+  .Popover.open {
+    animation: PopoverOpen 0.5s alternate 1 forwards; }
+  .Popover.close {
+    animation: PopoverClose 0.5s alternate 1 forwards; }
+  .Popover.closed {
+    display: none;
+    pointer-events: none; }
+  .Popover .PopoverBody {
+    display: block;
+    max-width: 64rem;
+    width: max-content;
+    max-height: 90vh;
+    height: auto;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 100%;
+    margin: auto;
+    border-radius: 1rem;
+    background-color: #f8f8f8;
+    box-shadow: 0 10px 21px rgba(0, 0, 0, 0.3);
+    -webkit-transform: -webkit- translateX(-3rem) translateY(1rem);
+    -webkit-transform: translateX(-3rem) translateY(1rem);
+    transform: translateX(-3rem) translateY(1rem);
+    pointer-events: auto; }
+    .Popover .PopoverBody .PopoverArrow {
+      display: block;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: auto;
+      border-style: solid;
+      border-width: 10px;
+      border-color: transparent;
+      bottom: 100%;
+      left: 0px;
+      right: 0px;
+      border-bottom-color: #f8f8f8;
+      margin-left: 3rem; }
+    .Popover .PopoverBody .PopoverContents {
+      max-height: 90vh;
+      height: auto;
+      overflow-x: hidden;
+      overflow-y: auto;
+      border-radius: 1rem; }
+      .Popover .PopoverBody .PopoverControl .close {
+        position: absolute;
+        width: 3rem;
+        height: 3rem;
+        top: -4rem;
+        right: 1rem; }
+        .Popover .PopoverBody .PopoverControl .close::before, .Popover .PopoverBody .PopoverControl .close::after {
+          content: '';
+          position: absolute;
+          top: 1.5rem;
+          width: 3rem;
+          height: 1px;
+          background-color: #f8f8f8; }
+        .Popover .PopoverBody .PopoverControl .close::before {
+          -webkit-transform: -webkit- rotateZ(45deg);
+          -webkit-transform: rotateZ(45deg);
+          transform: rotateZ(45deg); }
+        .Popover .PopoverBody .PopoverControl .close::after {
+          -webkit-transform: -webkit- rotateZ(-45deg);
+          -webkit-transform: rotateZ(-45deg);
+          transform: rotateZ(-45deg); }
+
+@keyframes PopoverOpen {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+@keyframes PopoverClose {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+/*# sourceMappingURL=./style.css.map */
