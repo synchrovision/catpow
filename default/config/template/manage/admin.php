@@ -1,5 +1,23 @@
 <?php
 namespace Catpow;
-clear(3);
-§sec('search','s');
+$appFile=\cp::get_file_path('<!--data_type-->/<!--data_name-->/manage/app.js',cp::FROM_THEME|cp::FROM_CONFIG);
+\cp::use_components(['Finder','Finder/SearchResults','Finder/SelectLayout','Finder/SelectColumns','Finder/BulkControl','Finder/FilterControl','Finder/Download','Finder/PerPage','Finder/Status','Finder/Pagenate']);
+$id=uniqid('manage-');
+$props=[
+	'basepath'=>"<!--data_type-->/<!--data_name-->/manage",
+	'baseurl'=>html_entity_decode(menu_page_url('cpdb-<!--data_name-->-manage-admin',false)),
+	'query'=>get_query_var('q',null)
+];
 ?>
+<div class="appContainer">
+	<div id="<?=$id?>"></div>
+	<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded',function(){
+		<?php include $appFile; ?>
+		wp.element.render(
+			wp.element.createElement(app,<?=json_encode($props)?>),
+			document.getElementById('<?=$id?>')
+		);
+	});
+	</script>
+</div>

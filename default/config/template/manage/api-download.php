@@ -1,16 +1,25 @@
 <?php
 namespace Catpow;
 $rows=[];
-$cols=array_map(function($col){
-	$meta_type_class=CP::get_class_name('meta',$col['type']);
-	return $meta_type_class::resolve_conf($col);
-},cp::get_conf_data('<!--data_type-->/<!--data_name-->')['meta']);
+$cols=cp::get_conf_data('<!--data_type-->/<!--data_name-->')['meta'];
 
-foreach(loop('<!--data_type-->/<!--data_name-->') as $id=>$obj){
-	$row=['_id'=>$id];
+$row=[];
+foreach($cols as $name=>$col){
+	$row[]=$name;
+}
+$rows[]=$row;
+foreach(loop('<!--data_type-->/<!--data_name-->',['where'=>['meta_id'=>$req['rows']]]) as $id=>$obj){
+	$row=[];
 	foreach($cols as $name=>$col){
-		$row[$name]=meta($name)->value;
+		$row[]=meta($name)->value;
 	}
 	$rows[]=$row;
 }
-$res->set_data(compact('cols','rows'));
+$csv=new CSV($rows);
+$csv->flatten();
+error_log(var_export($req['rows'],1).__FILE__.__LINE__);
+error_log(var_export($rows,1).__FILE__.__LINE__);
+$res->set_data([
+	'name'=>'<!--data_name-->',
+	'data'=>$csv->get_output()
+]);
