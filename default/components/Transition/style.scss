@@ -1,35 +1,100 @@
 @import 'admin_style_config.scss';
 
-
 .transition{
-	@include bnd((f:1 1 a,p:r,o:h));
-	@include trn((t:.5s,p:200vw));
+	@include bnd((p:r,o:h));
+	@include trn((p:200vw));
+	&_current{
+		@include bnd((p:r));
+	}
 	&_prev{
 		@include bnd((p:a,t:0,l:0,r:0));
 		@include usr((e:n));
 	}
-	&-init &{
+	&-none>&{
+		&_prev{
+			&-from,&-to{
+				@include trn((o:0));
+			}
+		}
+	}
+	&-init>&{
 		&_current{
-			&-from{
+			&-from>*{
 				@include trn((s:.9,o:0));
 			}
-			&-to{
+			&-to>*{
 				@include trn((t:.5s,s:1,o:1));
 			}
 		}
 		&_prev{
-			&-from{
+			&-from>*{
 				@include trn((s:1,o:1));
 			}
-			&-to{
+			&-to>*{
 				@include trn((t:.5s,s:1.1,o:0));
 			}
 		}
 	}
-	&-prev &{
+	&-focus>&{
+		&_current{
+			&-from>*{
+				@include trn((o:0,z:-10vw));
+			}
+			&-to>*{
+				@include trn((t:.5s .2s,z:0));
+			}
+		}
+		&_prev{
+			&-from>*{
+				@include trn((o:1,z:0));
+			}
+			&-to>*{
+				@include trn((t:.5s,o:0,z:10vw));
+			}
+		}
+	}
+	&-blur>&{
+		&_current{
+			&-from>*{
+				@include trn((o:0,z:10vw));
+			}
+			&-to>*{
+				@include trn((t:.5s .2s,z:0));
+			}
+		}
+		&_prev{
+			&-from>*{
+				@include trn((o:1,z:0));
+			}
+			&-to>*{
+				@include trn((t:.5s,o:0,z:-10vw));
+			}
+		}
+	}
+	&-prev>&{
 		&_current{
 			&-from{
-				@include bnd((p:r,l:-100%));
+				@include bnd((p:r,l:-100%,r:100%));
+			}
+			&-to{
+				@include bnd((p:r,l:0,r:0));
+				@include trn((t:.5s));
+			}
+		}
+		&_prev{
+			&-from{
+				@include bnd((p:a,l:0));
+			}
+			&-to{
+				@include bnd((l:100%,r:-100%));
+				@include trn((t:.5s));
+			}
+		}
+	}
+	&-next>&{
+		&_current{
+			&-from{
+				@include bnd((p:r,l:100%,r:-100%));
 			}
 			&-to{
 				@include bnd((p:r,l:0));
@@ -41,32 +106,12 @@
 				@include bnd((p:a,l:0));
 			}
 			&-to{
-				@include bnd((l:100%));
+				@include bnd((l:-100%,r:100%));
 				@include trn((t:.5s));
 			}
 		}
 	}
-	&-next &{
-		&_current{
-			&-from{
-				@include bnd((p:r,l:100%));
-			}
-			&-to{
-				@include bnd((p:r,l:0));
-				@include trn((t:.5s));
-			}
-		}
-		&_prev{
-			&-from{
-				@include bnd((p:a,l:0));
-			}
-			&-to{
-				@include bnd((l:-100%));
-				@include trn((t:.5s));
-			}
-		}
-	}
-	&-mod &{
+	&-mod>&{
 		&_current{
 			&-from{
 				@include trn((o:0));
