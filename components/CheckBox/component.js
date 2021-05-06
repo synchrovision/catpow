@@ -1,9 +1,10 @@
 Catpow.CheckBox = function (props) {
 	var label = props.label,
-	    selected = props.selected,
 	    onChange = props.onChange;
 	var useState = wp.element.useState;
 
+
+	var selected = props.selected || props.value;
 
 	if (label) {
 		return wp.element.createElement(
