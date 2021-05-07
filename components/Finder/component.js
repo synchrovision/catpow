@@ -41,8 +41,10 @@ Catpow.Finder = function (props) {
 	var reducer = useCallback(function (state, action) {
 		switch (action.type) {
 			case 'setIndex':
-				var index = action.index;
-				return babelHelpers.extends({}, state, { index: action.index });
+				{
+					var index = action.index;
+					return babelHelpers.extends({}, state, { index: index });
+				}
 			case 'setPath':
 				return babelHelpers.extends({}, state, { path: action.path });
 			case 'addQuery':
@@ -150,7 +152,8 @@ Catpow.Finder = function (props) {
 	var _useReducer = useReducer(reducer, {
 		index: {
 			cols: {},
-			rows: []
+			rows: [],
+			colsByRole: {}
 		},
 		path: props.path,
 		apiPath: '/cp/v1/' + basepath,
@@ -196,7 +199,7 @@ Catpow.Finder = function (props) {
 				}
 				break;
 		}
-	});
+	}, []);
 
 	var config = useMemo(function () {
 		return JSON.parse(localStorage.getItem('config:' + basepath) || '{}');
@@ -235,6 +238,7 @@ Catpow.Finder = function (props) {
 		wp.apiFetch({
 			path: state.apiPath + '/index'
 		}).then(function (index) {
+			index.colsByRole = {};
 			Object.keys(index.cols).map(function (name, i) {
 				index.cols[name].hide = config.cols[name] ? config.cols[name].hide : i > 8 || ['contents', 'data'].indexOf(index.cols[name].role) !== -1;
 				fillConf(index.cols[name]);
@@ -257,12 +261,16 @@ Catpow.Finder = function (props) {
 	}, [props]);
 
 	return wp.element.createElement(
-		Catpow.FinderContext.Provider,
-		{ value: { state: state, dispatch: dispatch } },
+		Catpow.AppManager,
+		null,
 		wp.element.createElement(
-			'div',
-			{ className: "Finder " + className },
-			props.children
+			Catpow.FinderContext.Provider,
+			{ value: { state: state, dispatch: dispatch } },
+			wp.element.createElement(
+				'div',
+				{ className: "Finder " + className },
+				props.children
+			)
 		)
 	);
 };

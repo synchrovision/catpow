@@ -28,9 +28,10 @@ Catpow.Finder=(props)=>{
 	
 	const reducer=useCallback((state,action)=>{
 		switch(action.type){
-			case 'setIndex':
-				var index=action.index;
-				return {...state,index:action.index};
+			case 'setIndex':{
+				const index=action.index;
+				return {...state,index};
+			}
 			case 'setPath':
 				return {...state,path:action.path};
 			case 'addQuery':{
@@ -114,7 +115,8 @@ Catpow.Finder=(props)=>{
 	const [state,dispatch]=useReducer(reducer,{
 		index:{
 			cols:{},
-			rows:[]
+			rows:[],
+			colsByRole:{}
 		},
 		path:props.path,
 		apiPath:'/cp/v1/'+basepath,
@@ -159,7 +161,7 @@ Catpow.Finder=(props)=>{
 				}
 				break;
 		}
-	});
+	},[]);
 	
 	const config=useMemo(()=>JSON.parse(localStorage.getItem('config:'+basepath) || '{}'),[state]);
 	useEffect(()=>{
@@ -195,6 +197,7 @@ Catpow.Finder=(props)=>{
 		wp.apiFetch({
 			path:state.apiPath+'/index'
 		}).then((index)=>{
+			index.colsByRole={};
 			Object.keys(index.cols).map((name,i)=>{
 				index.cols[name].hide=(config.cols[name])?config.cols[name].hide:(i>8 || ['contents','data'].indexOf(index.cols[name].role)!==-1);
 				fillConf(index.cols[name]);
@@ -215,9 +218,11 @@ Catpow.Finder=(props)=>{
 	},[props]);
 	
 	return (
-		<Catpow.FinderContext.Provider value={{state,dispatch}}>
-			<div className={"Finder "+className}>{props.children}</div>
-		</Catpow.FinderContext.Provider>
+		<Catpow.AppManager>
+			<Catpow.FinderContext.Provider value={{state,dispatch}}>
+				<div className={"Finder "+className}>{props.children}</div>
+			</Catpow.FinderContext.Provider>
+		</Catpow.AppManager>
 	);
 }
 Catpow.Finder.Nav=(props)=>{

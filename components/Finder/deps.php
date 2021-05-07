@@ -1,3 +1,3 @@
 <?php
 $useScripts=['urljs'];
-$useComponents=['Output'];
+$useComponents=['AppManager','Output'];
