@@ -29,8 +29,7 @@
     border-radius: 1rem;
     background-color: #f8f8f8;
     box-shadow: 0 10px 21px rgba(0, 0, 0, 0.3);
-    -webkit-transform: -webkit- translateX(-3rem) translateY(1rem);
-    -webkit-transform: translateX(-3rem) translateY(1rem);
+    transform: -webkit- translateX(-3rem) translateY(1rem);
     transform: translateX(-3rem) translateY(1rem);
     pointer-events: auto; }
     .Popover .PopoverBody .PopoverArrow {
@@ -67,12 +66,10 @@
           height: 1px;
           background-color: #f8f8f8; }
         .Popover .PopoverBody .PopoverControl .close::before {
-          -webkit-transform: -webkit- rotateZ(45deg);
-          -webkit-transform: rotateZ(45deg);
+          transform: -webkit- rotateZ(45deg);
           transform: rotateZ(45deg); }
         .Popover .PopoverBody .PopoverControl .close::after {
-          -webkit-transform: -webkit- rotateZ(-45deg);
-          -webkit-transform: rotateZ(-45deg);
+          transform: -webkit- rotateZ(-45deg);
           transform: rotateZ(-45deg); }
 
 @keyframes PopoverOpen {
