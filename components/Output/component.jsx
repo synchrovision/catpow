@@ -5,10 +5,10 @@
 	switch(conf.output_type){
 		case 'group':
 			return (
-				<ul className="outputs">
+				<ul className="OutputGroup">
 					{value.map((row)=>{
 						return (
-							<li className="outputs__item">
+							<li className="item">
 								{Object.keys(conf.meta).map((name)=>(
 									<dl>
 										<dt>{conf.meta[name].label}</dt>
@@ -24,6 +24,17 @@
 		case 'radio':
 		case 'checkbox':
 			return value.map((val)=>conf.dict[val]).join(',');
+		case 'image':
+			return (
+				<ul className="OutputImages">
+					<li className="item">
+						{props.images.map((image)=>(
+							<img className="OutputImage" src={image.url}/>
+						))}
+					</li>
+				</ul>
+				
+			);
 		default:
 			return value.join(',');
 	}

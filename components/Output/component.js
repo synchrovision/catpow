@@ -8,11 +8,11 @@ Catpow.Output = function (props) {
 		case 'group':
 			return wp.element.createElement(
 				'ul',
-				{ className: 'outputs' },
+				{ className: 'OutputGroup' },
 				value.map(function (row) {
 					return wp.element.createElement(
 						'li',
-						{ className: 'outputs__item' },
+						{ className: 'item' },
 						Object.keys(conf.meta).map(function (name) {
 							return wp.element.createElement(
 								'dl',
@@ -38,6 +38,18 @@ Catpow.Output = function (props) {
 			return value.map(function (val) {
 				return conf.dict[val];
 			}).join(',');
+		case 'image':
+			return wp.element.createElement(
+				'ul',
+				{ className: 'OutputImages' },
+				wp.element.createElement(
+					'li',
+					{ className: 'item' },
+					props.images.map(function (image) {
+						return wp.element.createElement('img', { className: 'OutputImage', src: image.url });
+					})
+				)
+			);
 		default:
 			return value.join(',');
 	}
