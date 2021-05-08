@@ -102,6 +102,9 @@ abstract class meta{
 			}
 		}
 	}
+	public static function get_props($meta){
+		return ['value'=>$meta->value];
+	}
 	
 	public static function get_validations($conf){return static::$validation;}
 	public static function validate($input_id,$vals,$meta,&$errors){}

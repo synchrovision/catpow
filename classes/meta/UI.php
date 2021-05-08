@@ -22,6 +22,13 @@ class UI extends meta{
 		$class_name=\cp::get_class_name('meta',static::$input_type);
 		return $class_name::input($meta,$prm);
 	}
+	public static function get_props($meta){
+		if(!empty(static::$output_type)){
+			$class_name=\cp::get_class_name('meta',static::$output_type);
+			return $class_name::get_props($meta);
+		}
+		return ['value'=>$meta->value];
+	}
 	
 	public static function fill_param($prm,$meta){
 		$prm=(array)$prm;
