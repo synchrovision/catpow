@@ -59,16 +59,12 @@ Catpow.Finder=(props)=>{
 				if(action.layout===state.layout){return state;}
 				return {...state,layout:action.layout,transition:'mod'};
 			case 'showColumn':
-				state.index.cols[action.name].hide=false;
-				return {...state};
 			case 'hideColumn':
-				state.index.cols[action.name].hide=true;
+				state.index.cols[action.name].hide=action.type!=='showColumn';
 				return {...state};
 			case 'selectRow':
-				action.row._selected=true;
-				return {...state};
 			case 'deselectRow':
-				action.row._selected=false;
+				action.row._selected=action.type==='selectRow';
 				return {...state};
 			case 'focusItem':
 				return {...state,focused:action.row};
@@ -172,7 +168,7 @@ Catpow.Finder=(props)=>{
 		const items=state.index.rows.filter((row)=>{
 			return Object.keys(state.query).every((key)=>{
 				if(state.query[key].length===0){return true;}
-				return state.query[key].indexOf(row[key][0])!==-1;
+				return state.query[key].indexOf(row[key].value[0])!==-1;
 			});
 		});
 		const itemsInPage=items.slice(0,state.itemsPerPage);
@@ -199,7 +195,11 @@ Catpow.Finder=(props)=>{
 		}).then((index)=>{
 			index.colsByRole={};
 			Object.keys(index.cols).map((name,i)=>{
-				index.cols[name].hide=(config.cols[name])?config.cols[name].hide:(i>8 || ['contents','data'].indexOf(index.cols[name].role)!==-1);
+				const col=index.cols[name];
+				const {role='none'}=col;
+				col.hide=(config.cols[name])?config.cols[name].hide:(i>8 || ['contents','data'].indexOf(role)!==-1);
+				if(!index.colsByRole[role]){index.colsByRole[role]=[];}
+				index.colsByRole[role].push(col);
 				fillConf(index.cols[name]);
 			});
 			dispatch({type:'setIndex',index});
