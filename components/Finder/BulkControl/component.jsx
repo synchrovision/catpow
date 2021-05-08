@@ -124,7 +124,7 @@ Catpow.Finder.BulkControl=(props)=>{
 					</div>
 				</li>
 			</ul>
-			<Catpow.OuterContents name="modal">{modal}</Catpow.OuterContents>
+			{modal}
 		</div>
 	);
 }

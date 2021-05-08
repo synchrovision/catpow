@@ -240,10 +240,6 @@ Catpow.Finder.BulkControl = function (props) {
 				)
 			)
 		),
-		wp.element.createElement(
-			Catpow.OuterContents,
-			{ name: 'modal' },
-			modal
-		)
+		modal
 	);
 };
