@@ -1,7 +1,5 @@
 @import 'admin_style_config.scss';
 .Popover{
-	@include bnd((d:b,p:a,t:0,b:0,l:0,r:0,z:10000));
-	@include usr((e:n));
 	&.open{
 		@include anm((a:PopoverOpen .5s a 1 f));
 	}
@@ -12,7 +10,15 @@
 		@include bnd((d:n));
 		@include usr((e:n));
 	}
-	.PopoverBody{
+	&Anchor{
+		@include bnd((d:b,p:a,t:0,b:0,l:0,r:0,z:10000));
+		@include usr((e:n));
+	}
+	&Container{
+		@include bnd((p:f,t:0,r:0,w:50rem,h:10rem));
+		@include usr((e:n));
+	}
+	&Body{
 		@include bnd((d:b,w:max 64rem,h:a 90vh,p:a,l:0,r:0,t:100%,mg:a));
 		@include bdr((r:1rem));
 		@include bg((c:b));
@@ -45,7 +51,6 @@
 		}
 	}
 }
-
 @keyframes PopoverOpen{
 	0%{
 		@include trn((o:0));
