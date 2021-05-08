@@ -13,18 +13,22 @@
 		@include bnd((d:n));
 		@include usr((e:n));
 	}
-	.PopupBG{
+	&Container{
+		@include bnd((d:b,p:f,t:0,l:0,r:0));
+	}
+	&BG{
 		content:'';
 		@include bnd((d:b,p:f,t:0,b:0,l:0,r:0));
 		@include bg((c:shd));
 	}
-	.PopupBody{
+	&Body{
 		@include bnd((d:b,w:fit 64rem,h:a 90vh,p:f,l:0,r:0,t:50%,mg:a));
 		@include bdr((r:1rem));
 		@include bg((c:b));
 		@include shd((b:2));
 		@include trn((y:-50%));
 		.PopupContents{
+			@include bnd((oy:a));
 		}
 		.PopupControl{
 			.close{
