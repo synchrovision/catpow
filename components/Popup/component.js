@@ -21,33 +21,37 @@ Catpow.Popup = function (props) {
 	}, [open]);
 
 	return wp.element.createElement(
-		'div',
-		{
-			className: 'Popup ' + state,
-			onAnimationEnd: function onAnimationEnd() {
-				if (state === 'close') {
-					setPopupState('closed');
-					onClosed();
-				}
-			}
-		},
-		wp.element.createElement('div', { 'class': 'PopupBG', onClick: function onClick() {
-				if (closeOnClickAway) {
-					onClose();
-				}
-			} }),
+		Catpow.External,
+		{ className: 'PopupContainer' },
 		wp.element.createElement(
 			'div',
-			{ 'class': 'PopupBody' },
+			{
+				className: 'Popup ' + state,
+				onAnimationEnd: function onAnimationEnd() {
+					if (state === 'close') {
+						setPopupState('closed');
+						onClosed();
+					}
+				}
+			},
+			wp.element.createElement('div', { 'class': 'PopupBG', onClick: function onClick() {
+					if (closeOnClickAway) {
+						onClose();
+					}
+				} }),
 			wp.element.createElement(
 				'div',
-				{ className: 'PopupContents' },
-				children
-			),
-			closeButton && wp.element.createElement(
-				'div',
-				{ className: 'PopupControl' },
-				wp.element.createElement('div', { className: 'close', onClick: onClose })
+				{ 'class': 'PopupBody' },
+				wp.element.createElement(
+					'div',
+					{ className: 'PopupContents' },
+					children
+				),
+				closeButton && wp.element.createElement(
+					'div',
+					{ className: 'PopupControl' },
+					wp.element.createElement('div', { className: 'close', onClick: onClose })
+				)
 			)
 		)
 	);
