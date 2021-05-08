@@ -22,13 +22,13 @@ Catpow.ModalForm=(props)=>{
 	const [state,dispatch]=useReducer(reducer,{open:true,values:{}});
 	
 	return (
-		<Catpow.ModalFormContext.Provider value={{state,dispatch}}>
-			<Catpow.Popup open={state.open} closeOnClickAway={false} onClosed={()=>onComplete(state.values)}>
+		<Catpow.Popup open={state.open} closeOnClickAway={false} onClosed={()=>onComplete(state.values)}>
+			<Catpow.ModalFormContext.Provider value={{state,dispatch}}>
 				<div className={"ModalForm"}>
 					{children}
 				</div>
-			</Catpow.Popup>
-		</Catpow.ModalFormContext.Provider>
+			</Catpow.ModalFormContext.Provider>
+		</Catpow.Popup>
 	);
 }
 Catpow.ModalForm.Input=(props)=>{

@@ -32,13 +32,13 @@ Catpow.ModalForm = function (props) {
 	    dispatch = _useReducer2[1];
 
 	return wp.element.createElement(
-		Catpow.ModalFormContext.Provider,
-		{ value: { state: state, dispatch: dispatch } },
+		Catpow.Popup,
+		{ open: state.open, closeOnClickAway: false, onClosed: function onClosed() {
+				return onComplete(state.values);
+			} },
 		wp.element.createElement(
-			Catpow.Popup,
-			{ open: state.open, closeOnClickAway: false, onClosed: function onClosed() {
-					return onComplete(state.values);
-				} },
+			Catpow.ModalFormContext.Provider,
+			{ value: { state: state, dispatch: dispatch } },
 			wp.element.createElement(
 				'div',
 				{ className: "ModalForm" },
