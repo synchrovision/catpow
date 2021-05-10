@@ -26,11 +26,27 @@ Catpow.Finder=(props)=>{
 		history.pushState(state,'',uri.directory(uri.directory()+'/'+path).addQuery(q).toString());
 	},[props]);
 	
+	
 	const reducer=useCallback((state,action)=>{
 		switch(action.type){
 			case 'setIndex':{
+				const {config}=state;
 				const index=action.index;
-				return {...state,index};
+				const colsToShow=[];
+				const colsToShowByRole={};
+				Object.keys(index.cols).map((name,i)=>{
+					const col=index.cols[name];
+					const {role='none'}=col;
+					col.name=name;
+					col.hide=(config.cols[name])?config.cols[name].hide:(i>8 || ['contents','data'].indexOf(role)!==-1);
+					if(!col.hide){
+						colsToShow.push(col);
+						if(!colsToShowByRole[role]){colsToShowByRole[role]=[];}
+						colsToShowByRole[role].push(col);
+					}
+					fillConf(index.cols[name]);
+				});
+				return {...state,index,colsToShow,colsToShowByRole};
 			}
 			case 'setPath':
 				return {...state,path:action.path};
@@ -59,9 +75,13 @@ Catpow.Finder=(props)=>{
 				if(action.layout===state.layout){return state;}
 				return {...state,layout:action.layout,transition:'mod'};
 			case 'showColumn':
-			case 'hideColumn':
+			case 'hideColumn':{
+				const {role='none'}=state.index.cols[action.name];
 				state.index.cols[action.name].hide=action.type!=='showColumn';
+				state.colsToShow=Object.keys(state.index.cols).map((key)=>state.index.cols[key]).filter((col)=>!col.hide);
+				state.colsToShowByRole[role]=state.colsToShow.filter((col)=>col.role===role);
 				return {...state};
+			}
 			case 'selectRow':
 			case 'deselectRow':
 				action.row._selected=action.type==='selectRow';
@@ -109,11 +129,13 @@ Catpow.Finder=(props)=>{
 		return state;
 	},[]);
 	const [state,dispatch]=useReducer(reducer,{
+		config:JSON.parse(localStorage.getItem('config:'+basepath) || '{}'),
 		index:{
 			cols:{},
 			rows:[],
-			colsByRole:{}
 		},
+		colsToShow:[],
+		colsToShowByRole:{},
 		path:props.path,
 		apiPath:'/cp/v1/'+basepath,
 		query:props.query || {},
@@ -159,7 +181,6 @@ Catpow.Finder=(props)=>{
 		}
 	},[]);
 	
-	const config=useMemo(()=>JSON.parse(localStorage.getItem('config:'+basepath) || '{}'),[state]);
 	useEffect(()=>{
 		localStorage.setItem('config:'+basepath,JSON.stringify({cols:state.index.cols}));
 	},[state]);
@@ -193,15 +214,6 @@ Catpow.Finder=(props)=>{
 		wp.apiFetch({
 			path:state.apiPath+'/index'
 		}).then((index)=>{
-			index.colsByRole={};
-			Object.keys(index.cols).map((name,i)=>{
-				const col=index.cols[name];
-				const {role='none'}=col;
-				col.hide=(config.cols[name])?config.cols[name].hide:(i>8 || ['contents','data'].indexOf(role)!==-1);
-				if(!index.colsByRole[role]){index.colsByRole[role]=[];}
-				index.colsByRole[role].push(col);
-				fillConf(index.cols[name]);
-			});
 			dispatch({type:'setIndex',index});
 		});
 		window.addEventListener('popstate',(e)=>{

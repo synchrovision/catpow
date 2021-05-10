@@ -42,8 +42,28 @@ Catpow.Finder = function (props) {
 		switch (action.type) {
 			case 'setIndex':
 				{
+					var config = state.config;
+
 					var index = action.index;
-					return babelHelpers.extends({}, state, { index: index });
+					var colsToShow = [];
+					var colsToShowByRole = {};
+					Object.keys(index.cols).map(function (name, i) {
+						var col = index.cols[name];
+						var _col$role = col.role,
+						    role = _col$role === undefined ? 'none' : _col$role;
+
+						col.name = name;
+						col.hide = config.cols[name] ? config.cols[name].hide : i > 8 || ['contents', 'data'].indexOf(role) !== -1;
+						if (!col.hide) {
+							colsToShow.push(col);
+							if (!colsToShowByRole[role]) {
+								colsToShowByRole[role] = [];
+							}
+							colsToShowByRole[role].push(col);
+						}
+						fillConf(index.cols[name]);
+					});
+					return babelHelpers.extends({}, state, { index: index, colsToShow: colsToShow, colsToShowByRole: colsToShowByRole });
 				}
 			case 'setPath':
 				return babelHelpers.extends({}, state, { path: action.path });
@@ -91,8 +111,21 @@ Catpow.Finder = function (props) {
 				return babelHelpers.extends({}, state, { layout: action.layout, transition: 'mod' });
 			case 'showColumn':
 			case 'hideColumn':
-				state.index.cols[action.name].hide = action.type !== 'showColumn';
-				return babelHelpers.extends({}, state);
+				{
+					var _state$index$cols$act = state.index.cols[action.name].role,
+					    role = _state$index$cols$act === undefined ? 'none' : _state$index$cols$act;
+
+					state.index.cols[action.name].hide = action.type !== 'showColumn';
+					state.colsToShow = Object.keys(state.index.cols).map(function (key) {
+						return state.index.cols[key];
+					}).filter(function (col) {
+						return !col.hide;
+					});
+					state.colsToShowByRole[role] = state.colsToShow.filter(function (col) {
+						return col.role === role;
+					});
+					return babelHelpers.extends({}, state);
+				}
 			case 'selectRow':
 			case 'deselectRow':
 				action.row._selected = action.type === 'selectRow';
@@ -146,11 +179,13 @@ Catpow.Finder = function (props) {
 	}, []);
 
 	var _useReducer = useReducer(reducer, {
+		config: JSON.parse(localStorage.getItem('config:' + basepath) || '{}'),
 		index: {
 			cols: {},
-			rows: [],
-			colsByRole: {}
+			rows: []
 		},
+		colsToShow: [],
+		colsToShowByRole: {},
 		path: props.path,
 		apiPath: '/cp/v1/' + basepath,
 		query: props.query || {},
@@ -197,9 +232,6 @@ Catpow.Finder = function (props) {
 		}
 	}, []);
 
-	var config = useMemo(function () {
-		return JSON.parse(localStorage.getItem('config:' + basepath) || '{}');
-	}, [state]);
 	useEffect(function () {
 		localStorage.setItem('config:' + basepath, JSON.stringify({ cols: state.index.cols }));
 	}, [state]);
@@ -234,19 +266,6 @@ Catpow.Finder = function (props) {
 		wp.apiFetch({
 			path: state.apiPath + '/index'
 		}).then(function (index) {
-			index.colsByRole = {};
-			Object.keys(index.cols).map(function (name, i) {
-				var col = index.cols[name];
-				var _col$role = col.role,
-				    role = _col$role === undefined ? 'none' : _col$role;
-
-				col.hide = config.cols[name] ? config.cols[name].hide : i > 8 || ['contents', 'data'].indexOf(role) !== -1;
-				if (!index.colsByRole[role]) {
-					index.colsByRole[role] = [];
-				}
-				index.colsByRole[role].push(col);
-				fillConf(index.cols[name]);
-			});
 			dispatch({ type: 'setIndex', index: index });
 		});
 		window.addEventListener('popstate', function (e) {
