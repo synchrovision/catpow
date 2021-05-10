@@ -117,7 +117,7 @@
 				@include trn((o:0));
 			}
 			&-to{
-				@include trn((t:1s,o:1));
+				@include trn((t:.5s,o:1));
 			}
 		}
 		&_prev{
@@ -125,7 +125,7 @@
 				@include trn((o:1));
 			}
 			&-to{
-				@include trn((t:1s,o:0));
+				@include trn((t:.5s,o:0));
 			}
 		}
 	}

@@ -109,13 +109,13 @@
 .transition-mod > .transition_current-from {
   opacity: 0; }
 .transition-mod > .transition_current-to {
-  -webkit-transition: 1s;
-  transition: 1s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
   opacity: 1; }
 .transition-mod > .transition_prev-from {
   opacity: 1; }
 .transition-mod > .transition_prev-to {
-  -webkit-transition: 1s;
-  transition: 1s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
   opacity: 0; }
 /*# sourceMappingURL=./style.css.map */
