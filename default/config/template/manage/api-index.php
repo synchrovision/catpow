@@ -9,7 +9,7 @@ $cols=array_map(function($col){
 foreach(loop('<!--data_type-->/<!--data_name-->') as $id=>$obj){
 	$row=['_id'=>$id];
 	foreach($cols as $name=>$col){
-		$row[$name]=meta($name)->value;
+		$row[$name]=meta($name)->props;
 	}
 	$rows[]=$row;
 }
