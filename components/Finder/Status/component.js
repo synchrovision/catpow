@@ -22,14 +22,10 @@ Catpow.Finder.Status = function (props) {
 	var cols = state.index.cols;
 
 
-	var selectedItems = state.itemsInPage.filter(function (item) {
-		return item._selected;
-	});
-
 	return wp.element.createElement(
 		'div',
 		{ className: 'FinderControl FinderStatus' },
 		sprintf(__('%d件中%d件表示', 'catpow'), state.items.length, state.itemsInPage.length),
-		selectedItems.length > 0 && sprintf(__('%d件選択', 'catpow'), selectedItems.length)
+		state.selectedRows.length > 0 && sprintf(__('%d件選択', 'catpow'), state.selectedRows.length)
 	);
 };
