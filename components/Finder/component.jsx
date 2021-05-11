@@ -192,11 +192,12 @@ Catpow.Finder=(props)=>{
 		return {
 			roleGroups:{
 				images:['image'],
-				header:['label','name'],
+				header:['label','name','altname'],
 				tags:['group','tag'],
+				excerpt:['desc'],
 				address:['zip','prefecture','address'],
 				contact:['tel','fax','email','url'],
-				contentes:['data','contents'],
+				contents:['data','contents'],
 				style:['color']
 			}
 		}
