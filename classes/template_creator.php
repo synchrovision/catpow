@@ -226,7 +226,6 @@ class template_creator{
 		if(strpos($body,'<!--if:')===false){return false;}
 		$cond_datas=['items'=>[]];
 		$cond_datas['body']=preg_replace_callback(self::get_template_code_regex('if','else'),function($matches)use(&$cond_datas){
-			$conds=self::parse_filter_str($matches['filter']);
 			$cond_index='cond:'.count($cond_datas['items']);
 			$cond_datas['items'][$cond_index]=[
 				'index'=>$cond_index,
