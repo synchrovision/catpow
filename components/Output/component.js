@@ -35,9 +35,25 @@ Catpow.Output = function (props) {
 		case 'select':
 		case 'radio':
 		case 'checkbox':
-			return value.map(function (val) {
-				return conf.dict[val];
-			}).join(',');
+			{
+				var labels = value.map(function (val) {
+					return conf.dict[val];
+				});
+				if (!labels.length) {
+					return false;
+				}
+				return wp.element.createElement(
+					'ul',
+					{ clasName: 'OutputLabels' },
+					labels.map(function (label) {
+						return wp.element.createElement(
+							'li',
+							{ className: 'item' },
+							label
+						);
+					})
+				);
+			}
 		case 'image':
 			return wp.element.createElement(
 				'ul',
@@ -46,7 +62,7 @@ Catpow.Output = function (props) {
 					'li',
 					{ className: 'item' },
 					props.images.map(function (image) {
-						return wp.element.createElement('img', { className: 'OutputImage', src: image.url });
+						return wp.element.createElement('img', { className: 'image', src: image.url });
 					})
 				)
 			);

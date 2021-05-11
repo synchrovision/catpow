@@ -22,14 +22,21 @@
 			);
 		case 'select':
 		case 'radio':
-		case 'checkbox':
-			return value.map((val)=>conf.dict[val]).join(',');
+		case 'checkbox':{
+			const labels=value.map((val)=>conf.dict[val]);
+			if(!labels.length){return false;}
+			return (
+				<ul clasName="OutputLabels">
+					{labels.map((label)=><li className="item">{label}</li>)}
+				</ul>
+			);
+		}
 		case 'image':
 			return (
 				<ul className="OutputImages">
 					<li className="item">
 						{props.images.map((image)=>(
-							<img className="OutputImage" src={image.url}/>
+							<img className="image" src={image.url}/>
 						))}
 					</li>
 				</ul>
