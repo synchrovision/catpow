@@ -26,12 +26,12 @@ Catpow.Finder=(props)=>{
 		history.pushState(state,'',uri.directory(uri.directory()+'/'+path).addQuery(q).toString());
 	},[props]);
 	
-	
 	const reducer=useCallback((state,action)=>{
 		switch(action.type){
 			case 'setIndex':{
 				const {config}=state;
-				const index=action.index;
+				const {index,wait=false}=action;
+				const colsByRole={};
 				const colsToShow=[];
 				const colsToShowByRole={};
 				Object.keys(index.cols).map((name,i)=>{
@@ -39,6 +39,8 @@ Catpow.Finder=(props)=>{
 					const {role='none'}=col;
 					col.name=name;
 					col.hide=(config.cols[name])?config.cols[name].hide:(i>8 || ['contents','data'].indexOf(role)!==-1);
+					if(!colsByRole[role]){colsByRole[role]=[];}
+					colsByRole[role].push(col);
 					if(!col.hide){
 						colsToShow.push(col);
 						if(!colsToShowByRole[role]){colsToShowByRole[role]=[];}
@@ -46,7 +48,7 @@ Catpow.Finder=(props)=>{
 					}
 					fillConf(index.cols[name]);
 				});
-				return {...state,index,colsToShow,colsToShowByRole};
+				return {...state,index,colsByRole,colsToShow,colsToShowByRole,wait};
 			}
 			case 'setPath':
 				return {...state,path:action.path};
@@ -83,9 +85,11 @@ Catpow.Finder=(props)=>{
 				return {...state};
 			}
 			case 'selectRow':
-			case 'deselectRow':
+			case 'deselectRow':{
 				action.row._selected=action.type==='selectRow';
-				return {...state};
+				const selectedRows=state.index.rows.filter((row)=>row._selected);
+				return {...state,selectedRows};
+			}
 			case 'focusItem':
 				return {...state,focused:action.row};
 			case 'blurItem':
@@ -129,11 +133,13 @@ Catpow.Finder=(props)=>{
 		return state;
 	},[]);
 	const [state,dispatch]=useReducer(reducer,{
+		wait:true,
 		config:JSON.parse(localStorage.getItem('config:'+basepath) || '{}'),
 		index:{
 			cols:{},
 			rows:[],
 		},
+		colsByRole:{},
 		colsToShow:[],
 		colsToShowByRole:{},
 		path:props.path,
@@ -143,6 +149,7 @@ Catpow.Finder=(props)=>{
 		items:[],
 		itemsInPage:[],
 		itemsPerPage:20,
+		selectedRows:[],
 		focused:false,
 		page:1,
 		device:Catpow.util.getDevice()
@@ -178,6 +185,20 @@ Catpow.Finder=(props)=>{
 					});
 				}
 				break;
+		}
+	},[]);
+	
+	const info=useMemo(()=>{
+		return {
+			roleGroups:{
+				images:['image'],
+				header:['label','name'],
+				tags:['group','tag'],
+				address:['zip','prefecture','address'],
+				contact:['tel','fax','email','url'],
+				contentes:['data','contents'],
+				style:['color']
+			}
 		}
 	},[]);
 	
@@ -231,7 +252,7 @@ Catpow.Finder=(props)=>{
 	
 	return (
 		<Catpow.AppManager>
-			<Catpow.FinderContext.Provider value={{state,dispatch}}>
+			<Catpow.FinderContext.Provider value={{state,dispatch,info}}>
 				<div className={"Finder "+className}>{props.children}</div>
 			</Catpow.FinderContext.Provider>
 		</Catpow.AppManager>

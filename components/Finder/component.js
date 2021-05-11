@@ -43,8 +43,11 @@ Catpow.Finder = function (props) {
 			case 'setIndex':
 				{
 					var config = state.config;
+					var index = action.index,
+					    _action$wait = action.wait,
+					    wait = _action$wait === undefined ? false : _action$wait;
 
-					var index = action.index;
+					var colsByRole = {};
 					var colsToShow = [];
 					var colsToShowByRole = {};
 					Object.keys(index.cols).map(function (name, i) {
@@ -54,6 +57,10 @@ Catpow.Finder = function (props) {
 
 						col.name = name;
 						col.hide = config.cols[name] ? config.cols[name].hide : i > 8 || ['contents', 'data'].indexOf(role) !== -1;
+						if (!colsByRole[role]) {
+							colsByRole[role] = [];
+						}
+						colsByRole[role].push(col);
 						if (!col.hide) {
 							colsToShow.push(col);
 							if (!colsToShowByRole[role]) {
@@ -63,7 +70,7 @@ Catpow.Finder = function (props) {
 						}
 						fillConf(index.cols[name]);
 					});
-					return babelHelpers.extends({}, state, { index: index, colsToShow: colsToShow, colsToShowByRole: colsToShowByRole });
+					return babelHelpers.extends({}, state, { index: index, colsByRole: colsByRole, colsToShow: colsToShow, colsToShowByRole: colsToShowByRole, wait: wait });
 				}
 			case 'setPath':
 				return babelHelpers.extends({}, state, { path: action.path });
@@ -128,8 +135,13 @@ Catpow.Finder = function (props) {
 				}
 			case 'selectRow':
 			case 'deselectRow':
-				action.row._selected = action.type === 'selectRow';
-				return babelHelpers.extends({}, state);
+				{
+					action.row._selected = action.type === 'selectRow';
+					var selectedRows = state.index.rows.filter(function (row) {
+						return row._selected;
+					});
+					return babelHelpers.extends({}, state, { selectedRows: selectedRows });
+				}
 			case 'focusItem':
 				return babelHelpers.extends({}, state, { focused: action.row });
 			case 'blurItem':
@@ -179,11 +191,13 @@ Catpow.Finder = function (props) {
 	}, []);
 
 	var _useReducer = useReducer(reducer, {
+		wait: true,
 		config: JSON.parse(localStorage.getItem('config:' + basepath) || '{}'),
 		index: {
 			cols: {},
 			rows: []
 		},
+		colsByRole: {},
 		colsToShow: [],
 		colsToShowByRole: {},
 		path: props.path,
@@ -193,6 +207,7 @@ Catpow.Finder = function (props) {
 		items: [],
 		itemsInPage: [],
 		itemsPerPage: 20,
+		selectedRows: [],
 		focused: false,
 		page: 1,
 		device: Catpow.util.getDevice()
@@ -230,6 +245,20 @@ Catpow.Finder = function (props) {
 				}
 				break;
 		}
+	}, []);
+
+	var info = useMemo(function () {
+		return {
+			roleGroups: {
+				images: ['image'],
+				header: ['label', 'name'],
+				tags: ['group', 'tag'],
+				address: ['zip', 'prefecture', 'address'],
+				contact: ['tel', 'fax', 'email', 'url'],
+				contentes: ['data', 'contents'],
+				style: ['color']
+			}
+		};
 	}, []);
 
 	useEffect(function () {
@@ -288,7 +317,7 @@ Catpow.Finder = function (props) {
 		null,
 		wp.element.createElement(
 			Catpow.FinderContext.Provider,
-			{ value: { state: state, dispatch: dispatch } },
+			{ value: { state: state, dispatch: dispatch, info: info } },
 			wp.element.createElement(
 				'div',
 				{ className: "Finder " + className },
