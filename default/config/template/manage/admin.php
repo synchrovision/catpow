@@ -1,7 +1,13 @@
 <?php
 namespace Catpow;
 $appFile=\cp::get_file_path('<!--data_type-->/<!--data_name-->/manage/app.js',cp::FROM_THEME|cp::FROM_CONFIG);
-\cp::use_components(['Finder','Finder/SearchResults','Finder/SelectLayout','Finder/SelectColumns','Finder/BulkControl','Finder/FilterControl','Finder/Download','Finder/PerPage','Finder/Status','Finder/Pagenate']);
+\cp::use_components([
+	'Finder',
+	'Finder/Focused','Finder/SearchResults',
+	'Finder/SelectLayout','Finder/SelectColumns','Finder/BulkControl',
+	'Finder/FilterControl','Finder/Download','Finder/PerPage','Finder/Status','Finder/Pagenate',
+	'Spinner'
+]);
 $id=uniqid('manage-');
 $props=[
 	'basepath'=>"<!--data_type-->/<!--data_name-->/manage",
