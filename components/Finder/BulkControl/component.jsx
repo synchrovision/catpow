@@ -28,33 +28,33 @@ Catpow.Finder.BulkControl=(props)=>{
 	},[state.bulk]);
 	
 	const exec_bulk=useCallback(async(action)=>{
-		const conf=state.bulk[action];
-		const rows=state.items.filter((item)=>item._selected).map((item)=>item._id);
-		
 		try{
+			const conf=state.bulk[action];
 			const vals=await show_modal(conf);
+			
+			wp.apiFetch({
+				path:state.apiPath+'/bulk/exec/'+action,
+				method: 'POST',
+				data:{rows:state.selectedRows.map((row)=>row._id),vals}
+			}).then((res)=>{
+				if(callback){
+					callback({action,res,state,dispatch});
+				}
+				if(res.remove){
+					dispatch({type:'removeRows',rows:state.selectedRows});
+				}
+				if(res.update){
+					dispatch({type:'updateRows',rows:res.update});
+				}
+				if(res.message){
+					dispatch({type:'showMessage',...res.message});
+				}
+				if(res.download){
+					Catpow.util.download(res.download.data,res.download.name || state.name+'.csv','text/csv');
+				}
+			});
 		}
 		catch(err){return false;}
-		
-		wp.apiFetch({
-			path:state.apiPath+'/bulk/exec/'+action,
-			method: 'POST',
-			data:{rows,vals}
-		}).then((res)=>{
-			console.log(res);
-			if(callback){
-				callback({action,res,state,dispatch});
-			}
-			if(res.items){
-				res.items.map((newItem)=>{
-					const oldItem=state.items.find((oldItem)=>oldItem._id===newItem._id)
-					if(oldItem){Object.assign(oldItem,newItem);}
-				});
-			}
-			if(res.message){
-				dispatch({type:'showMessage',...res.message});
-			}
-		});
 	},[state,dispatch]);
 	const show_modal=useCallback((conf)=>{
 		const {ModalForm}=Catpow;
@@ -120,7 +120,7 @@ Catpow.Finder.BulkControl=(props)=>{
 						<button
 							className="button"
 							onClick={(e)=>{exec_bulk(value)}}
-						>{__('適用','catpow')}</button>
+						>{__('実行','catpow')}</button>
 					</div>
 				</li>
 			</ul>

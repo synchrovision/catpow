@@ -51,64 +51,57 @@ Catpow.Finder.BulkControl = function (props) {
 
 	var exec_bulk = useCallback(function () {
 		var _ref = babelHelpers.asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(action) {
-			var conf, rows, _vals;
-
+			var conf, vals;
 			return regeneratorRuntime.wrap(function _callee$(_context) {
 				while (1) {
 					switch (_context.prev = _context.next) {
 						case 0:
+							_context.prev = 0;
 							conf = state.bulk[action];
-							rows = state.items.filter(function (item) {
-								return item._selected;
-							}).map(function (item) {
-								return item._id;
-							});
-							_context.prev = 2;
-							_context.next = 5;
+							_context.next = 4;
 							return show_modal(conf);
 
-						case 5:
-							_vals = _context.sent;
+						case 4:
+							vals = _context.sent;
+
+
+							wp.apiFetch({
+								path: state.apiPath + '/bulk/exec/' + action,
+								method: 'POST',
+								data: { rows: state.selectedRows.map(function (row) {
+										return row._id;
+									}), vals: vals }
+							}).then(function (res) {
+								if (callback) {
+									callback({ action: action, res: res, state: state, dispatch: dispatch });
+								}
+								if (res.remove) {
+									dispatch({ type: 'removeRows', rows: state.selectedRows });
+								}
+								if (res.update) {
+									dispatch({ type: 'updateRows', rows: res.update });
+								}
+								if (res.message) {
+									dispatch(babelHelpers.extends({ type: 'showMessage' }, res.message));
+								}
+								if (res.download) {
+									Catpow.util.download(res.download.data, res.download.name || state.name + '.csv', 'text/csv');
+								}
+							});
 							_context.next = 11;
 							break;
 
 						case 8:
 							_context.prev = 8;
-							_context.t0 = _context['catch'](2);
+							_context.t0 = _context['catch'](0);
 							return _context.abrupt('return', false);
 
 						case 11:
-
-							wp.apiFetch({
-								path: state.apiPath + '/bulk/exec/' + action,
-								method: 'POST',
-								data: { rows: rows, vals: vals }
-							}).then(function (res) {
-								console.log(res);
-								if (callback) {
-									callback({ action: action, res: res, state: state, dispatch: dispatch });
-								}
-								if (res.items) {
-									res.items.map(function (newItem) {
-										var oldItem = state.items.find(function (oldItem) {
-											return oldItem._id === newItem._id;
-										});
-										if (oldItem) {
-											babelHelpers.extends(oldItem, newItem);
-										}
-									});
-								}
-								if (res.message) {
-									dispatch(babelHelpers.extends({ type: 'showMessage' }, res.message));
-								}
-							});
-
-						case 12:
 						case 'end':
 							return _context.stop();
 					}
 				}
-			}, _callee, _this, [[2, 8]]);
+			}, _callee, _this, [[0, 8]]);
 		}));
 
 		return function (_x) {
@@ -235,7 +228,7 @@ Catpow.Finder.BulkControl = function (props) {
 								exec_bulk(value);
 							}
 						},
-						__('適用', 'catpow')
+						__('実行', 'catpow')
 					)
 				)
 			)

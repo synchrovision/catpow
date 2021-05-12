@@ -1,3 +1,3 @@
 <?php
 $useStyles=['dashicons'];
-$useComponents=['SelectBox','Popover','ModalForm'];
+$useComponents=['SelectBox','RadioButtons','Popover','ModalForm'];
