@@ -37,6 +37,26 @@ Catpow.Finder = function (props) {
 		var uri = URI(baseurl);
 		history.pushState(state, '', uri.directory(uri.directory() + '/' + path).addQuery(q).toString());
 	}, [props]);
+	var updateResults = useCallback(function (state) {
+		state.items = state.index.rows.filter(function (row) {
+			return Object.keys(state.query).every(function (key) {
+				if (state.query[key].length === 0) {
+					return true;
+				}
+				return state.query[key].indexOf(row[key].value[0]) !== -1;
+			});
+		});
+		reflectResults(state);
+	}, []);
+	var reflectResults = useCallback(function (state) {
+		state.selectedRows = state.items.filter(function (row) {
+			return row._selected;
+		});
+		state.maxNumPages = Math.ceil(state.items.length / state.itemsPerPage);
+		state.page = Math.min(state.maxNumPages, Math.max(1, state.page));
+		var offset = state.itemsPerPage * (state.page - 1);
+		state.itemsInPage = state.items.slice(offset, offset + state.itemsPerPage);
+	}, []);
 
 	var reducer = useCallback(function (state, action) {
 		switch (action.type) {
@@ -71,6 +91,37 @@ Catpow.Finder = function (props) {
 						fillConf(index.cols[name]);
 					});
 					return babelHelpers.extends({}, state, { index: index, colsByRole: colsByRole, colsToShow: colsToShow, colsToShowByRole: colsToShowByRole, wait: wait });
+				}
+			case 'updateRows':
+				{
+					if (action.rows) {
+						var newRowsMap = new Map(action.rows.map(function (row) {
+							return [row._id, row];
+						}));
+						state.index.rows.map(function (row) {
+							if (newRowsMap.has(row._id)) {
+								console.log(row);
+								console.log(newRowsMap.get(row._id));
+								babelHelpers.extends(row, newRowsMap.get(row._id));
+							}
+						});
+					}
+					updateResults(state);
+					return babelHelpers.extends({}, state);
+				}
+			case 'removeRows':
+				{
+					var removeFrags = new Map(action.rows.map(function (row) {
+						return [row, true];
+					}));
+					state.index.rows = state.index.rows.filter(function (row) {
+						return removeFrags.has(row);
+					});
+					state.items = state.items.filter(function (row) {
+						return removeFrags.has(row);
+					});
+					reflectResults(state);
+					return babelHelpers.extends({}, state);
 				}
 			case 'setPath':
 				return babelHelpers.extends({}, state, { path: action.path });
@@ -147,12 +198,14 @@ Catpow.Finder = function (props) {
 			case 'blurItem':
 				return babelHelpers.extends({}, state, { focused: false });
 			case 'setItems':
-				var maxNumPages = Math.ceil(action.items.length / state.itemsPerPage);
-				return babelHelpers.extends({}, state, {
-					items: action.items,
-					maxNumPages: maxNumPages,
-					page: Math.min(maxNumPages, state.page)
-				});
+				{
+					var maxNumPages = Math.ceil(action.items.length / state.itemsPerPage);
+					return babelHelpers.extends({}, state, {
+						items: action.items,
+						maxNumPages: maxNumPages,
+						page: Math.min(maxNumPages, state.page)
+					});
+				}
 			case 'setPage':
 				{
 					var page = Math.min(state.maxNumPages, Math.max(1, action.page));
@@ -167,25 +220,21 @@ Catpow.Finder = function (props) {
 				}
 			case 'setItemsPerPage':
 				{
-					if (!action.itemsPerPage) {
+					if (!action.itemsPerPage || action.itemsPerPage === state.itemsPerPage) {
 						return state;
 					}
-					var _maxNumPages = Math.ceil(state.items.length / action.itemsPerPage);
-					var _page = Math.min(_maxNumPages, state.page);
-					var _offset = action.itemsPerPage * (_page - 1);
-					return babelHelpers.extends({}, state, {
-						itemsInPage: state.items.slice(_offset, _offset + action.itemsPerPage),
-						itemsPerPage: action.itemsPerPage,
-						maxNumPages: _maxNumPages,
-						page: _page
-					});
+					state.itemsPerPage = action.itemsPerPage;
+					reflectResults(state);
+					return babelHelpers.extends({}, state);
 				}
 			case 'updateDevice':
-				var device = Catpow.util.getDevice();
-				if (device === state.device) {
-					return state;
+				{
+					var device = Catpow.util.getDevice();
+					if (device === state.device) {
+						return state;
+					}
+					return babelHelpers.extends({}, state, { device: Catpow.util.getDevice() });
 				}
-				return babelHelpers.extends({}, state, { device: Catpow.util.getDevice() });
 		}
 		return state;
 	}, []);
@@ -267,22 +316,8 @@ Catpow.Finder = function (props) {
 	}, [state]);
 
 	useEffect(function () {
-		var items = state.index.rows.filter(function (row) {
-			return Object.keys(state.query).every(function (key) {
-				if (state.query[key].length === 0) {
-					return true;
-				}
-				return state.query[key].indexOf(row[key].value[0]) !== -1;
-			});
-		});
-		var itemsInPage = items.slice(0, state.itemsPerPage);
-		var maxNumPages = Math.ceil(items.length / state.itemsPerPage);
-		dispatch({ type: 'update', data: {
-				page: 1,
-				items: items,
-				itemsInPage: itemsInPage,
-				maxNumPages: maxNumPages
-			} });
+		updateResults(state);
+		dispatch({ type: 'update' });
 	}, [state.path, state.query, state.index]);
 	useEffect(function () {
 		if (!state.ignorePushState) {
