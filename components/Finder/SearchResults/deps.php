@@ -1,3 +1,3 @@
 <?php
 $useScripts=[];
-$useComponents=['Transition','Output','Checkbox'];
+$useComponents=['Transition','Output','CheckBox'];
