@@ -14,5 +14,9 @@ class color extends meta{
 		wp_enqueue_script('cp_colorpicker_script');
 		return parent::input($meta,$prm);
 	}
+	public static function resolve_conf($conf){
+		if(empty($conf['role'])){$conf['role']='color';}
+		return $conf;
+	}
 }
 ?>

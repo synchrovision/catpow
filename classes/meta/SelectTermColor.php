@@ -3,7 +3,7 @@ namespace Catpow\meta;
 
 class SelectTermColor extends SelectPostColor{
 	public static
-		$input_type='select';
+		$output_type='select';
 	static $ui='SelectColor';
 	public static function get($data_type,$data_name,$id,$meta_name,$conf){
 		global $wpdb;

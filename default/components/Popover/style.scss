@@ -1,0 +1,69 @@
+@import 'admin_style_config.scss';
+.Popover{
+	&.open{
+		@include anm((a:PopoverOpen .5s a 1 f));
+	}
+	&.close{
+		@include anm((a:PopoverClose .5s a 1 f));
+	}
+	&.closed{
+		@include bnd((d:n));
+		@include usr((e:n));
+	}
+	&Anchor{
+		@include bnd((d:b,p:a,t:0,b:0,l:0,r:0,z:10000));
+		@include usr((e:n));
+	}
+	&Container{
+		@include bnd((p:f,t:0,r:0,w:50rem,h:10rem));
+		@include usr((e:n));
+	}
+	&Body{
+		@include bnd((d:b,w:max 64rem,h:a 90vh,p:a,l:0,r:0,t:100%,mg:a));
+		@include bdr((r:1rem));
+		@include bg((c:b));
+		@include shd((b:10));
+		@include trn((x:-3rem,y:1rem));
+		@include usr((e:a));
+		.PopoverArrow{
+			@include tail((p:t,c:b));
+			@include bnd((mgl:3rem));
+		}
+		.PopoverContents{
+			@include bnd((h:a 90vh,ox:h,oy:a));
+			@include bdr((r:1rem));
+		}
+		.PopoverControl{
+			.close{
+				@include bnd((p:a,w:3rem,h:3rem,t:-4rem,r:1rem));
+				&::before,&::after{
+					content:'';
+					@include bnd((p:a,t:1.5rem,w:3rem,h:1));
+					@include bg((c:b));
+				}
+				&::before{
+					@include trn((r:45deg));
+				}
+				&::after{
+					@include trn((r:-45deg));
+				}
+			}
+		}
+	}
+}
+@keyframes PopoverOpen{
+	0%{
+		@include trn((o:0));
+	}
+	100%{
+		@include trn((o:1));
+	}
+}
+@keyframes PopoverClose{
+	0%{
+		@include trn((o:1));
+	}
+	100%{
+		@include trn((o:0));
+	}
+}

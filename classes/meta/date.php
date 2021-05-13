@@ -13,5 +13,9 @@ class date extends meta{
 		if($prm=='time'){return strtotime($val);}
 		return date($prm,strtotime($val));
 	}
+	public static function resolve_conf($conf){
+		if(empty($conf['role'])){$conf['role']='date';}
+		return $conf;
+	}
 }
 ?>

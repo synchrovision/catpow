@@ -408,6 +408,9 @@ class CP{
 		wp_enqueue_script($src,reset($file),$deps,$ver,$in_footer);
 		return true;
 	}
+	public static function set_script_translations($src){
+		wp_set_script_translations($src,'catpow',WP_PLUGIN_DIR.'/catpow/languages');
+	}
 	public static function enqueue_style($src=false,$deps=array(),$flag=0733,$ver=false,$media=false){
 		static $missed=[];
 		if(wp_style_is($src) || isset($missed[$src])){return false;}
@@ -446,6 +449,7 @@ class CP{
 			}
 		}
 		self::enqueue_script('ui/'.$name.'/input.js',$deps);
+		self::set_script_translations('ui/'.$name.'/input.js');
 		if($f=self::get_file_path('ui/'.$name.'/inputInit.php')){include $f;}
 		$done[$name]=1;
 		return true;
@@ -477,6 +481,7 @@ class CP{
 			}
 		}
 		self::enqueue_script('ui/'.$name.'/output.js',$deps);
+		self::set_script_translations('ui/'.$name.'/output.js');
 		if($f=self::get_file_path('ui/'.$name.'/outputInit.php')){include $f;}
 		$done[$name]=1;
 		return true;
@@ -521,6 +526,7 @@ class CP{
 		}
 		self::enqueue_script('components/'.$name.'/component.js',$deps);
 		self::enqueue_style('components/'.$name.'/style.css');
+		self::set_script_translations('components/'.$name.'/component.js');
 		$done[$name]=1;
 	}
 	public static function use_store($name){
@@ -537,6 +543,7 @@ class CP{
 			}
 		}
 		self::enqueue_script('stores/'.$name.'/store.js',$deps);
+		self::set_script_translations('stores/'.$name.'/store.js');
 		$done[$name]=1;
 	}
 	
@@ -882,6 +889,7 @@ class CP{
 		$class_name=self::get_class_name('meta',$conf['type']);
 		$class_name::fill_conf($conf);
 		$conf['input_type']=$class_name::$input_type;
+		$conf['output_type']=$class_name::$output_type??$conf['input_type'];
 		if(!isset($conf['label']))$conf['label']=$conf['name'];
 		if(substr($conf['label'],-1)=='*')$conf['required']=true;
 		if(!empty($conf['show_in_rest'])){
@@ -2037,9 +2045,8 @@ class CP{
 						'sourceRoot'=>'/'
 					]);
 					$css=$scssc->compile(file_get_contents($scss_name.'.scss'),$scss_name.'.scss');
-				}catch(Exception $e){
-					error_log('%s:%s;',$scss_name,$e->getMessage());
-					die;
+				}catch(\Exception $e){
+					error_log(sprintf('%s:%s;',$scss_name,$e->getMessage()));
 				}
 				file_put_contents($scss_name.'.css',$css);
 			}

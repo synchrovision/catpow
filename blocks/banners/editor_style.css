@@ -9,9 +9,10 @@ ul.wp-block-catpow-banners li.item {
     position: absolute;
     left: 0px;
     bottom: 0px;
-    background-color: rgba(254, 254, 254, 0.8);
+    background-color: rgba(248, 248, 248, 0.8);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
     ul.wp-block-catpow-banners li.item > .link p {
       margin: 0px;
       padding: 0.2rem;
       font-size: 1rem; }
+/*# sourceMappingURL=./editor_style.css.map */

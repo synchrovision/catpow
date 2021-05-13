@@ -1,25 +1,31 @@
-﻿Catpow.Popup=function({children,open,onClose,closeButton}){
-	var [state,setPopupState]=wp.element.useState('closed');
-	if(open && state==='closed'){setPopupState('open');}
-	if(!open && state==='open'){setPopupState('close');}
+﻿Catpow.Popup=(props)=>{
+	const {children,open,onClose,onClosed,closeButton=false,closeOnClickAway=true}=props;
+	const {useState,useEffect}=wp.element;
+	const [state,setPopupState]=useState('closed');
+	
+	useEffect(()=>setPopupState(open?'open':'close'),[open]);
+	
 	return (
-		<div
-			className={'Popup '+state}
-			onAnimationEnd={()=>{
-				if(state==='close'){
-					setPopupState('closed');
-				}
-			}}
-		>
-			<div class="PopupBG" onClick={onClose}></div>
-			<div class="PopupBody">
-				<div className="PopupContents">{children}</div>
-				{closeButton && (
-					<div className="PopupControl">
-						<div className="close" onClick={onClose}></div>
-					</div>
-				)}
+		<Catpow.External className="PopupContainer">
+			<div
+				className={'Popup '+state}
+				onAnimationEnd={()=>{
+					if(state==='close'){
+						setPopupState('closed');
+						onClosed();
+					}
+				}}
+			>
+				<div class="PopupBG" onClick={()=>{if(closeOnClickAway){onClose()}}}></div>
+				<div class="PopupBody">
+					<div className="PopupContents">{children}</div>
+					{closeButton && (
+						<div className="PopupControl">
+							<div className="close" onClick={onClose}></div>
+						</div>
+					)}
+				</div>
 			</div>
-		</div>
+		</Catpow.External>
 	);
 }

@@ -1,0 +1,183 @@
+@charset "utf-8";
+.FinderSearchResultsItems {
+  background-color: #f8f8f8;
+  list-style: none; }
+  .FinderSearchResultsItems > .list {
+    margin: 0px auto; }
+    .FinderSearchResultsItems > .list .item .title {
+      text-align: center;
+      font-size: 1.2rem; }
+  .FinderSearchResultsItems.list-view .list {
+    list-style: none; }
+    .FinderSearchResultsItems.list-view .list > .item {
+      padding: 5px;
+      margin: 0px; }
+      .FinderSearchResultsItems.list-view .list > .item > .contents {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-lines: multiple;
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-align-items: center;
+        align-items: center;
+        height: 100%;
+        border-radius: 10px;
+        background-color: #f8f8f8;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+        .FinderSearchResultsItems.list-view .list > .item > .contents .control {
+          -webkit-box-flex: 0;
+          flex-grow: 0;
+          flex-shrink: 0;
+          flex-basis: auto;
+          padding: 10px 5px; }
+        .FinderSearchResultsItems.list-view .list > .item > .contents .texts {
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: flex;
+          -webkit-box-lines: multiple;
+          -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+          -webkit-align-items: center;
+          align-items: center;
+          -webkit-box-flex: 1;
+          flex-grow: 1;
+          flex-shrink: 1;
+          flex-basis: 100px;
+          padding: 10px; }
+          .FinderSearchResultsItems.list-view .list > .item > .contents .texts .header {
+            -webkit-box-flex: 1;
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 100px;
+            font-size: 18px; }
+          .FinderSearchResultsItems.list-view .list > .item > .contents .texts .tags {
+            -webkit-box-flex: 1;
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 150px; }
+          .FinderSearchResultsItems.list-view .list > .item > .contents .texts .address {
+            -webkit-box-flex: 2;
+            flex-grow: 2;
+            flex-shrink: 2;
+            flex-basis: 200px; }
+          .FinderSearchResultsItems.list-view .list > .item > .contents .texts .contact {
+            -webkit-box-flex: 2;
+            flex-grow: 2;
+            flex-shrink: 2;
+            flex-basis: 200px; }
+          .FinderSearchResultsItems.list-view .list > .item > .contents .texts .focus {
+            -webkit-box-flex: 0;
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: 100px;
+            margin: 5px;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: #007cba;
+            cursor: pointer;
+            text-align: center;
+            font-size: 15px;
+            line-height: 1em;
+            font-weight: 700;
+            color: #f8f8f8; }
+.FinderSearchResultsItems.grid-view .list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap; }
+  .FinderSearchResultsItems.grid-view .list > .item, .FinderSearchResultsItems.grid-view .list > .spacer {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 240px;
+    box-sizing: border-box;
+    margin: 0px; }
+  .FinderSearchResultsItems.grid-view .list > .item {
+    padding: 0.5rem; }
+    .FinderSearchResultsItems.grid-view .list > .item > .contents {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-lines: multiple;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+      height: 100%;
+      background-color: #f8f8f8;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+      .FinderSearchResultsItems.grid-view .list > .item > .contents .control {
+        -webkit-box-flex: 0;
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: auto;
+        padding: 10px 5px; }
+      .FinderSearchResultsItems.grid-view .list > .item > .contents .texts {
+        -webkit-box-flex: 1;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 100px;
+        padding: 10px; }
+        .FinderSearchResultsItems.grid-view .list > .item > .contents .texts .header {
+          padding: 0px;
+          margin: 0px;
+          padding-bottom: 5px;
+          margin-bottom: 10px;
+          font-size: 18px;
+          border-bottom-style: solid;
+          border-bottom-width: 1px;
+          border-bottom-color: #a2a2a2; }
+        .FinderSearchResultsItems.grid-view .list > .item > .contents .texts .focus {
+          display: block;
+          margin: 10px;
+          padding: 5px;
+          border-radius: 5px;
+          background-color: #007cba;
+          cursor: pointer;
+          text-align: center;
+          font-size: 15px;
+          line-height: 1em;
+          font-weight: 700;
+          color: #f8f8f8; }
+.FinderSearchResultsItems.table-view {
+  overflow-x: auto; }
+  .FinderSearchResultsItems.table-view .table {
+    min-width: 100%;
+    width: auto; }
+    .FinderSearchResultsItems.table-view .table .header {
+      background-color: #a2a2a2; }
+      .FinderSearchResultsItems.table-view .table .header .row .cell {
+        min-width: 8rem;
+        width: auto;
+        padding: 0.5rem;
+        text-align: center;
+        color: #fff; }
+    .FinderSearchResultsItems.table-view .table .body .row {
+      background-color: #ececec; }
+      .FinderSearchResultsItems.table-view .table .body .row:nth-child(odd) {
+        background-color: #f6f6f6; }
+      .FinderSearchResultsItems.table-view .table .body .row.selected {
+        background-color: #d9ebf5; }
+        .FinderSearchResultsItems.table-view .table .body .row.selected:nth-child(odd) {
+          background-color: #e6f2f8; }
+      .FinderSearchResultsItems.table-view .table .body .row .control {
+        width: 3rem;
+        text-align: center; }
+      .FinderSearchResultsItems.table-view .table .body .row .cell {
+        min-width: 8rem;
+        width: auto;
+        padding: 0.5rem; }
+        .FinderSearchResultsItems.table-view .table .body .row .cell .outputs__item dl {
+          clear: both; }
+          .FinderSearchResultsItems.table-view .table .body .row .cell .outputs__item dl dt {
+            float: left;
+            min-width: fit-content;
+            max-width: auto;
+            width: 4rem; }
+            .FinderSearchResultsItems.table-view .table .body .row .cell .outputs__item dl dt::after {
+              content: '：'; }
+          .FinderSearchResultsItems.table-view .table .body .row .cell .outputs__item dl dd {
+            float: left;
+            margin: 0px; }
+/*# sourceMappingURL=./style.css.map */

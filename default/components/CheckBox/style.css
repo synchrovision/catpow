@@ -1,0 +1,61 @@
+@charset "utf-8";
+.CheckBox {
+  display: inline-block;
+  position: relative;
+  padding: 1rem 1.5rem;
+  margin: 0.75rem;
+  padding-left: 4rem;
+  border-radius: 2rem;
+  font-size: 1.5rem;
+  line-height: 1em;
+  color: #b4b4b4;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset, -1px -1px 1px rgba(0, 0, 0, 0.1), -1px -1px 1px rgba(255, 255, 255, 0.8) inset, 1px 1px 1px rgba(255, 255, 255, 0.8); }
+  .CheckBoxIcon {
+    display: block;
+    position: relative;
+    width: 1.5rem;
+    margin: 0px 1rem;
+    height: 1.5rem;
+    border-radius: 3px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8) inset, -1px -1px 1px rgba(0, 0, 0, 0.1), -1px -1px 1px rgba(0, 0, 0, 0.1) inset, 1px 1px 1px rgba(255, 255, 255, 0.8); }
+    .CheckBoxIcon::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 0px;
+      height: 0px;
+      border-left-style: solid;
+      border-bottom-style: solid;
+      border-left-width: 3px;
+      border-bottom-width: 3px;
+      border-left-color: #66b0d6;
+      border-bottom-color: #66b0d6;
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;
+      opacity: 0;
+      transform: -webkit- translateY(0.5rem) rotateZ(-45deg);
+      transform: translateY(0.5rem) rotateZ(-45deg);
+      -webkit-transition: width 0s 0.2s, height 0s 0.2s, opacity 0.2s;
+      transition: width 0s 0.2s, height 0s 0.2s, opacity 0.2s; }
+      .CheckBoxIcon.selected::before {
+        width: 1.5rem;
+        height: 0.75rem;
+        opacity: 1;
+        -webkit-transition: width 0.1s 0.1s, height 0.1s, opacity 0.1s;
+        transition: width 0.1s 0.1s, height 0.1s, opacity 0.1s; }
+  .CheckBox > .CheckBoxIcon {
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 1rem;
+    bottom: 0px;
+    margin: auto; }
+  .CheckBox.selected {
+    color: #444;
+    box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8) inset, -1px -1px 1px rgba(255, 255, 255, 0.8), -1px -1px 1px rgba(0, 0, 0, 0.1) inset, 1px 1px 1px rgba(0, 0, 0, 0.1); }
+/*# sourceMappingURL=./style.css.map */

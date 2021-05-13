@@ -1,0 +1,32 @@
+@import 'admin_style_config.scss';
+
+
+.FinderBulkControl{
+	@include bnd((d:ib,p:r));
+	&Form{
+		@include bnd((w:80vw 60rem));
+		.title{
+			@include bnd((mg:0,mgb:10,pd:20));
+			@include bdr((p:b,s:s,w:1,c:t 30));
+			@include txt((a:c,p:18,h:1em,f:t,w:b));
+		}
+		.inputs{
+			@include bnd((mg:0));
+			@include txt((a:c));
+			.item{
+				@include bnd((d:b,p:r,mg:0 a,pd:10 30));
+				@include bdr((p:b,s:s,w:1,c:t 20));
+				.label{
+					@include bnd((mg:0,mgb:10));
+					@include txt((p:15,h:1.5em));
+				}
+				.desc{
+					@include txt((a:j,p:12,h:1.5em));
+				}
+				.caption{
+					@include txt((a:j,p:10,h:1.5em));
+				}
+			}
+		}
+	}
+}
