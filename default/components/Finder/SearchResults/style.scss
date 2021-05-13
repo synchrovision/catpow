@@ -1,0 +1,156 @@
+@import "admin_style_config.scss";
+.FinderSearchResults{
+	&Items{
+		@include bg((c:b));
+		@include txt((l:n));
+		&>.list{
+			@include bnd((mg:0 a));
+			.item{
+				.title{
+					@include txt((a:c,p:1.2rem));
+				}
+			}
+		}
+		&.list-view{
+			.list{
+				@include txt((l:n));
+				&>.item{
+					@include bnd((pd:5,mg:0));
+					&>.contents{
+						@include flx((w:w,a:c));
+						@include bnd((h:f));
+						@include bdr((r:10));
+						@include bg((c:b));
+						@include shd((b:1));
+						.control{
+							@include bnd((f:0 0 a,pd:10 5));
+						}
+						.texts{
+							@include flx((w:w,a:c));
+							@include bnd((f:1 1 100,pd:10));
+							.header{
+								@include bnd((f:1 1 100));
+								@include txt((p:18));
+							}
+							.tags{
+								@include bnd((f:1 1 150));
+							}
+							.address{
+								@include bnd((f:2 2 200));
+								
+							}
+							.contact{
+								@include bnd((f:2 2 200));
+							}
+							.focus{
+								@include bnd((f:0 0 100,mg:5,pd:5));
+								@include bdr((r:5));
+								@include bg((c:m));
+								@include usr((c:p));
+								@include txt((a:c,p:15,h:1em,w:b,c:b));
+							}
+						}
+					}
+				}
+			}
+		}
+		&.grid-view{
+			.list{
+				@include flx((w:w));
+				&>.item,&>.spacer{
+					@include bnd((f:1 1 240,bs:b,mg:0));
+				}
+				&>.item{
+					@include bnd((pd:.5rem));
+					&>.contents{
+						@include flx((w:w));
+						@include bnd((h:f));
+						@include bg((c:b));
+						@include shd((b:1));
+						.control{
+							@include bnd((f:0 0 a,pd:10 5));
+						}
+						.texts{
+							@include bnd((f:1 1 100,pd:10));
+							.header{
+								@include bnd((pd:0,mg:0,pdb:5,mgb:10));
+								@include txt((p:18));
+								@include bdr((p:b,s:s,w:1,c:t 50));
+							}
+							.tags{
+								
+							}
+							.address{
+								
+							}
+							.contact{
+								
+							}
+							.focus{
+								@include bnd((d:b,mg:10,pd:5));
+								@include bdr((r:5));
+								@include bg((c:m));
+								@include usr((c:p));
+								@include txt((a:c,p:15,h:1em,w:b,c:b));
+							}
+						}
+					}
+				}
+			}
+		}
+		&.table-view{
+			@include bnd((ox:a));
+			.table{
+				@include bnd((w:f a));
+				.header{
+					@include bg((c:t 50));
+					.row{
+						.cell{
+							@include bnd((w:8rem a,pd:.5rem));
+							@include txt((a:c,c:i));
+						}
+					}
+				}
+				.body{
+					.row{
+						@include bg((c:t 10));
+						&:nth-child(odd){
+							@include bg((c:t 5));
+						}
+						&.selected{
+							@include bg((c:m 15));
+							&:nth-child(odd){
+								@include bg((c:m 10));
+							}
+						}
+						.control{
+							@include bnd((w:3rem));
+							@include txt((a:c));
+						}
+						.cell{
+							@include bnd((w:8rem a,pd:.5rem));
+							.outputs{
+								&__item{
+									dl{
+										@include bnd((cl:b));
+										dt{
+											@include bnd((fl:l,w:fit 4rem a));
+											&::after{
+												content:'：';
+											}
+										}
+										dd{
+											@include bnd((fl:l));
+											@include bnd((mg:0));
+										}
+									}
+								}
+							}
+						}
+					}
+
+				}
+			}
+		}
+	}
+}
