@@ -11,7 +11,7 @@ Catpow.CheckBox = function (props) {
 			'div',
 			{ className: "CheckBox" + (selected ? ' selected' : ''), onClick: function onClick(e) {
 					onChange(!selected);
-				} },
+				}, role: 'checkbox', 'aria-checked': selected },
 			wp.element.createElement(
 				'div',
 				{ className: "CheckBoxIcon" + (selected ? ' selected' : '') },
@@ -24,7 +24,7 @@ Catpow.CheckBox = function (props) {
 		'div',
 		{ className: "CheckBoxIcon" + (selected ? ' selected' : ''), onClick: function onClick(e) {
 				onChange(!selected);
-			} },
+			}, role: 'checkbox', 'aria-checked': selected },
 		' '
 	);
 };

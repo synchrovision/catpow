@@ -27,7 +27,7 @@ Catpow.RadioButtons = function (props) {
 				"div",
 				{ className: "RadioButton" + (selected ? ' selected' : ''), onClick: function onClick(e) {
 						onChange(option.value);
-					} },
+					}, role: "checkbox", "aria-checked": selected },
 				wp.element.createElement(
 					"div",
 					{ className: "RadioButtonIcon" + (selected ? ' selected' : '') },
