@@ -36,7 +36,9 @@ Catpow.Output = function (props) {
 		case 'radio':
 		case 'checkbox':
 			{
-				var labels = value.map(function (val) {
+				var labels = value.filter(function (val) {
+					return !!val;
+				}).map(function (val) {
 					return conf.dict[val];
 				});
 				if (!labels.length) {
