@@ -10,7 +10,7 @@ $actions=[
 		}
 	],
 	'download'=>[
-		'label'=>'ダウンロード',
+		'label'=>'CSVをダウンロード',
 		'callback'=>function($rows){
 			
 			$data=[];
