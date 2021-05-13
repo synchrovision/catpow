@@ -82,8 +82,8 @@ Catpow.Finder=(props)=>{
 			}
 			case 'removeRows':{
 				const removeFrags=new Map(action.rows.map((row)=>[row,true]));
-				state.index.rows=state.index.rows.filter((row)=>removeFrags.has(row));
-				state.items=state.items.filter((row)=>removeFrags.has(row));
+				state.index.rows=state.index.rows.filter((row)=>!removeFrags.has(row));
+				state.items=state.items.filter((row)=>!removeFrags.has(row));
 				reflectResults(state);
 				return {...state};
 			}

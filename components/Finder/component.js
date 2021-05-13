@@ -115,10 +115,10 @@ Catpow.Finder = function (props) {
 						return [row, true];
 					}));
 					state.index.rows = state.index.rows.filter(function (row) {
-						return removeFrags.has(row);
+						return !removeFrags.has(row);
 					});
 					state.items = state.items.filter(function (row) {
-						return removeFrags.has(row);
+						return !removeFrags.has(row);
 					});
 					reflectResults(state);
 					return babelHelpers.extends({}, state);
