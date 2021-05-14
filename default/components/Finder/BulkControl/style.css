@@ -1,44 +1,52 @@
 @charset "utf-8";
 .FinderBulkControl {
   display: inline-block;
-  position: relative; }
-  .FinderBulkControlForm {
-    max-width: 60rem;
-    width: 80vw; }
-    .FinderBulkControlForm .title {
-      margin: 0px;
-      margin-bottom: 10px;
-      padding: 20px;
-      border-bottom-style: solid;
-      border-bottom-width: 1px;
-      border-bottom-color: #c7c7c7;
-      text-align: center;
-      font-size: 18px;
-      line-height: 1em;
-      font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
-      font-weight: 700; }
-    .FinderBulkControlForm .inputs {
-      margin: 0px;
-      text-align: center; }
-      .FinderBulkControlForm .inputs .item {
-        display: block;
-        position: relative;
-        margin: 0px auto;
-        padding: 10px 30px;
-        border-bottom-style: solid;
-        border-bottom-width: 1px;
-        border-bottom-color: #dadada; }
-        .FinderBulkControlForm .inputs .item .label {
-          margin: 0px;
-          margin-bottom: 10px;
-          font-size: 15px;
-          line-height: 1.5em; }
-        .FinderBulkControlForm .inputs .item .desc {
-          text-align: justify;
-          font-size: 12px;
-          line-height: 1.5em; }
-        .FinderBulkControlForm .inputs .item .caption {
-          text-align: justify;
-          font-size: 10px;
-          line-height: 1.5em; }
+  position: relative;
+}
+.FinderBulkControlForm {
+  max-width: 60rem;
+  width: 80vw;
+}
+.FinderBulkControlForm .title {
+  margin: 0px;
+  margin-bottom: 10px;
+  padding: 20px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #c7c7c7;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1em;
+  font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-weight: 700;
+}
+.FinderBulkControlForm .inputs {
+  margin: 0px;
+  text-align: center;
+}
+.FinderBulkControlForm .inputs .item {
+  display: block;
+  position: relative;
+  margin: 0px auto;
+  padding: 10px 30px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #dadada;
+}
+.FinderBulkControlForm .inputs .item .label {
+  margin: 0px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  line-height: 1.5em;
+}
+.FinderBulkControlForm .inputs .item .desc {
+  text-align: justify;
+  font-size: 12px;
+  line-height: 1.5em;
+}
+.FinderBulkControlForm .inputs .item .caption {
+  text-align: justify;
+  font-size: 10px;
+  line-height: 1.5em;
+}
 /*# sourceMappingURL=./style.css.map */

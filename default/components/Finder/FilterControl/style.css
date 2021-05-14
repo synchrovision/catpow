@@ -1,15 +1,19 @@
 @charset "utf-8";
 .FinderFilterControl__table {
   border-collapse: collapse;
-  border-spacing: 0px; }
-  .FinderFilterControl__table > .row > .label {
-    padding: 1rem 2rem;
-    min-width: 8rem;
-    width: auto; }
-  .FinderFilterControl__table > .row > .inputs {
-    padding: 1rem; }
-  .FinderFilterControl__table > .row + .row {
-    border-top-style: solid;
-    border-top-width: 1px;
-    border-top-color: #dadada; }
+  border-spacing: 0px;
+}
+.FinderFilterControl__table > .row > .label {
+  padding: 1rem 2rem;
+  min-width: 8rem;
+  width: auto;
+}
+.FinderFilterControl__table > .row > .inputs {
+  padding: 1rem;
+}
+.FinderFilterControl__table > .row + .row {
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #dadada;
+}
 /*# sourceMappingURL=./style.css.map */

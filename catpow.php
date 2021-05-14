@@ -12,7 +12,7 @@ Author URI: https://twitter.com/synchro_vision
 Text Domain: catpow
 Domain Path: /languages
 */
-
+include __DIR__.'/vendor/autoload.php';
 include __DIR__.'/classes/CP.php';
 foreach(cp::$core_functions as $n){include(__DIR__.'/core/'.$n.'.php');}
 

@@ -1,13 +1,6 @@
 <?php
 use Catpow\facebook\cpfb;
 
-if(!file_exists(__DIR__.'/vendor')){
-	require_once(ABSPATH.'/wp-admin/includes/file.php');
-	WP_Filesystem();
-	unzip_file( __DIR__.'/vendor.zip', __DIR__);
-}
-include __DIR__.'/vendor/Facebook/autoload.php';
-
 add_action('body_start',function(){
 	?>
 	<div id="fb-root"></div>
