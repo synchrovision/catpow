@@ -1,5 +1,6 @@
 <?php
 namespace Catpow;
+api::register_nonce();
 $appFile=\cp::get_file_path('<!--data_type-->/<!--data_name-->/manage/app.js',cp::FROM_THEME|cp::FROM_CONFIG);
 \cp::use_components([
 	'Finder',
