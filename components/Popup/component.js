@@ -30,7 +30,7 @@ Catpow.Popup = function (props) {
 				onAnimationEnd: function onAnimationEnd() {
 					if (state === 'close') {
 						setPopupState('closed');
-						onClosed();
+						onClosed && onClosed();
 					}
 				}
 			},
