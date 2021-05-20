@@ -72,9 +72,10 @@ trait formTrait{
 	/*render*/
 	public function render($slug=false,$vars=false){
 		wp_enqueue_script('cp_form');
+		wp_enqueue_script('cp_rest_nonce');
+		\Catpow\api::register_nonce('form/post');
 		?>
 		<form action="<?= home_url(); ?>" method="get" id="<?= $this->form_id ?>" class="cp_form" enctype="multipart/form-data">
-			<?php wp_nonce_field('cp_form','_cp_form_nonce'); ?>
 			<input type="hidden" name="cp_form_id" value="<?= $this->form_id ?>"/>
 			<div class="cp_form_content" data-role="cp_form_content" data-form-id="<?= $this->form_id ?>">
 				<?php $this->inc($slug,$vars); ?>

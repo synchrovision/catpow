@@ -6,6 +6,9 @@ use Catpow\content\form_exception;
 */
 
 class post extends \Catpow\api{
+	public static 
+		$method='POST',
+		$check_nonce=true;
 	public static function call($req,$res){
 		add_action('set_logged_in_cookie',function($logged_in_cookie){
 			$_COOKIE[LOGGED_IN_COOKIE]=$logged_in_cookie;
@@ -73,9 +76,6 @@ class post extends \Catpow\api{
 		}
 		$GLOBALS['res']['html']=ob_get_clean();
 		$res->set_data($GLOBALS['res']);
-	}
-	public static function permission($req){
-		return wp_verify_nonce($req->get_param('_cp_form_nonce'),'cp_form');
 	}
 }
 
