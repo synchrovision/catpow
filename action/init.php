@@ -10,7 +10,7 @@ while($fname = $cpjs_dir->read()){
 		wp_register_script(
 			substr($fname,0,-3),
 			plugins_url().'/catpow/js/'.$fname,
-			substr($fname,0,7)==='cp_rest'?['jquery','wp-api-fetch']:['jquery'],
+			($fname==='cp_form.js' || substr($fname,0,7)==='cp_rest')?['jquery','wp-api-fetch']:['jquery'],
 			filemtime(WP_PLUGIN_DIR.'/catpow/js/'.$fname),
 			true
 		);
