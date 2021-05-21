@@ -6,6 +6,10 @@ class select_rel_rows extends select{
 		$value_type='NUMERIC',
 		$data_type='bigint(20)';
 	
+	public static function get_rel_data_value($relkey,$vals,$conf){
+		global $cpdb;
+		return call_user_func_array('array_merge',array_column($cpdb->select($conf['table'],['meta_id'=>$vals]),$relkey));
+	}
 	public static function output($meta,$prm){
 		$val=$meta->value;
 		if(empty($val)){return false;}
