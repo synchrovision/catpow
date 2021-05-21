@@ -23,7 +23,7 @@ class select_rel_rows extends select{
 		$key_meta=$database_meta['meta'][$key];
 		
 		$row=reset($cpdb->select($table,['meta_id'=>$val],false));
-		return \cp::get_output($key_meta,$row[$key])[0];
+		return $row[$key];
 	}
 	
 	public static function get_selections($meta){
