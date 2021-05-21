@@ -196,6 +196,14 @@ trait formTrait{
 		$this->allowed_inputs[\cp::get_input_id($name,$key)]=$meta;
 	}
 	public function get($name,$key='value'){
+		if(strpos($name,'->')!==false){
+			list($name,$relkey)=explode('->',$name);
+			$conf=$this->conf['meta'][$name];
+			if(empty($conf)){return [];}
+			$class_name=\cp::get_class_name('meta',$conf['type']);
+			$values=$this->inputs->get($this->the_data_path.'/'.$name);
+			return $class_name::get_rel_data_value($relkey,$values,$conf);
+		}
 		return $this->inputs->get($this->the_data_path.'/'.$name,$key);
 	}
 	public function set($name,$val,$key='value'){
