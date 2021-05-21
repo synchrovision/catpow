@@ -966,7 +966,7 @@ class CP{
 				$conf
 			);
 			if(isset($relkey)){
-				return $cache[$data_path.'->'.$relkey][$tmp]=$class_name::get_rel_data_value($values,$relkey,$conf);
+				return $cache[$data_path.'->'.$relkey][$tmp]=$class_name::get_rel_data_value($relkey,$values,$conf);
 			}
 			return $values;
 		}
