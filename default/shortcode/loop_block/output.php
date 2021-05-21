@@ -6,7 +6,7 @@ $data=$GLOBALS['loop_block_data'][$prm[0]];
 
 if(cp::$content){
 	$path=$data['path'];
-	if($data['values']){
+	if(!empty($data['values'])){
 		$org_vars=cp::$vars;
 		foreach($data['values'] as $values){
 			cp::$vars=array_merge(cp::$vars,$values);
