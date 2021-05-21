@@ -49,6 +49,9 @@ class mailform extends article_type{
 		$conf_data['meta']['mail']['meta']+=[
 			'email'=>['type'=>'email','label'=>'メールアドレス']
 		];
+		if(isset($conf_data['on_receive_inputs'])){
+			$conf_data['meta']['mail']['on_receive']=$conf_data['on_receive_inputs'];
+		}
 		if(!isset($GLOBALS['post_types'][$mailconf_post_type])){
 			$GLOBALS['post_types'][$mailconf_post_type]=['article_type'=>'mailconf'];
 			\cp::fill_conf_data('post',$mailconf_post_type,$GLOBALS['post_types'][$mailconf_post_type]);
