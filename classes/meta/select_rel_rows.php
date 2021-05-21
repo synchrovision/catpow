@@ -26,8 +26,10 @@ class select_rel_rows extends select{
 		
 		$key_meta=$database_meta['meta'][$key];
 		
-		$row=reset($cpdb->select($table,['meta_id'=>$val],false));
-		return $row[$key];
+		$rtn='';
+		$rows=$cpdb->select($meta->conf['table'],['meta_id'=>$val],false);
+		$values=call_user_func_array('array_merge',array_column($rows,$key));
+		return implode(',',$values);
 	}
 	
 	public static function get_selections($meta){
