@@ -195,6 +195,18 @@ trait formTrait{
 	public function allow_input($name,$meta,$key='value'){
 		$this->allowed_inputs[\cp::get_input_id($name,$key)]=$meta;
 	}
+	public function get($name,$key='value'){
+		return $this->inputs->get($this->the_data_path.'/'.$name,$key);
+	}
+	public function set($name,$val,$key='value'){
+		return $this->inputs->set($this->the_data_path.'/'.$name,$val,$key);
+	}
+	public function del($name,$key='value'){
+		return $this->inputs->del($this->the_data_path.'/'.$name,$key);
+	}
+	public function def($name,$val,$key='value'){
+		return $this->inputs->def($this->the_data_path.'/'.$name,$val,$key);
+	}
 	public function receive($req=false){
 		if($req===false){$req=$_REQUEST;}
 		$inputs_class_name=\cp::get_class_name('inputs');
@@ -245,6 +257,7 @@ trait formTrait{
 			$class_name=\cp::get_class_name('meta',$meta->conf['type']);
 			$class_name::reflect_to_inputs($this->inputs,$input_id,$vals,$meta);
 		}
+		if(!empty($this->conf['on_receive'])){$this->conf['on_receive']($this);}
 		
 		return true;
 	}
