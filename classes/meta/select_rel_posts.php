@@ -8,8 +8,16 @@ class select_rel_posts extends select{
 	
 	public static function get_rel_data_value($relkey,$vals,$conf){
 		$values=[];
-		foreach($vals as $id){
-			$values[]=\cp::get_the_meta_value("post/".get_post_type($id)."/{$id}/{$relkey}")?:[];
+		$relkey=\Catpow\data_type\post::$key_translation[$relkey]??$relkey;
+		if(in_array($relkey,\Catpow\query\post::$data_keys)){
+			foreach($vals as $id){
+				$values[]=[get_post($id)->$relkey];
+			}
+		}
+		else{
+			foreach($vals as $id){
+				$values[]=\cp::get_the_meta_value("post/".get_post_type($id)."/{$id}/{$relkey}")?:[];
+			}
 		}
 		return call_user_func_array('array_merge',$values);
 	}
