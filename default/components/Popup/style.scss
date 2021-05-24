@@ -1,0 +1,67 @@
+@import 'admin_style_config.scss';
+
+
+.Popup{
+	@include bnd((d:i,p:r,z:10000));
+	&.open{
+		@include anm((a:PopupOpen .5s a 1 f));
+	}
+	&.close{
+		@include anm((a:PopupClose .5s a 1 f));
+	}
+	&.closed{
+		@include bnd((d:n));
+		@include usr((e:n));
+	}
+	&Container{
+		@include bnd((d:b,p:f,t:0,l:0,r:0));
+	}
+	&BG{
+		content:'';
+		@include bnd((d:b,p:f,t:0,b:0,l:0,r:0));
+		@include bg((c:shd));
+	}
+	&Body{
+		@include bnd((d:b,w:fit 64rem,h:a 90vh,p:f,l:0,r:0,t:50%,mg:a));
+		@include bdr((r:1rem));
+		@include bg((c:b));
+		@include shd((b:2));
+		@include trn((y:-50%));
+		.PopupContents{
+			@include bnd((oy:a));
+		}
+		.PopupControl{
+			.close{
+				@include bnd((p:a,w:3rem,h:3rem,t:-4rem,r:1rem));
+				&::before,&::after{
+					content:'';
+					@include bnd((p:a,t:1.5rem,w:3rem,h:1));
+					@include bg((c:b));
+				}
+				&::before{
+					@include trn((r:45deg));
+				}
+				&::after{
+					@include trn((r:-45deg));
+				}
+			}
+		}
+	}
+}
+
+@keyframes PopupOpen{
+	0%{
+		@include trn((o:0));
+	}
+	100%{
+		@include trn((o:1));
+	}
+}
+@keyframes PopupClose{
+	0%{
+		@include trn((o:1));
+	}
+	100%{
+		@include trn((o:0));
+	}
+}

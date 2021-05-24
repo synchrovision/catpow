@@ -1,0 +1,41 @@
+@import "admin_style_config.scss";
+
+.Finder{
+	@include bg((c:b));
+	$b:&;
+	&Navigation{
+		@include bnd((p:r,z:100));
+		@include flx((w:w,a:c));
+		#{$b}Spacer{
+			@include bnd((f:1 1 a));
+		}
+	}
+	&Main{
+		
+	}
+	&Control{
+		@include bnd((d:ib,pd:1rem));
+		.items{
+			@include bnd((pd:0,mg:0));
+			@include flx((w:w));
+			@include txt((l:n,h:1em));
+			@include bdr((r:1rem));
+			@include shd((bve:-1));
+			.item{
+				@include bnd((p:r,pd:0,mg:0));
+				&>.inputs{
+					@include bnd((pd:1rem));
+				}
+				&>.icon{
+					@include txt((c:t 50));
+					@include bnd((pd:1rem));
+				}
+				&.active{
+					&>.icon{
+						@include txt((c:m));
+					}
+				}
+			}
+		}
+	}
+}

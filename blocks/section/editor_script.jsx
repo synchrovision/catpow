@@ -15,7 +15,7 @@
 
 registerBlockType('catpow/section',{
 	title: '🐾 Section',
-	description:'見出しと内容のまとまりを表すセクションのブロックです。',
+	description:__('見出しと内容のまとまりを表すセクションのブロックです。','catpow'),
 	icon: 'id-alt',
 	category: 'catpow',
 	attributes:{
@@ -90,8 +90,8 @@ registerBlockType('catpow/section',{
 		CP.manageStyleData(props,['patternImageCss','headerPatternImageCss','frameImageCss','borderImageCss']);
 		
 		const selectiveClasses=[
-			{input:'buttons',filter:'sectionTag',key:'SectionTag',label:'セクションタグ',values:['article','section','aside','div']},
-			{input:'buttons',filter:'headingTag',key:'HeadingTag',label:'見出しタグ',values:['h2','h3','h4'],effect:(val)=>{
+			{input:'buttons',filter:'sectionTag',key:'SectionTag',label:__('セクションタグ','catpow'),values:['article','section','aside','div']},
+			{input:'buttons',filter:'headingTag',key:'HeadingTag',label:__('見出しタグ','catpow'),values:['h2','h3','h4'],effect:(val)=>{
 				for(const key in states){
 					if(key.substr(0,5)==='level'){states[key]=false;}
 				}
@@ -99,7 +99,7 @@ registerBlockType('catpow/section',{
 				setAttributes({classes:CP.flagsToWords(states)});
 			}},
 			{
-				label:'タイプ',
+				label:__('タイプ','catpow'),
 				filter:'type',
 				type:'gridbuttons',
 				values:[
@@ -110,49 +110,49 @@ registerBlockType('catpow/section',{
 				sub:{
 					scene:[
 						'color',
-						{label:'プレフィクス',values:'hasPrefix'},
-						{label:'ヘッダ画像',values:'hasHeaderImage',sub:[
+						{label:__('プレフィクス','catpow'),values:'hasPrefix'},
+						{label:__('ヘッダ画像','catpow'),values:'hasHeaderImage',sub:[
 							{input:'image',keys:imageKeys.headerImage,size:imageSizes.headerImage}
 						]},
-						{label:'ヘッダ背景画像',values:'hasHeaderBackgroundImage',sub:[
-							{input:'picture',label:'背景画像',keys:imageKeys.headerBackgroundImage,devices},
-							{label:'薄く',values:'paleHeaderBG'}
+						{label:__('ヘッダ背景画像','catpow'),values:'hasHeaderBackgroundImage',sub:[
+							{input:'picture',label:__('背景画像','catpow'),keys:imageKeys.headerBackgroundImage,devices},
+							{label:__('薄く','catpow'),values:'paleHeaderBG'}
 						]},
-						{label:'抜き色文字',values:'inverseText',sub:[
-							{label:'ヘッダ背景色',values:'hasHeaderBackgroundColor',sub:[
-								{label:'パターン画像',values:'hasHeaderPatternImage',sub:[
+						{label:__('抜き色文字','catpow'),values:'inverseText',sub:[
+							{label:__('ヘッダ背景色','catpow'),values:'hasHeaderBackgroundColor',sub:[
+								{label:__('パターン画像','catpow'),values:'hasHeaderPatternImage',sub:[
 									{input:'pattern',css:'headerPatternImageCss',sel:'#'+id+' > .contents > .header'},
 								]}
 							]}
 						]},
-						{label:'リード',values:'hasLead'},
-						{label:'背景画像',values:'hasBackgroundImage',sub:[
-							{input:'picture',label:'背景画像',keys:imageKeys.backgroundImage,devices},
-							{label:'薄く',values:'paleBG'}
+						{label:__('リード','catpow'),values:'hasLead'},
+						{label:__('背景画像','catpow'),values:'hasBackgroundImage',sub:[
+							{input:'picture',label:__('背景画像','catpow'),keys:imageKeys.backgroundImage,devices},
+							{label:__('薄く','catpow'),values:'paleBG'}
 						]},
-						{label:'背景色',values:'hasBackgroundColor'},
-						{label:'メニューアイコン',values:'hasNavIcon',sub:[
-							{input:'image',label:'アイコン',keys:imageKeys.navIcon,size:'thumbnail'}
+						{label:__('背景色','catpow'),values:'hasBackgroundColor'},
+						{label:__('メニューアイコン','catpow'),values:'hasNavIcon',sub:[
+							{input:'image',label:__('アイコン','catpow'),keys:imageKeys.navIcon,size:'thumbnail'}
 						]},
 						{
-							label:'テンプレート',
+							label:__('テンプレート','catpow'),
 							values:'isTemplate',
 							sub:[
 								{
 									input:'text',
-									label:'ヘッダ画像コード',
+									label:__('ヘッダ画像コード','catpow'),
 									key:'headerImageCode',
 									cond:states.hasHeaderImage
 								},
 								{
 									input:'text',
-									label:'ヘッダ背景画像コード',
+									label:__('ヘッダ背景画像コード','catpow'),
 									key:'headerBackgroundImageCode',
 									cond:states.hasHeaderBackgroundImage
 								},
 								{
 									input:'text',
-									label:'背景画像コード',
+									label:__('背景画像コード','catpow'),
 									key:'backgroundImageCode',
 									cond:states.hasBackgroundImage
 								}
@@ -161,45 +161,45 @@ registerBlockType('catpow/section',{
 					],
 					article:[
 						'color',
-						{type:'buttons',label:'レベル',values:{level2:'2',level3:'3',level4:'4'}},
-						{type:'gridbuttons',label:'見出しタイプ',filter:'heading_type',values:['header','headline','catch']},
-						{label:'ヘッダ画像',values:'hasHeaderImage',sub:[
+						{type:'buttons',label:__('レベル','catpow'),values:{level2:'2',level3:'3',level4:'4'}},
+						{type:'gridbuttons',label:__('見出しタイプ','catpow'),filter:'heading_type',values:['header','headline','catch']},
+						{label:__('ヘッダ画像','catpow'),values:'hasHeaderImage',sub:[
 							{
 								input:'image',keys:imageKeys.headerImage,size:imageSizes.headerImage,
 								cond:(!states.isTemplate || !headerImageCode)
 							}
 						]},
-						{label:'リード',values:'hasLead'},
-						{label:'背景画像',values:'hasBackgroundImage',sub:[
+						{label:__('リード','catpow'),values:'hasLead'},
+						{label:__('背景画像','catpow'),values:'hasBackgroundImage',sub:[
 							{input:'picture',keys:imageKeys.backgroundImage,devices,cond:(!states.isTemplate || !backgroundImageCode)},
-							{label:'薄く',values:'paleBG'}
+							{label:__('薄く','catpow'),values:'paleBG'}
 						]},
-						{label:'背景色',values:'hasBackgroundColor'},
-						{label:'メニューアイコン',values:'hasNavIcon',sub:[
-							{input:'image',label:'アイコン',keys:imageKeys.navIcon,size:'thumbnail'}
+						{label:__('背景色','catpow'),values:'hasBackgroundColor'},
+						{label:__('メニューアイコン','catpow'),values:'hasNavIcon',sub:[
+							{input:'image',label:__('アイコン','catpow'),keys:imageKeys.navIcon,size:'thumbnail'}
 						]},
-						{label:'パターン画像',values:'hasPatternImage',sub:[
+						{label:__('パターン画像','catpow'),values:'hasPatternImage',sub:[
 							{input:'pattern',css:'patternImageCss',sel:'#'+id,color},
 						]},
-						{label:'フレーム画像',values:'hasFrameImage',sub:[
+						{label:__('フレーム画像','catpow'),values:'hasFrameImage',sub:[
 							{input:'frame',css:'frameImageCss',sel:'#'+id,color},
 						]},
-						{label:'ボーダー画像',values:'hasBorderImage',sub:[
+						{label:__('ボーダー画像','catpow'),values:'hasBorderImage',sub:[
 							{input:'border',css:'borderImageCss',sel:'#'+id+' > .contents',color},
 						]},
 						{
-							label:'テンプレート',
+							label:__('テンプレート','catpow'),
 							values:'isTemplate',
 							sub:[
 								{
 									input:'text',
-									label:'ヘッダ画像コード',
+									label:__('ヘッダ画像コード','catpow'),
 									key:'headerImageCode',
 									cond:states.hasHeaderImage
 								},
 								{
 									input:'text',
-									label:'背景画像コード',
+									label:__('背景画像コード','catpow'),
 									key:'backgroundImageCode',
 									cond:states.hasBackgroundImage
 								}
@@ -209,38 +209,38 @@ registerBlockType('catpow/section',{
 					column:[
 						'color',
 						'pattern',
-						{label:'アイコン',values:'hasIcon',sub:[
+						{label:__('アイコン','catpow'),values:'hasIcon',sub:[
 							{input:'icon',color}
 						]},
-						{label:'画像',values:'hasImage',sub:[
+						{label:__('画像','catpow'),values:'hasImage',sub:[
 							{input:'image',keys:imageKeys.image}
 						]},
-						{label:'背景画像',values:'hasBackgroundImage',sub:[
+						{label:__('背景画像','catpow'),values:'hasBackgroundImage',sub:[
 							{input:'picture',keys:imageKeys.backgroundImage,devices,cond:(!states.isTemplate || !backgroundImageCode)},
-							{label:'薄く',values:'paleBG'}
+							{label:__('薄く','catpow'),values:'paleBG'}
 						]},
-						{label:'線',values:{no_border:'なし',thin_border:'細',bold_border:'太'}},
-						{label:'角丸',values:'round'},
-						{label:'影',values:'shadow',sub:[{label:'内側',values:'inset'}]},
-						{label:'メニューアイコン',values:'hasNavIcon',sub:[
-							{input:'image',label:'アイコン',keys:imageKeys.navIcon,size:'thumbnail'}
+						{label:__('線','catpow'),values:{no_border:__('なし','catpow'),thin_border:__('細','catpow'),bold_border:__('太','catpow')}},
+						{label:__('角丸','catpow'),values:'round'},
+						{label:__('影','catpow'),values:'shadow',sub:[{label:__('内側','catpow'),values:'inset'}]},
+						{label:__('メニューアイコン','catpow'),values:'hasNavIcon',sub:[
+							{input:'image',label:__('アイコン','catpow'),keys:imageKeys.navIcon,size:'thumbnail'}
 						]},
-						{label:'ボーダー画像',values:'hasBorderImage',sub:[
+						{label:__('ボーダー画像','catpow'),values:'hasBorderImage',sub:[
 							{input:'border',css:'borderImageCss',sel:'#'+id+' > .contents',color},
 						]},
 						{
-							label:'テンプレート',
+							label:__('テンプレート','catpow'),
 							values:'isTemplate',
 							sub:[
 								{
 									input:'text',
-									label:'画像コード',
+									label:__('画像コード','catpow'),
 									key:'imageCode',
 									cond:states.hasImage
 								},
 								{
 									input:'text',
-									label:'背景画像コード',
+									label:__('背景画像コード','catpow'),
 									key:'backgroundImageCode',
 									cond:states.hasBackgroundImage
 								}
@@ -356,7 +356,7 @@ registerBlockType('catpow/section',{
 			</SectionTag>,
 			<InspectorControls>
 				<CP.SelectClassPanel
-					title='クラス'
+					title={__('クラス','catpow')}
 					icon='art'
 					set={setAttributes}
 					attr={attributes}
@@ -372,7 +372,7 @@ registerBlockType('catpow/section',{
 				</PanelBody>
 				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 					<TextareaControl
-						label='クラス'
+						label={__('クラス','catpow')}
 						onChange={(classes)=>setAttributes({classes})}
 						value={classes}
 					/>

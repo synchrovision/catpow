@@ -1,0 +1,19 @@
+@import "admin_style_config.scss";
+.FinderFocused{
+	&>.items{
+		@include tbl(());
+		@include bnd((w:f));
+		&>.item{
+			@include bg((c:t 5));
+			&:nth-of-type(odd){
+				@include bg((c:t 10));
+			}
+			&>.label{
+				@include bnd((pd:10,w:200));
+			}
+			&>.value{
+				@include bnd((pd:10));
+			}
+		}
+	}
+}

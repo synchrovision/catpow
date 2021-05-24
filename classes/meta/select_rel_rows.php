@@ -6,6 +6,10 @@ class select_rel_rows extends select{
 		$value_type='NUMERIC',
 		$data_type='bigint(20)';
 	
+	public static function get_rel_data_value($relkey,$vals,$conf){
+		global $cpdb;
+		return call_user_func_array('array_merge',array_column($cpdb->select($conf['table'],['meta_id'=>$vals]),$relkey));
+	}
 	public static function output($meta,$prm){
 		$val=$meta->value;
 		if(empty($val)){return false;}
@@ -22,13 +26,16 @@ class select_rel_rows extends select{
 		
 		$key_meta=$database_meta['meta'][$key];
 		
-		$row=reset($cpdb->select($table,['meta_id'=>$val],false));
-		return \cp::get_output($key_meta,$row[$key])[0];
+		$rtn='';
+		$rows=$cpdb->select($meta->conf['table'],['meta_id'=>$val],false);
+		$values=call_user_func_array('array_merge',array_column($rows,$key));
+		return implode(',',$values);
 	}
 	
 	public static function get_selections($meta){
 		global $cpdb;
 		if(empty($meta->conf['table'])){return [];}
+		if(empty($meta->conf['value'])){$meta->conf['value']='';}
 		$where=is_callable($meta->conf['value'])?$meta->conf['value']($meta):$meta->conf['value'];
 		if(is_object($where) and is_a($where,\cp::get_class_name('query','cpdb'))){$where=$where->where;}
 		$table=$meta->conf['table'];
@@ -51,11 +58,10 @@ class select_rel_rows extends select{
 		$rows=$cpdb->select($table,$where,false);
 		if(isset($sortby)){
 			foreach($rows as $i=>$row){
-				$rtn[cp_get_cft_output($sortby_meta,$row[$sortby])[0]]
-					[cp_get_cft_output($key_meta,$row[$key])[0]]=$row['meta_id'];
+				$rtn[$row[$sortby]][$row[$key]]=$row['meta_id'];
 			}
 		}
-		else{foreach($rows as $row){$rtn[cp_get_cft_output($key_meta,$row[$key])[0]]=$row['meta_id'];}}
+		else{foreach($rows as $row){$rtn[$row[$key][0]]=$row['meta_id'];}}
 		if(isset($meta->conf['addition'])){
 			if(is_array($meta->conf['addition'])){$rtn=array_merge($rtn,$meta->conf['addition']);}
 			else{$rtn[$meta->conf['addition']]=0;}

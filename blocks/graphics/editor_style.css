@@ -25,7 +25,7 @@
   border-style: solid;
   border-width: 1px;
   border-color: #007cba;
-  background-color: #fefefe; }
+  background-color: #f8f8f8; }
 .wp-block-catpow-graphics .item .pos {
   left: -15px; }
 .wp-block-catpow-graphics .item .del {
@@ -34,3 +34,4 @@
   left: 30px; }
 .wp-block-catpow-graphics .item .bnd {
   right: -15px; }
+/*# sourceMappingURL=./editor_style.css.map */

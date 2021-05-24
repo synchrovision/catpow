@@ -1,0 +1,38 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-05-05 19:54+0900\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.3\n"
+"X-Poedit-KeywordsList: _;_e;__\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: BulkControl/component.js:92
+msgid "一括処理"
+msgstr "Bulk"
+
+#: BulkControl/component.js:107
+msgid "適用"
+msgstr "Exec"
+
+#: PerPage/component.js:34
+msgid "件/頁"
+msgstr "/page"
+
+#: Status/component.js:32
+#, javascript-format
+msgid "%d件中%d件表示"
+msgstr "Show %2$d from %1$d"
+
+#: Status/component.js:33
+#, javascript-format
+msgid "%d件選択"
+msgstr "%d selected"

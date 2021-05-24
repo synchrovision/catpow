@@ -18,6 +18,12 @@ $post_types_to_register=array();
 $post_formats_to_support=array();
 $is_support_post_thumbnails=false;
 foreach($post_types as $type=>&$type_vals){
+	if(!empty($type_vals['children'])){
+		foreach($type_vals['children'] as $child_type=>$child_type_vals){
+			$post_types[$child_type]=&$type_vals['children'][$child_type];
+			$post_types[$child_type]['parent']=$type;
+		}
+	}
 	$supports=array('title','editor');
 	if(!empty($type_vals['comments']))array_push($supports,'comments');
 	if(isset($type_vals['post-formats'])){
@@ -59,7 +65,7 @@ foreach($post_types as $type=>&$type_vals){
 				'menu_position'=>$type_vals['menu_position']??null,
 				'show_ui'=>current_user_can($type_vals['capability']??'edit_others_posts'),
 				'show_in_rest'=>$type_vals['richedit']??true,
-				'show_in_menu'=>$type_vals['show_in_menu']??true,
+				'show_in_menu'=>$type_vals['show_in_menu']??empty($type_vals['parent']),
 				'hierarchical'=>$type_vals['hierarchical']??false,
 				'supports'=>$supports,
 				'template'=>$type_vals['default_content']??false,

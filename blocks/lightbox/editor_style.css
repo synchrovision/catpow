@@ -17,7 +17,7 @@ ul.wp-block-catpow-lightbox.edit {
   border-color: rgba(68, 68, 68, 0.5);
   border-radius: 1rem;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  background-color: #fefefe; }
+  background-color: #f8f8f8; }
   ul.wp-block-catpow-lightbox.edit li.item {
     display: -webkit-box;
     display: -webkit-flex;
@@ -131,3 +131,4 @@ div.lightbox_preview {
     transform-origin: top left;
     transform: -webkit- scale(0.625);
     transform: scale(0.625); }
+/*# sourceMappingURL=./editor_style.css.map */

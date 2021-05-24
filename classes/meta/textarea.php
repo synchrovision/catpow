@@ -19,5 +19,17 @@ class textarea extends meta{
 			$meta->value
 		);
 	}
+	public static function resolve_conf($conf){
+		if(empty($conf['role'])){
+			$conf['role']=[
+				'desc'=>'desc',
+				'excerpt'=>'desc',
+				'caption'=>'caption',
+				'address'=>'address',
+				'keywords'=>'keywords'
+			][$conf['name']]??'contents';
+		}
+		return $conf;
+	}
 }
 ?>

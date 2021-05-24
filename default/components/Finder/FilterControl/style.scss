@@ -1,0 +1,19 @@
+@import 'admin_style_config.scss';
+
+
+.FinderFilterControl{
+	&__table{
+		@include tbl(());
+		&>.row{
+			&>.label{
+				@include bnd((pd:1rem 2rem,w:8rem a));
+			}
+			&>.inputs{
+				@include bnd((pd:1rem));
+			}
+			&+.row{
+				@include bdr((p:t,s:s,w:1,c:t 20));
+			}
+		}
+	}
+}

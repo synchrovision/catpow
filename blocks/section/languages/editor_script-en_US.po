@@ -1,0 +1,155 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-04-28 14:06+0900\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"X-Poedit-KeywordsList: _;_e;__\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: editor_script.js:18
+msgid "見出しと内容のまとまりを表すセクションのブロックです。"
+msgstr "A block of sections that represents a set of headings and content."
+
+#: editor_script.js:112
+msgid "セクションタグ"
+msgstr "Section Tag"
+
+#: editor_script.js:112
+msgid "見出しタグ"
+msgstr "Heading Tag"
+
+#: editor_script.js:123
+msgid "タイプ"
+msgstr "Type"
+
+#: editor_script.js:128
+msgid "プレフィクス"
+msgstr "Prefix"
+
+#: editor_script.js:128 editor_script.js:148
+msgid "ヘッダ画像"
+msgstr "Header Image"
+
+#: editor_script.js:128
+msgid "ヘッダ背景画像"
+msgstr "Header BG Image"
+
+#: editor_script.js:128 editor_script.js:151 editor_script.js:166
+msgid "背景画像"
+msgstr "BG Image"
+
+#: editor_script.js:128 editor_script.js:151 editor_script.js:166
+msgid "薄く"
+msgstr "Pale"
+
+#: editor_script.js:128
+msgid "抜き色文字"
+msgstr "Invert Text Color"
+
+#: editor_script.js:128
+msgid "ヘッダ背景色"
+msgstr "Header BG Color"
+
+#: editor_script.js:128 editor_script.js:151
+msgid "パターン画像"
+msgstr "Pattern Image"
+
+#: editor_script.js:128 editor_script.js:151
+msgid "リード"
+msgstr "Lead Text"
+
+#: editor_script.js:128 editor_script.js:151
+msgid "背景色"
+msgstr "BG Color"
+
+#: editor_script.js:128 editor_script.js:151 editor_script.js:166
+msgid "メニューアイコン"
+msgstr "Menu Icon"
+
+#: editor_script.js:128 editor_script.js:151 editor_script.js:166
+msgid "アイコン"
+msgstr "Icon"
+
+#: editor_script.js:129 editor_script.js:152 editor_script.js:167
+msgid "テンプレート"
+msgstr "Template"
+
+#: editor_script.js:133 editor_script.js:156
+msgid "ヘッダ画像コード"
+msgstr "Header Image ShortCode"
+
+#: editor_script.js:138
+msgid "ヘッダ背景画像コード"
+msgstr "Header BG Image ShortCode"
+
+#: editor_script.js:143 editor_script.js:161 editor_script.js:176
+msgid "背景画像コード"
+msgstr "BG Image Code"
+
+#: editor_script.js:148
+msgid "レベル"
+msgstr "Level"
+
+#: editor_script.js:148
+msgid "見出しタイプ"
+msgstr "Heading Type"
+
+#: editor_script.js:151
+msgid "フレーム画像"
+msgstr "Frame Image"
+
+#: editor_script.js:151 editor_script.js:166
+msgid "ボーダー画像"
+msgstr "Border Image"
+
+#: editor_script.js:166
+msgid "画像"
+msgstr "Image"
+
+#: editor_script.js:166
+msgid "線"
+msgstr "Stroke"
+
+#: editor_script.js:166
+msgid "なし"
+msgstr "none"
+
+#: editor_script.js:166
+msgid "細"
+msgstr "thin"
+
+#: editor_script.js:166
+msgid "太"
+msgstr "Bold"
+
+#: editor_script.js:166
+msgid "角丸"
+msgstr "Rounded"
+
+#: editor_script.js:166
+msgid "影"
+msgstr "Shadow"
+
+#: editor_script.js:166
+msgid "内側"
+msgstr "Inset"
+
+#: editor_script.js:171
+msgid "画像コード"
+msgstr "Image ShortCode"
+
+#: editor_script.js:302 editor_script.js:324
+msgid "クラス"
+msgstr "Class"
+
+#~ msgid "catpow"
+#~ msgstr "catpow"
