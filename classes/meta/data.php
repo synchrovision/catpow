@@ -50,5 +50,9 @@ class data extends meta{
 	public static function reflect_to_order(&$order_data,$data_type,$data_name,$meta_name,$conf){
 		return false;
 	}
+	public static function resolve_conf($conf){
+		if(empty($conf['role'])){$conf['role']='data';}
+		return $conf;
+	}
 }
 ?>

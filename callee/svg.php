@@ -3,7 +3,7 @@ if(substr($_GET['uri'],-4)!=='.svg'){
 	header('HTTP/1.0 403 Forbidden');
 	die();
 }
-$url=($_SERVER['HTTPS']?'https://':'http://').$_SERVER['HTTP_HOST'].$_GET['uri'];
+$url=(!empty($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST'].$_GET['uri'];
 $svg=file_get_contents($url);
 
 if(!empty($_GET['color'])){

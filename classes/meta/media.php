@@ -38,6 +38,10 @@ class media extends meta{
 		return self::get_input($meta->the_data_path,$meta->conf,$meta->value);
 	}
 	
+	public static function get_props($meta){
+		return ['values'=>$meta->value,'images'=>array_map('wp_get_attachment_image_src',$mete->value)];
+	}
+	
 	public static function get_input($path,$conf,$val){
 		if(isset($conf['dummy'])){$dummy=get_template_directory_uri('/images/'.$conf['dummy']);}
 		else{$dummy=\cp::get_file_url('images/dummy.jpg');}
@@ -91,6 +95,10 @@ class media extends meta{
 		(empty($prm['playsinline'])?'':' playsinline').
 		(empty($prm['preload'])?'':' preload').
 		(empty($prm['loop'])?'':' loop');
+	}
+	public static function resolve_conf($conf){
+		if(empty($conf['role'])){$conf['role']='image';}
+		return $conf;
 	}
 }
 

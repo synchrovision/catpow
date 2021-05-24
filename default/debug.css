@@ -14,7 +14,7 @@
   width: auto;
   overflow-y: auto;
   text-align: left;
-  background-color: #fefefe;
+  background-color: #f8f8f8;
   opacity: 0.9;
   transform: -webkit- translateZ(100px);
   transform: translateZ(100px); }
@@ -50,3 +50,4 @@
         content: '…'; }
       #cp_log table tr.close td table {
         display: none; }
+/*# sourceMappingURL=./debug.css.map */

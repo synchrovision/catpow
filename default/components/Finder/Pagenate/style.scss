@@ -1,0 +1,45 @@
+@import 'admin_style_config.scss';
+
+
+.FinderPagenate{
+	@include bnd((pd:1rem));
+	@include flx((w:n,a:c,j:c));
+	.button{
+		@include bnd((f:0 0 a,pd:.5rem));
+		@include bg((c:n));
+		@include bdr((s:n,r:1rem));
+		@include trn((t:.5s));
+		@include txt((h:1em,c:m));
+		@include shd((bve:-1));
+		&:hover{
+			@include bg((c:n));
+		}
+		&.disable{
+			@include txt((c:t 10));
+			@include shd((bve:0));
+		}
+		.button_prev{
+			
+		}
+		.button_next{
+			
+		}
+	}
+	.items{
+		@include bnd((p:r,f:0 1 a,pd:0 2rem));
+		@include flx((w:w));
+		@include txt((l:n));
+		.item{
+			@include bnd((d:ib,pd:.5em,mg:.5em,w:2rem,h:2rem));
+			@include bdr((r:1rem));
+			@include txt((a:c,p:1.5rem,c:t 30));
+			@include shd((bv:-1));
+			@include trn((t:.5s));
+			@include usr((c:p));
+			&.active{
+				@include txt((c:m));
+				@include shd((bv:1));
+			}
+		}
+	}
+}

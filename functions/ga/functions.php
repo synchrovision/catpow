@@ -18,11 +18,12 @@ add_action('cp_setup',function(){
 
 				document.addEventListener('DOMContentLoaded',function(){
 					var cb=function(el){
-						if(!el.dataset.event){return;}
+						if(!el.dataset.event || el.dataset.eventRegistered){return;}
 						var data=window.Catpow.ga.parseEventString(el.dataset.event);
 						el.addEventListener(data.event,function(){
 							window.Catpow.ga.send(data);
 						});
+						el.dataset.eventRegistered=true;
 					};
 					document.querySelectorAll('[data-event]').forEach(cb);
 					var o=new MutationObserver(function(mutations){

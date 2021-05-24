@@ -9,5 +9,9 @@ class tel extends meta{
 		if($prm==='text'){return $val;}
 		return sprintf('<a class="tel" href="tel:%s">%s</a>',preg_replace('/\D/','',$val),$val);
 	}
+	public static function resolve_conf($conf){
+		if(empty($conf['role'])){$conf['role']='tel';}
+		return $conf;
+	}
 }
 ?>

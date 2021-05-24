@@ -80,6 +80,9 @@ function get_menu_link($slug,$path_data){
 	return [$key=>$hooks[$key]];
 }
 cp::conf_data_walk(function($data_type,$data_name,&$conf_data){
+	if($conf_data['parent']){
+		add_menus(compact('data_type','data_name'),$conf_data,[$conf_data['parent']=>[$conf_data['label']=>$data_name]]);
+	}
 	if(isset($conf_data['article_type'])){
 		$class_name=cp::get_class_name('article_type',$conf_data['article_type']);
 		add_menus(compact('data_type','data_name'),$conf_data,$class_name::get_menus($conf_data));

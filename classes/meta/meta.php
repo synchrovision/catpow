@@ -5,6 +5,7 @@ abstract class meta{
 		$value_type='CHAR',
 		$data_type='longtext',
 		$input_type='text',
+		$output_type=null,
 		$validation=[],
 		$has_children=false,
 		$can_edit=true,
@@ -100,6 +101,9 @@ abstract class meta{
 				yield $meta_id=>$meta_value;
 			}
 		}
+	}
+	public static function get_props($meta){
+		return ['value'=>$meta->value];
 	}
 	
 	public static function get_validations($conf){return static::$validation;}

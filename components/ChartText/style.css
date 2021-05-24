@@ -8,8 +8,9 @@
   .ChartText .val {
     text-anchor: middle;
     dominant-baseline: middle;
-    fill: #fefefe; }
+    fill: #f8f8f8; }
     .ChartText .val .unit {
       dominant-baseline: middle; }
   .ChartText .ledgendText {
     dominant-baseline: middle; }
+/*# sourceMappingURL=./style.css.map */

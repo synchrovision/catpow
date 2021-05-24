@@ -79,7 +79,7 @@ class CSV{
 				}
 			}
 			else{
-				$flatten_data[$key]=[$val];
+				$flatten_data[$key]=$val;
 			}
 		}
 		return $flatten_data;

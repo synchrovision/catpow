@@ -387,6 +387,12 @@ class content{
 					return $this->handler=new $class_name($this->the_data_path,$this->conf,$this->get_the_data());
 				}
 				return null;
+			case 'props':
+				if(is_a($this,meta::class)){
+					$class_name=\cp::get_class_name('meta',$this->conf['type']);
+					return $this->props=$class_name::get_props($this);
+				}
+				return null;
 		}
 	}
 	public function __sleep(){
