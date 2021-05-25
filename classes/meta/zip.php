@@ -4,7 +4,8 @@ namespace Catpow\meta;
 class zip extends meta{
 	public static
 		$input_type='zip',
-		$validation=['text','zip'];
+		$validation=['text','zip'],
+		$effect_targets=['prefecture','todouhuken','city','sikuchouson','address','address1','address2'];
 	
 	public static function input($meta,$prm){
 		$path=$meta->the_data_path;
@@ -18,13 +19,12 @@ class zip extends meta{
 		if(empty($meta->conf['address'])){
 			$adrs=[];
 			$parent_metas=\cp::get_conf_data(dirname($meta->conf['path']))['meta'];
-			if(isset($parent_metas['prefecture'])){$adrs[]='prefecture';}
-			elseif(isset($parent_metas['todouhuken'])){$adrs[]='todouhuken';}
-			if(isset($parent_metas['city'])){$adrs[]='city';}
-			elseif(isset($parent_metas['sikuchouson'])){$adrs[]='sikuchouson';}
-			if(isset($parent_metas['address'])){$adrs[]='address';}
-			if(isset($parent_metas['address1'])){$adrs[]='address1';}
-			if(isset($parent_metas['address2'])){$adrs[]='address2';}
+			$pref=preg_match('/(\w+_)zip/',$meta->conf['name'],$matches)?$matches[1]:'';
+			
+			foreach(self::$effect_targets as $target){
+				$n=$pref.$target;
+				if(isset($parent_metas[$n])){$adrs[]=$n;}
+			}
 		}
 		else{$adrs=(array)$meta->conf['address'];}
 		foreach($adrs as $i=>$adr){
