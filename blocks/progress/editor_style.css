@@ -7,9 +7,8 @@
 }
 .editor-styles-wrapper .wp-block-catpow-progress .item > .itemControl {
   position: absolute;
-  bottom: -30px;
-  left: 0px;
-  right: 0px;
+  top: 3px;
+  right: 3px;
   margin: auto;
   width: fit-content;
 }
