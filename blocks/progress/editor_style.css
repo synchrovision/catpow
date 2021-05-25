@@ -1,0 +1,16 @@
+@charset "utf-8";
+.editor-styles-wrapper .wp-block-catpow-progress {
+  margin: 0px auto;
+}
+.editor-styles-wrapper .wp-block-catpow-progress .item {
+  position: relative;
+}
+.editor-styles-wrapper .wp-block-catpow-progress .item > .itemControl {
+  position: absolute;
+  bottom: -30px;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+  width: fit-content;
+}
+/*# sourceMappingURL=./editor_style.css.map */
