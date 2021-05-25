@@ -18,20 +18,22 @@ class radio extends select{
 				$rtn.=sprintf('<fieldset><legend>%s</legend>',$i);
 				foreach($s as $ii=>$ss){
 					$rtn.=sprintf(
-						'<label class="radio" for="%2$s--%4$s"%s><input id="%s--%4$s" type="radio" name="%s" tabindex="%s" value="%s"%s>%s</label>',
-						isset($label_attrs[$ss])?$label_attrs[$ss]:'',
-						\cp::get_input_id($path),\cp::get_input_name($path),\cp::get_tabindex(),
-						$ss,($ss==$val)?' checked="checked"':'',is_int($ii)?$ss:$ii
+						'<span class="radio"><input id="%s" type="radio" name="%s" value="%s"%s><label class="label" for="%1$s"%s>%s</label></span>',
+						\cp::get_input_id($path).'--'.\cp::get_tabindex(),\cp::get_input_name($path),
+						$ss,($ss==$val)?' checked="checked"':'',
+						isset($label_attrs[$s])?$label_attrs[$s]:'',
+						is_int($ii)?$ss:$ii
 					);
 				}
 				$rtn.='</fieldset>';
 			}else{
 				$label_attr=isset($label_attrs[$s])?$label_attrs[$s]:'';
 				$rtn.=sprintf(
-					'<label class="radio" for="%2$s--%4$s"%s><input id="%s--%4$s" type="radio" name="%s" tabindex="%s" value="%s"%s>%s</label>',
+					'<span class="radio"><input id="%s" type="radio" name="%s" value="%s"%s><label class="label" for="%1$s"%s>%s</label></span>',
+					\cp::get_input_id($path).'--'.\cp::get_tabindex(),\cp::get_input_name($path),
+					$s,($s==$val)?' checked="checked"':'',
 					isset($label_attrs[$s])?$label_attrs[$s]:'',
-					\cp::get_input_id($path),\cp::get_input_name($path),\cp::get_tabindex(),
-					$s,($s==$val)?' checked="checked"':'',is_int($i)?$s:$i
+					is_int($i)?$s:$i
 				);
 			}
 		}
