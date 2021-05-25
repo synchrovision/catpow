@@ -109,7 +109,7 @@
 		};
 		
 		return (
-			<div className={classes}>
+			<div className={classes} data-progress={attributes.progress}>
 				<ul className="items"><Items/></ul>
 			</div>
 		);

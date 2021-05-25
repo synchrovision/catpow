@@ -173,7 +173,7 @@ registerBlockType('catpow/progress', {
 
 		return wp.element.createElement(
 			'div',
-			{ className: classes },
+			{ className: classes, 'data-progress': attributes.progress },
 			wp.element.createElement(
 				'ul',
 				{ className: 'items' },
