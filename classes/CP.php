@@ -701,6 +701,7 @@ class CP{
 		if($depth<3){
 			if($depth===2){list($data_type,$data_name,$tmp_name)=explode('/',$content_path);}
 			elseif($depth===1){list($data_type,$data_name)=explode('/',$content_path);}
+			else{return $cache[$content_path]=[];}
 			$conf_data_name=self::get_conf_data_name($data_type);
 			if(!isset($GLOBALS[$conf_data_name][$data_name])){
 				if($data_type==='catpow'){
@@ -1238,7 +1239,7 @@ class CP{
 			' id="%1$s" class="cp-meta-item %2$s cp-meta-item-%3$s %4$s" data-meta_name="%3$s" data-role="cp-meta-item" data-meta_type="%2$s"',
 			self::get_input_id($data_path),
 			$conf['type']??'text',
-			$path_data['meta_path']?end($path_data['meta_path'])['meta_name']:'',
+			empty($path_data['meta_path'])?'':end($path_data['meta_path'])['meta_name'],
 			empty($conf['multiple'])?'single-item':'multiple-item'
 		);
 		if(isset($conf['watch'])){
@@ -2022,6 +2023,12 @@ class CP{
 						'accent_color'=>get_theme_mod('accent_color',$color_roles['accent_color']['default']),
 						'text_color'=>get_theme_mod('text_color',$color_roles['text_color']['default'])
 					]);
+					$scssc->registerFunction('embed_svg',function($args)use($scssc){
+						if($f=self::get_file_path($args[0][2][0])){
+							return sprintf('data:image/svg+xml;base64,%s',base64_encode(file_get_contents($f)));
+						}
+						return false;
+					});
 					$scssc->registerFunction('export_colors',function($args)use($scssc){
 						if(empty($args[0]) || $args[0][0]!=='map'){return false;}
 						$data=array_combine(
