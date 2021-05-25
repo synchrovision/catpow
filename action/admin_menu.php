@@ -60,7 +60,7 @@ function get_menu_link($slug,$path_data){
 	}
 	else{
 		$slug_path_data=\cp::parse_content_path($slug);
-		if($slug_path_data['data_type']==='post' && isset($post_types[$slug_path_data['data_name']]) && empty($slug_path_data['tmp_name'])){
+		if(isset($slug_path_data['data_type']) && $slug_path_data['data_type']==='post' && isset($post_types[$slug_path_data['data_name']]) && empty($slug_path_data['tmp_name'])){
 			return 'edit.php?post_type='.$slug_path_data['data_name'];
 		}
 		$path_data=array_merge($path_data,['file_name'=>'admin','file_type'=>'php'],$slug_path_data);
@@ -80,7 +80,7 @@ function get_menu_link($slug,$path_data){
 	return [$key=>$hooks[$key]];
 }
 cp::conf_data_walk(function($data_type,$data_name,&$conf_data){
-	if($conf_data['parent']){
+	if(isset($conf_data['parent'])){
 		add_menus(compact('data_type','data_name'),$conf_data,[$conf_data['parent']=>[$conf_data['label']=>$data_name]]);
 	}
 	if(isset($conf_data['article_type'])){
