@@ -19,10 +19,11 @@ class zip extends meta{
 		if(empty($meta->conf['address'])){
 			$adrs=[];
 			$parent_metas=\cp::get_conf_data(dirname($meta->conf['path']))['meta'];
-			$pref=preg_match('/(\w+_)zip/',$meta->conf['name'],$matches)?$matches[1]:'';
+			$pref=preg_match('/^(\w+_)zip/i',$meta->conf['name'],$matches)?$matches[1]:'';
+			$suff=preg_match('/zip(?:code)?(_\w+)$/i',$meta->conf['name'],$matches)?$matches[1]:'';
 			
 			foreach(self::$effect_targets as $target){
-				$n=$pref.$target;
+				$n=$pref.$target.$suff;
 				if(isset($parent_metas[$n])){$adrs[]=$n;}
 			}
 		}
