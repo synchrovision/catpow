@@ -591,6 +591,11 @@ class CP{
 		}
 		return $cache[$path]=$post_data;
 	}
+	public static function get_block_code($block,$attr){
+		if($f=self::get_file_path("blocks/{$block}/gen.php")){
+			ob_start();include $f;return ob_get_clean();
+		}
+	}
 	
 	/*基本テンプレート*/
 	public static function site_header($name=false,$vars=false){
