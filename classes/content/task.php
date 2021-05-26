@@ -75,7 +75,7 @@ class task extends form{
 		$dir=$this->get_dir();
 		do{$token=\cp::rand_id(8);$f=$dir.$token.'.php';}
 		while(file_exists($f));
-		mkdir(dirname($f),0755,true);
+		if(!is_dir(dirname($f))){mkdir(dirname($f),0755,true);}
 		$str="<?php\n\$param=".var_export($param,true).';';
 		file_put_contents($f,$str);
 		$this->f=$f;
