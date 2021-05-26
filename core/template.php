@@ -573,6 +573,7 @@ function task($file=null,$param=null,$loop_id=null,$inputs=null){
 	if(empty($file)){$file='task';}
 	elseif(strpos($file,'/')===false){$file='task-'.$file;}
 	
+	if(empty(\cp::$content->form)){return null;}
 	if(isset(\cp::$content->form->tasks[$file])){
 		return \cp::$content->form->tasks[$file];
 	}
