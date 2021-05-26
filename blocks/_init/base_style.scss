@@ -227,20 +227,20 @@ table.editItemsTable{
 	.item{
 		@include bnd((pd:0,mg:0));
 		.title{
-			@include bnd((pd:.25em 0,pdl:1.5em,p:r,mg:0));
-			@include txt((p:1.4rem,w:r));
+			@include bnd((pd:.1em 0,pdl:1em,p:r,mg:0));
+			@include txt((p:12,w:r));
 			@include usr((c:p));
 			.name{
 				@include bnd((d:ib,mgl:1em));
-				@include txt((c:t 50));
+				@include txt((p:.8em,c:t 50));
 			}
 		}
 		&.hasChildren{
 			&>.title{
 				&::before{
 					content:'▶︎';
-					@include bnd((d:b,p:a,t:.2em,b:0,l:0,mg:a));
-					@include txt((c:t 50));
+					@include bnd((d:b,p:a,t:.3em,b:0,l:0,mg:a));
+					@include txt((p:.7em,c:t 50));
 				}
 			}
 			&.open{
@@ -252,7 +252,7 @@ table.editItemsTable{
 			}
 		}
 		.children{
-			@include bnd((pdl:.5em));
+			@include bnd((pdl:1em));
 		}
 	}
 }
