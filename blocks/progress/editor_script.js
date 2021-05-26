@@ -22,7 +22,7 @@ registerBlockType('catpow/progress', {
 		var states = CP.wordsToFlags(classes);
 
 		var selectiveClasses = useMemo(function () {
-			return [{ input: 'range', label: '進捗', min: 0, max: items.length - 1, key: 'progress' }, { label: '番号', values: 'hasCounter', sub: [{ input: 'text', label: '番号前置テキスト', key: 'countPrefix' }, { input: 'text', label: '番号後置テキスト', key: 'countSuffix' }] }];
+			return [{ input: 'range', label: '進捗', min: 0, max: items.length - 1, key: 'progress' }, { type: 'buttons', label: 'サイズ', values: ['small', 'medium', 'large'] }, { label: '番号', values: 'hasCounter', sub: [{ input: 'text', label: '番号前置テキスト', key: 'countPrefix' }, { input: 'text', label: '番号後置テキスト', key: 'countSuffix' }] }];
 		}, [items.length]);
 
 		var save = useCallback(function () {
@@ -43,7 +43,8 @@ registerBlockType('catpow/progress', {
 						set: setAttributes,
 						attr: attributes,
 						items: attributes.items,
-						index: index
+						index: index,
+						isSelected: isSelected && index == attributes.currentItemIndex
 					},
 					states.hasCounter && wp.element.createElement(
 						'div',
@@ -76,7 +77,7 @@ registerBlockType('catpow/progress', {
 					)
 				);
 			});
-		}, [setAttributes, attributes]);
+		}, [setAttributes, attributes, isSelected]);
 
 		return wp.element.createElement(
 			Fragment,

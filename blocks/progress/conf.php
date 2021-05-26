@@ -1,6 +1,6 @@
 <?php
 $attributes=[
-	"classes"=>["source"=>'attribute',"selector"=>'.wp-block-catpow-progress',"attribute"=>'class',"default"=>'wp-block-catpow-progress'],
+	"classes"=>["source"=>'attribute',"selector"=>'.wp-block-catpow-progress',"attribute"=>'class',"default"=>'wp-block-catpow-progress medium'],
 	"progress"=>["source"=>'attribute',"selector"=>'.wp-block-catpow-progress',"attribute"=>'data-progress',"default"=>'0'],
 	"countPrefix"=>["source"=>'text',"selector"=>'.counter .prefix'],
 	"countSuffix"=>["source"=>'text',"selector"=>'.counter .suffix'],

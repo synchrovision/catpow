@@ -13,6 +13,7 @@
 		
 		const selectiveClasses=useMemo(()=>[
 			{input:'range',label:'進捗',min:0,max:items.length-1,key:'progress'},
+			{type:'buttons',label:'サイズ',values:['small','medium','large']},
 			{label:'番号',values:'hasCounter',sub:[
 				{input:'text',label:'番号前置テキスト',key:'countPrefix'},
 				{input:'text',label:'番号後置テキスト',key:'countSuffix'}
@@ -35,6 +36,7 @@
 					attr={attributes}
 					items={attributes.items}
 					index={index}
+					isSelected={isSelected && index==attributes.currentItemIndex}
 				>
 					{states.hasCounter &&
 						<div className='counter'>
@@ -51,7 +53,7 @@
 					</div>
 				</CP.Item>
 			));
-		},[setAttributes,attributes]);
+		},[setAttributes,attributes,isSelected]);
 		
         return (
 			<Fragment>
