@@ -165,9 +165,11 @@ if(function_exists('register_block_type')){
 						}
 						break;
 				}
-
 			}
-			register_block_type('catpow/'.str_replace('_','-',$block_name),$param);
+			if(file_exists($f=$block_dir.'/'.$block_name.'/block.json')){
+				register_block_type_from_metadata($f,$param);
+			}
+			else{register_block_type('catpow/'.str_replace('_','-',$block_name),$param);}
 		}
 	}
 	cp::scss_compile($block_style_names);
