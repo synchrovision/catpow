@@ -108,6 +108,12 @@ class content{
 		$form_param=$this->get_form_param($file,$loop_id,$inputs);
 		$form_param['form_id']=$file;
 		$form_param['param']=$param;
+		if(isset($this->inherit)){
+			$form_param['inherit']=$this->inherit;
+			foreach(array_keys($this->inherit) as $key){
+				$form_param[$key]=$this->$key;
+			}
+		}
 		return new task($form_param);
 	}
 	public function talk($file,$param=null,$loop_id=null,$inputs=null){

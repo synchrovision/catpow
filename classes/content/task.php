@@ -90,6 +90,11 @@ class task extends form{
 	public function save(){
 		if(!$this->valid){return $this;}
 		$this->param['inputs_data']=$this->inputs->data;
+		if(isset($this->inherit)){
+			foreach(array_keys($this->inherit) as $key){
+				$this->param['inherit_data'][$key]=$this->$key;
+			}
+		}
 		$str="<?php\n\$param=".var_export($this->param,true).';';
 		file_put_contents($this->f,$str);
 		return $this;
@@ -103,6 +108,12 @@ class task extends form{
 		$this->param=$param;
 		$this->inputs->data=$this->param['inputs_data'];
 		$this->loop_id=$this->param['loop_id']??'p';
+		if(isset($param['inherit_data'])){
+			foreach($param['inherit_data'] as $key=>$val){
+				$this->$key=$val;
+				$this->inherit[$key]=true;
+			}
+		}
 		return $this;
 	}
 	
