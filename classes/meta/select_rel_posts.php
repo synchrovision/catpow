@@ -10,12 +10,12 @@ class select_rel_posts extends select{
 		$values=[];
 		$relkey=\Catpow\data_type\post::$key_translation[$relkey]??$relkey;
 		if(in_array($relkey,\Catpow\query\post::$data_keys)){
-			foreach($vals as $id){
+			foreach((array)$vals as $id){
 				$values[]=[get_post($id)->$relkey];
 			}
 		}
 		else{
-			foreach($vals as $id){
+			foreach((array)$vals as $id){
 				$values[]=\cp::get_the_meta_value("post/".get_post_type($id)."/{$id}/{$relkey}")?:[];
 			}
 		}
