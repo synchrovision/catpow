@@ -63,8 +63,6 @@ registerBlockType('catpow/section', {
 		iconSrc: { source: 'attribute', selector: '.icon [src]', attribute: 'src', default: cp.theme_url + '/images/dummy_icon.svg' },
 		iconAlt: { source: 'attribute', selector: '.icon [src]', attribute: 'alt' }
 	},
-	providesContext: { 'catpow/color': 'color' },
-	usesContext: ['catpow/color'],
 	example: CP.example,
 	edit: function edit(props) {
 		var attributes = props.attributes,

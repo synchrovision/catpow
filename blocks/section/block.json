@@ -1,0 +1,5 @@
+{
+	"name":"catpow/section",
+	"providesContext":{"catpow/color":"color"},
+	"usesContext":["catpow/color"]
+}
