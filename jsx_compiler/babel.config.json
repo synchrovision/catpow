@@ -1,6 +1,6 @@
 {
 	"presets": [
-		[ "env", {
+		[ "@babel/env", {
 			"modules": false,
 			"targets": {
 				"browsers": [
@@ -16,11 +16,11 @@
 		} ]
 	],
 	"plugins": [
-		"external-helpers",
-		[ "transform-react-jsx", {
-			"pragma": "wp.element.createElement"
+		"@babel/external-helpers",
+		["@babel/transform-react-jsx", {
+			"pragma":"wp.element.createElement"
 		} ],
-		"transform-object-rest-spread",
-		"transform-object-assign"
+		"@babel/plugin-proposal-object-rest-spread",
+		"@babel/transform-object-assign"
 	]
 }
