@@ -169,6 +169,9 @@ class task extends form{
 		}
 		return isset($this->param['flag'][$name]);
 	}
+	public function is_flagged($name){
+		return isset($this->param['flag'][$name]);
+	}
 	public function wait_flag($name){
 		while($this->valid){
 			if($this->load()->flag($name)){return true;}
