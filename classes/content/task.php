@@ -119,7 +119,7 @@ class task extends form{
 	}
 	
 	public function check(){
-		if($this->checked()){return true;}
+		if($this->is_checked()){return true;}
 		$this->load();
 		if(!$this->valid){return false;}
 		$this->param['checked'][\cp::$id]=true;
@@ -127,7 +127,7 @@ class task extends form{
 		$this->save();
 		return true;
 	}
-	public function checked(){
+	public function is_checked(){
 		return isset($this->param['checked'][\cp::$id]);
 	}
 	
