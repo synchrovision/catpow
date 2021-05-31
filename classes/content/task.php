@@ -11,6 +11,7 @@ namespace Catpow\content;
 */
 class task extends form{
 	public $valid,$token,$token_key,$f,$param;
+	const BEACON_COUNT=1,BEACON_UNLIMITED=2;
 	
 	public function __construct($param){
 		parent::__construct($param);
