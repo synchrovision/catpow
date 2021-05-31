@@ -34,9 +34,7 @@ var _wp$richText = wp.richText,
     registerFormatType = _wp$richText.registerFormatType,
     toggleFormat = _wp$richText.toggleFormat;
 var __ = wp.i18n.__;
-
 var el = wp.element.createElement;
-
 var registerPlugin = wp.plugins.registerPlugin;
 var _wp$editPost = wp.editPost,
     PluginSidebarMoreMenuItem = _wp$editPost.PluginSidebarMoreMenuItem,
