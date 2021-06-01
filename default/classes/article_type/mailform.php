@@ -29,10 +29,9 @@ class mailform extends article_type{
 		$default_meta_conf=[
 			'name'=>['type'=>'post_name','label'=>'識別名'],
 			'clear'=>['type'=>'checkbox','label'=>'クリア','value'=>['入力項目'=>1,'入力値'=>2,'フォーム'=>4]],
-			'receive'=>['type'=>'radio','label'=>'データ受信','value'=>['しない'=>-1,'する'=>1]],
-			'push'=>['type'=>'radio','label'=>'登録処理','value'=>['しない'=>-1,'する'=>1]],
+			'receive'=>['type'=>'radio','label'=>'入力受取','value'=>['しない'=>-1,'する'=>1]],
+			'push'=>['type'=>'radio','label'=>'データ登録','value'=>['しない'=>-1,'する'=>1]],
 			'send_mail'=>['type'=>'checkbox_post_datas','label'=>'メール送信','value'=>$mailconf_post_type],
-			'check_task'=>['type'=>'radio','label'=>'タスク完了確認','value'=>['しない'=>-1,'する'=>1]],
 			'mail'=>['type'=>'share','show_in_menu'=>false,'show_in_loop'=>false,'meta'=>[]]
 		];
 		if(empty($conf_data['meta'])){$conf_data['meta']=$default_meta_conf;}
