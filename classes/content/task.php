@@ -64,25 +64,27 @@ class task extends form{
 	public function create(){
 		$param=$this->param;
 		if(!isset($param['expire'])){$param['expire']=strtotime('+ 1 hour');}
+		if(!is_numeric($param['expire'])){$param['expire']=strtotime($param['expire']);}
 		if(!isset($param['limit'])){$param['limit']=1;}
 		if(!isset($param['checked'])){$param['checked']=[];}
 		if(!isset($param['flag'])){$param['flag']=[];}
 		if(!isset($param['complete'])){$param['complete']=false;}
 		if(!isset($param['inputs_data'])){$param['inputs_data']=[];}
-		if(!isset($param['key'])){$param['key']=\cp::rand_id(8);}
 		if($this->parent && !is_null($this->parent->form->loop_id)){
 			$this->loop_id=$param['loop_id']=$this->parent->form->loop_id;
 		}
 		$dir=$this->get_dir();
 		do{$token=\cp::rand_id(8);$f=$dir.$token.'.php';}
 		while(file_exists($f));
+		$token_key=\cp::rand_id(8);
+		$param['hash']=wp_hash($token_key);
 		if(!is_dir(dirname($f))){mkdir(dirname($f),0755,true);}
 		$str="<?php\n\$param=".var_export($param,true).';';
 		file_put_contents($f,$str);
 		$this->f=$f;
 		$this->valid=true;
 		$this->token=$token;
-		$this->token_key=$param['key'];
+		$this->token_key=$token_key;
 		$this->param=$param;
 	}
 	public function delete(){
@@ -103,7 +105,7 @@ class task extends form{
 	public function load(){
 		if(!file_exists($this->f)){$this->valid=false;return $this;}
 		include $this->f;
-		if($this->token_key!==$param['key']){$this->valid=false;return $this;}
+		if(wp_hash($this->token_key)!==$param['hash']){$this->valid=false;return $this;}
 		if($param['expire'] < time() && $param['limit'] < 1){$this->valid=false;return $this;}
 		$this->valid=true;
 		$this->param=$param;
