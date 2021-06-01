@@ -106,7 +106,7 @@ class task extends form{
 		if(!file_exists($this->f)){$this->valid=false;return $this;}
 		include $this->f;
 		if(wp_hash($this->token_key)!==$param['hash']){$this->valid=false;return $this;}
-		if($param['expire'] < time() && $param['limit'] < 1){$this->valid=false;return $this;}
+		if($param['expire'] < time() || $param['limit'] < 1){$this->valid=false;return $this;}
 		$this->valid=true;
 		$this->param=$param;
 		$this->inputs->data=$this->param['inputs_data'];
