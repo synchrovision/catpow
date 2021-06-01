@@ -1,5 +1,5 @@
 <!-- wp:catpow/t-button -->
-<a className="wp-block-catpow-t-button <?=$attr['classses']??''?>" href="<?=$attr['url']??''?>">
+<a class="wp-block-catpow-t-button <?=$attr['classses']??''?>" href="<?=$attr['url']??''?>">
 	<table width="100%">
 		<tbody>
 			<tr>
