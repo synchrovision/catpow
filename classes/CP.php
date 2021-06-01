@@ -1537,14 +1537,13 @@ class CP{
 		
 		$path_data=self::get_the_path_data();
 		if(isset($path_data['meta_path'])){
-			$loop_class_name=self::get_class_name('content','meta');
 			$last_meta=&end($path_data['meta_path']);
 			if(isset($last_meta['meta_id'])){
 				$loop_id=$last_meta['meta_id'];
 				unset($last_meta['meta_id']);
 			}
 			else{$loop_id=null;}
-			return $content=new $loop_class_name(['path_data'=>$path_data,'loop_id'=>$loop_id]);
+			return $content=new content\meta(['path_data'=>$path_data,'loop_id'=>$loop_id]);
 		}
 		global $wp_query;
 		if(
@@ -1553,8 +1552,7 @@ class CP{
 			isset($wp_query->query_vars['cp_token']) && 
 			isset($wp_query->query_vars['cp_token_key'])
 		){
-			$loop_class_name=self::get_class_name('content','task');
-			return $content=new $loop_class_name([
+			return $content=new content\task([
 				'path_data'=>$path_data,
 				'token'=>$wp_query->query_vars['cp_token'],
 				'token_key'=>$wp_query->query_vars['cp_token_key']
@@ -1563,7 +1561,6 @@ class CP{
 		
 		$data_type=$path_data['data_type'];
 		$data_name=$path_data['data_name'];
-		$loop_class_name=self::get_class_name('content','loop');
 		$query_class_name=self::get_class_name('query',$data_type);
 		if(in_array($data_type,array('post','nav','page'),true)){
 			global $wp_query;
@@ -1580,7 +1577,7 @@ class CP{
 			unset($path_data['data_id']);
 		}
 		else{$loop_id=null;}
-		return $content=new $loop_class_name(['path_data'=>$path_data,'query'=>$query,'loop_id'=>$loop_id]);
+		return $content=new content\loop(['path_data'=>$path_data,'query'=>$query,'loop_id'=>$loop_id]);
 	}
 	public static function get_the_query_value(){
 		static $query_value;
