@@ -92,10 +92,10 @@ class task extends form{
 	}
 	public function save(){
 		if(!$this->valid){return $this;}
-		$this->param['inputs_data']=$this->inputs->data;
+		$this->param['inputs_data']=$this->inputs->data??[];
 		if(isset($this->inherit)){
 			foreach(array_keys($this->inherit) as $key){
-				$this->param['inherit_data'][$key]=$this->$key;
+				$this->param['inherit_data'][$key]=$this->{$key};
 			}
 		}
 		$str="<?php\n\$param=".var_export($this->param,true).';';
