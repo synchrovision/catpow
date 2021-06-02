@@ -560,7 +560,9 @@ class CP{
 		$names[]=false;
 		foreach($names as $name){
 			if($post_data=get_page_by_path($page_path.($name?'-'.$name:''),ARRAY_A,$post_type)){
-				$post_data['meta']=get_post_custom($post_data['ID']);
+				$post_data['meta']=array_map(function($values){
+					return array_map('maybe_unserialize',$values);
+				},get_post_custom($post_data['ID']));
 				return $post_data;
 			}
 		}
