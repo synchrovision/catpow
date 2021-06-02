@@ -47,6 +47,7 @@ class select_post_datas extends select{
 			if(isset($conf_data['article_type'])){
 				$class_name=\cp::get_class_name('article_type',$conf_data['article_type']);
 				foreach($class_name::get_default_post_datas($conf_data) as $path=>$post_data){
+					$post_data=\cp::get_default_post_data($path);
 					$rtn[$post_data['post_title']??$path]=$path;
 				}
 			}
@@ -54,11 +55,12 @@ class select_post_datas extends select{
 				foreach($conf_data['template'] as $template){
 					$class_name=\cp::get_class_name('template_type',explode('-',$template)[0]);
 					foreach($class_name::get_default_post_datas($conf_data) as $path=>$post_data){
+						$post_data=\cp::get_default_post_data($path);
 						$rtn[$post_data['post_title']??$path]=$path;
 					}
 				}
 			}
-			sort($rtn);
+			asort($rtn);
 			if(isset($meta->conf['addition'])){
 				if(is_array($meta->conf['addition'])){$rtn=array_merge($rtn,$meta->conf['addition']);}
 				else{$rtn[$meta->conf['addition']]=0;}
