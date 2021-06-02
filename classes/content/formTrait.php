@@ -278,15 +278,16 @@ trait formTrait{
 		foreach($task_processes as $task_process){
 			$task=$this->get_task($task_process['file']??null);
 			if(empty($task)){return false;}
-			if($task_process['is_checked'] && !$task->is_checked()){return false;}
-			if($task_process['is_completed'] && !$task->is_completed()){return false;}
-			if($task_process['is_flagged'] && !$task->is_flagged($task_process['is_flagged'])){return false;}
+			if(!empty($task_process['is_checked']) && !$task->is_checked()){return false;}
+			if(!empty($task_process['is_completed']) && !$task->is_completed()){return false;}
+			if(!empty($task_process['is_flagged']) && !$task->is_flagged($task_process['is_flagged'])){return false;}
 		}
 		return true;
 	}
 	public function do_task_main_process($task_processes){
+		error_log(var_export($task_processes,1).__FILE__.__LINE__);
 		foreach($task_processes as $task_process){
-			if($task_process['create']){
+			if(!empty($task_process['create'])){
 				if(empty($file)){$file='task';}
 				elseif(strpos($file,'/')===false){$file='task-'.$file;}
 				$task=$this->task($file,$task_process['create']);
@@ -295,12 +296,12 @@ trait formTrait{
 				$task=$this->get_task($task_process['file']??null);
 			}
 			if(empty($task)){continue;}
-			if($task_process['save']){$task->save();}
-			if($task_process['load']){$task->load();}
-			if($task_process['check']){$task->check();}
-			if($task_process['complete']){$task->complete();}
-			if($task_process['flag']){$task->flag($task_process['flag'],true);}
-			if($task_process['unflag']){$task->flag($task_process['unflag'],false);}
+			if(!empty($task_process['save'])){$task->save();}
+			if(!empty($task_process['load'])){$task->load();}
+			if(!empty($task_process['check'])){$task->check();}
+			if(!empty($task_process['complete'])){$task->complete();}
+			if(!empty($task_process['flag'])){$task->flag($task_process['flag'],true);}
+			if(!empty($task_process['unflag'])){$task->flag($task_process['unflag'],false);}
 		}
 	}
 	
