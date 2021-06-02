@@ -47,14 +47,14 @@ class select_post_datas extends select{
 			if(isset($conf_data['article_type'])){
 				$class_name=\cp::get_class_name('article_type',$conf_data['article_type']);
 				foreach($class_name::get_default_post_datas($conf_data) as $path=>$post_data){
-					$rtn[$post_data['post_title']]=$path;
+					$rtn[$post_data['post_title']??$path]=$path;
 				}
 			}
 			if(isset($conf_data['template'])){
 				foreach($conf_data['template'] as $template){
 					$class_name=\cp::get_class_name('template_type',explode('-',$template)[0]);
 					foreach($class_name::get_default_post_datas($conf_data) as $path=>$post_data){
-						$rtn[$post_data['post_title']]=$path;
+						$rtn[$post_data['post_title']??$path]=$path;
 					}
 				}
 			}
