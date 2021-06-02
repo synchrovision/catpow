@@ -10,7 +10,7 @@ $HeadingTag='h'.$level;
 $states=[];
 foreach(explode(' ',$attr['classes']) as $name){$states[$name]=true;}
 ?>
-<!-- wp:catpow/section -->
+<!-- wp:catpow/section <?=json_encode(compact('HeadingTag'))?> -->
 <<?=$SectionTag?> id="<?=$attr['id']??'sec-'.cp::rand_id(4)?>" class="wp-block-catpow-section <?=$attr['classes']??'article level3 headline'?>" data-icon="<?=$attr['navIcon']??''?>">
 <?php if($states['hasImage']??false): ?>
 		<div class="image"><?=$attr['image']??''?></div>
