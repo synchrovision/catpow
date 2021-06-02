@@ -11,51 +11,51 @@ $states=[];
 foreach(explode(' ',$attr['classes']) as $name){$states[$name]=true;}
 ?>
 <!-- wp:catpow/section -->
-<<?=$SectionTag?> id="<?=$attr['id']?>" class="wp-block-catpow-section <?=$attr['classes']?>" data-icon="<?=$attr['navIcon']?>">
-<?php if($states['hasImage']): ?>
-		<div class="image"><?=$attr['image']?></div>
+<<?=$SectionTag?> id="<?=$attr['id']??'sec-'.cp::rand_id(4)?>" class="wp-block-catpow-section <?=$attr['classes']??'article level3 headline'?>" data-icon="<?=$attr['navIcon']??''?>">
+<?php if($states['hasImage']??false): ?>
+		<div class="image"><?=$attr['image']??''?></div>
 <?php endif; ?>
 	<div class="contents">
 		<header class='header'>
 			<div class="title">
-<?php if($states['hasIcon']): ?>
-				<div class="icon"><?=$attr['icon']?></div>
+<?php if($states['hasIcon']??false): ?>
+				<div class="icon"><?=$attr['icon']??''?></div>
 <?php endif; ?>
-<?php if($states['hasPrefix']): ?>
-				<div class="prefix"><?=$attr['prefix']?></div>
+<?php if($states['hasPrefix']??false): ?>
+				<div class="prefix"><?=$attr['prefix']??''?></div>
 <?php endif; ?>
-<?php if($states['hasHeaderImage']): ?>
-				<div class="image"><?=$attr['headerImage']?></div>
+<?php if($states['hasHeaderImage']??false): ?>
+				<div class="image"><?=$attr['headerImage']??''?></div>
 <?php endif; ?>
 				<<?=$HeadingTag?> class="heading">
-					<?=$attr['title']?>
+					<?=$attr['title']??''?>
 				</<?=$HeadingTag?>>
-<?php if($states['hasLead']): ?>
-				 <p class="lead"><?=$attr['lead']?></p>
+<?php if($states['hasLead']??false): ?>
+				 <p class="lead"><?=$attr['lead']??''?></p>
 <?php endif; ?>
 			</div>
-<?php if($states['hasHeaderBackgroundImage']): ?>
-			<div class="background"><?=$attr['headerBackgroundImage']?></div>
+<?php if($states['hasHeaderBackgroundImage']??false): ?>
+			<div class="background"><?=$attr['headerBackgroundImage']??''?></div>
 <?php endif; ?>
 		</header>
 		<div class="text"><?=$children?></div>
 	</div>
-<?php if($states['hasBackgroundImage']): ?>
+<?php if($states['hasBackgroundImage']??false): ?>
 	<div class="background">
-		<div class="background"><?=$attr['backgroundImage']?></div>
+		<div class="background"><?=$attr['backgroundImage']??''?></div>
 	</div>
 <?php endif; ?>
-<?php if($states['hasPatternImage']): ?>
-	<style class="patternImageCss"><?=$attr['patternImageCss']?></style>
+<?php if($states['hasPatternImage']??false): ?>
+	<style class="patternImageCss"><?=$attr['patternImageCss']??''?></style>
 <?php endif; ?>
-<?php if($states['hasHeaderPatternImage']): ?>
-	<style class="headerPatternImageCss"><?=$attr['headerPatternImageCss']?></style>
+<?php if($states['hasHeaderPatternImage']??false): ?>
+	<style class="headerPatternImageCss"><?=$attr['headerPatternImageCss']??''?></style>
 <?php endif; ?>
-<?php if($states['hasBorderImage']): ?>
-	<style class="borderImageCss"><?=$attr['borderImageCss']?></style>
+<?php if($states['hasBorderImage']??false): ?>
+	<style class="borderImageCss"><?=$attr['borderImageCss']??''?></style>
 <?php endif; ?>
-<?php if($states['hasFrameImage']): ?>
-	<style class="frameImageCss"><?=$attr['frameImageCss']?></style>
+<?php if($states['hasFrameImage']??false): ?>
+	<style class="frameImageCss"><?=$attr['frameImageCss']??''?></style>
 <?php endif; ?>
 </<?=$SectionTag?>>
 <!-- /wp:catpow/section -->
