@@ -15,19 +15,37 @@
 		});
 	},[props.options]);
 	
+	if(Array.isArray(value)){
+		return (
+			<div className={"CheckBoxes"}>
+				{options.map((option)=>(
+					<CheckBox
+						label={option.label}
+						onChange={(selected)=>{
+							onChange(
+								option.value,selected,
+								selected?
+								value.concat(value,[option.value]):
+								value.filter((val)=>val!==option.value)
+							)
+						}}
+						selected={value.indexOf(option.value)!==-1}
+					/>
+				))}
+			</div>
+		);
+	}
+	
 	return (
 		<div className={"CheckBoxes"}>
 			{options.map((option)=>(
 				<CheckBox
 					label={option.label}
 					onChange={(selected)=>{
-						onChange(
-							selected?
-							value.concat(value,[option.value]):
-							value.filter((val)=>val!==option.value)
-						)
+						value[option.value]=selected;
+						onChange(option.value,selected,value)
 					}}
-					selected={value.indexOf(option.value)!==-1}
+					selected={value[option.value]}
 				/>
 			))}
 		</div>

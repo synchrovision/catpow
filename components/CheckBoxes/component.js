@@ -25,17 +25,34 @@ Catpow.CheckBoxes = function (props) {
       };
     });
   }, [props.options]);
+
+  if (Array.isArray(value)) {
+    return wp.element.createElement("div", {
+      className: "CheckBoxes"
+    }, options.map(function (option) {
+      return wp.element.createElement(CheckBox, {
+        label: option.label,
+        onChange: function onChange(selected) {
+          _onChange(option.value, selected, selected ? value.concat(value, [option.value]) : value.filter(function (val) {
+            return val !== option.value;
+          }));
+        },
+        selected: value.indexOf(option.value) !== -1
+      });
+    }));
+  }
+
   return wp.element.createElement("div", {
     className: "CheckBoxes"
   }, options.map(function (option) {
     return wp.element.createElement(CheckBox, {
       label: option.label,
       onChange: function onChange(selected) {
-        _onChange(selected ? value.concat(value, [option.value]) : value.filter(function (val) {
-          return val !== option.value;
-        }));
+        value[option.value] = selected;
+
+        _onChange(option.value, selected, value);
       },
-      selected: value.indexOf(option.value) !== -1
+      selected: value[option.value]
     });
   }));
 };
