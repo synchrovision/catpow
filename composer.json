@@ -5,8 +5,5 @@
         "michelf/php-markdown": "^1.9",
         "google/apiclient": "^2.9",
         "facebook/graph-sdk": "^5.7",
-        "laminas/laminas-mvc": "^3.2",
-        "laminas/laminas-code": "^4.3",
-        "laminas/laminas-mail": "^2.14"
     }
 }
