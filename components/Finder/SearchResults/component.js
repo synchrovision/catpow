@@ -117,7 +117,7 @@ Catpow.Finder.SearchResults = function (props) {
       }),
       onChange: function onChange(selected) {
         return dispatch({
-          type: selected ? 'selectAllRows' : 'deselectAllRows'
+          type: selected ? 'selectAllRowsInPage' : 'deselectAllRowsInPage'
         });
       }
     })), wp.element.createElement("th", {

@@ -67,7 +67,7 @@
 						<th className="control">
 							<Catpow.CheckBox
 								selected={state.itemsInPage.every((item)=>item._selected)}
-								onChange={(selected)=>dispatch({type:selected?'selectAllRows':'deselectAllRows'})}
+								onChange={(selected)=>dispatch({type:selected?'selectAllRowsInPage':'deselectAllRowsInPage'})}
 							/>
 						</th>
 						<th className="focus"></th>

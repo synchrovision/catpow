@@ -124,13 +124,14 @@ Catpow.Finder=(props)=>{
 			case 'selectRow':
 			case 'deselectRow':{
 				action.row._selected=action.type==='selectRow';
-				const selectedRows=state.index.rows.filter((row)=>row._selected);
+				const selectedRows=state.itemsInPage.filter((row)=>row._selected);
 				return {...state,selectedRows};
 			}
-			case 'selectAllRows':
-			case 'deselectAllRows':{
-				const isSelect=action.type==='selectAllRows';
-				const selectedRows=state.index.rows.filter((row)=>row._selected=isSelect);
+			case 'selectAllRowsInPage':
+			case 'deselectAllRowsInPage':{
+				const isSelect=action.type==='selectAllRowsInPage';
+				state.index.rows.map((row)=>row._selected=false);
+				const selectedRows=state.itemsInPage.filter((row)=>row._selected=isSelect);
 				return {...state,selectedRows};
 			}
 			case 'focusItem':

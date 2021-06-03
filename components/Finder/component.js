@@ -236,7 +236,7 @@ Catpow.Finder = function (props) {
       case 'deselectRow':
         {
           action.row._selected = action.type === 'selectRow';
-          var selectedRows = state.index.rows.filter(function (row) {
+          var selectedRows = state.itemsInPage.filter(function (row) {
             return row._selected;
           });
           return _objectSpread(_objectSpread({}, state), {}, {
@@ -244,12 +244,15 @@ Catpow.Finder = function (props) {
           });
         }
 
-      case 'selectAllRows':
-      case 'deselectAllRows':
+      case 'selectAllRowsInPage':
+      case 'deselectAllRowsInPage':
         {
-          var isSelect = action.type === 'selectAllRows';
+          var isSelect = action.type === 'selectAllRowsInPage';
+          state.index.rows.map(function (row) {
+            return row._selected = false;
+          });
 
-          var _selectedRows = state.index.rows.filter(function (row) {
+          var _selectedRows = state.itemsInPage.filter(function (row) {
             return row._selected = isSelect;
           });
 
