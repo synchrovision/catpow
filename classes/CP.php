@@ -896,6 +896,7 @@ class CP{
 		$conf['name']=$conf['attr']['data-meta-name']=basename($path);
 		$conf['path']=$path;
 		$class_name=self::get_class_name('meta',$conf['type']);
+		if(!class_exists($class_name)){return;}
 		$class_name::fill_conf($conf);
 		if(empty($conf['input_type'])){$conf['input_type']=$class_name::$input_type;}
 		$conf['output_type']=$class_name::$output_type??$conf['input_type'];
