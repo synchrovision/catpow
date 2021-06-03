@@ -16,10 +16,10 @@ if(basename($dir)!=='catpow'){
 		rename($dir,dirname($dir).'/catpow');
 		$plugin='catpow/catpow.php';
 		if($network_wide){
-			$active_plugins=get_network_option('active_plugins',[]);
+			$active_plugins=get_network_option(null,'active_sitewide_plugins',[]);
 			unset($active_plugins[$wrong_plugin_name]);
 			$active_plugins[$plugin]=time();
-			update_network_option('active_plugins',$active_plugins);
+			update_network_option(null,'active_sitewide_plugins',$active_plugins);
 		}
 		else{
 			$active_plugins=get_option('active_plugins',[]);
