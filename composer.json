@@ -4,6 +4,6 @@
         "scssphp/scssphp": "^1.4",
         "michelf/php-markdown": "^1.9",
         "google/apiclient": "^2.9",
-        "facebook/graph-sdk": "^5.7",
+        "facebook/graph-sdk": "^5.7"
     }
 }
