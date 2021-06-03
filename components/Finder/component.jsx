@@ -124,7 +124,7 @@ Catpow.Finder=(props)=>{
 			case 'selectRow':
 			case 'deselectRow':{
 				action.row._selected=action.type==='selectRow';
-				const selectedRows=state.itemsInPage.filter((row)=>row._selected);
+				const selectedRows=state.index.rows.filter((row)=>row._selected);
 				return {...state,selectedRows};
 			}
 			case 'selectAllRowsInPage':
