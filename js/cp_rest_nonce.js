@@ -1,6 +1,6 @@
 /* global wp console cp_rest_nonces*/
 wp.apiFetch.use(function(options,next){
-	if(cp_rest_nonces && options.path.substr(0,7)==='/cp/v1/'){
+	if(cp_rest_nonces && options.path && options.path.substr(0,7)==='/cp/v1/'){
 		const chunks=options.path.substr(7).split('/');
 		const class_path=chunks.slice(0,2).join('/');
 		if(cp_rest_nonces[class_path]){
