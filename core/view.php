@@ -88,7 +88,7 @@ function the_PV($id=false){
 
 
 /*基本 view_meta*/
-if($wpdb)$wpdb->viewmeta=$wpdb->prefix."viewmeta"; 
+if(!empty($wpdb))$wpdb->viewmeta=$wpdb->prefix."viewmeta"; 
 
 function add_view_meta($view_id,$name,$value,$unique=false){
 	return add_metadata('view',$view_id,$name,$value,$unique);
