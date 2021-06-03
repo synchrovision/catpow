@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "00ccc4cc41fb9c87950dc0537a90b1f1",
+    "content-hash": "7a49d82d17f358a6e4db5f9da06c697c",
     "packages": [
         {
             "name": "facebook/graph-sdk",
