@@ -67,10 +67,7 @@
 						<th className="control">
 							<Catpow.CheckBox
 								selected={state.itemsInPage.every((item)=>item._selected)}
-								onChange={(checked)=>{
-									state.itemsInPage.map((item)=>item._selected=checked);
-									dispatch({type:'update'});
-								}}
+								onChange={(selected)=>dispatch({type:selected?'selectAllRows':'deselectAllRows'})}
 							/>
 						</th>
 						<th className="focus"></th>
