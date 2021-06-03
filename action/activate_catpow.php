@@ -9,3 +9,23 @@ if(!wp_next_scheduled('cp_cron_hourly')){
 if(!wp_next_scheduled('cp_cron_daily')){
 	wp_schedule_event(strtotime(date('Y-m-d')),'daily','cp_cron_daily');
 }
+
+$dir=dirname(__DIR__);
+if(basename($dir)!=='catpow'){
+	add_action('activated_plugin',function($wrong_plugin_name,$network_wide)use($dir){
+		rename($dir,dirname($dir).'/catpow');
+		$plugin='catpow/catpow.php';
+		if($network_wide){
+			$active_plugins=get_network_option('active_plugins',[]);
+			unset($active_plugins[$wrong_plugin_name]);
+			$active_plugins[$plugin]=time();
+			update_network_option('active_plugins',$active_plugins);
+		}
+		else{
+			$active_plugins=get_option('active_plugins',[]);
+			$active_plugins=array_diff($active_plugins,[$wrong_plugin_name]);
+			$active_plugins[]=$plugin;
+			update_option('active_plugins',array_values($active_plugins));
+		}
+	},10,2);
+}
