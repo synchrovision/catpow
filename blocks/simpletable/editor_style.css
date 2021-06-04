@@ -1,9 +1,12 @@
 @charset "utf-8";
 table.wp-block-catpow-simpletable {
-  width: 100%; }
-  table.wp-block-catpow-simpletable tbody tr {
-    position: relative; }
-    table.wp-block-catpow-simpletable tbody tr .itemControl {
-      position: absolute;
-      right: 0.5rem; }
+  width: 100%;
+}
+table.wp-block-catpow-simpletable tbody tr {
+  position: relative;
+}
+table.wp-block-catpow-simpletable tbody tr .itemControl {
+  position: absolute;
+  right: 0.5rem;
+}
 /*# sourceMappingURL=./editor_style.css.map */

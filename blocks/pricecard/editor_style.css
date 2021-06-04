@@ -2,14 +2,17 @@
 ul.wp-block-catpow-pricecard li.item .itemControl {
   position: absolute;
   top: 0.5rem;
-  right: 0.5rem; }
+  right: 0.5rem;
+}
 ul.wp-block-catpow-pricecard li.item .link {
-  position: relative; }
-  ul.wp-block-catpow-pricecard li.item .link .components-base-control {
-    position: absolute;
-    bottom: -4rem;
-    left: 0px;
-    right: 0px;
-    margin: auto;
-    color: #444; }
+  position: relative;
+}
+ul.wp-block-catpow-pricecard li.item .link .components-base-control {
+  position: absolute;
+  bottom: -4rem;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+  color: #444;
+}
 /*# sourceMappingURL=./editor_style.css.map */

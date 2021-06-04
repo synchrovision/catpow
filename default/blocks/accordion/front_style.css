@@ -3,114 +3,150 @@
   padding: 1rem;
   margin: 0px auto;
   max-width: 96rem;
-  width: auto; }
-  .wp-block-catpow-accordion > .header {
-    position: relative;
-    padding: 1rem 2rem;
-    padding-right: 5rem;
-    background-color: #007cba;
-    border-radius: 1rem;
-    cursor: pointer; }
-    .wp-block-catpow-accordion > .header .title {
-      padding: 0px;
-      margin: 0px;
-      text-align: left;
-      font-size: 2rem;
-      line-height: 1em;
-      font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
-      font-weight: 700;
-      color: #f8f8f8; }
-      .wp-block-catpow-accordion > .header .icon::before, .wp-block-catpow-accordion > .header .icon::after {
-        content: '';
-        display: block;
-        position: absolute;
-        width: 2rem;
-        height: 1px;
-        top: 0px;
-        bottom: 0px;
-        right: 1rem;
-        margin: auto;
-        background-color: #f8f8f8; }
-      .wp-block-catpow-accordion > .header .icon::before {
-        -webkit-transition: 0.5s;
-        transition: 0.5s;
-        transform: -webkit- rotateZ(180deg);
-        transform: rotateZ(180deg); }
-      .wp-block-catpow-accordion > .header .icon::after {
-        -webkit-transition: 0.5s;
-        transition: 0.5s;
-        transform: -webkit- rotateZ(90deg);
-        transform: rotateZ(90deg); }
-  .wp-block-catpow-accordion.hasImage > .header {
-    padding-left: 5rem; }
-    .wp-block-catpow-accordion.hasImage > .header .image {
-      display: block;
-      width: 4rem;
-      height: 4rem;
-      position: absolute;
-      top: 0px;
-      left: 0px; }
-      .wp-block-catpow-accordion.hasImage > .header .image img, .wp-block-catpow-accordion.hasImage > .header .image picture, .wp-block-catpow-accordion.hasImage > .header .image video {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-position: center;
-        object-fit: cover; }
-  .wp-block-catpow-accordion.open > .header .icon::after, .wp-block-catpow-accordion.open > .header .icon::before {
-    transform: -webkit- rotateZ(0deg);
-    transform: rotateZ(0deg); }
-  .wp-block-catpow-accordion > .container {
-    overflow: hidden;
-    -webkit-transition: 0.75s;
-    transition: 0.75s; }
-    .wp-block-catpow-accordion > .container > .contents {
-      padding: 2rem; }
-      .color1 .wp-block-catpow-accordion > .header {
-        background-color: #d65c5c; }
-    .color2 .wp-block-catpow-accordion > .header {
-      background-color: #d6995c; }
-  .color3 .wp-block-catpow-accordion > .header {
-    background-color: #d6d65c; }
+  width: auto;
+}
+.wp-block-catpow-accordion > .header {
+  position: relative;
+  padding: 1rem 2rem;
+  padding-right: 5rem;
+  background-color: #007cba;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+.wp-block-catpow-accordion > .header .title {
+  padding: 0px;
+  margin: 0px;
+  text-align: left;
+  font-size: 2rem;
+  line-height: 1em;
+  font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-weight: 700;
+  color: #f8f8f8;
+}
+.wp-block-catpow-accordion > .header .icon::before, .wp-block-catpow-accordion > .header .icon::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 2rem;
+  height: 1px;
+  top: 0px;
+  bottom: 0px;
+  right: 1rem;
+  margin: auto;
+  background-color: #f8f8f8;
+}
+.wp-block-catpow-accordion > .header .icon::before {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  transform: -webkit- rotateZ(180deg);
+  transform: rotateZ(180deg);
+}
+.wp-block-catpow-accordion > .header .icon::after {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  transform: -webkit- rotateZ(90deg);
+  transform: rotateZ(90deg);
+}
+.wp-block-catpow-accordion.hasImage > .header {
+  padding-left: 5rem;
+}
+.wp-block-catpow-accordion.hasImage > .header .image {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.wp-block-catpow-accordion.hasImage > .header .image img, .wp-block-catpow-accordion.hasImage > .header .image picture, .wp-block-catpow-accordion.hasImage > .header .image video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  object-fit: cover;
+}
+.wp-block-catpow-accordion.open > .header .icon::after, .wp-block-catpow-accordion.open > .header .icon::before {
+  transform: -webkit- rotateZ(0deg);
+  transform: rotateZ(0deg);
+}
+.wp-block-catpow-accordion > .container {
+  overflow: hidden;
+  -webkit-transition: 0.75s;
+  transition: 0.75s;
+}
+.wp-block-catpow-accordion > .container > .contents {
+  padding: 2rem;
+}
+.color1 .wp-block-catpow-accordion > .header {
+  background-color: #d65c5c;
+}
+.color2 .wp-block-catpow-accordion > .header {
+  background-color: #d6995c;
+}
+.color3 .wp-block-catpow-accordion > .header {
+  background-color: #d6d65c;
+}
 .color4 .wp-block-catpow-accordion > .header {
-  background-color: #99d65c; }
+  background-color: #99d65c;
+}
 .color5 .wp-block-catpow-accordion > .header {
-  background-color: #5cd65c; }
+  background-color: #5cd65c;
+}
 .color6 .wp-block-catpow-accordion > .header {
-  background-color: #5cd699; }
+  background-color: #5cd699;
+}
 .color7 .wp-block-catpow-accordion > .header {
-  background-color: #5cd6d6; }
+  background-color: #5cd6d6;
+}
 .color8 .wp-block-catpow-accordion > .header {
-  background-color: #5c99d6; }
+  background-color: #5c99d6;
+}
 .color9 .wp-block-catpow-accordion > .header {
-  background-color: #5c5cd6; }
+  background-color: #5c5cd6;
+}
 .color10 .wp-block-catpow-accordion > .header {
-  background-color: #995cd6; }
+  background-color: #995cd6;
+}
 .color11 .wp-block-catpow-accordion > .header {
-  background-color: #d65cd6; }
+  background-color: #d65cd6;
+}
 .color12 .wp-block-catpow-accordion > .header {
-  background-color: #d65c99; }
+  background-color: #d65c99;
+}
 .wp-block-catpow-accordion.color1 > .header {
-  background-color: #d65c5c; }
+  background-color: #d65c5c;
+}
 .wp-block-catpow-accordion.color2 > .header {
-  background-color: #d6995c; }
+  background-color: #d6995c;
+}
 .wp-block-catpow-accordion.color3 > .header {
-  background-color: #d6d65c; }
+  background-color: #d6d65c;
+}
 .wp-block-catpow-accordion.color4 > .header {
-  background-color: #99d65c; }
+  background-color: #99d65c;
+}
 .wp-block-catpow-accordion.color5 > .header {
-  background-color: #5cd65c; }
+  background-color: #5cd65c;
+}
 .wp-block-catpow-accordion.color6 > .header {
-  background-color: #5cd699; }
+  background-color: #5cd699;
+}
 .wp-block-catpow-accordion.color7 > .header {
-  background-color: #5cd6d6; }
+  background-color: #5cd6d6;
+}
 .wp-block-catpow-accordion.color8 > .header {
-  background-color: #5c99d6; }
+  background-color: #5c99d6;
+}
 .wp-block-catpow-accordion.color9 > .header {
-  background-color: #5c5cd6; }
+  background-color: #5c5cd6;
+}
 .wp-block-catpow-accordion.color10 > .header {
-  background-color: #995cd6; }
+  background-color: #995cd6;
+}
 .wp-block-catpow-accordion.color11 > .header {
-  background-color: #d65cd6; }
+  background-color: #d65cd6;
+}
 .wp-block-catpow-accordion.color12 > .header {
-  background-color: #d65c99; }
+  background-color: #d65c99;
+}
 /*# sourceMappingURL=./front_style.css.map */
