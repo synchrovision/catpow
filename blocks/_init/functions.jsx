@@ -662,7 +662,7 @@
 		const {Button,ButtonGroup}=wp.components;
 		return (
 			<BaseControl label={props.label} help={props.help} id={'CP-SelectButtons-'+wp.compose.useInstanceId(CP.SelectButtons)}>
-				<div>
+				<div className="selectButtons">
 					<ButtonGroup>
 						{props.options.map((option)=>(
 							<Button

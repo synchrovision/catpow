@@ -1075,7 +1075,9 @@ var CP = {
       label: props.label,
       help: props.help,
       id: 'CP-SelectButtons-' + wp.compose.useInstanceId(CP.SelectButtons)
-    }, wp.element.createElement("div", null, wp.element.createElement(ButtonGroup, null, props.options.map(function (option) {
+    }, wp.element.createElement("div", {
+      className: "selectButtons"
+    }, wp.element.createElement(ButtonGroup, null, props.options.map(function (option) {
       return wp.element.createElement(Button, {
         onClick: function onClick() {
           return props.onChange(option.value);
