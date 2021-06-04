@@ -6,7 +6,7 @@
 		.item{
 			@include bnd((p:r));
 			&>.itemControl{
-				@include bnd((p:a,t:3,r:3,mg:a,w:fit));
+				@include bnd((p:a,t:3,l:3,mg:a,w:fit));
 			}
 		}
 	}

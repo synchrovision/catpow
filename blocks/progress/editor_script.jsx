@@ -5,38 +5,43 @@
 	category: 'catpow',
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {useMemo,useCallback}=wp.element;
-		const {items=[],classes,currentItemIndex}=attributes;
-		const primaryClass='wp-block-catpow-progress';
-		
-		var states=CP.wordsToFlags(classes);
+		const {Fragment,useMemo,useCallback}=wp.element;
+		const {Flex,FlexItem,FlexBlock,PanelBody,Button,Spinner,SelectControl,CheckboxControl,TextControl}=wp.components;
+		const {post,settings,selections,activeLabel,progress}=attributes;
 		
 		const selectiveClasses=useMemo(()=>[
-			{input:'range',label:'進捗',min:0,max:items.length-1,key:'progress'},
-			{type:'buttons',label:'サイズ',values:['small','medium','large']},
-			{label:'番号',values:'hasCounter',sub:[
-				{input:'text',label:'番号前置テキスト',key:'countPrefix'},
-				{input:'text',label:'番号後置テキスト',key:'countSuffix'}
-			]}
-		],[items.length]);
+			{input:'text',label:'設定名',key:'post'}
+		],[]);
 		
-		const save=useCallback(()=>{
-			setAttributes({items:JSON.parse(JSON.stringify(attributes.items))});
+		const setSettings=useCallback((args)=>{
+			const {currentItemIndex,...otherArgs}=args;
+			if(currentItemIndex!==undefined){setAttributes({currentItemIndex});}
+			setAttributes({settings:{...settings,...otherArgs}});
 		},[setAttributes,attributes]);
-		
+		const registerSettings=useCallback(()=>{
+			const post_id=wp.data.select('core/editor').getCurrentPostId();
+			wp.apiFetch({path:'/cp/v1/blocks/config/progress/settings/register',method:'post',data:{post_id,settings}}).then((res)=>{
+				setAttributes({post:res.post,selections:false});
+			});
+		},[settings]);
+		const updateSettings=useCallback(()=>{
+			wp.apiFetch({path:'/cp/v1/blocks/config/progress/settings/update',method:'post',data:{post,settings}});
+		},[post,settings]);
+		const deleteSettings=useCallback(()=>{
+			wp.apiFetch({path:'/cp/v1/blocks/config/progress/settings/delete',method:'post',data:{post}}).then(()=>{
+				setAttributes({post:'default',settings:false,selections:false});
+			});
+		},[post]);
 		
 		const Items=useCallback((props)=>{
-			const {countPrefix,countSuffix}=attributes;
-			const states=CP.wordsToFlags(attributes.classes);
-			return attributes.items.map((item,index)=>(
-				<CP.Item
-					tag='li'
-					className={(index==attributes.progress?'active':'')}
-					set={setAttributes}
-					attr={attributes}
-					items={attributes.items}
-					index={index}
-					isSelected={isSelected && index==attributes.currentItemIndex}
+			const {countPrefix,countSuffix}=settings;
+			const states=CP.wordsToFlags(settings.classes);
+			return settings.items.map((item,index)=>(
+				<li 
+					className={'item '+(index==attributes.step?'active':'')}
+					onClick={(e)=>{
+						setAttributes({step:index});
+					}}
 				>
 					{states.hasCounter &&
 						<div className='counter'>
@@ -47,73 +52,105 @@
 					}
 					<div className='label'>
 						<RichText
-							onChange={(label)=>{item.label=label;save();}}
+							onChange={(label)=>{item.label=label;setSettings(settings);}}
 							value={item.label}
 						/>
 					</div>
-				</CP.Item>
+				</li>
 			));
-		},[setAttributes,attributes,isSelected]);
+		},[setAttributes,attributes,setSettings,settings,isSelected]);
+		 
+		if(!settings){
+			wp.apiFetch({path:'/cp/v1/blocks/config/progress/settings',method:'post',data:{post}}).then((settings)=>{
+				console.log(settings);
+				setAttributes({settings});
+			});
+		}
+		if(!selections){
+			wp.apiFetch({path:'/cp/v1/blocks/config/progress/settings/selections'}).then((selections)=>{
+				setAttributes({selections});
+			});
+		}
+		const CenterSpinner=useCallback((props)=>(
+			<Flex justify="center">
+				<FlexItem>
+					<Spinner/>
+				</FlexItem>
+			</Flex>
+		),[]);
+		
+		const states=(settings && settings.classes)?CP.wordsToFlags(settings.classes):{};
 		
         return (
 			<Fragment>
-				<CP.SelectModeToolbar
-					set={setAttributes}
-					attr={attributes}
-				/>
 				<InspectorControls>
-					<CP.SelectClassPanel
-						title='クラス'
-						icon='art'
-						set={setAttributes}
-						attr={attributes}
-						selectiveClasses={selectiveClasses}
-						filters={CP.filters.progress || {}}
-					/>
-					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl
-							label='クラス'
-							onChange={(classes)=>setAttributes({classes})}
-							value={classes}
+					<PanelBody title="設定" initialOpen={false} icon="admin-generic">
+						{selections?(
+							<SelectControl
+								value={post}
+								options={Object.keys(selections).map((label)=>{return {
+									label,value:selections[label]
+								}})}
+								onChange={(post)=>{
+									setAttributes({post,settings:false});
+								}}
+							/>
+						):<CenterSpinner/>}
+						<CheckboxControl
+							label="番号"
+							onChange={(flag)=>{
+								states.hasCounter=flag;
+								setSettings({classes:CP.flagsToWords(states)});
+							}}
+							checked={states.hasCounter}
 						/>
+						{states.hasCounter && (
+							<Fragment>
+								<TextControl
+									label="番号前テキスト"
+									value={settings.countPrefix}
+									onChange={(countPrefix)=>{setSettings({countPrefix})}}
+								/>
+								<TextControl
+									label="番号後テキスト"
+									value={settings.countSuffix}
+									onChange={(countSuffix)=>{setSettings({countSuffix})}}
+								/>
+							</Fragment>
+						)}
+						{settings?(
+							<CP.EditItemsTable
+								set={setSettings}
+								attr={settings}
+								columns={[
+									{type:'text',key:'label'},
+								]}
+							/>
+						):<CenterSpinner/>}
+						<Flex justify="center">
+							<FlexItem>
+								<Button isPrimary onClick={updateSettings}>設定を更新</Button>
+							</FlexItem>
+						</Flex>
+						<Flex justify="center">
+							<FlexItem>
+								<Button isLink onClick={registerSettings}>登録</Button>｜<Button isLink isDestructive onClick={deleteSettings}>削除</Button>
+							</FlexItem>
+						</Flex>
 					</PanelBody>
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
 				<Fragment>
-					<div className={classes}>
-						<ul className="items"><Items/></ul>
-					</div>
+					{settings?(
+						<div className={'wp-block-catpow-progress '+settings.classes}>
+							<ul className="items"><Items/></ul>
+						</div>
+					):<CenterSpinner/>}
 				</Fragment>
 			</Fragment>
         );
     },
 	save({attributes,className}){
-		const {useMemo,useCallback}=wp.element;
-		const {classes=''}=attributes;
-		
-		const Items=(props)=>{
-			const {countPrefix,countSuffix}=attributes;
-			const states=CP.wordsToFlags(attributes.classes);
-			return attributes.items.map((item,index)=>(
-				<li className={'item'+(index==attributes.progress?' active':'')}>
-					{states.hasCounter &&
-						<div className='counter'>
-							{countPrefix && <span class="prefix">{countPrefix}</span>}
-							<span className="number">{index+1}</span>
-							{countSuffix && <span class="suffix">{countSuffix}</span>}
-						</div>
-					}
-					<div className='label'>
-						<RichText.Content value={item.label}/>
-					</div>
-				</li>
-			));
-		};
-		
-		return (
-			<div className={classes} data-progress={attributes.progress}>
-				<ul className="items"><Items/></ul>
-			</div>
-		);
+		return false;
 	}
 });
