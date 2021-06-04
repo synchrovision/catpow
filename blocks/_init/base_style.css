@@ -1,5 +1,5 @@
 @charset "utf-8";
-div.itemControl {
+.itemControl {
   padding: 2px 5px;
   position: relative;
   z-index: 1000;
@@ -18,7 +18,7 @@ div.itemControl {
   -webkit-justify-content: space-around;
   justify-content: space-around;
 }
-div.itemControl div.btn {
+.itemControl div.btn {
   display: inline-block;
   margin: 2px;
   text-align: center;
@@ -30,45 +30,45 @@ div.itemControl div.btn {
   transition: 0.5s;
   opacity: 0.7;
 }
-div.itemControl div.btn.delete::before {
+.itemControl div.btn.delete::before {
   content: "";
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
 }
-div.itemControl div.btn.clone::before {
+.itemControl div.btn.clone::before {
   content: "";
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
 }
-div.itemControl div.btn.up::before {
+.itemControl div.btn.up::before {
   content: "";
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
 }
-div.itemControl div.btn.down::before {
+.itemControl div.btn.down::before {
   content: "";
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
 }
-div.itemControl div.btn.left::before {
+.itemControl div.btn.left::before {
   content: "";
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
 }
-div.itemControl div.btn.right::before {
+.itemControl div.btn.right::before {
   content: "";
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
 }
-div.itemControl div.btn.edit::before {
+.itemControl div.btn.edit::before {
   content: "";
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
 }
-div.itemControl div.btn:hover {
+.itemControl div.btn:hover {
   opacity: 1;
 }
-div.itemControl div.inputs {
+.itemControl div.inputs {
   display: block;
   position: absolute;
   width: 200px;
@@ -87,44 +87,47 @@ div.itemControl div.inputs {
   transform: translateY(-10px);
   pointer-events: none;
 }
-div.itemControl div.inputs div.sub {
+.itemControl div.inputs div.sub {
   padding-left: 10px;
   margin-bottom: 20px;
   border-left-style: solid;
   border-left-width: 5px;
   border-left-color: #eee;
 }
-div.itemControl.open {
+.itemControl.open {
   z-index: 1001;
 }
-div.itemControl.open div.btn.edit {
+.itemControl.open div.btn.edit {
   opacity: 1;
 }
-div.itemControl.open div.inputs {
+.itemControl.open div.inputs {
   display: block;
   opacity: 0.8;
   transform: -webkit- translateY(0px);
   transform: translateY(0px);
   pointer-events: auto;
 }
-div.components-panel div.sub {
+.components-panel div.sub {
   padding-left: 10px;
   margin-bottom: 20px;
   border-left-style: solid;
   border-left-width: 5px;
   border-left-color: #eee;
 }
-div.components-panel img.selectImage {
+.components-panel img.selectImage {
   width: 100px;
   height: auto;
 }
-div.embedded_content {
+.selectButtons {
+  width: max-content;
+}
+.embedded_content {
   position: relative;
   min-height: 5rem;
   height: auto;
   padding-top: 2rem;
 }
-div.embedded_content > .label {
+.embedded_content > .label {
   position: absolute;
   right: 0px;
   top: 0px;
@@ -139,7 +142,7 @@ div.embedded_content > .label {
   color: #444;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
-div.alt_content {
+.alt_content {
   position: relative;
   min-height: 5rem;
   height: auto;
@@ -149,7 +152,7 @@ div.alt_content {
   border-width: 1px;
   border-color: #a2a2a2;
 }
-div.alt_content > .label {
+.alt_content > .label {
   position: absolute;
   right: 0px;
   top: 0px;
@@ -164,34 +167,34 @@ div.alt_content > .label {
   color: #f8f8f8;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
-table.selectPosition {
+.selectPosition {
   border-collapse: collapse;
   border-spacing: 0px;
 }
-table.selectPosition td {
+.selectPosition td {
   width: 2rem;
   height: 2rem;
   border-style: solid;
   border-width: 1px;
   border-color: #dadada;
 }
-table.selectPosition td.active {
+.selectPosition td.active {
   background-color: #007cba;
 }
-table.selectPosition td.disable {
+.selectPosition td.disable {
   background-color: #ececec;
 }
-table.SelectPictureSources {
+.SelectPictureSources {
   width: 100%;
 }
-table.SelectPictureSources td {
+.SelectPictureSources td {
   position: relative;
 }
-table.SelectPictureSources td img.selectImage {
+.SelectPictureSources td img.selectImage {
   width: 100%;
   height: auto;
 }
-table.SelectPictureSources td > .label {
+.SelectPictureSources td > .label {
   position: absolute;
   right: 0px;
   top: 0px;
@@ -206,10 +209,11 @@ table.SelectPictureSources td > .label {
   color: #f8f8f8;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
-ul.selectColor {
+.selectColor {
+  width: 400px;
   list-style: none;
 }
-ul.selectColor li {
+.selectColor li {
   display: inline-block;
   position: relative;
   width: 2rem;
@@ -218,10 +222,10 @@ ul.selectColor li {
   border-radius: 2rem;
   cursor: pointer;
 }
-ul.selectColor li.fillColor0 {
+.selectColor li.fillColor0 {
   background-color: #ececec;
 }
-ul.selectColor li::after {
+.selectColor li::after {
   content: ' ';
   display: block;
   position: absolute;
@@ -232,10 +236,10 @@ ul.selectColor li::after {
   border-radius: 2rem;
   background-color: #f8f8f8;
 }
-ul.selectColor li.active::after {
+.selectColor li.active::after {
   display: none;
 }
-ul.selectPattern {
+.selectPattern {
   list-style: none;
   display: -webkit-box;
   display: -webkit-flex;
@@ -244,7 +248,7 @@ ul.selectPattern {
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-ul.selectPattern li {
+.selectPattern li {
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
@@ -255,10 +259,10 @@ ul.selectPattern li {
   background-size: 50% auto;
   cursor: pointer;
 }
-ul.selectPattern li.active {
+.selectPattern li.active {
   background-color: #007cba;
 }
-ul.selectPreparedImage {
+.selectPreparedImage {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -270,7 +274,7 @@ ul.selectPreparedImage {
   border-width: 1px;
   border-color: #ececec;
 }
-ul.selectPreparedImage .item {
+.selectPreparedImage .item {
   -webkit-box-flex: 0;
   flex-grow: 0;
   flex-shrink: 0;
@@ -278,14 +282,14 @@ ul.selectPreparedImage .item {
   box-sizing: border-box;
   cursor: pointer;
 }
-ul.selectPreparedImage .item img {
+.selectPreparedImage .item img {
   width: 100%;
   height: auto;
 }
-ul.selectPreparedImage .item.active {
+.selectPreparedImage .item.active {
   background-color: #007cba;
 }
-ul.selectPreparedImageSet {
+.selectPreparedImageSet {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -297,7 +301,7 @@ ul.selectPreparedImageSet {
   border-width: 1px;
   border-color: #ececec;
 }
-ul.selectPreparedImageSet .item {
+.selectPreparedImageSet .item {
   -webkit-box-flex: 0;
   flex-grow: 0;
   flex-shrink: 0;
@@ -305,17 +309,17 @@ ul.selectPreparedImageSet .item {
   box-sizing: border-box;
   cursor: pointer;
 }
-ul.selectPreparedImageSet .item img {
+.selectPreparedImageSet .item img {
   width: 100%;
   height: auto;
 }
-ul.selectPreparedImageSet .item.active {
+.selectPreparedImageSet .item.active {
   background-color: #007cba;
 }
-ul.selectGridButtons {
+.selectGridButtons {
   margin: 0px;
 }
-ul.selectGridButtons.col2 {
+.selectGridButtons.col2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -323,17 +327,17 @@ ul.selectGridButtons.col2 {
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-ul.selectGridButtons.col2 > * {
+.selectGridButtons.col2 > * {
   flex-grow: 1;
   box-sizing: border-box;
 }
-ul.selectGridButtons.col2 > * {
+.selectGridButtons.col2 > * {
   flex-basis: 100%;
 }
-ul.selectGridButtons.col2 > *:first-child:nth-last-child(2n), ul.selectGridButtons.col2 > *:first-child:nth-last-child(2n) ~ * {
+.selectGridButtons.col2 > *:first-child:nth-last-child(2n), .selectGridButtons.col2 > *:first-child:nth-last-child(2n) ~ * {
   flex-basis: 50%;
 }
-ul.selectGridButtons.col3 {
+.selectGridButtons.col3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -341,20 +345,20 @@ ul.selectGridButtons.col3 {
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-ul.selectGridButtons.col3 > * {
+.selectGridButtons.col3 > * {
   flex-grow: 1;
   box-sizing: border-box;
 }
-ul.selectGridButtons.col3 > *:first-child:nth-last-child(1), ul.selectGridButtons.col3 > *:first-child:nth-last-child(1) ~ * {
+.selectGridButtons.col3 > *:first-child:nth-last-child(1), .selectGridButtons.col3 > *:first-child:nth-last-child(1) ~ * {
   flex-basis: 100%;
 }
-ul.selectGridButtons.col3 > *, ul.selectGridButtons.col3 > *:first-child:nth-last-child(2), ul.selectGridButtons.col3 > *:first-child:nth-last-child(2) ~ * {
+.selectGridButtons.col3 > *, .selectGridButtons.col3 > *:first-child:nth-last-child(2), .selectGridButtons.col3 > *:first-child:nth-last-child(2) ~ * {
   flex-basis: 50%;
 }
-ul.selectGridButtons.col3 > *:first-child:nth-last-child(3n), ul.selectGridButtons.col3 > *:first-child:nth-last-child(3n) ~ *, ul.selectGridButtons.col3 > *:nth-child(2n):nth-last-child(3n + 1) ~ * {
+.selectGridButtons.col3 > *:first-child:nth-last-child(3n), .selectGridButtons.col3 > *:first-child:nth-last-child(3n) ~ *, .selectGridButtons.col3 > *:nth-child(2n):nth-last-child(3n + 1) ~ * {
   flex-basis: 33%;
 }
-ul.selectGridButtons.col4 {
+.selectGridButtons.col4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -362,20 +366,20 @@ ul.selectGridButtons.col4 {
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-ul.selectGridButtons.col4 > * {
+.selectGridButtons.col4 > * {
   flex-grow: 1;
   box-sizing: border-box;
 }
-ul.selectGridButtons.col4 > *:first-child:nth-last-child(2), ul.selectGridButtons.col4 > *:first-child:nth-last-child(2) ~ *, ul.selectGridButtons.col4 > *:first-child:nth-last-child(5), ul.selectGridButtons.col4 > *:first-child:nth-last-child(5) ~ * {
+.selectGridButtons.col4 > *:first-child:nth-last-child(2), .selectGridButtons.col4 > *:first-child:nth-last-child(2) ~ *, .selectGridButtons.col4 > *:first-child:nth-last-child(5), .selectGridButtons.col4 > *:first-child:nth-last-child(5) ~ * {
   flex-basis: 50%;
 }
-ul.selectGridButtons.col4 > *, ul.selectGridButtons.col4 > *:first-child:nth-last-child(3), ul.selectGridButtons.col4 > *:first-child:nth-last-child(3) ~ *, ul.selectGridButtons.col4 > *:first-child:nth-last-child(5) ~ *:nth-child(2n):nth-last-child(3n + 1) ~ * {
+.selectGridButtons.col4 > *, .selectGridButtons.col4 > *:first-child:nth-last-child(3), .selectGridButtons.col4 > *:first-child:nth-last-child(3) ~ *, .selectGridButtons.col4 > *:first-child:nth-last-child(5) ~ *:nth-child(2n):nth-last-child(3n + 1) ~ * {
   flex-basis: 33%;
 }
-ul.selectGridButtons.col4 > *:first-child:nth-last-child(4n), ul.selectGridButtons.col4 > *:first-child:nth-last-child(4n) ~ *, ul.selectGridButtons.col4 > *:nth-child(3n):nth-last-child(4n + 1) ~ * {
+.selectGridButtons.col4 > *:first-child:nth-last-child(4n), .selectGridButtons.col4 > *:first-child:nth-last-child(4n) ~ *, .selectGridButtons.col4 > *:nth-child(3n):nth-last-child(4n + 1) ~ * {
   flex-basis: 25%;
 }
-ul.selectGridButtons.col5 {
+.selectGridButtons.col5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -383,23 +387,23 @@ ul.selectGridButtons.col5 {
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-ul.selectGridButtons.col5 > * {
+.selectGridButtons.col5 > * {
   flex-grow: 1;
   box-sizing: border-box;
 }
-ul.selectGridButtons.col5 > *:first-child:nth-last-child(3), ul.selectGridButtons.col5 > *:first-child:nth-last-child(3) ~ *, ul.selectGridButtons.col5 > *:first-child:nth-last-child(7), ul.selectGridButtons.col5 > *:first-child:nth-last-child(7) ~ *, ul.selectGridButtons.col5 > *:first-child:nth-last-child(11), ul.selectGridButtons.col5 > *:first-child:nth-last-child(11) ~ * {
+.selectGridButtons.col5 > *:first-child:nth-last-child(3), .selectGridButtons.col5 > *:first-child:nth-last-child(3) ~ *, .selectGridButtons.col5 > *:first-child:nth-last-child(7), .selectGridButtons.col5 > *:first-child:nth-last-child(7) ~ *, .selectGridButtons.col5 > *:first-child:nth-last-child(11), .selectGridButtons.col5 > *:first-child:nth-last-child(11) ~ * {
   flex-basis: 33%;
 }
-ul.selectGridButtons.col5 > *, ul.selectGridButtons.col5 > *:first-child:nth-last-child(4), ul.selectGridButtons.col5 > *:first-child:nth-last-child(4) ~ *, ul.selectGridButtons.col5 > *:first-child:nth-last-child(7) ~ *:nth-child(3n):nth-last-child(4n + 1) ~ *, ul.selectGridButtons.col5 > *:first-child:nth-last-child(8), ul.selectGridButtons.col5 > *:first-child:nth-last-child(8) ~ *, ul.selectGridButtons.col5 > *:first-child:nth-last-child(11) ~ *:nth-child(3n):nth-last-child(4n + 1) ~ * {
+.selectGridButtons.col5 > *, .selectGridButtons.col5 > *:first-child:nth-last-child(4), .selectGridButtons.col5 > *:first-child:nth-last-child(4) ~ *, .selectGridButtons.col5 > *:first-child:nth-last-child(7) ~ *:nth-child(3n):nth-last-child(4n + 1) ~ *, .selectGridButtons.col5 > *:first-child:nth-last-child(8), .selectGridButtons.col5 > *:first-child:nth-last-child(8) ~ *, .selectGridButtons.col5 > *:first-child:nth-last-child(11) ~ *:nth-child(3n):nth-last-child(4n + 1) ~ * {
   flex-basis: 25%;
 }
-ul.selectGridButtons.col5 > *:first-child:nth-last-child(5n), ul.selectGridButtons.col5 > *:first-child:nth-last-child(5n) ~ *, ul.selectGridButtons.col5 > *:nth-child(4n):nth-last-child(5n + 1) ~ * {
+.selectGridButtons.col5 > *:first-child:nth-last-child(5n), .selectGridButtons.col5 > *:first-child:nth-last-child(5n) ~ *, .selectGridButtons.col5 > *:nth-child(4n):nth-last-child(5n + 1) ~ * {
   flex-basis: 20%;
 }
-ul.selectGridButtons.col5 > *:first-child:nth-last-child(6), ul.selectGridButtons.col5 > *:first-child:nth-last-child(6) ~ * {
+.selectGridButtons.col5 > *:first-child:nth-last-child(6), .selectGridButtons.col5 > *:first-child:nth-last-child(6) ~ * {
   flex-basis: 16%;
 }
-ul.selectGridButtons.col6 {
+.selectGridButtons.col6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -407,26 +411,26 @@ ul.selectGridButtons.col6 {
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-ul.selectGridButtons.col6 > * {
+.selectGridButtons.col6 > * {
   flex-grow: 1;
   box-sizing: border-box;
 }
-ul.selectGridButtons.col6 > *:first-child:nth-last-child(3), ul.selectGridButtons.col6 > *:first-child:nth-last-child(3) ~ * {
+.selectGridButtons.col6 > *:first-child:nth-last-child(3), .selectGridButtons.col6 > *:first-child:nth-last-child(3) ~ * {
   flex-basis: 33%;
 }
-ul.selectGridButtons.col6 > *:first-child:nth-last-child(4), ul.selectGridButtons.col6 > *:first-child:nth-last-child(4) ~ *, ul.selectGridButtons.col6 > *:first-child:nth-last-child(8), ul.selectGridButtons.col6 > *:first-child:nth-last-child(8) ~ *, ul.selectGridButtons.col6 > *:first-child:nth-last-child(9), ul.selectGridButtons.col6 > *:first-child:nth-last-child(9) ~ *, ul.selectGridButtons.col6 > *:first-child:nth-last-child(14), ul.selectGridButtons.col6 > *:first-child:nth-last-child(14) ~ *, ul.selectGridButtons.col6 > *:first-child:nth-last-child(19), ul.selectGridButtons.col6 > *:first-child:nth-last-child(19) ~ * {
+.selectGridButtons.col6 > *:first-child:nth-last-child(4), .selectGridButtons.col6 > *:first-child:nth-last-child(4) ~ *, .selectGridButtons.col6 > *:first-child:nth-last-child(8), .selectGridButtons.col6 > *:first-child:nth-last-child(8) ~ *, .selectGridButtons.col6 > *:first-child:nth-last-child(9), .selectGridButtons.col6 > *:first-child:nth-last-child(9) ~ *, .selectGridButtons.col6 > *:first-child:nth-last-child(14), .selectGridButtons.col6 > *:first-child:nth-last-child(14) ~ *, .selectGridButtons.col6 > *:first-child:nth-last-child(19), .selectGridButtons.col6 > *:first-child:nth-last-child(19) ~ * {
   flex-basis: 25%;
 }
-ul.selectGridButtons.col6 > *, ul.selectGridButtons.col6 > *:first-child:nth-last-child(5), ul.selectGridButtons.col6 > *:first-child:nth-last-child(5) ~ *, ul.selectGridButtons.col6 > *:first-child:nth-last-child(9) ~ *:nth-child(4n):nth-last-child(5n + 1) ~ *, ul.selectGridButtons.col6 > *:first-child:nth-last-child(10), ul.selectGridButtons.col6 > *:first-child:nth-last-child(10) ~ *, ul.selectGridButtons.col6 > *:first-child:nth-last-child(14) ~ *:nth-child(4n):nth-last-child(5n + 1) ~ *, ul.selectGridButtons.col6 > *:first-child:nth-last-child(15), ul.selectGridButtons.col6 > *:first-child:nth-last-child(15) ~ *, ul.selectGridButtons.col6 > *:first-child:nth-last-child(19) ~ *:nth-child(4n):nth-last-child(5n + 1) ~ * {
+.selectGridButtons.col6 > *, .selectGridButtons.col6 > *:first-child:nth-last-child(5), .selectGridButtons.col6 > *:first-child:nth-last-child(5) ~ *, .selectGridButtons.col6 > *:first-child:nth-last-child(9) ~ *:nth-child(4n):nth-last-child(5n + 1) ~ *, .selectGridButtons.col6 > *:first-child:nth-last-child(10), .selectGridButtons.col6 > *:first-child:nth-last-child(10) ~ *, .selectGridButtons.col6 > *:first-child:nth-last-child(14) ~ *:nth-child(4n):nth-last-child(5n + 1) ~ *, .selectGridButtons.col6 > *:first-child:nth-last-child(15), .selectGridButtons.col6 > *:first-child:nth-last-child(15) ~ *, .selectGridButtons.col6 > *:first-child:nth-last-child(19) ~ *:nth-child(4n):nth-last-child(5n + 1) ~ * {
   flex-basis: 20%;
 }
-ul.selectGridButtons.col6 > *:first-child:nth-last-child(6n), ul.selectGridButtons.col6 > *:first-child:nth-last-child(6n) ~ *, ul.selectGridButtons.col6 > *:nth-child(5n):nth-last-child(6n + 1) ~ *, ul.selectGridButtons.col6 > *:first-child:nth-last-child(13), ul.selectGridButtons.col6 > *:first-child:nth-last-child(13) ~ * {
+.selectGridButtons.col6 > *:first-child:nth-last-child(6n), .selectGridButtons.col6 > *:first-child:nth-last-child(6n) ~ *, .selectGridButtons.col6 > *:nth-child(5n):nth-last-child(6n + 1) ~ *, .selectGridButtons.col6 > *:first-child:nth-last-child(13), .selectGridButtons.col6 > *:first-child:nth-last-child(13) ~ * {
   flex-basis: 16%;
 }
-ul.selectGridButtons.col6 > *:first-child:nth-last-child(7), ul.selectGridButtons.col6 > *:first-child:nth-last-child(7) ~ *, ul.selectGridButtons.col6 > *:first-child:nth-last-child(13) ~ *:nth-child(6n):nth-last-child(7n + 1) ~ * {
+.selectGridButtons.col6 > *:first-child:nth-last-child(7), .selectGridButtons.col6 > *:first-child:nth-last-child(7) ~ *, .selectGridButtons.col6 > *:first-child:nth-last-child(13) ~ *:nth-child(6n):nth-last-child(7n + 1) ~ * {
   flex-basis: 14%;
 }
-ul.selectGridButtons .item {
+.selectGridButtons .item {
   padding: 1rem 0.5rem;
   margin: 0px 0px -1px -1px;
   box-sizing: border-box;
@@ -439,16 +443,16 @@ ul.selectGridButtons .item {
   color: #444;
   cursor: pointer;
 }
-ul.selectGridButtons .item.active {
+.selectGridButtons .item.active {
   background-color: #007cba;
   color: #f8f8f8;
 }
-table.editItemsTable {
+.editItemsTable {
   border-collapse: collapse;
   border-spacing: 0px;
   margin: 2rem auto;
 }
-table.editItemsTable th, table.editItemsTable td {
+.editItemsTable th, .editItemsTable td {
   padding: 0.5em;
   min-width: 6em;
   max-width: 30em;
@@ -458,17 +462,17 @@ table.editItemsTable th, table.editItemsTable td {
   border-color: #a2a2a2;
   font-size: 1.2rem;
 }
-table.editItemsTable thead th {
+.editItemsTable thead th {
   background-color: #f6f6f6;
 }
-table.editItemsTable tbody th {
+.editItemsTable tbody th {
   background-color: #f9f9f9;
 }
-table.editItemsTable tbody td > img {
+.editItemsTable tbody td > img {
   width: 6em;
   height: auto;
 }
-table.editItemsTable tbody td .SelectPictureSources {
+.editItemsTable tbody td .SelectPictureSources {
   width: 10rem;
 }
 .dataStructure .item {

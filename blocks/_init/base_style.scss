@@ -1,6 +1,6 @@
 @import 'admin_style_config.scss';
 
-div.itemControl{
+.itemControl{
 	@include bnd((pd:2 5,p:r,z:1000));
 	@include txt((a:c,p:12,h:10));
 	@include bg((c:b));
@@ -62,7 +62,7 @@ div.itemControl{
 	}
 }
 
-div.components-panel{
+.components-panel{
 	div.sub{
 		@include bnd((pdl:10,mgb:20));
 		@include bdr((p:l,s:s,w:5,c:#eee));
@@ -71,8 +71,10 @@ div.components-panel{
 		@include bnd((w:100,h:a));
 	}
 }
-
-div.embedded_content{
+.selectButtons{
+	@include bnd((w:max));
+}
+.embedded_content{
 	@include bnd((p:r,h:5rem a,pdt:2rem));
 	&>.label{
 		@include bnd((p:a,r:0,t:0,pd:.5rem 1rem,z:10));
@@ -81,7 +83,7 @@ div.embedded_content{
 		@include shd((b:1));
 	}
 }
-div.alt_content{
+.alt_content{
 	@include bnd((p:r,h:5rem a,pdt:2rem,mg:0 a));
 	@include bdr((s:s,w:1,c:t 50));
 	&>.label{
@@ -91,7 +93,7 @@ div.alt_content{
 		@include shd((b:1));
 	}
 }
-table.selectPosition{
+.selectPosition{
 	@include tbl(());
 	td{
 		@include bnd((w:2rem,h:2rem));
@@ -104,7 +106,7 @@ table.selectPosition{
 		}
 	}
 }
-table.SelectPictureSources{
+.SelectPictureSources{
 	@include bnd((w:f));
 	td{
 		@include bnd((p:r));
@@ -119,7 +121,8 @@ table.SelectPictureSources{
 		}
 	}
 }
-ul.selectColor{
+.selectColor{
+	@include bnd((w:400));
 	@include txt((l:n));
 	li{
 		@include bnd((d:ib,p:r,w:2rem,h:2rem,mg:.5rem));
@@ -137,7 +140,7 @@ ul.selectColor{
 		&.active::after{@include bnd((d:n));}
 	}
 }
-ul.selectPattern{
+.selectPattern{
 	@include txt((l:n));
 	@include flx((w:w));
 	li{
@@ -147,7 +150,7 @@ ul.selectPattern{
 		&.active{@include bg((c:m));}
 	}
 }
-ul.selectPreparedImage{
+.selectPreparedImage{
 	@include flx((w:w));
 	@include bg((c:t 20));
 	@include bdr((s:s,w:1,c:t 10));
@@ -162,7 +165,7 @@ ul.selectPreparedImage{
 		}
 	}
 }
-ul.selectPreparedImageSet{
+.selectPreparedImageSet{
 	@include flx((w:w));
 	@include bg((c:t 20));
 	@include bdr((s:s,w:1,c:t 10));
@@ -177,7 +180,7 @@ ul.selectPreparedImageSet{
 		}
 	}
 }
-ul.selectGridButtons{
+.selectGridButtons{
 	@include bnd((mg:0));
 	@for $c from 2 through 6{
 		&.col#{$c}{
@@ -196,7 +199,7 @@ ul.selectGridButtons{
 	}
 }
 
-table.editItemsTable{
+.editItemsTable{
 	@include tbl(());
 	@include bnd((mg:2rem a));
 	th,td{
