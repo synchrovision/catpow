@@ -4,9 +4,26 @@ $post_data['meta']=[
 	'receive'=>[-1],
 	'push'=>[-1],
 	'send_mail'=>[],
-	'task_process'=>[]
+	'task_process'=>[],
+	'_progress_block_settings'=>[
+		[
+			'classes'=>'hasCounter medium',
+			'countPrefix'=>'Step.',
+			'countSuffix'=>'',
+			'items'=>[
+				['label'=>'申込','classes'=>''],
+				['label'=>'入力','classes'=>''],
+				['label'=>'確認','classes'=>''],
+				['label'=>'送信','classes'=>''],
+			]
+		]
+	]
 ];
-$post_data['post_content']=cp::get_block_code('section',[
+$post_data['post_content']=cp::get_block_code('progress',[
+	'post'=>$conf_data['name'].'/form',
+	'step'=>0
+]);
+$post_data['post_content'].=cp::get_block_code('section',[
 	'clases'=>'article headline',
 	'title'=>__('送信先のメールアドレスを入力','catpow')
 ],[

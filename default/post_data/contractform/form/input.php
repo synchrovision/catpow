@@ -6,7 +6,11 @@ $post_data['meta']=[
 	'send_mail'=>[],
 	'check_task'=>[-1]
 ];
-$post_data['post_content']=cp::get_block_code('simpletable',[
+$post_data['post_content']=cp::get_block_code('progress',[
+	'post'=>$conf_data['name'].'/form',
+	'step'=>1
+]);
+$post_data['post_content'].=cp::get_block_code('simpletable',[
 	'classes'=>'inputs',
 	'rows'=>array_map(function($conf,$name){
 		return ['classes'=>empty($conf['required'])?'optional':'required','cells'=>[

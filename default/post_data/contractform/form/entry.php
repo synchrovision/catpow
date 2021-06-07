@@ -10,7 +10,11 @@ $post_data['meta']=[
 	]],
 	'check_task'=>[-1]
 ];
-$post_data['post_content']=cp::get_block_code('section',[
+$post_data['post_content']=cp::get_block_code('progress',[
+	'post'=>$conf_data['name'].'/form',
+	'step'=>0
+]);
+$post_data['post_content'].=cp::get_block_code('section',[
 	'clases'=>'article headline',
 	'title'=>__('メールを送信しました','catpow')
 ],[
