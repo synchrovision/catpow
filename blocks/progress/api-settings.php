@@ -8,9 +8,7 @@ $default_settings=[
 		['label'=>'入力','classes'=>''],
 		['label'=>'確認','classes'=>''],
 		['label'=>'送信','classes'=>''],
-	],
-	'post'=>$req['post'],
-	'post_data'=>$post_data
+	]
 ];
 if($req['param']==='register'){
 	update_post_meta($req['post_id'],$meta_name,$req['settings']);
@@ -38,10 +36,10 @@ if($req['param']==='selections'){
 			['key'=>$meta_name,'compare'=>'exists']
 		]
 	]);
-	$selections=['──'=>'default'];
+	$selections=['default'=>'──'];
 	foreach($posts as $post){
 		$post_type_label=$GLOBALS['post_types'][$post->post_type]['label']??'';
-		$selections[$post_type_label.'：'.$post->post_title]=$post->post_type.'/'.get_page_uri($post);
+		$selections[$post->post_type.'/'.get_page_uri($post)]=$post_type_label.'：'.$post->post_title;
 	}
 	$res->set_data($selections);
 	return;
