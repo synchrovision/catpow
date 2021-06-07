@@ -18,7 +18,8 @@ registerBlockType('catpow/progress', {
     var _wp$element = wp.element,
         Fragment = _wp$element.Fragment,
         useMemo = _wp$element.useMemo,
-        useCallback = _wp$element.useCallback;
+        useCallback = _wp$element.useCallback,
+        useEffect = _wp$element.useEffect;
     var _wp$components = wp.components,
         Flex = _wp$components.Flex,
         FlexItem = _wp$components.FlexItem,
@@ -33,13 +34,42 @@ registerBlockType('catpow/progress', {
         settings = attributes.settings,
         selections = attributes.selections,
         activeLabel = attributes.activeLabel,
-        progress = attributes.progress;
+        progress = attributes.progress,
+        _attributes$isWaiting = attributes.isWaiting,
+        isWaiting = _attributes$isWaiting === void 0 ? false : _attributes$isWaiting;
     var selectiveClasses = useMemo(function () {
       return [{
-        input: 'text',
-        label: '設定名',
-        key: 'post'
+        input: 'select',
+        key: 'post',
+        values: selections
+      }, {
+        input: 'range',
+        key: 'step',
+        min: 0,
+        max: settings ? settings.items.length - 1 : 0
       }];
+    }, [selections, settings]);
+    var settingsSelectiveClasses = useMemo(function () {
+      return [{
+        type: 'buttons',
+        label: 'サイズ',
+        values: ['small', 'medium', 'large']
+      }, {
+        label: '番号',
+        values: 'hasCounter',
+        sub: [{
+          input: 'text',
+          label: '番号前テキスト',
+          key: 'countPrefix'
+        }, {
+          input: 'text',
+          label: '番号後テキスト',
+          key: 'countSuffix'
+        }]
+      }];
+    }, []);
+    var sizeSettings = useMemo(function () {
+      return CP.parseSelections(['small', 'medium', 'large']);
     }, []);
     var setSettings = useCallback(function (args) {
       var currentItemIndex = args.currentItemIndex,
@@ -57,6 +87,9 @@ registerBlockType('catpow/progress', {
     }, [setAttributes, attributes]);
     var registerSettings = useCallback(function () {
       var post_id = wp.data.select('core/editor').getCurrentPostId();
+      setAttributes({
+        isWaiting: true
+      });
       wp.apiFetch({
         path: '/cp/v1/blocks/config/progress/settings/register',
         method: 'post',
@@ -67,11 +100,15 @@ registerBlockType('catpow/progress', {
       }).then(function (res) {
         setAttributes({
           post: res.post,
-          selections: false
+          selections: false,
+          isWaiting: false
         });
       });
     }, [settings]);
     var updateSettings = useCallback(function () {
+      setAttributes({
+        isWaiting: true
+      });
       wp.apiFetch({
         path: '/cp/v1/blocks/config/progress/settings/update',
         method: 'post',
@@ -79,9 +116,16 @@ registerBlockType('catpow/progress', {
           post: post,
           settings: settings
         }
+      }).then(function (res) {
+        setAttributes({
+          isWaiting: false
+        });
       });
     }, [post, settings]);
     var deleteSettings = useCallback(function () {
+      setAttributes({
+        isWaiting: true
+      });
       wp.apiFetch({
         path: '/cp/v1/blocks/config/progress/settings/delete',
         method: 'post',
@@ -92,7 +136,8 @@ registerBlockType('catpow/progress', {
         setAttributes({
           post: 'default',
           settings: false,
-          selections: false
+          selections: false,
+          isWaiting: false
         });
       });
     }, [post]);
@@ -136,7 +181,6 @@ registerBlockType('catpow/progress', {
           post: post
         }
       }).then(function (settings) {
-        console.log(settings);
         setAttributes({
           settings: settings
         });
@@ -158,58 +202,34 @@ registerBlockType('catpow/progress', {
         justify: "center"
       }, wp.element.createElement(FlexItem, null, wp.element.createElement(Spinner, null)));
     }, []);
+    useEffect(function () {
+      setAttributes({
+        settings: false
+      });
+    }, [post]);
     var states = settings && settings.classes ? CP.wordsToFlags(settings.classes) : {};
-    return wp.element.createElement(Fragment, null, wp.element.createElement(InspectorControls, null, wp.element.createElement(PanelBody, {
+    return wp.element.createElement(Fragment, null, wp.element.createElement(InspectorControls, null, wp.element.createElement(CP.SelectClassPanel, {
+      title: "\u30AF\u30E9\u30B9",
+      initialOpen: true,
+      icon: "admin-generic",
+      set: setAttributes,
+      attr: attributes,
+      selectiveClasses: selectiveClasses
+    }), settings ? wp.element.createElement(CP.SelectClassPanel, {
       title: "\u8A2D\u5B9A",
       initialOpen: false,
-      icon: "admin-generic"
-    }, selections ? wp.element.createElement(SelectControl, {
-      value: post,
-      options: Object.keys(selections).map(function (label) {
-        return {
-          label: label,
-          value: selections[label]
-        };
-      }),
-      onChange: function onChange(post) {
-        setAttributes({
-          post: post,
-          settings: false
-        });
-      }
-    }) : wp.element.createElement(CenterSpinner, null), wp.element.createElement(CheckboxControl, {
-      label: "\u756A\u53F7",
-      onChange: function onChange(flag) {
-        states.hasCounter = flag;
-        setSettings({
-          classes: CP.flagsToWords(states)
-        });
-      },
-      checked: states.hasCounter
-    }), states.hasCounter && wp.element.createElement(Fragment, null, wp.element.createElement(TextControl, {
-      label: "\u756A\u53F7\u524D\u30C6\u30AD\u30B9\u30C8",
-      value: settings.countPrefix,
-      onChange: function onChange(countPrefix) {
-        setSettings({
-          countPrefix: countPrefix
-        });
-      }
-    }), wp.element.createElement(TextControl, {
-      label: "\u756A\u53F7\u5F8C\u30C6\u30AD\u30B9\u30C8",
-      value: settings.countSuffix,
-      onChange: function onChange(countSuffix) {
-        setSettings({
-          countSuffix: countSuffix
-        });
-      }
-    })), settings ? wp.element.createElement(CP.EditItemsTable, {
+      icon: "admin-generic",
+      set: setSettings,
+      attr: settings,
+      selectiveClasses: settingsSelectiveClasses
+    }, wp.element.createElement(CP.EditItemsTable, {
       set: setSettings,
       attr: settings,
       columns: [{
         type: 'text',
         key: 'label'
       }]
-    }) : wp.element.createElement(CenterSpinner, null), wp.element.createElement(Flex, {
+    }), !isWaiting ? wp.element.createElement(Fragment, null, wp.element.createElement(Flex, {
       justify: "center"
     }, wp.element.createElement(FlexItem, null, wp.element.createElement(Button, {
       isPrimary: true,
@@ -223,7 +243,7 @@ registerBlockType('catpow/progress', {
       isLink: true,
       isDestructive: true,
       onClick: deleteSettings
-    }, "\u524A\u9664")))), wp.element.createElement(CP.ItemControlInfoPanel, null)), wp.element.createElement(Fragment, null, settings ? wp.element.createElement("div", {
+    }, "\u524A\u9664")))) : wp.element.createElement(CenterSpinner, null)) : wp.element.createElement(CenterSpinner, null), wp.element.createElement(CP.ItemControlInfoPanel, null)), wp.element.createElement(Fragment, null, settings ? wp.element.createElement("div", {
       className: 'wp-block-catpow-progress ' + settings.classes
     }, wp.element.createElement("ul", {
       className: "items"

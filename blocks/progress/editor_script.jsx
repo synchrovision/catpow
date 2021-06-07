@@ -5,13 +5,22 @@
 	category: 'catpow',
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {Fragment,useMemo,useCallback}=wp.element;
+		const {Fragment,useMemo,useCallback,useEffect}=wp.element;
 		const {Flex,FlexItem,FlexBlock,PanelBody,Button,Spinner,SelectControl,CheckboxControl,TextControl}=wp.components;
-		const {post,settings,selections,activeLabel,progress}=attributes;
+		const {post,settings,selections,activeLabel,progress,isWaiting=false}=attributes;
 		
 		const selectiveClasses=useMemo(()=>[
-			{input:'text',label:'設定名',key:'post'}
+			{input:'select',key:'post',values:selections},
+			{input:'range',key:'step',min:0,max:settings?(settings.items.length-1):0}
+		],[selections,settings]);
+		const settingsSelectiveClasses=useMemo(()=>[
+			{type:'buttons',label:'サイズ',values:['small','medium','large']},
+			{label:'番号',values:'hasCounter',sub:[
+				{input:'text',label:'番号前テキスト',key:'countPrefix'},
+				{input:'text',label:'番号後テキスト',key:'countSuffix'}
+			]}
 		],[]);
+		const sizeSettings=useMemo(()=>CP.parseSelections(['small','medium','large']),[]);
 		
 		const setSettings=useCallback((args)=>{
 			const {currentItemIndex,...otherArgs}=args;
@@ -20,16 +29,21 @@
 		},[setAttributes,attributes]);
 		const registerSettings=useCallback(()=>{
 			const post_id=wp.data.select('core/editor').getCurrentPostId();
+			setAttributes({isWaiting:true});
 			wp.apiFetch({path:'/cp/v1/blocks/config/progress/settings/register',method:'post',data:{post_id,settings}}).then((res)=>{
-				setAttributes({post:res.post,selections:false});
+				setAttributes({post:res.post,selections:false,isWaiting:false});
 			});
 		},[settings]);
 		const updateSettings=useCallback(()=>{
-			wp.apiFetch({path:'/cp/v1/blocks/config/progress/settings/update',method:'post',data:{post,settings}});
+			setAttributes({isWaiting:true});
+			wp.apiFetch({path:'/cp/v1/blocks/config/progress/settings/update',method:'post',data:{post,settings}}).then((res)=>{
+				setAttributes({isWaiting:false});
+			});
 		},[post,settings]);
 		const deleteSettings=useCallback(()=>{
+			setAttributes({isWaiting:true});
 			wp.apiFetch({path:'/cp/v1/blocks/config/progress/settings/delete',method:'post',data:{post}}).then(()=>{
-				setAttributes({post:'default',settings:false,selections:false});
+				setAttributes({post:'default',settings:false,selections:false,isWaiting:false});
 			});
 		},[post]);
 		
@@ -62,7 +76,6 @@
 		 
 		if(!settings){
 			wp.apiFetch({path:'/cp/v1/blocks/config/progress/settings',method:'post',data:{post}}).then((settings)=>{
-				console.log(settings);
 				setAttributes({settings});
 			});
 		}
@@ -78,47 +91,30 @@
 				</FlexItem>
 			</Flex>
 		),[]);
+		useEffect(()=>{setAttributes({settings:false})},[post]);
 		
 		const states=(settings && settings.classes)?CP.wordsToFlags(settings.classes):{};
 		
         return (
 			<Fragment>
 				<InspectorControls>
-					<PanelBody title="設定" initialOpen={false} icon="admin-generic">
-						{selections?(
-							<SelectControl
-								value={post}
-								options={Object.keys(selections).map((label)=>{return {
-									label,value:selections[label]
-								}})}
-								onChange={(post)=>{
-									setAttributes({post,settings:false});
-								}}
-							/>
-						):<CenterSpinner/>}
-						<CheckboxControl
-							label="番号"
-							onChange={(flag)=>{
-								states.hasCounter=flag;
-								setSettings({classes:CP.flagsToWords(states)});
-							}}
-							checked={states.hasCounter}
-						/>
-						{states.hasCounter && (
-							<Fragment>
-								<TextControl
-									label="番号前テキスト"
-									value={settings.countPrefix}
-									onChange={(countPrefix)=>{setSettings({countPrefix})}}
-								/>
-								<TextControl
-									label="番号後テキスト"
-									value={settings.countSuffix}
-									onChange={(countSuffix)=>{setSettings({countSuffix})}}
-								/>
-							</Fragment>
-						)}
-						{settings?(
+					<CP.SelectClassPanel
+						title="クラス"
+						initialOpen={true}
+						icon="admin-generic"
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+					/>
+					{settings?(
+						<CP.SelectClassPanel
+							title="設定"
+							initialOpen={false}
+							icon="admin-generic"
+							set={setSettings}
+							attr={settings}
+							selectiveClasses={settingsSelectiveClasses}
+						>
 							<CP.EditItemsTable
 								set={setSettings}
 								attr={settings}
@@ -126,18 +122,22 @@
 									{type:'text',key:'label'},
 								]}
 							/>
-						):<CenterSpinner/>}
-						<Flex justify="center">
-							<FlexItem>
-								<Button isPrimary onClick={updateSettings}>設定を更新</Button>
-							</FlexItem>
-						</Flex>
-						<Flex justify="center">
-							<FlexItem>
-								<Button isLink onClick={registerSettings}>登録</Button>｜<Button isLink isDestructive onClick={deleteSettings}>削除</Button>
-							</FlexItem>
-						</Flex>
-					</PanelBody>
+							{!isWaiting?(
+								<Fragment>
+									<Flex justify="center">
+										<FlexItem>
+											<Button isPrimary onClick={updateSettings}>設定を更新</Button>
+										</FlexItem>
+									</Flex>
+									<Flex justify="center">
+										<FlexItem>
+											<Button isLink onClick={registerSettings}>登録</Button>｜<Button isLink isDestructive onClick={deleteSettings}>削除</Button>
+										</FlexItem>
+									</Flex>
+								</Fragment>
+							):<CenterSpinner/>}
+						</CP.SelectClassPanel>
+					):<CenterSpinner/>}
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
 				<Fragment>
