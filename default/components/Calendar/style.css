@@ -2,102 +2,131 @@
 .Calendar {
   padding: 1em;
   margin: 0px auto;
-  width: fit-content; }
-  .Calendar > table {
-    display: inline-block;
-    border-collapse: collapse;
-    border-spacing: 0px;
-    cursor: pointer; }
-    .Calendar > table caption {
-      position: relative;
-      padding: 0.5em 0px; }
-      .Calendar > table caption .year {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-box-lines: multiple;
-        -webkit-flex-wrap: wrap;
-        flex-wrap: wrap;
-        -webkit-align-items: center;
-        align-items: center;
-        -webkit-justify-content: center;
-        justify-content: center; }
-        .Calendar > table caption .year .current {
-          display: inline-block;
-          margin: 0px 1em;
-          font-size: 1em;
-          line-height: 1em; }
-        .Calendar > table caption .year .btn {
-          padding: 0px 0.5em; }
-          .Calendar > table caption .year .btn::before {
-            font-family: dashicons;
-            color: #c7c7c7; }
-        .Calendar > table caption .year .prev::before {
-          content: '\f341'; }
-      .Calendar > table caption .year .next::before {
-        content: '\f345'; }
-    .Calendar > table caption .year .prev10::before {
-      content: '\f141'; }
-  .Calendar > table caption .year .next10::before {
-    content: '\f139'; }
-  .Calendar > table caption .month {
-    display: block;
-    position: relative; }
-    .Calendar > table caption .month .current {
-      display: inline-block;
-      margin: 0px 1em;
-      font-size: 2em;
-      line-height: 1em;
-      vertical-align: bottom; }
-      .Calendar > table caption .month .current::after {
-        content: '月'; }
-    .Calendar > table caption .month .btn::before {
-      color: #c7c7c7; }
-    .Calendar > table caption .month .prev {
-      position: absolute;
-      bottom: 0px;
-      left: 0px; }
-      .Calendar > table caption .month .prev::before {
-        content: '＜';
-        display: inline-block;
-        margin-right: 0.5em; }
-    .Calendar > table caption .month .next {
-      position: absolute;
-      bottom: 0px;
-      right: 0px; }
-      .Calendar > table caption .month .next::before {
-        content: '＞';
-        display: inline-block;
-        margin-left: 0.5em; }
-  .Calendar > table th, .Calendar > table td {
-    height: 2em;
-    width: 2em;
-    padding: 0.25em;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #dadada;
-    text-align: center; }
-    .Calendar > table .day.active {
-      background-color: rgba(0, 124, 186, 0.2); }
-    .Calendar > table .day.sunday {
-      color: #d65c5c; }
-    .Calendar > table .day.saturday {
-      color: #5c99d6; }
-    .Calendar > table .day.outMonth, .Calendar > table .day.disabled {
-      color: #ececec; }
-  .Calendar.small {
-    font-size: 1rem; }
-  .Calendar.medium {
-    font-size: 1.5rem; }
-  .Calendar.large {
-    font-size: 1.5rem; }
-    .Calendar.large .day {
-      width: 10em;
-      height: 10em;
-      padding: 1rem;
-      box-sizing: border-box;
-      text-align: left;
-      vertical-align: top; }
-      .Calendar.large .day .date {
-        display: block; }
+  width: fit-content;
+}
+.Calendar > table {
+  display: inline-block;
+  border-collapse: collapse;
+  border-spacing: 0px;
+  cursor: pointer;
+}
+.Calendar > table caption {
+  position: relative;
+  padding: 0.5em 0px;
+}
+.Calendar > table caption .year {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.Calendar > table caption .year .current {
+  display: inline-block;
+  margin: 0px 1em;
+  font-size: 1em;
+  line-height: 1em;
+}
+.Calendar > table caption .year .btn {
+  padding: 0px 0.5em;
+}
+.Calendar > table caption .year .btn::before {
+  font-family: dashicons;
+  color: #c7c7c7;
+}
+.Calendar > table caption .year .prev::before {
+  content: '';
+}
+.Calendar > table caption .year .next::before {
+  content: '';
+}
+.Calendar > table caption .year .prev10::before {
+  content: '';
+}
+.Calendar > table caption .year .next10::before {
+  content: '';
+}
+.Calendar > table caption .month {
+  display: block;
+  position: relative;
+}
+.Calendar > table caption .month .current {
+  display: inline-block;
+  margin: 0px 1em;
+  font-size: 2em;
+  line-height: 1em;
+  vertical-align: bottom;
+}
+.Calendar > table caption .month .current::after {
+  content: '月';
+}
+.Calendar > table caption .month .btn::before {
+  color: #c7c7c7;
+}
+.Calendar > table caption .month .prev {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+.Calendar > table caption .month .prev::before {
+  content: '＜';
+  display: inline-block;
+  margin-right: 0.5em;
+}
+.Calendar > table caption .month .next {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+.Calendar > table caption .month .next::before {
+  content: '＞';
+  display: inline-block;
+  margin-left: 0.5em;
+}
+.Calendar > table th, .Calendar > table td {
+  height: 2em;
+  width: 2em;
+  padding: 0.25em;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dadada;
+  text-align: center;
+}
+.Calendar > table .day.active {
+  background-color: rgba(0, 124, 186, 0.2);
+}
+.Calendar > table .day.sunday {
+  color: #d65c5c;
+}
+.Calendar > table .day.saturday {
+  color: #5c99d6;
+}
+.Calendar > table .day.outMonth, .Calendar > table .day.disabled {
+  color: #ececec;
+}
+.Calendar.small {
+  font-size: 1rem;
+}
+.Calendar.medium {
+  font-size: 1.5rem;
+}
+.Calendar.large {
+  font-size: 1.5rem;
+}
+.Calendar.large .day {
+  width: 10em;
+  height: 10em;
+  padding: 1rem;
+  box-sizing: border-box;
+  text-align: left;
+  vertical-align: top;
+}
+.Calendar.large .day .date {
+  display: block;
+}
 /*# sourceMappingURL=./style.css.map */
