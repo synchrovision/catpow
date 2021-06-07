@@ -14,7 +14,7 @@ if($attr['post']==='default'){
 	$settings=$default_settings;
 }
 else{
-	$post_data=cp::get_post_data($req['post']);
+	$post_data=cp::get_post_data($attr['post']);
 	$settings=$post_data['meta'][$meta_name][0]??$default_settings;
 }
 $hasCounter=preg_match('/\bhasCounter\b/',$settings['classes']);
