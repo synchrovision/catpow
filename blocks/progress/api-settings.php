@@ -31,7 +31,7 @@ if($req['param']==='delete'){
 }
 if($req['param']==='selections'){
 	$posts=get_posts([
-		'post_type'=>'any',
+		'post_type'=>array_keys($GLOBALS['post_types']),
 		'meta_query'=>[
 			['key'=>$meta_name,'compare'=>'exists']
 		]
