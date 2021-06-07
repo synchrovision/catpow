@@ -2497,7 +2497,7 @@ var CP = {
       title: props.title,
       initialOpen: props.initialOpen || false,
       icon: props.icon
-    }, props.selectiveClasses.map(SelectClass));
+    }, props.selectiveClasses.map(SelectClass), props.children);
   },
   AlignClassToolbar: function AlignClassToolbar(props) {
     var aligns = ['left', 'center', 'right'];

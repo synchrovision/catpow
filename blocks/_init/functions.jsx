@@ -1779,6 +1779,7 @@
 		return (
 			<PanelBody title={props.title} initialOpen={props.initialOpen || false} icon={props.icon}>
 				{props.selectiveClasses.map(SelectClass)}
+				{props.children}
 			</PanelBody>
 		);
 	},
