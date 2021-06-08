@@ -279,6 +279,36 @@ $GLOBALS['wp_filter']['the_content']->callbacks[11]['do_shortcode']['function']=
 	return $content;
 };
 
+/*plugin*/
+add_filter('extra_plugin_headers',function($headers){
+	$headers[]='GitHub Repository';
+	return $headers;
+});
+add_filter('pre_set_site_transient_update_plugins',function($transient){
+	foreach(get_plugins() as $plugin=>$plugin_data){
+		$repo=Catpow\github\Repo::of_plugin($plugin);
+		if(!empty($repo) && $repo->hasNewerRelease){
+			$transient->response[$plugin]=$repo->dataForTransientUpdatePlugins;
+		}
+	}
+	return $transient;
+});
+add_filter('site_transient_update_plugins',function($values){
+	return $values;
+});
+add_filter('plugins_api',function($res,$action,$arg){
+	if(in_array($action,['query_plugins','plugin_information'],true)&& isset($arg->slug)){
+		$repo=Catpow\github\Repo::of_plugin($arg->slug);
+		if(!empty($repo)){return $repo->dataForPluginsApi;}
+	}
+	return $res;
+},10,3);
+add_filter('upgrader_source_selection',function($source,$remote_source,$upgrader,$hook_extra){
+	if(empty($upgrader->skin->plugin_info['GitHub Repository'])){return $source;}
+	$newsource=$remote_source.'/'.dirname($hook_extra['plugin']);
+	rename($source,$newsource);
+	return $newsource;
+},10,4);
 
 /*alt image*/
 add_filter('image_downsize',function($out,$id,$size){
