@@ -798,6 +798,7 @@ class CP{
 		}
 		foreach($conf_data['template'] as $template){
 			$class_name=self::get_class_name('template_type',explode('-',$template)[0]);
+			if(!class_exists($class_name)){continue;}
 			$class_name::fill_conf_data($conf_data);
 		}
 		if(isset($conf_data['meta'])){
