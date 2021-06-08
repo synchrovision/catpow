@@ -63,7 +63,8 @@ registerBlockType('catpow/datatable', {
         setAttributes = _ref.setAttributes,
         isSelected = _ref.isSelected;
     var classes = attributes.classes,
-        rows = attributes.rows,
+        _attributes$rows = attributes.rows,
+        rows = _attributes$rows === void 0 ? [] : _attributes$rows,
         doLoop = attributes.doLoop,
         _attributes$AltMode = attributes.AltMode,
         AltMode = _attributes$AltMode === void 0 ? false : _attributes$AltMode;
@@ -312,7 +313,8 @@ registerBlockType('catpow/datatable', {
         className = _ref2.className;
     var _attributes$classes = attributes.classes,
         classes = _attributes$classes === void 0 ? '' : _attributes$classes,
-        rows = attributes.rows,
+        _attributes$rows2 = attributes.rows,
+        rows = _attributes$rows2 === void 0 ? [] : _attributes$rows2,
         loopParam = attributes.loopParam,
         doLoop = attributes.doLoop;
     var classArray = classes.split(' ');
@@ -343,7 +345,8 @@ registerBlockType('catpow/datatable', {
           className = _ref3.className;
       var _attributes$classes2 = attributes.classes,
           classes = _attributes$classes2 === void 0 ? '' : _attributes$classes2,
-          rows = attributes.rows,
+          _attributes$rows3 = attributes.rows,
+          rows = _attributes$rows3 === void 0 ? [] : _attributes$rows3,
           loopParam = attributes.loopParam;
       var classArray = classes.split(' ');
       var states = CP.wordsToFlags(classes);

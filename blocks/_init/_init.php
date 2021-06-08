@@ -8,6 +8,7 @@ $data=[];
 		foreach($conf_data[$pref.'template'] as $template){
 			$template_data=explode('-',$template);
 			$class_name=cp::get_class_name('template_type',$template_data[0]);
+			if(!class_exists($class_name)){continue;}
 			$embeddables=$class_name::get_embeddables($conf_data);
 			foreach($embeddables as $embed_type=>$embeddable){
 				if(empty($data[$embed_type][$conf_data['label']])){
