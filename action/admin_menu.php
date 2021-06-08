@@ -85,14 +85,18 @@ cp::conf_data_walk(function($data_type,$data_name,&$conf_data){
 	}
 	if(isset($conf_data['article_type'])){
 		$class_name=cp::get_class_name('article_type',$conf_data['article_type']);
-		add_menus(compact('data_type','data_name'),$conf_data,$class_name::get_menus($conf_data));
+		if(class_exists($class_name)){
+			add_menus(compact('data_type','data_name'),$conf_data,$class_name::get_menus($conf_data));
+		}
 	}
 	if($templates=$conf_data[($data_type=='cpdb'?'alias_':'').'template']??null){
 		foreach($templates as $template){
 			$tmp_name=explode('-',$template)[0];
 			$tmp_slug=explode('-',$template)[1]??null;
 			$class_name=cp::get_class_name('template_type',$tmp_name);
-			add_menus(compact('data_type','data_name','tmp_name','tmp_slug'),$conf_data,$class_name::get_menus($conf_data));
+			if(class_exists($class_name)){
+				add_menus(compact('data_type','data_name','tmp_name','tmp_slug'),$conf_data,$class_name::get_menus($conf_data));
+			}
 		}
 	}
 });
