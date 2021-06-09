@@ -2059,10 +2059,10 @@ class CP{
 						'sourceRoot'=>'/'
 					]);
 					$css=$scssc->compile(file_get_contents($scss_name.'.scss'),$scss_name.'.scss');
+					file_put_contents($scss_name.'.css',$css);
 				}catch(\Exception $e){
 					error_log(sprintf('%s:%s;',$scss_name,$e->getMessage()));
 				}
-				file_put_contents($scss_name.'.css',$css);
 			}
 		}
 	}
