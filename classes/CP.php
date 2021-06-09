@@ -2013,7 +2013,12 @@ class CP{
 					foreach(self::$extensions as $extension){
 						$scssc->addImportPath(WP_PLUGIN_DIR.'/'.$extension.'/scss/');
 					}
-					$scssc->addImportPath(WP_PLUGIN_DIR.'/catpow/scss/');
+					$catpow_scss_dir=WP_PLUGIN_DIR.'/catpow/scss/';
+					if(!file_exists($catpow_scss_dir.'catpow.scss')){
+						$repo=new github\Repo('synchrovision/catpow-scss');
+						$repo->download($catpow_scss_dir);
+					}
+					$scssc->addImportPath($catpow_scss_dir);
 					$scssc->addImportPath(get_stylesheet_directory().'/');
 					$scssc->addImportPath(get_template_directory().'/');
 					foreach(self::$extensions as $extension){
