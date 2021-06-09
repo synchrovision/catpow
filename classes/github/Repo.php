@@ -19,7 +19,24 @@ class Repo{
 		$rtn->plugin_data=$plugin_data;
 		return $rtn;
 	}
-	
+	public function download($to){
+		if(!$this->latestZipUrl){return false;}
+		require_once(ABSPATH.'/wp-admin/includes/file.php');
+		WP_Filesystem();
+			
+		$download=download_url($this->latestZipUrl);
+		if(is_wp_error($download)){
+			error_log($download->get_error_message());
+			return false;
+		}
+ 		$result=unzip_file($download,dirname($to));
+		if(is_wp_error($result)){
+			error_log($result->get_error_message());
+			return false;
+		}
+		rename(dirname($to).'/'.$this->latestReleaseName,$to);
+		return true;
+	}
 	
 	function query($path){
 		$url='https://api.github.com/repos/'.$this->repo.'/'.$path;
@@ -39,8 +56,12 @@ class Repo{
 		switch($name){
 			case 'homepage':
 				return sprintf('https://github.com/%s',$this->repo);
+			case 'name':
+				return $this->name=basename($this->repo);
 			case 'latestRelease':
 				return $this->latestRelease=$this->query('releases/latest');
+			case 'latestReleaseName':
+				return $this->name.'-'.$this->latestVersion;
 			case 'latestVersion':
 				return $this->latestRelease['tag_name'];
 			case 'latestZipUrl':
