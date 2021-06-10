@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Catpow
-Description: オリジナルCMS制作支援フレームワーク。オリジナルCMSの開発のためのWordPress中級者以上向けのプラグインです。PHP7.2〜　Wordpress5.0〜
+Description: サイト固有の機能を実装したオリジナルデザインのテーマを開発するためのプラグインです。
 Author: synchro_vision
 Version: 0.3.4-alpha
 Author URI: https://twitter.com/synchro_vision
