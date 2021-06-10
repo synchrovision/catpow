@@ -19,7 +19,10 @@ abstract class api{
 	}
 	public static function register_nonce($action=null){
 		static $is_first=true,$nonces=[];
-		if(!isset($action)){$action=\cp::$content->path;}
+		if(!isset($action)){
+			if(static::class === self::class){$action=\cp::$content->path;}
+			else{$action=implode('/',array_slice(explode('\\',static::class),-2));}
+		}
 		if($is_first){
 			\cp::enqueue_script('cp_rest_nonce');
 			add_action(is_admin()?'admin_footer':'wp_footer',function()use(&$nonces){

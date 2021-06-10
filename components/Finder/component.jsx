@@ -127,6 +127,13 @@ Catpow.Finder=(props)=>{
 				const selectedRows=state.index.rows.filter((row)=>row._selected);
 				return {...state,selectedRows};
 			}
+			case 'selectAllRowsInPage':
+			case 'deselectAllRowsInPage':{
+				const isSelect=action.type==='selectAllRowsInPage';
+				state.index.rows.map((row)=>row._selected=false);
+				const selectedRows=state.itemsInPage.filter((row)=>row._selected=isSelect);
+				return {...state,selectedRows};
+			}
 			case 'focusItem':
 				return {...state,focused:action.row};
 			case 'blurItem':

@@ -48,7 +48,7 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {classes,rows,doLoop,AltMode=false}=attributes;
+		const {classes,rows=[],doLoop,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-datatable';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
@@ -226,7 +226,7 @@
     },
 
 	save({attributes,className}){
-		const {classes='',rows,loopParam,doLoop}=attributes;
+		const {classes='',rows=[],loopParam,doLoop}=attributes;
 		var classArray=classes.split(' ');
 		
 		var states=CP.wordsToFlags(classes);
@@ -267,7 +267,7 @@
 	deprecated:[
 		{
 			save({attributes,className}){
-				const {classes='',rows,loopParam}=attributes;
+				const {classes='',rows=[],loopParam}=attributes;
 				var classArray=classes.split(' ');
 
 				var states=CP.wordsToFlags(classes);

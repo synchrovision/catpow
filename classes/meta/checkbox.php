@@ -22,10 +22,11 @@ class checkbox extends select{
 				foreach($s as $ii=>$ss){
 					$index=\cp::get_tabindex();
 					$rtn.=sprintf(
-						'<label class="checkbox" for="%2$s"%s><input id="%s" type="checkbox" name="%s" value="%s"%s>%s</label>',
-						isset($label_attrs[$ss])?$label_attrs[$ss]:'',
+						'<span class="checkbox"><input id="%s" type="checkbox" name="%s" value="%s"%s><label class="label" for="%1$s"%s>%s</label></span>',
 						\cp::get_input_id($path.'/'.$index),\cp::get_input_name($path.'/'.$index),
-						$ss,in_array($ss,$vals)?' checked="checked"':'',is_int($ii)?$ss:$ii
+						$ss,in_array($ss,$vals)?' checked="checked"':'',
+						isset($label_attrs[$ss])?$label_attrs[$ss]:'',
+						is_int($ii)?$ss:$ii
 					);
 				}
 				$rtn.='</fieldset>';
@@ -33,10 +34,11 @@ class checkbox extends select{
 				$index=\cp::get_tabindex();
 				$label_attr=isset($label_attrs[$s])?$label_attrs[$s]:'';
 				$rtn.=sprintf(
-					'<label class="checkbox" for="%2$s"%s><input id="%s" type="checkbox" name="%s" value="%s"%s>%s</label>',
-					isset($label_attrs[$s])?$label_attrs[$s]:'',
+					'<span class="checkbox"><input id="%s" type="checkbox" name="%s" value="%s"%s><label class="label" for="%1$s"%s>%s</label></span>',
 					\cp::get_input_id($path.'/'.$index),\cp::get_input_name($path.'/'.$index),
-					$s,in_array($s,$vals)?' checked="checked"':'',is_int($i)?$s:$i
+					$s,in_array($s,$vals)?' checked="checked"':'',
+					isset($label_attrs[$s])?$label_attrs[$s]:'',
+					is_int($i)?$s:$i
 				);
 			}
 		}

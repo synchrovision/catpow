@@ -34,7 +34,7 @@ registerBlockType('catpow/motiongraphic',{
 		},[attributes]);
 		
 		if(!selections){
-			wp.apiFetch({path:'cp/v1/blocks/config/motiongraphic/selections'}).then((res)=>{
+			wp.apiFetch({path:'/cp/v1/blocks/config/motiongraphic/selections'}).then((res)=>{
 				initSelectionItems(res.items[0].sub);
 				CP.config.motiongraphic.selections=res.items;
 				setAttributes({selections:res.items});

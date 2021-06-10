@@ -3,6 +3,11 @@
 \cp::$content_path=\cp::get_the_content_path();
 \cp::$content=\cp::get_the_content();
 
+if(property_exists(\cp::$content,'valid') && empty(\cp::$content->valid)){
+	header('HTTP/1.0 403 Forbidden');
+	exit;
+}
+
 /*file*/
 if(get_query_var('cp_page_type')==='file'){
 	$path=\cp::$content_path.'/'.get_query_var('cp_file_path');

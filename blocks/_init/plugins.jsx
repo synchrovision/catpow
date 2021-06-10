@@ -1,5 +1,5 @@
 ﻿registerPlugin('catpow-sidebar',{render:(props)=>{
-	const {useState,useCallback,useReducer}=wp.element;
+	const {Fragment,useState,useCallback,useReducer}=wp.element;
 	const [structure,setStructure]=useState(structure);
 	const {DataStructure,DataStructureItem}=CP;
 	const {Button,ButtonGroup}=wp.components;
@@ -12,13 +12,37 @@
 	const RenderMeta=useCallback(({meta})=>{
 		return (
 			<DataStructure>
-				{meta.map((item)=>(
-					<DataStructureItem title={item.label} name={item.name}>
-						{item.meta.length && <RenderMeta meta={item.meta}/>}
-					</DataStructureItem>
-				))}
+				{meta.map((item)=>{
+					if(item.value){
+						return (
+							<DataStructureItem title={item.label} name={item.name}>
+								<RenderMetaValue value={item.value}/>
+							</DataStructureItem>
+						);
+					}
+					return (
+						<DataStructureItem title={item.label} name={item.name}>
+							{item.meta.length && <RenderMeta meta={item.meta}/>}
+						</DataStructureItem>
+					);
+				})}
 			</DataStructure>
 		);
+	},[props]);
+	const RenderMetaValue=useCallback(({value})=>{
+		if(Array.isArray(value)){
+			return value.map((val)=><DataStructureItem title={val}/>);
+		}
+		return Object.keys(value).map((key)=>{
+			if(typeof value[key] === 'object'){
+				return (
+					<DataStructureItem title={key}>
+						<RenderMetaValue value={value[key]}/>
+					</DataStructureItem>
+				);
+			}
+			return <DataStructureItem title={key} name={value[key]}/>
+		});
 	},[props]);
 	
     return (

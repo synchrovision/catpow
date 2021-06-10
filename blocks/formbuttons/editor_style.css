@@ -1,29 +1,33 @@
 @charset "utf-8";
 .wp-block-catpow-formbuttons li.item {
   position: relative;
-  list-style: none; }
-  .wp-block-catpow-formbuttons li.item .itemControl {
-    position: absolute;
-    top: -2rem;
-    right: 0px; }
-    .wp-block-catpow-formbuttons li.item div.button .action {
-      display: block;
-      position: absolute;
-      top: 100%;
-      left: 0px;
-      right: 0px;
-      margin: auto;
-      padding: 3px;
-      z-index: 7;
-      font-size: 11px;
-      line-height: 1em;
-      letter-spacing: 0px;
-      color: #444;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
-      .wp-block-catpow-formbuttons li.item div.button .action::before {
-        content: "\f013";
-        font-family: 'Font Awesome 5 Free';
-        font-weight: 900;
-        display: inline-block;
-        margin-right: 0.5em; }
+  list-style: none;
+}
+.wp-block-catpow-formbuttons li.item .itemControl {
+  position: absolute;
+  top: -2rem;
+  right: 0px;
+}
+.wp-block-catpow-formbuttons li.item div.button .action {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+  padding: 3px;
+  z-index: 7;
+  font-size: 11px;
+  line-height: 1em;
+  letter-spacing: 0px;
+  color: #444;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+.wp-block-catpow-formbuttons li.item div.button .action::before {
+  content: "";
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  display: inline-block;
+  margin-right: 0.5em;
+}
 /*# sourceMappingURL=./editor_style.css.map */

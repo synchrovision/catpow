@@ -5,18 +5,24 @@
   padding: 0.5rem;
   cursor: pointer;
   text-align: center;
-  font-size: 1.5rem; }
-  .DateSelect > .inputs .input {
-    text-align: right; }
-    .DateSelect > .inputs .input.year {
-      width: 7ch; }
-    .DateSelect > .inputs .input.month, .DateSelect > .inputs .input.date {
-      width: 5ch; }
-  .DateSelect > .inputs .btn {
-    display: inline-block;
-    margin-left: 0.5em;
-    vertical-align: middle; }
-    .DateSelect > .inputs .btn::before {
-      content: '\f508';
-      font-family: dashicons; }
+  font-size: 1.5rem;
+}
+.DateSelect > .inputs .input {
+  text-align: right;
+}
+.DateSelect > .inputs .input.year {
+  width: 7ch;
+}
+.DateSelect > .inputs .input.month, .DateSelect > .inputs .input.date {
+  width: 5ch;
+}
+.DateSelect > .inputs .btn {
+  display: inline-block;
+  margin-left: 0.5em;
+  vertical-align: middle;
+}
+.DateSelect > .inputs .btn::before {
+  content: '';
+  font-family: dashicons;
+}
 /*# sourceMappingURL=./input.css.map */

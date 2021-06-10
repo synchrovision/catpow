@@ -1,27 +1,33 @@
 @charset "utf-8";
 body table.wp-block-catpow-layouttable {
-  width: 100%; }
-  body table.wp-block-catpow-layouttable thead tr th, body table.wp-block-catpow-layouttable tbody tr th, body table.wp-block-catpow-layouttable thead tr td, body table.wp-block-catpow-layouttable tbody tr td {
-    position: relative; }
-    body table.wp-block-catpow-layouttable thead tr th div.itemControl, body table.wp-block-catpow-layouttable tbody tr th div.itemControl, body table.wp-block-catpow-layouttable thead tr td div.itemControl, body table.wp-block-catpow-layouttable tbody tr td div.itemControl {
-      width: 7rem; }
-      body table.wp-block-catpow-layouttable thead tr th div.itemControl.columnControl, body table.wp-block-catpow-layouttable tbody tr th div.itemControl.columnControl, body table.wp-block-catpow-layouttable thead tr td div.itemControl.columnControl, body table.wp-block-catpow-layouttable tbody tr td div.itemControl.columnControl {
-        position: absolute;
-        bottom: -2rem;
-        left: 0px;
-        right: 0px;
-        margin: auto; }
-      body table.wp-block-catpow-layouttable thead tr th div.itemControl.rowControl, body table.wp-block-catpow-layouttable tbody tr th div.itemControl.rowControl, body table.wp-block-catpow-layouttable thead tr td div.itemControl.rowControl, body table.wp-block-catpow-layouttable tbody tr td div.itemControl.rowControl {
-        position: absolute;
-        top: 0px;
-        right: -6rem; }
-    body table.wp-block-catpow-layouttable thead tr th div.selectBox, body table.wp-block-catpow-layouttable tbody tr th div.selectBox, body table.wp-block-catpow-layouttable thead tr td div.selectBox, body table.wp-block-catpow-layouttable tbody tr td div.selectBox {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0px;
-      left: 0px;
-      background-color: #0ff;
-      opacity: 0.2;
-      pointer-events: none; }
+  width: 100%;
+}
+body table.wp-block-catpow-layouttable thead tr th, body table.wp-block-catpow-layouttable thead tr td, body table.wp-block-catpow-layouttable tbody tr th, body table.wp-block-catpow-layouttable tbody tr td {
+  position: relative;
+}
+body table.wp-block-catpow-layouttable thead tr th div.itemControl, body table.wp-block-catpow-layouttable thead tr td div.itemControl, body table.wp-block-catpow-layouttable tbody tr th div.itemControl, body table.wp-block-catpow-layouttable tbody tr td div.itemControl {
+  width: 7rem;
+}
+body table.wp-block-catpow-layouttable thead tr th div.itemControl.columnControl, body table.wp-block-catpow-layouttable thead tr td div.itemControl.columnControl, body table.wp-block-catpow-layouttable tbody tr th div.itemControl.columnControl, body table.wp-block-catpow-layouttable tbody tr td div.itemControl.columnControl {
+  position: absolute;
+  bottom: -2rem;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+}
+body table.wp-block-catpow-layouttable thead tr th div.itemControl.rowControl, body table.wp-block-catpow-layouttable thead tr td div.itemControl.rowControl, body table.wp-block-catpow-layouttable tbody tr th div.itemControl.rowControl, body table.wp-block-catpow-layouttable tbody tr td div.itemControl.rowControl {
+  position: absolute;
+  top: 0px;
+  right: -6rem;
+}
+body table.wp-block-catpow-layouttable thead tr th div.selectBox, body table.wp-block-catpow-layouttable thead tr td div.selectBox, body table.wp-block-catpow-layouttable tbody tr th div.selectBox, body table.wp-block-catpow-layouttable tbody tr td div.selectBox {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background-color: #0ff;
+  opacity: 0.2;
+  pointer-events: none;
+}
 /*# sourceMappingURL=./editor_style.css.map */

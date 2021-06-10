@@ -1,0 +1,13 @@
+@import 'admin_style_config.scss';
+
+.editor-styles-wrapper{
+	.wp-block-catpow-progress{
+		@include bnd((mg:0 a));
+		.item{
+			@include bnd((p:r));
+			&>.itemControl{
+				@include bnd((p:a,t:3,l:3,mg:a,w:fit));
+			}
+		}
+	}
+}

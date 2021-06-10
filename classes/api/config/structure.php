@@ -20,11 +20,16 @@ class structure extends \Catpow\api{
 		$rtn=[];
 		if(!empty($conf_data['meta'])){
 			foreach($conf_data['meta'] as $key=>$child_conf_data){
+				$conf_class_name=\cp::get_class_name('meta',$child_conf_data['type']);
+				if(class_exists($conf_class_name)){
+					$child_conf_data=$conf_class_name::resolve_conf($child_conf_data);
+				}
 				$rtn[]=[
 					'name'=>$key,
 					'label'=>$child_conf_data['label'],
 					'type'=>$child_conf_data['type'],
-					'meta'=>self::get_structure($child_conf_data)
+					'meta'=>self::get_structure($child_conf_data),
+					'value'=>$child_conf_data['value']??false
 				];
 			}
 		}

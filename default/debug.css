@@ -17,37 +17,46 @@
   background-color: #f8f8f8;
   opacity: 0.9;
   transform: -webkit- translateZ(100px);
-  transform: translateZ(100px); }
-  #cp_log small {
-    color: #444; }
-  #cp_log table {
-    border-collapse: collapse;
-    border-spacing: 0px; }
-    #cp_log table tr th, #cp_log table tr td {
-      padding: 5px;
-      border-style: solid;
-      border-width: 1px;
-      border-color: rgba(68, 68, 68, 0.5);
-      text-align: left;
-      line-height: 100%;
-      color: rgba(68, 68, 68, 0.8); }
-    #cp_log table tr th {
-      font-size: 10px;
-      font-weight: bold;
-      vertical-align: top;
-      background-color: rgba(0, 124, 186, 0.1);
-      cursor: pointer; }
-      #cp_log table tr th .type {
-        display: block;
-        font-size: 8px;
-        font-weight: normal; }
-    #cp_log table tr td {
-      font-size: 8px;
-      vertical-align: middle;
-      -webkit-transition: 0.5s;
-      transition: 0.5s; }
-      #cp_log table tr.close td::before {
-        content: '…'; }
-      #cp_log table tr.close td table {
-        display: none; }
+  transform: translateZ(100px);
+}
+#cp_log small {
+  color: #444;
+}
+#cp_log table {
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+#cp_log table tr th, #cp_log table tr td {
+  padding: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(68, 68, 68, 0.5);
+  text-align: left;
+  line-height: 100%;
+  color: rgba(68, 68, 68, 0.8);
+}
+#cp_log table tr th {
+  font-size: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  background-color: rgba(0, 124, 186, 0.1);
+  cursor: pointer;
+}
+#cp_log table tr th .type {
+  display: block;
+  font-size: 8px;
+  font-weight: normal;
+}
+#cp_log table tr td {
+  font-size: 8px;
+  vertical-align: middle;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+#cp_log table tr.close td::before {
+  content: '…';
+}
+#cp_log table tr.close td table {
+  display: none;
+}
 /*# sourceMappingURL=./debug.css.map */

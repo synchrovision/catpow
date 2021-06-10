@@ -1,0 +1,5 @@
+{
+	"name":"catpow/div",
+	"providesContext":{"catpow/color":"color"},
+	"usesContext":["catpow/color"]
+}

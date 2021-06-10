@@ -1,6 +1,6 @@
 <?php
 add_action('phpmailer_init',function($mailer){
-	$smtp=get_option('cp_smtp')[0];
+	$smtp=get_option('cp_smtp');
 	if($smtp){
 		$mailer->isSMTP();
 		$mailer->Host=$smtp['host'][0];

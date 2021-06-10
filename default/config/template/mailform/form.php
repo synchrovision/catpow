@@ -10,3 +10,4 @@ if(!empty($post_data['meta']['send_mail'])){cp::send_mails($post_data['meta']['s
 if(isset($post_data['meta']['clear'])){clear(array_sum($post_data['meta']['clear']));}
 content($path);
 §message();
+deps();

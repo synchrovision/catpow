@@ -2,7 +2,7 @@
 $conf=[
 	'cat'=>'optimize',
 	'meta'=>[
-		'cp_smtp'=>['type'=>'options','option'=>'cp_smtp','meta'=>[
+		'cp_smtp'=>['type'=>'options','input_type'=>'data','option'=>'cp_smtp','meta'=>[
 			'host'=>['type'=>'text','label'=>'ホスト'],
 			'user'=>['type'=>'text','label'=>'ユーザー'],
 			'pass'=>['type'=>'text','label'=>'パスワード'],

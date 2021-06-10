@@ -560,7 +560,9 @@ class CP{
 		$names[]=false;
 		foreach($names as $name){
 			if($post_data=get_page_by_path($page_path.($name?'-'.$name:''),ARRAY_A,$post_type)){
-				$post_data['meta']=get_post_custom($post_data['ID']);
+				$post_data['meta']=array_map(function($values){
+					return array_map('maybe_unserialize',$values);
+				},get_post_custom($post_data['ID']));
 				return $post_data;
 			}
 		}
@@ -590,6 +592,12 @@ class CP{
 			include $f;
 		}
 		return $cache[$path]=$post_data;
+	}
+	public static function get_block_code($block,$attr,$children=false){
+		if($f=self::get_file_path("blocks/{$block}/gen.php")){
+			if(is_array($children)){$children=implode("\n",$children);}
+			ob_start();include $f;return ob_get_clean();
+		}
 	}
 	
 	/*基本テンプレート*/
@@ -701,6 +709,7 @@ class CP{
 		if($depth<3){
 			if($depth===2){list($data_type,$data_name,$tmp_name)=explode('/',$content_path);}
 			elseif($depth===1){list($data_type,$data_name)=explode('/',$content_path);}
+			else{return $cache[$content_path]=[];}
 			$conf_data_name=self::get_conf_data_name($data_type);
 			if(!isset($GLOBALS[$conf_data_name][$data_name])){
 				if($data_type==='catpow'){
@@ -789,6 +798,7 @@ class CP{
 		}
 		foreach($conf_data['template'] as $template){
 			$class_name=self::get_class_name('template_type',explode('-',$template)[0]);
+			if(!class_exists($class_name)){continue;}
 			$class_name::fill_conf_data($conf_data);
 		}
 		if(isset($conf_data['meta'])){
@@ -887,8 +897,9 @@ class CP{
 		$conf['name']=$conf['attr']['data-meta-name']=basename($path);
 		$conf['path']=$path;
 		$class_name=self::get_class_name('meta',$conf['type']);
+		if(!class_exists($class_name)){return;}
 		$class_name::fill_conf($conf);
-		$conf['input_type']=$class_name::$input_type;
+		if(empty($conf['input_type'])){$conf['input_type']=$class_name::$input_type;}
 		$conf['output_type']=$class_name::$output_type??$conf['input_type'];
 		if(!isset($conf['label']))$conf['label']=$conf['name'];
 		if(substr($conf['label'],-1)=='*')$conf['required']=true;
@@ -1238,7 +1249,7 @@ class CP{
 			' id="%1$s" class="cp-meta-item %2$s cp-meta-item-%3$s %4$s" data-meta_name="%3$s" data-role="cp-meta-item" data-meta_type="%2$s"',
 			self::get_input_id($data_path),
 			$conf['type']??'text',
-			$path_data['meta_path']?end($path_data['meta_path'])['meta_name']:'',
+			empty($path_data['meta_path'])?'':end($path_data['meta_path'])['meta_name'],
 			empty($conf['multiple'])?'single-item':'multiple-item'
 		);
 		if(isset($conf['watch'])){
@@ -1530,14 +1541,13 @@ class CP{
 		
 		$path_data=self::get_the_path_data();
 		if(isset($path_data['meta_path'])){
-			$loop_class_name=self::get_class_name('content','meta');
 			$last_meta=&end($path_data['meta_path']);
 			if(isset($last_meta['meta_id'])){
 				$loop_id=$last_meta['meta_id'];
 				unset($last_meta['meta_id']);
 			}
 			else{$loop_id=null;}
-			return $content=new $loop_class_name(['path_data'=>$path_data,'loop_id'=>$loop_id]);
+			return $content=new content\meta(['path_data'=>$path_data,'loop_id'=>$loop_id]);
 		}
 		global $wp_query;
 		if(
@@ -1546,8 +1556,7 @@ class CP{
 			isset($wp_query->query_vars['cp_token']) && 
 			isset($wp_query->query_vars['cp_token_key'])
 		){
-			$loop_class_name=self::get_class_name('content','task');
-			return $content=new $loop_class_name([
+			return $content=new content\task([
 				'path_data'=>$path_data,
 				'token'=>$wp_query->query_vars['cp_token'],
 				'token_key'=>$wp_query->query_vars['cp_token_key']
@@ -1556,7 +1565,6 @@ class CP{
 		
 		$data_type=$path_data['data_type'];
 		$data_name=$path_data['data_name'];
-		$loop_class_name=self::get_class_name('content','loop');
 		$query_class_name=self::get_class_name('query',$data_type);
 		if(in_array($data_type,array('post','nav','page'),true)){
 			global $wp_query;
@@ -1573,7 +1581,7 @@ class CP{
 			unset($path_data['data_id']);
 		}
 		else{$loop_id=null;}
-		return $content=new $loop_class_name(['path_data'=>$path_data,'query'=>$query,'loop_id'=>$loop_id]);
+		return $content=new content\loop(['path_data'=>$path_data,'query'=>$query,'loop_id'=>$loop_id]);
 	}
 	public static function get_the_query_value(){
 		static $query_value;
@@ -2005,7 +2013,12 @@ class CP{
 					foreach(self::$extensions as $extension){
 						$scssc->addImportPath(WP_PLUGIN_DIR.'/'.$extension.'/scss/');
 					}
-					$scssc->addImportPath(WP_PLUGIN_DIR.'/catpow/scss/');
+					$catpow_scss_dir=WP_PLUGIN_DIR.'/catpow/scss/';
+					if(!file_exists($catpow_scss_dir.'catpow.scss')){
+						$repo=new github\Repo('synchrovision/catpow-scss');
+						$repo->download($catpow_scss_dir);
+					}
+					$scssc->addImportPath($catpow_scss_dir);
 					$scssc->addImportPath(get_stylesheet_directory().'/');
 					$scssc->addImportPath(get_template_directory().'/');
 					foreach(self::$extensions as $extension){
@@ -2022,6 +2035,12 @@ class CP{
 						'accent_color'=>get_theme_mod('accent_color',$color_roles['accent_color']['default']),
 						'text_color'=>get_theme_mod('text_color',$color_roles['text_color']['default'])
 					]);
+					$scssc->registerFunction('embed_svg',function($args)use($scssc){
+						if($f=self::get_file_path($args[0][2][0])){
+							return sprintf('data:image/svg+xml;base64,%s',base64_encode(file_get_contents($f)));
+						}
+						return false;
+					});
 					$scssc->registerFunction('export_colors',function($args)use($scssc){
 						if(empty($args[0]) || $args[0][0]!=='map'){return false;}
 						$data=array_combine(
@@ -2045,10 +2064,10 @@ class CP{
 						'sourceRoot'=>'/'
 					]);
 					$css=$scssc->compile(file_get_contents($scss_name.'.scss'),$scss_name.'.scss');
+					file_put_contents($scss_name.'.css',$css);
 				}catch(\Exception $e){
 					error_log(sprintf('%s:%s;',$scss_name,$e->getMessage()));
 				}
-				file_put_contents($scss_name.'.css',$css);
 			}
 		}
 	}

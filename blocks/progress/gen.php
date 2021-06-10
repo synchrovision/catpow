@@ -1,0 +1,1 @@
+<!-- wp:catpow/progress <?=json_encode(['post'=>$attr['post']??'default','step'=>$attr['step']??0])?> /-->

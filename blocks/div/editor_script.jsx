@@ -36,8 +36,6 @@ registerBlockType('catpow/div',{
 		frameImageCss:{source:'text',selector:'style.frameImageCss'},
 		borderImageCss:{source:'text',selector:'style.borderImageCss'},
 	},
-	providesContext:{'catpow/color':'color'},
-	usesContext:['catpow/color'],
 	example:CP.example,
 	edit(props){
 		const {attributes,className,setAttributes,context}=props;

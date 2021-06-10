@@ -3,29 +3,42 @@
   display: block;
   max-width: 30rem;
   width: 100%;
-  margin: 0px auto; }
-  .BarChart svg rect.color1 {
-    fill: #d65c5c; }
-  .BarChart svg rect.color2 {
-    fill: #d6995c; }
-  .BarChart svg rect.color3 {
-    fill: #d6d65c; }
-  .BarChart svg rect.color4 {
-    fill: #99d65c; }
-  .BarChart svg rect.color5 {
-    fill: #5cd65c; }
-  .BarChart svg rect.color6 {
-    fill: #5cd699; }
-  .BarChart svg rect.color7 {
-    fill: #5cd6d6; }
-  .BarChart svg rect.color8 {
-    fill: #5c99d6; }
-  .BarChart svg rect.color9 {
-    fill: #5c5cd6; }
-  .BarChart svg rect.color10 {
-    fill: #995cd6; }
-  .BarChart svg rect.color11 {
-    fill: #d65cd6; }
-  .BarChart svg rect.color12 {
-    fill: #d65c99; }
+  margin: 0px auto;
+}
+.BarChart svg rect.color1 {
+  fill: #d65c5c;
+}
+.BarChart svg rect.color2 {
+  fill: #d6995c;
+}
+.BarChart svg rect.color3 {
+  fill: #d6d65c;
+}
+.BarChart svg rect.color4 {
+  fill: #99d65c;
+}
+.BarChart svg rect.color5 {
+  fill: #5cd65c;
+}
+.BarChart svg rect.color6 {
+  fill: #5cd699;
+}
+.BarChart svg rect.color7 {
+  fill: #5cd6d6;
+}
+.BarChart svg rect.color8 {
+  fill: #5c99d6;
+}
+.BarChart svg rect.color9 {
+  fill: #5c5cd6;
+}
+.BarChart svg rect.color10 {
+  fill: #995cd6;
+}
+.BarChart svg rect.color11 {
+  fill: #d65cd6;
+}
+.BarChart svg rect.color12 {
+  fill: #d65c99;
+}
 /*# sourceMappingURL=./output.css.map */
