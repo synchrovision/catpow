@@ -210,16 +210,16 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 .selectColor {
-  width: 400px;
+  width: 220px;
   list-style: none;
 }
 .selectColor li {
   display: inline-block;
   position: relative;
-  width: 2rem;
-  height: 2rem;
-  margin: 0.5rem;
-  border-radius: 2rem;
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  border-radius: 20px;
   cursor: pointer;
 }
 .selectColor li.fillColor0 {
@@ -233,7 +233,7 @@
   bottom: 1px;
   left: 1px;
   right: 1px;
-  border-radius: 2rem;
+  border-radius: 20px;
   background-color: #f8f8f8;
 }
 .selectColor li.active::after {
