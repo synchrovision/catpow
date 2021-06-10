@@ -57,37 +57,4 @@
 .switcherEdit [data-type="catpow/switchercontent"] {
   display: none;
 }
-.switcherEdit[data-current-index="0"] [data-type="catpow/switchercontent"]:nth-of-type(1) {
-  display: block;
-}
-.switcherEdit[data-current-index="1"] [data-type="catpow/switchercontent"]:nth-of-type(2) {
-  display: block;
-}
-.switcherEdit[data-current-index="2"] [data-type="catpow/switchercontent"]:nth-of-type(3) {
-  display: block;
-}
-.switcherEdit[data-current-index="3"] [data-type="catpow/switchercontent"]:nth-of-type(4) {
-  display: block;
-}
-.switcherEdit[data-current-index="4"] [data-type="catpow/switchercontent"]:nth-of-type(5) {
-  display: block;
-}
-.switcherEdit[data-current-index="5"] [data-type="catpow/switchercontent"]:nth-of-type(6) {
-  display: block;
-}
-.switcherEdit[data-current-index="6"] [data-type="catpow/switchercontent"]:nth-of-type(7) {
-  display: block;
-}
-.switcherEdit[data-current-index="7"] [data-type="catpow/switchercontent"]:nth-of-type(8) {
-  display: block;
-}
-.switcherEdit[data-current-index="8"] [data-type="catpow/switchercontent"]:nth-of-type(9) {
-  display: block;
-}
-.switcherEdit[data-current-index="9"] [data-type="catpow/switchercontent"]:nth-of-type(10) {
-  display: block;
-}
-.switcherEdit[data-current-index="10"] [data-type="catpow/switchercontent"]:nth-of-type(11) {
-  display: block;
-}
 /*# sourceMappingURL=./editor_style.css.map */

@@ -31,11 +31,4 @@
 		@include bnd((mg:0,pd:0));
 	}
 	[data-type="catpow/switchercontent"]{@include bnd((d:n));}
-	@for $i from 0 through 10{
-		&[data-current-index="#{$i}"]{
-			[data-type="catpow/switchercontent"]:nth-of-type(#{$i + 1}){
-				@include bnd((d:b));
-			}
-		}
-	}
 }

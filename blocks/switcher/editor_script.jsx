@@ -76,6 +76,7 @@
 				case 'current_user_can':setAttributes({values:"administrator\neditor\nauthor\ncontributor\nsubscriber"});break;
 			}
 		},[attributes.factor]);
+		const currentBlockId='block-'+wp.data.select('core/block-editor').getBlock(clientId).innerBlocks[currentIndex].clientId;
         return (
 			<Fragment>
 				<div className="switcherEdit" data-current-index={currentIndex}>
@@ -97,6 +98,7 @@
 						/>
 					</div>
 				</div>
+				{currentBlockId && <style>{CP.createStyleCode({['#'+currentBlockId]:{display:'block'}})}</style>}
 				<InspectorControls>
 					<CP.SelectClassPanel
 						title='クラス'

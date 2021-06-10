@@ -109,6 +109,7 @@ registerBlockType('catpow/switcher', {
           break;
       }
     }, [attributes.factor]);
+    var currentBlockId = 'block-' + wp.data.select('core/block-editor').getBlock(clientId).innerBlocks[currentIndex].clientId;
     return wp.element.createElement(Fragment, null, wp.element.createElement("div", {
       className: "switcherEdit",
       "data-current-index": currentIndex
@@ -136,6 +137,8 @@ registerBlockType('catpow/switcher', {
         }];
       }),
       allowedBlocks: ['catpow/switchercontent']
+    }))), currentBlockId && wp.element.createElement("style", null, CP.createStyleCode(babelHelpers.defineProperty({}, '#' + currentBlockId, {
+      display: 'block'
     }))), wp.element.createElement(InspectorControls, null, wp.element.createElement(CP.SelectClassPanel, {
       title: "\u30AF\u30E9\u30B9",
       icon: "art",
