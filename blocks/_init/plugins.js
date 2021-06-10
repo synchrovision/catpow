@@ -1,6 +1,7 @@
 registerPlugin('catpow-sidebar', {
   render: function render(props) {
     var _wp$element = wp.element,
+        Fragment = _wp$element.Fragment,
         useState = _wp$element.useState,
         useCallback = _wp$element.useCallback,
         useReducer = _wp$element.useReducer;
@@ -28,6 +29,15 @@ registerPlugin('catpow-sidebar', {
     var RenderMeta = useCallback(function (_ref) {
       var meta = _ref.meta;
       return wp.element.createElement(DataStructure, null, meta.map(function (item) {
+        if (item.value) {
+          return wp.element.createElement(DataStructureItem, {
+            title: item.label,
+            name: item.name
+          }, wp.element.createElement(RenderMetaValue, {
+            value: item.value
+          }));
+        }
+
         return wp.element.createElement(DataStructureItem, {
           title: item.label,
           name: item.name
@@ -35,6 +45,32 @@ registerPlugin('catpow-sidebar', {
           meta: item.meta
         }));
       }));
+    }, [props]);
+    var RenderMetaValue = useCallback(function (_ref2) {
+      var value = _ref2.value;
+
+      if (Array.isArray(value)) {
+        return value.map(function (val) {
+          return wp.element.createElement(DataStructureItem, {
+            title: val
+          });
+        });
+      }
+
+      return Object.keys(value).map(function (key) {
+        if (babelHelpers.typeof(value[key]) === 'object') {
+          return wp.element.createElement(DataStructureItem, {
+            title: key
+          }, wp.element.createElement(RenderMetaValue, {
+            value: value[key]
+          }));
+        }
+
+        return wp.element.createElement(DataStructureItem, {
+          title: key,
+          name: value[key]
+        });
+      });
     }, [props]);
     return wp.element.createElement(Fragment, null, wp.element.createElement(PluginSidebarMoreMenuItem, {
       target: "catpow-sidebar"
