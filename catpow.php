@@ -3,8 +3,8 @@
 Plugin Name: Catpow
 Description: サイト固有の機能を実装したオリジナルデザインのテーマを開発するためのプラグインです。
 Author: synchro_vision
-Version: 0.3.4-alpha
-Author URI: https://twitter.com/synchro_vision
+Version: 0.3.5-alpha
+Author URI: https://catpow.info
 Text Domain: catpow
 Domain Path: /languages
 GitHub Repository: synchrovision/catpow
