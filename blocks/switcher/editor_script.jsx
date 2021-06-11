@@ -1,4 +1,27 @@
-﻿registerBlockType('catpow/switcher',{
+﻿CP.config.switcher={
+	factors:{
+		schedule:'日時',
+		is_user_logged_in:'ログイン',
+		current_user_can:'ユーザー権限',
+		user_value:'ユーザー情報',
+		input_value:'フォーム入力値',
+		content_value:'コンテンツ情報',
+	},
+	factorFlags:{
+		schedule:4,
+		is_user_logged_in:4,
+		current_user_can:4,
+		user_value:7,
+		input_value:7,
+		content_value:7,
+	},
+	flagValues:{
+		field:1,
+		compare:2,
+		values:4,
+	}
+};
+registerBlockType('catpow/switcher',{
 	title:'🐾 Switcher',
 	description:'日時やログインユーザーによってコンテンツの内容が切り替わるコンテナです。',
 	icon:'networking',
@@ -9,38 +32,33 @@
 		const {useState,useEffect,useMemo,useCallback}=wp.element;
 		const {currentIndex=0}=attributes;
 		const [newBlocks,setNewBlocks]=useState(false);
+		const {factors,factorFlags,flagValues}=CP.config.switcher;
+		
 		const selectiveClasses=[
 			{
 				label:'ファクター',
 				input:'select',
 				key:'factor',
-				values:{
-					schedule:'日時',
-					is_user_logged_in:'ログイン',
-					current_user_can:'ユーザー権限',
-					user_value:'ユーザー情報',
-					input_value:'フォーム入力値',
-					content_value:'コンテンツ情報',
-				}
+				values:factors
 			},
 			{
 				label:'フィールド',
 				input:'text',
 				key:'field',
-				cond:['user_value','input_value','content_value'].indexOf(attributes.factor) >-1
+				cond:factorFlags[attributes.factor]&flagValues['field']
 			},
 			{
 				label:'比較',
 				input:'buttons',
 				key:'compare',
 				values:['=','IN','BETWEEN'],
-				cond:['user_value','input_value','content_value'].indexOf(attributes.factor) >-1
+				cond:factorFlags[attributes.factor]&flagValues['compare']
 			},
 			{
 				label:'値',
 				input:'textarea',
 				key:'values',
-				cond:['schedule','current_user_can','user_value','input_value','content_value'].indexOf(attributes.factor) >-1
+				cond:factorFlags[attributes.factor]&flagValues['values']
 			}
 		];
 		const values=useMemo(()=>attributes.values.split("\n"),[attributes.values]);
@@ -84,12 +102,21 @@
 						<li className="tab icon">
 							<Icon icon="networking"/>
 						</li>
-						{values.map((cond,index)=>(
+						<li className="tab">
+							{factors[attributes.factor]}
+						</li>
+						{factorFlags[attributes.factor]&flagValues['field']?(
+							<li className="tab">
+								{attributes.field}
+								{factorFlags[attributes.factor]&flagValues['compare'] && '　'+attributes.compare}
+							</li>
+						):false}
+						{factorFlags[attributes.factor]&flagValues['values']?values.map((cond,index)=>(
 							<li
 								className={"tab"+(index===currentIndex?' active':'')}
 								onClick={()=>{setAttributes({currentIndex:index})}}
 							>{cond}</li>
-						))}
+						)):false}
 					</ul>
 					<div className="contents">
 						<InnerBlocks
