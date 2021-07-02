@@ -224,6 +224,10 @@ class CSV{
 		}
 		return $rtn;
 	}
+	public function dict($key=null,$where=[]){
+		if(is_null($key)){$key=$this->data[0][0];}
+		return array_column($this->select($where),null,$key);
+	}
 	public function update($data,$where){
 		$keys=$this->data[0];
 		for($r=1,$l=count($this->data);$r<$l;$r++){
