@@ -20,7 +20,7 @@ class seo{
 			$post_type_data=$post_types[get_post_type()];
 			if(isset($post_type_data['meta']['image'])){
 				if($image_data=wp_get_attachment_image_src(get_post_meta(get_the_ID(),'image',true),'vga')){
-					return $image=$image_data['url'];
+					return $image=$image_data[0];
 				}
 			}
 			if(has_post_thumbnail()){return $image=get_the_post_thumbnail_url();}
