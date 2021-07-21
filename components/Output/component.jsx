@@ -23,7 +23,7 @@
 		case 'select':
 		case 'radio':
 		case 'checkbox':{
-			const labels=value.filter((val)=>!!val).map((val)=>conf.dict[val]);
+			const labels=(Array.isArray(value)?value:[value]).filter((val)=>!!val).map((val)=>conf.dict[val]);
 			if(!labels.length){return false;}
 			return (
 				<ul clasName="OutputLabels">
