@@ -5,6 +5,9 @@ chdir(dirname(__DIR__));
 passthru('git submodule update --init --recursive');
 chdir(__DIR__);
 if(!file_exists(__DIR__.'/node_modules')){passthru('npm install');}
+if(!file_exists($f=dirname(__DIR__).'/js/babelHelpers.js')){
+	passthru('node_modules/.bin/babel-external-helpers -t var  > '.$f);
+}
 
 while(true){
 	$jsx_files=get_jsx_files();
