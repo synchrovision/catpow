@@ -459,44 +459,12 @@ add_filter('nav_menu_link_attributes',function($atts,$item,$args,$depth){
 
 
 /*permalink*/
-global $pagenow;
-if($pagenow=='options-permalink.php'){
-	function cp_add_rewrite_rules($data_type){
-		$conf_data_name=cp::get_conf_data_name($data_type);
-		global $$conf_data_name;
-		$datas=$$conf_data_name;
-		if(empty($datas))return;
-		foreach($datas as $data_name=>$data){
-			foreach(['','alias_'] as $pref){
-				if(isset($data[$pref.'template'])){
-					foreach($data[$pref.'template'] as $tmp){
-						$tmp_data=explode('-',$tmp);
-						$tmp_name=$tmp_data[0];
-						$tmp_slug=$tmp_data[1]??null;
-
-						$class_name=cp::get_class_name('template_type',$tmp_name);
-						foreach($class_name::get_rewrite_rule($data[$pref.'path']) as $rewrite_rule){
-							if(isset($tmp_slug)){
-								$rewrite_rule['reg'].="/{$tmp_slug}";
-								$rewrite_rule['rep'].="&cp_tmp_slug={$tmp_slug}";
-							}
-							$rewrite_rule['reg'].='/?$';
-							add_rewrite_rule($rewrite_rule['reg'],$rewrite_rule['rep'],'top');
-						}
-					}
-				}
-			}
-		}
-	}
-	foreach(cp::$data_types as $data_type){
-		cp_add_rewrite_rules($data_type);
-	}
-	add_rewrite_rule(
-		'callback/(.+)/?$',
-		'index.php?cp_callee=$matches[1]',
-		'top'
-	);
-	Catpow\util\htaccess::update();
-}
+add_filter('rewrite_rules_array',function($rules){
+	return array_merge(Catpow\util\rewrite::get_rules(),$rules);
+});
+add_filter('flush_rewrite_rules_hard',function($do_hard){
+	if($do_hard){Catpow\util\htaccess::update();}
+	return $do_hard;
+});
 
 
