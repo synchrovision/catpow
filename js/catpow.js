@@ -2,7 +2,27 @@
 jQuery.catpow=jQuery.catpow || {};
 window.Catpow=window.Catpow || {};
 window.Catpow.UI=window.Catpow.UI || {};
-
+jQuery.catpow.set_page_top_offset=function(offset){
+	$(window).off('.set_page_top_offset');
+	if(window.location.hash){
+		window.addEventListener('load',function(){
+			window.scrollBy({top:-$.catpow.pageTopOffset});
+		});
+	}
+	if(Number.isInteger(offset)){
+		return $.catpow.pageTopOffset=offset;	
+	}
+	if(typeof offset === 'string'){offset=jQuery(offset);}
+	if(offset instanceof jQuery){offset=offset.get(0);}
+	if(offset instanceof HTMLElement){
+		$(window).on('resize.set_page_top_offset scroll.set_page_top_offset',function(){
+			$.catpow.pageTopOffset=Math.max(0,offset.getBoundingClientRect().bottom);
+		});
+		return $.catpow.pageTopOffset=offset.getBoundingClientRect().bottom;
+	}
+	$.catpow.pageTopOffset=0;
+};
+jQuery.catpow.pageTopOffset=0;
 (function($){
 	//指定のcssがdocumentになければ読み込み
 	$.cp_require_styles=function(styles){
@@ -46,43 +66,38 @@ window.Catpow.UI=window.Catpow.UI || {};
 
 
 		//親要素内でスクロールフィックス、offset値だけ上にマージンをとる
-		cp_scrollfix:function(offset){
-			var offsetObject;
-			offset=offset?offset:0;
-			if(offset instanceof jQuery){offsetObject=offset.get(0);}
-			else if(offset instanceof HTMLElement){offsetObject=offset;}
+		cp_scrollfix:function(){
 			var $parent=$(this).parent(),$control=$(this),$window=$(window);
-			var s=$window.scrollTop(),ts=0,ty=0,winh;
+			var s=$window.scrollTop(),ts=0,ty=0,winh,winw;
 			$control.init=function(){
-				if($parent.css('position')==='static'){$parent.css({"position":"relative"});}
-				$(this).css({position:'static',width:'auto'});
-				$(this).width($(this).width());
+				window.addEventListener('load',function(){
+					if($parent.css('position')==='static'){$parent.css({"position":"relative"});}
+				});
 				$control.update();
 			}
 			$control.update=function(){
 				winh=window.innerHeight;
+				winw=window.innerWidth;
 				ts=$window.scrollTop()-s;
 				s=$window.scrollTop();
-				if(offsetObject){offset=offsetObject.getBoundingClientRect().bottom;}
 				$control.each(function(){
 					var bnd1=this.getBoundingClientRect();
 					var bnd2=this.parentNode.getBoundingClientRect();
-					if(bnd2.top>offset){
-						$(this).css({transform:'translate3d(0,0,0)',position:'absolute',top:0,bottom:'auto'});
+					if(bnd2.top>$.catpow.pageTopOffset){
+						$(this).css({transform:'translate3d(0,0,0)',position:'absolute',top:0,bottom:'auto',left:0,right:0});
 					}
-					else if(bnd2.top+bnd2.height<offset+bnd1.height){
-						$(this).css({transform:'translate3d(0,0,0)',position:'absolute',top:'auto',bottom:0});
+					else if(bnd2.top+bnd2.height<$.catpow.pageTopOffset+bnd1.height){
+						$(this).css({transform:'translate3d(0,0,0)',position:'absolute',top:'auto',bottom:0,left:0,right:0});
 					}
 					else{
 						ty-=ts;
 						ty=Math.min(0,Math.max(winh-bnd1.height,ty));
-						$(this).css({transform:'translate3d(0,'+ty+'px,0)',position:'fixed',top:offset + 'px',bottom:'auto'});
+						$(this).css({transform:'translate3d(0,'+ty+'px,0)',position:'fixed',top:$.catpow.pageTopOffset + 'px',bottom:'auto',left:bnd2.left,right:winw-bnd2.right});
 
 					}
 				});
+				window.requestAnimationFrame($control.update);
 			};
-			$(window).scroll(function(){$control.update();});
-			$(window).resize(function(){$control.init();});
 			$control.init();
 			return this;
 		},
@@ -90,8 +105,10 @@ window.Catpow.UI=window.Catpow.UI || {};
 		cp_parallax:function(){
 			var $tgt=$(this);
 			$tgt.css({overflow:'hidden'}).children().css({position:'absolute'});
-			if($tgt.css('position')==='static'){$tgt.css('position','relative');}
-			$tgt.update=function(){
+			window.addEventListener('load',function(){
+				if($tgt.css('position')==='static'){$tgt.css('position','relative');}
+			});
+			$tgt.tick=function(){
 				var winh=window.innerHeight;
 				$tgt.each(function(){
 					var bnd=this.getBoundingClientRect();
@@ -109,6 +126,7 @@ window.Catpow.UI=window.Catpow.UI || {};
 						}
 					});
 				});
+				window.requestAnimationFrame($tgt.tick);
 			};
 			$tgt.each(function(){
 				$(this).children().each(function(){
@@ -117,8 +135,7 @@ window.Catpow.UI=window.Catpow.UI || {};
 					else{this.orgTransform+=' ';}
 				});
 			});
-			$(window).scroll(function(){$tgt.update();});
-			$tgt.update();
+			$tgt.tick();
 			return $tgt;
 		},
 
@@ -873,18 +890,18 @@ window.Catpow.UI=window.Catpow.UI || {};
 			return this;
 		},
 		//ハッシュリンクをスクロールにして、現在のスクロール位置に当たるリンクと対象要素にactiveクラスを付加する
-		cp_hashscroll:function(mgn){
-			mgn=mgn?mgn:0;
+		cp_hashscroll:function(){
 			var $hash_links=[];
 			var s,prev_s;
-
-			$(this).find("a[href^='#']").each(function(){
-				var $hash_link=$(this);
-				$hash_link.tgt=$(this.hash);
-				$hash_link.click(function(){
+			
+			var cb=function(el){
+				var $hash_link=$(el);
+				$hash_link.tgt=$(el.hash);
+				$hash_link.off('.hashscroll');
+				$hash_link.on('click.hashscroll',function(){
 					if($hash_link.tgt.length){
 						$hash_link.tgt.trigger('expect');
-						$('body,html').animate({scrollTop:$hash_link.tgt.offset().top-mgn},500);
+						$('body,html').animate({scrollTop:$hash_link.tgt.offset().top - $.catpow.pageTopOffset},500);
 					}
 					else{
 						$('body,html').animate({scrollTop:0},500);
@@ -892,6 +909,19 @@ window.Catpow.UI=window.Catpow.UI || {};
 					return false;
 				});
 				$hash_links.push($hash_link);
+			};
+			var o=new MutationObserver(function(mutations){
+				mutations.map(function(mutation){
+					mutation.addedNodes.forEach(function(node){
+						if(node.nodeType===1){
+							node.querySelectorAll("a[href^='#']").forEach(cb);
+						}
+					});
+				});
+			});
+			o.observe(this.get(0),{childList:true,subtree:true});
+			$(this).each(function(){
+				this.querySelectorAll("a[href^='#']").forEach(cb);
 			});
 			setInterval(function(){
 				s=$(window).scrollTop();
@@ -899,7 +929,7 @@ window.Catpow.UI=window.Catpow.UI || {};
 					$.each($hash_links,function($i,$hash_link){
 						if($hash_link.tgt.length < 1){return;}
 						var bnd=$hash_link.tgt.get(0).getBoundingClientRect();
-						if(bnd.top<mgn && bnd.bottom>mgn){
+						if(bnd.top<$.catpow.pageTopOffset && bnd.bottom>$.catpow.pageTopOffset){
 							$hash_link.addClass('active');$hash_link.tgt.addClass('active');
 						}
 						else{$hash_link.removeClass('active');$hash_link.tgt.removeClass('active');}
