@@ -86,7 +86,7 @@ jQuery.catpow.pageTopOffset=0;
 					if(bnd2.top>$.catpow.pageTopOffset){
 						$(this).css({transform:'translate3d(0,0,0)',position:'absolute',top:0,bottom:'auto',left:0,right:0});
 					}
-					else if(bnd2.top+bnd2.height<$.catpow.pageTopOffset+bnd1.height){
+					else if(bnd2.bottom<Math.min(winh,$.catpow.pageTopOffset+bnd1.height)){
 						$(this).css({transform:'translate3d(0,0,0)',position:'absolute',top:'auto',bottom:0,left:0,right:0});
 					}
 					else{
