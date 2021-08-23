@@ -31,8 +31,8 @@ jQuery.catpow.set_page_top_offset=function(offset){
 				$control.update();
 			}
 			$control.update=function(){
-				winh=window.innerHeight;
-				winw=window.innerWidth;
+				winh=document.documentElement.clientHeight;
+				winw=document.documentElement.clientWidth;
 				ts=$window.scrollTop()-s;
 				s=$window.scrollTop();
 				$control.each(function(){
@@ -63,7 +63,7 @@ jQuery.catpow.set_page_top_offset=function(offset){
 				if($tgt.css('position')==='static'){$tgt.css('position','relative');}
 			});
 			$tgt.tick=function(){
-				var winh=window.innerHeight;
+				var winh=document.documentElement.clientHeight;
 				$tgt.each(function(){
 					var bnd=this.getBoundingClientRect();
 					var tgth=bnd.height;
