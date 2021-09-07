@@ -4,13 +4,15 @@
   position: absolute;
   top: -2rem;
   left: 0rem;
-  z-index: 100; }
-  .wp-block-catpow-honeycomb .item .handlers .handler {
-    display: inline-block;
-    color: #007cba;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
-    user-select: none; }
+  z-index: 100;
+}
+.wp-block-catpow-honeycomb .item .handlers .handler {
+  display: inline-block;
+  color: #007cba;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
 /*# sourceMappingURL=./editor_style.css.map */
