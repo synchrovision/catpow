@@ -2030,7 +2030,7 @@ class CP{
 					$scssc->setVariables([
 						'header_image'=>get_header_image(),
 						'background_image'=>get_background_image(),
-						'background_color'=>'#'.get_background_color(),
+						'background_color'=>get_theme_mod('background_color')?'#'.get_theme_mod('background_color'):$color_roles['background_color']['default'],
 						'main_color'=>get_theme_mod('main_color',$color_roles['main_color']['default']),
 						'accent_color'=>get_theme_mod('accent_color',$color_roles['accent_color']['default']),
 						'text_color'=>get_theme_mod('text_color',$color_roles['text_color']['default'])

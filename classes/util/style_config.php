@@ -10,6 +10,7 @@ class style_config{
 	public static function get_color_roles(){
 		if(isset(static::$color_roles)){return static::$color_roles;}
 		return static::$color_roles=apply_filters('cp_color_roles',[
+			'background_color'=>['label'=>'背景色','default'=>'#ffffff'],
 			'main_color'=>['label'=>'基本色','default'=>'#888888'],
 			'accent_color'=>['label'=>'強調色','default'=>'#EE8800'],
 			'text_color'=>['label'=>'文字色','default'=>'#666666']
