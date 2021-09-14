@@ -105,7 +105,7 @@ registerFormatType('catpow/small', {
 registerFormatType('catpow/title', {
   title: 'Title',
   tagName: 'span',
-  className: 'ititle',
+  className: 'rtf-title',
   attributes: {
     type: 'class'
   },
@@ -202,7 +202,7 @@ registerFormatType('catpow/title', {
 registerFormatType('catpow/mark', {
   title: 'Mark',
   tagName: 'mark',
-  className: 'mark',
+  className: 'rtf-mark',
   attributes: {
     color: 'class'
   },
@@ -281,7 +281,7 @@ registerFormatType('catpow/mark', {
 registerFormatType('catpow/large', {
   title: 'Large',
   tagName: 'strong',
-  className: 'large',
+  className: 'rtf-large',
   attributes: {
     color: 'class'
   },
@@ -358,7 +358,7 @@ registerFormatType('catpow/large', {
 registerFormatType('catpow/tag', {
   title: 'tag',
   tagName: 'a',
-  className: 'tag',
+  className: 'rtf-tag',
   attributes: {
     url: 'href',
     color: 'class'
@@ -440,14 +440,54 @@ registerFormatType('catpow/tag', {
     }))];
   }
 });
-registerFormatType('catpow/clear', {
-  title: 'clear',
-  tagName: 'div',
-  className: null,
+registerFormatType('catpow/annotation', {
+  title: 'annotation',
+  tagName: 'small',
+  className: 'rtf-annotation',
   edit: function edit(_ref3) {
     var isActive = _ref3.isActive,
         value = _ref3.value,
         onChange = _ref3.onChange;
+
+    var onToggle = function onToggle() {
+      return onChange(toggleFormat(value, {
+        type: 'catpow/annotation'
+      }));
+    };
+
+    var icon = wp.element.createElement("svg", {
+      role: "img",
+      focusable: "false",
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "20",
+      height: "20",
+      viewBox: "0 0 20 20",
+      "aria-hidden": "true"
+    }, wp.element.createElement("path", {
+      d: "M2.99,2.01l7.04,7.04l7.04-7.04l0.62,0.62l-7.04,7.04l7.04,7.04l-0.62,0.62l-7.04-7.04l-7.06,7.06l-0.62-0.62l7.06-7.06 L2.37,2.62L2.99,2.01z M3.95,11.26c-0.87,0-1.6-0.73-1.6-1.6s0.73-1.6,1.6-1.6s1.6,0.73,1.6,1.6C5.55,10.58,4.78,11.26,3.95,11.26z M8.43,3.58c0-0.87,0.73-1.6,1.6-1.6s1.6,0.73,1.6,1.6s-0.73,1.6-1.6,1.6C9.11,5.18,8.43,4.42,8.43,3.58z M11.63,15.74 c0,0.87-0.73,1.6-1.6,1.6s-1.6-0.73-1.6-1.6c0-0.88,0.73-1.6,1.6-1.6C10.94,14.14,11.63,14.91,11.63,15.74z M16.11,8.06 c0.87,0,1.6,0.73,1.6,1.6s-0.73,1.6-1.6,1.6c-0.88,0-1.6-0.73-1.6-1.6C14.51,8.75,15.28,8.06,16.11,8.06z"
+    }));
+    return [wp.element.createElement(Fragment, null, wp.element.createElement(BlockControls, null, wp.element.createElement(Toolbar, {
+      controls: [{
+        icon: icon,
+        onClick: onToggle,
+        isActive: isActive
+      }]
+    })), wp.element.createElement(RichTextToolbarButton, {
+      icon: icon,
+      title: 'annotation',
+      onClick: onToggle,
+      isActive: isActive
+    }))];
+  }
+});
+registerFormatType('catpow/clear', {
+  title: 'clear',
+  tagName: 'div',
+  className: null,
+  edit: function edit(_ref4) {
+    var isActive = _ref4.isActive,
+        value = _ref4.value,
+        onChange = _ref4.onChange;
     var create = wp.richText.create;
     return [wp.element.createElement(RichTextToolbarButton, {
       icon: 'dismiss',
