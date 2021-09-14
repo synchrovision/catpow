@@ -9,9 +9,12 @@ div.DateSelect .value {
   border-radius: 0.5rem;
   cursor: pointer;
   text-align: center;
-  font-size: 1.5rem; }
-  div.DateSelect .value.year {
-    width: 4ch; }
-  div.DateSelect .value.month, div.DateSelect .value.date {
-    width: 2ch; }
+  font-size: 1.5rem;
+}
+div.DateSelect .value.year {
+  width: 4ch;
+}
+div.DateSelect .value.month, div.DateSelect .value.date {
+  width: 2ch;
+}
 /*# sourceMappingURL=./input.css.map */

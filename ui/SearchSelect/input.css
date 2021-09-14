@@ -9,21 +9,25 @@ div.SearchSelect .currentLabel {
   border-radius: 0.5rem;
   text-align: center;
   font-size: 1.5rem;
-  cursor: pointer; }
+  cursor: pointer;
+}
 div.SearchSelect .searchBox {
-  padding: 1rem; }
-  div.SearchSelect .searchBox input.searchInput {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    padding-left: 4rem;
-    margin: 0px;
-    background-image: url('images/search.svg');
-    background-size: auto 2rem;
-    background-repeat: no-repeat;
-    background-position: 1rem 50%; }
+  padding: 1rem;
+}
+div.SearchSelect .searchBox input.searchInput {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 4rem;
+  margin: 0px;
+  background-image: url('images/search.svg');
+  background-size: auto 2rem;
+  background-repeat: no-repeat;
+  background-position: 1rem 50%;
+}
 div.SearchSelect .selectBox {
   min-height: 30rem;
   height: auto;
-  padding: 1rem; }
+  padding: 1rem;
+}
 /*# sourceMappingURL=./input.css.map */
