@@ -43,6 +43,7 @@ registerBlockType('catpow/banners', {
     var imageKeys = CP.config.banners.imageKeys;
     var selectiveClasses = [{
       label: 'サイズ',
+      type: 'buttons',
       values: ['small', 'medium', 'large']
     }, {
       label: 'タイトル',
@@ -184,6 +185,10 @@ registerBlockType('catpow/banners', {
         type: 'text',
         key: 'imageCode',
         cond: states.isTemplate
+      }, {
+        type: 'text',
+        key: 'alt',
+        cond: true
       }, {
         type: 'text',
         key: 'linkUrl',

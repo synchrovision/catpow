@@ -11,6 +11,7 @@ ul.wp-block-catpow-banners li.item > .link {
   position: absolute;
   left: 0px;
   bottom: 0px;
+  z-index: 10;
   background-color: rgba(248, 248, 248, 0.8);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }

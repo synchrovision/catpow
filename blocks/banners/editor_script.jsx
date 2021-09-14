@@ -29,7 +29,7 @@ registerBlockType('catpow/banners',{
 		const {imageKeys}=CP.config.banners;
         
 		var selectiveClasses=[
-			{label:'サイズ',values:['small','medium','large']},
+			{label:'サイズ',type:'buttons',values:['small','medium','large']},
 			{label:'タイトル',values:'hasTitle'},
 			CP.selectiveClassesPreset.isTemplate
 		];
@@ -160,6 +160,7 @@ registerBlockType('catpow/banners',{
 								{type:'text',key:'title',cond:states.hasTitle},
 								{type:'image',label:'image',keys:imageKeys.image,cond:true},
 								{type:'text',key:'imageCode',cond:states.isTemplate},
+								{type:'text',key:'alt',cond:true},
 								{type:'text',key:'linkUrl',cond:true},
 								{type:'text',key:'target',cond:true},
 							]}
