@@ -8,6 +8,20 @@ add_filter('cron_schedules',function($schedules){
 		]
 	];
 },20);
+add_action('cp_cron',function($callback,$args){
+    if(is_callable($callback)){
+        call_user_func_array($callback,$args);
+    }
+},20,2);
+add_action('cp_cron_every_minutes',function(){
+	cp::include_plugin_files('action/cron_every_minutes');
+},20);
+add_action('cp_cron_hourly',function(){
+	cp::include_plugin_files('action/cron_hourly');
+},20);
+add_action('cp_cron_daily',function(){
+	cp::include_plugin_files('action/cron_daily');
+},20);
 
 add_action('cp_init',function(){
 	cp::include_plugin_files('action/cp_init');
@@ -82,17 +96,6 @@ add_action('delete_blog',function($blog_id, $drop){
 /*メール*/
 add_action('phpmailer_init',function($phpmailer){
 	cp::include_plugin_files('action/phpmailer_init',compact(['phpmailer']));
-},20);
-
-/*cronアクション*/
-add_action('cp_cron_every_minutes',function(){
-	cp::include_plugin_files('action/cron_every_minutes');
-},20);
-add_action('cp_cron_hourly',function(){
-	cp::include_plugin_files('action/cron_hourly');
-},20);
-add_action('cp_cron_daily',function(){
-	cp::include_plugin_files('action/cron_daily');
 },20);
 
 ?>
