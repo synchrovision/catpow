@@ -2,7 +2,7 @@
 
 
 .Popup{
-	@include bnd((d:i,p:r,z:10000));
+	@include bnd((d:i,p:r));
 	&.open{
 		@include anm((a:PopupOpen .5s a 1 f));
 	}
@@ -14,11 +14,11 @@
 		@include usr((e:n));
 	}
 	&Container{
-		@include bnd((d:b,p:f,t:0,l:0,r:0));
+		@include bnd((d:b,p:f,t:0,l:0,r:0,z:10000));
 	}
 	&BG{
 		content:'';
-		@include bnd((d:b,p:f,t:0,b:0,l:0,r:0));
+		@include bnd((d:b,p:f,i:0));
 		@include bg((c:shd));
 	}
 	&Body{

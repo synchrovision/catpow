@@ -2,7 +2,6 @@
 .Popup {
   display: inline;
   position: relative;
-  z-index: 10000;
 }
 .Popup.open {
   animation: PopupOpen 0.5s alternate 1 forwards;
@@ -20,15 +19,17 @@
   top: 0px;
   left: 0px;
   right: 0px;
+  z-index: 10000;
 }
 .PopupBG {
   content: '';
   display: block;
   position: fixed;
   top: 0px;
+  right: 0px;
   bottom: 0px;
   left: 0px;
-  right: 0px;
+  inset: 0px;
   background-color: rgba(0, 0, 0, 0.3);
 }
 .PopupBody {
