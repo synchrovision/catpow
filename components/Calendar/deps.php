@@ -1,0 +1,2 @@
+<?php
+$useStyles=['dashicons'];
