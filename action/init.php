@@ -65,7 +65,7 @@ add_action('wp_ajax_nopriv_cp_form',[\cp::get_class_name('content','form'),'resp
 
 /*blocks*/
 if(function_exists('register_block_type')){
-	add_filter('block_categories',function($cats,$post){
+	add_filter('block_categories_all',function($cats,$block_editor_context){
 		$cats[]=[
 			'slug'=>'catpow',
 			'title'=>"\u{1F43E} Catpow"
