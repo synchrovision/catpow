@@ -1,0 +1,14 @@
+@charset "utf-8";
+.PostSchedule__contents {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-items: center;
+  align-items: center;
+  max-width: 1000px;
+  width: auto;
+}
+/*# sourceMappingURL=./input.css.map */

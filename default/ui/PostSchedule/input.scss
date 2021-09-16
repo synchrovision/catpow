@@ -1,0 +1,7 @@
+@import 'admin_style_config.scss';
+
+.PostSchedule{
+	&__contents{
+		@include flx((w:w,a:c));
+	}
+}
