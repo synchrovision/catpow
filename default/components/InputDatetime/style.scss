@@ -1,0 +1,5 @@
+@import 'admin_style_config.scss';
+
+.InputDateTime{
+	@include bnd((pd:10));
+}
