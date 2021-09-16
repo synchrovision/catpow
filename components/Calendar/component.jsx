@@ -103,7 +103,7 @@
 	return (
 		<div className={'Calendar '+className}>
 			<table>
-				<caption onDoubleClick={()=>dispatch({type:'reset'})}>
+				<caption>
 					{showYear && (
 						<div className="year">
 							{showControl && (
