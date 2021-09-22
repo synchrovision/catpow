@@ -2,7 +2,7 @@
 namespace Catpow\meta;
 
 class PostSchedule extends UI{
-	public static $defaultParam=['statuses'=>['publish','private','draft','pending','trash','delete']];
+	public static $can_search=false,$defaultParam=['statuses'=>['publish','private','draft','pending','trash','delete']];
 	public static function get($data_type,$data_name,$id,$meta_name,$conf){
 		$events=[];
 		$crons=_get_cron_array();
