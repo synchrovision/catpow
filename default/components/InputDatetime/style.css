@@ -2,4 +2,7 @@
 .InputDateTime {
   padding: 10px;
 }
+.InputDateTime.invalid .InputDateTime__date {
+  background-color: rgba(214, 91, 91, 0.2);
+}
 /*# sourceMappingURL=./style.css.map */

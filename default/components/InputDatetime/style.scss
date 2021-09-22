@@ -2,4 +2,9 @@
 
 .InputDateTime{
 	@include bnd((pd:10));
+	&.invalid &{
+		&__date{
+			@include bg((c:1 1 .2));
+		}
+	}
 }
