@@ -24,9 +24,11 @@ class cpdb{
 				\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
 				\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
 				\PDO::ATTR_EMULATE_PREPARES => false,
+				\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false
 			)
 		);
 		$this->init();
+		if(ini_get('memory_limit')<'512M'){ini_set("memory_limit", "512M");}
 	}
 	public function init(){
 		$table_datas=get_option('cpdb_tables');
@@ -373,13 +375,12 @@ class cpdb{
 		if($limit){$q[]=self::get_sql_data_limit($limit);}
 		$sth=$this->query($q);
 		while($row=$sth->fetch(\PDO::FETCH_ASSOC)){
-			foreach($row as $key=>&$val){
+			foreach($row as $key=>$val){
 				if(in_array($key,['meta_id','root_object_id','parent_id']))continue;
 				$col_conf=$this->structure[$table_name]['columns'][$key];
-				if($col_conf['multiple'] or $col_conf['has_children']){$val=unserialize($val);}
-				else{$val=(array)$val;}
+				if($col_conf['multiple'] or $col_conf['has_children']){$row[$key]=unserialize($val);}
+				else{$row[$key]=(array)$val;}
 			}
-			unset($val);
 			$meta_id=$row['meta_id'];
 			if(!$include_meta_id){unset($row['meta_id']);}
 			$rtn[$meta_id]=$row;
