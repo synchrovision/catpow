@@ -94,6 +94,9 @@ if(function_exists('register_block_type')){
 		'script'=>['catpow'],
 		'style'=>[]
 	];
+	if($will_compile_editor_script=current_user_can('edit_themes') && $_SERVER['SERVER_NAME']==='localhost'){
+		include_once(dirname(__DIR__).'/jsx_compiler/functions.php');
+	}
 	foreach(cp::get_file_urls('blocks') as $block_dir=>$block_url){
 		foreach(glob($block_dir.'/_init/*.js') as $format_script){
 			$fname=basename($format_script);
@@ -111,6 +114,7 @@ if(function_exists('register_block_type')){
 		foreach(glob($block_dir.'/*/editor_script.js') as $editor_script){
 			$block_name=basename(dirname($editor_script));
 			if(cp::$use_blocks && !in_array($block_name,cp::$use_blocks)){continue;}
+			if($will_compile_editor_script){Catpow\cp_jsx_compile($editor_script);}
 			$block_style_names[]='blocks/'.$block_name.'/editor_style';
 			$block_style_names[]='blocks/'.$block_name.'/style';
 			unset($attributes);
@@ -173,6 +177,7 @@ if(function_exists('register_block_type')){
 		}
 	}
 	cp::scss_compile($block_style_names);
+	
 	add_filter('render_block',function($block_content,$block)use($deps){
 		static $done=[];
 		if(!empty($done[$block['blockName']])){return $block_content;}

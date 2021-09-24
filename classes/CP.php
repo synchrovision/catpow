@@ -404,6 +404,10 @@ class CP{
 		if(wp_script_is($src) || isset($missed[$src])){return false;}
 		if(wp_script_is($src,'registered')){wp_enqueue_script($src);return true;}
 		if(empty($file=self::get_file_path_url($src,$flag))){$missed[$src]=1;return false;}
+		if(current_user_can('edit_themes') && $_SERVER['SERVER_NAME']==='localhost'){
+			include_once(dirname(__DIR__).'/jsx_compiler/functions.php');
+			cp_jsx_compile(key($file));
+		}
 		if(empty($ver)){$ver=filemtime(key($file));}
 		wp_enqueue_script($src,reset($file),$deps,$ver,$in_footer);
 		return true;
