@@ -3,7 +3,8 @@ if(substr($_GET['uri'],-4)!=='.svg'){
 	header('HTTP/1.0 403 Forbidden');
 	die();
 }
-$file=dirname(__DIR__,4).$_GET['uri'];
+$file=dirname(__DIR__,4).strstr($_GET['uri'],'/wp-content/');
+if(!file_exists($file)){$file=(!empty($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST'].$_GET['uri'];}
 $svg=file_get_contents($file);
 
 if(!empty($_GET['color'])){
