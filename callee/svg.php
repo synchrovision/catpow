@@ -4,7 +4,7 @@ if(substr($_GET['uri'],-4)!=='.svg'){
 	die();
 }
 $url=(!empty($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST'].$_GET['uri'];
-$svg=file_get_contents($url);
+$svg=file_get_contents(dirname(__DIR__,4).$_GET['uri']);
 
 if(!empty($_GET['color'])){
 	if(preg_match('/^#([a-fA-f0-9]{3}){1,2}$/',$_GET['color'])){
