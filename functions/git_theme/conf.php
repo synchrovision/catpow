@@ -1,0 +1,4 @@
+<?php
+$conf=[
+	'cat'=>'git'
+];
