@@ -2039,6 +2039,10 @@ class CP{
 						'accent_color'=>get_theme_mod('accent_color',$color_roles['accent_color']['default']),
 						'text_color'=>get_theme_mod('text_color',$color_roles['text_color']['default'])
 					]);
+					$scssc->registerFunction('debug',function($args){
+						error_log(var_export($args,1));
+						return false;
+					});
 					$scssc->registerFunction('embed_svg',function($args)use($scssc){
 						if($f=self::get_file_path($args[0][2][0])){
 							return sprintf('data:image/svg+xml;base64,%s',base64_encode(file_get_contents($f)));
