@@ -6,11 +6,14 @@ span.star {
   background-image: url('images/star_g.svg');
   background-size: 1.5rem auto;
   background-position: 0% 50%;
-  background-repeat: repeat-x; }
-  span.star .value {
-    display: block;
-    height: 100%;
-    background-image: url('images/star.svg');
-    background-size: 1.5rem auto;
-    background-position: 0% 50%;
-    background-repeat: repeat-x; }
+  background-repeat: repeat-x;
+}
+span.star .value {
+  display: block;
+  height: 100%;
+  background-image: url('images/star.svg');
+  background-size: 1.5rem auto;
+  background-position: 0% 50%;
+  background-repeat: repeat-x;
+}
+/*# sourceMappingURL=./style.css.map */
