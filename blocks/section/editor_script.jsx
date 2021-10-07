@@ -3,6 +3,7 @@
 	imageKeys:{
 		navIcon:{src:"navIcon"},
 		image:{mime:"imageMime",src:"imageSrc",alt:"imageAlt",srcset:"imageSrcset"},
+		titleImage:{mime:"titleImageMime",src:"titleImageSrc",alt:"titleImageAlt",srcset:"titleImageSrcset",sources:"titleImageSources"},
 		headerImage:{mime:"headerImageMime",src:"headerImageSrc",alt:"headerImageAlt",srcset:"headerImageSrcset"},
 		headerBackgroundImage:{mime:"headerBackgroundImageMime",src:"headerBackgroundImageSrc",alt:"headerBackgroundImageAlt",srcset:"headerBackgroundImageSrcset",sources:"headerBackgroundImageSources"},
 		backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset",sources:"backgroundImageSources"}
@@ -30,6 +31,15 @@ registerBlockType('catpow/section',{
 		prefix:{source:'children',selector:'header div.prefix'},
 		title:{type:'array',source:'children',selector:'header h2,header .heading',default:['Title']},
 		lead:{type:'array',source:'children',selector:'header p,header .lead'},
+
+		titleImageMime:{source:'attribute',selector:'header .titleImage [src]',attribute:'data-mime'},
+		titleImageSrc:{source:'attribute',selector:'header .titleImage [src]',attribute:'src',default:cp.theme_url+'/images/dummy.jpg'},
+		titleImageSrcset:{source:'attribute',selector:'header .titleImage [src]',attribute:'srcset'},
+		titleImageAlt:{source:'attribute',selector:'header .titleImage [src]',attribute:'alt'},
+		titleImageCode:{source:'text',selector:'header .titleImage'},
+		titleImageSources:CP.getPictureSoucesAttributesForDevices(
+			CP.config.section.devices,'header .titleImage picture','dummy.jpg'
+		),
 
 		headerImageMime:{source:'attribute',selector:'header .image [src]',attribute:'data-mime'},
 		headerImageSrc:{source:'attribute',selector:'header .image [src]',attribute:'src',default:cp.theme_url+'/images/dummy.jpg'},
@@ -109,6 +119,9 @@ registerBlockType('catpow/section',{
 					scene:[
 						'color',
 						{label:__('プレフィクス','catpow'),values:'hasPrefix'},
+						{label:__('タイトル画像','catpow'),values:'hasTitleImage',sub:[
+							{input:'picture',keys:imageKeys.titleImage,devices}
+						]},
 						{label:__('ヘッダ画像','catpow'),values:'hasHeaderImage',sub:[
 							{input:'image',keys:imageKeys.headerImage,size:imageSizes.headerImage}
 						]},
@@ -302,9 +315,24 @@ registerBlockType('catpow/section',{
 									)}
 								</div>
 							}
-							<HeadingTag className="heading">
-								<RichText tagName="div" value={title} onChange={(title)=>setAttributes({title})}/>
-							</HeadingTag>
+							{states.hasTitleImage?(
+								<HeadingTag class="titleImage">
+									{(states.isTemplate && titleImageCode)?(
+										<CP.DummyImage text={titleImageCode}/>
+									):(
+										<CP.SelectResponsiveImage
+											set={setAttributes}
+											attr={attributes}
+											keys={imageKeys.titleImage}
+											devices={devices}
+										/>
+									)}
+								</HeadingTag>
+							):(
+								<HeadingTag className="heading">
+									<RichText tagName="div" value={title} onChange={(title)=>setAttributes({title})}/>
+								</HeadingTag>
+							)}
 							{states.hasLead && 
 								<p className="lead"><RichText tagName="div" value={lead} onChange={(lead)=>setAttributes({lead})}/></p>
 							}
@@ -433,9 +461,23 @@ registerBlockType('catpow/section',{
 									)}
 								</div>
 							}
-							<HeadingTag className="heading">
-								<RichText.Content value={title}/>
-							</HeadingTag>
+							{states.hasTitleImage?(
+								<HeadingTag class="titleImage">
+									{(states.isTemplate && titleImageCode)?(
+										titleImageCode
+									):(
+										<CP.ResponsiveImage
+											attr={attributes}
+											keys={imageKeys.titleImage}
+											devices={devices}
+										/>
+									)}
+								</HeadingTag>
+							):(
+								<HeadingTag className="heading">
+									<RichText.Content value={title}/>
+								</HeadingTag>
+							)}
 							{states.hasLead && <p className="lead"><RichText.Content value={lead}/></p>}
 						</div>
 						{states.hasHeaderBackgroundImage &&

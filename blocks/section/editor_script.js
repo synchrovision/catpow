@@ -10,6 +10,13 @@ CP.config.section = {
       alt: "imageAlt",
       srcset: "imageSrcset"
     },
+    titleImage: {
+      mime: "titleImageMime",
+      src: "titleImageSrc",
+      alt: "titleImageAlt",
+      srcset: "titleImageSrcset",
+      sources: "titleImageSources"
+    },
     headerImage: {
       mime: "headerImageMime",
       src: "headerImageSrc",
@@ -82,6 +89,32 @@ registerBlockType('catpow/section', {
       source: 'children',
       selector: 'header p,header .lead'
     },
+    titleImageMime: {
+      source: 'attribute',
+      selector: 'header .titleImage [src]',
+      attribute: 'data-mime'
+    },
+    titleImageSrc: {
+      source: 'attribute',
+      selector: 'header .titleImage [src]',
+      attribute: 'src',
+      default: cp.theme_url + '/images/dummy.jpg'
+    },
+    titleImageSrcset: {
+      source: 'attribute',
+      selector: 'header .titleImage [src]',
+      attribute: 'srcset'
+    },
+    titleImageAlt: {
+      source: 'attribute',
+      selector: 'header .titleImage [src]',
+      attribute: 'alt'
+    },
+    titleImageCode: {
+      source: 'text',
+      selector: 'header .titleImage'
+    },
+    titleImageSources: CP.getPictureSoucesAttributesForDevices(CP.config.section.devices, 'header .titleImage picture', 'dummy.jpg'),
     headerImageMime: {
       source: 'attribute',
       selector: 'header .image [src]',
@@ -277,6 +310,14 @@ registerBlockType('catpow/section', {
         scene: ['color', {
           label: __('プレフィクス', 'catpow'),
           values: 'hasPrefix'
+        }, {
+          label: __('タイトル画像', 'catpow'),
+          values: 'hasTitleImage',
+          sub: [{
+            input: 'picture',
+            keys: imageKeys.titleImage,
+            devices: devices
+          }]
         }, {
           label: __('ヘッダ画像', 'catpow'),
           values: 'hasHeaderImage',
@@ -581,7 +622,16 @@ registerBlockType('catpow/section', {
       attr: attributes,
       keys: imageKeys.headerImage,
       size: imageSizes.headerImage
-    })), wp.element.createElement(HeadingTag, {
+    })), states.hasTitleImage ? wp.element.createElement(HeadingTag, {
+      class: "titleImage"
+    }, states.isTemplate && titleImageCode ? wp.element.createElement(CP.DummyImage, {
+      text: titleImageCode
+    }) : wp.element.createElement(CP.SelectResponsiveImage, {
+      set: setAttributes,
+      attr: attributes,
+      keys: imageKeys.titleImage,
+      devices: devices
+    })) : wp.element.createElement(HeadingTag, {
       className: "heading"
     }, wp.element.createElement(RichText, {
       tagName: "div",
@@ -719,7 +769,13 @@ registerBlockType('catpow/section', {
     }, states.isTemplate && headerImageCode ? headerImageCode : wp.element.createElement(CP.ResponsiveImage, {
       attr: attributes,
       keys: imageKeys.headerImage
-    })), wp.element.createElement(HeadingTag, {
+    })), states.hasTitleImage ? wp.element.createElement(HeadingTag, {
+      class: "titleImage"
+    }, states.isTemplate && titleImageCode ? titleImageCode : wp.element.createElement(CP.ResponsiveImage, {
+      attr: attributes,
+      keys: imageKeys.titleImage,
+      devices: devices
+    })) : wp.element.createElement(HeadingTag, {
       className: "heading"
     }, wp.element.createElement(RichText.Content, {
       value: title
