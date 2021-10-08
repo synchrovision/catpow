@@ -38,8 +38,8 @@
 		];
 		const itemClasses=[
 			'color',
-			{label:'position',values:['left','right']},
-			{label:'type',filter:'type',values:['say','shout','think','whisper']}
+			{type:'buttons',label:'position',values:['left','right']},
+			{type:'gridbuttons',label:'type',filter:'type',values:['say','shout','think','whisper']}
 		];
 		
 		let itemsCopy=items.map((obj)=>jQuery.extend(true,{},obj));

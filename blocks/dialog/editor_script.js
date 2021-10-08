@@ -64,9 +64,11 @@ registerBlockType('catpow/dialog', {
       }]
     }];
     var itemClasses = ['color', {
+      type: 'buttons',
       label: 'position',
       values: ['left', 'right']
     }, {
+      type: 'gridbuttons',
       label: 'type',
       filter: 'type',
       values: ['say', 'shout', 'think', 'whisper']
