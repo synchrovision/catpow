@@ -24,7 +24,8 @@ foreach($post_types as $type=>&$type_vals){
 			$post_types[$child_type]['parent']=$type;
 		}
 	}
-	$supports=array('title','editor');
+	$supports=array('title');
+	if($type!=='attachment')array_push($supports,'editor');
 	if(!empty($type_vals['comments']))array_push($supports,'comments');
 	if(isset($type_vals['post-formats'])){
 		array_push($supports,'post-formats');
