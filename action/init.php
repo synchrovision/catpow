@@ -310,8 +310,11 @@ add_filter('plugins_api',function($res,$action,$arg){
 	return $res;
 },10,3);
 add_filter('upgrader_source_selection',function($source,$remote_source,$upgrader,$hook_extra){
-	if(empty($upgrader->skin->plugin_info['GitHub Repository'])){return $source;}
-	$newsource=$remote_source.'/'.dirname($hook_extra['plugin']);
+	if(
+		empty($repo=$upgrader->skin->plugin_info['GitHub Repository']??null) && 
+		empty($repo=Catpow\util\wp::get_plugin_data_from_dir($source)['GitHub Repository']??null)
+	){return $source;}
+	$newsource=dirname($source).'/'.basename($repo).'/';
 	rename($source,$newsource);
 	return $newsource;
 },10,4);
