@@ -365,7 +365,6 @@ add_filter('wp_prepare_attachment_for_js',function($response,$attachment,$meta){
 
 /*preview*/
 add_action('admin_print_footer_scripts',function(){
-	error_log(var_export(cp::get_logo_url(),1).__FILE__.':'.__LINE__);
 	if(!($logo_url=cp::get_logo_url())){return;}
 ?>
 <script>
