@@ -363,6 +363,21 @@ add_filter('wp_prepare_attachment_for_js',function($response,$attachment,$meta){
 	return $response;
 },10,3);
 
+/*preview*/
+add_action('admin_print_footer_scripts',function(){
+	error_log(var_export(cp::get_logo_url(),1).__FILE__.':'.__LINE__);
+	if(!($logo_url=cp::get_logo_url())){return;}
+?>
+<script>
+	wp.hooks.addFilter(
+		'editor.PostPreview.interstitialMarkup',
+		'my-plugin/modify_preview_message',
+		function(msg){return msg.replace(/<svg.+?<\/svg>/,'<img src="<?=$logo_url?>" alt="<?=get_bloginfo('name')?>"/>');}
+	);
+</script>
+<?php
+},50);
+
 /*avatar*/
 add_filter('get_avatar_url',function($url,$id_or_email,$args){
 	if(!is_numeric($id_or_email)){
