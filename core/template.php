@@ -14,6 +14,7 @@ function menu($location,$args=null){
 	if(isset($args)){$args['theme_location']=$location;}
 	else{
 		$args=[
+			'container_class'=>"menu-{$location}-container",
 			'theme_location'=>$location,
 			'before'=>'<div class="link">',
 			'after'=>'</div>'
