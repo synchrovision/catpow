@@ -26,6 +26,13 @@ class wp{
 			},$styles->to_do)))
 		];
 	}
+	public static function get_plugin_data_from_dir($dir){
+		foreach(glob(rtrim($dir,'/').'/*.php') as $file){
+			$plugin_data=get_plugin_data($file,false,false);
+			if(!empty($plugin_data['Name'])){return $plugin_data;}
+		}
+		return null;
+	}
 }
 
 ?>
