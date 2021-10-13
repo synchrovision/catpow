@@ -6,6 +6,38 @@ class menu implements iSetup{
 		global $nav_datas;
 		$locations=get_theme_mod('nav_menu_locations');
 		$cnt=0;
+		$default_menu_items=self::get_default_menu_items();
+		foreach($nav_datas as $menu_name=>$menu_data){
+			if(!has_nav_menu($menu_name)){
+				if($menu_object=wp_get_nav_menu_object($menu_name)){
+					$locations[$menu_name]=$menu_object->term_id;
+					printf('allocate menu to %s<br/>',$menu_name);
+					$cnt++;
+				}
+				else{
+					$locations[$menu_name]=wp_update_nav_menu_object(0,array('menu-name'=>$menu_name,'slug'=>$menu_name));
+					printf('create and allocate menu to %s<br/>',$menu_name);
+					$menu_item_created[$menu_name]=[];
+					if(isset($menu_data['type'])){
+						$menu_type=$menu_data['type'];
+					}
+					else{
+						$menu_type=self::get_menu_type_for_location($menu_name);
+					}
+					foreach((array)$default_menu_items[$menu_type] as $page_path=>$menu_item){
+						if(isset($menu_item['parent']) && isset($menu_item_created[$menu_name][$menu_item['parent']])){
+							$menu_item['menu-item-parent-id']=$menu_item_created[$menu_name][$menu_item['parent']];
+						}
+						$menu_item_created[$menu_name][$page_path]=wp_update_nav_menu_item($locations[$menu_name],'',$menu_item);
+					}
+					$cnt++;
+				}
+			}
+		}
+		printf('%d menus updated',$cnt);
+		set_theme_mod('nav_menu_locations',$locations);
+	}
+	static function get_default_menu_items(){
 		$default_menu_items=[];
 		foreach($GLOBALS['static_pages'] as $data_name=>$conf){
 			if($post=get_page_by_path($conf['page_path'])){
@@ -46,45 +78,15 @@ class menu implements iSetup{
 
 			}
 		}
-		foreach($nav_datas as $menu_name=>$menu_data){
-			if(!has_nav_menu($menu_name)){
-				if($menu_object=wp_get_nav_menu_object($menu_name)){
-					$locations[$menu_name]=$menu_object->term_id;
-					printf('allocate menu to %s<br/>',$menu_name);
-					$cnt++;
-				}
-				else{
-					$locations[$menu_name]=wp_update_nav_menu_object(0,array('menu-name'=>$menu_name,'slug'=>$menu_name));
-					printf('create and allocate menu to %s<br/>',$menu_name);
-					$menu_item_created[$menu_name]=[];
-					if(isset($menu_data['type'])){
-						$menu_type=$menu_data['type'];
-					}
-					else{
-						switch($menu_name){
-							case 'sitemap':
-								$menu_type='sitemap';break;
-							case 'header':
-							case 'side':
-								$menu_type='main';break;
-							case 'primary':
-								$menu_type='primary';break;
-							default:
-								$menu_type='sub';
-						}
-					}
-					foreach((array)$default_menu_items[$menu_type] as $page_path=>$menu_item){
-						if(isset($menu_item['parent']) && isset($menu_item_created[$menu_name][$menu_item['parent']])){
-							$menu_item['menu-item-parent-id']=$menu_item_created[$menu_name][$menu_item['parent']];
-						}
-						$menu_item_created[$menu_name][$page_path]=wp_update_nav_menu_item($locations[$menu_name],'',$menu_item);
-					}
-					$cnt++;
-				}
-			}
+		return $default_menu_items;
+	}
+	static function get_menu_type_for_location($location){
+		switch($location){
+			case 'primary':
+			case 'sitemap':return $location;
+			case 'header':
+			case 'side':return 'main';
+			default:return 'sub';
 		}
-		printf('%d menus updated',$cnt);
-		set_theme_mod('nav_menu_locations',$locations);
-
 	}
 }
