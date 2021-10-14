@@ -40,7 +40,7 @@ class cpdb{
 		foreach($table_datas as $table_name=>$table_data){
 			$this->alias[$table_data['alias']]=$table_name;
 			$this->relation[$table_name]=$table_data['children'];
-			foreach($table_data['functions'] as $function){
+			foreach($table_data['functions']??[] as $function){
 				$this->functional[$function][$table_name]=$table_data;
 			}
 		}
