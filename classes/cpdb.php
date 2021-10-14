@@ -153,9 +153,9 @@ class cpdb{
 		$values=self::serialize_array_values($values);
 		return [' (`'.implode('`,`',array_keys($values)).'`) VALUES (?'.str_repeat(',?',count($values)-1).')'=>array_values($values)];
 	}
-	public static function get_sql_data_set($values){
+	public static function get_sql_data_set($values,$sql=' SET'){
 		$values=self::serialize_array_values($values);
-		return [' SET'.vsprintf(substr(str_repeat(' `%s` = ?,',count($values)),0,-1),array_keys($values))=>array_values($values)];
+		return [$sql.vsprintf(substr(str_repeat(' `%s` = ?,',count($values)),0,-1),array_keys($values))=>array_values($values)];
 	}
 	public static function get_sql_data_orderby($values){
 		if(is_array($values)){$values=implode(',',$values);}
@@ -284,17 +284,21 @@ class cpdb{
 					if(is_array($val)){array_walk_recursive($val,function(&$v){$v=(string)$v;});}
 					$val=serialize((array)$val);
 				}
-				else{if(is_array($val)){$val=reset($val);}}
+				else{if(is_array($val)){$val=array_values($val)[0]??null;}}
 			}
 			
 			if(isset($row['meta_id'])){
-				$meta_id=$row['meta_id'];
+				$meta_id=$cols['meta_id']=$row['meta_id'];
 				if($table_conf['has_parent']){
-					$parent_id=$this->select($_table_name,['meta_id'=>$row['meta_id']],false,'parent_id');
-					$parent_id=reset($parent_id)['parent_id'];
+					if(isset($row['parent_id'])){$parent_id=$cols['parent_id']=$row['parent_id'];}
+					else{
+						$parent_id=$this->select($_table_name,['meta_id'=>$row['meta_id']],false,'parent_id');
+						$parent_id=$cols['parent_id']=reset($parent_id)['parent_id'];
+					}
 					$updated_rows[$parent_id][]=$meta_id;
+					if(isset($row['root_object_id'])){$root_object_id=$cols['root_object_id']=$row['root_object_id'];}
 				}
-				$this->query(['UPDATE '.$_table_name,self::get_sql_data_set($cols),[' WHERE meta_id = ?'=>[$meta_id]]]);
+				$this->query(['INSERT INTO '.$_table_name,self::get_sql_data_values($cols),self::get_sql_data_set($cols,' ON DUPLICATE KEY UPDATE')]);
 			}
 			else{
 				if($table_conf['has_parent']){
