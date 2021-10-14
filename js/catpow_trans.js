@@ -1,6 +1,4 @@
-	(function($){$.fn.extend({
-	
-	
+(function($){$.fn.extend({
 	//子孫要素をクラス名に応じてレイアウト
 	//例1:ap_20_100=position:absolute;top:20px;left:100px;
 	//例2:rp_20_100_br=position:relative;bottom:20px;right:100px;
@@ -38,10 +36,10 @@
 		var try_complete=function(){if(cnt--==0){if(complete)complete($tgt);}}
 		$(this).children ().each(function(){
 			if($(this).attr('class')!=null){
-				var cls_arr=$(this).attr('class').split(' ');
+				var cls_arr=$(this).attr('class').split(' '),from,to,i,prm;
 				if(cls_arr.some(function(v){return v=='transchildren'})){cnt++;$(this).cp_trans_in(try_complete);}
-				for(var i in cls_arr){
-					var prm=cls_arr[i].split('_');
+				for(i in cls_arr){
+					prm=cls_arr[i].split('_');
 					if(prm.length<2)continue;
 					if(prm[0]=='fadein' || prm[0]=='fade'){
 						prm[3]=prm[3]?prm[3]:'linear';
@@ -54,8 +52,8 @@
 					if(prm[0]=='slidein' || prm[0]=='fadeslidein' || prm[0]=='slide' || prm[0]=='fadeslide'){
 						prm[5]=prm[5]?prm[5]:'swing';
 						max_dur=Math.max(max_dur,parseInt(prm[3])+parseInt(prm[4]));
-						var from={'s':0};
-						var to={'s':1};
+						from={'s':0};
+						to={'s':1};
 						$(this).css(from);
 						$(this).css('transform','translate('+parseInt(prm[1])+'px,'+parseInt(prm[2])+')');
 						if(prm[0]=='fadeslidein' || prm[0]=='fadeslide'){$(this).css('opacity',0);}
@@ -77,8 +75,8 @@
 					if(prm[0]=='zoomin' || prm[0]=='fadezoomin' || prm[0]=='zoom' || prm[0]=='fadezoom'){
 						prm[4]=prm[4]?prm[4]:'swing';
 						max_dur=Math.max(max_dur,parseInt(prm[2])+parseInt(prm[3]));
-						var from={'s':0};
-						var to={'s':1};
+						from={'s':0};
+						to={'s':1};
 						var stp=(prm[1]-100)/100;
 						$(this).css(from);
 						$(this).css('transform','scale('+parseInt(prm[1])/100+')');
@@ -101,11 +99,11 @@
 					if(prm[0]=='rotatein' || prm[0]=='faderotatein' || prm[0]=='rotate' || prm[0]=='faderotate'){
 						prm[5]=prm[5]?prm[5]:'swing';
 						max_dur=Math.max(max_dur,parseInt(prm[3])+parseInt(prm[4]));
-						var from={'s':0};
-						var to={'s':1};
+						from={'s':0};
+						to={'s':1};
 						$(this).css(from);
 						$(this).css('transform','rotate'+prm[1]+'('+parseInt(prm[2])+'deg)');
-						if(prm[0]=='faderotatein'){$(this).css('opacity',0);}
+						if(prm[0]=='faderotatein'){$(this).css('opacity',1);}
 						$(this).stop().animate({'t':100},parseInt(prm[3]),'linear',function(){$(this).animate(to,{
 							'duration':parseInt(prm[4]),
 							'easing':prm[5],
@@ -135,10 +133,10 @@
 		var try_complete=function(){if(cnt--==0){if(complete)complete($tgt);}}
 		$(this).children ().each(function(){
 			if($(this).attr('class')!=null){
-				var cls_arr=$(this).attr('class').split(' ');
+				var cls_arr=$(this).attr('class').split(' '),from,to,i,prm;
 				if(cls_arr.some(function(v){return v=='transchildren'})){cnt++;$(this).cp_trans_out(try_complete);}
-				for(var i in cls_arr){
-					var prm=cls_arr[i].split('_');
+				for(i in cls_arr){
+					prm=cls_arr[i].split('_');
 					if(prm.length<2)continue;
 					if(prm[0]=='fadeout' || prm[0]=='fade'){
 						prm[3]=prm[3]?prm[3]:'linear';
@@ -151,8 +149,8 @@
 					if(prm[0]=='slideout' || prm[0]=='fadeslideout' || prm[0]=='slide' || prm[0]=='fadeslide'){
 						prm[5]=prm[5]?prm[5]:'swing';
 						max_dur=Math.max(max_dur,parseInt(prm[3])+parseInt(prm[4]));
-						var from={'s':0};
-						var to={'s':1};
+						from={'s':0};
+						to={'s':1};
 						$(this).css(from);
 						$(this).css('transform','translate(0px,0px)');
 						if(prm[0]=='fadeslideout' || prm[0]=='fadeslide'){$(this).css('opacity',1);}
@@ -174,8 +172,8 @@
 					if(prm[0]=='zoomout' || prm[0]=='fadezoomout' || prm[0]=='zoom' || prm[0]=='fadezoom'){
 						prm[4]=prm[4]?prm[4]:'swing';
 						max_dur=Math.max(max_dur,parseInt(prm[2])+parseInt(prm[3]));
-						var from={'s':0};
-						var to={'s':1};
+						from={'s':0};
+						to={'s':1};
 						var stp=(prm[1]-100)/100;
 						$(this).css(from);
 						$(this).css('transform','scale(1)');
@@ -198,8 +196,8 @@
 					if(prm[0]=='rotateout' || prm[0]=='faderotateout' || prm[0]=='rotate' || prm[0]=='faderotate'){
 						prm[5]=prm[5]?prm[5]:'swing';
 						max_dur=Math.max(max_dur,parseInt(prm[3])+parseInt(prm[4]));
-						var from={'s':0};
-						var to={'s':1};
+						from={'s':0};
+						to={'s':1};
 						$(this).css(from);
 						$(this).css('transform','rotate(0deg)');
 						if(prm[0]=='faderotateout' || prm[0]=='faderotate'){$(this).css('opacity',1);}
@@ -318,7 +316,6 @@
 			if($(this).css('position')=='static')$(this).css('position','relative');
 		});
 		$cnt.scroll(function(){
-			var b0=$cnt.scrollTop();
 			var b1=$cnt.scrollTop()+$cnt.height();
 			$.each(bps,function(i,bp){
 				if(bp[1]<b1){
@@ -334,8 +331,7 @@
 				bps.push([$(this).offset().top,$(this).offset().top+$(this).height(),true]);
 			});
 		});
-		(function update(i,bp){
-			var b0=$cnt.scrollTop();
+		(function update(){
 			var b1=$cnt.scrollTop()+$cnt.height();
 			$.each(bps,function(i,bp){
 				if(bp[1]<b1){
@@ -348,7 +344,7 @@
 		return $(this);
 	},
 	//子要素の座標でスクロールを区切ってcp_trans_[in|out]する
-	cp_scene_trans:function(fnc1,fnc2){
+	cp_scene_trans:function(){
 		var $tgt=$(this);
 		var bps=[];
 		var crr=0;
@@ -388,7 +384,7 @@
 	},
 	//リンクを$tgtのtransout処理が終わってから遷移するようにする
 	cp_trans_link:function($tgt){
-		$(this).each(function(i,e){
+		$(this).each(function(){
 			$(this).click(function(e){
 				e.preventDefault();
 				var url=$(this).attr('href');
@@ -402,7 +398,7 @@
 	//トランジション付きでcp_ajax_linkを行う
 	//コンテンツ読み込み完了時にready、トランジション終了時にcompleteを実行
 	cp_trans_ajax_link:function($tgt,ready,complete){
-		$(this).each(function(i,e){
+		$(this).each(function(){
 			var url=$(this).attr('href');
 			var data_url=url;
 			if($(this).attr('data-ajax-url')!=null)data_url=$(this).attr('data-ajax-url');
@@ -415,7 +411,7 @@
 						window.history.pushState(null,null,url);
 						$tgt.cp_trans_out(function(){
 							$tgt.html(data);
-							$(document).ready(function(e) {
+							$(document).ready(function(){
 								ready();
 								$tgt.cp_trans_in(complete);
 							});
@@ -446,9 +442,6 @@
 		}
 		lazy_load();
 		return $(this);
-	},
-　
-		
-	
+	}
 })})(jQuery);
 
