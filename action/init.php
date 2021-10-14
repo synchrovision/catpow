@@ -24,6 +24,7 @@ wp_enqueue_style('font_awesome','https://cdnjs.cloudflare.com/ajax/libs/font-awe
 wp_register_script('urljs','https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.19.2/URI.min.js');
 wp_register_script('axios','https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js');
 wp_register_script('remarkable','https://cdnjs.cloudflare.com/ajax/libs/remarkable/2.0.1/remarkable.min.js');
+wp_register_script('jquery-easing','https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js');
 
 wp_enqueue_script('catpow');
 wp_localize_script('catpow','cp',array(
