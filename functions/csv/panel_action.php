@@ -8,11 +8,11 @@ if($_REQUEST['csv_action']==='upload'){
 		$csv=new CSV($_FILES['csv']['tmp_name']);
 		foreach($csv->collect('data_type') as $data_type=>$datas){
 			$query_class=\cp::get_class_name('query',$data_type);
-			array_walk($datas,function(&$row){
-				foreach($row as &$val){
-					if($v=json_decode($val,true)){$val=$v;}
+			foreach($datas as $r=>$row){
+				foreach($row as $c=>$val){
+					if($v=json_decode($val,true)){$datas[$r][$c]=$v;}
 				}
-			});
+			}
 			$query_class::import($datas);
 		}
 	}
