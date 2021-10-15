@@ -8,11 +8,17 @@ Catpow.Output = function (props) {
     case 'group':
       return wp.element.createElement("ul", {
         className: "OutputGroup"
-      }, value.map(function (row) {
+      }, Object.keys(value).map(function (key) {
+        var row = value[key];
+        console.log(key);
+        console.log(row);
         return wp.element.createElement("li", {
-          className: "item"
+          className: "item",
+          key: key
         }, Object.keys(conf.meta).map(function (name) {
-          return wp.element.createElement("dl", null, wp.element.createElement("dt", null, conf.meta[name].label), wp.element.createElement("dd", null, wp.element.createElement(Catpow.Output, {
+          return wp.element.createElement("dl", {
+            key: name
+          }, wp.element.createElement("dt", null, conf.meta[name].label), wp.element.createElement("dd", null, wp.element.createElement(Catpow.Output, {
             conf: conf.meta[name],
             value: row[name]
           })));
@@ -26,7 +32,7 @@ Catpow.Output = function (props) {
         var labels = (Array.isArray(value) ? value : [value]).filter(function (val) {
           return !!val;
         }).map(function (val) {
-          return conf.dict[val];
+          return conf.dict && conf.dict[val];
         });
 
         if (!labels.length) {

@@ -6,11 +6,14 @@
 		case 'group':
 			return (
 				<ul className="OutputGroup">
-					{value.map((row)=>{
+					{Object.keys(value).map((key)=>{
+						const row=value[key];
+						console.log(key);
+						console.log(row);
 						return (
-							<li className="item">
+							<li className="item" key={key}>
 								{Object.keys(conf.meta).map((name)=>(
-									<dl>
+									<dl key={name}>
 										<dt>{conf.meta[name].label}</dt>
 										<dd><Catpow.Output conf={conf.meta[name]} value={row[name]}/></dd>
 									</dl>
@@ -23,7 +26,7 @@
 		case 'select':
 		case 'radio':
 		case 'checkbox':{
-			const labels=(Array.isArray(value)?value:[value]).filter((val)=>!!val).map((val)=>conf.dict[val]);
+			const labels=(Array.isArray(value)?value:[value]).filter((val)=>!!val).map((val)=>conf.dict && conf.dict[val]);
 			if(!labels.length){return false;}
 			return (
 				<ul clasName="OutputLabels">
