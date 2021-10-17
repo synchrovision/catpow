@@ -57,6 +57,6 @@ Catpow.ModalForm.Button=(props)=>{
 	});
 	
 	return (
-		<button className={className} onClick={()=>{onClick({state,dispatch,name,value})}}>{label}</button>
+		<Catpow.Button className={className} onClick={()=>{onClick({state,dispatch,name,value})}} label={label}/>
 	);
 }

@@ -1,2 +1,2 @@
 <?php
-$useComponents=['SelectBox','CheckBox','Popup'];
+$useComponents=['SelectBox','CheckBox','Buttons','Popup'];
