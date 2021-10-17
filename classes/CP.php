@@ -2068,7 +2068,7 @@ class CP{
 						'sourceMapWriteTo'=>$scss_name.'.css.map',
 						'sourceMapURL'=>'./'.basename($scss_name).'.css.map',
 						'sourceMapFilename'=>basename($scss_name).'.css.map',
-						'sourceMapBasepath'=>$_SERVER['DOCUMENT_ROOT'],
+						'sourceMapBasepath'=>ABSPATH,
 						'sourceRoot'=>'/'
 					]);
 					$css=$scssc->compile(file_get_contents($scss_name.'.scss'),$scss_name.'.scss');
