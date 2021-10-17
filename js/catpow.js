@@ -3,6 +3,7 @@ jQuery.catpow=jQuery.catpow || {};
 window.Catpow=window.Catpow || {};
 window.Catpow.UI=window.Catpow.UI || {};
 jQuery.catpow.set_page_top_offset=function(offset){
+	var $=jQuery;
 	$(window).off('.set_page_top_offset');
 	if(window.location.hash){
 		window.addEventListener('load',function(){
