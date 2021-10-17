@@ -1,0 +1,63 @@
+@charset "utf-8";
+.Buttons {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 0.5em;
+}
+.Buttons.large {
+  font-size: 24px;
+}
+.Buttons.medium {
+  font-size: 18px;
+}
+.Buttons.small {
+  font-size: 12px;
+}
+.Button {
+  position: relative;
+  padding: 0.5em 1em;
+  margin: 0.2em;
+  border-style: none;
+  border-radius: 0.2em;
+  background-color: #f8f8f8;
+  text-align: center;
+  line-height: 1em;
+  color: #007cba;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+.Button.primary {
+  background-color: #007cba;
+  color: #f8f8f8;
+}
+.Button.secondary {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #007cba;
+  color: #007cba;
+}
+.Button.danger {
+  background-color: #d65c5c;
+  color: #f8f8f8;
+}
+.Button.negative {
+  border-style: solid;
+  border-width: 1px;
+  color: #a2a2a2;
+}
+.Button.disabled {
+  background-color: #ececec;
+  color: #a2a2a2;
+}
+.ButtonIcon {
+  display: none;
+}
+/*# sourceMappingURL=./style.css.map */

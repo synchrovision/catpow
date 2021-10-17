@@ -1,0 +1,47 @@
+@import 'admin_style_config.scss';
+
+.Buttons{
+	@include flx((w:w,j:c));
+	@include bnd((pd:.5em));
+	&.large{
+		@include txt((p:24));
+	}
+	&.medium{
+		@include txt((p:18));
+	}
+	&.small{
+		@include txt((p:12));
+	}
+}
+.Button{
+	@include bnd((p:r,pd:.5em 1em,mg:.2em));
+	@include bdr((s:n,r:.2em));
+	@include bg((c:b));
+	@include txt((a:c,h:1em,c:m));
+	@include trn((t:.5s));
+	@include usr((c:p));
+	@include shd((b:1));
+	&.primary{
+		@include bg((c:m));
+		@include txt((c:b));
+	}
+	&.secondary{
+		@include bdr((s:s,w:1,c:m));
+		@include txt((c:m));
+	}
+	&.danger{
+		@include bg((c:1));
+		@include txt((c:b));
+	}
+	&.negative{
+		@include bdr((s:s,w:1));
+		@include txt((c:t 50));
+	}
+	&.disabled{
+		@include bg((c:t 10));
+		@include txt((c:t 50));
+	}
+	&Icon{
+		@include bnd((d:n));
+	}
+}
