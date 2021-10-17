@@ -134,7 +134,8 @@ Catpow.Finder.BulkControl = function (props) {
   }(), [state, dispatch]);
   var show_modal = useCallback(function (conf) {
     var _Catpow = Catpow,
-        ModalForm = _Catpow.ModalForm;
+        ModalForm = _Catpow.ModalForm,
+        Buttons = _Catpow.Buttons;
     var Input = ModalForm.Input,
         Button = ModalForm.Button;
     return new Promise(function (resolve, reject) {
@@ -175,21 +176,17 @@ Catpow.Finder.BulkControl = function (props) {
         }, wp.element.createElement(Input, otherPorps)), caption && wp.element.createElement("p", {
           className: "caption"
         }, caption));
-      })), wp.element.createElement("ul", {
-        className: "buttons s"
-      }, wp.element.createElement("li", {
-        className: "item negative"
-      }, wp.element.createElement(Button, {
+      })), wp.element.createElement(Buttons, null, wp.element.createElement(Button, {
         label: __('キャンセル', 'catpow'),
+        className: "negative",
         name: "accept",
         value: false
-      })), wp.element.createElement("li", {
-        className: "item primary"
-      }, wp.element.createElement(Button, {
+      }), wp.element.createElement(Button, {
         label: __('実行', 'catpow'),
+        className: "primary",
         name: "accept",
         value: true
-      }))))));
+      })))));
     });
   }, [setModal]);
   return wp.element.createElement("div", {
@@ -207,10 +204,10 @@ Catpow.Finder.BulkControl = function (props) {
     onChange: function onChange(val) {
       setValue(val);
     }
-  }), wp.element.createElement("button", {
-    className: "button",
+  }), wp.element.createElement(Catpow.Button, {
+    label: __('実行', 'catpow'),
     onClick: function onClick(e) {
       exec_bulk(value);
     }
-  }, __('実行', 'catpow'))))), modal);
+  })))), modal);
 };

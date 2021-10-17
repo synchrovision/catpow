@@ -57,7 +57,7 @@ Catpow.Finder.BulkControl=(props)=>{
 		catch(err){return false;}
 	},[state,dispatch]);
 	const show_modal=useCallback((conf)=>{
-		const {ModalForm}=Catpow;
+		const {ModalForm,Buttons}=Catpow;
 		const {Input,Button}=ModalForm;
 		return new Promise((resolve,reject)=>{
 			if(!conf.inputs){resolve(false);return;}
@@ -84,22 +84,20 @@ Catpow.Finder.BulkControl=(props)=>{
 								)
 							})}
 						</ul>
-						<ul className="buttons s">
-							<li className="item negative">
-								<Button
-									label={__('キャンセル','catpow')}
-									name="accept"
-									value={false}
-								/>
-							</li>
-							<li className="item primary">
-								<Button
-									label={__('実行','catpow')}
-									name="accept"
-									value={true}
-								/>
-							</li>
-						</ul>
+						<Buttons>
+							<Button
+								label={__('キャンセル','catpow')}
+								className="negative"
+								name="accept"
+								value={false}
+							/>
+							<Button
+								label={__('実行','catpow')}
+								className="primary"
+								name="accept"
+								value={true}
+							/>
+						</Buttons>
 					</div>
 				</ModalForm>
 			);
@@ -117,10 +115,10 @@ Catpow.Finder.BulkControl=(props)=>{
 							options={options}
 							onChange={(val)=>{setValue(val);}}
 						/>
-						<button
-							className="button"
+						<Catpow.Button
+							label={__('実行','catpow')}
 							onClick={(e)=>{exec_bulk(value)}}
-						>{__('実行','catpow')}</button>
+						/>
 					</div>
 				</li>
 			</ul>
