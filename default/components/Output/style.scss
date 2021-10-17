@@ -1,0 +1,31 @@
+@import 'admin_style_config.scss';
+
+.Output{
+	&Group{
+		>.item{
+			@include bnd((pd:10 0));
+			+.item{@include bdr((p:t,s:s,w:1,c:t 30));}
+			dl{
+				@include bnd((mg:0,pd:5));
+				dt{
+					@include bnd((cl:b,fl:l,w:100,pd:2,mg:0));
+				}
+				dd{
+					@include bnd((pd:2,pdl:110,mg:0,h:1.5em a));
+				}
+			}
+		}
+	}
+	&Labels{
+		>.item{
+			
+		}
+	}
+	&Images{
+		>.item{
+			>.image{
+				@include bnd((d:b,w:a 300,h:a));
+			}
+		}
+	}
+}
