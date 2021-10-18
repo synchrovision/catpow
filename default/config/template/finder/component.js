@@ -1,32 +1,30 @@
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = babelHelpers.getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = babelHelpers.getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return babelHelpers.possibleConstructorReturn(this, result); }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+var Finder = /*#__PURE__*/function (_wp$element$Component) {
+  babelHelpers.inherits(Finder, _wp$element$Component);
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+  var _super = _createSuper(Finder);
 
-var Finder = function (_wp$element$Component) {
-	_inherits(Finder, _wp$element$Component);
+  function Finder(props) {
+    babelHelpers.classCallCheck(this, Finder);
+    return _super.call(this, props);
+  }
 
-	function Finder(props) {
-		_classCallCheck(this, Finder);
-
-		return _possibleConstructorReturn(this, (Finder.__proto__ || Object.getPrototypeOf(Finder)).call(this, props));
-	}
-
-	_createClass(Finder, [{
-		key: "render",
-		value: function render() {
-			return wp.element.createElement("ul", { "class": "wp-block-catpow-listed" + this.props.classes });
-		}
-	}, {
-		key: "componentDidMount",
-		value: function componentDidMount() {}
-	}, {
-		key: "componentDidUpdate",
-		value: function componentDidUpdate() {}
-	}]);
-
-	return Finder;
+  babelHelpers.createClass(Finder, [{
+    key: "render",
+    value: function render() {
+      return wp.element.createElement("ul", {
+        class: "wp-block-catpow-listed" + this.props.classes
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {}
+  }]);
+  return Finder;
 }(wp.element.Component);
