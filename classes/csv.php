@@ -16,11 +16,15 @@ class CSV{
 			$csv=fopen($csv,'r');
 			if(empty($fill_column)){
 				while($row=fgetcsv($csv)){
+					if($row[0][0]==='#' || $row==[null]){continue;}
 					array_push($this->data,$row);
 				}
 			}
 			else{
-				$keys=fgetcsv($csv);
+				while($keys=fgetcsv($csv)){
+					if($keys[0][0]==='#' || $keys==[null]){continue;}
+					break;
+				}
 				array_push($this->data,$keys);
 				if($fill_column===true){$fill_column=count($keys);}
 				if(is_numeric($fill_column)){$fill_column=range(0,$fill_column);}
@@ -32,6 +36,7 @@ class CSV{
 				}
 				$current_values=[];
 				while($row=fgetcsv($csv)){
+					if($row[0][0]==='#' || $row==[null]){continue;}
 					foreach($fill_column as $index){
 						if(empty($row[$index])){$row[$index]=$current_values[$index];}
 						else{$current_values[$index]=$row[$index];}
