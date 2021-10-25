@@ -33,27 +33,27 @@ class schedule{
 					}
 					return false;
 				case 'yearly':
-					$month=date('m',$time);
-					$date=date('m/d',$time);
+					$month=wp_date('m',$time);
+					$date=wp_date('m/d',$time);
 					foreach($data as $value){
 						if($value===$month || $value===$date){continue 3;}
 					}
 					return false;
 				case 'monthly':
-					$date=date('d',$time);
-					$nth_day=sprintf('%d-%d',ceil($date/7),date('w',$time));
+					$date=wp_date('d',$time);
+					$nth_day=sprintf('%d-%d',ceil($date/7),wp_date('w',$time));
 					foreach($data as $value){
 						if($value===$date || $value===$nth_day){continue 3;}
 					}
 					return false;
 				case 'weekly':
-					$day=date('w',$time);
+					$day=wp_date('w',$time);
 					foreach($data as $value){
 						if($value===$day){continue 3;}
 					}
 					return false;
 				case 'daily':
-					$hour=date('H:i',$time);
+					$hour=wp_date('H:i',$time);
 					foreach($data as $period){
 						if($period[0]<=$hour && $period[1]>=$hour){continue 3;}
 					}
@@ -190,11 +190,11 @@ class schedule{
 		static $last_matches;
 		if(empty($base)){
 			if(empty($last_matches)){
-				preg_match(self::DATETIME_PATTERN,date('Y-m-d H:i'),$last_matches);
+				preg_match(self::DATETIME_PATTERN,wp_date('Y-m-d H:i'),$last_matches);
 			}
 		}
 		else{
-			preg_match(self::DATETIME_PATTERN,date('Y-m-d H:i',strtotime($base)),$last_matches);
+			preg_match(self::DATETIME_PATTERN,wp_date('Y-m-d H:i',strtotime($base)),$last_matches);
 		}
 		$value=str_replace('/','-',trim($value));
 		preg_match(self::DATETIME_PATTERN,$value,$matches);
