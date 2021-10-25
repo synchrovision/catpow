@@ -129,7 +129,8 @@ registerBlockType('catpow/switcher', {
           break;
       }
     }, [attributes.factor]);
-    var currentBlockId = 'block-' + wp.data.select('core/block-editor').getBlock(clientId).innerBlocks[currentIndex].clientId;
+    var currentBlock = wp.data.select('core/block-editor').getBlock(clientId).innerBlocks[currentIndex];
+    var currentBlockId = currentBlock ? 'block-' + currentBlock.clientId : false;
     return wp.element.createElement(Fragment, null, wp.element.createElement("div", {
       className: "switcherEdit",
       "data-current-index": currentIndex

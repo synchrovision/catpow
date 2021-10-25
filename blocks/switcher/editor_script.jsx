@@ -94,7 +94,8 @@ registerBlockType('catpow/switcher',{
 				case 'current_user_can':setAttributes({values:"administrator\neditor\nauthor\ncontributor\nsubscriber"});break;
 			}
 		},[attributes.factor]);
-		const currentBlockId='block-'+wp.data.select('core/block-editor').getBlock(clientId).innerBlocks[currentIndex].clientId;
+		const currentBlock=wp.data.select('core/block-editor').getBlock(clientId).innerBlocks[currentIndex];
+		const currentBlockId=currentBlock?'block-'+currentBlock.clientId:false;
         return (
 			<Fragment>
 				<div className="switcherEdit" data-current-index={currentIndex}>
