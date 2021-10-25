@@ -28,6 +28,8 @@ registerBlockType('catpow/switcher', {
   category: 'catpow-functional',
   example: CP.example,
   edit: function edit(props) {
+    var _wp$data$select$getBl;
+
     var attributes = props.attributes,
         className = props.className,
         setAttributes = props.setAttributes,
@@ -129,8 +131,7 @@ registerBlockType('catpow/switcher', {
           break;
       }
     }, [attributes.factor]);
-    var currentBlock = wp.data.select('core/block-editor').getBlock(clientId).innerBlocks[currentIndex];
-    var currentBlockId = currentBlock ? 'block-' + currentBlock.clientId : false;
+    var currentBlockId = 'block-' + ((_wp$data$select$getBl = wp.data.select('core/block-editor').getBlock(clientId).innerBlocks[currentIndex]) === null || _wp$data$select$getBl === void 0 ? void 0 : _wp$data$select$getBl.clientId);
     return wp.element.createElement(Fragment, null, wp.element.createElement("div", {
       className: "switcherEdit",
       "data-current-index": currentIndex
