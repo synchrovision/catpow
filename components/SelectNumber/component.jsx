@@ -1,5 +1,5 @@
 ﻿Catpow.SelectNumber=(props)=>{
-	const {min=1,max=10,step=1,value,onChange}=props;
+	const {min=1,max=10,label,step=1,value,onChange}=props;
 	const {useState,useMemo}=wp.element;
 	
 	const selections=useMemo(()=>{
@@ -12,7 +12,8 @@
 	
 	return (
 		<select className="SelectNumber" onChange={(e)=>{onChange(e.currentTarget.value);}}>
-			{selections.map((i)=>(<option value={i} selected={value===i}>{i}</option>))}
+			{label && <option selected={value===undefined}>{label}</option>}
+			{selections.map((i)=>(<option value={i} selected={value===i} key={i}>{i}</option>))}
 		</select>
 	);
 }
