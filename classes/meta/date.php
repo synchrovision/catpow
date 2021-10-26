@@ -9,9 +9,10 @@ class date extends meta{
 	
 	public static function output($meta,$prm){
 		$val=$meta->value;
+		if(empty($val)){return $meta->conf['default_output']??'---';}
 		if(empty($prm)){return \Catpow\calendar::dates_to_str($val);}
 		if($prm=='time'){return strtotime($val);}
-		return date($prm,strtotime($val));
+		return wp_date($prm,strtotime($val));
 	}
 	public static function resolve_conf($conf){
 		if(empty($conf['role'])){$conf['role']='date';}
