@@ -24,7 +24,7 @@ register_rest_route(
 				return include $f;
 			}
 			session_write_close();
-			return wp_verify_nonce($_SERVER['HTTP_X_WP_NONCE'], 'wp_rest') && wp_verify_nonce($_SERVER['HTTP_X_CP_NONCE'],$req['content_path']);
+			return wp_verify_nonce($_SERVER['HTTP_X_WP_NONCE']??'','wp_rest') && wp_verify_nonce($_SERVER['HTTP_X_CP_NONCE']??'',$req['content_path']);
 		},
 		'callback'=>function($req){
 			cp::session_start();
