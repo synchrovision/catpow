@@ -420,7 +420,7 @@ class CP{
 		if(wp_style_is($src) || isset($missed[$src])){return false;}
 		if(wp_style_is($src,'registered')){wp_enqueue_style($src);return true;}
 		if(empty($file=self::get_file_path_url($src,$flag))){$missed[$src]=1;return false;}
-		self::scss_compile([substr($src,0,-4)]);
+		scss::compile([substr($src,0,-4)]);
 		if(empty($ver)){$ver=filemtime(key($file));}
 		wp_enqueue_style($src,reset($file),$deps,$ver,$media);
 		return true;
@@ -1983,101 +1983,7 @@ class CP{
 	
 	/*scss*/
 	public static function scss_compile($scss_names){
-		if(!current_user_can('edit_themes'))return;
-		if(version_compare(PHP_VERSION, '5.4')<0)return;
-		static $scssc,$admin_style_config_modified_time,$style_config_modified_time;
-		$css_files=[];
-		if(empty($style_config_modified_time)){
-			if(empty($config_file=self::get_file_path('config/style_config.scss',self::FROM_THEME))){$style_config_modified_time=0;}
-			else{$style_config_modified_time=filemtime($config_file);}
-			$style_config_modified_time=max((int)get_option('cp_style_config_modified_time',0),$style_config_modified_time);
-		}
-		if(empty($admin_style_config_modified_time)){
-			if(empty($admin_config_file=self::get_file_path('scss/admin_style_config.scss',self::FROM_PLUGIN))){$admin_style_config_modified_time=0;}
-			else{$admin_style_config_modified_time=filemtime($admin_config_file);}
-		}
-		foreach($scss_names as $scss_base_name){
-			if($f=self::get_file_path_url($scss_base_name.'.scss',0733)){
-				$scss_name=substr(key($f),0,-5);
-				$scss_url=substr(reset($f),0,-5);
-			}
-			else{continue;}
-			$css_files[]=$scss_name.'.css';
-			$is_theme_file=strpos($scss_name,'/wp-content/themes/')!==false;
-			if(
-				!file_exists($scss_name.'.css') or
-				filemtime($scss_name.'.css') < max(
-					filemtime($scss_name.'.scss')+10,
-					$is_theme_file?$style_config_modified_time:$admin_style_config_modified_time
-				)
-			){
-				if(empty($scssc)){
-					$scssc = new \ScssPhp\ScssPhp\Compiler();
-					$scssc->addImportPath(ABSPATH.'/wp-admin/css/colors/');
-					foreach(self::$extensions as $extension){
-						$scssc->addImportPath(WP_PLUGIN_DIR.'/'.$extension.'/scss/');
-					}
-					$catpow_scss_dir=WP_PLUGIN_DIR.'/catpow/scss/';
-					if(!file_exists($catpow_scss_dir.'catpow.scss')){
-						$repo=new github\Repo('synchrovision/catpow-scss');
-						$repo->download($catpow_scss_dir);
-					}
-					$scssc->addImportPath($catpow_scss_dir);
-					$scssc->addImportPath(get_stylesheet_directory().'/');
-					$scssc->addImportPath(get_template_directory().'/');
-					foreach(self::$extensions as $extension){
-						$scssc->addImportPath(WP_PLUGIN_DIR.'/'.$extension.'/default/');
-					}
-					$scssc->addImportPath(WP_PLUGIN_DIR.'/catpow/default/');
-					$scssc->setSourceMap(\ScssPhp\ScssPhp\Compiler::SOURCE_MAP_FILE);
-					$color_roles=util\style_config::get_color_roles();
-					$scssc->setVariables([
-						'header_image'=>get_header_image(),
-						'background_image'=>get_background_image(),
-						'background_color'=>get_theme_mod('background_color')?'#'.get_theme_mod('background_color'):$color_roles['background_color']['default'],
-						'main_color'=>get_theme_mod('main_color',$color_roles['main_color']['default']),
-						'accent_color'=>get_theme_mod('accent_color',$color_roles['accent_color']['default']),
-						'text_color'=>get_theme_mod('text_color',$color_roles['text_color']['default'])
-					]);
-					$scssc->registerFunction('debug',function($args){
-						error_log(var_export($args,1));
-						return false;
-					});
-					$scssc->registerFunction('embed_svg',function($args)use($scssc){
-						if($f=self::get_file_path($args[0][2][0])){
-							return sprintf('data:image/svg+xml;base64,%s',base64_encode(file_get_contents($f)));
-						}
-						return false;
-					});
-					$scssc->registerFunction('export_colors',function($args)use($scssc){
-						if(empty($args[0]) || $args[0][0]!=='map'){return false;}
-						$data=array_combine(
-							array_map([$scssc,'compileValue'],$args[0][1]),
-							array_map([$scssc,'compileValue'],$args[0][2])
-						);
-						$dir=get_stylesheet_directory().'/json';
-						if(!is_dir($dir)){mkdir($dir,0777,true);}
-						file_put_contents($dir.'/colors.json',json_encode($data,0500));
-						return true;
-					});
-					do_action('cp_scss_compiler_init',$scssc);
-				}
-				try{
-					error_log('SCSS compile '.$scss_name);
-					$scssc->setSourceMapOptions([
-						'sourceMapWriteTo'=>$scss_name.'.css.map',
-						'sourceMapURL'=>'./'.basename($scss_name).'.css.map',
-						'sourceMapFilename'=>basename($scss_name).'.css.map',
-						'sourceMapBasepath'=>ABSPATH,
-						'sourceRoot'=>'/'
-					]);
-					$css=$scssc->compile(file_get_contents($scss_name.'.scss'),$scss_name.'.scss');
-					file_put_contents($scss_name.'.css',$css);
-				}catch(\Exception $e){
-					error_log(sprintf('%s:%s;',$scss_name,$e->getMessage()));
-				}
-			}
-		}
+		scss::compile($scss_names);
 	}
 	/*gzip*/
 	public static function gzip_compress($files){
