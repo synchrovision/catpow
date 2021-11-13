@@ -1436,31 +1436,11 @@
 				}
 				else if(prm === 'event'){
 					if(cp.use_functions.indexOf('ga')>-1){
-						var {parseEventString,createEventString}=window.Catpow.ga;
-						var event=parseEventString(item['event']);
-						var params={event:'イベント',action:'アクション',category:'カテゴリ',label_name:'ラベル名',label:'ラベル',value:'値'};
 						rtn.push(
-							<BaseControl label="Google Analitics Event">
-								<table>
-									{Object.keys(params).map((key)=>{
-										return (
-											<tr>
-												<th width="80">{params[key]}</th>
-												<td>
-													<TextControl
-														value={event[key]}
-														type={key=='value'?'number':'text'}
-														onChange={(val)=>{
-															event[key]=val;
-															save({event:createEventString(event)});
-														}}
-													/>
-												</td>
-											</tr>
-										);
-									})}
-								</table>
-							</BaseControl>
+							<CP.GaEventInput 
+								value={item['event']}
+								onChange={(event)=>{save({event});}}
+							/>
 						);
 					}
 				}
@@ -2096,6 +2076,64 @@
 					<div className="children">{props.children}</div>
 				)}
 			</li>
+		);
+	},
+	
+	GaEventInput:(props)=>{
+		const {onChange}=props;
+		const {useState,useReducer,useCallback,useEffect}=wp.element;
+		const {parseEventString,createEventString}=window.Catpow.ga;
+		const eventParams=[
+			{type:'text',label:'イベント',name:'event',isExtended:true},
+			{type:'text',label:'アクション',name:'action',isExtended:false},
+			{type:'text',label:'カテゴリ',name:'category',isExtended:false},
+			{type:'text',label:'ラベル名',name:'label_name',isExtended:true},
+			{type:'text',label:'ラベル',name:'label',isExtended:false},
+			{type:'number',label:'値',name:'value',isExtended:true}
+		];
+		const reducer=useCallback((state,action)=>{
+			switch(action.type){
+				case 'UPDATE':{
+					const event={...state.event,...action.event};
+					const value=createEventString(event);
+					onChange(value);
+					return {...state,event,value};
+				}
+			}
+			return state;
+		},[]);
+		const [state,dispatch]=useReducer(reducer,{
+			value:props.value,
+			event:parseEventString(props.value)
+		});
+		const [useExtended,setUseExtended]=useState(!!(state.event.label_name || state.event.value));
+		return (
+			<BaseControl label="Google Analitics Event">
+				<table>
+					{eventParams.map((param)=>{
+						if(!useExtended && param.isExtended){return false;}
+						return (
+							<tr>
+								<th width="80">{param.label}</th>
+								<td>
+									<TextControl
+										value={state.event[param.name]}
+										type={param.type}
+										onChange={(val)=>{
+											dispatch({type:'UPDATE',event:{[param.name]:val}});
+										}}
+									/>
+								</td>
+							</tr>
+						);
+					})}
+				</table>
+				<CheckboxControl
+					label="拡張設定"
+					onChange={(flag)=>{setUseExtended(flag)}}
+					checked={useExtended}
+				/>
+			</BaseControl>
 		);
 	}
 };
