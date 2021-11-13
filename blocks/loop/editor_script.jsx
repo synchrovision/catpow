@@ -65,7 +65,7 @@
 							tree={cpEmbeddablesTree.loop}
 							onChange={(content_path)=>{
 								const path=content_path.substr(0,content_path.lastIndexOf('/'));
-								wp.apiFetch({path:'cp/v1/'+path+'/template'}).then((template)=>{
+								wp.apiFetch({path:'/cp/v1/'+path+'/template'}).then((template)=>{
 									wp.data.dispatch('core/block-editor').replaceInnerBlocks(
 										clientId,
 										CP.createBlocks(template)
