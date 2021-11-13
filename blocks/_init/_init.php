@@ -10,6 +10,9 @@ $data=[];
 			$class_name=cp::get_class_name('template_type',$template_data[0]);
 			if(!class_exists($class_name)){continue;}
 			$embeddables=$class_name::get_embeddables($conf_data);
+			if(empty($embeddables)){continue;}
+			$path="{$conf_data[$pref.'path']}/{$template}";
+			Catpow\api::register_nonce($path);
 			foreach($embeddables as $embed_type=>$embeddable){
 				if(empty($data[$embed_type][$conf_data['label']])){
 					$data[$embed_type][$conf_data['label']]=[
@@ -21,13 +24,13 @@ $data=[];
 				foreach($embeddable as $label=>$item){
 					if(is_array($item)){
 						$item['name']=$label.(isset($template_data[1])?'('.$template_data[1].')':'');
-						if(isset($item['file'])){$item['id']=$conf_data[$pref.'path'].'/'.$template.'/'.$item['file'];}
+						if(isset($item['file'])){$item['id']=$path.'/'.$item['file'];}
 						$data[$embed_type][$conf_data['label']]['children'][]=$item;
 					}
 					else{
 						$data[$embed_type][$conf_data['label']]['children'][]=[
 							'name'=>$label.(isset($template_data[1])?'('.$template_data[1].')':''),
-							'id'=>$conf_data[$pref.'path'].'/'.$template.'/'.$item
+							'id'=>$path.'/'.$item
 						];
 					}
 				}
