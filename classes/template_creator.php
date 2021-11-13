@@ -164,20 +164,21 @@ class template_creator{
 				foreach($cond_data['filters'] as $key=>$flag){
 					if(strpos($key,'/')===false){
 						if(empty($conf_data['meta'][$key])===$flag){
-							$contents=str_replace('<<'.$cond_index.'>>',$cond_data['else'],$cond_datas['body']);
+							$cond_datas['body']=str_replace('<<'.$cond_index.'>>',$cond_data['else'],$cond_datas['body']);
 							continue 2;
 						}
 					}
 					else{
 						list($key,$val)=explode('/',$key);
 						if(!is_array($conf_data[$key]) || empty($conf_data[$key][$val])===$flag && !in_array($conf_data[$key],$val)===$flag){
-							$contents=str_replace('<<'.$cond_index.'>>',$cond_data['else'],$cond_datas['body']);
+							$cond_datas['body']=str_replace('<<'.$cond_index.'>>',$cond_data['else'],$cond_datas['body']);
 							continue 2;
 						}
 					}
 				}
-				$contents=str_replace('<<'.$cond_index.'>>',$cond_data['body'],$cond_datas['body']);
+				$cond_datas['body']=str_replace('<<'.$cond_index.'>>',$cond_data['body'],$cond_datas['body']);
 			}
+			$contents=$cond_datas['body'];
 		}
 		$contents=str_replace('<!--data_type-->',$path_data['data_type'],$contents);
 		$contents=str_replace('<!--data_name-->',$path_data['data_name'],$contents);
