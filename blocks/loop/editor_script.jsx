@@ -6,10 +6,19 @@
 	example:CP.example,
 	edit({attributes,setAttributes,className,clientId}){
         const {content_path,query,config,EditMode=false}=attributes;
+		const {useMemo}=wp.element;
 		let configData;
 		
+		const itemMap=useMemo(()=>{
+			const map={};
+			Object.keys(cpEmbeddablesTree.loop).map((label)=>{
+				cpEmbeddablesTree.loop[label].children.map((item)=>{map[item.id]=item;});
+			});
+			return map;
+		},[]);
+		
 		if(!config){
-		   if(content_path){
+		   if(content_path && itemMap[content_path].has_config){
 				const path=content_path.substr(0,content_path.lastIndexOf('/'));
 				wp.apiFetch({path:'/cp/v1/'+path+'/config'}).then((config)=>{
 					Object.keys(config).map((key)=>config[key].json='config');
@@ -65,13 +74,14 @@
 							tree={cpEmbeddablesTree.loop}
 							onChange={(content_path)=>{
 								const path=content_path.substr(0,content_path.lastIndexOf('/'));
-								wp.apiFetch({path:'/cp/v1/'+path+'/template'}).then((template)=>{
-									wp.data.dispatch('core/block-editor').replaceInnerBlocks(
-										clientId,
-										CP.createBlocks(template)
-									);
-								}).catch((res)=>{
-								});
+								if(itemMap[content_path].has_template){
+									wp.apiFetch({path:'/cp/v1/'+path+'/template'}).then((template)=>{
+										wp.data.dispatch('core/block-editor').replaceInnerBlocks(
+											clientId,
+											CP.createBlocks(template)
+										);
+									});
+								}
 								setAttributes({content_path,config:null});
 							}}
 						/>

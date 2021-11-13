@@ -14,10 +14,20 @@ registerBlockType('catpow/loop', {
         config = attributes.config,
         _attributes$EditMode = attributes.EditMode,
         EditMode = _attributes$EditMode === void 0 ? false : _attributes$EditMode;
+    var useMemo = wp.element.useMemo;
     var configData;
+    var itemMap = useMemo(function () {
+      var map = {};
+      Object.keys(cpEmbeddablesTree.loop).map(function (label) {
+        cpEmbeddablesTree.loop[label].children.map(function (item) {
+          map[item.id] = item;
+        });
+      });
+      return map;
+    }, []);
 
     if (!config) {
-      if (content_path) {
+      if (content_path && itemMap[content_path].has_config) {
         var path = content_path.substr(0, content_path.lastIndexOf('/'));
         wp.apiFetch({
           path: '/cp/v1/' + path + '/config'
@@ -76,11 +86,15 @@ registerBlockType('catpow/loop', {
       tree: cpEmbeddablesTree.loop,
       onChange: function onChange(content_path) {
         var path = content_path.substr(0, content_path.lastIndexOf('/'));
-        wp.apiFetch({
-          path: '/cp/v1/' + path + '/template'
-        }).then(function (template) {
-          wp.data.dispatch('core/block-editor').replaceInnerBlocks(clientId, CP.createBlocks(template));
-        }).catch(function (res) {});
+
+        if (itemMap[content_path].has_template) {
+          wp.apiFetch({
+            path: '/cp/v1/' + path + '/template'
+          }).then(function (template) {
+            wp.data.dispatch('core/block-editor').replaceInnerBlocks(clientId, CP.createBlocks(template));
+          });
+        }
+
         setAttributes({
           content_path: content_path,
           config: null
