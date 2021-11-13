@@ -20,7 +20,7 @@ registerBlockType('catpow/loop', {
       if (content_path) {
         var path = content_path.substr(0, content_path.lastIndexOf('/'));
         wp.apiFetch({
-          path: 'cp/v1/' + path + '/config'
+          path: '/cp/v1/' + path + '/config'
         }).then(function (config) {
           Object.keys(config).map(function (key) {
             return config[key].json = 'config';

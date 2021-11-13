@@ -11,7 +11,7 @@
 		if(!config){
 		   if(content_path){
 				const path=content_path.substr(0,content_path.lastIndexOf('/'));
-				wp.apiFetch({path:'cp/v1/'+path+'/config'}).then((config)=>{
+				wp.apiFetch({path:'/cp/v1/'+path+'/config'}).then((config)=>{
 					Object.keys(config).map((key)=>config[key].json='config');
 					setAttributes({config:JSON.stringify(config)});
 				}).catch((res)=>{
