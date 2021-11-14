@@ -72,9 +72,10 @@ registerBlockType('catpow/buttons', {
       }]
     }];
     var itemClasses = ['color', {
+      type: 'gridbuttons',
       label: '属性',
       filter: 'rank',
-      values: ['default', 'primary', 'negative', 'danger', 'secure']
+      values: ['default', 'primary', 'secondary', 'negative', 'danger', 'secure']
     }, {
       label: 'アイコン',
       values: 'hasIcon',

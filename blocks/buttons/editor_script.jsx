@@ -34,7 +34,7 @@
 		];
 		const itemClasses=[
 			'color',
-			{label:'属性',filter:'rank',values:['default','primary','negative','danger','secure']},
+			{type:'gridbuttons',label:'属性',filter:'rank',values:['default','primary','secondary','negative','danger','secure']},
 			{label:'アイコン',values:'hasIcon',sub:[
 				{input:'icon'}
 			]},
