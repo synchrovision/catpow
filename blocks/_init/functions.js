@@ -2835,6 +2835,10 @@ var CP = {
         useReducer = _wp$element2.useReducer,
         useCallback = _wp$element2.useCallback,
         useEffect = _wp$element2.useEffect;
+    var _wp$components4 = wp.components,
+        Card = _wp$components4.Card,
+        CardHeader = _wp$components4.CardHeader,
+        CardBody = _wp$components4.CardBody;
     var _window$Catpow$ga = window.Catpow.ga,
         parseEventString = _window$Catpow$ga.parseEventString,
         createEventString = _window$Catpow$ga.createEventString;
@@ -2900,9 +2904,7 @@ var CP = {
         useExtended = _useState6[0],
         setUseExtended = _useState6[1];
 
-    return wp.element.createElement(BaseControl, {
-      label: "Google Analitics Event"
-    }, wp.element.createElement("table", null, eventParams.map(function (param) {
+    return wp.element.createElement(BaseControl, null, wp.element.createElement(Card, null, wp.element.createElement(CardHeader, null, "Google Analitics Event"), wp.element.createElement(CardBody, null, wp.element.createElement("table", null, eventParams.map(function (param) {
       if (!useExtended && param.isExtended) {
         return false;
       }
@@ -2919,13 +2921,13 @@ var CP = {
           });
         }
       })));
-    })), wp.element.createElement(CheckboxControl, {
+    }), wp.element.createElement("tr", null, wp.element.createElement("th", null), wp.element.createElement("td", null, wp.element.createElement(CheckboxControl, {
       label: "\u62E1\u5F35\u8A2D\u5B9A",
       onChange: function onChange(flag) {
         setUseExtended(flag);
       },
       checked: useExtended
-    }));
+    })))))));
   }
 };
 CP.example = {

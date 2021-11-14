@@ -2082,6 +2082,7 @@
 	GaEventInput:(props)=>{
 		const {onChange}=props;
 		const {useState,useReducer,useCallback,useEffect}=wp.element;
+		const {Card,CardHeader,CardBody}=wp.components;
 		const {parseEventString,createEventString}=window.Catpow.ga;
 		const eventParams=[
 			{type:'text',label:'イベント',name:'event',isExtended:true},
@@ -2108,31 +2109,41 @@
 		});
 		const [useExtended,setUseExtended]=useState(!!(state.event.label_name || state.event.value));
 		return (
-			<BaseControl label="Google Analitics Event">
-				<table>
-					{eventParams.map((param)=>{
-						if(!useExtended && param.isExtended){return false;}
-						return (
+			<BaseControl>
+				<Card>
+					<CardHeader>Google Analitics Event</CardHeader>
+					<CardBody>
+						<table>
+							{eventParams.map((param)=>{
+								if(!useExtended && param.isExtended){return false;}
+								return (
+									<tr>
+										<th width="80">{param.label}</th>
+										<td>
+											<TextControl
+												value={state.event[param.name]}
+												type={param.type}
+												onChange={(val)=>{
+													dispatch({type:'UPDATE',event:{[param.name]:val}});
+												}}
+											/>
+										</td>
+									</tr>
+								);
+							})}
 							<tr>
-								<th width="80">{param.label}</th>
+								<th></th>
 								<td>
-									<TextControl
-										value={state.event[param.name]}
-										type={param.type}
-										onChange={(val)=>{
-											dispatch({type:'UPDATE',event:{[param.name]:val}});
-										}}
+									<CheckboxControl
+										label="拡張設定"
+										onChange={(flag)=>{setUseExtended(flag)}}
+										checked={useExtended}
 									/>
 								</td>
 							</tr>
-						);
-					})}
-				</table>
-				<CheckboxControl
-					label="拡張設定"
-					onChange={(flag)=>{setUseExtended(flag)}}
-					checked={useExtended}
-				/>
+						</table>
+					</CardBody>
+				</Card>
 			</BaseControl>
 		);
 	}
