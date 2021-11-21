@@ -6,12 +6,12 @@ use Catpow\util\style_config;
 	<dt><i class="fas fa-language"></i>プロジェクトID</dt>
 	<dd><?php input('cp_adobe_fonts_pid'); ?></dd>
 </dl>
-<?php foreach(style_config::get_font_roles() as $role=>$conf):?>
+<?php foreach(loop('fonts') as $val):foreach(style_config::get_font_roles() as $role=>$conf):?>
 <dl>
 	<dt><i class="fas fa-font"></i><?=$conf['label']?></dt>
-	<dd><?php input("{$role}_font"); ?></dd>
+	<dd><?php input($role.'_font'); ?></dd>
 </dl>
-<?php endforeach; ?>
+<?php endforeach;endforeach; ?>
 <ul>
 	<li>
 		<p class="caption">

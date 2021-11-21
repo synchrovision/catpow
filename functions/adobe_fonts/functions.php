@@ -19,9 +19,22 @@ add_action('wp_head',function(){
 });
 
 add_action('cp_scss_compiler_init',function($scssc){
-	$vars=[];
-	foreach(style_config::get_font_roles() as $role=>$conf){
-		$vars["{$role}_font"]=get_option("cp_adobe_fonts_{$role}_font",$conf['default']);
+	$fonts=[];
+	if($f=\cp::get_file_path('json/fonts.json')){
+		$vars=(array)json_decode(file_get_contents($f),true);
+		foreach($vars[0] as $key=>$val){
+			$fonts[$key]=implode(',',$val);
+		}
 	}
-	$scssc->setVariables($vars);
+	else{
+		// migration
+		$vars=[[]];
+		$f=get_stylesheet_directory().'/json/fonts.json';
+		foreach(style_config::get_font_roles() as $role=>$conf){
+			$fonts["{$role}_font"]=get_option("cp_adobe_fonts_{$role}_font",$conf['default']);
+			$vars[0]["{$role}_font"]=explode(',',$fonts["{$role}_font"]);
+		}
+		file_put_contents($f,json_encode($vars,\JSON_UNESCAPED_UNICODE));
+	}
+	$scssc->setVariables($fonts);
 });
