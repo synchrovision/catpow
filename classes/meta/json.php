@@ -8,7 +8,7 @@ class json extends meta{
 	
 	public static function get($data_type,$data_name,$id,$meta_name,$conf){
 		if($f=\cp::get_file_path('json/'.($conf['value']??$meta_name).'.json')){
-			return (array)json_decode(file_get_contents($f));
+			return (array)json_decode(file_get_contents($f),true);
 		}
 		return [];
 	}
