@@ -35,6 +35,26 @@ class select_terms extends select{
 		wp_set_object_terms($id,$vals,$taxonomy);
 	}
 	
+	public static function export($data_type,$data_name,$id,$meta_name,$conf){
+		$vals=static::get($data_type,$data_name,$id,$meta_name,$conf);
+		if(!empty($conf['export']) && in_array($conf['export'],['slug','name'])){
+			$field=$conf['export'];
+			foreach($vals as $i=>$val){
+				$vals[$i]=get_term($val)->$field;
+			}
+		}
+		return $vals;
+	}
+	public static function import($data_type,$data_name,$id,$meta_name,$vals,$conf){
+		if(!empty($conf['export']) && in_array($conf['export'],['slug','name'])){
+			$taxonomy=is_string($conf['value'])?$conf['value']:$conf['value']['taxonomy'];
+			foreach($vals as $i=>$val){
+				$vals[$i]=term_exists($val,$taxonomy)['term_id']??wp_insert_term($val,$taxonomy)['term_id'];
+			}
+		}
+		return static::set($data_type,$data_name,$id,$meta_name,$vals,$conf);
+	}
+	
 	public static function output($meta,$prm){
 		$val=$meta->value;
 		if(empty($val))return '';
@@ -115,44 +135,46 @@ class select_terms extends select{
 			$sortby=$meta->conf['sortby'];
 			$sortby_conf=$taxonomies[$q->query_vars['taxonomy']]['meta'][$sortby];
 		}
-		if(empty($meta->conf['input_loop'])){
-			if(isset($sortby)){
-				foreach($q->get_terms() as $i=>$term){
-					$rtn[reset(\cp::get_output($sortby_conf,get_term_meta($term->term_id,$sortby,true)))][$term->name]=$term->term_id;
+		if(isset($q)){
+			if(empty($meta->conf['input_loop'])){
+				if(isset($sortby)){
+					foreach($q->get_terms() as $i=>$term){
+						$rtn[reset(\cp::get_output($sortby_conf,get_term_meta($term->term_id,$sortby,true)))][$term->name]=$term->term_id;
+					}
+				}
+				else{
+					$term_group_names=[];
+					foreach($q->get_terms() as $i=>$term){
+						if(empty($term->parent)){
+							if(isset($rtn[$term->name])){continue;}
+							$rtn[$term->name]=$term->term_id;
+							$term_group_names[$term->term_id]='[ '.$term->name.' ]';
+							$rtn[$term_group_names[$term->term_id]]=[];
+						}
+						else{
+							if(!isset($term_group_names[$term->parent])){
+								$parent_term=get_term($term->parent,$term->taxonomy);
+								$rtn[$parent_term->name]=$term->parent;
+								$term_group_names[$term->parent]='[ '.$parent_term->name.' ]';
+								$rtn[$term_group_names[$term->parent]]=[];
+							}
+							$rtn[$term_group_names[$term->parent]][$term->name]=$term->term_id;
+						}
+					}
+					$rtn=array_filter($rtn);
 				}
 			}
 			else{
-				$term_group_names=[];
-				foreach($q->get_terms() as $i=>$term){
-					if(empty($term->parent)){
-						if(isset($rtn[$term->name])){continue;}
-						$rtn[$term->name]=$term->term_id;
-						$term_group_names[$term->term_id]='[ '.$term->name.' ]';
-						$rtn[$term_group_names[$term->term_id]]=[];
-					}
-					else{
-						if(!isset($term_group_names[$term->parent])){
-							$parent_term=get_term($term->parent,$term->taxonomy);
-							$rtn[$parent_term->name]=$term->parent;
-							$term_group_names[$term->parent]='[ '.$parent_term->name.' ]';
-							$rtn[$term_group_names[$term->parent]]=[];
-						}
-						$rtn[$term_group_names[$term->parent]][$term->name]=$term->term_id;
-					}
+				if(is_array($meta->conf['input_loop'])){$tmp=$meta->conf['input_loop'][0];$name=$meta->conf['input_loop'][1];}
+				elseif(is_string($meta->conf['input_loop'])){$tmp=$meta->conf['input_loop'];$name='loop';}
+				else{$tmp='listed';$name='loop';}
+				$class_name=\cp::get_class_name('content','loop');
+				$loop=new $class_name(['path'=>'term/'.$tmp,'query'=>$q]);
+				foreach($loop as $i=>$term){
+					ob_start();
+					if(isset($sortby)){$rtn[reset(\cp::get_output($sortby_conf,get_term_meta($term->term_id,$sortby,true)))][ob_get_clean()]=$term->term_id;}
+					else{$rtn[ob_get_clean()]=$term->term_id;}
 				}
-				$rtn=array_filter($rtn);
-			}
-		}
-		else{
-			if(is_array($meta->conf['input_loop'])){$tmp=$meta->conf['input_loop'][0];$name=$meta->conf['input_loop'][1];}
-			elseif(is_string($meta->conf['input_loop'])){$tmp=$meta->conf['input_loop'];$name='loop';}
-			else{$tmp='listed';$name='loop';}
-			$class_name=\cp::get_class_name('content','loop');
-			$loop=new $class_name(['path'=>'term/'.$tmp,'query'=>$q]);
-			foreach($loop as $i=>$term){
-				ob_start();
-				if(isset($sortby)){$rtn[reset(\cp::get_output($sortby_conf,get_term_meta($term->term_id,$sortby,true)))][ob_get_clean()]=$term->term_id;}
-				else{$rtn[ob_get_clean()]=$term->term_id;}
 			}
 		}
 		if(isset($sortby)){ksort($rtn);}
