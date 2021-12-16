@@ -16,41 +16,55 @@ body.wp-admin::after {
   pointer-events: none;
   -webkit-transition: 0.5s;
   transition: 0.5s;
-  opacity: 0; }
+  opacity: 0;
+}
 body.wp-admin.busy_mode:after {
   pointer-events: auto;
-  opacity: 0.4; }
+  opacity: 0.4;
+}
 body.wp-admin.login {
-  background-color: #fefefe; }
-  body.wp-admin.login #login h1 a {
-    width: auto;
-    background-image: url('images/logo.png');
-    background-size: 80% auto;
-    background-position: center; }
+  background-color: #f8f8f8;
+}
+body.wp-admin.login #login h1 a {
+  width: auto;
+  background-image: url('images/logo.png');
+  background-size: 80% auto;
+  background-position: center;
+}
 body.wp-admin #adminmenumain #adminmenuback {
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3); }
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+}
 body.wp-admin #wpcontent #wpadminbar {
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3); }
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+}
 body.wp-admin #wpcontent #editor {
-  background-color: #fefefe; }
-  body.wp-admin #wpcontent #editor .edit-post-header, body.wp-admin #wpcontent #editor .edit-post-sidebar {
-    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3); }
-  body.wp-admin #wpcontent #editor .editor-post-title__block .editor-post-title__input {
-    color: #444; }
-    body.wp-admin #wpcontent #editor .edit-post-visual-editor .editor-post-title__block, body.wp-admin #wpcontent #editor .edit-post-visual-editor .editor-block-list__block {
-      max-width: 960px;
-      width: auto; }
-  body.wp-admin #wpcontent #editor .edit-post-layout__metaboxes {
-    border-color: rgba(68, 68, 68, 0.5); }
+  background-color: #f8f8f8;
+}
+body.wp-admin #wpcontent #editor .edit-post-header, body.wp-admin #wpcontent #editor .edit-post-sidebar {
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+}
+body.wp-admin #wpcontent #editor .editor-post-title__block .editor-post-title__input {
+  color: #444;
+}
+body.wp-admin #wpcontent #editor .edit-post-visual-editor .editor-post-title__block, body.wp-admin #wpcontent #editor .edit-post-visual-editor .editor-block-list__block {
+  max-width: 960px;
+  width: auto;
+}
+body.wp-admin #wpcontent #editor .edit-post-layout__metaboxes {
+  border-color: rgba(68, 68, 68, 0.5);
+}
 body.wp-admin #wpcontent #cpcf_custom_box {
-  background-color: #fefefe; }
-  body.wp-admin #wpcontent #cpcf_custom_box > h2 {
-    color: #444;
-    border-color: rgba(68, 68, 68, 0.3); }
-  body.wp-admin #wpcontent #cpcf_custom_box .inside {
-    padding: 1rem;
-    margin: 0px;
-    border-style: none; }
+  background-color: #f8f8f8;
+}
+body.wp-admin #wpcontent #cpcf_custom_box > h2 {
+  color: #444;
+  border-color: rgba(68, 68, 68, 0.3);
+}
+body.wp-admin #wpcontent #cpcf_custom_box .inside {
+  padding: 1rem;
+  margin: 0px;
+  border-style: none;
+}
 body.wp-admin #wpcontent form#cp_search #cpcf_custom_box_button {
   position: fixed;
   z-index: 10001;
@@ -72,173 +86,197 @@ body.wp-admin #wpcontent form#cp_search #cpcf_custom_box_button {
   font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   font-weight: 500;
   color: #fff;
-  cursor: pointer; }
-  body.wp-admin #wpcontent form#cp_search #cpcf_custom_box_button::before {
-    content: "\f002";
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900; }
+  cursor: pointer;
+}
+body.wp-admin #wpcontent form#cp_search #cpcf_custom_box_button::before {
+  content: "";
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+}
 body.wp-admin #wpcontent form#cp_search #cpcf_custom_box {
-  background-color: transparent; }
-  body.wp-admin #wpcontent form#cp_search #cpcf_custom_box .inside {
-    position: fixed;
-    z-index: 10000;
-    bottom: 0px;
-    right: 0px;
-    background-color: #fefefe;
-    border-top-style: solid;
-    border-left-style: solid;
-    border-top-width: 1px;
-    border-left-width: 1px;
-    border-top-color: #007cba;
-    border-left-color: #007cba;
-    border-radius: 1rem 0px 0px 0px;
-    box-shadow: 0 5px 11px rgba(0, 0, 0, 0.3);
-    pointer-events: none;
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    opacity: 0;
-    transform: -webkit- translateY(100vh);
-    transform: translateY(100vh); }
-    body.wp-admin #wpcontent form#cp_search #cpcf_custom_box.active .inside {
-      pointer-events: auto;
-      opacity: 1;
-      transform: -webkit- translateY(0px);
-      transform: translateY(0px); }
+  background-color: transparent;
+}
+body.wp-admin #wpcontent form#cp_search #cpcf_custom_box .inside {
+  position: fixed;
+  z-index: 10000;
+  bottom: 0px;
+  right: 0px;
+  background-color: #f8f8f8;
+  border-top-style: solid;
+  border-left-style: solid;
+  border-top-width: 1px;
+  border-left-width: 1px;
+  border-top-color: #007cba;
+  border-left-color: #007cba;
+  border-radius: 1rem 0px 0px 0px;
+  box-shadow: 0 5px 11px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  opacity: 0;
+  transform: -webkit- translateY(100vh);
+  transform: translateY(100vh);
+}
+body.wp-admin #wpcontent form#cp_search #cpcf_custom_box.active .inside {
+  pointer-events: auto;
+  opacity: 1;
+  transform: -webkit- translateY(0px);
+  transform: translateY(0px);
+}
 body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions {
-  overflow: visible; }
-  body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition {
-    display: inline-block;
-    position: relative;
-    margin: 0px 5px; }
-    body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition .button::before {
-      content: "\f002";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900;
-      display: inline-block;
-      margin-right: 10px; }
-    body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs {
-      display: block;
-      position: absolute;
-      padding: 20px;
-      width: 600px;
-      top: 40px;
-      left: -200px;
-      z-index: 10000;
-      background-color: #fefefe;
-      border-style: solid;
-      border-width: 1px;
-      border-color: #007cba;
-      border-radius: 10px;
-      box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-      -webkit-transition: 0.5s;
-      transition: 0.5s;
-      opacity: 0;
-      transform: -webkit- translateY(-10px);
-      transform: translateY(-10px);
-      pointer-events: none; }
-      body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs::before {
-        content: ' ';
-        display: block;
-        width: 1px;
-        height: 1px;
-        position: absolute;
-        top: -21px;
-        left: 220px;
-        border-style: solid;
-        border-width: 10px;
-        border-color: transparent;
-        border-bottom-color: #007cba; }
-      body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs.active {
-        opacity: 1;
-        transform: -webkit- translateY(0px);
-        transform: translateY(0px);
-        pointer-events: auto; }
-      body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs table.inputs {
-        width: 100%;
-        border-collapse: collapse;
-        border-spacing: 0px; }
-        body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs table.inputs th, body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs table.inputs td {
-          padding: 5px 10px;
-          border-style: solid;
-          border-width: 1px;
-          border-color: #c7c7c7;
-          text-align: left;
-          font-size: 12px;
-          line-height: 12px;
-          font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
-          font-weight: normal;
-          color: dimgrey; }
-        body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs table.inputs th {
-          background-color: rgba(0, 124, 186, 0.1); }
-          body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs table.inputs td label {
-            display: inline-block;
-            margin: 5px; }
+  overflow: visible;
+}
+body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition {
+  display: inline-block;
+  position: relative;
+  margin: 0px 5px;
+}
+body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition .button::before {
+  content: "";
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  display: inline-block;
+  margin-right: 10px;
+}
+body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs {
+  display: block;
+  position: absolute;
+  padding: 20px;
+  width: 600px;
+  top: 40px;
+  left: -200px;
+  z-index: 10000;
+  background-color: #f8f8f8;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #007cba;
+  border-radius: 10px;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  opacity: 0;
+  transform: -webkit- translateY(-10px);
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs::before {
+  content: ' ';
+  display: block;
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  top: -21px;
+  left: 220px;
+  border-style: solid;
+  border-width: 10px;
+  border-color: transparent;
+  border-bottom-color: #007cba;
+}
+body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs.active {
+  opacity: 1;
+  transform: -webkit- translateY(0px);
+  transform: translateY(0px);
+  pointer-events: auto;
+}
+body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs table.inputs {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs table.inputs th, body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs table.inputs td {
+  padding: 5px 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #c7c7c7;
+  text-align: left;
+  font-size: 12px;
+  line-height: 12px;
+  font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-weight: normal;
+  color: dimgray;
+}
+body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs table.inputs th {
+  background-color: rgba(0, 124, 186, 0.1);
+}
+body.wp-admin #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs table.inputs td label {
+  display: inline-block;
+  margin: 5px;
+}
 body.wp-admin #wpcontent .cp_form_section {
   padding: 2rem;
-  background-color: #fefefe; }
-  body.wp-admin #wpcontent .wp-list-table a.pdf {
-    display: inline-block;
-    width: 80px;
-    height: 115px;
-    overflow: hidden; }
-    body.wp-admin #wpcontent .wp-list-table a.pdf object {
-      width: 400%;
-      height: 400%;
-      -webkit-transform-origin: 0 0 0;
-      transform-origin: 0 0 0;
-      transform: -webkit- scale(0.25);
-      transform: scale(0.25); }
+  background-color: #f8f8f8;
+}
+body.wp-admin #wpcontent .wp-list-table a.pdf {
+  display: inline-block;
+  width: 80px;
+  height: 115px;
+  overflow: hidden;
+}
+body.wp-admin #wpcontent .wp-list-table a.pdf object {
+  width: 400%;
+  height: 400%;
+  -webkit-transform-origin: 0 0 0;
+  transform-origin: 0 0 0;
+  transform: -webkit- scale(0.25);
+  transform: scale(0.25);
+}
 body.wp-admin #wpcontent .cp_admin div.checkbox.cp-meta-item-use_functions label.checkbox .image {
   display: inline-block;
   width: 8rem;
-  margin-right: 1rem; }
+  margin-right: 1rem;
+}
 body.wp-admin #wpcontent .cp_admin div.checkbox.cp-meta-item-use_functions label.checkbox .text {
-  position: relative; }
-  body.wp-admin #wpcontent .cp_admin div.checkbox.cp-meta-item-use_functions label.checkbox .text h3 {
-    text-align: center;
-    font-size: 1.3rem;
-    font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
-    font-weight: 500;
-    color: #444; }
-  body.wp-admin #wpcontent .cp_admin div.checkbox.cp-meta-item-use_functions label.checkbox .text p {
-    display: block;
-    position: absolute;
-    width: 14em;
-    padding: 1em;
-    margin: 0px auto;
-    left: -10em;
-    right: -10em;
-    z-index: 1;
-    background-color: #1a89c1;
-    border-radius: 1em;
-    text-align: justify;
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    opacity: 0;
-    transform: -webkit- translateY(1em);
-    transform: translateY(1em);
-    pointer-events: none; }
-    body.wp-admin #wpcontent .cp_admin div.checkbox.cp-meta-item-use_functions label.checkbox .text p::before {
-      content: ' ';
-      width: 1px;
-      height: 1px;
-      position: absolute;
-      top: -1em;
-      margin: 0px auto;
-      left: 0px;
-      right: 0px;
-      border-style: solid;
-      border-width: 0.5em;
-      border-color: transparent;
-      border-bottom-color: #1a89c1; }
-  body.wp-admin #wpcontent .cp_admin div.checkbox.cp-meta-item-use_functions label.checkbox .text:hover p {
-    opacity: 1;
-    transform: -webkit- translateY(0px);
-    transform: translateY(0px); }
+  position: relative;
+}
+body.wp-admin #wpcontent .cp_admin div.checkbox.cp-meta-item-use_functions label.checkbox .text h3 {
+  text-align: center;
+  font-size: 1.3rem;
+  font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-weight: 500;
+  color: #444;
+}
+body.wp-admin #wpcontent .cp_admin div.checkbox.cp-meta-item-use_functions label.checkbox .text p {
+  display: block;
+  position: absolute;
+  width: 14em;
+  padding: 1em;
+  margin: 0px auto;
+  left: -10em;
+  right: -10em;
+  z-index: 1;
+  background-color: #1a89c1;
+  border-radius: 1em;
+  text-align: justify;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  opacity: 0;
+  transform: -webkit- translateY(1em);
+  transform: translateY(1em);
+  pointer-events: none;
+}
+body.wp-admin #wpcontent .cp_admin div.checkbox.cp-meta-item-use_functions label.checkbox .text p::before {
+  content: ' ';
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  top: -1em;
+  margin: 0px auto;
+  left: 0px;
+  right: 0px;
+  border-style: solid;
+  border-width: 0.5em;
+  border-color: transparent;
+  border-bottom-color: #1a89c1;
+}
+body.wp-admin #wpcontent .cp_admin div.checkbox.cp-meta-item-use_functions label.checkbox .text:hover p {
+  opacity: 1;
+  transform: -webkit- translateY(0px);
+  transform: translateY(0px);
+}
 body.wp-admin #wpcontent .cp_admin ul.functions {
   padding: 1rem;
   border-radius: 1rem;
@@ -248,50 +286,60 @@ body.wp-admin #wpcontent .cp_admin ul.functions {
   display: flex;
   -webkit-box-lines: multiple;
   -webkit-flex-wrap: wrap;
-  flex-wrap: wrap; }
-  body.wp-admin #wpcontent .cp_admin ul.functions > li {
-    margin: 0px;
-    -webkit-transition: 0.5s;
-    transition: 0.5s; }
-    body.wp-admin #wpcontent .cp_admin ul.functions > li > h2, body.wp-admin #wpcontent .cp_admin ul.functions > li > .cp_form_section > h2 {
-      display: block;
-      position: relative;
-      padding: 5px;
-      margin: 10px;
-      text-align: center;
-      font-size: 2rem;
-      line-height: 1em;
-      font-family: 'Raleway';
-      color: #444;
-      border-bottom-style: solid;
-      border-bottom-width: 1px; }
-    body.wp-admin #wpcontent .cp_admin ul.functions > li .image, body.wp-admin #wpcontent .cp_admin ul.functions > li > .cp_form_section .image {
-      margin: 5px;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3) inset; }
-    body.wp-admin #wpcontent .cp_admin ul.functions > li .desc, body.wp-admin #wpcontent .cp_admin ul.functions > li > .cp_form_section .desc {
-      padding: 5px 10px;
-      text-align: justify;
-      font-size: 1rem;
-      line-height: 1.5em;
-      font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
-      font-weight: normal;
-      color: #444; }
-    body.wp-admin #wpcontent .cp_admin ul.functions > li .control, body.wp-admin #wpcontent .cp_admin ul.functions > li > .cp_form_section .control {
-      margin: 10px 20px; }
-  body.wp-admin #wpcontent .cp_admin ul.functions.active > li {
-    -webkit-box-flex: 1;
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 200px; }
+  flex-wrap: wrap;
+}
+body.wp-admin #wpcontent .cp_admin ul.functions > li {
+  margin: 0px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+body.wp-admin #wpcontent .cp_admin ul.functions > li > h2, body.wp-admin #wpcontent .cp_admin ul.functions > li > .cp_form_section > h2 {
+  display: block;
+  position: relative;
+  padding: 5px;
+  margin: 10px;
+  text-align: center;
+  font-size: 2rem;
+  line-height: 1em;
+  font-family: 'Raleway';
+  color: #444;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+body.wp-admin #wpcontent .cp_admin ul.functions > li .image, body.wp-admin #wpcontent .cp_admin ul.functions > li > .cp_form_section .image {
+  margin: 5px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3) inset;
+}
+body.wp-admin #wpcontent .cp_admin ul.functions > li .desc, body.wp-admin #wpcontent .cp_admin ul.functions > li > .cp_form_section .desc {
+  padding: 5px 10px;
+  text-align: justify;
+  font-size: 1rem;
+  line-height: 1.5em;
+  font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-weight: normal;
+  color: #444;
+}
+body.wp-admin #wpcontent .cp_admin ul.functions > li .control, body.wp-admin #wpcontent .cp_admin ul.functions > li > .cp_form_section .control {
+  margin: 10px 20px;
+}
+body.wp-admin #wpcontent .cp_admin ul.functions.active > li {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 200px;
+}
 body.wp-admin #wpcontent .cp_admin ul.functions.inactive > li {
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
-  flex-basis: 150px; }
-  body.wp-admin #wpcontent .cp_admin ul.functions.inactive > li.item > h2 {
-    font-size: 1.5rem; }
-  body.wp-admin #wpcontent .cp_admin ul.functions.inactive > li.item .desc {
-    font-size: 0.8rem; }
+  flex-basis: 150px;
+}
+body.wp-admin #wpcontent .cp_admin ul.functions.inactive > li.item > h2 {
+  font-size: 1.5rem;
+}
+body.wp-admin #wpcontent .cp_admin ul.functions.inactive > li.item .desc {
+  font-size: 0.8rem;
+}
 /*# sourceMappingURL=./admin.css.map */
