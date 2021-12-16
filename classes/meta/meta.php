@@ -71,6 +71,12 @@ abstract class meta{
 			call_user_func(['\\Catpow\\data_type\\'.$data_type,'add_meta'],$data_name,$id,$meta_name,$val);
 		}
 	}
+	public static function export($data_type,$data_name,$id,$meta_name,$conf){
+		return static::get($data_type,$data_name,$id,$meta_name,$conf);
+	}
+	public static function import($data_type,$data_name,$id,$meta_name,$vals,$conf){
+		return static::set($data_type,$data_name,$id,$meta_name,$vals,$conf);
+	}
 	
 	public static function get_rel_data_value($relkey,$vals,$conf){
 		return array_column($vals,$relkey);
