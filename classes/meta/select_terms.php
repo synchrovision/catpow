@@ -108,7 +108,13 @@ class select_terms extends select{
 		if(is_object($q) and is_a($q,\cp::get_class_name('query','term'))){$q=$q->q;}
 		
 		$q['terms']=$input['value'];
-		if(isset($input['compare'])){$q['operator']=$input['compare'];}
+		if(!is_numeric($input['value'][0])){$q['field']='slug';}
+		if(isset($input['compare'])){
+			$q['operator']=[
+				'='=>'IN',
+				'!='=>'NOT IN'
+			][$input['compare']]??$input['compare'];
+		}
 		if(isset($input['include_children'])){$q['include_children']=$input['include_children'];}
 		$query['tax_query'][]=$q;
 	}
