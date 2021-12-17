@@ -29,18 +29,22 @@ class term extends query{
 		return wp_update_term($data_id,$data_name,$object_data)['term_id'];
 	}
 	public static function insert($object_data){
+		global $wpdb;
 		$object_data=array_merge([
-			'term_name'=>\cp::date()
+			'name'=>\cp::date()
 		],$object_data);
 		if(isset($object_data['term_id'])){
 			$new_term_id=$object_data['term_id'];
-			if(get_term($object_data['term_id'],$object_data['taxonomy'])){
-				$updated_term=wp_update_term($object_data['term_id'],$object_data['taxonomy'],$object_data);
-				if(is_wp_error($updated_term)){_d($updated_term);return;}
-				return $new_term_id;
+			if(term_exists($new_term_id)){
+				$org_tax=$wpdb->get_var($wpdb->prepare("SELECT taxonomy FROM {$wpdb->term_taxonomy} WHERE term_id = %s",[$new_term_id]));
+				if($org_tax===$object_data['taxonomy']){
+					$updated_term=wp_update_term($object_data['term_id'],$object_data['taxonomy'],$object_data);
+					if(is_wp_error($updated_term)){return false;}
+					return $new_term_id;
+				}
+				wp_delete_term($new_term_id,$org_tax);
 			}
-			global $wpdb;
-			$created_term=wp_insert_term($object_data['term_name'],$object_data['taxonomy'],$object_data);
+			$created_term=wp_insert_term($object_data['name'],$object_data['taxonomy'],$object_data);
 			if(is_wp_error($created_term)){return;}
 			$created_term_id=$created_term['term_id'];
 			$wpdb->update(
@@ -55,7 +59,7 @@ class term extends query{
 			);
 			return $new_term_id;
 		}
-		return wp_insert_term($object_data['term_name'],$object_data['taxonomy'],$object_data)['term_id'];
+		return wp_insert_term($object_data['name'],$object_data['taxonomy'],$object_data)['term_id'];
 	}
 	public static function update($object_data){
 		return wp_update_term($object_data['term_id'],$object_data['taxonomy'],$object_data)['term_id'];
