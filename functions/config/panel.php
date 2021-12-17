@@ -9,4 +9,3 @@
 <ul class="buttons">
 	<li><?php button('<i class="fas fa-sync-alt"></i>更新','action','reload'); ?></li>
 </ul>
-<?php §message(); ?>

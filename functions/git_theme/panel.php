@@ -5,7 +5,6 @@
 </code>
 <?php else: ?>
 <ul class="buttons">
-	<li><?php button('<i class="fas fa-sync-alt"></i>作成','action','message'); ?></li>
+	<li><?php button('<i class="fas fa-sync-alt"></i>作成','action'); ?></li>
 </ul>
 <?php endif; ?>
-<?php §message(); ?>

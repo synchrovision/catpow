@@ -21,6 +21,5 @@
 	各キー取得して入力してください
 </p>
 <ul class="wp-block-catpow-buttons m center">
-	<li class="item edit"><?php button('登録','action','message'); ?></li>
+	<li class="item edit"><?php button('登録','action'); ?></li>
 </ul>
-<?php §message(); ?>

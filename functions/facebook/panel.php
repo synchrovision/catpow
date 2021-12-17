@@ -20,7 +20,7 @@
 	</li>
 </ul>
 <ul>
-	<li class="edit"><?php button('登録','action','message'); ?></li>
+	<li class="edit"><?php button('登録','action'); ?></li>
 </ul>
 
 <p>Facebookログインの設定で必要な処理に応じて有効なOAuthリダイレクトURIに以下を設定してください。</p>

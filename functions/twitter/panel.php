@@ -15,6 +15,5 @@
 	</li>
 </ul>
 <ul class="buttons">
-	<li class="edit"><?php button('登録','action','message'); ?></li>
+	<li class="edit"><?php button('登録','action'); ?></li>
 </ul>
-<?php §message(); ?>

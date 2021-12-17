@@ -20,7 +20,7 @@
 </table>
 <ul class="buttons">
 	<li>
-		<?php button('ユーザー切り替え','action','update_results');?>
+		<?php button('ユーザー切り替え','action');?>
 		<small>
 			管理画面以外のページにおけるユーザーのログイン情報を一時的に書き換えます。
 		</small>

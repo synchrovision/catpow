@@ -1,5 +1,5 @@
 <?php
 namespace Catpow;
 receive();
-push();
-msg('更新しました');
+push();?>
+更新しました

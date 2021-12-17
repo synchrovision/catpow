@@ -2,4 +2,5 @@
 namespace Catpow;
 receive();
 push();
-message('更新しました');
+?>
+更新しました
