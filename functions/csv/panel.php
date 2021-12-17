@@ -12,7 +12,7 @@
 		</label>
 		<ul class="buttons">
 			<li>
-				<?php button('<i class="fas fa-upload"></i>アップロード','action','update_results',['csv_action'=>'upload'],'section');?>
+				<?php button('<i class="fas fa-upload"></i>アップロード','action','replace',['csv_action'=>'upload'],'section');?>
 			</li>
 		</ul>
 	</li>

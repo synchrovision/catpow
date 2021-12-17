@@ -14,6 +14,7 @@ if($_REQUEST['csv_action']==='upload'){
 				}
 			}
 			$query_class::import($datas);
+			printf('import %d %ss',count($datas),$data_type);
 		}
 	}
 }
