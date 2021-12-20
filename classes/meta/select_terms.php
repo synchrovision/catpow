@@ -65,8 +65,22 @@ class select_terms extends select{
 		else{$addition=false;}
 		if(is_numeric($val) && $val>0){
 			$term=get_term($val);
+			if(empty($prm)){return $term->name;}
+			$tax=$term->taxonomy;
+			global $taxonomies;
+			if(in_array($prm,$taxonomies[$tax]['template'])){
+				$class_name=\cp::get_class_name('content','loop');
+				ob_start();
+				$class_name::from_object($term)->render($prm);
+				return ob_get_clean();
+			}
+			elseif(isset($taxonomies[$tax]['meta'][$prm])){
+				$meta=new \Catpow\content\meta(['data_path'=>'term/'.$tax.'/'.$val.'/'.$prm]);
+				return $meta->get_output();
+			}
 			switch($prm){
-				case false:
+				case 'id':
+					return $term->term_id;
 				case 'title':
 					return $term->name;
 				case 'icon':
@@ -81,19 +95,6 @@ class select_terms extends select{
 					);
 				case 'url':
 					return get_term_link($term);
-				default:
-					global $taxonomies;
-					$tax=$term->taxonomy;
-					if(in_array($prm,$taxonomies[$tax]['template'])){
-						$class_name=\cp::get_class_name('content','loop');
-						ob_start();
-						$class_name::from_object($term)->render($prm);
-						return ob_get_clean();
-					}
-					elseif(isset($taxonomies[$tax]['meta'][$prm])){
-						$meta=new \Catpow\content\meta(['data_path'=>'term/'.$tax.'/'.$val.'/'.$prm]);
-						return $meta->get_output();
-					}
 			}
 		}
 		elseif($addition){
