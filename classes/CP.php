@@ -1914,9 +1914,9 @@ class CP{
 			return wp_get_attachment_image_src($id,'full')[0];
 		}
 		$fs=glob(get_stylesheet_directory().'/images/logo.{png,svg,jpg,gif}',GLOB_BRACE);
-		if($fs[0]){return get_stylesheet_directory_uri().'/images/'.basename($fs[0]);}
+		if(!empty($fs[0])){return get_stylesheet_directory_uri().'/images/'.basename($fs[0]);}
 		$fs=glob(get_template_directory().'/images/logo.{png,svg,jpg,gif}',GLOB_BRACE);
-		if($fs[0]){return get_template_directory_uri().'/images/'.basename($fs[0]);}
+		if(!empty($fs[0])){return get_template_directory_uri().'/images/'.basename($fs[0]);}
 		return false;
 	}
 	
