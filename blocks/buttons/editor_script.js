@@ -211,16 +211,20 @@ registerBlockType('catpow/buttons', {
         loopParam = attributes.loopParam,
         doLoop = attributes.doLoop;
     var states = CP.wordsToFlags(classes);
+    var blockType = wp.data.select('core/blocks').getBlockType('catpow/buttons');
     var rtn = [];
     items.map(function (item, index) {
       var itemStates = CP.wordsToFlags(item.classes);
+      var eventDispatcherAttributes = {};
+      blockType.attributes.items.eventDispatcherAttributes.map(function (attr_name) {
+        eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute] = item[attr_name];
+      });
       rtn.push(wp.element.createElement("li", {
         className: item.classes
-      }, wp.element.createElement("a", {
+      }, wp.element.createElement("a", babelHelpers.extends({
         href: item.url,
-        className: "button",
-        "data-event": item.event
-      }, itemStates.hasIcon && wp.element.createElement("span", {
+        className: "button"
+      }, eventDispatcherAttributes), itemStates.hasIcon && wp.element.createElement("span", {
         className: "icon"
       }, wp.element.createElement("img", {
         src: item.iconSrc,

@@ -167,16 +167,20 @@
 	save({attributes,className}){
 		const {items=[],classes,loopParam,doLoop}=attributes;
 		const states=CP.wordsToFlags(classes);
-		
+		const blockType=wp.data.select('core/blocks').getBlockType('catpow/buttons');
 		let rtn=[];
 		items.map((item,index)=>{
 			const itemStates=CP.wordsToFlags(item.classes);
+			const eventDispatcherAttributes={};
+			blockType.attributes.items.eventDispatcherAttributes.map((attr_name)=>{
+				eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute]=item[attr_name];
+			});
 			rtn.push(
 				<li className={item.classes}>
 					<a
 						href={item.url}
 						className='button'
-						data-event={item.event}
+						{...eventDispatcherAttributes}
 					>
 						{itemStates.hasIcon && 
 							<span className="icon">

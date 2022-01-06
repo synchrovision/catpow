@@ -1673,15 +1673,18 @@ var CP = {
     var _wp$components3 = wp.components,
         ColorPicker = _wp$components3.ColorPicker,
         GradientPicker = _wp$components3.__experimentalGradientPicker;
-    var _props$classKey = props.classKey,
-        classKey = _props$classKey === void 0 ? 'classes' : _props$classKey,
-        items = props.items,
-        index = props.index,
-        subItemsKey = props.subItemsKey,
-        subIndex = props.subIndex,
-        set = props.set,
-        attr = props.attr,
-        triggerClasses = props.triggerClasses;
+
+    var _wp$hooks$applyFilter = wp.hooks.applyFilters('catpow.SelectClassPanelProps', props),
+        _wp$hooks$applyFilter2 = _wp$hooks$applyFilter.classKey,
+        classKey = _wp$hooks$applyFilter2 === void 0 ? 'classes' : _wp$hooks$applyFilter2,
+        items = _wp$hooks$applyFilter.items,
+        index = _wp$hooks$applyFilter.index,
+        subItemsKey = _wp$hooks$applyFilter.subItemsKey,
+        subIndex = _wp$hooks$applyFilter.subIndex,
+        set = _wp$hooks$applyFilter.set,
+        attr = _wp$hooks$applyFilter.attr,
+        triggerClasses = _wp$hooks$applyFilter.triggerClasses;
+
     var itemsKey = props.itemsKey,
         itemClasses = props.itemClasses;
     var item;
@@ -2090,16 +2093,12 @@ var CP = {
             }
           }));
         } else if (prm === 'event') {
-          if (cp.use_functions.indexOf('ga') > -1) {
-            rtn.push(wp.element.createElement(CP.GaEventInput, {
-              value: item['event'],
-              onChange: function onChange(event) {
-                save({
-                  event: event
-                });
-              }
-            }));
-          }
+          wp.hooks.applyFilters('catpow.EventInputs', [], {
+            item: item,
+            save: save
+          }).map(function (EventInput) {
+            rtn.push(EventInput);
+          });
         } else if (prm.input) {
           switch (prm.input) {
             case 'select':
@@ -2827,107 +2826,6 @@ var CP = {
     }, props.name)), !!open && !!props.children && wp.element.createElement("div", {
       className: "children"
     }, props.children));
-  },
-  GaEventInput: function GaEventInput(props) {
-    var onChange = props.onChange;
-    var _wp$element2 = wp.element,
-        useState = _wp$element2.useState,
-        useReducer = _wp$element2.useReducer,
-        useCallback = _wp$element2.useCallback,
-        useEffect = _wp$element2.useEffect;
-    var _wp$components4 = wp.components,
-        Card = _wp$components4.Card,
-        CardHeader = _wp$components4.CardHeader,
-        CardBody = _wp$components4.CardBody;
-    var _window$Catpow$ga = window.Catpow.ga,
-        parseEventString = _window$Catpow$ga.parseEventString,
-        createEventString = _window$Catpow$ga.createEventString;
-    var eventParams = [{
-      type: 'text',
-      label: 'イベント',
-      name: 'event',
-      isExtended: true
-    }, {
-      type: 'text',
-      label: 'アクション',
-      name: 'action',
-      isExtended: false
-    }, {
-      type: 'text',
-      label: 'カテゴリ',
-      name: 'category',
-      isExtended: false
-    }, {
-      type: 'text',
-      label: 'ラベル名',
-      name: 'label_name',
-      isExtended: true
-    }, {
-      type: 'text',
-      label: 'ラベル',
-      name: 'label',
-      isExtended: false
-    }, {
-      type: 'number',
-      label: '値',
-      name: 'value',
-      isExtended: true
-    }];
-    var reducer = useCallback(function (state, action) {
-      switch (action.type) {
-        case 'UPDATE':
-          {
-            var event = _objectSpread(_objectSpread({}, state.event), action.event);
-
-            var value = createEventString(event);
-            onChange(value);
-            return _objectSpread(_objectSpread({}, state), {}, {
-              event: event,
-              value: value
-            });
-          }
-      }
-
-      return state;
-    }, []);
-
-    var _useReducer = useReducer(reducer, {
-      value: props.value,
-      event: parseEventString(props.value)
-    }),
-        _useReducer2 = babelHelpers.slicedToArray(_useReducer, 2),
-        state = _useReducer2[0],
-        dispatch = _useReducer2[1];
-
-    var _useState5 = useState(!!(state.event.label_name || state.event.value)),
-        _useState6 = babelHelpers.slicedToArray(_useState5, 2),
-        useExtended = _useState6[0],
-        setUseExtended = _useState6[1];
-
-    return wp.element.createElement(BaseControl, null, wp.element.createElement(Card, null, wp.element.createElement(CardHeader, null, "Google Analitics Event"), wp.element.createElement(CardBody, null, wp.element.createElement("table", null, eventParams.map(function (param) {
-      if (!useExtended && param.isExtended) {
-        return false;
-      }
-
-      return wp.element.createElement("tr", null, wp.element.createElement("th", {
-        width: "80"
-      }, param.label), wp.element.createElement("td", null, wp.element.createElement(TextControl, {
-        value: state.event[param.name],
-        type: param.type,
-        onChange: function onChange(val) {
-          dispatch({
-            type: 'UPDATE',
-            event: babelHelpers.defineProperty({}, param.name, val)
-          });
-        }
-      })));
-    }), wp.element.createElement("tr", null, wp.element.createElement("th", null), wp.element.createElement("td", null, wp.element.createElement(CheckboxControl, {
-      label: "\u62E1\u5F35\u8A2D\u5B9A",
-      onChange: function onChange(flag) {
-        setUseExtended(flag);
-      },
-      checked: useExtended
-    })))))));
   }
 };
 CP.example = {

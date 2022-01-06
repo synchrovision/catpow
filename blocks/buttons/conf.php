@@ -4,9 +4,11 @@ $attributes=[
 	"items"=>[
 		"source"=>'query',
 		"selector"=>'li.item',
+		'filters'=>[
+			'eventDispatcher'=>['selector'=>'.button']
+		],
 		"query"=>[
 			"classes"=>["source"=>'attribute',"attribute"=>'class'],
-			"event"=>["source"=>'attribute',"selector"=>'.button',"attribute"=>'data-event'],
 			"text"=>["source"=>'text',"selector"=>'.button'],
 			"url"=>["source"=>'attribute',"selector"=>'.button',"attribute"=>'href'],
 			"iconSrc"=>["source"=>'attribute',"selector"=>'.icon img',"attribute"=>'src'],

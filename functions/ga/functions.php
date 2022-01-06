@@ -54,3 +54,8 @@ function cpga_send_event($cat,$action,$label=false,$value=false){
 add_action('init',function(){
 	cp::enqueue_script('functions/ga/script.js');
 });
+add_filter('cp_block_items_attributes_eventDispatcher',function($items,$args){
+	$items['query']['event']=array_merge(["source"=>'attribute',"attribute"=>'data-event'],$args);
+	$items['eventDispatcherAttributes'][]='event';
+	return $items;
+},10,2);
