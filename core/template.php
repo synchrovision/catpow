@@ -458,7 +458,7 @@ function §form($file=null,$loop_id=null,$inputs=null,$vars=null){
 	return $form;
 }
 function form($name=null){
-	if(empty($name)){return \cp::$content->form;}
+	if(empty($name)){return \cp::$content->form??null;}
 	if(isset(\cp::$forms[\cp::$content->path.'/'.$name])){return \cp::$forms[\cp::$content->path.'/'.$name];}
 	if(isset(\cp::$forms[$name])){return \cp::$forms[$name];}
 	return null;

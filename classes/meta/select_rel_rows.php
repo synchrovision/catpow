@@ -34,6 +34,7 @@ class select_rel_rows extends select{
 	
 	public static function get_selections($meta){
 		global $cpdb;
+		$rtn=[];
 		if(empty($meta->conf['table'])){return [];}
 		if(empty($meta->conf['value'])){$meta->conf['value']='';}
 		$where=is_callable($meta->conf['value'])?$meta->conf['value']($meta):$meta->conf['value'];
