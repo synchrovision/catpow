@@ -98,6 +98,14 @@ if(function_exists('register_block_type')){
 	if($will_compile_editor_script=current_user_can('edit_themes') && $_SERVER['SERVER_NAME']==='localhost'){
 		include_once(dirname(__DIR__).'/jsx_compiler/functions.php');
 	}
+	add_filter('register_block_type_args',function($args,$block_type){
+		if(!empty($args['attributes']['items']['filters'])){
+			foreach($args['attributes']['items']['filters'] as $filter=>$filter_args){
+				$args['attributes']['items']=apply_filters("cp_block_items_attributes_{$filter}",$args['attributes']['items'],$filter_args);
+			}
+		}
+		return $args;
+	},10,2);
 	foreach(cp::get_file_urls('blocks') as $block_dir=>$block_url){
 		foreach(glob($block_dir.'/_init/*.js') as $format_script){
 			$fname=basename($format_script);
