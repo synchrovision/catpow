@@ -101,13 +101,13 @@ if(function_exists('register_block_type')){
 	foreach(cp::get_file_urls('blocks') as $block_dir=>$block_url){
 		foreach(glob($block_dir.'/_init/*.js') as $format_script){
 			$fname=basename($format_script);
-			$code_name='cp_blocks_init_'.substr($fname,0,-3);
+			$code_name=substr(strstr($format_script,'/wp-content/'),12,-3);
 			wp_register_script($code_name,$block_url.'/_init/'.$fname,['wp-blocks','wp-i18n','wp-element','wp-editor','catpow']);
 			$deps['editor_script'][]=$code_name;
 		}
 		foreach(glob($block_dir.'/_init/*.css') as $format_style){
 			$fname=basename($format_style);
-			$code_name='cp_blocks_init_'.substr($fname,0,-4);
+			$code_name=substr(strstr($format_style,'/wp-content/'),12,-4);
 			wp_register_style($code_name,$block_url.'/_init/'.$fname);
 			$block_style_names[]='blocks/_init/'.substr($fname,0,-4);
 			$deps['editor_style'][]=$code_name;
