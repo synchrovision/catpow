@@ -1,10 +1,15 @@
+/* global gtag */
 window.Catpow = window.Catpow || {};
 
 window.Catpow.ga={
+	parseEventValue:function(value){
+		if(!value){return [];}
+		return value.split(' + ').map(window.Catpow.ga.parseEventString);
+	},
 	parseEventString:function(str){
-		// action:category«label_name:label»#value@event
+		// action:category«label_name:label»#value@event→send_to
 		if(!str){return {};}
-		var matches=str.match(/^([\d\w_]+?)?(?::([\d\w_]+?))?(?:«(?:(.+?):)?([^:]+?)?»)?(?:#(\d+))?(?:@(\w+))?$/);
+		var matches=str.match(/^([\d\w_]+?)?(?::([\d\w_]+?))?(?:«(?:(.+?):)?([^:]+?)?»)?(?:#(\d+))?(?:@(\w+))?(?:→(.+))?$/);
 		if(!matches){return {};}
 		var rtn={};
 		if(matches[1]){rtn.action=matches[1];}
@@ -13,7 +18,11 @@ window.Catpow.ga={
 		if(matches[4]){rtn.label=matches[4];}
 		if(matches[5]){rtn.value=matches[5];}
 		rtn.event=matches[6] || 'click';
+		if(matches[7]){rtn.send_to=matches[7];}
 		return rtn;
+	},
+	createEventValue:function(datas){
+		return datas.filter((data)=>!!data.action).map(window.Catpow.ga.createEventString).join(' + ');
 	},
 	createEventString:function(data){
 		if(!data.action)return '';
@@ -27,6 +36,7 @@ window.Catpow.ga={
 		}
 		if(data.value){rtn+='#'+data.value;}
 		if(data.event && data.event!=='click'){rtn+='@'+data.event;}
+		if(data.send_to){rtn+='→'+data.send_to;}
 		return rtn;
 	},
 	send:function(data){

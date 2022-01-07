@@ -14,14 +14,16 @@ add_action('cp_setup',function(){
 				function gtag(){dataLayer.push(arguments);}
 				gtag('js', new Date());
 
-				gtag('config', '<?=$cp_ga_code?>',<?=json_encode($conf)?>);
+				gtag('config','<?=$cp_ga_code?>',<?=json_encode($conf)?>);
 
 				document.addEventListener('DOMContentLoaded',function(){
 					var cb=function(el){
 						if(!el.dataset.event || el.dataset.eventRegistered){return;}
-						var data=window.Catpow.ga.parseEventString(el.dataset.event);
-						el.addEventListener(data.event,function(){
-							window.Catpow.ga.send(data);
+						var datas=window.Catpow.ga.parseEventValue(el.dataset.event);
+						datas.map(function(data){
+							el.addEventListener(data.event,function(){
+								window.Catpow.ga.send(data);
+							});
 						});
 						el.dataset.eventRegistered=true;
 					};
@@ -40,7 +42,7 @@ add_action('cp_setup',function(){
 				});
 			</script>
 			<?php
-		});
+		},5);
 	}
 });
 
