@@ -23,9 +23,11 @@ add_action('cp_setup',function(){
 				document.addEventListener('DOMContentLoaded',function(){
 					var cb=function(el){
 						if(!el.dataset.yssEvent || el.dataset.yssEventRegistered){return;}
-						var data=window.Catpow.yss.parseEventString(el.dataset.yssEvent);
-						el.addEventListener(data.event,function(){
-							window.Catpow.yss.send(data);
+						var datas=window.Catpow.yss.parseEventValue(el.dataset.yssEvent);
+						datas.map(function(data){
+							el.addEventListener(data.event,function(){
+								window.Catpow.yss.send(data);
+							});
 						});
 						el.dataset.yssEventRegistered=true;
 					};
@@ -44,7 +46,7 @@ add_action('cp_setup',function(){
 				});
 			</script>
 			<?php
-		});
+		},5);
 	}
 });
 

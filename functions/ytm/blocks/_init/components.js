@@ -12,11 +12,19 @@ CP.YssEventInput = function (props) {
   var _wp$components = wp.components,
       Card = _wp$components.Card,
       CardHeader = _wp$components.CardHeader,
-      CardBody = _wp$components.CardBody;
+      CardBody = _wp$components.CardBody,
+      Flex = _wp$components.Flex,
+      FlexItem = _wp$components.FlexItem,
+      FlexBlock = _wp$components.FlexBlock,
+      Icon = _wp$components.Icon;
   var _window$Catpow$yss = window.Catpow.yss,
-      parseEventString = _window$Catpow$yss.parseEventString,
-      createEventString = _window$Catpow$yss.createEventString;
+      parseEventValue = _window$Catpow$yss.parseEventValue,
+      createEventValue = _window$Catpow$yss.createEventValue;
   var eventParams = [{
+    type: 'text',
+    label: 'イベント',
+    name: 'event'
+  }, {
     type: 'text',
     label: 'ラベル',
     name: 'label'
@@ -29,13 +37,35 @@ CP.YssEventInput = function (props) {
     switch (action.type) {
       case 'UPDATE':
         {
-          var event = _objectSpread(_objectSpread({}, state.event), action.event);
-
-          var value = createEventString(event);
+          state.events[action.index] = _objectSpread(_objectSpread({}, state.events[action.index]), action.event);
+          var value = createEventValue(state.events);
           onChange(value);
           return _objectSpread(_objectSpread({}, state), {}, {
-            event: event,
             value: value
+          });
+        }
+
+      case 'CLONE':
+        {
+          state.events.splice(action.index, 0, _objectSpread({}, state.events[action.index]));
+
+          var _value = createEventValue(state.events);
+
+          onChange(_value);
+          return _objectSpread(_objectSpread({}, state), {}, {
+            value: _value
+          });
+        }
+
+      case 'REMOVE':
+        {
+          state.events.splice(action.index, 1);
+
+          var _value2 = createEventValue(state.events);
+
+          onChange(_value2);
+          return _objectSpread(_objectSpread({}, state), {}, {
+            value: _value2
           });
         }
     }
@@ -45,24 +75,43 @@ CP.YssEventInput = function (props) {
 
   var _useReducer = useReducer(reducer, {
     value: props.value,
-    event: parseEventString(props.value)
+    events: parseEventValue(props.value)
   }),
       _useReducer2 = babelHelpers.slicedToArray(_useReducer, 2),
       state = _useReducer2[0],
       dispatch = _useReducer2[1];
 
-  return wp.element.createElement(BaseControl, null, wp.element.createElement(Card, null, wp.element.createElement(CardHeader, null, "Yahoo Listing Event"), wp.element.createElement(CardBody, null, wp.element.createElement("table", null, eventParams.map(function (param) {
-    return wp.element.createElement("tr", null, wp.element.createElement("th", {
-      width: "80"
-    }, param.label), wp.element.createElement("td", null, wp.element.createElement(TextControl, {
-      value: state.event[param.name],
-      type: param.type,
-      onChange: function onChange(val) {
+  return wp.element.createElement(BaseControl, null, state.events.map(function (event, index) {
+    return wp.element.createElement(Card, null, wp.element.createElement(CardHeader, null, wp.element.createElement(Flex, null, wp.element.createElement(FlexBlock, null, "Yahoo SS conversion"), wp.element.createElement(FlexItem, null, wp.element.createElement(Icon, {
+      icon: "insert",
+      onClick: function onClick() {
         dispatch({
-          type: 'UPDATE',
-          event: babelHelpers.defineProperty({}, param.name, val)
+          type: 'CLONE',
+          index: index
         });
       }
-    })));
-  })))));
+    }), state.events.length > 1 && wp.element.createElement(Icon, {
+      icon: "remove",
+      onClick: function onClick() {
+        dispatch({
+          type: 'REMOVE',
+          index: index
+        });
+      }
+    })))), wp.element.createElement(CardBody, null, wp.element.createElement("table", null, eventParams.map(function (param) {
+      return wp.element.createElement("tr", null, wp.element.createElement("th", {
+        width: "80"
+      }, param.label), wp.element.createElement("td", null, wp.element.createElement(TextControl, {
+        value: event[param.name],
+        type: param.type,
+        onChange: function onChange(val) {
+          dispatch({
+            type: 'UPDATE',
+            event: babelHelpers.defineProperty({}, param.name, val),
+            index: index
+          });
+        }
+      })));
+    }))));
+  }));
 };
