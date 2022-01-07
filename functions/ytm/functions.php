@@ -3,6 +3,7 @@ add_action('cp_setup',function(){
 	if($cp_yss_id=get_option('cp_yss_id')){
 		if(is_array($cp_yss_id)){$cp_yss_id=reset($cp_yss_id);}
 		add_action('wp_head',function()use($cp_yss_id){
+			$use_retargeting=get_option('cp_yss_use_retargeting')==='1';
 			?>
 			<!-- Global site tag (ytag.js) - Yahoo Listing -->
 			<script async src="https://s.yimg.jp/images/listing/tool/cv/ytag.js"></script>
@@ -12,6 +13,7 @@ add_action('cp_setup',function(){
 				function ytag() { yjDataLayer.push(arguments); }
 				ytag({"type":"ycl_cookie"});
 				ytag({"type":"ycl_cookie_extended"});
+				<?php if($use_retargeting): ?>
 				ytag({
 					"type":"yss_retargeting",
 					"config": {
@@ -19,6 +21,7 @@ add_action('cp_setup',function(){
 						"yahoo_sstag_custom_params": {}
 					}
 				});
+				<?php endif; ?>
 
 				document.addEventListener('DOMContentLoaded',function(){
 					var cb=function(el){
