@@ -157,10 +157,13 @@ CP.GaEventInput = function (props) {
       checked: useExtended
     }))))));
   }, []);
-  return wp.element.createElement(BaseControl, null, state.events.map(function (event, index) {
+  return wp.element.createElement(BaseControl, null, state.events.length > 0 ? state.events.map(function (event, index) {
     return wp.element.createElement(EventInputCard, {
       event: event,
       index: index
     });
+  }) : wp.element.createElement(EventInputCard, {
+    event: {},
+    index: 0
   }));
 };

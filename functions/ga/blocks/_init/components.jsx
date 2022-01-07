@@ -101,10 +101,13 @@
 		)
 	},[]);
 	
-	
 	return (
 		<BaseControl>
-		{state.events.map((event,index)=>(<EventInputCard event={event} index={index}/>))}
+		{state.events.length>0?(
+			state.events.map((event,index)=>(<EventInputCard event={event} index={index}/>))
+		):(
+			<EventInputCard event={{}} index={0}/>
+		)}
 		</BaseControl>
 	);
 }

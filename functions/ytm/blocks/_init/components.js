@@ -81,7 +81,9 @@ CP.YssEventInput = function (props) {
       state = _useReducer2[0],
       dispatch = _useReducer2[1];
 
-  return wp.element.createElement(BaseControl, null, state.events.map(function (event, index) {
+  var EventInputCard = useCallback(function (props) {
+    var event = props.event,
+        index = props.index;
     return wp.element.createElement(Card, null, wp.element.createElement(CardHeader, null, wp.element.createElement(Flex, null, wp.element.createElement(FlexBlock, null, "Yahoo SS conversion"), wp.element.createElement(FlexItem, null, wp.element.createElement(Icon, {
       icon: "insert",
       onClick: function onClick() {
@@ -113,5 +115,14 @@ CP.YssEventInput = function (props) {
         }
       })));
     }))));
+  }, []);
+  return wp.element.createElement(BaseControl, null, state.events.length > 0 ? state.events.map(function (event, index) {
+    return wp.element.createElement(EventInputCard, {
+      event: event,
+      index: index
+    });
+  }) : wp.element.createElement(EventInputCard, {
+    event: {},
+    index: 0
   }));
 };

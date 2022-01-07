@@ -35,9 +35,10 @@
 		value:props.value,
 		events:parseEventValue(props.value)
 	});
-	return (
-		<BaseControl>
-		{state.events.map((event,index)=>(
+	
+	const EventInputCard=useCallback((props)=>{
+		const {event,index}=props;
+		return (
 			<Card>
 				<CardHeader>
 					<Flex >
@@ -81,7 +82,16 @@
 					</table>
 				</CardBody>
 			</Card>
-		))}
+		)
+	},[]);
+	
+	return (
+		<BaseControl>
+		{state.events.length>0?(
+			state.events.map((event,index)=>(<EventInputCard event={event} index={index}/>))
+		):(
+			<EventInputCard event={{}} index={0}/>
+		)}
 		</BaseControl>
 	);
 }
