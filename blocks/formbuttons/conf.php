@@ -5,9 +5,11 @@ $attributes=[
 	'items'=>[
 		'source'=>'query',
 		'selector'=>'li.item',
+		'filters'=>[
+			'eventDispatcher'=>['selector'=>'.button']
+		],
 		'query'=>[
 			'classes'=>['source'=>'attribute','attribute'=>'class'],
-			'event'=>['source'=>'attribute','selector'=>'.button','attribute'=>'data-event'],
 			'action'=>['source'=>'attribute','selector'=>'.button','attribute'=>'data-action'],
 			'callback'=>['source'=>'attribute','selector'=>'.button','attribute'=>'data-callback'],
 			'target'=>['source'=>'attribute','selector'=>'.button','attribute'=>'data-target'],

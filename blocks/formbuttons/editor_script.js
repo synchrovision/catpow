@@ -135,19 +135,23 @@ registerBlockType('catpow/formbuttons', {
 
     var classArray = _.uniq(classes.split(' '));
 
+    var blockType = wp.data.select('core/blocks').getBlockType('catpow/formbuttons');
     var rtn = [];
     items.map(function (item, index) {
       var itemStates = CP.wordsToFlags(item.classes);
+      var eventDispatcherAttributes = {};
+      blockType.attributes.items.eventDispatcherAttributes.map(function (attr_name) {
+        eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute] = item[attr_name];
+      });
       rtn.push(wp.element.createElement("li", {
         className: item.classes
-      }, wp.element.createElement("div", {
+      }, wp.element.createElement("div", babelHelpers.extends({
         className: "button",
         "data-action": item.action,
         "data-callback": item.callback,
         "data-target": item.target,
-        "ignore-message": item.ignoreMessage,
-        "data-event": item.event
-      }, itemStates.hasIcon && wp.element.createElement("span", {
+        "ignore-message": item.ignoreMessage
+      }, eventDispatcherAttributes), itemStates.hasIcon && wp.element.createElement("span", {
         className: "icon"
       }, wp.element.createElement("img", {
         src: item.iconSrc,

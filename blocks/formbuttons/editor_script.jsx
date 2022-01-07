@@ -103,11 +103,15 @@
 	save({attributes,className}){
 		const {items=[],classes=''}=attributes;
 		var classArray=_.uniq(classes.split(' '));
-		
+		const blockType=wp.data.select('core/blocks').getBlockType('catpow/formbuttons');
 		
 		let rtn=[];
 		items.map((item,index)=>{
 			const itemStates=CP.wordsToFlags(item.classes);
+			const eventDispatcherAttributes={};
+			blockType.attributes.items.eventDispatcherAttributes.map((attr_name)=>{
+				eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute]=item[attr_name];
+			});
 			rtn.push(
 				<li className={item.classes}>
 					<div
@@ -116,7 +120,7 @@
 						data-callback={item.callback}
 						data-target={item.target}
 						ignore-message={item.ignoreMessage}
-						data-event={item.event}
+						{...eventDispatcherAttributes}
 					>
 						{itemStates.hasIcon && 
 							<span className="icon">
