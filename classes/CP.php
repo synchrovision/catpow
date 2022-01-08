@@ -2041,18 +2041,15 @@ class CP{
 			}
 		}
 		return $all_blocks;
-	}
+	} 
 	public static function get_supported_blocks(){
 		static $supported_blocks;
 		if(isset($supported_blocks)){return $supported_blocks;}
-		$supported_blocks=array_intersect(
-			self::get_all_blocks(),
-			array_merge(
-				scandir(get_stylesheet_directory().'/blocks'),
-				scandir(get_template_directory().'/blocks'),
-				['loop','form','embed','widget','tool','cond']
-			)
-		);
+		$supported_blocks=['loop','form','embed','widget','tool','cond'];
+		foreach(self::get_file_paths('block') as $block_dir){
+			$supported_blocks=array_merge(scandir($block_dir));
+		}
+		$supported_blocks=array_intersect(self::get_all_blocks(),$supported_blocks);
 		return $supported_blocks;
 	}
 	
