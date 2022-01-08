@@ -13,7 +13,8 @@ class theme implements iSetup{
 			while(file_exists(get_theme_root().'/'.$theme_name.'-'.$i)){$i++;}
 			$theme_name=$theme_name.'-'.$i;
 		}
-		dir_copy(WP_PLUGIN_DIR.'/catpow/theme_default',get_theme_root().'/'.$theme_name);
+		chdir(WP_CONTENT_DIR);
+		passthru("cp -r plugins/catpow/theme_default themes/{$theme_name}");
 		$allowedthemes=get_option('allowedthemes');
 		$allowedthemes[$theme_name]=true;
 		update_option('allowedthemes',$allowedthemes);
