@@ -1,11 +1,11 @@
 @charset "utf-8";
 .itemControl {
-  padding: 2px 5px;
+  padding: 0.125rem 0.3125rem;
   position: relative;
   z-index: 1000;
   text-align: center;
-  font-size: 12px;
-  line-height: 10px;
+  font-size: 0.75rem;
+  line-height: 0.625rem;
   background-color: #f8f8f8;
   border-radius: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
@@ -20,10 +20,10 @@
 }
 .itemControl div.btn {
   display: inline-block;
-  margin: 2px;
+  margin: 0.125rem;
   text-align: center;
-  font-size: 12px;
-  line-height: 10px;
+  font-size: 0.75rem;
+  line-height: 0.625rem;
   color: #444;
   cursor: pointer;
   -webkit-transition: 0.5s;
@@ -71,27 +71,27 @@
 .itemControl div.inputs {
   display: block;
   position: absolute;
-  width: 200px;
-  padding: 10px;
+  width: 12.5rem;
+  padding: 0.625rem;
   top: 100%;
-  right: 0px;
-  margin: 0px auto;
+  right: 0rem;
+  margin: 0rem auto;
   z-index: 1001;
   background-color: #f8f8f8;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   text-align: left;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   opacity: 0;
-  transform: -webkit- translateY(-10px);
-  transform: translateY(-10px);
+  transform: -webkit- translateY(-0.625rem);
+  transform: translateY(-0.625rem);
   pointer-events: none;
 }
 .itemControl div.inputs div.sub {
-  padding-left: 10px;
-  margin-bottom: 20px;
+  padding-left: 0.625rem;
+  margin-bottom: 1.25rem;
   border-left-style: solid;
-  border-left-width: 5px;
+  border-left-width: 0.3125rem;
   border-left-color: #eee;
 }
 .itemControl.open {
@@ -103,19 +103,19 @@
 .itemControl.open div.inputs {
   display: block;
   opacity: 0.8;
-  transform: -webkit- translateY(0px);
-  transform: translateY(0px);
+  transform: -webkit- translateY(0rem);
+  transform: translateY(0rem);
   pointer-events: auto;
 }
 .components-panel div.sub {
-  padding-left: 10px;
-  margin-bottom: 20px;
+  padding-left: 0.625rem;
+  margin-bottom: 1.25rem;
   border-left-style: solid;
-  border-left-width: 5px;
+  border-left-width: 0.3125rem;
   border-left-color: #eee;
 }
 .components-panel img.selectImage {
-  width: 100px;
+  width: 6.25rem;
   height: auto;
 }
 .selectButtons {
@@ -129,14 +129,14 @@
 }
 .embedded_content > .label {
   position: absolute;
-  right: 0px;
-  top: 0px;
+  right: 0rem;
+  top: 0rem;
   padding: 0.5rem 1rem;
   z-index: 10;
   background-color: #f8f8f8;
   text-align: center;
   font-size: 1rem;
-  line-height: 10px;
+  line-height: 0.625rem;
   font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   font-weight: 400;
   color: #444;
@@ -147,21 +147,21 @@
   min-height: 5rem;
   height: auto;
   padding-top: 2rem;
-  margin: 0px auto;
+  margin: 0rem auto;
   border-style: solid;
-  border-width: 1px;
+  border-width: 0.0625rem;
   border-color: #a2a2a2;
 }
 .alt_content > .label {
   position: absolute;
-  right: 0px;
-  top: 0px;
+  right: 0rem;
+  top: 0rem;
   padding: 0.25em;
   z-index: 10;
   background-color: #007cba;
   text-align: center;
   font-size: 1.2rem;
-  line-height: 10px;
+  line-height: 0.625rem;
   font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   font-weight: 400;
   color: #f8f8f8;
@@ -175,7 +175,7 @@
   width: 2rem;
   height: 2rem;
   border-style: solid;
-  border-width: 1px;
+  border-width: 0.0625rem;
   border-color: #dadada;
 }
 .selectPosition td.active {
@@ -196,30 +196,30 @@
 }
 .SelectPictureSources td > .label {
   position: absolute;
-  right: 0px;
-  top: 0px;
+  right: 0rem;
+  top: 0rem;
   padding: 0.25em;
   z-index: 10;
   background-color: #007cba;
   text-align: center;
   font-size: 1.2rem;
-  line-height: 10px;
+  line-height: 0.625rem;
   font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   font-weight: 400;
   color: #f8f8f8;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 .selectColor {
-  width: 220px;
+  width: 13.75rem;
   list-style: none;
 }
 .selectColor li {
   display: inline-block;
   position: relative;
-  width: 20px;
-  height: 20px;
-  margin: 5px;
-  border-radius: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0.3125rem;
+  border-radius: 1.25rem;
   cursor: pointer;
 }
 .selectColor li.fillColor0 {
@@ -229,11 +229,11 @@
   content: ' ';
   display: block;
   position: absolute;
-  top: 1px;
-  bottom: 1px;
-  left: 1px;
-  right: 1px;
-  border-radius: 20px;
+  top: 0.0625rem;
+  bottom: 0.0625rem;
+  left: 0.0625rem;
+  right: 0.0625rem;
+  border-radius: 1.25rem;
   background-color: #f8f8f8;
 }
 .selectColor li.active::after {
@@ -254,7 +254,7 @@
   flex-shrink: 1;
   flex-basis: 30%;
   padding-top: 30%;
-  margin: 0px;
+  margin: 0rem;
   background-color: #a2a2a2;
   background-size: 50% auto;
   cursor: pointer;
@@ -271,7 +271,7 @@
   flex-wrap: wrap;
   background-color: #dadada;
   border-style: solid;
-  border-width: 1px;
+  border-width: 0.0625rem;
   border-color: #ececec;
 }
 .selectPreparedImage .item {
@@ -298,7 +298,7 @@
   flex-wrap: wrap;
   background-color: #dadada;
   border-style: solid;
-  border-width: 1px;
+  border-width: 0.0625rem;
   border-color: #ececec;
 }
 .selectPreparedImageSet .item {
@@ -317,7 +317,7 @@
   background-color: #007cba;
 }
 .selectGridButtons {
-  margin: 0px;
+  margin: 0rem;
 }
 .selectGridButtons.col2 {
   display: -webkit-box;
@@ -432,13 +432,13 @@
 }
 .selectGridButtons .item {
   padding: 1rem 0.5rem;
-  margin: 0px 0px -1px -1px;
+  margin: 0rem 0rem -0.0625rem -0.0625rem;
   box-sizing: border-box;
   border-style: solid;
-  border-width: 1px;
+  border-width: 0.0625rem;
   border-color: #444;
   text-align: center;
-  font-size: 13px;
+  font-size: 0.8125rem;
   line-height: 1em;
   color: #444;
   cursor: pointer;
@@ -458,7 +458,7 @@
   max-width: 30em;
   width: auto;
   border-style: solid;
-  border-width: 1px;
+  border-width: 0.0625rem;
   border-color: #a2a2a2;
   font-size: 1.2rem;
 }
@@ -476,15 +476,15 @@
   width: 10rem;
 }
 .dataStructure .item {
-  padding: 0px;
-  margin: 0px;
+  padding: 0rem;
+  margin: 0rem;
 }
 .dataStructure .item .title {
-  padding: 0.1em 0px;
+  padding: 0.1em 0rem;
   padding-left: 1em;
   position: relative;
-  margin: 0px;
-  font-size: 12px;
+  margin: 0rem;
+  font-size: 0.75rem;
   font-weight: 400;
   cursor: pointer;
 }
@@ -499,8 +499,8 @@
   display: block;
   position: absolute;
   top: 0.3em;
-  bottom: 0px;
-  left: 0px;
+  bottom: 0rem;
+  left: 0rem;
   margin: auto;
   font-size: 0.7em;
   color: #a2a2a2;
