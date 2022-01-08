@@ -140,9 +140,13 @@ registerBlockType('catpow/formbuttons', {
     items.map(function (item, index) {
       var itemStates = CP.wordsToFlags(item.classes);
       var eventDispatcherAttributes = {};
-      blockType.attributes.items.eventDispatcherAttributes.map(function (attr_name) {
-        eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute] = item[attr_name];
-      });
+
+      if (blockType.attributes.items.eventDispatcherAttributes) {
+        blockType.attributes.items.eventDispatcherAttributes.map(function (attr_name) {
+          eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute] = item[attr_name];
+        });
+      }
+
       rtn.push(wp.element.createElement("li", {
         className: item.classes
       }, wp.element.createElement("div", babelHelpers.extends({

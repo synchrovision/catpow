@@ -109,9 +109,11 @@
 		items.map((item,index)=>{
 			const itemStates=CP.wordsToFlags(item.classes);
 			const eventDispatcherAttributes={};
-			blockType.attributes.items.eventDispatcherAttributes.map((attr_name)=>{
-				eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute]=item[attr_name];
-			});
+			if(blockType.attributes.items.eventDispatcherAttributes){
+				blockType.attributes.items.eventDispatcherAttributes.map((attr_name)=>{
+					eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute]=item[attr_name];
+				});
+			}
 			rtn.push(
 				<li className={item.classes}>
 					<div
