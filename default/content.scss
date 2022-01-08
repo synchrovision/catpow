@@ -1,45 +1,44 @@
 @import 'admin_style_config.scss';
 
 html{
-	@include txt((p:10));
 	@media(#{bp(-1)}){
-		@include txt((p:2.5vw));
+		@include txt((p:2vw));
 	}
 }
 #{sel(m e u)}{
 	h2{
 		&.title{
-			@include bnd((w:a 960,mg:5rem a 4rem,pd:.5rem,pdl:5rem,cl:b));
-			@include bg((i:'images/icon_pref_h2.png',p:0% 50%,r:n,s:4.5rem 5rem));
+			@include bnd((w:a 960,mg:50 a 40,pd:5,pdl:50,cl:b));
+			@include bg((i:'images/icon_pref_h2.png',p:0% 50%,r:n,s:45 50));
 			@include bdr((p:b,s:s,w:2,c:a));
-			@include txt((p:2.6rem,h:1.5em,f:g,s:r,c:t));
+			@include txt((p:26,h:1.5em,f:g,s:r,c:t));
 		}
 	}
 	article{
 	}
 	section{
 		&.wp-block-catpow-section{
-			@include bnd((d:b,mg:10rem a));
+			@include bnd((d:b,mg:100 a));
 			&>.contents{
-				@include bnd((w:95% 96rem,mg:2rem a,p:r));
+				@include bnd((w:95% 960,mg:20 a,p:r));
 				&>header{
 					@include bnd((p:r));
 					h2{
-						@include bnd((pdb:.5rem,mgb:2rem,bs:b));
+						@include bnd((pdb:5,mgb:20,bs:b));
 						@include bdr((p:b,s:s,w:1,c:a));
-						@include txt((a:l,p:2rem,h:2em,f:g,s:b,c:a));
+						@include txt((a:l,p:20,h:2em,f:g,s:b,c:a));
 					}
 					p{
-						@include bnd((mg:2rem));
-						@include txt((a:j,p:1.5rem,h:2em,f:g,w:m,c:t));
+						@include bnd((mg:20));
+						@include txt((a:j,p:15,h:2em,f:g,w:m,c:t));
 					}
 				}
 				&>.text{
-					@include txt((p:1.4rem,h:2em));
+					@include txt((p:14,h:2em));
 				}
 			}
 			&.hasBackgroundImage{
-				@include bnd((p:r,pd:5rem 0));
+				@include bnd((p:r,pd:50 0));
 				@include bg((s:auto 100vh,p:c));
 				&::before{
 					content: ' ';
@@ -59,7 +58,7 @@ html{
 					}
 				}
 				.contents{
-					@include bnd((f:2 2 300,bs:b,pd:2rem));
+					@include bnd((f:2 2 300,bs:b,pd:20));
 					@include bg((c:b));
 				}
 			}
@@ -67,30 +66,30 @@ html{
 				&>.contents{
 					&>header{
 						&>.image{
-							@include bnd((d:b,p:a,w:4rem,h:4rem,t:-.5rem,l:-.5rem,z:1));
+							@include bnd((d:b,p:a,w:40,h:40,t:-5,l:-5,z:1));
 							img{
-								@include bnd((w:4rem,h:a));
+								@include bnd((w:40,h:a));
 								@include bnd((p:a,b:0));
 							}
 						}
 						h2{
-							@include bnd((pdl:5rem));
+							@include bnd((pdl:50));
 						}
 					}
 				}
 			}
 			&.scene{
-				@include bnd((pd:5rem 0));
+				@include bnd((pd:50 0));
 				@include bg((c:b));
 				@include shd((b:-5));
 				&>.contents{
-					@include bnd((w:f f,mg:2rem a,p:r));
+					@include bnd((w:f f,mg:20 a,p:r));
 					&>header{
 						h2{
-							@include bnd((pd:5rem 1rem,p:r));
+							@include bnd((pd:50 10,p:r));
 							@include bg((c:b));
 							@include bdr((p:t b,s:s,w:3,c:m));
-							@include txt((a:c,p:3rem,c:a,b:k));
+							@include txt((a:c,p:30,c:a,b:k));
 						}
 						p{
 							@include txt((a:c));
@@ -107,29 +106,29 @@ html{
 			}
 		}
 		&.search{
-			@include bnd((d:b,p:r,mg:5rem a,pd:2rem,o:h));
+			@include bnd((d:b,p:r,mg:50 a,pd:20,o:h));
 			@include bdr((p:t b,s:s,w:1,c:b 50));
 			@include bg((c:b 1 .5));
 			&::before{
 				@include ico('search');
-				@include bnd((d:b,p:a,l:-10rem,t:-10rem,z:-1));
-				@include txt((p:60rem,c:t 1 .1));
+				@include bnd((d:b,p:a,l:-100,t:-100,z:-1));
+				@include txt((p:600,c:t 1 .1));
 			}
 			&>.contents{
-				@include bnd((p:r,w:f 96rem,mg:0 a,pd:2rem,bs:b));
+				@include bnd((p:r,w:f 960,mg:0 a,pd:20,bs:b));
 				&>header{
 					@include bnd((p:r));
 					h2{
-						@include bnd((pdb:.5rem,mgb:1rem,bs:b));
+						@include bnd((pdb:5,mgb:10,bs:b));
 						@include bdr((p:b,s:s,w:1,c:a));
-						@include txt((a:l,p:2rem,h:1.5em,f:g,s:b,c:a));
+						@include txt((a:l,p:20,h:1.5em,f:g,s:b,c:a));
 						&::before{
 							@include ico('search');
-							@include bnd((d:ib,mgr:1rem));
+							@include bnd((d:ib,mgr:10));
 						}
 					}
 					p{
-						@include txt((a:j,p:1.5rem,h:1.5em,f:g,s:b,c:t));
+						@include txt((a:j,p:15,h:1.5em,f:g,s:b,c:t));
 					}
 				}
 				&>.text{
@@ -138,15 +137,15 @@ html{
 			}
 		}
 		&.notice{
-			@include bnd((w:90% 90rem,mg:2rem a));
-			@include bdr((s:s,w:1,c:t 1 .5,r:1rem));
+			@include bnd((w:90% 900,mg:20 a));
+			@include bdr((s:s,w:1,c:t 1 .5,r:10));
 			@include bg((c:b 1 .8));
 			&>.contents{
-				@include bnd((w:a,mg:0,pd:1rem 2rem));
+				@include bnd((w:a,mg:0,pd:10 20));
 				&>header{
 					h2{
-						@include bnd((mg:.5rem 0,pd:.5rem 0));
-						@include txt((p:1.5rem));
+						@include bnd((mg:5 0,pd:5 0));
+						@include txt((p:15));
 					}
 				}
 			}
@@ -168,11 +167,11 @@ html{
 			.message{
                 @include usr((e:n));
                 .text{
-                    @include bnd((pd:3 5,w:80%,mg:1rem a));
+                    @include bnd((pd:3 5,w:80%,mg:10 a));
                     @include bg((c:m));
                     @include bdr((r:3));
                     @include shd((b:1));
-                    @include txt((a:c,c:i,p:1.1rem,h:1.5em));
+                    @include txt((a:c,c:i,p:11,h:1.5em));
                     @include trn((t:1s,ty:0,o:1));
                     &:after{
                         content: '　';
@@ -192,10 +191,10 @@ html{
 		&.cp-meta-item{
 			@include bnd((p:r,pd:5));
 			&.multiple-item{
-				@include bnd((mg:.5rem,pd:.5rem));
+				@include bnd((mg:5,pd:5));
 				@include bdr((s:s,w:1,c:t 1 .5,r:5));
 				&>.cp-meta-unit{
-					@include bnd((p:r,mg:.5rem,pd:.5rem));
+					@include bnd((p:r,mg:5,pd:5));
 					@include bdr((s:s,w:1,c:t 1 .2,r:5));
 					.multiple-input-buttons{
 						@include bnd((p:a,t:0,r:0,pd:1 3));
@@ -203,8 +202,8 @@ html{
 						@include bdr((r:0 4 0 4));
 						@include txt((h:10));
 						.btn-inc,.btn-dec{
-							@include bnd((d:ib,mg:.3rem));
-							@include txt((p:1.3rem,h:1em,f:e,a:c,c:b 1 .5));
+							@include bnd((d:ib,mg:3));
+							@include txt((p:13,h:1em,f:e,a:c,c:b 1 .5));
 							@include trn((t:.5s));
 							@include usr((c:p));
 							&:hover{
@@ -245,8 +244,8 @@ html{
 			}
 			
 			fieldset{
-				@include bnd((mg:1rem 0,pd:1rem));
-				@include bdr((s:s,w:1,c:t 1 .3,r:.5rem));
+				@include bnd((mg:10 0,pd:10));
+				@include bdr((s:s,w:1,c:t 1 .3,r:5));
 				legend{
 					@include txt((c:t 1 .3));
 				}
@@ -259,7 +258,7 @@ html{
                 @include bnd((w:120));
             }
 			img.ajax_upload_media{
-				@include bnd((w:10rem,h:a));
+				@include bnd((w:100,h:a));
 			}
 			span.pdf{
 				@include bnd((d:ib,w:160,h:230,o:h));
@@ -277,14 +276,14 @@ html{
 			label{
 				@include bnd((d:ib,pd:3,mg:3));
 				@include bg((c:b));
-				@include txt((p:1.3rem,h:1em,c:t 40));
+				@include txt((p:13,h:1em,c:t 40));
 				@include trn((t:.5s));
 				@include usr((c:p));
 				&.checkbox,&.radio{
 					@include bnd((d:ib,mg:.3em,pd:.3em 1em));
 					@include bg((c:m 1 0));
 					@include bdr((s:s,w:1,c:t 1 .5,r:1em));
-					@include txt((p:1.2rem,h:1em,f:g,w:m,c:t 1 .5));
+					@include txt((p:1.20,h:1em,f:g,w:m,c:t 1 .5));
 					&:before{
 						@include bnd((d:ib,mgr:5));
 						@include txt((c:t 1 .5));
@@ -341,56 +340,21 @@ html{
 				}
 			}
 		}
-		&.cp_lightbox_container{
-			@include bnd((p:f,t:0,l:0,z:100000,w:100vw,h:100vh,pd:20,bs:b));
-			@include bg((c:$shd));
-			@include trn((t:1s opacity,o:0,bf:h));
-			@include usr((e:n));
-			.cp_lightbox_content{
-				@include bnd((w:a 960,p:r,h:f,bs:b,pd:20,mg:0 a,oy:a));
-				@include bg((c:b));
-				@include trn((bf:h));
-                ul.buttons.cp_lightbox_control{
-                    @include bnd((p:f,r:5,t:5,mg:0,pd:0));
-                    @media(#{bp(2)}){
-                        @include bnd((r:calc(50vw - 520px)));
-                    }
-                    li{
-                        .button{
-                            @include bnd((pd:3 5));
-                            @include txt((p:32,h:32));
-                            @include shd((b:3));
-                            @include bdr((s:n,r:20));
-                            &::before{
-                                @include bnd((d:ib,mgr:0));
-                            }
-                        }
-                    }
-                }
-			}
-			&.active{
-				@include trn((o:1));
-				@include usr((e:a));
-				.content{
-
-				}
-			}
-		}
 		&.products{
-			@include bnd((mg:5rem a));
+			@include bnd((mg:50 a));
 			@include flx((w:w));
 			&>.cp_form_section{
-				@include bnd((f:1 1 25rem,pd:1rem,bs:b,mg:1rem));
+				@include bnd((f:1 1 250,pd:10,bs:b,mg:10));
 				@include bg((c:b 1 .6));
 				@include bdr((s:s,w:1,c:t 1 .5,r:10));
 				h3{
-					@include txt((a:l,p:1.6rem,h:1.5em,f:g,w:b,c:t));
+					@include txt((a:l,p:16,h:1.5em,f:g,w:b,c:t));
 				}
 				p{
-					@include bnd((d:b,pd:2rem 1rem));
+					@include bnd((d:b,pd:20 10));
 					@include txt((a:r));
 					.price{
-						@include txt((a:c,p:2rem,h:1rem,f:g,w:b,c:a));
+						@include txt((a:c,p:20,h:10,f:g,w:b,c:a));
 						.unit{
 							@include txt((p:.7em,c:t));
 						}
@@ -401,11 +365,11 @@ html{
 				}
 			}
 			&>.spacer{
-				@include bnd((f:1 1 25rem,mg:0 1rem));
+				@include bnd((f:1 1 250,mg:0 10));
 			}
 		}
 		&.gmap{
-			@include bnd((h:20rem));
+			@include bnd((h:200));
 		}
 		&.table_wrapper{
 			@include bnd((ox:a));
@@ -428,261 +392,6 @@ html{
 		}
 	}
 	ul{
-		*{@include txt((c:t));}
-		&.wp-block-catpow-slick{
-			&.mv{
-				button.slick-arrow{
-					@include bnd((z:100));
-					&.slick-prev{
-						@include bnd((l:1rem));
-					}
-					&.slick-next{
-						@include bnd((r:1rem));
-					}
-				}
-				li.item{
-					@include bnd((h:30rem a));
-					@include bg((p:c,s:cvr));
-					@include flx((a:f));
-					.text{
-						@include bnd((f:1 1 10rem));
-						@include bg((c:#000 1 .5));
-						@include txt((v:m));
-						@include flx((w:w,v:c));
-						h3{
-							@include bnd((f:1 1 90%,pd:0 4rem,bs:b));
-							@include txt((a:c,p:4rem,h:1.5em,f:g,fw:800,s:b,c:#fff,b:k));
-							@include shd((t:5));
-						}
-						h4{
-							@include bnd((f:1 1 90%,pd:0 4rem,bs:b));
-							@include txt((a:c,p:2rem,h:1.5em,f:g,s:b,c:#fff,b:k));
-							@include shd((t:3));
-						}
-						p{
-							@include bnd((f:1 1 90%,pd:0 4rem,bs:b));
-							@include txt((a:c,p:1.5rem,h:1.5em,f:g,s:r,c:#fff,b:k));
-							@include shd((t:2));
-						}
-						@media(#{bp(2)}){
-							h3{@include txt((p:6rem));}
-						}
-					}
-					&.slick-slide{
-						.text{
-							h3{
-								@include trn((t:.5s,o:0,y:2rem));
-							}
-							h4{
-								@include trn((t:.5s .5s,o:0,y:-1rem));
-							}
-							p{
-								@include trn((t:.5s .5s,o:0,y:-1rem));
-							}
-						}
-						&.slick-current{
-							.text{
-								h3,h4,p{
-									@include trn((o:1,y:0));
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		&.wp-block-catpow-listed{
-			&.service{
-				@include bnd((d:b,w:90% 96rem,mg:3rem a));
-				@include flx((w:w));
-				@include txt((l:n));
-				li{
-					@include bnd((pd:1rem .5rem,bs:b,f:1 1 20rem));
-					h3{
-						@include txt((a:l,p:2rem,h:1.5em,f:g,fw:900,c:a));
-						&::before{
-							@include bnd((d:ib,mgr:.5em));
-							@include ico('chevron-circle-right');
-						}
-					}
-					.contents{
-						@include flx((w:w));
-						.image{
-							@include bnd((pd:1rem .5rem,bs:b,f:1 1 10rem));
-							img{@include bnd((w:f,h:a));}
-						}
-						.text{
-							@include bnd((pd:1rem .5rem,bs:b,f:2 2 16rem));
-							h4{
-								@include bnd((mgb:.5em,pdb:.5em));
-								@include bdr((p:b,s:d,w:1,c:t));
-								@include txt((a:j,p:1.3rem,h:1.5em,f:g,s:b,c:t));
-							}
-							p{
-								@include txt((a:j,p:1rem,h:1.5em,f:g,s:r,c:t));
-							}
-							.link{
-								a{
-									@include bnd((d:ib,p:r,mg:1rem .5rem,pd:.5rem 1rem));
-									@include bg((c:m));
-									@include bdr((r:1rem));
-									@include txt((a:l,p:1.2rem,h:1em,f:g,s:r,c:#fff));
-									&::before{
-										@include bnd((d:ib,mgr:.5em));
-										@include ico('chevron-circle-right');
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-			&.news{
-				@include bnd((d:b,p:r,c:40rem));
-				@include txt((l:n));
-				li{
-					@include bnd((pd:0 1rem,bi:a));
-					.contents{
-						.text{
-							@include bnd((pd:1rem 0));
-							@include bdr((p:b,s:s,w:1,c:#666));
-							@include flx((w:w));
-							h4{
-								@include bnd((mg:0,pd:0,f:1 1 10rem));
-								@include txt((a:l,p:1.3rem,h:1.5em,f:g,s:r,c:t));
-							}
-							p{
-								@include bnd((mg:0,pd:0,f:3 3 30rem));
-								@include txt((a:l,p:1.3rem,h:1.5em,f:g,s:r,c:t));
-							}
-						}
-					}
-				}
-			}
-			&.flowchart{
-				@include bnd((mg:3rem a));
-				@include txt((l:n));
-				li.item{
-					@include bnd((p:r,pd:1rem,mg:0 a,bs:b,w:a 80rem));
-					&>header{
-						@include bnd((p:a,t:0,l:0,w:15rem,h:15rem,mg:1rem,bs:b));
-						@include bdr((s:s,w:1,c:m,r:10rem));
-						@include bg((c:m));
-						@include flx((w:w,v:c));
-						@include shd((b:3));
-						&>*{
-							@include bnd((f:1 1 90%));
-						}
-						.counter{
-							@include bnd((pdb:.5rem,mgb:.5rem));
-							@include bdr((p:b,s:s,w:1,c:m 50));
-							@include txt((a:c,p:4rem,h:1em,f:e,s:r,c:t));
-							.prefix{
-								@include bnd((d:b));
-								@include txt((p:1.5rem,h:1em));
-							}
-						}
-						h3{
-							@include bnd((h:3em));
-							@include txt((a:c,p:1.5rem,h:1.5em,f:g,w:b,c:t,b:w));
-						}
-					}
-					.contents{
-						@include bnd((pd:13rem 2rem 2rem,h:16rem a));
-						@include flx((w:w));
-						@media(#{bp(2)}){
-							@include bnd((pd:0 0 0 17rem));
-						}
-						.image{
-							@include bnd((f:1 1 15rem,pd:1rem,bs:b));
-							img{
-								@include bnd((w:f,h:a));
-								@include bdr((r:1em));
-							}
-						}
-						.text{
-							@include bnd((f:3 3 35rem,pd:1rem,bs:b));
-							@include txt((a:j,p:1.3rem,h:1.5em,f:g,s:r,c:t));
-						}
-					}
-				}
-				li.spacer{
-					@include bnd((f:1 1 20rem));
-				}
-			}
-			&.checklist{
-				@include bnd((d:b,p:r,mg:0,pd:10));
-				@include txt((l:n));
-				li{
-					@include bnd((d:b,p:r,mg:1rem 0,pd:0 0 0 2rem));
-					@include txt((a:j,p:1.2rem,h:1.5em,f:g,s:r,c:t));
-					&::before{
-						@include ico('check-circle');
-						@include bnd((d:b,p:a,t:0,l:0));
-					}
-				}
-			}
-			&.panel{
-				@include bnd((d:b,pd:0,mg:5rem 0));
-				@include bg((c:b 1 .9));
-				@include flx((w:w));
-				@include txt((l:n));
-				@include bdr((p:t l,s:s,w:1,c:t 1 .7));
-				li.item{
-					@include bnd((pd:0,bs:b,f:1 1 30rem));
-					@include bdr((p:b r,s:s,w:1,c:t 1 .7));
-					&>header{
-						@include bnd((pd:1rem));
-						@include bg((c:m 1 .5));
-						.counter{
-							@include txt((a:c));
-							.prefix{
-								@include bnd((mgr:.5em));
-								@include txt((a:c,p:2rem,h:1.5em,f:g,w:b,c:i));
-							}
-							.number{@include txt((a:c,p:3rem,h:1.5em,f:g,w:b,c:i));}
-						}
-						h3{
-							@include txt((a:c,p:2rem,h:1.5em,f:g,fw:900,c:i));
-						}
-					}
-					.contents{
-						@include bnd((pd:0));
-						@include flx((w:w));
-						.image{
-							@include bnd((pd:0,bs:b,f:1 1 15rem));
-							img{@include bnd((w:f,h:a));}
-						}
-						.text{
-							@include bnd((pd:1rem,bs:b,f:1 1 20rem));
-							h4{
-								@include bnd((mgb:.5em,pdb:.5em));
-								@include bdr((p:b,s:d,w:1,c:t));
-								@include txt((a:j,p:1.3rem,h:1.5em,f:g,s:b,c:t));
-							}
-							p{
-								@include txt((a:j,p:1.2rem,h:1.5em,f:g,s:r,c:t));
-							}
-							.link{
-								a{
-									@include bnd((d:ib,p:r,mg:1rem .5rem,pd:.5rem 1rem));
-									@include bg((c:m));
-									@include bdr((r:1rem));
-									@include txt((a:l,p:1.2rem,h:1em,f:g,s:r,c:#fff));
-									&::before{
-										@include bnd((d:ib,mgr:.5em));
-										@include ico('chevron-circle-right');
-									}
-								}
-							}
-						}
-					}
-				}
-				li.spacer{
-					@include bnd((f:1 1 30rem));
-				}
-			}
-		}
 		&.pagenate{
 			@include bnd((mg:20 10));
 			@include txt((a:c,l:n));
@@ -702,182 +411,11 @@ html{
 				}
 			}
 		}
-		&.buttons{
-			@include bnd((w:a,mg:20 a,pd:0));
-			@include flx((w:w,c:1));
-			@include txt((l:n));
-			@include bp((
-				1:(flx:(c:2)),
-				2:(flx:(c:3)),
-				3:(flx:(c:4))
-			));
-			li{
-                @include bnd((mg:0,pd:0));
-                @include bg((c:n));
-				.button{
-					@include bnd((d:b,p:r,h:a,mg:1rem,pd:.5em 1.5em));
-					@include bg((c:m));
-					@include bdr((r:5));
-					@include txt((a:c,p:2rem,c:i,f:g,s:b,t:.2em));
-					@include usr((c:p));
-					@include trn((t:.5s));
-                    @include shd((b:n));
-                    &::before{
-                        @include bnd((d:ib,mgr:5));
-                        @include txt((s:r,t:0));
-                    }
-				}
-				&.negative .button{
-					@include bg((c:t 25));
-				}
-				&.primary .button{
-					@include bg((c:a));
-				}
-                &.danger .button{
-                    @include bg((c:1 80));
-                }
-                &.play .button:before{
-                    @include ico('play');
-                }
-                &.next .button:before{
-                    @include ico('arrow-right');
-                }
-                &.back .button:before{
-                    @include ico('arrow-left');
-                }
-                &.file .button:before{
-                    @include ico('file');
-                }
-                &.home .button:before{
-                    @include ico('home');
-                }
-                &.trash .button:before{
-                    @include ico('trash');
-                }
-                &.cart .button:before{
-                    @include ico('shopping-cart');
-                }
-                &.mail .button:before{
-                    @include ico('envelope');
-                }
-                &.search .button:before{
-                    @include ico('search');
-                }
-                &.caution .button:before{
-                    @include ico('exclamation-triangle');
-                }
-                &.help .button:before{
-                    @include ico('question-circle');
-                }
-                &.open .button:before{
-                    @include ico('chevron-circle-right');
-                }
-                &.close .button:before{
-                    @include ico('times-circle');
-                }
-                &.plus .button:before{
-                    @include ico('plus-circle');
-                }
-                &.minus .button:before{
-                    @include ico('minus-circle');
-                }
-                &.refresh .button:before{
-                    @include ico('refresh');
-                }
-                &.edit .button:before{
-                    @include ico('pencil');
-                }
-                &.check .button:before{
-                    @include ico('check-circle');
-                }
-				small{
-					@include bnd((d:b,mg:10 20));
-					@include txt((p:11,c:t,f:g));
-				}
-			}
-			&:hover .button{
-				@include trn((o:.7));
-				&:hover{@include trn((o:1));}
-			}
-			&.ss{
-                @include bnd((mg:0));
-				&>li{
-					.button{
-						@include bnd((mg:2,pd:2 5));
-						@include bdr((r:3));
-						@include txt((p:1rem,h:1em));
-					}
-					i{
-						@include bnd((mgr:5));
-					}
-				}
-			}
-			&.s{
-                @include bnd((mg:5));
-				&>li{
-					.button{
-						@include bnd((mg:2,pd:4 8));
-						@include bdr((r:5));
-						@include txt((p:1.2rem,h:1.5em));
-					}
-					i{
-						@include bnd((mgr:5));
-					}
-				}
-			}
-			&.m{
-                @include bnd((mg:20));
-				&>li{
-					.button{
-						@include bnd((mg:5,pd:8));
-						@include bdr((r:5));
-						@include txt((p:2rem,h:1.5em));
-					}
-					i{
-						@include bnd((mgr:10));
-					}
-                }
-			}
-			&.l{
-                @include bnd((pd:30));
-				&>li{
-					.button{
-						@include bnd((mg:10,pd:12));
-						@include bdr((r:5));
-						@include txt((p:3rem,h:1.5em));
-					}
-					i{
-						@include bnd((mgr:10));
-					}
-				}
-			}
-			&.i{
-				@include bnd((mg:0 5,w:a,d:ib));
-				&>li{
-					@include bnd((d:ib));
-				}
-			}
-            &.left,&.center,&.right{
-                @include bnd((d:b));
-                &>li{
-                    @include bnd((d:ib));
-                }
-            }
-            &.left{
-                @include txt((a:l));
-            }
-            &.center{
-                @include txt((a:c));
-            }
-            &.right{
-                @include txt((a:r));
-            }
-		}
 		&.fx{
 			@include txt((l:n));
 			li{
 				&.item{
-					@include bnd((pd:.5rem,bs:b));
+					@include bnd((pd:5,bs:b));
 					@include flx((w:w,a:c));
 					@include bg((c:m 1 0));
 					@include bdr((p:b,s:d,w:2,c:t 1 .3));
@@ -887,114 +425,41 @@ html{
 						@include bg((c:m 1 .1));
 					}
 					h3{
-						@include bnd((f:1 1 10rem,pd:.5rem));
-						@include txt((p:1.6rem,h:1em,f:g,fw:800,c:t));
+						@include bnd((f:1 1 100,pd:5));
+						@include txt((p:16,h:1em,f:g,fw:800,c:t));
 						.image{
-							@include bnd((d:ib,mgr:1rem,w:3rem));
+							@include bnd((d:ib,mgr:10,w:30));
 							img{@include bnd((w:f,h:a));}
 						}
 					}
 					ul{
-						@include bnd((f:3 3 30rem,pd:1rem));
+						@include bnd((f:3 3 300,pd:10));
 						@include txt((l:n));
 						@include flx((w:w,a:b));
 						li{
-							@include bnd((f:1 1 20rem,pd:.5rem));
+							@include bnd((f:1 1 200,pd:5));
 							@include txt((a:l));
 							&>span,&>small{
 								@include txt((v:b,h:1em));
 							}
 							&>span.title{
-								@include txt((p:1.5rem,f:g,fw:800,c:t));
+								@include txt((p:15,f:g,fw:800,c:t));
 							}
 							&>span.price{
-								@include bnd((mg:0 .5em,w:10rem));
-								@include txt((p:2rem,f:g,fw:800,c:a));
+								@include bnd((mg:0 .5em,w:100));
+								@include txt((p:20,f:g,fw:800,c:a));
 							}
 							&>span.unit{
-								@include txt((p:1.3rem,f:g,fw:800,c:t));
+								@include txt((p:13,f:g,fw:800,c:t));
 							}
 							small{
 								@include bnd((d:ib));
-								@include txt((p:1.1rem,f:g,fw:400,c:t));
+								@include txt((p:11,f:g,fw:400,c:t));
 							}
 						}
 					}
 					.cp-meta-item{
 						@include bnd((d:ib));
-					}
-				}
-			}
-		}
-		&.rate{
-			@include bnd((pd:2rem,c:40rem));
-			@include txt((l:n));
-			li.item{
-				@include bnd((pd:1rem 0,mg:0 1rem,bi:a));
-				@include bdr((p:b,s:s,w:1,c:#666));
-				@include flx((w:w,a:c));
-				&.new{
-					h3::before{
-						content: '★';
-						@include txt((c:3));
-					}
-				}
-				&.high{
-					h3::before{
-						@include ico('arrow-up');
-						@include txt((c:1));
-					}
-				}
-				h3{
-					@include bnd((f:1 1 27rem,pd:0,mg:0));
-					@include txt((p:1.2rem,h:1em,f:g,w:m,c:t));
-					span.div{
-						@include bnd((d:ib,mgr:.5em,pd:3 .5rem));
-						@include bg((c:m));
-						@include bdr((r:1rem));
-						@include txt((p:1rem,h:1em,f:g,w:b,c:i));
-					}
-				}
-				p{
-					@include bnd((f:1 1 10rem,pd:0 1rem 0,mg:0,bs:b));
-					@include txt((a:r));
-					span.rate{
-						@include txt((p:1.3rem));
-						span.num{@include txt((p:1.8rem,h:1em,f:g,w:b,c:m));}
-					}
-				}
-				small{
-					@include bnd((f:1 1 90%));
-					@include txt((a:r,p:1rem));
-				}
-			}
-		}
-		&.shareholder_ticket{
-			@include bnd((d:b,p:r,mg:4rem 0));
-			@include flx((w:w));
-			@include txt((l:n));
-			li{
-				@include bnd((f:1 1 30rem,mg:2rem,pd:2rem));
-				@include bdr((s:s,w:1,c:t 1 .5,r:1rem));
-				@include flx((w:w));
-				.image{
-					@include bnd((f:1 1 10rem,pd:1rem,bs:b));
-					img{
-						@include bnd((w:f,h:a));
-					}
-				}
-				.text{
-					@include bnd((f:2 2 20rem,pd:1rem,bs:b));
-					h3{
-						@include txt((p:4rem,h:1em,f:g,w:m,c:t));
-					}
-					p{
-						span.price{
-							@include txt((p:4rem,h:1em,f:e,s:b,c:m));
-							span.unit{
-								@include txt((p:2rem,h:1em,f:g,s:b,c:m));
-							}
-						}
 					}
 				}
 			}
@@ -1006,19 +471,19 @@ html{
 			@include bnd((d:b,p:r,mg:0,pd:10));
 			@include txt((l:n));
 			li{
-				@include bnd((pd:1rem 0));
+				@include bnd((pd:10 0));
 				@include flx((w:w));
 				.image{
-					@include bnd((f:1 1 15rem,pd:1rem,bs:b));
+					@include bnd((f:1 1 150,pd:10,bs:b));
 					img{
 						@include bnd((w:f,h:a));
 					}
 				}
 				.text{
-					@include bnd((f:1 1 15rem,pd:1rem,bs:b));
+					@include bnd((f:1 1 150,pd:10,bs:b));
 					h3{
-						@include bnd((mgb:.5rem,pdb:.5rem));
-						@include txt((p:1.8rem,f:g,w:m,c:m));
+						@include bnd((mgb:5,pdb:5));
+						@include txt((p:18,f:g,w:m,c:m));
 						@include bdr((p:b,s:s,w:1,c:m));
 					}
 					div.address{
@@ -1027,7 +492,7 @@ html{
 					dl.info{
 						@include flx((w:w));
 						dt{
-							@include bnd((f:1 1 5rem));
+							@include bnd((f:1 1 50));
 						}
 						dd{
 							@include bnd((f:2 2 60%));
@@ -1035,71 +500,15 @@ html{
 					}
 				}
 				.map{
-					@include bnd((f:2 2 20rem,pd:1rem,bs:b));
+					@include bnd((f:2 2 200,pd:10,bs:b));
 				}
 			}
 		}
-		&.contact{
-			@include bnd((d:b,p:r,mg:10rem 1rem,pd:1rem));
-			@include bdr((s:s,w:1,c:t 1 .5,r:1rem));
-			@include txt((l:n));
-			@include flx((w:w));
-			li{
-				@include bnd((f:1 1 30rem,pd:1rem,bs:b));
-				h3{
-					@include bnd((mgb:.5rem,pdb:.5rem));
-					@include txt((p:1.8rem,f:g,w:m,c:m));
-					@include bdr((p:b,s:s,w:1,c:m));
-				}
-				div.tel{
-					a.tel{
-						@include txt((a:l,p:3rem,h:1em,f:g,w:b,c:m));
-					}
-
-				}
-			}
-		}
-	}
-	ol{
-	}
-	dl{
 	}
 	table{
 		*{@include txt((c:t));}
-		&.wp-block-catpow-simpletable{
-			@include tbl(());
-			@include bnd((w:95%,mg:50 a));
-			tbody{
-				tr{
-					th,td{
-						@include bnd((pd:10));
-						@include txt((a:l,p:15,h:1.5em,f:g));
-						@include bdr((p:b,s:s,w:1,c:t 1 .2));
-					}
-					th{
-						@include bnd((w:180));
-					}
-				}
-			}
-			@media(#{bp(-1)}){
-				tbody{
-					@include bnd((d:b));
-					tr{
-						@include bnd((d:b,pd:10 0));
-						@include bdr((p:b,s:s,w:1,c:t 1 .2));
-						th,td{
-							@include bnd((d:b,pd:5));
-							@include bdr((p:b,s:n));
-						}
-						th{
-							@include bnd((w:a));
-						}
-					}
-				}
-			}
-		}
 		&.inputs{
-			@include bnd((mg:4rem a,w:f 96rem));
+			@include bnd((mg:40 a,w:f 960));
 			@include tbl(());
 			&>thead>tr,&>tbody>tr{
 				&>th,&>td{
@@ -1110,7 +519,7 @@ html{
                     ));
 				}
 				&>th{
-					@include bnd((w:12rem));
+					@include bnd((w:120));
 					@include bg((c:m 1 .5));
 					@include txt((a:l,p:12,c:t 70,s:b));
 					@include bp((
@@ -1175,305 +584,8 @@ html{
 				}
 			}
 		}
-		&.calendar{
-			@include bnd((p:r,w:f));
-			@include tbl(());
-			&>caption{
-				@include bnd((pd:20 10));
-				@include txt((p:18,c:t 80));
-				.month{
-					@include txt((p:36));
-				}
-			}
-			&>thead{
-				&>tr{
-					&>th{
-						@include bnd((pd:2));
-						@include bg((c:m 80));
-						@include txt((a:c,p:12,c:b));
-						p{
-							@include bnd((mg:0));
-						}
-					}
-				}
-			}
-			&>tbody{
-				&>tr{
-					&>td{
-						@include bnd((p:r,w:14%,h:100 a,pd:5,bs:b));
-						@include bdr((s:s,w:1,c:t 10));
-						@include txt((v:t));
-						@include trn((t:.5s));
-						@include bp((
-							-2:(bnd:(pd:2,w:a,p:s),txt:(a:c))
-						));
-						&:hover{
-							@include bg((c:m 10));
-						}
-						p.date{
-							@include bnd((d:ib,pd:2 5,mg:0));
-							@include txt((p:16,h:16,c:t 80));
-                            @include bp((
-                                -2:(bnd:(d:b,pd:10 0))
-                            ));
-						}
-                        &>.cp_form_section{
-                            @include bp((
-                                -2:(
-                                    bnd:(p:a,l:2vw,w:96vw,pd:15,bs:b,z:1000),
-                                    bg:(c:b),
-                                    bdr:(r:5),
-                                    trn:(o:0,t:.5s),
-                                    shd:(b:10),
-                                    usr:(e:n)
-                                )
-                            ));
-                        }
-						&.event{
-							@include usr((c:p));
-                            @include bp((
-                                -2:(bg:(c:m 50))
-                            ));
-						}
-						&.holiday p.date{
-							@include bg((c:1 40));
-							@include bdr((r:10));
-							@include txt((c:b));
-                            @include bp((
-                                -2:(bg:(c:n),txt:(c:1))
-                            ));
-						}
-						p.holiday{
-							@include bnd((p:a,r:5,t:5,pd:2 5,mg:0));
-							@include bg((c:1 40));
-							@include bdr((r:10));
-							@include txt((p:10,h:10,c:b));
-							@include bp((
-								-2:(bnd:(d:n))
-							));
-						}
-						&.out_month{
-							p.date{
-								@include txt((c:t 20));
-							}
-						}
-                        ul.buttons{
-                            li{
-                                @include bnd((p:r));
-                                @include txt((a:c));
-                                div.button.diary{
-                                    @include bnd((pdl:15));
-                                    @include bp((
-                                        -2:(
-                                            bnd:(pd:4 8 4 15,mg:5 2),
-                                            txt:(p:15,h:15)
-                                        )
-                                    ));
-                                    &:before{
-                                        @include bnd((d:b,p:a,pd:4,w:14,h:14,t:-5,l:-12));
-                                        @include bg((c:inherit));
-                                        @include txt((a:c,p:14,h:14,c:b));
-                                        @include bdr((s:n,r:10));
-                                        @include shd((b:2));
-                                    }
-                                    &.normal:before{
-                                        content: '授';
-                                    }
-                                    &.self:before{
-                                        content: '自';
-                                    }
-                                    &.exam:before{
-                                        content: '試';
-                                    }
-                                    &.mock:before{
-                                        content: '模';
-                                    }
-                                    &.specific:before{
-                                        content: '特';
-                                    }
-                                    &.seminar:before{
-                                        content: 'セ';
-                                    }
-                                    &.reserved:after,&.canceled:after,&.attended:after{
-                                        @include bnd((d:b,p:a,pd:4,w:14,h:14,t:-5,r:-12));
-                                        @include txt((a:c,p:14,h:14,c:b));
-                                        @include bdr((s:n,r:10));
-                                        @include shd((b:2));
-                                    }
-                                    &.reserved:after{
-                                        @include bg((c:#d00));
-                                        content: '予';
-                                    }
-                                    &.attended:after{
-                                        @include bg((c:#00d));
-                                        content: '出';
-                                    }
-                                    &.canceled:after{
-                                        @include bg((c:#aaa));
-                                        content: 'キ';
-                                    }
-                                }
-                            }
-                        }
-						ul.cal-events{
-                            @include bnd((pd:5 15));
-                            @include txt((l:n));
-                            li{
-                                &>ul{
-                                    @include bnd((mg:0));
-                                }
-                            }
-						}
-						div.events{
-							div.event{
-								@include bnd((d:n));
-								label{
-									@include bnd((d:b,pd:2));
-									@include bdr((r:10));
-									@include bg((c:t 25));
-									@include txt((a:c,p:10,h:10,c:b));
-									@include trn((t:.5s));
-									input{
-										@include bnd((d:n));
-									}
-								}
-								&.active,&:hover{
-									@include bnd((d:b));
-									label{
-										@include bg((c:m));
-									}
-								}
-								@for $i from 0 through 12{
-									&.event#{$i}.active label,&.event#{$i}:hover label{
-										@include bg((c:$i));
-									}
-								}
-							}
-						}
-						&.event.active,&.event.forcus{
-							@include bp((
-								-2:(bg:(c:a))
-							));
-							p.date{
-								@include bp((
-									-2:(txt:(c:b))
-								));
-							}
-						}
-						&.event:hover{
-							div.events{
-								@include bp((
-									2:(
-										bnd:(d:b,p:a,w:100,t:30,l:0,z:100),
-										bg:(c:b),
-										bdr:(s:s,w:1,c:m,r:10),
-										shd:(b:1),
-									)
-								));
-								div.event{
-									@include bp((
-										2:(bnd:(d:b))
-									));
-								}
-							}
-						}
-						&.event.forcus{
-                            &>.cp_form_section{
-                                @include bp((
-                                    -2:(
-                                        trn:(o:1),
-                                        usr:(e:a)
-                                    )
-                                ));
-                            }
-						}
-					}
-				}
-			}
-		}
-		&.collect{
-			@include bnd((w:calc(100% - 20px),mg:10 a));
-			@include tbl(());
-			&>thead>tr,&>tbody>tr{
-				&>th,&>td{
-					@include bnd((pd:3));
-					@include bdr((s:s,w:1,c:t 10));
-				}
-				&>th{
-					@include bnd((w:150));
-					@include bg((c:m 10));
-					@include txt((a:c,p:12,c:t 70,s:b));
-					@include bp((
-						-1:(bnd:(d:b,w:a),txt:(a:c))
-					));
-				}
-				&>td{
-					@include bg((c:b));
-					@include txt((a:c,p:12,c:t 70,s:r));
-					@include bp((
-						-1:(bnd:(d:b,w:a),txt:(a:c))
-					));
-				}
-			}
-            &>tbody>tr>th{
-                @include bnd((w:150 a));
-            }
-		}
-		&.fx{
-			@include tbl(());
-			thead{
-				tr{
-					th{
-						@include txt((a:c,p:1.5rem,h:1em,f:g,w:b,c:t));
-						small{
-							@include txt((p:1.2rem,h:1em,f:g,w:r,c:t));
-						}
-					}
-				}
-			}
-			tbody{
-				tr{
-					@include bnd((f:1 1 30rem,pd:3rem,bs:b));
-					th,td{
-						@include bdr((p:b,s:s,w:1,c:t 1 .3));
-					}
-					th{
-						@include txt((a:l,p:1.5rem,h:1em,f:g,fw:800,c:t));
-						.image{
-							@include bnd((d:ib,mgr:1rem,w:3rem));
-							img{@include bnd((w:f,h:a));}
-						}
-					}
-					td{
-						@include txt((a:l));
-						input.numeric{
-							@include bnd((w:8rem));
-						}
-						&>span.title{
-							@include txt((p:1.3rem,f:g,fw:800,c:t));
-						}
-						&>span.price{
-							@include txt((p:2rem,f:g,fw:800,c:m));
-						}
-						&>span.unit{
-							@include txt((p:1.3rem,f:g,fw:800,c:t));
-						}
-						small{
-							@include bnd((d:ib,pd:.5rem));
-							&>span.price{
-								@include txt((p:1.1rem,f:g,fw:400,c:t));
-							}
-						}
-						.cp-meta-item{
-							@include bnd((d:ib));
-						}
-					}
-				}
-			}
-		}
 	}
 	form{
-		*{@include txt((c:t));}
 		&.cp_form{
             div.cp_form_nav{
                 @include bnd((d:b,p:f,t:60,l:0,w:f,bs:b,z:1000));
@@ -1488,12 +600,10 @@ html{
             }
 		}
 	}
-	img{
-	}
 	figure{
 		*{@include txt((c:t));}
 		&.wp-block-image{
-			@include bnd((d:b,w:f,mgb:5rem,cl:b));
+			@include bnd((d:b,w:f,mgb:50,cl:b));
 			img{
 				@include bnd((d:b,w:a f,h:a,mg:0 a));
 			}
@@ -1502,13 +612,13 @@ html{
 					@include bnd((w:40%));
 				}
 				&.alignleft{
-					@include bnd((mgr:2rem,fl:l));
+					@include bnd((mgr:20,fl:l));
 					&+*{
 						@include bnd((pdl:40%,bs:b));
 					}
 				}
 				&.alignright{
-					@include bnd((mgl:2rem,fl:r));
+					@include bnd((mgl:20,fl:r));
 					&+*{
 						@include bnd((pdr:40%,bs:b));
 					}
@@ -1563,23 +673,19 @@ html{
             @include bnd((d:ib,mg:0 3));
         }
 		&.icon{
-			@include bnd((d:ib,mg:0 .5rem,pd:.5rem));
+			@include bnd((d:ib,mg:0 5,pd:5));
 			@include bg((c:m));
-			@include bdr((r:.5rem));
-			@include txt((a:c,p:.8rem,h:1em,f:g,w:m,c:#fff,v:m));
+			@include bdr((r:5));
+			@include txt((a:c,p:8,h:1em,f:g,w:m,c:#fff,v:m));
 			&.high{@include bg((c:1));}
 			&.new{@include bg((c:8));}
 		}
-	}
-	strong{
-	}
-	small{
 	}
 	#{$sel_input_text},textarea{
 		@include bnd((pd:5,mg:0 5,bs:b));
 		@include bg((c:b));
 		@include bdr((s:s,w:1,c:t 1 .3));
-		@include txt((p:1.5rem,c:t));
+		@include txt((p:15,c:t));
 		&::placeholder{
 			@include txt((c:t 1 .3));
 		}
@@ -1611,10 +717,10 @@ html{
 			}
 		}
 		&.link{
-			@include bnd((d:ib,mg:0 5,pd:.3rem 1rem));
+			@include bnd((d:ib,mg:0 5,pd:3 10));
 			@include bg((c:m 1 .8));
-			@include bdr((r:1rem));
-			@include txt((p:1.4rem,h:1em,c:i));
+			@include bdr((r:10));
+			@include txt((p:14,h:1em,c:i));
 			@include trn((t:.5s));
 			&:before{
 				@include ico('chevron-circle-right');
@@ -1739,5 +845,148 @@ html{
 	[data-role="cp_form_section_submit"],
 	[data-role="cp_form_acion_submit"]{
 		@include usr((c:p));
+	}
+}
+
+
+.rtf,#editor .rtf{
+	&-title{
+		@include bnd((d:b));
+		&:not(:first-child){
+			@include bnd((mgt:1em));
+		}
+		&.iheader{
+			@include bnd((pdb:.25em,mgb:.5em));
+			@include bdr((p:b,s:s,w:1));
+		}
+		&.iheadline{
+			@include bnd((p:r,pd:0,pdl:1.5em,mgb:.5em));
+			@include txt((p:1.1em,h:1.5em));
+			&::before{
+				content:'';
+				@include bnd((d:b,p:a,t:.25em,l:0,w:1em,h:1em));
+				@include bg((c:m));
+			}
+			@include clr(){
+				&::before{
+					@include bg((c:$i));
+				}
+			}
+		}
+		&.icatch{
+			@include bnd((mgb:.5em));
+			@include txt((p:1.25em));
+		}
+	}
+	&-large{
+		@include bnd((d:ib));
+		@include txt((p:1.5em,w:b,c:m));
+		@include clr(){
+			@include txt((c:$i));
+		}
+	}
+	&-mark{
+		@include bg((c:m 20));
+		@include clr(){
+			@include bg((c:$i 20));
+		}
+	}
+	&-tag{
+		@include bnd((d:ib,pd:.2em 1em,mg:0 .2em));
+		@include bdr((r:1em));
+		@include bg((c:m));
+		@include txt((c:b,h:1em,s:n));
+		&:hover{
+			@include txt((c:b));
+		}
+		@include clr(){
+			@include bg((c:$i));
+		}
+		
+	}
+	&-annotation{
+		@include bnd((d:b,p:r,pdl:1.5em));
+		&::before{
+			content:'※';
+			@include bnd((d:b,p:a,t:0,l:0));
+		}
+	}
+}
+
+.cp_lightbox_container{
+	@include bnd((p:f,t:0,l:0,z:100000,w:100vw,h:100vh));
+	@include bg((c:#000 1 .6));
+	@include trn((t:.5s,o:1));
+	&:not(.active){
+		@include usr((e:n));
+		@include trn((o:0));
+	}
+	.cp_lightbox_content{
+		@include bnd((p:r,w:a 80rem,h:a 80vh,p:a,t:50%,l:50%,mg:a));
+		@include bg((c:b));
+		@include trn((y:-50%,x:-50%));
+		@include shd((b:10));
+		.cp_lightbox_group{
+			&:not(.active){
+				@include bnd((d:n));
+			}
+		}
+		.cp_lightbox_content_body{
+			@include bnd((w:f,h:f,oy:a));
+		}
+		.cp_lightbox_control{
+			.button{
+				@include bnd((mg:0,pd:0));
+				@include bdr((s:n));
+				@include bg((c:n));
+			}
+			.prev,.next{
+				@include bnd((d:n,p:a,b:-5rem,h:3rem,mg:a));
+				@include txt((p:2rem,c:b));
+				@include trn((o:.8));
+				&.active{@include bnd((d:b));}
+			}
+			.prev{
+				@include bnd((l:.5rem));
+				&::before{
+					content:'＜'
+				}
+			}
+			.next{
+				@include bnd((r:.5rem));
+				&::before{
+					content:'＞'
+				}
+			}
+			.close{
+				@include bnd((p:a,w:3rem,h:3rem,t:-5rem,r:1rem));
+				&::before,&::after{
+					content:'';
+					@include bnd((p:a,t:1.5rem,w:3rem,h:1));
+					@include bg((c:b));
+				}
+				&::before{
+					@include trn((r:45deg));
+				}
+				&::after{
+					@include trn((r:-45deg));
+				}
+			}
+			ul.dots{
+				@include bnd((p:a,b:-5rem,l:2rem,r:2rem));
+				@include txt((a:c));
+				li.dot{
+					@include bnd((d:ib,mg:.5rem,w:1rem,h:1rem));
+					@include bdr((s:s,c:b,w:1,r:1rem));
+					@include bg((c:b));
+					@include txt((v:m));
+					@include trn((o:.2));
+					&.active{
+						@include trn((o:1));
+					}
+				}
+
+			}
+		}
 	}
 }
