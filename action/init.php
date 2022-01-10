@@ -106,20 +106,22 @@ if(function_exists('register_block_type')){
 		}
 		return $args;
 	},10,2);
-	foreach(cp::get_file_urls('blocks') as $block_dir=>$block_url){
-		foreach(glob($block_dir.'/_init/*.js') as $format_script){
+	foreach(cp::get_file_urls('blocks/_init') as $block_init_dir=>$block_init_url){
+		foreach(glob($block_init_dir.'/*.js') as $format_script){
 			$fname=basename($format_script);
 			$code_name=substr(strstr($format_script,'/wp-content/'),12,-3);
-			wp_register_script($code_name,$block_url.'/_init/'.$fname,['wp-blocks','wp-i18n','wp-element','wp-editor','catpow']);
+			wp_register_script($code_name,$block_init_url.'/'.$fname,['wp-blocks','wp-i18n','wp-element','wp-editor','catpow']);
 			$deps['editor_script'][]=$code_name;
 		}
-		foreach(glob($block_dir.'/_init/*.css') as $format_style){
+		foreach(glob($block_init_dir.'/*.css') as $format_style){
 			$fname=basename($format_style);
 			$code_name=substr(strstr($format_style,'/wp-content/'),12,-4);
-			wp_register_style($code_name,$block_url.'/_init/'.$fname);
+			wp_register_style($code_name,$block_init_url.'/'.$fname);
 			$block_style_names[]='blocks/_init/'.substr($fname,0,-4);
 			$deps['editor_style'][]=$code_name;
 		}
+	}
+	foreach(cp::get_file_urls('blocks') as $block_dir=>$block_url){
 		foreach(glob($block_dir.'/*/editor_script.js') as $editor_script){
 			$block_name=basename(dirname($editor_script));
 			if(cp::$use_blocks && !in_array($block_name,cp::$use_blocks)){continue;}
