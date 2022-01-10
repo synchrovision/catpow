@@ -6,7 +6,7 @@ ul.wp-block-catpow-buttons li.item {
 ul.wp-block-catpow-buttons li.item .itemControl {
   position: absolute;
   top: -2rem;
-  right: 0px;
+  right: 0rem;
 }
 ul.wp-block-catpow-buttons li.item div.button {
   min-height: auto;
@@ -17,13 +17,13 @@ ul.wp-block-catpow-buttons li.item div.button .url {
   display: block;
   position: absolute;
   top: 100%;
-  left: 0px;
-  right: 0px;
+  left: 0rem;
+  right: 0rem;
   margin: auto;
-  padding: 3px;
-  font-size: 11px;
+  padding: 0.1875rem;
+  font-size: 0.6875rem;
   line-height: 1em;
-  letter-spacing: 0px;
+  letter-spacing: 0rem;
   color: #444;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }

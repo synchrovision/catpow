@@ -11,13 +11,13 @@ body table.wp-block-catpow-datatable thead tr th div.itemControl, body table.wp-
 body table.wp-block-catpow-datatable thead tr th div.itemControl.columnControl, body table.wp-block-catpow-datatable thead tr td div.itemControl.columnControl, body table.wp-block-catpow-datatable tbody tr th div.itemControl.columnControl, body table.wp-block-catpow-datatable tbody tr td div.itemControl.columnControl {
   position: absolute;
   bottom: -2rem;
-  left: 0px;
-  right: 0px;
+  left: 0rem;
+  right: 0rem;
   margin: auto;
 }
 body table.wp-block-catpow-datatable thead tr th div.itemControl.rowControl, body table.wp-block-catpow-datatable thead tr td div.itemControl.rowControl, body table.wp-block-catpow-datatable tbody tr th div.itemControl.rowControl, body table.wp-block-catpow-datatable tbody tr td div.itemControl.rowControl {
   position: absolute;
-  top: 0px;
+  top: 0rem;
   right: -6rem;
 }
 /*# sourceMappingURL=./editor_style.css.map */

@@ -36,8 +36,8 @@ div.wp-block-catpow-tabs[data-current-index="10"] [data-type="catpow/tabscontent
   display: block;
 }
 div.wp-block-catpow-tabs > ul.tab {
-  padding: 0px;
-  margin: 0px;
+  padding: 0rem;
+  margin: 0rem;
 }
 div.wp-block-catpow-tabs > ul.tab li.item {
   position: relative;
@@ -46,8 +46,8 @@ div.wp-block-catpow-tabs > ul.tab li.item .itemControl {
   width: 7rem;
   position: absolute;
   top: -2rem;
-  left: 0px;
-  right: 0px;
+  left: 0rem;
+  right: 0rem;
   margin: auto;
 }
 div.wp-block-catpow-tabs > .contents {

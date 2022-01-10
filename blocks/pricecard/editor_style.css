@@ -10,8 +10,8 @@ ul.wp-block-catpow-pricecard li.item .link {
 ul.wp-block-catpow-pricecard li.item .link .components-base-control {
   position: absolute;
   bottom: -4rem;
-  left: 0px;
-  right: 0px;
+  left: 0rem;
+  right: 0rem;
   margin: auto;
   color: #444;
 }

@@ -20,7 +20,7 @@ div.wp-block-catpow-slider ul.contents li div.itemControl {
 div.wp-block-catpow-slider.edit {
   padding: 2rem;
   border-style: solid;
-  border-width: 1px;
+  border-width: 0.0625rem;
   border-color: rgba(68, 68, 68, 0.5);
   border-radius: 1rem;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
@@ -34,7 +34,7 @@ div.wp-block-catpow-slider.edit ul.contents li {
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   border-bottom-style: solid;
-  border-bottom-width: 1px;
+  border-bottom-width: 0.0625rem;
   border-bottom-color: rgba(68, 68, 68, 0.5);
 }
 div.wp-block-catpow-slider.edit ul.contents li div.slide {

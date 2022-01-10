@@ -1,16 +1,16 @@
 @charset "utf-8";
 .wp-block-catpow-picture.alt_content {
-  padding-top: 0px;
+  padding-top: 0rem;
 }
 .wp-block-catpow-picture.alt_content.sp {
-  width: 375px;
+  width: 23.4375rem;
 }
 .wp-block-catpow-picture.alt_content.tb {
-  max-width: 750px;
+  max-width: 46.875rem;
   width: 100%;
 }
 .wp-block-catpow-picture.alt_content.lt {
-  max-width: 1125px;
+  max-width: 70.3125rem;
   width: 100%;
 }
 /*# sourceMappingURL=./editor_style.css.map */

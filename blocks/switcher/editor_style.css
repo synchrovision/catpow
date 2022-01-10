@@ -5,10 +5,10 @@
 }
 .switcherEdit > .tabs {
   position: absolute;
-  top: 0px;
-  right: 0px;
-  margin: 0px;
-  padding: 0px;
+  top: 0rem;
+  right: 0rem;
+  margin: 0rem;
+  padding: 0rem;
   z-index: 10;
   display: -webkit-box;
   display: -webkit-flex;
@@ -25,7 +25,7 @@
   flex-shrink: 0;
   flex-basis: auto;
   padding: 0.5rem 1rem;
-  margin: 0px;
+  margin: 0rem;
   text-align: center;
   font-size: 1.2rem;
   line-height: 1em;
@@ -43,7 +43,7 @@
 }
 .switcherEdit > .tabs > .tab + .tab {
   border-left-style: solid;
-  border-left-width: 1px;
+  border-left-width: 0.0625rem;
   border-left-color: rgba(0, 0, 0, 0.3);
 }
 .switcherEdit > .tabs > .tab.active {
@@ -51,8 +51,8 @@
   color: #fff;
 }
 .switcherEdit > .contents {
-  margin: 0px;
-  padding: 0px;
+  margin: 0rem;
+  padding: 0rem;
 }
 .switcherEdit [data-type="catpow/switchercontent"] {
   display: none;

@@ -6,11 +6,11 @@
   display: none;
 }
 .formBlock.editMode {
-  padding: 10px;
+  padding: 0.625rem;
   background-color: #ececec;
 }
 .formBlock.editMode > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block {
-  padding-bottom: 5px;
+  padding-bottom: 0.3125rem;
   background-color: #f8f8f8;
   box-shadow: 0 4px 9px rgba(0, 0, 0, 0.3);
 }

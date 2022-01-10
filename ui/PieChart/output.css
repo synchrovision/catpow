@@ -3,7 +3,7 @@
   display: block;
   max-width: 30rem;
   width: 100%;
-  margin: 0px auto;
+  margin: 0rem auto;
 }
 .PieChart svg path.color1, .PieChart svg rect.color1 {
   fill: #d65c5c;
