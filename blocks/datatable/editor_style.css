@@ -6,11 +6,11 @@ body table.wp-block-catpow-datatable thead tr th, body table.wp-block-catpow-dat
   position: relative;
 }
 body table.wp-block-catpow-datatable thead tr th div.itemControl, body table.wp-block-catpow-datatable thead tr td div.itemControl, body table.wp-block-catpow-datatable tbody tr th div.itemControl, body table.wp-block-catpow-datatable tbody tr td div.itemControl {
-  width: 7rem;
+  width: 4.375rem;
 }
 body table.wp-block-catpow-datatable thead tr th div.itemControl.columnControl, body table.wp-block-catpow-datatable thead tr td div.itemControl.columnControl, body table.wp-block-catpow-datatable tbody tr th div.itemControl.columnControl, body table.wp-block-catpow-datatable tbody tr td div.itemControl.columnControl {
   position: absolute;
-  bottom: -2rem;
+  bottom: -1.25rem;
   left: 0rem;
   right: 0rem;
   margin: auto;
@@ -18,6 +18,6 @@ body table.wp-block-catpow-datatable thead tr th div.itemControl.columnControl, 
 body table.wp-block-catpow-datatable thead tr th div.itemControl.rowControl, body table.wp-block-catpow-datatable thead tr td div.itemControl.rowControl, body table.wp-block-catpow-datatable tbody tr th div.itemControl.rowControl, body table.wp-block-catpow-datatable tbody tr td div.itemControl.rowControl {
   position: absolute;
   top: 0rem;
-  right: -6rem;
+  right: -3.75rem;
 }
 /*# sourceMappingURL=./editor_style.css.map */

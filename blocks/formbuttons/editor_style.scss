@@ -5,7 +5,7 @@
 		@include bnd((p:r));
 		@include txt((l:n));
 		.itemControl{
-			@include bnd((p:a,t:-2rem,r:0));
+			@include bnd((p:a,t:-20,r:0));
 		}
 		div.button{
 			.action{

@@ -2,15 +2,15 @@
 
 div.wp-block-catpow-sidebar{
 	&>.block-editor-inner-blocks{
-		@include bnd((f:1 1 60rem));
+		@include bnd((f:1 1 600));
 		&>.block-editor-block-list__layout{
 			@include flx((w:w));
 			&>.block-editor-block-list__block{
 				&[data-type="catpow/maincolumn"]{
-					@include bnd((f:10 10 30rem));
+					@include bnd((f:10 10 300));
 				}
 				&[data-type="catpow/sidecolumn"]{
-					@include bnd((f:0 0 24rem));
+					@include bnd((f:0 0 240));
 				}
 			}
 		}

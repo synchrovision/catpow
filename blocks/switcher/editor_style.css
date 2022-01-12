@@ -24,22 +24,22 @@
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: auto;
-  padding: 0.5rem 1rem;
+  padding: 0.3125rem 0.625rem;
   margin: 0rem;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 0.75rem;
   line-height: 1em;
   font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   list-style: none;
   cursor: pointer;
 }
 .switcherEdit > .tabs > .tab.icon {
-  padding: 0.25rem 0.5rem;
+  padding: 0.15625rem 0.3125rem;
 }
 .switcherEdit > .tabs > .tab.icon .dashicon {
-  width: 1.5rem;
-  height: 1.5rem;
-  font-size: 1.5rem;
+  width: 0.9375rem;
+  height: 0.9375rem;
+  font-size: 0.9375rem;
 }
 .switcherEdit > .tabs > .tab + .tab {
   border-left-style: solid;

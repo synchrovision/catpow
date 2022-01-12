@@ -6,7 +6,7 @@ table.wp-block-catpow-simpletable{
 		tr{
 			@include bnd((p:r));
 			.itemControl{
-				@include bnd((p:a,r:.5rem));
+				@include bnd((p:a,r:5));
 			}
 		}
 	}

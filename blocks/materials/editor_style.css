@@ -8,7 +8,7 @@
 .editor-styles-wrapper ul.wp-block-catpow-materials li.item.group > .itemControl {
   position: absolute;
   top: 0rem;
-  left: -8rem;
+  left: -5rem;
 }
 .editor-styles-wrapper ul.wp-block-catpow-materials li.item.group li.item {
   position: relative;
@@ -16,7 +16,7 @@
 .editor-styles-wrapper ul.wp-block-catpow-materials li.item.group li.item > .itemControl {
   position: absolute;
   top: 0rem;
-  right: -8rem;
+  right: -5rem;
 }
 .editor-styles-wrapper ul.wp-block-catpow-materials li.item.group > .link {
   position: absolute;

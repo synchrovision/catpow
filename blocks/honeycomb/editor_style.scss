@@ -3,7 +3,7 @@
 .wp-block-catpow-honeycomb{
 	.item{
 		.handlers{
-			@include bnd((d:b,p:a,t:-2rem,l:0rem,z:100));
+			@include bnd((d:b,p:a,t:-20,l:00,z:100));
 			.handler{
 				@include bnd((d:ib));
 				@include txt((c:m));

@@ -4,8 +4,8 @@ ul.wp-block-catpow-listed li.item {
 }
 ul.wp-block-catpow-listed li.item .itemControl {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: 0.3125rem;
+  right: 0.3125rem;
 }
 ul.wp-block-catpow-listed li.item > .link {
   min-width: 1em;
@@ -18,16 +18,16 @@ ul.wp-block-catpow-listed li.item > .link {
 }
 ul.wp-block-catpow-listed li.item > .link p {
   margin: 0rem;
-  padding: 0.2rem;
+  padding: 0.125rem;
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.625rem;
 }
 ul.wp-block-catpow-listed.edit {
-  padding: 2rem;
+  padding: 1.25rem;
   border-style: solid;
   border-width: 0.0625rem;
   border-color: rgba(68, 68, 68, 0.5);
-  border-radius: 1rem;
+  border-radius: 0.625rem;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
   background-color: #f8f8f8;
 }
@@ -40,11 +40,11 @@ ul.wp-block-catpow-listed.edit li.item {
   flex-wrap: wrap;
 }
 ul.wp-block-catpow-listed.edit li.item > .image {
-  padding: 0.5rem;
+  padding: 0.3125rem;
   -webkit-box-flex: 0;
   flex-grow: 0;
   flex-shrink: 0;
-  flex-basis: 10rem;
+  flex-basis: 6.25rem;
 }
 ul.wp-block-catpow-listed.edit li.item > .image img, ul.wp-block-catpow-listed.edit li.item > .image video {
   width: 100%;
@@ -54,7 +54,7 @@ ul.wp-block-catpow-listed.edit li.item > header {
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
-  flex-basis: 20rem;
+  flex-basis: 12.5rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -69,80 +69,80 @@ ul.wp-block-catpow-listed.edit li.item > header div.counter {
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 90%;
-  padding: 0.5rem;
+  padding: 0.3125rem;
   text-align: center;
 }
 ul.wp-block-catpow-listed.edit li.item > header div.counter span {
-  font-size: 1.1rem;
+  font-size: 0.6875rem;
   line-height: 1em;
   font-weight: 400;
   color: #36c;
 }
 ul.wp-block-catpow-listed.edit li.item > header div.counter span.number {
   display: inline-block;
-  margin: 0rem 0.5rem;
+  margin: 0rem 0.3125rem;
   font-size: 1.5em;
 }
 ul.wp-block-catpow-listed.edit li.item > header div.image {
-  padding: 0.5rem;
+  padding: 0.3125rem;
   -webkit-box-flex: 0;
   flex-grow: 0;
   flex-shrink: 0;
-  flex-basis: 5rem;
+  flex-basis: 3.125rem;
 }
 ul.wp-block-catpow-listed.edit li.item > header div.image img, ul.wp-block-catpow-listed.edit li.item > header div.image video {
   display: block;
   width: auto;
-  height: 4rem;
+  height: 2.5rem;
   margin: 0rem auto;
 }
 ul.wp-block-catpow-listed.edit li.item > header div.text {
-  padding: 0.5rem;
+  padding: 0.3125rem;
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
-  flex-basis: 10rem;
+  flex-basis: 6.25rem;
 }
 ul.wp-block-catpow-listed.edit li.item > header div.text h3 {
-  padding: 0.5rem;
+  padding: 0.3125rem;
   margin: 0rem;
   text-align: left;
-  font-size: 2rem;
+  font-size: 1.25rem;
   font-weight: 400;
   color: #36c;
 }
 ul.wp-block-catpow-listed.edit li.item > header div.text p {
-  padding: 1rem;
-  margin-top: 1rem;
+  padding: 0.625rem;
+  margin-top: 0.625rem;
   border-top-style: solid;
   border-top-width: 0.0625rem;
   border-top-color: #fff;
   text-align: justify;
-  font-size: 1.2rem;
+  font-size: 0.75rem;
   font-weight: 400;
   color: #007cba;
 }
 ul.wp-block-catpow-listed.edit li.item > .text {
-  padding: 1rem;
+  padding: 0.625rem;
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
-  flex-basis: 30rem;
+  flex-basis: 18.75rem;
 }
 ul.wp-block-catpow-listed.edit li.item > .text h4 {
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.5rem;
+  padding-bottom: 0.3125rem;
+  margin-bottom: 0.3125rem;
   border-bottom-style: dotted;
   border-bottom-width: 0.0625rem;
   border-bottom-color: #444;
   text-align: left;
-  font-size: 1.5rem;
+  font-size: 0.9375rem;
   font-weight: 400;
   color: #444;
 }
 ul.wp-block-catpow-listed.edit li.item > .text p {
   text-align: justify;
-  font-size: 1.2rem;
+  font-size: 0.75rem;
   font-weight: 400;
   color: #444;
 }

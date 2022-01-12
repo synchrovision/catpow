@@ -2,7 +2,7 @@
 .wp-block-catpow-honeycomb .item .handlers {
   display: block;
   position: absolute;
-  top: -2rem;
+  top: -1.25rem;
   left: 0rem;
   z-index: 100;
 }

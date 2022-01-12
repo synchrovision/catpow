@@ -4,8 +4,8 @@ ul.wp-block-catpow-banners li.item {
 }
 ul.wp-block-catpow-banners li.item .itemControl {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: 0.3125rem;
+  right: 0.3125rem;
 }
 ul.wp-block-catpow-banners li.item > .link {
   position: absolute;
@@ -17,7 +17,7 @@ ul.wp-block-catpow-banners li.item > .link {
 }
 ul.wp-block-catpow-banners li.item > .link p {
   margin: 0rem;
-  padding: 0.2rem;
-  font-size: 1rem;
+  padding: 0.125rem;
+  font-size: 0.625rem;
 }
 /*# sourceMappingURL=./editor_style.css.map */

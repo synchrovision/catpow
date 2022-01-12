@@ -4,8 +4,8 @@ ul.wp-block-catpow-pricelist li.item {
 }
 ul.wp-block-catpow-pricelist li.item .itemControl {
   position: absolute;
-  top: 1rem;
-  right: -8rem;
+  top: 0.625rem;
+  right: -5rem;
 }
 ul.wp-block-catpow-pricelist li.item > .link {
   position: absolute;

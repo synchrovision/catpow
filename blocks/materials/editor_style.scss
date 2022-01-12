@@ -6,12 +6,12 @@
 		li.item.group{
 			@include bnd((p:r));
 			&>.itemControl{
-				@include bnd((p:a,t:0,l:-8rem));
+				@include bnd((p:a,t:0,l:-80));
 			}
 			li.item{
 				@include bnd((p:r));
 				&>.itemControl{
-					@include bnd((p:a,t:0,r:-8rem));
+					@include bnd((p:a,t:0,r:-80));
 				}
 			}
 			&>.link{

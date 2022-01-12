@@ -7,9 +7,9 @@ body table.wp-block-catpow-datatable{
 			th,td{
 				@include bnd((p:r));
 				div.itemControl{
-					@include bnd((w:7rem));
-					&.columnControl{@include bnd((p:a,b:-2rem,l:0,r:0,mg:a));}
-					&.rowControl{@include bnd((p:a,t:0,r:-6rem));}
+					@include bnd((w:70));
+					&.columnControl{@include bnd((p:a,b:-20,l:0,r:0,mg:a));}
+					&.rowControl{@include bnd((p:a,t:0,r:-60));}
 				}
 			}
 		}

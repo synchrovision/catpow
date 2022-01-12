@@ -7,7 +7,7 @@
   font-size: 0.75rem;
   line-height: 0.625rem;
   background-color: #f8f8f8;
-  border-radius: 1rem;
+  border-radius: 0.625rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   display: -webkit-box;
   display: -webkit-flex;
@@ -123,19 +123,19 @@
 }
 .embedded_content {
   position: relative;
-  min-height: 5rem;
+  min-height: 3.125rem;
   height: auto;
-  padding-top: 2rem;
+  padding-top: 1.25rem;
 }
 .embedded_content > .label {
   position: absolute;
   right: 0rem;
   top: 0rem;
-  padding: 0.5rem 1rem;
+  padding: 0.3125rem 0.625rem;
   z-index: 10;
   background-color: #f8f8f8;
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.625rem;
   line-height: 0.625rem;
   font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   font-weight: 400;
@@ -144,9 +144,9 @@
 }
 .alt_content {
   position: relative;
-  min-height: 5rem;
+  min-height: 3.125rem;
   height: auto;
-  padding-top: 2rem;
+  padding-top: 1.25rem;
   margin: 0rem auto;
   border-style: solid;
   border-width: 0.0625rem;
@@ -160,7 +160,7 @@
   z-index: 10;
   background-color: #007cba;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 0.75rem;
   line-height: 0.625rem;
   font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   font-weight: 400;
@@ -172,8 +172,8 @@
   border-spacing: 0px;
 }
 .selectPosition td {
-  width: 2rem;
-  height: 2rem;
+  width: 1.25rem;
+  height: 1.25rem;
   border-style: solid;
   border-width: 0.0625rem;
   border-color: #dadada;
@@ -202,7 +202,7 @@
   z-index: 10;
   background-color: #007cba;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 0.75rem;
   line-height: 0.625rem;
   font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   font-weight: 400;
@@ -431,7 +431,7 @@
   flex-basis: 14%;
 }
 .selectGridButtons .item {
-  padding: 1rem 0.5rem;
+  padding: 0.625rem 0.3125rem;
   margin: 0rem 0rem -0.0625rem -0.0625rem;
   box-sizing: border-box;
   border-style: solid;
@@ -450,7 +450,7 @@
 .editItemsTable {
   border-collapse: collapse;
   border-spacing: 0px;
-  margin: 2rem auto;
+  margin: 1.25rem auto;
 }
 .editItemsTable th, .editItemsTable td {
   padding: 0.5em;
@@ -460,7 +460,7 @@
   border-style: solid;
   border-width: 0.0625rem;
   border-color: #a2a2a2;
-  font-size: 1.2rem;
+  font-size: 0.75rem;
 }
 .editItemsTable thead th {
   background-color: #f6f6f6;
@@ -473,7 +473,7 @@
   height: auto;
 }
 .editItemsTable tbody td .SelectPictureSources {
-  width: 10rem;
+  width: 6.25rem;
 }
 .dataStructure .item {
   padding: 0rem;

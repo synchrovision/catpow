@@ -4,8 +4,8 @@ ul.wp-block-catpow-panes li.item {
 }
 ul.wp-block-catpow-panes li.item .itemControl {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: 0.3125rem;
+  right: 0.3125rem;
 }
 ul.wp-block-catpow-panes li.item > .link {
   min-width: 1em;
@@ -18,8 +18,8 @@ ul.wp-block-catpow-panes li.item > .link {
 }
 ul.wp-block-catpow-panes li.item > .link p {
   margin: 0rem;
-  padding: 0.2rem;
+  padding: 0.125rem;
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.625rem;
 }
 /*# sourceMappingURL=./editor_style.css.map */

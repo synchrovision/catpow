@@ -1,15 +1,15 @@
 @charset "utf-8";
 ul.wp-block-catpow-pricecard li.item .itemControl {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: 0.3125rem;
+  right: 0.3125rem;
 }
 ul.wp-block-catpow-pricecard li.item .link {
   position: relative;
 }
 ul.wp-block-catpow-pricecard li.item .link .components-base-control {
   position: absolute;
-  bottom: -4rem;
+  bottom: -2.5rem;
   left: 0rem;
   right: 0rem;
   margin: auto;

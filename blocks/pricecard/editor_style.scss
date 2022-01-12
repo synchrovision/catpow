@@ -3,12 +3,12 @@
 ul.wp-block-catpow-pricecard{
 	li.item{
 		.itemControl{
-			@include bnd((p:a,t:.5rem,r:.5rem));
+			@include bnd((p:a,t:5,r:5));
 		}
 		.link{
 			@include bnd((p:r));
 			.components-base-control{
-				@include bnd((p:a,b:-4rem,l:0,r:0,mg:a));
+				@include bnd((p:a,b:-40,l:0,r:0,mg:a));
 				@include txt((c:t));
 			}
 		}

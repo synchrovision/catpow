@@ -8,14 +8,14 @@
 		@include bg((c:b));
 		@include shd((b:1));
 		&>.tab{
-			@include bnd((f:0 0 a,pd:.5rem 1rem,mg:0));
-			@include txt((a:c,p:1.2rem,h:1em,f:g,l:n));
+			@include bnd((f:0 0 a,pd:5 10,mg:0));
+			@include txt((a:c,p:12,h:1em,f:g,l:n));
 			@include usr((c:p));
 			&.icon{
-				@include bnd((pd:.25rem .5rem));
+				@include bnd((pd:2.5 5));
 				.dashicon{
-					@include bnd((w:1.5rem,h:1.5rem));
-					@include txt((p:1.5rem));
+					@include bnd((w:15,h:15));
+					@include txt((p:15));
 				}
 			}
 			&+.tab{

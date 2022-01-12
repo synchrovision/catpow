@@ -1,24 +1,24 @@
 @charset "utf-8";
 .wp-block-catpow-graphics.alt_content {
-  padding-top: 0rem;
+  padding-top: 00;
 }
 .wp-block-catpow-graphics.alt_content.sp {
-  width: 23.4375rem;
+  width: 234.375;
 }
 .wp-block-catpow-graphics.alt_content.tb {
-  max-width: 46.875rem;
+  max-width: 468.75;
   width: 100%;
 }
 .wp-block-catpow-graphics.alt_content.lt {
-  max-width: 70.3125rem;
+  max-width: 703.125;
   width: 100%;
 }
 .wp-block-catpow-graphics .item .pos, .wp-block-catpow-graphics .item .del, .wp-block-catpow-graphics .item .dup, .wp-block-catpow-graphics .item .bnd {
   display: block;
   position: absolute;
-  top: -0.625rem;
-  width: 1.25rem;
-  height: 1.25rem;
+  top: -06.25;
+  width: 12.5;
+  height: 12.5;
   z-index: 1;
   box-sizing: content-box;
   color: #007cba;
@@ -27,22 +27,22 @@
   pointer-events: none;
 }
 .wp-block-catpow-graphics .item .pos, .wp-block-catpow-graphics .item .bnd {
-  border-radius: 0.9375rem;
+  border-radius: 09.375;
   border-style: solid;
-  border-width: 0.0625rem;
+  border-width: 00.625;
   border-color: #007cba;
   background-color: #f8f8f8;
 }
 .wp-block-catpow-graphics .item .pos {
-  left: -0.9375rem;
+  left: -09.375;
 }
 .wp-block-catpow-graphics .item .del {
-  left: 0.625rem;
+  left: 06.25;
 }
 .wp-block-catpow-graphics .item .dup {
-  left: 1.875rem;
+  left: 18.75;
 }
 .wp-block-catpow-graphics .item .bnd {
-  right: -0.9375rem;
+  right: -09.375;
 }
 /*# sourceMappingURL=./editor_style.css.map */

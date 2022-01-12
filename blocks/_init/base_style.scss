@@ -4,7 +4,7 @@
 	@include bnd((pd:2 5,p:r,z:1000));
 	@include txt((a:c,p:12,h:10));
 	@include bg((c:b));
-	@include bdr((r:1rem));
+	@include bdr((r:10));
 	@include shd((b:1));
 	@include flx((w:n,j:a));
 	div.btn{
@@ -75,28 +75,28 @@
 	@include bnd((w:max));
 }
 .embedded_content{
-	@include bnd((p:r,h:5rem a,pdt:2rem));
+	@include bnd((p:r,h:50 a,pdt:20));
 	&>.label{
-		@include bnd((p:a,r:0,t:0,pd:.5rem 1rem,z:10));
+		@include bnd((p:a,r:0,t:0,pd:5 10,z:10));
 		@include bg((c:b));
-		@include txt((a:c,p:1rem,h:10,f:g,w:r,c:t));
+		@include txt((a:c,p:10,h:10,f:g,w:r,c:t));
 		@include shd((b:1));
 	}
 }
 .alt_content{
-	@include bnd((p:r,h:5rem a,pdt:2rem,mg:0 a));
+	@include bnd((p:r,h:50 a,pdt:20,mg:0 a));
 	@include bdr((s:s,w:1,c:t 50));
 	&>.label{
 		@include bnd((p:a,r:0,t:0,pd:.25em,z:10));
 		@include bg((c:m));
-		@include txt((a:c,p:1.2rem,h:10,f:g,w:r,c:b));
+		@include txt((a:c,p:12,h:10,f:g,w:r,c:b));
 		@include shd((b:1));
 	}
 }
 .selectPosition{
 	@include tbl(());
 	td{
-		@include bnd((w:2rem,h:2rem));
+		@include bnd((w:20,h:20));
 		@include bdr((s:s,w:1,c:t 20));
 		&.active{
 			@include bg((c:m));
@@ -116,7 +116,7 @@
 		&>.label{
 			@include bnd((p:a,r:0,t:0,pd:.25em,z:10));
 			@include bg((c:m));
-			@include txt((a:c,p:1.2rem,h:10,f:g,w:r,c:b));
+			@include txt((a:c,p:12,h:10,f:g,w:r,c:b));
 			@include shd((b:1));
 		}
 	}
@@ -188,7 +188,7 @@
 		}
 	}
 	.item{
-		@include bnd((pd:1rem .5rem,mg:0 0 -1 -1,bs:b));
+		@include bnd((pd:10 5,mg:0 0 -1 -1,bs:b));
 		@include bdr((s:s,w:1,c:t));
 		@include txt((a:c,p:13,h:1em,c:t));
 		@include usr((c:p));
@@ -201,11 +201,11 @@
 
 .editItemsTable{
 	@include tbl(());
-	@include bnd((mg:2rem a));
+	@include bnd((mg:20 a));
 	th,td{
 		@include bnd((pd:.5em,w:6em a 30em));
 		@include bdr((s:s,w:1,c:t 50));
-		@include txt((p:1.2rem));
+		@include txt((p:12));
 	}
 	thead{
 		th{
@@ -221,7 +221,7 @@
 				@include bnd((w:6em,h:a));
 			}
 			.SelectPictureSources{
-				@include bnd((w:10rem));
+				@include bnd((w:100));
 			}
 		}
 	}

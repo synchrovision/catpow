@@ -43,9 +43,9 @@ div.wp-block-catpow-tabs > ul.tab li.item {
   position: relative;
 }
 div.wp-block-catpow-tabs > ul.tab li.item .itemControl {
-  width: 7rem;
+  width: 4.375rem;
   position: absolute;
-  top: -2rem;
+  top: -1.25rem;
   left: 0rem;
   right: 0rem;
   margin: auto;

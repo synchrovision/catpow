@@ -4,43 +4,43 @@ ul.wp-block-catpow-panel{
 	li.item{
 		@include bnd((p:r));
 		.itemControl{
-			@include bnd((p:a,t:.5rem,r:.5rem));
+			@include bnd((p:a,t:5,r:5));
 		}
 	}
 	&.edit{
-		@include bnd((pd:2rem));
-		@include bdr((s:s,w:1,c:t 1 .5,r:1rem));
+		@include bnd((pd:20));
+		@include bdr((s:s,w:1,c:t 1 .5,r:10));
 		@include shd((b:3));
 		@include bg((c:b));
 		@include txt((l:n));
 		li.item{
 			@include flx((w:w));
 			div.image{
-				@include bnd((pd:1rem,f:0 0 10rem));
+				@include bnd((pd:10,f:0 0 100));
 				img,video{
 					@include bnd((w:f,h:a));
 				}
 			}
 			div.text{
-				@include bnd((pd:1rem,f:1 1 15rem));
+				@include bnd((pd:10,f:1 1 150));
 				.icon{
-					@include bnd((d:ib,w:8rem,h:8rem));
+					@include bnd((d:ib,w:80,h:80));
 					@include bg((c:#ccc));
 					img{
 						@include bnd((w:f,h:a));
 					}
 				}
 				h3{
-					@include bnd((pdb:.5rem,mgb:.5rem));
+					@include bnd((pdb:5,mgb:5));
 					@include bdr((p:b,s:d,w:1,c:t));
-					@include txt((a:l,p:1.5rem,w:r,c:t));
+					@include txt((a:l,p:15,w:r,c:t));
 				}
-				p{@include txt((a:j,p:1.2rem,w:r,c:t));}
+				p{@include txt((a:j,p:12,w:r,c:t));}
 				.link{
 					@include bnd((p:r));
 					a{
-						@include bnd((d:b,mg:1rem a));
-						@include txt((p:1.2rem,h:1em,c:t));
+						@include bnd((d:b,mg:10 a));
+						@include txt((p:12,h:1em,c:t));
 						&::before{
 							@include ico('chevron-right');
 							@include bnd((d:ib,mgr:.5em));

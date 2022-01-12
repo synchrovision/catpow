@@ -14,7 +14,7 @@ div.wp-block-catpow-tabs{
 		li.item{
 			@include bnd((p:r));
 			.itemControl{
-				@include bnd((w:7rem,p:a,t:-2rem,l:0,r:0,mg:a));
+				@include bnd((w:70,p:a,t:-20,l:0,r:0,mg:a));
 			}
 		}
 	}

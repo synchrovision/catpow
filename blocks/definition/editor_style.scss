@@ -4,7 +4,7 @@
 	.item{
 		@include bnd((p:r));
 		.itemControl{
-			@include bnd((p:a,t:.5rem,r:.5rem));
+			@include bnd((p:a,t:5,r:5));
 		}
 	}
 }
