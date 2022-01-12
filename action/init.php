@@ -211,7 +211,9 @@ if(function_exists('register_block_type')){
 		return $block_content;
 	},10,2);
 	add_action('enqueue_block_editor_assets',function()use($deps){
-		cp::include_plugin_files('blocks/_init/_init.php');
+		foreach(cp::get_file_paths('blocks/_init/_init.php') as $blocks_init_file){
+			include $blocks_init_file;
+		}
 		$block_registry=WP_Block_Type_Registry::get_instance();
 		foreach($block_registry->get_all_registered() as $block_name=>$block_type){
 			$block_base_name=explode('/',$block_name)[1];
