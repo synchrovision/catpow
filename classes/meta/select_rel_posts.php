@@ -32,8 +32,9 @@ class select_rel_posts extends select{
 		if(is_numeric($val) && $val>0){
 			switch($prm){
 				case false:
-				case 'title':
 					return '<span class="select_item">'.get_the_title($val).'</span>';
+				case 'title':
+					return get_the_title($val);
 				case 'content':
 					return str_replace(']]>',']]&gt;',apply_filters('the_content',get_post($val)->post_content));
 				case 'link':
