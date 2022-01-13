@@ -16,20 +16,20 @@
 .PopupContainer {
   display: block;
   position: fixed;
-  top: 0px;
-  left: 0px;
-  right: 0px;
+  top: 0rem;
+  left: 0rem;
+  right: 0rem;
   z-index: 10000;
 }
 .PopupBG {
   content: '';
   display: block;
   position: fixed;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  inset: 0px;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
   background-color: rgba(0, 0, 0, 0.3);
 }
 .PopupBody {
@@ -39,8 +39,8 @@
   max-height: 90vh;
   height: auto;
   position: fixed;
-  left: 0px;
-  right: 0px;
+  left: 0rem;
+  right: 0rem;
   top: 50%;
   margin: auto;
   border-radius: 1rem;
@@ -64,7 +64,7 @@
   position: absolute;
   top: 1.5rem;
   width: 3rem;
-  height: 1px;
+  height: 0.0625rem;
   background-color: #f8f8f8;
 }
 .PopupBody .PopupControl .close::before {
