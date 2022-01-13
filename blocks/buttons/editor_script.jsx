@@ -9,7 +9,8 @@
 	),
 	category: 'catpow',
 	example:CP.example,
-	edit({attributes,className,setAttributes,isSelected}){
+	edit(props){
+		const {attributes,className,setAttributes,isSelected}=props;
 		const {items=[],classes,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-buttons';
 		var classArray=_.uniq((className+' '+classes).split(' '));
@@ -177,11 +178,14 @@
 					eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute]=item[attr_name];
 				});
 			}
+			const shouldOpenWithOtherWindow=/^\w+:\/\//.test(item.url);
 			rtn.push(
 				<li className={item.classes}>
 					<a
 						href={item.url}
 						className='button'
+						target={shouldOpenWithOtherWindow?'_blank':null}
+						rel={shouldOpenWithOtherWindow?'noopener':null}
 						{...eventDispatcherAttributes}
 					>
 						{itemStates.hasIcon && 

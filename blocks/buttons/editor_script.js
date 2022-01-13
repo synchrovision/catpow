@@ -14,11 +14,11 @@ registerBlockType('catpow/buttons', {
   })),
   category: 'catpow',
   example: CP.example,
-  edit: function edit(_ref) {
-    var attributes = _ref.attributes,
-        className = _ref.className,
-        setAttributes = _ref.setAttributes,
-        isSelected = _ref.isSelected;
+  edit: function edit(props) {
+    var attributes = props.attributes,
+        className = props.className,
+        setAttributes = props.setAttributes,
+        isSelected = props.isSelected;
     var _attributes$items = attributes.items,
         items = _attributes$items === void 0 ? [] : _attributes$items,
         classes = attributes.classes,
@@ -202,9 +202,9 @@ registerBlockType('catpow/buttons', {
       className: classes
     }, rtn))));
   },
-  save: function save(_ref2) {
-    var attributes = _ref2.attributes,
-        className = _ref2.className;
+  save: function save(_ref) {
+    var attributes = _ref.attributes,
+        className = _ref.className;
     var _attributes$items2 = attributes.items,
         items = _attributes$items2 === void 0 ? [] : _attributes$items2,
         classes = attributes.classes,
@@ -223,11 +223,14 @@ registerBlockType('catpow/buttons', {
         });
       }
 
+      var shouldOpenWithOtherWindow = /^\w+:\/\//.test(item.url);
       rtn.push(wp.element.createElement("li", {
         className: item.classes
       }, wp.element.createElement("a", babelHelpers.extends({
         href: item.url,
-        className: "button"
+        className: "button",
+        target: shouldOpenWithOtherWindow ? '_blank' : null,
+        rel: shouldOpenWithOtherWindow ? 'noopener' : null
       }, eventDispatcherAttributes), itemStates.hasIcon && wp.element.createElement("span", {
         className: "icon"
       }, wp.element.createElement("img", {
@@ -240,9 +243,9 @@ registerBlockType('catpow/buttons', {
     }, rtn), doLoop && wp.element.createElement("onEmpty", null, wp.element.createElement(InnerBlocks.Content, null)));
   },
   deprecated: [{
-    save: function save(_ref3) {
-      var attributes = _ref3.attributes,
-          className = _ref3.className;
+    save: function save(_ref2) {
+      var attributes = _ref2.attributes,
+          className = _ref2.className;
       var _attributes$items3 = attributes.items,
           items = _attributes$items3 === void 0 ? [] : _attributes$items3,
           classes = attributes.classes,
