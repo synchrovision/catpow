@@ -42,11 +42,20 @@ foreach($post_types as $type=>&$type_vals){
 			global $wp_post_types;
 			if($type_vals['label']!==$type){
 				add_filter("post_type_labels_{$type}",function($labels)use($type_vals){
-					$labels->name=
-					$labels->singular_name=
-					$labels->menu_name=
-					$labels->name_admin_bar=
-						$type_vals['label'];
+					if(is_array($labels)){
+						$labels['name']=
+						$labels['singular_name']=
+						$labels['menu_name']=
+						$labels['name_admin_bar']=
+							$type_vals['label'];
+					}
+					else{
+						$labels->name=
+						$labels->singular_name=
+						$labels->menu_name=
+						$labels->name_admin_bar=
+							$type_vals['label'];
+					}
 					return $labels;
 				});
 			}
