@@ -57,7 +57,7 @@ class scss{
 			);
 			$dir=get_stylesheet_directory().'/json';
 			if(!is_dir($dir)){mkdir($dir,0777,true);}
-			file_put_contents($dir.'/colors.json',json_encode($data,0500));
+			file_put_contents($dir.'/colors.json',json_encode($data,0700));
 			return true;
 		});
 		do_action('cp_scss_compiler_init',$scssc);
