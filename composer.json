@@ -19,5 +19,10 @@
 			"Script",
 			"YouTube"
         ]
+    },
+    "config": {
+        "platform": {
+            "php": "7.4"
+        }
     }
 }
