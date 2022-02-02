@@ -8,11 +8,11 @@ class ComposerStaticInitf260feebcdf007a5b5910b4be790fdf4
 {
     public static $files = array (
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
-        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
+        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
-        'c65d09b6820da036953a371c8c73a9b1' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/polyfills.php',
+        '1f87db08236948d07391152dccb70f04' => __DIR__ . '/..' . '/google/apiclient-services/autoload.php',
         'a8d3953fd9959404dd22d3dfcd0a79f0' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
     );
 
@@ -23,6 +23,7 @@ class ComposerStaticInitf260feebcdf007a5b5910b4be790fdf4
         ),
         'S' => 
         array (
+            'Spatie\\Color\\' => 13,
             'ScssPhp\\ScssPhp\\' => 16,
         ),
         'P' => 
@@ -43,6 +44,7 @@ class ComposerStaticInitf260feebcdf007a5b5910b4be790fdf4
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
+            'Google\\Service\\' => 15,
             'Google\\Auth\\' => 12,
             'Google\\' => 7,
         ),
@@ -58,17 +60,22 @@ class ComposerStaticInitf260feebcdf007a5b5910b4be790fdf4
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
         ),
+        'Spatie\\Color\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/color/src',
+        ),
         'ScssPhp\\ScssPhp\\' => 
         array (
             0 => __DIR__ . '/..' . '/scssphp/scssphp/src',
         ),
         'Psr\\Log\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+            0 => __DIR__ . '/..' . '/psr/log/src',
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -102,6 +109,10 @@ class ComposerStaticInitf260feebcdf007a5b5910b4be790fdf4
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
+        'Google\\Service\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/apiclient-services/src',
+        ),
         'Google\\Auth\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/auth/src',
@@ -117,16 +128,6 @@ class ComposerStaticInitf260feebcdf007a5b5910b4be790fdf4
         'Facebook\\' => 
         array (
             0 => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook',
-        ),
-    );
-
-    public static $prefixesPsr0 = array (
-        'G' => 
-        array (
-            'Google_Service_' => 
-            array (
-                0 => __DIR__ . '/..' . '/google/apiclient-services/src',
-            ),
         ),
     );
 
@@ -160,7 +161,6 @@ class ComposerStaticInitf260feebcdf007a5b5910b4be790fdf4
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitf260feebcdf007a5b5910b4be790fdf4::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitf260feebcdf007a5b5910b4be790fdf4::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitf260feebcdf007a5b5910b4be790fdf4::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitf260feebcdf007a5b5910b4be790fdf4::$classMap;
 
         }, null, ClassLoader::class);

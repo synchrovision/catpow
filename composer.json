@@ -1,10 +1,11 @@
 {
     "require": {
-        "guzzlehttp/guzzle": "^7.3",
-        "scssphp/scssphp": "^1.4",
-        "michelf/php-markdown": "^1.9",
-        "google/apiclient": "^2.9",
-        "facebook/graph-sdk": "^5.7"
+        "guzzlehttp/guzzle": "*",
+        "scssphp/scssphp": "*",
+        "michelf/php-markdown": "*",
+        "google/apiclient": "*",
+        "facebook/graph-sdk": "*",
+        "spatie/color": "*"
     },
     "scripts": {
         "post-update-cmd": "Google\\Task\\Composer::cleanup"
