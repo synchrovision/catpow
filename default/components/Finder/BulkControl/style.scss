@@ -4,7 +4,7 @@
 .FinderBulkControl{
 	@include bnd((d:ib,p:r));
 	&Form{
-		@include bnd((w:80vw 60rem));
+		@include bnd((w:80vw 600));
 		.title{
 			@include bnd((mg:0,mgb:10,pd:20));
 			@include bdr((p:b,s:s,w:1,c:t 30));

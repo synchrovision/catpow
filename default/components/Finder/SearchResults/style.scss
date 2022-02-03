@@ -7,7 +7,7 @@
 			@include bnd((mg:0 a));
 			.item{
 				.title{
-					@include txt((a:c,p:1.2rem));
+					@include txt((a:c,p:12));
 				}
 			}
 		}
@@ -61,7 +61,7 @@
 					@include bnd((f:1 1 240,bs:b,mg:0));
 				}
 				&>.item{
-					@include bnd((pd:.5rem));
+					@include bnd((pd:5));
 					&>.contents{
 						@include flx((w:w));
 						@include bnd((h:f));
@@ -106,7 +106,7 @@
 					@include bg((c:t 50));
 					.row{
 						.cell{
-							@include bnd((w:8rem a,pd:.5rem));
+							@include bnd((w:80 a,pd:5));
 							@include txt((a:c,c:i));
 						}
 					}
@@ -124,17 +124,17 @@
 							}
 						}
 						.control{
-							@include bnd((w:3rem));
+							@include bnd((w:30));
 							@include txt((a:c));
 						}
 						.cell{
-							@include bnd((w:8rem a,pd:.5rem));
+							@include bnd((w:80 a,pd:5));
 							.outputs{
 								&__item{
 									dl{
 										@include bnd((cl:b));
 										dt{
-											@include bnd((fl:l,w:fit 4rem a));
+											@include bnd((fl:l,w:fit 40 a));
 											&::after{
 												content:'：';
 											}

@@ -2,14 +2,14 @@
 
 
 .CheckBox{
-	@include bnd((d:ib,p:r,pd:1rem 1.5rem,mg:.75rem,pdl:4rem));
-	@include bdr((r:2rem));
-	@include txt((p:1.5rem,h:1em,c:t 40));
+	@include bnd((d:ib,p:r,pd:10 15,mg:7.5,pdl:40));
+	@include bdr((r:20));
+	@include txt((p:15,h:1em,c:t 40));
 	@include trn((t:.5s));
 	@include usr((c:p));
 	@include shd((bv:-1));
 	&Icon{
-		@include bnd((d:b,p:r,w:1.5rem,mg:0 1rem,h:1.5rem));
+		@include bnd((d:b,p:r,w:15,mg:0 10,h:15));
 		@include bdr((r:3));
 		@include trn((t:.5s));
 		@include shd((bve:-1));
@@ -17,19 +17,19 @@
 			content:'';
 			@include bnd((d:b,p:a,w:0,h:0));
 			@include bdr((p:l b,s:s,w:3,c:m 60));
-			@include trn((y:.5rem,r:-45deg,to:0 0,o:0));
+			@include trn((y:5,r:-45deg,to:0 0,o:0));
 			@include trn((t:(w 0s .2s,h 0s .2s,o .2s)));
 		}
 		&.selected{
 			&::before{
-				@include bnd((w:1.5rem,h:.75rem));
+				@include bnd((w:15,h:7.5));
 				@include trn((o:1));
 				@include trn((t:(w .1s .1s,h .1s,o .1s)));
 			}
 		}
 	}
 	&>&Icon{
-		@include bnd((d:b,p:a,t:0,l:1rem,b:0,mg:a));
+		@include bnd((d:b,p:a,t:0,l:10,b:0,mg:a));
 	}
 	&.selected{
 		@include txt((c:t));

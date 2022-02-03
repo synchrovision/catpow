@@ -1,14 +1,14 @@
 @import "config/style_config.scss";
 
 .collected{
-	@include bnd((w:a 96rem,mg:0 a,pd:2rem,bs:b));
+	@include bnd((w:a 960,mg:0 a,pd:20,bs:b));
 	&_group{
 		@include txt((l:n));
 	}
 	&_label{
 		@include bnd((pdb:.5em,mgb:.5em));
 		@include bdr((p:b,s:s,w:1,c:t 50));
-		@include txt((p:2rem));
+		@include txt((p:20));
 		@include usr((c:p));
 		&::before{
 			content:'';
@@ -26,14 +26,14 @@
 		@include flx((w:w));
 	}
 	&_item{
-		@include bnd((f:1 1 40rem,pd:1em));
+		@include bnd((f:1 1 400,pd:1em));
 		@include txt((l:n));
 		&_text{
 		}
 		&_title{
 			@include bnd((pdb:.5em,mgb:.5em));
 			@include bdr((p:b,s:s,w:1,c:t 50));
-			@include txt((p:1.5rem));
+			@include txt((p:15));
 		}
 		&_desc{
 

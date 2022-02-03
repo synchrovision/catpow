@@ -922,7 +922,7 @@ html{
 		@include trn((o:0));
 	}
 	.cp_lightbox_content{
-		@include bnd((p:r,w:a 80rem,h:a 80vh,p:a,t:50%,l:50%,mg:a));
+		@include bnd((p:r,w:a 800,h:a 80vh,p:a,t:50%,l:50%,mg:a));
 		@include bg((c:b));
 		@include trn((y:-50%,x:-50%));
 		@include shd((b:10));
@@ -941,28 +941,28 @@ html{
 				@include bg((c:n));
 			}
 			.prev,.next{
-				@include bnd((d:n,p:a,b:-5rem,h:3rem,mg:a));
-				@include txt((p:2rem,c:b));
+				@include bnd((d:n,p:a,b:-50,h:30,mg:a));
+				@include txt((p:20,c:b));
 				@include trn((o:.8));
 				&.active{@include bnd((d:b));}
 			}
 			.prev{
-				@include bnd((l:.5rem));
+				@include bnd((l:5));
 				&::before{
 					content:'＜'
 				}
 			}
 			.next{
-				@include bnd((r:.5rem));
+				@include bnd((r:5));
 				&::before{
 					content:'＞'
 				}
 			}
 			.close{
-				@include bnd((p:a,w:3rem,h:3rem,t:-5rem,r:1rem));
+				@include bnd((p:a,w:30,h:30,t:-50,r:10));
 				&::before,&::after{
 					content:'';
-					@include bnd((p:a,t:1.5rem,w:3rem,h:1));
+					@include bnd((p:a,t:15,w:30,h:1));
 					@include bg((c:b));
 				}
 				&::before{
@@ -973,11 +973,11 @@ html{
 				}
 			}
 			ul.dots{
-				@include bnd((p:a,b:-5rem,l:2rem,r:2rem));
+				@include bnd((p:a,b:-50,l:20,r:20));
 				@include txt((a:c));
 				li.dot{
-					@include bnd((d:ib,mg:.5rem,w:1rem,h:1rem));
-					@include bdr((s:s,c:b,w:1,r:1rem));
+					@include bnd((d:ib,mg:5,w:10,h:10));
+					@include bdr((s:s,c:b,w:1,r:10));
 					@include bg((c:b));
 					@include txt((v:m));
 					@include trn((o:.2));

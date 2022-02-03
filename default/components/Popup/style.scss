@@ -22,8 +22,8 @@
 		@include bg((c:shd));
 	}
 	&Body{
-		@include bnd((d:b,w:fit 64rem,h:a 90vh,p:f,l:0,r:0,t:50%,mg:a));
-		@include bdr((r:1rem));
+		@include bnd((d:b,w:fit 640,h:a 90vh,p:f,l:0,r:0,t:50%,mg:a));
+		@include bdr((r:10));
 		@include bg((c:b));
 		@include shd((b:2));
 		@include trn((y:-50%));
@@ -32,10 +32,10 @@
 		}
 		.PopupControl{
 			.close{
-				@include bnd((p:a,w:3rem,h:3rem,t:-4rem,r:1rem));
+				@include bnd((p:a,w:30,h:30,t:-40,r:10));
 				&::before,&::after{
 					content:'';
-					@include bnd((p:a,t:1.5rem,w:3rem,h:1));
+					@include bnd((p:a,t:15,w:30,h:1));
 					@include bg((c:b));
 				}
 				&::before{

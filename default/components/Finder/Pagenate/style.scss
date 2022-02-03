@@ -2,12 +2,12 @@
 
 
 .FinderPagenate{
-	@include bnd((pd:1rem));
+	@include bnd((pd:10));
 	@include flx((w:n,a:c,j:c));
 	.button{
-		@include bnd((f:0 0 a,pd:.5rem));
+		@include bnd((f:0 0 a,pd:5));
 		@include bg((c:n));
-		@include bdr((s:n,r:1rem));
+		@include bdr((s:n,r:10));
 		@include trn((t:.5s));
 		@include txt((h:1em,c:m));
 		@include shd((bve:-1));
@@ -26,13 +26,13 @@
 		}
 	}
 	.items{
-		@include bnd((p:r,f:0 1 a,pd:0 2rem));
+		@include bnd((p:r,f:0 1 a,pd:0 20));
 		@include flx((w:w));
 		@include txt((l:n));
 		.item{
-			@include bnd((d:ib,pd:.5em,mg:.5em,w:2rem,h:2rem));
-			@include bdr((r:1rem));
-			@include txt((a:c,p:1.5rem,c:t 30));
+			@include bnd((d:ib,pd:.5em,mg:.5em,w:20,h:20));
+			@include bdr((r:10));
+			@include txt((a:c,p:15,c:t 30));
 			@include shd((bv:-1));
 			@include trn((t:.5s));
 			@include usr((c:p));

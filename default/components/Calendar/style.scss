@@ -93,15 +93,15 @@
 		}
 	}
 	&.small{
-		@include txt((p:1rem));
+		@include txt((p:10));
 	}
 	&.medium{
-		@include txt((p:1.5rem));
+		@include txt((p:15));
 	}
 	&.large{
-		@include txt((p:1.5rem));
+		@include txt((p:15));
 		.day{
-			@include bnd((w:10em,h:10em,pd:1rem,bs:b));
+			@include bnd((w:10em,h:10em,pd:10,bs:b));
 			@include txt((a:l,v:t));
 			.date{
 				@include bnd((d:b));

@@ -1,11 +1,11 @@
 @import 'admin_style_config.scss';
 
 span.star{
-	@include bnd((d:ib,w:7.5rem,h:1.5rem));
-	@include bg((i:'images/star_g.svg',s:1.5rem a,p:0% 50%,r:x));
+	@include bnd((d:ib,w:75,h:15));
+	@include bg((i:'images/star_g.svg',s:15 a,p:0% 50%,r:x));
 	.value{
 		@include bnd((d:b,h:f));
-		@include bg((i:'images/star.svg',s:1.5rem a,p:0% 50%,r:x,));
+		@include bg((i:'images/star.svg',s:15 a,p:0% 50%,r:x,));
 	}
 	
 }

@@ -3,10 +3,10 @@
 div.wp-block-catpow-sidebar{
     @include flx((w:w));
     div.wp-block-catpow-maincolumn{
-        @include bnd((f:10 10 30rem));
+        @include bnd((f:10 10 300));
     }
     div.wp-block-catpow-sidecolumn{
-        @include bnd((f:1 1 30rem,pd:1rem,bs:b));
+        @include bnd((f:1 1 300,pd:10,bs:b));
 		@include bdr((p:r,s:s,w:1,c:t 30));
     }
     &.left{
@@ -14,7 +14,7 @@ div.wp-block-catpow-sidebar{
     }
 	@media(#{bp(2)}){
 		div.wp-block-catpow-sidecolumn{
-			@include bnd((f:0 0 24rem));
+			@include bnd((f:0 0 240));
 		}
 	}
 }
