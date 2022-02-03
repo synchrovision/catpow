@@ -6,7 +6,7 @@
 	useEffect(()=>setPopupState(open?'open':'close'),[open]);
 	
 	return (
-		<Catpow.External className="PopupContainer">
+		<Catpow.External id="PopupContainer" className="PopupContainer">
 			<div
 				className={'Popup '+state}
 				onAnimationEnd={()=>{
