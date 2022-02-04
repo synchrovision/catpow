@@ -1,1 +1,1 @@
-{"version":3,"file":"editor_style.css.map","sourceRoot":"/","sources":["wp-content/plugins/catpow/scss/admin_style_config.scss","wp-content/plugins/catpow/blocks/formblock/editor_style.scss"],"names":[],"mappings":"AAAA;ACIE;AAAA;AAAA;AAKE;AAAA;AAAA;AAMH;AAAA;AAAA;AAAA;AAKG;AAAA;AAAA;AAAA;AAAA"}
+{"version":3,"file":"editor_style.css.map","sourceRoot":"/","sources":["wp-content/plugins/catpow/blocks/formblock/editor_style.scss"],"names":[],"mappings":"AAIE;AAAA;AAAA;AAKE;AAAA;AAAA;AAMH;AAAA;AAAA;AAAA;AAKG;AAAA;AAAA;AAAA;AAAA"}

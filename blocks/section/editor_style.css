@@ -1,8 +1,7 @@
-@charset "utf-8";
 section.wp-block-catpow-section.article {
   background-color: rgba(0, 0, 0, 0);
   border-style: solid;
-  border-width: 00.625;
+  border-width: 0.0625rem;
   border-color: transparent;
   -webkit-transition: 0.5s;
   transition: 0.5s;

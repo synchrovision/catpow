@@ -1,5 +1,7 @@
-@charset "utf-8";
 div.Progress progress, div.Progress progress:enabled {
-  cursor: pointer; }
+  cursor: pointer;
+}
 div.Progress progress + input {
-  margin-left: 1em; }
+  margin-left: 1em;
+}
+/*# sourceMappingURL=./input.css.map */

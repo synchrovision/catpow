@@ -1,4 +1,3 @@
-@charset "utf-8";
 table.wp-block-catpow-simpletable {
   width: 100%;
 }
@@ -7,6 +6,6 @@ table.wp-block-catpow-simpletable tbody tr {
 }
 table.wp-block-catpow-simpletable tbody tr .itemControl {
   position: absolute;
-  right: 03.125;
+  right: 0.3125rem;
 }
 /*# sourceMappingURL=./editor_style.css.map */

@@ -1,10 +1,9 @@
-@charset "utf-8";
 .wp-block-catpow-definition .item {
   position: relative;
 }
 .wp-block-catpow-definition .item .itemControl {
   position: absolute;
-  top: 03.125;
-  right: 03.125;
+  top: 0.3125rem;
+  right: 0.3125rem;
 }
 /*# sourceMappingURL=./editor_style.css.map */

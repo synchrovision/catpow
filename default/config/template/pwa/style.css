@@ -1,9 +1,9 @@
 @charset "utf-8";
 .finder {
-  max-width: 96rem;
+  max-width: 960;
   width: auto;
-  margin: 2rem auto;
-  padding: 2rem;
+  margin: 20 auto;
+  padding: 20;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -17,16 +17,16 @@
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 100%;
-  padding: 1rem;
+  padding: 10;
 }
 .finder_tags_item {
   display: inline-block;
-  padding: 0.5rem 1rem;
-  margin: 0.5rem;
+  padding: 05 10;
+  margin: 05;
   border-style: solid;
   border-width: 1px;
   border-color: #666;
-  border-radius: 2rem;
+  border-radius: 20;
   cursor: pointer;
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -43,13 +43,13 @@
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
-  flex-basis: 20rem;
+  flex-basis: 200;
   max-height: 80vh;
   height: auto;
   overflow-y: auto;
 }
 .finder_items_item {
-  padding: 1rem;
+  padding: 10;
   border-style: solid;
   border-width: 1px;
   border-color: #f0f0f0;
@@ -59,6 +59,6 @@
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
-  flex-basis: 60rem;
+  flex-basis: 600;
 }
 /*# sourceMappingURL=./style.css.map */

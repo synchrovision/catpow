@@ -1,4 +1,4 @@
-@charset "utf-8";
+@charset "UTF-8";
 .DateSelect > .inputs {
   display: inline-block;
   margin: 0rem 0.5em;
@@ -22,7 +22,7 @@
   vertical-align: middle;
 }
 .DateSelect > .inputs .btn::before {
-  content: '';
+  content: "";
   font-family: dashicons;
 }
 /*# sourceMappingURL=./input.css.map */

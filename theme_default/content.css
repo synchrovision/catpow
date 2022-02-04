@@ -1,11 +1,13 @@
-@charset "utf-8";
-@import url('https://fonts.googleapis.com/css?family=Staatliches&subset=latin-ext');
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Staatliches&subset=latin-ext");
 html {
-  font-size: 10px; }
-  @media (max-width:639px) {
+  font-size: 10px;
+}
+@media (max-width:639px) {
   html {
-    font-size: 2.5vw; } }
-
+    font-size: 2.5vw;
+  }
+}
 body div.cp_message {
   margin: 10px;
   padding: 20px;
@@ -17,2048 +19,1727 @@ body div.cp_message {
   text-align: center;
   font-weight: bold;
   font-size: 18px;
-  line-height: 18px; }
-  body div.cp_caution {
-    margin: 10px;
-    padding: 20px;
-    background-color: #999188;
-    border-radius: 10px;
-    color: #ffe;
-    text-align: center;
-    font-weight: bold;
-    font-size: 15px;
-    line-height: 15px; }
-  body div.cp_form_message .message, body div.cp_form_section_message .message {
-    pointer-events: none; }
-    body div.cp_form_message .message .text, body div.cp_form_section_message .message .text {
-      padding: 3px 5px;
-      width: 80%;
-      margin: 1rem auto;
-      background-color: #321;
-      border-radius: 3px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
-      text-align: center;
-      color: #ffe;
-      font-size: 1.1rem;
-      line-height: 1.5em;
-      -webkit-transition: 1s;
-      transition: 1s;
-      -webkit-opacity: 1;
-      -moz-opacity: 1;
-      -ms-opacity: 1;
-      -o-opacity: 1;
-      opacity: 1; }
-      body div.cp_form_message .message .text:after, body div.cp_form_section_message .message .text:after {
-        content: '　';
-        display: block;
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        bottom: -10px;
-        left: 30px;
-        border-color: transparent;
-        border-style: solid;
-        border-width: 5px;
-        border-top-color: #321; }
-    body div.cp_form_message .message.has_target .text, body div.cp_form_section_message .message.has_target .text {
-      position: absolute;
-      left: 0px;
-      top: -25px;
-      width: auto;
-      margin: 0px;
-      white-space: nowrap;
-      line-height: 1em; }
-  body div.cp-meta-item {
-    position: relative;
-    padding: 5px; }
-    body div.cp-meta-item.multiple-item {
-      margin: 0.5rem;
-      padding: 0.5rem;
-      border-style: solid;
-      border-width: 1px;
-      border-color: rgba(136, 119, 102, .5);
-      border-radius: 5px; }
-    body div.cp-meta-item.multiple-item > .cp-meta-unit {
-      position: relative;
-      margin: 0.5rem;
-      padding: 0.5rem;
-      border-style: solid;
-      border-width: 1px;
-      border-color: rgba(136, 119, 102, .2);
-      border-radius: 5px; }
-      body div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons {
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        padding: 1px 3px;
-        background-color: #876;
-        border-radius: 0px 4px 0px 4px;
-        line-height: 10px; }
-        body div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-inc, body div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-dec {
-          display: inline-block;
-          margin: 0.3rem;
-          font-size: 1.3rem;
-          line-height: 1em;
-          font-family: 'times';
-          text-align: center;
-          color: rgba(255, 255, 238, .5);
-          -webkit-transition: 0.5s;
-          transition: 0.5s;
-          cursor: pointer; }
-          body div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-inc:hover, body div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-dec:hover {
-            color: #ffe; }
-        body div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-inc::after {
-          content: " \f067";
-          font-family: 'Font Awesome 5 Free';
-          font-weight: 900; }
-        body div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-dec::after {
-          content: " \f068";
-          font-family: 'Font Awesome 5 Free';
-          font-weight: 900; }
-      body div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons {
-        position: absolute;
-        bottom: 0px;
-        right: 0px;
-        padding: 1px 3px;
-        background-color: #f3f1f0;
-        border-radius: 4px 0px 4px 0px;
-        line-height: 10px; }
-        body div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-up, body div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-down {
-          display: inline-block;
-          -webkit-appearance: none;
-          -moz-appearance: none;
-          appearance: none;
-          padding: 1px;
-          margin: 1px;
-          width: 10px;
-          height: 10px;
-          border-radius: 12px;
-          background-color: #f9f8f7;
-          font-size: 9px;
-          line-height: 9px;
-          font-family: 'times';
-          text-align: center;
-          color: #e7e4e0;
-          -webkit-transition: 0.5s;
-          transition: 0.5s;
-          cursor: pointer; }
-          body div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-up:hover, body div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-down:hover {
-            background-color: #fff; }
-        body div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-up::after {
-          content: " \f077";
-          font-family: 'Font Awesome 5 Free';
-          font-weight: 900; }
-        body div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-down::after {
-          content: " \f078";
-          font-family: 'Font Awesome 5 Free';
-          font-weight: 900; }
-    body div.cp-meta-item fieldset {
-      margin: 1rem 0px;
-      padding: 1rem;
-      border-style: solid;
-      border-width: 1px;
-      border-color: rgba(136, 119, 102, .3);
-      border-radius: 0.5rem; }
-    body div.cp-meta-item fieldset legend {
-      color: rgba(136, 119, 102, .3); }
-    body div.cp-meta-item input.number {
-      width: 60px;
-      text-align: right; }
-    body div.cp-meta-item input.numeric {
-      width: 120px; }
-    body div.cp-meta-item img.ajax_upload_media {
-      width: 10rem;
-      height: auto; }
-    body div.cp-meta-item span.pdf {
-      display: inline-block;
-      width: 160px;
-      height: 230px;
-      overflow: hidden; }
-    body div.cp-meta-item span.pdf object {
-      width: 200%;
-      height: 200%;
-      -webkit-transform-origin: 0 0 0;
-      transform-origin: 0 0 0;
-      transform: -webkit- scale(0.5);
-      transform: scale(0.5); }
-    body div.cp-meta-item select {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      padding: 5px 10px;
-      height: auto;
-      background-color: #ffe;
-      border-radius: 5px;
-      border-style: solid;
-      border-color: #e1ddd9;
-      border-width: 1px;
-      font-size: 12px;
-      line-height: 12px;
-      color: #876; }
-    body div.cp-meta-item label {
-      display: inline-block;
-      padding: 3px;
-      margin: 3px;
-      background-color: #ffe;
-      font-size: 1.3rem;
-      line-height: 1em;
-      color: #cfc9c2;
-      -webkit-transition: 0.5s;
-      transition: 0.5s;
-      cursor: pointer; }
-    body div.cp-meta-item label.checkbox, body div.cp-meta-item label.radio {
-      display: inline-block;
-      margin: 0.3em;
-      padding: 0.3em 1em;
-      background-color: rgba(51, 34, 17, 0);
-      border-style: solid;
-      border-width: 1px;
-      border-color: rgba(136, 119, 102, .5);
-      border-radius: 1em;
-      font-size: 1.2rem;
-      line-height: 1em;
-      font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
-      font-weight: 500;
-      color: rgba(136, 119, 102, .5); }
-      body div.cp-meta-item label.checkbox:before, body div.cp-meta-item label.radio:before {
-        display: inline-block;
-        margin-right: 5px;
-        color: rgba(136, 119, 102, .5); }
-      body div.cp-meta-item label.checkbox.active, body div.cp-meta-item label.radio.active {
-        color: #ffe;
-        background-color: #321;
-        border-color: #321; }
-        body div.cp-meta-item label.checkbox.active:before, body div.cp-meta-item label.radio.active:before {
-          color: #ffe; }
-      body div.cp-meta-item label.checkbox.disabled, body div.cp-meta-item label.radio.disabled {
-        display: none;
-        color: #edebe8; }
-        body div.cp-meta-item label.checkbox.disabled:before, body div.cp-meta-item label.radio.disabled:before {
-          color: #f5f4f3; }
-      body div.cp-meta-item label.checkbox input, body div.cp-meta-item label.radio input {
-        display: none; }
-    body div.cp-meta-item label.checkbox:before {
-      content: " \f0c8";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-      body div.cp-meta-item label.checkbox.active:before {
-        content: " \f14a";
-        font-family: 'Font Awesome 5 Free';
-        font-weight: 900; }
-    body div.cp-meta-item label.radio:before {
-      content: " \f059";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-      body div.cp-meta-item label.radio.active:before {
-        content: " \f111";
-        font-family: 'Font Awesome 5 Free';
-        font-weight: 900; }
-    body div.cp-meta-item button.cp_calendar_increase {
-      display: block;
-      position: relative;
-      margin: 5px auto;
-      padding: 5px;
-      background-color: #999188;
-      border-style: none;
-      border-radius: 10px;
-      text-align: center;
-      font-size: 24px;
-      line-height: 24px;
-      color: #ffe;
-      -webkit-transition: 0.5s;
-      transition: 0.5s;
-      cursor: pointer; }
-    body div.cp-meta-item button.cp_calendar_increase:hover {
-      background-color: #321; }
-  body div.cp_lightbox_container {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    z-index: 100000;
-    width: 100vw;
-    height: 100vh;
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: rgba(0, 0, 0, .3);
-    -webkit-transition: 1s opacity;
-    transition: 1s opacity;
-    -webkit-opacity: 0;
-    -moz-opacity: 0;
-    -ms-opacity: 0;
-    -o-opacity: 0;
-    opacity: 0;
-    pointer-events: none; }
-    body div.cp_lightbox_container .cp_lightbox_content {
-      max-width: 960px;
-      width: auto;
-      position: relative;
-      height: 100%;
-      box-sizing: border-box;
-      padding: 20px;
-      margin: 0px auto;
-      overflow-y: auto;
-      background-color: #ffe; }
-    body div.cp_lightbox_container .cp_lightbox_content ul.buttons.cp_lightbox_control {
-      position: fixed;
-      right: 5px;
-      top: 5px;
-      margin: 0px;
-      padding: 0px; }
-      @media (min-width:960px) {
-      body div.cp_lightbox_container .cp_lightbox_content ul.buttons.cp_lightbox_control {
-        right: calc(50vw - 520px); } }
-      body div.cp_lightbox_container .cp_lightbox_content ul.buttons.cp_lightbox_control li .button {
-        padding: 3px 5px;
-        font-size: 32px;
-        line-height: 32px;
-        box-shadow: 0 3px 7px rgba(0, 0, 0, .2);
-        border-style: none;
-        border-radius: 20px; }
-        body div.cp_lightbox_container .cp_lightbox_content ul.buttons.cp_lightbox_control li .button::before {
-          display: inline-block;
-          margin-right: 0px; }
-    body div.cp_lightbox_container.active {
-      -webkit-opacity: 1;
-      -moz-opacity: 1;
-      -ms-opacity: 1;
-      -o-opacity: 1;
-      opacity: 1;
-      pointer-events: auto; }
-    body div.background {
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      overflow: hidden; }
-    body div.background img, body div.background video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center; }
-    body div.background::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0px;
-      left: 0px;
-      background-color: #000;
-      -webkit-opacity: 0;
-      -moz-opacity: 0;
-      -ms-opacity: 0;
-      -o-opacity: 0;
-      opacity: 0; }
-  body p.caption {
-    margin: 5px;
-    font-size: 12px;
-    line-height: 14px;
-    color: #a09285;
-    font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif; }
-  body p.left {
-    text-align: left; }
-  body p.right {
-    text-align: right; }
-  body p.center {
-    text-align: center; }
-  body ul.pagenate {
-    margin: 20px 10px;
-    text-align: center;
-    list-style: none; }
-    body ul.pagenate li {
-      display: inline-block;
-      margin: 3px;
-      font-size: 12px;
-      color: #cfc9c2;
-      cursor: pointer;
-      -webkit-transition: 0.5s;
-      transition: 0.5s; }
-    body ul.pagenate li:hover {
-      color: #a09285; }
-    body ul.pagenate li.active {
-      padding: 3px;
-      width: 20px;
-      background-color: #5c4e41;
-      border-radius: 5px;
-      font-size: 14px;
-      line-height: 12px;
-      color: #ffe;
-      text-align: center; }
-  body ul.buttons {
-    width: auto;
-    margin: 20px auto;
-    padding: 0px;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-lines: multiple;
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
-    list-style: none; }
-    body ul.buttons > * {
-      flex-grow: 1;
-      box-sizing: border-box; }
-    body ul.buttons > *:first-child:nth-last-child(2), body ul.buttons > *:first-child:nth-last-child(2) ~ *:nth-child(-n + 2) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(2) ~ *:nth-child(n + 3) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(3), body ul.buttons > *:first-child:nth-last-child(3) ~ *:nth-child(-n + 3) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(3) ~ *:nth-child(n + 4) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(4), body ul.buttons > *:first-child:nth-last-child(4) ~ *:nth-child(-n + 4) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(4) ~ *:nth-child(n + 5) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(5), body ul.buttons > *:first-child:nth-last-child(5) ~ *:nth-child(-n + 5) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(5) ~ *:nth-child(n + 6) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(6), body ul.buttons > *:first-child:nth-last-child(6) ~ *:nth-child(-n + 6) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(6) ~ *:nth-child(n + 7) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(7), body ul.buttons > *:first-child:nth-last-child(7) ~ *:nth-child(-n + 7) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(7) ~ *:nth-child(n + 8) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(8), body ul.buttons > *:first-child:nth-last-child(8) ~ *:nth-child(-n + 8) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(8) ~ *:nth-child(n + 9) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(9), body ul.buttons > *:first-child:nth-last-child(9) ~ *:nth-child(-n + 9) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(9) ~ *:nth-child(n + 10) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(10), body ul.buttons > *:first-child:nth-last-child(10) ~ *:nth-child(-n + 10) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(10) ~ *:nth-child(n + 11) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(11), body ul.buttons > *:first-child:nth-last-child(11) ~ *:nth-child(-n + 11) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(11) ~ *:nth-child(n + 12) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(12), body ul.buttons > *:first-child:nth-last-child(12) ~ *:nth-child(-n + 12) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(12) ~ *:nth-child(n + 13) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(13), body ul.buttons > *:first-child:nth-last-child(13) ~ *:nth-child(-n + 13) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(13) ~ *:nth-child(n + 14) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(14), body ul.buttons > *:first-child:nth-last-child(14) ~ *:nth-child(-n + 14) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(14) ~ *:nth-child(n + 15) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(15), body ul.buttons > *:first-child:nth-last-child(15) ~ *:nth-child(-n + 15) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(15) ~ *:nth-child(n + 16) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(16), body ul.buttons > *:first-child:nth-last-child(16) ~ *:nth-child(-n + 16) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(16) ~ *:nth-child(n + 17) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(17), body ul.buttons > *:first-child:nth-last-child(17) ~ *:nth-child(-n + 17) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(17) ~ *:nth-child(n + 18) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(18), body ul.buttons > *:first-child:nth-last-child(18) ~ *:nth-child(-n + 18) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(18) ~ *:nth-child(n + 19) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(19), body ul.buttons > *:first-child:nth-last-child(19) ~ *:nth-child(-n + 19) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(19) ~ *:nth-child(n + 20) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(20), body ul.buttons > *:first-child:nth-last-child(20) ~ *:nth-child(-n + 20) {
-      flex-basis: 100%; }
-    body ul.buttons > *:first-child:nth-last-child(20) ~ *:nth-child(n + 21) {
-      flex-basis: 100%; }
-    @media (min-width:640px) {
-      body ul.buttons {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: flex; }
-        body ul.buttons > * {
-          flex-grow: 1;
-          box-sizing: border-box; }
-        body ul.buttons > *:first-child:nth-last-child(2), body ul.buttons > *:first-child:nth-last-child(2) ~ *:nth-child(-n + 2) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(2) ~ *:nth-child(n + 3) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(3), body ul.buttons > *:first-child:nth-last-child(3) ~ *:nth-child(-n + 1) {
-          flex-basis: 100%; }
-        body ul.buttons > *:first-child:nth-last-child(3) ~ *:nth-child(n + 2) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(4), body ul.buttons > *:first-child:nth-last-child(4) ~ *:nth-child(-n + 4) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(4) ~ *:nth-child(n + 5) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(5), body ul.buttons > *:first-child:nth-last-child(5) ~ *:nth-child(-n + 1) {
-          flex-basis: 100%; }
-        body ul.buttons > *:first-child:nth-last-child(5) ~ *:nth-child(n + 2) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(6), body ul.buttons > *:first-child:nth-last-child(6) ~ *:nth-child(-n + 6) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(6) ~ *:nth-child(n + 7) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(7), body ul.buttons > *:first-child:nth-last-child(7) ~ *:nth-child(-n + 1) {
-          flex-basis: 100%; }
-        body ul.buttons > *:first-child:nth-last-child(7) ~ *:nth-child(n + 2) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(8), body ul.buttons > *:first-child:nth-last-child(8) ~ *:nth-child(-n + 8) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(8) ~ *:nth-child(n + 9) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(9), body ul.buttons > *:first-child:nth-last-child(9) ~ *:nth-child(-n + 1) {
-          flex-basis: 100%; }
-        body ul.buttons > *:first-child:nth-last-child(9) ~ *:nth-child(n + 2) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(10), body ul.buttons > *:first-child:nth-last-child(10) ~ *:nth-child(-n + 10) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(10) ~ *:nth-child(n + 11) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(11), body ul.buttons > *:first-child:nth-last-child(11) ~ *:nth-child(-n + 1) {
-          flex-basis: 100%; }
-        body ul.buttons > *:first-child:nth-last-child(11) ~ *:nth-child(n + 2) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(12), body ul.buttons > *:first-child:nth-last-child(12) ~ *:nth-child(-n + 12) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(12) ~ *:nth-child(n + 13) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(13), body ul.buttons > *:first-child:nth-last-child(13) ~ *:nth-child(-n + 1) {
-          flex-basis: 100%; }
-        body ul.buttons > *:first-child:nth-last-child(13) ~ *:nth-child(n + 2) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(14), body ul.buttons > *:first-child:nth-last-child(14) ~ *:nth-child(-n + 14) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(14) ~ *:nth-child(n + 15) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(15), body ul.buttons > *:first-child:nth-last-child(15) ~ *:nth-child(-n + 1) {
-          flex-basis: 100%; }
-        body ul.buttons > *:first-child:nth-last-child(15) ~ *:nth-child(n + 2) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(16), body ul.buttons > *:first-child:nth-last-child(16) ~ *:nth-child(-n + 16) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(16) ~ *:nth-child(n + 17) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(17), body ul.buttons > *:first-child:nth-last-child(17) ~ *:nth-child(-n + 1) {
-          flex-basis: 100%; }
-        body ul.buttons > *:first-child:nth-last-child(17) ~ *:nth-child(n + 2) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(18), body ul.buttons > *:first-child:nth-last-child(18) ~ *:nth-child(-n + 18) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(18) ~ *:nth-child(n + 19) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(19), body ul.buttons > *:first-child:nth-last-child(19) ~ *:nth-child(-n + 1) {
-          flex-basis: 100%; }
-        body ul.buttons > *:first-child:nth-last-child(19) ~ *:nth-child(n + 2) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(20), body ul.buttons > *:first-child:nth-last-child(20) ~ *:nth-child(-n + 20) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(20) ~ *:nth-child(n + 21) {
-          flex-basis: 50%; } }
-    @media (min-width:960px) {
-      body ul.buttons {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: flex; }
-        body ul.buttons > * {
-          flex-grow: 1;
-          box-sizing: border-box; }
-        body ul.buttons > *:first-child:nth-last-child(2), body ul.buttons > *:first-child:nth-last-child(2) ~ *:nth-child(-n + 2) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(2) ~ *:nth-child(n + 3) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(3), body ul.buttons > *:first-child:nth-last-child(3) ~ *:nth-child(-n + 3) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(3) ~ *:nth-child(n + 4) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(4), body ul.buttons > *:first-child:nth-last-child(4) ~ *:nth-child(-n + 4) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(4) ~ *:nth-child(n + 5) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(5), body ul.buttons > *:first-child:nth-last-child(5) ~ *:nth-child(-n + 2) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(5) ~ *:nth-child(n + 3) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(6), body ul.buttons > *:first-child:nth-last-child(6) ~ *:nth-child(-n + 6) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(6) ~ *:nth-child(n + 7) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(7), body ul.buttons > *:first-child:nth-last-child(7) ~ *:nth-child(-n + 4) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(7) ~ *:nth-child(n + 5) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(8), body ul.buttons > *:first-child:nth-last-child(8) ~ *:nth-child(-n + 2) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(8) ~ *:nth-child(n + 3) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(9), body ul.buttons > *:first-child:nth-last-child(9) ~ *:nth-child(-n + 9) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(9) ~ *:nth-child(n + 10) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(10), body ul.buttons > *:first-child:nth-last-child(10) ~ *:nth-child(-n + 4) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(10) ~ *:nth-child(n + 5) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(11), body ul.buttons > *:first-child:nth-last-child(11) ~ *:nth-child(-n + 2) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(11) ~ *:nth-child(n + 3) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(12), body ul.buttons > *:first-child:nth-last-child(12) ~ *:nth-child(-n + 12) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(12) ~ *:nth-child(n + 13) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(13), body ul.buttons > *:first-child:nth-last-child(13) ~ *:nth-child(-n + 4) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(13) ~ *:nth-child(n + 5) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(14), body ul.buttons > *:first-child:nth-last-child(14) ~ *:nth-child(-n + 2) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(14) ~ *:nth-child(n + 3) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(15), body ul.buttons > *:first-child:nth-last-child(15) ~ *:nth-child(-n + 15) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(15) ~ *:nth-child(n + 16) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(16), body ul.buttons > *:first-child:nth-last-child(16) ~ *:nth-child(-n + 4) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(16) ~ *:nth-child(n + 5) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(17), body ul.buttons > *:first-child:nth-last-child(17) ~ *:nth-child(-n + 2) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(17) ~ *:nth-child(n + 3) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(18), body ul.buttons > *:first-child:nth-last-child(18) ~ *:nth-child(-n + 18) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(18) ~ *:nth-child(n + 19) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(19), body ul.buttons > *:first-child:nth-last-child(19) ~ *:nth-child(-n + 4) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(19) ~ *:nth-child(n + 5) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(20), body ul.buttons > *:first-child:nth-last-child(20) ~ *:nth-child(-n + 2) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(20) ~ *:nth-child(n + 3) {
-          flex-basis: 33%; } }
-    @media (min-width:1600px) {
-      body ul.buttons {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: flex; }
-        body ul.buttons > * {
-          flex-grow: 1;
-          box-sizing: border-box; }
-        body ul.buttons > *:first-child:nth-last-child(2), body ul.buttons > *:first-child:nth-last-child(2) ~ *:nth-child(-n + 2) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(2) ~ *:nth-child(n + 3) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(3), body ul.buttons > *:first-child:nth-last-child(3) ~ *:nth-child(-n + 3) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(3) ~ *:nth-child(n + 4) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(4), body ul.buttons > *:first-child:nth-last-child(4) ~ *:nth-child(-n + 4) {
-          flex-basis: 25%; }
-        body ul.buttons > *:first-child:nth-last-child(4) ~ *:nth-child(n + 5) {
-          flex-basis: 25%; }
-        body ul.buttons > *:first-child:nth-last-child(5), body ul.buttons > *:first-child:nth-last-child(5) ~ *:nth-child(-n + 2) {
-          flex-basis: 50%; }
-        body ul.buttons > *:first-child:nth-last-child(5) ~ *:nth-child(n + 3) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(6), body ul.buttons > *:first-child:nth-last-child(6) ~ *:nth-child(-n + 6) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(6) ~ *:nth-child(n + 7) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(7), body ul.buttons > *:first-child:nth-last-child(7) ~ *:nth-child(-n + 3) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(7) ~ *:nth-child(n + 4) {
-          flex-basis: 25%; }
-        body ul.buttons > *:first-child:nth-last-child(8), body ul.buttons > *:first-child:nth-last-child(8) ~ *:nth-child(-n + 8) {
-          flex-basis: 25%; }
-        body ul.buttons > *:first-child:nth-last-child(8) ~ *:nth-child(n + 9) {
-          flex-basis: 25%; }
-        body ul.buttons > *:first-child:nth-last-child(9), body ul.buttons > *:first-child:nth-last-child(9) ~ *:nth-child(-n + 9) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(9) ~ *:nth-child(n + 10) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(10), body ul.buttons > *:first-child:nth-last-child(10) ~ *:nth-child(-n + 6) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(10) ~ *:nth-child(n + 7) {
-          flex-basis: 25%; }
-        body ul.buttons > *:first-child:nth-last-child(11), body ul.buttons > *:first-child:nth-last-child(11) ~ *:nth-child(-n + 3) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(11) ~ *:nth-child(n + 4) {
-          flex-basis: 25%; }
-        body ul.buttons > *:first-child:nth-last-child(12), body ul.buttons > *:first-child:nth-last-child(12) ~ *:nth-child(-n + 12) {
-          flex-basis: 25%; }
-        body ul.buttons > *:first-child:nth-last-child(12) ~ *:nth-child(n + 13) {
-          flex-basis: 25%; }
-        body ul.buttons > *:first-child:nth-last-child(13), body ul.buttons > *:first-child:nth-last-child(13) ~ *:nth-child(-n + 9) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(13) ~ *:nth-child(n + 10) {
-          flex-basis: 25%; }
-        body ul.buttons > *:first-child:nth-last-child(14), body ul.buttons > *:first-child:nth-last-child(14) ~ *:nth-child(-n + 6) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(14) ~ *:nth-child(n + 7) {
-          flex-basis: 25%; }
-        body ul.buttons > *:first-child:nth-last-child(15), body ul.buttons > *:first-child:nth-last-child(15) ~ *:nth-child(-n + 3) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(15) ~ *:nth-child(n + 4) {
-          flex-basis: 25%; }
-        body ul.buttons > *:first-child:nth-last-child(16), body ul.buttons > *:first-child:nth-last-child(16) ~ *:nth-child(-n + 16) {
-          flex-basis: 25%; }
-        body ul.buttons > *:first-child:nth-last-child(16) ~ *:nth-child(n + 17) {
-          flex-basis: 25%; }
-        body ul.buttons > *:first-child:nth-last-child(17), body ul.buttons > *:first-child:nth-last-child(17) ~ *:nth-child(-n + 9) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(17) ~ *:nth-child(n + 10) {
-          flex-basis: 25%; }
-        body ul.buttons > *:first-child:nth-last-child(18), body ul.buttons > *:first-child:nth-last-child(18) ~ *:nth-child(-n + 6) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(18) ~ *:nth-child(n + 7) {
-          flex-basis: 25%; }
-        body ul.buttons > *:first-child:nth-last-child(19), body ul.buttons > *:first-child:nth-last-child(19) ~ *:nth-child(-n + 3) {
-          flex-basis: 33%; }
-        body ul.buttons > *:first-child:nth-last-child(19) ~ *:nth-child(n + 4) {
-          flex-basis: 25%; }
-        body ul.buttons > *:first-child:nth-last-child(20), body ul.buttons > *:first-child:nth-last-child(20) ~ *:nth-child(-n + 20) {
-          flex-basis: 25%; }
-        body ul.buttons > *:first-child:nth-last-child(20) ~ *:nth-child(n + 21) {
-          flex-basis: 25%; } }
-    body ul.buttons li {
-      margin: 0px;
-      padding: 0px;
-      background-color: transparent; }
-    body ul.buttons li .button {
-      display: block;
-      position: relative;
-      height: auto;
-      margin: 1rem;
-      padding: 0.5em 1.5em;
-      background-color: #321;
-      border-radius: 5px;
-      text-align: center;
-      font-size: 2rem;
-      color: #ffe;
-      font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
-      font-weight: bold;
-      letter-spacing: 0.2em;
-      cursor: pointer;
-      -webkit-transition: 0.5s;
-      transition: 0.5s;
-      box-shadow: none; }
-      body ul.buttons li .button::before {
-        display: inline-block;
-        margin-right: 5px;
-        font-weight: normal;
-        letter-spacing: 0px; }
-    body ul.buttons li.negative .button {
-      background-color: #e1ddd9; }
-    body ul.buttons li.primary .button {
-      background-color: #f80; }
-    body ul.buttons li.danger .button {
-      background-color: #f53d3d; }
-    body ul.buttons li.play .button:before {
-      content: " \f04b";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-    body ul.buttons li.next .button:before {
-      content: " \f061";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-    body ul.buttons li.back .button:before {
-      content: " \f060";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-    body ul.buttons li.file .button:before {
-      content: " \f15b";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-    body ul.buttons li.home .button:before {
-      content: " \f015";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-    body ul.buttons li.trash .button:before {
-      content: " \f1f8";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-    body ul.buttons li.cart .button:before {
-      content: " \f07a";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-    body ul.buttons li.mail .button:before {
-      content: " \f0e0";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-    body ul.buttons li.search .button:before {
-      content: " \f002";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-    body ul.buttons li.caution .button:before {
-      content: " \f071";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-    body ul.buttons li.help .button:before {
-      content: " \f059";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-    body ul.buttons li.open .button:before {
-      content: " \f138";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-    body ul.buttons li.close .button:before {
-      content: " \f057";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-    body ul.buttons li.plus .button:before {
-      content: " \f055";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-    body ul.buttons li.minus .button:before {
-      content: " \f056";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-    body ul.buttons li.refresh .button:before {
-      content: " \f2f1";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-    body ul.buttons li.edit .button:before {
-      content: " \f303";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-    body ul.buttons li.check .button:before {
-      content: " \f058";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-    body ul.buttons li small {
-      display: block;
-      margin: 10px 20px;
-      font-size: 11px;
-      color: #876;
-      font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif; }
-    body ul.buttons:hover .button {
-      -webkit-opacity: 0.7;
-      -moz-opacity: 0.7;
-      -ms-opacity: 0.7;
-      -o-opacity: 0.7;
-      opacity: 0.7; }
-    body ul.buttons:hover .button:hover {
-      -webkit-opacity: 1;
-      -moz-opacity: 1;
-      -ms-opacity: 1;
-      -o-opacity: 1;
-      opacity: 1; }
-    body ul.buttons.ss {
-      margin: 0px; }
-    body ul.buttons.ss > li .button {
-      margin: 2px;
-      padding: 2px 5px;
-      border-radius: 3px;
-      font-size: 1rem;
-      line-height: 1em; }
-      body ul.buttons.ss > li i {
-        margin-right: 5px; }
-    body ul.buttons.s {
-      margin: 5px; }
-    body ul.buttons.s > li .button {
-      margin: 2px;
-      padding: 4px 8px;
-      border-radius: 5px;
-      font-size: 1.2rem;
-      line-height: 1.5em; }
-      body ul.buttons.s > li i {
-        margin-right: 5px; }
-    body ul.buttons.m {
-      margin: 20px; }
-    body ul.buttons.m > li .button {
-      margin: 5px;
-      padding: 8px;
-      border-radius: 5px;
-      font-size: 2rem;
-      line-height: 1.5em; }
-      body ul.buttons.m > li i {
-        margin-right: 10px; }
-    body ul.buttons.l {
-      padding: 30px; }
-    body ul.buttons.l > li .button {
-      margin: 10px;
-      padding: 12px;
-      border-radius: 5px;
-      font-size: 3rem;
-      line-height: 1.5em; }
-      body ul.buttons.l > li i {
-        margin-right: 10px; }
-    body ul.buttons.i {
-      margin: 0px 5px;
-      width: auto;
-      display: inline-block; }
-    body ul.buttons.i > li {
-      display: inline-block; }
-    body ul.buttons.left, body ul.buttons.center, body ul.buttons.right {
-      display: block; }
-    body ul.buttons.left > li, body ul.buttons.center > li, body ul.buttons.right > li {
-      display: inline-block; }
-    body ul.buttons.left {
-      text-align: left; }
-    body ul.buttons.center {
-      text-align: center; }
-    body ul.buttons.right {
-      text-align: right; }
-  body ul.inputs {
-    list-style: none; }
-  body ul.access {
-    display: block;
-    position: relative;
-    margin: 0px;
-    padding: 10px;
-    list-style: none; }
-    body ul.access li {
-      padding: 1rem 0px;
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-box-lines: multiple;
-      -webkit-flex-wrap: wrap;
-      flex-wrap: wrap; }
-    body ul.access li .image {
-      -webkit-box-flex: 1;
-      flex-grow: 1;
-      flex-shrink: 1;
-      flex-basis: 15rem;
-      padding: 1rem;
-      box-sizing: border-box; }
-      body ul.access li .image img {
-        width: 100%;
-        height: auto; }
-    body ul.access li .text {
-      -webkit-box-flex: 1;
-      flex-grow: 1;
-      flex-shrink: 1;
-      flex-basis: 15rem;
-      padding: 1rem;
-      box-sizing: border-box; }
-      body ul.access li .text h3 {
-        margin-bottom: 0.5rem;
-        padding-bottom: 0.5rem;
-        font-size: 1.8rem;
-        font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
-        font-weight: 500;
-        color: #321;
-        border-bottom-style: solid;
-        border-bottom-width: 1px;
-        border-bottom-color: #321; }
-      body ul.access li .text dl.info {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-box-lines: multiple;
-        -webkit-flex-wrap: wrap;
-        flex-wrap: wrap; }
-        body ul.access li .text dl.info dt {
-          -webkit-box-flex: 1;
-          flex-grow: 1;
-          flex-shrink: 1;
-          flex-basis: 5rem; }
-        body ul.access li .text dl.info dd {
-          -webkit-box-flex: 2;
-          flex-grow: 2;
-          flex-shrink: 2;
-          flex-basis: 60%; }
-    body ul.access li .map {
-      -webkit-box-flex: 2;
-      flex-grow: 2;
-      flex-shrink: 2;
-      flex-basis: 20rem;
-      padding: 1rem;
-      box-sizing: border-box; }
-  body ul.contact {
-    display: block;
-    position: relative;
-    margin: 10rem 1rem;
-    padding: 1rem;
-    border-style: solid;
-    border-width: 1px;
-    border-color: rgba(136, 119, 102, .5);
-    border-radius: 1rem;
-    list-style: none;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-lines: multiple;
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap; }
-    body ul.contact li {
-      -webkit-box-flex: 1;
-      flex-grow: 1;
-      flex-shrink: 1;
-      flex-basis: 30rem;
-      padding: 1rem;
-      box-sizing: border-box; }
-    body ul.contact li h3 {
-      margin-bottom: 0.5rem;
-      padding-bottom: 0.5rem;
-      font-size: 1.8rem;
-      font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
-      font-weight: 500;
-      color: #321;
-      border-bottom-style: solid;
-      border-bottom-width: 1px;
-      border-bottom-color: #321; }
-    body ul.contact li div.tel a.tel {
-      text-align: left;
-      font-size: 3rem;
-      line-height: 1em;
-      font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
-      font-weight: 700;
-      color: #321; }
+  line-height: 18px;
+}
+body div.cp_caution {
+  margin: 10px;
+  padding: 20px;
+  background-color: #999188;
+  border-radius: 10px;
+  color: #ffe;
+  text-align: center;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 15px;
+}
+body div.cp_form_message .message, body div.cp_form_section_message .message {
+  pointer-events: none;
+}
+body div.cp_form_message .message .text, body div.cp_form_section_message .message .text {
+  padding: 3px 5px;
+  width: 80%;
+  margin: 1rem auto;
+  background-color: #321;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: #ffe;
+  font-size: 1.1rem;
+  line-height: 1.5em;
+  -webkit-transition: 1s;
+  transition: 1s;
+  opacity: 1;
+}
+body div.cp_form_message .message .text:after, body div.cp_form_section_message .message .text:after {
+  content: "　";
+  display: block;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  bottom: -10px;
+  left: 30px;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px;
+  border-top-color: #321;
+}
+body div.cp_form_message .message.has_target .text, body div.cp_form_section_message .message.has_target .text {
+  position: absolute;
+  left: 0px;
+  top: -25px;
+  width: auto;
+  margin: 0px;
+  white-space: nowrap;
+  line-height: 1em;
+}
+body div.cp-meta-item {
+  position: relative;
+  padding: 5px;
+}
+body div.cp-meta-item.multiple-item {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(136, 119, 102, 0.5);
+  border-radius: 5px;
+}
+body div.cp-meta-item.multiple-item > .cp-meta-unit {
+  position: relative;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(136, 119, 102, 0.2);
+  border-radius: 5px;
+}
+body div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 1px 3px;
+  background-color: #876;
+  border-radius: 0px 4px 0px 4px;
+  line-height: 10px;
+}
+body div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-inc, body div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-dec {
+  display: inline-block;
+  margin: 0.3rem;
+  font-size: 1.3rem;
+  line-height: 1em;
+  font-family: "times";
+  text-align: center;
+  color: rgba(255, 255, 238, 0.5);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  cursor: pointer;
+}
+body div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-inc:hover, body div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-dec:hover {
+  color: #ffe;
+}
+body div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-inc::after {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-dec::after {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  padding: 1px 3px;
+  background-color: #f3f1f0;
+  border-radius: 4px 0px 4px 0px;
+  line-height: 10px;
+}
+body div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-up, body div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-down {
+  display: inline-block;
+  padding: 1px;
+  margin: 1px;
+  width: 10px;
+  height: 10px;
+  border-radius: 12px;
+  background-color: #f9f8f7;
+  font-size: 9px;
+  line-height: 9px;
+  font-family: "times";
+  text-align: center;
+  color: #e7e4e0;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  cursor: pointer;
+}
+body div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-up:hover, body div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-down:hover {
+  background-color: white;
+}
+body div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-up::after {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-down::after {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body div.cp-meta-item fieldset {
+  margin: 1rem 0px;
+  padding: 1rem;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(136, 119, 102, 0.3);
+  border-radius: 0.5rem;
+}
+body div.cp-meta-item fieldset legend {
+  color: rgba(136, 119, 102, 0.3);
+}
+body div.cp-meta-item input.number {
+  width: 60px;
+  text-align: right;
+}
+body div.cp-meta-item input.numeric {
+  width: 120px;
+}
+body div.cp-meta-item img.ajax_upload_media {
+  width: 10rem;
+  height: auto;
+}
+body div.cp-meta-item span.pdf {
+  display: inline-block;
+  width: 160px;
+  height: 230px;
+  overflow: hidden;
+}
+body div.cp-meta-item span.pdf object {
+  width: 200%;
+  height: 200%;
+  -webkit-transform-origin: 0 0 0;
+  transform-origin: 0 0 0;
+  transform: -webkit- scale(0.5);
+  transform: scale(0.5);
+}
+body div.cp-meta-item select {
+  padding: 5px 10px;
+  height: auto;
+  background-color: #ffe;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: #e1ddd9;
+  border-width: 1px;
+  font-size: 12px;
+  line-height: 12px;
+  color: #876;
+}
+body div.cp-meta-item label {
+  display: inline-block;
+  padding: 3px;
+  margin: 3px;
+  background-color: #ffe;
+  font-size: 1.3rem;
+  line-height: 1em;
+  color: #cfc9c2;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  cursor: pointer;
+}
+body div.cp-meta-item label.checkbox, body div.cp-meta-item label.radio {
+  display: inline-block;
+  margin: 0.3em;
+  padding: 0.3em 1em;
+  background-color: rgba(51, 34, 17, 0);
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(136, 119, 102, 0.5);
+  border-radius: 1em;
+  font-size: 1.2rem;
+  line-height: 1em;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-weight: 500;
+  color: rgba(136, 119, 102, 0.5);
+}
+body div.cp-meta-item label.checkbox:before, body div.cp-meta-item label.radio:before {
+  display: inline-block;
+  margin-right: 5px;
+  color: rgba(136, 119, 102, 0.5);
+}
+body div.cp-meta-item label.checkbox.active, body div.cp-meta-item label.radio.active {
+  color: #ffe;
+  background-color: #321;
+  border-color: #321;
+}
+body div.cp-meta-item label.checkbox.active:before, body div.cp-meta-item label.radio.active:before {
+  color: #ffe;
+}
+body div.cp-meta-item label.checkbox.disabled, body div.cp-meta-item label.radio.disabled {
+  display: none;
+  color: #edebe8;
+}
+body div.cp-meta-item label.checkbox.disabled:before, body div.cp-meta-item label.radio.disabled:before {
+  color: #f5f4f3;
+}
+body div.cp-meta-item label.checkbox input, body div.cp-meta-item label.radio input {
+  display: none;
+}
+body div.cp-meta-item label.checkbox:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body div.cp-meta-item label.checkbox.active:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body div.cp-meta-item label.radio:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body div.cp-meta-item label.radio.active:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body div.cp-meta-item button.cp_calendar_increase {
+  display: block;
+  position: relative;
+  margin: 5px auto;
+  padding: 5px;
+  background-color: #999188;
+  border-style: none;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 24px;
+  line-height: 24px;
+  color: #ffe;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  cursor: pointer;
+}
+body div.cp-meta-item button.cp_calendar_increase:hover {
+  background-color: #321;
+}
+body div.cp_lightbox_container {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 100000;
+  width: 100vw;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.3);
+  -webkit-transition: 1s opacity;
+  transition: 1s opacity;
+  opacity: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  pointer-events: none;
+}
+body div.cp_lightbox_container .cp_lightbox_content {
+  max-width: 960px;
+  width: auto;
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  margin: 0px auto;
+  overflow-y: auto;
+  background-color: #ffe;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+body div.cp_lightbox_container .cp_lightbox_content ul.buttons.cp_lightbox_control {
+  position: fixed;
+  right: 5px;
+  top: 5px;
+  margin: 0px;
+  padding: 0px;
+}
+@media (min-width:960px) {
+  body div.cp_lightbox_container .cp_lightbox_content ul.buttons.cp_lightbox_control {
+    right: calc(50vw - 520px);
+  }
+}
+body div.cp_lightbox_container .cp_lightbox_content ul.buttons.cp_lightbox_control li .button {
+  padding: 3px 5px;
+  font-size: 32px;
+  line-height: 32px;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  border-style: none;
+  border-radius: 20px;
+}
+body div.cp_lightbox_container .cp_lightbox_content ul.buttons.cp_lightbox_control li .button::before {
+  display: inline-block;
+  margin-right: 0px;
+}
+body div.cp_lightbox_container.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+body div.background {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+body div.background img, body div.background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+body div.background::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background-color: #000;
+  opacity: 0;
+}
+body p.caption {
+  margin: 5px;
+  font-size: 12px;
+  line-height: 14px;
+  color: #a09285;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+}
+body p.left {
+  text-align: left;
+}
+body p.right {
+  text-align: right;
+}
+body p.center {
+  text-align: center;
+}
+body ul.pagenate {
+  margin: 20px 10px;
+  text-align: center;
+  list-style: none;
+}
+body ul.pagenate li {
+  display: inline-block;
+  margin: 3px;
+  font-size: 12px;
+  color: #cfc9c2;
+  cursor: pointer;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+body ul.pagenate li:hover {
+  color: #a09285;
+}
+body ul.pagenate li.active {
+  padding: 3px;
+  width: 20px;
+  background-color: #5c4e41;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 12px;
+  color: #ffe;
+  text-align: center;
+}
+body ul.buttons {
+  width: auto;
+  margin: 20px auto;
+  padding: 0px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  list-style: none;
+}
+body ul.buttons > * {
+  flex-grow: 1;
+  box-sizing: border-box;
+}
+body ul.buttons li {
+  margin: 0px;
+  padding: 0px;
+  background-color: transparent;
+}
+body ul.buttons li .button {
+  display: block;
+  position: relative;
+  height: auto;
+  margin: 1rem;
+  padding: 0.5em 1.5em;
+  background-color: #321;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 2rem;
+  color: #ffe;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-weight: bold;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  box-shadow: none;
+}
+body ul.buttons li .button::before {
+  display: inline-block;
+  margin-right: 5px;
+  font-weight: normal;
+  letter-spacing: 0px;
+}
+body ul.buttons li.negative .button {
+  background-color: #e1ddd9;
+}
+body ul.buttons li.primary .button {
+  background-color: #F80;
+}
+body ul.buttons li.danger .button {
+  background-color: #f53d3d;
+}
+body ul.buttons li.play .button:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body ul.buttons li.next .button:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body ul.buttons li.back .button:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body ul.buttons li.file .button:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body ul.buttons li.home .button:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body ul.buttons li.trash .button:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body ul.buttons li.cart .button:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body ul.buttons li.mail .button:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body ul.buttons li.search .button:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body ul.buttons li.caution .button:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body ul.buttons li.help .button:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body ul.buttons li.open .button:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body ul.buttons li.close .button:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body ul.buttons li.plus .button:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body ul.buttons li.minus .button:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body ul.buttons li.refresh .button:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body ul.buttons li.edit .button:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body ul.buttons li.check .button:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+body ul.buttons li small {
+  display: block;
+  margin: 10px 20px;
+  font-size: 11px;
+  color: #876;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+}
+body ul.buttons:hover .button {
+  opacity: 0.7;
+}
+body ul.buttons:hover .button:hover {
+  opacity: 1;
+}
+body ul.buttons.ss {
+  margin: 0px;
+}
+body ul.buttons.ss > li .button {
+  margin: 2px;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 1rem;
+  line-height: 1em;
+}
+body ul.buttons.ss > li i {
+  margin-right: 5px;
+}
+body ul.buttons.s {
+  margin: 5px;
+}
+body ul.buttons.s > li .button {
+  margin: 2px;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  line-height: 1.5em;
+}
+body ul.buttons.s > li i {
+  margin-right: 5px;
+}
+body ul.buttons.m {
+  margin: 20px;
+}
+body ul.buttons.m > li .button {
+  margin: 5px;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 2rem;
+  line-height: 1.5em;
+}
+body ul.buttons.m > li i {
+  margin-right: 10px;
+}
+body ul.buttons.l {
+  padding: 30px;
+}
+body ul.buttons.l > li .button {
+  margin: 10px;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 3rem;
+  line-height: 1.5em;
+}
+body ul.buttons.l > li i {
+  margin-right: 10px;
+}
+body ul.buttons.i {
+  margin: 0px 5px;
+  width: auto;
+  display: inline-block;
+}
+body ul.buttons.i > li {
+  display: inline-block;
+}
+body ul.buttons.left, body ul.buttons.center, body ul.buttons.right {
+  display: block;
+}
+body ul.buttons.left > li, body ul.buttons.center > li, body ul.buttons.right > li {
+  display: inline-block;
+}
+body ul.buttons.left {
+  text-align: left;
+}
+body ul.buttons.center {
+  text-align: center;
+}
+body ul.buttons.right {
+  text-align: right;
+}
+body ul.inputs {
+  list-style: none;
+}
+body ul.access {
+  display: block;
+  position: relative;
+  margin: 0px;
+  padding: 10px;
+  list-style: none;
+}
+body ul.access li {
+  padding: 1rem 0px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+body ul.access li .image {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 15rem;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+body ul.access li .image img {
+  width: 100%;
+  height: auto;
+}
+body ul.access li .text {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 15rem;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+body ul.access li .text h3 {
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1.8rem;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-weight: 500;
+  color: #321;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #321;
+}
+body ul.access li .text dl.info {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+body ul.access li .text dl.info dt {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 5rem;
+}
+body ul.access li .text dl.info dd {
+  -webkit-box-flex: 2;
+  flex-grow: 2;
+  flex-shrink: 2;
+  flex-basis: 60%;
+}
+body ul.access li .map {
+  -webkit-box-flex: 2;
+  flex-grow: 2;
+  flex-shrink: 2;
+  flex-basis: 20rem;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+body ul.contact {
+  display: block;
+  position: relative;
+  margin: 10rem 1rem;
+  padding: 1rem;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(136, 119, 102, 0.5);
+  border-radius: 1rem;
+  list-style: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+body ul.contact li {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 30rem;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+body ul.contact li h3 {
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1.8rem;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-weight: 500;
+  color: #321;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #321;
+}
+body ul.contact li div.tel a.tel {
+  text-align: left;
+  font-size: 3rem;
+  line-height: 1em;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-weight: 700;
+  color: #321;
+}
+body ul.link {
+  display: block;
+  position: relative;
+  max-width: 96rem;
+  width: 90%;
+  margin: 1rem auto;
+  padding: 1rem;
+  list-style: none;
+}
+@media (min-width:960px) {
   body ul.link {
-    display: block;
-    position: relative;
-    max-width: 96rem;
-    width: 90%;
-    margin: 1rem auto;
-    padding: 1rem;
-    list-style: none; }
-    @media (min-width:960px) {
-    body ul.link {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-box-lines: multiple;
-      -webkit-flex-wrap: wrap;
-      flex-wrap: wrap; }
-      body ul.link > * {
-        flex-grow: 1;
-        box-sizing: border-box; }
-
-      body ul.link > *:first-child:nth-last-child(2), body ul.link > *:first-child:nth-last-child(2) ~ *:nth-child(-n + 2) {
-        flex-basis: 50%; }
-
-      body ul.link > *:first-child:nth-last-child(2) ~ *:nth-child(n + 3) {
-        flex-basis: 50%; }
-
-      body ul.link > *:first-child:nth-last-child(3), body ul.link > *:first-child:nth-last-child(3) ~ *:nth-child(-n + 3) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(3) ~ *:nth-child(n + 4) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(4), body ul.link > *:first-child:nth-last-child(4) ~ *:nth-child(-n + 4) {
-        flex-basis: 50%; }
-
-      body ul.link > *:first-child:nth-last-child(4) ~ *:nth-child(n + 5) {
-        flex-basis: 50%; }
-
-      body ul.link > *:first-child:nth-last-child(5), body ul.link > *:first-child:nth-last-child(5) ~ *:nth-child(-n + 2) {
-        flex-basis: 50%; }
-
-      body ul.link > *:first-child:nth-last-child(5) ~ *:nth-child(n + 3) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(6), body ul.link > *:first-child:nth-last-child(6) ~ *:nth-child(-n + 6) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(6) ~ *:nth-child(n + 7) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(7), body ul.link > *:first-child:nth-last-child(7) ~ *:nth-child(-n + 4) {
-        flex-basis: 50%; }
-
-      body ul.link > *:first-child:nth-last-child(7) ~ *:nth-child(n + 5) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(8), body ul.link > *:first-child:nth-last-child(8) ~ *:nth-child(-n + 2) {
-        flex-basis: 50%; }
-
-      body ul.link > *:first-child:nth-last-child(8) ~ *:nth-child(n + 3) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(9), body ul.link > *:first-child:nth-last-child(9) ~ *:nth-child(-n + 9) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(9) ~ *:nth-child(n + 10) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(10), body ul.link > *:first-child:nth-last-child(10) ~ *:nth-child(-n + 4) {
-        flex-basis: 50%; }
-
-      body ul.link > *:first-child:nth-last-child(10) ~ *:nth-child(n + 5) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(11), body ul.link > *:first-child:nth-last-child(11) ~ *:nth-child(-n + 2) {
-        flex-basis: 50%; }
-
-      body ul.link > *:first-child:nth-last-child(11) ~ *:nth-child(n + 3) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(12), body ul.link > *:first-child:nth-last-child(12) ~ *:nth-child(-n + 12) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(12) ~ *:nth-child(n + 13) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(13), body ul.link > *:first-child:nth-last-child(13) ~ *:nth-child(-n + 4) {
-        flex-basis: 50%; }
-
-      body ul.link > *:first-child:nth-last-child(13) ~ *:nth-child(n + 5) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(14), body ul.link > *:first-child:nth-last-child(14) ~ *:nth-child(-n + 2) {
-        flex-basis: 50%; }
-
-      body ul.link > *:first-child:nth-last-child(14) ~ *:nth-child(n + 3) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(15), body ul.link > *:first-child:nth-last-child(15) ~ *:nth-child(-n + 15) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(15) ~ *:nth-child(n + 16) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(16), body ul.link > *:first-child:nth-last-child(16) ~ *:nth-child(-n + 4) {
-        flex-basis: 50%; }
-
-      body ul.link > *:first-child:nth-last-child(16) ~ *:nth-child(n + 5) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(17), body ul.link > *:first-child:nth-last-child(17) ~ *:nth-child(-n + 2) {
-        flex-basis: 50%; }
-
-      body ul.link > *:first-child:nth-last-child(17) ~ *:nth-child(n + 3) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(18), body ul.link > *:first-child:nth-last-child(18) ~ *:nth-child(-n + 18) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(18) ~ *:nth-child(n + 19) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(19), body ul.link > *:first-child:nth-last-child(19) ~ *:nth-child(-n + 4) {
-        flex-basis: 50%; }
-
-      body ul.link > *:first-child:nth-last-child(19) ~ *:nth-child(n + 5) {
-        flex-basis: 33%; }
-
-      body ul.link > *:first-child:nth-last-child(20), body ul.link > *:first-child:nth-last-child(20) ~ *:nth-child(-n + 2) {
-        flex-basis: 50%; }
-
-      body ul.link > *:first-child:nth-last-child(20) ~ *:nth-child(n + 3) {
-        flex-basis: 33%; } }
-    body ul.link li.item {
-      position: relative;
-      padding: 1rem;
-      box-sizing: border-box; }
-    body ul.link li.item .image {
-      height: 30rem;
-      overflow: hidden; }
-      body ul.link li.item .image img, body ul.link li.item .image video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-        -webkit-transition: 1s;
-        transition: 1s; }
-    body ul.link li.item .text {
-      display: block;
-      position: absolute;
-      bottom: 1rem;
-      left: 1rem;
-      right: 1rem;
-      padding: 2rem;
-      box-sizing: border-box;
-      background-color: rgba(51, 34, 17, .8); }
-      body ul.link li.item .text h3 {
-        margin-bottom: 0.5rem;
-        padding-bottom: 0.5rem;
-        border-bottom-style: solid;
-        border-bottom-width: 1px;
-        border-bottom-color: #ffe;
-        text-align: center;
-        font-size: 1.5rem;
-        line-height: 1.5em;
-        font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
-        font-weight: 700;
-        color: #ffe; }
-      body ul.link li.item .text p {
-        text-align: justify;
-        font-size: 1.2rem;
-        line-height: 1.5em;
-        font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
-        font-weight: 400;
-        color: #ffe; }
-    body ul.link li.item a.link {
-      display: block;
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      left: 0px;
-      top: 0px; }
-    body ul.link li.item:hover .image img, body ul.link li.item:hover .image video {
-      transform: -webkit- scale(1.1);
-      transform: scale(1.1); }
-    body ul.link li.spacer {
-      -webkit-box-flex: 1;
-      flex-grow: 1;
-      flex-shrink: 1;
-      flex-basis: 30rem;
-      margin: 0px 1rem; }
-  body ul.banner {
-    display: block;
-    position: relative;
-    max-width: 96rem;
-    width: 90%;
-    margin: 1rem auto;
-    padding: 1rem;
-    list-style: none; }
-    body ul.banner li.item {
-      position: relative;
-      margin: 1rem;
-      box-sizing: border-box;
-      border-style: solid;
-      border-width: 2px;
-      border-color: #f80;
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-box-lines: multiple;
-      -webkit-flex-wrap: wrap;
-      flex-wrap: wrap;
-      -webkit-box-direction: reverse;
-      -webkit-box-orient: horizontal;
-      -webkit-flex-direction: row-reverse;
-      flex-direction: row-reverse; }
-    body ul.banner li.item .image {
-      -webkit-box-flex: 2;
-      flex-grow: 2;
-      flex-shrink: 2;
-      flex-basis: 24rem;
-      min-height: 10rem;
-      height: auto;
-      position: relative;
-      overflow: hidden; }
-      body ul.banner li.item .image img, body ul.banner li.item .image video {
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-        -webkit-transition: 1s;
-        transition: 1s; }
-    body ul.banner li.item .text {
-      position: relative;
-      -webkit-box-flex: 1;
-      flex-grow: 1;
-      flex-shrink: 1;
-      flex-basis: 24rem;
-      padding: 2rem;
-      box-sizing: border-box;
-      background-color: #f80; }
-      body ul.banner li.item .text::before {
-        content: " \f138";
-        font-family: 'Font Awesome 5 Free';
-        font-weight: 900;
-        display: block;
-        position: absolute;
-        width: 10rem;
-        height: 10rem;
-        top: 0px;
-        bottom: 0px;
-        left: 2rem;
-        margin: auto;
-        font-size: 10rem;
-        line-height: 1em;
-        color: #ffe;
-        -webkit-opacity: 0.1;
-        -moz-opacity: 0.1;
-        -ms-opacity: 0.1;
-        -o-opacity: 0.1;
-        opacity: 0.1; }
-      body ul.banner li.item .text h3 {
-        margin-bottom: 1rem;
-        padding-bottom: 1rem;
-        border-bottom-style: solid;
-        border-bottom-width: 1px;
-        border-bottom-color: #ffe;
-        text-align: left;
-        font-size: 2rem;
-        line-height: 1.5em;
-        font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
-        font-weight: 700;
-        color: #ffe; }
-      body ul.banner li.item .text p {
-        text-align: justify;
-        font-size: 1.2rem;
-        line-height: 1.5em;
-        font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
-        font-weight: 400;
-        color: #ffe; }
-    body ul.banner li.item a.link {
-      display: block;
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      left: 0px;
-      top: 0px; }
-    body ul.banner li.item:hover .image img, body ul.banner li.item:hover .image video {
-      transform: -webkit- scale(1.1);
-      transform: scale(1.1); }
-    body ul.banner li.spacer {
-      -webkit-box-flex: 1;
-      flex-grow: 1;
-      flex-shrink: 1;
-      flex-basis: 30rem;
-      margin: 0px 1rem; }
-  body ul.tab {
-    display: block;
-    max-width: 96rem;
-    width: 95%;
-    margin: 3rem auto 2rem;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-bottom-color: #f80;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-lines: single;
-    -webkit-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    list-style: none; }
-    body ul.tab li.item {
-      position: relative;
-      -webkit-box-flex: 0;
-      flex-grow: 0;
-      flex-shrink: 1;
-      flex-basis: 20rem;
-      margin: 0px;
-      padding: 0px;
-      box-sizing: border-box;
-      background-color: rgba(51, 34, 17, .5); }
-    body ul.tab li.item h3 {
-      margin: 0px;
-      padding: 1rem;
-      text-align: center;
-      font-size: 1.5rem;
-      line-height: 1em;
-      font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
-      font-weight: 700;
-      color: #ffe; }
-    body ul.tab li.item.active {
-      background-color: #f80; }
-    body ul.tab li.item a.link {
-      display: block;
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      left: 0px;
-      top: 0px; }
-  body table.wp-list-table tr td div.cp-meta-item img, body table.wp-list-table tr td div.cp-meta-item video {
-    display: block;
-    width: 10rem;
-    height: auto; }
-  body table.wp-block-table {
-    border-collapse: collapse;
-    border-spacing: 0px; }
-    body table.wp-block-table.award {
-      position: relative;
-      margin: 1rem auto; }
-    @media (max-width:639px) {
-      body table.wp-block-table.award {
-        margin: 1rem; } }
-    body table.wp-block-table.award tr td {
-      position: relative;
-      padding: 1rem;
-      border-style: solid;
-      border-width: 1px;
-      border-color: #876; }
-      body table.wp-block-table.award tr td:nth-of-type(1) {
-        width: 4rem; }
-      body table.wp-block-table.award tr td:nth-of-type(2) {
-        width: 30rem; }
-      body table.wp-block-table.award tr td:nth-of-type(3) {
-        width: 16rem; }
-  body table.inputs {
-    margin: 4rem auto;
-    max-width: 96rem;
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0px; }
-    body table.inputs * {
-      color: #876; }
-    body table.inputs > thead > tr > th, body table.inputs > tbody > tr > th, body table.inputs > thead > tr > td, body table.inputs > tbody > tr > td {
-      padding: 5px;
-      border-style: solid;
-      border-width: 1px;
-      border-color: #fffff5; }
-      @media (min-width:640px) {
-        body table.inputs > thead > tr > th, body table.inputs > tbody > tr > th, body table.inputs > thead > tr > td, body table.inputs > tbody > tr > td {
-          padding: 10px; } }
-    body table.inputs > thead > tr > th, body table.inputs > tbody > tr > th {
-      width: 12rem;
-      background-color: rgba(51, 34, 17, .5);
-      text-align: left;
-      font-size: 12px;
-      color: #aca094;
-      font-weight: bold; }
-      @media (max-width:639px) {
-        body table.inputs > thead > tr > th, body table.inputs > tbody > tr > th {
-          display: block;
-          width: auto;
-          text-align: center; } }
-      body table.inputs > thead > tr > th i, body table.inputs > tbody > tr > th i {
-        display: inline-block;
-        width: 15px;
-        margin-right: 15px;
-        text-align: center; }
-      body table.inputs > thead > tr > th.required:after, body table.inputs > tbody > tr > th.required:after {
-        content: '必須';
-        display: inline-block;
-        padding: 2px 5px;
-        margin-left: 5px;
-        background-color: #f80;
-        border-radius: 3px;
-        color: #ffe;
-        font-size: 10px;
-        line-height: 10px;
-        font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
-        font-weight: bold;
-        vertical-align: 3px; }
-    body table.inputs > thead > tr > td, body table.inputs > tbody > tr > td {
-      background-color: rgba(255, 255, 238, .5);
-      text-align: left;
-      font-size: 11px;
-      color: #aca094;
-      font-weight: normal; }
-      @media (max-width:639px) {
-        body table.inputs > thead > tr > td, body table.inputs > tbody > tr > td {
-          display: block;
-          width: auto;
-          text-align: center; } }
-      body table.inputs > thead > tr > td input, body table.inputs > tbody > tr > td input, body table.inputs > thead > tr > td textarea, body table.inputs > tbody > tr > td textarea {
-        background-color: #ffe; }
-      body table.inputs > thead > tr > td textarea.full, body table.inputs > tbody > tr > td textarea.full {
-        width: 100%;
-        box-sizing: border-box; }
-      body table.inputs > thead > tr > td > img, body table.inputs > tbody > tr > td > img {
-        width: 20rem;
-        height: auto; }
-      body table.inputs > thead > tr > td span, body table.inputs > tbody > tr > td span {
-        display: inline-block; }
-    body table.inputs > thead > tr.disabled, body table.inputs > tbody > tr.disabled {
-      display: none; }
-  body table.manage {
-    border-collapse: collapse;
-    border-spacing: 0px; }
-    body table.manage > thead > tr > th, body table.manage > tbody > tr > th, body table.manage > thead > tr > td, body table.manage > tbody > tr > td {
-      padding: 5px;
-      border-style: solid;
-      border-width: 1px;
-      border-color: #fffff5; }
-    body table.manage > thead > tr > th, body table.manage > tbody > tr > th {
-      background-color: rgba(51, 34, 17, .5);
-      text-align: left;
-      font-size: 12px;
-      color: #aca094;
-      font-weight: bold; }
-    body table.manage > thead > tr > td, body table.manage > tbody > tr > td {
-      background-color: rgba(255, 255, 238, .5);
-      text-align: left;
-      font-size: 11px;
-      color: #aca094;
-      font-weight: normal; }
-      body table.manage > thead > tr > td textarea.full, body table.manage > tbody > tr > td textarea.full {
-        width: 100%;
-        box-sizing: border-box; }
-      body table.manage > thead > tr > td span, body table.manage > tbody > tr > td span {
-        display: inline-block; }
-  body table.calendar {
-    position: relative;
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0px; }
-    body table.calendar > caption {
-      padding: 20px 10px;
-      font-size: 18px;
-      color: #a09285; }
-    body table.calendar > caption .month {
-      font-size: 36px; }
-    body table.calendar > thead > tr > th {
-      padding: 2px;
-      background-color: #5c4e41;
-      text-align: center;
-      font-size: 12px;
-      color: #ffe; }
-      body table.calendar > thead > tr > th p {
-        margin: 0px; }
-    body table.calendar > tbody > tr > td {
-      position: relative;
-      width: 14%;
-      min-height: 100px;
-      height: auto;
-      padding: 5px;
-      box-sizing: border-box;
-      border-style: solid;
-      border-width: 1px;
-      border-color: #f3f1f0;
-      vertical-align: top;
-      -webkit-transition: 0.5s;
-      transition: 0.5s; }
-      @media (max-width:959px) {
-          body table.calendar > tbody > tr > td {
-            padding: 2px;
-            width: auto;
-            position: static;
-            text-align: center; } }
-      body table.calendar > tbody > tr > td:hover {
-        background-color: #ebe9e7; }
-      body table.calendar > tbody > tr > td p.date {
-        display: inline-block;
-        padding: 2px 5px;
-        margin: 0px;
-        font-size: 16px;
-        line-height: 16px;
-        color: #a09285; }
-        @media (max-width:959px) {
-          body table.calendar > tbody > tr > td p.date {
-            display: block;
-            padding: 10px 0px; } }
-      @media (max-width:959px) {
-            body table.calendar > tbody > tr > td > .cp_form_section {
-              position: absolute;
-              left: 2vw;
-              width: 96vw;
-              padding: 15px;
-              box-sizing: border-box;
-              z-index: 1000;
-              background-color: #ffe;
-              border-radius: 5px;
-              -webkit-opacity: 0;
-              -moz-opacity: 0;
-              -ms-opacity: 0;
-              -o-opacity: 0;
-              opacity: 0;
-              -webkit-transition: 0.5s;
-              transition: 0.5s;
-              box-shadow: 0 10px 21px rgba(0, 0, 0, .2);
-              pointer-events: none; } }
-      body table.calendar > tbody > tr > td.event {
-        cursor: pointer; }
-        @media (max-width:959px) {
-          body table.calendar > tbody > tr > td.event {
-            background-color: #999188; } }
-      body table.calendar > tbody > tr > td.holiday p.date {
-        background-color: #fa9e9e;
-        border-radius: 10px;
-        color: #ffe; }
-        @media (max-width:959px) {
-          body table.calendar > tbody > tr > td.holiday p.date {
-            background-color: transparent;
-            color: #f20d0d; } }
-      body table.calendar > tbody > tr > td p.holiday {
-        position: absolute;
-        right: 5px;
-        top: 5px;
-        padding: 2px 5px;
-        margin: 0px;
-        background-color: #fa9e9e;
-        border-radius: 10px;
-        font-size: 10px;
-        line-height: 10px;
-        color: #ffe; }
-        @media (max-width:959px) {
-          body table.calendar > tbody > tr > td p.holiday {
-            display: none; } }
-      body table.calendar > tbody > tr > td.out_month p.date {
-        color: #e7e4e0; }
-      body table.calendar > tbody > tr > td ul.buttons li {
-        position: relative;
-        text-align: center; }
-        body table.calendar > tbody > tr > td ul.buttons li div.button.diary {
-          padding-left: 15px; }
-          @media (max-width:959px) {
-            body table.calendar > tbody > tr > td ul.buttons li div.button.diary {
-              padding: 4px 8px 4px 15px;
-              margin: 5px 2px;
-              font-size: 15px;
-              line-height: 15px; } }
-          body table.calendar > tbody > tr > td ul.buttons li div.button.diary::before {
-            display: block;
-            position: absolute;
-            padding: 4px;
-            width: 14px;
-            height: 14px;
-            top: -5px;
-            left: -12px;
-            background-color: inherit;
-            text-align: center;
-            font-size: 14px;
-            line-height: 14px;
-            color: #ffe;
-            border-style: none;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, .2); }
-      body table.calendar > tbody > tr > td ul.cal-events {
-        padding: 5px 15px;
-        list-style: none; }
-      body table.calendar > tbody > tr > td ul.cal-events li > ul {
-        margin: 0px; }
-      body table.calendar > tbody > tr > td div.events div.event {
-        display: none; }
-        body table.calendar > tbody > tr > td div.events div.event label {
-          display: block;
-          padding: 2px;
-          border-radius: 10px;
-          background-color: #e1ddd9;
-          text-align: center;
-          font-size: 10px;
-          line-height: 10px;
-          color: #ffe;
-          -webkit-transition: 0.5s;
-          transition: 0.5s; }
-          body table.calendar > tbody > tr > td div.events div.event label input {
-            display: none; }
-        body table.calendar > tbody > tr > td div.events div.event.active, body table.calendar > tbody > tr > td div.events div.event:hover {
-          display: block; }
-          body table.calendar > tbody > tr > td div.events div.event.active label, body table.calendar > tbody > tr > td div.events div.event:hover label {
-            background-color: #321; }
-        body table.calendar > tbody > tr > td div.events div.event.event0.active label, body table.calendar > tbody > tr > td div.events div.event.event0:hover label {
-          background-color: 0; }
-        body table.calendar > tbody > tr > td div.events div.event.event1.active label, body table.calendar > tbody > tr > td div.events div.event.event1:hover label {
-          background-color: #f20d0d; }
-        body table.calendar > tbody > tr > td div.events div.event.event2.active label, body table.calendar > tbody > tr > td div.events div.event.event2:hover label {
-          background-color: #f2800d; }
-        body table.calendar > tbody > tr > td div.events div.event.event3.active label, body table.calendar > tbody > tr > td div.events div.event.event3:hover label {
-          background-color: #f2f20d; }
-        body table.calendar > tbody > tr > td div.events div.event.event4.active label, body table.calendar > tbody > tr > td div.events div.event.event4:hover label {
-          background-color: #80f20d; }
-        body table.calendar > tbody > tr > td div.events div.event.event5.active label, body table.calendar > tbody > tr > td div.events div.event.event5:hover label {
-          background-color: #0df20d; }
-        body table.calendar > tbody > tr > td div.events div.event.event6.active label, body table.calendar > tbody > tr > td div.events div.event.event6:hover label {
-          background-color: #0df280; }
-        body table.calendar > tbody > tr > td div.events div.event.event7.active label, body table.calendar > tbody > tr > td div.events div.event.event7:hover label {
-          background-color: #0df2f2; }
-        body table.calendar > tbody > tr > td div.events div.event.event8.active label, body table.calendar > tbody > tr > td div.events div.event.event8:hover label {
-          background-color: #0d80f2; }
-        body table.calendar > tbody > tr > td div.events div.event.event9.active label, body table.calendar > tbody > tr > td div.events div.event.event9:hover label {
-          background-color: #0d0df2; }
-        body table.calendar > tbody > tr > td div.events div.event.event10.active label, body table.calendar > tbody > tr > td div.events div.event.event10:hover label {
-          background-color: #800df2; }
-        body table.calendar > tbody > tr > td div.events div.event.event11.active label, body table.calendar > tbody > tr > td div.events div.event.event11:hover label {
-          background-color: #f20df2; }
-        body table.calendar > tbody > tr > td div.events div.event.event12.active label, body table.calendar > tbody > tr > td div.events div.event.event12:hover label {
-          background-color: #f20d80; }
-      @media (max-width:959px) {
-            body table.calendar > tbody > tr > td.event.active, body table.calendar > tbody > tr > td.event.forcus {
-              background-color: #f80; } }
-      @media (max-width:959px) {
-              body table.calendar > tbody > tr > td.event.active p.date, body table.calendar > tbody > tr > td.event.forcus p.date {
-                color: #ffe; } }
-      @media (min-width:960px) {
-              body table.calendar > tbody > tr > td.event:hover div.events {
-                display: block;
-                position: absolute;
-                width: 100px;
-                top: 30px;
-                left: 0px;
-                z-index: 100;
-                background-color: #ffe;
-                border-style: solid;
-                border-width: 1px;
-                border-color: #321;
-                border-radius: 10px;
-                box-shadow: 0 1px 3px rgba(0, 0, 0, .2); } }
-        @media (min-width:960px) {
-              body table.calendar > tbody > tr > td.event:hover div.events div.event {
-                display: block; } }
-      @media (max-width:959px) {
-              body table.calendar > tbody > tr > td.event.forcus > .cp_form_section {
-                -webkit-opacity: 1;
-                -moz-opacity: 1;
-                -ms-opacity: 1;
-                -o-opacity: 1;
-                opacity: 1;
-                pointer-events: auto; } }
-  body table.collect {
-    width: calc(100% - 20px);
-    margin: 10px auto;
-    border-collapse: collapse;
-    border-spacing: 0px; }
-    body table.collect > thead > tr > th, body table.collect > tbody > tr > th, body table.collect > thead > tr > td, body table.collect > tbody > tr > td {
-      padding: 3px;
-      border-style: solid;
-      border-width: 1px;
-      border-color: #f3f1f0; }
-    body table.collect > thead > tr > th, body table.collect > tbody > tr > th {
-      width: 150px;
-      background-color: #ebe9e7;
-      text-align: center;
-      font-size: 12px;
-      color: #aca094;
-      font-weight: bold; }
-      @media (max-width:639px) {
-        body table.collect > thead > tr > th, body table.collect > tbody > tr > th {
-          display: block;
-          width: auto;
-          text-align: center; } }
-    body table.collect > thead > tr > td, body table.collect > tbody > tr > td {
-      background-color: #ffe;
-      text-align: center;
-      font-size: 12px;
-      color: #aca094;
-      font-weight: normal; }
-      @media (max-width:639px) {
-        body table.collect > thead > tr > td, body table.collect > tbody > tr > td {
-          display: block;
-          width: auto;
-          text-align: center; } }
-    body table.collect > tbody > tr > th {
-      min-width: 150px;
-      width: auto; }
-  body form.cp_form div.cp_form_nav {
-    display: block;
-    position: fixed;
-    top: 60px;
-    left: 0px;
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 1000;
-    background-color: #ffe;
-    -webkit-opacity: 0;
-    -moz-opacity: 0;
-    -ms-opacity: 0;
-    -o-opacity: 0;
-    opacity: 0;
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    transform: -webkit- translateY(-60px);
-    transform: translateY(-60px);
-    box-shadow: 0 3px 7px rgba(0, 0, 0, .2); }
-    body form.cp_form.lead div.cp_form_nav {
-      -webkit-opacity: 0.9;
-      -moz-opacity: 0.9;
-      -ms-opacity: 0.9;
-      -o-opacity: 0.9;
-      opacity: 0.9;
-      transform: -webkit- translateY(0px);
-      transform: translateY(0px); }
-  body figure.wp-block-image {
-    display: block;
-    max-width: 96rem;
-    width: 100%;
-    margin: 5rem auto;
-    clear: both; }
-    body figure.wp-block-image img {
-      display: block;
-      width: 100%;
-      height: auto;
-      margin: 0px auto; }
-    @media (min-width:960px) {
-    body figure.wp-block-image.alignleft, body figure.wp-block-image.alignright {
-      width: 40%; }
-    body figure.wp-block-image.alignleft {
-      margin-right: 2rem;
-      float: left; }
-      body figure.wp-block-image.alignleft + * {
-        padding-left: 40%;
-        box-sizing: border-box; }
-    body figure.wp-block-image.alignright {
-      margin-left: 2rem;
-      float: right; }
-      body figure.wp-block-image.alignright + * {
-        padding-right: 40%;
-        box-sizing: border-box; } }
-  body ruby rt {
-    font-size: 40%;
-    font-weight: normal; }
-  body span.label {
-    display: inline-block;
-    padding: 4px 8px;
-    margin: 3px;
-    background-color: #321;
-    border-radius: 3px;
-    text-align: center;
-    font-size: 12px;
-    color: #ffe;
-    line-height: 12px;
-    font-weight: bold;
-    vertical-align: middle; }
-    body span.label small {
-      display: inline-block;
-      margin: 0px 5px;
-      font-size: 10px;
-      font-weight: normal; }
-    body span.label.s {
-      padding: 2px 8px;
-      margin: 0px 4px;
-      font-size: 10px;
-      border-radius: 10px; }
-    body span.label.s.f {
-      width: 80px; }
-    body span.label.s small {
-      margin: 0px 3px;
-      font-size: 8px; }
-    body span.label.m {
-      font-size: 12px; }
-    body span.label.m.f {
-      width: 100px; }
-    body span.label.m small {
-      margin: 0px 5px;
-      font-size: 10px; }
-    body span.label.l {
-      font-size: 14px; }
-    body span.label.l.f {
-      width: 120px; }
-    body span.label.l small {
-      margin: 0px 6px;
-      font-size: 11px; }
-    body span.label.color0 {
-      background-color: 0; }
-    body span.label.color1 {
-      background-color: #f20d0d; }
-    body span.label.color2 {
-      background-color: #f2800d; }
-    body span.label.color3 {
-      background-color: #f2f20d; }
-    body span.label.color4 {
-      background-color: #80f20d; }
-    body span.label.color5 {
-      background-color: #0df20d; }
-    body span.label.color6 {
-      background-color: #0df280; }
-    body span.label.color7 {
-      background-color: #0df2f2; }
-    body span.label.color8 {
-      background-color: #0d80f2; }
-    body span.label.color9 {
-      background-color: #0d0df2; }
-    body span.label.color10 {
-      background-color: #800df2; }
-    body span.label.color11 {
-      background-color: #f20df2; }
-    body span.label.color12 {
-      background-color: #f20d80; }
-  body span.item {
-    display: inline-block;
-    margin: 0px 3px; }
-  body span.icon {
-    display: inline-block;
-    margin: 0px 0.5rem;
-    padding: 0.5rem;
-    background-color: #321;
-    border-radius: 0.5rem;
-    text-align: center;
-    font-size: 0.8rem;
-    line-height: 1em;
-    font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
-    font-weight: 500;
-    color: #fff;
-    vertical-align: middle; }
-    body span.icon.high {
-      background-color: #f20d0d; }
-    body span.icon.new {
-      background-color: #0d80f2; }
-  body input[type="text"], body input[type="password"], body input[type="datetime"], body input[type="datetime-local"], body input[type="date"], body input[type="month"], body input[type="time"], body input[type="week"], body input[type="number"], body input[type="email"], body input[type="url"], body input[type="search"], body input[type="tel"], body input[type="color"], body textarea {
-    padding: 5px;
-    margin: 0px 5px;
-    box-sizing: border-box;
-    background-color: #ffe;
-    border-style: solid;
-    border-width: 1px;
-    border-color: rgba(136, 119, 102, .3);
-    font-size: 1.5rem;
-    color: #876; }
-  body input[type="text"]::placeholder, body input[type="password"]::placeholder, body input[type="datetime"]::placeholder, body input[type="datetime-local"]::placeholder, body input[type="date"]::placeholder, body input[type="month"]::placeholder, body input[type="time"]::placeholder, body input[type="week"]::placeholder, body input[type="number"]::placeholder, body input[type="email"]::placeholder, body input[type="url"]::placeholder, body input[type="search"]::placeholder, body input[type="tel"]::placeholder, body input[type="color"]::placeholder, body textarea::placeholder {
-    color: rgba(136, 119, 102, .3); }
-  body a {
-    color: #321; }
-  body a.mail {
-    display: inline-block;
-    margin: 3px 5px;
-    font-size: 14px;
-    color: #a09285;
-    -webkit-transition: 0.5s;
-    transition: 0.5s; }
-    body a.mail:before {
-      content: " \f0e0";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900;
-      display: inline-block;
-      margin-right: 5px; }
-    body a.mail:hover {
-      color: #321; }
-  body a.tel {
-    display: inline-block;
-    margin: 3px 5px;
-    font-size: 14px;
-    color: #a09285;
-    -webkit-transition: 0.5s;
-    transition: 0.5s; }
-    body a.tel:before {
-      content: " \f098";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900;
-      display: inline-block;
-      margin-right: 5px; }
-    body a.tel:hover {
-      color: #321; }
-  body header.notification {
-    margin: 10px; }
-    body header.notification h1 {
-      margin: 10px 0px;
-      padding: 10px;
-      font-size: 24px;
-      color: #321;
-      font-family: Georgiam, 'Hiragino Mincho ProN', 'Yu Mincho', serif;
-      font-weight: bold;
-      border-bottom-style: solid;
-      border-bottom-width: 1px;
-      border-bottom-color: #321; }
-    body header.notification h1 small {
-      font-size: 18px;
-      color: #321;
-      font-family: Georgiam, 'Hiragino Mincho ProN', 'Yu Mincho', serif;
-      font-weight: normal; }
-    body header.notification p {
-      margin: 10px;
-      font-size: 12px;
-      color: #a09285; }
-  body header.catch {
-    margin: 20px auto;
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
     -webkit-box-lines: multiple;
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
-    background-color: #321; }
-    body header.catch .text {
-      padding: 20px;
-      -webkit-box-flex: 300;
-      flex-grow: 300;
-      flex-shrink: 300;
-      flex-basis: 300px;
-      box-sizing: border-box; }
-      @media (min-width:960px) {
-      body header.catch .text {
-        padding: 30px; } }
-      @media (min-width:1600px) {
-      body header.catch .text {
-        padding: 40px; } }
-    body header.catch .text h1 {
-      font-size: 32px;
-      color: #ffe;
-      font-family: Georgiam, 'Hiragino Mincho ProN', 'Yu Mincho', serif;
-      font-weight: bold; }
-      @media (min-width:960px) {
-        body header.catch .text h1 {
-          font-size: 48px; } }
-      @media (min-width:1600px) {
-        body header.catch .text h1 {
-          font-size: 64px; } }
-    body header.catch .text p {
-      font-size: 16px;
-      color: #ffe;
-      font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif; }
-      @media (min-width:960px) {
-        body header.catch .text p {
-          font-size: 20px; } }
-      @media (min-width:1600px) {
-        body header.catch .text p {
-          font-size: 24px; } }
-    body header.catch .image {
-      position: relative;
-      -webkit-box-flex: 300;
-      flex-grow: 300;
-      flex-shrink: 300;
-      flex-basis: 300px; }
-    body header.catch .image figure img {
-      width: 100%;
-      height: auto; }
-      body header.catch .image figure figcaption {
-        position: absolute;
-        bottom: 5px;
-        right: 5px;
-        font-size: 11px;
-        color: #ffe;
-        font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif; }
-  body header.label h1 {
-    display: block;
-    position: relative;
-    padding: 5px 10px;
-    margin: 0px;
-    background-color: #5c4e41;
-    border-radius: 4px 4px 0px 0px;
-    font-size: 18px;
-    color: #ffe;
-    font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif; }
-    body header.label h1 i.fa {
-      margin-right: 10px; }
-    body header.label h1 img {
-      display: inline-block;
-      width: 30px;
-      height: auto;
-      margin-right: 5px; }
-    body header.label h1 small {
-      padding: 5px;
-      font-size: 11px;
-      color: #ffe;
-      font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', メイリオ, sans-serif;
-      vertical-align: middle; }
-  body .transition.org, body .transition.new, body .transition.del {
-    -webkit-transition: 1s;
-    transition: 1s; }
-  body .transition.org {
-    position: absolute; }
-  body .transition.new {
-    position: relative; }
-  body .transition.from.org {
-    -webkit-opacity: 1;
-    -moz-opacity: 1;
-    -ms-opacity: 1;
-    -o-opacity: 1;
-    opacity: 1; }
-    body .transition.from.new {
-      -webkit-opacity: 0;
-      -moz-opacity: 0;
-      -ms-opacity: 0;
-      -o-opacity: 0;
-      opacity: 0;
-      transform: -webkit- translateX(50px);
-      transform: translateX(50px); }
-    body .transition.from.del {
-      -webkit-opacity: 1;
-      -moz-opacity: 1;
-      -ms-opacity: 1;
-      -o-opacity: 1;
-      opacity: 1; }
-  body .transition.to.org {
-    -webkit-opacity: 0;
-    -moz-opacity: 0;
-    -ms-opacity: 0;
-    -o-opacity: 0;
-    opacity: 0; }
-    body .transition.to.new {
-      -webkit-opacity: 1;
-      -moz-opacity: 1;
-      -ms-opacity: 1;
-      -o-opacity: 1;
-      opacity: 1;
-      transform: -webkit- translateX(0px);
-      transform: translateX(0px); }
-    body .transition.to.del {
-      -webkit-opacity: 0;
-      -moz-opacity: 0;
-      -ms-opacity: 0;
-      -o-opacity: 0;
-      opacity: 0;
-      transform: -webkit- translateY(-20px);
-      transform: translateY(-20px); }
-  body [data-role="cp_form_submit"], body [data-role="cp_form_section_submit"], body [data-role="cp_form_acion_submit"] {
-    cursor: pointer; }
-
+  }
+  body ul.link > * {
+    flex-grow: 1;
+    box-sizing: border-box;
+  }
+  body ul.link > *:first-child:nth-last-child(1), body ul.link > *:first-child:nth-last-child(1) ~ * {
+    flex-basis: 100%;
+  }
+  body ul.link > *, body ul.link > *:first-child:nth-last-child(2), body ul.link > *:first-child:nth-last-child(2) ~ * {
+    flex-basis: 50%;
+  }
+  body ul.link > *:first-child:nth-last-child(3n), body ul.link > *:first-child:nth-last-child(3n) ~ *, body ul.link > *:nth-child(2n):nth-last-child(3n + 1) ~ * {
+    flex-basis: 33%;
+  }
+}
+body ul.link li.item {
+  position: relative;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+body ul.link li.item .image {
+  height: 30rem;
+  overflow: hidden;
+}
+body ul.link li.item .image img, body ul.link li.item .image video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+body ul.link li.item .text {
+  display: block;
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  padding: 2rem;
+  box-sizing: border-box;
+  background-color: rgba(51, 34, 17, 0.8);
+}
+body ul.link li.item .text h3 {
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #ffe;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1.5em;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-weight: 700;
+  color: #ffe;
+}
+body ul.link li.item .text p {
+  text-align: justify;
+  font-size: 1.2rem;
+  line-height: 1.5em;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-weight: 400;
+  color: #ffe;
+}
+body ul.link li.item a.link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+body ul.link li.item:hover .image img, body ul.link li.item:hover .image video {
+  transform: -webkit- scale(1.1);
+  transform: scale(1.1);
+}
+body ul.link li.spacer {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 30rem;
+  margin: 0px 1rem;
+}
+body ul.banner {
+  display: block;
+  position: relative;
+  max-width: 96rem;
+  width: 90%;
+  margin: 1rem auto;
+  padding: 1rem;
+  list-style: none;
+}
+body ul.banner li.item {
+  position: relative;
+  margin: 1rem;
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #F80;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-direction: reverse;
+  -webkit-box-orient: horizontal;
+  -webkit-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+body ul.banner li.item .image {
+  -webkit-box-flex: 2;
+  flex-grow: 2;
+  flex-shrink: 2;
+  flex-basis: 24rem;
+  min-height: 10rem;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+}
+body ul.banner li.item .image img, body ul.banner li.item .image video {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+body ul.banner li.item .text {
+  position: relative;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 24rem;
+  padding: 2rem;
+  box-sizing: border-box;
+  background-color: #F80;
+}
+body ul.banner li.item .text::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  display: block;
+  position: absolute;
+  width: 10rem;
+  height: 10rem;
+  top: 0px;
+  bottom: 0px;
+  left: 2rem;
+  margin: auto;
+  font-size: 10rem;
+  line-height: 1em;
+  color: #ffe;
+  opacity: 0.1;
+}
+body ul.banner li.item .text h3 {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #ffe;
+  text-align: left;
+  font-size: 2rem;
+  line-height: 1.5em;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-weight: 700;
+  color: #ffe;
+}
+body ul.banner li.item .text p {
+  text-align: justify;
+  font-size: 1.2rem;
+  line-height: 1.5em;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-weight: 400;
+  color: #ffe;
+}
+body ul.banner li.item a.link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+body ul.banner li.item:hover .image img, body ul.banner li.item:hover .image video {
+  transform: -webkit- scale(1.1);
+  transform: scale(1.1);
+}
+body ul.banner li.spacer {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 30rem;
+  margin: 0px 1rem;
+}
+body ul.tab {
+  display: block;
+  max-width: 96rem;
+  width: 95%;
+  margin: 3rem auto 2rem;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #F80;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  list-style: none;
+}
+body ul.tab li.item {
+  position: relative;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 20rem;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  background-color: rgba(51, 34, 17, 0.5);
+}
+body ul.tab li.item h3 {
+  margin: 0px;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1em;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-weight: 700;
+  color: #ffe;
+}
+body ul.tab li.item.active {
+  background-color: #F80;
+}
+body ul.tab li.item a.link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+body table.wp-list-table tr td div.cp-meta-item img, body table.wp-list-table tr td div.cp-meta-item video {
+  display: block;
+  width: 10rem;
+  height: auto;
+}
+body table.wp-block-table {
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+body table.wp-block-table.award {
+  position: relative;
+  margin: 1rem auto;
+}
+@media (max-width:639px) {
+  body table.wp-block-table.award {
+    margin: 1rem;
+  }
+}
+body table.wp-block-table.award tr td {
+  position: relative;
+  padding: 1rem;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #876;
+}
+body table.wp-block-table.award tr td:nth-of-type(1) {
+  width: 4rem;
+}
+body table.wp-block-table.award tr td:nth-of-type(2) {
+  width: 30rem;
+}
+body table.wp-block-table.award tr td:nth-of-type(3) {
+  width: 16rem;
+}
+body table.inputs {
+  margin: 4rem auto;
+  max-width: 96rem;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+body table.inputs * {
+  color: #876;
+}
+body table.inputs > thead > tr > th, body table.inputs > thead > tr > td, body table.inputs > tbody > tr > th, body table.inputs > tbody > tr > td {
+  padding: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #fffff5;
+}
+body table.inputs > thead > tr > th, body table.inputs > tbody > tr > th {
+  width: 12rem;
+  background-color: rgba(51, 34, 17, 0.5);
+  text-align: left;
+  font-size: 12px;
+  color: #aca094;
+  font-weight: bold;
+}
+body table.inputs > thead > tr > th i, body table.inputs > tbody > tr > th i {
+  display: inline-block;
+  width: 15px;
+  margin-right: 15px;
+  text-align: center;
+}
+body table.inputs > thead > tr > th.required:after, body table.inputs > tbody > tr > th.required:after {
+  content: "必須";
+  display: inline-block;
+  padding: 2px 5px;
+  margin-left: 5px;
+  background-color: #F80;
+  border-radius: 3px;
+  color: #ffe;
+  font-size: 10px;
+  line-height: 10px;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-weight: bold;
+  vertical-align: 3px;
+}
+body table.inputs > thead > tr > td, body table.inputs > tbody > tr > td {
+  background-color: rgba(255, 255, 238, 0.5);
+  text-align: left;
+  font-size: 11px;
+  color: #aca094;
+  font-weight: normal;
+}
+body table.inputs > thead > tr > td input, body table.inputs > thead > tr > td textarea, body table.inputs > tbody > tr > td input, body table.inputs > tbody > tr > td textarea {
+  background-color: #ffe;
+}
+body table.inputs > thead > tr > td textarea.full, body table.inputs > tbody > tr > td textarea.full {
+  width: 100%;
+  box-sizing: border-box;
+}
+body table.inputs > thead > tr > td > img, body table.inputs > tbody > tr > td > img {
+  width: 20rem;
+  height: auto;
+}
+body table.inputs > thead > tr > td span, body table.inputs > tbody > tr > td span {
+  display: inline-block;
+}
+body table.inputs > thead > tr.disabled, body table.inputs > tbody > tr.disabled {
+  display: none;
+}
+body table.manage {
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+body table.manage > thead > tr > th, body table.manage > thead > tr > td, body table.manage > tbody > tr > th, body table.manage > tbody > tr > td {
+  padding: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #fffff5;
+}
+body table.manage > thead > tr > th, body table.manage > tbody > tr > th {
+  background-color: rgba(51, 34, 17, 0.5);
+  text-align: left;
+  font-size: 12px;
+  color: #aca094;
+  font-weight: bold;
+}
+body table.manage > thead > tr > td, body table.manage > tbody > tr > td {
+  background-color: rgba(255, 255, 238, 0.5);
+  text-align: left;
+  font-size: 11px;
+  color: #aca094;
+  font-weight: normal;
+}
+body table.manage > thead > tr > td textarea.full, body table.manage > tbody > tr > td textarea.full {
+  width: 100%;
+  box-sizing: border-box;
+}
+body table.manage > thead > tr > td span, body table.manage > tbody > tr > td span {
+  display: inline-block;
+}
+body table.calendar {
+  position: relative;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+body table.calendar > caption {
+  padding: 20px 10px;
+  font-size: 18px;
+  color: #a09285;
+}
+body table.calendar > caption .month {
+  font-size: 36px;
+}
+body table.calendar > thead > tr > th {
+  padding: 2px;
+  background-color: #5c4e41;
+  text-align: center;
+  font-size: 12px;
+  color: #ffe;
+}
+body table.calendar > thead > tr > th p {
+  margin: 0px;
+}
+body table.calendar > tbody > tr > td {
+  position: relative;
+  width: 14%;
+  min-height: 100px;
+  height: auto;
+  padding: 5px;
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #f3f1f0;
+  vertical-align: top;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+body table.calendar > tbody > tr > td:hover {
+  background-color: #ebe9e7;
+}
+body table.calendar > tbody > tr > td p.date {
+  display: inline-block;
+  padding: 2px 5px;
+  margin: 0px;
+  font-size: 16px;
+  line-height: 16px;
+  color: #a09285;
+}
+body table.calendar > tbody > tr > td.event {
+  cursor: pointer;
+}
+body table.calendar > tbody > tr > td.holiday p.date {
+  background-color: #fa9e9e;
+  border-radius: 10px;
+  color: #ffe;
+}
+body table.calendar > tbody > tr > td p.holiday {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  padding: 2px 5px;
+  margin: 0px;
+  background-color: #fa9e9e;
+  border-radius: 10px;
+  font-size: 10px;
+  line-height: 10px;
+  color: #ffe;
+}
+body table.calendar > tbody > tr > td.out_month p.date {
+  color: #e7e4e0;
+}
+body table.calendar > tbody > tr > td ul.buttons li {
+  position: relative;
+  text-align: center;
+}
+body table.calendar > tbody > tr > td ul.buttons li div.button.diary {
+  padding-left: 15px;
+}
+body table.calendar > tbody > tr > td ul.buttons li div.button.diary::before {
+  display: block;
+  position: absolute;
+  padding: 4px;
+  width: 14px;
+  height: 14px;
+  top: -5px;
+  left: -12px;
+  background-color: inherit;
+  text-align: center;
+  font-size: 14px;
+  line-height: 14px;
+  color: #ffe;
+  border-style: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+body table.calendar > tbody > tr > td ul.cal-events {
+  padding: 5px 15px;
+  list-style: none;
+}
+body table.calendar > tbody > tr > td ul.cal-events li > ul {
+  margin: 0px;
+}
+body table.calendar > tbody > tr > td div.events div.event {
+  display: none;
+}
+body table.calendar > tbody > tr > td div.events div.event label {
+  display: block;
+  padding: 2px;
+  border-radius: 10px;
+  background-color: #e1ddd9;
+  text-align: center;
+  font-size: 10px;
+  line-height: 10px;
+  color: #ffe;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+body table.calendar > tbody > tr > td div.events div.event label input {
+  display: none;
+}
+body table.calendar > tbody > tr > td div.events div.event.active, body table.calendar > tbody > tr > td div.events div.event:hover {
+  display: block;
+}
+body table.calendar > tbody > tr > td div.events div.event.active label, body table.calendar > tbody > tr > td div.events div.event:hover label {
+  background-color: #321;
+}
+body table.calendar > tbody > tr > td div.events div.event.event0.active label, body table.calendar > tbody > tr > td div.events div.event.event0:hover label {
+  background-color: 0;
+}
+body table.calendar > tbody > tr > td div.events div.event.event1.active label, body table.calendar > tbody > tr > td div.events div.event.event1:hover label {
+  background-color: #f20d0d;
+}
+body table.calendar > tbody > tr > td div.events div.event.event2.active label, body table.calendar > tbody > tr > td div.events div.event.event2:hover label {
+  background-color: #f2800d;
+}
+body table.calendar > tbody > tr > td div.events div.event.event3.active label, body table.calendar > tbody > tr > td div.events div.event.event3:hover label {
+  background-color: #f2f20d;
+}
+body table.calendar > tbody > tr > td div.events div.event.event4.active label, body table.calendar > tbody > tr > td div.events div.event.event4:hover label {
+  background-color: #80f20d;
+}
+body table.calendar > tbody > tr > td div.events div.event.event5.active label, body table.calendar > tbody > tr > td div.events div.event.event5:hover label {
+  background-color: #0df20d;
+}
+body table.calendar > tbody > tr > td div.events div.event.event6.active label, body table.calendar > tbody > tr > td div.events div.event.event6:hover label {
+  background-color: #0df280;
+}
+body table.calendar > tbody > tr > td div.events div.event.event7.active label, body table.calendar > tbody > tr > td div.events div.event.event7:hover label {
+  background-color: #0df2f2;
+}
+body table.calendar > tbody > tr > td div.events div.event.event8.active label, body table.calendar > tbody > tr > td div.events div.event.event8:hover label {
+  background-color: #0d80f2;
+}
+body table.calendar > tbody > tr > td div.events div.event.event9.active label, body table.calendar > tbody > tr > td div.events div.event.event9:hover label {
+  background-color: #0d0df2;
+}
+body table.calendar > tbody > tr > td div.events div.event.event10.active label, body table.calendar > tbody > tr > td div.events div.event.event10:hover label {
+  background-color: #800df2;
+}
+body table.calendar > tbody > tr > td div.events div.event.event11.active label, body table.calendar > tbody > tr > td div.events div.event.event11:hover label {
+  background-color: #f20df2;
+}
+body table.calendar > tbody > tr > td div.events div.event.event12.active label, body table.calendar > tbody > tr > td div.events div.event.event12:hover label {
+  background-color: #f20d80;
+}
+body table.collect {
+  width: calc(100% - 20px);
+  margin: 10px auto;
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+body table.collect > thead > tr > th, body table.collect > thead > tr > td, body table.collect > tbody > tr > th, body table.collect > tbody > tr > td {
+  padding: 3px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #f3f1f0;
+}
+body table.collect > thead > tr > th, body table.collect > tbody > tr > th {
+  width: 150px;
+  background-color: #ebe9e7;
+  text-align: center;
+  font-size: 12px;
+  color: #aca094;
+  font-weight: bold;
+}
+body table.collect > thead > tr > td, body table.collect > tbody > tr > td {
+  background-color: #ffe;
+  text-align: center;
+  font-size: 12px;
+  color: #aca094;
+  font-weight: normal;
+}
+body table.collect > tbody > tr > th {
+  min-width: 150px;
+  width: auto;
+}
+body form.cp_form div.cp_form_nav {
+  display: block;
+  position: fixed;
+  top: 60px;
+  left: 0px;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1000;
+  background-color: #ffe;
+  opacity: 0;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  transform: -webkit- translateY(-60px);
+  transform: translateY(-60px);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+}
+body form.cp_form.lead div.cp_form_nav {
+  opacity: 0.9;
+  transform: -webkit- translateY(0px);
+  transform: translateY(0px);
+}
+body figure.wp-block-image {
+  display: block;
+  max-width: 96rem;
+  width: 100%;
+  margin: 5rem auto;
+  clear: both;
+}
+body figure.wp-block-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0px auto;
+}
+@media (min-width:960px) {
+  body figure.wp-block-image.alignleft, body figure.wp-block-image.alignright {
+    width: 40%;
+  }
+  body figure.wp-block-image.alignleft {
+    margin-right: 2rem;
+    float: left;
+  }
+  body figure.wp-block-image.alignleft + * {
+    padding-left: 40%;
+    box-sizing: border-box;
+  }
+  body figure.wp-block-image.alignright {
+    margin-left: 2rem;
+    float: right;
+  }
+  body figure.wp-block-image.alignright + * {
+    padding-right: 40%;
+    box-sizing: border-box;
+  }
+}
+body ruby rt {
+  font-size: 40%;
+  font-weight: normal;
+}
+body span.label {
+  display: inline-block;
+  padding: 4px 8px;
+  margin: 3px;
+  background-color: #321;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 12px;
+  color: #ffe;
+  line-height: 12px;
+  font-weight: bold;
+  vertical-align: middle;
+}
+body span.label small {
+  display: inline-block;
+  margin: 0px 5px;
+  font-size: 10px;
+  font-weight: normal;
+}
+body span.label.s {
+  padding: 2px 8px;
+  margin: 0px 4px;
+  font-size: 10px;
+  border-radius: 10px;
+}
+body span.label.s.f {
+  width: 80px;
+}
+body span.label.s small {
+  margin: 0px 3px;
+  font-size: 8px;
+}
+body span.label.m {
+  font-size: 12px;
+}
+body span.label.m.f {
+  width: 100px;
+}
+body span.label.m small {
+  margin: 0px 5px;
+  font-size: 10px;
+}
+body span.label.l {
+  font-size: 14px;
+}
+body span.label.l.f {
+  width: 120px;
+}
+body span.label.l small {
+  margin: 0px 6px;
+  font-size: 11px;
+}
+body span.label.color0 {
+  background-color: 0;
+}
+body span.label.color1 {
+  background-color: #f20d0d;
+}
+body span.label.color2 {
+  background-color: #f2800d;
+}
+body span.label.color3 {
+  background-color: #f2f20d;
+}
+body span.label.color4 {
+  background-color: #80f20d;
+}
+body span.label.color5 {
+  background-color: #0df20d;
+}
+body span.label.color6 {
+  background-color: #0df280;
+}
+body span.label.color7 {
+  background-color: #0df2f2;
+}
+body span.label.color8 {
+  background-color: #0d80f2;
+}
+body span.label.color9 {
+  background-color: #0d0df2;
+}
+body span.label.color10 {
+  background-color: #800df2;
+}
+body span.label.color11 {
+  background-color: #f20df2;
+}
+body span.label.color12 {
+  background-color: #f20d80;
+}
+body span.item {
+  display: inline-block;
+  margin: 0px 3px;
+}
+body span.icon {
+  display: inline-block;
+  margin: 0px 0.5rem;
+  padding: 0.5rem;
+  background-color: #321;
+  border-radius: 0.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  line-height: 1em;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-weight: 500;
+  color: #fff;
+  vertical-align: middle;
+}
+body span.icon.high {
+  background-color: #f20d0d;
+}
+body span.icon.new {
+  background-color: #0d80f2;
+}
+body input[type="text"], body input[type="password"], body input[type="datetime"], body input[type="datetime-local"], body input[type="date"], body input[type="month"], body input[type="time"], body input[type="week"], body input[type="number"], body input[type="email"], body input[type="url"], body input[type="search"], body input[type="tel"], body input[type="color"], body textarea {
+  padding: 5px;
+  margin: 0px 5px;
+  box-sizing: border-box;
+  background-color: #ffe;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(136, 119, 102, 0.3);
+  font-size: 1.5rem;
+  color: #876;
+}
+body input[type="text"]::placeholder, body input[type="password"]::placeholder, body input[type="datetime"]::placeholder, body input[type="datetime-local"]::placeholder, body input[type="date"]::placeholder, body input[type="month"]::placeholder, body input[type="time"]::placeholder, body input[type="week"]::placeholder, body input[type="number"]::placeholder, body input[type="email"]::placeholder, body input[type="url"]::placeholder, body input[type="search"]::placeholder, body input[type="tel"]::placeholder, body input[type="color"]::placeholder, body textarea::placeholder {
+  color: rgba(136, 119, 102, 0.3);
+}
+body a {
+  color: #321;
+}
+body a.mail {
+  display: inline-block;
+  margin: 3px 5px;
+  font-size: 14px;
+  color: #a09285;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+body a.mail:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  display: inline-block;
+  margin-right: 5px;
+}
+body a.mail:hover {
+  color: #321;
+}
+body a.tel {
+  display: inline-block;
+  margin: 3px 5px;
+  font-size: 14px;
+  color: #a09285;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+body a.tel:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  display: inline-block;
+  margin-right: 5px;
+}
+body a.tel:hover {
+  color: #321;
+}
+body header.notification {
+  margin: 10px;
+}
+body header.notification h1 {
+  margin: 10px 0px;
+  padding: 10px;
+  font-size: 24px;
+  color: #321;
+  font-family: Georgiam, "Hiragino Mincho ProN", "Yu Mincho", serif;
+  font-weight: bold;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #321;
+}
+body header.notification h1 small {
+  font-size: 18px;
+  color: #321;
+  font-family: Georgiam, "Hiragino Mincho ProN", "Yu Mincho", serif;
+  font-weight: normal;
+}
+body header.notification p {
+  margin: 10px;
+  font-size: 12px;
+  color: #a09285;
+}
+body header.catch {
+  margin: 20px auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  background-color: #321;
+}
+body header.catch .text {
+  padding: 20px;
+  -webkit-box-flex: 300;
+  flex-grow: 300;
+  flex-shrink: 300;
+  flex-basis: 300px;
+  box-sizing: border-box;
+}
+body header.catch .text h1 {
+  font-size: 32px;
+  color: #ffe;
+  font-family: Georgiam, "Hiragino Mincho ProN", "Yu Mincho", serif;
+  font-weight: bold;
+}
+body header.catch .text p {
+  font-size: 16px;
+  color: #ffe;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+}
+body header.catch .image {
+  position: relative;
+  -webkit-box-flex: 300;
+  flex-grow: 300;
+  flex-shrink: 300;
+  flex-basis: 300px;
+}
+body header.catch .image figure img {
+  width: 100%;
+  height: auto;
+}
+body header.catch .image figure figcaption {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-size: 11px;
+  color: #ffe;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+}
+body header.label h1 {
+  display: block;
+  position: relative;
+  padding: 5px 10px;
+  margin: 0px;
+  background-color: #5c4e41;
+  border-radius: 4px 4px 0px 0px;
+  font-size: 18px;
+  color: #ffe;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+}
+body header.label h1 i.fa {
+  margin-right: 10px;
+}
+body header.label h1 img {
+  display: inline-block;
+  width: 30px;
+  height: auto;
+  margin-right: 5px;
+}
+body header.label h1 small {
+  padding: 5px;
+  font-size: 11px;
+  color: #ffe;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  vertical-align: middle;
+}
+body .transition.org, body .transition.new, body .transition.del {
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+body .transition.org {
+  position: absolute;
+}
+body .transition.new {
+  position: relative;
+}
+body .transition.from.org {
+  opacity: 1;
+}
+body .transition.from.new {
+  opacity: 0;
+  transform: -webkit- translateX(50px);
+  transform: translateX(50px);
+}
+body .transition.from.del {
+  opacity: 1;
+}
+body .transition.to.org {
+  opacity: 0;
+}
+body .transition.to.new {
+  opacity: 1;
+  transform: -webkit- translateX(0px);
+  transform: translateX(0px);
+}
+body .transition.to.del {
+  opacity: 0;
+  transform: -webkit- translateY(-20px);
+  transform: translateY(-20px);
+}
+body [data-role="cp_form_submit"], body [data-role="cp_form_section_submit"], body [data-role="cp_form_acion_submit"] {
+  cursor: pointer;
+}
 #cp_lightbox {
   position: fixed;
   top: 0px;
@@ -2066,87 +1747,89 @@ body div.cp_message {
   z-index: 100000;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, .6);
+  background-color: #00000088;
   -webkit-transition: 0.5s;
   transition: 0.5s;
-  -webkit-opacity: 0;
-  -moz-opacity: 0;
-  -ms-opacity: 0;
-  -o-opacity: 0;
   opacity: 0;
-  pointer-events: none; }
-  #cp_lightbox .cp_lightbox_content {
-    position: relative;
-    max-width: 80rem;
-    width: 90vw;
-    max-height: 80rem;
-    height: 90vh;
-    position: absolute;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    margin: auto;
-    padding: 10px;
-    overflow: visible;
-    background-color: #ffe;
-    box-shadow: 0 10px 21px rgba(0, 0, 0, .2); }
-  #cp_lightbox .cp_lightbox_content div.group ul.items li.item img {
-    width: 100%;
-    height: auto; }
-    #cp_lightbox .cp_lightbox_content div.group div.control .prev, #cp_lightbox .cp_lightbox_content div.group div.control .next {
-      display: none;
-      position: absolute;
-      top: 0px;
-      bottom: 0px;
-      margin: auto;
-      font-size: 3rem;
-      color: #888;
-      -webkit-opacity: 0.8;
-      -moz-opacity: 0.8;
-      -ms-opacity: 0.8;
-      -o-opacity: 0.8;
-      opacity: 0.8; }
-      #cp_lightbox .cp_lightbox_content div.group div.control .prev.active, #cp_lightbox .cp_lightbox_content div.group div.control .next.active {
-        display: block; }
-    #cp_lightbox .cp_lightbox_content div.group div.control .prev {
-      left: -1rem; }
-      #cp_lightbox .cp_lightbox_content div.group div.control .prev::before {
-        content: " \f137";
-        font-family: 'Font Awesome 5 Free';
-        font-weight: 900; }
-    #cp_lightbox .cp_lightbox_content div.group div.control .next {
-      right: -1rem; }
-      #cp_lightbox .cp_lightbox_content div.group div.control .next::before {
-        content: " \f138";
-        font-family: 'Font Awesome 5 Free';
-        font-weight: 900; }
-    #cp_lightbox .cp_lightbox_content div.group div.control .close {
-      position: absolute;
-      width: 3rem;
-      height: 3rem;
-      padding: 0.5rem;
-      top: -2rem;
-      right: -2rem;
-      text-align: center;
-      font-size: 3rem;
-      line-height: 1em;
-      color: #f80;
-      background-color: #ffe;
-      border-radius: 3rem;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, .2); }
-      #cp_lightbox .cp_lightbox_content div.group div.control .close::before {
-        content: " \f057";
-        font-family: 'Font Awesome 5 Free';
-        font-weight: 900; }
-    #cp_lightbox .cp_lightbox_content div.group div.control ul.dots li.dot::before {
-      content: " \f0c8";
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900; }
-  #cp_lightbox.active {
-    -webkit-opacity: 1;
-    -moz-opacity: 1;
-    -ms-opacity: 1;
-    -o-opacity: 1;
-    opacity: 1;
-    pointer-events: auto; }
+  pointer-events: none;
+}
+#cp_lightbox .cp_lightbox_content {
+  position: relative;
+  max-width: 80rem;
+  width: 90vw;
+  max-height: 80rem;
+  height: 90vh;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+  padding: 10px;
+  overflow: visible;
+  background-color: #ffe;
+  box-shadow: 0 10px 21px rgba(0, 0, 0, 0.3);
+}
+#cp_lightbox .cp_lightbox_content div.group ul.items li.item img {
+  width: 100%;
+  height: auto;
+}
+#cp_lightbox .cp_lightbox_content div.group div.control .prev, #cp_lightbox .cp_lightbox_content div.group div.control .next {
+  display: none;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  margin: auto;
+  font-size: 3rem;
+  color: #888;
+  opacity: 0.8;
+}
+#cp_lightbox .cp_lightbox_content div.group div.control .prev.active, #cp_lightbox .cp_lightbox_content div.group div.control .next.active {
+  display: block;
+}
+#cp_lightbox .cp_lightbox_content div.group div.control .prev {
+  left: -1rem;
+}
+#cp_lightbox .cp_lightbox_content div.group div.control .prev::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+#cp_lightbox .cp_lightbox_content div.group div.control .next {
+  right: -1rem;
+}
+#cp_lightbox .cp_lightbox_content div.group div.control .next::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+#cp_lightbox .cp_lightbox_content div.group div.control .close {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  padding: 0.5rem;
+  top: -2rem;
+  right: -2rem;
+  text-align: center;
+  font-size: 3rem;
+  line-height: 1em;
+  color: #F80;
+  background-color: #ffe;
+  border-radius: 3rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+#cp_lightbox .cp_lightbox_content div.group div.control .close::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+#cp_lightbox .cp_lightbox_content div.group div.control ul.dots li.dot::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+#cp_lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+/*# sourceMappingURL=./content.css.map */

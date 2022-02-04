@@ -1,4 +1,4 @@
-@charset "utf-8";
+@charset "UTF-8";
 .wp-block-catpow-formbuttons li.item {
   position: relative;
   list-style: none;
@@ -25,7 +25,7 @@
 }
 .wp-block-catpow-formbuttons li.item div.button .action::before {
   content: "";
-  font-family: 'Font Awesome 5 Free';
+  font-family: "Font Awesome 5 Free";
   font-weight: 900;
   display: inline-block;
   margin-right: 0.5em;

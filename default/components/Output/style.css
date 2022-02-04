@@ -1,33 +1,32 @@
-@charset "utf-8";
 .OutputGroup > .item {
-  padding: 10px 0px;
+  padding: 0.625rem 0rem;
 }
 .OutputGroup > .item + .item {
   border-top-style: solid;
-  border-top-width: 1px;
+  border-top-width: 0.0625rem;
   border-top-color: #c7c7c7;
 }
 .OutputGroup > .item dl {
-  margin: 0px;
-  padding: 5px;
+  margin: 0rem;
+  padding: 0.3125rem;
 }
 .OutputGroup > .item dl dt {
   clear: both;
   float: left;
-  width: 100px;
-  padding: 2px;
-  margin: 0px;
+  width: 6.25rem;
+  padding: 0.125rem;
+  margin: 0rem;
 }
 .OutputGroup > .item dl dd {
-  padding: 2px;
-  padding-left: 110px;
-  margin: 0px;
+  padding: 0.125rem;
+  padding-left: 6.875rem;
+  margin: 0rem;
   min-height: 1.5em;
   height: auto;
 }
 .OutputImages > .item > .image {
   display: block;
-  max-width: 300px;
+  max-width: 18.75rem;
   width: auto;
   height: auto;
 }

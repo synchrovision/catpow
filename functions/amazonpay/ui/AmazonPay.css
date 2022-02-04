@@ -1,95 +1,109 @@
-@charset "utf-8";
+@charset "UTF-8";
 #AmazonPayButtonContainer {
   padding: 1rem;
-  text-align: center; }
-
+  text-align: center;
+}
 .amazonPayPopup {
   position: fixed;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
+  top: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  right: 0rem;
   z-index: 10000;
   background-color: rgba(0, 0, 0, 0.8);
   -webkit-transition: 1s;
   transition: 1s;
-  opacity: 1; }
-  .amazonPayPopup:not(.open) {
-    opacity: 0;
-    pointer-events: none; }
-  .amazonPayPopup .amazonPayPopupContent {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    background-color: #fefefe;
-    transform: -webkit- translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%); }
-    .amazonPayPopup .amazonPayPopupContent .amazonPayWidget {
-      width: 300px;
-      height: 228px;
-      margin: 1rem; }
-    @media (min-width:640px) {
-      .amazonPayPopup .amazonPayPopupContent .amazonPayWidget {
-        width: 400px; } }
-    .amazonPayPopup .amazonPayPopupContent .amazonPayError {
-      display: block;
-      position: relative;
-      margin: 1rem;
-      padding: 0.5rem;
-      border-radius: 0.3rem;
-      background-color: #e4b33c;
-      text-align: center;
-      font-size: 1.4rem;
-      line-height: 1em;
-      font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
-      color: #fefefe; }
-    .amazonPayPopup .amazonPayPopupContent .amazonPayCheckoutButton {
-      display: block;
-      width: 20rem;
-      height: auto;
-      margin: 1rem auto;
-      padding: 1rem;
-      text-align: center;
-      font-size: 2rem;
-      line-height: 1em;
-      font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
-      font-weight: 700;
-      color: #000;
-      background-image: -webkit-linear-gradient(bottom, #efd18a, #e9c263 49%, #e4b33c 50%, #e9c263);
-      background-image: -moz-linear-gradient(bottom, #efd18a, #e9c263 49%, #e4b33c 50%, #e9c263);
-      background-image: -ms-linear-gradient(bottom, #efd18a, #e9c263 49%, #e4b33c 50%, #e9c263);
-      background-image: -o-linear-gradient(bottom, #efd18a, #e9c263 49%, #e4b33c 50%, #e9c263);
-      background-image: linear-gradient(180deg, #efd18a, #e9c263 49%, #e4b33c 50%, #e9c263);
-      border-radius: 0.5rem; }
-      .amazonPayPopup .amazonPayPopupContent .amazonPayCheckoutButton:not(.active) {
-        background-image: -webkit-linear-gradient(bottom, #e0e0e0, #d6d6d6 49%, #ccc 50%, #d6d6d6);
-        background-image: -moz-linear-gradient(bottom, #e0e0e0, #d6d6d6 49%, #ccc 50%, #d6d6d6);
-        background-image: -ms-linear-gradient(bottom, #e0e0e0, #d6d6d6 49%, #ccc 50%, #d6d6d6);
-        background-image: -o-linear-gradient(bottom, #e0e0e0, #d6d6d6 49%, #ccc 50%, #d6d6d6);
-        background-image: linear-gradient(180deg, #e0e0e0, #d6d6d6 49%, #ccc 50%, #d6d6d6);
-        color: #888; }
-    .amazonPayPopup .amazonPayPopupContent .amazonPayPopupClose {
-      position: absolute;
-      top: -2rem;
-      right: -2rem;
-      width: 3rem;
-      height: 3rem;
-      z-index: 20;
-      background-color: rgba(68, 68, 68, 0.8);
-      border-radius: 2rem;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
-      .amazonPayPopup .amazonPayPopupContent .amazonPayPopupClose::before, .amazonPayPopup .amazonPayPopupContent .amazonPayPopupClose::after {
-        content: '';
-        display: block;
-        position: absolute;
-        width: 2rem;
-        height: 0.2rem;
-        top: 1.4rem;
-        left: 0.5rem;
-        background-color: #fefefe; }
-      .amazonPayPopup .amazonPayPopupContent .amazonPayPopupClose::before {
-        transform: -webkit- rotateZ(45deg);
-        transform: rotateZ(45deg); }
-      .amazonPayPopup .amazonPayPopupContent .amazonPayPopupClose::after {
-        transform: -webkit- rotateZ(-45deg);
-        transform: rotateZ(-45deg); }
+  opacity: 1;
+}
+.amazonPayPopup:not(.open) {
+  opacity: 0;
+  pointer-events: none;
+}
+.amazonPayPopup .amazonPayPopupContent {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: #f8f8f8;
+  transform: -webkit- translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+.amazonPayPopup .amazonPayPopupContent .amazonPayWidget {
+  width: 18.75rem;
+  height: 14.25rem;
+  margin: 1rem;
+}
+@media (min-width:640px) {
+  .amazonPayPopup .amazonPayPopupContent .amazonPayWidget {
+    width: 25rem;
+  }
+}
+.amazonPayPopup .amazonPayPopupContent .amazonPayError {
+  display: block;
+  position: relative;
+  margin: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  background-color: #e4b33c;
+  text-align: center;
+  font-size: 1.4rem;
+  line-height: 1em;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  color: #f8f8f8;
+}
+.amazonPayPopup .amazonPayPopupContent .amazonPayCheckoutButton {
+  display: block;
+  width: 20rem;
+  height: auto;
+  margin: 1rem auto;
+  padding: 1rem;
+  text-align: center;
+  font-size: 2rem;
+  line-height: 1em;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-weight: 700;
+  color: #000;
+  background-image: -webkit-linear-gradient(bottom, #efd18a, #e9c263 49%, #e4b33c 50%, #e9c263);
+  background-image: -moz-linear-gradient(bottom, #efd18a, #e9c263 49%, #e4b33c 50%, #e9c263);
+  background-image: -ms-linear-gradient(bottom, #efd18a, #e9c263 49%, #e4b33c 50%, #e9c263);
+  background-image: -o-linear-gradient(bottom, #efd18a, #e9c263 49%, #e4b33c 50%, #e9c263);
+  background-image: linear-gradient(180deg, #efd18a, #e9c263 49%, #e4b33c 50%, #e9c263);
+  border-radius: 0.5rem;
+}
+.amazonPayPopup .amazonPayPopupContent .amazonPayCheckoutButton:not(.active) {
+  background-image: -webkit-linear-gradient(bottom, #e0e0e0, #d6d6d6 49%, #ccc 50%, #d6d6d6);
+  background-image: -moz-linear-gradient(bottom, #e0e0e0, #d6d6d6 49%, #ccc 50%, #d6d6d6);
+  background-image: -ms-linear-gradient(bottom, #e0e0e0, #d6d6d6 49%, #ccc 50%, #d6d6d6);
+  background-image: -o-linear-gradient(bottom, #e0e0e0, #d6d6d6 49%, #ccc 50%, #d6d6d6);
+  background-image: linear-gradient(180deg, #e0e0e0, #d6d6d6 49%, #ccc 50%, #d6d6d6);
+  color: #888;
+}
+.amazonPayPopup .amazonPayPopupContent .amazonPayPopupClose {
+  position: absolute;
+  top: -2rem;
+  right: -2rem;
+  width: 3rem;
+  height: 3rem;
+  z-index: 20;
+  background-color: rgba(68, 68, 68, 0.8);
+  border-radius: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+.amazonPayPopup .amazonPayPopupContent .amazonPayPopupClose::before, .amazonPayPopup .amazonPayPopupContent .amazonPayPopupClose::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 2rem;
+  height: 0.2rem;
+  top: 1.4rem;
+  left: 0.5rem;
+  background-color: #f8f8f8;
+}
+.amazonPayPopup .amazonPayPopupContent .amazonPayPopupClose::before {
+  transform: -webkit- rotateZ(45deg);
+  transform: rotateZ(45deg);
+}
+.amazonPayPopup .amazonPayPopupContent .amazonPayPopupClose::after {
+  transform: -webkit- rotateZ(-45deg);
+  transform: rotateZ(-45deg);
+}
+/*# sourceMappingURL=./AmazonPay.css.map */

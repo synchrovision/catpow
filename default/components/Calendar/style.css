@@ -1,4 +1,4 @@
-@charset "utf-8";
+@charset "UTF-8";
 .Calendar {
   padding: 1em;
   margin: 0rem auto;
@@ -40,16 +40,16 @@
   color: #c7c7c7;
 }
 .Calendar > table caption .year .prev::before {
-  content: '';
+  content: "";
 }
 .Calendar > table caption .year .next::before {
-  content: '';
+  content: "";
 }
 .Calendar > table caption .year .prev10::before {
-  content: '';
+  content: "";
 }
 .Calendar > table caption .year .next10::before {
-  content: '';
+  content: "";
 }
 .Calendar > table caption .month {
   display: block;
@@ -63,7 +63,7 @@
   vertical-align: bottom;
 }
 .Calendar > table caption .month .current::after {
-  content: '月';
+  content: "月";
 }
 .Calendar > table caption .month .btn::before {
   color: #c7c7c7;
@@ -74,7 +74,7 @@
   left: 0rem;
 }
 .Calendar > table caption .month .prev::before {
-  content: '＜';
+  content: "＜";
   display: inline-block;
   margin-right: 0.5em;
 }
@@ -84,7 +84,7 @@
   right: 0rem;
 }
 .Calendar > table caption .month .next::before {
-  content: '＞';
+  content: "＞";
   display: inline-block;
   margin-left: 0.5em;
 }
@@ -110,18 +110,18 @@
   color: #ececec;
 }
 .Calendar.small {
-  font-size: 1rem;
+  font-size: 0.625rem;
 }
 .Calendar.medium {
-  font-size: 1.5rem;
+  font-size: 0.9375rem;
 }
 .Calendar.large {
-  font-size: 1.5rem;
+  font-size: 0.9375rem;
 }
 .Calendar.large .day {
   width: 10em;
   height: 10em;
-  padding: 1rem;
+  padding: 0.625rem;
   box-sizing: border-box;
   text-align: left;
   vertical-align: top;

@@ -1,4 +1,4 @@
-@charset "utf-8";
+@charset "UTF-8";
 .itemControl {
   padding: 0.125rem 0.3125rem;
   position: relative;
@@ -32,37 +32,37 @@
 }
 .itemControl div.btn.delete::before {
   content: "";
-  font-family: 'Font Awesome 5 Free';
+  font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 .itemControl div.btn.clone::before {
   content: "";
-  font-family: 'Font Awesome 5 Free';
+  font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 .itemControl div.btn.up::before {
   content: "";
-  font-family: 'Font Awesome 5 Free';
+  font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 .itemControl div.btn.down::before {
   content: "";
-  font-family: 'Font Awesome 5 Free';
+  font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 .itemControl div.btn.left::before {
   content: "";
-  font-family: 'Font Awesome 5 Free';
+  font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 .itemControl div.btn.right::before {
   content: "";
-  font-family: 'Font Awesome 5 Free';
+  font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 .itemControl div.btn.edit::before {
   content: "";
-  font-family: 'Font Awesome 5 Free';
+  font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 .itemControl div.btn:hover {
@@ -137,7 +137,7 @@
   text-align: center;
   font-size: 0.625rem;
   line-height: 0.625rem;
-  font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   font-weight: 400;
   color: #444;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
@@ -162,7 +162,7 @@
   text-align: center;
   font-size: 0.75rem;
   line-height: 0.625rem;
-  font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   font-weight: 400;
   color: #f8f8f8;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
@@ -204,7 +204,7 @@
   text-align: center;
   font-size: 0.75rem;
   line-height: 0.625rem;
-  font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   font-weight: 400;
   color: #f8f8f8;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
@@ -226,7 +226,7 @@
   background-color: #ececec;
 }
 .selectColor li::after {
-  content: ' ';
+  content: " ";
   display: block;
   position: absolute;
   top: 0.0625rem;
@@ -495,7 +495,7 @@
   color: #a2a2a2;
 }
 .dataStructure .item.hasChildren > .title::before {
-  content: '▶︎';
+  content: "▶︎";
   display: block;
   position: absolute;
   top: 0.3em;

@@ -1188,7 +1188,7 @@ body{
 }
 #cp_lightbox{
 	@include bnd((p:f,t:0,l:0,z:100000,w:100vw,h:100vh));
-	@include bg((c:0 0 .6));
+	@include bg((c:#00000088));
 	@include trn((t:.5s,o:0));
 	@include usr((e:n));
 	.cp_lightbox_content{

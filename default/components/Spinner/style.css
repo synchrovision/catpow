@@ -1,37 +1,36 @@
-@charset "utf-8";
 .Spinner-circle {
   position: relative;
-  min-height: 300px;
+  min-height: 18.75rem;
   height: 100%;
 }
 .Spinner-circle > .graphics {
   position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
+  top: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  right: 0rem;
   margin: auto;
-  width: 80px;
-  height: 80px;
+  width: 5rem;
+  height: 5rem;
 }
 .Spinner-circle > .graphics > .graphic {
   position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
+  top: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  right: 0rem;
   box-sizing: border-box;
   border-style: solid;
-  border-width: 3px;
+  border-width: 0.1875rem;
   border-color: transparent;
   border-radius: 50%;
 }
 .Spinner-circle > .graphics > .graphic1 {
-  border-width: 3px;
+  border-width: 0.1875rem;
   border-color: #ececec;
 }
 .Spinner-circle > .graphics > .graphic2, .Spinner-circle > .graphics > .graphic3 {
-  border-top-width: 3px;
+  border-top-width: 0.1875rem;
   border-top-style: solid;
   border-top-color: #007cba;
   animation: SpinnerCircleRotate 1s infinite ease forwards;

@@ -1,6 +1,5 @@
-@charset "utf-8";
 .InputDateTime {
-  padding: 10px;
+  padding: 0.625rem;
 }
 .InputDateTime.invalid .InputDateTime__date {
   background-color: rgba(214, 91, 91, 0.2);

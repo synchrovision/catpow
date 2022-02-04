@@ -1,4 +1,3 @@
-@charset "utf-8";
 .FinderFocused > .items {
   border-collapse: collapse;
   border-spacing: 0px;
@@ -11,10 +10,10 @@
   background-color: #ececec;
 }
 .FinderFocused > .items > .item > .label {
-  padding: 10px;
-  width: 200px;
+  padding: 0.625rem;
+  width: 12.5rem;
 }
 .FinderFocused > .items > .item > .value {
-  padding: 10px;
+  padding: 0.625rem;
 }
 /*# sourceMappingURL=./style.css.map */

@@ -1,4 +1,4 @@
-@charset "utf-8";
+@charset "UTF-8";
 #cp_log {
   display: block;
   position: fixed;
@@ -54,7 +54,7 @@
   transition: 0.5s;
 }
 #cp_log table tr.close td::before {
-  content: '…';
+  content: "…";
 }
 #cp_log table tr.close td table {
   display: none;

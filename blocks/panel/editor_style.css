@@ -1,4 +1,4 @@
-@charset "utf-8";
+@charset "UTF-8";
 ul.wp-block-catpow-panel li.item {
   position: relative;
 }
@@ -82,7 +82,7 @@ ul.wp-block-catpow-panel.edit li.item div.text .link a {
 }
 ul.wp-block-catpow-panel.edit li.item div.text .link a::before {
   content: "";
-  font-family: 'Font Awesome 5 Free';
+  font-family: "Font Awesome 5 Free";
   font-weight: 900;
   display: inline-block;
   margin-right: 0.5em;

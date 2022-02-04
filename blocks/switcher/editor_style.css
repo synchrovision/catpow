@@ -1,4 +1,4 @@
-@charset "utf-8";
+@charset "UTF-8";
 .switcherEdit {
   position: relative;
   padding-top: 2em;
@@ -29,7 +29,7 @@
   text-align: center;
   font-size: 0.75rem;
   line-height: 1em;
-  font-family: 'Helvetica Neue', "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   list-style: none;
   cursor: pointer;
 }

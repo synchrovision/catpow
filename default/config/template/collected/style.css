@@ -1,9 +1,9 @@
 @charset "utf-8";
 .collected {
-  max-width: 96rem;
+  max-width: 960;
   width: auto;
   margin: 0px auto;
-  padding: 2rem;
+  padding: 20;
   box-sizing: border-box; }
   .collected_group {
     list-style: none; }
@@ -13,7 +13,7 @@
     border-bottom-style: solid;
     border-bottom-width: 1px;
     border-bottom-color: #acacac;
-    font-size: 2rem;
+    font-size: 20;
     cursor: pointer; }
     .collected_label::before {
       content: '';
@@ -46,7 +46,7 @@
     -webkit-box-flex: 1;
     flex-grow: 1;
     flex-shrink: 1;
-    flex-basis: 40rem;
+    flex-basis: 400;
     padding: 1em;
     list-style: none; }
     .collected_item_title {
@@ -55,4 +55,4 @@
       border-bottom-style: solid;
       border-bottom-width: 1px;
       border-bottom-color: #acacac;
-      font-size: 1.5rem; }
+      font-size: 15; }
