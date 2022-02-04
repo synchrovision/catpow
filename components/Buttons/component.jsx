@@ -1,5 +1,6 @@
 ﻿Catpow.Buttons=(props)=>{
 	const {className="medium"}=props;
+	const {useMemo}=wp.element;
 	if(props.children){
 		return (
 			<div className={"Buttons "+className}>

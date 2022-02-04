@@ -1,6 +1,7 @@
 Catpow.Buttons = function (props) {
   var _props$className = props.className,
       className = _props$className === void 0 ? "medium" : _props$className;
+  var useMemo = wp.element.useMemo;
 
   if (props.children) {
     return wp.element.createElement("div", {
