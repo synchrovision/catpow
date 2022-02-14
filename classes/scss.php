@@ -2,6 +2,9 @@
 namespace Catpow;
 use ScssPhp\ScssPhp\Compiler;
 use ScssPhp\ScssPhp\Type;
+use Spatie\Color\Hex;
+use Spatie\Color\Hsl;
+use Spatie\Color\Rgba;
 
 class scss{
 	public static $scssc;
@@ -19,7 +22,7 @@ class scss{
 			$vars=$scssc->getVariables();
 			if($vars['is_plugins_scss']==Compiler::$true){
 				$catpow_dir=WP_PLUGIN_DIR.'/catpow/';
-				$plugin_dir=preg_replace('|(/wp-content/plugins/.+?/).+$|','$1',$vars['scss_name']);
+				$plugin_dir=preg_replace('|(/wp-content/plugins/.+?/).+$|','$1',$vars['scss_name'][1]);
 				foreach(['scss/','default/'] as $d){
 					if(file_exists($f=$plugin_dir.$d.$path)){return $f;}
 					if($catpow_dir!==$plugin_dir && file_exists($f=$catpow_dir.$d.$path)){return $f;}
@@ -31,14 +34,15 @@ class scss{
 		});
 		$scssc->setSourceMap(Compiler::SOURCE_MAP_FILE);
 		$color_roles=util\style_config::get_color_roles();
-		$scssc->setVariables([
+		$theme_customize_values=[
 			'header_image'=>get_header_image(),
 			'background_image'=>get_background_image(),
 			'background_color'=>get_theme_mod('background_color')?'#'.get_theme_mod('background_color'):$color_roles['background_color']['default'],
 			'main_color'=>get_theme_mod('main_color',$color_roles['main_color']['default']),
 			'accent_color'=>get_theme_mod('accent_color',$color_roles['accent_color']['default']),
 			'text_color'=>get_theme_mod('text_color',$color_roles['text_color']['default'])
-		]);
+		];
+		$scssc->setVariables($theme_customize_values);
 		$scssc->registerFunction('debug',function($args){
 			error_log(var_export($args,1));
 			return false;
@@ -59,6 +63,31 @@ class scss{
 			if(!is_dir($dir)){mkdir($dir,0777,true);}
 			file_put_contents($dir.'/colors.json',json_encode($data,0700));
 			return true;
+		});
+		$scssc->registerFunction('import_colors',function($args)use($scssc,$theme_customize_values){
+			$b=$theme_customize_values['background_color'];
+			$m=$theme_customize_values['main_color'];
+			$a=$theme_customize_values['accent_color'];
+			$t=$theme_customize_values['text_color'];
+			$colors=compact('b','m','a','t');
+			$m_hsl=Hex::fromString($m)->toHsl();
+			$a_hsl=Hex::fromString($a)->toHsl();
+			$b_hsl=Hex::fromString($b)->toHsl();
+			foreach(range(1,12) as $i){
+				$colors[$i]=(string)(new Hsl(($i-1)*30,$m_hsl->saturation(),$m_hsl->lightness()))->toHex();
+				$colors['a'.$i]=(string)(new Hsl(($i-1)*30,$a_hsl->saturation(),$a_hsl->lightness()))->toHex();
+			}
+			$colors['b2']=(string)(new Hsl($b_hsl->hue(),$b_hsl->saturation(),$b_hsl->lightness()-5))->toHex();
+			$colors['sh']='#00000033';
+			$colors['lt']='#FFFFFF88';
+			$colors['shd']='#00000044';
+			$colors['i']='#FFFFFF';
+			$colors['n']='transparent';
+			return [
+				TYPE::T_MAP,
+				array_map(function($key){return [TYPE::T_KEYWORD,$key];},array_keys($colors)),
+				array_map(function($val){return [TYPE::T_KEYWORD,$val];},array_values($colors))
+			];
 		});
 		do_action('cp_scss_compiler_init',$scssc);
 		return static::$scssc=$scssc;
