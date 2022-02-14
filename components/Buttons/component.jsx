@@ -19,12 +19,12 @@
 		}
 		return Object.keys(props.options).map((key)=>{
 			const [label,className]=(key+':').split(':');
-			return {label,className,value:props.options[label]};
+			return {label,className,value:props.options[key]};
 		});
 	},[props.options]);
 	return (
 		<div className={"Buttons "+className}>
-			{options.map((option,index)=><Catpow.Button {...option} key={index}/>)}
+			{options.map((option,index)=><Catpow.Button onClick={onClick} {...option} key={index}/>)}
 		</div>
 	);
 }

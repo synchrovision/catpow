@@ -39,14 +39,16 @@ Catpow.Buttons = function (props) {
       return {
         label: label,
         className: className,
-        value: props.options[label]
+        value: props.options[key]
       };
     });
   }, [props.options]);
   return wp.element.createElement("div", {
     className: "Buttons " + className
   }, options.map(function (option, index) {
-    return wp.element.createElement(Catpow.Button, babelHelpers.extends({}, option, {
+    return wp.element.createElement(Catpow.Button, babelHelpers.extends({
+      onClick: onClick
+    }, option, {
       key: index
     }));
   }));
