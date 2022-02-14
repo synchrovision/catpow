@@ -11,7 +11,7 @@ $id=uniqid();
 $GLOBALS['loop_block_data'][$id]=[
 	'path'=>$attr['content_path'],
 	'query'=>$attr['query'],
-	'content'=>$contents['content']['content'],
-	'on_empty'=>$contents['on_empty']['content'],
+	'content'=>$contents['content']['content']??'',
+	'on_empty'=>$contents['on_empty']['content']??'',
 ];
 echo "[loop_block {$id}]";
