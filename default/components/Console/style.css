@@ -1,0 +1,52 @@
+.Console {
+  overflow: hidden;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  border-radius: 0.625rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+.Console__controles {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 18.75rem;
+  padding: 1.25rem;
+}
+.Console__controles .ControlItem__label {
+  padding-bottom: 0.3125rem;
+  margin-bottom: 0.3125rem;
+  border-bottom-style: solid;
+  border-bottom-width: 0.0625rem;
+  font-size: 1rem;
+}
+.Console__controles .ControlItem__desc {
+  font-size: 0.875rem;
+}
+.Console__controles .ControlItem__body {
+  padding: 0.3125rem;
+}
+.Console__results {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 18.75rem;
+  padding: 1.25rem;
+  min-height: 6.25rem;
+  max-height: 50rem;
+  height: auto;
+  background-color: #f6f6f6;
+}
+.Console__results .error {
+  color: #d65c5c;
+}
+.Console__results .warn {
+  color: #d6d65c;
+}
+.Console__results .log {
+  color: #444;
+}
+/*# sourceMappingURL=./style.css.map */
