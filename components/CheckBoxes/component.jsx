@@ -1,8 +1,7 @@
 ﻿Catpow.CheckBoxes=(props)=>{
 	const {useMemo}=wp.element;
-	const {value,onChange}=props;
+	const {value=[],onChange}=props;
 	const {CheckBox}=Catpow;
-	
 	const options=useMemo(()=>{
 		if(Array.isArray(props.options)){
 			return props.options.map((option)=>{
@@ -16,20 +15,19 @@
 	},[props.options]);
 	
 	if(Array.isArray(value)){
+		const flags={};
+		value.map((val)=>flags[val]=true);
 		return (
 			<div className={"CheckBoxes"}>
 				{options.map((option)=>(
 					<CheckBox
 						label={option.label}
 						onChange={(selected)=>{
-							onChange(
-								option.value,selected,
-								selected?
-								value.concat(value,[option.value]):
-								value.filter((val)=>val!==option.value)
-							)
+							if(selected){flags[option.value]=true;}
+							else{delete flags[option.value];}
+							onChange(Object.keys(flags));
 						}}
-						selected={value.indexOf(option.value)!==-1}
+						selected={flags[option.value]}
 					/>
 				))}
 			</div>

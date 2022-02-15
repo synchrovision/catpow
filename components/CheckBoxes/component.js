@@ -1,6 +1,7 @@
 Catpow.CheckBoxes = function (props) {
   var useMemo = wp.element.useMemo;
-  var value = props.value,
+  var _props$value = props.value,
+      value = _props$value === void 0 ? [] : _props$value,
       _onChange = props.onChange;
   var _Catpow = Catpow,
       CheckBox = _Catpow.CheckBox;
@@ -27,17 +28,25 @@ Catpow.CheckBoxes = function (props) {
   }, [props.options]);
 
   if (Array.isArray(value)) {
+    var flags = {};
+    value.map(function (val) {
+      return flags[val] = true;
+    });
     return wp.element.createElement("div", {
       className: "CheckBoxes"
     }, options.map(function (option) {
       return wp.element.createElement(CheckBox, {
         label: option.label,
         onChange: function onChange(selected) {
-          _onChange(option.value, selected, selected ? value.concat(value, [option.value]) : value.filter(function (val) {
-            return val !== option.value;
-          }));
+          if (selected) {
+            flags[option.value] = true;
+          } else {
+            delete flags[option.value];
+          }
+
+          _onChange(Object.keys(flags));
         },
-        selected: value.indexOf(option.value) !== -1
+        selected: flags[option.value]
       });
     }));
   }
