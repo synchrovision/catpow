@@ -34,14 +34,19 @@ class scss{
 		});
 		$scssc->setSourceMap(Compiler::SOURCE_MAP_FILE);
 		$color_roles=util\style_config::get_color_roles();
+		$font_roles=util\style_config::get_font_roles();
+		$colors=get_theme_mod('colors');
+		$fonts=get_theme_mod('fonts');
 		$theme_customize_values=[
 			'header_image'=>get_header_image(),
-			'background_image'=>get_background_image(),
-			'background_color'=>get_theme_mod('background_color')?'#'.get_theme_mod('background_color'):$color_roles['background_color']['default'],
-			'main_color'=>get_theme_mod('main_color',$color_roles['main_color']['default']),
-			'accent_color'=>get_theme_mod('accent_color',$color_roles['accent_color']['default']),
-			'text_color'=>get_theme_mod('text_color',$color_roles['text_color']['default'])
+			'background_image'=>get_background_image()
 		];
+		foreach($color_roles as $color_role=>$color_role_settings){
+			$theme_customize_values[$color_role.'_color']=$colors[$color_role]??$color_role_settings['default'];
+		}
+		foreach($font_roles as $font_role=>$font_role_settings){
+			$theme_customize_values[$font_role.'_font']=$fonts[$font_role]??$font_role_settings['default'];
+		}
 		$scssc->setVariables($theme_customize_values);
 		$scssc->registerFunction('debug',function($args){
 			error_log(var_export($args,1));
@@ -53,23 +58,17 @@ class scss{
 			}
 			return false;
 		});
-		$scssc->registerFunction('export_colors',function($args)use($scssc){
-			if(empty($args[0]) || $args[0][0]!=='map'){return false;}
-			$data=array_combine(
-				array_map([$scssc,'compileValue'],$args[0][1]),
-				array_map([$scssc,'compileValue'],$args[0][2])
-			);
-			$dir=get_stylesheet_directory().'/json';
-			if(!is_dir($dir)){mkdir($dir,0777,true);}
-			file_put_contents($dir.'/colors.json',json_encode($data,0700));
-			return true;
+		$scssc->registerFunction('export_colors',function($args){
+			static::export_map_data('colors',$args);
 		});
-		$scssc->registerFunction('import_colors',function($args)use($scssc,$theme_customize_values){
-			$b=$theme_customize_values['background_color'];
-			$m=$theme_customize_values['main_color'];
-			$a=$theme_customize_values['accent_color'];
-			$t=$theme_customize_values['text_color'];
-			$colors=compact('b','m','a','t');
+		$scssc->registerFunction('export_fonts',function($args){
+			static::export_map_data('fonts',$args);
+		});
+		$scssc->registerFunction('import_colors',function($args)use($scssc,$color_roles,$theme_customize_values){
+			foreach($color_roles as $color_role=>$color_role_settings){
+				$colors[$color_role_settings['shorthand']]=$theme_customize_values[$color_role.'_color'];
+			}
+			extract($colors);
 			$m_hsl=Hex::fromString($m)->toHsl();
 			$a_hsl=Hex::fromString($a)->toHsl();
 			$b_hsl=Hex::fromString($b)->toHsl();
@@ -83,11 +82,14 @@ class scss{
 			$colors['shd']='#00000044';
 			$colors['i']='#FFFFFF';
 			$colors['n']='transparent';
-			return [
-				TYPE::T_MAP,
-				array_map(function($key){return [TYPE::T_KEYWORD,$key];},array_keys($colors)),
-				array_map(function($val){return [TYPE::T_KEYWORD,$val];},array_values($colors))
-			];
+			return self::create_map_data($colors);
+		});
+		$scssc->registerFunction('import_fonts',function($args)use($scssc,$font_roles,$theme_customize_values){
+			$fonts=[];
+			foreach($font_roles as $font_role=>$font_role_settings){
+				$fonts[$font_role_settings['shorthand']]=$theme_customize_values[$font_role.'_font'];
+			}
+			return self::create_map_data($fonts);
 		});
 		do_action('cp_scss_compiler_init',$scssc);
 		return static::$scssc=$scssc;
@@ -144,6 +146,24 @@ class scss{
 			}
 		}
 	
+	}
+	public static function create_map_data($data){
+		return [
+			TYPE::T_MAP,
+			array_map(function($key){return [TYPE::T_KEYWORD,$key];},array_keys($data)),
+			array_map(function($val){return [TYPE::T_KEYWORD,$val];},array_values($data))
+		];
+	}
+	public static function export_map_data($name,$args){
+		if(empty($args[0]) || $args[0][0]!=='map'){return false;}
+		$data=array_combine(
+			array_map([static::$scssc,'compileValue'],$args[0][1]),
+			array_map([static::$scssc,'compileValue'],$args[0][2])
+		);
+		$dir=get_stylesheet_directory().'/json';
+		if(!is_dir($dir)){mkdir($dir,0777,true);}
+		file_put_contents($dir.'/'.$name.'.json',json_encode($data,0700));
+		return true;
 	}
 }
 
