@@ -23,18 +23,23 @@ add_action('cp_cron_daily',function(){
 	cp::include_plugin_files('action/cron_daily');
 },20);
 
+/*plugin update*/
+add_action('upgrader_process_complete',function($upgrader,$hook_extra){
+	cp::include_plugin_files('action/upgrader_process_complete');
+},10,2);
+
+/*plugin init*/
 add_action('cp_init',function(){
 	cp::include_plugin_files('action/cp_init');
 },20);
-
 add_action('cp_setup',function(){
 	cp::include_plugin_files('action/cp_setup');
 },20);
+
+/*init*/
 add_action('parse_request',function($wp){
 	cp::include_plugin_files('action/parse_request',compact('wp'));
 },20);
-
-/*init*/
 add_action('init',function(){
 	cp::include_plugin_files('action/init');
 },20);
