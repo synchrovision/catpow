@@ -44,6 +44,23 @@ class style_config{
 		do_action('cp_style_config_update');
 		update_option('cp_style_config_modified_time',time());
 	}
+	public static function set_config_json($domain,$data){
+		return file_put_contents(self::get_config_dir_path().'/'.$domain.'.json',json_encode($data,0700));
+	}
+	public static function get_config_json($domain){
+		if(file_exists($f=self::get_config_dir_path().'/'.$domain.'.json')){
+			return json_decode(file_get_contents($f),true);
+		}
+		return [];
+	}
+	public static function get_config_dir_path(){
+		static $path;
+		if(isset($path)){return $path;}
+		$path=WP_CONTENT_DIR.'/config/';
+		if(is_multisite()){$path.=get_current_blog_id().'/';}
+		$path.=get_stylesheet();
+		return $path;
+	}
 }
 
 ?>
