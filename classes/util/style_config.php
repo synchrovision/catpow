@@ -44,6 +44,19 @@ class style_config{
 		do_action('cp_style_config_update');
 		update_option('cp_style_config_modified_time',time());
 	}
+	public static function print_css_vars(){
+		$vars=apply_filters('cp_css_vars',[
+			'colors'=>self::get_config_json('colors'),
+			'fonts'=>self::get_config_json('fonts')
+		]);
+		echo '<style type="text/css">:root{';
+		foreach($vars as $group=>$vals){
+			foreach($vals as $key=>$val){
+				printf('--cp-%s-%s:%s;',$group,$key,$val);
+			}
+		}
+		echo '}</style>';
+	}
 	public static function set_config_json($domain,$data){
 		return file_put_contents(self::get_config_dir_path().'/'.$domain.'.json',json_encode($data,0700));
 	}
