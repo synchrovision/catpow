@@ -14,11 +14,26 @@ if(!empty($_GET['color'])){
 }
 elseif(!empty($_GET['c'])){
 	if(preg_match('/^\w+$/',$_GET['c'])){
-		if(!empty($_GET['theme']) && preg_match('/^[\w\-]+$/',$_GET['theme'])){
-			$json=preg_replace('@(/wp-content/).+$@',"$1themes/{$_GET['theme']}/json/colors.json",$file);
+		$config_dir=dirname(__DIR__,3)."/config";
+		if(file_exists($sites=$config_dir.'/sites.json') && $sites=json_decode(file_get_contents($sites),true)){
+			$site=$sites[$_SERVER['HTTP_HOST'].strstr($_SERVER['REQUEST_URI'],'/wp-content/',true).'/']??null;
+		}
+		if(empty($_GET['theme'])){
+			if(preg_match('@/wp-content/themes/(?P<theme>[\w\-]+)/@',$file,$matches)){
+				$theme=$matches['theme'];
+			}
+		}
+		elseif(preg_match('/^[\w\-]+$/',$_GET['theme'])){
+			$theme=$_GET['theme'];
+		}
+		if(!empty($theme)){
+			$json=$config_dir.($site?"/{$site}/":'/').$theme.'/colors.json';
+			if(!file_exists($json)){
+				$json=preg_replace('@(/wp-content/).+$@',"$1themes/{$theme}/json/colors.json",$file);
+			}
 		}
 		else{
-			$json=preg_replace('@(/wp-content/(themes/[\w\-]+|plugins/catpow/default)/).+$@','$1json/colors.json',$file);
+			$json=dirname(__DIR__).'/default/json/colors.json';
 		}
 		if(($colors=json_decode(file_get_contents($json),true)) && $c=$colors[$_GET['c']]??null){
 			if(isset($c))$svg=str_replace('<svg ',"<svg color='{$c}' fill='currentcolor' ",$svg);
