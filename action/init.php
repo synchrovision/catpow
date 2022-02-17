@@ -39,6 +39,13 @@ wp_localize_script('catpow','cp',array(
 	'wp_rest_nonce'=>wp_create_nonce('wp_rest')
 ));
 
+if($GLOBALS['is_IE']){
+	wp_enqueue_script('object-fit-images','https://cdnjs.cloudflare.com/ajax/libs/object-fit-images⁄3.2.4/ofi.min.js');
+	wp_enqueue_script('smoothscroll-polyfill','https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js');
+	wp_enqueue_script('stickyfill','https://cdnjs.cloudflare.com/ajax/libs/stickyfill/2.1.0/stickyfill.min.js');
+	wp_enqueue_script('css-vars-ponyfill','https://cdnjs.cloudflare.com/ajax/libs/css-vars-ponyfill/2.3.2/css-vars-ponyfill.min.js');
+}
+
 /* script translation */
 add_filter('load_script_translation_file',function($file,$handle,$domain){
 	if($domain==='catpow' && substr($handle,-3)==='.js'){
