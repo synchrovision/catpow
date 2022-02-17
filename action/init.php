@@ -46,6 +46,10 @@ if($GLOBALS['is_IE']){
 	wp_enqueue_script('css-vars-ponyfill','https://cdnjs.cloudflare.com/ajax/libs/css-vars-ponyfill/2.3.2/css-vars-ponyfill.min.js');
 }
 
+/* css vars */
+add_action('admin_head',[\cp::get_class_name('util','style_config'),'print_css_vars']);
+add_action('wp_head',[\cp::get_class_name('util','style_config'),'print_css_vars']);
+
 /* script translation */
 add_filter('load_script_translation_file',function($file,$handle,$domain){
 	if($domain==='catpow' && substr($handle,-3)==='.js'){
