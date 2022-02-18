@@ -420,7 +420,7 @@ class CP{
 		if(wp_style_is($src) || isset($missed[$src])){return false;}
 		if(wp_style_is($src,'registered')){wp_enqueue_style($src);return true;}
 		if(empty($file=self::get_file_path_url($src,$flag))){$missed[$src]=1;return false;}
-		scss::compile([substr($src,0,-4)]);
+		if(current_user_can('edit_themes')){scss::compile([substr($src,0,-4)]);}
 		if(empty($ver)){$ver=filemtime(key($file));}
 		wp_enqueue_style($src,reset($file),$deps,$ver,$media);
 		return true;
@@ -1983,7 +1983,7 @@ class CP{
 	
 	/*scss*/
 	public static function scss_compile($scss_names){
-		scss::compile($scss_names);
+		if(current_user_can('edit_themes')){scss::compile($scss_names);}
 	}
 	/*gzip*/
 	public static function gzip_compress($files){
