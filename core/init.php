@@ -43,6 +43,9 @@ add_action('parse_request',function($wp){
 add_action('init',function(){
 	cp::include_plugin_files('action/init');
 },20);
+add_action('customize_preview_init',function($manager){
+	cp::include_plugin_files('action/customize_preview_init',compact('manager'));
+},20,1);
 
 /*ログイン画面アクション*/
 add_action('login_init',function(){
