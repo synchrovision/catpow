@@ -13,7 +13,7 @@ jQuery.catpow.set_page_top_offset=function(offset){
 	if(Number.isInteger(offset)){
 		return $.catpow.pageTopOffset=offset;	
 	}
-	if(typeof offset === 'string'){offset=jQuery(offset);}
+	if(typeof offset==='string'){offset=jQuery(offset);}
 	if(offset instanceof jQuery){offset=offset.get(0);}
 	if(offset instanceof HTMLElement){
 		$(window).on('resize.set_page_top_offset scroll.set_page_top_offset',function(){
@@ -1206,9 +1206,9 @@ Catpow.util={
 			el.setAttribute('type','text/javascript');
 			el.setAttribute('src',src);
 			document.body.appendChild(el);
-			el.onload = el.onreadystatechange = function( _, isAbort ) {
+			el.onload=el.onreadystatechange=function( _, isAbort ) {
 				if(isAbort || !el.readyState || /loaded|complete/.test(el.readyState) ) {
-					el.onload = el.onreadystatechange = null;
+					el.onload=el.onreadystatechange=null;
 					if(!isAbort) { dfr.resolve(); }
 				}
 			};
@@ -1292,15 +1292,52 @@ Catpow.util={
 	/*file*/
 	download:function(data,name,type){
 		var blob=new Blob([data],{type:type||'text/plain'});
-		var url = window.URL || window.webkitURL;
-		var blobURL = url.createObjectURL(blob);
+		var url=window.URL || window.webkitURL;
+		var blobURL=url.createObjectURL(blob);
 
-		var a = document.createElement('a');
-		a.download = name||'undefined.txt';
-		a.href = blobURL;
+		var a=document.createElement('a');
+		a.download=name||'undefined.txt';
+		a.href=blobURL;
 		a.click();
 		a.remove();
 		return true;
+	},
+	/*color*/
+	hslToHex:function(hsl){
+		var l=hsl.l/100;
+		var a=hsl.s*Math.min(l,1-l)/100;
+		var f=function(n){
+			var k=(n+hsl.h/30)%12;
+			var c=l-a*Math.max(Math.min(k-3,9-k,1),-1);
+			return Math.round(255*c).toString(16).padStart(2,'0');
+		};
+		return '#'+f(0)+f(8)+f(4);
+	},
+	hexToHsl:function(hex){
+		var h=0,s=0;
+		var rgb=hex.match(/#?(\w{2})(\w{2})(\w{2})/).slice(1).map(function(c){return parseInt(c,16)/0xff;});
+		var max=Math.max.apply(null,rgb);
+		var min=Math.min.apply(null,rgb);
+		var d=max-min;
+		var l=(max+min)/2;
+		var [r,g,b]=rgb;
+		
+		if(d!=0){
+			if(r===max){
+				h=60*((g-b)/d)%6;
+				h=h<0?h+360:h;
+			}
+			if(g===max){
+				h=60*(((b-r)/d)+2);
+			}
+			if(b===max){
+				h=60*(((r-g)/d)+4);
+			}
+		}
+		if(l>0 && l<1){
+			s=d/(1-Math.abs(l*2-1));
+		}
+		return {h:Math.round(h),s:Math.round(s*100),l:Math.round(l*100)};
 	}
 };
 
