@@ -68,20 +68,7 @@ class scss{
 			foreach($color_roles as $color_role=>$color_role_settings){
 				$colors[$color_role_settings['shorthand']]=$theme_customize_values[$color_role.'_color'];
 			}
-			extract($colors);
-			$m_hsl=Hex::fromString($m)->toHsl();
-			$a_hsl=Hex::fromString($a)->toHsl();
-			$b_hsl=Hex::fromString($b)->toHsl();
-			foreach(range(1,12) as $i){
-				$colors[$i]=(string)(new Hsl(($i-1)*30,$m_hsl->saturation(),$m_hsl->lightness()))->toHex();
-				$colors['a'.$i]=(string)(new Hsl(($i-1)*30,$a_hsl->saturation(),$a_hsl->lightness()))->toHex();
-			}
-			$colors['b2']=(string)(new Hsl($b_hsl->hue(),$b_hsl->saturation(),$b_hsl->lightness()-5))->toHex();
-			$colors['sh']='#00000033';
-			$colors['lt']='#FFFFFF88';
-			$colors['shd']='#00000044';
-			$colors['i']='#FFFFFF';
-			$colors['n']='transparent';
+			$colors=util\style_config::extend_colors($colors);
 			return self::create_map_data($colors);
 		});
 		$scssc->registerFunction('import_fonts',function($args)use($scssc,$font_roles,$theme_customize_values){
@@ -90,6 +77,32 @@ class scss{
 				$fonts[$font_role_settings['shorthand']]=$theme_customize_values[$font_role.'_font'];
 			}
 			return self::create_map_data($fonts);
+		});
+		$scssc->registerFunction('translate_color',function($args){
+			$args=array_map([static::$scssc,'compileValue'],$args);
+			$color=false;
+			$colors=util\style_config::get_config_json('colors');
+			$tones=util\style_config::get_config_json('tones');
+			if($args[1]==='false' && $args[2]==='false' && isset($colors[$args[0]])){
+				$color=sprintf('var(--cp-colors-%s)',$args[0]);
+			}
+			elseif(preg_match('/^([a-z]+)?(\d+)?$/',$args[0],$matches)){
+				$key=$matches[1]?:'m';
+				$num=$matches[2]??null;
+				error_log(var_export($matches,1).__FILE__.':'.__LINE__);
+				if(isset($tones[$key])){
+					$f='var(--cp-tones-'.$key.'-%s)';
+					$tone=$tones[$key];
+					$color=sprintf(
+						'hsla(%s,%s,%s,%s)',
+						empty($num)?sprintf($f,'h'):30*($num-1),
+						sprintf($f,'s'),
+						$args[1]==='false'?'calc(1% * '.sprintf($f,'l').')':sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]),
+						$args[2]==='false'?1:$args[2]
+					);
+				}
+			}
+			return apply_filters('cp_translate_color',$color,$args);
 		});
 		do_action('cp_scss_compiler_init',$scssc);
 		return static::$scssc=$scssc;
@@ -103,7 +116,6 @@ class scss{
 		if(empty($style_config_modified_time)){
 			if(empty($config_file=CP::get_file_path('config/style_config.scss',CP::FROM_THEME))){$style_config_modified_time=0;}
 			else{$style_config_modified_time=filemtime($config_file);}
-			$style_config_modified_time=max((int)get_option('cp_style_config_modified_time',0),$style_config_modified_time);
 		}
 		if(empty($admin_style_config_modified_time)){
 			if(empty($admin_config_file=CP::get_file_path('scss/admin_style_config.scss',CP::FROM_PLUGIN))){$admin_style_config_modified_time=0;}
