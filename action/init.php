@@ -250,6 +250,7 @@ if(function_exists('register_block_type')){
 	if(current_user_can('edit_themes')){\cp::gzip_compress(glob(WP_PLUGIN_DIR.'/catpow/blocks/*/*.{js,css}',GLOB_BRACE));}
 	add_filter('allowed_block_types_all',function($allowed_block_types,$block_editor_context){
 		$post=$block_editor_context->post;
+		if(empty($post)){return $allowed_block_types;}
 		if($post->post_type==='page'){
 			$conf_data=$GLOBALS['static_pages'][$post->post_name]??null;
 		}
