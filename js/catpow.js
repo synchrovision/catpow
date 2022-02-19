@@ -1324,7 +1324,7 @@ Catpow.util={
 		
 		if(d!=0){
 			if(r===max){
-				h=60*((g-b)/d)%6;
+				h=60*((g-b)/d);
 				h=h<0?h+360:h;
 			}
 			if(g===max){
