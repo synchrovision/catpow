@@ -1366,4 +1366,6 @@ Math.pround=function(n,p){
 Math.pceil=function(n,p){
 	return parseFloat(Math.ceil(parseFloat(n+'e'+p))+'e-'+p);
 };
-
+Math.clamp=function(a,b,c){
+	return Math.max(a,Math.min(b,c));
+}
