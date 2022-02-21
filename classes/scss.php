@@ -122,6 +122,15 @@ class scss{
 			$tone=apply_filters('cp_extract_color_tone',$tone,$args);
 			return self::create_map_data($tone);
 		});
+		$scssc->registerFunction('translate_font',function($args){
+			$args=array_map([static::$scssc,'compileValue'],$args);
+			$font=false;
+			$fonts=util\style_config::get_config_json('fonts');
+			if(isset($fonts[$args[0]])){
+				$font=sprintf('var(--cp-fonts-%s)',$args[0]);
+			}
+			return apply_filters('cp_translate_font',$font,$args);
+		});
 		do_action('cp_scss_compiler_init',$scssc);
 		return static::$scssc=$scssc;
 		

@@ -23,6 +23,13 @@ add_action('wp_head',function(){
 			});
 		});
 <?php endforeach; ?>
+<?php foreach(Catpow\util\style_config::get_font_roles() as $role=>$conf):$key=$conf['shorthand'];?>
+		wp.customize('fonts[<?=$role?>]',function(setting){
+			setting.bind(function(font){
+				rootStyle.setProperty('--cp-fonts-<?=$key?>',font);
+			});
+		});
+<?php endforeach; ?>
 	});
 </script>
 <?php
