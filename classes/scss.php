@@ -47,7 +47,7 @@ class scss{
 		foreach($font_roles as $font_role=>$font_role_settings){
 			$theme_customize_values[$font_role.'_font']=$fonts[$font_role]??$font_role_settings['default'];
 		}
-		$scssc->setVariables($theme_customize_values);
+		$scssc->addVariables(self::create_map_data($theme_customize_values));
 		$scssc->registerFunction('debug',function($args){
 			error_log(var_export($args,1));
 			return false;
@@ -101,7 +101,9 @@ class scss{
 					);
 				}
 			}
-			return apply_filters('cp_translate_color',$color,$args);
+			$color=apply_filters('cp_translate_color',$color,$args);
+			if(empty($color)){return Compiler::$false;}
+			return [TYPE::T_KEYWORD,$color];
 		});
 		$scssc->registerFunction('extract_color_tone',function($args){
 			$args=array_map([static::$scssc,'compileValue'],$args);
@@ -114,8 +116,8 @@ class scss{
 					$f='var(--cp-tones-'.$key.'-%s)';
 					$tone=[
 						'h'=>isset($num)?30*($num-1).'deg':sprintf('calc(1deg * '.$f.')','h'),
-						's'=>sprintf($f,'S'),
-						'b'=>isset($args[1])?sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]):sprintf($f,'B')
+						's'=>sprintf($f,'s'),
+						'l'=>isset($args[1])?sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]):sprintf($f,'l')
 					];
 				}
 			}
@@ -129,7 +131,9 @@ class scss{
 			if(isset($fonts[$args[0]])){
 				$font=sprintf('var(--cp-fonts-%s)',$args[0]);
 			}
-			return apply_filters('cp_translate_font',$font,$args);
+			$font=apply_filters('cp_translate_font',$font,$args);
+			if(empty($font)){return Compiler::$false;}
+			return [TYPE::T_KEYWORD,$font];
 		});
 		do_action('cp_scss_compiler_init',$scssc);
 		return static::$scssc=$scssc;
