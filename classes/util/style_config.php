@@ -87,11 +87,14 @@ class style_config{
 		foreach($roles as $role=>$conf){
 			$key=$conf['shorthand'];
 			$hsl=Factory::fromString($colors[$key])->toHsl();
+			$hsb=$hsl->toHsb();
 			$tones[$key]=[
 				'h'=>round($hsl->hue()),
 				's'=>round($hsl->saturation()).'%',
 				'l'=>round($hsl->lightness()).'%',
-				't'=>round(1-$hsl->lightness()/100,2).'%'
+				't'=>round(1-$hsl->lightness()/100,2).'%',
+				'S'=>round($hsb->saturation()).'%',
+				'B'=>round($hsb->brightness()).'%',
 			];
 		}
 		foreach(['sh','lt','shd'] as $key){

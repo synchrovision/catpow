@@ -89,7 +89,6 @@ class scss{
 			elseif(preg_match('/^([a-z]+)?(\d+)?$/',$args[0],$matches)){
 				$key=$matches[1]?:'m';
 				$num=$matches[2]??null;
-				error_log(var_export($matches,1).__FILE__.':'.__LINE__);
 				if(isset($tones[$key])){
 					$f='var(--cp-tones-'.$key.'-%s)';
 					$tone=$tones[$key];
@@ -103,6 +102,25 @@ class scss{
 				}
 			}
 			return apply_filters('cp_translate_color',$color,$args);
+		});
+		$scssc->registerFunction('extract_color_tone',function($args){
+			$args=array_map([static::$scssc,'compileValue'],$args);
+			$tones=util\style_config::get_config_json('tones');
+			$tone=null;
+			if(preg_match('/^([a-z]+)?(\d+)?$/',$args[0],$matches)){
+				$key=$matches[1]?:'m';
+				$num=$matches[2]??null;
+				if(isset($tones[$key])){
+					$f='var(--cp-tones-'.$key.'-%s)';
+					$tone=[
+						'h'=>isset($num)?30*($num-1).'deg':sprintf('calc(1deg * '.$f.')','h'),
+						's'=>sprintf($f,'S'),
+						'b'=>isset($args[1])?sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]):sprintf($f,'B')
+					];
+				}
+			}
+			$tone=apply_filters('cp_extract_color_tone',$tone,$args);
+			return self::create_map_data($tone);
 		});
 		do_action('cp_scss_compiler_init',$scssc);
 		return static::$scssc=$scssc;
