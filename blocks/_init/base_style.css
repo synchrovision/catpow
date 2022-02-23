@@ -447,6 +447,19 @@
   background-color: #007cba;
   color: #f8f8f8;
 }
+.DataInputTable {
+  border-collapse: separate;
+  border-spacing: 0.125rem;
+}
+.DataInputTable__head__row__cell {
+  padding: 0.25rem;
+  font-weight: 400;
+  background-color: #ececec;
+}
+.DataInputTable__body__row__cell {
+  padding: 0.25rem;
+  background-color: #f6f6f6;
+}
 .editItemsTable {
   border-collapse: collapse;
   border-spacing: 0px;
@@ -511,5 +524,44 @@
 }
 .dataStructure .item .children {
   padding-left: 1em;
+}
+.EventInputCard__item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 0.3125rem;
+  -webkit-align-items: center;
+  align-items: center;
+  padding: 0.3125rem 0rem;
+}
+.EventInputCard__item__pref {
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+  margin-bottom: 0.5rem;
+}
+.EventInputCard__item__title {
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 5rem;
+  margin-bottom: 0.5rem;
+  word-break: keep-all;
+}
+.EventInputCard__item__inputs {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 5rem;
+}
+.EventInputCard__item.is-type-data .EventInputCard__item__inputs, .EventInputCard__item.is-type-buttons .EventInputCard__item__inputs, .EventInputCard__item.is-type-gridbuttons .EventInputCard__item__inputs {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 100%;
 }
 /*# sourceMappingURL=./base_style.css.map */

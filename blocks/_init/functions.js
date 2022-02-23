@@ -1,6 +1,8 @@
 var _excluded = ["className", "attr", "set", "keys", "index", "size", "devices", "device", "isTemplate"],
     _excluded2 = ["className", "name", "value", "color", "onChange"],
-    _excluded3 = ["className", "name", "value", "color", "onChange"];
+    _excluded3 = ["className", "name", "value", "color", "onChange"],
+    _excluded4 = ["label"],
+    _excluded5 = ["label"];
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -874,6 +876,37 @@ var CP = {
     }
   },
 
+  /*datalist*/
+  getDataListId: function getDataListId(name, values) {
+    var id = 'datalist-' + name;
+
+    if (!document.getElementById(id)) {
+      if (!values) {
+        if (!CP.dataListPresets.hasOwnProperty(name)) {
+          return null;
+        }
+
+        values = CP.dataListPresets[name];
+      }
+
+      var datalist = document.createElement('datalist');
+      datalist.id = id;
+      values.map(function (value) {
+        var option = document.createElement('option');
+        option.value = value;
+        datalist.appendChild(option);
+      });
+      document.body.appendChild(datalist);
+    }
+
+    return id;
+  },
+  dataListPresets: {
+    currency: ['AUD', 'CAD', 'CNY', 'DKK', 'HKD', 'INR', 'IDR', 'JPY', 'KRW', 'MYR', 'NOK', 'PHP', 'RUB', 'SGD', 'VND', 'SEK', 'CHF', 'THB', 'GBP', 'USD', 'TWD', 'EUR', 'BRL'],
+    mouseEvent: ['click', 'dblclick', 'mouseup', 'mousedown', 'mouseenter', 'mouseleave', 'mouseover', 'mouseout', 'contextmenu'],
+    playerEvent: ['canplay', 'canplaythrough', 'complete', 'durationchange', 'emptied', 'ended', 'loadeddata', 'loadedmetadata', 'pause', 'play', 'playing', 'progress', 'ratechange', 'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting']
+  },
+
   /*richtext helper*/
   getSelecedFormatElement: function getSelecedFormatElement() {
     var sel = window.getSelection();
@@ -1090,7 +1123,7 @@ var CP = {
     var maxStrlen = props.options.reduce(function (acc, cur) {
       return Math.max(acc, cur.label.length + cur.label.replace(/[ -~]+/, '').length);
     }, 3);
-    var colNum = Math.floor(36 / (maxStrlen + 2));
+    var colNum = Math.min(6, Math.floor(36 / (maxStrlen + 2)));
     return wp.element.createElement(BaseControl, {
       label: props.label,
       help: props.help,
@@ -1573,6 +1606,201 @@ var CP = {
       }));
     }));
   },
+  DataInputTable: function DataInputTable(props) {
+    var cols = props.cols,
+        value = props.value,
+        _onChange2 = props.onChange;
+    var _wp$element2 = wp.element,
+        useCallback = _wp$element2.useCallback,
+        useMemo = _wp$element2.useMemo;
+    var el = wp.element.createElement;
+    var Row = useCallback(function (props) {
+      var cols = props.cols,
+          value = props.value,
+          _onChange = props.onChange;
+      return wp.element.createElement("tr", {
+        className: "DataInputTable__body__row"
+      }, Object.keys(cols).map(function (c) {
+        return wp.element.createElement("td", {
+          className: "DataInputTable__body__row__cell"
+        }, wp.element.createElement(CP.DynamicInput, {
+          value: value[c],
+          onChange: function onChange(val) {
+            value[c] = val;
+
+            _onChange(value);
+          },
+          param: cols[c]
+        }));
+      }));
+    }, []);
+    var defaultRowValues = useMemo(function () {
+      var rowValue = {};
+      Object.keys(cols).map(function (c) {
+        rowValue[c] = cols[c].default || '';
+      });
+      return [rowValue];
+    }, [cols]);
+    var colsWithoutLabel = useMemo(function () {
+      var colsWithoutLabel = {};
+      Object.keys(cols).map(function (c) {
+        var _cols$c = cols[c],
+            label = _cols$c.label,
+            otherParams = babelHelpers.objectWithoutProperties(_cols$c, _excluded4);
+        colsWithoutLabel[c] = otherParams;
+      });
+      return colsWithoutLabel;
+    }, [cols]);
+    return wp.element.createElement("table", {
+      className: "DataInputTable"
+    }, wp.element.createElement("thead", {
+      class: "DataInputTable__head"
+    }, wp.element.createElement("tr", {
+      class: "DataInputTable__head__row"
+    }, Object.keys(cols).map(function (c) {
+      return wp.element.createElement("th", {
+        className: "DataInputTable__head__row__cell"
+      }, cols[c].label || c);
+    }))), wp.element.createElement("tbody", {
+      class: "DataInputTable__body"
+    }, (value || defaultRowValues).map(function (rowValue, index) {
+      return wp.element.createElement(Row, {
+        cols: colsWithoutLabel,
+        value: rowValue,
+        onChange: function onChange(rowValue) {
+          if (!value) {
+            _onChange2([rowValue]);
+
+            return;
+          }
+
+          value[index] = rowValue;
+
+          _onChange2(value);
+        },
+        onDelete: function onDelete() {
+          if (!value) {
+            _onChange2([]);
+
+            return;
+          }
+
+          value.splice(index, 1);
+
+          _onChange2(value);
+        },
+        onClone: function onClone() {
+          if (!value) {
+            _onChange2([defaultRowValues]);
+
+            return;
+          }
+
+          value.splice(index, 0, JSON.parse(JSON.stringify(rowValue)));
+
+          _onChange2(value);
+        }
+      });
+    })));
+  },
+  DynamicInput: function DynamicInput(props) {
+    var param = props.param,
+        value = props.value,
+        onChange = props.onChange;
+
+    switch (param.type) {
+      case 'radio':
+        {
+          var _CP$parseSelections = CP.parseSelections(param.options),
+              options = _CP$parseSelections.options;
+
+          return wp.element.createElement(RadioControl, {
+            label: param.label || null,
+            onChange: onChange,
+            selected: value,
+            options: options
+          });
+        }
+
+      case 'select':
+        {
+          var _CP$parseSelections2 = CP.parseSelections(param.options),
+              _options = _CP$parseSelections2.options;
+
+          return wp.element.createElement(SelectControl, {
+            label: param.label || null,
+            onChange: onChange,
+            value: value,
+            options: _options
+          });
+        }
+
+      case 'buttons':
+        {
+          var _CP$parseSelections3 = CP.parseSelections(param.options),
+              _options2 = _CP$parseSelections3.options;
+
+          return wp.element.createElement(CP.SelectButtons, {
+            onChange: onChange,
+            selected: value,
+            options: _options2
+          });
+        }
+
+      case 'gridbuttons':
+        {
+          var _CP$parseSelections4 = CP.parseSelections(param.options),
+              _options3 = _CP$parseSelections4.options;
+
+          return wp.element.createElement(CP.SelectGridButtons, {
+            onChange: onChange,
+            selected: value,
+            options: _options3
+          });
+        }
+
+      case 'range':
+        {
+          return wp.element.createElement(RangeControl, {
+            label: param.label || null,
+            onChange: onChange,
+            value: value,
+            min: param.min || 0,
+            max: param.max || 10,
+            step: param.step || 1
+          });
+        }
+
+      case 'bool':
+        {
+          return wp.element.createElement(ToggleControl, {
+            label: param.label || null,
+            checked: value,
+            onChange: onChange
+          });
+        }
+
+      case 'data':
+        {
+          return wp.element.createElement(CP.DataInputTable, {
+            cols: param.cols,
+            value: value,
+            onChange: onChange
+          });
+        }
+
+      default:
+        {
+          return wp.element.createElement(TextControl, {
+            label: param.label || null,
+            type: param.type,
+            value: value,
+            onChange: onChange,
+            list: param.list && CP.getDataListId(param.list, param.values)
+          });
+        }
+    }
+  },
   Item: function Item(props) {
     var tag = props.tag,
         items = props.items,
@@ -1874,9 +2102,9 @@ var CP = {
               break;
           }
         } else if (_.isObject(prm.values)) {
-          var _CP$parseSelections = CP.parseSelections(prm.values),
-              _options = _CP$parseSelections.options,
-              _values = _CP$parseSelections.values;
+          var _CP$parseSelections5 = CP.parseSelections(prm.values),
+              _options4 = _CP$parseSelections5.options,
+              _values = _CP$parseSelections5.values;
 
           rtn.push(wp.element.createElement(SelectControl, {
             label: prm.label,
@@ -1884,7 +2112,7 @@ var CP = {
             onChange: function onChange(val) {
               CP.setJsonValue(props, prm.json, prm.key, val);
             },
-            options: _options
+            options: _options4
           }));
 
           if (prm.sub) {
@@ -2102,9 +2330,9 @@ var CP = {
         } else if (prm.input) {
           switch (prm.input) {
             case 'select':
-              var _CP$parseSelections2 = CP.parseSelections(prm.values),
-                  options = _CP$parseSelections2.options,
-                  values = _CP$parseSelections2.values;
+              var _CP$parseSelections6 = CP.parseSelections(prm.values),
+                  options = _CP$parseSelections6.options,
+                  values = _CP$parseSelections6.values;
 
               rtn.push(wp.element.createElement(SelectControl, {
                 label: prm.label,
@@ -2123,9 +2351,9 @@ var CP = {
               break;
 
             case 'buttons':
-              var _CP$parseSelections3 = CP.parseSelections(prm.values),
-                  options = _CP$parseSelections3.options,
-                  values = _CP$parseSelections3.values;
+              var _CP$parseSelections7 = CP.parseSelections(prm.values),
+                  options = _CP$parseSelections7.options,
+                  values = _CP$parseSelections7.values;
 
               rtn.push(wp.element.createElement(CP.SelectButtons, {
                 label: prm.label,
@@ -2142,9 +2370,9 @@ var CP = {
               break;
 
             case 'gridbuttons':
-              var _CP$parseSelections4 = CP.parseSelections(prm.values),
-                  options = _CP$parseSelections4.options,
-                  values = _CP$parseSelections4.values;
+              var _CP$parseSelections8 = CP.parseSelections(prm.values),
+                  options = _CP$parseSelections8.options,
+                  values = _CP$parseSelections8.values;
 
               rtn.push(wp.element.createElement(CP.SelectGridButtons, {
                 label: prm.label,
@@ -2284,7 +2512,9 @@ var CP = {
               rtn.push(wp.element.createElement(CP.SelectPreparedImage, {
                 name: prm.input,
                 value: item[prm.keys.src],
-                color: prm.color || 0,
+                color: prm.color || CP.getColor({
+                  attr: item
+                }) || 0,
                 onChange: function onChange(image) {
                   var _save9;
 
@@ -2327,9 +2557,9 @@ var CP = {
           var subClasses = CP.getSubClasses(prm);
           var bindClasses = CP.getBindClasses(prm);
 
-          var _CP$parseSelections5 = CP.parseSelections(prm.values),
-              options = _CP$parseSelections5.options,
-              values = _CP$parseSelections5.values;
+          var _CP$parseSelections9 = CP.parseSelections(prm.values),
+              options = _CP$parseSelections9.options,
+              values = _CP$parseSelections9.values;
 
           var currentClass = values.find(function (value) {
             return states[value];
@@ -2826,6 +3056,186 @@ var CP = {
     }, props.name)), !!open && !!props.children && wp.element.createElement("div", {
       className: "children"
     }, props.children));
+  },
+  EventInputCards: function EventInputCards(props) {
+    var title = props.title,
+        onChange = props.onChange;
+    var _wp$element3 = wp.element,
+        useState = _wp$element3.useState,
+        useReducer = _wp$element3.useReducer,
+        useCallback = _wp$element3.useCallback,
+        useEffect = _wp$element3.useEffect,
+        useMemo = _wp$element3.useMemo;
+    var _wp$components4 = wp.components,
+        Card = _wp$components4.Card,
+        CardHeader = _wp$components4.CardHeader,
+        CardBody = _wp$components4.CardBody,
+        Flex = _wp$components4.Flex,
+        FlexItem = _wp$components4.FlexItem,
+        FlexBlock = _wp$components4.FlexBlock,
+        Icon = _wp$components4.Icon;
+    var _props$processer = props.processer,
+        processerId = _props$processer.processerId,
+        eventTypes = _props$processer.eventTypes,
+        parseEventValue = _props$processer.parseEventValue,
+        createEventValue = _props$processer.createEventValue,
+        eventParams = _props$processer.eventParams;
+    var reducer = useCallback(function (state, action) {
+      switch (action.type) {
+        case 'UPDATE':
+          {
+            state.events[action.index] = _objectSpread(_objectSpread({}, state.events[action.index]), action.event);
+            var value = createEventValue(state.events);
+            onChange(value);
+            return _objectSpread(_objectSpread({}, state), {}, {
+              value: value
+            });
+          }
+
+        case 'CLONE':
+          {
+            state.events.splice(action.index, 0, _objectSpread({}, state.events[action.index]));
+
+            var _value = createEventValue(state.events);
+
+            onChange(_value);
+            return _objectSpread(_objectSpread({}, state), {}, {
+              value: _value
+            });
+          }
+
+        case 'REMOVE':
+          {
+            state.events.splice(action.index, 1);
+
+            var _value2 = createEventValue(state.events);
+
+            onChange(_value2);
+            return _objectSpread(_objectSpread({}, state), {}, {
+              value: _value2
+            });
+          }
+      }
+
+      return state;
+    }, []);
+
+    var _useReducer = useReducer(reducer, {
+      value: props.value,
+      events: parseEventValue(props.value)
+    }),
+        _useReducer2 = babelHelpers.slicedToArray(_useReducer, 2),
+        state = _useReducer2[0],
+        dispatch = _useReducer2[1];
+
+    var eventParamsWithoutLabel = useMemo(function () {
+      var eventParamsWithoutLabel = {};
+      Object.keys(eventParams).map(function (name) {
+        var _eventParams$name = eventParams[name],
+            label = _eventParams$name.label,
+            otherParams = babelHelpers.objectWithoutProperties(_eventParams$name, _excluded5);
+        eventParamsWithoutLabel[name] = otherParams;
+      });
+      return eventParamsWithoutLabel;
+    }, [eventParams]);
+    var EventInputCard = useCallback(function (props) {
+      var event = props.event,
+          index = props.index;
+      return wp.element.createElement(Card, {
+        className: "EventInputCard"
+      }, wp.element.createElement(CardHeader, {
+        className: "EventInputCard__header"
+      }, wp.element.createElement(Flex, null, wp.element.createElement(FlexBlock, null, title), wp.element.createElement(FlexItem, null, wp.element.createElement(Icon, {
+        icon: "insert",
+        onClick: function onClick() {
+          dispatch({
+            type: 'CLONE',
+            index: index
+          });
+        }
+      }), state.events.length > 1 && wp.element.createElement(Icon, {
+        icon: "remove",
+        onClick: function onClick() {
+          dispatch({
+            type: 'REMOVE',
+            index: index
+          });
+        }
+      })))), wp.element.createElement(CardBody, {
+        className: "EventInputCard__body"
+      }, wp.element.createElement("div", {
+        className: "EventInputCard__item"
+      }, wp.element.createElement("div", {
+        className: "EventInputCard__item__pref"
+      }, "@"), wp.element.createElement("div", {
+        className: "EventInputCard__item__inputs"
+      }, wp.element.createElement(TextControl, {
+        value: event.event,
+        onChange: function onChange(val) {
+          dispatch({
+            type: 'UPDATE',
+            event: {
+              event: val
+            },
+            index: index
+          });
+        },
+        list: CP.getDataListId(props.eventList || 'mouseEvent')
+      }))), eventTypes && wp.element.createElement("div", {
+        className: "EventInputCard__item"
+      }, wp.element.createElement("div", {
+        className: "EventInputCard__item__title"
+      }, __('イベントタイプ', 'catpow')), wp.element.createElement("div", {
+        className: "EventInputCard__item__inputs"
+      }, wp.element.createElement(TextControl, {
+        value: event.eventType,
+        onChange: function onChange(val) {
+          dispatch({
+            type: 'UPDATE',
+            event: {
+              eventType: val
+            },
+            index: index
+          });
+        },
+        list: CP.getDataListId(processerId + 'EventTypes', Object.keys(eventTypes))
+      }))), (eventTypes && event.eventType && eventTypes[event.eventType] && eventTypes[event.eventType].options || Object.keys(eventParams)).map(function (paramName) {
+        var param = eventParams[paramName];
+
+        if (!param) {
+          console.log('EventInputCard : event parameter ' + paramName + ' was not found');
+          return false;
+        }
+
+        return wp.element.createElement("div", {
+          className: "EventInputCard__item is-type-" + (param.type || 'text'),
+          key: paramName
+        }, wp.element.createElement("div", {
+          className: "EventInputCard__item__title"
+        }, param.label), wp.element.createElement("div", {
+          className: "EventInputCard__item__inputs"
+        }, wp.element.createElement(CP.DynamicInput, {
+          param: eventParamsWithoutLabel[paramName],
+          value: event[paramName],
+          onChange: function onChange(val) {
+            dispatch({
+              type: 'UPDATE',
+              event: babelHelpers.defineProperty({}, paramName, val),
+              index: index
+            });
+          }
+        })));
+      })));
+    }, []);
+    return wp.element.createElement(BaseControl, null, state.events.length > 0 ? state.events.map(function (event, index) {
+      return wp.element.createElement(EventInputCard, {
+        event: event,
+        index: index
+      });
+    }) : wp.element.createElement(EventInputCard, {
+      event: {},
+      index: 0
+    }));
   }
 };
 CP.example = {

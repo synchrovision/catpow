@@ -198,6 +198,26 @@
 		}
 	}
 }
+.DataInputTable{
+	@include tbl((s:2));
+	&__head{
+		&__row{
+			&__cell{
+				@include bnd((pd:4));
+				@include txt((w:r));
+				@include bg((c:t 10));
+			}
+		}
+	}
+	&__body{
+		&__row{
+			&__cell{
+				@include bnd((pd:4));
+				@include bg((c:t 5));
+			}
+		}
+	}
+}
 
 .editItemsTable{
 	@include tbl(());
@@ -256,6 +276,33 @@
 		}
 		.children{
 			@include bnd((pdl:1em));
+		}
+	}
+}
+
+.EventInputCard{
+	&__header{
+		
+	}
+	&__item{
+		@include flx((w:w,g:5,a:c));
+		@include bnd((pd:5 0));
+		&__pref{
+			@include bnd((f:0 0 a,mgb:8));
+		}
+		&__title{
+			@include bnd((f:0 0 80,mgb:8));
+			@include txt((b:k));
+		}
+		&__inputs{
+			@include bnd((f:1 1 80));
+		}
+		&.is-type-data &,
+		&.is-type-buttons &,
+		&.is-type-gridbuttons &{
+			&__inputs{
+				@include bnd((f:1 1 f));
+			}
 		}
 	}
 }

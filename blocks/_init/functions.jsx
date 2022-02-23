@@ -524,6 +524,38 @@
 		}
 	},
 	
+	/*datalist*/
+	getDataListId(name,values){
+		const id='datalist-'+name;
+		if(!document.getElementById(id)){
+			if(!values){
+				if(!CP.dataListPresets.hasOwnProperty(name)){return null;}
+				values=CP.dataListPresets[name];
+			}
+			const datalist=document.createElement('datalist');
+			datalist.id=id;
+			values.map((value)=>{
+				const option=document.createElement('option');
+				option.value=value;
+				datalist.appendChild(option);
+			});
+			document.body.appendChild(datalist);
+		}
+		return id;
+	},
+	dataListPresets:{
+		currency:['AUD','CAD','CNY','DKK','HKD','INR','IDR','JPY','KRW','MYR','NOK','PHP','RUB','SGD','VND','SEK','CHF','THB','GBP','USD','TWD','EUR','BRL'],
+		mouseEvent:[
+			'click','dblclick','mouseup','mousedown','mouseenter','mouseleave','mouseover','mouseout','contextmenu'
+		],
+		playerEvent:[
+			'canplay','canplaythrough','complete','durationchange',
+			'emptied','ended','loadeddata','loadedmetadata',
+			'pause','play','playing','progress','ratechange',
+			'seeked','seeking','stalled','suspend','timeupdate','volumechange','waiting'
+		]
+	},
+	
 	/*richtext helper*/
 	getSelecedFormatElement:()=>{
 		const sel=window.getSelection();
@@ -677,7 +709,7 @@
 	},
 	SelectGridButtons:(props)=>{
 		const maxStrlen=props.options.reduce((acc,cur)=>Math.max(acc,cur.label.length+cur.label.replace(/[ -~]+/,'').length),3);
-		const colNum=Math.floor(36/(maxStrlen+2));
+		const colNum=Math.min(6,Math.floor(36/(maxStrlen+2)));
 		return (
 			<BaseControl label={props.label} help={props.help} id={'CP-SelectGridButtons-'+wp.compose.useInstanceId(CP.SelectGridButtons)}>
 				<ul className={"selectGridButtons col"+colNum}>
@@ -1038,6 +1070,170 @@
 				})}
 			</ul>
 		);
+	},
+	
+	DataInputTable:(props)=>{
+		const {cols,value,onChange}=props;
+		const {useCallback,useMemo}=wp.element;
+		const el=wp.element.createElement;
+		const Row=useCallback((props)=>{
+			const {cols,value,onChange}=props;
+			return (
+				<tr className="DataInputTable__body__row">
+				{Object.keys(cols).map((c)=>(
+					<td className="DataInputTable__body__row__cell">
+						<CP.DynamicInput
+							value={value[c]}
+							onChange={(val)=>{
+								value[c]=val;
+								onChange(value);
+							}}
+							param={cols[c]}
+						/>
+					</td>
+				))}
+				</tr>
+			);
+		},[]);
+		const defaultRowValues=useMemo(()=>{
+			const rowValue={};
+			Object.keys(cols).map((c)=>{
+				rowValue[c]=cols[c].default || '';
+			});
+			return [rowValue];
+		},[cols]);
+		const colsWithoutLabel=useMemo(()=>{
+			const colsWithoutLabel={};
+			Object.keys(cols).map((c)=>{
+				const {label,...otherParams}=cols[c];
+				colsWithoutLabel[c]=otherParams;
+			});
+			return colsWithoutLabel;
+		},[cols]);
+		
+		return (
+			<table className="DataInputTable">
+				<thead class="DataInputTable__head">
+					<tr class="DataInputTable__head__row">
+					{Object.keys(cols).map((c)=>(
+						<th className="DataInputTable__head__row__cell">{cols[c].label || c}</th>
+					))}
+					</tr>
+				</thead>
+				<tbody class="DataInputTable__body">
+				{(value || defaultRowValues).map((rowValue,index)=>(
+					<Row
+						cols={colsWithoutLabel}
+						value={rowValue}
+						onChange={(rowValue)=>{
+							if(!value){onChange([rowValue]);return;}
+							value[index]=rowValue;
+							onChange(value);
+						}}
+						onDelete={()=>{
+							if(!value){onChange([]);return;}
+							value.splice(index,1);
+							onChange(value);
+						}}
+						onClone={()=>{
+							if(!value){onChange([defaultRowValues]);return;}
+							value.splice(index,0,JSON.parse(JSON.stringify(rowValue)));
+							onChange(value);
+						}}
+					/>
+				))}
+				</tbody>
+			</table>
+		);
+	},
+	DynamicInput:(props)=>{
+		const {param,value,onChange}=props;
+
+		switch(param.type){
+			case 'radio':{
+				const {options}=CP.parseSelections(param.options);
+				return (
+					<RadioControl
+						label={param.label || null}
+						onChange={onChange}
+						selected={value}
+						options={options}
+					/>
+				);
+			}
+			case 'select':{
+				const {options}=CP.parseSelections(param.options);
+				return (
+					<SelectControl
+						label={param.label || null}
+						onChange={onChange}
+						value={value}
+						options={options}
+					/>
+				);
+			}
+			case 'buttons':{
+				const {options}=CP.parseSelections(param.options);
+				return (
+					<CP.SelectButtons
+						onChange={onChange}
+						selected={value}
+						options={options}
+					/>
+				);
+			}
+			case 'gridbuttons':{
+				const {options}=CP.parseSelections(param.options);
+				return (
+					<CP.SelectGridButtons
+						onChange={onChange}
+						selected={value}
+						options={options}
+					/>
+				);
+			}
+			case 'range':{
+				return (
+					<RangeControl
+						label={param.label || null}
+						onChange={onChange}
+						value={value}
+						min={param.min || 0}
+						max={param.max || 10}
+						step={param.step || 1}
+					/>
+				);
+			}
+			case 'bool':{
+				return (
+					<ToggleControl
+						label={param.label || null}
+						checked={value}
+						onChange={onChange}
+					/>
+				);
+			}
+			case 'data':{
+				return (
+					<CP.DataInputTable
+						cols={param.cols}
+						value={value}
+						onChange={onChange}
+					/>
+				)
+			}
+			default:{
+				return (
+					<TextControl
+						label={param.label || null}
+						type={param.type}
+						value={value}
+						onChange={onChange}
+						list={param.list && CP.getDataListId(param.list,param.values)}
+					/>
+				);
+			}
+		}
 	},
 
 	Item:(props)=>{
@@ -1594,7 +1790,7 @@
 								<CP.SelectPreparedImage
 									name={prm.input}
 									value={item[prm.keys.src]}
-									color={prm.color || 0}
+									color={prm.color || CP.getColor({attr:item}) || 0}
 									onChange={(image)=>{
 										save({
 											[prm.keys.src]:image.url,
@@ -2069,6 +2265,136 @@
 					<div className="children">{props.children}</div>
 				)}
 			</li>
+		);
+	},
+	
+	EventInputCards:(props)=>{
+		const {title,onChange}=props;
+		const {useState,useReducer,useCallback,useEffect,useMemo}=wp.element;
+		const {Card,CardHeader,CardBody,Flex,FlexItem,FlexBlock,Icon}=wp.components;
+		const {processerId,eventTypes,parseEventValue,createEventValue,eventParams}=props.processer;
+
+		const reducer=useCallback((state,action)=>{
+			switch(action.type){
+				case 'UPDATE':{
+					state.events[action.index]={...state.events[action.index],...action.event};
+					const value=createEventValue(state.events);
+					onChange(value);
+					return {...state,value};
+				}
+				case 'CLONE':{
+					state.events.splice(action.index,0,{...state.events[action.index]});
+					const value=createEventValue(state.events);
+					onChange(value);
+					return {...state,value};
+				}
+				case 'REMOVE':{
+					state.events.splice(action.index,1);
+					const value=createEventValue(state.events);
+					onChange(value);
+					return {...state,value};
+				}
+			}
+			return state;
+		},[]);
+		const [state,dispatch]=useReducer(reducer,{
+			value:props.value,
+			events:parseEventValue(props.value)
+		});
+		const eventParamsWithoutLabel=useMemo(()=>{
+			const eventParamsWithoutLabel={};
+			Object.keys(eventParams).map((name)=>{
+				const {label,...otherParams}=eventParams[name];
+				eventParamsWithoutLabel[name]=otherParams;
+			});
+			return eventParamsWithoutLabel;
+		},[eventParams]);
+		
+		const EventInputCard=useCallback((props)=>{
+			const {event,index}=props;
+			return (
+				<Card className="EventInputCard">
+					<CardHeader className="EventInputCard__header">
+						<Flex>
+							<FlexBlock>{title}</FlexBlock>
+							<FlexItem>
+								<Icon
+									icon="insert"
+									onClick={()=>{
+										dispatch({type:'CLONE',index});
+									}}
+								/>
+								{state.events.length>1 && (
+									<Icon
+										icon="remove"
+										onClick={()=>{
+											dispatch({type:'REMOVE',index});
+										}}
+									/>
+								)}
+							</FlexItem>
+						</Flex>
+					</CardHeader>
+					<CardBody className="EventInputCard__body">
+						<div className="EventInputCard__item">
+							<div className="EventInputCard__item__pref">@</div>
+							<div className="EventInputCard__item__inputs">
+								<TextControl
+									value={event.event}
+									onChange={(val)=>{
+										dispatch({type:'UPDATE',event:{event:val},index});
+									}}
+									list={CP.getDataListId(props.eventList || 'mouseEvent')}
+								/>
+							</div>
+						</div>
+						{eventTypes && (
+							<div className="EventInputCard__item">
+								<div className="EventInputCard__item__title">{__('イベントタイプ','catpow')}</div>
+								<div className="EventInputCard__item__inputs">
+									<TextControl
+										value={event.eventType}
+										onChange={(val)=>{
+											dispatch({type:'UPDATE',event:{eventType:val},index});
+										}}
+										list={CP.getDataListId(processerId+'EventTypes',Object.keys(eventTypes))}
+									/>
+								</div>
+							</div>
+						)}
+						{(
+							(eventTypes && event.eventType && eventTypes[event.eventType] && eventTypes[event.eventType].options) || 
+							Object.keys(eventParams)
+						).map((paramName)=>{
+							const param=eventParams[paramName];
+							if(!param){console.log('EventInputCard : event parameter '+paramName+' was not found');return false;}
+							return (
+								<div className={"EventInputCard__item is-type-"+(param.type || 'text')} key={paramName}>
+									<div className="EventInputCard__item__title">{param.label}</div>
+									<div className="EventInputCard__item__inputs">
+										<CP.DynamicInput
+											param={eventParamsWithoutLabel[paramName]}
+											value={event[paramName]}
+											onChange={(val)=>{
+												dispatch({type:'UPDATE',event:{[paramName]:val},index});
+											}}
+										/>
+									</div>
+								</div>
+							);
+						})}
+					</CardBody>
+				</Card>
+			)
+		},[]);
+		return (
+			<BaseControl>
+			{state.events.length>0?(
+				state.events.map((event,index)=>(<EventInputCard event={event} index={index}/>))
+			):(
+				<EventInputCard event={{}} index={0}/>
+			)}
+			</BaseControl>
 		);
 	}
 };
