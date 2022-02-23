@@ -4,7 +4,7 @@ add_action('cp_setup',function(){
 		if(is_array($cp_ga_code)){$cp_ga_code=reset($cp_ga_code);}
 		add_action('wp_head',function()use($cp_ga_code){
 			$conf=[
-				'costom_map'=>apply_filters('cpga_dimensions',[])
+				'custom_map'=>apply_filters('cpga_dimensions',[])
 			];
 			?>
 			<!-- Global site tag (gtag.js) - Google Analytics -->
