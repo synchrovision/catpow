@@ -78,63 +78,65 @@ class scss{
 			}
 			return self::create_map_data($fonts);
 		});
-		$scssc->registerFunction('translate_color',function($args){
-			$args=array_map([static::$scssc,'compileValue'],$args);
-			$color=false;
-			$colors=util\style_config::get_config_json('colors');
-			$tones=util\style_config::get_config_json('tones');
-			if($args[1]==='false' && $args[2]==='false' && isset($colors[$args[0]])){
-				$color=sprintf('var(--cp-colors-%s)',$args[0]);
-			}
-			elseif(preg_match('/^([a-z]+)?(\d+)?$/',$args[0],$matches)){
-				$key=$matches[1]?:'m';
-				$num=$matches[2]??null;
-				if(isset($tones[$key])){
-					$f='var(--cp-tones-'.$key.'-%s)';
-					$tone=$tones[$key];
-					$color=sprintf(
-						'hsla(%s,%s,%s,%s)',
-						empty($num)?sprintf($f,'h'):30*($num-1),
-						sprintf($f,'s'),
-						$args[1]==='false'?'calc(1% * '.sprintf($f,'l').')':sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]),
-						$args[2]==='false'?1:$args[2]
-					);
+		if(apply_filters('cp_use_css_vars',true)){
+			$scssc->registerFunction('translate_color',function($args){
+				$args=array_map([static::$scssc,'compileValue'],$args);
+				$color=false;
+				$colors=util\style_config::get_config_json('colors');
+				$tones=util\style_config::get_config_json('tones');
+				if($args[1]==='false' && $args[2]==='false' && isset($colors[$args[0]])){
+					$color=sprintf('var(--cp-colors-%s)',$args[0]);
 				}
-			}
-			$color=apply_filters('cp_translate_color',$color,$args);
-			if(empty($color)){return Compiler::$false;}
-			return [TYPE::T_KEYWORD,$color];
-		});
-		$scssc->registerFunction('extract_color_tone',function($args){
-			$args=array_map([static::$scssc,'compileValue'],$args);
-			$tones=util\style_config::get_config_json('tones');
-			$tone=null;
-			if(preg_match('/^([a-z]+)?(\d+)?$/',$args[0],$matches)){
-				$key=$matches[1]?:'m';
-				$num=$matches[2]??null;
-				if(isset($tones[$key])){
-					$f='var(--cp-tones-'.$key.'-%s)';
-					$tone=[
-						'h'=>isset($num)?30*($num-1).'deg':sprintf('calc(1deg * '.$f.')','h'),
-						's'=>sprintf($f,'s'),
-						'l'=>isset($args[1])?sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]):sprintf($f,'l')
-					];
+				elseif(preg_match('/^([a-z]+)?(\d+)?$/',$args[0],$matches)){
+					$key=$matches[1]?:'m';
+					$num=$matches[2]??null;
+					if(isset($tones[$key])){
+						$f='var(--cp-tones-'.$key.'-%s)';
+						$tone=$tones[$key];
+						$color=sprintf(
+							'hsla(%s,%s,%s,%s)',
+							empty($num)?sprintf($f,'h'):30*($num-1),
+							sprintf($f,'s'),
+							$args[1]==='false'?'calc(1% * '.sprintf($f,'l').')':sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]),
+							$args[2]==='false'?1:$args[2]
+						);
+					}
 				}
-			}
-			$tone=apply_filters('cp_extract_color_tone',$tone,$args);
-			return self::create_map_data($tone);
-		});
-		$scssc->registerFunction('translate_font',function($args){
-			$args=array_map([static::$scssc,'compileValue'],$args);
-			$font=false;
-			$fonts=util\style_config::get_config_json('fonts');
-			if(isset($fonts[$args[0]])){
-				$font=sprintf('var(--cp-fonts-%s)',$args[0]);
-			}
-			$font=apply_filters('cp_translate_font',$font,$args);
-			if(empty($font)){return Compiler::$false;}
-			return [TYPE::T_KEYWORD,$font];
-		});
+				$color=apply_filters('cp_translate_color',$color,$args);
+				if(empty($color)){return Compiler::$false;}
+				return [TYPE::T_KEYWORD,$color];
+			});
+			$scssc->registerFunction('extract_color_tone',function($args){
+				$args=array_map([static::$scssc,'compileValue'],$args);
+				$tones=util\style_config::get_config_json('tones');
+				$tone=null;
+				if(preg_match('/^([a-z]+)?(\d+)?$/',$args[0],$matches)){
+					$key=$matches[1]?:'m';
+					$num=$matches[2]??null;
+					if(isset($tones[$key])){
+						$f='var(--cp-tones-'.$key.'-%s)';
+						$tone=[
+							'h'=>isset($num)?30*($num-1).'deg':sprintf('calc(1deg * '.$f.')','h'),
+							's'=>sprintf($f,'s'),
+							'l'=>isset($args[1])?sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]):sprintf($f,'l')
+						];
+					}
+				}
+				$tone=apply_filters('cp_extract_color_tone',$tone,$args);
+				return self::create_map_data($tone);
+			});
+			$scssc->registerFunction('translate_font',function($args){
+				$args=array_map([static::$scssc,'compileValue'],$args);
+				$font=false;
+				$fonts=util\style_config::get_config_json('fonts');
+				if(isset($fonts[$args[0]])){
+					$font=sprintf('var(--cp-fonts-%s)',$args[0]);
+				}
+				$font=apply_filters('cp_translate_font',$font,$args);
+				if(empty($font)){return Compiler::$false;}
+				return [TYPE::T_KEYWORD,$font];
+			});
+		}
 		do_action('cp_scss_compiler_init',$scssc);
 		return static::$scssc=$scssc;
 		
@@ -147,6 +149,9 @@ class scss{
 		if(empty($style_config_modified_time)){
 			if(empty($config_file=CP::get_file_path('config/style_config.scss',CP::FROM_THEME))){$style_config_modified_time=0;}
 			else{$style_config_modified_time=filemtime($config_file);}
+			if(!apply_filters('cp_use_css_vars',true)){
+				$style_config_modified_time=max((int)get_option('cp_style_config_modified_time',0),$style_config_modified_time);
+			}
 		}
 		if(empty($admin_style_config_modified_time)){
 			if(empty($admin_config_file=CP::get_file_path('scss/admin_style_config.scss',CP::FROM_PLUGIN))){$admin_style_config_modified_time=0;}
