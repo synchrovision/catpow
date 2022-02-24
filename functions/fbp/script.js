@@ -91,7 +91,7 @@ window.Catpow.fbp={
 		if(rtn.custom){
 			rtn.custom=rtn.custom.split(',').map(function(entry){
 				entry=entry.split(':');
-				return {key:entry[0],value:entry[1]};
+				return {label:entry[0],value:entry[1]};
 			});
 		}
 		if(!rtn.event){rtn.event='click';}
@@ -131,7 +131,7 @@ window.Catpow.fbp={
 		if(data.custom){
 			rtn+='【';
 			rtn+=data.custom.map(function(entry){
-				return entry.key+':'+entry.value;
+				return entry.label+':'+entry.value;
 			}).join(',');
 			rtn+='】';
 		}
@@ -154,7 +154,7 @@ window.Catpow.fbp={
 		});
 		if(data.custom){
 			data.custom.map(function(entry){
-				prm[entry.key]=entry.value;
+				prm[entry.label]=entry.value;
 			});
 		}
 		if(data.fb_pixel_id){
