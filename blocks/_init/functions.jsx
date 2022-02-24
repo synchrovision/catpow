@@ -2344,6 +2344,19 @@
 						</Flex>
 					</CardHeader>
 					<CardBody className="EventInputCard__body">
+						{eventTypes && (
+							<div className="EventInputCard__item">
+								<div className="EventInputCard__item__inputs">
+									<TextControl
+										value={event.eventType}
+										onChange={(val)=>{
+											dispatch({type:'UPDATE',event:{eventType:val},index});
+										}}
+										list={CP.getDataListId(processerId+'EventTypes',Object.keys(eventTypes))}
+									/>
+								</div>
+							</div>
+						)}
 						<div className="EventInputCard__item">
 							<div className="EventInputCard__item__pref">@</div>
 							<div className="EventInputCard__item__inputs">
@@ -2355,17 +2368,6 @@
 									list={CP.getDataListId(props.eventList || 'mouseEvent')}
 								/>
 							</div>
-							{eventTypes && (
-								<div className="EventInputCard__item__inputs">
-									<TextControl
-										value={event.eventType}
-										onChange={(val)=>{
-											dispatch({type:'UPDATE',event:{eventType:val},index});
-										}}
-										list={CP.getDataListId(processerId+'EventTypes',Object.keys(eventTypes))}
-									/>
-								</div>
-							)}
 						</div>
 						{activeEventParamNames.map((paramName)=>{
 							const param=eventParams[paramName];

@@ -3174,7 +3174,23 @@ var CP = {
         }
       })))), wp.element.createElement(CardBody, {
         className: "EventInputCard__body"
+      }, eventTypes && wp.element.createElement("div", {
+        className: "EventInputCard__item"
       }, wp.element.createElement("div", {
+        className: "EventInputCard__item__inputs"
+      }, wp.element.createElement(TextControl, {
+        value: event.eventType,
+        onChange: function onChange(val) {
+          dispatch({
+            type: 'UPDATE',
+            event: {
+              eventType: val
+            },
+            index: index
+          });
+        },
+        list: CP.getDataListId(processerId + 'EventTypes', Object.keys(eventTypes))
+      }))), wp.element.createElement("div", {
         className: "EventInputCard__item"
       }, wp.element.createElement("div", {
         className: "EventInputCard__item__pref"
@@ -3192,20 +3208,6 @@ var CP = {
           });
         },
         list: CP.getDataListId(props.eventList || 'mouseEvent')
-      })), eventTypes && wp.element.createElement("div", {
-        className: "EventInputCard__item__inputs"
-      }, wp.element.createElement(TextControl, {
-        value: event.eventType,
-        onChange: function onChange(val) {
-          dispatch({
-            type: 'UPDATE',
-            event: {
-              eventType: val
-            },
-            index: index
-          });
-        },
-        list: CP.getDataListId(processerId + 'EventTypes', Object.keys(eventTypes))
       }))), activeEventParamNames.map(function (paramName) {
         var param = eventParams[paramName];
         return wp.element.createElement("div", {
