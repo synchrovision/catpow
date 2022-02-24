@@ -3141,6 +3141,17 @@ var CP = {
     var EventInputCard = useCallback(function (props) {
       var event = props.event,
           index = props.index;
+      var activeEventParamNames = useMemo(function () {
+        if (eventTypes && event.eventType && eventTypes[event.eventType]) {
+          return Object.keys(eventParams).filter(function (paramName) {
+            return eventParams[paramName].common || eventTypes[event.eventType].options.indexOf(paramName) >= 0;
+          });
+        }
+
+        return Object.keys(eventParams).filter(function (paramName) {
+          return !eventParams[paramName].limited;
+        });
+      }, [eventTypes, eventParams, event.eventType]);
       return wp.element.createElement(Card, {
         className: "EventInputCard"
       }, wp.element.createElement(CardHeader, {
@@ -3181,11 +3192,7 @@ var CP = {
           });
         },
         list: CP.getDataListId(props.eventList || 'mouseEvent')
-      }))), eventTypes && wp.element.createElement("div", {
-        className: "EventInputCard__item"
-      }, wp.element.createElement("div", {
-        className: "EventInputCard__item__title"
-      }, __('イベントタイプ', 'catpow')), wp.element.createElement("div", {
+      })), eventTypes && wp.element.createElement("div", {
         className: "EventInputCard__item__inputs"
       }, wp.element.createElement(TextControl, {
         value: event.eventType,
@@ -3199,14 +3206,8 @@ var CP = {
           });
         },
         list: CP.getDataListId(processerId + 'EventTypes', Object.keys(eventTypes))
-      }))), (eventTypes && event.eventType && eventTypes[event.eventType] && eventTypes[event.eventType].options || Object.keys(eventParams)).map(function (paramName) {
+      }))), activeEventParamNames.map(function (paramName) {
         var param = eventParams[paramName];
-
-        if (!param) {
-          console.log('EventInputCard : event parameter ' + paramName + ' was not found');
-          return false;
-        }
-
         return wp.element.createElement("div", {
           className: "EventInputCard__item is-type-" + (param.type || 'text'),
           key: paramName

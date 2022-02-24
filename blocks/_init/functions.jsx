@@ -2312,6 +2312,14 @@
 		
 		const EventInputCard=useCallback((props)=>{
 			const {event,index}=props;
+			const activeEventParamNames=useMemo(()=>{
+				if(eventTypes && event.eventType && eventTypes[event.eventType]){
+					return Object.keys(eventParams).filter((paramName)=>{
+						return eventParams[paramName].common || eventTypes[event.eventType].options.indexOf(paramName)>=0;
+					});
+				}
+				return Object.keys(eventParams).filter((paramName)=>!eventParams[paramName].limited);
+			},[eventTypes,eventParams,event.eventType]);
 			return (
 				<Card className="EventInputCard">
 					<CardHeader className="EventInputCard__header">
@@ -2347,10 +2355,7 @@
 									list={CP.getDataListId(props.eventList || 'mouseEvent')}
 								/>
 							</div>
-						</div>
-						{eventTypes && (
-							<div className="EventInputCard__item">
-								<div className="EventInputCard__item__title">{__('イベントタイプ','catpow')}</div>
+							{eventTypes && (
 								<div className="EventInputCard__item__inputs">
 									<TextControl
 										value={event.eventType}
@@ -2360,14 +2365,10 @@
 										list={CP.getDataListId(processerId+'EventTypes',Object.keys(eventTypes))}
 									/>
 								</div>
-							</div>
-						)}
-						{(
-							(eventTypes && event.eventType && eventTypes[event.eventType] && eventTypes[event.eventType].options) || 
-							Object.keys(eventParams)
-						).map((paramName)=>{
+							)}
+						</div>
+						{activeEventParamNames.map((paramName)=>{
 							const param=eventParams[paramName];
-							if(!param){console.log('EventInputCard : event parameter '+paramName+' was not found');return false;}
 							return (
 								<div className={"EventInputCard__item is-type-"+(param.type || 'text')} key={paramName}>
 									<div className="EventInputCard__item__title">{param.label}</div>
