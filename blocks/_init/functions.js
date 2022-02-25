@@ -3048,14 +3048,28 @@ var CP = {
       });
       return eventParamsWithoutLabel;
     }, [eventParams]);
+    var eventTypeList = useMemo(function () {
+      if (!eventTypes) {
+        return [];
+      }
+
+      return Object.keys(eventTypes).filter(function (eventType) {
+        return eventType !== '_custom';
+      });
+    }, [eventTypes]);
     var EventInputCard = useCallback(function (props) {
       var event = props.event,
           index = props.index;
       var activeEventParamNames = useMemo(function () {
-        if (eventTypes && event.eventType && eventTypes[event.eventType]) {
-          return Object.keys(eventParams).filter(function (paramName) {
-            return eventParams[paramName].common || eventTypes[event.eventType].options.indexOf(paramName) >= 0;
-          });
+        if (eventTypes && event.eventType) {
+          var eventType = eventTypes[event.eventType] || eventTypes['_custom'];
+          console.log(eventType);
+
+          if (eventType) {
+            return Object.keys(eventParams).filter(function (paramName) {
+              return eventParams[paramName].common || eventType.options.indexOf(paramName) >= 0;
+            });
+          }
         }
 
         return Object.keys(eventParams).filter(function (paramName) {
@@ -3099,7 +3113,7 @@ var CP = {
             index: index
           });
         },
-        list: CP.getDataListId(processerId + 'EventTypes', Object.keys(eventTypes))
+        list: CP.getDataListId(processerId + 'EventTypes', eventTypeList)
       }))), wp.element.createElement("div", {
         className: "EventInputCard__item"
       }, wp.element.createElement("div", {

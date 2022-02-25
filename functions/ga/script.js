@@ -34,7 +34,8 @@ window.Catpow.ga={
 		view_cart:{label:'カートを表示',options:['currency','value','items'],require:['currency','value','items']},
 		view_item:{label:'商品を表示',options:['currency','value','items'],require:['currency','value','items']},
 		view_item_list:{label:'商品一覧を表示',options:['items'],require:['items']},
-		view_promotion:{label:'プロモーションを表示',options:['items'],require:[]}
+		view_promotion:{label:'プロモーションを表示',options:['items'],require:[]},
+		_custom:{options:['category','event_label']}
 	},
 	currencies:{
 		'¥':'JPY',

@@ -2247,14 +2247,22 @@
 			});
 			return eventParamsWithoutLabel;
 		},[eventParams]);
+		const eventTypeList=useMemo(()=>{
+			if(!eventTypes){return [];}
+			return Object.keys(eventTypes).filter((eventType)=>eventType!=='_custom');
+		},[eventTypes]);
 		
 		const EventInputCard=useCallback((props)=>{
 			const {event,index}=props;
 			const activeEventParamNames=useMemo(()=>{
-				if(eventTypes && event.eventType && eventTypes[event.eventType]){
-					return Object.keys(eventParams).filter((paramName)=>{
-						return eventParams[paramName].common || eventTypes[event.eventType].options.indexOf(paramName)>=0;
-					});
+				if(eventTypes && event.eventType){
+					const eventType=eventTypes[event.eventType] || eventTypes['_custom'];
+					console.log(eventType);
+					if(eventType){
+						return Object.keys(eventParams).filter((paramName)=>{
+							return eventParams[paramName].common || eventType.options.indexOf(paramName)>=0;
+						});
+					}
 				}
 				return Object.keys(eventParams).filter((paramName)=>!eventParams[paramName].limited);
 			},[eventTypes,eventParams,event.eventType]);
@@ -2290,7 +2298,7 @@
 										onChange={(val)=>{
 											dispatch({type:'UPDATE',event:{eventType:val},index});
 										}}
-										list={CP.getDataListId(processerId+'EventTypes',Object.keys(eventTypes))}
+										list={CP.getDataListId(processerId+'EventTypes',eventTypeList)}
 									/>
 								</div>
 							</div>

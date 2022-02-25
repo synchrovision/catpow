@@ -22,6 +22,7 @@ window.Catpow.fbp={
 		SubmitApplication:{label:'応募',options:[],require:[]},
 		Subscribe:{label:'サブスクリプション登録',options:['currency','predicted_ltv','value'],require:[]},
 		ViewContent:{label:'コンテンツビュー',options:['content_category','content_name','content_type','contents','currency','value'],require:[]},
+		_custom:{options:['custom']}
 	},
 	eventParams:{
 		content_category:{type:'text',label:'製品カテゴリ'},
@@ -32,9 +33,9 @@ window.Catpow.fbp={
 		currency:{type:'gridbuttons',label:'通貨',default:'JPY',options:['JPY','USD','EUR']},
 		value:{type:'number',label:'価格'},
 		num_items:{type:'number',label:'数量'},
-		predicted_ltv:{type:'number',label:'予想顧客 生涯価格',limited:true},
-		search_string:{type:'text',label:'検索ワード',limited:true},
-		status:{type:'bool',label:'登録ステータス',limited:true},
+		predicted_ltv:{type:'number',label:'予想顧客 生涯価格'},
+		search_string:{type:'text',label:'検索ワード'},
+		status:{type:'bool',label:'登録ステータス'},
 		custom:{type:'data',label:'カスタムパラメータ',cols:{label:{label:'ラベル'},value:{label:'値'}}},
 		fb_pixel_id:{type:'text',label:'送信先',common:true}
 	},
