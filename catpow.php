@@ -8,7 +8,7 @@ Author URI: https://catpow.info
 Text Domain: catpow
 Domain Path: /languages
 GitHub Repository: synchrovision/catpow
-Requires at least: 5.8
+Requires at least: 5.9
 Requires PHP: 7.4
 */
 include __DIR__.'/vendor/autoload.php';
