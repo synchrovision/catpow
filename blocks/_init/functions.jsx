@@ -1147,11 +1147,16 @@
 		);
 	},
 	DynamicInput:(props)=>{
+		const {useMemo}=wp.element;
 		const {param,value,onChange}=props;
+		const type=param.type || param.input || 'text';
+		const {options}=useMemo(()=>{
+			if(!param.options && !param.values){return {};}
+			return CP.parseSelections(param.options || param.values);
+		},[param.options,param.values]);
 
-		switch(param.type){
+		switch(type){
 			case 'radio':{
-				const {options}=CP.parseSelections(param.options);
 				return (
 					<RadioControl
 						label={param.label || null}
@@ -1162,7 +1167,6 @@
 				);
 			}
 			case 'select':{
-				const {options}=CP.parseSelections(param.options);
 				return (
 					<SelectControl
 						label={param.label || null}
@@ -1173,9 +1177,9 @@
 				);
 			}
 			case 'buttons':{
-				const {options}=CP.parseSelections(param.options);
 				return (
 					<CP.SelectButtons
+						label={param.label || null}
 						onChange={onChange}
 						selected={value}
 						options={options}
@@ -1183,9 +1187,9 @@
 				);
 			}
 			case 'gridbuttons':{
-				const {options}=CP.parseSelections(param.options);
 				return (
 					<CP.SelectGridButtons
+						label={param.label || null}
 						onChange={onChange}
 						selected={value}
 						options={options}
@@ -1216,7 +1220,17 @@
 			case 'data':{
 				return (
 					<CP.DataInputTable
+						label={param.label || null}
 						cols={param.cols}
+						value={value}
+						onChange={onChange}
+					/>
+				)
+			}
+			case 'textarea':{
+				return (
+					<TextareaControl
+						label={param.label || null}
 						value={value}
 						onChange={onChange}
 					/>
@@ -1636,93 +1650,16 @@
 				else if(prm.input){
 					switch(prm.input){
 						case 'select':
-							var {options,values}=CP.parseSelections(prm.values);
-							rtn.push(
-								<SelectControl
-									label={prm.label}
-									onChange={(val)=>{
-										save({[prm.key]:val});
-										if(prm.effect){prm.effect(val);}i
-									}}
-									value={item[prm.key]}
-									options={options}
-								/>
-							);
-							break;
 						case 'buttons':
-							var {options,values}=CP.parseSelections(prm.values);
-							rtn.push(
-								<CP.SelectButtons
-									label={prm.label}
-									onChange={(val)=>{
-										save({[prm.key]:val});
-										if(prm.effect){prm.effect(val);}
-									}}
-									selected={item[prm.key]}
-									options={options}
-								/>
-							);
-							break;
 						case 'gridbuttons':
-							var {options,values}=CP.parseSelections(prm.values);
-							rtn.push(
-								<CP.SelectGridButtons
-									label={prm.label}
-									onChange={(val)=>{
-										save({[prm.key]:val});
-										if(prm.effect){prm.effect(val);}
-									}}
-									selected={item[prm.key]}
-									options={options}
-								/>
-							);
-							break;
-						case 'text':
-							rtn.push(
-								<TextControl
-									label={prm.label}
-									value={item[prm.key]}
-									onChange={(val)=>{
-										save({[prm.key]:val});
-										if(prm.effect){prm.effect(val);}
-									}}
-								/>
-							);
-							break;
-						case 'textarea':
-							rtn.push(
-								<TextareaControl
-									label={prm.label}
-									value={item[prm.key]}
-									onChange={(val)=>{
-										save({[prm.key]:val});
-										if(prm.effect){prm.effect(val);}
-									}}
-								/>
-							);
-							break;
-						case 'range':
-							if(!prm.coef){prm.coef=1;}
-							rtn.push(
-								<RangeControl
-									label={prm.label}
-									value={item[prm.key]/prm.coef}
-									onChange={(val)=>{
-										val*=prm.coef;
-										save({[prm.key]:val});
-										if(prm.effect){prm.effect(val);}
-									}}
-									min={prm.min}
-									max={prm.max}
-									step={prm.step}
-								/>
-							);
-							break;
 						case 'bool':
+						case 'range':
+						case 'text':
+						case 'textarea':{
 							rtn.push(
-								<ToggleControl
-									label={prm.label}
-									checked={item[prm.key]}
+								<CP.DynamicInput
+									param={prm}
+									value={item[prm.key]}
 									onChange={(val)=>{
 										save({[prm.key]:val});
 										if(prm.effect){prm.effect(val);}
@@ -1730,6 +1667,7 @@
 								/>
 							);
 							break;
+						}
 						case 'image':
 							if(prm.label){
 								rtn.push(<h5>{prm.label}</h5>);
