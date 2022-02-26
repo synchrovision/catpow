@@ -118,7 +118,9 @@ class scss{
 						$tone=[
 							'h'=>isset($num)?30*($num-1).'deg':sprintf('calc(1deg * '.$f.')','h'),
 							's'=>sprintf($f,'s'),
-							'l'=>isset($args[1])?sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]):sprintf($f,'l')
+							'l'=>isset($args[1])?sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]):sprintf($f,'l'),
+							'S'=>sprintf($f,'S'),
+							'B'=>isset($args[1])?sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]):sprintf($f,'B'),
 						];
 					}
 				}
