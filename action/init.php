@@ -109,14 +109,6 @@ if(function_exists('register_block_type')){
 	if($will_compile_editor_script=current_user_can('edit_themes') && $_SERVER['SERVER_NAME']==='localhost'){
 		include_once(dirname(__DIR__).'/jsx_compiler/functions.php');
 	}
-	add_filter('register_block_type_args',function($args,$block_type){
-		if(!empty($args['attributes']['items']['filters'])){
-			foreach($args['attributes']['items']['filters'] as $filter=>$filter_args){
-				$args['attributes']['items']=apply_filters("cp_block_items_attributes_{$filter}",$args['attributes']['items'],$filter_args);
-			}
-		}
-		return $args;
-	},10,2);
 	foreach(cp::get_file_urls('blocks/_init') as $block_init_dir=>$block_init_url){
 		foreach(glob($block_init_dir.'/*.js') as $format_script){
 			$fname=basename($format_script);
@@ -139,7 +131,7 @@ if(function_exists('register_block_type')){
 			if($will_compile_editor_script){Catpow\cp_jsx_compile($editor_script);}
 			$block_style_names[]='blocks/'.$block_name.'/editor_style';
 			$block_style_names[]='blocks/'.$block_name.'/style';
-			unset($attributes);
+			unset($attributes,$filters);
 			$param=array();
 			foreach([
 				'conf'=>'php',
@@ -174,7 +166,20 @@ if(function_exists('register_block_type')){
 					case 'php':
 						if($fname === 'conf'){
 							include $file_path;
-							if(isset($attributes)){$param['attributes']=$attributes;}
+							if(isset($attributes)){
+								if(isset($filters)){
+									foreach($filters as $filter=>$filter_args){
+										$attributes=apply_filters("cp_block_attributes_{$filter}",$attributes,$filter_args);
+									}
+								}
+								if(!empty($attributes['items']['filters'])){
+									foreach($attributes['items']['filters'] as $filter=>$filter_args){
+										$attributes['items']=apply_filters("cp_block_items_attributes_{$filter}",$attributes['items'],$filter_args);
+									}
+								}
+								$param['attributes']=$attributes;
+								unset($attributes,$filters,$filter_args);
+							}
 						}
 						elseif($fname === 'render'){
 							$param['render_callback']=function($attr,$content=null,$block=null)use($file_path){
