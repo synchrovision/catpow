@@ -32,20 +32,6 @@ class CP{
 		self::$extensions=apply_filters('catpow_extensions',[]);
 		self::$data_types=apply_filters('catpow_data_types',['post','page','nav','term','comment','user','site','view','cpdb']);
 		
-		if($f=\cp::get_file_path('config/catpow/config.php',\cp::FROM_THEME)){
-			include $f;
-			self::$use_functions=array_merge(['catpow'],$value['use_functions']);
-		}
-		else{
-			self::$use_functions=['catpow'];
-		}
-		if($f=\cp::get_file_path('config/catpow/blocks.php',\cp::FROM_THEME)){
-			include $f;
-			self::$use_blocks=$value['use_blocks'];
-		}
-		else{
-			self::$use_blocks=self::get_supported_blocks();
-		}
 		spl_autoload_register(function($class){
 			static $classes_dirs;
 			if(!isset($classes_dirs)){$classes_dirs=self::get_file_paths('classes');}
@@ -61,7 +47,6 @@ class CP{
 			}
 		});
 		do_action('cp_init');
-
 		foreach(self::$use_functions as $n){
 			self::include_plugin_files('functions/'.$n.'/functions');
 			self::include_template_files('functions/'.$n.'/functions');

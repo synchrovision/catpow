@@ -44,13 +44,11 @@ add_filter('option_home',function($url){
 	return $cache=apply_filters_ref_array('option_home_ref',[$url]);
 });
 
-
 include cp::get_file_path('config/system_config.php',cp::FROM_THEME|cp::FROM_DEFAULT);
 include cp::get_file_path('config/theme_config.php',cp::FROM_THEME|cp::FROM_DEFAULT);
 
-if(isset($use_functions)){
-	cp::$use_functions=array_merge(cp::$use_functions,$use_functions);
-}
+cp::$use_functions=array_merge(['catpow'],$use_functions??[]);
+cp::$use_blocks=cp::get_supported_blocks();
 if(isset($use_blocks)){
 	cp::$use_blocks=array_intersect(cp::$use_blocks,$use_blocks);
 }
