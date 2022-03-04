@@ -60,11 +60,7 @@
 					isSelected={isSelected}
 				>
 					<div class="button">
-						{itemStates.hasIcon && 
-							<span className="icon">
-								<img src={item.iconSrc} alt={item.iconAlt}/>
-							</span>
-						}
+						{itemStates.hasIcon && <CP.OutputIcon item={item}/>}
 						<span
 							onInput={(e)=>{
 								item.text=e.target.innerText;
@@ -165,7 +161,8 @@
 			</Fragment>
         );
     },
-	save({attributes,className}){
+	save(props){
+		const {attributes,className}=props;
 		const {items=[],classes,loopParam,doLoop}=attributes;
 		const states=CP.wordsToFlags(classes);
 		const blockType=wp.data.select('core/blocks').getBlockType('catpow/buttons');
@@ -188,11 +185,7 @@
 						rel={shouldOpenWithOtherWindow?'noopener':null}
 						{...eventDispatcherAttributes}
 					>
-						{itemStates.hasIcon && 
-							<span className="icon">
-								<img src={item.iconSrc} alt={item.iconAlt}/>
-							</span>
-						}
+						{itemStates.hasIcon && <CP.OutputIcon item={item}/>}
 						{item.text}
 					</a>
 				</li>
