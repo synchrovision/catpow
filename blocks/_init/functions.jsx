@@ -1072,6 +1072,42 @@
 		);
 	},
 	
+	InputIcon:(props)=>{
+		return wp.element.createElement(CP[wp.hooks.applyFilters('catpow.IconComponent','StandardIcon')].Input,props);
+	},
+	OutputIcon:(props)=>{
+		return wp.element.createElement(CP[wp.hooks.applyFilters('catpow.IconComponent','StandardIcon')].Output,props);
+	},
+	StandardIcon:{
+		Input:(props)=>{
+			const {item,prm,save}=props;
+			prm.keys=prm.keys || {};
+			prm.keys.src=prm.keys.src || prm.input+'Src';
+			prm.keys.alt=prm.keys.alt || prm.input+'Alt';
+			return (
+				<CP.SelectPreparedImage
+					name={prm.input}
+					value={item[prm.keys.src]}
+					color={prm.color || CP.getColor({attr:item}) || 0}
+					onChange={(image)=>{
+						save({
+							[prm.keys.src]:image.url,
+							[prm.keys.alt]:image.alt,
+						});
+					}}
+				/>
+			);
+		},
+		Output:(props)=>{
+			const {item}=props;
+			return (
+				<span className="icon">
+					<img src={item.iconSrc} alt={item.iconAlt}/>
+				</span>
+			)
+		}
+	},
+	
 	DataInputTable:(props)=>{
 		const {cols,value,onChange}=props;
 		const {useCallback,useMemo}=wp.element;
@@ -1716,6 +1752,11 @@
 								/>
 							);
 						case 'icon':
+							if(prm.label){
+								rtn.push(<h5>{prm.label}</h5>);
+							}
+							rtn.push(<CP.InputIcon prm={prm} item={item} save={save}/>);
+							break;
 						case 'symbol':
 						case 'pattern':
 							prm.keys=prm.keys || {};

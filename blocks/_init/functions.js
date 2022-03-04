@@ -1606,6 +1606,43 @@ var CP = {
       }));
     }));
   },
+  InputIcon: function InputIcon(props) {
+    return wp.element.createElement(CP[wp.hooks.applyFilters('catpow.IconComponent', 'StandardIcon')].Input, props);
+  },
+  OutputIcon: function OutputIcon(props) {
+    return wp.element.createElement(CP[wp.hooks.applyFilters('catpow.IconComponent', 'StandardIcon')].Output, props);
+  },
+  StandardIcon: {
+    Input: function Input(props) {
+      var item = props.item,
+          prm = props.prm,
+          save = props.save;
+      prm.keys = prm.keys || {};
+      prm.keys.src = prm.keys.src || prm.input + 'Src';
+      prm.keys.alt = prm.keys.alt || prm.input + 'Alt';
+      return wp.element.createElement(CP.SelectPreparedImage, {
+        name: prm.input,
+        value: item[prm.keys.src],
+        color: prm.color || CP.getColor({
+          attr: item
+        }) || 0,
+        onChange: function onChange(image) {
+          var _save;
+
+          save((_save = {}, babelHelpers.defineProperty(_save, prm.keys.src, image.url), babelHelpers.defineProperty(_save, prm.keys.alt, image.alt), _save));
+        }
+      });
+    },
+    Output: function Output(props) {
+      var item = props.item;
+      return wp.element.createElement("span", {
+        className: "icon"
+      }, wp.element.createElement("img", {
+        src: item.iconSrc,
+        alt: item.iconAlt
+      }));
+    }
+  },
   DataInputTable: function DataInputTable(props) {
     var cols = props.cols,
         value = props.value,
@@ -2409,6 +2446,17 @@ var CP = {
               }));
 
             case 'icon':
+              if (prm.label) {
+                rtn.push(wp.element.createElement("h5", null, prm.label));
+              }
+
+              rtn.push(wp.element.createElement(CP.InputIcon, {
+                prm: prm,
+                item: item,
+                save: save
+              }));
+              break;
+
             case 'symbol':
             case 'pattern':
               prm.keys = prm.keys || {};
@@ -2426,9 +2474,9 @@ var CP = {
                   attr: item
                 }) || 0,
                 onChange: function onChange(image) {
-                  var _save3;
+                  var _save4;
 
-                  save((_save3 = {}, babelHelpers.defineProperty(_save3, prm.keys.src, image.url), babelHelpers.defineProperty(_save3, prm.keys.alt, image.alt), _save3));
+                  save((_save4 = {}, babelHelpers.defineProperty(_save4, prm.keys.src, image.url), babelHelpers.defineProperty(_save4, prm.keys.alt, image.alt), _save4));
                 }
               }));
               break;
