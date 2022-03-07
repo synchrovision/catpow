@@ -64,7 +64,7 @@ class cond{
 		
 		$query_class_name=\cp::get_class_name('query',$data_type);
 		
-		$metas=\cp::get_the_conf_data($path)['meta'];
+		$metas=\cp::get_the_conf_data($path)['meta']??[];
 		foreach($this->lines as $line){
 			$name=$line['key'];
 			if(isset($metas[$name])){
