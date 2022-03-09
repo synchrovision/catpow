@@ -47,6 +47,7 @@ if($GLOBALS['is_IE']){
 }
 
 /* css vars */
+add_action('customize_controls_head',[\cp::get_class_name('util','style_config'),'print_css_vars']);
 add_action('admin_head',[\cp::get_class_name('util','style_config'),'print_css_vars']);
 add_action('wp_head',[\cp::get_class_name('util','style_config'),'print_css_vars']);
 
