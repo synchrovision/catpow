@@ -17,10 +17,15 @@ class style_config{
 	public static function get_color_roles(){
 		if(isset(static::$color_roles)){return static::$color_roles;}
 		return static::$color_roles=apply_filters('cp_color_roles',[
-			'background'=>['label'=>'背景色','default'=>'#ffffff','shorthand'=>'b'],
+			'background'=>['label'=>'背景色','default'=>'#ffffff','shorthand'=>'b','extend'=>true],
+			'sheet'=>['label'=>'濃背景色','default'=>'#dddddd','shorthand'=>'s','extend'=>true],
+			'text'=>['label'=>'文字色','default'=>'#666666','shorthand'=>'t'],
 			'main'=>['label'=>'基本色','default'=>'#888888','shorthand'=>'m','extend'=>true],
 			'accent'=>['label'=>'強調色','default'=>'#EE8800','shorthand'=>'a','extend'=>true],
-			'text'=>['label'=>'文字色','default'=>'#666666','shorthand'=>'t']
+			'inside'=>['label'=>'抜き文字色','default'=>'#000000','shorthand'=>'i'],
+			'light'=>['label'=>'照明色','default'=>'hsla(0,0%,100%,0.5)','shorthand'=>'lt','alphaEnabled'=>true],
+			'shade'=>['label'=>'陰色','default'=>'hsla(0,0%,0%,0.2)','shorthand'=>'sh','alphaEnabled'=>true],
+			'shadow'=>['label'=>'影色','default'=>'hsla(0,0%,0%,0.3)','shorthand'=>'shd','alphaEnabled'=>true],
 		]);
 	}
 	public static function get_font_roles(){
@@ -30,21 +35,31 @@ class style_config{
 			'text'=>['label'=>'本文','default'=>'sans-serif','shorthand'=>'t'],
 			'caption'=>['label'=>'キャプション','default'=>'sans-serif','shorthand'=>'c'],
 			'decoration'=>['label'=>'装飾','default'=>'sans-serif','shorthand'=>'d'],
-			'strong'=>['label'=>'強調','default'=>'sans-serif','shorthand'=>'s']
+			'script'=>['label'=>'手書き','default'=>'sans-serif','shorthand'=>'s']
 		]);
 	}
 	public static function update($wp_customize_settings=null){
 		if(isset($wp_customize_settings)){
 			$id_data=$wp_customize_settings->id_data();
 			$domain=$id_data['base'];
-			$key=$id_data['keys'][0];
 			$data=get_theme_mod($domain);
-			$data[$key]=$wp_customize_settings->post_value();
-			$data=static::translate_keys($domain,$data);
-			if($domain==='colors'){
-				$data=static::extend_colors($data);
-				static::set_config_json('tones',static::get_tones($data));
+			if(!empty($key=$id_data['keys'][0])){
+				$data[$key]=$wp_customize_settings->post_value();
 			}
+			else{
+				$data=$wp_customize_settings->post_value();
+			}
+			if($domain==='colors'){
+				$tones=$data['tones'];
+				foreach($tones as $key=>$tone){
+					foreach($tone as $k=>$v){
+						if($k!=='h' && $k!=='a')$tones[$key][$k].='%';
+					}
+				}
+				static::set_config_json('tones',$tones);
+				unset($data['tones']);
+			}
+			$data=static::translate_keys($domain,$data);
 			static::set_config_json($domain,$data);
 		}
 		do_action('cp_style_config_update');
@@ -59,27 +74,6 @@ class style_config{
 			$rtn[$roles[$key]['shorthand']??$key]=$val;
 		}
 		return $rtn;
-	}
-	public static function extend_colors($colors){
-		$roles=static::get_color_roles();
-		$hsls=[];
-		foreach($roles as $role=>$conf){
-			if(empty($conf['extend'])){continue;}
-			$key=$conf['shorthand'];
-			$hsl=Factory::fromString($colors[$key])->toHsl();
-			foreach(range(1,12) as $i){
-				$colors[($key==='m'?'':$key).$i]=(string)(new Hsl(($i-1)*30,$hsl->saturation(),$hsl->lightness()))->toHex();
-			}
-		}
-		$b_hsl=Factory::fromString($colors['b'])->toHsl();
-		$bla=$b_hsl->lightness()/250;
-		$colors['b2']=(string)(new Hsl($b_hsl->hue(),$b_hsl->saturation(),$b_hsl->lightness()-5))->toHex();
-		$colors['sh']=(string)(new Hsla(0,0,0,0.6-$bla));
-		$colors['lt']=(string)(new Hsla(0,0,100,0.1+$bla));
-		$colors['shd']=(string)(new Hsla(0,0,0,0.7-$bla));
-		$colors['i']=$b_hsl->lightness()>50?'#FFFFFF':'#000000';
-		$colors['n']='transparent';
-		return apply_filters('cp_extend_colors',$colors);
 	}
 	public static function get_tones($colors){
 		$roles=static::get_color_roles();
