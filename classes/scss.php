@@ -58,6 +58,12 @@ class scss{
 			}
 			return false;
 		});
+		$scssc->registerFunction('embed_image',function($args)use($scssc){
+			if($f=CP::get_file_path($args[0][2][0])){
+				return sprintf('data:%s;base64,%s',mime_content_type($f),base64_encode(file_get_contents($f)));
+			}
+			return false;
+		});
 		$scssc->registerFunction('export_colors',function($args){
 			static::export_map_data('colors',$args);
 		});
