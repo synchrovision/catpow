@@ -1304,8 +1304,8 @@ Catpow.util={
 	},
 	/*color*/
 	hslToHex:function(hsl){
-		var l=hsl.l/100;
-		var a=hsl.s*Math.min(l,1-l)/100;
+		var l=Math.min(100,hsl.l)/100;
+		var a=Math.min(100,hsl.s)*Math.min(l,1-l)/100;
 		var f=function(n){
 			var k=(n+hsl.h/30)%12;
 			var c=l-a*Math.max(Math.min(k-3,9-k,1),-1);
