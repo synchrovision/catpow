@@ -97,7 +97,7 @@ class scss{
 							'hsla(%s,%s,%s,%s)',
 							empty($num)?sprintf($f,'h'):30*($num-1),
 							sprintf($f,'s'),
-							$args[1]==='false'?'calc(1% * '.sprintf($f,'l').')':sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]),
+							$args[1]==='false'?sprintf($f,'l'):sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]),
 							$args[2]==='false'?1:$args[2]
 						);
 					}
