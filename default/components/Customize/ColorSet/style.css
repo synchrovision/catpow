@@ -1,0 +1,132 @@
+.ColorSet .panes {
+  position: relative;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+.ColorSet .panes > * {
+  flex-grow: 1;
+  box-sizing: border-box;
+}
+.ColorSet .panes > *:first-child:nth-last-child(1), .ColorSet .panes > *:first-child:nth-last-child(1) ~ * {
+  flex-basis: 100%;
+}
+.ColorSet .panes > *, .ColorSet .panes > *:first-child:nth-last-child(2), .ColorSet .panes > *:first-child:nth-last-child(2) ~ * {
+  flex-basis: 50%;
+}
+.ColorSet .panes > *:first-child:nth-last-child(3n), .ColorSet .panes > *:first-child:nth-last-child(3n) ~ *, .ColorSet .panes > *:nth-child(2n):nth-last-child(3n + 1) ~ * {
+  flex-basis: 33%;
+}
+.ColorSet .panes > .pane {
+  position: relative;
+  padding: 0.9375rem;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.ColorSet .panes > .pane.is-dark {
+  color: white;
+}
+.ColorSet .panes > .pane > .body {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.ColorSet .panes > .pane > .body > .label {
+  font-size: 1.25em;
+  font-weight: 700;
+}
+.ColorSet .panes > .pane > .body > .text {
+  display: block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0rem;
+  border-style: none;
+  border-radius: 0rem;
+  background-color: transparent;
+  text-align: center;
+  color: inherit;
+}
+.ColorSet .panes > .pane > .bg {
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+}
+.ColorSet .panes > .pane > .input_color {
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  margin: auto;
+  margin-bottom: 0rem;
+  opacity: 0;
+  pointer-events: none;
+}
+.ColorSet-ColorPicker {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.ColorSet-ColorPicker__item {
+  position: relative;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 30%;
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAAHnlligAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHJJREFUeNpi+P///4EDBxiAGMgCCCAGFB5AADGCRBgYDh48CCRZIJS9vT2QBAggFBkmBiSAogxFBiCAoHogAKIKAlBUYTELAiAmEtABEECk20G6BOmuIl0CIMBQ/IEMkO0myiSSraaaBhZcbkUOs0HuBwDplz5uFJ3Z4gAAAABJRU5ErkJggg==");
+}
+.ColorSet-ColorPicker__item > .chip {
+  display: block;
+  height: 5rem;
+  cursor: pointer;
+}
+.ColorSet-ColorPicker__item > .chip > .label {
+  padding: 0.625rem;
+}
+.ColorSet-ColorPicker__item > .chip.is-dark > .label {
+  color: white;
+}
+.ColorSet-ColorPicker__item > .chip.is-light > .label {
+  color: black;
+}
+.ColorSet-ColorPicker__item > .modal {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0rem;
+  z-index: 100;
+  background-color: #f8f8f8;
+  border-radius: 0.625rem;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+}
+.ColorSet-ColorPicker__item > .PopoverAnchor {
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+}
+.ColorSet-ColorPicker__item.close > .modal {
+  display: none;
+}
+.ColorSet-ColorPicker__box {
+  padding: 1.25rem;
+}
+/*# sourceMappingURL=./style.css.map */
