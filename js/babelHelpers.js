@@ -1,4 +1,81 @@
 var babelHelpers = {};
+
+function _asyncIterator(iterable) {
+  var method,
+      async,
+      sync,
+      retry = 2;
+
+  if (typeof Symbol !== "undefined") {
+    async = Symbol.asyncIterator;
+    sync = Symbol.iterator;
+  }
+
+  while (retry--) {
+    if (async && (method = iterable[async]) != null) {
+      return method.call(iterable);
+    }
+
+    if (sync && (method = iterable[sync]) != null) {
+      return new AsyncFromSyncIterator(method.call(iterable));
+    }
+
+    async = "@@asyncIterator";
+    sync = "@@iterator";
+  }
+
+  throw new TypeError("Object is not async iterable");
+}
+
+function AsyncFromSyncIterator(s) {
+  AsyncFromSyncIterator = function (s) {
+    this.s = s;
+    this.n = s.next;
+  };
+
+  AsyncFromSyncIterator.prototype = {
+    s: null,
+    n: null,
+    next: function () {
+      return AsyncFromSyncIteratorContinuation(this.n.apply(this.s, arguments));
+    },
+    return: function (value) {
+      var ret = this.s.return;
+
+      if (ret === undefined) {
+        return Promise.resolve({
+          value: value,
+          done: true
+        });
+      }
+
+      return AsyncFromSyncIteratorContinuation(ret.apply(this.s, arguments));
+    },
+    throw: function (value) {
+      var thr = this.s.return;
+      if (thr === undefined) return Promise.reject(value);
+      return AsyncFromSyncIteratorContinuation(thr.apply(this.s, arguments));
+    }
+  };
+
+  function AsyncFromSyncIteratorContinuation(r) {
+    if (Object(r) !== r) {
+      return Promise.reject(new TypeError(r + " is not an object."));
+    }
+
+    var done = r.done;
+    return Promise.resolve(r.value).then(function (value) {
+      return {
+        value: value,
+        done: done
+      };
+    });
+  }
+
+  return new AsyncFromSyncIterator(s);
+}
+
+babelHelpers.asyncIterator = _asyncIterator;
 var REACT_ELEMENT_TYPE;
 
 function _createRawReactElement(type, props, key, children) {
@@ -171,22 +248,6 @@ function _wrapRegExp() {
 }
 
 babelHelpers.wrapRegExp = _wrapRegExp;
-
-function _asyncIterator(iterable) {
-  var method;
-
-  if (typeof Symbol !== "undefined") {
-    if (Symbol.asyncIterator) method = iterable[Symbol.asyncIterator];
-    if (method == null && Symbol.iterator) method = iterable[Symbol.iterator];
-  }
-
-  if (method == null) method = iterable["@@asyncIterator"];
-  if (method == null) method = iterable["@@iterator"];
-  if (method == null) throw new TypeError("Object is not async iterable");
-  return method.call(iterable);
-}
-
-babelHelpers.asyncIterator = _asyncIterator;
 
 function _AwaitValue(value) {
   this.wrapped = value;
@@ -511,7 +572,7 @@ function _objectSpread(target) {
     var ownKeys = Object.keys(source);
 
     if (typeof Object.getOwnPropertySymbols === 'function') {
-      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+      ownKeys.push.apply(ownKeys, Object.getOwnPropertySymbols(source).filter(function (sym) {
         return Object.getOwnPropertyDescriptor(source, sym).enumerable;
       }));
     }
@@ -782,6 +843,8 @@ babelHelpers.assertThisInitialized = _assertThisInitialized;
 function _possibleConstructorReturn(self, call) {
   if (call && (typeof call === "object" || typeof call === "function")) {
     return call;
+  } else if (call !== void 0) {
+    throw new TypeError("Derived constructors may only return object or undefined");
   }
 
   return babelHelpers.assertThisInitialized(self);
@@ -819,7 +882,7 @@ function _superPropBase(object, property) {
 
 babelHelpers.superPropBase = _superPropBase;
 
-function _get(target, property, receiver) {
+function _get() {
   if (typeof Reflect !== "undefined" && Reflect.get) {
     babelHelpers.get = _get = Reflect.get;
   } else {
@@ -829,14 +892,14 @@ function _get(target, property, receiver) {
       var desc = Object.getOwnPropertyDescriptor(base, property);
 
       if (desc.get) {
-        return desc.get.call(receiver);
+        return desc.get.call(arguments.length < 3 ? target : receiver);
       }
 
       return desc.value;
     };
   }
 
-  return _get(target, property, receiver || target);
+  return _get.apply(this, arguments);
 }
 
 babelHelpers.get = _get;
@@ -1805,6 +1868,28 @@ function _classPrivateMethodGet(receiver, privateSet, fn) {
 }
 
 babelHelpers.classPrivateMethodGet = _classPrivateMethodGet;
+
+function _checkPrivateRedeclaration(obj, privateCollection) {
+  if (privateCollection.has(obj)) {
+    throw new TypeError("Cannot initialize the same private elements twice on an object");
+  }
+}
+
+babelHelpers.checkPrivateRedeclaration = _checkPrivateRedeclaration;
+
+function _classPrivateFieldInitSpec(obj, privateMap, value) {
+  babelHelpers.checkPrivateRedeclaration(obj, privateMap);
+  privateMap.set(obj, value);
+}
+
+babelHelpers.classPrivateFieldInitSpec = _classPrivateFieldInitSpec;
+
+function _classPrivateMethodInitSpec(obj, privateSet) {
+  babelHelpers.checkPrivateRedeclaration(obj, privateSet);
+  privateSet.add(obj);
+}
+
+babelHelpers.classPrivateMethodInitSpec = _classPrivateMethodInitSpec;
 
 function _classPrivateMethodSet() {
   throw new TypeError("attempted to reassign private method");

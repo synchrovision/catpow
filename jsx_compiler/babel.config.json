@@ -21,6 +21,7 @@
 			"pragma":"wp.element.createElement"
 		} ],
 		"@babel/plugin-proposal-object-rest-spread",
-		"@babel/transform-object-assign"
+		"@babel/transform-object-assign",
+		"@babel/plugin-transform-named-capturing-groups-regex"
 	]
 }
