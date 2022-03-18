@@ -24,43 +24,24 @@
   right: 0rem;
   width: 31.25rem;
   height: 6.25rem;
+  z-index: 1000000;
   pointer-events: none;
 }
 .PopoverBody {
   display: block;
   max-width: 40rem;
   width: max-content;
-  max-height: 90vh;
+  max-height: 50vh;
   height: auto;
   position: absolute;
-  left: 0rem;
-  right: 0rem;
-  top: 100%;
   margin: auto;
   border-radius: 0.625rem;
   background-color: #f8f8f8;
   box-shadow: 0 10px 21px rgba(0, 0, 0, 0.3);
-  transform: -webkit- translateX(-1.875rem) translateY(0.625rem);
-  transform: translateX(-1.875rem) translateY(0.625rem);
   pointer-events: auto;
 }
-.PopoverBody .PopoverArrow {
-  display: block;
-  position: absolute;
-  width: 0.0625rem;
-  height: 0.0625rem;
-  margin: auto;
-  border-style: solid;
-  border-width: 0.625rem;
-  border-color: transparent;
-  bottom: 100%;
-  left: 0rem;
-  right: 0rem;
-  border-bottom-color: #f8f8f8;
-  margin-left: 1.875rem;
-}
 .PopoverBody .PopoverContents {
-  max-height: 90vh;
+  max-height: 50vh;
   height: auto;
   overflow-x: hidden;
   overflow-y: auto;
@@ -88,6 +69,60 @@
 .PopoverBody .PopoverControl .close::after {
   transform: -webkit- rotateZ(-45deg);
   transform: rotateZ(-45deg);
+}
+.Popover.top .PopoverBody {
+  bottom: 100%;
+  transform: -webkit- translateY(-0.625rem);
+  transform: translateY(-0.625rem);
+}
+.Popover.top .PopoverBody .PopoverArrow {
+  display: block;
+  position: absolute;
+  width: 0.0625rem;
+  height: 0.0625rem;
+  margin: auto;
+  border-style: solid;
+  border-width: 0.625rem;
+  border-color: transparent;
+  top: 100%;
+  left: 0rem;
+  right: 0rem;
+  border-top-color: #f8f8f8;
+}
+.Popover.bottom .PopoverBody {
+  top: 100%;
+  transform: -webkit- translateY(0.625rem);
+  transform: translateY(0.625rem);
+}
+.Popover.bottom .PopoverBody .PopoverArrow {
+  display: block;
+  position: absolute;
+  width: 0.0625rem;
+  height: 0.0625rem;
+  margin: auto;
+  border-style: solid;
+  border-width: 0.625rem;
+  border-color: transparent;
+  bottom: 100%;
+  left: 0rem;
+  right: 0rem;
+  border-bottom-color: #f8f8f8;
+}
+.Popover.left .PopoverBody {
+  right: 0rem;
+}
+.Popover.left .PopoverBody .PopoverArrow {
+  margin-right: 1.875rem;
+}
+.Popover.center .PopoverBody {
+  left: -30vw;
+  right: -30vw;
+}
+.Popover.right .PopoverBody {
+  left: 0rem;
+}
+.Popover.right .PopoverBody .PopoverArrow {
+  margin-left: 1.875rem;
 }
 @keyframes PopoverOpen {
   0% {

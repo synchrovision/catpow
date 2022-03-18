@@ -15,22 +15,17 @@
 		@include usr((e:n));
 	}
 	&Container{
-		@include bnd((p:f,t:0,r:0,w:500,h:100));
+		@include bnd((p:f,t:0,r:0,w:500,h:100,z:1000000));
 		@include usr((e:n));
 	}
 	&Body{
-		@include bnd((d:b,w:max 640,h:a 90vh,p:a,l:0,r:0,t:100%,mg:a));
+		@include bnd((d:b,w:max 640,h:a 50vh,p:a,mg:a));
 		@include bdr((r:10));
 		@include bg((c:b));
 		@include shd((b:10));
-		@include trn((x:-30,y:10));
 		@include usr((e:a));
-		.PopoverArrow{
-			@include tail((p:t,c:b));
-			@include bnd((mgl:30));
-		}
 		.PopoverContents{
-			@include bnd((h:a 90vh,ox:h,oy:a));
+			@include bnd((h:a 50vh,ox:h,oy:a));
 			@include bdr((r:10));
 		}
 		.PopoverControl{
@@ -48,6 +43,35 @@
 					@include trn((r:-45deg));
 				}
 			}
+		}
+	}
+	&.top &Body{
+		@include bnd((b:f));
+		@include trn((y:-10));
+		.PopoverArrow{
+			@include tail((p:b,c:b));
+		}
+	}
+	&.bottom &Body{
+		@include bnd((t:f));
+		@include trn((y:10));
+		.PopoverArrow{
+			@include tail((p:t,c:b));
+		}
+	}
+	&.left &Body{
+		@include bnd((r:0));
+		.PopoverArrow{
+			@include bnd((mgr:30));
+		}
+	}
+	&.center &Body{
+		@include bnd((l:-30vw,r:-30vw));
+	}
+	&.right &Body{
+		@include bnd((l:0));
+		.PopoverArrow{
+			@include bnd((mgl:30));
 		}
 	}
 }
