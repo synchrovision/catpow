@@ -17,5 +17,6 @@ Catpow.Customize=(props)=>{
 		wp.customize.control(id).setting.set(value);
 	},[id]);
 	
+	if(value===null){return false;}
 	return wp.element.createElement(Catpow.Customize[type],{id,value,onChange,param});
 }
