@@ -56,8 +56,11 @@ class style_config{
 						if($k!=='h' && $k!=='a')$tones[$key][$k].='%';
 					}
 				}
+				$tones['hr']=$data['hueRange'];
 				static::set_config_json('tones',$tones);
 				unset($data['tones']);
+				unset($data['autoDefine']);
+				unset($data['hueRange']);
 			}
 			$data=static::translate_keys($domain,$data);
 			static::set_config_json($domain,$data);

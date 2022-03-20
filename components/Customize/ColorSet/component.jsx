@@ -86,13 +86,17 @@
 		}
 	},[]);
 	const colorReducer=useCallback((colors,action)=>{
-		if(action.type==='TOGGLE_AUTO_DEFINE'){
-			return {colors,autodefine:!colors.autodefine};
+		if(action.autoDefine){
+			return {...colors,autoDefine:action.autoDefine^colors.autoDefine};
+		}
+		if(action.hueRange){
+			const newColors={...colors,hueRange:parseInt(action.hueRange)};
+			onChange(newColors);
+			return newColors;
 		}
 		const {role,value}=action;
 		const key=roles[role].shorthand;
 		colors.tones[key]=getTones(value);
-		console.log(colors.tones[key]);
 		const newColors={...colors,[role]:value};
 		autoDefine(newColors,key,colors.autoDefine);
 		onChange(newColors);
@@ -100,6 +104,7 @@
 	},[]);
 	const initColors=useCallback((colors)=>{
 		if(!colors.tones){colors.tones={};}
+		if(!colors.huerange){colors.huerange=30;}
 		Object.keys(roles).map((role)=>{
 			const key=roles[role].shorthand;
 			if(!colors[role]){colors[role]=roles[role].default;}
@@ -112,50 +117,6 @@
 	},[roles]);
 	const [colors,setColors]=useReducer(colorReducer,value,initColors);
 	
-	const Pane=useCallback((props)=>{
-		const {role,value}=props;
-		const ref=useRef(null);
-		const [tmp,setTmp]=useState(value[role]);
-		
-		useEffect(()=>{
-			setTmp(value[role]);
-		},[value[role]]);
-		
-		const isDark=useMemo(()=>isDarkColor(value[role]),[value[role]]);
-		const inputId=`ColorSet-input-${id}-${role}`;
-		
-		
-		return (
-			<div className={'pane pane_'+role+(isDark?' is-dark':' is-light')}>
-				<div className="body">
-					<label className="label" for={inputId}>{roles[role].label}</label>
-					<input
-						type="text"
-						className="text"
-						value={tmp}
-						onChange={(e)=>{
-							const value=e.currentTarget.value;
-							if(/^#\w{6}$/.test(value)){
-								setColors({role,value});
-							}
-							setTmp(value);
-						}}
-					/>
-				</div>
-				<div className="bg" onClick={(e)=>{ref.current.dispatchEvent(new Event('click'))}} style={{backgroundColor:value[role]}}></div>
-				<input
-					ref={ref}
-					id={inputId}
-					className="input input_color"
-					type="color"
-					value={value[role]}
-					onChange={(e)=>{
-						setColors({role,value:e.currentTarget.value});
-					}}
-				/>
-			</div>
-		);
-	},[]);
 	const ColorPicker=useCallback((props)=>{
 		const {role,value,open,onClick}=props;
 		const ref=useRef(null);
@@ -183,6 +144,34 @@
 						/>
 					</div>
 				</Catpow.Popover>
+			</div>
+		);
+	},[]);
+	const HueRange=useCallback((props)=>{
+		const {value}=props;
+		const preview=useMemo(()=>{
+			const {h,s,l}=value.tones.m;
+			const hr=value.hueRange;
+			return (
+				<div className="ColorSet-HueRange__preview">
+					{[...Array(12).keys()].map((i)=>(
+						<div class="ColorSet-HueRange__preview__item" style={{backgroundColor:'hsl('+(h+hr*(i-6))+','+s+'%,'+l+'%)'}}></div>
+					))}
+				</div>
+			);
+		},[value.tones.m.h,value.hueRange]);
+		return (
+			<div class="ColorSet-HueRange">
+				{preview}
+				<input
+					type="range"
+					value={value.hueRange}
+					onChange={(e)=>{
+						setColors({hueRange:e.currentTarget.value})
+					}}
+					min={1}
+					max={30}
+				/>
 			</div>
 		);
 	},[]);
@@ -228,6 +217,7 @@
 					<div className="ColorSet-ColorPicker">
 						{Object.keys(roles).map((role)=><ColorPicker role={role} value={value} open={role===activeRole} onClick={()=>setActiveRole(role===activeRole?null:role)}/>)}
 					</div>
+					<HueRange value={value}/>
 				</div>
 			);
 		}

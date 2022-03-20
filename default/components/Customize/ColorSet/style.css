@@ -129,4 +129,22 @@
 .ColorSet-ColorPicker__box {
   padding: 1.25rem;
 }
+.ColorSet-HueRange {
+  padding: 0.625rem;
+}
+.ColorSet-HueRange__preview {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+.ColorSet-HueRange__preview__item {
+  height: 1.875rem;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+}
 /*# sourceMappingURL=./style.css.map */
