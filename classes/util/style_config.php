@@ -33,9 +33,9 @@ class style_config{
 		return static::$font_roles=apply_filters('cp_font_roles',[
 			'heading'=>['label'=>'見出し','default'=>'sans-serif','shorthand'=>'h'],
 			'text'=>['label'=>'本文','default'=>'sans-serif','shorthand'=>'t'],
-			'caption'=>['label'=>'キャプション','default'=>'sans-serif','shorthand'=>'c'],
-			'decoration'=>['label'=>'装飾','default'=>'sans-serif','shorthand'=>'d'],
-			'script'=>['label'=>'手書き','default'=>'sans-serif','shorthand'=>'s']
+			'code'=>['label'=>'コード','default'=>'monospace','shorthand'=>'c'],
+			'decoration'=>['label'=>'装飾','default'=>'fantasy','shorthand'=>'d'],
+			'script'=>['label'=>'手書き','default'=>'cursive','shorthand'=>'s']
 		]);
 	}
 	public static function update($wp_customize_settings=null){
@@ -49,24 +49,8 @@ class style_config{
 			else{
 				$data=$wp_customize_settings->post_value();
 			}
-			if($domain==='colors'){
-				$tones=$data['tones'];
-				foreach($tones as $key=>$tone){
-					foreach($tone as $k=>$v){
-						if($k!=='h' && $k!=='a')$tones[$key][$k].='%';
-					}
-				}
-				$tones['hr']=$data['hueRange'];
-				static::set_config_json('tones',$tones);
-				unset($data['tones']);
-				unset($data['autoDefine']);
-				unset($data['hueRange']);
-			}
-			$data=static::translate_keys($domain,$data);
-			static::set_config_json($domain,$data);
+			static::update_config_json($domain,$data);
 		}
-		do_action('cp_style_config_update');
-		update_option('cp_style_config_modified_time',time());
 	}
 	public static function translate_keys($domain,$data){
 		$get_roles_method='get_'.preg_replace('/s$/','',$domain).'_roles';
@@ -121,9 +105,30 @@ class style_config{
 		}
 		echo '}</style>';
 	}
+	public static function update_config_json($domain,$data){
+		if($domain==='colors'){
+			$tones=$data['tones'];
+			foreach($tones as $key=>$tone){
+				foreach($tone as $k=>$v){
+					if($k!=='h' && $k!=='a')$tones[$key][$k].='%';
+				}
+			}
+			$tones['hr']=$data['hueRange'];
+			static::set_config_json('tones',$tones);
+			unset($data['tones']);
+			unset($data['autoDefine']);
+			unset($data['hueRange']);
+		}
+		$data=static::translate_keys($domain,$data);
+		static::set_config_json($domain,$data);
+		do_action('cp_style_config_update');
+		update_option('cp_style_config_modified_time',time());
+	}
 	public static function set_config_json($domain,$data){
 		static::$cache[$domain]=$data;
-		return file_put_contents(self::get_config_dir_path().'/'.$domain.'.json',json_encode($data,0700));
+		$config_dir=self::get_config_dir_path();
+		if(!is_dir($config_dir)){mkdir($config_dir,0755,true);}
+		return file_put_contents($config_dir.'/'.$domain.'.json',json_encode($data,0700));
 	}
 	public static function get_config_json($domain){
 		if(isset(static::$cache[$domain])){return static::$cache[$domain];}
