@@ -93,15 +93,16 @@ class scss{
 				if($args[1]==='false' && $args[2]==='false' && isset($colors[$args[0]])){
 					$color=sprintf('var(--cp-colors-%s)',$args[0]);
 				}
-				elseif(preg_match('/^([a-z]+)?(\d+)?$/',$args[0],$matches)){
+				elseif(preg_match('/^([a-z]+)?(-)?(\d+)?$/',$args[0],$matches)){
 					$key=$matches[1]?:'m';
-					$num=$matches[2]??null;
+					$staticHue=!empty($matches[2]);
+					$num=$matches[3]??null;
 					if(isset($tones[$key])){
 						$f='var(--cp-tones-'.$key.'-%s)';
 						$tone=$tones[$key];
 						$color=sprintf(
 							'hsla(%s,%s,%s,%s)',
-							empty($num)?sprintf($f,'h'):30*($num-1),
+							empty($num)?sprintf($f,'h'):($staticHue?$num:sprintf('calc('.$f.' + var(--cp-tones-hr) * %s)','h',(int)$num-6)),
 							sprintf($f,'s'),
 							$args[1]==='false'?sprintf($f,'l'):sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]),
 							$args[2]==='false'?1:$args[2]

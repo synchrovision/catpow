@@ -13,7 +13,10 @@ if(!empty($_GET['color'])){
 	}
 }
 elseif(!empty($_GET['c'])){
-	if(preg_match('/^\w+$/',$_GET['c'])){
+	if(preg_match('/^(\w+?)(-)?(\d+)?$/',$_GET['c'],$matches)){
+		$key=$matches[1]??'m';
+		$staticHue=!empty($matches[2]);
+		$num=$matches[3];
 		$config_dir=dirname(__DIR__,3)."/config";
 		if(file_exists($sites=$config_dir.'/sites.json') && $sites=json_decode(file_get_contents($sites),true)){
 			$site=$sites[$_SERVER['HTTP_HOST'].strstr($_SERVER['REQUEST_URI'],'/wp-content/',true).'/']??null;
@@ -27,16 +30,22 @@ elseif(!empty($_GET['c'])){
 			$theme=$_GET['theme'];
 		}
 		if(!empty($theme)){
-			$json=$config_dir.($site?"/{$site}/":'/').$theme.'/colors.json';
+			$json=$config_dir.($site?"/{$site}/":'/').$theme.'/tones.json';
 			if(!file_exists($json)){
-				$json=preg_replace('@(/wp-content/).+$@',"$1themes/{$theme}/json/colors.json",$file);
+				$json=preg_replace('@(/wp-content/).+$@',"$1themes/{$theme}/json/tones.json",$file);
 			}
 		}
 		else{
-			$json=dirname(__DIR__).'/default/json/colors.json';
+			$json=dirname(__DIR__).'/default/json/tones.json';
 		}
-		if(($colors=json_decode(file_get_contents($json),true)) && $c=$colors[$_GET['c']]??null){
-			if(isset($c))$svg=str_replace('<svg ',"<svg color='{$c}' fill='currentcolor' ",$svg);
+		if(($tones=json_decode(file_get_contents($json),true)) && $tone=$tones[$key]??null){
+			if(isset($num)){
+				$c=sprintf('hsl(%s,%s,%s)',$staticHue?$num:($tone['h']+($num-6)*$tones['hr']),$tone['s'],$tone['l']);
+			}
+			else{
+				$c=sprintf('hsl(%s,%s,%s)',$tone['h'],$tone['s'],$tone['l']);
+			}
+			$svg=str_replace('<svg ',"<svg color='{$c}' fill='currentcolor' ",$svg);
 		}
 	}
 }
