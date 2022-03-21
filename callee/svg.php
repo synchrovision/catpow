@@ -13,8 +13,8 @@ if(!empty($_GET['color'])){
 	}
 }
 elseif(!empty($_GET['c'])){
-	if(preg_match('/^(\w+?)(-)?(\d+)?$/',$_GET['c'],$matches)){
-		$key=$matches[1]??'m';
+	if(preg_match('/^([a-zA-Z]+?)?(-)?(\d+)?$/',$_GET['c'],$matches)){
+		$key=$matches[1]?:'m';
 		$staticHue=!empty($matches[2]);
 		$num=$matches[3]??null;
 		$config_dir=dirname(__DIR__,3)."/config";
