@@ -65,22 +65,33 @@ class style_config{
 	public static function get_tones($colors){
 		$roles=static::get_color_roles();
 		$tones=[];
+		$lacks=[];
 		foreach($roles as $role=>$conf){
 			$key=$conf['shorthand'];
-			$hsl=Factory::fromString($colors[$key])->toHsl();
-			$hsb=$hsl->toHsb();
-			$tones[$key]=[
-				'h'=>round($hsl->hue()),
-				's'=>round($hsl->saturation()).'%',
-				'l'=>round($hsl->lightness()).'%',
-				't'=>round(1-$hsl->lightness()/100,2).'%',
-				'S'=>round($hsb->saturation()).'%',
-				'B'=>round($hsb->brightness()).'%',
-			];
-		}
-		foreach(['sh','lt','shd'] as $key){
-			$color=Factory::fromString($colors[$key]);
-			$tones[$key]=['a'=>round($color->alpha(),2)];
+			$color=$colors[$role]??$colors[$key]??null;
+			if(empty($color)){$lacks[]=$role;}
+			if($conf['alphaEnabled']){
+				$raw=Factory::fromString($color);
+				$hsl=$raw->toHsl();
+				$tones[$key]=[
+					'h'=>round($hsl->hue()),
+					's'=>round($hsl->saturation()),
+					'l'=>round($hsl->lightness()),
+					'a'=>round($raw->alpha(),2),
+				];
+			}
+			else{
+				$hsl=Factory::fromString($color)->toHsl();
+				$hsb=$hsl->toHsb();
+				$tones[$key]=[
+					'h'=>round($hsl->hue()),
+					's'=>round($hsl->saturation()),
+					'l'=>round($hsl->lightness()),
+					't'=>round(1-$hsl->lightness()/100,2),
+					'S'=>round($hsb->saturation()),
+					'B'=>round($hsb->brightness()),
+				];
+			}
 		}
 		return $tones;
 	}
