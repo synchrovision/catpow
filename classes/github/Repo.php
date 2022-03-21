@@ -66,6 +66,8 @@ class Repo{
 				return $this->latestRelease['tag_name'];
 			case 'latestZipUrl':
 				return sprintf('https://github.com/%s/archive/%s.zip',$this->repo,$this->latestVersion);
+			case 'masterZipUrl':
+				return sprintf('https://github.com/%s/archive/refs/heads/master.zip',$this->repo);
 			case 'hasNewerRelease':
 				if(empty($this->plugin) || empty($this->plugin_data)){return false;}
 				return version_compare($this->latestVersion,$this->plugin_data['Version'],'>');
