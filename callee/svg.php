@@ -16,7 +16,7 @@ elseif(!empty($_GET['c'])){
 	if(preg_match('/^(\w+?)(-)?(\d+)?$/',$_GET['c'],$matches)){
 		$key=$matches[1]??'m';
 		$staticHue=!empty($matches[2]);
-		$num=$matches[3];
+		$num=$matches[3]??null;
 		$config_dir=dirname(__DIR__,3)."/config";
 		if(file_exists($sites=$config_dir.'/sites.json') && $sites=json_decode(file_get_contents($sites),true)){
 			$site=$sites[$_SERVER['HTTP_HOST'].strstr($_SERVER['REQUEST_URI'],'/wp-content/',true).'/']??null;
