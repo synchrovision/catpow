@@ -240,12 +240,11 @@ Catpow.Customize.ColorSet = function (props) {
   }, []);
   var HueRange = useCallback(function (props) {
     var value = props.value;
-    var preview = useMemo(function () {
-      var _value$tones$m = value.tones.m,
-          h = _value$tones$m.h,
-          s = _value$tones$m.s,
-          l = _value$tones$m.l;
-      var hr = value.hueRange;
+    var Preview = useCallback(function (props) {
+      var h = props.h,
+          s = props.s,
+          l = props.l,
+          hr = props.hr;
       return wp.element.createElement("div", {
         className: "ColorSet-HueRange__preview"
       }, babelHelpers.toConsumableArray(Array(12).keys()).map(function (i) {
@@ -259,7 +258,9 @@ Catpow.Customize.ColorSet = function (props) {
     }, [value.tones.m.h, value.hueRange]);
     return wp.element.createElement("div", {
       class: "ColorSet-HueRange"
-    }, preview, wp.element.createElement("input", {
+    }, wp.element.createElement("div", {
+      class: "ColorSet-HueRange__input"
+    }, wp.element.createElement("input", {
       type: "range",
       value: value.hueRange,
       onChange: function onChange(e) {
@@ -269,6 +270,26 @@ Catpow.Customize.ColorSet = function (props) {
       },
       min: 1,
       max: 30
+    })), wp.element.createElement(Preview, {
+      h: value.tones.b.h,
+      s: value.tones.b.s,
+      l: value.tones.b.l,
+      hr: value.hueRange
+    }), wp.element.createElement(Preview, {
+      h: value.tones.s.h,
+      s: value.tones.s.s,
+      l: value.tones.s.l,
+      hr: value.hueRange
+    }), wp.element.createElement(Preview, {
+      h: value.tones.m.h,
+      s: value.tones.m.s,
+      l: value.tones.m.l,
+      hr: value.hueRange
+    }), wp.element.createElement(Preview, {
+      h: value.tones.a.h,
+      s: value.tones.a.s,
+      l: value.tones.a.l,
+      hr: value.hueRange
     }));
   }, []);
   var BulkInput = useCallback(function (props) {

@@ -132,6 +132,9 @@
 .ColorSet-HueRange {
   padding: 0.625rem;
 }
+.ColorSet-HueRange__input {
+  padding: 0.625rem;
+}
 .ColorSet-HueRange__preview {
   display: -webkit-box;
   display: -webkit-flex;
@@ -141,7 +144,7 @@
   flex-wrap: nowrap;
 }
 .ColorSet-HueRange__preview__item {
-  height: 1.875rem;
+  height: 1.25rem;
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;

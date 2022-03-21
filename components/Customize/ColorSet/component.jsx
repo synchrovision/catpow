@@ -149,9 +149,8 @@
 	},[]);
 	const HueRange=useCallback((props)=>{
 		const {value}=props;
-		const preview=useMemo(()=>{
-			const {h,s,l}=value.tones.m;
-			const hr=value.hueRange;
+		const Preview=useCallback((props)=>{
+			const {h,s,l,hr}=props;
 			return (
 				<div className="ColorSet-HueRange__preview">
 					{[...Array(12).keys()].map((i)=>(
@@ -162,16 +161,21 @@
 		},[value.tones.m.h,value.hueRange]);
 		return (
 			<div class="ColorSet-HueRange">
-				{preview}
-				<input
-					type="range"
-					value={value.hueRange}
-					onChange={(e)=>{
-						setColors({hueRange:e.currentTarget.value})
-					}}
-					min={1}
-					max={30}
-				/>
+				<div class="ColorSet-HueRange__input">
+					<input
+						type="range"
+						value={value.hueRange}
+						onChange={(e)=>{
+							setColors({hueRange:e.currentTarget.value})
+						}}
+						min={1}
+						max={30}
+					/>
+				</div>
+				<Preview h={value.tones.b.h} s={value.tones.b.s} l={value.tones.b.l} hr={value.hueRange}/>
+				<Preview h={value.tones.s.h} s={value.tones.s.s} l={value.tones.s.l} hr={value.hueRange}/>
+				<Preview h={value.tones.m.h} s={value.tones.m.s} l={value.tones.m.l} hr={value.hueRange}/>
+				<Preview h={value.tones.a.h} s={value.tones.a.s} l={value.tones.a.l} hr={value.hueRange}/>
 			</div>
 		);
 	},[]);

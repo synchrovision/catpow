@@ -81,10 +81,13 @@
 	}
 	&-HueRange{
 		@include bnd((pd:10));
+		&__input{
+			@include bnd((pd:10));
+		}
 		&__preview{
 			@include flx((w:n));
 			&__item{
-				@include bnd((h:30,f:1 1 a));
+				@include bnd((h:20,f:1 1 a));
 			}
 		}
 	}
