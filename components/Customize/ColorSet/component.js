@@ -155,6 +155,15 @@ Catpow.Customize.ColorSet = function (props) {
       return _newColors;
     }
 
+    if (action.hueShift !== undefined) {
+      var _newColors2 = _objectSpread(_objectSpread({}, colors), {}, {
+        hueShift: parseInt(action.hueShift)
+      });
+
+      onChange(_newColors2);
+      return _newColors2;
+    }
+
     var role = action.role,
         value = action.value;
     var key = roles[role].shorthand;
@@ -171,8 +180,12 @@ Catpow.Customize.ColorSet = function (props) {
       colors.tones = {};
     }
 
-    if (!colors.huerange) {
-      colors.huerange = 30;
+    if (!colors.hueRange) {
+      colors.hueRange = 30;
+    }
+
+    if (!colors.hueShift) {
+      colors.hueShift = 0;
     }
 
     Object.keys(roles).map(function (role) {
@@ -244,14 +257,15 @@ Catpow.Customize.ColorSet = function (props) {
       var h = props.h,
           s = props.s,
           l = props.l,
-          hr = props.hr;
+          hr = props.hr,
+          hs = props.hs;
       return wp.element.createElement("div", {
         className: "ColorSet-HueRange__preview"
       }, babelHelpers.toConsumableArray(Array(12).keys()).map(function (i) {
         return wp.element.createElement("div", {
           class: "ColorSet-HueRange__preview__item",
           style: {
-            backgroundColor: 'hsl(' + (h + hr * (i - 6)) + ',' + s + '%,' + l + '%)'
+            backgroundColor: 'hsl(' + (h + hr * (i - 6) + hs) + ',' + s + '%,' + l + '%)'
           }
         });
       }));
@@ -260,7 +274,7 @@ Catpow.Customize.ColorSet = function (props) {
       class: "ColorSet-HueRange"
     }, wp.element.createElement("div", {
       class: "ColorSet-HueRange__input"
-    }, wp.element.createElement("input", {
+    }, wp.element.createElement("label", null, "Range"), wp.element.createElement("input", {
       type: "range",
       value: value.hueRange,
       onChange: function onChange(e) {
@@ -270,26 +284,42 @@ Catpow.Customize.ColorSet = function (props) {
       },
       min: 1,
       max: 30
+    })), wp.element.createElement("div", {
+      class: "ColorSet-HueRange__input"
+    }, wp.element.createElement("label", null, "Shift"), wp.element.createElement("input", {
+      type: "range",
+      value: value.hueShift,
+      onChange: function onChange(e) {
+        setColors({
+          hueShift: e.currentTarget.value
+        });
+      },
+      min: -180,
+      max: 180
     })), wp.element.createElement(Preview, {
       h: value.tones.b.h,
       s: value.tones.b.s,
       l: value.tones.b.l,
-      hr: value.hueRange
+      hr: value.hueRange,
+      hs: value.hueShift
     }), wp.element.createElement(Preview, {
       h: value.tones.s.h,
       s: value.tones.s.s,
       l: value.tones.s.l,
-      hr: value.hueRange
+      hr: value.hueRange,
+      hs: value.hueShift
     }), wp.element.createElement(Preview, {
       h: value.tones.m.h,
       s: value.tones.m.s,
       l: value.tones.m.l,
-      hr: value.hueRange
+      hr: value.hueRange,
+      hs: value.hueShift
     }), wp.element.createElement(Preview, {
       h: value.tones.a.h,
       s: value.tones.a.s,
       l: value.tones.a.l,
-      hr: value.hueRange
+      hr: value.hueRange,
+      hs: value.hueShift
     }));
   }, []);
   var BulkInput = useCallback(function (props) {

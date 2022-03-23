@@ -25,6 +25,7 @@ add_action('wp_head',function(){
 					});
 				});
 				rootStyle.setProperty('--cp-tones-hr',colors.hueRange);
+				rootStyle.setProperty('--cp-tones-hs',colors.hueShift);
 			});
 		});
 <?php foreach(Catpow\util\style_config::get_font_roles() as $role=>$conf):$key=$conf['shorthand'];?>

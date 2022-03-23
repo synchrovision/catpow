@@ -94,6 +94,11 @@
 			onChange(newColors);
 			return newColors;
 		}
+		if(action.hueShift!==undefined){
+			const newColors={...colors,hueShift:parseInt(action.hueShift)};
+			onChange(newColors);
+			return newColors;
+		}
 		const {role,value}=action;
 		const key=roles[role].shorthand;
 		colors.tones[key]=getTones(value);
@@ -104,7 +109,8 @@
 	},[]);
 	const initColors=useCallback((colors)=>{
 		if(!colors.tones){colors.tones={};}
-		if(!colors.huerange){colors.huerange=30;}
+		if(!colors.hueRange){colors.hueRange=30;}
+		if(!colors.hueShift){colors.hueShift=0;}
 		Object.keys(roles).map((role)=>{
 			const key=roles[role].shorthand;
 			if(!colors[role]){colors[role]=roles[role].default;}
@@ -150,11 +156,11 @@
 	const HueRange=useCallback((props)=>{
 		const {value}=props;
 		const Preview=useCallback((props)=>{
-			const {h,s,l,hr}=props;
+			const {h,s,l,hr,hs}=props;
 			return (
 				<div className="ColorSet-HueRange__preview">
 					{[...Array(12).keys()].map((i)=>(
-						<div class="ColorSet-HueRange__preview__item" style={{backgroundColor:'hsl('+(h+hr*(i-6))+','+s+'%,'+l+'%)'}}></div>
+						<div class="ColorSet-HueRange__preview__item" style={{backgroundColor:'hsl('+(h+hr*(i-6)+hs)+','+s+'%,'+l+'%)'}}></div>
 					))}
 				</div>
 			);
@@ -162,6 +168,7 @@
 		return (
 			<div class="ColorSet-HueRange">
 				<div class="ColorSet-HueRange__input">
+					<label>Range</label>
 					<input
 						type="range"
 						value={value.hueRange}
@@ -172,10 +179,22 @@
 						max={30}
 					/>
 				</div>
-				<Preview h={value.tones.b.h} s={value.tones.b.s} l={value.tones.b.l} hr={value.hueRange}/>
-				<Preview h={value.tones.s.h} s={value.tones.s.s} l={value.tones.s.l} hr={value.hueRange}/>
-				<Preview h={value.tones.m.h} s={value.tones.m.s} l={value.tones.m.l} hr={value.hueRange}/>
-				<Preview h={value.tones.a.h} s={value.tones.a.s} l={value.tones.a.l} hr={value.hueRange}/>
+				<div class="ColorSet-HueRange__input">
+					<label>Shift</label>
+					<input
+						type="range"
+						value={value.hueShift}
+						onChange={(e)=>{
+							setColors({hueShift:e.currentTarget.value})
+						}}
+						min={-180}
+						max={180}
+					/>
+				</div>
+				<Preview h={value.tones.b.h} s={value.tones.b.s} l={value.tones.b.l} hr={value.hueRange} hs={value.hueShift}/>
+				<Preview h={value.tones.s.h} s={value.tones.s.s} l={value.tones.s.l} hr={value.hueRange} hs={value.hueShift}/>
+				<Preview h={value.tones.m.h} s={value.tones.m.s} l={value.tones.m.l} hr={value.hueRange} hs={value.hueShift}/>
+				<Preview h={value.tones.a.h} s={value.tones.a.s} l={value.tones.a.l} hr={value.hueRange} hs={value.hueShift}/>
 			</div>
 		);
 	},[]);

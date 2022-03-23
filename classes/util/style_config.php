@@ -125,10 +125,12 @@ class style_config{
 				}
 			}
 			$tones['hr']=$data['hueRange'];
+			$tones['hs']=$data['hueShift'];
 			static::set_config_json('tones',$tones);
 			unset($data['tones']);
 			unset($data['autoDefine']);
 			unset($data['hueRange']);
+			unset($data['hueShift']);
 		}
 		$data=static::translate_keys($domain,$data);
 		static::set_config_json($domain,$data);

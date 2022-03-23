@@ -102,7 +102,7 @@ class scss{
 						$tone=$tones[$key];
 						$color=sprintf(
 							'hsla(%s,%s,%s,%s)',
-							empty($num)?sprintf($f,'h'):($staticHue?$num:sprintf('calc('.$f.' + var(--cp-tones-hr) * %s)','h',(int)$num-6)),
+							empty($num)?sprintf($f,'h'):($staticHue?$num:sprintf('calc('.$f.' + var(--cp-tones-hr) * %s + var(--cp-tones-hs))','h',(int)$num-6)),
 							sprintf($f,'s'),
 							$args[1]==='false'?sprintf($f,'l'):sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]),
 							$args[2]==='false'?1:$args[2]
