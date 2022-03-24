@@ -10,7 +10,7 @@ namespace Catpow\content;
 * 
 */
 class content{
-	public $parent,$inherit;
+	public $parent,$inherit,$childrens;
 	
 	public function __construct($param){
 		foreach($param as $key=>$val){$this->$key=$val;}
@@ -60,6 +60,11 @@ class content{
 		if(!is_object($q) || !is_a($q,$class_name)){$q=new $class_name($q);}
 		
 		return new loop(['path'=>$path,'parent'=>$this,'query'=>$q]);
+	}
+	public function children(){
+		if(is_null($this->loop_id)){return false;}
+		if(isset($this->childrens[$this->loop_id])){return $this->childrens[$this->loop_id];}
+		return $this->childrens[$this->loop_id]=$this->query($this->path,['parent'=>$this->loop_id]);
 	}
 	public function meta($name,$param=null){
 		if(is_array($name)){
@@ -300,6 +305,7 @@ class content{
 	}
 	
 	public function is_empty(){
+		if(isset($this->objects)){return empty($this->objects);}
 		if(is_a($this,loop::class)){return $this->query->is_empty();}
 		if(is_a($this,meta::class)){return empty(array_filter($this->data)) && empty(\cp::get_the_meta_value($this->data_path,$this->tmp_name));}
 		if(is_a($this,form::class)){return empty($this->form->inputs->get($this->data_path));}
