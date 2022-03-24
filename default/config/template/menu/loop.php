@@ -1,8 +1,8 @@
 <?php namespace Catpow; ?>
 <?php foreach(loop() as $id=>$obj): ?>
 <!--@icon-->
-<h3>
+<h3 class="menu-item__title">
 	<?=$title?>
-	<small><!--@desc--></small>
+	<small class="menu-item__desc"><!--@desc--></small>
 </h3>
 <?php endforeach; ?>
