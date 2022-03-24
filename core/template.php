@@ -13,12 +13,16 @@ function _e($str){
 function menu($location,$args=null){
 	if(isset($args)){$args['theme_location']=$location;}
 	else{
+		global $nav_datas;
 		$args=[
 			'container_class'=>"menu-{$location}-container",
 			'theme_location'=>$location,
 			'before'=>'<div class="link">',
 			'after'=>'</div>'
 		];
+		if(isset($nav_datas[$location]['template']) && in_array('nav_menu',$nav_datas[$location]['template'])){
+			$args['walker']=new walker\nav_menu;
+		}
 	}
 	wp_nav_menu($args);
 }
@@ -419,6 +423,9 @@ function loop($name=null,$prm=null,$vars=null){
 		}
 	}
 	else{return \cp::$content->loop();}
+}
+function children(){
+	return \cp::$content->children();
 }
 function user($path,$id=null){
 	if(is_null($id)){$id=get_current_user_id();}
