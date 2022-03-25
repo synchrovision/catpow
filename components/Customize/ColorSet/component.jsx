@@ -126,11 +126,12 @@
 	const ColorPicker=useCallback((props)=>{
 		const {role,value,open,onClick}=props;
 		const ref=useRef(null);
+		
 		useEffect(()=>{
 			jQuery(ref.current).wpColorPicker({
 				hide:false,
 				change:(e,ui)=>{
-					setColors({role,value:e.target.value});
+					setColors({role,value:ui.color.to_s(roles[role].alphaEnabled?'hsla':'hex')});
 				}
 			});
 		},[ref.current]);

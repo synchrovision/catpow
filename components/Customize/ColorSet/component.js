@@ -224,7 +224,7 @@ Catpow.Customize.ColorSet = function (props) {
         change: function change(e, ui) {
           setColors({
             role: role,
-            value: e.target.value
+            value: ui.color.to_s(roles[role].alphaEnabled ? 'hsla' : 'hex')
           });
         }
       });
