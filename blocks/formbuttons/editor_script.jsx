@@ -43,11 +43,7 @@
 					isSelected={isSelected}
 				>
 					<div class="button">
-						{itemStates.hasIcon && 
-							<span className="icon">
-								<img src={item.iconSrc} alt={item.iconAlt}/>
-							</span>
-						}
+						{itemStates.hasIcon && <CP.OutputIcon item={item}/>}
 						<span
 							onInput={(e)=>{item.text=e.target.innerText;}}
 							onBlur={saveItems}
@@ -124,11 +120,7 @@
 						ignore-message={item.ignoreMessage}
 						{...eventDispatcherAttributes}
 					>
-						{itemStates.hasIcon && 
-							<span className="icon">
-								<img src={item.iconSrc} alt={item.iconAlt}/>
-							</span>
-						}
+						{itemStates.hasIcon && <CP.OutputIcon item={item}/>}
 						{item.text}
 					</div>
 				</li>

@@ -6,6 +6,7 @@ $attributes=[
 		'source'=>'query',
 		'selector'=>'li.item',
 		'filters'=>[
+			'iconHolder'=>['selector'=>'.icon'],
 			'eventDispatcher'=>['selector'=>'.button']
 		],
 		'query'=>[

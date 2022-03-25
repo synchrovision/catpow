@@ -65,12 +65,9 @@ registerBlockType('catpow/formbuttons', {
         isSelected: isSelected
       }, wp.element.createElement("div", {
         class: "button"
-      }, itemStates.hasIcon && wp.element.createElement("span", {
-        className: "icon"
-      }, wp.element.createElement("img", {
-        src: item.iconSrc,
-        alt: item.iconAlt
-      })), wp.element.createElement("span", {
+      }, itemStates.hasIcon && wp.element.createElement(CP.OutputIcon, {
+        item: item
+      }), wp.element.createElement("span", {
         onInput: function onInput(e) {
           item.text = e.target.innerText;
         },
@@ -155,12 +152,9 @@ registerBlockType('catpow/formbuttons', {
         "data-callback": item.callback,
         "data-target": item.target,
         "ignore-message": item.ignoreMessage
-      }, eventDispatcherAttributes), itemStates.hasIcon && wp.element.createElement("span", {
-        className: "icon"
-      }, wp.element.createElement("img", {
-        src: item.iconSrc,
-        alt: item.iconAlt
-      })), item.text)));
+      }, eventDispatcherAttributes), itemStates.hasIcon && wp.element.createElement(CP.OutputIcon, {
+        item: item
+      }), item.text)));
     });
     return wp.element.createElement("ul", {
       className: classes
