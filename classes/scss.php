@@ -47,7 +47,7 @@ class scss{
 		foreach($font_roles as $font_role=>$font_role_settings){
 			$theme_customize_values[$font_role.'_font']=$fonts[$font_role]??$font_role_settings['default'];
 		}
-		$scssc->addVariables(self::create_map_data($theme_customize_values));
+		$scssc->addVariables(array_map(function($val){return [TYPE::T_KEYWORD,$val];},$theme_customize_values));
 		$scssc->registerFunction('debug',function($args){
 			error_log(var_export($args,1));
 			return false;
