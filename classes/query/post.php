@@ -19,6 +19,7 @@ class post extends query{
 			'author__in'=>1, 'author__not_in'=>1
 		],
 		$key_translation=[
+			'length'=>'found_posts',
 			'parent'=>'post_parent',
 			'limit'=>'posts_per_page',
 		],

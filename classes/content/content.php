@@ -306,7 +306,7 @@ class content{
 	
 	public function is_empty(){
 		if(isset($this->objects)){return empty($this->objects);}
-		if(is_a($this,loop::class)){return $this->query->is_empty();}
+		if(is_a($this,loop::class)){return empty($this->query) || $this->query->is_empty();}
 		if(is_a($this,meta::class)){return empty(array_filter($this->data)) && empty(\cp::get_the_meta_value($this->data_path,$this->tmp_name));}
 		if(is_a($this,form::class)){return empty($this->form->inputs->get($this->data_path));}
 	}
@@ -405,6 +405,9 @@ class content{
 					return $this->props=$class_name::get_props($this);
 				}
 				return null;
+			case 'length':
+				if(isset($this->objects)){return count($this->objects);}
+				return $this->query->length;
 		}
 	}
 	public function __sleep(){
