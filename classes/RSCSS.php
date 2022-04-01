@@ -55,6 +55,7 @@ class RSCSS{
 		foreach($classes as $i=>$class){
 			if(substr($class,-1)==='-'){
 				$_b=substr($class,0,-1);
+				$_bi=$i;
 			}
 			elseif(substr($class,0,1)==='_'){
 				$this->selectors[':root']['.'.$class]=[];
@@ -84,7 +85,7 @@ class RSCSS{
 			else{
 				$this->b=explode('-',$_b);
 			}
-			$classes[$i]=$this->s.'-'.implode('-',$this->b);
+			$classes[$_bi]=$this->s.'-'.implode('-',$this->b);
 			$el->setAttribute('class',implode(' ',$classes));
 			$prev_e=$this->e;
 			$this->e=[];
