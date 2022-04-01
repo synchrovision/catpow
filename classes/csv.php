@@ -16,13 +16,13 @@ class CSV{
 			$csv=fopen($csv,'r');
 			if(empty($fill_column)){
 				while($row=fgetcsv($csv)){
-					if($row[0][0]==='#' || $row==[null]){continue;}
+					if(($row[0][0]??'')==='#' || $row==[null]){continue;}
 					array_push($this->data,$row);
 				}
 			}
 			else{
 				while($keys=fgetcsv($csv)){
-					if($keys[0][0]==='#' || $keys==[null]){continue;}
+					if(($keys[0][0]??'')==='#' || $keys==[null]){continue;}
 					break;
 				}
 				array_push($this->data,$keys);
@@ -36,7 +36,7 @@ class CSV{
 				}
 				$current_values=[];
 				while($row=fgetcsv($csv)){
-					if($row[0][0]==='#' || $row==[null]){continue;}
+					if(($row[0][0]??'')==='#' || $row==[null]){continue;}
 					foreach($fill_column as $index){
 						if(empty($row[$index])){$row[$index]=$current_values[$index];}
 						else{$current_values[$index]=$row[$index];}
