@@ -72,6 +72,16 @@ class mail extends template_type{
 			'script.js'=>['jQuery(function($){%s});'=>''],
 		];
 	}
+	
+	
+	public static function get_form_type($file){
+		switch($file){
+			case 'form.php':
+				return 1;
+			default:
+				return parent::get_form_type($file);
+		}
+	}
 }
 
 ?>
