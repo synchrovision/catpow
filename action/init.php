@@ -255,10 +255,7 @@ if(function_exists('register_block_type')){
 			);
 		}
 	});
-	if(current_user_can('edit_themes')){
-		\cp::gzip_compress(glob(WP_PLUGIN_DIR.'/catpow/blocks/*/*.js'));
-		\cp::gzip_compress(glob(WP_PLUGIN_DIR.'/catpow/blocks/*/*.css'));
-	}
+	if(current_user_can('edit_themes')){\cp::gzip_compress(glob(WP_PLUGIN_DIR.'/catpow/blocks/*/*.{js,css}',defined('GLOB_BRACE')?GLOB_BRACE:0));}
 	add_filter('allowed_block_types_all',function($allowed_block_types,$block_editor_context){
 		$post=$block_editor_context->post;
 		if(empty($post)){return $allowed_block_types;}

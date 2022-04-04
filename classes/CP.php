@@ -1898,9 +1898,9 @@ class CP{
 		if($id=get_theme_mod('costom_logo')){
 			return wp_get_attachment_image_src($id,'full')[0];
 		}
-		$fs=glob(get_stylesheet_directory().'/images/logo.{png,svg,jpg,gif}',GLOB_BRACE);
+		$fs=glob(get_stylesheet_directory().'/images/logo.{png,svg,jpg,gif}',(defined('GLOB_BRACE')?GLOB_BRACE:0));
 		if(!empty($fs[0])){return get_stylesheet_directory_uri().'/images/'.basename($fs[0]);}
-		$fs=glob(get_template_directory().'/images/logo.{png,svg,jpg,gif}',GLOB_BRACE);
+		$fs=glob(get_template_directory().'/images/logo.{png,svg,jpg,gif}',(defined('GLOB_BRACE')?GLOB_BRACE:0));
 		if(!empty($fs[0])){return get_template_directory_uri().'/images/'.basename($fs[0]);}
 		return false;
 	}
@@ -1993,7 +1993,7 @@ class CP{
 		if(isset($all_functions)){return $all_functions;}
 		return $all_functions=array_map('basename',glob(
 			WP_PLUGIN_DIR.'/{catpow,'.implode(',',self::$extensions).'}/functions/[!_]*',
-			GLOB_ONLYDIR|GLOB_BRACE
+			GLOB_ONLYDIR|(defined('GLOB_BRACE')?GLOB_BRACE:0)
 		));
 	}
 	public static function get_use_functions_dir(){
@@ -2003,7 +2003,7 @@ class CP{
 		return $functions_dirs=glob(
 			WP_PLUGIN_DIR.'/{catpow,'.implode(',',self::$extensions).'}'.
 			'/functions/{'.implode(',',self::$use_functions).'}',
-			GLOB_ONLYDIR|GLOB_BRACE
+			GLOB_ONLYDIR|(defined('GLOB_BRACE')?GLOB_BRACE:0)
 		);
 	}
 	public static function get_use_functions_dir_url(){
