@@ -61,10 +61,11 @@ Catpow.Customize.ColorSet = function (props) {
     if (flag & 1) {
       if (key === 'b') {
         var bla = colors.tones.b.l * 4 / 1000;
-        colors.shade = 'hsla(0,0%,0%,' + (0.6 - bla) + ')';
-        colors.shadow = 'hsla(0,0%,0%,' + (0.7 - bla) + ')';
+        colors.shade = 'hsla(0,0%,0%,' + Math.pround(0.6 - bla, 3) + ')';
+        colors.shadow = 'hsla(0,0%,0%,' + Math.pround(0.7 - bla, 3) + ')';
         colors.tones.sh = getTones(colors.shade);
         colors.tones.shd = getTones(colors.shadow);
+        console.log(colors.shade);
       }
     }
 
@@ -90,7 +91,7 @@ Catpow.Customize.ColorSet = function (props) {
       if (key === 'b') {
         var _bla = colors.tones.b.l * 4 / 1000;
 
-        colors.light = 'hsla(0,0%,100%,' + (0.1 + _bla) + ')';
+        colors.light = 'hsla(0,0%,100%,' + Math.pround(0.1 + _bla, 3) + ')';
         colors.tones.lt = getTones(colors.light);
       }
     }
@@ -212,6 +213,26 @@ Catpow.Customize.ColorSet = function (props) {
       colors = _useReducer2[0],
       setColors = _useReducer2[1];
 
+  var ModeSelect = useCallback(function (props) {
+    var Icon = wp.components.Icon;
+    var value = props.value,
+        onChange = props.onChange;
+    return wp.element.createElement("div", {
+      className: "ColorSet-ModeSelect"
+    }, wp.element.createElement(Icon, {
+      className: "ColorSet-ModeSelect__item" + (value === 'pane' ? ' active' : ''),
+      icon: "admin-settings",
+      onClick: function onClick() {
+        return onChange('pane');
+      }
+    }), wp.element.createElement(Icon, {
+      className: "ColorSet-ModeSelect__item" + (value === 'bulk' ? ' active' : ''),
+      icon: "media-text",
+      onClick: function onClick() {
+        return onChange('bulk');
+      }
+    }));
+  }, []);
   var ColorPicker = useCallback(function (props) {
     var role = props.role,
         value = props.value,
@@ -253,23 +274,6 @@ Catpow.Customize.ColorSet = function (props) {
   }, []);
   var HueRange = useCallback(function (props) {
     var value = props.value;
-    var Preview = useCallback(function (props) {
-      var h = props.h,
-          s = props.s,
-          l = props.l,
-          hr = props.hr,
-          hs = props.hs;
-      return wp.element.createElement("div", {
-        className: "ColorSet-HueRange__preview"
-      }, babelHelpers.toConsumableArray(Array(12).keys()).map(function (i) {
-        return wp.element.createElement("div", {
-          class: "ColorSet-HueRange__preview__item",
-          style: {
-            backgroundColor: 'hsl(' + (h + hr * (i - 6) + hs) + ',' + s + '%,' + l + '%)'
-          }
-        });
-      }));
-    }, [value.tones.m.h, value.hueRange]);
     return wp.element.createElement("div", {
       class: "ColorSet-HueRange"
     }, wp.element.createElement("div", {
@@ -296,31 +300,7 @@ Catpow.Customize.ColorSet = function (props) {
       },
       min: -180,
       max: 180
-    })), wp.element.createElement(Preview, {
-      h: value.tones.b.h,
-      s: value.tones.b.s,
-      l: value.tones.b.l,
-      hr: value.hueRange,
-      hs: value.hueShift
-    }), wp.element.createElement(Preview, {
-      h: value.tones.s.h,
-      s: value.tones.s.s,
-      l: value.tones.s.l,
-      hr: value.hueRange,
-      hs: value.hueShift
-    }), wp.element.createElement(Preview, {
-      h: value.tones.m.h,
-      s: value.tones.m.s,
-      l: value.tones.m.l,
-      hr: value.hueRange,
-      hs: value.hueShift
-    }), wp.element.createElement(Preview, {
-      h: value.tones.a.h,
-      s: value.tones.a.s,
-      l: value.tones.a.l,
-      hr: value.hueRange,
-      hs: value.hueShift
-    }));
+    })));
   }, []);
   var BulkInput = useCallback(function (props) {
     var value = props.value;
@@ -330,19 +310,40 @@ Catpow.Customize.ColorSet = function (props) {
         tmp = _useState6[0],
         setTmp = _useState6[1];
 
+    var keyRoleMap = useMemo(function () {
+      var map = {
+        hr: 'hueRange',
+        hs: 'hueShift'
+      };
+      Object.keys(roles).map(function (role) {
+        map[roles[role].shorthand] = role;
+      });
+      return map;
+    }, [roles]);
     var checkValue = useCallback(function (tmp) {
       var lines = tmp.split("\n");
 
-      if (Object.keys(roles).some(function (role, index) {
-        if (!lines[index]) {
+      if (lines.some(function (line) {
+        if (!line) {
           return true;
         }
 
-        if (roles[role].alphaEnabled) {
-          return !/hsla?\(\d+,\d+%,\d+%(,[\d\.]+)?\)/.test(lines[index]);
+        var _line$split = line.split(' : '),
+            _line$split2 = babelHelpers.slicedToArray(_line$split, 2),
+            key = _line$split2[0],
+            val = _line$split2[1];
+
+        var role = keyRoleMap[key];
+
+        if (key === 'hr' || key === 'hs') {
+          return !/^-?\d+$/.test(val);
         }
 
-        return !/^#\w{6}$/.test(lines[index]);
+        if (roles[role].alphaEnabled) {
+          return !/^hsla?\(\d+,\d+%,\d+%(,[\d\.]+)?\)$/.test(val);
+        }
+
+        return !/^#\w{6}$/.test(val);
       })) {
         return false;
       }
@@ -352,19 +353,34 @@ Catpow.Customize.ColorSet = function (props) {
     var commitValue = useCallback(function (tmp) {
       var lines = tmp.split("\n"),
           colors = {};
-      Object.keys(roles).map(function (role, index) {
-        colors[role] = lines[index];
+      lines.map(function (line) {
+        var _line$split3 = line.split(' : '),
+            _line$split4 = babelHelpers.slicedToArray(_line$split3, 2),
+            key = _line$split4[0],
+            val = _line$split4[1];
+
+        var role = keyRoleMap[key];
+
+        if (key === 'hr' || key === 'hs') {
+          colors[role] = parseInt(val);
+        } else {
+          colors[role] = val;
+          value.tones[key] = getTones(val);
+        }
       });
       onChange(_objectSpread(_objectSpread({}, value), colors));
     }, []);
     useEffect(function () {
       setTmp(Object.keys(roles).map(function (role) {
-        return value[role];
-      }).join("\n"));
+        return roles[role].shorthand + ' : ' + value[role];
+      }).join("\n") + "\nhr : " + value.hueRange + "\nhs : " + value.hueShift);
     }, [value]);
-    return wp.element.createElement("textarea", {
+    return wp.element.createElement("div", {
+      className: "ColorSet-BulkInput"
+    }, wp.element.createElement("textarea", {
+      className: "ColorSet-BulkInput__textarea",
       value: tmp,
-      rows: Object.keys(roles).length,
+      rows: Object.keys(roles).length + 2,
       onChange: function onChange(e) {
         var tmp = e.currentTarget.value;
         setTmp(tmp);
@@ -373,15 +389,72 @@ Catpow.Customize.ColorSet = function (props) {
           commitValue(tmp);
         }
       }
-    });
+    }), wp.element.createElement(Icon, {
+      className: "ColorSet-BulkInput__clipboard",
+      icon: "clipboard",
+      onClick: function onClick() {
+        return navigator.clipboard.writeText(tmp);
+      }
+    }));
   }, [roles]);
+  var Preview = useCallback(function (props) {
+    var value = props.value;
+    var Row = useCallback(function (props) {
+      var h = props.h,
+          s = props.s,
+          l = props.l,
+          hr = props.hr,
+          hs = props.hs;
+      return wp.element.createElement("div", {
+        className: "ColorSet-Preview__row"
+      }, babelHelpers.toConsumableArray(Array(12).keys()).map(function (i) {
+        return wp.element.createElement("div", {
+          class: "ColorSet-Preview__row__item",
+          style: {
+            backgroundColor: 'hsl(' + (h + hr * (i - 6) + hs) + ',' + s + '%,' + l + '%)'
+          }
+        });
+      }));
+    }, []);
+    console.log(value);
+    return wp.element.createElement("div", {
+      className: "ColorSet-Preview"
+    }, wp.element.createElement(Row, {
+      h: value.tones.b.h,
+      s: value.tones.b.s,
+      l: value.tones.b.l,
+      hr: value.hueRange,
+      hs: value.hueShift
+    }), wp.element.createElement(Row, {
+      h: value.tones.s.h,
+      s: value.tones.s.s,
+      l: value.tones.s.l,
+      hr: value.hueRange,
+      hs: value.hueShift
+    }), wp.element.createElement(Row, {
+      h: value.tones.m.h,
+      s: value.tones.m.s,
+      l: value.tones.m.l,
+      hr: value.hueRange,
+      hs: value.hueShift
+    }), wp.element.createElement(Row, {
+      h: value.tones.a.h,
+      s: value.tones.a.s,
+      l: value.tones.a.l,
+      hr: value.hueRange,
+      hs: value.hueShift
+    }));
+  }, []);
 
   switch (inputMode) {
     case 'pane':
       {
         return wp.element.createElement("div", {
           className: "ColorSet"
-        }, wp.element.createElement("div", {
+        }, wp.element.createElement(ModeSelect, {
+          value: inputMode,
+          onChange: setInputMode
+        }), wp.element.createElement("div", {
           className: "ColorSet-ColorPicker"
         }, Object.keys(roles).map(function (role) {
           return wp.element.createElement(ColorPicker, {
@@ -394,6 +467,8 @@ Catpow.Customize.ColorSet = function (props) {
           });
         })), wp.element.createElement(HueRange, {
           value: value
+        }), wp.element.createElement(Preview, {
+          value: value
         }));
       }
 
@@ -401,7 +476,12 @@ Catpow.Customize.ColorSet = function (props) {
       {
         return wp.element.createElement("div", {
           className: "ColorSet"
-        }, wp.element.createElement(BulkInput, {
+        }, wp.element.createElement(ModeSelect, {
+          value: inputMode,
+          onChange: setInputMode
+        }), wp.element.createElement(BulkInput, {
+          value: value
+        }), wp.element.createElement(Preview, {
           value: value
         }));
       }

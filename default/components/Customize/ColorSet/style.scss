@@ -35,6 +35,15 @@
 			}
 		}
 	}
+	&-ModeSelect{
+		@include bnd((pd:10 0));
+		&__item{
+			@include txt((p:24,c:t 1 .5));
+			&.active{
+				@include txt((c:m));
+			}
+		}
+	}
 	&-ColorPicker{
 		@include flx((w:w));
 		&__item{
@@ -84,10 +93,30 @@
 		&__input{
 			@include bnd((pd:10));
 		}
-		&__preview{
+	}
+	&-Preview{
+		&__row{
 			@include flx((w:n));
 			&__item{
 				@include bnd((h:20,f:1 1 a));
+			}
+		}
+	}
+	&-BulkInput{
+		@include bnd((p:r));
+		&__textarea{
+			@include bnd((w:f));
+		}
+		&__clipboard{
+			@include bnd((p:a,r:5,t:5));
+			@include trn((t:.2s,s:1,o:.5));
+			@include usr((c:p));
+			&:hover{
+				@include txt((c:m));
+				@include trn((o:1));
+			}
+			&:active{
+				@include trn((s:.9,o:1));
 			}
 		}
 	}

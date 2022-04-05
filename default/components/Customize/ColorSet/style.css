@@ -74,6 +74,16 @@
   opacity: 0;
   pointer-events: none;
 }
+.ColorSet-ModeSelect {
+  padding: 0.625rem 0rem;
+}
+.ColorSet-ModeSelect__item {
+  font-size: 1.5rem;
+  color: rgba(68, 68, 68, 0.5);
+}
+.ColorSet-ModeSelect__item.active {
+  color: #007cba;
+}
 .ColorSet-ColorPicker {
   display: -webkit-box;
   display: -webkit-flex;
@@ -135,7 +145,7 @@
 .ColorSet-HueRange__input {
   padding: 0.625rem;
 }
-.ColorSet-HueRange__preview {
+.ColorSet-Preview__row {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -143,11 +153,37 @@
   -webkit-flex-wrap: nowrap;
   flex-wrap: nowrap;
 }
-.ColorSet-HueRange__preview__item {
+.ColorSet-Preview__row__item {
   height: 1.25rem;
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: auto;
+}
+.ColorSet-BulkInput {
+  position: relative;
+}
+.ColorSet-BulkInput__textarea {
+  width: 100%;
+}
+.ColorSet-BulkInput__clipboard {
+  position: absolute;
+  right: 0.3125rem;
+  top: 0.3125rem;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  opacity: 0.5;
+  transform: -webkit- scale(1);
+  transform: scale(1);
+  cursor: pointer;
+}
+.ColorSet-BulkInput__clipboard:hover {
+  color: #007cba;
+  opacity: 1;
+}
+.ColorSet-BulkInput__clipboard:active {
+  opacity: 1;
+  transform: -webkit- scale(0.9);
+  transform: scale(0.9);
 }
 /*# sourceMappingURL=./style.css.map */

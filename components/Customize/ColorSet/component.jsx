@@ -19,10 +19,11 @@
 		if(flag & 0o01){
 			if(key==='b'){
 				const bla=colors.tones.b.l*4/1000;
-				colors.shade='hsla(0,0%,0%,'+(0.6-bla)+')';
-				colors.shadow='hsla(0,0%,0%,'+(0.7-bla)+')';
+				colors.shade='hsla(0,0%,0%,'+Math.pround(0.6-bla,3)+')';
+				colors.shadow='hsla(0,0%,0%,'+Math.pround(0.7-bla,3)+')';
 				colors.tones.sh=getTones(colors.shade);
 				colors.tones.shd=getTones(colors.shadow);
+				console.log(colors.shade);
 			}
 		}
 		if(flag & 0o02){
@@ -40,7 +41,7 @@
 		if(flag & 0o10){
 			if(key==='b'){
 				const bla=colors.tones.b.l*4/1000;
-				colors.light='hsla(0,0%,100%,'+(0.1+bla)+')';
+				colors.light='hsla(0,0%,100%,'+Math.pround(0.1+bla,3)+')';
 				colors.tones.lt=getTones(colors.light);
 			}
 		}
@@ -123,6 +124,16 @@
 	},[roles]);
 	const [colors,setColors]=useReducer(colorReducer,value,initColors);
 	
+	const ModeSelect=useCallback((props)=>{
+		const {Icon}=wp.components;
+		const {value,onChange}=props;
+		return (
+			<div className="ColorSet-ModeSelect">
+				<Icon className={"ColorSet-ModeSelect__item"+(value==='pane'?' active':'')} icon="admin-settings" onClick={()=>onChange('pane')}/>
+				<Icon className={"ColorSet-ModeSelect__item"+(value==='bulk'?' active':'')} icon="media-text" onClick={()=>onChange('bulk')}/>
+			</div>
+		);
+	},[]);
 	const ColorPicker=useCallback((props)=>{
 		const {role,value,open,onClick}=props;
 		const ref=useRef(null);
@@ -156,16 +167,6 @@
 	},[]);
 	const HueRange=useCallback((props)=>{
 		const {value}=props;
-		const Preview=useCallback((props)=>{
-			const {h,s,l,hr,hs}=props;
-			return (
-				<div className="ColorSet-HueRange__preview">
-					{[...Array(12).keys()].map((i)=>(
-						<div class="ColorSet-HueRange__preview__item" style={{backgroundColor:'hsl('+(h+hr*(i-6)+hs)+','+s+'%,'+l+'%)'}}></div>
-					))}
-				</div>
-			);
-		},[value.tones.m.h,value.hueRange]);
 		return (
 			<div class="ColorSet-HueRange">
 				<div class="ColorSet-HueRange__input">
@@ -192,63 +193,114 @@
 						max={180}
 					/>
 				</div>
-				<Preview h={value.tones.b.h} s={value.tones.b.s} l={value.tones.b.l} hr={value.hueRange} hs={value.hueShift}/>
-				<Preview h={value.tones.s.h} s={value.tones.s.s} l={value.tones.s.l} hr={value.hueRange} hs={value.hueShift}/>
-				<Preview h={value.tones.m.h} s={value.tones.m.s} l={value.tones.m.l} hr={value.hueRange} hs={value.hueShift}/>
-				<Preview h={value.tones.a.h} s={value.tones.a.s} l={value.tones.a.l} hr={value.hueRange} hs={value.hueShift}/>
 			</div>
 		);
 	},[]);
 	const BulkInput=useCallback((props)=>{
 		const {value}=props;
 		const [tmp,setTmp]=useState();
+		const keyRoleMap=useMemo(()=>{
+			const map={hr:'hueRange',hs:'hueShift'};
+			Object.keys(roles).map((role)=>{
+				map[roles[role].shorthand]=role;
+			});
+			return map;
+		},[roles]);
 		const checkValue=useCallback((tmp)=>{
 			const lines=tmp.split("\n");
-			if(Object.keys(roles).some((role,index)=>{
-				if(!lines[index]){return true;}
-				if(roles[role].alphaEnabled){return !/hsla?\(\d+,\d+%,\d+%(,[\d\.]+)?\)/.test(lines[index]);}
-				return !/^#\w{6}$/.test(lines[index]);
+			if(lines.some((line)=>{
+				if(!line){return true;}
+				const [key,val]=line.split(' : ');
+				const role=keyRoleMap[key];
+				if(key==='hr' || key==='hs'){return !/^-?\d+$/.test(val);}
+				if(roles[role].alphaEnabled){return !/^hsla?\(\d+,\d+%,\d+%(,[\d\.]+)?\)$/.test(val);}
+				return !/^#\w{6}$/.test(val);
 			})){return false;}
 			return true;
 		},[]);
 		const commitValue=useCallback((tmp)=>{
 			const lines=tmp.split("\n"),colors={};
-			Object.keys(roles).map((role,index)=>{
-				colors[role]=lines[index];
+			lines.map((line)=>{
+				const [key,val]=line.split(' : ');
+				const role=keyRoleMap[key];
+				if(key==='hr' || key==='hs'){
+					colors[role]=parseInt(val);
+				}
+				else{
+					colors[role]=val;
+					value.tones[key]=getTones(val);
+				}
 			});
 			onChange({...value,...colors});
 		},[]);
 		useEffect(()=>{
-			setTmp(Object.keys(roles).map((role)=>value[role]).join("\n"));
+			setTmp(
+				Object.keys(roles).map((role)=>roles[role].shorthand+' : '+value[role]).join("\n")+
+				"\nhr : "+value.hueRange+"\nhs : "+value.hueShift
+			);
 		},[value]);
 		return (
-			<textarea
-				value={tmp}
-				rows={Object.keys(roles).length}
-				onChange={(e)=>{
-					const tmp=e.currentTarget.value;
-					setTmp(tmp);
-					if(checkValue(tmp)){commitValue(tmp);}
-				}}
-			/>
+			<div className="ColorSet-BulkInput">
+				<textarea
+					className="ColorSet-BulkInput__textarea"
+					value={tmp}
+					rows={Object.keys(roles).length+2}
+					onChange={(e)=>{
+						const tmp=e.currentTarget.value;
+						setTmp(tmp);
+						if(checkValue(tmp)){commitValue(tmp);}
+					}}
+				/>
+				<Icon
+					className="ColorSet-BulkInput__clipboard"
+					icon="clipboard"
+					onClick={()=>navigator.clipboard.writeText(tmp)}
+				/>
+			</div>
 		);
 	},[roles]);
+	const Preview=useCallback((props)=>{
+		const {value}=props;
+		const Row=useCallback((props)=>{
+			const {h,s,l,hr,hs}=props;
+			return (
+				<div className="ColorSet-Preview__row">
+					{[...Array(12).keys()].map((i)=>(
+						<div class="ColorSet-Preview__row__item" style={{backgroundColor:'hsl('+(h+hr*(i-6)+hs)+','+s+'%,'+l+'%)'}}></div>
+					))}
+				</div>
+			);
+		},[]);
+		console.log(value);
+		return (
+			<div className="ColorSet-Preview">
+				<Row h={value.tones.b.h} s={value.tones.b.s} l={value.tones.b.l} hr={value.hueRange} hs={value.hueShift}/>
+				<Row h={value.tones.s.h} s={value.tones.s.s} l={value.tones.s.l} hr={value.hueRange} hs={value.hueShift}/>
+				<Row h={value.tones.m.h} s={value.tones.m.s} l={value.tones.m.l} hr={value.hueRange} hs={value.hueShift}/>
+				<Row h={value.tones.a.h} s={value.tones.a.s} l={value.tones.a.l} hr={value.hueRange} hs={value.hueShift}/>
+			</div>
+		);
+	},[]);
 	
 	switch(inputMode){
 		case 'pane':{
 			return (
 				<div className="ColorSet">
+					<ModeSelect value={inputMode} onChange={setInputMode}/>
 					<div className="ColorSet-ColorPicker">
 						{Object.keys(roles).map((role)=><ColorPicker role={role} value={value} open={role===activeRole} onClick={()=>setActiveRole(role===activeRole?null:role)}/>)}
 					</div>
 					<HueRange value={value}/>
+					<Preview value={value}/>
 				</div>
 			);
 		}
 		case 'bulk':{
 			return (
 				<div className="ColorSet">
+					<ModeSelect value={inputMode} onChange={setInputMode}/>
 					<BulkInput value={value}/>
+					<Preview value={value}/>
 				</div>
 			);
 		}
