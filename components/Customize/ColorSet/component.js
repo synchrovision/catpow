@@ -177,6 +177,10 @@ Catpow.Customize.ColorSet = function (props) {
     return newColors;
   }, []);
   var initColors = useCallback(function (colors) {
+    if (!colors) {
+      colors = {};
+    }
+
     if (!colors.tones) {
       colors.tones = {};
     }
@@ -416,7 +420,6 @@ Catpow.Customize.ColorSet = function (props) {
         });
       }));
     }, []);
-    console.log(value);
     return wp.element.createElement("div", {
       className: "ColorSet-Preview"
     }, wp.element.createElement(Row, {
@@ -459,16 +462,16 @@ Catpow.Customize.ColorSet = function (props) {
         }, Object.keys(roles).map(function (role) {
           return wp.element.createElement(ColorPicker, {
             role: role,
-            value: value,
+            value: colors,
             open: role === activeRole,
             onClick: function onClick() {
               return setActiveRole(role === activeRole ? null : role);
             }
           });
         })), wp.element.createElement(HueRange, {
-          value: value
+          value: colors
         }), wp.element.createElement(Preview, {
-          value: value
+          value: colors
         }));
       }
 
@@ -480,9 +483,9 @@ Catpow.Customize.ColorSet = function (props) {
           value: inputMode,
           onChange: setInputMode
         }), wp.element.createElement(BulkInput, {
-          value: value
+          value: colors
         }), wp.element.createElement(Preview, {
-          value: value
+          value: colors
         }));
       }
   }

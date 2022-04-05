@@ -109,6 +109,7 @@
 		return newColors;
 	},[]);
 	const initColors=useCallback((colors)=>{
+		if(!colors){colors={}}
 		if(!colors.tones){colors.tones={};}
 		if(!colors.hueRange){colors.hueRange=30;}
 		if(!colors.hueShift){colors.hueShift=0;}
@@ -271,7 +272,6 @@
 				</div>
 			);
 		},[]);
-		console.log(value);
 		return (
 			<div className="ColorSet-Preview">
 				<Row h={value.tones.b.h} s={value.tones.b.s} l={value.tones.b.l} hr={value.hueRange} hs={value.hueShift}/>
@@ -288,10 +288,10 @@
 				<div className="ColorSet">
 					<ModeSelect value={inputMode} onChange={setInputMode}/>
 					<div className="ColorSet-ColorPicker">
-						{Object.keys(roles).map((role)=><ColorPicker role={role} value={value} open={role===activeRole} onClick={()=>setActiveRole(role===activeRole?null:role)}/>)}
+						{Object.keys(roles).map((role)=><ColorPicker role={role} value={colors} open={role===activeRole} onClick={()=>setActiveRole(role===activeRole?null:role)}/>)}
 					</div>
-					<HueRange value={value}/>
-					<Preview value={value}/>
+					<HueRange value={colors}/>
+					<Preview value={colors}/>
 				</div>
 			);
 		}
@@ -299,8 +299,8 @@
 			return (
 				<div className="ColorSet">
 					<ModeSelect value={inputMode} onChange={setInputMode}/>
-					<BulkInput value={value}/>
-					<Preview value={value}/>
+					<BulkInput value={colors}/>
+					<Preview value={colors}/>
 				</div>
 			);
 		}
