@@ -125,7 +125,6 @@ registerBlockType('catpow/articlenav',{
 				return block.attributes.title;
 			});
 		}
-		console.log(getSectionTitles(mainContents));
 		
         return [
 			<div className={className}>

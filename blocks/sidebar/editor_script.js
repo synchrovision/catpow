@@ -151,7 +151,6 @@ registerBlockType('catpow/articlenav', {
       });
     };
 
-    console.log(getSectionTitles(mainContents));
     return [wp.element.createElement("div", {
       className: className
     }, wp.element.createElement("ul", {
