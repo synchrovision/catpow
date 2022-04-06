@@ -18,6 +18,7 @@ CP.EmbedIcon={
 					.then((res)=>res.text())
 					.then((text)=>{
 						const el=parser.parseFromString(text,'image/svg+xml');
+						if(el.querySelector('parsererror')){return;}
 						save({
 							embedIconSrc:image.url,
 							embedIconCode:serializer.serializeToString(el)

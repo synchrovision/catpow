@@ -17,6 +17,11 @@ CP.EmbedIcon = {
           return res.text();
         }).then(function (text) {
           var el = parser.parseFromString(text, 'image/svg+xml');
+
+          if (el.querySelector('parsererror')) {
+            return;
+          }
+
           save({
             embedIconSrc: image.url,
             embedIconCode: serializer.serializeToString(el)
