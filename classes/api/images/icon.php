@@ -11,10 +11,11 @@ class icon extends \Catpow\api{
 		$data=[];
 		$data_name=static::get_data_name();
 		foreach(\cp::get_file_path_url('images/'.$data_name) as $dir_path=>$dir_url){
-			foreach(glob($dir_path.'/*.{png,svg,gif,jpg}',GLOB_BRACE) as $image_file){
+			foreach(glob($dir_path.'/*.{png,svg,gif,jpg}',defined('GLOB_BRACE')?GLOB_BRACE:0) as $image_file){
 				$size=getimagesize($image_file);
 				$data[]=[
 					'url'=>$dir_url.'/'.basename($image_file),
+					'path'=>$image_file,
 					'width'=>$size[0]??false,
 					'height'=>$size[1]??false,
 					'alt'=>substr(basename($image_file),0,-4),
