@@ -250,7 +250,7 @@ registerBlockType('catpow/flow', {
       attributes.EditMode = false;
     }
 
-    return [wp.element.createElement(BlockControls, null, wp.element.createElement(Toolbar, {
+    return wp.element.createElement(Fragment, null, wp.element.createElement(BlockControls, null, wp.element.createElement(Toolbar, {
       controls: [{
         icon: 'edit',
         title: 'EditMode',
@@ -280,9 +280,43 @@ registerBlockType('catpow/flow', {
         });
       },
       value: classes
-    })), wp.element.createElement(CP.ItemControlInfoPanel, null)), wp.element.createElement("ul", {
-      className: attributes.EditMode ? primaryClass + ' edit' : classes
-    }, rtn)];
+    })), wp.element.createElement(CP.ItemControlInfoPanel, null)), attributes.EditMode ? wp.element.createElement("div", {
+      className: "alt_content"
+    }, wp.element.createElement("div", {
+      class: "label"
+    }, wp.element.createElement(Icon, {
+      icon: "edit"
+    })), wp.element.createElement(CP.EditItemsTable, {
+      set: setAttributes,
+      attr: attributes,
+      columns: [{
+        type: 'image',
+        label: 'image',
+        keys: imageKeys.image,
+        cond: states.hasImage
+      }, {
+        type: 'text',
+        key: 'title'
+      }, {
+        type: 'text',
+        key: 'titleCaption',
+        cond: states.hasTitleCaption
+      }, {
+        type: 'text',
+        key: 'subTitle',
+        cond: states.hasSubTitle
+      }, {
+        type: 'text',
+        key: 'text'
+      }, {
+        type: 'text',
+        key: 'linkUrl',
+        cond: states.hasLink
+      }],
+      isTemplate: states.isTemplate
+    })) : wp.element.createElement("ul", {
+      className: classes
+    }, rtn));
   },
   save: function save(_ref2) {
     var attributes = _ref2.attributes,

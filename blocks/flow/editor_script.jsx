@@ -159,39 +159,62 @@ registerBlockType('catpow/flow',{
 		
 		if(attributes.EditMode===undefined){attributes.EditMode=false;}
 		
-        return [
-			<BlockControls>
-				<Toolbar
-					controls={[
-						{
-							icon: 'edit',
-							title: 'EditMode',
-							isActive: attributes.EditMode,
-							onClick: () => setAttributes({EditMode:!attributes.EditMode})
-						}
-					]}
-				/>
-			</BlockControls>,
-			<InspectorControls>
-				<CP.SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters.flow || {}}
-				/>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label='クラス'
-						onChange={(classes)=>setAttributes({classes})}
-						value={classes}
+        return (
+			<Fragment>
+				<BlockControls>
+					<Toolbar
+						controls={[
+							{
+								icon: 'edit',
+								title: 'EditMode',
+								isActive: attributes.EditMode,
+								onClick: () => setAttributes({EditMode:!attributes.EditMode})
+							}
+						]}
 					/>
-				</PanelBody>
-				<CP.ItemControlInfoPanel/>
-			</InspectorControls>,
-			<ul className={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>
-        ];
+				</BlockControls>
+				<InspectorControls>
+					<CP.SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+						filters={CP.filters.flow || {}}
+					/>
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label='クラス'
+							onChange={(classes)=>setAttributes({classes})}
+							value={classes}
+						/>
+					</PanelBody>
+					<CP.ItemControlInfoPanel/>
+				</InspectorControls>
+				{attributes.EditMode?(
+					<div className="alt_content">
+						<div class="label">
+							<Icon icon="edit"/>
+						</div>
+						<CP.EditItemsTable
+							set={setAttributes}
+							attr={attributes}
+							columns={[
+								{type:'image',label:'image',keys:imageKeys.image,cond:states.hasImage},
+								{type:'text',key:'title'},
+								{type:'text',key:'titleCaption',cond:states.hasTitleCaption},
+								{type:'text',key:'subTitle',cond:states.hasSubTitle},
+								{type:'text',key:'text'},
+								{type:'text',key:'linkUrl',cond:states.hasLink}
+							]}
+							isTemplate={states.isTemplate}
+						/>
+					</div>
+				):(
+					<ul className={classes}>{rtn}</ul>
+				)}
+			</Fragment>
+        );
     },
 	save({attributes,className}){
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
