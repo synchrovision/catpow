@@ -505,7 +505,52 @@ jQuery.catpow.pageTopOffset=0;
 				$(window).on('scroll load',function(){$tgt.cp_scrollprogress_callback($(this).scrollTop()-$tgt.cp_scrollprogress_origin);});
 			});
 		},
-
+		
+		//要素をスワイプ操作可能にする
+		//閾値を超えてスワイプされた時にイベントを発火する
+		//swipeup    上方向に閾値を超えてスワイプ
+		//swipedown  下方向に閾値を超えてスワイプ
+		//swipeleft  左方向に閾値を超えてスワイプ
+		//swileright 右方向に閾値を超えてスワイプ
+		cp_swipeable:function(drc,thr){
+			if(navigator.maxTouchPoints < 1){return;}
+			var $el=$(this),org={x:0,y:0,t:0},diff,crr,path;
+			thr=thr || 100;
+			var keys={
+				x:{l:'x',u:'X',eb:'swipeleft',ef:'swiperight'},
+				y:{l:'y',u:'Y',eb:'swipeup',ef:'swipedown'}
+			}[drc || 'x'];
+			$el.on('touchstart',function(e){
+				$el.css('transition','none');
+				org={p:e.targetTouches[0]['client'+keys.u],t:Date.now()};
+				path=[org];
+			});
+			$el.on('touchmove',function(e){
+				crr={p:e.targetTouches[0]['client'+keys.u],t:Date.now()};
+				diff={p:crr.p-org.p,t:crr.t-org.t};
+				path.push(crr);
+				var p=parseInt(diff.p);
+				if($el.limit){
+					if($el.limit<0){
+						p=Math.max($el.limit,p);
+					}
+					else if($el.limit>0){
+						p=Math.min($el.limit,p);
+					}
+				}
+				$el.css('transform','translate'+keys.u+'('+p+'px)');
+				e.preventDefault();
+			});
+			$el.on('touchend',function(){
+				$el.css('transition','.2s');
+				$el.css('transform','translate'+keys.u+'(0)');
+				$el.one('transitionend',function(){$el.css('transition','');});
+				if(diff.p>thr){$el.trigger(keys.ef);}
+				else if(diff.p<-1*thr){$el.trigger(keys.eb);}
+			});
+			return $el;
+		},
+		
 		//click,touchendで$tgtにclsクラスを付加
 		cp_toggle_class:function(cls,$tgt){
 			if(!$tgt){$tgt=$(this).next();}
