@@ -1,0 +1,145 @@
+@import "config/style_config.scss";
+
+.nav-menu{
+	@include bnd((p:r));
+	@include flx((w:n,j:c));
+	@include bg((c:b));
+	@include txt((l:n));
+	>.menu-item{
+		@include bnd((f:0 1 a));
+		>.link{
+			@include bnd((p:r,pd:5));
+			@include flx((w:w,g:10,j:c,a:c));
+			@include txt((a:c,c:m));
+			>.icon{
+				>img{
+					@include bnd((h:24,w:a));
+				}
+			}
+			>.title{
+				@include txt((p:16));
+			}
+		}
+		>.children{
+			@include bnd((p:a,w:90% 1200,l:0,r:0,t:100%,pdt:20,mg:a));
+			@include usr((e:n));
+			>.contents{
+				@include bnd((o:h));
+				@include bg((c:b));
+				@include bdr((s:s,w:3,c:m,r:20));
+				@include txt((l:n));
+				@include shd((b:3));
+				@include flx((w:w));
+				@include trn((t:.5s,o:0,x:-50));
+				>.header{
+					@include bnd((f:1 1 200,o:h));
+					@include flx((w:w));
+					@include bg((c:m));
+					>.text{
+						@include bnd((f:1 1 150));
+						>.icon{
+							@include bnd((d:b,mg:a,pd:5));
+							>img{
+								@include bnd((d:b,mg:a,h:60,w:a));
+							}
+						}
+						>.title{
+							@include bnd((pd:5));
+							@include txt((a:c,p:24,h:1em,c:i,f:h));
+						}
+					}
+					>.image{
+						@include bnd((f:1 1 150));
+						>img{
+							@include bnd((w:f,h:a));
+							@include shd((b:2));
+						}
+					}
+				}
+				>.body{
+					@include bnd((f:4 4 600));
+					>.sub-menu{
+						@include bnd((pd:20,bs:b,c:200));
+						@include txt((l:n));
+						>.menu-item{
+							@include bnd((pd:5,bi:a));
+							.link{
+								@include bnd((d:b));
+								@include txt((c:t));
+								&:hover{
+									@include txt((c:a));
+								}
+							}
+							>.link{
+								@include txt((p:18,w:m));
+								>.icon{
+									@include bnd((d:ib));
+									>img{
+										@include bnd((d:b,h:1em,w:a));
+									}
+								}
+							}
+							>.sub-menu{
+								@include bnd((pdl:20));
+								@include txt((l:n));
+								>.menu-item{
+									>.link{@include txt((p:16));}
+								}
+							}
+							&.menu-item-has-children{
+								>.link{
+									@include bnd((d:b,pdb:5,mgb:10));
+									@include bdr((p:b,s:d,w:1,c:t));
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		&:hover{
+			>.link{
+				@include txt((c:a));
+			}
+			>.children{
+				@include usr((e:a));
+				>.contents{
+					@include trn((x:0,o:1));
+				}
+			}
+		}
+		&.active{
+			>.link{
+				@include txt((c:a));
+			}
+		}
+		&.menu-item-has-children{
+			>.link{
+				&::after{
+					content:'';
+					@include bnd((d:b,w:0,h:0,p:a,i:0,mg:a,mgb:0));
+					@include bdr((s:s,c:n,w:0));
+					@include bdr((p:t,c:a));
+					@include trn((t:.2s));
+				}
+			}
+			&:hover{
+				>.link{
+					&::after{
+						@include bnd((d:b,w:0,h:0,p:a,i:0,mg:a,mgb:-30));
+						@include bdr((w:15));
+						@include trn((t:.2s .2s));
+					}
+				}
+				
+			}
+		}
+		&:hover ~ .menu-item{
+			>.children{
+				>.contents{
+					@include trn((x:50));
+				}
+			}
+		}
+	}
+}

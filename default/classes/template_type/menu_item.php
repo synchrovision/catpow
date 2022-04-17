@@ -6,7 +6,8 @@ namespace Catpow\template_type;
 * メニューのタイトル部分のみ編集対象
 */
 
-class menu extends template_type{
+class menu_item extends template_type{
+	public static $menu_template_type='menu_item';
 }
 
 ?>

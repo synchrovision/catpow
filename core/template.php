@@ -10,7 +10,14 @@ function _e($str){
 }
 
 /*snippet*/
-function menu($location,$args=null){
+function menu($path,$args=null){
+	if(strpos($path,'/')){
+		list($location,$template)=explode('/',$path);
+	}
+	else{
+		$location=$path;
+		$template='menu_item';
+	}
 	if(isset($args)){$args['theme_location']=$location;}
 	else{
 		global $nav_datas;
@@ -20,10 +27,8 @@ function menu($location,$args=null){
 			'before'=>'<div class="link">',
 			'after'=>'</div>'
 		];
-		if(isset($nav_datas[$location]['template']) && in_array('nav_menu',$nav_datas[$location]['template'])){
-			$args['walker']=new walker\nav_menu;
-		}
 	}
+	$args['walker']=new walker\nav_menu($template);
 	wp_nav_menu($args);
 }
 function widgets($name){

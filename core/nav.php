@@ -20,9 +20,9 @@ add_filter('wp_nav_menu_objects',function($items){
 },10,2);
 add_filter('nav_menu_item_title',function($title,$item,$args,$depth){
 	global $nav_datas;
-	if(isset($nav_datas[$args->theme_location]['template']) && in_array('menu',$nav_datas[$args->theme_location]['template'])){
+	if(isset($args->walker->template)){
 		ob_start();
-		catpow\loop('nav/'.$args->theme_location.'/menu/loop.php',['p'=>$item->ID],compact('title','item','args','depth'));
+		catpow\loop('nav/'.$args->theme_location.'/'.$args->walker->template.'/loop.php',['p'=>$item->ID],compact('title','item','args','depth'));
 		return ob_get_clean();
 	}
 	return $title;
