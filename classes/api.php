@@ -8,7 +8,9 @@ abstract class api{
 	public static 
 		$method='GET',
 		$check_nonce=false,
-		$capability=false;
+		$capability=false,
+		$nonces=[],
+		$did_register_nonce=false;
 	public static function call($req,$res){
 	}
 	public static function permission($req){
@@ -18,19 +20,18 @@ abstract class api{
 		return true;
 	}
 	public static function register_nonce($action=null){
-		static $is_first=true,$nonces=[];
 		if(!isset($action)){
 			if(static::class === self::class){$action=\cp::$content->path;}
 			else{$action=implode('/',array_slice(explode('\\',static::class),-2));}
 		}
-		if($is_first){
+		if(!self::$did_register_nonce){
 			\cp::enqueue_script('cp_rest_nonce');
-			add_action(is_admin()?'admin_footer':'wp_footer',function()use(&$nonces){
-				wp_localize_script('cp_rest_nonce','cp_rest_nonces',$nonces);
+			add_action(is_admin()?'admin_footer':'wp_footer',function(){
+				wp_localize_script('cp_rest_nonce','cp_rest_nonces',self::$nonces);
 			});
-			$is_first=false;
+			self::$did_register_nonce=true;
 		}
-		$nonces[$action]=wp_create_nonce($action);
+		self::$nonces[$action]=wp_create_nonce($action);
 	}
 	public static function get_data_name(){
 		return substr(static::class,strrpos(static::class,'\\')+1);
