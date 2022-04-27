@@ -6,13 +6,20 @@ class console extends \Catpow\api{
 		$method='POST',
 		$check_nonce=true,
 		$props=[];
-	public static function render(){
-		static::register_nonce();
+	public static function render($path=null,$props=null){
 		\cp::use_component('Console');
-		$path=array_slice(explode('\\',static::class),-2);
+		if(empty($props)){$props=static::$props;}
+		if(empty($path)){
+			static::register_nonce();
+			$path=array_slice(explode('\\',static::class),-2);
+			$props['path']=implode('/',$path);
+		}
+		else{
+			static::register_nonce($path);
+			$props['path']=$path;
+			$path=explode('/',$path);
+		}
 		$id=uniqid(implode('',array_map('ucfirst',$path)));
-		$props=static::$props;
-		$props['path']=implode('/',$path);
 		
 		?>
 		<div id="<?=$id?>">
