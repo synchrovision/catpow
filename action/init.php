@@ -140,6 +140,7 @@ if(function_exists('register_block_type')){
 				'conf'=>'php',
 				'editor_script'=>'js',
 				'editor_style'=>'css',
+				'view_script'=>'js',
 				'script'=>'js',
 				'style'=>'css',
 				'render'=>'php'
