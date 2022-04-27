@@ -184,7 +184,6 @@ Catpow.Console = function (props) {
       return flags[word];
     }).join(' ');
   }, []);
-  console.log(state);
   return wp.element.createElement("div", {
     className: "Console"
   }, wp.element.createElement("div", {

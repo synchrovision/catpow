@@ -74,7 +74,6 @@ Catpow.Console=(props)=>{
 		if(undefined === flags){return '';}
 		return Object.keys(flags).filter((word)=>flags[word]).join(' ');
 	},[]);
-	console.log(state);
 	return (
 		<div className="Console">
 			<div class="Console__controles">
