@@ -33,14 +33,16 @@ register_rest_route(
 				if(!empty($req['tmp'])){
 					$conf=$GLOBALS[cp::get_conf_data_name($req['data_type'])][$req['data_name']]??null;
 					if(
-						isset($conf) && 
-						(in_array($req['tmp'],$conf['template']??[]) || in_array($req['tmp'],$conf['alias_template']??[])) &&
+						isset($conf) && (in_array($req['tmp'],$conf['template']??[]) || in_array($req['tmp'],$conf['alias_template']??[])) ||
+						wp_verify_nonce($_SERVER['HTTP_X_CP_NONCE']??'',$req['content_path'])
+					){
 						cp::get_template_part(
 							$req['content_path'].'/api'.
 							(empty($req['action'])?'':'-'.$req['action']).'.php',
 							['req'=>$req,'res'=>$res,'conf'=>$conf]
-						)
-					){return $res;}
+						);
+						return $res;
+					}
 				}
 				$api_class=cp::get_class_name('api',$req['data_type'],$req['data_name']);
 				if(class_exists($api_class)){
