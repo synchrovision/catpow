@@ -42,8 +42,8 @@ wp_localize_script('catpow','cp',array(
 ));
 
 if($GLOBALS['is_IE']){
+	wp_enqueue_script('polyfill','https://polyfill.io/v3/polyfill.min.js');
 	wp_enqueue_script('object-fit-images','https://cdnjs.cloudflare.com/ajax/libs/object-fit-images⁄3.2.4/ofi.min.js');
-	wp_enqueue_script('smoothscroll-polyfill','https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js');
 	wp_enqueue_script('stickyfill','https://cdnjs.cloudflare.com/ajax/libs/stickyfill/2.1.0/stickyfill.min.js');
 	wp_enqueue_script('css-vars-ponyfill','https://cdnjs.cloudflare.com/ajax/libs/css-vars-ponyfill/2.3.2/css-vars-ponyfill.min.js');
 }
