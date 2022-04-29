@@ -6,7 +6,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 * APIへ入力値を送信して結果を表示する
 */
 Catpow.Console = function (props) {
-  var path = props.path;
+  var _props$className = props.className,
+      className = _props$className === void 0 ? 'cp-console' : _props$className,
+      path = props.path;
   var el = wp.element.createElement;
   var _wp$element = wp.element,
       useState = _wp$element.useState,
@@ -92,15 +94,15 @@ Catpow.Console = function (props) {
       };
     }, []);
     return wp.element.createElement("div", {
-      className: "ControlItem"
+      className: className + '-controls-item'
     }, label && wp.element.createElement("div", {
-      className: "ControlItem__label"
+      className: "label"
     }, label), desc && wp.element.createElement("div", {
-      className: "ControlItem__desc"
+      className: "desc"
     }, desc), wp.element.createElement("div", {
-      class: "ControlItem__body"
+      class: "body"
     }, el(inputTypes[type], props)));
-  }, []);
+  }, [className]);
   var ResultItem = useCallback(function (props) {
     var _props$type = props.type,
         type = _props$type === void 0 ? 'log' : _props$type,
@@ -109,17 +111,17 @@ Catpow.Console = function (props) {
       return {
         error: function error(props) {
           return wp.element.createElement("div", {
-            className: "error"
+            className: "text -error"
           }, props.text);
         },
         warn: function warn(props) {
           return wp.element.createElement("div", {
-            className: "warn"
+            className: "text -warn"
           }, props.text);
         },
         log: function log(props) {
           return wp.element.createElement("div", {
-            className: "log"
+            className: "text -log"
           }, props.text);
         }
       };
@@ -159,6 +161,7 @@ Catpow.Console = function (props) {
       method: 'POST',
       data: data
     }).then(function (res) {
+      console.log(res);
       var results = res.results;
       dispatch({
         type: 'setResults',
@@ -185,13 +188,13 @@ Catpow.Console = function (props) {
     }).join(' ');
   }, []);
   return wp.element.createElement("div", {
-    className: "Console"
+    className: className
   }, wp.element.createElement("div", {
-    class: "Console__controles"
+    class: className + '-controls'
   }, props.controls.map(function (itemProps) {
     return el(ControlItem, itemProps);
   })), wp.element.createElement("div", {
-    class: "Console__results"
+    class: className + '-results'
   }, state.results.map(function (itemProps) {
     return el(ResultItem, itemProps);
   })));

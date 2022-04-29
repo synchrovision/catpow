@@ -2,7 +2,7 @@
 * APIへ入力値を送信して結果を表示する
 */
 Catpow.Console=(props)=>{
-	const {path}=props;
+	const {className='cp-console',path}=props;
 	const el=wp.element.createElement;
 	const {useState,useCallback,useEffect,useRef,useMemo,useReducer}=wp.element;
 	
@@ -27,19 +27,19 @@ Catpow.Console=(props)=>{
 			)
 		}),[]);
 		return (
-			<div className="ControlItem">
-				{label && <div className="ControlItem__label">{label}</div>}
-				{desc && <div className="ControlItem__desc">{desc}</div>}
-				<div class="ControlItem__body">{el(inputTypes[type],props)}</div>
+			<div className={className+'-controls-item'}>
+				{label && <div className="label">{label}</div>}
+				{desc && <div className="desc">{desc}</div>}
+				<div class="body">{el(inputTypes[type],props)}</div>
 			</div>
 		);
-	},[]);
+	},[className]);
 	const ResultItem=useCallback((props)=>{
 		const {type='log',text}=props;
 		const resultTypes=useMemo(()=>({
-			error:(props)=>(<div className="error">{props.text}</div>),
-			warn:(props)=>(<div className="warn">{props.text}</div>),
-			log:(props)=>(<div className="log">{props.text}</div>),
+			error:(props)=>(<div className="text -error">{props.text}</div>),
+			warn:(props)=>(<div className="text -warn">{props.text}</div>),
+			log:(props)=>(<div className="text -log">{props.text}</div>),
 		}),[]);
 		return el(resultTypes[type],props);
 	},[]);
@@ -63,6 +63,7 @@ Catpow.Console=(props)=>{
 	const submit=useCallback((action)=>{
 		const {data}=state;
 		wp.apiFetch({path:`/cp/v1/${path}/${action}`,method:'POST',data}).then((res)=>{
+			console.log(res);
 			const {results}=res;
 			dispatch({type:'setResults',results});
 		}).catch((e)=>{
@@ -75,11 +76,11 @@ Catpow.Console=(props)=>{
 		return Object.keys(flags).filter((word)=>flags[word]).join(' ');
 	},[]);
 	return (
-		<div className="Console">
-			<div class="Console__controles">
+		<div className={className}>
+			<div class={className+'-controls'}>
 				{props.controls.map((itemProps)=>el(ControlItem,itemProps))}
 			</div>
-			<div class="Console__results">
+			<div class={className+'-results'}>
 				{state.results.map((itemProps)=>el(ResultItem,itemProps))}
 			</div>
 		</div>

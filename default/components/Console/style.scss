@@ -1,31 +1,33 @@
 @import "admin_style_config.scss";
 
-.Console{
+.cp-console{
 	@include bnd((o:h));
 	@include flx((w:w));
 	@include bdr((r:10));
 	@include shd((b:2));
-	&__controles{
+	&-controls{
 		@include bnd((f:1 1 300,pd:20));
-		.ControlItem{
-			&__label{
+		&-item{
+			>.label{
 				@include bnd((pdb:5,mgb:5));
 				@include bdr((p:b,s:s,w:1));
 				@include txt((p:16));
 			}
-			&__desc{
+			>.desc{
 				@include txt((p:14));
 			}
-			&__body{
+			>.body{
 				@include bnd((pd:5));
 			}
 		}
 	}
-	&__results{
+	&-results{
 		@include bnd((f:1 1 300,pd:20,h:100 a 800));
 		@include bg((c:t 5));
-		.error{@include txt((c:1));}
-		.warn{@include txt((c:3));}
-		.log{@include txt((c:t));}
+		>.text{
+			&.-error{@include txt((c:1));}
+			&.-warn{@include txt((c:3));}
+			&.-log{@include txt((c:t));}
+		}
 	}
 }

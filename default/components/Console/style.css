@@ -1,4 +1,4 @@
-.Console {
+.cp-console {
   overflow: hidden;
   display: -webkit-box;
   display: -webkit-flex;
@@ -9,27 +9,27 @@
   border-radius: 0.625rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
-.Console__controles {
+.cp-console-controls {
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 18.75rem;
   padding: 1.25rem;
 }
-.Console__controles .ControlItem__label {
+.cp-console-controls-item > .label {
   padding-bottom: 0.3125rem;
   margin-bottom: 0.3125rem;
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
   font-size: 1rem;
 }
-.Console__controles .ControlItem__desc {
+.cp-console-controls-item > .desc {
   font-size: 0.875rem;
 }
-.Console__controles .ControlItem__body {
+.cp-console-controls-item > .body {
   padding: 0.3125rem;
 }
-.Console__results {
+.cp-console-results {
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
@@ -40,13 +40,13 @@
   height: auto;
   background-color: #f6f6f6;
 }
-.Console__results .error {
+.cp-console-results > .text.-error {
   color: #d65c5c;
 }
-.Console__results .warn {
+.cp-console-results > .text.-warn {
   color: #d6d65c;
 }
-.Console__results .log {
+.cp-console-results > .text.-log {
   color: #444;
 }
 /*# sourceMappingURL=./style.css.map */
