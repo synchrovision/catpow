@@ -2,8 +2,8 @@
 $attributes=[
 	"classes"=>["source"=>'attribute',"selector"=>'ul',"attribute"=>'class',"default"=>'wp-block-catpow-listed menu medium hasHeader hasTitle hasTitleCaption hasImage hasText'],
 	
-	'TitleTag'=>['type'=>'text','default'=>'h3'],
-	'SubTitleTag'=>['type'=>'text','default'=>'h4'],
+	'TitleTag'=>['type'=>'string','default'=>'h3'],
+	'SubTitleTag'=>['type'=>'string','default'=>'h4'],
 	
 	"items"=>[
 		"source"=>'query',
@@ -52,7 +52,7 @@ $attributes=[
 	"countSuffix"=>["source"=>'text',"selector"=>'.counter .suffix',"default"=>''],
 	"subCountPrefix"=>["source"=>'text',"selector"=>'.subcounter .prefix',"default"=>''],
 	"subCountSuffix"=>["source"=>'text',"selector"=>'.subcounter .suffix',"default"=>''],
-	"loopParam"=>["type"=>'text',"default"=>''],
+	"loopParam"=>["type"=>'string',"default"=>''],
 	"loopCount"=>["type"=>'number',"default"=>1],
 	
 	"doLoop"=>['type'=>'boolean',"default"=>false],

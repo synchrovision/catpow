@@ -4,13 +4,13 @@ $filters=[
 	'iconHolder'=>['selector'=>'.icon']
 ];
 $attributes=[
-	'color'=>['default'=>"0"],
+	'color'=>['type'=>'string','default'=>"0"],
 	'id'=>['source'=>'attribute','selector'=>'.wp-block-catpow-section','attribute'=>'id'],
 	'classes'=>['source'=>'attribute','selector'=>'.wp-block-catpow-section','attribute'=>'class','default'=>'wp-block-catpow-section article level3 center catch'],
 	'navIcon'=>['source'=>'attribute','selector'=>'.wp-block-catpow-section','attribute'=>'data-icon'],
 
-	'SectionTag'=>['type'=>'text','default'=>'section'],
-	'HeadingTag'=>['type'=>'text','default'=>'h2'],
+	'SectionTag'=>['type'=>'string','default'=>'section'],
+	'HeadingTag'=>['type'=>'string','default'=>'h2'],
 
 	'prefix'=>['source'=>'children','selector'=>'header div.prefix'],
 	'title'=>['type'=>'array','source'=>'children','selector'=>'header h2,header .heading','default'=>['Title']],

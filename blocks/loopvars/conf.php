@@ -1,9 +1,9 @@
 <?php
 $attributes=[
 	'columns'=>['type'=>'array','default'=>[
-		['type'=>'text','key'=>'classes'],
-		['type'=>'text','key'=>'title'],
-		['type'=>'text','key'=>'text']
+		['type'=>'string','key'=>'classes'],
+		['type'=>'string','key'=>'title'],
+		['type'=>'string','key'=>'text']
 	]],
 	'items'=>['type'=>'array','default'=>[
 		['classes'=>'color1','title'=>'Title1','text'=>'Text1'],
