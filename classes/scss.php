@@ -154,7 +154,7 @@ class scss{
 		if(!current_user_can('edit_themes'))return;
 		if(version_compare(PHP_VERSION, '5.4')<0)return;
 		static $scssc,$admin_style_config_modified_time,$style_config_modified_time;
-		$css_files=[];
+		$results=[];
 		if(empty($style_config_modified_time)){
 			if(empty($config_file=CP::get_file_path('config/style_config.scss',CP::FROM_THEME))){$style_config_modified_time=0;}
 			else{$style_config_modified_time=filemtime($config_file);}
@@ -167,12 +167,15 @@ class scss{
 			else{$admin_style_config_modified_time=filemtime($admin_config_file);}
 		}
 		foreach($scss_names as $scss_base_name){
-			if($f=CP::get_file_path_url($scss_base_name.'.scss',0733)){
+			if(substr($scss_base_name,-5)==='.scss'){
+				if(!file_exists($scss_base_name)){continue;}
+				$scss_name=substr($scss_base_name,0,-5);
+			}
+			else if($f=CP::get_file_path_url($scss_base_name.'.scss',0733)){
 				$scss_name=substr(key($f),0,-5);
-				$scss_url=substr(reset($f),0,-5);
 			}
 			else{continue;}
-			$css_files[]=$scss_name.'.css';
+			$result=['scss'=>$scss_name.'.scss','css'=>$scss_name.'css','name'=>$scss_name];
 			$is_theme_file=strpos($scss_name,'/wp-content/themes/')!==false;
 			if(
 				!file_exists($scss_name.'.css') or
@@ -197,12 +200,15 @@ class scss{
 					]);
 					$css=$scssc->compile(file_get_contents($scss_name.'.scss'),$scss_name.'.scss');
 					file_put_contents($scss_name.'.css',$css);
+					$result['status']='success';
 				}catch(\Exception $e){
 					error_log(sprintf('%s:%s;',$scss_name,$e->getMessage()));
+					$result['status']='error';
 				}
+				$results[]=$result;
 			}
 		}
-	
+		return $results;
 	}
 	public static function create_map_data($data){
 		return [
