@@ -2,7 +2,7 @@
 
 .BarChart{
 	svg{
-		@include bnd((d:b,w:f 30rem,mg:0 a));
+		@include bnd((d:b,w:f 300,mg:0 a));
 		rect{
 			@for $i from 1 through 12{
 				&.color#{$i}{

@@ -2,19 +2,19 @@
 
 div.SearchSelect{
 	.currentLabel{
-		@include bnd((d:ib,mg:0 .5em,pd:.5rem 1rem));
-		@include bdr((s:s,w:1,c:t 50,r:.5rem));
-		@include txt((a:c,p:1.5rem));
+		@include bnd((d:ib,mg:0 .5em,pd:5 10));
+		@include bdr((s:s,w:1,c:t 50,r:5));
+		@include txt((a:c,p:15));
 		@include usr((c:p));
 	}
 	.searchBox{
-		@include bnd((pd:1rem));
+		@include bnd((pd:10));
 		input.searchInput{
-			@include bnd((d:b,w:f,bs:b,pdl:4rem,mg:0));
-			@include bg((i:'images/search.svg',s:a 2rem,r:n,p:1rem 50%));
+			@include bnd((d:b,w:f,bs:b,pdl:40,mg:0));
+			@include bg((i:'images/search.svg',s:a 20,r:n,p:10 50%));
 		}
 	}
 	.selectBox{
-		@include bnd((h:30rem a,pd:1rem));
+		@include bnd((h:300 a,pd:10));
 	}
 }

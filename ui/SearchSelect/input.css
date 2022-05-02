@@ -1,32 +1,32 @@
 div.SearchSelect .currentLabel {
   display: inline-block;
   margin: 0rem 0.5em;
-  padding: 0.5rem 1rem;
+  padding: 0.3125rem 0.625rem;
   border-style: solid;
   border-width: 0.0625rem;
   border-color: #a2a2a2;
-  border-radius: 0.5rem;
+  border-radius: 0.3125rem;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 0.9375rem;
   cursor: pointer;
 }
 div.SearchSelect .searchBox {
-  padding: 1rem;
+  padding: 0.625rem;
 }
 div.SearchSelect .searchBox input.searchInput {
   display: block;
   width: 100%;
   box-sizing: border-box;
-  padding-left: 4rem;
+  padding-left: 2.5rem;
   margin: 0rem;
   background-image: url("images/search.svg");
-  background-size: auto 2rem;
+  background-size: auto 1.25rem;
   background-repeat: no-repeat;
-  background-position: 1rem 50%;
+  background-position: 0.625rem 50%;
 }
 div.SearchSelect .selectBox {
-  min-height: 30rem;
+  min-height: 18.75rem;
   height: auto;
-  padding: 1rem;
+  padding: 0.625rem;
 }
 /*# sourceMappingURL=./input.css.map */

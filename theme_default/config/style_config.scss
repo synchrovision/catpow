@@ -1,11 +1,7 @@
 @charset "utf-8";
 @import "catpow.scss";
 
-$selectors:(
-	m:'body .site_main .page_main .page_content',
-	e:'body.mce-content-body,.gutenberg .editor-block-list__layout',
-	u:'#profile-page,#cpcf_custom_box .inside'
-);
+$sizeUnit:0.0625rem;
 
 $st:90;
 $lt:50;

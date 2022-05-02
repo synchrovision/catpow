@@ -4,8 +4,8 @@
 	ul{
 		@include txt((l:n));
 		li{
-			@include bnd((d:ib,p:r,w:2rem,h:2rem,mg:.5rem));
-			@include bdr((r:2rem));
+			@include bnd((d:ib,p:r,w:20,h:20,mg:5));
+			@include bdr((r:20));
 			@include usr((c:p));
 			&.fillColor0{
 				@include bg((c:t 10));
@@ -13,7 +13,7 @@
 			&::after{
 				content: ' ';
 				@include bnd((d:b,p:a,t:1,b:1,l:1,r:1));
-				@include bdr((r:2rem));
+				@include bdr((r:20));
 				@include bg((c:b));
 			}
 			&.active::after{@include bnd((d:n));}

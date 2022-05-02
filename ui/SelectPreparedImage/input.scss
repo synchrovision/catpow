@@ -2,7 +2,7 @@
 
 .SelectPreparedImage{
 	ul{
-		@include bnd((d:b,w:30rem));
+		@include bnd((d:b,w:300));
 		@include bg((c:t 20));
 		.item{
 			@include bnd((d:ib,w:10%));

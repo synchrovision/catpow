@@ -1,5 +1,5 @@
 div.PointChart {
-  width: 30rem;
+  width: 18.75rem;
 }
 div.PointChart svg rect.control {
   fill: transparent;

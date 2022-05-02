@@ -1079,7 +1079,7 @@ body .site_main .page_main .page_content span.label.l small, body.mce-content-bo
   font-size: 0.6875rem;
 }
 body .site_main .page_main .page_content span.label.color0, body.mce-content-body span.label.color0, .gutenberg .editor-block-list__layout span.label.color0, #profile-page span.label.color0, #cpcf_custom_box .inside span.label.color0 {
-  background-color: 0;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 body .site_main .page_main .page_content span.label.color1, body.mce-content-body span.label.color1, .gutenberg .editor-block-list__layout span.label.color1, #profile-page span.label.color1, #cpcf_custom_box .inside span.label.color1 {
   background-color: #d65c5c;

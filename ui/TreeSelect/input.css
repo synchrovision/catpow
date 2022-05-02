@@ -4,15 +4,15 @@ div.treeSelect {
   position: relative;
 }
 div.treeSelect div.currentLabel h3 {
-  padding: 1rem;
+  padding: 0.625rem;
   height: 1em;
-  width: 10rem;
+  width: 6.25rem;
   border-style: solid;
   border-width: 0.0625rem;
   border-color: #c7c7c7;
-  border-radius: 0.5rem;
+  border-radius: 0.3125rem;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 0.9375rem;
   line-height: 1em;
   font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   font-weight: 400;
@@ -63,10 +63,10 @@ div.treeSelect div.selectBoxes div.selectBox ul.selectBoxItems li.selectBoxItem 
 div.treeSelect div.selectBoxes div.selectBox ul.selectBoxItems li.selectBoxItem h3 {
   display: block;
   position: relative;
-  padding: 1rem;
+  padding: 0.625rem;
   margin: 0rem;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 0.75rem;
   line-height: 1em;
   font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   font-weight: 400;
@@ -77,7 +77,7 @@ div.treeSelect div.selectBoxes div.selectBox:first-child {
   flex-shrink: 0;
   flex-basis: auto;
   overflow: hidden;
-  border-radius: 1rem 0rem 0rem 1rem;
+  border-radius: 0.625rem 0rem 0rem 0.625rem;
   background-color: #ececec;
   box-shadow: -5px 0px 5px -5px rgba(0, 0, 0, 0.3) inset;
 }
@@ -93,7 +93,7 @@ div.treeSelect div.selectBoxes div.selectBox:not(:first-child) {
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: auto;
-  padding: 1rem;
+  padding: 0.625rem;
 }
 div.treeSelect div.selectBoxes div.selectBox:not(:first-child) ul.selectBoxItems {
   -webkit-box-flex: 1;

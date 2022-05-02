@@ -69,7 +69,7 @@ html{
 					@include bdr((c:t 1 .3));
 				}
 				.inside{
-					@include bnd((pd:1rem,mg:0));
+					@include bnd((pd:10,mg:0));
 					@include bdr((s:n));
 				}
 			}
@@ -78,7 +78,7 @@ html{
 					@include bnd((p:f,z:10001,b:.5em,r:.5em,h:a,pd:1em));
 					@include bg((c:m));
 					@include bdr((p:t l,s:s,w:1,c:m,r:2em));
-					@include txt((a:c,p:1.5rem,h:1em,f:g,w:m,c:i));
+					@include txt((a:c,p:15,h:1em,f:g,w:m,c:i));
 					@include usr((c:p));
 					&::before{
 						@include ico('search');
@@ -89,7 +89,7 @@ html{
 					.inside{
 						@include bnd((p:f,z:10000,b:0,r:0,h:a 80vh,oy:a));
 						@include bg((c:b));
-						@include bdr((p:t l,s:s,w:1,c:m,r:1rem 0 0 0));
+						@include bdr((p:t l,s:s,w:1,c:m,r:10 0 0 0));
 						@include shd((b:5));
 						@include usr((e:n));
 						@include trn((t:.5s,y:100vh,o:0));
@@ -154,7 +154,7 @@ html{
 				}
 			}
 			.cp_form_section{
-				@include bnd((pd:2rem));
+				@include bnd((pd:20));
 				@include bg((c:b));
 			}
 			.wp-list-table{
@@ -172,18 +172,18 @@ html{
 				&.checkbox.cp-meta-item-use_functions{
 					label.checkbox{
 						.image{
-							@include bnd((d:ib,w:8rem,mgr:1rem));
+							@include bnd((d:ib,w:80,mgr:10));
 						}
 						.text{
 							@include bnd((p:r));
 							h3{
-								@include txt((a:c,p:1.3rem,f:g,w:m,c:t));
+								@include txt((a:c,p:13,f:g,w:m,c:t));
 							}
 							p{
 								@include bnd((d:b,p:a,w:14em,pd:1em,mg:0 a,l:-10em,r:-10em,z:1));
 								@include bg((c:m 90));
 								@include bdr((r:1em));
-								@include txt((a:j,p:1.1rem,w:r,c:i));
+								@include txt((a:j,p:11,w:r,c:i));
 								@include shd((b:2));
 								@include trn((t:.5s,y:1em,o:0));
 								@include usr((e:n));
@@ -204,8 +204,8 @@ html{
 				}
 			}
 			ul.functions{
-				@include bnd((pd:1rem));
-				@include bdr((r:1rem));
+				@include bnd((pd:10));
+				@include bdr((r:10));
 				@include shd((b:5));
 				&>li{
 					@include bnd((mg:0));
@@ -213,7 +213,7 @@ html{
 					&,&>.cp_form_section{
 						&>h2{
 							@include bnd((d:b,p:r,pd:5,mg:10));
-							@include txt((a:c,p:2rem,h:1em,f:'Raleway',c:t));
+							@include txt((a:c,p:20,h:1em,f:'Raleway',c:t));
 							@include bdr((p:b,s:s,w:1));
 						}
 						.image{
@@ -224,42 +224,42 @@ html{
 						}
 						.desc{
 							@include bnd((pd:5 10));
-							@include txt((a:j,p:1rem,h:1.5em,f:$gothic,s:r,c:t));
+							@include txt((a:j,p:10,h:1.5em,f:$gothic,s:r,c:t));
 						}
 						.control{
 							@include bnd((mg:10 20));
 						}
 					}
 					.cp_lightbox_content{
-						@include bnd((w:95% 100rem));
+						@include bnd((w:95% 1000));
 						@include flx((w:w));
 						.panel_body{
-							@include bnd((f:10 10 50rem));
+							@include bnd((f:10 10 500));
 							&>ul{
-								@include bnd((pd:2rem));
+								@include bnd((pd:20));
 								&>li{
-									@include bnd((pd:1rem 0));
+									@include bnd((pd:10 0));
 									h3{
-										@include bnd((mgb:1rem,pdb:1rem));
+										@include bnd((mgb:10,pdb:10));
 										@include bdr((p:b,s:s,w:1,c:t 50));
-										@include txt((p:2rem));
+										@include txt((p:20));
 									}
 								}
 							}
 						}
 						.cp_form_results{
-							@include bnd((f:1 1 20rem,pd:2rem));
+							@include bnd((f:1 1 200,pd:20));
 							@include bg((c:t));
-							@include txt((c:b,p:1.2rem));
+							@include txt((c:b,p:12));
 						}
 						.button_close_panel{
-							@include bnd((p:a,t:-2rem,r:-2rem));
+							@include bnd((p:a,t:-20,r:-20));
 							.button{
-								@include bnd((w:4rem,h:4rem,pd:1rem));
+								@include bnd((w:40,h:40,pd:10));
 								@include bdr((s:n,r:50%));
 								@include bg((c:m));
 								@include shd((b:2));
-								@include txt((a:c,p:2rem,h:1em,c:b));
+								@include txt((a:c,p:20,h:1em,c:b));
 								&::before{
 									@include ico('times');
 								}
@@ -268,7 +268,7 @@ html{
 					}
 				}
 				&.active{
-					@include grd((rc:20rem));
+					@include grd((rc:200));
 					&>li{
 						&.item{
 							&>.cp_form_section{
@@ -277,14 +277,14 @@ html{
 					}
 				}
 				&.inactive{
-					@include grd((rc:15rem));
+					@include grd((rc:150));
 					&>li{
 						&.item{
 							&>h2{
-								@include txt((p:1.5rem));
+								@include txt((p:15));
 							}
 							.desc{
-								@include txt((p:.8rem));
+								@include txt((p:8));
 							}
 						}
 					}

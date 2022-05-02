@@ -5,9 +5,9 @@ div.WeeklySchedule{
 	@include usr((s:n));
 	table.grid{
 		@include bnd((p:r,w:100%));
-		@include txt((a:c,p:1rem,c:t 30));
+		@include txt((a:c,p:10,c:t 30));
 		@include tbl((l:f));
-		td,th{@include bnd((h:2rem,bs:b));}
+		td,th{@include bnd((h:20,bs:b));}
 		tbody{
 			td{
 				@include bdr((s:s,w:1,c:t 30));
@@ -15,7 +15,7 @@ div.WeeklySchedule{
 		}
 	}
 	.DrawArea{
-		@include bnd((p:a,t:2rem,b:0,l:12.5%,r:0));
+		@include bnd((p:a,t:20,b:0,l:12.5%,r:0));
 		&:hover{@include usr((c:grab));}
 		.base{
 			@include bnd((p:a,t:0,b:0,l:0,r:0));

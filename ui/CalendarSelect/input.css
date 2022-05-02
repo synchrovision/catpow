@@ -4,7 +4,7 @@ div.CalendarSelect > table {
   border-collapse: collapse;
   border-spacing: 0px;
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 0.9375rem;
 }
 div.CalendarSelect > table caption {
   position: relative;

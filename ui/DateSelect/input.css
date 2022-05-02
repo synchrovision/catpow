@@ -2,10 +2,10 @@
 .DateSelect > .inputs {
   display: inline-block;
   margin: 0rem 0.5em;
-  padding: 0.5rem;
+  padding: 0.3125rem;
   cursor: pointer;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 0.9375rem;
 }
 .DateSelect > .inputs .input {
   text-align: right;

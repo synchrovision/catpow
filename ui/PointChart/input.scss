@@ -2,7 +2,7 @@
 
 
 div.PointChart{
-	@include bnd((w:30rem));
+	@include bnd((w:300));
 	svg{
 		rect.control{@include svg((f:n));@include usr((c:p));}
 		.valLine{@include svg((s:t 1 .3,w:1));}

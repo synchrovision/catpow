@@ -24,11 +24,11 @@ body{
 			.message{
                 @include usr((e:n));
                 .text{
-                    @include bnd((pd:3 5,w:80%,mg:1rem a));
+                    @include bnd((pd:3 5,w:80%,mg:10 a));
                     @include bg((c:m));
                     @include bdr((r:3));
                     @include shd((b:1));
-                    @include txt((a:c,c:i,p:1.1rem,h:1.5em));
+                    @include txt((a:c,c:i,p:11,h:1.5em));
                     @include trn((t:1s,ty:0,o:1));
                     &:after{
                         content: '　';
@@ -48,10 +48,10 @@ body{
 		&.cp-meta-item{
 			@include bnd((p:r,pd:5));
 			&.multiple-item{
-				@include bnd((mg:.5rem,pd:.5rem));
+				@include bnd((mg:5,pd:5));
 				@include bdr((s:s,w:1,c:t 1 .5,r:5));
 				&>.cp-meta-unit{
-					@include bnd((p:r,mg:.5rem,pd:.5rem));
+					@include bnd((p:r,mg:5,pd:5));
 					@include bdr((s:s,w:1,c:t 1 .2,r:5));
 					.multiple-input-buttons{
 						@include bnd((p:a,t:0,r:0,pd:1 3));
@@ -59,8 +59,8 @@ body{
 						@include bdr((r:0 4 0 4));
 						@include txt((h:10));
 						.btn-inc,.btn-dec{
-							@include bnd((d:ib,mg:.3rem));
-							@include txt((p:1.3rem,h:1em,f:e,a:c,c:b 1 .5));
+							@include bnd((d:ib,mg:3));
+							@include txt((p:13,h:1em,f:e,a:c,c:b 1 .5));
 							@include trn((t:.5s));
 							@include usr((c:p));
 							&:hover{
@@ -101,8 +101,8 @@ body{
 			}
 			
 			fieldset{
-				@include bnd((mg:1rem 0,pd:1rem));
-				@include bdr((s:s,w:1,c:t 1 .3,r:.5rem));
+				@include bnd((mg:10 0,pd:10));
+				@include bdr((s:s,w:1,c:t 1 .3,r:5));
 				legend{
 					@include txt((c:t 1 .3));
 				}
@@ -115,7 +115,7 @@ body{
                 @include bnd((w:120));
             }
 			img.ajax_upload_media{
-				@include bnd((w:10rem,h:a));
+				@include bnd((w:100,h:a));
 			}
 			span.pdf{
 				@include bnd((d:ib,w:160,h:230,o:h));
@@ -133,14 +133,14 @@ body{
 			label{
 				@include bnd((d:ib,pd:3,mg:3));
 				@include bg((c:b));
-				@include txt((p:1.3rem,h:1em,c:t 40));
+				@include txt((p:13,h:1em,c:t 40));
 				@include trn((t:.5s));
 				@include usr((c:p));
 				&.checkbox,&.radio{
 					@include bnd((d:ib,mg:.3em,pd:.3em 1em));
 					@include bg((c:m 1 0));
 					@include bdr((s:s,w:1,c:t 1 .5,r:1em));
-					@include txt((p:1.2rem,h:1em,f:g,w:m,c:t 1 .5));
+					@include txt((p:12,h:1em,f:g,w:m,c:t 1 .5));
 					&:before{
 						@include bnd((d:ib,mgr:5));
 						@include txt((c:t 1 .5));
@@ -293,10 +293,10 @@ body{
                 @include bnd((mg:0,pd:0));
                 @include bg((c:n));
 				.button{
-					@include bnd((d:b,p:r,h:a,mg:1rem,pd:.5em 1.5em));
+					@include bnd((d:b,p:r,h:a,mg:10,pd:.5em 1.5em));
 					@include bg((c:m));
 					@include bdr((r:5));
-					@include txt((a:c,p:2rem,c:i,f:g,s:b,t:.2em));
+					@include txt((a:c,p:20,c:i,f:g,s:b,t:.2em));
 					@include usr((c:p));
 					@include trn((t:.5s));
                     @include shd((b:n));
@@ -383,7 +383,7 @@ body{
 					.button{
 						@include bnd((mg:2,pd:2 5));
 						@include bdr((r:3));
-						@include txt((p:1rem,h:1em));
+						@include txt((p:10,h:1em));
 					}
 					i{
 						@include bnd((mgr:5));
@@ -396,7 +396,7 @@ body{
 					.button{
 						@include bnd((mg:2,pd:4 8));
 						@include bdr((r:5));
-						@include txt((p:1.2rem,h:1.5em));
+						@include txt((p:12,h:1.5em));
 					}
 					i{
 						@include bnd((mgr:5));
@@ -409,7 +409,7 @@ body{
 					.button{
 						@include bnd((mg:5,pd:8));
 						@include bdr((r:5));
-						@include txt((p:2rem,h:1.5em));
+						@include txt((p:20,h:1.5em));
 					}
 					i{
 						@include bnd((mgr:10));
@@ -422,7 +422,7 @@ body{
 					.button{
 						@include bnd((mg:10,pd:12));
 						@include bdr((r:5));
-						@include txt((p:3rem,h:1.5em));
+						@include txt((p:30,h:1.5em));
 					}
 					i{
 						@include bnd((mgr:10));
@@ -458,19 +458,19 @@ body{
 			@include bnd((d:b,p:r,mg:0,pd:10));
 			@include txt((l:n));
 			li{
-				@include bnd((pd:1rem 0));
+				@include bnd((pd:10 0));
 				@include flx((w:w));
 				.image{
-					@include bnd((f:1 1 15rem,pd:1rem,bs:b));
+					@include bnd((f:1 1 150,pd:10,bs:b));
 					img{
 						@include bnd((w:f,h:a));
 					}
 				}
 				.text{
-					@include bnd((f:1 1 15rem,pd:1rem,bs:b));
+					@include bnd((f:1 1 150,pd:10,bs:b));
 					h3{
-						@include bnd((mgb:.5rem,pdb:.5rem));
-						@include txt((p:1.8rem,f:g,w:m,c:m));
+						@include bnd((mgb:5,pdb:5));
+						@include txt((p:18,f:g,w:m,c:m));
 						@include bdr((p:b,s:s,w:1,c:m));
 					}
 					div.address{
@@ -479,7 +479,7 @@ body{
 					dl.info{
 						@include flx((w:w));
 						dt{
-							@include bnd((f:1 1 5rem));
+							@include bnd((f:1 1 50));
 						}
 						dd{
 							@include bnd((f:2 2 60%));
@@ -487,55 +487,55 @@ body{
 					}
 				}
 				.map{
-					@include bnd((f:2 2 20rem,pd:1rem,bs:b));
+					@include bnd((f:2 2 200,pd:10,bs:b));
 				}
 			}
 		}
 		&.contact{
-			@include bnd((d:b,p:r,mg:10rem 1rem,pd:1rem));
-			@include bdr((s:s,w:1,c:t 1 .5,r:1rem));
+			@include bnd((d:b,p:r,mg:100 10,pd:10));
+			@include bdr((s:s,w:1,c:t 1 .5,r:10));
 			@include txt((l:n));
 			@include flx((w:w));
 			li{
-				@include bnd((f:1 1 30rem,pd:1rem,bs:b));
+				@include bnd((f:1 1 300,pd:10,bs:b));
 				h3{
-					@include bnd((mgb:.5rem,pdb:.5rem));
-					@include txt((p:1.8rem,f:g,w:m,c:m));
+					@include bnd((mgb:5,pdb:5));
+					@include txt((p:18,f:g,w:m,c:m));
 					@include bdr((p:b,s:s,w:1,c:m));
 				}
 				div.tel{
 					a.tel{
-						@include txt((a:l,p:3rem,h:1em,f:g,w:b,c:m));
+						@include txt((a:l,p:30,h:1em,f:g,w:b,c:m));
 					}
 
 				}
 			}
 		}
 		&.link{
-			@include bnd((d:b,p:r,w:90% 96rem,mg:1rem a,pd:1rem));
+			@include bnd((d:b,p:r,w:90% 960,mg:10 a,pd:10));
 			@include txt((l:n));
 			@media(#{bp(2)}){
 				@include flx((w:w,c:3));
 			}
 			li.item{
-				@include bnd((p:r,pd:1rem,bs:b));
+				@include bnd((p:r,pd:10,bs:b));
 				.image{
-					@include bnd((h:30rem,o:h));
+					@include bnd((h:300,o:h));
 					img,video{
 						@include bnd((w:f,h:f,of:c,op:c));
 						@include trn((t:1s));
 					}
 				}
 				.text{
-					@include bnd((d:b,p:a,b:1rem,l:1rem,r:1rem,pd:2rem,bs:b));
+					@include bnd((d:b,p:a,b:10,l:10,r:10,pd:20,bs:b));
 					@include bg((c:m 1 .8));
 					h3{
-						@include bnd((mgb:.5rem,pdb:.5rem));
+						@include bnd((mgb:5,pdb:5));
 						@include bdr((p:b,s:s,w:1,c:i));
-						@include txt((a:c,p:1.5rem,h:1.5em,f:g,w:b,c:i));
+						@include txt((a:c,p:15,h:1.5em,f:g,w:b,c:i));
 					}
 					p{
-						@include txt((a:j,p:1.2rem,h:1.5em,f:g,w:r,c:i));
+						@include txt((a:j,p:12,h:1.5em,f:g,w:r,c:i));
 					}
 				}
 				a.link{
@@ -550,39 +550,39 @@ body{
 				}
 			}
 			li.spacer{
-				@include bnd((f:1 1 30rem,mg:0 1rem));
+				@include bnd((f:1 1 300,mg:0 10));
 			}
 		}
 		&.banner{
-			@include bnd((d:b,p:r,w:90% 96rem,mg:1rem a,pd:1rem));
+			@include bnd((d:b,p:r,w:90% 960,mg:10 a,pd:10));
 			@include txt((l:n));
 			li.item{
-				@include bnd((p:r,mg:1rem,bs:b));
+				@include bnd((p:r,mg:10,bs:b));
 				@include bdr((s:s,w:2,c:a));
 				@include flx((w:w,d:rr));
 				.image{
-					@include bnd((f:2 2 24rem,h:10rem a,p:r,o:h));
+					@include bnd((f:2 2 240,h:100 a,p:r,o:h));
 					img,video{
 						@include bnd((p:a,t:0,l:0,w:f,h:f,of:c,op:c));
 						@include trn((t:1s));
 					}
 				}
 				.text{
-					@include bnd((p:r,f:1 1 24rem,pd:2rem,bs:b));
+					@include bnd((p:r,f:1 1 240,pd:20,bs:b));
 					@include bg((c:a));
 					&::before{
 						@include ico('chevron-circle-right');
-						@include bnd((d:b,p:a,w:10rem,h:10rem,t:0,b:0,l:2rem,mg:a));
-						@include txt((p:10rem,h:1em,c:i));
+						@include bnd((d:b,p:a,w:100,h:100,t:0,b:0,l:20,mg:a));
+						@include txt((p:100,h:1em,c:i));
 						@include trn((o:.1));
 					}
 					h3{
-						@include bnd((mgb:1rem,pdb:1rem));
+						@include bnd((mgb:10,pdb:10));
 						@include bdr((p:b,s:s,w:1,c:i));
-						@include txt((a:l,p:2rem,h:1.5em,f:g,w:b,c:i));
+						@include txt((a:l,p:20,h:1.5em,f:g,w:b,c:i));
 					}
 					p{
-						@include txt((a:j,p:1.2rem,h:1.5em,f:g,w:r,c:i));
+						@include txt((a:j,p:12,h:1.5em,f:g,w:r,c:i));
 					}
 				}
 				a.link{
@@ -597,20 +597,20 @@ body{
 				}
 			}
 			li.spacer{
-				@include bnd((f:1 1 30rem,mg:0 1rem));
+				@include bnd((f:1 1 300,mg:0 10));
 			}
 		}
 		&.tab{
-			@include bnd((d:b,w:95% 96rem,mg:3rem a 2rem));
+			@include bnd((d:b,w:95% 960,mg:30 a 20));
 			@include bdr((p:b,s:s,w:1,c:a));
 			@include flx((w:n));
 			@include txt((l:n));
 			li.item{
-				@include bnd((p:r,f:0 1 20rem,mg:0,pd:0,bs:b));
+				@include bnd((p:r,f:0 1 200,mg:0,pd:0,bs:b));
 				@include bg((c:m 1 .5));
 				h3{
-					@include bnd((mg:0,pd:1rem));
-					@include txt((a:c,p:1.5rem,h:1em,f:g,w:b,c:i));
+					@include bnd((mg:0,pd:10));
+					@include txt((a:c,p:15,h:1em,f:g,w:b,c:i));
 				}
 				&.active{
 					@include bg((c:a));
@@ -626,7 +626,7 @@ body{
 			tr{
 				td{
 					div.cp-meta-item{
-						img,video{@include bnd((d:b,w:10rem,h:a));}
+						img,video{@include bnd((d:b,w:100,h:a));}
 					}
 				}
 			}
@@ -634,22 +634,22 @@ body{
 		&.wp-block-table{
 			@include tbl(());
 			&.award{
-				@include bnd((p:r,mg:1rem a));
+				@include bnd((p:r,mg:10 a));
 				@media(#{bp(-1)}){
-					@include bnd((mg:1rem));
+					@include bnd((mg:10));
 				}
 				tr{
 					td{
-						@include bnd((p:r,pd:1rem));
+						@include bnd((p:r,pd:10));
 						@include bdr((s:s,w:1,c:t));
 						&:nth-of-type(1){
-							@include bnd((w:4rem));
+							@include bnd((w:40));
 						}
 						&:nth-of-type(2){
-							@include bnd((w:30rem));
+							@include bnd((w:300));
 						}
 						&:nth-of-type(3){
-							@include bnd((w:16rem));
+							@include bnd((w:160));
 						}
 					}
 				}
@@ -657,7 +657,7 @@ body{
 			}
 		}
 		&.inputs{
-			@include bnd((mg:4rem a,w:f 96rem));
+			@include bnd((mg:40 a,w:f 960));
 			@include tbl(());
 			*{@include txt((c:t));}
 			&>thead>tr,&>tbody>tr{
@@ -669,7 +669,7 @@ body{
                     ));
 				}
 				&>th{
-					@include bnd((w:12rem));
+					@include bnd((w:120));
 					@include bg((c:m 1 .5));
 					@include txt((a:l,p:12,c:t 70,s:b));
 					@include bp((
@@ -704,7 +704,7 @@ body{
 						}
 					}
 					&>img{
-						@include bnd((w:20rem,h:a));
+						@include bnd((w:200,h:a));
 					}
 					span{
 						@include bnd((d:ib));
@@ -966,7 +966,7 @@ body{
 	}
 	figure{
 		&.wp-block-image{
-			@include bnd((d:b,w:f 96rem,mg:5rem a,cl:b));
+			@include bnd((d:b,w:f 960,mg:50 a,cl:b));
 			img{
 				@include bnd((d:b,w:f,h:a,mg:0 a));
 			}
@@ -975,13 +975,13 @@ body{
 					@include bnd((w:40%));
 				}
 				&.alignleft{
-					@include bnd((mgr:2rem,fl:l));
+					@include bnd((mgr:20,fl:l));
 					&+*{
 						@include bnd((pdl:40%,bs:b));
 					}
 				}
 				&.alignright{
-					@include bnd((mgl:2rem,fl:r));
+					@include bnd((mgl:20,fl:r));
 					&+*{
 						@include bnd((pdr:40%,bs:b));
 					}
@@ -1036,10 +1036,10 @@ body{
             @include bnd((d:ib,mg:0 3));
         }
 		&.icon{
-			@include bnd((d:ib,mg:0 .5rem,pd:.5rem));
+			@include bnd((d:ib,mg:0 5,pd:5));
 			@include bg((c:m));
-			@include bdr((r:.5rem));
-			@include txt((a:c,p:.8rem,h:1em,f:g,w:m,c:#fff,v:m));
+			@include bdr((r:5));
+			@include txt((a:c,p:8,h:1em,f:g,w:m,c:#fff,v:m));
 			&.high{@include bg((c:1));}
 			&.new{@include bg((c:8));}
 		}
@@ -1048,7 +1048,7 @@ body{
 		@include bnd((pd:5,mg:0 5,bs:b));
 		@include bg((c:b));
 		@include bdr((s:s,w:1,c:t 1 .3));
-		@include txt((p:1.5rem,c:t));
+		@include txt((p:15,c:t));
 		&::placeholder{
 			@include txt((c:t 1 .3));
 		}
@@ -1192,7 +1192,7 @@ body{
 	@include trn((t:.5s,o:0));
 	@include usr((e:n));
 	.cp_lightbox_content{
-		@include bnd((p:r,w:90vw 80rem,h:90vh 80rem,p:a,t:0,b:0,l:0,r:0,mg:a,pd:10,o:v));
+		@include bnd((p:r,w:90vw 800,h:90vh 800,p:a,t:0,b:0,l:0,r:0,mg:a,pd:10,o:v));
 		@include bg((c:b));
 		@include shd((b:10));
 		div.group{
@@ -1206,27 +1206,27 @@ body{
 			div.control{
 				.prev,.next{
 					@include bnd((d:n,p:a,t:0,b:0,mg:a));
-					@include txt((p:3rem,c:#888));
+					@include txt((p:30,c:#888));
 					@include trn((o:.8));
 					&.active{@include bnd((d:b));}
 				}
 				.prev{
-					@include bnd((l:-1rem));
+					@include bnd((l:-10));
 					&::before{
 						@include ico('chevron-circle-left');
 					}
 				}
 				.next{
-					@include bnd((r:-1rem));
+					@include bnd((r:-10));
 					&::before{
 						@include ico('chevron-circle-right');
 					}
 				}
 				.close{
-					@include bnd((p:a,w:3rem,h:3rem,pd:.5rem,t:-2rem,r:-2rem));
-					@include txt((a:c,p:3rem,h:1em,c:a));
+					@include bnd((p:a,w:30,h:30,pd:5,t:-20,r:-20));
+					@include txt((a:c,p:30,h:1em,c:a));
 					@include bg((c:b));
-					@include bdr((r:3rem));
+					@include bdr((r:30));
 					@include shd((b:2));
 					&::before{
 						@include ico('times-circle');

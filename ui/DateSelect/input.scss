@@ -3,9 +3,9 @@
 
 .DateSelect{
 	&>.inputs{
-		@include bnd((d:ib,mg:0 .5em,pd:.5rem));
+		@include bnd((d:ib,mg:0 .5em,pd:5));
 		@include usr((c:p));
-		@include txt((a:c,p:1.5rem));
+		@include txt((a:c,p:15));
 		.input{
 			@include txt((a:r));
 			&.year{

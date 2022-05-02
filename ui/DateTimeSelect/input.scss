@@ -3,10 +3,10 @@
 
 div.DateSelect{
 	.value{
-		@include bnd((d:ib,mg:0 .5em,pd:.5rem));
-		@include bdr((s:s,w:1,c:t 50,r:.5rem));
+		@include bnd((d:ib,mg:0 .5em,pd:5));
+		@include bdr((s:s,w:1,c:t 50,r:5));
 		@include usr((c:p));
-		@include txt((a:c,p:1.5rem));
+		@include txt((a:c,p:15));
 		&.year{
 			@include bnd((w:4ch));
 		}

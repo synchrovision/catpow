@@ -10,14 +10,14 @@ div.WeeklySchedule table.grid {
   position: relative;
   width: 100%;
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.625rem;
   color: #c7c7c7;
   table-layout: fixed;
   border-collapse: collapse;
   border-spacing: 0px;
 }
 div.WeeklySchedule table.grid td, div.WeeklySchedule table.grid th {
-  height: 2rem;
+  height: 1.25rem;
   box-sizing: border-box;
 }
 div.WeeklySchedule table.grid tbody td {
@@ -27,7 +27,7 @@ div.WeeklySchedule table.grid tbody td {
 }
 div.WeeklySchedule .DrawArea {
   position: absolute;
-  top: 2rem;
+  top: 1.25rem;
   bottom: 0rem;
   left: 12.5%;
   right: 0rem;

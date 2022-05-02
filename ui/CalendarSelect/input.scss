@@ -6,7 +6,7 @@ div.CalendarSelect{
 		@include bnd((d:ib));
 		@include tbl(());
 		@include usr((c:p));
-		@include txt((p:1.5rem));
+		@include txt((p:15));
 		caption{
 			@include bnd((p:r));
 			span.current{
