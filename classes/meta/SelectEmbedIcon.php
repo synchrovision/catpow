@@ -7,8 +7,8 @@ class SelectEmbedIcon extends UI{
 	static $ui='SelectPreparedImage',$defaultParam=['color'=>'i'];
 	public static function output($meta,$prm){
 		$val=$meta->value;
-		if(empty($val) || !file_exists($val)){return;}
-		if(mime_content_type($val)!=='image/svg'){return;}
+		if(empty($val) || !file_exists($val)){return $val;}
+		if(!in_array(mime_content_type($val),['image/svg','image/svg+xml'],true)){return mime_content_type($val);}
 		return file_get_contents($val);
 	}
 	public static function fill_param($prm,$meta){
