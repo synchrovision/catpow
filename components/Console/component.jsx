@@ -37,8 +37,10 @@ Catpow.Console=(props)=>{
 	const ResultItem=useCallback((props)=>{
 		const {type='log',text}=props;
 		const resultTypes=useMemo(()=>({
+			success:(props)=>(<div className="text -success">{props.text}</div>),
 			error:(props)=>(<div className="text -error">{props.text}</div>),
 			warn:(props)=>(<div className="text -warn">{props.text}</div>),
+			notice:(props)=>(<div className="text -notice">{props.text}</div>),
 			log:(props)=>(<div className="text -log">{props.text}</div>),
 		}),[]);
 		return el(resultTypes[type],props);

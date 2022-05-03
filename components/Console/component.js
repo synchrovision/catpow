@@ -109,6 +109,11 @@ Catpow.Console = function (props) {
         text = props.text;
     var resultTypes = useMemo(function () {
       return {
+        success: function success(props) {
+          return wp.element.createElement("div", {
+            className: "text -success"
+          }, props.text);
+        },
         error: function error(props) {
           return wp.element.createElement("div", {
             className: "text -error"
@@ -117,6 +122,11 @@ Catpow.Console = function (props) {
         warn: function warn(props) {
           return wp.element.createElement("div", {
             className: "text -warn"
+          }, props.text);
+        },
+        notice: function notice(props) {
+          return wp.element.createElement("div", {
+            className: "text -notice"
           }, props.text);
         },
         log: function log(props) {
