@@ -30,7 +30,7 @@ class CP{
 	}
 	public static function init(){
 		self::$extensions=apply_filters('catpow_extensions',[]);
-		self::$data_types=apply_filters('catpow_data_types',['post','page','nav','term','comment','user','site','view','cpdb']);
+		self::$data_types=apply_filters('catpow_data_types',['post','page','nav','term','comment','user','site','view','cpdb','task']);
 		
 		spl_autoload_register(function($class){
 			static $classes_dirs;
