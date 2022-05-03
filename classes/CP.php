@@ -56,9 +56,6 @@ class CP{
 		}
 		if($mo_file=self::get_file_path('languages/'.determine_locale().'.mo',030)){load_textdomain('catpow',$mo_file);}
 		
-		self::$data_types==apply_filters('cp_data_types',[
-			'catpow','post','page','nav','term','comment','user','site','view','task'
-		]);
 		do_action('cp_setup');
 	}
 	public static function session_start(){
