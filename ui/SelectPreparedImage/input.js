@@ -36,7 +36,8 @@ Catpow.UI.SelectPreparedImage = function (props) {
     });
     var thisValue = valueKey === 'url' ? url : image[valueKey];
     return wp.element.createElement("li", {
-      className: 'item ' + (value == thisValue ? 'active' : '')
+      className: 'item ' + (value == thisValue ? 'active' : ''),
+      key: thisValue
     }, wp.element.createElement("img", {
       src: url,
       alt: image.alt,

@@ -19,7 +19,7 @@ Catpow.UI.SelectPreparedImage=(props)=>{
 					const url=setURLparams(image.url,{c:color,theme:cp.theme});
 					const thisValue=(valueKey==='url')?url:image[valueKey];
 					return (
-						<li className={'item '+((value==thisValue)?'active':'')}>
+						<li className={'item '+((value==thisValue)?'active':'')} key={thisValue}>
 							<img
 								src={url}
 								alt={image.alt}
