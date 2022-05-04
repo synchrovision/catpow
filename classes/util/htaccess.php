@@ -35,6 +35,14 @@ RewriteCond %{REQUEST_URI} \.svg
 RewriteCond %{QUERY_STRING} .+
 RewriteRule . plugins/catpow/callee/svg.php?uri=%{REQUEST_URI} [L,QSA]
 
+RewriteCond %{HTTP_ACCEPT} image/webp
+RewriteCond %{SCRIPT_FILENAME}.webp -f
+RewriteRule .(jpe?g|png|gif)$ %{SCRIPT_FILENAME}.webp [T=image/webp]
+
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+</IfModule>
+
 RewriteCond %{HTTP:Accept-Encoding} gzip
 RewriteCond %{REQUEST_FILENAME}\.gz -s
 RewriteRule .+ %{REQUEST_URI}.gz
