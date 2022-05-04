@@ -30,7 +30,7 @@ class icon extends \Catpow\api{
 			$image=wp_get_attachment_image_src($post->ID,'full');
 			$data[]=[
 				'url'=>$image[0],
-				'path'=> wp_upload_dir()['basedir'].'/'.get_post_meta($post->ID,'_wp_attached_file',true),
+				'path'=>get_attached_file($post->ID),
 				'width'=>$image[1],
 				'height'=>$image[2],
 				'alt'=>get_post_meta($post->ID,'_wp_attachment_image_alt',true),
