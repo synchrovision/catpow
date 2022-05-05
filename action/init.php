@@ -353,52 +353,11 @@ add_filter('upgrader_source_selection',function($source,$remote_source,$upgrader
 	return $newsource;
 },10,4);
 
-/*alt image*/
-add_filter('image_downsize',function($out,$id,$size){
-	static $is_original=true;
-	$metadata=wp_get_attachment_metadata($id);
-	if($is_original && isset($metadata['alt_image']) && is_string($size)){
-		if(isset($metadata['alt_image'][$size])){
-			$is_original=false;
-			return image_downsize($metadata['alt_image'][$size],$size);
-		}
-	}
-	$is_original=true;
-	return $out;
-},10,3);
-add_filter('wp_prepare_attachment_for_js',function($response,$attachment,$meta){
-	global $_wp_additional_image_sizes;
-	$sizes=array_keys($_wp_additional_image_sizes);
-	$sizes[]='medium_large';
-	foreach($sizes as $size){
-		if($response['type']==='image'){
-			$src=wp_get_attachment_image_src($response['id'],$size);
-			$response['sizes'][$size]=[
-				'url'=>$src[0],
-				'width'=>$src[1],
-				'height'=>$src[2],
-				'resized'=>$src[3]
-			];
-		}
-	}
-	if(isset($meta['alt_image'])){
-		foreach($meta['alt_image'] as $size=>$id){
-			if($response['type']!=='image'){
-				$response['sizes'][$size]['url']=wp_get_attachment_url($meta['alt_image'][$size]);
-			}
-			else{
-				$src=wp_get_attachment_image_src($meta['alt_image'][$size],$size);
-				$response['sizes'][$size]=[
-					'url'=>$src[0],
-					'width'=>$src[1],
-					'height'=>$src[2],
-					'resized'=>$src[3]
-				];
-			}
-		}
-	}
-	return $response;
-},10,3);
+/*media*/
+add_filter('wp_generate_attachment_metadata','Catpow\\util\\media::callback_wp_generate_attachment_metadata',10,2);
+add_action('delete_attachment','Catpow\\util\\media::callback_delete_attachment',10,2);
+add_filter('image_downsize','Catpow\\util\\media::callback_image_downsize',10,3);
+add_filter('wp_prepare_attachment_for_js','Catpow\\util\\media::callback_wp_prepare_attachment_for_js',10,3);
 
 /*preview*/
 add_action('admin_print_footer_scripts',function(){

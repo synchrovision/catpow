@@ -41,34 +41,3 @@ add_action("add_attachment",function($id){
 		}
 	}
 });
-
-add_filter('wp_generate_attachment_metadata',function($metadata,$attachment_id){
-	$dir=wp_upload_dir()['basedir'].'/'.dirname($metadata['file']);
-	$sizes=$metadata['sizes'];
-	$sizes['full']=['file'=>basename($metadata['file']),'mime-type'=>mime_content_type($dir.'/'.basename($metadata['file']))];
-	$backup_sizes=[];
-	foreach($sizes as $size=>$size_data){
-		$f=$dir.'/'.$size_data['file'];
-		if(function_exists('imagewebp')){
-			switch($size_data['mime-type']){
-				case 'image/jpeg':
-					$im=imagecreatefromjpeg($f);break;
-				case 'image/png':
-					$im=imagecreatefrompng($f);break;
-				case 'image/gif':
-					$im=imagecreatefromgif($f);break;
-				default:
-					continue 2;
-			}
-			imagewebp($im,$f.'.webp');
-		}
-		else{
-			if(false===passthru("cwebp {$f} -o {$f}.webp")){continue;}
-		}
-		$backup_sizes[$size]=array_merge($size_data,['file'=>$size_data['file'].'.webp','mime-type'=>'imagewebp']);
-	}
-	if(!empty($backup_sizes)){
-		add_post_meta($attachment_id,'_wp_attachment_backup_sizes',$backup_sizes);
-	}
-	return $metadata;
-},10,2);

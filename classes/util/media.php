@@ -67,6 +67,92 @@ class media{
 			return false;
 		}
 	}
+	
+	//hooks
+	public static function callback_wp_generate_attachment_metadata($metadata,$attachment_id){
+		$dir=wp_upload_dir()['basedir'].'/'.dirname($metadata['file']);
+		$sizes=$metadata['sizes'];
+		$sizes['full']=['file'=>basename($metadata['file']),'mime-type'=>mime_content_type($dir.'/'.basename($metadata['file']))];
+		$webp_files=[];
+		foreach($sizes as $size=>$size_data){
+			$f=$dir.'/'.$size_data['file'];
+			if(function_exists('imagewebp')){
+				switch($size_data['mime-type']){
+					case 'image/jpeg':
+						$im=imagecreatefromjpeg($f);break;
+					case 'image/png':
+						$im=imagecreatefrompng($f);break;
+					case 'image/gif':
+						$im=imagecreatefromgif($f);break;
+					default:
+						continue 2;
+				}
+				imagewebp($im,$f.'.webp');
+			}
+			else{
+				if(false===passthru("cwebp {$f} -o {$f}.webp")){continue;}
+			}
+			$webp_files[]=$size_data['file'].'.webp';
+		}
+		if(!empty($webp_files)){
+			$metadata['webp_files']=$webp_files;
+		}
+		return $metadata;
+	}
+	public static function callback_delete_attachment($attachment_id){
+		$metadata=wp_get_attachment_metadata($attachment_id);
+		$dir=wp_upload_dir()['basedir'].'/'.dirname($metadata['file']);
+		if(!empty($metadata['webp_files'])){
+			foreach($metadata['webp_files'] as $webp_file){
+				wp_delete_file($dir.'/'.$webp_file);
+			}
+		}
+	}
+	public static function callback_image_downsize($out,$id,$size){
+		static $is_original=true;
+		$metadata=wp_get_attachment_metadata($id);
+		if($is_original && isset($metadata['alt_image']) && is_string($size)){
+			if(isset($metadata['alt_image'][$size])){
+				$is_original=false;
+				return image_downsize($metadata['alt_image'][$size],$size);
+			}
+		}
+		$is_original=true;
+		return $out;
+	}
+	public static function callback_wp_prepare_attachment_for_js($response,$attachment,$meta){
+		global $_wp_additional_image_sizes;
+		$sizes=array_keys($_wp_additional_image_sizes);
+		$sizes[]='medium_large';
+		foreach($sizes as $size){
+			if($response['type']==='image'){
+				$src=wp_get_attachment_image_src($response['id'],$size);
+				$response['sizes'][$size]=[
+					'url'=>$src[0],
+					'width'=>$src[1],
+					'height'=>$src[2],
+					'resized'=>$src[3]
+				];
+			}
+		}
+		if(isset($meta['alt_image'])){
+			foreach($meta['alt_image'] as $size=>$id){
+				if($response['type']!=='image'){
+					$response['sizes'][$size]['url']=wp_get_attachment_url($meta['alt_image'][$size]);
+				}
+				else{
+					$src=wp_get_attachment_image_src($meta['alt_image'][$size],$size);
+					$response['sizes'][$size]=[
+						'url'=>$src[0],
+						'width'=>$src[1],
+						'height'=>$src[2],
+						'resized'=>$src[3]
+					];
+				}
+			}
+		}
+		return $response;
+	}
 }
 
 ?>
