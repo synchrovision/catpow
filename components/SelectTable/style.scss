@@ -5,19 +5,19 @@ table.SelectTable{
 	@include bnd((w:f));
 	@include tbl((l:f));
 	&.hasLargeFontSize{
-		@include txt((p:2rem));
+		@include txt((p:20));
 	}
 	&.hasRegularFontSize{
-		@include txt((p:1.2rem));
+		@include txt((p:12));
 	}
 	&.hasSmallFontSize{
-		@include txt((p:0.8rem));
-		@include bp(2){@include txt((p:1.2rem));}
+		@include txt((p:8));
+		@include bp(2){@include txt((p:12));}
 	}
 	tbody{
 		tr{
 			td{
-				@include bnd((pd:1rem 0));
+				@include bnd((pd:10 0));
 				@include bdr((s:s,w:1,c:t 50));
 				@include txt((a:c));
 				@include usr((c:p));
