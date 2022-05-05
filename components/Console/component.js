@@ -18,6 +18,8 @@ Catpow.Console = function (props) {
       useMemo = _wp$element.useMemo,
       useReducer = _wp$element.useReducer;
   var ControlItem = useCallback(function (props) {
+    var state = props.state,
+        dispatch = props.dispatch;
     var _Catpow = Catpow,
         SelectBox = _Catpow.SelectBox,
         CheckBoxes = _Catpow.CheckBoxes,
@@ -86,7 +88,7 @@ Catpow.Console = function (props) {
         submit: function submit(props) {
           return wp.element.createElement(Buttons, {
             onClick: function onClick(action) {
-              _submit(action);
+              _submit(action, state.data);
             },
             options: props.options
           });
@@ -164,19 +166,23 @@ Catpow.Console = function (props) {
       state = _useReducer2[0],
       dispatch = _useReducer2[1];
 
-  var _submit = useCallback(function (action) {
-    var data = state.data;
+  var _submit = useCallback(function (action, data) {
     wp.apiFetch({
       path: "/cp/v1/".concat(path, "/").concat(action),
       method: 'POST',
       data: data
     }).then(function (res) {
-      console.log(res);
-      var results = res.results;
+      var results = res.results,
+          _res$resubmit = res.resubmit,
+          resubmit = _res$resubmit === void 0 ? false : _res$resubmit;
       dispatch({
         type: 'setResults',
         results: results
       });
+
+      if (resubmit) {
+        _submit(action, resubmit);
+      }
     }).catch(function (e) {
       dispatch({
         type: 'setResults',
@@ -202,7 +208,10 @@ Catpow.Console = function (props) {
   }, wp.element.createElement("div", {
     class: className + '-controls'
   }, props.controls.map(function (itemProps) {
-    return el(ControlItem, itemProps);
+    return el(ControlItem, _objectSpread(_objectSpread({}, itemProps), {}, {
+      state: state,
+      dispatch: dispatch
+    }));
   })), wp.element.createElement("div", {
     class: className + '-results'
   }, state.results.map(function (itemProps) {

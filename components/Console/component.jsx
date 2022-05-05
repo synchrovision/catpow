@@ -7,6 +7,7 @@ Catpow.Console=(props)=>{
 	const {useState,useCallback,useEffect,useRef,useMemo,useReducer}=wp.element;
 	
 	const ControlItem=useCallback((props)=>{
+		const {state,dispatch}=props;
 		const {SelectBox,CheckBoxes,RadioButtons,Buttons,Button,ModalForm}=Catpow;
 		const {name,type,label,desc}=props;
 		const inputTypes=useMemo(()=>({
@@ -23,7 +24,7 @@ Catpow.Console=(props)=>{
 				<RadioButtons onChange={(value)=>{dispatch({type:'setData',name,value});}} options={props.options} value={state.data[name]}/>
 			),
 			submit:(props)=>(
-				<Buttons onClick={(action)=>{submit(action)}} options={props.options}/>
+				<Buttons onClick={(action)=>{submit(action,state.data)}} options={props.options}/>
 			)
 		}),[]);
 		return (
@@ -62,12 +63,11 @@ Catpow.Console=(props)=>{
 		data:{},
 		results:[]
 	});
-	const submit=useCallback((action)=>{
-		const {data}=state;
+	const submit=useCallback((action,data)=>{
 		wp.apiFetch({path:`/cp/v1/${path}/${action}`,method:'POST',data}).then((res)=>{
-			console.log(res);
-			const {results}=res;
+			const {results,resubmit=false}=res;
 			dispatch({type:'setResults',results});
+			if(resubmit){submit(action,resubmit);}
 		}).catch((e)=>{
 			dispatch({type:'setResults',results:[{type:'error',text:e.message}]});
 		});
@@ -80,7 +80,7 @@ Catpow.Console=(props)=>{
 	return (
 		<div className={className}>
 			<div class={className+'-controls'}>
-				{props.controls.map((itemProps)=>el(ControlItem,itemProps))}
+				{props.controls.map((itemProps)=>el(ControlItem,{...itemProps,state,dispatch}))}
 			</div>
 			<div class={className+'-results'}>
 				{state.results.map((itemProps)=>el(ResultItem,itemProps))}
