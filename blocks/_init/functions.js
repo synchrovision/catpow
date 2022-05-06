@@ -709,6 +709,16 @@ var CP = {
       })
     };
   },
+
+  /*flags*/
+  testFlags: function testFlags(cond, flags) {
+    return cond & flags === cond;
+  },
+  filterArrayWithFlags: function filterArrayWithFlags(array, flags) {
+    return array.filter(function (c, i) {
+      return flags & 1 << i;
+    });
+  },
   wordsToFlags: function wordsToFlags(words) {
     var rtn = {};
 
@@ -737,6 +747,51 @@ var CP = {
       }
     });
     return flags;
+  },
+
+  /*proxy*/
+  finderProxy: function finderProxy(obj) {
+    return new Proxy(obj, CP.finderProxyHandler);
+  },
+  finderProxyHandler: {
+    get: function get(obj, prop) {
+      var rtn;
+
+      if (Array.isArray(obj) && !/^\d+$/.test(prop)) {
+        rtn = obj.find(function (item) {
+          return babelHelpers.typeof(item) === 'object' && item.hasOwnProperty('name') && item.name === prop;
+        });
+      } else {
+        rtn = obj[prop];
+      }
+
+      if (babelHelpers.typeof(rtn) === 'object') {
+        return new Proxy(rtn, CP.finderProxyHandler);
+      }
+
+      return rtn;
+    },
+    set: function set(obj, prop, val) {
+      if (Array.isArray(obj) && !/^\d+$/.test(prop)) {
+        val.name = prop;
+        obj.push(val);
+      } else {
+        obj[prop] = val;
+      }
+    },
+    deleteProperty: function deleteProperty(obj, prop) {
+      if (Array.isArray(obj) && !/^\d+$/.test(prop)) {
+        prop = obj.findIndex(function (item) {
+          return babelHelpers.typeof(item) === 'object' && item.hasOwnProperty('name') && item.name === prop;
+        });
+
+        if (prop < 0) {
+          return;
+        }
+      }
+
+      delete obj[prop];
+    }
   },
   parseSelections: function parseSelections(sels) {
     var options, values;

@@ -425,6 +425,10 @@
 		};
 	},
 	
+	/*flags*/
+	testFlags:(cond,flags)=>cond&flags===cond,
+	filterArrayWithFlags:(array,flags)=>array.filter((c,i)=>flags&1<<i),
+	
 	wordsToFlags:(words)=>{
 		var rtn={};
 		if(undefined === words){return {};}
@@ -441,6 +445,38 @@
 			if(!callback(key)){delete(flags[key]);}
 		});
 		return flags;
+	},
+	
+	/*proxy*/
+	finderProxy:(obj)=>new Proxy(obj,CP.finderProxyHandler),
+	finderProxyHandler:{
+		get:(obj,prop)=>{
+			var rtn;
+			if(Array.isArray(obj) && !(/^\d+$/.test(prop))){
+				rtn=obj.find((item)=>(typeof item === 'object') && item.hasOwnProperty('name') && item.name===prop);
+			}
+			else{
+				rtn=obj[prop];
+			}
+			if(typeof rtn === 'object'){return new Proxy(rtn,CP.finderProxyHandler);}
+			return rtn;
+		},
+		set:(obj,prop,val)=>{
+			if(Array.isArray(obj) && !(/^\d+$/.test(prop))){
+				val.name=prop;
+				obj.push(val);
+			}
+			else{
+				obj[prop]=val;
+			}
+		},
+		deleteProperty:(obj,prop)=>{
+			if(Array.isArray(obj) && !(/^\d+$/.test(prop))){
+				prop=obj.findIndex((item)=>(typeof item === 'object') && item.hasOwnProperty('name') && item.name===prop);
+				if(prop<0){return;}
+			}
+			delete obj[prop];
+		}
 	},
 	
 	parseSelections:(sels)=>{
