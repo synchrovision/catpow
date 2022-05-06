@@ -72,7 +72,10 @@ class media{
 	public static function callback_wp_generate_attachment_metadata($metadata,$attachment_id){
 		$dir=wp_upload_dir()['basedir'].'/'.dirname($metadata['file']);
 		$sizes=$metadata['sizes'];
-		$sizes['full']=['file'=>basename($metadata['file']),'mime-type'=>mime_content_type($dir.'/'.basename($metadata['file']))];
+		$sizes['full']=[
+			'file'=>substr(strrchr($metadata['file'],'/'),1),
+			'mime-type'=>mime_content_type($dir.'/'.substr(strrchr($metadata['file'],'/'),1))
+		];
 		$webp_files=[];
 		foreach($sizes as $size=>$size_data){
 			$f=$dir.'/'.$size_data['file'];
