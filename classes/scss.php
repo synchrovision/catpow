@@ -166,7 +166,7 @@ class scss{
 			if(empty($admin_config_file=CP::get_file_path('scss/admin_style_config.scss',CP::FROM_PLUGIN))){$admin_style_config_modified_time=0;}
 			else{$admin_style_config_modified_time=filemtime($admin_config_file);}
 		}
-		foreach($scss_names as $scss_base_name){
+		foreach((array)$scss_names as $scss_base_name){
 			if(substr($scss_base_name,-5)==='.scss'){
 				if(!file_exists($scss_base_name)){continue;}
 				$scss_name=substr($scss_base_name,0,-5);
