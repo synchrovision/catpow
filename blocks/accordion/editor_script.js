@@ -70,10 +70,10 @@ registerBlockType('catpow/accordion', {
         imageKeys = _CP$config$accordion.imageKeys,
         imageSizes = _CP$config$accordion.imageSizes;
     var selectiveClasses = useMemo(function () {
-      var _CP$config$section = CP.config.section,
-          devices = _CP$config$section.devices,
-          imageKeys = _CP$config$section.imageKeys,
-          imageSizes = _CP$config$section.imageSizes;
+      var _CP$config$accordion2 = CP.config.accordion,
+          devices = _CP$config$accordion2.devices,
+          imageKeys = _CP$config$accordion2.imageKeys,
+          imageSizes = _CP$config$accordion2.imageSizes;
       var selectiveClasses = ['color', {
         name: 'image',
         label: '画像',
@@ -163,10 +163,10 @@ registerBlockType('catpow/accordion', {
         imageAlt = attributes.imageAlt,
         imageCode = attributes.imageCode;
     var states = CP.wordsToFlags(classes);
-    var _CP$config$accordion2 = CP.config.accordion,
-        devices = _CP$config$accordion2.devices,
-        imageKeys = _CP$config$accordion2.imageKeys,
-        imageSizes = _CP$config$accordion2.imageSizes;
+    var _CP$config$accordion3 = CP.config.accordion,
+        devices = _CP$config$accordion3.devices,
+        imageKeys = _CP$config$accordion3.imageKeys,
+        imageSizes = _CP$config$accordion3.imageSizes;
     return wp.element.createElement(Fragment, null, wp.element.createElement("div", {
       className: classes
     }, wp.element.createElement("div", {

@@ -36,7 +36,7 @@ registerBlockType('catpow/accordion',{
 		const {devices,imageKeys,imageSizes}=CP.config.accordion;
 		
 		const selectiveClasses=useMemo(()=>{
-			const {devices,imageKeys,imageSizes}=CP.config.section;
+			const {devices,imageKeys,imageSizes}=CP.config.accordion;
 			const selectiveClasses=[
 				'color',
 				{name:'image',label:'画像',values:'hasImage',sub:[
