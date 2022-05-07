@@ -51,6 +51,7 @@ registerBlockType('catpow/section', {
     var attributes = props.attributes,
         className = props.className,
         setAttributes = props.setAttributes;
+    var useMemo = wp.element.useMemo;
     var SectionTag = attributes.SectionTag,
         HeadingTag = attributes.HeadingTag,
         color = attributes.color,
@@ -85,306 +86,359 @@ registerBlockType('catpow/section', {
         imageSizes = _CP$config$section.imageSizes;
     CP.inheritColor(props, ['iconSrc', 'patternImageCss', 'headerPatternImageCss', 'frameImageCss', 'borderImageCss']);
     CP.manageStyleData(props, ['patternImageCss', 'headerPatternImageCss', 'frameImageCss', 'borderImageCss']);
-    var selectiveClasses = [{
-      input: 'buttons',
-      filter: 'sectionTag',
-      key: 'SectionTag',
-      label: __('セクションタグ', 'catpow'),
-      values: ['article', 'section', 'aside', 'div']
-    }, {
-      input: 'buttons',
-      filter: 'headingTag',
-      key: 'HeadingTag',
-      label: __('見出しタグ', 'catpow'),
-      values: ['h2', 'h3', 'h4'],
-      effect: function effect(val) {
-        for (var key in states) {
-          if (key.substr(0, 5) === 'level') {
-            states[key] = false;
+    var selectiveClasses = useMemo(function () {
+      var _CP$config$section2 = CP.config.section,
+          devices = _CP$config$section2.devices,
+          imageKeys = _CP$config$section2.imageKeys,
+          imageSizes = _CP$config$section2.imageSizes;
+      var selectiveClasses = [{
+        name: 'sectionTag',
+        input: 'buttons',
+        key: 'SectionTag',
+        label: __('セクションタグ', 'catpow'),
+        values: ['article', 'section', 'aside', 'div']
+      }, {
+        name: 'headingTag',
+        input: 'buttons',
+        key: 'HeadingTag',
+        label: __('見出しタグ', 'catpow'),
+        values: ['h2', 'h3', 'h4'],
+        effect: function effect(val, states, _ref) {
+          var set = _ref.set;
+
+          for (var key in states) {
+            if (key.substr(0, 5) === 'level') {
+              states[key] = false;
+            }
           }
-        }
 
-        if (/^h\d$/.test(val)) {
-          states['level' + val[1]] = true;
-        }
+          if (/^h\d$/.test(val)) {
+            states['level' + val[1]] = true;
+          }
 
-        setAttributes({
-          classes: CP.flagsToWords(states)
-        });
-      }
-    }, {
-      label: __('タイプ', 'catpow'),
-      filter: 'type',
-      type: 'gridbuttons',
-      values: ['scene', 'article', 'column'],
-      sub: {
-        scene: ['color', {
-          label: __('プレフィクス', 'catpow'),
-          values: 'hasPrefix'
-        }, {
-          label: __('タイトル画像', 'catpow'),
-          values: 'hasTitleImage',
-          sub: [{
-            input: 'picture',
-            keys: imageKeys.titleImage,
-            devices: devices
-          }]
-        }, {
-          label: __('ヘッダ画像', 'catpow'),
-          values: 'hasHeaderImage',
-          sub: [{
-            input: 'image',
-            keys: imageKeys.headerImage,
-            size: imageSizes.headerImage
-          }]
-        }, {
-          label: __('ヘッダ背景画像', 'catpow'),
-          values: 'hasHeaderBackgroundImage',
-          sub: [{
-            input: 'picture',
-            label: __('背景画像', 'catpow'),
-            keys: imageKeys.headerBackgroundImage,
-            devices: devices
+          set({
+            classes: CP.flagsToWords(states)
+          });
+        }
+      }, {
+        name: 'type',
+        label: __('タイプ', 'catpow'),
+        type: 'gridbuttons',
+        values: ['scene', 'article', 'column'],
+        sub: {
+          scene: ['color', {
+            name: 'prefix',
+            label: __('プレフィクス', 'catpow'),
+            values: 'hasPrefix'
           }, {
-            label: __('薄く', 'catpow'),
-            values: 'paleHeaderBG'
-          }]
-        }, {
-          label: __('抜き色文字', 'catpow'),
-          values: 'inverseText',
-          sub: [{
-            label: __('ヘッダ背景色', 'catpow'),
-            values: 'hasHeaderBackgroundColor',
+            name: 'titleImage',
+            label: __('タイトル画像', 'catpow'),
+            values: 'hasTitleImage',
             sub: [{
-              label: __('パターン画像', 'catpow'),
-              values: 'hasHeaderPatternImage',
+              input: 'picture',
+              keys: imageKeys.titleImage,
+              devices: devices
+            }]
+          }, {
+            name: 'headerImage',
+            label: __('ヘッダ画像', 'catpow'),
+            values: 'hasHeaderImage',
+            sub: [{
+              input: 'image',
+              keys: imageKeys.headerImage,
+              size: imageSizes.headerImage
+            }]
+          }, {
+            name: 'headerBackgroundImage',
+            label: __('ヘッダ背景画像', 'catpow'),
+            values: 'hasHeaderBackgroundImage',
+            sub: [{
+              input: 'picture',
+              label: __('背景画像', 'catpow'),
+              keys: imageKeys.headerBackgroundImage,
+              devices: devices
+            }, {
+              label: __('薄く', 'catpow'),
+              values: 'paleHeaderBG'
+            }]
+          }, {
+            name: 'inverseText',
+            label: __('抜き色文字', 'catpow'),
+            values: 'inverseText',
+            sub: [{
+              label: __('ヘッダ背景色', 'catpow'),
+              values: 'hasHeaderBackgroundColor',
               sub: [{
-                input: 'pattern',
-                css: 'headerPatternImageCss',
-                sel: '#' + id + ' > .contents > .header'
+                label: __('パターン画像', 'catpow'),
+                values: 'hasHeaderPatternImage',
+                sub: [{
+                  input: 'pattern',
+                  css: 'headerPatternImageCss',
+                  sel: '#' + id + ' > .contents > .header'
+                }]
               }]
             }]
-          }]
-        }, {
-          label: __('リード', 'catpow'),
-          values: 'hasLead'
-        }, {
-          label: __('背景画像', 'catpow'),
-          values: 'hasBackgroundImage',
-          sub: [{
-            input: 'picture',
+          }, {
+            name: 'lead',
+            label: __('リード', 'catpow'),
+            values: 'hasLead'
+          }, {
+            name: 'backgroundImage',
             label: __('背景画像', 'catpow'),
-            keys: imageKeys.backgroundImage,
-            devices: devices
+            values: 'hasBackgroundImage',
+            sub: [{
+              input: 'picture',
+              label: __('背景画像', 'catpow'),
+              keys: imageKeys.backgroundImage,
+              devices: devices
+            }, {
+              name: 'paleBG',
+              label: __('薄く', 'catpow'),
+              values: 'paleBG'
+            }]
           }, {
-            label: __('薄く', 'catpow'),
-            values: 'paleBG'
-          }]
-        }, {
-          label: __('背景色', 'catpow'),
-          values: 'hasBackgroundColor'
-        }, {
-          label: __('メニューアイコン', 'catpow'),
-          values: 'hasNavIcon',
-          sub: [{
-            input: 'image',
+            name: 'backgroundColor',
+            label: __('背景色', 'catpow'),
+            values: 'hasBackgroundColor'
+          }, {
+            name: 'navIcon',
+            label: __('メニューアイコン', 'catpow'),
+            values: 'hasNavIcon',
+            sub: [{
+              input: 'image',
+              label: __('アイコン', 'catpow'),
+              keys: imageKeys.navIcon,
+              size: 'thumbnail'
+            }]
+          }, {
+            name: 'template',
+            label: __('テンプレート', 'catpow'),
+            values: 'isTemplate',
+            sub: [{
+              name: 'headerImageCode',
+              input: 'text',
+              label: __('ヘッダ画像コード', 'catpow'),
+              key: 'headerImageCode',
+              cond: 'hasHeaderImage'
+            }, {
+              name: 'headerBackgroundImageCode',
+              input: 'text',
+              label: __('ヘッダ背景画像コード', 'catpow'),
+              key: 'headerBackgroundImageCode',
+              cond: 'hasHeaderBackgroundImage'
+            }, {
+              name: 'backgroundImageCode',
+              input: 'text',
+              label: __('背景画像コード', 'catpow'),
+              key: 'backgroundImageCode',
+              cond: 'hasBackgroundImage'
+            }]
+          }],
+          article: ['color', {
+            name: 'level',
+            type: 'buttons',
+            label: __('レベル', 'catpow'),
+            values: {
+              level2: '2',
+              level3: '3',
+              level4: '4'
+            }
+          }, {
+            name: 'headingType',
+            type: 'gridbuttons',
+            label: __('見出しタイプ', 'catpow'),
+            filter: 'heading_type',
+            values: ['header', 'headline', 'catch']
+          }, {
+            name: 'headerImage',
+            label: __('ヘッダ画像', 'catpow'),
+            values: 'hasHeaderImage',
+            sub: [{
+              input: 'image',
+              keys: imageKeys.headerImage,
+              size: imageSizes.headerImage,
+              cond: function cond(states, _ref2) {
+                var attr = _ref2.attr;
+                return !states.isTemplate || !attr.headerImageCode;
+              }
+            }]
+          }, {
+            name: 'lead',
+            label: __('リード', 'catpow'),
+            values: 'hasLead'
+          }, {
+            name: 'backgroundImage',
+            label: __('背景画像', 'catpow'),
+            values: 'hasBackgroundImage',
+            sub: [{
+              input: 'picture',
+              keys: imageKeys.backgroundImage,
+              devices: devices,
+              cond: function cond(states, _ref3) {
+                var attr = _ref3.attr;
+                return !states.isTemplate || !attr.backgroundImageCode;
+              }
+            }, {
+              label: __('薄く', 'catpow'),
+              values: 'paleBG'
+            }]
+          }, {
+            name: 'backgroundColor',
+            label: __('背景色', 'catpow'),
+            values: 'hasBackgroundColor'
+          }, {
+            name: 'navIcon',
+            label: __('メニューアイコン', 'catpow'),
+            values: 'hasNavIcon',
+            sub: [{
+              input: 'image',
+              label: __('アイコン', 'catpow'),
+              keys: imageKeys.navIcon,
+              size: 'thumbnail'
+            }]
+          }, {
+            name: 'patternImage',
+            label: __('パターン画像', 'catpow'),
+            values: 'hasPatternImage',
+            sub: [{
+              input: 'pattern',
+              css: 'patternImageCss',
+              sel: '#' + id,
+              color: color
+            }]
+          }, {
+            name: 'frameImage',
+            label: __('フレーム画像', 'catpow'),
+            values: 'hasFrameImage',
+            sub: [{
+              input: 'frame',
+              css: 'frameImageCss',
+              sel: '#' + id,
+              color: color
+            }]
+          }, {
+            name: 'borderImage',
+            label: __('ボーダー画像', 'catpow'),
+            values: 'hasBorderImage',
+            sub: [{
+              input: 'border',
+              css: 'borderImageCss',
+              sel: '#' + id + ' > .contents',
+              color: color
+            }]
+          }, {
+            name: 'template',
+            label: __('テンプレート', 'catpow'),
+            values: 'isTemplate',
+            sub: [{
+              input: 'text',
+              label: __('ヘッダ画像コード', 'catpow'),
+              key: 'headerImageCode',
+              cond: 'hasHeaderImage'
+            }, {
+              input: 'text',
+              label: __('背景画像コード', 'catpow'),
+              key: 'backgroundImageCode',
+              cond: 'hasBackgroundImage'
+            }]
+          }],
+          column: ['color', 'pattern', {
+            name: 'icon',
             label: __('アイコン', 'catpow'),
-            keys: imageKeys.navIcon,
-            size: 'thumbnail'
-          }]
-        }, {
-          label: __('テンプレート', 'catpow'),
-          values: 'isTemplate',
-          sub: [{
-            input: 'text',
-            label: __('ヘッダ画像コード', 'catpow'),
-            key: 'headerImageCode',
-            cond: states.hasHeaderImage
+            values: 'hasIcon',
+            sub: [{
+              input: 'icon',
+              color: color
+            }]
           }, {
-            input: 'text',
-            label: __('ヘッダ背景画像コード', 'catpow'),
-            key: 'headerBackgroundImageCode',
-            cond: states.hasHeaderBackgroundImage
+            name: 'image',
+            label: __('画像', 'catpow'),
+            values: 'hasImage',
+            sub: [{
+              input: 'image',
+              keys: imageKeys.image
+            }]
           }, {
-            input: 'text',
-            label: __('背景画像コード', 'catpow'),
-            key: 'backgroundImageCode',
-            cond: states.hasBackgroundImage
-          }]
-        }],
-        article: ['color', {
-          type: 'buttons',
-          label: __('レベル', 'catpow'),
-          values: {
-            level2: '2',
-            level3: '3',
-            level4: '4'
-          }
-        }, {
-          type: 'gridbuttons',
-          label: __('見出しタイプ', 'catpow'),
-          filter: 'heading_type',
-          values: ['header', 'headline', 'catch']
-        }, {
-          label: __('ヘッダ画像', 'catpow'),
-          values: 'hasHeaderImage',
-          sub: [{
-            input: 'image',
-            keys: imageKeys.headerImage,
-            size: imageSizes.headerImage,
-            cond: !states.isTemplate || !headerImageCode
-          }]
-        }, {
-          label: __('リード', 'catpow'),
-          values: 'hasLead'
-        }, {
-          label: __('背景画像', 'catpow'),
-          values: 'hasBackgroundImage',
-          sub: [{
-            input: 'picture',
-            keys: imageKeys.backgroundImage,
-            devices: devices,
-            cond: !states.isTemplate || !backgroundImageCode
+            name: 'backgroundImage',
+            label: __('背景画像', 'catpow'),
+            values: 'hasBackgroundImage',
+            sub: [{
+              input: 'picture',
+              keys: imageKeys.backgroundImage,
+              devices: devices,
+              cond: function cond(states, _ref4) {
+                var attr = _ref4.attr;
+                return !states.isTemplate || !attr.backgroundImageCode;
+              }
+            }, {
+              label: __('薄く', 'catpow'),
+              values: 'paleBG'
+            }]
           }, {
-            label: __('薄く', 'catpow'),
-            values: 'paleBG'
-          }]
-        }, {
-          label: __('背景色', 'catpow'),
-          values: 'hasBackgroundColor'
-        }, {
-          label: __('メニューアイコン', 'catpow'),
-          values: 'hasNavIcon',
-          sub: [{
-            input: 'image',
-            label: __('アイコン', 'catpow'),
-            keys: imageKeys.navIcon,
-            size: 'thumbnail'
-          }]
-        }, {
-          label: __('パターン画像', 'catpow'),
-          values: 'hasPatternImage',
-          sub: [{
-            input: 'pattern',
-            css: 'patternImageCss',
-            sel: '#' + id,
-            color: color
-          }]
-        }, {
-          label: __('フレーム画像', 'catpow'),
-          values: 'hasFrameImage',
-          sub: [{
-            input: 'frame',
-            css: 'frameImageCss',
-            sel: '#' + id,
-            color: color
-          }]
-        }, {
-          label: __('ボーダー画像', 'catpow'),
-          values: 'hasBorderImage',
-          sub: [{
-            input: 'border',
-            css: 'borderImageCss',
-            sel: '#' + id + ' > .contents',
-            color: color
-          }]
-        }, {
-          label: __('テンプレート', 'catpow'),
-          values: 'isTemplate',
-          sub: [{
-            input: 'text',
-            label: __('ヘッダ画像コード', 'catpow'),
-            key: 'headerImageCode',
-            cond: states.hasHeaderImage
+            name: 'border',
+            label: __('線', 'catpow'),
+            values: {
+              no_border: __('なし', 'catpow'),
+              thin_border: __('細', 'catpow'),
+              bold_border: __('太', 'catpow')
+            }
           }, {
-            input: 'text',
-            label: __('背景画像コード', 'catpow'),
-            key: 'backgroundImageCode',
-            cond: states.hasBackgroundImage
-          }]
-        }],
-        column: ['color', 'pattern', {
-          label: __('アイコン', 'catpow'),
-          values: 'hasIcon',
-          sub: [{
-            input: 'icon',
-            color: color
-          }]
-        }, {
-          label: __('画像', 'catpow'),
-          values: 'hasImage',
-          sub: [{
-            input: 'image',
-            keys: imageKeys.image
-          }]
-        }, {
-          label: __('背景画像', 'catpow'),
-          values: 'hasBackgroundImage',
-          sub: [{
-            input: 'picture',
-            keys: imageKeys.backgroundImage,
-            devices: devices,
-            cond: !states.isTemplate || !backgroundImageCode
+            name: 'round',
+            label: __('角丸', 'catpow'),
+            values: 'round'
           }, {
-            label: __('薄く', 'catpow'),
-            values: 'paleBG'
-          }]
-        }, {
-          label: __('線', 'catpow'),
-          values: {
-            no_border: __('なし', 'catpow'),
-            thin_border: __('細', 'catpow'),
-            bold_border: __('太', 'catpow')
-          }
-        }, {
-          label: __('角丸', 'catpow'),
-          values: 'round'
-        }, {
-          label: __('影', 'catpow'),
-          values: 'shadow',
-          sub: [{
-            label: __('内側', 'catpow'),
-            values: 'inset'
-          }]
-        }, {
-          label: __('メニューアイコン', 'catpow'),
-          values: 'hasNavIcon',
-          sub: [{
-            input: 'image',
-            label: __('アイコン', 'catpow'),
-            keys: imageKeys.navIcon,
-            size: 'thumbnail'
-          }]
-        }, {
-          label: __('ボーダー画像', 'catpow'),
-          values: 'hasBorderImage',
-          sub: [{
-            input: 'border',
-            css: 'borderImageCss',
-            sel: '#' + id + ' > .contents',
-            color: color
-          }]
-        }, {
-          label: __('テンプレート', 'catpow'),
-          values: 'isTemplate',
-          sub: [{
-            input: 'text',
-            label: __('画像コード', 'catpow'),
-            key: 'imageCode',
-            cond: states.hasImage
+            name: 'shadow',
+            label: __('影', 'catpow'),
+            values: 'shadow',
+            sub: [{
+              label: __('内側', 'catpow'),
+              values: 'inset'
+            }]
           }, {
-            input: 'text',
-            label: __('背景画像コード', 'catpow'),
-            key: 'backgroundImageCode',
-            cond: states.hasBackgroundImage
+            name: 'navIcon',
+            label: __('メニューアイコン', 'catpow'),
+            values: 'hasNavIcon',
+            sub: [{
+              input: 'image',
+              label: __('アイコン', 'catpow'),
+              keys: imageKeys.navIcon,
+              size: 'thumbnail'
+            }]
+          }, {
+            name: 'borderImage',
+            label: __('ボーダー画像', 'catpow'),
+            values: 'hasBorderImage',
+            sub: [{
+              input: 'border',
+              css: 'borderImageCss',
+              sel: '#' + id + ' > .contents',
+              color: color
+            }]
+          }, {
+            name: 'template',
+            label: __('テンプレート', 'catpow'),
+            values: 'isTemplate',
+            sub: [{
+              input: 'text',
+              label: __('画像コード', 'catpow'),
+              key: 'imageCode',
+              cond: 'hasImage'
+            }, {
+              input: 'text',
+              label: __('背景画像コード', 'catpow'),
+              key: 'backgroundImageCode',
+              cond: 'hasBackgroundImage'
+            }]
           }]
-        }]
-      },
-      bind: {
-        scene: ['level2'],
-        column: ['level3']
-      }
-    }];
+        },
+        bind: {
+          scene: ['level2'],
+          column: ['level3']
+        }
+      }];
+      wp.hooks.applyFilters('catpow.blocks.section.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
     var level = CP.getNumberClass({
       attr: attributes
     }, 'level');
@@ -510,10 +564,10 @@ registerBlockType('catpow/section', {
       value: classes
     })))];
   },
-  save: function save(_ref) {
-    var attributes = _ref.attributes,
-        className = _ref.className,
-        setAttributes = _ref.setAttributes;
+  save: function save(_ref5) {
+    var attributes = _ref5.attributes,
+        className = _ref5.className,
+        setAttributes = _ref5.setAttributes;
     var SectionTag = attributes.SectionTag,
         HeadingTag = attributes.HeadingTag,
         id = attributes.id,
@@ -543,10 +597,10 @@ registerBlockType('catpow/section', {
       attr: attributes
     }, 'level');
     var states = CP.wordsToFlags(classes);
-    var _CP$config$section2 = CP.config.section,
-        devices = _CP$config$section2.devices,
-        imageKeys = _CP$config$section2.imageKeys,
-        imageSizes = _CP$config$section2.imageSizes;
+    var _CP$config$section3 = CP.config.section,
+        devices = _CP$config$section3.devices,
+        imageKeys = _CP$config$section3.imageKeys,
+        imageSizes = _CP$config$section3.imageSizes;
     return wp.element.createElement(SectionTag, {
       id: id,
       className: classes,
@@ -747,9 +801,9 @@ registerBlockType('catpow/section', {
         attribute: 'alt'
       }
     },
-    save: function save(_ref2) {
-      var attributes = _ref2.attributes,
-          className = _ref2.className;
+    save: function save(_ref6) {
+      var attributes = _ref6.attributes,
+          className = _ref6.className;
       var id = attributes.id,
           navIcon = attributes.navIcon,
           classes = attributes.classes,

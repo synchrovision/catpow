@@ -22,6 +22,7 @@ registerBlockType('catpow/section',{
 	example:CP.example,
 	edit(props){
 		const {attributes,className,setAttributes}=props;
+		const {useMemo}=wp.element;
         const {
 			SectionTag,HeadingTag,
 			color,id,classes,prefix,title,lead,
@@ -39,174 +40,185 @@ registerBlockType('catpow/section',{
 		CP.inheritColor(props,['iconSrc','patternImageCss','headerPatternImageCss','frameImageCss','borderImageCss']);
 		CP.manageStyleData(props,['patternImageCss','headerPatternImageCss','frameImageCss','borderImageCss']);
 		
-		const selectiveClasses=[
-			{input:'buttons',filter:'sectionTag',key:'SectionTag',label:__('セクションタグ','catpow'),values:['article','section','aside','div']},
-			{input:'buttons',filter:'headingTag',key:'HeadingTag',label:__('見出しタグ','catpow'),values:['h2','h3','h4'],effect:(val)=>{
-				for(const key in states){
-					if(key.substr(0,5)==='level'){states[key]=false;}
-				}
-				if(/^h\d$/.test(val)){states['level'+val[1]]=true;}
-				setAttributes({classes:CP.flagsToWords(states)});
-			}},
-			{
-				label:__('タイプ','catpow'),
-				filter:'type',
-				type:'gridbuttons',
-				values:[
-					'scene',
-					'article',
-					'column'
-				],
-				sub:{
-					scene:[
-						'color',
-						{label:__('プレフィクス','catpow'),values:'hasPrefix'},
-						{label:__('タイトル画像','catpow'),values:'hasTitleImage',sub:[
-							{input:'picture',keys:imageKeys.titleImage,devices}
-						]},
-						{label:__('ヘッダ画像','catpow'),values:'hasHeaderImage',sub:[
-							{input:'image',keys:imageKeys.headerImage,size:imageSizes.headerImage}
-						]},
-						{label:__('ヘッダ背景画像','catpow'),values:'hasHeaderBackgroundImage',sub:[
-							{input:'picture',label:__('背景画像','catpow'),keys:imageKeys.headerBackgroundImage,devices},
-							{label:__('薄く','catpow'),values:'paleHeaderBG'}
-						]},
-						{label:__('抜き色文字','catpow'),values:'inverseText',sub:[
-							{label:__('ヘッダ背景色','catpow'),values:'hasHeaderBackgroundColor',sub:[
-								{label:__('パターン画像','catpow'),values:'hasHeaderPatternImage',sub:[
-									{input:'pattern',css:'headerPatternImageCss',sel:'#'+id+' > .contents > .header'},
+		const selectiveClasses=useMemo(()=>{
+			const {devices,imageKeys,imageSizes}=CP.config.section;
+			const selectiveClasses=[
+				{name:'sectionTag',input:'buttons',key:'SectionTag',label:__('セクションタグ','catpow'),values:['article','section','aside','div']},
+				{name:'headingTag',input:'buttons',key:'HeadingTag',label:__('見出しタグ','catpow'),values:['h2','h3','h4'],effect:(val,states,{set})=>{
+					for(const key in states){
+						if(key.substr(0,5)==='level'){states[key]=false;}
+					}
+					if(/^h\d$/.test(val)){states['level'+val[1]]=true;}
+					set({classes:CP.flagsToWords(states)});
+				}},
+				{
+					name:'type',
+					label:__('タイプ','catpow'),
+					type:'gridbuttons',
+					values:[
+						'scene',
+						'article',
+						'column'
+					],
+					sub:{
+						scene:[
+							'color',
+							{name:'prefix',label:__('プレフィクス','catpow'),values:'hasPrefix'},
+							{name:'titleImage',label:__('タイトル画像','catpow'),values:'hasTitleImage',sub:[
+								{input:'picture',keys:imageKeys.titleImage,devices}
+							]},
+							{name:'headerImage',label:__('ヘッダ画像','catpow'),values:'hasHeaderImage',sub:[
+								{input:'image',keys:imageKeys.headerImage,size:imageSizes.headerImage}
+							]},
+							{name:'headerBackgroundImage',label:__('ヘッダ背景画像','catpow'),values:'hasHeaderBackgroundImage',sub:[
+								{input:'picture',label:__('背景画像','catpow'),keys:imageKeys.headerBackgroundImage,devices},
+								{label:__('薄く','catpow'),values:'paleHeaderBG'}
+							]},
+							{name:'inverseText',label:__('抜き色文字','catpow'),values:'inverseText',sub:[
+								{label:__('ヘッダ背景色','catpow'),values:'hasHeaderBackgroundColor',sub:[
+									{label:__('パターン画像','catpow'),values:'hasHeaderPatternImage',sub:[
+										{input:'pattern',css:'headerPatternImageCss',sel:'#'+id+' > .contents > .header'},
+									]}
 								]}
-							]}
-						]},
-						{label:__('リード','catpow'),values:'hasLead'},
-						{label:__('背景画像','catpow'),values:'hasBackgroundImage',sub:[
-							{input:'picture',label:__('背景画像','catpow'),keys:imageKeys.backgroundImage,devices},
-							{label:__('薄く','catpow'),values:'paleBG'}
-						]},
-						{label:__('背景色','catpow'),values:'hasBackgroundColor'},
-						{label:__('メニューアイコン','catpow'),values:'hasNavIcon',sub:[
-							{input:'image',label:__('アイコン','catpow'),keys:imageKeys.navIcon,size:'thumbnail'}
-						]},
-						{
-							label:__('テンプレート','catpow'),
-							values:'isTemplate',
-							sub:[
-								{
-									input:'text',
-									label:__('ヘッダ画像コード','catpow'),
-									key:'headerImageCode',
-									cond:states.hasHeaderImage
-								},
-								{
-									input:'text',
-									label:__('ヘッダ背景画像コード','catpow'),
-									key:'headerBackgroundImageCode',
-									cond:states.hasHeaderBackgroundImage
-								},
-								{
-									input:'text',
-									label:__('背景画像コード','catpow'),
-									key:'backgroundImageCode',
-									cond:states.hasBackgroundImage
-								}
-							]
-						}
-					],
-					article:[
-						'color',
-						{type:'buttons',label:__('レベル','catpow'),values:{level2:'2',level3:'3',level4:'4'}},
-						{type:'gridbuttons',label:__('見出しタイプ','catpow'),filter:'heading_type',values:['header','headline','catch']},
-						{label:__('ヘッダ画像','catpow'),values:'hasHeaderImage',sub:[
+							]},
+							{name:'lead',label:__('リード','catpow'),values:'hasLead'},
+							{name:'backgroundImage',label:__('背景画像','catpow'),values:'hasBackgroundImage',sub:[
+								{input:'picture',label:__('背景画像','catpow'),keys:imageKeys.backgroundImage,devices},
+								{name:'paleBG',label:__('薄く','catpow'),values:'paleBG'}
+							]},
+							{name:'backgroundColor',label:__('背景色','catpow'),values:'hasBackgroundColor'},
+							{name:'navIcon',label:__('メニューアイコン','catpow'),values:'hasNavIcon',sub:[
+								{input:'image',label:__('アイコン','catpow'),keys:imageKeys.navIcon,size:'thumbnail'}
+							]},
 							{
-								input:'image',keys:imageKeys.headerImage,size:imageSizes.headerImage,
-								cond:(!states.isTemplate || !headerImageCode)
+								name:'template',
+								label:__('テンプレート','catpow'),
+								values:'isTemplate',
+								sub:[
+									{
+										name:'headerImageCode',
+										input:'text',
+										label:__('ヘッダ画像コード','catpow'),
+										key:'headerImageCode',
+										cond:'hasHeaderImage'
+									},
+									{
+										name:'headerBackgroundImageCode',
+										input:'text',
+										label:__('ヘッダ背景画像コード','catpow'),
+										key:'headerBackgroundImageCode',
+										cond:'hasHeaderBackgroundImage'
+									},
+									{
+										name:'backgroundImageCode',
+										input:'text',
+										label:__('背景画像コード','catpow'),
+										key:'backgroundImageCode',
+										cond:'hasBackgroundImage'
+									}
+								]
 							}
-						]},
-						{label:__('リード','catpow'),values:'hasLead'},
-						{label:__('背景画像','catpow'),values:'hasBackgroundImage',sub:[
-							{input:'picture',keys:imageKeys.backgroundImage,devices,cond:(!states.isTemplate || !backgroundImageCode)},
-							{label:__('薄く','catpow'),values:'paleBG'}
-						]},
-						{label:__('背景色','catpow'),values:'hasBackgroundColor'},
-						{label:__('メニューアイコン','catpow'),values:'hasNavIcon',sub:[
-							{input:'image',label:__('アイコン','catpow'),keys:imageKeys.navIcon,size:'thumbnail'}
-						]},
-						{label:__('パターン画像','catpow'),values:'hasPatternImage',sub:[
-							{input:'pattern',css:'patternImageCss',sel:'#'+id,color},
-						]},
-						{label:__('フレーム画像','catpow'),values:'hasFrameImage',sub:[
-							{input:'frame',css:'frameImageCss',sel:'#'+id,color},
-						]},
-						{label:__('ボーダー画像','catpow'),values:'hasBorderImage',sub:[
-							{input:'border',css:'borderImageCss',sel:'#'+id+' > .contents',color},
-						]},
-						{
-							label:__('テンプレート','catpow'),
-							values:'isTemplate',
-							sub:[
+						],
+						article:[
+							'color',
+							{name:'level',type:'buttons',label:__('レベル','catpow'),values:{level2:'2',level3:'3',level4:'4'}},
+							{name:'headingType',type:'gridbuttons',label:__('見出しタイプ','catpow'),filter:'heading_type',values:['header','headline','catch']},
+							{name:'headerImage',label:__('ヘッダ画像','catpow'),values:'hasHeaderImage',sub:[
 								{
-									input:'text',
-									label:__('ヘッダ画像コード','catpow'),
-									key:'headerImageCode',
-									cond:states.hasHeaderImage
-								},
-								{
-									input:'text',
-									label:__('背景画像コード','catpow'),
-									key:'backgroundImageCode',
-									cond:states.hasBackgroundImage
+									input:'image',keys:imageKeys.headerImage,size:imageSizes.headerImage,
+									cond:(states,{attr})=>(!states.isTemplate || !attr.headerImageCode)
 								}
-							]
-						}
-					],
-					column:[
-						'color',
-						'pattern',
-						{label:__('アイコン','catpow'),values:'hasIcon',sub:[
-							{input:'icon',color}
-						]},
-						{label:__('画像','catpow'),values:'hasImage',sub:[
-							{input:'image',keys:imageKeys.image}
-						]},
-						{label:__('背景画像','catpow'),values:'hasBackgroundImage',sub:[
-							{input:'picture',keys:imageKeys.backgroundImage,devices,cond:(!states.isTemplate || !backgroundImageCode)},
-							{label:__('薄く','catpow'),values:'paleBG'}
-						]},
-						{label:__('線','catpow'),values:{no_border:__('なし','catpow'),thin_border:__('細','catpow'),bold_border:__('太','catpow')}},
-						{label:__('角丸','catpow'),values:'round'},
-						{label:__('影','catpow'),values:'shadow',sub:[{label:__('内側','catpow'),values:'inset'}]},
-						{label:__('メニューアイコン','catpow'),values:'hasNavIcon',sub:[
-							{input:'image',label:__('アイコン','catpow'),keys:imageKeys.navIcon,size:'thumbnail'}
-						]},
-						{label:__('ボーダー画像','catpow'),values:'hasBorderImage',sub:[
-							{input:'border',css:'borderImageCss',sel:'#'+id+' > .contents',color},
-						]},
-						{
-							label:__('テンプレート','catpow'),
-							values:'isTemplate',
-							sub:[
-								{
-									input:'text',
-									label:__('画像コード','catpow'),
-									key:'imageCode',
-									cond:states.hasImage
-								},
-								{
-									input:'text',
-									label:__('背景画像コード','catpow'),
-									key:'backgroundImageCode',
-									cond:states.hasBackgroundImage
-								}
-							]
-						}
-					]
-				},
-				bind:{
-					scene:['level2'],
-					column:['level3']
+							]},
+							{name:'lead',label:__('リード','catpow'),values:'hasLead'},
+							{name:'backgroundImage',label:__('背景画像','catpow'),values:'hasBackgroundImage',sub:[
+								{input:'picture',keys:imageKeys.backgroundImage,devices,cond:(states,{attr})=>(!states.isTemplate || !attr.backgroundImageCode)},
+								{label:__('薄く','catpow'),values:'paleBG'}
+							]},
+							{name:'backgroundColor',label:__('背景色','catpow'),values:'hasBackgroundColor'},
+							{name:'navIcon',label:__('メニューアイコン','catpow'),values:'hasNavIcon',sub:[
+								{input:'image',label:__('アイコン','catpow'),keys:imageKeys.navIcon,size:'thumbnail'}
+							]},
+							{name:'patternImage',label:__('パターン画像','catpow'),values:'hasPatternImage',sub:[
+								{input:'pattern',css:'patternImageCss',sel:'#'+id,color},
+							]},
+							{name:'frameImage',label:__('フレーム画像','catpow'),values:'hasFrameImage',sub:[
+								{input:'frame',css:'frameImageCss',sel:'#'+id,color},
+							]},
+							{name:'borderImage',label:__('ボーダー画像','catpow'),values:'hasBorderImage',sub:[
+								{input:'border',css:'borderImageCss',sel:'#'+id+' > .contents',color},
+							]},
+							{
+								name:'template',
+								label:__('テンプレート','catpow'),
+								values:'isTemplate',
+								sub:[
+									{
+										input:'text',
+										label:__('ヘッダ画像コード','catpow'),
+										key:'headerImageCode',
+										cond:'hasHeaderImage'
+									},
+									{
+										input:'text',
+										label:__('背景画像コード','catpow'),
+										key:'backgroundImageCode',
+										cond:'hasBackgroundImage'
+									}
+								]
+							}
+						],
+						column:[
+							'color',
+							'pattern',
+							{name:'icon',label:__('アイコン','catpow'),values:'hasIcon',sub:[
+								{input:'icon',color}
+							]},
+							{name:'image',label:__('画像','catpow'),values:'hasImage',sub:[
+								{input:'image',keys:imageKeys.image}
+							]},
+							{name:'backgroundImage',label:__('背景画像','catpow'),values:'hasBackgroundImage',sub:[
+								{input:'picture',keys:imageKeys.backgroundImage,devices,cond:(states,{attr})=>(!states.isTemplate || !attr.backgroundImageCode)},
+								{label:__('薄く','catpow'),values:'paleBG'}
+							]},
+							{name:'border',label:__('線','catpow'),values:{no_border:__('なし','catpow'),thin_border:__('細','catpow'),bold_border:__('太','catpow')}},
+							{name:'round',label:__('角丸','catpow'),values:'round'},
+							{name:'shadow',label:__('影','catpow'),values:'shadow',sub:[{label:__('内側','catpow'),values:'inset'}]},
+							{name:'navIcon',label:__('メニューアイコン','catpow'),values:'hasNavIcon',sub:[
+								{input:'image',label:__('アイコン','catpow'),keys:imageKeys.navIcon,size:'thumbnail'}
+							]},
+							{name:'borderImage',label:__('ボーダー画像','catpow'),values:'hasBorderImage',sub:[
+								{input:'border',css:'borderImageCss',sel:'#'+id+' > .contents',color},
+							]},
+							{
+								name:'template',
+								label:__('テンプレート','catpow'),
+								values:'isTemplate',
+								sub:[
+									{
+										input:'text',
+										label:__('画像コード','catpow'),
+										key:'imageCode',
+										cond:'hasImage'
+									},
+									{
+										input:'text',
+										label:__('背景画像コード','catpow'),
+										key:'backgroundImageCode',
+										cond:'hasBackgroundImage'
+									}
+								]
+							}
+						]
+					},
+					bind:{
+						scene:['level2'],
+						column:['level3']
+					}
 				}
-			}
-		];
+			];
+			wp.hooks.applyFilters('catpow.blocks.section.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		
 		var level=CP.getNumberClass({attr:attributes},'level');
 		
