@@ -38,6 +38,7 @@ registerBlockType('catpow/div',{
 	},
 	example:CP.example,
 	edit(props){
+		const {useState,useMemo}=wp.element;
 		const {attributes,className,setAttributes,context}=props;
         const {id,classes,color,patternImageCss,frameImageCss,borderImageCss}=attributes;
 		
@@ -48,48 +49,54 @@ registerBlockType('catpow/div',{
 		CP.manageStyleData(props,['patternImageCss','frameImageCss','borderImageCss']);
 		
 		
-		var selectiveClasses=[
-			{
-				label:'タイプ',
-				filter:'type',
-				type:'buttons',
-				values:['block','frame','columns'],
-				sub:{
-					frame:[
-						{label:'アイコン',values:'hasIcon',sub:[
-							{input:'icon',label:'アイコン',keys:imageKeys.iconImage,color}
-						]},
-						{type:'buttons',label:'線',values:{noBorder:'なし',thinBorder:'細',boldBorder:'太'}},
-						{label:'角丸',values:'round'},
-						{label:'影',values:'shadow',sub:[{label:'内側',values:'inset'}]}
+		const selectiveClasses=useMemo(()=>{
+			const {devices,imageKeys}=CP.config.div;
+			const selectiveClasses=[
+				{
+					name:'type',
+					label:'タイプ',
+					filter:'type',
+					type:'buttons',
+					values:['block','frame','columns'],
+					sub:{
+						frame:[
+							{label:'アイコン',values:'hasIcon',sub:[
+								{input:'icon',label:'アイコン',keys:imageKeys.iconImage,color}
+							]},
+							{type:'buttons',label:'線',values:{noBorder:'なし',thinBorder:'細',boldBorder:'太'}},
+							{label:'角丸',values:'round'},
+							{label:'影',values:'shadow',sub:[{label:'内側',values:'inset'}]}
+						],
+						columns:[
+							{label:'幅',values:{narrow:'狭い',regular:'普通',wide:'広い'}}
+						]
+					}
+				},
+				'color',
+				{name:'background',type:'buttons',label:'背景',values:{noBackground:'なし',hasBackgroundColor:'色',hasBackgroundImage:'画像',hasPatternImage:'パターン'},sub:{
+					hasBackgroundColor:[
+						{label:'パターン',values:'hasPattern',sub:['pattern']}
 					],
-					columns:[
-						{label:'幅',values:{narrow:'狭い',regular:'普通',wide:'広い'}}
+					hasBackgroundImage:[
+						{input:'picture',label:'背景画像',keys:imageKeys.backgroundImage,devices}
+					],
+					hasPatternImage:[
+						{input:'pattern',css:'patternImageCss',sel:({attr})=>'#'+attr.id,color},
 					]
-				}
-			},
-			'color',
-			{type:'buttons',label:'背景',values:{noBackground:'なし',hasBackgroundColor:'色',hasBackgroundImage:'画像',hasPatternImage:'パターン'},sub:{
-				hasBackgroundColor:[
-					{label:'パターン',values:'hasPattern',sub:['pattern']}
-				],
-				hasBackgroundImage:[
-					{input:'picture',label:'背景画像',keys:imageKeys.backgroundImage,devices}
-				],
-				hasPatternImage:[
-					{input:'pattern',css:'patternImageCss',sel:'#'+id,color},
-				]
-			}},
-			{type:'buttons',label:'ボーダー画像',values:{noBorder:'なし',hasFrameImage:'フレーム',hasBorderImage:'ボーダー'},sub:{
-				hasFrameImage:[
-					{input:'frame',css:'frameImageCss',sel:'#'+id,color}
-				],
-				hasBorderImage:[
-					{input:'border',css:'borderImageCss',sel:'#'+id,color}
-				]
-			}},
-			{type:'buttons',label:'余白','values':{noPad:'なし',thinPad:'極細',lightPad:'細',mediumPad:'中',boldPad:'太',heavyPad:'極太'}}
-		];
+				}},
+				{name:'borderImage',type:'buttons',label:'ボーダー画像',values:{noBorder:'なし',hasFrameImage:'フレーム',hasBorderImage:'ボーダー'},sub:{
+					hasFrameImage:[
+						{input:'frame',css:'frameImageCss',sel:({attr})=>'#'+attr.id,color}
+					],
+					hasBorderImage:[
+						{input:'border',css:'borderImageCss',sel:({attr})=>'#'+attr.id,color}
+					]
+				}},
+				{name:'pad',type:'buttons',label:'余白','values':{noPad:'なし',thinPad:'極細',lightPad:'細',mediumPad:'中',boldPad:'太',heavyPad:'極太'}}
+			];
+			wp.hooks.applyFilters('catpow.blocks.div.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		
         return [
 			<div id={id} className={classes}>

@@ -75,6 +75,9 @@ registerBlockType('catpow/div', {
   },
   example: CP.example,
   edit: function edit(props) {
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var attributes = props.attributes,
         className = props.className,
         setAttributes = props.setAttributes,
@@ -91,111 +94,131 @@ registerBlockType('catpow/div', {
         imageKeys = _CP$config$div.imageKeys;
     CP.inheritColor(props, ['iconImageSrc', 'patternImageCss', 'frameImageCss', 'borderImageCss']);
     CP.manageStyleData(props, ['patternImageCss', 'frameImageCss', 'borderImageCss']);
-    var selectiveClasses = [{
-      label: 'タイプ',
-      filter: 'type',
-      type: 'buttons',
-      values: ['block', 'frame', 'columns'],
-      sub: {
-        frame: [{
-          label: 'アイコン',
-          values: 'hasIcon',
-          sub: [{
-            input: 'icon',
+    var selectiveClasses = useMemo(function () {
+      var _CP$config$div2 = CP.config.div,
+          devices = _CP$config$div2.devices,
+          imageKeys = _CP$config$div2.imageKeys;
+      var selectiveClasses = [{
+        name: 'type',
+        label: 'タイプ',
+        filter: 'type',
+        type: 'buttons',
+        values: ['block', 'frame', 'columns'],
+        sub: {
+          frame: [{
             label: 'アイコン',
-            keys: imageKeys.iconImage,
+            values: 'hasIcon',
+            sub: [{
+              input: 'icon',
+              label: 'アイコン',
+              keys: imageKeys.iconImage,
+              color: color
+            }]
+          }, {
+            type: 'buttons',
+            label: '線',
+            values: {
+              noBorder: 'なし',
+              thinBorder: '細',
+              boldBorder: '太'
+            }
+          }, {
+            label: '角丸',
+            values: 'round'
+          }, {
+            label: '影',
+            values: 'shadow',
+            sub: [{
+              label: '内側',
+              values: 'inset'
+            }]
+          }],
+          columns: [{
+            label: '幅',
+            values: {
+              narrow: '狭い',
+              regular: '普通',
+              wide: '広い'
+            }
+          }]
+        }
+      }, 'color', {
+        name: 'background',
+        type: 'buttons',
+        label: '背景',
+        values: {
+          noBackground: 'なし',
+          hasBackgroundColor: '色',
+          hasBackgroundImage: '画像',
+          hasPatternImage: 'パターン'
+        },
+        sub: {
+          hasBackgroundColor: [{
+            label: 'パターン',
+            values: 'hasPattern',
+            sub: ['pattern']
+          }],
+          hasBackgroundImage: [{
+            input: 'picture',
+            label: '背景画像',
+            keys: imageKeys.backgroundImage,
+            devices: devices
+          }],
+          hasPatternImage: [{
+            input: 'pattern',
+            css: 'patternImageCss',
+            sel: function sel(_ref) {
+              var attr = _ref.attr;
+              return '#' + attr.id;
+            },
             color: color
           }]
-        }, {
-          type: 'buttons',
-          label: '線',
-          values: {
-            noBorder: 'なし',
-            thinBorder: '細',
-            boldBorder: '太'
-          }
-        }, {
-          label: '角丸',
-          values: 'round'
-        }, {
-          label: '影',
-          values: 'shadow',
-          sub: [{
-            label: '内側',
-            values: 'inset'
+        }
+      }, {
+        name: 'borderImage',
+        type: 'buttons',
+        label: 'ボーダー画像',
+        values: {
+          noBorder: 'なし',
+          hasFrameImage: 'フレーム',
+          hasBorderImage: 'ボーダー'
+        },
+        sub: {
+          hasFrameImage: [{
+            input: 'frame',
+            css: 'frameImageCss',
+            sel: function sel(_ref2) {
+              var attr = _ref2.attr;
+              return '#' + attr.id;
+            },
+            color: color
+          }],
+          hasBorderImage: [{
+            input: 'border',
+            css: 'borderImageCss',
+            sel: function sel(_ref3) {
+              var attr = _ref3.attr;
+              return '#' + attr.id;
+            },
+            color: color
           }]
-        }],
-        columns: [{
-          label: '幅',
-          values: {
-            narrow: '狭い',
-            regular: '普通',
-            wide: '広い'
-          }
-        }]
-      }
-    }, 'color', {
-      type: 'buttons',
-      label: '背景',
-      values: {
-        noBackground: 'なし',
-        hasBackgroundColor: '色',
-        hasBackgroundImage: '画像',
-        hasPatternImage: 'パターン'
-      },
-      sub: {
-        hasBackgroundColor: [{
-          label: 'パターン',
-          values: 'hasPattern',
-          sub: ['pattern']
-        }],
-        hasBackgroundImage: [{
-          input: 'picture',
-          label: '背景画像',
-          keys: imageKeys.backgroundImage,
-          devices: devices
-        }],
-        hasPatternImage: [{
-          input: 'pattern',
-          css: 'patternImageCss',
-          sel: '#' + id,
-          color: color
-        }]
-      }
-    }, {
-      type: 'buttons',
-      label: 'ボーダー画像',
-      values: {
-        noBorder: 'なし',
-        hasFrameImage: 'フレーム',
-        hasBorderImage: 'ボーダー'
-      },
-      sub: {
-        hasFrameImage: [{
-          input: 'frame',
-          css: 'frameImageCss',
-          sel: '#' + id,
-          color: color
-        }],
-        hasBorderImage: [{
-          input: 'border',
-          css: 'borderImageCss',
-          sel: '#' + id,
-          color: color
-        }]
-      }
-    }, {
-      type: 'buttons',
-      label: '余白',
-      'values': {
-        noPad: 'なし',
-        thinPad: '極細',
-        lightPad: '細',
-        mediumPad: '中',
-        boldPad: '太',
-        heavyPad: '極太'
-      }
-    }];
+        }
+      }, {
+        name: 'pad',
+        type: 'buttons',
+        label: '余白',
+        'values': {
+          noPad: 'なし',
+          thinPad: '極細',
+          lightPad: '細',
+          mediumPad: '中',
+          boldPad: '太',
+          heavyPad: '極太'
+        }
+      }];
+      wp.hooks.applyFilters('catpow.blocks.div.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
     return [wp.element.createElement("div", {
       id: id,
       className: classes
@@ -245,10 +268,10 @@ registerBlockType('catpow/div', {
       value: classes
     })))];
   },
-  save: function save(_ref) {
-    var attributes = _ref.attributes,
-        className = _ref.className,
-        setAttributes = _ref.setAttributes;
+  save: function save(_ref4) {
+    var attributes = _ref4.attributes,
+        className = _ref4.className,
+        setAttributes = _ref4.setAttributes;
     var id = attributes.id,
         _attributes$classes = attributes.classes,
         classes = _attributes$classes === void 0 ? '' : _attributes$classes,
@@ -257,9 +280,9 @@ registerBlockType('catpow/div', {
         frameImageCss = attributes.frameImageCss,
         borderImageCss = attributes.borderImageCss;
     var states = CP.wordsToFlags(classes);
-    var _CP$config$div2 = CP.config.div,
-        devices = _CP$config$div2.devices,
-        imageKeys = _CP$config$div2.imageKeys;
+    var _CP$config$div3 = CP.config.div,
+        devices = _CP$config$div3.devices,
+        imageKeys = _CP$config$div3.imageKeys;
     return wp.element.createElement("div", {
       id: id,
       className: classes
