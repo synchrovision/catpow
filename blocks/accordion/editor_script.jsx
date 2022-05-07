@@ -26,7 +26,7 @@ registerBlockType('catpow/accordion',{
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
-		const {useState}=wp.element;
+		const {useState,useMemo}=wp.element;
         const {
 			classes,title,
 			imageMime,imageSrc,imageAlt,imageCode
@@ -35,25 +35,32 @@ registerBlockType('catpow/accordion',{
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys,imageSizes}=CP.config.accordion;
 		
-		const selectiveClasses=[
-			'color',
-			{label:'画像',values:'hasImage',sub:[
-				{input:'image',keys:imageKeys.image,size:imageSizes.image}
-			]},
-			{label:'他を閉じる',values:'exclusive'},
-			{
-				label:'テンプレート',
-				values:'isTemplate',
-				sub:[
-					{
-						input:'text',
-						label:'画像コード',
-						key:'imageCode',
-						cond:states.hasImage
-					}
-				]
-			}
-		];
+		const selectiveClasses=useMemo(()=>{
+			const {devices,imageKeys,imageSizes}=CP.config.section;
+			const selectiveClasses=[
+				'color',
+				{name:'image',label:'画像',values:'hasImage',sub:[
+					{input:'image',keys:imageKeys.image,size:imageSizes.image}
+				]},
+				{name:'exclusive',label:'他を閉じる',values:'exclusive'},
+				{
+					name:'template',
+					label:'テンプレート',
+					values:'isTemplate',
+					sub:[
+						{
+							name:'imageCode',
+							input:'text',
+							label:'画像コード',
+							key:'imageCode',
+							cond:'hasImage'
+						}
+					]
+				}
+			];
+			wp.hooks.applyFilters('catpow.blocks.accordion.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		
         return (
 			<Fragment>

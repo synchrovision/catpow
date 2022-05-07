@@ -55,7 +55,9 @@ registerBlockType('catpow/accordion', {
     var attributes = _ref.attributes,
         className = _ref.className,
         setAttributes = _ref.setAttributes;
-    var useState = wp.element.useState;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var classes = attributes.classes,
         title = attributes.title,
         imageMime = attributes.imageMime,
@@ -67,27 +69,39 @@ registerBlockType('catpow/accordion', {
         devices = _CP$config$accordion.devices,
         imageKeys = _CP$config$accordion.imageKeys,
         imageSizes = _CP$config$accordion.imageSizes;
-    var selectiveClasses = ['color', {
-      label: '画像',
-      values: 'hasImage',
-      sub: [{
-        input: 'image',
-        keys: imageKeys.image,
-        size: imageSizes.image
-      }]
-    }, {
-      label: '他を閉じる',
-      values: 'exclusive'
-    }, {
-      label: 'テンプレート',
-      values: 'isTemplate',
-      sub: [{
-        input: 'text',
-        label: '画像コード',
-        key: 'imageCode',
-        cond: states.hasImage
-      }]
-    }];
+    var selectiveClasses = useMemo(function () {
+      var _CP$config$section = CP.config.section,
+          devices = _CP$config$section.devices,
+          imageKeys = _CP$config$section.imageKeys,
+          imageSizes = _CP$config$section.imageSizes;
+      var selectiveClasses = ['color', {
+        name: 'image',
+        label: '画像',
+        values: 'hasImage',
+        sub: [{
+          input: 'image',
+          keys: imageKeys.image,
+          size: imageSizes.image
+        }]
+      }, {
+        name: 'exclusive',
+        label: '他を閉じる',
+        values: 'exclusive'
+      }, {
+        name: 'template',
+        label: 'テンプレート',
+        values: 'isTemplate',
+        sub: [{
+          name: 'imageCode',
+          input: 'text',
+          label: '画像コード',
+          key: 'imageCode',
+          cond: 'hasImage'
+        }]
+      }];
+      wp.hooks.applyFilters('catpow.blocks.accordion.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
     return wp.element.createElement(Fragment, null, wp.element.createElement("div", {
       className: classes
     }, wp.element.createElement("div", {
