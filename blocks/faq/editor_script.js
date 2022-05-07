@@ -103,6 +103,9 @@ registerBlockType('catpow/faq', {
         className = _ref.className,
         setAttributes = _ref.setAttributes,
         isSelected = _ref.isSelected;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var _attributes$items = attributes.items,
         items = _attributes$items === void 0 ? [] : _attributes$items,
         _attributes$classes = attributes.classes,
@@ -112,19 +115,27 @@ registerBlockType('catpow/faq', {
     var primaryClass = 'wp-block-catpow-faq';
     var states = CP.wordsToFlags(classes);
     var imageKeys = CP.config.faq.imageKeys;
-    var selectiveClasses = [{
-      label: 'Qにキャプション',
-      values: 'hasTitleCaption'
-    }, {
-      label: 'Aに見出し',
-      values: 'hasSubTitle'
-    }, {
-      label: 'アコーディオン',
-      values: 'accordion'
-    }, {
-      label: 'リンク',
-      values: 'hasLink'
-    }];
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = [{
+        name: 'titleCaption',
+        label: 'Qにキャプション',
+        values: 'hasTitleCaption'
+      }, {
+        name: 'subTitle',
+        label: 'Aに見出し',
+        values: 'hasSubTitle'
+      }, {
+        name: 'accordion',
+        label: 'アコーディオン',
+        values: 'accordion'
+      }, {
+        name: 'link',
+        label: 'リンク',
+        values: 'hasLink'
+      }];
+      wp.hooks.applyFilters('catpow.blocks.faq.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
     var rtn = [];
 
     var save = function save() {

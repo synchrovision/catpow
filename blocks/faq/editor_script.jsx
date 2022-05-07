@@ -54,18 +54,23 @@ registerBlockType('catpow/faq',{
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {useState,useMemo}=wp.element;
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
 		const primaryClass='wp-block-catpow-faq';
 		
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.faq;
         
-		var selectiveClasses=[
-			{label:'Qにキャプション',values:'hasTitleCaption'},
-			{label:'Aに見出し',values:'hasSubTitle'},
-			{label:'アコーディオン',values:'accordion'},
-			{label:'リンク',values:'hasLink'}
-		];
+		const selectiveClasses=useMemo(()=>{
+			const selectiveClasses=[
+				{name:'titleCaption',label:'Qにキャプション',values:'hasTitleCaption'},
+				{name:'subTitle',label:'Aに見出し',values:'hasSubTitle'},
+				{name:'accordion',label:'アコーディオン',values:'accordion'},
+				{name:'link',label:'リンク',values:'hasLink'}
+			];
+			wp.hooks.applyFilters('catpow.blocks.faq.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		
 		
 		let rtn=[];
