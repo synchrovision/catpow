@@ -454,6 +454,7 @@
 			var rtn;
 			if(Array.isArray(obj) && !(/^\d+$/.test(prop))){
 				rtn=obj.find((item)=>(typeof item === 'object') && item.hasOwnProperty('name') && item.name===prop);
+				if(!rtn && Array.prototype.hasOwnProperty(prop)){return obj[prop];}
 			}
 			else{
 				rtn=obj[prop];
@@ -469,6 +470,7 @@
 			else{
 				obj[prop]=val;
 			}
+			return true;
 		},
 		deleteProperty:(obj,prop)=>{
 			if(Array.isArray(obj) && !(/^\d+$/.test(prop))){
@@ -1439,8 +1441,11 @@
 		}
 
 		const SelectClass=(prm)=>{
-			if(prm.hasOwnProperty('cond') && !prm.cond){
-				return false;
+			if(prm.hasOwnProperty('cond')){
+				if(prm.cond===false){return false;}
+				if(Array.isArray(prm.cond) && prm.cond.some((className)=>!states[className])){return false;}
+				if(typeof prm.cond === 'string' && !states[prm.cond]){return false;}
+				if(typeof prm.cond === 'function' && !prm.cond(states,props)){return false;}
 			}
 			let rtn=[];
 			if(prm.filter && props.filters && props.filters[prm.filter]){
@@ -1734,7 +1739,7 @@
 									value={item[prm.key]}
 									onChange={(val)=>{
 										save({[prm.key]:val});
-										if(prm.effect){prm.effect(val);}
+										if(prm.effect){prm.effect(val,states,props);}
 									}}
 								/>
 							);
@@ -1872,7 +1877,7 @@
 						states[newClass]=true;
 
 						saveClasses();
-						if(prm.effect){prm.effect(currentClass,newClass);}
+						if(prm.effect){prm.effect(currentClass,newClass,states,props);}
 					};
 
 

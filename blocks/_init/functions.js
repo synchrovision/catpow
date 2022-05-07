@@ -761,6 +761,10 @@ var CP = {
         rtn = obj.find(function (item) {
           return babelHelpers.typeof(item) === 'object' && item.hasOwnProperty('name') && item.name === prop;
         });
+
+        if (!rtn && Array.prototype.hasOwnProperty(prop)) {
+          return obj[prop];
+        }
       } else {
         rtn = obj[prop];
       }
@@ -778,6 +782,8 @@ var CP = {
       } else {
         obj[prop] = val;
       }
+
+      return true;
     },
     deleteProperty: function deleteProperty(obj, prop) {
       if (Array.isArray(obj) && !/^\d+$/.test(prop)) {
@@ -2061,8 +2067,24 @@ var CP = {
     };
 
     var SelectClass = function SelectClass(prm) {
-      if (prm.hasOwnProperty('cond') && !prm.cond) {
-        return false;
+      if (prm.hasOwnProperty('cond')) {
+        if (prm.cond === false) {
+          return false;
+        }
+
+        if (Array.isArray(prm.cond) && prm.cond.some(function (className) {
+          return !states[className];
+        })) {
+          return false;
+        }
+
+        if (typeof prm.cond === 'string' && !states[prm.cond]) {
+          return false;
+        }
+
+        if (typeof prm.cond === 'function' && !prm.cond(states, props)) {
+          return false;
+        }
       }
 
       var rtn = [];
@@ -2447,7 +2469,7 @@ var CP = {
                     save(babelHelpers.defineProperty({}, prm.key, val));
 
                     if (prm.effect) {
-                      prm.effect(val);
+                      prm.effect(val, states, props);
                     }
                   }
                 }));
@@ -2615,7 +2637,7 @@ var CP = {
             saveClasses();
 
             if (prm.effect) {
-              prm.effect(currentClass, newClass);
+              prm.effect(currentClass, newClass, states, props);
             }
           };
 
