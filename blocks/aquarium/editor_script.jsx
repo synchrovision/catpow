@@ -67,13 +67,16 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
+		const {useState,useMemo}=wp.element;
 		const {classes,layers=[]}=attributes;
 		const primaryClass='wp-block-catpow-aquarium';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		
-		const selectiveClasses=[
-			'color'
-		];
+		const selectiveClasses=useMemo(()=>{
+			const selectiveClasses=['color'];
+			wp.hooks.applyFilters('catpow.blocks.aquarium.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		
 		return [
 			<div className={classes}>

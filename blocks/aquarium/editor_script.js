@@ -114,6 +114,9 @@ registerBlockType('catpow/aquarium', {
     var attributes = _ref.attributes,
         className = _ref.className,
         setAttributes = _ref.setAttributes;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var classes = attributes.classes,
         _attributes$layers = attributes.layers,
         layers = _attributes$layers === void 0 ? [] : _attributes$layers;
@@ -121,7 +124,11 @@ registerBlockType('catpow/aquarium', {
 
     var classArray = _.uniq((className + ' ' + classes).split(' '));
 
-    var selectiveClasses = ['color'];
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = ['color'];
+      wp.hooks.applyFilters('catpow.blocks.aquarium.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
     return [wp.element.createElement("div", {
       className: classes
     }, layers.map(function (layer) {
