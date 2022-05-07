@@ -56,6 +56,7 @@ registerBlockType('catpow/flow',{
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {useState,useMemo}=wp.element;
 		const {items=[],classes,countPrefix,countSuffix}=attributes;
 		const primaryClass='wp-block-catpow-flow';
 		var classArray=_.uniq((className+' '+classes).split(' '));
@@ -63,17 +64,22 @@ registerBlockType('catpow/flow',{
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.flow;
         
-		var selectiveClasses=[
-			{label:'番号',values:'hasCounter',sub:[
-				{input:'text',label:'番号前置テキスト',key:'countPrefix'},
-				{input:'text',label:'番号後置テキスト',key:'countSuffix'},
-			]},
-			{label:'画像',values:'hasImage'},
-			{label:'タイトルキャプション',values:'hasTitleCaption'},
-			{label:'サブタイトル',values:'hasSubTitle'},
-			{label:'サイズ',values:['small','medium','large']},
-			{label:'リンク',values:'hasLink'}
-		];
+		const selectiveClasses=useMemo(()=>{
+			const {imageKeys}=CP.config.flow;
+			const selectiveClasses=[
+				{name:'counter',label:'番号',values:'hasCounter',sub:[
+					{name:'countPrefix',input:'text',label:'番号前置テキスト',key:'countPrefix'},
+					{name:'countSuffix',input:'text',label:'番号後置テキスト',key:'countSuffix'},
+				]},
+				{name:'image',label:'画像',values:'hasImage'},
+				{name:'titleCaption',label:'タイトルキャプション',values:'hasTitleCaption'},
+				{name:'sbTitle',label:'サブタイトル',values:'hasSubTitle'},
+				{name:'size',label:'サイズ',values:['small','medium','large']},
+				{name:'link',label:'リンク',values:'hasLink'}
+			];
+			wp.hooks.applyFilters('catpow.blocks.flow.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		
 		let rtn=[];
 		const save=()=>{

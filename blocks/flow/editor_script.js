@@ -114,6 +114,9 @@ registerBlockType('catpow/flow', {
         className = _ref.className,
         setAttributes = _ref.setAttributes,
         isSelected = _ref.isSelected;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var _attributes$items = attributes.items,
         items = _attributes$items === void 0 ? [] : _attributes$items,
         classes = attributes.classes,
@@ -125,34 +128,47 @@ registerBlockType('catpow/flow', {
 
     var states = CP.wordsToFlags(classes);
     var imageKeys = CP.config.flow.imageKeys;
-    var selectiveClasses = [{
-      label: '番号',
-      values: 'hasCounter',
-      sub: [{
-        input: 'text',
-        label: '番号前置テキスト',
-        key: 'countPrefix'
+    var selectiveClasses = useMemo(function () {
+      var imageKeys = CP.config.flow.imageKeys;
+      var selectiveClasses = [{
+        name: 'counter',
+        label: '番号',
+        values: 'hasCounter',
+        sub: [{
+          name: 'countPrefix',
+          input: 'text',
+          label: '番号前置テキスト',
+          key: 'countPrefix'
+        }, {
+          name: 'countSuffix',
+          input: 'text',
+          label: '番号後置テキスト',
+          key: 'countSuffix'
+        }]
       }, {
-        input: 'text',
-        label: '番号後置テキスト',
-        key: 'countSuffix'
-      }]
-    }, {
-      label: '画像',
-      values: 'hasImage'
-    }, {
-      label: 'タイトルキャプション',
-      values: 'hasTitleCaption'
-    }, {
-      label: 'サブタイトル',
-      values: 'hasSubTitle'
-    }, {
-      label: 'サイズ',
-      values: ['small', 'medium', 'large']
-    }, {
-      label: 'リンク',
-      values: 'hasLink'
-    }];
+        name: 'image',
+        label: '画像',
+        values: 'hasImage'
+      }, {
+        name: 'titleCaption',
+        label: 'タイトルキャプション',
+        values: 'hasTitleCaption'
+      }, {
+        name: 'sbTitle',
+        label: 'サブタイトル',
+        values: 'hasSubTitle'
+      }, {
+        name: 'size',
+        label: 'サイズ',
+        values: ['small', 'medium', 'large']
+      }, {
+        name: 'link',
+        label: 'リンク',
+        values: 'hasLink'
+      }];
+      wp.hooks.applyFilters('catpow.blocks.flow.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
     var rtn = [];
 
     var save = function save() {
