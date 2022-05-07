@@ -150,6 +150,9 @@ registerBlockType('catpow/chart', {
         className = _ref.className,
         setAttributes = _ref.setAttributes,
         isSelected = _ref.isSelected;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var classes = attributes.classes,
         graph = attributes.graph,
         _attributes$EditMode = attributes.EditMode,
@@ -159,29 +162,37 @@ registerBlockType('catpow/chart', {
     var classArray = _.uniq((className + ' ' + classes).split(' '));
 
     var classNameArray = className.split(' ');
-    var selectiveClasses = [{
-      label: 'タイプ',
-      filter: 'type',
-      values: {
-        BarChart: '棒グラフ',
-        PieChart: '円グラフ',
-        LineChart: '折れ線グラフ',
-        RadarChart: 'レーダーチャート'
-      }
-    }, {
-      label: '値を表示',
-      values: 'hasValue',
-      sub: [{
-        label: '単位を表示',
-        values: 'hasUnit'
-      }]
-    }, {
-      label: '枠線を表示',
-      values: 'hasFrame'
-    }, {
-      label: '罫線を表示',
-      values: 'hasGrid'
-    }];
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = [{
+        name: 'type',
+        label: 'タイプ',
+        filter: 'type',
+        values: {
+          BarChart: '棒グラフ',
+          PieChart: '円グラフ',
+          LineChart: '折れ線グラフ',
+          RadarChart: 'レーダーチャート'
+        }
+      }, {
+        name: 'value',
+        label: '値を表示',
+        values: 'hasValue',
+        sub: [{
+          label: '単位を表示',
+          values: 'hasUnit'
+        }]
+      }, {
+        name: 'frame',
+        label: '枠線を表示',
+        values: 'hasFrame'
+      }, {
+        name: 'grid',
+        label: '罫線を表示',
+        values: 'hasGrid'
+      }];
+      wp.hooks.applyFilters('catpow.blocks.chart.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
     var type = CP.getSelectiveClass({
       attr: attributes
     }, selectiveClasses[0].values);
@@ -268,7 +279,9 @@ registerBlockType('catpow/chart', {
       value: classArray.join(' ')
     }))), EditMode ? DataTable() : wp.element.createElement("div", {
       className: classes
-    }, el(Catpow[type + 'Output'], _objectSpread(_objectSpread({}, states), graph[0]))));
+    }, Catpow[type + 'Output'] ? el(Catpow[type + 'Output'], _objectSpread(_objectSpread({}, states), graph[0])) : wp.element.createElement("div", {
+      className: "alert"
+    }, "Invalid Chart Type")));
   },
   save: function save(_ref2) {
     var attributes = _ref2.attributes,

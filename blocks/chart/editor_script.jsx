@@ -60,28 +60,34 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {useState,useMemo}=wp.element;
 		const {classes,graph,EditMode=false}=attributes;
 		const primaryClass='wp-block-catpow-chart';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
         
-		var selectiveClasses=[
-			{
-				label:'タイプ',
-				filter:'type',
-				values:{
-					BarChart:'棒グラフ',
-					PieChart:'円グラフ',
-					LineChart:'折れ線グラフ',
-					RadarChart:'レーダーチャート'
-				}
-			},
-			{label:'値を表示',values:'hasValue',sub:[
-				{label:'単位を表示',values:'hasUnit'}
-			]},
-			{label:'枠線を表示',values:'hasFrame'},
-			{label:'罫線を表示',values:'hasGrid'}
-		];
+		const selectiveClasses=useMemo(()=>{
+			const selectiveClasses=[
+				{
+					name:'type',
+					label:'タイプ',
+					filter:'type',
+					values:{
+						BarChart:'棒グラフ',
+						PieChart:'円グラフ',
+						LineChart:'折れ線グラフ',
+						RadarChart:'レーダーチャート'
+					}
+				},
+				{name:'value',label:'値を表示',values:'hasValue',sub:[
+					{label:'単位を表示',values:'hasUnit'}
+				]},
+				{name:'frame',label:'枠線を表示',values:'hasFrame'},
+				{name:'grid',label:'罫線を表示',values:'hasGrid'}
+			];
+			wp.hooks.applyFilters('catpow.blocks.chart.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		let type=CP.getSelectiveClass({attr:attributes},selectiveClasses[0].values);
 		
 		const states=CP.wordsToFlags(classes);
@@ -187,7 +193,11 @@
 					DataTable()
 				):(
 					<div className={classes}>
-						{el(Catpow[type+'Output'],{...states,...graph[0]})}
+						{Catpow[type+'Output']?(
+							el(Catpow[type+'Output'],{...states,...graph[0]})
+						):(
+							<div className="alert">Invalid Chart Type</div>
+						)}
 					</div>
 				)}
 			</Fragment>
