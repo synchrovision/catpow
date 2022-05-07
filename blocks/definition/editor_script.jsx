@@ -17,25 +17,31 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {useState,useMemo}=wp.element;
 		const {items=[],classes='',loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-definition';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		
 		var states=CP.wordsToFlags(classes);
 		
-		var selectiveClasses=[
-			{
-				label:'テンプレート',
-				values:'isTemplate',
-				sub:[
-					{input:'bool',label:'ループ',key:'doLoop',sub:[
-						{label:'content path',input:'text',key:'content_path'},
-						{label:'query',input:'textarea',key:'query'},
-						{label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
-					]}
-				]
-			}
-		];
+		const selectiveClasses=useMemo(()=>{
+			const selectiveClasses=[
+				{
+					name:'template',
+					label:'テンプレート',
+					values:'isTemplate',
+					sub:[
+						{name:'loop',input:'bool',label:'ループ',key:'doLoop',sub:[
+							{name:'contentPath',label:'content path',input:'text',key:'content_path'},
+							{name:'query',label:'query',input:'textarea',key:'query'},
+							{name:'loopCount',label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
+						]}
+					]
+				}
+			];
+			wp.hooks.applyFilters('catpow.blocks.definition.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		
 		const save=()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))});
