@@ -2298,10 +2298,11 @@ var CP = {
         var _prm$device = prm.device,
             device = _prm$device === void 0 ? 'pc' : _prm$device;
         var media = CP.getMediaQueryKeyForDevice(device);
+        var sel = typeof prm.sel === 'function' ? prm.sel(props) : prm.sel;
         styleDatas[prm.css] = styleDatas[prm.css] || {};
         styleDatas[prm.css][media] = styleDatas[prm.css][media] || {};
-        styleDatas[prm.css][media][prm.sel] = styleDatas[prm.css][media][prm.sel] || {};
-        var tgt = styleDatas[prm.css][media][prm.sel];
+        styleDatas[prm.css][media][sel] = styleDatas[prm.css][media][sel] || {};
+        var tgt = styleDatas[prm.css][media][sel];
 
         if (prm.input) {
           switch (prm.input) {
@@ -2388,9 +2389,9 @@ var CP = {
                         repeat = _image$conf3.repeat;
                     var media = CP.getMediaQueryKeyForDevice(device);
                     styleDatas[prm.css][media] = styleDatas[prm.css][media] || {};
-                    styleDatas[prm.css][media][prm.sel] = styleDatas[prm.css][media][prm.sel] || {};
-                    styleDatas[prm.css][media][prm.sel]['border-style'] = 'solid';
-                    styleDatas[prm.css][media][prm.sel]['border-image'] = 'url(' + image.url + ') fill ' + slice + ' / ' + width + ' ' + repeat;
+                    styleDatas[prm.css][media][sel] = styleDatas[prm.css][media][sel] || {};
+                    styleDatas[prm.css][media][sel]['border-style'] = 'solid';
+                    styleDatas[prm.css][media][sel]['border-image'] = 'url(' + image.url + ') fill ' + slice + ' / ' + width + ' ' + repeat;
                   });
                   saveCss(prm.css);
                 }

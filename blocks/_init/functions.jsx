@@ -1603,7 +1603,7 @@
 			else if(prm.css){
 				const {device='pc'}=prm;
 				const media=CP.getMediaQueryKeyForDevice(device);
-				const sel=(typeof sel === 'function')?prm.sel(props)?prm.sel;
+				const sel=(typeof prm.sel === 'function')?prm.sel(props):prm.sel;
 				styleDatas[prm.css]=styleDatas[prm.css] || {};
 				styleDatas[prm.css][media]=styleDatas[prm.css][media] || {};
 				styleDatas[prm.css][media][sel]=styleDatas[prm.css][media][sel] || {};
