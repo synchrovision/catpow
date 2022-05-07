@@ -762,7 +762,7 @@ var CP = {
           return babelHelpers.typeof(item) === 'object' && item.hasOwnProperty('name') && item.name === prop;
         });
 
-        if (!rtn && Array.prototype.hasOwnProperty(prop)) {
+        if (!rtn && prop in obj) {
           return obj[prop];
         }
       } else {
@@ -776,9 +776,21 @@ var CP = {
       return rtn;
     },
     set: function set(obj, prop, val) {
-      if (Array.isArray(obj) && !/^\d+$/.test(prop)) {
+      if (Array.isArray(obj) && !/^\d+$/.test(prop) && !(prop in obj)) {
+        if (babelHelpers.typeof(val) !== 'object') {
+          return false;
+        }
+
         val.name = prop;
-        obj.push(val);
+        var index = obj.findIndex(function (item) {
+          return babelHelpers.typeof(item) === 'object' && item.hasOwnProperty('name') && item.name === prop;
+        });
+
+        if (index < 0) {
+          obj.push(val);
+        } else {
+          obj[index] = val;
+        }
       } else {
         obj[prop] = val;
       }

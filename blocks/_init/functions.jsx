@@ -454,7 +454,7 @@
 			var rtn;
 			if(Array.isArray(obj) && !(/^\d+$/.test(prop))){
 				rtn=obj.find((item)=>(typeof item === 'object') && item.hasOwnProperty('name') && item.name===prop);
-				if(!rtn && Array.prototype.hasOwnProperty(prop)){return obj[prop];}
+				if(!rtn && prop in obj){return obj[prop];}
 			}
 			else{
 				rtn=obj[prop];
@@ -463,9 +463,12 @@
 			return rtn;
 		},
 		set:(obj,prop,val)=>{
-			if(Array.isArray(obj) && !(/^\d+$/.test(prop))){
+			if(Array.isArray(obj) && !(/^\d+$/.test(prop)) && !(prop in obj)){
+				if(typeof val !== 'object'){return false;}
 				val.name=prop;
-				obj.push(val);
+				const index=obj.findIndex((item)=>(typeof item === 'object') && item.hasOwnProperty('name') && item.name===prop);
+				if(index<0){obj.push(val);}
+				else{obj[index]=val;}
 			}
 			else{
 				obj[prop]=val;
