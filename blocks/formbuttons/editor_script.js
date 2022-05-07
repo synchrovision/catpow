@@ -9,6 +9,9 @@ registerBlockType('catpow/formbuttons', {
         className = _ref.className,
         setAttributes = _ref.setAttributes,
         isSelected = _ref.isSelected;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var _attributes$items = attributes.items,
         items = _attributes$items === void 0 ? [] : _attributes$items,
         _attributes$classes = attributes.classes,
@@ -18,31 +21,43 @@ registerBlockType('catpow/formbuttons', {
     var classArray = _.uniq((className + ' ' + classes).split(' '));
 
     var classNameArray = className.split(' ');
-    var selectiveClasses = [{
-      label: 'サイズ',
-      filter: 'size',
-      values: {
-        l: '大',
-        m: '中',
-        s: '小',
-        ss: '極小'
-      }
-    }, {
-      label: 'インライン',
-      values: 'i'
-    }];
-    var itemClasses = ['color', {
-      type: 'gridbuttons',
-      label: '属性',
-      filter: 'rank',
-      values: ['default', 'primary', 'secondary', 'negative', 'danger', 'secure']
-    }, {
-      label: 'アイコン',
-      values: 'hasIcon',
-      sub: [{
-        input: 'icon'
-      }]
-    }, 'event'];
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = [{
+        name: 'size',
+        label: 'サイズ',
+        filter: 'size',
+        values: {
+          l: '大',
+          m: '中',
+          s: '小',
+          ss: '極小'
+        }
+      }, {
+        name: 'inline',
+        label: 'インライン',
+        values: 'i'
+      }];
+      wp.hooks.applyFilters('catpow.blocks.formbuttons.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
+    var selectiveItemClasses = useMemo(function () {
+      var selectiveItemClasses = ['color', {
+        name: 'rank',
+        type: 'gridbuttons',
+        label: '属性',
+        filter: 'rank',
+        values: ['default', 'primary', 'secondary', 'negative', 'danger', 'secure']
+      }, {
+        name: 'icon',
+        label: 'アイコン',
+        values: 'hasIcon',
+        sub: [{
+          input: 'icon'
+        }]
+      }, 'event'];
+      wp.hooks.applyFilters('catpow.blocks.formbuttons.selectiveItemClasses', CP.finderProxy(selectiveItemClasses));
+      return selectiveItemClasses;
+    }, []);
 
     var saveItems = function saveItems() {
       setAttributes({
@@ -104,7 +119,7 @@ registerBlockType('catpow/formbuttons', {
       attr: attributes,
       items: items,
       index: attributes.currentItemIndex,
-      selectiveClasses: itemClasses,
+      selectiveClasses: selectiveItemClasses,
       filters: CP.filters.buttons || {}
     }), wp.element.createElement(PanelBody, {
       title: "CLASS",

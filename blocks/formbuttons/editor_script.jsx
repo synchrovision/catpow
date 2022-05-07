@@ -5,24 +5,33 @@
 	category: 'catpow',
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {useState,useMemo}=wp.element;
 		const {items=[],classes=''}=attributes;
 		const primaryClass='wp-block-catpow-formbuttons';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
 		
         
-		var selectiveClasses=[
-			{label:'サイズ',filter:'size',values:{l:'大',m:'中',s:'小',ss:'極小'}},
-			{label:'インライン',values:'i'}
-		];
-		const itemClasses=[
-			'color',
-			{type:'gridbuttons',label:'属性',filter:'rank',values:['default','primary','secondary','negative','danger','secure']},
-			{label:'アイコン',values:'hasIcon',sub:[
-				{input:'icon'}
-			]},
-			'event'
-		];
+		const selectiveClasses=useMemo(()=>{
+			var selectiveClasses=[
+				{name:'size',label:'サイズ',filter:'size',values:{l:'大',m:'中',s:'小',ss:'極小'}},
+				{name:'inline',label:'インライン',values:'i'}
+			];
+			wp.hooks.applyFilters('catpow.blocks.formbuttons.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
+		const selectiveItemClasses=useMemo(()=>{
+			const selectiveItemClasses=[
+				'color',
+				{name:'rank',type:'gridbuttons',label:'属性',filter:'rank',values:['default','primary','secondary','negative','danger','secure']},
+				{name:'icon',label:'アイコン',values:'hasIcon',sub:[
+					{input:'icon'}
+				]},
+				'event'
+			];
+			wp.hooks.applyFilters('catpow.blocks.formbuttons.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
+			return selectiveItemClasses;
+		},[]);
 		
 		const saveItems=()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))});
@@ -79,7 +88,7 @@
 					attr={attributes}
 					items={items}
 					index={attributes.currentItemIndex}
-					selectiveClasses={itemClasses}
+					selectiveClasses={selectiveItemClasses}
 					filters={CP.filters.buttons || {}}
 				/>
 				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
