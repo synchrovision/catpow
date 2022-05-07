@@ -19,6 +19,9 @@ registerBlockType('catpow/dialog', {
         className = _ref.className,
         setAttributes = _ref.setAttributes,
         isSelected = _ref.isSelected;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var _attributes$items = attributes.items,
         items = _attributes$items === void 0 ? [] : _attributes$items,
         _attributes$classes = attributes.classes,
@@ -39,40 +42,55 @@ registerBlockType('catpow/dialog', {
 
     var classNameArray = className.split(' ');
     var states = CP.wordsToFlags(classes);
-    var selectiveClasses = [{
-      label: 'テンプレート',
-      values: 'isTemplate',
-      sub: [{
-        input: 'bool',
-        label: 'ループ',
-        key: 'doLoop',
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = [{
+        name: 'template',
+        label: 'テンプレート',
+        values: 'isTemplate',
         sub: [{
-          label: 'content path',
-          input: 'text',
-          key: 'content_path'
-        }, {
-          label: 'query',
-          input: 'textarea',
-          key: 'query'
-        }, {
-          label: 'プレビューループ数',
-          input: 'range',
-          key: 'loopCount',
-          min: 1,
-          max: 16
+          name: 'loop',
+          input: 'bool',
+          label: 'ループ',
+          key: 'doLoop',
+          sub: [{
+            name: 'contentPath',
+            label: 'content path',
+            input: 'text',
+            key: 'content_path'
+          }, {
+            name: 'query',
+            label: 'query',
+            input: 'textarea',
+            key: 'query'
+          }, {
+            name: 'loopCount',
+            label: 'プレビューループ数',
+            input: 'range',
+            key: 'loopCount',
+            min: 1,
+            max: 16
+          }]
         }]
-      }]
-    }];
-    var itemClasses = ['color', {
-      type: 'buttons',
-      label: 'position',
-      values: ['left', 'right']
-    }, {
-      type: 'gridbuttons',
-      label: 'type',
-      filter: 'type',
-      values: ['say', 'shout', 'think', 'whisper']
-    }];
+      }];
+      wp.hooks.applyFilters('catpow.blocks.dialog.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
+    var selectiveItemClasses = useMemo(function () {
+      var selectiveItemClasses = ['color', {
+        name: 'position',
+        type: 'buttons',
+        label: 'position',
+        values: ['left', 'right']
+      }, {
+        name: 'type',
+        type: 'gridbuttons',
+        label: 'type',
+        filter: 'type',
+        values: ['say', 'shout', 'think', 'whisper']
+      }];
+      wp.hooks.applyFilters('catpow.blocks.dialog.selectiveItemClasses', CP.finderProxy(selectiveItemClasses));
+      return selectiveItemClasses;
+    }, []);
     var itemsCopy = items.map(function (obj) {
       return jQuery.extend(true, {}, obj);
     });
@@ -166,7 +184,7 @@ registerBlockType('catpow/dialog', {
       attr: attributes,
       items: itemsCopy,
       index: attributes.currentItemIndex,
-      selectiveClasses: itemClasses,
+      selectiveClasses: selectiveItemClasses,
       filters: CP.filters.dialog || {}
     }), wp.element.createElement(CP.ItemControlInfoPanel, null)), wp.element.createElement(Fragment, null, EditMode ? wp.element.createElement("div", {
       className: "alt_content"
