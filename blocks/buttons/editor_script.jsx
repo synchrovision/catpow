@@ -10,6 +10,7 @@
 	category: 'catpow',
 	example:CP.example,
 	edit(props){
+		const {useState,useMemo}=wp.element;
 		const {attributes,className,setAttributes,isSelected}=props;
 		const {items=[],classes,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-buttons';
@@ -18,29 +19,39 @@
 		
 		const states=CP.wordsToFlags(classes);
         
-		var selectiveClasses=[
-			{type:'buttons',label:'サイズ',filter:'size',values:{l:'大',m:'中',s:'小',ss:'極小'}},
-			{label:'インライン',values:'i'},
-			{
-				label:'テンプレート',
-				values:'isTemplate',
-				sub:[
-					{input:'bool',label:'ループ',key:'doLoop',sub:[
-						{label:'content path',input:'text',key:'content_path'},
-						{label:'query',input:'textarea',key:'query'},
-						{label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
-					]}
-				]
-			}
-		];
-		const itemClasses=[
-			'color',
-			{type:'gridbuttons',label:'属性',filter:'rank',values:['default','primary','secondary','negative','danger','secure']},
-			{label:'アイコン',values:'hasIcon',sub:[
-				{input:'icon'}
-			]},
-			'event'
-		];
+		const selectiveClasses=useMemo(()=>{
+			const selectiveClasses=[
+				{name:'size',type:'buttons',label:'サイズ',filter:'size',values:{l:'大',m:'中',s:'小',ss:'極小'}},
+				{name:'inline',label:'インライン',values:'i'},
+				{
+					name:'template',
+					label:'テンプレート',
+					values:'isTemplate',
+					sub:[
+						{input:'bool',label:'ループ',key:'doLoop',sub:[
+							{label:'content path',input:'text',key:'content_path'},
+							{label:'query',input:'textarea',key:'query'},
+							{label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
+						]}
+					]
+				}
+			];
+			wp.hooks.applyFilters('catpow.blocks.buttons.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
+		
+		const selectiveItemClasses=useMemo(()=>{
+			const selectiveItemClasses=[
+				'color',
+				{name:'rank',type:'gridbuttons',label:'属性',filter:'rank',values:['default','primary','secondary','negative','danger','secure']},
+				{name:'icon',label:'アイコン',values:'hasIcon',sub:[
+					{input:'icon'}
+				]},
+				'event'
+			];
+			wp.hooks.applyFilters('catpow.blocks.buttons.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
+			return selectiveItemClasses;
+		},[]);
 		
 		const saveItems=()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))});
@@ -115,7 +126,7 @@
 						attr={attributes}
 						items={items}
 						index={attributes.currentItemIndex}
-						selectiveClasses={itemClasses}
+						selectiveClasses={selectiveItemClasses}
 						filters={CP.filters.buttons || {}}
 					/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>

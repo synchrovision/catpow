@@ -15,6 +15,9 @@ registerBlockType('catpow/buttons', {
   category: 'catpow',
   example: CP.example,
   edit: function edit(props) {
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var attributes = props.attributes,
         className = props.className,
         setAttributes = props.setAttributes,
@@ -34,55 +37,68 @@ registerBlockType('catpow/buttons', {
 
     var classNameArray = className.split(' ');
     var states = CP.wordsToFlags(classes);
-    var selectiveClasses = [{
-      type: 'buttons',
-      label: 'サイズ',
-      filter: 'size',
-      values: {
-        l: '大',
-        m: '中',
-        s: '小',
-        ss: '極小'
-      }
-    }, {
-      label: 'インライン',
-      values: 'i'
-    }, {
-      label: 'テンプレート',
-      values: 'isTemplate',
-      sub: [{
-        input: 'bool',
-        label: 'ループ',
-        key: 'doLoop',
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = [{
+        name: 'size',
+        type: 'buttons',
+        label: 'サイズ',
+        filter: 'size',
+        values: {
+          l: '大',
+          m: '中',
+          s: '小',
+          ss: '極小'
+        }
+      }, {
+        name: 'inline',
+        label: 'インライン',
+        values: 'i'
+      }, {
+        name: 'template',
+        label: 'テンプレート',
+        values: 'isTemplate',
         sub: [{
-          label: 'content path',
-          input: 'text',
-          key: 'content_path'
-        }, {
-          label: 'query',
-          input: 'textarea',
-          key: 'query'
-        }, {
-          label: 'プレビューループ数',
-          input: 'range',
-          key: 'loopCount',
-          min: 1,
-          max: 16
+          input: 'bool',
+          label: 'ループ',
+          key: 'doLoop',
+          sub: [{
+            label: 'content path',
+            input: 'text',
+            key: 'content_path'
+          }, {
+            label: 'query',
+            input: 'textarea',
+            key: 'query'
+          }, {
+            label: 'プレビューループ数',
+            input: 'range',
+            key: 'loopCount',
+            min: 1,
+            max: 16
+          }]
         }]
-      }]
-    }];
-    var itemClasses = ['color', {
-      type: 'gridbuttons',
-      label: '属性',
-      filter: 'rank',
-      values: ['default', 'primary', 'secondary', 'negative', 'danger', 'secure']
-    }, {
-      label: 'アイコン',
-      values: 'hasIcon',
-      sub: [{
-        input: 'icon'
-      }]
-    }, 'event'];
+      }];
+      wp.hooks.applyFilters('catpow.blocks.buttons.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
+    var selectiveItemClasses = useMemo(function () {
+      var selectiveItemClasses = ['color', {
+        name: 'rank',
+        type: 'gridbuttons',
+        label: '属性',
+        filter: 'rank',
+        values: ['default', 'primary', 'secondary', 'negative', 'danger', 'secure']
+      }, {
+        name: 'icon',
+        label: 'アイコン',
+        values: 'hasIcon',
+        sub: [{
+          input: 'icon'
+        }]
+      }, 'event'];
+      wp.hooks.applyFilters('catpow.blocks.buttons.selectiveItemClasses', CP.finderProxy(selectiveItemClasses));
+      return selectiveItemClasses;
+    }, []);
 
     var saveItems = function saveItems() {
       setAttributes({
@@ -156,7 +172,7 @@ registerBlockType('catpow/buttons', {
       attr: attributes,
       items: items,
       index: attributes.currentItemIndex,
-      selectiveClasses: itemClasses,
+      selectiveClasses: selectiveItemClasses,
       filters: CP.filters.buttons || {}
     }), wp.element.createElement(PanelBody, {
       title: "CLASS",
