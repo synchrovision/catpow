@@ -451,6 +451,8 @@
 	finderProxy:(obj)=>new Proxy(obj,CP.finderProxyHandler),
 	finderProxyHandler:{
 		get:(obj,prop)=>{
+			if(prop === 'isFinderProxy'){return true;}
+			if(prop === 'finderProxyTarget'){return obj;}
 			var rtn;
 			if(Array.isArray(obj) && !(/^\d+$/.test(prop))){
 				rtn=obj.find((item)=>(typeof item === 'object') && item.hasOwnProperty('name') && item.name===prop);
@@ -463,6 +465,7 @@
 			return rtn;
 		},
 		set:(obj,prop,val)=>{
+			if(typeof val === 'object' && val.isFinderProxy){val=val.finderProxyTarget;}
 			if(Array.isArray(obj) && !(/^\d+$/.test(prop)) && !(prop in obj)){
 				if(typeof val !== 'object'){return false;}
 				val.name=prop;

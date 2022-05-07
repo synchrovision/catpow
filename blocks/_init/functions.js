@@ -755,6 +755,14 @@ var CP = {
   },
   finderProxyHandler: {
     get: function get(obj, prop) {
+      if (prop === 'isFinderProxy') {
+        return true;
+      }
+
+      if (prop === 'finderProxyTarget') {
+        return obj;
+      }
+
       var rtn;
 
       if (Array.isArray(obj) && !/^\d+$/.test(prop)) {
@@ -776,6 +784,10 @@ var CP = {
       return rtn;
     },
     set: function set(obj, prop, val) {
+      if (babelHelpers.typeof(val) === 'object' && val.isFinderProxy) {
+        val = val.finderProxyTarget;
+      }
+
       if (Array.isArray(obj) && !/^\d+$/.test(prop) && !(prop in obj)) {
         if (babelHelpers.typeof(val) !== 'object') {
           return false;
