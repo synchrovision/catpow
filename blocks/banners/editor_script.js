@@ -29,6 +29,9 @@ registerBlockType('catpow/banners', {
         className = _ref.className,
         setAttributes = _ref.setAttributes,
         isSelected = _ref.isSelected;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var _attributes$items = attributes.items,
         items = _attributes$items === void 0 ? [] : _attributes$items,
         classes = attributes.classes,
@@ -41,27 +44,39 @@ registerBlockType('catpow/banners', {
         AltMode = _attributes$AltMode === void 0 ? false : _attributes$AltMode;
     var states = CP.wordsToFlags(classes);
     var imageKeys = CP.config.banners.imageKeys;
-    var selectiveClasses = [{
-      label: 'サイズ',
-      type: 'buttons',
-      values: ['small', 'medium', 'large']
-    }, {
-      label: 'タイトル',
-      values: 'hasTitle'
-    }, CP.selectiveClassesPreset.isTemplate];
-    var selectiveItemClasses = [{
-      input: 'image',
-      label: '画像',
-      keys: imageKeys.image
-    }, {
-      input: 'text',
-      label: 'alt',
-      key: 'alt'
-    }, {
-      input: 'text',
-      label: 'target',
-      key: 'target'
-    }, 'event'];
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = [{
+        label: 'サイズ',
+        type: 'buttons',
+        values: ['small', 'medium', 'large']
+      }, {
+        label: 'タイトル',
+        values: 'hasTitle'
+      }, CP.selectiveClassesPreset.isTemplate];
+      wp.hooks.applyFilters('catpow.blocks.banners.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
+    var selectiveItemClasses = useMemo(function () {
+      var imageKeys = CP.config.banners.imageKeys;
+      var selectiveItemClasses = [{
+        name: 'image',
+        input: 'image',
+        label: '画像',
+        keys: imageKeys.image
+      }, {
+        name: 'alt',
+        input: 'text',
+        label: 'alt',
+        key: 'alt'
+      }, {
+        name: 'target',
+        input: 'text',
+        label: 'target',
+        key: 'target'
+      }, 'event'];
+      wp.hooks.applyFilters('catpow.blocks.banners.selectiveItemClasses', CP.finderProxy(selectiveItemClasses));
+      return selectiveItemClasses;
+    }, []);
     var itemTemplateSelectiveClasses = [{
       input: 'text',
       label: '画像',
