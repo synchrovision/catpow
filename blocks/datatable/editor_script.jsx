@@ -48,6 +48,7 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {useState,useMemo}=wp.element;
 		const {classes,rows=[],doLoop,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-datatable';
 		var classArray=_.uniq((className+' '+classes).split(' '));
@@ -76,14 +77,18 @@
 			{label:'ヘッダ行',values:'hasHeaderRow'},
 			{label:'ヘッダ列',values:'hasHeaderColumn'},
 		];
-		var selectiveClasses=[
-			{label:'タイプ',filter:'type',values:['spec','sheet','plan']},
-			'color',
-			{input:'bool',label:'ループ',key:'doLoop',sub:[
-				{label:'content path',input:'text',key:'content_path'},
-				{label:'query',input:'textarea',key:'query'}
-			]}
-		];
+		const selectiveClasses=useMemo(()=>{
+			const selectiveClasses=[
+				{name:'type',label:'タイプ',filter:'type',values:['spec','sheet','plan']},
+				'color',
+				{name:'loop',input:'bool',label:'ループ',key:'doLoop',sub:[
+					{name:'contentPath',label:'content path',input:'text',key:'content_path'},
+					{name:'query',label:'query',input:'textarea',key:'query'}
+				]}
+			];
+			wp.hooks.applyFilters('catpow.blocks.datatable.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		
 		
 		const saveItems=()=>{

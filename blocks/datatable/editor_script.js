@@ -62,6 +62,9 @@ registerBlockType('catpow/datatable', {
         className = _ref.className,
         setAttributes = _ref.setAttributes,
         isSelected = _ref.isSelected;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var classes = attributes.classes,
         _attributes$rows = attributes.rows,
         rows = _attributes$rows === void 0 ? [] : _attributes$rows,
@@ -107,24 +110,32 @@ registerBlockType('catpow/datatable', {
       label: 'ヘッダ列',
       values: 'hasHeaderColumn'
     }];
-    var selectiveClasses = [{
-      label: 'タイプ',
-      filter: 'type',
-      values: ['spec', 'sheet', 'plan']
-    }, 'color', {
-      input: 'bool',
-      label: 'ループ',
-      key: 'doLoop',
-      sub: [{
-        label: 'content path',
-        input: 'text',
-        key: 'content_path'
-      }, {
-        label: 'query',
-        input: 'textarea',
-        key: 'query'
-      }]
-    }];
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = [{
+        name: 'type',
+        label: 'タイプ',
+        filter: 'type',
+        values: ['spec', 'sheet', 'plan']
+      }, 'color', {
+        name: 'loop',
+        input: 'bool',
+        label: 'ループ',
+        key: 'doLoop',
+        sub: [{
+          name: 'contentPath',
+          label: 'content path',
+          input: 'text',
+          key: 'content_path'
+        }, {
+          name: 'query',
+          label: 'query',
+          input: 'textarea',
+          key: 'query'
+        }]
+      }];
+      wp.hooks.applyFilters('catpow.blocks.datatable.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
 
     var saveItems = function saveItems() {
       setAttributes({
