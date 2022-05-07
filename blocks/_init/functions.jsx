@@ -1603,10 +1603,11 @@
 			else if(prm.css){
 				const {device='pc'}=prm;
 				const media=CP.getMediaQueryKeyForDevice(device);
+				const sel=(typeof sel === 'function')?prm.sel(props)?prm.sel;
 				styleDatas[prm.css]=styleDatas[prm.css] || {};
 				styleDatas[prm.css][media]=styleDatas[prm.css][media] || {};
-				styleDatas[prm.css][media][prm.sel]=styleDatas[prm.css][media][prm.sel] || {};
-				const tgt=styleDatas[prm.css][media][prm.sel];
+				styleDatas[prm.css][media][sel]=styleDatas[prm.css][media][sel] || {};
+				const tgt=styleDatas[prm.css][media][sel];
 				if(prm.input){
 					switch(prm.input){
 						case 'border':
@@ -1659,9 +1660,9 @@
 											const {device,slice,width,repeat}=image.conf;
 											const media=CP.getMediaQueryKeyForDevice(device);
 											styleDatas[prm.css][media] = styleDatas[prm.css][media] || {};
-											styleDatas[prm.css][media][prm.sel] = styleDatas[prm.css][media][prm.sel] || {};
-											styleDatas[prm.css][media][prm.sel]['border-style']='solid';
-											styleDatas[prm.css][media][prm.sel]['border-image']='url('+image.url+') fill '+slice+' / '+width+' '+repeat;
+											styleDatas[prm.css][media][sel] = styleDatas[prm.css][media][sel] || {};
+											styleDatas[prm.css][media][sel]['border-style']='solid';
+											styleDatas[prm.css][media][sel]['border-image']='url('+image.url+') fill '+slice+' / '+width+' '+repeat;
 										});
 										saveCss(prm.css);
 									}}
