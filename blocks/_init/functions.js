@@ -812,7 +812,7 @@ var CP = {
     deleteProperty: function deleteProperty(obj, prop) {
       if (Array.isArray(obj) && !/^\d+$/.test(prop)) {
         prop = obj.findIndex(function (item) {
-          return babelHelpers.typeof(item) === 'object' && item.hasOwnProperty('name') && item.name === prop;
+          return item === prop || babelHelpers.typeof(item) === 'object' && item.hasOwnProperty('name') && item.name === prop;
         });
 
         if (prop < 0) {

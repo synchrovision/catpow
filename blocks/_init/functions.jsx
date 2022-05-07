@@ -480,7 +480,7 @@
 		},
 		deleteProperty:(obj,prop)=>{
 			if(Array.isArray(obj) && !(/^\d+$/.test(prop))){
-				prop=obj.findIndex((item)=>(typeof item === 'object') && item.hasOwnProperty('name') && item.name===prop);
+				prop=obj.findIndex((item)=>item === prop || (typeof item === 'object') && item.hasOwnProperty('name') && item.name===prop);
 				if(prop<0){return;}
 			}
 			delete obj[prop];
