@@ -9,6 +9,9 @@ registerBlockType('catpow/pricelist', {
         className = _ref.className,
         setAttributes = _ref.setAttributes,
         isSelected = _ref.isSelected;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var _attributes$items = attributes.items,
         items = _attributes$items === void 0 ? [] : _attributes$items,
         classes = attributes.classes,
@@ -21,47 +24,64 @@ registerBlockType('catpow/pricelist', {
         AltMode = _attributes$AltMode === void 0 ? false : _attributes$AltMode;
     var primaryClass = 'wp-block-catpow-pricelist';
     var states = CP.wordsToFlags(classes);
-    var selectiveClasses = [{
-      label: 'テンプレート',
-      values: 'isTemplate',
-      sub: [{
-        input: 'bool',
-        label: 'ループ',
-        key: 'doLoop',
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = [{
+        name: 'template',
+        label: 'テンプレート',
+        values: 'isTemplate',
         sub: [{
-          label: 'content path',
-          input: 'text',
-          key: 'content_path'
-        }, {
-          label: 'query',
-          input: 'textarea',
-          key: 'query'
-        }, {
-          label: 'プレビューループ数',
-          input: 'range',
-          key: 'loopCount',
-          min: 1,
-          max: 16
+          name: 'loop',
+          input: 'bool',
+          label: 'ループ',
+          key: 'doLoop',
+          sub: [{
+            name: 'contentPath',
+            label: 'content path',
+            input: 'text',
+            key: 'content_path'
+          }, {
+            name: 'query',
+            label: 'query',
+            input: 'textarea',
+            key: 'query'
+          }, {
+            name: 'loopCount',
+            label: 'プレビューループ数',
+            input: 'range',
+            key: 'loopCount',
+            min: 1,
+            max: 16
+          }]
         }]
-      }]
-    }];
-    var itemSelectiveClasses = [{
-      label: '見出し',
-      values: 'isHeading'
-    }, {
-      label: 'レベル',
-      values: {
-        level1: '1',
-        level2: '2',
-        level3: '3'
-      }
-    }, {
-      label: '画像',
-      values: 'hasImage'
-    }, {
-      label: 'キャプション',
-      values: 'hasCaption'
-    }];
+      }];
+      wp.hooks.applyFilters('catpow.blocks.pricelist.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
+    var selectiveItemClasses = useMemo(function () {
+      var selectiveItemClasses = [{
+        name: 'heading',
+        label: '見出し',
+        values: 'isHeading'
+      }, {
+        name: 'level1',
+        label: 'レベル',
+        values: {
+          level1: '1',
+          level2: '2',
+          level3: '3'
+        }
+      }, {
+        name: 'image',
+        label: '画像',
+        values: 'hasImage'
+      }, {
+        name: 'caption',
+        label: 'キャプション',
+        values: 'hasCaption'
+      }];
+      wp.hooks.applyFilters('catpow.blocks.pricelist.selectiveItemClasses', CP.finderProxy(selectiveItemClasses));
+      return selectiveItemClasses;
+    }, []);
     var rtn = [];
     var imageKeys = {
       image: {
@@ -169,7 +189,7 @@ registerBlockType('catpow/pricelist', {
       attr: attributes,
       items: items,
       index: attributes.currentItemIndex,
-      selectiveClasses: itemSelectiveClasses,
+      selectiveClasses: selectiveItemClasses,
       filters: CP.filters.pricelist || {}
     }), wp.element.createElement(CP.ItemControlInfoPanel, null)), wp.element.createElement(Fragment, null, EditMode ? wp.element.createElement("div", {
       className: "alt_content"
