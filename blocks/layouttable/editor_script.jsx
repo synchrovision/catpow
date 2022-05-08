@@ -77,6 +77,7 @@ registerBlockType('catpow/layouttable',{
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {useState,useMemo}=wp.element;
 		const {classes='',rows}=attributes;
 		const primaryClass='wp-block-catpow-layouttable';
 		
@@ -97,10 +98,14 @@ registerBlockType('catpow/layouttable',{
 			reader.readAsText(attributes.file);
 		}
 		
-		var selectiveClasses=[
-			{label:'タイプ',filter:'type',values:['spec','sheet','plan']},
-			'color'
-		];
+		const selectiveClasses=useMemo(()=>{
+			var selectiveClasses=[
+				{name:'type',label:'タイプ',filter:'type',values:['spec','sheet','plan']},
+				'color'
+			];
+			wp.hooks.applyFilters('catpow.blocks.layouttable.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		
 		var rtn=[];
 		

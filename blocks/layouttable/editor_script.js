@@ -135,6 +135,9 @@ registerBlockType('catpow/layouttable', {
         className = _ref.className,
         setAttributes = _ref.setAttributes,
         isSelected = _ref.isSelected;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var _attributes$classes = attributes.classes,
         classes = _attributes$classes === void 0 ? '' : _attributes$classes,
         rows = attributes.rows;
@@ -165,11 +168,16 @@ registerBlockType('catpow/layouttable', {
       reader.readAsText(attributes.file);
     }
 
-    var selectiveClasses = [{
-      label: 'タイプ',
-      filter: 'type',
-      values: ['spec', 'sheet', 'plan']
-    }, 'color'];
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = [{
+        name: 'type',
+        label: 'タイプ',
+        filter: 'type',
+        values: ['spec', 'sheet', 'plan']
+      }, 'color'];
+      wp.hooks.applyFilters('catpow.blocks.layouttable.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
     var rtn = [];
     var rowLen = rows.length;
     var colLen = 0;
