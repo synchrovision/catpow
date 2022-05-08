@@ -1,4 +1,10 @@
-﻿registerBlockType('catpow/honeycomb',{
+﻿CP.config.honeycomb={
+	imageKeys:{
+		image:{src:"src",items:"items"},
+	}
+};
+
+registerBlockType('catpow/honeycomb',{
 	title: '🐾 honeycomb',
 	description:'六角形のパネルをレイアウトします。',
 	icon:(
@@ -41,6 +47,7 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {useState,useMemo}=wp.element;
         const {id,classes,items=[]}=attributes;
         let {breakpoints,grid}=attributes;
 		
@@ -67,18 +74,26 @@
 		});
 		
 		var states=CP.wordsToFlags(classes);
-		const imageKeys={
-			image:{src:"src",items:"items"},
-		};
-		const selectiveClasses=[];
-		const selectiveItemClasses=[
-			'color',
-			{label:'画像',values:'hasImage',sub:[
-				{input:'image',keys:imageKeys.image}
-			]},
-			{label:'タイトル',values:'hasTitle'},
-			{label:'テキスト',values:'hasText'}
-		];
+		
+		const selectiveClasses=useMemo(()=>{
+			const selectiveClasses=[];
+			wp.hooks.applyFilters('catpow.blocks.honeycomb.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
+		const selectiveItemClasses=useMemo(()=>{
+			const {imageKeys}=CP.config.honeycomb;
+			const selectiveItemClasses=[
+				'color',
+				{name:'image',label:'画像',values:'hasImage',sub:[
+					{input:'image',keys:imageKeys.image}
+				]},
+				{name:'title',label:'タイトル',values:'hasTitle'},
+				{name:'text',label:'テキスト',values:'hasText'}
+			];
+			wp.hooks.applyFilters('catpow.blocks.honeycomb.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
+			return selectiveItemClasses;
+		},[]);
+		
 		
 		var tgtItem=false;
 		
@@ -203,6 +218,14 @@
 					/>
 				</PanelBody>
 				<CP.SelectClassPanel
+					title='クラス'
+					icon='art'
+					set={setAttributes}
+					attr={attributes}
+					selectiveClasses={selectiveClasses}
+					filters={CP.filters.buttons || {}}
+				/>
+				<CP.SelectClassPanel
 					title='アイテム'
 					icon='edit'
 					set={setAttributes}
@@ -245,9 +268,7 @@
 		});
 		
 		var states=CP.wordsToFlags(classes);
-		const imageKeys={
-			image:{src:"src",items:"items"},
-		};
+		const {imageKeys}=CP.config.honeycomb;
 		
 		return (
 			<div

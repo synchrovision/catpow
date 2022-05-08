@@ -1,3 +1,11 @@
+CP.config.honeycomb = {
+  imageKeys: {
+    image: {
+      src: "src",
+      items: "items"
+    }
+  }
+};
 registerBlockType('catpow/honeycomb', {
   title: '🐾 honeycomb',
   description: '六角形のパネルをレイアウトします。',
@@ -85,6 +93,9 @@ registerBlockType('catpow/honeycomb', {
         className = _ref.className,
         setAttributes = _ref.setAttributes,
         isSelected = _ref.isSelected;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var id = attributes.id,
         classes = attributes.classes,
         _attributes$items = attributes.items,
@@ -123,27 +134,33 @@ registerBlockType('catpow/honeycomb', {
       cssDatas[bp] = babelHelpers.defineProperty({}, '#' + id, CP.createGridStyleCodeData(grid[bpIndex]));
     });
     var states = CP.wordsToFlags(classes);
-    var imageKeys = {
-      image: {
-        src: "src",
-        items: "items"
-      }
-    };
-    var selectiveClasses = [];
-    var selectiveItemClasses = ['color', {
-      label: '画像',
-      values: 'hasImage',
-      sub: [{
-        input: 'image',
-        keys: imageKeys.image
-      }]
-    }, {
-      label: 'タイトル',
-      values: 'hasTitle'
-    }, {
-      label: 'テキスト',
-      values: 'hasText'
-    }];
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = [];
+      wp.hooks.applyFilters('catpow.blocks.honeycomb.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
+    var selectiveItemClasses = useMemo(function () {
+      var imageKeys = CP.config.honeycomb.imageKeys;
+      var selectiveItemClasses = ['color', {
+        name: 'image',
+        label: '画像',
+        values: 'hasImage',
+        sub: [{
+          input: 'image',
+          keys: imageKeys.image
+        }]
+      }, {
+        name: 'title',
+        label: 'タイトル',
+        values: 'hasTitle'
+      }, {
+        name: 'text',
+        label: 'テキスト',
+        values: 'hasText'
+      }];
+      wp.hooks.applyFilters('catpow.blocks.honeycomb.selectiveItemClasses', CP.finderProxy(selectiveItemClasses));
+      return selectiveItemClasses;
+    }, []);
     var tgtItem = false;
     var itemHandler = [wp.element.createElement("div", {
       className: "handler move",
@@ -287,6 +304,13 @@ registerBlockType('catpow/honeycomb', {
       },
       value: id
     })), wp.element.createElement(CP.SelectClassPanel, {
+      title: "\u30AF\u30E9\u30B9",
+      icon: "art",
+      set: setAttributes,
+      attr: attributes,
+      selectiveClasses: selectiveClasses,
+      filters: CP.filters.buttons || {}
+    }), wp.element.createElement(CP.SelectClassPanel, {
       title: "\u30A2\u30A4\u30C6\u30E0",
       icon: "edit",
       set: setAttributes,
@@ -328,12 +352,7 @@ registerBlockType('catpow/honeycomb', {
       cssDatas[bp] = babelHelpers.defineProperty({}, '#' + id, CP.createGridStyleCodeData(grid[bpIndex]));
     });
     var states = CP.wordsToFlags(classes);
-    var imageKeys = {
-      image: {
-        src: "src",
-        items: "items"
-      }
-    };
+    var imageKeys = CP.config.honeycomb.imageKeys;
     return wp.element.createElement("div", {
       id: id,
       className: classes,
