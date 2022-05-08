@@ -24,48 +24,61 @@ registerBlockType('catpow/lightbox',{
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {useState,useMemo}=wp.element;
 		const {items=[],classes,boxClasses,blockState,loopCount,doLoop,EditMode=false,AltMode=false,OpenMode=false,currentItemIndex=0}=attributes;
 		const {imageKeys}=CP.config.lightbox;
 		
 		var states=CP.wordsToFlags(classes);
         
-		var selectiveClasses=[
-			{label:'サイズ',values:['small','medium','large']},
-			{label:'サムネール画像',values:'hasHeaderImage'},
-			{label:'タイトル',values:'hasTitle'},
-			{label:'タイトルキャプション',values:'hasTitleCaption'},
-			{label:'画像',values:'hasImage'},
-			{label:'タイトル',values:'hasSubTitle'},
-			{label:'テキスト',values:'hasText'},
-			{label:'ボックスサイズ',values:['small','medium','large'],key:'boxClasses'},
-			{
-				label:'テンプレート',
-				values:'isTemplate',
-				sub:[
-					{input:'bool',label:'ループ',key:'doLoop',sub:[
-						{label:'content path',input:'text',key:'content_path'},
-						{label:'query',input:'textarea',key:'query'},
-						{label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
-					]}
-				]
-			}
-		];
-		const itemSelectiveClasses=[
-			{input:'image',label:'画像',keys:imageKeys.image,cond:states.hasImage,isTemplate:states.isTemplate},
-			{
-				input:'text',
-				label:'画像コード',
-				key:'imageCode',
-				cond:states.hasImage && states.isTemplate
-			},
-			{input:'image',label:'サムネール画像',keys:imageKeys.headerImage,cond:states.hasHeaderImage,isTemplate:states.isTemplate},
-			{
-				input:'text',
-				label:'サムネール画像コード',
-				key:'headerImageCode',
-				cond:states.hasHeaderImage && states.isTemplate
-			}
-		];
+		const selectiveClasses=useMemo(()=>{
+			const selectiveClasses=[
+				{name:'size',label:'サイズ',values:['small','medium','large']},
+				{name:'headerImage',label:'サムネール画像',values:'hasHeaderImage'},
+				{name:'title',label:'タイトル',values:'hasTitle'},
+				{name:'titleCaption',label:'タイトルキャプション',values:'hasTitleCaption'},
+				{name:'image',label:'画像',values:'hasImage'},
+				{name:'subTitle',label:'タイトル',values:'hasSubTitle'},
+				{name:'text',label:'テキスト',values:'hasText'},
+				{name:'boxSize',label:'ボックスサイズ',values:['small','medium','large'],key:'boxClasses'},
+				{
+					name:'template',
+					label:'テンプレート',
+					values:'isTemplate',
+					sub:[
+						{input:'bool',label:'ループ',key:'doLoop',sub:[
+							{label:'content path',input:'text',key:'content_path'},
+							{label:'query',input:'textarea',key:'query'},
+							{label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
+						]}
+					]
+				}
+			];
+			wp.hooks.applyFilters('catpow.blocks.lightbox.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
+		const selectiveItemClasses=useMemo(()=>{
+			const selectiveItemClasses=[
+				{name:'image',input:'image',label:'画像',keys:imageKeys.image,cond:states.hasImage,isTemplate:states.isTemplate},
+				{
+					name:'imageCode',
+					input:'text',
+					label:'画像コード',
+					key:'imageCode',
+					cond:states.hasImage && states.isTemplate
+				},
+				{name:'',input:'image',label:'サムネール画像',keys:imageKeys.headerImage,cond:states.hasHeaderImage,isTemplate:states.isTemplate},
+				{
+					name:'headerImageCode',
+					input:'text',
+					label:'サムネール画像コード',
+					key:'headerImageCode',
+					cond:states.hasHeaderImage && states.isTemplate
+				}
+			];
+			wp.hooks.applyFilters('catpow.blocks.lightbox.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
+			return selectiveItemClasses;
+		},[]);
+		
 		const save=()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))});
 		};
@@ -159,7 +172,7 @@ registerBlockType('catpow/lightbox',{
 						attr={attributes}
 						items={items}
 						index={attributes.currentItemIndex}
-						selectiveClasses={itemSelectiveClasses}
+						selectiveClasses={selectiveItemClasses}
 						filters={CP.filters.lightbox || {}}
 					/>
 					<CP.ItemControlInfoPanel/>
