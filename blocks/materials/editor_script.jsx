@@ -5,29 +5,39 @@
 	category: 'catpow',
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {useState,useMemo}=wp.element;
 		const {items=[],classes,loopParam,loopCount,doLoop,EditMode=false,AltMode=false,currentItemIndex}=attributes;
 		const primaryClass='wp-block-catpow-materials';
 		
 		var states=CP.wordsToFlags(classes);
 		
         
-		var selectiveClasses=[
-			{
-				label:'テンプレート',
-				values:'isTemplate',
-				sub:[
-					{input:'bool',label:'ループ',key:'doLoop',sub:[
-						{label:'content path',input:'text',key:'content_path'},
-						{label:'query',input:'textarea',key:'query'},
-						{label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
-					]}
-				]
-			}
-		];
-		const itemSelectiveClasses=[
-			'color',
-			{label:'ラベル',values:'hasLabel'}
-		];
+		const selectiveClasses=useMemo(()=>{
+			const selectiveClasses=[
+				{
+					name:'template',
+					label:'テンプレート',
+					values:'isTemplate',
+					sub:[
+						{name:'loop',input:'bool',label:'ループ',key:'doLoop',sub:[
+							{name:'contentPath',label:'content path',input:'text',key:'content_path'},
+							{name:'query',label:'query',input:'textarea',key:'query'},
+							{name:'loopCount',label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
+						]}
+					]
+				}
+			];
+			wp.hooks.applyFilters('catpow.blocks.materials.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
+		const selectiveItemClasses=useMemo(()=>{
+			const selectiveItemClasses=[
+				'color',
+				{name:'label',label:'ラベル',values:'hasLabel'}
+			];
+			wp.hooks.applyFilters('catpow.blocks.materials.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
+			return selectiveItemClasses;
+		},[]);
 		
 		let rtn=[];
 		const imageKeys={
@@ -140,7 +150,7 @@
 						attr={attributes}
 						items={items}
 						index={attributes.currentItemIndex}
-						selectiveClasses={itemSelectiveClasses}
+						selectiveClasses={selectiveItemClasses}
 						filters={CP.filters.materials || {}}
 					/>
 					<CP.ItemControlInfoPanel/>
