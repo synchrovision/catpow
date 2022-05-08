@@ -26,6 +26,7 @@ registerBlockType('catpow/listed',{
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {useState,useMemo}=wp.element;
 		const {items=[],TitleTag,SubTitleTag,classes='',countPrefix,countSuffix,subCountPrefix,subCountSuffix,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-listed';
 		var classArray=_.uniq((className+' '+classes).split(' '));
@@ -34,94 +35,107 @@ registerBlockType('catpow/listed',{
 		var states=CP.wordsToFlags(classes);
 		
         
-		var selectiveClasses=[
-			{input:'buttons',filter:'titleTag',key:'TitleTag',label:'タイトルタグ',values:['h2','h3','h4'],effect:(val)=>{
-				if(/^h\d$/.test(val)){setAttributes({SubTitleTag:'h'+(parseInt(val[1])+1)})}
-			}},
-			{input:'buttons',filter:'subTitleTag',key:'SubTitleTag',label:'サブタイトルタグ',values:['h3','h4','h5'],cond:states.hasSubTitle},
-			{
-				label:'タイプ',
-				filter:'type',
-				type:'gridbuttons',
-				values:{
-					orderd:'連番リスト',
-					news:'お知らせ',
-					index:'目次',
-					menu:'メニュー'
+		const selectiveClasses=useMemo(()=>{
+			const selectiveClasses=[
+				{name:'titleTag',input:'buttons',filter:'titleTag',key:'TitleTag',label:'タイトルタグ',values:['h2','h3','h4'],effect:(val,{set})=>{
+					if(/^h\d$/.test(val)){set({SubTitleTag:'h'+(parseInt(val[1])+1)})}
+				}},
+				{name:'titleTag',input:'buttons',filter:'subTitleTag',key:'SubTitleTag',label:'サブタイトルタグ',values:['h3','h4','h5'],cond:'hasSubTitle'},
+				{
+					name:'type',
+					label:'タイプ',
+					filter:'type',
+					type:'gridbuttons',
+					values:{
+						orderd:'連番リスト',
+						news:'お知らせ',
+						index:'目次',
+						menu:'メニュー'
+					},
+					sub:{
+						orderd:[
+							{name:'image',label:'画像',values:'hasImage'},
+							{name:'countPrefix',input:'text',label:'番号前置テキスト',key:'countPrefix'},
+							{name:'countSuffix',input:'text',label:'番号後置テキスト',key:'countSuffix'},
+							{name:'titleCaption',label:'タイトルキャプション',values:'hasTitleCaption'},
+							{name:'subTitle',label:'サブタイトル',values:'hasSubTitle'},
+							{name:'link',label:'リンク',values:'hasLink'}
+						],
+						news:[
+							{name:'link',label:'リンク',values:'hasLink'}
+						],
+						index:[
+							{name:'level',label:'レベル','values':['level0','level1','level2','level3']}
+						],
+						menu:[
+							{name:'size',type:'buttons',label:'サイズ',values:['small','medium','large']},
+							{name:'image',type:'buttons',label:'画像',values:{noImage:'なし',hasImage:'大',hasHeaderImage:'小'}},
+							{name:'backgroundImage',label:'背景画像',values:'hasBackgroundImage',sub:[
+								{name:'paleBG',label:'薄く',values:'paleBG'}
+							]},
+							{name:'backgroundColor',label:'背景色',values:'hasBackgroundColor'},
+							{name:'inverseText',label:'抜き色文字',values:'inverseText'},
+							{name:'titleCaption',label:'タイトルキャプション',values:'hasTitleCaption'},
+							{name:'text',label:'テキスト',values:'hasText'},
+							{name:'link',label:'リンク',values:'hasLink'}
+						]
+					},
+					bind:{
+						orderd:['hasHeader','hasCounter','hasTitle','hasText'],
+						news:['hasText','hasSubTitle'],
+						index:['hasHeader','hasTitle','hasText'],
+						menu:['hasHeader','hasTitle']
+					},
+					item:{
+						news:[],
+						index:[],
+						menu:['color'],
+						sphere:['color']
+					}
 				},
-				sub:{
-					orderd:[
-						{label:'画像',values:'hasImage'},
-						{input:'text',label:'番号前置テキスト',key:'countPrefix'},
-						{input:'text',label:'番号後置テキスト',key:'countSuffix'},
-						{label:'タイトルキャプション',values:'hasTitleCaption'},
-						{label:'サブタイトル',values:'hasSubTitle'},
-						{label:'リンク',values:'hasLink'}
-					],
-					news:[
-						{label:'リンク',values:'hasLink'}
-					],
-					index:[
-						{label:'レベル','values':['level0','level1','level2','level3']}
-					],
-					menu:[
-						{type:'buttons',label:'サイズ',values:['small','medium','large']},
-						{type:'buttons',label:'画像',values:{noImage:'なし',hasImage:'大',hasHeaderImage:'小'}},
-						{label:'背景画像',values:'hasBackgroundImage',sub:[
-							{label:'薄く',values:'paleBG'}
-						]},
-						{label:'背景色',values:'hasBackgroundColor'},
-						{label:'抜き色文字',values:'inverseText'},
-						{label:'タイトルキャプション',values:'hasTitleCaption'},
-						{label:'テキスト',values:'hasText'},
-						{label:'リンク',values:'hasLink'}
+				{
+					name:'template',
+					label:'テンプレート',
+					values:'isTemplate',
+					sub:[
+						{name:'loop',input:'bool',label:'ループ',key:'doLoop',sub:[
+							{name:'contentPath',label:'content path',input:'text',key:'content_path'},
+							{name:'query',label:'query',input:'textarea',key:'query'},
+							{name:'loopCount',label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
+						]}
 					]
-				},
-                bind:{
-                    orderd:['hasHeader','hasCounter','hasTitle','hasText'],
-					news:['hasText','hasSubTitle'],
-					index:['hasHeader','hasTitle','hasText'],
-					menu:['hasHeader','hasTitle']
-                },
-				item:{
-					news:[],
-					index:[],
-					menu:['color'],
-					sphere:['color']
 				}
-			},
-			{
-				label:'テンプレート',
-				values:'isTemplate',
-				sub:[
-					{input:'bool',label:'ループ',key:'doLoop',sub:[
-						{label:'content path',input:'text',key:'content_path'},
-						{label:'query',input:'textarea',key:'query'},
-						{label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
-					]}
-				]
-			}
-		];
-		const itemTemplateSelectiveClasses=[
-			{
-				input:'text',
-				label:'画像コード',
-				key:'imageCode',
-				cond:states.hasImage
-			},
-			{
-				input:'text',
-				label:'ヘッダ画像コード',
-				key:'headerImageCode',
-				cond:states.hasHeaderImage
-			},
-			{
-				input:'text',
-				label:'サブ画像コード',
-				key:'subImageCode',
-				cond:states.hasSubImage
-			}
-		];
+			];
+			wp.hooks.applyFilters('catpow.blocks.listed.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
+		const selectiveItemTemplateClasses=useMemo(()=>{
+			const selectiveItemTemplateClasses=[
+				{
+					name:'imageCode',
+					input:'text',
+					label:'画像コード',
+					key:'imageCode',
+					cond:'hasImage'
+				},
+				{
+					name:'headerImageCode',
+					input:'text',
+					label:'ヘッダ画像コード',
+					key:'headerImageCode',
+					cond:'hasHeaderImage'
+				},
+				{
+					name:'subImageCode',
+					input:'text',
+					label:'サブ画像コード',
+					key:'subImageCode',
+					cond:'hasSubImage'
+				}
+			];
+			wp.hooks.applyFilters('catpow.blocks.listed.selectiveItemTemplateClasses',CP.finderProxy(selectiveItemTemplateClasses));
+			return selectiveItemTemplateClasses;
+		},[]);
 		
 		const save=()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))});
@@ -307,7 +321,7 @@ registerBlockType('catpow/listed',{
 							attr={attributes}
 							items={items}
 							index={attributes.currentItemIndex}
-							selectiveClasses={itemTemplateSelectiveClasses}
+							selectiveClasses={selectiveItemTemplateClasses}
 							filters={CP.filters.listed || {}}
 						/>
 					}

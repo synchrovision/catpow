@@ -47,6 +47,9 @@ registerBlockType('catpow/listed', {
         className = _ref.className,
         setAttributes = _ref.setAttributes,
         isSelected = _ref.isSelected;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var _attributes$items = attributes.items,
         items = _attributes$items === void 0 ? [] : _attributes$items,
         TitleTag = attributes.TitleTag,
@@ -69,154 +72,192 @@ registerBlockType('catpow/listed', {
 
     var classNameArray = className.split(' ');
     var states = CP.wordsToFlags(classes);
-    var selectiveClasses = [{
-      input: 'buttons',
-      filter: 'titleTag',
-      key: 'TitleTag',
-      label: 'タイトルタグ',
-      values: ['h2', 'h3', 'h4'],
-      effect: function effect(val) {
-        if (/^h\d$/.test(val)) {
-          setAttributes({
-            SubTitleTag: 'h' + (parseInt(val[1]) + 1)
-          });
-        }
-      }
-    }, {
-      input: 'buttons',
-      filter: 'subTitleTag',
-      key: 'SubTitleTag',
-      label: 'サブタイトルタグ',
-      values: ['h3', 'h4', 'h5'],
-      cond: states.hasSubTitle
-    }, {
-      label: 'タイプ',
-      filter: 'type',
-      type: 'gridbuttons',
-      values: {
-        orderd: '連番リスト',
-        news: 'お知らせ',
-        index: '目次',
-        menu: 'メニュー'
-      },
-      sub: {
-        orderd: [{
-          label: '画像',
-          values: 'hasImage'
-        }, {
-          input: 'text',
-          label: '番号前置テキスト',
-          key: 'countPrefix'
-        }, {
-          input: 'text',
-          label: '番号後置テキスト',
-          key: 'countSuffix'
-        }, {
-          label: 'タイトルキャプション',
-          values: 'hasTitleCaption'
-        }, {
-          label: 'サブタイトル',
-          values: 'hasSubTitle'
-        }, {
-          label: 'リンク',
-          values: 'hasLink'
-        }],
-        news: [{
-          label: 'リンク',
-          values: 'hasLink'
-        }],
-        index: [{
-          label: 'レベル',
-          'values': ['level0', 'level1', 'level2', 'level3']
-        }],
-        menu: [{
-          type: 'buttons',
-          label: 'サイズ',
-          values: ['small', 'medium', 'large']
-        }, {
-          type: 'buttons',
-          label: '画像',
-          values: {
-            noImage: 'なし',
-            hasImage: '大',
-            hasHeaderImage: '小'
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = [{
+        name: 'titleTag',
+        input: 'buttons',
+        filter: 'titleTag',
+        key: 'TitleTag',
+        label: 'タイトルタグ',
+        values: ['h2', 'h3', 'h4'],
+        effect: function effect(val, _ref2) {
+          var set = _ref2.set;
+
+          if (/^h\d$/.test(val)) {
+            set({
+              SubTitleTag: 'h' + (parseInt(val[1]) + 1)
+            });
           }
-        }, {
-          label: '背景画像',
-          values: 'hasBackgroundImage',
-          sub: [{
-            label: '薄く',
-            values: 'paleBG'
+        }
+      }, {
+        name: 'titleTag',
+        input: 'buttons',
+        filter: 'subTitleTag',
+        key: 'SubTitleTag',
+        label: 'サブタイトルタグ',
+        values: ['h3', 'h4', 'h5'],
+        cond: 'hasSubTitle'
+      }, {
+        name: 'type',
+        label: 'タイプ',
+        filter: 'type',
+        type: 'gridbuttons',
+        values: {
+          orderd: '連番リスト',
+          news: 'お知らせ',
+          index: '目次',
+          menu: 'メニュー'
+        },
+        sub: {
+          orderd: [{
+            name: 'image',
+            label: '画像',
+            values: 'hasImage'
+          }, {
+            name: 'countPrefix',
+            input: 'text',
+            label: '番号前置テキスト',
+            key: 'countPrefix'
+          }, {
+            name: 'countSuffix',
+            input: 'text',
+            label: '番号後置テキスト',
+            key: 'countSuffix'
+          }, {
+            name: 'titleCaption',
+            label: 'タイトルキャプション',
+            values: 'hasTitleCaption'
+          }, {
+            name: 'subTitle',
+            label: 'サブタイトル',
+            values: 'hasSubTitle'
+          }, {
+            name: 'link',
+            label: 'リンク',
+            values: 'hasLink'
+          }],
+          news: [{
+            name: 'link',
+            label: 'リンク',
+            values: 'hasLink'
+          }],
+          index: [{
+            name: 'level',
+            label: 'レベル',
+            'values': ['level0', 'level1', 'level2', 'level3']
+          }],
+          menu: [{
+            name: 'size',
+            type: 'buttons',
+            label: 'サイズ',
+            values: ['small', 'medium', 'large']
+          }, {
+            name: 'image',
+            type: 'buttons',
+            label: '画像',
+            values: {
+              noImage: 'なし',
+              hasImage: '大',
+              hasHeaderImage: '小'
+            }
+          }, {
+            name: 'backgroundImage',
+            label: '背景画像',
+            values: 'hasBackgroundImage',
+            sub: [{
+              name: 'paleBG',
+              label: '薄く',
+              values: 'paleBG'
+            }]
+          }, {
+            name: 'backgroundColor',
+            label: '背景色',
+            values: 'hasBackgroundColor'
+          }, {
+            name: 'inverseText',
+            label: '抜き色文字',
+            values: 'inverseText'
+          }, {
+            name: 'titleCaption',
+            label: 'タイトルキャプション',
+            values: 'hasTitleCaption'
+          }, {
+            name: 'text',
+            label: 'テキスト',
+            values: 'hasText'
+          }, {
+            name: 'link',
+            label: 'リンク',
+            values: 'hasLink'
           }]
-        }, {
-          label: '背景色',
-          values: 'hasBackgroundColor'
-        }, {
-          label: '抜き色文字',
-          values: 'inverseText'
-        }, {
-          label: 'タイトルキャプション',
-          values: 'hasTitleCaption'
-        }, {
-          label: 'テキスト',
-          values: 'hasText'
-        }, {
-          label: 'リンク',
-          values: 'hasLink'
-        }]
-      },
-      bind: {
-        orderd: ['hasHeader', 'hasCounter', 'hasTitle', 'hasText'],
-        news: ['hasText', 'hasSubTitle'],
-        index: ['hasHeader', 'hasTitle', 'hasText'],
-        menu: ['hasHeader', 'hasTitle']
-      },
-      item: {
-        news: [],
-        index: [],
-        menu: ['color'],
-        sphere: ['color']
-      }
-    }, {
-      label: 'テンプレート',
-      values: 'isTemplate',
-      sub: [{
-        input: 'bool',
-        label: 'ループ',
-        key: 'doLoop',
+        },
+        bind: {
+          orderd: ['hasHeader', 'hasCounter', 'hasTitle', 'hasText'],
+          news: ['hasText', 'hasSubTitle'],
+          index: ['hasHeader', 'hasTitle', 'hasText'],
+          menu: ['hasHeader', 'hasTitle']
+        },
+        item: {
+          news: [],
+          index: [],
+          menu: ['color'],
+          sphere: ['color']
+        }
+      }, {
+        name: 'template',
+        label: 'テンプレート',
+        values: 'isTemplate',
         sub: [{
-          label: 'content path',
-          input: 'text',
-          key: 'content_path'
-        }, {
-          label: 'query',
-          input: 'textarea',
-          key: 'query'
-        }, {
-          label: 'プレビューループ数',
-          input: 'range',
-          key: 'loopCount',
-          min: 1,
-          max: 16
+          name: 'loop',
+          input: 'bool',
+          label: 'ループ',
+          key: 'doLoop',
+          sub: [{
+            name: 'contentPath',
+            label: 'content path',
+            input: 'text',
+            key: 'content_path'
+          }, {
+            name: 'query',
+            label: 'query',
+            input: 'textarea',
+            key: 'query'
+          }, {
+            name: 'loopCount',
+            label: 'プレビューループ数',
+            input: 'range',
+            key: 'loopCount',
+            min: 1,
+            max: 16
+          }]
         }]
-      }]
-    }];
-    var itemTemplateSelectiveClasses = [{
-      input: 'text',
-      label: '画像コード',
-      key: 'imageCode',
-      cond: states.hasImage
-    }, {
-      input: 'text',
-      label: 'ヘッダ画像コード',
-      key: 'headerImageCode',
-      cond: states.hasHeaderImage
-    }, {
-      input: 'text',
-      label: 'サブ画像コード',
-      key: 'subImageCode',
-      cond: states.hasSubImage
-    }];
+      }];
+      wp.hooks.applyFilters('catpow.blocks.listed.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
+    var selectiveItemTemplateClasses = useMemo(function () {
+      var selectiveItemTemplateClasses = [{
+        name: 'imageCode',
+        input: 'text',
+        label: '画像コード',
+        key: 'imageCode',
+        cond: 'hasImage'
+      }, {
+        name: 'headerImageCode',
+        input: 'text',
+        label: 'ヘッダ画像コード',
+        key: 'headerImageCode',
+        cond: 'hasHeaderImage'
+      }, {
+        name: 'subImageCode',
+        input: 'text',
+        label: 'サブ画像コード',
+        key: 'subImageCode',
+        cond: 'hasSubImage'
+      }];
+      wp.hooks.applyFilters('catpow.blocks.listed.selectiveItemTemplateClasses', CP.finderProxy(selectiveItemTemplateClasses));
+      return selectiveItemTemplateClasses;
+    }, []);
 
     var save = function save() {
       setAttributes({
@@ -385,7 +426,7 @@ registerBlockType('catpow/listed', {
       attr: attributes,
       items: items,
       index: attributes.currentItemIndex,
-      selectiveClasses: itemTemplateSelectiveClasses,
+      selectiveClasses: selectiveItemTemplateClasses,
       filters: CP.filters.listed || {}
     }), wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? wp.element.createElement("div", {
       className: "alt_content"
@@ -464,9 +505,9 @@ registerBlockType('catpow/listed', {
       className: classes
     }, rtn)));
   },
-  save: function save(_ref2) {
-    var attributes = _ref2.attributes,
-        className = _ref2.className;
+  save: function save(_ref3) {
+    var attributes = _ref3.attributes,
+        className = _ref3.className;
     var _attributes$items2 = attributes.items,
         items = _attributes$items2 === void 0 ? [] : _attributes$items2,
         TitleTag = attributes.TitleTag,
@@ -564,9 +605,9 @@ registerBlockType('catpow/listed', {
     }, rtn), doLoop && wp.element.createElement("onEmpty", null, wp.element.createElement(InnerBlocks.Content, null)));
   },
   deprecated: [{
-    save: function save(_ref3) {
-      var attributes = _ref3.attributes,
-          className = _ref3.className;
+    save: function save(_ref4) {
+      var attributes = _ref4.attributes,
+          className = _ref4.className;
       var _attributes$items3 = attributes.items,
           items = _attributes$items3 === void 0 ? [] : _attributes$items3,
           _attributes$classes3 = attributes.classes,
