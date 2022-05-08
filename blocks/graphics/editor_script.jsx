@@ -85,6 +85,7 @@ registerBlockType('catpow/graphics',{
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {useState,useMemo}=wp.element;
         const {id,classes='',src,srcset,alt,heights,items=[],device}=attributes;
 		
 		if(!id){
@@ -98,59 +99,69 @@ registerBlockType('catpow/graphics',{
 		const {devices,devicesForCss,imageKeys,getCssDatas,renderCssDatas,parseRectAttr,getRectAttr}=CP.config.graphics;
 		const cssDatas=getCssDatas(attributes,states);
 		
-		const selectiveClasses=[
-			{
-				label:'ベース画像',
-				values:'hasBaseImage',
-			 	sub:[
-					{input:'picture',keys:imageKeys.base,devices}
-				]
-			},
-			{label:'高さ',input:'text',key:'heights'}
-		];
-		const selectiveItemClasses=[
-			{label:'タイプ',filter:'type',values:{isImage:'画像',isText:'テキスト'},sub:{
-				isImage:[
-					{label:'タイプ',filter:'imageType',values:['type1','type2','type3']},
-					{input:'text',label:'代替テキスト',key:'alt'},
-					{input:'text',label:'リンク',key:'link'},
-					{input:'picture',label:'画像',keys:imageKeys.image,devices}
-				],
-				isText:[
-					{label:'タイプ',filter:'textType',values:['type1','type2','type3']},
-					'color',
-					{label:'ヌキ文字',values:'inverse'},
-					{label:'見出し',values:'hasTitle'},
-					{label:'リード',values:'hasLead'},
-					{label:'テキスト',values:'hasText'}
-				]
-			}},
-			{label:'フェードイン',values:'fadeIn'},
-			{label:'スライドイン',values:'slideIn',sub:[
-				{type:'radio',filer:'slideIn',label:'方向',values:{
-					slideInLeft:'左',
-					slideInRight:'右',
-					slideInUp:'上',
-					slideInDown:'下',
-					slideInFront:'前',
-					slideInBack:'後'
+		const selectiveClasses=useMemo(()=>{
+			const {devices,devicesForCss,imageKeys,getCssDatas,renderCssDatas,parseRectAttr,getRectAttr}=CP.config.graphics;
+			const selectiveClasses=[
+				{
+					name:'baseImage',
+					label:'ベース画像',
+					values:'hasBaseImage',
+					sub:[
+						{name:'picture',input:'picture',keys:imageKeys.base,devices}
+					]
+				},
+				{name:'height',label:'高さ',input:'text',key:'heights'}
+			];
+			wp.hooks.applyFilters('catpow.blocks.graphics.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
+		const selectiveItemClasses=useMemo(()=>{
+			const {devices,devicesForCss,imageKeys,getCssDatas,renderCssDatas,parseRectAttr,getRectAttr}=CP.config.graphics;
+			const selectiveItemClasses=[
+				{name:'type',label:'タイプ',filter:'type',values:{isImage:'画像',isText:'テキスト'},sub:{
+					isImage:[
+						{name:'imageType',label:'タイプ',filter:'imageType',values:['type1','type2','type3']},
+						{name:'alt',input:'text',label:'代替テキスト',key:'alt'},
+						{name:'link',input:'text',label:'リンク',key:'link'},
+						{name:'image',input:'picture',label:'画像',keys:imageKeys.image,devices}
+					],
+					isText:[
+						{name:'textType',label:'タイプ',filter:'textType',values:['type1','type2','type3']},
+						'color',
+						{name:'inverse',label:'ヌキ文字',values:'inverse'},
+						{name:'title',label:'見出し',values:'hasTitle'},
+						{name:'lead',label:'リード',values:'hasLead'},
+						{name:'text',label:'テキスト',values:'hasText'}
+					]
 				}},
-			]},
-			{label:'回転',filter:'roll',values:'roll',sub:[
-			 	{type:'radio',label:'方向',values:{rollLeft:'左',rollRight:'右'}},
-			 	{type:'radio',label:'速度',values:{rollSlow:'遅い',rollFast:'速い'}},
-			 ]},
-			{label:'ホバー',filter:'hover',values:'hover',sub:[
-				{label:'フェード',values:'hoverFade'},
-				{type:'radio',label:'動き',values:{
-					hoverNoMove:'なし',
-					hoverZoom:'ズーム',
-					hoverLift:'リフト',
-					hoverJump:'ジャンプ',
-				}}
-			]}
-		];
-		
+				{name:'fadeIn',label:'フェードイン',values:'fadeIn'},
+				{name:'slideIn',label:'スライドイン',values:'slideIn',sub:[
+					{name:'direction',type:'radio',filer:'slideIn',label:'方向',values:{
+						slideInLeft:'左',
+						slideInRight:'右',
+						slideInUp:'上',
+						slideInDown:'下',
+						slideInFront:'前',
+						slideInBack:'後'
+					}},
+				]},
+				{name:'roll',label:'回転',filter:'roll',values:'roll',sub:[
+					{name:'direction',type:'radio',label:'方向',values:{rollLeft:'左',rollRight:'右'}},
+					{name:'speed',type:'radio',label:'速度',values:{rollSlow:'遅い',rollFast:'速い'}},
+				 ]},
+				{name:'hover',label:'ホバー',filter:'hover',values:'hover',sub:[
+					{name:'fade',label:'フェード',values:'hoverFade'},
+					{name:'motion',type:'radio',label:'動き',values:{
+						hoverNoMove:'なし',
+						hoverZoom:'ズーム',
+						hoverLift:'リフト',
+						hoverJump:'ジャンプ',
+					}}
+				]}
+			];
+			wp.hooks.applyFilters('catpow.blocks.graphics.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
+			return selectiveItemClasses;
+		},[]);
 		
 		var tgtItem=false;
 		

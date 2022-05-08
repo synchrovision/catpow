@@ -179,6 +179,9 @@ registerBlockType('catpow/graphics', {
         className = _ref.className,
         setAttributes = _ref.setAttributes,
         isSelected = _ref.isSelected;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var id = attributes.id,
         _attributes$classes = attributes.classes,
         classes = _attributes$classes === void 0 ? '' : _attributes$classes,
@@ -208,119 +211,165 @@ registerBlockType('catpow/graphics', {
         parseRectAttr = _CP$config$graphics.parseRectAttr,
         getRectAttr = _CP$config$graphics.getRectAttr;
     var cssDatas = getCssDatas(attributes, states);
-    var selectiveClasses = [{
-      label: 'ベース画像',
-      values: 'hasBaseImage',
-      sub: [{
-        input: 'picture',
-        keys: imageKeys.base,
-        devices: devices
-      }]
-    }, {
-      label: '高さ',
-      input: 'text',
-      key: 'heights'
-    }];
-    var selectiveItemClasses = [{
-      label: 'タイプ',
-      filter: 'type',
-      values: {
-        isImage: '画像',
-        isText: 'テキスト'
-      },
-      sub: {
-        isImage: [{
-          label: 'タイプ',
-          filter: 'imageType',
-          values: ['type1', 'type2', 'type3']
-        }, {
-          input: 'text',
-          label: '代替テキスト',
-          key: 'alt'
-        }, {
-          input: 'text',
-          label: 'リンク',
-          key: 'link'
-        }, {
+    var selectiveClasses = useMemo(function () {
+      var _CP$config$graphics2 = CP.config.graphics,
+          devices = _CP$config$graphics2.devices,
+          devicesForCss = _CP$config$graphics2.devicesForCss,
+          imageKeys = _CP$config$graphics2.imageKeys,
+          getCssDatas = _CP$config$graphics2.getCssDatas,
+          renderCssDatas = _CP$config$graphics2.renderCssDatas,
+          parseRectAttr = _CP$config$graphics2.parseRectAttr,
+          getRectAttr = _CP$config$graphics2.getRectAttr;
+      var selectiveClasses = [{
+        name: 'baseImage',
+        label: 'ベース画像',
+        values: 'hasBaseImage',
+        sub: [{
+          name: 'picture',
           input: 'picture',
-          label: '画像',
-          keys: imageKeys.image,
+          keys: imageKeys.base,
           devices: devices
-        }],
-        isText: [{
-          label: 'タイプ',
-          filter: 'textType',
-          values: ['type1', 'type2', 'type3']
-        }, 'color', {
-          label: 'ヌキ文字',
-          values: 'inverse'
-        }, {
-          label: '見出し',
-          values: 'hasTitle'
-        }, {
-          label: 'リード',
-          values: 'hasLead'
-        }, {
-          label: 'テキスト',
-          values: 'hasText'
         }]
-      }
-    }, {
-      label: 'フェードイン',
-      values: 'fadeIn'
-    }, {
-      label: 'スライドイン',
-      values: 'slideIn',
-      sub: [{
-        type: 'radio',
-        filer: 'slideIn',
-        label: '方向',
+      }, {
+        name: 'height',
+        label: '高さ',
+        input: 'text',
+        key: 'heights'
+      }];
+      wp.hooks.applyFilters('catpow.blocks.graphics.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
+    var selectiveItemClasses = useMemo(function () {
+      var _CP$config$graphics3 = CP.config.graphics,
+          devices = _CP$config$graphics3.devices,
+          devicesForCss = _CP$config$graphics3.devicesForCss,
+          imageKeys = _CP$config$graphics3.imageKeys,
+          getCssDatas = _CP$config$graphics3.getCssDatas,
+          renderCssDatas = _CP$config$graphics3.renderCssDatas,
+          parseRectAttr = _CP$config$graphics3.parseRectAttr,
+          getRectAttr = _CP$config$graphics3.getRectAttr;
+      var selectiveItemClasses = [{
+        name: 'type',
+        label: 'タイプ',
+        filter: 'type',
         values: {
-          slideInLeft: '左',
-          slideInRight: '右',
-          slideInUp: '上',
-          slideInDown: '下',
-          slideInFront: '前',
-          slideInBack: '後'
-        }
-      }]
-    }, {
-      label: '回転',
-      filter: 'roll',
-      values: 'roll',
-      sub: [{
-        type: 'radio',
-        label: '方向',
-        values: {
-          rollLeft: '左',
-          rollRight: '右'
+          isImage: '画像',
+          isText: 'テキスト'
+        },
+        sub: {
+          isImage: [{
+            name: 'imageType',
+            label: 'タイプ',
+            filter: 'imageType',
+            values: ['type1', 'type2', 'type3']
+          }, {
+            name: 'alt',
+            input: 'text',
+            label: '代替テキスト',
+            key: 'alt'
+          }, {
+            name: 'link',
+            input: 'text',
+            label: 'リンク',
+            key: 'link'
+          }, {
+            name: 'image',
+            input: 'picture',
+            label: '画像',
+            keys: imageKeys.image,
+            devices: devices
+          }],
+          isText: [{
+            name: 'textType',
+            label: 'タイプ',
+            filter: 'textType',
+            values: ['type1', 'type2', 'type3']
+          }, 'color', {
+            name: 'inverse',
+            label: 'ヌキ文字',
+            values: 'inverse'
+          }, {
+            name: 'title',
+            label: '見出し',
+            values: 'hasTitle'
+          }, {
+            name: 'lead',
+            label: 'リード',
+            values: 'hasLead'
+          }, {
+            name: 'text',
+            label: 'テキスト',
+            values: 'hasText'
+          }]
         }
       }, {
-        type: 'radio',
-        label: '速度',
-        values: {
-          rollSlow: '遅い',
-          rollFast: '速い'
-        }
-      }]
-    }, {
-      label: 'ホバー',
-      filter: 'hover',
-      values: 'hover',
-      sub: [{
-        label: 'フェード',
-        values: 'hoverFade'
+        name: 'fadeIn',
+        label: 'フェードイン',
+        values: 'fadeIn'
       }, {
-        type: 'radio',
-        label: '動き',
-        values: {
-          hoverNoMove: 'なし',
-          hoverZoom: 'ズーム',
-          hoverLift: 'リフト',
-          hoverJump: 'ジャンプ'
-        }
-      }]
-    }];
+        name: 'slideIn',
+        label: 'スライドイン',
+        values: 'slideIn',
+        sub: [{
+          name: 'direction',
+          type: 'radio',
+          filer: 'slideIn',
+          label: '方向',
+          values: {
+            slideInLeft: '左',
+            slideInRight: '右',
+            slideInUp: '上',
+            slideInDown: '下',
+            slideInFront: '前',
+            slideInBack: '後'
+          }
+        }]
+      }, {
+        name: 'roll',
+        label: '回転',
+        filter: 'roll',
+        values: 'roll',
+        sub: [{
+          name: 'direction',
+          type: 'radio',
+          label: '方向',
+          values: {
+            rollLeft: '左',
+            rollRight: '右'
+          }
+        }, {
+          name: 'speed',
+          type: 'radio',
+          label: '速度',
+          values: {
+            rollSlow: '遅い',
+            rollFast: '速い'
+          }
+        }]
+      }, {
+        name: 'hover',
+        label: 'ホバー',
+        filter: 'hover',
+        values: 'hover',
+        sub: [{
+          name: 'fade',
+          label: 'フェード',
+          values: 'hoverFade'
+        }, {
+          name: 'motion',
+          type: 'radio',
+          label: '動き',
+          values: {
+            hoverNoMove: 'なし',
+            hoverZoom: 'ズーム',
+            hoverLift: 'リフト',
+            hoverJump: 'ジャンプ'
+          }
+        }]
+      }];
+      wp.hooks.applyFilters('catpow.blocks.graphics.selectiveItemClasses', CP.finderProxy(selectiveItemClasses));
+      return selectiveItemClasses;
+    }, []);
     var tgtItem = false;
 
     var save = function save() {
@@ -613,11 +662,11 @@ registerBlockType('catpow/graphics', {
         _attributes$items2 = attributes.items,
         items = _attributes$items2 === void 0 ? [] : _attributes$items2;
     var states = CP.wordsToFlags(classes);
-    var _CP$config$graphics2 = CP.config.graphics,
-        devices = _CP$config$graphics2.devices,
-        imageKeys = _CP$config$graphics2.imageKeys,
-        getCssDatas = _CP$config$graphics2.getCssDatas,
-        renderCssDatas = _CP$config$graphics2.renderCssDatas;
+    var _CP$config$graphics4 = CP.config.graphics,
+        devices = _CP$config$graphics4.devices,
+        imageKeys = _CP$config$graphics4.imageKeys,
+        getCssDatas = _CP$config$graphics4.getCssDatas,
+        renderCssDatas = _CP$config$graphics4.renderCssDatas;
     var cssDatas = getCssDatas(attributes, states);
     return wp.element.createElement("div", {
       id: id,
