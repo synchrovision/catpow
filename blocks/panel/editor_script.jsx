@@ -1,4 +1,10 @@
-﻿registerBlockType('catpow/panel',{
+﻿CP.config.panel={
+	imageKeys:{
+		icon:{src:"iconSrc",alt:"iconAlt",items:"items"},
+		image:{src:"src",alt:"alt",items:"items"}
+	}
+};
+registerBlockType('catpow/panel',{
 	title: '🐾 Panel',
 	description:'大小の矩形パネルをレイアウトします。',
 	icon: 'grid-view',
@@ -35,78 +41,83 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {useState,useMemo}=wp.element;
 		const {classes,items=[]}=attributes;
 		const primaryClass='wp-block-catpow-panel';
 		var classArray=_.uniq((classes).split(' '));
 		
-		const imageKeys={
-			icon:{src:"iconSrc",alt:"iconAlt",items:"items"},
-			image:{src:"src",alt:"alt",items:"items"}
-		};
+		const {imageKeys}=CP.config.panel;
 		
-		var selectiveClasses=[
-			{
-				label:'タイプ',
-				filter:'type',
-				values:{tile:'タイル',menu:'メニュー'},
-				item:{
-					tile:[
-						'color',
-						{label:'白文字',values:'brightText',sub:[
-							{label:'色付き背景',values:'colorBG'}
-						]},
-						{label:'アイコン',values:'hasIcon'},
-						{label:'タイトル',values:'hasTitle'},
-						{label:'文章',values:'hasText'},
-						{label:'画像',values:'hasImage',sub:[
-							{label:'画像を薄く',values:'paleImage'},
-							{label:'画像',input:'image',keys:imageKeys.image,size:'vga'}
-						]},
-						{label:'リンク',values:'hasLink',sub:[
-							{label:'外部リンク',values:'linkExternal'}
-						]},
-						{label:'縦サイズ',values:{rspan1:'1',rspan2:'2',rspan3:'3'}},
-						{label:'横サイズ',values:{cspan1:'1',cspan2:'2',cspan3:'3'}}
-					],
-					menu:[
-						'color',
-						{label:'アイコン',values:'hasIcon'},
-						{label:'タイトル',values:'hasTitle'},
-						{label:'文章',values:'hasText'},
-						{label:'画像',values:'hasImage',sub:[
-							{label:'画像',input:'image',keys:imageKeys.image,size:'vga'}
-						]},
-						{label:'リンク',values:'hasLink',sub:[
-							{label:'外部リンク',values:'linkExternal'}
-						]},
-						{label:'縦サイズ',values:{rspan1:'1',rspan2:'2',rspan3:'3'}},
-						{label:'横サイズ',values:{cspan1:'1',cspan2:'2',cspan3:'3'}}
-					]
+		const selectiveClasses=useMemo(()=>{
+			const selectiveClasses=[
+				{
+					name:'type',
+					label:'タイプ',
+					filter:'type',
+					values:{tile:'タイル',menu:'メニュー'},
+					item:{
+						tile:[
+							'color',
+							{name:'brightText',label:'白文字',values:'brightText',sub:[
+								{name:'colorBG',label:'色付き背景',values:'colorBG'}
+							]},
+							{name:'icon',label:'アイコン',values:'hasIcon'},
+							{name:'title',label:'タイトル',values:'hasTitle'},
+							{name:'text',label:'文章',values:'hasText'},
+							{name:'image',label:'画像',values:'hasImage',sub:[
+								{name:'paleImage',label:'画像を薄く',values:'paleImage'},
+								{name:'image',label:'画像',input:'image',keys:imageKeys.image,size:'vga'}
+							]},
+							{name:'link',label:'リンク',values:'hasLink',sub:[
+								{name:'external',label:'外部リンク',values:'linkExternal'}
+							]},
+							{name:'rowSpan',label:'縦サイズ',values:{rspan1:'1',rspan2:'2',rspan3:'3'}},
+							{name:'colSpan',label:'横サイズ',values:{cspan1:'1',cspan2:'2',cspan3:'3'}}
+						],
+						menu:[
+							'color',
+							{name:'icon',label:'アイコン',values:'hasIcon'},
+							{name:'title',label:'タイトル',values:'hasTitle'},
+							{name:'text',label:'文章',values:'hasText'},
+							{name:'image',label:'画像',values:'hasImage',sub:[
+								{name:'image',label:'画像',input:'image',keys:imageKeys.image,size:'vga'}
+							]},
+							{name:'link',label:'リンク',values:'hasLink',sub:[
+								{name:'external',label:'外部リンク',values:'linkExternal'}
+							]},
+							{name:'rowSpan',label:'縦サイズ',values:{rspan1:'1',rspan2:'2',rspan3:'3'}},
+							{name:'colSpan',label:'横サイズ',values:{cspan1:'1',cspan2:'2',cspan3:'3'}}
+						]
+					},
+					bind:{
+						tile:['panel'],
+						menu:['panel']
+					}
 				},
-				bind:{
-					tile:['panel'],
-					menu:['panel']
+				{
+					name:'size',
+					label:'サイズ',
+					values:{
+						column1:'1/1',
+						column2:'1/2',
+						column3:'1/3',
+						column4:'1/4'
+					}
+				},
+				{
+					name:'columnsCount',
+					label:'カラム数',
+					values:{
+						grid18:'1-2-3-6-9-18',
+						grid24:'1-2-3-4-6-8-12-24',
+						grid27:'1-3-9-27',
+						grid32:'1-2-4-8-16-32',
+					}
 				}
-			},
-			{
-				label:'サイズ',
-				values:{
-					column1:'1/1',
-					column2:'1/2',
-					column3:'1/3',
-					column4:'1/4'
-				}
-			},
-			{
-				label:'カラム数',
-				values:{
-					grid18:'1-2-3-6-9-18',
-					grid24:'1-2-3-4-6-8-12-24',
-					grid27:'1-3-9-27',
-					grid32:'1-2-4-8-16-32',
-				}
-			}
-		];
+			];
+			wp.hooks.applyFilters('catpow.blocks.panel.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		
 		let itemsCopy=items.map((obj)=>jQuery.extend(true,{},obj));
 		
