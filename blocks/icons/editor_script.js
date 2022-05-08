@@ -64,6 +64,9 @@ registerBlockType('catpow/icons', {
         className = _ref.className,
         setAttributes = _ref.setAttributes,
         isSelected = _ref.isSelected;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var _attributes$items = attributes.items,
         items = _attributes$items === void 0 ? [] : _attributes$items,
         classes = attributes.classes,
@@ -74,22 +77,47 @@ registerBlockType('catpow/icons', {
     var classArray = _.uniq((className + ' ' + classes).split(' '));
 
     var classNameArray = className.split(' ');
-    var selectiveClasses = [{
-      label: 'サイズ',
-      filter: 'size',
-      values: ['small', 'medium', 'large']
-    }, {
-      label: '塗り',
-      values: "filled",
-      sub: [{
-        label: '形状',
-        filter: 'shape',
-        values: {
-          circle: "丸",
-          square: "四角"
-        }
-      }]
-    }];
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = [{
+        name: 'size',
+        label: 'サイズ',
+        filter: 'size',
+        values: ['small', 'medium', 'large']
+      }, {
+        name: 'filled',
+        label: '塗り',
+        values: "filled",
+        sub: [{
+          name: 'shape',
+          label: '形状',
+          filter: 'shape',
+          values: {
+            circle: "丸",
+            square: "四角"
+          }
+        }]
+      }];
+      wp.hooks.applyFilters('catpow.blocks.icons.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
+    var selectiveItemClasses = useMemo(function () {
+      var selectiveItemClasses = [{
+        name: 'image',
+        input: 'image',
+        keys: {
+          src: 'src',
+          alt: 'alt'
+        },
+        size: 'thumbnail'
+      }, {
+        name: 'link',
+        input: 'text',
+        key: 'href',
+        label: 'リンク'
+      }, 'color'];
+      wp.hooks.applyFilters('catpow.blocks.icons.selectiveItemClasses', CP.finderProxy(selectiveItemClasses));
+      return selectiveItemClasses;
+    }, []);
     var rtn = [];
     items.map(function (item, index) {
       if (!item.controlClasses) {
@@ -152,18 +180,7 @@ registerBlockType('catpow/icons', {
       attr: attributes,
       items: items,
       index: attributes.currentItemIndex,
-      selectiveClasses: [{
-        input: 'image',
-        keys: {
-          src: 'src',
-          alt: 'alt'
-        },
-        size: 'thumbnail'
-      }, {
-        input: 'text',
-        key: 'href',
-        label: 'リンク'
-      }, 'color']
+      selectiveClasses: selectiveItemClasses
     }), wp.element.createElement(CP.ItemControlInfoPanel, null)), wp.element.createElement("ul", {
       className: attributes.EditMode ? primaryClass + ' edit' : classes
     }, rtn)];

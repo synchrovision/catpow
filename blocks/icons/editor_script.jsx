@@ -39,18 +39,33 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {useState,useMemo}=wp.element;
 		const {items=[],classes,countPrefix,countSuffix}=attributes;
 		const primaryClass='wp-block-catpow-icons';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
 		
         
-		var selectiveClasses=[
-			{label:'サイズ',filter:'size',values:['small','medium','large']},
-			{label:'塗り',values:"filled",sub:[
-				 {label:'形状',filter:'shape',values:{circle:"丸",square:"四角"}},
-			 ]}
-		];
+		const selectiveClasses=useMemo(()=>{
+			var selectiveClasses=[
+				{name:'size',label:'サイズ',filter:'size',values:['small','medium','large']},
+				{name:'filled',label:'塗り',values:"filled",sub:[
+					 {name:'shape',label:'形状',filter:'shape',values:{circle:"丸",square:"四角"}},
+				 ]}
+			];
+			wp.hooks.applyFilters('catpow.blocks.icons.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
+		const selectiveItemClasses=useMemo(()=>{
+			const selectiveItemClasses=[
+				{name:'image',input:'image',keys:{src:'src',alt:'alt'},size:'thumbnail'},
+				{name:'link',input:'text',key:'href',label:'リンク'},
+				'color'
+			];
+			wp.hooks.applyFilters('catpow.blocks.icons.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
+			return selectiveItemClasses;
+		},[]);
+		
 		
 		let rtn=[];
 		
@@ -113,11 +128,7 @@
 					attr={attributes}
 					items={items}
 					index={attributes.currentItemIndex}
-					selectiveClasses={[
-						{input:'image',keys:{src:'src',alt:'alt'},size:'thumbnail'},
-						{input:'text',key:'href',label:'リンク'},
-						'color'
-					]}
+					selectiveClasses={selectiveItemClasses}
 				/>
 				<CP.ItemControlInfoPanel/>
 			</InspectorControls>,
