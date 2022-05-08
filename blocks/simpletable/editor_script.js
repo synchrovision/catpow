@@ -95,34 +95,44 @@ registerBlockType('catpow/simpletable', {
         className = _ref.className,
         setAttributes = _ref.setAttributes,
         isSelected = _ref.isSelected;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var classes = attributes.classes,
         rows = attributes.rows;
-    var selectiveClasses = [{
-      label: 'タイプ',
-      filter: 'type',
-      values: ['spec', 'info', 'history', 'inputs'],
-      item: {
-        spec: [{
-          label: '種別',
-          values: {
-            normal: 'なし',
-            important: '重要',
-            caution: '注意'
-          }
-        }],
-        inputs: [{
-          label: '種別',
-          type: 'buttons',
-          values: {
-            normal: 'なし',
-            required: '必須',
-            recommended: '推奨',
-            optional: '任意',
-            readonly: '固定'
-          }
-        }, 'cond']
-      }
-    }, 'color'];
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = [{
+        name: 'type',
+        label: 'タイプ',
+        filter: 'type',
+        values: ['spec', 'info', 'history', 'inputs'],
+        item: {
+          spec: [{
+            name: 'type',
+            label: '種別',
+            values: {
+              normal: 'なし',
+              important: '重要',
+              caution: '注意'
+            }
+          }],
+          inputs: [{
+            name: 'type',
+            label: '種別',
+            type: 'buttons',
+            values: {
+              normal: 'なし',
+              required: '必須',
+              recommended: '推奨',
+              optional: '任意',
+              readonly: '固定'
+            }
+          }, 'cond']
+        }
+      }, 'color'];
+      wp.hooks.applyFilters('catpow.blocks.simpletable.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
 
     var saveItems = function saveItems() {
       setAttributes({

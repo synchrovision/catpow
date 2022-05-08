@@ -56,35 +56,41 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {useState,useMemo}=wp.element;
 		const {classes,rows}=attributes;
 		
-		var selectiveClasses=[
-			{
-				label:'タイプ',
-				filter:'type',
-				values:['spec','info','history','inputs'],
-				item:{
-					spec:[
-						{label:'種別',values:{
-							normal:'なし',
-							important:'重要',
-							caution:'注意'
-						}}
-					],
-					inputs:[
-						{label:'種別',type:'buttons',values:{
-							normal:'なし',
-							required:'必須',
-							recommended:'推奨',
-							optional:'任意',
-							readonly:'固定'
-						}},
-						'cond'
-					]
-				}
-			},
-			'color'
-		];
+		const selectiveClasses=useMemo(()=>{
+			const selectiveClasses=[
+				{
+					name:'type',
+					label:'タイプ',
+					filter:'type',
+					values:['spec','info','history','inputs'],
+					item:{
+						spec:[
+							{name:'type',label:'種別',values:{
+								normal:'なし',
+								important:'重要',
+								caution:'注意'
+							}}
+						],
+						inputs:[
+							{name:'type',label:'種別',type:'buttons',values:{
+								normal:'なし',
+								required:'必須',
+								recommended:'推奨',
+								optional:'任意',
+								readonly:'固定'
+							}},
+							'cond'
+						]
+					}
+				},
+				'color'
+			];
+			wp.hooks.applyFilters('catpow.blocks.simpletable.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		
 		const saveItems=()=>{
 			setAttributes({rows:JSON.parse(JSON.stringify(rows))});
