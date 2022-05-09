@@ -32,6 +32,7 @@ registerBlockType('catpow/slider',{
 	
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
+		const {useState,useMemo}=wp.element;
 		const {classes='',controlClasses='',config,items,doLoop,EditMode=false,AltMode=false,device}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
@@ -58,84 +59,90 @@ registerBlockType('catpow/slider',{
 			{label:'閉じる操作',values:'closable'}
 		];
 		
-		var selectiveClasses=[
-			{
-				label:'タイプ',values:['visual','story','articles','index'],
-				filter:'type',
-				type:'gridbuttons',
-				sub:{
-					visual:[
-						{label:'見出し',values:'hasTitle',sub:[
-							{label:'サブタイトル',values:'hasSubTitle'},
-							{label:'テキスト',values:'hasText'},
-							{label:'白文字',values:'brightText',sub:[
-								{label:'色付き背景',values:'colorBG'}
-							]}
-						]},
-						{label:'スライド画像',values:'hasSlide'},
-						{label:'イメージ画像',values:'hasImage',sub:[
-							{label:'サムネール',values:'hasThumbnail'}
-						]},
-						{label:'背景画像',values:'hasBackgroundImage',sub:[
-						 	{label:'背景画像を薄く',values:'paleBG'}
-						 ]},
-						{label:'リンク',values:'hasLink'}
-					],
-					story:[
-						{label:'サブタイトル',values:'hasSubTitle'},
-						{label:'白文字',values:'brightText',sub:[
-							{label:'色付き背景',values:'colorBG'}
-						]},
-						{label:'画像',values:'hasImage',sub:[
-							{label:'サムネール',values:'hasThumbnail'}
-						]},
-						{label:'背景画像',values:'hasBackgroundImage',sub:[
-						 	{label:'背景画像を薄く',values:'paleBG'}
-						 ]},
-						{label:'リンク',values:'hasLink'}
-					],
-					articles:[
-						{label:'タイトル',values:'hasTitle'},
-						{label:'テキスト',values:'hasText'},
-						{label:'画像',values:'hasImage'},
-						{label:'リンク',values:'hasLink'}
-					],
-					index:[
-						{label:'サブタイトル',values:'hasSubTitle'},
-						{label:'画像',values:'hasImage'},
-						{label:'リンク',values:'hasLink'}
-					]
+		const selectiveClasses=useMemo(()=>{
+			const {devices,imageKeys,imageSizes}=CP.config.slider;
+			const selectiveClasses=[
+				{
+					name:'type',
+					label:'タイプ',values:['visual','story','articles','index'],
+					filter:'type',
+					type:'gridbuttons',
+					sub:{
+						visual:[
+							{name:'hasTitle',label:'見出し',values:'hasTitle',sub:[
+								{name:'subTitle',label:'サブタイトル',values:'hasSubTitle'},
+								{name:'text',label:'テキスト',values:'hasText'},
+								{name:'brightText',label:'白文字',values:'brightText',sub:[
+									{name:'colorBG',label:'色付き背景',values:'colorBG'}
+								]}
+							]},
+							{name:'slide',label:'スライド画像',values:'hasSlide'},
+							{name:'image',label:'イメージ画像',values:'hasImage',sub:[
+								{name:'thumbnail',label:'サムネール',values:'hasThumbnail'}
+							]},
+							{name:'backgroundImage',label:'背景画像',values:'hasBackgroundImage',sub:[
+								{name:'paleBG',label:'背景画像を薄く',values:'paleBG'}
+							 ]},
+							{name:'link',label:'リンク',values:'hasLink'}
+						],
+						story:[
+							{name:'subTitle',label:'サブタイトル',values:'hasSubTitle'},
+							{name:'brightText',label:'白文字',values:'brightText',sub:[
+								{name:'colorBG',label:'色付き背景',values:'colorBG'}
+							]},
+							{name:'image',label:'画像',values:'hasImage',sub:[
+								{name:'thumbnail',label:'サムネール',values:'hasThumbnail'}
+							]},
+							{name:'backgroundImage',label:'背景画像',values:'hasBackgroundImage',sub:[
+								{name:'paleBG',label:'背景画像を薄く',values:'paleBG'}
+							 ]},
+							{name:'link',label:'リンク',values:'hasLink'}
+						],
+						articles:[
+							{name:'title',label:'タイトル',values:'hasTitle'},
+							{name:'text',label:'テキスト',values:'hasText'},
+							{name:'image',label:'画像',values:'hasImage'},
+							{name:'link',label:'リンク',values:'hasLink'}
+						],
+						index:[
+							{name:'subTitle',label:'サブタイトル',values:'hasSubTitle'},
+							{name:'image',label:'画像',values:'hasImage'},
+							{name:'link',label:'リンク',values:'hasLink'}
+						]
+					},
+					bind:{
+						story:['hasTitle','hasText'],
+						index:['hasTitle','hasText']
+					},
+					item:{
+						visual:[
+							'color',
+							'pattern',
+							{name:'slide',input:'picture',label:'スライド画像',keys:imageKeys.slide,devices,cond:'hasSlide'},
+							{name:'backgroundImage',input:'picture',label:'背景画像',keys:imageKeys.backgroundImage,devices,cond:'hasBackgroundImage'}
+						],
+						story:[
+							'color',
+							'pattern',
+							{name:'backgroundImage',input:'picture',label:'背景画像',keys:imageKeys.backgroundImage,devices,cond:'hasBackgroundImage'}
+						]
+					}
 				},
-				bind:{
-					story:['hasTitle','hasText'],
-					index:['hasTitle','hasText']
-				},
-				item:{
-					visual:[
-						'color',
-						'pattern',
-						{input:'picture',label:'スライド画像',keys:imageKeys.slide,devices,cond:states.hasSlide},
-						{input:'picture',label:'背景画像',keys:imageKeys.backgroundImage,devices,cond:states.hasBackgroundImage}
-					],
-					story:[
-						'color',
-						'pattern',
-						{input:'picture',label:'背景画像',keys:imageKeys.backgroundImage,devices,cond:states.hasBackgroundImage}
+				{
+					label:'テンプレート',
+					values:'isTemplate',
+					sub:[
+						{name:'loop',input:'bool',label:'ループ',key:'doLoop',sub:[
+							{name:'contentPath',label:'content path',input:'text',key:'content_path'},
+							{name:'query',label:'query',input:'textarea',key:'query'},
+							{name:'loopCount',label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
+						]}
 					]
 				}
-			},
-			{
-				label:'テンプレート',
-				values:'isTemplate',
-				sub:[
-					{input:'bool',label:'ループ',key:'doLoop',sub:[
-						{label:'content path',input:'text',key:'content_path'},
-						{label:'query',input:'textarea',key:'query'},
-						{label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
-					]}
-				]
-			}
-		];
+			];
+			wp.hooks.applyFilters('catpow.blocks.slider.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		
 		const save=()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))});
