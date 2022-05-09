@@ -90,6 +90,9 @@ registerBlockType('catpow/sphere', {
         className = _ref.className,
         setAttributes = _ref.setAttributes,
         isSelected = _ref.isSelected;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var _attributes$items = attributes.items,
         items = _attributes$items === void 0 ? [] : _attributes$items,
         _attributes$classes = attributes.classes,
@@ -99,21 +102,34 @@ registerBlockType('catpow/sphere', {
     var primaryClass = 'wp-block-catpow-sphere';
     var states = CP.wordsToFlags(classes);
     var imageKeys = CP.config.sphere.imageKeys;
-    var selectiveClasses = [{
-      type: 'buttons',
-      label: 'サイズ',
-      filter: 'size',
-      values: ['small', 'medium', 'large']
-    }, {
-      label: '画像',
-      values: 'hasSubImage'
-    }, {
-      label: 'タイトル',
-      values: 'hasSubTitle'
-    }, {
-      label: 'テキスト',
-      values: 'hasText'
-    }];
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = [{
+        name: 'size',
+        type: 'buttons',
+        label: 'サイズ',
+        filter: 'size',
+        values: ['small', 'medium', 'large']
+      }, {
+        name: 'image',
+        label: '画像',
+        values: 'hasSubImage'
+      }, {
+        name: 'subTitle',
+        label: 'タイトル',
+        values: 'hasSubTitle'
+      }, {
+        name: 'text',
+        label: 'テキスト',
+        values: 'hasText'
+      }];
+      wp.hooks.applyFilters('catpow.blocks.sphere.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
+    var selectiveItemClasses = useMemo(function () {
+      var selectiveItemClasses = ['color'];
+      wp.hooks.applyFilters('catpow.blocks.sphere.selectiveItemClasses', CP.finderProxy(selectiveItemClasses));
+      return selectiveItemClasses;
+    }, []);
     var rtn = [];
 
     var save = function save() {
@@ -200,7 +216,7 @@ registerBlockType('catpow/sphere', {
       attr: attributes,
       items: items,
       index: attributes.currentItemIndex,
-      selectiveClasses: ['color']
+      selectiveClasses: selectiveItemClasses
     }), wp.element.createElement(CP.ItemControlInfoPanel, null)), wp.element.createElement("ul", {
       className: attributes.EditMode ? primaryClass + ' edit' : classes
     }, rtn)];

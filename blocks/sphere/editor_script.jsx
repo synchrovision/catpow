@@ -51,18 +51,28 @@ registerBlockType('catpow/sphere',{
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {useState,useMemo}=wp.element;
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
 		const primaryClass='wp-block-catpow-sphere';
 		
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.sphere;
         
-		var selectiveClasses=[
-			{type:'buttons',label:'サイズ',filter:'size',values:['small','medium','large']},
-			{label:'画像',values:'hasSubImage'},
-			{label:'タイトル',values:'hasSubTitle'},
-			{label:'テキスト',values:'hasText'}
-		];
+		const selectiveClasses=useMemo(()=>{
+			const selectiveClasses=[
+				{name:'size',type:'buttons',label:'サイズ',filter:'size',values:['small','medium','large']},
+				{name:'image',label:'画像',values:'hasSubImage'},
+				{name:'subTitle',label:'タイトル',values:'hasSubTitle'},
+				{name:'text',label:'テキスト',values:'hasText'}
+			];
+			wp.hooks.applyFilters('catpow.blocks.sphere.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
+		const selectiveItemClasses=useMemo(()=>{
+			const selectiveItemClasses=['color'];
+			wp.hooks.applyFilters('catpow.blocks.sphere.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
+			return selectiveItemClasses;
+		},[]);
 		
 		let rtn=[];
 		const save=()=>{
@@ -151,7 +161,7 @@ registerBlockType('catpow/sphere',{
 					attr={attributes}
 					items={items}
 					index={attributes.currentItemIndex}
-					selectiveClasses={['color']}
+					selectiveClasses={selectiveItemClasses}
 				/>
 				<CP.ItemControlInfoPanel/>
 			</InspectorControls>,
