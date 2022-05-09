@@ -17,6 +17,6 @@ $post_data['post_content']=cp::get_block_code('simpletable',[
 $post_data['post_content'].=cp::get_block_code('formbuttons',[
 	'classes'=>'m',
 	'items'=>[
-		['action'=>'confirm','text'=>__('確認','catpow')]
+		['action'=>'confirm','text'=>__('確認','catpow'),'classes'=>'primary']
 	]
 ]);
