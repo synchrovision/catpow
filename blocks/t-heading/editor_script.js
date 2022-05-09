@@ -54,17 +54,26 @@ registerBlockType('catpow/t-heading', {
         setAttributes = _ref.setAttributes,
         onReplace = _ref.onReplace,
         mergeBlocks = _ref.mergeBlocks;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var classes = attributes.classes,
         title = attributes.title;
     var primaryClass = 'wp-block-catpow-t-heading';
     var states = CP.wordsToFlags(classes);
-    var selectiveClasses = ['color', {
-      label: 'タイプ',
-      values: ['header', 'headline', 'catch']
-    }, {
-      label: 'サイズ',
-      values: ['large', 'medium', 'small']
-    }];
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = ['color', {
+        name: 'type',
+        label: 'タイプ',
+        values: ['header', 'headline', 'catch']
+      }, {
+        name: 'size',
+        label: 'サイズ',
+        values: ['large', 'medium', 'small']
+      }];
+      wp.hooks.applyFilters('catpow.blocks.t-heading.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
     return [wp.element.createElement("table", {
       width: "100%",
       className: classes
