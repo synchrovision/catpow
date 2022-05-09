@@ -34,33 +34,42 @@ registerBlockType('catpow/switcher',{
 		const [newBlocks,setNewBlocks]=useState(false);
 		const {factors,factorFlags,flagValues}=CP.config.switcher;
 		
-		const selectiveClasses=[
-			{
-				label:'ファクター',
-				input:'select',
-				key:'factor',
-				values:factors
-			},
-			{
-				label:'フィールド',
-				input:'text',
-				key:'field',
-				cond:factorFlags[attributes.factor]&flagValues['field']
-			},
-			{
-				label:'比較',
-				input:'buttons',
-				key:'compare',
-				values:['=','IN','BETWEEN'],
-				cond:factorFlags[attributes.factor]&flagValues['compare']
-			},
-			{
-				label:'値',
-				input:'textarea',
-				key:'values',
-				cond:factorFlags[attributes.factor]&flagValues['values']
-			}
-		];
+		const selectiveClasses=useMemo(()=>{
+			const {factors,factorFlags,flagValues}=CP.config.switcher;
+			const selectiveClasses=[
+				{
+					name:'factor',
+					label:'ファクター',
+					input:'select',
+					key:'factor',
+					values:factors
+				},
+				{
+					name:'field',
+					label:'フィールド',
+					input:'text',
+					key:'field',
+					cond:(states,{attr})=>factorFlags[attr.factor]&flagValues['field']
+				},
+				{
+					name:'compare',
+					label:'比較',
+					input:'buttons',
+					key:'compare',
+					values:['=','IN','BETWEEN'],
+					cond:(states,{attr})=>factorFlags[attr.factor]&flagValues['compare']
+				},
+				{
+					name:'values',
+					label:'値',
+					input:'textarea',
+					key:'values',
+					cond:(states,{attr})=>factorFlags[attr.factor]&flagValues['values']
+				}
+			];
+			wp.hooks.applyFilters('catpow.blocks.switcher.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		const values=useMemo(()=>attributes.values.split("\n"),[attributes.values]);
 		useEffect(()=>{
 			const editor=wp.data.dispatch('core/block-editor');

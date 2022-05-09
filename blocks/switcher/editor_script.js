@@ -52,28 +52,49 @@ registerBlockType('catpow/switcher', {
         factors = _CP$config$switcher.factors,
         factorFlags = _CP$config$switcher.factorFlags,
         flagValues = _CP$config$switcher.flagValues;
-    var selectiveClasses = [{
-      label: 'ファクター',
-      input: 'select',
-      key: 'factor',
-      values: factors
-    }, {
-      label: 'フィールド',
-      input: 'text',
-      key: 'field',
-      cond: factorFlags[attributes.factor] & flagValues['field']
-    }, {
-      label: '比較',
-      input: 'buttons',
-      key: 'compare',
-      values: ['=', 'IN', 'BETWEEN'],
-      cond: factorFlags[attributes.factor] & flagValues['compare']
-    }, {
-      label: '値',
-      input: 'textarea',
-      key: 'values',
-      cond: factorFlags[attributes.factor] & flagValues['values']
-    }];
+    var selectiveClasses = useMemo(function () {
+      var _CP$config$switcher2 = CP.config.switcher,
+          factors = _CP$config$switcher2.factors,
+          factorFlags = _CP$config$switcher2.factorFlags,
+          flagValues = _CP$config$switcher2.flagValues;
+      var selectiveClasses = [{
+        name: 'factor',
+        label: 'ファクター',
+        input: 'select',
+        key: 'factor',
+        values: factors
+      }, {
+        name: 'field',
+        label: 'フィールド',
+        input: 'text',
+        key: 'field',
+        cond: function cond(states, _ref) {
+          var attr = _ref.attr;
+          return factorFlags[attr.factor] & flagValues['field'];
+        }
+      }, {
+        name: 'compare',
+        label: '比較',
+        input: 'buttons',
+        key: 'compare',
+        values: ['=', 'IN', 'BETWEEN'],
+        cond: function cond(states, _ref2) {
+          var attr = _ref2.attr;
+          return factorFlags[attr.factor] & flagValues['compare'];
+        }
+      }, {
+        name: 'values',
+        label: '値',
+        input: 'textarea',
+        key: 'values',
+        cond: function cond(states, _ref3) {
+          var attr = _ref3.attr;
+          return factorFlags[attr.factor] & flagValues['values'];
+        }
+      }];
+      wp.hooks.applyFilters('catpow.blocks.switcher.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
     var values = useMemo(function () {
       return attributes.values.split("\n");
     }, [attributes.values]);
@@ -176,10 +197,10 @@ registerBlockType('catpow/switcher', {
       initialOpen: true
     })));
   },
-  save: function save(_ref) {
-    var attributes = _ref.attributes,
-        className = _ref.className,
-        setAttributes = _ref.setAttributes;
+  save: function save(_ref4) {
+    var attributes = _ref4.attributes,
+        className = _ref4.className,
+        setAttributes = _ref4.setAttributes;
     return wp.element.createElement(InnerBlocks.Content, null);
   }
 });
@@ -197,11 +218,11 @@ registerBlockType('catpow/switchercontent', {
       default: 'content'
     }
   },
-  edit: function edit(_ref2) {
-    var attributes = _ref2.attributes,
-        className = _ref2.className,
-        setAttributes = _ref2.setAttributes,
-        clientId = _ref2.clientId;
+  edit: function edit(_ref5) {
+    var attributes = _ref5.attributes,
+        className = _ref5.className,
+        setAttributes = _ref5.setAttributes,
+        clientId = _ref5.clientId;
     var cond = attributes.cond;
     return wp.element.createElement("div", {
       className: 'switcherContent'
@@ -210,10 +231,10 @@ registerBlockType('catpow/switchercontent', {
       templateLock: false
     }));
   },
-  save: function save(_ref3) {
-    var attributes = _ref3.attributes,
-        className = _ref3.className,
-        setAttributes = _ref3.setAttributes;
+  save: function save(_ref6) {
+    var attributes = _ref6.attributes,
+        className = _ref6.className,
+        setAttributes = _ref6.setAttributes;
     var cond = attributes.cond;
     return wp.element.createElement(Fragment, null, wp.element.createElement("switcherContent", {
       cond: cond
