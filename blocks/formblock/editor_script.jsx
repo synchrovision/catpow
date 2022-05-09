@@ -5,10 +5,10 @@
 	category: 'catpow-embed',
 	example:CP.example,
 	edit({attributes,setAttributes,className,isSelected,clientId}){
-        const {content_path,inputs,data_id,values,actions,EditMode=false}=attributes;
-		
+		const {content_path,inputs,data_id,values,actions,EditMode=false}=attributes;
+
 		let postDataSelection=false;
-		
+
 		if(!actions && content_path){
 			const path=content_path.substr(0,content_path.lastIndexOf('/'));
 			wp.apiFetch({path:'cp/v1/'+path+'/actions'}).then((actions)=>{
@@ -16,8 +16,8 @@
 				setAttributes({actions});
 			});
 		}
-		
-        return (
+
+		return (
 			<Fragment>
 				<BlockControls>
 					<Toolbar
@@ -74,8 +74,8 @@
 					</PanelBody>
 				</InspectorControls>
 			</Fragment>
-        );
-    },
+		);
+	},
 
 	save({attributes,className,setAttributes}){
 		return <InnerBlocks.Content/>;
@@ -86,19 +86,19 @@ registerBlockType('catpow/formblockcontent',{
 	title:'🐾 FormBlockContent',
 	icon:'editor-code',
 	category:'catpow',
-    parent:['catpow/formblock'],
+	parent:['catpow/formblock'],
 	attributes:{
 		name:{type:'attribute',label:'名前',selector:'formBlockContent',attribute:'name',default:'edit'},
 		action:{type:'attribute',label:'アクション',selector:'formBlockContent',attribute:'action',default:'{}'}
 	},
 	edit({attributes,className,setAttributes,clientId}){
 		const {name}=attributes;
-		
+
 		const parentClientId=wp.data.select('core/block-editor').getBlockParentsByBlockName(clientId,'catpow/formblock')[0];
 		const parentBlock=wp.data.select('core/block-editor').getBlock(parentClientId);
 		const actions=parentBlock.attributes.actions;
-		
-        return (
+
+		return (
 			<Fragment>
 				<div className={'formBlockContent embedded_content'}>
 					<div class="label">{name}</div>
@@ -123,9 +123,9 @@ registerBlockType('catpow/formblockcontent',{
 						/>
 					}
 				</InspectorControls>
-        	</Fragment>
+			</Fragment>
 		);
-    },
+	},
 	save({attributes,className,setAttributes}){
 		const {name,action}=attributes;
 		return (

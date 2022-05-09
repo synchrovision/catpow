@@ -3,12 +3,12 @@
 	description:'クエリの投稿の情報を表示するためのコンテナです。',
 	icon: 'editor-code',
 	category: 'catpow-functional',
-    parent:['catpow/t-body','catpow/t-box','catpow/t-loop'],
+	parent:['catpow/t-body','catpow/t-box','catpow/t-loop'],
 	example:CP.example,
 	edit({attributes,setAttributes,className}){
-        const {content_path,query,AltMode=false}=attributes;
-		 
-        return (
+		const {content_path,query,AltMode=false}=attributes;
+
+		return (
 			<Fragment>
 				<BlockControls>
 					<Toolbar
@@ -45,8 +45,8 @@
 					</PanelBody>
 				</InspectorControls>
 			</Fragment>
-        );
-    },
+		);
+	},
 
 	save({attributes,className,setAttributes}){
 		return <InnerBlocks.Content/>;
@@ -58,21 +58,21 @@ registerBlockType('catpow/t-loopcontent',{
 	title:'🐾 t-loopContent',
 	icon:'editor-code',
 	category:'catpow',
-    parent:['catpow/t-loop'],
+	parent:['catpow/t-loop'],
 	attributes:{
 		name:{type:'attribute',label:'名前',selector:'t-loopContent',attribute:'name',default:'content'},
 	},
 	edit({attributes,className,setAttributes,clientId}){
 		const {name}=attributes;
-		
+
 		const template=(name=='on_empty')?[['catpow/t-paragraph',{align:'center',content:'Not Found'}]]:[['catpow/t-paragraph']];
-		
-        return (
+
+		return (
 			<div className={'wp-block-catpow-t-loopContent'}>
 				<InnerBlocks template={template} templateLock={false}/>
 			</div>
 		);
-    },
+	},
 	save({attributes,className,setAttributes}){
 		const {name}=attributes;
 		return (

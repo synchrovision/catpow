@@ -27,8 +27,8 @@ registerBlockType('catpow/panes',{
 		const {items=[],classes='',loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
 		var states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.panes;
-		
-        
+
+
 		var selectiveClasses=[
 			{label:'シンボル',values:'hasSymbol'},
 			{
@@ -59,13 +59,13 @@ registerBlockType('catpow/panes',{
 				key:'imageCode',
 				cond:states.isTemplate
 			},
-			
+
 		];
-		
+
 		const save=()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))});
 		};
-		
+
 		let rtn=[];
 
 		items.map((item,index)=>{
@@ -130,15 +130,15 @@ registerBlockType('catpow/panes',{
 				</CP.Item>
 			);
 		});
-		
+
 		if(rtn.length<loopCount){
 			let len=rtn.length;
 			while(rtn.length<loopCount){
 				rtn.push(rtn[rtn.length%len]);
 			}
 		}
-		
-        return (
+
+		return (
 			<Fragment>
 				<CP.SelectModeToolbar
 					set={setAttributes}
@@ -205,13 +205,13 @@ registerBlockType('catpow/panes',{
 					</Fragment>
 				)}
 			</Fragment>
-        );
-    },
+		);
+	},
 	save({attributes,className}){
 		const {items=[],classes='',linkUrl,loopParam,doLoop}=attributes;
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.panes;
-		
+
 		let rtn=[];
 		items.map((item,index)=>{
 			rtn.push(

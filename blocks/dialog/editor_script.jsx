@@ -180,8 +180,8 @@
 					 )}
 				</Fragment>
 			</Fragment>
-        );
-    },
+		);
+	},
 	save({attributes,className}){
 		const {items=[],classes='',countPrefix,countSuffix,subCountPrefix,subCountSuffix,linkUrl,linkText,loopParam,doLoop}=attributes;
 		var classArray=_.uniq(classes.split(' '));

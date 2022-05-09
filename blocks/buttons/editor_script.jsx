@@ -18,7 +18,7 @@
 		var classNameArray=className.split(' ');
 		
 		const states=CP.wordsToFlags(classes);
-        
+		
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
 				{name:'size',type:'buttons',label:'サイズ',filter:'size',values:{l:'大',m:'中',s:'小',ss:'極小'}},
@@ -101,7 +101,7 @@
 			}
 		}
 		
-        return (
+		return (
 			<Fragment>
 				<BlockControls>
 					<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
@@ -170,8 +170,8 @@
 					 )}
 				</Fragment>
 			</Fragment>
-        );
-    },
+		);
+	},
 	save(props){
 		const {attributes,className}=props;
 		const {items=[],classes,loopParam,doLoop}=attributes;

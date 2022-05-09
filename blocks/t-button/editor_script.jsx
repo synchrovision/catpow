@@ -3,7 +3,7 @@
 	description:'HTMLメール用のテーブルレイアウトのボタンです。',
 	icon:'editor-code',
 	category:'catpow-mail',
-    parent:['catpow/t-body','catpow/t-box','catpow/t-loop'],
+	parent:['catpow/t-body','catpow/t-box','catpow/t-loop'],
 	attributes:{
 		classes:{source:'attribute',selector:'a',attribute:'class',default:'wp-block-catpow-t-button medium'},
 		title:{source:'children',selector:'tbody td',default:'Title'},
@@ -12,10 +12,10 @@
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
 		const {useState,useMemo}=wp.element;
-        const {classes,title}=attributes;
+		const {classes,title}=attributes;
 		const primaryClass='wp-block-catpow-t-button';
 		var states=CP.wordsToFlags(classes);
-		
+
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
 				'color',
@@ -25,8 +25,8 @@
 			wp.hooks.applyFilters('catpow.blocks.t-button.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		},[]);
-		
-        return [
+
+		return [
 			<a className={classes}>
 				<table width="100%">
 					<tbody>
@@ -58,12 +58,12 @@
 					/>
 				</PanelBody>
 			</InspectorControls>
-        ];
-    },
+		];
+	},
 
 
 	save({attributes,className,setAttributes}){
-        const {classes,title,url}=attributes;
+		const {classes,title,url}=attributes;
 		const primaryClass='wp-block-catpow-t-button';
 		return (
 			<a className={classes} href={url}>

@@ -54,10 +54,10 @@ registerBlockType('catpow/sphere',{
 		const {useState,useMemo}=wp.element;
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
 		const primaryClass='wp-block-catpow-sphere';
-		
+
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.sphere;
-        
+
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
 				{name:'size',type:'buttons',label:'サイズ',filter:'size',values:['small','medium','large']},
@@ -73,7 +73,7 @@ registerBlockType('catpow/sphere',{
 			wp.hooks.applyFilters('catpow.blocks.sphere.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		},[]);
-		
+
 		let rtn=[];
 		const save=()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))});
@@ -123,10 +123,10 @@ registerBlockType('catpow/sphere',{
 				</CP.Item>
 			);
 		});
-		
+
 		if(attributes.EditMode===undefined){attributes.EditMode=false;}
-		
-        return [
+
+		return [
 			<BlockControls>
 				<Toolbar
 					controls={[
@@ -166,14 +166,14 @@ registerBlockType('catpow/sphere',{
 				<CP.ItemControlInfoPanel/>
 			</InspectorControls>,
 			<ul className={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>
-        ];
-    },
+		];
+	},
 	save({attributes,className}){
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
-		
+
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.sphere;
-		
+
 		let rtn=[];
 		items.map((item,index)=>{
 			rtn.push(

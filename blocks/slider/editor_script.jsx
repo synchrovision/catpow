@@ -29,15 +29,15 @@ registerBlockType('catpow/slider',{
 			},
 		]
 	},
-	
+
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
 		const {useState,useMemo}=wp.element;
 		const {classes='',controlClasses='',config,items,doLoop,EditMode=false,AltMode=false,device}=attributes;
-		
+
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys,imageSizes}=CP.config.slider;
-		
+
 		var statesClasses=[
 			{label:'アロー',values:'hasArrows'},
 			{label:'ドット',values:'hasDots'},
@@ -58,7 +58,7 @@ registerBlockType('catpow/slider',{
 			{label:'スクロール操作',values:'scrollable'},
 			{label:'閉じる操作',values:'closable'}
 		];
-		
+
 		const selectiveClasses=useMemo(()=>{
 			const {devices,imageKeys,imageSizes}=CP.config.slider;
 			const selectiveClasses=[
@@ -143,16 +143,16 @@ registerBlockType('catpow/slider',{
 			wp.hooks.applyFilters('catpow.blocks.slider.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		},[]);
-		
+
 		const save=()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))});
 		};
 
-		
+
 		var rtn=[];
 		var thumbs=[];
 		var dots=[];
-		
+
 		let configData=JSON.parse(config);
 		if(configData.initialSlide === undefined){configData.initialSlide=0;}
 		const gotoItem=(i)=>{
@@ -165,7 +165,7 @@ registerBlockType('catpow/slider',{
 		const nextItem=()=>{
 			gotoItem(configData.initialSlide+1);
 		};
-		
+
 		const pushItem=(item,index)=>{
 			var posClass,itemClass,imageIndex;
 			imageIndex=(index-configData.initialSlide+items.length)%items.length;
@@ -280,13 +280,13 @@ registerBlockType('catpow/slider',{
 				dots.push(<li class={'dot '+posClass+' dot'+imageIndex} onClick={()=>gotoItem(index)}></li>);
 			}
 		}
-		
+
 		const l=items.length;
 		for(let i=0;i<l;i++){pushItem(items[i%l],i%l);}
-		
+
 		if(attributes.EditMode===undefined){attributes.EditMode=false;}
-		
-		
+
+
 		return (
 			<Fragment>
 				<CP.SelectModeToolbar
@@ -402,10 +402,10 @@ registerBlockType('catpow/slider',{
 	},
 	save({attributes,className}){
 		const {classes='',controlClasses='',config,items=[],doLoop}=attributes;
-		
+
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys,imageSizes}=CP.config.slider;
-		
+
 		var rtn=[];
 		var thumbs=[];
 		items.map(function(item,index){
@@ -466,7 +466,7 @@ registerBlockType('catpow/slider',{
 				);
 			}
 		});
-		
+
 		return (
 			<Fragment>
 				<div className={classes}>
@@ -520,7 +520,7 @@ registerBlockType('catpow/slider',{
 					]
 				}
 			},
-			
+
 			save({attributes,className}){
 				const {classes='',controlClasses='',config,items=[]}=attributes;
 				var classArray=_.uniq(classes.split(' '));

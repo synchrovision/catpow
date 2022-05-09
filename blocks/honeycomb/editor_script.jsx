@@ -48,33 +48,33 @@ registerBlockType('catpow/honeycomb',{
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
-        const {id,classes,items=[]}=attributes;
-        let {breakpoints,grid}=attributes;
-		
+		const {id,classes,items=[]}=attributes;
+		let {breakpoints,grid}=attributes;
+
 		if(!id){
 			setAttributes({id:'hnc'+(new Date().getTime().toString(16))})
 		}
 		if(undefined==attributes.bp){
 			setAttributes({bp:breakpoints[0]});
 		}
-		
+
 		breakpoints=breakpoints.split(',');
 		breakpoints.unshift('0');
 		grid=grid.split(',').map((val)=>val.split(' '));
 		let bpIndex=breakpoints.indexOf(attributes.bp);
 		if(bpIndex<0){setAttributes({bp:breakpoints[0]});}
 		const currentGrid=grid[bpIndex];
-		
+
 		var cssDatas={};
-		
+
 		breakpoints.map((bp,bpIndex)=>{
 			cssDatas[bp]={
 				['#'+id]:CP.createGridStyleCodeData(grid[bpIndex])
 			};
 		});
-		
+
 		var states=CP.wordsToFlags(classes);
-		
+
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[];
 			wp.hooks.applyFilters('catpow.blocks.honeycomb.selectiveClasses',CP.finderProxy(selectiveClasses));
@@ -93,22 +93,22 @@ registerBlockType('catpow/honeycomb',{
 			wp.hooks.applyFilters('catpow.blocks.honeycomb.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		},[]);
-		
-		
+
+
 		var tgtItem=false;
-		
+
 		const itemHandler=[
 			<div className="handler move" data-drawaction="move"><Icon icon="move"/></div>,
 			<div className="handler clone" data-drawaction="clone"><Icon icon="plus-alt"/></div>,
 			<div className="handler delete" data-drawaction="delete"><Icon icon="dismiss"/></div>
 		];
-		
+
 		const save=()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))});
 		}
-		
-		
-        return [
+
+
+		return [
 			<BlockControls>
 				<CP.SelectBreakPointToolbar
 					breakpoints={breakpoints}
@@ -249,27 +249,27 @@ registerBlockType('catpow/honeycomb',{
 				}
 				<CP.ItemControlInfoPanel/>
 			</InspectorControls>
-        ];
-    },
+		];
+	},
 	save({attributes,className,setAttributes}){
-        const {id,classes,items=[]}=attributes;
-        let {breakpoints,grid}=attributes;
-		
+		const {id,classes,items=[]}=attributes;
+		let {breakpoints,grid}=attributes;
+
 		breakpoints=breakpoints.split(',');
 		breakpoints.unshift('0');
 		grid=grid.split(',').map((val)=>val.split(' '));
-		
+
 		var cssDatas={};
-		
+
 		breakpoints.map((bp,bpIndex)=>{
 			cssDatas[bp]={
 				['#'+id]:CP.createGridStyleCodeData(grid[bpIndex])
 			};
 		});
-		
+
 		var states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.honeycomb;
-		
+
 		return (
 			<div
 				id={id}

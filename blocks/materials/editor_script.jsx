@@ -8,10 +8,10 @@
 		const {useState,useMemo}=wp.element;
 		const {items=[],classes,loopParam,loopCount,doLoop,EditMode=false,AltMode=false,currentItemIndex}=attributes;
 		const primaryClass='wp-block-catpow-materials';
-		
+
 		var states=CP.wordsToFlags(classes);
-		
-        
+
+
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
 				{
@@ -38,7 +38,7 @@
 			wp.hooks.applyFilters('catpow.blocks.materials.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		},[]);
-		
+
 		let rtn=[];
 		const imageKeys={
 			image:{src:"imageSrc",alt:"imageAlt",code:"imageCode",items:"items"}
@@ -112,7 +112,7 @@
 				</CP.Item>
 			);
 		});
-		
+
 		if(attributes.EditMode===undefined){attributes.EditMode=false;}
 		if(rtn.length<loopCount){
 			let len=rtn.length;
@@ -120,8 +120,8 @@
 				rtn.push(rtn[rtn.length%len]);
 			}
 		}
-		
-        return (
+
+		return (
 			<Fragment>
 				<CP.SelectModeToolbar
 					set={setAttributes}
@@ -191,14 +191,14 @@
 					 )}
 				</Fragment>
 			</Fragment>
-        );
-    },
+		);
+	},
 	save({attributes,className}){
 		const {items=[],classes='',loopParam,loopCount,doLoop}=attributes;
 		var classArray=_.uniq(classes.split(' '));
-		
+
 		var states=CP.wordsToFlags(classes);
-		
+
 		let rtn=[];
 		items.map((item,index)=>{
 			const itemStates=CP.wordsToFlags(item.classes);

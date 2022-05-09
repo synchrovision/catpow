@@ -6,7 +6,7 @@ registerBlockType('catpow/layouttable',{
 	description:'セルの結合と幅の指定ができるテーブルです。',
 	icon: 'editor-table',
 	category: 'catpow',
-	
+
 	transforms:{
 		from: [
 			{
@@ -80,7 +80,7 @@ registerBlockType('catpow/layouttable',{
 		const {useState,useMemo}=wp.element;
 		const {classes='',rows}=attributes;
 		const primaryClass='wp-block-catpow-layouttable';
-		
+
 		if(attributes.file){
 			var reader=new FileReader();
 			reader.addEventListener('loadend',()=>{
@@ -97,7 +97,7 @@ registerBlockType('catpow/layouttable',{
 			});
 			reader.readAsText(attributes.file);
 		}
-		
+
 		const selectiveClasses=useMemo(()=>{
 			var selectiveClasses=[
 				{name:'type',label:'タイプ',filter:'type',values:['spec','sheet','plan']},
@@ -106,16 +106,16 @@ registerBlockType('catpow/layouttable',{
 			wp.hooks.applyFilters('catpow.blocks.layouttable.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		},[]);
-		
+
 		var rtn=[];
-		
+
 		var rowLen=rows.length;
 		var colLen=0;
 		rows[0].cells.map((cell)=>{colLen+=parseInt(cell.colspan?cell.colspan:1);});
 		var rowsCopy=rows.map((row,r)=>{return {classes:row.classes,cells:new Array(colLen)}});
-		
+
 		var selectedCells=[];
-		
+
 		rows.map((row,r)=>{
 			let c=0;
 			row.cells.map((cell)=>{
@@ -134,25 +134,25 @@ registerBlockType('catpow/layouttable',{
 				if(cellCopy.isSelected){selectedCells.push(cellCopy);}
 			});
 		});
-	
+
 		const saverows=()=>{
 			setAttributes({rows:rowsCopy.map((row)=>{
 				row.cells=row.cells.filter((cell)=>!cell.mergedTo);
 				return row;
 			})});
 		}
-		
+
 		const addRow=(r)=>{
-            rowsCopy.splice(r,0,rowsCopy[r]);
-            saverows();
-        }
+			rowsCopy.splice(r,0,rowsCopy[r]);
+			saverows();
+		}
 		const deleteRow=(r)=>{
-            rowsCopy.splice(r,1);
-            saverows();
-        }
+			rowsCopy.splice(r,1);
+			saverows();
+		}
 		const upRow=(r)=>{
 			if(r<0 || r>=rowLen-1){return;}
-            rowsCopy.splice(r+1,0,rowsCopy.splice(r,1)[0]);
+			rowsCopy.splice(r+1,0,rowsCopy.splice(r,1)[0]);
 			var r1=rowsCopy[r].cells;
 			var r2=rowsCopy[r+1].cells;
 			for(var c=0;c<colLen;c++){
@@ -167,13 +167,13 @@ registerBlockType('catpow/layouttable',{
 					r2.splice(c,0,r1.splice(c+1,1)[0]);
 				}
 			}
-            saverows();
-        }
+			saverows();
+		}
 		const downRow=(r)=>{upRow(r-1);}
-		
+
 		const addColumn=(c)=>{
 			let done=[];
-            rowsCopy.map((row,r)=>{
+			rowsCopy.map((row,r)=>{
 				if(row.cells[c].colspan > 1){
 					done.push(row.cells[c]);
 					row.cells[c].colspan++;
@@ -189,11 +189,11 @@ registerBlockType('catpow/layouttable',{
 					row.cells.splice(c,0,row.cells[c]);
 				}
 			});
-            saverows();
-        }
+			saverows();
+		}
 		const deleteColumn=(c)=>{
 			let done=[];
-            rowsCopy.map((row,r)=>{
+			rowsCopy.map((row,r)=>{
 				if(row.cells[c].colspan > 1){
 					done.push(row.cells[c]);
 					row.cells[c].colspan--;
@@ -206,12 +206,12 @@ registerBlockType('catpow/layouttable',{
 					}
 				}
 			});
-            rowsCopy.map((row)=>row.cells.splice(c,1));
-            saverows();
-        }
+			rowsCopy.map((row)=>row.cells.splice(c,1));
+			saverows();
+		}
 		const upColumn=(c)=>{
 			if(c<0 || c>=colLen-1){return;}
-            rowsCopy.map((row)=>{
+			rowsCopy.map((row)=>{
 				if(
 					(row.cells[c].mergedTo && row.cells[c].mergedTo.colspan > 1) ||
 					row.cells[c].colspan > 1 ||
@@ -220,10 +220,10 @@ registerBlockType('catpow/layouttable',{
 				){return;}
 				row.cells.splice(c+1,0,row.cells.splice(c,1)[0]);
 			});
-            saverows();
-        }
+			saverows();
+		}
 		const downColumn=(c)=>{upColumn(c-1);}
-		
+
 		const selectCells=(e,r,c)=>{
 			if(e.metaKey){rowsCopy[r].cells[c].isSelected=!rowsCopy[r].cells[c].isSelected;}
 			else if(e.shiftKey){
@@ -256,32 +256,32 @@ registerBlockType('catpow/layouttable',{
 		const unselectAllCells=()=>{
 			selectedCells.map((cell)=>cell.isSelected=false);
 		}
-		
+
 		const getCellAttr=(attr,value)=>{
 			if(!selectedCells[0] || !selectedCells[0][attr]){return '';}
 			return selectedCells[0][attr];
 		}
 		const setCellAttr=(attr,value)=>{
-            selectedCells.map((cell)=>{cell[attr]=value;});
+			selectedCells.map((cell)=>{cell[attr]=value;});
 			saverows();
 		}
-		
+
 		const setCellClasses=(values,value)=>{
 			if(!Array.isArray(values) && _.isObject(values)){values=Object.keys(values);}
-			
-            selectedCells.map((cell)=>{
+
+			selectedCells.map((cell)=>{
 				let classArray=(cell.classes || '').split(' ');
 				classArray=_.difference(classArray,values);
 				if(Array.isArray(value)){classArray=classArray.concat(value);}
 				else{classArray.push(value);}
 				cell.classes=classArray.join(' ');
 			});
-							
+
 			saverows();
 		}
 		const addCellClasses=(values)=>{
 			if(!Array.isArray(values)){values=[values];}
-            selectedCells.map((cell)=>{
+			selectedCells.map((cell)=>{
 				let classArray=(cell.classes || '').split(' ');
 				classArray=_.difference(classArray,values);
 				classArray=classArray.concat(values);
@@ -291,7 +291,7 @@ registerBlockType('catpow/layouttable',{
 		}
 		const removeCellClasses=(values)=>{
 			if(!Array.isArray(values)){values=[values];}
-            selectedCells.map((cell)=>{
+			selectedCells.map((cell)=>{
 				let classArray=(cell.classes || '').split(' ');
 				classArray=_.difference(classArray,values);
 				cell.classes=classArray.join(' ')
@@ -312,13 +312,13 @@ registerBlockType('catpow/layouttable',{
 			if(selectedCells.length<2){return false;}
 			var from=selectedCells[0];
 			var to=selectedCells[selectedCells.length-1];
-			
+
 			var fromC=from.c;
 			var toR=to.r;
 			var toC=to.c;
 			if(to.rowlspan > 1){toR+=to.rowspan-1;}
 			if(to.colspan > 1){toC+=to.colspan-1;}
-			
+
 			return selectedCells.every((cell)=>{
 				if(cell.c < fromC || cell.c > toC){return false;}
 				if(cell.rowspan > 1 && cell.r+cell.rowspan-1 > toR){return false;}
@@ -329,24 +329,24 @@ registerBlockType('catpow/layouttable',{
 		const isMergedCellSelected=()=>{
 			return selectedCells.some((cell)=>(cell.rowspan > 1 || cell.colspan > 1));
 		}
-		
+
 		const mergeCells=()=>{
 			var from=selectedCells[0];
 			var to=selectedCells[selectedCells.length-1];
-			
+
 			var text=[];
 			selectedCells.map((cell)=>{
 				text=text.concat(cell.text);
 			});
 			from.text=text;
-			
+
 			let arias={mergedTo:from};
 			rowsCopy.slice(from.r,to.r+1).map((row)=>{
 				row.cells.fill(arias,from.c,to.c+1);
 			});
 			from.rowspan=to.r-from.r+1;
 			from.colspan=to.c-from.c+1;
-			
+
 			rowsCopy[from.r].cells[from.c]=from;
 			saverows();
 		}
@@ -365,16 +365,16 @@ registerBlockType('catpow/layouttable',{
 				}
 				rowsCopy[r].cells[c]=cell;
 			});
-			
+
 			saverows();
 		}
-		
+
 		var cellClasses=getCellClasses();
-		
+
 		const selectCellClasses=(prm)=>{
 			var {label,values}=prm;
 			var options,value;
-			
+
 			if(prm.filter && CP.filters.layouttable && CP.filters.layouttable[prm.filter]){
 				CP.filters.layouttable[prm.filter](prm);
 			}
@@ -387,7 +387,7 @@ registerBlockType('catpow/layouttable',{
 			}
 			value=_.intersection(cellClasses,values).shift();
 			if(!value){value='default';}
-			
+
 			return (
 				<SelectControl
 					label={label}
@@ -400,10 +400,10 @@ registerBlockType('catpow/layouttable',{
 				/>
 			);
 		}
-		
+
 		const aligns=['left','center','right'];
 		const valigns=['top','center','bottom'];
-		
+
 		return [
 			<BlockControls>
 				<AlignmentToolbar
@@ -416,14 +416,14 @@ registerBlockType('catpow/layouttable',{
 			</BlockControls>,
 			<table className={classes}>
 				<tbody>
-                    {rowsCopy.map((row,r)=>{
-                        return <tr>
-                            {row.cells.map((cell,c)=>{
+					{rowsCopy.map((row,r)=>{
+						return <tr>
+							{row.cells.map((cell,c)=>{
 								if(cell.mergedTo){return false;}
 								if(cell.style instanceof String){
 									cell.style=JSON.parse(cell.style);
 								}
-                                return el(
+								return el(
 									(cell.classes && cell.classes.split(' ').includes('th'))?'th':'td',
 									{
 										className:cell.classes,
@@ -453,10 +453,10 @@ registerBlockType('catpow/layouttable',{
 										{isSelected && cell.isSelected && <div className="selectBox"></div>}
 									</Fragment>
 								);
-                            })}
-                        </tr>
-                    })}
-                </tbody>
+							})}
+						</tr>
+					})}
+				</tbody>
 			</table>,
 			<InspectorControls>
 				<CP.SelectClassPanel
@@ -493,11 +493,11 @@ registerBlockType('catpow/layouttable',{
 				</PanelBody>
 			</InspectorControls>
 		];
-    },
+	},
 
 	save({attributes,className}){
 		const {classes,rows}=attributes;
-		
+
 		return <table className={classes}>
 			<tbody>{
 				rows.map((row)=>{

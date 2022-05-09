@@ -18,19 +18,19 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-        const {classes,items}=attributes;
+		const {classes,items}=attributes;
 		const primaryClass='wp-block-catpow-tabs';
-		
+
 		var template=[],realTabs=[];
 		for(var i=0;i<items.length;i++){
 			template.push(['catpow/tabscontent']);
 		}
-		
+
 		let itemsCopy=items.map((obj)=>jQuery.extend(true,{},obj));
 		let rtn=[];
-		
+
 		var currentIndex=attributes.currentIndex || 0;
-		
+
 		itemsCopy.map((item,index)=>{
 			var className=(currentIndex==index)?'active':(currentIndex>index)?'before':'after';
 			rtn.push(
@@ -52,8 +52,8 @@
 				</CP.Item>
 			)
 		});
-		
-        return [
+
+		return [
 			<div className={classes} data-current-index={currentIndex}>
 				<ul class="tab">{rtn}</ul>
 				<div class="contents">
@@ -63,20 +63,20 @@
 					/>
 				</div>
 			</div>,
-        ];
-    },
+		];
+	},
 
 
 	save({attributes,className,setAttributes}){
-        const {classes,items}=attributes;
-		
+		const {classes,items}=attributes;
+
 		let rtn=[];
 		items.map((item,index)=>{
 			rtn.push(
 				<li className='item'><h3><RichText.Content value={item.title}/></h3></li>
 			);
 		});
-		
+
 		return (
 			<div className={classes}>
 				<ul class="tab">{rtn}</ul>
@@ -92,14 +92,14 @@ registerBlockType('catpow/tabscontent',{
 	title:'🐾 TabsContent',
 	icon:'editor-code',
 	category:'catpow',
-    parent:['catpow/tabs'],
+	parent:['catpow/tabs'],
 	edit({attributes,className,setAttributes}){
-        return [
+		return [
 			<div className={'tabs_content'}>
 				<InnerBlocks template={[['catpow/section']]} templateLock={false}/>
 			</div>
-        ];
-    },
+		];
+	},
 	save({attributes,className,setAttributes}){
 		return (
 			<div className={'tabs_content'}>

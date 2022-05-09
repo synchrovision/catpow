@@ -96,38 +96,38 @@
 		}
 		
 		const addRow=(index)=>{
-            rows.splice(index,0,rows[index]);
-            saveItems();
-        }
+			rows.splice(index,0,rows[index]);
+			saveItems();
+		}
 		const deleteRow=(index)=>{
-            rows.splice(index,1);
-            saveItems();
-        }
+			rows.splice(index,1);
+			saveItems();
+		}
 		const upRow=(index)=>{
-            rows.splice(index+1,0,rows.splice(index,1)[0]);
-            saveItems();
-        }
+			rows.splice(index+1,0,rows.splice(index,1)[0]);
+			saveItems();
+		}
 		const downRow=(index)=>{
-            rows.splice(index-1,0,rows.splice(index,1)[0]);
-            saveItems();
-        }
-		
+			rows.splice(index-1,0,rows.splice(index,1)[0]);
+			saveItems();
+		}
+
 		const addColumn=(index)=>{
-            rows.map((row)=>row.cells.splice(index,0,row.cells[index]));
-            saveItems();
-        }
+			rows.map((row)=>row.cells.splice(index,0,row.cells[index]));
+			saveItems();
+		}
 		const deleteColumn=(index)=>{
-            rows.map((row)=>row.cells.splice(index,1));
-            saveItems();
-        }
+			rows.map((row)=>row.cells.splice(index,1));
+			saveItems();
+		}
 		const upColumn=(index)=>{
-            rows.map((row)=>{row.cells.splice(index+1,0,row.cells.splice(index,1)[0])});
-            saveItems();
-        }
+			rows.map((row)=>{row.cells.splice(index+1,0,row.cells.splice(index,1)[0])});
+			saveItems();
+		}
 		const downColumn=(index)=>{
-            rows.map((row)=>{row.cells.splice(index-1,0,row.cells.splice(index,1)[0])});
-            saveItems();
-        }
+			rows.map((row)=>{row.cells.splice(index-1,0,row.cells.splice(index,1)[0])});
+			saveItems();
+		}
 		
 		return (
 			<Fragment>
@@ -228,7 +228,7 @@
 				</InspectorControls>
 			</Fragment>
 		);
-    },
+	},
 
 	save({attributes,className}){
 		const {classes='',rows=[],loopParam,doLoop}=attributes;

@@ -45,9 +45,9 @@ registerBlockType('catpow/panel',{
 		const {classes,items=[]}=attributes;
 		const primaryClass='wp-block-catpow-panel';
 		var classArray=_.uniq((classes).split(' '));
-		
+
 		const {imageKeys}=CP.config.panel;
-		
+
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
 				{
@@ -118,11 +118,11 @@ registerBlockType('catpow/panel',{
 			wp.hooks.applyFilters('catpow.blocks.panel.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		},[]);
-		
+
 		let itemsCopy=items.map((obj)=>jQuery.extend(true,{},obj));
-		
+
 		let rtn=[];
-		
+
 		let totalGrid=0;
 
 		itemsCopy.map((item,index)=>{
@@ -137,11 +137,11 @@ registerBlockType('catpow/panel',{
 			}
 			var itemClassArray=(item.classes || '').split(' ');
 			Object.keys(itemStates).forEach(function(key){this[key]=itemClassArray.indexOf(key)!==-1;},itemStates);
-			
+
 			totalGrid+=
 				(CP.getNumberClass({attr:item},'rspan') || 1) * 
 				(CP.getNumberClass({attr:item},'cspan') || 1);
-			
+
 			rtn.push(
 				<CP.Item
 					tag='li'
@@ -202,10 +202,10 @@ registerBlockType('catpow/panel',{
 				</CP.Item>
 			);
 		});
-		
+
 		if(attributes.EditMode===undefined){attributes.EditMode=false;}
-		
-        return [
+
+		return [
 			<BlockControls>
 				<Toolbar
 					controls={[
@@ -248,8 +248,8 @@ registerBlockType('catpow/panel',{
 				</PanelBody>
 				<CP.ItemControlInfoPanel/>
 			</InspectorControls>
-        ];
-    },
+		];
+	},
 	save({attributes,className}){
 		const {classes='',items=[]}=attributes;
 		let rtn=[];
@@ -264,8 +264,8 @@ registerBlockType('catpow/panel',{
 			}
 			var itemClassArray=(item.classes || '').split(' ');
 			Object.keys(itemStates).forEach(function(key){this[key]=itemClassArray.indexOf(key)!==-1;},itemStates);
-		
-			
+
+
 			rtn.push(
 				<li class={item.classes}>
 					{itemStates.hasImage && <div className='image'><img src={item.src} alt={item.alt}/></div>}

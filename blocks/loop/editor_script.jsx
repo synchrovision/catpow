@@ -5,10 +5,10 @@
 	category:'catpow-embed',
 	example:CP.example,
 	edit({attributes,setAttributes,className,clientId}){
-        const {content_path,query,config,EditMode=false}=attributes;
+		const {content_path,query,config,EditMode=false}=attributes;
 		const {useMemo}=wp.element;
 		let configData;
-		
+
 		const itemMap=useMemo(()=>{
 			const map={};
 			Object.keys(cpEmbeddablesTree.loop).map((label)=>{
@@ -16,7 +16,7 @@
 			});
 			return map;
 		},[]);
-		
+
 		if(!config){
 		   if(content_path && itemMap[content_path].has_config){
 				const path=content_path.substr(0,content_path.lastIndexOf('/'));
@@ -32,8 +32,8 @@
 		else{
 			configData=JSON.parse(config);
 		}
-		
-        return (
+
+		return (
 			<Fragment>
 				{configData.template &&
 					<BlockControls>
@@ -95,13 +95,13 @@
 					</PanelBody>
 				</InspectorControls>
 			</Fragment>
-        );
-    },
+		);
+	},
 
 	save({attributes,className,setAttributes}){
 		return <InnerBlocks.Content/>;
 	},
-	
+
 	deprecated:[{
 		save(){return 'null';}
 	}]
@@ -112,21 +112,21 @@ registerBlockType('catpow/loopcontent',{
 	title:'🐾 LoopContent',
 	icon:'editor-code',
 	category:'catpow',
-    parent:['catpow/loop'],
+	parent:['catpow/loop'],
 	attributes:{
 		name:{type:'attribute',label:'名前',selector:'loopContent',attribute:'name',default:'content'},
 	},
 	edit({attributes,className,setAttributes,clientId}){
 		const {name}=attributes;
-		
+
 		const template=(name=='on_empty')?[['core/paragraph',{align:'center',content:'Not Found'}]]:[['catpow/section']];
-		
-        return (
+
+		return (
 			<div className={'loopContent'}>
 				<InnerBlocks template={template} templateLock={false}/>
 			</div>
 		);
-    },
+	},
 	save({attributes,className,setAttributes}){
 		const {name}=attributes;
 		return (

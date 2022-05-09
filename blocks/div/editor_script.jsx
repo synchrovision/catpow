@@ -40,7 +40,7 @@ registerBlockType('catpow/div',{
 	edit(props){
 		const {useState,useMemo}=wp.element;
 		const {attributes,className,setAttributes,context}=props;
-        const {id,classes,color,patternImageCss,frameImageCss,borderImageCss}=attributes;
+		const {id,classes,color,patternImageCss,frameImageCss,borderImageCss}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.div;
@@ -97,8 +97,8 @@ registerBlockType('catpow/div',{
 			wp.hooks.applyFilters('catpow.blocks.div.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		},[]);
-		
-        return [
+
+		return [
 			<div id={id} className={classes}>
 				{states.hasIcon && 
 					<div class="icon">
@@ -148,12 +148,12 @@ registerBlockType('catpow/div',{
 					/>
 				</PanelBody>
 			</InspectorControls>
-        ];
-    },
+		];
+	},
 
 
 	save({attributes,className,setAttributes}){
-        const {id,classes='',color,patternImageCss,frameImageCss,borderImageCss}=attributes;
+		const {id,classes='',color,patternImageCss,frameImageCss,borderImageCss}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.div;

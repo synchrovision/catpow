@@ -3,7 +3,7 @@
 	description:'HTMLメール用の段落ブロックです。',
 	icon:'editor-code',
 	category:'catpow-mail',
-    parent:['catpow/t-body','catpow/t-box','catpow/t-loop'],
+	parent:['catpow/t-body','catpow/t-box','catpow/t-loop'],
 	transforms:{
 		from: [
 			{
@@ -42,10 +42,10 @@
 	example:CP.example,
 	edit({attributes,className,setAttributes,onReplace,mergeBlocks}){
 		const {useState,useMemo}=wp.element;
-        const {classes,text}=attributes;
+		const {classes,text}=attributes;
 		const primaryClass='wp-block-catpow-t-paragraph';
 		var states=CP.wordsToFlags(classes);
-		
+
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
 				{name:'size',label:'サイズ',values:['large','medium','small']}
@@ -53,8 +53,8 @@
 			wp.hooks.applyFilters('catpow.blocks.t-paragraph.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		},[]);
-		
-        return [
+
+		return [
 			<table width="100%" className={classes}>
 				<tbody>
 					<tr>
@@ -102,12 +102,12 @@
 					/>
 				</PanelBody>
 			</InspectorControls>
-        ];
-    },
+		];
+	},
 
 
 	save({attributes,className,setAttributes}){
-        const {classes,text}=attributes;
+		const {classes,text}=attributes;
 		const primaryClass='wp-block-catpow-t-paragraph';
 		return (
 			<table width="100%" className={classes}>

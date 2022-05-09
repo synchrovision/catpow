@@ -60,10 +60,10 @@ registerBlockType('catpow/flow',{
 		const {items=[],classes,countPrefix,countSuffix}=attributes;
 		const primaryClass='wp-block-catpow-flow';
 		var classArray=_.uniq((className+' '+classes).split(' '));
-		
+
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.flow;
-        
+
 		const selectiveClasses=useMemo(()=>{
 			const {imageKeys}=CP.config.flow;
 			const selectiveClasses=[
@@ -80,7 +80,7 @@ registerBlockType('catpow/flow',{
 			wp.hooks.applyFilters('catpow.blocks.flow.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		},[]);
-		
+
 		let rtn=[];
 		const save=()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))});
@@ -162,10 +162,10 @@ registerBlockType('catpow/flow',{
 				</CP.Item>
 			);
 		});
-		
+
 		if(attributes.EditMode===undefined){attributes.EditMode=false;}
-		
-        return (
+
+		return (
 			<Fragment>
 				<BlockControls>
 					<Toolbar
@@ -220,15 +220,15 @@ registerBlockType('catpow/flow',{
 					<ul className={classes}>{rtn}</ul>
 				)}
 			</Fragment>
-        );
-    },
+		);
+	},
 	save({attributes,className}){
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
 		var classArray=_.uniq(classes.split(' '));
-		
+
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.flow;
-		
+
 		let rtn=[];
 		items.map((item,index)=>{
 			rtn.push(

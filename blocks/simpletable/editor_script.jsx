@@ -3,7 +3,7 @@
 	description:'見出しと本文の２列で構成されるシンプルなテーブルです。',
 	icon: 'editor-table',
 	category: 'catpow',
-	
+
 	transforms:{
 		from: [
 			{
@@ -58,7 +58,7 @@
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
 		const {classes,rows}=attributes;
-		
+
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
 				{
@@ -91,11 +91,11 @@
 			wp.hooks.applyFilters('catpow.blocks.simpletable.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		},[]);
-		
+
 		const saveItems=()=>{
 			setAttributes({rows:JSON.parse(JSON.stringify(rows))});
 		}
-		
+
 		;
 		return [
 			<InspectorControls>
@@ -150,7 +150,7 @@
 				</tbody>
 			</table>
 		];
-    },
+	},
 
 	save({attributes,className}){
 		const {classes,rows}=attributes

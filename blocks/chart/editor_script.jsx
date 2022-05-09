@@ -65,7 +65,7 @@
 		const primaryClass='wp-block-catpow-chart';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
-        
+		
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
 				{
@@ -158,7 +158,7 @@
 			);
 		}
 		
-        return (
+		return (
 			<Fragment>
 				<BlockControls>
 					<Toolbar
@@ -201,8 +201,8 @@
 					</div>
 				)}
 			</Fragment>
-        );
-    },
+		);
+	},
 	save({attributes,className}){
 		const {classes,graph}=attributes;
 		var classArray=_.uniq((attributes.classes || '').split(' '));

@@ -23,7 +23,7 @@ registerBlockType('catpow/section',{
 	edit(props){
 		const {attributes,className,setAttributes}=props;
 		const {useMemo}=wp.element;
-        const {
+		const {
 			SectionTag,HeadingTag,
 			color,id,classes,prefix,title,lead,
 			headerImageMime,headerImageSrc,headerImageSrcset,headerImageAlt,headerImageCode,
@@ -33,13 +33,13 @@ registerBlockType('catpow/section',{
 			headerPatternImageCss,patternImageCss,frameImageCss,borderImageCss,
 			iconSrc,iconAlt
 		}=attributes;
-		
+
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys,imageSizes}=CP.config.section;
-		
+
 		CP.inheritColor(props,['iconSrc','patternImageCss','headerPatternImageCss','frameImageCss','borderImageCss']);
 		CP.manageStyleData(props,['patternImageCss','headerPatternImageCss','frameImageCss','borderImageCss']);
-		
+
 		const selectiveClasses=useMemo(()=>{
 			const {devices,imageKeys,imageSizes}=CP.config.section;
 			const selectiveClasses=[
@@ -219,11 +219,11 @@ registerBlockType('catpow/section',{
 			wp.hooks.applyFilters('catpow.blocks.section.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		},[]);
-		
+
 		var level=CP.getNumberClass({attr:attributes},'level');
-		
-		
-        return [
+
+
+		return [
 			<BlockControls>
 				<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
 			</BlockControls>,
@@ -287,7 +287,7 @@ registerBlockType('catpow/section',{
 								<p className="lead"><RichText tagName="div" value={lead} onChange={(lead)=>setAttributes({lead})}/></p>
 							}
 						</div>
-						
+
 						{states.hasHeaderBackgroundImage && 
 							<div class="background">
 								{(states.isTemplate && headerBackgroundImageCode)?(
@@ -354,10 +354,10 @@ registerBlockType('catpow/section',{
 					/>
 				</PanelBody>
 			</InspectorControls>
-        ];
-    },
+		];
+	},
 	save({attributes,className,setAttributes}){
-        const {
+		const {
 			SectionTag,HeadingTag,
 			id,navIcon,classes,prefix,title,lead,
 			headerImageSrc,headerImageSrcset,headerImageAlt,headerImageCode,
@@ -367,12 +367,12 @@ registerBlockType('catpow/section',{
 			headerPatternImageCss,patternImageCss,frameImageCss,borderImageCss,
 			iconSrc,iconAlt
 		}=attributes;
-		
+
 		var level=CP.getNumberClass({attr:attributes},'level');
-		
+
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys,imageSizes}=CP.config.section;
-		
+
 		return (
 			<SectionTag id={id} className={classes} data-icon={navIcon}>
 				{states.hasImage && 

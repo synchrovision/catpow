@@ -5,9 +5,9 @@
 	category: 'catpow-functional',
 	example:CP.example,
 	edit({attributes,setAttributes,className}){
-        const {items,columns,EditMode=false}=attributes;
-		
-        return (
+		const {items,columns,EditMode=false}=attributes;
+
+		return (
 			<Fragment>
 				<CP.SelectModeToolbar
 					set={setAttributes}
@@ -48,8 +48,8 @@
 					</PanelBody>
 				</InspectorControls>
 			</Fragment>
-        );
-    },
+		);
+	},
 
 	save({attributes,className,setAttributes}){
 		return <InnerBlocks.Content/>;

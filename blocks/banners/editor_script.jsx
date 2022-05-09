@@ -28,7 +28,7 @@ registerBlockType('catpow/banners',{
 		
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.banners;
-        
+		
 		const selectiveClasses=useMemo(()=>{
 			var selectiveClasses=[
 				{label:'サイズ',type:'buttons',values:['small','medium','large']},
@@ -110,7 +110,7 @@ registerBlockType('catpow/banners',{
 			}
 		}
 		
-        return (
+		return (
 			<Fragment>
 				<CP.SelectModeToolbar
 					set={setAttributes}
@@ -192,8 +192,8 @@ registerBlockType('catpow/banners',{
 					</Fragment>
 				)}
 			</Fragment>
-        );
-    },
+		);
+	},
 	save({attributes,className}){
 		const {items=[],classes,loopParam,doLoop}=attributes;
 		

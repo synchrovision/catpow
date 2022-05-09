@@ -86,19 +86,19 @@ registerBlockType('catpow/graphics',{
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
-        const {id,classes='',src,srcset,alt,heights,items=[],device}=attributes;
-		
+		const {id,classes='',src,srcset,alt,heights,items=[],device}=attributes;
+
 		if(!id){
 			setAttributes({id:'g'+(new Date().getTime().toString(16))})
 		}
-		
+
 		attributes.EditMode=attributes.EditMode || 'pc';
 		var isModeSP=attributes.EditMode=='sp';
-		
+
 		const states=CP.wordsToFlags(classes);
 		const {devices,devicesForCss,imageKeys,getCssDatas,renderCssDatas,parseRectAttr,getRectAttr}=CP.config.graphics;
 		const cssDatas=getCssDatas(attributes,states);
-		
+
 		const selectiveClasses=useMemo(()=>{
 			const {devices,devicesForCss,imageKeys,getCssDatas,renderCssDatas,parseRectAttr,getRectAttr}=CP.config.graphics;
 			const selectiveClasses=[
@@ -162,14 +162,14 @@ registerBlockType('catpow/graphics',{
 			wp.hooks.applyFilters('catpow.blocks.graphics.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		},[]);
-		
+
 		var tgtItem=false;
-		
-		
+
+
 		const save=()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))});
 		}
-		
+
 		const onMouseDown=(e)=>{
 			var tgt=e.target;
 			var itemNode=tgt.closest('.item');
@@ -206,7 +206,7 @@ registerBlockType('catpow/graphics',{
 				let rectDatas=parseRectAttr(items[i].rect);
 				const deviceIndex=device?devicesForCss.indexOf(device):0;
 				let rectData=rectDatas[deviceIndex];
-					
+
 				if(tgtItem.type==='pos'){
 					if(e.altKey){
 						items.splice(i,0,JSON.parse(JSON.stringify(items[i])));
@@ -242,8 +242,8 @@ registerBlockType('catpow/graphics',{
 		const onDoubleClick=(e)=>{
 			var tgt=e.target;
 		};
-		
-        return (
+
+		return (
 			<Fragment>
 				<CP.SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices}/>
 				<div
@@ -421,16 +421,16 @@ registerBlockType('catpow/graphics',{
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
 			</Fragment>
-        );
-    },
+		);
+	},
 	save({attributes,className,setAttributes}){
-        const {id,classes,heights,heightSP,items=[]}=attributes;
-		
+		const {id,classes,heights,heightSP,items=[]}=attributes;
+
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys,getCssDatas,renderCssDatas}=CP.config.graphics;
-		
+
 		const cssDatas=getCssDatas(attributes,states);
-		
+
 		return (
 			<div id={id} className={classes} data-heights={heights}>
 				<div class="base">
@@ -463,7 +463,7 @@ registerBlockType('catpow/graphics',{
 							/>
 						);
 					};
-					
+
 					return el(
 						item.link?'a':'span',
 						{

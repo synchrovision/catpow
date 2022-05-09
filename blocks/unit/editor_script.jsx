@@ -22,9 +22,9 @@ registerBlockType('catpow/unit',{
 	},
 	attributes:{
 		classes:{source:'attribute',selector:'.wp-block-catpow-unit',attribute:'class',default:'wp-block-catpow-unit'},
-		
+
 		sources:CP.getPictureSoucesAttributesForDevices(CP.config.unit.devices),
-		
+
 		mime:{source:'attribute',selector:'[src]',attribute:'data-mime'},
 		src:{source:'attribute',selector:'[src]',attribute:'src',default:cp.theme_url+'/images/dummy.jpg'},
 		alt:{source:'attribute',selector:'[src]',attribute:'alt'},
@@ -32,11 +32,11 @@ registerBlockType('catpow/unit',{
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
-        const {classes}=attributes;
-		
+		const {classes}=attributes;
+
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.unit;
-		
+
 		var selectiveClasses=[
 			'color',
 			{
@@ -66,8 +66,8 @@ registerBlockType('catpow/unit',{
 				]
 			}
 		];
-		
-        return [
+
+		return [
 			<div className={classes}>
 				<figure class="image">
 					<ResponsiveImage
@@ -96,16 +96,16 @@ registerBlockType('catpow/unit',{
 					/>
 				</PanelBody>
 			</InspectorControls>
-        ];
-    },
+		];
+	},
 
 
 	save({attributes,className,setAttributes}){
-        const {classes=''}=attributes;
-		
+		const {classes=''}=attributes;
+
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.unit;
-		
+
 		return (
 			<div className={classes}>
 				<figure class="image">

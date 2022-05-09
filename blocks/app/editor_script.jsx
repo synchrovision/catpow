@@ -11,7 +11,7 @@ registerBlockType('catpow/app',{
 		customClassName:false,
 	},
 	edit({attributes,setAttributes,className}){
-        const {content_path,props,config}=attributes;
+		const {content_path,props,config}=attributes;
 		
 		if(!config && content_path){
 			const path=content_path.substr(0,content_path.lastIndexOf('/'));
@@ -21,7 +21,7 @@ registerBlockType('catpow/app',{
 			});
 		}
 		
-        return [
+		return [
 			<div class="embedded_content">
 				<div class="label">{content_path}</div>
 				<ServerSideRender block='catpow/app' attributes={attributes}/>
@@ -49,8 +49,8 @@ registerBlockType('catpow/app',{
 					/>
 				}
 			</InspectorControls>
-        ];
-    },
+		];
+	},
 
 	save({attributes,className,setAttributes}){
 		return 'null';

@@ -3,7 +3,7 @@
 	description:'HTMLメール用の画像ブロックです。',
 	icon:'editor-code',
 	category:'catpow-mail',
-    parent:['catpow/t-body','catpow/t-box','catpow/t-loop'],
+	parent:['catpow/t-body','catpow/t-box','catpow/t-loop'],
 	attributes:{
 		classes:{source:'attribute',selector:'table',attribute:'class',default:'wp-block-catpow-t-image'},
 		src:{source:'attribute',selector:'[src]',attribute:'src',default:cp.theme_url+'/images/dummy.jpg'},
@@ -13,10 +13,10 @@
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
 		const {useState,useMemo}=wp.element;
-        const {classes,src,alt,loopImage}=attributes;
+		const {classes,src,alt,loopImage}=attributes;
 		const primaryClass='wp-block-catpow-t-image';
 		var states=CP.wordsToFlags(classes);
-		
+
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
 				{
@@ -31,8 +31,8 @@
 			wp.hooks.applyFilters('catpow.blocks.t-image.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		},[]);
-		
-        return [
+
+		return [
 			<table width="100%" className={classes}>
 				<tbody>
 					<tr>
@@ -74,12 +74,12 @@
 					/>
 				</PanelBody>
 			</InspectorControls>
-        ];
-    },
+		];
+	},
 
 
 	save({attributes,className,setAttributes}){
-        const {classes,src,alt,loopImage}=attributes;
+		const {classes,src,alt,loopImage}=attributes;
 		const primaryClass='wp-block-catpow-t-image';
 		var states=CP.wordsToFlags(classes);
 		return (

@@ -18,10 +18,10 @@
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
 		const {useState,useMemo}=wp.element;
-        const {type,isHtmlMail,classes,headerText,footerText,body_class,textMail,TextMode=false}=attributes;
+		const {type,isHtmlMail,classes,headerText,footerText,body_class,textMail,TextMode=false}=attributes;
 		const primaryClass='wp-block-catpow-t-body';
 		var states=CP.wordsToFlags(classes);
-		
+
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
 				{name:'type',input:'buttons',label:'メールタイプ',key:'type',values:['plain','html'],sub:{
@@ -39,8 +39,8 @@
 			wp.hooks.applyFilters('catpow.blocks.t-body.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		},[]);
-		
-        return (
+
+		return (
 			<Fragment>
 				{(!isHtmlMail || TextMode)?(
 					<TextareaControl
@@ -116,13 +116,13 @@
 						/>
 					</PanelBody>
 				</InspectorControls>
-        	</Fragment>
+			</Fragment>
 		);
-    },
+	},
 
 
 	save({attributes,className,setAttributes}){
-        const {type,isHtmlMail,classes,headerText,textMail,footerText}=attributes;
+		const {type,isHtmlMail,classes,headerText,textMail,footerText}=attributes;
 		const primaryClass='wp-block-catpow-t-body';
 		var states=CP.wordsToFlags(classes);
 		return (

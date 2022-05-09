@@ -16,7 +16,7 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
-        return [
+		return [
 			<div className="embedded_content">
 				<div class="label">
 					表示条件：
@@ -70,8 +70,8 @@
 					/>
 				</PanelBody>
 			</InspectorControls>
-        ];
-    },
+		];
+	},
 
 
 	save({attributes,className,setAttributes}){

@@ -33,7 +33,7 @@ registerBlockType('catpow/switcher',{
 		const {currentIndex=0}=attributes;
 		const [newBlocks,setNewBlocks]=useState(false);
 		const {factors,factorFlags,flagValues}=CP.config.switcher;
-		
+
 		const selectiveClasses=useMemo(()=>{
 			const {factors,factorFlags,flagValues}=CP.config.switcher;
 			const selectiveClasses=[
@@ -104,7 +104,7 @@ registerBlockType('catpow/switcher',{
 			}
 		},[attributes.factor]);
 		const currentBlockId='block-'+wp.data.select('core/block-editor').getBlock(clientId).innerBlocks[currentIndex]?.clientId;
-        return (
+		return (
 			<Fragment>
 				<div className="switcherEdit" data-current-index={currentIndex}>
 					<ul className="tabs">
@@ -148,8 +148,8 @@ registerBlockType('catpow/switcher',{
 					/>
 				</InspectorControls>
 			</Fragment>
-        );
-    },
+		);
+	},
 	save({attributes,className,setAttributes}){
 		return (<InnerBlocks.Content/>);
 	}
@@ -160,19 +160,19 @@ registerBlockType('catpow/switchercontent',{
 	title:'🐾 SwitcherContent',
 	icon:'editor-code',
 	category:'catpow',
-    parent:['catpow/switcher'],
+	parent:['catpow/switcher'],
 	attributes:{
 		cond:{source:'attribute',label:'条件',selector:'switcherContent',attribute:'cond',default:'content'},
 	},
 	edit({attributes,className,setAttributes,clientId}){
 		const {cond}=attributes;
-		
-        return (
+
+		return (
 			<div className={'switcherContent'}>
 				<InnerBlocks template={[['core/paragraph']]} templateLock={false}/>
 			</div>
 		);
-    },
+	},
 	save({attributes,className,setAttributes}){
 		const {cond}=attributes;
 		return (

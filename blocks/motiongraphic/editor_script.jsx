@@ -14,9 +14,9 @@ registerBlockType('catpow/motiongraphic',{
 	},
 	edit({attributes,setAttributes,className}){
 		const {useCallback}=wp.element;
-        const {classes='',component,props}=attributes;
+		const {classes='',component,props}=attributes;
 		const {selections}=CP.config.motiongraphic;
-		
+
 		const initSelectionItems=useCallback((items)=>{
 			if(Array.isArray(items)){
 				items.map((item)=>{
@@ -32,7 +32,7 @@ registerBlockType('catpow/motiongraphic',{
 				});
 			}
 		},[attributes]);
-		
+
 		if(!selections){
 			wp.apiFetch({path:'/cp/v1/blocks/config/motiongraphic/selections'}).then((res)=>{
 				initSelectionItems(res.items[0].sub);
@@ -42,9 +42,9 @@ registerBlockType('catpow/motiongraphic',{
 			return false;
 		}
 		const SelectedComponent=(component && Catpow.Animation[component])?Catpow.Animation[component]:false;
-		
-		
-        return (
+
+
+		return (
 			<Fragment>
 				<div class="embedded_content">
 					<div class="label">{component}</div>
@@ -77,13 +77,13 @@ registerBlockType('catpow/motiongraphic',{
 					}
 				</InspectorControls>
 			</Fragment>
-        );
-    },
+		);
+	},
 
 	save({attributes,className,setAttributes}){
-        const {classes=''}=attributes;
+		const {classes=''}=attributes;
 		const states=CP.wordsToFlags(classes);
-		
+
 		return (
 			<InnerBlocks.Content/>
 		);

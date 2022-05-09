@@ -44,8 +44,8 @@
 		const primaryClass='wp-block-catpow-icons';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
-		
-        
+
+
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
 				{name:'size',label:'サイズ',filter:'size',values:['small','medium','large']},
@@ -65,10 +65,10 @@
 			wp.hooks.applyFilters('catpow.blocks.icons.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		},[]);
-		
-		
+
+
 		let rtn=[];
-		
+
 		items.map((item,index)=>{
 			if(!item.controlClasses){item.controlClasses='control';}
 			rtn.push(
@@ -86,10 +86,10 @@
 				</CP.Item>
 			);
 		});
-		
+
 		if(attributes.EditMode===undefined){attributes.EditMode=false;}
-		
-        return [
+
+		return [
 			<BlockControls>
 				<Toolbar
 					controls={[
@@ -133,11 +133,11 @@
 				<CP.ItemControlInfoPanel/>
 			</InspectorControls>,
 			<ul className={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>
-        ];
-    },
+		];
+	},
 	save({attributes,className}){
 		const {items=[],classes,countPrefix,countSuffix}=attributes;
-		
+
 		let rtn=[];
 		items.map((item,index)=>{
 			rtn.push(

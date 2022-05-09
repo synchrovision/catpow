@@ -57,10 +57,10 @@ registerBlockType('catpow/faq',{
 		const {useState,useMemo}=wp.element;
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
 		const primaryClass='wp-block-catpow-faq';
-		
+
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.faq;
-        
+
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
 				{name:'titleCaption',label:'Qにキャプション',values:'hasTitleCaption'},
@@ -71,8 +71,8 @@ registerBlockType('catpow/faq',{
 			wp.hooks.applyFilters('catpow.blocks.faq.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		},[]);
-		
-		
+
+
 		let rtn=[];
 		const save=()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))});
@@ -153,10 +153,10 @@ registerBlockType('catpow/faq',{
 				</CP.Item>
 			);
 		});
-		
+
 		if(attributes.EditMode===undefined){attributes.EditMode=false;}
-		
-        return [
+
+		return [
 			<BlockControls>
 				<Toolbar
 					controls={[
@@ -188,14 +188,14 @@ registerBlockType('catpow/faq',{
 				<CP.ItemControlInfoPanel/>
 			</InspectorControls>,
 			<ul className={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>
-        ];
-    },
+		];
+	},
 	save({attributes,className}){
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
-		
+
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.faq;
-		
+
 		let rtn=[];
 		items.map((item,index)=>{
 			rtn.push(

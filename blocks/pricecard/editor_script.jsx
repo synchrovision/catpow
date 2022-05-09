@@ -9,10 +9,10 @@
 		const primaryClass='wp-block-catpow-pricecard';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
-		
+
 		var states=CP.wordsToFlags(classes);
-		
-        
+
+
 		var selectiveClasses=[
 			{input:'text',label:'価格単位',key:'priceUnit'},
 			{type:'radio',label:'単位の位置',values:{"unitBefore":"前","unitAfter":"後"}},
@@ -43,7 +43,7 @@
 			{label:'値引き',values:'discount'},
 			{label:'画像コード',input:'text',key:'imageCode',cond:states.isTemplate}
 		];
-		
+
 		let rtn=[];
 		const imageKeys={
 			image:{src:"src",alt:"alt",code:'imageCode',items:"items"}
@@ -184,7 +184,7 @@
 				</CP.Item>
 			);
 		});
-		
+
 		if(attributes.EditMode===undefined){attributes.EditMode=false;}
 		if(rtn.length<loopCount){
 			let len=rtn.length;
@@ -192,8 +192,8 @@
 				rtn.push(rtn[rtn.length%len]);
 			}
 		}
-		
-        return (
+
+		return (
 			<Fragment>
 				<CP.SelectModeToolbar
 					set={setAttributes}
@@ -259,16 +259,16 @@
 					</Fragment>
 				 )}
 			</Fragment>
-       );
-    },
+	   );
+	},
 	save({attributes,className}){
 		const {items=[],classes='',priceUnit,priceCaption,linkText,loopCount,doLoop}=attributes;
 		const primaryClass='wp-block-catpow-pricecard';
 		var classArray=_.uniq(classes.split(' '));
-		
+
 		var states=CP.wordsToFlags(classes);
-		
-		
+
+
 		let rtn=[];
 		const imageKeys={
 			image:{src:"src",alt:"alt",code:'imageCode',items:"items"}

@@ -57,18 +57,18 @@ registerBlockType('catpow/ranking',{
 	edit({attributes,className,setAttributes,isSelected}){
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
 		const primaryClass='wp-block-catpow-ranking';
-		
+
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.ranking;
-        
+
 		var selectiveClasses=[
 			{label:'画像',values:'hasImage'},
 			{label:'タイトルキャプション',values:'hasTitleCaption'},
 			{label:'サブタイトル',values:'hasSubTitle'},
 			{label:'リンク',values:'hasLink'}
 		];
-		
-		
+
+
 		let rtn=[];
 		const save=()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))});
@@ -148,10 +148,10 @@ registerBlockType('catpow/ranking',{
 				</CP.Item>
 			);
 		});
-		
+
 		if(attributes.EditMode===undefined){attributes.EditMode=false;}
-		
-        return [
+
+		return [
 			<BlockControls>
 				<Toolbar
 					controls={[
@@ -182,14 +182,14 @@ registerBlockType('catpow/ranking',{
 				<CP.ItemControlInfoPanel/>
 			</InspectorControls>,
 			<ul className={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>
-        ];
-    },
+		];
+	},
 	save({attributes,className}){
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
-		
+
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.ranking;
-		
+
 		let rtn=[];
 		items.map((item,index)=>{
 			rtn.push(

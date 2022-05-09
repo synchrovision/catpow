@@ -31,10 +31,10 @@ registerBlockType('catpow/listed',{
 		const primaryClass='wp-block-catpow-listed';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
-		
+
 		var states=CP.wordsToFlags(classes);
-		
-        
+
+
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
 				{name:'titleTag',input:'buttons',filter:'titleTag',key:'TitleTag',label:'タイトルタグ',values:['h2','h3','h4'],effect:(val,{set})=>{
@@ -136,11 +136,11 @@ registerBlockType('catpow/listed',{
 			wp.hooks.applyFilters('catpow.blocks.listed.selectiveItemTemplateClasses',CP.finderProxy(selectiveItemTemplateClasses));
 			return selectiveItemTemplateClasses;
 		},[]);
-		
+
 		const save=()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))});
 		};
-		
+
 		let rtn=[];
 		const {imageKeys}=CP.config.listed;
 
@@ -273,15 +273,15 @@ registerBlockType('catpow/listed',{
 				</CP.Item>
 			);
 		});
-		
+
 		if(rtn.length<loopCount){
 			let len=rtn.length;
 			while(rtn.length<loopCount){
 				rtn.push(rtn[rtn.length%len]);
 			}
 		}
-		
-        return (
+
+		return (
 			<Fragment>
 				<CP.SelectModeToolbar
 					set={setAttributes}
@@ -368,13 +368,13 @@ registerBlockType('catpow/listed',{
 					</Fragment>
 				)}
 			</Fragment>
-        );
-    },
+		);
+	},
 	save({attributes,className}){
 		const {items=[],TitleTag,SubTitleTag,classes='',countPrefix,countSuffix,subCountPrefix,subCountSuffix,linkUrl,linkText,loopParam,doLoop}=attributes;
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.listed;
-		
+
 		let rtn=[];
 		items.map((item,index)=>{
 			rtn.push(

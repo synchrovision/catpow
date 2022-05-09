@@ -10,8 +10,8 @@
 		const primaryClass='wp-block-catpow-formbuttons';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		var classNameArray=className.split(' ');
-		
-        
+
+
 		const selectiveClasses=useMemo(()=>{
 			var selectiveClasses=[
 				{name:'size',label:'サイズ',filter:'size',values:{l:'大',m:'中',s:'小',ss:'極小'}},
@@ -32,13 +32,13 @@
 			wp.hooks.applyFilters('catpow.blocks.formbuttons.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		},[]);
-		
+
 		const saveItems=()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))});
 		}
-		
+
 		let rtn=[];
-		
+
 		items.map((item,index)=>{
 			if(!item.controlClasses){item.controlClasses='control';}
 			const itemStates=CP.wordsToFlags(item.classes);
@@ -67,10 +67,10 @@
 				</CP.Item>
 			);
 		});
-		
+
 		if(attributes.EditMode===undefined){attributes.EditMode=false;}
-		
-        return [
+
+		return [
 			<ul className={classes}>{rtn}</ul>,
 			<InspectorControls>
 				<CP.SelectClassPanel
@@ -103,13 +103,13 @@
 			<BlockControls>
 				<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
 			</BlockControls>
-        ];
-    },
+		];
+	},
 	save({attributes,className}){
 		const {items=[],classes=''}=attributes;
 		var classArray=_.uniq(classes.split(' '));
 		const blockType=wp.data.select('core/blocks').getBlockType('catpow/formbuttons');
-		
+
 		let rtn=[];
 		items.map((item,index)=>{
 			const itemStates=CP.wordsToFlags(item.classes);

@@ -12,7 +12,7 @@ registerBlockType('catpow/picture',{
 	category: 'catpow',
 	attributes:{
 		classes:{source:'attribute',selector:'div',attribute:'class',default:'wp-block-catpow-picture'},
-		
+
 		sources:CP.getPictureSoucesAttributesForDevices(CP.config.picture.devices),
 
 		mime:{source:'attribute',selector:'[src]',attribute:'data-mime'},
@@ -22,11 +22,11 @@ registerBlockType('catpow/picture',{
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-        const {classes,sources,src,srcset,alt,code,device}=attributes;
-		
+		const {classes,sources,src,srcset,alt,code,device}=attributes;
+
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.picture;
-		
+
 		const selectiveClasses=[
 			{input:'picture',label:'画像',keys:imageKeys.image,devices,isTemplate:states.isTemplate},
 			{
@@ -42,8 +42,8 @@ registerBlockType('catpow/picture',{
 				]
 			}
 		];
-		
-        return (
+
+		return (
 			<Fragment>
 				<CP.SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices}/>
 				<div className={classes+(device?' alt_content '+device:'')}>
@@ -72,14 +72,14 @@ registerBlockType('catpow/picture',{
 					/>
 				</InspectorControls>
 			</Fragment>
-        );
-    },
+		);
+	},
 	save({attributes,className,setAttributes}){
-        const {classes,srouces,src,srcset,alt,code}=attributes;
-		
+		const {classes,srouces,src,srcset,alt,code}=attributes;
+
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.picture;
-		
+
 		return (
 			<div className={classes}>
 				<CP.ResponsiveImage

@@ -5,9 +5,9 @@
 	category: 'catpow-functional',
 	example:CP.example,
 	edit({attributes,setAttributes,className}){
-        const {content_path,query,AltMode=false}=attributes;
-		 
-        return (
+		const {content_path,query,AltMode=false}=attributes;
+
+		return (
 			<Fragment>
 				<BlockControls>
 					<Toolbar
@@ -44,8 +44,8 @@
 					</PanelBody>
 				</InspectorControls>
 			</Fragment>
-        );
-    },
+		);
+	},
 
 	save({attributes,className,setAttributes}){
 		return <InnerBlocks.Content/>;
@@ -57,21 +57,21 @@ registerBlockType('catpow/loopblockcontent',{
 	title:'🐾 LoopBlockContent',
 	icon:'editor-code',
 	category:'catpow',
-    parent:['catpow/loopblock'],
+	parent:['catpow/loopblock'],
 	attributes:{
 		name:{type:'attribute',label:'名前',selector:'loopBlockContent',attribute:'name',default:'content'},
 	},
 	edit({attributes,className,setAttributes,clientId}){
 		const {name}=attributes;
-		
+
 		const template=(name=='on_empty')?[['core/paragraph',{align:'center',content:'Not Found'}]]:[['catpow/section']];
-		
-        return (
+
+		return (
 			<div className={'loopBlockContent'}>
 				<InnerBlocks template={template} templateLock={false}/>
 			</div>
 		);
-    },
+	},
 	save({attributes,className,setAttributes}){
 		const {name}=attributes;
 		return (

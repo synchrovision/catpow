@@ -27,7 +27,7 @@ registerBlockType('catpow/accordion',{
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
 		const {useState,useMemo}=wp.element;
-        const {
+		const {
 			classes,title,
 			imageMime,imageSrc,imageAlt,imageCode
 		}=attributes;
@@ -62,7 +62,7 @@ registerBlockType('catpow/accordion',{
 			return selectiveClasses;
 		},[]);
 		
-        return (
+		return (
 			<Fragment>
 				<div className={classes}>
 					<div className="header">
@@ -105,10 +105,10 @@ registerBlockType('catpow/accordion',{
 					</PanelBody>
 				</InspectorControls>
 			</Fragment>
-        );
-    },
+		);
+	},
 	save({attributes,className,setAttributes}){
-        const {
+		const {
 			classes,title,
 			imageMime,imageSrc,imageAlt,imageCode
 		}=attributes;

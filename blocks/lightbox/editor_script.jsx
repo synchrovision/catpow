@@ -27,9 +27,9 @@ registerBlockType('catpow/lightbox',{
 		const {useState,useMemo}=wp.element;
 		const {items=[],classes,boxClasses,blockState,loopCount,doLoop,EditMode=false,AltMode=false,OpenMode=false,currentItemIndex=0}=attributes;
 		const {imageKeys}=CP.config.lightbox;
-		
+
 		var states=CP.wordsToFlags(classes);
-        
+
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
 				{name:'size',label:'サイズ',values:['small','medium','large']},
@@ -78,13 +78,13 @@ registerBlockType('catpow/lightbox',{
 			wp.hooks.applyFilters('catpow.blocks.lightbox.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		},[]);
-		
+
 		const save=()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))});
 		};
-		
+
 		let rtn=[];		
-		
+
 		items.map((item,index)=>{
 			rtn.push(
 				<CP.Item
@@ -129,15 +129,15 @@ registerBlockType('catpow/lightbox',{
 				</CP.Item>
 			);
 		});
-		
+
 		if(rtn.length<loopCount){
 			let len=rtn.length;
 			while(rtn.length<loopCount){
 				rtn.push(rtn[rtn.length%len]);
 			}
 		}
-		
-        return (
+
+		return (
 			<Fragment>
 				<CP.SelectModeToolbar
 					set={setAttributes}
@@ -286,15 +286,15 @@ registerBlockType('catpow/lightbox',{
 					</div>
 				)}
 			</Fragment>
-        );
-    },
+		);
+	},
 	save({attributes,className}){
 		const {items=[],classes='',boxClasses,blockState,doLoop}=attributes;
-		
+
 		var states=CP.wordsToFlags(classes);
-		
+
 		const {imageKeys}=CP.config.lightbox;
-		
+
 		return (
 			<Fragment>
 				<ul className={classes}>

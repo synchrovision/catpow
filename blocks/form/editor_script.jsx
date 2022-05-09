@@ -5,10 +5,10 @@
 	category: 'catpow-embed',
 	example:CP.example,
 	edit({attributes,setAttributes,className}){
-        const {content_path,post_data_path,inputs,data_id,values}=attributes;
-		
+		const {content_path,post_data_path,inputs,data_id,values}=attributes;
+
 		let postDataSelection=false;
-		
+
 		Object.keys(cpEmbeddablesTree.form).forEach((parentKey)=>{
 			cpEmbeddablesTree.form[parentKey].children.map((item)=>{
 				if(item.id===content_path && item.post_data_paths){
@@ -27,8 +27,8 @@
 				setAttributes({post_data_path:postDataSelection[0]['id']});
 			}
 		}
-		
-        return [
+
+		return [
 			<div class="embedded_content">
 				<div class="label">{content_path}</div>
 				<ServerSideRender block='catpow/form' attributes={attributes}/>
@@ -54,26 +54,26 @@
 						/>
 					}
 				</PanelBody>
-                <PanelBody title="入力値" initialOpen={false}>
-                    <TextControl
-                        label='入力名'
-                        value={inputs}
-                        onChange={(inputs)=>{setAttributes({inputs});}}
-                    />
-                    <TextControl
-                        label='データID'
-                        value={data_id}
-                        onChange={(data_id)=>{setAttributes({data_id});}}
-                    />
-                    <TextareaControl
-                        label='初期値'
-                        value={values}
-                        onChange={(values)=>{setAttributes({values});}}
-                    />
-                </PanelBody>
+				<PanelBody title="入力値" initialOpen={false}>
+					<TextControl
+						label='入力名'
+						value={inputs}
+						onChange={(inputs)=>{setAttributes({inputs});}}
+					/>
+					<TextControl
+						label='データID'
+						value={data_id}
+						onChange={(data_id)=>{setAttributes({data_id});}}
+					/>
+					<TextareaControl
+						label='初期値'
+						value={values}
+						onChange={(values)=>{setAttributes({values});}}
+					/>
+				</PanelBody>
 			</InspectorControls>
-        ];
-    },
+		];
+	},
 
 	save({attributes,className,setAttributes}){
 		return 'null';

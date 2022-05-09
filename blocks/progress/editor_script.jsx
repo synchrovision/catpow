@@ -8,7 +8,7 @@
 		const {Fragment,useMemo,useCallback,useEffect}=wp.element;
 		const {Flex,FlexItem,FlexBlock,PanelBody,Button,Spinner,SelectControl,CheckboxControl,TextControl}=wp.components;
 		const {post,settings,selections,activeLabel,progress,isWaiting=false}=attributes;
-		
+
 		const selectiveClasses=useMemo(()=>[
 			{input:'select',key:'post',values:selections},
 			{input:'range',key:'step',min:0,max:settings?(settings.items.length-1):0}
@@ -21,7 +21,7 @@
 			]}
 		],[]);
 		const sizeSettings=useMemo(()=>CP.parseSelections(['small','medium','large']),[]);
-		
+
 		const setSettings=useCallback((args)=>{
 			const {currentItemIndex,...otherArgs}=args;
 			if(currentItemIndex!==undefined){setAttributes({currentItemIndex});}
@@ -46,7 +46,7 @@
 				setAttributes({post:'default',settings:false,selections:false,isWaiting:false});
 			});
 		},[post]);
-		
+
 		const Items=useCallback((props)=>{
 			const {countPrefix,countSuffix}=settings;
 			const states=CP.wordsToFlags(settings.classes);
@@ -73,7 +73,7 @@
 				</li>
 			));
 		},[setAttributes,attributes,setSettings,settings,isSelected]);
-		 
+
 		if(!settings){
 			wp.apiFetch({path:'/cp/v1/blocks/config/progress/settings',method:'post',data:{post}}).then((settings)=>{
 				setAttributes({settings});
@@ -92,10 +92,10 @@
 			</Flex>
 		),[]);
 		useEffect(()=>{setAttributes({settings:false})},[post]);
-		
+
 		const states=(settings && settings.classes)?CP.wordsToFlags(settings.classes):{};
-		
-        return (
+
+		return (
 			<Fragment>
 				<InspectorControls>
 					<CP.SelectClassPanel
@@ -148,8 +148,8 @@
 					):<CenterSpinner/>}
 				</Fragment>
 			</Fragment>
-        );
-    },
+		);
+	},
 	save({attributes,className}){
 		return false;
 	}

@@ -83,7 +83,7 @@
 			}
 		}
 		
-        return (
+		return (
 			<Fragment>
 				<CP.SelectModeToolbar
 					set={setAttributes}
@@ -137,8 +137,8 @@
 					</Fragment>
 				)}
 			</Fragment>
-        );
-    },
+		);
+	},
 	save({attributes,className}){
 		const {items=[],classes='',loopCount,doLoop,}=attributes;
 		const states=CP.wordsToFlags(classes);

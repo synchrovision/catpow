@@ -14,20 +14,20 @@ registerBlockType('catpow/sticky',{
 	category:'catpow',
 	attributes:{
 		classes:{source:'attribute',selector:'div',attribute:'class',default:'wp-block-catpow-sticky topLeft small label'},
-		
+
 		labelText:{source:'children',selector:'.content>.label',defalt:['ラベル']},
-		
+
 		openButtonImageSrc:{source:'attribute',selector:'.wp-block-catpow-sticky>.stickyButton [src].open',attribute:'src',default:cp.theme_url+'/images/dummy_icon.svg'},
 		closeButtonImageSrc:{source:'attribute',selector:'.wp-block-catpow-sticky>.stickyButton [src].close',attribute:'src',default:cp.theme_url+'/images/dummy_icon.svg'},
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
 		const {useState,useMemo}=wp.element;
-        const {classes,labelText}=attributes;
-		
+		const {classes,labelText}=attributes;
+
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.sticky;
-		
+
 		const selectiveClasses=useMemo(()=>{
 			const {imageKeys}=CP.config.sticky;
 			const selectiveClasses=[
@@ -62,8 +62,8 @@ registerBlockType('catpow/sticky',{
 			wp.hooks.applyFilters('catpow.blocks.sticky.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		},[]);
-		
-        return [
+
+		return [
 			<div className={classes}>
 				{states.collapsible && 
 					<div class="stickyButton">
@@ -114,14 +114,14 @@ registerBlockType('catpow/sticky',{
 					/>
 				</PanelBody>
 			</InspectorControls>
-        ];
-    },
+		];
+	},
 	save({attributes,className,setAttributes}){
-        const {classes='',labelText}=attributes;
-		
+		const {classes='',labelText}=attributes;
+
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.sticky;
-		
+
 		return (
 			<div className={classes}>
 				{states.collapsible && 
@@ -198,14 +198,14 @@ registerBlockType('catpow/stickycontent',{
 	title:'🐾 StickyContent',
 	icon:'editor-code',
 	category:'catpow',
-    parent:['catpow/sticky'],
+	parent:['catpow/sticky'],
 	edit({attributes,className,setAttributes}){
-        return [
+		return [
 			<div className={'sticky_content'}>
 				<InnerBlocks template={[['core/paragraph']]} templateLock={false}/>
 			</div>
-        ];
-    },
+		];
+	},
 	save({attributes,className,setAttributes}){
 		return (
 			<div className={'sticky_content'}>

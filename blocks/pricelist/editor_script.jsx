@@ -8,10 +8,10 @@
 		const {useState,useMemo}=wp.element;
 		const {items=[],classes,loopParam,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-pricelist';
-		
+
 		var states=CP.wordsToFlags(classes);
-		
-        
+
+
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
 				{
@@ -40,7 +40,7 @@
 			wp.hooks.applyFilters('catpow.blocks.pricelist.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		},[]);
-		
+
 		let rtn=[];
 		const imageKeys={
 			image:{src:"imageSrc",alt:"imageAlt",code:"imageCode",items:"items"}
@@ -100,7 +100,7 @@
 				</CP.Item>
 			);
 		});
-		
+
 		if(attributes.EditMode===undefined){attributes.EditMode=false;}
 		if(rtn.length<loopCount){
 			let len=rtn.length;
@@ -108,8 +108,8 @@
 				rtn.push(rtn[rtn.length%len]);
 			}
 		}
-		
-        return (
+
+		return (
 			<Fragment>
 				<CP.SelectModeToolbar
 					set={setAttributes}
@@ -178,18 +178,18 @@
 					 )}
 				</Fragment>
 			</Fragment>
-        );
-    },
+		);
+	},
 	save({attributes,className}){
 		const {items=[],classes='',loopParam,loopCount,doLoop}=attributes;
 		var classArray=_.uniq(classes.split(' '));
-		
+
 		var states=CP.wordsToFlags(classes);
-		
+
 		const imageKeys={
 			image:{src:"imageSrc",alt:"imageAlt",items:"items"}
 		};
-		
+
 		let rtn=[];
 		items.map((item,index)=>{
 			const itemStates=CP.wordsToFlags(item.classes);
