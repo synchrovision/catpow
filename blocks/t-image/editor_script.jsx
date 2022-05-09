@@ -12,19 +12,25 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
+		const {useState,useMemo}=wp.element;
         const {classes,src,alt,loopImage}=attributes;
 		const primaryClass='wp-block-catpow-t-image';
 		var states=CP.wordsToFlags(classes);
 		
-		var selectiveClasses=[
-			{
-				label:'テンプレート',
-				values:'isTemplate',
-				sub:[
-					{label:'画像出力コード',input:'text',key:'loopImage'},
-				]
-			}
-		];
+		const selectiveClasses=useMemo(()=>{
+			const selectiveClasses=[
+				{
+					name:'template',
+					label:'テンプレート',
+					values:'isTemplate',
+					sub:[
+						{name:'loopImage',label:'画像出力コード',input:'text',key:'loopImage'},
+					]
+				}
+			];
+			wp.hooks.applyFilters('catpow.blocks.t-image.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		
         return [
 			<table width="100%" className={classes}>

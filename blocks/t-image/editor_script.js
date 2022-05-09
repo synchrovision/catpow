@@ -33,21 +33,30 @@ registerBlockType('catpow/t-image', {
     var attributes = _ref.attributes,
         className = _ref.className,
         setAttributes = _ref.setAttributes;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var classes = attributes.classes,
         src = attributes.src,
         alt = attributes.alt,
         loopImage = attributes.loopImage;
     var primaryClass = 'wp-block-catpow-t-image';
     var states = CP.wordsToFlags(classes);
-    var selectiveClasses = [{
-      label: 'テンプレート',
-      values: 'isTemplate',
-      sub: [{
-        label: '画像出力コード',
-        input: 'text',
-        key: 'loopImage'
-      }]
-    }];
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = [{
+        name: 'template',
+        label: 'テンプレート',
+        values: 'isTemplate',
+        sub: [{
+          name: 'loopImage',
+          label: '画像出力コード',
+          input: 'text',
+          key: 'loopImage'
+        }]
+      }];
+      wp.hooks.applyFilters('catpow.blocks.t-image.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
     return [wp.element.createElement("table", {
       width: "100%",
       className: classes
