@@ -9,13 +9,18 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
+		const {useState,useMemo}=wp.element;
         const {classes}=attributes;
 		const primaryClass='wp-block-catpow-t-box';
 		var states=CP.wordsToFlags(classes);
 		
-		var selectiveClasses=[
-			{label:'サイズ',values:['large','medium','small']}
-		];
+		const selectiveClasses=useMemo(()=>{
+			const selectiveClasses=[
+				{name:'size',label:'サイズ',values:['large','medium','small']}
+			];
+			wp.hooks.applyFilters('catpow.blocks.t-box.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		
         return [
 			<table className={classes}>

@@ -17,13 +17,21 @@ registerBlockType('catpow/t-box', {
     var attributes = _ref.attributes,
         className = _ref.className,
         setAttributes = _ref.setAttributes;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var classes = attributes.classes;
     var primaryClass = 'wp-block-catpow-t-box';
     var states = CP.wordsToFlags(classes);
-    var selectiveClasses = [{
-      label: 'サイズ',
-      values: ['large', 'medium', 'small']
-    }];
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = [{
+        name: 'size',
+        label: 'サイズ',
+        values: ['large', 'medium', 'small']
+      }];
+      wp.hooks.applyFilters('catpow.blocks.t-box.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
     return [wp.element.createElement("table", {
       className: classes
     }, wp.element.createElement("tbody", null, wp.element.createElement("tr", null, wp.element.createElement("td", null, wp.element.createElement(InnerBlocks, null))))), wp.element.createElement(InspectorControls, null, wp.element.createElement(CP.SelectClassPanel, {
