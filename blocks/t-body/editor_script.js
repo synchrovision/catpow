@@ -47,6 +47,9 @@ registerBlockType('catpow/t-body', {
     var attributes = _ref.attributes,
         className = _ref.className,
         setAttributes = _ref.setAttributes;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var type = attributes.type,
         isHtmlMail = attributes.isHtmlMail,
         classes = attributes.classes,
@@ -58,35 +61,45 @@ registerBlockType('catpow/t-body', {
         TextMode = _attributes$TextMode === void 0 ? false : _attributes$TextMode;
     var primaryClass = 'wp-block-catpow-t-body';
     var states = CP.wordsToFlags(classes);
-    var selectiveClasses = [{
-      input: 'buttons',
-      label: 'メールタイプ',
-      key: 'type',
-      values: ['plain', 'html'],
-      sub: {
-        html: [{
-          input: 'bool',
-          label: 'テキストメール編集モード',
-          key: 'TextMode'
-        }, 'color', {
-          label: 'ヘッダ',
-          values: 'hasHeader'
-        }, {
-          label: 'フッタ',
-          values: 'hasFooter'
-        }, {
-          type: 'buttons',
-          label: '背景色',
-          values: ['white', 'gray', 'black'],
-          key: 'body_class'
-        }]
-      },
-      effect: function effect(val) {
-        setAttributes({
-          isHtmlMail: val === 'html'
-        });
-      }
-    }];
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = [{
+        name: 'type',
+        input: 'buttons',
+        label: 'メールタイプ',
+        key: 'type',
+        values: ['plain', 'html'],
+        sub: {
+          html: [{
+            name: 'textMode',
+            input: 'bool',
+            label: 'テキストメール編集モード',
+            key: 'TextMode'
+          }, 'color', {
+            name: 'header',
+            label: 'ヘッダ',
+            values: 'hasHeader'
+          }, {
+            name: 'footer',
+            label: 'フッタ',
+            values: 'hasFooter'
+          }, {
+            name: 'body',
+            type: 'buttons',
+            label: '背景色',
+            values: ['white', 'gray', 'black'],
+            key: 'body_class'
+          }]
+        },
+        effect: function effect(val, states, _ref2) {
+          var set = _ref2.set;
+          set({
+            isHtmlMail: val === 'html'
+          });
+        }
+      }];
+      wp.hooks.applyFilters('catpow.blocks.t-body.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
     return wp.element.createElement(Fragment, null, !isHtmlMail || TextMode ? wp.element.createElement(TextareaControl, {
       value: textMail,
       onChange: function onChange(textMail) {
@@ -156,10 +169,10 @@ registerBlockType('catpow/t-body', {
       value: classes
     }))));
   },
-  save: function save(_ref2) {
-    var attributes = _ref2.attributes,
-        className = _ref2.className,
-        setAttributes = _ref2.setAttributes;
+  save: function save(_ref3) {
+    var attributes = _ref3.attributes,
+        className = _ref3.className,
+        setAttributes = _ref3.setAttributes;
     var type = attributes.type,
         isHtmlMail = attributes.isHtmlMail,
         classes = attributes.classes,

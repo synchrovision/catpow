@@ -17,23 +17,28 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
+		const {useState,useMemo}=wp.element;
         const {type,isHtmlMail,classes,headerText,footerText,body_class,textMail,TextMode=false}=attributes;
 		const primaryClass='wp-block-catpow-t-body';
 		var states=CP.wordsToFlags(classes);
 		
-		var selectiveClasses=[
-			{input:'buttons',label:'メールタイプ',key:'type',values:['plain','html'],sub:{
-				html:[
-					{input:'bool',label:'テキストメール編集モード',key:'TextMode'},
-					'color',
-					{label:'ヘッダ',values:'hasHeader'},
-					{label:'フッタ',values:'hasFooter'},
-					{type:'buttons',label:'背景色',values:['white','gray','black'],key:'body_class'}
-				]
-			},effect:(val)=>{
-				setAttributes({isHtmlMail:val==='html'});
-			}}
-		];
+		const selectiveClasses=useMemo(()=>{
+			const selectiveClasses=[
+				{name:'type',input:'buttons',label:'メールタイプ',key:'type',values:['plain','html'],sub:{
+					html:[
+						{name:'textMode',input:'bool',label:'テキストメール編集モード',key:'TextMode'},
+						'color',
+						{name:'header',label:'ヘッダ',values:'hasHeader'},
+						{name:'footer',label:'フッタ',values:'hasFooter'},
+						{name:'body',type:'buttons',label:'背景色',values:['white','gray','black'],key:'body_class'}
+					]
+				},effect:(val,states,{set})=>{
+					set({isHtmlMail:val==='html'});
+				}}
+			];
+			wp.hooks.applyFilters('catpow.blocks.t-body.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		
         return (
 			<Fragment>
