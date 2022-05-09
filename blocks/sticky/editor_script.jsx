@@ -15,45 +15,53 @@ registerBlockType('catpow/sticky',{
 	attributes:{
 		classes:{source:'attribute',selector:'div',attribute:'class',default:'wp-block-catpow-sticky topLeft small label'},
 		
-		labelText:{source:'children',selector:'.label',defalt:['ラベル']},
+		labelText:{source:'children',selector:'.content>.label',defalt:['ラベル']},
 		
 		openButtonImageSrc:{source:'attribute',selector:'.wp-block-catpow-sticky>.stickyButton [src].open',attribute:'src',default:cp.theme_url+'/images/dummy_icon.svg'},
 		closeButtonImageSrc:{source:'attribute',selector:'.wp-block-catpow-sticky>.stickyButton [src].close',attribute:'src',default:cp.theme_url+'/images/dummy_icon.svg'},
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
+		const {useState,useMemo}=wp.element;
         const {classes,labelText}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.sticky;
 		
-		var selectiveClasses=[
-			{label:'位置',input:'position',disable:['left','center','right']},
-			{label:'サイズ',filter:'size',values:{full:'全面',large:'大',medium:'中',small:'小'}},
-			{
-				label:'タイプ',
-				filter:'type',
-				values:{label:'ラベル',container:'コンテナ',collapsible:'折り畳み'},
-				sub:{
-					label:[
-						'color'
-					],
-					collapsible:[
-						'color',
-						{
-							label:'ボタン',
-							values:{pullButton:'引き出し',menuButton:'メニュー',labelButton:'ラベル',imageButton:'画像'},
-							sub:{
-								imageButton:[
-									{label:'open',input:'image',keys:imageKeys.openButtonImage,size:'thumbnail'},
-									{label:'close',input:'image',keys:imageKeys.closeButtonImage,size:'thumbnail'}
-								]
+		const selectiveClasses=useMemo(()=>{
+			const {imageKeys}=CP.config.sticky;
+			const selectiveClasses=[
+				{name:'position',label:'位置',input:'position',disable:['left','center','right']},
+				{name:'size',label:'サイズ',filter:'size',values:{full:'全面',large:'大',medium:'中',small:'小'}},
+				{
+					name:'type',
+					label:'タイプ',
+					filter:'type',
+					values:{label:'ラベル',container:'コンテナ',collapsible:'折り畳み'},
+					sub:{
+						label:[
+							'color'
+						],
+						collapsible:[
+							'color',
+							{
+								name:'button',
+								label:'ボタン',
+								values:{pullButton:'引き出し',menuButton:'メニュー',labelButton:'ラベル',imageButton:'画像'},
+								sub:{
+									imageButton:[
+										{label:'open',input:'image',keys:imageKeys.openButtonImage,size:'thumbnail'},
+										{label:'close',input:'image',keys:imageKeys.closeButtonImage,size:'thumbnail'}
+									]
+								}
 							}
-						}
-					]
+						]
+					}
 				}
-			}
-		];
+			];
+			wp.hooks.applyFilters('catpow.blocks.sticky.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		
         return [
 			<div className={classes}>

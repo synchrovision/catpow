@@ -25,7 +25,7 @@ registerBlockType('catpow/sticky', {
     },
     labelText: {
       source: 'children',
-      selector: '.label',
+      selector: '.content>.label',
       defalt: ['ラベル']
     },
     openButtonImageSrc: {
@@ -46,57 +46,69 @@ registerBlockType('catpow/sticky', {
     var attributes = _ref.attributes,
         className = _ref.className,
         setAttributes = _ref.setAttributes;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var classes = attributes.classes,
         labelText = attributes.labelText;
     var states = CP.wordsToFlags(classes);
     var imageKeys = CP.config.sticky.imageKeys;
-    var selectiveClasses = [{
-      label: '位置',
-      input: 'position',
-      disable: ['left', 'center', 'right']
-    }, {
-      label: 'サイズ',
-      filter: 'size',
-      values: {
-        full: '全面',
-        large: '大',
-        medium: '中',
-        small: '小'
-      }
-    }, {
-      label: 'タイプ',
-      filter: 'type',
-      values: {
-        label: 'ラベル',
-        container: 'コンテナ',
-        collapsible: '折り畳み'
-      },
-      sub: {
-        label: ['color'],
-        collapsible: ['color', {
-          label: 'ボタン',
-          values: {
-            pullButton: '引き出し',
-            menuButton: 'メニュー',
-            labelButton: 'ラベル',
-            imageButton: '画像'
-          },
-          sub: {
-            imageButton: [{
-              label: 'open',
-              input: 'image',
-              keys: imageKeys.openButtonImage,
-              size: 'thumbnail'
-            }, {
-              label: 'close',
-              input: 'image',
-              keys: imageKeys.closeButtonImage,
-              size: 'thumbnail'
-            }]
-          }
-        }]
-      }
-    }];
+    var selectiveClasses = useMemo(function () {
+      var imageKeys = CP.config.sticky.imageKeys;
+      var selectiveClasses = [{
+        name: 'position',
+        label: '位置',
+        input: 'position',
+        disable: ['left', 'center', 'right']
+      }, {
+        name: 'size',
+        label: 'サイズ',
+        filter: 'size',
+        values: {
+          full: '全面',
+          large: '大',
+          medium: '中',
+          small: '小'
+        }
+      }, {
+        name: 'type',
+        label: 'タイプ',
+        filter: 'type',
+        values: {
+          label: 'ラベル',
+          container: 'コンテナ',
+          collapsible: '折り畳み'
+        },
+        sub: {
+          label: ['color'],
+          collapsible: ['color', {
+            name: 'button',
+            label: 'ボタン',
+            values: {
+              pullButton: '引き出し',
+              menuButton: 'メニュー',
+              labelButton: 'ラベル',
+              imageButton: '画像'
+            },
+            sub: {
+              imageButton: [{
+                label: 'open',
+                input: 'image',
+                keys: imageKeys.openButtonImage,
+                size: 'thumbnail'
+              }, {
+                label: 'close',
+                input: 'image',
+                keys: imageKeys.closeButtonImage,
+                size: 'thumbnail'
+              }]
+            }
+          }]
+        }
+      }];
+      wp.hooks.applyFilters('catpow.blocks.sticky.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
     return [wp.element.createElement("div", {
       className: classes
     }, states.collapsible && wp.element.createElement("div", {
