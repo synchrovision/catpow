@@ -41,13 +41,18 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,onReplace,mergeBlocks}){
+		const {useState,useMemo}=wp.element;
         const {classes,text}=attributes;
 		const primaryClass='wp-block-catpow-t-paragraph';
 		var states=CP.wordsToFlags(classes);
 		
-		var selectiveClasses=[
-			{label:'サイズ',values:['large','medium','small']}
-		];
+		const selectiveClasses=useMemo(()=>{
+			const selectiveClasses=[
+				{name:'size',label:'サイズ',values:['large','medium','small']}
+			];
+			wp.hooks.applyFilters('catpow.blocks.t-paragraph.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		
         return [
 			<table width="100%" className={classes}>

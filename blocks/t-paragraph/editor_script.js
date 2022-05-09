@@ -54,14 +54,22 @@ registerBlockType('catpow/t-paragraph', {
         setAttributes = _ref.setAttributes,
         onReplace = _ref.onReplace,
         mergeBlocks = _ref.mergeBlocks;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var classes = attributes.classes,
         text = attributes.text;
     var primaryClass = 'wp-block-catpow-t-paragraph';
     var states = CP.wordsToFlags(classes);
-    var selectiveClasses = [{
-      label: 'サイズ',
-      values: ['large', 'medium', 'small']
-    }];
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = [{
+        name: 'size',
+        label: 'サイズ',
+        values: ['large', 'medium', 'small']
+      }];
+      wp.hooks.applyFilters('catpow.blocks.t-paragraph.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
     return [wp.element.createElement("table", {
       width: "100%",
       className: classes
