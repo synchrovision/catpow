@@ -47,7 +47,7 @@
 		
         
 		const selectiveClasses=useMemo(()=>{
-			var selectiveClasses=[
+			const selectiveClasses=[
 				{name:'size',label:'サイズ',filter:'size',values:['small','medium','large']},
 				{name:'filled',label:'塗り',values:"filled",sub:[
 					 {name:'shape',label:'形状',filter:'shape',values:{circle:"丸",square:"四角"}},
