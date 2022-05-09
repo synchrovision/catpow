@@ -11,15 +11,20 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
+		const {useState,useMemo}=wp.element;
         const {classes,title}=attributes;
 		const primaryClass='wp-block-catpow-t-button';
 		var states=CP.wordsToFlags(classes);
 		
-		var selectiveClasses=[
-			'color',
-			{label:'サイズ',values:['large','medium','small']},
-			{input:'text',label:'URL',key:'url'}
-		];
+		const selectiveClasses=useMemo(()=>{
+			const selectiveClasses=[
+				'color',
+				{name:'size',label:'サイズ',values:['large','medium','small']},
+				{name:'url',input:'text',label:'URL',key:'url'}
+			];
+			wp.hooks.applyFilters('catpow.blocks.t-button.selectiveClasses',CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		},[]);
 		
         return [
 			<a className={classes}>

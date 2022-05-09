@@ -28,18 +28,27 @@ registerBlockType('catpow/t-button', {
     var attributes = _ref.attributes,
         className = _ref.className,
         setAttributes = _ref.setAttributes;
+    var _wp$element = wp.element,
+        useState = _wp$element.useState,
+        useMemo = _wp$element.useMemo;
     var classes = attributes.classes,
         title = attributes.title;
     var primaryClass = 'wp-block-catpow-t-button';
     var states = CP.wordsToFlags(classes);
-    var selectiveClasses = ['color', {
-      label: 'サイズ',
-      values: ['large', 'medium', 'small']
-    }, {
-      input: 'text',
-      label: 'URL',
-      key: 'url'
-    }];
+    var selectiveClasses = useMemo(function () {
+      var selectiveClasses = ['color', {
+        name: 'size',
+        label: 'サイズ',
+        values: ['large', 'medium', 'small']
+      }, {
+        name: 'url',
+        input: 'text',
+        label: 'URL',
+        key: 'url'
+      }];
+      wp.hooks.applyFilters('catpow.blocks.t-button.selectiveClasses', CP.finderProxy(selectiveClasses));
+      return selectiveClasses;
+    }, []);
     return [wp.element.createElement("a", {
       className: classes
     }, wp.element.createElement("table", {
