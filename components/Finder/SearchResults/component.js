@@ -125,7 +125,15 @@ Catpow.Finder.SearchResults = function (props) {
     }), state.colsToShow.map(function (col) {
       return wp.element.createElement("th", {
         className: "cell"
-      }, col.label);
+      }, col.label, wp.element.createElement("span", {
+        className: "sort sort-" + (state.sort[col.name] ? state.sort[col.name] : 'none'),
+        onClick: function onClick() {
+          dispatch({
+            type: 'switchSort',
+            key: col.name
+          });
+        }
+      }));
     }))), wp.element.createElement("tbody", {
       className: "body"
     }, state.itemsInPage.map(function (row) {

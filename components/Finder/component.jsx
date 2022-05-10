@@ -32,6 +32,19 @@ Catpow.Finder=(props)=>{
 				return state.query[key].some((val)=>val==row[key].value[0]);
 			});
 		});
+		if(Object.keys(state.sort).length>0){
+			const keys=Object.keys(state.sort);
+			state.items.sort((a,b)=>{
+				var rtn=0;
+				keys.some((key)=>{
+					if(a[key]==b[key]){return false;}
+					rtn=(a[key].value[0]<b[key].value[0] && state.sort[key]==='asc')?-1:1;
+					return true;
+				});
+				console.log(rtn);
+				return rtn;
+			});
+		}
 		reflectResults(state);
 	},[]);
 	const reflectResults=useCallback((state)=>{
@@ -108,6 +121,22 @@ Catpow.Finder=(props)=>{
 				return {...state,query:action.query};
 			case 'setPathAndQuery':
 				return {...state,path:action.path,query:action.query};
+			case 'updateSort':{
+				const {key,val}=action;
+				if(!action.val){
+					delete state.sort[key];
+					return {...state,sort:{...state.sort}};
+				}
+				return {...state,sort:{...state.sort,[key]:[val]}};
+			}
+			case 'switchSort':{
+				const {key}=action;
+				if(state.sort[key]==='desc'){
+					delete state.sort[key];
+					return {...state,sort:{...state.sort}};
+				}
+				return {...state,sort:{...state.sort,[key]:state.sort[key]?'desc':'asc'}};
+			}
 			case 'update':
 				return {...state,...(action.data || {})};
 			case 'setLayout':
@@ -184,6 +213,7 @@ Catpow.Finder=(props)=>{
 		path:props.path,
 		apiPath:'/cp/v1/'+basepath,
 		query:props.query || {},
+		sort:props.sort || {},
 		layout:'table',
 		items:[],
 		itemsInPage:[],
@@ -249,7 +279,7 @@ Catpow.Finder=(props)=>{
 	useEffect(()=>{
 		updateResults(state);
 		dispatch({type:'update'});
-	},[state.path,state.query,state.index]);
+	},[state.path,state.query,state.index,state.sort]);
 	useEffect(()=>{
 		if(!state.ignorePushState){
 			pushState(state);

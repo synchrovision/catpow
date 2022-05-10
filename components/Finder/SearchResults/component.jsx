@@ -72,7 +72,10 @@
 						</th>
 						<th className="focus"></th>
 						{state.colsToShow.map((col)=>(
-							<th className="cell">{col.label}</th>
+							<th className="cell">
+								{col.label}
+								<span className={"sort sort-"+(state.sort[col.name]?state.sort[col.name]:'none')} onClick={()=>{dispatch({type:'switchSort',key:col.name})}}></span>
+							</th>
 						))}
 					</tr>
 				</thead>

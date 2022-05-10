@@ -172,11 +172,60 @@
   background-color: #a2a2a2;
 }
 .FinderSearchResultsItems.table-view .table .header .row .cell {
+  position: relative;
   min-width: 5rem;
   width: auto;
   padding: 0.3125rem;
+  padding-right: 1.25rem;
   text-align: center;
   color: #fff;
+}
+.FinderSearchResultsItems.table-view .table .header .row .cell .sort {
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  width: 0.625rem;
+  height: 0.9375rem;
+  margin: auto;
+  margin-right: 0.3125rem;
+}
+.FinderSearchResultsItems.table-view .table .header .row .cell .sort::before, .FinderSearchResultsItems.table-view .table .header .row .cell .sort::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  width: 0rem;
+  height: 0rem;
+  margin: auto;
+  border-style: solid;
+  border-width: 0.375rem;
+  border-color: transparent;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+.FinderSearchResultsItems.table-view .table .header .row .cell .sort::before {
+  margin-top: 0rem;
+  border-bottom-color: rgba(255, 255, 255, 0.3);
+  border-top-width: 0rem;
+}
+.FinderSearchResultsItems.table-view .table .header .row .cell .sort::after {
+  margin-bottom: 0rem;
+  border-top-color: rgba(255, 255, 255, 0.3);
+  border-bottom-width: 0rem;
+}
+.FinderSearchResultsItems.table-view .table .header .row .cell .sort-asc::before {
+  border-bottom-color: #fff;
+}
+.FinderSearchResultsItems.table-view .table .header .row .cell .sort-desc::after {
+  border-top-color: #fff;
 }
 .FinderSearchResultsItems.table-view .table .body .row {
   background-color: #ececec;

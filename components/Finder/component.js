@@ -56,6 +56,24 @@ Catpow.Finder = function (props) {
         });
       });
     });
+
+    if (Object.keys(state.sort).length > 0) {
+      var keys = Object.keys(state.sort);
+      state.items.sort(function (a, b) {
+        var rtn = 0;
+        keys.some(function (key) {
+          if (a[key] == b[key]) {
+            return false;
+          }
+
+          rtn = a[key].value[0] < b[key].value[0] && state.sort[key] === 'asc' ? -1 : 1;
+          return true;
+        });
+        console.log(rtn);
+        return rtn;
+      });
+    }
+
     reflectResults(state);
   }, []);
   var reflectResults = useCallback(function (state) {
@@ -204,6 +222,39 @@ Catpow.Finder = function (props) {
           query: action.query
         });
 
+      case 'updateSort':
+        {
+          var _key2 = action.key,
+              _val2 = action.val;
+
+          if (!action.val) {
+            delete state.sort[_key2];
+            return _objectSpread(_objectSpread({}, state), {}, {
+              sort: _objectSpread({}, state.sort)
+            });
+          }
+
+          return _objectSpread(_objectSpread({}, state), {}, {
+            sort: _objectSpread(_objectSpread({}, state.sort), {}, babelHelpers.defineProperty({}, _key2, [_val2]))
+          });
+        }
+
+      case 'switchSort':
+        {
+          var _key3 = action.key;
+
+          if (state.sort[_key3] === 'desc') {
+            delete state.sort[_key3];
+            return _objectSpread(_objectSpread({}, state), {}, {
+              sort: _objectSpread({}, state.sort)
+            });
+          }
+
+          return _objectSpread(_objectSpread({}, state), {}, {
+            sort: _objectSpread(_objectSpread({}, state.sort), {}, babelHelpers.defineProperty({}, _key3, state.sort[_key3] ? 'desc' : 'asc'))
+          });
+        }
+
       case 'update':
         return _objectSpread(_objectSpread({}, state), action.data || {});
 
@@ -339,6 +390,7 @@ Catpow.Finder = function (props) {
     path: props.path,
     apiPath: '/cp/v1/' + basepath,
     query: props.query || {},
+    sort: props.sort || {},
     layout: 'table',
     items: [],
     itemsInPage: [],
@@ -408,7 +460,7 @@ Catpow.Finder = function (props) {
     dispatch({
       type: 'update'
     });
-  }, [state.path, state.query, state.index]);
+  }, [state.path, state.query, state.index, state.sort]);
   useEffect(function () {
     if (!state.ignorePushState) {
       pushState(state);

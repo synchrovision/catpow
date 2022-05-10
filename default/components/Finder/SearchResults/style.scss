@@ -106,8 +106,37 @@
 					@include bg((c:t 50));
 					.row{
 						.cell{
-							@include bnd((w:80 a,pd:5));
+							@include bnd((p:r,w:80 a,pd:5,pdr:20));
 							@include txt((a:c,c:i));
+							.sort{
+								@include bnd((d:b,p:a,i:0,w:10,h:15,mg:a,mgr:5));
+								&::before,&::after{
+									content:'';
+									@include bnd((d:b,p:a,i:0,w:0,h:0,mg:a));
+									@include bdr((s:s,w:6,c:n));
+									@include trn((t:.2s));
+								}
+								&::before{
+									@include bnd((mgt:0));
+									@include bdr((p:b,c:i 1 .3));
+									@include bdr((p:t,w:0));
+								}
+								&::after{
+									@include bnd((mgb:0));
+									@include bdr((p:t,c:i 1 .3));
+									@include bdr((p:b,w:0));
+								}
+								&-asc{
+									&::before{
+										@include bdr((p:b,c:i));
+									}
+								}
+								&-desc{
+									&::after{
+										@include bdr((p:t,c:i));
+									}
+								}
+							}
 						}
 					}
 				}
