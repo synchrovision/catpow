@@ -51,7 +51,9 @@ Catpow.Finder = function (props) {
           return true;
         }
 
-        return state.query[key].indexOf(row[key].value[0]) !== -1;
+        return state.query[key].some(function (val) {
+          return val == row[key].value[0];
+        });
       });
     });
     reflectResults(state);

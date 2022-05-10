@@ -29,7 +29,7 @@ Catpow.Finder=(props)=>{
 		state.items=state.index.rows.filter((row)=>{
 			return Object.keys(state.query).every((key)=>{
 				if(state.query[key].length===0){return true;}
-				return state.query[key].indexOf(row[key].value[0])!==-1;
+				return state.query[key].some((val)=>val==row[key].value[0]);
 			});
 		});
 		reflectResults(state);
