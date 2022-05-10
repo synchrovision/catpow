@@ -37,7 +37,7 @@ Catpow.Finder=(props)=>{
 			state.items.sort((a,b)=>{
 				var rtn=0;
 				keys.some((key)=>{
-					if(a[key]==b[key]){return false;}
+					if(a[key].value[0]==b[key].value[0]){return false;}
 					rtn=(a[key].value[0]<b[key].value[0] && state.sort[key]==='asc')?-1:1;
 					return true;
 				});
