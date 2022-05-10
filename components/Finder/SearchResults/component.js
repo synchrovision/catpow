@@ -126,7 +126,7 @@ Catpow.Finder.SearchResults = function (props) {
       return wp.element.createElement("th", {
         className: "cell"
       }, col.label, wp.element.createElement("span", {
-        className: "sort sort-" + (state.sort[col.name] ? state.sort[col.name] : 'none'),
+        className: "sort sort-" + (state.sort[col.name] || 'none'),
         onClick: function onClick() {
           dispatch({
             type: 'switchSort',
