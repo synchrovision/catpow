@@ -6,13 +6,19 @@ namespace Catpow\util;
 class debug{
 	
 	public static function log($log=false){
-		static $logs,$req_mtime;
+		static $logs,$req_mtime,$prev_mtime;
 		if(!isset($logs)){
 			$logs=array();
 			$req_mtime=$_SERVER['REQUEST_TIME_FLOAT'];
+			$prev_mtime=$req_mtime;
 		}
 		if($log===false){_d($logs);}
-		else{$logs[(string)(microtime(true)-$req_mtime)]=$log;}
+		else{
+			$mtime=microtime(true);
+			error_log(sprintf("degug: 0.%04d 0.%04d %s",($mtime-$req_mtime)*10000,($mtime-$prev_mtime)*10000,$log));
+			$logs[(string)($mtime-$req_mtime)]=$log;
+			$prev_mtime=$mtime;
+		}
 	}
 	public static function counter($id,$val=0,$ope='+'){
 		static $data;
