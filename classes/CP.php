@@ -1798,7 +1798,7 @@ class CP{
 				$body=apply_filters('the_content',$conf['message']);
 				$css='';
 				foreach($front_styles as $front_style=>$flag){
-					$css.=file_get_contents($front_style);
+					$css.=util\style_config::resolve_css_vars(file_get_contents($front_style));
 				}
 				$conf['message']=
 					'<!DOCTYPE html><html lang="ja">'.
