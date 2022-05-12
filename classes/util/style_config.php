@@ -125,6 +125,13 @@ class style_config{
 		}
 		echo '}</style>';
 	}
+	public static function resolve_css_vars($css_code){
+		return str_replace(
+			array_map(function($key){return sprintf('var(%s)',$key);},array_keys(self::get_css_vars())),
+			array_values(self::get_css_vars()),
+			$css_code
+		);
+	}
 	public static function update_config_json($domain,$data){
 		if($domain==='colors'){
 			$tones=$data['tones'];
