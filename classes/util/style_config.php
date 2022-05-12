@@ -95,24 +95,33 @@ class style_config{
 		}
 		return $tones;
 	}
-	public static function print_css_vars(){
+	public static function get_css_vars(){
+		static $css_vars;
+		if(isset($css_vars)){return $css_vars;}
+		$css_vars=[];
 		$vars=apply_filters('cp_css_vars',[
 			'tones'=>self::get_config_json('tones'),
 			'colors'=>self::get_config_json('colors'),
 			'fonts'=>self::get_config_json('fonts')
 		]);
-		echo '<style type="text/css" id="cp-css-vars">:root{';
 		foreach($vars as $group=>$vals){
 			foreach($vals as $key=>$val){
 				if(is_array($val)){
 					foreach($val as $k=>$v){
-						printf('--cp-%s-%s-%s:%s;',$group,$key,$k,$v);
+						$css_vars[sprintf('--cp-%s-%s-%s',$group,$key,$k)]=$v;
 					}
 				}
 				else{
-					printf('--cp-%s-%s:%s;',$group,$key,$val);
+					$css_vars[sprintf('--cp-%s-%s',$group,$key)]=$val;
 				}
 			}
+		}
+		return $css_vars;
+	}
+	public static function print_css_vars(){
+		echo '<style type="text/css" id="cp-css-vars">:root{';
+		foreach(self::get_css_vars() as $key=>$val){
+			printf('%s:%s;',$key,$val);
 		}
 		echo '}</style>';
 	}
