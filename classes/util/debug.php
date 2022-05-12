@@ -15,7 +15,7 @@ class debug{
 		if($log===false){_d($logs);}
 		else{
 			$mtime=microtime(true);
-			error_log(sprintf("degug: 0.%04d 0.%04d %s",($mtime-$req_mtime)*10000,($mtime-$prev_mtime)*10000,$log));
+			error_log(sprintf("degug: %.4f %.4f %s",$mtime-$req_mtime,$mtime-$prev_mtime,$log));
 			$logs[(string)($mtime-$req_mtime)]=$log;
 			$prev_mtime=$mtime;
 		}
