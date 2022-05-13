@@ -10,7 +10,7 @@ class seo{
 		if(is_singular()){
 			return $url=get_permalink();
 		}
-		return $url=($_SERVER['HTTPS']?'https':'http').':'.$_SERVER['HOST'].'/'.$_SERVER['REQUEST_URI'];
+		return $url=(empty($_SERVER['HTTPS'])?'http':'https').':'.($_SERVER['HOST']??'localhost').'/'.($_SERVER['REQUEST_URI']??'');
 	}
 	public static function get_image(){
 		static $image;

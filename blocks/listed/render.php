@@ -7,12 +7,12 @@ if($attr['doLoop']){
 		$matches
 	);
 	$GLOBALS['loop_block_data'][$id]=[
-		'path'=>$attr['content_path'],
-		'query'=>$attr['query'],
-		'before_loop'=>$matches['before_loop'],
-		'content'=>$matches['content'],
-		'after_loop'=>$matches['after_loop'],
-		'on_empty'=>$matches['on_empty'],
+		'path'=>$attr['content_path']??'',
+		'query'=>$attr['query']??'',
+		'before_loop'=>$matches['before_loop']??'',
+		'content'=>$matches['content']??'',
+		'after_loop'=>$matches['after_loop']??'',
+		'on_empty'=>$matches['on_empty']??'',
 	];
 	echo "[loop_block {$id}]";
 }
