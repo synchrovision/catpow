@@ -4,13 +4,11 @@
 */
 namespace Catpow\util;
 class debug{
-	
 	public static function log($log=false){
 		static $logs,$req_mtime,$prev_mtime;
 		if(!isset($logs)){
 			$logs=array();
-			$req_mtime=$_SERVER['REQUEST_TIME_FLOAT'];
-			$prev_mtime=$req_mtime;
+			$req_mtime=$prev_mtime=$_SERVER['REQUEST_TIME_FLOAT'];
 		}
 		if($log===false){_d($logs);}
 		else{
@@ -32,7 +30,6 @@ class debug{
 		}
 		return $data[$id];
 	}
-
 }
 
 ?>
