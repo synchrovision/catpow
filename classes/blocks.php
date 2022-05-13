@@ -104,7 +104,7 @@ class blocks{
 										strpos($GLOBALS['wp']->query_vars['rest_route'],'block-renderer') > 0;
 									ob_start();
 									if(!isset(cp::$content)){
-										cp::$content=new Catpow\content\loop(['parent'=>false]);
+										cp::$content=new content\loop(['parent'=>false]);
 									}
 									include $file_path;
 									return ob_get_clean();
@@ -146,7 +146,7 @@ class blocks{
 			foreach(cp::get_file_paths('blocks/_init/_init.php') as $blocks_init_file){
 				include $blocks_init_file;
 			}
-			$block_registry=WP_Block_Type_Registry::get_instance();
+			$block_registry=\WP_Block_Type_Registry::get_instance();
 			foreach($block_registry->get_all_registered() as $block_name=>$block_type){
 				$block_base_name=explode('/',$block_name)[1];
 				if($f=cp::get_file_path('blocks/'.$block_base_name.'/editor_init.php')){include $f;}
@@ -168,7 +168,7 @@ class blocks{
 				);
 			}
 		});
-		if(current_user_can('edit_themes')){\cp::gzip_compress(glob(WP_PLUGIN_DIR.'/catpow/blocks/*/*.{js,css}',defined('GLOB_BRACE')?GLOB_BRACE:0));}
+		if(current_user_can('edit_themes')){\cp::gzip_compress(glob(\WP_PLUGIN_DIR.'/catpow/blocks/*/*.{js,css}',defined('GLOB_BRACE')?GLOB_BRACE:0));}
 		add_filter('allowed_block_types_all',function($allowed_block_types,$block_editor_context){
 			$post=$block_editor_context->post;
 			if(empty($post)){return $allowed_block_types;}
