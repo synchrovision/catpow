@@ -90,10 +90,7 @@ class scss{
 				$color=false;
 				$colors=util\style_config::get_config_json('colors');
 				$tones=util\style_config::get_config_json('tones');
-				if($args[1]==='false' && $args[2]==='false' && isset($colors[$args[0]])){
-					$color=sprintf('var(--cp-colors-%s)',$args[0]);
-				}
-				elseif(preg_match('/^([a-z]+)?(-)?(\d+)?$/',$args[0],$matches)){
+				if(preg_match('/^([a-z]+)?(-)?(\d+)?$/',$args[0],$matches)){
 					$key=$matches[1]?:'m';
 					$staticHue=!empty($matches[2]);
 					$num=$matches[3]??null;
@@ -105,7 +102,7 @@ class scss{
 							empty($num)?sprintf($f,'h'):($staticHue?$num:sprintf('calc('.$f.' + var(--cp-tones-hr) * %s + var(--cp-tones-hs))','h',(int)$num-6)),
 							sprintf($f,'s'),
 							$args[1]==='false'?sprintf($f,'l'):sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]),
-							$args[2]==='false'?1:$args[2]
+							$args[2]==='false'?(isset($tone['a'])?'var(--cp-tones-'.$key.'-a)':1):$args[2]
 						);
 					}
 				}
