@@ -118,12 +118,20 @@ class style_config{
 		}
 		return $css_vars;
 	}
-	public static function print_css_vars(){
-		echo '<style type="text/css" id="cp-css-vars">:root{';
+	public static function get_css_vars_code(){
+		static $code;
+		if(isset($code)){return $code;}
+		$code=':root{';
 		foreach(self::get_css_vars() as $key=>$val){
-			printf('%s:%s;',$key,$val);
+			$code.=sprintf('%s:%s;',$key,$val);
 		}
-		echo '}</style>';
+		$code.='}';
+		return $code;
+	}
+	public static function print_css_vars(){
+		echo '<style type="text/css" id="cp-css-vars">';
+		echo self::get_css_vars_code();
+		echo '</style>';
 	}
 	public static function resolve_css_vars($css_code){
 		return str_replace(
