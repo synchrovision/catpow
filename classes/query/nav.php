@@ -8,7 +8,8 @@ class nav extends post{
 		$data_id_name='db_id',
 		$query_class=false;
 	protected static
-		$menu_items=[];
+		$menu_items=[],
+		$menu_items_by_id=[];
 	
 	public function __construct($q){
 		$this->q=static::fill_query_vars($q);
@@ -19,6 +20,8 @@ class nav extends post{
 		if(isset($q['data_name'])){
 			$q['theme_location']=$q['data_name'];
 		}
+		if(isset($q['data_id'])){$q['ID']=$q['data_id'];}
+		if(isset($q['p'])){$q['ID']=$q['p'];}
 		return $q;
 	}
 	
@@ -37,9 +40,15 @@ class nav extends post{
 				if(empty($parent_id)){continue;}
 				$menu_items_by_id[$parent_id]->classes[]='menu-item-has-children';
 			}
+			static::$menu_items_by_id[$location]=$menu_items_by_id;
 			static::$menu_items[$location]=$menu_items_by_parent_id;
 		}
-		$this->objects=static::$menu_items[$location][$q['parent']??0]??[];
+		if(isset($q['ID'])){
+			$this->objects=[static::$menu_items_by_id[$location][$q['ID']]];
+		}
+		else{
+			$this->objects=static::$menu_items[$location][$q['parent']??0]??[];
+		}
 	}
 	public function is_empty(){
 		return empty($this->objects);
