@@ -21,7 +21,7 @@ class CP{
 			'image',
 			'post','term','user','nav','comment','view',
 			'template',
-		],$use_functions,$use_blocks;
+		],$use_functions;
 		
 	protected $stock;
 	
