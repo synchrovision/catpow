@@ -2015,24 +2015,10 @@ class CP{
 		return $functions_dir_urls;
 	}
 	public static function get_all_blocks(){
-		static $all_blocks;
-		if(isset($all_blocks)){return $all_blocks;}
-		foreach(self::get_file_urls('blocks') as $block_dir=>$block_url){
-			foreach(glob($block_dir.'/*/editor_script.js') as $editor_script){
-				$all_blocks[]=basename(dirname($editor_script));
-			}
-		}
-		return $all_blocks;
+		return blocks::get_all_blocks();
 	} 
 	public static function get_supported_blocks(){
-		static $supported_blocks;
-		if(isset($supported_blocks)){return $supported_blocks;}
-		$supported_blocks=['loop','form','embed','widget','tool','cond'];
-		foreach(self::get_file_paths('blocks',030) as $block_dir){
-			$supported_blocks=array_merge(scandir($block_dir),$supported_blocks);
-		}
-		$supported_blocks=array_intersect(self::get_all_blocks(),$supported_blocks);
-		return $supported_blocks;
+		return blocks::get_supported_blocks();
 	}
 	
 	/*theme*/
