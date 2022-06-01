@@ -1,6 +1,5 @@
 <?php
 /*script*/
-
 $js_files=[];
 $cpjs_dir=dir(WP_PLUGIN_DIR.'/catpow/js');
 while($fname = $cpjs_dir->read()){
@@ -48,9 +47,9 @@ if($GLOBALS['is_IE']){
 }
 
 /* css vars */
-add_action('admin_enqueue_scripts',function(){
+add_action('admin_init',function(){
 	wp_add_inline_style('wp-block-editor',Catpow\util\style_config::get_css_vars_code());
-});
+},20);
 add_action('wp_enqueue_scripts',function(){
 	wp_add_inline_style('global-styles',Catpow\util\style_config::get_css_vars_code());
 });
@@ -289,5 +288,3 @@ add_filter('flush_rewrite_rules_hard',function($do_hard){
 	if($do_hard){Catpow\util\htaccess::update();}
 	return $do_hard;
 });
-
-
