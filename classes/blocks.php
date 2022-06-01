@@ -20,128 +20,27 @@ class blocks{
 				['slug'=>'catpow-mail','title'=>"\u{1F4E8} Mail"]
 			]);
 		},10,2);
-		$block_style_names=[];
-		if($will_compile_editor_script=current_user_can('edit_themes') && $_SERVER['SERVER_NAME']==='localhost'){
-			include_once(dirname(__DIR__).'/jsx_compiler/functions.php');
+		
+		$data=self::get_block_data_to_register();
+		foreach($data['js'] as $args){
+			call_user_func_array('wp_register_script',$args);
 		}
-		foreach(cp::get_file_urls('blocks/_init') as $block_init_dir=>$block_init_url){
-			foreach(glob($block_init_dir.'/*.js') as $format_script){
-				$fname=basename($format_script);
-				$code_name=substr(strstr($format_script,'/wp-content/'),12,-3);
-				wp_register_script($code_name,$block_init_url.'/'.$fname,['wp-blocks','wp-i18n','wp-element','wp-editor','catpow']);
-				self::$deps['editor_script'][]=$code_name;
-			}
-			foreach(glob($block_init_dir.'/*.css') as $format_style){
-				$fname=basename($format_style);
-				$code_name=substr(strstr($format_style,'/wp-content/'),12,-4);
-				wp_register_style($code_name,$block_init_url.'/'.$fname);
-				$block_style_names[]='blocks/_init/'.substr($fname,0,-4);
-				self::$deps['editor_style'][]=$code_name;
-			}
+		foreach($data['css'] as $args){
+			call_user_func_array('wp_register_style',$args);
 		}
-		foreach(cp::get_file_urls('blocks') as $block_dir=>$block_url){
-			foreach(glob($block_dir.'/*/editor_script.js') as $editor_script){
-				$block_name=basename(dirname($editor_script));
-				if(cp::$use_blocks && !in_array($block_name,cp::$use_blocks)){continue;}
-				if($will_compile_editor_script){cp_jsx_compile($editor_script);}
-				$block_style_names[]='blocks/'.$block_name.'/editor_style';
-				$block_style_names[]='blocks/'.$block_name.'/style';
-				unset($attributes,$filters);
-				$param=array();
-				foreach([
-					'conf'=>'php',
-					'editor_script'=>'js',
-					'editor_style'=>'css',
-					'view_script'=>'js',
-					'script'=>'js',
-					'style'=>'css',
-					'render'=>'php'
-				] as $fname=>$ext){
-					$file_name=$block_name.'/'.$fname.'.'.$ext;
-					if($fname==='script' || $fname==='style'){
-						$file_path_url=cp::get_file_path_url('blocks/'.$file_name);
-						if(empty($file_path_url)){continue;}
-						$file_path=key($file_path_url);
-						$file_url=reset($file_path_url);
-					}
-					else{
-						if(!file_exists($file_path=$block_dir.'/'.$file_name)){continue;}
-						$file_url=$block_url.'/'.$file_name;
-					}
-					$handle='blocks/'.$block_name.'/'.$fname.'.'.$ext;
-					switch($ext){
-						case 'js':
-							wp_register_script($handle,$file_url,self::$deps[$fname]);
-							\cp::set_script_translations($handle);
-							$param[$fname]=$handle;
-							break;
-						case 'css':
-							wp_register_style($handle,$file_url,self::$deps[$fname]);
-							$param[$fname]=$handle;
-							break;
-						case 'php':
-							if($fname === 'conf'){
-								include $file_path;
-								if(isset($attributes)){
-									if(isset($filters)){
-										foreach($filters as $filter=>$filter_args){
-											$attributes=apply_filters("cp_block_attributes_{$filter}",$attributes,$filter_args);
-										}
-									}
-									if(!empty($attributes['items']['filters'])){
-										foreach($attributes['items']['filters'] as $filter=>$filter_args){
-											$attributes['items']=apply_filters("cp_block_items_attributes_{$filter}",$attributes['items'],$filter_args);
-										}
-									}
-									$param['attributes']=$attributes;
-									unset($attributes,$filters,$filter_args);
-								}
-							}
-							elseif($fname === 'render'){
-								$param['render_callback']=function($attr,$content=null,$block=null)use($file_path){
-									$is_preview=
-										!empty(!empty($GLOBALS['wp']->query_vars['rest_route'])) &&
-										strpos($GLOBALS['wp']->query_vars['rest_route'],'block-renderer') > 0;
-									ob_start();
-									if(!isset(cp::$content)){
-										cp::$content=new content\loop(['parent'=>false]);
-									}
-									include $file_path;
-									return ob_get_clean();
-								};
-							}
-							break;
-					}
-				}
-				if(file_exists($f=$block_dir.'/'.$block_name.'/block.json')){
-					register_block_type_from_metadata($f,$param);
-				}
-				else{register_block_type('catpow/'.str_replace('_','-',$block_name),$param);}
+		foreach($data['blocks'] as $block_type=>$param){
+			if(isset($param['render_callback'])){
+				$param['render_callback']=self::get_render_callback($param['render_callback']);
 			}
+			register_block_type($block_type,$param);
 		}
-		cp::scss_compile($block_style_names);
-
-		add_filter('render_block',function($block_content,$block){
-			static $done=[];
-			if(!empty($done[$block['blockName']])){return $block_content;}
-			$block_name=explode('/',$block['blockName'])[1]??null;
-			if(empty($block_name)){return $block_content;}
-			if($f=cp::get_file_path('blocks/'.$block_name.'/front_init.php')){include $f;}
-			cp::enqueue_style(
-				'blocks/'.$block_name.'/front_style.css',
-				self::$deps['front_style']
-			);
-			cp::enqueue_script(
-				'blocks/'.$block_name.'/front_script.js',
-				self::$deps['front_script']
-			);
-			cp::enqueue_script(
-				'blocks/'.$block_name.'/component.js',
-				self::$deps['component']
-			);
-			$done[$block['blockName']]=true;
-			return $block_content;
-		},10,2);
+		foreach($data['front_init'] as $block_type=>$init_file){
+			add_filter('render_block_'.$block_type,function($block_content,$block)use($init_file){
+				include_once $init_file;
+				return $block_content;
+			},10,2);
+		}
+		
 		add_action('enqueue_block_editor_assets',function(){
 			foreach(cp::get_file_paths('blocks/_init/_init.php') as $blocks_init_file){
 				include $blocks_init_file;
@@ -150,22 +49,6 @@ class blocks{
 			foreach($block_registry->get_all_registered() as $block_name=>$block_type){
 				$block_base_name=explode('/',$block_name)[1];
 				if($f=cp::get_file_path('blocks/'.$block_base_name.'/editor_init.php')){include $f;}
-				cp::enqueue_script(
-					'blocks/'.$block_base_name.'/editor_init.js',
-					self::$deps['editor_script']
-				);
-				cp::enqueue_style(
-					'blocks/'.$block_base_name.'/front_style.css',
-					self::$deps['front_style']
-				);
-				cp::enqueue_script(
-					'blocks/'.$block_base_name.'/front_script.js',
-					self::$deps['front_script']
-				);
-				cp::enqueue_script(
-					'blocks/'.$block_base_name.'/component.js',
-					self::$deps['component']
-				);
 			}
 		});
 		if(current_user_can('edit_themes')){\cp::gzip_compress(glob(\WP_PLUGIN_DIR.'/catpow/blocks/*/*.{js,css}',defined('GLOB_BRACE')?GLOB_BRACE:0));}
@@ -188,5 +71,144 @@ class blocks{
 			}
 			return $allowed_block_types;
 		},10,2);
+	}
+	public static function get_all_blocks(){
+		static $all_blocks;
+		if(isset($all_blocks)){return $all_blocks;}
+		foreach(\cp::get_file_urls('blocks') as $block_dir=>$block_url){
+			foreach(glob($block_dir.'/*/editor_script.js') as $editor_script){
+				$all_blocks[]=basename(dirname($editor_script));
+			}
+		}
+		return $all_blocks;
+	} 
+	public static function get_supported_blocks(){
+		static $supported_blocks;
+		if(isset($supported_blocks)){return $supported_blocks;}
+		$supported_blocks=['loop','form','embed','widget','tool','cond'];
+		foreach(\cp::get_file_paths('blocks',030) as $block_dir){
+			$supported_blocks=array_merge(scandir($block_dir),$supported_blocks);
+		}
+		$supported_blocks=array_intersect(self::get_all_blocks(),$supported_blocks);
+		return $supported_blocks;
+	}
+	public static function get_block_data_to_register(){
+		$transient='block_data_to_register_for_'.get_stylesheet();
+		if((!current_user_can('edit_themes') || wp_is_json_request()) && $data=get_transient($transient)){return $data;}
+		$data=[];
+		$block_style_names=[];
+		foreach(cp::get_file_urls('blocks/_init') as $block_init_dir=>$block_init_url){
+			foreach(glob($block_init_dir.'/*.js') as $format_script){
+				$fname=basename($format_script);
+				$code_name=substr(strstr($format_script,'/wp-content/'),12,-3);
+				wp_register_script($code_name,$block_init_url.'/'.$fname,['wp-blocks','wp-i18n','wp-element','wp-editor','catpow']);
+				self::$deps['editor_script'][]=$code_name;
+			}
+			foreach(glob($block_init_dir.'/*.css') as $format_style){
+				$fname=basename($format_style);
+				$code_name=substr(strstr($format_style,'/wp-content/'),12,-4);
+				wp_register_style($code_name,$block_init_url.'/'.$fname);
+				$block_style_names[]='blocks/_init/'.substr($fname,0,-4);
+				self::$deps['editor_style'][]=$code_name;
+			}
+		}
+		foreach(cp::get_file_urls('blocks') as $block_dir=>$block_url){
+			foreach(glob($block_dir.'/*/editor_script.js') as $editor_script){
+				$block_name=basename(dirname($editor_script));
+				$block_type='catpow/'.str_replace('_','-',$block_name);
+				if(!in_array($block_name,self::get_all_blocks())){continue;}
+				$block_style_names[]='blocks/'.$block_name.'/editor_style';
+				$block_style_names[]='blocks/'.$block_name.'/style';
+				unset($attributes,$filters);
+				$param=[];
+				foreach([
+					'conf'=>'php',
+					'editor_script'=>'js',
+					'editor_style'=>'css',
+					'script'=>'js',
+					'style'=>'css',
+					'front_script'=>'js',
+					'front_style'=>'css',
+					'editor_init'=>'js',
+					'component'=>'js',
+					'render'=>'php',
+					'editor_init'=>'php',
+					'front_init'=>'php'
+				] as $fname=>$ext){
+					$file_name=$block_name.'/'.$fname.'.'.$ext;
+					$handle='blocks/'.$block_name.'/'.$fname.'.'.$ext;
+					switch($ext){
+						case 'js':
+						case 'css':
+							$file_url=cp::get_file_url('blocks/'.$file_name);
+							$data[$ext][$handle]=[$handle,(string)$file_url,self::$deps[$fname]];
+							if(in_array($fname,['style','script','editor_style','editor_script'])){
+								$param[$fname]=$handle;
+							}
+							else{
+								$parent_handle=sprintf(
+									'blocks/%s/%s%s',
+									$block_name,
+									(substr($fname,0,7)==='editor')?'editor_':'',
+									['js'=>'script.js','css'=>'style.css'][$ext]
+								);
+								$data[$ext][$parent_handle][2][]=$handle;
+							}
+							break;
+						case 'php':
+							$file_path=cp::get_file_path('blocks/'.$file_name);
+							if(empty($file_path)){break;}
+							if($fname === 'conf'){
+								include $file_path;
+								if(isset($attributes)){
+									if(isset($filters)){
+										foreach($filters as $filter=>$filter_args){
+											$attributes=apply_filters("cp_block_attributes_{$filter}",$attributes,$filter_args);
+										}
+									}
+									if(!empty($attributes['items']['filters'])){
+										foreach($attributes['items']['filters'] as $filter=>$filter_args){
+											$attributes['items']=apply_filters("cp_block_items_attributes_{$filter}",$attributes['items'],$filter_args);
+										}
+									}
+									$param['attributes']=$attributes;
+									unset($attributes,$filters,$filter_args);
+								}
+							}
+							elseif($fname === 'render'){
+								$param['render_callback']=$file_path;
+							}
+							else{
+								$data[$fname][$block_type]=$file_path;
+							}
+							break;
+					}
+				}
+				if(file_exists($block_json=$block_dir.'/'.$block_name.'/block.json')){
+					$data['blocks'][$block_json]=$param;
+				}
+				else{
+					$data['blocks'][$block_type]=$param;
+				}
+				
+			}
+		}
+		cp::scss_compile($block_style_names);
+		set_transient($transient,$data,\WEEK_IN_SECONDS);
+		return $data;
+	}
+	public static function get_render_callback($file_path){
+		if(is_callable($file_path)){return $file_path;}
+		return function($attr,$content=null,$block=null)use($file_path){
+			$is_preview=
+				!empty(!empty($GLOBALS['wp']->query_vars['rest_route'])) &&
+				strpos($GLOBALS['wp']->query_vars['rest_route'],'block-renderer') > 0;
+			ob_start();
+			if(!isset(cp::$content)){
+				cp::$content=new content\loop(['parent'=>false]);
+			}
+			include $file_path;
+			return ob_get_clean();
+		};
 	}
 }
