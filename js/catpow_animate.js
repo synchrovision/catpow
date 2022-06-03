@@ -70,6 +70,7 @@ jQuery.catpow.set_page_top_offset=function(offset){
 					if(bnd.top > winh || bnd.top + tgth < 0){return;}
 					var p1=bnd.top/(winh-tgth);
 					var p2=(bnd.top+tgth)/(winh+tgth);
+					$(this).css({'--parallax-p':p1,'--parallax-dp':p2});
 					$(this).children().each(function(){
 						var chlh=this.getBoundingClientRect().height;
 						if(tgth > chlh ^ chlh > winh){
