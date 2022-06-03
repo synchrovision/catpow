@@ -118,6 +118,7 @@ class blocks{
 				$block_type='catpow/'.str_replace('_','-',$block_name);
 				if(!in_array($block_name,self::get_all_blocks())){continue;}
 				$block_style_names[]='blocks/'.$block_name.'/editor_style';
+				$block_style_names[]='blocks/'.$block_name.'/front_style';
 				$block_style_names[]='blocks/'.$block_name.'/style';
 				unset($attributes,$filters);
 				$param=[];
