@@ -3,7 +3,6 @@ namespace Catpow\util;
 class SerialNumbers implements \IteratorAggregate, \ArrayAccess{
 	protected $bucket=[];
 	public function __construct($serial=''){
-		$bucket=[];
 		if(!empty($serial)){
 			foreach(explode('z',$serial) as $chunks){
 				foreach(str_split(substr($chunks,1),hexdec($chunks[0])) as $chunk){
