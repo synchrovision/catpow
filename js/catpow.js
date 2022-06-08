@@ -7,7 +7,7 @@ jQuery.catpow.set_page_top_offset=function(offset){
 	var updateOffset=function(offset){
 		if(offset<0){offset=0;}
 		$.catpow.pageTopOffset=offset;
-		document.documentElement.style.setProperty('--cp-page-top-offset',offset);
+		document.documentElement.style.setProperty('--cp-page-top-offset',offset + 'px');
 	};
 	$(window).off('.set_page_top_offset');
 	if(Number.isInteger(offset)){updateOffset(offset);}
