@@ -15,6 +15,7 @@ class blocks{
 		add_filter('block_categories_all',function($cats,$block_editor_context){
 			return array_merge($cats,[
 				['slug'=>'catpow','title'=>"\u{1F43E} Catpow"],
+				['slug'=>'catpow-parts','title'=>"\u{1F43E} Parts"],
 				['slug'=>'catpow-functional','title'=>"\u{1F43E} Functional"],
 				['slug'=>'catpow-embed','title'=>"\u{1F43E} Embed"],
 				['slug'=>'catpow-mail','title'=>"\u{1F4E8} Mail"]
