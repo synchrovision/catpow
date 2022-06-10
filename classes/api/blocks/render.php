@@ -33,6 +33,13 @@ class render extends \Catpow\api{
 			'innerContent'=>[],
 		];
 		$rendered=render_block($block);
+		
+		//dequeue style and scripts that should already loaded.
+		wp_dequeue_script('catpow');
+		wp_dequeue_script("blocks/{$req['tmp_name']}/script.js");
+		wp_dequeue_style("blocks/{$req['tmp_name']}/front_style.css");
+		wp_dequeue_style("blocks/{$req['tmp_name']}/style.css");
+		
 		$deps=\Catpow\util\wp::get_deps();
 		$res->set_data(compact('rendered','deps'));
 	}
