@@ -3313,6 +3313,78 @@ var CP = {
       event: {},
       index: 0
     }));
+  },
+  ServerSideRender: function ServerSideRender(props) {
+    var className = props.className,
+        block = props.block,
+        attributes = props.attributes;
+    var _wp$element4 = wp.element,
+        RawHTML = _wp$element4.RawHTML,
+        useState = _wp$element4.useState,
+        useMemo = _wp$element4.useMemo,
+        useRef = _wp$element4.useRef,
+        useEffect = _wp$element4.useEffect;
+    var useDebounce = wp.compose.useDebounce;
+
+    var _useState5 = useState(false),
+        _useState6 = babelHelpers.slicedToArray(_useState5, 2),
+        response = _useState6[0],
+        setResponse = _useState6[1];
+
+    var _useState7 = useState(false),
+        _useState8 = babelHelpers.slicedToArray(_useState7, 2),
+        hold = _useState8[0],
+        setHold = _useState8[1];
+
+    var _useState9 = useState([]),
+        _useState10 = babelHelpers.slicedToArray(_useState9, 2),
+        stylesheets = _useState10[0],
+        setStylesheets = _useState10[1];
+
+    useEffect(function () {
+      if (hold) {
+        return;
+      }
+
+      var path = '/cp/v1/blocks/render/' + block.split('/')[1];
+      var data = {
+        context: 'edit',
+        attributes: attributes
+      };
+      var post_id = wp.data.select('core/editor').getCurrentPostId();
+
+      if (post_id) {
+        data.post_id = post_id;
+      }
+
+      wp.apiFetch({
+        path: path,
+        data: data,
+        method: 'POST'
+      }).then(function (res) {
+        if (!res) {
+          return;
+        }
+
+        setStylesheets(res.deps.styles);
+        setResponse(res.rendered);
+      }).catch(function (res) {
+        console.log(res);
+      }).finally(function () {
+        setTimeout(function () {
+          return setHold(false);
+        }, 500);
+      });
+      setHold(true);
+    }, [JSON.stringify(attributes)]);
+    return wp.element.createElement(Fragment, null, wp.element.createElement(RawHTML, {
+      className: className
+    }, response), stylesheets.map(function (stylesheet) {
+      return wp.element.createElement("link", {
+        rel: "stylesheet",
+        href: stylesheet
+      });
+    }));
   }
 };
 CP.example = {
