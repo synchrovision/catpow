@@ -4,7 +4,7 @@ namespace Catpow\template_part;
 abstract class breadcrumb extends template_part{
 	public static function render(array $param=[]):void{
 		$links=self::get_items($param);
-		echo('<div class="wp-block-catpow-breadcrumb"><ul class="items">');
+		printf('<div class="%s"><ul class="items">',$param['container_class']??'wp-block-catpow-breadcrumb');
 
 		$position=1;
 		$json_ld_itemlist=[];
