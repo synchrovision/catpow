@@ -1,7 +1,5 @@
 (function($){$.fn.extend({
-	cp_article_nav:function($article,offset){
-		if(offset===undefined){offset=0;}
-		else{offset=parseInt(offset);}
+	cp_article_nav:function($article){
 		var $nav=$(this);
 		var $root_ul=$('<ul class="article_nav"></ul>').appendTo($nav);
 		var path=[];
@@ -15,7 +13,7 @@
 			}
 			$li.find('h3').on('click',function(){
 				$li.article.trigger('expect');
-				$('body,html').animate({scrollTop:parseInt($li.article.offset().top) - offset +10});
+				$('body,html').animate({scrollTop:parseInt($li.article.offset().top) - $.catpow.pageTopOffset +1});
 			});
 			if(path[0] && $.contains(path[0].article.get(0),$li.article.get(0))){
 				$li.ul=$('<ul></ul>').appendTo(path[0]);
@@ -32,7 +30,7 @@
 		$nav.update=function(){
 			all_li.map(function($li){
 				var bnd=$li.article.get(0).getBoundingClientRect();
-				if(bnd.top<offset && bnd.bottom>offset){$li.addClass('active');}
+				if(bnd.top<$.catpow.pageTopOffset && bnd.bottom>$.catpow.pageTopOffset){$li.addClass('active');}
 				else{$li.removeClass('active');}
 			});
 		};
