@@ -43,7 +43,9 @@ class blocks{
 				if(isset($param['render_callback'])){
 					$param['render_callback']=self::get_render_callback($param['render_callback']);
 				}
-				$block->set_props($param);
+				foreach($param as $key=>$val){
+					$block->$key=$val;
+				}
 			}
 		}
 		if(!empty($data['front_init'])){
@@ -154,17 +156,29 @@ class blocks{
 						$file_path_url=cp::get_file_path_url('blocks/'.$file_name);
 						$file_url=reset($file_path_url);
 						$data[$ext][$handle]=[$handle,(string)$file_url,self::$deps[$fname]];
-						if(in_array($fname,['style','script','editor_style','editor_script'])){
-							$param[$fname]=$handle;
+						if($is_core_block){
+							if(empty($file_url)){break;}
+							$key=$fname;
+							if(substr($key,0,6)==='front_'){
+								$key=substr($key,6);
+							}
+							if(in_array($key,['style','script'])){
+								$param[$fname]=$handle;
+							}
 						}
 						else{
-							$parent_handle=sprintf(
-								'blocks/%s/%s%s',
-								$block_name,
-								(substr($fname,0,7)==='editor')?'editor_':'',
-								['js'=>'script.js','css'=>'style.css'][$ext]
-							);
-							$data[$ext][$parent_handle][2][]=$handle;
+							if(in_array($fname,['style','script','editor_style','editor_script'])){
+								$param[$fname]=$handle;
+							}
+							else{
+								$parent_handle=sprintf(
+									'blocks/%s/%s%s',
+									$block_name,
+									(substr($fname,0,7)==='editor')?'editor_':'',
+									['js'=>'script.js','css'=>'style.css'][$ext]
+								);
+								$data[$ext][$parent_handle][2][]=$handle;
+							}
 						}
 						break;
 					case 'php':
@@ -183,7 +197,7 @@ class blocks{
 				}
 			}
 			if($is_core_block){
-				$data['core_block_params'][$block_type]=$param;
+				if(!empty($param)){$data['core_block_params'][$block_type]=$param;}
 			}
 			else{
 				if($block_json=cp::get_file_path('blocks/'.$block_name.'/block.json')){
