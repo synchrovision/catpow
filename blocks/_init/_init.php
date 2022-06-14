@@ -51,3 +51,5 @@ foreach(cp::$use_functions as $func){
 }
 wp_localize_script('catpow','cpEmbeddablesTree',$data);
 Catpow\api\blocks\config::register_nonce();
+
+wp_enqueue_style('font_awesome');
