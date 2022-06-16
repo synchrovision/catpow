@@ -11,7 +11,11 @@
 		"@babel/plugin-proposal-object-rest-spread": "",
 		"@babel/plugin-transform-object-assign": "",
 		"@babel/plugin-transform-react-jsx": "",
-		"@babel/preset-env": ""
+		"@babel/preset-env": "",
+		"css-loader": "^5.2.6",
+		"sass": "^1.35.1",
+		"sass-loader": "^12.1.0",
+		"style-loader": "^2.0.0"
 	},
 	"dependencies": {
 		"@babel/plugin-external-helpers": "^7.14.5",
@@ -20,7 +24,10 @@
 		"@babel/plugin-transform-react-jsx": "^7.14.5",
 		"@babel/preset-env": "^7.14.7",
 		"@wordpress/components": "^14.1.10",
+		"babel-loader": "^8.2.2",
 		"create-guten-block": "",
-		"po2json": ""
+		"po2json": "",
+		"webpack": "^5.38.1",
+		"webpack-cli": "^4.7.2"
 	}
 }

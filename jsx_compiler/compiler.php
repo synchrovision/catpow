@@ -11,9 +11,11 @@ if(!file_exists($f=dirname(__DIR__).'/js/babelHelpers.js')){
 
 while(true){
 	$jsx_files=get_jsx_files();
+	$entry_files=get_entry_files();
 	$po_files=get_po_files();
 	for($i=0;$i<20;$i++){
 		cp_jsx_compile($jsx_files);
+		cp_jsx_bundle($entry_files);
 		cp_po_compile($po_files);
 		sleep(3);
 	}
@@ -24,6 +26,7 @@ function get_jsx_files(){
     $wp_content_dir=dirname(__DIR__,3).'/';
 	
 	foreach(glob($wp_content_dir.'{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{blocks,ui,components,stores,*/*}/*/*.jsx',GLOB_BRACE) as $jsx_file){
+		if(strpos($jsx_file,'/node_modules/')!==false || file_exists(dirname($jsx_file).'/index.jsx')){continue;}
 		$jsx_files[]=$jsx_file;
 	}
 	return $jsx_files;
@@ -37,6 +40,30 @@ function cp_jsx_compile($jsx_files){
 			passthru('babel '.$jsx_file.' -o '.$js_file.' > '.__DIR__.'/logs/result.txt');
 			echo "build {$js_file}\n";
 			touch($js_file);
+		}
+	}
+}
+
+function get_entry_files(){
+	$entry_files=[];
+    $wp_content_dir=dirname(__DIR__,3).'/';
+	
+	foreach(glob($wp_content_dir.'{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{blocks,ui,components,stores,*/*}/*/*/index.jsx',GLOB_BRACE) as $entry_file){
+		if(strpos($entry_file,'/node_modules/')!==false){continue;}
+		$entry_files[]=$entry_file;
+	}
+	return $entry_files;
+}
+function cp_jsx_bundle($entry_files){
+	foreach($entry_files as $entry_file){
+		$bundle_js_file=dirname($entry_file).'.js';
+		$latest_filetime=filemtime($entry_file);
+		foreach(glob(dirname($entry_file).'/*') as $bundle_file){
+			$latest_filetime=max($latest_filetime,filemtime($bundle_file));
+		}
+		if(!file_exists($bundle_js_file) or filemtime($bundle_js_file) < $latest_filetime){
+			passthru('npx webpack build --mode production --entry '.$entry_file.' -o '.dirname($bundle_js_file).' --output-filename '.basename($bundle_js_file));
+			echo "bundle {$bundle_js_file}\n";
 		}
 	}
 }
