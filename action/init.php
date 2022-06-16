@@ -47,12 +47,11 @@ if($GLOBALS['is_IE']){
 }
 
 /* css vars */
+add_action('admin_head','Catpow\\util\\style_config::print_css_vars');
+add_action('wp_head','Catpow\\util\\style_config::print_css_vars');
 add_action('admin_init',function(){
 	wp_add_inline_style('wp-block-editor',Catpow\util\style_config::get_css_vars_code());
 },20);
-add_action('wp_enqueue_scripts',function(){
-	wp_add_inline_style('global-styles',Catpow\util\style_config::get_css_vars_code());
-});
 
 /* script translation */
 add_filter('load_script_translation_file',function($file,$handle,$domain){
