@@ -8,7 +8,7 @@ namespace Catpow\template_type;
 */
 
 class mailform extends template_type{
-	public static function get_embeddables($conf_data){
+	public static function get_embeddables($path,$conf_data){
 		global $wpdb;
 		$post_data_paths=[];
 		$path_data=(\cp::parse_conf_data_path($conf_data['path']));

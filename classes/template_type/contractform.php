@@ -6,7 +6,7 @@ namespace Catpow\template_type;
 
 class contractform extends template_type{
 	public static $permalinks=['task'];
-	public static function get_embeddables($conf_data){
+	public static function get_embeddables($path,$conf_data){
 		global $wpdb;
 		$post_data_paths=[];
 		$path_data=(\cp::parse_conf_data_path($conf_data['path']));

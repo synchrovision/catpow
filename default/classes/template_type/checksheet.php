@@ -6,7 +6,7 @@ namespace Catpow\template_type;
 */
 
 class checksheet extends template_type{
-	public static function get_embeddables($conf_data){
+	public static function get_embeddables($path,$conf_data){
 		$post_data_paths=[];
 		$posts=get_posts([
 			'post_type'=>$conf_data['data_name'],

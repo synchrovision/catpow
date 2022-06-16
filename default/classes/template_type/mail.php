@@ -6,7 +6,7 @@ namespace Catpow\template_type;
 
 class mail extends template_type{
 	public static $permalinks=['archive'];
-	public static function get_embeddables($conf_data){
+	public static function get_embeddables($path,$conf_data){
 		return ['form'=>[__('メールフォーム','catpow')=>'form.php']];
 	}
 	public static function get_template_files($conf_data){

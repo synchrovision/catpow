@@ -7,7 +7,7 @@ namespace Catpow\template_type;
 class slider_index extends template_type{
 	public static $permalinks=[];
 	
-	public static function get_embeddables($conf_data){
+	public static function get_embeddables($path,$conf_data){
 		return [
 			'loop'=>[
 				'スライダー（インデックス）'=>'loop.php'

@@ -10,7 +10,7 @@ namespace Catpow\template_type;
 
 class simple_shop extends template_type{
 	public static $permalinks=['archive','archive-cart','task-mail'];
-	public static function get_embeddables($conf_data){
+	public static function get_embeddables($path,$conf_data){
 		return [
 			'loop'=>[__('商品','catpow')=>'loop_item.php'],
 			'form'=>[__('ショップ')=>'form.php',__('カート','catpow')=>'form_cart.php']

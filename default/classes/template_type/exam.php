@@ -5,7 +5,7 @@ namespace Catpow\template_type;
 */
 
 class exam extends template_type{
-	public static function get_embeddables($conf_data){
+	public static function get_embeddables($path,$conf_data){
 		return ['form'=>['Q&A'=>'form.php']];
 	}
 	public static function get_template_files($conf_data){

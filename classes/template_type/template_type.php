@@ -38,8 +38,8 @@ abstract class template_type{
 		return false;
 	}
 	
-	public static function get_embeddables($conf_data){return [];}
-	public static function get_rest_routes($conf_data){return [];}
+	public static function get_embeddables($path,$conf_data){return [];}
+	public static function get_rest_routes($path,$conf_data){return [];}
 	public static function get_menus($conf_data){return [];}
 	public static function get_nav_menu_items($conf_data){return [];}
 	public static function get_template_files($conf_data){

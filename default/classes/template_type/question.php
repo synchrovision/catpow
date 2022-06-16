@@ -5,7 +5,7 @@ namespace Catpow\template_type;
 */
 
 class question extends template_type{
-	public static function get_embeddables($conf_data){
+	public static function get_embeddables($path,$conf_data){
 		return ['loop'=>['質問'=>'loop.php']];
 	}
 	public static function fill_conf_data(&$conf_data){

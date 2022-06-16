@@ -7,7 +7,7 @@ namespace Catpow\template_type;
 
 class shop extends template_type{
 	public static $permalinks=['archive','archive-cart','task-mail'];
-	public static function get_embeddables($conf_data){
+	public static function get_embeddables($path,$conf_data){
 		return [
 			'form'=>[
 				__('ショップ','catpow')=>'form.php',

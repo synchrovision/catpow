@@ -5,7 +5,7 @@ namespace Catpow\template_type;
 */
 
 class editblock extends template_type{
-	public static function get_embeddables($conf_data){
+	public static function get_embeddables($path,$conf_data){
 		return [
 			'formblock'=>['編集'=>'form.php']
 		];

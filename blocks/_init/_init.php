@@ -9,9 +9,9 @@ $data=[];
 			$template_data=explode('-',$template);
 			$class_name=cp::get_class_name('template_type',$template_data[0]);
 			if(!class_exists($class_name)){continue;}
-			$embeddables=$class_name::get_embeddables($conf_data);
-			if(empty($embeddables)){continue;}
 			$path="{$conf_data[$pref.'path']}/{$template}";
+			$embeddables=$class_name::get_embeddables($path,$conf_data);
+			if(empty($embeddables)){continue;}
 			Catpow\api::register_nonce($path);
 			$has_config=!empty(cp::get_file_path("{$path}/api-config.php",cp::FROM_THEME|cp::FROM_CONFIG));
 			$has_template=!empty(cp::get_file_path("{$path}/api-template.php",cp::FROM_THEME|cp::FROM_CONFIG));

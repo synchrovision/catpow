@@ -7,7 +7,7 @@ namespace Catpow\template_type;
 
 class register extends template_type{
 	public static $permalinks=['archive','task'];
-	public static function get_embeddables($conf_data){
+	public static function get_embeddables($path,$conf_data){
 		return ['form'=>['登録'=>'form.php']];
 	}
 	
