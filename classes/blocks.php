@@ -56,7 +56,6 @@ class blocks{
 				},10,2);
 			}
 		}
-		
 		add_action('enqueue_block_editor_assets',function(){
 			foreach(cp::get_file_paths('blocks/_init/_init.php') as $blocks_init_file){
 				include $blocks_init_file;
@@ -232,7 +231,10 @@ class blocks{
 		return function($attr,$content=null,$block=null)use($file_path){
 			$is_preview=
 				!empty(!empty($GLOBALS['wp']->query_vars['rest_route'])) &&
-				strpos($GLOBALS['wp']->query_vars['rest_route'],'block-renderer') > 0;
+				(
+					strpos($GLOBALS['wp']->query_vars['rest_route'],'/block-renderer/') > 0 ||
+					strpos($GLOBALS['wp']->query_vars['rest_route'],'/blocks/render/') > 0
+				);
 			ob_start();
 			if(!isset(cp::$content)){
 				cp::$content=new content\loop(['parent'=>false]);
