@@ -94,8 +94,9 @@ cp::conf_data_walk(function($data_type,$data_name,&$conf_data){
 			$tmp_name=explode('-',$template)[0];
 			$tmp_slug=explode('-',$template)[1]??null;
 			$class_name=cp::get_class_name('template_type',$tmp_name);
+			$path="{$conf_data[$pref.'path']}/{$template}";
 			if(class_exists($class_name)){
-				add_menus(compact('data_type','data_name','tmp_name','tmp_slug'),$conf_data,$class_name::get_menus($conf_data));
+				add_menus(compact('data_type','data_name','tmp_name','tmp_slug'),$conf_data,$class_name::get_menus($path,$conf_data));
 			}
 		}
 	}

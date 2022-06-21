@@ -40,8 +40,8 @@ abstract class template_type{
 	
 	public static function get_embeddables($path,$conf_data){return [];}
 	public static function get_rest_routes($path,$conf_data){return [];}
-	public static function get_menus($conf_data){return [];}
-	public static function get_nav_menu_items($conf_data){return [];}
+	public static function get_menus($path,$conf_data){return [];}
+	public static function get_nav_menu_items($path,$conf_data){return [];}
 	public static function get_template_files($conf_data){
 		static $cache;
 		$template=static::get_template_name();
