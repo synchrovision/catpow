@@ -10,7 +10,7 @@ class search extends template_type{
 	public static function get_embeddables($path,$conf_data){
 		return ['form'=>['検索フォーム'=>'form.php']];
 	}
-	public static function get_nav_menu_items($conf_data){
+	public static function get_nav_menu_items($path,$conf_data){
 		return [
 			$conf_data['label'].'  検索'=>$conf_data['data_name'].'/search'
 		];

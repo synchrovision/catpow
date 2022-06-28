@@ -8,7 +8,7 @@ class checksheet extends article_type{
 	public function __construct($data_path,$conf,$data){
 		
 	}
-	public static function get_menus($conf_data){
+	public static function get_menus($path,$conf_data){
 		$question_post_type=$conf_data['data_name'].'_item';
 		return [
 			'sub'=>[
