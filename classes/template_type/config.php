@@ -6,7 +6,7 @@ namespace Catpow\template_type;
 */
 
 class config extends template_type{
-	public static function get_menus($path,$conf_data){
+	public static function get_menus($conf_data){
 		if($conf_data['data_type']==='post'){
 			return [
 				'sub'=>[

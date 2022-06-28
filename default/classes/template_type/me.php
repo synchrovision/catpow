@@ -6,7 +6,7 @@ namespace Catpow\template_type;
 
 class me extends template_type{
 	public static $permalinks=['mypage'];
-	public static function get_nav_menu_items($path,$conf_data){
+	public static function get_nav_menu_items($conf_data){
 		return [
 			'マイページ'=>'me'
 		];

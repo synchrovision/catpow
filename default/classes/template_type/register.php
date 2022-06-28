@@ -11,12 +11,12 @@ class register extends template_type{
 		return ['form'=>['登録'=>'form.php']];
 	}
 	
-	public static function get_nav_menu_items($path,$conf_data){
+	public static function get_nav_menu_items($conf_data){
 		return [
 			$conf_data['label'].'  登録'=>$conf_data['data_name'].'/register'
 		];
 	}
-	public static function get_menus($path,$conf_data){
+	public static function get_menus($conf_data){
 		return [
 			'sub'=>[
 				'登録フォーム'=>'register_form',
