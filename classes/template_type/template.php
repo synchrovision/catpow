@@ -7,7 +7,7 @@ namespace Catpow\template_type;
 class template extends template_type{
 	
 	public static function get_embeddables($path,$conf_data){return [];}
-	public static function get_menus($conf_data){
+	public static function get_menus($path,$conf_data){
 		return [
 			'sub'=>[
 				'テンプレート'=>$conf_data['data_name'].'_tmpl'
