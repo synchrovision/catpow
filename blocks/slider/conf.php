@@ -11,7 +11,7 @@ $attributes=[
 	],
 	"items"=>[
 		"source"=>'query',
-		"selector"=>'ul.contents li.item',
+		"selector"=>'ul.contents>li.item,ul.contents>li',
 		"query"=>[
 			"classes"=>["source"=>'attribute',"attribute"=>'class'],
 			"title"=>["source"=>'children',"selector"=>'.text h3,.texts .title'],
