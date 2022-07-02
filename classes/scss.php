@@ -102,7 +102,7 @@ class scss{
 							empty($num)?sprintf($f,'h'):($staticHue?$num:sprintf('calc('.$f.' + var(--cp-tones-hr) * %s + var(--cp-tones-hs))','h',(int)$num-6)),
 							sprintf($f,'s'),
 							$args[1]==='false'?sprintf($f,'l'):sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]),
-							$args[2]==='false'?(isset($tone['a'])?'var(--cp-tones-'.$key.'-a)':1):$args[2]
+							$args[2]==='false'?(isset($tone['a'])?'var(--cp-tones-'.$key.'-a)':1):(isset($tone['a'])?'calc(var(--cp-tones-'.$key.'-a) * '.$args[2].')':$args[2])
 						);
 					}
 				}
