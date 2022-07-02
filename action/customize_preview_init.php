@@ -21,7 +21,7 @@ add_action('wp_head',function(){
 				});
 				Object.keys(colors.tones).map((key)=>{
 					Object.keys(colors.tones[key]).map((k)=>{
-						rootStyle.setProperty('--cp-tones-'+key+'-'+k,colors.tones[key][k]+(k==='h'?'':'%'));
+						rootStyle.setProperty('--cp-tones-'+key+'-'+k,colors.tones[key][k]+((k==='h' || k==='a')?'':'%'));
 					});
 				});
 				rootStyle.setProperty('--cp-tones-hr',colors.hueRange);
