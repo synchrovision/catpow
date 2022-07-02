@@ -23,6 +23,7 @@ wp_register_style('materialicons','https://fonts.googleapis.com/icon?family=Mate
 wp_register_script('urljs','https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.19.2/URI.min.js');
 wp_register_script('axios','https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js');
 wp_register_script('remarkable','https://cdnjs.cloudflare.com/ajax/libs/remarkable/2.0.1/remarkable.min.js');
+wp_register_script('mermaid','https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js');
 wp_register_script('jquery-easing','https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js');
 wp_register_script('wp-color-picker-alpha','https://cdn.jsdelivr.net/gh/kallookoo/wp-color-picker-alpha/dist/wp-color-picker-alpha.min.js',['wp-color-picker']);
 
