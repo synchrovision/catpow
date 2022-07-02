@@ -77,7 +77,7 @@
 			}
 		}
 		if(color.substr(0,3)==='hsl'){
-			const matches=color.match(/hsla?\((\d+),(\d+)%,(\d+)%(?:,([\d\.]+))?\)/);
+			const matches=color.match(/hsla?\((\d+),\s*(\d+)%,\s*(\d+)%(?:,\s*([\d\.]+))?\)/);
 			return {
 				h:matches[1],
 				s:matches[2],
