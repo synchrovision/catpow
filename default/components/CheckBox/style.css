@@ -28,6 +28,8 @@
   content: "";
   display: block;
   position: absolute;
+  top: 0.0625rem;
+  left: 0rem;
   width: 0rem;
   height: 0rem;
   border-left-style: solid;

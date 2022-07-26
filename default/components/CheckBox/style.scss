@@ -15,7 +15,7 @@
 		@include shd((bve:-1));
 		&::before{
 			content:'';
-			@include bnd((d:b,p:a,w:0,h:0));
+			@include bnd((d:b,p:a,t:1,l:0,w:0,h:0));
 			@include bdr((p:l b,s:s,w:3,c:m 60));
 			@include trn((y:5,r:-45deg,to:0 0,o:0));
 			@include trn((t:(w 0s .2s,h 0s .2s,o .2s)));
