@@ -116,6 +116,14 @@ class style_config{
 				}
 			}
 		}
+		$css_vars['--wp-background-image']=sprintf('url(%s)',get_background_image());
+		$css_vars['--wp-background-position-x']=get_theme_mod('background_position_x',get_theme_support('custom-background','default-position-x'));
+		$css_vars['--wp-background-position-y']=get_theme_mod('background_position_y',get_theme_support('custom-background','default-position-y'));
+		$css_vars['--wp-background-attachment']=get_theme_mod('background_attachment');
+		$css_vars['--wp-background-repeat']=get_theme_mod('background_repeat');
+		$css_vars['--wp-background-size']=get_theme_mod('background_size',get_theme_support('custom-background','default-size'));
+		$css_vars['--wp-logo-image']=sprintf('url(%s)',wp_get_attachment_url(get_theme_mod('custom_logo')));
+		$css_vars['--wp-icon-image']=sprintf('url(%s)',get_site_icon_url());
 		return $css_vars;
 	}
 	public static function get_css_vars_code(){
