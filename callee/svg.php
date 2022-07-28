@@ -40,7 +40,7 @@ elseif(!empty($_GET['c'])){
 		}
 		if(($tones=json_decode(file_get_contents($json),true)) && $tone=$tones[$key]??null){
 			if(isset($num)){
-				$c=sprintf('hsl(%s,%s,%s)',$staticHue?$num:($tone['h']+($num-6)*$tones['hr']),$tone['s'],$tone['l']);
+				$c=sprintf('hsl(%s,%s,%s)',$staticHue?$num:($tone['h']+($num-6)*$tones['hr']+$tones['hs']),$tone['s'],$tone['l']);
 			}
 			else{
 				$c=sprintf('hsl(%s,%s,%s)',$tone['h'],$tone['s'],$tone['l']);
