@@ -183,7 +183,6 @@ class scss{
 			){
 				$scssc=self::get_scssc();
 				try{
-					error_log('SCSS compile '.$scss_name);
 					$scssc->addVariables([
 						'is_plugins_scss'=>(strpos($scss_name,WP_PLUGIN_DIR)===0)?Compiler::$true:Compiler::$false,
 						'scss_name'=>[Type::T_STRING,$scss_name]
