@@ -23,17 +23,23 @@ class blocks{
 		},10,2);
 		
 		$data=self::get_block_data_to_register();
-		foreach($data['js'] as $args){
-			call_user_func_array('wp_register_script',$args);
-		}
-		foreach($data['css'] as $args){
-			call_user_func_array('wp_register_style',$args);
-		}
-		foreach($data['blocks'] as $block_type=>$param){
-			if(isset($param['render_callback'])){
-				$param['render_callback']=self::get_render_callback($param['render_callback']);
+		if(!empty($data['js'])){
+			foreach($data['js'] as $args){
+				call_user_func_array('wp_register_script',$args);
 			}
-			register_block_type($block_type,$param);
+		}
+		if(!empty($data['css'])){
+			foreach($data['css'] as $args){
+				call_user_func_array('wp_register_style',$args);
+			}
+		}
+		if(!empty($data['blocks'])){
+			foreach($data['blocks'] as $block_type=>$param){
+				if(isset($param['render_callback'])){
+					$param['render_callback']=self::get_render_callback($param['render_callback']);
+				}
+				register_block_type($block_type,$param);
+			}
 		}
 		if(!empty($data['core_block_params'])){
 			$registry=\WP_Block_Type_Registry::get_instance();
