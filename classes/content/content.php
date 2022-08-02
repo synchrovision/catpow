@@ -315,6 +315,17 @@ class content{
 	public function __get($name){
 		if(isset($this->path_data[$name])){return $this->path_data[$name];}
 		switch($name){
+			case 'the_id':
+			case 'the_name':
+			case 'the_title':
+			case 'the_content':{
+				if(empty($this->object)){return null;}
+				$data_type_class=\cp::get_class_name('data_type',$this->data_type);
+				return $data_type_class::{'get_'.substr($name,4)}($this->object);
+			}
+			case 'the_url':{
+				return $this->get_the_url();
+			}
 			case 'the_data_path':
 				return $this->get_the_data_path();
 			case 'the_real_data_path':
