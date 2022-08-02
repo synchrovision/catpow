@@ -48,7 +48,6 @@ class template_creator{
 			if(file_exists($f=STYLESHEETPATH.'/'.$path)){continue;}
 			$this->_create_folder_of_file($f);
 			$path_data=CP::parse_content_file_path($path);
-			$class_name=CP::get_class_name('template_item',$path_data['file_type']);
 			try{
 				ob_start();
 				self::render_code_data($code_data,$path_data,$conf_data);
@@ -71,6 +70,7 @@ class template_creator{
 			if($code_data==='default'){
 				$file_name=$path_data['file_name'];
 				if(isset($path_data['file_slug'])){$file_name.='-'.$path_data['file_slug'];}
+				if(isset($path_data['folder'])){$file_name=$path_data['folder'].'/'.$file_name;}
 				$f=\cp::get_file_path(
 					'config/template/'.$path_data['tmp_name'].'/'.$file_name.'.'.$path_data['file_type'],
 					\cp::FROM_THEME|\cp::FROM_DEFAULT
