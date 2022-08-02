@@ -11,20 +11,25 @@ registerBlockType('catpow/app',{
 		customClassName:false,
 	},
 	edit({attributes,setAttributes,className}){
-		const {content_path,props,config}=attributes;
+		const {content_path,props,options}=attributes;
+		const {useEffect}=wp.element;
 		
-		if(!config && content_path){
+		if(!options && content_path){
 			const path=content_path.substr(0,content_path.lastIndexOf('/'));
-			wp.apiFetch({path:'cp/v1/'+path+'/config'}).then((config)=>{
-				Object.keys(config).map((key)=>config[key].json='props');
-				setAttributes({config});
+			wp.apiFetch({path:'/cp/v1/blocks/config/app/options?path='+path})
+			.catch((res)=>{
+				console.log(res);
+			})
+			.then((options)=>{
+				options.forEach((option)=>option.json='props');
+				setAttributes({options});
 			});
 		}
 		
 		return [
 			<div class="embedded_content">
 				<div class="label">{content_path}</div>
-				<ServerSideRender block='catpow/app' attributes={attributes}/>
+				<CP.ServerSideRender block='catpow/app' attributes={attributes}/>
 			</div>,
 			<InspectorControls>
 				<PanelBody title="Path">
@@ -38,13 +43,13 @@ registerBlockType('catpow/app',{
 						}}
 					/>
 				</PanelBody>
-				{config &&
+				{options &&
 					<CP.SelectClassPanel
 						title='設定'
 						icon='edit'
 						set={setAttributes}
 						attr={attributes}
-						selectiveClasses={config}
+						selectiveClasses={options}
 						initialOpen={true}
 					/>
 				}

@@ -16,18 +16,21 @@ registerBlockType('catpow/app', {
         className = _ref.className;
     var content_path = attributes.content_path,
         props = attributes.props,
-        config = attributes.config;
+        options = attributes.options;
+    var useEffect = wp.element.useEffect;
 
-    if (!config && content_path) {
+    if (!options && content_path) {
       var path = content_path.substr(0, content_path.lastIndexOf('/'));
       wp.apiFetch({
-        path: 'cp/v1/' + path + '/config'
-      }).then(function (config) {
-        Object.keys(config).map(function (key) {
-          return config[key].json = 'props';
+        path: '/cp/v1/blocks/config/app/options?path=' + path
+      }).catch(function (res) {
+        console.log(res);
+      }).then(function (options) {
+        options.forEach(function (option) {
+          return option.json = 'props';
         });
         setAttributes({
-          config: config
+          options: options
         });
       });
     }
@@ -36,7 +39,7 @@ registerBlockType('catpow/app', {
       class: "embedded_content"
     }, wp.element.createElement("div", {
       class: "label"
-    }, content_path), wp.element.createElement(ServerSideRender, {
+    }, content_path), wp.element.createElement(CP.ServerSideRender, {
       block: "catpow/app",
       attributes: attributes
     })), wp.element.createElement(InspectorControls, null, wp.element.createElement(PanelBody, {
@@ -55,12 +58,12 @@ registerBlockType('catpow/app', {
           })
         });
       }
-    })), config && wp.element.createElement(CP.SelectClassPanel, {
+    })), options && wp.element.createElement(CP.SelectClassPanel, {
       title: "\u8A2D\u5B9A",
       icon: "edit",
       set: setAttributes,
       attr: attributes,
-      selectiveClasses: config,
+      selectiveClasses: options,
       initialOpen: true
     }))];
   },
