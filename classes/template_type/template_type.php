@@ -51,7 +51,15 @@ abstract class template_type{
 		if(!empty($tempate_dir)){
 			foreach(scandir($tempate_dir) as $fname){
 				if(in_array($fname[0],['.','_'],1)){continue;}
-				$files[$fname]='default';
+				if(is_dir($tempate_dir.'/'.$fname)){
+					foreach(scandir($tempate_dir.'/'.$fname) as $child_fname){
+						if(in_array($child_fname[0],['.','_'],1)){continue;}
+						$files[$fname.'/'.$child_fname]='default';
+					}
+				}
+				else{
+					$files[$fname]='default';
+				}
 			}
 		}
 		return $cache[$template]=$files;
