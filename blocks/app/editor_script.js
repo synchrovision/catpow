@@ -26,8 +26,14 @@ registerBlockType('catpow/app', {
       }).catch(function (res) {
         console.log(res);
       }).then(function (options) {
+        var newProps = JSON.parse(props);
+
         var initOption = function initOption(option) {
           option.json = 'props';
+
+          if (option.hasOwnProperty('default') && !newProps.hasOwnProperty(option.key)) {
+            newProps[option.key] = option.default;
+          }
 
           if (option.sub) {
             if (Array.isArray(option.sub)) {
@@ -42,7 +48,8 @@ registerBlockType('catpow/app', {
 
         options.forEach(initOption);
         setAttributes({
-          options: options
+          options: options,
+          props: JSON.stringify(newProps)
         });
       });
     }
@@ -64,7 +71,7 @@ registerBlockType('catpow/app', {
         var path = content_path.substr(0, content_path.lastIndexOf('/'));
         setAttributes({
           content_path: content_path,
-          config: false,
+          options: false,
           props: JSON.stringify({
             path: path
           })

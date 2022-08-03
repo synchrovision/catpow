@@ -21,8 +21,12 @@ registerBlockType('catpow/app',{
 				console.log(res);
 			})
 			.then((options)=>{
+				const newProps=JSON.parse(props);
 				const initOption=(option)=>{
 					option.json='props';
+					if(option.hasOwnProperty('default') && !newProps.hasOwnProperty(option.key)){
+						newProps[option.key]=option.default;
+					}
 					if(option.sub){
 						if(Array.isArray(option.sub)){
 							option.sub.forEach(initOption);
@@ -33,7 +37,7 @@ registerBlockType('catpow/app',{
 					}
 				};
 				options.forEach(initOption);
-				setAttributes({options});
+				setAttributes({options,props:JSON.stringify(newProps)});
 			});
 		}
 		
@@ -50,7 +54,7 @@ registerBlockType('catpow/app',{
 						tree={cpEmbeddablesTree.app}
 						onChange={(content_path)=>{
 							const path=content_path.substr(0,content_path.lastIndexOf('/'));
-							setAttributes({content_path,config:false,props:JSON.stringify({path})});
+							setAttributes({content_path,options:false,props:JSON.stringify({path})});
 						}}
 					/>
 				</PanelBody>
