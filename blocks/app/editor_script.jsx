@@ -21,7 +21,18 @@ registerBlockType('catpow/app',{
 				console.log(res);
 			})
 			.then((options)=>{
-				options.forEach((option)=>option.json='props');
+				const initOption=(option)=>{
+					option.json='props';
+					if(option.sub){
+						if(Array.isArray(option.sub)){
+							option.sub.forEach(initOption);
+						}
+						else{
+							Object.keys(option.sub).forEach((key)=>initOption(option.sub[key]));
+						}
+					}
+				};
+				options.forEach(initOption);
 				setAttributes({options});
 			});
 		}

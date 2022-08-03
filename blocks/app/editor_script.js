@@ -26,9 +26,21 @@ registerBlockType('catpow/app', {
       }).catch(function (res) {
         console.log(res);
       }).then(function (options) {
-        options.forEach(function (option) {
-          return option.json = 'props';
-        });
+        var initOption = function initOption(option) {
+          option.json = 'props';
+
+          if (option.sub) {
+            if (Array.isArray(option.sub)) {
+              option.sub.forEach(initOption);
+            } else {
+              Object.keys(option.sub).forEach(function (key) {
+                return initOption(option.sub[key]);
+              });
+            }
+          }
+        };
+
+        options.forEach(initOption);
         setAttributes({
           options: options
         });
