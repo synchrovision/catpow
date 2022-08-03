@@ -4,9 +4,9 @@ var _excluded = ["className", "attr", "set", "keys", "index", "size", "devices",
     _excluded4 = ["label"],
     _excluded5 = ["label"];
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { babelHelpers.defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { babelHelpers.defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
@@ -1829,7 +1829,7 @@ var CP = {
     var useMemo = wp.element.useMemo;
     var param = props.param,
         value = props.value,
-        onChange = props.onChange;
+        _onChange3 = props.onChange;
     var type = param.type || param.input || 'text';
 
     var _useMemo = useMemo(function () {
@@ -1846,7 +1846,7 @@ var CP = {
         {
           return wp.element.createElement(RadioControl, {
             label: param.label || null,
-            onChange: onChange,
+            onChange: _onChange3,
             selected: value,
             options: options
           });
@@ -1856,7 +1856,7 @@ var CP = {
         {
           return wp.element.createElement(SelectControl, {
             label: param.label || null,
-            onChange: onChange,
+            onChange: _onChange3,
             value: value,
             options: options
           });
@@ -1866,7 +1866,7 @@ var CP = {
         {
           return wp.element.createElement(CP.SelectButtons, {
             label: param.label || null,
-            onChange: onChange,
+            onChange: _onChange3,
             selected: value,
             options: options
           });
@@ -1876,7 +1876,7 @@ var CP = {
         {
           return wp.element.createElement(CP.SelectGridButtons, {
             label: param.label || null,
-            onChange: onChange,
+            onChange: _onChange3,
             selected: value,
             options: options
           });
@@ -1884,10 +1884,16 @@ var CP = {
 
       case 'range':
         {
+          if (!param.coef) {
+            param.coef = 1;
+          }
+
           return wp.element.createElement(RangeControl, {
             label: param.label || null,
-            onChange: onChange,
-            value: value,
+            onChange: function onChange(value) {
+              return _onChange3(value * param.coef);
+            },
+            value: value / param.coef,
             min: param.min || 0,
             max: param.max || 10,
             step: param.step || 1
@@ -1899,7 +1905,7 @@ var CP = {
           return wp.element.createElement(ToggleControl, {
             label: param.label || null,
             checked: value,
-            onChange: onChange
+            onChange: _onChange3
           });
         }
 
@@ -1909,7 +1915,7 @@ var CP = {
             label: param.label || null,
             cols: param.cols,
             value: value,
-            onChange: onChange
+            onChange: _onChange3
           });
         }
 
@@ -1918,7 +1924,7 @@ var CP = {
           return wp.element.createElement(TextareaControl, {
             label: param.label || null,
             value: value,
-            onChange: onChange
+            onChange: _onChange3
           });
         }
 
@@ -1928,7 +1934,7 @@ var CP = {
             label: param.label || null,
             type: param.type,
             value: value,
-            onChange: onChange,
+            onChange: _onChange3,
             list: param.list && CP.getDataListId(param.list, param.values)
           });
         }
@@ -2130,55 +2136,27 @@ var CP = {
       if (prm.json) {
         if (prm.input) {
           switch (prm.input) {
-            case 'text':
-              rtn.push(wp.element.createElement(TextControl, {
-                label: prm.label,
-                value: JSON.parse(props.attr[prm.json])[prm.key],
-                onChange: function onChange(val) {
-                  CP.setJsonValue(props, prm.json, prm.key, val);
-                }
-              }));
-              break;
-
-            case 'range':
-              if (!prm.coef) {
-                prm.coef = 1;
-              }
-
-              rtn.push(wp.element.createElement(RangeControl, {
-                label: prm.label,
-                value: CP.getJsonValue(props, prm.json, prm.key) / prm.coef,
-                onChange: function onChange(val) {
-                  CP.setJsonValue(props, prm.json, prm.key, val * prm.coef);
-                },
-                min: prm.min,
-                max: prm.max,
-                step: prm.step
-              }));
-              break;
-
+            case 'select':
+            case 'buttons':
+            case 'gridbuttons':
             case 'bool':
-              rtn.push(wp.element.createElement(ToggleControl, {
-                label: prm.label,
-                checked: JSON.parse(props.attr[prm.json])[prm.key],
-                onChange: function onChange(val) {
-                  CP.setJsonValue(props, prm.json, prm.key, val);
-                }
-              }));
+            case 'range':
+            case 'text':
+            case 'textarea':
+              {
+                rtn.push(wp.element.createElement(CP.DynamicInput, {
+                  param: prm,
+                  value: JSON.parse(props.attr[prm.json])[prm.key],
+                  onChange: function onChange(val) {
+                    CP.setJsonValue(props, prm.json, prm.key, val);
 
-              if (prm.sub) {
-                if (JSON.parse(props.attr[prm.json])[prm.key]) {
-                  var sub = [];
-                  prm.sub.map(function (prm) {
-                    sub.push(SelectClass(prm));
-                  });
-                  rtn.push(wp.element.createElement("div", {
-                    className: "sub"
-                  }, sub));
-                }
+                    if (prm.effect) {
+                      prm.effect(val, states, props);
+                    }
+                  }
+                }));
+                break;
               }
-
-              break;
 
             case 'flag':
               var value = CP.getJsonValue(props, prm.json, prm.key) || 0;
@@ -2250,6 +2228,44 @@ var CP = {
               }));
               break;
           }
+
+          switch (prm.input) {
+            case 'select':
+            case 'buttons':
+            case 'gridbuttons':
+              {
+                if (prm.sub) {
+                  if (prm.sub[JSON.parse(props.attr[prm.json])[prm.key]]) {
+                    var sub = [];
+                    prm.sub[JSON.parse(props.attr[prm.json])[prm.key]].map(function (prm) {
+                      sub.push(SelectClass(prm));
+                    });
+                    rtn.push(wp.element.createElement("div", {
+                      className: "sub"
+                    }, sub));
+                  }
+                }
+
+                break;
+              }
+
+            case 'bool':
+              {
+                if (prm.sub) {
+                  if (JSON.parse(props.attr[prm.json])[prm.key]) {
+                    var _sub = [];
+                    prm.sub.map(function (prm) {
+                      _sub.push(SelectClass(prm));
+                    });
+                    rtn.push(wp.element.createElement("div", {
+                      className: "sub"
+                    }, _sub));
+                  }
+                }
+
+                break;
+              }
+          }
         } else if (_.isObject(prm.values)) {
           var _CP$parseSelections = CP.parseSelections(prm.values),
               _options = _CP$parseSelections.options,
@@ -2268,13 +2284,13 @@ var CP = {
             var currentValue = CP.getJsonValue(props, prm.json, prm.key);
 
             if (currentValue && prm.sub[currentValue]) {
-              var _sub = [];
+              var _sub2 = [];
               prm.sub[currentValue].map(function (prm) {
-                _sub.push(SelectClass(prm));
+                _sub2.push(SelectClass(prm));
               });
               rtn.push(wp.element.createElement("div", {
                 className: "sub"
-              }, _sub));
+              }, _sub2));
             }
           }
         } else if (prm.values) {
@@ -2288,13 +2304,13 @@ var CP = {
 
           if (prm.sub) {
             if (CP.getJsonValue(props, prm.json, prm.key)) {
-              var _sub2 = [];
+              var _sub3 = [];
               prm.sub.map(function (prm) {
-                _sub2.push(SelectClass(prm));
+                _sub3.push(SelectClass(prm));
               });
               rtn.push(wp.element.createElement("div", {
                 className: "sub"
-              }, _sub2));
+              }, _sub3));
             }
           }
         } else {
@@ -2589,26 +2605,26 @@ var CP = {
             case 'buttons':
             case 'gridbuttons':
               if (prm.sub && prm.sub[item[prm.key]]) {
-                var _sub3 = [];
+                var _sub4 = [];
                 prm.sub[item[prm.key]].map(function (prm) {
-                  _sub3.push(SelectClass(prm));
+                  _sub4.push(SelectClass(prm));
                 });
                 rtn.push(wp.element.createElement("div", {
                   className: "sub"
-                }, _sub3));
+                }, _sub4));
               }
 
               break;
 
             case 'bool':
               if (prm.sub && item[prm.key]) {
-                var _sub4 = [];
+                var _sub5 = [];
                 prm.sub.map(function (prm) {
-                  _sub4.push(SelectClass(prm));
+                  _sub5.push(SelectClass(prm));
                 });
                 rtn.push(wp.element.createElement("div", {
                   className: "sub"
-                }, _sub4));
+                }, _sub5));
               }
 
               break;
@@ -2707,15 +2723,15 @@ var CP = {
             var _currentClass = CP.getSelectiveClass(props, prm.values, prm.key);
 
             if (_currentClass && prm.sub[_currentClass]) {
-              var _sub5 = [];
+              var _sub6 = [];
 
               prm.sub[_currentClass].map(function (prm) {
-                _sub5.push(SelectClass(prm));
+                _sub6.push(SelectClass(prm));
               });
 
               rtn.push(wp.element.createElement("div", {
                 className: "sub"
-              }, _sub5));
+              }, _sub6));
             }
           }
         } else {
@@ -2730,13 +2746,13 @@ var CP = {
 
           if (prm.sub) {
             if (states[prm.values]) {
-              var _sub6 = [];
+              var _sub7 = [];
               prm.sub.map(function (prm) {
-                _sub6.push(SelectClass(prm));
+                _sub7.push(SelectClass(prm));
               });
               rtn.push(wp.element.createElement("div", {
                 className: "sub"
-              }, _sub6));
+              }, _sub7));
             }
           }
         }

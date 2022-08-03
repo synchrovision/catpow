@@ -1277,11 +1277,12 @@
 				);
 			}
 			case 'range':{
+				if(!param.coef){param.coef=1;}
 				return (
 					<RangeControl
 						label={param.label || null}
-						onChange={onChange}
-						value={value}
+						onChange={(value)=>onChange(value*param.coef)}
+						value={value/param.coef}
 						min={param.min || 0}
 						max={param.max || 10}
 						step={param.step || 1}
@@ -1469,44 +1470,25 @@
 			if(prm.json){
 				if(prm.input){
 					switch(prm.input){
-						case 'text':
-							rtn.push(
-								<TextControl
-									label={prm.label}
-									value={JSON.parse(props.attr[prm.json])[prm.key]}
-									onChange={(val)=>{CP.setJsonValue(props,prm.json,prm.key,val);}}
-								/>
-							);
-							break;
-						case 'range':
-							if(!prm.coef){prm.coef=1;}
-							rtn.push(
-								<RangeControl
-									label={prm.label}
-									value={CP.getJsonValue(props,prm.json,prm.key)/prm.coef}
-									onChange={(val)=>{CP.setJsonValue(props,prm.json,prm.key,val*prm.coef);}}
-									min={prm.min}
-									max={prm.max}
-									step={prm.step}
-								/>
-							);
-							break;
+						case 'select':
+						case 'buttons':
+						case 'gridbuttons':
 						case 'bool':
+						case 'range':
+						case 'text':
+						case 'textarea':{
 							rtn.push(
-								<ToggleControl
-									label={prm.label}
-									checked={JSON.parse(props.attr[prm.json])[prm.key]}
-									onChange={(val)=>{CP.setJsonValue(props,prm.json,prm.key,val);}}
+								<CP.DynamicInput
+									param={prm}
+									value={JSON.parse(props.attr[prm.json])[prm.key]}
+									onChange={(val)=>{
+										CP.setJsonValue(props,prm.json,prm.key,val);
+										if(prm.effect){prm.effect(val,states,props);}
+									}}
 								/>
 							);
-							if(prm.sub){
-								if(JSON.parse(props.attr[prm.json])[prm.key]){
-									let sub=[];
-									prm.sub.map((prm)=>{sub.push(SelectClass(prm))});
-									rtn.push(<div className="sub">{sub}</div>);
-								}
-							}
 							break;
+						}
 						case 'flag':
 							let value=CP.getJsonValue(props,prm.json,prm.key) || 0;
 							if(prm.label){rtn.push(<h5>{prm.label}</h5>);}
@@ -1556,6 +1538,31 @@
 								/>
 							);
 							break;
+					}
+					
+					switch(prm.input){
+						case 'select':
+						case 'buttons':
+						case 'gridbuttons':{
+							if(prm.sub){
+								if(prm.sub[JSON.parse(props.attr[prm.json])[prm.key]]){
+									let sub=[];
+									prm.sub[JSON.parse(props.attr[prm.json])[prm.key]].map((prm)=>{sub.push(SelectClass(prm))});
+									rtn.push(<div className="sub">{sub}</div>);
+								}
+							}
+							break;
+						}
+						case 'bool':{
+							if(prm.sub){
+								if(JSON.parse(props.attr[prm.json])[prm.key]){
+									let sub=[];
+									prm.sub.map((prm)=>{sub.push(SelectClass(prm))});
+									rtn.push(<div className="sub">{sub}</div>);
+								}
+							}
+							break;
+						}
 					}
 				}
 				else if(_.isObject(prm.values)){
