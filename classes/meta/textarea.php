@@ -11,12 +11,11 @@ class textarea extends meta{
 	}
 	public static function input($meta,$prm){
 		$path=$meta->the_data_path;
-		$val=$meta->value;
 		return sprintf(
 			'<textarea name="%s"%s>%s</textarea>',
 			\cp::get_input_name($meta->the_data_path),
 			\cp::get_input_attr($meta->the_data_path,$meta->conf),
-			$meta->value
+			stripslashes($meta->value)
 		);
 	}
 	public static function resolve_conf($conf){
