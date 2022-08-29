@@ -436,7 +436,7 @@ class CP{
 		}
 		self::enqueue_script('ui/'.$name.'/input.js',$deps);
 		self::set_script_translations('ui/'.$name.'/input.js');
-		if($f=self::get_file_path('ui/'.$name.'/inputInit.php')){include $f;}
+		if($f=self::get_file_path('ui/'.$name.'/inputInit.php')){include_once $f;}
 		$done[$name]=1;
 		return true;
 	}
@@ -468,7 +468,7 @@ class CP{
 		}
 		self::enqueue_script('ui/'.$name.'/output.js',$deps);
 		self::set_script_translations('ui/'.$name.'/output.js');
-		if($f=self::get_file_path('ui/'.$name.'/outputInit.php')){include $f;}
+		if($f=self::get_file_path('ui/'.$name.'/outputInit.php')){include_once $f;}
 		$done[$name]=1;
 		return true;
 	}
