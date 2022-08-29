@@ -9,7 +9,17 @@ class media extends meta{
 		$can_search=false;
 	
 	public static function output($meta,$prm){
-		$val=$meta->value;
+		return self::get_output($meta->conf,$meta->value,$prm);
+	}
+	public static function input($meta,$prm){
+		return self::get_input($meta->the_data_path,$meta->conf,$meta->value);
+	}
+	
+	public static function get_props($meta){
+		return ['values'=>$meta->value,'images'=>array_map('wp_get_attachment_image_src',$mete->value)];
+	}
+	
+	public static function get_output($conf,$val,$prm){
 		if($prm=='url'){return wp_get_attachment_url($val);}
 		if(empty($post=get_post($val))){return '';}
 		if($prm=='type'){return $post->post_mime_type;}
@@ -24,24 +34,17 @@ class media extends meta{
 				return sprintf(
 					'<video src="%s"%s></video>',
 					wp_get_attachment_url($val),
-					static::get_player_attr(array_merge($meta->conf,(array)$prm))
+					static::get_player_attr(array_merge($conf,(array)$prm))
 				);
 			case 'audio':
 				return sprintf(
 					'<audio src="%s"%s></audio>',
 					wp_get_attachment_url($val),
-					static::get_player_attr(array_merge($meta->conf,(array)$prm))
+					static::get_player_attr(array_merge($conf,(array)$prm))
 				);
 		}
+		
 	}
-	public static function input($meta,$prm){
-		return self::get_input($meta->the_data_path,$meta->conf,$meta->value);
-	}
-	
-	public static function get_props($meta){
-		return ['values'=>$meta->value,'images'=>array_map('wp_get_attachment_image_src',$mete->value)];
-	}
-	
 	public static function get_input($path,$conf,$val){
 		if(isset($conf['dummy'])){$dummy=get_template_directory_uri('/images/'.$conf['dummy']);}
 		else{$dummy=\cp::get_file_url('images/dummy.jpg');}
