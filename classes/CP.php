@@ -513,6 +513,7 @@ class CP{
 		self::enqueue_script('components/'.$name.'/component.js',$deps);
 		self::enqueue_style('components/'.$name.'/style.css');
 		self::set_script_translations('components/'.$name.'/component.js');
+		if($f=self::get_file_path('components/'.$name.'/init.php')){include $f;}
 		$done[$name]=1;
 	}
 	public static function use_store($name){
