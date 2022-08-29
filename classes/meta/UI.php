@@ -30,24 +30,27 @@ class UI extends meta{
 		return ['value'=>$meta->value];
 	}
 	
-	public static function fill_param($prm,$meta){
-		$prm=(array)$prm;
-		if(empty(static::$defaultParam)){return $prm;}
-		
-		return array_map(
-			function($item)use($meta){
-				if(is_callable($item)){return $item($prm,$meta);}
-				return $item;
-			},
-			array_filter(
-				array_merge(
-					static::$defaultParam,
-					array_intersect_key($meta->conf,static::$defaultParam),
-					$prm
-				),
-				function($v){return isset($v);}
-			)
-		);
+	public static function fill_param($param,$meta){
+		$param=(array)$param;
+		$ui=$meta->conf['ui']??static::$ui??static::get_type();
+		if(!empty(static::$defaultParam)){
+			$param=array_map(
+				function($item)use($meta){
+					if(is_callable($item)){return $item($param,$meta);}
+					return $item;
+				},
+				array_filter(
+					array_merge(
+						static::$defaultParam,
+						array_intersect_key($meta->conf,static::$defaultParam),
+						$param
+					),
+					function($v){return isset($v);}
+				)
+			);
+		}
+		if($f=\cp::get_file_path('ui/'.$ui.'/fill_param.php')){include $f;}
+		return $param;
 	}
 	public static function get_output($path,$conf,$prm){
 		$ui=$conf['ui']??static::$ui??static::get_type();
