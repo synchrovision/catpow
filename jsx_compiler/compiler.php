@@ -1,13 +1,7 @@
 <?php
-putenv('PATH='.getenv('PATH').':'.__DIR__.':'.__DIR__.'/node_modules/.bin');
-putenv('NODE_PATH='.getenv('NODE_PATH').':'.__DIR__.'/node_modules');
 chdir(dirname(__DIR__));
 passthru('git submodule update --init --recursive');
 chdir(__DIR__);
-if(!file_exists(__DIR__.'/node_modules')){passthru('npm install');}
-if(!file_exists($f=dirname(__DIR__).'/js/babelHelpers.js')){
-	passthru('node_modules/.bin/babel-external-helpers -t var  > '.$f);
-}
 
 while(true){
 	$jsx_files=get_jsx_files();
@@ -37,7 +31,7 @@ function cp_jsx_compile($jsx_files){
 		$js_file=substr($jsx_file,0,-1);
 		if(!file_exists($jsx_file)){continue;}
 		if(!file_exists($js_file) or filemtime($js_file) < filemtime($jsx_file)){
-			passthru('babel '.$jsx_file.' -o '.$js_file.' > '.__DIR__.'/logs/result.txt');
+			passthru("deno bundle {$jsx_file} {$js_file}");
 			echo "build {$js_file}\n";
 			touch($js_file);
 		}
@@ -62,7 +56,7 @@ function cp_jsx_bundle($entry_files){
 			$latest_filetime=max($latest_filetime,filemtime($bundle_file));
 		}
 		if(!file_exists($bundle_js_file) or filemtime($bundle_js_file) < $latest_filetime){
-			passthru('npx webpack build --mode production --entry '.$entry_file.' -o '.dirname($bundle_js_file).' --output-filename '.basename($bundle_js_file));
+			passthru("deno bundle {$entry_file} {$bundle_js_file}");
 			echo "bundle {$bundle_js_file}\n";
 		}
 	}
@@ -83,7 +77,7 @@ function cp_po_compile($po_files){
 		if(!file_exists($po_file)){continue;}
 		if(!file_exists($jed_file) or filemtime($jed_file) < filemtime($po_file)){
 			if(!is_dir(dirname($jed_file))){mkdir(dirname($jed_file),0777,true);}
-			passthru('po2json '.$po_file.' '.$jed_file.' -f jed1.x -d catpow > '.__DIR__.'/logs/result.txt');
+			passthru("po2json {$po_file} {$jed_file} -f jed1.x -d catpow");
 			echo "build {$jed_file}\n";
 			touch($jed_file);
 		}

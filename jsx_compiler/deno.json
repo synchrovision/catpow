@@ -1,0 +1,6 @@
+{
+	"compilerOptions":{
+		"jsxFactory":"wp.element.createElement",
+		"jsxFragmentFactory":"wp.element.Fragment"
+	}
+}
