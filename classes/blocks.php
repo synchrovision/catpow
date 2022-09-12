@@ -67,14 +67,9 @@ class blocks{
 				},10,2);
 			}
 		}
-		add_action('enqueue_block_editor_assets',function(){
-			foreach(cp::get_file_paths('blocks/_init/_init.php') as $blocks_init_file){
-				include $blocks_init_file;
-			}
-			$block_registry=\WP_Block_Type_Registry::get_instance();
-			foreach($block_registry->get_all_registered() as $block_name=>$block_type){
-				$block_base_name=explode('/',$block_name)[1];
-				if($f=cp::get_file_path('blocks/'.$block_base_name.'/editor_init.php')){include $f;}
+		add_action('enqueue_block_editor_assets',function()use($data){
+			foreach($data['editor_init'] as $editor_init_file){
+				include $editor_init_file;
 			}
 		});
 		if(current_user_can('edit_themes')){\cp::gzip_compress(glob(\WP_PLUGIN_DIR.'/catpow/blocks/*/*.{js,css}',defined('GLOB_BRACE')?GLOB_BRACE:0));}
@@ -122,6 +117,7 @@ class blocks{
 		$transient='block_data_to_register_for_'.get_stylesheet();
 		if((!current_user_can('edit_themes') || wp_is_json_request()) && $data=get_transient($transient)){return $data;}
 		$data=[];
+		$data['editor_init']=cp::get_file_paths('blocks/_init/_init.php');
 		foreach(cp::get_file_urls('blocks/_init') as $block_init_dir=>$block_init_url){
 			foreach(glob($block_init_dir.'/*.js') as $format_script){
 				$fname=basename($format_script);
