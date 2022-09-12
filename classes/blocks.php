@@ -54,6 +54,11 @@ class blocks{
 				}
 			}
 		}
+		if(!empty($data['init'])){
+			foreach($data['init'] as $block_init_file){
+				include_once $block_init_file;
+			}
+		}
 		if(!empty($data['front_init'])){
 			foreach($data['front_init'] as $block_type=>$init_file){
 				add_filter('render_block_'.$block_type,function($block_content,$block)use($init_file){
@@ -149,6 +154,7 @@ class blocks{
 				'editor_init'=>'js',
 				'component'=>'js',
 				'render'=>'php',
+				'init'=>'php',
 				'editor_init'=>'php',
 				'front_init'=>'php'
 			] as $fname=>$ext){
