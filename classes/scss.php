@@ -90,16 +90,27 @@ class scss{
 				$color=false;
 				$colors=util\style_config::get_config_json('colors');
 				$tones=util\style_config::get_config_json('tones');
-				if(preg_match('/^([a-z]+)?(-)?(\d+)?$/',$args[0],$matches)){
+				if(preg_match('/^([a-z]+)?([-_])?(\d+)?$/',$args[0],$matches)){
 					$key=$matches[1]?:'m';
-					$staticHue=!empty($matches[2]);
+					$sep=$matches[2]??null;
+					$staticHue=$sep==='-';
+					$relativeHue=$sep==='_';
 					$num=$matches[3]??null;
 					if(isset($tones[$key])){
 						$f='var(--cp-tones-'.$key.'-%s)';
+						$rf='var(--cp-root-tones-'.$key.'-%s)';
 						$tone=$tones[$key];
 						$color=sprintf(
 							'hsla(%s,%s,%s,%s)',
-							empty($num)?sprintf($f,'h'):($staticHue?$num:sprintf('calc('.$f.' + var(--cp-tones-hr) * %s + var(--cp-tones-hs))','h',(int)$num-6)),
+							is_null($num)?
+							sprintf($f,'h'):
+							($staticHue?
+							 	$num:
+							 	(($num==='0' || $num==='6')?
+								 	sprintf($relativeHue?$f:$rf,'h'):
+								 	sprintf('calc('.($relativeHue?$f:$rf).' + var(--cp-tones-hr) * %s + var(--cp-tones-hs))','h',(int)$num-6)
+								)
+							),
 							sprintf($f,'s'),
 							$args[1]==='false'?sprintf($f,'l'):sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]),
 							$args[2]==='false'?(isset($tone['a'])?'var(--cp-tones-'.$key.'-a)':1):(isset($tone['a'])?'calc(var(--cp-tones-'.$key.'-a) * '.$args[2].')':$args[2])
