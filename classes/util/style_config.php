@@ -109,6 +109,9 @@ class style_config{
 				if(is_array($val)){
 					foreach($val as $k=>$v){
 						$css_vars[sprintf('--cp-%s-%s-%s',$group,$key,$k)]=$v;
+						if($group==='tones' && $k==='h'){
+							$css_vars[sprintf('--cp-root-%s-%s-%s',$group,$key,$k)]=$v;
+						}
 					}
 				}
 				else{
