@@ -8,8 +8,7 @@
 				<ul className="OutputGroup">
 					{Object.keys(value).map((key)=>{
 						const row=value[key];
-						console.log(key);
-						console.log(row);
+						console.log(conf);
 						return (
 							<li className="item" key={key}>
 								{Object.keys(conf.meta).map((name)=>(
@@ -26,7 +25,7 @@
 		case 'select':
 		case 'radio':
 		case 'checkbox':{
-			const labels=(Array.isArray(value)?value:[value]).filter((val)=>!!val).map((val)=>conf.dict && conf.dict[val]);
+			const labels=(Array.isArray(value)?value:[value]).filter((val)=>!!val).map((val)=>conf.dict?conf.dict[val]:val);
 			if(!labels.length){return false;}
 			return (
 				<ul clasName="OutputLabels">
