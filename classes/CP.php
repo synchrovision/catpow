@@ -410,7 +410,7 @@ class CP{
 	public static function use_ui_input($name){
 		static $done=[];
 		if(isset($done[$name])){return false;}
-		self::enqueue_script('ui/HiddenValues/input.js',['wp-element','babelHelpers']);
+		self::enqueue_script('ui/HiddenValues/input.js',['wp-element','babelHelpers','init-catpow-namespace']);
 		self::enqueue_style('ui/'.$name.'/input.css');
 		$deps=['ui/HiddenValues/input.js'];
 		if($f=self::get_file_path('ui/'.$name.'/deps.php')){
@@ -444,7 +444,7 @@ class CP{
 		static $done=[];
 		if(isset($done[$name])){return false;}
 		self::enqueue_style('ui/'.$name.'/output.css');
-		$deps=['wp-element','babelHelpers'];
+		$deps=['wp-element','babelHelpers','init-catpow-namespace'];
 		if($f=self::get_file_path('ui/'.$name.'/deps.php')){
 			include $f;
 			if(!empty($outputDeps)){
@@ -478,7 +478,7 @@ class CP{
 	public static function use_component($name){
 		static $done=[];
 		if(isset($done[$name])){return false;}
-		$deps=['wp-i18n','wp-api-fetch','wp-element','babelHelpers'];
+		$deps=['wp-i18n','wp-api-fetch','wp-element','babelHelpers','init-catpow-namespace'];
 		if($f=self::get_file_path('components/'.$name.'/deps.php')){
 			include $f;
 			if(!empty($useScripts)){
@@ -519,7 +519,7 @@ class CP{
 	public static function use_store($name){
 		static $done=[];
 		if(isset($done[$name])){return false;}
-		$deps=['wp-data','wp-api-fetch','babelHelpers'];
+		$deps=['wp-data','wp-api-fetch','babelHelpers','init-catpow-namespace'];
 		if($f=self::get_file_path('stores/'.$name.'/deps.php')){
 			include $f;
 			if(!empty($useScripts)){
