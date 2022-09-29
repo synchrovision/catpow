@@ -1,28 +1,29 @@
 {
-    "require": {
-        "guzzlehttp/guzzle": "*",
-        "scssphp/scssphp": "*",
-        "michelf/php-markdown": "*",
-        "google/apiclient": "*",
-        "facebook/graph-sdk": "*",
-        "spatie/color": "*"
-    },
-    "scripts": {
-        "post-update-cmd": "Google\\Task\\Composer::cleanup"
-    },
-    "extra": {
-        "google/apiclient-services": [
-            "Analytics",
+	"require": {
+		"guzzlehttp/guzzle": "*",
+		"scssphp/scssphp": "*",
+		"michelf/php-markdown": "*",
+		"google/apiclient": "*",
+		"facebook/graph-sdk": "*",
+		"spatie/color": "*"
+	},
+	"scripts": {
+		"post-update-cmd": "Google\\Task\\Composer::cleanup"
+	},
+	"extra": {
+		"google/apiclient-services": [
+			"Analytics",
 			"Calendar",
-            "Drive",
+			"Sheets",
+			"Drive",
 			"Oauth2",
 			"Script",
 			"YouTube"
-        ]
-    },
-    "config": {
-        "platform": {
-            "php": "7.4"
-        }
-    }
+		]
+	},
+	"config": {
+		"platform": {
+			"php": "7.4"
+		}
+	}
 }
