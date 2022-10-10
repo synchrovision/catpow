@@ -16,7 +16,14 @@ class media extends meta{
 	}
 	
 	public static function get_props($meta){
-		return ['values'=>$meta->value,'images'=>array_map('wp_get_attachment_image_src',$mete->value)];
+		$rtn=['values'=>$meta->value];
+		foreach($meta->value as $id){
+			$rtn['files'][]=
+				wp_attachment_is_image($id)?
+				array_combine(['url','width','height','resized'],wp_get_attachment_image_src($id)):
+				['url'=>wp_get_attachment_url($id)];
+		}
+		return $rtn;
 	}
 	
 	public static function get_output($conf,$val,$prm){
