@@ -59,6 +59,11 @@ class media_protect{
 		if(empty($cond)){unlink($cond_file);}
 		file_put_contents($cond_file,json_encode($cond,0700));
 	}
+	public static function get_cond($id){
+		$cond_file=dirname(get_attached_file($id)).'/cond.json';
+		if(!file_exists($cond_file)){return null;}
+		return json_decode(file_get_contents($cond_file),true);
+	}
 	public static function allow($id){
 		\cp::$data['allowed_protected_media'][get_current_blog_id()][$id]=true;
 	}
