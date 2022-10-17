@@ -8,34 +8,22 @@ class pdf extends media{
 		$rtn=array();
 		if($prm=='url'){return wp_get_attachment_url($val);}
 		if($prm=='path'){return wp_upload_dir()['path'].get_post_meta($val,'_wp_attached_file',1);}
+		$url=wp_get_attachment_url($val);
 		return sprintf(
-			'<a class="pdf" target="_blank" href="%1$s"><object data="%1$s" type="application/pdf"></object></a>',
-			wp_get_attachment_url($val)
+			'<a class="link-pdf" target="_blank" href="%s">%s</a>',
+			$url,basename($url)
 		);
 	}
-	
-	public static function get_input($path,$meta,$val){
-		
+	public static function get_input($path,$conf,$val){
 		wp_enqueue_media();
 		wp_enqueue_script('cp_media_upload');
 		
-		if(empty($val)){
-			return sprintf(
-					'<span class="ajax_upload_media_wrapper">'.
-					'<span id="%1$s"%2$s><object class="pdf" data="%3$s" type="application/pdf">'.
-					'</object><input type="hidden" name="%4$s" value=""/></span>'.
-					'</span>',
-				self::get_input_id($path),$attr,$dummy,self::get_input_name($path)
-			);
-		}
-		
-		$src=wp_get_attachment_url($v);
+		$src=empty($val)?null:wp_get_attachment_url($val);
 		return sprintf(
-			'<span class="ajax_upload_media_wrapper">'.
-			'<span id="%1$s"%2$s><object class="pdf" data="%3$s" type="application/pdf">'.
-			'</object><input type="hidden" name="%4$s" value="%5$s"/></span>'.
-			'</span>',
-			self::get_input_id($path),$attr,$src?$src:$dummy,self::get_input_name($path),$val
+			'<span class="ajax_upload_media is-type-application is-subtype-pdf" data-media-type="pdf">%s</span>'.
+			'<input type="hidden" name="%s" value="%s"/>',
+			$src?basename($src):'───',
+			\cp::get_input_name($path),$val
 		);
 	}
 }
