@@ -70,6 +70,9 @@ class media_protect{
 	public static function clear_allowed(){
 		unset(\cp::$data['allowed_protected_media'][get_current_blog_id()]);
 	}
+	public static function is_allowed($id){
+		return \cp::$data['allowed_protected_media'][get_current_blog_id()][$id]??false===true;
+	}
 }
 
 ?>
