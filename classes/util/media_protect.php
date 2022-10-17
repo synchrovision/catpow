@@ -53,6 +53,12 @@ class media_protect{
 		update_post_meta($id,'_wp_attachment_metadata',$metadata);
 		update_post_meta($id,'_wp_attached_file',$metadata['file']);
 	}
+	public static function set_cond($id,$cond){
+		self::protect($id);
+		$cond_file=dirname(get_attached_file($id)).'/cond.json';
+		if(empty($cond)){unlink($cond_file);}
+		file_put_contents($cond_file,json_encode($cond,0700));
+	}
 	public static function allow($id){
 		\cp::$data['allowed_protected_media'][get_current_blog_id()][$id]=true;
 	}
