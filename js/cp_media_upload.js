@@ -14,10 +14,12 @@ jQuery(function($){
 	}); 
 	media_uploader.on('select', function() {
 		var media = media_uploader.state().get('selection').first().toJSON();
+		console.log(media);
 		switch(media.type){
-			case 'image':$img.replaceWith('<img src="'+media.url+'" class="ajax_upload_media"/>');break;
-			case 'video':$img.replaceWith('<video src="'+media.url+'" class="ajax_upload_media"/>');break;
-			case 'audio':$img.replaceWith('<audio src="'+media.url+'" class="ajax_upload_media"/>');break;
+			case 'image':$img.replaceWith('<img src="'+media.url+'" class="ajax_upload_media is-type-image"/>');break;
+			case 'video':$img.replaceWith('<video src="'+media.url+'" class="ajax_upload_media is-type-video"/>');break;
+			case 'audio':$img.replaceWith('<audio src="'+media.url+'" class="ajax_upload_media is-type-audio"/>');break;
+			case 'application':$img.replaceWith('<span class="ajax_upload_media is-type-application is-subtype-'+media.subtype+'">'+media.filename+'</span>');break;
 		}
 		$input.attr('value',media.id);
 	});
