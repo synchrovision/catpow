@@ -9,7 +9,12 @@ $conf=[
 			'client_secret'=>['type'=>'text','size'=>50],
 			'scopes'=>['type'=>'checkbox','value'=>apply_filters('gauth_scopes',[
 				'userinfo'=>'https://www.googleapis.com/auth/userinfo.profile email',
-				'calendar'=>'https://www.googleapis.com/auth/calendar'
+				'calendar'=>'https://www.googleapis.com/auth/calendar',
+				'analytics'=>'https://www.googleapis.com/auth/analytics',
+				'spreadsheets'=>'https://www.googleapis.com/auth/spreadsheets',
+				'documents'=>'https://www.googleapis.com/auth/documents',
+				'drive'=>'https://www.googleapis.com/auth/drive',
+				'gmail'=>'https://mail.google.com/'
 			])]
 		]]
 	]
