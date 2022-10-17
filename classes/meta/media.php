@@ -9,10 +9,10 @@ class media extends meta{
 		$can_search=false;
 	
 	public static function output($meta,$prm){
-		return self::get_output($meta->conf,$meta->value,$prm);
+		return static::get_output($meta->conf,$meta->value,$prm);
 	}
 	public static function input($meta,$prm){
-		return self::get_input($meta->the_data_path,$meta->conf,$meta->value);
+		return static::get_input($meta->the_data_path,$meta->conf,$meta->value);
 	}
 	
 	public static function get_props($meta){
