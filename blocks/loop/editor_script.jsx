@@ -5,7 +5,7 @@
 	category:'catpow-embed',
 	example:CP.example,
 	edit({attributes,setAttributes,className,clientId}){
-		const {content_path,query,config,EditMode=false}=attributes;
+		const {content_path,deps={},query,config,EditMode=false}=attributes;
 		const {useMemo}=wp.element;
 		let configData;
 
@@ -16,6 +16,7 @@
 			});
 			return map;
 		},[]);
+		const item=useMemo(()=>content_path && itemMap[content_path],[itemMap,content_path]);
 
 		if(!config){
 		   if(content_path && itemMap[content_path].has_config){
@@ -32,7 +33,7 @@
 		else{
 			configData=JSON.parse(config);
 		}
-
+		
 		return (
 			<Fragment>
 				{configData.template &&
@@ -66,6 +67,12 @@
 						<ServerSideRender block='catpow/loop' attributes={attributes}/>
 					</div>
 				)}
+				{item?.deps?.css && (
+					<link rel="stylesheet" href={item.deps.css}/>
+				)}
+				{item?.deps?.js && (
+					<script type="text/javascript" src={item.deps.js}></script>
+				)}
 				<InspectorControls>
 					<PanelBody title="Query">
 						<TreeSelect
@@ -74,7 +81,8 @@
 							tree={cpEmbeddablesTree.loop}
 							onChange={(content_path)=>{
 								const path=content_path.substr(0,content_path.lastIndexOf('/'));
-								if(itemMap[content_path].has_template){
+								const {has_template}=itemMap[content_path]
+								if(has_template){
 									wp.apiFetch({path:'/cp/v1/'+path+'/template'}).then((template)=>{
 										wp.data.dispatch('core/block-editor').replaceInnerBlocks(
 											clientId,

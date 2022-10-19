@@ -13,6 +13,10 @@ $data=[];
 			$embeddables=$class_name::get_embeddables($path,$conf_data);
 			if(empty($embeddables)){continue;}
 			Catpow\api::register_nonce($path);
+			$deps=[
+				'css'=>cp::get_file_url("{$path}/style.css",cp::FROM_THEME|cp::FROM_CONFIG),
+				'script'=>cp::get_file_url("{$path}/script.js",cp::FROM_THEME|cp::FROM_CONFIG)
+			];
 			$has_config=!empty(cp::get_file_path("{$path}/api-config.php",cp::FROM_THEME|cp::FROM_CONFIG));
 			$has_template=!empty(cp::get_file_path("{$path}/api-template.php",cp::FROM_THEME|cp::FROM_CONFIG));
 			foreach($embeddables as $embed_type=>$embeddable){
@@ -27,7 +31,7 @@ $data=[];
 					if(!is_array($item)){$item=['id'=>$path.'/'.$item];}
 					if(isset($item['file'])){$item['id']=$path.'/'.$item['file'];}
 					$item['name']=$label.(isset($template_data[1])?'('.$template_data[1].')':'');
-					$data[$embed_type][$conf_data['label']]['children'][]=array_merge($item,compact('has_config','has_template'));
+					$data[$embed_type][$conf_data['label']]['children'][]=array_merge($item,compact('deps','has_config','has_template'));
 				}
 			}
 		}
