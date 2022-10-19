@@ -153,7 +153,10 @@ class select_terms extends select{
 					$term_group_names=[];
 					foreach($q->get_terms() as $i=>$term){
 						if(empty($term->parent)){
-							if(isset($rtn[$term->name])){continue;}
+							if(isset($rtn[$term->name])){
+								$rtn[$term->name.'('.$term->slug.')']=$term->term_id;
+								continue;
+							}
 							$rtn[$term->name]=$term->term_id;
 							$term_group_names[$term->term_id]='[ '.$term->name.' ]';
 							$rtn[$term_group_names[$term->term_id]]=[];
