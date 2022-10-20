@@ -5,6 +5,14 @@ class select extends meta{
 	public static
 		$input_type='select';
 	
+	public static function export($data_type,$data_name,$id,$meta_name,$conf){
+		return implode(',',static::get($data_type,$data_name,$id,$meta_name,$conf));
+	}
+	public static function import($data_type,$data_name,$id,$meta_name,$vals,$conf){
+		if(!is_array($vals)){$vals=explode(',',$vals);}
+		return static::set($data_type,$data_name,$id,$meta_name,$vals,$conf);
+	}
+	
 	public static function output($meta,$prm){
 		$sels=static::get_selections($meta);
 		$v=$meta->value;
