@@ -1,20 +1,17 @@
 <?php
 include __DIR__.'/classes/autoload.php';
+define('ABSPATH',dirname(__DIR__,4));
 session_start();
-$dir=dirname(__DIR__,3).'/uploads/';
+$dir=ABSPATH.'/wp-content/uploads/';
 $path=$_GET['path'];
-preg_match('|(sites/(?P<blog_id>\d+)/)?catpow/p(?P<media_id>\d+)/|',$path,$matches);
-$site_id=$matches['blog_id']?:'1';
-$media_id=$matches['media_id'];
 
-if(empty(\cp::$data['allowed_protected_media'][$site_id][$media_id]) || strpos($path,'../') || strpos($path,'..¥')){
+$file=$dir.'/'.$path;
+if(!is_allowd_file($file)){
 	header('HTTP/1.0 403 Forbidden');
 	die();
 }
-
-$file=$dir.'/'.$path;
 $mime=mime_content_type($file);
-$type=substr($mime,0,strpos($mime,'/'));
+$type=strstr($mime,'/',true);
 /*output*/
 header('Content-type: '.$mime);
 switch($type){
@@ -43,4 +40,37 @@ switch($type){
 		exit;
 	default:
 		readfile($file);
+}
+
+
+function is_allowd_file($file){
+	if(strpos($file,'../') || strpos($file,'..¥')){return false;}
+	$dirname='protected';
+	if(file_exists($cond_file=dirname($file).'/cond.json') && $cond=json_decode(file_get_contents($cond_file),true)){
+		if(check_cond($cond,$file)){return true;}
+	}
+	if(preg_match("|/wp-content/uploads/(sites/(?P<blog_id>\d+)/)?{$dirname}/p(?P<media_id>\d+)/|",$file,$matches)){
+		$site_id=$matches['blog_id']?:'1';
+		$media_id=$matches['media_id'];
+		if(!empty(\cp::$data['allowed_protected_media'][$site_id][$media_id])){return true;}
+	};
+	return false;
+}
+function check_cond($cond,$file){
+	if(isset($cond['time'])){
+		if(isset($cond['time']['from']) && time() < (int)$cond['time']['from']){return false;}
+		if(isset($cond['time']['to']) && time() > (int)$cond['time']['to']){return false;}
+	}
+	if(isset($cond['ip'])){
+		if($cond['ip']==='admin'){
+			if(
+				!file_exists($ip_list=ABSPATH.'/wp-content/uploads/config/admin_ip.lst') || 
+				!in_array($_SERVER['REMOTE_ADDR'],explode("\n",file_get_contents($ip_list)),true)
+			){return false;}
+		}
+		else if(is_array($cond['ip']) && !in_array($_SERVE['REMOTE_ADDR'],$cond['ip'],true)){
+			return false;
+		}
+	}
+	return true;
 }
