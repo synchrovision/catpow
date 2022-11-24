@@ -21,6 +21,7 @@ registerBlockType('catpow/loop', {
             });
             return map;
         }, []);
+        const items = useMemo(()=>Object.keys(cpEmbeddablesTree.loop).map((label)=>cpEmbeddablesTree.loop[label]), []);
         const item = useMemo(()=>content_path && itemMap[content_path], [
             itemMap,
             content_path
@@ -86,7 +87,7 @@ registerBlockType('catpow/loop', {
         }, wp.element.createElement(TreeSelect, {
             label: "content path",
             selectedId: content_path,
-            tree: cpEmbeddablesTree.loop,
+            tree: items,
             onChange: (content_path)=>{
                 const path = content_path.substr(0, content_path.lastIndexOf('/'));
                 const { has_template  } = itemMap[content_path];
