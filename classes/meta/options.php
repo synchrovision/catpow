@@ -11,6 +11,10 @@ class options extends meta{
 		return get_option($conf['option']??$meta_name);
 	}
 	public static function set($data_type,$data_name,$id,$meta_name,$vals,$conf){
+		if(empty($vals)){
+			delete_option($conf['option']??$meta_name);
+			return;
+		}
 		update_option($conf['option']??$meta_name,empty($conf['multiple'])?reset($vals):$vals);
 	}
 	
