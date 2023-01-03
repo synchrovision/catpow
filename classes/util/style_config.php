@@ -43,7 +43,7 @@ class style_config{
 			$id_data=$wp_customize_settings->id_data();
 			$domain=$id_data['base'];
 			$data=get_theme_mod($domain);
-			if(!empty($key=$id_data['keys'][0])){
+			if(!empty($key=$id_data['keys'][0]??null)){
 				$data[$key]=$wp_customize_settings->post_value();
 			}
 			else{
