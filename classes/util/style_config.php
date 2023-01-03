@@ -111,6 +111,7 @@ class style_config{
 						$css_vars[sprintf('--cp-%s-%s-%s',$group,$key,$k)]=$v;
 						if($group==='tones' && $k==='h'){
 							$css_vars[sprintf('--cp-root-%s-%s-%s',$group,$key,$k)]=$v;
+							$css_vars[sprintf('--cp-container-%s-%s-%s',$group,$key,$k)]=$v;
 						}
 					}
 				}
