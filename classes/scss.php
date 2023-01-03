@@ -98,6 +98,7 @@ class scss{
 					$num=$matches[3]??null;
 					if(isset($tones[$key])){
 						$f='var(--cp-tones-'.$key.'-%s)';
+						$cf='var(--cp-container-tones-'.$key.'-%s)';
 						$rf='var(--cp-root-tones-'.$key.'-%s)';
 						$tone=$tones[$key];
 						$color=sprintf(
@@ -107,8 +108,8 @@ class scss{
 							($staticHue?
 							 	$num:
 							 	(($num==='0' || $num==='6')?
-								 	sprintf($relativeHue?$f:$rf,'h'):
-								 	sprintf('calc('.($relativeHue?$f:$rf).' + var(--cp-tones-hr) * %s + var(--cp-tones-hs))','h',(int)$num-6)
+								 	sprintf($relativeHue?$cf:$rf,'h'):
+								 	sprintf('calc('.($relativeHue?$cf:$rf).' + var(--cp-tones-hr) * %s + var(--cp-tones-hs))','h',(int)$num-6)
 								)
 							),
 							sprintf($f,'s'),
