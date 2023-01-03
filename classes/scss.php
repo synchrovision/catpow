@@ -235,7 +235,10 @@ class scss{
 		return [
 			TYPE::T_MAP,
 			array_map(function($key){return [TYPE::T_KEYWORD,$key];},array_keys($data)),
-			array_map(function($val){return [TYPE::T_KEYWORD,$val];},array_values($data))
+			array_map(function($val){
+				if(is_array($val)){return self::create_map_data($val);}
+				return [TYPE::T_KEYWORD,$val];
+			},array_values($data))
 		];
 	}
 	public static function export_map_data($name,$args){
