@@ -121,6 +121,20 @@ class scss{
 				if(empty($color)){return Compiler::$false;}
 				return [TYPE::T_KEYWORD,$color];
 			});
+			$scssc->registerFunction('get_color_classes',function($args){
+				$classes=[];
+				$tones=util\style_config::get_config_json('tones');
+				foreach($tones as $key=>$val){
+					if(!isset($val['h'])){continue;}
+					foreach(range(0,12) as $n){
+						$m=$n===0?0:$n-6;
+						$classes['.color'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-root-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
+						$classes['.color'.$n]["--cp-container-tones-{$key}-h"]="var(--cp-tones-{$key}-h)";
+						$classes['.color_'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-container-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
+					}
+				}
+				return self::create_map_data($classes);
+			});
 			$scssc->registerFunction('extract_color_tone',function($args){
 				$args=array_map([static::$scssc,'compileValue'],$args);
 				$tones=util\style_config::get_config_json('tones');
