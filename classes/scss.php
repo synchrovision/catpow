@@ -90,10 +90,10 @@ class scss{
 				$color=false;
 				$colors=util\style_config::get_config_json('colors');
 				$tones=util\style_config::get_config_json('tones');
-				if(preg_match('/^([a-z]+)?([-_])?(\d+)?$/',$args[0],$matches)){
+				if(preg_match('/^([a-z]+)?(_|\-\-)?(\-?\d+)?$/',$args[0],$matches)){
 					$key=$matches[1]?:'m';
 					$sep=$matches[2]??null;
-					$staticHue=$sep==='-';
+					$staticHue=$sep==='--';
 					$relativeHue=$sep==='_';
 					$num=$matches[3]??null;
 					if(isset($tones[$key])){
