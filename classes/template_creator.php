@@ -62,14 +62,15 @@ class template_creator{
 		}
 	}
 	public static function render_code_data($code_data,$path_data,$conf_data){
-		$class_name=CP::get_class_name('template_item',$path_data['file_type']);
 		if(is_array($code_data)){
+			$class_name=CP::get_class_name('template_item',$path_data['file_type']);
 			$class_name::render($path_data,$conf_data,$code_data);
 		}
 		else{
 			if($code_data==='default'){
 				$file_name=$path_data['file_name'];
 				if(isset($path_data['file_slug'])){$file_name.='-'.$path_data['file_slug'];}
+				if(isset($path_data['file_sub_type'])){$file_name.='.'.$path_data['file_sub_type'];}
 				if(isset($path_data['folder'])){$file_name=$path_data['folder'].'/'.$file_name;}
 				$f=\cp::get_file_path(
 					'config/template/'.$path_data['tmp_name'].'/'.$file_name.'.'.$path_data['file_type'],
