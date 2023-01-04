@@ -19,7 +19,7 @@ registerBlockType('catpow/embed',{
 					<TreeSelect
 						label='path'
 						selectedId={content_path}
-						tree={cpEmbeddablesTree.embed}
+						tree={Object.values(cpEmbeddablesTree.embed)}
 						onChange={(content_path)=>{setAttributes({content_path:content_path});}}
 					/>
 				</PanelBody>
