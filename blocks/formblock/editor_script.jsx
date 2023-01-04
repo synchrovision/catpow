@@ -42,7 +42,7 @@
 						<TreeSelect
 							label='path'
 							selectedId={content_path}
-							tree={cpEmbeddablesTree.formblock}
+							tree={Object.values(cpEmbeddablesTree.formblock)}
 							onChange={(content_path)=>{
 								const path=content_path.substr(0,content_path.lastIndexOf('/'));
 								wp.apiFetch({path:'cp/v1/'+path+'/template'}).then((template)=>{
