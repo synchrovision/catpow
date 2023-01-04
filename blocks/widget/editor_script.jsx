@@ -31,7 +31,7 @@ registerBlockType('catpow/widget',{
 					<TreeSelect
 						label='path'
 						selectedId={func}
-						tree={cpEmbeddablesTree.widget}
+						tree={Object.values(cpEmbeddablesTree.widget)}
 						onChange={(func)=>{setAttributes({func:func});}}
 					/>
 				</PanelBody>
