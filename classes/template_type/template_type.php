@@ -22,10 +22,10 @@ abstract class template_type{
 	public static function get_preview_file($path_data,$conf_data){
 		$file_name=$path_data['file_name'];
 		if(isset($path_data['file_slug'])){$file_name.='-'.$path_data['file_slug'];}
+		if(isset($path_data['file_sub_type'])){$file_name.='.'.$path_data['file_sub_type'];}
 		$template_files=static::get_template_files($conf_data);
 		
 		if(isset($template_files[$file_name.'.php'])){
-			$class_name=\cp::get_class_name('template_item','php');
 			ob_start();
 			\Catpow\template_creator::render_code_data($template_files[$file_name.'.php'],$path_data,$conf_data);
 			$contents=ob_get_clean();
