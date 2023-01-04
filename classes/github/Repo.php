@@ -63,7 +63,7 @@ class Repo{
 			case 'latestReleaseName':
 				return $this->name.'-'.$this->latestVersion;
 			case 'latestVersion':
-				return $this->latestRelease['tag_name'];
+				return $this->latestRelease['tag_name']??null;
 			case 'latestZipUrl':
 				return sprintf('https://github.com/%s/archive/%s.zip',$this->repo,$this->latestVersion);
 			case 'masterZipUrl':
