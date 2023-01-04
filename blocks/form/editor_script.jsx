@@ -38,7 +38,7 @@
 					<TreeSelect
 						label='path'
 						selectedId={content_path}
-						tree={cpEmbeddablesTree.form}
+						tree={Object.values(cpEmbeddablesTree.form)}
 						onChange={(content_path)=>{
 							setAttributes({content_path:content_path});
 						}}
