@@ -39,6 +39,8 @@ class Repo{
 	}
 	
 	function query($path){
+		$transient="ghres_{$this->repo}/{$path}";
+		if($cache=get_site_transient($transient)){return $cache;}
 		$url='https://api.github.com/repos/'.$this->repo.'/'.$path;
 		if ($this->token){
 			$url=add_query_arg(['access_token'=>$this->access_token],$url);
@@ -49,6 +51,7 @@ class Repo{
 			error_log($body);
 			return [];
 		}
+		set_site_transient($transient,$body,\HOUR_IN_SECONDS);
 		return json_decode($body,1);
 	}
 	
