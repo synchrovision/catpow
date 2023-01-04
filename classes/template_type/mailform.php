@@ -2,9 +2,8 @@
 namespace Catpow\template_type;
 /**
 * メールフォームのテンプレート
-* ブロックとして記事本文中に埋め込んで使用します。
-* article_type/mailformのmailのtemplateとして使用されることを想定しており、
-* 単独での使用を想定しません
+* 自身の親である投稿をフォームの内容として、ブロックとして記事本文中に埋め込んで使用されます。
+* article_type/mailformのmailフィールドのtemplateとして使用されることを想定しており、単独での使用を想定しません。
 */
 
 class mailform extends template_type{
