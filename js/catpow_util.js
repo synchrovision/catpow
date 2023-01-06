@@ -1,4 +1,4 @@
-/* global console Catpow */
+/* global console Catpow Promise*/
 window.Catpow=window.Catpow || {};
 window.Catpow.UI=window.Catpow.UI || {};
 
@@ -69,29 +69,30 @@ Catpow.util={
 			document.head.appendChild(el);
 		});
 	},
-	requireScripts:function(scripts){
-		var dfr=new jQuery.Deferred();
+	requireScripts:async(scripts)=>{
 		var scriptsFlag={};
 		for(let i=0;i<document.scripts.length;i++){
 			scriptsFlag[document.scripts[i].src.split('?')[0]]=true;
 		}
-		jQuery.when.apply(null,scripts.filter(function(src){
-			return !scriptsFlag[src];
-		}).map(function(src){
-			const dfr=new jQuery.Deferred();
+		for(const script of scripts){
+			if(!scriptsFlag[script]){
+				await Catpow.util.loadScript(script);
+			}
+		}
+	},
+	loadScript:(src)=>{
+		return new Promise((resolve)=>{
 			const el=document.createElement('script');
 			el.setAttribute('type','text/javascript');
 			el.setAttribute('src',src);
 			document.body.appendChild(el);
-			el.onload=el.onreadystatechange=function( _, isAbort ) {
-				if(isAbort || !el.readyState || /loaded|complete/.test(el.readyState) ) {
+			el.onload=el.onreadystatechange=function(_,isAbort){
+				if(isAbort || !el.readyState || /loaded|complete/.test(el.readyState)) {
 					el.onload=el.onreadystatechange=null;
-					if(!isAbort) { dfr.resolve(); }
+					if(!isAbort){resolve();}
 				}
 			};
-			return dfr.promise();
-		})).then(function(){dfr.resolve();});
-		return dfr.promise();
+		});
 	},
 	getDateValue:function(dateObj){
 		return dateObj.getFullYear()+'-'+ (dateObj.getMonth()+1)+'-'+ dateObj.getDate();
