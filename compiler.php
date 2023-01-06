@@ -1,7 +1,9 @@
 <?php
-chdir(dirname(__DIR__));
-passthru('git submodule update --init --recursive');
+if(php_sapi_name()!=='cli'){exit;}
 chdir(__DIR__);
+passthru('git submodule update --init --recursive');
+define('WP_CONTENT_DIR',dirname(__DIR__,2));
+echo "start jsx compile\n";
 
 while(true){
 	$jsx_files=get_jsx_files();
@@ -17,9 +19,8 @@ while(true){
 
 function get_jsx_files(){
 	$jsx_files=[];
-    $wp_content_dir=dirname(__DIR__,3).'/';
 	
-	foreach(glob($wp_content_dir.'{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{blocks,ui,components,stores,*/*}/*/*.jsx',GLOB_BRACE) as $jsx_file){
+	foreach(glob(WP_CONTENT_DIR.'/{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{js,blocks/*,ui/*,components/*,stores/*,*/*/*}/*.jsx',GLOB_BRACE) as $jsx_file){
 		if(strpos($jsx_file,'/node_modules/')!==false || file_exists(dirname($jsx_file).'/index.jsx')){continue;}
 		$jsx_files[]=$jsx_file;
 	}
@@ -31,7 +32,7 @@ function cp_jsx_compile($jsx_files){
 		$js_file=substr($jsx_file,0,-1);
 		if(!file_exists($jsx_file)){continue;}
 		if(!file_exists($js_file) or filemtime($js_file) < filemtime($jsx_file)){
-			passthru("deno bundle {$jsx_file} {$js_file}");
+			passthru("esbuild {$jsx_file} --outfile={$js_file} --bundle --jsx-factory=wp.element.createElement --jsx-fragment=wp.element.Fragment");
 			echo "build {$js_file}\n";
 			touch($js_file);
 		}
@@ -40,9 +41,8 @@ function cp_jsx_compile($jsx_files){
 
 function get_entry_files(){
 	$entry_files=[];
-    $wp_content_dir=dirname(__DIR__,3).'/';
 	
-	foreach(glob($wp_content_dir.'{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{blocks,ui,components,stores,*/*}/*/*/index.jsx',GLOB_BRACE) as $entry_file){
+	foreach(glob(WP_CONTENT_DIR.'/{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{js,blocks/*,ui/*,components/*,stores/*,*/*/*}/*/index.jsx',GLOB_BRACE) as $entry_file){
 		if(strpos($entry_file,'/node_modules/')!==false){continue;}
 		$entry_files[]=$entry_file;
 	}
@@ -56,7 +56,7 @@ function cp_jsx_bundle($entry_files){
 			$latest_filetime=max($latest_filetime,filemtime($bundle_file));
 		}
 		if(!file_exists($bundle_js_file) or filemtime($bundle_js_file) < $latest_filetime){
-			passthru("deno bundle {$entry_file} {$bundle_js_file}");
+			passthru("esbuild {$entry_file} --outfile={$bundle_js_file} --bundle --jsx-factory=wp.element.createElement --jsx-fragment=wp.element.Fragment");
 			echo "bundle {$bundle_js_file}\n";
 		}
 	}
@@ -64,9 +64,8 @@ function cp_jsx_bundle($entry_files){
 
 function get_po_files(){
 	$po_files=[];
-    $wp_content_dir=dirname(__DIR__,3).'/';
 	
-	foreach(glob($wp_content_dir.'{plugins,themes}/catpow{,-*}/{blocks,components,ui}/*/languages/*.po',GLOB_BRACE) as $po_file){
+	foreach(glob(WP_CONTENT_DIR.'/{plugins,themes}/catpow{,-*}/{blocks,components,ui}/*/languages/*.po',GLOB_BRACE) as $po_file){
 		$po_files[$po_file]=substr($po_file,0,-3).'.json';
 	}
 	return $po_files;
