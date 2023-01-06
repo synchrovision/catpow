@@ -1,6 +1,8 @@
-﻿registerPlugin('catpow-sidebar',{render:(props)=>{
+﻿wp.plugins.registerPlugin('catpow-sidebar',{render:(props)=>{
 	const {Fragment,useState,useCallback,useReducer}=wp.element;
-	const [structure,setStructure]=useState(structure);
+	const [structure,setStructure]=useState();
+	const {PluginSidebarMoreMenuItem,PluginSidebar}=wp.editPost;
+	const {PanelBody} = wp.components;
 	const {DataStructure,DataStructureItem}=CP;
 	const {Button,ButtonGroup}=wp.components;
 	if(!structure){

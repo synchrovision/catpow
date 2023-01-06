@@ -62,10 +62,10 @@ wp.hooks.addFilter(
 			var content=wp.element.createElement(BlockEdit,props);
 
 			if((props.name==='core/columns' || props.name==='core/media-text') && typeof props.insertBlocksAfter==='undefined'){
-				return <Fragment><div></div></Fragment>
+				return <><div></div></>
 			}
 
-			return <Fragment>{content}</Fragment>;
+			return <>{content}</>;
 		};
 	},'allowColumnStyle')
 );

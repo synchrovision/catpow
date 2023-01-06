@@ -2480,8 +2480,6 @@
 		);
 	}
 };
-
-
 CP.example={
 	attributes:{
 		title:[CP.dummyText.title],
@@ -2499,3 +2497,4 @@ CP.example={
 		}
 	]
 };
+window.CP=CP;

@@ -1,4 +1,5 @@
-﻿registerFormatType('catpow/ruby',{
+﻿const {registerFormatType}=wp.richText;
+registerFormatType('catpow/ruby',{
 	title:'Ruby',
 	tagName:'ruby',
 	className:null,
@@ -14,7 +15,7 @@
 				value,wp.richText.create({html:'<ruby>'+wp.richText.slice(value).text+'<rt>'+rt+'</rt></ruby>'}),value.start,value.end
 			));
 		}
-		
+
 		const icon=(
 			<svg role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
 				<path d="M3.6,19.8L8.9,6.2h1.9l5.6,13.6h-2l-1.6-4.1H7l-1.5,4.1H3.6z M7.6,14.2h4.6l-1.4-3.8c-0.4-1.1-0.8-2.1-1-2.8
@@ -59,7 +60,7 @@ registerFormatType('catpow/small',{
 	className:null,
 	edit({isActive,value,onChange}){
 		const onToggle=()=>onChange(toggleFormat(value,{type:'catpow/small'}));
-		
+
 		const icon=(
 			<svg role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
 				<path d="M5.6,16.7l3.6-9.4h1.3l3.8,9.4H13l-1.1-2.8H8l-1,2.8H5.6z M8.3,12.9h3.2l-1-2.6C10.2,9.5,10,8.9,9.9,8.4
@@ -99,7 +100,7 @@ registerFormatType('catpow/title',{
 		const {Popover,Card,CardBody}=wp.components;
 		const {useMemo,useCallback}=wp.element;
 		const {applyFormat}=wp.richText;
-		
+
 		const onToggle=()=>{
 			return onChange(toggleFormat(value,{type:'catpow/title',attributes:{type:'iheader'}}));
 		}
@@ -107,7 +108,7 @@ registerFormatType('catpow/title',{
 		const setAttributes=useCallback((attr)=>{
 			onChange(applyFormat(value,{type:'catpow/title',attributes:Object.assign(activeAttributes,attr)}));
 		},[value,activeAttributes]);
-		
+
 		const icon=(
 			<svg role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
 				<g>
@@ -117,7 +118,7 @@ registerFormatType('catpow/title',{
 				<rect x="5" y="18" width="14" height="1"/>
 			</svg>
 		);
-		
+
 		return [
 			<Fragment>
 				{isActive && (
@@ -166,7 +167,7 @@ registerFormatType('catpow/mark',{
 		const {Popover,Card,CardBody}=wp.components;
 		const {useMemo,useCallback}=wp.element;
 		const {applyFormat}=wp.richText;
-		
+
 		const onToggle=()=>{
 			return onChange(toggleFormat(value,{type:'catpow/mark',attributes:{color:'color0'}}));
 		}
@@ -174,14 +175,14 @@ registerFormatType('catpow/mark',{
 		const setAttributes=useCallback((attr)=>{
 			onChange(applyFormat(value,{type:'catpow/mark',attributes:Object.assign(activeAttributes,attr)}));
 		},[value,activeAttributes]);
-		
+
 		const icon=(
 			<svg role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
 				<polygon points="7.9,10.8 12.1,10.8 10,5.3 	"/>
 	<path d="M0,2v16h20V2H0z M13.7,15.3L12.5,12h-5l-1.2,3.4H4.7L9,4h1.9l4.3,11.3H13.7z"/>
 			</svg>
 		);
-		
+
 		return [
 			<Fragment>
 				{isActive && (
@@ -225,7 +226,7 @@ registerFormatType('catpow/large',{
 		const {Popover,Card,CardBody}=wp.components;
 		const {useMemo,useCallback}=wp.element;
 		const {applyFormat}=wp.richText;
-		
+
 		const onToggle=()=>{
 			return onChange(toggleFormat(value,{type:'catpow/large',attributes:{color:'color0'}}));
 		}
@@ -233,7 +234,7 @@ registerFormatType('catpow/large',{
 		const setAttributes=useCallback((attr)=>{
 			onChange(applyFormat(value,{type:'catpow/large',attributes:Object.assign(activeAttributes,attr)}));
 		},[value,activeAttributes]);
-		
+
 		const icon=(
 			<svg role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
 				<path d="M4.8,0.5h5c1.6,0,2.8,0.1,3.6,0.4c0.8,0.2,1.5,0.7,2,1.5c0.5,0.8,0.8,2,0.8,3.6c0,1.1-0.2,1.9-0.5,2.4
@@ -243,7 +244,7 @@ registerFormatType('catpow/large',{
 		v-1.8c0-0.8-0.1-1.3-0.3-1.5C11.1,11.2,10.6,11.1,9.8,11.1z"/>
 			</svg>
 		);
-		
+
 		return [
 			<Fragment>
 				{isActive && (
@@ -289,7 +290,7 @@ registerFormatType('catpow/tag',{
 		const {Popover,BaseControle,TextControl,Card,CardBody}=wp.components;
 		const {useState,useMemo,useCallback}=wp.element;
 		const {removeFormat,applyFormat,insert,create,slice}=wp.richText;
-		
+
 		const onToggle=()=>{
 			return onChange(toggleFormat(value,{type:'catpow/tag',attributes:{class:'color0'}}));
 		}
@@ -345,7 +346,7 @@ registerFormatType('catpow/annotation',{
 	className:'rtf-annotation',
 	edit({isActive,value,onChange}){
 		const onToggle=()=>onChange(toggleFormat(value,{type:'catpow/annotation'}));
-		
+
 		const icon=(
 			<svg role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
 				<path d="M2.99,2.01l7.04,7.04l7.04-7.04l0.62,0.62l-7.04,7.04l7.04,7.04l-0.62,0.62l-7.04-7.04l-7.06,7.06l-0.62-0.62l7.06-7.06
@@ -391,4 +392,3 @@ registerFormatType('catpow/clear',{
 		];
 	}
 });
-
