@@ -26,7 +26,7 @@ wp.blocks.registerBlockType('catpow/unit',{
 		sources:CP.getPictureSoucesAttributesForDevices(CP.config.unit.devices),
 
 		mime:{source:'attribute',selector:'[src]',attribute:'data-mime'},
-		src:{source:'attribute',selector:'[src]',attribute:'src',default:cp.theme_url+'/images/dummy.jpg'},
+		src:{source:'attribute',selector:'[src]',attribute:'src',default:wpinfo.theme_url+'/images/dummy.jpg'},
 		alt:{source:'attribute',selector:'[src]',attribute:'alt'},
 		code:{source:'text'},
 	},

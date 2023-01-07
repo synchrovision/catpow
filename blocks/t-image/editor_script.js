@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/t-image/editor_script.jsx
+  // blocks/t-image/editor_script.jsx
   wp.blocks.registerBlockType("catpow/t-image", {
     title: "\u{1F43E} T-Image",
     description: "HTML\u30E1\u30FC\u30EB\u7528\u306E\u753B\u50CF\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
@@ -8,7 +8,7 @@
     parent: ["catpow/t-body", "catpow/t-box", "catpow/t-loop"],
     attributes: {
       classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-image" },
-      src: { source: "attribute", selector: "[src]", attribute: "src", default: cp.theme_url + "/images/dummy.jpg" },
+      src: { source: "attribute", selector: "[src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy.jpg" },
       alt: { source: "attribute", selector: "[src]", attribute: "alt" },
       loopImage: { source: "text", selector: "td", default: "[output image]" }
     },
@@ -36,7 +36,7 @@
         /* @__PURE__ */ wp.element.createElement("table", { width: "100%", className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", null, states.isTemplate ? /* @__PURE__ */ wp.element.createElement(
           "img",
           {
-            src: cp.plugins_url + "/catpow/callee/dummy_image.php?text=" + loopImage,
+            src: wpinfo.plugins_url + "/catpow/callee/dummy_image.php?text=" + loopImage,
             width: "100%",
             height: "auto"
           }

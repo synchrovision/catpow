@@ -6,9 +6,9 @@
 	parent:['catpow/t-body','catpow/t-box','catpow/t-loop'],
 	attributes:{
 		classes:{source:'attribute',selector:'table',attribute:'class',default:'wp-block-catpow-t-media-text'},
-		src:{source:'attribute',selector:'[src]',attribute:'src',default:cp.theme_url+'/images/dummy.jpg'},
+		src:{source:'attribute',selector:'[src]',attribute:'src',default:wpinfo.theme_url+'/images/dummy.jpg'},
 		alt:{source:'attribute',selector:'[src]',attribute:'alt'},
-		imageCode:{source:'text',selector:'td.imageCell',default:cp.theme_url+'/images/dummy.jpg'},
+		imageCode:{source:'text',selector:'td.imageCell',default:wpinfo.theme_url+'/images/dummy.jpg'},
 		width:{source:'attribute',selector:'td.imageCell',attribute:'width',default:'200'},
 	},
 	example:CP.example,

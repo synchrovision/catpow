@@ -28,13 +28,13 @@ wp.blocks.registerBlockType('catpow/panel',{
 			default:[...Array(8)].map((n,i)=>{
 				return {
 					classes:'item hasIcon hasLink hasTitle rspan1 cspan1 color'+i*2,
-					src:cp.theme_url+'/images/dummy.jpg',
+					src:wpinfo.theme_url+'/images/dummy.jpg',
 					alt:'dummy',
 					title:['Title'],
 					text:['Text'],
-					iconSrc:cp.theme_url+'/images/dummy_icon.svg',
+					iconSrc:wpinfo.theme_url+'/images/dummy_icon.svg',
 					iconAlt:'dummy',
-					linkUrl:cp.home_url
+					linkUrl:wpinfo.home_url
 				}
 			})
 		}

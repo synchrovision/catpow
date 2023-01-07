@@ -39,10 +39,10 @@ wp.blocks.registerBlockType('catpow/sphere',{
 					title:['Title'],
 					titleCaption:['Caption'],
 					subTitle:['SubTitle'],
-					src:cp.theme_url+'/images/dummy_icon.svg',
+					src:wpinfo.theme_url+'/images/dummy_icon.svg',
 					alt:'dummy',
 					text:['Text'],
-					linkUrl:cp.home_url
+					linkUrl:wpinfo.home_url
 				}
 			})
 		},

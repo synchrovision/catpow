@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/icons/editor_script.jsx
+  // blocks/icons/editor_script.jsx
   wp.blocks.registerBlockType("catpow/icons", {
     title: "\u{1F43E} Icons",
     description: "\u30EA\u30F3\u30AF\u4ED8\u304D\u306E\u30A2\u30A4\u30B3\u30F3\u753B\u50CF\u3092\u4E26\u3079\u3066\u8868\u793A\u3059\u308B\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
@@ -32,9 +32,9 @@
         default: [...Array(3)].map(() => {
           return {
             classes: "item",
-            src: cp.theme_url + "/images/dummy_icon.svg",
+            src: wpinfo.theme_url + "/images/dummy_icon.svg",
             alt: "dummy",
-            href: cp.home_url
+            href: wpinfo.home_url
           };
         })
       }

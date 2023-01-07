@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/sphere/editor_script.jsx
+  // blocks/sphere/editor_script.jsx
   CP.config.sphere = {
     imageKeys: {
       image: { src: "src", alt: "alt", items: "items" }
@@ -41,10 +41,10 @@
             title: ["Title"],
             titleCaption: ["Caption"],
             subTitle: ["SubTitle"],
-            src: cp.theme_url + "/images/dummy_icon.svg",
+            src: wpinfo.theme_url + "/images/dummy_icon.svg",
             alt: "dummy",
             text: ["Text"],
-            linkUrl: cp.home_url
+            linkUrl: wpinfo.home_url
           };
         })
       },

@@ -511,11 +511,11 @@ wp.blocks.registerBlockType('catpow/slider',{
 						{
 							title:['Title'],
 							subTitle:['SubTitle'],
-							src:cp.theme_url+'/images/dummy.jpg',
+							src:wpinfo.theme_url+'/images/dummy.jpg',
 							alt:'dummy',
 							text:['Text'],
 							url:'https://',
-							bg:"background-image:url('"+cp.theme_url+"/images/dummy.jpg')",
+							bg:"background-image:url('"+wpinfo.theme_url+"/images/dummy.jpg')",
 						}
 					]
 				}

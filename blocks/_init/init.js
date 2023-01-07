@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/_init/init/filter.jsx
+  // blocks/_init/init/filter.jsx
   wp.blocks.registerBlockStyle("core/heading", { name: "header", label: "header" });
   wp.blocks.registerBlockStyle("core/heading", { name: "headline", label: "headline" });
   wp.blocks.registerBlockStyle("core/heading", { name: "catch", label: "catch" });
@@ -64,7 +64,7 @@
     }, "allowColumnStyle")
   );
 
-  // ../blocks/_init/init/format.jsx
+  // blocks/_init/init/format.jsx
   var { registerFormatType } = wp.richText;
   registerFormatType("catpow/ruby", {
     title: "Ruby",
@@ -390,7 +390,7 @@
     }
   });
 
-  // ../blocks/_init/init/functions.jsx
+  // blocks/_init/init/functions.jsx
   var CP2 = {
     filters: {},
     cache: {},
@@ -448,10 +448,10 @@
     },
     imageSrcOrDummy: (src) => {
       if (!src) {
-        return cp.theme_url + "/images/dummy.jpg";
+        return wpinfo.theme_url + "/images/dummy.jpg";
       }
       if (src[0] == "[") {
-        return cp.plugins_url + "/catpow/callee/dummy_image.php?text=" + src;
+        return wpinfo.plugins_url + "/catpow/callee/dummy_image.php?text=" + src;
       }
       return src;
     },
@@ -1039,7 +1039,7 @@
       return attr;
     },
     getPictureSoucesAttributesDefaultValueForDevices: (devices, image) => {
-      return devices.map((device) => ({ srcset: cp.theme_url + "/images/" + (image || "dummy.jpg"), device }));
+      return devices.map((device) => ({ srcset: wpinfo.theme_url + "/images/" + (image || "dummy.jpg"), device }));
     },
     getMediaQueryKeyForDevice: (device) => {
       if (!CP2.devices[device].media_query) {
@@ -1175,10 +1175,10 @@
             return;
           }
           if (attributes[key].indexOf("url(") !== -1) {
-            atts[key] = attributes[key].replace(/url\((.+?)\)/, (m, p1) => "url(" + setURLparams(p1, { c: color, theme: cp.theme }) + ")");
+            atts[key] = attributes[key].replace(/url\((.+?)\)/, (m, p1) => "url(" + setURLparams(p1, { c: color, theme: wpinfo.theme }) + ")");
             return;
           }
-          atts[key] = setURLparams(attributes[key], { c: color, theme: cp.theme });
+          atts[key] = setURLparams(attributes[key], { c: color, theme: wpinfo.theme });
         });
         setAttributes(atts);
       }, [color]);
@@ -1397,7 +1397,7 @@
       var src = CP2.imageSrcOrDummy(item[keys.src]);
       if (keys.sources) {
         if (device) {
-          const source = item[keys.sources].find((source2) => source2.device === device) || { srcset: cp.theme_url + "/images/dummy.jpg" };
+          const source = item[keys.sources].find((source2) => source2.device === device) || { srcset: wpinfo.theme_url + "/images/dummy.jpg" };
           return /* @__PURE__ */ wp.element.createElement(
             "picture",
             {
@@ -1553,7 +1553,7 @@
             if (action.image) {
               state2.image = action.image;
             }
-            onChange({ ...state2.image, url: setURLparams(state2.image ? state2.image.url : value, { c: color, theme: cp.theme }) });
+            onChange({ ...state2.image, url: setURLparams(state2.image ? state2.image.url : value, { c: color, theme: wpinfo.theme }) });
         }
         return { ...state2 };
       }, { page: 0, images: null, image: null });
@@ -1570,7 +1570,7 @@
         return false;
       }
       return /* @__PURE__ */ wp.element.createElement("ul", { className: "selectPreparedImage " + name + " " + className, ...otherProps }, state.images.map((image) => {
-        const url = setURLparams(image.url, { c: color, theme: cp.theme });
+        const url = setURLparams(image.url, { c: color, theme: wpinfo.theme });
         return /* @__PURE__ */ wp.element.createElement("li", { className: "item " + (value == url ? "active" : "") }, /* @__PURE__ */ wp.element.createElement(
           "img",
           {
@@ -1602,7 +1602,7 @@
             }
             if (state2.imageset) {
               onChange(state2.imageset.map((item) => {
-                return { ...item, url: setURLparams(item.url, { c: color, theme: cp.theme }) };
+                return { ...item, url: setURLparams(item.url, { c: color, theme: wpinfo.theme }) };
               }));
             }
         }
@@ -1622,7 +1622,7 @@
       }
       return /* @__PURE__ */ wp.element.createElement("ul", { className: "selectPreparedImageSet " + name + " " + className, ...otherProps }, Object.keys(state.imagesets).map((key) => {
         const imageset = state.imagesets[key];
-        const url = setURLparams(imageset[0].url, { c: color, theme: cp.theme });
+        const url = setURLparams(imageset[0].url, { c: color, theme: wpinfo.theme });
         return /* @__PURE__ */ wp.element.createElement("li", { className: "item " + (value == url ? "active" : "") }, /* @__PURE__ */ wp.element.createElement(
           "img",
           {
@@ -2845,7 +2845,7 @@
       })));
     },
     DummyImage: ({ text }) => {
-      return /* @__PURE__ */ wp.element.createElement("img", { src: cp.plugins_url + "/catpow/callee/dummy_image.php?text=" + text });
+      return /* @__PURE__ */ wp.element.createElement("img", { src: wpinfo.plugins_url + "/catpow/callee/dummy_image.php?text=" + text });
     },
     DataStructure: (props) => {
       return /* @__PURE__ */ wp.element.createElement("ul", { className: "dataStructure" }, props.children);
@@ -3020,7 +3020,7 @@
   };
   window.CP = CP2;
 
-  // ../blocks/_init/init/plugins.jsx
+  // blocks/_init/init/plugins.jsx
   wp.plugins.registerPlugin("catpow-sidebar", { render: (props) => {
     const { Fragment: Fragment2, useState, useCallback, useReducer } = wp.element;
     const [structure, setStructure] = useState();

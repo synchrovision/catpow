@@ -17,8 +17,8 @@ wp.blocks.registerBlockType('catpow/sticky',{
 
 		labelText:{source:'children',selector:'.content>.label',defalt:['ラベル']},
 
-		openButtonImageSrc:{source:'attribute',selector:'.wp-block-catpow-sticky>.stickyButton [src].open',attribute:'src',default:cp.theme_url+'/images/dummy_icon.svg'},
-		closeButtonImageSrc:{source:'attribute',selector:'.wp-block-catpow-sticky>.stickyButton [src].close',attribute:'src',default:cp.theme_url+'/images/dummy_icon.svg'},
+		openButtonImageSrc:{source:'attribute',selector:'.wp-block-catpow-sticky>.stickyButton [src].open',attribute:'src',default:wpinfo.theme_url+'/images/dummy_icon.svg'},
+		closeButtonImageSrc:{source:'attribute',selector:'.wp-block-catpow-sticky>.stickyButton [src].close',attribute:'src',default:wpinfo.theme_url+'/images/dummy_icon.svg'},
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes}){

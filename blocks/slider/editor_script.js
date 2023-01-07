@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/slider/editor_script.jsx
+  // blocks/slider/editor_script.jsx
   CP.config.slider = {
     devices: ["sp", "tb"],
     imageKeys: {
@@ -462,11 +462,11 @@
               {
                 title: ["Title"],
                 subTitle: ["SubTitle"],
-                src: cp.theme_url + "/images/dummy.jpg",
+                src: wpinfo.theme_url + "/images/dummy.jpg",
                 alt: "dummy",
                 text: ["Text"],
                 url: "https://",
-                bg: "background-image:url('" + cp.theme_url + "/images/dummy.jpg')"
+                bg: "background-image:url('" + wpinfo.theme_url + "/images/dummy.jpg')"
               }
             ]
           }

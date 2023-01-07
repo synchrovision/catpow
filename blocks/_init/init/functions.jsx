@@ -50,8 +50,8 @@
 		}).open();
 	},
 	imageSrcOrDummy:(src)=>{
-		if(!src){return cp.theme_url+'/images/dummy.jpg';}
-		if(src[0]=='['){return cp.plugins_url+'/catpow/callee/dummy_image.php?text='+src;}
+		if(!src){return wpinfo.theme_url+'/images/dummy.jpg';}
+		if(src[0]=='['){return wpinfo.plugins_url+'/catpow/callee/dummy_image.php?text='+src;}
 		return src;
 	},
 	
@@ -528,7 +528,7 @@
 		return attr;
 	},
 	getPictureSoucesAttributesDefaultValueForDevices:(devices,image)=>{
-		return devices.map((device)=>({srcset:cp.theme_url+'/images/'+(image || 'dummy.jpg'),device}));
+		return devices.map((device)=>({srcset:wpinfo.theme_url+'/images/'+(image || 'dummy.jpg'),device}));
 	},
 	getMediaQueryKeyForDevice:(device)=>{
 		if(!CP.devices[device].media_query){return 'default';}
@@ -629,10 +629,10 @@
 			images.map((key)=>{
 				if(!attributes[key]){return;}
 				if(attributes[key].indexOf('url(')!==-1){
-					atts[key]=attributes[key].replace(/url\((.+?)\)/,(m,p1)=>'url('+setURLparams(p1,{c:color,theme:cp.theme})+')');
+					atts[key]=attributes[key].replace(/url\((.+?)\)/,(m,p1)=>'url('+setURLparams(p1,{c:color,theme:wpinfo.theme})+')');
 					return;
 				}
-				atts[key]=setURLparams(attributes[key],{c:color,theme:cp.theme});
+				atts[key]=setURLparams(attributes[key],{c:color,theme:wpinfo.theme});
 			});
 			setAttributes(atts);
 		},[color]);
@@ -864,7 +864,7 @@
 		var src=CP.imageSrcOrDummy(item[keys.src]);
 		if(keys.sources){
 			if(device){
-				const source=item[keys.sources].find((source)=>source.device===device) || {srcset:cp.theme_url+'/images/dummy.jpg'};
+				const source=item[keys.sources].find((source)=>source.device===device) || {srcset:wpinfo.theme_url+'/images/dummy.jpg'};
 				return (
 					<picture
 						className={'selectImage '+className}
@@ -1021,7 +1021,7 @@
 						state.image=state.images.find((image)=>image.url===bareURL);
 					}
 					if(action.image){state.image=action.image;}
-					onChange({...state.image,url:setURLparams(state.image?state.image.url:value,{c:color,theme:cp.theme})});
+					onChange({...state.image,url:setURLparams(state.image?state.image.url:value,{c:color,theme:wpinfo.theme})});
 			}
 			return {...state};
 		},{page:0,images:null,image:null});
@@ -1043,7 +1043,7 @@
 		return (
 			<ul className={'selectPreparedImage '+name+' '+className} {...otherProps}>
 				{state.images.map((image)=>{
-					const url=setURLparams(image.url,{c:color,theme:cp.theme});
+					const url=setURLparams(image.url,{c:color,theme:wpinfo.theme});
 					return (
 						<li className={'item '+((value==url)?'active':'')}>
 							<img
@@ -1076,7 +1076,7 @@
 					if(action.imageset){state.imageset=action.imageset;}
 					if(state.imageset){
 						onChange(state.imageset.map((item)=>{
-							return {...item,url:setURLparams(item.url,{c:color,theme:cp.theme})};
+							return {...item,url:setURLparams(item.url,{c:color,theme:wpinfo.theme})};
 						}));
 					}
 			}
@@ -1101,7 +1101,7 @@
 			<ul className={'selectPreparedImageSet '+name+' '+className} {...otherProps}>
 				{Object.keys(state.imagesets).map((key)=>{
 					const imageset=state.imagesets[key];
-					const url=setURLparams(imageset[0].url,{c:color,theme:cp.theme});
+					const url=setURLparams(imageset[0].url,{c:color,theme:wpinfo.theme});
 					return (
 						<li className={'item '+((value==url)?'active':'')}>
 							<img
@@ -2278,7 +2278,7 @@
 	},
 
 	DummyImage:({text})=>{
-		return <img src={cp.plugins_url+'/catpow/callee/dummy_image.php?text='+text}/>
+		return <img src={wpinfo.plugins_url+'/catpow/callee/dummy_image.php?text='+text}/>
 	},
 	
 	DataStructure:(props)=>{

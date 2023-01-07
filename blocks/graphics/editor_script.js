@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/graphics/editor_script.jsx
+  // blocks/graphics/editor_script.jsx
   CP.config.graphics = {
     devices: ["sp", "tb"],
     devicesForCss: ["pc", "tb", "sp"],
@@ -50,7 +50,7 @@
     attributes: {
       id: { source: "attribute", selector: ".wp-block-catpow-graphics", attribute: "id", default: "" },
       classes: { source: "attribute", selector: ".wp-block-catpow-graphics", attribute: "class", default: "wp-block-catpow-graphics hasBaseImage" },
-      src: { source: "attribute", selector: "[src]", attribute: "src", default: cp.theme_url + "/images/dummy_bg.jpg" },
+      src: { source: "attribute", selector: "[src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy_bg.jpg" },
       srcset: { source: "attribute", selector: "[src]", attribute: "srcset" },
       alt: { source: "attribute", selector: "[src]", attribute: "alt" },
       sources: CP.getPictureSoucesAttributesForDevices(CP.config.graphics.devices, ".base picture", "dummy_bg.jpg"),
@@ -76,7 +76,7 @@
             id: "graphics_image1",
             classes: "item isImage",
             rect: "25 25 50,25 25 50,25 25 50",
-            src: cp.theme_url + "/images/dummy.jpg",
+            src: wpinfo.theme_url + "/images/dummy.jpg",
             srcset: "",
             alt: "",
             sources: CP.getPictureSoucesAttributesDefaultValueForDevices(CP.config.graphics.devices),

@@ -37,7 +37,7 @@ wp.blocks.registerBlockType('catpow/honeycomb',{
 				{
 					classes:'item hasImage hasTitle hasText',
 					order:'2 2 2 1,2 2 2 1,2 2 2 1',
-					src:cp.theme_url+'/images/dummy.jpg',
+					src:wpinfo.theme_url+'/images/dummy.jpg',
 					title:['Title'],
 					text:['Text'],
 				}
@@ -169,7 +169,6 @@ wp.blocks.registerBlockType('catpow/honeycomb',{
 							data-index={index}
 							src={itemStates.hasImage?item.src:false}
 							handler={itemHandler}
-							data-index={index}
 							onClick={()=>{setAttributes({currentItemIndex:index})}}
 						>
 							{itemStates.hasTitle &&

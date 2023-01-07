@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/accordion/editor_script.jsx
+  // blocks/accordion/editor_script.jsx
   CP.config.accordion = {
     devices: ["sp", "tb"],
     imageKeys: {
@@ -18,7 +18,7 @@
       classes: { source: "attribute", selector: ".wp-block-catpow-accordion", attribute: "class", default: "wp-block-catpow-accordion" },
       title: { type: "array", source: "children", selector: ".title", default: ["Title"] },
       imageMime: { source: "attribute", selector: ".image [src]", attribute: "data-mime" },
-      imageSrc: { source: "attribute", selector: ".image [src]", attribute: "src", default: cp.theme_url + "/images/dummy.jpg" },
+      imageSrc: { source: "attribute", selector: ".image [src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy.jpg" },
       imageAlt: { source: "attribute", selector: ".image [src]", attribute: "alt" },
       imageCode: { source: "text", selector: ".image" }
     },

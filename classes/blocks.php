@@ -3,7 +3,7 @@ namespace Catpow;
 
 class blocks{
 	public static $deps=[
-		'editor_script'=>['wp-blocks','wp-i18n','wp-element','wp-editor','wp-plugins','wp-edit-post','catpow'],
+		'editor_script'=>['wp-blocks','wp-i18n','wp-element','wp-editor','wp-plugins','wp-edit-post','catpow','wpinfo'],
 		'editor_style'=>['wp-edit-blocks'],
 		'front_script'=>[],
 		'front_style'=>[],
@@ -122,7 +122,7 @@ class blocks{
 			foreach(glob($block_init_dir.'/*.js') as $format_script){
 				$fname=basename($format_script);
 				$code_name=substr(strstr($format_script,'/wp-content/'),12,-3);
-				wp_register_script($code_name,$block_init_url.'/'.$fname,['wp-blocks','wp-i18n','wp-element','wp-editor','catpow']);
+				wp_register_script($code_name,$block_init_url.'/'.$fname,['wp-blocks','wp-i18n','wp-element','wp-editor','catpow','wpinfo']);
 				self::$deps['editor_script'][]=$code_name;
 			}
 			foreach(glob($block_init_dir.'/*.css') as $format_style){

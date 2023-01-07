@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/t-button/editor_script.jsx
+  // blocks/t-button/editor_script.jsx
   wp.blocks.registerBlockType("catpow/t-button", {
     title: "\u{1F43E} T-Button",
     description: "HTML\u30E1\u30FC\u30EB\u7528\u306E\u30C6\u30FC\u30D6\u30EB\u30EC\u30A4\u30A2\u30A6\u30C8\u306E\u30DC\u30BF\u30F3\u3067\u3059\u3002",
@@ -9,7 +9,7 @@
     attributes: {
       classes: { source: "attribute", selector: "a", attribute: "class", default: "wp-block-catpow-t-button medium" },
       title: { source: "children", selector: "tbody td", default: "Title" },
-      url: { source: "attribute", selector: "a", attribute: "href", default: cp.home_url }
+      url: { source: "attribute", selector: "a", attribute: "href", default: wpinfo.home_url }
     },
     example: CP.example,
     edit({ attributes, className, setAttributes }) {

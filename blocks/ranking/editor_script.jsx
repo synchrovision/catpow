@@ -43,10 +43,10 @@ wp.blocks.registerBlockType('catpow/ranking',{
 					title:['Title'],
 					titleCaption:['Caption'],
 					subTitle:['SubTitle'],
-					src:cp.theme_url+'/images/dummy.jpg',
+					src:wpinfo.theme_url+'/images/dummy.jpg',
 					alt:'dummy',
 					text:['Text'],
-					linkUrl:cp.home_url
+					linkUrl:wpinfo.home_url
 				}
 			})
 		},

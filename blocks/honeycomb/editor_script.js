@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/honeycomb/editor_script.jsx
+  // blocks/honeycomb/editor_script.jsx
   CP.config.honeycomb = {
     imageKeys: {
       image: { src: "src", items: "items" }
@@ -29,7 +29,7 @@
           {
             classes: "item hasImage hasTitle hasText",
             order: "2 2 2 1,2 2 2 1,2 2 2 1",
-            src: cp.theme_url + "/images/dummy.jpg",
+            src: wpinfo.theme_url + "/images/dummy.jpg",
             title: ["Title"],
             text: ["Text"]
           }
@@ -153,7 +153,6 @@
                 "data-index": index,
                 src: itemStates.hasImage ? item.src : false,
                 handler: itemHandler,
-                "data-index": index,
                 onClick: () => {
                   setAttributes({ currentItemIndex: index });
                 }

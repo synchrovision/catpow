@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/div/editor_script.jsx
+  // blocks/div/editor_script.jsx
   CP.config.div = {
     devices: ["sp", "tb"],
     imageKeys: {
@@ -27,9 +27,9 @@
       color: { default: "0" },
       id: { source: "attribute", selector: ".wp-block-catpow-div", attribute: "id" },
       classes: { source: "attribute", selector: "div", attribute: "class", default: "wp-block-catpow-div frame thinBorder" },
-      iconImageSrc: { source: "attribute", selector: ".wp-block-catpow-div>.icon [src]", attribute: "src", default: cp.theme_url + "/images/dummy_icon.svg" },
+      iconImageSrc: { source: "attribute", selector: ".wp-block-catpow-div>.icon [src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy_icon.svg" },
       iconImageAlt: { source: "attribute", selector: ".wp-block-catpow-div>.icon [src]", attribute: "alt" },
-      backgroundImageSrc: { source: "attribute", selector: ".wp-block-catpow-div>.background [src]", attribute: "src", default: cp.theme_url + "/images/dummy_bg.jpg" },
+      backgroundImageSrc: { source: "attribute", selector: ".wp-block-catpow-div>.background [src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy_bg.jpg" },
       backgroundImageSources: CP.getPictureSoucesAttributesForDevices(CP.config.div.devices, ".wp-block-catpow-div>.background picture", "dummy_bg.jpg"),
       patternImageCss: { source: "text", selector: "style.patternImageCss" },
       frameImageCss: { source: "text", selector: "style.frameImageCss" },

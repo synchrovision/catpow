@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/unit/editor_script.jsx
+  // blocks/unit/editor_script.jsx
   CP.config.unit = {
     devices: ["sp", "tb"],
     imageKeys: {
@@ -26,7 +26,7 @@
       classes: { source: "attribute", selector: ".wp-block-catpow-unit", attribute: "class", default: "wp-block-catpow-unit" },
       sources: CP.getPictureSoucesAttributesForDevices(CP.config.unit.devices),
       mime: { source: "attribute", selector: "[src]", attribute: "data-mime" },
-      src: { source: "attribute", selector: "[src]", attribute: "src", default: cp.theme_url + "/images/dummy.jpg" },
+      src: { source: "attribute", selector: "[src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy.jpg" },
       alt: { source: "attribute", selector: "[src]", attribute: "alt" },
       code: { source: "text" }
     },

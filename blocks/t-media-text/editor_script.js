@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/t-media-text/editor_script.jsx
+  // blocks/t-media-text/editor_script.jsx
   wp.blocks.registerBlockType("catpow/t-media-text", {
     title: "\u{1F43E} T-media-text",
     description: "HTML\u30E1\u30FC\u30EB\u7528\u306E\u753B\u50CF\u30FB\u30C6\u30AD\u30B9\u30C8\u306E\u30BB\u30C3\u30C8\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
@@ -8,9 +8,9 @@
     parent: ["catpow/t-body", "catpow/t-box", "catpow/t-loop"],
     attributes: {
       classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-media-text" },
-      src: { source: "attribute", selector: "[src]", attribute: "src", default: cp.theme_url + "/images/dummy.jpg" },
+      src: { source: "attribute", selector: "[src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy.jpg" },
       alt: { source: "attribute", selector: "[src]", attribute: "alt" },
-      imageCode: { source: "text", selector: "td.imageCell", default: cp.theme_url + "/images/dummy.jpg" },
+      imageCode: { source: "text", selector: "td.imageCell", default: wpinfo.theme_url + "/images/dummy.jpg" },
       width: { source: "attribute", selector: "td.imageCell", attribute: "width", default: "200" }
     },
     example: CP.example,

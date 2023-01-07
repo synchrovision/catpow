@@ -6,7 +6,7 @@
 	parent:['catpow/t-body','catpow/t-box','catpow/t-loop'],
 	attributes:{
 		classes:{source:'attribute',selector:'table',attribute:'class',default:'wp-block-catpow-t-image'},
-		src:{source:'attribute',selector:'[src]',attribute:'src',default:cp.theme_url+'/images/dummy.jpg'},
+		src:{source:'attribute',selector:'[src]',attribute:'src',default:wpinfo.theme_url+'/images/dummy.jpg'},
 		alt:{source:'attribute',selector:'[src]',attribute:'alt'},
 		loopImage:{source:'text',selector:'td',default:'[output image]'},
 	},
@@ -39,7 +39,7 @@
 						<td>
 							{states.isTemplate?(
 								<img
-									src={cp.plugins_url+'/catpow/callee/dummy_image.php?text='+loopImage}
+									src={wpinfo.plugins_url+'/catpow/callee/dummy_image.php?text='+loopImage}
 									width="100%"
 									height="auto"
 								/>
