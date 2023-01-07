@@ -34,7 +34,8 @@ wp_register_script('mermaid','https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.
 wp_register_script('jquery-easing','https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js');
 wp_register_script('wp-color-picker-alpha','https://cdn.jsdelivr.net/gh/kallookoo/wp-color-picker-alpha/dist/wp-color-picker-alpha.min.js',['wp-color-picker']);
 
-wp_localize_script('catpow','cp',array(
+wp_register_script('wpinfo',null);
+wp_localize_script('wpinfo','wpinfo',array(
 	'plugins_url'=>plugins_url(),
 	'rest_url'=>get_rest_url(),
 	'ajax_url'=>admin_url().'admin-ajax.php',
