@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/zeus',{
+﻿wp.blocks.registerBlockType('catpow/zeus',{
 	title: '🐾 Zeus',
 	icon: 'cart',
 	category: 'catpow',
