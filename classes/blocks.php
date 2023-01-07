@@ -5,10 +5,10 @@ class blocks{
 	public static $deps=[
 		'editor_script'=>['wp-blocks','wp-i18n','wp-element','wp-editor','wp-plugins','wp-edit-post','babelHelpers','catpow'],
 		'editor_style'=>['wp-edit-blocks'],
-		'front_script'=>['catpow'],
+		'front_script'=>[],
 		'front_style'=>[],
-		'component'=>['wp-element','wp-api-fetch','catpow'],
-		'script'=>['catpow'],
+		'component'=>['wp-element','wp-api-fetch'],
+		'script'=>[],
 		'style'=>[]
 	];
 	public static function register_blocks(){
