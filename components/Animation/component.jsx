@@ -1,8 +1,6 @@
 ﻿/**
 * 
 */
-Catpow.AnimationContext=wp.element.createContext({});
-
 Catpow.Animation=(props)=>{
 	const {useState,useContext,useEffect,useReducer,useRef}=wp.element;
 	const {className='Animation'}=props;
@@ -40,17 +38,18 @@ Catpow.Animation=(props)=>{
 	});
 	useEffect(()=>{
 		var requestID;
-		const tick=()=>{
+		const tick=(t)=>{
 			requestID=window.requestAnimationFrame(tick);
 			dispatch({type:'tick'});
 		}
-		tick();
+		requestID=window.requestAnimationFrame(tick);
 		return ()=>{window.cancelAnimationFrame(requestID);}
 	},[props]);
 	
 	return (
-		<Catpow.AnimationContext.Provider value={{state,dispatch}}>
+		<Catpow.Animation.Context.Provider value={{state,dispatch}}>
 			<div className={className} ref={ref}>{props.children}</div>
-		</Catpow.AnimationContext.Provider>
+		</Catpow.Animation.Context.Provider>
 	);
 }
+Catpow.Animation.Context=wp.element.createContext({});
