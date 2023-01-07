@@ -43,8 +43,7 @@ wp_localize_script('wpinfo','wpinfo',array(
 	'home_url'=>home_url(),
 	'theme_url'=>get_stylesheet_directory_uri(),
 	'theme'=>get_stylesheet(),
-	'use_functions'=>cp::$use_functions,
-	'wp_rest_nonce'=>wp_create_nonce('wp_rest')
+	'use_functions'=>cp::$use_functions
 ));
 wp_register_script('init-catpow-namespace',null);
 wp_add_inline_script('init-catpow-namespace','window.Catpow=window.Catpow || {};window.Catpow.UI=window.Catpow.UI || {};');
