@@ -61,17 +61,20 @@ class UI extends meta{
 		?>
 		<div id="<?=$id?>" data-ui="<?=$ui?>">
 			<script type="text/javascript">
-				jQuery(function($){
-					window.Catpow.uiProps=window.Catpow.uiProps || {};
-					window.Catpow.uiProps['<?=$id?>']=<?=json_encode($prm)?>;
+				(async()=>{
+					if(document.readyState==='loading'){
+						await new Promise((resolve)=>{document.addEventListener('DOMContentLoaded',resolve);});
+					}
+					window.Catpow.UI.props=window.Catpow.UI.props || {};
+					window.Catpow.UI.props['<?=$id?>']=<?=json_encode($prm)?>;
 					wp.element.render(
 						wp.element.createElement(
 							Catpow.UI.<?=$ui?>Output,
-							window.Catpow.uiProps['<?=$id?>']
+							window.Catpow.UI.props['<?=$id?>']
 						),
 						document.getElementById("<?=$id?>")
 					);
-				});
+				})();
 			</script>
 		</div>
 		<?php
@@ -86,17 +89,20 @@ class UI extends meta{
 		?>
 		<div id="<?=$id?>" data-ui="<?=$ui?>">
 			<script type="text/javascript">
-				jQuery(function($){
-					window.Catpow.uiProps=window.Catpow.uiProps || {};
-					window.Catpow.uiProps['<?=$id?>']=<?=json_encode($prm)?>;
+				(async()=>{
+					if(document.readyState==='loading'){
+						await new Promise((resolve)=>{document.addEventListener('DOMContentLoaded',resolve);});
+					}
+					window.Catpow.UI.props=window.Catpow.UI.props || {};
+					window.Catpow.UI.props['<?=$id?>']=<?=json_encode($prm)?>;
 					wp.element.render(
 						wp.element.createElement(
 							Catpow.UI.<?=$ui?>,
-							window.Catpow.uiProps['<?=$id?>']
+							window.Catpow.UI.props['<?=$id?>']
 						),
 						document.getElementById("<?=$id?>")
 					);
-				});
+				})();
 			</script>
 		</div>
 		<?php
