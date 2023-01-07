@@ -1231,6 +1231,12 @@ Catpow.util={
 	getDeviceData:function(){
 		return Catpow.util.devices[Catpow.util.getDevice()];
 	},
+	/*event*/
+	ready:(callback)=>{
+		if(document.readyState!=='loading'){callback();}
+		else{document.addEventListener('DOMContentLoaded',callback);}
+	},
+	/*deps*/
 	requireStyles:function(styles){
 		styles.filter(function(href){
 			for(let i=0;i<document.styleSheets.length;i++){
