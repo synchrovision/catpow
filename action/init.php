@@ -33,6 +33,8 @@ wp_register_script('remarkable','https://cdnjs.cloudflare.com/ajax/libs/remarkab
 wp_register_script('mermaid','https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js');
 wp_register_script('jquery-easing','https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js');
 wp_register_script('wp-color-picker-alpha','https://cdn.jsdelivr.net/gh/kallookoo/wp-color-picker-alpha/dist/wp-color-picker-alpha.min.js',['wp-color-picker']);
+wp_register_script('ajaxzip3','https://ajaxzip3.github.io/ajaxzip3.js');
+
 
 wp_register_script('wpinfo',null);
 wp_localize_script('wpinfo','wpinfo',array(
