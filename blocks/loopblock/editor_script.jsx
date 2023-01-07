@@ -8,7 +8,7 @@
 		const {content_path,query,AltMode=false}=attributes;
 
 		return (
-			<Fragment>
+			<>
 				<BlockControls>
 					<Toolbar
 						controls={[
@@ -43,7 +43,7 @@
 						/>
 					</PanelBody>
 				</InspectorControls>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -75,11 +75,11 @@ registerBlockType('catpow/loopblockcontent',{
 	save({attributes,className,setAttributes}){
 		const {name}=attributes;
 		return (
-			<Fragment>
+			<>
 				<loopBlockContent name={name}>
 					<InnerBlocks.Content/>
 				</loopBlockContent>
-			</Fragment>
+			</>
 		);
 	}
 });

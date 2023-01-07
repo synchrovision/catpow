@@ -139,7 +139,7 @@ wp.blocks.registerBlockType('catpow/panes',{
 		}
 
 		return (
-			<Fragment>
+			<>
 				<CP.SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
@@ -191,7 +191,7 @@ wp.blocks.registerBlockType('catpow/panes',{
 						/>
 					</div>
 				):(
-					<Fragment>
+					<>
 						{(AltMode && doLoop)?(
 							<div className="alt_content">
 								<div class="label">
@@ -202,9 +202,9 @@ wp.blocks.registerBlockType('catpow/panes',{
 						):(
 							<ul className={classes}>{rtn}</ul>
 						)}
-					</Fragment>
+					</>
 				)}
-			</Fragment>
+			</>
 		);
 	},
 	save({attributes,className}){
@@ -250,12 +250,12 @@ wp.blocks.registerBlockType('catpow/panes',{
 			);
 		});
 		return (
-			<Fragment>
+			<>
 				<ul className={classes}>
 					{rtn}
 				</ul>
 				{doLoop && <onEmpty><InnerBlocks.Content/></onEmpty>}
-			</Fragment>
+			</>
 		);
 	}
 });

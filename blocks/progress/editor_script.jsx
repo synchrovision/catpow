@@ -96,7 +96,7 @@
 		const states=(settings && settings.classes)?CP.wordsToFlags(settings.classes):{};
 
 		return (
-			<Fragment>
+			<>
 				<InspectorControls>
 					<CP.SelectClassPanel
 						title="クラス"
@@ -123,7 +123,7 @@
 								]}
 							/>
 							{!isWaiting?(
-								<Fragment>
+								<>
 									<Flex justify="center">
 										<FlexItem>
 											<Button isPrimary onClick={updateSettings}>設定を更新</Button>
@@ -134,20 +134,20 @@
 											<Button isLink onClick={registerSettings}>登録</Button>｜<Button isLink isDestructive onClick={deleteSettings}>削除</Button>
 										</FlexItem>
 									</Flex>
-								</Fragment>
+								</>
 							):<CenterSpinner/>}
 						</CP.SelectClassPanel>
 					):<CenterSpinner/>}
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
-				<Fragment>
+				<>
 					{settings?(
 						<div className={'wp-block-catpow-progress '+settings.classes}>
 							<ul className="items"><Items/></ul>
 						</div>
 					):<CenterSpinner/>}
-				</Fragment>
-			</Fragment>
+				</>
+			</>
 		);
 	},
 	save({attributes,className}){

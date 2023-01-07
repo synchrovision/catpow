@@ -194,7 +194,7 @@
 		}
 
 		return (
-			<Fragment>
+			<>
 				<CP.SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
@@ -245,7 +245,7 @@
 						isTemplate={states.isTemplate}
 					/>
 				 ):(
-					<Fragment>
+					<>
 						{(AltMode && doLoop)?(
 							<div className="alt_content">
 								<div class="label">
@@ -256,9 +256,9 @@
 						):(
 							<ul className={classes}>{rtn}</ul>
 						)}
-					</Fragment>
+					</>
 				 )}
-			</Fragment>
+			</>
 	   );
 	},
 	save({attributes,className}){
@@ -340,12 +340,12 @@
 			);
 		});
 		return (
-			<Fragment>
+			<>
 				<ul className={classes}>
 					{rtn}
 				</ul>
 				{doLoop && <onEmpty><InnerBlocks.Content/></onEmpty>}
-			</Fragment>
+			</>
 		);
 	},
 	deprecated:[

@@ -111,7 +111,7 @@ wp.blocks.registerBlockType('catpow/banners',{
 		}
 		
 		return (
-			<Fragment>
+			<>
 				<CP.SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
@@ -178,7 +178,7 @@ wp.blocks.registerBlockType('catpow/banners',{
 						/>
 					</div>
 				):(
-					<Fragment>
+					<>
 						{(AltMode && doLoop)?(
 							<div className="alt_content">
 								<div class="label">
@@ -189,9 +189,9 @@ wp.blocks.registerBlockType('catpow/banners',{
 						):(
 							<ul className={classes}>{rtn}</ul>
 						)}
-					</Fragment>
+					</>
 				)}
-			</Fragment>
+			</>
 		);
 	},
 	save({attributes,className}){
@@ -201,7 +201,7 @@ wp.blocks.registerBlockType('catpow/banners',{
 		const {imageKeys}=CP.config.banners;
 		
 		return (
-			<Fragment>
+			<>
 				<ul className={classes}>
 					{
 						items.map((item,index)=>{
@@ -222,7 +222,7 @@ wp.blocks.registerBlockType('catpow/banners',{
 					}
 				</ul>
 				{doLoop && <onEmpty><InnerBlocks.Content/></onEmpty>}
-			</Fragment>
+			</>
 		);
 	},
 	deprecated:[

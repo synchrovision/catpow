@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/banners/editor_script.jsx
+  // blocks/banners/editor_script.jsx
   CP.config.banners = {
     imageKeys: {
       image: { src: "src", alt: "alt", code: "imageCode", items: "items" }
@@ -114,7 +114,7 @@
           rtn.push(rtn[rtn.length % len]);
         }
       }
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectModeToolbar,
         {
           set: setAttributes,
@@ -176,13 +176,13 @@
           ],
           isTemplate: states.isTemplate
         }
-      )) : /* @__PURE__ */ wp.element.createElement(Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, rtn)));
+      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, rtn)));
     },
     save({ attributes, className }) {
       const { items = [], classes: classes2, loopParam, doLoop } = attributes;
       const states = CP.wordsToFlags(classes2);
       const { imageKeys } = CP.config.banners;
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, items.map((item, index) => {
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, items.map((item, index) => {
         return /* @__PURE__ */ wp.element.createElement("li", { className: item.classes }, states.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), /* @__PURE__ */ wp.element.createElement("a", { href: item.linkUrl, target: item.target, "data-event": item.event, rel: item.target ? "noopener noreferrer" : "" }, /* @__PURE__ */ wp.element.createElement(
           CP.ResponsiveImage,
           {

@@ -432,7 +432,7 @@ wp.blocks.registerBlockType('catpow/layouttable',{
 										style:cell.style,
 										onClick:(e)=>selectCells(e,r,c)
 									},
-									<Fragment>
+									<>
 										<RichText onChange={(text)=>{cell.text=text;saverows();}} value={cell.text}/>
 										{isSelected && (c == colLen-parseInt(cell.colspan?cell.colspan:1)) && 
 											<div class="itemControl rowControl">
@@ -451,7 +451,7 @@ wp.blocks.registerBlockType('catpow/layouttable',{
 											</div>
 										}
 										{isSelected && cell.isSelected && <div className="selectBox"></div>}
-									</Fragment>
+									</>
 								);
 							})}
 						</tr>

@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/formblock/editor_script.jsx
+  // blocks/formblock/editor_script.jsx
   wp.blocks.registerBlockType("catpow/formblock", {
     title: "\u{1F43E} FormBlock",
     description: "\u30C6\u30FC\u30DE\u306B\u5B9A\u7FA9\u3055\u308C\u305F\u7DE8\u96C6\u53EF\u80FD\u306A\u30D5\u30A9\u30FC\u30E0\u3092\u8868\u793A\u3057\u307E\u3059\u3002",
@@ -16,7 +16,7 @@
           setAttributes({ actions: actions2 });
         });
       }
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
         Toolbar,
         {
           controls: [
@@ -97,7 +97,7 @@
       const parentClientId = wp.data.select("core/block-editor").getBlockParentsByBlockName(clientId, "catpow/formblock")[0];
       const parentBlock = wp.data.select("core/block-editor").getBlock(parentClientId);
       const actions = parentBlock.attributes.actions;
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "formBlockContent embedded_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, name), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/section"]], templateLock: false })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u8A2D\u5B9A", initialOpen: true }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "formBlockContent embedded_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, name), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/section"]], templateLock: false })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u8A2D\u5B9A", initialOpen: true }, /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
           label: "\u540D\u524D",
@@ -120,7 +120,7 @@
     },
     save({ attributes, className, setAttributes }) {
       const { name, action } = attributes;
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("formBlockContent", { name, action }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("formBlockContent", { name, action }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }
   });
 })();

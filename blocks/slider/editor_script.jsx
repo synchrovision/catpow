@@ -288,7 +288,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 
 
 		return (
-			<Fragment>
+			<>
 				<CP.SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
@@ -376,7 +376,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 						/>
 					</div>
 				):(
-					<Fragment>
+					<>
 						{(AltMode && doLoop)?(
 							<div className="alt_content">
 								<div class="label">
@@ -395,9 +395,9 @@ wp.blocks.registerBlockType('catpow/slider',{
 								</div>
 							</div>
 						)}
-					</Fragment>
+					</>
 				)}
-			</Fragment>
+			</>
 		);
 	},
 	save({attributes,className}){
@@ -468,7 +468,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 		});
 
 		return (
-			<Fragment>
+			<>
 				<div className={classes}>
 					<ul class="contents">
 						{rtn}
@@ -481,7 +481,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 					</div>
 				</div>
 				{doLoop && <onEmpty><InnerBlocks.Content/></onEmpty>}
-			</Fragment>
+			</>
 		);
 	},
 	deprecated:[

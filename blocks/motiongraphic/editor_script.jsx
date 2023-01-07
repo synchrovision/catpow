@@ -45,7 +45,7 @@ wp.blocks.registerBlockType('catpow/motiongraphic',{
 
 
 		return (
-			<Fragment>
+			<>
 				<div class="embedded_content">
 					<div class="label">{component}</div>
 					<div className={classes}>
@@ -76,7 +76,7 @@ wp.blocks.registerBlockType('catpow/motiongraphic',{
 						/>
 					}
 				</InspectorControls>
-			</Fragment>
+			</>
 		);
 	},
 

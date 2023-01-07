@@ -248,7 +248,7 @@
       const onDoubleClick = (e) => {
         var tgt = e.target;
       };
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices }), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices }), /* @__PURE__ */ wp.element.createElement(
         "div",
         {
           id,
@@ -281,7 +281,7 @@
           const itemBody = () => {
             if (itemSelected) {
               if (itemStates.isText) {
-                return /* @__PURE__ */ wp.element.createElement(Fragment, null, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", { className: "title" }, /* @__PURE__ */ wp.element.createElement(
+                return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", { className: "title" }, /* @__PURE__ */ wp.element.createElement(
                   RichText,
                   {
                     placeholder: "Title",
@@ -327,7 +327,7 @@
               );
             }
             if (itemStates.isText) {
-              return /* @__PURE__ */ wp.element.createElement(Fragment, null, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", { className: "title" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), itemStates.hasLead && /* @__PURE__ */ wp.element.createElement("h4", { className: "lead" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.lead })), itemStates.hasText && /* @__PURE__ */ wp.element.createElement("p", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })));
+              return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", { className: "title" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), itemStates.hasLead && /* @__PURE__ */ wp.element.createElement("h4", { className: "lead" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.lead })), itemStates.hasText && /* @__PURE__ */ wp.element.createElement("p", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })));
             }
             return /* @__PURE__ */ wp.element.createElement(
               CP.ResponsiveImage,
@@ -348,7 +348,7 @@
               "data-index": index,
               "data-rect": item.rect
             },
-            /* @__PURE__ */ wp.element.createElement(Fragment, null, itemBody(), isSelected && itemSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "control" }, /* @__PURE__ */ wp.element.createElement("div", { className: "pos" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "move" })), /* @__PURE__ */ wp.element.createElement("div", { className: "del" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "dismiss" })), /* @__PURE__ */ wp.element.createElement("div", { className: "dup" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "plus-alt" })), /* @__PURE__ */ wp.element.createElement("div", { className: "bnd" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "leftright" }))))
+            /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, itemBody(), isSelected && itemSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "control" }, /* @__PURE__ */ wp.element.createElement("div", { className: "pos" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "move" })), /* @__PURE__ */ wp.element.createElement("div", { className: "del" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "dismiss" })), /* @__PURE__ */ wp.element.createElement("div", { className: "dup" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "plus-alt" })), /* @__PURE__ */ wp.element.createElement("div", { className: "bnd" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "leftright" }))))
           );
         }),
         /* @__PURE__ */ wp.element.createElement("style", null, device ? CP.createStyleCode(cssDatas[device]) : renderCssDatas(cssDatas))
@@ -411,7 +411,7 @@
         var itemStates = CP.wordsToFlags(item.classes);
         const itemBody = () => {
           if (itemStates.isText) {
-            return /* @__PURE__ */ wp.element.createElement(Fragment, null, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", { className: "title" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), itemStates.hasLead && /* @__PURE__ */ wp.element.createElement("h4", { className: "lead" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.lead })), itemStates.hasText && /* @__PURE__ */ wp.element.createElement("p", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })));
+            return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", { className: "title" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), itemStates.hasLead && /* @__PURE__ */ wp.element.createElement("h4", { className: "lead" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.lead })), itemStates.hasText && /* @__PURE__ */ wp.element.createElement("p", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })));
           }
           return /* @__PURE__ */ wp.element.createElement(
             CP.ResponsiveImage,

@@ -35,7 +35,7 @@
 		}
 		
 		return (
-			<Fragment>
+			<>
 				{configData.template && 
 					<BlockControls>
 						<Toolbar
@@ -102,7 +102,7 @@
 						}
 					</PanelBody>
 				</InspectorControls>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -138,11 +138,11 @@ registerBlockType('catpow/loopcontent',{
 	save({attributes,className,setAttributes}){
 		const {name}=attributes;
 		return (
-			<Fragment>
+			<>
 				<loopContent name={name}>
 					<InnerBlocks.Content/>
 				</loopContent>
-			</Fragment>
+			</>
 		);
 	}
 });

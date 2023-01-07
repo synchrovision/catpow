@@ -31,7 +31,7 @@ registerFormatType('catpow/ruby',{
 		);
 
 		return [
-			<Fragment>
+			<>
 				<RichTextShortcut
 					type={'primary'}
 					character={'r'}
@@ -45,7 +45,7 @@ registerFormatType('catpow/ruby',{
 					shortcutType={'primary'}
 					shortcutCharacter={'r'}
 				/>
-			</Fragment>
+			</>
 		];
 	}
 });
@@ -69,7 +69,7 @@ registerFormatType('catpow/small',{
 		);
 
 		return [
-			<Fragment>
+			<>
 				<RichTextShortcut
 					type={'primary'}
 					character={'-'}
@@ -83,7 +83,7 @@ registerFormatType('catpow/small',{
 					shortcutType={'primary'}
 					shortcutCharacter={'-'}
 				/>
-			</Fragment>
+			</>
 		];
 	}
 });
@@ -120,7 +120,7 @@ registerFormatType('catpow/title',{
 		);
 
 		return [
-			<Fragment>
+			<>
 				{isActive && (
 					<Popover getAnchorRect={()=>el.getBoundingClientRect()} position='bottom left' focusOnMount={false}>
 						<Card size="small">
@@ -151,7 +151,7 @@ registerFormatType('catpow/title',{
 					onClick={onToggle}
 					isActive={isActive}
 				/>
-			</Fragment>
+			</>
 		];
 	}
 });
@@ -184,7 +184,7 @@ registerFormatType('catpow/mark',{
 		);
 
 		return [
-			<Fragment>
+			<>
 				{isActive && (
 					<Popover getAnchorRect={()=>el.getBoundingClientRect()} position='bottom center' focusOnMount={false}>
 						<Card size="small">
@@ -210,7 +210,7 @@ registerFormatType('catpow/mark',{
 					onClick={onToggle}
 					isActive={isActive}
 				/>
-			</Fragment>
+			</>
 		];
 	}
 });
@@ -246,7 +246,7 @@ registerFormatType('catpow/large',{
 		);
 
 		return [
-			<Fragment>
+			<>
 				{isActive && (
 					<Popover getAnchorRect={()=>el.getBoundingClientRect()} position='bottom center' focusOnMount={false}>
 						<Card size="small">
@@ -272,7 +272,7 @@ registerFormatType('catpow/large',{
 					onClick={onToggle}
 					isActive={isActive}
 				/>
-			</Fragment>
+			</>
 		];
 	}
 });
@@ -300,7 +300,7 @@ registerFormatType('catpow/tag',{
 		},[value,activeAttributes]);
 
 		return [
-			<Fragment>
+			<>
 				{isActive && (
 					<Popover getAnchorRect={()=>el.getBoundingClientRect()} position='bottom center' focusOnMount={false}>
 						<Card>
@@ -335,7 +335,7 @@ registerFormatType('catpow/tag',{
 					onClick={onToggle}
 					isActive={isActive}
 				/>
-			</Fragment>
+			</>
 		];
 	}
 });
@@ -358,7 +358,7 @@ registerFormatType('catpow/annotation',{
 		);
 
 		return [
-			<Fragment>
+			<>
 				<BlockControls>
 					<Toolbar
 						controls={[
@@ -372,7 +372,7 @@ registerFormatType('catpow/annotation',{
 					onClick={onToggle}
 					isActive={isActive}
 				/>
-			</Fragment>
+			</>
 		];
 	}
 });

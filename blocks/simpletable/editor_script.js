@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/simpletable/editor_script.jsx
+  // blocks/simpletable/editor_script.jsx
   wp.blocks.registerBlockType("catpow/simpletable", {
     title: "\u{1F43E} SimpleTable",
     description: "\u898B\u51FA\u3057\u3068\u672C\u6587\u306E\uFF12\u5217\u3067\u69CB\u6210\u3055\u308C\u308B\u30B7\u30F3\u30D7\u30EB\u306A\u30C6\u30FC\u30D6\u30EB\u3067\u3059\u3002",
@@ -58,6 +58,7 @@
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useState, useMemo } = wp.element;
+      const { InspectorControls, RichText } = wp.blockEditor;
       const { classes, rows } = attributes;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
@@ -155,6 +156,7 @@
       ];
     },
     save({ attributes, className }) {
+      const { RichText } = wp.blockEditor;
       const { classes, rows } = attributes;
       return /* @__PURE__ */ wp.element.createElement("table", { className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
         return /* @__PURE__ */ wp.element.createElement("tr", { className: row.classes, "data-refine-cond": row.cond }, /* @__PURE__ */ wp.element.createElement("th", { className: row.cells[0].classes }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: row.cells[0].text })), /* @__PURE__ */ wp.element.createElement("td", { className: row.cells[1].classes }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: row.cells[1].text })));

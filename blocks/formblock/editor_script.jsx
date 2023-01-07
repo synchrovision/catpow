@@ -18,7 +18,7 @@
 		}
 
 		return (
-			<Fragment>
+			<>
 				<BlockControls>
 					<Toolbar
 						controls={[
@@ -73,7 +73,7 @@
 						/>
 					</PanelBody>
 				</InspectorControls>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -99,7 +99,7 @@ registerBlockType('catpow/formblockcontent',{
 		const actions=parentBlock.attributes.actions;
 
 		return (
-			<Fragment>
+			<>
 				<div className={'formBlockContent embedded_content'}>
 					<div class="label">{name}</div>
 					<InnerBlocks template={[['catpow/section']]} templateLock={false}/>
@@ -123,17 +123,17 @@ registerBlockType('catpow/formblockcontent',{
 						/>
 					}
 				</InspectorControls>
-			</Fragment>
+			</>
 		);
 	},
 	save({attributes,className,setAttributes}){
 		const {name,action}=attributes;
 		return (
-			<Fragment>
+			<>
 				<formBlockContent name={name} action={action}>
 					<InnerBlocks.Content/>
 				</formBlockContent>
-			</Fragment>
+			</>
 		);
 	}
 });

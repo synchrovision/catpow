@@ -57,6 +57,7 @@
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
+		const {InspectorControls,RichText}=wp.blockEditor;
 		const {classes,rows}=attributes;
 
 		const selectiveClasses=useMemo(()=>{
@@ -153,7 +154,8 @@
 	},
 
 	save({attributes,className}){
-		const {classes,rows}=attributes
+		const {RichText}=wp.blockEditor;
+		const {classes,rows}=attributes;
 		return (
 			<table className={classes}>
 				<tbody>

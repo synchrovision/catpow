@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/switcher/editor_script.jsx
+  // blocks/switcher/editor_script.jsx
   CP.config.switcher = {
     factors: {
       schedule: "\u65E5\u6642",
@@ -111,7 +111,7 @@
         }
       }, [attributes.factor]);
       const currentBlockId = "block-" + wp.data.select("core/block-editor").getBlock(clientId).innerBlocks[currentIndex]?.clientId;
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "switcherEdit", "data-current-index": currentIndex }, /* @__PURE__ */ wp.element.createElement("ul", { className: "tabs" }, /* @__PURE__ */ wp.element.createElement("li", { className: "tab icon" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "networking" })), /* @__PURE__ */ wp.element.createElement("li", { className: "tab" }, factors[attributes.factor]), factorFlags[attributes.factor] & flagValues["field"] ? /* @__PURE__ */ wp.element.createElement("li", { className: "tab" }, attributes.field, factorFlags[attributes.factor] & flagValues["compare"] && "\u3000" + attributes.compare) : false, factorFlags[attributes.factor] & flagValues["values"] ? values.map((cond, index) => /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "switcherEdit", "data-current-index": currentIndex }, /* @__PURE__ */ wp.element.createElement("ul", { className: "tabs" }, /* @__PURE__ */ wp.element.createElement("li", { className: "tab icon" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "networking" })), /* @__PURE__ */ wp.element.createElement("li", { className: "tab" }, factors[attributes.factor]), factorFlags[attributes.factor] & flagValues["field"] ? /* @__PURE__ */ wp.element.createElement("li", { className: "tab" }, attributes.field, factorFlags[attributes.factor] & flagValues["compare"] && "\u3000" + attributes.compare) : false, factorFlags[attributes.factor] & flagValues["values"] ? values.map((cond, index) => /* @__PURE__ */ wp.element.createElement(
         "li",
         {
           className: "tab" + (index === currentIndex ? " active" : ""),
@@ -158,7 +158,7 @@
     },
     save({ attributes, className, setAttributes }) {
       const { cond } = attributes;
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("switcherContent", { cond }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("switcherContent", { cond }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }
   });
 })();

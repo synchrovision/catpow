@@ -16,7 +16,7 @@
 		},[]);
 		
 		return (
-			<Fragment>
+			<>
 				<div className={"collapsible_content "+(open?'open':'close')}>
 					<div class="label" onClick={()=>setOpen(!open)}>🐾 EntryPopup</div>
 					<div className={attributes.classes}>
@@ -38,7 +38,7 @@
 						selectiveClasses={selectiveClasses}
 					/>
 				</InspectorControls>
-			</Fragment>
+			</>
 		);
 	},
 

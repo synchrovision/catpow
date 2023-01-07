@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/t-body/editor_script.jsx
+  // blocks/t-body/editor_script.jsx
   wp.blocks.registerBlockType("catpow/t-body", {
     title: "\u{1F43E} T-Body",
     description: "HTML\u30E1\u30FC\u30EB\u306E\u30D9\u30FC\u30B9\u3068\u306A\u308B\u30D8\u30C3\u30C0\u30FB\u30D5\u30C3\u30BF\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
@@ -40,7 +40,7 @@
         wp.hooks.applyFilters("catpow.blocks.t-body.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, !isHtmlMail || TextMode ? /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, !isHtmlMail || TextMode ? /* @__PURE__ */ wp.element.createElement(
         TextareaControl,
         {
           value: textMail,
@@ -98,7 +98,7 @@
       const { type, isHtmlMail, classes, headerText, textMail, footerText } = attributes;
       const primaryClass = "wp-block-catpow-t-body";
       var states = CP.wordsToFlags(classes);
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, (!isHtmlMail || textMail) && /* @__PURE__ */ wp.element.createElement("textmail", null, textMail), isHtmlMail && /* @__PURE__ */ wp.element.createElement("table", { width: "100%", align: "center", className: classes }, states.hasHeader && /* @__PURE__ */ wp.element.createElement("thead", { className: "wp-block-catpow-t-body__header" }, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: headerText })))), /* @__PURE__ */ wp.element.createElement("tbody", { className: "wp-block-catpow-t-body__body" }, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement("div", { className: "wp-block-catpow-t-body__body__contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null))))), states.hasFooter && /* @__PURE__ */ wp.element.createElement("tfoot", { className: "wp-block-catpow-t-body__footer" }, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: footerText }))))));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, (!isHtmlMail || textMail) && /* @__PURE__ */ wp.element.createElement("textmail", null, textMail), isHtmlMail && /* @__PURE__ */ wp.element.createElement("table", { width: "100%", align: "center", className: classes }, states.hasHeader && /* @__PURE__ */ wp.element.createElement("thead", { className: "wp-block-catpow-t-body__header" }, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: headerText })))), /* @__PURE__ */ wp.element.createElement("tbody", { className: "wp-block-catpow-t-body__body" }, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement("div", { className: "wp-block-catpow-t-body__body__contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null))))), states.hasFooter && /* @__PURE__ */ wp.element.createElement("tfoot", { className: "wp-block-catpow-t-body__footer" }, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: footerText }))))));
     }
   });
 })();

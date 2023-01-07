@@ -79,7 +79,7 @@
 						/>
 					</div>
 					{!itemStates.isHeading &&
-						<Fragment>
+						<>
 							<div className="line"></div>
 							<div className='price'>
 								<RichText
@@ -87,7 +87,7 @@
 									value={item.price}
 								/>
 							</div>
-						</Fragment>
+						</>
 					}
 					{itemStates.hasCaption &&
 						<div className='caption'>
@@ -110,7 +110,7 @@
 		}
 
 		return (
-			<Fragment>
+			<>
 				<CP.SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
@@ -143,7 +143,7 @@
 					/>
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
-				<Fragment>
+				<>
 					{EditMode?(
 						<div className="alt_content">
 							<div class="label">
@@ -163,7 +163,7 @@
 							/>
 						</div>
 					 ):(
-						<Fragment>
+						<>
 							{(AltMode && doLoop)?(
 								<div className="alt_content">
 									<div class="label">
@@ -174,10 +174,10 @@
 							):(
 								<ul className={classes}>{rtn}</ul>
 							)}
-						</Fragment>
+						</>
 					 )}
-				</Fragment>
-			</Fragment>
+				</>
+			</>
 		);
 	},
 	save({attributes,className}){
@@ -205,10 +205,10 @@
 					}
 					<div className='title'><RichText.Content value={item.title}/></div>
 					{!itemStates.isHeading &&
-						<Fragment>
+						<>
 							<div className="line"></div>
 							<div className='price'><RichText.Content value={item.price}/></div>
-						</Fragment>
+						</>
 					}
 					{itemStates.hasCaption &&
 						<div className='caption'><RichText.Content value={item.caption}/></div>
@@ -217,12 +217,12 @@
 			);
 		});
 		return (
-			<Fragment>
+			<>
 				<ul className={classes}>
 					{rtn}
 				</ul>
 				{doLoop && <onEmpty><InnerBlocks.Content/></onEmpty>}
-			</Fragment>
+			</>
 		);
 	},
 	deprecated:[
@@ -252,10 +252,10 @@
 							}
 							<div className='title'><RichText.Content value={item.title}/></div>
 							{!itemStates.isHeading &&
-								<Fragment>
+								<>
 									<div className="line"></div>
 									<div className='price'><RichText.Content value={item.price}/></div>
-								</Fragment>
+								</>
 							}
 							{itemStates.hasCaption &&
 								<div className='caption'><RichText.Content value={item.caption}/></div>

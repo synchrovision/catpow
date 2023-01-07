@@ -48,7 +48,7 @@
 	},[props]);
 	
     return (
-		<Fragment>
+		<>
 			<PluginSidebarMoreMenuItem target="catpow-sidebar">🐾Catpow</PluginSidebarMoreMenuItem>
 			<PluginSidebar
 				name="catpow-sidebar"
@@ -97,6 +97,6 @@
 					</DataStructure>
 				</PanelBody>
 			</PluginSidebar>
-		</Fragment>
+		</>
     );
 } } );

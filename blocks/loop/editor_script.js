@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/loop/editor_script.jsx
+  // blocks/loop/editor_script.jsx
   wp.blocks.registerBlockType("catpow/loop", {
     title: "\u{1F43E} Loop",
     description: "\u30C6\u30FC\u30DE\u306B\u5B9A\u7FA9\u3055\u308C\u305F\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u3067\u6295\u7A3F\u3092\u8868\u793A\u3057\u307E\u3059\u3002",
@@ -34,7 +34,7 @@
       } else {
         configData = JSON.parse(config);
       }
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, configData.template && /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, configData.template && /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
         Toolbar,
         {
           controls: [
@@ -108,7 +108,7 @@
     },
     save({ attributes, className, setAttributes }) {
       const { name } = attributes;
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("loopContent", { name }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("loopContent", { name }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }
   });
 })();

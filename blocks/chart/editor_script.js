@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/chart/editor_script.jsx
+  // blocks/chart/editor_script.jsx
   wp.blocks.registerBlockType("catpow/chart", {
     title: "\u{1F43E} Chart",
     description: "\u30B0\u30E9\u30D5\u3092\u8868\u793A\u3057\u307E\u3059\u3002",
@@ -148,7 +148,7 @@
           }));
         }))));
       };
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
         Toolbar,
         {
           controls: [

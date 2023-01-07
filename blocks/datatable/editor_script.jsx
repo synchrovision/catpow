@@ -130,13 +130,13 @@
 		}
 		
 		return (
-			<Fragment>
+			<>
 				<CP.SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
 					modes={['AltMode']}
 				/>
-				<Fragment>
+				<>
 					{(AltMode && doLoop)?(
 						<div className="alt_content">
 							<div class="label">
@@ -200,7 +200,7 @@
 							</tbody>
 						</table>
 					)}
-				</Fragment>
+				</>
 				<InspectorControls>
 					<CP.SelectClassPanel
 						title='表示設定'
@@ -226,7 +226,7 @@
 						/>
 					</PanelBody>
 				</InspectorControls>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -237,7 +237,7 @@
 		var states=CP.wordsToFlags(classes);
 		
 		return (
-			<Fragment>
+			<>
 				<table className={classes}>
 					{states.hasHeaderRow && 
 						<thead>
@@ -266,7 +266,7 @@
 					</tbody>
 				</table>
 				{doLoop && <onEmpty><InnerBlocks.Content/></onEmpty>}
-			</Fragment>
+			</>
 		);
 	},
 	deprecated:[

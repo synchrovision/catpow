@@ -9,7 +9,7 @@
 		const {content_path,query,AltMode=false}=attributes;
 
 		return (
-			<Fragment>
+			<>
 				<BlockControls>
 					<Toolbar
 						controls={[
@@ -44,7 +44,7 @@
 						/>
 					</PanelBody>
 				</InspectorControls>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -54,7 +54,7 @@
 });
 
 
-registerBlockType('catpow/t-loopcontent',{
+wp.blocks.registerBlockType('catpow/t-loopcontent',{
 	title:'🐾 t-loopContent',
 	icon:'editor-code',
 	category:'catpow',
@@ -76,11 +76,11 @@ registerBlockType('catpow/t-loopcontent',{
 	save({attributes,className,setAttributes}){
 		const {name}=attributes;
 		return (
-			<Fragment>
+			<>
 				<t-loopContent name={name}>
 					<InnerBlocks.Content/>
 				</t-loopContent>
-			</Fragment>
+			</>
 		);
 	}
 });

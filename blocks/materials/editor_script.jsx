@@ -122,7 +122,7 @@
 		}
 
 		return (
-			<Fragment>
+			<>
 				<CP.SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
@@ -155,7 +155,7 @@
 					/>
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
-				<Fragment>
+				<>
 					{EditMode?(
 						<div className="alt_content">
 							<div class="label">
@@ -176,7 +176,7 @@
 							/>
 						</div>
 					 ):(
-						<Fragment>
+						<>
 							{(AltMode && doLoop)?(
 								<div className="alt_content">
 									<div class="label">
@@ -187,10 +187,10 @@
 							):(
 								<ul className={classes}>{rtn}</ul>
 							)}
-						</Fragment>
+						</>
 					 )}
-				</Fragment>
-			</Fragment>
+				</>
+			</>
 		);
 	},
 	save({attributes,className}){
@@ -236,12 +236,12 @@
 			);
 		});
 		return (
-			<Fragment>
+			<>
 				<ul className={classes}>
 					{rtn}
 				</ul>
 				{doLoop && <onEmpty><InnerBlocks.Content/></onEmpty>}
-			</Fragment>
+			</>
 		);
 	}
 });

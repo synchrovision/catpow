@@ -63,7 +63,7 @@ wp.blocks.registerBlockType('catpow/accordion',{
 		},[]);
 		
 		return (
-			<Fragment>
+			<>
 				<div className={classes}>
 					<div className="header">
 						{states.hasImage &&
@@ -104,7 +104,7 @@ wp.blocks.registerBlockType('catpow/accordion',{
 						/>
 					</PanelBody>
 				</InspectorControls>
-			</Fragment>
+			</>
 		);
 	},
 	save({attributes,className,setAttributes}){
@@ -116,7 +116,7 @@ wp.blocks.registerBlockType('catpow/accordion',{
 		const {devices,imageKeys,imageSizes}=CP.config.accordion;
 		
 		return (
-			<Fragment>
+			<>
 				<div className={classes}>
 					<div className="header">
 						{states.hasImage && 
@@ -139,7 +139,7 @@ wp.blocks.registerBlockType('catpow/accordion',{
 						<div className="contents"><InnerBlocks.Content/></div>
 					</div>
 				</div>
-			</Fragment>
+			</>
 		);
 	}
 });

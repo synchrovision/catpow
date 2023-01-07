@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/definition/editor_script.jsx
+  // blocks/definition/editor_script.jsx
   wp.blocks.registerBlockType("catpow/definition", {
     title: "\u{1F43E} Definition",
     description: "\u5B9A\u7FA9\u30EA\u30B9\u30C8\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059",
@@ -90,7 +90,7 @@
           rtn.push(rtn[rtn.length % len]);
         }
       }
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectModeToolbar,
         {
           set: setAttributes,
@@ -124,7 +124,7 @@
           ],
           isTemplate: states.isTemplate
         }
-      )) : /* @__PURE__ */ wp.element.createElement(Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("div", { className: classes }, rtn)));
+      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("div", { className: classes }, rtn)));
     },
     save({ attributes, className }) {
       const { items = [], classes = "", loopCount, doLoop } = attributes;
@@ -135,7 +135,7 @@
           /* @__PURE__ */ wp.element.createElement("dl", { className: "item" }, /* @__PURE__ */ wp.element.createElement("dt", { className: "title" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), /* @__PURE__ */ wp.element.createElement("dd", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })))
         );
       });
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, rtn), doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, rtn), doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }
   });
 })();

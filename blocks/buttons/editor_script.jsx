@@ -102,7 +102,7 @@
 		}
 		
 		return (
-			<Fragment>
+			<>
 				<BlockControls>
 					<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
 				</BlockControls>
@@ -138,7 +138,7 @@
 					</PanelBody>
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
-				<Fragment>
+				<>
 					{EditMode?(
 						<div className="alt_content">
 							<div class="label">
@@ -155,7 +155,7 @@
 							/>
 						</div>
 					 ):(
-						<Fragment>
+						<>
 							{(AltMode && doLoop)?(
 								<div className="alt_content">
 									<div class="label">
@@ -166,10 +166,10 @@
 							):(
 								<ul className={classes}>{rtn}</ul>
 							)}
-						</Fragment>
+						</>
 					 )}
-				</Fragment>
-			</Fragment>
+				</>
+			</>
 		);
 	},
 	save(props){
@@ -203,12 +203,12 @@
 			);
 		});
 		return (
-			<Fragment>
+			<>
 				<ul className={classes}>
 					{rtn}
 				</ul>
 				{doLoop && <onEmpty><InnerBlocks.Content/></onEmpty>}
-			</Fragment>
+			</>
 		);
 	},
 	deprecated:[

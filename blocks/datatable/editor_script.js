@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/datatable/editor_script.jsx
+  // blocks/datatable/editor_script.jsx
   wp.blocks.registerBlockType("catpow/datatable", {
     title: "\u{1F43E} DataTable",
     description: "\u4E00\u884C\u307E\u305F\u306F\uFF11\u5217\u306E\u898B\u51FA\u3057\u3092\u6301\u3064\u30C6\u30FC\u30D6\u30EB\u3067\u3059\u3002",
@@ -130,14 +130,14 @@
         });
         saveItems();
       };
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectModeToolbar,
         {
           set: setAttributes,
           attr: attributes,
           modes: ["AltMode"]
         }
-      ), /* @__PURE__ */ wp.element.createElement(Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("table", { className: classes2 }, states.hasHeaderRow && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, rows[0].cells.map((cell, index) => {
+      ), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("table", { className: classes2 }, states.hasHeaderRow && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, rows[0].cells.map((cell, index) => {
         if (index === 0) {
           if (states.hasHeaderColumn && cell.text.length === 0) {
             cell.classes = "spacer";
@@ -207,7 +207,7 @@
       const { classes: classes2 = "", rows = [], loopParam, doLoop } = attributes;
       var classArray = classes2.split(" ");
       var states = CP.wordsToFlags(classes2);
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("table", { className: classes2 }, states.hasHeaderRow && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, rows[0].cells.map((cell, index) => {
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("table", { className: classes2 }, states.hasHeaderRow && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, rows[0].cells.map((cell, index) => {
         return /* @__PURE__ */ wp.element.createElement("th", { className: cell.classes }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: cell.text }));
       }))), /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
         if (states.hasHeaderRow && index == 0) {

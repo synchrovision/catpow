@@ -41,7 +41,7 @@
 		},[]);
 
 		return (
-			<Fragment>
+			<>
 				{(!isHtmlMail || TextMode)?(
 					<TextareaControl
 						value={textMail}
@@ -116,7 +116,7 @@
 						/>
 					</PanelBody>
 				</InspectorControls>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -126,7 +126,7 @@
 		const primaryClass='wp-block-catpow-t-body';
 		var states=CP.wordsToFlags(classes);
 		return (
-			<Fragment>
+			<>
 				{(!isHtmlMail || textMail) && <textmail>{textMail}</textmail>}
 				{isHtmlMail && 
 					<table width="100%" align="center" className={classes}>
@@ -155,7 +155,7 @@
 						}
 					</table>
 				}
-			</Fragment>
+			</>
 		);
 	}
 });

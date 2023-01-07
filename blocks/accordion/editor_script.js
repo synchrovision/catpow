@@ -61,7 +61,7 @@
         wp.hooks.applyFilters("catpow.blocks.accordion.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement("div", { className: "header" }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && imageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: imageCode }) : /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement("div", { className: "header" }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && imageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: imageCode }) : /* @__PURE__ */ wp.element.createElement(
         CP.SelectResponsiveImage,
         {
           set: setAttributes,
@@ -99,7 +99,7 @@
       } = attributes;
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys, imageSizes } = CP.config.accordion;
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement("div", { className: "header" }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { class: "image" }, states.isTemplate && imageCode ? imageCode : /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement("div", { className: "header" }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { class: "image" }, states.isTemplate && imageCode ? imageCode : /* @__PURE__ */ wp.element.createElement(
         CP.ResponsiveImage,
         {
           attr: attributes,

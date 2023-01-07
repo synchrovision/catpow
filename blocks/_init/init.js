@@ -1896,7 +1896,7 @@
             set({ currentItemIndex: index });
           }
         },
-        /* @__PURE__ */ wp.element.createElement(Fragment, null, children, isSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: (e) => CP2.deleteItem(props) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: (e) => CP2.cloneItem(props) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn up", onClick: (e) => CP2.upItem(props) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn down", onClick: (e) => CP2.downItem(props) })))
+        /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, children, isSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: (e) => CP2.deleteItem(props) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: (e) => CP2.cloneItem(props) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn up", onClick: (e) => CP2.upItem(props) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn down", onClick: (e) => CP2.downItem(props) })))
       );
     },
     ItemControlInfoPanel: () => {
@@ -2998,7 +2998,7 @@
         });
         setHold(true);
       }, [JSON.stringify(attributes)]);
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement(RawHTML, { className }, response), stylesheets.map((stylesheet) => /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: stylesheet })));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RawHTML, { className }, response), stylesheets.map((stylesheet) => /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: stylesheet })));
     }
   };
   CP2.example = {
@@ -3052,7 +3052,7 @@
         return /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: key, name: value[key] });
       });
     }, [props]);
-    return /* @__PURE__ */ wp.element.createElement(Fragment2, null, /* @__PURE__ */ wp.element.createElement(PluginSidebarMoreMenuItem, { target: "catpow-sidebar" }, "\u{1F43E}Catpow"), /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(PluginSidebarMoreMenuItem, { target: "catpow-sidebar" }, "\u{1F43E}Catpow"), /* @__PURE__ */ wp.element.createElement(
       PluginSidebar,
       {
         name: "catpow-sidebar",

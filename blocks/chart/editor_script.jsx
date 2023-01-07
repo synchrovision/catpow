@@ -159,7 +159,7 @@
 		}
 		
 		return (
-			<Fragment>
+			<>
 				<BlockControls>
 					<Toolbar
 						controls={[
@@ -200,7 +200,7 @@
 						)}
 					</div>
 				)}
-			</Fragment>
+			</>
 		);
 	},
 	save({attributes,className}){

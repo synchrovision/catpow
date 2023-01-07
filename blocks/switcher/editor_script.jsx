@@ -105,7 +105,7 @@ wp.blocks.registerBlockType('catpow/switcher',{
 		},[attributes.factor]);
 		const currentBlockId='block-'+wp.data.select('core/block-editor').getBlock(clientId).innerBlocks[currentIndex]?.clientId;
 		return (
-			<Fragment>
+			<>
 				<div className="switcherEdit" data-current-index={currentIndex}>
 					<ul className="tabs">
 						<li className="tab icon">
@@ -147,7 +147,7 @@ wp.blocks.registerBlockType('catpow/switcher',{
 						initialOpen={true}
 					/>
 				</InspectorControls>
-			</Fragment>
+			</>
 		);
 	},
 	save({attributes,className,setAttributes}){
@@ -176,11 +176,11 @@ registerBlockType('catpow/switchercontent',{
 	save({attributes,className,setAttributes}){
 		const {cond}=attributes;
 		return (
-			<Fragment>
+			<>
 				<switcherContent cond={cond}>
 					<InnerBlocks.Content/>
 				</switcherContent>
-			</Fragment>
+			</>
 		);
 	}
 });

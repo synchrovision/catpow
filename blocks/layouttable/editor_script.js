@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/layouttable/editor_script.jsx
+  // blocks/layouttable/editor_script.jsx
   wp.blocks.registerBlockType("catpow/layouttable", {
     title: "\u{1F43E} LayoutTable",
     description: "\u30BB\u30EB\u306E\u7D50\u5408\u3068\u5E45\u306E\u6307\u5B9A\u304C\u3067\u304D\u308B\u30C6\u30FC\u30D6\u30EB\u3067\u3059\u3002",
@@ -459,7 +459,7 @@
                 style: cell.style,
                 onClick: (e) => selectCells(e, r, c)
               },
-              /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement(RichText, { onChange: (text) => {
+              /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RichText, { onChange: (text) => {
                 cell.text = text;
                 saverows();
               }, value: cell.text }), isSelected && c == colLen - parseInt(cell.colspan ? cell.colspan : 1) && /* @__PURE__ */ wp.element.createElement("div", { class: "itemControl rowControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn up", onClick: () => downRow(r) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteRow(r) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addRow(r) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn down", onClick: () => upRow(r) })), isSelected && r == rowLen - parseInt(cell.rowspan ? cell.rowspan : 1) && /* @__PURE__ */ wp.element.createElement("div", { class: "itemControl columnControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn left", onClick: () => downColumn(c) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteColumn(c) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addColumn(c) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn right", onClick: () => upColumn(c) })), isSelected && cell.isSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "selectBox" }))

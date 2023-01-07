@@ -244,7 +244,7 @@ wp.blocks.registerBlockType('catpow/graphics',{
 		};
 
 		return (
-			<Fragment>
+			<>
 				<CP.SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices}/>
 				<div
 					id={id}
@@ -280,7 +280,7 @@ wp.blocks.registerBlockType('catpow/graphics',{
 							if(itemSelected){
 								if(itemStates.isText){
 									return (
-										<Fragment>
+										<>
 											{itemStates.hasTitle && 
 												<h3 className="title">
 													<RichText
@@ -308,7 +308,7 @@ wp.blocks.registerBlockType('catpow/graphics',{
 													/>
 												 </p>
 											}
-										</Fragment>
+										</>
 									);
 								}
 								return (
@@ -324,11 +324,11 @@ wp.blocks.registerBlockType('catpow/graphics',{
 							}
 							if(itemStates.isText){
 								return (
-									<Fragment>
+									<>
 										{itemStates.hasTitle && <h3 className="title"><RichText.Content value={item.title}/></h3>}
 										{itemStates.hasLead && <h4 className="lead"><RichText.Content value={item.lead}/></h4>}
 										{itemStates.hasText && <p className="text"><RichText.Content value={item.text}/></p>}
-									</Fragment>
+									</>
 								);
 							}
 							return (
@@ -351,7 +351,7 @@ wp.blocks.registerBlockType('catpow/graphics',{
 								'data-index':index,
 								'data-rect':item.rect
 							},
-							<Fragment>
+							<>
 								{itemBody()}
 								{isSelected && itemSelected && 
 									<div className="control">
@@ -369,7 +369,7 @@ wp.blocks.registerBlockType('catpow/graphics',{
 										</div>
 									</div>
 								}
-							</Fragment>
+							</>
 						);
 					})}
 					<style>
@@ -420,7 +420,7 @@ wp.blocks.registerBlockType('catpow/graphics',{
 					}
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
-			</Fragment>
+			</>
 		);
 	},
 	save({attributes,className,setAttributes}){
@@ -447,11 +447,11 @@ wp.blocks.registerBlockType('catpow/graphics',{
 					const itemBody=()=>{
 						if(itemStates.isText){
 							return (
-								<Fragment>
+								<>
 									{itemStates.hasTitle && <h3 className="title"><RichText.Content value={item.title}/></h3>}
 									{itemStates.hasLead && <h4 className="lead"><RichText.Content value={item.lead}/></h4>}
 									{itemStates.hasText && <p className="text"><RichText.Content value={item.text}/></p>}
-								</Fragment>
+								</>
 							);
 						}
 						return (

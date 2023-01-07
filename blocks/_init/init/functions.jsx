@@ -1364,7 +1364,7 @@
 					set({currentItemIndex:index});
 				}
 			},
-			<Fragment>
+			<>
 				{children}
 				{isSelected &&
 					<div className='itemControl'>
@@ -1374,7 +1374,7 @@
 						<div className='btn down' onClick={(e)=>CP.downItem(props)}></div>
 					</div>
 				}
-			</Fragment>
+			</>
 		);
 	},
 	ItemControlInfoPanel:()=>{
@@ -2473,10 +2473,10 @@
 		},[JSON.stringify(attributes)]);
 		
 		return (
-			<Fragment>
+			<>
 				<RawHTML className={className}>{response}</RawHTML>
 				{stylesheets.map((stylesheet)=><link rel="stylesheet" href={stylesheet}/>)}
-			</Fragment>
+			</>
 		);
 	}
 };

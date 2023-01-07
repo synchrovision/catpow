@@ -8,9 +8,9 @@
 		const {content_path,query,config,EditMode=false}=attributes;
 		
 		return (
-			<Fragment>
+			<>
 				<ServerSideRender block='catpow/breadcrumb' attributes={attributes}/>
-			</Fragment>
+			</>
 		);
 	},
 

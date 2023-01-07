@@ -138,7 +138,7 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 		}
 
 		return (
-			<Fragment>
+			<>
 				<CP.SelectModeToolbar
 					set={setAttributes}
 					attr={attributes}
@@ -178,7 +178,7 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
 				{!OpenMode?(
-					<Fragment>
+					<>
 						{EditMode?(
 							<div className="alt_content">
 								<div class="label">
@@ -201,7 +201,7 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 								/>
 							</div>
 						 ):(
-							<Fragment>
+							<>
 								{(AltMode && doLoop)?(
 									<div className="alt_content">
 										<div class="label">
@@ -212,9 +212,9 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 								):(
 									<ul className={classes}>{rtn}</ul>
 								)}
-							</Fragment>
+							</>
 						 )}
-					</Fragment>
+					</>
 				):(
 					<div className="lightbox_preview">
 						<div id="cp_lightbox" className="cp_lightbox_container active">
@@ -285,7 +285,7 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 						</div>
 					</div>
 				)}
-			</Fragment>
+			</>
 		);
 	},
 	save({attributes,className}){
@@ -296,7 +296,7 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 		const {imageKeys}=CP.config.lightbox;
 
 		return (
-			<Fragment>
+			<>
 				<ul className={classes}>
 					{items.map((item,index)=>{
 						return (
@@ -338,7 +338,7 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 					})}
 				</ul>
 				{doLoop && <onEmpty><InnerBlocks.Content/></onEmpty>}
-			</Fragment>
+			</>
 		);
 	},
 });

@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/lightbox/editor_script.jsx
+  // blocks/lightbox/editor_script.jsx
   CP.config.lightbox = {
     imageKeys: {
       image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
@@ -130,7 +130,7 @@
           rtn.push(rtn[rtn.length % len]);
         }
       }
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectModeToolbar,
         {
           set: setAttributes,
@@ -173,7 +173,7 @@
           selectiveClasses: selectiveItemClasses,
           filters: CP.filters.lightbox || {}
         }
-      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), !OpenMode ? /* @__PURE__ */ wp.element.createElement(Fragment, null, EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), !OpenMode ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           set: setAttributes,
@@ -190,7 +190,7 @@
           ],
           isTemplate: states.isTemplate
         }
-      )) : /* @__PURE__ */ wp.element.createElement(Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn))) : /* @__PURE__ */ wp.element.createElement("div", { className: "lightbox_preview" }, /* @__PURE__ */ wp.element.createElement("div", { id: "cp_lightbox", className: "cp_lightbox_container active" }, /* @__PURE__ */ wp.element.createElement("div", { class: "cp_lightbox_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "group active" }, /* @__PURE__ */ wp.element.createElement("ul", { class: "items" }, items.map((item, index) => {
+      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn))) : /* @__PURE__ */ wp.element.createElement("div", { className: "lightbox_preview" }, /* @__PURE__ */ wp.element.createElement("div", { id: "cp_lightbox", className: "cp_lightbox_container active" }, /* @__PURE__ */ wp.element.createElement("div", { class: "cp_lightbox_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "group active" }, /* @__PURE__ */ wp.element.createElement("ul", { class: "items" }, items.map((item, index) => {
         var isActive = currentItemIndex == index;
         return /* @__PURE__ */ wp.element.createElement("li", { className: isActive ? "item active" : "item" }, /* @__PURE__ */ wp.element.createElement("div", { className: boxClasses }, states.hasSubTitle && /* @__PURE__ */ wp.element.createElement("header", { className: "title" }, /* @__PURE__ */ wp.element.createElement("h4", null, /* @__PURE__ */ wp.element.createElement(
           RichText,
@@ -242,7 +242,7 @@
       const { items = [], classes = "", boxClasses, blockState, doLoop } = attributes;
       var states = CP.wordsToFlags(classes);
       const { imageKeys } = CP.config.lightbox;
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, items.map((item, index) => {
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, items.map((item, index) => {
         return /* @__PURE__ */ wp.element.createElement("li", { className: item.classes }, /* @__PURE__ */ wp.element.createElement("header", null, states.hasHeaderImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(
           CP.ResponsiveImage,
           {

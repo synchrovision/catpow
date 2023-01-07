@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/loopvars/editor_script.jsx
+  // blocks/loopvars/editor_script.jsx
   wp.blocks.registerBlockType("catpow/loopvars", {
     title: "\u{1F43E} LoopVars",
     description: "\u30D6\u30ED\u30C3\u30AF\u306E\u5185\u5BB9\u3092\u5909\u6570\u306E\u30C6\u30FC\u30D6\u30EB\u3092\u30EB\u30FC\u30D7\u3057\u3066\u8868\u793A\u3057\u307E\u3059\u3002\u5404\u5909\u6570\u306F\u30D6\u30ED\u30C3\u30AF\u5185\u3067[var \u5909\u6570\u540D]\u306E\u30B7\u30E7\u30FC\u30C8\u30B3\u30FC\u30C9\u3067\u5229\u7528\u3067\u304D\u307E\u3059\u3002",
@@ -8,7 +8,7 @@
     example: CP.example,
     edit({ attributes, setAttributes, className }) {
       const { items, columns, EditMode = false } = attributes;
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectModeToolbar,
         {
           set: setAttributes,

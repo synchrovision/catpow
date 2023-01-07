@@ -166,7 +166,7 @@ wp.blocks.registerBlockType('catpow/flow',{
 		if(attributes.EditMode===undefined){attributes.EditMode=false;}
 
 		return (
-			<Fragment>
+			<>
 				<BlockControls>
 					<Toolbar
 						controls={[
@@ -219,7 +219,7 @@ wp.blocks.registerBlockType('catpow/flow',{
 				):(
 					<ul className={classes}>{rtn}</ul>
 				)}
-			</Fragment>
+			</>
 		);
 	},
 	save({attributes,className}){
