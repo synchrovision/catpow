@@ -1,4 +1,8 @@
 <?php
+add_filter('rest_allowed_cors_headers',function($allow_headers){
+	$allow_headers[]='X-CP-Nonce';
+	return $allow_headers;
+});
 register_rest_route(
 	'cp/v1',
 	'/(?P<content_path>(?P<data_type>[a-z]\w*)(?:/(?P<data_name>[a-z]\w*))?(?:/(?P<tmp>(?P<tmp_name>[a-z]\w*)(?:\-(?P<tmp_slug>[a-z]\w*))?))?)(?:/(?P<data_id>\d+))?(?:/(?P<action>[a-z]\w*))?(?:/(?P<param>.+))?/?',
