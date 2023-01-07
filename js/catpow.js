@@ -1424,8 +1424,7 @@ Catpow.util={
         return {h:Math.round(h*360),s:Math.round(s*100),b:Math.round(b*100)};
 	}
 };
-
-//浮動小数点問題対策のmath
+/*Math*/
 Math.sum=function(){
 	var args=[],i;
 	for(i=0;i<arguments.length;i++){
@@ -1441,15 +1440,7 @@ Math.sum=function(){
 	},0);
 	return parseFloat(n+'e'+i);
 };
-Math.pfloor=function(n,p){
-	return parseFloat(Math.floor(parseFloat(n+'e'+p))+'e-'+p);
-};
-Math.pround=function(n,p){
-	return parseFloat(Math.round(parseFloat(n+'e'+p))+'e-'+p);
-};
-Math.pceil=function(n,p){
-	return parseFloat(Math.ceil(parseFloat(n+'e'+p))+'e-'+p);
-};
-Math.clamp=function(a,b,c){
-	return Math.max(a,Math.min(b,c));
-}
+Math.pfloor=(n,p)=>parseFloat(Math.floor(parseFloat(n+'e'+p))+'e-'+p);
+Math.pround=(n,p)=>parseFloat(Math.round(parseFloat(n+'e'+p))+'e-'+p);
+Math.pceil=(n,p)=>parseFloat(Math.ceil(parseFloat(n+'e'+p))+'e-'+p);
+Math.clamp=(a,b,c)=>Math.max(a,Math.min(b,c));
