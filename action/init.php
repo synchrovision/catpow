@@ -45,8 +45,6 @@ wp_localize_script('wpinfo','wpinfo',array(
 	'theme'=>get_stylesheet(),
 	'use_functions'=>cp::$use_functions
 ));
-wp_register_script('init-catpow-namespace',null);
-wp_add_inline_script('init-catpow-namespace','window.Catpow=window.Catpow || {};window.Catpow.UI=window.Catpow.UI || {};');
 
 if($GLOBALS['is_IE']){
 	wp_enqueue_script('polyfill','https://polyfill.io/v3/polyfill.min.js');
