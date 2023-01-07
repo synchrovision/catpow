@@ -1,37 +1,17 @@
-Catpow.SelectNumber = function (props) {
-  var _props$min = props.min,
-      min = _props$min === void 0 ? 1 : _props$min,
-      _props$max = props.max,
-      max = _props$max === void 0 ? 10 : _props$max,
-      label = props.label,
-      _props$step = props.step,
-      step = _props$step === void 0 ? 1 : _props$step,
-      value = props.value,
-      _onChange = props.onChange;
-  var _wp$element = wp.element,
-      useState = _wp$element.useState,
-      useMemo = _wp$element.useMemo;
-  var selections = useMemo(function () {
-    var selections = [];
-
-    for (var i = parseInt(min); i <= parseInt(max); i += parseInt(step)) {
-      selections.push(i);
-    }
-
-    return selections;
-  }, [min, max, step]);
-  return wp.element.createElement("select", {
-    className: "SelectNumber",
-    onChange: function onChange(e) {
-      _onChange(e.currentTarget.value);
-    }
-  }, label && wp.element.createElement("option", {
-    selected: value === undefined
-  }, label), selections.map(function (i) {
-    return wp.element.createElement("option", {
-      value: i,
-      selected: value === i,
-      key: i
-    }, i);
-  }));
-};
+(() => {
+  // ../components/SelectNumber/component.jsx
+  Catpow.SelectNumber = (props) => {
+    const { min = 1, max = 10, label, step = 1, value, onChange } = props;
+    const { useState, useMemo } = wp.element;
+    const selections = useMemo(() => {
+      const selections2 = [];
+      for (let i = parseInt(min); i <= parseInt(max); i += parseInt(step)) {
+        selections2.push(i);
+      }
+      return selections2;
+    }, [min, max, step]);
+    return /* @__PURE__ */ React.createElement("select", { className: "SelectNumber", onChange: (e) => {
+      onChange(e.currentTarget.value);
+    } }, label && /* @__PURE__ */ React.createElement("option", { selected: value === void 0 }, label), selections.map((i) => /* @__PURE__ */ React.createElement("option", { value: i, selected: value === i, key: i }, i)));
+  };
+})();

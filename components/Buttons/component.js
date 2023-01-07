@@ -1,73 +1,34 @@
-Catpow.Buttons = function (props) {
-  var _props$className = props.className,
-      className = _props$className === void 0 ? "medium" : _props$className;
-  var useMemo = wp.element.useMemo;
-
-  if (props.children) {
-    return wp.element.createElement("div", {
-      className: "Buttons " + className
-    }, props.children);
-  }
-
-  var onClick = props.onClick;
-  var options = useMemo(function () {
-    if (Array.isArray(props.options)) {
-      return props.options.map(function (option) {
-        if (babelHelpers.typeof(option) === 'object') {
-          return option;
-        }
-
-        var _split = (option + ':').split(':'),
-            _split2 = babelHelpers.slicedToArray(_split, 2),
-            label = _split2[0],
-            className = _split2[1];
-
-        return {
-          label: label,
-          className: className,
-          value: label
-        };
-      });
+(() => {
+  // ../components/Buttons/component.jsx
+  Catpow.Buttons = (props) => {
+    const { className = "medium" } = props;
+    const { useMemo } = wp.element;
+    if (props.children) {
+      return /* @__PURE__ */ React.createElement("div", { className: "Buttons " + className }, props.children);
     }
-
-    return Object.keys(props.options).map(function (key) {
-      var _split3 = (key + ':').split(':'),
-          _split4 = babelHelpers.slicedToArray(_split3, 2),
-          label = _split4[0],
-          className = _split4[1];
-
-      return {
-        label: label,
-        className: className,
-        value: props.options[key]
-      };
-    });
-  }, [props.options]);
-  return wp.element.createElement("div", {
-    className: "Buttons " + className
-  }, options.map(function (option, index) {
-    return wp.element.createElement(Catpow.Button, babelHelpers.extends({
-      onClick: onClick
-    }, option, {
-      key: index
-    }));
-  }));
-};
-
-Catpow.Button = function (props) {
-  var _props$className2 = props.className,
-      className = _props$className2 === void 0 ? "secondary" : _props$className2,
-      label = props.label,
-      value = props.value,
-      _onClick = props.onClick;
-  var disabled = props.disabled || className.split(' ').indexOf('disabled') !== -1;
-  return wp.element.createElement("button", {
-    className: "Button " + className,
-    onClick: function onClick() {
-      !props.disabled && _onClick(value);
-    },
-    disabled: props.disabled
-  }, wp.element.createElement("div", {
-    className: "ButtonIcon"
-  }, " "), label);
-};
+    const { onClick } = props;
+    const options = useMemo(() => {
+      if (Array.isArray(props.options)) {
+        return props.options.map((option) => {
+          if (typeof option === "object") {
+            return option;
+          }
+          const [label, className2] = (option + ":").split(":");
+          return { label, className: className2, value: label };
+        });
+      }
+      return Object.keys(props.options).map((key) => {
+        const [label, className2] = (key + ":").split(":");
+        return { label, className: className2, value: props.options[key] };
+      });
+    }, [props.options]);
+    return /* @__PURE__ */ React.createElement("div", { className: "Buttons " + className }, options.map((option, index) => /* @__PURE__ */ React.createElement(Catpow.Button, { onClick, ...option, key: index })));
+  };
+  Catpow.Button = (props) => {
+    const { className = "secondary", label, value, onClick } = props;
+    const disabled = props.disabled || className.split(" ").indexOf("disabled") !== -1;
+    return /* @__PURE__ */ React.createElement("button", { className: "Button " + className, onClick: () => {
+      !props.disabled && onClick(value);
+    }, disabled: props.disabled }, /* @__PURE__ */ React.createElement("div", { className: "ButtonIcon" }, " "), label);
+  };
+})();

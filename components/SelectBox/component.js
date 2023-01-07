@@ -1,23 +1,7 @@
-Catpow.SelectBox = function (props) {
-  var label = props.label,
-      value = props.value,
-      options = props.options,
-      _onChange = props.onChange;
-  return wp.element.createElement("select", {
-    className: "SelectBox",
-    value: value,
-    onChange: function onChange(e) {
-      return _onChange(event.target.value);
-    }
-  }, label && wp.element.createElement("option", {
-    value: false
-  }, label), babelHelpers.typeof(options) === 'object' && (Array.isArray(options) ? options.map(function (val) {
-    return wp.element.createElement("option", {
-      value: val
-    }, val);
-  }) : Object.keys(options).map(function (label) {
-    return wp.element.createElement("option", {
-      value: options[label]
-    }, label);
-  })));
-};
+(() => {
+  // ../components/SelectBox/component.jsx
+  Catpow.SelectBox = (props) => {
+    const { label, value, options, onChange } = props;
+    return /* @__PURE__ */ React.createElement("select", { className: "SelectBox", value, onChange: (e) => onChange(event.target.value) }, label && /* @__PURE__ */ React.createElement("option", { value: false }, label), typeof options === "object" && (Array.isArray(options) ? options.map((val) => /* @__PURE__ */ React.createElement("option", { value: val }, val)) : Object.keys(options).map((label2) => /* @__PURE__ */ React.createElement("option", { value: options[label2] }, label2))));
+  };
+})();

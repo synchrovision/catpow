@@ -1,67 +1,51 @@
-Catpow.CheckBoxes = function (props) {
-  var useMemo = wp.element.useMemo;
-  var _props$value = props.value,
-      value = _props$value === void 0 ? [] : _props$value,
-      _onChange = props.onChange;
-  var _Catpow = Catpow,
-      CheckBox = _Catpow.CheckBox;
-  var options = useMemo(function () {
-    if (Array.isArray(props.options)) {
-      return props.options.map(function (option) {
-        if (babelHelpers.typeof(option) === 'object') {
-          return option;
-        }
-
-        return {
-          label: option,
-          value: option
-        };
-      });
-    }
-
-    return Object.keys(props.options).map(function (label) {
-      return {
-        label: label,
-        value: props.options[label]
-      };
-    });
-  }, [props.options]);
-
-  if (Array.isArray(value)) {
-    var flags = {};
-    value.map(function (val) {
-      return flags[val] = true;
-    });
-    return wp.element.createElement("div", {
-      className: "CheckBoxes"
-    }, options.map(function (option) {
-      return wp.element.createElement(CheckBox, {
-        label: option.label,
-        onChange: function onChange(selected) {
-          if (selected) {
-            flags[option.value] = true;
-          } else {
-            delete flags[option.value];
+(() => {
+  // ../components/CheckBoxes/component.jsx
+  Catpow.CheckBoxes = (props) => {
+    const { useMemo } = wp.element;
+    const { value = [], onChange } = props;
+    const { CheckBox } = Catpow;
+    const options = useMemo(() => {
+      if (Array.isArray(props.options)) {
+        return props.options.map((option) => {
+          if (typeof option === "object") {
+            return option;
           }
-
-          _onChange(Object.keys(flags));
-        },
-        selected: flags[option.value]
+          return { label: option, value: option };
+        });
+      }
+      return Object.keys(props.options).map((label) => {
+        return { label, value: props.options[label] };
       });
-    }));
-  }
-
-  return wp.element.createElement("div", {
-    className: "CheckBoxes"
-  }, options.map(function (option) {
-    return wp.element.createElement(CheckBox, {
-      label: option.label,
-      onChange: function onChange(selected) {
-        value[option.value] = selected;
-
-        _onChange(option.value, selected, value);
-      },
-      selected: value[option.value]
-    });
-  }));
-};
+    }, [props.options]);
+    if (Array.isArray(value)) {
+      const flags = {};
+      value.map((val) => flags[val] = true);
+      return /* @__PURE__ */ React.createElement("div", { className: "CheckBoxes" }, options.map((option) => /* @__PURE__ */ React.createElement(
+        CheckBox,
+        {
+          label: option.label,
+          onChange: (selected) => {
+            if (selected) {
+              flags[option.value] = true;
+            } else {
+              delete flags[option.value];
+            }
+            onChange(Object.keys(flags));
+          },
+          selected: flags[option.value]
+        }
+      )));
+    }
+    return /* @__PURE__ */ React.createElement("div", { className: "CheckBoxes" }, options.map((option) => /* @__PURE__ */ React.createElement(
+      CheckBox,
+      {
+        label: option.label,
+        onChange: (selected) => {
+          value[option.value] = selected;
+          onChange(option.value, selected, value);
+        },
+        selected: value[option.value]
+      }
+    )));
+  };
+})();

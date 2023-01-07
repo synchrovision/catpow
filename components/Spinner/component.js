@@ -1,17 +1,7 @@
-Catpow.Spinner = function (props) {
-	var _props$type = props.type,
-	    type = _props$type === undefined ? 'circle' : _props$type;
-
-
-	return wp.element.createElement(
-		"div",
-		{ className: "Spinner Spinner-" + type },
-		wp.element.createElement(
-			"div",
-			{ className: "graphics" },
-			wp.element.createElement("div", { className: "graphic graphic1" }),
-			wp.element.createElement("div", { className: "graphic graphic2" }),
-			wp.element.createElement("div", { className: "graphic graphic3" })
-		)
-	);
-};
+(() => {
+  // ../components/Spinner/component.jsx
+  Catpow.Spinner = (props) => {
+    const { type = "circle" } = props;
+    return /* @__PURE__ */ React.createElement("div", { className: `Spinner Spinner-${type}` }, /* @__PURE__ */ React.createElement("div", { className: "graphics" }, /* @__PURE__ */ React.createElement("div", { className: "graphic graphic1" }), /* @__PURE__ */ React.createElement("div", { className: "graphic graphic2" }), /* @__PURE__ */ React.createElement("div", { className: "graphic graphic3" })));
+  };
+})();

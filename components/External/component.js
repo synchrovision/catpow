@@ -1,55 +1,40 @@
-Catpow.External = function (props) {
-  var children = props.children,
-      trace = props.trace;
-  var _wp$element = wp.element,
-      render = _wp$element.render,
-      useState = _wp$element.useState,
-      useMemo = _wp$element.useMemo,
-      useCallback = _wp$element.useCallback,
-      useEffect = _wp$element.useEffect,
-      useRef = _wp$element.useRef,
-      createPortal = _wp$element.createPortal;
-  var ref = useRef({
-    contents: false,
-    setContents: function setContents() {}
-  });
-  var el = useMemo(function () {
-    if (props.id) {
-      var exEl = document.getElementById(props.id);
-
-      if (exEl) {
-        return exEl;
-      }
-    }
-
-    var el = document.createElement('div');
-
-    if (props.id) {
-      el.id = props.id;
-    }
-
-    el.className = props.className;
-    document.body.appendChild(el);
-    return el;
-  }, []);
-
-  if (trace) {
-    useEffect(function () {
-      el.style.position = 'absolute';
-      var timer = setInterval(function () {
-        if (trace.getBoundingClientRect) {
-          var bnd = trace.getBoundingClientRect();
-          el.style.left = window.scrollX + bnd.left + 'px';
-          el.style.top = window.scrollY + bnd.top + 'px';
-          el.style.width = bnd.width + 'px';
-          el.style.height = bnd.height + 'px';
+(() => {
+  // ../components/External/component.jsx
+  Catpow.External = (props) => {
+    const { children, trace } = props;
+    const { render, useState, useMemo, useCallback, useEffect, useRef, createPortal } = wp.element;
+    const ref = useRef({ contents: false, setContents: () => {
+    } });
+    const el = useMemo(() => {
+      if (props.id) {
+        const exEl = document.getElementById(props.id);
+        if (exEl) {
+          return exEl;
         }
-      }, 50);
-      return function () {
-        return clearInterval(timer);
-      };
-    }, [trace]);
-  }
-
-  return createPortal(children, el);
-};
+      }
+      const el2 = document.createElement("div");
+      if (props.id) {
+        el2.id = props.id;
+      }
+      el2.className = props.className;
+      document.body.appendChild(el2);
+      return el2;
+    }, []);
+    if (trace) {
+      useEffect(() => {
+        el.style.position = "absolute";
+        const timer = setInterval(() => {
+          if (trace.getBoundingClientRect) {
+            const bnd = trace.getBoundingClientRect();
+            el.style.left = window.scrollX + bnd.left + "px";
+            el.style.top = window.scrollY + bnd.top + "px";
+            el.style.width = bnd.width + "px";
+            el.style.height = bnd.height + "px";
+          }
+        }, 50);
+        return () => clearInterval(timer);
+      }, [trace]);
+    }
+    return createPortal(children, el);
+  };
+})();

@@ -1,33 +1,24 @@
-/**
-* Finderのレイアウトを変更する
-*/
-
-Catpow.Finder.SelectLayout = function (props) {
-	var useContext = wp.element.useContext;
-
-	var _useContext = useContext(Catpow.FinderContext),
-	    state = _useContext.state,
-	    dispatch = _useContext.dispatch;
-
-	var selections = [{ value: 'list', icon: 'excerpt-view' }, { value: 'grid', icon: 'grid-view' }, { value: 'table', icon: 'list-view' }];
-	return wp.element.createElement(
-		'div',
-		{ className: 'FinderControl FinderSelectLayout' },
-		wp.element.createElement(
-			'ul',
-			{ className: 'items' },
-			selections.map(function (sel) {
-				return wp.element.createElement(
-					'li',
-					{
-						className: 'item' + (state.layout === sel.value ? ' active' : ''),
-						onClick: function onClick() {
-							dispatch({ type: 'setLayout', layout: sel.value });
-						}
-					},
-					wp.element.createElement('div', { 'class': "icon dashicons dashicons-" + sel.icon })
-				);
-			})
-		)
-	);
-};
+(() => {
+  // ../components/Finder/SelectLayout/component.jsx
+  Catpow.Finder.SelectLayout = (props) => {
+    const { useContext } = wp.element;
+    const { state, dispatch } = useContext(Catpow.FinderContext);
+    const selections = [
+      { value: "list", icon: "excerpt-view" },
+      { value: "grid", icon: "grid-view" },
+      { value: "table", icon: "list-view" }
+    ];
+    return /* @__PURE__ */ React.createElement("div", { className: "FinderControl FinderSelectLayout" }, /* @__PURE__ */ React.createElement("ul", { className: "items" }, selections.map((sel) => {
+      return /* @__PURE__ */ React.createElement(
+        "li",
+        {
+          className: "item" + (state.layout === sel.value ? " active" : ""),
+          onClick: () => {
+            dispatch({ type: "setLayout", layout: sel.value });
+          }
+        },
+        /* @__PURE__ */ React.createElement("div", { class: "icon dashicons dashicons-" + sel.icon })
+      );
+    })));
+  };
+})();
