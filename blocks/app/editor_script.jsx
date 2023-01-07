@@ -51,7 +51,7 @@ wp.blocks.registerBlockType('catpow/app',{
 					<TreeSelect
 						label='path'
 						selectedId={content_path}
-						tree={cpEmbeddablesTree.app}
+						tree={Object.values(cpEmbeddablesTree.app)}
 						onChange={(content_path)=>{
 							const path=content_path.substr(0,content_path.lastIndexOf('/'));
 							setAttributes({content_path,options:false,props:JSON.stringify({path})});
