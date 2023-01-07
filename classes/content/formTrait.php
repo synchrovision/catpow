@@ -71,8 +71,8 @@ trait formTrait{
 	
 	/*render*/
 	public function render($slug=false,$vars=false){
-		wp_enqueue_script('cp_form');
-		wp_enqueue_script('cp_rest_nonce');
+		wp_enqueue_script('cpform');
+		wp_enqueue_script('cpform.nonce');
 		\Catpow\api::register_nonce('form/post');
 		?>
 		<form action="<?= home_url(); ?>" method="get" id="<?= $this->form_id ?>" class="cp_form" enctype="multipart/form-data">

@@ -11,7 +11,7 @@ class color extends meta{
 	public static function input($meta,$prm){
 		wp_enqueue_style('wp-color-picker');
 		wp_enqueue_script('wp-color-picker');
-		wp_enqueue_script('cp_colorpicker_script');
+		wp_enqueue_script('jquery.colorpicker.setup');
 		return parent::input($meta,$prm);
 	}
 	public static function resolve_conf($conf){

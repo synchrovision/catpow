@@ -134,7 +134,7 @@ class meta extends content{
 	}
 	
 	public function get_multiple_input_buttons(){
-		wp_enqueue_script('cp_multiple_input');
+		wp_enqueue_script('cp.multiple_input');
 		return
 			'<div class="multiple-input-buttons">'.
 			'<span class="btn-inc" data-role="cp-input-item-increase"></span>'.
@@ -144,8 +144,8 @@ class meta extends content{
 		echo $this->get_multiple_input_buttons();
 	}
 	public function get_sort_input_buttons(){
-		wp_enqueue_script('cp_multiple_input');
-		wp_enqueue_script('cp_sort_input');
+		wp_enqueue_script('cp.multiple_input');
+		wp_enqueue_script('jquery.catpow.sort_input');
 		wp_enqueue_script('jquery-ui-sortable');
 		return
 			'<div class="sort-input-buttons">'.
