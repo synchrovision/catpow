@@ -2,13 +2,20 @@
 /*script*/
 $js_files=[];
 $cpjs_dir=dir(WP_PLUGIN_DIR.'/catpow/js');
+$deps_map=[
+	'jquery'=>['jquery'],
+	'cp'=>['catpow'],
+	'cpform'=>['catpow','wp-api-fetch'],
+	'cpui'=>['catpow','wp-element'],
+	'wp'=>['wpinfo']
+];
 while($fname = $cpjs_dir->read()){
 	if(strpos('.',$fname)===0)continue;
 	if(substr($fname,-3)==='.js'){
 		wp_register_script(
 			substr($fname,0,-3),
 			plugins_url().'/catpow/js/'.$fname,
-			($fname==='cp_form.js' || substr($fname,0,7)==='cp_rest')?['jquery','wp-api-fetch']:['jquery'],
+			$deps_map[strstr($fname,'.',true)]??[],
 			filemtime(WP_PLUGIN_DIR.'/catpow/js/'.$fname),
 			true
 		);
