@@ -1,68 +1,70 @@
-﻿jQuery(function($){if(!("AjaxZip3" in window)){$.getScript("https://ajaxzip3.github.io/ajaxzip3.js");}});
+﻿Catpow.UI.ZipCode=(props)=>{
+	const {useState,useCallback,useReducer,useMemo,useEffect,useRef}=wp.element;
+	const [isComposing,setIsComposing]=useState(false);
+	const ref0=useRef(),ref1=useRef();
+	const refs=useMemo(()=>[ref0,ref1],[ref0,ref1]);
 
-Catpow.UI.ZipCode=class extends wp.element.Component{
-	constructor(props) {
-		super(props);
-		this.secs0=React.createRef();
-		this.secs1=React.createRef();
-		this.state={value:props.value || '-',isComposing:false};
-	}
-	render(){
-		var {value,isComposing}=this.state;
-		var secs=value.split('-').slice(0,2);
-		
-		const setValue=(i,val)=>{
-			if(!val.match(/^\d+$/)){val='';}
-			if(val.length==7){
-				secs[0]=val.substring(0,3);
-				secs[1]=val.substring(3);
-			}
-			else{
-				secs[i]=val;
-				if(i==0 && val.length>2){
-					if(!isComposing){
-						this.secs1.current.focus();
-					}
-				}
-			}
-			AjaxZip3.zip2addr(this.secs0.current,this.secs1.current,this.props.pref,this.props.addr);
-			this.setState({value:secs.join('-')});
+	const reducer=useCallback((state,action)=>{
+		const secs=[...state.secs];
+		if(!action.value.match(/^\d+$/)){action.value='';}
+		if(action.value.length===7){
+			secs[0]=action.value.substring(0,3);
+			secs[1]=action.value.substring(3);
 		}
-		
-		const input=(i)=>(
+		else{
+			secs[action.index]=action.value;
+		}
+		return {value:secs.join('-'),secs};
+	},[]);
+	const [state,update]=useReducer(reducer,{
+		value:props.value,
+		secs:props.value.split('-').slice(0,2)
+	});
+	
+	useEffect(()=>{
+		if('AjaxZip3' in window){
+			AjaxZip3.zip2addr(ref0.current,ref1.current,props.pref,props.addr);
+		}
+	},[state.value]);
+	useEffect(()=>{
+		if(state.secs[0].length>2 && !isComposing){
+			ref1.current.focus();
+		}
+	},[state.secs[0].length,isComposing]);
+
+	const Input=useCallback((props)=>{
+		const {index,value}=props;
+		return (
 			<input
 				type="text"
-				size={["3","4"][i]}
-				className={"sec"+i}
+				size={["3","4"][index]}
+				className={"sec"+index}
 				onChange={(e)=>{
-					var val=e.target.value;
-					setValue(i,e.target.value);
+					update({index,value:e.target.value});
 				}}
 				onCompositionStart={(e)=>{
-					this.setState({isComposing:true});
+					setIsComposing(true);
 				}}
 				onCompositionEnd={(e)=>{
-					isComposing=false;
-					setValue(i,e.target.value);
-					this.setState({isComposing});
+					setIsComposing(false);
+					update({index,value:e.target.value});
 				}}
-				ref={this['secs'+i]}
-				value={secs[i]}
+				ref={refs[index]}
+				value={value}
 			/>
 		);
-		
-		
-		return (
-			<div className={'ZipCode'}>
-				{input(0)}
-				<span class="sep">-</span>
-				{input(1)}
+	},[update,refs]);
 
-				<Catpow.UI.HiddenValues
-					name={this.props.name}
-					value={value}
-				/>
-			</div>
-		);
-	}
+	return (
+		<div className={'ZipCode'}>
+			<Input index={0} value={state.secs[0]}/>
+			<span class="sep">-</span>
+			<Input index={1} value={state.secs[1]}/>
+
+			<Catpow.UI.HiddenValues
+				name={props.name}
+				value={state.value}
+			/>
+		</div>
+	);
 }
