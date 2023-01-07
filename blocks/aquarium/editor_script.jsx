@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/aquarium',{
+﻿wp.blocks.registerBlockType('catpow/aquarium',{
 	title: '🐾 aquarium',
 	description:'画像とテキストを３次元にレイアウトします。',
 	icon: (

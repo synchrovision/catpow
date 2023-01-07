@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/t-image',{
+﻿wp.blocks.registerBlockType('catpow/t-image',{
 	title:'🐾 T-Image',
 	description:'HTMLメール用の画像ブロックです。',
 	icon:'editor-code',

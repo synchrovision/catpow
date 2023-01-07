@@ -3,7 +3,7 @@
 * functions/[funciton]/blocks.php を埋め込み、もしくは 
 * Catpow\blocks\[funciton]::render();を実行
 */
-registerBlockType('catpow/widget',{
+wp.blocks.registerBlockType('catpow/widget',{
 	title: '🐾 Widget',
 	description:'拡張機能に定義された埋め込みコンテンツを表示します。',
 	icon: 'editor-code',

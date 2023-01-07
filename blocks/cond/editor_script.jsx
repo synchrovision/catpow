@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/cond',{
+﻿wp.blocks.registerBlockType('catpow/cond',{
 	title:'🐾 Cond',
 	description:'日時やログインユーザーによってコンテンツの表示が切り替わるコンテナです。',
 	icon:'editor-code',

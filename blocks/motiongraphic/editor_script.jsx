@@ -4,7 +4,7 @@
 */
 CP.config.motiongraphic={
 };
-registerBlockType('catpow/motiongraphic',{
+wp.blocks.registerBlockType('catpow/motiongraphic',{
 	title: '🐾 MotionGraphic',
 	icon: 'video-alt3',
 	category: 'catpow-embed',

@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/t-box',{
+﻿wp.blocks.registerBlockType('catpow/t-box',{
 	title:'🐾 T-Box',
 	description:'HTMLメール用のレイアウト調整用コンテナブロックです。',
 	icon:'editor-code',

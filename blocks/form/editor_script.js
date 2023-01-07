@@ -1,102 +1,89 @@
-// deno-fmt-ignore-file
-// deno-lint-ignore-file
-// This code was bundled using `deno bundle` and it's not recommended to edit it manually
-
-registerBlockType('catpow/form', {
-    title: '🐾 Form',
-    description: 'テーマに定義されたフォームを表示します。',
-    icon: 'editor-code',
-    category: 'catpow-embed',
+(() => {
+  // ../blocks/form/editor_script.jsx
+  wp.blocks.registerBlockType("catpow/form", {
+    title: "\u{1F43E} Form",
+    description: "\u30C6\u30FC\u30DE\u306B\u5B9A\u7FA9\u3055\u308C\u305F\u30D5\u30A9\u30FC\u30E0\u3092\u8868\u793A\u3057\u307E\u3059\u3002",
+    icon: "editor-code",
+    category: "catpow-embed",
     example: CP.example,
-    edit ({ attributes , setAttributes , className  }) {
-        const { content_path , post_data_path , inputs , data_id , values  } = attributes;
-        let postDataSelection = false;
-        Object.keys(cpEmbeddablesTree.form).forEach((parentKey)=>{
-            cpEmbeddablesTree.form[parentKey].children.map((item)=>{
-                if (item.id === content_path && item.post_data_paths) {
-                    postDataSelection = [];
-                    Object.keys(item.post_data_paths).forEach(function(key) {
-                        postDataSelection.push({
-                            id: key,
-                            name: item.post_data_paths[key]
-                        });
-                    });
-                }
+    edit({ attributes, setAttributes, className }) {
+      const { content_path, post_data_path, inputs, data_id, values } = attributes;
+      const { InspectorControls } = wp.blockEditor;
+      const { PanelBody, TreeSelect, TextareaControl, TextControl, ServerSideRender } = wp.components;
+      let postDataSelection = false;
+      Object.keys(cpEmbeddablesTree.form).forEach((parentKey) => {
+        cpEmbeddablesTree.form[parentKey].children.map((item) => {
+          if (item.id === content_path && item.post_data_paths) {
+            postDataSelection = [];
+            Object.keys(item.post_data_paths).forEach(function(key) {
+              postDataSelection.push({ id: key, name: item.post_data_paths[key] });
             });
+          }
         });
-        if (postDataSelection === false) {
-            if (post_data_path) {
-                setAttributes({
-                    post_data_path: false
-                });
-            }
-        } else {
-            if (!post_data_path || !postDataSelection.some((item)=>item['id'] === post_data_path)) {
-                setAttributes({
-                    post_data_path: postDataSelection[0]['id']
-                });
-            }
+      });
+      if (postDataSelection === false) {
+        if (post_data_path) {
+          setAttributes({ post_data_path: false });
         }
-        return [
-            wp.element.createElement("div", {
-                class: "embedded_content"
-            }, wp.element.createElement("div", {
-                class: "label"
-            }, content_path), wp.element.createElement(ServerSideRender, {
-                block: "catpow/form",
-                attributes: attributes
-            })),
-            wp.element.createElement(InspectorControls, null, wp.element.createElement(PanelBody, {
-                title: "フォーム"
-            }, wp.element.createElement(TreeSelect, {
-                label: "path",
-                selectedId: content_path,
-                tree: Object.values(cpEmbeddablesTree.form),
-                onChange: (content_path)=>{
-                    setAttributes({
-                        content_path: content_path
-                    });
-                }
-            }), postDataSelection && wp.element.createElement(TreeSelect, {
-                label: "form",
-                selectedId: post_data_path,
-                tree: postDataSelection,
-                onChange: (post_data_path)=>{
-                    setAttributes({
-                        post_data_path: post_data_path
-                    });
-                }
-            })), wp.element.createElement(PanelBody, {
-                title: "入力値",
-                initialOpen: false
-            }, wp.element.createElement(TextControl, {
-                label: "入力名",
-                value: inputs,
-                onChange: (inputs)=>{
-                    setAttributes({
-                        inputs
-                    });
-                }
-            }), wp.element.createElement(TextControl, {
-                label: "データID",
-                value: data_id,
-                onChange: (data_id)=>{
-                    setAttributes({
-                        data_id
-                    });
-                }
-            }), wp.element.createElement(TextareaControl, {
-                label: "初期値",
-                value: values,
-                onChange: (values)=>{
-                    setAttributes({
-                        values
-                    });
-                }
-            })))
-        ];
+      } else {
+        if (!post_data_path || !postDataSelection.some((item) => item["id"] === post_data_path)) {
+          setAttributes({ post_data_path: postDataSelection[0]["id"] });
+        }
+      }
+      return [
+        /* @__PURE__ */ wp.element.createElement("div", { class: "embedded_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/form", attributes })),
+        /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u30D5\u30A9\u30FC\u30E0" }, /* @__PURE__ */ wp.element.createElement(
+          TreeSelect,
+          {
+            label: "path",
+            selectedId: content_path,
+            tree: Object.values(cpEmbeddablesTree.form),
+            onChange: (content_path2) => {
+              setAttributes({ content_path: content_path2 });
+            }
+          }
+        ), postDataSelection && /* @__PURE__ */ wp.element.createElement(
+          TreeSelect,
+          {
+            label: "form",
+            selectedId: post_data_path,
+            tree: postDataSelection,
+            onChange: (post_data_path2) => {
+              setAttributes({ post_data_path: post_data_path2 });
+            }
+          }
+        )), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u5165\u529B\u5024", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+          TextControl,
+          {
+            label: "\u5165\u529B\u540D",
+            value: inputs,
+            onChange: (inputs2) => {
+              setAttributes({ inputs: inputs2 });
+            }
+          }
+        ), /* @__PURE__ */ wp.element.createElement(
+          TextControl,
+          {
+            label: "\u30C7\u30FC\u30BFID",
+            value: data_id,
+            onChange: (data_id2) => {
+              setAttributes({ data_id: data_id2 });
+            }
+          }
+        ), /* @__PURE__ */ wp.element.createElement(
+          TextareaControl,
+          {
+            label: "\u521D\u671F\u5024",
+            value: values,
+            onChange: (values2) => {
+              setAttributes({ values: values2 });
+            }
+          }
+        )))
+      ];
     },
-    save ({ attributes , className , setAttributes  }) {
-        return 'null';
+    save({ attributes, className, setAttributes }) {
+      return "null";
     }
-});
+  });
+})();

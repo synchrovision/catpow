@@ -4,7 +4,7 @@
 		image:{sources:'sources',src:"src",alt:"alt",code:"code"}
 	}
 };
-registerBlockType('catpow/unit',{
+wp.blocks.registerBlockType('catpow/unit',{
 	title:'🐾 Unit',
 	description:'画像とテキストを並べてレイアウトするためのブロックです。',
 	icon:'align-pull-left',

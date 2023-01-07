@@ -3,7 +3,7 @@
 		image:{src:"src",alt:"alt",items:"items"}
 	}
 };
-registerBlockType('catpow/faq',{
+wp.blocks.registerBlockType('catpow/faq',{
 	title: '🐾 FaQ',
 	description:'質問と回答の一覧ブロックです。',
 	icon: 'editor-help',

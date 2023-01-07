@@ -1,4 +1,6 @@
-﻿CP.config.section={
+﻿const {__}=wp.i18n;
+
+CP.config.section={
 	devices:['sp','tb'],
 	imageKeys:{
 		navIcon:{src:"navIcon"},
@@ -13,8 +15,7 @@
 		headerImage:'medium_large'
 	}
 };
-
-registerBlockType('catpow/section',{
+wp.blocks.registerBlockType('catpow/section',{
 	title: '🐾 Section',
 	description:__('見出しと内容のまとまりを表すセクションのブロックです。','catpow'),
 	icon: 'id-alt',

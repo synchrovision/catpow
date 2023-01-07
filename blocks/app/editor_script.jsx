@@ -2,7 +2,7 @@
 * 現在の投稿を規定のテンプレートを用いて表示する
 * APIを用いて様々な操作を行うcomponentを表示する
 */
-registerBlockType('catpow/app',{
+wp.blocks.registerBlockType('catpow/app',{
 	title: '🐾 App',
 	icon: 'editor-code',
 	category: 'catpow-embed',

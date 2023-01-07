@@ -4,7 +4,7 @@
 	}
 };
 
-registerBlockType('catpow/honeycomb',{
+wp.blocks.registerBlockType('catpow/honeycomb',{
 	title: '🐾 honeycomb',
 	description:'六角形のパネルをレイアウトします。',
 	icon:(

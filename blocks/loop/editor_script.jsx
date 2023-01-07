@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/loop',{
+﻿wp.blocks.registerBlockType('catpow/loop',{
 	title:'🐾 Loop',
 	description:'テーマに定義されたテンプレートで投稿を表示します。',
 	icon:'editor-code',

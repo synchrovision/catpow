@@ -1,127 +1,79 @@
-CP.config.picture = {
-  devices: ['sp', 'tb'],
-  imageKeys: {
-    image: {
-      sources: 'sources',
-      src: "src",
-      alt: "alt",
-      code: "code"
+(() => {
+  // ../blocks/picture/editor_script.jsx
+  CP.config.picture = {
+    devices: ["sp", "tb"],
+    imageKeys: {
+      image: { sources: "sources", src: "src", alt: "alt", code: "code" }
     }
-  }
-};
-registerBlockType('catpow/picture', {
-  title: '🐾 Picture',
-  description: '画面サイズに応じて切り替わる画像。',
-  icon: 'id-alt',
-  category: 'catpow',
-  attributes: {
-    classes: {
-      source: 'attribute',
-      selector: 'div',
-      attribute: 'class',
-      default: 'wp-block-catpow-picture'
+  };
+  wp.blocks.registerBlockType("catpow/picture", {
+    title: "\u{1F43E} Picture",
+    description: "\u753B\u9762\u30B5\u30A4\u30BA\u306B\u5FDC\u3058\u3066\u5207\u308A\u66FF\u308F\u308B\u753B\u50CF\u3002",
+    icon: "id-alt",
+    category: "catpow",
+    attributes: {
+      classes: { source: "attribute", selector: "div", attribute: "class", default: "wp-block-catpow-picture" },
+      sources: CP.getPictureSoucesAttributesForDevices(CP.config.picture.devices),
+      mime: { source: "attribute", selector: "[src]", attribute: "data-mime" },
+      src: { source: "attribute", selector: "[src]", attribute: "src", default: cp.theme_url + "/images/dummy.jpg" },
+      alt: { source: "attribute", selector: "[src]", attribute: "alt" },
+      code: { source: "text" }
     },
-    sources: CP.getPictureSoucesAttributesForDevices(CP.config.picture.devices),
-    mime: {
-      source: 'attribute',
-      selector: '[src]',
-      attribute: 'data-mime'
+    example: CP.example,
+    edit({ attributes, className, setAttributes, isSelected }) {
+      const { classes, sources, src, srcset, alt, code, device } = attributes;
+      const states = CP.wordsToFlags(classes);
+      const { devices, imageKeys } = CP.config.picture;
+      const selectiveClasses = [
+        { input: "picture", label: "\u753B\u50CF", keys: imageKeys.image, devices, isTemplate: states.isTemplate },
+        {
+          label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
+          values: "isTemplate",
+          sub: [
+            {
+              input: "text",
+              label: "\u753B\u50CF\u30B3\u30FC\u30C9",
+              key: "code",
+              cond: true
+            }
+          ]
+        }
+      ];
+      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices }), /* @__PURE__ */ wp.element.createElement("div", { className: classes + (device ? " alt_content " + device : "") }, device && /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(
+        CP.SelectResponsiveImage,
+        {
+          attr: attributes,
+          set: setAttributes,
+          keys: imageKeys.image,
+          device,
+          devices,
+          isTemplate: states.isTemplate
+        }
+      )), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: "\u30AF\u30E9\u30B9",
+          icon: "art",
+          set: setAttributes,
+          attr: attributes,
+          selectiveClasses,
+          filters: CP.filters.picture || {}
+        }
+      )));
     },
-    src: {
-      source: 'attribute',
-      selector: '[src]',
-      attribute: 'src',
-      default: cp.theme_url + '/images/dummy.jpg'
-    },
-    alt: {
-      source: 'attribute',
-      selector: '[src]',
-      attribute: 'alt'
-    },
-    code: {
-      source: 'text'
+    save({ attributes, className, setAttributes }) {
+      const { classes, srouces, src, srcset, alt, code } = attributes;
+      const states = CP.wordsToFlags(classes);
+      const { devices, imageKeys } = CP.config.picture;
+      return /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement(
+        CP.ResponsiveImage,
+        {
+          attr: attributes,
+          keys: imageKeys.image,
+          devices,
+          isTemplate: states.isTemplate
+        }
+      ));
     }
-  },
-  example: CP.example,
-  edit: function edit(_ref) {
-    var attributes = _ref.attributes,
-        className = _ref.className,
-        setAttributes = _ref.setAttributes,
-        isSelected = _ref.isSelected;
-    var classes = attributes.classes,
-        sources = attributes.sources,
-        src = attributes.src,
-        srcset = attributes.srcset,
-        alt = attributes.alt,
-        code = attributes.code,
-        device = attributes.device;
-    var states = CP.wordsToFlags(classes);
-    var _CP$config$picture = CP.config.picture,
-        devices = _CP$config$picture.devices,
-        imageKeys = _CP$config$picture.imageKeys;
-    var selectiveClasses = [{
-      input: 'picture',
-      label: '画像',
-      keys: imageKeys.image,
-      devices: devices,
-      isTemplate: states.isTemplate
-    }, {
-      label: 'テンプレート',
-      values: 'isTemplate',
-      sub: [{
-        input: 'text',
-        label: '画像コード',
-        key: 'code',
-        cond: true
-      }]
-    }];
-    return wp.element.createElement(Fragment, null, wp.element.createElement(CP.SelectDeviceToolbar, {
-      attr: attributes,
-      set: setAttributes,
-      devices: devices
-    }), wp.element.createElement("div", {
-      className: classes + (device ? ' alt_content ' + device : '')
-    }, device && wp.element.createElement("div", {
-      class: "label"
-    }, wp.element.createElement(Icon, {
-      icon: CP.devices[device].icon
-    })), wp.element.createElement(CP.SelectResponsiveImage, {
-      attr: attributes,
-      set: setAttributes,
-      keys: imageKeys.image,
-      device: device,
-      devices: devices,
-      isTemplate: states.isTemplate
-    })), wp.element.createElement(InspectorControls, null, wp.element.createElement(CP.SelectClassPanel, {
-      title: "\u30AF\u30E9\u30B9",
-      icon: "art",
-      set: setAttributes,
-      attr: attributes,
-      selectiveClasses: selectiveClasses,
-      filters: CP.filters.picture || {}
-    })));
-  },
-  save: function save(_ref2) {
-    var attributes = _ref2.attributes,
-        className = _ref2.className,
-        setAttributes = _ref2.setAttributes;
-    var classes = attributes.classes,
-        srouces = attributes.srouces,
-        src = attributes.src,
-        srcset = attributes.srcset,
-        alt = attributes.alt,
-        code = attributes.code;
-    var states = CP.wordsToFlags(classes);
-    var _CP$config$picture2 = CP.config.picture,
-        devices = _CP$config$picture2.devices,
-        imageKeys = _CP$config$picture2.imageKeys;
-    return wp.element.createElement("div", {
-      className: classes
-    }, wp.element.createElement(CP.ResponsiveImage, {
-      attr: attributes,
-      keys: imageKeys.image,
-      devices: devices,
-      isTemplate: states.isTemplate
-    }));
-  }
-});
+  });
+})();

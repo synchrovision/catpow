@@ -1,286 +1,221 @@
-CP.config.panes = {
-  imageKeys: {
-    image: {
-      src: "src",
-      alt: "alt",
-      code: "imageCode",
-      items: "items"
-    },
-    symbol: {
-      src: "symbolSrc",
-      alt: "symbolAlt",
-      code: "symbolCode",
-      items: "items"
+(() => {
+  // ../blocks/panes/editor_script.jsx
+  CP.config.panes = {
+    imageKeys: {
+      image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
+      symbol: { src: "symbolSrc", alt: "symbolAlt", code: "symbolCode", items: "items" }
     }
-  }
-};
-registerBlockType('catpow/panes', {
-  title: '🐾 Panes',
-  description: '矩形の画像とテキストのペアのリスト。',
-  icon: 'editor-ul',
-  category: 'catpow',
-  transforms: {
-    from: [{
-      type: 'block',
-      blocks: CP.listedConvertibles,
-      transform: function transform(attributes) {
-        attributes.classes = 'wp-block-catpow-panes';
-        return createBlock('catpow/panes', attributes);
-      }
-    }]
-  },
-  example: CP.example,
-  edit: function edit(_ref) {
-    var attributes = _ref.attributes,
-        className = _ref.className,
-        setAttributes = _ref.setAttributes,
-        isSelected = _ref.isSelected;
-    var _attributes$items = attributes.items,
-        items = _attributes$items === void 0 ? [] : _attributes$items,
-        _attributes$classes = attributes.classes,
-        classes = _attributes$classes === void 0 ? '' : _attributes$classes,
-        loopCount = attributes.loopCount,
-        doLoop = attributes.doLoop,
-        _attributes$EditMode = attributes.EditMode,
-        EditMode = _attributes$EditMode === void 0 ? false : _attributes$EditMode,
-        _attributes$AltMode = attributes.AltMode,
-        AltMode = _attributes$AltMode === void 0 ? false : _attributes$AltMode;
-    var states = CP.wordsToFlags(classes);
-    var imageKeys = CP.config.panes.imageKeys;
-    var selectiveClasses = [{
-      label: 'シンボル',
-      values: 'hasSymbol'
-    }, {
-      label: 'テンプレート',
-      values: 'isTemplate',
-      sub: [{
-        input: 'bool',
-        label: 'ループ',
-        key: 'doLoop',
-        sub: [{
-          label: 'content path',
-          input: 'text',
-          key: 'content_path'
-        }, {
-          label: 'query',
-          input: 'textarea',
-          key: 'query'
-        }, {
-          label: 'プレビューループ数',
-          input: 'range',
-          key: 'loopCount',
-          min: 1,
-          max: 16
-        }]
-      }]
-    }];
-    var itemSelectiveClasses = ['color', 'pattern', {
-      input: 'symbol',
-      keys: imageKeys.symbol,
-      cond: states.hasSymbol
-    }, {
-      input: 'text',
-      label: 'シンボル画像コード',
-      key: 'symbolCode',
-      cond: states.isTemplate && states.hasSymbol
-    }, {
-      input: 'text',
-      label: '画像コード',
-      key: 'imageCode',
-      cond: states.isTemplate
-    }];
-
-    var save = function save() {
-      setAttributes({
-        items: JSON.parse(JSON.stringify(items))
-      });
-    };
-
-    var rtn = [];
-    items.map(function (item, index) {
-      if (!item.controlClasses) {
-        item.controlClasses = 'control';
-      }
-
-      rtn.push(wp.element.createElement(CP.Item, {
-        tag: "li",
-        set: setAttributes,
-        attr: attributes,
-        items: items,
-        index: index,
-        isSelected: isSelected
-      }, wp.element.createElement("div", {
-        class: "image"
-      }, wp.element.createElement(CP.SelectResponsiveImage, {
-        attr: attributes,
-        set: setAttributes,
-        keys: imageKeys.image,
-        index: index,
-        size: "large",
-        isTemplate: states.isTemplate
-      })), wp.element.createElement("div", {
-        class: "contents"
-      }, wp.element.createElement("div", {
-        className: "text"
-      }, states.hasSymbol && wp.element.createElement("div", {
-        className: "symbol"
-      }, wp.element.createElement(CP.ResponsiveImage, {
-        attr: attributes,
-        keys: imageKeys.symbol,
-        index: index,
-        size: "medium",
-        isTemplate: states.isTemplate
-      })), wp.element.createElement("h3", null, wp.element.createElement(RichText, {
-        onChange: function onChange(title) {
-          item.title = title;
-          save();
-        },
-        value: item.title
-      })), wp.element.createElement("p", null, wp.element.createElement(RichText, {
-        onChange: function onChange(titleCaption) {
-          item.titleCaption = titleCaption;
-          save();
-        },
-        value: item.titleCaption
-      })))), states.hasLink && isSelected && wp.element.createElement("div", {
-        className: "link"
-      }, wp.element.createElement("p", {
-        contentEditable: true,
-        onBlur: function onBlur(e) {
-          item.linkUrl = e.currentTarget.innerHTML;
-          save();
+  };
+  wp.blocks.registerBlockType("catpow/panes", {
+    title: "\u{1F43E} Panes",
+    description: "\u77E9\u5F62\u306E\u753B\u50CF\u3068\u30C6\u30AD\u30B9\u30C8\u306E\u30DA\u30A2\u306E\u30EA\u30B9\u30C8\u3002",
+    icon: "editor-ul",
+    category: "catpow",
+    transforms: {
+      from: [
+        {
+          type: "block",
+          blocks: CP.listedConvertibles,
+          transform: (attributes) => {
+            attributes.classes = "wp-block-catpow-panes";
+            return createBlock("catpow/panes", attributes);
+          }
         }
-      }, item.linkUrl))));
-    });
-
-    if (rtn.length < loopCount) {
-      var len = rtn.length;
-
-      while (rtn.length < loopCount) {
-        rtn.push(rtn[rtn.length % len]);
+      ]
+    },
+    example: CP.example,
+    edit({ attributes, className, setAttributes, isSelected }) {
+      const { items = [], classes = "", loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+      var states = CP.wordsToFlags(classes);
+      const { imageKeys } = CP.config.panes;
+      var selectiveClasses = [
+        { label: "\u30B7\u30F3\u30DC\u30EB", values: "hasSymbol" },
+        {
+          label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
+          values: "isTemplate",
+          sub: [
+            { input: "bool", label: "\u30EB\u30FC\u30D7", key: "doLoop", sub: [
+              { label: "content path", input: "text", key: "content_path" },
+              { label: "query", input: "textarea", key: "query" },
+              { label: "\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", input: "range", key: "loopCount", min: 1, max: 16 }
+            ] }
+          ]
+        }
+      ];
+      const itemSelectiveClasses = [
+        "color",
+        "pattern",
+        { input: "symbol", keys: imageKeys.symbol, cond: states.hasSymbol },
+        {
+          input: "text",
+          label: "\u30B7\u30F3\u30DC\u30EB\u753B\u50CF\u30B3\u30FC\u30C9",
+          key: "symbolCode",
+          cond: states.isTemplate && states.hasSymbol
+        },
+        {
+          input: "text",
+          label: "\u753B\u50CF\u30B3\u30FC\u30C9",
+          key: "imageCode",
+          cond: states.isTemplate
+        }
+      ];
+      const save = () => {
+        setAttributes({ items: JSON.parse(JSON.stringify(items)) });
+      };
+      let rtn = [];
+      items.map((item, index) => {
+        if (!item.controlClasses) {
+          item.controlClasses = "control";
+        }
+        rtn.push(
+          /* @__PURE__ */ wp.element.createElement(
+            CP.Item,
+            {
+              tag: "li",
+              set: setAttributes,
+              attr: attributes,
+              items,
+              index,
+              isSelected
+            },
+            /* @__PURE__ */ wp.element.createElement("div", { class: "image" }, /* @__PURE__ */ wp.element.createElement(
+              CP.SelectResponsiveImage,
+              {
+                attr: attributes,
+                set: setAttributes,
+                keys: imageKeys.image,
+                index,
+                size: "large",
+                isTemplate: states.isTemplate
+              }
+            )),
+            /* @__PURE__ */ wp.element.createElement("div", { class: "contents" }, /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, states.hasSymbol && /* @__PURE__ */ wp.element.createElement("div", { className: "symbol" }, /* @__PURE__ */ wp.element.createElement(
+              CP.ResponsiveImage,
+              {
+                attr: attributes,
+                keys: imageKeys.symbol,
+                index,
+                size: "medium",
+                isTemplate: states.isTemplate
+              }
+            )), /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(
+              RichText,
+              {
+                onChange: (title) => {
+                  item.title = title;
+                  save();
+                },
+                value: item.title
+              }
+            )), /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(
+              RichText,
+              {
+                onChange: (titleCaption) => {
+                  item.titleCaption = titleCaption;
+                  save();
+                },
+                value: item.titleCaption
+              }
+            )))),
+            states.hasLink && isSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "link" }, /* @__PURE__ */ wp.element.createElement(
+              "p",
+              {
+                contentEditable: true,
+                onBlur: (e) => {
+                  item.linkUrl = e.currentTarget.innerHTML;
+                  save();
+                }
+              },
+              item.linkUrl
+            ))
+          )
+        );
+      });
+      if (rtn.length < loopCount) {
+        let len = rtn.length;
+        while (rtn.length < loopCount) {
+          rtn.push(rtn[rtn.length % len]);
+        }
       }
+      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectModeToolbar,
+        {
+          set: setAttributes,
+          attr: attributes
+        }
+      ), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: "\u30AF\u30E9\u30B9",
+          icon: "art",
+          set: setAttributes,
+          attr: attributes,
+          selectiveClasses,
+          filters: CP.filters.panes || {}
+        }
+      ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+        TextareaControl,
+        {
+          label: "\u30AF\u30E9\u30B9",
+          onChange: (classes2) => setAttributes({ classes: classes2 }),
+          value: classes
+        }
+      )), /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: "\u30A2\u30A4\u30C6\u30E0",
+          icon: "edit",
+          set: setAttributes,
+          attr: attributes,
+          items,
+          index: attributes.currentItemIndex,
+          selectiveClasses: itemSelectiveClasses,
+          filters: CP.filters.panes || {}
+        }
+      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+        CP.EditItemsTable,
+        {
+          set: setAttributes,
+          attr: attributes,
+          columns: [
+            { type: "image", label: "image", keys: imageKeys.image, cond: true },
+            { type: "text", key: "imageCode", cond: states.isTemplate },
+            { type: "text", key: "title", cond: states.hasTitle },
+            { type: "text", key: "titleCaption", cond: states.hasTitleCaption },
+            { type: "text", key: "linkUrl", cond: states.hasLink }
+          ],
+          isTemplate: states.isTemplate
+        }
+      )) : /* @__PURE__ */ wp.element.createElement(Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn)));
+    },
+    save({ attributes, className }) {
+      const { items = [], classes = "", linkUrl, loopParam, doLoop } = attributes;
+      const states = CP.wordsToFlags(classes);
+      const { imageKeys } = CP.config.panes;
+      let rtn = [];
+      items.map((item, index) => {
+        rtn.push(
+          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes }, /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(
+            CP.ResponsiveImage,
+            {
+              attr: attributes,
+              keys: imageKeys.image,
+              index,
+              isTemplate: states.isTemplate
+            }
+          )), /* @__PURE__ */ wp.element.createElement("div", { class: "contents" }, /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, states.hasSymbol && /* @__PURE__ */ wp.element.createElement("div", { className: "symbol" }, /* @__PURE__ */ wp.element.createElement(
+            CP.ResponsiveImage,
+            {
+              attr: attributes,
+              keys: imageKeys.symbol,
+              index,
+              size: "medium",
+              isTemplate: states.isTemplate
+            }
+          )), /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.titleCaption })))), states.hasLink && item.linkUrl && /* @__PURE__ */ wp.element.createElement("div", { className: "link" }, /* @__PURE__ */ wp.element.createElement("a", { href: item.linkUrl }, " ")))
+        );
+      });
+      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn), doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }
-
-    return wp.element.createElement(Fragment, null, wp.element.createElement(CP.SelectModeToolbar, {
-      set: setAttributes,
-      attr: attributes
-    }), wp.element.createElement(InspectorControls, null, wp.element.createElement(CP.SelectClassPanel, {
-      title: "\u30AF\u30E9\u30B9",
-      icon: "art",
-      set: setAttributes,
-      attr: attributes,
-      selectiveClasses: selectiveClasses,
-      filters: CP.filters.panes || {}
-    }), wp.element.createElement(PanelBody, {
-      title: "CLASS",
-      icon: "admin-generic",
-      initialOpen: false
-    }, wp.element.createElement(TextareaControl, {
-      label: "\u30AF\u30E9\u30B9",
-      onChange: function onChange(classes) {
-        return setAttributes({
-          classes: classes
-        });
-      },
-      value: classes
-    })), wp.element.createElement(CP.SelectClassPanel, {
-      title: "\u30A2\u30A4\u30C6\u30E0",
-      icon: "edit",
-      set: setAttributes,
-      attr: attributes,
-      items: items,
-      index: attributes.currentItemIndex,
-      selectiveClasses: itemSelectiveClasses,
-      filters: CP.filters.panes || {}
-    }), wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? wp.element.createElement("div", {
-      className: "alt_content"
-    }, wp.element.createElement("div", {
-      class: "label"
-    }, wp.element.createElement(Icon, {
-      icon: "edit"
-    })), wp.element.createElement(CP.EditItemsTable, {
-      set: setAttributes,
-      attr: attributes,
-      columns: [{
-        type: 'image',
-        label: 'image',
-        keys: imageKeys.image,
-        cond: true
-      }, {
-        type: 'text',
-        key: 'imageCode',
-        cond: states.isTemplate
-      }, {
-        type: 'text',
-        key: 'title',
-        cond: states.hasTitle
-      }, {
-        type: 'text',
-        key: 'titleCaption',
-        cond: states.hasTitleCaption
-      }, {
-        type: 'text',
-        key: 'linkUrl',
-        cond: states.hasLink
-      }],
-      isTemplate: states.isTemplate
-    })) : wp.element.createElement(Fragment, null, AltMode && doLoop ? wp.element.createElement("div", {
-      className: "alt_content"
-    }, wp.element.createElement("div", {
-      class: "label"
-    }, wp.element.createElement(Icon, {
-      icon: "welcome-comments"
-    })), wp.element.createElement(InnerBlocks, null)) : wp.element.createElement("ul", {
-      className: classes
-    }, rtn)));
-  },
-  save: function save(_ref2) {
-    var attributes = _ref2.attributes,
-        className = _ref2.className;
-    var _attributes$items2 = attributes.items,
-        items = _attributes$items2 === void 0 ? [] : _attributes$items2,
-        _attributes$classes2 = attributes.classes,
-        classes = _attributes$classes2 === void 0 ? '' : _attributes$classes2,
-        linkUrl = attributes.linkUrl,
-        loopParam = attributes.loopParam,
-        doLoop = attributes.doLoop;
-    var states = CP.wordsToFlags(classes);
-    var imageKeys = CP.config.panes.imageKeys;
-    var rtn = [];
-    items.map(function (item, index) {
-      rtn.push(wp.element.createElement("li", {
-        className: item.classes
-      }, wp.element.createElement("div", {
-        className: "image"
-      }, wp.element.createElement(CP.ResponsiveImage, {
-        attr: attributes,
-        keys: imageKeys.image,
-        index: index,
-        isTemplate: states.isTemplate
-      })), wp.element.createElement("div", {
-        class: "contents"
-      }, wp.element.createElement("div", {
-        className: "text"
-      }, states.hasSymbol && wp.element.createElement("div", {
-        className: "symbol"
-      }, wp.element.createElement(CP.ResponsiveImage, {
-        attr: attributes,
-        keys: imageKeys.symbol,
-        index: index,
-        size: "medium",
-        isTemplate: states.isTemplate
-      })), wp.element.createElement("h3", null, wp.element.createElement(RichText.Content, {
-        value: item.title
-      })), wp.element.createElement("p", null, wp.element.createElement(RichText.Content, {
-        value: item.titleCaption
-      })))), states.hasLink && item.linkUrl && wp.element.createElement("div", {
-        className: "link"
-      }, wp.element.createElement("a", {
-        href: item.linkUrl
-      }, " "))));
-    });
-    return wp.element.createElement(Fragment, null, wp.element.createElement("ul", {
-      className: classes
-    }, rtn), doLoop && wp.element.createElement("onEmpty", null, wp.element.createElement(InnerBlocks.Content, null)));
-  }
-});
+  });
+})();

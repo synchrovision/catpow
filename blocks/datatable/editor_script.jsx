@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/datatable',{
+﻿wp.blocks.registerBlockType('catpow/datatable',{
 	title: '🐾 DataTable',
 	description:'一行または１列の見出しを持つテーブルです。',
 	icon: 'editor-table',

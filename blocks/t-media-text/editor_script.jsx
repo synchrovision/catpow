@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/t-media-text',{
+﻿wp.blocks.registerBlockType('catpow/t-media-text',{
 	title:'🐾 T-media-text',
 	description:'HTMLメール用の画像・テキストのセットのブロックです。',
 	icon:'editor-code',

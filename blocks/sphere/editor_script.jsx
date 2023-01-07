@@ -3,7 +3,7 @@
 		image:{src:"src",alt:"alt",items:"items"}
 	}
 };
-registerBlockType('catpow/sphere',{
+wp.blocks.registerBlockType('catpow/sphere',{
 	title: '🐾 Sphere',
 	description:'ログイン中のユーザーの情報を表示するためのコンテナです。',
 	icon: 'image-filter',

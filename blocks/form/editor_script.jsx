@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/form',{
+﻿wp.blocks.registerBlockType('catpow/form',{
 	title: '🐾 Form',
 	description:'テーマに定義されたフォームを表示します。',
 	icon: 'editor-code',
@@ -6,6 +6,8 @@
 	example:CP.example,
 	edit({attributes,setAttributes,className}){
 		const {content_path,post_data_path,inputs,data_id,values}=attributes;
+		const {InspectorControls} = wp.blockEditor;
+		const {PanelBody,TreeSelect,TextareaControl,TextControl,ServerSideRender} = wp.components;
 
 		let postDataSelection=false;
 

@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/t-loop',{
+﻿wp.blocks.registerBlockType('catpow/t-loop',{
 	title: '🐾 T-loop',
 	description:'クエリの投稿の情報を表示するためのコンテナです。',
 	icon: 'editor-code',

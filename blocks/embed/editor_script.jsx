@@ -1,7 +1,7 @@
 ﻿/*
 * 規定のテンプレートを埋め込む
 */
-registerBlockType('catpow/embed',{
+wp.blocks.registerBlockType('catpow/embed',{
 	title: '🐾 Embed',
 	description:'テーマに定義された埋め込みコンテンツを表示します。',
 	icon: 'editor-code',

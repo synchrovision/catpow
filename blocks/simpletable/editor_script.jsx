@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/simpletable',{
+﻿wp.blocks.registerBlockType('catpow/simpletable',{
 	title: '🐾 SimpleTable',
 	description:'見出しと本文の２列で構成されるシンプルなテーブルです。',
 	icon: 'editor-table',

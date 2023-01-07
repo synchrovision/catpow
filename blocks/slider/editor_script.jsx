@@ -10,7 +10,7 @@
 	}
 };
 
-registerBlockType('catpow/slider',{
+wp.blocks.registerBlockType('catpow/slider',{
 	title: '🐾 Slider',
 	description:'スライダーのブロックです。',
 	icon:'video-alt3',

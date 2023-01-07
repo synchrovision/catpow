@@ -1,7 +1,7 @@
 ﻿/**
 * @todo BlockVerticalAlignmentToolbarが実装されたら対応
 */
-registerBlockType('catpow/layouttable',{
+wp.blocks.registerBlockType('catpow/layouttable',{
 	title: '🐾 LayoutTable',
 	description:'セルの結合と幅の指定ができるテーブルです。',
 	icon: 'editor-table',

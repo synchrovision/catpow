@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/definition',{
+﻿wp.blocks.registerBlockType('catpow/definition',{
 	title: '🐾 Definition',
 	description:'定義リストのブロックです',
 	icon: 'editor-ul',

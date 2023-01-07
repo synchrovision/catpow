@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/t-heading',{
+﻿wp.blocks.registerBlockType('catpow/t-heading',{
 	title:'🐾 T-Heading',
 	description:'HTMLメール用の見出しブロックです。',
 	icon:'editor-code',

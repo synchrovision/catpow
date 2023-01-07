@@ -37,7 +37,7 @@
 	}
 };
 
-registerBlockType('catpow/graphics',{
+wp.blocks.registerBlockType('catpow/graphics',{
 	title: '🐾 graphics',
 	description:'画像を自由にレイアウトします。',
 	icon:'format-image',

@@ -5,7 +5,7 @@
 	}
 };
 
-registerBlockType('catpow/panes',{
+wp.blocks.registerBlockType('catpow/panes',{
 	title: '🐾 Panes',
 	description:'矩形の画像とテキストのペアのリスト。',
 	icon: 'editor-ul',

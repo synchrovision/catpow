@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/container',{
+﻿wp.blocks.registerBlockType('catpow/container',{
 	title:'🐾 Container',
 	description:'スクロール可能領域を作成できるコンテナです。',
 	icon:'editor-code',

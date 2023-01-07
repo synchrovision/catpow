@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/pricelist',{
+﻿wp.blocks.registerBlockType('catpow/pricelist',{
 	title: '🐾 PriceList',
 	description:'価格表のブロックです。',
 	icon: 'editor-ul',

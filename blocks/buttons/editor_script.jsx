@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/buttons',{
+﻿wp.blocks.registerBlockType('catpow/buttons',{
 	title: '🐾 Buttons',
 	description:'ボタンのブロックです。',
 	icon: (

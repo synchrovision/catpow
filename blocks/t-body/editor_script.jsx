@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/t-body',{
+﻿wp.blocks.registerBlockType('catpow/t-body',{
 	title:'🐾 T-Body',
 	description:'HTMLメールのベースとなるヘッダ・フッタのブロックです。',
 	icon:'editor-code',

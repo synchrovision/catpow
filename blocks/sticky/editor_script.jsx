@@ -7,7 +7,7 @@
 		image:'vga'
 	}
 };
-registerBlockType('catpow/sticky',{
+wp.blocks.registerBlockType('catpow/sticky',{
 	title:'🐾 Sticky',
 	description:'スクロールに追従するコンテンツを配置します。',
 	icon:'menu',

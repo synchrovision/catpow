@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/entrypopup',{
+﻿wp.blocks.registerBlockType('catpow/entrypopup',{
 	title:'🐾 EntryPopup',
 	description:'サイト・ページ訪問時に表示されるポップアップ。',
 	icon:'admin-comments',

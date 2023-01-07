@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/userinfo',{
+﻿wp.blocks.registerBlockType('catpow/userinfo',{
 	title: '🐾 UserInfo',
 	description:'ログイン中のユーザーの情報を表示するためのコンテナです。ログインしていない場合はログインフォームが表示されます。',
 	icon: 'admin-users',

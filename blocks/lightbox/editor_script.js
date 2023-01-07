@@ -1,416 +1,266 @@
-CP.config.lightbox = {
-  imageKeys: {
-    image: {
-      src: "src",
-      alt: "alt",
-      code: "imageCode",
-      items: "items"
-    },
-    headerImage: {
-      src: "headerImageSrc",
-      alt: "headerImageAlt",
-      code: "headerImageCode",
-      items: "items"
+(() => {
+  // ../blocks/lightbox/editor_script.jsx
+  CP.config.lightbox = {
+    imageKeys: {
+      image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
+      headerImage: { src: "headerImageSrc", alt: "headerImageAlt", code: "headerImageCode", items: "items" }
     }
-  }
-};
-registerBlockType('catpow/lightbox', {
-  title: '🐾 Lightbox',
-  description: 'クリックでポップアップ表示する画像です。',
-  icon: 'editor-ul',
-  category: 'catpow',
-  transforms: {
-    from: [{
-      type: 'block',
-      blocks: CP.listedConvertibles,
-      transform: function transform(attributes) {
-        attributes.classes = 'wp-block-catpow-lightbox medium hasTitle hasImage hasText';
-        return createBlock('catpow/lightbox', attributes);
-      }
-    }]
-  },
-  example: CP.example,
-  edit: function edit(_ref) {
-    var attributes = _ref.attributes,
-        className = _ref.className,
-        setAttributes = _ref.setAttributes,
-        isSelected = _ref.isSelected;
-    var _wp$element = wp.element,
-        useState = _wp$element.useState,
-        useMemo = _wp$element.useMemo;
-    var _attributes$items = attributes.items,
-        items = _attributes$items === void 0 ? [] : _attributes$items,
-        classes = attributes.classes,
-        boxClasses = attributes.boxClasses,
-        blockState = attributes.blockState,
-        loopCount = attributes.loopCount,
-        doLoop = attributes.doLoop,
-        _attributes$EditMode = attributes.EditMode,
-        EditMode = _attributes$EditMode === void 0 ? false : _attributes$EditMode,
-        _attributes$AltMode = attributes.AltMode,
-        AltMode = _attributes$AltMode === void 0 ? false : _attributes$AltMode,
-        _attributes$OpenMode = attributes.OpenMode,
-        OpenMode = _attributes$OpenMode === void 0 ? false : _attributes$OpenMode,
-        _attributes$currentIt = attributes.currentItemIndex,
-        currentItemIndex = _attributes$currentIt === void 0 ? 0 : _attributes$currentIt;
-    var imageKeys = CP.config.lightbox.imageKeys;
-    var states = CP.wordsToFlags(classes);
-    var selectiveClasses = useMemo(function () {
-      var selectiveClasses = [{
-        name: 'size',
-        label: 'サイズ',
-        values: ['small', 'medium', 'large']
-      }, {
-        name: 'headerImage',
-        label: 'サムネール画像',
-        values: 'hasHeaderImage'
-      }, {
-        name: 'title',
-        label: 'タイトル',
-        values: 'hasTitle'
-      }, {
-        name: 'titleCaption',
-        label: 'タイトルキャプション',
-        values: 'hasTitleCaption'
-      }, {
-        name: 'image',
-        label: '画像',
-        values: 'hasImage'
-      }, {
-        name: 'subTitle',
-        label: 'タイトル',
-        values: 'hasSubTitle'
-      }, {
-        name: 'text',
-        label: 'テキスト',
-        values: 'hasText'
-      }, {
-        name: 'boxSize',
-        label: 'ボックスサイズ',
-        values: ['small', 'medium', 'large'],
-        key: 'boxClasses'
-      }, {
-        name: 'template',
-        label: 'テンプレート',
-        values: 'isTemplate',
-        sub: [{
-          input: 'bool',
-          label: 'ループ',
-          key: 'doLoop',
-          sub: [{
-            label: 'content path',
-            input: 'text',
-            key: 'content_path'
-          }, {
-            label: 'query',
-            input: 'textarea',
-            key: 'query'
-          }, {
-            label: 'プレビューループ数',
-            input: 'range',
-            key: 'loopCount',
-            min: 1,
-            max: 16
-          }]
-        }]
-      }];
-      wp.hooks.applyFilters('catpow.blocks.lightbox.selectiveClasses', CP.finderProxy(selectiveClasses));
-      return selectiveClasses;
-    }, []);
-    var selectiveItemClasses = useMemo(function () {
-      var selectiveItemClasses = [{
-        name: 'image',
-        input: 'image',
-        label: '画像',
-        keys: imageKeys.image,
-        cond: states.hasImage,
-        isTemplate: states.isTemplate
-      }, {
-        name: 'imageCode',
-        input: 'text',
-        label: '画像コード',
-        key: 'imageCode',
-        cond: states.hasImage && states.isTemplate
-      }, {
-        name: '',
-        input: 'image',
-        label: 'サムネール画像',
-        keys: imageKeys.headerImage,
-        cond: states.hasHeaderImage,
-        isTemplate: states.isTemplate
-      }, {
-        name: 'headerImageCode',
-        input: 'text',
-        label: 'サムネール画像コード',
-        key: 'headerImageCode',
-        cond: states.hasHeaderImage && states.isTemplate
-      }];
-      wp.hooks.applyFilters('catpow.blocks.lightbox.selectiveItemClasses', CP.finderProxy(selectiveItemClasses));
-      return selectiveItemClasses;
-    }, []);
-
-    var save = function save() {
-      setAttributes({
-        items: JSON.parse(JSON.stringify(items))
-      });
-    };
-
-    var rtn = [];
-    items.map(function (item, index) {
-      rtn.push(wp.element.createElement(CP.Item, {
-        tag: "li",
-        set: setAttributes,
-        attr: attributes,
-        items: items,
-        index: index
-      }, wp.element.createElement("header", null, states.hasHeaderImage && wp.element.createElement("div", {
-        className: "image"
-      }, wp.element.createElement(CP.SelectResponsiveImage, {
-        attr: attributes,
-        set: setAttributes,
-        keys: imageKeys.headerImage,
-        index: index,
-        size: "vga",
-        isTemplate: states.isTemplate
-      })), states.hasTitle && wp.element.createElement("div", {
-        className: "text"
-      }, wp.element.createElement("h3", null, wp.element.createElement(RichText, {
-        onChange: function onChange(text) {
-          item.title = text;
-          save();
-        },
-        value: item.title
-      })), states.hasTitleCaption && wp.element.createElement("p", null, wp.element.createElement(RichText, {
-        onChange: function onChange(text) {
-          item.titleCaption = text;
-          save();
-        },
-        value: item.titleCaption
-      }))))));
-    });
-
-    if (rtn.length < loopCount) {
-      var len = rtn.length;
-
-      while (rtn.length < loopCount) {
-        rtn.push(rtn[rtn.length % len]);
-      }
-    }
-
-    return wp.element.createElement(Fragment, null, wp.element.createElement(CP.SelectModeToolbar, {
-      set: setAttributes,
-      attr: attributes,
-      modes: ['EditMode', 'AltMode', 'OpenMode']
-    }), wp.element.createElement(InspectorControls, null, wp.element.createElement(CP.SelectClassPanel, {
-      title: "\u30AF\u30E9\u30B9",
-      icon: "art",
-      set: setAttributes,
-      attr: attributes,
-      selectiveClasses: selectiveClasses,
-      filters: CP.filters.lightbox || {}
-    }), wp.element.createElement(PanelBody, {
-      title: "CLASS",
-      icon: "admin-generic",
-      initialOpen: false
-    }, wp.element.createElement(TextareaControl, {
-      label: "\u30AF\u30E9\u30B9",
-      onChange: function onChange(classes) {
-        return setAttributes({
-          classes: classes
-        });
-      },
-      value: classes
-    }), wp.element.createElement(TextareaControl, {
-      label: "\u30DC\u30C3\u30AF\u30B9\u30AF\u30E9\u30B9",
-      onChange: function onChange(boxClasses) {
-        return setAttributes({
-          boxClasses: boxClasses
-        });
-      },
-      value: boxClasses
-    })), wp.element.createElement(CP.SelectClassPanel, {
-      title: "\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0",
-      icon: "edit",
-      set: setAttributes,
-      attr: attributes,
-      items: items,
-      index: attributes.currentItemIndex,
-      selectiveClasses: selectiveItemClasses,
-      filters: CP.filters.lightbox || {}
-    }), wp.element.createElement(CP.ItemControlInfoPanel, null)), !OpenMode ? wp.element.createElement(Fragment, null, EditMode ? wp.element.createElement("div", {
-      className: "alt_content"
-    }, wp.element.createElement("div", {
-      class: "label"
-    }, wp.element.createElement(Icon, {
-      icon: "edit"
-    })), wp.element.createElement(CP.EditItemsTable, {
-      set: setAttributes,
-      attr: attributes,
-      columns: [{
-        type: 'image',
-        label: 'image',
-        keys: imageKeys.image,
-        cond: states.hasImage
-      }, {
-        type: 'text',
-        key: 'imageCode',
-        cond: states.isTemplate && states.hasImage
-      }, {
-        type: 'image',
-        label: 'header',
-        keys: imageKeys.headerImage,
-        cond: states.hasHeaderImage
-      }, {
-        type: 'text',
-        key: 'headerImageCode',
-        cond: states.isTemplate && states.hasHeaderImage
-      }, {
-        type: 'text',
-        key: 'title',
-        cond: states.hasTitle
-      }, {
-        type: 'text',
-        key: 'titleCaption',
-        cond: states.hasTitleCaption
-      }, {
-        type: 'text',
-        key: 'subTitle',
-        cond: states.hasSubTitle
-      }, {
-        type: 'text',
-        key: 'text',
-        cond: states.hasText
-      }],
-      isTemplate: states.isTemplate
-    })) : wp.element.createElement(Fragment, null, AltMode && doLoop ? wp.element.createElement("div", {
-      className: "alt_content"
-    }, wp.element.createElement("div", {
-      class: "label"
-    }, wp.element.createElement(Icon, {
-      icon: "welcome-comments"
-    })), wp.element.createElement(InnerBlocks, null)) : wp.element.createElement("ul", {
-      className: classes
-    }, rtn))) : wp.element.createElement("div", {
-      className: "lightbox_preview"
-    }, wp.element.createElement("div", {
-      id: "cp_lightbox",
-      className: "cp_lightbox_container active"
-    }, wp.element.createElement("div", {
-      class: "cp_lightbox_content"
-    }, wp.element.createElement("div", {
-      class: "group active"
-    }, wp.element.createElement("ul", {
-      class: "items"
-    }, items.map(function (item, index) {
-      var isActive = currentItemIndex == index;
-      return wp.element.createElement("li", {
-        className: isActive ? 'item active' : 'item'
-      }, wp.element.createElement("div", {
-        className: boxClasses
-      }, states.hasSubTitle && wp.element.createElement("header", {
-        className: "title"
-      }, wp.element.createElement("h4", null, wp.element.createElement(RichText, {
-        onChange: function onChange(subTitle) {
-          items[index].subTitle = subTitle;
-          setAttributes({
-            items: items
-          });
-        },
-        value: item.subTitle,
-        placeholder: "SubTitle"
-      }))), states.hasImage && wp.element.createElement("div", {
-        className: "image"
-      }, wp.element.createElement(CP.SelectResponsiveImage, {
-        attr: attributes,
-        set: setAttributes,
-        keys: imageKeys.image,
-        index: index,
-        size: "full",
-        isTemplate: states.isTemplate
-      })), states.hasText && wp.element.createElement("div", {
-        className: "text"
-      }, wp.element.createElement("div", {
-        onFocus: function onFocus() {
-          blockState.enableBlockFormat = true;
-        },
-        onBlur: function onBlur() {
-          blockState.enableBlockFormat = false;
+  };
+  wp.blocks.registerBlockType("catpow/lightbox", {
+    title: "\u{1F43E} Lightbox",
+    description: "\u30AF\u30EA\u30C3\u30AF\u3067\u30DD\u30C3\u30D7\u30A2\u30C3\u30D7\u8868\u793A\u3059\u308B\u753B\u50CF\u3067\u3059\u3002",
+    icon: "editor-ul",
+    category: "catpow",
+    transforms: {
+      from: [
+        {
+          type: "block",
+          blocks: CP.listedConvertibles,
+          transform: (attributes) => {
+            attributes.classes = "wp-block-catpow-lightbox medium hasTitle hasImage hasText";
+            return createBlock("catpow/lightbox", attributes);
+          }
         }
-      }, wp.element.createElement(RichText, {
-        onChange: function onChange(text) {
-          items[index].text = text;
-          setAttributes({
-            items: items
-          });
-        },
-        value: item.text
-      })))));
-    })), wp.element.createElement("div", {
-      class: "cp_lightbox_control"
-    }, wp.element.createElement("div", {
-      className: "prev active"
-    }), wp.element.createElement("ul", {
-      className: "dots active"
-    }, items.map(function (item, index) {
-      var isActive = currentItemIndex == index;
-      return wp.element.createElement("li", {
-        className: isActive ? 'dot active' : 'dot',
-        "data-index": index
+      ]
+    },
+    example: CP.example,
+    edit({ attributes, className, setAttributes, isSelected }) {
+      const { useState, useMemo } = wp.element;
+      const { items = [], classes, boxClasses, blockState, loopCount, doLoop, EditMode = false, AltMode = false, OpenMode = false, currentItemIndex = 0 } = attributes;
+      const { imageKeys } = CP.config.lightbox;
+      var states = CP.wordsToFlags(classes);
+      const selectiveClasses = useMemo(() => {
+        const selectiveClasses2 = [
+          { name: "size", label: "\u30B5\u30A4\u30BA", values: ["small", "medium", "large"] },
+          { name: "headerImage", label: "\u30B5\u30E0\u30CD\u30FC\u30EB\u753B\u50CF", values: "hasHeaderImage" },
+          { name: "title", label: "\u30BF\u30A4\u30C8\u30EB", values: "hasTitle" },
+          { name: "titleCaption", label: "\u30BF\u30A4\u30C8\u30EB\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "hasTitleCaption" },
+          { name: "image", label: "\u753B\u50CF", values: "hasImage" },
+          { name: "subTitle", label: "\u30BF\u30A4\u30C8\u30EB", values: "hasSubTitle" },
+          { name: "text", label: "\u30C6\u30AD\u30B9\u30C8", values: "hasText" },
+          { name: "boxSize", label: "\u30DC\u30C3\u30AF\u30B9\u30B5\u30A4\u30BA", values: ["small", "medium", "large"], key: "boxClasses" },
+          {
+            name: "template",
+            label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
+            values: "isTemplate",
+            sub: [
+              { input: "bool", label: "\u30EB\u30FC\u30D7", key: "doLoop", sub: [
+                { label: "content path", input: "text", key: "content_path" },
+                { label: "query", input: "textarea", key: "query" },
+                { label: "\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", input: "range", key: "loopCount", min: 1, max: 16 }
+              ] }
+            ]
+          }
+        ];
+        wp.hooks.applyFilters("catpow.blocks.lightbox.selectiveClasses", CP.finderProxy(selectiveClasses2));
+        return selectiveClasses2;
+      }, []);
+      const selectiveItemClasses = useMemo(() => {
+        const selectiveItemClasses2 = [
+          { name: "image", input: "image", label: "\u753B\u50CF", keys: imageKeys.image, cond: states.hasImage, isTemplate: states.isTemplate },
+          {
+            name: "imageCode",
+            input: "text",
+            label: "\u753B\u50CF\u30B3\u30FC\u30C9",
+            key: "imageCode",
+            cond: states.hasImage && states.isTemplate
+          },
+          { name: "", input: "image", label: "\u30B5\u30E0\u30CD\u30FC\u30EB\u753B\u50CF", keys: imageKeys.headerImage, cond: states.hasHeaderImage, isTemplate: states.isTemplate },
+          {
+            name: "headerImageCode",
+            input: "text",
+            label: "\u30B5\u30E0\u30CD\u30FC\u30EB\u753B\u50CF\u30B3\u30FC\u30C9",
+            key: "headerImageCode",
+            cond: states.hasHeaderImage && states.isTemplate
+          }
+        ];
+        wp.hooks.applyFilters("catpow.blocks.lightbox.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
+        return selectiveItemClasses2;
+      }, []);
+      const save = () => {
+        setAttributes({ items: JSON.parse(JSON.stringify(items)) });
+      };
+      let rtn = [];
+      items.map((item, index) => {
+        rtn.push(
+          /* @__PURE__ */ wp.element.createElement(
+            CP.Item,
+            {
+              tag: "li",
+              set: setAttributes,
+              attr: attributes,
+              items,
+              index
+            },
+            /* @__PURE__ */ wp.element.createElement("header", null, states.hasHeaderImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(
+              CP.SelectResponsiveImage,
+              {
+                attr: attributes,
+                set: setAttributes,
+                keys: imageKeys.headerImage,
+                index,
+                size: "vga",
+                isTemplate: states.isTemplate
+              }
+            )), states.hasTitle && /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(
+              RichText,
+              {
+                onChange: (text) => {
+                  item.title = text;
+                  save();
+                },
+                value: item.title
+              }
+            )), states.hasTitleCaption && /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(
+              RichText,
+              {
+                onChange: (text) => {
+                  item.titleCaption = text;
+                  save();
+                },
+                value: item.titleCaption
+              }
+            ))))
+          )
+        );
       });
-    })), wp.element.createElement("div", {
-      className: "next active"
-    }), wp.element.createElement("div", {
-      className: "close"
-    })))))));
-  },
-  save: function save(_ref2) {
-    var attributes = _ref2.attributes,
-        className = _ref2.className;
-    var _attributes$items2 = attributes.items,
-        items = _attributes$items2 === void 0 ? [] : _attributes$items2,
-        _attributes$classes = attributes.classes,
-        classes = _attributes$classes === void 0 ? '' : _attributes$classes,
-        boxClasses = attributes.boxClasses,
-        blockState = attributes.blockState,
-        doLoop = attributes.doLoop;
-    var states = CP.wordsToFlags(classes);
-    var imageKeys = CP.config.lightbox.imageKeys;
-    return wp.element.createElement(Fragment, null, wp.element.createElement("ul", {
-      className: classes
-    }, items.map(function (item, index) {
-      return wp.element.createElement("li", {
-        className: item.classes
-      }, wp.element.createElement("header", null, states.hasHeaderImage && wp.element.createElement("div", {
-        className: "image"
-      }, wp.element.createElement(CP.ResponsiveImage, {
-        attr: attributes,
-        keys: imageKeys.headerImage,
-        index: index,
-        isTemplate: states.isTemplate
-      })), states.hasTitle && wp.element.createElement("div", {
-        className: "text"
-      }, wp.element.createElement("h3", null, wp.element.createElement(RichText.Content, {
-        value: item.title
-      })), states.hasTitleCaption && wp.element.createElement("p", null, wp.element.createElement(RichText.Content, {
-        value: item.titleCaption
-      })))), wp.element.createElement("div", {
-        class: boxClasses
-      }, states.hasSubTitle && wp.element.createElement("header", {
-        className: "title"
-      }, wp.element.createElement("h4", null, wp.element.createElement(RichText.Content, {
-        value: item.subTitle
-      }))), states.hasImage && wp.element.createElement("div", {
-        className: "image"
-      }, wp.element.createElement(CP.ResponsiveImage, {
-        attr: attributes,
-        keys: imageKeys.image,
-        index: index,
-        isTemplate: states.isTemplate
-      })), states.hasText && wp.element.createElement("div", {
-        className: "text"
-      }, wp.element.createElement(RichText.Content, {
-        value: item.text
-      }))));
-    })), doLoop && wp.element.createElement("onEmpty", null, wp.element.createElement(InnerBlocks.Content, null)));
-  }
-});
+      if (rtn.length < loopCount) {
+        let len = rtn.length;
+        while (rtn.length < loopCount) {
+          rtn.push(rtn[rtn.length % len]);
+        }
+      }
+      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectModeToolbar,
+        {
+          set: setAttributes,
+          attr: attributes,
+          modes: ["EditMode", "AltMode", "OpenMode"]
+        }
+      ), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: "\u30AF\u30E9\u30B9",
+          icon: "art",
+          set: setAttributes,
+          attr: attributes,
+          selectiveClasses,
+          filters: CP.filters.lightbox || {}
+        }
+      ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+        TextareaControl,
+        {
+          label: "\u30AF\u30E9\u30B9",
+          onChange: (classes2) => setAttributes({ classes: classes2 }),
+          value: classes
+        }
+      ), /* @__PURE__ */ wp.element.createElement(
+        TextareaControl,
+        {
+          label: "\u30DC\u30C3\u30AF\u30B9\u30AF\u30E9\u30B9",
+          onChange: (boxClasses2) => setAttributes({ boxClasses: boxClasses2 }),
+          value: boxClasses
+        }
+      )), /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: "\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0",
+          icon: "edit",
+          set: setAttributes,
+          attr: attributes,
+          items,
+          index: attributes.currentItemIndex,
+          selectiveClasses: selectiveItemClasses,
+          filters: CP.filters.lightbox || {}
+        }
+      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), !OpenMode ? /* @__PURE__ */ wp.element.createElement(Fragment, null, EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+        CP.EditItemsTable,
+        {
+          set: setAttributes,
+          attr: attributes,
+          columns: [
+            { type: "image", label: "image", keys: imageKeys.image, cond: states.hasImage },
+            { type: "text", key: "imageCode", cond: states.isTemplate && states.hasImage },
+            { type: "image", label: "header", keys: imageKeys.headerImage, cond: states.hasHeaderImage },
+            { type: "text", key: "headerImageCode", cond: states.isTemplate && states.hasHeaderImage },
+            { type: "text", key: "title", cond: states.hasTitle },
+            { type: "text", key: "titleCaption", cond: states.hasTitleCaption },
+            { type: "text", key: "subTitle", cond: states.hasSubTitle },
+            { type: "text", key: "text", cond: states.hasText }
+          ],
+          isTemplate: states.isTemplate
+        }
+      )) : /* @__PURE__ */ wp.element.createElement(Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn))) : /* @__PURE__ */ wp.element.createElement("div", { className: "lightbox_preview" }, /* @__PURE__ */ wp.element.createElement("div", { id: "cp_lightbox", className: "cp_lightbox_container active" }, /* @__PURE__ */ wp.element.createElement("div", { class: "cp_lightbox_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "group active" }, /* @__PURE__ */ wp.element.createElement("ul", { class: "items" }, items.map((item, index) => {
+        var isActive = currentItemIndex == index;
+        return /* @__PURE__ */ wp.element.createElement("li", { className: isActive ? "item active" : "item" }, /* @__PURE__ */ wp.element.createElement("div", { className: boxClasses }, states.hasSubTitle && /* @__PURE__ */ wp.element.createElement("header", { className: "title" }, /* @__PURE__ */ wp.element.createElement("h4", null, /* @__PURE__ */ wp.element.createElement(
+          RichText,
+          {
+            onChange: (subTitle) => {
+              items[index].subTitle = subTitle;
+              setAttributes({ items });
+            },
+            value: item.subTitle,
+            placeholder: "SubTitle"
+          }
+        ))), states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(
+          CP.SelectResponsiveImage,
+          {
+            attr: attributes,
+            set: setAttributes,
+            keys: imageKeys.image,
+            index,
+            size: "full",
+            isTemplate: states.isTemplate
+          }
+        )), states.hasText && /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, /* @__PURE__ */ wp.element.createElement(
+          "div",
+          {
+            onFocus: () => {
+              blockState.enableBlockFormat = true;
+            },
+            onBlur: () => {
+              blockState.enableBlockFormat = false;
+            }
+          },
+          /* @__PURE__ */ wp.element.createElement(
+            RichText,
+            {
+              onChange: (text) => {
+                items[index].text = text;
+                setAttributes({ items });
+              },
+              value: item.text
+            }
+          )
+        ))));
+      })), /* @__PURE__ */ wp.element.createElement("div", { class: "cp_lightbox_control" }, /* @__PURE__ */ wp.element.createElement("div", { className: "prev active" }), /* @__PURE__ */ wp.element.createElement("ul", { className: "dots active" }, items.map((item, index) => {
+        var isActive = currentItemIndex == index;
+        return /* @__PURE__ */ wp.element.createElement("li", { className: isActive ? "dot active" : "dot", "data-index": index });
+      })), /* @__PURE__ */ wp.element.createElement("div", { className: "next active" }), /* @__PURE__ */ wp.element.createElement("div", { className: "close" })))))));
+    },
+    save({ attributes, className }) {
+      const { items = [], classes = "", boxClasses, blockState, doLoop } = attributes;
+      var states = CP.wordsToFlags(classes);
+      const { imageKeys } = CP.config.lightbox;
+      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, items.map((item, index) => {
+        return /* @__PURE__ */ wp.element.createElement("li", { className: item.classes }, /* @__PURE__ */ wp.element.createElement("header", null, states.hasHeaderImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(
+          CP.ResponsiveImage,
+          {
+            attr: attributes,
+            keys: imageKeys.headerImage,
+            index,
+            isTemplate: states.isTemplate
+          }
+        )), states.hasTitle && /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), states.hasTitleCaption && /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.titleCaption })))), /* @__PURE__ */ wp.element.createElement("div", { class: boxClasses }, states.hasSubTitle && /* @__PURE__ */ wp.element.createElement("header", { className: "title" }, /* @__PURE__ */ wp.element.createElement("h4", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.subTitle }))), states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(
+          CP.ResponsiveImage,
+          {
+            attr: attributes,
+            keys: imageKeys.image,
+            index,
+            isTemplate: states.isTemplate
+          }
+        )), states.hasText && /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text }))));
+      })), doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
+    }
+  });
+})();

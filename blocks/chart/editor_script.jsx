@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/chart',{
+﻿wp.blocks.registerBlockType('catpow/chart',{
 	title: '🐾 Chart',
 	description:'グラフを表示します。',
 	icon: 'chart-bar',

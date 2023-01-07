@@ -8,7 +8,7 @@
 	}
 };
 
-registerBlockType('catpow/accordion',{
+wp.blocks.registerBlockType('catpow/accordion',{
 	title: '🐾 Accordion',
 	description:'クリックで折り畳みできるブロックです。',
 	icon: 'insert',

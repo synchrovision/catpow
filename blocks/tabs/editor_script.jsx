@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/tabs',{
+﻿wp.blocks.registerBlockType('catpow/tabs',{
 	title:'🐾 Tabs',
 	description:'タブによる表示切り替えのブロックです。',
 	icon:'editor-code',
@@ -88,7 +88,7 @@
 	}
 });
 
-registerBlockType('catpow/tabscontent',{
+wp.blocks.registerBlockType('catpow/tabscontent',{
 	title:'🐾 TabsContent',
 	icon:'editor-code',
 	category:'catpow',

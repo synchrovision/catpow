@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/loopvars',{
+﻿wp.blocks.registerBlockType('catpow/loopvars',{
 	title: '🐾 LoopVars',
 	description:'ブロックの内容を変数のテーブルをループして表示します。各変数はブロック内で[var 変数名]のショートコードで利用できます。',
 	icon: 'editor-code',

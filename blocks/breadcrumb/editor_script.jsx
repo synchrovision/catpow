@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/breadcrumb',{
+﻿wp.blocks.registerBlockType('catpow/breadcrumb',{
 	title:'🐾 Breadcrumb',
 	description:__('パンくずリストを表示します。','catpow'),
 	icon:'welcome-widgets-menus',

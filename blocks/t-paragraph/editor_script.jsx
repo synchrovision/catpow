@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/t-paragraph',{
+﻿wp.blocks.registerBlockType('catpow/t-paragraph',{
 	title:'🐾 T-Paragraph',
 	description:'HTMLメール用の段落ブロックです。',
 	icon:'editor-code',

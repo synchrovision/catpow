@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/formblock',{
+﻿wp.blocks.registerBlockType('catpow/formblock',{
 	title: '🐾 FormBlock',
 	description:'テーマに定義された編集可能なフォームを表示します。',
 	icon: 'editor-code',

@@ -3,7 +3,7 @@
 		image:{src:"src",alt:"alt",items:"items"}
 	}
 };
-registerBlockType('catpow/ranking',{
+wp.blocks.registerBlockType('catpow/ranking',{
 	title: '🐾 Ranking',
 	description:'ランキングの一覧ブロックです。',
 	icon: 'awards',

@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/dialog',{
+﻿wp.blocks.registerBlockType('catpow/dialog',{
 	title: '🐾 Dialog',
 	description:'フキダシで会話を表現するブロックです。',
 	icon: 'format-chat',

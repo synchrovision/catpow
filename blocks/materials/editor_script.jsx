@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/materials',{
+﻿wp.blocks.registerBlockType('catpow/materials',{
 	title: '🐾 Materials',
 	description:'材料・成分一覧のブロックです。',
 	icon: 'editor-ul',

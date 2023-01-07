@@ -5,7 +5,7 @@
 	}
 };
 
-registerBlockType('catpow/picture',{
+wp.blocks.registerBlockType('catpow/picture',{
 	title: '🐾 Picture',
 	description:'画面サイズに応じて切り替わる画像。',
 	icon: 'id-alt',

@@ -4,7 +4,7 @@
 		image:{src:"src",alt:"alt",items:"items"}
 	}
 };
-registerBlockType('catpow/panel',{
+wp.blocks.registerBlockType('catpow/panel',{
 	title: '🐾 Panel',
 	description:'大小の矩形パネルをレイアウトします。',
 	icon: 'grid-view',

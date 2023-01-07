@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/loopblock',{
+﻿wp.blocks.registerBlockType('catpow/loopblock',{
 	title: '🐾 Loopblock',
 	description:'クエリの投稿の情報を表示するためのコンテナです。',
 	icon: 'editor-code',

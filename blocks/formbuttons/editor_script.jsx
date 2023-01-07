@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/formbuttons',{
+﻿wp.blocks.registerBlockType('catpow/formbuttons',{
 	title: '🐾 FormButtons',
 	description:'フォーム用のボタンです。',
 	icon: 'upload',

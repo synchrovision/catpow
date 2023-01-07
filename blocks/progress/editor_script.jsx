@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/progress',{
+﻿wp.blocks.registerBlockType('catpow/progress',{
 	title: '🐾 Progress',
 	description:'進捗のブロックです。',
 	icon: 'editor-ul',

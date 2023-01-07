@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/pricecard',{
+﻿wp.blocks.registerBlockType('catpow/pricecard',{
 	title: '🐾 PriceCard',
 	description:'サービス・商品情報の一覧ブロックです。',
 	icon: 'index-card',

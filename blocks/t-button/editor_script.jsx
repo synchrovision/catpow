@@ -1,4 +1,4 @@
-﻿registerBlockType('catpow/t-button',{
+﻿wp.blocks.registerBlockType('catpow/t-button',{
 	title:'🐾 T-Button',
 	description:'HTMLメール用のテーブルレイアウトのボタンです。',
 	icon:'editor-code',

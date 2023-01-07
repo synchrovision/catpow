@@ -21,7 +21,7 @@
 		values:4,
 	}
 };
-registerBlockType('catpow/switcher',{
+wp.blocks.registerBlockType('catpow/switcher',{
 	title:'🐾 Switcher',
 	description:'日時やログインユーザーによってコンテンツの内容が切り替わるコンテナです。',
 	icon:'networking',
