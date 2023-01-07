@@ -417,6 +417,17 @@ class CP{
 					$deps[]='ui/'.$inputDep.'/input.js';
 				}
 			}
+			if(!empty($useScripts)){
+				foreach($useScripts as $useScript){
+					self::enqueue_script($useScript);
+					$deps[]=$useScript;
+				}
+			}
+			if(!empty($useStyles)){
+				foreach($useStyles as $useStyle){
+					self::enqueue_style($useStyle);
+				}
+			}
 			if(!empty($useComponents)){
 				foreach($useComponents as $useComponent){
 					self::use_component($useComponent);
@@ -447,6 +458,17 @@ class CP{
 				foreach($outputDeps as $outputDep){
 					self::use_ui_output($outputDep);
 					$deps[]='ui/'.$outputDep.'/output.js';
+				}
+			}
+			if(!empty($useScripts)){
+				foreach($useScripts as $useScript){
+					self::enqueue_script($useScript);
+					$deps[]=$useScript;
+				}
+			}
+			if(!empty($useStyles)){
+				foreach($useStyles as $useStyle){
+					self::enqueue_style($useStyle);
 				}
 			}
 			if(!empty($useComponents)){
