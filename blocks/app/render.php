@@ -18,7 +18,7 @@ foreach($required_files as $required_file){
 		return;
 	}
 }
-$deps=['wp-i18n','wp-api-fetch','wp-element','babelHelpers'];
+$deps=['wp-i18n','wp-api-fetch','wp-element'];
 $props=json_decode($attr['props'],true);
 $config=json_decode(file_get_contents($dir.'/config.json'),true);
 $app_name=$config['name']??'BlockApp';

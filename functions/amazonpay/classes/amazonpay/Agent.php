@@ -32,7 +32,7 @@ class Agent{
 		if(!wp_script_is($uiPath.'.js')){
 			\cp::enqueue_style($uiPath.'.css');
 			wp_enqueue_script('AmazonPayWidgets',$this->getWidgetsJsURL());
-			\cp::enqueue_script($uiPath.'.js',['wp-element','babelHelpers','AmazonPayWidgets']);
+			\cp::enqueue_script($uiPath.'.js',['wp-element','AmazonPayWidgets']);
 		}
 		$id='AmazonPayButtonContainer';
 		

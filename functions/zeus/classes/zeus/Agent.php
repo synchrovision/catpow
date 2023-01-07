@@ -23,7 +23,7 @@ class Agent{
 			\cp::enqueue_style($uiPath.'.css');
 			wp_enqueue_style('ZeusSstyle','https://linkpt.cardservice.co.jp/api/token/1.0/zeus_token.css');
 			wp_enqueue_script('ZeusScript','https://linkpt.cardservice.co.jp/api/token/1.0/zeus_token_cvv.js');
-			\cp::enqueue_script($uiPath.'.js',['wp-element','babelHelpers','ZeusScript']);
+			\cp::enqueue_script($uiPath.'.js',['wp-element','ZeusScript']);
 		}
 		$id='ZeusButtonContainer';
 		

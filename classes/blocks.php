@@ -3,7 +3,7 @@ namespace Catpow;
 
 class blocks{
 	public static $deps=[
-		'editor_script'=>['wp-blocks','wp-i18n','wp-element','wp-editor','wp-plugins','wp-edit-post','babelHelpers','catpow'],
+		'editor_script'=>['wp-blocks','wp-i18n','wp-element','wp-editor','wp-plugins','wp-edit-post','catpow'],
 		'editor_style'=>['wp-edit-blocks'],
 		'front_script'=>[],
 		'front_style'=>[],
