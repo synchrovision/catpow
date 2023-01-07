@@ -52,6 +52,8 @@
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useState, useMemo } = wp.element;
+      const { InnerBlocks, InspectorControls, RichText: RichText2 } = wp.blockEditor;
+      const { PanelBody, TextareaControl } = wp.components;
       const { classes: classes2, rows = [], doLoop, AltMode = false } = attributes;
       const primaryClass = "wp-block-catpow-datatable";
       var classArray = _.uniq((className + " " + classes2).split(" "));
@@ -145,7 +147,7 @@
             cell.classes = "";
           }
         }
-        return /* @__PURE__ */ wp.element.createElement("th", { className: cell.classes }, /* @__PURE__ */ wp.element.createElement(RichText, { onChange: (text) => {
+        return /* @__PURE__ */ wp.element.createElement("th", { className: cell.classes }, /* @__PURE__ */ wp.element.createElement(RichText2, { onChange: (text) => {
           cell.text = text;
           saveItems();
         }, value: cell.text }));
@@ -154,7 +156,7 @@
           return false;
         }
         return /* @__PURE__ */ wp.element.createElement("tr", null, row.cells.map((cell, columnIndex) => {
-          var children = [/* @__PURE__ */ wp.element.createElement(RichText, { onChange: (text) => {
+          var children = [/* @__PURE__ */ wp.element.createElement(RichText2, { onChange: (text) => {
             cell.text = text;
             saveItems();
           }, value: cell.text })];
@@ -204,11 +206,12 @@
       ))));
     },
     save({ attributes, className }) {
+      const { InnerBlocks, RichText: RichText2 } = wp.blockEditor;
       const { classes: classes2 = "", rows = [], loopParam, doLoop } = attributes;
       var classArray = classes2.split(" ");
       var states = CP.wordsToFlags(classes2);
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("table", { className: classes2 }, states.hasHeaderRow && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, rows[0].cells.map((cell, index) => {
-        return /* @__PURE__ */ wp.element.createElement("th", { className: cell.classes }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: cell.text }));
+        return /* @__PURE__ */ wp.element.createElement("th", { className: cell.classes }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: cell.text }));
       }))), /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
         if (states.hasHeaderRow && index == 0) {
           return false;

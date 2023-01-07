@@ -8,6 +8,8 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
+		const {InnerBlocks,BlockControls,InspectorControls}=wp.blockEditor;
+		const {PanelBody,TextareaControl} = wp.components;
 		const {classes}=attributes;
 		const primaryClass='wp-block-catpow-sidebar';
 		var classArray=_.uniq((className+' '+classes).split(' '));
@@ -39,6 +41,7 @@
 
 
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		const {classes}=attributes;
 		return (
 			<div className={classes}>

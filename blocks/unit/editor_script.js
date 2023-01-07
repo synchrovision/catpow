@@ -32,6 +32,8 @@
     },
     example: CP.example,
     edit({ attributes, className, setAttributes }) {
+      const { InnerBlocks, InspectorControls } = wp.blockEditor;
+      const { PanelBody, TextareaControl } = wp.components;
       const { classes } = attributes;
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys } = CP.config.unit;
@@ -93,6 +95,7 @@
       ];
     },
     save({ attributes, className, setAttributes }) {
+      const { InnerBlocks } = wp.blockEditor;
       const { classes = "" } = attributes;
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys } = CP.config.unit;

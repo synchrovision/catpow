@@ -23,6 +23,8 @@ wp.blocks.registerBlockType('catpow/sticky',{
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
 		const {useState,useMemo}=wp.element;
+		const {InnerBlocks,InspectorControls,RichText}=wp.blockEditor;
+		const {PanelBody,TextareaControl} = wp.components;
 		const {classes,labelText}=attributes;
 
 		const states=CP.wordsToFlags(classes);
@@ -117,6 +119,7 @@ wp.blocks.registerBlockType('catpow/sticky',{
 		];
 	},
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks,RichText}=wp.blockEditor;
 		const {classes='',labelText}=attributes;
 
 		const states=CP.wordsToFlags(classes);

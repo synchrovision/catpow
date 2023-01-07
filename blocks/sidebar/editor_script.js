@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/sidebar/editor_script.jsx
+  // blocks/sidebar/editor_script.jsx
   wp.blocks.registerBlockType("catpow/sidebar", {
     title: "\u{1F43E} Sidebar",
     description: "\u30B5\u30A4\u30C9\u30D0\u30FC\u306E\u3042\u308B\u30B3\u30F3\u30C6\u30F3\u30C4\u9818\u57DF\u306E\u30B3\u30F3\u30C6\u30CA\u3067\u3059\u3002",
@@ -10,12 +10,14 @@
     },
     example: CP.example,
     edit({ attributes, className, setAttributes }) {
+      const { InnerBlocks: InnerBlocks2, BlockControls, InspectorControls } = wp.blockEditor;
+      const { PanelBody, TextareaControl } = wp.components;
       const { classes } = attributes;
       const primaryClass = "wp-block-catpow-sidebar";
       var classArray = _.uniq((className + " " + classes).split(" "));
       return [
         /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement(
-          InnerBlocks,
+          InnerBlocks2,
           {
             template: [
               ["catpow/maincolumn"],
@@ -36,8 +38,9 @@
       ];
     },
     save({ attributes, className, setAttributes }) {
+      const { InnerBlocks: InnerBlocks2 } = wp.blockEditor;
       const { classes } = attributes;
-      return /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null));
+      return /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2.Content, null));
     }
   });
   registerBlockType("catpow/sidecolumn", {

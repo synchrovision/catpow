@@ -57,6 +57,8 @@ wp.blocks.registerBlockType('catpow/flow',{
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
+		const {BlockControls,InspectorControls,RichText}=wp.blockEditor;
+		const {PanelBody,TextareaControl,TextControl} = wp.components;
 		const {items=[],classes,countPrefix,countSuffix}=attributes;
 		const primaryClass='wp-block-catpow-flow';
 		var classArray=_.uniq((className+' '+classes).split(' '));
@@ -223,6 +225,7 @@ wp.blocks.registerBlockType('catpow/flow',{
 		);
 	},
 	save({attributes,className}){
+		const {RichText}=wp.blockEditor;
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
 		var classArray=_.uniq(classes.split(' '));
 

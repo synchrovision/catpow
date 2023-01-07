@@ -61,6 +61,8 @@
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
+		const {BlockControls,InspectorControls}=wp.blockEditor;
+		const {PanelBody,TextareaControl} = wp.components;
 		const {classes,graph,EditMode=false}=attributes;
 		const primaryClass='wp-block-catpow-chart';
 		var classArray=_.uniq((className+' '+classes).split(' '));

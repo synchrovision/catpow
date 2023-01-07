@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/section/editor_script.jsx
+  // blocks/section/editor_script.jsx
   var { __ } = wp.i18n;
   CP.config.section = {
     devices: ["sp", "tb"],
@@ -23,6 +23,8 @@
     category: "catpow",
     example: CP.example,
     edit(props) {
+      const { InnerBlocks, BlockControls, InspectorControls, RichText } = wp.blockEditor;
+      const { PanelBody, TextareaControl, TextControl } = wp.components;
       const { attributes, className, setAttributes } = props;
       const { useMemo } = wp.element;
       const {
@@ -315,6 +317,7 @@
       ];
     },
     save({ attributes, className, setAttributes }) {
+      const { InnerBlocks, RichText } = wp.blockEditor;
       const {
         SectionTag,
         HeadingTag,

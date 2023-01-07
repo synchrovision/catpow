@@ -10,6 +10,8 @@ wp.blocks.registerBlockType('catpow/widget',{
 	category: 'catpow-embed',
 	example:CP.example,
 	edit({attributes,setAttributes,className}){
+		const {InspectorControls}=wp.blockEditor;
+		const {PanelBody,TreeSelect,ServerSideRender} = wp.components;
         const {func,param}=attributes;
         let statesClasses,panels;
 

@@ -20,6 +20,8 @@
     example: CP.example,
     edit({ attributes, className, setAttributes }) {
       const { useState, useMemo } = wp.element;
+      const { InnerBlocks, BlockControls, InspectorControls, RichText } = wp.blockEditor;
+      const { PanelBody, TextareaControl } = wp.components;
       const { type, isHtmlMail, classes, headerText, footerText, body_class, textMail, TextMode = false } = attributes;
       const primaryClass = "wp-block-catpow-t-body";
       var states = CP.wordsToFlags(classes);
@@ -95,6 +97,7 @@
       ))));
     },
     save({ attributes, className, setAttributes }) {
+      const { InnerBlocks, RichText } = wp.blockEditor;
       const { type, isHtmlMail, classes, headerText, textMail, footerText } = attributes;
       const primaryClass = "wp-block-catpow-t-body";
       var states = CP.wordsToFlags(classes);

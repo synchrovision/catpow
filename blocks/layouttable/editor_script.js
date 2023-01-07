@@ -78,6 +78,8 @@
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useState, useMemo } = wp.element;
+      const { InnerBlocks, BlockControls, InspectorControls, RichText } = wp.blockEditor;
+      const { PanelBody, Button, TreeSelect, TextareaControl, TextControl, ServerSideRender } = wp.components;
       const { classes = "", rows } = attributes;
       const primaryClass = "wp-block-catpow-layouttable";
       if (attributes.file) {
@@ -506,6 +508,7 @@
       ];
     },
     save({ attributes, className }) {
+      const { RichText } = wp.blockEditor;
       const { classes, rows } = attributes;
       return /* @__PURE__ */ wp.element.createElement("table", { className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row) => {
         return /* @__PURE__ */ wp.element.createElement("tr", null, row.cells.map((cell) => {

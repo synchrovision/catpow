@@ -8,6 +8,8 @@
     parent: ["catpow/t-body", "catpow/t-box", "catpow/t-loop"],
     example: CP.example,
     edit({ attributes, setAttributes, className }) {
+      const { InnerBlocks, BlockControls, InspectorControls } = wp.blockEditor;
+      const { PanelBody, TextareaControl, TextControl } = wp.components;
       const { content_path, query, AltMode = false } = attributes;
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
         Toolbar,
@@ -42,6 +44,7 @@
       ))));
     },
     save({ attributes, className, setAttributes }) {
+      const { InnerBlocks } = wp.blockEditor;
       return /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null);
     }
   });
@@ -54,11 +57,13 @@
       name: { type: "attribute", label: "\u540D\u524D", selector: "t-loopContent", attribute: "name", default: "content" }
     },
     edit({ attributes, className, setAttributes, clientId }) {
+      const { InnerBlocks } = wp.blockEditor;
       const { name } = attributes;
       const template = name == "on_empty" ? [["catpow/t-paragraph", { align: "center", content: "Not Found" }]] : [["catpow/t-paragraph"]];
       return /* @__PURE__ */ wp.element.createElement("div", { className: "wp-block-catpow-t-loopContent" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template, templateLock: false }));
     },
     save({ attributes, className, setAttributes }) {
+      const { InnerBlocks } = wp.blockEditor;
       const { name } = attributes;
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("t-loopContent", { name }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }

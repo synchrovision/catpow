@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/t-paragraph/editor_script.jsx
+  // blocks/t-paragraph/editor_script.jsx
   wp.blocks.registerBlockType("catpow/t-paragraph", {
     title: "\u{1F43E} T-Paragraph",
     description: "HTML\u30E1\u30FC\u30EB\u7528\u306E\u6BB5\u843D\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
@@ -42,6 +42,8 @@
     example: CP.example,
     edit({ attributes, className, setAttributes, onReplace, mergeBlocks }) {
       const { useState, useMemo } = wp.element;
+      const { BlockControls, InspectorControls, RichText } = wp.blockEditor;
+      const { PanelBody, TextareaControl } = wp.components;
       const { classes, text } = attributes;
       const primaryClass = "wp-block-catpow-t-paragraph";
       var states = CP.wordsToFlags(classes);
@@ -99,6 +101,7 @@
       ];
     },
     save({ attributes, className, setAttributes }) {
+      const { RichText } = wp.blockEditor;
       const { classes, text } = attributes;
       const primaryClass = "wp-block-catpow-t-paragraph";
       return /* @__PURE__ */ wp.element.createElement("table", { width: "100%", className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: text })))));

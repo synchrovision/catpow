@@ -1409,7 +1409,7 @@
 	},
 
 	SelectClassPanel:(props)=>{
-		const {ColorPicker,__experimentalGradientPicker:GradientPicker}=wp.components;
+		const {PanelBody,ColorPicker,__experimentalGradientPicker:GradientPicker}=wp.components;
 		const {classKey='classes',items,index,subItemsKey,subIndex,set,attr,triggerClasses}=wp.hooks.applyFilters('catpow.SelectClassPanelProps',props);
 		let {itemsKey,itemClasses}=props;
 		let item;

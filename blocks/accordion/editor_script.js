@@ -25,6 +25,8 @@
     example: CP.example,
     edit({ attributes, className, setAttributes }) {
       const { useState, useMemo } = wp.element;
+      const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
+      const { PanelBody, TextareaControl } = wp.components;
       const {
         classes,
         title,
@@ -99,6 +101,7 @@
       } = attributes;
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys, imageSizes } = CP.config.accordion;
+      const { InnerBlocks, RichText } = wp.blockEditor;
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement("div", { className: "header" }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { class: "image" }, states.isTemplate && imageCode ? imageCode : /* @__PURE__ */ wp.element.createElement(
         CP.ResponsiveImage,
         {

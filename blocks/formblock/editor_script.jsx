@@ -5,6 +5,8 @@
 	category: 'catpow-embed',
 	example:CP.example,
 	edit({attributes,setAttributes,className,isSelected,clientId}){
+		const {InnerBlocks,BlockControls,InspectorControls}=wp.blockEditor;
+		const {PanelBody,TreeSelect,TextareaControl,TextControl} = wp.components;
 		const {content_path,inputs,data_id,values,actions,EditMode=false}=attributes;
 
 		let postDataSelection=false;
@@ -78,11 +80,12 @@
 	},
 
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		return <InnerBlocks.Content/>;
 	}
 });
 
-registerBlockType('catpow/formblockcontent',{
+wp.blocks.registerBlockType('catpow/formblockcontent',{
 	title:'🐾 FormBlockContent',
 	icon:'editor-code',
 	category:'catpow',
@@ -92,6 +95,7 @@ registerBlockType('catpow/formblockcontent',{
 		action:{type:'attribute',label:'アクション',selector:'formBlockContent',attribute:'action',default:'{}'}
 	},
 	edit({attributes,className,setAttributes,clientId}){
+		const {InnerBlocks,InspectorControls}=wp.blockEditor;
 		const {name}=attributes;
 
 		const parentClientId=wp.data.select('core/block-editor').getBlockParentsByBlockName(clientId,'catpow/formblock')[0];
@@ -127,6 +131,7 @@ registerBlockType('catpow/formblockcontent',{
 		);
 	},
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		const {name,action}=attributes;
 		return (
 			<>

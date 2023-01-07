@@ -55,6 +55,8 @@ wp.blocks.registerBlockType('catpow/ranking',{
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {BlockControls,InspectorControls,RichText}=wp.blockEditor;
+		const {PanelBody,TextareaControl} = wp.components;
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
 		const primaryClass='wp-block-catpow-ranking';
 
@@ -185,6 +187,7 @@ wp.blocks.registerBlockType('catpow/ranking',{
 		];
 	},
 	save({attributes,className}){
+		const {RichText}=wp.blockEditor;
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
 
 		const states=CP.wordsToFlags(classes);

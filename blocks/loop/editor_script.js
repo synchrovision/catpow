@@ -7,6 +7,8 @@
     category: "catpow-embed",
     example: CP.example,
     edit({ attributes, setAttributes, className, clientId }) {
+      const { InnerBlocks: InnerBlocks2, BlockControls, InspectorControls } = wp.blockEditor;
+      const { PanelBody, TreeSelect, TextareaControl, ServerSideRender } = wp.components;
       const { content_path, deps = {}, query, config, EditMode = false } = attributes;
       const { useMemo } = wp.element;
       let configData;
@@ -47,7 +49,7 @@
           ]
         }
       )), configData.template && EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content loopContents" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
-        InnerBlocks,
+        InnerBlocks2,
         {
           allowedBlocks: ["catpow/loopcontent"],
           template: configData.template,
@@ -85,7 +87,8 @@
       ))));
     },
     save({ attributes, className, setAttributes }) {
-      return /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null);
+      const { InnerBlocks: InnerBlocks2 } = wp.blockEditor;
+      return /* @__PURE__ */ wp.element.createElement(InnerBlocks2.Content, null);
     },
     deprecated: [{
       save() {

@@ -48,6 +48,8 @@ wp.blocks.registerBlockType('catpow/honeycomb',{
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
+		const {BlockControls,InspectorControls,RichText}=wp.blockEditor;
+		const {PanelBody,TextareaControl,TextControl} = wp.components;
 		const {id,classes,items=[]}=attributes;
 		let {breakpoints,grid}=attributes;
 
@@ -251,6 +253,7 @@ wp.blocks.registerBlockType('catpow/honeycomb',{
 		];
 	},
 	save({attributes,className,setAttributes}){
+		const {RichText}=wp.blockEditor;
 		const {id,classes,items=[]}=attributes;
 		let {breakpoints,grid}=attributes;
 

@@ -27,6 +27,8 @@ wp.blocks.registerBlockType('catpow/accordion',{
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
 		const {useState,useMemo}=wp.element;
+		const {InnerBlocks,InspectorControls,RichText}=wp.blockEditor;
+		const {PanelBody,TextareaControl} = wp.components;
 		const {
 			classes,title,
 			imageMime,imageSrc,imageAlt,imageCode
@@ -114,6 +116,7 @@ wp.blocks.registerBlockType('catpow/accordion',{
 		}=attributes;
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys,imageSizes}=CP.config.accordion;
+		const {InnerBlocks,RichText}=wp.blockEditor;
 		
 		return (
 			<>

@@ -22,6 +22,8 @@
 	example:CP.example,
 	edit(props){
 		const {useState,useMemo}=wp.element;
+		const {InnerBlocks,InspectorControls}=wp.blockEditor;
+		const {PanelBody,TextareaControl} = wp.components;
 		const {attributes,className,setAttributes,context}=props;
 		const {id,classes,color}=attributes;
 		
@@ -69,6 +71,7 @@
 
 
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		const {id,classes='',color}=attributes;
 		
 		const states=CP.wordsToFlags(classes);

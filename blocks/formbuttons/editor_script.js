@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/formbuttons/editor_script.jsx
+  // blocks/formbuttons/editor_script.jsx
   wp.blocks.registerBlockType("catpow/formbuttons", {
     title: "\u{1F43E} FormButtons",
     description: "\u30D5\u30A9\u30FC\u30E0\u7528\u306E\u30DC\u30BF\u30F3\u3067\u3059\u3002",
@@ -8,6 +8,8 @@
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useState, useMemo } = wp.element;
+      const { BlockControls, InspectorControls } = wp.blockEditor;
+      const { PanelBody, TextareaControl } = wp.components;
       const { items = [], classes = "" } = attributes;
       const primaryClass = "wp-block-catpow-formbuttons";
       var classArray = _.uniq((className + " " + classes).split(" "));

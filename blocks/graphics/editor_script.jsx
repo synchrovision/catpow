@@ -86,6 +86,8 @@ wp.blocks.registerBlockType('catpow/graphics',{
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
+		const {InspectorControls,RichText}=wp.blockEditor;
+		const {PanelBody,TextareaControl,TextControl} = wp.components;
 		const {id,classes='',src,srcset,alt,heights,items=[],device}=attributes;
 
 		if(!id){
@@ -424,6 +426,7 @@ wp.blocks.registerBlockType('catpow/graphics',{
 		);
 	},
 	save({attributes,className,setAttributes}){
+		const {RichText}=wp.blockEditor;
 		const {id,classes,heights,heightSP,items=[]}=attributes;
 
 		const states=CP.wordsToFlags(classes);

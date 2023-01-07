@@ -33,6 +33,8 @@ wp.blocks.registerBlockType('catpow/slider',{
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
 		const {useState,useMemo}=wp.element;
+		const {InnerBlocks,InspectorControls,RichText}=wp.blockEditor;
+		const {PanelBody,TextareaControl} = wp.components;
 		const {classes='',controlClasses='',config,items,doLoop,EditMode=false,AltMode=false,device}=attributes;
 
 		const states=CP.wordsToFlags(classes);
@@ -401,6 +403,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 		);
 	},
 	save({attributes,className}){
+		const {InnerBlocks,RichText}=wp.blockEditor;
 		const {classes='',controlClasses='',config,items=[],doLoop}=attributes;
 
 		const states=CP.wordsToFlags(classes);

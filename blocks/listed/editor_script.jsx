@@ -27,6 +27,8 @@ wp.blocks.registerBlockType('catpow/listed',{
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
+		const {InnerBlocks,InspectorControls,RichText}=wp.blockEditor;
+		const {PanelBody,TextareaControl} = wp.components;
 		const {items=[],TitleTag,SubTitleTag,classes='',countPrefix,countSuffix,subCountPrefix,subCountSuffix,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-listed';
 		var classArray=_.uniq((className+' '+classes).split(' '));
@@ -371,6 +373,7 @@ wp.blocks.registerBlockType('catpow/listed',{
 		);
 	},
 	save({attributes,className}){
+		const {InnerBlocks,RichText}=wp.blockEditor;
 		const {items=[],TitleTag,SubTitleTag,classes='',countPrefix,countSuffix,subCountPrefix,subCountSuffix,linkUrl,linkText,loopParam,doLoop}=attributes;
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.listed;

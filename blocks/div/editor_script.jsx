@@ -39,6 +39,8 @@ wp.blocks.registerBlockType('catpow/div',{
 	example:CP.example,
 	edit(props){
 		const {useState,useMemo}=wp.element;
+		const {InnerBlocks,InspectorControls}=wp.blockEditor;
+		const {PanelBody,TextareaControl} = wp.components;
 		const {attributes,className,setAttributes,context}=props;
 		const {id,classes,color,patternImageCss,frameImageCss,borderImageCss}=attributes;
 		
@@ -153,6 +155,7 @@ wp.blocks.registerBlockType('catpow/div',{
 
 
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		const {id,classes='',color,patternImageCss,frameImageCss,borderImageCss}=attributes;
 		
 		const states=CP.wordsToFlags(classes);

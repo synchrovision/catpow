@@ -7,6 +7,8 @@
     category: "catpow-functional",
     example: CP.example,
     edit({ attributes, setAttributes, className }) {
+      const { InnerBlocks: InnerBlocks2, BlockControls, InspectorControls } = wp.blockEditor;
+      const { PanelBody, TextareaControl, TextControl } = wp.components;
       const { content_path, query, AltMode = false } = attributes;
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
         Toolbar,
@@ -20,7 +22,7 @@
             }
           ]
         }
-      )), /* @__PURE__ */ wp.element.createElement("div", { className: "loopBlock " + (AltMode ? "alt_content altMode" : "embedded_content") }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, AltMode ? /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" }) : content_path), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/loopblockcontent"], ["catpow/loopblockcontent", { name: "on_empty" }]], templateLock: "all" })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
+      )), /* @__PURE__ */ wp.element.createElement("div", { className: "loopBlock " + (AltMode ? "alt_content altMode" : "embedded_content") }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, AltMode ? /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" }) : content_path), /* @__PURE__ */ wp.element.createElement(InnerBlocks2, { template: [["catpow/loopblockcontent"], ["catpow/loopblockcontent", { name: "on_empty" }]], templateLock: "all" })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
           label: "content path",
@@ -41,7 +43,8 @@
       ))));
     },
     save({ attributes, className, setAttributes }) {
-      return /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null);
+      const { InnerBlocks: InnerBlocks2 } = wp.blockEditor;
+      return /* @__PURE__ */ wp.element.createElement(InnerBlocks2.Content, null);
     }
   });
   registerBlockType("catpow/loopblockcontent", {

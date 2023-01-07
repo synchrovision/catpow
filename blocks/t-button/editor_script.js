@@ -14,6 +14,8 @@
     example: CP.example,
     edit({ attributes, className, setAttributes }) {
       const { useState, useMemo } = wp.element;
+      const { InspectorControls, RichText } = wp.blockEditor;
+      const { PanelBody, TextareaControl } = wp.components;
       const { classes, title } = attributes;
       const primaryClass = "wp-block-catpow-t-button";
       var states = CP.wordsToFlags(classes);
@@ -57,6 +59,7 @@
       ];
     },
     save({ attributes, className, setAttributes }) {
+      const { RichText } = wp.blockEditor;
       const { classes, title, url } = attributes;
       const primaryClass = "wp-block-catpow-t-button";
       return /* @__PURE__ */ wp.element.createElement("a", { className: classes, href: url }, /* @__PURE__ */ wp.element.createElement("table", { width: "100%" }, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: title }))))));

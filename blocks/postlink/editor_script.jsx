@@ -5,6 +5,8 @@
 	category: 'catpow',
 	example:CP.example,
 	edit({attributes,setAttributes,className}){
+		const {InspectorControls}=wp.blockEditor;
+		const {PanelBody,ServerSideRender} = wp.components;
 		const {func,param}=attributes;
 
 		return [

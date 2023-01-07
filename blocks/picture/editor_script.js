@@ -21,6 +21,7 @@
     },
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
+      const { InspectorControls } = wp.blockEditor;
       const { classes, sources, src, srcset, alt, code, device } = attributes;
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys } = CP.config.picture;
@@ -39,7 +40,7 @@
           ]
         }
       ];
-      return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices }), /* @__PURE__ */ wp.element.createElement("div", { className: classes + (device ? " alt_content " + device : "") }, device && /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices }), /* @__PURE__ */ wp.element.createElement("div", { className: classes + (device ? " alt_content " + device : "") }, device && /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(
         CP.SelectResponsiveImage,
         {
           attr: attributes,

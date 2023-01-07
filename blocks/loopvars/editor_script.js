@@ -7,6 +7,8 @@
     category: "catpow-functional",
     example: CP.example,
     edit({ attributes, setAttributes, className }) {
+      const { InnerBlocks, InspectorControls } = wp.blockEditor;
+      const { PanelBody } = wp.components;
       const { items, columns, EditMode = false } = attributes;
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectModeToolbar,
@@ -39,6 +41,7 @@
       ))));
     },
     save({ attributes, className, setAttributes }) {
+      const { InnerBlocks } = wp.blockEditor;
       return /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null);
     }
   });

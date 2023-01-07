@@ -1,5 +1,5 @@
 (() => {
-  // ../blocks/t-box/editor_script.jsx
+  // blocks/t-box/editor_script.jsx
   wp.blocks.registerBlockType("catpow/t-box", {
     title: "\u{1F43E} T-Box",
     description: "HTML\u30E1\u30FC\u30EB\u7528\u306E\u30EC\u30A4\u30A2\u30A6\u30C8\u8ABF\u6574\u7528\u30B3\u30F3\u30C6\u30CA\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
@@ -12,6 +12,8 @@
     example: CP.example,
     edit({ attributes, className, setAttributes }) {
       const { useState, useMemo } = wp.element;
+      const { InnerBlocks, InspectorControls } = wp.blockEditor;
+      const { PanelBody, TextareaControl } = wp.components;
       const { classes } = attributes;
       const primaryClass = "wp-block-catpow-t-box";
       var states = CP.wordsToFlags(classes);
@@ -45,6 +47,7 @@
       ];
     },
     save({ attributes, className, setAttributes }) {
+      const { InnerBlocks } = wp.blockEditor;
       const { classes } = attributes;
       const primaryClass = "wp-block-catpow-t-box";
       var states = CP.wordsToFlags(classes);

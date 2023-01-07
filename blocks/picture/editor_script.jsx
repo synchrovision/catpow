@@ -22,6 +22,7 @@ wp.blocks.registerBlockType('catpow/picture',{
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {InspectorControls}=wp.blockEditor;
 		const {classes,sources,src,srcset,alt,code,device}=attributes;
 
 		const states=CP.wordsToFlags(classes);
@@ -44,7 +45,7 @@ wp.blocks.registerBlockType('catpow/picture',{
 		];
 
 		return (
-			<Fragment>
+			<>
 				<CP.SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices}/>
 				<div className={classes+(device?' alt_content '+device:'')}>
 					{device &&
@@ -71,7 +72,7 @@ wp.blocks.registerBlockType('catpow/picture',{
 						filters={CP.filters.picture || {}}
 					/>
 				</InspectorControls>
-			</Fragment>
+			</>
 		);
 	},
 	save({attributes,className,setAttributes}){

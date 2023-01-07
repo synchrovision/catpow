@@ -6,6 +6,8 @@
 	parent:['catpow/t-body','catpow/t-box','catpow/t-loop'],
 	example:CP.example,
 	edit({attributes,setAttributes,className}){
+		const {InnerBlocks,BlockControls,InspectorControls}=wp.blockEditor;
+		const {PanelBody,TextareaControl,TextControl} = wp.components;
 		const {content_path,query,AltMode=false}=attributes;
 
 		return (
@@ -49,6 +51,7 @@
 	},
 
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		return <InnerBlocks.Content/>;
 	}
 });
@@ -63,6 +66,7 @@ wp.blocks.registerBlockType('catpow/t-loopcontent',{
 		name:{type:'attribute',label:'名前',selector:'t-loopContent',attribute:'name',default:'content'},
 	},
 	edit({attributes,className,setAttributes,clientId}){
+		const {InnerBlocks}=wp.blockEditor;
 		const {name}=attributes;
 
 		const template=(name=='on_empty')?[['catpow/t-paragraph',{align:'center',content:'Not Found'}]]:[['catpow/t-paragraph']];
@@ -74,6 +78,7 @@ wp.blocks.registerBlockType('catpow/t-loopcontent',{
 		);
 	},
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		const {name}=attributes;
 		return (
 			<>

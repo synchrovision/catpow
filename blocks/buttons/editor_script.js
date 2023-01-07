@@ -8,6 +8,8 @@
     example: CP.example,
     edit(props) {
       const { useState, useMemo } = wp.element;
+      const { InnerBlocks: InnerBlocks2, InspectorControls } = wp.blockEditor;
+      const { PanelBody, TextareaControl } = wp.components;
       const { attributes, className, setAttributes, isSelected } = props;
       const { items = [], classes: classes2, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
       const primaryClass = "wp-block-catpow-buttons";
@@ -147,9 +149,10 @@
           ],
           isTemplate: states.isTemplate
         }
-      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, rtn))));
+      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks2, null)) : /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, rtn))));
     },
     save(props) {
+      const { InnerBlock } = wp.blockEditor;
       const { attributes, className } = props;
       const { items = [], classes: classes2, loopParam, doLoop } = attributes;
       const states = CP.wordsToFlags(classes2);

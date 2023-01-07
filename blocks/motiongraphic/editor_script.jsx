@@ -14,6 +14,7 @@ wp.blocks.registerBlockType('catpow/motiongraphic',{
 	},
 	edit({attributes,setAttributes,className}){
 		const {useCallback}=wp.element;
+		const {InnerBlocks,InspectorControls}=wp.blockEditor;
 		const {classes='',component,props}=attributes;
 		const {selections}=CP.config.motiongraphic;
 
@@ -81,6 +82,7 @@ wp.blocks.registerBlockType('catpow/motiongraphic',{
 	},
 
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		const {classes=''}=attributes;
 		const states=CP.wordsToFlags(classes);
 

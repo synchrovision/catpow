@@ -7,6 +7,8 @@
     category: "catpow-embed",
     example: CP.example,
     edit({ attributes, setAttributes, className, isSelected, clientId }) {
+      const { InnerBlocks, BlockControls, InspectorControls } = wp.blockEditor;
+      const { PanelBody: PanelBody2, TreeSelect, TextareaControl, TextControl: TextControl2 } = wp.components;
       const { content_path, inputs, data_id, values, actions, EditMode = false } = attributes;
       let postDataSelection = false;
       if (!actions && content_path) {
@@ -33,7 +35,7 @@
         {
           allowedBlocks: ["catpow/formblockcontent"]
         }
-      )), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u30D5\u30A9\u30FC\u30E0" }, /* @__PURE__ */ wp.element.createElement(
+      )), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody2, { title: "\u30D5\u30A9\u30FC\u30E0" }, /* @__PURE__ */ wp.element.createElement(
         TreeSelect,
         {
           label: "path",
@@ -50,8 +52,8 @@
             setAttributes({ content_path: content_path2, actions: null });
           }
         }
-      )), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u5165\u529B\u5024", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-        TextControl,
+      )), /* @__PURE__ */ wp.element.createElement(PanelBody2, { title: "\u5165\u529B\u5024", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+        TextControl2,
         {
           label: "\u5165\u529B\u540D",
           value: inputs,
@@ -60,7 +62,7 @@
           }
         }
       ), /* @__PURE__ */ wp.element.createElement(
-        TextControl,
+        TextControl2,
         {
           label: "\u30C7\u30FC\u30BFID",
           value: data_id,
@@ -80,10 +82,11 @@
       ))));
     },
     save({ attributes, className, setAttributes }) {
+      const { InnerBlocks } = wp.blockEditor;
       return /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null);
     }
   });
-  registerBlockType("catpow/formblockcontent", {
+  wp.blocks.registerBlockType("catpow/formblockcontent", {
     title: "\u{1F43E} FormBlockContent",
     icon: "editor-code",
     category: "catpow",
@@ -93,6 +96,7 @@
       action: { type: "attribute", label: "\u30A2\u30AF\u30B7\u30E7\u30F3", selector: "formBlockContent", attribute: "action", default: "{}" }
     },
     edit({ attributes, className, setAttributes, clientId }) {
+      const { InnerBlocks, InspectorControls } = wp.blockEditor;
       const { name } = attributes;
       const parentClientId = wp.data.select("core/block-editor").getBlockParentsByBlockName(clientId, "catpow/formblock")[0];
       const parentBlock = wp.data.select("core/block-editor").getBlock(parentClientId);
@@ -119,6 +123,7 @@
       )));
     },
     save({ attributes, className, setAttributes }) {
+      const { InnerBlocks } = wp.blockEditor;
       const { name, action } = attributes;
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("formBlockContent", { name, action }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }

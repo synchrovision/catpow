@@ -14,6 +14,8 @@
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
 		const {useState,useMemo}=wp.element;
+		const {InnerBlocks,BlockControls,InspectorControls}=wp.blockEditor;
+		const {PanelBody,TextareaControl} = wp.components;
 		const {classes,src,alt,imageCode,width}=attributes;
 		const primaryClass='wp-block-catpow-t-media-text';
 		var states=CP.wordsToFlags(classes);
@@ -81,6 +83,7 @@
 
 
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		const {classes,src,alt,imageCode,width}=attributes;
 		const primaryClass='wp-block-catpow-t-media-text';
 		var states=CP.wordsToFlags(classes);

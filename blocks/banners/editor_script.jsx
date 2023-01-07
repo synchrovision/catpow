@@ -24,6 +24,8 @@ wp.blocks.registerBlockType('catpow/banners',{
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
+		const {InnerBlocks,InspectorControls,RichText}=wp.blockEditor;
+		const {PanelBody,TextareaControl} = wp.components;
 		const {items=[],classes,loopCount,imageCode,doLoop,EditMode=false,AltMode=false}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
@@ -195,6 +197,7 @@ wp.blocks.registerBlockType('catpow/banners',{
 		);
 	},
 	save({attributes,className}){
+		const {InnerBlocks,RichText}=wp.blockEditor;
 		const {items=[],classes,loopParam,doLoop}=attributes;
 		
 		const states=CP.wordsToFlags(classes);

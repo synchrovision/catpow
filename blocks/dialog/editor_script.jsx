@@ -18,6 +18,8 @@
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
+		const {InnerBlocks,InspectorControls,RichText}=wp.blockEditor;
+		const {PanelBody,TextareaControl} = wp.components;
 		const {items=[],classes='',countPrefix,countSuffix,subCountPrefix,subCountSuffix,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-dialog';
 		var classArray=_.uniq((className+' '+classes).split(' '));
@@ -183,6 +185,7 @@
 		);
 	},
 	save({attributes,className}){
+		const {InnerBlocks,RichText}=wp.blockEditor;
 		const {items=[],classes='',countPrefix,countSuffix,subCountPrefix,subCountSuffix,linkUrl,linkText,loopParam,doLoop}=attributes;
 		var classArray=_.uniq(classes.split(' '));
 		

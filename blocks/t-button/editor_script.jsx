@@ -12,6 +12,8 @@
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
 		const {useState,useMemo}=wp.element;
+		const {InspectorControls,RichText}=wp.blockEditor;
+		const {PanelBody,TextareaControl} = wp.components;
 		const {classes,title}=attributes;
 		const primaryClass='wp-block-catpow-t-button';
 		var states=CP.wordsToFlags(classes);
@@ -63,6 +65,7 @@
 
 
 	save({attributes,className,setAttributes}){
+		const {RichText}=wp.blockEditor;
 		const {classes,title,url}=attributes;
 		const primaryClass='wp-block-catpow-t-button';
 		return (

@@ -151,6 +151,7 @@ wp.blocks.registerBlockType('catpow/switcher',{
 		);
 	},
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		return (<InnerBlocks.Content/>);
 	}
 });

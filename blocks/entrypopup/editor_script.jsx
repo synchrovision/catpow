@@ -4,7 +4,8 @@
 	icon:'admin-comments',
 	category:'catpow',
 	edit({attributes,className,setAttributes}){
-		const {Fragment,useState,useMemo}=wp.element;
+		const {useState,useMemo}=wp.element;
+		const {InnerBlocks,InspectorControls}=wp.blockEditor;
 		const [open,setOpen]=useState(false);
 		
 		const selectiveClasses=useMemo(()=>{

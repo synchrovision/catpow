@@ -5,6 +5,8 @@
 	category: 'catpow',
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {InnerBlocks,InspectorControls,RichText}=wp.blockEditor;
+		const {PanelBody,TextareaControl} = wp.components;
 		const {items=[],classes='',priceUnit,priceCaption,linkText,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-pricecard';
 		var classArray=_.uniq((className+' '+classes).split(' '));
@@ -262,6 +264,7 @@
 	   );
 	},
 	save({attributes,className}){
+		const {InnerBlocks,RichText}=wp.blockEditor;
 		const {items=[],classes='',priceUnit,priceCaption,linkText,loopCount,doLoop}=attributes;
 		const primaryClass='wp-block-catpow-pricecard';
 		var classArray=_.uniq(classes.split(' '));

@@ -141,7 +141,8 @@
       )));
     },
     save({ attributes, className, setAttributes }) {
-      return /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null);
+      const { InnerBlocks: InnerBlocks2 } = wp.blockEditor;
+      return /* @__PURE__ */ wp.element.createElement(InnerBlocks2.Content, null);
     }
   });
   registerBlockType("catpow/switchercontent", {

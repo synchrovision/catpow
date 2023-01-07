@@ -1,11 +1,13 @@
 (() => {
-  // ../blocks/embed/editor_script.jsx
+  // blocks/embed/editor_script.jsx
   wp.blocks.registerBlockType("catpow/embed", {
     title: "\u{1F43E} Embed",
     description: "\u30C6\u30FC\u30DE\u306B\u5B9A\u7FA9\u3055\u308C\u305F\u57CB\u3081\u8FBC\u307F\u30B3\u30F3\u30C6\u30F3\u30C4\u3092\u8868\u793A\u3057\u307E\u3059\u3002",
     icon: "editor-code",
     category: "catpow-embed",
     edit({ attributes, setAttributes, className }) {
+      const { InspectorControls } = wp.blockEditor;
+      const { PanelBody, TreeSelect, ServerSideRender } = wp.components;
       const { content_path, query } = attributes;
       return [
         /* @__PURE__ */ wp.element.createElement("div", { class: "embedded_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/embed", attributes })),

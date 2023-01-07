@@ -55,6 +55,8 @@ wp.blocks.registerBlockType('catpow/faq',{
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
+		const {BlockControls,InspectorControls,RichText}=wp.blockEditor;
+		const {PanelBody,TextareaControl} = wp.components;
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
 		const primaryClass='wp-block-catpow-faq';
 
@@ -191,6 +193,7 @@ wp.blocks.registerBlockType('catpow/faq',{
 		];
 	},
 	save({attributes,className}){
+		const {RichText}=wp.blockEditor;
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
 
 		const states=CP.wordsToFlags(classes);

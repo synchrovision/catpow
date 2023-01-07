@@ -5,6 +5,8 @@
 	category:'catpow-embed',
 	example:CP.example,
 	edit({attributes,setAttributes,className,clientId}){
+		const {InnerBlocks,BlockControls,InspectorControls}=wp.blockEditor;
+		const {PanelBody,TreeSelect,TextareaControl,ServerSideRender} = wp.components;
 		const {content_path,deps={},query,config,EditMode=false}=attributes;
 		const {useMemo}=wp.element;
 		let configData;
@@ -107,6 +109,7 @@
 	},
 
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		return <InnerBlocks.Content/>;
 	},
 

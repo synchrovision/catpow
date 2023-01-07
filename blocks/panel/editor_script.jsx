@@ -42,6 +42,8 @@ wp.blocks.registerBlockType('catpow/panel',{
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
+		const {BlockControls,InspectorControls,RichText}=wp.blockEditor;
+		const {PanelBody,TextareaControl} = wp.components;
 		const {classes,items=[]}=attributes;
 		const primaryClass='wp-block-catpow-panel';
 		var classArray=_.uniq((classes).split(' '));
@@ -251,6 +253,7 @@ wp.blocks.registerBlockType('catpow/panel',{
 		];
 	},
 	save({attributes,className}){
+		const {RichText}=wp.blockEditor;
 		const {classes='',items=[]}=attributes;
 		let rtn=[];
 		items.map((item,index)=>{

@@ -8,6 +8,8 @@
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useState, useMemo } = wp.element;
+      const { InnerBlocks, InspectorControls, RichText: RichText2 } = wp.blockEditor;
+      const { PanelBody, TextareaControl } = wp.components;
       const { items = [], classes: classes2, loopParam, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
       const primaryClass = "wp-block-catpow-pricelist";
       var states = CP.wordsToFlags(classes2);
@@ -73,7 +75,7 @@
               }
             )),
             /* @__PURE__ */ wp.element.createElement("div", { className: "title" }, /* @__PURE__ */ wp.element.createElement(
-              RichText,
+              RichText2,
               {
                 onChange: (title) => {
                   item.title = title;
@@ -83,7 +85,7 @@
               }
             )),
             !itemStates.isHeading && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "line" }), /* @__PURE__ */ wp.element.createElement("div", { className: "price" }, /* @__PURE__ */ wp.element.createElement(
-              RichText,
+              RichText2,
               {
                 onChange: (price) => {
                   item.price = price;
@@ -93,7 +95,7 @@
               }
             ))),
             itemStates.hasCaption && /* @__PURE__ */ wp.element.createElement("div", { className: "caption" }, /* @__PURE__ */ wp.element.createElement(
-              RichText,
+              RichText2,
               {
                 onChange: (caption) => {
                   item.caption = caption;
@@ -166,6 +168,7 @@
       )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, rtn))));
     },
     save({ attributes, className }) {
+      const { InnerBlocks, RichText: RichText2 } = wp.blockEditor;
       const { items = [], classes: classes2 = "", loopParam, loopCount, doLoop } = attributes;
       var classArray = _.uniq(classes2.split(" "));
       var states = CP.wordsToFlags(classes2);
@@ -182,7 +185,7 @@
               attr: attributes,
               keys: imageKeys.image
             }
-          )), /* @__PURE__ */ wp.element.createElement("div", { className: "title" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), !itemStates.isHeading && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "line" }), /* @__PURE__ */ wp.element.createElement("div", { className: "price" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.price }))), itemStates.hasCaption && /* @__PURE__ */ wp.element.createElement("div", { className: "caption" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.caption })))
+          )), /* @__PURE__ */ wp.element.createElement("div", { className: "title" }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: item.title })), !itemStates.isHeading && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "line" }), /* @__PURE__ */ wp.element.createElement("div", { className: "price" }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: item.price }))), itemStates.hasCaption && /* @__PURE__ */ wp.element.createElement("div", { className: "caption" }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: item.caption })))
         );
       });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, rtn), doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));

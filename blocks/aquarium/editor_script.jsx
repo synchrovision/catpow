@@ -68,6 +68,7 @@
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
 		const {useState,useMemo}=wp.element;
+		const {InnerBlocks,InspectorControls}=wp.blockEditor;
 		const {classes,layers=[]}=attributes;
 		const primaryClass='wp-block-catpow-aquarium';
 		var classArray=_.uniq((className+' '+classes).split(' '));

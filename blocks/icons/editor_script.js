@@ -42,6 +42,8 @@
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useState, useMemo } = wp.element;
+      const { BlockControls, InspectorControls } = wp.blockEditor;
+      const { PanelBody, TreeSelect, TextareaControl } = wp.components;
       const { items = [], classes, countPrefix, countSuffix } = attributes;
       const primaryClass = "wp-block-catpow-icons";
       var classArray = _.uniq((className + " " + classes).split(" "));

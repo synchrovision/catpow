@@ -25,6 +25,8 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
+		const {InnerBlocks,InspectorControls,RichText}=wp.blockEditor;
+		const {PanelBody,TextareaControl} = wp.components;
 		const {items=[],classes,boxClasses,blockState,loopCount,doLoop,EditMode=false,AltMode=false,OpenMode=false,currentItemIndex=0}=attributes;
 		const {imageKeys}=CP.config.lightbox;
 
@@ -289,6 +291,7 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 		);
 	},
 	save({attributes,className}){
+		const {InnerBlocks,RichText}=wp.blockEditor;
 		const {items=[],classes='',boxClasses,blockState,doLoop}=attributes;
 
 		var states=CP.wordsToFlags(classes);

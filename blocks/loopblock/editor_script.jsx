@@ -5,6 +5,8 @@
 	category: 'catpow-functional',
 	example:CP.example,
 	edit({attributes,setAttributes,className}){
+		const {InnerBlocks,BlockControls,InspectorControls}=wp.blockEditor;
+		const {PanelBody,TextareaControl,TextControl} = wp.components;
 		const {content_path,query,AltMode=false}=attributes;
 
 		return (
@@ -48,6 +50,7 @@
 	},
 
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		return <InnerBlocks.Content/>;
 	}
 });

@@ -38,6 +38,8 @@
     example: CP.example,
     edit(props) {
       const { useState, useMemo } = wp.element;
+      const { InnerBlocks, InspectorControls } = wp.blockEditor;
+      const { PanelBody, TextareaControl } = wp.components;
       const { attributes, className, setAttributes, context } = props;
       const { id, classes, color, patternImageCss, frameImageCss, borderImageCss } = attributes;
       const states = CP.wordsToFlags(classes);
@@ -131,6 +133,7 @@
       ];
     },
     save({ attributes, className, setAttributes }) {
+      const { InnerBlocks } = wp.blockEditor;
       const { id, classes = "", color, patternImageCss, frameImageCss, borderImageCss } = attributes;
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys } = CP.config.div;

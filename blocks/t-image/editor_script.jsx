@@ -13,6 +13,8 @@
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
 		const {useState,useMemo}=wp.element;
+		const {InspectorControls}=wp.blockEditor;
+		const {PanelBody,TextareaControl} = wp.components;
 		const {classes,src,alt,loopImage}=attributes;
 		const primaryClass='wp-block-catpow-t-image';
 		var states=CP.wordsToFlags(classes);
