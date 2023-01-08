@@ -102,6 +102,13 @@ Catpow.util={
 			};
 		});
 	},
+	evalScript:(el)=>{
+		const script=document.createElement("script");
+		script.type="text/javascript";
+		script.appendChild(document.createTextNode(el.textContent));
+		document.head.prepend(script);
+		script.remove();
+	},
 	/*datetime*/
 	getDateValue:function(dateObj){
 		return dateObj.getFullYear()+'-'+ (dateObj.getMonth()+1)+'-'+ dateObj.getDate();
