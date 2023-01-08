@@ -1,15 +1,23 @@
-wp.hooks.addFilter('catpow.EventInputs', 'catpow/editor', function (EventInputs, _ref) {
-  var item = _ref.item,
-      save = _ref.save;
-  EventInputs.push(wp.element.createElement(CP.EventInputCards, {
-    title: 'FacebookPixel Event',
-    value: item['fbpEvent'],
-    onChange: function onChange(fbpEvent) {
-      save({
-        fbpEvent: fbpEvent
-      });
-    },
-    processer: window.Catpow.fbp
-  }));
-  return EventInputs;
-});
+(() => {
+  // ../functions/fbp/blocks/_init/filter.jsx
+  wp.hooks.addFilter(
+    "catpow.EventInputs",
+    "catpow/editor",
+    function(EventInputs, { item, save }) {
+      EventInputs.push(
+        /* @__PURE__ */ React.createElement(
+          CP.EventInputCards,
+          {
+            title: "FacebookPixel Event",
+            value: item["fbpEvent"],
+            onChange: (fbpEvent) => {
+              save({ fbpEvent });
+            },
+            processer: window.Catpow.fbp
+          }
+        )
+      );
+      return EventInputs;
+    }
+  );
+})();

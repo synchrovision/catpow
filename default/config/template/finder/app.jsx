@@ -1,4 +1,4 @@
-const app=(props)=>{
+window.app=(props)=>{
 	const {Finder}=Catpow;
 	const {SelectLayout}=Finder;
 	return (

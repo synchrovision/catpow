@@ -1,13 +1,21 @@
-wp.hooks.addFilter('catpow.EventInputs', 'catpow/editor', function (EventInputs, _ref) {
-  var item = _ref.item,
-      save = _ref.save;
-  EventInputs.push(wp.element.createElement(CP.YssEventInput, {
-    value: item['yssEvent'],
-    onChange: function onChange(yssEvent) {
-      save({
-        yssEvent: yssEvent
-      });
+(() => {
+  // ../functions/ytm/blocks/_init/filter.jsx
+  wp.hooks.addFilter(
+    "catpow.EventInputs",
+    "catpow/editor",
+    function(EventInputs, { item, save }) {
+      EventInputs.push(
+        /* @__PURE__ */ React.createElement(
+          CP.YssEventInput,
+          {
+            value: item["yssEvent"],
+            onChange: (yssEvent) => {
+              save({ yssEvent });
+            }
+          }
+        )
+      );
+      return EventInputs;
     }
-  }));
-  return EventInputs;
-});
+  );
+})();

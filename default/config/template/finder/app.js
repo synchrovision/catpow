@@ -1,11 +1,8 @@
-var app = function app(props) {
-	var _Catpow = Catpow,
-	    Finder = _Catpow.Finder;
-	var SelectLayout = Finder.SelectLayout;
-
-	return wp.element.createElement(
-		Finder,
-		props,
-		wp.element.createElement(SelectLayout, null)
-	);
-};
+(() => {
+  // default/config/template/finder/app.jsx
+  window.app = (props) => {
+    const { Finder } = Catpow;
+    const { SelectLayout } = Finder;
+    return /* @__PURE__ */ wp.element.createElement(Finder, { ...props }, /* @__PURE__ */ wp.element.createElement(SelectLayout, null));
+  };
+})();
