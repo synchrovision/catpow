@@ -1,4 +1,4 @@
-const app=(props)=>{
+window.app=(props)=>{
 	const {useCallback}=wp.element;
 	
 	const App=useCallback((props)=>{
