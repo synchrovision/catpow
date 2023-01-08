@@ -35,6 +35,10 @@ wp_register_script('jquery-easing','https://cdnjs.cloudflare.com/ajax/libs/jquer
 wp_register_script('wp-color-picker-alpha','https://cdn.jsdelivr.net/gh/kallookoo/wp-color-picker-alpha/dist/wp-color-picker-alpha.min.js',['wp-color-picker']);
 wp_register_script('ajaxzip3','https://ajaxzip3.github.io/ajaxzip3.js');
 
+wp_scripts()->add_data('react','global','React');
+wp_scripts()->add_data('react-dom','global','ReactDOM');
+wp_scripts()->add_data('jquery','global','jQuery');
+
 
 wp_register_script('wpinfo',null);
 wp_localize_script('wpinfo','wpinfo',array(
