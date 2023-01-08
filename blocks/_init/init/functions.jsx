@@ -735,7 +735,7 @@
 		);
 	},
 	SelectButtons:(props)=>{
-		const {Button,ButtonGroup}=wp.components;
+		const {BaseControl,Button,ButtonGroup}=wp.components;
 		return (
 			<BaseControl label={props.label} help={props.help} id={'CP-SelectButtons-'+wp.compose.useInstanceId(CP.SelectButtons)}>
 				<div className="selectButtons">
@@ -752,6 +752,7 @@
 		);
 	},
 	SelectGridButtons:(props)=>{
+		const {BaseControl}=wp.components;
 		const maxStrlen=props.options.reduce((acc,cur)=>Math.max(acc,cur.label.length+cur.label.replace(/[ -~]+/,'').length),3);
 		const colNum=Math.min(6,Math.floor(36/(maxStrlen+2)));
 		return (
@@ -1228,6 +1229,8 @@
 	},
 	DynamicInput:(props)=>{
 		const {useMemo}=wp.element;
+		const {TextControl,TextareaControl,SelectControl,ToggleControl,RangeControl}=wp.components;
+
 		const {param,value,onChange}=props;
 		const type=param.type || param.input || 'text';
 		const {options}=useMemo(()=>{
@@ -1378,6 +1381,7 @@
 		);
 	},
 	ItemControlInfoPanel:()=>{
+		const {PanelBody}=wp.components;
 		return (
 			<PanelBody title="操作" initialOpen={false} icon="info">
 				<table>
@@ -1409,7 +1413,7 @@
 	},
 
 	SelectClassPanel:(props)=>{
-		const {PanelBody,ColorPicker,__experimentalGradientPicker:GradientPicker}=wp.components;
+		const {PanelBody,CheckboxControl,SelectControl,TextareaControl,TextControl,ColorPicker,__experimentalGradientPicker:GradientPicker}=wp.components;
 		const {classKey='classes',items,index,subItemsKey,subIndex,set,attr,triggerClasses}=wp.hooks.applyFilters('catpow.SelectClassPanelProps',props);
 		let {itemsKey,itemClasses}=props;
 		let item;
@@ -1988,6 +1992,7 @@
 	},
 
 	AlignClassToolbar:(props)=>{
+		const {BlockAlignmentToolbar}=wp.blockEditor;
 		const aligns=['left','center','right'];
 		return (
 			<BlockAlignmentToolbar
@@ -1998,6 +2003,7 @@
 		);
 	},
 	VerticalAlignClassToolbar:(props)=>{
+		const {BlockVerticalAlignmentToolbar}=wp.blockEditor;
 		const aligns=['top','center','bottom'];
 		return (
 			<BlockVerticalAlignmentToolbar
@@ -2008,6 +2014,7 @@
 		);
 	},
 	SelectColorClass:(props)=>{
+		const {BaseControl}=wp.components;
 		const {label,help}=props;
 
 		return (
@@ -2020,6 +2027,7 @@
 		);
 	},
 	SelectPatternClass:(props)=>{
+		const {BaseControl}=wp.components;
 		const {label,help,selected,onChange}=props;
 
 		var items=Array.from(Array(6),(v,i)=>{
@@ -2042,6 +2050,7 @@
 	},
 
 	SelectPositionClass:(props)=>{
+		const {BaseControl}=wp.components;
 		const rows=[
 			['topLeft','top','topRight'],
 			['left','center','right'],
@@ -2083,6 +2092,7 @@
 	},
 
 	ImporterCSVPanel:(props)=>{
+		const {PanelBody,FormFileUpload}=wp.components;
 		let reader=new FileReader();
 		reader.onload=(e)=>{
 			props.callback(CP.parseCSV(e.target.result));
@@ -2099,6 +2109,8 @@
 	},
 
 	SelectBreakPointToolbar:(props)=>{
+		const {Toolbar}=wp.components;
+
 		return (
 			<Toolbar
 				controls={props.breakpoints.map((bp)=>{
@@ -2117,6 +2129,9 @@
 		);
 	},
 	SelectModeToolbar:(props)=>{
+		const {BlockControls}=wp.blockEditor;
+		const {Toolbar}=wp.components;
+
 		const {set,attr,modes=['EditMode','AltMode']}=props;
 		const SomeMode=modes.some((mode)=>attr[mode]);
 		const icons={
@@ -2151,6 +2166,8 @@
 	},
 
 	SelectDeviceToolbar:(props)=>{
+		const {BlockControls}=wp.blockEditor;
+		const {Toolbar}=wp.components;
 		const {set,attr,devices=['sp','pc']}=props;
 		return (
 			<BlockControls>
@@ -2305,7 +2322,7 @@
 	EventInputCards:(props)=>{
 		const {title,onChange}=props;
 		const {useState,useReducer,useCallback,useEffect,useMemo}=wp.element;
-		const {Card,CardHeader,CardBody,Flex,FlexItem,FlexBlock,Icon}=wp.components;
+		const {BaseControl,Card,CardHeader,CardBody,Flex,FlexItem,FlexBlock,Icon,TextControl}=wp.components;
 		const {processerId,eventTypes,parseEventValue,createEventValue,eventParams}=props.processer;
 
 		const reducer=useCallback((state,action)=>{

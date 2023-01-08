@@ -1,9 +1,9 @@
-﻿const {registerFormatType}=wp.richText;
-registerFormatType('catpow/ruby',{
+﻿wp.richText.registerFormatType('catpow/ruby',{
 	title:'Ruby',
 	tagName:'ruby',
 	className:null,
 	edit({isActive,value,onChange}){
+		const {RichTextShortcut,RichTextToolbarButton}=wp.editor;
 		const onToggle=()=>{
 			if(isActive){
 				return onChange(wp.richText.toggleFormat(value,{type:'catpow/ruby'}));
@@ -49,16 +49,17 @@ registerFormatType('catpow/ruby',{
 		];
 	}
 });
-registerFormatType('catpow/rt',{
+wp.richText.registerFormatType('catpow/rt',{
 	title:'RubyText',
 	tagName:'rt',
 	className:null
 });
-registerFormatType('catpow/small',{
+wp.richText.registerFormatType('catpow/small',{
 	title:'small',
 	tagName:'small',
 	className:null,
 	edit({isActive,value,onChange}){
+		const {RichTextToolbarButton,RichTextShortcut}=wp.editor;
 		const onToggle=()=>onChange(toggleFormat(value,{type:'catpow/small'}));
 
 		const icon=(
@@ -88,7 +89,7 @@ registerFormatType('catpow/small',{
 	}
 });
 
-registerFormatType('catpow/title',{
+wp.richText.registerFormatType('catpow/title',{
 	title:'Title',
 	tagName:'span',
 	className:'rtf-title',
@@ -97,7 +98,9 @@ registerFormatType('catpow/title',{
 	},
 	edit(props){
 		const {isActive,value,onChange,activeAttributes}=props;
-		const {Popover,Card,CardBody}=wp.components;
+		const {RichTextToolbarButton}=wp.editor;
+		const {BlockControls} = wp.blockEditor;
+		const {Popover,Card,CardBody,Toolbar}=wp.components;
 		const {useMemo,useCallback}=wp.element;
 		const {applyFormat}=wp.richText;
 
@@ -155,7 +158,7 @@ registerFormatType('catpow/title',{
 		];
 	}
 });
-registerFormatType('catpow/mark',{
+wp.richText.registerFormatType('catpow/mark',{
 	title:'Mark',
 	tagName:'mark',
 	className:'rtf-mark',
@@ -164,7 +167,9 @@ registerFormatType('catpow/mark',{
 	},
 	edit(props){
 		const {isActive,value,onChange,activeAttributes}=props;
-		const {Popover,Card,CardBody}=wp.components;
+		const {Popover,Card,CardBody,Toolbar}=wp.components;
+		const {RichTextShortcut,RichTextToolbarButton}=wp.editor;
+		const {BlockControls}=wp.blockEditor;
 		const {useMemo,useCallback}=wp.element;
 		const {applyFormat}=wp.richText;
 
@@ -214,7 +219,7 @@ registerFormatType('catpow/mark',{
 		];
 	}
 });
-registerFormatType('catpow/large',{
+wp.richText.registerFormatType('catpow/large',{
 	title:'Large',
 	tagName:'strong',
 	className:'rtf-large',
@@ -223,8 +228,10 @@ registerFormatType('catpow/large',{
 	},
 	edit(props){
 		const {isActive,value,onChange,activeAttributes}=props;
-		const {Popover,Card,CardBody}=wp.components;
+		const {Popover,Card,CardBody,Toolbar}=wp.components;
 		const {useMemo,useCallback}=wp.element;
+		const {RichTextToolbarButton}=wp.editor;
+		const {BlockControls} = wp.blockEditor;
 		const {applyFormat}=wp.richText;
 
 		const onToggle=()=>{
@@ -277,7 +284,7 @@ registerFormatType('catpow/large',{
 	}
 });
 
-registerFormatType('catpow/tag',{
+wp.richText.registerFormatType('catpow/tag',{
 	title:'tag',
 	tagName:'a',
 	className:'rtf-tag',
@@ -287,7 +294,9 @@ registerFormatType('catpow/tag',{
 	},
 	edit(props){
 		const {isActive,value,onChange,onFocus,activeAttributes,activeObject}=props;
-		const {Popover,BaseControle,TextControl,Card,CardBody}=wp.components;
+		const {Popover,BaseControle,TextControl,Card,CardBody,Toolbar}=wp.components;
+		const {BlockControls} = wp.blockEditor;
+		const {RichTextToolbarButton,RichTextShortcut}=wp.editor;
 		const {useState,useMemo,useCallback}=wp.element;
 		const {removeFormat,applyFormat,insert,create,slice}=wp.richText;
 
@@ -340,11 +349,15 @@ registerFormatType('catpow/tag',{
 	}
 });
 
-registerFormatType('catpow/annotation',{
+wp.richText.registerFormatType('catpow/annotation',{
 	title:'annotation',
 	tagName:'small',
 	className:'rtf-annotation',
 	edit({isActive,value,onChange}){
+		const {BlockControls} = wp.blockEditor;
+		const {Toolbar}=wp.components;
+		const {RichTextToolbarButton}=wp.editor;
+
 		const onToggle=()=>onChange(toggleFormat(value,{type:'catpow/annotation'}));
 
 		const icon=(
@@ -376,11 +389,12 @@ registerFormatType('catpow/annotation',{
 		];
 	}
 });
-registerFormatType('catpow/clear',{
+wp.richText.registerFormatType('catpow/clear',{
 	title:'clear',
 	tagName:'div',
 	className:null,
 	edit({isActive,value,onChange}){
+		const {RichTextToolbarButton}=wp.editor;
 		const {create}=wp.richText;
 		return [
 			<RichTextToolbarButton

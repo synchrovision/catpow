@@ -65,12 +65,12 @@
   );
 
   // blocks/_init/init/format.jsx
-  var { registerFormatType } = wp.richText;
-  registerFormatType("catpow/ruby", {
+  wp.richText.registerFormatType("catpow/ruby", {
     title: "Ruby",
     tagName: "ruby",
     className: null,
     edit({ isActive, value, onChange }) {
+      const { RichTextShortcut, RichTextToolbarButton } = wp.editor;
       const onToggle = () => {
         if (isActive) {
           return onChange(wp.richText.toggleFormat(value, { type: "catpow/ruby" }));
@@ -113,16 +113,17 @@
       ];
     }
   });
-  registerFormatType("catpow/rt", {
+  wp.richText.registerFormatType("catpow/rt", {
     title: "RubyText",
     tagName: "rt",
     className: null
   });
-  registerFormatType("catpow/small", {
+  wp.richText.registerFormatType("catpow/small", {
     title: "small",
     tagName: "small",
     className: null,
     edit({ isActive, value, onChange }) {
+      const { RichTextToolbarButton, RichTextShortcut } = wp.editor;
       const onToggle = () => onChange(toggleFormat(value, { type: "catpow/small" }));
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("path", { d: "M5.6,16.7l3.6-9.4h1.3l3.8,9.4H13l-1.1-2.8H8l-1,2.8H5.6z M8.3,12.9h3.2l-1-2.6C10.2,9.5,10,8.9,9.9,8.4\n		C9.7,9,9.6,9.6,9.3,10.1L8.3,12.9z" }));
       return [
@@ -147,7 +148,7 @@
       ];
     }
   });
-  registerFormatType("catpow/title", {
+  wp.richText.registerFormatType("catpow/title", {
     title: "Title",
     tagName: "span",
     className: "rtf-title",
@@ -156,7 +157,9 @@
     },
     edit(props) {
       const { isActive, value, onChange, activeAttributes } = props;
-      const { Popover, Card, CardBody } = wp.components;
+      const { RichTextToolbarButton } = wp.editor;
+      const { BlockControls } = wp.blockEditor;
+      const { Popover, Card, CardBody, Toolbar } = wp.components;
       const { useMemo, useCallback } = wp.element;
       const { applyFormat } = wp.richText;
       const onToggle = () => {
@@ -198,7 +201,7 @@
       ];
     }
   });
-  registerFormatType("catpow/mark", {
+  wp.richText.registerFormatType("catpow/mark", {
     title: "Mark",
     tagName: "mark",
     className: "rtf-mark",
@@ -207,7 +210,9 @@
     },
     edit(props) {
       const { isActive, value, onChange, activeAttributes } = props;
-      const { Popover, Card, CardBody } = wp.components;
+      const { Popover, Card, CardBody, Toolbar } = wp.components;
+      const { RichTextShortcut, RichTextToolbarButton } = wp.editor;
+      const { BlockControls } = wp.blockEditor;
       const { useMemo, useCallback } = wp.element;
       const { applyFormat } = wp.richText;
       const onToggle = () => {
@@ -244,7 +249,7 @@
       ];
     }
   });
-  registerFormatType("catpow/large", {
+  wp.richText.registerFormatType("catpow/large", {
     title: "Large",
     tagName: "strong",
     className: "rtf-large",
@@ -253,8 +258,10 @@
     },
     edit(props) {
       const { isActive, value, onChange, activeAttributes } = props;
-      const { Popover, Card, CardBody } = wp.components;
+      const { Popover, Card, CardBody, Toolbar } = wp.components;
       const { useMemo, useCallback } = wp.element;
+      const { RichTextToolbarButton } = wp.editor;
+      const { BlockControls } = wp.blockEditor;
       const { applyFormat } = wp.richText;
       const onToggle = () => {
         return onChange(toggleFormat(value, { type: "catpow/large", attributes: { color: "color0" } }));
@@ -290,7 +297,7 @@
       ];
     }
   });
-  registerFormatType("catpow/tag", {
+  wp.richText.registerFormatType("catpow/tag", {
     title: "tag",
     tagName: "a",
     className: "rtf-tag",
@@ -300,7 +307,9 @@
     },
     edit(props) {
       const { isActive, value, onChange, onFocus, activeAttributes, activeObject } = props;
-      const { Popover, BaseControle, TextControl: TextControl2, Card, CardBody } = wp.components;
+      const { Popover, BaseControle, TextControl, Card, CardBody, Toolbar } = wp.components;
+      const { BlockControls } = wp.blockEditor;
+      const { RichTextToolbarButton, RichTextShortcut } = wp.editor;
       const { useState, useMemo, useCallback } = wp.element;
       const { removeFormat, applyFormat, insert, create, slice } = wp.richText;
       const onToggle = () => {
@@ -312,7 +321,7 @@
       }, [value, activeAttributes]);
       return [
         /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { getAnchorRect: () => el.getBoundingClientRect(), position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, null, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
-          TextControl2,
+          TextControl,
           {
             label: "URL",
             value: activeAttributes["url"],
@@ -343,11 +352,14 @@
       ];
     }
   });
-  registerFormatType("catpow/annotation", {
+  wp.richText.registerFormatType("catpow/annotation", {
     title: "annotation",
     tagName: "small",
     className: "rtf-annotation",
     edit({ isActive, value, onChange }) {
+      const { BlockControls } = wp.blockEditor;
+      const { Toolbar } = wp.components;
+      const { RichTextToolbarButton } = wp.editor;
       const onToggle = () => onChange(toggleFormat(value, { type: "catpow/annotation" }));
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("path", { d: "M2.99,2.01l7.04,7.04l7.04-7.04l0.62,0.62l-7.04,7.04l7.04,7.04l-0.62,0.62l-7.04-7.04l-7.06,7.06l-0.62-0.62l7.06-7.06\n		L2.37,2.62L2.99,2.01z M3.95,11.26c-0.87,0-1.6-0.73-1.6-1.6s0.73-1.6,1.6-1.6s1.6,0.73,1.6,1.6C5.55,10.58,4.78,11.26,3.95,11.26z\n		 M8.43,3.58c0-0.87,0.73-1.6,1.6-1.6s1.6,0.73,1.6,1.6s-0.73,1.6-1.6,1.6C9.11,5.18,8.43,4.42,8.43,3.58z M11.63,15.74\n		c0,0.87-0.73,1.6-1.6,1.6s-1.6-0.73-1.6-1.6c0-0.88,0.73-1.6,1.6-1.6C10.94,14.14,11.63,14.91,11.63,15.74z M16.11,8.06\n		c0.87,0,1.6,0.73,1.6,1.6s-0.73,1.6-1.6,1.6c-0.88,0-1.6-0.73-1.6-1.6C14.51,8.75,15.28,8.06,16.11,8.06z" }));
       return [
@@ -370,11 +382,12 @@
       ];
     }
   });
-  registerFormatType("catpow/clear", {
+  wp.richText.registerFormatType("catpow/clear", {
     title: "clear",
     tagName: "div",
     className: null,
     edit({ isActive, value, onChange }) {
+      const { RichTextToolbarButton } = wp.editor;
       const { create } = wp.richText;
       return [
         /* @__PURE__ */ wp.element.createElement(
@@ -1281,7 +1294,7 @@
       )));
     },
     SelectButtons: (props) => {
-      const { Button, ButtonGroup } = wp.components;
+      const { BaseControl, Button, ButtonGroup } = wp.components;
       return /* @__PURE__ */ wp.element.createElement(BaseControl, { label: props.label, help: props.help, id: "CP-SelectButtons-" + wp.compose.useInstanceId(CP2.SelectButtons) }, /* @__PURE__ */ wp.element.createElement("div", { className: "selectButtons" }, /* @__PURE__ */ wp.element.createElement(ButtonGroup, null, props.options.map((option) => /* @__PURE__ */ wp.element.createElement(
         Button,
         {
@@ -1292,6 +1305,7 @@
       )))));
     },
     SelectGridButtons: (props) => {
+      const { BaseControl } = wp.components;
       const maxStrlen = props.options.reduce((acc, cur) => Math.max(acc, cur.label.length + cur.label.replace(/[ -~]+/, "").length), 3);
       const colNum = Math.min(6, Math.floor(36 / (maxStrlen + 2)));
       return /* @__PURE__ */ wp.element.createElement(BaseControl, { label: props.label, help: props.help, id: "CP-SelectGridButtons-" + wp.compose.useInstanceId(CP2.SelectGridButtons) }, /* @__PURE__ */ wp.element.createElement("ul", { className: "selectGridButtons col" + colNum }, props.options.map((option) => /* @__PURE__ */ wp.element.createElement(
@@ -1732,6 +1746,7 @@
     },
     DynamicInput: (props) => {
       const { useMemo } = wp.element;
+      const { TextControl, TextareaControl, SelectControl, ToggleControl, RangeControl } = wp.components;
       const { param, value, onChange } = props;
       const type = param.type || param.input || "text";
       const { options } = useMemo(() => {
@@ -1900,10 +1915,11 @@
       );
     },
     ItemControlInfoPanel: () => {
+      const { PanelBody } = wp.components;
       return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u64CD\u4F5C", initialOpen: false, icon: "info" }, /* @__PURE__ */ wp.element.createElement("table", null, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + S"), /* @__PURE__ */ wp.element.createElement("td", null, "\u4FDD\u5B58")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + D"), /* @__PURE__ */ wp.element.createElement("td", null, "\u8907\u88FD")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + delete"), /* @__PURE__ */ wp.element.createElement("td", null, "\u524A\u9664")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + \u2191"), /* @__PURE__ */ wp.element.createElement("td", null, "\u524D\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + \u2193"), /* @__PURE__ */ wp.element.createElement("td", null, "\u6B21\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048")))));
     },
     SelectClassPanel: (props) => {
-      const { PanelBody: PanelBody2, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
+      const { PanelBody, CheckboxControl, SelectControl, TextareaControl, TextControl, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
       const { classKey = "classes", items, index, subItemsKey, subIndex: subIndex2, set, attr, triggerClasses } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
       let { itemsKey, itemClasses } = props;
       let item;
@@ -2586,11 +2602,12 @@
         if (!itemClasses || Array.isArray(itemClasses) && itemClasses.length === 0) {
           return false;
         }
-        return /* @__PURE__ */ wp.element.createElement(PanelBody2, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, itemClasses.map(SelectClass));
+        return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, itemClasses.map(SelectClass));
       }
-      return /* @__PURE__ */ wp.element.createElement(PanelBody2, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, props.selectiveClasses.map(SelectClass), props.children);
+      return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, props.selectiveClasses.map(SelectClass), props.children);
     },
     AlignClassToolbar: (props) => {
+      const { BlockAlignmentToolbar } = wp.blockEditor;
       const aligns = ["left", "center", "right"];
       return /* @__PURE__ */ wp.element.createElement(
         BlockAlignmentToolbar,
@@ -2604,6 +2621,7 @@
       );
     },
     VerticalAlignClassToolbar: (props) => {
+      const { BlockVerticalAlignmentToolbar } = wp.blockEditor;
       const aligns = ["top", "center", "bottom"];
       return /* @__PURE__ */ wp.element.createElement(
         BlockVerticalAlignmentToolbar,
@@ -2617,6 +2635,7 @@
       );
     },
     SelectColorClass: (props) => {
+      const { BaseControl } = wp.components;
       const { label, help } = props;
       return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement(
         CP2.SelectThemeColor,
@@ -2627,6 +2646,7 @@
       ));
     },
     SelectPatternClass: (props) => {
+      const { BaseControl } = wp.components;
       const { label, help, selected, onChange } = props;
       var items = Array.from(Array(6), (v, i) => {
         var classes = "bgPattern" + i;
@@ -2646,6 +2666,7 @@
       return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement("ul", { class: "selectPattern" }, items));
     },
     SelectPositionClass: (props) => {
+      const { BaseControl } = wp.components;
       const rows = [
         ["topLeft", "top", "topRight"],
         ["left", "center", "right"],
@@ -2676,6 +2697,7 @@
       }))))));
     },
     ImporterCSVPanel: (props) => {
+      const { PanelBody, FormFileUpload } = wp.components;
       let reader = new FileReader();
       reader.onload = (e) => {
         props.callback(CP2.parseCSV(e.target.result));
@@ -2692,6 +2714,7 @@
       ));
     },
     SelectBreakPointToolbar: (props) => {
+      const { Toolbar } = wp.components;
       return /* @__PURE__ */ wp.element.createElement(
         Toolbar,
         {
@@ -2707,6 +2730,8 @@
       );
     },
     SelectModeToolbar: (props) => {
+      const { BlockControls } = wp.blockEditor;
+      const { Toolbar } = wp.components;
       const { set, attr, modes = ["EditMode", "AltMode"] } = props;
       const SomeMode = modes.some((mode) => attr[mode]);
       const icons = {
@@ -2741,6 +2766,8 @@
       }));
     },
     SelectDeviceToolbar: (props) => {
+      const { BlockControls } = wp.blockEditor;
+      const { Toolbar } = wp.components;
       const { set, attr, devices = ["sp", "pc"] } = props;
       return /* @__PURE__ */ wp.element.createElement(BlockControls, null, devices.map((device) => {
         return /* @__PURE__ */ wp.element.createElement(
@@ -2858,7 +2885,7 @@
     EventInputCards: (props) => {
       const { title, onChange } = props;
       const { useState, useReducer, useCallback, useEffect, useMemo } = wp.element;
-      const { Card, CardHeader, CardBody, Flex, FlexItem, FlexBlock, Icon: Icon2 } = wp.components;
+      const { BaseControl, Card, CardHeader, CardBody, Flex, FlexItem, FlexBlock, Icon: Icon2, TextControl } = wp.components;
       const { processerId, eventTypes, parseEventValue, createEventValue, eventParams } = props.processer;
       const reducer = useCallback((state2, action) => {
         switch (action.type) {
@@ -3021,13 +3048,12 @@
   window.CP = CP2;
 
   // blocks/_init/init/plugins.jsx
-  wp.plugins.registerPlugin("catpow-sidebar", { render: (props) => {
-    const { Fragment, useState, useCallback, useReducer } = wp.element;
-    const [structure, setStructure] = useState();
+  registerPlugin("catpow-sidebar", { render: (props) => {
+    const { useState, useMemo, useCallback } = wp.element;
     const { PluginSidebarMoreMenuItem, PluginSidebar } = wp.editPost;
-    const { PanelBody: PanelBody2 } = wp.components;
+    const { PanelBody } = wp.components;
+    const [structure, setStructure] = useState();
     const { DataStructure, DataStructureItem } = CP;
-    const { Button, ButtonGroup } = wp.components;
     if (!structure) {
       wp.apiFetch({ path: "/cp/v1/config/structure" }).then((structure2) => {
         setStructure(structure2);
@@ -3059,7 +3085,7 @@
         title: "\u{1F43E}Catpow",
         icon: /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("g", null, /* @__PURE__ */ wp.element.createElement("path", { d: "M10.1,14.5c0-0.9,0.5-1.4,1.3-1.5c0.6-0.1,1.1-0.5,1.6-0.8c0.8-0.5,2.3-0.4,3,0.1c0.4,0.3,0.8,0.6,1,1.1\n								c0.2,0.5,0.1,1,0.1,1.5c-0.1,0.8,0.1,1.6,0.1,2.4c0,1.3-1.4,1.7-2.3,1.4c-0.6-0.3-0.9-0.8-1.3-1.3c-0.4-0.4-0.9-0.7-1.4-0.9\n								c-0.8-0.3-1.7-0.6-2.1-1.6C10,14.8,10.1,14.6,10.1,14.5z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M2.8,8.6c0.3-1,0.5-2.2,0.9-3.3c0.3-0.8,1.9-1.3,2.7-1c0.9,0.3,1.7,0.9,2.5,1.4c0.5,0.3,1.1,0.5,1.4,1.1\n								c0.2,0.5,0.2,0.9,0,1.4c-0.6,1.2-1.7,1-2.7,1.1c-0.8,0.1-1.4,0.5-2,0.9c-0.5,0.3-1,0.5-1.6,0.4C3.2,10.2,2.7,9.7,2.8,8.6z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M4.9,2.2C4.8,2.8,4.8,3.6,4,3.9C3.5,4.1,3.2,3.8,2.9,3.5C2,2.6,2.2,1.6,2.7,0.6c0.2-0.3,0.5-0.5,0.9-0.4\n								c0.4,0,0.7,0.3,0.9,0.6C4.8,1.2,4.9,1.7,4.9,2.2z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M1,3.5c0.8,0,1.3,0.8,1.5,1.4c0.2,0.7,0.1,1.2-0.4,1.7C1.6,7.1,0.9,6.8,0.5,6.2C0.1,5.6,0.1,4.9,0.2,4.3\n								C0.2,3.8,0.4,3.4,1,3.5z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M5.8,1.8c0-1.2,0.4-1.6,1.3-1.5c0.6,0.1,1,0.6,1.1,1.2c0.1,0.8,0,1.5-0.6,2.1C7.1,4,6.7,3.7,6.5,3.4C6,3,5.7,2.4,5.8,1.8z\n								" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M15.3,11.5c-0.7,0-1-0.3-1-1c0-0.9,0.9-1.8,1.8-1.8c0.6,0,1.1,0.6,1.1,1.3C17.2,10.7,16.3,11.5,15.3,11.5z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M17.3,12.5c0-1.1,0.3-1.5,1.1-1.5c0.8,0,1.3,0.5,1.3,1.2c0,1-0.6,1.7-1.3,1.7C17.6,13.9,17.3,13.5,17.3,12.5z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M11.6,11.8c-0.5,0.1-0.9-0.2-0.9-0.8c0-1,0.6-1.9,1.3-2c0.8,0,1.3,0.4,1.3,1.2C13.3,11.1,12.7,11.7,11.6,11.8z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M18.9,17.7c-0.7,0-1.2-0.9-1-1.5c0.2-0.4,0.1-0.8,0.4-1.2c0.3-0.3,1.2-0.3,1.4,0.1c0.4,0.8,0.3,1.7-0.3,2.4\n								C19.3,17.6,19.1,17.7,18.9,17.7z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M8.7,3.4c0-0.6,0.4-1.1,0.9-1.1C10.2,2.3,11,3.2,11,4c0,0.6-0.5,0.9-1.1,1C9.2,4.9,8.7,4.3,8.7,3.4z" })))
       },
-      /* @__PURE__ */ wp.element.createElement(PanelBody2, { title: "\u30C7\u30FC\u30BF\u69CB\u9020", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(DataStructure, null, structure && Object.keys(structure).map((data_type) => {
+      /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u30C7\u30FC\u30BF\u69CB\u9020", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(DataStructure, null, structure && Object.keys(structure).map((data_type) => {
         return /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: data_type }, structure[data_type].length && /* @__PURE__ */ wp.element.createElement(DataStructure, null, structure[data_type].map((item) => /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: item.label, name: item.name }, item.meta.length && /* @__PURE__ */ wp.element.createElement(RenderMeta, { meta: item.meta })))));
       })))
     ));

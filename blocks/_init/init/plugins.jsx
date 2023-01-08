@@ -1,10 +1,10 @@
-﻿wp.plugins.registerPlugin('catpow-sidebar',{render:(props)=>{
-	const {Fragment,useState,useCallback,useReducer}=wp.element;
-	const [structure,setStructure]=useState();
+﻿registerPlugin('catpow-sidebar',{render:(props)=>{
+	const {useState,useMemo,useCallback}=wp.element;
 	const {PluginSidebarMoreMenuItem,PluginSidebar}=wp.editPost;
-	const {PanelBody} = wp.components;
+	const {PanelBody}=wp.components;
+
+	const [structure,setStructure]=useState();
 	const {DataStructure,DataStructureItem}=CP;
-	const {Button,ButtonGroup}=wp.components;
 	if(!structure){
 		wp.apiFetch({path:'/cp/v1/config/structure'}).then(structure=>{
 			setStructure(structure);
