@@ -7,7 +7,7 @@ class database implements iSetup{
 		global $wpdb,$cpdb;
 		require_once( ABSPATH.'wp-admin/includes/upgrade.php');
 
-		$org_tables=$cpdb->tables;
+		$org_tables=$cpdb->tables??[];
 
 		$created_tables=[];
 		$update_logs=[];
