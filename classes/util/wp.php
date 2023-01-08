@@ -11,20 +11,33 @@ class wp{
 		$styles->all_deps($styles->queue);
 		return [
 			'scripts'=>array_values(array_filter(array_map(function($handle)use($scripts){
-				if(empty($src=$scripts->registered[$handle]->src)){return false;}
-				if(!preg_match('|^(https?:)?//|',$src) && !($scripts->content_url && 0 === strpos($src,$scripts->content_url))){
-					return $scripts->base_url.$src;
-				}
-				return apply_filters('script_loader_src',$src,$handle);
+				return self::get_loader_src('script',$scripts,$handle);
 			},$scripts->to_do))),
 			'styles'=>array_values(array_filter(array_map(function($handle)use($styles){
-				if(empty($src=$styles->registered[$handle]->src)){return false;}
-				if(!preg_match( '|^(https?:)?//|',$src) && !($styles->content_url && 0 === strpos($src,$styles->content_url))){
-					 return $styles->base_url.$src;
-				}
-				return apply_filters('style_loader_src',$src,$handle);
+				return self::get_loader_src('style',$styles,$handle);
 			},$styles->to_do)))
 		];
+	}
+	public static function get_deps_data(){
+		$data=[];
+		foreach(['style','script'] as $type){
+			$$type=call_user_func('wp_'.$type.'s');
+			$$type->all_deps($$type->queue);
+			foreach($$type->to_do as $handle){
+				$data[$type.'s'][$handle]=[
+					'src'=>self::get_loader_src($type,$$type,$handle),
+					'extra'=>$$type->registered[$handle]->extra
+				];
+			}
+		}
+		return $data;
+	}
+	public static function get_loader_src($type,$loader,$handle){
+		if(empty($src=$loader->registered[$handle]->src)){return false;}
+		if(!preg_match('|^(https?:)?//|',$src) && !($loader->content_url && 0 === strpos($src,$loader->content_url))){
+			return $loader->base_url.$src;
+		}
+		return apply_filters($type.'_loader_src',$src,$handle);
 	}
 	public static function get_plugin_data_from_dir($dir){
 		foreach(glob(rtrim($dir,'/').'/*.php') as $file){
