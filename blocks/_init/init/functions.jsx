@@ -991,7 +991,7 @@
 					</tr>
 					<tr>
 					{devices.map((device)=>(
-						<td>
+						<td key={device}>
 							<div className="label">
 								<Icon icon={CP.devices[device].icon}/>
 							</div>
@@ -1046,7 +1046,7 @@
 				{state.images.map((image)=>{
 					const url=setURLparams(image.url,{c:color,theme:wpinfo.theme});
 					return (
-						<li className={'item '+((value==url)?'active':'')}>
+						<li className={'item '+((value==url)?'active':'')} key={image.url}>
 							<img
 								src={url}
 								alt={image.alt}
@@ -1104,7 +1104,7 @@
 					const imageset=state.imagesets[key];
 					const url=setURLparams(imageset[0].url,{c:color,theme:wpinfo.theme});
 					return (
-						<li className={'item '+((value==url)?'active':'')}>
+						<li className={'item '+((value==url)?'active':'')} key={key}>
 							<img
 								src={url}
 								alt={imageset[0].alt}
@@ -1162,7 +1162,7 @@
 			return (
 				<tr className="DataInputTable__body__row">
 				{Object.keys(cols).map((c)=>(
-					<td className="DataInputTable__body__row__cell">
+					<td className="DataInputTable__body__row__cell" key={c}>
 						<CP.DynamicInput
 							value={value[c]}
 							onChange={(val)=>{
@@ -1197,7 +1197,7 @@
 				<thead class="DataInputTable__head">
 					<tr class="DataInputTable__head__row">
 					{Object.keys(cols).map((c)=>(
-						<th className="DataInputTable__head__row__cell">{cols[c].label || c}</th>
+						<th className="DataInputTable__head__row__cell" key={c}>{cols[c].label || c}</th>
 					))}
 					</tr>
 				</thead>
@@ -1221,6 +1221,7 @@
 							value.splice(index,0,JSON.parse(JSON.stringify(rowValue)));
 							onChange(value);
 						}}
+						key={index}
 					/>
 				))}
 				</tbody>
@@ -1506,6 +1507,7 @@
 											CP.setJsonValue(props,prm.json,prm.key,value);
 										}}
 										checked={value & prm.values[key]}
+										key={key}
 									/>
 								);
 							});
@@ -2068,7 +2070,7 @@
 						<tr>
 						{cols.map((col)=>{
 							var isChecked=value==col;
-							if(disable && disable.includes(col)){return <td className="disable"> </td>;}
+							if(disable && disable.includes(col)){return <td className="disable" key={col}> </td>;}
 							return (
 								<td
 									className={isChecked?"active":""}
@@ -2080,6 +2082,7 @@
 											CP.switchSelectiveClass(props,values,col,props.key)
 										}
 									}}
+									key={col}
 								> </td>
 							);
 						})}
@@ -2158,6 +2161,7 @@
 									onClick:()=>set({[mode]:!attr[mode]})
 								}
 							]}
+							key={mode}
 						/>
 					);
 				})}
@@ -2187,6 +2191,7 @@
 									}
 								}
 							]}
+							key={device}
 						/>
 					);
 				})}
@@ -2216,6 +2221,7 @@
 								onClick={(e)=>{
 									set({currentItemIndex:index});
 								}}
+								key={index}
 							>
 								{columns.map((col)=>{
 									if('cond' in col && !col.cond){return false;}
@@ -2452,7 +2458,7 @@
 		return (
 			<BaseControl>
 			{state.events.length>0?(
-				state.events.map((event,index)=>(<EventInputCard event={event} index={index}/>))
+				state.events.map((event,index)=>(<EventInputCard event={event} index={index} key={index}/>))
 			):(
 				<EventInputCard event={{}} index={0}/>
 			)}
@@ -2492,7 +2498,7 @@
 		return (
 			<>
 				<RawHTML className={className}>{response}</RawHTML>
-				{stylesheets.map((stylesheet)=><link rel="stylesheet" href={stylesheet}/>)}
+				{stylesheets.map((stylesheet)=><link rel="stylesheet" href={stylesheet} key={stylesheet}/>)}
 			</>
 		);
 	}

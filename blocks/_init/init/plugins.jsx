@@ -81,11 +81,11 @@
 					<DataStructure>
 					{structure && Object.keys(structure).map((data_type)=>{
 						return (
-							<DataStructureItem title={data_type}>
+							<DataStructureItem title={data_type} key={data_type}>
 								{structure[data_type].length && (
 									<DataStructure>
 									{structure[data_type].map((item)=>(
-										<DataStructureItem title={item.label} name={item.name}>
+										<DataStructureItem title={item.label} name={item.name} key={item.name}>
 											{item.meta.length && <RenderMeta meta={item.meta}/>}
 										</DataStructureItem>
 									))}
