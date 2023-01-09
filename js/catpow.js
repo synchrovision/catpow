@@ -1,4 +1,4 @@
-/* global console wp Catpow Promise*/
+/* global console Catpow Promise Proxy*/
 window.Catpow=window.Catpow || {};
 window.Catpow.UI=window.Catpow.UI || {};
 window.Catpow.uiProps=window.Catpow.uiProps || {};
@@ -62,6 +62,75 @@ Catpow.util={
 	ready:(callback)=>{
 		if(document.readyState!=='loading'){callback();}
 		else{document.addEventListener('DOMContentLoaded',callback);}
+	},
+	/*dom*/
+	el:(tag,props,children)=>{
+		const el=document.createElement(tag);
+		Object.keys(props).forEach((key)=>{
+			el[key]=props[key];
+		});
+		if(Array.isArray(children)){
+			children.forEach((child)=>{
+				if(typeof child === 'string'){
+					el.appendChild(document.createTextNode(child));
+				}
+				else{el.appendChild(child);}
+			});
+		}
+		return el;
+	},
+	bem:(className)=>{
+		const children={};
+		return new Proxy(function(){
+			if(arguments.length>0){
+				const classes=[];let i;
+				for(i=0;i<arguments.length;i++){
+					if(typeof(arguments[i])==='string'){
+						classes.push(arguments[i]);
+						continue;
+					}
+					classes.push.apply(
+						classes,
+						Array.isArray(arguments[i])?arguments[i]:
+						Object.keys(arguments[i]).filter((c)=>arguments[i][c])
+					);
+				}
+				if(classes.length>0){return className+' '+classes.join(' ');}
+			}
+			return className;
+		},{
+			get:(target,prop)=>{
+				if(undefined===children[prop]){
+					children[prop]=Catpow.util.bem(className.split(' ')[0]+(prop[0]==='_'?'_':'-')+prop);
+				}
+				return children[prop];
+			}
+		});
+	},
+	/*calc*/
+	fib:(n)=>{
+		if(undefined===Catpow.util.fib.cache){Catpow.util.fib.cache=[0,1,1];}
+		if(undefined!==Catpow.util.fib.cache[n]){return Catpow.util.fib.cache[n];}
+		return Catpow.util.fib.cache[n-2]+Catpow.util.fib.cache[n-1];
+	},
+	bez:(ns,t)=>{
+		var p=0,n=ns.length-1,i;
+		p+=ns[0]*Math.pow((1-t),n)
+		for(i=1;i<n;i++){
+			p+=ns[i]*Math.pow((1-t),n-i)*Math.pow(t,i)*n;
+		}
+		p+=ns[n]*Math.pow(t,n);
+		return p;
+	},
+	srand:(w=88675123)=>{
+		var x=123456789,y=362436069,z=521288629;
+		return (min,max)=>{
+			let t;
+			t=x^(x<<11);
+			[x,y,z]=[y,z,w];
+			w=(w^(w>>>19))^(t^(t>>>8));
+			return min+Math.abs(w)%(max+1-min);
+		}
 	},
 	/*deps*/
 	requireStyles:function(styles){
