@@ -38,6 +38,7 @@ wp_register_script('ajaxzip3','https://ajaxzip3.github.io/ajaxzip3.js');
 wp_scripts()->add_data('react','global','React');
 wp_scripts()->add_data('react-dom','global','ReactDOM');
 wp_scripts()->add_data('jquery','global','jQuery');
+wp_scripts()->add_data('catpow','global','Catpow');
 
 
 wp_register_script('wpinfo',null);
