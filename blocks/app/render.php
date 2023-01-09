@@ -32,7 +32,13 @@ if(isset($config['deps'])){
 if(file_exists($f=$dir.'/init.php')){include $f;}
 if(file_exists($dir.'/style.scss')){cp::enqueue_style($path.'/style.css');}
 if($is_preview){
-	if(file_exists($f=$dir.'/preview.php')){return include $f;}
+	if(file_exists($dir.'/preview.php')){
+		cp::get_template_part($path.'/preview.php',compact('props'));
+	}
+	else{
+		echo('No Preview');
+	}
+	return;
 }
 wp_enqueue_script($app_name,$url.'/app.js',$deps);
 ?>

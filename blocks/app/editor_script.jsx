@@ -2,6 +2,8 @@
 * 現在の投稿を規定のテンプレートを用いて表示する
 * APIを用いて様々な操作を行うcomponentを表示する
 */
+
+
 wp.blocks.registerBlockType('catpow/app',{
 	title: '🐾 App',
 	icon: 'editor-code',
@@ -13,6 +15,9 @@ wp.blocks.registerBlockType('catpow/app',{
 	edit({attributes,setAttributes,className}){
 		const {content_path,props,options}=attributes;
 		const {useEffect}=wp.element;
+		const {InspectorControls}=wp.blockEditor;
+		const {PanelBody,TreeSelect}=wp.components;
+		const {useSelect}=wp.data;
 		
 		if(!options && content_path){
 			const path=content_path.substr(0,content_path.lastIndexOf('/'));
@@ -41,35 +46,37 @@ wp.blocks.registerBlockType('catpow/app',{
 			});
 		}
 		
-		return [
-			<div class="embedded_content">
-				<div class="label">{content_path}</div>
-				<CP.ServerSideRender block='catpow/app' attributes={attributes}/>
-			</div>,
-			<InspectorControls>
-				<PanelBody title="Path">
-					<TreeSelect
-						label='path'
-						selectedId={content_path}
-						tree={Object.values(cpEmbeddablesTree.app)}
-						onChange={(content_path)=>{
-							const path=content_path.substr(0,content_path.lastIndexOf('/'));
-							setAttributes({content_path,options:false,props:JSON.stringify({path})});
-						}}
-					/>
-				</PanelBody>
-				{options &&
-					<CP.SelectClassPanel
-						title='設定'
-						icon='edit'
-						set={setAttributes}
-						attr={attributes}
-						selectiveClasses={options}
-						initialOpen={true}
-					/>
-				}
-			</InspectorControls>
-		];
+		return (
+			<>
+				<div className="embedded_content">
+					<div className="label">{content_path}</div>
+					<CP.ServerSideRender block='catpow/app' attributes={attributes}/>
+				</div>
+				<InspectorControls>
+					<PanelBody title="Path">
+						<TreeSelect
+							label='path'
+							selectedId={content_path}
+							tree={Object.values(cpEmbeddablesTree.app)}
+							onChange={(content_path)=>{
+								const path=content_path.substr(0,content_path.lastIndexOf('/'));
+								setAttributes({content_path,options:false,props:JSON.stringify({path})});
+							}}
+						/>
+					</PanelBody>
+					{options &&
+						<CP.SelectClassPanel
+							title='設定'
+							icon='edit'
+							set={setAttributes}
+							attr={attributes}
+							selectiveClasses={options}
+							initialOpen={true}
+						/>
+					}
+				</InspectorControls>
+			</>
+		);
 	},
 
 	save({attributes,className,setAttributes}){

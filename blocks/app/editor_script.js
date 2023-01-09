@@ -1,95 +1,67 @@
-/*
-* 現在の投稿を規定のテンプレートを用いて表示する
-* APIを用いて様々な操作を行うcomponentを表示する
-*/
-registerBlockType('catpow/app', {
-  title: '🐾 App',
-  icon: 'editor-code',
-  category: 'catpow-embed',
-  example: CP.example,
-  supports: {
-    customClassName: false
-  },
-  edit: function edit(_ref) {
-    var attributes = _ref.attributes,
-        setAttributes = _ref.setAttributes,
-        className = _ref.className;
-    var content_path = attributes.content_path,
-        props = attributes.props,
-        options = attributes.options;
-    var useEffect = wp.element.useEffect;
-
-    if (!options && content_path) {
-      var path = content_path.substr(0, content_path.lastIndexOf('/'));
-      wp.apiFetch({
-        path: '/cp/v1/blocks/config/app/options?path=' + path
-      }).catch(function (res) {
-        console.log(res);
-      }).then(function (options) {
-        var newProps = JSON.parse(props);
-
-        var initOption = function initOption(option) {
-          option.json = 'props';
-
-          if (option.hasOwnProperty('default') && !newProps.hasOwnProperty(option.key)) {
-            newProps[option.key] = option.default;
-          }
-
-          if (option.sub) {
-            if (Array.isArray(option.sub)) {
-              option.sub.forEach(initOption);
-            } else {
-              Object.keys(option.sub).forEach(function (key) {
-                return initOption(option.sub[key]);
-              });
+(() => {
+  // blocks/app/editor_script.jsx
+  wp.blocks.registerBlockType("catpow/app", {
+    title: "\u{1F43E} App",
+    icon: "editor-code",
+    category: "catpow-embed",
+    example: CP.example,
+    supports: {
+      customClassName: false
+    },
+    edit({ attributes, setAttributes, className }) {
+      const { content_path, props, options } = attributes;
+      const { useEffect } = wp.element;
+      const { InspectorControls } = wp.blockEditor;
+      const { PanelBody, TreeSelect } = wp.components;
+      const { useSelect } = wp.data;
+      if (!options && content_path) {
+        const path = content_path.substr(0, content_path.lastIndexOf("/"));
+        wp.apiFetch({ path: "/cp/v1/blocks/config/app/options?path=" + path }).catch((res) => {
+          console.log(res);
+        }).then((options2) => {
+          const newProps = JSON.parse(props);
+          const initOption = (option) => {
+            option.json = "props";
+            if (option.hasOwnProperty("default") && !newProps.hasOwnProperty(option.key)) {
+              newProps[option.key] = option.default;
             }
-          }
-        };
-
-        options.forEach(initOption);
-        setAttributes({
-          options: options,
-          props: JSON.stringify(newProps)
-        });
-      });
-    }
-
-    return [wp.element.createElement("div", {
-      class: "embedded_content"
-    }, wp.element.createElement("div", {
-      class: "label"
-    }, content_path), wp.element.createElement(CP.ServerSideRender, {
-      block: "catpow/app",
-      attributes: attributes
-    })), wp.element.createElement(InspectorControls, null, wp.element.createElement(PanelBody, {
-      title: "Path"
-    }, wp.element.createElement(TreeSelect, {
-      label: "path",
-      selectedId: content_path,
-      tree: cpEmbeddablesTree.app,
-      onChange: function onChange(content_path) {
-        var path = content_path.substr(0, content_path.lastIndexOf('/'));
-        setAttributes({
-          content_path: content_path,
-          options: false,
-          props: JSON.stringify({
-            path: path
-          })
+            if (option.sub) {
+              if (Array.isArray(option.sub)) {
+                option.sub.forEach(initOption);
+              } else {
+                Object.keys(option.sub).forEach((key) => initOption(option.sub[key]));
+              }
+            }
+          };
+          options2.forEach(initOption);
+          setAttributes({ options: options2, props: JSON.stringify(newProps) });
         });
       }
-    })), options && wp.element.createElement(CP.SelectClassPanel, {
-      title: "\u8A2D\u5B9A",
-      icon: "edit",
-      set: setAttributes,
-      attr: attributes,
-      selectiveClasses: options,
-      initialOpen: true
-    }))];
-  },
-  save: function save(_ref2) {
-    var attributes = _ref2.attributes,
-        className = _ref2.className,
-        setAttributes = _ref2.setAttributes;
-    return 'null';
-  }
-});
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "embedded_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, content_path), /* @__PURE__ */ wp.element.createElement(CP.ServerSideRender, { block: "catpow/app", attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" }, /* @__PURE__ */ wp.element.createElement(
+        TreeSelect,
+        {
+          label: "path",
+          selectedId: content_path,
+          tree: Object.values(cpEmbeddablesTree.app),
+          onChange: (content_path2) => {
+            const path = content_path2.substr(0, content_path2.lastIndexOf("/"));
+            setAttributes({ content_path: content_path2, options: false, props: JSON.stringify({ path }) });
+          }
+        }
+      )), options && /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: "\u8A2D\u5B9A",
+          icon: "edit",
+          set: setAttributes,
+          attr: attributes,
+          selectiveClasses: options,
+          initialOpen: true
+        }
+      )));
+    },
+    save({ attributes, className, setAttributes }) {
+      return "null";
+    }
+  });
+})();
