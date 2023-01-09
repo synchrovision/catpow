@@ -18,5 +18,6 @@ Catpow.Customize=(props)=>{
 	},[id]);
 	
 	if(value===null){return false;}
+	if(!(type in Catpow.Customize)){console.error(`Catpow.Customize.${type} was not found`);return false;}
 	return wp.element.createElement(Catpow.Customize[type],{id,value,onChange,param});
 }
