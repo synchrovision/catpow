@@ -1414,6 +1414,7 @@
 	},
 
 	SelectClassPanel:(props)=>{
+		const {Fragment}=wp.element;
 		const {PanelBody,CheckboxControl,SelectControl,TextareaControl,TextControl,ColorPicker,__experimentalGradientPicker:GradientPicker}=wp.components;
 		const {classKey='classes',items,index,subItemsKey,subIndex,set,attr,triggerClasses}=wp.hooks.applyFilters('catpow.SelectClassPanelProps',props);
 		let {itemsKey,itemClasses}=props;
@@ -1981,13 +1982,21 @@
 			if(!itemClasses || Array.isArray(itemClasses) && itemClasses.length===0){return false;}
 			return (
 				<PanelBody title={props.title} initialOpen={props.initialOpen || false} icon={props.icon}>
-					{itemClasses.map(SelectClass)}
+					{itemClasses.map((prm,index)=>(
+						<Fragment key={index}>
+							{SelectClass(prm).map((item,index)=><Fragment key={index}>{item}</Fragment>)}
+						</Fragment>
+					))}
 				</PanelBody>
 			);
 		}
 		return (
 			<PanelBody title={props.title} initialOpen={props.initialOpen || false} icon={props.icon}>
-				{props.selectiveClasses.map(SelectClass)}
+				{props.selectiveClasses.map((prm,index)=>(
+					<Fragment key={index}>
+						{SelectClass(prm).map((item,index)=><Fragment key={index}>{item}</Fragment>)}
+					</Fragment>
+				))}
 				{props.children}
 			</PanelBody>
 		);
@@ -2066,8 +2075,8 @@
 			<BaseControl label={label} help={help}>
 				<table className="selectPosition">
 					<tbody>
-					{rows.map((cols)=>(
-						<tr>
+					{rows.map((cols,index)=>(
+						<tr key={index}>
 						{cols.map((col)=>{
 							var isChecked=value==col;
 							if(disable && disable.includes(col)){return <td className="disable" key={col}> </td>;}

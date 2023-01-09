@@ -1904,6 +1904,7 @@
       return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u64CD\u4F5C", initialOpen: false, icon: "info" }, /* @__PURE__ */ wp.element.createElement("table", null, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + S"), /* @__PURE__ */ wp.element.createElement("td", null, "\u4FDD\u5B58")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + D"), /* @__PURE__ */ wp.element.createElement("td", null, "\u8907\u88FD")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + delete"), /* @__PURE__ */ wp.element.createElement("td", null, "\u524A\u9664")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + \u2191"), /* @__PURE__ */ wp.element.createElement("td", null, "\u524D\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + \u2193"), /* @__PURE__ */ wp.element.createElement("td", null, "\u6B21\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048")))));
     },
     SelectClassPanel: (props) => {
+      const { Fragment } = wp.element;
       const { PanelBody, CheckboxControl, SelectControl, TextareaControl, TextControl, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
       const { classKey = "classes", items, index, subItemsKey, subIndex: subIndex2, set, attr, triggerClasses } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
       let { itemsKey, itemClasses } = props;
@@ -2588,9 +2589,9 @@
         if (!itemClasses || Array.isArray(itemClasses) && itemClasses.length === 0) {
           return false;
         }
-        return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, itemClasses.map(SelectClass));
+        return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, itemClasses.map((prm, index2) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: index2 }, SelectClass(prm).map((item2, index3) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: index3 }, item2)))));
       }
-      return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, props.selectiveClasses.map(SelectClass), props.children);
+      return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, props.selectiveClasses.map((prm, index2) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: index2 }, SelectClass(prm).map((item2, index3) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: index3 }, item2)))), props.children);
     },
     AlignClassToolbar: (props) => {
       const { BlockAlignmentToolbar } = wp.blockEditor;
@@ -2661,7 +2662,7 @@
       const values = _.flatten(rows);
       const { label, help, itemsKey, index, disable } = props;
       let value = itemsKey ? CP2.getItemSelectiveClass(props, values) : CP2.getSelectiveClass(props, values);
-      return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement("table", { className: "selectPosition" }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((cols) => /* @__PURE__ */ wp.element.createElement("tr", null, cols.map((col) => {
+      return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement("table", { className: "selectPosition" }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((cols, index2) => /* @__PURE__ */ wp.element.createElement("tr", { key: index2 }, cols.map((col) => {
         var isChecked = value == col;
         if (disable && disable.includes(col)) {
           return /* @__PURE__ */ wp.element.createElement("td", { className: "disable", key: col }, " ");
