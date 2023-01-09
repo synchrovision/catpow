@@ -30,7 +30,7 @@
 			</svg>
 		);
 
-		return [
+		return (
 			<>
 				<RichTextShortcut
 					type={'primary'}
@@ -46,7 +46,7 @@
 					shortcutCharacter={'r'}
 				/>
 			</>
-		];
+		);
 	}
 });
 wp.richText.registerFormatType('catpow/rt',{
@@ -69,7 +69,7 @@ wp.richText.registerFormatType('catpow/small',{
 			</svg>
 		);
 
-		return [
+		return (
 			<>
 				<RichTextShortcut
 					type={'primary'}
@@ -85,7 +85,7 @@ wp.richText.registerFormatType('catpow/small',{
 					shortcutCharacter={'-'}
 				/>
 			</>
-		];
+		);
 	}
 });
 
@@ -122,7 +122,7 @@ wp.richText.registerFormatType('catpow/title',{
 			</svg>
 		);
 
-		return [
+		return (
 			<>
 				{isActive && (
 					<Popover getAnchorRect={()=>el.getBoundingClientRect()} position='bottom left' focusOnMount={false}>
@@ -155,7 +155,7 @@ wp.richText.registerFormatType('catpow/title',{
 					isActive={isActive}
 				/>
 			</>
-		];
+		);
 	}
 });
 wp.richText.registerFormatType('catpow/mark',{
@@ -188,7 +188,7 @@ wp.richText.registerFormatType('catpow/mark',{
 			</svg>
 		);
 
-		return [
+		return (
 			<>
 				{isActive && (
 					<Popover getAnchorRect={()=>el.getBoundingClientRect()} position='bottom center' focusOnMount={false}>
@@ -216,7 +216,7 @@ wp.richText.registerFormatType('catpow/mark',{
 					isActive={isActive}
 				/>
 			</>
-		];
+		);
 	}
 });
 wp.richText.registerFormatType('catpow/large',{
@@ -252,7 +252,7 @@ wp.richText.registerFormatType('catpow/large',{
 			</svg>
 		);
 
-		return [
+		return (
 			<>
 				{isActive && (
 					<Popover getAnchorRect={()=>el.getBoundingClientRect()} position='bottom center' focusOnMount={false}>
@@ -280,7 +280,7 @@ wp.richText.registerFormatType('catpow/large',{
 					isActive={isActive}
 				/>
 			</>
-		];
+		);
 	}
 });
 
@@ -308,7 +308,7 @@ wp.richText.registerFormatType('catpow/tag',{
 			onChange(applyFormat(value,{type:'catpow/tag',attributes:Object.assign(activeAttributes,attr)}));
 		},[value,activeAttributes]);
 
-		return [
+		return (
 			<>
 				{isActive && (
 					<Popover getAnchorRect={()=>el.getBoundingClientRect()} position='bottom center' focusOnMount={false}>
@@ -345,7 +345,7 @@ wp.richText.registerFormatType('catpow/tag',{
 					isActive={isActive}
 				/>
 			</>
-		];
+		);
 	}
 });
 
@@ -370,7 +370,7 @@ wp.richText.registerFormatType('catpow/annotation',{
 			</svg>
 		);
 
-		return [
+		return (
 			<>
 				<BlockControls>
 					<Toolbar
@@ -386,7 +386,7 @@ wp.richText.registerFormatType('catpow/annotation',{
 					isActive={isActive}
 				/>
 			</>
-		];
+		);
 	}
 });
 wp.richText.registerFormatType('catpow/clear',{
@@ -396,13 +396,13 @@ wp.richText.registerFormatType('catpow/clear',{
 	edit({isActive,value,onChange}){
 		const {RichTextToolbarButton}=wp.editor;
 		const {create}=wp.richText;
-		return [
+		return (
 			<RichTextToolbarButton
 				icon={'dismiss'}
 				title={'🧹全てのスタイルをクリア'}
 				onClick={()=>onChange(create({html:value.text}))}
 				isActive={false}
 			/>
-		];
+		);
 	}
 });

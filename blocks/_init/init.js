@@ -91,26 +91,24 @@
         ));
       };
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("path", { d: "M3.6,19.8L8.9,6.2h1.9l5.6,13.6h-2l-1.6-4.1H7l-1.5,4.1H3.6z M7.6,14.2h4.6l-1.4-3.8c-0.4-1.1-0.8-2.1-1-2.8\n				c-0.2,0.9-0.4,1.7-0.7,2.6L7.6,14.2z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M10.7,4.4C10.4,4.7,10.1,4.9,9.8,5C9.6,5.1,9.3,5.1,9,5.1C8.4,5.2,8,5,7.7,4.8c-0.3-0.3-0.4-0.6-0.4-1c0-0.2,0-0.4,0.2-0.6\n					C7.6,3,7.7,2.8,7.9,2.7C8,2.6,8.2,2.5,8.5,2.4c0.2,0,0.4-0.1,0.7-0.1c0.7-0.1,1.1-0.2,1.4-0.3c0-0.1,0-0.2,0-0.2\n					c0-0.3-0.1-0.6-0.2-0.7c-0.2-0.2-0.5-0.3-0.9-0.3C9.1,0.8,8.8,0.9,8.6,1C8.4,1.2,8.3,1.4,8.2,1.8L7.4,1.7C7.5,1.3,7.6,1,7.8,0.8\n					c0.2-0.2,0.4-0.4,0.7-0.5c0.3-0.1,0.7-0.2,1.1-0.2c0.4,0,0.7,0,1,0.1c0.3,0.1,0.4,0.2,0.6,0.4c0.1,0.1,0.2,0.3,0.3,0.5\n					c0,0.1,0,0.4,0,0.7l0,1.1c0,0.8,0,1.2,0.1,1.4c0,0.2,0.1,0.4,0.2,0.6l-0.8,0C10.8,4.9,10.7,4.7,10.7,4.4z M10.6,2.6\n					C10.3,2.8,9.9,2.9,9.3,3C9,3,8.7,3.1,8.6,3.1C8.5,3.2,8.4,3.3,8.3,3.4C8.2,3.5,8.2,3.6,8.2,3.8c0,0.2,0.1,0.4,0.3,0.5\n					c0.2,0.1,0.4,0.2,0.7,0.2c0.3,0,0.6-0.1,0.8-0.2s0.4-0.3,0.5-0.6c0.1-0.2,0.1-0.5,0.1-0.8L10.6,2.6z" }));
-      return [
-        /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
-          RichTextShortcut,
-          {
-            type: "primary",
-            character: "r",
-            onUse: onToggle
-          }
-        ), /* @__PURE__ */ wp.element.createElement(
-          RichTextToolbarButton,
-          {
-            icon,
-            title: "Ruby",
-            onClick: onToggle,
-            isActive,
-            shortcutType: "primary",
-            shortcutCharacter: "r"
-          }
-        ))
-      ];
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
+        RichTextShortcut,
+        {
+          type: "primary",
+          character: "r",
+          onUse: onToggle
+        }
+      ), /* @__PURE__ */ wp.element.createElement(
+        RichTextToolbarButton,
+        {
+          icon,
+          title: "Ruby",
+          onClick: onToggle,
+          isActive,
+          shortcutType: "primary",
+          shortcutCharacter: "r"
+        }
+      ));
     }
   });
   wp.richText.registerFormatType("catpow/rt", {
@@ -126,26 +124,24 @@
       const { RichTextToolbarButton, RichTextShortcut } = wp.editor;
       const onToggle = () => onChange(toggleFormat(value, { type: "catpow/small" }));
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("path", { d: "M5.6,16.7l3.6-9.4h1.3l3.8,9.4H13l-1.1-2.8H8l-1,2.8H5.6z M8.3,12.9h3.2l-1-2.6C10.2,9.5,10,8.9,9.9,8.4\n		C9.7,9,9.6,9.6,9.3,10.1L8.3,12.9z" }));
-      return [
-        /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
-          RichTextShortcut,
-          {
-            type: "primary",
-            character: "-",
-            onUse: onToggle
-          }
-        ), /* @__PURE__ */ wp.element.createElement(
-          RichTextToolbarButton,
-          {
-            icon,
-            title: "small",
-            onClick: onToggle,
-            isActive,
-            shortcutType: "primary",
-            shortcutCharacter: "-"
-          }
-        ))
-      ];
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
+        RichTextShortcut,
+        {
+          type: "primary",
+          character: "-",
+          onUse: onToggle
+        }
+      ), /* @__PURE__ */ wp.element.createElement(
+        RichTextToolbarButton,
+        {
+          icon,
+          title: "small",
+          onClick: onToggle,
+          isActive,
+          shortcutType: "primary",
+          shortcutCharacter: "-"
+        }
+      ));
     }
   });
   wp.richText.registerFormatType("catpow/title", {
@@ -170,35 +166,33 @@
         onChange(applyFormat(value, { type: "catpow/title", attributes: Object.assign(activeAttributes, attr) }));
       }, [value, activeAttributes]);
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("g", null, /* @__PURE__ */ wp.element.createElement("path", { d: "M6.9,15.9V2.6h2.7v5.2h5.3V2.6h2.7v13.3h-2.7v-5.8H9.6v5.8H6.9z" })), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "1", width: "4", height: "18" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "5", y: "18", width: "14", height: "1" }));
-      return [
-        /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { getAnchorRect: () => el.getBoundingClientRect(), position: "bottom left", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
-          CP.SelectButtons,
-          {
-            options: [
-              { label: "header", value: "iheader" },
-              { label: "headline", value: "iheadline" },
-              { label: "catch", value: "icatch" }
-            ],
-            selected: activeAttributes["type"],
-            onChange: (type) => setAttributes({ type })
-          }
-        )))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
-          Toolbar,
-          {
-            controls: [
-              { icon, onClick: onToggle, isActive }
-            ]
-          }
-        )), /* @__PURE__ */ wp.element.createElement(
-          RichTextToolbarButton,
-          {
-            icon,
-            title: "Title",
-            onClick: onToggle,
-            isActive
-          }
-        ))
-      ];
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { getAnchorRect: () => el.getBoundingClientRect(), position: "bottom left", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectButtons,
+        {
+          options: [
+            { label: "header", value: "iheader" },
+            { label: "headline", value: "iheadline" },
+            { label: "catch", value: "icatch" }
+          ],
+          selected: activeAttributes["type"],
+          onChange: (type) => setAttributes({ type })
+        }
+      )))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
+        Toolbar,
+        {
+          controls: [
+            { icon, onClick: onToggle, isActive }
+          ]
+        }
+      )), /* @__PURE__ */ wp.element.createElement(
+        RichTextToolbarButton,
+        {
+          icon,
+          title: "Title",
+          onClick: onToggle,
+          isActive
+        }
+      ));
     }
   });
   wp.richText.registerFormatType("catpow/mark", {
@@ -223,30 +217,28 @@
         onChange(applyFormat(value, { type: "catpow/mark", attributes: Object.assign(activeAttributes, attr) }));
       }, [value, activeAttributes]);
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("polygon", { points: "7.9,10.8 12.1,10.8 10,5.3 	" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M0,2v16h20V2H0z M13.7,15.3L12.5,12h-5l-1.2,3.4H4.7L9,4h1.9l4.3,11.3H13.7z" }));
-      return [
-        /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { getAnchorRect: () => el.getBoundingClientRect(), position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
-          CP.SelectThemeColor,
-          {
-            onChange: (color) => setAttributes({ color }),
-            selected: activeAttributes["color"]
-          }
-        )))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
-          Toolbar,
-          {
-            controls: [
-              { icon, onClick: onToggle, isActive }
-            ]
-          }
-        )), /* @__PURE__ */ wp.element.createElement(
-          RichTextToolbarButton,
-          {
-            icon,
-            title: "Mark",
-            onClick: onToggle,
-            isActive
-          }
-        ))
-      ];
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { getAnchorRect: () => el.getBoundingClientRect(), position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectThemeColor,
+        {
+          onChange: (color) => setAttributes({ color }),
+          selected: activeAttributes["color"]
+        }
+      )))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
+        Toolbar,
+        {
+          controls: [
+            { icon, onClick: onToggle, isActive }
+          ]
+        }
+      )), /* @__PURE__ */ wp.element.createElement(
+        RichTextToolbarButton,
+        {
+          icon,
+          title: "Mark",
+          onClick: onToggle,
+          isActive
+        }
+      ));
     }
   });
   wp.richText.registerFormatType("catpow/large", {
@@ -271,30 +263,28 @@
         onChange(applyFormat(value, { type: "catpow/large", attributes: Object.assign(activeAttributes, attr) }));
       }, [value, activeAttributes]);
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("path", { d: "M4.8,0.5h5c1.6,0,2.8,0.1,3.6,0.4c0.8,0.2,1.5,0.7,2,1.5c0.5,0.8,0.8,2,0.8,3.6c0,1.1-0.2,1.9-0.5,2.4\n		c-0.4,0.4-1.1,0.8-2.1,1c1.2,0.3,1.9,0.7,2.4,1.3c0.4,0.6,0.6,1.5,0.6,2.8v1.8c0,1.3-0.1,2.3-0.4,2.9c-0.3,0.6-0.8,1.1-1.4,1.3\n		c-0.7,0.2-2,0.3-4,0.3H4.8V0.5z M9.8,3.8v4.3c0.2,0,0.4,0,0.5,0c0.5,0,0.8-0.1,0.9-0.4c0.1-0.2,0.2-0.9,0.2-2.1\n		c0-0.6-0.1-1-0.2-1.3s-0.3-0.4-0.4-0.5C10.7,3.8,10.4,3.8,9.8,3.8z M9.8,11.1v5.4c0.7,0,1.2-0.1,1.4-0.3c0.2-0.2,0.3-0.7,0.3-1.5\n		v-1.8c0-0.8-0.1-1.3-0.3-1.5C11.1,11.2,10.6,11.1,9.8,11.1z" }));
-      return [
-        /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { getAnchorRect: () => el.getBoundingClientRect(), position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
-          CP.SelectThemeColor,
-          {
-            onChange: (color) => setAttributes({ color }),
-            selected: activeAttributes["color"]
-          }
-        )))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
-          Toolbar,
-          {
-            controls: [
-              { icon, onClick: onToggle, isActive }
-            ]
-          }
-        )), /* @__PURE__ */ wp.element.createElement(
-          RichTextToolbarButton,
-          {
-            icon,
-            title: "Large",
-            onClick: onToggle,
-            isActive
-          }
-        ))
-      ];
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { getAnchorRect: () => el.getBoundingClientRect(), position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectThemeColor,
+        {
+          onChange: (color) => setAttributes({ color }),
+          selected: activeAttributes["color"]
+        }
+      )))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
+        Toolbar,
+        {
+          controls: [
+            { icon, onClick: onToggle, isActive }
+          ]
+        }
+      )), /* @__PURE__ */ wp.element.createElement(
+        RichTextToolbarButton,
+        {
+          icon,
+          title: "Large",
+          onClick: onToggle,
+          isActive
+        }
+      ));
     }
   });
   wp.richText.registerFormatType("catpow/tag", {
@@ -319,37 +309,35 @@
       const setAttributes = useCallback((attr) => {
         onChange(applyFormat(value, { type: "catpow/tag", attributes: Object.assign(activeAttributes, attr) }));
       }, [value, activeAttributes]);
-      return [
-        /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { getAnchorRect: () => el.getBoundingClientRect(), position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, null, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
-          TextControl,
-          {
-            label: "URL",
-            value: activeAttributes["url"],
-            onChange: (url) => setAttributes({ url })
-          }
-        ))), /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
-          CP.SelectThemeColor,
-          {
-            onChange: (color) => setAttributes({ color }),
-            selected: activeAttributes["color"]
-          }
-        )))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
-          Toolbar,
-          {
-            controls: [
-              { icon: "tag", onClick: onToggle, isActive }
-            ]
-          }
-        )), /* @__PURE__ */ wp.element.createElement(
-          RichTextToolbarButton,
-          {
-            icon: "tag",
-            title: "tag",
-            onClick: onToggle,
-            isActive
-          }
-        ))
-      ];
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { getAnchorRect: () => el.getBoundingClientRect(), position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, null, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
+        TextControl,
+        {
+          label: "URL",
+          value: activeAttributes["url"],
+          onChange: (url) => setAttributes({ url })
+        }
+      ))), /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectThemeColor,
+        {
+          onChange: (color) => setAttributes({ color }),
+          selected: activeAttributes["color"]
+        }
+      )))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
+        Toolbar,
+        {
+          controls: [
+            { icon: "tag", onClick: onToggle, isActive }
+          ]
+        }
+      )), /* @__PURE__ */ wp.element.createElement(
+        RichTextToolbarButton,
+        {
+          icon: "tag",
+          title: "tag",
+          onClick: onToggle,
+          isActive
+        }
+      ));
     }
   });
   wp.richText.registerFormatType("catpow/annotation", {
@@ -362,24 +350,22 @@
       const { RichTextToolbarButton } = wp.editor;
       const onToggle = () => onChange(toggleFormat(value, { type: "catpow/annotation" }));
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("path", { d: "M2.99,2.01l7.04,7.04l7.04-7.04l0.62,0.62l-7.04,7.04l7.04,7.04l-0.62,0.62l-7.04-7.04l-7.06,7.06l-0.62-0.62l7.06-7.06\n		L2.37,2.62L2.99,2.01z M3.95,11.26c-0.87,0-1.6-0.73-1.6-1.6s0.73-1.6,1.6-1.6s1.6,0.73,1.6,1.6C5.55,10.58,4.78,11.26,3.95,11.26z\n		 M8.43,3.58c0-0.87,0.73-1.6,1.6-1.6s1.6,0.73,1.6,1.6s-0.73,1.6-1.6,1.6C9.11,5.18,8.43,4.42,8.43,3.58z M11.63,15.74\n		c0,0.87-0.73,1.6-1.6,1.6s-1.6-0.73-1.6-1.6c0-0.88,0.73-1.6,1.6-1.6C10.94,14.14,11.63,14.91,11.63,15.74z M16.11,8.06\n		c0.87,0,1.6,0.73,1.6,1.6s-0.73,1.6-1.6,1.6c-0.88,0-1.6-0.73-1.6-1.6C14.51,8.75,15.28,8.06,16.11,8.06z" }));
-      return [
-        /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
-          Toolbar,
-          {
-            controls: [
-              { icon, onClick: onToggle, isActive }
-            ]
-          }
-        )), /* @__PURE__ */ wp.element.createElement(
-          RichTextToolbarButton,
-          {
-            icon,
-            title: "annotation",
-            onClick: onToggle,
-            isActive
-          }
-        ))
-      ];
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
+        Toolbar,
+        {
+          controls: [
+            { icon, onClick: onToggle, isActive }
+          ]
+        }
+      )), /* @__PURE__ */ wp.element.createElement(
+        RichTextToolbarButton,
+        {
+          icon,
+          title: "annotation",
+          onClick: onToggle,
+          isActive
+        }
+      ));
     }
   });
   wp.richText.registerFormatType("catpow/clear", {
@@ -389,17 +375,15 @@
     edit({ isActive, value, onChange }) {
       const { RichTextToolbarButton } = wp.editor;
       const { create } = wp.richText;
-      return [
-        /* @__PURE__ */ wp.element.createElement(
-          RichTextToolbarButton,
-          {
-            icon: "dismiss",
-            title: "\u{1F9F9}\u5168\u3066\u306E\u30B9\u30BF\u30A4\u30EB\u3092\u30AF\u30EA\u30A2",
-            onClick: () => onChange(create({ html: value.text })),
-            isActive: false
-          }
-        )
-      ];
+      return /* @__PURE__ */ wp.element.createElement(
+        RichTextToolbarButton,
+        {
+          icon: "dismiss",
+          title: "\u{1F9F9}\u5168\u3066\u306E\u30B9\u30BF\u30A4\u30EB\u3092\u30AF\u30EA\u30A2",
+          onClick: () => onChange(create({ html: value.text })),
+          isActive: false
+        }
+      );
     }
   });
 
@@ -1536,7 +1520,7 @@
     },
     SelectPictureSources: (props) => {
       const { devices } = props;
-      return /* @__PURE__ */ wp.element.createElement("table", { className: "SelectPictureSources" }, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { colspan: devices.length }, /* @__PURE__ */ wp.element.createElement(CP2.SelectResponsiveImage, { ...props }))), /* @__PURE__ */ wp.element.createElement("tr", null, devices.map((device) => /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP2.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("table", { className: "SelectPictureSources" }, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { colspan: devices.length }, /* @__PURE__ */ wp.element.createElement(CP2.SelectResponsiveImage, { ...props }))), /* @__PURE__ */ wp.element.createElement("tr", null, devices.map((device) => /* @__PURE__ */ wp.element.createElement("td", { key: device }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP2.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(
         CP2.SelectResponsiveImage,
         {
           device,
@@ -1585,7 +1569,7 @@
       }
       return /* @__PURE__ */ wp.element.createElement("ul", { className: "selectPreparedImage " + name + " " + className, ...otherProps }, state.images.map((image) => {
         const url = setURLparams(image.url, { c: color, theme: wpinfo.theme });
-        return /* @__PURE__ */ wp.element.createElement("li", { className: "item " + (value == url ? "active" : "") }, /* @__PURE__ */ wp.element.createElement(
+        return /* @__PURE__ */ wp.element.createElement("li", { className: "item " + (value == url ? "active" : ""), key: image.url }, /* @__PURE__ */ wp.element.createElement(
           "img",
           {
             src: url,
@@ -1637,7 +1621,7 @@
       return /* @__PURE__ */ wp.element.createElement("ul", { className: "selectPreparedImageSet " + name + " " + className, ...otherProps }, Object.keys(state.imagesets).map((key) => {
         const imageset = state.imagesets[key];
         const url = setURLparams(imageset[0].url, { c: color, theme: wpinfo.theme });
-        return /* @__PURE__ */ wp.element.createElement("li", { className: "item " + (value == url ? "active" : "") }, /* @__PURE__ */ wp.element.createElement(
+        return /* @__PURE__ */ wp.element.createElement("li", { className: "item " + (value == url ? "active" : ""), key }, /* @__PURE__ */ wp.element.createElement(
           "img",
           {
             src: url,
@@ -1685,7 +1669,7 @@
       const el = wp.element.createElement;
       const Row = useCallback((props2) => {
         const { cols: cols2, value: value2, onChange: onChange2 } = props2;
-        return /* @__PURE__ */ wp.element.createElement("tr", { className: "DataInputTable__body__row" }, Object.keys(cols2).map((c) => /* @__PURE__ */ wp.element.createElement("td", { className: "DataInputTable__body__row__cell" }, /* @__PURE__ */ wp.element.createElement(
+        return /* @__PURE__ */ wp.element.createElement("tr", { className: "DataInputTable__body__row" }, Object.keys(cols2).map((c) => /* @__PURE__ */ wp.element.createElement("td", { className: "DataInputTable__body__row__cell", key: c }, /* @__PURE__ */ wp.element.createElement(
           CP2.DynamicInput,
           {
             value: value2[c],
@@ -1712,7 +1696,7 @@
         });
         return colsWithoutLabel2;
       }, [cols]);
-      return /* @__PURE__ */ wp.element.createElement("table", { className: "DataInputTable" }, /* @__PURE__ */ wp.element.createElement("thead", { class: "DataInputTable__head" }, /* @__PURE__ */ wp.element.createElement("tr", { class: "DataInputTable__head__row" }, Object.keys(cols).map((c) => /* @__PURE__ */ wp.element.createElement("th", { className: "DataInputTable__head__row__cell" }, cols[c].label || c)))), /* @__PURE__ */ wp.element.createElement("tbody", { class: "DataInputTable__body" }, (value || defaultRowValues).map((rowValue, index) => /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("table", { className: "DataInputTable" }, /* @__PURE__ */ wp.element.createElement("thead", { class: "DataInputTable__head" }, /* @__PURE__ */ wp.element.createElement("tr", { class: "DataInputTable__head__row" }, Object.keys(cols).map((c) => /* @__PURE__ */ wp.element.createElement("th", { className: "DataInputTable__head__row__cell", key: c }, cols[c].label || c)))), /* @__PURE__ */ wp.element.createElement("tbody", { class: "DataInputTable__body" }, (value || defaultRowValues).map((rowValue, index) => /* @__PURE__ */ wp.element.createElement(
         Row,
         {
           cols: colsWithoutLabel,
@@ -1740,7 +1724,8 @@
             }
             value.splice(index, 0, JSON.parse(JSON.stringify(rowValue)));
             onChange(value);
-          }
+          },
+          key: index
         }
       ))));
     },
@@ -2027,7 +2012,8 @@
                           }
                           CP2.setJsonValue(props, prm.json, prm.key, value);
                         },
-                        checked: value & prm.values[key]
+                        checked: value & prm.values[key],
+                        key
                       }
                     )
                   );
@@ -2678,7 +2664,7 @@
       return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement("table", { className: "selectPosition" }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((cols) => /* @__PURE__ */ wp.element.createElement("tr", null, cols.map((col) => {
         var isChecked = value == col;
         if (disable && disable.includes(col)) {
-          return /* @__PURE__ */ wp.element.createElement("td", { className: "disable" }, " ");
+          return /* @__PURE__ */ wp.element.createElement("td", { className: "disable", key: col }, " ");
         }
         return /* @__PURE__ */ wp.element.createElement(
           "td",
@@ -2690,7 +2676,8 @@
               } else {
                 CP2.switchSelectiveClass(props, values, col, props.key);
               }
-            }
+            },
+            key: col
           },
           " "
         );
@@ -2760,7 +2747,8 @@
                 isActive: attr[mode],
                 onClick: () => set({ [mode]: !attr[mode] })
               }
-            ]
+            ],
+            key: mode
           }
         );
       }));
@@ -2786,7 +2774,8 @@
                   }
                 }
               }
-            ]
+            ],
+            key: device
           }
         );
       }));
@@ -2804,7 +2793,8 @@
           {
             onClick: (e) => {
               set({ currentItemIndex: index });
-            }
+            },
+            key: index
           },
           columns.map((col) => {
             if ("cond" in col && !col.cond) {
@@ -2990,7 +2980,7 @@
           )));
         })));
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(BaseControl, null, state.events.length > 0 ? state.events.map((event, index) => /* @__PURE__ */ wp.element.createElement(EventInputCard, { event, index })) : /* @__PURE__ */ wp.element.createElement(EventInputCard, { event: {}, index: 0 }));
+      return /* @__PURE__ */ wp.element.createElement(BaseControl, null, state.events.length > 0 ? state.events.map((event, index) => /* @__PURE__ */ wp.element.createElement(EventInputCard, { event, index, key: index })) : /* @__PURE__ */ wp.element.createElement(EventInputCard, { event: {}, index: 0 }));
     },
     ServerSideRender: (props) => {
       const { className, block, attributes } = props;
@@ -3025,7 +3015,7 @@
         });
         setHold(true);
       }, [JSON.stringify(attributes)]);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RawHTML, { className }, response), stylesheets.map((stylesheet) => /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: stylesheet })));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RawHTML, { className }, response), stylesheets.map((stylesheet) => /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: stylesheet, key: stylesheet })));
     }
   };
   CP2.example = {
@@ -3086,7 +3076,7 @@
         icon: /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("g", null, /* @__PURE__ */ wp.element.createElement("path", { d: "M10.1,14.5c0-0.9,0.5-1.4,1.3-1.5c0.6-0.1,1.1-0.5,1.6-0.8c0.8-0.5,2.3-0.4,3,0.1c0.4,0.3,0.8,0.6,1,1.1\n								c0.2,0.5,0.1,1,0.1,1.5c-0.1,0.8,0.1,1.6,0.1,2.4c0,1.3-1.4,1.7-2.3,1.4c-0.6-0.3-0.9-0.8-1.3-1.3c-0.4-0.4-0.9-0.7-1.4-0.9\n								c-0.8-0.3-1.7-0.6-2.1-1.6C10,14.8,10.1,14.6,10.1,14.5z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M2.8,8.6c0.3-1,0.5-2.2,0.9-3.3c0.3-0.8,1.9-1.3,2.7-1c0.9,0.3,1.7,0.9,2.5,1.4c0.5,0.3,1.1,0.5,1.4,1.1\n								c0.2,0.5,0.2,0.9,0,1.4c-0.6,1.2-1.7,1-2.7,1.1c-0.8,0.1-1.4,0.5-2,0.9c-0.5,0.3-1,0.5-1.6,0.4C3.2,10.2,2.7,9.7,2.8,8.6z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M4.9,2.2C4.8,2.8,4.8,3.6,4,3.9C3.5,4.1,3.2,3.8,2.9,3.5C2,2.6,2.2,1.6,2.7,0.6c0.2-0.3,0.5-0.5,0.9-0.4\n								c0.4,0,0.7,0.3,0.9,0.6C4.8,1.2,4.9,1.7,4.9,2.2z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M1,3.5c0.8,0,1.3,0.8,1.5,1.4c0.2,0.7,0.1,1.2-0.4,1.7C1.6,7.1,0.9,6.8,0.5,6.2C0.1,5.6,0.1,4.9,0.2,4.3\n								C0.2,3.8,0.4,3.4,1,3.5z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M5.8,1.8c0-1.2,0.4-1.6,1.3-1.5c0.6,0.1,1,0.6,1.1,1.2c0.1,0.8,0,1.5-0.6,2.1C7.1,4,6.7,3.7,6.5,3.4C6,3,5.7,2.4,5.8,1.8z\n								" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M15.3,11.5c-0.7,0-1-0.3-1-1c0-0.9,0.9-1.8,1.8-1.8c0.6,0,1.1,0.6,1.1,1.3C17.2,10.7,16.3,11.5,15.3,11.5z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M17.3,12.5c0-1.1,0.3-1.5,1.1-1.5c0.8,0,1.3,0.5,1.3,1.2c0,1-0.6,1.7-1.3,1.7C17.6,13.9,17.3,13.5,17.3,12.5z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M11.6,11.8c-0.5,0.1-0.9-0.2-0.9-0.8c0-1,0.6-1.9,1.3-2c0.8,0,1.3,0.4,1.3,1.2C13.3,11.1,12.7,11.7,11.6,11.8z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M18.9,17.7c-0.7,0-1.2-0.9-1-1.5c0.2-0.4,0.1-0.8,0.4-1.2c0.3-0.3,1.2-0.3,1.4,0.1c0.4,0.8,0.3,1.7-0.3,2.4\n								C19.3,17.6,19.1,17.7,18.9,17.7z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M8.7,3.4c0-0.6,0.4-1.1,0.9-1.1C10.2,2.3,11,3.2,11,4c0,0.6-0.5,0.9-1.1,1C9.2,4.9,8.7,4.3,8.7,3.4z" })))
       },
       /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u30C7\u30FC\u30BF\u69CB\u9020", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(DataStructure, null, structure && Object.keys(structure).map((data_type) => {
-        return /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: data_type }, structure[data_type].length && /* @__PURE__ */ wp.element.createElement(DataStructure, null, structure[data_type].map((item) => /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: item.label, name: item.name }, item.meta.length && /* @__PURE__ */ wp.element.createElement(RenderMeta, { meta: item.meta })))));
+        return /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: data_type, key: data_type }, structure[data_type].length && /* @__PURE__ */ wp.element.createElement(DataStructure, null, structure[data_type].map((item) => /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: item.label, name: item.name, key: item.name }, item.meta.length && /* @__PURE__ */ wp.element.createElement(RenderMeta, { meta: item.meta })))));
       })))
     ));
   } });
