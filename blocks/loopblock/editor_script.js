@@ -47,7 +47,7 @@
       return /* @__PURE__ */ wp.element.createElement(InnerBlocks2.Content, null);
     }
   });
-  registerBlockType("catpow/loopblockcontent", {
+  wp.blocks.registerBlockType("catpow/loopblockcontent", {
     title: "\u{1F43E} LoopBlockContent",
     icon: "editor-code",
     category: "catpow",

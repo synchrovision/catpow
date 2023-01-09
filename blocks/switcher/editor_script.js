@@ -145,7 +145,7 @@
       return /* @__PURE__ */ wp.element.createElement(InnerBlocks2.Content, null);
     }
   });
-  registerBlockType("catpow/switchercontent", {
+  wp.blocks.registerBlockType("catpow/switchercontent", {
     title: "\u{1F43E} SwitcherContent",
     icon: "editor-code",
     category: "catpow",

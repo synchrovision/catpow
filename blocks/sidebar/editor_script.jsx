@@ -51,7 +51,7 @@
 	}
 });
 
-registerBlockType('catpow/sidecolumn',{
+wp.blocks.registerBlockType('catpow/sidecolumn',{
 	title:'🐾 SideColumn',
 	icon:'editor-code',
 	category:'catpow',
@@ -88,7 +88,7 @@ registerBlockType('catpow/sidecolumn',{
 	]
 });
 
-registerBlockType('catpow/maincolumn',{
+wp.blocks.registerBlockType('catpow/maincolumn',{
 	title:'🐾 MainColumn',
 	icon:'editor-code',
 	category:'catpow',
@@ -112,7 +112,7 @@ registerBlockType('catpow/maincolumn',{
 	}
 });
 
-registerBlockType('catpow/articlenav',{
+wp.blocks.registerBlockType('catpow/articlenav',{
 	title:'🐾 ArticelNav',
 	icon:'editor-ul',
 	category:'catpow',

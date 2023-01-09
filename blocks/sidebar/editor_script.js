@@ -43,7 +43,7 @@
       return /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2.Content, null));
     }
   });
-  registerBlockType("catpow/sidecolumn", {
+  wp.blocks.registerBlockType("catpow/sidecolumn", {
     title: "\u{1F43E} SideColumn",
     icon: "editor-code",
     category: "catpow",
@@ -64,7 +64,7 @@
       }
     ]
   });
-  registerBlockType("catpow/maincolumn", {
+  wp.blocks.registerBlockType("catpow/maincolumn", {
     title: "\u{1F43E} MainColumn",
     icon: "editor-code",
     category: "catpow",
@@ -81,7 +81,7 @@
       return /* @__PURE__ */ wp.element.createElement("div", { className: "column column_main" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null));
     }
   });
-  registerBlockType("catpow/articlenav", {
+  wp.blocks.registerBlockType("catpow/articlenav", {
     title: "\u{1F43E} ArticelNav",
     icon: "editor-ul",
     category: "catpow",

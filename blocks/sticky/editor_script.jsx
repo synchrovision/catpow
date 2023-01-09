@@ -197,7 +197,7 @@ wp.blocks.registerBlockType('catpow/sticky',{
 	]
 });
 
-registerBlockType('catpow/stickycontent',{
+wp.blocks.registerBlockType('catpow/stickycontent',{
 	title:'🐾 StickyContent',
 	icon:'editor-code',
 	category:'catpow',

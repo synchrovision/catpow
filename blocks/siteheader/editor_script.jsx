@@ -1,4 +1,6 @@
-﻿wp.blocks.registerBlockType('catpow/siteheader',{
+﻿const {__}=wp.i18n;
+
+wp.blocks.registerBlockType('catpow/siteheader',{
 	title:'🐾 SiteHeader',
 	description:__('サイト共通ヘッダのブロックです。','catpow'),
 	icon:'welcome-widgets-menus',

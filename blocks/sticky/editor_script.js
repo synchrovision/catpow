@@ -157,7 +157,7 @@
       }
     ]
   });
-  registerBlockType("catpow/stickycontent", {
+  wp.blocks.registerBlockType("catpow/stickycontent", {
     title: "\u{1F43E} StickyContent",
     icon: "editor-code",
     category: "catpow",

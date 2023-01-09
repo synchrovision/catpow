@@ -157,7 +157,7 @@ wp.blocks.registerBlockType('catpow/switcher',{
 });
 
 
-registerBlockType('catpow/switchercontent',{
+wp.blocks.registerBlockType('catpow/switchercontent',{
 	title:'🐾 SwitcherContent',
 	icon:'editor-code',
 	category:'catpow',
