@@ -344,7 +344,31 @@ Catpow.util={
 			if(h>1){h--;}
 		}
         return {h:Math.round(h*360),s:Math.round(s*100),b:Math.round(b*100)};
-	}
+	},
+	/*animation*/
+	animate:(cb,dur=500,ease=null)=>{
+		var s=parseInt(performance.now()),c=1/dur,p=0;
+		if(ease===null){ease=Catpow.util.easeInOutQuad;}
+		if(Array.isArray(ease)){
+			const ns=ease;
+			ns.unshift(0);ns.push(1);
+			ease=(p)=>Catpow.util.bez(ns,p);
+		}
+		const tick=(t)=>{
+			p=(t-s)*c;
+			if(p>1){return cb(1);}
+			window.requestAnimationFrame(tick);
+			return cb(ease(p));
+		}
+		window.requestAnimationFrame(tick);
+	},
+	easeLinear:(p)=>p,
+	easeInQuad:(p)=>p*p,
+	easeOutQuad:(p)=>1-Math.pow(1-p,2),
+	easeInOutQuad:(p)=>(p<0.5)?(p*p*2):(1-Math.pow(1-p,2)*2),
+	easeInCubic:(p)=>p*p*p,
+	easeOutCubic:(p)=>1-Math.pow(1-p,3),
+	easeInOutCubic:(p)=>(p<0.5)?(p*p*p*4):(1-Math.pow(1-p,3)*4)
 };
 /*Math*/
 Math.sum=function(){
