@@ -4,7 +4,8 @@ $js_files=[];
 $cpjs_dir=dir(WP_PLUGIN_DIR.'/catpow/js');
 $deps_map=[
 	'jquery'=>['jquery'],
-	'cp'=>['catpow'],
+	'catpow.js'=>[],
+	'catpow'=>['catpow'],
 	'cpform'=>['catpow','wp-api-fetch'],
 	'cpui'=>['catpow','wp-element'],
 	'wp'=>['wpinfo']
@@ -15,7 +16,7 @@ while($fname = $cpjs_dir->read()){
 		wp_register_script(
 			substr($fname,0,-3),
 			plugins_url().'/catpow/js/'.$fname,
-			$deps_map[strstr($fname,'.',true)]??[],
+			$deps_map[$fname]??$deps_map[strstr($fname,'.',true)]??[],
 			filemtime(WP_PLUGIN_DIR.'/catpow/js/'.$fname),
 			true
 		);
