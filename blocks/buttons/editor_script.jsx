@@ -11,7 +11,7 @@
 	example:CP.example,
 	edit(props){
 		const {useState,useMemo}=wp.element;
-		const {InnerBlocks,InspectorControls}=wp.blockEditor;
+		const {BlockControls,InnerBlocks,InspectorControls}=wp.blockEditor;
 		const {PanelBody,TextareaControl} = wp.components;
 		const {attributes,className,setAttributes,isSelected}=props;
 		const {items=[],classes,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;

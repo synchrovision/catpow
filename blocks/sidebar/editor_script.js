@@ -49,12 +49,14 @@
     category: "catpow",
     parent: ["catpow/sidebar"],
     edit({ attributes, className, setAttributes }) {
+      const { InnerBlocks: InnerBlocks2 } = wp.blockEditor;
       return [
-        /* @__PURE__ */ wp.element.createElement("div", { className: "column column_side" }, /* @__PURE__ */ wp.element.createElement("div", { class: "column_side_container" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/articlenav"]], templateLock: false })), /* @__PURE__ */ wp.element.createElement("div", { class: "sidebar_button" }))
+        /* @__PURE__ */ wp.element.createElement("div", { className: "column column_side" }, /* @__PURE__ */ wp.element.createElement("div", { class: "column_side_container" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2, { template: [["catpow/articlenav"]], templateLock: false })), /* @__PURE__ */ wp.element.createElement("div", { class: "sidebar_button" }))
       ];
     },
     save({ attributes, className, setAttributes }) {
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "column column_side" }, /* @__PURE__ */ wp.element.createElement("div", { class: "column_side_container" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)), /* @__PURE__ */ wp.element.createElement("div", { class: "sidebar_button" }));
+      const { InnerBlocks: InnerBlocks2 } = wp.blockEditor;
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "column column_side" }, /* @__PURE__ */ wp.element.createElement("div", { class: "column_side_container" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2.Content, null)), /* @__PURE__ */ wp.element.createElement("div", { class: "sidebar_button" }));
     },
     deprecated: [
       {
@@ -73,12 +75,14 @@
     },
     parent: ["catpow/sidebar"],
     edit({ attributes, className, setAttributes }) {
+      const { InnerBlocks: InnerBlocks2 } = wp.blockEditor;
       return [
-        /* @__PURE__ */ wp.element.createElement("div", { className: "column column_main" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/section"]], templateLock: false }))
+        /* @__PURE__ */ wp.element.createElement("div", { className: "column column_main" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2, { template: [["catpow/section"]], templateLock: false }))
       ];
     },
     save({ attributes, className, setAttributes }) {
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "column column_main" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null));
+      const { InnerBlocks: InnerBlocks2 } = wp.blockEditor;
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "column column_main" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2.Content, null));
     }
   });
   wp.blocks.registerBlockType("catpow/articlenav", {
@@ -88,6 +92,7 @@
     parent: ["catpow/sidecolumn"],
     edit({ attributes, className, setAttributes, clientId }) {
       const { useEffect } = wp.element;
+      const { RichText } = wp.blockEditor;
       const parentClientId = wp.data.select("core/block-editor").getBlockParentsByBlockName(clientId, "catpow/sidebar")[0];
       const mainContents = wp.data.select("core/block-editor").getBlock(parentClientId).innerBlocks[0].innerBlocks;
       const getSectionTitles = (innerBlocks) => {

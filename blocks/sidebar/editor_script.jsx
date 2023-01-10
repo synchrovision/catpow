@@ -57,6 +57,7 @@ wp.blocks.registerBlockType('catpow/sidecolumn',{
 	category:'catpow',
 	parent:['catpow/sidebar'],
 	edit({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		return [
 			<div className={'column column_side'}>
 				<div class="column_side_container">
@@ -67,6 +68,7 @@ wp.blocks.registerBlockType('catpow/sidecolumn',{
 		];
 	},
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		return (
 			<div className={'column column_side'}>
 				<div class="column_side_container"><InnerBlocks.Content/></div>
@@ -97,6 +99,7 @@ wp.blocks.registerBlockType('catpow/maincolumn',{
 	},
 	parent:['catpow/sidebar'],
 	edit({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		return [
 			<div className={'column column_main'}>
 				<InnerBlocks template={[['catpow/section']]} templateLock={false} />
@@ -104,6 +107,7 @@ wp.blocks.registerBlockType('catpow/maincolumn',{
 		];
 	},
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		return (
 			<div className={'column column_main'}>
 				<InnerBlocks.Content/>
@@ -119,6 +123,7 @@ wp.blocks.registerBlockType('catpow/articlenav',{
 	parent:['catpow/sidecolumn'],
 	edit({attributes,className,setAttributes,clientId}){
 		const {useEffect}=wp.element;
+		const {RichText}=wp.blockEditor;
 
 		const parentClientId=wp.data.select('core/block-editor').getBlockParentsByBlockName(clientId,'catpow/sidebar')[0];
 		const mainContents=wp.data.select('core/block-editor').getBlock(parentClientId).innerBlocks[0].innerBlocks;
