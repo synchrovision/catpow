@@ -168,7 +168,7 @@
 							<tbody>
 								{rows.map((row,index)=>{
 									if(states.hasHeaderRow && index==0){return false;}
-									return <tr>
+									return <tr key={index}>
 										{row.cells.map((cell,columnIndex)=>{
 											var children=[<RichText onChange={(text)=>{cell.text=text;saveItems();}} value={cell.text}/>];
 											if(isSelected && (columnIndex == row.cells.length-1)){
@@ -256,7 +256,7 @@
 					<tbody>
 						{rows.map((row,index)=>{
 							if(states.hasHeaderRow && index==0){return false;}
-							return <tr>
+							return <tr key={index}>
 								{row.cells.map((cell,columnIndex)=>{
 									return wp.element.createElement(
 										(states.hasHeaderColumn && columnIndex==0)?'th':'td',

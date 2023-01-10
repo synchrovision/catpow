@@ -98,6 +98,7 @@ wp.blocks.registerBlockType('catpow/flow',{
 					items={items}
 					index={index}
 					isSelected={isSelected}
+					key={index}
 				>
 					{states.hasImage &&
 						<div className='image'>
@@ -235,7 +236,7 @@ wp.blocks.registerBlockType('catpow/flow',{
 		let rtn=[];
 		items.map((item,index)=>{
 			rtn.push(
-				<li className={item.classes}>
+				<li className={item.classes} key={index}>
 					{states.hasImage && <div className='image'><img src={item.src} alt={item.alt}/></div>}
 					<header>
 						{states.hasCounter &&

@@ -406,95 +406,97 @@ wp.blocks.registerBlockType('catpow/layouttable',{
 		const aligns=['left','center','right'];
 		const valigns=['top','center','bottom'];
 
-		return [
-			<BlockControls>
-				<AlignmentToolbar
-					value={_.intersection(cellClasses,aligns).shift()}
-					onChange={(value)=>{
-						if(value){setCellClasses(aligns,value);}
-						else{removeCellClasses(aligns);}
-					}}
-				/>
-			</BlockControls>,
-			<table className={classes}>
-				<tbody>
-					{rowsCopy.map((row,r)=>{
-						return <tr>
-							{row.cells.map((cell,c)=>{
-								if(cell.mergedTo){return false;}
-								if(cell.style instanceof String){
-									cell.style=JSON.parse(cell.style);
-								}
-								return el(
-									(cell.classes && cell.classes.split(' ').includes('th'))?'th':'td',
-									{
-										className:cell.classes,
-										rowspan:cell.rowspan,
-										colspan:cell.colspan,
-										style:cell.style,
-										onClick:(e)=>selectCells(e,r,c)
-									},
-									<>
-										<RichText onChange={(text)=>{cell.text=text;saverows();}} value={cell.text}/>
-										{isSelected && (c == colLen-parseInt(cell.colspan?cell.colspan:1)) && 
-											<div class="itemControl rowControl">
-												<div className='btn up' onClick={()=>downRow(r)}></div>
-												<div className='btn delete' onClick={()=>deleteRow(r)}></div>
-												<div className='btn clone' onClick={()=>addRow(r)}></div>
-												<div className='btn down' onClick={()=>upRow(r)}></div>
-											</div>
-										}
-										{isSelected && (r == rowLen-parseInt(cell.rowspan?cell.rowspan:1)) && 
-											<div class="itemControl columnControl">
-												<div className='btn left' onClick={()=>downColumn(c)}></div>
-												<div className='btn delete' onClick={()=>deleteColumn(c)}></div>
-												<div className='btn clone' onClick={()=>addColumn(c)}></div>
-												<div className='btn right' onClick={()=>upColumn(c)}></div>
-											</div>
-										}
-										{isSelected && cell.isSelected && <div className="selectBox"></div>}
-									</>
-								);
-							})}
-						</tr>
-					})}
-				</tbody>
-			</table>,
-			<InspectorControls>
-				<CP.SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-				/>
-				<PanelBody title="セル">
-					{selectCellClasses({label:'タイプ',filter:'role',values:{
-						'default':'通常','th':"見出し",'spacer':"空白"
-					}})}
-					{selectCellClasses({label:'カラー',filter:'color',values:{
-						'default':'なし','pale':'薄色','primary':"推奨",'deprecated':"非推奨"
-					}})}
-					{selectCellClasses({label:'文字',filter:'size',values:{
-						'default':'なし','large':"大",'medium':"中",'small':"小"
-					}})}
-					<TextControl
-						label="幅"
-						value={getCellAttr('style').width || ''}
-						onChange={(val)=>{
-							if(val){setCellAttr('style',{width:val})}
-							else{setCellAttr('style',{})}
+		return (
+			<>
+				<BlockControls>
+					<AlignmentToolbar
+						value={_.intersection(cellClasses,aligns).shift()}
+						onChange={(value)=>{
+							if(value){setCellClasses(aligns,value);}
+							else{removeCellClasses(aligns);}
 						}}
 					/>
-					{isRectSelection() && 
-						<Button isDefault onClick={()=>mergeCells()}>セルを結合</Button>
-					}
-					{selectedCells.some((cell)=>(cell.rowspan > 1 || cell.colspan > 1)) &&
-						<Button isDefault onClick={()=>breakCells()}>結合を解除</Button>
-					}
-				</PanelBody>
-			</InspectorControls>
-		];
+				</BlockControls>
+				<table className={classes}>
+					<tbody>
+						{rowsCopy.map((row,r)=>{
+							return <tr key={r}>
+								{row.cells.map((cell,c)=>{
+									if(cell.mergedTo){return false;}
+									if(cell.style instanceof String){
+										cell.style=JSON.parse(cell.style);
+									}
+									return el(
+										(cell.classes && cell.classes.split(' ').includes('th'))?'th':'td',
+										{
+											className:cell.classes,
+											rowspan:cell.rowspan,
+											colspan:cell.colspan,
+											style:cell.style,
+											onClick:(e)=>selectCells(e,r,c)
+										},
+										<>
+											<RichText onChange={(text)=>{cell.text=text;saverows();}} value={cell.text}/>
+											{isSelected && (c == colLen-parseInt(cell.colspan?cell.colspan:1)) && 
+												<div class="itemControl rowControl">
+													<div className='btn up' onClick={()=>downRow(r)}></div>
+													<div className='btn delete' onClick={()=>deleteRow(r)}></div>
+													<div className='btn clone' onClick={()=>addRow(r)}></div>
+													<div className='btn down' onClick={()=>upRow(r)}></div>
+												</div>
+											}
+											{isSelected && (r == rowLen-parseInt(cell.rowspan?cell.rowspan:1)) && 
+												<div class="itemControl columnControl">
+													<div className='btn left' onClick={()=>downColumn(c)}></div>
+													<div className='btn delete' onClick={()=>deleteColumn(c)}></div>
+													<div className='btn clone' onClick={()=>addColumn(c)}></div>
+													<div className='btn right' onClick={()=>upColumn(c)}></div>
+												</div>
+											}
+											{isSelected && cell.isSelected && <div className="selectBox"></div>}
+										</>
+									);
+								})}
+							</tr>
+						})}
+					</tbody>
+				</table>
+				<InspectorControls>
+					<CP.SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+					/>
+					<PanelBody title="セル">
+						{selectCellClasses({label:'タイプ',filter:'role',values:{
+							'default':'通常','th':"見出し",'spacer':"空白"
+						}})}
+						{selectCellClasses({label:'カラー',filter:'color',values:{
+							'default':'なし','pale':'薄色','primary':"推奨",'deprecated':"非推奨"
+						}})}
+						{selectCellClasses({label:'文字',filter:'size',values:{
+							'default':'なし','large':"大",'medium':"中",'small':"小"
+						}})}
+						<TextControl
+							label="幅"
+							value={getCellAttr('style').width || ''}
+							onChange={(val)=>{
+								if(val){setCellAttr('style',{width:val})}
+								else{setCellAttr('style',{})}
+							}}
+						/>
+						{isRectSelection() && 
+							<Button isDefault onClick={()=>mergeCells()}>セルを結合</Button>
+						}
+						{selectedCells.some((cell)=>(cell.rowspan > 1 || cell.colspan > 1)) &&
+							<Button isDefault onClick={()=>breakCells()}>結合を解除</Button>
+						}
+					</PanelBody>
+				</InspectorControls>
+			</>
+		);
 	},
 
 	save({attributes,className}){
@@ -503,8 +505,8 @@ wp.blocks.registerBlockType('catpow/layouttable',{
 
 		return <table className={classes}>
 			<tbody>{
-				rows.map((row)=>{
-					return <tr>
+				rows.map((row,r)=>{
+					return <tr key={r}>
 						 {row.cells.map((cell)=>{
 							cell.style=CP.parseStyleString(cell.style);
 							return el(

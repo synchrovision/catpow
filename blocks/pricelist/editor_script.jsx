@@ -62,6 +62,7 @@
 					items={items}
 					index={index}
 					isSelected={isSelected}
+					key={index}
 				>
 					{itemStates.hasImage &&
 						<div className='image'>
@@ -197,7 +198,7 @@
 		items.map((item,index)=>{
 			const itemStates=CP.wordsToFlags(item.classes);
 			rtn.push(
-				<li className={item.classes}>
+				<li className={item.classes} key={index}>
 					{itemStates.hasImage &&
 						<div className='image'>
 							<CP.ResponsiveImage

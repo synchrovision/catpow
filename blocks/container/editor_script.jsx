@@ -43,30 +43,32 @@
 			return selectiveClasses;
 		},[]);
 
-		return [
-			<div className={classes}>
-				<div className="body">
-					<InnerBlocks template={[['core/paragraph',{content:CP.dummyText.text}]]} templateLock={false}/>
+		return (
+			<>
+				<div className={classes}>
+					<div className="body">
+						<InnerBlocks template={[['core/paragraph',{content:CP.dummyText.text}]]} templateLock={false}/>
+					</div>
 				</div>
-			</div>,
-			<InspectorControls>
-				<CP.SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters.container || {}}
-				/>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label='クラス'
-						onChange={(classes)=>setAttributes({classes})}
-						value={classes}
+				<InspectorControls>
+					<CP.SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+						filters={CP.filters.container || {}}
 					/>
-				</PanelBody>
-			</InspectorControls>
-		];
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label='クラス'
+							onChange={(classes)=>setAttributes({classes})}
+							value={classes}
+						/>
+					</PanelBody>
+				</InspectorControls>
+			</>
+		);
 	},
 
 

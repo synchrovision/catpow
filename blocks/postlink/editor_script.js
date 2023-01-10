@@ -10,10 +10,7 @@
       const { InspectorControls } = wp.blockEditor;
       const { PanelBody, ServerSideRender } = wp.components;
       const { func, param } = attributes;
-      return [
-        /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/postlink", attributes: Object.assign({}, attributes, { preview: true }) }),
-        /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" }))
-      ];
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/postlink", attributes: Object.assign({}, attributes, { preview: true }) }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" })));
     },
     save({ attributes, className, setAttributes }) {
       return "null";

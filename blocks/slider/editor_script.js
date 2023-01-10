@@ -188,7 +188,8 @@
               set: setAttributes,
               attr: attributes,
               items,
-              index
+              index,
+              key: index
             },
             states.hasSlide && /* @__PURE__ */ wp.element.createElement("div", { className: "slide" }, /* @__PURE__ */ wp.element.createElement(
               CP.SelectResponsiveImage,
@@ -394,7 +395,7 @@
       var thumbs = [];
       items.map(function(item, index) {
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes }, states.hasSlide && /* @__PURE__ */ wp.element.createElement("div", { className: "slide" }, /* @__PURE__ */ wp.element.createElement(
+          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, states.hasSlide && /* @__PURE__ */ wp.element.createElement("div", { className: "slide" }, /* @__PURE__ */ wp.element.createElement(
             CP.ResponsiveImage,
             {
               attr: attributes,

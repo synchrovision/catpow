@@ -81,7 +81,8 @@
               attr: attributes,
               items,
               index,
-              isSelected: attributes.currentItemIndex == index
+              isSelected: attributes.currentItemIndex == index,
+              key: index
             },
             /* @__PURE__ */ wp.element.createElement("a", null, /* @__PURE__ */ wp.element.createElement("img", { src: item.src, alt: item.alt }))
           )
@@ -90,63 +91,59 @@
       if (attributes.EditMode === void 0) {
         attributes.EditMode = false;
       }
-      return [
-        /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
-          Toolbar,
-          {
-            controls: [
-              {
-                icon: "edit",
-                title: "EditMode",
-                isActive: attributes.EditMode,
-                onClick: () => setAttributes({ EditMode: !attributes.EditMode })
-              }
-            ]
-          }
-        ), /* @__PURE__ */ wp.element.createElement(
-          CP.AlignClassToolbar,
-          {
-            set: setAttributes,
-            attr: attributes
-          }
-        )),
-        /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-          CP.SelectClassPanel,
-          {
-            title: "\u30AF\u30E9\u30B9",
-            icon: "art",
-            set: setAttributes,
-            attr: attributes,
-            selectiveClasses
-          }
-        ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-          TextareaControl,
-          {
-            label: "\u30AF\u30E9\u30B9",
-            onChange: (clss) => setAttributes({ classes: clss }),
-            value: classArray.join(" ")
-          }
-        )), /* @__PURE__ */ wp.element.createElement(
-          CP.SelectClassPanel,
-          {
-            title: "\u30A2\u30A4\u30C6\u30E0",
-            icon: "edit",
-            set: setAttributes,
-            attr: attributes,
-            items,
-            index: attributes.currentItemIndex,
-            selectiveClasses: selectiveItemClasses
-          }
-        ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)),
-        /* @__PURE__ */ wp.element.createElement("ul", { className: attributes.EditMode ? primaryClass + " edit" : classes }, rtn)
-      ];
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
+        Toolbar,
+        {
+          controls: [
+            {
+              icon: "edit",
+              title: "EditMode",
+              isActive: attributes.EditMode,
+              onClick: () => setAttributes({ EditMode: !attributes.EditMode })
+            }
+          ]
+        }
+      ), /* @__PURE__ */ wp.element.createElement(
+        CP.AlignClassToolbar,
+        {
+          set: setAttributes,
+          attr: attributes
+        }
+      )), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: "\u30AF\u30E9\u30B9",
+          icon: "art",
+          set: setAttributes,
+          attr: attributes,
+          selectiveClasses
+        }
+      ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+        TextareaControl,
+        {
+          label: "\u30AF\u30E9\u30B9",
+          onChange: (clss) => setAttributes({ classes: clss }),
+          value: classArray.join(" ")
+        }
+      )), /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: "\u30A2\u30A4\u30C6\u30E0",
+          icon: "edit",
+          set: setAttributes,
+          attr: attributes,
+          items,
+          index: attributes.currentItemIndex,
+          selectiveClasses: selectiveItemClasses
+        }
+      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement("ul", { className: attributes.EditMode ? primaryClass + " edit" : classes }, rtn));
     },
     save({ attributes, className }) {
       const { items = [], classes, countPrefix, countSuffix } = attributes;
       let rtn = [];
       items.map((item, index) => {
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes }, /* @__PURE__ */ wp.element.createElement("a", { href: item.href }, /* @__PURE__ */ wp.element.createElement("img", { src: item.src, alt: item.alt })))
+          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("a", { href: item.href }, /* @__PURE__ */ wp.element.createElement("img", { src: item.src, alt: item.alt })))
         );
       });
       return /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn);

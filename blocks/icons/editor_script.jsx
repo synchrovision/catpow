@@ -81,6 +81,7 @@
 					items={items}
 					index={index}
 					isSelected={attributes.currentItemIndex==index}
+					key={index}
 				>
 					<a>
 						<img src={item.src} alt={item.alt}/>
@@ -91,51 +92,53 @@
 
 		if(attributes.EditMode===undefined){attributes.EditMode=false;}
 
-		return [
-			<BlockControls>
-				<Toolbar
-					controls={[
-						{
-							icon: 'edit',
-							title: 'EditMode',
-							isActive: attributes.EditMode,
-							onClick: () => setAttributes({EditMode:!attributes.EditMode})
-						}
-					]}
-				/>
-				<CP.AlignClassToolbar
-					set={setAttributes}
-					attr={attributes}
-				/>
-			</BlockControls>,
-			<InspectorControls>
-				<CP.SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-				/>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label='クラス'
-						onChange={(clss)=>setAttributes({classes:clss})}
-						value={classArray.join(' ')}
+		return (
+			<>
+				<BlockControls>
+					<Toolbar
+						controls={[
+							{
+								icon: 'edit',
+								title: 'EditMode',
+								isActive: attributes.EditMode,
+								onClick: () => setAttributes({EditMode:!attributes.EditMode})
+							}
+						]}
 					/>
-				</PanelBody>
-				<CP.SelectClassPanel
-					title='アイテム'
-					icon='edit'
-					set={setAttributes}
-					attr={attributes}
-					items={items}
-					index={attributes.currentItemIndex}
-					selectiveClasses={selectiveItemClasses}
-				/>
-				<CP.ItemControlInfoPanel/>
-			</InspectorControls>,
-			<ul className={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>
-		];
+					<CP.AlignClassToolbar
+						set={setAttributes}
+						attr={attributes}
+					/>
+				</BlockControls>
+				<InspectorControls>
+					<CP.SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+					/>
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label='クラス'
+							onChange={(clss)=>setAttributes({classes:clss})}
+							value={classArray.join(' ')}
+						/>
+					</PanelBody>
+					<CP.SelectClassPanel
+						title='アイテム'
+						icon='edit'
+						set={setAttributes}
+						attr={attributes}
+						items={items}
+						index={attributes.currentItemIndex}
+						selectiveClasses={selectiveItemClasses}
+					/>
+					<CP.ItemControlInfoPanel/>
+				</InspectorControls>
+				<ul className={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>
+			</>
+		);
 	},
 	save({attributes,className}){
 		const {items=[],classes,countPrefix,countSuffix}=attributes;
@@ -143,7 +146,7 @@
 		let rtn=[];
 		items.map((item,index)=>{
 			rtn.push(
-				<li className={item.classes}>
+				<li className={item.classes} key={index}>
 					<a href={item.href}>
 						<img src={item.src} alt={item.alt}/>
 					</a>

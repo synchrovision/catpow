@@ -70,6 +70,7 @@ wp.blocks.registerBlockType('catpow/banners',{
 					items={items}
 					index={index}
 					isSelected={isSelected}
+					key={index}
 				>
 					{states.hasTitle &&
 						<h3>
@@ -209,7 +210,7 @@ wp.blocks.registerBlockType('catpow/banners',{
 					{
 						items.map((item,index)=>{
 							return (
-								<li className={item.classes}>
+								<li className={item.classes} key={index}>
 									{states.hasTitle && <h3><RichText.Content value={item.title}/></h3>}
 									<a href={item.linkUrl} target={item.target} data-event={item.event} rel={item.target?'noopener noreferrer':''}>
 										<CP.ResponsiveImage

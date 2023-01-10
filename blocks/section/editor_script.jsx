@@ -226,138 +226,140 @@ wp.blocks.registerBlockType('catpow/section',{
 		var level=CP.getNumberClass({attr:attributes},'level');
 
 
-		return [
-			<BlockControls>
-				<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
-			</BlockControls>,
-			<SectionTag id={id} className={classes}>
-				{states.hasImage && 
-					<div class="image">
-						{(states.isTemplate && imageCode)?(
-							<CP.DummyImage text={imageCode}/>
-						):(
-							<CP.SelectResponsiveImage
-								attr={attributes}
-								set={setAttributes}
-								keys={imageKeys.image}
-								size={imageSizes.image}
-							/>
-						)}
-					</div>
-				}
-				<div class='contents'>
-					<header class='header'>
-						<div class="title">
-							{states.hasIcon && <CP.OutputIcon item={attributes}/>}
-							{states.hasPrefix && 
-								<div class="prefix">
-									<RichText tagName="div" value={prefix} onChange={(prefix)=>setAttributes({prefix})}/>
-								</div>
-							}
-							{states.hasHeaderImage &&
-								<div class="image">
-									{(states.isTemplate && headerImageCode)?(
-										<CP.DummyImage text={headerImageCode}/>
-									):(
-										<CP.SelectResponsiveImage
-											set={setAttributes}
-											attr={attributes}
-											keys={imageKeys.headerImage}
-											size={imageSizes.headerImage}
-										/>
-									)}
-								</div>
-							}
-							{states.hasTitleImage?(
-								<HeadingTag class="titleImage">
-									{(states.isTemplate && titleImageCode)?(
-										<CP.DummyImage text={titleImageCode}/>
-									):(
-										<CP.SelectResponsiveImage
-											set={setAttributes}
-											attr={attributes}
-											keys={imageKeys.titleImage}
-											devices={devices}
-										/>
-									)}
-								</HeadingTag>
+		return (
+			<>
+				<BlockControls>
+					<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
+				</BlockControls>
+				<SectionTag id={id} className={classes}>
+					{states.hasImage && 
+						<div class="image">
+							{(states.isTemplate && imageCode)?(
+								<CP.DummyImage text={imageCode}/>
 							):(
-								<HeadingTag className="heading">
-									<RichText tagName="div" value={title} onChange={(title)=>setAttributes({title})}/>
-								</HeadingTag>
+								<CP.SelectResponsiveImage
+									attr={attributes}
+									set={setAttributes}
+									keys={imageKeys.image}
+									size={imageSizes.image}
+								/>
 							)}
-							{states.hasLead && 
-								<p className="lead"><RichText tagName="div" value={lead} onChange={(lead)=>setAttributes({lead})}/></p>
-							}
 						</div>
-
-						{states.hasHeaderBackgroundImage && 
-							<div class="background">
-								{(states.isTemplate && headerBackgroundImageCode)?(
-									<CP.DummyImage text={headerBackgroundImageCode}/>
+					}
+					<div class='contents'>
+						<header class='header'>
+							<div class="title">
+								{states.hasIcon && <CP.OutputIcon item={attributes}/>}
+								{states.hasPrefix && 
+									<div class="prefix">
+										<RichText tagName="div" value={prefix} onChange={(prefix)=>setAttributes({prefix})}/>
+									</div>
+								}
+								{states.hasHeaderImage &&
+									<div class="image">
+										{(states.isTemplate && headerImageCode)?(
+											<CP.DummyImage text={headerImageCode}/>
+										):(
+											<CP.SelectResponsiveImage
+												set={setAttributes}
+												attr={attributes}
+												keys={imageKeys.headerImage}
+												size={imageSizes.headerImage}
+											/>
+										)}
+									</div>
+								}
+								{states.hasTitleImage?(
+									<HeadingTag class="titleImage">
+										{(states.isTemplate && titleImageCode)?(
+											<CP.DummyImage text={titleImageCode}/>
+										):(
+											<CP.SelectResponsiveImage
+												set={setAttributes}
+												attr={attributes}
+												keys={imageKeys.titleImage}
+												devices={devices}
+											/>
+										)}
+									</HeadingTag>
 								):(
-									<CP.SelectResponsiveImage
-										set={setAttributes}
-										attr={attributes}
-										keys={imageKeys.headerBackgroundImage}
-									/>
+									<HeadingTag className="heading">
+										<RichText tagName="div" value={title} onChange={(title)=>setAttributes({title})}/>
+									</HeadingTag>
 								)}
+								{states.hasLead && 
+									<p className="lead"><RichText tagName="div" value={lead} onChange={(lead)=>setAttributes({lead})}/></p>
+								}
 							</div>
-						}
-					</header>
-					<div class="text"><InnerBlocks/></div>
-				</div>
-				{states.hasBackgroundImage && 
-					<div class="background">
-						{(states.isTemplate && backgroundImageCode)?(
-							<CP.DummyImage text={backgroundImageCode}/>
-						):(
-							<CP.SelectResponsiveImage
-								set={setAttributes}
-								attr={attributes}
-								keys={imageKeys.backgroundImage}
-							/>
-						)}
+
+							{states.hasHeaderBackgroundImage && 
+								<div class="background">
+									{(states.isTemplate && headerBackgroundImageCode)?(
+										<CP.DummyImage text={headerBackgroundImageCode}/>
+									):(
+										<CP.SelectResponsiveImage
+											set={setAttributes}
+											attr={attributes}
+											keys={imageKeys.headerBackgroundImage}
+										/>
+									)}
+								</div>
+							}
+						</header>
+						<div class="text"><InnerBlocks/></div>
 					</div>
-				}
-				{states.hasPatternImage && (
-					<style>{patternImageCss}</style>
-				)}
-				{states.hasHeaderPatternImage && (
-					<style>{headerPatternImageCss}</style>
-				)}
-				{states.hasBorderImage && (
-					<style>{borderImageCss}</style>
-				)}
-				{states.hasFrameImage && (
-					<style>{frameImageCss}</style>
-				)}
-			</SectionTag>,
-			<InspectorControls>
-				<CP.SelectClassPanel
-					title={__('クラス','catpow')}
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters.section || {}}
-				/>
-				<PanelBody title="ID" icon="admin-links" initialOpen={false}>
-					<TextControl
-						label='ID'
-						onChange={(id)=>{setAttributes({id:id});}}
-						value={id}
+					{states.hasBackgroundImage && 
+						<div class="background">
+							{(states.isTemplate && backgroundImageCode)?(
+								<CP.DummyImage text={backgroundImageCode}/>
+							):(
+								<CP.SelectResponsiveImage
+									set={setAttributes}
+									attr={attributes}
+									keys={imageKeys.backgroundImage}
+								/>
+							)}
+						</div>
+					}
+					{states.hasPatternImage && (
+						<style>{patternImageCss}</style>
+					)}
+					{states.hasHeaderPatternImage && (
+						<style>{headerPatternImageCss}</style>
+					)}
+					{states.hasBorderImage && (
+						<style>{borderImageCss}</style>
+					)}
+					{states.hasFrameImage && (
+						<style>{frameImageCss}</style>
+					)}
+				</SectionTag>
+				<InspectorControls>
+					<CP.SelectClassPanel
+						title={__('クラス','catpow')}
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+						filters={CP.filters.section || {}}
 					/>
-				</PanelBody>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label={__('クラス','catpow')}
-						onChange={(classes)=>setAttributes({classes})}
-						value={classes}
-					/>
-				</PanelBody>
-			</InspectorControls>
-		];
+					<PanelBody title="ID" icon="admin-links" initialOpen={false}>
+						<TextControl
+							label='ID'
+							onChange={(id)=>{setAttributes({id:id});}}
+							value={id}
+						/>
+					</PanelBody>
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label={__('クラス','catpow')}
+							onChange={(classes)=>setAttributes({classes})}
+							value={classes}
+						/>
+					</PanelBody>
+				</InspectorControls>
+			</>
+		);
 	},
 	save({attributes,className,setAttributes}){
 		const {InnerBlocks,RichText}=wp.blockEditor;

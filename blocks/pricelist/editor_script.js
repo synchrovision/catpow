@@ -62,7 +62,8 @@
               attr: attributes,
               items,
               index,
-              isSelected
+              isSelected,
+              key: index
             },
             itemStates.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(
               CP.SelectResponsiveImage,
@@ -179,7 +180,7 @@
       items.map((item, index) => {
         const itemStates = CP.wordsToFlags(item.classes);
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes }, itemStates.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(
+          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, itemStates.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(
             CP.ResponsiveImage,
             {
               attr: attributes,

@@ -60,7 +60,8 @@
               attr: attributes,
               items,
               index,
-              isSelected: isSelected && currentItemIndex == index
+              isSelected: isSelected && currentItemIndex == index,
+              key: index
             },
             itemStates.hasLabel && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(
               RichText,
@@ -190,7 +191,7 @@
       items.map((item, index) => {
         const itemStates = CP.wordsToFlags(item.classes);
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes }, itemStates.hasLabel && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.label })), /* @__PURE__ */ wp.element.createElement("ul", { className: "items" }, item.items.map((subItem, subIndex) => {
+          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, itemStates.hasLabel && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.label })), /* @__PURE__ */ wp.element.createElement("ul", { className: "items" }, item.items.map((subItem, subIndex) => {
             const subItemStates = CP.wordsToFlags(subItem.classes);
             return /* @__PURE__ */ wp.element.createElement("li", { className: subItem.classes }, /* @__PURE__ */ wp.element.createElement("div", { class: "text" }, /* @__PURE__ */ wp.element.createElement("div", { className: "title" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: subItem.title })), /* @__PURE__ */ wp.element.createElement("div", { className: "line" }), /* @__PURE__ */ wp.element.createElement("div", { className: "amount" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: subItem.amount })), subItemStates.hasCaption && /* @__PURE__ */ wp.element.createElement("div", { className: "caption" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: subItem.caption }))));
           })))

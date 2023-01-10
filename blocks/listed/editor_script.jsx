@@ -156,6 +156,7 @@ wp.blocks.registerBlockType('catpow/listed',{
 					items={items}
 					index={index}
 					isSelected={isSelected}
+					key={index}
 				>
 					{states.hasImage && 
 						<div class="image">
@@ -381,7 +382,7 @@ wp.blocks.registerBlockType('catpow/listed',{
 		let rtn=[];
 		items.map((item,index)=>{
 			rtn.push(
-				<li className={item.classes}>
+				<li className={item.classes} key={index}>
 					{states.hasImage &&
 						<div className='image'>
 							<CP.ResponsiveImage

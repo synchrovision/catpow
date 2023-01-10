@@ -60,6 +60,7 @@
 					items={items}
 					index={index}
 					isSelected={isSelected && currentItemIndex==index}
+					key={index}
 				>
 					{itemStates.hasLabel &&
 						<div className='label'>
@@ -206,7 +207,7 @@
 		items.map((item,index)=>{
 			const itemStates=CP.wordsToFlags(item.classes);
 			rtn.push(
-				<li className={item.classes}>
+				<li className={item.classes} key={index}>
 					{itemStates.hasLabel &&
 						<div className='label'>
 							<RichText.Content value={item.label}/>

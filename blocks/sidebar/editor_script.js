@@ -15,27 +15,23 @@
       const { classes } = attributes;
       const primaryClass = "wp-block-catpow-sidebar";
       var classArray = _.uniq((className + " " + classes).split(" "));
-      return [
-        /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement(
-          InnerBlocks2,
-          {
-            template: [
-              ["catpow/maincolumn"],
-              ["catpow/sidecolumn"]
-            ],
-            templateLock: "all"
-          }
-        )),
-        /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })),
-        /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-          TextareaControl,
-          {
-            label: "\u30AF\u30E9\u30B9",
-            onChange: (classes2) => setAttributes({ classes: classes2 }),
-            value: classArray.join(" ")
-          }
-        )))
-      ];
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement(
+        InnerBlocks2,
+        {
+          template: [
+            ["catpow/maincolumn"],
+            ["catpow/sidecolumn"]
+          ],
+          templateLock: "all"
+        }
+      )), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+        TextareaControl,
+        {
+          label: "\u30AF\u30E9\u30B9",
+          onChange: (classes2) => setAttributes({ classes: classes2 }),
+          value: classArray.join(" ")
+        }
+      ))));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks: InnerBlocks2 } = wp.blockEditor;
@@ -76,9 +72,7 @@
     parent: ["catpow/sidebar"],
     edit({ attributes, className, setAttributes }) {
       const { InnerBlocks: InnerBlocks2 } = wp.blockEditor;
-      return [
-        /* @__PURE__ */ wp.element.createElement("div", { className: "column column_main" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2, { template: [["catpow/section"]], templateLock: false }))
-      ];
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "column column_main" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2, { template: [["catpow/section"]], templateLock: false }));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks: InnerBlocks2 } = wp.blockEditor;
@@ -100,11 +94,9 @@
           return block.attributes.title;
         });
       };
-      return [
-        /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("ul", { class: "article_nav" }, getSectionTitles(mainContents).map((title) => {
-          return /* @__PURE__ */ wp.element.createElement("li", null, /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: title })));
-        })))
-      ];
+      return /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("ul", { class: "article_nav" }, getSectionTitles(mainContents).map((title) => {
+        return /* @__PURE__ */ wp.element.createElement("li", null, /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: title })));
+      })));
     },
     save({ attributes, className, setAttributes }) {
       return /* @__PURE__ */ wp.element.createElement("div", { className });

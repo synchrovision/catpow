@@ -30,7 +30,7 @@
 			else{data[keys.src]=image.url;}
 			if(keys.sources && image.sizes){
 				devices=devices || ['sp'];
-				data[keys.sources]=devices.map((device)=>{
+				data[keys.sources]=devices.forEach((device)=>{
 					const sizeData=CP.devices[device];
 					return {srcset:image.sizes[sizeData.media_size].url,device};
 				});
@@ -38,7 +38,7 @@
 			if(keys.srcset && image.sizes){
 				devices=devices || ['sp','pc'];
 				data[keys.srcset]='';
-				devices.map((device)=>{
+				devices.forEach((device)=>{
 					const sizeData=CP.devices[device];
 					data[keys.srcset]+=image.sizes[sizeData.media_size].url+sizeData.rep;
 				});
@@ -116,7 +116,7 @@
 		let values;
 		if(Array.isArray(prm.values)){values=prm.values;}
 		else{values=Object.keys(prm.values);}
-		values.map((val)=>{
+		values.forEach((val)=>{
 			if(prm.sub && prm.sub[val]){
 				rtn[val]=CP.getAllSubClasses(prm.sub[val]);
 			}
@@ -128,7 +128,7 @@
 	},
 	getAllSubClasses:(prms)=>{
 		let rtn=[];
-		prms.map((prm)=>{
+		prms.forEach((prm)=>{
 			if(typeof prm === 'object'){
 				if(prm.values){
 					if(Array.isArray(prm.values)){
@@ -146,7 +146,7 @@
 						rtn=rtn.concat(CP.getAllSubClasses(prm.sub));
 					}
 					else{
-						Object.keys(prm.sub).map((key)=>{
+						Object.keys(prm.sub).forEach((key)=>{
 							rtn=rtn.concat(CP.getAllSubClasses(prm.sub[key]));
 						});
 					}
@@ -160,7 +160,7 @@
 		let values;
 		if(Array.isArray(prm.values)){values=prm.values;}
 		else{values=Object.keys(prm.values);}
-		values.map((val)=>{
+		values.forEach((val)=>{
 			if(prm.bind && prm.bind[val]){
 				rtn[val]=prm.bind[val];
 			}
@@ -314,7 +314,7 @@
 		if(css instanceof Object){return css;}
 		if(!css){return {};}
 		var obj={};
-		css.replace('&amp;','&').split(';').map((pair)=>{
+		css.replace('&amp;','&').split(';').forEach((pair)=>{
 			const match=pair.match(/^([^:]+?):(.+)$/);
 			if(!match){return;}
 			obj[match[1]]=match[2];
@@ -432,7 +432,7 @@
 	wordsToFlags:(words)=>{
 		var rtn={};
 		if(undefined === words){return {};}
-		words.split(' ').map((word)=>{rtn[word]=true;});
+		words.split(' ').forEach((word)=>{rtn[word]=true;});
 		return rtn;
 	},
 	flagsToWords:(flags)=>{
@@ -441,7 +441,7 @@
 	},
 	
 	filterFlags:(flags,callback)=>{
-		Object.keys(flags).map((key)=>{
+		Object.keys(flags).forEach((key)=>{
 			if(!callback(key)){delete(flags[key]);}
 		});
 		return flags;
@@ -578,7 +578,7 @@
 			}
 			const datalist=document.createElement('datalist');
 			datalist.id=id;
-			values.map((value)=>{
+			values.forEach((value)=>{
 				const option=document.createElement('option');
 				option.value=value;
 				datalist.appendChild(option);
@@ -626,7 +626,7 @@
 				inheritColor:color==context['catpow/color'],
 				classes:classes.replace(/color\d+\s*/,'')+' color'+color
 			};
-			images.map((key)=>{
+			images.forEach((key)=>{
 				if(!attributes[key]){return;}
 				if(attributes[key].indexOf('url(')!==-1){
 					atts[key]=attributes[key].replace(/url\((.+?)\)/,(m,p1)=>'url('+setURLparams(p1,{c:color,theme:wpinfo.theme})+')');
@@ -647,7 +647,7 @@
 		if(!id){setAttributes({id:'s'+(new Date().getTime().toString(16))})}
 		if(undefined === styleDatas){
 			const styleDatas={};
-			csss.map((key)=>{
+			csss.forEach((key)=>{
 				styleDatas[key]=CP.parseStyleCodeWithMediaQuery(attributes[key]);
 			});
 			setAttributes({styleDatas});
@@ -660,7 +660,7 @@
 				const atts={};
 				atts.prevId=id;
 				atts.styleDatas={};
-				csss.map((key)=>{
+				csss.forEach((key)=>{
 					if(!attributes[key]){return;}
 					atts[key]=attributes[key].replace('#'+prevId,'#'+id);
 					atts.styleDatas[key]=CP.parseStyleCodeWithMediaQuery(atts[key]);
@@ -744,6 +744,7 @@
 							<Button
 								onClick={()=>props.onChange(option.value)}
 								isPrimary={props.selected===option.value}
+								key={option.value}
 							>{option.label}</Button>
 						))}
 					</ButtonGroup>
@@ -762,6 +763,7 @@
 						<li
 							onClick={()=>props.onChange(option.value)}
 							className={'item'+((props.selected===option.value)?' active':'')}
+							key={option.value}
 						>{option.label}</li>
 					))}
 				</ul>
@@ -790,9 +792,8 @@
 			const sizeData=CP.devices[device];
 			onClick=(e)=>CP.selectImage({src:'src'},function({src}){
 				if(keys.sources){
-					item[keys.sources].map((source)=>{
+					item[keys.sources].forEach((source)=>{
 						if(source.device===device){source.srcset=src;}
-						return source;
 					});
 					if(items){
 						set({[keys.items]:JSON.parse(JSON.stringify(items))});
@@ -886,7 +887,7 @@
 					{...otherProps}
 				>
 					{item[keys.sources].map((source)=>(
-						<source srcset={source.srcset} media={CP.devices[source.device].media_query} data-device={source.device}/>
+						<source srcSet={source.srcset} media={CP.devices[source.device].media_query} data-device={source.device} key={source.device}/>
 					))}
 					<img
 						src={src}
@@ -900,7 +901,7 @@
 				className={'selectImage '+className}
 				src={src}
 				alt={item[keys.alt]}
-				srcset={item[keys.srcset]}
+				srcSet={item[keys.srcset]}
 				sizes={sizes}
 				data-mime={item[keys.mime]}
 				onClick={onClick}
@@ -934,7 +935,7 @@
 				<video
 					className={className}
 					src={item[keys.src]}
-					srcset={item[keys.srcset]}
+					srcSet={item[keys.srcset]}
 					sizes={sizes}
 					data-mime={item[keys.mime]}
 					autoplay={1}
@@ -959,7 +960,7 @@
 			return (
 				<picture className={'selectImage '+className}>
 					{item[keys.sources].map((source)=>(
-						<source srcset={source.srcset} media={CP.devices[source.device].media_query} data-device={source.device}/>
+						<source srcset={source.srcset} media={CP.devices[source.device].media_query} data-device={source.device} key={source.device}/>
 					))}
 					<img
 						src={item[keys.src]}
@@ -973,7 +974,7 @@
 				className={className}
 				src={item[keys.src]}
 				alt={item[keys.alt]}
-				srcset={item[keys.srcset]}
+				srcSet={item[keys.srcset]}
 				sizes={sizes}
 				data-mime={item[keys.mime]}
 			/>
@@ -1178,14 +1179,14 @@
 		},[]);
 		const defaultRowValues=useMemo(()=>{
 			const rowValue={};
-			Object.keys(cols).map((c)=>{
+			Object.keys(cols).forEach((c)=>{
 				rowValue[c]=cols[c].default || '';
 			});
 			return [rowValue];
 		},[cols]);
 		const colsWithoutLabel=useMemo(()=>{
 			const colsWithoutLabel={};
-			Object.keys(cols).map((c)=>{
+			Object.keys(cols).forEach((c)=>{
 				const {label,...otherParams}=cols[c];
 				colsWithoutLabel[c]=otherParams;
 			});
@@ -1498,7 +1499,7 @@
 						case 'flag':
 							let value=CP.getJsonValue(props,prm.json,prm.key) || 0;
 							if(prm.label){rtn.push(<h5>{prm.label}</h5>);}
-							Object.keys(prm.values).map((key)=>{
+							Object.keys(prm.values).forEach((key)=>{
 								rtn.push(
 									<CheckboxControl
 										label={key}
@@ -1554,7 +1555,7 @@
 							if(prm.sub){
 								if(prm.sub[JSON.parse(props.attr[prm.json])[prm.key]]){
 									let sub=[];
-									prm.sub[JSON.parse(props.attr[prm.json])[prm.key]].map((prm)=>{sub.push(SelectClass(prm))});
+									prm.sub[JSON.parse(props.attr[prm.json])[prm.key]].forEach((prm)=>{sub.push(SelectClass(prm))});
 									rtn.push(<div className="sub">{sub}</div>);
 								}
 							}
@@ -1564,7 +1565,7 @@
 							if(prm.sub){
 								if(JSON.parse(props.attr[prm.json])[prm.key]){
 									let sub=[];
-									prm.sub.map((prm)=>{sub.push(SelectClass(prm))});
+									prm.sub.forEach((prm)=>{sub.push(SelectClass(prm))});
 									rtn.push(<div className="sub">{sub}</div>);
 								}
 							}
@@ -1586,7 +1587,7 @@
 						let currentValue=CP.getJsonValue(props,prm.json,prm.key);
 						if(currentValue && prm.sub[currentValue]){
 							let sub=[];
-							prm.sub[currentValue].map((prm)=>{sub.push(SelectClass(prm))});
+							prm.sub[currentValue].forEach((prm)=>{sub.push(SelectClass(prm))});
 							rtn.push(<div className="sub">{sub}</div>);
 						}
 					}
@@ -1602,7 +1603,7 @@
 					if(prm.sub){
 						if(CP.getJsonValue(props,prm.json,prm.key)){
 							let sub=[];
-							prm.sub.map((prm)=>{sub.push(SelectClass(prm))});
+							prm.sub.forEach((prm)=>{sub.push(SelectClass(prm))});
 							rtn.push(<div className="sub">{sub}</div>);
 						}
 					}
@@ -1672,7 +1673,7 @@
 									value={CP.getUrlInStyleCode(tgt['border-image'])}
 									color={prm.color || 0}
 									onChange={(imageset)=>{
-										imageset.map((image)=>{
+										imageset.forEach((image)=>{
 											if(!image.conf){return;}
 											const {device,slice,width,repeat}=image.conf;
 											const media=CP.getMediaQueryKeyForDevice(device);
@@ -1743,7 +1744,7 @@
 					);
 				}
 				else if(prm === 'event'){
-					wp.hooks.applyFilters('catpow.EventInputs',[],{item,save}).map((EventInput)=>{rtn.push(EventInput);});
+					wp.hooks.applyFilters('catpow.EventInputs',[],{item,save}).forEach((EventInput)=>{rtn.push(EventInput);});
 				}
 				else if(prm.input){
 					switch(prm.input){
@@ -1848,14 +1849,14 @@
 						case 'gridbuttons':
 							if(prm.sub && prm.sub[item[prm.key]]){
 								let sub=[];
-								prm.sub[item[prm.key]].map((prm)=>{sub.push(SelectClass(prm))});
+								prm.sub[item[prm.key]].forEach((prm)=>{sub.push(SelectClass(prm))});
 								rtn.push(<div className="sub">{sub}</div>);
 							}
 							break;
 						case 'bool':
 							if(prm.sub && item[prm.key]){
 								let sub=[];
-								prm.sub.map((prm)=>{sub.push(SelectClass(prm))});
+								prm.sub.forEach((prm)=>{sub.push(SelectClass(prm))});
 								rtn.push(<div className="sub">{sub}</div>);
 							}
 							break;
@@ -1888,11 +1889,11 @@
 							if(bindClasses[newClass]){
 								newSels=newSels.concat(bindClasses[newClass]);
 							}
-							currentSels.map((value)=>{
+							currentSels.forEach((value)=>{
 								if(!newSels.includes(value)){states[value]=false;}
 							});
 						}
-						bindClasses[newClass].map((value)=>{
+						bindClasses[newClass].forEach((value)=>{
 							states[value]=true;
 						});
 						states[newClass]=true;
@@ -1949,7 +1950,7 @@
 						let currentClass=CP.getSelectiveClass(props,prm.values,prm.key);
 						if(currentClass && prm.sub[currentClass]){
 							let sub=[];
-							prm.sub[currentClass].map((prm)=>{sub.push(SelectClass(prm))});
+							prm.sub[currentClass].forEach((prm)=>{sub.push(SelectClass(prm))});
 							rtn.push(<div className="sub">{sub}</div>);
 						}
 					}
@@ -1968,7 +1969,7 @@
 					if(prm.sub){
 						if(states[prm.values]){
 							let sub=[];
-							prm.sub.map((prm)=>{sub.push(SelectClass(prm))});
+							prm.sub.forEach((prm)=>{sub.push(SelectClass(prm))});
 							rtn.push(<div className="sub">{sub}</div>);
 						}
 					}
@@ -2218,7 +2219,7 @@
 			<table className="editItemsTable">
 				<thead>
 					<tr>
-						{columns.map((col)=>((!('cond' in col) || col.cond)?<th>{col.label || col.key}</th>:false))}
+						{columns.map((col)=>((!('cond' in col) || col.cond)?<th key={col.key}>{col.label || col.key}</th>:false))}
 						<th></th>
 					</tr>
 				</thead>
@@ -2237,7 +2238,7 @@
 									switch(col.type){
 										case 'text':
 											return (
-												<td>
+												<td key={col.key}>
 													<RichText
 														value={item[col.key]}
 														onChange={(value)=>{
@@ -2249,7 +2250,7 @@
 											);
 										case 'image':
 											return (
-												<td>
+												<td key={col.key}>
 													<CP.SelectResponsiveImage
 														attr={attr}
 														set={set}
@@ -2262,7 +2263,7 @@
 											);
 										case 'picture':
 											return (
-												<td>
+												<td key={col.key}>
 													<CP.SelectPictureSources
 														index={index}
 														attr={attr}
@@ -2275,11 +2276,11 @@
 												</td>
 											);
 										case 'items':
-											col.columns.map((subCol)=>{
+											col.columns.forEach((subCol)=>{
 												if(subCol.keys){subCol.keys.subItems=col.key;}
 											});
 											return (
-												<td>
+												<td key={col.key}>
 													<CP.EditItemsTable
 														set={()=>{
 															save();
@@ -2369,7 +2370,7 @@
 		});
 		const eventParamsWithoutLabel=useMemo(()=>{
 			const eventParamsWithoutLabel={};
-			Object.keys(eventParams).map((name)=>{
+			Object.keys(eventParams).forEach((name)=>{
 				const {label,...otherParams}=eventParams[name];
 				eventParamsWithoutLabel[name]=otherParams;
 			});

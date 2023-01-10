@@ -110,147 +110,150 @@ wp.blocks.registerBlockType('catpow/honeycomb',{
 		}
 
 
-		return [
-			<BlockControls>
-				<CP.SelectBreakPointToolbar
-					breakpoints={breakpoints}
-					value={attributes.bp}
-					onChange={(bp)=>setAttributes({bp})}
-				/>
-			</BlockControls>,
-			<Catpow.DrawArea
-				id={id}
-				className={classes}
-				onCatch={(e)=>{
-					console.log('onCatch');
-				}}
-				onDraw={(e)=>{
-					e.moveItem();
-				}}
-				onRelease={(e)=>{
-					e.resetItem();
-					console.log(e);
-					if(e.action==='delete'){
-						items.splice(e.index,1);
+		return (
+			<>
+				<BlockControls>
+					<CP.SelectBreakPointToolbar
+						breakpoints={breakpoints}
+						value={attributes.bp}
+						onChange={(bp)=>setAttributes({bp})}
+					/>
+				</BlockControls>
+				<Catpow.DrawArea
+					id={id}
+					className={classes}
+					onCatch={(e)=>{
+						console.log('onCatch');
+					}}
+					onDraw={(e)=>{
+						e.moveItem();
+					}}
+					onRelease={(e)=>{
+						e.resetItem();
+						console.log(e);
+						if(e.action==='delete'){
+							items.splice(e.index,1);
+							save();
+							return;
+						}
+						var order=items[e.index].order.split(',');
+						if(e.action==='clone'){
+							items.splice(e.index,0,JSON.parse(JSON.stringify(items[e.index])));
+						}
+						order[bpIndex]=
+							Math.max(1,Math.min(currentGrid[0]-1,Math.ceil(e.x/e.w*currentGrid[0])))
+							+' '+
+							Math.max(1,Math.min(currentGrid[1],Math.ceil(e.y/e.h*currentGrid[1])))
+							+' 2 1';
+						items[e.index].order=order.join(',');
 						save();
-						return;
-					}
-					var order=items[e.index].order.split(',');
-					if(e.action==='clone'){
-						items.splice(e.index,0,JSON.parse(JSON.stringify(items[e.index])));
-					}
-					order[bpIndex]=
-						Math.max(1,Math.min(currentGrid[0]-1,Math.ceil(e.x/e.w*currentGrid[0])))
-						+' '+
-						Math.max(1,Math.min(currentGrid[1],Math.ceil(e.y/e.h*currentGrid[1])))
-						+' 2 1';
-					items[e.index].order=order.join(',');
-					save();
-				}}
-				style={{
-					width:((attributes.bp=='0')?breakpoints[1]:attributes.bp)+'px',
-					margin:'0 auto',
-					border:'solid 1px #888'
-				}}
-			>
-				{items.map((item,index)=>{
-					var itemID=id+'_item_'+index;
-					var itemStates=CP.wordsToFlags(item.classes);
-					var itemClasses=item.classes;
-					var itemSelected=attributes.currentItemIndex==index;
-					var order=item.order.split(',').map((val)=>val.split(' '));
-					if(itemSelected){itemClasses+=' selected';}
-					breakpoints.map((bp,bpIndex)=>{
-						cssDatas[bp]=cssDatas[bp] || {};
-						cssDatas[bp]['#'+itemID]=CP.createGridItemStyleCodeData(order[bpIndex]);
-					});
-					return (
-						<Catpow.Hexagon
-							id={itemID}
-							className={itemClasses}
-							data-index={index}
-							src={itemStates.hasImage?item.src:false}
-							handler={itemHandler}
-							onClick={()=>{setAttributes({currentItemIndex:index})}}
-						>
-							{itemStates.hasTitle &&
-								<h3>
-									<RichText
-										placeholder='Title'
-										onChange={(title)=>{item.title=title;save();}}
-										value={item.title}
-									/>
-								</h3>
-							}
-							{itemStates.hasText &&
-								<p>
-									<RichText
-										placeholder='Text'
-										onChange={(text)=>{item.text=text;save();}}
-										value={item.text}
-									/>
-								</p>
-							}
-						</Catpow.Hexagon>
-					);
-				})}
-				<style>
-					{CP.createStyleCode(cssDatas[attributes.bp])}
-				</style>
-			</Catpow.DrawArea>,
-			<InspectorControls>
-				<PanelBody title="Grid" icon="admin-links" initialOpen={false}>
-					<TextControl
-						label='BreakPoints'
-						onChange={(breakpoints)=>{setAttributes({breakpoints});}}
-						value={attributes.breakpoints}
-					/>
-					<TextControl
-						label='Grid'
-						onChange={(grid)=>{setAttributes({grid});}}
-						value={attributes.grid}
-					/>
-				</PanelBody>
-				<PanelBody title="ID" icon="admin-links" initialOpen={false}>
-					<TextControl
-						label='ID'
-						onChange={(id)=>{setAttributes({id:id});}}
-						value={id}
-					/>
-				</PanelBody>
-				<CP.SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters.buttons || {}}
-				/>
-				<CP.SelectClassPanel
-					title='アイテム'
-					icon='edit'
-					set={setAttributes}
-					attr={attributes}
-					items={items}
-					index={attributes.currentItemIndex}
-					selectiveClasses={selectiveItemClasses}
-					filters={CP.filters.honeycomb || {}}
-				/>
-				{items[attributes.currentItemIndex] && 
-					<PanelBody title="ITEM CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl
-							label='クラス'
-							onChange={(classes)=>{
-								items[attributes.currentItemIndex].classes=classes;
-								save();
-							}}
-							value={items[attributes.currentItemIndex].classes}
+					}}
+					style={{
+						width:((attributes.bp=='0')?breakpoints[1]:attributes.bp)+'px',
+						margin:'0 auto',
+						border:'solid 1px #888'
+					}}
+				>
+					{items.map((item,index)=>{
+						var itemID=id+'_item_'+index;
+						var itemStates=CP.wordsToFlags(item.classes);
+						var itemClasses=item.classes;
+						var itemSelected=attributes.currentItemIndex==index;
+						var order=item.order.split(',').map((val)=>val.split(' '));
+						if(itemSelected){itemClasses+=' selected';}
+						breakpoints.map((bp,bpIndex)=>{
+							cssDatas[bp]=cssDatas[bp] || {};
+							cssDatas[bp]['#'+itemID]=CP.createGridItemStyleCodeData(order[bpIndex]);
+						});
+						return (
+							<Catpow.Hexagon
+								id={itemID}
+								className={itemClasses}
+								data-index={index}
+								src={itemStates.hasImage?item.src:false}
+								handler={itemHandler}
+								onClick={()=>{setAttributes({currentItemIndex:index})}}
+								key={index}
+							>
+								{itemStates.hasTitle &&
+									<h3>
+										<RichText
+											placeholder='Title'
+											onChange={(title)=>{item.title=title;save();}}
+											value={item.title}
+										/>
+									</h3>
+								}
+								{itemStates.hasText &&
+									<p>
+										<RichText
+											placeholder='Text'
+											onChange={(text)=>{item.text=text;save();}}
+											value={item.text}
+										/>
+									</p>
+								}
+							</Catpow.Hexagon>
+						);
+					})}
+					<style>
+						{CP.createStyleCode(cssDatas[attributes.bp])}
+					</style>
+				</Catpow.DrawArea>
+				<InspectorControls>
+					<PanelBody title="Grid" icon="admin-links" initialOpen={false}>
+						<TextControl
+							label='BreakPoints'
+							onChange={(breakpoints)=>{setAttributes({breakpoints});}}
+							value={attributes.breakpoints}
+						/>
+						<TextControl
+							label='Grid'
+							onChange={(grid)=>{setAttributes({grid});}}
+							value={attributes.grid}
 						/>
 					</PanelBody>
-				}
-				<CP.ItemControlInfoPanel/>
-			</InspectorControls>
-		];
+					<PanelBody title="ID" icon="admin-links" initialOpen={false}>
+						<TextControl
+							label='ID'
+							onChange={(id)=>{setAttributes({id:id});}}
+							value={id}
+						/>
+					</PanelBody>
+					<CP.SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+						filters={CP.filters.buttons || {}}
+					/>
+					<CP.SelectClassPanel
+						title='アイテム'
+						icon='edit'
+						set={setAttributes}
+						attr={attributes}
+						items={items}
+						index={attributes.currentItemIndex}
+						selectiveClasses={selectiveItemClasses}
+						filters={CP.filters.honeycomb || {}}
+					/>
+					{items[attributes.currentItemIndex] && 
+						<PanelBody title="ITEM CLASS" icon="admin-generic" initialOpen={false}>
+							<TextareaControl
+								label='クラス'
+								onChange={(classes)=>{
+									items[attributes.currentItemIndex].classes=classes;
+									save();
+								}}
+								value={items[attributes.currentItemIndex].classes}
+							/>
+						</PanelBody>
+					}
+					<CP.ItemControlInfoPanel/>
+				</InspectorControls>
+			</>
+		);
 	},
 	save({attributes,className,setAttributes}){
 		const {RichText}=wp.blockEditor;
@@ -294,6 +297,7 @@ wp.blocks.registerBlockType('catpow/honeycomb',{
 							className={item.classes}
 							src={itemStates.hasImage?item.src:false}
 							data-order={item.order}
+							key={index}
 						>
 							{itemStates.hasTitle &&
 								<h3><RichText.Content value={item.title}/></h3>

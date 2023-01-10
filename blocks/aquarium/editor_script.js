@@ -65,34 +65,31 @@
         wp.hooks.applyFilters("catpow.blocks.aquarium.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return [
-        /* @__PURE__ */ wp.element.createElement("div", { className: classes }, layers.map((layer) => {
-          return /* @__PURE__ */ wp.element.createElement("div", { className: layer.classes }, layer.items.map((item) => {
-            return /* @__PURE__ */ wp.element.createElement("div", { className: item.classes }, item.images.length > 0 && item.images.map((image) => {
-              return /* @__PURE__ */ wp.element.createElement("div", { className: image.classes }, /* @__PURE__ */ wp.element.createElement("img", { src: image.src, srcset: image.srcset, alt: image.alt }));
-            }), item.texts.length > 0 && item.texts.map((text) => {
-              return /* @__PURE__ */ wp.element.createElement("div", { className: text.classes }, /* @__PURE__ */ wp.element.createElement("h3", null, text.title), /* @__PURE__ */ wp.element.createElement("p", null, text.text));
-            }));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, layers.map((layer) => {
+        return /* @__PURE__ */ wp.element.createElement("div", { className: layer.classes }, layer.items.map((item, index) => {
+          return /* @__PURE__ */ wp.element.createElement("div", { className: item.classes, key: index }, item.images.length > 0 && item.images.map((image) => {
+            return /* @__PURE__ */ wp.element.createElement("div", { className: image.classes }, /* @__PURE__ */ wp.element.createElement("img", { src: image.src, srcset: image.srcset, alt: image.alt }));
+          }), item.texts.length > 0 && item.texts.map((text) => {
+            return /* @__PURE__ */ wp.element.createElement("div", { className: text.classes }, /* @__PURE__ */ wp.element.createElement("h3", null, text.title), /* @__PURE__ */ wp.element.createElement("p", null, text.text));
           }));
-        }), /* @__PURE__ */ wp.element.createElement("div", { class: "contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2, null))),
-        /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-          CP.SelectClassPanel,
-          {
-            title: "\u30AF\u30E9\u30B9",
-            icon: "art",
-            set: setAttributes,
-            attr: attributes,
-            selectiveClasses,
-            filters: CP.filters.aquarium || {}
-          }
-        ))
-      ];
+        }));
+      }), /* @__PURE__ */ wp.element.createElement("div", { class: "contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2, null))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: "\u30AF\u30E9\u30B9",
+          icon: "art",
+          set: setAttributes,
+          attr: attributes,
+          selectiveClasses,
+          filters: CP.filters.aquarium || {}
+        }
+      )));
     },
     save({ attributes, className, setAttributes }) {
       const { classes, layers = [] } = attributes;
       return /* @__PURE__ */ wp.element.createElement("div", { className: classes }, layers.map((layer) => {
-        return /* @__PURE__ */ wp.element.createElement("div", { className: layer.classes }, layer.items.map((item) => {
-          return /* @__PURE__ */ wp.element.createElement("div", { className: item.classes }, item.images.length > 0 && item.images.map((image) => {
+        return /* @__PURE__ */ wp.element.createElement("div", { className: layer.classes }, layer.items.map((item, index) => {
+          return /* @__PURE__ */ wp.element.createElement("div", { className: item.classes, key: index }, item.images.length > 0 && item.images.map((image) => {
             return /* @__PURE__ */ wp.element.createElement("div", { className: image.classes }, /* @__PURE__ */ wp.element.createElement("img", { src: image.src, srcset: image.srcset, alt: image.alt }));
           }), item.texts.length > 0 && item.texts.map((text) => {
             return /* @__PURE__ */ wp.element.createElement("div", { className: text.classes }, /* @__PURE__ */ wp.element.createElement("h3", null, text.title), /* @__PURE__ */ wp.element.createElement("p", null, text.text));

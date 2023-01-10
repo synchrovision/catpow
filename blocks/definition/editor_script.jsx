@@ -61,6 +61,7 @@
 					items={items}
 					index={index}
 					isSelected={isSelected}
+					key={index}
 				>
 					<dt className="title">
 						<RichText
@@ -149,7 +150,7 @@
 		let rtn=[];
 		items.map((item,index)=>{
 			rtn.push(
-				<dl className="item">
+				<dl className="item" key={index}>
 					<dt className="title"><RichText.Content value={item.title}/></dt>
 					<dd className="text"><RichText.Content value={item.text}/></dd>
 				</dl>

@@ -70,7 +70,8 @@
               attr: attributes,
               items,
               index,
-              isSelected
+              isSelected,
+              key: index
             },
             states.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(
               RichText2,
@@ -186,7 +187,7 @@
       const states = CP.wordsToFlags(classes2);
       const { imageKeys } = CP.config.banners;
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, items.map((item, index) => {
-        return /* @__PURE__ */ wp.element.createElement("li", { className: item.classes }, states.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: item.title })), /* @__PURE__ */ wp.element.createElement("a", { href: item.linkUrl, target: item.target, "data-event": item.event, rel: item.target ? "noopener noreferrer" : "" }, /* @__PURE__ */ wp.element.createElement(
+        return /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, states.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: item.title })), /* @__PURE__ */ wp.element.createElement("a", { href: item.linkUrl, target: item.target, "data-event": item.event, rel: item.target ? "noopener noreferrer" : "" }, /* @__PURE__ */ wp.element.createElement(
           CP.ResponsiveImage,
           {
             attr: attributes,

@@ -62,48 +62,45 @@
         wp.hooks.applyFilters("catpow.blocks.sticky.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return [
-        /* @__PURE__ */ wp.element.createElement("div", { className: classes }, states.collapsible && /* @__PURE__ */ wp.element.createElement("div", { class: "stickyButton" }, /* @__PURE__ */ wp.element.createElement("div", { class: "stickyButtonIcon" }, states.labelButton && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(RichText2, { onChange: (labelText2) => {
-          setAttributes({ labelText: labelText2 });
-        }, value: labelText })), states.imageButton && [
-          /* @__PURE__ */ wp.element.createElement(
-            ResponsiveImage,
-            {
-              className: "open",
-              attr: attributes,
-              keys: imageKeys.openButtonImage
-            }
-          ),
-          /* @__PURE__ */ wp.element.createElement(
-            ResponsiveImage,
-            {
-              className: "close",
-              attr: attributes,
-              keys: imageKeys.closeButtonImage
-            }
-          )
-        ])), /* @__PURE__ */ wp.element.createElement("div", { class: "content" }, states.label && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(RichText2, { onChange: (labelText2) => {
-          setAttributes({ labelText: labelText2 });
-        }, value: labelText })), (states.container || states.collapsible) && /* @__PURE__ */ wp.element.createElement(InnerBlocks2, null))),
-        /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-          CP.SelectClassPanel,
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, states.collapsible && /* @__PURE__ */ wp.element.createElement("div", { class: "stickyButton" }, /* @__PURE__ */ wp.element.createElement("div", { class: "stickyButtonIcon" }, states.labelButton && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(RichText2, { onChange: (labelText2) => {
+        setAttributes({ labelText: labelText2 });
+      }, value: labelText })), states.imageButton && [
+        /* @__PURE__ */ wp.element.createElement(
+          ResponsiveImage,
           {
-            title: "\u30AF\u30E9\u30B9",
-            icon: "art",
-            set: setAttributes,
+            className: "open",
             attr: attributes,
-            selectiveClasses,
-            filters: CP.filters.listed || {}
+            keys: imageKeys.openButtonImage
           }
-        ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-          TextareaControl,
+        ),
+        /* @__PURE__ */ wp.element.createElement(
+          ResponsiveImage,
           {
-            label: "\u30AF\u30E9\u30B9",
-            onChange: (classes2) => setAttributes({ classes: classes2 }),
-            value: classes
+            className: "close",
+            attr: attributes,
+            keys: imageKeys.closeButtonImage
           }
-        )))
-      ];
+        )
+      ])), /* @__PURE__ */ wp.element.createElement("div", { class: "content" }, states.label && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(RichText2, { onChange: (labelText2) => {
+        setAttributes({ labelText: labelText2 });
+      }, value: labelText })), (states.container || states.collapsible) && /* @__PURE__ */ wp.element.createElement(InnerBlocks2, null))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: "\u30AF\u30E9\u30B9",
+          icon: "art",
+          set: setAttributes,
+          attr: attributes,
+          selectiveClasses,
+          filters: CP.filters.listed || {}
+        }
+      ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+        TextareaControl,
+        {
+          label: "\u30AF\u30E9\u30B9",
+          onChange: (classes2) => setAttributes({ classes: classes2 }),
+          value: classes
+        }
+      ))));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks: InnerBlocks2, RichText: RichText2 } = wp.blockEditor;

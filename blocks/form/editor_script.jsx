@@ -30,51 +30,53 @@
 			}
 		}
 
-		return [
-			<div class="embedded_content">
-				<div class="label">{content_path}</div>
-				<ServerSideRender block='catpow/form' attributes={attributes}/>
-			</div>,
-			<InspectorControls>
-				<PanelBody title="フォーム">
-					<TreeSelect
-						label='path'
-						selectedId={content_path}
-						tree={Object.values(cpEmbeddablesTree.form)}
-						onChange={(content_path)=>{
-							setAttributes({content_path:content_path});
-						}}
-					/>
-					{postDataSelection &&
+		return (
+			<>
+				<div class="embedded_content">
+					<div class="label">{content_path}</div>
+					<ServerSideRender block='catpow/form' attributes={attributes}/>
+				</div>,
+				<InspectorControls>
+					<PanelBody title="フォーム">
 						<TreeSelect
-							label='form'
-							selectedId={post_data_path}
-							tree={postDataSelection}
-							onChange={(post_data_path)=>{
-								setAttributes({post_data_path:post_data_path});
+							label='path'
+							selectedId={content_path}
+							tree={Object.values(cpEmbeddablesTree.form)}
+							onChange={(content_path)=>{
+								setAttributes({content_path:content_path});
 							}}
 						/>
-					}
-				</PanelBody>
-				<PanelBody title="入力値" initialOpen={false}>
-					<TextControl
-						label='入力名'
-						value={inputs}
-						onChange={(inputs)=>{setAttributes({inputs});}}
-					/>
-					<TextControl
-						label='データID'
-						value={data_id}
-						onChange={(data_id)=>{setAttributes({data_id});}}
-					/>
-					<TextareaControl
-						label='初期値'
-						value={values}
-						onChange={(values)=>{setAttributes({values});}}
-					/>
-				</PanelBody>
-			</InspectorControls>
-		];
+						{postDataSelection &&
+							<TreeSelect
+								label='form'
+								selectedId={post_data_path}
+								tree={postDataSelection}
+								onChange={(post_data_path)=>{
+									setAttributes({post_data_path:post_data_path});
+								}}
+							/>
+						}
+					</PanelBody>
+					<PanelBody title="入力値" initialOpen={false}>
+						<TextControl
+							label='入力名'
+							value={inputs}
+							onChange={(inputs)=>{setAttributes({inputs});}}
+						/>
+						<TextControl
+							label='データID'
+							value={data_id}
+							onChange={(data_id)=>{setAttributes({data_id});}}
+						/>
+						<TextareaControl
+							label='初期値'
+							value={values}
+							onChange={(values)=>{setAttributes({values});}}
+						/>
+					</PanelBody>
+				</InspectorControls>
+			</>
+		);
 	},
 
 	save({attributes,className,setAttributes}){

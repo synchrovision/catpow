@@ -424,7 +424,7 @@
         }
         if (keys.sources && image.sizes) {
           devices = devices || ["sp"];
-          data[keys.sources] = devices.map((device) => {
+          data[keys.sources] = devices.forEach((device) => {
             const sizeData = CP2.devices[device];
             return { srcset: image.sizes[sizeData.media_size].url, device };
           });
@@ -432,7 +432,7 @@
         if (keys.srcset && image.sizes) {
           devices = devices || ["sp", "pc"];
           data[keys.srcset] = "";
-          devices.map((device) => {
+          devices.forEach((device) => {
             const sizeData = CP2.devices[device];
             data[keys.srcset] += image.sizes[sizeData.media_size].url + sizeData.rep;
           });
@@ -536,7 +536,7 @@
       } else {
         values = Object.keys(prm.values);
       }
-      values.map((val) => {
+      values.forEach((val) => {
         if (prm.sub && prm.sub[val]) {
           rtn[val] = CP2.getAllSubClasses(prm.sub[val]);
         } else {
@@ -547,7 +547,7 @@
     },
     getAllSubClasses: (prms) => {
       let rtn = [];
-      prms.map((prm) => {
+      prms.forEach((prm) => {
         if (typeof prm === "object") {
           if (prm.values) {
             if (Array.isArray(prm.values)) {
@@ -562,7 +562,7 @@
             if (Array.isArray(prm.sub)) {
               rtn = rtn.concat(CP2.getAllSubClasses(prm.sub));
             } else {
-              Object.keys(prm.sub).map((key) => {
+              Object.keys(prm.sub).forEach((key) => {
                 rtn = rtn.concat(CP2.getAllSubClasses(prm.sub[key]));
               });
             }
@@ -579,7 +579,7 @@
       } else {
         values = Object.keys(prm.values);
       }
-      values.map((val) => {
+      values.forEach((val) => {
         if (prm.bind && prm.bind[val]) {
           rtn[val] = prm.bind[val];
         } else {
@@ -791,7 +791,7 @@
         return {};
       }
       var obj = {};
-      css.replace("&amp;", "&").split(";").map((pair) => {
+      css.replace("&amp;", "&").split(";").forEach((pair) => {
         const match = pair.match(/^([^:]+?):(.+)$/);
         if (!match) {
           return;
@@ -920,7 +920,7 @@
       if (void 0 === words) {
         return {};
       }
-      words.split(" ").map((word) => {
+      words.split(" ").forEach((word) => {
         rtn[word] = true;
       });
       return rtn;
@@ -932,7 +932,7 @@
       return Object.keys(flags).filter((word) => flags[word]).join(" ");
     },
     filterFlags: (flags, callback) => {
-      Object.keys(flags).map((key) => {
+      Object.keys(flags).forEach((key) => {
         if (!callback(key)) {
           delete flags[key];
         }
@@ -1094,7 +1094,7 @@
         }
         const datalist = document.createElement("datalist");
         datalist.id = id;
-        values.map((value) => {
+        values.forEach((value) => {
           const option = document.createElement("option");
           option.value = value;
           datalist.appendChild(option);
@@ -1167,7 +1167,7 @@
           inheritColor: color == context["catpow/color"],
           classes: classes.replace(/color\d+\s*/, "") + " color" + color
         };
-        images.map((key) => {
+        images.forEach((key) => {
           if (!attributes[key]) {
             return;
           }
@@ -1190,7 +1190,7 @@
       }
       if (void 0 === styleDatas) {
         const styleDatas2 = {};
-        csss.map((key) => {
+        csss.forEach((key) => {
           styleDatas2[key] = CP2.parseStyleCodeWithMediaQuery(attributes[key]);
         });
         setAttributes({ styleDatas: styleDatas2 });
@@ -1203,7 +1203,7 @@
           const atts = {};
           atts.prevId = id;
           atts.styleDatas = {};
-          csss.map((key) => {
+          csss.forEach((key) => {
             if (!attributes[key]) {
               return;
             }
@@ -1281,7 +1281,8 @@
         Button,
         {
           onClick: () => props.onChange(option.value),
-          isPrimary: props.selected === option.value
+          isPrimary: props.selected === option.value,
+          key: option.value
         },
         option.label
       )))));
@@ -1294,7 +1295,8 @@
         "li",
         {
           onClick: () => props.onChange(option.value),
-          className: "item" + (props.selected === option.value ? " active" : "")
+          className: "item" + (props.selected === option.value ? " active" : ""),
+          key: option.value
         },
         option.label
       ))));
@@ -1317,11 +1319,10 @@
         const sizeData = CP2.devices[device];
         onClick = (e) => CP2.selectImage({ src: "src" }, function({ src: src2 }) {
           if (keys.sources) {
-            item[keys.sources].map((source) => {
+            item[keys.sources].forEach((source) => {
               if (source.device === device) {
                 source.srcset = src2;
               }
-              return source;
             });
             if (items) {
               set({ [keys.items]: JSON.parse(JSON.stringify(items)) });
@@ -1417,7 +1418,7 @@
             onClick,
             ...otherProps
           },
-          item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcset: source.srcset, media: CP2.devices[source.device].media_query, "data-device": source.device })),
+          item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP2.devices[source.device].media_query, "data-device": source.device, key: source.device })),
           /* @__PURE__ */ wp.element.createElement(
             "img",
             {
@@ -1433,7 +1434,7 @@
           className: "selectImage " + className,
           src,
           alt: item[keys.alt],
-          srcset: item[keys.srcset],
+          srcSet: item[keys.srcset],
           sizes,
           "data-mime": item[keys.mime],
           onClick,
@@ -1475,7 +1476,7 @@
           {
             className,
             src: item[keys.src],
-            srcset: item[keys.srcset],
+            srcSet: item[keys.srcset],
             sizes,
             "data-mime": item[keys.mime],
             autoplay: 1,
@@ -1496,7 +1497,7 @@
             }
           ));
         }
-        return /* @__PURE__ */ wp.element.createElement("picture", { className: "selectImage " + className }, item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcset: source.srcset, media: CP2.devices[source.device].media_query, "data-device": source.device })), /* @__PURE__ */ wp.element.createElement(
+        return /* @__PURE__ */ wp.element.createElement("picture", { className: "selectImage " + className }, item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcset: source.srcset, media: CP2.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement(
           "img",
           {
             src: item[keys.src],
@@ -1510,7 +1511,7 @@
           className,
           src: item[keys.src],
           alt: item[keys.alt],
-          srcset: item[keys.srcset],
+          srcSet: item[keys.srcset],
           sizes,
           "data-mime": item[keys.mime]
         }
@@ -1681,14 +1682,14 @@
       }, []);
       const defaultRowValues = useMemo(() => {
         const rowValue = {};
-        Object.keys(cols).map((c) => {
+        Object.keys(cols).forEach((c) => {
           rowValue[c] = cols[c].default || "";
         });
         return [rowValue];
       }, [cols]);
       const colsWithoutLabel = useMemo(() => {
         const colsWithoutLabel2 = {};
-        Object.keys(cols).map((c) => {
+        Object.keys(cols).forEach((c) => {
           const { label, ...otherParams } = cols[c];
           colsWithoutLabel2[c] = otherParams;
         });
@@ -1998,7 +1999,7 @@
                 if (prm.label) {
                   rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
                 }
-                Object.keys(prm.values).map((key) => {
+                Object.keys(prm.values).forEach((key) => {
                   rtn.push(
                     /* @__PURE__ */ wp.element.createElement(
                       CheckboxControl,
@@ -2073,7 +2074,7 @@
                 if (prm.sub) {
                   if (prm.sub[JSON.parse(props.attr[prm.json])[prm.key]]) {
                     let sub = [];
-                    prm.sub[JSON.parse(props.attr[prm.json])[prm.key]].map((prm2) => {
+                    prm.sub[JSON.parse(props.attr[prm.json])[prm.key]].forEach((prm2) => {
                       sub.push(SelectClass(prm2));
                     });
                     rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
@@ -2085,7 +2086,7 @@
                 if (prm.sub) {
                   if (JSON.parse(props.attr[prm.json])[prm.key]) {
                     let sub = [];
-                    prm.sub.map((prm2) => {
+                    prm.sub.forEach((prm2) => {
                       sub.push(SelectClass(prm2));
                     });
                     rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
@@ -2113,7 +2114,7 @@
               let currentValue = CP2.getJsonValue(props, prm.json, prm.key);
               if (currentValue && prm.sub[currentValue]) {
                 let sub = [];
-                prm.sub[currentValue].map((prm2) => {
+                prm.sub[currentValue].forEach((prm2) => {
                   sub.push(SelectClass(prm2));
                 });
                 rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
@@ -2135,7 +2136,7 @@
             if (prm.sub) {
               if (CP2.getJsonValue(props, prm.json, prm.key)) {
                 let sub = [];
-                prm.sub.map((prm2) => {
+                prm.sub.forEach((prm2) => {
                   sub.push(SelectClass(prm2));
                 });
                 rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
@@ -2232,7 +2233,7 @@
                       value: CP2.getUrlInStyleCode(tgt["border-image"]),
                       color: prm.color || 0,
                       onChange: (imageset) => {
-                        imageset.map((image) => {
+                        imageset.forEach((image) => {
                           if (!image.conf) {
                             return;
                           }
@@ -2315,7 +2316,7 @@
               )
             );
           } else if (prm === "event") {
-            wp.hooks.applyFilters("catpow.EventInputs", [], { item, save }).map((EventInput) => {
+            wp.hooks.applyFilters("catpow.EventInputs", [], { item, save }).forEach((EventInput) => {
               rtn.push(EventInput);
             });
           } else if (prm.input) {
@@ -2438,7 +2439,7 @@
               case "gridbuttons":
                 if (prm.sub && prm.sub[item[prm.key]]) {
                   let sub = [];
-                  prm.sub[item[prm.key]].map((prm2) => {
+                  prm.sub[item[prm.key]].forEach((prm2) => {
                     sub.push(SelectClass(prm2));
                   });
                   rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
@@ -2447,7 +2448,7 @@
               case "bool":
                 if (prm.sub && item[prm.key]) {
                   let sub = [];
-                  prm.sub.map((prm2) => {
+                  prm.sub.forEach((prm2) => {
                     sub.push(SelectClass(prm2));
                   });
                   rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
@@ -2476,13 +2477,13 @@
                 if (bindClasses[newClass]) {
                   newSels = newSels.concat(bindClasses[newClass]);
                 }
-                currentSels.map((value) => {
+                currentSels.forEach((value) => {
                   if (!newSels.includes(value)) {
                     states[value] = false;
                   }
                 });
               }
-              bindClasses[newClass].map((value) => {
+              bindClasses[newClass].forEach((value) => {
                 states[value] = true;
               });
               states[newClass] = true;
@@ -2548,7 +2549,7 @@
               let currentClass2 = CP2.getSelectiveClass(props, prm.values, prm.key);
               if (currentClass2 && prm.sub[currentClass2]) {
                 let sub = [];
-                prm.sub[currentClass2].map((prm2) => {
+                prm.sub[currentClass2].forEach((prm2) => {
                   sub.push(SelectClass(prm2));
                 });
                 rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
@@ -2571,7 +2572,7 @@
             if (prm.sub) {
               if (states[prm.values]) {
                 let sub = [];
-                prm.sub.map((prm2) => {
+                prm.sub.forEach((prm2) => {
                   sub.push(SelectClass(prm2));
                 });
                 rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
@@ -2785,7 +2786,7 @@
       const save = () => {
         set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
       };
-      return /* @__PURE__ */ wp.element.createElement("table", { className: "editItemsTable" }, /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, columns.map((col) => !("cond" in col) || col.cond ? /* @__PURE__ */ wp.element.createElement("th", null, col.label || col.key) : false), /* @__PURE__ */ wp.element.createElement("th", null))), /* @__PURE__ */ wp.element.createElement("tbody", null, items.map((item, index) => {
+      return /* @__PURE__ */ wp.element.createElement("table", { className: "editItemsTable" }, /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, columns.map((col) => !("cond" in col) || col.cond ? /* @__PURE__ */ wp.element.createElement("th", { key: col.key }, col.label || col.key) : false), /* @__PURE__ */ wp.element.createElement("th", null))), /* @__PURE__ */ wp.element.createElement("tbody", null, items.map((item, index) => {
         const propsForControl = { tag: "tr", set, itemsKey, items, index };
         return /* @__PURE__ */ wp.element.createElement(
           "tr",
@@ -2801,7 +2802,7 @@
             }
             switch (col.type) {
               case "text":
-                return /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement(
+                return /* @__PURE__ */ wp.element.createElement("td", { key: col.key }, /* @__PURE__ */ wp.element.createElement(
                   RichText,
                   {
                     value: item[col.key],
@@ -2812,7 +2813,7 @@
                   }
                 ));
               case "image":
-                return /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement(
+                return /* @__PURE__ */ wp.element.createElement("td", { key: col.key }, /* @__PURE__ */ wp.element.createElement(
                   CP2.SelectResponsiveImage,
                   {
                     attr,
@@ -2824,7 +2825,7 @@
                   }
                 ));
               case "picture":
-                return /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement(
+                return /* @__PURE__ */ wp.element.createElement("td", { key: col.key }, /* @__PURE__ */ wp.element.createElement(
                   CP2.SelectPictureSources,
                   {
                     index,
@@ -2837,12 +2838,12 @@
                   }
                 ));
               case "items":
-                col.columns.map((subCol) => {
+                col.columns.forEach((subCol) => {
                   if (subCol.keys) {
                     subCol.keys.subItems = col.key;
                   }
                 });
-                return /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement(
+                return /* @__PURE__ */ wp.element.createElement("td", { key: col.key }, /* @__PURE__ */ wp.element.createElement(
                   CP2.EditItemsTable,
                   {
                     set: () => {
@@ -2905,7 +2906,7 @@
       });
       const eventParamsWithoutLabel = useMemo(() => {
         const eventParamsWithoutLabel2 = {};
-        Object.keys(eventParams).map((name) => {
+        Object.keys(eventParams).forEach((name) => {
           const { label, ...otherParams } = eventParams[name];
           eventParamsWithoutLabel2[name] = otherParams;
         });

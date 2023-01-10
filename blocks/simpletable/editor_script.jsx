@@ -95,62 +95,64 @@
 
 		const saveItems=()=>{
 			setAttributes({rows:JSON.parse(JSON.stringify(rows))});
-		}
-
-		;
-		return [
-			<InspectorControls>
-				<CP.SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters.simpletable || {}}
-				/>
-				<CP.SelectClassPanel
-					title='行'
-					icon='edit'
-					set={setAttributes}
-					attr={attributes}
-					items={rows}
-					index={attributes.currentItemIndex}
-					triggerClasses={selectiveClasses[0]}
-					filters={CP.filters.simpletable || {}}
-				/>
-				<CP.ItemControlInfoPanel/>
-			</InspectorControls>,
-			<table className={classes}>
-				<tbody>
-				{rows.map((row,index)=>{
-					return (
-						<CP.Item
-							tag='tr'
-							set={setAttributes}
-							attr={attributes}
-							items={rows}
-							itemskey='rows'
-							index={index}
-							isSelected={isSelected}
-						>
-							<th>
-								<RichText
-									onChange={(text)=>{row.cells[0].text=text;saveItems();}}
-									value={row.cells[0].text}
-								/>
-							</th>
-							<td>
-								<RichText
-									onChange={(text)=>{row.cells[1].text=text;saveItems();}}
-									value={row.cells[1].text}
-								/>
-							</td>
-						</CP.Item>
-					);
-				})}
-				</tbody>
-			</table>
-		];
+		};
+		
+		return (
+			<>
+				<InspectorControls>
+					<CP.SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+						filters={CP.filters.simpletable || {}}
+					/>
+					<CP.SelectClassPanel
+						title='行'
+						icon='edit'
+						set={setAttributes}
+						attr={attributes}
+						items={rows}
+						index={attributes.currentItemIndex}
+						triggerClasses={selectiveClasses[0]}
+						filters={CP.filters.simpletable || {}}
+					/>
+					<CP.ItemControlInfoPanel/>
+				</InspectorControls>
+				<table className={classes}>
+					<tbody>
+					{rows.map((row,index)=>{
+						return (
+							<CP.Item
+								tag='tr'
+								set={setAttributes}
+								attr={attributes}
+								items={rows}
+								itemskey='rows'
+								index={index}
+								isSelected={isSelected}
+								key={index}
+							>
+								<th>
+									<RichText
+										onChange={(text)=>{row.cells[0].text=text;saveItems();}}
+										value={row.cells[0].text}
+									/>
+								</th>
+								<td>
+									<RichText
+										onChange={(text)=>{row.cells[1].text=text;saveItems();}}
+										value={row.cells[1].text}
+									/>
+								</td>
+							</CP.Item>
+						);
+					})}
+					</tbody>
+				</table>
+			</>
+		);
 	},
 
 	save({attributes,className}){
@@ -161,7 +163,7 @@
 				<tbody>
 				{rows.map((row,index)=>{
 					return (
-						<tr className={row.classes} data-refine-cond={row.cond}>
+						<tr className={row.classes} data-refine-cond={row.cond} key={index}>
 							<th className={row.cells[0].classes}><RichText.Content value={row.cells[0].text}/></th>
 							<td className={row.cells[1].classes}><RichText.Content value={row.cells[1].text}/></td>
 						</tr>

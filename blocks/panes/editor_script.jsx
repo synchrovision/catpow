@@ -80,6 +80,7 @@ wp.blocks.registerBlockType('catpow/panes',{
 					items={items}
 					index={index}
 					isSelected={isSelected}
+					key={index}
 				>
 					<div class="image">
 						<CP.SelectResponsiveImage
@@ -218,7 +219,7 @@ wp.blocks.registerBlockType('catpow/panes',{
 		let rtn=[];
 		items.map((item,index)=>{
 			rtn.push(
-				<li className={item.classes}>
+				<li className={item.classes} key={index}>
 					<div className='image'>
 						<CP.ResponsiveImage
 							attr={attributes}

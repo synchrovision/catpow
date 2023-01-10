@@ -9,13 +9,15 @@
 		const {PanelBody,ServerSideRender} = wp.components;
 		const {func,param}=attributes;
 
-		return [
-			<ServerSideRender block='catpow/postlink' attributes={Object.assign({},attributes,{preview:true})}/>,
-			<InspectorControls>
-				<PanelBody title="Path">
-				</PanelBody>
-			</InspectorControls>
-		];
+		return (
+			<>
+				<ServerSideRender block='catpow/postlink' attributes={Object.assign({},attributes,{preview:true})}/>
+				<InspectorControls>
+					<PanelBody title="Path">
+					</PanelBody>
+				</InspectorControls>
+			</>
+		);
 	},
 
 	save({attributes,className,setAttributes}){

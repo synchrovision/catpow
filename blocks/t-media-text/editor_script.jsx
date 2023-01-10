@@ -36,49 +36,51 @@
 			return selectiveClasses;
 		},[]);
 
-		return [
-			<table width="100%" className={classes}>
-				<tbody>
-					<tr>
-						<td className="imageCell" width={width}>
-							<CP.SelectResponsiveImage
-								set={setAttributes}
-								attr={attributes}
-								keys={{src:'src',alt:'alt',code:'imageCode'}}
-								size="large"
-								width="100%"
-								height="auto"
-								isTemplate={states.isTemplate}
-							/>
-						</td>
-						<td className="spacerCell"></td>
-						<td className="textCell">
-							<InnerBlocks/>
-						</td>
-					</tr>
-				</tbody>
-			</table>,
-			<BlockControls>
-				<CP.VerticalAlignClassToolbar set={setAttributes} attr={attributes}/>
-			</BlockControls>,
-			<InspectorControls>
-				<CP.SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters['t-media-text'] || {}}
-				/>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label='クラス'
-						onChange={(classes)=>setAttributes({classes})}
-						value={classes}
+		return (
+			<>
+				<table width="100%" className={classes}>
+					<tbody>
+						<tr>
+							<td className="imageCell" width={width}>
+								<CP.SelectResponsiveImage
+									set={setAttributes}
+									attr={attributes}
+									keys={{src:'src',alt:'alt',code:'imageCode'}}
+									size="large"
+									width="100%"
+									height="auto"
+									isTemplate={states.isTemplate}
+								/>
+							</td>
+							<td className="spacerCell"></td>
+							<td className="textCell">
+								<InnerBlocks/>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<BlockControls>
+					<CP.VerticalAlignClassToolbar set={setAttributes} attr={attributes}/>
+				</BlockControls>
+				<InspectorControls>
+					<CP.SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+						filters={CP.filters['t-media-text'] || {}}
 					/>
-				</PanelBody>
-			</InspectorControls>
-		];
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label='クラス'
+							onChange={(classes)=>setAttributes({classes})}
+							value={classes}
+						/>
+					</PanelBody>
+				</InspectorControls>
+			</>
+		);
 	},
 
 

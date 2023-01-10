@@ -42,6 +42,7 @@
 					items={itemsCopy}
 					index={index}
 					isSelected={isSelected}
+					key={index}
 				>
 					<h3 onClick={()=>{setAttributes({currentIndex:index})}}>
 						<RichText
@@ -53,7 +54,7 @@
 			)
 		});
 
-		return [
+		return (
 			<div className={classes} data-current-index={currentIndex}>
 				<ul class="tab">{rtn}</ul>
 				<div class="contents">
@@ -62,8 +63,8 @@
 						templateLock='all'
 					/>
 				</div>
-			</div>,
-		];
+			</div>
+		);
 	},
 
 
@@ -73,7 +74,7 @@
 		let rtn=[];
 		items.map((item,index)=>{
 			rtn.push(
-				<li className='item'><h3><RichText.Content value={item.title}/></h3></li>
+				<li className='item' key={index}><h3><RichText.Content value={item.title}/></h3></li>
 			);
 		});
 

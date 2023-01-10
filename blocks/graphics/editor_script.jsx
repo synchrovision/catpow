@@ -351,7 +351,8 @@ wp.blocks.registerBlockType('catpow/graphics',{
 								id:id+'_item_'+index,
 								className:itemClasses,
 								'data-index':index,
-								'data-rect':item.rect
+								'data-rect':item.rect,
+								key:index
 							},
 							<>
 								{itemBody()}
@@ -473,7 +474,8 @@ wp.blocks.registerBlockType('catpow/graphics',{
 							id:id+'_item_'+index,
 							className:item.classes,
 							href:item.link,
-							'data-rect':item.rect
+							'data-rect':item.rect,
+							key:index
 						},
 						itemBody()
 					);

@@ -57,6 +57,7 @@
 					onClick={(e)=>{
 						setAttributes({step:index});
 					}}
+					key={index}
 				>
 					{states.hasCounter &&
 						<div className='counter'>

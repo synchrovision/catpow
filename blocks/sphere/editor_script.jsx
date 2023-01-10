@@ -91,6 +91,7 @@ wp.blocks.registerBlockType('catpow/sphere',{
 					items={items}
 					index={index}
 					isSelected={isSelected}
+					key={index}
 				>
 					<div class="contents">
 						{states.hasSubImage &&
@@ -128,47 +129,49 @@ wp.blocks.registerBlockType('catpow/sphere',{
 
 		if(attributes.EditMode===undefined){attributes.EditMode=false;}
 
-		return [
-			<BlockControls>
-				<Toolbar
-					controls={[
-						{
-							icon: 'edit',
-							title: 'EditMode',
-							isActive: attributes.EditMode,
-							onClick: () => setAttributes({EditMode:!attributes.EditMode})
-						}
-					]}
-				/>
-			</BlockControls>,
-			<InspectorControls>
-				<CP.SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-				/>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label='クラス'
-						onChange={(classes)=>setAttributes({classes})}
-						value={classes}
+		return (
+			<>
+				<BlockControls>
+					<Toolbar
+						controls={[
+							{
+								icon: 'edit',
+								title: 'EditMode',
+								isActive: attributes.EditMode,
+								onClick: () => setAttributes({EditMode:!attributes.EditMode})
+							}
+						]}
 					/>
-				</PanelBody>
-				<CP.SelectClassPanel
-					title='アイテム'
-					icon='edit'
-					set={setAttributes}
-					attr={attributes}
-					items={items}
-					index={attributes.currentItemIndex}
-					selectiveClasses={selectiveItemClasses}
-				/>
-				<CP.ItemControlInfoPanel/>
-			</InspectorControls>,
-			<ul className={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>
-		];
+				</BlockControls>
+				<InspectorControls>
+					<CP.SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+					/>
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label='クラス'
+							onChange={(classes)=>setAttributes({classes})}
+							value={classes}
+						/>
+					</PanelBody>
+					<CP.SelectClassPanel
+						title='アイテム'
+						icon='edit'
+						set={setAttributes}
+						attr={attributes}
+						items={items}
+						index={attributes.currentItemIndex}
+						selectiveClasses={selectiveItemClasses}
+					/>
+					<CP.ItemControlInfoPanel/>
+				</InspectorControls>
+				<ul className={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>
+			</>
+		);
 	},
 	save({attributes,className}){
 		const {RichText}=wp.blockEditor;
@@ -180,7 +183,7 @@ wp.blocks.registerBlockType('catpow/sphere',{
 		let rtn=[];
 		items.map((item,index)=>{
 			rtn.push(
-				<li className={item.classes}>
+				<li className={item.classes} key={index}>
 					<div class="contents">
 						{states.hasSubImage && <div className='image'><img src={item.subImageSrc} alt={item.subImageAlt}/></div>}
 						{states.hasSubTitle && <h4><RichText.Content value={item.subTitle}/></h4>}

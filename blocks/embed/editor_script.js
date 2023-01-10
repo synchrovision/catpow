@@ -9,20 +9,17 @@
       const { InspectorControls } = wp.blockEditor;
       const { PanelBody, TreeSelect, ServerSideRender } = wp.components;
       const { content_path, query } = attributes;
-      return [
-        /* @__PURE__ */ wp.element.createElement("div", { class: "embedded_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/embed", attributes })),
-        /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" }, /* @__PURE__ */ wp.element.createElement(
-          TreeSelect,
-          {
-            label: "path",
-            selectedId: content_path,
-            tree: Object.values(cpEmbeddablesTree.embed),
-            onChange: (content_path2) => {
-              setAttributes({ content_path: content_path2 });
-            }
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { class: "embedded_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/embed", attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" }, /* @__PURE__ */ wp.element.createElement(
+        TreeSelect,
+        {
+          label: "path",
+          selectedId: content_path,
+          tree: Object.values(cpEmbeddablesTree.embed),
+          onChange: (content_path2) => {
+            setAttributes({ content_path: content_path2 });
           }
-        )))
-      ];
+        }
+      ))));
     },
     example: CP.example,
     save({ attributes, className, setAttributes }) {

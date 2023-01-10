@@ -95,6 +95,7 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 					attr={attributes}
 					items={items}
 					index={index}
+					key={index}
 				>
 					<header>
 						{states.hasHeaderImage &&
@@ -226,7 +227,7 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 									{items.map((item,index)=>{
 										var isActive=currentItemIndex==index;
 										return (
-											<li className={isActive?'item active':'item'}>
+											<li className={isActive?'item active':'item'} key={index}>
 												<div className={boxClasses}>
 													{states.hasSubTitle &&
 														<header className="title">
@@ -303,7 +304,7 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 				<ul className={classes}>
 					{items.map((item,index)=>{
 						return (
-							<li className={item.classes}>
+							<li className={item.classes} key={index}>
 								<header>
 									{states.hasHeaderImage && 
 										<div className='image'>

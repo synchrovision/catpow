@@ -11,22 +11,24 @@ wp.blocks.registerBlockType('catpow/embed',{
 		const {PanelBody,TreeSelect,ServerSideRender} = wp.components;
 		const {content_path,query}=attributes;
 
-		return [
-			<div class="embedded_content">
-				<div class="label">{content_path}</div>
-				<ServerSideRender block='catpow/embed' attributes={attributes}/>
-			</div>,
-			<InspectorControls>
-				<PanelBody title="Path">
-					<TreeSelect
-						label='path'
-						selectedId={content_path}
-						tree={Object.values(cpEmbeddablesTree.embed)}
-						onChange={(content_path)=>{setAttributes({content_path:content_path});}}
-					/>
-				</PanelBody>
-			</InspectorControls>
-		];
+		return (
+			<>
+				<div class="embedded_content">
+					<div class="label">{content_path}</div>
+					<ServerSideRender block='catpow/embed' attributes={attributes}/>
+				</div>
+				<InspectorControls>
+					<PanelBody title="Path">
+						<TreeSelect
+							label='path'
+							selectedId={content_path}
+							tree={Object.values(cpEmbeddablesTree.embed)}
+							onChange={(content_path)=>{setAttributes({content_path:content_path});}}
+						/>
+					</PanelBody>
+				</InspectorControls>
+			</>
+		);
 	},
 	example:CP.example,
 	save({attributes,className,setAttributes}){

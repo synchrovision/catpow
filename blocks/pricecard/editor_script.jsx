@@ -64,6 +64,7 @@
 					items={items}
 					index={index}
 					isSelected={isSelected}
+					key={index}
 				>
 					{states.hasImage &&
 						<div className='image'>
@@ -279,7 +280,7 @@
 		items.map((item,index)=>{
 			if(!item.controlClasses){item.controlClasses='control';}
 			rtn.push(
-				<li className={item.classes}>
+				<li className={item.classes} key={index}>
 					{states.hasImage &&
 						<div className='image'>
 							<CP.ResponsiveImage

@@ -41,7 +41,8 @@
               attr: attributes,
               items: itemsCopy,
               index,
-              isSelected
+              isSelected,
+              key: index
             },
             /* @__PURE__ */ wp.element.createElement("h3", { onClick: () => {
               setAttributes({ currentIndex: index });
@@ -58,22 +59,20 @@
           )
         );
       });
-      return [
-        /* @__PURE__ */ wp.element.createElement("div", { className: classes, "data-current-index": currentIndex }, /* @__PURE__ */ wp.element.createElement("ul", { class: "tab" }, rtn), /* @__PURE__ */ wp.element.createElement("div", { class: "contents" }, /* @__PURE__ */ wp.element.createElement(
-          InnerBlocks,
-          {
-            template,
-            templateLock: "all"
-          }
-        )))
-      ];
+      return /* @__PURE__ */ wp.element.createElement("div", { className: classes, "data-current-index": currentIndex }, /* @__PURE__ */ wp.element.createElement("ul", { class: "tab" }, rtn), /* @__PURE__ */ wp.element.createElement("div", { class: "contents" }, /* @__PURE__ */ wp.element.createElement(
+        InnerBlocks,
+        {
+          template,
+          templateLock: "all"
+        }
+      )));
     },
     save({ attributes, className, setAttributes }) {
       const { classes, items } = attributes;
       let rtn = [];
       items.map((item, index) => {
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("li", { className: "item" }, /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })))
+          /* @__PURE__ */ wp.element.createElement("li", { className: "item", key: index }, /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })))
         );
       });
       return /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement("ul", { class: "tab" }, rtn), /* @__PURE__ */ wp.element.createElement("div", { class: "contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));

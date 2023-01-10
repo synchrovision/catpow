@@ -155,7 +155,7 @@
         if (states.hasHeaderRow && index == 0) {
           return false;
         }
-        return /* @__PURE__ */ wp.element.createElement("tr", null, row.cells.map((cell, columnIndex) => {
+        return /* @__PURE__ */ wp.element.createElement("tr", { key: index }, row.cells.map((cell, columnIndex) => {
           var children = [/* @__PURE__ */ wp.element.createElement(RichText2, { onChange: (text) => {
             cell.text = text;
             saveItems();
@@ -216,7 +216,7 @@
         if (states.hasHeaderRow && index == 0) {
           return false;
         }
-        return /* @__PURE__ */ wp.element.createElement("tr", null, row.cells.map((cell, columnIndex) => {
+        return /* @__PURE__ */ wp.element.createElement("tr", { key: index }, row.cells.map((cell, columnIndex) => {
           return wp.element.createElement(
             states.hasHeaderColumn && columnIndex == 0 ? "th" : "td",
             { className: cell.classes },

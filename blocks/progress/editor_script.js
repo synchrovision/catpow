@@ -58,7 +58,8 @@
             className: "item " + (index == attributes.step ? "active" : ""),
             onClick: (e) => {
               setAttributes({ step: index });
-            }
+            },
+            key: index
           },
           states2.hasCounter && /* @__PURE__ */ wp.element.createElement("div", { className: "counter" }, countPrefix && /* @__PURE__ */ wp.element.createElement("span", { class: "prefix" }, countPrefix), /* @__PURE__ */ wp.element.createElement("span", { className: "number" }, index + 1), countSuffix && /* @__PURE__ */ wp.element.createElement("span", { class: "suffix" }, countSuffix)),
           /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(

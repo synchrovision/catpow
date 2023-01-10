@@ -14,29 +14,31 @@
 		const primaryClass='wp-block-catpow-sidebar';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 
-		return [
-			<div className={classes}>
-				<InnerBlocks
-					template={[
-						['catpow/maincolumn'],
-						['catpow/sidecolumn']
-					]}
-					templateLock='all'
-				/>
-			</div>,
-			<BlockControls>
-				<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
-			</BlockControls>,
-			<InspectorControls>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label='クラス'
-						onChange={(classes)=>setAttributes({classes})}
-						value={classArray.join(' ')}
+		return (
+			<>
+				<div className={classes}>
+					<InnerBlocks
+						template={[
+							['catpow/maincolumn'],
+							['catpow/sidecolumn']
+						]}
+						templateLock='all'
 					/>
-				</PanelBody>
-			</InspectorControls>
-		];
+				</div>
+				<BlockControls>
+					<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
+				</BlockControls>
+				<InspectorControls>
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label='クラス'
+							onChange={(classes)=>setAttributes({classes})}
+							value={classArray.join(' ')}
+						/>
+					</PanelBody>
+				</InspectorControls>
+			</>
+		);
 	},
 
 
@@ -100,11 +102,11 @@ wp.blocks.registerBlockType('catpow/maincolumn',{
 	parent:['catpow/sidebar'],
 	edit({attributes,className,setAttributes}){
 		const {InnerBlocks}=wp.blockEditor;
-		return [
+		return (
 			<div className={'column column_main'}>
 				<InnerBlocks template={[['catpow/section']]} templateLock={false} />
 			</div>
-		];
+		);
 	},
 	save({attributes,className,setAttributes}){
 		const {InnerBlocks}=wp.blockEditor;
@@ -134,7 +136,7 @@ wp.blocks.registerBlockType('catpow/articlenav',{
 			});
 		}
 
-		return [
+		return (
 			<div className={className}>
 				<ul class="article_nav">
 					{getSectionTitles(mainContents).map((title)=>{
@@ -142,7 +144,7 @@ wp.blocks.registerBlockType('catpow/articlenav',{
 					})}
 				</ul>
 			</div>
-		];
+		);
 	},
 	save({attributes,className,setAttributes}){
 		return (

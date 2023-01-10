@@ -23,31 +23,33 @@ wp.blocks.registerBlockType('catpow/widget',{
         }
         
         
-        return [
-			<div class="widgetded_content">
-				<div class="label">{func}</div>
-				<ServerSideRender block='catpow/widget' attributes={attributes}/>
-			</div>,
-			<InspectorControls>
-				<PanelBody title="Path">
-					<TreeSelect
-						label='path'
-						selectedId={func}
-						tree={Object.values(cpEmbeddablesTree.widget)}
-						onChange={(func)=>{setAttributes({func:func});}}
-					/>
-				</PanelBody>
-                {statesClasses && 
-                    <CP.SelectClassPanel
-                        title='設定'
-                        icon='admin-appearance'
-                        set={setAttributes}
-                        attr={attributes}
-                        selectiveClasses={statesClasses}
-                    />
-                }
-			</InspectorControls>
-        ];
+        return (
+			<>
+				<div class="widgetded_content">
+					<div class="label">{func}</div>
+					<ServerSideRender block='catpow/widget' attributes={attributes}/>
+				</div>,
+				<InspectorControls>
+					<PanelBody title="Path">
+						<TreeSelect
+							label='path'
+							selectedId={func}
+							tree={Object.values(cpEmbeddablesTree.widget)}
+							onChange={(func)=>{setAttributes({func:func});}}
+						/>
+					</PanelBody>
+					{statesClasses && 
+						<CP.SelectClassPanel
+							title='設定'
+							icon='admin-appearance'
+							set={setAttributes}
+							attr={attributes}
+							selectiveClasses={statesClasses}
+						/>
+					}
+				</InspectorControls>
+			</>
+        );
     },
 
 	save({attributes,className,setAttributes}){

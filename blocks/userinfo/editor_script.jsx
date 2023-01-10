@@ -5,14 +5,14 @@
 	category: 'catpow-functional',
 	example:CP.example,
 	edit({attributes,setAttributes,className}){
-        return [
+        return (
 			<div class="embedded_content">
 				<div class="label">UserInfo</div>
 				<InnerBlocks template={[
 					['core/paragraph',{content:'[output last_name] [output first_name]'}]
 				]}/>
 			</div>
-        ];
+        );
     },
 
 	save({attributes,className,setAttributes}){

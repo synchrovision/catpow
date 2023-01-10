@@ -152,6 +152,7 @@ wp.blocks.registerBlockType('catpow/panel',{
 					items={itemsCopy}
 					index={index}
 					isSelected={isSelected}
+					key={index}
 				>
 					{itemStates.hasImage &&
 						<div className='image'>
@@ -207,50 +208,52 @@ wp.blocks.registerBlockType('catpow/panel',{
 
 		if(attributes.EditMode===undefined){attributes.EditMode=false;}
 
-		return [
-			<BlockControls>
-				<Toolbar
-					controls={[
-						{
-							icon:'edit',
-							title:'EditMode',
-							isActive:attributes.EditMode,
-							onClick:()=>setAttributes({EditMode:!attributes.EditMode})
-						}
-					]}
-				/>
-			</BlockControls>,
-			<ul class={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>,
-			<InspectorControls>
-				<CP.SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-				/>
-				<CP.SelectClassPanel
-					title='パネル'
-					icon='edit'
-					set={setAttributes}
-					attr={attributes}
-					items={itemsCopy}
-					index={attributes.currentItemIndex}
-					triggerClasses={selectiveClasses[0]}
-				/>
-				<PanelBody title="info" icon="admin-generic" initialOpen={false}>
-					<p>合計グリッド数：{totalGrid}</p>
-				</PanelBody>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label='クラス'
-						onChange={(clss)=>setAttributes({classes:clss})}
-						value={classArray.join(' ')}
+		return (
+			<>
+				<BlockControls>
+					<Toolbar
+						controls={[
+							{
+								icon:'edit',
+								title:'EditMode',
+								isActive:attributes.EditMode,
+								onClick:()=>setAttributes({EditMode:!attributes.EditMode})
+							}
+						]}
 					/>
-				</PanelBody>
-				<CP.ItemControlInfoPanel/>
-			</InspectorControls>
-		];
+				</BlockControls>
+				<ul class={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>
+				<InspectorControls>
+					<CP.SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+					/>
+					<CP.SelectClassPanel
+						title='パネル'
+						icon='edit'
+						set={setAttributes}
+						attr={attributes}
+						items={itemsCopy}
+						index={attributes.currentItemIndex}
+						triggerClasses={selectiveClasses[0]}
+					/>
+					<PanelBody title="info" icon="admin-generic" initialOpen={false}>
+						<p>合計グリッド数：{totalGrid}</p>
+					</PanelBody>
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label='クラス'
+							onChange={(clss)=>setAttributes({classes:clss})}
+							value={classArray.join(' ')}
+						/>
+					</PanelBody>
+					<CP.ItemControlInfoPanel/>
+				</InspectorControls>
+			</>
+		);
 	},
 	save({attributes,className}){
 		const {RichText}=wp.blockEditor;
@@ -270,7 +273,7 @@ wp.blocks.registerBlockType('catpow/panel',{
 
 
 			rtn.push(
-				<li class={item.classes}>
+				<li class={item.classes} key={index}>
 					{itemStates.hasImage && <div className='image'><img src={item.src} alt={item.alt}/></div>}
 					<div class="text">
 						{itemStates.hasIcon && <div class="icon"><img src={item.iconSrc} alt={item.iconAlt}/></div>}

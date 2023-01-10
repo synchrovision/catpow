@@ -69,36 +69,38 @@ wp.blocks.registerBlockType('catpow/unit',{
 			}
 		];
 
-		return [
-			<div className={classes}>
-				<figure class="image">
-					<ResponsiveImage
-						attr={attributes}
-						keys={imageKeys.image}
-					/>
-				</figure>
-				<div class="contents">
-					<InnerBlocks template={[['core/paragraph',{content:CP.dummyText.text}]]} templateLock={false}/>
+		return (
+			<>
+				<div className={classes}>
+					<figure class="image">
+						<ResponsiveImage
+							attr={attributes}
+							keys={imageKeys.image}
+						/>
+					</figure>
+					<div class="contents">
+						<InnerBlocks template={[['core/paragraph',{content:CP.dummyText.text}]]} templateLock={false}/>
+					</div>
 				</div>
-			</div>,
-			<InspectorControls>
-				<CP.SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters.unit || {}}
-				/>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label='クラス'
-						onChange={(classes)=>setAttributes({classes})}
-						value={classes}
+				<InspectorControls>
+					<CP.SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+						filters={CP.filters.unit || {}}
 					/>
-				</PanelBody>
-			</InspectorControls>
-		];
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label='クラス'
+							onChange={(classes)=>setAttributes({classes})}
+							value={classes}
+						/>
+					</PanelBody>
+				</InspectorControls>
+			</>
+		);
 	},
 
 

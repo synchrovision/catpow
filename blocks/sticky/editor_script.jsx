@@ -65,58 +65,60 @@ wp.blocks.registerBlockType('catpow/sticky',{
 			return selectiveClasses;
 		},[]);
 
-		return [
-			<div className={classes}>
-				{states.collapsible && 
-					<div class="stickyButton">
-						<div class="stickyButtonIcon">
-							{states.labelButton &&
-								<div className='label'>
-									<RichText onChange={(labelText)=>{setAttributes({labelText})}} value={labelText}/>
-								</div>
-							}
-							{states.imageButton && [
-								<ResponsiveImage
-									className='open'
-									attr={attributes}
-									keys={imageKeys.openButtonImage}
-								/>,
-								<ResponsiveImage
-									className='close'
-									attr={attributes}
-									keys={imageKeys.closeButtonImage}
-								/>
-							]}
-						</div>
-					</div>
-				}
-				<div class="content">
-					{states.label &&
-						<div className="label">
-							<RichText onChange={(labelText)=>{setAttributes({labelText})}} value={labelText}/>
+		return (
+			<>
+				<div className={classes}>
+					{states.collapsible && 
+						<div class="stickyButton">
+							<div class="stickyButtonIcon">
+								{states.labelButton &&
+									<div className='label'>
+										<RichText onChange={(labelText)=>{setAttributes({labelText})}} value={labelText}/>
+									</div>
+								}
+								{states.imageButton && [
+									<ResponsiveImage
+										className='open'
+										attr={attributes}
+										keys={imageKeys.openButtonImage}
+									/>,
+									<ResponsiveImage
+										className='close'
+										attr={attributes}
+										keys={imageKeys.closeButtonImage}
+									/>
+								]}
+							</div>
 						</div>
 					}
-					{(states.container || states.collapsible) && <InnerBlocks/>}
+					<div class="content">
+						{states.label &&
+							<div className="label">
+								<RichText onChange={(labelText)=>{setAttributes({labelText})}} value={labelText}/>
+							</div>
+						}
+						{(states.container || states.collapsible) && <InnerBlocks/>}
+					</div>
 				</div>
-			</div>,
-			<InspectorControls>
-				<CP.SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters.listed || {}}
-				/>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label='クラス'
-						onChange={(classes)=>setAttributes({classes})}
-						value={classes}
+				<InspectorControls>
+					<CP.SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+						filters={CP.filters.listed || {}}
 					/>
-				</PanelBody>
-			</InspectorControls>
-		];
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label='クラス'
+							onChange={(classes)=>setAttributes({classes})}
+							value={classes}
+						/>
+					</PanelBody>
+				</InspectorControls>
+			</>
+		);
 	},
 	save({attributes,className,setAttributes}){
 		const {InnerBlocks,RichText}=wp.blockEditor;

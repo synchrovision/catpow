@@ -123,7 +123,7 @@
             col.label
           );
         }))), /* @__PURE__ */ wp.element.createElement("tbody", null, graph[0].rows.map((row, r) => {
-          return /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement(
+          return /* @__PURE__ */ wp.element.createElement("tr", { key: r }, /* @__PURE__ */ wp.element.createElement(
             "th",
             {
               align: "center",

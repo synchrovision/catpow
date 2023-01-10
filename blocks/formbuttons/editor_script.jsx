@@ -52,6 +52,7 @@
 					items={items}
 					index={index}
 					isSelected={isSelected}
+					key={index}
 				>
 					<div class="button">
 						{itemStates.hasIcon && <CP.OutputIcon item={item}/>}
@@ -72,40 +73,42 @@
 
 		if(attributes.EditMode===undefined){attributes.EditMode=false;}
 
-		return [
-			<ul className={classes}>{rtn}</ul>,
-			<InspectorControls>
-				<CP.SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters.buttons || {}}
-				/>
-				<CP.SelectClassPanel
-					title='ボタン'
-					icon='edit'
-					set={setAttributes}
-					attr={attributes}
-					items={items}
-					index={attributes.currentItemIndex}
-					selectiveClasses={selectiveItemClasses}
-					filters={CP.filters.buttons || {}}
-				/>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label='クラス'
-						onChange={(clss)=>setAttributes({classes:clss})}
-						value={classArray.join(' ')}
+		return (
+			<>
+				<ul className={classes}>{rtn}</ul>,
+				<InspectorControls>
+					<CP.SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+						filters={CP.filters.buttons || {}}
 					/>
-				</PanelBody>
-				<CP.ItemControlInfoPanel/>
-			</InspectorControls>,
-			<BlockControls>
-				<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
-			</BlockControls>
-		];
+					<CP.SelectClassPanel
+						title='ボタン'
+						icon='edit'
+						set={setAttributes}
+						attr={attributes}
+						items={items}
+						index={attributes.currentItemIndex}
+						selectiveClasses={selectiveItemClasses}
+						filters={CP.filters.buttons || {}}
+					/>
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label='クラス'
+							onChange={(clss)=>setAttributes({classes:clss})}
+							value={classArray.join(' ')}
+						/>
+					</PanelBody>
+					<CP.ItemControlInfoPanel/>
+				</InspectorControls>,
+				<BlockControls>
+					<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
+				</BlockControls>
+			</>
+		);
 	},
 	save({attributes,className}){
 		const {items=[],classes=''}=attributes;
@@ -122,7 +125,7 @@
 				});
 			}
 			rtn.push(
-				<li className={item.classes}>
+				<li className={item.classes} key={index}>
 					<div
 						className="button"
 						data-action={item.action}

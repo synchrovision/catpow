@@ -61,7 +61,8 @@
               attr: attributes,
               items,
               index,
-              isSelected
+              isSelected,
+              key: index
             },
             /* @__PURE__ */ wp.element.createElement("dt", { className: "title" }, /* @__PURE__ */ wp.element.createElement(
               RichText,
@@ -135,7 +136,7 @@
       let rtn = [];
       items.map((item, index) => {
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("dl", { className: "item" }, /* @__PURE__ */ wp.element.createElement("dt", { className: "title" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), /* @__PURE__ */ wp.element.createElement("dd", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })))
+          /* @__PURE__ */ wp.element.createElement("dl", { className: "item", key: index }, /* @__PURE__ */ wp.element.createElement("dt", { className: "title" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), /* @__PURE__ */ wp.element.createElement("dd", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })))
         );
       });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, rtn), doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));

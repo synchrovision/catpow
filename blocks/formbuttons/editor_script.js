@@ -52,7 +52,8 @@
               attr: attributes,
               items,
               index,
-              isSelected
+              isSelected,
+              key: index
             },
             /* @__PURE__ */ wp.element.createElement("div", { class: "button" }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), /* @__PURE__ */ wp.element.createElement(
               "span",
@@ -82,40 +83,36 @@
       if (attributes.EditMode === void 0) {
         attributes.EditMode = false;
       }
-      return [
-        /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn),
-        /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-          CP.SelectClassPanel,
-          {
-            title: "\u30AF\u30E9\u30B9",
-            icon: "art",
-            set: setAttributes,
-            attr: attributes,
-            selectiveClasses,
-            filters: CP.filters.buttons || {}
-          }
-        ), /* @__PURE__ */ wp.element.createElement(
-          CP.SelectClassPanel,
-          {
-            title: "\u30DC\u30BF\u30F3",
-            icon: "edit",
-            set: setAttributes,
-            attr: attributes,
-            items,
-            index: attributes.currentItemIndex,
-            selectiveClasses: selectiveItemClasses,
-            filters: CP.filters.buttons || {}
-          }
-        ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-          TextareaControl,
-          {
-            label: "\u30AF\u30E9\u30B9",
-            onChange: (clss) => setAttributes({ classes: clss }),
-            value: classArray.join(" ")
-          }
-        )), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)),
-        /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes }))
-      ];
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn), ",", /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: "\u30AF\u30E9\u30B9",
+          icon: "art",
+          set: setAttributes,
+          attr: attributes,
+          selectiveClasses,
+          filters: CP.filters.buttons || {}
+        }
+      ), /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: "\u30DC\u30BF\u30F3",
+          icon: "edit",
+          set: setAttributes,
+          attr: attributes,
+          items,
+          index: attributes.currentItemIndex,
+          selectiveClasses: selectiveItemClasses,
+          filters: CP.filters.buttons || {}
+        }
+      ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+        TextareaControl,
+        {
+          label: "\u30AF\u30E9\u30B9",
+          onChange: (clss) => setAttributes({ classes: clss }),
+          value: classArray.join(" ")
+        }
+      )), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), ",", /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })));
     },
     save({ attributes, className }) {
       const { items = [], classes = "" } = attributes;
@@ -131,7 +128,7 @@
           });
         }
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes }, /* @__PURE__ */ wp.element.createElement(
+          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement(
             "div",
             {
               className: "button",

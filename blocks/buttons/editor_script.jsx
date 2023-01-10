@@ -71,6 +71,7 @@
 					items={items}
 					index={index}
 					isSelected={isSelected}
+					key={index}
 				>
 					<div class="button">
 						{itemStates.hasIcon && <CP.OutputIcon item={item}/>}
@@ -191,7 +192,7 @@
 			}
 			const shouldOpenWithOtherWindow=/^\w+:\/\//.test(item.url);
 			rtn.push(
-				<li className={item.classes}>
+				<li className={item.classes} key={index}>
 					<a
 						href={item.url}
 						className='button'

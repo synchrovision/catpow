@@ -54,51 +54,47 @@
         wp.hooks.applyFilters("catpow.blocks.t-paragraph.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return [
-        /* @__PURE__ */ wp.element.createElement("table", { width: "100%", className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement(
-          RichText,
-          {
-            identifier: "content",
-            onMerge: mergeBlocks,
-            onSplit: (val) => {
-              if (!val) {
-                return createBlock("catpow/t-paragraph", {
-                  classes: "wp-block-catpow-t-paragraph left medium"
-                });
-              }
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("table", { width: "100%", className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement(
+        RichText,
+        {
+          identifier: "content",
+          onMerge: mergeBlocks,
+          onSplit: (val) => {
+            if (!val) {
               return createBlock("catpow/t-paragraph", {
-                ...attributes,
-                text: val
+                classes: "wp-block-catpow-t-paragraph left medium"
               });
-            },
-            onReplace,
-            onRemove: () => onReplace([]),
-            onChange: (text2) => {
-              setAttributes({ text: text2 });
-            },
-            value: text
-          }
-        ))))),
-        /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })),
-        /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-          CP.SelectClassPanel,
-          {
-            title: "\u30AF\u30E9\u30B9",
-            icon: "art",
-            set: setAttributes,
-            attr: attributes,
-            selectiveClasses,
-            filters: CP.filters["t-paragraph"] || {}
-          }
-        ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-          TextareaControl,
-          {
-            label: "\u30AF\u30E9\u30B9",
-            onChange: (classes2) => setAttributes({ classes: classes2 }),
-            value: classes
-          }
-        )))
-      ];
+            }
+            return createBlock("catpow/t-paragraph", {
+              ...attributes,
+              text: val
+            });
+          },
+          onReplace,
+          onRemove: () => onReplace([]),
+          onChange: (text2) => {
+            setAttributes({ text: text2 });
+          },
+          value: text
+        }
+      ))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: "\u30AF\u30E9\u30B9",
+          icon: "art",
+          set: setAttributes,
+          attr: attributes,
+          selectiveClasses,
+          filters: CP.filters["t-paragraph"] || {}
+        }
+      ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+        TextareaControl,
+        {
+          label: "\u30AF\u30E9\u30B9",
+          onChange: (classes2) => setAttributes({ classes: classes2 }),
+          value: classes
+        }
+      ))));
     },
     save({ attributes, className, setAttributes }) {
       const { RichText } = wp.blockEditor;

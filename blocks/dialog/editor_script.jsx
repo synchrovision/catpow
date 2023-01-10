@@ -74,6 +74,7 @@
 					items={itemsCopy}
 					index={index}
 					isSelected={isSelected}
+					key={index}
 				>
 					<header>
 						<div className='image'>
@@ -197,7 +198,7 @@
 		let rtn=[];
 		items.map((item,index)=>{
 			rtn.push(
-				<li className={item.classes}>
+				<li className={item.classes} key={index}>
 					<header>
 						<div class='image'>
 							<CP.ResponsiveImage

@@ -34,49 +34,51 @@
 			return selectiveClasses;
 		},[]);
 
-		return [
-			<table width="100%" className={classes}>
-				<tbody>
-					<tr>
-						<td>
-							{states.isTemplate?(
-								<img
-									src={wpinfo.plugins_url+'/catpow/callee/dummy_image.php?text='+loopImage}
-									width="100%"
-									height="auto"
-								/>
-							):(
-								<CP.SelectResponsiveImage
-									set={setAttributes}
-									attr={attributes}
-									keys={{src:'src',alt:'alt'}}
-									size="large"
-									width="100%"
-									height="auto"
-								/>
-							)}
-						</td>
-					</tr>
-				</tbody>
-			</table>,
-			<InspectorControls>
-				<CP.SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters['t-image'] || {}}
-				/>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label='クラス'
-						onChange={(classes)=>setAttributes({classes})}
-						value={classes}
+		return (
+			<>
+				<table width="100%" className={classes}>
+					<tbody>
+						<tr>
+							<td>
+								{states.isTemplate?(
+									<img
+										src={wpinfo.plugins_url+'/catpow/callee/dummy_image.php?text='+loopImage}
+										width="100%"
+										height="auto"
+									/>
+								):(
+									<CP.SelectResponsiveImage
+										set={setAttributes}
+										attr={attributes}
+										keys={{src:'src',alt:'alt'}}
+										size="large"
+										width="100%"
+										height="auto"
+									/>
+								)}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<InspectorControls>
+					<CP.SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+						filters={CP.filters['t-image'] || {}}
 					/>
-				</PanelBody>
-			</InspectorControls>
-		];
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label='クラス'
+							onChange={(classes)=>setAttributes({classes})}
+							value={classes}
+						/>
+					</PanelBody>
+				</InspectorControls>
+			</>
+		);
 	},
 
 

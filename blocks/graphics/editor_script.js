@@ -348,7 +348,8 @@
               id: id + "_item_" + index,
               className: itemClasses,
               "data-index": index,
-              "data-rect": item.rect
+              "data-rect": item.rect,
+              key: index
             },
             /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, itemBody(), isSelected && itemSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "control" }, /* @__PURE__ */ wp.element.createElement("div", { className: "pos" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "move" })), /* @__PURE__ */ wp.element.createElement("div", { className: "del" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "dismiss" })), /* @__PURE__ */ wp.element.createElement("div", { className: "dup" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "plus-alt" })), /* @__PURE__ */ wp.element.createElement("div", { className: "bnd" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "leftright" }))))
           );
@@ -432,7 +433,8 @@
             id: id + "_item_" + index,
             className: item.classes,
             href: item.link,
-            "data-rect": item.rect
+            "data-rect": item.rect,
+            key: index
           },
           itemBody()
         );

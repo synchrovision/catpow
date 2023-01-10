@@ -188,6 +188,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 					attr={attributes}
 					items={items}
 					index={index}
+					key={index}
 				>
 					{states.hasSlide &&
 						<div className='slide'>
@@ -413,7 +414,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 		var thumbs=[];
 		items.map(function(item,index){
 			rtn.push(
-				<li className={item.classes}>
+				<li className={item.classes} key={index}>
 					{states.hasSlide &&
 						<div className='slide'>
 							<CP.ResponsiveImage

@@ -28,39 +28,41 @@
 			return selectiveClasses;
 		},[]);
 
-		return [
-			<a className={classes}>
-				<table width="100%">
-					<tbody>
-						<tr>
-							<td>
-								<RichText
-									onChange={(title)=>{setAttributes({title});}}
-									value={title}
-								/>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</a>,
-			<InspectorControls>
-				<CP.SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters['t-button'] || {}}
-				/>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label='クラス'
-						onChange={(classes)=>setAttributes({classes})}
-						value={classes}
+		return (
+			<>
+				<a className={classes}>
+					<table width="100%">
+						<tbody>
+							<tr>
+								<td>
+									<RichText
+										onChange={(title)=>{setAttributes({title});}}
+										value={title}
+									/>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</a>,
+				<InspectorControls>
+					<CP.SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+						filters={CP.filters['t-button'] || {}}
 					/>
-				</PanelBody>
-			</InspectorControls>
-		];
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label='クラス'
+							onChange={(classes)=>setAttributes({classes})}
+							value={classes}
+						/>
+					</PanelBody>
+				</InspectorControls>
+			</>
+		);
 	},
 
 

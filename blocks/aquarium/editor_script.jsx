@@ -79,48 +79,50 @@
 			return selectiveClasses;
 		},[]);
 		
-		return [
-			<div className={classes}>
-				{layers.map((layer)=>{
-					return (
-						<div className={layer.classes}>
-							{layer.items.map((item)=>{
-								return (
-									<div className={item.classes}>
-										{item.images.length>0 && item.images.map((image)=>{
-											return (
-												<div className={image.classes}>
-													<img src={image.src} srcset={image.srcset} alt={image.alt}/>
-												</div>
-											);
-										})}
-										{item.texts.length>0 && item.texts.map((text)=>{
-											return (
-												<div className={text.classes}>
-													<h3>{text.title}</h3>
-													<p>{text.text}</p>
-												</div>
-											);
-										})}
-									</div>
-								);
-							})}
-						</div>
-					);
-				})}
-				<div class='contents'><InnerBlocks/></div>
-			</div>,
-			<InspectorControls>
-				<CP.SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters.aquarium || {}}
-				/>
-			</InspectorControls>
-		];
+		return (
+			<>
+				<div className={classes}>
+					{layers.map((layer)=>{
+						return (
+							<div className={layer.classes}>
+								{layer.items.map((item,index)=>{
+									return (
+										<div className={item.classes} key={index}>
+											{item.images.length>0 && item.images.map((image)=>{
+												return (
+													<div className={image.classes}>
+														<img src={image.src} srcset={image.srcset} alt={image.alt}/>
+													</div>
+												);
+											})}
+											{item.texts.length>0 && item.texts.map((text)=>{
+												return (
+													<div className={text.classes}>
+														<h3>{text.title}</h3>
+														<p>{text.text}</p>
+													</div>
+												);
+											})}
+										</div>
+									);
+								})}
+							</div>
+						);
+					})}
+					<div class='contents'><InnerBlocks/></div>
+				</div>
+				<InspectorControls>
+					<CP.SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+						filters={CP.filters.aquarium || {}}
+					/>
+				</InspectorControls>
+			</>
+		);
 	},
 	save({attributes,className,setAttributes}){
 		const {classes,layers=[]}=attributes;
@@ -130,9 +132,9 @@
 				{layers.map((layer)=>{
 					return (
 						<div className={layer.classes}>
-							{layer.items.map((item)=>{
+							{layer.items.map((item,index)=>{
 								return (
-									<div className={item.classes}>
+									<div className={item.classes} key={index}>
 										{item.images.length>0 && item.images.map((image)=>{
 											return (
 												<div className={image.classes}>

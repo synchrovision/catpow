@@ -130,7 +130,7 @@
 					 <tbody>
 					 {graph[0].rows.map((row,r)=>{
 						 return (
-							<tr>
+							<tr key={r}>
 								<th
 									align="center"
 									onBlur={(e)=>{

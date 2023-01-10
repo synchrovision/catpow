@@ -92,160 +92,157 @@
       const save = () => {
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });
       };
-      return [
-        /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
-          CP.SelectBreakPointToolbar,
-          {
-            breakpoints,
-            value: attributes.bp,
-            onChange: (bp) => setAttributes({ bp })
-          }
-        )),
-        /* @__PURE__ */ wp.element.createElement(
-          Catpow.DrawArea,
-          {
-            id,
-            className: classes,
-            onCatch: (e) => {
-              console.log("onCatch");
-            },
-            onDraw: (e) => {
-              e.moveItem();
-            },
-            onRelease: (e) => {
-              e.resetItem();
-              console.log(e);
-              if (e.action === "delete") {
-                items.splice(e.index, 1);
-                save();
-                return;
-              }
-              var order = items[e.index].order.split(",");
-              if (e.action === "clone") {
-                items.splice(e.index, 0, JSON.parse(JSON.stringify(items[e.index])));
-              }
-              order[bpIndex] = Math.max(1, Math.min(currentGrid[0] - 1, Math.ceil(e.x / e.w * currentGrid[0]))) + " " + Math.max(1, Math.min(currentGrid[1], Math.ceil(e.y / e.h * currentGrid[1]))) + " 2 1";
-              items[e.index].order = order.join(",");
-              save();
-            },
-            style: {
-              width: (attributes.bp == "0" ? breakpoints[1] : attributes.bp) + "px",
-              margin: "0 auto",
-              border: "solid 1px #888"
-            }
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectBreakPointToolbar,
+        {
+          breakpoints,
+          value: attributes.bp,
+          onChange: (bp) => setAttributes({ bp })
+        }
+      )), /* @__PURE__ */ wp.element.createElement(
+        Catpow.DrawArea,
+        {
+          id,
+          className: classes,
+          onCatch: (e) => {
+            console.log("onCatch");
           },
-          items.map((item, index) => {
-            var itemID = id + "_item_" + index;
-            var itemStates = CP.wordsToFlags(item.classes);
-            var itemClasses = item.classes;
-            var itemSelected = attributes.currentItemIndex == index;
-            var order = item.order.split(",").map((val) => val.split(" "));
-            if (itemSelected) {
-              itemClasses += " selected";
-            }
-            breakpoints.map((bp, bpIndex2) => {
-              cssDatas[bp] = cssDatas[bp] || {};
-              cssDatas[bp]["#" + itemID] = CP.createGridItemStyleCodeData(order[bpIndex2]);
-            });
-            return /* @__PURE__ */ wp.element.createElement(
-              Catpow.Hexagon,
-              {
-                id: itemID,
-                className: itemClasses,
-                "data-index": index,
-                src: itemStates.hasImage ? item.src : false,
-                handler: itemHandler,
-                onClick: () => {
-                  setAttributes({ currentItemIndex: index });
-                }
-              },
-              itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(
-                RichText,
-                {
-                  placeholder: "Title",
-                  onChange: (title) => {
-                    item.title = title;
-                    save();
-                  },
-                  value: item.title
-                }
-              )),
-              itemStates.hasText && /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(
-                RichText,
-                {
-                  placeholder: "Text",
-                  onChange: (text) => {
-                    item.text = text;
-                    save();
-                  },
-                  value: item.text
-                }
-              ))
-            );
-          }),
-          /* @__PURE__ */ wp.element.createElement("style", null, CP.createStyleCode(cssDatas[attributes.bp]))
-        ),
-        /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Grid", icon: "admin-links", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-          TextControl,
-          {
-            label: "BreakPoints",
-            onChange: (breakpoints2) => {
-              setAttributes({ breakpoints: breakpoints2 });
-            },
-            value: attributes.breakpoints
-          }
-        ), /* @__PURE__ */ wp.element.createElement(
-          TextControl,
-          {
-            label: "Grid",
-            onChange: (grid2) => {
-              setAttributes({ grid: grid2 });
-            },
-            value: attributes.grid
-          }
-        )), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "ID", icon: "admin-links", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-          TextControl,
-          {
-            label: "ID",
-            onChange: (id2) => {
-              setAttributes({ id: id2 });
-            },
-            value: id
-          }
-        )), /* @__PURE__ */ wp.element.createElement(
-          CP.SelectClassPanel,
-          {
-            title: "\u30AF\u30E9\u30B9",
-            icon: "art",
-            set: setAttributes,
-            attr: attributes,
-            selectiveClasses,
-            filters: CP.filters.buttons || {}
-          }
-        ), /* @__PURE__ */ wp.element.createElement(
-          CP.SelectClassPanel,
-          {
-            title: "\u30A2\u30A4\u30C6\u30E0",
-            icon: "edit",
-            set: setAttributes,
-            attr: attributes,
-            items,
-            index: attributes.currentItemIndex,
-            selectiveClasses: selectiveItemClasses,
-            filters: CP.filters.honeycomb || {}
-          }
-        ), items[attributes.currentItemIndex] && /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "ITEM CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-          TextareaControl,
-          {
-            label: "\u30AF\u30E9\u30B9",
-            onChange: (classes2) => {
-              items[attributes.currentItemIndex].classes = classes2;
+          onDraw: (e) => {
+            e.moveItem();
+          },
+          onRelease: (e) => {
+            e.resetItem();
+            console.log(e);
+            if (e.action === "delete") {
+              items.splice(e.index, 1);
               save();
-            },
-            value: items[attributes.currentItemIndex].classes
+              return;
+            }
+            var order = items[e.index].order.split(",");
+            if (e.action === "clone") {
+              items.splice(e.index, 0, JSON.parse(JSON.stringify(items[e.index])));
+            }
+            order[bpIndex] = Math.max(1, Math.min(currentGrid[0] - 1, Math.ceil(e.x / e.w * currentGrid[0]))) + " " + Math.max(1, Math.min(currentGrid[1], Math.ceil(e.y / e.h * currentGrid[1]))) + " 2 1";
+            items[e.index].order = order.join(",");
+            save();
+          },
+          style: {
+            width: (attributes.bp == "0" ? breakpoints[1] : attributes.bp) + "px",
+            margin: "0 auto",
+            border: "solid 1px #888"
           }
-        )), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null))
-      ];
+        },
+        items.map((item, index) => {
+          var itemID = id + "_item_" + index;
+          var itemStates = CP.wordsToFlags(item.classes);
+          var itemClasses = item.classes;
+          var itemSelected = attributes.currentItemIndex == index;
+          var order = item.order.split(",").map((val) => val.split(" "));
+          if (itemSelected) {
+            itemClasses += " selected";
+          }
+          breakpoints.map((bp, bpIndex2) => {
+            cssDatas[bp] = cssDatas[bp] || {};
+            cssDatas[bp]["#" + itemID] = CP.createGridItemStyleCodeData(order[bpIndex2]);
+          });
+          return /* @__PURE__ */ wp.element.createElement(
+            Catpow.Hexagon,
+            {
+              id: itemID,
+              className: itemClasses,
+              "data-index": index,
+              src: itemStates.hasImage ? item.src : false,
+              handler: itemHandler,
+              onClick: () => {
+                setAttributes({ currentItemIndex: index });
+              },
+              key: index
+            },
+            itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(
+              RichText,
+              {
+                placeholder: "Title",
+                onChange: (title) => {
+                  item.title = title;
+                  save();
+                },
+                value: item.title
+              }
+            )),
+            itemStates.hasText && /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(
+              RichText,
+              {
+                placeholder: "Text",
+                onChange: (text) => {
+                  item.text = text;
+                  save();
+                },
+                value: item.text
+              }
+            ))
+          );
+        }),
+        /* @__PURE__ */ wp.element.createElement("style", null, CP.createStyleCode(cssDatas[attributes.bp]))
+      ), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Grid", icon: "admin-links", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+        TextControl,
+        {
+          label: "BreakPoints",
+          onChange: (breakpoints2) => {
+            setAttributes({ breakpoints: breakpoints2 });
+          },
+          value: attributes.breakpoints
+        }
+      ), /* @__PURE__ */ wp.element.createElement(
+        TextControl,
+        {
+          label: "Grid",
+          onChange: (grid2) => {
+            setAttributes({ grid: grid2 });
+          },
+          value: attributes.grid
+        }
+      )), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "ID", icon: "admin-links", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+        TextControl,
+        {
+          label: "ID",
+          onChange: (id2) => {
+            setAttributes({ id: id2 });
+          },
+          value: id
+        }
+      )), /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: "\u30AF\u30E9\u30B9",
+          icon: "art",
+          set: setAttributes,
+          attr: attributes,
+          selectiveClasses,
+          filters: CP.filters.buttons || {}
+        }
+      ), /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: "\u30A2\u30A4\u30C6\u30E0",
+          icon: "edit",
+          set: setAttributes,
+          attr: attributes,
+          items,
+          index: attributes.currentItemIndex,
+          selectiveClasses: selectiveItemClasses,
+          filters: CP.filters.honeycomb || {}
+        }
+      ), items[attributes.currentItemIndex] && /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "ITEM CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+        TextareaControl,
+        {
+          label: "\u30AF\u30E9\u30B9",
+          onChange: (classes2) => {
+            items[attributes.currentItemIndex].classes = classes2;
+            save();
+          },
+          value: items[attributes.currentItemIndex].classes
+        }
+      )), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)));
     },
     save({ attributes, className, setAttributes }) {
       const { RichText } = wp.blockEditor;
@@ -285,7 +282,8 @@
               id: itemID,
               className: item.classes,
               src: itemStates.hasImage ? item.src : false,
-              "data-order": item.order
+              "data-order": item.order,
+              key: index
             },
             itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })),
             itemStates.hasText && /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text }))

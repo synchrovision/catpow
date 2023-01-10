@@ -56,55 +56,57 @@
 			return selectiveClasses;
 		},[]);
 
-		return [
-			<table width="100%" className={classes}>
-				<tbody>
-					<tr>
-						<td>
-							<RichText
-								identifier="content"
-								onMerge={mergeBlocks}
-								onSplit={(val)=>{
-									if(!val){
+		return (
+			<>
+				<table width="100%" className={classes}>
+					<tbody>
+						<tr>
+							<td>
+								<RichText
+									identifier="content"
+									onMerge={mergeBlocks}
+									onSplit={(val)=>{
+										if(!val){
+											return createBlock('catpow/t-paragraph',{
+												classes:'wp-block-catpow-t-paragraph left medium',
+											});
+										}
 										return createBlock('catpow/t-paragraph',{
-											classes:'wp-block-catpow-t-paragraph left medium',
+											...attributes,
+											text:val
 										});
-									}
-									return createBlock('catpow/t-paragraph',{
-										...attributes,
-										text:val
-									});
-								}}
-								onReplace={onReplace}
-								onRemove={()=>onReplace([])}
-								onChange={(text)=>{setAttributes({text});}}
-								value={text}
-							/>
-						</td>
-					</tr>
-				</tbody>
-			</table>,
-			<BlockControls>
-				<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
-			</BlockControls>,
-			<InspectorControls>
-				<CP.SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters['t-paragraph'] || {}}
-				/>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label='クラス'
-						onChange={(classes)=>setAttributes({classes})}
-						value={classes}
+									}}
+									onReplace={onReplace}
+									onRemove={()=>onReplace([])}
+									onChange={(text)=>{setAttributes({text});}}
+									value={text}
+								/>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<BlockControls>
+					<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
+				</BlockControls>
+				<InspectorControls>
+					<CP.SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+						filters={CP.filters['t-paragraph'] || {}}
 					/>
-				</PanelBody>
-			</InspectorControls>
-		];
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label='クラス'
+							onChange={(classes)=>setAttributes({classes})}
+							value={classes}
+						/>
+					</PanelBody>
+				</InspectorControls>
+			</>
+		);
 	},
 
 
