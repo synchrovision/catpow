@@ -361,7 +361,7 @@ wp.blocks.registerBlockType('catpow/section',{
 			</>
 		);
 	},
-	save({attributes,className,setAttributes}){
+	save({attributes,className}){
 		const {InnerBlocks,RichText}=wp.blockEditor;
 		const {
 			SectionTag,HeadingTag,
