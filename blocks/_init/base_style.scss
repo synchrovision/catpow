@@ -1,5 +1,5 @@
-@import 'admin_style_config.scss';
-
+@import 'catpow.scss';
+$sizeUnit:0.0625rem;
 .itemControl{
 	@include bnd((pd:2 5,p:r,z:1000));
 	@include txt((a:c,p:12,h:10));
@@ -151,8 +151,11 @@
 		@include bnd((d:ib,p:r,w:20,h:20,mg:5));
 		@include bdr((r:20));
 		@include usr((c:p));
-		&.fillColor0{
-			@include bg((c:t 10));
+		&.fillColor{
+			@include bg((c:m_0));
+			&.color0{
+				@include bg((c:shd));
+			}
 		}
 		&::after{
 			content: ' ';

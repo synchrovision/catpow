@@ -1217,16 +1217,14 @@
     /*compornents*/
     SelectThemeColor: (props) => {
       const { selected, onChange } = props;
+      const { bem } = Catpow.util;
+      const classes = bem("fillColor");
       var items = Array.from(Array(13), (v, i) => {
-        var classes = "fillColor" + i;
         const value = "color" + i;
-        if (value == selected) {
-          classes += " active";
-        }
         return /* @__PURE__ */ wp.element.createElement(
           "li",
           {
-            className: classes,
+            className: classes(value, { active: value == selected }),
             onClick: () => onChange(value)
           },
           " "
