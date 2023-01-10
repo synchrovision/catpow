@@ -151,6 +151,7 @@ class blocks{
 				'component'=>'js',
 				'render'=>'php',
 				'init'=>'php',
+				'deps'=>'php',
 				'editor_init'=>'php',
 				'front_init'=>'php'
 			] as $fname=>$ext){
@@ -193,6 +194,19 @@ class blocks{
 						if(empty($file_path)){break;}
 						if($fname === 'conf'){
 							self::apply_conf_file($param,$file_path);
+						}
+						elseif($fname === 'deps'){
+							$deps = include $file_path;
+							if(!empty($deps['scripts'])){
+								$data['js']['blocks/'.$block_name.'/script.js'][2]=array_merge(
+									$data['js']['blocks/'.$block_name.'/script.js'][2]??[],$deps['scripts']
+								);
+							}
+							if(!empty($deps['styles'])){
+								$data['style']['blocks/'.$block_name.'/style.css'][2]=array_merge(
+									$data['style']['blocks/'.$block_name.'/style.css'][2]??[],$deps['styles']
+								);
+							}
 						}
 						elseif($fname === 'render'){
 							$param['render_callback']=$file_path;
