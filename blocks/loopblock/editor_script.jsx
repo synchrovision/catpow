@@ -24,7 +24,7 @@
 					/>
 				</BlockControls>
 				<div className={"loopBlock "+(AltMode?"alt_content altMode":"embedded_content")}>
-					<div class="label">
+					<div className="label">
 						{AltMode?(
 							<Icon icon="welcome-comments"/>
 						):(content_path)}

@@ -215,7 +215,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 						</div>
 					}
 					{(states.hasTitle || states.hasSubTitle || states.hasText) && 
-						<div class="texts">
+						<div className="texts">
 							{states.hasTitle && 
 								<h3 className="title">
 									<RichText
@@ -268,7 +268,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 			);
 			if(states.hasImage && states.hasThumbnail){
 				thumbs.push(
-					<li class={'item '+posClass+' thumb'+imageIndex} onClick={()=>gotoItem(index)}>
+					<li className={'item '+posClass+' thumb'+imageIndex} onClick={()=>gotoItem(index)}>
 						<CP.SelectResponsiveImage
 							attr={attributes}
 							set={setAttributes}
@@ -280,7 +280,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 				);
 			}
 			if(states.hasDots){
-				dots.push(<li class={'dot '+posClass+' dot'+imageIndex} onClick={()=>gotoItem(index)}></li>);
+				dots.push(<li className={'dot '+posClass+' dot'+imageIndex} onClick={()=>gotoItem(index)}></li>);
 			}
 		}
 
@@ -357,7 +357,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 				</InspectorControls>
 				{attributes.EditMode?(
 					<div className="alt_content">
-						<div class="label">
+						<div className="label">
 							<Icon icon="edit"/>
 						</div>
 						<CP.EditItemsTable
@@ -382,18 +382,18 @@ wp.blocks.registerBlockType('catpow/slider',{
 					<>
 						{(AltMode && doLoop)?(
 							<div className="alt_content">
-								<div class="label">
+								<div className="label">
 									<Icon icon="welcome-comments"/>
 								</div>
 								<InnerBlocks/>
 							</div>
 						):(
 							<div className={classes}>
-								<ul class="contents">{rtn}</ul>
+								<ul className="contents">{rtn}</ul>
 								<div className={controlClasses} data-config={config}>
 									{states.hasArrows && <div class='arrow prev' onClick={prevItem}> </div>}
-									{states.hasImage && states.hasThumbnail && <ul class="thumbnail">{thumbs}</ul>}
-									{states.hasDots && <ul class="dots">{dots}</ul>}
+									{states.hasImage && states.hasThumbnail && <ul className="thumbnail">{thumbs}</ul>}
+									{states.hasDots && <ul className="dots">{dots}</ul>}
 									{states.hasArrows && <div class='arrow next' onClick={nextItem}> </div>}
 								</div>
 							</div>
@@ -437,7 +437,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 						</div>
 					}
 					{(states.hasTitle || states.hasSubTitle || states.hasText) && 
-						<div class="texts">
+						<div className="texts">
 							{states.hasTitle && <h3 className="title"><RichText.Content value={item.title}/></h3>}
 							{states.hasSubTitle && <h4 className="subtitle"><RichText.Content value={item.subTitle}/></h4>}
 							{states.hasText && <p className="text"><RichText.Content value={item.text}/></p>}
@@ -459,7 +459,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 			);
 			if(states.hasImage && states.hasThumbnail){
 				thumbs.push(
-					<li class={item.classes}>
+					<li className={item.classes}>
 						<CP.ResponsiveImage
 							attr={attributes}
 							keys={imageKeys.image}
@@ -474,13 +474,13 @@ wp.blocks.registerBlockType('catpow/slider',{
 		return (
 			<>
 				<div className={classes}>
-					<ul class="contents">
+					<ul className="contents">
 						{rtn}
 					</ul>
 					<div className={controlClasses} data-config={config}>
 						{states.hasArrows && <div class='arrow prev'> </div>}
-						{states.hasImage && states.hasThumbnail && <ul class="thumbnail">{thumbs}</ul>}
-						{states.hasDots && <ul class="dots"><li class="dot"> </li></ul>}
+						{states.hasImage && states.hasThumbnail && <ul className="thumbnail">{thumbs}</ul>}
+						{states.hasDots && <ul className="dots"><li className="dot"> </li></ul>}
 						{states.hasArrows && <div class='arrow next'> </div>}
 					</div>
 				</div>
@@ -563,13 +563,13 @@ wp.blocks.registerBlockType('catpow/slider',{
 					}
 					else{item.bg={}}
 					rtn.push(
-						<li class={'item'} style={item.bg}>
+						<li className={'item'} style={item.bg}>
 							{states.hasImage &&
 								<div className='image'>
 									<img src={item.src} alt={item.alt}/>
 								</div>
 							}
-							<div class="text">
+							<div className="text">
 								{states.hasTitle && <h3><RichText.Content value={item.title}/></h3>}
 								{states.hasSubTitle && <h4><RichText.Content value={item.subTitle}/></h4>}
 								{states.hasText && <p><RichText.Content value={item.text}/></p>}
@@ -578,7 +578,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 					);
 					if(states.hasThumbnail){
 						thumbs.push(
-							<li class={'item'} style={item.bg}>
+							<li className={'item'} style={item.bg}>
 								<img src={item.src} alt={item.alt}/>
 							</li>
 						);
@@ -586,11 +586,11 @@ wp.blocks.registerBlockType('catpow/slider',{
 				});
 
 				return <div className={classes}>
-					<ul class="contents">{rtn}</ul>
+					<ul className="contents">{rtn}</ul>
 					<div className={controlClasses} data-config={config}>
 						{states.hasArrows && <div class='arrow prev'> </div>}
-						{states.hasThumbnail && <ul class="thumbnail">{thumbs}</ul>}
-						{states.hasDots && <ul class="dots"><li class="dot"> </li></ul>}
+						{states.hasThumbnail && <ul className="thumbnail">{thumbs}</ul>}
+						{states.hasDots && <ul className="dots"><li className="dot"> </li></ul>}
 						{states.hasArrows && <div class='arrow next'> </div>}
 					</div>
 				</div>;
@@ -636,7 +636,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 								</div>
 							}
 							{(states.hasTitle || states.hasSubTitle || states.hasText) && 
-								<div class="text">
+								<div className="text">
 									{states.hasTitle && <h3><RichText.Content value={item.title}/></h3>}
 									{states.hasSubTitle && <h4><RichText.Content value={item.subTitle}/></h4>}
 									{states.hasText && <p><RichText.Content value={item.text}/></p>}
@@ -657,7 +657,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 					);
 					if(states.hasImage && states.hasThumbnail){
 						thumbs.push(
-							<li class={item.classes}>
+							<li className={item.classes}>
 								<CP.ResponsiveImage
 									attr={attributes}
 									keys={imageKeys.image}
@@ -670,15 +670,15 @@ wp.blocks.registerBlockType('catpow/slider',{
 				});
 
 				return <div className={classes}>
-					<ul class="contents">
+					<ul className="contents">
 						{states.doLoop && '[loop_template '+(loopParam || '')+']'}
 						{rtn}
 						{states.doLoop && '[/loop_template]'}
 					</ul>
 					<div className={controlClasses} data-config={config}>
 						{states.hasArrows && <div class='arrow prev'> </div>}
-						{states.hasImage && states.hasThumbnail && <ul class="thumbnail">{thumbs}</ul>}
-						{states.hasDots && <ul class="dots"><li class="dot"> </li></ul>}
+						{states.hasImage && states.hasThumbnail && <ul className="thumbnail">{thumbs}</ul>}
+						{states.hasDots && <ul className="dots"><li className="dot"> </li></ul>}
 						{states.hasArrows && <div class='arrow next'> </div>}
 					</div>
 				</div>;

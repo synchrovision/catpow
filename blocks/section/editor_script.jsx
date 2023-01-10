@@ -233,7 +233,7 @@ wp.blocks.registerBlockType('catpow/section',{
 				</BlockControls>
 				<SectionTag id={id} className={classes}>
 					{states.hasImage && 
-						<div class="image">
+						<div className="image">
 							{(states.isTemplate && imageCode)?(
 								<CP.DummyImage text={imageCode}/>
 							):(
@@ -246,17 +246,17 @@ wp.blocks.registerBlockType('catpow/section',{
 							)}
 						</div>
 					}
-					<div class='contents'>
-						<header class='header'>
-							<div class="title">
+					<div className='contents'>
+						<header className='header'>
+							<div className="title">
 								{states.hasIcon && <CP.OutputIcon item={attributes}/>}
 								{states.hasPrefix && 
-									<div class="prefix">
+									<div className="prefix">
 										<RichText tagName="div" value={prefix} onChange={(prefix)=>setAttributes({prefix})}/>
 									</div>
 								}
 								{states.hasHeaderImage &&
-									<div class="image">
+									<div className="image">
 										{(states.isTemplate && headerImageCode)?(
 											<CP.DummyImage text={headerImageCode}/>
 										):(
@@ -270,7 +270,7 @@ wp.blocks.registerBlockType('catpow/section',{
 									</div>
 								}
 								{states.hasTitleImage?(
-									<HeadingTag class="titleImage">
+									<HeadingTag className="titleImage">
 										{(states.isTemplate && titleImageCode)?(
 											<CP.DummyImage text={titleImageCode}/>
 										):(
@@ -293,7 +293,7 @@ wp.blocks.registerBlockType('catpow/section',{
 							</div>
 
 							{states.hasHeaderBackgroundImage && 
-								<div class="background">
+								<div className="background">
 									{(states.isTemplate && headerBackgroundImageCode)?(
 										<CP.DummyImage text={headerBackgroundImageCode}/>
 									):(
@@ -306,10 +306,10 @@ wp.blocks.registerBlockType('catpow/section',{
 								</div>
 							}
 						</header>
-						<div class="text"><InnerBlocks/></div>
+						<div className="text"><InnerBlocks/></div>
 					</div>
 					{states.hasBackgroundImage && 
-						<div class="background">
+						<div className="background">
 							{(states.isTemplate && backgroundImageCode)?(
 								<CP.DummyImage text={backgroundImageCode}/>
 							):(
@@ -382,7 +382,7 @@ wp.blocks.registerBlockType('catpow/section',{
 		return (
 			<SectionTag id={id} className={classes} data-icon={navIcon}>
 				{states.hasImage && 
-					<div class="image">
+					<div className="image">
 						{(states.isTemplate && imageCode)?(
 							imageCode
 						):(
@@ -394,15 +394,15 @@ wp.blocks.registerBlockType('catpow/section',{
 						)}
 					</div>
 				}
-				<div class="contents">
-					<header class='header'>
-						<div class="title">
+				<div className="contents">
+					<header className='header'>
+						<div className="title">
 							{states.hasIcon && <CP.OutputIcon item={attributes}/>}
 							{states.hasPrefix && 
-								<div class="prefix"><RichText.Content value={prefix}/></div>
+								<div className="prefix"><RichText.Content value={prefix}/></div>
 							}
 							{states.hasHeaderImage &&
-								<div class="image">
+								<div className="image">
 									{(states.isTemplate && headerImageCode)?(
 										headerImageCode
 									):(
@@ -414,7 +414,7 @@ wp.blocks.registerBlockType('catpow/section',{
 								</div>
 							}
 							{states.hasTitleImage?(
-								<HeadingTag class="titleImage">
+								<HeadingTag className="titleImage">
 									{(states.isTemplate && titleImageCode)?(
 										titleImageCode
 									):(
@@ -433,7 +433,7 @@ wp.blocks.registerBlockType('catpow/section',{
 							{states.hasLead && <p className="lead"><RichText.Content value={lead}/></p>}
 						</div>
 						{states.hasHeaderBackgroundImage &&
-							<div class="background">
+							<div className="background">
 								{(states.isTemplate && headerBackgroundImageCode)?(
 									headerBackgroundImageCode
 								):(
@@ -446,10 +446,10 @@ wp.blocks.registerBlockType('catpow/section',{
 							</div>
 						}
 					</header>
-					<div class="text"><InnerBlocks.Content/></div>
+					<div className="text"><InnerBlocks.Content/></div>
 				</div>
 				{states.hasBackgroundImage && 
-					<div class="background">
+					<div className="background">
 						{(states.isTemplate && backgroundImageCode)?(
 							backgroundImageCode
 						):(

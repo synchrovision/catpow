@@ -20,7 +20,7 @@
 		const {PanelBody,TextareaControl} = wp.components;
 		return [
 			<div className="embedded_content">
-				<div class="label">
+				<div className="label">
 					表示条件：
 					{attributes.schedule}
 					{attributes.is_user_logged_in!=0 && 'ログイン'+(attributes.is_user_logged_in==1?'している':'していない')}

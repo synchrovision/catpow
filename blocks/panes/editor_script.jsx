@@ -82,7 +82,7 @@ wp.blocks.registerBlockType('catpow/panes',{
 					isSelected={isSelected}
 					key={index}
 				>
-					<div class="image">
+					<div className="image">
 						<CP.SelectResponsiveImage
 							attr={attributes}
 							set={setAttributes}
@@ -92,7 +92,7 @@ wp.blocks.registerBlockType('catpow/panes',{
 							isTemplate={states.isTemplate}
 						/>
 					</div>
-					<div class="contents">
+					<div className="contents">
 						<div className='text'>
 							{states.hasSymbol &&
 								<div className="symbol">
@@ -177,7 +177,7 @@ wp.blocks.registerBlockType('catpow/panes',{
 				</InspectorControls>
 				{EditMode?(
 					<div className="alt_content">
-						<div class="label">
+						<div className="label">
 							<Icon icon="edit"/>
 						</div>
 						<CP.EditItemsTable
@@ -197,7 +197,7 @@ wp.blocks.registerBlockType('catpow/panes',{
 					<>
 						{(AltMode && doLoop)?(
 							<div className="alt_content">
-								<div class="label">
+								<div className="label">
 									<Icon icon="welcome-comments"/>
 								</div>
 								<InnerBlocks/>
@@ -228,7 +228,7 @@ wp.blocks.registerBlockType('catpow/panes',{
 							isTemplate={states.isTemplate}
 						/>
 					</div>
-					<div class="contents">
+					<div className="contents">
 						<div className='text'>
 							{states.hasSymbol &&
 								<div className="symbol">

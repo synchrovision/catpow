@@ -13,8 +13,8 @@ wp.blocks.registerBlockType('catpow/embed',{
 
 		return (
 			<>
-				<div class="embedded_content">
-					<div class="label">{content_path}</div>
+				<div className="embedded_content">
+					<div className="label">{content_path}</div>
 					<ServerSideRender block='catpow/embed' attributes={attributes}/>
 				</div>
 				<InspectorControls>

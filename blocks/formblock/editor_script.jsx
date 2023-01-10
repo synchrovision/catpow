@@ -33,8 +33,8 @@
 						]}
 					/>
 				</BlockControls>
-				<div class={"formBlock embedded_content"+(EditMode?' editMode':'')}>
-					<div class="label">{content_path || 'not selected'}</div>
+				<div className={"formBlock embedded_content"+(EditMode?' editMode':'')}>
+					<div className="label">{content_path || 'not selected'}</div>
 					<InnerBlocks
 						allowedBlocks={['catpow/formblockcontent']}
 					/>
@@ -105,7 +105,7 @@ wp.blocks.registerBlockType('catpow/formblockcontent',{
 		return (
 			<>
 				<div className={'formBlockContent embedded_content'}>
-					<div class="label">{name}</div>
+					<div className="label">{name}</div>
 					<InnerBlocks template={[['catpow/section']]} templateLock={false}/>
 				</div>
 				<InspectorControls>

@@ -25,7 +25,7 @@
 					/>
 				</BlockControls>
 				<div className={"wp-block-catpow-t-loop "+(AltMode?"alt_content altMode":"embedded_content")}>
-					<div class="label">
+					<div className="label">
 						{AltMode?(
 							<Icon icon="welcome-comments"/>
 						):(content_path)}

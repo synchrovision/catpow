@@ -54,14 +54,14 @@
 					isSelected={isSelected}
 					key={index}
 				>
-					<div class="button">
+					<div className="button">
 						{itemStates.hasIcon && <CP.OutputIcon item={item}/>}
 						<span
 							onInput={(e)=>{item.text=e.target.innerText;}}
 							onBlur={saveItems}
 							contentEditable="true"
 						>{item.text}</span>
-						<span class="action"
+						<span className="action"
 							onInput={(e)=>{item.action=e.target.innerText;}}
 							onBlur={saveItems}
 							contentEditable="true"

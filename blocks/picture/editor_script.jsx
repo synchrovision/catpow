@@ -49,7 +49,7 @@ wp.blocks.registerBlockType('catpow/picture',{
 				<CP.SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices}/>
 				<div className={classes+(device?' alt_content '+device:'')}>
 					{device &&
-						<div class="label">
+						<div className="label">
 							<Icon icon={CP.devices[device].icon}/>
 						</div>
 					}

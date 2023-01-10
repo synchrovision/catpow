@@ -81,7 +81,7 @@
               isSelected,
               key: index
             },
-            /* @__PURE__ */ wp.element.createElement("div", { class: "image" }, /* @__PURE__ */ wp.element.createElement(
+            /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(
               CP.SelectResponsiveImage,
               {
                 attr: attributes,
@@ -92,7 +92,7 @@
                 isTemplate: states.isTemplate
               }
             )),
-            /* @__PURE__ */ wp.element.createElement("div", { class: "contents" }, /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, states.hasSymbol && /* @__PURE__ */ wp.element.createElement("div", { className: "symbol" }, /* @__PURE__ */ wp.element.createElement(
+            /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, states.hasSymbol && /* @__PURE__ */ wp.element.createElement("div", { className: "symbol" }, /* @__PURE__ */ wp.element.createElement(
               CP.ResponsiveImage,
               {
                 attr: attributes,
@@ -175,7 +175,7 @@
           selectiveClasses: itemSelectiveClasses,
           filters: CP.filters.panes || {}
         }
-      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           set: setAttributes,
@@ -189,7 +189,7 @@
           ],
           isTemplate: states.isTemplate
         }
-      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn)));
+      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn)));
     },
     save({ attributes, className }) {
       const { InnerBlocks, RichText } = wp.blockEditor;
@@ -207,7 +207,7 @@
               index,
               isTemplate: states.isTemplate
             }
-          )), /* @__PURE__ */ wp.element.createElement("div", { class: "contents" }, /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, states.hasSymbol && /* @__PURE__ */ wp.element.createElement("div", { className: "symbol" }, /* @__PURE__ */ wp.element.createElement(
+          )), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, states.hasSymbol && /* @__PURE__ */ wp.element.createElement("div", { className: "symbol" }, /* @__PURE__ */ wp.element.createElement(
             CP.ResponsiveImage,
             {
               attr: attributes,

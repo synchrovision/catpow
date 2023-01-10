@@ -257,11 +257,11 @@ wp.blocks.registerBlockType('catpow/graphics',{
 					onDoubleClick={onDoubleClick}
 				>
 					{device &&
-						<div class="label">
+						<div className="label">
 							<Icon icon={CP.devices[device].icon}/>
 						</div>
 					}
-					<div class="base">
+					<div className="base">
 						{states.hasBaseImage && 
 							<CP.ResponsiveImage
 								attr={attributes}
@@ -437,7 +437,7 @@ wp.blocks.registerBlockType('catpow/graphics',{
 
 		return (
 			<div id={id} className={classes} data-heights={heights}>
-				<div class="base">
+				<div className="base">
 					{states.hasBaseImage && 
 						<CP.ResponsiveImage
 							attr={attributes}

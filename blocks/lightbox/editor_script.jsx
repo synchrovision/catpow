@@ -184,7 +184,7 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 					<>
 						{EditMode?(
 							<div className="alt_content">
-								<div class="label">
+								<div className="label">
 									<Icon icon="edit"/>
 								</div>
 								<CP.EditItemsTable
@@ -207,7 +207,7 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 							<>
 								{(AltMode && doLoop)?(
 									<div className="alt_content">
-										<div class="label">
+										<div className="label">
 											<Icon icon="welcome-comments"/>
 										</div>
 										<InnerBlocks/>
@@ -221,9 +221,9 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 				):(
 					<div className="lightbox_preview">
 						<div id="cp_lightbox" className="cp_lightbox_container active">
-							<div class="cp_lightbox_content">
-								<div class="group active">
-									<ul class="items">
+							<div className="cp_lightbox_content">
+								<div className="group active">
+									<ul className="items">
 									{items.map((item,index)=>{
 										var isActive=currentItemIndex==index;
 										return (
@@ -270,7 +270,7 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 										);
 									})}
 									</ul>
-									<div class="cp_lightbox_control">
+									<div className="cp_lightbox_control">
 										<div className="prev active"></div>
 										<ul className="dots active">
 											{items.map((item,index)=>{
@@ -323,7 +323,7 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 										</div>
 									}
 								</header>
-								<div class={boxClasses}>
+								<div className={boxClasses}>
 									{states.hasSubTitle && <header className="title"><h4><RichText.Content value={item.subTitle}/></h4></header>}
 									{states.hasImage &&
 										<div className='image'>

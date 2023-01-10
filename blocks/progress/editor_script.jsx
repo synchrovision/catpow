@@ -61,9 +61,9 @@
 				>
 					{states.hasCounter &&
 						<div className='counter'>
-							{countPrefix && <span class="prefix">{countPrefix}</span>}
+							{countPrefix && <span className="prefix">{countPrefix}</span>}
 							<span className="number">{index+1}</span>
-							{countSuffix && <span class="suffix">{countSuffix}</span>}
+							{countSuffix && <span className="suffix">{countSuffix}</span>}
 						</div>
 					}
 					<div className='label'>

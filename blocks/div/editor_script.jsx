@@ -103,7 +103,7 @@ wp.blocks.registerBlockType('catpow/div',{
 		return [
 			<div id={id} className={classes}>
 				{states.hasIcon && 
-					<div class="icon">
+					<div className="icon">
 						<CP.SelectResponsiveImage
 							set={setAttributes}
 							attr={attributes}
@@ -113,7 +113,7 @@ wp.blocks.registerBlockType('catpow/div',{
 					</div>
 				}
 				{states.hasBackgroundImage && 
-					<div class="background">
+					<div className="background">
 						<CP.ResponsiveImage
 							set={setAttributes}
 							attr={attributes}
@@ -164,7 +164,7 @@ wp.blocks.registerBlockType('catpow/div',{
 		return (
 			<div id={id} className={classes}>
 				{states.hasIcon && 
-					<div class="icon">
+					<div className="icon">
 						<CP.ResponsiveImage
 							attr={attributes}
 							keys={imageKeys.iconImage}
@@ -172,7 +172,7 @@ wp.blocks.registerBlockType('catpow/div',{
 					</div>
 				}
 				{states.hasBackgroundImage && 
-					<div class="background">
+					<div className="background">
 						<CP.ResponsiveImage
 							attr={attributes}
 							keys={imageKeys.backgroundImage}

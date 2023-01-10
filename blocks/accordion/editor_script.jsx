@@ -123,7 +123,7 @@ wp.blocks.registerBlockType('catpow/accordion',{
 				<div className={classes}>
 					<div className="header">
 						{states.hasImage && 
-							<div class="image">
+							<div className="image">
 								{(states.isTemplate && imageCode)?(
 									imageCode
 								):(

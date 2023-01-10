@@ -114,9 +114,9 @@ wp.blocks.registerBlockType('catpow/flow',{
 					<header onFocus={()=>{attributes.blockState.enableBlockFormat=false;}}>
 						{states.hasCounter &&
 							<div className='counter'>
-								{countPrefix && <span class="prefix">{countPrefix}</span>}
+								{countPrefix && <span className="prefix">{countPrefix}</span>}
 								<span className="number">{index+1}</span>
-								{countSuffix && <span class="suffix">{countSuffix}</span>}
+								{countSuffix && <span className="suffix">{countSuffix}</span>}
 							</div>
 						}
 						<div className='text'>
@@ -136,7 +136,7 @@ wp.blocks.registerBlockType('catpow/flow',{
 							}
 						</div>
 					</header>
-					<div class="contents">
+					<div className="contents">
 						{states.hasSubTitle &&
 							<h4 onFocus={()=>{attributes.blockState.enableBlockFormat=false;}}>
 								<RichText
@@ -202,7 +202,7 @@ wp.blocks.registerBlockType('catpow/flow',{
 				</InspectorControls>
 				{attributes.EditMode?(
 					<div className="alt_content">
-						<div class="label">
+						<div className="label">
 							<Icon icon="edit"/>
 						</div>
 						<CP.EditItemsTable
@@ -241,9 +241,9 @@ wp.blocks.registerBlockType('catpow/flow',{
 					<header>
 						{states.hasCounter &&
 							<div className='counter'>
-								{countPrefix && <span class="prefix">{countPrefix}</span>}
+								{countPrefix && <span className="prefix">{countPrefix}</span>}
 								<span className="number">{index+1}</span>
-								{countSuffix && <span class="suffix">{countSuffix}</span>}
+								{countSuffix && <span className="suffix">{countSuffix}</span>}
 							</div>
 						}
 						<div className='text'>
@@ -251,7 +251,7 @@ wp.blocks.registerBlockType('catpow/flow',{
 							{states.hasTitle && states.hasTitleCaption && <p><RichText.Content value={item.titleCaption}/></p>}
 						</div>
 					</header>
-					<div class="contents">
+					<div className="contents">
 						{states.hasSubTitle && <h4><RichText.Content value={item.subTitle}/></h4>}
 						<div className="text"><RichText.Content value={item.text}/></div>
 					</div>
@@ -317,9 +317,9 @@ wp.blocks.registerBlockType('catpow/flow',{
 							<header>
 								{states.hasCounter &&
 									<div className='counter'>
-										{countPrefix && <span class="prefix">{countPrefix}</span>}
+										{countPrefix && <span className="prefix">{countPrefix}</span>}
 										<span className="number">{index+1}</span>
-										{countSuffix && <span class="suffix">{countSuffix}</span>}
+										{countSuffix && <span className="suffix">{countSuffix}</span>}
 									</div>
 								}
 								<div className='text'>
@@ -327,7 +327,7 @@ wp.blocks.registerBlockType('catpow/flow',{
 									{states.hasTitle && states.hasTitleCaption && <p><RichText.Content value={item.titleCaption}/></p>}
 								</div>
 							</header>
-							<div class="contents">
+							<div className="contents">
 								{states.hasSubTitle && <h4><RichText.Content value={item.subTitle}/></h4>}
 								<p><RichText.Content value={item.text}/></p>
 							</div>

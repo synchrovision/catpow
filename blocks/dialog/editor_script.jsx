@@ -96,7 +96,7 @@
 							</h3>
 						</div>
 					</header>
-					<div class="contents">
+					<div className="contents">
 						<p>
 							<RichText
 								onChange={(text)=>{itemsCopy[index].text=text;setAttributes({items:itemsCopy});}}
@@ -152,7 +152,7 @@
 				<>
 					{EditMode?(
 						<div className="alt_content">
-							<div class="label">
+							<div className="label">
 								<Icon icon="edit"/>
 							</div>
 							<CP.EditItemsTable
@@ -171,7 +171,7 @@
 						<>
 							{(AltMode && doLoop)?(
 								<div className="alt_content">
-									<div class="label">
+									<div className="label">
 										<Icon icon="welcome-comments"/>
 									</div>
 									<InnerBlocks/>
@@ -212,7 +212,7 @@
 							<h3><RichText.Content value={item.title}/></h3>
 						</div>
 					</header>
-						<div class="contents">
+						<div className="contents">
 						<p><RichText.Content value={item.text}/></p>
 					</div>
 				</li>
@@ -245,7 +245,7 @@
 									<h3><RichText.Content value={item.title}/></h3>
 								</div>
 							</header>
-								<div class="contents">
+								<div className="contents">
 								<p><RichText.Content value={item.text}/></p>
 							</div>
 						</li>

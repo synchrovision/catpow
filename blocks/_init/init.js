@@ -1230,7 +1230,7 @@
           " "
         );
       });
-      return /* @__PURE__ */ wp.element.createElement("ul", { class: "selectColor" }, items);
+      return /* @__PURE__ */ wp.element.createElement("ul", { className: "selectColor" }, items);
     },
     SelectColors: (props) => {
       const { useState, useRef } = wp.element;
@@ -1695,7 +1695,7 @@
         });
         return colsWithoutLabel2;
       }, [cols]);
-      return /* @__PURE__ */ wp.element.createElement("table", { className: "DataInputTable" }, /* @__PURE__ */ wp.element.createElement("thead", { class: "DataInputTable__head" }, /* @__PURE__ */ wp.element.createElement("tr", { class: "DataInputTable__head__row" }, Object.keys(cols).map((c) => /* @__PURE__ */ wp.element.createElement("th", { className: "DataInputTable__head__row__cell", key: c }, cols[c].label || c)))), /* @__PURE__ */ wp.element.createElement("tbody", { class: "DataInputTable__body" }, (value || defaultRowValues).map((rowValue, index) => /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("table", { className: "DataInputTable" }, /* @__PURE__ */ wp.element.createElement("thead", { className: "DataInputTable__head" }, /* @__PURE__ */ wp.element.createElement("tr", { className: "DataInputTable__head__row" }, Object.keys(cols).map((c) => /* @__PURE__ */ wp.element.createElement("th", { className: "DataInputTable__head__row__cell", key: c }, cols[c].label || c)))), /* @__PURE__ */ wp.element.createElement("tbody", { className: "DataInputTable__body" }, (value || defaultRowValues).map((rowValue, index) => /* @__PURE__ */ wp.element.createElement(
         Row,
         {
           cols: colsWithoutLabel,
@@ -2649,7 +2649,7 @@
           " "
         );
       });
-      return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement("ul", { class: "selectPattern" }, items));
+      return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement("ul", { className: "selectPattern" }, items));
     },
     SelectPositionClass: (props) => {
       const { BaseControl } = wp.components;

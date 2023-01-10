@@ -6,8 +6,8 @@
 	example:CP.example,
 	edit({attributes,setAttributes,className}){
         return (
-			<div class="embedded_content">
-				<div class="label">UserInfo</div>
+			<div className="embedded_content">
+				<div className="label">UserInfo</div>
 				<InnerBlocks template={[
 					['core/paragraph',{content:'[output last_name] [output first_name]'}]
 				]}/>

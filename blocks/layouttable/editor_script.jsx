@@ -438,7 +438,7 @@ wp.blocks.registerBlockType('catpow/layouttable',{
 										<>
 											<RichText onChange={(text)=>{cell.text=text;saverows();}} value={cell.text}/>
 											{isSelected && (c == colLen-parseInt(cell.colspan?cell.colspan:1)) && 
-												<div class="itemControl rowControl">
+												<div className="itemControl rowControl">
 													<div className='btn up' onClick={()=>downRow(r)}></div>
 													<div className='btn delete' onClick={()=>deleteRow(r)}></div>
 													<div className='btn clone' onClick={()=>addRow(r)}></div>
@@ -446,7 +446,7 @@ wp.blocks.registerBlockType('catpow/layouttable',{
 												</div>
 											}
 											{isSelected && (r == rowLen-parseInt(cell.rowspan?cell.rowspan:1)) && 
-												<div class="itemControl columnControl">
+												<div className="itemControl columnControl">
 													<div className='btn left' onClick={()=>downColumn(c)}></div>
 													<div className='btn delete' onClick={()=>deleteColumn(c)}></div>
 													<div className='btn clone' onClick={()=>addColumn(c)}></div>

@@ -32,8 +32,8 @@
 
 		return (
 			<>
-				<div class="embedded_content">
-					<div class="label">{content_path}</div>
+				<div className="embedded_content">
+					<div className="label">{content_path}</div>
 					<ServerSideRender block='catpow/form' attributes={attributes}/>
 				</div>,
 				<InspectorControls>

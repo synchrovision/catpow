@@ -69,7 +69,7 @@
 							value={item.title}
 						/>
 					</dt>
-					<dd class="text">
+					<dd className="text">
 						<RichText
 							onChange={(text)=>{item.text=text;save();}}
 							value={item.text}
@@ -112,7 +112,7 @@
 				</InspectorControls>
 				{EditMode?(
 					<div className="alt_content">
-						<div class="label">
+						<div className="label">
 							<Icon icon="edit"/>
 						</div>
 						<CP.EditItemsTable
@@ -129,7 +129,7 @@
 					<>
 						{(AltMode && doLoop)?(
 							<div className="alt_content">
-								<div class="label">
+								<div className="label">
 									<Icon icon="welcome-comments"/>
 								</div>
 								<InnerBlocks/>

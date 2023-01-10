@@ -25,8 +25,8 @@ wp.blocks.registerBlockType('catpow/widget',{
         
         return (
 			<>
-				<div class="widgetded_content">
-					<div class="label">{func}</div>
+				<div className="widgetded_content">
+					<div className="label">{func}</div>
 					<ServerSideRender block='catpow/widget' attributes={attributes}/>
 				</div>,
 				<InspectorControls>

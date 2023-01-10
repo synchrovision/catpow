@@ -69,8 +69,8 @@ wp.blocks.registerBlockType('catpow/sticky',{
 			<>
 				<div className={classes}>
 					{states.collapsible && 
-						<div class="stickyButton">
-							<div class="stickyButtonIcon">
+						<div className="stickyButton">
+							<div className="stickyButtonIcon">
 								{states.labelButton &&
 									<div className='label'>
 										<RichText onChange={(labelText)=>{setAttributes({labelText})}} value={labelText}/>
@@ -91,7 +91,7 @@ wp.blocks.registerBlockType('catpow/sticky',{
 							</div>
 						</div>
 					}
-					<div class="content">
+					<div className="content">
 						{states.label &&
 							<div className="label">
 								<RichText onChange={(labelText)=>{setAttributes({labelText})}} value={labelText}/>
@@ -130,8 +130,8 @@ wp.blocks.registerBlockType('catpow/sticky',{
 		return (
 			<div className={classes}>
 				{states.collapsible && 
-					<div class="stickyButton">
-						<div class="stickyButtonIcon">
+					<div className="stickyButton">
+						<div className="stickyButtonIcon">
 							{states.labelButton &&
 								<div className='label'><RichText.Content value={labelText}/></div>
 							}
@@ -150,7 +150,7 @@ wp.blocks.registerBlockType('catpow/sticky',{
 						</div>
 					</div>
 				}
-				<div class="content">
+				<div className="content">
 					{states.label && <div className="label"><RichText.Content value={labelText}/></div>}
 					{(states.container || states.collapsible) && <InnerBlocks.Content/>}
 				</div>
@@ -168,8 +168,8 @@ wp.blocks.registerBlockType('catpow/sticky',{
 				return (
 					<div className={classes}>
 						{states.collapsible && 
-							<div class="stickyMenuButton">
-								<div class="stickyMenuButtonIcon">
+							<div className="stickyMenuButton">
+								<div className="stickyMenuButtonIcon">
 									{states.labelButton &&
 										<div className='label'><RichText.Content value={labelText}/></div>
 									}
@@ -188,7 +188,7 @@ wp.blocks.registerBlockType('catpow/sticky',{
 								</div>
 							</div>
 						}
-						<div class="content">
+						<div className="content">
 							{states.label && <div className="label"><RichText.Content value={labelText}/></div>}
 							{(states.container || states.collapsible) && <InnerBlocks.Content/>}
 						</div>

@@ -62,10 +62,10 @@ wp.blocks.registerBlockType('catpow/sidecolumn',{
 		const {InnerBlocks}=wp.blockEditor;
 		return [
 			<div className={'column column_side'}>
-				<div class="column_side_container">
+				<div className="column_side_container">
 					<InnerBlocks template={[['catpow/articlenav']]} templateLock={false}/>
 				</div>
-				<div class="sidebar_button"></div>
+				<div className="sidebar_button"></div>
 			</div>
 		];
 	},
@@ -73,8 +73,8 @@ wp.blocks.registerBlockType('catpow/sidecolumn',{
 		const {InnerBlocks}=wp.blockEditor;
 		return (
 			<div className={'column column_side'}>
-				<div class="column_side_container"><InnerBlocks.Content/></div>
-				<div class="sidebar_button"></div>
+				<div className="column_side_container"><InnerBlocks.Content/></div>
+				<div className="sidebar_button"></div>
 			</div>
 		);
 	},
@@ -84,7 +84,7 @@ wp.blocks.registerBlockType('catpow/sidecolumn',{
 				return (
 					<div className={'column column_side'}>
 						<InnerBlocks.Content/>
-						<div class="sidebar_button"></div>
+						<div className="sidebar_button"></div>
 					</div>
 				);
 			}
@@ -138,7 +138,7 @@ wp.blocks.registerBlockType('catpow/articlenav',{
 
 		return (
 			<div className={className}>
-				<ul class="article_nav">
+				<ul className="article_nav">
 					{getSectionTitles(mainContents).map((title)=>{
 						return <li><h3><RichText.Content value={title}/></h3></li>;
 					})}

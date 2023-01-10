@@ -246,7 +246,7 @@
         return selectiveClasses2;
       }, []);
       var level = CP.getNumberClass({ attr: attributes }, "level");
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })), /* @__PURE__ */ wp.element.createElement(SectionTag, { id, className: classes }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { class: "image" }, states.isTemplate && imageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: imageCode }) : /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })), /* @__PURE__ */ wp.element.createElement(SectionTag, { id, className: classes }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && imageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: imageCode }) : /* @__PURE__ */ wp.element.createElement(
         CP.SelectResponsiveImage,
         {
           attr: attributes,
@@ -254,7 +254,7 @@
           keys: imageKeys.image,
           size: imageSizes.image
         }
-      )), /* @__PURE__ */ wp.element.createElement("div", { class: "contents" }, /* @__PURE__ */ wp.element.createElement("header", { class: "header" }, /* @__PURE__ */ wp.element.createElement("div", { class: "title" }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), states.hasPrefix && /* @__PURE__ */ wp.element.createElement("div", { class: "prefix" }, /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "div", value: prefix, onChange: (prefix2) => setAttributes({ prefix: prefix2 }) })), states.hasHeaderImage && /* @__PURE__ */ wp.element.createElement("div", { class: "image" }, states.isTemplate && headerImageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: headerImageCode }) : /* @__PURE__ */ wp.element.createElement(
+      )), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement("header", { className: "header" }, /* @__PURE__ */ wp.element.createElement("div", { className: "title" }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), states.hasPrefix && /* @__PURE__ */ wp.element.createElement("div", { className: "prefix" }, /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "div", value: prefix, onChange: (prefix2) => setAttributes({ prefix: prefix2 }) })), states.hasHeaderImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && headerImageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: headerImageCode }) : /* @__PURE__ */ wp.element.createElement(
         CP.SelectResponsiveImage,
         {
           set: setAttributes,
@@ -262,7 +262,7 @@
           keys: imageKeys.headerImage,
           size: imageSizes.headerImage
         }
-      )), states.hasTitleImage ? /* @__PURE__ */ wp.element.createElement(HeadingTag, { class: "titleImage" }, states.isTemplate && titleImageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: titleImageCode }) : /* @__PURE__ */ wp.element.createElement(
+      )), states.hasTitleImage ? /* @__PURE__ */ wp.element.createElement(HeadingTag, { className: "titleImage" }, states.isTemplate && titleImageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: titleImageCode }) : /* @__PURE__ */ wp.element.createElement(
         CP.SelectResponsiveImage,
         {
           set: setAttributes,
@@ -270,14 +270,14 @@
           keys: imageKeys.titleImage,
           devices
         }
-      )) : /* @__PURE__ */ wp.element.createElement(HeadingTag, { className: "heading" }, /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "div", value: title, onChange: (title2) => setAttributes({ title: title2 }) })), states.hasLead && /* @__PURE__ */ wp.element.createElement("p", { className: "lead" }, /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "div", value: lead, onChange: (lead2) => setAttributes({ lead: lead2 }) }))), states.hasHeaderBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { class: "background" }, states.isTemplate && headerBackgroundImageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: headerBackgroundImageCode }) : /* @__PURE__ */ wp.element.createElement(
+      )) : /* @__PURE__ */ wp.element.createElement(HeadingTag, { className: "heading" }, /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "div", value: title, onChange: (title2) => setAttributes({ title: title2 }) })), states.hasLead && /* @__PURE__ */ wp.element.createElement("p", { className: "lead" }, /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "div", value: lead, onChange: (lead2) => setAttributes({ lead: lead2 }) }))), states.hasHeaderBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, states.isTemplate && headerBackgroundImageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: headerBackgroundImageCode }) : /* @__PURE__ */ wp.element.createElement(
         CP.SelectResponsiveImage,
         {
           set: setAttributes,
           attr: attributes,
           keys: imageKeys.headerBackgroundImage
         }
-      ))), /* @__PURE__ */ wp.element.createElement("div", { class: "text" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null))), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { class: "background" }, states.isTemplate && backgroundImageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: backgroundImageCode }) : /* @__PURE__ */ wp.element.createElement(
+      ))), /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null))), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, states.isTemplate && backgroundImageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: backgroundImageCode }) : /* @__PURE__ */ wp.element.createElement(
         CP.SelectResponsiveImage,
         {
           set: setAttributes,
@@ -344,34 +344,34 @@
       var level = CP.getNumberClass({ attr: attributes }, "level");
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys, imageSizes } = CP.config.section;
-      return /* @__PURE__ */ wp.element.createElement(SectionTag, { id, className: classes, "data-icon": navIcon }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { class: "image" }, states.isTemplate && imageCode ? imageCode : /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(SectionTag, { id, className: classes, "data-icon": navIcon }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && imageCode ? imageCode : /* @__PURE__ */ wp.element.createElement(
         CP.ResponsiveImage,
         {
           attr: attributes,
           keys: imageKeys.image,
           size: "medium_large"
         }
-      )), /* @__PURE__ */ wp.element.createElement("div", { class: "contents" }, /* @__PURE__ */ wp.element.createElement("header", { class: "header" }, /* @__PURE__ */ wp.element.createElement("div", { class: "title" }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), states.hasPrefix && /* @__PURE__ */ wp.element.createElement("div", { class: "prefix" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: prefix })), states.hasHeaderImage && /* @__PURE__ */ wp.element.createElement("div", { class: "image" }, states.isTemplate && headerImageCode ? headerImageCode : /* @__PURE__ */ wp.element.createElement(
+      )), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement("header", { className: "header" }, /* @__PURE__ */ wp.element.createElement("div", { className: "title" }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), states.hasPrefix && /* @__PURE__ */ wp.element.createElement("div", { className: "prefix" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: prefix })), states.hasHeaderImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && headerImageCode ? headerImageCode : /* @__PURE__ */ wp.element.createElement(
         CP.ResponsiveImage,
         {
           attr: attributes,
           keys: imageKeys.headerImage
         }
-      )), states.hasTitleImage ? /* @__PURE__ */ wp.element.createElement(HeadingTag, { class: "titleImage" }, states.isTemplate && titleImageCode ? titleImageCode : /* @__PURE__ */ wp.element.createElement(
+      )), states.hasTitleImage ? /* @__PURE__ */ wp.element.createElement(HeadingTag, { className: "titleImage" }, states.isTemplate && titleImageCode ? titleImageCode : /* @__PURE__ */ wp.element.createElement(
         CP.ResponsiveImage,
         {
           attr: attributes,
           keys: imageKeys.titleImage,
           devices
         }
-      )) : /* @__PURE__ */ wp.element.createElement(HeadingTag, { className: "heading" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: title })), states.hasLead && /* @__PURE__ */ wp.element.createElement("p", { className: "lead" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: lead }))), states.hasHeaderBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { class: "background" }, states.isTemplate && headerBackgroundImageCode ? headerBackgroundImageCode : /* @__PURE__ */ wp.element.createElement(
+      )) : /* @__PURE__ */ wp.element.createElement(HeadingTag, { className: "heading" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: title })), states.hasLead && /* @__PURE__ */ wp.element.createElement("p", { className: "lead" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: lead }))), states.hasHeaderBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, states.isTemplate && headerBackgroundImageCode ? headerBackgroundImageCode : /* @__PURE__ */ wp.element.createElement(
         CP.ResponsiveImage,
         {
           attr: attributes,
           keys: imageKeys.headerBackgroundImage,
           devices
         }
-      ))), /* @__PURE__ */ wp.element.createElement("div", { class: "text" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null))), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { class: "background" }, states.isTemplate && backgroundImageCode ? backgroundImageCode : /* @__PURE__ */ wp.element.createElement(
+      ))), /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null))), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, states.isTemplate && backgroundImageCode ? backgroundImageCode : /* @__PURE__ */ wp.element.createElement(
         CP.ResponsiveImage,
         {
           attr: attributes,

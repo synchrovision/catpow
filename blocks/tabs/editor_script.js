@@ -59,7 +59,7 @@
           )
         );
       });
-      return /* @__PURE__ */ wp.element.createElement("div", { className: classes, "data-current-index": currentIndex }, /* @__PURE__ */ wp.element.createElement("ul", { class: "tab" }, rtn), /* @__PURE__ */ wp.element.createElement("div", { class: "contents" }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("div", { className: classes, "data-current-index": currentIndex }, /* @__PURE__ */ wp.element.createElement("ul", { className: "tab" }, rtn), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement(
         InnerBlocks,
         {
           template,
@@ -75,7 +75,7 @@
           /* @__PURE__ */ wp.element.createElement("li", { className: "item", key: index }, /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })))
         );
       });
-      return /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement("ul", { class: "tab" }, rtn), /* @__PURE__ */ wp.element.createElement("div", { class: "contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
+      return /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement("ul", { className: "tab" }, rtn), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }
   });
   wp.blocks.registerBlockType("catpow/tabscontent", {

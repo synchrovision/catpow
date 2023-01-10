@@ -95,7 +95,7 @@
         return selectiveClasses2;
       }, []);
       return [
-        /* @__PURE__ */ wp.element.createElement("div", { id, className: classes }, states.hasIcon && /* @__PURE__ */ wp.element.createElement("div", { class: "icon" }, /* @__PURE__ */ wp.element.createElement(
+        /* @__PURE__ */ wp.element.createElement("div", { id, className: classes }, states.hasIcon && /* @__PURE__ */ wp.element.createElement("div", { className: "icon" }, /* @__PURE__ */ wp.element.createElement(
           CP.SelectResponsiveImage,
           {
             set: setAttributes,
@@ -103,7 +103,7 @@
             keys: imageKeys.iconImage,
             size: "middle"
           }
-        )), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { class: "background" }, /* @__PURE__ */ wp.element.createElement(
+        )), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
           CP.ResponsiveImage,
           {
             set: setAttributes,
@@ -137,13 +137,13 @@
       const { id, classes = "", color, patternImageCss, frameImageCss, borderImageCss } = attributes;
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys } = CP.config.div;
-      return /* @__PURE__ */ wp.element.createElement("div", { id, className: classes }, states.hasIcon && /* @__PURE__ */ wp.element.createElement("div", { class: "icon" }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("div", { id, className: classes }, states.hasIcon && /* @__PURE__ */ wp.element.createElement("div", { className: "icon" }, /* @__PURE__ */ wp.element.createElement(
         CP.ResponsiveImage,
         {
           attr: attributes,
           keys: imageKeys.iconImage
         }
-      )), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { class: "background" }, /* @__PURE__ */ wp.element.createElement(
+      )), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
         CP.ResponsiveImage,
         {
           attr: attributes,

@@ -30,7 +30,7 @@
             }
           ]
         }
-      )), /* @__PURE__ */ wp.element.createElement("div", { class: "formBlock embedded_content" + (EditMode ? " editMode" : "") }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, content_path || "not selected"), /* @__PURE__ */ wp.element.createElement(
+      )), /* @__PURE__ */ wp.element.createElement("div", { className: "formBlock embedded_content" + (EditMode ? " editMode" : "") }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, content_path || "not selected"), /* @__PURE__ */ wp.element.createElement(
         InnerBlocks,
         {
           allowedBlocks: ["catpow/formblockcontent"]
@@ -101,7 +101,7 @@
       const parentClientId = wp.data.select("core/block-editor").getBlockParentsByBlockName(clientId, "catpow/formblock")[0];
       const parentBlock = wp.data.select("core/block-editor").getBlock(parentClientId);
       const actions = parentBlock.attributes.actions;
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "formBlockContent embedded_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, name), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/section"]], templateLock: false })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u8A2D\u5B9A", initialOpen: true }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "formBlockContent embedded_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, name), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/section"]], templateLock: false })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u8A2D\u5B9A", initialOpen: true }, /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
           label: "\u540D\u524D",

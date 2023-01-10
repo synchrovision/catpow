@@ -7,7 +7,7 @@
     category: "catpow-functional",
     example: CP.example,
     edit({ attributes, setAttributes, className }) {
-      return /* @__PURE__ */ wp.element.createElement("div", { class: "embedded_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, "UserInfo"), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "embedded_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, "UserInfo"), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [
         ["core/paragraph", { content: "[output last_name] [output first_name]" }]
       ] }));
     },

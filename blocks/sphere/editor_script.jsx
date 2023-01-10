@@ -93,7 +93,7 @@ wp.blocks.registerBlockType('catpow/sphere',{
 					isSelected={isSelected}
 					key={index}
 				>
-					<div class="contents">
+					<div className="contents">
 						{states.hasSubImage &&
 							<div className='image'>
 								<CP.SelectResponsiveImage
@@ -184,7 +184,7 @@ wp.blocks.registerBlockType('catpow/sphere',{
 		items.map((item,index)=>{
 			rtn.push(
 				<li className={item.classes} key={index}>
-					<div class="contents">
+					<div className="contents">
 						{states.hasSubImage && <div className='image'><img src={item.subImageSrc} alt={item.subImageAlt}/></div>}
 						{states.hasSubTitle && <h4><RichText.Content value={item.subTitle}/></h4>}
 						{states.hasText && <p><RichText.Content value={item.text}/></p>}

@@ -149,7 +149,7 @@
 				<>
 					{EditMode?(
 						<div className="alt_content">
-							<div class="label">
+							<div className="label">
 								<Icon icon="edit"/>
 							</div>
 							<CP.EditItemsTable
@@ -169,7 +169,7 @@
 						<>
 							{(AltMode && doLoop)?(
 								<div className="alt_content">
-									<div class="label">
+									<div className="label">
 										<Icon icon="welcome-comments"/>
 									</div>
 									<InnerBlocks/>

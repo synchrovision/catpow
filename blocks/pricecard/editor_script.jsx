@@ -96,28 +96,28 @@
 									/>
 								</p>
 							}
-							<div class="price">
-								<span class="listPrice">
-									{states.unitBefore && <span class="unit">{priceUnit}</span>}
-									<span class="number">
+							<div className="price">
+								<span className="listPrice">
+									{states.unitBefore && <span className="unit">{priceUnit}</span>}
+									<span className="number">
 										<RichText
 											onChange={(listPrice)=>{items[index].listPrice=listPrice;save();}}
 											value={item.listPrice}
 										/>
 									</span>
-									{states.unitAfter && <span class="unit">{priceUnit}</span>}
+									{states.unitAfter && <span className="unit">{priceUnit}</span>}
 								</span>
-								<span class="price">
-									{states.unitBefore && <span class="unit">{priceUnit}</span>}
-									<span class="number">
+								<span className="price">
+									{states.unitBefore && <span className="unit">{priceUnit}</span>}
+									<span className="number">
 										<RichText
 											onChange={(price)=>{items[index].price=price;save();}}
 											value={item.price}
 										/>
 									</span>
-									{states.unitAfter && <span class="unit">{priceUnit}</span>}
+									{states.unitAfter && <span className="unit">{priceUnit}</span>}
 								</span>
-								<span class="priceCaption">
+								<span className="priceCaption">
 									<RichText
 										onChange={(priceCaption)=>{setAttributes({priceCaption});}}
 										value={priceCaption}
@@ -127,7 +127,7 @@
 						</div>
 					</header>
 					{(states.hasSubTitle || states.hasText || states.hasSpec || states.hasLink) && 
-						<div class="contents">
+						<div className="contents">
 							{states.hasSubTitle &&
 								<h4>
 									<RichText
@@ -251,7 +251,7 @@
 					<>
 						{(AltMode && doLoop)?(
 							<div className="alt_content">
-								<div class="label">
+								<div className="label">
 									<Icon icon="welcome-comments"/>
 								</div>
 								<InnerBlocks/>
@@ -300,23 +300,23 @@
 							{states.hasTitle && states.hasTitleCaption && 
 								<p><RichText.Content value={item.titleCaption}/></p>
 							}
-							<div class="price">
-								<span class="listPrice">
-									{states.unitBefore && <span class="unit">{priceUnit}</span>}
-									<span class="number">{item.listPrice}</span>
-									{states.unitAfter && <span class="unit">{priceUnit}</span>}
+							<div className="price">
+								<span className="listPrice">
+									{states.unitBefore && <span className="unit">{priceUnit}</span>}
+									<span className="number">{item.listPrice}</span>
+									{states.unitAfter && <span className="unit">{priceUnit}</span>}
 								</span>
-								<span class="price">
-									{states.unitBefore && <span class="unit">{priceUnit}</span>}
-									<span class="number">{item.price}</span>
-									{states.unitAfter && <span class="unit">{priceUnit}</span>}
+								<span className="price">
+									{states.unitBefore && <span className="unit">{priceUnit}</span>}
+									<span className="number">{item.price}</span>
+									{states.unitAfter && <span className="unit">{priceUnit}</span>}
 								</span>
-								<span class="priceCaption"><RichText.Content value={priceCaption}/></span>
+								<span className="priceCaption"><RichText.Content value={priceCaption}/></span>
 							</div>
 						</div>
 					</header>
 					{(states.hasSubTitle || states.hasText || states.hasSpec || states.hasLink) && 
-						<div class="contents">
+						<div className="contents">
 							{states.hasSubTitle &&
 								<h4><RichText.Content value={item.subTitle}/></h4>
 							}
@@ -389,23 +389,23 @@
 									{states.hasTitle && states.hasTitleCaption && 
 										<p><RichText.Content value={item.titleCaption}/></p>
 									}
-									<div class="price">
-										<span class="listPrice">
-											{states.unitBefore && <span class="unit">{priceUnit}</span>}
-											<span class="number">{item.listPrice}</span>
-											{states.unitAfter && <span class="unit">{priceUnit}</span>}
+									<div className="price">
+										<span className="listPrice">
+											{states.unitBefore && <span className="unit">{priceUnit}</span>}
+											<span className="number">{item.listPrice}</span>
+											{states.unitAfter && <span className="unit">{priceUnit}</span>}
 										</span>
-										<span class="price">
-											{states.unitBefore && <span class="unit">{priceUnit}</span>}
-											<span class="number">{item.price}</span>
-											{states.unitAfter && <span class="unit">{priceUnit}</span>}
+										<span className="price">
+											{states.unitBefore && <span className="unit">{priceUnit}</span>}
+											<span className="number">{item.price}</span>
+											{states.unitAfter && <span className="unit">{priceUnit}</span>}
 										</span>
-										<span class="priceCaption"><RichText.Content value={priceCaption}/></span>
+										<span className="priceCaption"><RichText.Content value={priceCaption}/></span>
 									</div>
 								</div>
 							</header>
 							{(states.hasSubTitle || states.hasText || states.hasSpec || states.hasLink) && 
-								<div class="contents">
+								<div className="contents">
 									{states.hasSubTitle &&
 										<h4><RichText.Content value={item.subTitle}/></h4>
 									}

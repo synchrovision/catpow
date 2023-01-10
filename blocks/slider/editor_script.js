@@ -213,7 +213,7 @@
                 isTemplate: states.isTemplate
               }
             )),
-            (states.hasTitle || states.hasSubTitle || states.hasText) && /* @__PURE__ */ wp.element.createElement("div", { class: "texts" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", { className: "title" }, /* @__PURE__ */ wp.element.createElement(
+            (states.hasTitle || states.hasSubTitle || states.hasText) && /* @__PURE__ */ wp.element.createElement("div", { className: "texts" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", { className: "title" }, /* @__PURE__ */ wp.element.createElement(
               RichText2,
               {
                 onChange: (title) => {
@@ -268,7 +268,7 @@
         );
         if (states.hasImage && states.hasThumbnail) {
           thumbs.push(
-            /* @__PURE__ */ wp.element.createElement("li", { class: "item " + posClass + " thumb" + imageIndex, onClick: () => gotoItem(index) }, /* @__PURE__ */ wp.element.createElement(
+            /* @__PURE__ */ wp.element.createElement("li", { className: "item " + posClass + " thumb" + imageIndex, onClick: () => gotoItem(index) }, /* @__PURE__ */ wp.element.createElement(
               CP.SelectResponsiveImage,
               {
                 attr: attributes,
@@ -281,7 +281,7 @@
           );
         }
         if (states.hasDots) {
-          dots.push(/* @__PURE__ */ wp.element.createElement("li", { class: "dot " + posClass + " dot" + imageIndex, onClick: () => gotoItem(index) }));
+          dots.push(/* @__PURE__ */ wp.element.createElement("li", { className: "dot " + posClass + " dot" + imageIndex, onClick: () => gotoItem(index) }));
         }
       };
       const l = items.length;
@@ -365,7 +365,7 @@
           triggerClasses: selectiveClasses[0],
           filters: CP.filters.slider || {}
         }
-      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           set: setAttributes,
@@ -384,7 +384,7 @@
           ],
           isTemplate: states.isTemplate
         }
-      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("div", { className: classes2 }, /* @__PURE__ */ wp.element.createElement("ul", { class: "contents" }, rtn), /* @__PURE__ */ wp.element.createElement("div", { className: controlClasses, "data-config": config }, states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { class: "arrow prev", onClick: prevItem }, " "), states.hasImage && states.hasThumbnail && /* @__PURE__ */ wp.element.createElement("ul", { class: "thumbnail" }, thumbs), states.hasDots && /* @__PURE__ */ wp.element.createElement("ul", { class: "dots" }, dots), states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { class: "arrow next", onClick: nextItem }, " ")))));
+      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("div", { className: classes2 }, /* @__PURE__ */ wp.element.createElement("ul", { className: "contents" }, rtn), /* @__PURE__ */ wp.element.createElement("div", { className: controlClasses, "data-config": config }, states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { class: "arrow prev", onClick: prevItem }, " "), states.hasImage && states.hasThumbnail && /* @__PURE__ */ wp.element.createElement("ul", { className: "thumbnail" }, thumbs), states.hasDots && /* @__PURE__ */ wp.element.createElement("ul", { className: "dots" }, dots), states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { class: "arrow next", onClick: nextItem }, " ")))));
     },
     save({ attributes, className }) {
       const { InnerBlocks, RichText: RichText2 } = wp.blockEditor;
@@ -412,7 +412,7 @@
               index,
               isTemplate: states.isTemplate
             }
-          )), (states.hasTitle || states.hasSubTitle || states.hasText) && /* @__PURE__ */ wp.element.createElement("div", { class: "texts" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", { className: "title" }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: item.title })), states.hasSubTitle && /* @__PURE__ */ wp.element.createElement("h4", { className: "subtitle" }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: item.subTitle })), states.hasText && /* @__PURE__ */ wp.element.createElement("p", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: item.text }))), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
+          )), (states.hasTitle || states.hasSubTitle || states.hasText) && /* @__PURE__ */ wp.element.createElement("div", { className: "texts" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", { className: "title" }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: item.title })), states.hasSubTitle && /* @__PURE__ */ wp.element.createElement("h4", { className: "subtitle" }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: item.subTitle })), states.hasText && /* @__PURE__ */ wp.element.createElement("p", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: item.text }))), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
             CP.ResponsiveImage,
             {
               attr: attributes,
@@ -425,7 +425,7 @@
         );
         if (states.hasImage && states.hasThumbnail) {
           thumbs.push(
-            /* @__PURE__ */ wp.element.createElement("li", { class: item.classes }, /* @__PURE__ */ wp.element.createElement(
+            /* @__PURE__ */ wp.element.createElement("li", { className: item.classes }, /* @__PURE__ */ wp.element.createElement(
               CP.ResponsiveImage,
               {
                 attr: attributes,
@@ -437,7 +437,7 @@
           );
         }
       });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes2 }, /* @__PURE__ */ wp.element.createElement("ul", { class: "contents" }, rtn), /* @__PURE__ */ wp.element.createElement("div", { className: controlClasses, "data-config": config }, states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { class: "arrow prev" }, " "), states.hasImage && states.hasThumbnail && /* @__PURE__ */ wp.element.createElement("ul", { class: "thumbnail" }, thumbs), states.hasDots && /* @__PURE__ */ wp.element.createElement("ul", { class: "dots" }, /* @__PURE__ */ wp.element.createElement("li", { class: "dot" }, " ")), states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { class: "arrow next" }, " "))), doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes2 }, /* @__PURE__ */ wp.element.createElement("ul", { className: "contents" }, rtn), /* @__PURE__ */ wp.element.createElement("div", { className: controlClasses, "data-config": config }, states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { class: "arrow prev" }, " "), states.hasImage && states.hasThumbnail && /* @__PURE__ */ wp.element.createElement("ul", { className: "thumbnail" }, thumbs), states.hasDots && /* @__PURE__ */ wp.element.createElement("ul", { className: "dots" }, /* @__PURE__ */ wp.element.createElement("li", { className: "dot" }, " ")), states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { class: "arrow next" }, " "))), doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     },
     deprecated: [
       {
@@ -516,15 +516,15 @@
               item.bg = {};
             }
             rtn.push(
-              /* @__PURE__ */ wp.element.createElement("li", { class: "item", style: item.bg }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement("img", { src: item.src, alt: item.alt })), /* @__PURE__ */ wp.element.createElement("div", { class: "text" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), states.hasSubTitle && /* @__PURE__ */ wp.element.createElement("h4", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.subTitle })), states.hasText && /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text }))))
+              /* @__PURE__ */ wp.element.createElement("li", { className: "item", style: item.bg }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement("img", { src: item.src, alt: item.alt })), /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), states.hasSubTitle && /* @__PURE__ */ wp.element.createElement("h4", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.subTitle })), states.hasText && /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text }))))
             );
             if (states.hasThumbnail) {
               thumbs.push(
-                /* @__PURE__ */ wp.element.createElement("li", { class: "item", style: item.bg }, /* @__PURE__ */ wp.element.createElement("img", { src: item.src, alt: item.alt }))
+                /* @__PURE__ */ wp.element.createElement("li", { className: "item", style: item.bg }, /* @__PURE__ */ wp.element.createElement("img", { src: item.src, alt: item.alt }))
               );
             }
           });
-          return /* @__PURE__ */ wp.element.createElement("div", { className: classes2 }, /* @__PURE__ */ wp.element.createElement("ul", { class: "contents" }, rtn), /* @__PURE__ */ wp.element.createElement("div", { className: controlClasses, "data-config": config }, states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { class: "arrow prev" }, " "), states.hasThumbnail && /* @__PURE__ */ wp.element.createElement("ul", { class: "thumbnail" }, thumbs), states.hasDots && /* @__PURE__ */ wp.element.createElement("ul", { class: "dots" }, /* @__PURE__ */ wp.element.createElement("li", { class: "dot" }, " ")), states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { class: "arrow next" }, " ")));
+          return /* @__PURE__ */ wp.element.createElement("div", { className: classes2 }, /* @__PURE__ */ wp.element.createElement("ul", { className: "contents" }, rtn), /* @__PURE__ */ wp.element.createElement("div", { className: controlClasses, "data-config": config }, states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { class: "arrow prev" }, " "), states.hasThumbnail && /* @__PURE__ */ wp.element.createElement("ul", { className: "thumbnail" }, thumbs), states.hasDots && /* @__PURE__ */ wp.element.createElement("ul", { className: "dots" }, /* @__PURE__ */ wp.element.createElement("li", { className: "dot" }, " ")), states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { class: "arrow next" }, " ")));
         }
       },
       {
@@ -558,7 +558,7 @@
                   index,
                   isTemplate: states.isTemplate
                 }
-              )), (states.hasTitle || states.hasSubTitle || states.hasText) && /* @__PURE__ */ wp.element.createElement("div", { class: "text" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), states.hasSubTitle && /* @__PURE__ */ wp.element.createElement("h4", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.subTitle })), states.hasText && /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text }))), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
+              )), (states.hasTitle || states.hasSubTitle || states.hasText) && /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), states.hasSubTitle && /* @__PURE__ */ wp.element.createElement("h4", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.subTitle })), states.hasText && /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text }))), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
                 CP.ResponsiveImage,
                 {
                   attr: attributes,
@@ -570,7 +570,7 @@
             );
             if (states.hasImage && states.hasThumbnail) {
               thumbs.push(
-                /* @__PURE__ */ wp.element.createElement("li", { class: item.classes }, /* @__PURE__ */ wp.element.createElement(
+                /* @__PURE__ */ wp.element.createElement("li", { className: item.classes }, /* @__PURE__ */ wp.element.createElement(
                   CP.ResponsiveImage,
                   {
                     attr: attributes,
@@ -582,7 +582,7 @@
               );
             }
           });
-          return /* @__PURE__ */ wp.element.createElement("div", { className: classes2 }, /* @__PURE__ */ wp.element.createElement("ul", { class: "contents" }, states.doLoop && "[loop_template " + (loopParam || "") + "]", rtn, states.doLoop && "[/loop_template]"), /* @__PURE__ */ wp.element.createElement("div", { className: controlClasses, "data-config": config }, states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { class: "arrow prev" }, " "), states.hasImage && states.hasThumbnail && /* @__PURE__ */ wp.element.createElement("ul", { class: "thumbnail" }, thumbs), states.hasDots && /* @__PURE__ */ wp.element.createElement("ul", { class: "dots" }, /* @__PURE__ */ wp.element.createElement("li", { class: "dot" }, " ")), states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { class: "arrow next" }, " ")));
+          return /* @__PURE__ */ wp.element.createElement("div", { className: classes2 }, /* @__PURE__ */ wp.element.createElement("ul", { className: "contents" }, states.doLoop && "[loop_template " + (loopParam || "") + "]", rtn, states.doLoop && "[/loop_template]"), /* @__PURE__ */ wp.element.createElement("div", { className: controlClasses, "data-config": config }, states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { class: "arrow prev" }, " "), states.hasImage && states.hasThumbnail && /* @__PURE__ */ wp.element.createElement("ul", { className: "thumbnail" }, thumbs), states.hasDots && /* @__PURE__ */ wp.element.createElement("ul", { className: "dots" }, /* @__PURE__ */ wp.element.createElement("li", { className: "dot" }, " ")), states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { class: "arrow next" }, " ")));
         },
         migrate(attributes) {
           var states = CP.wordsToFlags(classes);

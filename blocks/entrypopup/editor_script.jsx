@@ -19,7 +19,7 @@
 		return (
 			<>
 				<div className={"collapsible_content "+(open?'open':'close')}>
-					<div class="label" onClick={()=>setOpen(!open)}>🐾 EntryPopup</div>
+					<div className="label" onClick={()=>setOpen(!open)}>🐾 EntryPopup</div>
 					<div className={attributes.classes}>
 						<div className="body">
 							<div className="contents">
@@ -27,7 +27,7 @@
 							</div>
 							<div className="close" onClick={()=>setOpen(false)}></div>
 						</div>
-						<div class="bg"></div>
+						<div className="bg"></div>
 					</div>
 				</div>
 				<InspectorControls>

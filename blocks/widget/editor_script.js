@@ -17,7 +17,7 @@
           return conf;
         });
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { class: "widgetded_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, func), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/widget", attributes })), ",", /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "widgetded_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, func), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/widget", attributes })), ",", /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" }, /* @__PURE__ */ wp.element.createElement(
         TreeSelect,
         {
           label: "path",

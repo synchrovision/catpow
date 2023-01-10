@@ -106,9 +106,9 @@ wp.blocks.registerBlockType('catpow/faq',{
 					<header>
 						{states.hasCounter &&
 							<div className='counter'>
-								{countPrefix && <span class="prefix">{countPrefix}</span>}
+								{countPrefix && <span className="prefix">{countPrefix}</span>}
 								<span className="number">{index+1}</span>
-								{countSuffix && <span class="suffix">{countSuffix}</span>}
+								{countSuffix && <span className="suffix">{countSuffix}</span>}
 							</div>
 						}
 						<div className='text'>
@@ -128,7 +128,7 @@ wp.blocks.registerBlockType('catpow/faq',{
 							}
 						</div>
 					</header>
-					<div class="contents">
+					<div className="contents">
 						{states.hasSubTitle &&
 							<h4>
 								<RichText
@@ -210,9 +210,9 @@ wp.blocks.registerBlockType('catpow/faq',{
 					<header>
 						{states.hasCounter &&
 							<div className='counter'>
-								{countPrefix && <span class="prefix">{countPrefix}</span>}
+								{countPrefix && <span className="prefix">{countPrefix}</span>}
 								<span className="number">{index+1}</span>
-								{countSuffix && <span class="suffix">{countSuffix}</span>}
+								{countSuffix && <span className="suffix">{countSuffix}</span>}
 							</div>
 						}
 						<div className='text'>
@@ -220,7 +220,7 @@ wp.blocks.registerBlockType('catpow/faq',{
 							{states.hasTitle && states.hasTitleCaption && <p><RichText.Content value={item.titleCaption}/></p>}
 						</div>
 					</header>
-					<div class="contents">
+					<div className="contents">
 						{states.hasSubTitle && <h4><RichText.Content value={item.subTitle}/></h4>}
 						<p><RichText.Content value={item.text}/></p>
 					</div>

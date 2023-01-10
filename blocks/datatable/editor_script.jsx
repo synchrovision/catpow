@@ -141,7 +141,7 @@
 				<>
 					{(AltMode && doLoop)?(
 						<div className="alt_content">
-							<div class="label">
+							<div className="label">
 								<Icon icon="welcome-comments"/>
 							</div>
 							<InnerBlocks/>
@@ -173,7 +173,7 @@
 											var children=[<RichText onChange={(text)=>{cell.text=text;saveItems();}} value={cell.text}/>];
 											if(isSelected && (columnIndex == row.cells.length-1)){
 												children.push(
-													<div class="itemControl rowControl">
+													<div className="itemControl rowControl">
 														<div className='btn up' onClick={()=>downRow(index)}></div>
 														<div className='btn delete' onClick={()=>deleteRow(index)}></div>
 														<div className='btn clone' onClick={()=>addRow(index)}></div>
@@ -183,7 +183,7 @@
 											}
 											if(isSelected && (index == rows.length-1)){
 												children.push(
-													<div class="itemControl columnControl">
+													<div className="itemControl columnControl">
 														<div className='btn left' onClick={()=>downColumn(columnIndex)}></div>
 														<div className='btn delete' onClick={()=>deleteColumn(columnIndex)}></div>
 														<div className='btn clone' onClick={()=>addColumn(columnIndex)}></div>

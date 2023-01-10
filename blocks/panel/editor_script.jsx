@@ -165,7 +165,7 @@ wp.blocks.registerBlockType('catpow/panel',{
 							/>
 						</div>
 					}
-					<div class="text">
+					<div className="text">
 						{itemStates.hasIcon &&
 							<div className='icon'>
 								<CP.SelectResponsiveImage
@@ -222,7 +222,7 @@ wp.blocks.registerBlockType('catpow/panel',{
 						]}
 					/>
 				</BlockControls>
-				<ul class={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>
+				<ul className={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>
 				<InspectorControls>
 					<CP.SelectClassPanel
 						title='クラス'
@@ -273,10 +273,10 @@ wp.blocks.registerBlockType('catpow/panel',{
 
 
 			rtn.push(
-				<li class={item.classes} key={index}>
+				<li className={item.classes} key={index}>
 					{itemStates.hasImage && <div className='image'><img src={item.src} alt={item.alt}/></div>}
-					<div class="text">
-						{itemStates.hasIcon && <div class="icon"><img src={item.iconSrc} alt={item.iconAlt}/></div>}
+					<div className="text">
+						{itemStates.hasIcon && <div className="icon"><img src={item.iconSrc} alt={item.iconAlt}/></div>}
 						{itemStates.hasTitle && <h3><RichText.Content value={item.title}/></h3>}
 						{itemStates.hasText && <p><RichText.Content value={item.text}/></p>}
 						{itemStates.hasLink &&

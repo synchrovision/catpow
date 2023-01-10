@@ -54,7 +54,7 @@
 				}
 				{(configData.template && EditMode)?(
 					<div className="alt_content loopContents">
-						<div class="label">
+						<div className="label">
 							<Icon icon="edit"/>
 						</div>
 						<InnerBlocks
@@ -64,8 +64,8 @@
 						/>
 					</div>
 				):(
-					<div class="embedded_content">
-						<div class="label">{content_path}</div>
+					<div className="embedded_content">
+						<div className="label">{content_path}</div>
 						<ServerSideRender block='catpow/loop' attributes={attributes}/>
 					</div>
 				)}

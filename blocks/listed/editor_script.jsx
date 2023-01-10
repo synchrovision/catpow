@@ -159,7 +159,7 @@ wp.blocks.registerBlockType('catpow/listed',{
 					key={index}
 				>
 					{states.hasImage && 
-						<div class="image">
+						<div className="image">
 							<CP.SelectResponsiveImage
 								attr={attributes}
 								set={setAttributes}
@@ -174,13 +174,13 @@ wp.blocks.registerBlockType('catpow/listed',{
 						<header className="header">
 							{states.hasCounter &&
 								<div className='counter'>
-									{countPrefix && <span class="prefix">{countPrefix}</span>}
+									{countPrefix && <span className="prefix">{countPrefix}</span>}
 									<span className="number">{index+1}</span>
-									{countSuffix && <span class="suffix">{countSuffix}</span>}
+									{countSuffix && <span className="suffix">{countSuffix}</span>}
 								</div>
 							}
 							{states.hasHeaderImage && 
-								<div class="image">
+								<div className="image">
 									<CP.SelectResponsiveImage
 										attr={attributes}
 										set={setAttributes}
@@ -212,16 +212,16 @@ wp.blocks.registerBlockType('catpow/listed',{
 						</header>
 					}
 					{(states.hasSubImage || states.hasSubTitle || states.hasText) && 
-						<div class="contents">
+						<div className="contents">
 							{states.hasSubCounter &&
 								<div className='subcounter'>
-									{subCountPrefix && <span class="prefix">{subCountPrefix}</span>}
+									{subCountPrefix && <span className="prefix">{subCountPrefix}</span>}
 									<span className="number">{index+1}</span>
-									{subCountSuffix && <span class="suffix">{subCountSuffix}</span>}
+									{subCountSuffix && <span className="suffix">{subCountSuffix}</span>}
 								</div>
 							}
 							{states.hasSubImage && 
-								<div class="image">
+								<div className="image">
 									<CP.SelectResponsiveImage
 										attr={attributes}
 										set={setAttributes}
@@ -332,7 +332,7 @@ wp.blocks.registerBlockType('catpow/listed',{
 				</InspectorControls>
 				{EditMode?(
 					<div className="alt_content">
-						<div class="label">
+						<div className="label">
 							<Icon icon="edit"/>
 						</div>
 						<CP.EditItemsTable
@@ -360,7 +360,7 @@ wp.blocks.registerBlockType('catpow/listed',{
 					<>
 						{(AltMode && doLoop)?(
 							<div className="alt_content">
-								<div class="label">
+								<div className="label">
 									<Icon icon="welcome-comments"/>
 								</div>
 								<InnerBlocks/>
@@ -397,9 +397,9 @@ wp.blocks.registerBlockType('catpow/listed',{
 						<header className="header">
 							{states.hasCounter &&
 								<div className='counter'>
-									{countPrefix && <span class="prefix">{countPrefix}</span>}
+									{countPrefix && <span className="prefix">{countPrefix}</span>}
 									<span className="number">{index+1}</span>
-									{countSuffix && <span class="suffix">{countSuffix}</span>}
+									{countSuffix && <span className="suffix">{countSuffix}</span>}
 								</div>
 							}
 							{states.hasHeaderImage &&
@@ -419,12 +419,12 @@ wp.blocks.registerBlockType('catpow/listed',{
 						</header>
 					}
 					{(states.hasSubImage || states.hasSubTitle || states.hasText) && 
-						<div class="contents">
+						<div className="contents">
 							{states.hasSubCounter &&
 								<div className='subcounter'>
-									{subCountPrefix && <span class="prefix">{subCountPrefix}</span>}
+									{subCountPrefix && <span className="prefix">{subCountPrefix}</span>}
 									<span className="number">{index+1}</span>
-									{subCountSuffix && <span class="suffix">{subCountSuffix}</span>}
+									{subCountSuffix && <span className="suffix">{subCountSuffix}</span>}
 								</div>
 							}
 							{states.hasSubImage &&
@@ -498,9 +498,9 @@ wp.blocks.registerBlockType('catpow/listed',{
 								<header>
 									{states.hasCounter &&
 										<div className='counter'>
-											{countPrefix && <span class="prefix">{countPrefix}</span>}
+											{countPrefix && <span className="prefix">{countPrefix}</span>}
 											<span className="number">{index+1}</span>
-											{countSuffix && <span class="suffix">{countSuffix}</span>}
+											{countSuffix && <span className="suffix">{countSuffix}</span>}
 										</div>
 									}
 									{states.hasHeaderImage &&
@@ -520,12 +520,12 @@ wp.blocks.registerBlockType('catpow/listed',{
 								</header>
 							}
 							{(states.hasSubImage || states.hasSubTitle || states.hasText) && 
-								<div class="contents">
+								<div className="contents">
 									{states.hasSubCounter &&
 										<div className='subcounter'>
-											{subCountPrefix && <span class="prefix">{subCountPrefix}</span>}
+											{subCountPrefix && <span className="prefix">{subCountPrefix}</span>}
 											<span className="number">{index+1}</span>
-											{subCountSuffix && <span class="suffix">{subCountSuffix}</span>}
+											{subCountSuffix && <span className="suffix">{subCountSuffix}</span>}
 										</div>
 									}
 									{states.hasSubImage &&

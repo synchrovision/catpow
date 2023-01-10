@@ -47,17 +47,17 @@
     edit({ attributes, className, setAttributes }) {
       const { InnerBlocks: InnerBlocks2 } = wp.blockEditor;
       return [
-        /* @__PURE__ */ wp.element.createElement("div", { className: "column column_side" }, /* @__PURE__ */ wp.element.createElement("div", { class: "column_side_container" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2, { template: [["catpow/articlenav"]], templateLock: false })), /* @__PURE__ */ wp.element.createElement("div", { class: "sidebar_button" }))
+        /* @__PURE__ */ wp.element.createElement("div", { className: "column column_side" }, /* @__PURE__ */ wp.element.createElement("div", { className: "column_side_container" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2, { template: [["catpow/articlenav"]], templateLock: false })), /* @__PURE__ */ wp.element.createElement("div", { className: "sidebar_button" }))
       ];
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks: InnerBlocks2 } = wp.blockEditor;
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "column column_side" }, /* @__PURE__ */ wp.element.createElement("div", { class: "column_side_container" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2.Content, null)), /* @__PURE__ */ wp.element.createElement("div", { class: "sidebar_button" }));
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "column column_side" }, /* @__PURE__ */ wp.element.createElement("div", { className: "column_side_container" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2.Content, null)), /* @__PURE__ */ wp.element.createElement("div", { className: "sidebar_button" }));
     },
     deprecated: [
       {
         save({ attributes, className, setAttributes }) {
-          return /* @__PURE__ */ wp.element.createElement("div", { className: "column column_side" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null), /* @__PURE__ */ wp.element.createElement("div", { class: "sidebar_button" }));
+          return /* @__PURE__ */ wp.element.createElement("div", { className: "column column_side" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null), /* @__PURE__ */ wp.element.createElement("div", { className: "sidebar_button" }));
         }
       }
     ]
@@ -94,7 +94,7 @@
           return block.attributes.title;
         });
       };
-      return /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("ul", { class: "article_nav" }, getSectionTitles(mainContents).map((title) => {
+      return /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("ul", { className: "article_nav" }, getSectionTitles(mainContents).map((title) => {
         return /* @__PURE__ */ wp.element.createElement("li", null, /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: title })));
       })));
     },

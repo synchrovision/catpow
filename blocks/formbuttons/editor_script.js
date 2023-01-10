@@ -55,7 +55,7 @@
               isSelected,
               key: index
             },
-            /* @__PURE__ */ wp.element.createElement("div", { class: "button" }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), /* @__PURE__ */ wp.element.createElement(
+            /* @__PURE__ */ wp.element.createElement("div", { className: "button" }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), /* @__PURE__ */ wp.element.createElement(
               "span",
               {
                 onInput: (e) => {
@@ -68,7 +68,7 @@
             ), /* @__PURE__ */ wp.element.createElement(
               "span",
               {
-                class: "action",
+                className: "action",
                 onInput: (e) => {
                   item.action = e.target.innerText;
                 },

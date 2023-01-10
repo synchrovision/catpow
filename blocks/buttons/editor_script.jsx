@@ -73,7 +73,7 @@
 					isSelected={isSelected}
 					key={index}
 				>
-					<div class="button">
+					<div className="button">
 						{itemStates.hasIcon && <CP.OutputIcon item={item}/>}
 						<span
 							onInput={(e)=>{
@@ -83,7 +83,7 @@
 							contentEditable="true"
 						>{item.text}</span>
 						{isSelected &&
-							<span class="url"
+							<span className="url"
 								onInput={(e)=>{
 									item.url=e.target.innerText;
 								}}
@@ -144,7 +144,7 @@
 				<>
 					{EditMode?(
 						<div className="alt_content">
-							<div class="label">
+							<div className="label">
 								<Icon icon="edit"/>
 							</div>
 							<CP.EditItemsTable
@@ -161,7 +161,7 @@
 						<>
 							{(AltMode && doLoop)?(
 								<div className="alt_content">
-									<div class="label">
+									<div className="label">
 										<Icon icon="welcome-comments"/>
 									</div>
 									<InnerBlocks/>

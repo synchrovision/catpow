@@ -260,8 +260,8 @@
           onMouseUp,
           onDoubleClick
         },
-        device && /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })),
-        /* @__PURE__ */ wp.element.createElement("div", { class: "base" }, states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(
+        device && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })),
+        /* @__PURE__ */ wp.element.createElement("div", { className: "base" }, states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(
           CP.ResponsiveImage,
           {
             attr: attributes,
@@ -404,7 +404,7 @@
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys, getCssDatas, renderCssDatas } = CP.config.graphics;
       const cssDatas = getCssDatas(attributes, states);
-      return /* @__PURE__ */ wp.element.createElement("div", { id, className: classes, "data-heights": heights }, /* @__PURE__ */ wp.element.createElement("div", { class: "base" }, states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("div", { id, className: classes, "data-heights": heights }, /* @__PURE__ */ wp.element.createElement("div", { className: "base" }, states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(
         CP.ResponsiveImage,
         {
           attr: attributes,

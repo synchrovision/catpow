@@ -687,7 +687,7 @@
 		});
 
 		return (
-			<ul class="selectColor">{items}</ul>
+			<ul className="selectColor">{items}</ul>
 		);
 	},
 	SelectColors:(props)=>{
@@ -1195,14 +1195,14 @@
 		
 		return (
 			<table className="DataInputTable">
-				<thead class="DataInputTable__head">
-					<tr class="DataInputTable__head__row">
+				<thead className="DataInputTable__head">
+					<tr className="DataInputTable__head__row">
 					{Object.keys(cols).map((c)=>(
 						<th className="DataInputTable__head__row__cell" key={c}>{cols[c].label || c}</th>
 					))}
 					</tr>
 				</thead>
-				<tbody class="DataInputTable__body">
+				<tbody className="DataInputTable__body">
 				{(value || defaultRowValues).map((rowValue,index)=>(
 					<Row
 						cols={colsWithoutLabel}
@@ -2056,7 +2056,7 @@
 
 		return (
 			<BaseControl label={label} help={help}>
-				<ul class="selectPattern">{items}</ul>
+				<ul className="selectPattern">{items}</ul>
 			</BaseControl>
 		);
 	},

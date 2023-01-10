@@ -47,8 +47,8 @@ wp.blocks.registerBlockType('catpow/motiongraphic',{
 
 		return (
 			<>
-				<div class="embedded_content">
-					<div class="label">{component}</div>
+				<div className="embedded_content">
+					<div className="label">{component}</div>
 					<div className={classes}>
 						<div className="wp-block-catpow-motiongraphic__background">
 							{SelectedComponent?(

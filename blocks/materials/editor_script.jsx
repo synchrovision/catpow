@@ -85,7 +85,7 @@
 								index={subIndex}
 								isSelected={isSelected && currentItemIndex==index && item.currentItemIndex==subIndex}
 							>
-								<div class="text">
+								<div className="text">
 									<div className="title">
 										<RichText
 											onChange={(title)=>{subItem.title=title;save();}}
@@ -161,7 +161,7 @@
 				<>
 					{EditMode?(
 						<div className="alt_content">
-							<div class="label">
+							<div className="label">
 								<Icon icon="edit"/>
 							</div>
 							<CP.EditItemsTable
@@ -182,7 +182,7 @@
 						<>
 							{(AltMode && doLoop)?(
 								<div className="alt_content">
-									<div class="label">
+									<div className="label">
 										<Icon icon="welcome-comments"/>
 									</div>
 									<InnerBlocks/>
@@ -218,7 +218,7 @@
 						const subItemStates=CP.wordsToFlags(subItem.classes);
 						return (
 							<li className={subItem.classes}>
-								<div class="text">
+								<div className="text">
 									<div className="title">
 										<RichText.Content value={subItem.title} />
 									</div>

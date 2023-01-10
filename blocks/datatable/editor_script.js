@@ -139,7 +139,7 @@
           attr: attributes,
           modes: ["AltMode"]
         }
-      ), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("table", { className: classes2 }, states.hasHeaderRow && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, rows[0].cells.map((cell, index) => {
+      ), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("table", { className: classes2 }, states.hasHeaderRow && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, rows[0].cells.map((cell, index) => {
         if (index === 0) {
           if (states.hasHeaderColumn && cell.text.length === 0) {
             cell.classes = "spacer";
@@ -162,12 +162,12 @@
           }, value: cell.text })];
           if (isSelected && columnIndex == row.cells.length - 1) {
             children.push(
-              /* @__PURE__ */ wp.element.createElement("div", { class: "itemControl rowControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn up", onClick: () => downRow(index) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteRow(index) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addRow(index) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn down", onClick: () => upRow(index) }))
+              /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl rowControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn up", onClick: () => downRow(index) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteRow(index) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addRow(index) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn down", onClick: () => upRow(index) }))
             );
           }
           if (isSelected && index == rows.length - 1) {
             children.push(
-              /* @__PURE__ */ wp.element.createElement("div", { class: "itemControl columnControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn left", onClick: () => downColumn(columnIndex) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteColumn(columnIndex) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addColumn(columnIndex) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn right", onClick: () => upColumn(columnIndex) }))
+              /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl columnControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn left", onClick: () => downColumn(columnIndex) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteColumn(columnIndex) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addColumn(columnIndex) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn right", onClick: () => upColumn(columnIndex) }))
             );
           }
           return wp.element.createElement(

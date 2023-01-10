@@ -56,8 +56,8 @@
 
 		return (
 			<div className={classes} data-current-index={currentIndex}>
-				<ul class="tab">{rtn}</ul>
-				<div class="contents">
+				<ul className="tab">{rtn}</ul>
+				<div className="contents">
 					<InnerBlocks
 						template={template}
 						templateLock='all'
@@ -80,8 +80,8 @@
 
 		return (
 			<div className={classes}>
-				<ul class="tab">{rtn}</ul>
-				<div class="contents">
+				<ul className="tab">{rtn}</ul>
+				<div className="contents">
 					<InnerBlocks.Content/>
 				</div>
 			</div>

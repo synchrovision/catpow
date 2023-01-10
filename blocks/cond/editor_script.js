@@ -21,7 +21,7 @@
       const { InnerBlocks, InspectorControls } = wp.blockEditor;
       const { PanelBody, TextareaControl } = wp.components;
       return [
-        /* @__PURE__ */ wp.element.createElement("div", { className: "embedded_content" }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, "\u8868\u793A\u6761\u4EF6\uFF1A", attributes.schedule, attributes.is_user_logged_in != 0 && "\u30ED\u30B0\u30A4\u30F3" + (attributes.is_user_logged_in == 1 ? "\u3057\u3066\u3044\u308B" : "\u3057\u3066\u3044\u306A\u3044"), attributes.input_value, attributes.content_value), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)),
+        /* @__PURE__ */ wp.element.createElement("div", { className: "embedded_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, "\u8868\u793A\u6761\u4EF6\uFF1A", attributes.schedule, attributes.is_user_logged_in != 0 && "\u30ED\u30B0\u30A4\u30F3" + (attributes.is_user_logged_in == 1 ? "\u3057\u3066\u3044\u308B" : "\u3057\u3066\u3044\u306A\u3044"), attributes.input_value, attributes.content_value), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)),
         /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u8868\u793A\u6761\u4EF6", icon: "admin-generic" }, /* @__PURE__ */ wp.element.createElement(
           TextareaControl,
           {
