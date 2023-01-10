@@ -265,6 +265,16 @@ Catpow.util={
 		a.remove();
 		return true;
 	},
+	/*csv*/
+	parseCSV:(csv)=>{
+		let tmp=[];
+		csv=csv.replace(/("[^"]*")+/g,(match)=>{
+            tmp.push(match.slice(1,-1).replace(/""/g,'"'));return '[TMP]';
+        });
+		return csv.split("\r\n").map((row)=>{
+            return row.split(',').map((val)=>val==='[TMP]'?tmp.shift():val)
+        });
+	},
 	/*color*/
 	hslToHex:function(hsl){
 		var l=Math.min(100,hsl.l)/100;
