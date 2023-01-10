@@ -1,16 +1,16 @@
-/* exported cp_form */
+/* exported cpform */
 /* global cp wp console Promise*/
 
-const cp_form=(form)=>{
-	if(form.classList.contains('cp_form')){form.addEventListener('submit',(e)=>e.preventDefault());}
+const cpform=(form)=>{
+	if(form.classList.contains('cpform')){form.addEventListener('submit',(e)=>e.preventDefault());}
 	form.addEventListener('click',(e)=>{
 		var el;
-		if(el=e.target.closest('[data-role^="cp_form_submit_"]')){
+		if(el=e.target.closest('[data-role^="cpform_submit_"]')){
 			var target;
 			switch(el.dataset.role){
-				case "cp_form_submit_form":target=form;break;
-				case "cp_form_submit_section":target=el.closest('.cp_form_section');break;
-				case "cp_form_submit_action":target=el;break;
+				case "cpform_submit_form":target=form;break;
+				case "cpform_submit_section":target=el.closest('.cpform_section');break;
+				case "cpform_submit_action":target=el;break;
 			}
 
 			if(!el.dataset.ignoreMessage){
@@ -20,12 +20,12 @@ const cp_form=(form)=>{
 					return;
 				}
 			}
-			form.querySelectorAll('.cp_form_message .message').forEach((el)=>el.remove());
+			form.querySelectorAll('.cpform_message .message').forEach((el)=>el.remove());
 			const param=el.dataset.param?JSON.parse(el.dataset.param):false;
 			submit(target,el.dataset.action,el.dataset.callback,param);
 		}
-		else if(el=e.target.closest('[data-role="cp_form_action_submit_group"] [data-param-value]')){
-			const group=el.closest('[data-role="cp_form_action_submit_group"]');
+		else if(el=e.target.closest('[data-role="cpform_action_submit_group"] [data-param-value]')){
+			const group=el.closest('[data-role="cpform_action_submit_group"]');
 			const param={[group.dataset.paramKey]:el.dataset.paramValue};
 			submit(el,group.dataset.action,group.dataset.callback,param);
 		}
@@ -92,12 +92,12 @@ const cp_form=(form)=>{
 			return new FormData(form);
 		}
 		else{
-			const sec=target.closest('.cp_form_section')
+			const sec=target.closest('.cpform_section')
 			const fd=new FormData();
-			fd.append('action','cp_form');
-			append_inputs_to_fd(fd,form.querySelectorAll('[name="_cp_form_nonce"],[name="_wp_http_referer"],[name="cp_form_id"]'));
+			fd.append('action','cpform');
+			append_inputs_to_fd(fd,form.querySelectorAll('[name="_cpform_nonce"],[name="_wp_http_referer"],[name="cpform_id"]'));
 			if(sec){
-				fd.append('cp_form_section_id',sec.dataset.sectionId);
+				fd.append('cpform_section_id',sec.dataset.sectionId);
 			}
 			append_inputs_to_fd(fd,target.querySelectorAll('input,select,textarea'));
 			if(target.dataset.watch){
@@ -127,8 +127,8 @@ const cp_form=(form)=>{
 		return new Promise((resolve,reject)=>{
 			try{
 				const fd=get_fd(target);
-				fd.append('action','cp_form');
-				if(action){fd.append('cp_form_action',action);}
+				fd.append('action','cpform');
+				if(action){fd.append('cpform_action',action);}
 				if(param){
 					Object.keys(param).forEach((key)=>fd.append(key,param[key]));
 				}
@@ -169,9 +169,9 @@ const cp_form=(form)=>{
 							});
 						}
 					}
-					form.dispatchEvent(new CustomEvent('before_cp_form_callback',res));
+					form.dispatchEvent(new CustomEvent('before_cpform_callback',res));
 					if(res.nonce){
-						const nonceInput=form.querySelector('[name="_cp_form_nonce"]');
+						const nonceInput=form.querySelector('[name="_cpform_nonce"]');
 						window.console.log('reset nonce : from '+nonceInput.value+' to '+res.nonce);
 						nonceInput.value=res.nonce;
 					}
@@ -180,7 +180,7 @@ const cp_form=(form)=>{
 						cbs[cbn](target,res);
 						if(cbn){form.dispatchEvent(new CustomEvent('after_'+cbn));}
 					});
-					form.dispatchEvent(new CustomEvent('after_cp_form_callback',res));
+					form.dispatchEvent(new CustomEvent('after_cpform_callback',res));
 					form.dispatchEvent(new CustomEvent('update'));
 					resolve();
 				}).catch(function(res){
@@ -342,9 +342,9 @@ const cp_form=(form)=>{
 	};
 	const callbacks={
 		message:function(target,data){
-			const sec=(target===form && target.dataset.role==="cp_form_section")?target:target.closest('form,[data-role="cp_form_section"]');
+			const sec=(target===form && target.dataset.role==="cpform_section")?target:target.closest('form,[data-role="cpform_section"]');
 			const id=(sec===form)?form.id:sec.dataset.sectionId;
-			var msgBox=form.querySelector('[data-role="cp_form_message"][data-form-id="'+id+'"]');
+			var msgBox=form.querySelector('[data-role="cpform_message"][data-form-id="'+id+'"]');
 			if(!msgBox.length){
 				window.console.error('Messge Box for the form is not exists');
 				window.console.error(data);
@@ -393,7 +393,7 @@ const cp_form=(form)=>{
 		replace:function(target,data){
 			var tgt,sel;
 			if(data.target){
-				sel='[data-role="cp_form_'+data.target+'"]';
+				sel='[data-role="cpform_'+data.target+'"]';
 				if(data.target==='section' && data.section_id){
 					sel+='[data-section-id="'+data.section_id+'"]';
 				}
@@ -405,15 +405,15 @@ const cp_form=(form)=>{
 							tgt=target.closest(sel);
 							break;
 						default:
-							tgt=target.closest('form,[data-role="cp_form_section"]').querySelector(sel);
+							tgt=target.closest('form,[data-role="cpform_section"]').querySelector(sel);
 					}
 
 				}
 			}
 			else{
 				tgt=target.matches('form')?
-					target.querySelector('[data-role="cp_form_content"]'):
-					target.closest('[data-role="cp_form_content"],[data-role="cp_form_section"]');
+					target.querySelector('[data-role="cpform_content"]'):
+					target.closest('[data-role="cpform_content"],[data-role="cpform_section"]');
 			}
 			const newItem=htmlStringToNode(data.html);
 
@@ -444,8 +444,8 @@ const cp_form=(form)=>{
 		},
 		remove:function(target,data){
 			const tgt=data.section_id?
-				form.querySelector('[data-role="cp_form_section"][data-section-id="'+data.section_id+'"]'):
-				target.closest('form,[data-role="cp_form_section"]');
+				form.querySelector('[data-role="cpform_section"][data-section-id="'+data.section_id+'"]'):
+				target.closest('form,[data-role="cpform_section"]');
 			if(data.delay){delayRemove(tgt);}
 			else{tgt.remove();}
 			return true;
@@ -588,7 +588,7 @@ const cp_form=(form)=>{
 				else{prm=data.timer;}
 				if(prm.interval===undefined){prm.interval=500;}
 				var tick=function(){
-					fetch(cp.plugins_url+'/catpow/callee/cp_form_tick.php',{
+					fetch(cp.plugins_url+'/catpow/callee/cpform_tick.php',{
 						method:'POST',
 						body:fd
 					}).then((res)=>res.json()).then((res)=>{
@@ -616,7 +616,7 @@ const cp_form=(form)=>{
 						window.console.error(ts);
 						window.console.error(et);
 						if(parseInt(e.status)===200){
-							fetch(cp.plugins_url+'/catpow/callee/cp_form_tick.php',{
+							fetch(cp.plugins_url+'/catpow/callee/cpform_tick.php',{
 								method:'post',
 								body:fd
 							}).then((res)=>{
@@ -647,8 +647,8 @@ const cp_form=(form)=>{
 	if(document.readyState==='loading'){
 		await new Promise((resolve)=>{document.addEventListener('DOMContentLoaded',resolve);});
 	}
-	document.querySelectorAll('form [name="cp_form_id"]').forEach((el)=>{
+	document.querySelectorAll('form [name="cpform_id"]').forEach((el)=>{
 		const form=el.closest('form');
-		if(form){cp_form(form);}
+		if(form){cpform(form);}
 	});
 })();

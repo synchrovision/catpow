@@ -987,7 +987,7 @@ jQuery.catpow.pageTopOffset=0;
 		//チェックされたradioとcheckboxの対応するlabelにactiveクラスを付与
 		//data-condで設定された条件を満たさないradio,checkboxにdisabled属性を付与
 		//及び対応するlabelにdisabledクラスを付与	
-		cp_form_conditioner:function(){
+		cpform_conditioner:function(){
 			var $form=$(this);
 			$form.on('change','input[type="checkbox"]',function(){
 				if($(this).is(':checked')){

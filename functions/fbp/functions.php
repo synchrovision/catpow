@@ -39,7 +39,7 @@ add_action('cp_setup',function(){
 							});
 						});
 					});
-					document.querySelectorAll('.cp_form').forEach(function(node){o.observe(node,{childList:true,subtree:true});});
+					document.querySelectorAll('.cpform').forEach(function(node){o.observe(node,{childList:true,subtree:true});});
 				});
 			</script>
 			<noscript><img height="1" width="1" style="display:none"

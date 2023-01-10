@@ -27,7 +27,7 @@
 						onClick={(e)=>{
 							if(!canCheckout){return false;}
 							console.log('onClickCheckoutButton');
-							cp_form_submit(component.$ref,component.props.action,function($item,res){
+							cpform_submit(component.$ref,component.props.action,function($item,res){
 								console.log('onCheckout');
 								if(res.error){
 									component.setState({canCheckout:false,errorMessage:res.message});
@@ -81,7 +81,7 @@
 			onAddressSelect: function (addressbook) {
 				// お届け先の住所が変更された時に呼び出されます、ここで手数料などの再計算ができます。
 				console.log('onAddressSelect');
-				cp_form_submit(component.$ref,component.props.action,function($item,res){
+				cpform_submit(component.$ref,component.props.action,function($item,res){
 					console.log(res);
 					//document.getElementById('amazonPayError').innerHTML=res.html;
 				},{task:'onAddressSelect',orderReferenceId:component.orderReferenceId});
@@ -153,7 +153,7 @@
 				if(!component.orderReferenceId){
 					component.orderReferenceId = orderReference.getAmazonOrderReferenceId();
 				}
-				cp_form_submit(component.$ref,component.props.action,function($item,res){
+				cpform_submit(component.$ref,component.props.action,function($item,res){
 					if(res.error){
 						component.setState({canCheckout:false,errorMessage:res.message});
 						return false;
@@ -168,7 +168,7 @@
 			onPaymentSelect: function() {
 				console.log('onPaymentSelect');
 				console.log(arguments);
-				cp_form_submit(component.$ref,component.props.action,function($item,res){
+				cpform_submit(component.$ref,component.props.action,function($item,res){
 					if(res.error){
 						component.setState({canCheckout:false,errorMessage:res.message});
 						return false;

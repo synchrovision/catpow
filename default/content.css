@@ -212,7 +212,7 @@ body .site_main .page_main .page_content section.search, body.mce-content-body s
   background-color: rgba(248, 248, 248, 0.5);
 }
 body .site_main .page_main .page_content section.search::before, body.mce-content-body section.search::before, .gutenberg .editor-block-list__layout section.search::before, #profile-page section.search::before, #cpcf_custom_box .inside section.search::before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   display: block;
@@ -249,7 +249,7 @@ body .site_main .page_main .page_content section.search > .contents > header h2,
   color: #36c;
 }
 body .site_main .page_main .page_content section.search > .contents > header h2::before, body.mce-content-body section.search > .contents > header h2::before, .gutenberg .editor-block-list__layout section.search > .contents > header h2::before, #profile-page section.search > .contents > header h2::before, #cpcf_custom_box .inside section.search > .contents > header h2::before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   display: inline-block;
@@ -307,10 +307,10 @@ body .site_main .page_main .page_content div.cp_caution, body.mce-content-body d
   font-size: 0.9375rem;
   line-height: 0.9375rem;
 }
-body .site_main .page_main .page_content div.cp_form_message .message, body .site_main .page_main .page_content div.cp_form_section_message .message, body.mce-content-body div.cp_form_message .message, body.mce-content-body div.cp_form_section_message .message, .gutenberg .editor-block-list__layout div.cp_form_message .message, .gutenberg .editor-block-list__layout div.cp_form_section_message .message, #profile-page div.cp_form_message .message, #profile-page div.cp_form_section_message .message, #cpcf_custom_box .inside div.cp_form_message .message, #cpcf_custom_box .inside div.cp_form_section_message .message {
+body .site_main .page_main .page_content div.cpform_message .message, body .site_main .page_main .page_content div.cpform_section_message .message, body.mce-content-body div.cpform_message .message, body.mce-content-body div.cpform_section_message .message, .gutenberg .editor-block-list__layout div.cpform_message .message, .gutenberg .editor-block-list__layout div.cpform_section_message .message, #profile-page div.cpform_message .message, #profile-page div.cpform_section_message .message, #cpcf_custom_box .inside div.cpform_message .message, #cpcf_custom_box .inside div.cpform_section_message .message {
   pointer-events: none;
 }
-body .site_main .page_main .page_content div.cp_form_message .message .text, body .site_main .page_main .page_content div.cp_form_section_message .message .text, body.mce-content-body div.cp_form_message .message .text, body.mce-content-body div.cp_form_section_message .message .text, .gutenberg .editor-block-list__layout div.cp_form_message .message .text, .gutenberg .editor-block-list__layout div.cp_form_section_message .message .text, #profile-page div.cp_form_message .message .text, #profile-page div.cp_form_section_message .message .text, #cpcf_custom_box .inside div.cp_form_message .message .text, #cpcf_custom_box .inside div.cp_form_section_message .message .text {
+body .site_main .page_main .page_content div.cpform_message .message .text, body .site_main .page_main .page_content div.cpform_section_message .message .text, body.mce-content-body div.cpform_message .message .text, body.mce-content-body div.cpform_section_message .message .text, .gutenberg .editor-block-list__layout div.cpform_message .message .text, .gutenberg .editor-block-list__layout div.cpform_section_message .message .text, #profile-page div.cpform_message .message .text, #profile-page div.cpform_section_message .message .text, #cpcf_custom_box .inside div.cpform_message .message .text, #cpcf_custom_box .inside div.cpform_section_message .message .text {
   padding: 0.1875rem 0.3125rem;
   width: 80%;
   margin: 0.625rem auto;
@@ -325,7 +325,7 @@ body .site_main .page_main .page_content div.cp_form_message .message .text, bod
   transition: 1s;
   opacity: 1;
 }
-body .site_main .page_main .page_content div.cp_form_message .message .text:after, body .site_main .page_main .page_content div.cp_form_section_message .message .text:after, body.mce-content-body div.cp_form_message .message .text:after, body.mce-content-body div.cp_form_section_message .message .text:after, .gutenberg .editor-block-list__layout div.cp_form_message .message .text:after, .gutenberg .editor-block-list__layout div.cp_form_section_message .message .text:after, #profile-page div.cp_form_message .message .text:after, #profile-page div.cp_form_section_message .message .text:after, #cpcf_custom_box .inside div.cp_form_message .message .text:after, #cpcf_custom_box .inside div.cp_form_section_message .message .text:after {
+body .site_main .page_main .page_content div.cpform_message .message .text:after, body .site_main .page_main .page_content div.cpform_section_message .message .text:after, body.mce-content-body div.cpform_message .message .text:after, body.mce-content-body div.cpform_section_message .message .text:after, .gutenberg .editor-block-list__layout div.cpform_message .message .text:after, .gutenberg .editor-block-list__layout div.cpform_section_message .message .text:after, #profile-page div.cpform_message .message .text:after, #profile-page div.cpform_section_message .message .text:after, #cpcf_custom_box .inside div.cpform_message .message .text:after, #cpcf_custom_box .inside div.cpform_section_message .message .text:after {
   content: "　";
   display: block;
   position: absolute;
@@ -338,7 +338,7 @@ body .site_main .page_main .page_content div.cp_form_message .message .text:afte
   border-width: 0.3125rem;
   border-top-color: #007cba;
 }
-body .site_main .page_main .page_content div.cp_form_message .message.has_target .text, body .site_main .page_main .page_content div.cp_form_section_message .message.has_target .text, body.mce-content-body div.cp_form_message .message.has_target .text, body.mce-content-body div.cp_form_section_message .message.has_target .text, .gutenberg .editor-block-list__layout div.cp_form_message .message.has_target .text, .gutenberg .editor-block-list__layout div.cp_form_section_message .message.has_target .text, #profile-page div.cp_form_message .message.has_target .text, #profile-page div.cp_form_section_message .message.has_target .text, #cpcf_custom_box .inside div.cp_form_message .message.has_target .text, #cpcf_custom_box .inside div.cp_form_section_message .message.has_target .text {
+body .site_main .page_main .page_content div.cpform_message .message.has_target .text, body .site_main .page_main .page_content div.cpform_section_message .message.has_target .text, body.mce-content-body div.cpform_message .message.has_target .text, body.mce-content-body div.cpform_section_message .message.has_target .text, .gutenberg .editor-block-list__layout div.cpform_message .message.has_target .text, .gutenberg .editor-block-list__layout div.cpform_section_message .message.has_target .text, #profile-page div.cpform_message .message.has_target .text, #profile-page div.cpform_section_message .message.has_target .text, #cpcf_custom_box .inside div.cpform_message .message.has_target .text, #cpcf_custom_box .inside div.cpform_section_message .message.has_target .text {
   position: absolute;
   left: 0rem;
   top: -1.5625rem;
@@ -393,12 +393,12 @@ body .site_main .page_main .page_content div.cp-meta-item.multiple-item > .cp-me
   color: #f8f8f8;
 }
 body .site_main .page_main .page_content div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-inc::after, body.mce-content-body div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-inc::after, .gutenberg .editor-block-list__layout div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-inc::after, #profile-page div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-inc::after, #cpcf_custom_box .inside div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-inc::after {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body .site_main .page_main .page_content div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-dec::after, body.mce-content-body div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-dec::after, .gutenberg .editor-block-list__layout div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-dec::after, #profile-page div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-dec::after, #cpcf_custom_box .inside div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-dec::after {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
@@ -432,12 +432,12 @@ body .site_main .page_main .page_content div.cp-meta-item.multiple-item > .cp-me
   background-color: white;
 }
 body .site_main .page_main .page_content div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-up::after, body.mce-content-body div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-up::after, .gutenberg .editor-block-list__layout div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-up::after, #profile-page div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-up::after, #cpcf_custom_box .inside div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-up::after {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body .site_main .page_main .page_content div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-down::after, body.mce-content-body div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-down::after, .gutenberg .editor-block-list__layout div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-down::after, #profile-page div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-down::after, #cpcf_custom_box .inside div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-down::after {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
@@ -540,22 +540,22 @@ body .site_main .page_main .page_content div.cp-meta-item label.checkbox input, 
   display: none;
 }
 body .site_main .page_main .page_content div.cp-meta-item label.checkbox:before, body.mce-content-body div.cp-meta-item label.checkbox:before, .gutenberg .editor-block-list__layout div.cp-meta-item label.checkbox:before, #profile-page div.cp-meta-item label.checkbox:before, #cpcf_custom_box .inside div.cp-meta-item label.checkbox:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body .site_main .page_main .page_content div.cp-meta-item label.checkbox.active:before, body.mce-content-body div.cp-meta-item label.checkbox.active:before, .gutenberg .editor-block-list__layout div.cp-meta-item label.checkbox.active:before, #profile-page div.cp-meta-item label.checkbox.active:before, #cpcf_custom_box .inside div.cp-meta-item label.checkbox.active:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body .site_main .page_main .page_content div.cp-meta-item label.radio:before, body.mce-content-body div.cp-meta-item label.radio:before, .gutenberg .editor-block-list__layout div.cp-meta-item label.radio:before, #profile-page div.cp-meta-item label.radio:before, #cpcf_custom_box .inside div.cp-meta-item label.radio:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body .site_main .page_main .page_content div.cp-meta-item label.radio.active:before, body.mce-content-body div.cp-meta-item label.radio.active:before, .gutenberg .editor-block-list__layout div.cp-meta-item label.radio.active:before, #profile-page div.cp-meta-item label.radio.active:before, #cpcf_custom_box .inside div.cp-meta-item label.radio.active:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
@@ -587,7 +587,7 @@ body .site_main .page_main .page_content div.products, body.mce-content-body div
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-body .site_main .page_main .page_content div.products > .cp_form_section, body.mce-content-body div.products > .cp_form_section, .gutenberg .editor-block-list__layout div.products > .cp_form_section, #profile-page div.products > .cp_form_section, #cpcf_custom_box .inside div.products > .cp_form_section {
+body .site_main .page_main .page_content div.products > .cpform_section, body.mce-content-body div.products > .cpform_section, .gutenberg .editor-block-list__layout div.products > .cpform_section, #profile-page div.products > .cpform_section, #cpcf_custom_box .inside div.products > .cpform_section {
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
@@ -601,7 +601,7 @@ body .site_main .page_main .page_content div.products > .cp_form_section, body.m
   border-color: rgba(68, 68, 68, 0.5);
   border-radius: 0.625rem;
 }
-body .site_main .page_main .page_content div.products > .cp_form_section h3, body.mce-content-body div.products > .cp_form_section h3, .gutenberg .editor-block-list__layout div.products > .cp_form_section h3, #profile-page div.products > .cp_form_section h3, #cpcf_custom_box .inside div.products > .cp_form_section h3 {
+body .site_main .page_main .page_content div.products > .cpform_section h3, body.mce-content-body div.products > .cpform_section h3, .gutenberg .editor-block-list__layout div.products > .cpform_section h3, #profile-page div.products > .cpform_section h3, #cpcf_custom_box .inside div.products > .cpform_section h3 {
   text-align: left;
   font-size: 1rem;
   line-height: 1.5em;
@@ -609,12 +609,12 @@ body .site_main .page_main .page_content div.products > .cp_form_section h3, bod
   font-weight: 700;
   color: #444;
 }
-body .site_main .page_main .page_content div.products > .cp_form_section p, body.mce-content-body div.products > .cp_form_section p, .gutenberg .editor-block-list__layout div.products > .cp_form_section p, #profile-page div.products > .cp_form_section p, #cpcf_custom_box .inside div.products > .cp_form_section p {
+body .site_main .page_main .page_content div.products > .cpform_section p, body.mce-content-body div.products > .cpform_section p, .gutenberg .editor-block-list__layout div.products > .cpform_section p, #profile-page div.products > .cpform_section p, #cpcf_custom_box .inside div.products > .cpform_section p {
   display: block;
   padding: 1.25rem 0.625rem;
   text-align: right;
 }
-body .site_main .page_main .page_content div.products > .cp_form_section p .price, body.mce-content-body div.products > .cp_form_section p .price, .gutenberg .editor-block-list__layout div.products > .cp_form_section p .price, #profile-page div.products > .cp_form_section p .price, #cpcf_custom_box .inside div.products > .cp_form_section p .price {
+body .site_main .page_main .page_content div.products > .cpform_section p .price, body.mce-content-body div.products > .cpform_section p .price, .gutenberg .editor-block-list__layout div.products > .cpform_section p .price, #profile-page div.products > .cpform_section p .price, #cpcf_custom_box .inside div.products > .cpform_section p .price {
   text-align: center;
   font-size: 1.25rem;
   line-height: 0.625rem;
@@ -622,11 +622,11 @@ body .site_main .page_main .page_content div.products > .cp_form_section p .pric
   font-weight: 700;
   color: #36c;
 }
-body .site_main .page_main .page_content div.products > .cp_form_section p .price .unit, body.mce-content-body div.products > .cp_form_section p .price .unit, .gutenberg .editor-block-list__layout div.products > .cp_form_section p .price .unit, #profile-page div.products > .cp_form_section p .price .unit, #cpcf_custom_box .inside div.products > .cp_form_section p .price .unit {
+body .site_main .page_main .page_content div.products > .cpform_section p .price .unit, body.mce-content-body div.products > .cpform_section p .price .unit, .gutenberg .editor-block-list__layout div.products > .cpform_section p .price .unit, #profile-page div.products > .cpform_section p .price .unit, #cpcf_custom_box .inside div.products > .cpform_section p .price .unit {
   font-size: 0.7em;
   color: #444;
 }
-body .site_main .page_main .page_content div.products > .cp_form_section p .price small, body.mce-content-body div.products > .cp_form_section p .price small, .gutenberg .editor-block-list__layout div.products > .cp_form_section p .price small, #profile-page div.products > .cp_form_section p .price small, #cpcf_custom_box .inside div.products > .cp_form_section p .price small {
+body .site_main .page_main .page_content div.products > .cpform_section p .price small, body.mce-content-body div.products > .cpform_section p .price small, .gutenberg .editor-block-list__layout div.products > .cpform_section p .price small, #profile-page div.products > .cpform_section p .price small, #cpcf_custom_box .inside div.products > .cpform_section p .price small {
   font-size: 0.5em;
   font-weight: 400;
   color: #444;
@@ -964,7 +964,7 @@ body .site_main .page_main .page_content table.manage > thead > tr > td textarea
 body .site_main .page_main .page_content table.manage > thead > tr > td span, body .site_main .page_main .page_content table.manage > tbody > tr > td span, body.mce-content-body table.manage > thead > tr > td span, body.mce-content-body table.manage > tbody > tr > td span, .gutenberg .editor-block-list__layout table.manage > thead > tr > td span, .gutenberg .editor-block-list__layout table.manage > tbody > tr > td span, #profile-page table.manage > thead > tr > td span, #profile-page table.manage > tbody > tr > td span, #cpcf_custom_box .inside table.manage > thead > tr > td span, #cpcf_custom_box .inside table.manage > tbody > tr > td span {
   display: inline-block;
 }
-body .site_main .page_main .page_content form.cp_form div.cp_form_nav, body.mce-content-body form.cp_form div.cp_form_nav, .gutenberg .editor-block-list__layout form.cp_form div.cp_form_nav, #profile-page form.cp_form div.cp_form_nav, #cpcf_custom_box .inside form.cp_form div.cp_form_nav {
+body .site_main .page_main .page_content form.cpform div.cpform_nav, body.mce-content-body form.cpform div.cpform_nav, .gutenberg .editor-block-list__layout form.cpform div.cpform_nav, #profile-page form.cpform div.cpform_nav, #cpcf_custom_box .inside form.cpform div.cpform_nav {
   display: block;
   position: fixed;
   top: 3.75rem;
@@ -980,7 +980,7 @@ body .site_main .page_main .page_content form.cp_form div.cp_form_nav, body.mce-
   transform: translateY(-3.75rem);
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
 }
-body .site_main .page_main .page_content form.cp_form.lead div.cp_form_nav, body.mce-content-body form.cp_form.lead div.cp_form_nav, .gutenberg .editor-block-list__layout form.cp_form.lead div.cp_form_nav, #profile-page form.cp_form.lead div.cp_form_nav, #cpcf_custom_box .inside form.cp_form.lead div.cp_form_nav {
+body .site_main .page_main .page_content form.cpform.lead div.cpform_nav, body.mce-content-body form.cpform.lead div.cpform_nav, .gutenberg .editor-block-list__layout form.cpform.lead div.cpform_nav, #profile-page form.cpform.lead div.cpform_nav, #cpcf_custom_box .inside form.cpform.lead div.cpform_nav {
   opacity: 0.9;
   transform: -webkit- translateY(0rem);
   transform: translateY(0rem);
@@ -1167,7 +1167,7 @@ body .site_main .page_main .page_content a.mail, body.mce-content-body a.mail, .
   transition: 0.5s;
 }
 body .site_main .page_main .page_content a.mail:before, body.mce-content-body a.mail:before, .gutenberg .editor-block-list__layout a.mail:before, #profile-page a.mail:before, #cpcf_custom_box .inside a.mail:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   display: inline-block;
@@ -1185,7 +1185,7 @@ body .site_main .page_main .page_content a.tel, body.mce-content-body a.tel, .gu
   transition: 0.5s;
 }
 body .site_main .page_main .page_content a.tel:before, body.mce-content-body a.tel:before, .gutenberg .editor-block-list__layout a.tel:before, #profile-page a.tel:before, #cpcf_custom_box .inside a.tel:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   display: inline-block;
@@ -1207,7 +1207,7 @@ body .site_main .page_main .page_content a.link, body.mce-content-body a.link, .
   transition: 0.5s;
 }
 body .site_main .page_main .page_content a.link:before, body.mce-content-body a.link:before, .gutenberg .editor-block-list__layout a.link:before, #profile-page a.link:before, #cpcf_custom_box .inside a.link:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   display: inline-block;
@@ -1364,7 +1364,7 @@ body .site_main .page_main .page_content .transition.to.del, body.mce-content-bo
   transform: -webkit- translateY(-1.25rem);
   transform: translateY(-1.25rem);
 }
-body .site_main .page_main .page_content [data-role="cp_form_submit"], body .site_main .page_main .page_content [data-role="cp_form_section_submit"], body .site_main .page_main .page_content [data-role="cp_form_acion_submit"], body.mce-content-body [data-role="cp_form_submit"], body.mce-content-body [data-role="cp_form_section_submit"], body.mce-content-body [data-role="cp_form_acion_submit"], .gutenberg .editor-block-list__layout [data-role="cp_form_submit"], .gutenberg .editor-block-list__layout [data-role="cp_form_section_submit"], .gutenberg .editor-block-list__layout [data-role="cp_form_acion_submit"], #profile-page [data-role="cp_form_submit"], #profile-page [data-role="cp_form_section_submit"], #profile-page [data-role="cp_form_acion_submit"], #cpcf_custom_box .inside [data-role="cp_form_submit"], #cpcf_custom_box .inside [data-role="cp_form_section_submit"], #cpcf_custom_box .inside [data-role="cp_form_acion_submit"] {
+body .site_main .page_main .page_content [data-role="cpform_submit"], body .site_main .page_main .page_content [data-role="cpform_section_submit"], body .site_main .page_main .page_content [data-role="cpform_acion_submit"], body.mce-content-body [data-role="cpform_submit"], body.mce-content-body [data-role="cpform_section_submit"], body.mce-content-body [data-role="cpform_acion_submit"], .gutenberg .editor-block-list__layout [data-role="cpform_submit"], .gutenberg .editor-block-list__layout [data-role="cpform_section_submit"], .gutenberg .editor-block-list__layout [data-role="cpform_acion_submit"], #profile-page [data-role="cpform_submit"], #profile-page [data-role="cpform_section_submit"], #profile-page [data-role="cpform_acion_submit"], #cpcf_custom_box .inside [data-role="cpform_submit"], #cpcf_custom_box .inside [data-role="cpform_section_submit"], #cpcf_custom_box .inside [data-role="cpform_acion_submit"] {
   cursor: pointer;
 }
 .rtf-title, #editor .rtf-title {

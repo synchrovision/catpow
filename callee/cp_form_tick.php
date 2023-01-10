@@ -155,14 +155,14 @@ function cp_thread_set_response($param){
 }
 
 try{
-	global $catpow_dir,$dir,$response,$form_id,$cp_loop_thread_id,$cp_form_is_section_request;
+	global $catpow_dir,$dir,$response,$form_id,$cp_loop_thread_id,$cpform_is_section_request;
 	$catpow_dir=__DIR__;
 	assert(isset($_REQUEST['cp_data_stock_name']),'requier cp_data_stock_name');
-	assert(isset($_REQUEST['cp_form_id']) || isset($_REQUEST['cp_form_section_id']),'requier cp_form_id');
+	assert(isset($_REQUEST['cpform_id']) || isset($_REQUEST['cpform_section_id']),'requier cpform_id');
 	$cp_data_stock_name=$_REQUEST['cp_data_stock_name'];
-	$cp_form_is_section_request=isset($_REQUEST['cp_form_section_id']);
-	if($cp_form_is_section_request){$form_id=$_REQUEST['cp_form_section_id'];}
-	else{$form_id=$_REQUEST['cp_form_id'];}
+	$cpform_is_section_request=isset($_REQUEST['cpform_section_id']);
+	if($cpform_is_section_request){$form_id=$_REQUEST['cpform_section_id'];}
+	else{$form_id=$_REQUEST['cpform_id'];}
 	$dir=cp_stock_get('_dir',$form_id);
 	$cp_loop_thread_id=cp_stock_get('_loop_shift',$form_id,'cp_loop_thread_id');
 	assert($dir!==false,'data is not exists');
@@ -173,7 +173,7 @@ try{
 	if($html){
 		$response['html']=$html;
 		if(!isset($response['callback'])){
-			$response['callback']=$cp_form_is_section_request?'cp_form_append_section_log':'cp_form_append_log';
+			$response['callback']=$cpform_is_section_request?'cpform_append_section_log':'cpform_append_log';
 		}
 	}
 	cp_thread_ping();

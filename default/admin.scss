@@ -155,7 +155,7 @@ body{
 			}
 		}
 	}
-	.cp_form_section{
+	.cpform_section{
 		@include bnd((pd:10));
 		@include bg((c:b));
 	}
@@ -251,7 +251,7 @@ body{
 		&>li{
 			@include bnd((mg:0));
 			@include trn((t:.5s));
-			&,&>.cp_form_section{
+			&,&>.cpform_section{
 				&>h2{
 					@include bnd((d:b,p:r,pd:5,mg:10));
 					@include txt((a:c,p:20,h:1em,f:'Raleway',c:t));
@@ -306,7 +306,7 @@ body{
 						}
 					}
 				}
-				.cp_form_results{
+				.cpform_results{
 					@include bnd((f:1 1 200,h:a 80vh,bs:b,pd:20,oy:a));
 					@include bg((c:t));
 					@include txt((c:b,p:12));
@@ -330,7 +330,7 @@ body{
 			@include grd((rc:200));
 			&>li{
 				&.item{
-					&>.cp_form_section{
+					&>.cpform_section{
 					}
 				}
 			}

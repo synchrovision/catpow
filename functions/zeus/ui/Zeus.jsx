@@ -46,7 +46,7 @@
 								}
 								else{
 									component.token_key=zeus_token_response_data.token_key;
-									cp_form_submit(component.$ref,component.props.action,function($item,res){
+									cpform_submit(component.$ref,component.props.action,function($item,res){
 										console.log(res);
 										this.setState({popupOpen:false});
 									},{token_key:zeus_token_response_data.token_key});

@@ -102,7 +102,7 @@ html body #wpcontent #cp_search #cpcf_custom_box_button {
   cursor: pointer;
 }
 html body #wpcontent #cp_search #cpcf_custom_box_button::before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
@@ -148,7 +148,7 @@ html body #wpcontent form#posts-filter div.tablenav.top .actions div.search_cond
   margin: 0px 5px;
 }
 html body #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition .button::before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   display: inline-block;
@@ -218,7 +218,7 @@ html body #wpcontent form#posts-filter div.tablenav.top .actions div.search_cond
   display: inline-block;
   margin: 5px;
 }
-html body #wpcontent .cp_form_section {
+html body #wpcontent .cpform_section {
   padding: 2rem;
   background-color: #ffe;
 }
@@ -303,7 +303,7 @@ html body .cp_admin ul.functions > li {
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
-html body .cp_admin ul.functions > li > h2, html body .cp_admin ul.functions > li > .cp_form_section > h2 {
+html body .cp_admin ul.functions > li > h2, html body .cp_admin ul.functions > li > .cpform_section > h2 {
   display: block;
   position: relative;
   padding: 5px;
@@ -316,13 +316,13 @@ html body .cp_admin ul.functions > li > h2, html body .cp_admin ul.functions > l
   border-bottom-style: solid;
   border-bottom-width: 1px;
 }
-html body .cp_admin ul.functions > li .image, html body .cp_admin ul.functions > li > .cp_form_section .image {
+html body .cp_admin ul.functions > li .image, html body .cp_admin ul.functions > li > .cpform_section .image {
   margin: 5px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3) inset;
 }
-html body .cp_admin ul.functions > li .desc, html body .cp_admin ul.functions > li > .cp_form_section .desc {
+html body .cp_admin ul.functions > li .desc, html body .cp_admin ul.functions > li > .cpform_section .desc {
   padding: 5px 10px;
   text-align: justify;
   font-size: 1rem;
@@ -331,7 +331,7 @@ html body .cp_admin ul.functions > li .desc, html body .cp_admin ul.functions > 
   font-weight: normal;
   color: #876;
 }
-html body .cp_admin ul.functions > li .control, html body .cp_admin ul.functions > li > .cp_form_section .control {
+html body .cp_admin ul.functions > li .control, html body .cp_admin ul.functions > li > .cpform_section .control {
   margin: 10px 20px;
 }
 html body .cp_admin ul.functions > li .cp_lightbox_content {
@@ -364,7 +364,7 @@ html body .cp_admin ul.functions > li .cp_lightbox_content .panel_body > ul > li
   border-bottom-color: #c4bbb3;
   font-size: 2rem;
 }
-html body .cp_admin ul.functions > li .cp_lightbox_content .cp_form_results {
+html body .cp_admin ul.functions > li .cp_lightbox_content .cpform_results {
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
@@ -393,7 +393,7 @@ html body .cp_admin ul.functions > li .cp_lightbox_content .button_close_panel .
   color: #ffe;
 }
 html body .cp_admin ul.functions > li .cp_lightbox_content .button_close_panel .button::before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }

@@ -20,29 +20,29 @@ class post extends \Catpow\api{
 			$form->is_receiver=true;
 			
 			$GLOBALS['res']=array();
-			if($req->has_param('cp_form_action')){
-				$cp_form_action=$req->get_param('cp_form_action');
-				if(isset($form->allowed_inputs[$cp_form_action])){
-					$meta=$form->allowed_inputs[$cp_form_action];
+			if($req->has_param('cpform_action')){
+				$cpform_action=$req->get_param('cpform_action');
+				if(isset($form->allowed_inputs[$cpform_action])){
+					$meta=$form->allowed_inputs[$cpform_action];
 					$class_name=\cp::get_class_name('meta',$meta->conf['type']);
 					$class_name::response($meta);
 				}
 				else{
-					if(!in_array($cp_form_action,$form->allowed_actions)){
-						error_log('not allowed form action : '.$cp_form_action);
-						$form->error('不正なリクエストです','not allowed form action : '.$cp_form_action);
+					if(!in_array($cpform_action,$form->allowed_actions)){
+						error_log('not allowed form action : '.$cpform_action);
+						$form->error('不正なリクエストです','not allowed form action : '.$cpform_action);
 					}
 					if(
 						\cp::get_template_part(
-							$form->path.'/'.$form->file_name.'-'.$cp_form_action.'.php',
-							['action'=>$cp_form_action]
+							$form->path.'/'.$form->file_name.'-'.$cpform_action.'.php',
+							['action'=>$cpform_action]
 						) ||
 						\cp::get_template_part(
 							$form->path.'/'.$form->file_name.'.php',
-							['action'=>$cp_form_action]
+							['action'=>$cpform_action]
 						)
 					){
-						$GLOBALS['res']['action']=$cp_form_action;
+						$GLOBALS['res']['action']=$cpform_action;
 					}
 					else{
 						$form->error('無効なリクエストです');
@@ -50,10 +50,10 @@ class post extends \Catpow\api{
 				}
 			}
 			else{
-				$cp_form_action=$form->file_slug??false;
+				$cpform_action=$form->file_slug??false;
 				$file=$form->file;
 				\cp::get_template_part($form->path.'/'.$file);
-				$GLOBALS['res']['action']=$cp_form_action;
+				$GLOBALS['res']['action']=$cpform_action;
 			}
 		}
 		catch(form_exception $e){

@@ -19,7 +19,7 @@ div{
 		@include bdr((r:10));
 		@include txt((c:b,a:c,s:b,p:15,h:15));
 	}
-	&.cp_form_message,&.cp_form_section_message{
+	&.cpform_message,&.cpform_section_message{
 		.message{
 			@include usr((e:n));
 			.text{
@@ -199,7 +199,7 @@ div{
 	&.products{
 		@include bnd((mg:50 a));
 		@include flx((w:w));
-		&>.cp_form_section{
+		&>.cpform_section{
 			@include bnd((f:1 1 250,pd:10,bs:b,mg:10));
 			@include bg((c:b 1 .6));
 			@include bdr((s:s,w:1,c:t 1 .5,r:10));
@@ -389,15 +389,15 @@ table{
 	}
 }
 form{
-	&.cp_form{
-		div.cp_form_nav{
+	&.cpform{
+		div.cpform_nav{
 			@include bnd((d:b,p:f,t:60,l:0,w:f,bs:b,z:1000));
 			@include bg((c:b));
 			@include trn((y:-60,o:0,t:.5s));
 			@include shd((b:3));
 		}
 		&.lead{
-			div.cp_form_nav{
+			div.cpform_nav{
 				@include trn((y:0,o:.9));
 			}
 		}
@@ -541,9 +541,9 @@ a{
 		}
 	}
 }
-[data-role="cp_form_submit"],
-[data-role="cp_form_section_submit"],
-[data-role="cp_form_acion_submit"]{
+[data-role="cpform_submit"],
+[data-role="cpform_section_submit"],
+[data-role="cpform_acion_submit"]{
 	@include usr((c:p));
 }
 

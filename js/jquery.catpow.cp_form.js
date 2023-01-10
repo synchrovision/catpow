@@ -2,36 +2,36 @@
 
 jQuery(function($){
 	$.catpow.forms=[];
-	$('form:has([name="cp_form_id"])').each(function(){
+	$('form:has([name="cpform_id"])').each(function(){
 		var $form=$(this);
-		cp_form_init($form);
+		cpform_init($form);
 		$.catpow.forms.push($form);
 	});
 });
-function cp_form_init($form){
+function cpform_init($form){
     var $=jQuery;
-    if($form.is('.cp_form')){$form.submit(function(){return false;});}
-    $form.on('click','[data-role^="cp_form_submit_"]',function(){
+    if($form.is('.cpform')){$form.submit(function(){return false;});}
+    $form.on('click','[data-role^="cpform_submit_"]',function(){
         var param,$tgt;
         switch($(this).attr('data-role')){
-            case "cp_form_submit_form":$tgt=$(this).closest('form');break;
-            case "cp_form_submit_section":$tgt=$(this).closest('.cp_form_section');break;
-            case "cp_form_submit_action":$tgt=$(this);break;
+            case "cpform_submit_form":$tgt=$(this).closest('form');break;
+            case "cpform_submit_section":$tgt=$(this).closest('.cpform_section');break;
+            case "cpform_submit_action":$tgt=$(this);break;
         }
         if(!$(this).attr('data-ignore-message') && $tgt.find('.message.task').length){
             $('html,body').animate({scrollTop:$tgt.find('.message.task').offset().top-100},500);
             throw 'Error message remain';
         }
-        $('.cp_form_message .message',$(this).closest('form')).remove();
+        $('.cpform_message .message',$(this).closest('form')).remove();
         if($(this).is('[data-param]')){param=JSON.parse($(this).attr('data-param'));}
         else{param=false;}
-        cp_form_submit($tgt,$(this).attr('data-action'),$(this).attr('data-callback'),param);
+        cpform_submit($tgt,$(this).attr('data-action'),$(this).attr('data-callback'),param);
     });
-    $form.on('click','[data-role="cp_form_action_submit_group"] [data-param-value]',function(){
-        var $cnt=$(this).closest('[data-role="cp_form_action_submit_group"]');
+    $form.on('click','[data-role="cpform_action_submit_group"] [data-param-value]',function(){
+        var $cnt=$(this).closest('[data-role="cpform_action_submit_group"]');
         var param={};
         param[$cnt.attr('data-param-key')]=$(this).attr('data-param-value');
-        cp_form_submit($(this),$cnt.attr('data-action'),$cnt.attr('data-callback'),param);
+        cpform_submit($(this),$cnt.attr('data-action'),$cnt.attr('data-callback'),param);
     });
 	
 	$form.on('change',function(e){
@@ -43,15 +43,15 @@ function cp_form_init($form){
 					var callback,param;
 					if($watcher.is('[data-param]')){param=JSON.parse($watcher.attr('data-param'));}else{param=false;}
 					if($watcher.is('[data-callback]')){callback=$watcher.attr('data-callback');}else{callback='replace_item';}
-					cp_form_submit($watcher,$watcher.attr('id'),callback,param);
+					cpform_submit($watcher,$watcher.attr('id'),callback,param);
 				}
 			});
 		})
 	});
-    $form.cp_form_conditioner();
+    $form.cpform_conditioner();
 }
 
-function cp_form_get_fd($item){
+function cpform_get_fd($item){
     var $=jQuery;
     var $form,$sec,fd;
     if($item.is('form')){
@@ -59,14 +59,14 @@ function cp_form_get_fd($item){
     }
     else{
         $form=$item.closest('form');
-		$sec=$item.closest('.cp_form_section')
+		$sec=$item.closest('.cpform_section')
         fd=new FormData();
-        fd.append('action','cp_form');
-        fd.append('_cp_form_nonce',$form.find('[name="_cp_form_nonce"]').val());
+        fd.append('action','cpform');
+        fd.append('_cpform_nonce',$form.find('[name="_cpform_nonce"]').val());
         fd.append('_wp_http_referer',$form.find('[name="_wp_http_referer"]').val());
-        fd.append('cp_form_id',$form.find('[name="cp_form_id"]').val());
+        fd.append('cpform_id',$form.find('[name="cpform_id"]').val());
         if($sec.length){
-			fd.append('cp_form_section_id',$sec.attr('data-section-id'));
+			fd.append('cpform_section_id',$sec.attr('data-section-id'));
 		}
 		$item.cp_get_fd(fd);
 		if($item.is('[data-watch]')){
@@ -76,16 +76,16 @@ function cp_form_get_fd($item){
     }
     return fd;
 }
-function cp_form_submit($item,action,callback,param){
+function cpform_submit($item,action,callback,param){
     var $=jQuery;
     var $form,fd;
     var dfr=new $.Deferred();
     try{
         if($item.is('form')){$form=$item;}
         else{$form=$item.closest('form');}
-        fd=cp_form_get_fd($item);
-        fd.append('action','cp_form');
-        if(action){fd.append('cp_form_action',action);}
+        fd=cpform_get_fd($item);
+        fd.append('action','cpform');
+        if(action){fd.append('cpform_action',action);}
         if(param){$.each(param,function(key,val){fd.append(key,val);});}
         $('body').addClass('busy_mode');
 		
@@ -102,8 +102,8 @@ function cp_form_submit($item,action,callback,param){
                     res.callback=res.callback.split(',');
                 }
                 $.each(res.callback,function(i,cb){
-                    if(cb in $.catpow.cp_form.callback){
-                        cbs[cb]=$.catpow.cp_form.callback[cb];
+                    if(cb in $.catpow.cpform.callback){
+                        cbs[cb]=$.catpow.cpform.callback[cb];
                     }
                     else{cbs[cb]=window[cb];}
                 });
@@ -116,25 +116,25 @@ function cp_form_submit($item,action,callback,param){
                     $.each(callback,function(cbn,cb){
                         if(typeof cb === 'function'){cbs[cbn]=cb;}
                         else{
-                            if(cb in $.catpow.cp_form.callback){
-                                cbs[cb]=$.catpow.cp_form.callback[cb];
+                            if(cb in $.catpow.cpform.callback){
+                                cbs[cb]=$.catpow.cpform.callback[cb];
                             }
                             else{cbs[cb]=window[cb];}
                         }
                     });
                 }
             }
-            $form.trigger('before_cp_form_callback',res);
+            $form.trigger('before_cpform_callback',res);
 			if(res.nonce){
-				window.console.log('reset nonce : from '+$('[name="_cp_form_nonce"]',$form).val()+' to '+res.nonce);
-				$('[name="_cp_form_nonce"]',$form).val(res.nonce);
+				window.console.log('reset nonce : from '+$('[name="_cpform_nonce"]',$form).val()+' to '+res.nonce);
+				$('[name="_cpform_nonce"]',$form).val(res.nonce);
 			}
             $.each(cbs,function(cbn,cb){
                 if(cbn){$form.trigger(new $.Event('before_'+cbn));}
                 cb($item,res);
                 if(cbn){$form.trigger(new $.Event('after_'+cbn));}
             });
-            $form.trigger('after_cp_form_callback',res);
+            $form.trigger('after_cpform_callback',res);
             $form.cp_update();
             dfr.resolve();
         }).catch(function(res){
@@ -150,15 +150,15 @@ function cp_form_submit($item,action,callback,param){
 }
 
 (function($){
-    $.catpow.cp_form={
+    $.catpow.cpform={
         callback:{
             message:function($form,data){
                 
 				var form_id;
-				if(!$form.is('form,[data-role="cp_form_section"]')){$form=$form.closest('form,[data-role="cp_form_section"]');}
+				if(!$form.is('form,[data-role="cpform_section"]')){$form=$form.closest('form,[data-role="cpform_section"]');}
                 if($form.is('form')){form_id=$form.attr('id');}
 				else{form_id=$form.attr('data-section-id');}
-				var $msgBox=$('[data-role="cp_form_message"][data-form-id="'+form_id+'"]',$form);
+				var $msgBox=$('[data-role="cpform_message"][data-form-id="'+form_id+'"]',$form);
                 if($msgBox.length===0){
 					window.console.error('Messge Box for the form is not exists');
 					window.console.error(data);
@@ -206,7 +206,7 @@ function cp_form_submit($item,action,callback,param){
             replace:function($form,data){
 				var $tgt,sel;
 				if(data.target){
-					sel='[data-role="cp_form_'+data.target+'"]';
+					sel='[data-role="cpform_'+data.target+'"]';
 					if(data.target==='section' && data.section_id){
 						$form=$form.closest('form');
 						sel+='[data-section-id="'+data.section_id+'"]';
@@ -219,15 +219,15 @@ function cp_form_submit($item,action,callback,param){
 								$tgt=$form.closest(sel);
 								break;
 							default:
-								$form=$form.closest('form,[data-role="cp_form_section"]');
+								$form=$form.closest('form,[data-role="cpform_section"]');
 								$tgt=$(sel,$form);
 						}
 						
 					}
 				}
 				else{
-					if($form.is('form')){$tgt=$('[data-role="cp_form_content"]',$form);}
-					else{$tgt=$form.closest('[data-role="cp_form_content"],[data-role="cp_form_section"]');}
+					if($form.is('form')){$tgt=$('[data-role="cpform_content"]',$form);}
+					else{$tgt=$form.closest('[data-role="cpform_content"],[data-role="cpform_section"]');}
 				}
                
 				if(data.deps){
@@ -267,10 +267,10 @@ function cp_form_submit($item,action,callback,param){
             remove:function($form,data){
 				var $tgt;
                 if(data.section_id){
-					$tgt=$('[data-role="cp_form_section"][data-section-id="'+data.section_id+'"]',$form.closest('form'));
+					$tgt=$('[data-role="cpform_section"][data-section-id="'+data.section_id+'"]',$form.closest('form'));
                 }
 				else{
-					$tgt=$form.closest('form,[data-role="cp_form_section"]');
+					$tgt=$form.closest('form,[data-role="cpform_section"]');
 				}
 				if(data.delay){$tgt.cp_delay_remove();}
 				else{$tgt.remove();}
@@ -309,7 +309,7 @@ function cp_form_submit($item,action,callback,param){
 			
             delay_replace:function($form,data){
 				data.delay=true;
-                return $.catpow.cp_form.replace($form,data)
+                return $.catpow.cpform.replace($form,data)
             },
             delay_replace_items:function($form,data){
                 $form=$form.closest('form');
@@ -330,7 +330,7 @@ function cp_form_submit($item,action,callback,param){
             },
             delay_remove:function($form,data){
 				data.delay=true;
-                return $.catpow.cp_form.remove($form,data)
+                return $.catpow.cpform.remove($form,data)
             },
 			
             lightbox:function($item,data){
@@ -405,12 +405,12 @@ function cp_form_submit($item,action,callback,param){
                 if(data.submit===undefined){prm={delay:1000,action:'action'};}
                 else{prm=data.submit;}
                 if(prm.delay===undefined){
-                    return cp_form_submit($item,prm.action,prm.callback,prm.param);
+                    return cpform_submit($item,prm.action,prm.callback,prm.param);
                 }
                 else{
                     var dfr=new $.Deferred();
                     setTimeout(function(){
-                        cp_form_submit($item,prm.action,prm.callback,prm.param).done(function(){
+                        cpform_submit($item,prm.action,prm.callback,prm.param).done(function(){
                             dfr.resolve();
                         });
                     },prm.delay);
@@ -421,11 +421,11 @@ function cp_form_submit($item,action,callback,param){
             ticker:function($item,data){
                 var fd,prm,dfr;
                 dfr=new $.Deferred();
-                fd=cp_form_get_fd($item);
+                fd=cpform_get_fd($item);
                 fd.append('cp_thread[path]',data.thread.path);
                 fd.append('cp_thread[id]',data.tread.id);
                 $item.on('change',function(){
-                    fd=cp_form_get_fd($item);
+                    fd=cpform_get_fd($item);
                     fd.append('cp_thread[path]',data.thread.path);
                     fd.append('cp_thread[id]',data.tread.id);
                 });
@@ -434,7 +434,7 @@ function cp_form_submit($item,action,callback,param){
                 if(prm.interval===undefined){prm.interval=500;}
                 var tick=function(){
                     $.ajax({
-                        url:cp.plugins_url+'/catpow/callee/cp_form_tick.php',
+                        url:cp.plugins_url+'/catpow/callee/cpform_tick.php',
                         type:'post',
                         dataType:'json',
                         data:fd,
@@ -444,8 +444,8 @@ function cp_form_submit($item,action,callback,param){
                         if(res.callback){
                             try{
                                 var rtn;
-                                if(res.callback in $.catpow.cp_form.callback){
-                                    rtn=$.catpow.cp_form.callback[res.callback]($item,res);
+                                if(res.callback in $.catpow.cpform.callback){
+                                    rtn=$.catpow.cpform.callback[res.callback]($item,res);
                                 }
                                 else{rtn=window[res.callback]($item,res);}
                                 if(typeof rtn==='object'){
@@ -467,7 +467,7 @@ function cp_form_submit($item,action,callback,param){
                         if(parseInt(e.status)===200){
                             window.console.log('data:');
                             $.ajax({
-                                url:cp.plugins_url+'/catpow/callee/cp_form_tick.php',
+                                url:cp.plugins_url+'/catpow/callee/cpform_tick.php',
                                 type:'post',
                                 dataType:'html',
                                 data:fd,

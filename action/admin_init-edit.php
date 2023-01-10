@@ -60,7 +60,7 @@ add_action('admin_notices',function($wp_admin_bar)use($post_type){
 		wp_enqueue_script('cp_search');
 		?>
 		<form id="cp_search">
-			<div id="cpcf_custom_box" class="cp_form_section">
+			<div id="cpcf_custom_box" class="cpform_section">
 				<input type="hidden" name="post_type" value="<?=$post_type?>">
 				<input type="hidden" name="cp_page_type" value="search">
 				<input type="hidden" name="cp_data_type" value="post">

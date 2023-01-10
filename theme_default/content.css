@@ -32,10 +32,10 @@ body div.cp_caution {
   font-size: 15px;
   line-height: 15px;
 }
-body div.cp_form_message .message, body div.cp_form_section_message .message {
+body div.cpform_message .message, body div.cpform_section_message .message {
   pointer-events: none;
 }
-body div.cp_form_message .message .text, body div.cp_form_section_message .message .text {
+body div.cpform_message .message .text, body div.cpform_section_message .message .text {
   padding: 3px 5px;
   width: 80%;
   margin: 1rem auto;
@@ -50,7 +50,7 @@ body div.cp_form_message .message .text, body div.cp_form_section_message .messa
   transition: 1s;
   opacity: 1;
 }
-body div.cp_form_message .message .text:after, body div.cp_form_section_message .message .text:after {
+body div.cpform_message .message .text:after, body div.cpform_section_message .message .text:after {
   content: "　";
   display: block;
   position: absolute;
@@ -63,7 +63,7 @@ body div.cp_form_message .message .text:after, body div.cp_form_section_message 
   border-width: 5px;
   border-top-color: #321;
 }
-body div.cp_form_message .message.has_target .text, body div.cp_form_section_message .message.has_target .text {
+body div.cpform_message .message.has_target .text, body div.cpform_section_message .message.has_target .text {
   position: absolute;
   left: 0px;
   top: -25px;
@@ -118,12 +118,12 @@ body div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn
   color: #ffe;
 }
 body div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-inc::after {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body div.cp-meta-item.multiple-item > .cp-meta-unit .multiple-input-buttons .btn-dec::after {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
@@ -157,12 +157,12 @@ body div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-up:
   background-color: white;
 }
 body div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-up::after {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-down::after {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
@@ -265,22 +265,22 @@ body div.cp-meta-item label.checkbox input, body div.cp-meta-item label.radio in
   display: none;
 }
 body div.cp-meta-item label.checkbox:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body div.cp-meta-item label.checkbox.active:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body div.cp-meta-item label.radio:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body div.cp-meta-item label.radio.active:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
@@ -485,92 +485,92 @@ body ul.buttons li.danger .button {
   background-color: #f53d3d;
 }
 body ul.buttons li.play .button:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body ul.buttons li.next .button:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body ul.buttons li.back .button:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body ul.buttons li.file .button:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body ul.buttons li.home .button:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body ul.buttons li.trash .button:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body ul.buttons li.cart .button:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body ul.buttons li.mail .button:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body ul.buttons li.search .button:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body ul.buttons li.caution .button:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body ul.buttons li.help .button:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body ul.buttons li.open .button:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body ul.buttons li.close .button:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body ul.buttons li.plus .button:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body ul.buttons li.minus .button:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body ul.buttons li.refresh .button:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body ul.buttons li.edit .button:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 body ul.buttons li.check .button:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
@@ -942,7 +942,7 @@ body ul.banner li.item .text {
   background-color: #F80;
 }
 body ul.banner li.item .text::before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   display: block;
@@ -1376,7 +1376,7 @@ body table.collect > tbody > tr > th {
   min-width: 150px;
   width: auto;
 }
-body form.cp_form div.cp_form_nav {
+body form.cpform div.cpform_nav {
   display: block;
   position: fixed;
   top: 60px;
@@ -1392,7 +1392,7 @@ body form.cp_form div.cp_form_nav {
   transform: translateY(-60px);
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
 }
-body form.cp_form.lead div.cp_form_nav {
+body form.cpform.lead div.cpform_nav {
   opacity: 0.9;
   transform: -webkit- translateY(0px);
   transform: translateY(0px);
@@ -1576,7 +1576,7 @@ body a.mail {
   transition: 0.5s;
 }
 body a.mail:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   display: inline-block;
@@ -1594,7 +1594,7 @@ body a.tel {
   transition: 0.5s;
 }
 body a.tel:before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   display: inline-block;
@@ -1737,7 +1737,7 @@ body .transition.to.del {
   transform: -webkit- translateY(-20px);
   transform: translateY(-20px);
 }
-body [data-role="cp_form_submit"], body [data-role="cp_form_section_submit"], body [data-role="cp_form_acion_submit"] {
+body [data-role="cpform_submit"], body [data-role="cpform_section_submit"], body [data-role="cpform_acion_submit"] {
   cursor: pointer;
 }
 #cp_lightbox {
@@ -1791,7 +1791,7 @@ body [data-role="cp_form_submit"], body [data-role="cp_form_section_submit"], bo
   left: -1rem;
 }
 #cp_lightbox .cp_lightbox_content div.group div.control .prev::before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
@@ -1799,7 +1799,7 @@ body [data-role="cp_form_submit"], body [data-role="cp_form_section_submit"], bo
   right: -1rem;
 }
 #cp_lightbox .cp_lightbox_content div.group div.control .next::before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
@@ -1819,12 +1819,12 @@ body [data-role="cp_form_submit"], body [data-role="cp_form_section_submit"], bo
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 #cp_lightbox .cp_lightbox_content div.group div.control .close::before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 #cp_lightbox .cp_lightbox_content div.group div.control ul.dots li.dot::before {
-  content: "";
+  content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }

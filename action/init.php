@@ -90,8 +90,8 @@ add_filter('body_class',function($classes){
 });
 
 /*cp form*/
-add_action('wp_ajax_cp_form',[\cp::get_class_name('content','form'),'response']);
-add_action('wp_ajax_nopriv_cp_form',[\cp::get_class_name('content','form'),'response']);
+add_action('wp_ajax_cpform',[\cp::get_class_name('content','form'),'response']);
+add_action('wp_ajax_nopriv_cpform',[\cp::get_class_name('content','form'),'response']);
 
 /*blocks*/
 if(function_exists('register_block_type')){

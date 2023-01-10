@@ -1607,8 +1607,8 @@ class CP{
 	
 	/*フォーム*/
 	public static function get_the_form($req=false){
-		if($req===false){$form_id=$_REQUEST['cp_form_section_id']??$_REQUEST['cp_form_id']??null;}
-		elseif(is_array($req)){$form_id=$req['cp_form_section_id']??$req['cp_form_id']??null;}
+		if($req===false){$form_id=$_REQUEST['cpform_section_id']??$_REQUEST['cpform_id']??null;}
+		elseif(is_array($req)){$form_id=$req['cpform_section_id']??$req['cpform_id']??null;}
 		else{$form_id=$req;}
 		return self::$forms[$form_id]??false;
 	}

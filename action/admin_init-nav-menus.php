@@ -34,15 +34,15 @@ add_action('wp_nav_menu_item_custom_fields',function($item_id,$item,$depth,$args
 		if(empty($location_name) || empty($GLOBALS['nav_datas'][$location_name]['meta'])){continue;}
 		echo("<div class=\"wp_nav_menu_item_custom_fields wp-clearfix {$location_name}\">");
 		$sec=\cp::$content->sec('nav/'.$location_name.'/admin/form.php',$item->ID);
-		printf('<input type="hidden" name="cp_form_section_ids[]" value="%s"/>',$sec->form_id);
+		printf('<input type="hidden" name="cpform_section_ids[]" value="%s"/>',$sec->form_id);
 		$sec->render();
 		echo('</div>');
 	}
 },10,5);
 
 add_action('wp_update_nav_menu_item',function($menu_id,$menu_item_db_id,$args){
-	if(empty($_REQUEST['cp_form_section_ids'])){return;}
-	foreach((array)$_REQUEST['cp_form_section_ids'] as $sec_id){
+	if(empty($_REQUEST['cpform_section_ids'])){return;}
+	foreach((array)$_REQUEST['cpform_section_ids'] as $sec_id){
 		if(isset(cp::$forms[$sec_id])){
 			$form=cp::$forms[$sec_id];
 			$form->receive();

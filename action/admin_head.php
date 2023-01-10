@@ -6,7 +6,7 @@ cp::enqueue_style('content.css');
 
 
 if($current_screen->base=='edit'){
-	wp_enqueue_script('cp_form');
+	wp_enqueue_script('cpform');
 }
 elseif($current_screen->base=='post'){
 	add_editor_style('https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css');
@@ -65,13 +65,13 @@ function _cp_post_edit_form($post,$box){
 	$sec_class=\cp::get_class_name('content','form_section');
 	$sec=$sec_class::from_object($post,'admin/form.php');
 	
-	wp_enqueue_script('cp_form');
+	wp_enqueue_script('cpform');
 	cp::enqueue_style('content.css');
 	cp::enqueue_style($sec->path.'/style.css');
 	cp::enqueue_script($sec->path.'/script.css');
 
-	wp_nonce_field('cp_form','_cp_form_nonce');
-	printf('<input type="hidden" name="cp_form_section_id" value="%s"/>',$sec->form_id);
+	wp_nonce_field('cpform','_cpform_nonce');
+	printf('<input type="hidden" name="cpform_section_id" value="%s"/>',$sec->form_id);
 	
 	$sec->render();
 	
@@ -96,14 +96,14 @@ if($current_screen->base=='term'){
 		$tmp_path='term/'.$current_screen->taxonomy;
 		
 		wp_nonce_field('insert_post','_cpnonce');
-		wp_enqueue_script('cp_form');
+		wp_enqueue_script('cpform');
 		cp::enqueue_style('content.css');
 		cp::enqueue_style('style.css');
 		cp::enqueue_style($tmp_path.'/admin/style.css');
 		cp::enqueue_script($tmp_path.'/admin/script.js');
 		
 		$sec=\cp::$content->sec($tmp_path.'/admin/form.php',$term->term_id);
-		printf('<input type="hidden" name="cp_form_section_id" value="%s"/>',$sec->form_id);
+		printf('<input type="hidden" name="cpform_section_id" value="%s"/>',$sec->form_id);
 		$sec->render();
 	});
 }

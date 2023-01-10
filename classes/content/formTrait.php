@@ -75,9 +75,9 @@ trait formTrait{
 		wp_enqueue_script('cpform.nonce');
 		\Catpow\api::register_nonce('form/post');
 		?>
-		<form action="<?= home_url(); ?>" method="get" id="<?= $this->form_id ?>" class="cp_form" enctype="multipart/form-data">
-			<input type="hidden" name="cp_form_id" value="<?= $this->form_id ?>"/>
-			<div class="cp_form_content" data-role="cp_form_content" data-form-id="<?= $this->form_id ?>">
+		<form action="<?= home_url(); ?>" method="get" id="<?= $this->form_id ?>" class="cpform" enctype="multipart/form-data">
+			<input type="hidden" name="cpform_id" value="<?= $this->form_id ?>"/>
+			<div class="cpform_content" data-role="cpform_content" data-form-id="<?= $this->form_id ?>">
 				<?php $this->inc($slug,$vars); ?>
 			</div>
 		</form>
@@ -116,7 +116,7 @@ trait formTrait{
 		if(is_null($target)){$target=!empty($param)?'action':(is_a($this,form_section::class)?'section':'form');}
 		if(is_null($ignore_message)){$ignore_message=in_array($action,['close','cancel','back','prev','reset']);}
 		if(is_array($callback)){$callback=implode(',',$callback);}
-		$rtn=sprintf('data-role="cp_form_submit_%s" data-callback="%s"',$target,$callback??'replace');
+		$rtn=sprintf('data-role="cpform_submit_%s" data-callback="%s"',$target,$callback??'replace');
 		if(!empty($action)){$this->allow_action($action);$rtn.=' data-action="'.$action.'"';}
 		if($ignore_message)$rtn.=' data-ignore-message=1';
 		if($param)$rtn.=sprintf(' data-param=\'%s\'',json_encode((array)$param));
@@ -131,7 +131,7 @@ trait formTrait{
 		echo '</ul>';
 	}
 	public function buttons_attr($action=false,$key='paged',$callback='replace'){
-		$rtn=sprintf('data-role="cp_form_action_submit_group" data-param-key="%s" data-callback="%s"',$key,$callback);
+		$rtn=sprintf('data-role="cpform_action_submit_group" data-param-key="%s" data-callback="%s"',$key,$callback);
 		if(!empty($action)){$this->allow_action($action);$rtn.=' data-action="'.$action.'"';}
 		return $rtn;
 	}
@@ -151,7 +151,7 @@ trait formTrait{
 		return $this->div('navs',$content);
 	}
 	public function div($name,$content){
-		printf('<div class="cp_form_%1$s" data-role="cp_form_%1$s" data-form-id="%2$s">',$name,$this->form_id);
+		printf('<div class="cpform_%1$s" data-role="cpform_%1$s" data-form-id="%2$s">',$name,$this->form_id);
 		if(!empty($content)){
 			if(is_callable($content)){$content();}
 			elseif(!\cp::get_template_part($this->path.'/'.$this->path_data['file_name'].'-'.$content.'.php')){echo $content;}
@@ -388,7 +388,7 @@ trait formTrait{
 	}
 	
 	public static function response(){
-		check_ajax_referer('cp_form','_cp_form_nonce');
+		check_ajax_referer('cpform','_cpform_nonce');
 		global $res;
 		add_action('set_logged_in_cookie',function($logged_in_cookie){
 			$_COOKIE[LOGGED_IN_COOKIE]=$logged_in_cookie;
@@ -400,29 +400,29 @@ trait formTrait{
 			$form->is_receiver=true;
 			
 			$res=array();
-			if(isset($_REQUEST['cp_form_action'])){
-				$cp_form_action=$_REQUEST['cp_form_action'];
-				if(isset($form->allowed_inputs[$cp_form_action])){
-					$meta=$form->allowed_inputs[$cp_form_action];
+			if(isset($_REQUEST['cpform_action'])){
+				$cpform_action=$_REQUEST['cpform_action'];
+				if(isset($form->allowed_inputs[$cpform_action])){
+					$meta=$form->allowed_inputs[$cpform_action];
 					$class_name=\cp::get_class_name('meta',$meta->conf['type']);
 					$class_name::response($meta);
 				}
 				else{
-					if(!in_array($_REQUEST['cp_form_action'],$form->allowed_actions)){
-						error_log('not allowed form action : '.$_REQUEST['cp_form_action']);
-						$form->error('不正なリクエストです','not allowed form action : '.$_REQUEST['cp_form_action']);
+					if(!in_array($_REQUEST['cpform_action'],$form->allowed_actions)){
+						error_log('not allowed form action : '.$_REQUEST['cpform_action']);
+						$form->error('不正なリクエストです','not allowed form action : '.$_REQUEST['cpform_action']);
 					}
 					if(
 						\cp::get_template_part(
-							$form->path.'/'.$form->file_name.'-'.$cp_form_action.'.php',
-							['action'=>$cp_form_action]
+							$form->path.'/'.$form->file_name.'-'.$cpform_action.'.php',
+							['action'=>$cpform_action]
 						) ||
 						\cp::get_template_part(
 							$form->path.'/'.$form->file_name.'.php',
-							['action'=>$cp_form_action]
+							['action'=>$cpform_action]
 						)
 					){
-						$res['action']=$cp_form_action;
+						$res['action']=$cpform_action;
 					}
 					else{
 						$form->error('無効なリクエストです');
@@ -430,10 +430,10 @@ trait formTrait{
 				}
 			}
 			else{
-				$cp_form_action=$form->file_slug??false;
+				$cpform_action=$form->file_slug??false;
 				$file=$form->file;
 				\cp::get_template_part($form->path.'/'.$file);
-				$res['action']=$cp_form_action;
+				$res['action']=$cpform_action;
 			}
 		}
 		catch(form_exception $e){

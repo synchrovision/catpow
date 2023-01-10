@@ -22,14 +22,14 @@ add_action(($pagenow==='profile.php')?'show_user_profile':'edit_user_profile',fu
 	$role=reset($user->roles);
 	$tmp_path='user/'.$role;
 
-	wp_nonce_field('cp_form','_cp_form_nonce');
-	wp_enqueue_script('cp_form');
+	wp_nonce_field('cpform','_cpform_nonce');
+	wp_enqueue_script('cpform');
 	cp::enqueue_style('content.css');
 	cp::enqueue_style('style.css');
 	cp::enqueue_style($tmp_path.'/admin/style.css');
 	cp::enqueue_script($tmp_path.'/admin/script.js');
 
 	$sec=\cp::$content->sec($tmp_path.'/admin/form.php',$user->ID);
-	printf('<input type="hidden" name="cp_form_section_id" value="%s"/>',$sec->form_id);
+	printf('<input type="hidden" name="cpform_section_id" value="%s"/>',$sec->form_id);
 	$sec->render();
 });
