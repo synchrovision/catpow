@@ -1,4 +1,6 @@
-﻿wp.richText.registerFormatType('catpow/ruby',{
+﻿import {CP} from './CP.jsx';
+
+wp.richText.registerFormatType('catpow/ruby',{
 	title:'Ruby',
 	tagName:'ruby',
 	className:null,
