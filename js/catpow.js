@@ -107,6 +107,11 @@ Catpow.util={
 			}
 		});
 	},
+	/*string*/
+	camelToKebab:(str)=>str.replace(/(\w)([A-Z])/g,'$1-$2').toLowerCase(),
+	camelToSnake:(str)=>str.replace(/(\w)([A-Z])/g,'$1_$2').toLowerCase(),
+	kebabToCamel:(str)=>str.replace(/\-(\w)/g,(m)=>m[1].toUpperCase()),
+	snakeToCamel:(str)=>str.replace(/_(\w)/g,(m)=>m[1].toUpperCase()),
 	/*calc*/
 	fib:(n)=>{
 		if(undefined===Catpow.util.fib.cache){Catpow.util.fib.cache=[0,1,1];}
