@@ -20,6 +20,7 @@
     },
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
+      const { InnerBlocks, RichText } = wp.blockEditor;
       const { classes, items } = attributes;
       const primaryClass = "wp-block-catpow-tabs";
       var template = [], realTabs = [];
@@ -68,6 +69,7 @@
       )));
     },
     save({ attributes, className, setAttributes }) {
+      const { InnerBlocks, RichText } = wp.blockEditor;
       const { classes, items } = attributes;
       let rtn = [];
       items.map((item, index) => {
@@ -84,11 +86,13 @@
     category: "catpow",
     parent: ["catpow/tabs"],
     edit({ attributes, className, setAttributes }) {
+      const { InnerBlocks } = wp.blockEditor;
       return [
         /* @__PURE__ */ wp.element.createElement("div", { className: "tabs_content" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/section"]], templateLock: false }))
       ];
     },
     save({ attributes, className, setAttributes }) {
+      const { InnerBlocks } = wp.blockEditor;
       return /* @__PURE__ */ wp.element.createElement("div", { className: "tabs_content" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null));
     }
   });

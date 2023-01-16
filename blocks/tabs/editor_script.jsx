@@ -18,6 +18,7 @@
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {InnerBlocks,RichText}=wp.blockEditor;
 		const {classes,items}=attributes;
 		const primaryClass='wp-block-catpow-tabs';
 
@@ -69,6 +70,7 @@
 
 
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks,RichText}=wp.blockEditor;
 		const {classes,items}=attributes;
 
 		let rtn=[];
@@ -95,6 +97,7 @@ wp.blocks.registerBlockType('catpow/tabscontent',{
 	category:'catpow',
 	parent:['catpow/tabs'],
 	edit({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		return [
 			<div className={'tabs_content'}>
 				<InnerBlocks template={[['catpow/section']]} templateLock={false}/>
@@ -102,6 +105,7 @@ wp.blocks.registerBlockType('catpow/tabscontent',{
 		];
 	},
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		return (
 			<div className={'tabs_content'}>
 				<InnerBlocks.Content/>

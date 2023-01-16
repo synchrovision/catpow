@@ -77,9 +77,9 @@
     },
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
-      const { useState, useMemo } = wp.element;
-      const { InnerBlocks, BlockControls, InspectorControls, RichText } = wp.blockEditor;
-      const { PanelBody, Button, TreeSelect, TextareaControl, TextControl } = wp.components;
+      const { useState, useMemo, createElement: el } = wp.element;
+      const { AlignmentToolbar, InnerBlocks, BlockControls, InspectorControls, RichText } = wp.blockEditor;
+      const { PanelBody, Button, SelectControl, TreeSelect, TextareaControl, TextControl } = wp.components;
       const { classes = "", rows } = attributes;
       const primaryClass = "wp-block-catpow-layouttable";
       if (attributes.file) {
@@ -504,6 +504,7 @@
       ), isRectSelection() && /* @__PURE__ */ wp.element.createElement(Button, { isDefault: true, onClick: () => mergeCells() }, "\u30BB\u30EB\u3092\u7D50\u5408"), selectedCells.some((cell) => cell.rowspan > 1 || cell.colspan > 1) && /* @__PURE__ */ wp.element.createElement(Button, { isDefault: true, onClick: () => breakCells() }, "\u7D50\u5408\u3092\u89E3\u9664"))));
     },
     save({ attributes, className }) {
+      const { createElement: el } = wp.element;
       const { RichText } = wp.blockEditor;
       const { classes, rows } = attributes;
       return /* @__PURE__ */ wp.element.createElement("table", { className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, r) => {
