@@ -288,7 +288,7 @@ wp.blocks.registerBlockType('catpow/section',{
 									</HeadingTag>
 								)}
 								{states.hasLead && 
-									<p className="lead"><RichText tagName="div" value={lead} onChange={(lead)=>setAttributes({lead})}/></p>
+									<div className="lead"><RichText tagName="div" value={lead} onChange={(lead)=>setAttributes({lead})}/></div>
 								}
 							</div>
 
@@ -430,7 +430,7 @@ wp.blocks.registerBlockType('catpow/section',{
 									<RichText.Content value={title}/>
 								</HeadingTag>
 							)}
-							{states.hasLead && <p className="lead"><RichText.Content value={lead}/></p>}
+							{states.hasLead && <div className="lead"><RichText.Content value={lead}/></div>}
 						</div>
 						{states.hasHeaderBackgroundImage &&
 							<div className="background">
