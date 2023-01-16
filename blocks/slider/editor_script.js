@@ -268,7 +268,7 @@
         );
         if (states.hasImage && states.hasThumbnail) {
           thumbs.push(
-            /* @__PURE__ */ wp.element.createElement("li", { className: "item " + posClass + " thumb" + imageIndex, onClick: () => gotoItem(index) }, /* @__PURE__ */ wp.element.createElement(
+            /* @__PURE__ */ wp.element.createElement("li", { className: "item " + posClass + " thumb" + imageIndex, onClick: () => gotoItem(index), key: index }, /* @__PURE__ */ wp.element.createElement(
               CP.SelectResponsiveImage,
               {
                 attr: attributes,
@@ -281,7 +281,7 @@
           );
         }
         if (states.hasDots) {
-          dots.push(/* @__PURE__ */ wp.element.createElement("li", { className: "dot " + posClass + " dot" + imageIndex, onClick: () => gotoItem(index) }));
+          dots.push(/* @__PURE__ */ wp.element.createElement("li", { className: "dot " + posClass + " dot" + imageIndex, onClick: () => gotoItem(index), key: index }));
         }
       };
       const l = items.length;
@@ -425,7 +425,7 @@
         );
         if (states.hasImage && states.hasThumbnail) {
           thumbs.push(
-            /* @__PURE__ */ wp.element.createElement("li", { className: item.classes }, /* @__PURE__ */ wp.element.createElement(
+            /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement(
               CP.ResponsiveImage,
               {
                 attr: attributes,

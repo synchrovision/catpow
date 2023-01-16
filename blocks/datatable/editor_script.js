@@ -147,7 +147,7 @@
             cell.classes = "";
           }
         }
-        return /* @__PURE__ */ wp.element.createElement("th", { className: cell.classes }, /* @__PURE__ */ wp.element.createElement(RichText2, { onChange: (text) => {
+        return /* @__PURE__ */ wp.element.createElement("th", { className: cell.classes, key: index }, /* @__PURE__ */ wp.element.createElement(RichText2, { onChange: (text) => {
           cell.text = text;
           saveItems();
         }, value: cell.text }));
@@ -172,7 +172,7 @@
           }
           return wp.element.createElement(
             states.hasHeaderColumn && columnIndex == 0 ? "th" : "td",
-            { className: cell.classes },
+            { className: cell.classes, key: columnIndex },
             children
           );
         }));
@@ -211,7 +211,7 @@
       var classArray = classes2.split(" ");
       var states = CP.wordsToFlags(classes2);
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("table", { className: classes2 }, states.hasHeaderRow && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, rows[0].cells.map((cell, index) => {
-        return /* @__PURE__ */ wp.element.createElement("th", { className: cell.classes }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: cell.text }));
+        return /* @__PURE__ */ wp.element.createElement("th", { className: cell.classes, key: index }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: cell.text }));
       }))), /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
         if (states.hasHeaderRow && index == 0) {
           return false;
@@ -219,7 +219,7 @@
         return /* @__PURE__ */ wp.element.createElement("tr", { key: index }, row.cells.map((cell, columnIndex) => {
           return wp.element.createElement(
             states.hasHeaderColumn && columnIndex == 0 ? "th" : "td",
-            { className: cell.classes },
+            { className: cell.classes, key: columnIndex },
             cell.text
           );
         }));

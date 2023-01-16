@@ -268,7 +268,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 			);
 			if(states.hasImage && states.hasThumbnail){
 				thumbs.push(
-					<li className={'item '+posClass+' thumb'+imageIndex} onClick={()=>gotoItem(index)}>
+					<li className={'item '+posClass+' thumb'+imageIndex} onClick={()=>gotoItem(index)} key={index}>
 						<CP.SelectResponsiveImage
 							attr={attributes}
 							set={setAttributes}
@@ -280,7 +280,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 				);
 			}
 			if(states.hasDots){
-				dots.push(<li className={'dot '+posClass+' dot'+imageIndex} onClick={()=>gotoItem(index)}></li>);
+				dots.push(<li className={'dot '+posClass+' dot'+imageIndex} onClick={()=>gotoItem(index)} key={index}></li>);
 			}
 		}
 
@@ -459,7 +459,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 			);
 			if(states.hasImage && states.hasThumbnail){
 				thumbs.push(
-					<li className={item.classes}>
+					<li className={item.classes} key={index}>
 						<CP.ResponsiveImage
 							attr={attributes}
 							keys={imageKeys.image}

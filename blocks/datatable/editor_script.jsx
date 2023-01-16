@@ -157,7 +157,7 @@
 												else if(cell.classes=='spacer'){cell.classes='';}
 											}
 											return (
-												<th className={cell.classes}>
+												<th className={cell.classes} key={index}>
 													<RichText onChange={(text)=>{cell.text=text;saveItems();}} value={cell.text}/>
 												</th>
 											);
@@ -193,7 +193,7 @@
 											}
 											return wp.element.createElement(
 												(states.hasHeaderColumn && columnIndex==0)?'th':'td',
-												{className:cell.classes},
+												{className:cell.classes,key:columnIndex},
 												children
 											);
 										})}
@@ -247,7 +247,7 @@
 							<tr>
 								{rows[0].cells.map((cell,index)=>{
 									return (
-										<th className={cell.classes}><RichText.Content value={cell.text}/></th>
+										<th className={cell.classes} key={index}><RichText.Content value={cell.text}/></th>
 									);
 								})}
 							</tr>
@@ -260,7 +260,7 @@
 								{row.cells.map((cell,columnIndex)=>{
 									return wp.element.createElement(
 										(states.hasHeaderColumn && columnIndex==0)?'th':'td',
-										{className:cell.classes},
+										{className:cell.classes,key:columnIndex},
 										cell.text
 									);
 								})}
