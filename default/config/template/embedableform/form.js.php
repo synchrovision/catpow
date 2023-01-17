@@ -4,6 +4,7 @@ header('content-type:text/javascript');
 $form_path=cp::$content->conf['meta']['mail']['alias_path'].'/mailform/form.php';
 $form=cp::$content->form($form_path);
 ob_start();
+cp::enqueue_style('content.css');
 $form->render(null,['post_data_path'=>'<!--data_name-->/form']);
 $deps_data=util\wp::get_deps_data();
 $html=ob_get_clean();
