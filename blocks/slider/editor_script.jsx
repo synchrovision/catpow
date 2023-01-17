@@ -217,28 +217,28 @@ wp.blocks.registerBlockType('catpow/slider',{
 					{(states.hasTitle || states.hasSubTitle || states.hasText) && 
 						<div className="texts">
 							{states.hasTitle && 
-								<h3 className="title">
-									<RichText
-										onChange={(title)=>{item.title=title;save();}}
-										value={item.title}
-									/>
-								</h3>
+								<RichText
+									tagName="h3"
+									className="title"
+									onChange={(title)=>{item.title=title;save();}}
+									value={item.title}
+								/>
 							}
 							{states.hasSubTitle &&
-								<h4 className="subtitle">
-									<RichText
-										onChange={(subTitle)=>{item.subTitle=subTitle;save();}}
-										value={item.subTitle}
-									/>
-								</h4>
+								<RichText
+									tagName="h4"
+									className="subtitle"
+									onChange={(subTitle)=>{item.subTitle=subTitle;save();}}
+									value={item.subTitle}
+								/>
 							}
 							{states.hasText &&
-								<p className="text">
-									<RichText
-										onChange={(text)=>{item.text=text;save();}}
-										value={item.text}
-									/>
-								</p>
+								<RichText
+									tagName="p"
+									className="text"
+									onChange={(text)=>{item.text=text;save();}}
+									value={item.text}
+								/>
 							}
 						</div>
 					}
@@ -438,9 +438,9 @@ wp.blocks.registerBlockType('catpow/slider',{
 					}
 					{(states.hasTitle || states.hasSubTitle || states.hasText) && 
 						<div className="texts">
-							{states.hasTitle && <h3 className="title"><RichText.Content value={item.title}/></h3>}
-							{states.hasSubTitle && <h4 className="subtitle"><RichText.Content value={item.subTitle}/></h4>}
-							{states.hasText && <p className="text"><RichText.Content value={item.text}/></p>}
+							{states.hasTitle && <RichText.Content tagName="h3" className="title" value={item.title}/>}
+							{states.hasSubTitle && <RichText.Content tagName="h4" className="subtitle" value={item.subTitle}/>}
+							{states.hasText && <RichText.Content tagName="p" className="text" value={item.text}/>}
 						</div>
 					}
 					{states.hasBackgroundImage &&

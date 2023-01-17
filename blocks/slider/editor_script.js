@@ -213,34 +213,40 @@
                 isTemplate: states.isTemplate
               }
             )),
-            (states.hasTitle || states.hasSubTitle || states.hasText) && /* @__PURE__ */ wp.element.createElement("div", { className: "texts" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", { className: "title" }, /* @__PURE__ */ wp.element.createElement(
+            (states.hasTitle || states.hasSubTitle || states.hasText) && /* @__PURE__ */ wp.element.createElement("div", { className: "texts" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(
               RichText2,
               {
+                tagName: "h3",
+                className: "title",
                 onChange: (title) => {
                   item.title = title;
                   save();
                 },
                 value: item.title
               }
-            )), states.hasSubTitle && /* @__PURE__ */ wp.element.createElement("h4", { className: "subtitle" }, /* @__PURE__ */ wp.element.createElement(
+            ), states.hasSubTitle && /* @__PURE__ */ wp.element.createElement(
               RichText2,
               {
+                tagName: "h4",
+                className: "subtitle",
                 onChange: (subTitle) => {
                   item.subTitle = subTitle;
                   save();
                 },
                 value: item.subTitle
               }
-            )), states.hasText && /* @__PURE__ */ wp.element.createElement("p", { className: "text" }, /* @__PURE__ */ wp.element.createElement(
+            ), states.hasText && /* @__PURE__ */ wp.element.createElement(
               RichText2,
               {
+                tagName: "p",
+                className: "text",
                 onChange: (text) => {
                   item.text = text;
                   save();
                 },
                 value: item.text
               }
-            ))),
+            )),
             states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
               CP.SelectResponsiveImage,
               {
@@ -412,7 +418,7 @@
               index,
               isTemplate: states.isTemplate
             }
-          )), (states.hasTitle || states.hasSubTitle || states.hasText) && /* @__PURE__ */ wp.element.createElement("div", { className: "texts" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", { className: "title" }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: item.title })), states.hasSubTitle && /* @__PURE__ */ wp.element.createElement("h4", { className: "subtitle" }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: item.subTitle })), states.hasText && /* @__PURE__ */ wp.element.createElement("p", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: item.text }))), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
+          )), (states.hasTitle || states.hasSubTitle || states.hasText) && /* @__PURE__ */ wp.element.createElement("div", { className: "texts" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText2.Content, { tagName: "h3", className: "title", value: item.title }), states.hasSubTitle && /* @__PURE__ */ wp.element.createElement(RichText2.Content, { tagName: "h4", className: "subtitle", value: item.subTitle }), states.hasText && /* @__PURE__ */ wp.element.createElement(RichText2.Content, { tagName: "p", className: "text", value: item.text })), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
             CP.ResponsiveImage,
             {
               attr: attributes,

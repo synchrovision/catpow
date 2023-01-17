@@ -193,20 +193,19 @@ wp.blocks.registerBlockType('catpow/listed',{
 							}
 							<div className='text'>
 								{states.hasTitle &&
-									<TitleTag className="title">
-										<RichText
-											onChange={(title)=>{item.title=title;save();}}
-											value={item.title}
-										/>
-									</TitleTag>
+									<RichText
+										tagName={TitleTag}
+										className="title"
+										onChange={(title)=>{item.title=title;save();}}
+										value={item.title}
+									/>
 								}
 								{states.hasTitle && states.hasTitleCaption && 
-									<p className="titlecaption">
-										<RichText
-											onChange={(titleCaption)=>{item.titleCaption=titleCaption;save();}}
-											value={item.titleCaption}
-										/>
-									</p>
+									<RichText
+										className="titlecaption"
+										onChange={(titleCaption)=>{item.titleCaption=titleCaption;save();}}
+										value={item.titleCaption}
+									/>
 								}
 							</div>
 						</header>
@@ -233,21 +232,21 @@ wp.blocks.registerBlockType('catpow/listed',{
 								</div>
 							}
 							{states.hasSubTitle &&
-								<SubTitleTag className="subtitle">
-									<RichText
-										onChange={(subTitle)=>{item.subTitle=subTitle;save();}}
-										value={item.subTitle}
-										placeholder='SubTitle'
-									/>
-								</SubTitleTag>
+								<RichText
+									tagName={SubTitleTag}
+									className="subtitle"
+									onChange={(subTitle)=>{item.subTitle=subTitle;save();}}
+									value={item.subTitle}
+									placeholder='SubTitle'
+								/>
 							}
 							{states.hasText && 
-								<p className="text">
-									<RichText
-										onChange={(text)=>{item.text=text;save();}}
-										value={item.text}
-									/>
-								</p>
+								<RichText
+									tagName="p"
+									className="text"
+									onChange={(text)=>{item.text=text;save();}}
+									value={item.text}
+								/>
 							}
 						</div>
 					}
@@ -413,8 +412,8 @@ wp.blocks.registerBlockType('catpow/listed',{
 								</div>
 							}
 							<div className='text'>
-								{states.hasTitle && <TitleTag className="title"><RichText.Content value={item.title}/></TitleTag>}
-								{states.hasTitle && states.hasTitleCaption && <p className="titlecaption"><RichText.Content value={item.titleCaption}/></p>}
+								{states.hasTitle && <RichText.Content tagName={TitleTag} className="title" value={item.title}/>}
+								{states.hasTitle && states.hasTitleCaption && <RichText.Content tagName="p" className="titlecaption" value={item.titleCaption}/>}
 							</div>
 						</header>
 					}
@@ -437,8 +436,8 @@ wp.blocks.registerBlockType('catpow/listed',{
 									/>
 								</div>
 							}
-							{states.hasSubTitle && <SubTitleTag className="subtitle"><RichText.Content value={item.subTitle}/></SubTitleTag>}
-							{states.hasText && <p className="text"><RichText.Content value={item.text}/></p>}
+							{states.hasSubTitle && <RichText.Content tagName={SubTitleTag} className="subtitle" value={item.subTitle}/>}
+							{states.hasText && <RichText.Content tagName="p" className="text" value={item.text}/>}
 						</div>
 					}
 					{states.hasBackgroundImage && 
