@@ -9,36 +9,6 @@ wp.blocks.registerBlockType('catpow/panel',{
 	description:'大小の矩形パネルをレイアウトします。',
 	icon: 'grid-view',
 	category: 'catpow',
-	attributes:{
-		classes:{source:'attribute',selector:'ul',attribute:'class',default:'wp-block-catpow-panel panel tile column1 grid32'},
-		items:{
-			source:'query',
-			selector:'li.item',
-			query:{
-				classes:{source:'attribute',attribute:'class'},
-				src:{source:'attribute',selector:'.image [src]',attribute:'src'},
-				alt:{source:'attribute',selector:'.image [src]',attribute:'alt'},
-				title:{source:'children',selector:'.text h3'},
-				text:{source:'children',selector:'.text p'},
-				iconSrc:{source:'attribute',selector:'.text .icon [src]',attribute:'src'},
-				iconAlt:{source:'attribute',selector:'.text .icon [src]',attribute:'alt'},
-				linkUrl:{source:'attribute',selector:'.text .link a',attribute:'href'},
-				linkText:{source:'text',selector:'.text .link a'},
-			},
-			default:[...Array(8)].map((n,i)=>{
-				return {
-					classes:'item hasIcon hasLink hasTitle rspan1 cspan1 color'+i*2,
-					src:wpinfo.theme_url+'/images/dummy.jpg',
-					alt:'dummy',
-					title:['Title'],
-					text:['Text'],
-					iconSrc:wpinfo.theme_url+'/images/dummy_icon.svg',
-					iconAlt:'dummy',
-					linkUrl:wpinfo.home_url
-				}
-			})
-		}
-	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
@@ -63,7 +33,9 @@ wp.blocks.registerBlockType('catpow/panel',{
 							{name:'brightText',label:'白文字',values:'brightText',sub:[
 								{name:'colorBG',label:'色付き背景',values:'colorBG'}
 							]},
-							{name:'icon',label:'アイコン',values:'hasIcon'},
+							{name:'icon',label:'アイコン',values:'hasIcon',sub:[
+								{input:'icon'}
+							]},
 							{name:'title',label:'タイトル',values:'hasTitle'},
 							{name:'text',label:'文章',values:'hasText'},
 							{name:'image',label:'画像',values:'hasImage',sub:[
@@ -78,7 +50,9 @@ wp.blocks.registerBlockType('catpow/panel',{
 						],
 						menu:[
 							'color',
-							{name:'icon',label:'アイコン',values:'hasIcon'},
+							{name:'icon',label:'アイコン',values:'hasIcon',sub:[
+								{input:'icon'}
+							]},
 							{name:'title',label:'タイトル',values:'hasTitle'},
 							{name:'text',label:'文章',values:'hasText'},
 							{name:'image',label:'画像',values:'hasImage',sub:[
@@ -166,17 +140,7 @@ wp.blocks.registerBlockType('catpow/panel',{
 						</div>
 					}
 					<div className="text">
-						{itemStates.hasIcon &&
-							<div className='icon'>
-								<CP.SelectResponsiveImage
-									attr={attributes}
-									set={setAttributes}
-									keys={imageKeys.icon}
-									index={index}
-									size='thumbnail'
-								/>
-							</div>
-						}
+						{itemStates.hasIcon && <CP.OutputIcon item={item}/>}
 						{itemStates.hasTitle && 
 							<h3>
 								<RichText
@@ -276,7 +240,7 @@ wp.blocks.registerBlockType('catpow/panel',{
 				<li className={item.classes} key={index}>
 					{itemStates.hasImage && <div className='image'><img src={item.src} alt={item.alt}/></div>}
 					<div className="text">
-						{itemStates.hasIcon && <div className="icon"><img src={item.iconSrc} alt={item.iconAlt}/></div>}
+						{itemStates.hasIcon && <CP.OutputIcon item={item}/>}
 						{itemStates.hasTitle && <h3><RichText.Content value={item.title}/></h3>}
 						{itemStates.hasText && <p><RichText.Content value={item.text}/></p>}
 						{itemStates.hasLink &&

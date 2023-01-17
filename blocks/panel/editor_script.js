@@ -11,36 +11,6 @@
     description: "\u5927\u5C0F\u306E\u77E9\u5F62\u30D1\u30CD\u30EB\u3092\u30EC\u30A4\u30A2\u30A6\u30C8\u3057\u307E\u3059\u3002",
     icon: "grid-view",
     category: "catpow",
-    attributes: {
-      classes: { source: "attribute", selector: "ul", attribute: "class", default: "wp-block-catpow-panel panel tile column1 grid32" },
-      items: {
-        source: "query",
-        selector: "li.item",
-        query: {
-          classes: { source: "attribute", attribute: "class" },
-          src: { source: "attribute", selector: ".image [src]", attribute: "src" },
-          alt: { source: "attribute", selector: ".image [src]", attribute: "alt" },
-          title: { source: "children", selector: ".text h3" },
-          text: { source: "children", selector: ".text p" },
-          iconSrc: { source: "attribute", selector: ".text .icon [src]", attribute: "src" },
-          iconAlt: { source: "attribute", selector: ".text .icon [src]", attribute: "alt" },
-          linkUrl: { source: "attribute", selector: ".text .link a", attribute: "href" },
-          linkText: { source: "text", selector: ".text .link a" }
-        },
-        default: [...Array(8)].map((n, i) => {
-          return {
-            classes: "item hasIcon hasLink hasTitle rspan1 cspan1 color" + i * 2,
-            src: wpinfo.theme_url + "/images/dummy.jpg",
-            alt: "dummy",
-            title: ["Title"],
-            text: ["Text"],
-            iconSrc: wpinfo.theme_url + "/images/dummy_icon.svg",
-            iconAlt: "dummy",
-            linkUrl: wpinfo.home_url
-          };
-        })
-      }
-    },
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useState, useMemo } = wp.element;
@@ -63,7 +33,9 @@
                 { name: "brightText", label: "\u767D\u6587\u5B57", values: "brightText", sub: [
                   { name: "colorBG", label: "\u8272\u4ED8\u304D\u80CC\u666F", values: "colorBG" }
                 ] },
-                { name: "icon", label: "\u30A2\u30A4\u30B3\u30F3", values: "hasIcon" },
+                { name: "icon", label: "\u30A2\u30A4\u30B3\u30F3", values: "hasIcon", sub: [
+                  { input: "icon" }
+                ] },
                 { name: "title", label: "\u30BF\u30A4\u30C8\u30EB", values: "hasTitle" },
                 { name: "text", label: "\u6587\u7AE0", values: "hasText" },
                 { name: "image", label: "\u753B\u50CF", values: "hasImage", sub: [
@@ -78,7 +50,9 @@
               ],
               menu: [
                 "color",
-                { name: "icon", label: "\u30A2\u30A4\u30B3\u30F3", values: "hasIcon" },
+                { name: "icon", label: "\u30A2\u30A4\u30B3\u30F3", values: "hasIcon", sub: [
+                  { input: "icon" }
+                ] },
                 { name: "title", label: "\u30BF\u30A4\u30C8\u30EB", values: "hasTitle" },
                 { name: "text", label: "\u6587\u7AE0", values: "hasText" },
                 { name: "image", label: "\u753B\u50CF", values: "hasImage", sub: [
@@ -162,16 +136,7 @@
                 size: "vga"
               }
             )),
-            /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement("div", { className: "icon" }, /* @__PURE__ */ wp.element.createElement(
-              CP.SelectResponsiveImage,
-              {
-                attr: attributes,
-                set: setAttributes,
-                keys: imageKeys.icon,
-                index,
-                size: "thumbnail"
-              }
-            )), itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(
+            /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(
               RichText,
               {
                 onChange: (title) => {
@@ -258,7 +223,7 @@
           this[key] = itemClassArray.indexOf(key) !== -1;
         }, itemStates);
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, itemStates.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement("img", { src: item.src, alt: item.alt })), /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement("div", { className: "icon" }, /* @__PURE__ */ wp.element.createElement("img", { src: item.iconSrc, alt: item.iconAlt })), itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), itemStates.hasText && /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })), itemStates.hasLink && /* @__PURE__ */ wp.element.createElement("div", { className: "link" }, /* @__PURE__ */ wp.element.createElement(
+          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, itemStates.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement("img", { src: item.src, alt: item.alt })), /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), itemStates.hasText && /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })), itemStates.hasLink && /* @__PURE__ */ wp.element.createElement("div", { className: "link" }, /* @__PURE__ */ wp.element.createElement(
             "a",
             {
               href: item.linkUrl,
