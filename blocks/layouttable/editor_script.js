@@ -454,8 +454,8 @@
             cell.classes && cell.classes.split(" ").includes("th") ? "th" : "td",
             {
               className: cell.classes,
-              rowspan: cell.rowspan,
-              colspan: cell.colspan,
+              rowSpan: cell.rowspan,
+              colSpan: cell.colspan,
               style: cell.style,
               onClick: (e) => selectCells(e, r, c),
               key: c
@@ -513,7 +513,7 @@
           cell.style = CP.parseStyleString(cell.style);
           return el(
             cell.classes && cell.classes.split(" ").includes("th") ? "th" : "td",
-            { className: cell.classes, rowspan: cell.rowspan, colspan: cell.colspan, style: cell.style, key: c },
+            { className: cell.classes, rowSpan: cell.rowspan, colSpan: cell.colspan, style: cell.style, key: c },
             /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: cell.text })
           );
         }));
