@@ -11,6 +11,7 @@ CP.SelectThemeColor=(props)=>{
 			<li
 				className={classes(value,{active:value==selected})}
 				onClick={()=>onChange(value)}
+				key={value}
 			> </li>
 		);
 	});

@@ -1289,7 +1289,8 @@
         "li",
         {
           className: classes(value, { active: value == selected }),
-          onClick: () => onChange(value)
+          onClick: () => onChange(value),
+          key: value
         },
         " "
       );
@@ -2645,8 +2646,8 @@
             let currentClass2 = CP.getSelectiveClass(props, prm.values, prm.key);
             if (currentClass2 && prm.sub[currentClass2]) {
               let sub = [];
-              prm.sub[currentClass2].forEach((prm2) => {
-                sub.push(SelectClass(prm2));
+              prm.sub[currentClass2].forEach((prm2, index2) => {
+                sub.push(/* @__PURE__ */ wp.element.createElement(Fragment, { key: index2 }, SelectClass(prm2)));
               });
               rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
             }
@@ -2668,15 +2669,15 @@
           if (prm.sub) {
             if (states[prm.values]) {
               let sub = [];
-              prm.sub.forEach((prm2) => {
-                sub.push(SelectClass(prm2));
+              prm.sub.forEach((prm2, index2) => {
+                sub.push(/* @__PURE__ */ wp.element.createElement(Fragment, { key: index2 }, SelectClass(prm2)));
               });
               rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
             }
           }
         }
       }
-      return rtn;
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, rtn.map((item2, index2) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: index2 }, item2)));
     };
     if (triggerClasses && triggerClasses.item) {
       const blockStates = CP.wordsToFlags(attr.classes);
@@ -2684,9 +2685,9 @@
       if (!itemClasses || Array.isArray(itemClasses) && itemClasses.length === 0) {
         return false;
       }
-      return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, itemClasses.map((prm, index2) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: index2 }, SelectClass(prm).map((item2, index3) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: index3 }, item2)))));
+      return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, itemClasses.map((prm, index2) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: index2 }, SelectClass(prm))));
     }
-    return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, props.selectiveClasses.map((prm, index2) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: index2 }, SelectClass(prm).map((item2, index3) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: index3 }, item2)))), props.children);
+    return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, props.selectiveClasses.map((prm, index2) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: index2 }, SelectClass(prm))), props.children);
   };
 
   // blocks/_init/init/AlignClassToolbar.jsx

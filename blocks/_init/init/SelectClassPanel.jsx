@@ -536,7 +536,7 @@ CP.SelectClassPanel=(props)=>{
 					let currentClass=CP.getSelectiveClass(props,prm.values,prm.key);
 					if(currentClass && prm.sub[currentClass]){
 						let sub=[];
-						prm.sub[currentClass].forEach((prm)=>{sub.push(SelectClass(prm))});
+						prm.sub[currentClass].forEach((prm,index)=>{sub.push(<Fragment key={index}>{SelectClass(prm)}</Fragment>)});
 						rtn.push(<div className="sub">{sub}</div>);
 					}
 				}
@@ -555,13 +555,17 @@ CP.SelectClassPanel=(props)=>{
 				if(prm.sub){
 					if(states[prm.values]){
 						let sub=[];
-						prm.sub.forEach((prm)=>{sub.push(SelectClass(prm))});
+						prm.sub.forEach((prm,index)=>{sub.push(<Fragment key={index}>{SelectClass(prm)}</Fragment>)});
 						rtn.push(<div className="sub">{sub}</div>);
 					}
 				}
 			}
 		}
-		return rtn;
+		return (
+			<>
+				{rtn.map((item,index)=><Fragment key={index}>{item}</Fragment>)}
+			</>
+		);
 	};
 	if(triggerClasses && triggerClasses.item){
 		const blockStates=CP.wordsToFlags(attr.classes);
@@ -571,7 +575,7 @@ CP.SelectClassPanel=(props)=>{
 			<PanelBody title={props.title} initialOpen={props.initialOpen || false} icon={props.icon}>
 				{itemClasses.map((prm,index)=>(
 					<Fragment key={index}>
-						{SelectClass(prm).map((item,index)=><Fragment key={index}>{item}</Fragment>)}
+						{SelectClass(prm)}
 					</Fragment>
 				))}
 			</PanelBody>
@@ -581,7 +585,7 @@ CP.SelectClassPanel=(props)=>{
 		<PanelBody title={props.title} initialOpen={props.initialOpen || false} icon={props.icon}>
 			{props.selectiveClasses.map((prm,index)=>(
 				<Fragment key={index}>
-					{SelectClass(prm).map((item,index)=><Fragment key={index}>{item}</Fragment>)}
+					{SelectClass(prm)}
 				</Fragment>
 			))}
 			{props.children}
