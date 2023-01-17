@@ -143,7 +143,8 @@
                   val.value = e.currentTarget.innerHTML;
                   save();
                 },
-                contentEditable: true
+                contentEditable: true,
+                key: c
               },
               val.value
             );

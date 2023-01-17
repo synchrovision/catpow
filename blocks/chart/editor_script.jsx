@@ -148,6 +148,7 @@
 												save();
 											}}
 											contentEditable={true}
+											key={c}
 										>{val.value}</td>
 									 );
 								 })}

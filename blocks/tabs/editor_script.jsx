@@ -98,11 +98,11 @@ wp.blocks.registerBlockType('catpow/tabscontent',{
 	parent:['catpow/tabs'],
 	edit({attributes,className,setAttributes}){
 		const {InnerBlocks}=wp.blockEditor;
-		return [
+		return (
 			<div className={'tabs_content'}>
 				<InnerBlocks template={[['catpow/section']]} templateLock={false}/>
 			</div>
-		];
+		);
 	},
 	save({attributes,className,setAttributes}){
 		const {InnerBlocks}=wp.blockEditor;

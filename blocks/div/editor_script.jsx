@@ -100,57 +100,59 @@ wp.blocks.registerBlockType('catpow/div',{
 			return selectiveClasses;
 		},[]);
 
-		return [
-			<div id={id} className={classes}>
-				{states.hasIcon && 
-					<div className="icon">
-						<CP.SelectResponsiveImage
-							set={setAttributes}
-							attr={attributes}
-							keys={imageKeys.iconImage}
-							size='middle'
-						/>
-					</div>
-				}
-				{states.hasBackgroundImage && 
-					<div className="background">
-						<CP.ResponsiveImage
-							set={setAttributes}
-							attr={attributes}
-							keys={imageKeys.backgroundImage}
-							devices={devices}
-						/>
-					</div>
-				}
-				<InnerBlocks template={[['core/paragraph',{content:CP.dummyText.text}]]} templateLock={false}/>
-				{states.hasPatternImage && (
-					<style className="patternImageCss">{patternImageCss}</style>
-				)}
-				{states.hasBorderImage && (
-					<style className="borderImageCss">{borderImageCss}</style>
-				)}
-				{states.hasFrameImage && (
-					<style className="frameImageCss">{frameImageCss}</style>
-				)}
-			</div>,
-			<InspectorControls>
-				<CP.SelectClassPanel
-					title='クラス'
-					icon='art'
-					set={setAttributes}
-					attr={attributes}
-					selectiveClasses={selectiveClasses}
-					filters={CP.filters.div || {}}
-				/>
-				<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-					<TextareaControl
-						label='クラス'
-						onChange={(classes)=>setAttributes({classes})}
-						value={classes}
+		return (
+			<>
+				<div id={id} className={classes}>
+					{states.hasIcon && 
+						<div className="icon">
+							<CP.SelectResponsiveImage
+								set={setAttributes}
+								attr={attributes}
+								keys={imageKeys.iconImage}
+								size='middle'
+							/>
+						</div>
+					}
+					{states.hasBackgroundImage && 
+						<div className="background">
+							<CP.ResponsiveImage
+								set={setAttributes}
+								attr={attributes}
+								keys={imageKeys.backgroundImage}
+								devices={devices}
+							/>
+						</div>
+					}
+					<InnerBlocks template={[['core/paragraph',{content:CP.dummyText.text}]]} templateLock={false}/>
+					{states.hasPatternImage && (
+						<style className="patternImageCss">{patternImageCss}</style>
+					)}
+					{states.hasBorderImage && (
+						<style className="borderImageCss">{borderImageCss}</style>
+					)}
+					{states.hasFrameImage && (
+						<style className="frameImageCss">{frameImageCss}</style>
+					)}
+				</div>
+				<InspectorControls>
+					<CP.SelectClassPanel
+						title='クラス'
+						icon='art'
+						set={setAttributes}
+						attr={attributes}
+						selectiveClasses={selectiveClasses}
+						filters={CP.filters.div || {}}
 					/>
-				</PanelBody>
-			</InspectorControls>
-		];
+					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+						<TextareaControl
+							label='クラス'
+							onChange={(classes)=>setAttributes({classes})}
+							value={classes}
+						/>
+					</PanelBody>
+				</InspectorControls>
+			</>
+		);
 	},
 
 

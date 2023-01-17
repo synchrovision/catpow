@@ -94,43 +94,40 @@
         wp.hooks.applyFilters("catpow.blocks.div.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return [
-        /* @__PURE__ */ wp.element.createElement("div", { id, className: classes }, states.hasIcon && /* @__PURE__ */ wp.element.createElement("div", { className: "icon" }, /* @__PURE__ */ wp.element.createElement(
-          CP.SelectResponsiveImage,
-          {
-            set: setAttributes,
-            attr: attributes,
-            keys: imageKeys.iconImage,
-            size: "middle"
-          }
-        )), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
-          CP.ResponsiveImage,
-          {
-            set: setAttributes,
-            attr: attributes,
-            keys: imageKeys.backgroundImage,
-            devices
-          }
-        )), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph", { content: CP.dummyText.text }]], templateLock: false }), states.hasPatternImage && /* @__PURE__ */ wp.element.createElement("style", { className: "patternImageCss" }, patternImageCss), states.hasBorderImage && /* @__PURE__ */ wp.element.createElement("style", { className: "borderImageCss" }, borderImageCss), states.hasFrameImage && /* @__PURE__ */ wp.element.createElement("style", { className: "frameImageCss" }, frameImageCss)),
-        /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-          CP.SelectClassPanel,
-          {
-            title: "\u30AF\u30E9\u30B9",
-            icon: "art",
-            set: setAttributes,
-            attr: attributes,
-            selectiveClasses,
-            filters: CP.filters.div || {}
-          }
-        ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-          TextareaControl,
-          {
-            label: "\u30AF\u30E9\u30B9",
-            onChange: (classes2) => setAttributes({ classes: classes2 }),
-            value: classes
-          }
-        )))
-      ];
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { id, className: classes }, states.hasIcon && /* @__PURE__ */ wp.element.createElement("div", { className: "icon" }, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectResponsiveImage,
+        {
+          set: setAttributes,
+          attr: attributes,
+          keys: imageKeys.iconImage,
+          size: "middle"
+        }
+      )), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
+        CP.ResponsiveImage,
+        {
+          set: setAttributes,
+          attr: attributes,
+          keys: imageKeys.backgroundImage,
+          devices
+        }
+      )), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph", { content: CP.dummyText.text }]], templateLock: false }), states.hasPatternImage && /* @__PURE__ */ wp.element.createElement("style", { className: "patternImageCss" }, patternImageCss), states.hasBorderImage && /* @__PURE__ */ wp.element.createElement("style", { className: "borderImageCss" }, borderImageCss), states.hasFrameImage && /* @__PURE__ */ wp.element.createElement("style", { className: "frameImageCss" }, frameImageCss)), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: "\u30AF\u30E9\u30B9",
+          icon: "art",
+          set: setAttributes,
+          attr: attributes,
+          selectiveClasses,
+          filters: CP.filters.div || {}
+        }
+      ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+        TextareaControl,
+        {
+          label: "\u30AF\u30E9\u30B9",
+          onChange: (classes2) => setAttributes({ classes: classes2 }),
+          value: classes
+        }
+      ))));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks } = wp.blockEditor;

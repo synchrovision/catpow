@@ -433,7 +433,8 @@ wp.blocks.registerBlockType('catpow/layouttable',{
 											rowspan:cell.rowspan,
 											colspan:cell.colspan,
 											style:cell.style,
-											onClick:(e)=>selectCells(e,r,c)
+											onClick:(e)=>selectCells(e,r,c),
+											key:c
 										},
 										<>
 											<RichText onChange={(text)=>{cell.text=text;saverows();}} value={cell.text}/>
@@ -508,11 +509,11 @@ wp.blocks.registerBlockType('catpow/layouttable',{
 			<tbody>{
 				rows.map((row,r)=>{
 					return <tr key={r}>
-						 {row.cells.map((cell)=>{
+						 {row.cells.map((cell,c)=>{
 							cell.style=CP.parseStyleString(cell.style);
 							return el(
 								(cell.classes && cell.classes.split(' ').includes('th'))?'th':'td',
-								{className:cell.classes,rowspan:cell.rowspan,colspan:cell.colspan,style:cell.style},
+								{className:cell.classes,rowspan:cell.rowspan,colspan:cell.colspan,style:cell.style,key:c},
 								<RichText.Content value={cell.text}/>
 							);
 						})}

@@ -159,15 +159,15 @@
           var children = [/* @__PURE__ */ wp.element.createElement(RichText2, { onChange: (text) => {
             cell.text = text;
             saveItems();
-          }, value: cell.text })];
+          }, value: cell.text, key: "text" })];
           if (isSelected && columnIndex == row.cells.length - 1) {
             children.push(
-              /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl rowControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn up", onClick: () => downRow(index) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteRow(index) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addRow(index) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn down", onClick: () => upRow(index) }))
+              /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl rowControl", key: "rowControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn up", onClick: () => downRow(index) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteRow(index) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addRow(index) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn down", onClick: () => upRow(index) }))
             );
           }
           if (isSelected && index == rows.length - 1) {
             children.push(
-              /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl columnControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn left", onClick: () => downColumn(columnIndex) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteColumn(columnIndex) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addColumn(columnIndex) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn right", onClick: () => upColumn(columnIndex) }))
+              /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl columnControl", key: "columnControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn left", onClick: () => downColumn(columnIndex) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteColumn(columnIndex) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addColumn(columnIndex) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn right", onClick: () => upColumn(columnIndex) }))
             );
           }
           return wp.element.createElement(

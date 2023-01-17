@@ -170,10 +170,10 @@
 									if(states.hasHeaderRow && index==0){return false;}
 									return <tr key={index}>
 										{row.cells.map((cell,columnIndex)=>{
-											var children=[<RichText onChange={(text)=>{cell.text=text;saveItems();}} value={cell.text}/>];
+											var children=[<RichText onChange={(text)=>{cell.text=text;saveItems();}} value={cell.text} key="text"/>];
 											if(isSelected && (columnIndex == row.cells.length-1)){
 												children.push(
-													<div className="itemControl rowControl">
+													<div className="itemControl rowControl" key="rowControl">
 														<div className='btn up' onClick={()=>downRow(index)}></div>
 														<div className='btn delete' onClick={()=>deleteRow(index)}></div>
 														<div className='btn clone' onClick={()=>addRow(index)}></div>
@@ -183,7 +183,7 @@
 											}
 											if(isSelected && (index == rows.length-1)){
 												children.push(
-													<div className="itemControl columnControl">
+													<div className="itemControl columnControl" key="columnControl">
 														<div className='btn left' onClick={()=>downColumn(columnIndex)}></div>
 														<div className='btn delete' onClick={()=>deleteColumn(columnIndex)}></div>
 														<div className='btn clone' onClick={()=>addColumn(columnIndex)}></div>

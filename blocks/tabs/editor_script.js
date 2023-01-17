@@ -87,9 +87,7 @@
     parent: ["catpow/tabs"],
     edit({ attributes, className, setAttributes }) {
       const { InnerBlocks } = wp.blockEditor;
-      return [
-        /* @__PURE__ */ wp.element.createElement("div", { className: "tabs_content" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/section"]], templateLock: false }))
-      ];
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "tabs_content" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/section"]], templateLock: false }));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks } = wp.blockEditor;

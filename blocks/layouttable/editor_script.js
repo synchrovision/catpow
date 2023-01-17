@@ -457,7 +457,8 @@
               rowspan: cell.rowspan,
               colspan: cell.colspan,
               style: cell.style,
-              onClick: (e) => selectCells(e, r, c)
+              onClick: (e) => selectCells(e, r, c),
+              key: c
             },
             /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RichText, { onChange: (text) => {
               cell.text = text;
@@ -508,11 +509,11 @@
       const { RichText } = wp.blockEditor;
       const { classes, rows } = attributes;
       return /* @__PURE__ */ wp.element.createElement("table", { className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, r) => {
-        return /* @__PURE__ */ wp.element.createElement("tr", { key: r }, row.cells.map((cell) => {
+        return /* @__PURE__ */ wp.element.createElement("tr", { key: r }, row.cells.map((cell, c) => {
           cell.style = CP.parseStyleString(cell.style);
           return el(
             cell.classes && cell.classes.split(" ").includes("th") ? "th" : "td",
-            { className: cell.classes, rowspan: cell.rowspan, colspan: cell.colspan, style: cell.style },
+            { className: cell.classes, rowspan: cell.rowspan, colspan: cell.colspan, style: cell.style, key: c },
             /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: cell.text })
           );
         }));
