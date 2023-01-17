@@ -1,5 +1,5 @@
 (() => {
-  // ../ui/TimeSelect/input.jsx
+  // ui/TimeSelect/input.jsx
   Catpow.UI.TimeSelect = class extends wp.element.Component {
     constructor(props) {
       super(props);
@@ -18,11 +18,11 @@
       };
       for (i = 0; i < 24; i++) {
         ii = (i + "").padStart(2, "0");
-        selections.hour.push(/* @__PURE__ */ React.createElement("option", { value: ii }, ii));
+        selections.hour.push(/* @__PURE__ */ wp.element.createElement("option", { value: ii }, ii));
       }
       for (i = 0; i < 60; i += step) {
         ii = (i + "").padStart(2, "0");
-        selections.minit.push(/* @__PURE__ */ React.createElement("option", { value: ii }, ii));
+        selections.minit.push(/* @__PURE__ */ wp.element.createElement("option", { value: ii }, ii));
       }
       this.state = { selections, value };
     }
@@ -32,11 +32,11 @@
         vals[i] = val;
         this.setState({ value: vals.join(":") });
       };
-      return /* @__PURE__ */ React.createElement("div", { className: "TimeSelect" }, /* @__PURE__ */ React.createElement("select", { onChange: (e) => {
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "TimeSelect" }, /* @__PURE__ */ wp.element.createElement("select", { onChange: (e) => {
         setTime(0, e.target.value);
-      }, value: vals[0] }, this.state.selections.hour), /* @__PURE__ */ React.createElement("span", { class: "delimiter" }, ":"), /* @__PURE__ */ React.createElement("select", { onChange: (e) => {
+      }, value: vals[0] }, this.state.selections.hour), /* @__PURE__ */ wp.element.createElement("span", { className: "delimiter" }, ":"), /* @__PURE__ */ wp.element.createElement("select", { onChange: (e) => {
         setTime(1, e.target.value);
-      }, value: vals[1] }, this.state.selections.minit), /* @__PURE__ */ React.createElement(
+      }, value: vals[1] }, this.state.selections.minit), /* @__PURE__ */ wp.element.createElement(
         Catpow.UI.HiddenValues,
         {
           name: this.props.name,

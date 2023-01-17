@@ -35,8 +35,8 @@
 						}
 					}}
 				>
-					<div class="PopoverBody">
-						<div class="PopoverArrow"></div>
+					<div className="PopoverBody">
+						<div className="PopoverArrow"></div>
 						<div className="PopoverContents">{children}</div>
 						{closeButton && (
 							<div className="PopoverControl">

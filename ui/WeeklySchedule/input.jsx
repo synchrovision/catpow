@@ -100,7 +100,7 @@ Catpow.UI.WeeklySchedule=class extends wp.element.Component{
 		
 		return (
 			<div className={'WeeklySchedule'}>
-				<table class="grid">
+				<table className="grid">
 					<thead>
 						<tr>
 							<td className="spacer"></td>

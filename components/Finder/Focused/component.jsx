@@ -18,15 +18,15 @@
 	
 	return (
 		<div className={flagsToWords(flags)}>
-			<table class="items">
+			<table className="items">
 			{Object.keys(roleGroups).map((group)=>{
 				if(!hasRoleGroup(group)){return false;}
 				return roleGroups[group].map((role)=>{
 					if(!state.colsByRole[role] || !state.colsByRole[role].length){return false;}
 					return state.colsByRole[role].map((col)=>(
-						<tr class="item">
-							<th class="label">{col.label}</th>
-							<td class="value"><Catpow.Output conf={col} {...state.focused[col.name]}/></td>
+						<tr className="item">
+							<th className="label">{col.label}</th>
+							<td className="value"><Catpow.Output conf={col} {...state.focused[col.name]}/></td>
 						</tr>
 					))
 				});

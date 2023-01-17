@@ -65,7 +65,7 @@ Catpow.UI.SearchSelect=class extends wp.element.Component{
 					}}
 				>{currentLabel || this.props.defaultLabel}</div>
 				<Catpow.Popup open={this.state.selecting} onClose={()=>this.setState({selecting:false})}>
-					<div class="searchBox">
+					<div className="searchBox">
 						<input
 							type="text"
 							className="searchInput"
@@ -79,7 +79,7 @@ Catpow.UI.SearchSelect=class extends wp.element.Component{
 							}}
 						/>
 					</div>
-					<div class="selectBox">
+					<div className="selectBox">
 						<Catpow.SelectTable
 							selections={currentSelections}
 							value={currentLabel}

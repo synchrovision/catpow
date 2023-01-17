@@ -1,5 +1,5 @@
 (() => {
-  // ../ui/PhoneNumber/input.jsx
+  // ui/PhoneNumber/input.jsx
   Catpow.UI.PhoneNumber = (props) => {
     const { useState, useMemo, useRef, useCallback, useReducer } = wp.element;
     const init = useCallback((state2) => {
@@ -41,7 +41,7 @@
       return state2;
     }, []);
     const [state, dispatch] = useReducer(reducer, { value: props.value }, init);
-    const Input = useCallback(({ i, refs: refs2, state: state2, dispatch: dispatch2 }) => /* @__PURE__ */ React.createElement(
+    const Input = useCallback(({ i, refs: refs2, state: state2, dispatch: dispatch2 }) => /* @__PURE__ */ wp.element.createElement(
       "input",
       {
         type: "text",
@@ -65,7 +65,7 @@
       }
     ), []);
     const refs = [useRef({}), useRef({}), useRef({})];
-    return /* @__PURE__ */ React.createElement("div", { className: "PhoneNumber" }, /* @__PURE__ */ React.createElement(Input, { i: 0, refs, state, dispatch }), /* @__PURE__ */ React.createElement("span", { class: "sep" }, "-"), /* @__PURE__ */ React.createElement(Input, { i: 1, refs, state, dispatch }), /* @__PURE__ */ React.createElement("span", { class: "sep" }, "-"), /* @__PURE__ */ React.createElement(Input, { i: 2, refs, state, dispatch }), /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "PhoneNumber" }, /* @__PURE__ */ wp.element.createElement(Input, { i: 0, refs, state, dispatch }), /* @__PURE__ */ wp.element.createElement("span", { className: "sep" }, "-"), /* @__PURE__ */ wp.element.createElement(Input, { i: 1, refs, state, dispatch }), /* @__PURE__ */ wp.element.createElement("span", { className: "sep" }, "-"), /* @__PURE__ */ wp.element.createElement(Input, { i: 2, refs, state, dispatch }), /* @__PURE__ */ wp.element.createElement(
       Catpow.UI.HiddenValues,
       {
         name: props.name,

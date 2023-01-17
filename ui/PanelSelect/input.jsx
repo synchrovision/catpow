@@ -10,7 +10,7 @@ Catpow.UI.PanelSelect=(props)=>{
 	
 	return (
 		<div className={'PanelSelect'}>
-			<ul class="items">
+			<ul className="items">
 				{props.items.map((item)=>{
 					const isActive=value.indexOf(item.value)>0;
 

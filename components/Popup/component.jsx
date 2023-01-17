@@ -16,8 +16,8 @@
 					}
 				}}
 			>
-				<div class="PopupBG" onClick={()=>{if(closeOnClickAway){onClose()}}}></div>
-				<div class="PopupBody">
+				<div className="PopupBG" onClick={()=>{if(closeOnClickAway){onClose()}}}></div>
+				<div className="PopupBody">
 					<div className="PopupContents">{children}</div>
 					{closeButton && (
 						<div className="PopupControl">

@@ -65,9 +65,9 @@
 	return (
 		<div className={'PhoneNumber'}>
 			<Input i={0} refs={refs} state={state} dispatch={dispatch}/>
-			<span class="sep">-</span>
+			<span className="sep">-</span>
 			<Input i={1} refs={refs} state={state} dispatch={dispatch}/>
-			<span class="sep">-</span>
+			<span className="sep">-</span>
 			<Input i={2} refs={refs} state={state} dispatch={dispatch}/>
 
 			<Catpow.UI.HiddenValues

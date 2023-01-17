@@ -35,7 +35,7 @@
 										})}
 									</div>
 								)}
-								<div class="texts">
+								<div className="texts">
 									{Object.keys(roleGroups).map((group)=>{
 										if(!hasRoleGroup(group) || group==='images'){return false;}
 										return (

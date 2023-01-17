@@ -21,7 +21,7 @@
 		<div className="FinderControl FinderDownload">
 			<ul className="items">
 				<li className={'item'} onClick={download}>
-					<div class={"icon dashicons dashicons-download"}></div>
+					<div className={"icon dashicons dashicons-download"}></div>
 				</li>
 			</ul>
 		</div>

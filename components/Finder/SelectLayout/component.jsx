@@ -21,7 +21,7 @@ Catpow.Finder.SelectLayout=(props)=>{
 								dispatch({type:'setLayout',layout:sel.value})
 							}}
 						>
-							<div class={"icon dashicons dashicons-"+sel.icon}></div>
+							<div className={"icon dashicons dashicons-"+sel.icon}></div>
 						</li>
 					);
 				})}

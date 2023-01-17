@@ -38,13 +38,13 @@
 					<CheckBoxes options={processOptions} value={state.value} onChange={save}/>
 					<CheckBox label={__("タスク発行")} selected={state.value.create} onChange={(value)=>{state.value.create=value?{}:false;save();}}/>
 					{state.value.create && (
-						<dl class="inputs">
-							<dt class="label">{__('アクション')}</dt>
-							<dd class="input"><input type="text" value={state.value.create.action} onChange={(e)=>{state.value.create.action=e.target.value;save();}}/></dd>
-							<dt class="label">{__('有効期限')}</dt>
-							<dd class="input"><input type="text" value={state.value.create.expire} onChange={(e)=>{state.value.create.expire=e.target.value;save();}}/></dd>
-							<dt class="label">{__('有効回数')}</dt>
-							<dd class="input"><input type="number" value={state.value.create.limit} onChange={(e)=>{state.value.create.limit=e.target.value;save();}}/></dd>
+						<dl className="inputs">
+							<dt className="label">{__('アクション')}</dt>
+							<dd className="input"><input type="text" value={state.value.create.action} onChange={(e)=>{state.value.create.action=e.target.value;save();}}/></dd>
+							<dt className="label">{__('有効期限')}</dt>
+							<dd className="input"><input type="text" value={state.value.create.expire} onChange={(e)=>{state.value.create.expire=e.target.value;save();}}/></dd>
+							<dt className="label">{__('有効回数')}</dt>
+							<dd className="input"><input type="number" value={state.value.create.limit} onChange={(e)=>{state.value.create.limit=e.target.value;save();}}/></dd>
 						</dl>
 					)}
 					<Catpow.UI.HiddenValues name={props.name} value={state.value}/>

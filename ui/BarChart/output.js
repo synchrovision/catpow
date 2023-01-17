@@ -1,5 +1,5 @@
 (() => {
-  // ../ui/BarChart/output.jsx
+  // ui/BarChart/output.jsx
   Catpow.UI.BarChartOutput = (props) => {
     var colsSvg = [], rowsSvg = [], textsSvg = [];
     var { rows, cols, width = 300, height = 300, padding = 50, total } = props;
@@ -18,20 +18,20 @@
     var rowStep = graphWidth / rows.length, barWidth = rowStep / 4 * 3, barMargin = rowStep / 8, coef = graphHeight / total;
     var pos, h;
     colsSvg = cols.map((col, r) => {
-      return /* @__PURE__ */ React.createElement("g", { className: col.classes, "data-label": col.label });
+      return /* @__PURE__ */ wp.element.createElement("g", { className: col.classes, "data-label": col.label });
     });
     var valPos = [];
     rowsSvg = rows.map((row, r) => {
       var pos2 = { x: r * rowStep + graphOrg.x + barMargin, y: graphOrg.y };
       valPos[r] = [];
-      return /* @__PURE__ */ React.createElement("g", { className: row.classes, "data-label": row.label }, row.vals.map((val, c) => {
+      return /* @__PURE__ */ wp.element.createElement("g", { className: row.classes, "data-label": row.label }, row.vals.map((val, c) => {
         h = val.value * coef;
         pos2.y -= h;
         valPos[r][c] = {
           x: r * rowStep + rowStep / 2 + padding,
           y: pos2.y + h / 2
         };
-        return /* @__PURE__ */ React.createElement(
+        return /* @__PURE__ */ wp.element.createElement(
           "rect",
           {
             className: cols[c].classes.replace("col", "val"),
@@ -49,6 +49,6 @@
         return valPos[r][c];
       }
     };
-    return /* @__PURE__ */ React.createElement("div", { className: "BarChart" }, /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 " + width + " " + height }, /* @__PURE__ */ React.createElement("g", { class: "graph" }, /* @__PURE__ */ React.createElement("g", { class: "cols" }, colsSvg), /* @__PURE__ */ React.createElement("g", { class: "rows" }, rowsSvg)), el(Catpow.ChartText, props)));
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "BarChart" }, /* @__PURE__ */ wp.element.createElement("svg", { viewBox: "0 0 " + width + " " + height }, /* @__PURE__ */ wp.element.createElement("g", { className: "graph" }, /* @__PURE__ */ wp.element.createElement("g", { className: "cols" }, colsSvg), /* @__PURE__ */ wp.element.createElement("g", { className: "rows" }, rowsSvg)), el(Catpow.ChartText, props)));
   };
 })();

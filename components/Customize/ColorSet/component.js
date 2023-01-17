@@ -161,7 +161,7 @@
           }
         });
       }, [ref.current]);
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet-ColorPicker__item " + (open ? "open" : "close") }, /* @__PURE__ */ wp.element.createElement("div", { className: "chip " + (isDarkColor(value2[role]) ? "is-dark" : "is-light"), onClick, style: { backgroundColor: value2[role] } }, /* @__PURE__ */ wp.element.createElement("div", { class: "label" }, roles[role].label)), /* @__PURE__ */ wp.element.createElement(Catpow.Popover, { open }, /* @__PURE__ */ wp.element.createElement("div", { class: "ColorSet-ColorPicker__box" }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet-ColorPicker__item " + (open ? "open" : "close") }, /* @__PURE__ */ wp.element.createElement("div", { className: "chip " + (isDarkColor(value2[role]) ? "is-dark" : "is-light"), onClick, style: { backgroundColor: value2[role] } }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, roles[role].label)), /* @__PURE__ */ wp.element.createElement(Catpow.Popover, { open }, /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet-ColorPicker__box" }, /* @__PURE__ */ wp.element.createElement(
         "input",
         {
           ref,
@@ -174,7 +174,7 @@
     }, []);
     const HueRange = useCallback((props2) => {
       const { value: value2 } = props2;
-      return /* @__PURE__ */ wp.element.createElement("div", { class: "ColorSet-HueRange" }, /* @__PURE__ */ wp.element.createElement("div", { class: "ColorSet-HueRange__input" }, /* @__PURE__ */ wp.element.createElement("label", null, "Range"), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet-HueRange" }, /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet-HueRange__input" }, /* @__PURE__ */ wp.element.createElement("label", null, "Range"), /* @__PURE__ */ wp.element.createElement(
         "input",
         {
           type: "range",
@@ -185,7 +185,7 @@
           min: 1,
           max: 30
         }
-      )), /* @__PURE__ */ wp.element.createElement("div", { class: "ColorSet-HueRange__input" }, /* @__PURE__ */ wp.element.createElement("label", null, "Shift"), /* @__PURE__ */ wp.element.createElement(
+      )), /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet-HueRange__input" }, /* @__PURE__ */ wp.element.createElement("label", null, "Shift"), /* @__PURE__ */ wp.element.createElement(
         "input",
         {
           type: "range",
@@ -274,7 +274,7 @@
       const { value: value2 } = props2;
       const Row = useCallback((props3) => {
         const { h, s, l, hr, hs } = props3;
-        return /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet-Preview__row" }, [...Array(12).keys()].map((i) => /* @__PURE__ */ wp.element.createElement("div", { class: "ColorSet-Preview__row__item", style: { backgroundColor: "hsl(" + (h + hr * (i - 6) + hs) + "," + s + "%," + l + "%)" } })));
+        return /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet-Preview__row" }, [...Array(12).keys()].map((i) => /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet-Preview__row__item", style: { backgroundColor: "hsl(" + (h + hr * (i - 6) + hs) + "," + s + "%," + l + "%)" } })));
       }, []);
       return /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet-Preview" }, /* @__PURE__ */ wp.element.createElement(Row, { h: value2.tones.b.h, s: value2.tones.b.s, l: value2.tones.b.l, hr: value2.hueRange, hs: value2.hueShift }), /* @__PURE__ */ wp.element.createElement(Row, { h: value2.tones.s.h, s: value2.tones.s.s, l: value2.tones.s.l, hr: value2.hueRange, hs: value2.hueShift }), /* @__PURE__ */ wp.element.createElement(Row, { h: value2.tones.m.h, s: value2.tones.m.s, l: value2.tones.m.l, hr: value2.hueRange, hs: value2.hueShift }), /* @__PURE__ */ wp.element.createElement(Row, { h: value2.tones.a.h, s: value2.tones.a.s, l: value2.tones.a.l, hr: value2.hueRange, hs: value2.hueShift }));
     }, []);

@@ -1,5 +1,5 @@
 (() => {
-  // ../components/Finder/Download/component.jsx
+  // components/Finder/Download/component.jsx
   Catpow.Finder.Download = (props) => {
     const { useContext, useCallback } = wp.element;
     const { state, dispatch } = useContext(Catpow.FinderContext);
@@ -17,6 +17,6 @@
         Catpow.util.download(res.data, res.name || state.name + ".csv", "text/csv");
       });
     }, [state.items, state.itemsInPage, dispatch]);
-    return /* @__PURE__ */ React.createElement("div", { className: "FinderControl FinderDownload" }, /* @__PURE__ */ React.createElement("ul", { className: "items" }, /* @__PURE__ */ React.createElement("li", { className: "item", onClick: download }, /* @__PURE__ */ React.createElement("div", { class: "icon dashicons dashicons-download" }))));
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "FinderControl FinderDownload" }, /* @__PURE__ */ wp.element.createElement("ul", { className: "items" }, /* @__PURE__ */ wp.element.createElement("li", { className: "item", onClick: download }, /* @__PURE__ */ wp.element.createElement("div", { className: "icon dashicons dashicons-download" }))));
   };
 })();

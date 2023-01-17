@@ -200,7 +200,7 @@
 			rtn.push(
 				<li className={item.classes} key={index}>
 					<header>
-						<div class='image'>
+						<div className='image'>
 							<CP.ResponsiveImage
 								attr={attributes}
 								keys={imageKeys.headerImage}
@@ -240,7 +240,7 @@
 					rtn.push(
 						<li className={item.classes}>
 							<header>
-								<div class='image'><img src={item.headerImageSrc} alt={item.headerImageAlt}/></div>
+								<div className='image'><img src={item.headerImageSrc} alt={item.headerImageAlt}/></div>
 								<div className='text'>
 									<h3><RichText.Content value={item.title}/></h3>
 								</div>

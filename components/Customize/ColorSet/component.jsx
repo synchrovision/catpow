@@ -150,10 +150,10 @@
 		return (
 			<div className={"ColorSet-ColorPicker__item "+(open?'open':'close')}>
 				<div className={"chip "+(isDarkColor(value[role])?'is-dark':'is-light')} onClick={onClick} style={{backgroundColor:value[role]}}>
-					<div class="label">{roles[role].label}</div>
+					<div className="label">{roles[role].label}</div>
 				</div>
 				<Catpow.Popover open={open}>
-					<div class="ColorSet-ColorPicker__box">
+					<div className="ColorSet-ColorPicker__box">
 						<input
 							ref={ref}
 							type="text"
@@ -169,8 +169,8 @@
 	const HueRange=useCallback((props)=>{
 		const {value}=props;
 		return (
-			<div class="ColorSet-HueRange">
-				<div class="ColorSet-HueRange__input">
+			<div className="ColorSet-HueRange">
+				<div className="ColorSet-HueRange__input">
 					<label>Range</label>
 					<input
 						type="range"
@@ -182,7 +182,7 @@
 						max={30}
 					/>
 				</div>
-				<div class="ColorSet-HueRange__input">
+				<div className="ColorSet-HueRange__input">
 					<label>Shift</label>
 					<input
 						type="range"
@@ -267,7 +267,7 @@
 			return (
 				<div className="ColorSet-Preview__row">
 					{[...Array(12).keys()].map((i)=>(
-						<div class="ColorSet-Preview__row__item" style={{backgroundColor:'hsl('+(h+hr*(i-6)+hs)+','+s+'%,'+l+'%)'}}></div>
+						<div className="ColorSet-Preview__row__item" style={{backgroundColor:'hsl('+(h+hr*(i-6)+hs)+','+s+'%,'+l+'%)'}}></div>
 					))}
 				</div>
 			);

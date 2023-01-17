@@ -391,10 +391,10 @@ wp.blocks.registerBlockType('catpow/slider',{
 							<div className={classes}>
 								<ul className="contents">{rtn}</ul>
 								<div className={controlClasses} data-config={config}>
-									{states.hasArrows && <div class='arrow prev' onClick={prevItem}> </div>}
+									{states.hasArrows && <div className='arrow prev' onClick={prevItem}> </div>}
 									{states.hasImage && states.hasThumbnail && <ul className="thumbnail">{thumbs}</ul>}
 									{states.hasDots && <ul className="dots">{dots}</ul>}
-									{states.hasArrows && <div class='arrow next' onClick={nextItem}> </div>}
+									{states.hasArrows && <div className='arrow next' onClick={nextItem}> </div>}
 								</div>
 							</div>
 						)}
@@ -478,10 +478,10 @@ wp.blocks.registerBlockType('catpow/slider',{
 						{rtn}
 					</ul>
 					<div className={controlClasses} data-config={config}>
-						{states.hasArrows && <div class='arrow prev'> </div>}
+						{states.hasArrows && <div className='arrow prev'> </div>}
 						{states.hasImage && states.hasThumbnail && <ul className="thumbnail">{thumbs}</ul>}
 						{states.hasDots && <ul className="dots"><li className="dot"> </li></ul>}
-						{states.hasArrows && <div class='arrow next'> </div>}
+						{states.hasArrows && <div className='arrow next'> </div>}
 					</div>
 				</div>
 				{doLoop && <onEmpty><InnerBlocks.Content/></onEmpty>}
@@ -588,10 +588,10 @@ wp.blocks.registerBlockType('catpow/slider',{
 				return <div className={classes}>
 					<ul className="contents">{rtn}</ul>
 					<div className={controlClasses} data-config={config}>
-						{states.hasArrows && <div class='arrow prev'> </div>}
+						{states.hasArrows && <div className='arrow prev'> </div>}
 						{states.hasThumbnail && <ul className="thumbnail">{thumbs}</ul>}
 						{states.hasDots && <ul className="dots"><li className="dot"> </li></ul>}
-						{states.hasArrows && <div class='arrow next'> </div>}
+						{states.hasArrows && <div className='arrow next'> </div>}
 					</div>
 				</div>;
 			},
@@ -676,10 +676,10 @@ wp.blocks.registerBlockType('catpow/slider',{
 						{states.doLoop && '[/loop_template]'}
 					</ul>
 					<div className={controlClasses} data-config={config}>
-						{states.hasArrows && <div class='arrow prev'> </div>}
+						{states.hasArrows && <div className='arrow prev'> </div>}
 						{states.hasImage && states.hasThumbnail && <ul className="thumbnail">{thumbs}</ul>}
 						{states.hasDots && <ul className="dots"><li className="dot"> </li></ul>}
-						{states.hasArrows && <div class='arrow next'> </div>}
+						{states.hasArrows && <div className='arrow next'> </div>}
 					</div>
 				</div>;
 			},

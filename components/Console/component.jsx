@@ -31,7 +31,7 @@ Catpow.Console=(props)=>{
 			<div className={className+'-controls-item'}>
 				{label && <div className="label">{label}</div>}
 				{desc && <div className="desc">{desc}</div>}
-				<div class="body">{el(inputTypes[type],props)}</div>
+				<div className="body">{el(inputTypes[type],props)}</div>
 			</div>
 		);
 	},[className]);
@@ -79,10 +79,10 @@ Catpow.Console=(props)=>{
 	},[]);
 	return (
 		<div className={className}>
-			<div class={className+'-controls'}>
+			<div className={className+'-controls'}>
 				{props.controls.map((itemProps)=>el(ControlItem,{...itemProps,state,dispatch}))}
 			</div>
-			<div class={className+'-results'}>
+			<div className={className+'-results'}>
 				{state.results.map((itemProps)=>el(ResultItem,itemProps))}
 			</div>
 		</div>

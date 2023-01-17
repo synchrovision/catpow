@@ -1,5 +1,5 @@
 (() => {
-  // ../ui/WeeklySchedule/input.jsx
+  // ui/WeeklySchedule/input.jsx
   Catpow.UI.WeeklySchedule = class extends wp.element.Component {
     constructor(props) {
       super(props);
@@ -43,7 +43,7 @@
       };
       const Rect = (props) => {
         const { children, day, start, end, ...otherProps } = props;
-        return /* @__PURE__ */ React.createElement(
+        return /* @__PURE__ */ wp.element.createElement(
           "div",
           {
             style: {
@@ -69,9 +69,9 @@
         }
         start = minutesToDayAndTime(start);
         end = minutesToDayAndTime(end);
-        const startHandler = /* @__PURE__ */ React.createElement("div", { className: "handler moveStart", "data-drawaction": "moveStart" });
-        const endHandler = /* @__PURE__ */ React.createElement("div", { className: "handler moveEnd", "data-drawaction": "moveEnd" });
-        const label = /* @__PURE__ */ React.createElement("div", { className: "label" }, minutesToTime(start.m) + "\u301C" + minutesToTime(end.m));
+        const startHandler = /* @__PURE__ */ wp.element.createElement("div", { className: "handler moveStart", "data-drawaction": "moveStart" });
+        const endHandler = /* @__PURE__ */ wp.element.createElement("div", { className: "handler moveEnd", "data-drawaction": "moveEnd" });
+        const label = /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, minutesToTime(start.m) + "\u301C" + minutesToTime(end.m));
         if (start.d < end.d) {
           rcts.push({ day: start.d, start: start.m, end: 1440, children: [label, startHandler] });
           for (d = start.d + 1; d < end.d; d++) {
@@ -90,12 +90,12 @@
         } else {
           rcts = [{ day: start.d, start: start.m, end: end.m, children: [label, startHandler, endHandler] }];
         }
-        return /* @__PURE__ */ React.createElement("div", { className: "item event", "data-index": index }, rcts.map((rectProps) => /* @__PURE__ */ React.createElement(Rect, { className: "rect", "data-drawaction": "move", ...rectProps })));
+        return /* @__PURE__ */ wp.element.createElement("div", { className: "item event", "data-index": index }, rcts.map((rectProps) => /* @__PURE__ */ wp.element.createElement(Rect, { className: "rect", "data-drawaction": "move", ...rectProps })));
       };
-      var events = value.map((eventProps, index) => /* @__PURE__ */ React.createElement(Event, { index, ...eventProps }));
-      return /* @__PURE__ */ React.createElement("div", { className: "WeeklySchedule" }, /* @__PURE__ */ React.createElement("table", { class: "grid" }, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("td", { className: "spacer" }), Array.from({ length: 7 }).map((_, i) => /* @__PURE__ */ React.createElement("th", null, this.dayLabels[i])))), /* @__PURE__ */ React.createElement("tbody", null, Array.from({ length: 24 }).map((_, i) => {
-        return /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", null, i, ":00"), Array.from({ length: 7 }).map((_2, i2) => /* @__PURE__ */ React.createElement("td", null)));
-      }))), /* @__PURE__ */ React.createElement(
+      var events = value.map((eventProps, index) => /* @__PURE__ */ wp.element.createElement(Event, { index, ...eventProps }));
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "WeeklySchedule" }, /* @__PURE__ */ wp.element.createElement("table", { className: "grid" }, /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "spacer" }), Array.from({ length: 7 }).map((_, i) => /* @__PURE__ */ wp.element.createElement("th", null, this.dayLabels[i])))), /* @__PURE__ */ wp.element.createElement("tbody", null, Array.from({ length: 24 }).map((_, i) => {
+        return /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, i, ":00"), Array.from({ length: 7 }).map((_2, i2) => /* @__PURE__ */ wp.element.createElement("td", null)));
+      }))), /* @__PURE__ */ wp.element.createElement(
         Catpow.DrawArea,
         {
           className: "DrawArea",
@@ -145,9 +145,9 @@
             save();
           }
         },
-        /* @__PURE__ */ React.createElement("div", { className: "item base", "data-drawaction": "add" }),
+        /* @__PURE__ */ wp.element.createElement("div", { className: "item base", "data-drawaction": "add" }),
         events
-      ), /* @__PURE__ */ React.createElement(Catpow.UI.HiddenValues, { name: this.props.name, value }));
+      ), /* @__PURE__ */ wp.element.createElement(Catpow.UI.HiddenValues, { name: this.props.name, value }));
     }
   };
 })();

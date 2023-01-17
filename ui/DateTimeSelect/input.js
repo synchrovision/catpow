@@ -1,5 +1,5 @@
 (() => {
-  // ../ui/DateTimeSelect/input.jsx
+  // ui/DateTimeSelect/input.jsx
   Catpow.UI.DateTimeSelect = class extends wp.element.Component {
     constructor(props) {
       super(props);
@@ -96,9 +96,9 @@
         }
         return val;
       };
-      return /* @__PURE__ */ React.createElement("div", { className: "DateSelect" }, /* @__PURE__ */ React.createElement("div", { class: "value year", onClick: () => {
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "DateSelect" }, /* @__PURE__ */ wp.element.createElement("div", { className: "value year", onClick: () => {
         this.setState({ yearSelecting: true });
-      } }, getDate("Y")), /* @__PURE__ */ React.createElement(Catpow.Popup, { open: this.state.yearSelecting, onClose: () => this.setState({ yearSelecting: false }) }, /* @__PURE__ */ React.createElement(
+      } }, getDate("Y")), /* @__PURE__ */ wp.element.createElement(Catpow.Popup, { open: this.state.yearSelecting, onClose: () => this.setState({ yearSelecting: false }) }, /* @__PURE__ */ wp.element.createElement(
         Catpow.SelectTable,
         {
           selections: this.state.selections.year,
@@ -110,9 +110,9 @@
             this.setState({ yearSelecting: false });
           }
         }
-      )), /* @__PURE__ */ React.createElement("span", { class: "unit" }, "\u5E74"), /* @__PURE__ */ React.createElement("div", { class: "value month", onClick: () => {
+      )), /* @__PURE__ */ wp.element.createElement("span", { className: "unit" }, "\u5E74"), /* @__PURE__ */ wp.element.createElement("div", { className: "value month", onClick: () => {
         this.setState({ monthSelecting: true });
-      } }, getDate("m")), /* @__PURE__ */ React.createElement(Catpow.Popup, { open: this.state.monthSelecting, onClose: () => this.setState({ monthSelecting: false }) }, /* @__PURE__ */ React.createElement(
+      } }, getDate("m")), /* @__PURE__ */ wp.element.createElement(Catpow.Popup, { open: this.state.monthSelecting, onClose: () => this.setState({ monthSelecting: false }) }, /* @__PURE__ */ wp.element.createElement(
         Catpow.SelectTable,
         {
           selections: this.state.selections.month,
@@ -123,9 +123,9 @@
             this.setState({ monthSelecting: false });
           }
         }
-      )), /* @__PURE__ */ React.createElement("span", { class: "unit" }, "\u6708"), /* @__PURE__ */ React.createElement("div", { class: "value date", onClick: () => {
+      )), /* @__PURE__ */ wp.element.createElement("span", { className: "unit" }, "\u6708"), /* @__PURE__ */ wp.element.createElement("div", { className: "value date", onClick: () => {
         this.setState({ dateSelecting: true });
-      } }, getDate("d")), /* @__PURE__ */ React.createElement(Catpow.Popup, { open: this.state.dateSelecting, onClose: () => this.setState({ dateSelecting: false }) }, /* @__PURE__ */ React.createElement(
+      } }, getDate("d")), /* @__PURE__ */ wp.element.createElement(Catpow.Popup, { open: this.state.dateSelecting, onClose: () => this.setState({ dateSelecting: false }) }, /* @__PURE__ */ wp.element.createElement(
         Catpow.SelectTable,
         {
           selections: this.state.selections.date,
@@ -136,9 +136,9 @@
             this.setState({ dateSelecting: false });
           }
         }
-      )), /* @__PURE__ */ React.createElement("span", { class: "unit" }, "\u65E5"), /* @__PURE__ */ React.createElement("div", { class: "value hours", onClick: () => {
+      )), /* @__PURE__ */ wp.element.createElement("span", { className: "unit" }, "\u65E5"), /* @__PURE__ */ wp.element.createElement("div", { className: "value hours", onClick: () => {
         this.setState({ hoursSelecting: true });
-      } }, getDate("H")), /* @__PURE__ */ React.createElement(Catpow.Popup, { open: this.state.hoursSelecting, onClose: () => this.setState({ hoursSelecting: false }) }, /* @__PURE__ */ React.createElement(
+      } }, getDate("H")), /* @__PURE__ */ wp.element.createElement(Catpow.Popup, { open: this.state.hoursSelecting, onClose: () => this.setState({ hoursSelecting: false }) }, /* @__PURE__ */ wp.element.createElement(
         Catpow.SelectTable,
         {
           selections: this.state.selections.hours,
@@ -149,9 +149,9 @@
             this.setState({ hoursSelecting: false });
           }
         }
-      )), /* @__PURE__ */ React.createElement("span", { class: "unit" }, "\u6642"), /* @__PURE__ */ React.createElement("div", { class: "value minutes", onClick: () => {
+      )), /* @__PURE__ */ wp.element.createElement("span", { className: "unit" }, "\u6642"), /* @__PURE__ */ wp.element.createElement("div", { className: "value minutes", onClick: () => {
         this.setState({ minutesSelecting: true });
-      } }, getDate("i")), /* @__PURE__ */ React.createElement(Catpow.Popup, { open: this.state.minutesSelecting, onClose: () => this.setState({ minutesSelecting: false }) }, /* @__PURE__ */ React.createElement(
+      } }, getDate("i")), /* @__PURE__ */ wp.element.createElement(Catpow.Popup, { open: this.state.minutesSelecting, onClose: () => this.setState({ minutesSelecting: false }) }, /* @__PURE__ */ wp.element.createElement(
         Catpow.SelectTable,
         {
           selections: this.state.selections.minutes,
@@ -162,7 +162,7 @@
             this.setState({ minutesSelecting: false });
           }
         }
-      )), /* @__PURE__ */ React.createElement("span", { class: "unit" }, "\u5206"), date !== false && /* @__PURE__ */ React.createElement(
+      )), /* @__PURE__ */ wp.element.createElement("span", { className: "unit" }, "\u5206"), date !== false && /* @__PURE__ */ wp.element.createElement(
         Catpow.UI.HiddenValues,
         {
           name: this.props.name,

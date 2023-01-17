@@ -1,5 +1,5 @@
 (() => {
-  // ../ui/SearchSelect/input.jsx
+  // ui/SearchSelect/input.jsx
   Catpow.UI.SearchSelect = class extends wp.element.Component {
     constructor(props) {
       super(props);
@@ -62,7 +62,7 @@
         }
         return cache[needle2] = haystack.filter((val) => val.indexOf(needle2) >= 0);
       };
-      return /* @__PURE__ */ React.createElement("div", { className: "SearchSelect" }, /* @__PURE__ */ React.createElement(
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "SearchSelect" }, /* @__PURE__ */ wp.element.createElement(
         "div",
         {
           className: "currentLabel",
@@ -71,7 +71,7 @@
           }
         },
         currentLabel || this.props.defaultLabel
-      ), /* @__PURE__ */ React.createElement(Catpow.Popup, { open: this.state.selecting, onClose: () => this.setState({ selecting: false }) }, /* @__PURE__ */ React.createElement("div", { class: "searchBox" }, /* @__PURE__ */ React.createElement(
+      ), /* @__PURE__ */ wp.element.createElement(Catpow.Popup, { open: this.state.selecting, onClose: () => this.setState({ selecting: false }) }, /* @__PURE__ */ wp.element.createElement("div", { className: "searchBox" }, /* @__PURE__ */ wp.element.createElement(
         "input",
         {
           type: "text",
@@ -85,7 +85,7 @@
             });
           }
         }
-      )), /* @__PURE__ */ React.createElement("div", { class: "selectBox" }, /* @__PURE__ */ React.createElement(
+      )), /* @__PURE__ */ wp.element.createElement("div", { className: "selectBox" }, /* @__PURE__ */ wp.element.createElement(
         Catpow.SelectTable,
         {
           selections: currentSelections,
@@ -100,7 +100,7 @@
             });
           }
         }
-      ))), /* @__PURE__ */ React.createElement(Catpow.UI.HiddenValues, { name: this.props.name, value: this.state.value }));
+      ))), /* @__PURE__ */ wp.element.createElement(Catpow.UI.HiddenValues, { name: this.props.name, value: this.state.value }));
     }
   };
 })();

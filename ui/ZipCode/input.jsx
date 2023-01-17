@@ -58,7 +58,7 @@
 	return (
 		<div className={'ZipCode'}>
 			<Input index={0} value={state.secs[0]}/>
-			<span class="sep">-</span>
+			<span className="sep">-</span>
 			<Input index={1} value={state.secs[1]}/>
 
 			<Catpow.UI.HiddenValues

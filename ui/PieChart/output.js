@@ -1,5 +1,5 @@
 (() => {
-  // ../ui/PieChart/output.jsx
+  // ui/PieChart/output.jsx
   Catpow.UI.PieChartOutput = (props) => {
     const { useState } = wp.element;
     var { rows, cols, width = 300, height = 300, padding = 50 } = props;
@@ -24,7 +24,7 @@
       d += " A " + r + " " + r + " 0 " + (v * 2 > total ? "1" : "0") + " 1 " + crrPos.x + " " + crrPos.y;
       d += " L " + ox + " " + oy;
       pies.push(
-        /* @__PURE__ */ React.createElement(
+        /* @__PURE__ */ wp.element.createElement(
           "path",
           {
             className: cols[c].classes.replace("col", "val"),
@@ -34,7 +34,7 @@
         )
       );
     });
-    return /* @__PURE__ */ React.createElement("div", { className: "PieChart" }, /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 " + width + " " + height }, /* @__PURE__ */ React.createElement("g", { class: "graph" }, /* @__PURE__ */ React.createElement("g", { className: rows[0].classes, "data-label": rows[0].label }, pies)), el(Catpow.ChartText, {
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "PieChart" }, /* @__PURE__ */ wp.element.createElement("svg", { viewBox: "0 0 " + width + " " + height }, /* @__PURE__ */ wp.element.createElement("g", { className: "graph" }, /* @__PURE__ */ wp.element.createElement("g", { className: rows[0].classes, "data-label": rows[0].label }, pies)), el(Catpow.ChartText, {
       ...props,
       rowTitle: false,
       rowUnit: false,

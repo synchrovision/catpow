@@ -36,7 +36,7 @@
 				<select onChange={(e)=>{setTime(0,e.target.value);}} value={vals[0]}>
 					{this.state.selections.hour}
 				</select>
-				<span class="delimiter">:</span>
+				<span className="delimiter">:</span>
 				<select onChange={(e)=>{setTime(1,e.target.value);}} value={vals[1]}>
 					{this.state.selections.minit}
 				</select>

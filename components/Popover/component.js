@@ -1,5 +1,5 @@
 (() => {
-  // ../components/Popover/component.jsx
+  // components/Popover/component.jsx
   Catpow.Popover = function(props) {
     const { children, open, onClose, closeButton } = props;
     const { Fragment, useEffect, useState, useRef } = wp.element;
@@ -28,7 +28,7 @@
         setPosition(classes);
       }
     }, [ref, open]);
-    return /* @__PURE__ */ React.createElement(Fragment, null, /* @__PURE__ */ React.createElement("div", { className: "PopoverAnchor", ref }), /* @__PURE__ */ React.createElement(Catpow.External, { className: "PopoverContainer", trace: ref.current }, /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "PopoverAnchor", ref }), /* @__PURE__ */ wp.element.createElement(Catpow.External, { className: "PopoverContainer", trace: ref.current }, /* @__PURE__ */ wp.element.createElement(
       "div",
       {
         className: `Popover ${state} ${position}`,
@@ -38,7 +38,7 @@
           }
         }
       },
-      /* @__PURE__ */ React.createElement("div", { class: "PopoverBody" }, /* @__PURE__ */ React.createElement("div", { class: "PopoverArrow" }), /* @__PURE__ */ React.createElement("div", { className: "PopoverContents" }, children), closeButton && /* @__PURE__ */ React.createElement("div", { className: "PopoverControl" }, /* @__PURE__ */ React.createElement("div", { className: "close", onClick: onClose })))
+      /* @__PURE__ */ wp.element.createElement("div", { className: "PopoverBody" }, /* @__PURE__ */ wp.element.createElement("div", { className: "PopoverArrow" }), /* @__PURE__ */ wp.element.createElement("div", { className: "PopoverContents" }, children), closeButton && /* @__PURE__ */ wp.element.createElement("div", { className: "PopoverControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "close", onClick: onClose })))
     )));
   };
 })();

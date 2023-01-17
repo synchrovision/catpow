@@ -15,7 +15,7 @@
 		orgPos=this.val2pos({x:0,y:0});
 		
 		this.base=(
-			<g class="base">
+			<g className="base">
 				<rect
 					className="bg" 
 					x={this.bodyBnd.l}

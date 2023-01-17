@@ -109,7 +109,7 @@
 							</div>
 						);
 					})}
-					<div class='contents'><InnerBlocks/></div>
+					<div className='contents'><InnerBlocks/></div>
 				</div>
 				<InspectorControls>
 					<CP.SelectClassPanel
@@ -156,7 +156,7 @@
 						</div>
 					);
 				})}
-				<div class='contents'><InnerBlocks.Content/></div>
+				<div className='contents'><InnerBlocks.Content/></div>
 			</div>
 		);
 	}

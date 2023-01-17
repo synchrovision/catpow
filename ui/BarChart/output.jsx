@@ -57,9 +57,9 @@
 	return (
 		<div className={'BarChart'}>
 			<svg viewBox={"0 0 "+width+" "+height}>
-				<g class="graph">
-					<g class="cols">{colsSvg}</g>
-					<g class="rows">{rowsSvg}</g>
+				<g className="graph">
+					<g className="cols">{colsSvg}</g>
+					<g className="rows">{rowsSvg}</g>
 				</g>
 				{el(Catpow.ChartText,props)}
 			</svg>

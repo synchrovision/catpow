@@ -1,5 +1,5 @@
 (() => {
-  // ../ui/PointChart/input.jsx
+  // ui/PointChart/input.jsx
   Catpow.UI.PointChart = class extends wp.element.Component {
     constructor(props) {
       super(props);
@@ -14,7 +14,7 @@
       };
       this.bodyBnd = { t: 50, b: 250, l: 50, r: 250, w: 200, h: 200 };
       orgPos = this.val2pos({ x: 0, y: 0 });
-      this.base = /* @__PURE__ */ React.createElement("g", { class: "base" }, /* @__PURE__ */ React.createElement(
+      this.base = /* @__PURE__ */ wp.element.createElement("g", { className: "base" }, /* @__PURE__ */ wp.element.createElement(
         "rect",
         {
           className: "bg",
@@ -23,7 +23,7 @@
           width: this.bodyBnd.w,
           height: this.bodyBnd.h
         }
-      ), /* @__PURE__ */ React.createElement("line", { className: "baseLine", x1: orgPos.x, x2: orgPos.x, y1: this.bodyBnd.t, y2: this.bodyBnd.b }), /* @__PURE__ */ React.createElement("line", { className: "baseLine", x1: this.bodyBnd.l, x2: this.bodyBnd.r, y1: orgPos.y, y2: orgPos.y }), /* @__PURE__ */ React.createElement("text", { className: "label left", x: this.bodyBnd.l - 10, y: orgPos.y }, this.labels.x[0]), /* @__PURE__ */ React.createElement("text", { className: "label right", x: this.bodyBnd.r + 10, y: orgPos.y }, this.labels.x[1]), /* @__PURE__ */ React.createElement("text", { className: "label top", x: orgPos.x, y: this.bodyBnd.t - 10 }, this.labels.y[0]), /* @__PURE__ */ React.createElement("text", { className: "label bottom", x: orgPos.x, y: this.bodyBnd.b + 10 }, this.labels.y[1]));
+      ), /* @__PURE__ */ wp.element.createElement("line", { className: "baseLine", x1: orgPos.x, x2: orgPos.x, y1: this.bodyBnd.t, y2: this.bodyBnd.b }), /* @__PURE__ */ wp.element.createElement("line", { className: "baseLine", x1: this.bodyBnd.l, x2: this.bodyBnd.r, y1: orgPos.y, y2: orgPos.y }), /* @__PURE__ */ wp.element.createElement("text", { className: "label left", x: this.bodyBnd.l - 10, y: orgPos.y }, this.labels.x[0]), /* @__PURE__ */ wp.element.createElement("text", { className: "label right", x: this.bodyBnd.r + 10, y: orgPos.y }, this.labels.x[1]), /* @__PURE__ */ wp.element.createElement("text", { className: "label top", x: orgPos.x, y: this.bodyBnd.t - 10 }, this.labels.y[0]), /* @__PURE__ */ wp.element.createElement("text", { className: "label bottom", x: orgPos.x, y: this.bodyBnd.b + 10 }, this.labels.y[1]));
       this.state = { value, press };
     }
     val2pos(value) {
@@ -35,7 +35,7 @@
     render() {
       var { value, press } = this.state;
       var pos = this.val2pos(value);
-      return /* @__PURE__ */ React.createElement("div", { className: "PointChart" }, /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 300 300" }, this.base, /* @__PURE__ */ React.createElement("line", { className: "valLine", x1: pos.x, x2: pos.x, y1: this.bodyBnd.t, y2: this.bodyBnd.b }), /* @__PURE__ */ React.createElement("line", { className: "valLine", x1: this.bodyBnd.l, x2: this.bodyBnd.r, y1: pos.y, y2: pos.y }), /* @__PURE__ */ React.createElement("rect", { className: "point", x: pos.x - 5, y: pos.y - 5, width: "10", height: "10" }), /* @__PURE__ */ React.createElement(
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "PointChart" }, /* @__PURE__ */ wp.element.createElement("svg", { viewBox: "0 0 300 300" }, this.base, /* @__PURE__ */ wp.element.createElement("line", { className: "valLine", x1: pos.x, x2: pos.x, y1: this.bodyBnd.t, y2: this.bodyBnd.b }), /* @__PURE__ */ wp.element.createElement("line", { className: "valLine", x1: this.bodyBnd.l, x2: this.bodyBnd.r, y1: pos.y, y2: pos.y }), /* @__PURE__ */ wp.element.createElement("rect", { className: "point", x: pos.x - 5, y: pos.y - 5, width: "10", height: "10" }), /* @__PURE__ */ wp.element.createElement(
         "rect",
         {
           className: "control",
@@ -65,7 +65,7 @@
             });
           }
         }
-      )), /* @__PURE__ */ React.createElement(
+      )), /* @__PURE__ */ wp.element.createElement(
         Catpow.UI.HiddenValues,
         {
           name: this.props.name,

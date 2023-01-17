@@ -78,7 +78,7 @@
 		
 		return (
 			<div className={'DateSelect'}>
-				<div class="value year" onClick={()=>{this.setState({yearSelecting:true})}}>{getDate('Y')}</div>
+				<div className="value year" onClick={()=>{this.setState({yearSelecting:true})}}>{getDate('Y')}</div>
 				<Catpow.Popup open={this.state.yearSelecting} onClose={()=>this.setState({yearSelecting:false})}>
 					<Catpow.SelectTable
 						selections={this.state.selections.year}
@@ -91,8 +91,8 @@
 						}}
 					/>
 				</Catpow.Popup>
-				<span class="unit">年</span>
-				<div class="value month" onClick={()=>{this.setState({monthSelecting:true})}}>{getDate('m')}</div>
+				<span className="unit">年</span>
+				<div className="value month" onClick={()=>{this.setState({monthSelecting:true})}}>{getDate('m')}</div>
 				<Catpow.Popup open={this.state.monthSelecting} onClose={()=>this.setState({monthSelecting:false})}>
 					<Catpow.SelectTable
 						selections={this.state.selections.month}
@@ -104,8 +104,8 @@
 						}}
 					/>
 				</Catpow.Popup>
-				<span class="unit">月</span>
-				<div class="value date" onClick={()=>{this.setState({dateSelecting:true})}}>{getDate('d')}</div>
+				<span className="unit">月</span>
+				<div className="value date" onClick={()=>{this.setState({dateSelecting:true})}}>{getDate('d')}</div>
 				<Catpow.Popup open={this.state.dateSelecting} onClose={()=>this.setState({dateSelecting:false})}>
 					<Catpow.SelectTable
 						selections={this.state.selections.date}
@@ -117,9 +117,9 @@
 						}}
 					/>
 				</Catpow.Popup>
-				<span class="unit">日</span>
+				<span className="unit">日</span>
 				
-				<div class="value hours" onClick={()=>{this.setState({hoursSelecting:true})}}>{getDate('H')}</div>
+				<div className="value hours" onClick={()=>{this.setState({hoursSelecting:true})}}>{getDate('H')}</div>
 				<Catpow.Popup open={this.state.hoursSelecting} onClose={()=>this.setState({hoursSelecting:false})}>
 					<Catpow.SelectTable
 						selections={this.state.selections.hours}
@@ -131,8 +131,8 @@
 						}}
 					/>
 				</Catpow.Popup>
-				<span class="unit">時</span>
-				<div class="value minutes" onClick={()=>{this.setState({minutesSelecting:true})}}>{getDate('i')}</div>
+				<span className="unit">時</span>
+				<div className="value minutes" onClick={()=>{this.setState({minutesSelecting:true})}}>{getDate('i')}</div>
 				<Catpow.Popup open={this.state.minutesSelecting} onClose={()=>this.setState({minutesSelecting:false})}>
 					<Catpow.SelectTable
 						selections={this.state.selections.minutes}
@@ -144,7 +144,7 @@
 						}}
 					/>
 				</Catpow.Popup>
-				<span class="unit">分</span>
+				<span className="unit">分</span>
 
 				{date!==false && <Catpow.UI.HiddenValues
 					name={this.props.name}

@@ -1,12 +1,12 @@
 (() => {
-  // ../components/Calendar/component.jsx
+  // components/Calendar/component.jsx
   Catpow.Calendar = (props) => {
     const { Fragment } = wp.element;
     const { useState, useCallback, useEffect, useReducer, useMemo } = wp.element;
     const { className = "medium", min = null, max = null, values, onSelect, showYear = true, showMonth = true, showControl = false } = props;
     const minTime = min ? Catpow.util.getDateObject(min).getTime() : Number.MIN_VALUE;
     const maxTime = max ? Catpow.util.getDateObject(max).getTime() : Number.MAX_VALUE;
-    const thead = useMemo(() => /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", null, "\u65E5,\u6708,\u706B,\u6C34,\u6728,\u91D1,\u571F".split(",").map((d) => /* @__PURE__ */ React.createElement("td", null, d)))), [props]);
+    const thead = useMemo(() => /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, "\u65E5,\u6708,\u706B,\u6C34,\u6728,\u91D1,\u571F".split(",").map((d) => /* @__PURE__ */ wp.element.createElement("td", null, d)))), [props]);
     const weekDays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
     const [state, dispatch] = useReducer((state2, action) => {
       switch (action.type) {
@@ -91,8 +91,8 @@
         month: props.month
       });
     }, [props.year, props.month]);
-    return /* @__PURE__ */ React.createElement("div", { className: "Calendar " + className }, /* @__PURE__ */ React.createElement("table", null, /* @__PURE__ */ React.createElement("caption", null, showYear && /* @__PURE__ */ React.createElement("div", { className: "year" }, showControl && /* @__PURE__ */ React.createElement(Fragment, null, /* @__PURE__ */ React.createElement("span", { className: "btn prev10", onClick: () => dispatch({ type: "prev10Year" }) }), /* @__PURE__ */ React.createElement("span", { className: "btn prev", onClick: () => dispatch({ type: "prevYear" }) })), /* @__PURE__ */ React.createElement("span", { class: "current" }, state.year), showControl && /* @__PURE__ */ React.createElement(Fragment, null, /* @__PURE__ */ React.createElement("span", { className: "btn next", onClick: () => dispatch({ type: "nextYear" }) }), /* @__PURE__ */ React.createElement("span", { className: "btn next10", onClick: () => dispatch({ type: "next10Year" }) }))), showMonth && /* @__PURE__ */ React.createElement("div", { className: "month" }, showControl && /* @__PURE__ */ React.createElement("span", { className: "btn prev", onClick: () => dispatch({ type: "prevMonth" }) }), /* @__PURE__ */ React.createElement("span", { class: "current" }, state.month), showControl && /* @__PURE__ */ React.createElement("span", { className: "btn next", onClick: () => dispatch({ type: "nextMonth" }) }))), thead, /* @__PURE__ */ React.createElement("tbody", null, weeks.map((week) => {
-      return /* @__PURE__ */ React.createElement("tr", { className: "week" }, week.days.map((day, i) => {
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "Calendar " + className }, /* @__PURE__ */ wp.element.createElement("table", null, /* @__PURE__ */ wp.element.createElement("caption", null, showYear && /* @__PURE__ */ wp.element.createElement("div", { className: "year" }, showControl && /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("span", { className: "btn prev10", onClick: () => dispatch({ type: "prev10Year" }) }), /* @__PURE__ */ wp.element.createElement("span", { className: "btn prev", onClick: () => dispatch({ type: "prevYear" }) })), /* @__PURE__ */ wp.element.createElement("span", { className: "current" }, state.year), showControl && /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("span", { className: "btn next", onClick: () => dispatch({ type: "nextYear" }) }), /* @__PURE__ */ wp.element.createElement("span", { className: "btn next10", onClick: () => dispatch({ type: "next10Year" }) }))), showMonth && /* @__PURE__ */ wp.element.createElement("div", { className: "month" }, showControl && /* @__PURE__ */ wp.element.createElement("span", { className: "btn prev", onClick: () => dispatch({ type: "prevMonth" }) }), /* @__PURE__ */ wp.element.createElement("span", { className: "current" }, state.month), showControl && /* @__PURE__ */ wp.element.createElement("span", { className: "btn next", onClick: () => dispatch({ type: "nextMonth" }) }))), thead, /* @__PURE__ */ wp.element.createElement("tbody", null, weeks.map((week) => {
+      return /* @__PURE__ */ wp.element.createElement("tr", { className: "week" }, week.days.map((day, i) => {
         const t = day.dateObject.getTime();
         const value = values[day.value] ? values[day.value] : null;
         const inRange = t >= minTime && t <= maxTime;
@@ -111,7 +111,7 @@
             }
           }
         }
-        return /* @__PURE__ */ React.createElement(
+        return /* @__PURE__ */ wp.element.createElement(
           "td",
           {
             className: classes,
@@ -121,8 +121,8 @@
               }
             }
           },
-          /* @__PURE__ */ React.createElement("span", { class: "date" }, day.dateObject.getDate()),
-          value && value.content && /* @__PURE__ */ React.createElement("div", { className: "content" }, value.content)
+          /* @__PURE__ */ wp.element.createElement("span", { className: "date" }, day.dateObject.getDate()),
+          value && value.content && /* @__PURE__ */ wp.element.createElement("div", { className: "content" }, value.content)
         );
       }));
     }))));

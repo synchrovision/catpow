@@ -16,7 +16,7 @@ Catpow.Finder.Pagenate=(props)=>{
 					dispatch({type:'setPage',page:state.page-1});
 				}}
 			>
-				<div class={"icon dashicons dashicons-arrow-left-alt2"}></div>
+				<div className={"icon dashicons dashicons-arrow-left-alt2"}></div>
 			</div>
 			<ul className="items">
 				{[...Array(state.maxNumPages).keys()].map((i)=>{
@@ -40,7 +40,7 @@ Catpow.Finder.Pagenate=(props)=>{
 					dispatch({type:'setPage',page:state.page+1});
 				}}
 			>
-				<div class={"icon dashicons dashicons-arrow-right-alt2"}></div>
+				<div className={"icon dashicons dashicons-arrow-right-alt2"}></div>
 			</div>
 		</div>
 	);

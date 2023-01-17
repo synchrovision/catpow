@@ -112,7 +112,7 @@
 									<span className="btn prev" onClick={()=>dispatch({type:'prevYear'})}></span>
 								</Fragment>
 							)}
-							<span class="current">{state.year}</span>
+							<span className="current">{state.year}</span>
 							{showControl && (
 								<Fragment>
 									<span className="btn next" onClick={()=>dispatch({type:'nextYear'})}></span>
@@ -126,7 +126,7 @@
 							{showControl && (
 								<span className="btn prev" onClick={()=>dispatch({type:'prevMonth'})}></span>
 							)}
-							<span class="current">{state.month}</span>
+							<span className="current">{state.month}</span>
 							{showControl && (
 								<span className="btn next" onClick={()=>dispatch({type:'nextMonth'})}></span>
 							)}
@@ -161,7 +161,7 @@
 											if(inRange){onSelect(day.value,{day,value});}
 										}}
 									>
-										<span class="date">{day.dateObject.getDate()}</span>
+										<span className="date">{day.dateObject.getDate()}</span>
 										{value && value.content && (
 											<div className="content">{value.content}</div>
 										)}
