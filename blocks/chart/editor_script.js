@@ -106,6 +106,7 @@
               save();
             },
             contentEditable: true,
+            suppressContentEditableWarning: true,
             colSpan: graph[0].cols.length + 1
           },
           graph[0].title
@@ -118,7 +119,8 @@
                 col.label = e.currentTarget.innerHTML;
                 save();
               },
-              contentEditable: true
+              contentEditable: true,
+              suppressContentEditableWarning: true
             },
             col.label
           );
@@ -131,7 +133,8 @@
                 row.label = e.currentTarget.innerHTML;
                 save();
               },
-              contentEditable: true
+              contentEditable: true,
+              suppressContentEditableWarning: true
             },
             row.label
           ), row.vals.map((val, c) => {
@@ -144,6 +147,7 @@
                   save();
                 },
                 contentEditable: true,
+                suppressContentEditableWarning: true,
                 key: c
               },
               val.value

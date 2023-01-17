@@ -108,6 +108,7 @@
 									save();
 								}}
 								contentEditable={true}
+								suppressContentEditableWarning={true}
 								colSpan={graph[0].cols.length+1}
 							>{graph[0].title}</th>
 						 </tr>
@@ -122,6 +123,7 @@
 											save();
 										}}
 										contentEditable={true}
+										suppressContentEditableWarning={true}
 									>{col.label}</th>
 								 );
 							 })}
@@ -138,6 +140,7 @@
 										save();
 									}}
 									contentEditable={true}
+									suppressContentEditableWarning={true}
 									>{row.label}</th>
 								 {row.vals.map((val,c)=>{
 									 return (
@@ -148,6 +151,7 @@
 												save();
 											}}
 											contentEditable={true}
+											suppressContentEditableWarning={true}
 											key={c}
 										>{val.value}</td>
 									 );

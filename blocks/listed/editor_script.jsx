@@ -264,7 +264,8 @@ wp.blocks.registerBlockType('catpow/listed',{
 					{states.hasLink && isSelected &&
 						<div className='link'>
 							<p
-								contentEditable
+								contentEditable={true}
+								suppressContentEditableWarning={true}
 								onBlur={(e)=>{
 									item.linkUrl=e.currentTarget.innerHTML;
 									save();

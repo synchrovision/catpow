@@ -75,7 +75,8 @@
                 onBlur: (e) => {
                   saveItems();
                 },
-                contentEditable: "true"
+                contentEditable: true,
+                suppressContentEditableWarning: true
               },
               item.text
             ), isSelected && /* @__PURE__ */ wp.element.createElement(
@@ -88,7 +89,8 @@
                 onBlur: (e) => {
                   saveItems();
                 },
-                contentEditable: "true"
+                contentEditable: true,
+                suppressContentEditableWarning: true
               },
               item.url
             ))

@@ -80,7 +80,8 @@
 								item.text=e.target.innerText;
 							}}
 							onBlur={(e)=>{saveItems();}}
-							contentEditable="true"
+							contentEditable={true}
+							suppressContentEditableWarning={true}
 						>{item.text}</span>
 						{isSelected &&
 							<span className="url"
@@ -88,7 +89,8 @@
 									item.url=e.target.innerText;
 								}}
 								onBlur={(e)=>{saveItems();}}
-								contentEditable="true"
+								contentEditable={true}
+								suppressContentEditableWarning={true}
 							>{item.url}</span>
 						}
 					</div>

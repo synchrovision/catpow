@@ -62,7 +62,8 @@
                   item.text = e.target.innerText;
                 },
                 onBlur: saveItems,
-                contentEditable: "true"
+                contentEditable: true,
+                suppressContentEditableWarning: true
               },
               item.text
             ), /* @__PURE__ */ wp.element.createElement(
@@ -73,7 +74,8 @@
                   item.action = e.target.innerText;
                 },
                 onBlur: saveItems,
-                contentEditable: "true"
+                contentEditable: true,
+                suppressContentEditableWarning: true
               },
               item.action
             ))

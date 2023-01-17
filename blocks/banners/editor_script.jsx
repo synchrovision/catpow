@@ -93,7 +93,8 @@ wp.blocks.registerBlockType('catpow/banners',{
 					{isSelected &&
 						<div className='link'>
 							<p
-								contentEditable
+								contentEditable={true}
+								suppressContentEditableWarning={true}
 								onBlur={(e)=>{
 									item.linkUrl=e.currentTarget.innerHTML;
 									save();

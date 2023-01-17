@@ -250,6 +250,7 @@
               "p",
               {
                 contentEditable: true,
+                suppressContentEditableWarning: true,
                 onBlur: (e) => {
                   item.linkUrl = e.currentTarget.innerHTML;
                   save();

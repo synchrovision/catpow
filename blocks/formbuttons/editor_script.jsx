@@ -59,12 +59,14 @@
 						<span
 							onInput={(e)=>{item.text=e.target.innerText;}}
 							onBlur={saveItems}
-							contentEditable="true"
+							contentEditable={true}
+							suppressContentEditableWarning={true}
 						>{item.text}</span>
 						<span className="action"
 							onInput={(e)=>{item.action=e.target.innerText;}}
 							onBlur={saveItems}
-							contentEditable="true"
+							contentEditable={true}
+							suppressContentEditableWarning={true}
 						>{item.action}</span>
 					</div>
 				</CP.Item>
