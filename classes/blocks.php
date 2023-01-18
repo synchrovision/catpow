@@ -26,6 +26,7 @@ class blocks{
 		if(!empty($data['js'])){
 			foreach($data['js'] as $args){
 				call_user_func_array('wp_register_script',$args);
+				CP::set_script_translations($args[0]);
 			}
 		}
 		if(!empty($data['css'])){
@@ -163,9 +164,9 @@ class blocks{
 					case 'js':
 						$file_path_url=cp::get_file_path_url('blocks/'.$file_name);
 						$file_url=reset($file_path_url);
+						if(empty($file_url)){break;}
 						$data[$ext][$handle]=[$handle,(string)$file_url,self::$deps[$fname]];
 						if($is_core_block){
-							if(empty($file_url)){break;}
 							$key=$fname;
 							if(substr($key,0,6)==='front_'){
 								$key=substr($key,6);
