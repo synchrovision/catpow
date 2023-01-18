@@ -1,6 +1,7 @@
 ﻿import {CP} from './CP.jsx';
 
 CP.SelectPictureSources=(props)=>{
+	const {Icon}=wp.components;
 	const {devices}=props;
 	return (
 		<table className="SelectPictureSources">
