@@ -5,7 +5,8 @@
 		"michelf/php-markdown": "*",
 		"google/apiclient": "*",
 		"facebook/graph-sdk": "*",
-		"spatie/color": "*"
+		"spatie/color": "*",
+		"gettext/json": "^1.0"
 	},
 	"scripts": {
 		"post-update-cmd": "Google\\Task\\Composer::cleanup"

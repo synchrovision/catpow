@@ -48,6 +48,8 @@ class ComposerStaticInit1852ed70731dde04283bbb204d82800a
             'Google\\Service\\' => 15,
             'Google\\Auth\\' => 12,
             'Google\\' => 7,
+            'Gettext\\Languages\\' => 18,
+            'Gettext\\' => 8,
         ),
         'F' => 
         array (
@@ -75,8 +77,8 @@ class ComposerStaticInit1852ed70731dde04283bbb204d82800a
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -121,6 +123,15 @@ class ComposerStaticInit1852ed70731dde04283bbb204d82800a
         'Google\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/apiclient/src',
+        ),
+        'Gettext\\Languages\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/gettext/languages/src',
+        ),
+        'Gettext\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/gettext/json/src',
+            1 => __DIR__ . '/..' . '/gettext/gettext/src',
         ),
         'Firebase\\JWT\\' => 
         array (
