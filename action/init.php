@@ -69,13 +69,15 @@ add_action('admin_init',function(){
 },20);
 
 /* script translation */
-add_filter('load_script_translation_file',function($file,$handle,$domain){
+add_filter('pre_load_script_translations',function($translations,$file,$handle,$domain){
 	if($domain==='catpow' && substr($handle,-3)==='.js'){
 		$locale = determine_locale();
-		return \cp::get_file_path(dirname($handle).'/languages/'.substr(basename($handle),0,-3).'-'.$locale.'.json');
+		if($file=\cp::get_file_path(dirname($handle).'/languages/'.substr(basename($handle),0,-3).'-'.$locale.'.json')){
+			return file_get_contents($file);
+		}
 	}
-	return $file;
-},10,3);
+	return $translations;
+},10,4);
 
 /*add_image_size*/
 add_image_size('vga',640,480,1);
