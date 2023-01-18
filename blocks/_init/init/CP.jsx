@@ -612,18 +612,17 @@
 	inheritColor:(props,images)=>{
 		const {attributes,className,setAttributes,context}=props;
 		const {setURLparams}=Catpow.util;
-		const {classes,color,inheritColor}=attributes;
-		const {useEffect}=wp.element;
-		if(undefined === inheritColor){
-			setAttributes({inheritColor:color === "0" || context['catpow/color'] === color})
-		}
-		wp.element.useEffect(()=>{
+		const {classes,color}=attributes;
+		const {useEffect,useMemo}=wp.element;
+		const inheritColor=useMemo(()=>{
+			return color === "0" || context['catpow/color'] === color;
+		},[color,context['catpow/color']]);
+		useEffect(()=>{
 			if(inheritColor && context['catpow/color']!=="0"){setAttributes({color:context['catpow/color']});}
 			setAttributes({inheritColor:color === context['catpow/color']});
 		},[context['catpow/color']]);
-		wp.element.useEffect(()=>{
+		useEffect(()=>{
 			const atts={
-				inheritColor:color==context['catpow/color'],
 				classes:classes.replace(/color\d+\s*/,'')+' color'+color
 			};
 			images.forEach((key)=>{
@@ -644,15 +643,17 @@
 		const {id,prevId,styleDatas}=attributes;
 		const {useEffect}=wp.element;
 		
-		if(!id){setAttributes({id:'s'+(new Date().getTime().toString(16))})}
-		if(undefined === styleDatas){
-			const styleDatas={};
-			csss.forEach((key)=>{
-				styleDatas[key]=CP.parseStyleCodeWithMediaQuery(attributes[key]);
-			});
-			setAttributes({styleDatas});
-		}
-		wp.element.useEffect(()=>{
+		useEffect(()=>{
+			if(!id){setAttributes({id:'s'+(new Date().getTime().toString(16))})}
+			if(undefined === styleDatas){
+				const styleDatas={};
+				csss.forEach((key)=>{
+					styleDatas[key]=CP.parseStyleCodeWithMediaQuery(attributes[key]);
+				});
+				setAttributes({styleDatas});
+			}
+		},[]);
+		useEffect(()=>{
 			if(id && id.length>2){
 				if(document.querySelectorAll('#'+id).length>1){
 					setAttributes({id:'s'+(new Date().getTime().toString(16))})
