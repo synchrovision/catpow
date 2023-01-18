@@ -76,7 +76,7 @@ function cp_po_compile($po_files){
 		if(!file_exists($po_file)){continue;}
 		if(!file_exists($jed_file) or filemtime($jed_file) < filemtime($po_file)){
 			if(!is_dir(dirname($jed_file))){mkdir(dirname($jed_file),0777,true);}
-			passthru("po2json {$po_file} {$jed_file} -f jed1.x -d catpow");
+			passthru("npx po2json {$po_file} {$jed_file} -f jed1.x -d catpow");
 			echo "build {$jed_file}\n";
 			touch($jed_file);
 		}
