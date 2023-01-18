@@ -180,7 +180,7 @@ jQuery.catpow.pageTopOffset=0;
 				var url=$(this).attr('href');
 				var data_url=url;
 				if($(this).attr('data-ajax-url')!==null){data_url=$(this).attr('data-ajax-url');}
-				$(this).click(function(i,e){
+				$(this).on('click',function(i,e){
 					e.preventDefault();
 					$.ajax({
 						url:data_url,
@@ -413,7 +413,7 @@ jQuery.catpow.pageTopOffset=0;
 				});
 			}else{
 				var crr=0;
-				$(window).scroll(function(){
+				$(window).on('scroll',function(){
 					var s=$(this).scrollTop();
 					var n=0;
 					for(var t in thr){
@@ -778,7 +778,7 @@ jQuery.catpow.pageTopOffset=0;
 			}
 			if(prm.scrollable){
 				$(document).on('wheel,mousewheel,DOMMouseScroll,touchmove',function(e){if(in_interval){e.preventDefault();}});
-				$(window).scroll(function(){
+				$(window).on('scroll',function(){
 					by_scroll=true;
 					$control.goto(Math.floor(len*$(window).scrollTop()/($(document).height()-$(window).innerHeight())));
 				});
@@ -879,7 +879,7 @@ jQuery.catpow.pageTopOffset=0;
 		//クリックで次要素をスライドダウン、自身にactiveクラスを付加、再度クリックで元に戻る
 		cp_accordion:function(){
 			$(this).css({cursor:'pointer'}).next().hide();
-			$(this).click(function(){
+			$(this).on('click',function(){
 				if($(this).hasClass('active')){
 					$(this).next().slideUp();
 					$(this).removeClass('active');
@@ -896,7 +896,7 @@ jQuery.catpow.pageTopOffset=0;
 			$group.labels=$group.children(':even');
 			$group.contents=$group.children(':odd');
 			$group.contents.hide();
-			$group.labels.click(function(){
+			$group.labels.on('click',function(){
 				if($(this).hasClass('active')){
 					$group.contents.stop().slideUp();
 					$group.labels.removeClass('active');
@@ -917,7 +917,7 @@ jQuery.catpow.pageTopOffset=0;
 			if(!$tgt){$tgt=$(this).next();}
 			$(this).children().each(function(i){
 				$tgt.children().hide();
-				$(this).click(function(){
+				$(this).on('click',function(){
 					$tgt.children().hide();
 					$tgt.children().eq(i).show();
 					$self.children().removeClass('active');
