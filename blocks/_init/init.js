@@ -1595,8 +1595,9 @@
 
   // blocks/_init/init/SelectPictureSources.jsx
   CP.SelectPictureSources = (props) => {
+    const { Icon } = wp.components;
     const { devices } = props;
-    return /* @__PURE__ */ wp.element.createElement("table", { className: "SelectPictureSources" }, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { colspan: devices.length }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props }))), /* @__PURE__ */ wp.element.createElement("tr", null, devices.map((device) => /* @__PURE__ */ wp.element.createElement("td", { key: device }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement("table", { className: "SelectPictureSources" }, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { colSpan: devices.length }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props }))), /* @__PURE__ */ wp.element.createElement("tr", null, devices.map((device) => /* @__PURE__ */ wp.element.createElement("td", { key: device }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(
       CP.SelectResponsiveImage,
       {
         device,
@@ -2998,7 +2999,7 @@
   CP.EventInputCards = (props) => {
     const { title, onChange } = props;
     const { useState, useReducer, useCallback, useEffect, useMemo } = wp.element;
-    const { BaseControl, Card, CardHeader, CardBody, Flex, FlexItem, FlexBlock, Icon: Icon2, TextControl } = wp.components;
+    const { BaseControl, Card, CardHeader, CardBody, Flex, FlexItem, FlexBlock, Icon, TextControl } = wp.components;
     const { processerId, eventTypes, parseEventValue, createEventValue, eventParams } = props.processer;
     const reducer = useCallback((state2, action) => {
       switch (action.type) {
@@ -3056,7 +3057,7 @@
         return Object.keys(eventParams).filter((paramName) => !eventParams[paramName].limited);
       }, [eventTypes, eventParams, event.eventType]);
       return /* @__PURE__ */ wp.element.createElement(Card, { className: "EventInputCard" }, /* @__PURE__ */ wp.element.createElement(CardHeader, { className: "EventInputCard__header" }, /* @__PURE__ */ wp.element.createElement(Flex, null, /* @__PURE__ */ wp.element.createElement(FlexBlock, null, title), /* @__PURE__ */ wp.element.createElement(FlexItem, null, /* @__PURE__ */ wp.element.createElement(
-        Icon2,
+        Icon,
         {
           icon: "insert",
           onClick: () => {
@@ -3064,7 +3065,7 @@
           }
         }
       ), state.events.length > 1 && /* @__PURE__ */ wp.element.createElement(
-        Icon2,
+        Icon,
         {
           icon: "remove",
           onClick: () => {

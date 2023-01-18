@@ -7,7 +7,7 @@ CP.SelectPictureSources=(props)=>{
 		<table className="SelectPictureSources">
 			<tbody>
 				<tr>
-					<td colspan={devices.length}>
+					<td colSpan={devices.length}>
 						<CP.SelectResponsiveImage {...props}/>
 					</td>
 				</tr>
