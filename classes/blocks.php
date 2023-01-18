@@ -123,13 +123,13 @@ class blocks{
 			foreach(glob($block_init_dir.'/*.js') as $format_script){
 				$fname=basename($format_script);
 				$code_name=substr(strstr($format_script,'/wp-content/'),12,-3);
-				wp_register_script($code_name,$block_init_url.'/'.$fname,['wp-blocks','wp-i18n','wp-element','wp-editor','catpow','wpinfo']);
+				$data['js'][$code_name]=[$code_name,$block_init_url.'/'.$fname,['wp-blocks','wp-i18n','wp-element','wp-editor','catpow','wpinfo']];
 				self::$deps['editor_script'][]=$code_name;
 			}
 			foreach(glob($block_init_dir.'/*.css') as $format_style){
 				$fname=basename($format_style);
 				$code_name=substr(strstr($format_style,'/wp-content/'),12,-4);
-				wp_register_style($code_name,$block_init_url.'/'.$fname);
+				$data['css'][$code_name]=[$code_name,$block_init_url.'/'.$fname];
 				cp::scss_compile(substr($format_style,0,-3).'scss');
 				self::$deps['editor_style'][]=$code_name;
 			}
