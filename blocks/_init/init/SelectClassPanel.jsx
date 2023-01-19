@@ -295,9 +295,9 @@ CP.SelectClassPanel=(props)=>{
 						label='色'
 						set={props.set}
 						attr={props.attr}
-						selected={Object.keys(states).find(key=>/^color\d+/.test(key))}
+						selected={Object.keys(states).find(key=>CP.colorClassPattern.test(key))}
 						onChange={(color)=>{
-							CP.filterFlags(states,(key)=>!(/^color\d+/.test(key)));
+							CP.filterFlags(states,(key)=>!(CP.colorClassPattern.test(key)));
 							states[color]=true;
 							if(!items){set({color:color.substr(5)});}
 							saveClasses();
