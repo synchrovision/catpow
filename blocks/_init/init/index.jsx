@@ -35,3 +35,4 @@ import './DummyImage.jsx';
 import './DataStructure.jsx';
 import './EventInputCards.jsx';
 import './ServerSideRender.jsx';
+import './ColorVarTracer.jsx';
