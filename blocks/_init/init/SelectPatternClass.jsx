@@ -12,6 +12,7 @@ CP.SelectPatternClass=(props)=>{
 			<li
 				className={classes}
 				onClick={()=>onChange(value)}
+				key={value}
 			> </li>
 		);
 	});
