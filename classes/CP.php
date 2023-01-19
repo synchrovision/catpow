@@ -391,6 +391,7 @@ class CP{
 		return true;
 	}
 	public static function set_script_translations($src){
+		if(current_user_can('edit_themes')){util\i18n::make_json_for_script($src);}
 		wp_set_script_translations($src,'catpow',WP_PLUGIN_DIR.'/catpow/languages');
 	}
 	public static function enqueue_style($src=false,$deps=array(),$flag=0733,$ver=false,$media=false){
