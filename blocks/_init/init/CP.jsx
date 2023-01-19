@@ -636,6 +636,21 @@
 			setAttributes(atts);
 		},[color]);
 	},
+	parseColorClass:(colorClass)=>{
+		if(colorClass){
+			const matches=colorClass.match(CP.colorClassPattern);
+			if(matches){
+				return {
+					absolute:matches[2]==='--',
+					relative:matches[2]==='_',
+					value:matches[3]
+				};
+			}
+		}
+		return {absolute:false,relative:false,value:0};
+	},
+	generateColorClass:(data)=>'color'+(data.absolute?'--':(data.relative?'_':''))+data.value,
+	colorClassPattern:/^color((|_|\-\-)(\-?\d+))$/,
 	
 	/*id reflection*/
 	manageStyleData:(props,csss)=>{
