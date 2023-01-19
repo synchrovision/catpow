@@ -7,11 +7,12 @@ CP.EditItemsTable=(props)=>{
 	const save=()=>{
 		set({[itemsKey]:JSON.parse(JSON.stringify(items))});	
 	};
+	
 	return (
 		<table className="editItemsTable">
 			<thead>
 				<tr>
-					{columns.map((col)=>((!('cond' in col) || col.cond)?<th key={col.key}>{col.label || col.key}</th>:false))}
+					{columns.map((col,c)=>((!('cond' in col) || col.cond)?<th key={c}>{col.label || col.key}</th>:false))}
 					<th></th>
 				</tr>
 			</thead>
@@ -25,12 +26,12 @@ CP.EditItemsTable=(props)=>{
 							}}
 							key={index}
 						>
-							{columns.map((col)=>{
+							{columns.map((col,c)=>{
 								if('cond' in col && !col.cond){return false;}
 								switch(col.type){
 									case 'text':
 										return (
-											<td key={col.key}>
+											<td key={c}>
 												<RichText
 													value={item[col.key]}
 													onChange={(value)=>{
@@ -42,7 +43,7 @@ CP.EditItemsTable=(props)=>{
 										);
 									case 'image':
 										return (
-											<td key={col.key}>
+											<td key={c}>
 												<CP.SelectResponsiveImage
 													attr={attr}
 													set={set}
@@ -55,7 +56,7 @@ CP.EditItemsTable=(props)=>{
 										);
 									case 'picture':
 										return (
-											<td key={col.key}>
+											<td key={c}>
 												<CP.SelectPictureSources
 													index={index}
 													attr={attr}
@@ -72,7 +73,7 @@ CP.EditItemsTable=(props)=>{
 											if(subCol.keys){subCol.keys.subItems=col.key;}
 										});
 										return (
-											<td key={col.key}>
+											<td key={c}>
 												<CP.EditItemsTable
 													set={()=>{
 														save();
