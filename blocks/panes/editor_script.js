@@ -26,7 +26,7 @@
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
-      const { PanelBody, TextareaControl } = wp.components;
+      const { Icon, PanelBody, TextareaControl } = wp.components;
       const { items = [], classes = "", loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
       var states = CP.wordsToFlags(classes);
       const { imageKeys } = CP.config.panes;

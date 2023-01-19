@@ -21,7 +21,7 @@
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useState, useMemo } = wp.element;
       const { InnerBlocks, InspectorControls, RichText: RichText2 } = wp.blockEditor;
-      const { PanelBody, TextareaControl } = wp.components;
+      const { Icon, PanelBody, TextareaControl } = wp.components;
       const { items = [], classes: classes2 = "", countPrefix, countSuffix, subCountPrefix, subCountSuffix, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
       const primaryClass = "wp-block-catpow-dialog";
       var classArray = _.uniq((className + " " + classes2).split(" "));

@@ -9,7 +9,7 @@
     example: CP.example,
     edit({ attributes, setAttributes, className }) {
       const { InnerBlocks, BlockControls, InspectorControls } = wp.blockEditor;
-      const { PanelBody, TextareaControl, TextControl } = wp.components;
+      const { Icon, PanelBody, TextareaControl, TextControl } = wp.components;
       const { content_path, query, AltMode = false } = attributes;
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
         Toolbar,

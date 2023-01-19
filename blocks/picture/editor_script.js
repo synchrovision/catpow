@@ -22,6 +22,7 @@
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { InspectorControls } = wp.blockEditor;
+      const { Icon } = wp.components;
       const { classes, sources, src, srcset, alt, code, device } = attributes;
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys } = CP.config.picture;

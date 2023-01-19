@@ -26,7 +26,7 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
 		const {InnerBlocks,InspectorControls,RichText}=wp.blockEditor;
-		const {PanelBody,TextareaControl} = wp.components;
+		const {Icon,PanelBody,TextareaControl}=wp.components;
 		const {items=[],classes,boxClasses,blockState,loopCount,doLoop,EditMode=false,AltMode=false,OpenMode=false,currentItemIndex=0}=attributes;
 		const {imageKeys}=CP.config.lightbox;
 

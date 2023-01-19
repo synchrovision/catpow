@@ -50,7 +50,7 @@
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
 		const {InnerBlocks,InspectorControls,RichText}=wp.blockEditor;
-		const {PanelBody,TextareaControl} = wp.components;
+		const {Icon,PanelBody,TextareaControl} = wp.components;
 		const {classes,rows=[],doLoop,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-datatable';
 		var classArray=_.uniq((className+' '+classes).split(' '));

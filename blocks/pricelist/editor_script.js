@@ -9,7 +9,7 @@
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useState, useMemo } = wp.element;
       const { InnerBlocks, InspectorControls, RichText: RichText2 } = wp.blockEditor;
-      const { PanelBody, TextareaControl } = wp.components;
+      const { Icon, PanelBody, TextareaControl } = wp.components;
       const { items = [], classes: classes2, loopParam, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
       const primaryClass = "wp-block-catpow-pricelist";
       var states = CP.wordsToFlags(classes2);

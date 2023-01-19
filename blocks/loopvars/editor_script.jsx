@@ -6,7 +6,7 @@
 	example:CP.example,
 	edit({attributes,setAttributes,className}){
 		const {InnerBlocks,InspectorControls}=wp.blockEditor;
-		const {PanelBody} = wp.components;
+		const {Icon,PanelBody} = wp.components;
 		const {items,columns,EditMode=false}=attributes;
 
 		return (

@@ -25,7 +25,7 @@ wp.blocks.registerBlockType('catpow/banners',{
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
 		const {InnerBlocks,InspectorControls,RichText}=wp.blockEditor;
-		const {PanelBody,TextareaControl} = wp.components;
+		const {Icon,PanelBody,TextareaControl}=wp.components;
 		const {items=[],classes,loopCount,imageCode,doLoop,EditMode=false,AltMode=false}=attributes;
 		
 		const states=CP.wordsToFlags(classes);

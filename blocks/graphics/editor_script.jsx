@@ -87,7 +87,7 @@ wp.blocks.registerBlockType('catpow/graphics',{
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
 		const {InspectorControls,RichText}=wp.blockEditor;
-		const {PanelBody,TextareaControl,TextControl} = wp.components;
+		const {Icon,PanelBody,TextareaControl,TextControl}=wp.components;
 		const {id,classes='',src,srcset,alt,heights,items=[],device}=attributes;
 
 		if(!id){

@@ -8,7 +8,7 @@
     example: CP.example,
     edit({ attributes, setAttributes, className, clientId }) {
       const { InnerBlocks: InnerBlocks2, BlockControls, InspectorControls } = wp.blockEditor;
-      const { PanelBody, TreeSelect, TextareaControl, ServerSideRender } = wp.components;
+      const { Icon, PanelBody, TreeSelect, TextareaControl, ServerSideRender } = wp.components;
       const { content_path, deps = {}, query, config, EditMode = false } = attributes;
       const { useMemo } = wp.element;
       let configData;

@@ -30,6 +30,7 @@ wp.blocks.registerBlockType('catpow/switcher',{
 	edit(props){
 		const {attributes,className,setAttributes,isSelected,clientId}=props;
 		const {useState,useEffect,useMemo,useCallback}=wp.element;
+		const {Icon}=wp.components;
 		const {currentIndex=0}=attributes;
 		const [newBlocks,setNewBlocks]=useState(false);
 		const {factors,factorFlags,flagValues}=CP.config.switcher;

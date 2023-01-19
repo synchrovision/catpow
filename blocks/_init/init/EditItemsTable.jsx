@@ -2,6 +2,7 @@ import {CP} from './CP.jsx';
 
 CP.EditItemsTable=(props)=>{
 	const {set,attr,itemsKey='items',columns,isTemplate}=props;
+	const {RichText}=wp.blockEditor;
 	const items=attr[itemsKey] || [];
 	const save=()=>{
 		set({[itemsKey]:JSON.parse(JSON.stringify(items))});	

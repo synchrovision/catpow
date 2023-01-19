@@ -34,7 +34,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 	edit({attributes,className,setAttributes}){
 		const {useState,useMemo}=wp.element;
 		const {InnerBlocks,InspectorControls,RichText}=wp.blockEditor;
-		const {PanelBody,TextareaControl} = wp.components;
+		const {Icon,PanelBody,TextareaControl} = wp.components;
 		const {classes='',controlClasses='',config,items,doLoop,EditMode=false,AltMode=false,device}=attributes;
 
 		const states=CP.wordsToFlags(classes);

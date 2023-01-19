@@ -38,7 +38,7 @@
     edit({ attributes, className, setAttributes }) {
       const { useState, useMemo } = wp.element;
       const { InnerBlocks, InspectorControls, RichText: RichText2 } = wp.blockEditor;
-      const { PanelBody, TextareaControl } = wp.components;
+      const { Icon, PanelBody, TextareaControl } = wp.components;
       const { classes: classes2 = "", controlClasses = "", config, items, doLoop, EditMode = false, AltMode = false, device } = attributes;
       const states = CP.wordsToFlags(classes2);
       const { devices, imageKeys, imageSizes } = CP.config.slider;

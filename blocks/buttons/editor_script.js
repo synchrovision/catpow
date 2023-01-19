@@ -9,7 +9,7 @@
     edit(props) {
       const { useState, useMemo } = wp.element;
       const { BlockControls, InnerBlocks: InnerBlocks2, InspectorControls } = wp.blockEditor;
-      const { PanelBody, TextareaControl } = wp.components;
+      const { Icon, PanelBody, TextareaControl } = wp.components;
       const { attributes, className, setAttributes, isSelected } = props;
       const { items = [], classes: classes2, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
       const primaryClass = "wp-block-catpow-buttons";
