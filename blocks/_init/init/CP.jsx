@@ -623,7 +623,7 @@
 		},[context['catpow/color']]);
 		useEffect(()=>{
 			const atts={
-				classes:classes.split(' ').filter(str=>!CP.colorClassPattern.test(str)).join(' ')+' color'+color
+				classes:classes.split(' ').filter(str=>!CP.colorClassPattern.test(str)).join(' ')+(color!==undefined?' color'+color:'')
 			};
 			images.forEach((key)=>{
 				if(!attributes[key]){return;}
