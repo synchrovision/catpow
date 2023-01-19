@@ -6,9 +6,10 @@ wp.richText.registerFormatType('catpow/ruby',{
 	className:null,
 	edit({isActive,value,onChange}){
 		const {RichTextShortcut,RichTextToolbarButton}=wp.editor;
+		const {toggleFormat}=wp.richText;
 		const onToggle=()=>{
 			if(isActive){
-				return onChange(wp.richText.toggleFormat(value,{type:'catpow/ruby'}));
+				return onChange(toggleFormat(value,{type:'catpow/ruby'}));
 			}
 			if(wp.richText.isCollapsed(value)){alert(__('ルビをつけたいテキストを選択してください'));return;}
 			let rt=prompt(__('ルビを入力'));
@@ -62,6 +63,7 @@ wp.richText.registerFormatType('catpow/small',{
 	className:null,
 	edit({isActive,value,onChange}){
 		const {RichTextToolbarButton,RichTextShortcut}=wp.editor;
+		const {toggleFormat}=wp.richText;
 		const onToggle=()=>onChange(toggleFormat(value,{type:'catpow/small'}));
 
 		const icon=(
@@ -104,7 +106,7 @@ wp.richText.registerFormatType('catpow/title',{
 		const {BlockControls} = wp.blockEditor;
 		const {Popover,Card,CardBody,Toolbar}=wp.components;
 		const {useMemo,useCallback}=wp.element;
-		const {applyFormat}=wp.richText;
+		const {applyFormat,toggleFormat}=wp.richText;
 
 		const onToggle=()=>{
 			return onChange(toggleFormat(value,{type:'catpow/title',attributes:{type:'iheader'}}));
@@ -173,7 +175,7 @@ wp.richText.registerFormatType('catpow/mark',{
 		const {RichTextShortcut,RichTextToolbarButton}=wp.editor;
 		const {BlockControls}=wp.blockEditor;
 		const {useMemo,useCallback}=wp.element;
-		const {applyFormat}=wp.richText;
+		const {applyFormat,toggleFormat}=wp.richText;
 
 		const onToggle=()=>{
 			return onChange(toggleFormat(value,{type:'catpow/mark',attributes:{color:'color0'}}));
@@ -234,7 +236,7 @@ wp.richText.registerFormatType('catpow/large',{
 		const {useMemo,useCallback}=wp.element;
 		const {RichTextToolbarButton}=wp.editor;
 		const {BlockControls} = wp.blockEditor;
-		const {applyFormat}=wp.richText;
+		const {applyFormat,toggleFormat}=wp.richText;
 
 		const onToggle=()=>{
 			return onChange(toggleFormat(value,{type:'catpow/large',attributes:{color:'color0'}}));
@@ -300,7 +302,7 @@ wp.richText.registerFormatType('catpow/tag',{
 		const {BlockControls} = wp.blockEditor;
 		const {RichTextToolbarButton,RichTextShortcut}=wp.editor;
 		const {useState,useMemo,useCallback}=wp.element;
-		const {removeFormat,applyFormat,insert,create,slice}=wp.richText;
+		const {removeFormat,applyFormat,toggleFormat,insert,create,slice}=wp.richText;
 
 		const onToggle=()=>{
 			return onChange(toggleFormat(value,{type:'catpow/tag',attributes:{class:'color0'}}));
@@ -359,6 +361,7 @@ wp.richText.registerFormatType('catpow/annotation',{
 		const {BlockControls} = wp.blockEditor;
 		const {Toolbar}=wp.components;
 		const {RichTextToolbarButton}=wp.editor;
+		const {toggleFormat}=wp.richText;
 
 		const onToggle=()=>onChange(toggleFormat(value,{type:'catpow/annotation'}));
 
