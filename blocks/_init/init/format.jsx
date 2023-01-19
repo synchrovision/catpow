@@ -128,7 +128,7 @@ wp.richText.registerFormatType('catpow/title',{
 		return (
 			<>
 				{isActive && (
-					<Popover getAnchorRect={()=>el.getBoundingClientRect()} position='bottom left' focusOnMount={false}>
+					<Popover anchor={el} position='bottom left' focusOnMount={false}>
 						<Card size="small">
 							<CardBody>
 								<CP.SelectButtons
@@ -193,7 +193,7 @@ wp.richText.registerFormatType('catpow/mark',{
 		return (
 			<>
 				{isActive && (
-					<Popover getAnchorRect={()=>el.getBoundingClientRect()} position='bottom center' focusOnMount={false}>
+					<Popover anchor={el} position='bottom center' focusOnMount={false}>
 						<Card size="small">
 							<CardBody>
 								<CP.SelectThemeColor
@@ -256,7 +256,7 @@ wp.richText.registerFormatType('catpow/large',{
 		return (
 			<>
 				{isActive && (
-					<Popover getAnchorRect={()=>el.getBoundingClientRect()} position='bottom center' focusOnMount={false}>
+					<Popover anchor={el} position='bottom center' focusOnMount={false}>
 						<Card size="small">
 							<CardBody>
 								<CP.SelectThemeColor
@@ -311,7 +311,7 @@ wp.richText.registerFormatType('catpow/tag',{
 		return (
 			<>
 				{isActive && (
-					<Popover getAnchorRect={()=>el.getBoundingClientRect()} position='bottom center' focusOnMount={false}>
+					<Popover anchor={el} position='bottom center' focusOnMount={false}>
 						<Card>
 							<CardBody>
 								<TextControl
