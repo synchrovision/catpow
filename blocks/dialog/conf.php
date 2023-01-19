@@ -6,10 +6,10 @@ $attributes=[
 		"selector"=>'li.item',
 		"query"=>[
 			"classes"=>["source"=>'attribute',"attribute"=>'class'],
-			"title"=>["source"=>'children',"selector"=>'header .text h3'],
+			"title"=>["source"=>'html',"selector"=>'header .text h3'],
 			"headerImageSrc"=>["source"=>'attribute',"selector"=>'header .image [src]',"attribute"=>'src'],
 			"headerImageAlt"=>["source"=>'attribute',"selector"=>'header .image [src]',"attribute"=>'alt'],
-			"text"=>["source"=>'children',"selector"=>'.contents p']
+			"text"=>["source"=>'html',"selector"=>'.contents p']
 		],
 		"default"=>array_map(function(){
 			return [

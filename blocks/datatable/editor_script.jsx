@@ -38,7 +38,7 @@
 						classes:"wp-block-catpow-datatable spec",
 						rows:attributes.body.map((row)=>({
 							cells:row.cells.map((cell)=>({
-								text:wp.blocks.parseWithAttributeSchema(cell.content,{source:'children'})
+								text:wp.blocks.parseWithAttributeSchema(cell.content,{source:'html'})
 							}))
 						}))
 					});
@@ -261,7 +261,7 @@
 									return wp.element.createElement(
 										(states.hasHeaderColumn && columnIndex==0)?'th':'td',
 										{className:cell.classes,key:columnIndex},
-										cell.text
+										<RichText.Content value={cell.text}/>
 									);
 								})}
 							</tr>

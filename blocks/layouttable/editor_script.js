@@ -46,7 +46,7 @@
             source: "query",
             selector: "th,td",
             query: {
-              text: { source: "children" },
+              text: { source: "html" },
               classes: { source: "attribute", attribute: "class" },
               rowspan: { source: "attribute", attribute: "rowspan" },
               colspan: { source: "attribute", attribute: "colspan" },

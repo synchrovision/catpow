@@ -503,11 +503,11 @@ wp.blocks.registerBlockType('catpow/slider',{
 					source:'query',
 					selector:'li.item',
 					query:{
-						title:{source:'children',selector:'.text h3'},
-						subTitle:{source:'children',selector:'.text h4'},
+						title:{source:'html',selector:'.text h3'},
+						subTitle:{source:'html',selector:'.text h4'},
 						src:{source:'attribute',selector:'.image [src]',attribute:'src'},
 						alt:{source:'attribute',selector:'.image [src]',attribute:'alt'},
-						text:{source:'children',selector:'.text p'},
+						text:{source:'html',selector:'.text p'},
 						url:{source:'attribute',selector:'a',attribute:'href'},
 						bg:{source:'attribute',attribute:'style'}
 					},

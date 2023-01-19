@@ -31,7 +31,7 @@
 					source:'query',
 					selector:'th,td',
 					query:{
-						text:{source:'children'},
+						text:{source:'html'},
 						classes:{source:'attribute',attribute:'class'},
 						style:{source:'attribute',attribute:'style'}
 					}

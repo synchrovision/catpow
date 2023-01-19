@@ -37,7 +37,7 @@
 	},
 	attributes:{
 		classes:{source:'attribute',selector:'table',attribute:'class',default:'wp-block-catpow-t-paragraph medium'},
-		text:{source:'children',selector:'tbody td',default:'text'}
+		text:{source:'html',selector:'tbody td',default:'text'}
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,onReplace,mergeBlocks}){

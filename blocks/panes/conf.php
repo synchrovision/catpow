@@ -6,8 +6,8 @@ $attributes=[
 		"selector"=>'li.item',
 		"query"=>[
 			"classes"=>["source"=>'attribute',"attribute"=>'class'],
-			"title"=>["source"=>'children',"selector"=>'.contents .text h3'],
-			"titleCaption"=>["source"=>'children',"selector"=>'.contents .text p'],
+			"title"=>["source"=>'html',"selector"=>'.contents .text h3'],
+			"titleCaption"=>["source"=>'html',"selector"=>'.contents .text p'],
 
 			"src"=>["source"=>'attribute',"selector"=>'li>.image [src]',"attribute"=>'src'],
 			"alt"=>["source"=>'attribute',"selector"=>'li>.image [src]',"attribute"=>'alt'],

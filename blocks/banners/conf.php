@@ -6,7 +6,7 @@ $attributes=[
 		"selector"=>'li.item',
 		"query"=>[
 			"classes"=>["source"=>'attribute',"attribute"=>'class'],
-			"title"=>["source"=>'children',"selector"=>'h3'],
+			"title"=>["source"=>'html',"selector"=>'h3'],
 			"src"=>["source"=>'attribute',"selector"=>'[src]',"attribute"=>'src'],
 			"alt"=>["source"=>'attribute',"selector"=>'[src]',"attribute"=>'alt'],
 			"imageCode"=>["source"=>'text',"selector"=>'a'],

@@ -8,7 +8,7 @@
     parent: ["catpow/t-body", "catpow/t-box", "catpow/t-loop"],
     attributes: {
       classes: { source: "attribute", selector: "a", attribute: "class", default: "wp-block-catpow-t-button medium" },
-      title: { source: "children", selector: "tbody td", default: "Title" },
+      title: { source: "html", selector: "tbody td", default: "Title" },
       url: { source: "attribute", selector: "a", attribute: "href", default: wpinfo.home_url }
     },
     example: CP.example,

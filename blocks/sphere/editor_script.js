@@ -32,8 +32,8 @@
           classes: { source: "attribute", attribute: "class" },
           subImageSrc: { source: "attribute", selector: ".contents .image [src]", attribute: "src" },
           subImageAlt: { source: "attribute", selector: ".contents .image [src]", attribute: "alt" },
-          subTitle: { source: "children", selector: ".contents h4" },
-          text: { source: "children", selector: ".contents p" }
+          subTitle: { source: "html", selector: ".contents h4" },
+          text: { source: "html", selector: ".contents p" }
         },
         default: [...Array(3)].map(() => {
           return {

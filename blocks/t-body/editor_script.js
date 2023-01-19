@@ -12,8 +12,8 @@
       type: { type: "string", source: "meta", meta: "type", default: "html" },
       isHtmlMail: { type: "boolean", default: false },
       classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-body hasHeader hasFooter" },
-      headerText: { source: "children", selector: "thead th", default: ["Title"] },
-      footerText: { source: "children", selector: "tfoot td", default: ["caption"] },
+      headerText: { source: "html", selector: "thead th", default: ["Title"] },
+      footerText: { source: "html", selector: "tfoot td", default: ["caption"] },
       body_class: { type: "string", default: "white" },
       textMail: { source: "text", selector: "textmail" }
     },

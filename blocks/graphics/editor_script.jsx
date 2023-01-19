@@ -61,9 +61,9 @@ wp.blocks.registerBlockType('catpow/graphics',{
 				srcset:{source:'attribute',selector:'[src]',attribute:'srcset'},
 				alt:{source:'attribute',selector:'[src]',attribute:'alt'},
 				sources:CP.getPictureSoucesAttributes(),
-				title:{source:'children',selector:'.title'},
-				lead:{source:'children',selector:'.lead'},
-				text:{source:'children',selector:'.text'},
+				title:{source:'html',selector:'.title'},
+				lead:{source:'html',selector:'.lead'},
+				text:{source:'html',selector:'.text'},
 				link:{source:'attribute',attribute:'href'}
 			},
 			default:[

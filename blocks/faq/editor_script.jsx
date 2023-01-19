@@ -28,12 +28,12 @@ wp.blocks.registerBlockType('catpow/faq',{
 			selector:'li.item',
 			query:{
 				classes:{source:'attribute',attribute:'class'},
-				title:{source:'children',selector:'header .text h3'},
-				titleCaption:{source:'children',selector:'header .text p'},
+				title:{source:'html',selector:'header .text h3'},
+				titleCaption:{source:'html',selector:'header .text p'},
 				src:{source:'attribute',selector:'li>.image [src]',attribute:'src'},
 				alt:{source:'attribute',selector:'li>.image [src]',attribute:'alt'},
-				subTitle:{source:'children',selector:'.contents h4'},
-				text:{source:'children',selector:'.contents p'},
+				subTitle:{source:'html',selector:'.contents h4'},
+				text:{source:'html',selector:'.contents p'},
 				linkUrl:{source:'attribute',selector:'.link a',attribute:'href'}
 			},
 			default:[...Array(3)].map(()=>{

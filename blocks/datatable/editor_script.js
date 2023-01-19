@@ -41,7 +41,7 @@
               classes: "wp-block-catpow-datatable spec",
               rows: attributes.body.map((row) => ({
                 cells: row.cells.map((cell) => ({
-                  text: wp.blocks.parseWithAttributeSchema(cell.content, { source: "children" })
+                  text: wp.blocks.parseWithAttributeSchema(cell.content, { source: "html" })
                 }))
               }))
             });
@@ -220,7 +220,7 @@
           return wp.element.createElement(
             states.hasHeaderColumn && columnIndex == 0 ? "th" : "td",
             { className: cell.classes, key: columnIndex },
-            cell.text
+            /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: cell.text })
           );
         }));
       }))), doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));

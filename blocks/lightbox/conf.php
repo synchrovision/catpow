@@ -7,8 +7,8 @@ $attributes=[
 		"selector"=>'li.item',
 		"query"=>[
 			"classes"=>["source"=>'attribute',"attribute"=>'class'],
-			"title"=>["source"=>'children',"selector"=>'header .text h3'],
-			"titleCaption"=>["source"=>'children',"selector"=>'header .text p'],
+			"title"=>["source"=>'html',"selector"=>'header .text h3'],
+			"titleCaption"=>["source"=>'html',"selector"=>'header .text p'],
 			
 			"headerImageSrc"=>["source"=>'attribute',"selector"=>'header .image [src]',"attribute"=>'src'],
 			"headerImageAlt"=>["source"=>'attribute',"selector"=>'header .image [src]',"attribute"=>'alt'],
@@ -18,8 +18,8 @@ $attributes=[
 			"alt"=>["source"=>'attribute',"selector"=>'.contents .image [src]',"attribute"=>'alt'],
 			"imageCode"=>["source"=>'text',"selector"=>'.contents .image'],
 			
-			"subTitle"=>["source"=>'children',"selector"=>'.contents .title h4'],
-			"text"=>["source"=>'children',"selector"=>'.contents .text'],
+			"subTitle"=>["source"=>'html',"selector"=>'.contents .title h4'],
+			"text"=>["source"=>'html',"selector"=>'.contents .text'],
 		],
 		"default"=>array_map(function(){
 			return [

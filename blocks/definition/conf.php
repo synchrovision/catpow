@@ -6,8 +6,8 @@ $attributes=[
 		"source"=>'query',
 		"selector"=>'dl.item',
 		"query"=>[
-			"title"=>["source"=>'children',"selector"=>'dt'],
-			"text"=>["source"=>'children',"selector"=>'dd'],
+			"title"=>["source"=>'html',"selector"=>'dt'],
+			"text"=>["source"=>'html',"selector"=>'dd'],
 		],
 		"default"=>array_map(function(){
 			return [

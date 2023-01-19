@@ -22,8 +22,8 @@
           classes: { source: "attribute", attribute: "class" },
           order: { source: "attribute", "attribute": "data-order" },
           src: { source: "attribute", selector: "svg image", attribute: "href" },
-          title: { source: "children", selector: ".title" },
-          text: { source: "children", selector: ".text" }
+          title: { source: "html", selector: ".title" },
+          text: { source: "html", selector: ".text" }
         },
         default: [
           {

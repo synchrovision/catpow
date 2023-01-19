@@ -9,7 +9,7 @@
 			source:'query',
 			selector:'ul.tab li.item',
 			query:{
-				title:{source:'children',selector:'h3'},
+				title:{source:'html',selector:'h3'},
 			},
 			default:[...Array(3)].map(()=>{
 				return {title:['title']};

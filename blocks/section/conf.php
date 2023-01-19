@@ -12,9 +12,9 @@ $attributes=[
 	'SectionTag'=>['type'=>'string','default'=>'section'],
 	'HeadingTag'=>['type'=>'string','default'=>'h2'],
 
-	'prefix'=>['source'=>'children','selector'=>'header div.prefix'],
-	'title'=>['type'=>'array','source'=>'children','selector'=>'header h2,header .heading','default'=>['Title']],
-	'lead'=>['type'=>'array','source'=>'children','selector'=>'header p,header .lead'],
+	'prefix'=>['source'=>'html','selector'=>'header div.prefix'],
+	'title'=>['source'=>'html','selector'=>'header h2,header .heading','default'=>['Title']],
+	'lead'=>['source'=>'html','selector'=>'header p,header .lead'],
 
 	'titleImageMime'=>['source'=>'attribute','selector'=>'header .titleImage [src]','attribute'=>'data-mime'],
 	'titleImageSrc'=>['source'=>'attribute','selector'=>'header .titleImage [src]','attribute'=>'src','default'=>cp::get_file_url('images/dummy.jpg')],

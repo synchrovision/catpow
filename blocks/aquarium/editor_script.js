@@ -32,8 +32,8 @@
                 selector: ".text",
                 query: {
                   classes: { source: "attribute", attribute: "class" },
-                  title: { source: "children", selector: "h3" },
-                  text: { source: "children", selector: "p" }
+                  title: { source: "html", selector: "h3" },
+                  text: { source: "html", selector: "p" }
                 }
               }
             }

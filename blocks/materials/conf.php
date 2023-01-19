@@ -6,15 +6,15 @@ $attributes=[
 		"selector"=>'li.item.group',
 		"query"=>[
 			"classes"=>["source"=>'attribute',"attribute"=>'class'],
-			"label"=>["source"=>'children',"selector"=>'.label'],
+			"label"=>["source"=>'html',"selector"=>'.label'],
 			"items"=>[
 				"source"=>'query',
 				"selector"=>'li.item',
 				"query"=>[
 					"classes"=>["source"=>'attribute',"attribute"=>'class'],
-					"title"=>["source"=>'children',"selector"=>'.title'],
-					"caption"=>["source"=>'children',"selector"=>'.caption'],
-					"amount"=>["source"=>'children',"selector"=>'.amount'],
+					"title"=>["source"=>'html',"selector"=>'.title'],
+					"caption"=>["source"=>'html',"selector"=>'.caption'],
+					"amount"=>["source"=>'html',"selector"=>'.amount'],
 				]
 			]
 		],

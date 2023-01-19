@@ -9,9 +9,9 @@ $attributes=[
 			"imageSrc"=>["source"=>'attribute',"selector"=>'.image [src]',"attribute"=>'src'],
 			"imageAlt"=>["source"=>'attribute',"selector"=>'.image [src]',"attribute"=>'alt'],
 			"imageCode"=>["source"=>'text',"selector"=>'.image'],
-			"title"=>["source"=>'children',"selector"=>'.title'],
-			"caption"=>["source"=>'children',"selector"=>'.caption'],
-			"price"=>["source"=>'children',"selector"=>'.price'],
+			"title"=>["source"=>'html',"selector"=>'.title'],
+			"caption"=>["source"=>'html',"selector"=>'.caption'],
+			"price"=>["source"=>'html',"selector"=>'.price'],
 		],
 		"default"=>array_map(function($i){
 			return [
