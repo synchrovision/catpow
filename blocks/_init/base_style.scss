@@ -144,15 +144,29 @@ $sizeUnit:0.0625rem;
 		}
 	}
 }
+.CP{
+	&-SelectThemeColor{
+		&-items{
+			@include bnd((w:220,mg:4 0));
+			@include flx((w:n));
+			@include txt((l:n));
+			&-item{
+				@include bnd((f:1 1 10,h:20));
+				@include usr((c:p));
+				@include bg((c:m));
+				&:not(.active){@include trn((o:.2));}
+			}
+		}
+	}
+}
 .selectColor{
 	@include bnd((w:220));
 	@include txt((l:n));
 	li{
 		@include bnd((d:ib,p:r,w:20,h:20,mg:5));
-		@include bdr((r:20));
 		@include usr((c:p));
 		&.fillColor{
-			@include bg((c:m_0));
+			@include bg((c:m));
 			&.color0{
 				@include bg((c:shd));
 			}
@@ -160,8 +174,13 @@ $sizeUnit:0.0625rem;
 		&::after{
 			content: ' ';
 			@include bnd((d:b,p:a,t:1,b:1,l:1,r:1));
-			@include bdr((r:20));
 			@include bg((c:b));
+		}
+		&.relative{
+			@include bdr((r:50%));
+			&::after{
+				@include bdr((r:50%));
+			}
 		}
 		&.active::after{@include bnd((d:n));}
 	}
