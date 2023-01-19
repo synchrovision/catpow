@@ -15,7 +15,7 @@
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useState, useMemo } = wp.element;
       const { BlockControls, InspectorControls, RichText } = wp.blockEditor;
-      const { PanelBody, TextareaControl, TextControl, Toolbar } = wp.components;
+      const { PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
       const { classes, items = [] } = attributes;
       const primaryClass = "wp-block-catpow-panel";
       var classArray = _.uniq(classes.split(" "));
@@ -165,7 +165,7 @@
         attributes.EditMode = false;
       }
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
-        Toolbar,
+        ToolbarGroup,
         {
           controls: [
             {

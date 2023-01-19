@@ -6,7 +6,7 @@
 	example:CP.example,
 	edit({attributes,setAttributes,className,isSelected,clientId}){
 		const {InnerBlocks,BlockControls,InspectorControls}=wp.blockEditor;
-		const {PanelBody,TreeSelect,TextareaControl,TextControl} = wp.components;
+		const {PanelBody,TreeSelect,TextareaControl,TextControl,ToolbarGroup}=wp.components;
 		const {content_path,inputs,data_id,values,actions,EditMode=false}=attributes;
 
 		let postDataSelection=false;
@@ -22,7 +22,7 @@
 		return (
 			<>
 				<BlockControls>
-					<Toolbar
+					<ToolbarGroup
 						controls={[
 							{
 								icon: 'edit',

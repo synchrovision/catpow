@@ -58,7 +58,7 @@ wp.blocks.registerBlockType('catpow/flow',{
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
 		const {BlockControls,InspectorControls,RichText}=wp.blockEditor;
-		const {Icon,PanelBody,TextareaControl,TextControl,Toolbar}=wp.components;
+		const {Icon,PanelBody,TextareaControl,TextControl,ToolbarGroup}=wp.components;
 		const {items=[],classes,countPrefix,countSuffix}=attributes;
 		const primaryClass='wp-block-catpow-flow';
 		var classArray=_.uniq((className+' '+classes).split(' '));
@@ -171,7 +171,7 @@ wp.blocks.registerBlockType('catpow/flow',{
 		return (
 			<>
 				<BlockControls>
-					<Toolbar
+					<ToolbarGroup
 						controls={[
 							{
 								icon: 'edit',

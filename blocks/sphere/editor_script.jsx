@@ -53,7 +53,7 @@ wp.blocks.registerBlockType('catpow/sphere',{
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
 		const {BlockControls,InspectorControls,RichText}=wp.blockEditor;
-		const {PanelBody,TextareaControl} = wp.components;
+		const {PanelBody,TextareaControl,ToolbarGroup}=wp.components;
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
 		const primaryClass='wp-block-catpow-sphere';
 
@@ -132,7 +132,7 @@ wp.blocks.registerBlockType('catpow/sphere',{
 		return (
 			<>
 				<BlockControls>
-					<Toolbar
+					<ToolbarGroup
 						controls={[
 							{
 								icon: 'edit',

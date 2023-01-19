@@ -8,7 +8,7 @@
     example: CP.example,
     edit({ attributes, setAttributes, className, clientId }) {
       const { InnerBlocks: InnerBlocks2, BlockControls, InspectorControls } = wp.blockEditor;
-      const { Icon, PanelBody, TreeSelect, TextareaControl, ServerSideRender } = wp.components;
+      const { Icon, PanelBody, TreeSelect, TextareaControl, ServerSideRender, ToolbarGroup } = wp.components;
       const { content_path, deps = {}, query, config, EditMode = false } = attributes;
       const { useMemo } = wp.element;
       let configData;
@@ -37,7 +37,7 @@
         configData = JSON.parse(config);
       }
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, configData.template && /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
-        Toolbar,
+        ToolbarGroup,
         {
           controls: [
             {

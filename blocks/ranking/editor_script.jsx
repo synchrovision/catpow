@@ -56,7 +56,7 @@ wp.blocks.registerBlockType('catpow/ranking',{
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {BlockControls,InspectorControls,RichText}=wp.blockEditor;
-		const {PanelBody,TextareaControl} = wp.components;
+		const {PanelBody,TextareaControl,ToolbarGroup}=wp.components;
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
 		const primaryClass='wp-block-catpow-ranking';
 
@@ -157,7 +157,7 @@ wp.blocks.registerBlockType('catpow/ranking',{
 		return (
 			<>
 				<BlockControls>
-					<Toolbar
+					<ToolbarGroup
 						controls={[
 							{
 								icon: 'edit',

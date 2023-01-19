@@ -103,7 +103,7 @@ wp.richText.registerFormatType('catpow/title',{
 	edit(props){
 		const {isActive,value,onChange,activeAttributes}=props;
 		const {BlockControls,RichTextToolbarButton}=wp.blockEditor;
-		const {Popover,Card,CardBody,Toolbar}=wp.components;
+		const {Popover,Card,CardBody,ToolbarGroup}=wp.components;
 		const {useMemo,useCallback}=wp.element;
 		const {applyFormat,toggleFormat}=wp.richText;
 
@@ -145,7 +145,7 @@ wp.richText.registerFormatType('catpow/title',{
 					</Popover>
 				)}
 				<BlockControls>
-					<Toolbar
+					<ToolbarGroup
 						controls={[
 							{icon,onClick:onToggle,isActive}
 						]}
@@ -170,7 +170,7 @@ wp.richText.registerFormatType('catpow/mark',{
 	},
 	edit(props){
 		const {isActive,value,onChange,activeAttributes}=props;
-		const {Popover,Card,CardBody,Toolbar}=wp.components;
+		const {Popover,Card,CardBody,ToolbarGroup}=wp.components;
 		const {BlockControls,RichTextShortcut,RichTextToolbarButton}=wp.blockEditor;
 		const {useMemo,useCallback}=wp.element;
 		const {applyFormat,toggleFormat}=wp.richText;
@@ -205,7 +205,7 @@ wp.richText.registerFormatType('catpow/mark',{
 					</Popover>
 				)}
 				<BlockControls>
-					<Toolbar
+					<ToolbarGroup
 						controls={[
 							{icon,onClick:onToggle,isActive}
 						]}
@@ -230,7 +230,7 @@ wp.richText.registerFormatType('catpow/large',{
 	},
 	edit(props){
 		const {isActive,value,onChange,activeAttributes}=props;
-		const {Popover,Card,CardBody,Toolbar}=wp.components;
+		const {Popover,Card,CardBody,ToolbarGroup}=wp.components;
 		const {useMemo,useCallback}=wp.element;
 		const {BlockControls,RichTextToolbarButton}=wp.blockEditor;
 		const {applyFormat,toggleFormat}=wp.richText;
@@ -268,7 +268,7 @@ wp.richText.registerFormatType('catpow/large',{
 					</Popover>
 				)}
 				<BlockControls>
-					<Toolbar
+					<ToolbarGroup
 						controls={[
 							{icon,onClick:onToggle,isActive}
 						]}
@@ -295,7 +295,7 @@ wp.richText.registerFormatType('catpow/tag',{
 	},
 	edit(props){
 		const {isActive,value,onChange,onFocus,activeAttributes,activeObject}=props;
-		const {Popover,BaseControle,TextControl,Card,CardBody,Toolbar}=wp.components;
+		const {Popover,BaseControle,TextControl,Card,CardBody,ToolbarGroup}=wp.components;
 		const {BlockControls,RichTextToolbarButton,RichTextShortcut}=wp.blockEditor;
 		const {useState,useMemo,useCallback}=wp.element;
 		const {removeFormat,applyFormat,toggleFormat,insert,create,slice}=wp.richText;
@@ -332,7 +332,7 @@ wp.richText.registerFormatType('catpow/tag',{
 					</Popover>
 				)}
 				<BlockControls>
-					<Toolbar
+					<ToolbarGroup
 						controls={[
 							{icon:'tag',onClick:onToggle,isActive}
 						]}
@@ -355,7 +355,7 @@ wp.richText.registerFormatType('catpow/annotation',{
 	className:'rtf-annotation',
 	edit({isActive,value,onChange}){
 		const {BlockControls,RichTextToolbarButton}=wp.blockEditor;
-		const {Toolbar}=wp.components;
+		const {ToolbarGroup}=wp.components;
 		const {toggleFormat}=wp.richText;
 
 		const onToggle=()=>onChange(toggleFormat(value,{type:'catpow/annotation'}));
@@ -373,7 +373,7 @@ wp.richText.registerFormatType('catpow/annotation',{
 		return (
 			<>
 				<BlockControls>
-					<Toolbar
+					<ToolbarGroup
 						controls={[
 							{icon,onClick:onToggle,isActive}
 						]}

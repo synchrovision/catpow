@@ -21,7 +21,7 @@
     edit({ attributes, className, setAttributes }) {
       const { useState, useMemo } = wp.element;
       const { InnerBlocks, BlockControls, InspectorControls, RichText } = wp.blockEditor;
-      const { PanelBody, TextareaControl } = wp.components;
+      const { PanelBody, TextareaControl, ToolbarGroup } = wp.components;
       const { type, isHtmlMail, classes, headerText, footerText, body_class, textMail, TextMode = false } = attributes;
       const primaryClass = "wp-block-catpow-t-body";
       var states = CP.wordsToFlags(classes);
@@ -66,7 +66,7 @@
           value: footerText
         }
       )))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
-        Toolbar,
+        ToolbarGroup,
         {
           controls: [
             {

@@ -19,7 +19,7 @@
 	edit({attributes,className,setAttributes}){
 		const {useState,useMemo}=wp.element;
 		const {InnerBlocks,BlockControls,InspectorControls,RichText}=wp.blockEditor;
-		const {PanelBody,TextareaControl} = wp.components;
+		const {PanelBody,TextareaControl,ToolbarGroup}=wp.components;
 		const {type,isHtmlMail,classes,headerText,footerText,body_class,textMail,TextMode=false}=attributes;
 		const primaryClass='wp-block-catpow-t-body';
 		var states=CP.wordsToFlags(classes);
@@ -91,7 +91,7 @@
 				 )}
 				<InspectorControls>
 					<BlockControls>
-						<Toolbar
+						<ToolbarGroup
 							controls={[
 								{
 									icon:'media-text',

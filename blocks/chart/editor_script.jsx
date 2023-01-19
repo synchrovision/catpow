@@ -62,7 +62,7 @@
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
 		const {BlockControls,InspectorControls}=wp.blockEditor;
-		const {PanelBody,TextareaControl} = wp.components;
+		const {PanelBody,TextareaControl,ToolbarGroup} = wp.components;
 		const {classes,graph,EditMode=false}=attributes;
 		const primaryClass='wp-block-catpow-chart';
 		var classArray=_.uniq((className+' '+classes).split(' '));
@@ -168,7 +168,7 @@
 		return (
 			<>
 				<BlockControls>
-					<Toolbar
+					<ToolbarGroup
 						controls={[
 							{
 								icon: 'edit',

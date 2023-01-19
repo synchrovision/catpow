@@ -2,13 +2,13 @@ import {CP} from './CP.jsx';
 
 CP.SelectDeviceToolbar=(props)=>{
 	const {BlockControls}=wp.blockEditor;
-	const {Toolbar}=wp.components;
+	const {ToolbarGroup}=wp.components;
 	const {set,attr,devices=['sp','pc']}=props;
 	return (
 		<BlockControls>
 			{devices.map((device)=>{
 				return (
-					<Toolbar
+					<ToolbarGroup
 						controls={[
 							{
 								icon:CP.devices[device].icon,

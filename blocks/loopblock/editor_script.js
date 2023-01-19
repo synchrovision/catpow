@@ -8,10 +8,10 @@
     example: CP.example,
     edit({ attributes, setAttributes, className }) {
       const { InnerBlocks: InnerBlocks2, BlockControls, InspectorControls } = wp.blockEditor;
-      const { PanelBody, TextareaControl, TextControl } = wp.components;
+      const { PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
       const { content_path, query, AltMode = false } = attributes;
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
-        Toolbar,
+        ToolbarGroup,
         {
           controls: [
             {

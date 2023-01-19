@@ -56,7 +56,7 @@ wp.blocks.registerBlockType('catpow/faq',{
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
 		const {BlockControls,InspectorControls,RichText}=wp.blockEditor;
-		const {PanelBody,TextareaControl} = wp.components;
+		const {PanelBody,TextareaControl,ToolbarGroup}=wp.components;
 		const {items=[],classes='',countPrefix,countSuffix}=attributes;
 		const primaryClass='wp-block-catpow-faq';
 
@@ -162,7 +162,7 @@ wp.blocks.registerBlockType('catpow/faq',{
 		return (
 			<>
 				<BlockControls>
-					<Toolbar
+					<ToolbarGroup
 						controls={[
 							{
 								icon: 'edit',

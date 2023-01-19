@@ -1,10 +1,10 @@
 ﻿import {CP} from './CP.jsx';
 
 CP.SelectBreakPointToolbar=(props)=>{
-	const {Toolbar}=wp.components;
+	const {ToolbarGroup}=wp.components;
 
 	return (
-		<Toolbar
+		<ToolbarGroup
 			controls={props.breakpoints.map((bp)=>{
 				let title=bp=="0"?'ー':bp;
 				return {

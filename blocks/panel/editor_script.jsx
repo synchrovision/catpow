@@ -13,7 +13,7 @@ wp.blocks.registerBlockType('catpow/panel',{
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
 		const {BlockControls,InspectorControls,RichText}=wp.blockEditor;
-		const {PanelBody,TextareaControl,TextControl,Toolbar} = wp.components;
+		const {PanelBody,TextareaControl,TextControl,ToolbarGroup} = wp.components;
 		const {classes,items=[]}=attributes;
 		const primaryClass='wp-block-catpow-panel';
 		var classArray=_.uniq((classes).split(' '));
@@ -175,7 +175,7 @@ wp.blocks.registerBlockType('catpow/panel',{
 		return (
 			<>
 				<BlockControls>
-					<Toolbar
+					<ToolbarGroup
 						controls={[
 							{
 								icon:'edit',

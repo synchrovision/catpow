@@ -8,7 +8,7 @@
     example: CP.example,
     edit({ attributes, setAttributes, className, isSelected, clientId }) {
       const { InnerBlocks, BlockControls, InspectorControls } = wp.blockEditor;
-      const { PanelBody: PanelBody2, TreeSelect, TextareaControl, TextControl: TextControl2 } = wp.components;
+      const { PanelBody: PanelBody2, TreeSelect, TextareaControl, TextControl: TextControl2, ToolbarGroup } = wp.components;
       const { content_path, inputs, data_id, values, actions, EditMode = false } = attributes;
       let postDataSelection = false;
       if (!actions && content_path) {
@@ -19,7 +19,7 @@
         });
       }
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
-        Toolbar,
+        ToolbarGroup,
         {
           controls: [
             {

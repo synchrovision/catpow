@@ -6,7 +6,7 @@
 	example:CP.example,
 	edit({attributes,setAttributes,className,clientId}){
 		const {InnerBlocks,BlockControls,InspectorControls}=wp.blockEditor;
-		const {Icon,PanelBody,TreeSelect,TextareaControl,ServerSideRender} = wp.components;
+		const {Icon,PanelBody,TreeSelect,TextareaControl,ServerSideRender,ToolbarGroup}=wp.components;
 		const {content_path,deps={},query,config,EditMode=false}=attributes;
 		const {useMemo}=wp.element;
 		let configData;
@@ -40,7 +40,7 @@
 			<>
 				{configData.template && 
 					<BlockControls>
-						<Toolbar
+						<ToolbarGroup
 							controls={[
 								{
 									icon:'edit',

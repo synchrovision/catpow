@@ -2,7 +2,7 @@
 
 CP.SelectModeToolbar=(props)=>{
 	const {BlockControls}=wp.blockEditor;
-	const {Toolbar}=wp.components;
+	const {ToolbarGroup}=wp.components;
 
 	const {set,attr,modes=['EditMode','AltMode']}=props;
 	const SomeMode=modes.some((mode)=>attr[mode]);
@@ -21,7 +21,7 @@ CP.SelectModeToolbar=(props)=>{
 				if(!attr[mode] && SomeMode){return false;}
 				if(cond[mode] && !attr[cond[mode]]){return false;}
 				return (
-					<Toolbar
+					<ToolbarGroup
 						controls={[
 							{
 								icon:icons[mode],

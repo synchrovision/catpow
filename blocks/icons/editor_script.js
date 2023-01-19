@@ -43,7 +43,7 @@
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useState, useMemo } = wp.element;
       const { BlockControls, InspectorControls } = wp.blockEditor;
-      const { PanelBody, TreeSelect, TextareaControl } = wp.components;
+      const { PanelBody, TreeSelect, TextareaControl, ToolbarGroup } = wp.components;
       const { items = [], classes, countPrefix, countSuffix } = attributes;
       const primaryClass = "wp-block-catpow-icons";
       var classArray = _.uniq((className + " " + classes).split(" "));
@@ -92,7 +92,7 @@
         attributes.EditMode = false;
       }
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
-        Toolbar,
+        ToolbarGroup,
         {
           controls: [
             {

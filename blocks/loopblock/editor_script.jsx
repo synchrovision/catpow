@@ -6,13 +6,13 @@
 	example:CP.example,
 	edit({attributes,setAttributes,className}){
 		const {InnerBlocks,BlockControls,InspectorControls}=wp.blockEditor;
-		const {PanelBody,TextareaControl,TextControl} = wp.components;
+		const {PanelBody,TextareaControl,TextControl,ToolbarGroup}=wp.components;
 		const {content_path,query,AltMode=false}=attributes;
 
 		return (
 			<>
 				<BlockControls>
-					<Toolbar
+					<ToolbarGroup
 						controls={[
 							{
 								icon: 'welcome-comments',
