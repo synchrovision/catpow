@@ -841,7 +841,7 @@
       }, [context["catpow/color"]]);
       useEffect(() => {
         const atts = {
-          classes: classes.replace(/color\d+\s*/, "") + " color" + color
+          classes: classes.split(" ").filter((str) => !CP.colorClassPattern.test(str)).join(" ") + (color !== void 0 ? " color" + color : "")
         };
         images.forEach((key) => {
           if (!attributes[key]) {
@@ -856,6 +856,21 @@
         setAttributes(atts);
       }, [color]);
     },
+    parseColorClass: (colorClass) => {
+      if (colorClass) {
+        const matches = colorClass.match(CP.colorClassPattern);
+        if (matches) {
+          return {
+            absolute: matches[2] === "--",
+            relative: matches[2] === "_",
+            value: matches[3]
+          };
+        }
+      }
+      return { absolute: false, relative: false, value: 0 };
+    },
+    generateColorClass: (data) => "color" + (data.absolute ? "--" : data.relative ? "_" : "") + data.value,
+    colorClassPattern: /^color((|_|\-\-)(\-?\d+))$/,
     /*id reflection*/
     manageStyleData: (props, csss) => {
       const { attributes, className, setAttributes } = props;
@@ -918,10 +933,11 @@
     tagName: "ruby",
     className: null,
     edit({ isActive, value, onChange }) {
-      const { RichTextShortcut, RichTextToolbarButton } = wp.editor;
+      const { RichTextShortcut, RichTextToolbarButton } = wp.blockEditor;
+      const { toggleFormat } = wp.richText;
       const onToggle = () => {
         if (isActive) {
-          return onChange(wp.richText.toggleFormat(value, { type: "catpow/ruby" }));
+          return onChange(toggleFormat(value, { type: "catpow/ruby" }));
         }
         if (wp.richText.isCollapsed(value)) {
           alert(__("\u30EB\u30D3\u3092\u3064\u3051\u305F\u3044\u30C6\u30AD\u30B9\u30C8\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"));
@@ -969,7 +985,8 @@
     tagName: "small",
     className: null,
     edit({ isActive, value, onChange }) {
-      const { RichTextToolbarButton, RichTextShortcut } = wp.editor;
+      const { RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
+      const { toggleFormat } = wp.richText;
       const onToggle = () => onChange(toggleFormat(value, { type: "catpow/small" }));
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("path", { d: "M5.6,16.7l3.6-9.4h1.3l3.8,9.4H13l-1.1-2.8H8l-1,2.8H5.6z M8.3,12.9h3.2l-1-2.6C10.2,9.5,10,8.9,9.9,8.4\n		C9.7,9,9.6,9.6,9.3,10.1L8.3,12.9z" }));
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
@@ -1001,11 +1018,10 @@
     },
     edit(props) {
       const { isActive, value, onChange, activeAttributes } = props;
-      const { RichTextToolbarButton } = wp.editor;
-      const { BlockControls } = wp.blockEditor;
-      const { Popover, Card, CardBody, Toolbar } = wp.components;
+      const { BlockControls, RichTextToolbarButton } = wp.blockEditor;
+      const { Popover, Card, CardBody, ToolbarGroup } = wp.components;
       const { useMemo, useCallback } = wp.element;
-      const { applyFormat } = wp.richText;
+      const { applyFormat, toggleFormat } = wp.richText;
       const onToggle = () => {
         return onChange(toggleFormat(value, { type: "catpow/title", attributes: { type: "iheader" } }));
       };
@@ -1014,7 +1030,7 @@
         onChange(applyFormat(value, { type: "catpow/title", attributes: Object.assign(activeAttributes, attr) }));
       }, [value, activeAttributes]);
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("g", null, /* @__PURE__ */ wp.element.createElement("path", { d: "M6.9,15.9V2.6h2.7v5.2h5.3V2.6h2.7v13.3h-2.7v-5.8H9.6v5.8H6.9z" })), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "1", width: "4", height: "18" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "5", y: "18", width: "14", height: "1" }));
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { getAnchorRect: () => el.getBoundingClientRect(), position: "bottom left", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: el, position: "bottom left", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectButtons,
         {
           options: [
@@ -1026,7 +1042,7 @@
           onChange: (type) => setAttributes({ type })
         }
       )))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
-        Toolbar,
+        ToolbarGroup,
         {
           controls: [
             { icon, onClick: onToggle, isActive }
@@ -1052,11 +1068,10 @@
     },
     edit(props) {
       const { isActive, value, onChange, activeAttributes } = props;
-      const { Popover, Card, CardBody, Toolbar } = wp.components;
-      const { RichTextShortcut, RichTextToolbarButton } = wp.editor;
-      const { BlockControls } = wp.blockEditor;
+      const { Popover, Card, CardBody, ToolbarGroup } = wp.components;
+      const { BlockControls, RichTextShortcut, RichTextToolbarButton } = wp.blockEditor;
       const { useMemo, useCallback } = wp.element;
-      const { applyFormat } = wp.richText;
+      const { applyFormat, toggleFormat } = wp.richText;
       const onToggle = () => {
         return onChange(toggleFormat(value, { type: "catpow/mark", attributes: { color: "color0" } }));
       };
@@ -1065,14 +1080,14 @@
         onChange(applyFormat(value, { type: "catpow/mark", attributes: Object.assign(activeAttributes, attr) }));
       }, [value, activeAttributes]);
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("polygon", { points: "7.9,10.8 12.1,10.8 10,5.3 	" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M0,2v16h20V2H0z M13.7,15.3L12.5,12h-5l-1.2,3.4H4.7L9,4h1.9l4.3,11.3H13.7z" }));
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { getAnchorRect: () => el.getBoundingClientRect(), position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: el, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: el.parentElement }, /* @__PURE__ */ wp.element.createElement(
         CP.SelectThemeColor,
         {
           onChange: (color) => setAttributes({ color }),
           selected: activeAttributes["color"]
         }
-      )))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
-        Toolbar,
+      ))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
+        ToolbarGroup,
         {
           controls: [
             { icon, onClick: onToggle, isActive }
@@ -1098,11 +1113,10 @@
     },
     edit(props) {
       const { isActive, value, onChange, activeAttributes } = props;
-      const { Popover, Card, CardBody, Toolbar } = wp.components;
+      const { Popover, Card, CardBody, ToolbarGroup } = wp.components;
       const { useMemo, useCallback } = wp.element;
-      const { RichTextToolbarButton } = wp.editor;
-      const { BlockControls } = wp.blockEditor;
-      const { applyFormat } = wp.richText;
+      const { BlockControls, RichTextToolbarButton } = wp.blockEditor;
+      const { applyFormat, toggleFormat } = wp.richText;
       const onToggle = () => {
         return onChange(toggleFormat(value, { type: "catpow/large", attributes: { color: "color0" } }));
       };
@@ -1111,14 +1125,14 @@
         onChange(applyFormat(value, { type: "catpow/large", attributes: Object.assign(activeAttributes, attr) }));
       }, [value, activeAttributes]);
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("path", { d: "M4.8,0.5h5c1.6,0,2.8,0.1,3.6,0.4c0.8,0.2,1.5,0.7,2,1.5c0.5,0.8,0.8,2,0.8,3.6c0,1.1-0.2,1.9-0.5,2.4\n		c-0.4,0.4-1.1,0.8-2.1,1c1.2,0.3,1.9,0.7,2.4,1.3c0.4,0.6,0.6,1.5,0.6,2.8v1.8c0,1.3-0.1,2.3-0.4,2.9c-0.3,0.6-0.8,1.1-1.4,1.3\n		c-0.7,0.2-2,0.3-4,0.3H4.8V0.5z M9.8,3.8v4.3c0.2,0,0.4,0,0.5,0c0.5,0,0.8-0.1,0.9-0.4c0.1-0.2,0.2-0.9,0.2-2.1\n		c0-0.6-0.1-1-0.2-1.3s-0.3-0.4-0.4-0.5C10.7,3.8,10.4,3.8,9.8,3.8z M9.8,11.1v5.4c0.7,0,1.2-0.1,1.4-0.3c0.2-0.2,0.3-0.7,0.3-1.5\n		v-1.8c0-0.8-0.1-1.3-0.3-1.5C11.1,11.2,10.6,11.1,9.8,11.1z" }));
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { getAnchorRect: () => el.getBoundingClientRect(), position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: el, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: el.parentElement }, /* @__PURE__ */ wp.element.createElement(
         CP.SelectThemeColor,
         {
           onChange: (color) => setAttributes({ color }),
           selected: activeAttributes["color"]
         }
-      )))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
-        Toolbar,
+      ))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
+        ToolbarGroup,
         {
           controls: [
             { icon, onClick: onToggle, isActive }
@@ -1145,11 +1159,10 @@
     },
     edit(props) {
       const { isActive, value, onChange, onFocus, activeAttributes, activeObject } = props;
-      const { Popover, BaseControle, TextControl, Card, CardBody, Toolbar } = wp.components;
-      const { BlockControls } = wp.blockEditor;
-      const { RichTextToolbarButton, RichTextShortcut } = wp.editor;
+      const { Popover, BaseControle, TextControl, Card, CardBody, ToolbarGroup } = wp.components;
+      const { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
       const { useState, useMemo, useCallback } = wp.element;
-      const { removeFormat, applyFormat, insert, create, slice } = wp.richText;
+      const { removeFormat, applyFormat, toggleFormat, insert, create, slice } = wp.richText;
       const onToggle = () => {
         return onChange(toggleFormat(value, { type: "catpow/tag", attributes: { class: "color0" } }));
       };
@@ -1157,21 +1170,21 @@
       const setAttributes = useCallback((attr) => {
         onChange(applyFormat(value, { type: "catpow/tag", attributes: Object.assign(activeAttributes, attr) }));
       }, [value, activeAttributes]);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { getAnchorRect: () => el.getBoundingClientRect(), position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, null, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: el, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, null, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
           label: "URL",
           value: activeAttributes["url"],
           onChange: (url) => setAttributes({ url })
         }
-      ))), /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
+      ))), /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: el.parentElement }, /* @__PURE__ */ wp.element.createElement(
         CP.SelectThemeColor,
         {
           onChange: (color) => setAttributes({ color }),
           selected: activeAttributes["color"]
         }
-      )))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
-        Toolbar,
+      ))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
+        ToolbarGroup,
         {
           controls: [
             { icon: "tag", onClick: onToggle, isActive }
@@ -1193,13 +1206,13 @@
     tagName: "small",
     className: "rtf-annotation",
     edit({ isActive, value, onChange }) {
-      const { BlockControls } = wp.blockEditor;
-      const { Toolbar } = wp.components;
-      const { RichTextToolbarButton } = wp.editor;
+      const { BlockControls, RichTextToolbarButton } = wp.blockEditor;
+      const { ToolbarGroup } = wp.components;
+      const { toggleFormat } = wp.richText;
       const onToggle = () => onChange(toggleFormat(value, { type: "catpow/annotation" }));
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("path", { d: "M2.99,2.01l7.04,7.04l7.04-7.04l0.62,0.62l-7.04,7.04l7.04,7.04l-0.62,0.62l-7.04-7.04l-7.06,7.06l-0.62-0.62l7.06-7.06\n		L2.37,2.62L2.99,2.01z M3.95,11.26c-0.87,0-1.6-0.73-1.6-1.6s0.73-1.6,1.6-1.6s1.6,0.73,1.6,1.6C5.55,10.58,4.78,11.26,3.95,11.26z\n		 M8.43,3.58c0-0.87,0.73-1.6,1.6-1.6s1.6,0.73,1.6,1.6s-0.73,1.6-1.6,1.6C9.11,5.18,8.43,4.42,8.43,3.58z M11.63,15.74\n		c0,0.87-0.73,1.6-1.6,1.6s-1.6-0.73-1.6-1.6c0-0.88,0.73-1.6,1.6-1.6C10.94,14.14,11.63,14.91,11.63,15.74z M16.11,8.06\n		c0.87,0,1.6,0.73,1.6,1.6s-0.73,1.6-1.6,1.6c-0.88,0-1.6-0.73-1.6-1.6C14.51,8.75,15.28,8.06,16.11,8.06z" }));
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
-        Toolbar,
+        ToolbarGroup,
         {
           controls: [
             { icon, onClick: onToggle, isActive }
@@ -1221,7 +1234,7 @@
     tagName: "div",
     className: null,
     edit({ isActive, value, onChange }) {
-      const { RichTextToolbarButton } = wp.editor;
+      const { RichTextToolbarButton } = wp.blockEditor;
       const { create } = wp.richText;
       return /* @__PURE__ */ wp.element.createElement(
         RichTextToolbarButton,
@@ -1282,21 +1295,26 @@
   // blocks/_init/init/SelectThemeColor.jsx
   CP.SelectThemeColor = (props) => {
     const { selected, onChange } = props;
+    const { useCallback, useMemo } = wp.element;
     const { bem } = Catpow.util;
-    const classes = bem("fillColor");
-    var items = Array.from(Array(13), (v, i) => {
-      const value = "color" + i;
-      return /* @__PURE__ */ wp.element.createElement(
-        "li",
-        {
-          className: classes(value, { active: value == selected }),
-          onClick: () => onChange(value),
-          key: value
-        },
-        " "
-      );
-    });
-    return /* @__PURE__ */ wp.element.createElement("ul", { className: "selectColor" }, items);
+    const classes = bem("CP-SelectThemeColor");
+    const data = useMemo(() => CP.parseColorClass(selected), [selected]);
+    const Selections = useCallback((props2) => {
+      const { absolute = false, relative = false, selected: selected2 } = props2;
+      return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.items({ absolute }) }, Array.from(Array(13), (v, value) => {
+        const colorClass = CP.generateColorClass({ absolute, relative, value });
+        return /* @__PURE__ */ wp.element.createElement(
+          "li",
+          {
+            className: classes.items.item(colorClass, { active: colorClass == selected2, absolute, relative }),
+            onClick: () => onChange(colorClass),
+            key: colorClass
+          },
+          " "
+        );
+      }));
+    }, []);
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(Selections, { selected, absolute: true }), /* @__PURE__ */ wp.element.createElement(Selections, { selected }), /* @__PURE__ */ wp.element.createElement(Selections, { selected, relative: true }));
   };
 
   // blocks/_init/init/SelectColors.jsx
@@ -2374,9 +2392,9 @@
                 label: "\u8272",
                 set: props.set,
                 attr: props.attr,
-                selected: Object.keys(states).find((key) => /^color\d+/.test(key)),
+                selected: Object.keys(states).find((key) => CP.colorClassPattern.test(key)),
                 onChange: (color) => {
-                  CP.filterFlags(states, (key) => !/^color\d+/.test(key));
+                  CP.filterFlags(states, (key) => !CP.colorClassPattern.test(key));
                   states[color] = true;
                   if (!items) {
                     set({ color: color.substr(5) });
@@ -2751,7 +2769,8 @@
         "li",
         {
           className: classes,
-          onClick: () => onChange(value)
+          onClick: () => onChange(value),
+          key: value
         },
         " "
       );
@@ -2814,9 +2833,9 @@
 
   // blocks/_init/init/SelectBreakPointToolbar.jsx
   CP.SelectBreakPointToolbar = (props) => {
-    const { Toolbar } = wp.components;
+    const { ToolbarGroup } = wp.components;
     return /* @__PURE__ */ wp.element.createElement(
-      Toolbar,
+      ToolbarGroup,
       {
         controls: props.breakpoints.map((bp) => {
           let title = bp == "0" ? "\u30FC" : bp;
@@ -2833,7 +2852,7 @@
   // blocks/_init/init/SelectModeToolbar.jsx
   CP.SelectModeToolbar = (props) => {
     const { BlockControls } = wp.blockEditor;
-    const { Toolbar } = wp.components;
+    const { ToolbarGroup } = wp.components;
     const { set, attr, modes = ["EditMode", "AltMode"] } = props;
     const SomeMode = modes.some((mode) => attr[mode]);
     const icons = {
@@ -2853,7 +2872,7 @@
         return false;
       }
       return /* @__PURE__ */ wp.element.createElement(
-        Toolbar,
+        ToolbarGroup,
         {
           controls: [
             {
@@ -2872,11 +2891,11 @@
   // blocks/_init/init/SelectDeviceToolbar.jsx
   CP.SelectDeviceToolbar = (props) => {
     const { BlockControls } = wp.blockEditor;
-    const { Toolbar } = wp.components;
+    const { ToolbarGroup } = wp.components;
     const { set, attr, devices = ["sp", "pc"] } = props;
     return /* @__PURE__ */ wp.element.createElement(BlockControls, null, devices.map((device) => {
       return /* @__PURE__ */ wp.element.createElement(
-        Toolbar,
+        ToolbarGroup,
         {
           controls: [
             {
@@ -2901,11 +2920,12 @@
   // blocks/_init/init/EditItemsTable.jsx
   CP.EditItemsTable = (props) => {
     const { set, attr, itemsKey = "items", columns, isTemplate } = props;
+    const { RichText } = wp.blockEditor;
     const items = attr[itemsKey] || [];
     const save = () => {
       set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
     };
-    return /* @__PURE__ */ wp.element.createElement("table", { className: "editItemsTable" }, /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, columns.map((col) => !("cond" in col) || col.cond ? /* @__PURE__ */ wp.element.createElement("th", { key: col.key }, col.label || col.key) : false), /* @__PURE__ */ wp.element.createElement("th", null))), /* @__PURE__ */ wp.element.createElement("tbody", null, items.map((item, index) => {
+    return /* @__PURE__ */ wp.element.createElement("table", { className: "editItemsTable" }, /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, columns.map((col, c) => !("cond" in col) || col.cond ? /* @__PURE__ */ wp.element.createElement("th", { key: c }, col.label || col.key) : false), /* @__PURE__ */ wp.element.createElement("th", null))), /* @__PURE__ */ wp.element.createElement("tbody", null, items.map((item, index) => {
       const propsForControl = { tag: "tr", set, itemsKey, items, index };
       return /* @__PURE__ */ wp.element.createElement(
         "tr",
@@ -2915,13 +2935,13 @@
           },
           key: index
         },
-        columns.map((col) => {
+        columns.map((col, c) => {
           if ("cond" in col && !col.cond) {
             return false;
           }
           switch (col.type) {
             case "text":
-              return /* @__PURE__ */ wp.element.createElement("td", { key: col.key }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(
                 RichText,
                 {
                   value: item[col.key],
@@ -2932,7 +2952,7 @@
                 }
               ));
             case "image":
-              return /* @__PURE__ */ wp.element.createElement("td", { key: col.key }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(
                 CP.SelectResponsiveImage,
                 {
                   attr,
@@ -2944,7 +2964,7 @@
                 }
               ));
             case "picture":
-              return /* @__PURE__ */ wp.element.createElement("td", { key: col.key }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(
                 CP.SelectPictureSources,
                 {
                   index,
@@ -2962,7 +2982,7 @@
                   subCol.keys.subItems = col.key;
                 }
               });
-              return /* @__PURE__ */ wp.element.createElement("td", { key: col.key }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(
                 CP.EditItemsTable,
                 {
                   set: () => {
@@ -3143,5 +3163,26 @@
       setHold(true);
     }, [JSON.stringify(attributes)]);
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RawHTML, { className }, response), stylesheets.map((stylesheet) => /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: stylesheet, key: stylesheet })));
+  };
+
+  // blocks/_init/init/ColorVarTracer.jsx
+  CP.ColorVarTracer = (props) => {
+    const { target } = props;
+    const { useMemo } = wp.element;
+    const vars = useMemo(() => {
+      const vars2 = {};
+      if (target) {
+        const styles = getComputedStyle(target);
+        ["b", "m", "a"].forEach((k) => {
+          ["", "-container"].forEach((p) => {
+            const name = `--cp${p}-tones-${k}-h`;
+            vars2[name] = styles.getPropertyValue(name);
+          });
+        });
+      }
+      return vars2;
+    }, [target]);
+    console.log(vars);
+    return /* @__PURE__ */ wp.element.createElement("div", { style: vars }, props.children);
   };
 })();

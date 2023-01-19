@@ -23,9 +23,9 @@ wp.blocks.registerBlockType('catpow/section',{
 	example:CP.example,
 	edit(props){
 		const {InnerBlocks,BlockControls,InspectorControls,RichText}=wp.blockEditor;
-		const {PanelBody,TextareaControl,TextControl} = wp.components;
+		const {PanelBody,TextareaControl,TextControl}=wp.components;
 		const {attributes,className,setAttributes}=props;
-		const {useMemo}=wp.element;
+		const {useMemo,useState}=wp.element;
 		const {
 			SectionTag,HeadingTag,
 			color,id,classes,prefix,title,lead,
@@ -39,6 +39,8 @@ wp.blocks.registerBlockType('catpow/section',{
 
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys,imageSizes}=CP.config.section;
+		
+		const [mainBlock,setMainBlock]=useState();
 
 		CP.inheritColor(props,['iconSrc','patternImageCss','headerPatternImageCss','frameImageCss','borderImageCss']);
 		CP.manageStyleData(props,['patternImageCss','headerPatternImageCss','frameImageCss','borderImageCss']);
@@ -231,7 +233,7 @@ wp.blocks.registerBlockType('catpow/section',{
 				<BlockControls>
 					<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
 				</BlockControls>
-				<SectionTag id={id} className={classes}>
+				<SectionTag id={id} className={classes} ref={setMainBlock}>
 					{states.hasImage && 
 						<div className="image">
 							{(states.isTemplate && imageCode)?(
@@ -335,28 +337,30 @@ wp.blocks.registerBlockType('catpow/section',{
 					)}
 				</SectionTag>
 				<InspectorControls>
-					<CP.SelectClassPanel
-						title={__('クラス','catpow')}
-						icon='art'
-						set={setAttributes}
-						attr={attributes}
-						selectiveClasses={selectiveClasses}
-						filters={CP.filters.section || {}}
-					/>
-					<PanelBody title="ID" icon="admin-links" initialOpen={false}>
-						<TextControl
-							label='ID'
-							onChange={(id)=>{setAttributes({id:id});}}
-							value={id}
+					<CP.ColorVarTracer target={mainBlock}>
+						<CP.SelectClassPanel
+							title={__('クラス','catpow')}
+							icon='art'
+							set={setAttributes}
+							attr={attributes}
+							selectiveClasses={selectiveClasses}
+							filters={CP.filters.section || {}}
 						/>
-					</PanelBody>
-					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl
-							label={__('クラス','catpow')}
-							onChange={(classes)=>setAttributes({classes})}
-							value={classes}
-						/>
-					</PanelBody>
+						<PanelBody title="ID" icon="admin-links" initialOpen={false}>
+							<TextControl
+								label='ID'
+								onChange={(id)=>{setAttributes({id:id});}}
+								value={id}
+							/>
+						</PanelBody>
+						<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
+							<TextareaControl
+								label={__('クラス','catpow')}
+								onChange={(classes)=>setAttributes({classes})}
+								value={classes}
+							/>
+						</PanelBody>
+					</CP.ColorVarTracer>
 				</InspectorControls>
 			</>
 		);

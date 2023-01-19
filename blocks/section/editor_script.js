@@ -26,7 +26,7 @@
       const { InnerBlocks, BlockControls, InspectorControls, RichText } = wp.blockEditor;
       const { PanelBody, TextareaControl, TextControl } = wp.components;
       const { attributes, className, setAttributes } = props;
-      const { useMemo } = wp.element;
+      const { useMemo, useState } = wp.element;
       const {
         SectionTag,
         HeadingTag,
@@ -58,6 +58,7 @@
       } = attributes;
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys, imageSizes } = CP.config.section;
+      const [mainBlock, setMainBlock] = useState();
       CP.inheritColor(props, ["iconSrc", "patternImageCss", "headerPatternImageCss", "frameImageCss", "borderImageCss"]);
       CP.manageStyleData(props, ["patternImageCss", "headerPatternImageCss", "frameImageCss", "borderImageCss"]);
       const selectiveClasses = useMemo(() => {
@@ -246,7 +247,7 @@
         return selectiveClasses2;
       }, []);
       var level = CP.getNumberClass({ attr: attributes }, "level");
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })), /* @__PURE__ */ wp.element.createElement(SectionTag, { id, className: classes }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && imageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: imageCode }) : /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })), /* @__PURE__ */ wp.element.createElement(SectionTag, { id, className: classes, ref: setMainBlock }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && imageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: imageCode }) : /* @__PURE__ */ wp.element.createElement(
         CP.SelectResponsiveImage,
         {
           attr: attributes,
@@ -284,7 +285,7 @@
           attr: attributes,
           keys: imageKeys.backgroundImage
         }
-      )), states.hasPatternImage && /* @__PURE__ */ wp.element.createElement("style", null, patternImageCss), states.hasHeaderPatternImage && /* @__PURE__ */ wp.element.createElement("style", null, headerPatternImageCss), states.hasBorderImage && /* @__PURE__ */ wp.element.createElement("style", null, borderImageCss), states.hasFrameImage && /* @__PURE__ */ wp.element.createElement("style", null, frameImageCss)), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+      )), states.hasPatternImage && /* @__PURE__ */ wp.element.createElement("style", null, patternImageCss), states.hasHeaderPatternImage && /* @__PURE__ */ wp.element.createElement("style", null, headerPatternImageCss), states.hasBorderImage && /* @__PURE__ */ wp.element.createElement("style", null, borderImageCss), states.hasFrameImage && /* @__PURE__ */ wp.element.createElement("style", null, frameImageCss)), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: mainBlock }, /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
           title: __("\u30AF\u30E9\u30B9", "catpow"),
@@ -310,7 +311,7 @@
           onChange: (classes2) => setAttributes({ classes: classes2 }),
           value: classes
         }
-      ))));
+      )))));
     },
     save({ attributes, className }) {
       const { InnerBlocks, RichText } = wp.blockEditor;

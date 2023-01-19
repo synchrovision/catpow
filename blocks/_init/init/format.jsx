@@ -196,10 +196,12 @@ wp.richText.registerFormatType('catpow/mark',{
 					<Popover anchor={el} position='bottom center' focusOnMount={false}>
 						<Card size="small">
 							<CardBody>
-								<CP.SelectThemeColor
-									onChange={(color)=>setAttributes({color})}
-									selected={activeAttributes['color']}
-								/>
+								<CP.ColorVarTracer target={el.parentElement}>
+									<CP.SelectThemeColor
+										onChange={(color)=>setAttributes({color})}
+										selected={activeAttributes['color']}
+									/>
+								</CP.ColorVarTracer>
 							</CardBody>
 						</Card>
 					</Popover>
@@ -259,10 +261,12 @@ wp.richText.registerFormatType('catpow/large',{
 					<Popover anchor={el} position='bottom center' focusOnMount={false}>
 						<Card size="small">
 							<CardBody>
-								<CP.SelectThemeColor
-									onChange={(color)=>setAttributes({color})}
-									selected={activeAttributes['color']}
-								/>
+								<CP.ColorVarTracer target={el.parentElement}>
+									<CP.SelectThemeColor
+										onChange={(color)=>setAttributes({color})}
+										selected={activeAttributes['color']}
+									/>
+								</CP.ColorVarTracer>
 							</CardBody>
 						</Card>
 					</Popover>
@@ -323,10 +327,12 @@ wp.richText.registerFormatType('catpow/tag',{
 						</Card>
 						<Card size="small">
 							<CardBody>
-								<CP.SelectThemeColor
-									onChange={(color)=>setAttributes({color})}
-									selected={activeAttributes['color']}
-								/>
+								<CP.ColorVarTracer target={el.parentElement}>
+									<CP.SelectThemeColor
+										onChange={(color)=>setAttributes({color})}
+										selected={activeAttributes['color']}
+									/>
+								</CP.ColorVarTracer>
 							</CardBody>
 						</Card>
 					</Popover>
