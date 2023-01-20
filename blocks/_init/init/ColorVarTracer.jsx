@@ -8,7 +8,7 @@ CP.ColorVarTracer=(props)=>{
 		const vars={};
 		if(target){
 			const styles=getComputedStyle(target);
-			['b','m','a'].forEach((k)=>{
+			['b','s','t','m','a','i'].forEach((k)=>{
 				['','-container'].forEach((p)=>{
 					const name=`--cp${p}-tones-${k}-h`;
 					vars[name]=styles.getPropertyValue(name);
@@ -17,8 +17,6 @@ CP.ColorVarTracer=(props)=>{
 		}
 		return vars;
 	},[target]);
-	
-	console.log(vars);
 	
 	return <div style={vars}>{props.children}</div>;
 };
