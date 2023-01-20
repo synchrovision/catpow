@@ -176,7 +176,7 @@ wp.richText.registerFormatType('catpow/mark',{
 		const {applyFormat,toggleFormat}=wp.richText;
 
 		const onToggle=()=>{
-			return onChange(toggleFormat(value,{type:'catpow/mark',attributes:{color:'color0'}}));
+			return onChange(toggleFormat(value,{type:'catpow/mark',attributes:{color:'color_0'}}));
 		}
 		const el=useMemo(CP.getSelecedFormatElement,[isActive,value.start,value.end]);
 		const setAttributes=useCallback((attr)=>{
@@ -238,7 +238,7 @@ wp.richText.registerFormatType('catpow/large',{
 		const {applyFormat,toggleFormat}=wp.richText;
 
 		const onToggle=()=>{
-			return onChange(toggleFormat(value,{type:'catpow/large',attributes:{color:'color0'}}));
+			return onChange(toggleFormat(value,{type:'catpow/large',attributes:{color:'color_0'}}));
 		}
 		const el=useMemo(CP.getSelecedFormatElement,[isActive,value.start,value.end]);
 		const setAttributes=useCallback((attr)=>{
@@ -305,7 +305,7 @@ wp.richText.registerFormatType('catpow/tag',{
 		const {removeFormat,applyFormat,toggleFormat,insert,create,slice}=wp.richText;
 
 		const onToggle=()=>{
-			return onChange(toggleFormat(value,{type:'catpow/tag',attributes:{class:'color0'}}));
+			return onChange(toggleFormat(value,{type:'catpow/tag',attributes:{class:'color_0'}}));
 		}
 		const el=useMemo(CP.getSelecedFormatElement,[isActive,value.start,value.end]);
 		const setAttributes=useCallback((attr)=>{
