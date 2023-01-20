@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: catpow\n"
-"POT-Creation-Date: 2020-07-30 14:58+0900\n"
+"POT-Creation-Date: 2023-01-20 10:59+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-KeywordsList: _;_e;__\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -19,7 +19,6 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-3: **/vendor\n"
 
 #: action/admin_init-edit.php:73 action/admin_init-users.php:47
-#: default/config/template/manage/sec_search.php:25
 msgid "検索"
 msgstr "search"
 
@@ -27,37 +26,216 @@ msgstr "search"
 msgid "変更日"
 msgstr "modified"
 
-#: action/admin_menu.php:101
+#: action/admin_init-post.php:9
+msgid "複製"
+msgstr "Clone"
+
+#: action/admin_menu.php:107
 msgid "再利用可能ブロック"
 msgstr "reusable blocks"
 
 #: action/admin_notices.php:3
-msgid ""
-"設定ファイルが更新されています　サイトを更新してください"
+msgid "設定ファイルが更新されています　サイトを更新してください"
 msgstr "Config was updated. Update site"
 
-#: action/rest_api_init.php:31
+#: action/customize_register.php:20
+msgid "フォント"
+msgstr "Font"
+
+#: action/rest_api_init.php:61 functions/hide_author/functions.php:6
 msgid "無効なリクエストです"
 msgstr "ineffective request"
 
-#: blocks/_init/format.js:15
+#: blocks/_init/init.js:944
 msgid "ルビをつけたいテキストを選択してください"
 msgstr "Select text to add ruby"
 
-#: blocks/_init/format.js:17
+#: blocks/_init/init.js:947
 msgid "ルビを入力"
 msgstr "input ruby"
 
-#: blocks/_init/format.js:280
-msgid "クラスを入力"
-msgstr "input class"
+#: blocks/breadcrumb/editor_script.js:6
+msgid "パンくずリストを表示します。"
+msgstr "Show breadcrumb"
 
-#: classes/cpdb.php:231 classes/cpdb.php:294
+#: blocks/container/editor_script.js:34
+msgid "スクロールX"
+msgstr "ScrollX"
+
+#: blocks/container/editor_script.js:35
+msgid "コンテンツの幅"
+msgstr "Content Width"
+
+#: blocks/container/editor_script.js:37
+msgid "スクロールY"
+msgstr "ScrollY"
+
+#: blocks/container/editor_script.js:38
+msgid "コンテナの高さ"
+msgstr "Container Height"
+
+#: blocks/entrypopup/editor_script.js:22 blocks/section/editor_script.js:291
+#: blocks/section/editor_script.js:310
+msgid "クラス"
+msgstr "Class"
+
+#: blocks/section/editor_script.js:21
+msgid "見出しと内容のまとまりを表すセクションのブロックです。"
+msgstr ""
+
+#: blocks/section/editor_script.js:67
+msgid "セクションタグ"
+msgstr "Section Tag"
+
+#: blocks/section/editor_script.js:68
+msgid "見出しタグ"
+msgstr "HeadingTag"
+
+#: blocks/section/editor_script.js:81
+msgid "タイプ"
+msgstr "Type"
+
+#: blocks/section/editor_script.js:91
+msgid "プレフィクス"
+msgstr "Prefix"
+
+#: blocks/section/editor_script.js:92
+msgid "タイトル画像"
+msgstr "Title Image"
+
+#: blocks/section/editor_script.js:95 blocks/section/editor_script.js:151
+msgid "ヘッダ画像"
+msgstr "Header Image"
+
+#: blocks/section/editor_script.js:98
+msgid "ヘッダ背景画像"
+msgstr "Header Background Image"
+
+#: blocks/section/editor_script.js:99 blocks/section/editor_script.js:110
+#: blocks/section/editor_script.js:111 blocks/section/editor_script.js:160
+#: blocks/section/editor_script.js:206
+msgid "背景画像"
+msgstr ""
+
+#: blocks/section/editor_script.js:100 blocks/section/editor_script.js:112
+#: blocks/section/editor_script.js:162 blocks/section/editor_script.js:208
+msgid "薄く"
+msgstr ""
+
+#: blocks/section/editor_script.js:102
+msgid "抜き色文字"
+msgstr ""
+
+#: blocks/section/editor_script.js:103
+msgid "ヘッダ背景色"
+msgstr ""
+
+#: blocks/section/editor_script.js:104 blocks/section/editor_script.js:168
+msgid "パターン画像"
+msgstr ""
+
+#: blocks/section/editor_script.js:109 blocks/section/editor_script.js:159
+msgid "リード"
+msgstr "Lead"
+
+#: blocks/section/editor_script.js:114 blocks/section/editor_script.js:164
+msgid "背景色"
+msgstr ""
+
+#: blocks/section/editor_script.js:115 blocks/section/editor_script.js:165
+#: blocks/section/editor_script.js:213
+msgid "メニューアイコン"
+msgstr "Menu Icon"
+
+#: blocks/section/editor_script.js:116 blocks/section/editor_script.js:166
+#: blocks/section/editor_script.js:200 blocks/section/editor_script.js:214
+msgid "アイコン"
+msgstr "Icon"
+
+#: blocks/section/editor_script.js:120 blocks/section/editor_script.js:179
+#: blocks/section/editor_script.js:221
+msgid "テンプレート"
+msgstr ""
+
+#: blocks/section/editor_script.js:126 blocks/section/editor_script.js:184
+msgid "ヘッダ画像コード"
+msgstr ""
+
+#: blocks/section/editor_script.js:133
+msgid "ヘッダ背景画像コード"
+msgstr ""
+
+#: blocks/section/editor_script.js:140 blocks/section/editor_script.js:190
+#: blocks/section/editor_script.js:232
+msgid "背景画像コード"
+msgstr ""
+
+#: blocks/section/editor_script.js:149
+msgid "レベル"
+msgstr "Level"
+
+#: blocks/section/editor_script.js:150
+msgid "見出しタイプ"
+msgstr "Heading Type"
+
+#: blocks/section/editor_script.js:171
+msgid "フレーム画像"
+msgstr "Frame Image"
+
+#: blocks/section/editor_script.js:174 blocks/section/editor_script.js:216
+msgid "ボーダー画像"
+msgstr "Border Image"
+
+#: blocks/section/editor_script.js:203
+msgid "画像"
+msgstr "Image"
+
+#: blocks/section/editor_script.js:210
+msgid "線"
+msgstr "Stroke"
+
+#: blocks/section/editor_script.js:210
+msgid "なし"
+msgstr "None"
+
+#: blocks/section/editor_script.js:210
+msgid "細"
+msgstr "Thin"
+
+#: blocks/section/editor_script.js:210
+msgid "太"
+msgstr "Bold"
+
+#: blocks/section/editor_script.js:211
+msgid "角丸"
+msgstr "Round"
+
+#: blocks/section/editor_script.js:212
+msgid "影"
+msgstr "Shadow"
+
+#: blocks/section/editor_script.js:212
+msgid "内側"
+msgstr "Inside"
+
+#: blocks/section/editor_script.js:226
+msgid "画像コード"
+msgstr "Image Code"
+
+#: blocks/sitefooter/editor_script.js:6
+msgid "サイト共通フッタのブロックです。"
+msgstr ""
+
+#: blocks/siteheader/editor_script.js:6
+msgid "サイト共通ヘッダのブロックです。"
+msgstr ""
+
+#: classes/cpdb.php:236 classes/cpdb.php:304
 #, php-format
 msgid "%sへのinsertにparent_idは必須です"
 msgstr "insertion to %s require parent_id"
 
-#: classes/meta/gmap.php:17
+#: classes/meta/gmap.php:21
 msgid "gmapを使うにはGoogleAPIキーが必要です"
 msgstr "gmap neeeds GoogleAPI key"
 
@@ -73,7 +251,7 @@ msgstr "URL"
 msgid "お名前"
 msgstr "name"
 
-#: classes/meta/mail.php:15
+#: classes/meta/mail.php:15 default/post_data/contractform/form.php:37
 msgid "メールアドレス"
 msgstr "mail address"
 
@@ -235,6 +413,52 @@ msgstr "%s is invalid"
 msgid "郵便番号を入力してください（半角数字）"
 msgstr "invalid zip code (alphanumeric)"
 
+#: components/Finder/BulkControl/component.js:84
+msgid "キャンセル"
+msgstr "Cancel"
+
+#: components/Finder/BulkControl/component.js:92
+#: components/Finder/BulkControl/component.js:115
+msgid "実行"
+msgstr "Execute"
+
+#: components/Finder/BulkControl/component.js:105
+msgid "一括処理"
+msgstr "Bulk"
+
+#: components/Finder/PerPage/component.js:11
+msgid "件/頁"
+msgstr "items/page"
+
+#: components/Finder/SearchResults/component.js:35
+msgid "詳細を見る"
+msgstr "Show Detail"
+
+#: components/Finder/SearchResults/component.js:49
+msgid "検索結果なし"
+msgstr "Not Found"
+
+#: components/Finder/Status/component.js:9
+#, javascript-format
+msgid "%d件中%d件表示"
+msgstr "%d found show %d"
+
+#: components/Finder/Status/component.js:9
+#, javascript-format
+msgid "%d件選択"
+msgstr "%d items Selected"
+
+#: components/ModalForm/component.js:37
+#: default/config/template/config/sec_inputs.php:44
+#: default/post_data/contractform/form/confirm.php:26
+#: default/post_data/mailform/form/confirm.php:21
+msgid "送信"
+msgstr "send"
+
+#: core/init.php:7
+msgid "Every Minutes"
+msgstr ""
+
 #: core/user.php:57
 msgid "ゲスト"
 msgstr "guest"
@@ -242,10 +466,6 @@ msgstr "guest"
 #: default/classes/template_type/mail.php:10
 msgid "メールフォーム"
 msgstr "mail form"
-
-#: default/classes/template_type/menu.php:9
-msgid "メニュー"
-msgstr "menu"
 
 #: default/classes/template_type/news.php:9
 msgid "ニュース"
@@ -269,29 +489,90 @@ msgstr "products"
 msgid "スレッド"
 msgstr "thread"
 
-#: default/config/template/config/sec_inputs.php:44
-msgid "送信"
-msgstr "send"
-
 #: default/config/template/mailconf/admin.php:8
 msgid "送信・返信メール設定"
 msgstr "mail config"
 
-#: default/config/template/manage/sec_manage_item-edit.php:12
-msgid "削除"
-msgstr "delete"
+#: default/config/template/manage/api-bulk.php:9
+#, php-format
+msgid "%d件を削除しました"
+msgstr ""
 
-#: default/config/template/manage/sec_manage_item-edit.php:13
-msgid "更新"
-msgstr "update"
+#: default/config/template/manage/api-bulk.php:55
+#, php-format
+msgid "%d件のステータスを更新しました"
+msgstr "%d items status updated"
 
-#: default/config/template/manage/sec_manage_item.php:12
-msgid "編集"
-msgstr "edit"
+#: default/post_data/contractconf/entry.php:2
+msgid "エントリー"
+msgstr "Entry"
 
-#: default/config/template/manage/sec_search-results.php:16
-msgid "操作"
-msgstr "control"
+#: default/post_data/contractconf/entry.php:11
+#, php-format
+msgid ""
+"下記のURLにて必要事項を入力して申込を行ってください。\n"
+"%s"
+msgstr ""
+
+#: default/post_data/contractconf/entry.php:16
+msgid "申込フォーム"
+msgstr "Entry Form"
+
+#: default/post_data/contractconf/entry.php:20
+msgid "下記のボタンから必要事項を入力して申込を行ってください。"
+msgstr ""
+
+#: default/post_data/contractconf/entry.php:25
+msgid "申込フォームへ"
+msgstr "Go to Entry Form"
+
+#: default/post_data/contractconf/entry.php:29
+msgid ""
+"リンクの有効期限は15分です。有効期限が切れた場合はお手数ですが申込メール送"
+"信からやり直してください。"
+msgstr ""
+
+#: default/post_data/contractconf/notice.php:2
+#, php-format
+msgid "【お問い合わせ】%s様より"
+msgstr ""
+
+#: default/post_data/contractconf/thanks.php:2
+msgid "お問い合わせありがとうございます。"
+msgstr ""
+
+#: default/post_data/contractform/form.php:28
+msgid "送信先のメールアドレスを入力"
+msgstr "Input email to send"
+
+#: default/post_data/contractform/form.php:31
+msgid ""
+"入力したメールアドレスに申込フォームへのリンクを記載したメールを送信します"
+msgstr ""
+
+#: default/post_data/contractform/form.php:45
+msgid "申込メールを送信"
+msgstr ""
+
+#: default/post_data/contractform/form/confirm.php:25
+#: default/post_data/mailform/form/confirm.php:20
+msgid "戻る"
+msgstr ""
+
+#: default/post_data/contractform/form/entry.php:19
+msgid "メールを送信しました"
+msgstr ""
+
+#: default/post_data/contractform/form/entry.php:22
+msgid ""
+"申込フォームへのリンクを記載したメールを送信しました。<br/>メールに記載さ"
+"れたリンクから必要事項を記入して申込を行ってください。"
+msgstr ""
+
+#: default/post_data/contractform/form/input.php:25
+#: default/post_data/mailform/form.php:20
+msgid "確認"
+msgstr ""
 
 #: functions/amazonpay/classes/amazonpay/PaymentException.php:14
 msgid "支払方法に問題があるようです"
@@ -354,19 +635,19 @@ msgstr "OrderID was not set"
 msgid "決済IDがセットされていません"
 msgstr "AuthorizationID was not set"
 
-#: functions/facebook/functions.php:29
+#: functions/facebook/functions.php:22
 msgid "Facebookでログイン"
 msgstr "login with FaceBook"
 
 #: functions/gauth/desc.php:2
 msgid ""
-"Googleの各種APIを利用するための認証情報を登録します。gmap,"
-"gcalで必要になります。"
+"Googleの各種APIを利用するための認証情報を登録します。gmap,gcalで必要になり"
+"ます。"
 msgstr ""
-"Register your credentials to use Google's various APIs. It "
-"is required by gmap,gcal."
+"Register your credentials to use Google's various APIs. It is required by "
+"gmap,gcal."
 
-#: functions/gauth/functions.php:19
+#: functions/gauth/functions.php:13
 msgid "Googleでログイン"
 msgstr "login with Google"
 
@@ -377,6 +658,61 @@ msgstr "show"
 #: functions/gtranslate/conf.php:5
 msgid "非表示"
 msgstr "hide"
+
+#: ui/TaskProcess/input.js:24
+msgid "セーブ"
+msgstr "Save"
+
+#: ui/TaskProcess/input.js:25
+msgid "ロード"
+msgstr "Load"
+
+#: ui/TaskProcess/input.js:26
+msgid "接続承認"
+msgstr ""
+
+#: ui/TaskProcess/input.js:27
+msgid "接続承認確認"
+msgstr ""
+
+#: ui/TaskProcess/input.js:28
+msgid "タスク完了"
+msgstr ""
+
+#: ui/TaskProcess/input.js:29
+msgid "タスク完了確認"
+msgstr ""
+
+#: ui/TaskProcess/input.js:32
+msgid "タスク発行"
+msgstr ""
+
+#: ui/TaskProcess/input.js:35
+msgid "アクション"
+msgstr ""
+
+#: ui/TaskProcess/input.js:38
+msgid "有効期限"
+msgstr ""
+
+#: ui/TaskProcess/input.js:41
+msgid "有効回数"
+msgstr ""
+
+#~ msgid "クラスを入力"
+#~ msgstr "input class"
+
+#~ msgid "削除"
+#~ msgstr "delete"
+
+#~ msgid "更新"
+#~ msgstr "update"
+
+#~ msgid "編集"
+#~ msgstr "edit"
+
+#~ msgid "操作"
+#~ msgstr "control"
 
 #~ msgid "不正なリクエストです"
 #~ msgstr "invalid request"
