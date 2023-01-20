@@ -2,6 +2,7 @@
 
 CP.SelectClassPanel=(props)=>{
 	const {Fragment}=wp.element;
+	const {__}=wp.i18n;
 	const {PanelBody,CheckboxControl,SelectControl,TextareaControl,TextControl,ColorPicker,__experimentalGradientPicker:GradientPicker}=wp.components;
 	const {classKey='classes',items,index,subItemsKey,subIndex,set,attr,triggerClasses}=wp.hooks.applyFilters('catpow.SelectClassPanelProps',props);
 	let {itemsKey,itemClasses}=props;
@@ -292,7 +293,7 @@ CP.SelectClassPanel=(props)=>{
 			if(prm === 'color'){
 				rtn.push(
 					<CP.SelectColorClass
-						label='色'
+						label={__('色','catpow')}
 						set={props.set}
 						attr={props.attr}
 						selected={Object.keys(states).find(key=>CP.colorClassPattern.test(key))}
@@ -308,7 +309,7 @@ CP.SelectClassPanel=(props)=>{
 			else if(prm === 'pattern'){
 				rtn.push(
 					<CP.SelectPatternClass
-						label='パターン'
+						label={__('パターン','catpow')}
 						set={props.set}
 						attr={props.attr}
 						selected={Object.keys(states).find(key=>/^pattern\d+/.test(key))}
@@ -323,7 +324,7 @@ CP.SelectClassPanel=(props)=>{
 			else if(prm === 'cond'){
 				rtn.push(
 					<TextareaControl
-						label='表示条件'
+						label={__('表示条件','catpow')}
 						value={item['cond']}
 						onChange={(cond)=>save({cond})}
 					/>
