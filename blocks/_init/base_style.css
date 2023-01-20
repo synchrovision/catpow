@@ -275,6 +275,12 @@
   flex-wrap: nowrap;
   list-style: none;
 }
+.CP-SelectThemeColor-items-icon {
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.2);
+}
+.CP-SelectThemeColor-items-icon.active {
+  color: var(--wp-admin-theme-color);
+}
 .CP-SelectThemeColor-items-item {
   -webkit-box-flex: 1;
   flex-grow: 1;
@@ -283,6 +289,9 @@
   height: 1.25rem;
   cursor: pointer;
   background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  border-top-style: solid;
+  border-top-width: 0.625rem;
+  border-top-color: hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),var(--cp-tones-a-l),1);
 }
 .CP-SelectThemeColor-items-item:not(.active) {
   opacity: 0.2;

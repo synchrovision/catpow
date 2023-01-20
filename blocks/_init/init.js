@@ -861,15 +861,16 @@
         const matches = colorClass.match(CP.colorClassPattern);
         if (matches) {
           return {
-            absolute: matches[2] === "--",
+            fixed: matches[2] === "--",
+            absolute: matches[2] === "",
             relative: matches[2] === "_",
             value: matches[3]
           };
         }
       }
-      return { absolute: false, relative: false, value: 0 };
+      return { fixed: false, absolute: false, relative: false, value: 0 };
     },
-    generateColorClass: (data) => "color" + (data.absolute ? "--" : data.relative ? "_" : "") + data.value,
+    generateColorClass: (data) => "color" + (data.fixed ? "--" : data.relative ? "_" : "") + data.value,
     colorClassPattern: /^color((|_|\-\-)(\-?\d+))$/,
     /*id reflection*/
     manageStyleData: (props, csss) => {
@@ -1073,7 +1074,7 @@
       const { useMemo, useCallback } = wp.element;
       const { applyFormat, toggleFormat } = wp.richText;
       const onToggle = () => {
-        return onChange(toggleFormat(value, { type: "catpow/mark", attributes: { color: "color0" } }));
+        return onChange(toggleFormat(value, { type: "catpow/mark", attributes: { color: "color_0" } }));
       };
       const el = useMemo(CP.getSelecedFormatElement, [isActive, value.start, value.end]);
       const setAttributes = useCallback((attr) => {
@@ -1118,7 +1119,7 @@
       const { BlockControls, RichTextToolbarButton } = wp.blockEditor;
       const { applyFormat, toggleFormat } = wp.richText;
       const onToggle = () => {
-        return onChange(toggleFormat(value, { type: "catpow/large", attributes: { color: "color0" } }));
+        return onChange(toggleFormat(value, { type: "catpow/large", attributes: { color: "color_0" } }));
       };
       const el = useMemo(CP.getSelecedFormatElement, [isActive, value.start, value.end]);
       const setAttributes = useCallback((attr) => {
@@ -1164,7 +1165,7 @@
       const { useState, useMemo, useCallback } = wp.element;
       const { removeFormat, applyFormat, toggleFormat, insert, create, slice } = wp.richText;
       const onToggle = () => {
-        return onChange(toggleFormat(value, { type: "catpow/tag", attributes: { class: "color0" } }));
+        return onChange(toggleFormat(value, { type: "catpow/tag", attributes: { class: "color_0" } }));
       };
       const el = useMemo(CP.getSelecedFormatElement, [isActive, value.start, value.end]);
       const setAttributes = useCallback((attr) => {
@@ -1296,17 +1297,18 @@
   CP.SelectThemeColor = (props) => {
     const { selected, onChange } = props;
     const { useCallback, useMemo } = wp.element;
+    const { Icon } = wp.components;
     const { bem } = Catpow.util;
     const classes = bem("CP-SelectThemeColor");
     const data = useMemo(() => CP.parseColorClass(selected), [selected]);
     const Selections = useCallback((props2) => {
-      const { absolute = false, relative = false, selected: selected2 } = props2;
-      return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.items({ absolute }) }, Array.from(Array(13), (v, value) => {
-        const colorClass = CP.generateColorClass({ absolute, relative, value });
+      const { fixed = false, absolute = false, relative = false, active = false, selected: selected2 } = props2;
+      return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.items({ fixed, absolute, relative, active }) }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.items.icon({ active }) }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: fixed ? "lock" : absolute ? "media-default" : "excerpt-view" })), Array.from(Array(13), (v, value) => {
+        const colorClass = CP.generateColorClass({ fixed, absolute, relative, value });
         return /* @__PURE__ */ wp.element.createElement(
           "li",
           {
-            className: classes.items.item(colorClass, { active: colorClass == selected2, absolute, relative }),
+            className: classes.items.item(colorClass, { active: colorClass == selected2, fixed, absolute, relative }),
             onClick: () => onChange(colorClass),
             key: colorClass
           },
@@ -1314,7 +1316,7 @@
         );
       }));
     }, []);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(Selections, { selected, absolute: true }), /* @__PURE__ */ wp.element.createElement(Selections, { selected }), /* @__PURE__ */ wp.element.createElement(Selections, { selected, relative: true }));
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(Selections, { selected, fixed: true, active: data.fixed }), /* @__PURE__ */ wp.element.createElement(Selections, { selected, absolute: true, active: data.absolute }), /* @__PURE__ */ wp.element.createElement(Selections, { selected, relative: true, active: data.relative }));
   };
 
   // blocks/_init/init/SelectColors.jsx
@@ -2021,6 +2023,7 @@
   // blocks/_init/init/SelectClassPanel.jsx
   CP.SelectClassPanel = (props) => {
     const { Fragment } = wp.element;
+    const { __: __2 } = wp.i18n;
     const { PanelBody, CheckboxControl, SelectControl, TextareaControl, TextControl, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
     const { classKey = "classes", items, index, subItemsKey, subIndex: subIndex2, set, attr, triggerClasses } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
     let { itemsKey, itemClasses } = props;
@@ -2389,7 +2392,7 @@
             /* @__PURE__ */ wp.element.createElement(
               CP.SelectColorClass,
               {
-                label: "\u8272",
+                label: __2("\u8272", "catpow"),
                 set: props.set,
                 attr: props.attr,
                 selected: Object.keys(states).find((key) => CP.colorClassPattern.test(key)),
@@ -2409,7 +2412,7 @@
             /* @__PURE__ */ wp.element.createElement(
               CP.SelectPatternClass,
               {
-                label: "\u30D1\u30BF\u30FC\u30F3",
+                label: __2("\u30D1\u30BF\u30FC\u30F3", "catpow"),
                 set: props.set,
                 attr: props.attr,
                 selected: Object.keys(states).find((key) => /^pattern\d+/.test(key)),
@@ -2426,7 +2429,7 @@
             /* @__PURE__ */ wp.element.createElement(
               TextareaControl,
               {
-                label: "\u8868\u793A\u6761\u4EF6",
+                label: __2("\u8868\u793A\u6761\u4EF6", "catpow"),
                 value: item["cond"],
                 onChange: (cond) => save({ cond })
               }

@@ -1,5 +1,9 @@
 @import 'catpow.scss';
 $sizeUnit:0.0625rem;
+$colors:(
+	at:var(--wp-admin-theme-color)
+);
+
 .itemControl{
 	@include bnd((pd:2 5,p:r,z:1000));
 	@include txt((a:c,p:12,h:10));
@@ -150,10 +154,17 @@ $sizeUnit:0.0625rem;
 			@include bnd((w:220,mg:4 0));
 			@include flx((w:n));
 			@include txt((l:n));
+			&-icon{
+				@include txt((c:t 1 .2));
+				&.active{
+					@include txt((c:at));
+				}
+			}
 			&-item{
 				@include bnd((f:1 1 10,h:20));
 				@include usr((c:p));
 				@include bg((c:m));
+				@include bdr((p:t,s:s,w:10,c:a));
 				&:not(.active){@include trn((o:.2));}
 			}
 		}

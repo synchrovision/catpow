@@ -641,15 +641,16 @@
 			const matches=colorClass.match(CP.colorClassPattern);
 			if(matches){
 				return {
-					absolute:matches[2]==='--',
+					fixed:matches[2]==='--',
+					absolute:matches[2]==='',
 					relative:matches[2]==='_',
 					value:matches[3]
 				};
 			}
 		}
-		return {absolute:false,relative:false,value:0};
+		return {fixed:false,absolute:false,relative:false,value:0};
 	},
-	generateColorClass:(data)=>'color'+(data.absolute?'--':(data.relative?'_':''))+data.value,
+	generateColorClass:(data)=>'color'+(data.fixed?'--':(data.relative?'_':''))+data.value,
 	colorClassPattern:/^color((|_|\-\-)(\-?\d+))$/,
 	
 	/*id reflection*/
