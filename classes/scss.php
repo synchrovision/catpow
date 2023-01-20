@@ -129,9 +129,11 @@ class scss{
 					if(!isset($val['h'])){continue;}
 					foreach(range(0,12) as $n){
 						$m=$n===0?0:$n-6;
+						$classes['.color--'.$n]["--cp-tones-{$key}-h"]=$n*30;
 						$classes['.color'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-root-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
-						$classes['.color'.$n]["--cp-container-tones-{$key}-h"]="var(--cp-tones-{$key}-h)";
 						$classes['.color_'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-container-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
+						$classes['.color--'.$n]["--cp-container-tones-{$key}-h"]=
+						$classes['.color'.$n]["--cp-container-tones-{$key}-h"]="var(--cp-tones-{$key}-h)";
 					}
 				}
 				return self::create_map_data($classes);
