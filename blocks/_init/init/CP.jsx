@@ -30,7 +30,7 @@
 			else{data[keys.src]=image.url;}
 			if(keys.sources && image.sizes){
 				devices=devices || ['sp'];
-				data[keys.sources]=devices.forEach((device)=>{
+				data[keys.sources]=devices.map((device)=>{
 					const sizeData=CP.devices[device];
 					return {srcset:image.sizes[sizeData.media_size].url,device};
 				});
