@@ -91,7 +91,7 @@
 											{item.images.length>0 && item.images.map((image)=>{
 												return (
 													<div className={image.classes}>
-														<img src={image.src} srcset={image.srcset} alt={image.alt}/>
+														<img src={image.src} srcSet={image.srcset} alt={image.alt}/>
 													</div>
 												);
 											})}
@@ -138,7 +138,7 @@
 										{item.images.length>0 && item.images.map((image)=>{
 											return (
 												<div className={image.classes}>
-													<img src={image.src} srcset={image.srcset} alt={image.alt}/>
+													<img src={image.src} srcSet={image.srcset} alt={image.alt}/>
 												</div>
 											);
 										})}

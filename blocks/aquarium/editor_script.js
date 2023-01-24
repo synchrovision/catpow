@@ -68,7 +68,7 @@
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, layers.map((layer) => {
         return /* @__PURE__ */ wp.element.createElement("div", { className: layer.classes }, layer.items.map((item, index) => {
           return /* @__PURE__ */ wp.element.createElement("div", { className: item.classes, key: index }, item.images.length > 0 && item.images.map((image) => {
-            return /* @__PURE__ */ wp.element.createElement("div", { className: image.classes }, /* @__PURE__ */ wp.element.createElement("img", { src: image.src, srcset: image.srcset, alt: image.alt }));
+            return /* @__PURE__ */ wp.element.createElement("div", { className: image.classes }, /* @__PURE__ */ wp.element.createElement("img", { src: image.src, srcSet: image.srcset, alt: image.alt }));
           }), item.texts.length > 0 && item.texts.map((text) => {
             return /* @__PURE__ */ wp.element.createElement("div", { className: text.classes }, /* @__PURE__ */ wp.element.createElement("h3", null, text.title), /* @__PURE__ */ wp.element.createElement("p", null, text.text));
           }));
@@ -90,7 +90,7 @@
       return /* @__PURE__ */ wp.element.createElement("div", { className: classes }, layers.map((layer) => {
         return /* @__PURE__ */ wp.element.createElement("div", { className: layer.classes }, layer.items.map((item, index) => {
           return /* @__PURE__ */ wp.element.createElement("div", { className: item.classes, key: index }, item.images.length > 0 && item.images.map((image) => {
-            return /* @__PURE__ */ wp.element.createElement("div", { className: image.classes }, /* @__PURE__ */ wp.element.createElement("img", { src: image.src, srcset: image.srcset, alt: image.alt }));
+            return /* @__PURE__ */ wp.element.createElement("div", { className: image.classes }, /* @__PURE__ */ wp.element.createElement("img", { src: image.src, srcSet: image.srcset, alt: image.alt }));
           }), item.texts.length > 0 && item.texts.map((text) => {
             return /* @__PURE__ */ wp.element.createElement("div", { className: text.classes }, /* @__PURE__ */ wp.element.createElement("h3", null, text.title), /* @__PURE__ */ wp.element.createElement("p", null, text.text));
           }));

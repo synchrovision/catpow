@@ -51,7 +51,7 @@ CP.ResponsiveImage=({className,attr,keys,index,sizes,devices,device,isTemplate})
 		return (
 			<picture className={'selectImage '+className}>
 				{item[keys.sources].map((source)=>(
-					<source srcset={source.srcset} media={CP.devices[source.device].media_query} data-device={source.device} key={source.device}/>
+					<source srcSet={source.srcset} media={CP.devices[source.device].media_query} data-device={source.device} key={source.device}/>
 				))}
 				<img
 					src={item[keys.src]}
