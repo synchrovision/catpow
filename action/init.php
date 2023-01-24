@@ -28,6 +28,7 @@ while($fname = $cpjs_dir->read()){
 
 wp_register_style('font_awesome','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css');
 wp_register_style('materialicons','https://fonts.googleapis.com/icon?family=Material+Icons');
+wp_register_script('alpine','https://unpkg.com/alpinejs');
 wp_register_script('urljs','https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.19.2/URI.min.js');
 wp_register_script('axios','https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js');
 wp_register_script('remarkable','https://cdnjs.cloudflare.com/ajax/libs/remarkable/2.0.1/remarkable.min.js');
@@ -40,6 +41,7 @@ wp_scripts()->add_data('react','global','React');
 wp_scripts()->add_data('react-dom','global','ReactDOM');
 wp_scripts()->add_data('jquery','global','jQuery');
 wp_scripts()->add_data('catpow','global','Catpow');
+wp_scripts()->add_data('alpine','global','alpine');
 
 
 wp_register_script('wpinfo',null);
