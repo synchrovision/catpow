@@ -5,7 +5,7 @@ wp.plugins.registerPlugin('catpow-sidebar',{render:(props)=>{
 	const {PluginSidebarMoreMenuItem,PluginSidebar}=wp.editPost;
 	const {PanelBody}=wp.components;
 
-	const [structure,setStructure]=useState();
+	const [structure,setStructure]=useState(false);
 	const {DataStructure,DataStructureItem}=CP;
 	if(!structure){
 		wp.apiFetch({path:'/cp/v1/config/structure'}).then(structure=>{

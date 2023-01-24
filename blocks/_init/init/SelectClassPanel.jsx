@@ -550,7 +550,7 @@ CP.SelectClassPanel=(props)=>{
 							states[prm.values]=!states[prm.values];
 							saveClasses();
 						}}
-						checked={states[prm.values]}
+						checked={!!states[prm.values]}
 					/>
 				);
 				if(prm.sub){
