@@ -1254,7 +1254,7 @@
     const { useState, useMemo, useCallback } = wp.element;
     const { PluginSidebarMoreMenuItem, PluginSidebar } = wp.editPost;
     const { PanelBody } = wp.components;
-    const [structure, setStructure] = useState();
+    const [structure, setStructure] = useState(false);
     const { DataStructure, DataStructureItem } = CP;
     if (!structure) {
       wp.apiFetch({ path: "/cp/v1/config/structure" }).then((structure2) => {
@@ -1593,7 +1593,7 @@
           }
         ));
       }
-      return /* @__PURE__ */ wp.element.createElement("picture", { className: "selectImage " + className }, item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcset: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("picture", { className: "selectImage " + className }, item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement(
         "img",
         {
           src: item[keys.src],
@@ -2685,7 +2685,7 @@
                   states[prm.values] = !states[prm.values];
                   saveClasses();
                 },
-                checked: states[prm.values]
+                checked: !!states[prm.values]
               }
             )
           );
@@ -3176,7 +3176,7 @@
       const vars2 = {};
       if (target) {
         const styles = getComputedStyle(target);
-        ["b", "m", "a"].forEach((k) => {
+        ["b", "s", "t", "m", "a", "i"].forEach((k) => {
           ["", "-container"].forEach((p) => {
             const name = `--cp${p}-tones-${k}-h`;
             vars2[name] = styles.getPropertyValue(name);
@@ -3185,7 +3185,6 @@
       }
       return vars2;
     }, [target]);
-    console.log(vars);
     return /* @__PURE__ */ wp.element.createElement("div", { style: vars }, props.children);
   };
 })();
