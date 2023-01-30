@@ -191,25 +191,25 @@ class blocks{
 						}
 						break;
 					case 'php':
+						if($fname==='deps'){
+							foreach(cp::get_file_paths('blocks/'.$file_name) as $file_path){
+								$deps=include $file_path;
+								foreach (['editor_script'=>'js','editor_style'=>'css','script'=>'js','style'=>'css'] as $handler=>$type){
+									if(!empty($deps[$handler])){
+										$data[$type]["blocks/{$block_name}/{$handler}.{$type}"][2]=array_merge(
+											$data[$type]["blocks/{$block_name}/{$handler}.{$type}"][2]??[],$deps[$handler]
+										);
+									}
+								}
+							}
+							break;
+						}
 						$file_path=cp::get_file_path('blocks/'.$file_name);
 						if(empty($file_path)){break;}
-						if($fname === 'conf'){
+						if($fname==='conf'){
 							self::apply_conf_file($param,$file_path);
 						}
-						elseif($fname === 'deps'){
-							$deps = include $file_path;
-							if(!empty($deps['scripts'])){
-								$data['js']['blocks/'.$block_name.'/script.js'][2]=array_merge(
-									$data['js']['blocks/'.$block_name.'/script.js'][2]??[],$deps['scripts']
-								);
-							}
-							if(!empty($deps['styles'])){
-								$data['style']['blocks/'.$block_name.'/style.css'][2]=array_merge(
-									$data['style']['blocks/'.$block_name.'/style.css'][2]??[],$deps['styles']
-								);
-							}
-						}
-						elseif($fname === 'render'){
+						elseif($fname==='render'){
 							$param['render_callback']=$file_path;
 						}
 						else{
