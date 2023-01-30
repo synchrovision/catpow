@@ -60,14 +60,14 @@ wp.blocks.registerBlockType('catpow/sidecolumn',{
 	parent:['catpow/sidebar'],
 	edit({attributes,className,setAttributes}){
 		const {InnerBlocks}=wp.blockEditor;
-		return [
+		return (
 			<div className={'column column_side'}>
 				<div className="column_side_container">
 					<InnerBlocks template={[['catpow/articlenav']]} templateLock={false}/>
 				</div>
 				<div className="sidebar_button"></div>
 			</div>
-		];
+		);
 	},
 	save({attributes,className,setAttributes}){
 		const {InnerBlocks}=wp.blockEditor;
@@ -139,8 +139,8 @@ wp.blocks.registerBlockType('catpow/articlenav',{
 		return (
 			<div className={className}>
 				<ul className="article_nav">
-					{getSectionTitles(mainContents).map((title)=>{
-						return <li><h3><RichText.Content value={title}/></h3></li>;
+					{getSectionTitles(mainContents).map((title,index)=>{
+						return <li key={index}><h3><RichText.Content value={title}/></h3></li>;
 					})}
 				</ul>
 			</div>

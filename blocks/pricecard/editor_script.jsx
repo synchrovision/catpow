@@ -5,6 +5,7 @@
 	category: 'catpow',
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
+		const {Fragment}=wp.element;
 		const {InnerBlocks,InspectorControls,RichText}=wp.blockEditor;
 		const {Icon,PanelBody,TextareaControl} = wp.components;
 		const {items=[],classes='',priceUnit,priceCaption,linkText,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
@@ -148,26 +149,28 @@
 							{states.hasSpec && 
 								<dl className="spec">
 									{item.specLabels.map((label,specIndex)=>{
-										return [
-											<dt>
-												<RichText
-													onChange={(text)=>{
-														items[index].specLabels[specIndex].text=text;
-														save();
-													}}
-													value={items[index].specLabels[specIndex].text}
-												/>
-											</dt>,
-											<dd>
-												<RichText
-													onChange={(text)=>{
-														items[index].specValues[specIndex].text=text;
-														save();
-													}}
-													value={items[index].specValues[specIndex].text}
-												/>
-											</dd>
-										];
+										return (
+											<Fragment key={specIndex}>
+												<dt>
+													<RichText
+														onChange={(text)=>{
+															items[index].specLabels[specIndex].text=text;
+															save();
+														}}
+														value={items[index].specLabels[specIndex].text}
+													/>
+												</dt>
+												<dd>
+													<RichText
+														onChange={(text)=>{
+															items[index].specValues[specIndex].text=text;
+															save();
+														}}
+														value={items[index].specValues[specIndex].text}
+													/>
+												</dd>
+											</Fragment>
+										);
 									})}
 								</dl>
 							}
@@ -265,6 +268,7 @@
 	   );
 	},
 	save({attributes,className}){
+		const {Fragment}=wp.element;
 		const {InnerBlocks,RichText}=wp.blockEditor;
 		const {items=[],classes='',priceUnit,priceCaption,linkText,loopCount,doLoop}=attributes;
 		const primaryClass='wp-block-catpow-pricecard';
@@ -326,10 +330,12 @@
 							{states.hasSpec && 
 								<dl className="spec">
 									{item.specLabels.map((label,specIndex)=>{
-										return [
-											<dt><RichText.Content value={items[index].specLabels[specIndex].text}/></dt>,
-											<dd><RichText.Content value={items[index].specValues[specIndex].text}/></dd>
-										];
+										return (
+											<Fragment key={specIndex}>
+												<dt><RichText.Content value={items[index].specLabels[specIndex].text}/></dt>
+												<dd><RichText.Content value={items[index].specValues[specIndex].text}/></dd>
+											</Fragment>
+										);
 									})}
 								</dl>
 							}

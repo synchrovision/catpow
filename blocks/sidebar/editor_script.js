@@ -46,9 +46,7 @@
     parent: ["catpow/sidebar"],
     edit({ attributes, className, setAttributes }) {
       const { InnerBlocks: InnerBlocks2 } = wp.blockEditor;
-      return [
-        /* @__PURE__ */ wp.element.createElement("div", { className: "column column_side" }, /* @__PURE__ */ wp.element.createElement("div", { className: "column_side_container" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2, { template: [["catpow/articlenav"]], templateLock: false })), /* @__PURE__ */ wp.element.createElement("div", { className: "sidebar_button" }))
-      ];
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "column column_side" }, /* @__PURE__ */ wp.element.createElement("div", { className: "column_side_container" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2, { template: [["catpow/articlenav"]], templateLock: false })), /* @__PURE__ */ wp.element.createElement("div", { className: "sidebar_button" }));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks: InnerBlocks2 } = wp.blockEditor;
@@ -94,8 +92,8 @@
           return block.attributes.title;
         });
       };
-      return /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("ul", { className: "article_nav" }, getSectionTitles(mainContents).map((title) => {
-        return /* @__PURE__ */ wp.element.createElement("li", null, /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: title })));
+      return /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("ul", { className: "article_nav" }, getSectionTitles(mainContents).map((title, index) => {
+        return /* @__PURE__ */ wp.element.createElement("li", { key: index }, /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: title })));
       })));
     },
     save({ attributes, className, setAttributes }) {
