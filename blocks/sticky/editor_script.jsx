@@ -15,7 +15,7 @@ wp.blocks.registerBlockType('catpow/sticky',{
 	attributes:{
 		classes:{source:'attribute',selector:'div',attribute:'class',default:'wp-block-catpow-sticky topLeft small label'},
 
-		labelText:{source:'html',selector:'.content>.label',defalt:['ラベル']},
+		labelText:{source:'html',selector:'.content>.label',defalt:'ラベル'},
 
 		openButtonImageSrc:{source:'attribute',selector:'.wp-block-catpow-sticky>.stickyButton [src].open',attribute:'src',default:wpinfo.theme_url+'/images/dummy_icon.svg'},
 		closeButtonImageSrc:{source:'attribute',selector:'.wp-block-catpow-sticky>.stickyButton [src].close',attribute:'src',default:wpinfo.theme_url+'/images/dummy_icon.svg'},

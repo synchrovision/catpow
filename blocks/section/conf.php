@@ -13,7 +13,7 @@ $attributes=[
 	'HeadingTag'=>['type'=>'string','default'=>'h2'],
 
 	'prefix'=>['source'=>'html','selector'=>'header div.prefix'],
-	'title'=>['source'=>'html','selector'=>'header h2,header .heading','default'=>['Title']],
+	'title'=>['source'=>'html','selector'=>'header h2,header .heading','default'=>'Title'],
 	'lead'=>['source'=>'html','selector'=>'header p,header .lead'],
 
 	'titleImageMime'=>['source'=>'attribute','selector'=>'header .titleImage [src]','attribute'=>'data-mime'],

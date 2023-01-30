@@ -16,7 +16,7 @@ wp.blocks.registerBlockType('catpow/accordion',{
 	attributes:{
 		classes:{source:'attribute',selector:'.wp-block-catpow-accordion',attribute:'class',default:'wp-block-catpow-accordion'},
 
-		title:{type:'array',source:'html',selector:'.title',default:['Title']},
+		title:{source:'html',selector:'.title',default:'Title'},
 
 		imageMime:{source:'attribute',selector:'.image [src]',attribute:'data-mime'},
 		imageSrc:{source:'attribute',selector:'.image [src]',attribute:'src',default:wpinfo.theme_url+'/images/dummy.jpg'},
