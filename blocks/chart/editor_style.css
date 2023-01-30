@@ -11,16 +11,16 @@ ul.wp-block-catpow-listed li.item > .link {
 }
 ul.wp-block-catpow-listed li.item > .link input {
   margin: 0.625rem auto;
-  color: #444;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
 }
 ul.wp-block-catpow-listed.edit {
   padding: 1.25rem;
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: rgba(68, 68, 68, 0.5);
+  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.5);
   border-radius: 0.625rem;
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  background-color: #f8f8f8;
+  box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
 }
 ul.wp-block-catpow-listed.edit li.item {
   display: -webkit-box;
@@ -67,7 +67,7 @@ ul.wp-block-catpow-listed.edit li.item > header div.counter span {
   font-size: 0.6875rem;
   line-height: 1em;
   font-weight: 400;
-  color: #36c;
+  color: hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),var(--cp-tones-a-l),1);
 }
 ul.wp-block-catpow-listed.edit li.item > header div.counter span.number {
   display: inline-block;
@@ -100,18 +100,18 @@ ul.wp-block-catpow-listed.edit li.item > header div.text h3 {
   text-align: left;
   font-size: 1.25rem;
   font-weight: 400;
-  color: #36c;
+  color: hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),var(--cp-tones-a-l),1);
 }
 ul.wp-block-catpow-listed.edit li.item > header div.text p {
   padding: 0.625rem;
   margin-top: 0.625rem;
   border-top-style: solid;
   border-top-width: 0.0625rem;
-  border-top-color: #fff;
+  border-top-color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
   text-align: justify;
   font-size: 0.75rem;
   font-weight: 400;
-  color: #007cba;
+  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 ul.wp-block-catpow-listed.edit li.item > .text {
   padding: 0.625rem;
@@ -125,16 +125,16 @@ ul.wp-block-catpow-listed.edit li.item > .text h4 {
   margin-bottom: 0.3125rem;
   border-bottom-style: dotted;
   border-bottom-width: 0.0625rem;
-  border-bottom-color: #444;
+  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
   text-align: left;
   font-size: 0.9375rem;
   font-weight: 400;
-  color: #444;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
 }
 ul.wp-block-catpow-listed.edit li.item > .text p {
   text-align: justify;
   font-size: 0.75rem;
   font-weight: 400;
-  color: #444;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
 }
 /*# sourceMappingURL=./editor_style.css.map */

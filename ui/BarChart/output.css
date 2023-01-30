@@ -5,39 +5,39 @@
   margin: 0rem auto;
 }
 .BarChart svg rect.color1 {
-  fill: #d65c5c;
+  fill: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -5 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 .BarChart svg rect.color2 {
-  fill: #d6995c;
+  fill: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -4 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 .BarChart svg rect.color3 {
-  fill: #d6d65c;
+  fill: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -3 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 .BarChart svg rect.color4 {
-  fill: #99d65c;
+  fill: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -2 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 .BarChart svg rect.color5 {
-  fill: #5cd65c;
+  fill: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -1 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 .BarChart svg rect.color6 {
-  fill: #5cd699;
+  fill: hsla(var(--cp-root-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 .BarChart svg rect.color7 {
-  fill: #5cd6d6;
+  fill: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 1 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 .BarChart svg rect.color8 {
-  fill: #5c99d6;
+  fill: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 2 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 .BarChart svg rect.color9 {
-  fill: #5c5cd6;
+  fill: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 3 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 .BarChart svg rect.color10 {
-  fill: #995cd6;
+  fill: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 4 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 .BarChart svg rect.color11 {
-  fill: #d65cd6;
+  fill: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 5 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 .BarChart svg rect.color12 {
-  fill: #d65c99;
+  fill: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 6 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 /*# sourceMappingURL=./output.css.map */

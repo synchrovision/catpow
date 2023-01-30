@@ -17,6 +17,6 @@ ul.wp-block-catpow-pricelist li.item > .link {
 }
 ul.wp-block-catpow-pricelist li.item > .link input {
   margin: 0rem auto;
-  color: #444;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
 }
 /*# sourceMappingURL=./editor_style.css.map */

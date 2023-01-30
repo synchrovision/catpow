@@ -4,7 +4,7 @@
 	@include bnd((pd:10,mg:0 a,w:a 960));
 	&>.header{
 		@include bnd((p:r,pd:10 20,pdr:50));
-		@include bg((c:m0));
+		@include bg((c:m));
 		@include bdr((r:10));
 		@include usr((c:p));
 		.title{
