@@ -342,7 +342,7 @@
               }
             );
           };
-          return el(
+          return wp.element.createElement(
             "span",
             {
               id: id + "_item_" + index,
@@ -427,7 +427,7 @@
             }
           );
         };
-        return el(
+        return wp.element.createElement(
           item.link ? "a" : "span",
           {
             id: id + "_item_" + index,
