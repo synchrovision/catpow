@@ -14,7 +14,7 @@
       devicesForCss.map((device) => {
         rtn[device] = {};
       });
-      if (!states.hasBaseImage) {
+      if (!states.hasBaseImage && heights) {
         heights.split(",").map((height, deviceIndex) => {
           rtn[devicesForCss[deviceIndex]]["#" + id + " .base"] = { "padding-top": height + "%" };
         });
@@ -50,11 +50,11 @@
     attributes: {
       id: { source: "attribute", selector: ".wp-block-catpow-graphics", attribute: "id", default: "" },
       classes: { source: "attribute", selector: ".wp-block-catpow-graphics", attribute: "class", default: "wp-block-catpow-graphics hasBaseImage" },
-      src: { source: "attribute", selector: "[src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy_bg.jpg" },
-      srcset: { source: "attribute", selector: "[src]", attribute: "srcset" },
-      alt: { source: "attribute", selector: "[src]", attribute: "alt" },
+      src: { source: "attribute", selector: ".base [src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy_bg.jpg" },
+      srcset: { source: "attribute", selector: ".base [src]", attribute: "srcset" },
+      alt: { source: "attribute", selector: ".base [src]", attribute: "alt" },
       sources: CP.getPictureSoucesAttributesForDevices(CP.config.graphics.devices, ".base picture", "dummy_bg.jpg"),
-      height: { source: "attribute", selector: ".wp-block-catpow-graphics", "attribute": "data-heights", default: "120,80,60" },
+      heights: { source: "attribute", selector: ".wp-block-catpow-graphics", "attribute": "data-heights", default: "60,80,120" },
       items: {
         source: "query",
         selector: ".item",
@@ -86,19 +86,17 @@
             link: ""
           }
         ]
-      }
+      },
+      device: { type: "string", default: "pc" }
     },
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
-      const { useState, useMemo } = wp.element;
+      const { __ } = wp.i18n;
+      const { useState, useMemo, useCallback, useEffect, useReducer } = wp.element;
       const { InspectorControls, RichText } = wp.blockEditor;
-      const { Icon, PanelBody, TextareaControl, TextControl } = wp.components;
+      const { BaseControl, Icon, PanelBody, RangeControl, TextareaControl, TextControl } = wp.components;
       const { id, classes = "", src, srcset, alt, heights, items = [], device } = attributes;
-      if (!id) {
-        setAttributes({ id: "g" + new Date().getTime().toString(16) });
-      }
-      attributes.EditMode = attributes.EditMode || "pc";
-      var isModeSP = attributes.EditMode == "sp";
+      console.log(attributes);
       const states = CP.wordsToFlags(classes);
       const { devices, devicesForCss, imageKeys, getCssDatas, renderCssDatas, parseRectAttr, getRectAttr } = CP.config.graphics;
       const cssDatas = getCssDatas(attributes, states);
@@ -112,8 +110,7 @@
             sub: [
               { name: "picture", input: "picture", keys: imageKeys2.base, devices: devices2 }
             ]
-          },
-          { name: "height", label: "\u9AD8\u3055", input: "text", key: "heights" }
+          }
         ];
         wp.hooks.applyFilters("catpow.blocks.graphics.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
@@ -166,34 +163,32 @@
         return selectiveItemClasses2;
       }, []);
       var tgtItem = false;
+      useEffect(() => {
+        if (!id) {
+          setAttributes({ id: "g" + new Date().getTime().toString(16) });
+        }
+      }, [!id]);
       const save = () => {
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });
       };
       const onMouseDown = (e) => {
-        var tgt = e.target;
-        var itemNode = tgt.closest(".item");
+        const tgt = e.target;
+        const controlNode = tgt.closest("[data-control-type]");
+        const itemNode = tgt.closest(".item");
         if (!itemNode) {
           tgtItem = false;
-          setAttributes({ currentItemIndex: i });
+          setAttributes({ currentItemIndex: -1 });
           return;
         }
         var i = itemNode.dataset.index;
         tgtItem = { node: itemNode };
-        if (tgt.classList.contains("pos")) {
-          tgtItem.type = "pos";
-        }
-        if (tgt.classList.contains("del")) {
-          tgtItem.type = "del";
-        }
-        if (tgt.classList.contains("dup")) {
-          tgtItem.type = "dup";
-        }
-        if (tgt.classList.contains("bnd")) {
-          tgtItem.type = "bnd";
+        if (controlNode) {
+          tgtItem.type = controlNode.dataset.controlType;
         }
         tgtItem.node.style.animation = "none";
         tgtItem.node.style.transition = "none";
         tgtItem.node.style.transform = "scale(1)";
+        console.log(tgtItem);
         if (attributes.currentItemIndex != i) {
           setAttributes({ currentItemIndex: i });
         }
@@ -250,7 +245,46 @@
       const onDoubleClick = (e) => {
         var tgt = e.target;
       };
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices }), /* @__PURE__ */ wp.element.createElement(
+      const InputHeights = useCallback((props) => {
+        const { onChange, value } = props;
+        const marks = useMemo(() => [
+          { value: 50, label: "50" },
+          { value: 100, label: "100" },
+          { value: 200, label: "200" },
+          { value: 400, label: "400" }
+        ], []);
+        const devices2 = CP.config.graphics.devicesForCss;
+        const init = useCallback((states3) => {
+          if (!states3.value) {
+            states3.value = wp.data.select("core/blocks").getBlockType("catpow/graphics").attributes.heights.default;
+          }
+          states3.heights = states3.value.split(",").map((n) => parseInt(n));
+          return states3;
+        }, []);
+        const reducer = useCallback((states3, action) => {
+          const heights2 = states3.heights.slice();
+          heights2[action.index] = action.value;
+          const value2 = heights2.join(",");
+          onChange(value2, action.device);
+          return { value: value2, heights: heights2 };
+        }, []);
+        const [states2, dispatch] = useReducer(reducer, { value }, init);
+        return /* @__PURE__ */ wp.element.createElement(BaseControl, { label: __("\u9AD8\u3055", "catpow") }, devices2.map((device2, index) => /* @__PURE__ */ wp.element.createElement(
+          RangeControl,
+          {
+            key: device2,
+            value: states2.heights[index],
+            currentInput: states2.heights[index],
+            beforeIcon: CP.devices[device2].icon,
+            min: 10,
+            max: 400,
+            marks,
+            withInputField: true,
+            onChange: (value2) => dispatch({ index, device: device2, value: value2 })
+          }
+        )));
+      }, []);
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices: CP.config.graphics.devicesForCss }), /* @__PURE__ */ wp.element.createElement(
         "div",
         {
           id,
@@ -260,14 +294,14 @@
           onMouseUp,
           onDoubleClick
         },
-        device && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })),
+        /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })),
         /* @__PURE__ */ wp.element.createElement("div", { className: "base" }, states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(
           CP.ResponsiveImage,
           {
             attr: attributes,
             keys: imageKeys.base,
             devices,
-            device
+            device: device === "pc" ? null : device
           }
         )),
         items.map((item, index) => {
@@ -322,7 +356,7 @@
                   attr: attributes,
                   set: setAttributes,
                   devices,
-                  device,
+                  device: device === "pc" ? null : device,
                   keys: imageKeys.image,
                   index
                 }
@@ -337,7 +371,7 @@
                 attr: attributes,
                 keys: imageKeys.image,
                 devices,
-                device,
+                device: device === "pc" ? null : device,
                 index
               }
             );
@@ -351,10 +385,10 @@
               "data-rect": item.rect,
               key: index
             },
-            /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, itemBody(), isSelected && itemSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "control" }, /* @__PURE__ */ wp.element.createElement("div", { className: "pos" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "move" })), /* @__PURE__ */ wp.element.createElement("div", { className: "del" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "dismiss" })), /* @__PURE__ */ wp.element.createElement("div", { className: "dup" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "plus-alt" })), /* @__PURE__ */ wp.element.createElement("div", { className: "bnd" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "leftright" }))))
+            /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, itemBody(), isSelected && itemSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "control" }, /* @__PURE__ */ wp.element.createElement("div", { className: "pos", "data-control-type": "pos" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "move" })), /* @__PURE__ */ wp.element.createElement("div", { className: "del", "data-control-type": "del" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "dismiss" })), /* @__PURE__ */ wp.element.createElement("div", { className: "dup", "data-control-type": "dup" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "plus-alt" })), /* @__PURE__ */ wp.element.createElement("div", { className: "bnd", "data-control-type": "bnd" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "leftright" }))))
           );
         }),
-        /* @__PURE__ */ wp.element.createElement("style", null, device ? CP.createStyleCode(cssDatas[device]) : renderCssDatas(cssDatas))
+        /* @__PURE__ */ wp.element.createElement("style", null, device !== "pc" ? CP.createStyleCode(cssDatas[device]) : renderCssDatas(cssDatas))
       ), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
@@ -363,8 +397,18 @@
           set: setAttributes,
           attr: attributes,
           selectiveClasses,
-          filters: CP.filters.graphics || {}
-        }
+          filters: CP.filters.graphics || {},
+          initialOpen: true
+        },
+        !states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(
+          InputHeights,
+          {
+            value: heights,
+            onChange: (heights2, device2) => {
+              setAttributes({ heights: heights2, device: device2 });
+            }
+          }
+        )
       ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "ID", icon: "admin-links", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
@@ -400,7 +444,7 @@
     },
     save({ attributes, className, setAttributes }) {
       const { RichText } = wp.blockEditor;
-      const { id, classes, heights, heightSP, items = [] } = attributes;
+      const { id, classes, heights, items = [] } = attributes;
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys, getCssDatas, renderCssDatas } = CP.config.graphics;
       const cssDatas = getCssDatas(attributes, states);

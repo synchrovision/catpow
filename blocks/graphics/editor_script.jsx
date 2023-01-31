@@ -10,7 +10,7 @@
 		const {devicesForCss}=CP.config.graphics;
 		let rtn={};
 		devicesForCss.map((device)=>{rtn[device]={};});
-		if(!states.hasBaseImage){
+		if(!states.hasBaseImage && heights){
 			heights.split(',').map((height,deviceIndex)=>{
 				rtn[devicesForCss[deviceIndex]]['#'+id+' .base']={'padding-top':height+'%'};
 			});
@@ -45,11 +45,11 @@ wp.blocks.registerBlockType('catpow/graphics',{
 	attributes:{
 		id:{source:'attribute',selector:'.wp-block-catpow-graphics',attribute:'id',default:''},
 		classes:{source:'attribute',selector:'.wp-block-catpow-graphics',attribute:'class',default:'wp-block-catpow-graphics hasBaseImage'},
-		src:{source:'attribute',selector:'[src]',attribute:'src',default:wpinfo.theme_url+'/images/dummy_bg.jpg'},
-		srcset:{source:'attribute',selector:'[src]',attribute:'srcset'},
-		alt:{source:'attribute',selector:'[src]',attribute:'alt'},
+		src:{source:'attribute',selector:'.base [src]',attribute:'src',default:wpinfo.theme_url+'/images/dummy_bg.jpg'},
+		srcset:{source:'attribute',selector:'.base [src]',attribute:'srcset'},
+		alt:{source:'attribute',selector:'.base [src]',attribute:'alt'},
 		sources:CP.getPictureSoucesAttributesForDevices(CP.config.graphics.devices,'.base picture','dummy_bg.jpg'),
-		height:{source:'attribute',selector:'.wp-block-catpow-graphics','attribute':'data-heights',default:'120,80,60'},
+		heights:{source:'attribute',selector:'.wp-block-catpow-graphics','attribute':'data-heights',default:'60,80,120'},
 		items:{
 			source:'query',
 			selector:'.item',
@@ -81,22 +81,19 @@ wp.blocks.registerBlockType('catpow/graphics',{
 					link:''
 				}
 			]
-		}
+		},
+		device:{type:'string',default:'pc'}
+		
 	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
-		const {useState,useMemo}=wp.element;
+		const {__}=wp.i18n;
+		const {useState,useMemo,useCallback,useEffect,useReducer}=wp.element;
 		const {InspectorControls,RichText}=wp.blockEditor;
-		const {Icon,PanelBody,TextareaControl,TextControl}=wp.components;
+		const {BaseControl,Icon,PanelBody,RangeControl,TextareaControl,TextControl}=wp.components;
 		const {id,classes='',src,srcset,alt,heights,items=[],device}=attributes;
-
-		if(!id){
-			setAttributes({id:'g'+(new Date().getTime().toString(16))})
-		}
-
-		attributes.EditMode=attributes.EditMode || 'pc';
-		var isModeSP=attributes.EditMode=='sp';
-
+		
+		console.log(attributes);
 		const states=CP.wordsToFlags(classes);
 		const {devices,devicesForCss,imageKeys,getCssDatas,renderCssDatas,parseRectAttr,getRectAttr}=CP.config.graphics;
 		const cssDatas=getCssDatas(attributes,states);
@@ -111,8 +108,7 @@ wp.blocks.registerBlockType('catpow/graphics',{
 					sub:[
 						{name:'picture',input:'picture',keys:imageKeys.base,devices}
 					]
-				},
-				{name:'height',label:'高さ',input:'text',key:'heights'}
+				}
 			];
 			wp.hooks.applyFilters('catpow.blocks.graphics.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -166,6 +162,12 @@ wp.blocks.registerBlockType('catpow/graphics',{
 		},[]);
 
 		var tgtItem=false;
+		
+		useEffect(()=>{
+			if(!id){
+				setAttributes({id:'g'+(new Date().getTime().toString(16))});
+			}
+		},[!id]);
 
 
 		const save=()=>{
@@ -173,18 +175,19 @@ wp.blocks.registerBlockType('catpow/graphics',{
 		}
 
 		const onMouseDown=(e)=>{
-			var tgt=e.target;
-			var itemNode=tgt.closest('.item');
-			if(!itemNode){tgtItem=false;setAttributes({currentItemIndex:i});return;}
+			const tgt=e.target;
+			const controlNode=tgt.closest('[data-control-type]');
+			const itemNode=tgt.closest('.item');
+			if(!itemNode){tgtItem=false;setAttributes({currentItemIndex:-1});return;}
 			var i=itemNode.dataset.index;
 			tgtItem={node:itemNode};
-			if(tgt.classList.contains('pos')){tgtItem.type='pos';}
-			if(tgt.classList.contains('del')){tgtItem.type='del';}
-			if(tgt.classList.contains('dup')){tgtItem.type='dup';}
-			if(tgt.classList.contains('bnd')){tgtItem.type='bnd';}
+			if(controlNode){
+				tgtItem.type=controlNode.dataset.controlType;
+			}
 			tgtItem.node.style.animation='none';
 			tgtItem.node.style.transition='none';
 			tgtItem.node.style.transform='scale(1)';
+			console.log(tgtItem);
 			if(attributes.currentItemIndex!=i){
 				setAttributes({currentItemIndex:i});
 			}
@@ -244,10 +247,58 @@ wp.blocks.registerBlockType('catpow/graphics',{
 		const onDoubleClick=(e)=>{
 			var tgt=e.target;
 		};
-
+		
+		const InputHeights=useCallback((props)=>{
+			const {onChange,value}=props;
+			const marks=useMemo(()=>[
+				{value:50,label:'50'},
+				{value:100,label:'100'},
+				{value:200,label:'200'},
+				{value:400,label:'400'}
+			],[]);
+			
+			const devices=CP.config.graphics.devicesForCss;
+			
+			const init=useCallback((states)=>{
+				if(!states.value){
+					states.value=wp.data.select('core/blocks').getBlockType('catpow/graphics').attributes.heights.default;
+				}
+				states.heights=states.value.split(',').map((n)=>parseInt(n));
+				return states;
+			},[]);
+			
+			const reducer=useCallback((states,action)=>{
+				const heights=states.heights.slice();
+				heights[action.index]=action.value;
+				const value=heights.join(',');
+				onChange(value,action.device);
+				return {value,heights};	
+			},[]);
+			const [states,dispatch]=useReducer(reducer,{value},init);
+		
+			
+			return (
+				<BaseControl label={__('高さ','catpow')}>
+					{devices.map((device,index)=>(
+						<RangeControl
+							key={device}
+							value={states.heights[index]}
+							currentInput={states.heights[index]}
+							beforeIcon={CP.devices[device].icon}
+							min={10}
+							max={400}
+							marks={marks}
+							withInputField={true}
+							onChange={(value)=>dispatch({index,device,value})}
+						/>
+					))}
+				</BaseControl>
+			);
+		},[]);
+		
 		return (
 			<>
-				<CP.SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices}/>
+				<CP.SelectDeviceToolbar attr={attributes} set={setAttributes} devices={CP.config.graphics.devicesForCss}/>
 				<div
 					id={id}
 					className={classes+(device?' alt_content '+device:'')}
@@ -256,18 +307,16 @@ wp.blocks.registerBlockType('catpow/graphics',{
 					onMouseUp={onMouseUp}
 					onDoubleClick={onDoubleClick}
 				>
-					{device &&
-						<div className="label">
-							<Icon icon={CP.devices[device].icon}/>
-						</div>
-					}
+					<div className="label">
+						<Icon icon={CP.devices[device].icon}/>
+					</div>
 					<div className="base">
 						{states.hasBaseImage && 
 							<CP.ResponsiveImage
 								attr={attributes}
 								keys={imageKeys.base}
 								devices={devices}
-								device={device}
+								device={device==='pc'?null:device}
 							/>
 						}
 					</div>
@@ -318,7 +367,7 @@ wp.blocks.registerBlockType('catpow/graphics',{
 										attr={attributes}
 										set={setAttributes}
 										devices={devices}
-										device={device}
+										device={device==='pc'?null:device}
 										keys={imageKeys.image}
 										index={index}
 									/>
@@ -338,7 +387,7 @@ wp.blocks.registerBlockType('catpow/graphics',{
 									attr={attributes}
 									keys={imageKeys.image}
 									devices={devices}
-									device={device}
+									device={device==='pc'?null:device}
 									index={index}
 								/>
 							);
@@ -358,16 +407,16 @@ wp.blocks.registerBlockType('catpow/graphics',{
 								{itemBody()}
 								{isSelected && itemSelected && 
 									<div className="control">
-										<div className="pos">
+										<div className="pos" data-control-type="pos">
 											<Icon icon="move"/>
 										</div>
-										<div className="del">
+										<div className="del" data-control-type="del">
 											<Icon icon="dismiss"/>
 										</div>
-										<div className="dup">
+										<div className="dup" data-control-type="dup">
 											<Icon icon="plus-alt"/>
 										</div>
-										<div className="bnd">
+										<div className="bnd" data-control-type="bnd">
 											<Icon icon="leftright"/>
 										</div>
 									</div>
@@ -376,7 +425,7 @@ wp.blocks.registerBlockType('catpow/graphics',{
 						);
 					})}
 					<style>
-						{device?(
+						{device!=='pc'?(
 							CP.createStyleCode(cssDatas[device])
 						):(
 							renderCssDatas(cssDatas)
@@ -391,7 +440,17 @@ wp.blocks.registerBlockType('catpow/graphics',{
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
 						filters={CP.filters.graphics || {}}
-					/>
+						initialOpen={true}
+					>
+					{!states.hasBaseImage && (
+						<InputHeights
+							value={heights}
+							onChange={(heights,device)=>{
+								setAttributes({heights,device});
+							}}
+						/>
+					)}
+					</CP.SelectClassPanel>
 					<PanelBody title="ID" icon="admin-links" initialOpen={false}>
 						<TextControl
 							label='ID'
@@ -428,7 +487,7 @@ wp.blocks.registerBlockType('catpow/graphics',{
 	},
 	save({attributes,className,setAttributes}){
 		const {RichText}=wp.blockEditor;
-		const {id,classes,heights,heightSP,items=[]}=attributes;
+		const {id,classes,heights,items=[]}=attributes;
 
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys,getCssDatas,renderCssDatas}=CP.config.graphics;

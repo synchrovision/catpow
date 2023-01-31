@@ -1,6 +1,7 @@
 @import 'admin_style_config.scss';
 
 .wp-block-catpow-graphics{
+	@include usr((s:n,c:p));
 	&.alt_content{
 		@include bnd((pdt:0));
 		&.sp{
@@ -16,13 +17,13 @@
 	.item{
 		.pos,.del,.dup,.bnd{
 			@include bnd((d:b,p:a,t:-10,w:20,h:20,z:1,bs:c));
-			@include txt((c:m));
+			@include txt((c:wp));
 			svg{
 				@include usr((e:n));
 			}
 		}
 		.pos,.bnd{
-			@include bdr((r:15,s:s,w:1,c:m));
+			@include bdr((r:15,s:s,w:1,c:wp));
 			@include bg((c:b));
 		}
 		.pos{
