@@ -53,7 +53,7 @@
                 { label: "\u5F71", values: "shadow", sub: [{ label: "\u5185\u5074", values: "inset" }] }
               ],
               columns: [
-                { label: "\u5E45", values: { narrow: "\u72ED\u3044", regular: "\u666E\u901A", wide: "\u5E83\u3044" } }
+                { type: "buttons", label: "\u5E45", values: { narrow: "\u72ED\u3044", regular: "\u666E\u901A", wide: "\u5E83\u3044" } }
               ]
             }
           },

@@ -55,7 +55,7 @@ wp.blocks.registerBlockType('catpow/div',{
 							{label:'影',values:'shadow',sub:[{label:'内側',values:'inset'}]}
 						],
 						columns:[
-							{label:'幅',values:{narrow:'狭い',regular:'普通',wide:'広い'}}
+							{type:'buttons',label:'幅',values:{narrow:'狭い',regular:'普通',wide:'広い'}}
 						]
 					}
 				},
