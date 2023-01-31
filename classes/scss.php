@@ -90,6 +90,7 @@ class scss{
 				$color=false;
 				$colors=util\style_config::get_config_json('colors');
 				$tones=util\style_config::get_config_json('tones');
+				if($args[0]==='wp'){return 'var(--wp-admin-theme-color)';}
 				if(preg_match('/^([a-z]+)?(_|\-\-)?(\-?\d+)?$/',$args[0],$matches)){
 					$key=$matches[1]?:'m';
 					$sep=$matches[2]??null;
