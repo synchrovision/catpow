@@ -1,6 +1,6 @@
 @charset "UTF-8";
 body {
-  background-color: #f8f8f8;
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
 }
 body::after {
   content: "　";
@@ -48,36 +48,36 @@ body.login .button.sns_login img {
   vertical-align: middle;
 }
 #adminmenumain #adminmenuback {
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
 #wpcontent #wpadminbar {
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
 #wpcontent #editor {
-  background-color: #f8f8f8;
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
 }
 #wpcontent #editor .edit-post-header, #wpcontent #editor .edit-post-sidebar {
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
 #wpcontent #editor .editor-post-title__block .editor-post-title__input {
-  color: #444;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
 }
 #wpcontent #editor .edit-post-visual-editor {
-  background-color: #f8f8f8;
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
 }
 #wpcontent #editor .edit-post-visual-editor .editor-post-title__block, #wpcontent #editor .edit-post-visual-editor .editor-block-list__block {
   max-width: 60rem;
   width: auto;
 }
 #wpcontent #editor .edit-post-layout__metaboxes {
-  border-color: rgba(68, 68, 68, 0.5);
+  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.5);
 }
 #wpcontent #cpcf_custom_box {
-  background-color: #f8f8f8;
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
 }
 #wpcontent #cpcf_custom_box > h2 {
-  color: #444;
-  border-color: rgba(68, 68, 68, 0.3);
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
+  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.3);
 }
 #wpcontent #cpcf_custom_box .inside {
   padding: 0.625rem;
@@ -91,20 +91,20 @@ body.login .button.sns_login img {
   right: 0.5em;
   height: auto;
   padding: 1em;
-  background-color: #007cba;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
   border-top-style: solid;
   border-left-style: solid;
   border-top-width: 0.0625rem;
   border-left-width: 0.0625rem;
-  border-top-color: #007cba;
-  border-left-color: #007cba;
+  border-top-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  border-left-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
   border-radius: 2em;
   text-align: center;
   font-size: 0.9375rem;
   line-height: 1em;
   font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   font-weight: 500;
-  color: #fff;
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
   cursor: pointer;
 }
 #wpcontent #cp_search #cpcf_custom_box_button::before {
@@ -123,15 +123,15 @@ body.login .button.sns_login img {
   max-height: 80vh;
   height: auto;
   overflow-y: auto;
-  background-color: #f8f8f8;
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
   border-top-style: solid;
   border-left-style: solid;
   border-top-width: 0.0625rem;
   border-left-width: 0.0625rem;
-  border-top-color: #007cba;
-  border-left-color: #007cba;
+  border-top-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  border-left-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
   border-radius: 0.625rem 0rem 0rem 0rem;
-  box-shadow: 0 5px 11px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 11px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
   pointer-events: none;
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -168,12 +168,12 @@ body.login .button.sns_login img {
   top: 2.5rem;
   left: -12.5rem;
   z-index: 10000;
-  background-color: #f8f8f8;
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: #007cba;
+  border-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
   border-radius: 0.625rem;
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
   -webkit-transition: 0.5s;
   transition: 0.5s;
   opacity: 0;
@@ -192,7 +192,7 @@ body.login .button.sns_login img {
   border-style: solid;
   border-width: 0.625rem;
   border-color: transparent;
-  border-bottom-color: #007cba;
+  border-bottom-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs.active {
   opacity: 1;
@@ -209,16 +209,16 @@ body.login .button.sns_login img {
   padding: 0.3125rem 0.625rem;
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: #c7c7c7;
+  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 30),1);
   text-align: left;
   font-size: 0.75rem;
   line-height: 0.75rem;
   font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   font-weight: normal;
-  color: dimgray;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 80),1);
 }
 #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs table.inputs th {
-  background-color: rgba(0, 124, 186, 0.1);
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 100),0.1);
 }
 #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs table.inputs td label {
   display: inline-block;
@@ -226,7 +226,7 @@ body.login .button.sns_login img {
 }
 #wpcontent .cpform_section {
   padding: 0.625rem;
-  background-color: #f8f8f8;
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
 }
 #wpcontent .wp-list-table a.pdf {
   display: inline-block;
@@ -278,7 +278,7 @@ body.login .button.sns_login img {
   width: 1.875rem;
   margin: 0rem;
   margin-right: 0.625rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) inset;
+  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a)) inset;
 }
 .cp_admin div.checkbox.cp-meta-item-use_functions .cp-meta-unit label.checkbox .text {
   -webkit-box-flex: 1;
@@ -293,7 +293,7 @@ body.login .button.sns_login img {
   font-size: 0.8125rem;
   font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   font-weight: 500;
-  color: #444;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
 }
 .cp_admin div.checkbox.cp-meta-item-use_functions .cp-meta-unit label.checkbox .text p {
   display: block;
@@ -304,13 +304,13 @@ body.login .button.sns_login img {
   left: -10em;
   right: -10em;
   z-index: 1;
-  background-color: #1a89c1;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 90),1);
   border-radius: 1em;
   text-align: justify;
   font-size: 0.6875rem;
   font-weight: 400;
-  color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
   -webkit-transition: 0.5s;
   transition: 0.5s;
   opacity: 0;
@@ -328,7 +328,7 @@ body.login .button.sns_login img {
   border-style: solid;
   border-width: 0.5em;
   border-color: transparent;
-  border-bottom-color: #1a89c1;
+  border-bottom-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 90),1);
 }
 .cp_admin div.checkbox.cp-meta-item-use_functions .cp-meta-unit label.checkbox:hover .text p {
   opacity: 1;
@@ -336,7 +336,7 @@ body.login .button.sns_login img {
   transform: translateY(1.5em);
 }
 .cp_admin div.checkbox.cp-meta-item-use_functions .cp-meta-unit label.checkbox:not(.active) .text h4 {
-  color: #a2a2a2;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 50),1);
 }
 .cp_admin .buttons {
   display: -webkit-box;
@@ -360,11 +360,11 @@ body.login .button.sns_login img {
   display: block;
   margin: 0rem;
   padding: 0.5em;
-  background-color: #007cba;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
   text-align: center;
   font-size: 0.9375rem;
   line-height: 1em;
-  color: #f8f8f8;
+  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
 }
 .cp_admin .buttons li .button i.fab, .cp_admin .buttons li .button i.fas {
   display: inline-block;
@@ -389,7 +389,7 @@ body.login .button.sns_login img {
   font-size: 1.25rem;
   line-height: 1em;
   font-family: "Raleway";
-  color: #444;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
 }
@@ -397,7 +397,7 @@ body.login .button.sns_login img {
   margin: 0.3125rem;
   background-color: #fff;
   border-radius: 0.625rem;
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3) inset;
+  box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a)) inset;
 }
 .cp_admin ul.functions > li .desc, .cp_admin ul.functions > li > .cpform_section .desc {
   padding: 0.3125rem 0.625rem;
@@ -406,7 +406,7 @@ body.login .button.sns_login img {
   line-height: 1.5em;
   font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   font-weight: normal;
-  color: #444;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
 }
 .cp_admin ul.functions > li .control, .cp_admin ul.functions > li > .cpform_section .control {
   margin: 0.625rem 1.25rem;
@@ -441,7 +441,7 @@ body.login .button.sns_login img {
   padding-bottom: 0.625rem;
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
-  border-bottom-color: #a2a2a2;
+  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 50),1);
   font-size: 1.25rem;
 }
 .cp_admin ul.functions > li .cp_lightbox_content .panel_body > ul > li p {
@@ -489,8 +489,8 @@ body.login .button.sns_login img {
   box-sizing: border-box;
   padding: 1.25rem;
   overflow-y: auto;
-  background-color: #444;
-  color: #f8f8f8;
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
+  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
   font-size: 0.75rem;
 }
 .cp_admin ul.functions > li .cp_lightbox_content .button_close_panel {
@@ -504,12 +504,12 @@ body.login .button.sns_login img {
   padding: 0.625rem;
   border-style: none;
   border-radius: 50%;
-  background-color: #007cba;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
   text-align: center;
   font-size: 1.25rem;
   line-height: 1em;
-  color: #f8f8f8;
+  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
 }
 .cp_admin ul.functions > li .cp_lightbox_content .button_close_panel .button::before {
   content: "";

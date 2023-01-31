@@ -7,7 +7,7 @@
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   border-radius: 0.625rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
 .cp-console-controls {
   -webkit-box-flex: 1;
@@ -38,15 +38,15 @@
   min-height: 6.25rem;
   max-height: 50rem;
   height: auto;
-  background-color: #f6f6f6;
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 5),1);
 }
 .cp-console-results > .text.-error {
-  color: #d65c5c;
+  color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -5 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 .cp-console-results > .text.-warn {
-  color: #d6d65c;
+  color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -3 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 .cp-console-results > .text.-log {
-  color: #444;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
 }
 /*# sourceMappingURL=./style.css.map */

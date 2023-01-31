@@ -7,11 +7,11 @@
   border-radius: 1.25rem;
   font-size: 0.9375rem;
   line-height: 1em;
-  color: #b4b4b4;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 40),1);
   -webkit-transition: 0.5s;
   transition: 0.5s;
   cursor: pointer;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset, -1px -1px 1px rgba(0, 0, 0, 0.1), -1px -1px 1px rgba(255, 255, 255, 0.8) inset, 1px 1px 1px rgba(255, 255, 255, 0.8);
+  box-shadow: 1px 1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)), -1px -1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a));
 }
 .RadioButtonIcon {
   display: block;
@@ -22,7 +22,7 @@
   border-radius: 50%;
   -webkit-transition: 0.5s;
   transition: 0.5s;
-  box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8) inset, -1px -1px 1px rgba(0, 0, 0, 0.1), -1px -1px 1px rgba(0, 0, 0, 0.1) inset, 1px 1px 1px rgba(255, 255, 255, 0.8);
+  box-shadow: 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)), -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a));
 }
 .RadioButtonIcon::before {
   content: "";
@@ -33,7 +33,7 @@
   left: 0rem;
   right: 0rem;
   margin: 0.125rem;
-  background-color: #ececec;
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),1);
   border-radius: 50%;
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -42,7 +42,7 @@
   transform: scale(0.5);
 }
 .RadioButtonIcon.selected::before {
-  background-color: #007cba;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
   opacity: 1;
   transform: -webkit- scale(1);
   transform: scale(1);
@@ -56,7 +56,7 @@
   margin: auto;
 }
 .RadioButton.selected {
-  color: #444;
-  box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8) inset, -1px -1px 1px rgba(255, 255, 255, 0.8), -1px -1px 1px rgba(0, 0, 0, 0.1) inset, 1px 1px 1px rgba(0, 0, 0, 0.1);
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
+  box-shadow: 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, -1px -1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)), -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, 1px 1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a));
 }
 /*# sourceMappingURL=./style.css.map */
