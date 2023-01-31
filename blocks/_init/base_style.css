@@ -158,7 +158,7 @@
   top: 0rem;
   padding: 0.25em;
   z-index: 10;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  background-color: var(--wp-admin-theme-color);
   text-align: center;
   font-size: 0.75rem;
   line-height: 0.625rem;
@@ -234,7 +234,7 @@
   border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 20),1);
 }
 .selectPosition td.active {
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  background-color: var(--wp-admin-theme-color);
 }
 .selectPosition td.disable {
   background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),1);
@@ -255,7 +255,7 @@
   top: 0rem;
   padding: 0.25em;
   z-index: 10;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  background-color: var(--wp-admin-theme-color);
   text-align: center;
   font-size: 0.75rem;
   line-height: 0.625rem;
@@ -354,7 +354,7 @@
   cursor: pointer;
 }
 .selectPattern li.active {
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  background-color: var(--wp-admin-theme-color);
 }
 .selectPreparedImage {
   display: -webkit-box;
@@ -381,7 +381,7 @@
   height: auto;
 }
 .selectPreparedImage .item.active {
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  background-color: var(--wp-admin-theme-color);
 }
 .selectPreparedImageSet {
   display: -webkit-box;
@@ -408,7 +408,7 @@
   height: auto;
 }
 .selectPreparedImageSet .item.active {
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  background-color: var(--wp-admin-theme-color);
 }
 .selectGridButtons {
   margin: 0rem;
@@ -538,7 +538,7 @@
   cursor: pointer;
 }
 .selectGridButtons .item.active {
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  background-color: var(--wp-admin-theme-color);
   color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
 }
 .DataInputTable {

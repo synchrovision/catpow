@@ -92,7 +92,7 @@ $colors:(
 	@include bdr((s:s,w:1,c:t 50));
 	&>.label{
 		@include bnd((p:a,r:0,t:0,pd:.25em,z:10));
-		@include bg((c:m));
+		@include bg((c:wp));
 		@include txt((a:c,p:12,h:10,f:g,w:r,c:b));
 		@include shd((b:1));
 	}
@@ -126,7 +126,7 @@ $colors:(
 		@include bnd((w:20,h:20));
 		@include bdr((s:s,w:1,c:t 20));
 		&.active{
-			@include bg((c:m));
+			@include bg((c:wp));
 		}
 		&.disable{
 			@include bg((c:t 10));
@@ -142,7 +142,7 @@ $colors:(
 		}
 		&>.label{
 			@include bnd((p:a,r:0,t:0,pd:.25em,z:10));
-			@include bg((c:m));
+			@include bg((c:wp));
 			@include txt((a:c,p:12,h:10,f:g,w:r,c:b));
 			@include shd((b:1));
 		}
@@ -203,7 +203,7 @@ $colors:(
 		@include bnd((f:1 1 30%,pdt:30%,mg:0));
 		@include bg((c:t 50,s:50% a));
 		@include usr((c:p));
-		&.active{@include bg((c:m));}
+		&.active{@include bg((c:wp));}
 	}
 }
 .selectPreparedImage{
@@ -217,7 +217,7 @@ $colors:(
 			@include bnd((w:f,h:a));
 		}
 		&.active{
-			@include bg((c:m));
+			@include bg((c:wp));
 		}
 	}
 }
@@ -232,7 +232,7 @@ $colors:(
 			@include bnd((w:f,h:a));
 		}
 		&.active{
-			@include bg((c:m));
+			@include bg((c:wp));
 		}
 	}
 }
@@ -249,7 +249,7 @@ $colors:(
 		@include txt((a:c,p:13,h:1em,c:t));
 		@include usr((c:p));
 		&.active{
-			@include bg((c:m));
+			@include bg((c:wp));
 			@include txt((c:b));
 		}
 	}
