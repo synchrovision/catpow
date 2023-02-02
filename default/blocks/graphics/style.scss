@@ -1,0 +1,156 @@
+@import "config/style_config.scss";
+
+
+.wp-block-catpow-graphics{
+	@include bnd((p:r));
+	.item{
+		@include bnd((d:b,p:a));
+		&.fadeIn{
+			@include trn((t:1s,o:0));
+			&.visible{
+				@include trn((o:1));
+			}
+		}
+		&.slideIn{
+			&.slideInLeft{@include trn((x:40));}
+			&.slideInRight{@include trn((x:-40));}
+			&.slideInUp{@include trn((y:40));}
+			&.slideInDown{@include trn((y:-40));}
+			&.slideInFront{@include trn((s:.90));}
+			&.slideInBack{@include trn((s:1.1));}
+			&.visible{
+				@include trn((t:1s,x:0,y:0));
+			}
+		}
+		&.roll{
+			&.rollLeft{
+				&.rollSlow img{@include trn((a:'rollLeft' 10s l i));}
+				&.rollFast img{@include trn((a:'rollLeft' 2s l i));}
+			}
+			&.rollRight{
+				&.rollSlow img{@include trn((a:'rollRight' 10s l i));}
+				&.rollFast img{@include trn((a:'rollRight' 2s l i));}
+			}
+		}
+		&.hoverFade{
+			@include trn((t:.5s,o:1));
+			&:hover{
+				@include trn((o:.7));
+			}
+		}
+		&.hoverZoom{
+			@include trn((t:.5s,s:1));
+			&:hover{
+				@include trn((s:1.05));
+			}
+		}
+		&.hoverLift{
+			@include trn((t:.5s,y:0));
+			&:hover{
+				@include trn((y:-10));
+			}
+		}
+		&.hoverJump{
+			&:hover{
+				@include trn((a:'slideUpBit' 1s ease(j) b i));
+			}
+		}
+		
+		&.hasBackground{
+			@include bg((c:m));
+		}
+		&.hasBoxShadow{
+			@include shd((b:5));
+		}
+		&.hasTextShadow{
+			@include bg((t:2));
+		}
+		&.isEllipse{
+			@include bnd((o:h));
+			@include bdr((r:50%));
+		}
+		&.isText{
+			&.type1{
+				@include bnd((pd:20));
+				@include bg((c:b 1 .8));
+				.title{
+					@include bnd((pdb:10,mgb:10));
+					@include bdr((p:b,s:s,w:1));
+					@include txt((p:40));
+				}
+				.lead{
+					@include txt((p:15));
+				}
+				.text{
+					@include txt((p:12));
+				}
+			}
+			&.type2{
+				.title{
+					@include bnd((pdb:10,mgb:10));
+					@include bdr((p:b,s:d,w:1));
+					@include txt((p:30));
+				}
+				.lead{
+					@include txt((p:15));
+				}
+				.text{
+					@include txt((p:12));
+				}
+			}
+			&.type3{
+				.title{
+					@include bnd((pdb:10,mgb:10));
+					@include bdr((p:b,s:s,w:1));
+					@include txt((p:20));
+				}
+				.lead{
+					@include txt((p:15));
+				}
+				.text{
+					@include txt((p:12));
+				}
+			}
+			&.inverse{
+				@include txt((c:b));
+				&.type1{
+					@include bg((c:t 1 .8));
+					.title{
+						@include txt((c:b));
+					}
+				}
+			}
+		}
+	}
+	img{
+		@include bnd((d:b,w:f,h:f,of:c,op:c));
+	}
+}
+
+@keyframes slideUpBit{
+	0%{
+		@include trn((y:0));
+	}
+	100%{
+		@include trn((y:-3));
+	}
+}
+
+@keyframes rollLeft{
+	0%{
+		@include trn((r:0));
+	}
+	100%{
+		@include trn((r:-360deg));
+	}
+}
+
+@keyframes rollRight{
+	0%{
+		@include trn((r:0));
+	}
+	100%{
+		@include trn((r:360deg));
+	}
+}
+

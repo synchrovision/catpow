@@ -3,7 +3,7 @@ import {CP} from './CP.jsx';
 CP.SelectDeviceToolbar=(props)=>{
 	const {BlockControls}=wp.blockEditor;
 	const {ToolbarGroup}=wp.components;
-	const {set,attr,devices=['sp','pc']}=props;
+	const {set,attr,devices=['sp','pc'],defaultInput}=props;
 	return (
 		<BlockControls>
 			{devices.map((device)=>{
@@ -16,7 +16,7 @@ CP.SelectDeviceToolbar=(props)=>{
 								isActive:attr.device===device,
 								onClick:()=>{
 									if(attr.device===device){
-										set({device:null});
+										set({device:defaultInput || null});
 									}
 									else{set({device});}
 								}
