@@ -549,7 +549,6 @@ CP.SelectClassPanel=(props)=>{
 
 
 				if(prm.sub){
-					let currentClass=CP.getSelectiveClass(ref.current.props,prm.values,prm.key);
 					if(currentClass && prm.sub[currentClass]){
 						let sub=[];
 						prm.sub[currentClass].forEach((prm,index)=>{sub.push(<Fragment key={index}>{SelectClass(prm)}</Fragment>)});
