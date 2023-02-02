@@ -149,6 +149,40 @@ $colors:(
 	}
 }
 .CP{
+	&-BoundingBox{
+		@include bnd((p:r,bs:b,z:1000));
+		@include bdr((s:s,w:2,c:wp));
+		@include usr((e:n));
+		&.is-doing-action::before{
+			content: '';
+			@include bnd((d:b,p:f,i:0,z:1000));
+			@include usr((e:a));
+		}
+		&-controls{
+			&-control{
+				@include usr((e:a));
+				&.is-size-control{
+					@include bnd((p:a,i:0,mg:a,w:10,h:10,bs:b));
+					@include bg((c:b));
+					@include bdr((s:s,w:2,c:wp));
+					&.is-top{@include bnd((mgt:-5));}
+					&.is-bottom{@include bnd((mgb:-5));}
+					&.is-left{@include bnd((mgl:-5));}
+					&.is-right{@include bnd((mgr:-5));}
+					&.is-ns{@include usr((c:ns-resize));}
+					&.is-ew{@include usr((c:ew-resize));}
+					&.is-nwse{@include usr((c:nwse-resize));}
+					&.is-nesw{@include usr((c:nesw-resize));}
+				}
+				&.is-position-control{
+					@include bnd((p:a,i:0,mg:a,w:20,h:20,bs:b));
+					@include bg((c:b));
+					@include bdr((s:s,w:2,c:wp,r:50%));
+					@include usr((c:move));
+				}
+			}
+		}
+	}
 	&-SelectThemeColor{
 		&-items{
 			@include bnd((w:220,mg:4 0));
