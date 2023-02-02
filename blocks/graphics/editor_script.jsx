@@ -18,7 +18,7 @@
 		items.map((item,index)=>{
 			item.rect.split(',').map((rect,deviceIndex)=>{
 				const bnd=rect.split(' ').map((val)=>val+'%');
-				rtn[devicesForCss[deviceIndex]]['#'+id+'_item_'+index]={left:bnd[0],top:bnd[1],width:bnd[2]};
+				rtn[devicesForCss[deviceIndex]]['#'+id+'_item_'+index]={left:bnd[0],top:bnd[1],width:bnd[2],height:bnd[3]};
 			});
 		});
 		return rtn;
@@ -70,7 +70,7 @@ wp.blocks.registerBlockType('catpow/graphics',{
 				{
 					id:'graphics_image1',
 					classes:'item isImage',
-					rect:'25 25 50,25 25 50,25 25 50',
+					rect:'25 25 50 50,25 25 50 50,25 25 50 50',
 					src:wpinfo.theme_url+'/images/dummy.jpg',
 					srcset:'',
 					alt:'',
@@ -88,12 +88,15 @@ wp.blocks.registerBlockType('catpow/graphics',{
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {__}=wp.i18n;
-		const {useState,useMemo,useCallback,useEffect,useReducer}=wp.element;
+		const {useState,useMemo,useCallback,useEffect,useReducer,useRef}=wp.element;
 		const {InspectorControls,RichText}=wp.blockEditor;
 		const {BaseControl,Icon,PanelBody,RangeControl,TextareaControl,TextControl}=wp.components;
 		const {id,classes='',src,srcset,alt,heights,items=[],device}=attributes;
 		
-		console.log(attributes);
+		const [currentItemNode,setCurrentItemNode]=useState(false);
+		const [currentItemIndex,setCurrentItemIndex]=useState(-1);
+		const [containerNode,setContainerNode]=useState(false);
+		
 		const states=CP.wordsToFlags(classes);
 		const {devices,devicesForCss,imageKeys,getCssDatas,renderCssDatas,parseRectAttr,getRectAttr}=CP.config.graphics;
 		const cssDatas=getCssDatas(attributes,states);
@@ -116,22 +119,28 @@ wp.blocks.registerBlockType('catpow/graphics',{
 		const selectiveItemClasses=useMemo(()=>{
 			const {devices,devicesForCss,imageKeys,getCssDatas,renderCssDatas,parseRectAttr,getRectAttr}=CP.config.graphics;
 			const selectiveItemClasses=[
-				{name:'type',label:'タイプ',filter:'type',values:{isImage:'画像',isText:'テキスト'},sub:{
+				{name:'type',type:'buttons',label:'タイプ',filter:'type',values:{isImage:'画像',isText:'テキスト'},sub:{
 					isImage:[
-						{name:'imageType',label:'タイプ',filter:'imageType',values:['type1','type2','type3']},
+						{name:'type',type:'buttons',values:['type1','type2','type3']},
 						{name:'alt',input:'text',label:'代替テキスト',key:'alt'},
 						{name:'link',input:'text',label:'リンク',key:'link'},
 						{name:'image',input:'picture',label:'画像',keys:imageKeys.image,devices}
 					],
 					isText:[
-						{name:'textType',label:'タイプ',filter:'textType',values:['type1','type2','type3']},
+						{name:'type',type:'buttons',values:['type1','type2','type3']},
 						'color',
-						{name:'inverse',label:'ヌキ文字',values:'inverse'},
+						{name:'inverse',label:'ヌキ文字',values:'inverse',sub:[
+							{name:'hasBackground',label:'背景色',values:'hasBackground'}
+						]},
 						{name:'title',label:'見出し',values:'hasTitle'},
 						{name:'lead',label:'リード',values:'hasLead'},
 						{name:'text',label:'テキスト',values:'hasText'}
 					]
 				}},
+				{name:'hasBoxShadow',label:'影（ボックス）',values:'hasBoxShadow'},
+				{name:'hasTextShadow',label:'影（テキスト）',values:'hasTextShadow'},
+				{name:'isEllipse',label:'円形',values:'isEllipse'},
+				{name:'fadeIn',label:'フェードイン',values:'fadeIn'},
 				{name:'fadeIn',label:'フェードイン',values:'fadeIn'},
 				{name:'slideIn',label:'スライドイン',values:'slideIn',sub:[
 					{name:'direction',type:'radio',filer:'slideIn',label:'方向',values:{
@@ -171,14 +180,14 @@ wp.blocks.registerBlockType('catpow/graphics',{
 
 
 		const save=()=>{
-			setAttributes({items:JSON.parse(JSON.stringify(items))});
+			setAttributes({items:JSON.parse(JSON.stringify(items))})
 		}
 
 		const onMouseDown=(e)=>{
 			const tgt=e.target;
 			const controlNode=tgt.closest('[data-control-type]');
 			const itemNode=tgt.closest('.item');
-			if(!itemNode){tgtItem=false;setAttributes({currentItemIndex:-1});return;}
+			if(!itemNode){return;}
 			var i=itemNode.dataset.index;
 			tgtItem={node:itemNode};
 			if(controlNode){
@@ -187,9 +196,8 @@ wp.blocks.registerBlockType('catpow/graphics',{
 			tgtItem.node.style.animation='none';
 			tgtItem.node.style.transition='none';
 			tgtItem.node.style.transform='scale(1)';
-			console.log(tgtItem);
-			if(attributes.currentItemIndex!=i){
-				setAttributes({currentItemIndex:i});
+			if(currentItemIndex!=i){
+				setCurrentItemIndex(i);
 			}
 		};
 		const onMouseMove=(e)=>{
@@ -298,14 +306,15 @@ wp.blocks.registerBlockType('catpow/graphics',{
 		
 		return (
 			<>
-				<CP.SelectDeviceToolbar attr={attributes} set={setAttributes} devices={CP.config.graphics.devicesForCss}/>
+				<CP.SelectDeviceToolbar attr={attributes} set={setAttributes} devices={CP.config.graphics.devicesForCss} defaultInput='pc'/>
 				<div
 					id={id}
-					className={classes+(device?' alt_content '+device:'')}
+					className={classes+(isSelected?' alt_content '+device:'')}
 					onMouseDown={onMouseDown}
 					onMouseMove={onMouseMove}
 					onMouseUp={onMouseUp}
 					onDoubleClick={onDoubleClick}
+					ref={setContainerNode}
 				>
 					<div className="label">
 						<Icon icon={CP.devices[device].icon}/>
@@ -320,10 +329,31 @@ wp.blocks.registerBlockType('catpow/graphics',{
 							/>
 						}
 					</div>
+					<CP.BoundingBox
+						target={currentItemNode}
+						container={containerNode}
+						onChange={()=>{
+							const bnd=containerNode.getBoundingClientRect();
+							const tgtBnd=currentItemNode.getBoundingClientRect();
+							const rectDatas=parseRectAttr(items[currentItemIndex].rect);
+							const deviceIndex=device?devicesForCss.indexOf(device):0;
+							rectDatas[deviceIndex]=[
+								parseInt((tgtBnd.left-bnd.left)/bnd.width*1000)/10,
+								parseInt((tgtBnd.top-bnd.top)/bnd.height*1000)/10,
+								parseInt(tgtBnd.width/bnd.width*1000)/10,
+								parseInt(tgtBnd.height/bnd.height*1000)/10
+							];
+							items[currentItemIndex].rect=getRectAttr(rectDatas);
+							save();
+						}}
+						onDeselect={()=>{
+							setCurrentItemIndex(-1);
+						}}
+					/>
 					{items.map((item,index)=>{
 						var itemStates=CP.wordsToFlags(item.classes);
 						var itemClasses=item.classes;
-						var itemSelected=attributes.currentItemIndex==index;
+						var itemSelected=currentItemIndex==index;
 						if(isSelected){itemClasses+=' visible active actived';}
 						if(itemSelected){itemClasses+=' selected';}
 
@@ -401,23 +431,19 @@ wp.blocks.registerBlockType('catpow/graphics',{
 								className:itemClasses,
 								'data-index':index,
 								'data-rect':item.rect,
+								ref:itemSelected?setCurrentItemNode:null,
+								onClick:(e)=>setCurrentItemIndex(index),
 								key:index
 							},
 							<>
 								{itemBody()}
 								{isSelected && itemSelected && 
 									<div className="control">
-										<div className="pos" data-control-type="pos">
-											<Icon icon="move"/>
-										</div>
 										<div className="del" data-control-type="del">
 											<Icon icon="dismiss"/>
 										</div>
 										<div className="dup" data-control-type="dup">
 											<Icon icon="plus-alt"/>
-										</div>
-										<div className="bnd" data-control-type="bnd">
-											<Icon icon="leftright"/>
 										</div>
 									</div>
 								}
@@ -464,19 +490,19 @@ wp.blocks.registerBlockType('catpow/graphics',{
 						set={setAttributes}
 						attr={attributes}
 						items={items}
-						index={attributes.currentItemIndex}
+						index={currentItemIndex}
 						selectiveClasses={selectiveItemClasses}
 						filters={CP.filters.graphics || {}}
 					/>
-					{items[attributes.currentItemIndex] && 
+					{items[currentItemIndex] && 
 						<PanelBody title="ITEM CLASS" icon="admin-generic" initialOpen={false}>
 							<TextareaControl
 								label='クラス'
 								onChange={(classes)=>{
-									items[attributes.currentItemIndex].classes=classes;
+									items[currentItemIndex].classes=classes;
 									save();
 								}}
-								value={items[attributes.currentItemIndex].classes}
+								value={items[currentItemIndex].classes}
 							/>
 						</PanelBody>
 					}

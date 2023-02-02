@@ -22,7 +22,7 @@
       items.map((item, index) => {
         item.rect.split(",").map((rect, deviceIndex) => {
           const bnd = rect.split(" ").map((val) => val + "%");
-          rtn[devicesForCss[deviceIndex]]["#" + id + "_item_" + index] = { left: bnd[0], top: bnd[1], width: bnd[2] };
+          rtn[devicesForCss[deviceIndex]]["#" + id + "_item_" + index] = { left: bnd[0], top: bnd[1], width: bnd[2], height: bnd[3] };
         });
       });
       return rtn;
@@ -75,7 +75,7 @@
           {
             id: "graphics_image1",
             classes: "item isImage",
-            rect: "25 25 50,25 25 50,25 25 50",
+            rect: "25 25 50 50,25 25 50 50,25 25 50 50",
             src: wpinfo.theme_url + "/images/dummy.jpg",
             srcset: "",
             alt: "",
@@ -92,11 +92,13 @@
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { __ } = wp.i18n;
-      const { useState, useMemo, useCallback, useEffect, useReducer } = wp.element;
+      const { useState, useMemo, useCallback, useEffect, useReducer, useRef } = wp.element;
       const { InspectorControls, RichText } = wp.blockEditor;
       const { BaseControl, Icon, PanelBody, RangeControl, TextareaControl, TextControl } = wp.components;
       const { id, classes = "", src, srcset, alt, heights, items = [], device } = attributes;
-      console.log(attributes);
+      const [currentItemNode, setCurrentItemNode] = useState(false);
+      const [currentItemIndex, setCurrentItemIndex] = useState(-1);
+      const [containerNode, setContainerNode] = useState(false);
       const states = CP.wordsToFlags(classes);
       const { devices, devicesForCss, imageKeys, getCssDatas, renderCssDatas, parseRectAttr, getRectAttr } = CP.config.graphics;
       const cssDatas = getCssDatas(attributes, states);
@@ -118,22 +120,28 @@
       const selectiveItemClasses = useMemo(() => {
         const { devices: devices2, devicesForCss: devicesForCss2, imageKeys: imageKeys2, getCssDatas: getCssDatas2, renderCssDatas: renderCssDatas2, parseRectAttr: parseRectAttr2, getRectAttr: getRectAttr2 } = CP.config.graphics;
         const selectiveItemClasses2 = [
-          { name: "type", label: "\u30BF\u30A4\u30D7", filter: "type", values: { isImage: "\u753B\u50CF", isText: "\u30C6\u30AD\u30B9\u30C8" }, sub: {
+          { name: "type", type: "buttons", label: "\u30BF\u30A4\u30D7", filter: "type", values: { isImage: "\u753B\u50CF", isText: "\u30C6\u30AD\u30B9\u30C8" }, sub: {
             isImage: [
-              { name: "imageType", label: "\u30BF\u30A4\u30D7", filter: "imageType", values: ["type1", "type2", "type3"] },
+              { name: "type", type: "buttons", values: ["type1", "type2", "type3"] },
               { name: "alt", input: "text", label: "\u4EE3\u66FF\u30C6\u30AD\u30B9\u30C8", key: "alt" },
               { name: "link", input: "text", label: "\u30EA\u30F3\u30AF", key: "link" },
               { name: "image", input: "picture", label: "\u753B\u50CF", keys: imageKeys2.image, devices: devices2 }
             ],
             isText: [
-              { name: "textType", label: "\u30BF\u30A4\u30D7", filter: "textType", values: ["type1", "type2", "type3"] },
+              { name: "type", type: "buttons", values: ["type1", "type2", "type3"] },
               "color",
-              { name: "inverse", label: "\u30CC\u30AD\u6587\u5B57", values: "inverse" },
+              { name: "inverse", label: "\u30CC\u30AD\u6587\u5B57", values: "inverse", sub: [
+                { name: "hasBackground", label: "\u80CC\u666F\u8272", values: "hasBackground" }
+              ] },
               { name: "title", label: "\u898B\u51FA\u3057", values: "hasTitle" },
               { name: "lead", label: "\u30EA\u30FC\u30C9", values: "hasLead" },
               { name: "text", label: "\u30C6\u30AD\u30B9\u30C8", values: "hasText" }
             ]
           } },
+          { name: "hasBoxShadow", label: "\u5F71\uFF08\u30DC\u30C3\u30AF\u30B9\uFF09", values: "hasBoxShadow" },
+          { name: "hasTextShadow", label: "\u5F71\uFF08\u30C6\u30AD\u30B9\u30C8\uFF09", values: "hasTextShadow" },
+          { name: "isEllipse", label: "\u5186\u5F62", values: "isEllipse" },
+          { name: "fadeIn", label: "\u30D5\u30A7\u30FC\u30C9\u30A4\u30F3", values: "fadeIn" },
           { name: "fadeIn", label: "\u30D5\u30A7\u30FC\u30C9\u30A4\u30F3", values: "fadeIn" },
           { name: "slideIn", label: "\u30B9\u30E9\u30A4\u30C9\u30A4\u30F3", values: "slideIn", sub: [
             { name: "direction", type: "radio", filer: "slideIn", label: "\u65B9\u5411", values: {
@@ -176,8 +184,6 @@
         const controlNode = tgt.closest("[data-control-type]");
         const itemNode = tgt.closest(".item");
         if (!itemNode) {
-          tgtItem = false;
-          setAttributes({ currentItemIndex: -1 });
           return;
         }
         var i = itemNode.dataset.index;
@@ -188,9 +194,8 @@
         tgtItem.node.style.animation = "none";
         tgtItem.node.style.transition = "none";
         tgtItem.node.style.transform = "scale(1)";
-        console.log(tgtItem);
-        if (attributes.currentItemIndex != i) {
-          setAttributes({ currentItemIndex: i });
+        if (currentItemIndex != i) {
+          setCurrentItemIndex(i);
         }
       };
       const onMouseMove = (e) => {
@@ -284,15 +289,16 @@
           }
         )));
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices: CP.config.graphics.devicesForCss }), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices: CP.config.graphics.devicesForCss, defaultInput: "pc" }), /* @__PURE__ */ wp.element.createElement(
         "div",
         {
           id,
-          className: classes + (device ? " alt_content " + device : ""),
+          className: classes + (isSelected ? " alt_content " + device : ""),
           onMouseDown,
           onMouseMove,
           onMouseUp,
-          onDoubleClick
+          onDoubleClick,
+          ref: setContainerNode
         },
         /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })),
         /* @__PURE__ */ wp.element.createElement("div", { className: "base" }, states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(
@@ -304,10 +310,34 @@
             device: device === "pc" ? null : device
           }
         )),
+        /* @__PURE__ */ wp.element.createElement(
+          CP.BoundingBox,
+          {
+            target: currentItemNode,
+            container: containerNode,
+            onChange: () => {
+              const bnd = containerNode.getBoundingClientRect();
+              const tgtBnd = currentItemNode.getBoundingClientRect();
+              const rectDatas = parseRectAttr(items[currentItemIndex].rect);
+              const deviceIndex = device ? devicesForCss.indexOf(device) : 0;
+              rectDatas[deviceIndex] = [
+                parseInt((tgtBnd.left - bnd.left) / bnd.width * 1e3) / 10,
+                parseInt((tgtBnd.top - bnd.top) / bnd.height * 1e3) / 10,
+                parseInt(tgtBnd.width / bnd.width * 1e3) / 10,
+                parseInt(tgtBnd.height / bnd.height * 1e3) / 10
+              ];
+              items[currentItemIndex].rect = getRectAttr(rectDatas);
+              save();
+            },
+            onDeselect: () => {
+              setCurrentItemIndex(-1);
+            }
+          }
+        ),
         items.map((item, index) => {
           var itemStates = CP.wordsToFlags(item.classes);
           var itemClasses = item.classes;
-          var itemSelected = attributes.currentItemIndex == index;
+          var itemSelected = currentItemIndex == index;
           if (isSelected) {
             itemClasses += " visible active actived";
           }
@@ -383,9 +413,11 @@
               className: itemClasses,
               "data-index": index,
               "data-rect": item.rect,
+              ref: itemSelected ? setCurrentItemNode : null,
+              onClick: (e) => setCurrentItemIndex(index),
               key: index
             },
-            /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, itemBody(), isSelected && itemSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "control" }, /* @__PURE__ */ wp.element.createElement("div", { className: "pos", "data-control-type": "pos" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "move" })), /* @__PURE__ */ wp.element.createElement("div", { className: "del", "data-control-type": "del" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "dismiss" })), /* @__PURE__ */ wp.element.createElement("div", { className: "dup", "data-control-type": "dup" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "plus-alt" })), /* @__PURE__ */ wp.element.createElement("div", { className: "bnd", "data-control-type": "bnd" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "leftright" }))))
+            /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, itemBody(), isSelected && itemSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "control" }, /* @__PURE__ */ wp.element.createElement("div", { className: "del", "data-control-type": "del" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "dismiss" })), /* @__PURE__ */ wp.element.createElement("div", { className: "dup", "data-control-type": "dup" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "plus-alt" }))))
           );
         }),
         /* @__PURE__ */ wp.element.createElement("style", null, device !== "pc" ? CP.createStyleCode(cssDatas[device]) : renderCssDatas(cssDatas))
@@ -426,19 +458,19 @@
           set: setAttributes,
           attr: attributes,
           items,
-          index: attributes.currentItemIndex,
+          index: currentItemIndex,
           selectiveClasses: selectiveItemClasses,
           filters: CP.filters.graphics || {}
         }
-      ), items[attributes.currentItemIndex] && /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "ITEM CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+      ), items[currentItemIndex] && /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "ITEM CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextareaControl,
         {
           label: "\u30AF\u30E9\u30B9",
           onChange: (classes2) => {
-            items[attributes.currentItemIndex].classes = classes2;
+            items[currentItemIndex].classes = classes2;
             save();
           },
-          value: items[attributes.currentItemIndex].classes
+          value: items[currentItemIndex].classes
         }
       )), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)));
     },
