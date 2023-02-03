@@ -2,9 +2,9 @@
 
 
 .wp-block-catpow-graphics{
-	@include bnd((p:r));
+	@include bnd((p:r,mg:a));
 	.item{
-		@include bnd((d:b,p:a));
+		@include bnd((d:b,p:a,bs:b));
 		&.fadeIn{
 			@include trn((t:1s,o:0));
 			&.visible{
@@ -70,11 +70,14 @@
 			@include bdr((r:50%));
 		}
 		&.isText{
+			@include flx((w:n,a:c,j:c));
+			>.body{
+			}
 			&.type1{
 				@include bnd((pd:20));
 				@include bg((c:b 1 .8));
 				.title{
-					@include bnd((pdb:10,mgb:10));
+					@include bnd((pdb:10,mg:0 a 10));
 					@include bdr((p:b,s:s,w:1));
 					@include txt((p:40));
 				}
@@ -87,7 +90,7 @@
 			}
 			&.type2{
 				.title{
-					@include bnd((pdb:10,mgb:10));
+					@include bnd((pdb:10,mg:0 a 10));
 					@include bdr((p:b,s:d,w:1));
 					@include txt((p:30));
 				}
@@ -119,6 +122,10 @@
 						@include txt((c:b));
 					}
 				}
+			}
+			&.isEllipse{
+				@include bnd((pd:40 20));
+				@include txt((a:c));
 			}
 		}
 	}
