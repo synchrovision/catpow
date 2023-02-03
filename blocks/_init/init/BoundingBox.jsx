@@ -1,7 +1,7 @@
 ﻿import {CP} from './CP.jsx';
 
 CP.BoundingBox=(props)=>{
-	const {target,onDeselect,onDuplicate,onChange}=props;
+	const {target,onDeselect,onDuplicate,onDelete,onChange}=props;
 	const {useState,useCallback,useMemo,useEffect,useRef}=wp.element;
 	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem('CP-BoundingBox'),[]);
@@ -41,6 +41,14 @@ CP.BoundingBox=(props)=>{
 		return ()=>observer.disconnect();
 	},[target,observer]);
 	useEffect(()=>{
+		if(!target){return false;}
+		tracePosition(target);
+		const cb=()=>tracePosition(target);
+		window.addEventListener('resize',cb);
+		return ()=>window.removeEventListener('resize',cb);
+	},[target,props.viewMode]);
+	useEffect(()=>{
+		if(!onDeselect){return;}
 		const cb=(e)=>{
 			if(!target.contains(e.target) && !ref.current.contains(e.target)){
 				onDeselect();
@@ -49,6 +57,19 @@ CP.BoundingBox=(props)=>{
 		container.addEventListener('click',cb);
 		return ()=>container.removeEventListener('click',cb);
 	},[container,onDeselect]);
+	useEffect(()=>{
+		if(!onDelete){return;}
+		const cb=(e)=>{
+			if(e.isComposing || e.target.nodeName === "INPUT" || e.target.nodeName === "TEXTAREA" || e.target.isContentEditable){
+				return;
+			}
+			if(e.key === 'Backspace'){
+				onDelete(target);
+			}
+		}
+		document.addEventListener('keyup',cb);
+		return ()=>document.removeEventListener('keyup',cb);
+	},[target,onDelete]);
 	
 	const controls=useMemo(()=>{
 		const controls=[];
@@ -66,10 +87,12 @@ CP.BoundingBox=(props)=>{
 		return controls;
 	},[]);
 	
-	
 	const onMouseDown=useCallback((e)=>{
 		const control=e.target.closest('[data-control-action]');
 		if(!control){return setAction(false);}
+		if(onDuplicate && e.altKey && control.dataset.controlAction==='move'){
+			onDuplicate(target);
+		}
 		target.style.animation='none';
 		target.style.transition='none';
 		setAction({
@@ -135,14 +158,17 @@ CP.BoundingBox=(props)=>{
 		action.target.style.animation='';
 		action.target.style.transition='';
 		if(onChange){onChange(getBoundingArray(window.getComputedStyle(action.target)));}
+		action.target.style.left='';
+		action.target.style.top='';
+		action.target.style.width='';
+		action.target.style.height='';
 		setAction(false);
 	},[action,onChange]);
 	const onDoubleClick=useCallback((e)=>{
 		target.style.height='auto';
 		target.style.height=window.getComputedStyle(target).height+'px';
-	},[target]);
-	
-	
+		if(onChange){onChange(getBoundingArray(window.getComputedStyle(target)));}
+	},[target,onChange]);
 	
 	if(!target){return false;}
 	return (
