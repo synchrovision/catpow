@@ -67,7 +67,7 @@
                 { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" }
               ],
               index: [
-                { name: "level", label: "\u30EC\u30D9\u30EB", "values": ["level0", "level1", "level2", "level3"] }
+                { name: "level", type: "gridbuttons", label: "\u30EC\u30D9\u30EB", "values": ["level0", "level1", "level2", "level3"] }
               ],
               menu: [
                 { name: "size", type: "buttons", label: "\u30B5\u30A4\u30BA", values: ["small", "medium", "large"] },

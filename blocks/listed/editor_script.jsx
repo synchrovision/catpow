@@ -67,7 +67,7 @@ wp.blocks.registerBlockType('catpow/listed',{
 							{name:'link',label:'リンク',values:'hasLink'}
 						],
 						index:[
-							{name:'level',label:'レベル','values':['level0','level1','level2','level3']}
+							{name:'level',type:'gridbuttons',label:'レベル','values':['level0','level1','level2','level3']}
 						],
 						menu:[
 							{name:'size',type:'buttons',label:'サイズ',values:['small','medium','large']},
