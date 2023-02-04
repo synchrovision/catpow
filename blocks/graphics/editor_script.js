@@ -135,8 +135,6 @@
           setAttributes({ id: "g" + new Date().getTime().toString(16) });
         }
       }, [!id]);
-      console.log(className);
-      console.log(classes);
       const save = useCallback(() => {
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });
       }, [items]);
@@ -266,9 +264,11 @@
         const itemBody = () => {
           if (itemSelected) {
             if (itemStates.isText) {
-              return /* @__PURE__ */ wp.element.createElement("span", { className: "body" }, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", { className: "title" }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("span", { className: "body" }, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement(
                 RichText,
                 {
+                  tagName: "h3",
+                  className: "title",
                   placeholder: "Title",
                   onChange: (title) => {
                     console.log(title);
@@ -277,9 +277,11 @@
                   },
                   value: item.title
                 }
-              )), itemStates.hasLead && /* @__PURE__ */ wp.element.createElement("h4", { className: "lead" }, /* @__PURE__ */ wp.element.createElement(
+              ), itemStates.hasLead && /* @__PURE__ */ wp.element.createElement(
                 RichText,
                 {
+                  tagName: "h4",
+                  className: "lead",
                   placeholder: "Lead",
                   onChange: (lead) => {
                     item.lead = lead;
@@ -287,9 +289,11 @@
                   },
                   value: item.lead
                 }
-              )), itemStates.hasText && /* @__PURE__ */ wp.element.createElement("p", { className: "text" }, /* @__PURE__ */ wp.element.createElement(
+              ), itemStates.hasText && /* @__PURE__ */ wp.element.createElement(
                 RichText,
                 {
+                  tagName: "p",
+                  className: "text",
                   placeholder: "Text",
                   onChange: (text) => {
                     item.text = text;
@@ -297,7 +301,7 @@
                   },
                   value: item.text
                 }
-              )));
+              ));
             }
             return /* @__PURE__ */ wp.element.createElement(
               CP.SelectResponsiveImage,

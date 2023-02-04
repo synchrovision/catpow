@@ -1,8 +1,14 @@
 @import "config/style_config.scss";
 
-
 .wp-block-catpow-graphics{
 	@include bnd((p:r,mg:a));
+	@include txt((p:1.2vw));
+	@include bp(-1280){
+		@include txt((p:1.6vw));
+	}
+	@include bp(-640){
+		@include txt((p:3.2vw));
+	}
 	.item{
 		@include bnd((d:b,p:a,bs:b));
 		&.fadeIn{
@@ -74,44 +80,48 @@
 			>.body{
 			}
 			&.type1{
-				@include bnd((pd:20));
+				@include bnd((pd:1em));
 				@include bg((c:b 1 .8));
 				.title{
-					@include bnd((pdb:10,mg:0 a 10));
+					@include bnd((pdb:.25em,mg:0 a .25em));
 					@include bdr((p:b,s:s,w:1));
-					@include txt((p:40));
+					@include txt((p:3em));
 				}
 				.lead{
-					@include txt((p:15));
+					@include txt((p:1em));
 				}
 				.text{
-					@include txt((p:12));
+					@include txt((p:.8em));
 				}
 			}
 			&.type2{
+				@include bnd((pd:1em));
+				@include bg((c:b 1 .8));
 				.title{
-					@include bnd((pdb:10,mg:0 a 10));
-					@include bdr((p:b,s:d,w:1));
-					@include txt((p:30));
+					@include bnd((pdb:.25em,mg:0 a .25em));
+					@include bdr((p:b,s:s,w:1));
+					@include txt((p:3em));
 				}
 				.lead{
-					@include txt((p:15));
+					@include txt((p:1em));
 				}
 				.text{
-					@include txt((p:12));
+					@include txt((p:.8em));
 				}
 			}
 			&.type3{
+				@include bnd((pd:1em));
+				@include bg((c:b 1 .8));
 				.title{
-					@include bnd((pdb:10,mgb:10));
+					@include bnd((pdb:.25em,mg:0 a .25em));
 					@include bdr((p:b,s:s,w:1));
-					@include txt((p:20));
+					@include txt((p:3em));
 				}
 				.lead{
-					@include txt((p:15));
+					@include txt((p:1em));
 				}
 				.text{
-					@include txt((p:12));
+					@include txt((p:.8em));
 				}
 			}
 			&.inverse{
@@ -124,7 +134,7 @@
 				}
 			}
 			&.isEllipse{
-				@include bnd((pd:40 20));
+				@include bnd((pd:2em 1em));
 				@include txt((a:c));
 			}
 		}

@@ -136,8 +136,6 @@ wp.blocks.registerBlockType('catpow/graphics',{
 			}
 		},[!id]);
 
-		console.log(className);
-		console.log(classes);
 		const save=useCallback(()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))})
 		},[items]);
@@ -294,31 +292,31 @@ wp.blocks.registerBlockType('catpow/graphics',{
 									return (
 										<span className="body">
 											{itemStates.hasTitle && 
-												<h3 className="title">
-													<RichText
-														placeholder='Title'
-														onChange={(title)=>{console.log(title);item.title=title;save();}}
-														value={item.title}
-													/>
-												 </h3>
+												<RichText
+													tagName="h3"
+													className="title"
+													placeholder='Title'
+													onChange={(title)=>{console.log(title);item.title=title;save();}}
+													value={item.title}
+												/>
 											}
 											{itemStates.hasLead && 
-												<h4 className="lead">
-													<RichText
-														placeholder='Lead'
-														onChange={(lead)=>{item.lead=lead;save();}}
-														value={item.lead}
-													/>
-												 </h4>
+												<RichText
+													tagName="h4"
+													className="lead"
+													placeholder='Lead'
+													onChange={(lead)=>{item.lead=lead;save();}}
+													value={item.lead}
+												/>
 											}
 											{itemStates.hasText && 
-												<p className="text">
-													<RichText
-														placeholder='Text'
-														onChange={(text)=>{item.text=text;save();}}
-														value={item.text}
-													/>
-												 </p>
+												<RichText
+													tagName="p"
+													className="text"
+													placeholder='Text'
+													onChange={(text)=>{item.text=text;save();}}
+													value={item.text}
+												/>
 											}
 										</span>
 									);
