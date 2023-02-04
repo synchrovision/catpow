@@ -18,7 +18,7 @@
           blocks: CP.listedConvertibles,
           transform: (attributes) => {
             attributes.classes = "wp-block-catpow-panes";
-            return createBlock("catpow/panes", attributes);
+            return wp.blocks.createBlock("catpow/panes", attributes);
           }
         }
       ]

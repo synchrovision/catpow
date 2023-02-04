@@ -17,7 +17,7 @@
           blocks: CP.listedConvertibles,
           transform: (attributes) => {
             attributes.classes = "wp-block-catpow-banners medium hasTitle";
-            return createBlock("catpow/banners", attributes);
+            return wp.blocks.createBlock("catpow/banners", attributes);
           }
         }
       ]

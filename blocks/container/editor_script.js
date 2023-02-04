@@ -11,7 +11,7 @@
           type: "block",
           blocks: ["core/group"],
           transform: (attributes, innerBlocks) => {
-            return createBlock("catpow/container", { classes: "wp-block-catpow-container " }, innerBlocks);
+            return wp.blocks.createBlock("catpow/container", { classes: "wp-block-catpow-container " }, innerBlocks);
           }
         }
       ]

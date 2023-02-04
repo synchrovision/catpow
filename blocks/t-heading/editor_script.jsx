@@ -10,7 +10,7 @@
 				type:'block',
 				blocks:['core/paragraph'],
 				transform:(attributes)=>{
-					return createBlock('catpow/t-heading',{
+					return wp.blocks.createBlock('catpow/t-heading',{
 						classes:'wp-block-catpow-t-heading header center medium',
 						text:attributes.content
 					});
@@ -20,7 +20,7 @@
 				type:'block',
 				blocks:['catpow/t-paragraph'],
 				transform:(attributes)=>{
-					return createBlock('catpow/t-heading',{
+					return wp.blocks.createBlock('catpow/t-heading',{
 						classes:'wp-block-catpow-t-heading header center medium',
 						title:attributes.text
 					});
@@ -70,11 +70,11 @@
 									multiline={false}
 									onSplit={(val)=>{
 										if(!val){
-											return createBlock('catpow/t-paragraph',{
+											return wp.blocks.createBlock('catpow/t-paragraph',{
 												classes:'wp-block-catpow-t-paragraph left medium'
 											});
 										}
-										return createBlock('catpow/t-heading',{
+										return wp.blocks.createBlock('catpow/t-heading',{
 											...attributes,
 											title:val
 										});

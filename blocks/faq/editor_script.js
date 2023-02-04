@@ -17,7 +17,7 @@
           blocks: CP.listedConvertibles,
           transform: (attributes) => {
             attributes.classes = "wp-block-catpow-faq accordion";
-            return createBlock("catpow/faq", attributes);
+            return wp.blocks.createBlock("catpow/faq", attributes);
           }
         }
       ]

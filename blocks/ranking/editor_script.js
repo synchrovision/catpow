@@ -20,7 +20,7 @@
             if (!attributes.countPrefix) {
               attributes.countPrefix = "Step.";
             }
-            return createBlock("catpow/ranking", attributes);
+            return wp.blocks.createBlock("catpow/ranking", attributes);
           }
         }
       ]

@@ -19,7 +19,7 @@
 						rows:[{classes:'',cells:[{text:['Title'],classes:'th'}]}],
 						file:files[0]
 					};
-					return createBlock('catpow/datatable',attributes);
+					return wp.blocks.createBlock('catpow/datatable',attributes);
 				},
 			},
 			{
@@ -27,14 +27,14 @@
 				blocks:CP.tableConvertibles,
 				transform:(attributes)=>{
 					attributes.classes="wp-block-catpow-datatable spec";
-					return createBlock('catpow/datatable',attributes);
+					return wp.blocks.createBlock('catpow/datatable',attributes);
 				}
 			},
 			{
 				type:'block',
 				blocks:['core/table'],
 				transform:(attributes)=>{
-					return createBlock('catpow/datatable',{
+					return wp.blocks.createBlock('catpow/datatable',{
 						classes:"wp-block-catpow-datatable spec",
 						rows:attributes.body.map((row)=>({
 							cells:row.cells.map((cell)=>({

@@ -24,7 +24,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 					attributes.classes='wp-block-catpow-slider story hasTitle hasText hasImage';
 					if(!attributes.controlClasses){attributes.controlClasses='controls loop autoplay flickable';}
 					if(!attributes.config){attributes.config='{}';}
-					return createBlock('catpow/slider',attributes);
+					return wp.blocks.createBlock('catpow/slider',attributes);
 				},
 			},
 		]

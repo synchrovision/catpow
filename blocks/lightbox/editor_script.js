@@ -18,7 +18,7 @@
           blocks: CP.listedConvertibles,
           transform: (attributes) => {
             attributes.classes = "wp-block-catpow-lightbox medium hasTitle hasImage hasText";
-            return createBlock("catpow/lightbox", attributes);
+            return wp.blocks.createBlock("catpow/lightbox", attributes);
           }
         }
       ]

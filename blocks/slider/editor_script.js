@@ -29,7 +29,7 @@
             if (!attributes.config) {
               attributes.config = "{}";
             }
-            return createBlock("catpow/slider", attributes);
+            return wp.blocks.createBlock("catpow/slider", attributes);
           }
         }
       ]

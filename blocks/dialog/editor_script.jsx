@@ -10,7 +10,7 @@
 				blocks:CP.listedConvertibles,
 				transform:(attributes)=>{
 					attributes.classes='wp-block-catpow-dialog';
-					return createBlock('catpow/dialog',attributes);
+					return wp.blocks.createBlock('catpow/dialog',attributes);
 				},
 			},
 		]

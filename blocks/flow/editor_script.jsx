@@ -16,7 +16,7 @@ wp.blocks.registerBlockType('catpow/flow',{
 				transform:(attributes)=>{
 					attributes.classes='wp-block-catpow-flow medium hasCounter';
 					if(!attributes.countPrefix){attributes.countPrefix='Step.';}
-					return createBlock('catpow/flow',attributes);
+					return wp.blocks.createBlock('catpow/flow',attributes);
 				},
 			},
 		]

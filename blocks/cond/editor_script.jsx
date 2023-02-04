@@ -9,7 +9,7 @@
 				type:'block',
 				blocks:['core/group'],
 				transform:(attributes,innerBlocks)=>{
-					return createBlock('catpow/cond',{},innerBlocks);
+					return wp.blocks.createBlock('catpow/cond',{},innerBlocks);
 				},
 			},
 		]

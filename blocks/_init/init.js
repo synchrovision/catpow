@@ -690,7 +690,7 @@
         if (block[2]) {
           block[2] = CP.createBlocks(block[2]);
         }
-        return createBlock(...block);
+        return wp.blocks.createBlock(...block);
       });
     },
     devices: Catpow.util.devices,

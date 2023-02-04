@@ -16,7 +16,7 @@ wp.blocks.registerBlockType('catpow/div',{
 				type:'block',
 				blocks:['core/group'],
 				transform:(attributes,innerBlocks)=>{
-					return createBlock('catpow/div',{classes:'wp-block-catpow-div frame thinBorder'},innerBlocks);
+					return wp.blocks.createBlock('catpow/div',{classes:'wp-block-catpow-div frame thinBorder'},innerBlocks);
 				},
 			},
 		]

@@ -12,7 +12,7 @@
           blocks: CP.listedConvertibles,
           transform: (attributes) => {
             attributes.classes = "wp-block-catpow-definition";
-            return createBlock("catpow/definition", attributes);
+            return wp.blocks.createBlock("catpow/definition", attributes);
           }
         }
       ]

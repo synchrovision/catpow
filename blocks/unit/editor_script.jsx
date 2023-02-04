@@ -15,7 +15,7 @@ wp.blocks.registerBlockType('catpow/unit',{
 				type:'block',
 				blocks:['core/group'],
 				transform:(attributes,innerBlocks)=>{
-					return createBlock('catpow/unit',{classes:'wp-block-catpow-unit'},innerBlocks);
+					return wp.blocks.createBlock('catpow/unit',{classes:'wp-block-catpow-unit'},innerBlocks);
 				},
 			},
 		]

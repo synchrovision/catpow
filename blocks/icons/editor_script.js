@@ -12,7 +12,7 @@
           blocks: CP.listedConvertibles,
           transform: (attributes) => {
             attributes.classes = "wp-block-catpow-icons medium hasSubTitle hasText";
-            return createBlock("catpow/icons", attributes);
+            return wp.blocks.createBlock("catpow/icons", attributes);
           }
         }
       ]

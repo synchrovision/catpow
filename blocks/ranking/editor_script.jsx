@@ -16,7 +16,7 @@ wp.blocks.registerBlockType('catpow/ranking',{
 				transform:(attributes)=>{
 					attributes.classes='wp-block-catpow-ranking';
 					if(!attributes.countPrefix){attributes.countPrefix='Step.';}
-					return createBlock('catpow/ranking',attributes);
+					return wp.blocks.createBlock('catpow/ranking',attributes);
 				},
 			},
 		]

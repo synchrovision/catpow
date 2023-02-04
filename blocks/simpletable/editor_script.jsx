@@ -14,7 +14,7 @@
 				},
 				transform:(attributes)=>{
 					attributes.classes="wp-block-catpow-simpletable spec";
-					return createBlock('catpow/simpletable',attributes);
+					return wp.blocks.createBlock('catpow/simpletable',attributes);
 				}
 			}
 		]

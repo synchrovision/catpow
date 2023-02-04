@@ -19,7 +19,7 @@ wp.blocks.registerBlockType('catpow/listed',{
 				blocks:CP.listedConvertibles,
 				transform:(attributes)=>{
 					attributes.classes='wp-block-catpow-listed menu medium hasHeader hasTitle hasTitleCaption hasImage hasText';
-					return createBlock('catpow/listed',attributes);
+					return wp.blocks.createBlock('catpow/listed',attributes);
 				},
 			},
 		]

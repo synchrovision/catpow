@@ -15,7 +15,7 @@ wp.blocks.registerBlockType('catpow/sphere',{
 				blocks:CP.listedConvertibles,
 				transform:(attributes)=>{
 					attributes.classes='wp-block-catpow-sphere medium hasSubTitle hasText';
-					return createBlock('catpow/sphere',attributes);
+					return wp.blocks.createBlock('catpow/sphere',attributes);
 				},
 			},
 		]

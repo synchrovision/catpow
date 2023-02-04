@@ -22,7 +22,7 @@ wp.blocks.registerBlockType('catpow/layouttable',{
 						rows:[{classes:'',cells:[{text:['Title'],classes:''}]}],
 						file:files[0]
 					};
-					return createBlock('catpow/layouttable',attributes);
+					return wp.blocks.createBlock('catpow/layouttable',attributes);
 				},
 			},
 			{
@@ -30,7 +30,7 @@ wp.blocks.registerBlockType('catpow/layouttable',{
 				blocks:CP.tableConvertibles,
 				transform:(attributes)=>{
 					attributes.classes="wp-block-catpow-layouttable spec";
-					return createBlock('catpow/layouttable',attributes);
+					return wp.blocks.createBlock('catpow/layouttable',attributes);
 				}
 			}
 		]
