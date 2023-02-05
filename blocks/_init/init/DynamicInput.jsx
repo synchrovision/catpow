@@ -2,7 +2,7 @@
 
 CP.DynamicInput=(props)=>{
 	const {useMemo}=wp.element;
-	const {TextControl,TextareaControl,SelectControl,ToggleControl,RangeControl}=wp.components;
+	const {RadioControl,RangeControl,SelectControl,TextControl,TextareaControl,ToggleControl}=wp.components;
 
 	const {param,value,onChange}=props;
 	const type=param.type || param.input || 'text';

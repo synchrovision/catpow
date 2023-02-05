@@ -3,7 +3,7 @@
 CP.SelectClassPanel=(props)=>{
 	const {Fragment,useMemo,useCallback,useRef}=wp.element;
 	const {__}=wp.i18n;
-	const {PanelBody,CheckboxControl,SelectControl,TextareaControl,TextControl,ColorPicker,__experimentalGradientPicker:GradientPicker}=wp.components;
+	const {PanelBody,CheckboxControl,RadioControl,SelectControl,TextareaControl,TextControl,ColorPicker,__experimentalGradientPicker:GradientPicker}=wp.components;
 	const {classKey='classes',items,index,subItemsKey,subIndex,set,attr,triggerClasses}=wp.hooks.applyFilters('catpow.SelectClassPanelProps',props);
 	let {itemsKey=items?'items':null,itemClasses}=props;
 	const selectiveClasses=useMemo(()=>{

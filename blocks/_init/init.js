@@ -2049,7 +2049,7 @@
   // blocks/_init/init/DynamicInput.jsx
   CP.DynamicInput = (props) => {
     const { useMemo } = wp.element;
-    const { TextControl, TextareaControl, SelectControl, ToggleControl, RangeControl } = wp.components;
+    const { RadioControl, RangeControl, SelectControl, TextControl, TextareaControl, ToggleControl } = wp.components;
     const { param, value, onChange } = props;
     const type = param.type || param.input || "text";
     const { options } = useMemo(() => {
@@ -2230,7 +2230,7 @@
   CP.SelectClassPanel = (props) => {
     const { Fragment, useMemo, useCallback, useRef } = wp.element;
     const { __: __2 } = wp.i18n;
-    const { PanelBody, CheckboxControl, SelectControl, TextareaControl, TextControl, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
+    const { PanelBody, CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
     const { classKey = "classes", items, index, subItemsKey, subIndex: subIndex2, set, attr, triggerClasses } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
     let { itemsKey = items ? "items" : null, itemClasses } = props;
     const selectiveClasses = useMemo(() => {
