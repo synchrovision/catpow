@@ -6,12 +6,16 @@ $dir=ABSPATH.'/wp-content/uploads/';
 $path=$_GET['path'];
 
 $file=$dir.'/'.$path;
-if(!is_allowd_file($file)){
-	header('HTTP/1.0 403 Forbidden');
-	die();
-}
 $mime=mime_content_type($file);
 $type=strstr($mime,'/',true);
+if(!is_allowd_file($file)){
+	switch($type){
+		case 'video':$alt_file_name='403.mp4';break;
+		case 'audio':$alt_file_name='403.mp3';break;
+		default:$alt_file_name='403.jpg';break;
+	}
+	$file=file_exists($dir.$alt_file_name)?$dir.$alt_file_name:dirname(__DIR__).'/default/images/'.$alt_file_name;
+}
 /*output*/
 header('Content-type: '.$mime);
 switch($type){
