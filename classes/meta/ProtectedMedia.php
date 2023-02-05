@@ -26,7 +26,8 @@ class ProtectedMedia extends UI{
 	public static function fill_param($param,$meta){
 		$param=parent::fill_param($param,$meta);
 		if(!is_array($param['value'])){$param['value']=[];}
-		if(!empty($id=$param['value']['id'])){
+		if(isset($param['value']['id'])){
+			$id=$param['value']['id'];
 			$param['value']['url']=wp_get_attachment_url($id);
 			$param['value']['mime']=get_post_mime_type($id);
 		}
