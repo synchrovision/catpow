@@ -148,6 +148,8 @@ class blocks{
 				'style'=>'css',
 				'front_script'=>'js',
 				'front_style'=>'css',
+				'view_script'=>'js',
+				'view_style'=>'css',
 				'editor_init'=>'js',
 				'component'=>'js',
 				'render'=>'php',
@@ -176,17 +178,31 @@ class blocks{
 							}
 						}
 						else{
-							if(in_array($fname,['style','script','editor_style','editor_script'])){
-								$param[$fname]=$handle;
-							}
-							else{
-								$parent_handle=sprintf(
-									'blocks/%s/%s%s',
-									$block_name,
-									(substr($fname,0,7)==='editor')?'editor_':'',
-									['js'=>'script.js','css'=>'style.css'][$ext]
-								);
-								$data[$ext][$parent_handle][2][]=$handle;
+							switch($fname){
+								case 'style':
+								case 'script':
+								case 'view_style':
+								case 'view_script':
+								case 'editor_style':
+								case 'editor_script':
+									$param[$fname.'_handles'][]=$handle;
+									break;
+								case 'front_style':
+									$param['view_style_handles'][]=$handle;
+									break;
+								case 'front_script':
+									$param['view_script_handles'][]=$handle;
+									break;
+								default:
+									$parent_handle=sprintf(
+										'blocks/%s/%s%s',
+										$block_name,
+										(substr($fname,0,7)==='editor')?'editor_':'',
+										['js'=>'script.js','css'=>'style.css'][$ext]
+									);
+									if(isset($data[$ext][$parent_handle])){
+										$data[$ext][$parent_handle][2][]=$handle;
+									}
 							}
 						}
 						break;
