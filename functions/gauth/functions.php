@@ -4,16 +4,18 @@ use Catpow\gauth\cpgc;
 global $wpdb;
 $wpdb->gcal=$wpdb->prefix.'gcal';
 
-
-add_action('login_form',function(){
-	?>
-	<p>
-		<a class="button sns_login google" href="<?=cpgc::get_login_url()?>">
-			<?php \Catpow\image('sns/google.svg','Google'); ?>
-			<?=__('Googleでログイン','Catpow')?>
-		</a>
-	</p>
-	<?php
+add_action('login_init',function(){
+	$login_url=cpgc::get_login_url();
+	add_action('login_form',function()use($login_url){
+		?>
+		<p>
+			<a class="button sns_login google" href="<?=$login_url?>">
+				<?php \Catpow\image('sns/google.svg','Google'); ?>
+				<?=__('Googleでログイン','Catpow')?>
+			</a>
+		</p>
+		<?php
+	});
 });
 
 
