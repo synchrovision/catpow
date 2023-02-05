@@ -5,7 +5,7 @@ session_start();
 $dir=ABSPATH.'/wp-content/uploads/';
 $path=$_GET['path'];
 
-$file=$dir.'/'.$path;
+$file=$dir.$path;
 $mime=mime_content_type($file);
 $type=strstr($mime,'/',true);
 if(!is_allowd_file($file)){
