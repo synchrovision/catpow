@@ -171,6 +171,17 @@ class scss{
 				if(empty($font)){return Compiler::$false;}
 				return [TYPE::T_KEYWORD,$font];
 			});
+			$scssc->registerFunction('translate_size',function($args){
+				$args=array_map([static::$scssc,'compileValue'],$args);
+				$size=false;
+				$sizes=util\style_config::get_config_json('sizes');
+				if(isset($sizes[$args[0]])){
+					$size=sprintf('var(--cp-sizes-%s)',$args[0]);
+				}
+				$size=apply_filters('cp_translate_size',$size,$args);
+				if(empty($size)){return Compiler::$false;}
+				return [TYPE::T_KEYWORD,$size];
+			});
 		}
 		do_action('cp_scss_compiler_init',$scssc);
 		return static::$scssc=$scssc;
