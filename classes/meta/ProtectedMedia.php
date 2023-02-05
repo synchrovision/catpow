@@ -7,6 +7,7 @@ class ProtectedMedia extends UI{
 	
 	public static function get($data_type,$data_name,$id,$meta_name,$conf){
 		$ids=parent::get($data_type,$data_name,$id,$meta_name,$conf);
+		if(empty($ids)){return [];}
 		$vals=[];
 		foreach($ids as $id){
 			$vals[]=['id'=>$id,'cond'=>media_protect::get_cond($id)];
@@ -25,11 +26,9 @@ class ProtectedMedia extends UI{
 	public static function fill_param($param,$meta){
 		$param=parent::fill_param($param,$meta);
 		if(!is_array($param['value'])){$param['value']=[];}
-		foreach($param['value'] as $i=>$val){
-			if(empty($val['id'])){continue;}
-			$id=$val['id'];
-			$param['value'][$i]['url']=wp_get_attachment_url($id);
-			$param['value'][$i]['mime']=get_post_mime_type($id);
+		if(!empty($id=$param['value']['id'])){
+			$param['value']['url']=wp_get_attachment_url($id);
+			$param['value']['mime']=get_post_mime_type($id);
 		}
 		
 		$param['default']=[
@@ -39,6 +38,7 @@ class ProtectedMedia extends UI{
 		return $param;
 	}
 	public static function output($meta,$prm){
+		if(empty($meta->value['id'])){return '';}
 		if(self::should_allow($meta,$prm)){media_protect::allow($meta->value['id']);}
 		$val=$meta->value['id'];
 		if($prm=='url'){return wp_get_attachment_url($val);}
@@ -70,6 +70,7 @@ class ProtectedMedia extends UI{
 		return parent::input($meta,$prm);
 	}
 	public static function should_allow($meta,$prm){
+		if(empty($meta->value['id'])){return false;}
 		if(is_user_logged_in() && get_post($meta->value['id'])->post_author == get_current_user_id()){return true;}
 		if(current_user_can($meta->conf['capability']??'administrator')){return true;}
 		return false;
