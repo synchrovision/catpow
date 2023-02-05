@@ -3,13 +3,14 @@ namespace Catpow\gauth;
 
 class cpgc{
 	public static $gc;
-	const TOKEN_NAME = 'gapi_token';
+	const TOKEN_NAME='gapi_token',USER_NAME_KEY='gapi_user_name';
 	
 	public static function authenticate($code){
 		$token=self::get_gc()->authenticate($code);
 		unset($_SESSION[self::TOKEN_NAME]);
 		if($token['error']){return false;}
 		$_SESSION[self::TOKEN_NAME]=$token;
+		if(is_user_logged_in()){update_user_meta(get_current_user_id(),self::TOKEN_NAME,$token);}
 		return true;
 	}
 	
@@ -19,9 +20,7 @@ class cpgc{
 		}
 		else{
 			try{
-				include(dirname(dirname(__DIR__)).'/vendor/autoload.php');
-				
-				$conf=get_option('gauth_conf')[0]??null;
+				$conf=get_option('gauth_conf')??null;
 				
 				if(empty($conf)){return false;}
 
@@ -62,6 +61,39 @@ class cpgc{
 	}
 	public static function get_login_callback_url(){
 		return home_url('callback/gauth/login');
+	}
+	public static function login(){
+		if(!empty(self::get_gc()->getAccessToken()['error'])){
+			return false;
+		}
+		$user_data=self::req('GET','oauth2/v1/userinfo');
+
+		$gid=$user_data['id'];
+		$q=new WP_User_Query(['meta_query'=>[
+			['key'=>'_google_id','value'=>$gid]
+		]]);
+		if($q->get_total()==0){
+			if(is_user_looged_in()){
+				$uid=get_current_user_id();
+			}
+			else{
+				$uid=wp_insert_user([
+					'user_pass'=>wp_generate_password(),
+					'user_login'=>$user_data['name'],
+					'user_email'=>$user_data['email'],
+					'first_name'=>$user_data['given_name'],
+					'last_name'=>$user_data['family_name']
+				]);
+				wp_set_auth_cookie($uid);
+			}
+			add_user_meta($uid,'_google_id',$gid,true);
+		}
+		else{
+			$users=$q->get_results();
+			$uid=reset($users)->ID;
+			wp_set_auth_cookie($uid);
+		}
+		return $uid;
 	}
 	
 	public static function req($method,$uri,$options=[]){
