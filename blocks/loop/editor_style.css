@@ -6,11 +6,11 @@
 }
 .loopContents.editMode {
   padding: 0.625rem;
-  background-color: #ececec;
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),1);
 }
 .loopContents.editMode > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block {
   padding-bottom: 0.3125rem;
-  background-color: #f8f8f8;
-  box-shadow: 0 4px 9px rgba(0, 0, 0, 0.3);
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  box-shadow: 0 4px 9px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
 /*# sourceMappingURL=./editor_style.css.map */

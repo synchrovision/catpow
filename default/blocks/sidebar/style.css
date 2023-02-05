@@ -21,7 +21,7 @@ div.wp-block-catpow-sidebar div.wp-block-catpow-sidecolumn {
   box-sizing: border-box;
   border-right-style: solid;
   border-right-width: 0.0625rem;
-  border-right-color: #c7c7c7;
+  border-right-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 30),1);
 }
 div.wp-block-catpow-sidebar.left {
   display: -webkit-box;

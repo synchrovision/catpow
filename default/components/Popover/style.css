@@ -36,8 +36,8 @@
   position: absolute;
   margin: auto;
   border-radius: 0.625rem;
-  background-color: #f8f8f8;
-  box-shadow: 0 10px 21px rgba(0, 0, 0, 0.3);
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  box-shadow: 0 10px 21px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
   pointer-events: auto;
 }
 .PopoverBody .PopoverContents {
@@ -60,7 +60,7 @@
   top: 0.9375rem;
   width: 1.875rem;
   height: 0.0625rem;
-  background-color: #f8f8f8;
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
 }
 .PopoverBody .PopoverControl .close::before {
   transform: -webkit- rotateZ(45deg);
@@ -87,7 +87,7 @@
   top: 100%;
   left: 0rem;
   right: 0rem;
-  border-top-color: #f8f8f8;
+  border-top-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
 }
 .Popover.bottom .PopoverBody {
   top: 100%;
@@ -106,7 +106,7 @@
   bottom: 100%;
   left: 0rem;
   right: 0rem;
-  border-bottom-color: #f8f8f8;
+  border-bottom-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
 }
 .Popover.left .PopoverBody {
   right: 0rem;

@@ -7,7 +7,7 @@
   -webkit-box-lines: multiple;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
 .ColorSet .panes > * {
   flex-grow: 1;
@@ -79,10 +79,10 @@
 }
 .ColorSet-ModeSelect__item {
   font-size: 1.5rem;
-  color: rgba(68, 68, 68, 0.5);
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.5);
 }
 .ColorSet-ModeSelect__item.active {
-  color: #007cba;
+  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 .ColorSet-ColorPicker {
   display: -webkit-box;
@@ -120,9 +120,9 @@
   top: 100%;
   left: 0rem;
   z-index: 100;
-  background-color: #f8f8f8;
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
   border-radius: 0.625rem;
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
 .ColorSet-ColorPicker__item > .PopoverAnchor {
   display: block;
@@ -178,7 +178,7 @@
   cursor: pointer;
 }
 .ColorSet-BulkInput__clipboard:hover {
-  color: #007cba;
+  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
   opacity: 1;
 }
 .ColorSet-BulkInput__clipboard:active {

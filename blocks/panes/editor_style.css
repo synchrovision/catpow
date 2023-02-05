@@ -12,8 +12,8 @@ ul.wp-block-catpow-panes li.item > .link {
   position: absolute;
   right: 0rem;
   bottom: 0rem;
-  background-color: rgba(248, 248, 248, 0.8);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),calc(100% - var(--cp-tones-b-t) * 100),0.8);
+  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
 ul.wp-block-catpow-panes li.item > .link p {
   margin: 0rem;
