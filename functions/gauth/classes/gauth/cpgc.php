@@ -81,6 +81,7 @@ class cpgc{
 					$uid=$user->ID;
 				}
 				else{
+					if(get_option('users_can_register')!==1){return false;}
 					$uid=wp_insert_user([
 						'user_pass'=>wp_generate_password(),
 						'user_login'=>$user_data['name'],
