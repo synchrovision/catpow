@@ -1,22 +1,23 @@
 @import 'admin_style_config.scss';
 
 .SelectColor{
-	ul{
+	@include bnd((w:300));
+	&-items{
+		@include bnd((w:300,mg:4 0));
+		@include flx((w:n));
 		@include txt((l:n));
-		li{
-			@include bnd((d:ib,p:r,w:20,h:20,mg:5));
-			@include bdr((r:20));
+		&-icon{
+			@include txt((c:t 1 .2));
+			&.active{
+				@include txt((c:at));
+			}
+		}
+		&-item{
+			@include bnd((f:1 1 10,h:20));
 			@include usr((c:p));
-			&.fillColor0{
-				@include bg((c:t 10));
-			}
-			&::after{
-				content: ' ';
-				@include bnd((d:b,p:a,t:1,b:1,l:1,r:1));
-				@include bdr((r:20));
-				@include bg((c:b));
-			}
-			&.active::after{@include bnd((d:n));}
+			@include bg((c:m));
+			@include bdr((p:t,s:s,w:10,c:a));
+			&:not(.active){@include trn((o:.2));}
 		}
 	}
 }
