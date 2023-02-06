@@ -3,12 +3,12 @@
 Plugin Name: Catpow
 Description: サイト固有の機能を実装したオリジナルデザインのテーマを開発するためのプラグインです。
 Author: synchro_vision
-Version: 0.3.23-alpha
+Version: 0.4.0-alpha
 Author URI: https://catpow.info
 Text Domain: catpow
 Domain Path: /languages
 GitHub Repository: synchrovision/catpow
-Requires at least: 5.9
+Requires at least: 6.1
 Requires PHP: 7.4
 */
 include __DIR__.'/vendor/autoload.php';
