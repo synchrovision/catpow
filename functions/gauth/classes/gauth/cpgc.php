@@ -69,11 +69,11 @@ class cpgc{
 		$user_data=self::req('GET','oauth2/v1/userinfo');
 
 		$gid=$user_data['id'];
-		$q=new WP_User_Query(['meta_query'=>[
+		$q=new \WP_User_Query(['meta_query'=>[
 			['key'=>'_google_id','value'=>$gid]
 		]]);
 		if($q->get_total()==0){
-			if(is_user_looged_in()){
+			if(is_user_logged_in()){
 				$uid=get_current_user_id();
 			}
 			else{
