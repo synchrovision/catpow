@@ -5,7 +5,9 @@
 namespace Catpow\util;
 class rewrite{
 	public static function get_rules(){
-		$rules=[];
+		$rules=[
+			'callback/(.+)/?$'=>'index.php?cp_callee=$matches[1]'
+		];
 		foreach(\cp::$data_types as $data_type){
 			$datas=$GLOBALS[\cp::get_conf_data_name($data_type)];
 			if(empty($datas)){continue;}
