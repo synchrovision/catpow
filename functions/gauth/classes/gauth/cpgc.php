@@ -3,7 +3,7 @@ namespace Catpow\gauth;
 
 class cpgc{
 	public static $gc;
-	const TOKEN_NAME='gapi_token',USER_NAME_KEY='gapi_user_name';
+	const TOKEN_NAME='gapi_token',USER_NAME_KEY='gapi_user_name',ID_KEY='_google_id';
 	
 	public static function authenticate($code){
 		$token=self::get_gc()->authenticate($code);
@@ -70,7 +70,7 @@ class cpgc{
 
 		$gid=$user_data['id'];
 		$q=new \WP_User_Query(['meta_query'=>[
-			['key'=>'_google_id','value'=>$gid]
+			['key'=>self::ID_KEY,'value'=>$gid]
 		]]);
 		if($q->get_total()==0){
 			if(is_user_logged_in()){
@@ -91,7 +91,7 @@ class cpgc{
 				}
 				wp_set_auth_cookie($uid);
 			}
-			add_user_meta($uid,'_google_id',$gid,true);
+			add_user_meta($uid,self::ID_KEY,$gid,true);
 		}
 		else{
 			$users=$q->get_results();
