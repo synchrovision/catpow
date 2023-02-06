@@ -5,6 +5,8 @@ class blocks{
 	public static $deps=[
 		'editor_script'=>['wp-blocks','wp-i18n','wp-element','wp-editor','wp-plugins','wp-edit-post','catpow','wpinfo'],
 		'editor_style'=>['wp-edit-blocks'],
+		'view_script'=>[],
+		'view_style'=>[],
 		'front_script'=>[],
 		'front_style'=>[],
 		'component'=>['wp-element','wp-api-fetch'],
@@ -210,7 +212,11 @@ class blocks{
 						if($fname==='deps'){
 							foreach(cp::get_file_paths('blocks/'.$file_name) as $file_path){
 								$deps=include $file_path;
-								foreach (['editor_script'=>'js','editor_style'=>'css','script'=>'js','style'=>'css'] as $handler=>$type){
+								foreach ([
+									'editor_script'=>'js','editor_style'=>'css',
+									'view_script'=>'js','view_style'=>'css',
+									'script'=>'js','style'=>'css'
+								] as $handler=>$type){
 									if(!empty($deps[$handler])){
 										$data[$type]["blocks/{$block_name}/{$handler}.{$type}"][2]=array_merge(
 											$data[$type]["blocks/{$block_name}/{$handler}.{$type}"][2]??[],$deps[$handler]
