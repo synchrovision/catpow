@@ -22,7 +22,7 @@ class cpgc{
 			try{
 				$conf=get_option('gauth_conf')??null;
 				
-				if(empty($conf)){return false;}
+				if(empty($conf) || empty($conf['application_name']) || empty($conf['client_id']) || empty($conf['client_secret'])){return false;}
 
 				self::$gc=new \Google_Client([
 					'application_name'=>$conf['application_name'][0],
