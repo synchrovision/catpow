@@ -119,7 +119,7 @@
 });
 
 
-registerBlockType('catpow/loopcontent',{
+wp.blocks.registerBlockType('catpow/loopcontent',{
 	title:'🐾 LoopContent',
 	icon:'editor-code',
 	category:'catpow',

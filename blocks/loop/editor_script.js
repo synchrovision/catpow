@@ -96,7 +96,7 @@
       }
     }]
   });
-  registerBlockType("catpow/loopcontent", {
+  wp.blocks.registerBlockType("catpow/loopcontent", {
     title: "\u{1F43E} LoopContent",
     icon: "editor-code",
     category: "catpow",
