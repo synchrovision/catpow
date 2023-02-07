@@ -13,7 +13,7 @@ class gmap extends data{
 			return 'google.com/maps/search/?api=1&query='.($val[0]['address'][0]??'');
 		}
 		
-		wp_enqueue_script('cp_gmap');
+		wp_enqueue_script('jquery.catpow.gmap');
 		
 		if(empty($token)){
 			$gauth_conf=get_option('gauth_conf');
