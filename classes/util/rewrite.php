@@ -20,6 +20,7 @@ class rewrite{
 							$tmp_slug=$tmp_data[1]??null;
 
 							$class_name=\cp::get_class_name('template_type',$tmp_name);
+							if(!class_exists($class_name)){continue;}
 							foreach($class_name::get_rewrite_rule($data[$pref.'path']) as $rewrite_rule){
 								if(isset($tmp_slug)){
 									$rewrite_rule['reg'].="/{$tmp_slug}";
