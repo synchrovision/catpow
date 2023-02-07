@@ -37,7 +37,7 @@
 }
 .Calendar > table caption .year .btn::before {
   font-family: dashicons;
-  color: #c7c7c7;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 30),1);
 }
 .Calendar > table caption .year .prev::before {
   content: "";
@@ -66,7 +66,7 @@
   content: "月";
 }
 .Calendar > table caption .month .btn::before {
-  color: #c7c7c7;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 30),1);
 }
 .Calendar > table caption .month .prev {
   position: absolute;
@@ -94,20 +94,20 @@
   padding: 0.25em;
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: #dadada;
+  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 20),1);
   text-align: center;
 }
 .Calendar > table .day.active {
-  background-color: rgba(0, 124, 186, 0.2);
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 100),0.2);
 }
 .Calendar > table .day.sunday {
-  color: #d65c5c;
+  color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -5 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 .Calendar > table .day.saturday {
-  color: #5c99d6;
+  color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 2 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 .Calendar > table .day.outMonth, .Calendar > table .day.disabled {
-  color: #ececec;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),1);
 }
 .Calendar.small {
   font-size: 0.625rem;
