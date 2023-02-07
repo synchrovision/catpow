@@ -35,7 +35,7 @@
 				<div className="embedded_content">
 					<div className="label">{content_path}</div>
 					<ServerSideRender block='catpow/form' attributes={attributes}/>
-				</div>,
+				</div>
 				<InspectorControls>
 					<PanelBody title="フォーム">
 						<TreeSelect
