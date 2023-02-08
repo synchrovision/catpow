@@ -8,6 +8,7 @@ add_action('wp_dashboard_setup',function(){
 				$dir=dirname($contents_file);
 				$id=basename($dir);
 				if(file_exists($conf_file=$dir.'/conf.php')){include $conf_file;}
+				if(!current_user_can($conf['capability']??'edit_themes')){return;}
 				\cp::enqueue_style("dashboard/widgets/{$id}/style.css");
 				\cp::enqueue_script("dashboard/widgets/{$id}/script.js");
 				if(file_exists($form_file=$dir.'/form.php')){
@@ -22,8 +23,8 @@ add_action('wp_dashboard_setup',function(){
 					},
 					$control_callback??null,
 					$conf['callback_args']??null,
-					$conf['context']??'normal'
-					,$conf['priority']??'core'
+					$conf['context']??'normal',
+					$conf['priority']??'core'
 				);
 			});
 		}
