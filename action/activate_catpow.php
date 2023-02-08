@@ -29,12 +29,6 @@ if(basename($dir)!=='catpow'){
 		}
 	},10,2);
 }
-if(is_multisite()){
-	$json=WP_CONTENT_DIR.'/config/sites.json';
-	if(!is_dir(dirname($json))){mkdir(dirname($json,0755,true));}
-	$sites=[];
-	foreach(get_sites() as $site){
-		$sites[$site->domain.$site->path]=$site->id;
-	}
-	file_put_contents($json,json_encode($sites,0700));
-}
+add_action('activated_plugin',function(){
+	Catpow\util\site_config::update();
+});
