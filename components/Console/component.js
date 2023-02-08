@@ -72,6 +72,6 @@
       }
       return Object.keys(flags).filter((word) => flags[word]).join(" ");
     }, []);
-    return /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("div", { className: className + "-controls" }, props.controls.map((itemProps) => el(ControlItem, { ...itemProps, state, dispatch }))), /* @__PURE__ */ wp.element.createElement("div", { className: className + "-results" }, state.results.map((itemProps) => el(ResultItem, itemProps))));
+    return /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("div", { className: className + "-controls" }, props.controls.map((itemProps, key) => el(ControlItem, { ...itemProps, state, dispatch, key }))), /* @__PURE__ */ wp.element.createElement("div", { className: className + "-results" }, state.results.map((itemProps, key) => el(ResultItem, { ...itemProps, key }))));
   };
 })();

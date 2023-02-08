@@ -1,5 +1,5 @@
 (() => {
-  // ../components/CheckBoxes/component.jsx
+  // components/CheckBoxes/component.jsx
   Catpow.CheckBoxes = (props) => {
     const { useMemo } = wp.element;
     const { value = [], onChange } = props;
@@ -20,7 +20,7 @@
     if (Array.isArray(value)) {
       const flags = {};
       value.map((val) => flags[val] = true);
-      return /* @__PURE__ */ React.createElement("div", { className: "CheckBoxes" }, options.map((option) => /* @__PURE__ */ React.createElement(
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "CheckBoxes" }, options.map((option) => /* @__PURE__ */ wp.element.createElement(
         CheckBox,
         {
           label: option.label,
@@ -32,11 +32,12 @@
             }
             onChange(Object.keys(flags));
           },
-          selected: flags[option.value]
+          selected: flags[option.value],
+          key: option.label
         }
       )));
     }
-    return /* @__PURE__ */ React.createElement("div", { className: "CheckBoxes" }, options.map((option) => /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "CheckBoxes" }, options.map((option) => /* @__PURE__ */ wp.element.createElement(
       CheckBox,
       {
         label: option.label,
@@ -44,7 +45,8 @@
           value[option.value] = selected;
           onChange(option.value, selected, value);
         },
-        selected: value[option.value]
+        selected: value[option.value],
+        key: option.label
       }
     )));
   };

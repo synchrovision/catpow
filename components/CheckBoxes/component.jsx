@@ -28,6 +28,7 @@
 							onChange(Object.keys(flags));
 						}}
 						selected={flags[option.value]}
+						key={option.label}
 					/>
 				))}
 			</div>
@@ -44,6 +45,7 @@
 						onChange(option.value,selected,value)
 					}}
 					selected={value[option.value]}
+					key={option.label}
 				/>
 			))}
 		</div>

@@ -80,10 +80,10 @@ Catpow.Console=(props)=>{
 	return (
 		<div className={className}>
 			<div className={className+'-controls'}>
-				{props.controls.map((itemProps)=>el(ControlItem,{...itemProps,state,dispatch}))}
+				{props.controls.map((itemProps,key)=>el(ControlItem,{...itemProps,state,dispatch,key}))}
 			</div>
 			<div className={className+'-results'}>
-				{state.results.map((itemProps)=>el(ResultItem,itemProps))}
+				{state.results.map((itemProps,key)=>el(ResultItem,{...itemProps,key}))}
 			</div>
 		</div>
 	);
