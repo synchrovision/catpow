@@ -303,6 +303,9 @@ add_filter('rewrite_rules_array',function($rules){
 	return array_merge(Catpow\util\rewrite::get_rules(),$rules);
 });
 add_filter('flush_rewrite_rules_hard',function($do_hard){
-	if($do_hard){Catpow\util\htaccess::update();}
+	if($do_hard){
+		Catpow\util\htaccess::update();
+		Catpow\util\site_config::update();
+	}
 	return $do_hard;
 });
