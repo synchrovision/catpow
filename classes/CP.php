@@ -1252,11 +1252,11 @@ class CP{
 	public static function get_item_attr($data_path,$conf){
 		$path_data=self::parse_data_path($data_path);
 		$attr=sprintf(
-			' id="%1$s" class="cp-meta-item %2$s cp-meta-item-%3$s %4$s" data-meta_name="%3$s" data-role="cp-meta-item" data-meta_type="%2$s"',
+			' id="%1$s" class="cp-meta-item is-type-%2$s is-input-%3$s %4$s" data-meta-name="%3$s" data-role="cp-meta-item" data-meta-type="%2$s"',
 			self::get_input_id($data_path),
 			$conf['type']??'text',
 			empty($path_data['meta_path'])?'':end($path_data['meta_path'])['meta_name'],
-			empty($conf['multiple'])?'single-item':'multiple-item'
+			empty($conf['multiple'])?'is-single':'is-multiple'
 		);
 		if(isset($conf['watch'])){
 			$f=self::get_input_name(dirname(self::create_data_path($path_data)).'/%s');
@@ -1269,7 +1269,7 @@ class CP{
 	public static function get_unit_attr($data_path,$conf){
 		$path_data=self::parse_data_path($data_path);
 		return sprintf(
-			' id="%s" class="cp-meta-unit" data-role="cp-meta-unit"',
+			' id="%s" class="cp-meta-item-unit" data-role="cp-meta-item-unit"',
 			self::get_input_id($data_path)
 		);
 	}
