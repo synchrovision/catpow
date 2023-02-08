@@ -19,15 +19,15 @@ elseif(!empty($_GET['c'])){
 		$num=$matches[3]??null;
 		$config_dir=dirname(__DIR__,3)."/config";
 		if(file_exists($sites=$config_dir.'/sites.json') && $sites=json_decode(file_get_contents($sites),true)){
-			$site=$sites[$_SERVER['HTTP_HOST'].strstr($_SERVER['REQUEST_URI'],'/wp-content/',true).'/']??null;
+			$site_config=$sites[$_SERVER['HTTP_HOST'].strstr($_SERVER['REQUEST_URI'],'/wp-content/',true).'/']??null;
+			$site=$site_config['id']??null;
+			$theme=$site_config['theme']??null;
 		}
-		if(empty($_GET['theme'])){
-			if(preg_match('@/wp-content/themes/(?P<theme>[\w\-]+)/@',$file,$matches)){
-				$theme=$matches['theme'];
-			}
-		}
-		elseif(preg_match('/^[\w\-]+$/',$_GET['theme'])){
+		if(!empty($_GET['theme']) && preg_match('/^[\w\-]+$/',$_GET['theme'])){
 			$theme=$_GET['theme'];
+		}
+		if(empty($theme) && preg_match('@/wp-content/themes/(?P<theme>[\w\-]+)/@',$file,$matches)){
+			$theme=$matches['theme'];
 		}
 		if(!empty($theme)){
 			$json=$config_dir.($site?"/{$site}/":'/').$theme.'/tones.json';
