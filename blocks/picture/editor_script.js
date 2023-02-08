@@ -11,14 +11,6 @@
     description: "\u753B\u9762\u30B5\u30A4\u30BA\u306B\u5FDC\u3058\u3066\u5207\u308A\u66FF\u308F\u308B\u753B\u50CF\u3002",
     icon: "id-alt",
     category: "catpow",
-    attributes: {
-      classes: { source: "attribute", selector: "div", attribute: "class", default: "wp-block-catpow-picture" },
-      sources: CP.getPictureSoucesAttributesForDevices(CP.config.picture.devices),
-      mime: { source: "attribute", selector: "[src]", attribute: "data-mime" },
-      src: { source: "attribute", selector: "[src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy.jpg" },
-      alt: { source: "attribute", selector: "[src]", attribute: "alt" },
-      code: { source: "text" }
-    },
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { InspectorControls } = wp.blockEditor;

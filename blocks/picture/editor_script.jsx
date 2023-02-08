@@ -10,16 +10,6 @@ wp.blocks.registerBlockType('catpow/picture',{
 	description:'画面サイズに応じて切り替わる画像。',
 	icon: 'id-alt',
 	category: 'catpow',
-	attributes:{
-		classes:{source:'attribute',selector:'div',attribute:'class',default:'wp-block-catpow-picture'},
-
-		sources:CP.getPictureSoucesAttributesForDevices(CP.config.picture.devices),
-
-		mime:{source:'attribute',selector:'[src]',attribute:'data-mime'},
-		src:{source:'attribute',selector:'[src]',attribute:'src',default:wpinfo.theme_url+'/images/dummy.jpg'},
-		alt:{source:'attribute',selector:'[src]',attribute:'alt'},
-		code:{source:'text'},
-	},
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {InspectorControls}=wp.blockEditor;
