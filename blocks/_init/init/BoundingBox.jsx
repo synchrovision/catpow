@@ -1,7 +1,7 @@
 ﻿import {CP} from './CP.jsx';
 
 CP.BoundingBox=(props)=>{
-	const {target,onDeselect,onDuplicate,onDelete,onChange}=props;
+	const {targets,onDeselect,onDuplicate,onDelete,onChange}=props;
 	const {useState,useCallback,useMemo,useEffect,useRef}=wp.element;
 	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem('CP-BoundingBox'),[]);
@@ -10,8 +10,30 @@ CP.BoundingBox=(props)=>{
 	const [action,setAction]=useState(false);
 	const container=useMemo(()=>props.container || document,[props.container]);
 	
-	const tracePosition=useCallback((target)=>{
-		setStyle(extractPosition(target));
+	const tracePosition=useCallback((targets)=>{
+		if(targets.length===1){
+			setStyle(extractPosition(targets[0]));
+			return;
+		}
+		const bnd=targets.reduce((bnd,target)=>{
+			const crrBnd=getBoundingArray(extractPosition(target));
+			crrBnd[2]+=crrBnd[0];
+			crrBnd[3]+=crrBnd[1];
+			if(bnd===false){return crrBnd;}
+			return [
+				Math.min(bnd[0],crrBnd[0]),
+				Math.min(bnd[1],crrBnd[1]),
+				Math.max(bnd[2],crrBnd[2]),
+				Math.max(bnd[3],crrBnd[3]),
+			];
+		},false);
+		setStyle({
+			position:window.getComputedStyle(targets[0]).position,
+			left:bnd[0]+'px',
+			top:bnd[1]+'px',
+			width:(bnd[2]-bnd[0])+'px',
+			height:(bnd[3]-bnd[1])+'px',
+		});
 	},[]);
 	const extractPosition=useCallback((target)=>{
 		if(!target){return {};}
@@ -27,36 +49,39 @@ CP.BoundingBox=(props)=>{
 	
 	const observer=useMemo(()=>{
 		return new MutationObserver(mutations=>{
-			mutations.forEach(mutation=>{
-				if(mutation.attributeName==="style") {
-					tracePosition(mutation.target);
-				}
-			});
+			tracePosition(targets);
 		});
-	},[tracePosition]);
+	},[tracePosition,targets]);
+	
 	useEffect(()=>{
-		if(!target){return false;}
-		tracePosition(target);
-		observer.observe(target,{attributes:true,attributeFilter:['style']});
+		if(!targets.length){return false;}
+		tracePosition(targets);
+		targets.forEach((target)=>{
+			observer.observe(target,{attributes:true,attributeFilter:['style']});
+		});
 		return ()=>observer.disconnect();
-	},[target,observer]);
+	},[targets,observer]);
 	useEffect(()=>{
-		if(!target){return false;}
-		tracePosition(target);
-		const cb=()=>tracePosition(target);
+		if(!targets.length){return false;}
+		tracePosition(targets);
+		const cb=()=>tracePosition(targets);
 		window.addEventListener('resize',cb);
 		return ()=>window.removeEventListener('resize',cb);
-	},[target,props.viewMode]);
+	},[targets,props.viewMode]);
 	useEffect(()=>{
 		if(!onDeselect){return;}
 		const cb=(e)=>{
-			if(!target.contains(e.target) && !ref.current.contains(e.target)){
-				onDeselect();
+			if(ref.current && !e.shiftKey){
+				const bnd=ref.current.getBoundingClientRect();
+				const {clientX:x,clientY:y}=e;
+				if(x<bnd.left || x>bnd.right || y<bnd.top || y>bnd.bottom){
+					onDeselect();
+				}
 			}
 		}
 		container.addEventListener('click',cb);
 		return ()=>container.removeEventListener('click',cb);
-	},[container,onDeselect]);
+	},[targets,container,onDeselect]);
 	useEffect(()=>{
 		if(!onDelete){return;}
 		const cb=(e)=>{
@@ -64,12 +89,12 @@ CP.BoundingBox=(props)=>{
 				return;
 			}
 			if(e.key === 'Backspace'){
-				onDelete(target);
+				onDelete(targets);
 			}
 		}
-		document.addEventListener('keyup',cb);
-		return ()=>document.removeEventListener('keyup',cb);
-	},[target,onDelete]);
+		document.addEventListener('keydown',cb);
+		return ()=>document.removeEventListener('keydown',cb);
+	},[targets,onDelete]);
 	
 	const controls=useMemo(()=>{
 		const controls=[];
@@ -91,86 +116,127 @@ CP.BoundingBox=(props)=>{
 		const control=e.target.closest('[data-control-action]');
 		if(!control){return setAction(false);}
 		if(onDuplicate && e.altKey && control.dataset.controlAction==='move'){
-			onDuplicate(target);
+			onDuplicate(targets);
 		}
-		target.style.animation='none';
-		target.style.transition='none';
+		targets.forEach(target=>{
+			target.style.animation='none';
+			target.style.transition='none';
+		});
+		const orgBnd=getBoundingArray(window.getComputedStyle(ref.current));
+		const orgBnds=targets.map(target=>getBoundingArray(window.getComputedStyle(target)));
+		const [ol,ot,ow,oh]=orgBnd;
 		setAction({
 			action:control.dataset.controlAction,
 			flags:parseInt(control.dataset.controlFlags),
 			org:{x:e.clientX,y:e.clientY},
-			orgPos:getBoundingArray(window.getComputedStyle(target)),
+			orgBnd,
+			orgBnds,
+			coefs:orgBnds.map(bnd=>{
+				const [l,t,w,h]=bnd;
+				return [(l-ol)/ow,(t-ot)/oh,w/ow,h/oh];
+			}),
+			orgAspect:oh/ow,
 			keepAspect:e.shiftKey,
-			target
+			keepCenter:e.altKey,
+			targets
 		});
-	},[target,onDuplicate]);
+	},[ref,targets,onDuplicate]);
 	const onMouseMove=useCallback((e)=>{
 		if(!action){return;}
 		const dx=e.clientX-action.org.x;
 		const dy=e.clientY-action.org.y;
 		if(action.action==='move'){
-			action.target.style.left=action.orgPos[0]+dx+'px';
-			action.target.style.top=action.orgPos[1]+dy+'px';
+			targets.forEach((target,index)=>{
+				target.style.left=action.orgBnds[index][0]+dx+'px';
+				target.style.top=action.orgBnds[index][1]+dy+'px';
+			});
 		}
 		else if(action.action==='resize'){
+			let [ol,ot,ow,oh]=action.orgBnd;
+			let [l,t,w,h]=action.orgBnd;
 			if(!(action.flags&4)){
-				let w=action.orgPos[2];
 				if(action.flags&8){
 					w+=dx;
 				}
 				else{
 					w-=dx;
-					action.target.style.left=action.orgPos[0]+dx+'px';
-				}
-				action.target.style.width=w+'px';
-				if(action.keepAspect){
-					let h=action.orgPos[3]*w/action.orgPos[2],dh=h-action.orgPos[3];
-					action.target.style.height=h+'px';
-					if(action.flags&1){
-						action.target.style.top=action.orgPos[1]-dh/2+'px';
-					}
+					l+=dx;
 				}
 			}
 			if(!(action.flags&1)){
-				let h=action.orgPos[3];
 				if(action.flags&2){
 					h+=dy;
 				}
 				else{
 					h-=dy;
-					action.target.style.top=action.orgPos[1]+dy+'px';
+					t+=dy;
 				}
-				action.target.style.height=h+'px';
-				if(action.keepAspect){
-					let w=action.orgPos[2]*h/action.orgPos[3],dw=w-action.orgPos[2];
-					action.target.style.width=w+'px';
-					if(action.flags&4){
-						action.target.style.left=action.orgPos[0]-dw/2+'px';
+			}
+			if(action.keepAspect){
+				let d;
+				if(action.flags&1){
+					h*=w/ow;
+					t+=(oh-h)/2;
+				}
+				else if(action.flags&4){
+					w*=h/oh;
+					l+=(ow-w)/2;
+				}
+				else{
+					if(w*oh>h*ow){
+						w=ow*h/oh;
+						if(!(action.flags&8)){
+							l=ol+ow-w;
+						}
 					}
-					else if(!(action.flags&8)){
-						action.target.style.left=action.orgPos[0]-dw+'px';
+					else{
+						h=oh*w/ow;
+						if(!(action.flags&2)){
+							t=ot+oh-h;
+						}
 					}
 				}
 			}
+			targets.forEach((target,index)=>{
+				const coef=action.coefs[index];
+				target.style.left=l+w*coef[0]+'px';
+				target.style.top=t+h*coef[1]+'px';
+				target.style.width=w*coef[2]+'px';
+				target.style.height=h*coef[3]+'px';
+			});
 		}
 	},[action]);
 	const onMouseUp=useCallback((e)=>{
-		action.target.style.animation='';
-		action.target.style.transition='';
-		if(onChange){onChange(getBoundingArray(window.getComputedStyle(action.target)));}
-		action.target.style.left='';
-		action.target.style.top='';
-		action.target.style.width='';
-		action.target.style.height='';
+		action.targets.map(target=>{
+			target.style.animation='';
+			target.style.transition='';
+		});
+		if(onChange){
+			onChange(action.targets.map(
+				target=>getBoundingArray(extractPosition(target))
+			));
+		}
+		action.targets.map(target=>{
+			target.style.left='';
+			target.style.top='';
+			target.style.width='';
+			target.style.height='';
+		});
 		setAction(false);
 	},[action,onChange]);
 	const onDoubleClick=useCallback((e)=>{
-		target.style.height='auto';
-		target.style.height=window.getComputedStyle(target).height+'px';
-		if(onChange){onChange(getBoundingArray(window.getComputedStyle(target)));}
-	},[target,onChange]);
+		targets.forEach(target=>{
+			target.style.height='auto';
+			target.style.height=window.getComputedStyle(target).height+'px';
+		});
+		if(onChange){
+			onChange(targets.map(
+				target=>getBoundingArray(extractPosition(target))
+			));
+		}
+	},[targets,onChange]);
 	
-	if(!target){return false;}
+	if(!targets.length){return false;}
 	return (
 		<div
 			className={classes({'is-doing-action':!!action})}
