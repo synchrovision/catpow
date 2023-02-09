@@ -131,7 +131,7 @@
       }, []);
       var tgtItem = false;
       useEffect(() => {
-        if (!id) {
+        if (!id || document.querySelectorAll("#" + id).length > 1) {
           setAttributes({ id: "g" + new Date().getTime().toString(16) });
         }
       }, [!id]);
