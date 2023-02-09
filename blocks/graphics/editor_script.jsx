@@ -51,9 +51,14 @@ wp.blocks.registerBlockType('catpow/graphics',{
 		const {id,classes='',src,srcset,alt,heights,items=[],device}=attributes;
 		const {bem}=Catpow.util;
 		
-		const [currentItemNode,setCurrentItemNode]=useState(false);
-		const [currentItemIndex,setCurrentItemIndex]=useState(-1);
+		const [currentItemNodes,setCurrentItemNodes]=useState([]);
+		const [currentItemIndexes,setCurrentItemIndexes]=useState([]);
 		const [containerNode,setContainerNode]=useState(false);
+		
+		const targetRefs=useRef([]);
+		useEffect(()=>{
+			setCurrentItemNodes(currentItemIndexes.sort().map((index)=>targetRefs.current[index]));
+		},[currentItemIndexes,targetRefs,setCurrentItemNodes]);
 		
 		const states=CP.wordsToFlags(classes);
 		const {devices,devicesForCss,imageKeys,getCssDatas,renderCssDatas,parseRectAttr,getRectAttr}=CP.config.graphics;
@@ -101,7 +106,7 @@ wp.blocks.registerBlockType('catpow/graphics',{
 				{name:'fadeIn',label:'フェードイン',values:'fadeIn'},
 				{name:'fadeIn',label:'フェードイン',values:'fadeIn'},
 				{name:'slideIn',label:'スライドイン',values:'slideIn',sub:[
-					{name:'direction',type:'radio',filer:'slideIn',label:'方向',values:{
+					{name:'direction',type:'radio',filter:'slideIn',label:'方向',values:{
 						slideInLeft:'左',
 						slideInRight:'右',
 						slideInUp:'上',
@@ -194,14 +199,30 @@ wp.blocks.registerBlockType('catpow/graphics',{
 				rectData[deviceIndex]=rectData[0];
 				item.rect=getRectAttr(rectData);
 			};
-			if(currentItemIndex>-1){
-				f(items[currentItemIndex]);
+			if(currentItemIndexes.length){
+				currentItemIndexes.forEach((index)=>f(items[index]));
 			}
 			else{
 				items.forEach(f);
 			}
 			save();
-		},[devicesForCss,device,save,items,currentItemIndex]);
+		},[devicesForCss,device,save,items,currentItemIndexes]);
+		
+		const onClickItem=useCallback((e)=>{
+			const index=parseInt(e.currentTarget.dataset.index);
+			const selected=currentItemIndexes.includes(index);
+			if(e.shiftKey){
+				if(selected){
+					setCurrentItemIndexes(currentItemIndexes.filter((i)=>i!==index));
+				}
+				else{
+					setCurrentItemIndexes(currentItemIndexes.concat([index]));
+				}
+			}
+			else if(!selected){
+				setCurrentItemIndexes([index]);
+			}
+		},[currentItemIndexes,setCurrentItemIndexes]);
 		
 		return (
 			<>
@@ -209,22 +230,22 @@ wp.blocks.registerBlockType('catpow/graphics',{
 				<BlockControls>
 					<ToolbarGroup label="control">
 						{device!=='pc' && <ToolbarButton icon="update" label="update" onClick={copyFirstRect}/>}
-						{currentItemIndex > -1 &&
+						{currentItemIndexes.length===1 &&
 							<ToolbarButton
 								icon="insert"
 								label="insert"
 								onClick={()=>{
-									items.splice(currentItemIndex,0,JSON.parse(JSON.stringify(items[currentItemIndex])));
+									items.splice(currentItemIndexes[0],0,JSON.parse(JSON.stringify(items[currentItemIndexes[0]])));
 									save();
 								}}
 							/>
 						}
-						{currentItemIndex > -1 &&
+						{currentItemIndexes.length===1 &&
 							<ToolbarButton
 								icon="remove"
 								label="remove"
 								onClick={()=>{
-									items.splice(currentItemIndex,1);
+									items.splice(currentItemIndexes[0],1);
 									save();
 								}}
 							/>
@@ -249,32 +270,36 @@ wp.blocks.registerBlockType('catpow/graphics',{
 					</div>
 					{isSelected && 
 						<CP.BoundingBox
-							target={currentItemNode}
+							targets={currentItemNodes}
 							container={containerNode}
 							onChange={()=>{
 								const bnd=containerNode.getBoundingClientRect();
-								const tgtBnd=currentItemNode.getBoundingClientRect();
-								const rectDatas=parseRectAttr(items[currentItemIndex].rect);
 								const deviceIndex=device?devicesForCss.indexOf(device):0;
-								rectDatas[deviceIndex]=[
-									parseInt((tgtBnd.left-bnd.left)/bnd.width*1000)/10,
-									parseInt((tgtBnd.top-bnd.top)/bnd.height*1000)/10,
-									parseInt(tgtBnd.width/bnd.width*1000)/10,
-									parseInt(tgtBnd.height/bnd.height*1000)/10
-								];
-								items[currentItemIndex].rect=getRectAttr(rectDatas);
+								currentItemNodes.forEach((el)=>{
+									const {index}=el.dataset;
+									const tgtBnd=el.getBoundingClientRect();
+									const rectDatas=parseRectAttr(items[index].rect);
+									rectDatas[deviceIndex]=[
+										Math.pround((tgtBnd.left-bnd.left)/bnd.width*100,2),
+										Math.pround((tgtBnd.top-bnd.top)/bnd.height*100,2),
+										Math.pround(tgtBnd.width/bnd.width*100,2),
+										Math.pround(tgtBnd.height/bnd.height*100,2)
+									];
+									items[index].rect=getRectAttr(rectDatas);
+								});
 								save();
 							}}
 							onDeselect={()=>{
-								setCurrentItemIndex(-1);
+								setCurrentItemIndexes([]);
 							}}
 							onDuplicate={()=>{
-								items.splice(currentItemIndex,0,JSON.parse(JSON.stringify(items[currentItemIndex])));
+								items.push.apply(items,items.filter((item,index)=>currentItemIndexes.includes(index)));
 								save();
 							}}
 							onDelete={()=>{
-								items.splice(currentItemIndex,1);
-								save();
+								setAttributes({
+									items:items.filter((item,index)=>currentItemIndexes.includes(index))
+								});
 							}}
 							viewMode={device}
 						/>
@@ -282,12 +307,12 @@ wp.blocks.registerBlockType('catpow/graphics',{
 					{items.map((item,index)=>{
 						var itemStates=CP.wordsToFlags(item.classes);
 						var itemClasses=item.classes;
-						var itemSelected=currentItemIndex==index;
+						var itemSelected=currentItemIndexes.includes(index);
 						if(isSelected){itemClasses+=' visible active actived';}
 						if(itemSelected){itemClasses+=' selected';}
 
 						const itemBody=()=>{
-							if(itemSelected){
+							if(itemSelected && currentItemIndexes.length===1){
 								if(itemStates.isText){
 									return (
 										<span className="body">
@@ -360,8 +385,8 @@ wp.blocks.registerBlockType('catpow/graphics',{
 								className:itemClasses,
 								'data-index':index,
 								'data-rect':item.rect,
-								ref:itemSelected?setCurrentItemNode:null,
-								onClick:(e)=>setCurrentItemIndex(index),
+								ref:(el)=>targetRefs.current[index]=el,
+								onClick:onClickItem,
 								key:index
 							},
 							itemBody()
@@ -399,26 +424,28 @@ wp.blocks.registerBlockType('catpow/graphics',{
 							value={id}
 						/>
 					</CP.SelectClassPanel>
-					<CP.SelectClassPanel
-						title='アイテム'
-						icon='edit'
-						set={setAttributes}
-						attr={attributes}
-						items={items}
-						index={currentItemIndex}
-						selectiveClasses={selectiveItemClasses}
-						filters={CP.filters.graphics || {}}
-						initialOpen={true}
-					/>
-					{items[currentItemIndex] && 
+					{currentItemIndexes.length===1 &&
+						<CP.SelectClassPanel
+							title='アイテム'
+							icon='edit'
+							set={setAttributes}
+							attr={attributes}
+							items={items}
+							index={currentItemIndexes[0]}
+							selectiveClasses={selectiveItemClasses}
+							filters={CP.filters.graphics || {}}
+							initialOpen={true}
+						/>
+					}
+					{currentItemIndexes.length===1 &&
 						<PanelBody title="ITEM CLASS" icon="admin-generic" initialOpen={false}>
 							<TextareaControl
 								label='クラス'
 								onChange={(classes)=>{
-									items[currentItemIndex].classes=classes;
+									items[currentItemIndexes[0]].classes=classes;
 									save();
 								}}
-								value={items[currentItemIndex].classes}
+								value={items[currentItemIndexes[0]].classes}
 							/>
 						</PanelBody>
 					}
