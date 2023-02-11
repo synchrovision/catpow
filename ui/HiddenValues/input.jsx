@@ -5,7 +5,7 @@
 			return Object.keys(val).map(k=>hiddenInput(name+'['+k+']',val[k]));
 		}
 		else{
-			return <input type="hidden" name={name} value={val}/>;
+			return <input type="hidden" name={name} value={val} key={name}/>;
 		}
 	},[props]);
 	return (
