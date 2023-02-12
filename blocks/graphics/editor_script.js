@@ -1,5 +1,5 @@
 (() => {
-  // blocks/graphics/editor_script.jsx
+  // ../blocks/graphics/editor_script.jsx
   CP.config.graphics = {
     devices: ["sp", "tb"],
     devicesForCss: ["pc", "tb", "sp"],
@@ -36,7 +36,7 @@
       }).join("");
     },
     parseRectAttr: (rect) => {
-      return rect.split(",").map((rect2) => rect2.split(" "));
+      return rect.split(",").map((rect2) => rect2.split(" ").map((n) => parseFloat(n)));
     },
     getRectAttr: (rectDatas) => {
       return rectDatas.map((rectData) => rectData.join(" ")).join(",");
@@ -52,7 +52,7 @@
       const { __ } = wp.i18n;
       const { useState, useMemo, useCallback, useEffect, useReducer, useRef } = wp.element;
       const { BlockControls, InspectorControls, RichText } = wp.blockEditor;
-      const { BaseControl, Icon, PanelBody, RangeControl, TextareaControl, TextControl, Toolbar, ToolbarGroup, ToolbarButton } = wp.components;
+      const { BaseControl, Icon, PanelBody, RangeControl, TextareaControl, TextControl, Toolbar, ToolbarGroup, ToolbarButton, ToolbarDropdownMenu } = wp.components;
       const { id, classes = "", src, srcset, alt, heights, items = [], device } = attributes;
       const { bem } = Catpow.util;
       const [currentItemNodes, setCurrentItemNodes] = useState([]);
@@ -208,7 +208,64 @@
           setCurrentItemIndexes([index]);
         }
       }, [currentItemIndexes, setCurrentItemIndexes]);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices: CP.config.graphics.devicesForCss, defaultInput: "pc" }), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { label: "control" }, device !== "pc" && /* @__PURE__ */ wp.element.createElement(ToolbarButton, { icon: "update", label: "update", onClick: copyFirstRect }), currentItemIndexes.length === 1 && /* @__PURE__ */ wp.element.createElement(
+      const alignItems = useCallback((direction) => {
+        const deviceIndex = device ? devicesForCss.indexOf(device) : 0;
+        const l = currentItemIndexes.length;
+        const rectDatasList = currentItemIndexes.map((itemIndex) => parseRectAttr(items[itemIndex].rect));
+        const targetRectDatas = rectDatasList.map((rectDatas) => rectDatas[deviceIndex]);
+        const lefts = targetRectDatas.map((c) => c[0]);
+        const centers = targetRectDatas.map((c) => c[0] + c[2] / 2);
+        const rights = targetRectDatas.map((c) => c[0] + c[2]);
+        const minLeft = Math.min.apply(null, lefts);
+        const maxLeft = Math.max.apply(null, lefts);
+        const minCenter = Math.min.apply(null, centers);
+        const maxCenter = Math.max.apply(null, centers);
+        const minRight = Math.min.apply(null, rights);
+        const maxRight = Math.max.apply(null, rights);
+        const tops = targetRectDatas.map((c) => c[1]);
+        const middles = targetRectDatas.map((c) => c[1] + c[3] / 2);
+        const bottoms = targetRectDatas.map((c) => c[1] + c[3]);
+        const minTop = Math.min.apply(null, tops);
+        const maxTop = Math.max.apply(null, tops);
+        const minMiddle = Math.min.apply(null, middles);
+        const maxMiddle = Math.max.apply(null, middles);
+        const minBottom = Math.min.apply(null, bottoms);
+        const maxBottom = Math.max.apply(null, bottoms);
+        const totalWidth = targetRectDatas.map((c) => c[2]).reduce((p, c) => p + c);
+        const totalHeight = targetRectDatas.map((c) => c[3]).reduce((p, c) => p + c);
+        const width = maxRight - minLeft;
+        const height = maxBottom - minTop;
+        const marginX = width - totalWidth;
+        const marginY = height - totalHeight;
+        const sortLeft = targetRectDatas.slice().sort((a, b) => a[0] - b[0]);
+        const sortCenter = targetRectDatas.slice().sort((a, b) => a[0] + a[2] / 2 - (b[0] + b[2] / 2));
+        const sortRight = targetRectDatas.slice().sort((a, b) => a[0] + a[2] - (b[0] + b[2]));
+        const sortTop = targetRectDatas.slice().sort((a, b) => a[1] - b[1]);
+        const sortMiddle = targetRectDatas.slice().sort((a, b) => a[1] + a[3] / 2 - (b[1] + b[3] / 2));
+        const sortBottom = targetRectDatas.slice().sort((a, b) => a[1] + a[3] - (b[1] + b[3]));
+        const cb = {
+          left: (c) => c[0] = minLeft,
+          center: (c) => c[0] = minLeft + (width - c[2]) / 2,
+          right: (c) => c[0] = minLeft + (width - c[2]),
+          top: (c) => c[1] = minTop,
+          middle: (c) => c[1] = minTop + (height - c[3]) / 2,
+          bottom: (c) => c[1] = minTop + (height - c[3]),
+          evenLeft: (c) => c[0] = minLeft + (maxLeft - minLeft) / (l - 1) * sortLeft.indexOf(c),
+          evenCenter: (c) => c[0] = minCenter + (maxCenter - minCenter) / (l - 1) * sortCenter.indexOf(c) - c[2] / 2,
+          evenRight: (c) => c[0] = minRight - c[2] + (maxRight - minRight) / (l - 1) * sortRight.indexOf(c),
+          evenTop: (c) => c[1] = minTop + (maxTop - minTop) / (l - 1) * sortTop.indexOf(c),
+          evenMiddle: (c) => c[1] = minMiddle + (maxMiddle - minMiddle) / (l - 1) * sortMiddle.indexOf(c) - c[3] / 2,
+          evenBottom: (c) => c[1] = minBottom - c[3] + (maxBottom - minBottom) / (l - 1) * sortBottom.indexOf(c),
+          evenSpaceH: (c) => c[0] = sortCenter.slice(0, sortCenter.indexOf(c)).reduce((p, c2) => p + c2[2] + marginX / (l - 1), minLeft),
+          evenSpaceV: (c) => c[1] = sortMiddle.slice(0, sortMiddle.indexOf(c)).reduce((p, c2) => p + c2[3] + marginY / (l - 1), minTop)
+        }[direction];
+        rectDatasList.forEach((rectDatas, index) => {
+          cb(rectDatas[deviceIndex]);
+          items[currentItemIndexes[index]].rect = getRectAttr(rectDatas);
+        });
+        save();
+      }, [save, device, currentItemIndexes, items]);
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices: CP.config.graphics.devicesForCss, defaultInput: "pc" }), /* @__PURE__ */ wp.element.createElement(BlockControls, null, device !== "pc" && /* @__PURE__ */ wp.element.createElement(ToolbarButton, { icon: "update", label: "update", onClick: copyFirstRect }), currentItemIndexes.length > 0 && /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { label: "control" }, currentItemIndexes.length === 1 && /* @__PURE__ */ wp.element.createElement(
         ToolbarButton,
         {
           icon: "insert",
@@ -227,6 +284,28 @@
             items.splice(currentItemIndexes[0], 1);
             save();
           }
+        }
+      ), currentItemIndexes.length > 1 && /* @__PURE__ */ wp.element.createElement(
+        ToolbarDropdownMenu,
+        {
+          icon: /* @__PURE__ */ wp.element.createElement(CP.AlignmentIcon, { icon: "left" }),
+          label: "align",
+          controls: [
+            { title: "Left", icon: /* @__PURE__ */ wp.element.createElement(CP.AlignmentIcon, { icon: "left" }), onClick: () => alignItems("left") },
+            { title: "Center", icon: /* @__PURE__ */ wp.element.createElement(CP.AlignmentIcon, { icon: "center" }), onClick: () => alignItems("center") },
+            { title: "Right", icon: /* @__PURE__ */ wp.element.createElement(CP.AlignmentIcon, { icon: "right" }), onClick: () => alignItems("right") },
+            { title: "Top", icon: /* @__PURE__ */ wp.element.createElement(CP.AlignmentIcon, { icon: "top" }), onClick: () => alignItems("top") },
+            { title: "Middle", icon: /* @__PURE__ */ wp.element.createElement(CP.AlignmentIcon, { icon: "middle" }), onClick: () => alignItems("middle") },
+            { title: "Bottom", icon: /* @__PURE__ */ wp.element.createElement(CP.AlignmentIcon, { icon: "bottom" }), onClick: () => alignItems("bottom") },
+            { title: "Even Left", icon: /* @__PURE__ */ wp.element.createElement(CP.AlignmentIcon, { icon: "evenLeft" }), onClick: () => alignItems("evenLeft") },
+            { title: "Even Center", icon: /* @__PURE__ */ wp.element.createElement(CP.AlignmentIcon, { icon: "evenCenter" }), onClick: () => alignItems("evenCenter") },
+            { title: "Even Right", icon: /* @__PURE__ */ wp.element.createElement(CP.AlignmentIcon, { icon: "evenRight" }), onClick: () => alignItems("evenRight") },
+            { title: "Even Top", icon: /* @__PURE__ */ wp.element.createElement(CP.AlignmentIcon, { icon: "evenTop" }), onClick: () => alignItems("evenTop") },
+            { title: "Even Middle", icon: /* @__PURE__ */ wp.element.createElement(CP.AlignmentIcon, { icon: "evenMiddle" }), onClick: () => alignItems("evenMiddle") },
+            { title: "Even Bottom", icon: /* @__PURE__ */ wp.element.createElement(CP.AlignmentIcon, { icon: "evenBottom" }), onClick: () => alignItems("evenBottom") },
+            { title: "Even Space Horizontal", icon: /* @__PURE__ */ wp.element.createElement(CP.AlignmentIcon, { icon: "evenSpaceH" }), onClick: () => alignItems("evenSpaceH") },
+            { title: "Even Space Vertical ", icon: /* @__PURE__ */ wp.element.createElement(CP.AlignmentIcon, { icon: "evenSpaceV" }), onClick: () => alignItems("evenSpaceV") }
+          ]
         }
       ))), /* @__PURE__ */ wp.element.createElement("div", { id, className: classes + (isSelected ? " alt_content " + device : ""), ref: setContainerNode }, isSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement("div", { className: "base" }, states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(
         CP.ResponsiveImage,
