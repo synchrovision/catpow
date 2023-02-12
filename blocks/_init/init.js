@@ -1,5 +1,5 @@
 (() => {
-  // blocks/_init/init/filter.jsx
+  // ../blocks/_init/init/filter.jsx
   wp.blocks.registerBlockStyle("core/heading", { name: "header", label: "header" });
   wp.blocks.registerBlockStyle("core/heading", { name: "headline", label: "headline" });
   wp.blocks.registerBlockStyle("core/heading", { name: "catch", label: "catch" });
@@ -64,7 +64,7 @@
     }, "allowColumnStyle")
   );
 
-  // blocks/_init/init/CP.jsx
+  // ../blocks/_init/init/CP.jsx
   var CP = {
     filters: {},
     cache: {},
@@ -928,7 +928,7 @@
   };
   window.CP = CP;
 
-  // blocks/_init/init/format.jsx
+  // ../blocks/_init/init/format.jsx
   wp.richText.registerFormatType("catpow/ruby", {
     title: "Ruby",
     tagName: "ruby",
@@ -1249,7 +1249,7 @@
     }
   });
 
-  // blocks/_init/init/plugins.jsx
+  // ../blocks/_init/init/plugins.jsx
   wp.plugins.registerPlugin("catpow-sidebar", { render: (props) => {
     const { useState, useMemo, useCallback } = wp.element;
     const { PluginSidebarMoreMenuItem, PluginSidebar } = wp.editPost;
@@ -1293,7 +1293,42 @@
     ));
   } });
 
-  // blocks/_init/init/BoundingBox.jsx
+  // ../blocks/_init/init/AlignmentIcon.jsx
+  CP.AlignmentIcon = (props) => {
+    const { icon } = props;
+    switch (icon) {
+      case "top":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "10", y: "3", width: "8", height: "11" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "3", width: "7", height: "15" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "1", width: "18", height: "1" }));
+      case "middle":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("polygon", { points: "1.5 17.5 8.5 17.5 8.5 10.5 9.5 10.5 9.5 15.5 17.5 15.5 17.5 10.5 18.5 10.5 18.5 9.5 17.5 9.5 17.5 4.5 9.5 4.5 9.5 9.5 8.5 9.5 8.5 2.5 1.5 2.5 1.5 9.5 .5 9.5 .5 10.5 1.5 10.5 1.5 17.5" }));
+      case "bottom":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "10", y: "6", width: "8", height: "11" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "2", width: "7", height: "15" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "18", width: "18", height: "1" }));
+      case "left":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "3", y: "2", width: "11", height: "8" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "3", y: "11", width: "15", height: "7" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "1", width: "1", height: "18" }));
+      case "center":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("polygon", { points: "9 19 10 19 10 18 17 18 17 11 10 11 10 10 15 10 15 2 10 2 10 1 9 1 9 2 4 2 4 10 9 10 9 11 2 11 2 18 9 18 9 19" }));
+      case "right":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "6", y: "2", width: "11", height: "8" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "11", width: "15", height: "7" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "18", y: "1", width: "1", height: "18" }));
+      case "evenTop":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "3", y: "3", width: "14", height: "5" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "12", width: "16", height: "7" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "1", width: "18", height: "1" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "10", width: "18", height: "1" }));
+      case "evenMiddle":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("polygon", { points: "17 2 3 2 3 4 1 4 1 5 3 5 3 7 17 7 17 5 19 5 19 4 17 4 17 2" }), /* @__PURE__ */ wp.element.createElement("polygon", { points: "18 11 2 11 2 14 1 14 1 15 2 15 2 18 18 18 18 15 19 15 19 14 18 14 18 11" }));
+      case "evenBottom":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "3", y: "1", width: "14", height: "5" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "10", width: "16", height: "7" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "7", width: "18", height: "1" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "18", width: "18", height: "1" }));
+      case "evenLeft":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "3", y: "3", width: "5", height: "14" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "12", y: "2", width: "7", height: "16" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "1", width: "1", height: "18" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "10", y: "1", width: "1", height: "18" }));
+      case "evenCenter":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("polygon", { points: "4 1 4 3 2 3 2 17 4 17 4 19 5 19 5 17 7 17 7 3 5 3 5 1 4 1" }), /* @__PURE__ */ wp.element.createElement("polygon", { points: "15 1 14 1 14 2 11 2 11 18 14 18 14 19 15 19 15 18 18 18 18 2 15 2 15 1" }));
+      case "evenRight":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "3", width: "5", height: "14" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "10", y: "2", width: "7", height: "16" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "7", y: "1", width: "1", height: "18" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "18", y: "1", width: "1", height: "18" }));
+      case "evenSpaceV":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "4", y: "2", width: "13", height: "6" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "4", y: "11", width: "14", height: "7" }), /* @__PURE__ */ wp.element.createElement("polygon", { points: "3 10 3 9 4 9 4 8 3 8 3 7 2 7 2 8 1 8 1 9 2 9 2 10 1 10 1 11 2 11 2 12 3 12 3 11 4 11 4 10 3 10" }));
+      case "evenSpaceH":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "4", width: "6", height: "13" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "11", y: "4", width: "7", height: "14" }), /* @__PURE__ */ wp.element.createElement("polygon", { points: "12 3 12 2 11 2 11 1 10 1 10 2 9 2 9 1 8 1 8 2 7 2 7 3 8 3 8 4 9 4 9 3 10 3 10 4 11 4 11 3 12 3" }));
+    }
+  };
+
+  // ../blocks/_init/init/BoundingBox.jsx
   CP.BoundingBox = (props) => {
     const { targets, onDeselect, onDuplicate, onDelete, onChange } = props;
     const { useState, useCallback, useMemo, useEffect, useRef } = wp.element;
@@ -1560,7 +1595,7 @@
     );
   };
 
-  // blocks/_init/init/SelectThemeColor.jsx
+  // ../blocks/_init/init/SelectThemeColor.jsx
   CP.SelectThemeColor = (props) => {
     const { selected, onChange } = props;
     const { useCallback, useMemo } = wp.element;
@@ -1586,7 +1621,7 @@
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(Selections, { selected, fixed: true, active: data.fixed }), /* @__PURE__ */ wp.element.createElement(Selections, { selected, absolute: true, active: data.absolute }), /* @__PURE__ */ wp.element.createElement(Selections, { selected, relative: true, active: data.relative }));
   };
 
-  // blocks/_init/init/SelectColors.jsx
+  // ../blocks/_init/init/SelectColors.jsx
   CP.SelectColors = (props) => {
     const { useState, useRef } = wp.element;
     const { ColorPicker, ColorPalette, Popover } = wp.components;
@@ -1631,7 +1666,7 @@
     )));
   };
 
-  // blocks/_init/init/SelectButtons.jsx
+  // ../blocks/_init/init/SelectButtons.jsx
   CP.SelectButtons = (props) => {
     const { BaseControl, Button, ButtonGroup } = wp.components;
     return /* @__PURE__ */ wp.element.createElement(BaseControl, { label: props.label, help: props.help, id: "CP-SelectButtons-" + wp.compose.useInstanceId(CP.SelectButtons) }, /* @__PURE__ */ wp.element.createElement("div", { className: "selectButtons" }, /* @__PURE__ */ wp.element.createElement(ButtonGroup, null, props.options.map((option) => /* @__PURE__ */ wp.element.createElement(
@@ -1645,7 +1680,7 @@
     )))));
   };
 
-  // blocks/_init/init/SelectGridButtons.jsx
+  // ../blocks/_init/init/SelectGridButtons.jsx
   CP.SelectGridButtons = (props) => {
     const { BaseControl } = wp.components;
     const maxStrlen = props.options.reduce((acc, cur) => Math.max(acc, cur.label.length + cur.label.replace(/[ -~]+/, "").length), 3);
@@ -1661,7 +1696,7 @@
     ))));
   };
 
-  // blocks/_init/init/SelectResponsiveImage.jsx
+  // ../blocks/_init/init/SelectResponsiveImage.jsx
   CP.SelectResponsiveImage = (props) => {
     const { className, attr, set, keys = {}, index, size, devices, device, isTemplate, ...otherProps } = props;
     let { sizes } = props;
@@ -1804,7 +1839,7 @@
     );
   };
 
-  // blocks/_init/init/ResponsiveImage.jsx
+  // ../blocks/_init/init/ResponsiveImage.jsx
   CP.ResponsiveImage = ({ className, attr, keys, index, sizes, devices, device, isTemplate }) => {
     let type, item;
     if (keys.items) {
@@ -1881,7 +1916,7 @@
     );
   };
 
-  // blocks/_init/init/SelectPictureSources.jsx
+  // ../blocks/_init/init/SelectPictureSources.jsx
   CP.SelectPictureSources = (props) => {
     const { Icon } = wp.components;
     const { devices } = props;
@@ -1894,7 +1929,7 @@
     ))))));
   };
 
-  // blocks/_init/init/SelectPreparedImage.jsx
+  // ../blocks/_init/init/SelectPreparedImage.jsx
   CP.SelectPreparedImage = ({ className, name, value, color, onChange, ...otherProps }) => {
     let onClick;
     const { getURLparam, setURLparam, setURLparams, removeURLparam } = Catpow.util;
@@ -1947,7 +1982,7 @@
     }));
   };
 
-  // blocks/_init/init/SelectPreparedImageSet.jsx
+  // ../blocks/_init/init/SelectPreparedImageSet.jsx
   CP.SelectPreparedImageSet = ({ className, name, value, color, onChange, ...otherProps }) => {
     let onClick;
     const { getURLparam, setURLparam, setURLparams, removeURLparam } = Catpow.util;
@@ -2001,17 +2036,17 @@
     }));
   };
 
-  // blocks/_init/init/InputIcon.jsx
+  // ../blocks/_init/init/InputIcon.jsx
   CP.InputIcon = (props) => {
     return wp.element.createElement(CP[wp.hooks.applyFilters("catpow.IconComponent", "StandardIcon")].Input, props);
   };
 
-  // blocks/_init/init/OutputIcon.jsx
+  // ../blocks/_init/init/OutputIcon.jsx
   CP.OutputIcon = (props) => {
     return wp.element.createElement(CP[wp.hooks.applyFilters("catpow.IconComponent", "StandardIcon")].Output, props);
   };
 
-  // blocks/_init/init/StandardIcon.jsx
+  // ../blocks/_init/init/StandardIcon.jsx
   CP.StandardIcon = {
     Input: (props) => {
       const { item, prm, save } = props;
@@ -2039,7 +2074,7 @@
     }
   };
 
-  // blocks/_init/init/DataInputTable.jsx
+  // ../blocks/_init/init/DataInputTable.jsx
   CP.DataInputTable = (props) => {
     const { cols, value, onChange } = props;
     const { useCallback, useMemo } = wp.element;
@@ -2107,7 +2142,7 @@
     ))));
   };
 
-  // blocks/_init/init/DynamicInput.jsx
+  // ../blocks/_init/init/DynamicInput.jsx
   CP.DynamicInput = (props) => {
     const { useMemo } = wp.element;
     const { RadioControl, RangeControl, SelectControl, TextControl, TextareaControl, ToggleControl } = wp.components;
@@ -2226,7 +2261,7 @@
     }
   };
 
-  // blocks/_init/init/Item.jsx
+  // ../blocks/_init/init/Item.jsx
   CP.Item = (props) => {
     const { tag, items, itemsKey, index, set, attr, triggerClasses, children } = props;
     let { itemClasses } = props;
@@ -2281,13 +2316,13 @@
     );
   };
 
-  // blocks/_init/init/ItemControlInfoPanel.jsx
+  // ../blocks/_init/init/ItemControlInfoPanel.jsx
   CP.ItemControlInfoPanel = () => {
     const { PanelBody } = wp.components;
     return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u64CD\u4F5C", initialOpen: false, icon: "info" }, /* @__PURE__ */ wp.element.createElement("table", null, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + S"), /* @__PURE__ */ wp.element.createElement("td", null, "\u4FDD\u5B58")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + D"), /* @__PURE__ */ wp.element.createElement("td", null, "\u8907\u88FD")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + delete"), /* @__PURE__ */ wp.element.createElement("td", null, "\u524A\u9664")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + \u2191"), /* @__PURE__ */ wp.element.createElement("td", null, "\u524D\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + \u2193"), /* @__PURE__ */ wp.element.createElement("td", null, "\u6B21\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048")))));
   };
 
-  // blocks/_init/init/SelectClassPanel.jsx
+  // ../blocks/_init/init/SelectClassPanel.jsx
   CP.SelectClassPanel = (props) => {
     const { Fragment, useMemo, useCallback, useRef } = wp.element;
     const { __: __2 } = wp.i18n;
@@ -2991,7 +3026,7 @@
     return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, selectiveClasses.map((prm, index2) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: index2 }, SelectClass(prm))), props.children);
   };
 
-  // blocks/_init/init/AlignClassToolbar.jsx
+  // ../blocks/_init/init/AlignClassToolbar.jsx
   CP.AlignClassToolbar = (props) => {
     const { BlockAlignmentToolbar } = wp.blockEditor;
     const aligns = ["left", "center", "right"];
@@ -3007,7 +3042,7 @@
     );
   };
 
-  // blocks/_init/init/VerticalAlignClassToolbar.jsx
+  // ../blocks/_init/init/VerticalAlignClassToolbar.jsx
   CP.VerticalAlignClassToolbar = (props) => {
     const { BlockVerticalAlignmentToolbar } = wp.blockEditor;
     const aligns = ["top", "center", "bottom"];
@@ -3023,7 +3058,7 @@
     );
   };
 
-  // blocks/_init/init/SelectColorClass.jsx
+  // ../blocks/_init/init/SelectColorClass.jsx
   CP.SelectColorClass = (props) => {
     const { BaseControl } = wp.components;
     const { label, help } = props;
@@ -3036,7 +3071,7 @@
     ));
   };
 
-  // blocks/_init/init/SelectPatternClass.jsx
+  // ../blocks/_init/init/SelectPatternClass.jsx
   CP.SelectPatternClass = (props) => {
     const { BaseControl } = wp.components;
     const { label, help, selected, onChange } = props;
@@ -3059,7 +3094,7 @@
     return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement("ul", { className: "selectPattern" }, items));
   };
 
-  // blocks/_init/init/SelectPositionClass.jsx
+  // ../blocks/_init/init/SelectPositionClass.jsx
   CP.SelectPositionClass = (props) => {
     const { BaseControl } = wp.components;
     const rows = [
@@ -3093,7 +3128,7 @@
     }))))));
   };
 
-  // blocks/_init/init/ImporterCSVPanel.jsx
+  // ../blocks/_init/init/ImporterCSVPanel.jsx
   CP.ImporterCSVPanel = (props) => {
     const { PanelBody, FormFileUpload } = wp.components;
     let reader = new FileReader();
@@ -3112,7 +3147,7 @@
     ));
   };
 
-  // blocks/_init/init/SelectBreakPointToolbar.jsx
+  // ../blocks/_init/init/SelectBreakPointToolbar.jsx
   CP.SelectBreakPointToolbar = (props) => {
     const { ToolbarGroup } = wp.components;
     return /* @__PURE__ */ wp.element.createElement(
@@ -3130,7 +3165,7 @@
     );
   };
 
-  // blocks/_init/init/SelectModeToolbar.jsx
+  // ../blocks/_init/init/SelectModeToolbar.jsx
   CP.SelectModeToolbar = (props) => {
     const { BlockControls } = wp.blockEditor;
     const { ToolbarGroup } = wp.components;
@@ -3169,7 +3204,7 @@
     }));
   };
 
-  // blocks/_init/init/SelectDeviceToolbar.jsx
+  // ../blocks/_init/init/SelectDeviceToolbar.jsx
   CP.SelectDeviceToolbar = (props) => {
     const { BlockControls } = wp.blockEditor;
     const { ToolbarGroup } = wp.components;
@@ -3198,7 +3233,7 @@
     }));
   };
 
-  // blocks/_init/init/EditItemsTable.jsx
+  // ../blocks/_init/init/EditItemsTable.jsx
   CP.EditItemsTable = (props) => {
     const { set, attr, itemsKey = "items", columns, isTemplate } = props;
     const { RichText } = wp.blockEditor;
@@ -3282,12 +3317,12 @@
     })));
   };
 
-  // blocks/_init/init/DummyImage.jsx
+  // ../blocks/_init/init/DummyImage.jsx
   CP.DummyImage = ({ text }) => {
     return /* @__PURE__ */ wp.element.createElement("img", { src: wpinfo.plugins_url + "/catpow/callee/dummy_image.php?text=" + text });
   };
 
-  // blocks/_init/init/DataStructure.jsx
+  // ../blocks/_init/init/DataStructure.jsx
   CP.DataStructure = (props) => {
     return /* @__PURE__ */ wp.element.createElement("ul", { className: "dataStructure" }, props.children);
   };
@@ -3297,7 +3332,7 @@
     return /* @__PURE__ */ wp.element.createElement("li", { className: "item " + (props.children ? "hasChildren " + (open ? "open" : "close") : "noChildren") }, /* @__PURE__ */ wp.element.createElement("h5", { className: "title", onClick: () => setOpen(!open) }, props.title, void 0 !== props.name && /* @__PURE__ */ wp.element.createElement("span", { className: "name" }, props.name)), !!open && !!props.children && /* @__PURE__ */ wp.element.createElement("div", { className: "children" }, props.children));
   };
 
-  // blocks/_init/init/EventInputCards.jsx
+  // ../blocks/_init/init/EventInputCards.jsx
   CP.EventInputCards = (props) => {
     const { title, onChange } = props;
     const { useState, useReducer, useCallback, useEffect, useMemo } = wp.element;
@@ -3409,7 +3444,7 @@
     return /* @__PURE__ */ wp.element.createElement(BaseControl, null, state.events.length > 0 ? state.events.map((event, index) => /* @__PURE__ */ wp.element.createElement(EventInputCard, { event, index, key: index })) : /* @__PURE__ */ wp.element.createElement(EventInputCard, { event: {}, index: 0 }));
   };
 
-  // blocks/_init/init/ServerSideRender.jsx
+  // ../blocks/_init/init/ServerSideRender.jsx
   CP.ServerSideRender = (props) => {
     const { className, block, attributes } = props;
     const { RawHTML, useState, useMemo, useRef, useEffect } = wp.element;
@@ -3446,7 +3481,7 @@
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RawHTML, { className }, response), stylesheets.map((stylesheet) => /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: stylesheet, key: stylesheet })));
   };
 
-  // blocks/_init/init/ColorVarTracer.jsx
+  // ../blocks/_init/init/ColorVarTracer.jsx
   CP.ColorVarTracer = (props) => {
     const { target } = props;
     const { useMemo } = wp.element;

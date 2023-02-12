@@ -4,6 +4,7 @@ import './plugins.jsx';
 import './CP.jsx';
 
 /*components*/
+import './AlignmentIcon.jsx';
 import './BoundingBox.jsx';
 import './SelectThemeColor.jsx';
 import './SelectColors.jsx';
