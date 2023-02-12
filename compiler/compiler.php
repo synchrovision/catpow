@@ -2,7 +2,9 @@
 if(php_sapi_name()!=='cli'){exit;}
 chdir(__DIR__);
 passthru('git submodule update --init --recursive');
-define('WP_CONTENT_DIR',dirname(__DIR__,2));
+define('INC_DIR',__DIR__);
+define('WP_CONTENT_DIR',dirname(__DIR__,3));
+init();
 echo "start jsx compile\n";
 
 while(true){
@@ -12,6 +14,15 @@ while(true){
 		cp_jsx_compile($jsx_files);
 		cp_jsx_bundle($entry_files);
 		sleep(3);
+	}
+}
+
+function init(){
+	putenv('PATH='.getenv('PATH').':'.INC_DIR.':'.INC_DIR.'/node_modules/.bin');
+	putenv('NODE_PATH='.getenv('NODE_PATH').':'.INC_DIR.'/node_modules');
+	chdir(INC_DIR);
+	if(!file_exists(INC_DIR.'/node_modules')){
+		passthru('npm install');
 	}
 }
 
@@ -30,7 +41,7 @@ function cp_jsx_compile($jsx_files){
 		$js_file=substr($jsx_file,0,-1);
 		if(!file_exists($jsx_file)){continue;}
 		if(!file_exists($js_file) or filemtime($js_file) < filemtime($jsx_file)){
-			passthru("esbuild {$jsx_file} --outfile={$js_file} --bundle --jsx-factory=wp.element.createElement --jsx-fragment=wp.element.Fragment");
+			passthru("node bundle.esbuild.mjs {$jsx_file} {$js_file}");
 			echo "build {$js_file}\n";
 			touch($js_file);
 		}
@@ -54,7 +65,7 @@ function cp_jsx_bundle($entry_files){
 			$latest_filetime=max($latest_filetime,filemtime($bundle_file));
 		}
 		if(!file_exists($bundle_js_file) or filemtime($bundle_js_file) < $latest_filetime){
-			passthru("esbuild {$entry_file} --outfile={$bundle_js_file} --bundle --jsx-factory=wp.element.createElement --jsx-fragment=wp.element.Fragment");
+			passthru("node bundle.esbuild.mjs {$entry_file} {$bundle_js_file}");
 			echo "bundle {$bundle_js_file}\n";
 		}
 	}

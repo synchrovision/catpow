@@ -1,0 +1,12 @@
+{
+	"name": "catpow-jsx-compiler",
+	"version": "1.0.0",
+	"scripts": {
+		"watch": "php compiler.php"
+	},
+	"dependencies": {
+		"esbuild-svgr-plugin":"*",
+		"esbuild-sass-plugin":"*",
+		"js-cookie": "*"
+	}
+}
