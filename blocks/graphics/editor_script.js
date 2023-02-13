@@ -275,14 +275,16 @@
             save();
           }
         }
-      ), currentItemIndexes.length === 1 && /* @__PURE__ */ wp.element.createElement(
+      ), currentItemIndexes.length > 0 && /* @__PURE__ */ wp.element.createElement(
         ToolbarButton,
         {
           icon: "remove",
           label: "remove",
           onClick: () => {
-            items.splice(currentItemIndexes[0], 1);
-            save();
+            setAttributes({
+              items: items.filter((item, index) => !currentItemIndexes.includes(index))
+            });
+            setCurrentItemIndexes([]);
           }
         }
       ), currentItemIndexes.length > 1 && /* @__PURE__ */ wp.element.createElement(
@@ -346,7 +348,7 @@
           },
           onDelete: () => {
             setAttributes({
-              items: items.filter((item, index) => currentItemIndexes.includes(index))
+              items: items.filter((item, index) => !currentItemIndexes.includes(index))
             });
           },
           viewMode: device

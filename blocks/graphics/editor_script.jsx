@@ -303,13 +303,15 @@ wp.blocks.registerBlockType('catpow/graphics',{
 									}}
 								/>
 							}
-							{currentItemIndexes.length===1 &&
+							{currentItemIndexes.length>0 &&
 								<ToolbarButton
 									icon="remove"
 									label="remove"
 									onClick={()=>{
-										items.splice(currentItemIndexes[0],1);
-										save();
+										setAttributes({
+											items:items.filter((item,index)=>!currentItemIndexes.includes(index))
+										});
+										setCurrentItemIndexes([]);
 									}}
 								/>
 							}
@@ -384,7 +386,7 @@ wp.blocks.registerBlockType('catpow/graphics',{
 							}}
 							onDelete={()=>{
 								setAttributes({
-									items:items.filter((item,index)=>currentItemIndexes.includes(index))
+									items:items.filter((item,index)=>!currentItemIndexes.includes(index))
 								});
 							}}
 							viewMode={device}
