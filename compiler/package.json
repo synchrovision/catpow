@@ -5,6 +5,7 @@
 		"watch": "php compiler.php"
 	},
 	"dependencies": {
+		"@svgr/core":"*",
 		"js-cookie": "*"
 	}
 }
