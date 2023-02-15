@@ -6,7 +6,7 @@ cp::use_component('Animation/'.$attr['component']);
 <div class="<?=$attr['classes']?>">
 	<div id="<?=$id?>" class="wp-block-catpow-motiongraphic__background"></div>
 	<script type="text/javascript">
-	jQuery(function($){
+	(cb=>document.readyState!=='loading'?cb():document.addEventListener('DOMContentLoaded',cb))(()=>{
 		var el=wp.element.createElement;
 		wp.element.render(
 			el(Catpow.FixedBG,null,[
@@ -16,6 +16,7 @@ cp::use_component('Animation/'.$attr['component']);
 			]),
 			document.getElementById("<?=$id?>")
 		);
+		
 	});
 	</script>
 	<?=$content?>
