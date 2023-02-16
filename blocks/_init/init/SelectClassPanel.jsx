@@ -3,7 +3,7 @@
 CP.SelectClassPanelContext=wp.element.createContext({});
 
 CP.SelectClassPanel=(props)=>{
-	const {Fragment,useMemo,useCallback,useRef,useContext,createElement:el}=wp.element;
+	const {Fragment,useMemo,useCallback,useContext,createElement:el}=wp.element;
 	const {__}=wp.i18n;
 	const {PanelBody,CheckboxControl,RadioControl,SelectControl,TextareaControl,TextControl,ColorPicker,__experimentalGradientPicker:GradientPicker}=wp.components;
 	const {classKey='classes',items,index,subItemsKey,subIndex,set,attr,triggerClasses}=wp.hooks.applyFilters('catpow.SelectClassPanelProps',props);
@@ -18,7 +18,6 @@ CP.SelectClassPanel=(props)=>{
 	
 	const {styleDatas}=attr;
 	
-	const ref=useRef({});
 	const item=useMemo(()=>{
 		if(!items){return attr;}
 		if(!items[index]){return false;}
@@ -36,7 +35,7 @@ CP.SelectClassPanel=(props)=>{
 		else{
 			set(data);
 		}
-	},[set,index,ref,items,itemsKey]);
+	},[set,index,items,itemsKey]);
 	const saveClasses=useCallback(()=>{
 		save({[classKey]:CP.flagsToWords(states)});
 	},[save,classKey,states]);
@@ -584,7 +583,7 @@ CP.SelectClassPanel=(props)=>{
 				{rtn.map((item,index)=><Fragment key={index}>{item}</Fragment>)}
 			</>
 		);
-	},[ref]);
+	},[]);
 	
 	if(!item || !selectiveClasses){return false;}
 	
