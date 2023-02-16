@@ -2,6 +2,12 @@
 window.Catpow = window.Catpow || {};
 
 window.Catpow.yss={
+	processerId:'yss',
+	guideURL:false,
+	eventParams:{
+		label:{type:'text',label:'ラベル'},
+		value:{type:'number',label:'値'}
+	},
 	parseEventValue:function(value){
 		if(!value){return [];}
 		return value.split(' + ').map(window.Catpow.yss.parseEventString);
