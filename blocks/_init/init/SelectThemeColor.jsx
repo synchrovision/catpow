@@ -28,7 +28,7 @@ CP.SelectThemeColor=(props)=>{
 				})}
 			</ul>
 		);
-	},[]);
+	},[onChange]);
 
 	return (
 		<div className={classes()}>

@@ -1617,7 +1617,7 @@
           " "
         );
       }));
-    }, []);
+    }, [onChange]);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(Selections, { selected, fixed: true, active: data.fixed }), /* @__PURE__ */ wp.element.createElement(Selections, { selected, absolute: true, active: data.absolute }), /* @__PURE__ */ wp.element.createElement(Selections, { selected, relative: true, active: data.relative }));
   };
 
@@ -2325,7 +2325,7 @@
   // ../blocks/_init/init/SelectClassPanel.jsx
   CP.SelectClassPanelContext = wp.element.createContext({});
   CP.SelectClassPanel = (props) => {
-    const { Fragment, useMemo, useCallback, useRef, useContext, createElement: el } = wp.element;
+    const { Fragment, useMemo, useCallback, useContext, createElement: el } = wp.element;
     const { __: __2 } = wp.i18n;
     const { PanelBody, CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
     const { classKey = "classes", items, index, subItemsKey, subIndex: subIndex2, set, attr, triggerClasses } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
@@ -2338,7 +2338,6 @@
       return triggerClasses.item[Object.keys(triggerClasses.item).find((value) => blockStates[value])];
     }, [props.selectiveClasses, triggerClasses]);
     const { styleDatas } = attr;
-    const ref = useRef({});
     const item = useMemo(() => {
       if (!items) {
         return attr;
@@ -2359,7 +2358,7 @@
       } else {
         set(data);
       }
-    }, [set, index, ref, items, itemsKey]);
+    }, [set, index, items, itemsKey]);
     const saveClasses = useCallback(() => {
       save({ [classKey]: CP.flagsToWords(states) });
     }, [save, classKey, states]);
@@ -3019,7 +3018,7 @@
         }
       }
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, rtn.map((item3, index2) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: index2 }, item3)));
-    }, [ref]);
+    }, []);
     if (!item || !selectiveClasses) {
       return false;
     }
