@@ -3,7 +3,7 @@ window.Catpow = window.Catpow || {};
 
 window.Catpow.ga={
 	processerId:'ga',
-	// https://developers.google.com/gtagjs/reference/ga4-events?hl=ja
+	guideURL:'https://developers.google.com/gtagjs/reference/ga4-events?hl=ja',
 	eventTypes:{
 		add_payment_info:{label:'支払い情報を送信',options:['currency','value','items'],require:['currency','value','items']},
 		add_shipping_info:{label:'配送先情報を送信',options:['currency','value','items'],require:['currency','value','items']},

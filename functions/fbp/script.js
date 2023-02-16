@@ -3,7 +3,7 @@ window.Catpow = window.Catpow || {};
 
 window.Catpow.fbp={
 	processerId:'fbp',
-	// https://developers.facebook.com/docs/facebook-pixel/reference#object-properties
+	guideURL:'https://developers.facebook.com/docs/facebook-pixel/reference',
 	eventTypes:{
 		AddPaymentInfo:{label:'支払い情報の追加',options:['content_category','contents','currency','value'],require:[]},
 		AddToCart:{label:'カートに追加',options:['content_name','content_type','contents','currency','value'],require:['content_type','contents']},
