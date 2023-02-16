@@ -5,7 +5,7 @@ class hurigana extends katakana{
 	
 	public static function input($meta,$prm){
 		if(empty($meta->conf['reflect'])){return parent::input($meta,$prm);}
-		wp_enqueue_script('cp_kana_reflection');
+		wp_enqueue_script('jquery.catpow.kana_reflection');
 		
 		$path=$meta->the_data_path;
 		$input_name= \cp::get_input_name($path);
