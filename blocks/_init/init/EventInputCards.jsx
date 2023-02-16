@@ -8,31 +8,25 @@ CP.EventInputCards=(props)=>{
 
 	const reducer=useCallback((state,action)=>{
 		switch(action.type){
+			case 'UPDATE_ALL':{
+				return {events:action.events};
+			}
 			case 'UPDATE':{
 				state.events[action.index]={...state.events[action.index],...action.event};
-				const value=createEventValue(state.events);
-				onChange(value);
-				return {...state,value};
+				return {...state};
 			}
 			case 'CLONE':{
 				state.events.splice(action.index,0,{...state.events[action.index]});
-				const value=createEventValue(state.events);
-				onChange(value);
-				return {...state,value};
+				return {...state};
 			}
 			case 'REMOVE':{
 				state.events.splice(action.index,1);
-				const value=createEventValue(state.events);
-				onChange(value);
-				return {...state,value};
+				return {...state};
 			}
 		}
 		return state;
 	},[]);
-	const [state,dispatch]=useReducer(reducer,{
-		value:props.value,
-		events:parseEventValue(props.value)
-	});
+	const [state,dispatch]=useReducer(reducer,{events:[]});
 	const eventParamsWithoutLabel=useMemo(()=>{
 		const eventParamsWithoutLabel={};
 		Object.keys(eventParams).forEach((name)=>{
@@ -45,6 +39,17 @@ CP.EventInputCards=(props)=>{
 		if(!eventTypes){return [];}
 		return Object.keys(eventTypes).filter((eventType)=>eventType!=='_custom');
 	},[eventTypes]);
+	useEffect(()=>{
+		const timer=setTimeout(()=>{
+			onChange(createEventValue(state.events));
+		},500);
+		return ()=>clearTimeout(timer);
+	},[state]);
+	useEffect(()=>{
+		const events=parseEventValue(props.value);
+		if(events){dispatch({type:'UPDATE_ALL',events});}
+	},[props.value]);
+	
 
 	const EventInputCard=useCallback((props)=>{
 		const {event,index}=props;
@@ -117,7 +122,7 @@ CP.EventInputCards=(props)=>{
 								<div className="EventInputCard__item__inputs">
 									<CP.DynamicInput
 										param={eventParamsWithoutLabel[paramName]}
-										value={event[paramName]}
+										value={event[paramName] || ''}
 										onChange={(val)=>{
 											dispatch({type:'UPDATE',event:{[paramName]:val},index});
 										}}
