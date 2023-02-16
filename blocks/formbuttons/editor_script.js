@@ -1,5 +1,5 @@
 (() => {
-  // blocks/formbuttons/editor_script.jsx
+  // ../blocks/formbuttons/editor_script.jsx
   wp.blocks.registerBlockType("catpow/formbuttons", {
     title: "\u{1F43E} FormButtons",
     description: "\u30D5\u30A9\u30FC\u30E0\u7528\u306E\u30DC\u30BF\u30F3\u3067\u3059\u3002",
@@ -85,7 +85,7 @@
       if (attributes.EditMode === void 0) {
         attributes.EditMode = false;
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn), ",", /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
           title: "\u30AF\u30E9\u30B9",
@@ -114,7 +114,7 @@
           onChange: (clss) => setAttributes({ classes: clss }),
           value: classArray.join(" ")
         }
-      )), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), ",", /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })));
+      )), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })));
     },
     save({ attributes, className }) {
       const { items = [], classes = "" } = attributes;

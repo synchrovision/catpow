@@ -77,7 +77,7 @@
 
 		return (
 			<>
-				<ul className={classes}>{rtn}</ul>,
+				<ul className={classes}>{rtn}</ul>
 				<InspectorControls>
 					<CP.SelectClassPanel
 						title='クラス'
@@ -105,7 +105,7 @@
 						/>
 					</PanelBody>
 					<CP.ItemControlInfoPanel/>
-				</InspectorControls>,
+				</InspectorControls>
 				<BlockControls>
 					<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
 				</BlockControls>
