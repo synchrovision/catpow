@@ -84,7 +84,7 @@ window.Catpow.ga={
 			if(matches[index+1]!==undefined){rtn[key]=matches[index+1];}
 		});
 		if(rtn.currency){
-			rtn.currency=window.Catpow.fbp.currencies[rtn.currency];
+			rtn.currency=window.Catpow.ga.currencies[rtn.currency];
 		}
 		if(rtn.items){
 			rtn.items=rtn.items.split(',').map(function(chunk){
