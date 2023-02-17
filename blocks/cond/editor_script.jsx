@@ -17,7 +17,7 @@
 	example:CP.example,
 	edit({attributes,className,setAttributes}){
 		const {InnerBlocks,InspectorControls}=wp.blockEditor;
-		const {PanelBody,TextareaControl} = wp.components;
+		const {PanelBody,SelectControl,TextareaControl} = wp.components;
 		return [
 			<div className="embedded_content">
 				<div className="label">
