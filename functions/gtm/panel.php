@@ -1,3 +1,4 @@
+<?php namespace Catpow; ?>
 <dl>
 	<dt><i class="fa fa-google"></i>コンテナID</dt>
 	<dd><?php input('cp_gtm_container_id'); ?></dd>
@@ -11,6 +12,6 @@
 	</li>
 </ul>
 
-<ul class="buttons">
-	<li class="edit"><?php button('登録','action'); ?></li>
+<ul class="cp-admin-buttons">
+	<li class="item edit"><?php button('登録','action'); ?></li>
 </ul>

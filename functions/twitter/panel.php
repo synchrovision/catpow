@@ -14,6 +14,6 @@
 		</p>
 	</li>
 </ul>
-<ul class="buttons">
-	<li class="edit"><?php button('登録','action'); ?></li>
+<ul class="cp-admin-buttons">
+	<li class="item edit"><?php button('登録','action'); ?></li>
 </ul>

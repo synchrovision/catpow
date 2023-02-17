@@ -1,4 +1,158 @@
 @import 'admin_style_config.scss';
 
-html body .cp_admin ul.functions.active{
+.cp-admin{
+	.checkbox.cp-meta-item-use_functions{
+		.cp-meta-unit{
+			@include flx((w:w,j:c));
+			label.checkbox{
+				@include bnd((f:0 0 200));
+				@include flx((w:w,a:c));
+				&::before{
+					@include bnd((d:n));
+				}
+				.image{
+					@include bnd((d:ib,w:30,mg:0,mgr:10));
+					@include shd((b:-1));
+				}
+				.text{
+					@include bnd((f:1 1 a,p:r));
+					h4{
+						@include bnd((mg:0));
+						@include txt((a:l,p:13,f:t,w:m,c:t));
+					}
+					p{
+						@include bnd((d:b,p:a,w:14em,pd:1em,mg:0 a,l:-10em,r:-10em,z:1));
+						@include bg((c:m 90));
+						@include bdr((r:1em));
+						@include txt((a:j,p:11,w:r,c:i));
+						@include shd((b:2));
+						@include trn((t:.5s,y:2em,o:0));
+						@include usr((e:n));
+						&::before{
+							content: ' ';
+							@include bnd((w:1,h:1,p:a,t:-1em,l:1em));
+							@include bdr((s:s,w:.5em,c:n));
+							@include bdr((p:b,c:m 90));
+						}
+					}
+				}
+				&:hover{
+					.text{
+						p{
+							@include trn((y:1.5em,o:1));
+						}
+					}
+				}
+				&:not(.active){
+					.text{
+						h4{
+							@include txt((c:t 50));
+						}
+					}
+				}
+			}
+
+		}
+	}
+	
+	&-buttons{
+		@include bnd((pd:0,mg:0));
+		@include flx((w:w,j:c));
+		>.item{
+			@include bnd((f:0 1 300));
+			>.button{
+				@include bnd((d:b,p:r,mg:.5em,pd:.5em 1em));
+				@include bg((c:wp));
+				@include txt((a:c,p:16,h:1em,c:b,w:b));
+				@include bdr((s:n));
+				>.fas{
+					@include bnd((d:ib,mgr:.5em));
+				}
+			}
+		}
+	}
+	small{
+		@include bnd((d:b,pd:.5em));
+		@include txt((a:l));
+	}
+	&-functions{
+		@include grd((rc:200));
+		&>li{
+			@include bnd((mg:0));
+			@include trn((t:.5s));
+			&,&>.cpform_section{
+				&>.title{
+					@include bnd((d:b,p:r,pd:5,mg:10));
+					@include txt((a:c,p:20,h:1em,f:'Raleway',c:t));
+				}
+				.image{
+					@include bnd((mg:5));
+					@include bg((c:#fff));
+					@include bdr((r:10));
+					@include shd((b:-3));
+				}
+				.desc{
+					@include bnd((pd:5 10));
+					@include txt((a:j,p:12,h:1.5em,f:$gothic,s:r,c:t));
+				}
+				.control{
+					@include bnd((mg:10 20));
+				}
+			}
+			.cp_lightbox_content{
+				@include bnd((w:95% 1000));
+				@include flx((w:w));
+				.panel_body{
+					@include bnd((f:10 10 500,h:a 800,pd:20,bs:b,oy:a));
+					&>ul{
+						&>li{
+							@include bnd((pd:10 0));
+							@include txt((a:c));
+							h3{
+								@include bnd((mgb:10,pdb:10));
+								@include bdr((p:b,s:s,w:1,c:t 50));
+								@include txt((p:20));
+							}
+							p{
+								@include bnd((w:fit,mg:0 a,pd:1em));
+								@include txt((a:j,p:13));
+							}
+						}
+					}
+					dl{
+						@include bnd((pd:5));
+						@include flx((w:w,a:c));
+						dt{
+							@include bnd((f:1 1 150));
+							@include txt((p:15));
+							i.fab{
+								@include bnd((d:ib,mgr:.5em));
+							}
+						}
+						dd{
+							@include bnd((f:3 3 calc(100% - 200)));
+						}
+					}
+				}
+				.cpform_results{
+					@include bnd((f:1 1 200,pd:20,oy:a));
+					@include bg((c:t));
+					@include txt((c:b,p:12));
+				}
+				.button_close_panel{
+					@include bnd((p:a,t:-20,r:-20));
+					.button{
+						@include bnd((w:40,h:40,pd:10));
+						@include bdr((s:n,r:50%));
+						@include bg((c:wp));
+						@include shd((b:2));
+						@include txt((a:c,p:20,h:1em,c:b));
+						&::before{
+							@include ico('times');
+						}
+					}
+				}
+			}
+		}
+	}
 }

@@ -16,10 +16,11 @@ use Catpow\util\style_config;
 	<li>
 		<p class="caption">
 			<a href="https://fonts.adobe.com/my_fonts#web_projects-section" target="_blank">AdobeFonts WEBプロジェクト</a>で
-			使いたいプロジェクトのIDを入力し、各箇所に使用するフォントを設定してください。
+			使いたいプロジェクトのIDを入力し、
+			<a href="<?=wp_customize_url()?>" target="_blank">カスタマイズ</a>のフォントパネルで各箇所に使用するフォントを設定してください。
 		</p>
 	</li>
 </ul>
-<ul class="buttons">
-	<li><?php button('<i class="fas fa-sync-alt"></i>登録','action'); ?></li>
+<ul class="cp-admin-buttons">
+	<li class="item"><?php button('<i class="fas fa-sync-alt"></i>登録','action'); ?></li>
 </ul>

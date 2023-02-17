@@ -37,6 +37,6 @@ use Catpow\gauth\cpgc;
 		</p>
 	</li>
 </ul>
-<ul class="buttons">
-	<li><?php button('<i class="fas fa-sync-alt"></i>登録','action'); ?></li>
+<ul class="cp-admin-buttons">
+	<li class="item"><?php button('<i class="fas fa-sync-alt"></i>登録','action'); ?></li>
 </ul>

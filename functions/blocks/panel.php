@@ -7,6 +7,6 @@
 		<small>何も選択しない場合はテーマで使用可能なブロックが全て有効になります。</small>
 	</li> 
 </ul>
-<ul class="buttons">
-	<li><?php button('<i class="fas fa-sync-alt"></i>更新','action','reload'); ?></li>
+<ul class="cp-admin-buttons">
+	<li class="item"><?php button('<i class="fas fa-sync-alt"></i>更新','action','reload'); ?></li>
 </ul>

@@ -10,8 +10,8 @@
 			<span>アップロードするCSVを選択</span>
 			<input id="cp_admin_csv_upload" type="file" name="csv" accept="text/csv"/>
 		</label>
-		<ul class="buttons">
-			<li>
+		<ul class="cp-admin-buttons">
+			<li class="item">
 				<?php button('<i class="fas fa-upload"></i>アップロード','action','replace',['csv_action'=>'upload'],'section');?>
 			</li>
 		</ul>
@@ -20,8 +20,8 @@
 		<h3>CSVをダウンロード</h3>
 		<p>指定したデータのCSVをダウンロードします。</p>
 		<?php input('conf_data_path'); ?>
-		<ul class="buttons">
-			<li>
+		<ul class="cp-admin-buttons">
+			<li class="item">
 				<?php button('<i class="fas fa-download"></i>ダウンロード','action','download',['csv_action'=>'download'],'section');?>
 			</li>
 		</ul>	

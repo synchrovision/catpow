@@ -18,8 +18,8 @@
 		</td>
 	</tr>
 </table>
-<ul class="buttons">
-	<li>
+<ul class="cp-admin-buttons">
+	<li class="item">
 		<?php button('ユーザー切り替え','action');?>
 		<small>
 			管理画面以外のページにおけるユーザーのログイン情報を一時的に書き換えます。
