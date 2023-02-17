@@ -65,6 +65,7 @@ wp.blocks.registerBlockType('catpow/loopblockcontent',{
 		name:{type:'attribute',label:'名前',selector:'loopBlockContent',attribute:'name',default:'content'},
 	},
 	edit({attributes,className,setAttributes,clientId}){
+		const {InnerBlocks}=wp.blockEditor;
 		const {name}=attributes;
 
 		const template=(name=='on_empty')?[['core/paragraph',{align:'center',content:'Not Found'}]]:[['catpow/section']];
@@ -76,6 +77,7 @@ wp.blocks.registerBlockType('catpow/loopblockcontent',{
 		);
 	},
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		const {name}=attributes;
 		return (
 			<>
