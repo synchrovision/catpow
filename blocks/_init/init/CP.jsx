@@ -189,10 +189,10 @@
 	},
 	
 	selectPrevItem:(tag)=>{
-		jQuery(window.getSelection().anchorNode).closest(tag).prev().find('[contentEditable]').get(0).focus();
+		window.getSelection().anchorNode.parentNode.closest(tag).previousElementSibling.querySelector('[contentEditable]').focus();
 	},
 	selectNextItem:(tag)=>{
-		jQuery(window.getSelection().anchorNode).closest(tag).next().find('[contentEditable]').get(0).focus();
+		window.getSelection().anchorNode.parentNode.closest(tag).nextElementSibling.querySelector('[contentEditable]').focus();
 	},
 	saveItem:({items,itemsKey,set})=>{
 		set({[itemsKey || 'items']:JSON.parse(JSON.stringify(items))});
