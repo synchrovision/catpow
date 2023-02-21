@@ -47,9 +47,11 @@
         }, 1);
       }
       return () => {
-        refPrev.current.innerHTML = refCurrent.current.innerHTML;
+        if (refCurrent.current) {
+          refPrev.current.innerHTML = refCurrent.current.innerHTML;
+        }
       };
     }, [children]);
-    return /* @__PURE__ */ React.createElement("div", { className: `transition transition-${type}`, ref: refContainer }, /* @__PURE__ */ React.createElement("div", { className: "transition_prev transition_prev-" + (ready ? "from" : "to"), ref: refPrev }), /* @__PURE__ */ React.createElement("div", { className: "transition_current transition_current-" + (ready ? "from" : "to"), ref: refCurrent }, contents));
+    return /* @__PURE__ */ wp.element.createElement("div", { className: `transition transition-${type}`, ref: refContainer }, /* @__PURE__ */ wp.element.createElement("div", { className: "transition_prev transition_prev-" + (ready ? "from" : "to"), ref: refPrev }), /* @__PURE__ */ wp.element.createElement("div", { className: "transition_current transition_current-" + (ready ? "from" : "to"), ref: refCurrent }, contents));
   };
 })();

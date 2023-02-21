@@ -51,7 +51,7 @@
 			},1);
 		}
 		return ()=>{
-			refPrev.current.innerHTML=refCurrent.current.innerHTML;
+			if(refCurrent.current){refPrev.current.innerHTML=refCurrent.current.innerHTML;}
 		};
 	},[children]);
 	
