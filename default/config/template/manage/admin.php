@@ -18,13 +18,13 @@ $props=[
 ?>
 <div class="appContainer">
 	<div id="<?=$id?>"></div>
-	<script type="text/javascript">
-	document.addEventListener('DOMContentLoaded',function(){
-		<?php include $appFile; ?>
-		wp.element.render(
-			wp.element.createElement(app,<?=json_encode($props)?>),
-			document.getElementById('<?=$id?>')
-		);
-	});
+	<script type="module">
+		import App from "<?=CP::get_file_url('<!--data_type-->/<!--data_name-->/manage/app.module.js',0773)?>";
+		document.addEventListener('DOMContentLoaded',function(){
+			wp.element.render(
+				wp.element.createElement(App,<?=json_encode($props)?>),
+				document.getElementById('<?=$id?>')
+			);
+		});
 	</script>
 </div>
