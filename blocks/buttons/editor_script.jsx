@@ -178,7 +178,7 @@
 		);
 	},
 	save(props){
-		const {InnerBlock}=wp.blockEditor;
+		const {InnerBlocks}=wp.blockEditor;
 		const {attributes,className}=props;
 		const {items=[],classes,loopParam,doLoop}=attributes;
 		const states=CP.wordsToFlags(classes);

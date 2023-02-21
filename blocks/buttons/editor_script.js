@@ -1,5 +1,5 @@
 (() => {
-  // blocks/buttons/editor_script.jsx
+  // ../blocks/buttons/editor_script.jsx
   wp.blocks.registerBlockType("catpow/buttons", {
     title: "\u{1F43E} Buttons",
     description: "\u30DC\u30BF\u30F3\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
@@ -8,7 +8,7 @@
     example: CP.example,
     edit(props) {
       const { useState, useMemo } = wp.element;
-      const { BlockControls, InnerBlocks: InnerBlocks2, InspectorControls } = wp.blockEditor;
+      const { BlockControls, InnerBlocks, InspectorControls } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
       const { attributes, className, setAttributes, isSelected } = props;
       const { items = [], classes: classes2, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
@@ -152,10 +152,10 @@
           ],
           isTemplate: states.isTemplate
         }
-      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks2, null)) : /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, rtn))));
+      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, rtn))));
     },
     save(props) {
-      const { InnerBlock } = wp.blockEditor;
+      const { InnerBlocks } = wp.blockEditor;
       const { attributes, className } = props;
       const { items = [], classes: classes2, loopParam, doLoop } = attributes;
       const states = CP.wordsToFlags(classes2);
