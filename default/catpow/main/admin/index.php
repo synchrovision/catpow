@@ -8,4 +8,4 @@
 </div>
 <?php
 cp::enqueue_script('catpow/main/admin/script.js');
-cp::enqueue_style('catpow/main/admin/style.css',['wp-format-library','dashicons']);
+cp::enqueue_style('catpow/main/admin/style.css',['wp-format-library','dashicons','font_awesome']);
