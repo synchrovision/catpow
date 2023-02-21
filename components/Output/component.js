@@ -10,7 +10,7 @@
         return /* @__PURE__ */ wp.element.createElement("ul", { className: "OutputGroup" }, Object.keys(value).map((key) => {
           const row = value[key];
           console.log(conf);
-          return /* @__PURE__ */ wp.element.createElement("li", { className: "item", key }, Object.keys(conf.meta).map((name, index) => /* @__PURE__ */ wp.element.createElement("dl", { key: name, key: index }, /* @__PURE__ */ wp.element.createElement("dt", null, conf.meta[name].label), /* @__PURE__ */ wp.element.createElement("dd", null, /* @__PURE__ */ wp.element.createElement(Catpow.Output, { conf: conf.meta[name], value: row[name] })))));
+          return /* @__PURE__ */ wp.element.createElement("li", { className: "item", key }, Object.keys(conf.meta).map((name) => /* @__PURE__ */ wp.element.createElement("dl", { key: name }, /* @__PURE__ */ wp.element.createElement("dt", null, conf.meta[name].label), /* @__PURE__ */ wp.element.createElement("dd", null, /* @__PURE__ */ wp.element.createElement(Catpow.Output, { conf: conf.meta[name], value: row[name] })))));
         }));
       case "select":
       case "radio":

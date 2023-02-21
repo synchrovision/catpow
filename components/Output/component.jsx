@@ -11,8 +11,8 @@
 						console.log(conf);
 						return (
 							<li className="item" key={key}>
-								{Object.keys(conf.meta).map((name,index)=>(
-									<dl key={name} key={index}>
+								{Object.keys(conf.meta).map((name)=>(
+									<dl key={name}>
 										<dt>{conf.meta[name].label}</dt>
 										<dd><Catpow.Output conf={conf.meta[name]} value={row[name]}/></dd>
 									</dl>
