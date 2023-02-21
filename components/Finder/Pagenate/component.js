@@ -1,5 +1,5 @@
 (() => {
-  // components/Finder/Pagenate/component.jsx
+  // ../components/Finder/Pagenate/component.jsx
   Catpow.Finder.Pagenate = (props) => {
     const { useContext } = wp.element;
     const { state, dispatch } = useContext(Catpow.FinderContext);
@@ -28,7 +28,8 @@
           className: "item item" + p + " " + stateClass,
           onClick: () => {
             dispatch({ type: "setPage", page });
-          }
+          },
+          key: i
         },
         page
       );

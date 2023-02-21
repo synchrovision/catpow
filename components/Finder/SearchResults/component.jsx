@@ -30,7 +30,7 @@
 										{roleGroups.images.map((role)=>{
 											if(!colsToShowByRole[role] || !colsToShowByRole[role].length){return false;}
 											return colsToShowByRole[role].map((col)=>(
-												<Catpow.Output conf={col} {...row[col.name]}/>
+												<Catpow.Output conf={col} {...row[col.name]} key={col.name}/>
 											))
 										})}
 									</div>
@@ -39,11 +39,11 @@
 									{Object.keys(roleGroups).map((group)=>{
 										if(!hasRoleGroup(group) || group==='images'){return false;}
 										return (
-											<div className={group}>
+											<div className={group} key={group}>
 												{roleGroups[group].map((role)=>{
 													if(!colsToShowByRole[role] || !colsToShowByRole[role].length){return false;}
 													return colsToShowByRole[role].map((col)=>(
-														<Catpow.Output conf={col} {...row[col.name]}/>
+														<Catpow.Output conf={col} {...row[col.name]} key={col.name}/>
 													))
 												})}
 											</div>
@@ -72,7 +72,7 @@
 						</th>
 						<th className="focus"></th>
 						{state.colsToShow.map((col)=>(
-							<th className="cell">
+							<th className="cell" key={col.name}>
 								{col.label}
 								<span className={"sort sort-"+(state.sort[col.name] || 'none')} onClick={()=>{dispatch({type:'switchSort',key:col.name})}}></span>
 							</th>
@@ -81,11 +81,11 @@
 				</thead>
 				<tbody className="body">
 					{state.itemsInPage.map((row)=>(
-						<tr className={"row"+(row._selected?' selected':'')} key={'row'+row._id}>
+						<tr className={"row"+(row._selected?' selected':'')} key={row._id}>
 							<th className="control"><Catpow.CheckBox selected={row._selected} onChange={(selected)=>dispatch({type:selected?'selectRow':'deselectRow',row})}/></th>
 							<th className="focus"><div className={"icon dashicons dashicons-admin-page"} onClick={()=>dispatch({type:'focusItem',row})}></div></th>
 							{state.colsToShow.map((col)=>(
-								<td className="cell"><Catpow.Output conf={col} {...row[col.name]}/></td>
+								<td className="cell" key={col.name}><Catpow.Output conf={col} {...row[col.name]}/></td>
 							))}
 						</tr>
 					))}

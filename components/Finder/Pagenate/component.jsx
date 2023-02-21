@@ -29,6 +29,7 @@ Catpow.Finder.Pagenate=(props)=>{
 							onClick={()=>{
 								dispatch({type:'setPage',page});
 							}}
+							key={i}
 						>{page}</li>
 					);
 				})}
