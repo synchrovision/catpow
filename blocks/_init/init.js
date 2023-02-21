@@ -293,10 +293,10 @@
       return attr[key].split(" ").indexOf(value) !== -1;
     },
     selectPrevItem: (tag) => {
-      jQuery(window.getSelection().anchorNode).closest(tag).prev().find("[contentEditable]").get(0).focus();
+      window.getSelection().anchorNode.parentNode.closest(tag).previousElementSibling.querySelector("[contentEditable]").focus();
     },
     selectNextItem: (tag) => {
-      jQuery(window.getSelection().anchorNode).closest(tag).next().find("[contentEditable]").get(0).focus();
+      window.getSelection().anchorNode.parentNode.closest(tag).nextElementSibling.querySelector("[contentEditable]").focus();
     },
     saveItem: ({ items, itemsKey, set }) => {
       set({ [itemsKey || "items"]: JSON.parse(JSON.stringify(items)) });
@@ -318,7 +318,6 @@
         return false;
       items.splice(index - 1, 2, items[index], items[index - 1]);
       CP.saveItem(props);
-      CP.selectPrevItem(tag);
     },
     downItem: (props) => {
       var { tag, items, index } = props;
@@ -326,7 +325,6 @@
         return false;
       items.splice(index, 2, items[index + 1], items[index]);
       CP.saveItem(props);
-      CP.selectNextItem(tag);
     },
     switchItemColor: ({ items, index, set }, color, itemsKey) => {
       if (itemsKey === void 0) {
