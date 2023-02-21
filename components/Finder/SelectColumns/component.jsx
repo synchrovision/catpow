@@ -20,6 +20,7 @@ Catpow.Finder.SelectColumns=(props)=>{
 									label={cols[name].label}
 									selected={!cols[name].hide}
 									onChange={(val)=>dispatch({type:(val?'show':'hide')+'Column',name})}
+									key={name}
 								/>
 							))}
 						</div>

@@ -1,5 +1,5 @@
 (() => {
-  // components/Finder/SelectLayout/component.jsx
+  // ../components/Finder/SelectLayout/component.jsx
   Catpow.Finder.SelectLayout = (props) => {
     const { useContext } = wp.element;
     const { state, dispatch } = useContext(Catpow.FinderContext);
@@ -15,7 +15,8 @@
           className: "item" + (state.layout === sel.value ? " active" : ""),
           onClick: () => {
             dispatch({ type: "setLayout", layout: sel.value });
-          }
+          },
+          key: sel.value
         },
         /* @__PURE__ */ wp.element.createElement("div", { className: "icon dashicons dashicons-" + sel.icon })
       );

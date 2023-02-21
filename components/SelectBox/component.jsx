@@ -7,9 +7,9 @@
 				<option value={false}>{label}</option>
 			)}
 			{typeof options === 'object' && (Array.isArray(options)?(
-				options.map((val)=><option value={val}>{val}</option>)
+				options.map((val)=><option value={val} key={val}>{val}</option>)
 			):(
-				Object.keys(options).map((label)=><option value={options[label]}>{label}</option>)
+				Object.keys(options).map((label)=><option value={options[label]} key={label}>{label}</option>)
 			))}
 		</select>
 	);

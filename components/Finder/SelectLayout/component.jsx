@@ -20,6 +20,7 @@ Catpow.Finder.SelectLayout=(props)=>{
 							onClick={()=>{
 								dispatch({type:'setLayout',layout:sel.value})
 							}}
+							key={sel.value}
 						>
 							<div className={"icon dashicons dashicons-"+sel.icon}></div>
 						</li>
