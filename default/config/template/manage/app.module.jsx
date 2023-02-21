@@ -6,7 +6,7 @@ export default (props)=>{
 		const {Nav,Spacer,Main,SelectLayout,SelectColumns,BulkControl,FilterControl,Download,PerPage,Status,SearchResults,Focused,Pagenate}=Catpow.Finder;
 		const {state,dispatch,info}=useContext(Catpow.FinderContext);
 		
-		const Phase=useCallback((props)=>props.children)
+		const Phase=useCallback((props)=>props.children,[])
 		
 		return(
 			<Catpow.Transition>
