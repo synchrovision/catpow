@@ -6,19 +6,21 @@ export default (props)=>{
 		const {Nav,Spacer,Main,SelectLayout,SelectColumns,BulkControl,FilterControl,Download,PerPage,Status,SearchResults,Focused,Pagenate}=Catpow.Finder;
 		const {state,dispatch,info}=useContext(Catpow.FinderContext);
 		
+		const Phase=useCallback((props)=>props.children)
+		
 		return(
 			<Catpow.Transition>
 				{state.wait?(
-					<Fragment depth={0}>
+					<Phase depth={0}>
 						<Catpow.Spinner/>
-					</Fragment>
+					</Phase>
 				):state.focused?(
-					<Fragment depth={2}>
+					<Phase depth={2}>
 						<div className={"icon dashicons dashicons-arrow-left-alt"} onClick={()=>dispatch({type:'blurItem'})}></div>
 						<Focused/>
-					</Fragment>
+					</Phase>
 				):(
-					<Fragment depth={1}>
+					<Phase depth={1}>
 						<Nav>
 							<BulkControl/>
 							<SelectLayout/>
@@ -33,7 +35,7 @@ export default (props)=>{
 							<SearchResults/>
 						</Main>
 						<Pagenate/>
-					</Fragment>
+					</Phase>
 				)}
 			</Catpow.Transition>
 		);
