@@ -213,14 +213,12 @@
 		if(!items[index-1])return false;
 		items.splice(index-1,2,items[index],items[index-1]);
 		CP.saveItem(props);
-		CP.selectPrevItem(tag);
 	},
 	downItem:(props)=>{
 		var {tag,items,index}=props;
 		if(!items[index+1])return false;
 		items.splice(index,2,items[index+1],items[index]);
 		CP.saveItem(props);
-		CP.selectNextItem(tag);
 	},
 	
 	switchItemColor:({items,index,set},color,itemsKey)=>{
