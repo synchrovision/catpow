@@ -1,5 +1,5 @@
 (() => {
-  // blocks/simpletable/editor_script.jsx
+  // ../blocks/simpletable/editor_script.jsx
   wp.blocks.registerBlockType("catpow/simpletable", {
     title: "\u{1F43E} SimpleTable",
     description: "\u898B\u51FA\u3057\u3068\u672C\u6587\u306E\uFF12\u5217\u3067\u69CB\u6210\u3055\u308C\u308B\u30B7\u30F3\u30D7\u30EB\u306A\u30C6\u30FC\u30D6\u30EB\u3067\u3059\u3002",

@@ -96,7 +96,6 @@
 		const saveItems=()=>{
 			setAttributes({rows:JSON.parse(JSON.stringify(rows))});
 		};
-		
 		return (
 			<>
 				<InspectorControls>
