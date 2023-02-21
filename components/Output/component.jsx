@@ -11,8 +11,8 @@
 						console.log(conf);
 						return (
 							<li className="item" key={key}>
-								{Object.keys(conf.meta).map((name)=>(
-									<dl key={name}>
+								{Object.keys(conf.meta).map((name,index)=>(
+									<dl key={name} key={index}>
 										<dt>{conf.meta[name].label}</dt>
 										<dd><Catpow.Output conf={conf.meta[name]} value={row[name]}/></dd>
 									</dl>
@@ -28,8 +28,8 @@
 			const labels=(Array.isArray(value)?value:[value]).filter((val)=>!!val).map((val)=>conf.dict?conf.dict[val]:val);
 			if(!labels.length){return false;}
 			return (
-				<ul clasName="OutputLabels">
-					{labels.map((label)=><li className="item">{label}</li>)}
+				<ul className="OutputLabels">
+					{labels.map((label,index)=><li className="item" key={index}>{label}</li>)}
 				</ul>
 			);
 		}
@@ -37,8 +37,8 @@
 			return (
 				<ul className="OutputImages">
 					<li className="item">
-						{props.images.map((image)=>(
-							<img className="image" src={image.url}/>
+						{props.images.map((image,index)=>(
+							<img className="image" src={image.url} key={index}/>
 						))}
 					</li>
 				</ul>
