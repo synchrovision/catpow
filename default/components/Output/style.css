@@ -4,7 +4,7 @@
 .OutputGroup > .item + .item {
   border-top-style: solid;
   border-top-width: 0.0625rem;
-  border-top-color: #c7c7c7;
+  border-top-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 30),1);
 }
 .OutputGroup > .item dl {
   margin: 0rem;

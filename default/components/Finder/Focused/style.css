@@ -4,10 +4,10 @@
   width: 100%;
 }
 .FinderFocused > .items > .item {
-  background-color: #f6f6f6;
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 5),1);
 }
 .FinderFocused > .items > .item:nth-of-type(odd) {
-  background-color: #ececec;
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),1);
 }
 .FinderFocused > .items > .item > .label {
   padding: 0.625rem;

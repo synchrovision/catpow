@@ -13,7 +13,7 @@
   padding: 1.25rem;
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
-  border-bottom-color: #c7c7c7;
+  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 30),1);
   text-align: center;
   font-size: 1.125rem;
   line-height: 1em;
@@ -31,7 +31,7 @@
   padding: 0.625rem 1.875rem;
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
-  border-bottom-color: #dadada;
+  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 20),1);
 }
 .FinderBulkControlForm .inputs .item .label {
   margin: 0rem;
