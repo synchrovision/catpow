@@ -21,7 +21,7 @@
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
 				'color',
-				{name:'size',label:'サイズ',values:['large','medium','small']},
+				{name:'size',type:'buttons',label:'サイズ',values:['large','medium','small']},
 				{name:'url',input:'text',label:'URL',key:'url'}
 			];
 			wp.hooks.applyFilters('catpow.blocks.t-button.selectiveClasses',CP.finderProxy(selectiveClasses));

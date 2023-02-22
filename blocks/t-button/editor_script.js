@@ -1,5 +1,5 @@
 (() => {
-  // blocks/t-button/editor_script.jsx
+  // ../blocks/t-button/editor_script.jsx
   wp.blocks.registerBlockType("catpow/t-button", {
     title: "\u{1F43E} T-Button",
     description: "HTML\u30E1\u30FC\u30EB\u7528\u306E\u30C6\u30FC\u30D6\u30EB\u30EC\u30A4\u30A2\u30A6\u30C8\u306E\u30DC\u30BF\u30F3\u3067\u3059\u3002",
@@ -22,7 +22,7 @@
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
           "color",
-          { name: "size", label: "\u30B5\u30A4\u30BA", values: ["large", "medium", "small"] },
+          { name: "size", type: "buttons", label: "\u30B5\u30A4\u30BA", values: ["large", "medium", "small"] },
           { name: "url", input: "text", label: "URL", key: "url" }
         ];
         wp.hooks.applyFilters("catpow.blocks.t-button.selectiveClasses", CP.finderProxy(selectiveClasses2));
