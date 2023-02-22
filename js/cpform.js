@@ -1,4 +1,4 @@
-/* exported cpform */
+/* exported cpform Catpow */
 /* global cp wp console Promise*/
 
 const cpform=(form)=>{
@@ -240,11 +240,11 @@ const cpform=(form)=>{
 							bnd1.left !== bnd2.left ||
 							bnd1.top !== bnd2.top
 						){
-							var pos=el.position();
+							var pos=getComputedStyle(el);
 							el.style.width=bnd2.width;
 							el.style.height=bnd2.height;
-							el.style.left=pos.left+bnd2.left-bnd1.left;
-							el.style.top=pos.top+bnd2.top-bnd1.top;
+							el.style.left=(parseFloat(pos.left)+bnd2.left-bnd1.left)+'px';
+							el.style.top=(parseFloat(pos.top)+bnd2.top-bnd1.top)+'px';
 						}
 					}
 					else{
@@ -366,7 +366,7 @@ const cpform=(form)=>{
 			const sec=(target===form && target.dataset.role==="cpform_section")?target:target.closest('form,[data-role="cpform_section"]');
 			const id=(sec===form)?form.id:sec.dataset.sectionId;
 			var msgBox=form.querySelector('[data-role="cpform_message"][data-form-id="'+id+'"]');
-			if(!msgBox.length){
+			if(!msgBox){
 				window.console.error('Messge Box for the form is not exists');
 				window.console.error(data);
 				return;
@@ -377,15 +377,15 @@ const cpform=(form)=>{
 			data.message.forEach(function(msg){
 				if(!msg.class){msg.class='';}
 				const msgEl=el('div',{className:'message '+msg.class},[
-					el('div',{className:'text'},msg.message)
+					el('div',{className:'text'},[msg.message])
 				]);
-				msgEl.appendTo(msgBox);
+				msgBox.append(msgEl);
 				if(msg.selector){
 					var tgt;
 					if(form.matches(msg.selector)){
 						tgt=form;
 						msgEl.classList.add('no_target');
-						msgEl.appendTo(msgBox);
+						msgBox.append(msgEl);
 					}
 					else{
 						tgt=form.querySelector(msg.selector);
