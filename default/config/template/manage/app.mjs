@@ -1,5 +1,5 @@
-// ../default/config/template/manage/app.module.jsx
-var app_module_default = (props) => {
+// ../default/config/template/manage/app.mjs.jsx
+var app_mjs_default = (props) => {
   const { useCallback } = wp.element;
   const App = useCallback((props2) => {
     const { useContext, useCallback: useCallback2, Fragment } = wp.element;
@@ -11,5 +11,5 @@ var app_module_default = (props) => {
   return /* @__PURE__ */ wp.element.createElement(Catpow.Finder, { ...props }, /* @__PURE__ */ wp.element.createElement(App, null));
 };
 export {
-  app_module_default as default
+  app_mjs_default as default
 };
