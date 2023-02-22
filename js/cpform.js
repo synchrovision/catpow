@@ -323,6 +323,13 @@ const cpform=(form)=>{
 		dummy.innerHTML=html;
 		return dummy.children[0];
 	};
+	const evalScript=(el)=>{
+		const script=document.createElement("script");
+		script.type="text/javascript";
+		script.appendChild(document.createTextNode(el.textContent));
+		document.head.prepend(script);
+		script.remove();
+	};
 	const getLightBox=(container)=>{
 		const lightBox=container.querySelector('.cp_lightbox_container');
 		if(lightBox){return lightBox;}
