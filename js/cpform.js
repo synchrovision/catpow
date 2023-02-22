@@ -407,7 +407,7 @@ const cpform=(form)=>{
 			const topMessage=Array.from(form.querySelectorAll('.message')).reduce((p,c)=>{
 				p.getBoundingClientRect().top<c.getBoundingClientRect().top?p:c;
 			});
-			topMessage.scrollIntoView({behavior:'smooth'});
+			topMessage.scrollIntoView({behavior:'smooth',block:'center'});
 			form.dispatchEvent(new CustomEvent('update'));
 			return true;
 		},
