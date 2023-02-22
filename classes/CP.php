@@ -1801,15 +1801,15 @@ class CP{
 			if(is_array($conf['type'])){$conf['type']=reset($conf['type']);}
 			
 			if($conf['type']==='html'){
-				$front_styles=[self::get_file_path('mail.css',0733)=>true];
+				$styles=[self::get_file_path('mail.css',0733)=>true];
 				$body_class='';
-				$GLOBALS['wp_filter']['render_block']->callbacks[10]['collect_front_styles']=[
-					'function'=>function($block_content,$block)use(&$front_styles,&$body_class){
+				$GLOBALS['wp_filter']['render_block']->callbacks[10]['collect_styles']=[
+					'function'=>function($block_content,$block)use(&$styles,&$body_class){
 						$block_name=explode('/',$block['blockName'])[1]??null;
 						if(empty($block_name)){return $block_content;}
 						if(isset($block['attrs']['body_class'])){$body_class=$block['attrs']['body_class'];}
-						if($f=self::get_file_path('blocks/'.$block_name.'/front_style.css',0733)){
-							$front_styles[$f]=true;
+						if($f=self::get_file_path('blocks/'.$block_name.'/style.css',0733)){
+							$styles[$f]=true;
 						}
 						return $block_content;
 					},
@@ -1817,8 +1817,8 @@ class CP{
 				];
 				$body=apply_filters('the_content',$conf['message']);
 				$css='';
-				foreach($front_styles as $front_style=>$flag){
-					$css.=util\style_config::resolve_css_vars(file_get_contents($front_style));
+				foreach($styles as $style=>$flag){
+					$css.=util\style_config::resolve_css_vars(file_get_contents($style));
 				}
 				$conf['message']=
 					'<!DOCTYPE html><html lang="ja">'.
