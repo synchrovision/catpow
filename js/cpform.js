@@ -54,7 +54,9 @@ const cpform=(form)=>{
 	});
 	
 	const reflectCheckedState=(el)=>{
-		el.closest('label').classList.toggle('active',el.checked);
+		const label=el.closest('label');
+		if(!label){return;}
+		label.classList.toggle('active',el.checked);
 		document.querySelectorAll('label[for="'+el.id+'"]').classList.toggle('active',el.checked);
 	};
 	form.querySelectorAll('input:checked').forEach(reflectCheckedState);
