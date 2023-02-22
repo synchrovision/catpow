@@ -4,7 +4,7 @@
     const { useState, useReducer, useMemo, useCallback, useEffect } = wp.element;
     const [open, setOpen] = useState(false);
     const now = useMemo(() => Catpow.util.getDateObject("now"));
-    const [state, dispatch] = useReducer((state2, action) => {
+    const reducer = useCallback((state2, action) => {
       switch (action.type) {
         case "init": {
           state2.min = Catpow.util.getDateObject(props.min || "-80 year");
@@ -14,7 +14,6 @@
           state2.minYear = state2.min.getFullYear();
           state2.maxYear = state2.max.getFullYear();
           action.value = props.value;
-          return { ...state2 };
         }
         case "update": {
           const d = action.value ? Catpow.util.getDateObject(action.value) : new Date(
@@ -63,15 +62,16 @@
         }
       }
       return state2;
-    }, {});
+    }, []);
+    const [state, dispatch] = useReducer(reducer, {});
     useEffect(() => dispatch({ type: "init" }), []);
-    return /* @__PURE__ */ React.createElement("div", { className: "DateSelect" }, /* @__PURE__ */ React.createElement("div", { className: "inputs" }, /* @__PURE__ */ React.createElement(Catpow.SelectNumber, { label: "---", min: state.minYear, max: state.maxYear, value: state.year, onChange: (year) => {
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "DateSelect" }, /* @__PURE__ */ wp.element.createElement("div", { className: "inputs" }, /* @__PURE__ */ wp.element.createElement(Catpow.SelectNumber, { label: "---", min: state.minYear, max: state.maxYear, value: state.year, onChange: (year) => {
       dispatch({ type: "update", year });
-    } }), /* @__PURE__ */ React.createElement("span", { className: "unit" }, "\u5E74"), /* @__PURE__ */ React.createElement(Catpow.SelectNumber, { label: "---", min: state.minMonth, max: state.maxMonth, value: state.month, onChange: (month) => {
+    } }), /* @__PURE__ */ wp.element.createElement("span", { className: "unit" }, "\u5E74"), /* @__PURE__ */ wp.element.createElement(Catpow.SelectNumber, { label: "---", min: state.minMonth, max: state.maxMonth, value: state.month, onChange: (month) => {
       dispatch({ type: "update", month });
-    } }), /* @__PURE__ */ React.createElement("span", { className: "unit" }, "\u6708"), /* @__PURE__ */ React.createElement(Catpow.SelectNumber, { label: "---", min: state.minDate, max: state.maxDate, value: state.date, onChange: (date) => {
+    } }), /* @__PURE__ */ wp.element.createElement("span", { className: "unit" }, "\u6708"), /* @__PURE__ */ wp.element.createElement(Catpow.SelectNumber, { label: "---", min: state.minDate, max: state.maxDate, value: state.date, onChange: (date) => {
       dispatch({ type: "update", date });
-    } }), /* @__PURE__ */ React.createElement("span", { className: "unit" }, "\u65E5"), /* @__PURE__ */ React.createElement("span", { className: "btn calendar", onClick: () => setOpen(true) })), /* @__PURE__ */ React.createElement(Catpow.Popup, { open, onClose: () => setOpen(false), closeButton: true }, /* @__PURE__ */ React.createElement(
+    } }), /* @__PURE__ */ wp.element.createElement("span", { className: "unit" }, "\u65E5"), /* @__PURE__ */ wp.element.createElement("span", { className: "btn calendar", onClick: () => setOpen(true) })), /* @__PURE__ */ wp.element.createElement(Catpow.Popup, { open, onClose: () => setOpen(false), closeButton: true }, /* @__PURE__ */ wp.element.createElement(
       Catpow.Calendar,
       {
         className: "medium",
@@ -86,7 +86,7 @@
           dispatch({ type: "update", value });
         }
       }
-    )), state.value && /* @__PURE__ */ React.createElement(
+    )), state.value && /* @__PURE__ */ wp.element.createElement(
       Catpow.UI.HiddenValues,
       {
         name: props.name,

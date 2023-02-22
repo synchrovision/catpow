@@ -3,7 +3,7 @@
 	const [open,setOpen]=useState(false);
 	
 	const now=useMemo(()=>Catpow.util.getDateObject('now'));
-	const [state,dispatch]=useReducer((state,action)=>{
+	const reducer=useCallback((state,action)=>{
 		switch(action.type){
 			case 'init':{
 				state.min=Catpow.util.getDateObject(props.min || '-80 year');
@@ -13,7 +13,6 @@
 				state.minYear=state.min.getFullYear();
 				state.maxYear=state.max.getFullYear();
 				action.value=props.value;
-				return {...state};
 			}
 			case 'update':{
 				const d=action.value?(
@@ -67,7 +66,8 @@
 			}
 		}
 		return state;
-	},{});
+	},[]);
+	const [state,dispatch]=useReducer(reducer,{});
 	useEffect(()=>dispatch({type:'init'}),[]);
 	
 	return (
