@@ -52,6 +52,18 @@ const cpform=(form)=>{
 			form.querySelectorAll('input[name="'+e.target.name+'"]').forEach(reflectCheckedState);
 		}
 	});
+	const observer=new MutationObserver((mutationList)=>{
+		mutationList.forEach((mutation)=>{
+			if(mutation.type==='childList' && mutation.addedNodes){
+				mutation.addedNodes.forEach((addedNode)=>{
+					if(addedNode.nodeType===Node.ELEMENT_NODE){
+						addedNode.querySelectorAll('script').forEach(evalScript);
+					}
+				});
+			}
+		});
+	});
+	observer.observe(form,{childList:true,subtree:true});
 	
 	const reflectCheckedState=(el)=>{
 		const label=el.closest('label');
