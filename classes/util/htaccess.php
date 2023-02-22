@@ -41,6 +41,7 @@ RewriteRule .(jpe?g|png|gif)$ %{SCRIPT_FILENAME}.webp [T=image/webp]
 
 <IfModule mod_mime.c>
   AddType image/webp .webp
+  AddType text/javascript .mjs
 </IfModule>
 
 RewriteCond %{HTTP:Accept-Encoding} gzip
