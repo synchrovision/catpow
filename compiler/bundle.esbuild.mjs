@@ -45,9 +45,9 @@ let svgAsJsx={
 
 
 await esbuild.build({
-	entryPoints: [process.argv[2]],
-	outfile: process.argv[3],
-	format:path.basename(process.argv[3]).includes('module.')?'esm':'iife',
+	entryPoints:[process.argv[2]],
+	outfile:process.argv[3],
+	format:process.argv[3].substr(-4)==='.mjs'?'esm':'iife',
 	bundle:true,
 	jsxFactory:'wp.element.createElement',
 	jsxFragment:'wp.element.Fragment',

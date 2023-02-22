@@ -38,8 +38,8 @@ function get_jsx_files(){
 
 function cp_jsx_compile($jsx_files){
 	foreach($jsx_files as $jsx_file){
-		$js_file=substr($jsx_file,0,-1);
 		if(!file_exists($jsx_file)){continue;}
+		$js_file=substr($jsx_file,0,substr($jsx_file,-8)==='.mjs.jsx'?-4:-1);
 		if(!file_exists($js_file) or filemtime($js_file) < filemtime($jsx_file)){
 			passthru("node bundle.esbuild.mjs {$jsx_file} {$js_file}");
 			echo "build {$js_file}\n";
@@ -51,7 +51,7 @@ function cp_jsx_compile($jsx_files){
 function get_entry_files(){
 	$entry_files=[];
 	
-	foreach(glob(WP_CONTENT_DIR.'/{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{js,blocks/*,ui/*,components/*,stores/*,*/*/*}/*/index.jsx',GLOB_BRACE) as $entry_file){
+	foreach(glob(WP_CONTENT_DIR.'/{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{js,blocks/*,ui/*,components/*,stores/*,*/*/*}/*/index{,.mjs}.jsx',GLOB_BRACE) as $entry_file){
 		if(strpos($entry_file,'/node_modules/')!==false){continue;}
 		$entry_files[]=$entry_file;
 	}
@@ -59,9 +59,10 @@ function get_entry_files(){
 }
 function cp_jsx_bundle($entry_files){
 	foreach($entry_files as $entry_file){
-		$bundle_js_file=dirname($entry_file).'.js';
+		$dirname=dirname($entry_file);
+		$bundle_js_file=$dirname.(substr($entry_file,-8)==='.mjs.jsx'?'.mjs':'.js');
 		$latest_filetime=filemtime($entry_file);
-		foreach(glob(dirname($entry_file).'/*') as $bundle_file){
+		foreach(glob($dirname.'/*') as $bundle_file){
 			$latest_filetime=max($latest_filetime,filemtime($bundle_file));
 		}
 		if(!file_exists($bundle_js_file) or filemtime($bundle_js_file) < $latest_filetime){
