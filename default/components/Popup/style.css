@@ -1,12 +1,18 @@
 .Popup {
-  display: inline;
   position: relative;
+  visibility: hidden;
+  opacity: 0;
 }
 .Popup.open {
-  animation: PopupOpen 0.5s alternate 1 forwards;
+  visibility: visible;
+  -webkit-transition: visibility 0s, opacity 0.5s;
+  transition: visibility 0s, opacity 0.5s;
+  opacity: 1;
 }
 .Popup.close {
-  animation: PopupClose 0.5s alternate 1 forwards;
+  -webkit-transition: visibility 0s 0.5s, opacity 0.5s;
+  transition: visibility 0s 0.5s, opacity 0.5s;
+  opacity: 0;
 }
 .Popup.closed {
   display: none;
@@ -73,21 +79,5 @@
 .PopupBody .PopupControl .close::after {
   transform: -webkit- rotateZ(-45deg);
   transform: rotateZ(-45deg);
-}
-@keyframes PopupOpen {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes PopupClose {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
 }
 /*# sourceMappingURL=./style.css.map */

@@ -2,12 +2,14 @@
 
 
 .Popup{
-	@include bnd((d:i,p:r));
+	@include bnd((p:r,v:h));
+	@include trn((o:0));
 	&.open{
-		@include anm((a:PopupOpen .5s a 1 f));
+		@include bnd((v:v));
+		@include trn((t:(v 0s, o .5s),o:1));
 	}
 	&.close{
-		@include anm((a:PopupClose .5s a 1 f));
+		@include trn((t:(v 0s .5s, o .5s),o:0));
 	}
 	&.closed{
 		@include bnd((d:n));
@@ -46,22 +48,5 @@
 				}
 			}
 		}
-	}
-}
-
-@keyframes PopupOpen{
-	0%{
-		@include trn((o:0));
-	}
-	100%{
-		@include trn((o:1));
-	}
-}
-@keyframes PopupClose{
-	0%{
-		@include trn((o:1));
-	}
-	100%{
-		@include trn((o:0));
 	}
 }
