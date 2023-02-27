@@ -1,5 +1,5 @@
 (() => {
-  // blocks/ranking/editor_script.jsx
+  // ../blocks/ranking/editor_script.jsx
   CP.config.ranking = {
     imageKeys: {
       image: { src: "src", alt: "alt", items: "items" }

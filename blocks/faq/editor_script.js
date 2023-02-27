@@ -1,5 +1,5 @@
 (() => {
-  // blocks/faq/editor_script.jsx
+  // ../blocks/faq/editor_script.jsx
   CP.config.faq = {
     imageKeys: {
       image: { src: "src", alt: "alt", items: "items" }

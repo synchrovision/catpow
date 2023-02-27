@@ -1,5 +1,5 @@
 (() => {
-  // blocks/layouttable/editor_script.jsx
+  // ../blocks/layouttable/editor_script.jsx
   wp.blocks.registerBlockType("catpow/layouttable", {
     title: "\u{1F43E} LayoutTable",
     description: "\u30BB\u30EB\u306E\u7D50\u5408\u3068\u5E45\u306E\u6307\u5B9A\u304C\u3067\u304D\u308B\u30C6\u30FC\u30D6\u30EB\u3067\u3059\u3002",

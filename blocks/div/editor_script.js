@@ -1,5 +1,5 @@
 (() => {
-  // blocks/div/editor_script.jsx
+  // ../blocks/div/editor_script.jsx
   CP.config.div = {
     devices: ["sp", "tb"],
     imageKeys: {

@@ -1,5 +1,5 @@
 (() => {
-  // blocks/banners/editor_script.jsx
+  // ../blocks/banners/editor_script.jsx
   CP.config.banners = {
     imageKeys: {
       image: { src: "src", alt: "alt", code: "imageCode", items: "items" }

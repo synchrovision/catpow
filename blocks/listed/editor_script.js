@@ -1,5 +1,5 @@
 (() => {
-  // blocks/listed/editor_script.jsx
+  // ../blocks/listed/editor_script.jsx
   CP.config.listed = {
     imageKeys: {
       image: { src: "src", alt: "alt", code: "imageCode", items: "items" },

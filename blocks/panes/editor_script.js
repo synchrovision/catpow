@@ -1,5 +1,5 @@
 (() => {
-  // blocks/panes/editor_script.jsx
+  // ../blocks/panes/editor_script.jsx
   CP.config.panes = {
     imageKeys: {
       image: { src: "src", alt: "alt", code: "imageCode", items: "items" },

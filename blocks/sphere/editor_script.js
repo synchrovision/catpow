@@ -1,5 +1,5 @@
 (() => {
-  // blocks/sphere/editor_script.jsx
+  // ../blocks/sphere/editor_script.jsx
   CP.config.sphere = {
     imageKeys: {
       image: { src: "src", alt: "alt", items: "items" }

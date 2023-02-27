@@ -1,5 +1,5 @@
 (() => {
-  // default/config/template/app/config.json
+  // ../default/config/template/app/config.json
   var config_default = {
     name: "SampleApp",
     options: [
@@ -8,7 +8,7 @@
     deps: ["catpow"]
   };
 
-  // default/config/template/app/app/App.jsx
+  // ../default/config/template/app/app/App.jsx
   var { useState, useMemo, useCallback, useReducer, createContext, useEffect } = wp.element;
   var { bem } = Catpow.util;
   var PropsContext = createContext({});
@@ -39,6 +39,6 @@
     }))), /* @__PURE__ */ wp.element.createElement("div", { className: classes.footer() }))));
   };
 
-  // default/config/template/app/app/index.jsx
+  // ../default/config/template/app/app/index.jsx
   window[config_default.name] = App;
 })();

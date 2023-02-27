@@ -1,5 +1,5 @@
 (() => {
-  // blocks/slider/editor_script.jsx
+  // ../blocks/slider/editor_script.jsx
   CP.config.slider = {
     devices: ["sp", "tb"],
     imageKeys: {

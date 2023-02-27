@@ -1,5 +1,5 @@
 (() => {
-  // blocks/flow/editor_script.jsx
+  // ../blocks/flow/editor_script.jsx
   CP.config.flow = {
     imageKeys: {
       image: { src: "src", alt: "alt", items: "items" }

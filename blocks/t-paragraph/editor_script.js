@@ -1,5 +1,5 @@
 (() => {
-  // blocks/t-paragraph/editor_script.jsx
+  // ../blocks/t-paragraph/editor_script.jsx
   wp.blocks.registerBlockType("catpow/t-paragraph", {
     title: "\u{1F43E} T-Paragraph",
     description: "HTML\u30E1\u30FC\u30EB\u7528\u306E\u6BB5\u843D\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",

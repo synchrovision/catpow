@@ -1,5 +1,5 @@
 (() => {
-  // blocks/lightbox/editor_script.jsx
+  // ../blocks/lightbox/editor_script.jsx
   CP.config.lightbox = {
     imageKeys: {
       image: { src: "src", alt: "alt", code: "imageCode", items: "items" },

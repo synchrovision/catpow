@@ -1,5 +1,5 @@
 (() => {
-  // blocks/dialog/editor_script.jsx
+  // ../blocks/dialog/editor_script.jsx
   wp.blocks.registerBlockType("catpow/dialog", {
     title: "\u{1F43E} Dialog",
     description: "\u30D5\u30AD\u30C0\u30B7\u3067\u4F1A\u8A71\u3092\u8868\u73FE\u3059\u308B\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",

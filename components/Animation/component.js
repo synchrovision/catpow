@@ -50,7 +50,7 @@
         window.cancelAnimationFrame(requestID);
       };
     }, [props]);
-    return /* @__PURE__ */ React.createElement(Catpow.Animation.Context.Provider, { value: { state, dispatch } }, /* @__PURE__ */ React.createElement("div", { className, ref }, props.children));
+    return /* @__PURE__ */ wp.element.createElement(Catpow.Animation.Context.Provider, { value: { state, dispatch } }, /* @__PURE__ */ wp.element.createElement("div", { className, ref }, props.children));
   };
   Catpow.Animation.Context = wp.element.createContext({});
 })();

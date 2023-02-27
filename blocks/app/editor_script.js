@@ -1,5 +1,5 @@
 (() => {
-  // blocks/app/editor_script.jsx
+  // ../blocks/app/editor_script.jsx
   wp.blocks.registerBlockType("catpow/app", {
     title: "\u{1F43E} App",
     icon: "editor-code",

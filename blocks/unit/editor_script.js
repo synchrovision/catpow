@@ -1,5 +1,5 @@
 (() => {
-  // blocks/unit/editor_script.jsx
+  // ../blocks/unit/editor_script.jsx
   CP.config.unit = {
     devices: ["sp", "tb"],
     imageKeys: {

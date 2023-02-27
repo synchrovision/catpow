@@ -1,5 +1,5 @@
 (() => {
-  // blocks/siteheader/editor_script.jsx
+  // ../blocks/siteheader/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/siteheader", {
     title: "\u{1F43E} SiteHeader",
