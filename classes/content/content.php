@@ -424,7 +424,9 @@ class content{
 	public function __sleep(){
 		$keys=['data_path','tmp','file'];
 		if(isset($this->inherit)){$keys=array_merge($keys,array_keys($this->inherit));}
-		foreach($keys as $key){$this->$key;}
+		foreach($keys as $key){
+			if(!isset($this->$key)){$this->$key=null;}
+		}
 		$ref=new \ReflectionClass(static::class);
 		return array_merge(
 			$keys,
