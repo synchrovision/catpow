@@ -252,7 +252,7 @@ class blocks{
 				}
 			}
 		}
-		set_transient($transient,$data,\WEEK_IN_SECONDS);
+		set_transient($transient,$data);
 		return $data;
 	}
 	protected static function apply_conf_file(&$param,$conf_file){
