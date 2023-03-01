@@ -103,7 +103,7 @@
 				@include bnd((w:95% 1000));
 				@include flx((w:w));
 				.panel_body{
-					@include bnd((f:10 10 500,h:a 800,pd:20,bs:b,oy:a));
+					@include bnd((f:10 10 500,h:80vh 800,pd:20,bs:b,oy:a));
 					&>ul{
 						&>li{
 							@include bnd((pd:10 0));
