@@ -1,7 +1,7 @@
 <?php
 add_filter('posts_orderby',function($orderby){
 	global $wpdb;
-	return "{$wpdb->posts}.menu_order ASC,{$orderby}";
+	return "{$wpdb->posts}.menu_order ASC".(empty($orderby)?'':','.$orderby);
 });
 
 
