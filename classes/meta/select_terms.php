@@ -65,6 +65,7 @@ class select_terms extends select{
 		else{$addition=false;}
 		if(is_numeric($val) && $val>0){
 			$term=get_term($val);
+			if(empty($term)){return '';}
 			if(empty($prm)){return $term->name;}
 			$tax=$term->taxonomy;
 			global $taxonomies;
