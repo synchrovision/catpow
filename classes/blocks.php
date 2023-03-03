@@ -196,15 +196,10 @@ class blocks{
 									$param['view_script_handles'][]=$handle;
 									break;
 								default:
-									$parent_handle=sprintf(
-										'blocks/%s/%s%s',
-										$block_name,
-										(substr($fname,0,7)==='editor')?'editor_':'',
-										['js'=>'script.js','css'=>'style.css'][$ext]
-									);
-									if(isset($data[$ext][$parent_handle])){
-										$data[$ext][$parent_handle][2][]=$handle;
-									}
+									$param[
+										((substr($fname,0,7)==='editor')?'editor_':'').
+										['js'=>'script','css'=>'style'][$ext].'_handles'
+									][]=$handle;
 							}
 						}
 						break;
