@@ -1,5 +1,6 @@
 <?php
-update_option('cp_instagram_app_id',$_REQUEST['app_id']);
-update_option('cp_instagram_app_secret',$_REQUEST['app_secret']);
+namespace Catpow;
+receive();
+push();
 ?>
-InstagramAPIクライアントの登録情報を更新しました
+更新しました

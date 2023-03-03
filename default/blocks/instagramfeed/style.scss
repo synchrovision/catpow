@@ -1,0 +1,19 @@
+@import "admin_style_config.scss";
+
+.wp{
+	&-block{
+		&-catpow{
+			&-instagramfeed{
+				&-items{
+					@include flx((w:w));
+					&-item{
+						@include bnd((f:0 0 200));
+						&-img{
+							@include bnd((d:b,w:f,h:a));
+						}
+					}
+				}
+			}
+		}
+	}
+}

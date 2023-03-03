@@ -1,0 +1,20 @@
+.wp-block-catpow-instagramfeed-items {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.wp-block-catpow-instagramfeed-items-item {
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 12.5rem;
+}
+.wp-block-catpow-instagramfeed-items-item-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/*# sourceMappingURL=./style.css.map */
