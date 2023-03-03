@@ -107,6 +107,8 @@ Catpow.util={
 			}
 		});
 	},
+	classNamesToFlags:(classNames)=>classNames && classNames.split(' ').map(Catpow.util.kebabToCamel).reduce((p,c)=>p[c]=true,{}),
+	flagsToClassNames:(flags)=>flags && Object.keys(flags).filter((f)=>flags[f]).map(Catpow.util.camelToKebab).join(' '),
 	/*string*/
 	camelToKebab:(str)=>str.replace(/(\w)([A-Z])/g,'$1-$2').toLowerCase(),
 	camelToSnake:(str)=>str.replace(/(\w)([A-Z])/g,'$1_$2').toLowerCase(),
