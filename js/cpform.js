@@ -126,7 +126,14 @@ const cpform=(form)=>{
 		inputs.forEach((input)=>{
 			if(input.disabled){return;}
 			if(input.type==='file'){
-				if(input.files[0]){fd.append(input.name,input.files[0]);}
+				if(input.files[0]){
+					if(input.multiple){
+						Array.prototype.forEach.call(input.files,file=>fd.append(input.name,file));
+					}
+					else{
+						fd.append(input.name,input.files[0]);
+					}
+				}
 			}
 			else if((input.type==='checkbox' || input.type==="radio") && input.checked){
 				fd.append(input.name,input.value);
