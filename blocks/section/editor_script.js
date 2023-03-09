@@ -1,5 +1,5 @@
 (() => {
-  // blocks/section/editor_script.jsx
+  // ../blocks/section/editor_script.jsx
   var { __ } = wp.i18n;
   CP.config.section = {
     devices: ["sp", "tb"],
@@ -65,7 +65,7 @@
         const { devices: devices2, imageKeys: imageKeys2, imageSizes: imageSizes2 } = CP.config.section;
         const selectiveClasses2 = [
           { name: "sectionTag", input: "buttons", key: "SectionTag", label: __("\u30BB\u30AF\u30B7\u30E7\u30F3\u30BF\u30B0", "catpow"), values: ["article", "section", "aside", "div"] },
-          { name: "headingTag", input: "buttons", key: "HeadingTag", label: __("\u898B\u51FA\u3057\u30BF\u30B0", "catpow"), values: ["h2", "h3", "h4"], effect: (val, states2, { set }) => {
+          { name: "headingTag", input: "buttons", key: "HeadingTag", label: __("\u898B\u51FA\u3057\u30BF\u30B0", "catpow"), values: ["h1", "h2", "h3", "h4"], effect: (val, states2, { set }) => {
             for (const key in states2) {
               if (key.substr(0, 5) === "level") {
                 states2[key] = false;
@@ -146,7 +146,7 @@
               ],
               article: [
                 "color",
-                { name: "level", type: "buttons", label: __("\u30EC\u30D9\u30EB", "catpow"), values: { level2: "2", level3: "3", level4: "4" } },
+                { name: "level", type: "buttons", label: __("\u30EC\u30D9\u30EB", "catpow"), values: { level1: "1", level2: "2", level3: "3", level4: "4" } },
                 { name: "headingType", type: "gridbuttons", label: __("\u898B\u51FA\u3057\u30BF\u30A4\u30D7", "catpow"), filter: "heading_type", values: ["header", "headline", "catch"] },
                 { name: "headerImage", label: __("\u30D8\u30C3\u30C0\u753B\u50CF", "catpow"), values: "hasHeaderImage", sub: [
                   {

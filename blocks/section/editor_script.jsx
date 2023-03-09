@@ -49,7 +49,7 @@ wp.blocks.registerBlockType('catpow/section',{
 			const {devices,imageKeys,imageSizes}=CP.config.section;
 			const selectiveClasses=[
 				{name:'sectionTag',input:'buttons',key:'SectionTag',label:__('セクションタグ','catpow'),values:['article','section','aside','div']},
-				{name:'headingTag',input:'buttons',key:'HeadingTag',label:__('見出しタグ','catpow'),values:['h2','h3','h4'],effect:(val,states,{set})=>{
+				{name:'headingTag',input:'buttons',key:'HeadingTag',label:__('見出しタグ','catpow'),values:['h1','h2','h3','h4'],effect:(val,states,{set})=>{
 					for(const key in states){
 						if(key.substr(0,5)==='level'){states[key]=false;}
 					}
@@ -126,7 +126,7 @@ wp.blocks.registerBlockType('catpow/section',{
 						],
 						article:[
 							'color',
-							{name:'level',type:'buttons',label:__('レベル','catpow'),values:{level2:'2',level3:'3',level4:'4'}},
+							{name:'level',type:'buttons',label:__('レベル','catpow'),values:{level1:'1',level2:'2',level3:'3',level4:'4'}},
 							{name:'headingType',type:'gridbuttons',label:__('見出しタイプ','catpow'),filter:'heading_type',values:['header','headline','catch']},
 							{name:'headerImage',label:__('ヘッダ画像','catpow'),values:'hasHeaderImage',sub:[
 								{
