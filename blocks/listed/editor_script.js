@@ -143,7 +143,9 @@
       };
       let rtn = [];
       const { imageKeys } = CP.config.listed;
-      items.map((item, index) => {
+      [...Array(Math.max(items.length, loopCount)).keys()].forEach((i) => {
+        const index = i % items.length;
+        const item = items[index];
         if (!item.controlClasses) {
           item.controlClasses = "control";
         }
@@ -157,7 +159,7 @@
               items,
               index,
               isSelected,
-              key: index
+              key: i
             },
             states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(
               CP.SelectResponsiveImage,
@@ -261,12 +263,6 @@
           )
         );
       });
-      if (rtn.length < loopCount) {
-        let len = rtn.length;
-        while (rtn.length < loopCount) {
-          rtn.push(rtn[rtn.length % len]);
-        }
-      }
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectModeToolbar,
         {

@@ -145,8 +145,10 @@ wp.blocks.registerBlockType('catpow/listed',{
 
 		let rtn=[];
 		const {imageKeys}=CP.config.listed;
-
-		items.map((item,index)=>{
+		
+		[...Array(Math.max(items.length,loopCount)).keys()].forEach((i)=>{
+			const index=i%items.length;
+			const item=items[index];
 			if(!item.controlClasses){item.controlClasses='control';}
 			rtn.push(
 				<CP.Item
@@ -156,7 +158,7 @@ wp.blocks.registerBlockType('catpow/listed',{
 					items={items}
 					index={index}
 					isSelected={isSelected}
-					key={index}
+					key={i}
 				>
 					{states.hasImage && 
 						<div className="image">
@@ -276,13 +278,6 @@ wp.blocks.registerBlockType('catpow/listed',{
 				</CP.Item>
 			);
 		});
-
-		if(rtn.length<loopCount){
-			let len=rtn.length;
-			while(rtn.length<loopCount){
-				rtn.push(rtn[rtn.length%len]);
-			}
-		}
 
 		return (
 			<>
