@@ -1,0 +1,52 @@
+.SelectPreparedImage {
+  position: relative;
+}
+.SelectPreparedImage-icon {
+  display: block;
+  width: fit-content;
+  padding: 0.25rem;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+}
+.SelectPreparedImage-icon-img {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  object-position: center;
+  margin: 0rem;
+  border-style: none;
+}
+.SelectPreparedImage-list {
+  position: absolute;
+  top: 100%;
+  left: -50vw;
+  right: -50vw;
+  width: 18.75rem;
+  height: fit-content;
+  margin: auto;
+  z-index: 100;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 20),1);
+  box-shadow: 0 4px 9px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+}
+.SelectPreparedImage-list-item {
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 10%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.SelectPreparedImage-list-item-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.SelectPreparedImage-list-item.is-active {
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+}
+/*# sourceMappingURL=./input.css.map */

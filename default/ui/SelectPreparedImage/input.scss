@@ -1,0 +1,29 @@
+@import 'admin_style_config.scss';
+
+.SelectPreparedImage{
+	@include bnd((p:r));
+	&-icon{
+		@include bnd((d:b,w:fit,pd:4));
+		@include bg((c:m));
+		&-img{
+			@include bnd((d:b,w:32,h:32,op:c,mg:0));
+			@include bdr((s:n));
+		}
+	}
+	&-list{
+		@include bnd((p:a,t:100%,l:-50vw,r:-50vw,w:300,h:fit,mg:a,z:100));
+		@include flx((w:w));
+		@include bg((c:t 20));
+		@include shd((b:4));
+		&-item{
+			@include bnd((f:0 0 10%,bs:b));
+			@include usr((c:p));
+			&-img{
+				@include bnd((d:b,w:f,h:a));
+			}
+			&.is-active{
+				@include bg((c:m));
+			}
+		}
+	}
+}
