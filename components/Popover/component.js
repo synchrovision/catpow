@@ -1,12 +1,13 @@
 (() => {
-  // components/Popover/component.jsx
+  // ../components/Popover/component.jsx
   Catpow.Popover = function(props) {
-    const { children, open, onClose, closeButton } = props;
+    const { children, open, onClose, closeButton = false, closeOnClickAway = true } = props;
     const { Fragment, useEffect, useState, useRef } = wp.element;
     const [state, setPopoverState] = useState("closed");
     const [position, setPosition] = useState("");
     useEffect(() => setPopoverState(open ? "open" : state === "closed" ? "closed" : "close"), [open]);
     const ref = useRef({});
+    const [contentRef, setContentRef] = useState();
     useEffect(() => {
       if (ref.current.getBoundingClientRect && open) {
         const bnd = ref.current.getBoundingClientRect();
@@ -28,6 +29,18 @@
         setPosition(classes);
       }
     }, [ref, open]);
+    useEffect(() => {
+      if (!open || !contentRef || !closeOnClickAway) {
+        return;
+      }
+      const cb = (e) => {
+        if (!contentRef.contains(e.target)) {
+          onClose();
+        }
+      };
+      document.body.addEventListener("click", cb);
+      return () => document.body.removeEventListener("click", cb);
+    }, [open, closeOnClickAway, contentRef]);
     return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "PopoverAnchor", ref }), /* @__PURE__ */ wp.element.createElement(Catpow.External, { className: "PopoverContainer", trace: ref.current }, /* @__PURE__ */ wp.element.createElement(
       "div",
       {
@@ -36,7 +49,8 @@
           if (state === "close") {
             setPopoverState("closed");
           }
-        }
+        },
+        ref: setContentRef
       },
       /* @__PURE__ */ wp.element.createElement("div", { className: "PopoverBody" }, /* @__PURE__ */ wp.element.createElement("div", { className: "PopoverArrow" }), /* @__PURE__ */ wp.element.createElement("div", { className: "PopoverContents" }, children), closeButton && /* @__PURE__ */ wp.element.createElement("div", { className: "PopoverControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "close", onClick: onClose })))
     )));

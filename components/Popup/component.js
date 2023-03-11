@@ -1,5 +1,5 @@
 (() => {
-  // components/Popup/component.jsx
+  // ../components/Popup/component.jsx
   Catpow.Popup = (props) => {
     const { children, open, onClose, onClosed, closeButton = false, closeOnClickAway = true } = props;
     const { useState, useEffect } = wp.element;

@@ -1,5 +1,5 @@
 ﻿Catpow.Popover=function(props){
-	const {children,open,onClose,closeButton}=props;
+	const {children,open,onClose,closeButton=false,closeOnClickAway=true}=props;
 	const {Fragment,useEffect,useState,useRef}=wp.element;
 	const [state,setPopoverState]=useState('closed');
 	const [position,setPosition]=useState('');
@@ -7,6 +7,7 @@
 	useEffect(()=>setPopoverState(open?'open':(state==='closed'?'closed':'close')),[open]);
 	
 	const ref=useRef({});
+	const [contentRef,setContentRef]=useState();
 	
 	useEffect(()=>{
 		if(ref.current.getBoundingClientRect && open){
@@ -23,6 +24,15 @@
 		}
 	},[ref,open]);
 	
+	useEffect(()=>{
+		if(!open || !contentRef || !closeOnClickAway){return;}
+		const cb=(e)=>{
+			if(!contentRef.contains(e.target)){onClose();}
+		};
+		document.body.addEventListener('click',cb);
+		return ()=>document.body.removeEventListener('click',cb);
+	},[open,closeOnClickAway,contentRef]);
+	
 	return (
 		<Fragment>
 			<div className="PopoverAnchor" ref={ref}></div>
@@ -34,6 +44,7 @@
 							setPopoverState('closed');
 						}
 					}}
+					ref={setContentRef}
 				>
 					<div className="PopoverBody">
 						<div className="PopoverArrow"></div>
