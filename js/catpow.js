@@ -107,7 +107,7 @@ Catpow.util={
 			}
 		});
 	},
-	classNamesToFlags:(classNames)=>classNames && classNames.split(' ').map(Catpow.util.kebabToCamel).reduce((p,c)=>p[c]=true,{}),
+	classNamesToFlags:(classNames)=>classNames && classNames.split(' ').map(Catpow.util.kebabToCamel).reduce((p,c)=>{p[c]=true;return p},{}),
 	flagsToClassNames:(flags)=>flags && Object.keys(flags).filter((f)=>flags[f]).map(Catpow.util.camelToKebab).join(' '),
 	/*string*/
 	camelToKebab:(str)=>str.replace(/(\w)([A-Z])/g,'$1-$2').toLowerCase(),
