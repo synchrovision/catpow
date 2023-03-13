@@ -69,7 +69,7 @@
     filters: {},
     cache: {},
     config: {},
-    listedConvertibles: ["catpow/listed", "catpow/flow", "catpow/faq", "catpow/ranking", "catpow/dialog", "catpow/sphere", "catpow/slider", "catpow/banners", "catpow/lightbox", "catpow/panes"],
+    listedConvertibles: ["catpow/listed", "catpow/flow", "catpow/faq", "catpow/ranking", "catpow/dialog", "catpow/sphere", "catpow/slider", "catpow/banners", "catpow/lightbox", "catpow/panes", "catpow/slidablemenu"],
     tableConvertibles: ["catpow/simpletable", "catpow/datatable", "catpow/layouttable"],
     dummyText: {
       title: "\u543E\u8F29\u306F\u732B\u3067\u3042\u308B\u3002",

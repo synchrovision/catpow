@@ -1,0 +1,68 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-slidablemenu{
+	@include bnd((pd:.25em,sst:x m,ox:a));
+	>.items{
+		@include bnd((g:0,mg:0,pd:0));
+		@include txt((l:n));
+		>.item{
+			@include bnd((pd:.5em,bi:a,ssa:s));
+			>.contents{
+				@include bnd((o:h));
+				@include bdr((r:.5em));
+				@include flx((w:n));
+				@include bg((c:b));
+				@include shd((b:2));
+				>.image{
+					@include bnd((f:0 0 8em));
+					>img{
+						@include bnd((d:b,w:f,h:f,op:c,of:c));
+					}
+				}
+				>.texts{
+					@include bnd((f:1 1 10em,pd:.5em 1em));
+					>.title{
+						@include bnd((pd:0,mg:0,mgb:.5em));
+						@include txt((p:1.25em));
+					}
+					>.text{
+
+					}
+				}
+			}
+		}
+	}
+	&.small{
+		@include txt((p:12));
+		>.items{
+			@include bnd((c:var(--columns),w:calc(100% * var(--columns) / 4),g:0,mg:0,pd:0));
+			@include bp(-720){
+				@include bnd((w:calc(100% * var(--columns) / 3)));
+			}
+			@include bp(-480){
+				@include bnd((w:calc(100% * var(--columns) / 2)));
+			}
+		}
+	}
+	&.medium{
+		@include txt((p:14));
+		>.items{
+			@include bnd((c:var(--columns),w:calc(100% * var(--columns) / 3),g:0,mg:0,pd:0));
+			@include bp(-720){
+				@include bnd((w:calc(100% * var(--columns) / 2)));
+			}
+			@include bp(-480){
+				@include bnd((w:calc(100% * var(--columns))));
+			}
+		}
+	}
+	&.large{
+		@include txt((p:16));
+		>.items{
+			@include bnd((c:var(--columns),w:calc(100% * var(--columns) / 2),g:0,mg:0,pd:0));
+			@include bp(-720){
+				@include bnd((w:calc(100% * var(--columns))));
+			}
+		}
+	}
+}
