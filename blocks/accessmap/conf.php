@@ -22,9 +22,9 @@ $attributes=[
 		],
 		"default"=>[[
 			"classes"=>'item',
-			"title"=>['Title'],
-			"address"=>['Osaka city'],
-			"info"=>['info'],
+			"title"=>'Title',
+			"address"=>'Osaka city',
+			"info"=>'info',
 
 			"ll"=>'',
 			"q"=>''
