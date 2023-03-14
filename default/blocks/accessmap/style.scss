@@ -1,0 +1,39 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-accessmap{
+	@include bnd((pd:0,mg:0));
+	@include txt((l:n,ffs:p));
+	>.item{
+		@include bnd((pd:0,mg:0,h:20em a));
+		@include flx((w:w));
+		@include bg((c:s));
+		>.map{
+			@include bnd((f:1 1 25em));
+			>.gmap{
+				@include bnd((d:b,w:f,h:f));
+			}
+		}
+		>.access{
+			@include bnd((f:1 1 25em,pd:2em));
+			>.title{
+				@include bnd((pd:0,mg:0,mgb:.5em));
+				@include txt((p:1.5em));
+			}
+			>.address{
+				@include bnd((pd:0,mg:0,mgb:.5em));
+			}
+			>.info{
+				@include bnd((pd:0,mg:0));
+			}
+		}
+	}
+	&.large{
+		@include txt((p:18));
+	}
+	&.medium{
+		@include txt((p:14));
+	}
+	&.small{
+		@include txt((p:12));
+	}
+}

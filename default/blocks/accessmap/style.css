@@ -1,0 +1,62 @@
+.wp-block-catpow-accessmap {
+  padding: 0rem;
+  margin: 0rem;
+  list-style: none;
+  font-feature-settings: "palt";
+}
+.wp-block-catpow-accessmap > .item {
+  padding: 0rem;
+  margin: 0rem;
+  min-height: 20em;
+  height: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),1);
+}
+.wp-block-catpow-accessmap > .item > .map {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 25em;
+}
+.wp-block-catpow-accessmap > .item > .map > .gmap {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.wp-block-catpow-accessmap > .item > .access {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 25em;
+  padding: 2em;
+}
+.wp-block-catpow-accessmap > .item > .access > .title {
+  padding: 0rem;
+  margin: 0rem;
+  margin-bottom: 0.5em;
+  font-size: 1.5em;
+}
+.wp-block-catpow-accessmap > .item > .access > .address {
+  padding: 0rem;
+  margin: 0rem;
+  margin-bottom: 0.5em;
+}
+.wp-block-catpow-accessmap > .item > .access > .info {
+  padding: 0rem;
+  margin: 0rem;
+}
+.wp-block-catpow-accessmap.large {
+  font-size: 1.125rem;
+}
+.wp-block-catpow-accessmap.medium {
+  font-size: 0.875rem;
+}
+.wp-block-catpow-accessmap.small {
+  font-size: 0.75rem;
+}
+/*# sourceMappingURL=./style.css.map */

@@ -1,0 +1,9 @@
+.wp-block-catpow-accessmap > .item {
+  position: relative;
+}
+.wp-block-catpow-accessmap > .item .itemControl {
+  position: absolute;
+  top: 0.3125rem;
+  right: 0.3125rem;
+}
+/*# sourceMappingURL=./editor_style.css.map */

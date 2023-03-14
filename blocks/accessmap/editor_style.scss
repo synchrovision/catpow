@@ -1,0 +1,10 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-accessmap{
+	>.item{
+		@include bnd((p:r));
+		.itemControl{
+			@include bnd((p:a,t:5,r:5));
+		}
+	}
+}
