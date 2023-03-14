@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .SelectPreparedImage {
   position: relative;
 }
@@ -15,7 +16,7 @@
   margin: 0rem;
   border-style: none;
 }
-.SelectPreparedImage-list {
+.SelectPreparedImage-popover {
   position: absolute;
   top: 100%;
   left: -50vw;
@@ -24,6 +25,48 @@
   height: fit-content;
   margin: auto;
   z-index: 100;
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 20),1);
+  box-shadow: 0 4px 9px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+}
+.SelectPreparedImage-popover-search {
+  display: block;
+  position: relative;
+  padding: 0.5em;
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  font-size: 1rem;
+  line-height: 1em;
+}
+.SelectPreparedImage-popover-search::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  width: 1em;
+  height: 1em;
+  margin: auto;
+  margin-left: 1em;
+  font-family: "Material Icons";
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+}
+.SelectPreparedImage-popover-search .SelectPreparedImage-popover-search-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: block;
+  padding: 0.5em;
+  height: 1em;
+  width: 100%;
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 0.0625rem;
+  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 50),1);
+  border-left-width: 2em;
+}
+.SelectPreparedImage-popover-list {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -31,9 +74,8 @@
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 20),1);
-  box-shadow: 0 4px 9px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
-.SelectPreparedImage-list-item {
+.SelectPreparedImage-popover-list-item {
   -webkit-box-flex: 0;
   flex-grow: 0;
   flex-shrink: 0;
@@ -41,12 +83,12 @@
   box-sizing: border-box;
   cursor: pointer;
 }
-.SelectPreparedImage-list-item-img {
+.SelectPreparedImage-popover-list-item-img {
   display: block;
   width: 100%;
   height: auto;
 }
-.SelectPreparedImage-list-item.is-active {
+.SelectPreparedImage-popover-list-item.is-active {
   background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 /*# sourceMappingURL=./input.css.map */

@@ -11,10 +11,13 @@ Catpow.UI.SelectPreparedImage=(props)=>{
 	const {bem}=Catpow.util;
 	const classes=bem('SelectPreparedImage')
 	const [isOpen,setIsOpen]=useState(false);
+	const [search,setSearch]=useState('');
 	
 	useEffect(()=>{
 		wp.apiFetch({path:'cp/v1/images/'+props.type}).then(setImages);
 	},[setImages]);
+	
+	const filteredImages=useMemo(()=>images.filter((image)=>!search || image.url.indexOf(search)!==-1),[images,search]);
 	
 	return (
 		<div className={classes()}>
@@ -27,21 +30,31 @@ Catpow.UI.SelectPreparedImage=(props)=>{
 				/>
 			</div>
 			<Catpow.Popover open={isOpen} onClose={()=>setIsOpen(false)}>
-				<div className={classes.list()}>
-					{images.map((image)=>{
-						const url=setURLparams(image.url,{c:color});
-						const thisValue=(valueKey==='url')?url:image[valueKey];
-						return (
-							<div className={classes.list.item({'is-active':value==thisValue})} key={thisValue}>
-								<img
-									className={classes.list.item.img()}
-									src={url}
-									alt={image.alt}
-									onClick={()=>{setValue(thisValue)}}
-								/>
-							</div>
-						);
-					})}
+				<div className={classes.popover()}>
+					<div className={classes.popover.search()}>
+						<input
+							type="text"
+							className={classes.popover.search.input()}
+							onChange={(e)=>setSearch(e.target.value)}
+							value={search}
+						/>
+					</div>
+					<div className={classes.popover.list()}>
+						{filteredImages.map((image)=>{
+							const url=setURLparams(image.url,{c:color});
+							const thisValue=(valueKey==='url')?url:image[valueKey];
+							return (
+								<div className={classes.popover.list.item({'is-active':value==thisValue})} key={thisValue}>
+									<img
+										className={classes.popover.list.item.img()}
+										src={url}
+										alt={image.alt}
+										onClick={()=>{setValue(thisValue)}}
+									/>
+								</div>
+							);
+						})}
+					</div>
 				</div>
 			</Catpow.Popover>
 			<Catpow.UI.HiddenValues name={name} value={value}/>

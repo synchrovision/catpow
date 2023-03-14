@@ -10,19 +10,37 @@
 			@include bdr((s:n));
 		}
 	}
-	&-list{
+	&-popover{
 		@include bnd((p:a,t:100%,l:-50vw,r:-50vw,w:300,h:fit,mg:a,z:100));
-		@include flx((w:w));
 		@include bg((c:t 20));
 		@include shd((b:4));
-		&-item{
-			@include bnd((f:0 0 10%,bs:b));
-			@include usr((c:p));
-			&-img{
-				@include bnd((d:b,w:f,h:a));
+		&-search{
+			@include bnd((d:b,p:r,pd:.5em));
+			@include bg((c:b));
+			@include txt((p:16,h:1em));
+			&::before{
+				content:'\e8b6';
+				@include bnd((d:b,p:a,i:0,w:1em,h:1em,mg:a,mgl:1em));
+				@include txt((f:i,c:i));
 			}
-			&.is-active{
-				@include bg((c:m));
+			& &-input{
+				@include bnd((ap:n,d:b,pd:.5em,h:1em,w:f,bs:b));
+				@include bdr((s:s,w:1,c:t 50));
+				@include bdr((p:l,w:2em));
+			}
+		}
+		&-list{
+			@include flx((w:w));
+			@include bg((c:t 20));
+			&-item{
+				@include bnd((f:0 0 10%,bs:b));
+				@include usr((c:p));
+				&-img{
+					@include bnd((d:b,w:f,h:a));
+				}
+				&.is-active{
+					@include bg((c:m));
+				}
 			}
 		}
 	}
