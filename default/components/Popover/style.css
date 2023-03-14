@@ -24,7 +24,7 @@
   right: 0rem;
   width: 31.25rem;
   height: 6.25rem;
-  z-index: 1000000;
+  z-index: 99998;
   pointer-events: none;
 }
 .PopoverBody {
