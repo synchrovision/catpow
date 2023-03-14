@@ -3315,8 +3315,8 @@
   };
 
   // ../blocks/_init/init/DummyImage.jsx
-  CP.DummyImage = ({ text }) => {
-    return /* @__PURE__ */ wp.element.createElement("img", { src: wpinfo.plugins_url + "/catpow/callee/dummy_image.php?text=" + text });
+  CP.DummyImage = ({ className = "dummyimage", text }) => {
+    return /* @__PURE__ */ wp.element.createElement("img", { className, src: wpinfo.plugins_url + "/catpow/callee/dummy_image.php?text=" + text });
   };
 
   // ../blocks/_init/init/DataStructure.jsx
