@@ -10,7 +10,7 @@ if(cp::$content){
 		$org_vars=cp::$vars;
 		foreach($data['values'] as $values){
 			cp::$vars=array_merge(cp::$vars,$values);
-			echo do_shortcode($data['content']);
+			echo apply_filters('the_content',$data['content']);
 		}
 		cp::$vars=$org_vars;
 		return;
@@ -51,7 +51,7 @@ if(cp::$content){
 		else{
 			echo $data['before_loop']??'';
 			foreach($loop->loop() as $obj){
-				echo do_shortcode($data['content']);
+				echo apply_filters('the_content',$data['content']);
 			}
 			echo $data['after_loop']??'';
 		}
