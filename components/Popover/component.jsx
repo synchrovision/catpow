@@ -25,13 +25,13 @@
 	},[ref,open]);
 	
 	useEffect(()=>{
-		if(!open || !contentRef || !closeOnClickAway){return;}
+		if(!open || !contentRef || !onClose || !closeOnClickAway){return;}
 		const cb=(e)=>{
 			if(!contentRef.contains(e.target)){onClose();}
 		};
 		document.body.addEventListener('click',cb);
 		return ()=>document.body.removeEventListener('click',cb);
-	},[open,closeOnClickAway,contentRef]);
+	},[open,onClose,closeOnClickAway,contentRef]);
 	
 	return (
 		<Fragment>

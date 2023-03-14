@@ -30,7 +30,7 @@
       }
     }, [ref, open]);
     useEffect(() => {
-      if (!open || !contentRef || !closeOnClickAway) {
+      if (!open || !contentRef || !onClose || !closeOnClickAway) {
         return;
       }
       const cb = (e) => {
@@ -40,7 +40,7 @@
       };
       document.body.addEventListener("click", cb);
       return () => document.body.removeEventListener("click", cb);
-    }, [open, closeOnClickAway, contentRef]);
+    }, [open, onClose, closeOnClickAway, contentRef]);
     return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "PopoverAnchor", ref }), /* @__PURE__ */ wp.element.createElement(Catpow.External, { className: "PopoverContainer", trace: ref.current }, /* @__PURE__ */ wp.element.createElement(
       "div",
       {
