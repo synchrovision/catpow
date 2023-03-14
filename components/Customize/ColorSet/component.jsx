@@ -147,6 +147,7 @@
 				}
 			});
 		},[ref.current]);
+		
 		return (
 			<div className={"ColorSet-ColorPicker__item "+(open?'open':'close')}>
 				<div className={"chip "+(isDarkColor(value[role])?'is-dark':'is-light')} onClick={onClick} style={{backgroundColor:value[role]}}>
@@ -158,6 +159,7 @@
 							ref={ref}
 							type="text"
 							value={value[role]}
+							readOnly={true}
 							data-alpha-enabled={roles[role].alphaEnabled}
 							data-alpha-color-type={roles[role].alphaEnabled?'hsla':'hex'}
 						/>
@@ -267,7 +269,7 @@
 			return (
 				<div className="ColorSet-Preview__row">
 					{[...Array(12).keys()].map((i)=>(
-						<div className="ColorSet-Preview__row__item" style={{backgroundColor:'hsl('+(h+hr*(i-6)+hs)+','+s+'%,'+l+'%)'}}></div>
+						<div className="ColorSet-Preview__row__item" style={{backgroundColor:'hsl('+(h+hr*(i-6)+hs)+','+s+'%,'+l+'%)'}} key={i}></div>
 					))}
 				</div>
 			);
@@ -288,7 +290,7 @@
 				<div className="ColorSet">
 					<ModeSelect value={inputMode} onChange={setInputMode}/>
 					<div className="ColorSet-ColorPicker">
-						{Object.keys(roles).map((role)=><ColorPicker role={role} value={colors} open={role===activeRole} onClick={()=>setActiveRole(role===activeRole?null:role)}/>)}
+						{Object.keys(roles).map((role)=><ColorPicker role={role} value={colors} open={role===activeRole} onClick={()=>setActiveRole(role===activeRole?null:role)} key={role}/>)}
 					</div>
 					<HueRange value={colors}/>
 					<Preview value={colors}/>

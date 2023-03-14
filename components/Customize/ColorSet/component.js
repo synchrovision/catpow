@@ -1,5 +1,5 @@
 (() => {
-  // components/Customize/ColorSet/component.jsx
+  // ../components/Customize/ColorSet/component.jsx
   Catpow.Customize.ColorSet = (props) => {
     const { useState, useCallback, useMemo, useEffect, useRef, useReducer } = wp.element;
     const { id, value, onChange, param } = props;
@@ -167,6 +167,7 @@
           ref,
           type: "text",
           value: value2[role],
+          readOnly: true,
           "data-alpha-enabled": roles[role].alphaEnabled,
           "data-alpha-color-type": roles[role].alphaEnabled ? "hsla" : "hex"
         }
@@ -274,13 +275,13 @@
       const { value: value2 } = props2;
       const Row = useCallback((props3) => {
         const { h, s, l, hr, hs } = props3;
-        return /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet-Preview__row" }, [...Array(12).keys()].map((i) => /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet-Preview__row__item", style: { backgroundColor: "hsl(" + (h + hr * (i - 6) + hs) + "," + s + "%," + l + "%)" } })));
+        return /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet-Preview__row" }, [...Array(12).keys()].map((i) => /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet-Preview__row__item", style: { backgroundColor: "hsl(" + (h + hr * (i - 6) + hs) + "," + s + "%," + l + "%)" }, key: i })));
       }, []);
       return /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet-Preview" }, /* @__PURE__ */ wp.element.createElement(Row, { h: value2.tones.b.h, s: value2.tones.b.s, l: value2.tones.b.l, hr: value2.hueRange, hs: value2.hueShift }), /* @__PURE__ */ wp.element.createElement(Row, { h: value2.tones.s.h, s: value2.tones.s.s, l: value2.tones.s.l, hr: value2.hueRange, hs: value2.hueShift }), /* @__PURE__ */ wp.element.createElement(Row, { h: value2.tones.m.h, s: value2.tones.m.s, l: value2.tones.m.l, hr: value2.hueRange, hs: value2.hueShift }), /* @__PURE__ */ wp.element.createElement(Row, { h: value2.tones.a.h, s: value2.tones.a.s, l: value2.tones.a.l, hr: value2.hueRange, hs: value2.hueShift }));
     }, []);
     switch (inputMode) {
       case "pane": {
-        return /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet" }, /* @__PURE__ */ wp.element.createElement(ModeSelect, { value: inputMode, onChange: setInputMode }), /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet-ColorPicker" }, Object.keys(roles).map((role) => /* @__PURE__ */ wp.element.createElement(ColorPicker, { role, value: colors, open: role === activeRole, onClick: () => setActiveRole(role === activeRole ? null : role) }))), /* @__PURE__ */ wp.element.createElement(HueRange, { value: colors }), /* @__PURE__ */ wp.element.createElement(Preview, { value: colors }));
+        return /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet" }, /* @__PURE__ */ wp.element.createElement(ModeSelect, { value: inputMode, onChange: setInputMode }), /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet-ColorPicker" }, Object.keys(roles).map((role) => /* @__PURE__ */ wp.element.createElement(ColorPicker, { role, value: colors, open: role === activeRole, onClick: () => setActiveRole(role === activeRole ? null : role), key: role }))), /* @__PURE__ */ wp.element.createElement(HueRange, { value: colors }), /* @__PURE__ */ wp.element.createElement(Preview, { value: colors }));
       }
       case "bulk": {
         return /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet" }, /* @__PURE__ */ wp.element.createElement(ModeSelect, { value: inputMode, onChange: setInputMode }), /* @__PURE__ */ wp.element.createElement(BulkInput, { value: colors }), /* @__PURE__ */ wp.element.createElement(Preview, { value: colors }));
