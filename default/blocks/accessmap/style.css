@@ -6,34 +6,22 @@
 }
 .wp-block-catpow-accessmap > .item {
   padding: 0rem;
-  margin: 0rem;
-  min-height: 20em;
-  height: auto;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
   -webkit-box-lines: multiple;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),1);
-}
-.wp-block-catpow-accessmap > .item > .map {
-  -webkit-box-flex: 1;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 25em;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+  box-shadow: 0 4px 9px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
 .wp-block-catpow-accessmap > .item > .map > .gmap {
   display: block;
   width: 100%;
   height: 100%;
-}
-.wp-block-catpow-accessmap > .item > .access {
-  -webkit-box-flex: 1;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 25em;
-  padding: 2em;
+  object-position: center;
+  object-fit: cover;
 }
 .wp-block-catpow-accessmap > .item > .access > .title {
   padding: 0rem;
@@ -51,12 +39,99 @@
   margin: 0rem;
 }
 .wp-block-catpow-accessmap.large {
+  margin: auto;
   font-size: 1.125rem;
 }
+.wp-block-catpow-accessmap.large > .item {
+  min-height: 24em;
+  height: auto;
+  margin: 1.25rem auto;
+}
+.wp-block-catpow-accessmap.large > .item > .map {
+  height: 24em;
+  -webkit-box-flex: 4;
+  flex-grow: 4;
+  flex-shrink: 4;
+  flex-basis: 20em;
+}
+.wp-block-catpow-accessmap.large > .item > .access {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 20em;
+  padding: 2em;
+}
 .wp-block-catpow-accessmap.medium {
+  max-width: 62.5rem;
+  width: auto;
+  margin: auto;
+  padding: 0.625rem;
   font-size: 0.875rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+.wp-block-catpow-accessmap.medium > .item {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 40em;
+  min-height: 20em;
+  height: auto;
+}
+.wp-block-catpow-accessmap.medium > .item > .map {
+  height: 20em;
+  -webkit-box-flex: 2;
+  flex-grow: 2;
+  flex-shrink: 2;
+  flex-basis: 20em;
+}
+.wp-block-catpow-accessmap.medium > .item > .access {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 20em;
+  padding: 2em;
 }
 .wp-block-catpow-accessmap.small {
+  max-width: 62.5rem;
+  width: auto;
+  margin: auto;
+  padding: 0.625rem;
   font-size: 0.75rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+.wp-block-catpow-accessmap.small > .item {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 30em;
+  min-height: 20em;
+  height: auto;
+  min-height: 10em;
+  height: auto;
+}
+.wp-block-catpow-accessmap.small > .item > .map {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 10em;
+}
+.wp-block-catpow-accessmap.small > .item > .access {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 10em;
+  padding: 2em;
 }
 /*# sourceMappingURL=./style.css.map */

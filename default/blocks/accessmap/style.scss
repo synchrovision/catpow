@@ -4,17 +4,17 @@
 	@include bnd((pd:0,mg:0));
 	@include txt((l:n,ffs:p));
 	>.item{
-		@include bnd((pd:0,mg:0,h:20em a));
+		@include bnd((pd:0));
 		@include flx((w:w));
-		@include bg((c:s));
+		@include bg((c:m));
+		@include txt((c:i));
+		@include shd((b:4));
 		>.map{
-			@include bnd((f:1 1 25em));
 			>.gmap{
-				@include bnd((d:b,w:f,h:f));
+				@include bnd((d:b,w:f,h:f,op:c,of:c));
 			}
 		}
 		>.access{
-			@include bnd((f:1 1 25em,pd:2em));
 			>.title{
 				@include bnd((pd:0,mg:0,mgb:.5em));
 				@include txt((p:1.5em));
@@ -28,12 +28,45 @@
 		}
 	}
 	&.large{
+		@include bnd((mg:a));
 		@include txt((p:18));
+		>.item{
+			@include bnd((h:24em a,mg:20 a));
+			>.map{
+				@include bnd((h:24em,f:4 4 20em));
+			}
+			>.access{
+				@include bnd((f:1 1 20em,pd:2em));
+			}
+		}
 	}
 	&.medium{
+		@include bnd((w:a 1000,mg:a,pd:10));
 		@include txt((p:14));
+		@include flx((w:w,g:10));
+		>.item{
+			@include bnd((f:1 1 40em,h:20em a));
+			>.map{
+				@include bnd((h:20em,f:2 2 20em));
+			}
+			>.access{
+				@include bnd((f:1 1 20em,pd:2em));
+			}
+		}
 	}
 	&.small{
+		@include bnd((w:a 1000,mg:a,pd:10));
 		@include txt((p:12));
+		@include flx((w:w,g:10));
+		>.item{
+			@include bnd((f:1 1 30em,h:20em a));
+			@include bnd((h:10em a));
+			>.map{
+				@include bnd((f:1 1 10em));
+			}
+			>.access{
+				@include bnd((f:1 1 10em,pd:2em));
+			}
+		}
 	}
 }

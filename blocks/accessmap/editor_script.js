@@ -97,7 +97,7 @@
               isSelected,
               key: i
             },
-            /* @__PURE__ */ wp.element.createElement("div", { className: "map" }, states.isTemplate ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: q }) : /* @__PURE__ */ wp.element.createElement("iframe", { src: url, frameBorder: "0", className: "gmap", "data-ll": item.ll || false, "data-q": item.q || false })),
+            /* @__PURE__ */ wp.element.createElement("div", { className: "map" }, states.isTemplate ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { className: "gmap", text: q }) : /* @__PURE__ */ wp.element.createElement("iframe", { src: url, frameBorder: "0", className: "gmap", "data-ll": item.ll || false, "data-q": item.q || false })),
             /* @__PURE__ */ wp.element.createElement("div", { className: "access" }, /* @__PURE__ */ wp.element.createElement(
               RichText,
               {

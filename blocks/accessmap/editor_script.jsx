@@ -96,7 +96,7 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 				>
 					<div className="map">
 						{states.isTemplate?(
-							<CP.DummyImage text={q}/>
+							<CP.DummyImage className="gmap" text={q}/>
 						):(
 							<iframe src={url} frameBorder="0" className="gmap" data-ll={item.ll || false} data-q={item.q || false}></iframe>
 						)}
