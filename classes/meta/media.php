@@ -57,7 +57,7 @@ class media extends meta{
 		else{$dummy=\cp::get_file_url('images/dummy.jpg');}
 		
 		wp_enqueue_media();
-		wp_enqueue_script('cp_media_upload');
+		wp_enqueue_script('jquery.catpow.media_upload');
 		
 		if(empty($val)){
 			return sprintf(
