@@ -1,6 +1,5 @@
 /* global ytag */
 window.Catpow = window.Catpow || {};
-
 window.Catpow.yss={
 	processerId:'yss',
 	guideURL:false,
@@ -15,7 +14,7 @@ window.Catpow.yss={
 	parseEventString:function(str){
 		// action:category«label_name:label»#value@event
 		if(!str){return {};}
-		var matches=str.match(/^([\d\w_]+?)(?:#(\d+))?(?:@(\w+))?$/);
+		var matches=str.match(/^([\d\w_\-]+?)(?:#(\d+))?(?:@(\w+))?$/);
 		if(!matches){return {};}
 		var rtn={};
 		if(matches[1]){rtn.label=matches[1];}
