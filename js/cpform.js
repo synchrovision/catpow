@@ -135,8 +135,8 @@ const cpform=(form)=>{
 					}
 				}
 			}
-			else if((input.type==='checkbox' || input.type==="radio") && input.checked){
-				fd.append(input.name,input.value);
+			else if(input.type==='checkbox' || input.type==="radio"){
+				if(input.checked){fd.append(input.name,input.value);}
 			}
 			else{
 				fd.append(input.name,input.value);
