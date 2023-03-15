@@ -1,5 +1,5 @@
 (() => {
-  // blocks/panel/editor_script.jsx
+  // ../blocks/panel/editor_script.jsx
   CP.config.panel = {
     imageKeys: {
       icon: { src: "iconSrc", alt: "iconAlt", items: "items" },
@@ -45,8 +45,8 @@
                 { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink", sub: [
                   { name: "external", label: "\u5916\u90E8\u30EA\u30F3\u30AF", values: "linkExternal" }
                 ] },
-                { name: "rowSpan", label: "\u7E26\u30B5\u30A4\u30BA", values: { rspan1: "1", rspan2: "2", rspan3: "3" } },
-                { name: "colSpan", label: "\u6A2A\u30B5\u30A4\u30BA", values: { cspan1: "1", cspan2: "2", cspan3: "3" } }
+                { name: "rowSpan", type: "buttons", label: "\u7E26\u30B5\u30A4\u30BA", values: { rspan1: "1", rspan2: "2", rspan3: "3" } },
+                { name: "colSpan", type: "buttons", label: "\u6A2A\u30B5\u30A4\u30BA", values: { cspan1: "1", cspan2: "2", cspan3: "3" } }
               ],
               menu: [
                 "color",
@@ -61,8 +61,8 @@
                 { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink", sub: [
                   { name: "external", label: "\u5916\u90E8\u30EA\u30F3\u30AF", values: "linkExternal" }
                 ] },
-                { name: "rowSpan", label: "\u7E26\u30B5\u30A4\u30BA", values: { rspan1: "1", rspan2: "2", rspan3: "3" } },
-                { name: "colSpan", label: "\u6A2A\u30B5\u30A4\u30BA", values: { cspan1: "1", cspan2: "2", cspan3: "3" } }
+                { name: "rowSpan", type: "buttons", label: "\u7E26\u30B5\u30A4\u30BA", values: { rspan1: "1", rspan2: "2", rspan3: "3" } },
+                { name: "colSpan", type: "buttons", label: "\u6A2A\u30B5\u30A4\u30BA", values: { cspan1: "1", cspan2: "2", cspan3: "3" } }
               ]
             },
             bind: {
@@ -136,25 +136,29 @@
                 size: "vga"
               }
             )),
-            /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(
+            /* @__PURE__ */ wp.element.createElement("div", { className: "texts" }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement(
               RichText,
               {
+                tagName: "h3",
+                className: "title",
                 onChange: (title) => {
                   itemsCopy[index].title = title;
                   setAttributes({ items: itemsCopy });
                 },
                 value: item.title
               }
-            )), itemStates.hasText && /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(
+            ), itemStates.hasText && /* @__PURE__ */ wp.element.createElement(
               RichText,
               {
+                tagName: "p",
+                className: "text",
                 onChange: (text) => {
                   itemsCopy[index].text = text;
                   setAttributes({ items: itemsCopy });
                 },
                 value: item.text
               }
-            )), itemStates.hasLink && /* @__PURE__ */ wp.element.createElement("div", { className: "link" }, /* @__PURE__ */ wp.element.createElement(TextControl, { onChange: (linkUrl) => {
+            ), itemStates.hasLink && /* @__PURE__ */ wp.element.createElement("div", { className: "link" }, /* @__PURE__ */ wp.element.createElement(TextControl, { onChange: (linkUrl) => {
               itemsCopy[index].linkUrl = linkUrl;
               setAttributes({ items: itemsCopy });
             }, value: item.linkUrl })))
@@ -223,7 +227,7 @@
           this[key] = itemClassArray.indexOf(key) !== -1;
         }, itemStates);
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, itemStates.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement("img", { src: item.src, alt: item.alt })), /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), itemStates.hasText && /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })), itemStates.hasLink && /* @__PURE__ */ wp.element.createElement("div", { className: "link" }, /* @__PURE__ */ wp.element.createElement(
+          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, itemStates.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement("img", { src: item.src, alt: item.alt })), /* @__PURE__ */ wp.element.createElement("div", { className: "texts" }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "h3", className: "title", value: item.title }), itemStates.hasText && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "text", value: item.text }), itemStates.hasLink && /* @__PURE__ */ wp.element.createElement("div", { className: "link" }, /* @__PURE__ */ wp.element.createElement(
             "a",
             {
               href: item.linkUrl,

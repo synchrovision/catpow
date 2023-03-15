@@ -45,8 +45,8 @@ wp.blocks.registerBlockType('catpow/panel',{
 							{name:'link',label:'リンク',values:'hasLink',sub:[
 								{name:'external',label:'外部リンク',values:'linkExternal'}
 							]},
-							{name:'rowSpan',label:'縦サイズ',values:{rspan1:'1',rspan2:'2',rspan3:'3'}},
-							{name:'colSpan',label:'横サイズ',values:{cspan1:'1',cspan2:'2',cspan3:'3'}}
+							{name:'rowSpan',type:'buttons',label:'縦サイズ',values:{rspan1:'1',rspan2:'2',rspan3:'3'}},
+							{name:'colSpan',type:'buttons',label:'横サイズ',values:{cspan1:'1',cspan2:'2',cspan3:'3'}}
 						],
 						menu:[
 							'color',
@@ -61,8 +61,8 @@ wp.blocks.registerBlockType('catpow/panel',{
 							{name:'link',label:'リンク',values:'hasLink',sub:[
 								{name:'external',label:'外部リンク',values:'linkExternal'}
 							]},
-							{name:'rowSpan',label:'縦サイズ',values:{rspan1:'1',rspan2:'2',rspan3:'3'}},
-							{name:'colSpan',label:'横サイズ',values:{cspan1:'1',cspan2:'2',cspan3:'3'}}
+							{name:'rowSpan',type:'buttons',label:'縦サイズ',values:{rspan1:'1',rspan2:'2',rspan3:'3'}},
+							{name:'colSpan',type:'buttons',label:'横サイズ',values:{cspan1:'1',cspan2:'2',cspan3:'3'}}
 						]
 					},
 					bind:{
@@ -139,23 +139,23 @@ wp.blocks.registerBlockType('catpow/panel',{
 							/>
 						</div>
 					}
-					<div className="text">
+					<div className="texts">
 						{itemStates.hasIcon && <CP.OutputIcon item={item}/>}
 						{itemStates.hasTitle && 
-							<h3>
-								<RichText
-									onChange={(title)=>{itemsCopy[index].title=title;setAttributes({items:itemsCopy});}}
-									value={item.title}
-								/>
-							</h3>
+							<RichText
+								tagName="h3"
+								className="title"
+								onChange={(title)=>{itemsCopy[index].title=title;setAttributes({items:itemsCopy});}}
+								value={item.title}
+							/>
 						}
 						{itemStates.hasText &&
-							<p>
-								<RichText
-									onChange={(text)=>{itemsCopy[index].text=text;setAttributes({items:itemsCopy});}}
-									value={item.text}
-								/>
-							</p>
+							<RichText
+								tagName="p"
+								className="text"
+								onChange={(text)=>{itemsCopy[index].text=text;setAttributes({items:itemsCopy});}}
+								value={item.text}
+							/>
 						}
 						{itemStates.hasLink &&
 							<div className='link'>
@@ -239,10 +239,10 @@ wp.blocks.registerBlockType('catpow/panel',{
 			rtn.push(
 				<li className={item.classes} key={index}>
 					{itemStates.hasImage && <div className='image'><img src={item.src} alt={item.alt}/></div>}
-					<div className="text">
+					<div className="texts">
 						{itemStates.hasIcon && <CP.OutputIcon item={item}/>}
-						{itemStates.hasTitle && <h3><RichText.Content value={item.title}/></h3>}
-						{itemStates.hasText && <p><RichText.Content value={item.text}/></p>}
+						{itemStates.hasTitle && <RichText.Content tagName="h3" className="title" value={item.title}/>}
+						{itemStates.hasText && <RichText.Content tagName="p" className="text" value={item.text}/>}
 						{itemStates.hasLink &&
 							<div className='link'>
 								<a

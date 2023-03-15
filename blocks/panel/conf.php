@@ -1,9 +1,9 @@
 <?php
 $attributes=[
-	"classes"=>["source"=>'attribute',"selector"=>'ul',"attribute"=>'class',"default"=>'wp-block-catpow-panel panel tile column1 grid32'],
+	"classes"=>["source"=>'attribute',"selector"=>'.wp-block-catpow-panel',"attribute"=>'class',"default"=>'wp-block-catpow-panel panel tile column1 grid32'],
 	"items"=>[
 		"source"=>'query',
-		"selector"=>'li.item',
+		"selector"=>'.item',
 		'filters'=>[
 			'iconHolder'=>['selector'=>'.icon']
 		],
@@ -11,12 +11,12 @@ $attributes=[
 			'classes'=>['source'=>'attribute','attribute'=>'class'],
 			'src'=>['source'=>'attribute','selector'=>'.image [src]','attribute'=>'src'],
 			'alt'=>['source'=>'attribute','selector'=>'.image [src]','attribute'=>'alt'],
-			'title'=>['source'=>'html','selector'=>'.text h3'],
-			'text'=>['source'=>'html','selector'=>'.text p'],
-			'iconSrc'=>['source'=>'attribute','selector'=>'.text .icon [src]','attribute'=>'src'],
-			'iconAlt'=>['source'=>'attribute','selector'=>'.text .icon [src]','attribute'=>'alt'],
-			'linkUrl'=>['source'=>'attribute','selector'=>'.text .link a','attribute'=>'href'],
-			'linkText'=>['source'=>'text','selector'=>'.text .link a'],
+			'title'=>['source'=>'html','selector'=>'.texts .title'],
+			'text'=>['source'=>'html','selector'=>'.texts .text'],
+			'iconSrc'=>['source'=>'attribute','selector'=>'.texts .icon [src]','attribute'=>'src'],
+			'iconAlt'=>['source'=>'attribute','selector'=>'.texts .icon [src]','attribute'=>'alt'],
+			'linkUrl'=>['source'=>'attribute','selector'=>'.texts .link a','attribute'=>'href'],
+			'linkText'=>['source'=>'text','selector'=>'.texts .link a'],
 		],
 		"default"=>array_map(function($i){
 			return [
