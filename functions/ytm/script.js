@@ -12,7 +12,7 @@ window.Catpow.yss={
 		return value.split(' + ').map(window.Catpow.yss.parseEventString);
 	},
 	parseEventString:function(str){
-		// action:category«label_name:label»#value@event
+		// label#value@event
 		if(!str){return {};}
 		var matches=str.match(/^([\d\w_\-]+?)(?:#(\d+))?(?:@(\w+))?$/);
 		if(!matches){return {};}
