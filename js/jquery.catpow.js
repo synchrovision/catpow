@@ -962,7 +962,7 @@ jQuery.catpow.pageTopOffset=0;
 					});
 				});
 			});
-			o.observe(this.get(0),{childList:true,subtree:true});
+			if(this.get(0)){o.observe(this.get(0),{childList:true,subtree:true});}
 			$(this).each(function(){
 				this.querySelectorAll("a[href^='#']").forEach(cb);
 			});
