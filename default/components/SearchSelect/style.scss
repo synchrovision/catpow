@@ -1,0 +1,33 @@
+@import 'admin_style_config.scss';
+
+.SearchSelect{
+	&-selected{
+		&-items{
+			@include bnd((pd:.5em));
+			@include flx((w:w,g:.5em));
+			&-item{
+				@include bnd((w:5em a,pd:.5em 1em));
+				@include bg((c:b));
+				@include txt((a:c,c:t,h:1em));
+				@include bdr((r:1em));
+				@include shd((b:1));
+				@include usr((c:p));
+				&-button{
+					@include bnd((d:ib,w:1em,h:1em,mgl:.5em));
+					&::before{
+						content:'×';
+					}
+				}
+			}
+		}
+	}
+	&-search{
+		@include bnd((pd:10));
+		&-input{
+			@include bnd((d:b,w:f));
+		}
+	}
+	&-selections{
+		@include bnd((h:400,oy:a));
+	}
+}
