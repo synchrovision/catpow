@@ -144,13 +144,13 @@ wp.blocks.registerBlockType('catpow/section',{
 								{input:'image',label:__('アイコン','catpow'),keys:imageKeys.navIcon,size:'thumbnail'}
 							]},
 							{name:'patternImage',label:__('パターン画像','catpow'),values:'hasPatternImage',sub:[
-								{input:'pattern',css:'patternImageCss',sel:'#'+id,color},
+								{input:'pattern',css:'patternImageCss',sel:({attr})=>`#${attr.id}`,color},
 							]},
 							{name:'frameImage',label:__('フレーム画像','catpow'),values:'hasFrameImage',sub:[
-								{input:'frame',css:'frameImageCss',sel:'#'+id,color},
+								{input:'frame',css:'frameImageCss',sel:({attr})=>`#${attr.id}`,color},
 							]},
 							{name:'borderImage',label:__('ボーダー画像','catpow'),values:'hasBorderImage',sub:[
-								{input:'border',css:'borderImageCss',sel:'#'+id+' > .contents',color},
+								{input:'border',css:'borderImageCss',sel:({attr})=>`#${attr.id} > .contents`,color},
 							]},
 							{
 								name:'template',
@@ -192,7 +192,7 @@ wp.blocks.registerBlockType('catpow/section',{
 								{input:'image',label:__('アイコン','catpow'),keys:imageKeys.navIcon,size:'thumbnail'}
 							]},
 							{name:'borderImage',label:__('ボーダー画像','catpow'),values:'hasBorderImage',sub:[
-								{input:'border',css:'borderImageCss',sel:'#'+id+' > .contents',color},
+								{input:'border',css:'borderImageCss',sel:({attr})=>`#${attr.id} > .contents`,color},
 							]},
 							{
 								name:'template',

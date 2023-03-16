@@ -166,13 +166,13 @@
                   { input: "image", label: __("\u30A2\u30A4\u30B3\u30F3", "catpow"), keys: imageKeys2.navIcon, size: "thumbnail" }
                 ] },
                 { name: "patternImage", label: __("\u30D1\u30BF\u30FC\u30F3\u753B\u50CF", "catpow"), values: "hasPatternImage", sub: [
-                  { input: "pattern", css: "patternImageCss", sel: "#" + id, color }
+                  { input: "pattern", css: "patternImageCss", sel: ({ attr }) => `#${attr.id}`, color }
                 ] },
                 { name: "frameImage", label: __("\u30D5\u30EC\u30FC\u30E0\u753B\u50CF", "catpow"), values: "hasFrameImage", sub: [
-                  { input: "frame", css: "frameImageCss", sel: "#" + id, color }
+                  { input: "frame", css: "frameImageCss", sel: ({ attr }) => `#${attr.id}`, color }
                 ] },
                 { name: "borderImage", label: __("\u30DC\u30FC\u30C0\u30FC\u753B\u50CF", "catpow"), values: "hasBorderImage", sub: [
-                  { input: "border", css: "borderImageCss", sel: "#" + id + " > .contents", color }
+                  { input: "border", css: "borderImageCss", sel: ({ attr }) => `#${attr.id} > .contents`, color }
                 ] },
                 {
                   name: "template",
@@ -214,7 +214,7 @@
                   { input: "image", label: __("\u30A2\u30A4\u30B3\u30F3", "catpow"), keys: imageKeys2.navIcon, size: "thumbnail" }
                 ] },
                 { name: "borderImage", label: __("\u30DC\u30FC\u30C0\u30FC\u753B\u50CF", "catpow"), values: "hasBorderImage", sub: [
-                  { input: "border", css: "borderImageCss", sel: "#" + id + " > .contents", color }
+                  { input: "border", css: "borderImageCss", sel: ({ attr }) => `#${attr.id} > .contents`, color }
                 ] },
                 {
                   name: "template",
