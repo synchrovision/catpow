@@ -1,2 +1,2 @@
 <?php
-$useComponents=['Popup','SelectTable'];
+$useComponents=['SearchSelect'];
