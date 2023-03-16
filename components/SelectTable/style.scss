@@ -1,7 +1,7 @@
 @import 'admin_style_config.scss';
 
 
-table.SelectTable{
+.SelectTable{
 	@include bnd((w:f));
 	@include tbl((l:f));
 	&.hasLargeFontSize{
@@ -14,14 +14,17 @@ table.SelectTable{
 		@include txt((p:8));
 		@include bp(2){@include txt((p:12));}
 	}
-	tbody{
-		tr{
-			td{
+	&-tbody{
+		&-tr{
+			&-td{
 				@include bnd((pd:10 0));
 				@include bdr((s:s,w:1,c:t 50));
 				@include txt((a:c));
 				@include usr((c:p));
-				&.active,&:hover{
+				&:hover{
+					@include bg((c:s));
+				}
+				&.is-active{
 					@include bg((c:m));
 					@include txt((c:b));
 				}

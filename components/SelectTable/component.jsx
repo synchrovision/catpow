@@ -1,27 +1,38 @@
-﻿Catpow.SelectTable=function({selections,value,onChange,spacer,col}){
-	var i,items,values,fontSize,className="SelectTable",rows=[];
-	spacer=spacer || 0;
-	col=col || 5;
+﻿Catpow.SelectTable=(props)=>{
+	const {className="SelectTable",selections,value,onChange,spacer=0,col=5,multipe=false}=props;
+	var i,items,values,fontSize,rows=[];
+	const {useMemo,useCallback}=wp.element;
+	const {bem}=Catpow.util;
+	const classes=bem(className);
+	const itemClasses=classes.tbody.tr.td;
+	
+	const isActiveValue=useCallback((val)=>{
+		if(Array.isArray(value)){return value.includes(val);}
+		return value===val;
+	},[value]);
+	
 	if(Array.isArray(selections)){
-		values=selections;
 		items=selections.map((val)=>(
-			<td className={val===value?'item active':'item'} onClick={()=>{
+			<td className={itemClasses({'is-active':isActiveValue(val)})} onClick={()=>{
 				onChange(val);
 			}} key={val}>{val}</td>
 		));
 	}
 	else{
-		values=Object.values(selections);
 		items=Object.keys(selections).map((key)=>(
-			<td className={selections[key]===value?'item active':'item'} onClick={()=>{
+			<td className={itemClasses({'is-active':isActiveValue(selections[key])})} onClick={()=>{
 				onChange(selections[key]);
 			}} key={key}>{key}</td>
 		));
 	}
-	fontSize=(360/col-5)/Math.max(...(values.map((val)=>val.toString().length)));
-	if(fontSize>20){className+=' hasLargeFontSize';}
-	else if(fontSize>10){className+=' hasRegularFontSize';}
-	else{className+=' hasSmallFontSize';}
+	
+	const allLabels=useMemo(()=>Array.isArray(selections)?selections:Object.keys(selections),[selections]);
+	const fontSizeClass=useMemo(()=>{
+		const fontSize=(360/col-5)/Math.max(...(allLabels.map((label)=>label.toString().length)));
+		if(fontSize>20){return 'hasLargeFontSize';}
+		if(fontSize>10){return 'hasRegularFontSize';}
+		return 'hasSmallFontSize';
+	},[col,allLabels]);
 	
 	for(i=0;i<spacer;i++){
 		items.unshift(<td className="spacer" key={`start-spacer-${i}`}></td>);
@@ -33,9 +44,9 @@
 		rows.push(items.slice(i,i+col));
 	}
 	return (
-		<table className={className}>
-			<tbody>
-				{rows.map((row,index)=><tr key={index}>{row}</tr>)}
+		<table className={classes(fontSizeClass)}>
+			<tbody className={classes.tbody()}>
+				{rows.map((row,index)=><tr className={classes.tbody.tr()} key={index}>{row}</tr>)}
 			</tbody>
 		</table>
 	);
