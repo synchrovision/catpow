@@ -237,7 +237,7 @@ class meta extends content{
 	/*loop*/
 	public function loop(){
 		if(\cp::$content!==$this){$org_content=\cp::$content;\cp::$content=$this;}
-		$class_name=\cp::get_class_name('meta',$this->conf['type']);
+		$class_name=\cp::get_class_name('meta',$this->conf['type']??'text');
 		if(class_exists($class_name)){
 			foreach($class_name::loop($this) as $this->loop_id=>$meta_value){yield $this->loop_id=>$meta_value;}
 			unset($this->loop_id);
