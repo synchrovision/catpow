@@ -17,6 +17,19 @@
           }
         )
       );
+      EventInputs.push(
+        /* @__PURE__ */ wp.element.createElement(
+          CP.EventInputCards,
+          {
+            title: "Yahoo JAD conversion",
+            value: item["yjadEvent"],
+            onChange: (yjadEvent) => {
+              save({ yjadEvent });
+            },
+            processer: window.Catpow.yjad
+          }
+        )
+      );
       return EventInputs;
     }
   );

@@ -2,7 +2,9 @@
 $conf=[
 	'cat'=>'yahoo',
 	'meta'=>[
-		'cp_yss_id'=>['type'=>'options','option'=>'cp_yss_id','placeholder'=>'ID（10桁の数値）','size'=>50],
+		'cp_yss_id'=>['type'=>'options','option'=>'cp_yss_id','placeholder'=>'yahoo_conversion_id','size'=>50],
 		'cp_yss_use_retargeting'=>['type'=>'options','input_type'=>'radio','value'=>['使う'=>1,'使わない'=>0]],
+		'cp_yjad_id'=>['type'=>'options','option'=>'cp_yjad_id','placeholder'=>'yahoo_ydn_conv_io','size'=>50],
+		'cp_yjad_retargeting_id'=>['type'=>'options','option'=>'cp_yjad_retargeting_id','placeholder'=>'yahoo_retargeting_id','size'=>50],
 	]
 ];
