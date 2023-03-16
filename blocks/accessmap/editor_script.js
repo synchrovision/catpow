@@ -24,6 +24,7 @@
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
           { name: "size", type: "buttons", label: "\u30B5\u30A4\u30BA", values: ["small", "medium", "large"] },
+          { name: "mapColor", type: "buttons", label: "\u5730\u56F3\u306E\u8272", values: { mapColorNone: "\u901A\u5E38", mapColorGray: "\u30B0\u30EC\u30FC", mapColorSync: "\u540C\u8272" } },
           { name: "titleTag", input: "buttons", filter: "titleTag", key: "TitleTag", label: "\u30BF\u30A4\u30C8\u30EB\u30BF\u30B0", values: ["h2", "h3", "h4"], effect: (val, { set }) => {
             if (/^h\d$/.test(val)) {
               set({ titleTag: "h" + (parseInt(val[1]) + 1) });
@@ -50,6 +51,7 @@
       }, []);
       const selectiveItemClasses = useMemo(() => {
         const selectiveItemClasses2 = [
+          "color",
           { name: "q", key: "q", input: "text", label: "\u30DE\u30FC\u30AB\u30FC" },
           { name: "ll", key: "ll", input: "text", label: "\u4E2D\u5FC3\u5EA7\u6A19" }
         ];

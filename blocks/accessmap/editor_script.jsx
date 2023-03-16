@@ -25,6 +25,7 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
 				{name:'size',type:'buttons',label:'サイズ',values:['small','medium','large']},
+				{name:'mapColor',type:'buttons',label:'地図の色',values:{mapColorNone:'通常',mapColorGray:'グレー',mapColorSync:'同色'}},
 				{name:'titleTag',input:'buttons',filter:'titleTag',key:'TitleTag',label:'タイトルタグ',values:['h2','h3','h4'],effect:(val,{set})=>{
 					if(/^h\d$/.test(val)){set({titleTag:'h'+(parseInt(val[1])+1)})}
 				}},
@@ -49,6 +50,7 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 		},[]);
 		const selectiveItemClasses=useMemo(()=>{
 			const selectiveItemClasses=[
+				'color',
 				{name:'q',key:'q',input:'text',label:'マーカー'},
 				{name:'ll',key:'ll',input:'text',label:'中心座標'}
 			];

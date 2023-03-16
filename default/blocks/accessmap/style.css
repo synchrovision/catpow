@@ -134,4 +134,13 @@
   flex-basis: 10em;
   padding: 2em;
 }
+.wp-block-catpow-accessmap.mapColorGray > .item > .map {
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+}
+.wp-block-catpow-accessmap.mapColorSync > .item > .map {
+  mix-blend-mode: hard-light;
+  -webkit-filter: grayscale(0.8);
+  filter: grayscale(0.8);
+}
 /*# sourceMappingURL=./style.css.map */

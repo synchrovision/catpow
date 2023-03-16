@@ -69,4 +69,20 @@
 			}
 		}
 	}
+	&.mapColor{
+		&Gray{
+			>.item{
+				>.map{
+					@include trn((gry:1));
+				}
+			}
+		}
+		&Sync{
+			>.item{
+				>.map{
+					@include trn((gry:.8,bm:hl));
+				}
+			}
+		}
+	}
 }
