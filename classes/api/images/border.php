@@ -14,13 +14,13 @@ class border extends icon{
 			}
 			if(empty($conf['slice'])){
 				if($conf['ext']=='.svg'){
-					$code=file_get_contents($image['url']);
+					$code=file_get_contents($image['path']);
 					if(empty($image['width'])){
-						preg_match('|width="(?<width>\d+)|',$code,$matches);
+						preg_match('|width="(?P<width>\d+)|',$code,$matches);
 						$image['width']=$matches['width'];
 					}
 					if(empty($image['heigth'])){
-						preg_match('|height="(?<height>\d+)|',$code,$matches);
+						preg_match('|height="(?P<height>\d+)|',$code,$matches);
 						$image['height']=$matches['height'];
 					}
 				}
