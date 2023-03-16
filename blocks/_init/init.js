@@ -3395,7 +3395,6 @@
       const activeEventParamNames = useMemo(() => {
         if (eventTypes && event.eventType) {
           const eventType = eventTypes[event.eventType] || eventTypes["_custom"];
-          console.log(eventType);
           if (eventType) {
             return Object.keys(eventParams).filter((paramName) => {
               return eventParams[paramName].common || eventType.options.indexOf(paramName) >= 0;
@@ -3423,7 +3422,7 @@
       )))), /* @__PURE__ */ wp.element.createElement(CardBody, { className: "EventInputCard__body" }, eventTypes && /* @__PURE__ */ wp.element.createElement("div", { className: "EventInputCard__item" }, /* @__PURE__ */ wp.element.createElement("div", { className: "EventInputCard__item__inputs" }, /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
-          value: event.eventType,
+          value: event.eventType || "",
           onChange: (val) => {
             dispatch({ type: "UPDATE", event: { eventType: val }, index });
           },
@@ -3432,7 +3431,7 @@
       ))), /* @__PURE__ */ wp.element.createElement("div", { className: "EventInputCard__item" }, /* @__PURE__ */ wp.element.createElement("div", { className: "EventInputCard__item__pref" }, "@"), /* @__PURE__ */ wp.element.createElement("div", { className: "EventInputCard__item__inputs" }, /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
-          value: event.event,
+          value: event.event || "",
           onChange: (val) => {
             dispatch({ type: "UPDATE", event: { event: val }, index });
           },

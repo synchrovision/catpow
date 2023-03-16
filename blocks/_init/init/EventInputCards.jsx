@@ -56,7 +56,6 @@ CP.EventInputCards=(props)=>{
 		const activeEventParamNames=useMemo(()=>{
 			if(eventTypes && event.eventType){
 				const eventType=eventTypes[event.eventType] || eventTypes['_custom'];
-				console.log(eventType);
 				if(eventType){
 					return Object.keys(eventParams).filter((paramName)=>{
 						return eventParams[paramName].common || eventType.options.indexOf(paramName)>=0;
@@ -93,7 +92,7 @@ CP.EventInputCards=(props)=>{
 						<div className="EventInputCard__item">
 							<div className="EventInputCard__item__inputs">
 								<TextControl
-									value={event.eventType}
+									value={event.eventType || ''}
 									onChange={(val)=>{
 										dispatch({type:'UPDATE',event:{eventType:val},index});
 									}}
@@ -106,7 +105,7 @@ CP.EventInputCards=(props)=>{
 						<div className="EventInputCard__item__pref">@</div>
 						<div className="EventInputCard__item__inputs">
 							<TextControl
-								value={event.event}
+								value={event.event || ''}
 								onChange={(val)=>{
 									dispatch({type:'UPDATE',event:{event:val},index});
 								}}
