@@ -4,7 +4,7 @@
   overflow-x: auto;
 }
 .wp-block-catpow-slidablemenu > .items {
-  grid-area: 0;
+  gap: 0;
   margin: 0rem;
   padding: 0rem;
   list-style: none;
@@ -12,6 +12,7 @@
 .wp-block-catpow-slidablemenu > .items > .item {
   padding: 0.5em;
   break-inside: avoid;
+  scroll-snap-align: start;
 }
 .wp-block-catpow-slidablemenu > .items > .item > .contents {
   overflow: hidden;
@@ -59,7 +60,7 @@
   -moz-columns: var(--columns);
   columns: var(--columns);
   width: calc(100% * var(--columns) / 4);
-  grid-area: 0;
+  gap: 0;
   margin: 0rem;
   padding: 0rem;
 }
@@ -81,7 +82,7 @@
   -moz-columns: var(--columns);
   columns: var(--columns);
   width: calc(100% * var(--columns) / 3);
-  grid-area: 0;
+  gap: 0;
   margin: 0rem;
   padding: 0rem;
 }
@@ -103,7 +104,7 @@
   -moz-columns: var(--columns);
   columns: var(--columns);
   width: calc(100% * var(--columns) / 2);
-  grid-area: 0;
+  gap: 0;
   margin: 0rem;
   padding: 0rem;
 }
