@@ -282,7 +282,7 @@
           keys: imageKeys.titleImage,
           devices
         }
-      )) : /* @__PURE__ */ wp.element.createElement(HeadingTag, { className: "heading" }, /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "div", value: title, onChange: (title2) => setAttributes({ title: title2 }) })), states.hasLead && /* @__PURE__ */ wp.element.createElement("div", { className: "lead" }, /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "div", value: lead, onChange: (lead2) => setAttributes({ lead: lead2 }) }))), states.hasHeaderBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, states.isTemplate && headerBackgroundImageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: headerBackgroundImageCode }) : /* @__PURE__ */ wp.element.createElement(
+      )) : /* @__PURE__ */ wp.element.createElement(RichText, { tagName: HeadingTag, className: "heading", value: title, onChange: (title2) => setAttributes({ title: title2 }) }), states.hasLead && /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "div", className: "lead", value: lead, onChange: (lead2) => setAttributes({ lead: lead2 }) })), states.hasHeaderBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, states.isTemplate && headerBackgroundImageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: headerBackgroundImageCode }) : /* @__PURE__ */ wp.element.createElement(
         CP.SelectResponsiveImage,
         {
           set: setAttributes,
