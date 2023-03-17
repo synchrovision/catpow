@@ -38,3 +38,4 @@ import './DataStructure.jsx';
 import './EventInputCards.jsx';
 import './ServerSideRender.jsx';
 import './ColorVarTracer.jsx';
+import './PlacedPictures.jsx';

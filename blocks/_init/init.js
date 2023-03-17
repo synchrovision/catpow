@@ -298,39 +298,39 @@
     selectNextItem: (tag) => {
       window.getSelection().anchorNode.parentNode.closest(tag).nextElementSibling.querySelector("[contentEditable]").focus();
     },
-    saveItem: ({ items, itemsKey, set }) => {
-      set({ [itemsKey || "items"]: JSON.parse(JSON.stringify(items)) });
+    saveItem: ({ items: items2, itemsKey, set }) => {
+      set({ [itemsKey || "items"]: JSON.parse(JSON.stringify(items2)) });
     },
     deleteItem: (props) => {
-      var { items, index } = props;
-      items.splice(index, 1);
+      var { items: items2, index } = props;
+      items2.splice(index, 1);
       CP.saveItem(props);
     },
     cloneItem: (props) => {
-      var { tag, items, index } = props;
-      items.splice(index, 0, JSON.parse(JSON.stringify(items[index])));
+      var { tag, items: items2, index } = props;
+      items2.splice(index, 0, JSON.parse(JSON.stringify(items2[index])));
       CP.saveItem(props);
       CP.selectNextItem(tag);
     },
     upItem: (props) => {
-      var { tag, items, index } = props;
-      if (!items[index - 1])
+      var { tag, items: items2, index } = props;
+      if (!items2[index - 1])
         return false;
-      items.splice(index - 1, 2, items[index], items[index - 1]);
+      items2.splice(index - 1, 2, items2[index], items2[index - 1]);
       CP.saveItem(props);
     },
     downItem: (props) => {
-      var { tag, items, index } = props;
-      if (!items[index + 1])
+      var { tag, items: items2, index } = props;
+      if (!items2[index + 1])
         return false;
-      items.splice(index, 2, items[index + 1], items[index]);
+      items2.splice(index, 2, items2[index + 1], items2[index]);
       CP.saveItem(props);
     },
-    switchItemColor: ({ items, index, set }, color, itemsKey) => {
+    switchItemColor: ({ items: items2, index, set }, color, itemsKey) => {
       if (itemsKey === void 0) {
         itemsKey = "items";
       }
-      let classArray = (items[index].classes || "").split(" ");
+      let classArray = (items2[index].classes || "").split(" ");
       let i = classArray.findIndex((cls) => cls.substr(0, 5) === "color");
       if (i === -1) {
         if (color) {
@@ -343,21 +343,21 @@
           classArray.splice(i, 1);
         }
       }
-      items[index].classes = classArray.join(" ");
-      set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
+      items2[index].classes = classArray.join(" ");
+      set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
     },
-    getItemColor: ({ items, index }) => {
-      let c = (items[index].classes || "").split(" ").find((cls) => cls.substr(0, 5) === "color");
+    getItemColor: ({ items: items2, index }) => {
+      let c = (items2[index].classes || "").split(" ").find((cls) => cls.substr(0, 5) === "color");
       if (!c) {
         return 0;
       }
       return parseInt(c.substr(5));
     },
-    switchItemPattern: ({ items, index, set }, pattern, itemsKey) => {
+    switchItemPattern: ({ items: items2, index, set }, pattern, itemsKey) => {
       if (itemsKey === void 0) {
         itemsKey = "items";
       }
-      let classArray = (items[index].classes || "").split(" ");
+      let classArray = (items2[index].classes || "").split(" ");
       let i = classArray.findIndex((cls) => cls.substr(0, 7) === "pattern");
       if (i === -1) {
         if (pattern) {
@@ -370,21 +370,21 @@
           classArray.splice(i, 1);
         }
       }
-      items[index].classes = classArray.join(" ");
-      set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
+      items2[index].classes = classArray.join(" ");
+      set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
     },
-    getItemPattern: ({ items, index }) => {
-      let p = (items[index].classes || "").split(" ").find((cls) => cls.substr(0, 7) === "pattern");
+    getItemPattern: ({ items: items2, index }) => {
+      let p = (items2[index].classes || "").split(" ").find((cls) => cls.substr(0, 7) === "pattern");
       if (!p) {
         return 0;
       }
       return parseInt(p.substr(7));
     },
-    switchItemSelectiveClass: ({ items, index, set }, values, value, itemsKey) => {
+    switchItemSelectiveClass: ({ items: items2, index, set }, values, value, itemsKey) => {
       if (itemsKey === void 0) {
         itemsKey = "items";
       }
-      let classArray = (items[index].classes || "").split(" ");
+      let classArray = (items2[index].classes || "").split(" ");
       if (!Array.isArray(values) && _.isObject(values)) {
         values = Object.keys(values);
       }
@@ -394,35 +394,35 @@
       } else {
         classArray.push(value);
       }
-      items[index].classes = classArray.join(" ");
-      set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
+      items2[index].classes = classArray.join(" ");
+      set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
     },
-    getItemSelectiveClass: ({ items, index }, values) => {
-      if (!items[index].classes) {
+    getItemSelectiveClass: ({ items: items2, index }, values) => {
+      if (!items2[index].classes) {
         return false;
       }
-      let classArray = (items[index].classes || "").split(" ");
+      let classArray = (items2[index].classes || "").split(" ");
       if (!Array.isArray(values) && _.isObject(values)) {
         values = Object.keys(values);
       }
       return _.intersection(classArray, values).shift();
     },
-    toggleItemClass: ({ items, index, set }, value, itemsKey) => {
+    toggleItemClass: ({ items: items2, index, set }, value, itemsKey) => {
       if (itemsKey === void 0) {
         itemsKey = "items";
       }
-      let classArray = (items[index].classes || "").split(" ");
+      let classArray = (items2[index].classes || "").split(" ");
       let i = classArray.indexOf(value);
       if (i === -1) {
         classArray.push(value);
       } else {
         classArray.splice(i, 1);
       }
-      items[index].classes = classArray.join(" ");
-      set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
+      items2[index].classes = classArray.join(" ");
+      set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
     },
-    hasItemClass: ({ items, index }, value) => {
-      let classArray = (items[index].classes || "").split(" ");
+    hasItemClass: ({ items: items2, index }, value) => {
+      let classArray = (items2[index].classes || "").split(" ");
       return classArray.indexOf(value) !== -1;
     },
     getJsonValue: ({ attr }, json, key) => {
@@ -471,7 +471,7 @@
         if (!match) {
           return;
         }
-        obj[match[1]] = match[2];
+        obj[Catpow.util.kebabToCamel(match[1])] = match[2];
       });
       return obj;
     },
@@ -480,7 +480,7 @@
         return "";
       }
       return Object.keys(data).map((key) => {
-        return key + ":" + data[key] + ";";
+        return Catpow.util.camelToKebab(key) + ":" + data[key] + ";";
       }).join("");
     },
     parseStyleCode: (code) => {
@@ -1337,45 +1337,38 @@
     const [action, setAction] = useState(false);
     const container = useMemo(() => props.container || document, [props.container]);
     const tracePosition = useCallback((targets2) => {
-      if (targets2.length === 1) {
-        setStyle(extractPosition(targets2[0]));
-        return;
-      }
-      const bnd = targets2.reduce((bnd2, target) => {
-        const crrBnd = getBoundingArray(extractPosition(target));
-        crrBnd[2] += crrBnd[0];
-        crrBnd[3] += crrBnd[1];
+      const cBnd = container.getBoundingClientRect();
+      const bnd = targets2.length === 1 ? targets2[0].getBoundingClientRect() : targets2.reduce((bnd2, target) => {
+        const crrBnd = target.getBoundingClientRect();
         if (bnd2 === false) {
           return crrBnd;
         }
-        return [
-          Math.min(bnd2[0], crrBnd[0]),
-          Math.min(bnd2[1], crrBnd[1]),
-          Math.max(bnd2[2], crrBnd[2]),
-          Math.max(bnd2[3], crrBnd[3])
-        ];
+        return {
+          left: Math.min(bnd2.left, crrBnd.left),
+          right: Math.max(bnd2.right, crrBnd.right),
+          top: Math.min(bnd2.top, crrBnd.top),
+          bottom: Math.max(bnd2.bottom, crrBnd.bottom)
+        };
       }, false);
       setStyle({
-        position: window.getComputedStyle(targets2[0]).position,
-        left: bnd[0] + "px",
-        top: bnd[1] + "px",
-        width: bnd[2] - bnd[0] + "px",
-        height: bnd[3] - bnd[1] + "px"
+        position: "absolute",
+        left: bnd.left - cBnd.left + "px",
+        top: bnd.top - cBnd.top + "px",
+        width: bnd.right - bnd.left + "px",
+        height: bnd.bottom - bnd.top + "px"
       });
-    }, []);
-    const extractPosition = useCallback((target) => {
-      if (!target) {
-        return {};
-      }
-      const { position, left, top, width, height } = window.getComputedStyle(target);
-      return { position, left, top, width, height };
-    }, []);
-    const getBoundingArray = useCallback((obj) => [
-      parseFloat(obj.left),
-      parseFloat(obj.top),
-      parseFloat(obj.width),
-      parseFloat(obj.height)
-    ]);
+    }, [container]);
+    const getRelBnd = useCallback((el) => {
+      const bnd1 = container.getBoundingClientRect();
+      const bnd2 = el.getBoundingClientRect();
+      return {
+        ...bnd2,
+        left: bnd2.left - bnd1.left,
+        right: bnd2.right - bnd1.left,
+        top: bnd2.top - bnd1.top,
+        bottom: bnd2.bottom - bnd1.top
+      };
+    }, [container]);
     const observer = useMemo(() => {
       return new MutationObserver((mutations) => {
         tracePosition(targets);
@@ -1451,27 +1444,29 @@
       if (!control) {
         return setAction(false);
       }
-      if (onDuplicate && e.altKey && control.dataset.controlAction === "move") {
+      const action2 = control.dataset.controlAction;
+      const flags = parseInt(control.dataset.controlFlags);
+      if (onDuplicate && e.altKey && action2 === "move") {
         onDuplicate(targets);
       }
       targets.forEach((target) => {
         target.style.animation = "none";
         target.style.transition = "none";
       });
-      const orgBnd = getBoundingArray(window.getComputedStyle(ref.current));
-      const orgBnds = targets.map((target) => getBoundingArray(window.getComputedStyle(target)));
-      const [ol, ot, ow, oh] = orgBnd;
+      const orgBnd = ref.current.getBoundingClientRect();
+      const ox = orgBnd.right - (flags & 12) / 8 * orgBnd.width;
+      const oy = orgBnd.bottom - (flags & 3) / 2 * orgBnd.height;
+      if (action2 === "resize") {
+        targets.forEach((target) => {
+          const bnd = target.getBoundingClientRect();
+          target.style["transform-origin"] = `${ox - bnd.left}px ${oy - bnd.top}px`;
+        });
+      }
       setAction({
-        action: control.dataset.controlAction,
-        flags: parseInt(control.dataset.controlFlags),
-        org: { x: e.clientX, y: e.clientY },
+        action: action2,
+        flags,
+        org: { x: e.clientX, y: e.clientY, ox, oy },
         orgBnd,
-        orgBnds,
-        coefs: orgBnds.map((bnd) => {
-          const [l, t, w, h] = bnd;
-          return [(l - ol) / ow, (t - ot) / oh, w / ow, h / oh];
-        }),
-        orgAspect: oh / ow,
         keepAspect: e.shiftKey,
         keepCenter: e.altKey,
         targets
@@ -1485,74 +1480,33 @@
       const dy = e.clientY - action.org.y;
       if (action.action === "move") {
         targets.forEach((target, index) => {
-          target.style.left = action.orgBnds[index][0] + dx + "px";
-          target.style.top = action.orgBnds[index][1] + dy + "px";
+          target.style.transform = `translate(${dx}px,${dy}px)`;
         });
       } else if (action.action === "resize") {
-        let [ol, ot, ow, oh] = action.orgBnd;
-        let [l, t, w, h] = action.orgBnd;
-        if (!(action.flags & 4)) {
-          if (action.flags & 8) {
-            w += dx;
-          } else {
-            w -= dx;
-            l += dx;
-          }
-        }
-        if (!(action.flags & 1)) {
-          if (action.flags & 2) {
-            h += dy;
-          } else {
-            h -= dy;
-            t += dy;
-          }
-        }
-        if (action.keepAspect) {
-          let d;
-          if (action.flags & 1) {
-            h *= w / ow;
-            t += (oh - h) / 2;
-          } else if (action.flags & 4) {
-            w *= h / oh;
-            l += (ow - w) / 2;
-          } else {
-            if (w * oh > h * ow) {
-              w = ow * h / oh;
-              if (!(action.flags & 8)) {
-                l = ol + ow - w;
-              }
-            } else {
-              h = oh * w / ow;
-              if (!(action.flags & 2)) {
-                t = ot + oh - h;
-              }
-            }
-          }
+        let s;
+        const sx = Math.abs(e.clientX - action.org.ox) / action.orgBnd.width;
+        const sy = Math.abs(e.clientY - action.org.oy) / action.orgBnd.height;
+        if (action.flags & 1) {
+          s = action.keepAspect ? `scale(${sx})` : `scaleX(${sx})`;
+        } else if (action.flags & 4) {
+          s = action.keepAspect ? `scale(${sy})` : `scaleY(${sy})`;
+        } else {
+          s = action.keepAspect ? `scale(${Math.min(sx, sy)})` : `scale(${sx},${sy})`;
         }
         targets.forEach((target, index) => {
-          const coef = action.coefs[index];
-          target.style.left = l + w * coef[0] + "px";
-          target.style.top = t + h * coef[1] + "px";
-          target.style.width = w * coef[2] + "px";
-          target.style.height = h * coef[3] + "px";
+          target.style.transform = s;
         });
       }
     }, [action]);
     const onMouseUp = useCallback((e) => {
+      if (onChange) {
+        onChange(action.targets);
+      }
       action.targets.map((target) => {
         target.style.animation = "";
         target.style.transition = "";
-      });
-      if (onChange) {
-        onChange(action.targets.map(
-          (target) => getBoundingArray(extractPosition(target))
-        ));
-      }
-      action.targets.map((target) => {
-        target.style.left = "";
-        target.style.top = "";
-        target.style.width = "";
-        target.style.height = "";
+        target.style.transform = "";
+        target.style["transform-origin"] = "";
       });
       setAction(false);
     }, [action, onChange]);
@@ -1562,9 +1516,7 @@
         target.style.height = window.getComputedStyle(target).height + "px";
       });
       if (onChange) {
-        onChange(targets.map(
-          (target) => getBoundingArray(extractPosition(target))
-        ));
+        onChange(targets);
       }
     }, [targets, onChange]);
     if (!targets.length) {
@@ -1698,13 +1650,13 @@
   CP.SelectResponsiveImage = (props) => {
     const { className, attr, set, keys = {}, index, size, devices, device, isTemplate, ...otherProps } = props;
     let { sizes } = props;
-    let type, onClick, item, items;
+    let type, onClick, item, items2;
     if (keys.items) {
-      items = attr[keys.items];
+      items2 = attr[keys.items];
       if (keys.subItems) {
-        item = items[index][keys.subItems][subIndex];
+        item = items2[index][keys.subItems][subIndex];
       } else {
-        item = items[index];
+        item = items2[index];
       }
     } else {
       item = attr;
@@ -1718,15 +1670,15 @@
               source.srcset = src2;
             }
           });
-          if (items) {
-            set({ [keys.items]: JSON.parse(JSON.stringify(items)) });
+          if (items2) {
+            set({ [keys.items]: JSON.parse(JSON.stringify(items2)) });
           } else {
             set({ [keys.sources]: JSON.parse(JSON.stringify(item[keys.sources])) });
           }
         } else {
-          if (items) {
+          if (items2) {
             item[keys.srcset] = item[keys.srcset].replace(sizeData.reg, src2 + sizeData.rep);
-            set({ [keys.items]: JSON.parse(JSON.stringify(items)) });
+            set({ [keys.items]: JSON.parse(JSON.stringify(items2)) });
           } else {
             set({ [keys.srcset]: item[keys.srcset].replace(sizeData.reg, src2 + sizeData.rep) });
           }
@@ -1736,7 +1688,7 @@
       onClick = (e) => CP.selectImage(keys, function(data) {
         if (keys.items) {
           Object.assign(item, data);
-          set({ [keys.items]: JSON.parse(JSON.stringify(items)) });
+          set({ [keys.items]: JSON.parse(JSON.stringify(items2)) });
         } else {
           set(data);
         }
@@ -2269,14 +2221,14 @@
 
   // ../blocks/_init/init/Item.jsx
   CP.Item = (props) => {
-    const { tag, items, itemsKey, index, set, attr, triggerClasses, children } = props;
+    const { tag, items: items2, itemsKey, index, set, attr, triggerClasses, children } = props;
     let { itemClasses } = props;
-    if (!items[index].classes) {
-      items[index].classes = "item";
-    } else if (items[index].classes.search(/\bitem\b/) === -1) {
-      items[index].classes += " item";
+    if (!items2[index].classes) {
+      items2[index].classes = "item";
+    } else if (items2[index].classes.search(/\bitem\b/) === -1) {
+      items2[index].classes += " item";
     }
-    let classes = items[index].classes;
+    let classes = items2[index].classes;
     if (props.className) {
       classes += " " + props.className;
     }
@@ -2287,7 +2239,7 @@
       {
         className: classes,
         "data-index": index,
-        "data-refine-cond": items[index]["cond"],
+        "data-refine-cond": items2[index]["cond"],
         onKeyDown: (e) => {
           if (e.ctrlKey || e.metaKey) {
             switch (e.key) {
@@ -2334,8 +2286,8 @@
     const { Fragment, useMemo, useCallback, useContext, createElement: el } = wp.element;
     const { __: __2 } = wp.i18n;
     const { PanelBody, CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
-    const { classKey = "classes", items, index, subItemsKey, subIndex: subIndex2, set, attr, triggerClasses } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
-    let { itemsKey = items ? "items" : null, itemClasses } = props;
+    const { classKey = "classes", items: items2, index, subItemsKey, subIndex: subIndex2, set, attr, triggerClasses } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
+    let { itemsKey = items2 ? "items" : null, itemClasses } = props;
     const selectiveClasses = useMemo(() => {
       if (!triggerClasses || !triggerClasses.item) {
         return props.selectiveClasses;
@@ -2345,26 +2297,26 @@
     }, [props.selectiveClasses, triggerClasses]);
     const { styleDatas } = attr;
     const item = useMemo(() => {
-      if (!items) {
+      if (!items2) {
         return attr;
       }
-      if (!items[index]) {
+      if (!items2[index]) {
         return false;
       }
       if (subItemsKey) {
-        return items[index][subItemsKey][subIndex2];
+        return items2[index][subItemsKey][subIndex2];
       }
-      return items[index];
-    }, [attr, items, index, subItemsKey, subIndex2]);
+      return items2[index];
+    }, [attr, items2, index, subItemsKey, subIndex2]);
     const states = useMemo(() => CP.wordsToFlags(item[classKey]), [item[classKey]]);
     const save = useCallback((data) => {
-      if (items) {
+      if (items2) {
         Object.assign(item, data);
-        set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
+        set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
       } else {
         set(data);
       }
-    }, [set, index, items, itemsKey]);
+    }, [set, index, items2, itemsKey]);
     const saveClasses = useCallback(() => {
       save({ [classKey]: CP.flagsToWords(states) });
     }, [save, classKey, states]);
@@ -3080,7 +3032,7 @@
   CP.SelectPatternClass = (props) => {
     const { BaseControl } = wp.components;
     const { label, help, selected, onChange } = props;
-    var items = Array.from(Array(6), (v, i) => {
+    var items2 = Array.from(Array(6), (v, i) => {
       var classes = "bgPattern" + i;
       const value = "pattern" + i;
       if (value == selected) {
@@ -3096,7 +3048,7 @@
         " "
       );
     });
-    return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement("ul", { className: "selectPattern" }, items));
+    return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement("ul", { className: "selectPattern" }, items2));
   };
 
   // ../blocks/_init/init/SelectPositionClass.jsx
@@ -3242,12 +3194,12 @@
   CP.EditItemsTable = (props) => {
     const { set, attr, itemsKey = "items", columns, isTemplate } = props;
     const { RichText } = wp.blockEditor;
-    const items = attr[itemsKey] || [];
+    const items2 = attr[itemsKey] || [];
     const save = () => {
-      set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
+      set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
     };
-    return /* @__PURE__ */ wp.element.createElement("table", { className: "editItemsTable" }, /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, columns.map((col, c) => !("cond" in col) || col.cond ? /* @__PURE__ */ wp.element.createElement("th", { key: c }, col.label || col.key) : false), /* @__PURE__ */ wp.element.createElement("th", null))), /* @__PURE__ */ wp.element.createElement("tbody", null, items.map((item, index) => {
-      const propsForControl = { tag: "tr", set, itemsKey, items, index };
+    return /* @__PURE__ */ wp.element.createElement("table", { className: "editItemsTable" }, /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, columns.map((col, c) => !("cond" in col) || col.cond ? /* @__PURE__ */ wp.element.createElement("th", { key: c }, col.label || col.key) : false), /* @__PURE__ */ wp.element.createElement("th", null))), /* @__PURE__ */ wp.element.createElement("tbody", null, items2.map((item, index) => {
+      const propsForControl = { tag: "tr", set, itemsKey, items: items2, index };
       return /* @__PURE__ */ wp.element.createElement(
         "tr",
         {
@@ -3509,5 +3461,127 @@
       return vars2;
     }, [target]);
     return /* @__PURE__ */ wp.element.createElement("div", { style: vars }, props.children);
+  };
+
+  // ../blocks/_init/init/PlacedPictures.jsx
+  CP.PlacedPictures = (props) => {
+    const { className, attr, keys, index } = props;
+    const item = keys.items ? attr[keys.items][index] : attr;
+    const pictures = item[keys.pictures];
+    return /* @__PURE__ */ wp.element.createElement("div", { className }, pictures && pictures.map((picture2, index2) => {
+      const { style, code, sources, src, alt } = picture2;
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "item", style: CP.parseStyleString(style), key: index2 }, code || /* @__PURE__ */ wp.element.createElement("picture", { className: "picture" }, sources && sources.map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: "img", src, alt })));
+    }));
+  };
+  CP.PlacedPictures.Edit = (props) => {
+    const { className, set, attr, keys, index } = props;
+    const { useState, useMemo, useCallback, useRef, useEffect } = wp.element;
+    const item = keys.items ? attr[keys.items][index] : attr;
+    const pictures = item[keys.pictures];
+    const [mode, setMode] = useState(props.mode || "view");
+    const [currentItemNodes, setCurrentItemNodes] = useState([]);
+    const [currentItemIndexes, setCurrentItemIndexes] = useState([]);
+    const [containerNode, setContainerNode] = useState(false);
+    const targetRefs = useRef([]);
+    useEffect(() => {
+      setCurrentItemNodes(currentItemIndexes.sort().map((index2) => targetRefs.current[index2]));
+    }, [currentItemIndexes, targetRefs, setCurrentItemNodes]);
+    const remPx = useMemo(() => parseFloat(getComputedStyle(document.documentElement).fontSize), []);
+    const getPlaceStyle = useCallback((bnd, tgtBnd) => {
+      const style = {
+        position: "absolute",
+        width: Math.pround(tgtBnd.width / remPx, 2) + "rem",
+        height: Math.pround(tgtBnd.height / remPx, 2) + "rem"
+      };
+      const px = (tgtBnd.left - bnd.left + tgtBnd.width / 2) / bnd.width;
+      const py = (tgtBnd.top - bnd.top + tgtBnd.height / 2) / bnd.height;
+      if (px < 0.4) {
+        style.left = Math.pround((tgtBnd.left - bnd.left) / remPx, 4) + "rem";
+      } else if (px > 0.6) {
+        style.right = Math.pround((bnd.right - tgtBnd.right) / remPx, 4) + "rem";
+      } else {
+        style.left = style.right = 0;
+        style["margin-left"] = style["margin-right"] = "auto";
+      }
+      if (py < 0.4) {
+        style.top = Math.pround((tgtBnd.top - bnd.top) / remPx, 4) + "rem";
+      } else if (py > 0.6) {
+        style.bottom = Math.pround((bnd.bottom - tgtBnd.bottom) / remPx, 4) + "rem";
+      } else {
+        style.top = style.bottom = 0;
+        style["margin-top"] = style["margin-bottom"] = "auto";
+      }
+      return style;
+    }, []);
+    const onClickItem = useCallback((e) => {
+      const index2 = parseInt(e.currentTarget.dataset.index);
+      const selected = currentItemIndexes.includes(index2);
+      if (e.shiftKey) {
+        if (selected) {
+          setCurrentItemIndexes(currentItemIndexes.filter((i) => i !== index2));
+        } else {
+          setCurrentItemIndexes(currentItemIndexes.concat([index2]));
+        }
+      } else if (!selected) {
+        setCurrentItemIndexes([index2]);
+      }
+    }, [currentItemIndexes, setCurrentItemIndexes]);
+    const updatePictures = useCallback((pictures2) => {
+      if (keys.items) {
+        const items2 = attr[keys.iteems];
+        items2[index][keys.pictures] = [...pictures2];
+        set({ [keys.items]: [...items2] });
+      } else {
+        set({ [keys.pictures]: [...pictures2] });
+      }
+    }, [attr, set, keys, index]);
+    const save = useCallback(() => {
+      if (keys.items) {
+        items[index][keys.pictures] = JSON.parse(JSON.stringify(pictures));
+        set({ [keys.items]: [...items] });
+      } else {
+        set({ [keys.pictures]: JSON.parse(JSON.stringify(pictures)) });
+      }
+    }, [set, pictures]);
+    return /* @__PURE__ */ wp.element.createElement("div", { className, ref: setContainerNode }, pictures && pictures.map((picture2, index2) => {
+      const { style, code, sources, src, alt } = picture2;
+      return /* @__PURE__ */ wp.element.createElement(
+        "div",
+        {
+          className: "item",
+          style: CP.parseStyleString(style),
+          onClick: (e) => mode === "edit" && onClickItem(e),
+          onDoubleClick: () => mode === "view" && setMode("edit"),
+          "data-index": index2,
+          ref: (el) => targetRefs.current[index2] = el,
+          key: index2
+        },
+        code ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: code }) : /* @__PURE__ */ wp.element.createElement("picture", { className: "picture" }, sources && sources.map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: "img", src, alt }))
+      );
+    }), mode === "edit" && /* @__PURE__ */ wp.element.createElement(
+      CP.BoundingBox,
+      {
+        targets: currentItemNodes,
+        container: containerNode,
+        onChange: () => {
+          const bnd = containerNode.getBoundingClientRect();
+          currentItemNodes.forEach((el) => {
+            pictures[el.dataset.index].style = getPlaceStyle(bnd, el.getBoundingClientRect());
+          });
+          save();
+        },
+        onDeselect: () => {
+          setCurrentItemIndexes([]);
+        },
+        onDuplicate: () => {
+          pictures.push.apply(pictures, pictures.filter((item2, index2) => currentItemIndexes.includes(index2)));
+          save();
+        },
+        onDelete: () => {
+          currentItemIndexes.sort().revers().forEach((index2) => picture.splice(index2, 1));
+          save();
+        }
+      }
+    ));
   };
 })();
