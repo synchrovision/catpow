@@ -3468,17 +3468,21 @@
     const { className, attr, keys, index } = props;
     const item = keys.items ? attr[keys.items][index] : attr;
     const pictures = item[keys.pictures];
-    return /* @__PURE__ */ wp.element.createElement("div", { className }, pictures && pictures.map((picture2, index2) => {
-      const { style, code, sources, src, alt } = picture2;
+    return /* @__PURE__ */ wp.element.createElement("div", { className }, pictures && pictures.map((picture, index2) => {
+      const { style, code, sources, src, alt } = picture;
       return /* @__PURE__ */ wp.element.createElement("div", { className: "item", style: CP.parseStyleString(style), key: index2 }, code || /* @__PURE__ */ wp.element.createElement("picture", { className: "picture" }, sources && sources.map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: "img", src, alt })));
     }));
   };
   CP.PlacedPictures.Edit = (props) => {
-    const { className, set, attr, keys, index } = props;
+    const { className, set, attr, keys, index, devices } = props;
     const { useState, useMemo, useCallback, useRef, useEffect } = wp.element;
+    const { BlockControls, InspectorControls } = wp.blockEditor;
+    const { BaseControl, Icon, PanelBody, RangeControl, TextControl, Toolbar, ToolbarGroup, ToolbarButton, ToolbarDropdownMenu } = wp.components;
+    const { bem } = Catpow.util;
     const item = keys.items ? attr[keys.items][index] : attr;
     const pictures = item[keys.pictures];
-    const [mode, setMode] = useState(props.mode || "view");
+    const classes = useMemo(() => bem("CP-PlacedPictures " + className), [className]);
+    const [editMode, setEditMode] = useState(false);
     const [currentItemNodes, setCurrentItemNodes] = useState([]);
     const [currentItemIndexes, setCurrentItemIndexes] = useState([]);
     const [containerNode, setContainerNode] = useState(false);
@@ -3495,21 +3499,19 @@
       };
       const px = (tgtBnd.left - bnd.left + tgtBnd.width / 2) / bnd.width;
       const py = (tgtBnd.top - bnd.top + tgtBnd.height / 2) / bnd.height;
-      if (px < 0.4) {
+      if (px < 0.35) {
         style.left = Math.pround((tgtBnd.left - bnd.left) / remPx, 4) + "rem";
-      } else if (px > 0.6) {
+      } else if (px > 0.65) {
         style.right = Math.pround((bnd.right - tgtBnd.right) / remPx, 4) + "rem";
       } else {
-        style.left = style.right = 0;
-        style["margin-left"] = style["margin-right"] = "auto";
+        style.left = "calc(50% + " + Math.pround((tgtBnd.left - bnd.left - bnd.width / 2) / remPx, 4) + "rem)";
       }
-      if (py < 0.4) {
+      if (py < 0.35) {
         style.top = Math.pround((tgtBnd.top - bnd.top) / remPx, 4) + "rem";
-      } else if (py > 0.6) {
+      } else if (py > 0.65) {
         style.bottom = Math.pround((bnd.bottom - tgtBnd.bottom) / remPx, 4) + "rem";
       } else {
-        style.top = style.bottom = 0;
-        style["margin-top"] = style["margin-bottom"] = "auto";
+        style.top = "calc(50% + " + Math.pround((tgtBnd.top - bnd.top - bnd.height / 2) / remPx, 4) + "rem)";
       }
       return style;
     }, []);
@@ -3543,22 +3545,60 @@
         set({ [keys.pictures]: JSON.parse(JSON.stringify(pictures)) });
       }
     }, [set, pictures]);
-    return /* @__PURE__ */ wp.element.createElement("div", { className, ref: setContainerNode }, pictures && pictures.map((picture2, index2) => {
-      const { style, code, sources, src, alt } = picture2;
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-edit-mode": editMode }), ref: setContainerNode }, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
+      ToolbarButton,
+      {
+        icon: "images-alt",
+        label: "edit decoration",
+        isActive: editMode,
+        onClick: () => setEditMode(!editMode)
+      }
+    ), currentItemIndexes.length > 0 && /* @__PURE__ */ wp.element.createElement(
+      ToolbarButton,
+      {
+        icon: "insert",
+        label: "insert",
+        onClick: () => {
+          pictures.push.apply(pictures, pictures.filter((item2, index2) => currentItemIndexes.includes(index2)));
+          save();
+        }
+      }
+    ), currentItemIndexes.length > 0 && pictures.length > currentItemIndexes.length && /* @__PURE__ */ wp.element.createElement(
+      ToolbarButton,
+      {
+        icon: "remove",
+        label: "remove",
+        onClick: () => {
+          currentItemIndexes.sort().reverse().forEach((index2) => pictures.splice(index2, 1));
+          save();
+        }
+      }
+    )), pictures && pictures.map((picture, index2) => {
+      const { style, code, sources, src, alt } = picture;
       return /* @__PURE__ */ wp.element.createElement(
         "div",
         {
           className: "item",
           style: CP.parseStyleString(style),
-          onClick: (e) => mode === "edit" && onClickItem(e),
-          onDoubleClick: () => mode === "view" && setMode("edit"),
+          onClick: (e) => editMode && onClickItem(e),
           "data-index": index2,
           ref: (el) => targetRefs.current[index2] = el,
           key: index2
         },
-        code ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: code }) : /* @__PURE__ */ wp.element.createElement("picture", { className: "picture" }, sources && sources.map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: "img", src, alt }))
+        code ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: code }) : /* @__PURE__ */ wp.element.createElement(
+          "picture",
+          {
+            className: "picture",
+            onClick: (e) => editMode && currentItemIndexes.includes(index2) && CP.selectImage({ sources: "sources", src: "src", alt: "alt" }, function(data) {
+              Object.assign(picture, data);
+              save();
+            }, "full", devices)
+          },
+          sources && sources.map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })),
+          /* @__PURE__ */ wp.element.createElement("img", { className: "img", src, alt })
+        )
       );
-    }), mode === "edit" && /* @__PURE__ */ wp.element.createElement(
+    }), editMode && /* @__PURE__ */ wp.element.createElement(
       CP.BoundingBox,
       {
         targets: currentItemNodes,
@@ -3578,7 +3618,7 @@
           save();
         },
         onDelete: () => {
-          currentItemIndexes.sort().revers().forEach((index2) => picture.splice(index2, 1));
+          currentItemIndexes.sort().reverse().forEach((index2) => pictures.splice(index2, 1));
           save();
         }
       }
