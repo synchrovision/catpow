@@ -9,7 +9,8 @@
       titleImage: { mime: "titleImageMime", src: "titleImageSrc", alt: "titleImageAlt", srcset: "titleImageSrcset", sources: "titleImageSources" },
       headerImage: { mime: "headerImageMime", src: "headerImageSrc", alt: "headerImageAlt", srcset: "headerImageSrcset" },
       headerBackgroundImage: { mime: "headerBackgroundImageMime", src: "headerBackgroundImageSrc", alt: "headerBackgroundImageAlt", srcset: "headerBackgroundImageSrcset", sources: "headerBackgroundImageSources" },
-      backgroundImage: { src: "backgroundImageSrc", srcset: "backgroundImageSrcset", sources: "backgroundImageSources" }
+      backgroundImage: { src: "backgroundImageSrc", srcset: "backgroundImageSrcset", sources: "backgroundImageSources" },
+      decoration: { pictures: "decoration" }
     },
     imageSizes: {
       image: "medium",
@@ -174,6 +175,7 @@
                 { name: "borderImage", label: __("\u30DC\u30FC\u30C0\u30FC\u753B\u50CF", "catpow"), values: "hasBorderImage", sub: [
                   { input: "border", css: "borderImageCss", sel: ({ attr }) => `#${attr.id} > .contents`, color }
                 ] },
+                { name: "decoration", label: __("\u30C7\u30B3\u30EC\u30FC\u30B7\u30E7\u30F3", "catpow"), values: "hasDecoration" },
                 {
                   name: "template",
                   label: __("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
@@ -216,6 +218,7 @@
                 { name: "borderImage", label: __("\u30DC\u30FC\u30C0\u30FC\u753B\u50CF", "catpow"), values: "hasBorderImage", sub: [
                   { input: "border", css: "borderImageCss", sel: ({ attr }) => `#${attr.id} > .contents`, color }
                 ] },
+                { name: "decoration", label: __("\u30C7\u30B3\u30EC\u30FC\u30B7\u30E7\u30F3", "catpow"), values: "hasDecoration" },
                 {
                   name: "template",
                   label: __("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
@@ -255,7 +258,15 @@
           keys: imageKeys.image,
           size: imageSizes.image
         }
-      )), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement("header", { className: "header" }, /* @__PURE__ */ wp.element.createElement("div", { className: "title" }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), states.hasPrefix && /* @__PURE__ */ wp.element.createElement("div", { className: "prefix" }, /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "div", value: prefix, onChange: (prefix2) => setAttributes({ prefix: prefix2 }) })), states.hasHeaderImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && headerImageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: headerImageCode }) : /* @__PURE__ */ wp.element.createElement(
+      )), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, states.hasDecoration && /* @__PURE__ */ wp.element.createElement(
+        CP.PlacedPictures.Edit,
+        {
+          className: "decoration",
+          set: setAttributes,
+          attr: attributes,
+          keys: imageKeys.decoration
+        }
+      ), /* @__PURE__ */ wp.element.createElement("header", { className: "header" }, /* @__PURE__ */ wp.element.createElement("div", { className: "title" }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), states.hasPrefix && /* @__PURE__ */ wp.element.createElement("div", { className: "prefix" }, /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "div", value: prefix, onChange: (prefix2) => setAttributes({ prefix: prefix2 }) })), states.hasHeaderImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && headerImageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: headerImageCode }) : /* @__PURE__ */ wp.element.createElement(
         CP.SelectResponsiveImage,
         {
           set: setAttributes,
@@ -352,7 +363,14 @@
           keys: imageKeys.image,
           size: "medium_large"
         }
-      )), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement("header", { className: "header" }, /* @__PURE__ */ wp.element.createElement("div", { className: "title" }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), states.hasPrefix && /* @__PURE__ */ wp.element.createElement("div", { className: "prefix" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: prefix })), states.hasHeaderImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && headerImageCode ? headerImageCode : /* @__PURE__ */ wp.element.createElement(
+      )), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, states.hasDecoration && /* @__PURE__ */ wp.element.createElement(
+        CP.PlacedPictures,
+        {
+          className: "decoration",
+          attr: attributes,
+          keys: imageKeys.decoration
+        }
+      ), /* @__PURE__ */ wp.element.createElement("header", { className: "header" }, /* @__PURE__ */ wp.element.createElement("div", { className: "title" }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), states.hasPrefix && /* @__PURE__ */ wp.element.createElement("div", { className: "prefix" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: prefix })), states.hasHeaderImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && headerImageCode ? headerImageCode : /* @__PURE__ */ wp.element.createElement(
         CP.ResponsiveImage,
         {
           attr: attributes,

@@ -8,7 +8,8 @@ CP.config.section={
 		titleImage:{mime:"titleImageMime",src:"titleImageSrc",alt:"titleImageAlt",srcset:"titleImageSrcset",sources:"titleImageSources"},
 		headerImage:{mime:"headerImageMime",src:"headerImageSrc",alt:"headerImageAlt",srcset:"headerImageSrcset"},
 		headerBackgroundImage:{mime:"headerBackgroundImageMime",src:"headerBackgroundImageSrc",alt:"headerBackgroundImageAlt",srcset:"headerBackgroundImageSrcset",sources:"headerBackgroundImageSources"},
-		backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset",sources:"backgroundImageSources"}
+		backgroundImage:{src:"backgroundImageSrc",srcset:"backgroundImageSrcset",sources:"backgroundImageSources"},
+		decoration:{pictures:"decoration"}
 	},
 	imageSizes:{
 		image:'medium',
@@ -152,6 +153,7 @@ wp.blocks.registerBlockType('catpow/section',{
 							{name:'borderImage',label:__('ボーダー画像','catpow'),values:'hasBorderImage',sub:[
 								{input:'border',css:'borderImageCss',sel:({attr})=>`#${attr.id} > .contents`,color},
 							]},
+							{name:'decoration',label:__('デコレーション','catpow'),values:'hasDecoration'},
 							{
 								name:'template',
 								label:__('テンプレート','catpow'),
@@ -194,6 +196,7 @@ wp.blocks.registerBlockType('catpow/section',{
 							{name:'borderImage',label:__('ボーダー画像','catpow'),values:'hasBorderImage',sub:[
 								{input:'border',css:'borderImageCss',sel:({attr})=>`#${attr.id} > .contents`,color},
 							]},
+							{name:'decoration',label:__('デコレーション','catpow'),values:'hasDecoration'},
 							{
 								name:'template',
 								label:__('テンプレート','catpow'),
@@ -249,6 +252,14 @@ wp.blocks.registerBlockType('catpow/section',{
 						</div>
 					}
 					<div className='contents'>
+						{states.hasDecoration &&
+							<CP.PlacedPictures.Edit
+								className="decoration" 
+								set={setAttributes}
+								attr={attributes}
+								keys={imageKeys.decoration}
+							/>
+						}
 						<header className='header'>
 							<div className="title">
 								{states.hasIcon && <CP.OutputIcon item={attributes}/>}
@@ -399,6 +410,13 @@ wp.blocks.registerBlockType('catpow/section',{
 					</div>
 				}
 				<div className="contents">
+					{states.hasDecoration &&
+						<CP.PlacedPictures
+							className="decoration" 
+							attr={attributes}
+							keys={imageKeys.decoration}
+						/>
+					}
 					<header className='header'>
 						<div className="title">
 							{states.hasIcon && <CP.OutputIcon item={attributes}/>}

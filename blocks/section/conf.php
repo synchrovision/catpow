@@ -57,6 +57,10 @@ $attributes=[
 	'headerPatternImageCss'=>['source'=>'text','selector'=>'style.headerPatternImageCss'],
 	'frameImageCss'=>['source'=>'text','selector'=>'style.frameImageCss'],
 	'borderImageCss'=>['source'=>'text','selector'=>'style.borderImageCss'],
+	
+	'decoration'=>BlockConfig::getPlacedPicturesAttributesForDevices(
+		['sp','tb'],'.wp-block-catpow-section>.contents>.decoration','dummy_deco.png'
+	),
 
 	'iconSrc'=>['source'=>'attribute','selector'=>'.icon [src]','attribute'=>'src','default'=>cp::get_file_url('images/dummy_icon.svg')],
 	'iconAlt'=>['source'=>'attribute','selector'=>'.icon [src]','attribute'=>'alt'],
