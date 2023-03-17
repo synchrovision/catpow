@@ -315,14 +315,14 @@
 		css.replace('&amp;','&').split(';').forEach((pair)=>{
 			const match=pair.match(/^([^:]+?):(.+)$/);
 			if(!match){return;}
-			obj[match[1]]=match[2];
+			obj[Catpow.util.kebabToCamel(match[1])]=match[2];
 		});
 		return obj;
 	},
 	createStyleString:(data)=>{
 		if(!data){return '';}
 		return Object.keys(data).map((key)=>{
-			return key+':'+data[key]+';';
+			return Catpow.util.camelToKebab(key)+':'+data[key]+';';
 		}).join('');
 	},
 	parseStyleCode:(code)=>{
