@@ -26,12 +26,16 @@ CP.PlacedPictures=(props)=>{
 };
 
 CP.PlacedPictures.Edit=(props)=>{
-	const {className,set,attr,keys,index}=props;
+	const {className,set,attr,keys,index,devices}=props;
 	const {useState,useMemo,useCallback,useRef,useEffect}=wp.element;
+	const {BlockControls,InspectorControls}=wp.blockEditor;
+	const {BaseControl,Icon,PanelBody,RangeControl,TextControl,Toolbar,ToolbarGroup,ToolbarButton,ToolbarDropdownMenu}=wp.components;
+	const {bem}=Catpow.util;
 	const item=keys.items?attr[keys.items][index]:attr;
 	const pictures=item[keys.pictures];
+	const classes=useMemo(()=>bem('CP-PlacedPictures '+className),[className]);
 	
-	const [mode,setMode]=useState(props.mode || 'view');
+	const [editMode,setEditMode]=useState(false);
 	
 	const [currentItemNodes,setCurrentItemNodes]=useState([]);
 	const [currentItemIndexes,setCurrentItemIndexes]=useState([]);
@@ -51,26 +55,23 @@ CP.PlacedPictures.Edit=(props)=>{
 		};
 		const px=(tgtBnd.left-bnd.left+tgtBnd.width/2)/bnd.width;
 		const py=(tgtBnd.top-bnd.top+tgtBnd.height/2)/bnd.height;
-		if(px<0.4){
+		if(px<0.35){
 			style.left=Math.pround((tgtBnd.left-bnd.left)/remPx,4)+'rem';
 		}
-		else if(px>0.6){
+		else if(px>0.65){
 			style.right=Math.pround((bnd.right-tgtBnd.right)/remPx,4)+'rem';
 		}
 		else{
-			style.left=style.right=0;
-			style['margin-left']=style['margin-right']='auto';
+			style.left='calc(50% + '+Math.pround((tgtBnd.left-bnd.left-bnd.width/2)/remPx,4)+'rem)';
 		}
-		if(py<0.4){
+		if(py<0.35){
 			style.top=Math.pround((tgtBnd.top-bnd.top)/remPx,4)+'rem';
 		}
-		else if(py>0.6){
+		else if(py>0.65){
 			style.bottom=Math.pround((bnd.bottom-tgtBnd.bottom)/remPx,4)+'rem';
 		}
 		else{
-			style.top=style.bottom=0;
-			style['margin-top']=style['margin-bottom']='auto';
-			
+			style.top='calc(50% + '+Math.pround((tgtBnd.top-bnd.top-bnd.height/2)/remPx,4)+'rem)';
 		}
 		return style;
 	},[]);
@@ -113,14 +114,41 @@ CP.PlacedPictures.Edit=(props)=>{
 	},[set,pictures]);
 	
 	return (
-		<div className={className} ref={setContainerNode}>
+		<div className={classes({'is-edit-mode':editMode})} ref={setContainerNode}>
+			<BlockControls>
+				<ToolbarButton
+					icon="images-alt"
+					label="edit decoration"
+					isActive={editMode}
+					onClick={()=>setEditMode(!editMode)}
+				/>
+				{currentItemIndexes.length>0 &&
+					<ToolbarButton
+						icon="insert"
+						label="insert"
+						onClick={()=>{
+							pictures.push.apply(pictures,pictures.filter((item,index)=>currentItemIndexes.includes(index)));
+							save();
+						}}
+					/>
+				}
+				{currentItemIndexes.length>0 && pictures.length>currentItemIndexes.length &&
+					<ToolbarButton
+						icon="remove"
+						label="remove"
+						onClick={()=>{
+							currentItemIndexes.sort().reverse().forEach((index)=>pictures.splice(index,1));
+							save();
+						}}
+					/>
+				}
+			</BlockControls>
 			{pictures && pictures.map((picture,index)=>{
 				const {style,code,sources,src,alt}=picture;
 				return (
 					<div className="item"
 						style={CP.parseStyleString(style)}
-						onClick={(e)=>mode==='edit' && onClickItem(e)}
-						onDoubleClick={()=>mode==='view' && setMode('edit')}
+						onClick={(e)=>editMode && onClickItem(e)}
 						data-index={index}
 						ref={(el)=>targetRefs.current[index]=el}
 						key={index}
@@ -128,7 +156,13 @@ CP.PlacedPictures.Edit=(props)=>{
 						{code?(
 							<CP.DummyImage text={code}/>
 						):(
-							<picture className="picture">
+							<picture
+								className="picture"
+								onClick={(e)=>editMode && currentItemIndexes.includes(index) && CP.selectImage({sources:'sources',src:'src',alt:'alt'},function(data){
+									Object.assign(picture,data);
+									save();
+								},'full',devices)}
+							>
 								{sources && sources.map((source)=>(
 									<source srcSet={source.srcset} media={CP.devices[source.device].media_query} data-device={source.device} key={source.device}/>
 								))}
@@ -138,7 +172,7 @@ CP.PlacedPictures.Edit=(props)=>{
 					</div>
 				);
 			})}
-			{mode==='edit' && 
+			{editMode && 
 				<CP.BoundingBox
 					targets={currentItemNodes}
 					container={containerNode}
@@ -157,7 +191,7 @@ CP.PlacedPictures.Edit=(props)=>{
 						save();
 					}}
 					onDelete={()=>{
-						currentItemIndexes.sort().revers().forEach((index)=>picture.splice(index,1));
+						currentItemIndexes.sort().reverse().forEach((index)=>pictures.splice(index,1));
 						save();
 					}}
 				/>
