@@ -203,6 +203,27 @@ $colors:(
 			}
 		}
 	}
+	&-PlacedPictures{
+		&.is-edit-mode{
+			@include bnd((z:1000));
+			@include bdr((s:s,w:1,c:wp));
+			@include bg((c:b 1 .5));
+			&::before,&::after{
+				content:'';
+				@include bnd((d:b,p:a,i:0,mg:a));
+				@include bdr((s:s,w:1,c:wp));
+				@include usr((e:n));
+			}
+			&::before{
+				@include bnd((w:30%));
+				@include bdr((p:t b,s:n));
+			}
+			&::after{
+				@include bnd((h:30%));
+				@include bdr((p:l r,s:n));
+			}
+		}
+	}
 }
 .selectColor{
 	@include bnd((w:220));
