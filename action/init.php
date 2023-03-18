@@ -44,6 +44,10 @@ wp_scripts()->add_data('catpow','global','Catpow');
 wp_scripts()->add_data('alpine','global','alpine');
 
 
+\cp::register_script('script.js');
+\cp::register_style('style.css');
+\cp::register_style('content.css');
+
 wp_register_script('wpinfo',null);
 wp_localize_script('wpinfo','wpinfo',array(
 	'plugins_url'=>plugins_url(),
