@@ -11,7 +11,7 @@ class blocks{
 		'front_style'=>[],
 		'component'=>['wp-element','wp-api-fetch'],
 		'script'=>['catpow'],
-		'style'=>[]
+		'style'=>['content.css']
 	];
 	public static function register_blocks(){
 		add_filter('block_categories_all',function($cats,$block_editor_context){
