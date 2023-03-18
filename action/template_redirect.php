@@ -22,26 +22,15 @@ if(get_query_var('cp_page_type')==='file'){
 	header('HTTP/1.0 404 NotFound');
 	exit;
 }
-/*ページinit*/
+/*page init*/
 if($file=cp::get_file_path(cp::$content_path.'/init.php',cp::FROM_THEME|cp::FROM_CONFIG)){
 	include $file;
 }
-
-/*script style*/
-$css_arr=[
-	'style.css',
-	'content.css',
-	cp::$content_path.'/style.css',
-	cp::$content_path.'/layout.css'
-];
-foreach($css_arr as $path){cp::enqueue_style($path);}
-$js_arr=[
-	'script.js',
-	cp::$content_path.'/script.js'
-];
-foreach($js_arr as $path){cp::enqueue_script($path);}
-
-
+cp::enqueue_style('style.css');
+cp::enqueue_style('content.css');
+cp::enqueue_style(cp::$content_path.'/style.css');
+cp::enqueue_style(cp::$content_path.'/layout.css');
+cp::enqueue_script(cp::$content_path.'/script.js');
 
 /*admin bar*/
 if(!current_user_can('edit_posts')){
