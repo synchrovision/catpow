@@ -1,0 +1,48 @@
+.InputTextItems {
+  padding: 0.5em 1em;
+  margin: 0rem 0.5em;
+  border-radius: 1em;
+  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a)) inset;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1em;
+}
+.InputTextItems-item {
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+  padding: 0.25em;
+  padding-left: 1em;
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),1);
+  border-radius: 1em;
+  text-align: center;
+  line-height: 1em;
+}
+.InputTextItems-item-remove {
+  display: inline-block;
+  margin-left: 0.25rem;
+  width: 1.2em;
+  height: 1.2em;
+  padding: 0.1em;
+  border-radius: 50%;
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 20),1);
+  line-height: 1em;
+  cursor: pointer;
+}
+.InputTextItems .InputTextItems-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0.25rem;
+  border-style: none;
+}
+/*# sourceMappingURL=./style.css.map */

@@ -1,0 +1,26 @@
+@import 'admin_style_config.scss';
+
+.InputTextItems{
+	@include bnd((pd:.5em 1em,mg:0 .5em));
+	@include bdr((r:1em));
+	@include shd((b:-2));
+	@include flx((w:w,a:c,g:4));
+	@include txt((p:14,h:1em));
+	&-item{
+		@include bnd((f:0 0 a,pd:.25em,pdl:1em));
+		@include bg((c:t 10));
+		@include bdr((r:1em));
+		@include txt((a:c,h:1em));
+		&-remove{
+			@include bnd((d:ib,mgl:4,w:1.2em,h:1.2em,pd:.1em));
+			@include bdr((r:50%));
+			@include bg((c:t 20));
+			@include txt((h:1em));
+			@include usr((c:p));
+		}
+	}
+	& &-input{
+		@include bnd((ap:n,pd:4));
+		@include bdr((s:n));
+	}
+}
