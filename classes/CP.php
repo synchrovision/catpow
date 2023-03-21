@@ -1223,7 +1223,12 @@ class CP{
 	public static function get_input_attr($path,$conf,$io='input'){
 		$rtn=' id="'.self::get_input_id($path).'"';
 		$classes=isset($conf['class'])?is_string($conf['class'])?explode(' ',$conf['class']):$conf['class']:[];
-		$classes[]=$conf[$io.'-type']??$conf['type']??'text';
+		$type=$conf[$io.'-type']??$conf['type']??'text';
+		$classes[]='cp-meta-item-unit-input';
+		$classes[]='is-type-'.$type;
+		$meta_class="Catpow\\meta\\${type}";
+		$classes[]='is-input-type-'.$meta_class::$input_type;
+		$classes[]='is-value-type-'.$meta_class::$value_type;
 		$rtn.=' class="'.implode(' ',$classes).'"';
 		foreach(['placeholder','size','rows','cols','maxlength','autocomplete','min','max','step','pattern'] as $i=>$attr_name){
 			if(isset($conf[$attr_name]))$rtn.=' '.$attr_name.'="'.$conf[$attr_name].'"';
