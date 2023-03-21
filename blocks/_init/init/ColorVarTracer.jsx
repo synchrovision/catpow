@@ -9,9 +9,11 @@ CP.ColorVarTracer=(props)=>{
 		if(target){
 			const styles=getComputedStyle(target);
 			['b','s','t','m','a','i'].forEach((k)=>{
-				['','-container'].forEach((p)=>{
-					const name=`--cp${p}-tones-${k}-h`;
-					vars[name]=styles.getPropertyValue(name);
+				['h','s','l'].forEach((r)=>{
+					['','-container'].forEach((p)=>{
+						const name=`--cp${p}-tones-${k}-${r}`;
+						vars[name]=styles.getPropertyValue(name);
+					})
 				})
 			});
 		}
