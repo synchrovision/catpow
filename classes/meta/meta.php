@@ -83,6 +83,7 @@ abstract class meta{
 	}
 	
 	public static function output($meta,$prm){
+		if(is_array($meta->value)){return implode(',',$meta->value);}
 		return $meta->value;
 	}
 	public static function input($meta,$prm){
