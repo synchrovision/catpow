@@ -1,16 +1,16 @@
 /* global wp Catpow*/
 Catpow.util.ready(()=>{
 	document.body.addEventListener('click',(e)=>{
-		const unit=e.target.closest('[data-role="cp-meta-unit"]');
+		const unit=e.target.closest('[data-role="cp-meta-item-unit"]');
 		if(unit){
 			const decButton=e.target.closest('[data-role="cp-input-item-decrease"]');
-			const incButton=e.target.closest('[data-role="cp-input-item-decrease"]');
+			const incButton=e.target.closest('[data-role="cp-input-item-increase"]');
 			if(decButton){
 				unit.remove();
 				document.dispatchEvent(new CustomEvent('update_form'));
 			}
 			else if(incButton){
-				unit.after(unit.clone(true));
+				unit.after(unit.cloneNode(true));
 				reset_multiple_input_attr(unit.closest('[data-role="cp-meta-item"]'));
 				document.dispatchEvent(new CustomEvent('update_form'));
 			}
@@ -19,7 +19,7 @@ Catpow.util.ready(()=>{
 });
 
 function reset_multiple_input_attr(item){
-	item.querySelectorAll('[data-role="cp-meta-unit"]').forEach((el)=>{
+	item.querySelectorAll('[data-role="cp-meta-item-unit"]').forEach((el)=>{
 		if(document.getElementById(el.id)===el)return;
 		var orgID=el.id;
 		var path=orgID.split('--');
