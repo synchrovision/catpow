@@ -467,11 +467,11 @@
       }
       var obj = {};
       css.replace("&amp;", "&").split(";").forEach((pair) => {
-        const match = pair.match(/^([^:]+?):(.+)$/);
+        const match = pair.match(/^((\-\-)?([^:]+?)):(.+)$/);
         if (!match) {
           return;
         }
-        obj[Catpow.util.kebabToCamel(match[1])] = match[2];
+        obj[match[2] ? match[1] : Catpow.util.kebabToCamel(match[3])] = match[4];
       });
       return obj;
     },
