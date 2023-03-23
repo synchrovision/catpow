@@ -12,10 +12,11 @@ class post_title extends meta{
 	}
 	
 	public static function reflect_to_data(&$data,$data_type,$data_name,$meta_name,$id,$input,$conf){
+		if(empty($input['value'])){return false;}
 		$data['object_data'][static::get_type()]=reset($input['value']);
 	}
 	public static function reflect_to_query(&$query,$data_type,$data_name,$meta_name,$id,$input,$conf){
-		if(empty(array_filter($input['value']))){return false;}
+		if(empty($input['value']) || empty(array_filter($input['value']))){return false;}
 		$query['s']=reset($input['value']);
 	}
 	public static function reflect_to_order(&$order_data,$data_type,$data_name,$meta_name,$conf){
