@@ -27,6 +27,7 @@ class post extends query{
 			'post_type',
 			'ID',
 			'post_title',
+			'post_name',
 			'post_content',
 			'post_author',
 			'post_status',
