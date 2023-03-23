@@ -1,4 +1,4 @@
-﻿Catpow.UI.InputTextItems=(props)=>{
+﻿Catpow.UI.TextItems=(props)=>{
 	const {name,defaultLabel,options,multiple=false}=props;
 	const {useState}=wp.element;
 	const [value,setValue]=useState(props.value);

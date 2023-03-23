@@ -1,7 +1,7 @@
 <?php
 namespace Catpow\meta;
 
-class InputTextItems extends UI{
+class TextItems extends UI{
 	static $output_type='text';
 }
 ?>
