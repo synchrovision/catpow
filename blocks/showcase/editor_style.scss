@@ -1,0 +1,23 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-showcase{
+	.item{
+		@include bnd((p:r));
+		.itemControl{
+			@include bnd((p:a,t:5,r:5));
+		}
+		&>.link{
+			@include bnd((p:r));
+			input{
+				@include bnd((mg:10 a));
+				@include txt((c:t));
+			}
+		}
+	}
+	&.edit{
+		@include bnd((pd:20));
+		@include bdr((s:s,w:1,c:t 1 .5,r:10));
+		@include shd((b:3));
+		@include bg((c:b));
+	}
+}
