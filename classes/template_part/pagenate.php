@@ -12,9 +12,9 @@ abstract class pagenate extends template_part{
 				'total'=>$q->max_num_pages
 			],$param);
 			?>
-			<ul class="pagenate" <?=_buttons('results')?>>
+			<ul class="pagenate" <?=\Catpow\_buttons('results')?>>
 				<?php for($i=1;$i<=$param['total'];$i++): ?>
-				<li class="item<?=$param['current']===$i?' active':''?>" <?=_buttons_item($i);?>><?=$i?></li>
+				<li class="item<?=$param['current']===$i?' active':''?>" <?=\Catpow\_buttons_item($i);?>><?=$i?></li>
 				<?php endfor; ?>
 			</ul>
 			<?php
