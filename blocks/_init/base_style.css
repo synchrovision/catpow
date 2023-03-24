@@ -410,6 +410,37 @@
   border-left-style: none;
   border-right-style: none;
 }
+.CP-Link {
+  position: relative;
+}
+.CP-Link-input {
+  display: block;
+  position: absolute;
+  min-width: 1em;
+  width: fit-content;
+  height: 1em;
+  padding: 0.25em;
+  bottom: -2em;
+  left: -12.5rem;
+  right: -12.5rem;
+  margin: auto;
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  font-size: 0.75rem;
+  line-height: 1em;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
+  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  opacity: 1;
+  transform: -webkit- translateY(0rem);
+  transform: translateY(0rem);
+}
+.CP-Link:not(.is-selected) .CP-Link-input {
+  opacity: 0;
+  transform: -webkit- translateY(-0.5em);
+  transform: translateY(-0.5em);
+  pointer-events: none;
+}
 .selectColor {
   width: 13.75rem;
   list-style: none;

@@ -39,3 +39,4 @@ import './EventInputCards.jsx';
 import './ServerSideRender.jsx';
 import './ColorVarTracer.jsx';
 import './PlacedPictures.jsx';
+import './Link.jsx';
