@@ -1,6 +1,9 @@
 ﻿CP.config.showcase={
 	imageKeys:{
 		image:{src:"src",alt:"alt",code:"imageCode",items:"items"}
+	},
+	linkKeys:{
+		link:{href:"linkUrl",items:"items"}
 	}
 };
 wp.blocks.registerBlockType('catpow/showcase',{
@@ -30,7 +33,7 @@ wp.blocks.registerBlockType('catpow/showcase',{
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		
 		const states=CP.wordsToFlags(classes);
-		const {imageKeys}=CP.config.showcase;
+		const {imageKeys,linkKeys}=CP.config.showcase;
 
 		const selectiveClasses=useMemo(()=>{
 			const {imageKeys}=CP.config.showcase;
@@ -102,16 +105,19 @@ wp.blocks.registerBlockType('catpow/showcase',{
 							/>
 						</div>
 						{states.hasLink &&
-							<div className='link'>
+							<CP.Link.Edit
+								className="link"
+								attr={attributes}
+								set={setAttributes}
+								keys={linkKeys.link}
+								index={index}
+								isSelected={isSelected}
+							>
 								<RichText
 									onChange={(linkText)=>{items[index].linkText=linkText;save();}}
 									value={item.linkText}
 								/>
-								<TextControl onChange={(linkUrl)=>{
-									items[index].linkUrl=linkUrl;
-									save();
-								}} value={item.linkUrl} placeholder='URLを入力'/>
-							</div>
+							</CP.Link.Edit>
 						}
 					</div>
 				</CP.Item>
@@ -183,9 +189,8 @@ wp.blocks.registerBlockType('catpow/showcase',{
 		var classArray=_.uniq(classes.split(' '));
 
 		const states=CP.wordsToFlags(classes);
-		const {imageKeys}=CP.config.showcase;
+		const {imageKeys,linkKeys}=CP.config.showcase;
 
-		console.log(items);
 		let rtn=[];
 		items.forEach((item,index)=>{
 			rtn.push(
@@ -222,9 +227,14 @@ wp.blocks.registerBlockType('catpow/showcase',{
 							<RichText.Content value={item.text}/>
 						</div>
 						{states.hasLink &&
-							<a className='link' href={item.linkUrl}>
+							<CP.Link
+								className="link"
+								attr={attributes}
+								keys={linkKeys.link}
+								index={index}
+							>
 								<RichText.Content value={item.linkText}/>
-							</a>
+							</CP.Link>
 						}
 					</div>
 				</li>

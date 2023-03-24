@@ -3,6 +3,9 @@
   CP.config.showcase = {
     imageKeys: {
       image: { src: "src", alt: "alt", code: "imageCode", items: "items" }
+    },
+    linkKeys: {
+      link: { href: "linkUrl", items: "items" }
     }
   };
   wp.blocks.registerBlockType("catpow/showcase", {
@@ -31,7 +34,7 @@
       const primaryClass = "wp-block-catpow-showcase";
       var classArray = _.uniq((className + " " + classes).split(" "));
       const states = CP.wordsToFlags(classes);
-      const { imageKeys } = CP.config.showcase;
+      const { imageKeys, linkKeys } = CP.config.showcase;
       const selectiveClasses = useMemo(() => {
         const { imageKeys: imageKeys2 } = CP.config.showcase;
         const selectiveClasses2 = [
@@ -109,19 +112,27 @@
                 },
                 value: item.text
               }
-            )), states.hasLink && /* @__PURE__ */ wp.element.createElement("div", { className: "link" }, /* @__PURE__ */ wp.element.createElement(
-              RichText,
+            )), states.hasLink && /* @__PURE__ */ wp.element.createElement(
+              CP.Link.Edit,
               {
-                onChange: (linkText) => {
-                  items[index].linkText = linkText;
-                  save();
-                },
-                value: item.linkText
-              }
-            ), /* @__PURE__ */ wp.element.createElement(TextControl, { onChange: (linkUrl) => {
-              items[index].linkUrl = linkUrl;
-              save();
-            }, value: item.linkUrl, placeholder: "URL\u3092\u5165\u529B" })))
+                className: "link",
+                attr: attributes,
+                set: setAttributes,
+                keys: linkKeys.link,
+                index,
+                isSelected
+              },
+              /* @__PURE__ */ wp.element.createElement(
+                RichText,
+                {
+                  onChange: (linkText) => {
+                    items[index].linkText = linkText;
+                    save();
+                  },
+                  value: item.linkText
+                }
+              )
+            ))
           )
         );
       });
@@ -179,8 +190,7 @@
       const { items = [], classes = "", TitleTag, countPrefix, countSuffix } = attributes;
       var classArray = _.uniq(classes.split(" "));
       const states = CP.wordsToFlags(classes);
-      const { imageKeys } = CP.config.showcase;
-      console.log(items);
+      const { imageKeys, linkKeys } = CP.config.showcase;
       let rtn = [];
       items.forEach((item, index) => {
         rtn.push(
@@ -206,7 +216,16 @@
               className: "titleCaption",
               value: item.titleCaption
             }
-          ), /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })), states.hasLink && /* @__PURE__ */ wp.element.createElement("a", { className: "link", href: item.linkUrl }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.linkText }))))
+          ), /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })), states.hasLink && /* @__PURE__ */ wp.element.createElement(
+            CP.Link,
+            {
+              className: "link",
+              attr: attributes,
+              keys: linkKeys.link,
+              index
+            },
+            /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.linkText })
+          )))
         );
       });
       console.log(rtn);

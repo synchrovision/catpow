@@ -31,7 +31,8 @@ $attributes=[
 				"titleCaption"=>'Caption',
 				"src"=>cp::get_file_url('/images/dummy.jpg'),
 				"alt"=>'dummy',
-				"text"=>['Text'],
+				"text"=>'Text',
+				"linkText"=>'Read More',
 				"linkUrl"=>home_url()
 			];
 		},range(0,3))
