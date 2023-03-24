@@ -12,10 +12,10 @@ if(!empty($_GET['color'])){
 		$svg=str_replace('<svg ',"<svg color='{$_GET['color']} fill='currentcolor' ",$svg);
 	}
 }
-elseif(!empty($_GET['c'])){
-	if(preg_match('/^([a-zA-Z]+?)?(-)?(\d+)?$/',$_GET['c'],$matches)){
+elseif(isset($_GET['c'])){
+	if(preg_match('/^([a-zA-Z]+?)?(--|_)?(\d+)?$/',$_GET['c'],$matches)){
 		$key=$matches[1]?:'m';
-		$staticHue=!empty($matches[2]);
+		$staticHue=$matches[2]==='--';
 		$num=$matches[3]??null;
 		$config_dir=dirname(__DIR__,3)."/config";
 		if(file_exists($sites=$config_dir.'/sites.json') && $sites=json_decode(file_get_contents($sites),true)){
@@ -40,7 +40,7 @@ elseif(!empty($_GET['c'])){
 		}
 		if(($tones=json_decode(file_get_contents($json),true)) && $tone=$tones[$key]??null){
 			if(isset($num)){
-				$c=sprintf('hsl(%s,%s,%s)',$staticHue?$num:($tone['h']+($num-6)*$tones['hr']+$tones['hs']),$tone['s'],$tone['l']);
+				$c=sprintf('hsl(%s,%s,%s)',$staticHue?($num*30):($tone['h']+($num-6)*$tones['hr']+$tones['hs']),$tone['s'],$tone['l']);
 			}
 			else{
 				$c=sprintf('hsl(%s,%s,%s)',$tone['h'],$tone['s'],$tone['l']);
