@@ -38,6 +38,7 @@
       const selectiveClasses = useMemo(() => {
         const { imageKeys: imageKeys2 } = CP.config.showcase;
         const selectiveClasses2 = [
+          "color",
           { name: "counter", label: "\u756A\u53F7", values: "hasCounter", sub: [
             { name: "countPrefix", input: "text", label: "\u756A\u53F7\u524D\u7F6E\u30C6\u30AD\u30B9\u30C8", key: "countPrefix" },
             { name: "countSuffix", input: "text", label: "\u756A\u53F7\u5F8C\u7F6E\u30C6\u30AD\u30B9\u30C8", key: "countSuffix" }
@@ -228,7 +229,6 @@
           )))
         );
       });
-      console.log(rtn);
       return /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn);
     }
   });
