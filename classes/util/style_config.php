@@ -17,7 +17,7 @@ class style_config{
 	public static function get_color_roles(){
 		if(isset(static::$color_roles)){return static::$color_roles;}
 		return static::$color_roles=apply_filters('cp_color_roles',[
-			'background'=>['label'=>'背景色','default'=>'#ffffff','shorthand'=>'b','extend'=>true],
+			'background'=>['label'=>'背景色','default'=>'#ffffff','shorthand'=>'b'],
 			'sheet'=>['label'=>'濃背景色','default'=>'#dddddd','shorthand'=>'s','extend'=>true],
 			'text'=>['label'=>'文字色','default'=>'#666666','shorthand'=>'t'],
 			'main'=>['label'=>'基本色','default'=>'#888888','shorthand'=>'m','extend'=>true],
