@@ -430,7 +430,8 @@
 	wordsToFlags:(words)=>{
 		var rtn={};
 		if(undefined === words){return {};}
-		words.split(' ').forEach((word)=>{rtn[word]=true;});
+		if(typeof words === 'string'){words=words.split(' ');}
+		words.forEach((word)=>{rtn[word]=true;});
 		return rtn;
 	},
 	flagsToWords:(flags)=>{
@@ -650,7 +651,82 @@
 	},
 	generateColorClass:(data)=>'color'+(data.fixed?'--':(data.relative?'_':''))+data.value,
 	colorClassPattern:/^color((|_|\-\-)(\-?\d+))$/,
-	
+	parseToneClass:(toneClass)=>{
+		if(toneClass){
+			const matches=toneClass.match(CP.toneClassPattern);
+			if(matches){
+				return {
+					s:matches[2]==='s',
+					l:matches[2]==='l',
+					value:matches[3]
+				};
+			}
+		}
+		return {s:false,l:false,value:0};
+	},
+	generateToneClass:(data)=>'tone-'+(data.s?'s':'l')+data.value,
+	toneClassPattern:/^tone\-((s|l)(\-?\d+))$/,
+	extractColorAndToneClasses:(classes)=>{
+		if(typeof classes === 'string'){classes=classes.split(' ');}
+		const rtn={
+			h:classes.find((c)=>CP.colorClassPattern.test(c))
+		};
+		for(const c of classes){
+			const matches=c.match(CP.toneClassPattern);
+			if(matches){rtn[matches[2]]=c;}
+		}
+		return rtn;			  
+	},
+	colorClassProxy:(state)=>{
+		if(typeof state === 'string' || Array.isArray(state)){
+			state=CP.wordsToFlags(state);
+		}
+		return new Proxy(state,CP.colorClassProxyHandler);
+		
+	},
+	colorClassProxyHandler:{
+		get(state,prop){
+			switch(prop){
+				case 'classes':{
+					return CP.flagsToWords(state);
+				}
+				case 'h':{
+					return Object.keys(state).find((c)=>CP.colorClassPattern.test(c));
+				}
+				case 's':
+				case 'l':{
+					return Object.keys(state).find((c)=>{
+						const match=c.match(CP.toneClassPattern);
+						return match && match[2]===prop;
+					});
+				}
+			}
+			return Reflect.get(...arguments);
+		},
+		set(state,prop,val){
+			switch(prop){
+				case 'state':{
+					return state;
+				}
+				case 'h':
+				case 's':
+				case 'l':{
+					if(prop==='h'){
+						CP.filterFlags(state,(c)=>!CP.colorClassPattern.test(c));
+					}
+					else{
+						CP.filterFlags(state,(c)=>{
+							const match=c.match(CP.toneClassPattern);
+							return !(match && match[2]===prop);
+						});
+					}
+					if(val){state[val]=true;}
+					return;
+				}
+			}
+			return Reflect.set(...arguments);
+		}
+	},
 	/*id reflection*/
 	manageStyleData:(props,csss)=>{
 		const {attributes,className,setAttributes}=props;
