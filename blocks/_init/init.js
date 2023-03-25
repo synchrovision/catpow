@@ -595,7 +595,10 @@
       if (void 0 === words) {
         return {};
       }
-      words.split(" ").forEach((word) => {
+      if (typeof words === "string") {
+        words = words.split(" ");
+      }
+      words.forEach((word) => {
         rtn[word] = true;
       });
       return rtn;
@@ -870,6 +873,86 @@
     },
     generateColorClass: (data) => "color" + (data.fixed ? "--" : data.relative ? "_" : "") + data.value,
     colorClassPattern: /^color((|_|\-\-)(\-?\d+))$/,
+    parseToneClass: (toneClass) => {
+      if (toneClass) {
+        const matches = toneClass.match(CP.toneClassPattern);
+        if (matches) {
+          return {
+            s: matches[2] === "s",
+            l: matches[2] === "l",
+            value: matches[3]
+          };
+        }
+      }
+      return { s: false, l: false, value: 0 };
+    },
+    generateToneClass: (data) => "tone-" + (data.s ? "s" : "l") + data.value,
+    toneClassPattern: /^tone\-((s|l)(\-?\d+))$/,
+    extractColorAndToneClasses: (classes) => {
+      if (typeof classes === "string") {
+        classes = classes.split(" ");
+      }
+      const rtn = {
+        h: classes.find((c) => CP.colorClassPattern.test(c))
+      };
+      for (const c of classes) {
+        const matches = c.match(CP.toneClassPattern);
+        if (matches) {
+          rtn[matches[2]] = c;
+        }
+      }
+      return rtn;
+    },
+    colorClassProxy: (state) => {
+      if (typeof state === "string" || Array.isArray(state)) {
+        state = CP.wordsToFlags(state);
+      }
+      return new Proxy(state, CP.colorClassProxyHandler);
+    },
+    colorClassProxyHandler: {
+      get(state, prop) {
+        switch (prop) {
+          case "classes": {
+            return CP.flagsToWords(state);
+          }
+          case "h": {
+            return Object.keys(state).find((c) => CP.colorClassPattern.test(c));
+          }
+          case "s":
+          case "l": {
+            return Object.keys(state).find((c) => {
+              const match = c.match(CP.toneClassPattern);
+              return match && match[2] === prop;
+            });
+          }
+        }
+        return Reflect.get(...arguments);
+      },
+      set(state, prop, val) {
+        switch (prop) {
+          case "state": {
+            return state;
+          }
+          case "h":
+          case "s":
+          case "l": {
+            if (prop === "h") {
+              CP.filterFlags(state, (c) => !CP.colorClassPattern.test(c));
+            } else {
+              CP.filterFlags(state, (c) => {
+                const match = c.match(CP.toneClassPattern);
+                return !(match && match[2] === prop);
+              });
+            }
+            if (val) {
+              state[val] = true;
+            }
+            return;
+          }
+        }
+        return Reflect.set(...arguments);
+      }
+    },
     /*id reflection*/
     manageStyleData: (props, csss) => {
       const { attributes, className, setAttributes } = props;
@@ -1082,7 +1165,7 @@
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: el, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: el.parentElement }, /* @__PURE__ */ wp.element.createElement(
         CP.SelectThemeColor,
         {
-          onChange: (color) => setAttributes({ color }),
+          onChange: (proxy) => setAttributes({ color: proxy.classes }),
           selected: activeAttributes["color"]
         }
       ))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
@@ -1127,7 +1210,7 @@
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: el, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: el.parentElement }, /* @__PURE__ */ wp.element.createElement(
         CP.SelectThemeColor,
         {
-          onChange: (color) => setAttributes({ color }),
+          onChange: (proxy) => setAttributes({ color: proxy.classes }),
           selected: activeAttributes["color"]
         }
       ))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
@@ -1179,7 +1262,7 @@
       ))), /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: el.parentElement }, /* @__PURE__ */ wp.element.createElement(
         CP.SelectThemeColor,
         {
-          onChange: (color) => setAttributes({ color }),
+          onChange: (proxy) => setAttributes({ color: proxy.classes }),
           selected: activeAttributes["color"]
         }
       ))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
@@ -1323,6 +1406,17 @@
         return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "4", y: "2", width: "13", height: "6" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "4", y: "11", width: "14", height: "7" }), /* @__PURE__ */ wp.element.createElement("polygon", { points: "3 10 3 9 4 9 4 8 3 8 3 7 2 7 2 8 1 8 1 9 2 9 2 10 1 10 1 11 2 11 2 12 3 12 3 11 4 11 4 10 3 10" }));
       case "evenSpaceH":
         return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "4", width: "6", height: "13" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "11", y: "4", width: "7", height: "14" }), /* @__PURE__ */ wp.element.createElement("polygon", { points: "12 3 12 2 11 2 11 1 10 1 10 2 9 2 9 1 8 1 8 2 7 2 7 3 8 3 8 4 9 4 9 3 10 3 10 4 11 4 11 3 12 3" }));
+    }
+  };
+
+  // ../blocks/_init/init/ConfigIcon.jsx
+  CP.ConfigIcon = (props) => {
+    const { icon } = props;
+    switch (icon) {
+      case "light":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("path", { d: "m10,5c-2.76,0-5,2.24-5,5s2.24,5,5,5,5-2.24,5-5-2.24-5-5-5Zm0,9c-2.21,0-4-1.79-4-4s1.79-4,4-4,4,1.79,4,4-1.79,4-4,4Z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "m3.5,10.5H1c-.28,0-.5-.22-.5-.5s.22-.5.5-.5h2.5c.28,0,.5.22.5.5s-.22.5-.5.5ZM10,.5c-.28,0-.5.22-.5.5v2.5c0,.28.22.5.5.5s.5-.22.5-.5V1c0-.28-.22-.5-.5-.5Zm0,15.5c-.28,0-.5.22-.5.5v2.5c0,.28.22.5.5.5s.5-.22.5-.5v-2.5c0-.28-.22-.5-.5-.5ZM3.99,3.28c-.2-.2-.51-.2-.71,0-.2.2-.2.51,0,.71l1.77,1.77c.2.2.51.2.71,0,.2-.2.2-.51,0-.71l-1.77-1.77Zm10.96,10.96c-.2-.2-.51-.2-.71,0s-.2.51,0,.71l1.77,1.77c.2.2.51.2.71,0s.2-.51,0-.71l-1.77-1.77Zm4.05-4.74h-2.5c-.28,0-.5.22-.5.5s.22.5.5.5h2.5c.28,0,.5-.22.5-.5s-.22-.5-.5-.5Zm-13.95,4.74l-1.77,1.77c-.2.2-.2.51,0,.71.2.2.51.2.71,0l1.77-1.77c.2-.2.2-.51,0-.71-.2-.2-.51-.2-.71,0ZM14.95,5.76l1.77-1.77c.2-.2.2-.51,0-.71s-.51-.2-.71,0l-1.77,1.77c-.2.2-.2.51,0,.71s.51.2.71,0Z" }));
+      case "contrast":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "10", y: "3", width: "8", height: "11" }), /* @__PURE__ */ wp.element.createElement("path", { d: "m10,1C5.03,1,1,5.03,1,10s4.03,9,9,9,9-4.03,9-9S14.97,1,10,1Zm0,17c-4.42,0-8-3.58-8-8S5.58,2,10,2v16Z" }));
     }
   };
 
@@ -1547,28 +1641,57 @@
 
   // ../blocks/_init/init/SelectThemeColor.jsx
   CP.SelectThemeColor = (props) => {
-    const { selected, onChange } = props;
-    const { useCallback, useMemo } = wp.element;
+    const { onChange } = props;
+    const { useCallback, useMemo, Fragment } = wp.element;
     const { Icon } = wp.components;
     const { bem } = Catpow.util;
     const classes = bem("CP-SelectThemeColor");
-    const data = useMemo(() => CP.parseColorClass(selected), [selected]);
-    const Selections = useCallback((props2) => {
-      const { fixed = false, absolute = false, relative = false, active = false, selected: selected2 } = props2;
-      return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.items({ fixed, absolute, relative, active }) }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.items.icon({ active }) }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: fixed ? "lock" : absolute ? "media-default" : "excerpt-view" })), Array.from(Array(13), (v, value) => {
+    const proxy = useMemo(() => CP.colorClassProxy(props.selected), [props.selected]);
+    const data = useMemo(() => CP.parseColorClass(proxy.h), [proxy.h]);
+    const ColorSelections = useCallback((props2) => {
+      const { fixed = false, absolute = false, relative = false, active = false, proxy: proxy2 } = props2;
+      const { h, s, l } = proxy2;
+      const hsl = { h, s, l };
+      return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.colors({ fixed, absolute, relative, active }) }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active }) }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: fixed ? "lock" : absolute ? "media-default" : "excerpt-view" })), Array.from(Array(13), (v, value) => {
         const colorClass = CP.generateColorClass({ fixed, absolute, relative, value });
+        const active2 = colorClass === h;
         return /* @__PURE__ */ wp.element.createElement(
           "li",
           {
-            className: classes.items.item(colorClass, { active: colorClass == selected2, fixed, absolute, relative }),
-            onClick: () => onChange(colorClass),
+            className: classes.colors.item(colorClass, s, l, { active: active2 }),
+            onClick: () => {
+              proxy2.h = !active2 && colorClass;
+              onChange(proxy2);
+            },
             key: colorClass
           },
           " "
         );
       }));
     }, [onChange]);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(Selections, { selected, fixed: true, active: data.fixed }), /* @__PURE__ */ wp.element.createElement(Selections, { selected, absolute: true, active: data.absolute }), /* @__PURE__ */ wp.element.createElement(Selections, { selected, relative: true, active: data.relative }));
+    const ToneSelections = useCallback((props2) => {
+      const { proxy: proxy2 } = props2;
+      const { h, s, l } = proxy2;
+      const hsl = { h, s, l };
+      return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.tones() }, ["s", "l"].map((r) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: r }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active: !!hsl[r] }) }, /* @__PURE__ */ wp.element.createElement(CP.ConfigIcon, { icon: { s: "contrast", l: "light" }[r] })), Array.from(Array(5), (v, index) => {
+        const value = index - 2;
+        const toneClass = CP.generateToneClass({ [r]: true, value });
+        const active = toneClass === hsl[r];
+        return /* @__PURE__ */ wp.element.createElement(
+          "li",
+          {
+            className: classes.tones.item(h, r === "s" ? s : l, toneClass, { active }),
+            onClick: () => {
+              proxy2[r] = !active && toneClass;
+              onChange(proxy2);
+            },
+            key: toneClass
+          },
+          " "
+        );
+      }))));
+    }, [onChange]);
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(ColorSelections, { proxy, fixed: true, active: data.fixed }), /* @__PURE__ */ wp.element.createElement(ColorSelections, { proxy, absolute: true, active: data.absolute }), /* @__PURE__ */ wp.element.createElement(ColorSelections, { proxy, relative: true, active: data.relative }), /* @__PURE__ */ wp.element.createElement(ToneSelections, { proxy }));
   };
 
   // ../blocks/_init/init/SelectColors.jsx
@@ -2661,12 +2784,10 @@
               CP.SelectColorClass,
               {
                 label: __2("\u8272", "catpow"),
-                selected: Object.keys(states2).find((key) => CP.colorClassPattern.test(key)),
-                onChange: (color) => {
-                  CP.filterFlags(states2, (key) => !CP.colorClassPattern.test(key));
-                  states2[color] = true;
-                  if (!props2.items) {
-                    set({ color: color.substr(5) });
+                selected: states2,
+                onChange: (proxy) => {
+                  if (!props2.items && proxy.h) {
+                    set({ color: proxy.h.substr(5) });
                   }
                   saveClasses2();
                 }

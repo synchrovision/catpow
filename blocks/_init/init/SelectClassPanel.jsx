@@ -301,11 +301,9 @@ CP.SelectClassPanel=(props)=>{
 				rtn.push(
 					<CP.SelectColorClass
 						label={__('色','catpow')}
-						selected={Object.keys(states).find(key=>CP.colorClassPattern.test(key))}
-						onChange={(color)=>{
-							CP.filterFlags(states,(key)=>!(CP.colorClassPattern.test(key)));
-							states[color]=true;
-							if(!props.items){set({color:color.substr(5)});}
+						selected={states}
+						onChange={(proxy)=>{
+							if(!props.items && proxy.h){set({color:proxy.h.substr(5)});}
 							saveClasses();
 						}}
 					/>

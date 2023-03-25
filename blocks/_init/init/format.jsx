@@ -198,7 +198,7 @@ wp.richText.registerFormatType('catpow/mark',{
 							<CardBody>
 								<CP.ColorVarTracer target={el.parentElement}>
 									<CP.SelectThemeColor
-										onChange={(color)=>setAttributes({color})}
+										onChange={(proxy)=>setAttributes({color:proxy.classes})}
 										selected={activeAttributes['color']}
 									/>
 								</CP.ColorVarTracer>
@@ -263,7 +263,7 @@ wp.richText.registerFormatType('catpow/large',{
 							<CardBody>
 								<CP.ColorVarTracer target={el.parentElement}>
 									<CP.SelectThemeColor
-										onChange={(color)=>setAttributes({color})}
+										onChange={(proxy)=>setAttributes({color:proxy.classes})}
 										selected={activeAttributes['color']}
 									/>
 								</CP.ColorVarTracer>
@@ -329,7 +329,7 @@ wp.richText.registerFormatType('catpow/tag',{
 							<CardBody>
 								<CP.ColorVarTracer target={el.parentElement}>
 									<CP.SelectThemeColor
-										onChange={(color)=>setAttributes({color})}
+										onChange={(proxy)=>setAttributes({color:proxy.classes})}
 										selected={activeAttributes['color']}
 									/>
 								</CP.ColorVarTracer>
