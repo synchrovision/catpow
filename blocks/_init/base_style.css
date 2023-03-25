@@ -346,9 +346,39 @@
   border-radius: 50%;
   cursor: move;
 }
-.CP-SelectThemeColor-items {
+.CP-SelectThemeColor-colors-icon, .CP-SelectThemeColor-tones-icon {
+  margin: 0rem;
+  padding: 0rem 0.25rem;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.2);
+}
+.CP-SelectThemeColor-colors-icon svg, .CP-SelectThemeColor-tones-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: currentColor;
+}
+.CP-SelectThemeColor-colors-icon.active, .CP-SelectThemeColor-tones-icon.active {
+  color: var(--wp-admin-theme-color);
+}
+.CP-SelectThemeColor-colors-item, .CP-SelectThemeColor-tones-item {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0.625rem;
+  height: 1.25rem;
+  margin: 0rem;
+  padding: 0rem;
+  cursor: pointer;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  border-top-style: solid;
+  border-top-width: 0.625rem;
+  border-top-color: hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),var(--cp-tones-a-l),1);
+}
+.CP-SelectThemeColor-colors-item:not(.active), .CP-SelectThemeColor-tones-item:not(.active) {
+  opacity: 0.2;
+}
+.CP-SelectThemeColor-colors {
   width: 13.75rem;
-  margin: 0.25rem 0rem;
+  margin: 0.125rem 0rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -357,26 +387,16 @@
   flex-wrap: nowrap;
   list-style: none;
 }
-.CP-SelectThemeColor-items-icon {
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.2);
-}
-.CP-SelectThemeColor-items-icon.active {
-  color: var(--wp-admin-theme-color);
-}
-.CP-SelectThemeColor-items-item {
-  -webkit-box-flex: 1;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 0.625rem;
-  height: 1.25rem;
-  cursor: pointer;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-  border-top-style: solid;
-  border-top-width: 0.625rem;
-  border-top-color: hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),var(--cp-tones-a-l),1);
-}
-.CP-SelectThemeColor-items-item:not(.active) {
-  opacity: 0.2;
+.CP-SelectThemeColor-tones {
+  width: 13.75rem;
+  margin: 0.5rem 0rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  list-style: none;
 }
 .CP-PlacedPictures.is-edit-mode {
   z-index: 1000;
