@@ -41,7 +41,7 @@ elseif(isset($_GET['c'])){
 			$json=dirname(__DIR__).'/default/json/tones.json';
 		}
 		if(($tones=json_decode(file_get_contents($json),true)) && $tone=$tones[$key]??null){
-			$h=isset($num)?($staticHue?($num*30):($tone['h']+($num-6)*$tones['hr']+$tones['hs'])):$tone['h'];
+			$h=$staticHue?(($num??0)*30):(empty($num)?$tone['h']:$tone['h']+($num-6)*$tones['hr']+$tones['hs']);
 			$s=!empty($sv)?(rtrim($tone['s'],'%')+$sv*20).'%':$tone['s'];
 			$l=!empty($lv)?(rtrim($tone['l'],'%')+$lv*10).'%':$tone['l'];
 			$c=sprintf('hsl(%s,%s,%s)',$h,$s,$l);
