@@ -15,7 +15,7 @@ if(!empty($_GET['color'])){
 elseif(isset($_GET['c'])){
 	if(preg_match('/^([a-zA-Z]+?)?(--|_)?(\d+)?(?:s(\-?\d+))?(?:l(\-?\d+))?$/',$_GET['c'],$matches)){
 		$key=$matches[1]?:'m';
-		$staticHue=$matches[2]==='--';
+		$staticHue=($matches[2]??null)==='--';
 		$num=$matches[3]??null;
 		$sv=$matches[4]??null;
 		$lv=$matches[5]??null;
