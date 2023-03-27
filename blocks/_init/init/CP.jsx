@@ -622,7 +622,11 @@
 		},[context['catpow/color']]);
 		useEffect(()=>{
 			const atts={
-				classes:classes.split(' ').filter(str=>!CP.colorClassPattern.test(str)).join(' ')+(color!==undefined?' color'+color:'')
+				classes:
+					classes.split(' ')
+					.filter(str=>!CP.colorToneClassPattern.test(str))
+					.concat(CP.colorToneValueToClasses(color))
+					.join(' ')
 			};
 			images.forEach((key)=>{
 				if(!attributes[key]){return;}
@@ -635,6 +639,49 @@
 			setAttributes(atts);
 		},[color]);
 	},
+	extractColorToneValue:(classes)=>CP.generateColorToneValue(CP.extractColorToneValues(classes)),
+	extractColorToneValues:(classes)=>{
+		if(!Array.isArray(classes)){classes=classes.split(' ');}
+		const rtn={};
+		classes.find((c)=>{
+			const matches=c.match(CP.colorToneClassPattern);
+			if(matches){
+				if(matches[1]){
+					rtn.h=matches[2];
+				}
+				if(matches[5]){
+					rtn[matches[7]]=matches[8];
+				}
+				return (
+					rtn.hasOwnProperty('h') &&
+					rtn.hasOwnProperty('s') &&
+					rtn.hasOwnProperty('l')
+				);
+			}
+			return false;
+		});
+		return rtn;
+	},
+	parseColorToneValue:(value)=>{
+		if(value){
+			const matches=value.match(CP.colorToneValuePattern);
+			if(matches){
+				return {h:matches[1],s:matches[5],l:matches[7]}
+			}
+		}
+		return {h:'0'}
+	},
+	colorToneValueToClasses:(value)=>CP.generateColorToneClasses(CP.parseColorToneValue(value)),
+	generateColorToneValue:(values)=>(values.h || '0')+(values.s?'s'+values.s:'')+(values.l?'l'+values.l:''),
+	generateColorToneClasses:(values)=>{
+		const classes=[];
+		if(values.h){classes.push('color'+values.h);}
+		if(values.s){classes.push('tone-s'+values.s);}
+		if(values.l){classes.push('tone-l'+values.l);}
+		return classes;
+	},
+	colorToneValuePattern:/^((|_|\-\-)(\-?\d+))?(s(\-?\d+))?(l(\-?\d+))?$/,
+	colorToneClassPattern:/^(color((|_|\-\-)(\-?\d+)))|(tone\-((s|l)(\-?\d+)))$/,
 	parseColorClass:(colorClass)=>{
 		if(colorClass){
 			const matches=colorClass.match(CP.colorClassPattern);
@@ -666,29 +713,20 @@
 	},
 	generateToneClass:(data)=>'tone-'+(data.s?'s':'l')+data.value,
 	toneClassPattern:/^tone\-((s|l)(\-?\d+))$/,
-	extractColorAndToneClasses:(classes)=>{
-		if(typeof classes === 'string'){classes=classes.split(' ');}
-		const rtn={
-			h:classes.find((c)=>CP.colorClassPattern.test(c))
-		};
-		for(const c of classes){
-			const matches=c.match(CP.toneClassPattern);
-			if(matches){rtn[matches[2]]=c;}
-		}
-		return rtn;			  
-	},
 	colorClassProxy:(state)=>{
 		if(typeof state === 'string' || Array.isArray(state)){
 			state=CP.wordsToFlags(state);
 		}
 		return new Proxy(state,CP.colorClassProxyHandler);
-		
 	},
 	colorClassProxyHandler:{
 		get(state,prop){
 			switch(prop){
 				case 'classes':{
 					return CP.flagsToWords(state);
+				}
+				case 'value':{
+					return CP.extractColorToneValue(Object.keys(state).filter((c)=>state[c]));
 				}
 				case 'h':{
 					return Object.keys(state).find((c)=>CP.colorClassPattern.test(c));
