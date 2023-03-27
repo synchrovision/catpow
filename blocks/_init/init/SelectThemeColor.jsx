@@ -53,7 +53,7 @@ CP.SelectThemeColor=(props)=>{
 							const active=toneClass===hsl[r];
 							return (
 								<li
-									className={classes.tones.item(h,r==='s'?s:l,toneClass,{active})}
+									className={classes.tones.item(h,r==='s'?l:s,toneClass,{active})}
 									onClick={()=>{
 										proxy[r]=!active && toneClass;
 										onChange(proxy);

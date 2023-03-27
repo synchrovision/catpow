@@ -1715,7 +1715,7 @@
         return /* @__PURE__ */ wp.element.createElement(
           "li",
           {
-            className: classes.tones.item(h, r === "s" ? s : l, toneClass, { active }),
+            className: classes.tones.item(h, r === "s" ? l : s, toneClass, { active }),
             onClick: () => {
               proxy2[r] = !active && toneClass;
               onChange(proxy2);
