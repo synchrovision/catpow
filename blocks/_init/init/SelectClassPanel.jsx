@@ -303,7 +303,7 @@ CP.SelectClassPanel=(props)=>{
 						label={__('色','catpow')}
 						selected={states}
 						onChange={(proxy)=>{
-							if(!props.items && proxy.h){set({color:proxy.h.substr(5)});}
+							if(!props.items){set({color:proxy.value});}
 							saveClasses();
 						}}
 					/>
