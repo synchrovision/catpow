@@ -1,6 +1,11 @@
 <?php
 namespace Catpow\api\console;
 
+/**
+* 主に管理画面のダッシュボードウィジェットで
+* APIにリクエストを投げて結果を表示するコンソールの共通の基礎となるクラス
+*/
+
 class console extends \Catpow\api{
 	static
 		$method='POST',

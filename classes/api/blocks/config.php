@@ -1,8 +1,7 @@
 <?php
 namespace Catpow\api\blocks;
 /**
-* ブロックの設定のAPI
-* 指定のブロックのconfig.phpファイルを
+* 各ブロックに実装された api-[action].php ファイルを実行
 */
 
 class config extends \Catpow\api{

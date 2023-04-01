@@ -2,7 +2,8 @@
 namespace Catpow\api\form;
 use Catpow\content\form_exception;
 /**
-* APIのエンドポイントのクラス
+* Catpowのフォームのリクエスト先
+* リクエスト元のフォームの認証、入力検証を実行
 */
 
 class post extends \Catpow\api{

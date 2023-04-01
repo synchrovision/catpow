@@ -1,7 +1,7 @@
 <?php
 namespace Catpow\api\config;
 /**
-* APIのエンドポイントのクラス
+* サイトのカスタム投稿・カスタムフィールドの構成を取得
 */
 
 class structure extends \Catpow\api{
