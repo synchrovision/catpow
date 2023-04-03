@@ -13,7 +13,7 @@ class nav_menu extends \Walker_Nav_Menu {
 			case 'menu':
 				return \Catpow\loop("nav/{$args[0]->theme_location}/{$this->template}/loop.php");
 			case 'component':
-				
+				return \Catpow\loop("nav/{$args[0]->theme_location}/{$this->template}/render.php");
 		}
 	}
 }
