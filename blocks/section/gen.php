@@ -27,9 +27,7 @@ foreach(explode(' ',$attr['classes']) as $name){$states[$name]=true;}
 <?php if($states['hasHeaderImage']??false): ?>
 				<div class="image"><?=$attr['headerImage']??''?></div>
 <?php endif; ?>
-				<<?=$HeadingTag?> class="heading">
-					<?=$attr['title']??''?>
-				</<?=$HeadingTag?>>
+				<<?=$HeadingTag?> class="heading"><?=$attr['title']??''?></<?=$HeadingTag?>>
 <?php if($states['hasLead']??false): ?>
 				 <p class="lead"><?=$attr['lead']??''?></p>
 <?php endif; ?>
