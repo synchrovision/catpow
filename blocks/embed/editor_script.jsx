@@ -8,7 +8,8 @@ wp.blocks.registerBlockType('catpow/embed',{
 	category: 'catpow-embed',
 	edit({attributes,setAttributes,className}){
 		const {InspectorControls}=wp.blockEditor;
-		const {PanelBody,TreeSelect,ServerSideRender} = wp.components;
+		const {PanelBody,TreeSelect,ServerSideRender}=wp.components;
+		const {serverSideRender:ServerSideRender}=wp;
 		const {content_path,query}=attributes;
 
 		return (

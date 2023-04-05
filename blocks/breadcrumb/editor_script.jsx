@@ -7,7 +7,7 @@ wp.blocks.registerBlockType('catpow/breadcrumb',{
 	category:'catpow-parts',
 	example:CP.example,
 	edit({attributes,setAttributes,className,clientId}){
-		const {ServerSideRender} = wp.components;
+		const {serverSideRender:ServerSideRender}=wp;
 		const {content_path,query,config,EditMode=false}=attributes;
 		
 		return (

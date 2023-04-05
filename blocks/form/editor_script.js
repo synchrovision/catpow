@@ -1,5 +1,5 @@
 (() => {
-  // blocks/form/editor_script.jsx
+  // ../blocks/form/editor_script.jsx
   wp.blocks.registerBlockType("catpow/form", {
     title: "\u{1F43E} Form",
     description: "\u30C6\u30FC\u30DE\u306B\u5B9A\u7FA9\u3055\u308C\u305F\u30D5\u30A9\u30FC\u30E0\u3092\u8868\u793A\u3057\u307E\u3059\u3002",
@@ -9,7 +9,8 @@
     edit({ attributes, setAttributes, className }) {
       const { content_path, post_data_path, inputs, data_id, values } = attributes;
       const { InspectorControls } = wp.blockEditor;
-      const { PanelBody, TreeSelect, TextareaControl, TextControl, ServerSideRender } = wp.components;
+      const { PanelBody, TreeSelect, TextareaControl, TextControl } = wp.components;
+      const { serverSideRender: ServerSideRender } = wp;
       let postDataSelection = false;
       Object.keys(cpEmbeddablesTree.form).forEach((parentKey) => {
         cpEmbeddablesTree.form[parentKey].children.map((item) => {

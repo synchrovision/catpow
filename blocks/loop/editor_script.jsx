@@ -6,7 +6,8 @@
 	example:CP.example,
 	edit({attributes,setAttributes,className,clientId}){
 		const {InnerBlocks,BlockControls,InspectorControls}=wp.blockEditor;
-		const {Icon,PanelBody,TreeSelect,TextareaControl,ServerSideRender,ToolbarGroup}=wp.components;
+		const {Icon,PanelBody,TreeSelect,TextareaControl,ToolbarGroup}=wp.components;
+		const {serverSideRender:ServerSideRender}=wp;
 		const {content_path,deps={},query,config,EditMode=false}=attributes;
 		const {useMemo}=wp.element;
 		let configData;

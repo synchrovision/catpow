@@ -11,7 +11,8 @@ wp.blocks.registerBlockType('catpow/widget',{
 	example:CP.example,
 	edit({attributes,setAttributes,className}){
 		const {InspectorControls}=wp.blockEditor;
-		const {PanelBody,TreeSelect,ServerSideRender} = wp.components;
+		const {PanelBody,TreeSelect}=wp.components;
+		const {serverSideRender:ServerSideRender}=wp;
         const {func,param}=attributes;
         let statesClasses,panels;
 

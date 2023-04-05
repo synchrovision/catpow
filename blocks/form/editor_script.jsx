@@ -7,7 +7,8 @@
 	edit({attributes,setAttributes,className}){
 		const {content_path,post_data_path,inputs,data_id,values}=attributes;
 		const {InspectorControls} = wp.blockEditor;
-		const {PanelBody,TreeSelect,TextareaControl,TextControl,ServerSideRender} = wp.components;
+		const {PanelBody,TreeSelect,TextareaControl,TextControl}=wp.components;
+		const {serverSideRender:ServerSideRender}=wp;
 
 		let postDataSelection=false;
 

@@ -1,5 +1,5 @@
 (() => {
-  // blocks/loop/editor_script.jsx
+  // ../blocks/loop/editor_script.jsx
   wp.blocks.registerBlockType("catpow/loop", {
     title: "\u{1F43E} Loop",
     description: "\u30C6\u30FC\u30DE\u306B\u5B9A\u7FA9\u3055\u308C\u305F\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u3067\u6295\u7A3F\u3092\u8868\u793A\u3057\u307E\u3059\u3002",
@@ -8,7 +8,8 @@
     example: CP.example,
     edit({ attributes, setAttributes, className, clientId }) {
       const { InnerBlocks: InnerBlocks2, BlockControls, InspectorControls } = wp.blockEditor;
-      const { Icon, PanelBody, TreeSelect, TextareaControl, ServerSideRender, ToolbarGroup } = wp.components;
+      const { Icon, PanelBody, TreeSelect, TextareaControl, ToolbarGroup } = wp.components;
+      const { serverSideRender: ServerSideRender } = wp;
       const { content_path, deps = {}, query, config, EditMode = false } = attributes;
       const { useMemo } = wp.element;
       let configData;
