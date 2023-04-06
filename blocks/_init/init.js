@@ -1505,7 +1505,7 @@
     }, [tracePosition, targets]);
     useEffect(() => {
       if (!targets.length) {
-        return false;
+        return;
       }
       tracePosition(targets);
       targets.forEach((target) => {
@@ -1515,7 +1515,7 @@
     }, [targets, observer]);
     useEffect(() => {
       if (!targets.length) {
-        return false;
+        return;
       }
       tracePosition(targets);
       const cb = () => tracePosition(targets);

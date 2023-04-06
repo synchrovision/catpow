@@ -49,7 +49,7 @@ CP.BoundingBox=(props)=>{
 	},[tracePosition,targets]);
 	
 	useEffect(()=>{
-		if(!targets.length){return false;}
+		if(!targets.length){return;}
 		tracePosition(targets);
 		targets.forEach((target)=>{
 			observer.observe(target,{attributes:true,attributeFilter:['style']});
@@ -57,7 +57,7 @@ CP.BoundingBox=(props)=>{
 		return ()=>observer.disconnect();
 	},[targets,observer]);
 	useEffect(()=>{
-		if(!targets.length){return false;}
+		if(!targets.length){return;}
 		tracePosition(targets);
 		const cb=()=>tracePosition(targets);
 		window.addEventListener('resize',cb);
