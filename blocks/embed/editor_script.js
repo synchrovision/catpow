@@ -7,7 +7,8 @@
     category: "catpow-embed",
     edit({ attributes, setAttributes, className }) {
       const { InspectorControls } = wp.blockEditor;
-      const { PanelBody, TreeSelect, ServerSideRender } = wp.components;
+      const { PanelBody, TreeSelect } = wp.components;
+      const { serverSideRender: ServerSideRender } = wp;
       const { content_path, query } = attributes;
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "embedded_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/embed", attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" }, /* @__PURE__ */ wp.element.createElement(
         TreeSelect,
