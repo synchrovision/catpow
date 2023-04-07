@@ -31,6 +31,7 @@ wp.blocks.registerBlockType('catpow/switcher',{
 		const {attributes,className,setAttributes,isSelected,clientId}=props;
 		const {useState,useEffect,useMemo,useCallback}=wp.element;
 		const {Icon}=wp.components;
+		const {InnerBlocks,InspectorControls}=wp.blockEditor;
 		const {currentIndex=0}=attributes;
 		const [newBlocks,setNewBlocks]=useState(false);
 		const {factors,factorFlags,flagValues}=CP.config.switcher;
@@ -168,6 +169,7 @@ wp.blocks.registerBlockType('catpow/switchercontent',{
 	},
 	edit({attributes,className,setAttributes,clientId}){
 		const {cond}=attributes;
+		const {InnerBlocks}=wp.blockEditor;
 
 		return (
 			<div className={'switcherContent'}>
@@ -177,6 +179,7 @@ wp.blocks.registerBlockType('catpow/switchercontent',{
 	},
 	save({attributes,className,setAttributes}){
 		const {cond}=attributes;
+		const {InnerBlocks}=wp.blockEditor;
 		return (
 			<>
 				<switcherContent cond={cond}>

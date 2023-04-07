@@ -5,6 +5,7 @@
 	category: 'catpow-functional',
 	example:CP.example,
 	edit({attributes,setAttributes,className}){
+		const {InnerBlocks}=wp.blockEditor;
         return (
 			<div className="embedded_content">
 				<div className="label">UserInfo</div>
@@ -16,6 +17,7 @@
     },
 
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		return <InnerBlocks.Content/>;
 	}
 });

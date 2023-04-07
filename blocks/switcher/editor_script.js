@@ -1,5 +1,5 @@
 (() => {
-  // blocks/switcher/editor_script.jsx
+  // ../blocks/switcher/editor_script.jsx
   CP.config.switcher = {
     factors: {
       schedule: "\u65E5\u6642",
@@ -33,6 +33,7 @@
       const { attributes, className, setAttributes, isSelected, clientId } = props;
       const { useState, useEffect, useMemo, useCallback } = wp.element;
       const { Icon } = wp.components;
+      const { InnerBlocks, InspectorControls } = wp.blockEditor;
       const { currentIndex = 0 } = attributes;
       const [newBlocks, setNewBlocks] = useState(false);
       const { factors, factorFlags, flagValues } = CP.config.switcher;
@@ -142,8 +143,8 @@
       )));
     },
     save({ attributes, className, setAttributes }) {
-      const { InnerBlocks: InnerBlocks2 } = wp.blockEditor;
-      return /* @__PURE__ */ wp.element.createElement(InnerBlocks2.Content, null);
+      const { InnerBlocks } = wp.blockEditor;
+      return /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null);
     }
   });
   wp.blocks.registerBlockType("catpow/switchercontent", {
@@ -156,10 +157,12 @@
     },
     edit({ attributes, className, setAttributes, clientId }) {
       const { cond } = attributes;
+      const { InnerBlocks } = wp.blockEditor;
       return /* @__PURE__ */ wp.element.createElement("div", { className: "switcherContent" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph"]], templateLock: false }));
     },
     save({ attributes, className, setAttributes }) {
       const { cond } = attributes;
+      const { InnerBlocks } = wp.blockEditor;
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("switcherContent", { cond }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }
   });

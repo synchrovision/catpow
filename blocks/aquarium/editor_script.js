@@ -1,5 +1,5 @@
 (() => {
-  // blocks/aquarium/editor_script.jsx
+  // ../blocks/aquarium/editor_script.jsx
   wp.blocks.registerBlockType("catpow/aquarium", {
     title: "\u{1F43E} aquarium",
     description: "\u753B\u50CF\u3068\u30C6\u30AD\u30B9\u30C8\u3092\uFF13\u6B21\u5143\u306B\u30EC\u30A4\u30A2\u30A6\u30C8\u3057\u307E\u3059\u3002",
@@ -56,7 +56,7 @@
     example: CP.example,
     edit({ attributes, className, setAttributes }) {
       const { useState, useMemo } = wp.element;
-      const { InnerBlocks: InnerBlocks2, InspectorControls } = wp.blockEditor;
+      const { InnerBlocks, InspectorControls } = wp.blockEditor;
       const { classes, layers = [] } = attributes;
       const primaryClass = "wp-block-catpow-aquarium";
       var classArray = _.uniq((className + " " + classes).split(" "));
@@ -73,7 +73,7 @@
             return /* @__PURE__ */ wp.element.createElement("div", { className: text.classes }, /* @__PURE__ */ wp.element.createElement("h3", null, text.title), /* @__PURE__ */ wp.element.createElement("p", null, text.text));
           }));
         }));
-      }), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2, null))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+      }), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
           title: "\u30AF\u30E9\u30B9",
@@ -87,6 +87,7 @@
     },
     save({ attributes, className, setAttributes }) {
       const { classes, layers = [] } = attributes;
+      const { InnerBlocks } = wp.blockEditor;
       return /* @__PURE__ */ wp.element.createElement("div", { className: classes }, layers.map((layer) => {
         return /* @__PURE__ */ wp.element.createElement("div", { className: layer.classes }, layer.items.map((item, index) => {
           return /* @__PURE__ */ wp.element.createElement("div", { className: item.classes, key: index }, item.images.length > 0 && item.images.map((image) => {

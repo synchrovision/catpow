@@ -126,6 +126,7 @@
 	},
 	save({attributes,className,setAttributes}){
 		const {classes,layers=[]}=attributes;
+		const {InnerBlocks}=wp.blockEditor;
 		
 		return (
 			<div className={classes}>
