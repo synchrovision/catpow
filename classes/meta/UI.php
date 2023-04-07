@@ -4,6 +4,21 @@ namespace Catpow\meta;
 class UI extends meta{
 	public static $ui=null,$input_type=false,$output_type=false,$defaultParam=[];
 	
+	public static function export($data_type,$data_name,$id,$meta_name,$conf){
+		if(static::$output_type===false){
+			return static::get($data_type,$data_name,$id,$meta_name,$conf);
+		}
+		$class_name=\cp::get_class_name('meta',static::$output_type);
+		return $class_name::export($data_type,$data_name,$id,$meta_name,$conf);
+	}
+	public static function import($data_type,$data_name,$id,$meta_name,$vals,$conf){
+		if(static::$output_type===false){
+			return static::set($data_type,$data_name,$id,$meta_name,$vals,$conf);
+		}
+		$class_name=\cp::get_class_name('meta',static::$output_type);
+		return $class_name::import($data_type,$data_name,$id,$meta_name,$vals,$conf);
+	}
+	
 	public static function output($meta,$prm){
 		if(static::$output_type===false){
 			$prm=array_merge((array)$prm,['value'=>$meta->value]);
