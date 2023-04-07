@@ -48,6 +48,7 @@ class select_terms extends select{
 	public static function import($data_type,$data_name,$id,$meta_name,$vals,$conf){
 		if(!empty($conf['export']) && in_array($conf['export'],['slug','name'])){
 			$taxonomy=is_string($conf['value'])?$conf['value']:$conf['value']['taxonomy'];
+			if(is_array(reset($vals))){$vals=reset($vals);}
 			foreach($vals as $i=>$val){
 				$vals[$i]=term_exists($val,$taxonomy)['term_id']??wp_insert_term($val,$taxonomy)['term_id'];
 			}
