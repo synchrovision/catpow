@@ -17,10 +17,10 @@ class gmap extends data{
 		
 		if(empty($token)){
 			$gauth_conf=get_option('gauth_conf');
-			if(empty($gauth_conf[0]['api_key'][0])){
+			if(empty($gauth_conf['api_key'][0])){
 				return '<p class="caution">'.__('gmapを使うにはGoogleAPIキーが必要です','Catpow').'</p>';
 			}
-			$token=$gauth_conf[0]['api_key'][0];
+			$token=$gauth_conf['api_key'][0];
 		}
 		if(empty($mapOptions_default)){
 			$mapOptions_default=['zoom'=>16];
