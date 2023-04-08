@@ -110,6 +110,24 @@ Catpow.util={
 	},
 	classNamesToFlags:(classNames)=>classNames && classNames.split(' ').map(Catpow.util.kebabToCamel).reduce((p,c)=>{p[c]=true;return p},{}),
 	flagsToClassNames:(flags)=>flags && Object.keys(flags).filter((f)=>flags[f]).map(Catpow.util.camelToKebab).join(' '),
+	/*words*/
+	wordsToFlags:(words)=>{
+		var rtn={};
+		if(undefined === words){return {};}
+		if(typeof words === 'string'){words=words.split(' ');}
+		words.forEach((word)=>{rtn[word]=true;});
+		return rtn;
+	},
+	flagsToWords:(flags)=>{
+		if(undefined === flags){return '';}
+		return Object.keys(flags).filter((word)=>flags[word]).join(' ');
+	},
+	filterFlags:(flags,callback)=>{
+		Object.keys(flags).forEach((key)=>{
+			if(!callback(key)){delete(flags[key]);}
+		});
+		return flags;
+	},
 	/*string*/
 	camelToKebab:(str)=>str.replace(/(\w)([A-Z])/g,'$1-$2').toLowerCase(),
 	camelToSnake:(str)=>str.replace(/(\w)([A-Z])/g,'$1_$2').toLowerCase(),
