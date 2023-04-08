@@ -1,0 +1,37 @@
+@import "admin_style_config.scss";
+
+$colors:(
+	c:currentColor
+);
+
+.SelectColorToneClass{
+	@include bnd((w:200 f 400,mg:a));
+	&-colors,&-tones{
+		&-icon{
+			@include bnd((mg:0,pd:0 4));
+			@include txt((c:t));
+			svg{
+				@include bnd((w:20,h:20));
+				@include svg((f:c));
+			}
+			&:not(.active){@include trn((o:.2));}
+		}
+		&-item{
+			@include bnd((f:1 1 10,h:20,mg:0,pd:0,bs:b));
+			@include usr((c:p));
+			@include bg((c:m));
+			@include bdr((p:t,s:s,w:10,c:a));
+			&:not(.active){@include trn((o:.2));}
+		}
+	}
+	&-colors{
+		@include bnd((w:220,mg:2 0));
+		@include flx((w:n));
+		@include txt((l:n));
+	}
+	&-tones{
+		@include bnd((w:220,mg:8 0));
+		@include flx((w:n));
+		@include txt((l:n));
+	}
+}

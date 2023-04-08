@@ -1,0 +1,60 @@
+.SelectColorToneClass {
+  min-width: 12.5rem;
+  max-width: 25rem;
+  width: 100%;
+  margin: auto;
+}
+.SelectColorToneClass-colors-icon, .SelectColorToneClass-tones-icon {
+  margin: 0rem;
+  padding: 0rem 0.25rem;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
+}
+.SelectColorToneClass-colors-icon svg, .SelectColorToneClass-tones-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: currentColor;
+}
+.SelectColorToneClass-colors-icon:not(.active), .SelectColorToneClass-tones-icon:not(.active) {
+  opacity: 0.2;
+}
+.SelectColorToneClass-colors-item, .SelectColorToneClass-tones-item {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0.625rem;
+  height: 1.25rem;
+  margin: 0rem;
+  padding: 0rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  border-top-style: solid;
+  border-top-width: 0.625rem;
+  border-top-color: hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),var(--cp-tones-a-l),1);
+}
+.SelectColorToneClass-colors-item:not(.active), .SelectColorToneClass-tones-item:not(.active) {
+  opacity: 0.2;
+}
+.SelectColorToneClass-colors {
+  width: 13.75rem;
+  margin: 0.125rem 0rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  list-style: none;
+}
+.SelectColorToneClass-tones {
+  width: 13.75rem;
+  margin: 0.5rem 0rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  list-style: none;
+}
+/*# sourceMappingURL=./style.css.map */
