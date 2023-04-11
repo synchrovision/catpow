@@ -103,7 +103,7 @@ wp.blocks.registerBlockType('catpow/faq',{
 							/>
 						</div>
 					}
-					<header>
+					<header className="header">
 						{states.hasCounter &&
 							<div className='counter'>
 								{countPrefix && <span className="prefix">{countPrefix}</span>}
@@ -112,38 +112,38 @@ wp.blocks.registerBlockType('catpow/faq',{
 							</div>
 						}
 						<div className='text'>
-							<h3>
-								<RichText
-									onChange={(text)=>{items[index].title=text;save();}}
-									value={item.title}
-								/>
-							</h3>
+							<RichText
+								tagName="h3"
+								className="title"
+								onChange={(text)=>{items[index].title=text;save();}}
+								value={item.title}
+							/>
 							{states.hasTitleCaption && 
-								<p>
-									<RichText
-										onChange={(text)=>{items[index].titleCaption=text;save();}}
-										value={item.titleCaption}
-									/>
-								</p>
+								<RichText
+									tagName="p"
+									className="caption"
+									onChange={(text)=>{items[index].titleCaption=text;save();}}
+									value={item.titleCaption}
+								/>
 							}
 						</div>
 					</header>
 					<div className="contents">
 						{states.hasSubTitle &&
-							<h4>
-								<RichText
-									onChange={(subTitle)=>{items[index].subTitle=subTitle;save();}}
-									value={item.subTitle}
-									placeholder='SubTitle'
-								/>
-							</h4>
-						}
-						<p>
 							<RichText
-								onChange={(text)=>{items[index].text=text;save();}}
-								value={item.text}
+								tagName="h4"
+								className="subtitle"
+								onChange={(subTitle)=>{items[index].subTitle=subTitle;save();}}
+								value={item.subTitle}
+								placeholder='SubTitle'
 							/>
-						</p>
+						}
+						<RichText
+							tagName="p"
+							className="text"
+							onChange={(text)=>{items[index].text=text;save();}}
+							value={item.text}
+						/>
 					</div>
 					{states.hasLink &&
 						<div className='link'>
@@ -172,7 +172,7 @@ wp.blocks.registerBlockType('catpow/faq',{
 							}
 						]}
 					/>
-				</BlockControls>,
+				</BlockControls>
 				<InspectorControls>
 					<CP.SelectClassPanel
 						title='クラス'
@@ -190,7 +190,7 @@ wp.blocks.registerBlockType('catpow/faq',{
 						/>
 					</PanelBody>
 					<CP.ItemControlInfoPanel/>
-				</InspectorControls>,
+				</InspectorControls>
 				<ul className={attributes.EditMode?(primaryClass+' edit'):classes}>{rtn}</ul>
 			</>
 		);
@@ -216,13 +216,13 @@ wp.blocks.registerBlockType('catpow/faq',{
 							</div>
 						}
 						<div className='text'>
-							<h3><RichText.Content value={item.title}/></h3>
-							{states.hasTitle && states.hasTitleCaption && <p><RichText.Content value={item.titleCaption}/></p>}
+							<RichText.Content tagName="h3" className="title" value={item.title}/>
+							{states.hasTitle && states.hasTitleCaption && <p><RichText.Content tagName="p" className="caption" value={item.titleCaption}/></p>}
 						</div>
 					</header>
 					<div className="contents">
-						{states.hasSubTitle && <h4><RichText.Content value={item.subTitle}/></h4>}
-						<p><RichText.Content value={item.text}/></p>
+						{states.hasSubTitle && <RichText.Content tagName="h4" className="subtitle" value={item.subTitle}/>}
+						<RichText.Content tagName="p" className="text" value={item.text}/>
 					</div>
 					{states.hasLink && item.linkUrl && <div className='link'><a href={item.linkUrl}> </a></div>}
 				</li>
