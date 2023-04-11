@@ -1,5 +1,5 @@
 (() => {
-  // blocks/tabs/editor_script.jsx
+  // ../blocks/tabs/editor_script.jsx
   wp.blocks.registerBlockType("catpow/tabs", {
     title: "\u{1F43E} Tabs",
     description: "\u30BF\u30D6\u306B\u3088\u308B\u8868\u793A\u5207\u308A\u66FF\u3048\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
@@ -45,18 +45,21 @@
               isSelected,
               key: index
             },
-            /* @__PURE__ */ wp.element.createElement("h3", { onClick: () => {
-              setAttributes({ currentIndex: index });
-            } }, /* @__PURE__ */ wp.element.createElement(
+            /* @__PURE__ */ wp.element.createElement(
               RichText,
               {
+                tagName: "h3",
+                className: "title",
+                onClick: () => {
+                  setAttributes({ currentIndex: index });
+                },
                 onChange: (title) => {
                   itemsCopy[index].title = title;
                   setAttributes({ items: itemsCopy });
                 },
                 value: item.title
               }
-            ))
+            )
           )
         );
       });
@@ -74,7 +77,7 @@
       let rtn = [];
       items.map((item, index) => {
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("li", { className: "item", key: index }, /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })))
+          /* @__PURE__ */ wp.element.createElement("li", { className: "item", key: index }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "h3", className: "title", value: item.title }))
         );
       });
       return /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement("ul", { className: "tab" }, rtn), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));

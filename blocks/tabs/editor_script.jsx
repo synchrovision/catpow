@@ -45,12 +45,13 @@
 					isSelected={isSelected}
 					key={index}
 				>
-					<h3 onClick={()=>{setAttributes({currentIndex:index})}}>
-						<RichText
-							onChange={(title)=>{itemsCopy[index].title=title;setAttributes({items:itemsCopy});}}
-							value={item.title}
-						/>
-					</h3>
+					<RichText
+						tagName="h3"
+						className="title"
+						onClick={()=>{setAttributes({currentIndex:index})}}
+						onChange={(title)=>{itemsCopy[index].title=title;setAttributes({items:itemsCopy});}}
+						value={item.title}
+					/>
 				</CP.Item>
 			)
 		});
@@ -76,7 +77,7 @@
 		let rtn=[];
 		items.map((item,index)=>{
 			rtn.push(
-				<li className='item' key={index}><h3><RichText.Content value={item.title}/></h3></li>
+				<li className='item' key={index}><RichText.Content tagName="h3" className="title" value={item.title}/></li>
 			);
 		});
 
