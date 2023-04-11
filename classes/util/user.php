@@ -1,6 +1,6 @@
 <?php
 /**
-* WPのAjaxのメソッド
+* WordPressのユーザー登録などに関するメソッド
 */
 namespace Catpow\util;
 class user{

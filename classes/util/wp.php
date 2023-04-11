@@ -1,6 +1,6 @@
 <?php
 /**
-* WPのAjaxのメソッド
+* WordPressのDependenciesに関するメソッド
 */
 namespace Catpow\util;
 class wp{
