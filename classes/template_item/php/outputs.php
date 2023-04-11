@@ -15,9 +15,9 @@ class outputs extends \Catpow\template_item\php{
 				if(isset($conf['alias']) && !($param&2)){continue;}
 				if($class_name::$has_children && !$class_name::$is_bulk_output && !$class_name::$is_unit_output){$output=static::get_table_code_data($conf,$param);}
 				else{$output='<?php output(\''.$name.'\'); ?>';}
-				$rtn[$name]=['tr',
-					['th',$conf['label']],
-					['td',$output]
+				$rtn[$name]=['tr.row',
+					['th.th',$conf['label']],
+					['td.td',$output]
 				];
 			};
 			return $rtn;
@@ -47,9 +47,9 @@ class outputs extends \Catpow\template_item\php{
 			if(isset($conf['alias']) && !($param&2)){continue;}
 			if($class_name::$has_children && !$class_name::$is_unit_output){$output=static::get_table_code_data($conf);}
 			else{$output='<?php output(\''.$name.'\'); ?>';}
-			$table[$name]=['tr',
-				['th',$conf['label']],
-				['td',$output]
+			$table[$name]=['tr.row',
+				['th.th',$conf['label']],
+				['td.td',$output]
 			];
 		};
 		return ['',
