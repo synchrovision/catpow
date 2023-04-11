@@ -1,6 +1,6 @@
 <?php
 /**
-* フォント関連の設定を管理
+* 色・フォントのカスタマイズとCSS変数
 */
 namespace Catpow\util;
 use Spatie\Color\Hex;
