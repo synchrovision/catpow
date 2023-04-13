@@ -98,7 +98,7 @@ abstract class query{
 				foreach($conf['meta'] as $meta_name=>$meta_conf){
 					$meta_class=\cp::get_class_name('meta',$meta_conf['type']);
 					$val=$meta_class::export($data_type,$data_name,$id,$meta_name,$meta_conf);
-					if(empty($meta_conf['multiple']) && !$meta_class::$is_bulk_input){$val=reset($val);}
+					if(empty($meta_conf['multiple']) && !$meta_class::$is_bulk_input && is_array($val)){$val=reset($val);}
 					$meta_data[$meta_name]=$val;
 				}
 			}
