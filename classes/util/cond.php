@@ -80,7 +80,7 @@ class cond{
 			else{
 				$name=$query_class_name::$key_translation[$name]??$name;
 				if(isset($query_class_name::$search_keys[$name])){
-					if($query_class_name::$search_keys[$name]){$rtn[$name]=$line['value'];}
+					if($query_class_name::$search_keys[$name]){$rtn[$name]=is_array($line['value'])?$line['value']:explode(',',$line['value']);}
 					else{$rtn[$name]=is_array($line['value'])?reset($line['value']):$line['value'];}
 				}
 			}
