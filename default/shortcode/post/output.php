@@ -5,7 +5,7 @@ switch($prm[0]){
 	case 'id':the_ID();break;
 	case 'title':the_title();break;
 	case 'name':
-		echo ucfirst(str_replace(['_','-'],' ',$GLOBALS['post']->post_name));
+		echo ucwords(str_replace(['_','-'],' ',$GLOBALS['post']->post_name));
 		break;
 	case 'slug':echo $GLOBALS['post']->post_name;break;
 	case 'content':echo do_blocks($GLOBALS['post']->post_content);break;
