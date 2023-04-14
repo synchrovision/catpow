@@ -207,7 +207,7 @@ wp.blocks.registerBlockType('catpow/faq',{
 			rtn.push(
 				<li className={item.classes} key={index}>
 					{states.hasImage && <div className='image'><img src={item.src} alt={item.alt}/></div>}
-					<header>
+					<header className="header">
 						{states.hasCounter &&
 							<div className='counter'>
 								{countPrefix && <span className="prefix">{countPrefix}</span>}
