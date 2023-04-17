@@ -17,10 +17,6 @@ CP.config.section={
 	}
 };
 wp.blocks.registerBlockType('catpow/section',{
-	title: '🐾 Section',
-	description:__('見出しと内容のまとまりを表すセクションのブロックです。','catpow'),
-	icon: 'id-alt',
-	category: 'catpow',
 	example:CP.example,
 	edit(props){
 		const {InnerBlocks,BlockControls,InspectorControls,RichText}=wp.blockEditor;
@@ -96,6 +92,7 @@ wp.blocks.registerBlockType('catpow/section',{
 							{name:'navIcon',label:__('メニューアイコン','catpow'),values:'hasNavIcon',sub:[
 								{input:'image',label:__('アイコン','catpow'),keys:imageKeys.navIcon,size:'thumbnail'}
 							]},
+							{name:'decoration',label:__('デコレーション','catpow'),values:'hasDecoration'},
 							{
 								name:'template',
 								label:__('テンプレート','catpow'),

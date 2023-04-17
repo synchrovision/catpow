@@ -18,10 +18,6 @@
     }
   };
   wp.blocks.registerBlockType("catpow/section", {
-    title: "\u{1F43E} Section",
-    description: __("\u898B\u51FA\u3057\u3068\u5185\u5BB9\u306E\u307E\u3068\u307E\u308A\u3092\u8868\u3059\u30BB\u30AF\u30B7\u30E7\u30F3\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
-    icon: "id-alt",
-    category: "catpow",
     example: CP.example,
     edit(props) {
       const { InnerBlocks, BlockControls, InspectorControls, RichText } = wp.blockEditor;
@@ -116,6 +112,7 @@
                 { name: "navIcon", label: __("\u30E1\u30CB\u30E5\u30FC\u30A2\u30A4\u30B3\u30F3", "catpow"), values: "hasNavIcon", sub: [
                   { input: "image", label: __("\u30A2\u30A4\u30B3\u30F3", "catpow"), keys: imageKeys2.navIcon, size: "thumbnail" }
                 ] },
+                { name: "decoration", label: __("\u30C7\u30B3\u30EC\u30FC\u30B7\u30E7\u30F3", "catpow"), values: "hasDecoration" },
                 {
                   name: "template",
                   label: __("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
