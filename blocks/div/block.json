@@ -1,5 +1,20 @@
 {
-	"name":"catpow/div",
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"textdomain": "catpow",
+	"category": "catpow",
+	"icon": "editor-code",
+	"name": "catpow/div",
+	"title": "🐾 Div",
+	"description": "コンテンツを枠で囲んだりレイアウト調整をするためのコンテナです。",
 	"providesContext":{"catpow/color":"color"},
-	"usesContext":["catpow/color"]
+	"usesContext":["catpow/color"],
+	"supports": {
+		"anchor": true,
+		"className": false,
+		"color": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	}
 }

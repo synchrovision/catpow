@@ -8,10 +8,6 @@
     }
   };
   wp.blocks.registerBlockType("catpow/div", {
-    title: "\u{1F43E} Div",
-    description: "\u30B3\u30F3\u30C6\u30F3\u30C4\u3092\u67A0\u3067\u56F2\u3093\u3060\u308A\u30EC\u30A4\u30A2\u30A6\u30C8\u8ABF\u6574\u3092\u3059\u308B\u305F\u3081\u306E\u30B3\u30F3\u30C6\u30CA\u3067\u3059\u3002",
-    icon: "editor-code",
-    category: "catpow",
     transforms: {
       from: [
         {

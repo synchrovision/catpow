@@ -6,10 +6,6 @@
 	}
 };
 wp.blocks.registerBlockType('catpow/div',{
-	title:'🐾 Div',
-	description:'コンテンツを枠で囲んだりレイアウト調整をするためのコンテナです。',
-	icon:'editor-code',
-	category:'catpow',
 	transforms:{
 		from: [
 			{
