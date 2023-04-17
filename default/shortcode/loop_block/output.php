@@ -5,7 +5,7 @@ $data=$GLOBALS['loop_block_data'][$prm[0]];
 
 
 if(cp::$content){
-	$path=$data['path'];
+	$path=$data['path']??null;
 	if(!empty($data['values'])){
 		$org_vars=cp::$vars;
 		foreach($data['values'] as $values){
