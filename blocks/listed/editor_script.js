@@ -9,10 +9,6 @@
     }
   };
   wp.blocks.registerBlockType("catpow/listed", {
-    title: "\u{1F43E} Listed",
-    description: "\u76EE\u6B21\u3084\u304A\u77E5\u3089\u305B\u306A\u3069\u306E\u4E00\u89A7\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
-    icon: "editor-ul",
-    category: "catpow",
     transforms: {
       from: [
         {

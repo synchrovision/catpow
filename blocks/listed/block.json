@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"name":"catpow/listed",
+	"title": "🐾 Listed",
+	"icon": "editor-ul",
+	"category": "catpow",
+	"textdomain": "catpow",
+	"description": "目次やお知らせなどの一覧ブロックです。",
+	"supports": {
+		"anchor": false,
+		"className": false,
+		"color": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	}
+}
