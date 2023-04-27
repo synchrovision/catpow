@@ -50,6 +50,16 @@ wp.blocks.registerBlockType('catpow/showcase',{
 			wp.hooks.applyFilters('catpow.blocks.showcase.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		},[]);
+		const selectiveItemClasses=useMemo(()=>{
+			const {imageKeys}=CP.config.banners;
+			const selectiveItemClasses=[
+				'color',
+				{name:'image',input:'image',label:'画像',keys:imageKeys.image},
+				'event'
+			];
+			wp.hooks.applyFilters('catpow.blocks.showcase.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
+			return selectiveItemClasses;
+		},[]);
 
 		let rtn=[];
 		const save=()=>{
@@ -157,6 +167,29 @@ wp.blocks.registerBlockType('catpow/showcase',{
 							value={classes}
 						/>
 					</PanelBody>
+					{states.isTemplate?(
+						<CP.SelectClassPanel
+							title='テンプレート'
+							icon='edit'
+							set={setAttributes}
+							attr={attributes}
+							items={items}
+							index={attributes.currentItemIndex}
+							selectiveClasses={itemTemplateSelectiveClasses}
+							filters={CP.filters.showcase || {}}
+						/>
+					):(
+						<CP.SelectClassPanel
+							title='アイテム'
+							icon='edit'
+							set={setAttributes}
+							attr={attributes}
+							items={items}
+							index={attributes.currentItemIndex}
+							selectiveClasses={selectiveItemClasses}
+							filters={CP.filters.showcase || {}}
+						/>
+					)}
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
 				{attributes.EditMode?(
@@ -233,6 +266,7 @@ wp.blocks.registerBlockType('catpow/showcase',{
 								attr={attributes}
 								keys={linkKeys.link}
 								index={index}
+								{...CP.extractEventDispatcherAttributes('catpow/banners',item)}
 							>
 								<RichText.Content value={item.linkText}/>
 							</CP.Link>

@@ -50,6 +50,16 @@
         wp.hooks.applyFilters("catpow.blocks.showcase.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
+      const selectiveItemClasses = useMemo(() => {
+        const { imageKeys: imageKeys2 } = CP.config.banners;
+        const selectiveItemClasses2 = [
+          "color",
+          { name: "image", input: "image", label: "\u753B\u50CF", keys: imageKeys2.image },
+          "event"
+        ];
+        wp.hooks.applyFilters("catpow.blocks.showcase.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
+        return selectiveItemClasses2;
+      }, []);
       let rtn = [];
       const save = () => {
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });
@@ -169,7 +179,31 @@
           onChange: (classes2) => setAttributes({ classes: classes2 }),
           value: classes
         }
-      )), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+      )), states.isTemplate ? /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
+          icon: "edit",
+          set: setAttributes,
+          attr: attributes,
+          items,
+          index: attributes.currentItemIndex,
+          selectiveClasses: itemTemplateSelectiveClasses,
+          filters: CP.filters.showcase || {}
+        }
+      ) : /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: "\u30A2\u30A4\u30C6\u30E0",
+          icon: "edit",
+          set: setAttributes,
+          attr: attributes,
+          items,
+          index: attributes.currentItemIndex,
+          selectiveClasses: selectiveItemClasses,
+          filters: CP.filters.showcase || {}
+        }
+      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           set: setAttributes,
@@ -223,7 +257,8 @@
               className: "link",
               attr: attributes,
               keys: linkKeys.link,
-              index
+              index,
+              ...CP.extractEventDispatcherAttributes("catpow/banners", item)
             },
             /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.linkText })
           )))
