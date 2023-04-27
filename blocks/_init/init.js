@@ -825,6 +825,17 @@
       const con = sel.getRangeAt(0).startContainer;
       return con.nextElementSibling || con.parentElement;
     },
+    /*event*/
+    extractEventDispatcherAttributes: (blockTypeName, item) => {
+      const blockType = wp.data.select("core/blocks").getBlockType(blockTypeName);
+      const eventDispatcherAttributes = {};
+      if (blockType.attributes.items.eventDispatcherAttributes) {
+        blockType.attributes.items.eventDispatcherAttributes.map((attr_name) => {
+          eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute] = item[attr_name];
+        });
+      }
+      return eventDispatcherAttributes;
+    },
     /*color inherit*/
     inheritColor: (props, images) => {
       const { attributes, className, setAttributes, context } = props;
@@ -3785,20 +3796,20 @@
 
   // ../blocks/_init/init/Link.jsx
   CP.Link = (props) => {
-    const { className, attr, keys, index } = props;
+    const { className, attr, keys, index, ...otherProps } = props;
     const item = keys.items ? attr[keys.items][index] : attr;
     const href = item[keys.href] || "";
     const target = href.indexOf("://") !== -1 ? "_brank" : null;
-    return /* @__PURE__ */ wp.element.createElement("a", { className, href, target, rel: target && "noopener" }, props.children);
+    return /* @__PURE__ */ wp.element.createElement("a", { className, href, target, rel: target && "noopener", ...otherProps }, props.children);
   };
   CP.Link.Edit = (props) => {
-    const { className, set, attr, keys, index, isSelected } = props;
+    const { className, set, attr, keys, index, isSelected, ...otherProps } = props;
     const { onChange } = props;
     const { useMemo, useCallback } = wp.element;
     const { bem } = Catpow.util;
     const classes = useMemo(() => bem("CP-Link " + className), [className]);
     const item = useMemo(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
-    return /* @__PURE__ */ wp.element.createElement("span", { className: classes({ "is-selected": isSelected }) }, props.children, /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement("span", { className: classes({ "is-selected": isSelected }), ...otherProps }, props.children, /* @__PURE__ */ wp.element.createElement(
       "span",
       {
         className: classes.input(),
