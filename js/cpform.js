@@ -76,16 +76,21 @@ const cpform=(form)=>{
 	const refine=function(){
 		form.querySelectorAll('[data-refine-cond]').forEach((el)=>{
 			if(!el.dataset.refineCond){return true;}
-			const cond=JSON.parse(el.dataset.refineCond);
-			const flag=Object.keys(cond).every((name)=>cond[name].some((val)=>(
-				form.querySelectorAll('input[name^="'+name+'"][value="'+val+'"]:checked').length || 
-				form.querySelector('select[name^="'+name+'"]').value===val
-			)));
-			el.classList.toggle('disabled',flag);
-			el.querySelectorAll('input,textarea,select').forEach((el)=>{
-				if(flag){el.removeAttribute('disabled');}
-				else{el.setAttribute('disabled','disabled');}
-			});
+			try{
+				const cond=JSON.parse(el.dataset.refineCond);
+				const flag=Object.keys(cond).every((name)=>cond[name].some((val)=>(
+					form.querySelectorAll('input[name^="'+name+'"][value="'+val+'"]:checked').length || 
+					form.querySelector('select[name^="'+name+'"]').value===val
+				)));
+				el.classList.toggle('disabled',flag);
+				el.querySelectorAll('input,textarea,select').forEach((el)=>{
+					if(flag){el.removeAttribute('disabled');}
+					else{el.setAttribute('disabled','disabled');}
+				});
+			}
+			catch(e){
+				console.error('Failed to parse RefineCond : '+el.dataset.refineCond);
+			}
 		});
 		form.querySelectorAll('[data-refine-cond].disabled [data-refine-cond]').forEach((el)=>{
 			el.classList.remove('disabled');
