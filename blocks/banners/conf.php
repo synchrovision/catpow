@@ -4,6 +4,9 @@ $attributes=[
 	"items"=>[
 		"source"=>'query',
 		"selector"=>'li.item',
+		'filters'=>[
+			'eventDispatcher'=>['selector'=>'.link']
+		],
 		"query"=>[
 			"classes"=>["source"=>'attribute',"attribute"=>'class'],
 			"title"=>["source"=>'html',"selector"=>'h3'],

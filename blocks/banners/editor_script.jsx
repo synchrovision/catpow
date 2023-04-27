@@ -1,6 +1,9 @@
 ﻿CP.config.banners={
 	imageKeys:{
 		image:{src:"src",alt:"alt",code:'imageCode',items:"items"}
+	},
+	linkKeys:{
+		link:{href:"linkUrl",items:"items"}
 	}
 };
 
@@ -29,7 +32,7 @@ wp.blocks.registerBlockType('catpow/banners',{
 		const {items=[],classes,loopCount,imageCode,doLoop,EditMode=false,AltMode=false}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
-		const {imageKeys}=CP.config.banners;
+		const {imageKeys,linkKeys}=CP.config.banners;
 		
 		const selectiveClasses=useMemo(()=>{
 			var selectiveClasses=[
@@ -73,14 +76,21 @@ wp.blocks.registerBlockType('catpow/banners',{
 					key={index}
 				>
 					{states.hasTitle &&
-						<h3>
-							<RichText
-								onChange={(title)=>{item.title=title;save();}}
-								value={item.title}
-							/>
-						</h3>
+						<RichText
+							tagName="h3"
+							className="title"
+							onChange={(title)=>{item.title=title;save();}}
+							value={item.title}
+						/>
 					}
-					<a>
+					<CP.Link.Edit
+						className="link"
+						attr={attributes}
+						set={setAttributes}
+						keys={linkKeys.link}
+						index={index}
+						isSelected={isSelected}
+					>
 						<CP.SelectResponsiveImage
 							attr={attributes}
 							set={setAttributes}
@@ -89,19 +99,7 @@ wp.blocks.registerBlockType('catpow/banners',{
 							size='medium-large'
 							isTemplate={states.isTemplate}
 						/>
-					</a>
-					{isSelected &&
-						<div className='link'>
-							<p
-								contentEditable={true}
-								suppressContentEditableWarning={true}
-								onBlur={(e)=>{
-									item.linkUrl=e.currentTarget.innerHTML;
-									save();
-								}}
-							>{item.linkUrl}</p>
-						</div>
-					}
+					</CP.Link.Edit>
 				</CP.Item>
 			);
 		});
@@ -203,7 +201,7 @@ wp.blocks.registerBlockType('catpow/banners',{
 		const {items=[],classes,loopParam,doLoop}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
-		const {imageKeys}=CP.config.banners;
+		const {imageKeys,linkKeys}=CP.config.banners;
 		
 		return (
 			<>
@@ -212,15 +210,22 @@ wp.blocks.registerBlockType('catpow/banners',{
 						items.map((item,index)=>{
 							return (
 								<li className={item.classes} key={index}>
-									{states.hasTitle && <h3><RichText.Content value={item.title}/></h3>}
-									<a href={item.linkUrl} target={item.target} data-event={item.event} rel={item.target?'noopener noreferrer':''}>
+									{states.hasTitle && <RichText.Content tagName="h3" className="title" value={item.title}/>}
+									
+									<CP.Link
+										className="link"
+										attr={attributes}
+										keys={linkKeys.link}
+										index={index}
+										{...CP.extractEventDispatcherAttributes('catpow/banners',item)}
+									>
 										<CP.ResponsiveImage
 											attr={attributes}
 											keys={imageKeys.image}
 											index={index}
 											isTemplate={states.isTemplate}
 										/>
-									</a>
+									</CP.Link>
 								</li>
 							);
 						})

@@ -3,6 +3,9 @@
   CP.config.banners = {
     imageKeys: {
       image: { src: "src", alt: "alt", code: "imageCode", items: "items" }
+    },
+    linkKeys: {
+      link: { href: "linkUrl", items: "items" }
     }
   };
   wp.blocks.registerBlockType("catpow/banners", {
@@ -29,7 +32,7 @@
       const { Icon, PanelBody, TextareaControl } = wp.components;
       const { items = [], classes: classes2, loopCount, imageCode, doLoop, EditMode = false, AltMode = false } = attributes;
       const states = CP.wordsToFlags(classes2);
-      const { imageKeys } = CP.config.banners;
+      const { imageKeys, linkKeys } = CP.config.banners;
       const selectiveClasses = useMemo(() => {
         var selectiveClasses2 = [
           { label: "\u30B5\u30A4\u30BA", type: "buttons", values: ["small", "medium", "large"] },
@@ -73,39 +76,40 @@
               isSelected,
               key: index
             },
-            states.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(
+            states.hasTitle && /* @__PURE__ */ wp.element.createElement(
               RichText2,
               {
+                tagName: "h3",
+                className: "title",
                 onChange: (title) => {
                   item.title = title;
                   save();
                 },
                 value: item.title
               }
-            )),
-            /* @__PURE__ */ wp.element.createElement("a", null, /* @__PURE__ */ wp.element.createElement(
-              CP.SelectResponsiveImage,
+            ),
+            /* @__PURE__ */ wp.element.createElement(
+              CP.Link.Edit,
               {
+                className: "link",
                 attr: attributes,
                 set: setAttributes,
-                keys: imageKeys.image,
+                keys: linkKeys.link,
                 index,
-                size: "medium-large",
-                isTemplate: states.isTemplate
-              }
-            )),
-            isSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "link" }, /* @__PURE__ */ wp.element.createElement(
-              "p",
-              {
-                contentEditable: true,
-                suppressContentEditableWarning: true,
-                onBlur: (e) => {
-                  item.linkUrl = e.currentTarget.innerHTML;
-                  save();
-                }
+                isSelected
               },
-              item.linkUrl
-            ))
+              /* @__PURE__ */ wp.element.createElement(
+                CP.SelectResponsiveImage,
+                {
+                  attr: attributes,
+                  set: setAttributes,
+                  keys: imageKeys.image,
+                  index,
+                  size: "medium-large",
+                  isTemplate: states.isTemplate
+                }
+              )
+            )
           )
         );
       });
@@ -186,17 +190,27 @@
       const { InnerBlocks, RichText: RichText2 } = wp.blockEditor;
       const { items = [], classes: classes2, loopParam, doLoop } = attributes;
       const states = CP.wordsToFlags(classes2);
-      const { imageKeys } = CP.config.banners;
+      const { imageKeys, linkKeys } = CP.config.banners;
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, items.map((item, index) => {
-        return /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, states.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: item.title })), /* @__PURE__ */ wp.element.createElement("a", { href: item.linkUrl, target: item.target, "data-event": item.event, rel: item.target ? "noopener noreferrer" : "" }, /* @__PURE__ */ wp.element.createElement(
-          CP.ResponsiveImage,
+        return /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText2.Content, { tagName: "h3", className: "title", value: item.title }), /* @__PURE__ */ wp.element.createElement(
+          CP.Link,
           {
+            className: "link",
             attr: attributes,
-            keys: imageKeys.image,
+            keys: linkKeys.link,
             index,
-            isTemplate: states.isTemplate
-          }
-        )));
+            ...CP.extractEventDispatcherAttributes("catpow/banners", item)
+          },
+          /* @__PURE__ */ wp.element.createElement(
+            CP.ResponsiveImage,
+            {
+              attr: attributes,
+              keys: imageKeys.image,
+              index,
+              isTemplate: states.isTemplate
+            }
+          )
+        ));
       })), doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     },
     deprecated: [
