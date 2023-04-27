@@ -1,18 +1,18 @@
 ﻿import {CP} from './CP.jsx';
 
 CP.Link=(props)=>{
-	const {className,attr,keys,index}=props;
+	const {className,attr,keys,index,...otherProps}=props;
 	
 	const item=keys.items?attr[keys.items][index]:attr;
 	const href=item[keys.href] || '';
 	const target=href.indexOf('://')!==-1?'_brank':null;
 	
 	return (
-		<a className={className} href={href} target={target} rel={target && 'noopener'}>{props.children}</a>
+		<a className={className} href={href} target={target} rel={target && 'noopener'} {...otherProps}>{props.children}</a>
 	);
 }
 CP.Link.Edit=(props)=>{
-	const {className,set,attr,keys,index,isSelected}=props;
+	const {className,set,attr,keys,index,isSelected,...otherProps}=props;
 	const {onChange}=props;
 	const {useMemo,useCallback}=wp.element;
 	const {bem}=Catpow.util;
@@ -21,7 +21,7 @@ CP.Link.Edit=(props)=>{
 	const item=useMemo(()=>keys.items?attr[keys.items][index]:attr,[attr,keys.items,index]);
 	
 	return (
-		<span className={classes({'is-selected':isSelected})}>
+		<span className={classes({'is-selected':isSelected})} {...otherProps}>
 			{props.children}
 			<span
 				className={classes.input()}
