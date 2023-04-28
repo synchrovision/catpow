@@ -47,6 +47,7 @@ wp.blocks.registerBlockType('catpow/entrypopup',{
 
 
 	save({attributes,className,setAttributes}){
+		const {InnerBlocks}=wp.blockEditor;
 		return (
 			<div className={attributes.classes}>
 				<div className="body">
