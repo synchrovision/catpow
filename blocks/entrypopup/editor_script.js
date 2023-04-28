@@ -1,5 +1,6 @@
 (() => {
-  // blocks/entrypopup/editor_script.jsx
+  // ../blocks/entrypopup/editor_script.jsx
+  var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/entrypopup", {
     title: "\u{1F43E} EntryPopup",
     description: "\u30B5\u30A4\u30C8\u30FB\u30DA\u30FC\u30B8\u8A2A\u554F\u6642\u306B\u8868\u793A\u3055\u308C\u308B\u30DD\u30C3\u30D7\u30A2\u30C3\u30D7\u3002",
