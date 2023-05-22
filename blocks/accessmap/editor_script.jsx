@@ -241,6 +241,7 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 					{rtn}
 				</div>
 				{doLoop && <onEmpty><InnerBlocks.Content/></onEmpty>}
+				{doLoop && '<!--[loop_block]-->'}
 			</>
 		);
 	}
