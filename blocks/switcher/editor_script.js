@@ -119,7 +119,8 @@
           className: "tab" + (index === currentIndex ? " active" : ""),
           onClick: () => {
             setAttributes({ currentIndex: index });
-          }
+          },
+          key: index
         },
         cond
       )) : false), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement(

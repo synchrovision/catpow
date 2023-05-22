@@ -126,6 +126,7 @@ wp.blocks.registerBlockType('catpow/switcher',{
 							<li
 								className={"tab"+(index===currentIndex?' active':'')}
 								onClick={()=>{setAttributes({currentIndex:index})}}
+								key={index}
 							>{cond}</li>
 						)):false}
 					</ul>
