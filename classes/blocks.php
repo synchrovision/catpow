@@ -280,7 +280,7 @@ class blocks{
 				cp::$content=new content\loop(['parent'=>false]);
 			}
 			include $file_path;
-			return ob_get_clean();
+			return do_shortcode(ob_get_clean());
 		};
 	}
 }
