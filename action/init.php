@@ -107,28 +107,7 @@ if(function_exists('register_block_type')){
 }
 
 /*shortcode*/
-add_shortcode('home_url',function(){return home_url();});
-add_shortcode('home_href',function(){static $cache;return $cache??($cache=explode('://',home_url())[1]);});
-add_shortcode('home_path',function(){static $cache;return $cache??($cache=ltrim(parse_url(home_url('/'),PHP_URL_PATH),'/'));});
-add_shortcode('theme_url',function(){return get_stylesheet_directory_uri();});
-foreach(cp::get_file_paths('shortcode') as $sc_dir){
-	foreach(glob($sc_dir.'/*/output.php') as $sc_file){
-		$tag=substr($sc_file,strrpos($sc_file,'/',-12)+1,-11);
-		add_shortcode($tag,'shortcode_callback');
-	}
-}
-
-function shortcode_callback($atts,$content='',$tag=''){
-	if($f=cp::get_file_path('shortcode/'.$tag.'/output.php')){
-		cp::enqueue_script('shortcode/'.$tag.'/script.js');
-		cp::enqueue_style('shortcode/'.$tag.'/style.css');
-		ob_start();
-		include $f;
-		return ob_get_clean();
-	}
-	return false;
-}
-$GLOBALS['wp_filter']['the_content']->callbacks[11]['do_shortcode']['function']=['Catpow\\util\\shortcode','callback'];
+Catpow\shortcode::init();
 
 /*plugin*/
 add_filter('extra_plugin_headers',function($headers){
