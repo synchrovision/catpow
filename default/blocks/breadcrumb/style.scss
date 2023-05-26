@@ -1,0 +1,26 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-breadcrumb{
+	@include bnd((pd:18 8));
+	&-items{
+		@include bnd((pd:0 1em,mg:0 a,w:a 960));
+		@include flx((w:w));
+		@include txt((l:n,p:16,h:1em));
+		&-item{
+			@include bnd((f:0 0 a,pd:0 .25em));
+			&-link{
+				@include bnd((d:ib,pd:.5em 0));
+				@include txt((s:n));
+			}
+			&:not(:last-child){
+				&::after{
+					content:'＞';
+					@include bnd((d:ib,mgl:.5em));
+				}
+			}
+			&.is-home{
+				
+			}
+		}
+	}
+}

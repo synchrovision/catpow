@@ -4,15 +4,17 @@ namespace Catpow\template_part;
 abstract class breadcrumb extends template_part{
 	public static function render(array $param=[]):void{
 		$links=self::get_items($param);
-		printf('<div class="%s"><ul class="items">',$param['container_class']??'wp-block-catpow-breadcrumb');
+		$class_name=$param['container_class']??'wp-block-catpow-breadcrumb';
+		printf('<div class="%s"><ul class="%1$s-items">',$class_name);
 
 		$position=1;
+		$length=count($links);
 		$json_ld_itemlist=[];
 		foreach($links as $name => $val){
 			if(is_array($val)){
-				printf('<li class="item -multiple">');
+				printf('<li class="%s-items-item is-multiple">',$class_name);
 				foreach($val as $n => $v){
-					printf('<a class="link" href="%s">%s</a>',$v,$n);
+					printf('<a class="%s-items-item-link" href="%s">%s</a>',$class_name,$v,$n);
 					$json_ld_itemlist[]=[
 						'@type'=>'ListItem',
 						'position'=>$position,
@@ -22,7 +24,12 @@ abstract class breadcrumb extends template_part{
 				printf('</li>');
 			}
 			else{
-				printf('<li class="item%s"><a class="link" href="%s">%s</a></li>',$position===1?' -home':'',$val,$name);
+				printf(
+					'<li class="%s-items-item%s"><a class="%1$s-items-item-link" href="%s">%s</a></li>',
+					$class_name,
+					$position===1?' is-home':'',
+					$val,$name
+				);
 				$json_ld_itemlist[]=[
 					'@type'=>'ListItem',
 					'position'=>$position,
