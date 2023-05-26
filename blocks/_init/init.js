@@ -1006,7 +1006,7 @@
       const { useEffect } = wp.element;
       useEffect(() => {
         if (!id) {
-          setAttributes({ id: "s" + new Date().getTime().toString(16) });
+          setAttributes({ id: "s" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
         }
         if (void 0 === styleDatas) {
           const styleDatas2 = {};
@@ -1019,7 +1019,7 @@
       useEffect(() => {
         if (id && id.length > 2) {
           if (document.querySelectorAll("#" + id).length > 1) {
-            setAttributes({ id: "s" + new Date().getTime().toString(16) });
+            setAttributes({ id: "s" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
           }
           const atts = {};
           atts.prevId = id;
@@ -1817,7 +1817,10 @@
 
   // ../blocks/_init/init/SelectResponsiveImage.jsx
   CP.SelectResponsiveImage = (props) => {
-    const { className, attr, set, keys = {}, index, size, devices, device, isTemplate, ...otherProps } = props;
+    const { className = "", attr, set, keys = {}, index, size, devices, device, isTemplate, ...otherProps } = props;
+    const { useMemo } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo(() => bem("CP-SelectResponsiveImage " + className), [className]);
     let { sizes } = props;
     let type, onClick, item, items2;
     if (keys.items) {
@@ -1875,7 +1878,7 @@
       return /* @__PURE__ */ wp.element.createElement(
         "audio",
         {
-          className: "selectImage " + className,
+          className: classes("is-audio"),
           src: item[keys.src],
           "data-mime": item[keys.mime],
           onClick,
@@ -1894,7 +1897,7 @@
       return /* @__PURE__ */ wp.element.createElement(
         "video",
         {
-          className: "selectImage " + className,
+          className: classes("is-video"),
           src: item[keys.src],
           "data-mime": item[keys.mime],
           onClick,
@@ -1913,13 +1916,14 @@
         return /* @__PURE__ */ wp.element.createElement(
           "picture",
           {
-            className: "selectImage " + className,
+            className: classes("is-picture"),
             onClick,
             ...otherProps
           },
           /* @__PURE__ */ wp.element.createElement(
             "img",
             {
+              className: classes.img(),
               src: source.srcset,
               alt: item[keys.alt]
             }
@@ -1929,7 +1933,7 @@
       return /* @__PURE__ */ wp.element.createElement(
         "picture",
         {
-          className: "selectImage " + className,
+          className: classes("is-picture"),
           onClick,
           ...otherProps
         },
@@ -1937,6 +1941,7 @@
         /* @__PURE__ */ wp.element.createElement(
           "img",
           {
+            className: classes.img(),
             src,
             alt: item[keys.alt]
           }
@@ -1946,7 +1951,7 @@
     return /* @__PURE__ */ wp.element.createElement(
       "img",
       {
-        className: "selectImage " + className,
+        className: classes("is-img"),
         src,
         alt: item[keys.alt],
         srcSet: item[keys.srcset],
@@ -2039,7 +2044,10 @@
   CP.SelectPictureSources = (props) => {
     const { Icon } = wp.components;
     const { devices } = props;
-    return /* @__PURE__ */ wp.element.createElement("table", { className: "SelectPictureSources" }, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { colSpan: devices.length }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props }))), /* @__PURE__ */ wp.element.createElement("tr", null, devices.map((device) => /* @__PURE__ */ wp.element.createElement("td", { key: device }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(
+    const { useMemo } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo(() => bem("CP-SelectPictureSources"), []);
+    return /* @__PURE__ */ wp.element.createElement("table", { className: classes() }, /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.tbody() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), colSpan: devices.length }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props }))), /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, devices.map((device) => /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: device }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.tbody.tr.td.label() }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(
       CP.SelectResponsiveImage,
       {
         device,

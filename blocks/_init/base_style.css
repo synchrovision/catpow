@@ -239,31 +239,6 @@
 .selectPosition td.disable {
   background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),1);
 }
-.SelectPictureSources {
-  width: 100%;
-}
-.SelectPictureSources td {
-  position: relative;
-}
-.SelectPictureSources td img.selectImage {
-  width: 100%;
-  height: auto;
-}
-.SelectPictureSources td > .label {
-  position: absolute;
-  right: 0rem;
-  top: 0rem;
-  padding: 0.25em;
-  z-index: 10;
-  background-color: var(--wp-admin-theme-color);
-  text-align: center;
-  font-size: 0.75rem;
-  line-height: 0.625rem;
-  font-family: g;
-  font-weight: 400;
-  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
-  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
-}
 .CP-BoundingBox {
   position: relative;
   box-sizing: border-box;
@@ -460,6 +435,37 @@
   transform: -webkit- translateY(-0.5em);
   transform: translateY(-0.5em);
   pointer-events: none;
+}
+.CP-SelectResponsiveImage.is-video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.CP-SelectResponsiveImage-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.CP-SelectPictureSources {
+  width: 100%;
+}
+.CP-SelectPictureSources-tbody-tr-td {
+  position: relative;
+}
+.CP-SelectPictureSources-tbody-tr-td-label {
+  position: absolute;
+  right: 0rem;
+  top: 0rem;
+  padding: 0.25em;
+  z-index: 10;
+  background-color: var(--wp-admin-theme-color);
+  text-align: center;
+  font-size: 0.75rem;
+  line-height: 0.625rem;
+  font-family: g;
+  font-weight: 400;
+  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
 .selectColor {
   width: 13.75rem;

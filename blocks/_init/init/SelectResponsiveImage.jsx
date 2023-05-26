@@ -1,7 +1,11 @@
 ﻿import {CP} from './CP.jsx';
 
 CP.SelectResponsiveImage=(props)=>{
-	const {className,attr,set,keys={},index,size,devices,device,isTemplate,...otherProps}=props;
+	const {className='',attr,set,keys={},index,size,devices,device,isTemplate,...otherProps}=props;
+	const {useMemo}=wp.element;
+	const {bem}=Catpow.util;
+	const classes=useMemo(()=>bem('CP-SelectResponsiveImage '+className),[className]);
+	
 	let {sizes}=props;
 	let type,onClick,item,items;
 	if(keys.items){
@@ -60,7 +64,7 @@ CP.SelectResponsiveImage=(props)=>{
 	if(type=='audio'){
 		return (
 			<audio
-				className={'selectImage '+className}
+				className={classes('is-audio')}
 				src={item[keys.src]}
 				data-mime={item[keys.mime]}
 				onClick={onClick}
@@ -79,7 +83,7 @@ CP.SelectResponsiveImage=(props)=>{
 	if(type=='video'){
 		return (
 			<video
-				className={'selectImage '+className}
+				className={classes('is-video')}
 				src={item[keys.src]}
 				data-mime={item[keys.mime]}
 				onClick={onClick}
@@ -97,11 +101,12 @@ CP.SelectResponsiveImage=(props)=>{
 			const source=item[keys.sources].find((source)=>source.device===device) || {srcset:wpinfo.theme_url+'/images/dummy.jpg'};
 			return (
 				<picture
-					className={'selectImage '+className}
+					className={classes('is-picture')}
 					onClick={onClick}
 					{...otherProps}
 				>
 					<img
+						className={classes.img()}
 						src={source.srcset}
 						alt={item[keys.alt]}
 					/>
@@ -110,7 +115,7 @@ CP.SelectResponsiveImage=(props)=>{
 		}
 		return (
 			<picture
-				className={'selectImage '+className}
+				className={classes('is-picture')}
 				onClick={onClick}
 				{...otherProps}
 			>
@@ -118,6 +123,7 @@ CP.SelectResponsiveImage=(props)=>{
 					<source srcSet={source.srcset} media={CP.devices[source.device].media_query} data-device={source.device} key={source.device}/>
 				))}
 				<img
+					className={classes.img()}
 					src={src}
 					alt={item[keys.alt]}
 				/>
@@ -126,7 +132,7 @@ CP.SelectResponsiveImage=(props)=>{
 	}
 	return (
 		<img
-			className={'selectImage '+className}
+			className={classes('is-img')}
 			src={src}
 			alt={item[keys.alt]}
 			srcSet={item[keys.srcset]}

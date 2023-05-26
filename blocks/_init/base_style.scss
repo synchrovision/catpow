@@ -134,21 +134,6 @@ $colors:(
 		}
 	}
 }
-.SelectPictureSources{
-	@include bnd((w:f));
-	td{
-		@include bnd((p:r));
-		img.selectImage{
-			@include bnd((w:f,h:a));
-		}
-		&>.label{
-			@include bnd((p:a,r:0,t:0,pd:.25em,z:10));
-			@include bg((c:wp));
-			@include txt((a:c,p:12,h:10,f:g,w:r,c:b));
-			@include shd((b:1));
-		}
-	}
-}
 .CP{
 	&-BoundingBox{
 		@include bnd((p:r,bs:b,z:1000));
@@ -250,6 +235,30 @@ $colors:(
 			&-input{
 				@include trn((o:0,y:-.5em));
 				@include usr((e:n));
+			}
+		}
+	}
+	&-SelectResponsiveImage{
+		&.is-video{
+			@include bnd((d:b,w:f,h:a));
+		}
+		&-img{
+			@include bnd((d:b,w:f,h:a));
+		}
+	}
+	&-SelectPictureSources{
+		@include bnd((w:f));
+		&-tbody{
+			&-tr{
+				&-td{
+					@include bnd((p:r));
+					&-label{
+						@include bnd((p:a,r:0,t:0,pd:.25em,z:10));
+						@include bg((c:wp));
+						@include txt((a:c,p:12,h:10,f:g,w:r,c:b));
+						@include shd((b:1));
+					}
+				}
 			}
 		}
 	}
