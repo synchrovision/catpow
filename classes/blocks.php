@@ -143,23 +143,24 @@ class blocks{
 			$block_type=($is_core_block?'core/':'catpow/').str_replace('_','-',$block_name);
 			$param=[];
 			foreach([
-				'conf'=>'php',
-				'editor_script'=>'js',
-				'editor_style'=>'css',
-				'script'=>'js',
-				'style'=>'css',
-				'front_script'=>'js',
-				'front_style'=>'css',
-				'view_script'=>'js',
-				'view_style'=>'css',
-				'editor_init'=>'js',
-				'component'=>'js',
-				'render'=>'php',
-				'init'=>'php',
-				'deps'=>'php',
-				'editor_init'=>'php',
-				'front_init'=>'php'
-			] as $fname=>$ext){
+				'conf.php',
+				'editor_script.js',
+				'editor_style.css',
+				'script.js',
+				'style.css',
+				'front_script.js',
+				'front_style.css',
+				'view_script.js',
+				'view_style.css',
+				'editor_init.js',
+				'component.js',
+				'render.php',
+				'init.php',
+				'deps.php',
+				'editor_init.php',
+				'front_init.php'
+			] as $fname){
+				list($fname,$ext)=explode('.',$fname);
 				$file_name=$block_name.'/'.$fname.'.'.$ext;
 				$handle='blocks/'.$block_name.'/'.$fname.'.'.$ext;
 				switch($ext){
@@ -168,6 +169,7 @@ class blocks{
 					case 'js':
 						$file_path_url=cp::get_file_path_url('blocks/'.$file_name);
 						$file_url=reset($file_path_url);
+				
 						if(empty($file_url)){break;}
 						$data[$ext][$handle]=[$handle,(string)$file_url,self::$deps[$fname]];
 						if($is_core_block){
