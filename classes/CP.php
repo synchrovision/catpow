@@ -1840,7 +1840,7 @@ class CP{
 					'<head>'.
 					'<meta name="viewport" content="width=device-width" />'.
 					'<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />'.
-					'<title>'.do_shortcode($conf['subject']).'</title>'.
+					'<title>'.shortcode::do_shortcode($conf['subject']).'</title>'.
 					'<style>'.$css.'</style>'.
 					'</head>'.
 					'<body class="mail_body '.$body_class.'">'.$body.'</body>'.
@@ -1875,8 +1875,8 @@ class CP{
 						$val=implode(',',$val);
 					}
 					if(empty($val)){break;}
-					if($key==='to'){$to=do_shortcode($val);}
-					elseif($val){$h[$key]=do_shortcode($val);}
+					if($key==='to'){$to=shortcode::do_shortcode($val);}
+					elseif($val){$h[$key]=shortcode::do_shortcode($val);}
 					break;
 				case 'charset':
 					if(is_array($val)){$val=reset($val);}
@@ -1891,12 +1891,12 @@ class CP{
 				case 'title':
 				case 'subject':
 					if(is_array($val)){$val=implode(' ',$val);}
-					$subject=do_shortcode($val);
+					$subject=shortcode::do_shortcode($val);
 					break;
 				case 'body':
 				case 'message':
 					if(is_array($val)){$val=implode("\n",$val);}
-					$message=do_shortcode($val);
+					$message=shortcode::do_shortcode($val);
 					break;
 			}
 		}
