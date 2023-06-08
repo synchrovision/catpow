@@ -32,7 +32,7 @@ function reset_multiple_input_attr(item){
 		var orgName=baseName+'['+n+']';
 		var newName=baseName+'['+m+']';
 		el.id=newID;
-		el.querySelectorAll(':input,[id^="'+orgID+'"]').forEach((el)=>{
+		el.querySelectorAll('[name],[id^="'+orgID+'"]').forEach((el)=>{
 			if(el.name){
 				el.name=el.name.replace(orgName,newName);
 			}
