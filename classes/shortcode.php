@@ -8,7 +8,7 @@ class shortcode{
 		add_shortcode('home_path',function(){static $cache;return $cache??($cache=ltrim(parse_url(home_url('/'),PHP_URL_PATH),'/'));});
 		add_shortcode('theme_url',function(){return get_stylesheet_directory_uri();});
 		add_filter('render_block_core/template-part',[self::class,'do_shortcode']);
-		$GLOBALS['wp_filter']['the_content']->callbacks[11]['do_shortcode']['function']=[self::class,'do_shortcode'];
+		add_filter('the_content',[self::class,'do_shortcode']);
 	}
 	public static function callback($atts,$content='',$tag=''){
 		if($f=CP::get_file_path('shortcode/'.$tag.'/output.php')){
