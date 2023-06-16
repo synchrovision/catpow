@@ -1,7 +1,7 @@
 <?php
 $form=cp::$content->form(
 	$attr['content_path'],
-	do_shortcode($attr['data_id']??'')?:null,
+	Catpow\shortcode::do_shortcode(do_shortcode($attr['data_id']??''))?:null,
 	$attr['inputs']??null
 );
 if(!empty($attr['values'])){
@@ -9,7 +9,7 @@ if(!empty($attr['values'])){
 		$values=json_decode($attr['values'],1)?:null;
 	}
 	else{
-		$values=Catpow\util\dict::parse(do_shortcode($attr['values']));
+		$values=Catpow\util\dict::parse(Catpow\shortcode::do_shortcode(do_shortcode($attr['values'])));
 	}
 	$data_path=$form->the_data_path;
 	foreach($values as $key=>$val){
