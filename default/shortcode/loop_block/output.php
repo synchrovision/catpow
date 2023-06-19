@@ -19,7 +19,7 @@ if(cp::$content){
 		$query=null;
 	}
 	else{
-		$data['query']=Catpow\shortcode::do_shortcode(do_shortcode($data['query']));
+		$data['query']=shortcode::do_shortcode(do_shortcode($data['query']));
 		if($data['query'][0]==='{'){
 			$query=json_decode($data['query'],1)?:null;
 		}
