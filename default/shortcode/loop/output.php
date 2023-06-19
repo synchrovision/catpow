@@ -10,7 +10,7 @@ if(cp::$content){
 	}
 	else{
 		foreach(loop($prm[0],$arg) as $obj){
-			echo do_shortcode($content);
+			echo shortcode::do_shortcode(do_shortcode($content));
 		}
 	}
 }

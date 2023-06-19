@@ -13,7 +13,7 @@ switch($prm[0]){
 	case 'loop':
 		if(cp::$content && !empty($content)){
 			foreach(cp::$content->user($user->ID)->loop() as $obj){
-				echo do_shortcode($content);
+				echo shortcode::do_shortcode(do_shortcode($content));
 			}
 		}
 		break;

@@ -1,7 +1,7 @@
 <?php
 if(is_user_logged_in()){
 	foreach(cp::$content->user()->loop() as $user){
-		echo do_shortcode($content);
+		echo Catpow\shortcode::do_shortcode(do_shortcode($content));
 	}
 }
 else{

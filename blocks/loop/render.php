@@ -16,6 +16,6 @@ $GLOBALS['loop_block_data'][$id]=[
 ];
 
 if($is_preview){
-	echo do_shortcode("[loop_block {$id}]");
+	echo Catpow\shortcode::do_shortcode(do_shortcode("[loop_block {$id}]"));
 }
 else{echo "[loop_block {$id}]";}

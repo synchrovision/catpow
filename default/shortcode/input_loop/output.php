@@ -7,7 +7,7 @@ if(cp::$content):
 <div <?php _item(); ?>>
 	<?php foreach(loop() as $obj): ?>
 	<div <?php _unit(); ?>>
-		<?=do_shortcode($content); ?>
+		<?=shortcode::do_shortcode(do_shortcode($content))?>
 		<?php controller(); ?>
 	</div>
 	<?php endforeach; ?>

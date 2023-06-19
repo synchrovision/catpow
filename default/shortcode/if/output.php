@@ -25,5 +25,5 @@ do{
 			}
 		}
 	}
-	echo do_shortcode($content);
+	echo Catpow\shortcode::do_shortcode(do_shortcode($content));
 }while(false);

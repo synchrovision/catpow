@@ -283,7 +283,7 @@ class blocks{
 				cp::$content=new content\loop(['parent'=>false]);
 			}
 			include $file_path;
-			return do_shortcode(ob_get_clean());
+			return shortcode::do_shortcode(do_shortcode(ob_get_clean()));
 		};
 	}
 }

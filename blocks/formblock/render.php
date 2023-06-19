@@ -8,7 +8,7 @@ preg_match_all(
 
 $form=cp::$content->form(
 	$attr['content_path'],
-	do_shortcode($attr['data_id']??'')?:null,
+	Catpow\shortcode::do_shortcode(do_shortcode($attr['data_id']??''))?:null,
 	$attr['inputs']??null
 );
 $form->inherit['contents']=true;
