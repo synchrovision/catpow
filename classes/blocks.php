@@ -3,6 +3,7 @@ namespace Catpow;
 
 class blocks{
 	public static $deps=[
+		'editor_init'=>['wp-blocks','wp-i18n','wp-element','wp-editor','wp-plugins','wp-edit-post','catpow','catpow.colorTone','wpinfo'],
 		'editor_script'=>['wp-blocks','wp-i18n','wp-element','wp-editor','wp-plugins','wp-edit-post','catpow','catpow.colorTone','wpinfo'],
 		'editor_style'=>['wp-edit-blocks'],
 		'view_script'=>['catpow'],
@@ -171,7 +172,7 @@ class blocks{
 						$file_url=reset($file_path_url);
 				
 						if(empty($file_url)){break;}
-						$data[$ext][$handle]=[$handle,(string)$file_url,self::$deps[$fname]];
+						$data[$ext][$handle]=[$handle,(string)$file_url,self::$deps[$fname]??[]];
 						if($is_core_block){
 							$key=$fname;
 							if(substr($key,0,6)==='front_'){
