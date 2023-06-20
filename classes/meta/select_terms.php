@@ -160,15 +160,17 @@ class select_terms extends select{
 								continue;
 							}
 							$rtn[$term->name]=$term->term_id;
-							$term_group_names[$term->term_id]='[ '.$term->name.' ]';
-							$rtn[$term_group_names[$term->term_id]]=[];
+							$term_group_name='[ '.$term->name.' ]';
+							$term_group_names[$term->term_id]=$term_group_name;
+							if(!isset($rtn[$term_group_name])){$rtn[$term_group_name]=[];}
 						}
 						else{
 							if(!isset($term_group_names[$term->parent])){
 								$parent_term=get_term($term->parent,$term->taxonomy);
 								$rtn[$parent_term->name]=$term->parent;
-								$term_group_names[$term->parent]='[ '.$parent_term->name.' ]';
-								$rtn[$term_group_names[$term->parent]]=[];
+								$term_group_name='[ '.$parent_term->name.' ]';
+								$term_group_names[$term->parent]=$term_group_name;
+								if(!isset($rtn[$term_group_name])){$rtn[$term_group_name]=[];}
 							}
 							$rtn[$term_group_names[$term->parent]][$term->name]=$term->term_id;
 						}
