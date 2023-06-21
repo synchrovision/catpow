@@ -106,7 +106,8 @@ abstract class meta{
 				}
 			}
 			if(empty($meta->conf['multiple'])){
-				$loop=array_slice($loop,0,1);
+				$class_name=\cp::get_class_name('meta',$meta->conf['type']?:'text');
+				if(!$class_name::$is_bulk_input){$loop=array_slice($loop,0,1);}
 			}
 			elseif($meta->conf['multiple']>1){
 				$loop=array_pad(array_slice($loop,0,$meta->conf['multiple']),$meta->conf['multiple'],null);
