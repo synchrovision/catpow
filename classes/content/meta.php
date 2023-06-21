@@ -11,7 +11,7 @@ class meta extends content{
 	/*input output*/
 	public function output($prm=null,$format=null){
 		$class_name=\cp::get_class_name('meta',$this->conf['output-type']??$this->conf['type']??'text');
-		$format=$this->conf['output-format']??$this->conf['format']??null;
+		$format=$format??$this->conf['output-format']??$this->conf['format']??null;
 		if($class_name::$is_bulk_output){
 			$tmp=$class_name::output($this,$prm);
 			if(isset($format)){$tmp=printf($format,$tmp);}
