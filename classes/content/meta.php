@@ -23,12 +23,12 @@ class meta extends content{
 			else{echo $tmp;}
 		}
 		else{
-			foreach($class_name::loop($this) as $this->loop_id=>$meta_value){
+			foreach($class_name::loop($this,$class_name::USE_ALTERNATIVE) as $this->loop_id=>$this->value){
 				$tmp=$class_name::output($this,$prm);
 				if(isset($format)){$tmp=printf($format,$tmp);}
 				else{echo $tmp;}
 			}
-			unset($this->loop_id);
+			unset($this->loop_id,$this->value);
 		}
 		return $this;
 	}
@@ -235,12 +235,12 @@ class meta extends content{
 	}
 	
 	/*loop*/
-	public function loop(){
+	public function loop($flags=0){
 		if(\cp::$content!==$this){$org_content=\cp::$content;\cp::$content=$this;}
 		$class_name=\cp::get_class_name('meta',$this->conf['type']??'text');
 		if(class_exists($class_name)){
-			foreach($class_name::loop($this) as $this->loop_id=>$meta_value){yield $this->loop_id=>$meta_value;}
-			unset($this->loop_id);
+			foreach($class_name::loop($this,$flags) as $this->loop_id=>$this->value){yield $this->loop_id=>$this->value;}
+			unset($this->loop_id,$this->value);
 		}
 		if(isset($org_content)){\cp::$content=$org_content;}
 	}
