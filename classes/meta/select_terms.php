@@ -34,6 +34,23 @@ class select_terms extends select{
 		$vals=array_merge($vals,wp_get_object_terms($id,$taxonomy,['fields'=>'ids']));
 		wp_set_object_terms($id,$vals,$taxonomy);
 	}
+	public static function get_rel_data_value($relkey,$vals,$conf){
+		$values=[];
+		$relkey=\Catpow\data_type\term::$key_translation[$relkey]??$relkey;
+		if(in_array($relkey,\Catpow\query\term::$data_keys)){
+			foreach((array)$vals as $id){
+				$values[]=[get_term($id)->$relkey];
+			}
+		}
+		else{
+			$terms=array_map('get_term',(array)$vals);
+			usort($terms,function($a,$b){return $a->count<=>$b->count || $b->parent-$a->parent;});
+			foreach($terms as $term){
+				$values[]=\cp::get_the_meta_value("term/".$term->taxonomy."/{$term->term_id}/{$relkey}")?:[];
+			}
+		}
+		return call_user_func_array('array_merge',$values);
+	}
 	
 	public static function export($data_type,$data_name,$id,$meta_name,$conf){
 		$vals=static::get($data_type,$data_name,$id,$meta_name,$conf);
