@@ -1,6 +1,7 @@
 <?php
 namespace Catpow\meta;
 abstract class meta{
+	const USE_ALTERNATIVE=01;
 	public static
 		$value_type='CHAR',
 		$data_type='longtext',
@@ -83,8 +84,8 @@ abstract class meta{
 	}
 	
 	public static function output($meta,$prm){
-		if(is_array($meta->value)){return implode(',',$meta->value);}
-		return $meta->value;
+		$values=$meta->value;
+		return is_array($values)?implode(',',$values):$values;
 	}
 	public static function input($meta,$prm){
 		return sprintf(
@@ -94,14 +95,20 @@ abstract class meta{
 			\cp::get_input_attr($meta->the_data_path,$meta->conf)
 		);
 	}
-	public static function loop($meta){
+	public static function loop($meta,$flags=0){
 		if(isset($meta->param)){$loop=$meta->param;}
-		elseif(!empty($meta->conf['multiple']) && $meta->conf['multiple']>1){
-			for($i=0;$i<$meta->conf['multiple'];$i++){
-				$loop[$i]=$meta->value[$i]??null;
+		else{
+			$loop=$meta->value;
+			if(empty($loop[0]) && ($flags & self::USE_ALTERNATIVE) && !empty($meta->conf['alternative'])){
+				$alternatives=(array)$meta->conf['alternative'];
+				foreach($alternatives as $alternative){
+					if(!empty($loop=$meta->parent->get_the_data($alternative))){break;}
+				}
+			}
+			if(!empty($meta->conf['multiple']) && $meta->conf['multiple']>1){
+				$loop=array_pad(array_slice($loop,0,$meta->conf['multiple']),$meta->conf['multiple'],null);
 			}
 		}
-		else{$loop=$meta->value;}
 		
 		if(is_iterable($loop)){
 			foreach($loop as $meta_id=>$meta_value){
