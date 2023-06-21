@@ -23,11 +23,13 @@ class meta extends content{
 			else{echo $tmp;}
 		}
 		else{
+			$items=[];
 			foreach($class_name::loop($this,$class_name::USE_ALTERNATIVE) as $this->loop_id=>$this->value){
-				$tmp=$class_name::output($this,$prm);
-				if(isset($format)){$tmp=printf($format,$tmp);}
-				else{echo $tmp;}
+				$item=$class_name::output($this,$prm);
+				if(isset($format)){$item=sprintf($format,$item);}
+				$items[]=$item;
 			}
+			echo implode((isset($items[0]) && $items[0][0]==='<')?'':'　',$items);
 			unset($this->loop_id,$this->value);
 		}
 		return $this;
