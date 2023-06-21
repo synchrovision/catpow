@@ -105,7 +105,10 @@ abstract class meta{
 					if(!empty($loop=$meta->parent->get_the_data($alternative))){break;}
 				}
 			}
-			if(!empty($meta->conf['multiple']) && $meta->conf['multiple']>1){
+			if(empty($meta->conf['multiple'])){
+				$loop=array_slice($loop,0,1);
+			}
+			elseif($meta->conf['multiple']>1){
 				$loop=array_pad(array_slice($loop,0,$meta->conf['multiple']),$meta->conf['multiple'],null);
 			}
 		}
