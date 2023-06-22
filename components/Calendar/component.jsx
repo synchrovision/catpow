@@ -10,7 +10,7 @@
 		<thead>
 			<tr>
 				{"日,月,火,水,木,金,土".split(',').map((d)=>(
-					<td>{d}</td>
+					<td key={d}>{d}</td>
 				))}
 			</tr>
 		</thead>
@@ -135,9 +135,9 @@
 				</caption>
 				{thead}
 				<tbody>
-				{weeks.map((week)=>{
+				{weeks.map((week,index)=>{
 					return (
-						<tr className="week">
+						<tr className="week" key={index}>
 							{week.days.map((day,i)=>{
 								const t=day.dateObject.getTime();
 								const value=values[day.value]?values[day.value]:null;
@@ -160,6 +160,7 @@
 										onClick={()=>{
 											if(inRange){onSelect(day.value,{day,value});}
 										}}
+										key={i}
 									>
 										<span className="date">{day.dateObject.getDate()}</span>
 										{value && value.content && (

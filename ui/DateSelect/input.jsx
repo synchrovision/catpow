@@ -73,11 +73,11 @@
 	return (
 		<div className='DateSelect'>
 			<div className="inputs">
-				<Catpow.SelectNumber label="---" min={state.minYear} max={state.maxYear} value={state.year} onChange={(year)=>{dispatch({type:'update',year})}}/>
+				<Catpow.SelectNumber label="---" min={state.minYear} max={state.maxYear} exclude={state.excludeYear} value={state.year} onChange={(year)=>{dispatch({type:'update',year})}}/>
 				<span className="unit">年</span>
-				<Catpow.SelectNumber label="---" min={state.minMonth} max={state.maxMonth} value={state.month} onChange={(month)=>{dispatch({type:'update',month})}}/>
+				<Catpow.SelectNumber label="---" min={state.minMonth} max={state.maxMonth} exclude={state.excludeMonth} value={state.month} onChange={(month)=>{dispatch({type:'update',month})}}/>
 				<span className="unit">月</span>
-				<Catpow.SelectNumber label="---" min={state.minDate} max={state.maxDate} value={state.date} onChange={(date)=>{dispatch({type:'update',date})}}/>
+				<Catpow.SelectNumber label="---" min={state.minDate} max={state.maxDate} exclude={state.excludeDate} value={state.date} onChange={(date)=>{dispatch({type:'update',date})}}/>
 				<span className="unit">日</span>
 				<span className="btn calendar" onClick={()=>setOpen(true)}></span>
 			</div>

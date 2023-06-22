@@ -65,11 +65,11 @@
     }, []);
     const [state, dispatch] = useReducer(reducer, {});
     useEffect(() => dispatch({ type: "init" }), []);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: "DateSelect" }, /* @__PURE__ */ wp.element.createElement("div", { className: "inputs" }, /* @__PURE__ */ wp.element.createElement(Catpow.SelectNumber, { label: "---", min: state.minYear, max: state.maxYear, value: state.year, onChange: (year) => {
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "DateSelect" }, /* @__PURE__ */ wp.element.createElement("div", { className: "inputs" }, /* @__PURE__ */ wp.element.createElement(Catpow.SelectNumber, { label: "---", min: state.minYear, max: state.maxYear, exclude: state.excludeYear, value: state.year, onChange: (year) => {
       dispatch({ type: "update", year });
-    } }), /* @__PURE__ */ wp.element.createElement("span", { className: "unit" }, "\u5E74"), /* @__PURE__ */ wp.element.createElement(Catpow.SelectNumber, { label: "---", min: state.minMonth, max: state.maxMonth, value: state.month, onChange: (month) => {
+    } }), /* @__PURE__ */ wp.element.createElement("span", { className: "unit" }, "\u5E74"), /* @__PURE__ */ wp.element.createElement(Catpow.SelectNumber, { label: "---", min: state.minMonth, max: state.maxMonth, exclude: state.excludeMonth, value: state.month, onChange: (month) => {
       dispatch({ type: "update", month });
-    } }), /* @__PURE__ */ wp.element.createElement("span", { className: "unit" }, "\u6708"), /* @__PURE__ */ wp.element.createElement(Catpow.SelectNumber, { label: "---", min: state.minDate, max: state.maxDate, value: state.date, onChange: (date) => {
+    } }), /* @__PURE__ */ wp.element.createElement("span", { className: "unit" }, "\u6708"), /* @__PURE__ */ wp.element.createElement(Catpow.SelectNumber, { label: "---", min: state.minDate, max: state.maxDate, exclude: state.excludeDate, value: state.date, onChange: (date) => {
       dispatch({ type: "update", date });
     } }), /* @__PURE__ */ wp.element.createElement("span", { className: "unit" }, "\u65E5"), /* @__PURE__ */ wp.element.createElement("span", { className: "btn calendar", onClick: () => setOpen(true) })), /* @__PURE__ */ wp.element.createElement(Catpow.Popup, { open, onClose: () => setOpen(false), closeButton: true }, /* @__PURE__ */ wp.element.createElement(
       Catpow.Calendar,
