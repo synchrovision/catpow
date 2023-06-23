@@ -88,7 +88,7 @@
 				@include txt((c:8));
 			}
 			&.outMonth,&.disabled{
-				@include txt((c:t 10));
+				&,.date{@include txt((c:t 10));}
 			}
 		}
 	}

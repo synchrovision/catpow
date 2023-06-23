@@ -106,7 +106,7 @@
 .Calendar > table .day.saturday {
   color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 2 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
-.Calendar > table .day.outMonth, .Calendar > table .day.disabled {
+.Calendar > table .day.outMonth, .Calendar > table .day.outMonth .date, .Calendar > table .day.disabled, .Calendar > table .day.disabled .date {
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),1);
 }
 .Calendar.small {
