@@ -5,7 +5,8 @@ class DateSelect extends UI{
 	public static
 		$value_type='DATE',
 		$output_type='date',
-		$can_search_with_range=true;
+		$can_search_with_range=true,
+		$defaultParam=['exclude'=>false];
 	
 	public static function fill_param($prm,$meta){
 		$prm=(array)$prm;
