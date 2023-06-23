@@ -3,6 +3,7 @@
   Catpow.UI.DateSelect = (props) => {
     const { useState, useReducer, useMemo, useCallback, useEffect } = wp.element;
     const [open, setOpen] = useState(false);
+    const excludeCond = useMemo(() => props.exclude && date_cond(props.exclude), [props.exclude]);
     const now = useMemo(() => Catpow.util.getDateObject("now"));
     const reducer = useCallback((state2, action) => {
       switch (action.type) {
@@ -32,6 +33,12 @@
           if (t > state2.maxTime) {
             d.setTime(state2.maxTime);
           }
+          if (excludeCond) {
+            let i = 1;
+            while (excludeCond(d)) {
+              d.setDate(d.getDate() + i * (i++ & 1 ? 1 : -1));
+            }
+          }
           state2.value = Catpow.util.getDateValue(d);
           state2.year = d.getFullYear();
           state2.month = d.getMonth() + 1;
@@ -58,11 +65,21 @@
             state2.maxMonth = 12;
             state2.maxDate = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
           }
+          if (excludeCond) {
+            state2.excludeDate = [];
+            const td = new Date(d.getFullYear(), d.getMonth(), state2.minDate);
+            for (let d2 = state2.minDate; d2 <= state2.maxDate; d2++) {
+              td.setDate(d2);
+              if (excludeCond(td)) {
+                state2.excludeDate.push(d2);
+              }
+            }
+          }
           return { ...state2 };
         }
       }
       return state2;
-    }, []);
+    }, [excludeCond]);
     const [state, dispatch] = useReducer(reducer, {});
     useEffect(() => dispatch({ type: "init" }), []);
     return /* @__PURE__ */ wp.element.createElement("div", { className: "DateSelect" }, /* @__PURE__ */ wp.element.createElement("div", { className: "inputs" }, /* @__PURE__ */ wp.element.createElement(Catpow.SelectNumber, { label: "---", min: state.minYear, max: state.maxYear, exclude: state.excludeYear, value: state.year, onChange: (year) => {
@@ -80,6 +97,7 @@
         showControl: true,
         min: props.min,
         max: props.max,
+        exclude: excludeCond,
         values: state.value ? { [state.value]: true } : {},
         onSelect: (value) => {
           setOpen(false);

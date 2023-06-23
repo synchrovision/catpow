@@ -2,6 +2,8 @@
 	const {useState,useReducer,useMemo,useCallback,useEffect}=wp.element;
 	const [open,setOpen]=useState(false);
 	
+	const excludeCond=useMemo(()=>props.exclude && date_cond(props.exclude),[props.exclude]);
+	
 	const now=useMemo(()=>Catpow.util.getDateObject('now'));
 	const reducer=useCallback((state,action)=>{
 		switch(action.type){
@@ -31,6 +33,12 @@
 				const t=d.getTime();
 				if(t<state.minTime){d.setTime(state.minTime);}
 				if(t>state.maxTime){d.setTime(state.maxTime);}
+				if(excludeCond){
+					let i=1;
+					while(excludeCond(d)){
+						d.setDate(d.getDate()+i*((i++&1)?1:-1));
+					}
+				}
 				state.value=Catpow.util.getDateValue(d);
 				state.year=d.getFullYear();
 				state.month=d.getMonth()+1;
@@ -62,11 +70,19 @@
 					state.maxMonth=12;
 					state.maxDate=(new Date(d.getFullYear(),d.getMonth()+1,0)).getDate();
 				}
+				if(excludeCond){
+					state.excludeDate=[];
+					const td=new Date(d.getFullYear(),d.getMonth(),state.minDate);
+					for(let d=state.minDate;d<=state.maxDate;d++){
+						td.setDate(d);
+						if(excludeCond(td)){state.excludeDate.push(d);}
+					}
+				}
 				return {...state};
 			}
 		}
 		return state;
-	},[]);
+	},[excludeCond]);
 	const [state,dispatch]=useReducer(reducer,{});
 	useEffect(()=>dispatch({type:'init'}),[]);
 	
@@ -89,6 +105,7 @@
 					showControl={true}
 					min={props.min}
 					max={props.max}
+					exclude={excludeCond}
 					values={
 						state.value?{[state.value]:true}:{}
 					}
