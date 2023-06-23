@@ -3,7 +3,8 @@
   Catpow.Calendar = (props) => {
     const { Fragment } = wp.element;
     const { useState, useCallback, useEffect, useReducer, useMemo } = wp.element;
-    const { className = "medium", min = null, max = null, values, onSelect, showYear = true, showMonth = true, showControl = false } = props;
+    const { className = "medium", min = null, max = null, exclude = null, values, onSelect, showYear = true, showMonth = true, showControl = false } = props;
+    const { bem } = Catpow.util;
     const minTime = min ? Catpow.util.getDateObject(min).getTime() : Number.MIN_VALUE;
     const maxTime = max ? Catpow.util.getDateObject(max).getTime() : Number.MAX_VALUE;
     const thead = useMemo(() => /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, "\u65E5,\u6708,\u706B,\u6C34,\u6728,\u91D1,\u571F".split(",").map((d) => /* @__PURE__ */ wp.element.createElement("td", { key: d }, d)))), [props]);
@@ -95,11 +96,11 @@
       return /* @__PURE__ */ wp.element.createElement("tr", { className: "week", key: index }, week.days.map((day, i) => {
         const t = day.dateObject.getTime();
         const value = values[day.value] ? values[day.value] : null;
-        const inRange = t >= minTime && t <= maxTime;
+        const isValid = t >= minTime && t <= maxTime && !(exclude && exclude(day.dateObject));
         let classes = "day";
         classes += " " + weekDays[i];
         classes += day.inMonth ? " inMonth" : " outMonth";
-        classes += inRange ? "" : " disabled";
+        classes += isValid ? "" : " disabled";
         if (value) {
           if (typeof value == "object") {
             if ("classes" in value) {
@@ -116,7 +117,7 @@
           {
             className: classes,
             onClick: () => {
-              if (inRange) {
+              if (isValid) {
                 onSelect(day.value, { day, value });
               }
             },
