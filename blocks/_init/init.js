@@ -3618,6 +3618,44 @@
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RawHTML, { className }, response), stylesheets.map((stylesheet) => /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: stylesheet, key: stylesheet })));
   };
 
+  // ../blocks/_init/init/ServerSideRenderPart.jsx
+  CP.ServerSideRenderPart = (props) => {
+    const { className, ...otherProps } = props;
+    return /* @__PURE__ */ wp.element.createElement("div", { className }, "[ssr_parts" + Object.keys(otherProps).reduce((p, c) => p += ` ${c}=${otherProps[c]}`, "") + "]");
+  };
+  CP.ServerSideRenderPart.Preview = (props) => {
+    const { className, name, ...otherProps } = props;
+    const { RawHTML, useState, useMemo, useRef, useEffect } = wp.element;
+    const [response, setResponse] = useState(false);
+    const [hold, setHold] = useState(false);
+    const [stylesheets, setStylesheets] = useState([]);
+    useEffect(() => {
+      if (hold) {
+        return;
+      }
+      const path = "/cp/v1/blocks/parts/" + name;
+      const data = otherProps;
+      console.log(data);
+      const post_id = wp.data.select("core/editor").getCurrentPostId();
+      if (post_id) {
+        data.post_id = post_id;
+      }
+      wp.apiFetch({ path, data, method: "POST" }).then((res) => {
+        if (!res) {
+          return;
+        }
+        setStylesheets(res.deps.styles);
+        setResponse(res.rendered);
+      }).catch((res) => {
+        console.error(res);
+      }).finally(() => {
+        setTimeout(() => setHold(false), 500);
+      });
+      setHold(true);
+    }, [name, JSON.stringify(otherProps)]);
+    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RawHTML, { className }, response), stylesheets.map((stylesheet) => /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: stylesheet, key: stylesheet })));
+  };
+
   // ../blocks/_init/init/ColorVarTracer.jsx
   CP.ColorVarTracer = (props) => {
     const { target } = props;
