@@ -296,6 +296,42 @@ CP.SelectClassPanel=(props)=>{
 				);
 			}
 		}
+		else if(prm.vars){
+			
+			if(prm.input){
+				switch(prm.input){
+					case 'select':
+					case 'buttons':
+					case 'gridbuttons':
+					case 'bool':
+					case 'range':
+					case 'text':
+					case 'textarea':{
+						rtn.push(
+							<CP.DynamicInput
+								param={prm}
+								value={props.attr[prm.vars][prm.key]}
+								onChange={(val)=>{
+									save({[prm.vars]:{...props.attr[prm.vars],[prm.key]:''+val}});
+								}}
+							/>
+						);
+						break;
+					}
+				}
+			}
+			else{
+				rtn.push(
+					<TextControl
+						label={prm.label}
+						value={props.attr[prm.vars][prm.key]}
+						onChange={(val)=>{
+							save({[prm.vars]:{...props.attr[prm.vars],[prm.key]:''+val}});
+						}}
+					/>
+				);
+			}
+		}
 		else{
 			if(prm === 'color'){
 				rtn.push(

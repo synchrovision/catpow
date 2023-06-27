@@ -2831,6 +2831,45 @@
             )
           );
         }
+      } else if (prm.vars) {
+        if (prm.input) {
+          switch (prm.input) {
+            case "select":
+            case "buttons":
+            case "gridbuttons":
+            case "bool":
+            case "range":
+            case "text":
+            case "textarea": {
+              rtn.push(
+                /* @__PURE__ */ wp.element.createElement(
+                  CP.DynamicInput,
+                  {
+                    param: prm,
+                    value: props2.attr[prm.vars][prm.key],
+                    onChange: (val) => {
+                      save2({ [prm.vars]: { ...props2.attr[prm.vars], [prm.key]: "" + val } });
+                    }
+                  }
+                )
+              );
+              break;
+            }
+          }
+        } else {
+          rtn.push(
+            /* @__PURE__ */ wp.element.createElement(
+              TextControl,
+              {
+                label: prm.label,
+                value: props2.attr[prm.vars][prm.key],
+                onChange: (val) => {
+                  save2({ [prm.vars]: { ...props2.attr[prm.vars], [prm.key]: "" + val } });
+                }
+              }
+            )
+          );
+        }
       } else {
         if (prm === "color") {
           rtn.push(
