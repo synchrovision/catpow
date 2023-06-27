@@ -11,6 +11,7 @@ namespace Catpow\content;
 */
 class content{
 	public $parent,$inherit,$childrens;
+	protected $value;
 	
 	public function __construct($param){
 		foreach($param as $key=>$val){$this->$key=$val;}
@@ -331,7 +332,7 @@ class content{
 			case 'the_real_data_path':
 				return $this->get_the_real_data_path();
 			case 'value':
-				return $this->get_the_data();
+				return $this->value??$this->get_the_data();
 			case 'file':
 				$file=$this->path_data['file_name']??'index';
 				if(!empty($this->path_data['file_slug'])){$file.='-'.$this->path_data['file_slug'];}

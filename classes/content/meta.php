@@ -7,7 +7,6 @@ namespace Catpow\content;
 */
 class meta extends content{
 	public $param;
-	private $value;
 	
 	/*input output*/
 	public function output($prm=null,$format=null){
