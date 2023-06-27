@@ -1685,6 +1685,39 @@
     );
   };
 
+  // ../blocks/_init/init/SelectBlendMode.jsx
+  CP.SelectBlendMode = (props) => {
+    const { BlockControls } = wp.blockEditor;
+    const { SelectControl } = wp.components;
+    const { set, attr, options = [
+      { value: "normal", label: "\u901A\u5E38" },
+      { value: "multiply", label: "\u4E57\u7B97" },
+      { value: "screen", label: "\u30B9\u30AF\u30EA\u30FC\u30F3" },
+      { value: "overlay", label: "\u30AA\u30FC\u30D0\u30FC\u30EC\u30A4" },
+      { value: "darken", label: "\u6BD4\u8F03\uFF08\u6697\uFF09" },
+      { value: "lighten", label: "\u6BD4\u8F03\uFF08\u660E\uFF09" },
+      { value: "color-dodge", label: "\u8986\u3044\u713C\u304D" },
+      { value: "color-burn", label: "\u713C\u304D\u8FBC\u307F" },
+      { value: "hard-light", label: "\u30CF\u30FC\u30C9\u30E9\u30A4\u30C8" },
+      { value: "soft-light", label: "\u30BD\u30D5\u30C8\u30E9\u30A4\u30C8" },
+      { value: "difference", label: "\u5DEE\u306E\u7D76\u5BFE\u5024" },
+      { value: "exclusion", label: "\u9664\u5916" },
+      { value: "hue", label: "\u8272\u76F8" },
+      { value: "saturation", label: "\u5F69\u5EA6" },
+      { value: "color", label: "\u30AB\u30E9\u30FC" },
+      { value: "luminosity", label: "\u660E\u5EA6" }
+    ] } = props;
+    return /* @__PURE__ */ wp.element.createElement(
+      SelectControl,
+      {
+        label: props.label,
+        onChange: props.onChange,
+        value: props.value,
+        options
+      }
+    );
+  };
+
   // ../blocks/_init/init/SelectThemeColor.jsx
   CP.SelectThemeColor = (props) => {
     const { onChange } = props;
@@ -2855,6 +2888,20 @@
               );
               break;
             }
+            case "blendmode":
+              rtn.push(
+                /* @__PURE__ */ wp.element.createElement(
+                  CP.SelectBlendMode,
+                  {
+                    label: prm.label,
+                    value: props2.attr[prm.vars][prm.key],
+                    onChange: (val) => {
+                      save2({ [prm.vars]: { ...props2.attr[prm.vars], [prm.key]: val } });
+                    }
+                  }
+                )
+              );
+              break;
           }
         } else {
           rtn.push(

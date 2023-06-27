@@ -297,7 +297,6 @@ CP.SelectClassPanel=(props)=>{
 			}
 		}
 		else if(prm.vars){
-			
 			if(prm.input){
 				switch(prm.input){
 					case 'select':
@@ -318,6 +317,17 @@ CP.SelectClassPanel=(props)=>{
 						);
 						break;
 					}
+					case 'blendmode':
+						rtn.push(
+							<CP.SelectBlendMode
+								label={prm.label}
+								value={props.attr[prm.vars][prm.key]}
+								onChange={(val)=>{
+									save({[prm.vars]:{...props.attr[prm.vars],[prm.key]:val}});
+								}}
+							/>
+						);
+						break;
 				}
 			}
 			else{
