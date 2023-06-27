@@ -1,0 +1,47 @@
+@import "admin_style_config.scss";
+
+.wp-block-catpow-pageheader{
+	@include bnd((d:b,p:r));
+	@include bg((c:m));
+	&-body{
+		@include bnd((p:r,z:1));
+		&-title{
+			@include bnd((pd:80 20));
+			@include txt((a:c,f:h,p:32,h:1.5em,c:i));
+		}
+		&-breadcrumb{
+			@include bg((c:shd));
+			&-body{
+				@include bnd((w:a c,mg:a));
+				&-items{
+					@include flx((w:w));
+					@include txt((l:n));
+					&-item{
+						@include bnd((f:0 0 a));
+						&-link{
+							@include bnd((d:b,pd:8));
+							@include txt((p:14,c:i,s:n));
+						}
+						&:not(:last-child) &{
+							&-link{
+								&::after{
+									content:'＞';
+									@include bnd((d:ib,mgl:.5em));
+								}
+							}
+						}
+						&.is-home{
+						}
+					}
+				}
+			}
+		}
+	}
+	&-background{
+		@include bnd((d:b,p:a,i:0));
+		img{
+			@include bnd((d:b,w:f,h:f,op:c,of:c));
+			@include trn((o:var(--cp-image-opacity),bm:var(--cp-image-blendmode)));
+		}
+	}
+}

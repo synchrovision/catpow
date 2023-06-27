@@ -1,0 +1,72 @@
+@charset "UTF-8";
+.wp-block-catpow-pageheader {
+  display: block;
+  position: relative;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+}
+.wp-block-catpow-pageheader-body {
+  position: relative;
+  z-index: 1;
+}
+.wp-block-catpow-pageheader-body-title {
+  padding: 5rem 1.25rem;
+  text-align: center;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-size: 2rem;
+  line-height: 1.5em;
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+}
+.wp-block-catpow-pageheader-body-breadcrumb {
+  background-color: hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+}
+.wp-block-catpow-pageheader-body-breadcrumb-body {
+  max-width: 60rem;
+  width: auto;
+  margin: auto;
+}
+.wp-block-catpow-pageheader-body-breadcrumb-body-items {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  list-style: none;
+}
+.wp-block-catpow-pageheader-body-breadcrumb-body-items-item {
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+}
+.wp-block-catpow-pageheader-body-breadcrumb-body-items-item-link {
+  display: block;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+  text-decoration: none;
+}
+.wp-block-catpow-pageheader-body-breadcrumb-body-items-item:not(:last-child) .wp-block-catpow-pageheader-body-breadcrumb-body-items-item-link::after {
+  content: "＞";
+  display: inline-block;
+  margin-left: 0.5em;
+}
+.wp-block-catpow-pageheader-background {
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+}
+.wp-block-catpow-pageheader-background img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  object-fit: cover;
+  opacity: var(--cp-image-opacity);
+  mix-blend-mode: var(--cp-image-blendmode);
+}
+/*# sourceMappingURL=./style.css.map */
