@@ -113,10 +113,12 @@ abstract class breadcrumb extends template_part{
 					if(!empty($terms)){$cats=array_merge($cats,$terms);}
 				}
 				$links['tax']=array();
+				$links['child_tax']=array();
 				foreach($cats as $i=>$cat){
-					$links['tax'][$cat->name]=get_term_link($cat);
+					$links[$cat->parent?'child_tax':'tax'][$cat->name]=get_term_link($cat);
 				}
 				if(empty($links['tax'])){unset($links['tax']);}
+				if(empty($links['child_tax'])){unset($links['child_tax']);}
 			}
 			$links[get_the_title()]=get_permalink();
 			return $links;
