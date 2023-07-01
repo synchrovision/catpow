@@ -33,12 +33,13 @@
     example: CP.example,
     edit(props) {
       const { attributes, className, setAttributes, isSelected, clientId } = props;
-      const { useState, useEffect, useMemo, useCallback } = wp.element;
+      const { useState, useRef, useEffect, useMemo, useCallback } = wp.element;
       const { Icon } = wp.components;
       const { InnerBlocks, InspectorControls } = wp.blockEditor;
       const { currentIndex = 0 } = attributes;
       const [newBlocks, setNewBlocks] = useState(false);
       const { factors, factorFlags, flagValues } = CP.config.switcher;
+      const isFirstRenderRef = useRef(true);
       const selectiveClasses = useMemo(() => {
         const { factors: factors2, factorFlags: factorFlags2, flagValues: flagValues2 } = CP.config.switcher;
         const selectiveClasses2 = [
@@ -102,6 +103,10 @@
         }
       }, [currentIndex]);
       useEffect(() => {
+        if (isFirstRenderRef.current) {
+          isFirstRenderRef.current = false;
+          return;
+        }
         switch (attributes.factor) {
           case "schedule":
             setAttributes({ values: "0:00~6:00\n6:00~12:00\n12:00~18:00\n18:00~24:00" });

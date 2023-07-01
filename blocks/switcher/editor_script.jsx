@@ -31,12 +31,13 @@ wp.blocks.registerBlockType('catpow/switcher',{
 	example:CP.example,
 	edit(props){
 		const {attributes,className,setAttributes,isSelected,clientId}=props;
-		const {useState,useEffect,useMemo,useCallback}=wp.element;
+		const {useState,useRef,useEffect,useMemo,useCallback}=wp.element;
 		const {Icon}=wp.components;
 		const {InnerBlocks,InspectorControls}=wp.blockEditor;
 		const {currentIndex=0}=attributes;
 		const [newBlocks,setNewBlocks]=useState(false);
 		const {factors,factorFlags,flagValues}=CP.config.switcher;
+		const isFirstRenderRef=useRef(true);
 
 		const selectiveClasses=useMemo(()=>{
 			const {factors,factorFlags,flagValues}=CP.config.switcher;
@@ -101,6 +102,7 @@ wp.blocks.registerBlockType('catpow/switcher',{
 			}
 		},[currentIndex]);
 		useEffect(()=>{
+			if(isFirstRenderRef.current){isFirstRenderRef.current=false;return;}
 			switch(attributes.factor){
 				case 'schedule':setAttributes({values:"0:00~6:00\n6:00~12:00\n12:00~18:00\n18:00~24:00"});break;
 				case 'is_user_logged_in':setAttributes({values:"out\nin"});break;
@@ -109,6 +111,7 @@ wp.blocks.registerBlockType('catpow/switcher',{
 			}
 		},[attributes.factor]);
 		const currentBlockId='block-'+wp.data.select('core/block-editor').getBlock(clientId).innerBlocks[currentIndex]?.clientId;
+		
 		return (
 			<>
 				<div className="switcherEdit" data-current-index={currentIndex}>
