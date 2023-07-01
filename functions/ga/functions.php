@@ -4,7 +4,8 @@ add_action('cp_setup',function(){
 		if(is_array($cp_ga_code)){$cp_ga_code=reset($cp_ga_code);}
 		add_action('wp_head',function()use($cp_ga_code){
 			$conf=[
-				'custom_map'=>apply_filters('cpga_dimensions',[])
+				'custom_map'=>apply_filters('cpga_dimensions',[]),
+				'user_properties'=>apply_filters('cpga_user_properties',[])
 			];
 			?>
 			<!-- Global site tag (gtag.js) - Google Analytics -->
@@ -61,3 +62,8 @@ add_filter('cp_block_items_attributes_eventDispatcher',function($items,$args){
 	$items['eventDispatcherAttributes'][]='event';
 	return $items;
 },10,2);
+add_action('cp_set_user_properties',function($user_properties){
+	add_filter('cpga_user_properties',function($ga_user_properties)use($user_properties){
+		return array_merge($ga_user_properties,$user_properties);
+	});
+});

@@ -6,6 +6,7 @@
 		user_value:'ユーザー情報',
 		input_value:'フォーム入力値',
 		content_value:'コンテンツ情報',
+		ab_test:'ABテスト',
 	},
 	factorFlags:{
 		schedule:4,
@@ -14,6 +15,7 @@
 		user_value:7,
 		input_value:7,
 		content_value:7,
+		ab_test:5,
 	},
 	flagValues:{
 		field:1,
@@ -103,6 +105,7 @@ wp.blocks.registerBlockType('catpow/switcher',{
 				case 'schedule':setAttributes({values:"0:00~6:00\n6:00~12:00\n12:00~18:00\n18:00~24:00"});break;
 				case 'is_user_logged_in':setAttributes({values:"out\nin"});break;
 				case 'current_user_can':setAttributes({values:"administrator\neditor\nauthor\ncontributor\nsubscriber"});break;
+				case 'ab_test':setAttributes({field:"variation",values:"A\nB"});break;
 			}
 		},[attributes.factor]);
 		const currentBlockId='block-'+wp.data.select('core/block-editor').getBlock(clientId).innerBlocks[currentIndex]?.clientId;
@@ -119,7 +122,7 @@ wp.blocks.registerBlockType('catpow/switcher',{
 						{factorFlags[attributes.factor]&flagValues['field']?(
 							<li className="tab">
 								{attributes.field}
-								{factorFlags[attributes.factor]&flagValues['compare'] && '　'+attributes.compare}
+								{!!(factorFlags[attributes.factor]&flagValues['compare']) && '　'+attributes.compare}
 							</li>
 						):false}
 						{factorFlags[attributes.factor]&flagValues['values']?values.map((cond,index)=>(

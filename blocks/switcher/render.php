@@ -41,6 +41,22 @@ switch($attr['factor']){
 			return !empty(this()) && $cond->test_content(this());
 		};
 		break;
+	case 'ab_test':
+		$key='cp_user_property_'.$attr['field'];
+		if(!isset($_COOKIE[$key])){
+			$values=explode("\n",trim($attr['values']));
+			$user_property=$values[array_rand($values)];
+			setcookie($key,$user_property,strtotime('+ 1 year'));
+			$_COOKIE[$key]=$user_property;
+		}
+		else{
+			$user_property=$_COOKIE[$key];
+		}
+		do_action('cp_set_user_properties',[$attr['field']=>$user_property]);
+		$cond_cb=function($value)use($user_property){
+			return $value===$user_property;
+		};
+		break;
 	default:return;
 }
 foreach($contents as $value=>$data){

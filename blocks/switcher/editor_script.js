@@ -7,7 +7,8 @@
       current_user_can: "\u30E6\u30FC\u30B6\u30FC\u6A29\u9650",
       user_value: "\u30E6\u30FC\u30B6\u30FC\u60C5\u5831",
       input_value: "\u30D5\u30A9\u30FC\u30E0\u5165\u529B\u5024",
-      content_value: "\u30B3\u30F3\u30C6\u30F3\u30C4\u60C5\u5831"
+      content_value: "\u30B3\u30F3\u30C6\u30F3\u30C4\u60C5\u5831",
+      ab_test: "AB\u30C6\u30B9\u30C8"
     },
     factorFlags: {
       schedule: 4,
@@ -15,7 +16,8 @@
       current_user_can: 4,
       user_value: 7,
       input_value: 7,
-      content_value: 7
+      content_value: 7,
+      ab_test: 5
     },
     flagValues: {
       field: 1,
@@ -110,10 +112,13 @@
           case "current_user_can":
             setAttributes({ values: "administrator\neditor\nauthor\ncontributor\nsubscriber" });
             break;
+          case "ab_test":
+            setAttributes({ field: "variation", values: "A\nB" });
+            break;
         }
       }, [attributes.factor]);
       const currentBlockId = "block-" + wp.data.select("core/block-editor").getBlock(clientId).innerBlocks[currentIndex]?.clientId;
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "switcherEdit", "data-current-index": currentIndex }, /* @__PURE__ */ wp.element.createElement("ul", { className: "tabs" }, /* @__PURE__ */ wp.element.createElement("li", { className: "tab icon" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "networking" })), /* @__PURE__ */ wp.element.createElement("li", { className: "tab" }, factors[attributes.factor]), factorFlags[attributes.factor] & flagValues["field"] ? /* @__PURE__ */ wp.element.createElement("li", { className: "tab" }, attributes.field, factorFlags[attributes.factor] & flagValues["compare"] && "\u3000" + attributes.compare) : false, factorFlags[attributes.factor] & flagValues["values"] ? values.map((cond, index) => /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "switcherEdit", "data-current-index": currentIndex }, /* @__PURE__ */ wp.element.createElement("ul", { className: "tabs" }, /* @__PURE__ */ wp.element.createElement("li", { className: "tab icon" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "networking" })), /* @__PURE__ */ wp.element.createElement("li", { className: "tab" }, factors[attributes.factor]), factorFlags[attributes.factor] & flagValues["field"] ? /* @__PURE__ */ wp.element.createElement("li", { className: "tab" }, attributes.field, !!(factorFlags[attributes.factor] & flagValues["compare"]) && "\u3000" + attributes.compare) : false, factorFlags[attributes.factor] & flagValues["values"] ? values.map((cond, index) => /* @__PURE__ */ wp.element.createElement(
         "li",
         {
           className: "tab" + (index === currentIndex ? " active" : ""),
