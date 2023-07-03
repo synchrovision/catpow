@@ -3,7 +3,9 @@ namespace Catpow\meta;
 use Catpow\util\media_protect;
 
 class ProtectedMedia extends UI{
-	public static $output_type='protected_media';
+	public static
+		$output_type='protected_media',
+		$can_search=false;
 	
 	public static function get($data_type,$data_name,$id,$meta_name,$conf){
 		$ids=parent::get($data_type,$data_name,$id,$meta_name,$conf);
