@@ -83,7 +83,7 @@ body.login .button.sns_login img {
   border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.3);
 }
 #wpcontent #cpcf_custom_box .inside {
-  padding: 0.625rem;
+  padding: 1rem;
   margin: 0rem;
   border-style: none;
 }
@@ -95,12 +95,6 @@ body.login .button.sns_login img {
   height: auto;
   padding: 1em;
   background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-  border-top-style: solid;
-  border-left-style: solid;
-  border-top-width: 0.0625rem;
-  border-left-width: 0.0625rem;
-  border-top-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-  border-left-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
   border-radius: 2em;
   text-align: center;
   font-size: 0.9375rem;
@@ -109,6 +103,7 @@ body.login .button.sns_login img {
   font-weight: 500;
   color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
   cursor: pointer;
+  box-shadow: 0 4px 9px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
 #wpcontent #cp_search #cpcf_custom_box_button::before {
   content: "";
@@ -127,12 +122,6 @@ body.login .button.sns_login img {
   height: auto;
   overflow-y: auto;
   background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
-  border-top-style: solid;
-  border-left-style: solid;
-  border-top-width: 0.0625rem;
-  border-left-width: 0.0625rem;
-  border-top-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-  border-left-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
   border-radius: 0.625rem 0rem 0rem 0rem;
   box-shadow: 0 5px 11px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
   pointer-events: none;

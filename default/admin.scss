@@ -76,7 +76,7 @@ body{
 			@include bdr((c:t 1 .3));
 		}
 		.inside{
-			@include bnd((pd:10,mg:0));
+			@include bnd((pd:16,mg:0));
 			@include bdr((s:n));
 		}
 	}
@@ -84,9 +84,10 @@ body{
 		#cpcf_custom_box_button{
 			@include bnd((p:f,z:10001,b:.5em,r:.5em,h:a,pd:1em));
 			@include bg((c:m));
-			@include bdr((p:t l,s:s,w:1,c:m,r:2em));
+			@include bdr((r:2em));
 			@include txt((a:c,p:15,h:1em,f:g,w:m,c:i));
 			@include usr((c:p));
+			@include shd((b:4));
 			&::before{
 				@include ico('search');
 			}
@@ -96,7 +97,7 @@ body{
 			.inside{
 				@include bnd((p:f,z:10000,b:0,r:0,h:a 80vh,oy:a));
 				@include bg((c:b));
-				@include bdr((p:t l,s:s,w:1,c:m,r:10 0 0 0));
+				@include bdr((r:10 0 0 0));
 				@include shd((b:5));
 				@include usr((e:n));
 				@include trn((t:.5s,y:100vh,o:0));
