@@ -26,7 +26,7 @@ class jsonld_job extends jsonld{
 			"baseSalary"=>['type'=>'data','label'=>'給与','@type'=>'MonetaryAmount','multiple'=>1,'meta'=>[
 				'currency'=>['type'=>'select_json','label'=>'通貨','value'=>'currency'],
 				'value'=>['type'=>'data','label'=>'額面','@type'=>'QuantitativeValue','multiple'=>1,'meta'=>[
-					"type"=>['type'=>'select','label'=>'タイプ','value'=>[
+					"unitText"=>['type'=>'select','label'=>'タイプ','value'=>[
 						'時給'=>"HOUR",
 						'日給'=>"DAY",
 						'週給'=>"WEEK",
