@@ -8,8 +8,10 @@ $imgAtts=array_merge(
 	array_intersect_key($attr,['src'=>1,'alt'=>1,'width'=>1,'height'=>1])
 );
 if(isset($attr['id'])){$imgAtts['class']=sprintf(' class="wp-image-%d"',$attr['id']);}
-$imgAttr=implode(' ',array_map(function($key)use($imgAtts){return sprintf('%s="%s"',$key,$imgAtts[$key]);},$imgAtts));
+$imgAttr=implode(' ',array_map(function($key)use($imgAtts){
+	return sprintf('%s="%s"',$key,$imgAtts[$key]);
+},array_keys($imgAtts)));
 ?>
 <!-- wp:image<?=!empty($blockAttr)?' '.json_encode($blockAttr,0500):''?> -->
-<figure class="<?=implode(' ',$classNames)?>"><img src="<?=$src?>" alt="<?=$alt?>"<?=isset($attr['id'])?:''?>/></figure>
+<figure class="<?=implode(' ',$classNames)?>"><img <?=$imgAttr?>/></figure>
 <!-- /wp:image -->
