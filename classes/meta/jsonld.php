@@ -8,23 +8,32 @@ class jsonld extends data{
 		add_action('wp_footer',function()use($meta){
 			$vals=$meta->value[0];
 			$conf=$meta->conf;
-			$data=[
+			$data=array_merge([
 				'@context'=>'http://schema.org',
 				'@type'=>$conf['@type'],
-			];
-			foreach((array)$meta->conf['meta'] as $n=>$child_meta){
-				$val=$vals[$n];
-				if(empty($val)){continue;}
-				if(isset($child_meta['@type'])){
-					foreach($val as $i=>$v){
-						$val[$i]['@type']=$child_meta['@type'];
-					}
-				}
-				$data[$n]=empty($child_meta['multiple'])?reset($val):array_values($val);
-			}
+			],self::extract_data($meta->value[0],(array)$meta->conf['meta']));
 			printf('<script type="application/ld+json">%s</script>',json_encode($data,\JSON_UNESCAPED_UNICODE));
 		});
 		return '';
+	}
+	protected static function extract_data($vals,$confs){
+		$data=[];
+		foreach($confs as $name=>$conf){
+			$val=$vals[$name];
+			if(empty($val)){continue;}
+			if(isset($conf['meta'])){
+				foreach($val as $i=>$v){
+					$val[$i]=self::extract_data($v,$conf['meta']);
+				}
+			}
+			if(isset($conf['@type'])){
+				foreach($val as $i=>$v){
+					$val[$i]['@type']=$conf['@type'];
+				}
+			}
+			$data[$name]=empty($conf['multiple'])?reset($val):array_values($val);
+		}
+		return $data;
 	}
 }
 ?>
