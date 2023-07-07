@@ -13,6 +13,9 @@ class cpmd{
 			$html=preg_replace_callback('|<h(\d)>([^$]*?)</h\1>|',function($matches){
 				return CP::get_block_code('heading',['level'=>$matches[1],'content'=>trim($matches[2])]);
 			},$html);
+			$html=preg_replace_callback('|<p>\s*<img src="(.+?)" alt="(.+?)"\s*/>\s*</p>|',function($matches){
+				return CP::get_block_code('image',['src'=>$matches[1],'alt'=>$matches[2]]);
+			},$html);
 			$html=preg_replace_callback('|<p>([^$]*?)</p>|',function($matches){
 				if(empty($matches[1])){return '';}
 				return CP::get_block_code('paragraph',['content'=>trim($matches[1])]);
