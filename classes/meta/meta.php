@@ -110,7 +110,7 @@ abstract class meta{
 				if(!$class_name::$is_bulk_input){$loop=array_slice($loop,0,1);}
 			}
 			elseif($meta->conf['multiple']>1){
-				$loop=array_pad(array_slice($loop,0,$meta->conf['multiple']),$meta->conf['multiple'],null);
+				$loop=array_pad(array_slice($loop??[],0,$meta->conf['multiple']),$meta->conf['multiple'],null);
 			}
 		}
 		
