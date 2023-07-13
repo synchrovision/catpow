@@ -25,7 +25,7 @@ wp.blocks.registerBlockType('catpow/section',{
 		const {useMemo,useState}=wp.element;
 		const {
 			SectionTag,HeadingTag,
-			color,id,classes,prefix,title,lead,
+			color,anchor,classes,prefix,title,lead,
 			headerImageMime,headerImageSrc,headerImageSrcset,headerImageAlt,headerImageCode,
 			headerBackgroundImageCode,
 			imageMime,imageSrc,imageSrcset,imageAlt,imageCode,
@@ -79,7 +79,7 @@ wp.blocks.registerBlockType('catpow/section',{
 							{name:'inverseText',label:__('抜き色文字','catpow'),values:'inverseText',sub:[
 								{label:__('ヘッダ背景色','catpow'),values:'hasHeaderBackgroundColor',sub:[
 									{label:__('パターン画像','catpow'),values:'hasHeaderPatternImage',sub:[
-										{input:'pattern',css:'headerPatternImageCss',sel:'#'+id+' > .contents > .header'},
+										{input:'pattern',css:'headerPatternImageCss',sel:({attr})=>'#'+attr.anchor+' > .contents > .header'},
 									]}
 								]}
 							]},
@@ -142,13 +142,13 @@ wp.blocks.registerBlockType('catpow/section',{
 								{input:'image',label:__('アイコン','catpow'),keys:imageKeys.navIcon,size:'thumbnail'}
 							]},
 							{name:'patternImage',label:__('パターン画像','catpow'),values:'hasPatternImage',sub:[
-								{input:'pattern',css:'patternImageCss',sel:({attr})=>`#${attr.id}`,color},
+								{input:'pattern',css:'patternImageCss',sel:({attr})=>`#${attr.anchor}`,color},
 							]},
 							{name:'frameImage',label:__('フレーム画像','catpow'),values:'hasFrameImage',sub:[
-								{input:'frame',css:'frameImageCss',sel:({attr})=>`#${attr.id}`,color},
+								{input:'frame',css:'frameImageCss',sel:({attr})=>`#${attr.anchor}`,color},
 							]},
 							{name:'borderImage',label:__('ボーダー画像','catpow'),values:'hasBorderImage',sub:[
-								{input:'border',css:'borderImageCss',sel:({attr})=>`#${attr.id} > .contents`,color},
+								{input:'border',css:'borderImageCss',sel:({attr})=>`#${attr.anchor} > .contents`,color},
 							]},
 							{name:'decoration',label:__('デコレーション','catpow'),values:'hasDecoration'},
 							{
@@ -191,7 +191,7 @@ wp.blocks.registerBlockType('catpow/section',{
 								{input:'image',label:__('アイコン','catpow'),keys:imageKeys.navIcon,size:'thumbnail'}
 							]},
 							{name:'borderImage',label:__('ボーダー画像','catpow'),values:'hasBorderImage',sub:[
-								{input:'border',css:'borderImageCss',sel:({attr})=>`#${attr.id} > .contents`,color},
+								{input:'border',css:'borderImageCss',sel:({attr})=>`#${attr.anchor} > .contents`,color},
 							]},
 							{name:'decoration',label:__('デコレーション','catpow'),values:'hasDecoration'},
 							{
@@ -233,7 +233,7 @@ wp.blocks.registerBlockType('catpow/section',{
 				<BlockControls>
 					<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
 				</BlockControls>
-				<SectionTag id={id} className={classes} ref={setMainBlock}>
+				<SectionTag id={anchor} className={classes} ref={setMainBlock}>
 					{states.hasImage && 
 						<div className="image">
 							{(states.isTemplate && imageCode)?(
@@ -355,8 +355,8 @@ wp.blocks.registerBlockType('catpow/section',{
 						<PanelBody title="ID" icon="admin-links" initialOpen={false}>
 							<TextControl
 								label='ID'
-								onChange={(id)=>{setAttributes({id:id});}}
-								value={id}
+								onChange={(anchor)=>{setAttributes({anchor});}}
+								value={anchor}
 							/>
 						</PanelBody>
 						<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
@@ -375,7 +375,7 @@ wp.blocks.registerBlockType('catpow/section',{
 		const {InnerBlocks,RichText}=wp.blockEditor;
 		const {
 			SectionTag,HeadingTag,
-			id,navIcon,classes,prefix,title,lead,
+			anchor,navIcon,classes,prefix,title,lead,
 			headerImageSrc,headerImageSrcset,headerImageAlt,headerImageCode,
 			headerBackgroundImageCode,
 			imageSrc,imageSrcset,imageAlt,imageCode,
@@ -390,7 +390,7 @@ wp.blocks.registerBlockType('catpow/section',{
 		const {devices,imageKeys,imageSizes}=CP.config.section;
 
 		return (
-			<SectionTag id={id} className={classes} data-icon={navIcon}>
+			<SectionTag id={anchor} className={classes} data-icon={navIcon}>
 				{states.hasImage && 
 					<div className="image">
 						{(states.isTemplate && imageCode)?(

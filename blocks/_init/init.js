@@ -1002,11 +1002,12 @@
     /*id reflection*/
     manageStyleData: (props, csss) => {
       const { attributes, className, setAttributes } = props;
-      const { id, prevId, styleDatas } = attributes;
+      const { anchor, prevAnchor, styleDatas } = attributes;
       const { useEffect } = wp.element;
+      console.log(attributes);
       useEffect(() => {
-        if (!id) {
-          setAttributes({ id: "s" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
+        if (!anchor) {
+          setAttributes({ anchor: "s" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
         }
         if (void 0 === styleDatas) {
           const styleDatas2 = {};
@@ -1017,23 +1018,23 @@
         }
       }, []);
       useEffect(() => {
-        if (id && id.length > 2) {
-          if (document.querySelectorAll("#" + id).length > 1) {
-            setAttributes({ id: "s" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
+        if (anchor && anchor.length > 2) {
+          if (document.querySelectorAll("#" + anchor).length > 1) {
+            setAttributes({ anchor: "s" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
           }
           const atts = {};
-          atts.prevId = id;
+          atts.prevAnchor = anchor;
           atts.styleDatas = {};
           csss.forEach((key) => {
             if (!attributes[key]) {
               return;
             }
-            atts[key] = attributes[key].replace("#" + prevId, "#" + id);
+            atts[key] = attributes[key].replace("#" + prevAnchor, "#" + anchor);
             atts.styleDatas[key] = CP.parseStyleCodeWithMediaQuery(atts[key]);
           });
           setAttributes(atts);
         }
-      }, [id]);
+      }, [anchor]);
     }
   };
   CP.example = {

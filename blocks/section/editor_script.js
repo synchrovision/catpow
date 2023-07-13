@@ -28,7 +28,7 @@
         SectionTag,
         HeadingTag,
         color,
-        id,
+        anchor,
         classes,
         prefix,
         title,
@@ -99,7 +99,7 @@
                 { name: "inverseText", label: __("\u629C\u304D\u8272\u6587\u5B57", "catpow"), values: "inverseText", sub: [
                   { label: __("\u30D8\u30C3\u30C0\u80CC\u666F\u8272", "catpow"), values: "hasHeaderBackgroundColor", sub: [
                     { label: __("\u30D1\u30BF\u30FC\u30F3\u753B\u50CF", "catpow"), values: "hasHeaderPatternImage", sub: [
-                      { input: "pattern", css: "headerPatternImageCss", sel: "#" + id + " > .contents > .header" }
+                      { input: "pattern", css: "headerPatternImageCss", sel: ({ attr }) => "#" + attr.anchor + " > .contents > .header" }
                     ] }
                   ] }
                 ] },
@@ -164,13 +164,13 @@
                   { input: "image", label: __("\u30A2\u30A4\u30B3\u30F3", "catpow"), keys: imageKeys2.navIcon, size: "thumbnail" }
                 ] },
                 { name: "patternImage", label: __("\u30D1\u30BF\u30FC\u30F3\u753B\u50CF", "catpow"), values: "hasPatternImage", sub: [
-                  { input: "pattern", css: "patternImageCss", sel: ({ attr }) => `#${attr.id}`, color }
+                  { input: "pattern", css: "patternImageCss", sel: ({ attr }) => `#${attr.anchor}`, color }
                 ] },
                 { name: "frameImage", label: __("\u30D5\u30EC\u30FC\u30E0\u753B\u50CF", "catpow"), values: "hasFrameImage", sub: [
-                  { input: "frame", css: "frameImageCss", sel: ({ attr }) => `#${attr.id}`, color }
+                  { input: "frame", css: "frameImageCss", sel: ({ attr }) => `#${attr.anchor}`, color }
                 ] },
                 { name: "borderImage", label: __("\u30DC\u30FC\u30C0\u30FC\u753B\u50CF", "catpow"), values: "hasBorderImage", sub: [
-                  { input: "border", css: "borderImageCss", sel: ({ attr }) => `#${attr.id} > .contents`, color }
+                  { input: "border", css: "borderImageCss", sel: ({ attr }) => `#${attr.anchor} > .contents`, color }
                 ] },
                 { name: "decoration", label: __("\u30C7\u30B3\u30EC\u30FC\u30B7\u30E7\u30F3", "catpow"), values: "hasDecoration" },
                 {
@@ -213,7 +213,7 @@
                   { input: "image", label: __("\u30A2\u30A4\u30B3\u30F3", "catpow"), keys: imageKeys2.navIcon, size: "thumbnail" }
                 ] },
                 { name: "borderImage", label: __("\u30DC\u30FC\u30C0\u30FC\u753B\u50CF", "catpow"), values: "hasBorderImage", sub: [
-                  { input: "border", css: "borderImageCss", sel: ({ attr }) => `#${attr.id} > .contents`, color }
+                  { input: "border", css: "borderImageCss", sel: ({ attr }) => `#${attr.anchor} > .contents`, color }
                 ] },
                 { name: "decoration", label: __("\u30C7\u30B3\u30EC\u30FC\u30B7\u30E7\u30F3", "catpow"), values: "hasDecoration" },
                 {
@@ -247,7 +247,7 @@
         return selectiveClasses2;
       }, []);
       var level = CP.getNumberClass({ attr: attributes }, "level");
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })), /* @__PURE__ */ wp.element.createElement(SectionTag, { id, className: classes, ref: setMainBlock }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && imageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: imageCode }) : /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })), /* @__PURE__ */ wp.element.createElement(SectionTag, { id: anchor, className: classes, ref: setMainBlock }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && imageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: imageCode }) : /* @__PURE__ */ wp.element.createElement(
         CP.SelectResponsiveImage,
         {
           attr: attributes,
@@ -307,10 +307,10 @@
         TextControl,
         {
           label: "ID",
-          onChange: (id2) => {
-            setAttributes({ id: id2 });
+          onChange: (anchor2) => {
+            setAttributes({ anchor: anchor2 });
           },
-          value: id
+          value: anchor
         }
       )), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextareaControl,
@@ -326,7 +326,7 @@
       const {
         SectionTag,
         HeadingTag,
-        id,
+        anchor,
         navIcon,
         classes,
         prefix,
@@ -353,7 +353,7 @@
       var level = CP.getNumberClass({ attr: attributes }, "level");
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys, imageSizes } = CP.config.section;
-      return /* @__PURE__ */ wp.element.createElement(SectionTag, { id, className: classes, "data-icon": navIcon }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && imageCode ? imageCode : /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(SectionTag, { id: anchor, className: classes, "data-icon": navIcon }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && imageCode ? imageCode : /* @__PURE__ */ wp.element.createElement(
         CP.ResponsiveImage,
         {
           attr: attributes,

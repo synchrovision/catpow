@@ -5,7 +5,6 @@ $filters=[
 ];
 $attributes=[
 	'color'=>['type'=>'string','default'=>"0"],
-	'id'=>['source'=>'attribute','selector'=>'.wp-block-catpow-section','attribute'=>'id'],
 	'classes'=>['source'=>'attribute','selector'=>'.wp-block-catpow-section','attribute'=>'class','default'=>'wp-block-catpow-section article level3 center catch'],
 	'navIcon'=>['source'=>'attribute','selector'=>'.wp-block-catpow-section','attribute'=>'data-icon'],
 

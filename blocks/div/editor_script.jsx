@@ -23,7 +23,7 @@ wp.blocks.registerBlockType('catpow/div',{
 		const {InnerBlocks,InspectorControls}=wp.blockEditor;
 		const {PanelBody,TextareaControl} = wp.components;
 		const {attributes,className,setAttributes,context}=props;
-		const {id,classes,color,patternImageCss,frameImageCss,borderImageCss}=attributes;
+		const {anchor,classes,color,patternImageCss,frameImageCss,borderImageCss}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.div;
@@ -64,15 +64,15 @@ wp.blocks.registerBlockType('catpow/div',{
 						{input:'picture',label:'背景画像',keys:imageKeys.backgroundImage,devices}
 					],
 					hasPatternImage:[
-						{input:'pattern',css:'patternImageCss',sel:({attr})=>'#'+attr.id,color},
+						{input:'pattern',css:'patternImageCss',sel:({attr})=>'#'+attr.anchor,color},
 					]
 				}},
 				{name:'borderImage',type:'buttons',label:'ボーダー画像',values:{noBorder:'なし',hasFrameImage:'フレーム',hasBorderImage:'ボーダー'},sub:{
 					hasFrameImage:[
-						{input:'frame',css:'frameImageCss',sel:({attr})=>'#'+attr.id,color}
+						{input:'frame',css:'frameImageCss',sel:({attr})=>'#'+attr.anchor,color}
 					],
 					hasBorderImage:[
-						{input:'border',css:'borderImageCss',sel:({attr})=>'#'+attr.id,color}
+						{input:'border',css:'borderImageCss',sel:({attr})=>'#'+attr.anchor,color}
 					]
 				}},
 				{name:'pad',type:'buttons',label:'余白','values':{noPad:'なし',thinPad:'極細',lightPad:'細',mediumPad:'中',boldPad:'太',heavyPad:'極太'}}
@@ -83,7 +83,7 @@ wp.blocks.registerBlockType('catpow/div',{
 
 		return (
 			<>
-				<div id={id} className={classes}>
+				<div id={anchor} className={classes}>
 					{states.hasIcon && 
 						<div className="icon">
 							<CP.SelectResponsiveImage
@@ -139,13 +139,13 @@ wp.blocks.registerBlockType('catpow/div',{
 
 	save({attributes,className,setAttributes}){
 		const {InnerBlocks}=wp.blockEditor;
-		const {id,classes='',color,patternImageCss,frameImageCss,borderImageCss}=attributes;
+		const {anchor,classes='',color,patternImageCss,frameImageCss,borderImageCss}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.div;
 		
 		return (
-			<div id={id} className={classes}>
+			<div id={anchor} className={classes}>
 				{states.hasIcon && 
 					<div className="icon">
 						<CP.ResponsiveImage
