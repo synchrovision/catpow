@@ -9,7 +9,7 @@
   z-index: 1;
 }
 .wp-block-catpow-pageheader-body-title {
-  padding: 5rem 1.25rem;
+  padding: 7.5rem 1.25rem;
   text-align: center;
   font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   font-size: 2rem;
@@ -40,13 +40,13 @@
   flex-basis: auto;
 }
 .wp-block-catpow-pageheader-body-breadcrumb-body-items-item-link {
-  display: block;
+  display: inline-block;
   padding: 0.5rem;
   font-size: 0.875rem;
   color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
   text-decoration: none;
 }
-.wp-block-catpow-pageheader-body-breadcrumb-body-items-item:not(:last-child) .wp-block-catpow-pageheader-body-breadcrumb-body-items-item-link::after {
+.wp-block-catpow-pageheader-body-breadcrumb-body-items-item:not(:last-child) .wp-block-catpow-pageheader-body-breadcrumb-body-items-item-link:last-child::after {
   content: "＞";
   display: inline-block;
   margin-left: 0.5em;
