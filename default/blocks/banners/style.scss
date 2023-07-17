@@ -1,0 +1,34 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-banners{
+	@include txt((l:n));
+	>.item{
+		@include bnd((bs:b));
+		>.link{
+			@include bnd((d:b));
+			img{
+				@include bnd((d:b,p:r,w:f,h:a));
+				@include trn((t:.5s,o:1,s:1));
+				&:hover{
+					@include bnd((z:10));
+				}
+			}
+		}
+	}
+	&.small,&.medium,&.large{
+		@include bnd((mg:0 a,w:fit 1000,pd:10));
+		@include flx((w:w,g:16));
+	}
+	&.small{
+		>.item{@include bnd((f:1 1 150));}
+	}
+	&.medium{
+		>.item{@include bnd((f:1 1 300));}
+	}
+	&.large{
+		>.item{@include bnd((f:1 1 600));}
+	}
+	&.full{
+		>.item{@include bnd((f:1 1 f));}
+	}
+}

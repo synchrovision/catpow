@@ -1,6 +1,7 @@
 ﻿CP.config.banners={
+	devices:['sp','tb'],
 	imageKeys:{
-		image:{src:"src",alt:"alt",code:'imageCode',items:"items"}
+		image:{src:"src",alt:"alt",code:'imageCode',items:"items",sources:"sources"}
 	},
 	linkKeys:{
 		link:{href:"linkUrl",items:"items"}
@@ -29,14 +30,14 @@ wp.blocks.registerBlockType('catpow/banners',{
 		const {useState,useMemo}=wp.element;
 		const {InnerBlocks,InspectorControls,RichText}=wp.blockEditor;
 		const {Icon,PanelBody,TextareaControl}=wp.components;
-		const {items=[],classes,loopCount,imageCode,doLoop,EditMode=false,AltMode=false}=attributes;
+		const {items=[],classes,loopCount,imageCode,doLoop,device,EditMode=false,AltMode=false}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
-		const {imageKeys,linkKeys}=CP.config.banners;
+		const {devices,imageKeys,linkKeys}=CP.config.banners;
 		
 		const selectiveClasses=useMemo(()=>{
 			var selectiveClasses=[
-				{label:'サイズ',type:'buttons',values:['small','medium','large']},
+				{label:'サイズ',type:'buttons',values:['small','medium','large','full']},
 				{label:'タイトル',values:'hasTitle'},
 				CP.selectiveClassesPreset.isTemplate
 			];
@@ -46,7 +47,7 @@ wp.blocks.registerBlockType('catpow/banners',{
 		const selectiveItemClasses=useMemo(()=>{
 			const {imageKeys}=CP.config.banners;
 			const selectiveItemClasses=[
-				{name:'image',input:'image',label:'画像',keys:imageKeys.image},
+				{name:'image',input:'picture',label:'画像',keys:imageKeys.image,devices},
 				{name:'alt',input:'text',label:'alt',key:'alt'},
 				{name:'target',input:'text',label:'target',key:'target'},
 				'event'
@@ -96,7 +97,8 @@ wp.blocks.registerBlockType('catpow/banners',{
 							set={setAttributes}
 							keys={imageKeys.image}
 							index={index}
-							size='medium-large'
+							devices={devices}
+							device={device==='pc'?null:device}
 							isTemplate={states.isTemplate}
 						/>
 					</CP.Link.Edit>
@@ -114,10 +116,8 @@ wp.blocks.registerBlockType('catpow/banners',{
 		
 		return (
 			<>
-				<CP.SelectModeToolbar
-					set={setAttributes}
-					attr={attributes}
-				/>
+				<CP.SelectModeToolbar set={setAttributes} attr={attributes}/>
+				<CP.SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices}/>
 				<InspectorControls>
 					<CP.SelectClassPanel
 						title='クラス'
@@ -201,7 +201,7 @@ wp.blocks.registerBlockType('catpow/banners',{
 		const {items=[],classes,loopParam,doLoop}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
-		const {imageKeys,linkKeys}=CP.config.banners;
+		const {devices,imageKeys,linkKeys}=CP.config.banners;
 		
 		return (
 			<>
@@ -223,6 +223,7 @@ wp.blocks.registerBlockType('catpow/banners',{
 											attr={attributes}
 											keys={imageKeys.image}
 											index={index}
+											devices={devices}
 											isTemplate={states.isTemplate}
 										/>
 									</CP.Link>

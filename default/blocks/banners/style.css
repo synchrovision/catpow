@@ -1,0 +1,61 @@
+.wp-block-catpow-banners {
+  list-style: none;
+}
+.wp-block-catpow-banners > .item {
+  box-sizing: border-box;
+}
+.wp-block-catpow-banners > .item > .link {
+  display: block;
+}
+.wp-block-catpow-banners > .item > .link img {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: auto;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  opacity: 1;
+  transform: -webkit- scale(1);
+  transform: scale(1);
+}
+.wp-block-catpow-banners > .item > .link img:hover {
+  z-index: 10;
+}
+.wp-block-catpow-banners.small, .wp-block-catpow-banners.medium, .wp-block-catpow-banners.large {
+  margin: 0rem auto;
+  max-width: 62.5rem;
+  width: fit-content;
+  padding: 0.625rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.wp-block-catpow-banners.small > .item {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 9.375rem;
+}
+.wp-block-catpow-banners.medium > .item {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 18.75rem;
+}
+.wp-block-catpow-banners.large > .item {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 37.5rem;
+}
+.wp-block-catpow-banners.full > .item {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 100%;
+}
+/*# sourceMappingURL=./style.css.map */

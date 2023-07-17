@@ -1,8 +1,9 @@
 (() => {
   // ../blocks/banners/editor_script.jsx
   CP.config.banners = {
+    devices: ["sp", "tb"],
     imageKeys: {
-      image: { src: "src", alt: "alt", code: "imageCode", items: "items" }
+      image: { src: "src", alt: "alt", code: "imageCode", items: "items", sources: "sources" }
     },
     linkKeys: {
       link: { href: "linkUrl", items: "items" }
@@ -30,12 +31,12 @@
       const { useState, useMemo } = wp.element;
       const { InnerBlocks, InspectorControls, RichText: RichText2 } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
-      const { items = [], classes: classes2, loopCount, imageCode, doLoop, EditMode = false, AltMode = false } = attributes;
+      const { items = [], classes: classes2, loopCount, imageCode, doLoop, device, EditMode = false, AltMode = false } = attributes;
       const states = CP.wordsToFlags(classes2);
-      const { imageKeys, linkKeys } = CP.config.banners;
+      const { devices, imageKeys, linkKeys } = CP.config.banners;
       const selectiveClasses = useMemo(() => {
         var selectiveClasses2 = [
-          { label: "\u30B5\u30A4\u30BA", type: "buttons", values: ["small", "medium", "large"] },
+          { label: "\u30B5\u30A4\u30BA", type: "buttons", values: ["small", "medium", "large", "full"] },
           { label: "\u30BF\u30A4\u30C8\u30EB", values: "hasTitle" },
           CP.selectiveClassesPreset.isTemplate
         ];
@@ -45,7 +46,7 @@
       const selectiveItemClasses = useMemo(() => {
         const { imageKeys: imageKeys2 } = CP.config.banners;
         const selectiveItemClasses2 = [
-          { name: "image", input: "image", label: "\u753B\u50CF", keys: imageKeys2.image },
+          { name: "image", input: "picture", label: "\u753B\u50CF", keys: imageKeys2.image, devices },
           { name: "alt", input: "text", label: "alt", key: "alt" },
           { name: "target", input: "text", label: "target", key: "target" },
           "event"
@@ -105,7 +106,8 @@
                   set: setAttributes,
                   keys: imageKeys.image,
                   index,
-                  size: "medium-large",
+                  devices,
+                  device: device === "pc" ? null : device,
                   isTemplate: states.isTemplate
                 }
               )
@@ -122,13 +124,7 @@
           rtn.push(rtn[rtn.length % len]);
         }
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectModeToolbar,
-        {
-          set: setAttributes,
-          attr: attributes
-        }
-      ), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
           title: "\u30AF\u30E9\u30B9",
@@ -190,7 +186,7 @@
       const { InnerBlocks, RichText: RichText2 } = wp.blockEditor;
       const { items = [], classes: classes2, loopParam, doLoop } = attributes;
       const states = CP.wordsToFlags(classes2);
-      const { imageKeys, linkKeys } = CP.config.banners;
+      const { devices, imageKeys, linkKeys } = CP.config.banners;
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, items.map((item, index) => {
         return /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText2.Content, { tagName: "h3", className: "title", value: item.title }), /* @__PURE__ */ wp.element.createElement(
           CP.Link,
@@ -207,6 +203,7 @@
               attr: attributes,
               keys: imageKeys.image,
               index,
+              devices,
               isTemplate: states.isTemplate
             }
           )

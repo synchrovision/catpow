@@ -1,4 +1,5 @@
 <?php
+use Catpow\util\BlockConfig;
 $attributes=[
 	"classes"=>["source"=>'attribute',"selector"=>'ul',"attribute"=>'class',"default"=>'wp-block-catpow-banners medium hasTitle'],
 	"items"=>[
@@ -10,6 +11,7 @@ $attributes=[
 		"query"=>[
 			"classes"=>["source"=>'attribute',"attribute"=>'class'],
 			"title"=>["source"=>'html',"selector"=>'h3'],
+			"sources"=>BlockConfig::getPictureSoucesAttributesForDevices(['sp','tb']),
 			"src"=>["source"=>'attribute',"selector"=>'[src]',"attribute"=>'src'],
 			"alt"=>["source"=>'attribute',"selector"=>'[src]',"attribute"=>'alt'],
 			"imageCode"=>["source"=>'text',"selector"=>'a'],
@@ -21,6 +23,7 @@ $attributes=[
 			return [
 				"classes"=>'item',
 				"title"=>['Title'],
+				"sources"=>BlockConfig::getPictureSoucesAttributesDefaultValueForDevices(['sp','tb']),
 				"src"=>cp::get_file_url('/images/dummy.jpg'),
 				"alt"=>'dummy',
 				"linkUrl"=>home_url(),
