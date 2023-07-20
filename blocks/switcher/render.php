@@ -43,8 +43,8 @@ switch($attr['factor']){
 		break;
 	case 'ab_test':
 		$key='cp_user_property_'.$attr['field'];
-		if(!isset($_COOKIE[$key])){
-			$values=explode("\n",trim($attr['values']));
+		$values=explode("\n",trim($attr['values']));
+		if(!isset($_COOKIE[$key]) || !in_array($_COOKIE[$key],$values)){
 			$user_property=$values[array_rand($values)];
 			setcookie($key,$user_property,strtotime('+ 1 year'));
 			$_COOKIE[$key]=$user_property;
