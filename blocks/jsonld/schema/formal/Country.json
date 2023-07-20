@@ -1,0 +1,9 @@
+{
+    "$schema": "../schema.json",
+    "name": "Country",
+    "url": "https://schema.org/Country",
+    "items": [
+        {"name": "name","input": "text"},
+        {"name": "address","@type": "PostalAddress"}
+    ]
+}

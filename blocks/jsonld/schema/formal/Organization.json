@@ -1,0 +1,10 @@
+{
+    "$schema": "../schema.json",
+    "name": "Organization",
+    "url": "https://schema.org/Organization",
+    "items": [
+        {"name": "name","input": "text"},
+        {"name": "sameAs","input": "text"},
+        {"name": "logo","input": "text"}
+    ]
+}

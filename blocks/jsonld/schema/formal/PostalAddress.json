@@ -1,0 +1,12 @@
+{
+    "$schema": "../schema.json",
+    "name": "PostalAddress",
+    "url": "https://schema.org/PostalAddress",
+    "items": [
+        {"name": "streetAddress","input": "text"},
+        {"name": "addressLocality","input": "text"},
+        {"name": "addressRegion","input": "text"},
+        {"name": "postalCode","input": "text"},
+        {"name": "addressCountry","input": "text"}
+    ]
+}

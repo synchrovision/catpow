@@ -1,0 +1,9 @@
+{
+    "$schema": "../schema.json",
+    "name": "PropertyValue",
+    "url": "https://schema.org/PropertyValue",
+    "items": [
+        {"name": "name","input":"text"},
+        {"name": "value","input": "text"}
+    ]
+}

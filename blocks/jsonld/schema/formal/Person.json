@@ -1,0 +1,9 @@
+{
+    "$schema": "../schema.json",
+    "name": "Person",
+    "url": "https://schema.org/Person",
+    "items": [
+        {"name": "name","input":"text"},
+        {"name": "url","input": "text"}
+    ]
+}
