@@ -217,7 +217,7 @@ Catpow.util={
 		return (
 			dateTimeObj.getFullYear()+'-'+ 
 			(dateTimeObj.getMonth()+1)+'-'+
-			dateTimeObj.getDate()+' '+
+			dateTimeObj.getDate()+'T'+
 			dateTimeObj.getHours()+':'+
 			dateTimeObj.getMinutes()+':'+
 			dateTimeObj.getSeconds()
