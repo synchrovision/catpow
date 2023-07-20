@@ -1,0 +1,33 @@
+{
+    "$schema": "./schema.json",
+    "name": "JobPosting",
+    "url": "https://developers.google.com/search/docs/appearance/structured-data/job-posting",
+    "items": [
+       {"name": "datePosted","input": "datetime","default": "+1 day","required":true},
+       {"name": "description","input": "textarea","required": true},
+       {"name": "hiringOrganization","@type": "Organization","required":true},
+       {"name": "jobLocation","@type": "Place","required":true},
+       {"name": "title","input": "text","required":true},
+       {"name": "applicantLocationRequirements","@type": ["AdministrativeArea","State","Country","City"]},
+       {"name": "baseSalary","@type": "MonetaryAmount"},
+       {"name": "directApply","input": "toggle"},
+       {"name": "employmentType","input": "checkbox","options": [
+        {"label": "フルタイム","value": "FULL_TIME"},
+        {"label": "パートタイム","value": "PART_TIME"},
+        {"label": "契約社員","value": "CONTRACTOR"},
+        {"label": "派遣社員","value": "TEMPORARY"},
+        {"label": "インターンシップ","value": "INTERN"},
+        {"label": "ボランティア","value": "VOLUNTEER"},
+        {"label": "日雇い","value": "PER_DIEM"},
+        {"label": "その他","value": "OTHER"}
+       ],"default": ["FULL_TIME","PART_TIME"]},
+       {"name": "identifier","@type": "PropertyValue"},
+       {"name": "jobLocationType","input": "checkbox","options": [
+        {"label": "リモートワーク","value": "TELECOMMUTE"}
+       ]},
+       {"name": "validThrough","input": "datetime","default": "+3 month"},
+       {"name": "educationRequirements","@type": "EducationalOccupationalCredential","multiple": true},
+       {"name": "experienceRequirements","@type": "OccupationalExperienceRequirements","multiple": true},
+       {"name": "experienceInPlaceOfEducation","input": "toggle"}
+    ]
+}
