@@ -1,0 +1,12 @@
+{
+    "$schema": "./schema.json",
+    "name": "Article",
+    "url": "https://developers.google.com/search/docs/appearance/structured-data/article",
+    "items": [
+        {"name": "author","@type": "Person","multiple": true},
+        {"name": "dateModified","input": "datetime"},
+        {"name": "datePublished","input": "datetime"},
+        {"name": "headline","input": "text"},
+        {"name": "image","input": "text","multiple": true}
+    ]
+}
