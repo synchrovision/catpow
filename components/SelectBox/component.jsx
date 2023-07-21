@@ -1,16 +1,22 @@
 ﻿Catpow.SelectBox=(props)=>{
-	const {label,value,options,onChange}=props;
+	const {useMemo}=wp.element;
+	const {label,value,onChange}=props;
+	const options=useMemo(()=>{
+		if(Array.isArray(props.options)){
+			return props.options.map((option)=>{
+				if(typeof option === 'object'){return option;}
+				return {label:option,value:option};
+			});
+		}
+		return Object.keys(props.options).map((label)=>{
+			return {label,value:props.options[label]};
+		});
+	},[props.options]);
 	
 	return (
 		<select className={"SelectBox"} value={value} onChange={(e)=>onChange(event.target.value)}>
-			{label && (
-				<option value={false}>{label}</option>
-			)}
-			{typeof options === 'object' && (Array.isArray(options)?(
-				options.map((val)=><option value={val} key={val}>{val}</option>)
-			):(
-				Object.keys(options).map((label)=><option value={options[label]} key={label}>{label}</option>)
-			))}
+			{label && <option value={false}>{label}</option>}
+			{options.map((option)=><option value={option.value} key={option.label}>{option.label}</option>)}
 		</select>
 	);
 }
