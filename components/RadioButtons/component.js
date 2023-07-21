@@ -16,11 +16,22 @@
         return { label, value: props.options[label] };
       });
     }, [props.options]);
-    return /* @__PURE__ */ React.createElement("div", { className: "RadioButtons" }, options.map((option) => {
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "RadioButtons" }, options.map((option) => {
       const selected = option.value === value;
-      return /* @__PURE__ */ React.createElement("div", { className: "RadioButton" + (selected ? " selected" : ""), onClick: (e) => {
-        onChange(option.value);
-      }, role: "checkbox", "aria-checked": selected }, /* @__PURE__ */ React.createElement("div", { className: "RadioButtonIcon" + (selected ? " selected" : "") }, " "), option.label);
+      return /* @__PURE__ */ wp.element.createElement(
+        "div",
+        {
+          className: "RadioButton" + (selected ? " selected" : ""),
+          onClick: (e) => {
+            onChange(option.value);
+          },
+          role: "checkbox",
+          "aria-checked": selected,
+          key: option.label
+        },
+        /* @__PURE__ */ wp.element.createElement("div", { className: "RadioButtonIcon" + (selected ? " selected" : "") }, " "),
+        option.label
+      );
     }));
   };
 })();
