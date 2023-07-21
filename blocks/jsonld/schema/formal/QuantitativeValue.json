@@ -1,0 +1,15 @@
+{
+    "$schema": "../schema.json",
+    "name": "QuantitativeValue",
+    "url": "https://schema.org/QuantitativeValue",
+    "items": [
+        {"name": "value","input": "number"},
+        {"name": "unitText","input": "select","options": [
+            {"label":"HOUR","value":"HOUR"},
+            {"label":"DAY","value":"DAY"},
+            {"label":"WEEK","value":"WEEK"},
+            {"label":"MONTH","value":"MONTH"},
+            {"label":"YEAR","value":"YEAR"}
+        ],"default": "HOUR"}
+    ]
+}
