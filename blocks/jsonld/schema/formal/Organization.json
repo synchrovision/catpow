@@ -1,10 +1,11 @@
 {
     "$schema": "../schema.json",
     "name": "Organization",
+    "label": "組織",
     "url": "https://schema.org/Organization",
     "items": [
-        {"name": "name","input": "text"},
-        {"name": "sameAs","input": "text"},
-        {"name": "logo","input": "text"}
+        {"name": "name","label": "組織名","input": "text"},
+        {"name": "sameAs","label": "組織情報URL","input": "text"},
+        {"name": "logo","label": "ロゴ画像URL","input": "text"}
     ]
 }

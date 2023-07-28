@@ -1,14 +1,9 @@
 {
     "$schema": "../schema.json",
     "name": "Place",
+    "label": "所在地",
     "url": "https://schema.org/Place",
     "items": [
-        {"name": "address","@type": "PostalAddress","items": [
-            {"name": "streetAddress","input": "text"},
-            {"name": "addressLocality","input": "text"},
-            {"name": "addressRegion","input": "text"},
-            {"name": "postalCode","input": "text"},
-            {"name": "addressCountry","input": "text"}
-        ]}
+        {"name": "address","label": "住所","@type": "PostalAddress"}
     ]
 }

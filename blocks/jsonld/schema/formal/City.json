@@ -1,9 +1,10 @@
 {
     "$schema": "../schema.json",
     "name": "City",
+    "label": "市区町村",
     "url": "https://schema.org/City",
     "items": [
-        {"name": "name","input": "text"},
+        {"name": "name","label": "名称","input": "text"},
         {"name": "address","@type": "PostalAddress"}
     ]
 }

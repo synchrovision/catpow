@@ -1,9 +1,10 @@
 {
     "$schema": "../schema.json",
     "name": "MonetaryAmount",
+    "label": "報酬",
     "url": "https://schema.org/MonetaryAmount",
     "items": [
-        {"name": "currency","input": "select","options": [
+        {"name": "currency","label":"通貨","input": "select","options": [
             {"label":"ADP","value":"ADP"},
             {"label":"AED","value":"AED"},
             {"label":"AFA","value":"AFA"},
@@ -307,6 +308,6 @@
             {"label":"ZWN","value":"ZWN"},
             {"label":"ZWR","value":"ZWR"}
         ],"default": "JPY"},
-        {"name": "value","@type": "QuantitativeValue"}
+        {"name": "value","label": "価格","@type": "QuantitativeValue"}
     ]
 }

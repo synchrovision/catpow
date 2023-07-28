@@ -1,8 +1,9 @@
 {
     "$schema": "../schema.json",
     "name": "OccupationalExperienceRequirements",
+    "label": "必要経験",
     "url": "https://schema.org/OccupationalExperienceRequirements",
     "items": [
-        {"name": "monthsOfExperience","input":"range","min": 1,"max": 120}
+        {"name": "monthsOfExperience","label": "経験月数","input":"range","min": 1,"max": 120}
     ]
 }
