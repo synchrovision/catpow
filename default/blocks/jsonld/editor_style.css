@@ -94,7 +94,7 @@
   color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
 }
 #editor .wp-block-catpow-jsonld-editor-items-item {
-  padding: 1rem;
+  padding: 0.5rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -115,7 +115,7 @@
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
-  flex-basis: 10rem;
+  flex-basis: 6rem;
 }
 #editor .wp-block-catpow-jsonld-editor-items-item-label-help {
   display: inline-block;
@@ -140,7 +140,7 @@
   -webkit-box-flex: 10;
   flex-grow: 10;
   flex-shrink: 10;
-  flex-basis: 20rem;
+  flex-basis: 6rem;
 }
 #editor .wp-block-catpow-jsonld-editor-items-item-inputs-group-item {
   position: relative;

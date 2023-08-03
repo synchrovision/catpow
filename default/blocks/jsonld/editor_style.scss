@@ -48,7 +48,7 @@
 			}
 			&-items{
 				&-item{
-					@include bnd((pd:16));
+					@include bnd((pd:8));
 					@include flx((w:w));
 					&:not(:last-child){
 						@include bdr((p:b,s:s,w:1,c:shd));
@@ -58,7 +58,7 @@
 						@include txt((p:18));
 					}
 					&-label{
-						@include bnd((f:1 1 160));
+						@include bnd((f:1 1 96));
 						&-help{
 							@include bnd((d:ib,w:1em,h:1em,pd:.25em,mgl:.5em));
 							@include bg((c:t 50));
@@ -73,7 +73,7 @@
 						}
 					}
 					&-inputs{
-						@include bnd((f:10 10 320));
+						@include bnd((f:10 10 96));
 						&-input{
 							&-object{
 							}

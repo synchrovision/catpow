@@ -12,7 +12,7 @@ wp.blocks.registerBlockType('catpow/jsonld',{
 		const {Icon}=wp.components;
 		const {InspectorControls}=wp.blockEditor;
 		const {types,formals,data={},EditMode}=attributes;
-		const {SelectBox,RadioButtons,CheckBoxes,Toggle,InputDateTime}=Catpow;
+		const {SelectBox,RadioButtons,CheckBoxes,Toggle,SelectMedia,InputDateTime}=Catpow;
 		const classes=useMemo(()=>Catpow.util.bem('wp-block-catpow-jsonld'),[]);
 		
 		const save=useCallback(()=>{
@@ -164,7 +164,7 @@ wp.blocks.registerBlockType('catpow/jsonld',{
 				case 'text':
 					return <input className={classes.text()} type='text' value={value} onChange={(e)=>{updateValue(e.target.value)}}/>
 				case 'textarea':
-					return <textarea className={classes.textarea()} onChange={(e)=>{updateValue(e.target.value)}}>{value}</textarea>
+					return <textarea className={classes.textarea()} onChange={(e)=>{updateValue(e.target.value)}} value={value}/>
 				case 'number':
 				case 'range':{
 					return (
@@ -186,8 +186,10 @@ wp.blocks.registerBlockType('catpow/jsonld',{
 					return <CheckBoxes options={conf.options} value={value} onChange={updateValue}/>;
 				case 'toggle':
 					return <Toggle options={conf.options} value={value} onChange={updateValue}/>;
+				case 'image':
+					return <SelectMedia src={value} onChange={(media)=>updateValue(media.url)}/>;
 				case 'datetime':
-					return <InputDateTime value={value} onChange={updateValue}/>;
+					return <InputDateTime value={value} onChange={updateValue} format={conf.format} placeholder={conf.placeholder}/>;
 				default:
 					console.error('undefined input type '+conf.input);
 					return <div>{conf.input}</div>
@@ -368,7 +370,9 @@ wp.blocks.registerBlockType('catpow/jsonld',{
 					}
 				};
 				const {types,formals}=res;
-				Object.keys(formals).forEach((key)=>formals[key].items.forEach(fillConf));
+				Object.keys(formals).forEach((key)=>{
+					formals[key].items.forEach(fillConf);
+				});
 				Object.keys(types).forEach((key)=>{
 					types[key].type='object';
 					types[key].items.forEach(fillConf);

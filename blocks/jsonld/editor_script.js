@@ -12,7 +12,7 @@
       const { Icon } = wp.components;
       const { InspectorControls } = wp.blockEditor;
       const { types, formals, data = {}, EditMode } = attributes;
-      const { SelectBox, RadioButtons, CheckBoxes, Toggle, InputDateTime } = Catpow;
+      const { SelectBox, RadioButtons, CheckBoxes, Toggle, SelectMedia, InputDateTime } = Catpow;
       const classes = useMemo(() => Catpow.util.bem("wp-block-catpow-jsonld"), []);
       const save = useCallback(() => {
         setAttributes({ data: { ...data } });
@@ -158,7 +158,7 @@
           case "textarea":
             return /* @__PURE__ */ wp.element.createElement("textarea", { className: classes2.textarea(), onChange: (e) => {
               updateValue(e.target.value);
-            } }, value);
+            }, value });
           case "number":
           case "range": {
             return /* @__PURE__ */ wp.element.createElement(
@@ -183,8 +183,10 @@
             return /* @__PURE__ */ wp.element.createElement(CheckBoxes, { options: conf.options, value, onChange: updateValue });
           case "toggle":
             return /* @__PURE__ */ wp.element.createElement(Toggle, { options: conf.options, value, onChange: updateValue });
+          case "image":
+            return /* @__PURE__ */ wp.element.createElement(SelectMedia, { src: value, onChange: (media) => updateValue(media.url) });
           case "datetime":
-            return /* @__PURE__ */ wp.element.createElement(InputDateTime, { value, onChange: updateValue });
+            return /* @__PURE__ */ wp.element.createElement(InputDateTime, { value, onChange: updateValue, format: conf.format, placeholder: conf.placeholder });
           default:
             console.error("undefined input type " + conf.input);
             return /* @__PURE__ */ wp.element.createElement("div", null, conf.input);
@@ -350,7 +352,9 @@
             }
           };
           const { types: types2, formals: formals2 } = res;
-          Object.keys(formals2).forEach((key) => formals2[key].items.forEach(fillConf));
+          Object.keys(formals2).forEach((key) => {
+            formals2[key].items.forEach(fillConf);
+          });
           Object.keys(types2).forEach((key) => {
             types2[key].type = "object";
             types2[key].items.forEach(fillConf);
