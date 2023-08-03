@@ -9,7 +9,7 @@
 				"label":{"type":"string"},
 				"@type":{"type":["string","array"],"items":{"type":"string"}},
 				"type":{"type":"string","enum":["boolean","number","text","array","object"]},
-				"input":{"type":"string","enum":["toggle","range","datetime","text","textarea","select","radio","checkbox"]},
+				"input":{"type":"string","enum":["toggle","number","range","datetime","text","textarea","select","radio","checkbox"]},
 				"items":{"type":"array","items":{"$ref":"#/definitions/item"}},
 				"default":{"type":["boolean","number","text","array","object"]},
 				"multiple":{"type":"boolean"},
@@ -28,15 +28,19 @@
 						{
 							"properties":{
 								"type":{"type":"string","enum":["number"]},
-								"input":{"type":"string","enum":["range"]},
+								"input":{"type":"string","enum":["range","number"]},
 								"min":{"type":"number"},
 								"max":{"type":"number"},
+								"step":{"type":"number"},
+								"unit"{"type":"string"},
 								"default":{"type":"number"}
 							}
 						},
 						{
 							"properties":{
 								"input":{"type":"string","enum":["datetime"]},
+								"format":{"type":"string"},
+								"placeholder":{"type":"string"},
 								"default":{"type":"string"}
 							}
 						},

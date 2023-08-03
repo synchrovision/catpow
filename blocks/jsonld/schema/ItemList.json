@@ -1,0 +1,9 @@
+{
+    "$schema": "./schema.json",
+    "name": "ItemList",
+    "label": "カルーセル",
+    "url": "https://developers.google.com/search/docs/appearance/structured-data/carousel",
+    "items": [
+       {"name": "itemListElement","label": "アイテム","@type": "ListItem","multiple": true}
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "$schema": "../schema.json",
+    "name": "Clip",
+    "label": "動画クリップ",
+    "url": "https://schema.org/Clip",
+    "items": [
+        {"name": "name","label": "名前"},
+        {"name": "startOffset","label": "終了時間","input": "number","unit":"秒"},
+        {"name": "endOffset","label": "終了時間","input": "number","unit":"秒"},
+        {"name": "url","label": "URL"}
+    ]
+}

@@ -4,11 +4,15 @@
     "label": "求人情報",
     "url": "https://developers.google.com/search/docs/appearance/structured-data/job-posting",
     "items": [
+       {"name": "title","label": "職務の名称","input": "text","required":true},
        {"name": "datePosted","label": "掲載開始日時","input": "datetime","default": "+1 day","required":true},
+       {"name": "validThrough","label": "有効期限","input": "datetime","default": "+3 month"},
        {"name": "description","label": "詳細説明","input": "textarea","required": true},
        {"name": "hiringOrganization","label": "雇用主組織名","@type": "Organization","required":true},
        {"name": "jobLocation","label": "勤務地","@type": "Place","required":true},
-       {"name": "title","label": "職務の名称","input": "text","required":true},
+       {"name": "jobLocationType","label": "勤務地タイプ","input": "checkbox","options": [
+        {"label": "リモートワーク","value": "TELECOMMUTE"}
+       ]},
        {"name": "applicantLocationRequirements","label": "リモート可能地域","@type": ["AdministrativeArea","State","Country","City"]},
        {"name": "baseSalary","label": "基本給","@type": "MonetaryAmount"},
        {"name": "directApply","label": "直接応募可能","input": "toggle"},
@@ -23,10 +27,6 @@
         {"label": "その他","value": "OTHER"}
        ],"default": ["FULL_TIME","PART_TIME"]},
        {"name": "identifier","label": "雇用主組織ID","@type": "PropertyValue"},
-       {"name": "jobLocationType","label": "勤務地タイプ","input": "checkbox","options": [
-        {"label": "リモートワーク","value": "TELECOMMUTE"}
-       ]},
-       {"name": "validThrough","label": "有効期限","input": "datetime","default": "+3 month"},
        {"name": "educationRequirements","label": "学歴要件","@type": "EducationalOccupationalCredential","multiple": true},
        {"name": "experienceRequirements","label": "経験要件","@type": "OccupationalExperienceRequirements","multiple": true},
        {"name": "experienceInPlaceOfEducation","label": "経験者は学歴不問","input": "toggle"}

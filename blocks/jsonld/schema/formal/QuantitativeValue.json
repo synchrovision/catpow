@@ -4,7 +4,7 @@
     "label": "時間単価",
     "url": "https://schema.org/QuantitativeValue",
     "items": [
-        {"name": "value","label": "価格","input": "number"},
+        {"name": "value","label": "価格","input": "number","max": 1e+8},
         {"name": "unitText","label": "単位時間","input": "select","options": [
             {"label":"時間","value":"HOUR"},
             {"label":"日","value":"DAY"},
