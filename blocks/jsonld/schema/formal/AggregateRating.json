@@ -1,0 +1,13 @@
+{
+    "$schema": "../schema.json",
+    "name": "AggregateRating",
+    "label": "総合評価",
+    "url": "https://schema.org/AggregateRating",
+    "items": [
+        {"name": "ratingValue","label": "スコア","input": "number"},
+        {"name": "worstRating","label": "最小値","input": "number","default":1},
+        {"name": "bestRating","label": "最大値","input": "number","default": 5},
+        {"name": "ratingCount","label": "評価数","input": "number"},
+        {"name": "reviewCount","label": "レビュー数","input": "number"}
+    ]
+}

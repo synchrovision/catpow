@@ -1,0 +1,11 @@
+{
+    "$schema": "../schema.json",
+    "name": "Review",
+    "label": "レビュー",
+    "url": "https://schema.org/Review",
+    "items": [
+        {"name": "author","label": "投稿者","@type": ["Person","Organization"],"required": true},
+        {"name": "reviewRating","label": "レート","@type": "Rating"},
+        {"name": "datePublished","label": "投稿日","input": "datetime"}
+    ]
+}

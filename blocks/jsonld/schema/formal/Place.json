@@ -1,0 +1,9 @@
+{
+    "$schema": "../schema.json",
+    "name": "Place",
+    "label": "所在地",
+    "url": "https://schema.org/Place",
+    "items": [
+        {"name": "address","label": "住所","@type": "PostalAddress"}
+    ]
+}

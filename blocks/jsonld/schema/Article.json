@@ -1,0 +1,13 @@
+{
+    "$schema": "./schema.json",
+    "name": "Article",
+    "label": "記事",
+    "url": "https://developers.google.com/search/docs/appearance/structured-data/article",
+    "items": [
+        {"name": "author","label": "作成者","@type": "Person","multiple": true},
+        {"name": "dateModified","label": "変更日","input": "datetime"},
+        {"name": "datePublished","label": "公開日","input": "datetime"},
+        {"name": "headline","label": "見出し","input": "text"},
+        {"name": "image","label": "イメージ","input": "text","multiple": true}
+    ]
+}

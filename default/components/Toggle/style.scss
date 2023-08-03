@@ -1,0 +1,28 @@
+@import 'admin_style_config.scss';
+
+
+.Toggle{
+	@include bnd((w:4em,h:2em,o:h));
+	@include bdr((r:1em));
+	@include bg((c:b));
+	@include shd((b:-2));
+	@include usr((c:p));
+	&-handler{
+		@include bnd((d:b,p:r,w:4em,h:2em));
+		@include bg((c:wp));
+		@include bdr((r:1em));
+		@include trn((t:.2s,x:-2em));
+		&::before{
+			content:'';
+			@include bnd((d:b,p:a,i:0,w:2em,h:2em,mg:a,mgr:0));
+			@include bdr((r:1em));
+			@include bg((c:b));
+			@include shd((bvi:1));
+		}
+	}
+	&.is-active &{
+		&-handler{
+			@include trn((x:0));
+		}
+	}
+}

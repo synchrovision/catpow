@@ -15,24 +15,27 @@
         onChange(Catpow.uploader.state().get("selection").first().toJSON());
       }).open();
     }, [onChange]);
+    const dummy = useMemo(() => {
+      return props.dummy || wpinfo.theme_url + "/images/dummy.jpg";
+    }, [props.dummy]);
     const type = useMemo(() => !mime ? "image" : mime.split("/")[0], [mime]);
     if (type === "audio") {
-      return /* @__PURE__ */ React.createElement(
+      return /* @__PURE__ */ wp.element.createElement(
         "audio",
         {
           className,
-          src: item[keys.src],
+          src,
           onClick,
           ...otherProps
         }
       );
     }
     if (type === "video") {
-      return /* @__PURE__ */ React.createElement(
+      return /* @__PURE__ */ wp.element.createElement(
         "video",
         {
           className,
-          src: item[keys.src],
+          src,
           onClick,
           autoplay: 1,
           loop: 1,
@@ -42,11 +45,11 @@
         }
       );
     }
-    return /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ wp.element.createElement(
       "img",
       {
         className,
-        src,
+        src: src || dummy,
         onClick,
         ...otherProps
       }

@@ -1,0 +1,10 @@
+{
+    "$schema": "../schema.json",
+    "name": "Country",
+    "label": "国",
+    "url": "https://schema.org/Country",
+    "items": [
+        {"name": "name","label": "名称","input": "text"},
+        {"name": "address","@type": "PostalAddress"}
+    ]
+}

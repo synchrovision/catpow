@@ -1,0 +1,10 @@
+{
+    "$schema": "../schema.json",
+    "name": "PropertyValue",
+    "label": "識別情報",
+    "url": "https://schema.org/PropertyValue",
+    "items": [
+        {"name": "name","label": "名称","input":"text"},
+        {"name": "value","label": "識別値","input": "text"}
+    ]
+}

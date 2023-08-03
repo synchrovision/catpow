@@ -1,0 +1,11 @@
+{
+    "$schema": "../schema.json",
+    "name": "Rating",
+    "label": "レート",
+    "url": "https://schema.org/Rating",
+    "items": [
+        {"name": "ratingValue","label": "スコア","input": "number"},
+        {"name": "worstRating","label": "最小値","input": "number","default":1},
+        {"name": "bestRating","label": "最大値","input": "number","default": 5}
+    ]
+}

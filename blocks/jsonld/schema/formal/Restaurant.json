@@ -1,0 +1,10 @@
+{
+    "$schema": "../schema.json",
+    "name": "Restaurant",
+    "label": "レストラン",
+    "url": "https://schema.org/Restaurant",
+    "items": [
+        {"name": "name","label": "名称"},
+        {"name": "url","label": "URL"}
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "$schema": "../schema.json",
+    "name": "Movie",
+    "label": "映画",
+    "url": "https://schema.org/Movie",
+    "items": [
+        {"name": "name","label": "名称","required": true},
+        {"name": "url","label": "URL"},
+        {"name": "image","label": "画像","input": "image","required": true},
+        {"name": "aggregateRating","label": "評価","@type": "AggregateRating"},
+        {"name": "dateCreated","label": "公開日","input":"datetime"},
+        {"name": "director","label": "監督","@type": "Person"},
+        {"name": "review","label": "レビュー","@type": "Review"}
+    ]
+}

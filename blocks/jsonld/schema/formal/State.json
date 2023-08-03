@@ -1,0 +1,9 @@
+{
+    "$schema": "../schema.json",
+    "name": "State",
+    "label": "州",
+    "url": "https://schema.org/State",
+    "items": [
+        {"name": "name","label": "名称"}
+    ]
+}

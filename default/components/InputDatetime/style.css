@@ -1,7 +1,7 @@
 .InputDateTime {
   padding: 0.625rem;
 }
-.InputDateTime.invalid .InputDateTime__date {
-  background-color: rgba(214, 91, 91, 0.2);
+.InputDateTime.is-invalid .InputDateTime-date {
+  background-color: hsla(1,var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 100),0.1);
 }
 /*# sourceMappingURL=./style.css.map */

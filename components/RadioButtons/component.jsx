@@ -19,7 +19,13 @@
 			{options.map((option)=>{
 				const selected=option.value===value;
 				return (
-					<div className={"RadioButton"+(selected?' selected':'')} onClick={(e)=>{onChange(option.value);}} role="checkbox" aria-checked={selected}>
+					<div
+						className={"RadioButton"+(selected?' selected':'')}
+						onClick={(e)=>{onChange(option.value);}}
+						role="checkbox"
+						aria-checked={selected}
+						key={option.label}
+					>
 						<div className={"RadioButtonIcon"+(selected?' selected':'')} > </div>
 						{option.label}
 					</div>
