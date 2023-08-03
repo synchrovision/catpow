@@ -15,13 +15,16 @@
 		}).open();
 	},[onChange]);
 	
+	const dummy=useMemo(()=>{
+		return props.dummy || wpinfo.theme_url+'/images/dummy.jpg';
+	},[props.dummy]);
 	const type=useMemo(()=>(!mime)?'image':(mime.split('/')[0]),[mime]);
 	
 	if(type==='audio'){
 		return (
 			<audio
 				className={className}
-				src={item[keys.src]}
+				src={src}
 				onClick={onClick}
 				{...otherProps}
 				></audio>
@@ -31,7 +34,7 @@
 		return (
 			<video
 				className={className}
-				src={item[keys.src]}
+				src={src}
 				onClick={onClick}
 				autoplay={1}
 				loop={1}
@@ -44,7 +47,7 @@
 	return (
 		<img
 			className={className}
-			src={src}
+			src={src || dummy}
 			onClick={onClick}
 			{...otherProps}
 		/>
