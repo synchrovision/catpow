@@ -1,0 +1,141 @@
+@import 'admin_style_config.scss';
+
+#editor{
+	.wp-block-catpow-jsonld{
+		&-label{
+			@include flx((w:w,j:c,a:c));
+			@include bnd((mg:20,pd:20));
+			@include bdr((s:s,w:1));
+			@include txt((p:20,h:1em,c:t));
+			&-icon{
+				@include bnd((d:ib,mgr:.5em));
+				>svg{
+					@include bnd((w:1em,h:a));
+					@include svg((f:t,w:1));
+				}
+			}
+			&-text{
+				@include bnd((f:0 0 a));
+			}
+		}
+		&-editor{
+			@include bnd((d:b,p:r,mg:20));
+			@include bdr((r:8));
+			@include shd((b:4));
+			&-type{
+				@include bnd((pd:8));
+				@include flx((a:c,j:b));
+				@include bg((c:s));
+				@include bdr((p:b,s:s,w:1,c:shd,r:8 8 0 0));
+				&-icon{
+					@include bnd((f:0 0 32));
+				}
+				&-select{
+					@include bnd((ap:n,d:b,p:r,mg:10,pd:.5em,pdr:1.5em));
+					@include txt((p:20,h:1em));
+				}
+				&-help{
+					@include bnd((f:0 0 1em,h:1em,pd:.5em));
+					@include bg((c:wp));
+					@include bdr((r:50%));
+					@include txt((p:12,h:1em,s:n));
+					@include shd((b:1));
+					&::before{
+						content:'？';
+						@include txt((a:c,c:i));
+					}
+				}
+			}
+			&-items{
+				&-item{
+					@include bnd((pd:16));
+					@include flx((w:w));
+					&:not(:last-child){
+						@include bdr((p:b,s:s,w:1,c:shd));
+					}
+					&-selecttype{
+						@include bnd((mgb:12));
+						@include txt((p:18));
+					}
+					&-label{
+						@include bnd((f:1 1 160));
+						&-help{
+							@include bnd((d:ib,w:1em,h:1em,pd:.25em,mgl:.5em));
+							@include bg((c:t 50));
+							@include bdr((r:50%));
+							@include txt((p:10,h:1em,s:n,v:.5em));
+							@include shd((b:1));
+							&::before{
+								content:'？';
+								@include txt((a:c,c:i));
+							}
+							
+						}
+					}
+					&-inputs{
+						@include bnd((f:10 10 320));
+						&-input{
+							&-object{
+							}
+							&-text{
+							}
+							&-textarea{
+							}
+						}
+						&-group{
+							&-item{
+								@include bnd((p:r,pd:8));
+								@include bdr((r:8));
+								@include shd((b:1));
+								&-body{
+									
+								}
+								&-control{
+									@include bnd((d:b,p:a,t:0,r:0,pd:8));
+									&-increase,&-decrease{
+										@include bnd((d:ib,w:1em,h:1em,pd:.25em,mgl:.5em));
+										@include bg((c:t 50));
+										@include bdr((r:50%));
+										@include txt((p:10,h:1em,s:n,v:.5em));
+										@include shd((b:1));
+										&::before{
+											@include txt((a:c,c:i));
+										}
+									}
+									&-increase{
+										&::before{
+											content:'＋'
+										}
+									}
+									&-decrease{
+										&::before{
+											content:'ー'
+										}
+									}
+								}
+							}
+						}
+					}
+					&.is-level-0 &{
+						&-label{
+						}
+						&-inputs{
+						}
+					}
+					&.is-level-1 &{
+						&-label{
+						}
+						&-inputs{
+						}
+					}
+					&.is-level-2 &{
+						&-label{
+						}
+						&-inputs{
+						}
+					}
+				}
+			}
+		}
+	}
+}
