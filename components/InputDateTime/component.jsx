@@ -1,36 +1,46 @@
 ﻿Catpow.InputDateTime=(props)=>{
-	const {value,onChange}=props;
+	const {value,onChange,delay=2000,format='Y-m-d',placeholder='0000-00-00'}=props;
 	const {useState,useMemo,useCallback,useEffect}=wp.element;
+	const {getDateTimeString}=Catpow.datetime;
+	const {bem}=Catpow.util;
+	const classes=bem('InputDateTime');
+	
 	const [dateStr,setDateStr]=useState('');
 	const [isValid,setIsValid]=useState(true);
 	
-	const update=useCallback((dateStr)=>{
-		const dateData=parseDateString(dateStr);
-		if(dateData){
-			const date=new Date(dateData.groups.year,parseInt(dateData.groups.month)-1,dateData.groups.date);
-			if(dateData.groups.hours){
-				date.setHours(dateData.groups.hours);
-				date.setMinutes(dateData.groups.minutes);
-			}
-			onChange(date.getTime());
+	useEffect(()=>{
+		const date=new Date(dateStr);
+		if(!isNaN(date)){
 			setIsValid(true);
+			setDateStr(getDateTimeString(date,format));
 		}
-		else{setIsValid(false);}
+		else{
+			setIsValid(false);
+		}
 	},[]);
-	const getDateString=useCallback((date)=>[date.getFullYear(),date.getMonth()+1,date.getDate()].join('-')+' '+date.getHours()+':'+('00'+date.getMinutes()).slice(-2),[]);
-	const parseDateString=useCallback((dateStr)=>dateStr.match(/^(?<year>\d{4})\-(?<month>\d{1,2})\-(?<date>\d{1,2})(?: (?<hours>\d{1,2}):(?<minutes>\d{2}))?$/),[]);
-	useEffect(()=>{setDateStr(getDateString(new Date(value)));},[value]);
+	useEffect(()=>{
+		const timer=setTimeout(()=>{
+			const date=new Date(dateStr);
+			if(!isNaN(date)){
+				setIsValid(true);
+				setDateStr(getDateTimeString(date,format));
+				onChange(date.getTime());
+			}
+			else{
+				setIsValid(false);
+			}
+		},delay);
+		return ()=>clearTimeout(timer);
+	},[dateStr,onChange,delay,format]);
 	
 	return (
-		<div className={"InputDateTime"+(isValid?' valid':' invalid')}>
+		<div className={classes(dateStr?(isValid?'is-valid':'is-invalid'):'is-empty')}>
 			<input
 				type="text"
-				className="InputDateTime__date"
-				placeholder={'0000-00-00 00:00'}
+				className={classes.date()}
+				placeholder={placeholder}
 				value={dateStr}
 				onChange={(e)=>{setDateStr(e.target.value);}}
-				onBlur={(e)=>{update(dateStr);}}
-				onKeyPress={(e)=>{if(e.key=='Enter'){e.preventDefault();update(dateStr);}}}
 			/>
 		</div>
 	);
