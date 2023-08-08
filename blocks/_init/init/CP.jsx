@@ -783,8 +783,6 @@
 		const {anchor,prevAnchor,styleDatas}=attributes;
 		const {useEffect}=wp.element;
 		
-		console.log(attributes);
-		
 		useEffect(()=>{
 			if(!anchor){setAttributes({anchor:'s'+(new Date().getTime().toString(16))})}
 			if(undefined === styleDatas){
