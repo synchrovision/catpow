@@ -726,6 +726,7 @@
 	generateToneClass:(data)=>'tone-'+(data.s?'s':'l')+data.value,
 	toneClassPattern:/^tone\-((s|l)(\-?\d+))$/,
 	colorClassProxy:(state)=>{
+		if(!state){state={};}
 		if(typeof state === 'string' || Array.isArray(state)){
 			state=CP.wordsToFlags(state);
 		}
