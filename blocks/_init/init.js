@@ -947,6 +947,9 @@
     generateToneClass: (data) => "tone-" + (data.s ? "s" : "l") + data.value,
     toneClassPattern: /^tone\-((s|l)(\-?\d+))$/,
     colorClassProxy: (state) => {
+      if (!state) {
+        state = {};
+      }
       if (typeof state === "string" || Array.isArray(state)) {
         state = CP.wordsToFlags(state);
       }
@@ -1004,7 +1007,6 @@
       const { attributes, className, setAttributes } = props;
       const { anchor, prevAnchor, styleDatas } = attributes;
       const { useEffect } = wp.element;
-      console.log(attributes);
       useEffect(() => {
         if (!anchor) {
           setAttributes({ anchor: "s" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
@@ -1146,7 +1148,7 @@
       type: "class"
     },
     edit(props) {
-      const { isActive, value, onChange, activeAttributes } = props;
+      const { isActive, value, onChange, activeAttributes, contentRef } = props;
       const { BlockControls, RichTextToolbarButton } = wp.blockEditor;
       const { Popover, Card, CardBody, ToolbarGroup } = wp.components;
       const { useMemo, useCallback } = wp.element;
@@ -1159,7 +1161,7 @@
         onChange(applyFormat(value, { type: "catpow/title", attributes: Object.assign(activeAttributes, attr) }));
       }, [value, activeAttributes]);
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("g", null, /* @__PURE__ */ wp.element.createElement("path", { d: "M6.9,15.9V2.6h2.7v5.2h5.3V2.6h2.7v13.3h-2.7v-5.8H9.6v5.8H6.9z" })), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "1", width: "4", height: "18" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "5", y: "18", width: "14", height: "1" }));
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: el, position: "bottom left", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom left", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectButtons,
         {
           options: [
@@ -1196,7 +1198,7 @@
       color: "class"
     },
     edit(props) {
-      const { isActive, value, onChange, activeAttributes } = props;
+      const { isActive, value, onChange, activeAttributes, contentRef } = props;
       const { Popover, Card, CardBody, ToolbarGroup } = wp.components;
       const { BlockControls, RichTextShortcut, RichTextToolbarButton } = wp.blockEditor;
       const { useMemo, useCallback } = wp.element;
@@ -1209,7 +1211,7 @@
         onChange(applyFormat(value, { type: "catpow/mark", attributes: Object.assign(activeAttributes, attr) }));
       }, [value, activeAttributes]);
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("polygon", { points: "7.9,10.8 12.1,10.8 10,5.3 	" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M0,2v16h20V2H0z M13.7,15.3L12.5,12h-5l-1.2,3.4H4.7L9,4h1.9l4.3,11.3H13.7z" }));
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: el, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: el.parentElement }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: contentRef.current }, /* @__PURE__ */ wp.element.createElement(
         CP.SelectThemeColor,
         {
           onChange: (proxy) => setAttributes({ color: proxy.classes }),
@@ -1241,7 +1243,7 @@
       color: "class"
     },
     edit(props) {
-      const { isActive, value, onChange, activeAttributes } = props;
+      const { isActive, value, onChange, activeAttributes, contentRef } = props;
       const { Popover, Card, CardBody, ToolbarGroup } = wp.components;
       const { useMemo, useCallback } = wp.element;
       const { BlockControls, RichTextToolbarButton } = wp.blockEditor;
@@ -1254,7 +1256,7 @@
         onChange(applyFormat(value, { type: "catpow/large", attributes: Object.assign(activeAttributes, attr) }));
       }, [value, activeAttributes]);
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("path", { d: "M4.8,0.5h5c1.6,0,2.8,0.1,3.6,0.4c0.8,0.2,1.5,0.7,2,1.5c0.5,0.8,0.8,2,0.8,3.6c0,1.1-0.2,1.9-0.5,2.4\n		c-0.4,0.4-1.1,0.8-2.1,1c1.2,0.3,1.9,0.7,2.4,1.3c0.4,0.6,0.6,1.5,0.6,2.8v1.8c0,1.3-0.1,2.3-0.4,2.9c-0.3,0.6-0.8,1.1-1.4,1.3\n		c-0.7,0.2-2,0.3-4,0.3H4.8V0.5z M9.8,3.8v4.3c0.2,0,0.4,0,0.5,0c0.5,0,0.8-0.1,0.9-0.4c0.1-0.2,0.2-0.9,0.2-2.1\n		c0-0.6-0.1-1-0.2-1.3s-0.3-0.4-0.4-0.5C10.7,3.8,10.4,3.8,9.8,3.8z M9.8,11.1v5.4c0.7,0,1.2-0.1,1.4-0.3c0.2-0.2,0.3-0.7,0.3-1.5\n		v-1.8c0-0.8-0.1-1.3-0.3-1.5C11.1,11.2,10.6,11.1,9.8,11.1z" }));
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: el, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: el.parentElement }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: contentRef.current }, /* @__PURE__ */ wp.element.createElement(
         CP.SelectThemeColor,
         {
           onChange: (proxy) => setAttributes({ color: proxy.classes }),
@@ -1287,7 +1289,7 @@
       color: "class"
     },
     edit(props) {
-      const { isActive, value, onChange, onFocus, activeAttributes, activeObject } = props;
+      const { isActive, value, onChange, onFocus, activeAttributes, activeObject, contentRef } = props;
       const { Popover, BaseControle, TextControl, Card, CardBody, ToolbarGroup } = wp.components;
       const { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
       const { useState, useMemo, useCallback } = wp.element;
@@ -1299,14 +1301,14 @@
       const setAttributes = useCallback((attr) => {
         onChange(applyFormat(value, { type: "catpow/tag", attributes: Object.assign(activeAttributes, attr) }));
       }, [value, activeAttributes]);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: el, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, null, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, null, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
           label: "URL",
           value: activeAttributes["url"],
           onChange: (url) => setAttributes({ url })
         }
-      ))), /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: el.parentElement }, /* @__PURE__ */ wp.element.createElement(
+      ))), /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: contentRef.current }, /* @__PURE__ */ wp.element.createElement(
         CP.SelectThemeColor,
         {
           onChange: (proxy) => setAttributes({ color: proxy.classes }),
