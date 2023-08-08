@@ -101,7 +101,7 @@ wp.richText.registerFormatType('catpow/title',{
 		type:'class'
 	},
 	edit(props){
-		const {isActive,value,onChange,activeAttributes}=props;
+		const {isActive,value,onChange,activeAttributes,contentRef}=props;
 		const {BlockControls,RichTextToolbarButton}=wp.blockEditor;
 		const {Popover,Card,CardBody,ToolbarGroup}=wp.components;
 		const {useMemo,useCallback}=wp.element;
@@ -128,7 +128,7 @@ wp.richText.registerFormatType('catpow/title',{
 		return (
 			<>
 				{isActive && (
-					<Popover anchor={el} position='bottom left' focusOnMount={false}>
+					<Popover anchor={contentRef.current} position='bottom left' focusOnMount={false}>
 						<Card size="small">
 							<CardBody>
 								<CP.SelectButtons
@@ -169,7 +169,7 @@ wp.richText.registerFormatType('catpow/mark',{
 		color:'class'
 	},
 	edit(props){
-		const {isActive,value,onChange,activeAttributes}=props;
+		const {isActive,value,onChange,activeAttributes,contentRef}=props;
 		const {Popover,Card,CardBody,ToolbarGroup}=wp.components;
 		const {BlockControls,RichTextShortcut,RichTextToolbarButton}=wp.blockEditor;
 		const {useMemo,useCallback}=wp.element;
@@ -193,10 +193,10 @@ wp.richText.registerFormatType('catpow/mark',{
 		return (
 			<>
 				{isActive && (
-					<Popover anchor={el} position='bottom center' focusOnMount={false}>
+					<Popover anchor={contentRef.current} position='bottom center' focusOnMount={false}>
 						<Card size="small">
 							<CardBody>
-								<CP.ColorVarTracer target={el.parentElement}>
+								<CP.ColorVarTracer target={contentRef.current}>
 									<CP.SelectThemeColor
 										onChange={(proxy)=>setAttributes({color:proxy.classes})}
 										selected={activeAttributes['color']}
@@ -231,7 +231,7 @@ wp.richText.registerFormatType('catpow/large',{
 		color:'class'
 	},
 	edit(props){
-		const {isActive,value,onChange,activeAttributes}=props;
+		const {isActive,value,onChange,activeAttributes,contentRef}=props;
 		const {Popover,Card,CardBody,ToolbarGroup}=wp.components;
 		const {useMemo,useCallback}=wp.element;
 		const {BlockControls,RichTextToolbarButton}=wp.blockEditor;
@@ -258,10 +258,10 @@ wp.richText.registerFormatType('catpow/large',{
 		return (
 			<>
 				{isActive && (
-					<Popover anchor={el} position='bottom center' focusOnMount={false}>
+					<Popover anchor={contentRef.current} position='bottom center' focusOnMount={false}>
 						<Card size="small">
 							<CardBody>
-								<CP.ColorVarTracer target={el.parentElement}>
+								<CP.ColorVarTracer target={contentRef.current}>
 									<CP.SelectThemeColor
 										onChange={(proxy)=>setAttributes({color:proxy.classes})}
 										selected={activeAttributes['color']}
@@ -298,7 +298,7 @@ wp.richText.registerFormatType('catpow/tag',{
 		color:'class'
 	},
 	edit(props){
-		const {isActive,value,onChange,onFocus,activeAttributes,activeObject}=props;
+		const {isActive,value,onChange,onFocus,activeAttributes,activeObject,contentRef}=props;
 		const {Popover,BaseControle,TextControl,Card,CardBody,ToolbarGroup}=wp.components;
 		const {BlockControls,RichTextToolbarButton,RichTextShortcut}=wp.blockEditor;
 		const {useState,useMemo,useCallback}=wp.element;
@@ -315,7 +315,7 @@ wp.richText.registerFormatType('catpow/tag',{
 		return (
 			<>
 				{isActive && (
-					<Popover anchor={el} position='bottom center' focusOnMount={false}>
+					<Popover anchor={contentRef.current} position='bottom center' focusOnMount={false}>
 						<Card>
 							<CardBody>
 								<TextControl
@@ -327,7 +327,7 @@ wp.richText.registerFormatType('catpow/tag',{
 						</Card>
 						<Card size="small">
 							<CardBody>
-								<CP.ColorVarTracer target={el.parentElement}>
+								<CP.ColorVarTracer target={contentRef.current}>
 									<CP.SelectThemeColor
 										onChange={(proxy)=>setAttributes({color:proxy.classes})}
 										selected={activeAttributes['color']}
