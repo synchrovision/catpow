@@ -436,12 +436,7 @@
   transform: translateY(-0.5em);
   pointer-events: none;
 }
-.CP-SelectResponsiveImage.is-video {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.CP-SelectResponsiveImage-img {
+.CP-SelectResponsiveImage.is-video, .CP-SelectResponsiveImage.is-img, .CP-SelectResponsiveImage.is-picture, .CP-SelectResponsiveImage-img {
   display: block;
   width: 100%;
   height: auto;

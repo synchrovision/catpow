@@ -239,10 +239,7 @@ $colors:(
 		}
 	}
 	&-SelectResponsiveImage{
-		&.is-video{
-			@include bnd((d:b,w:f,h:a));
-		}
-		&-img{
+		&.is-video,&.is-img,&.is-picture,&-img{
 			@include bnd((d:b,w:f,h:a));
 		}
 	}
