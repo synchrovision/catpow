@@ -1156,7 +1156,6 @@
       const onToggle = () => {
         return onChange(toggleFormat(value, { type: "catpow/title", attributes: { type: "iheader" } }));
       };
-      const el = useMemo(CP.getSelecedFormatElement, [isActive, value.start, value.end]);
       const setAttributes = useCallback((attr) => {
         onChange(applyFormat(value, { type: "catpow/title", attributes: Object.assign(activeAttributes, attr) }));
       }, [value, activeAttributes]);
@@ -1206,7 +1205,6 @@
       const onToggle = () => {
         return onChange(toggleFormat(value, { type: "catpow/mark", attributes: { color: "color_0" } }));
       };
-      const el = useMemo(CP.getSelecedFormatElement, [isActive, value.start, value.end]);
       const setAttributes = useCallback((attr) => {
         onChange(applyFormat(value, { type: "catpow/mark", attributes: Object.assign(activeAttributes, attr) }));
       }, [value, activeAttributes]);
@@ -1251,7 +1249,6 @@
       const onToggle = () => {
         return onChange(toggleFormat(value, { type: "catpow/large", attributes: { color: "color_0" } }));
       };
-      const el = useMemo(CP.getSelecedFormatElement, [isActive, value.start, value.end]);
       const setAttributes = useCallback((attr) => {
         onChange(applyFormat(value, { type: "catpow/large", attributes: Object.assign(activeAttributes, attr) }));
       }, [value, activeAttributes]);
@@ -1297,7 +1294,6 @@
       const onToggle = () => {
         return onChange(toggleFormat(value, { type: "catpow/tag", attributes: { class: "color_0" } }));
       };
-      const el = useMemo(CP.getSelecedFormatElement, [isActive, value.start, value.end]);
       const setAttributes = useCallback((attr) => {
         onChange(applyFormat(value, { type: "catpow/tag", attributes: Object.assign(activeAttributes, attr) }));
       }, [value, activeAttributes]);
