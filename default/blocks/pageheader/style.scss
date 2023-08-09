@@ -4,7 +4,7 @@
 	@include bnd((d:b,p:r));
 	@include bg((c:m));
 	&-body{
-		@include bnd((p:r,z:1));
+		@include bnd((p:r,z:2));
 		&-title{
 			@include bnd((pd:120 20));
 			@include txt((a:c,f:h,p:32,h:1.5em,c:i));
@@ -38,10 +38,15 @@
 		}
 	}
 	&-background{
-		@include bnd((d:b,p:a,i:0));
-		img{
-			@include bnd((d:b,w:f,h:f,op:c,of:c));
+		@include bnd((d:b,p:a,i:0,z:1));
+		&::before{
+			content:'';
+			@include bnd((d:b,p:a,i:0,z:2));
+			@include bg((c:m));
 			@include trn((o:var(--cp-image-opacity),bm:var(--cp-image-blendmode)));
+		}
+		img{
+			@include bnd((d:b,w:f,h:f,op:c,of:c,z:1));
 		}
 	}
 }
