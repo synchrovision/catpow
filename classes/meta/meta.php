@@ -99,7 +99,7 @@ abstract class meta{
 		if(isset($meta->param)){$loop=$meta->param;}
 		else{
 			$loop=$meta->value;
-			if(empty($loop[0]) && ($flags & self::USE_ALTERNATIVE) && !empty($meta->conf['alternative'])){
+			if(empty(reset($loop)) && ($flags & self::USE_ALTERNATIVE) && !empty($meta->conf['alternative'])){
 				$alternatives=(array)$meta->conf['alternative'];
 				foreach($alternatives as $alternative){
 					if(!empty($loop=$meta->parent->get_the_data($alternative))){break;}
@@ -107,7 +107,7 @@ abstract class meta{
 			}
 			if(empty($meta->conf['multiple'])){
 				$class_name=\cp::get_class_name('meta',$meta->conf['type']?:'text');
-				if(!$class_name::$is_bulk_input){$loop=array_slice($loop??[],0,1);}
+				if(!$class_name::$is_bulk_input){$loop=[key($loop)=>reset($loop)];}
 			}
 			elseif($meta->conf['multiple']>1){
 				$loop=array_pad(array_slice($loop??[],0,$meta->conf['multiple']),$meta->conf['multiple'],null);
