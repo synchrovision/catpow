@@ -8,7 +8,7 @@ class options extends meta{
 		if(empty($conf['multiple'])){
 			return [get_option($conf['option']??$meta_name)];
 		}
-		return get_option($conf['option']??$meta_name);
+		return (array)get_option($conf['option']??$meta_name);
 	}
 	public static function set($data_type,$data_name,$id,$meta_name,$vals,$conf){
 		if(empty($vals)){
