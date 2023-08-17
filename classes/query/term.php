@@ -7,7 +7,11 @@ class term extends query{
 		$data_type_name='taxonomy',
 		$data_id_name='term_id',
 		$query_class='WP_Term_Query',
-		$search_keys=[],
+		$search_keys=[
+			'parent'=>0,'child_of'=>0,
+			'search'=>0,'hide_empty'=>0,
+			'include'=>1,'exclude'=>1
+		],
 		$key_translation=[
 			'limit'=>'number',
 		],
