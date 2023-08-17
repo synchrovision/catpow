@@ -14,7 +14,7 @@
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useState, useMemo, useCallback, useEffect } = wp.element;
       const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
-      const { Icon, PanelBody, TextareaControl } = wp.components;
+      const { Icon, PanelBody, TextControl, TextareaControl } = wp.components;
       const { classes, TitleTag, items = [], z, t, hl, loopCount, doLoop } = attributes;
       const primaryClassName = "wp-block-catpow-accessmap";
       var classArray = _.uniq((className + " " + classes).split(" "));
@@ -30,6 +30,8 @@
               set({ titleTag: "h" + (parseInt(val[1]) + 1) });
             }
           } },
+          { name: "hasTel", values: "hasTel", label: "\u96FB\u8A71\u756A\u53F7" },
+          { name: "hasMail", values: "hasMail", label: "\u30E1\u30FC\u30EB" },
           { name: "t", key: "t", input: "select", label: "\u30BF\u30A4\u30D7", values: { m: "\u5730\u56F3", k: "\u822A\u7A7A\u5199\u771F", h: "\u5730\u56F3 + \u822A\u7A7A\u5199\u771F", p: "\u5730\u5F62\u56F3", e: "Google Earth" } },
           { name: "z", key: "z", input: "range", label: "\u30BA\u30FC\u30E0", min: 0, max: 23 },
           { name: "hl", key: "hl", input: "buttons", label: "\u8A00\u8A9E", values: ["ja", "us", "zh-CN", "zh-TW"] },
@@ -122,6 +124,30 @@
                 },
                 value: item.address
               }
+            ), states.hasTel && /* @__PURE__ */ wp.element.createElement(
+              "span",
+              {
+                className: "tel",
+                onInput: (e) => {
+                  item.tel = e.target.innerText;
+                },
+                onBlur: save,
+                contentEditable: true,
+                suppressContentEditableWarning: true
+              },
+              item.tel
+            ), states.hasMail && /* @__PURE__ */ wp.element.createElement(
+              "span",
+              {
+                className: "mail",
+                onInput: (e) => {
+                  item.mail = e.target.innerText;
+                },
+                onBlur: save,
+                contentEditable: true,
+                suppressContentEditableWarning: true
+              },
+              item.mail
             ), /* @__PURE__ */ wp.element.createElement(
               RichText,
               {
@@ -198,6 +224,8 @@
             { type: "text", key: "title" },
             { type: "text", key: "zipcode" },
             { type: "text", key: "address" },
+            { type: "text", key: "tel" },
+            { type: "text", key: "mail" },
             { type: "text", key: "info" },
             { type: "text", key: "tel" },
             { type: "text", key: "mail" }
@@ -219,7 +247,7 @@
           url += `&ll=${item.ll}`;
         }
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("div", { className: "item", key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "map" }, /* @__PURE__ */ wp.element.createElement("iframe", { src: url, frameBorder: "0", className: "gmap", ll: item.ll, q: item.q })), /* @__PURE__ */ wp.element.createElement("div", { className: "access" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: TitleTag, className: "title", value: item.title }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "address", value: item.address }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "info", value: item.info })))
+          /* @__PURE__ */ wp.element.createElement("div", { className: "item", key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "map" }, /* @__PURE__ */ wp.element.createElement("iframe", { src: url, frameBorder: "0", className: "gmap", "data-ll": item.ll, "data-q": item.q })), /* @__PURE__ */ wp.element.createElement("div", { className: "access" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: TitleTag, className: "title", value: item.title }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "address", value: item.address }), states.hasTel && /* @__PURE__ */ wp.element.createElement("a", { className: "tel", href: "tel:" + item.tel.replace(/\D/g, "") }, item.tel), states.hasMail && /* @__PURE__ */ wp.element.createElement("a", { className: "mail", href: "mailto:" + item.mail }, item.mail), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "info", value: item.info })))
         );
       });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, rtn), doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));

@@ -29,6 +29,10 @@
   margin-bottom: 0.5em;
   font-size: 1.5em;
 }
+.wp-block-catpow-accessmap > .item > .access > .tel, .wp-block-catpow-accessmap > .item > .access > .mail {
+  font-size: 1.25em;
+  text-decoration: none;
+}
 .wp-block-catpow-accessmap > .item > .access > .address {
   padding: 0rem;
   margin: 0rem;

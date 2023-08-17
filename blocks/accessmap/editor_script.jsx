@@ -13,7 +13,7 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo,useCallback,useEffect}=wp.element;
 		const {InnerBlocks,InspectorControls,RichText}=wp.blockEditor;
-		const {Icon,PanelBody,TextareaControl}=wp.components;
+		const {Icon,PanelBody,TextControl,TextareaControl}=wp.components;
 		const {classes,TitleTag,items=[],z,t,hl,loopCount,doLoop}=attributes;
 		const primaryClassName='wp-block-catpow-accessmap';
 		var classArray=_.uniq((className+' '+classes).split(' '));
@@ -29,6 +29,8 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 				{name:'titleTag',input:'buttons',filter:'titleTag',key:'TitleTag',label:'タイトルタグ',values:['h2','h3','h4'],effect:(val,{set})=>{
 					if(/^h\d$/.test(val)){set({titleTag:'h'+(parseInt(val[1])+1)})}
 				}},
+				{name:'hasTel',values:'hasTel',label:'電話番号'},
+				{name:'hasMail',values:'hasMail',label:'メール'},
 				{name:'t',key:'t',input:'select',label:'タイプ',values:{m:'地図',k:'航空写真',h:'地図 + 航空写真',p:'地形図',e:'Google Earth'}},
 				{name:'z',key:'z',input:'range',label:'ズーム',min:0,max:23},
 				{name:'hl',key:'hl',input:'buttons',label:'言語',values:['ja','us','zh-CN','zh-TW']},
@@ -116,6 +118,24 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 							onChange={(address)=>{item.address=address;save();}}
 							value={item.address}
 						/>
+						{states.hasTel && (
+							<span
+								className="tel"
+								onInput={(e)=>{item.tel=e.target.innerText;}}
+								onBlur={save}
+								contentEditable={true}
+								suppressContentEditableWarning={true}
+							>{item.tel}</span>
+						)}
+						{states.hasMail && (
+							<span
+								className="mail"
+								onInput={(e)=>{item.mail=e.target.innerText;}}
+								onBlur={save}
+								contentEditable={true}
+								suppressContentEditableWarning={true}
+							>{item.mail}</span>
+						)}
 						<RichText
 							tagName='div'
 							className="info"
@@ -187,6 +207,8 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 								{type:'text',key:'title'},
 								{type:'text',key:'zipcode'},
 								{type:'text',key:'address'},
+								{type:'text',key:'tel'},
+								{type:'text',key:'mail'},
 								{type:'text',key:'info'},
 								{type:'text',key:'tel'},
 								{type:'text',key:'mail'}
@@ -225,11 +247,13 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 			rtn.push(
 				<div className="item" key={index}>
 					<div className="map">
-						<iframe src={url} frameBorder="0" className="gmap" ll={item.ll} q={item.q}></iframe>
+						<iframe src={url} frameBorder="0" className="gmap" data-ll={item.ll} data-q={item.q}></iframe>
 					</div>
 					<div className="access">
 						<RichText.Content tagName={TitleTag} className="title" value={item.title}/>
 						<RichText.Content tagName="div" className="address" value={item.address}/>
+						{states.hasTel && (<a className="tel" href={'tel:'+item.tel.replace(/\D/g,'')}>{item.tel}</a>)}
+						{states.hasMail && (<a className="mail" href={'mailto:'+item.mail}>{item.mail}</a>)}
 						<RichText.Content tagName="div" className="info" value={item.info}/>
 					</div>
 				</div>

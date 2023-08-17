@@ -15,6 +15,8 @@ $attributes=[
 		"query"=>[
 			"title"=>["source"=>'html',"selector"=>'.access .title'],
 			"address"=>["source"=>'html',"selector"=>'.access .address'],
+			"tel"=>["source"=>'html',"selector"=>'.access .tel'],
+			"mail"=>["source"=>'html',"selector"=>'.access .mail'],
 			"info"=>["source"=>'html',"selector"=>'.access .info'],
 
 			'll'=>['source'=>'attribute','selector'=>'.map .gmap','attribute'=>'data-ll'],
@@ -24,6 +26,8 @@ $attributes=[
 			"classes"=>'item',
 			"title"=>'Title',
 			"address"=>'Osaka city',
+			"tel"=>'00-0000-0000',
+			"mail"=>'info@example.com',
 			"info"=>'info',
 
 			"ll"=>'',

@@ -19,6 +19,9 @@
 				@include bnd((pd:0,mg:0,mgb:.5em));
 				@include txt((p:1.5em));
 			}
+			>.tel,>.mail{
+				@include txt((p:1.25em,s:n));
+			}
 			>.address{
 				@include bnd((pd:0,mg:0,mgb:.5em));
 			}
