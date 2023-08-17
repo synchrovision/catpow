@@ -31,6 +31,7 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 				}},
 				{name:'hasTel',values:'hasTel',label:'電話番号'},
 				{name:'hasMail',values:'hasMail',label:'メール'},
+				{name:'hasSite',values:'hasSite',label:'サイト'},
 				{name:'t',key:'t',input:'select',label:'タイプ',values:{m:'地図',k:'航空写真',h:'地図 + 航空写真',p:'地形図',e:'Google Earth'}},
 				{name:'z',key:'z',input:'range',label:'ズーム',min:0,max:23},
 				{name:'hl',key:'hl',input:'buttons',label:'言語',values:['ja','us','zh-CN','zh-TW']},
@@ -136,6 +137,15 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 								suppressContentEditableWarning={true}
 							>{item.mail}</span>
 						)}
+						{states.hasSite && (
+							<span
+								className="mail"
+								onInput={(e)=>{item.site=e.target.innerText;}}
+								onBlur={save}
+								contentEditable={true}
+								suppressContentEditableWarning={true}
+							>{item.site}</span>
+						)}
 						<RichText
 							tagName='div'
 							className="info"
@@ -209,9 +219,8 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 								{type:'text',key:'address'},
 								{type:'text',key:'tel'},
 								{type:'text',key:'mail'},
-								{type:'text',key:'info'},
-								{type:'text',key:'tel'},
-								{type:'text',key:'mail'}
+								{type:'text',key:'site'},
+								{type:'text',key:'info'}
 							]}
 							isTemplate={states.isTemplate}
 						/>
@@ -254,6 +263,7 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 						<RichText.Content tagName="div" className="address" value={item.address}/>
 						{states.hasTel && (<a className="tel" href={'tel:'+item.tel.replace(/\D/g,'')}>{item.tel}</a>)}
 						{states.hasMail && (<a className="mail" href={'mailto:'+item.mail}>{item.mail}</a>)}
+						{states.hasSite && (<a className="site" href={item.site} target="_blank" rel="noopener noreferer">{item.site}</a>)}
 						<RichText.Content tagName="div" className="info" value={item.info}/>
 					</div>
 				</div>

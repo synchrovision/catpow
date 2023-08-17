@@ -32,6 +32,7 @@
           } },
           { name: "hasTel", values: "hasTel", label: "\u96FB\u8A71\u756A\u53F7" },
           { name: "hasMail", values: "hasMail", label: "\u30E1\u30FC\u30EB" },
+          { name: "hasSite", values: "hasSite", label: "\u30B5\u30A4\u30C8" },
           { name: "t", key: "t", input: "select", label: "\u30BF\u30A4\u30D7", values: { m: "\u5730\u56F3", k: "\u822A\u7A7A\u5199\u771F", h: "\u5730\u56F3 + \u822A\u7A7A\u5199\u771F", p: "\u5730\u5F62\u56F3", e: "Google Earth" } },
           { name: "z", key: "z", input: "range", label: "\u30BA\u30FC\u30E0", min: 0, max: 23 },
           { name: "hl", key: "hl", input: "buttons", label: "\u8A00\u8A9E", values: ["ja", "us", "zh-CN", "zh-TW"] },
@@ -148,6 +149,18 @@
                 suppressContentEditableWarning: true
               },
               item.mail
+            ), states.hasSite && /* @__PURE__ */ wp.element.createElement(
+              "span",
+              {
+                className: "mail",
+                onInput: (e) => {
+                  item.site = e.target.innerText;
+                },
+                onBlur: save,
+                contentEditable: true,
+                suppressContentEditableWarning: true
+              },
+              item.site
             ), /* @__PURE__ */ wp.element.createElement(
               RichText,
               {
@@ -226,9 +239,8 @@
             { type: "text", key: "address" },
             { type: "text", key: "tel" },
             { type: "text", key: "mail" },
-            { type: "text", key: "info" },
-            { type: "text", key: "tel" },
-            { type: "text", key: "mail" }
+            { type: "text", key: "site" },
+            { type: "text", key: "info" }
           ],
           isTemplate: states.isTemplate
         }
@@ -247,7 +259,7 @@
           url += `&ll=${item.ll}`;
         }
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("div", { className: "item", key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "map" }, /* @__PURE__ */ wp.element.createElement("iframe", { src: url, frameBorder: "0", className: "gmap", "data-ll": item.ll, "data-q": item.q })), /* @__PURE__ */ wp.element.createElement("div", { className: "access" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: TitleTag, className: "title", value: item.title }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "address", value: item.address }), states.hasTel && /* @__PURE__ */ wp.element.createElement("a", { className: "tel", href: "tel:" + item.tel.replace(/\D/g, "") }, item.tel), states.hasMail && /* @__PURE__ */ wp.element.createElement("a", { className: "mail", href: "mailto:" + item.mail }, item.mail), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "info", value: item.info })))
+          /* @__PURE__ */ wp.element.createElement("div", { className: "item", key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "map" }, /* @__PURE__ */ wp.element.createElement("iframe", { src: url, frameBorder: "0", className: "gmap", "data-ll": item.ll, "data-q": item.q })), /* @__PURE__ */ wp.element.createElement("div", { className: "access" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: TitleTag, className: "title", value: item.title }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "address", value: item.address }), states.hasTel && /* @__PURE__ */ wp.element.createElement("a", { className: "tel", href: "tel:" + item.tel.replace(/\D/g, "") }, item.tel), states.hasMail && /* @__PURE__ */ wp.element.createElement("a", { className: "mail", href: "mailto:" + item.mail }, item.mail), states.hasSite && /* @__PURE__ */ wp.element.createElement("a", { className: "site", href: item.site, target: "_blank", rel: "noopener noreferer" }, item.site), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "info", value: item.info })))
         );
       });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, rtn), doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));

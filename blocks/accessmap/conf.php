@@ -17,6 +17,7 @@ $attributes=[
 			"address"=>["source"=>'html',"selector"=>'.access .address'],
 			"tel"=>["source"=>'html',"selector"=>'.access .tel'],
 			"mail"=>["source"=>'html',"selector"=>'.access .mail'],
+			"site"=>["source"=>'html',"selector"=>'.access .site'],
 			"info"=>["source"=>'html',"selector"=>'.access .info'],
 
 			'll'=>['source'=>'attribute','selector'=>'.map .gmap','attribute'=>'data-ll'],
@@ -28,6 +29,7 @@ $attributes=[
 			"address"=>'Osaka city',
 			"tel"=>'00-0000-0000',
 			"mail"=>'info@example.com',
+			"site"=>'https://example.com',
 			"info"=>'info',
 
 			"ll"=>'',
