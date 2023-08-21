@@ -170,9 +170,10 @@ class blocks{
 					case 'js':
 						$file_path_url=cp::get_file_path_url('blocks/'.$file_name);
 						$file_url=reset($file_path_url);
+						$file_path=key($file_path_url);
 				
 						if(empty($file_url)){break;}
-						$data[$ext][$handle]=[$handle,(string)$file_url,self::$deps[$fname]??[]];
+						$data[$ext][$handle]=[$handle,(string)$file_url,self::$deps[$fname]??[],filemtime($file_path)];
 						if($is_core_block){
 							$key=$fname;
 							if(substr($key,0,6)==='front_'){
