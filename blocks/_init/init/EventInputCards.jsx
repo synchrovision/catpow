@@ -3,8 +3,8 @@
 CP.EventInputCards=(props)=>{
 	const {title,onChange}=props;
 	const {useState,useReducer,useCallback,useEffect,useMemo}=wp.element;
-	const {BaseControl,Card,CardHeader,CardBody,Flex,FlexItem,FlexBlock,Icon,TextControl}=wp.components;
-	const {processerId,eventTypes,parseEventValue,createEventValue,eventParams}=props.processer;
+	const {BaseControl,Card,CardHeader,CardBody,CardFooter,Flex,FlexItem,FlexBlock,Icon,TextControl}=wp.components;
+	const {processerId,eventTypes,parseEventValue,createEventValue,createEventString,eventParams}=props.processer;
 
 	const reducer=useCallback((state,action)=>{
 		switch(action.type){
@@ -47,12 +47,15 @@ CP.EventInputCards=(props)=>{
 	},[state]);
 	useEffect(()=>{
 		const events=parseEventValue(props.value);
-		if(events){dispatch({type:'UPDATE_ALL',events});}
+		if(events){
+			if(state.events.length<1){dispatch({type:'UPDATE_ALL',events});}
+		}
 	},[props.value]);
 	
 
 	const EventInputCard=useCallback((props)=>{
-		const {event,index}=props;
+		const {event,index,canRemove}=props;
+		const [editMode,setEditMode]=useState(false);
 		const activeEventParamNames=useMemo(()=>{
 			if(eventTypes && event.eventType){
 				const eventType=eventTypes[event.eventType] || eventTypes['_custom'];
@@ -70,13 +73,7 @@ CP.EventInputCards=(props)=>{
 					<Flex>
 						<FlexBlock>{title}</FlexBlock>
 						<FlexItem>
-							<Icon
-								icon="insert"
-								onClick={()=>{
-									dispatch({type:'CLONE',index});
-								}}
-							/>
-							{state.events.length>1 && (
+							{canRemove && (
 								<Icon
 									icon="remove"
 									onClick={()=>{
@@ -84,60 +81,75 @@ CP.EventInputCards=(props)=>{
 									}}
 								/>
 							)}
+							<Icon
+								icon="insert"
+								onClick={()=>{
+									dispatch({type:'CLONE',index});
+								}}
+							/>
+							<Icon
+								icon="edit"
+								onClick={()=>setEditMode(!editMode)}
+							/>
 						</FlexItem>
 					</Flex>
 				</CardHeader>
-				<CardBody className="EventInputCard__body">
-					{eventTypes && (
-						<div className="EventInputCard__item">
-							<div className="EventInputCard__item__inputs">
-								<TextControl
-									value={event.eventType || ''}
-									onChange={(val)=>{
-										dispatch({type:'UPDATE',event:{eventType:val},index});
-									}}
-									list={CP.getDataListId(processerId+'EventTypes',eventTypeList)}
-								/>
-							</div>
-						</div>
-					)}
-					<div className="EventInputCard__item">
-						<div className="EventInputCard__item__pref">@</div>
-						<div className="EventInputCard__item__inputs">
-							<TextControl
-								value={event.event || ''}
-								onChange={(val)=>{
-									dispatch({type:'UPDATE',event:{event:val},index});
-								}}
-								list={CP.getDataListId(props.eventList || 'mouseEvent')}
-							/>
-						</div>
-					</div>
-					{activeEventParamNames.map((paramName)=>{
-						const param=eventParams[paramName];
-						return (
-							<div className={"EventInputCard__item is-type-"+(param.type || 'text')} key={paramName}>
-								<div className="EventInputCard__item__title">{param.label}</div>
+				{editMode && (
+					<CardBody className="EventInputCard__body">
+						{eventTypes && (
+							<div className="EventInputCard__item">
 								<div className="EventInputCard__item__inputs">
-									<CP.DynamicInput
-										param={eventParamsWithoutLabel[paramName]}
-										value={event[paramName] || ''}
+									<TextControl
+										value={event.eventType || ''}
 										onChange={(val)=>{
-											dispatch({type:'UPDATE',event:{[paramName]:val},index});
+											dispatch({type:'UPDATE',event:{eventType:val},index});
 										}}
+										list={CP.getDataListId(processerId+'EventTypes',eventTypeList)}
 									/>
 								</div>
 							</div>
-						);
-					})}
-				</CardBody>
+						)}
+						<div className="EventInputCard__item">
+							<div className="EventInputCard__item__pref">@</div>
+							<div className="EventInputCard__item__inputs">
+								<TextControl
+									value={event.event || ''}
+									onChange={(val)=>{
+										dispatch({type:'UPDATE',event:{event:val},index});
+									}}
+									list={CP.getDataListId(props.eventList || 'mouseEvent')}
+								/>
+							</div>
+						</div>
+						{activeEventParamNames.map((paramName)=>{
+							const param=eventParams[paramName];
+							return (
+								<div className={"EventInputCard__item is-type-"+(param.type || 'text')} key={paramName}>
+									<div className="EventInputCard__item__title">{param.label}</div>
+									<div className="EventInputCard__item__inputs">
+										<CP.DynamicInput
+											param={eventParamsWithoutLabel[paramName]}
+											value={event[paramName] || ''}
+											onChange={(val)=>{
+												dispatch({type:'UPDATE',event:{[paramName]:val},index});
+											}}
+										/>
+									</div>
+								</div>
+							);
+						})}
+					</CardBody>
+				)}
+				<CardFooter className="EventInputCard__footer" size="xSmall" justify="center">
+					{createEventString(event)}
+				</CardFooter>
 			</Card>
 		)
 	},[]);
 	return (
 		<BaseControl>
 		{state.events.length>0?(
-			state.events.map((event,index)=>(<EventInputCard event={event} index={index} key={index}/>))
+			state.events.map((event,index)=>(<EventInputCard event={event} index={index} canRemove={state.events.length>1} key={index}/>))
 		):(
 			<EventInputCard event={{}} index={0}/>
 		)}

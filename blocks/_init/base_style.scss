@@ -430,6 +430,12 @@ $colors:(
 	&__header{
 		
 	}
+	&__body{
+		
+	}
+	&__footer{
+		@include txt((p:10));
+	}
 	&__item{
 		@include flx((w:w,g:5,a:c));
 		@include bnd((pd:5 0));

@@ -3642,8 +3642,8 @@
   CP.EventInputCards = (props) => {
     const { title, onChange } = props;
     const { useState, useReducer, useCallback, useEffect, useMemo } = wp.element;
-    const { BaseControl, Card, CardHeader, CardBody, Flex, FlexItem, FlexBlock, Icon, TextControl } = wp.components;
-    const { processerId, eventTypes, parseEventValue, createEventValue, eventParams } = props.processer;
+    const { BaseControl, Card, CardHeader, CardBody, CardFooter, Flex, FlexItem, FlexBlock, Icon, TextControl } = wp.components;
+    const { processerId, eventTypes, parseEventValue, createEventValue, createEventString, eventParams } = props.processer;
     const reducer = useCallback((state2, action) => {
       switch (action.type) {
         case "UPDATE_ALL": {
@@ -3688,11 +3688,14 @@
     useEffect(() => {
       const events = parseEventValue(props.value);
       if (events) {
-        dispatch({ type: "UPDATE_ALL", events });
+        if (state.events.length < 1) {
+          dispatch({ type: "UPDATE_ALL", events });
+        }
       }
     }, [props.value]);
     const EventInputCard = useCallback((props2) => {
-      const { event, index } = props2;
+      const { event, index, canRemove } = props2;
+      const [editMode, setEditMode] = useState(false);
       const activeEventParamNames = useMemo(() => {
         if (eventTypes && event.eventType) {
           const eventType = eventTypes[event.eventType] || eventTypes["_custom"];
@@ -3704,15 +3707,7 @@
         }
         return Object.keys(eventParams).filter((paramName) => !eventParams[paramName].limited);
       }, [eventTypes, eventParams, event.eventType]);
-      return /* @__PURE__ */ wp.element.createElement(Card, { className: "EventInputCard" }, /* @__PURE__ */ wp.element.createElement(CardHeader, { className: "EventInputCard__header" }, /* @__PURE__ */ wp.element.createElement(Flex, null, /* @__PURE__ */ wp.element.createElement(FlexBlock, null, title), /* @__PURE__ */ wp.element.createElement(FlexItem, null, /* @__PURE__ */ wp.element.createElement(
-        Icon,
-        {
-          icon: "insert",
-          onClick: () => {
-            dispatch({ type: "CLONE", index });
-          }
-        }
-      ), state.events.length > 1 && /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(Card, { className: "EventInputCard" }, /* @__PURE__ */ wp.element.createElement(CardHeader, { className: "EventInputCard__header" }, /* @__PURE__ */ wp.element.createElement(Flex, null, /* @__PURE__ */ wp.element.createElement(FlexBlock, null, title), /* @__PURE__ */ wp.element.createElement(FlexItem, null, canRemove && /* @__PURE__ */ wp.element.createElement(
         Icon,
         {
           icon: "remove",
@@ -3720,7 +3715,21 @@
             dispatch({ type: "REMOVE", index });
           }
         }
-      )))), /* @__PURE__ */ wp.element.createElement(CardBody, { className: "EventInputCard__body" }, eventTypes && /* @__PURE__ */ wp.element.createElement("div", { className: "EventInputCard__item" }, /* @__PURE__ */ wp.element.createElement("div", { className: "EventInputCard__item__inputs" }, /* @__PURE__ */ wp.element.createElement(
+      ), /* @__PURE__ */ wp.element.createElement(
+        Icon,
+        {
+          icon: "insert",
+          onClick: () => {
+            dispatch({ type: "CLONE", index });
+          }
+        }
+      ), /* @__PURE__ */ wp.element.createElement(
+        Icon,
+        {
+          icon: "edit",
+          onClick: () => setEditMode(!editMode)
+        }
+      )))), editMode && /* @__PURE__ */ wp.element.createElement(CardBody, { className: "EventInputCard__body" }, eventTypes && /* @__PURE__ */ wp.element.createElement("div", { className: "EventInputCard__item" }, /* @__PURE__ */ wp.element.createElement("div", { className: "EventInputCard__item__inputs" }, /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
           value: event.eventType || "",
@@ -3750,9 +3759,9 @@
             }
           }
         )));
-      })));
+      })), /* @__PURE__ */ wp.element.createElement(CardFooter, { className: "EventInputCard__footer", size: "xSmall", justify: "center" }, createEventString(event)));
     }, []);
-    return /* @__PURE__ */ wp.element.createElement(BaseControl, null, state.events.length > 0 ? state.events.map((event, index) => /* @__PURE__ */ wp.element.createElement(EventInputCard, { event, index, key: index })) : /* @__PURE__ */ wp.element.createElement(EventInputCard, { event: {}, index: 0 }));
+    return /* @__PURE__ */ wp.element.createElement(BaseControl, null, state.events.length > 0 ? state.events.map((event, index) => /* @__PURE__ */ wp.element.createElement(EventInputCard, { event, index, canRemove: state.events.length > 1, key: index })) : /* @__PURE__ */ wp.element.createElement(EventInputCard, { event: {}, index: 0 }));
   };
 
   // ../blocks/_init/init/ServerSideRender.jsx

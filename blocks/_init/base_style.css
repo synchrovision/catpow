@@ -785,6 +785,9 @@
 .dataStructure .item .children {
   padding-left: 1em;
 }
+.EventInputCard__footer {
+  font-size: 0.625rem;
+}
 .EventInputCard__item {
   display: -webkit-box;
   display: -webkit-flex;
