@@ -391,6 +391,103 @@ wp.richText.registerFormatType('catpow/annotation',{
 		);
 	}
 });
+
+wp.richText.registerFormatType('catpow/custom',{
+	title:'custom',
+	tagName:'span',
+	className:'rtf-custom',
+	attributes:{
+		vars:'style'
+	},
+	edit(props){
+		const {isActive,value,onChange,onFocus,activeAttributes,activeObject,contentRef}=props;
+		const {Popover,BaseControl,TextControl,RangeControl,Card,CardBody,ToolbarGroup}=wp.components;
+		const {BlockControls,RichTextToolbarButton,RichTextShortcut}=wp.blockEditor;
+		const {useState,useMemo,useCallback,useReducer,useEffect}=wp.element;
+		const {removeFormat,applyFormat,toggleFormat,insert,create,slice}=wp.richText;
+
+		const onToggle=()=>{
+			return onChange(toggleFormat(value,{type:'catpow/custom',attributes:{vars:'color:inherit;font-size:1em;font-weight:400'}}));
+		}
+		const setAttributes=useCallback((attr)=>{
+			onChange(applyFormat(value,{type:'catpow/custom',attributes:Object.assign(activeAttributes,attr)}));
+		},[value,activeAttributes]);
+		
+		const init=useCallback((state)=>{
+			if(state.vars){
+				const {vars}=state;
+				try{
+					const color=vars.match(/color:(#?\w+);/)[1];
+					const size=vars.match(/font\-size:([\d\.]+)em;/)[1];
+					const weight=vars.match(/font\-weight:(\d+);/)[1];
+					return {color,size,weight,vars};
+				}
+				catch(e){
+					console.error('catpow/custom format : cannot parse vars',vars);
+				}
+			}
+			return {color:'inherit',size:1,weight:400,vars:'color:inherit;font-size:1em;font-weight:400;'};
+		},[]);
+		const reducer=useCallback((state,action)=>{
+			const {color,size,weight}={...state,...action};
+			const vars=`color:${color};font-size:${size}em;font-weight:${weight};`;
+			return {color,size,weight,vars};
+		},[]);
+		const [state,update]=useReducer(reducer,{vars:activeAttributes.vars},init);
+		useEffect(()=>{
+			onChange(applyFormat(value,{type:'catpow/custom',attributes:{vars:state.vars}}));
+		},[state.vars]);
+		
+
+		return (
+			<>
+				{isActive && (
+					<Popover anchor={contentRef.current} position='bottom center' focusOnMount={false}>
+						<Card>
+							<CardBody style={{width:"20rem"}}>
+								<TextControl
+									label="色"
+									onChange={(color)=>update({color})}
+									value={state.color}
+								/>
+								<RangeControl
+									label="サイズ"
+									onChange={(size)=>update({size})}
+									value={parseFloat(state.size)}
+									min={0.1}
+									max={10}
+									step={0.1}
+								/>
+								<RangeControl
+									label="太さ"
+									onChange={(weight)=>update({weight})}
+									value={parseFloat(state.weight)}
+									min={100}
+									max={1000}
+									step={100}
+								/>
+							</CardBody>
+						</Card>
+					</Popover>
+				)}
+				<BlockControls>
+					<ToolbarGroup
+						controls={[
+							{icon:'admin-generic',onClick:onToggle,isActive}
+						]}
+					/>
+				</BlockControls>
+				<RichTextToolbarButton
+					icon={'admin-generic'}
+					title={'custom'}
+					onClick={onToggle}
+					isActive={isActive}
+				/>
+			</>
+		);
+	}
+});
+
 wp.richText.registerFormatType('catpow/clear',{
 	title:'clear',
 	tagName:'div',

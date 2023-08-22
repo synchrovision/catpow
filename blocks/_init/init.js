@@ -1356,6 +1356,93 @@
       ));
     }
   });
+  wp.richText.registerFormatType("catpow/custom", {
+    title: "custom",
+    tagName: "span",
+    className: "rtf-custom",
+    attributes: {
+      vars: "style"
+    },
+    edit(props) {
+      const { isActive, value, onChange, onFocus, activeAttributes, activeObject, contentRef } = props;
+      const { Popover, BaseControl, TextControl, RangeControl, Card, CardBody, ToolbarGroup } = wp.components;
+      const { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
+      const { useState, useMemo, useCallback, useReducer, useEffect } = wp.element;
+      const { removeFormat, applyFormat, toggleFormat, insert, create, slice } = wp.richText;
+      const onToggle = () => {
+        return onChange(toggleFormat(value, { type: "catpow/custom", attributes: { vars: "color:inherit;font-size:1em;font-weight:400" } }));
+      };
+      const setAttributes = useCallback((attr) => {
+        onChange(applyFormat(value, { type: "catpow/custom", attributes: Object.assign(activeAttributes, attr) }));
+      }, [value, activeAttributes]);
+      const init = useCallback((state2) => {
+        if (state2.vars) {
+          const { vars } = state2;
+          try {
+            const color = vars.match(/color:(#?\w+);/)[1];
+            const size = vars.match(/font\-size:([\d\.]+)em;/)[1];
+            const weight = vars.match(/font\-weight:(\d+);/)[1];
+            return { color, size, weight, vars };
+          } catch (e) {
+            console.error("catpow/custom format : cannot parse vars", vars);
+          }
+        }
+        return { color: "inherit", size: 1, weight: 400, vars: "color:inherit;font-size:1em;font-weight:400;" };
+      }, []);
+      const reducer = useCallback((state2, action) => {
+        const { color, size, weight } = { ...state2, ...action };
+        const vars = `color:${color};font-size:${size}em;font-weight:${weight};`;
+        return { color, size, weight, vars };
+      }, []);
+      const [state, update] = useReducer(reducer, { vars: activeAttributes.vars }, init);
+      useEffect(() => {
+        onChange(applyFormat(value, { type: "catpow/custom", attributes: { vars: state.vars } }));
+      }, [state.vars]);
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, null, /* @__PURE__ */ wp.element.createElement(CardBody, { style: { width: "20rem" } }, /* @__PURE__ */ wp.element.createElement(
+        TextControl,
+        {
+          label: "\u8272",
+          onChange: (color) => update({ color }),
+          value: state.color
+        }
+      ), /* @__PURE__ */ wp.element.createElement(
+        RangeControl,
+        {
+          label: "\u30B5\u30A4\u30BA",
+          onChange: (size) => update({ size }),
+          value: parseFloat(state.size),
+          min: 0.1,
+          max: 10,
+          step: 0.1
+        }
+      ), /* @__PURE__ */ wp.element.createElement(
+        RangeControl,
+        {
+          label: "\u592A\u3055",
+          onChange: (weight) => update({ weight }),
+          value: parseFloat(state.weight),
+          min: 100,
+          max: 1e3,
+          step: 100
+        }
+      )))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
+        ToolbarGroup,
+        {
+          controls: [
+            { icon: "admin-generic", onClick: onToggle, isActive }
+          ]
+        }
+      )), /* @__PURE__ */ wp.element.createElement(
+        RichTextToolbarButton,
+        {
+          icon: "admin-generic",
+          title: "custom",
+          onClick: onToggle,
+          isActive
+        }
+      ));
+    }
+  });
   wp.richText.registerFormatType("catpow/clear", {
     title: "clear",
     tagName: "div",
