@@ -19,9 +19,9 @@ class style_config{
 		return static::$color_roles=apply_filters('cp_color_roles',[
 			'background'=>['label'=>'背景色','default'=>'#ffffff','shorthand'=>'b'],
 			'sheet'=>['label'=>'濃背景色','default'=>'#dddddd','shorthand'=>'s','extend'=>true],
-			'text'=>['label'=>'文字色','default'=>'#666666','shorthand'=>'t'],
-			'main'=>['label'=>'基本色','default'=>'#888888','shorthand'=>'m','extend'=>true],
-			'accent'=>['label'=>'強調色','default'=>'#EE8800','shorthand'=>'a','extend'=>true],
+			'text'=>['label'=>'文字色','default'=>'#666666','shorthand'=>'t','invert'=>true],
+			'main'=>['label'=>'基本色','default'=>'#888888','shorthand'=>'m','extend'=>true,'invert'=>true],
+			'accent'=>['label'=>'強調色','default'=>'#EE8800','shorthand'=>'a','extend'=>true,'invert'=>true],
 			'inside'=>['label'=>'抜き文字色','default'=>'#000000','shorthand'=>'i'],
 			'light'=>['label'=>'照明色','default'=>'hsla(0,0%,100%,0.5)','shorthand'=>'lt','alphaEnabled'=>true],
 			'shade'=>['label'=>'陰色','default'=>'hsla(0,0%,0%,0.2)','shorthand'=>'sh','alphaEnabled'=>true],
@@ -98,12 +98,21 @@ class style_config{
 	public static function get_css_vars(){
 		static $css_vars;
 		if(isset($css_vars)){return $css_vars;}
+		$roles=static::get_color_roles();
 		$css_vars=[];
 		$vars=apply_filters('cp_css_vars',[
 			'tones'=>self::get_config_json('tones'),
 			'colors'=>self::get_config_json('colors'),
 			'fonts'=>self::get_config_json('fonts')
 		]);
+		if(isset($vars['tones']['i'])){
+			foreach($roles as $role){
+				if(!empty($role['invert'])){
+					$key=$role['shorthand'];
+					$vars['tones'][$key.'x']=$vars['tones'][$key];
+				}
+			}
+		}
 		foreach($vars as $group=>$vals){
 			foreach($vals as $key=>$val){
 				if(is_array($val)){

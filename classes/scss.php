@@ -128,21 +128,28 @@ class scss{
 				$classes=[];
 				$tones=util\style_config::get_config_json('tones');
 				foreach($tones as $key=>$val){
-					if(empty($color_roles_by_shorthand[$key]['extend'])){continue;}
-					if(isset($val['h'])){
-						foreach(range(0,12) as $n){
-							$m=$n===0?0:$n-6;
-							$classes['.color--'.$n]["--cp-tones-{$key}-h"]=$n*30;
-							$classes['.color'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-root-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
-							$classes['.color_'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-container-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
-							$classes['.color--'.$n]["--cp-container-tones-{$key}-h"]=
-							$classes['.color'.$n]["--cp-container-tones-{$key}-h"]="var(--cp-tones-{$key}-h)";
+					if(!empty($color_roles_by_shorthand[$key]['extend'])){
+						if(isset($val['h'])){
+							foreach(range(0,12) as $n){
+								$m=$n===0?0:$n-6;
+								$classes['.color--'.$n]["--cp-tones-{$key}-h"]=$n*30;
+								$classes['.color'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-root-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
+								$classes['.color_'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-container-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
+								$classes['.color--'.$n]["--cp-container-tones-{$key}-h"]=
+								$classes['.color'.$n]["--cp-container-tones-{$key}-h"]="var(--cp-tones-{$key}-h)";
+							}
+						}
+						if(isset($val['s']) && isset($val['l'])){
+							foreach(range(-2,2) as $n){
+								$classes['.tone-s'.$n]["--cp-tones-{$key}-s"]="calc(var(--cp-root-tones-{$key}-s) + var(--cp-tones-ss,20%) * {$n})";
+								$classes['.tone-l'.$n]["--cp-tones-{$key}-l"]="calc(var(--cp-root-tones-{$key}-l) + var(--cp-tones-ls,10%) * {$n})";
+							}
 						}
 					}
-					if(isset($val['s']) && isset($val['l'])){
-						foreach(range(-2,2) as $n){
-							$classes['.tone-s'.$n]["--cp-tones-{$key}-s"]="calc(var(--cp-root-tones-{$key}-s) + var(--cp-tones-ss,20%) * {$n})";
-							$classes['.tone-l'.$n]["--cp-tones-{$key}-l"]="calc(var(--cp-root-tones-{$key}-l) + var(--cp-tones-ls,10%) * {$n})";
+					if(!empty($color_roles_by_shorthand[$key]['invert'])){
+						foreach($val as $k=>$v){
+							$classes['.resetTextColor']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
+							$classes['.invertTextColor']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-i-{$k})";
 						}
 					}
 				}
