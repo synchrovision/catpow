@@ -131,5 +131,15 @@ class UI extends meta{
 		}
 		return $conf;
 	}
+	
+	public static function reflect_to_query(&$query,$data_type,$data_name,$meta_name,$id,$input,$conf){
+		if(static::$output_type===false){
+			meta::reflect_to_query($query,$data_type,$data_name,$meta_name,$id,$input,$conf);
+		}
+		else{
+			$class_name=\cp::get_class_name('meta',static::$output_type);
+			$class_name::reflect_to_query($query,$data_type,$data_name,$meta_name,$id,$input,$conf);
+		}
+	}
 }
 ?>
