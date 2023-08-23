@@ -1370,7 +1370,7 @@
       const { useState, useMemo, useCallback, useReducer, useEffect } = wp.element;
       const { removeFormat, applyFormat, toggleFormat, insert, create, slice } = wp.richText;
       const onToggle = () => {
-        return onChange(toggleFormat(value, { type: "catpow/custom", attributes: { vars: "color:inherit;font-size:1em;font-weight:400" } }));
+        return onChange(toggleFormat(value, { type: "catpow/custom", attributes: { vars: "font-size:1em;" } }));
       };
       const setAttributes = useCallback((attr) => {
         onChange(applyFormat(value, { type: "catpow/custom", attributes: Object.assign(activeAttributes, attr) }));
@@ -1381,7 +1381,8 @@
           return state2;
         }
         const map = {
-          color: /color:(#?\w+);/,
+          color: /(?<!\-)color:(#?\w+);/,
+          bgcolor: /background\-color:(#?\w+);/,
           size: /font\-size:([\d\.]+)em;/,
           weight: /font\-weight:(\d+);/
         };
@@ -1397,6 +1398,7 @@
         let vars = "";
         const map = {
           color: "color:$;",
+          bgcolor: "background-color:$;",
           size: "font-size:$em;",
           weight: "font-weight:$;"
         };
@@ -1439,6 +1441,13 @@
           label: "\u8272",
           onChange: (color) => update({ color }),
           value: state.color || ""
+        }
+      ), /* @__PURE__ */ wp.element.createElement(
+        TextControl,
+        {
+          label: "\u80CC\u666F\u8272",
+          onChange: (bgcolor) => update({ bgcolor }),
+          value: state.bgcolor || ""
         }
       ), /* @__PURE__ */ wp.element.createElement(
         RangeControl,
