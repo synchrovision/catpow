@@ -1375,42 +1375,77 @@
       const setAttributes = useCallback((attr) => {
         onChange(applyFormat(value, { type: "catpow/custom", attributes: Object.assign(activeAttributes, attr) }));
       }, [value, activeAttributes]);
+      const extractStateFromVars = useCallback((vars) => {
+        const state2 = {};
+        if (!vars) {
+          return state2;
+        }
+        const map = {
+          color: /color:(#?\w+);/,
+          size: /font\-size:([\d\.]+)em;/,
+          weight: /font\-weight:(\d+);/
+        };
+        Object.keys(map).forEach((key) => {
+          const m = vars.match(map[key]);
+          if (m) {
+            state2[key] = m[1];
+          }
+        });
+        return state2;
+      }, []);
+      const extractVarsFromState = useCallback((state2) => {
+        let vars = "";
+        const map = {
+          color: "color:$;",
+          size: "font-size:$em;",
+          weight: "font-weight:$;"
+        };
+        Object.keys(map).forEach((key) => {
+          if (state2.hasOwnProperty(key)) {
+            vars += map[key].replace("$", "" + state2[key]);
+          }
+        });
+        return vars;
+      }, []);
       const init = useCallback((state2) => {
         if (state2.vars) {
           const { vars } = state2;
-          try {
-            const color = vars.match(/color:(#?\w+);/)[1];
-            const size = vars.match(/font\-size:([\d\.]+)em;/)[1];
-            const weight = vars.match(/font\-weight:(\d+);/)[1];
-            return { color, size, weight, vars };
-          } catch (e) {
-            console.error("catpow/custom format : cannot parse vars", vars);
-          }
+          return { vars, ...extractStateFromVars(vars) };
         }
-        return { color: "inherit", size: 1, weight: 400, vars: "color:inherit;font-size:1em;font-weight:400;" };
+        return { color: "inherit", size: 1, weight: 400, vars: "font-size:1em;" };
       }, []);
       const reducer = useCallback((state2, action) => {
-        const { color, size, weight } = { ...state2, ...action };
-        const vars = `color:${color};font-size:${size}em;font-weight:${weight};`;
-        return { color, size, weight, vars };
+        if (action.hasOwnProperty("vars")) {
+          const { vars } = action;
+          return { vars, ...extractStateFromVars(vars) };
+        } else {
+          const newState = { ...state2, ...action };
+          newState.vars = extractVarsFromState(newState);
+          return newState;
+        }
       }, []);
       const [state, update] = useReducer(reducer, { vars: activeAttributes.vars }, init);
       useEffect(() => {
-        onChange(applyFormat(value, { type: "catpow/custom", attributes: { vars: state.vars } }));
+        if (isActive) {
+          onChange(applyFormat(value, { type: "catpow/custom", attributes: { vars: state.vars } }));
+        }
       }, [state.vars]);
+      useEffect(() => {
+        update({ vars: activeAttributes.vars });
+      }, [activeAttributes.vars]);
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, null, /* @__PURE__ */ wp.element.createElement(CardBody, { style: { width: "20rem" } }, /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
           label: "\u8272",
           onChange: (color) => update({ color }),
-          value: state.color
+          value: state.color || ""
         }
       ), /* @__PURE__ */ wp.element.createElement(
         RangeControl,
         {
           label: "\u30B5\u30A4\u30BA",
           onChange: (size) => update({ size }),
-          value: parseFloat(state.size),
+          value: parseFloat(state.size || 1),
           min: 0.1,
           max: 10,
           step: 0.1
@@ -1420,7 +1455,7 @@
         {
           label: "\u592A\u3055",
           onChange: (weight) => update({ weight }),
-          value: parseFloat(state.weight),
+          value: parseFloat(state.weight || 400),
           min: 100,
           max: 1e3,
           step: 100

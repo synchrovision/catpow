@@ -413,30 +413,59 @@ wp.richText.registerFormatType('catpow/custom',{
 			onChange(applyFormat(value,{type:'catpow/custom',attributes:Object.assign(activeAttributes,attr)}));
 		},[value,activeAttributes]);
 		
+		const extractStateFromVars=useCallback((vars)=>{
+			const state={};
+			if(!vars){return state;}
+			const map={
+				color:/color:(#?\w+);/,
+				size:/font\-size:([\d\.]+)em;/,
+				weight:/font\-weight:(\d+);/
+			};
+			Object.keys(map).forEach((key)=>{
+				const m=vars.match(map[key]);
+				if(m){state[key]=m[1];}
+			});
+			return state;
+		},[]);
+		const extractVarsFromState=useCallback((state)=>{
+			let vars='';
+			const map={
+				color:"color:$;",
+				size:"font-size:$em;",
+				weight:"font-weight:$;"
+			};
+			Object.keys(map).forEach((key)=>{
+				if(state.hasOwnProperty(key)){vars+=map[key].replace('$',''+state[key]);}
+			});
+			return vars;
+		},[]);
 		const init=useCallback((state)=>{
 			if(state.vars){
 				const {vars}=state;
-				try{
-					const color=vars.match(/color:(#?\w+);/)[1];
-					const size=vars.match(/font\-size:([\d\.]+)em;/)[1];
-					const weight=vars.match(/font\-weight:(\d+);/)[1];
-					return {color,size,weight,vars};
-				}
-				catch(e){
-					console.error('catpow/custom format : cannot parse vars',vars);
-				}
+				return {vars,...extractStateFromVars(vars)};
 			}
-			return {color:'inherit',size:1,weight:400,vars:'color:inherit;font-size:1em;font-weight:400;'};
+			return {color:'inherit',size:1,weight:400,vars:'font-size:1em;'};
 		},[]);
 		const reducer=useCallback((state,action)=>{
-			const {color,size,weight}={...state,...action};
-			const vars=`color:${color};font-size:${size}em;font-weight:${weight};`;
-			return {color,size,weight,vars};
+			if(action.hasOwnProperty('vars')){
+				const {vars}=action;
+				return {vars,...extractStateFromVars(vars)};
+			}
+			else{
+				const newState={...state,...action};
+				newState.vars=extractVarsFromState(newState);
+				return newState;
+			}
 		},[]);
 		const [state,update]=useReducer(reducer,{vars:activeAttributes.vars},init);
 		useEffect(()=>{
-			onChange(applyFormat(value,{type:'catpow/custom',attributes:{vars:state.vars}}));
+			if(isActive){
+				onChange(applyFormat(value,{type:'catpow/custom',attributes:{vars:state.vars}}));
+			}
 		},[state.vars]);
+		useEffect(()=>{
+			update({vars:activeAttributes.vars});
+		},[activeAttributes.vars]);
 		
 
 		return (
@@ -448,12 +477,12 @@ wp.richText.registerFormatType('catpow/custom',{
 								<TextControl
 									label="色"
 									onChange={(color)=>update({color})}
-									value={state.color}
+									value={state.color || ''}
 								/>
 								<RangeControl
 									label="サイズ"
 									onChange={(size)=>update({size})}
-									value={parseFloat(state.size)}
+									value={parseFloat(state.size || 1)}
 									min={0.1}
 									max={10}
 									step={0.1}
@@ -461,7 +490,7 @@ wp.richText.registerFormatType('catpow/custom',{
 								<RangeControl
 									label="太さ"
 									onChange={(weight)=>update({weight})}
-									value={parseFloat(state.weight)}
+									value={parseFloat(state.weight || 400)}
 									min={100}
 									max={1000}
 									step={100}
