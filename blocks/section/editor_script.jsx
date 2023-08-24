@@ -36,7 +36,6 @@ wp.blocks.registerBlockType('catpow/section',{
 
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys,imageSizes}=CP.config.section;
-		
 		const [mainBlock,setMainBlock]=useState();
 
 		CP.inheritColor(props,['iconSrc','patternImageCss','headerPatternImageCss','frameImageCss','borderImageCss']);
@@ -89,6 +88,7 @@ wp.blocks.registerBlockType('catpow/section',{
 								{name:'paleBG',label:__('薄く','catpow'),values:'paleBG'}
 							]},
 							{name:'backgroundColor',label:__('背景色','catpow'),values:'hasBackgroundColor'},
+							'textColor',
 							{name:'navIcon',label:__('メニューアイコン','catpow'),values:'hasNavIcon',sub:[
 								{input:'image',label:__('アイコン','catpow'),keys:imageKeys.navIcon,size:'thumbnail'}
 							]},
@@ -138,6 +138,7 @@ wp.blocks.registerBlockType('catpow/section',{
 								{label:__('薄く','catpow'),values:'paleBG'}
 							]},
 							{name:'backgroundColor',label:__('背景色','catpow'),values:'hasBackgroundColor'},
+							'textColor',
 							{name:'navIcon',label:__('メニューアイコン','catpow'),values:'hasNavIcon',sub:[
 								{input:'image',label:__('アイコン','catpow'),keys:imageKeys.navIcon,size:'thumbnail'}
 							]},
@@ -180,6 +181,8 @@ wp.blocks.registerBlockType('catpow/section',{
 							{name:'image',label:__('画像','catpow'),values:'hasImage',sub:[
 								{input:'image',keys:imageKeys.image}
 							]},
+							{name:'backgroundColor',label:__('背景色','catpow'),values:'hasBackgroundColor'},
+							'textColor',
 							{name:'backgroundImage',label:__('背景画像','catpow'),values:'hasBackgroundImage',sub:[
 								{input:'picture',keys:imageKeys.backgroundImage,devices,cond:(states,{attr})=>(!states.isTemplate || !attr.backgroundImageCode)},
 								{label:__('薄く','catpow'),values:'paleBG'}
@@ -254,6 +257,7 @@ wp.blocks.registerBlockType('catpow/section',{
 								className="decoration" 
 								set={setAttributes}
 								attr={attributes}
+								devices={devices}
 								keys={imageKeys.decoration}
 							/>
 						}

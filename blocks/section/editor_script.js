@@ -109,6 +109,7 @@
                   { name: "paleBG", label: __("\u8584\u304F", "catpow"), values: "paleBG" }
                 ] },
                 { name: "backgroundColor", label: __("\u80CC\u666F\u8272", "catpow"), values: "hasBackgroundColor" },
+                "textColor",
                 { name: "navIcon", label: __("\u30E1\u30CB\u30E5\u30FC\u30A2\u30A4\u30B3\u30F3", "catpow"), values: "hasNavIcon", sub: [
                   { input: "image", label: __("\u30A2\u30A4\u30B3\u30F3", "catpow"), keys: imageKeys2.navIcon, size: "thumbnail" }
                 ] },
@@ -160,6 +161,7 @@
                   { label: __("\u8584\u304F", "catpow"), values: "paleBG" }
                 ] },
                 { name: "backgroundColor", label: __("\u80CC\u666F\u8272", "catpow"), values: "hasBackgroundColor" },
+                "textColor",
                 { name: "navIcon", label: __("\u30E1\u30CB\u30E5\u30FC\u30A2\u30A4\u30B3\u30F3", "catpow"), values: "hasNavIcon", sub: [
                   { input: "image", label: __("\u30A2\u30A4\u30B3\u30F3", "catpow"), keys: imageKeys2.navIcon, size: "thumbnail" }
                 ] },
@@ -202,6 +204,8 @@
                 { name: "image", label: __("\u753B\u50CF", "catpow"), values: "hasImage", sub: [
                   { input: "image", keys: imageKeys2.image }
                 ] },
+                { name: "backgroundColor", label: __("\u80CC\u666F\u8272", "catpow"), values: "hasBackgroundColor" },
+                "textColor",
                 { name: "backgroundImage", label: __("\u80CC\u666F\u753B\u50CF", "catpow"), values: "hasBackgroundImage", sub: [
                   { input: "picture", keys: imageKeys2.backgroundImage, devices: devices2, cond: (states2, { attr }) => !states2.isTemplate || !attr.backgroundImageCode },
                   { label: __("\u8584\u304F", "catpow"), values: "paleBG" }
@@ -261,6 +265,7 @@
           className: "decoration",
           set: setAttributes,
           attr: attributes,
+          devices,
           keys: imageKeys.decoration
         }
       ), /* @__PURE__ */ wp.element.createElement("header", { className: "header" }, /* @__PURE__ */ wp.element.createElement("div", { className: "title" }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), states.hasPrefix && /* @__PURE__ */ wp.element.createElement("div", { className: "prefix" }, /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "div", value: prefix, onChange: (prefix2) => setAttributes({ prefix: prefix2 }) })), states.hasHeaderImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && headerImageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: headerImageCode }) : /* @__PURE__ */ wp.element.createElement(
