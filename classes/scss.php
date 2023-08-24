@@ -148,7 +148,7 @@ class scss{
 					}
 					if(!empty($color_roles_by_shorthand[$key]['invert'])){
 						foreach($val as $k=>$v){
-							$classes['.resetTextColor']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
+							$classes['.revertTextColor']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
 							$classes['.invertTextColor']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-i-{$k})";
 						}
 					}
