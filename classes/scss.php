@@ -98,11 +98,11 @@ class scss{
 					$staticHue=$sep==='--';
 					$relativeHue=$sep==='_';
 					$num=$matches[3]??null;
-					if(isset($tones[$key])){
+					if(isset($tones[$key]) || (substr($key,-1)==='x' && isset($tones[substr($key,0,-1)]))){
 						$f='var(--cp-tones-'.$key.'-%s)';
 						$cf='var(--cp-container-tones-'.$key.'-%s)';
 						$rf='var(--cp-root-tones-'.$key.'-%s)';
-						$tone=$tones[$key];
+						$tone=$tones[$key]??[];
 						$color=sprintf(
 							'hsla(%s,%s,%s,%s)',
 							is_null($num)?
