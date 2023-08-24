@@ -2667,6 +2667,14 @@
     }, [set, styleDatas]);
     const SelectClass = useCallback(({ prm }) => {
       const { props: props2, item: item2, states: states2, save: save2, saveClasses: saveClasses2, saveCss: saveCss2 } = useContext(CP.SelectClassPanelContext);
+      if (typeof prm === "string") {
+        const preset = {
+          textColor: { name: "textColor", type: "buttons", label: __2("\u6587\u5B57\u8272", "catpow"), values: { revertTextColor: "\u901A\u5E38", invertTextColor: "\u53CD\u8EE2" } }
+        };
+        if (preset.hasOwnProperty(prm)) {
+          prm = preset[prm];
+        }
+      }
       if (prm.hasOwnProperty("cond")) {
         if (prm.cond === false) {
           return false;
@@ -3995,7 +4003,25 @@
         isActive: editMode,
         onClick: () => setEditMode(!editMode)
       }
-    ), currentItemIndexes.length > 0 && /* @__PURE__ */ wp.element.createElement(
+    ), editMode && /* @__PURE__ */ wp.element.createElement(
+      ToolbarButton,
+      {
+        icon: "welcome-add-page",
+        label: "add item",
+        onClick: () => {
+          pictures.push({
+            style: { width: "4rem", height: "4rem", top: "0rem", left: "0rem" },
+            code: false,
+            sources: devices.map((device) => {
+              return { device, srcset: CP.imageSrcOrDummy() };
+            }),
+            src: CP.imageSrcOrDummy(),
+            alt: ""
+          });
+          save();
+        }
+      }
+    ), editMode && currentItemIndexes.length > 0 && /* @__PURE__ */ wp.element.createElement(
       ToolbarButton,
       {
         icon: "insert",
@@ -4005,7 +4031,7 @@
           save();
         }
       }
-    ), currentItemIndexes.length > 0 && pictures.length > currentItemIndexes.length && /* @__PURE__ */ wp.element.createElement(
+    ), editMode && currentItemIndexes.length > 0 && pictures.length > currentItemIndexes.length && /* @__PURE__ */ wp.element.createElement(
       ToolbarButton,
       {
         icon: "remove",
