@@ -45,6 +45,12 @@ CP.SelectClassPanel=(props)=>{
 
 	const SelectClass=useCallback(({prm})=>{
 		const {props,item,states,save,saveClasses,saveCss}=useContext(CP.SelectClassPanelContext);
+		if(typeof prm ==='string'){
+			const preset={
+				textColor:{name:'textColor',type:'buttons',label:__('文字色','catpow'),values:{revertTextColor:'通常',invertTextColor:'反転'}}
+			};
+			if(preset.hasOwnProperty(prm)){prm=preset[prm];}
+		}
 		if(prm.hasOwnProperty('cond')){
 			if(prm.cond===false){return false;}
 			if(Array.isArray(prm.cond) && prm.cond.some((className)=>!states[className])){return false;}
