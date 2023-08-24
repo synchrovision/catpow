@@ -34,7 +34,6 @@ CP.PlacedPictures.Edit=(props)=>{
 	const item=keys.items?attr[keys.items][index]:attr;
 	const pictures=item[keys.pictures];
 	const classes=useMemo(()=>bem('CP-PlacedPictures '+className),[className]);
-	
 	const [editMode,setEditMode]=useState(false);
 	
 	const [currentItemNodes,setCurrentItemNodes]=useState([]);
@@ -122,7 +121,25 @@ CP.PlacedPictures.Edit=(props)=>{
 					isActive={editMode}
 					onClick={()=>setEditMode(!editMode)}
 				/>
-				{currentItemIndexes.length>0 &&
+				{editMode && (
+					<ToolbarButton
+						icon="welcome-add-page"
+						label="add item"
+						onClick={()=>{
+							pictures.push({
+								style:{width:'4rem',height:'4rem',top:'0rem',left:'0rem'},
+								code:false,
+								sources:devices.map((device)=>{
+									return {device,srcset:CP.imageSrcOrDummy()}
+								}),
+								src:CP.imageSrcOrDummy(),
+								alt:''
+							});
+							save();
+						}}
+					/>
+				)}
+				{editMode && currentItemIndexes.length>0 &&
 					<ToolbarButton
 						icon="insert"
 						label="insert"
@@ -132,7 +149,7 @@ CP.PlacedPictures.Edit=(props)=>{
 						}}
 					/>
 				}
-				{currentItemIndexes.length>0 && pictures.length>currentItemIndexes.length &&
+				{editMode && currentItemIndexes.length>0 && pictures.length>currentItemIndexes.length &&
 					<ToolbarButton
 						icon="remove"
 						label="remove"
