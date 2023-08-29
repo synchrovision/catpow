@@ -23,7 +23,7 @@ wp.blocks.registerBlockType('catpow/listed',{
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
-		const {InnerBlocks,InspectorControls,RichText}=wp.blockEditor;
+		const {InnerBlocks,InspectorControls,RichText,useBlockProps}=wp.blockEditor;
 		const {Icon,PanelBody,TextareaControl}=wp.components;
 		const {items=[],TitleTag,SubTitleTag,classes='',countPrefix,countSuffix,subCountPrefix,subCountSuffix,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-listed';
@@ -357,7 +357,7 @@ wp.blocks.registerBlockType('catpow/listed',{
 								<InnerBlocks/>
 							</div>
 						):(
-							<ul className={classes}>{rtn}</ul>
+							<ul {...useBlockProps({className:classes})}>{rtn}</ul>
 						)}
 					</>
 				)}
@@ -365,7 +365,7 @@ wp.blocks.registerBlockType('catpow/listed',{
 		);
 	},
 	save({attributes,className}){
-		const {InnerBlocks,RichText}=wp.blockEditor;
+		const {InnerBlocks,RichText,useBlockProps}=wp.blockEditor;
 		const {items=[],TitleTag,SubTitleTag,classes='',countPrefix,countSuffix,subCountPrefix,subCountSuffix,linkUrl,linkText,loopParam,doLoop}=attributes;
 		const states=CP.wordsToFlags(classes);
 		const {imageKeys}=CP.config.listed;
@@ -448,7 +448,7 @@ wp.blocks.registerBlockType('catpow/listed',{
 		});
 		return (
 			<>
-				<ul className={classes}>
+				<ul {...useBlockProps.save({className:classes})}>
 					{rtn}
 				</ul>
 				{doLoop && <onEmpty><InnerBlocks.Content/></onEmpty>}
