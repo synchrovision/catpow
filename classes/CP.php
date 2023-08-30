@@ -1835,16 +1835,19 @@ class CP{
 				foreach($styles as $style=>$flag){
 					$css.=util\style_config::resolve_css_vars(file_get_contents($style));
 				}
+				$cssToInlineStyles=new \voku\CssToInlineStyles\CssToInlineStyles();
 				$conf['message']=
 					'<!DOCTYPE html><html lang="ja">'.
 					'<head>'.
 					'<meta name="viewport" content="width=device-width" />'.
 					'<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />'.
 					'<title>'.shortcode::do_shortcode($conf['subject']).'</title>'.
-					'<style>'.$css.'</style>'.
 					'</head>'.
 					'<body class="mail_body '.$body_class.'">'.$body.'</body>'.
 					'</html>';
+				$cssToInlineStyles->setHTML($conf['message']);
+				$cssToInlineStyles->setCSS($css);
+				$conf['message']=$cssToInlineStyles->convert();
 			}
 		}
 		$conf=array_merge([
