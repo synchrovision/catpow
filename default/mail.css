@@ -36,6 +36,7 @@ img {
   text-decoration: none;
   -ms-interpolation-mode: bicubic;
   width: auto;
+  height: auto;
   clear: both;
   display: block;
 }
