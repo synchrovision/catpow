@@ -43,7 +43,7 @@
 							</tr>
 						</tbody>
 					</table>
-				</a>,
+				</a>
 				<InspectorControls>
 					<CP.SelectClassPanel
 						title='クラス'
