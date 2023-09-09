@@ -1,10 +1,5 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Staatliches&subset=latin-ext");
-@media (max-width:639px) {
-  html {
-    font-size: 4vw;
-  }
-}
 .color--0 {
   --cp-tones-s-h: 0;
   --cp-container-tones-s-h: var(--cp-tones-s-h);

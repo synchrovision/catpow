@@ -1,11 +1,6 @@
 @import "config/style_config.scss";
 @import url('https://fonts.googleapis.com/css?family=Staatliches&subset=latin-ext');
 
-html{
-	@media(#{bp(-1)}){
-		@include txt((p:4vw));
-	}
-}
 @include define_color_classes;
 div{
 	&.cp_message{
