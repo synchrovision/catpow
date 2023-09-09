@@ -54,7 +54,8 @@
             }
           },
           "color",
-          { name: "background", type: "buttons", label: "\u80CC\u666F", values: { noBackground: "\u306A\u3057", hasBackgroundColor: "\u8272", hasBackgroundImage: "\u753B\u50CF", hasPatternImage: "\u30D1\u30BF\u30FC\u30F3" }, sub: {
+          "textColor",
+          { name: "background", type: "buttons", label: "\u80CC\u666F", values: { noBackground: "\u306A\u3057", hasPaleBackgroundColor: "\u8584\u8272", hasBackgroundColor: "\u8272", hasBackgroundImage: "\u753B\u50CF", hasPatternImage: "\u30D1\u30BF\u30FC\u30F3" }, sub: {
             hasBackgroundColor: [
               { label: "\u30D1\u30BF\u30FC\u30F3", values: "hasPattern", sub: ["pattern"] }
             ],

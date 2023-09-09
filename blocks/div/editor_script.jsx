@@ -56,7 +56,8 @@ wp.blocks.registerBlockType('catpow/div',{
 					}
 				},
 				'color',
-				{name:'background',type:'buttons',label:'背景',values:{noBackground:'なし',hasBackgroundColor:'色',hasBackgroundImage:'画像',hasPatternImage:'パターン'},sub:{
+				'textColor',
+				{name:'background',type:'buttons',label:'背景',values:{noBackground:'なし',hasPaleBackgroundColor:'薄色',hasBackgroundColor:'色',hasBackgroundImage:'画像',hasPatternImage:'パターン'},sub:{
 					hasBackgroundColor:[
 						{label:'パターン',values:'hasPattern',sub:['pattern']}
 					],
