@@ -29,9 +29,9 @@ CP.EmbedIcon={
 		);
 	},
 	Output:(props)=>{
-		const {item}=props;
+		const {className='icon',item}=props;
 		return (
-			<div className="icon" data-src={item.embedIconSrc} dangerouslySetInnerHTML={{__html:item.embedIconCode}}/>
+			<div className={className} data-src={item.embedIconSrc} dangerouslySetInnerHTML={{__html:item.embedIconCode}}/>
 		);
 	}
 }

@@ -10,7 +10,7 @@
       const { item, prm, save } = props;
       const parser = new DOMParser();
       const serializer = new XMLSerializer();
-      return /* @__PURE__ */ React.createElement(
+      return /* @__PURE__ */ wp.element.createElement(
         CP.SelectPreparedImage,
         {
           name: "icon",
@@ -32,8 +32,8 @@
       );
     },
     Output: (props) => {
-      const { item } = props;
-      return /* @__PURE__ */ React.createElement("div", { className: "icon", "data-src": item.embedIconSrc, dangerouslySetInnerHTML: { __html: item.embedIconCode } });
+      const { className = "icon", item } = props;
+      return /* @__PURE__ */ wp.element.createElement("div", { className, "data-src": item.embedIconSrc, dangerouslySetInnerHTML: { __html: item.embedIconCode } });
     }
   };
 })();
