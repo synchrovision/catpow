@@ -192,6 +192,7 @@
             ), states.hasTitle && states.hasTitleCaption && /* @__PURE__ */ wp.element.createElement(
               RichText2,
               {
+                tagName: "p",
                 className: "titlecaption",
                 onChange: (titleCaption) => {
                   item.titleCaption = titleCaption;

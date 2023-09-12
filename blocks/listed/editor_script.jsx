@@ -200,6 +200,7 @@ wp.blocks.registerBlockType('catpow/listed',{
 								}
 								{states.hasTitle && states.hasTitleCaption && 
 									<RichText
+										tagName="p"
 										className="titlecaption"
 										onChange={(titleCaption)=>{item.titleCaption=titleCaption;save();}}
 										value={item.titleCaption}
