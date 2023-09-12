@@ -274,6 +274,8 @@ wp.blocks.registerBlockType('catpow/listed',{
 				</CP.Item>
 			);
 		});
+		
+		const blockProps=useBlockProps({className:classes});
 
 		return (
 			<>
@@ -357,7 +359,7 @@ wp.blocks.registerBlockType('catpow/listed',{
 								<InnerBlocks/>
 							</div>
 						):(
-							<ul {...useBlockProps({className:classes})}>{rtn}</ul>
+							<ul {...blockProps}>{rtn}</ul>
 						)}
 					</>
 				)}
