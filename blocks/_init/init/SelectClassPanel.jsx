@@ -47,6 +47,19 @@ CP.SelectClassPanel=(props)=>{
 		const {props,item,states,save,saveClasses,saveCss}=useContext(CP.SelectClassPanelContext);
 		if(typeof prm ==='string'){
 			const preset={
+				isTemplate:{
+					name:'template',
+					input:'bool',
+					key:'isTemplate',
+					label:'テンプレート',
+					sub:[
+						{name:'loop',input:'bool',label:'ループ',key:'doLoop',sub:[
+							{name:'contentPath',label:'content path',input:'text',key:'content_path'},
+							{name:'query',label:'query',input:'textarea',key:'query'},
+							{name:'loopCount',label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
+						]}
+					]
+				},
 				textColor:{name:'textColor',type:'buttons',label:__('文字色','catpow'),values:{revertTextColor:'通常',invertTextColor:'反転'}}
 			};
 			if(preset.hasOwnProperty(prm)){prm=preset[prm];}
