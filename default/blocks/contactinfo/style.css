@@ -1,0 +1,105 @@
+@charset "UTF-8";
+.wp-block-catpow-contactinfo {
+  max-width: 60rem;
+  width: fit-content;
+  padding: 1em;
+  margin: 1em auto;
+  text-align: center;
+  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+}
+.wp-block-catpow-contactinfo__title {
+  padding-bottom: 0.25em;
+  margin-bottom: 0.5em;
+  font-size: 1.5em;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  border-bottom-style: solid;
+  border-bottom-width: 0.0625rem;
+}
+.wp-block-catpow-contactinfo__lead {
+  font-size: 1em;
+}
+.wp-block-catpow-contactinfo__items {
+  padding: 2em 0rem;
+  font-size: 0.8em;
+  list-style: none;
+}
+.wp-block-catpow-contactinfo__items-item-title {
+  margin-bottom: 0.5em;
+  font-size: 1.5em;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+}
+.wp-block-catpow-contactinfo__items-item-lead {
+  font-size: 1em;
+}
+.wp-block-catpow-contactinfo__items-item-link {
+  margin: 0.25em auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 0.25em;
+  text-align: center;
+  font-size: 2.5em;
+  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  text-decoration: none;
+  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
+}
+@media (max-width:720px) {
+  .wp-block-catpow-contactinfo__items-item-link {
+    font-size: 2em;
+  }
+}
+.wp-block-catpow-contactinfo__items-item-link-icon {
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 1em;
+}
+.wp-block-catpow-contactinfo__items-item-link-icon > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.wp-block-catpow-contactinfo__items-item-caption {
+  font-size: 0.8em;
+}
+.wp-block-catpow-contactinfo__caption {
+  font-size: 0.8em;
+}
+.wp-block-catpow-contactinfo.has-multiple-items .wp-block-catpow-contactinfo__items {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: center;
+  justify-content: center;
+  gap: 1em;
+}
+.wp-block-catpow-contactinfo.has-multiple-items .wp-block-catpow-contactinfo__items-item {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 20em;
+  font-size: 0.8em;
+}
+.wp-block-catpow-contactinfo.has-multiple-items .wp-block-catpow-contactinfo__items-item-link {
+  font-size: 2em;
+}
+.wp-block-catpow-contactinfo.is-size-small {
+  font-size: 1rem;
+}
+.wp-block-catpow-contactinfo.is-size-medium {
+  font-size: 1.25rem;
+}
+.wp-block-catpow-contactinfo.is-size-large {
+  font-size: 1.5rem;
+}
+/*# sourceMappingURL=./style.css.map */

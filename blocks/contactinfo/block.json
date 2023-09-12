@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"name":"catpow/contactinfo",
+	"title": "🐾 ContactInfo",
+	"icon": "phone",
+	"category": "catpow",
+	"textdomain": "catpow",
+	"description": "お問い合わせの電話番号やメールアドレスを記載するためのブロックです。",
+	"supports": {
+		"anchor": false,
+		"className": false,
+		"color": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	}
+}

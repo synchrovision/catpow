@@ -1,0 +1,69 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-contactinfo{
+	@include bnd((w:fit 960,pd:1em,mg:1em a));
+	@include txt((a:c));
+	@include shd((b:2));
+	&__title{
+		@include bnd((pdb:.25em,mgb:.5em));
+		@include txt((p:1.5em,f:h));
+		@include bdr((p:b,s:s,w:1));
+	}
+	&__lead{
+		@include txt((p:1em));
+	}
+	&__items{
+		@include bnd((pd:2em 0));
+		@include txt((p:.8em,l:n));
+		&-item{
+			&-title{
+				@include bnd((mgb:.5em));
+				@include txt((p:1.5em,f:h));
+			}
+			&-lead{
+				@include txt((p:1em));
+			}
+			&-link{
+				@include bnd((mg:.25em a));
+				@include flx((w:n,j:c,a:c,g:.25em));
+				@include txt((a:c,p:2.5em,f:d,s:n,c:mx));
+				@include bp(-720){
+					@include txt((p:2em));
+				}
+				&-icon{
+					@include bnd((f:0 0 1em));
+					>svg{
+						@include bnd((d:b,w:f,h:a));
+					}
+				}
+			}
+			&-caption{
+				@include txt((p:.8em));
+			}
+		}
+	}
+	&__caption{
+		@include txt((p:.8em));
+	}
+	&.has-multiple-items &{
+		&__items{
+			@include flx((w:w,j:c,g:1em));
+			&-item{
+				@include bnd((f:1 1 20em));
+				@include txt((p:.8em));
+				&-link{
+					@include txt((p:2em));
+				}
+			}
+		}
+	}
+	&.is-size-small{
+		@include txt((p:16));
+	}
+	&.is-size-medium{
+		@include txt((p:20));
+	}
+	&.is-size-large{
+		@include txt((p:24));
+	}
+}

@@ -1,0 +1,10 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-contactinfo{
+	&__items-item{
+		@include bnd((p:r));
+		.itemControl{
+			@include bnd((p:a,b:f,r:5));
+		}
+	}
+}
