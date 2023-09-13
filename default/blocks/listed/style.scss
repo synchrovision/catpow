@@ -1,0 +1,341 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-listed{
+	&.orderd{
+		@include bnd((mg:30 a,w:a c));
+		@include txt((l:n));
+		@include grd((rc:400,g:20));
+		>.item{
+			@include bnd((p:r,bs:b));
+			@include shd((b:4));
+			>.header{
+				@include bnd((pd:20,mg:0));
+				@include bg((c:m));
+				.counter{
+					@include bnd((d:b,p:a,t:-.5em,l:-.5em,pd:1em,mgb:20));
+					@include bg((c:m));
+					@include bdr((s:s,w:2,r:2em));
+					@include txt((a:c,p:18,h:1em,f:d,c:i));
+					@include shd((b:2));
+					>.pref,>.suffix{
+						
+					}
+					>.number{
+						@include bnd((mg:0 .1em));
+						@include txt((p:1.5em));
+					}
+				}
+				>.text{
+					>.title,>.titlecaption{
+						@include bnd((pd:0,mg:0));
+						@include txt((c:i));
+					}
+					>.title{
+						@include txt((a:l,p:28,f:h,t:.1em));
+					}
+				}
+			}
+			>.contents{
+				@include bnd((pd:20));
+				>.subtitle{
+					@include bnd((pd:0,mgb:.5em));
+					@include txt((a:l,p:16,h:2em,c:tx,w:l));
+				}
+				>.text{
+					@include bnd((pd:0,mg:0));
+					@include txt((a:l,p:14,h:2em,c:tx,w:l));
+				}
+			}
+			>.link{
+				a{
+					@include bnd((d:b,p:a,t:0,b:0,l:0,r:0));
+				}
+			}
+		}
+		&.hasImage{
+			>.item{
+				>.image{
+					img{
+						@include bnd((w:f,h:a));
+					}
+				}
+			}
+		}
+	}
+	&.news{
+		@include bnd((d:b,w:f c,mg:30 a,c:400,g:20));
+		@include txt((l:n));
+		>.item{
+			@include bnd((pd:16 0,bi:a));
+			@include bdr((p:b,s:s,w:1));
+			>.contents{
+				>.subtitle{
+					@include bnd((pd:0,mgb:.5em));
+					@include txt((a:j,p:16,h:1.5em,f:t,s:b,c:t));
+				}
+				>.text{
+					@include txt((a:j,p:13,h:1.5em,f:t,s:r,c:t));
+				}
+			}
+		}
+	}
+	&.index{
+		@include bnd((d:b,w:f c,mg:30 a,c:400));
+		@include txt((l:n));
+		>.item{
+			@include bnd((pd:5,bs:b));
+			@include flx((w:w));
+			>.header{
+				@include bnd((f:1 1 200,pd:5));
+				@include flx((w:n,a:c));
+				>.counter{
+					@include bnd((d:b,f:0 0 50));
+					@include txt((a:c));
+					@include flx((w:w,a:c,v:m));
+					.prefix,.suffix{
+						@include bnd((d:b,f:1 1 90%));
+						@include txt((a:c,p:10,h:1em,f:t,w:b,c:t));
+					}
+					.number{
+						@include bnd((d:b,f:1 1 90%));
+						@include txt((a:c,p:30,h:1em,f:t,w:b,c:t));
+					}
+				}
+				>.image{
+					@include bnd((mgr:.5em));
+					img{
+						@include bnd((w:a,h:30));
+					}
+				}
+				>.text{
+					@include bnd((f:0 0 auto));
+					h3{
+						@include txt((a:l,p:15,h:1.5em,f:t,fw:900,c:t));
+					}
+				}
+				&::after{
+					content: '';
+					@include bnd((f:1 1 a,mg:10));
+					@include bdr((p:b,s:d,w:2,c:t 1 .5));
+				}
+			}
+			>.contents{
+				@include flx((w:n,a:c));
+				>.subtitle{
+					@include bnd((mg:0 .5em));
+					@include txt((a:j,p:14,h:1.5em,f:t,s:b,c:t));
+				}
+				>.text{
+					@include txt((a:j,p:13,h:1.5em,f:t,s:r,c:t));
+				}
+				.link{
+					a{
+						@include bnd((d:ib,p:r,mg:0 5));
+						@include txt((a:l,p:13,h:1em,f:t,s:r,c:m));
+						&::before{
+							@include bnd((d:ib,mgr:.5em));
+							@include ico('chevron-right');
+						}
+					}
+				}
+			}
+		}
+
+	}
+	&.menu{
+		@include txt((l:n,c:tx));
+		>.item{
+			>.header{
+				>.text{
+					>.title,>.titlecaption{
+						@include bnd((pd:0,mg:0));
+					}
+				}
+			}
+			>.contents{
+				>.text{
+					@include bnd((pd:0,mg:0));
+				}
+			}
+			>.link{
+				a{
+					@include bnd((d:b,p:a,i:0));
+				}
+			}
+		}
+		&.large{
+			@include bnd((mg:30 a,pd:0,w:a c));
+			@include grd((rc:400,g:20));
+			>.item{
+				@include bnd((p:r,bs:b));
+				@include trn((t:.5s));
+				@include shd((b:8));
+				>.header{
+					@include bnd((pd:10));
+					@include flx((w:w,a:c));
+					@include txt((a:c));
+					>.image{
+						@include bnd((f:0 0 120));
+						img{
+							@include bnd((w:f,h:f,op:c,of:c));
+						}
+					}
+					>.text{
+						@include bnd((f:1 1 120,pd:8));
+						>.title{
+							@include txt((p:22));
+						}
+						>.titlecaption{
+							@include txt((p:14));
+						}
+					}
+				}
+				>.contents{
+					@include bnd((pd:10));
+					>.text{
+						@include txt((a:l,p:14,h:2em,w:l,c:t));
+					}
+				}
+			}
+			&.hasImage{
+				>.item{
+					>.image{
+						@include bnd((p:r,o:h,w:f,h:400));
+						img{
+							@include bnd((w:f a,h:125% a));
+						}
+					}
+				}
+			}
+		}
+		&.medium{
+			@include bnd((pd:10,mg:20 a,w:a 960));
+			@include grd((rc:400,g:20));
+			>.item{
+				@include bnd((p:r,mg:1));
+				@include shd((b:4));
+				>.header{
+					@include flx((w:w));
+					>.image{
+						@include bnd((f:0 0 100));
+						img{
+							@include bnd((w:f,h:f,op:c,of:c));
+						}
+					}
+					>.text{
+						@include bnd((f:1 1 100,pd:8));
+						>.title{
+							@include bnd((pd:0,mg:0));
+							@include txt((p:20));
+							&+.titlecaption{
+								@include bnd((mgt:.5em,pdt:.5em));
+								@include bdr((p:t,s:s,w:1));
+							}
+						}
+						>.titlecaption{
+							@include bnd((pd:0,mg:0));
+							@include txt((a:l,p:13));
+						}
+					}
+				}
+				>.contents{
+					@include bnd((p:r,pd:10));
+					>.subtitle,>.text{
+						@include bnd((mg:0));
+						@include txt((a:l,p:13,h:2em,w:l));
+					}
+				}
+			}
+			&.hasImage{
+				>.item{
+					@include flx((w:w));
+					>.image{
+						@include bnd((f:1 1 100));
+						img{
+							@include bnd((d:b,w:f,h:f,op:c,of:c));
+						}
+					}
+					>.header{
+						@include bnd((f:2 2 200,pd:10));
+					}
+					>.contents{
+						@include bnd((f:4 4 400));
+					}
+				}
+			}
+		}
+		&.small{
+			@include bnd((pd:10,mg:0 a,w:a 960));
+			@include grd((rc:300,g:1em));
+			>.item{
+				@include bnd((p:r,bs:b,o:h));
+				@include trn((t:.5s));
+				@include shd((b:2));
+				>.header{
+					@include bnd((p:r,pd:4,z:1));
+					@include flx((a:t));
+					>.image{
+						@include bnd((f:0 0 60,pd:4));
+						img{
+							@include bnd((w:f,h:60,of:c,op:c));
+							@include bdr((r:50%));
+						}
+					}
+					>.text{
+						@include bnd((f:10 10 150,pd:4));
+						>.title{
+							@include bnd((f:1 1 f,pd:0,mg:0));
+							@include txt((p:18,h:1.5em,w:r));
+							@include bdr((p:b,s:s,w:1);
+							&+.titlecaption{
+								@include bnd((mgt:.5em));
+							}
+						}
+						>.titlecaption{
+							@include bnd((f:1 1 f,pd:0,mg:0));
+							@include txt((a:j,p:12,h:1.5em,w:l));
+						}
+					}
+				}
+				>.contents{
+					@include bnd((p:r,z:1,pd:10));
+					>.text{
+						@include bnd((pd:0,mg:0));
+						@include txt((a:j,p:12,h:1.5em));
+					}
+				}
+			}
+			&.hasImage{
+				>.item{
+					@include bnd((p:r,pdl:100));
+					>.image{
+						@include bnd((p:a,i:0,mgr:a,w:100,h:f));
+						img{@include bnd((w:f,h:f,op:c,of:c));}
+					}
+				}
+			}
+		}
+		&.hasBackgroundColor{
+			>.item{
+				>.header{
+					@include bg((c:m));
+					@include txt((c:i));
+				}
+			}
+		}
+		&.hasBackgroundImage{
+			>.item{
+				>.background{
+					@include bnd((d:b,p:a,i:0,z:-1));
+				}
+			}
+		}
+		&.paleBG{
+			>.item{
+				>.background{
+					@include trn((o:.25));
+				}
+			}
+		}
+	}
+}
