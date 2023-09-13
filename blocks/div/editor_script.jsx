@@ -23,14 +23,13 @@ wp.blocks.registerBlockType('catpow/div',{
 		const {InnerBlocks,InspectorControls}=wp.blockEditor;
 		const {PanelBody,TextareaControl} = wp.components;
 		const {attributes,className,setAttributes,context}=props;
-		const {anchor,classes,color,patternImageCss,frameImageCss,borderImageCss}=attributes;
+		const {customColorVars,anchor,classes,color,patternImageCss,frameImageCss,borderImageCss}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.div;
 		
 		CP.inheritColor(props,['iconImageSrc','patternImageCss','frameImageCss','borderImageCss']);
 		CP.manageStyleData(props,['patternImageCss','frameImageCss','borderImageCss']);
-		
 		
 		const selectiveClasses=useMemo(()=>{
 			const {devices,imageKeys}=CP.config.div;
@@ -56,6 +55,7 @@ wp.blocks.registerBlockType('catpow/div',{
 					}
 				},
 				'color',
+				'customColorVars',
 				'textColor',
 				{name:'background',type:'buttons',label:'背景',values:{noBackground:'なし',hasPaleBackgroundColor:'薄色',hasBackgroundColor:'色',hasBackgroundImage:'画像',hasPatternImage:'パターン'},sub:{
 					hasBackgroundColor:[
@@ -84,7 +84,7 @@ wp.blocks.registerBlockType('catpow/div',{
 
 		return (
 			<>
-				<div id={anchor} className={classes}>
+				<div id={anchor} className={classes} style={customColorVars}>
 					{states.hasIcon && 
 						<div className="icon">
 							<CP.SelectResponsiveImage
@@ -137,16 +137,15 @@ wp.blocks.registerBlockType('catpow/div',{
 		);
 	},
 
-
 	save({attributes,className,setAttributes}){
 		const {InnerBlocks}=wp.blockEditor;
-		const {anchor,classes='',color,patternImageCss,frameImageCss,borderImageCss}=attributes;
+		const {customColorVars,anchor,classes='',color,patternImageCss,frameImageCss,borderImageCss}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.div;
 		
 		return (
-			<div id={anchor} className={classes}>
+			<div id={anchor} className={classes} style={customColorVars}>
 				{states.hasIcon && 
 					<div className="icon">
 						<CP.ResponsiveImage

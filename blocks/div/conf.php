@@ -1,6 +1,7 @@
 <?php
 use Catpow\util\BlockConfig;
 $attributes=[
+	'customColorVars'=>['type'=>'object','default'=>[]],
 	'color'=>['type'=>'string','default'=>"0"],
 	"classes"=>["source"=>'attribute',"selector"=>'div',"attribute"=>'class',"default"=>'wp-block-catpow-div frame thinBorder'],
 
