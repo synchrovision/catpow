@@ -47,6 +47,7 @@ CP.SelectClassPanel=(props)=>{
 		const {props,item,states,save,saveClasses,saveCss}=useContext(CP.SelectClassPanelContext);
 		if(typeof prm ==='string'){
 			const preset={
+				customColorVars:{name:'customColorVars',input:'customColorVars',label:'カスタムカラー',vars:'customColorVars'},
 				isTemplate:{
 					name:'template',
 					input:'bool',
@@ -336,7 +337,24 @@ CP.SelectClassPanel=(props)=>{
 						);
 						break;
 					}
-					case 'blendmode':
+					case 'customColorVars':{
+						rtn.push(
+							<CP.CustomColorVars
+								value={props.attr[prm.vars]}
+								onChange={(vars)=>{
+									const newVars={...props.attr[prm.vars]};
+									Object.keys(vars).forEach((key)=>{
+										if(vars[key]===null){delete newVars[key];}
+										else{newVars[key]=vars[key];}
+									});
+									console.log({[prm.vars]:newVars});
+									save({[prm.vars]:newVars});
+								}}
+							/>
+						);
+						break;
+					}
+					case 'blendmode':{
 						rtn.push(
 							<CP.SelectBlendMode
 								label={prm.label}
@@ -347,6 +365,7 @@ CP.SelectClassPanel=(props)=>{
 							/>
 						);
 						break;
+					}
 				}
 			}
 			else{

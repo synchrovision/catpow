@@ -1907,45 +1907,57 @@
 
   // ../blocks/_init/init/SelectColors.jsx
   CP.SelectColors = (props) => {
-    const { useState, useRef } = wp.element;
+    const { useState, useRef, useReducer, useCallback } = wp.element;
     const { ColorPicker, ColorPalette, Popover } = wp.components;
     const { onChange } = props;
     const [index, setIndex] = useState(-1);
-    const colorValues = props.colors.map((color) => {
-      if (typeof color === "string") {
-        return color;
-      }
-      if ("h" in color) {
-        if ("a" in color) {
-          return `hsla(${color.h},${color.s},${color.l},${color.a})`;
+    const init = useCallback((colors2) => {
+      const colorValues = colors2.map((color) => {
+        if (typeof color === "string") {
+          return color;
         }
-        return `hsl(${color.h},${color.s},${color.l})`;
-      }
-      if ("a" in color) {
-        return `rgba(${color.r},${color.g},${color.b},${color.a})`;
-      }
-      return `rgba(${color.r},${color.g},${color.b})`;
-    });
-    const colors = colorValues.map((color) => {
-      return { name: color, color };
-    });
+        if ("h" in color) {
+          if ("a" in color) {
+            return `hsla(${color.h},${color.s},${color.l},${color.a})`;
+          }
+          return `hsl(${color.h},${color.s},${color.l})`;
+        }
+        if ("a" in color) {
+          return `rgba(${color.r},${color.g},${color.b},${color.a})`;
+        }
+        return `rgba(${color.r},${color.g},${color.b})`;
+      });
+      return colorValues.map((color) => {
+        return { name: color, color };
+      });
+    }, []);
+    const reducer = useCallback((colors2, action) => {
+      const { index: index2, color } = action;
+      const newColors = [...colors2];
+      newColors.splice(index2, 1, { name: color, color });
+      return newColors;
+    }, []);
+    const [colors, updateColors] = useReducer(reducer, props.colors, init);
+    const onChangeOfColorPalette = useCallback((value) => {
+      setIndex(colors.findIndex((color) => color.color == value));
+    }, [colors]);
+    const onChangeOfColorPicker = useCallback((value) => {
+      updateColors({ index, color: value.hex });
+      onChange(index, value);
+    }, [onChange, index, updateColors]);
     return /* @__PURE__ */ wp.element.createElement("div", null, /* @__PURE__ */ wp.element.createElement(
       ColorPalette,
       {
         colors,
-        color: index > -1 && colors[index].color,
-        onChange: (colorValue) => {
-          setIndex(colorValues.indexOf(colorValue));
-        }
+        value: index > -1 ? colors[index].color : "rgba(0,0,0,0)",
+        onChange: onChangeOfColorPalette,
+        disableCustomColors: true
       }
-    ), index > -1 && /* @__PURE__ */ wp.element.createElement(Popover, null, /* @__PURE__ */ wp.element.createElement(
+    ), index > -1 && /* @__PURE__ */ wp.element.createElement(Popover, { onClose: () => setIndex(-1) }, /* @__PURE__ */ wp.element.createElement(
       ColorPicker,
       {
         color: colors[index].color,
-        onChangeComplete: (value) => {
-          colors[index].color = value.hex;
-          onChange(index, value);
-        }
+        onChangeComplete: onChangeOfColorPicker
       }
     )));
   };
@@ -2369,8 +2381,8 @@
       );
     },
     Output: (props) => {
-      const { item } = props;
-      return /* @__PURE__ */ wp.element.createElement("span", { className: "icon" }, /* @__PURE__ */ wp.element.createElement("img", { src: item.iconSrc, alt: item.iconAlt }));
+      const { className = "icon", item } = props;
+      return /* @__PURE__ */ wp.element.createElement("span", { className }, /* @__PURE__ */ wp.element.createElement("img", { src: item.iconSrc, alt: item.iconAlt }));
     }
   };
 
@@ -2669,6 +2681,20 @@
       const { props: props2, item: item2, states: states2, save: save2, saveClasses: saveClasses2, saveCss: saveCss2 } = useContext(CP.SelectClassPanelContext);
       if (typeof prm === "string") {
         const preset = {
+          customColorVars: { name: "customColorVars", input: "customColorVars", label: "\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", vars: "customColorVars" },
+          isTemplate: {
+            name: "template",
+            input: "bool",
+            key: "isTemplate",
+            label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
+            sub: [
+              { name: "loop", input: "bool", label: "\u30EB\u30FC\u30D7", key: "doLoop", sub: [
+                { name: "contentPath", label: "content path", input: "text", key: "content_path" },
+                { name: "query", label: "query", input: "textarea", key: "query" },
+                { name: "loopCount", label: "\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", input: "range", key: "loopCount", min: 1, max: 16 }
+              ] }
+            ]
+          },
           textColor: { name: "textColor", type: "buttons", label: __2("\u6587\u5B57\u8272", "catpow"), values: { revertTextColor: "\u901A\u5E38", invertTextColor: "\u53CD\u8EE2" } }
         };
         if (preset.hasOwnProperty(prm)) {
@@ -3028,7 +3054,30 @@
               );
               break;
             }
-            case "blendmode":
+            case "customColorVars": {
+              rtn.push(
+                /* @__PURE__ */ wp.element.createElement(
+                  CP.CustomColorVars,
+                  {
+                    value: props2.attr[prm.vars],
+                    onChange: (vars) => {
+                      const newVars = { ...props2.attr[prm.vars] };
+                      Object.keys(vars).forEach((key) => {
+                        if (vars[key] === null) {
+                          delete newVars[key];
+                        } else {
+                          newVars[key] = vars[key];
+                        }
+                      });
+                      console.log({ [prm.vars]: newVars });
+                      save2({ [prm.vars]: newVars });
+                    }
+                  }
+                )
+              );
+              break;
+            }
+            case "blendmode": {
               rtn.push(
                 /* @__PURE__ */ wp.element.createElement(
                   CP.SelectBlendMode,
@@ -3042,6 +3091,7 @@
                 )
               );
               break;
+            }
           }
         } else {
           rtn.push(
@@ -4102,13 +4152,26 @@
     return /* @__PURE__ */ wp.element.createElement("a", { className, href, target, rel: target && "noopener", ...otherProps }, props.children);
   };
   CP.Link.Edit = (props) => {
-    const { className, set, attr, keys, index, isSelected, ...otherProps } = props;
+    const { className, set, attr, keys, index, isSelected = "auto", ...otherProps } = props;
     const { onChange } = props;
-    const { useMemo, useCallback } = wp.element;
+    const { useMemo, useCallback, useEffect, useState } = wp.element;
     const { bem } = Catpow.util;
     const classes = useMemo(() => bem("CP-Link " + className), [className]);
     const item = useMemo(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
-    return /* @__PURE__ */ wp.element.createElement("span", { className: classes({ "is-selected": isSelected }), ...otherProps }, props.children, /* @__PURE__ */ wp.element.createElement(
+    const [hasCursor, setHasCursor] = useState(false);
+    const [ref, setRef] = useState(false);
+    useEffect(() => {
+      const cb = () => {
+        if (!ref) {
+          return;
+        }
+        const selection = window.getSelection();
+        setHasCursor(selection.rangeCount > 0 && ref.contains(selection.getRangeAt(0).commonAncestorContainer));
+      };
+      document.addEventListener("click", cb);
+      return () => document.removeEventListener("click", cb);
+    }, [ref, setHasCursor]);
+    return /* @__PURE__ */ wp.element.createElement("span", { className: classes({ "is-selected": isSelected === "auto" ? hasCursor : isSelected }), ...otherProps, ref: setRef }, props.children, /* @__PURE__ */ wp.element.createElement(
       "span",
       {
         className: classes.input(),
@@ -4126,5 +4189,154 @@
       },
       item[keys.href] || ""
     ));
+  };
+
+  // ../blocks/_init/init/Loop.jsx
+  CP.Loop = (props) => {
+    const { current = 0, Component = "div", loop = false, ...otherProps } = props;
+    const { useState, useMemo, useCallback, useEffect, useRef } = wp.element;
+    const items2 = (() => {
+      const items3 = Array.isArray(props.items) ? props.items : Number.isInteger(props.items) ? [...Array(props.items).keys()] : Array.from(props.items);
+      items3.forEach((value, index) => {
+        if (typeof value !== "object") {
+          items3[index] = { value };
+        }
+      });
+      return items3;
+    })();
+    return (() => {
+      const l = items2.length;
+      const h = l >> 1;
+      return items2.map((item, index) => {
+        return /* @__PURE__ */ wp.element.createElement(
+          Component,
+          {
+            ...otherProps,
+            ...item,
+            index,
+            position: loop ? (index - current + l + h) % l - h : index - current,
+            key: index
+          }
+        );
+      });
+    })();
+  };
+
+  // ../blocks/_init/init/CustomColorVars.jsx
+  CP.CustomColorVars = (props) => {
+    const { useState, useRef, useMemo, useCallback } = wp.element;
+    const { ColorPicker, CheckboxControl, Flex, FlexItem, FlexBlock, Button, Popover } = wp.components;
+    const { label = "\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", value, onChange } = props;
+    const cache = useRef(value);
+    const [index, setIndex] = useState(-1);
+    const [useCustomColor, setUseCustomColor] = useState(Object.keys(value).length > 0);
+    const { bem, classNamesToFlags, flagsToClassNames } = Catpow.util;
+    const classes = bem("CP-CustomColorVars");
+    const roles = [
+      { key: "b", label: "\u80CC\u666F\u8272" },
+      { key: "s", label: "\u5F37\u8ABF\u80CC\u666F\u8272" },
+      { key: "t", label: "\u6587\u5B57\u8272" },
+      { key: "m", label: "\u57FA\u672C\u8272" },
+      { key: "a", label: "\u5F37\u8ABF\u8272" },
+      { key: "i", label: "\u53CD\u8EE2\u6587\u5B57\u8272" }
+    ];
+    const keys = ["h", "s", "l"];
+    const originalColors = useMemo(() => {
+      const originalColors2 = {};
+      const selectedBlock = wp.data.select("core/block-editor").getSelectedBlock();
+      const el = document.getElementById("block-" + selectedBlock.clientId);
+      const styles = window.getComputedStyle(el);
+      roles.forEach((role) => {
+        const hsla = {};
+        keys.forEach((key) => {
+          hsla[key] = styles.getPropertyValue(`--cp-tones-${role.key}-${key}`);
+        });
+        originalColors2[role.key] = `hsl(${hsla.h},${hsla.s},${hsla.l})`;
+      });
+      return originalColors2;
+    }, []);
+    const colors = useMemo(() => {
+      const colors2 = {};
+      roles.forEach((role) => {
+        const hsla = {};
+        if (keys.every((key) => {
+          const name = `--cp-tones-${role.key}-${key}`;
+          if (!value.hasOwnProperty(name)) {
+            return false;
+          }
+          hsla[key] = value[name];
+          return true;
+        })) {
+          colors2[role.key] = `hsl(${hsla.h},${hsla.s},${hsla.l})`;
+        }
+      });
+      return colors2;
+    }, []);
+    const Item = useCallback((props2) => {
+      const { classes: classes2, role, originalColor, onChange: onChange2 } = props2;
+      const [isOpen, setIsOpen] = useState(false);
+      const [isCustomized, setIsCustomized] = useState(!!props2.color);
+      const [color, setColor] = useState(props2.color || originalColor);
+      const onChangeComplete = useCallback((color2) => {
+        setIsCustomized(true);
+        setColor(color2.hex);
+        onChange2({
+          [`--cp-tones-${role.key}-h`]: color2.hsl.h + "",
+          [`--cp-tones-${role.key}-s`]: color2.hsl.s + "%",
+          [`--cp-tones-${role.key}-l`]: color2.hsl.l + "%"
+        });
+      }, [onChange2, role, setColor]);
+      const clearColorVars = useCallback(() => {
+        setIsCustomized(false);
+        setColor(originalColor);
+        onChange2({
+          [`--cp-tones-${role.key}-h`]: null,
+          [`--cp-tones-${role.key}-s`]: null,
+          [`--cp-tones-${role.key}-l`]: null
+        });
+      }, [onChange2, role, originalColor, setColor, setIsCustomized]);
+      return /* @__PURE__ */ wp.element.createElement("div", { className: classes2(flagsToClassNames({ isCustomized })) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes2.chip(), onClick: () => setIsOpen(!isOpen), style: { backgroundColor: color } }, /* @__PURE__ */ wp.element.createElement("div", { className: classes2.chip.label() }, role.label)), isOpen && /* @__PURE__ */ wp.element.createElement(Popover, { onClose: () => setIsOpen(false) }, /* @__PURE__ */ wp.element.createElement(
+        ColorPicker,
+        {
+          color,
+          onChangeComplete
+        }
+      ), /* @__PURE__ */ wp.element.createElement(Flex, { justify: "center" }, /* @__PURE__ */ wp.element.createElement(FlexItem, null, /* @__PURE__ */ wp.element.createElement(Button, { text: "CLEAR", onClick: clearColorVars })))));
+    }, []);
+    const clearAllColorVars = useCallback(() => {
+      const vars = {};
+      roles.forEach((role) => {
+        keys.forEach((key) => {
+          vars[`--cp-tones-${role.key}-${key}`] = null;
+        });
+      });
+      onChange(vars);
+    }, [onChange]);
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(
+      CheckboxControl,
+      {
+        label,
+        onChange: () => {
+          if (useCustomColor) {
+            cache.current = value;
+            clearAllColorVars();
+          } else {
+            onChange(cache.current);
+          }
+          setUseCustomColor(!useCustomColor);
+        },
+        checked: useCustomColor
+      }
+    ), /* @__PURE__ */ wp.element.createElement("div", { className: classes.items({ "is-active": useCustomColor }) }, roles.map((role) => /* @__PURE__ */ wp.element.createElement(
+      Item,
+      {
+        role,
+        classes: classes.items.item,
+        onChange,
+        color: colors[role.key] || false,
+        originalColor: originalColors[role.key],
+        key: role.key
+      }
+    ))));
   };
 })();

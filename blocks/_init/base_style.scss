@@ -259,6 +259,27 @@ $colors:(
 			}
 		}
 	}
+	&-CustomColorVars{
+		&-items{
+			@include bnd((pd:16));
+			@include flx((w:w));
+			&:not(.is-active){
+				@include bnd((d:n));
+			}
+			&-item{
+				@include bnd((f:1 1 30%));
+				@include usr((c:p));
+				&-chip{
+					@include bnd((h:60));
+					@include flx((w:w,a:c,j:c));
+					&-label{
+						@include txt((a:c,p:12,c:white));
+						@include shd((ts:1));
+					}
+				}
+			}
+		}
+	}
 }
 .selectColor{
 	@include bnd((w:220));

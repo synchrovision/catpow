@@ -44,3 +44,4 @@ import './ColorVarTracer.jsx';
 import './PlacedPictures.jsx';
 import './Link.jsx';
 import './Loop.jsx';
+import './CustomColorVars';
