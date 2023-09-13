@@ -72,7 +72,7 @@ wp.blocks.registerBlockType('catpow/listed',{
 								{name:'paleBG',label:'薄く',values:'paleBG'}
 							]},
 							{name:'backgroundColor',label:'背景色',values:'hasBackgroundColor'},
-							{name:'inverseText',label:'抜き色文字',values:'inverseText'},
+							'textColor',
 							{name:'titleCaption',label:'タイトルキャプション',values:'hasTitleCaption'},
 							{name:'text',label:'テキスト',values:'hasText'},
 							{name:'link',label:'リンク',values:'hasLink'}

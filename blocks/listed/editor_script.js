@@ -72,7 +72,7 @@
                   { name: "paleBG", label: "\u8584\u304F", values: "paleBG" }
                 ] },
                 { name: "backgroundColor", label: "\u80CC\u666F\u8272", values: "hasBackgroundColor" },
-                { name: "inverseText", label: "\u629C\u304D\u8272\u6587\u5B57", values: "inverseText" },
+                "textColor",
                 { name: "titleCaption", label: "\u30BF\u30A4\u30C8\u30EB\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "hasTitleCaption" },
                 { name: "text", label: "\u30C6\u30AD\u30B9\u30C8", values: "hasText" },
                 { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" }
