@@ -17,12 +17,12 @@ class style_config{
 	public static function get_color_roles(){
 		if(isset(static::$color_roles)){return static::$color_roles;}
 		return static::$color_roles=apply_filters('cp_color_roles',[
-			'background'=>['label'=>'背景色','default'=>'#ffffff','shorthand'=>'b'],
-			'sheet'=>['label'=>'強調背景色','default'=>'#dddddd','shorthand'=>'s','extend'=>true],
+			'background'=>['label'=>'背景色','default'=>'#ffffff','shorthand'=>'b','invert'=>'m'],
+			'sheet'=>['label'=>'強調背景色','default'=>'#dddddd','shorthand'=>'s','invert'=>'a','extend'=>true],
 			'text'=>['label'=>'文字色','default'=>'#666666','shorthand'=>'t','invert'=>'i'],
 			'main'=>['label'=>'基本色','default'=>'#888888','shorthand'=>'m','extend'=>true,'invert'=>'b'],
 			'accent'=>['label'=>'強調色','default'=>'#EE8800','shorthand'=>'a','extend'=>true,'invert'=>'s'],
-			'inside'=>['label'=>'反転文字色','default'=>'#000000','shorthand'=>'i'],
+			'inside'=>['label'=>'反転文字色','default'=>'#000000','shorthand'=>'i','invert'=>'t'],
 			'light'=>['label'=>'照明色','default'=>'hsla(0,0%,100%,0.5)','shorthand'=>'lt','alphaEnabled'=>true],
 			'shade'=>['label'=>'陰色','default'=>'hsla(0,0%,0%,0.2)','shorthand'=>'sh','alphaEnabled'=>true],
 			'shadow'=>['label'=>'影色','default'=>'hsla(0,0%,0%,0.3)','shorthand'=>'shd','alphaEnabled'=>true],
