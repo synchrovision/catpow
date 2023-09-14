@@ -20,7 +20,7 @@ wp.blocks.registerBlockType('catpow/div',{
 	example:CP.example,
 	edit(props){
 		const {useState,useMemo}=wp.element;
-		const {InnerBlocks,InspectorControls}=wp.blockEditor;
+		const {InnerBlocks,InspectorControls,useBlockProps}=wp.blockEditor;
 		const {PanelBody,TextareaControl} = wp.components;
 		const {attributes,className,setAttributes,context}=props;
 		const {customColorVars,anchor,classes,color,patternImageCss,frameImageCss,borderImageCss}=attributes;
@@ -82,9 +82,11 @@ wp.blocks.registerBlockType('catpow/div',{
 			return selectiveClasses;
 		},[]);
 
+		const blockProps=useBlockProps({className:classes,style:customColorVars});
+		
 		return (
 			<>
-				<div id={anchor} className={classes} style={customColorVars}>
+				<div {...blockProps}>
 					{states.hasIcon && <CP.OutputIcon item={attributes}/>}
 					{states.hasBackgroundImage && 
 						<div className="background">
@@ -129,14 +131,16 @@ wp.blocks.registerBlockType('catpow/div',{
 	},
 
 	save({attributes,className,setAttributes}){
-		const {InnerBlocks}=wp.blockEditor;
+		const {InnerBlocks,useBlockProps}=wp.blockEditor;
 		const {customColorVars,anchor,classes='',color,patternImageCss,frameImageCss,borderImageCss}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.div;
 		
+		const blockProps=useBlockProps.save({className:classes,style:customColorVars});
+		
 		return (
-			<div id={anchor} className={classes} style={customColorVars}>
+			<div {...blockProps}>
 				{states.hasIcon && <CP.OutputIcon item={attributes}/>}
 				{states.hasBackgroundImage && 
 					<div className="background">
