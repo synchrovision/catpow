@@ -36,26 +36,31 @@
 	&.mediumPad{@include bnd((pd:20));}
 	&.boldPad{@include bnd((pd:40));}
 	&.heavyPad{@include bnd((pd:80));}
-	@media(#{bp(-2)}){
+	@include bp(-960){
 		&.boldPad{@include bnd((pd:40 20));}
 		&.heavyPad{@include bnd((pd:80 20));}
 	}
 	&.hasIcon{
-		@media(#{bp(1)}){
-			@include bnd((pdl:240));
+		&>.icon{
+			svg{
+				@include txt((c:mx));
+			}
+		}
+		@include bp(960){
+			@include bnd((pdl:140));
 			&>.icon{
-				@include bnd((p:a,l:20,t:20,w:200));
+				@include bnd((p:a,l:20,t:20,w:100));
 				img{
 					@include bnd((w:f,h:a));
 				}
 			}
 		}
-		@media(#{bp(-1)}){
+		@include bp(-960){
 			&>.icon{
 				@include bnd((pd:20));
 				@include txt((a:c));
 				img{
-					@include bnd((w:150,h:a));
+					@include bnd((w:100,h:a));
 				}
 			}
 		}

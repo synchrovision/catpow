@@ -43,7 +43,7 @@ wp.blocks.registerBlockType('catpow/div',{
 					sub:{
 						frame:[
 							{label:'アイコン',values:'hasIcon',sub:[
-								{input:'icon',label:'アイコン',keys:imageKeys.iconImage,color}
+								{input:'icon',label:'アイコン',color}
 							]},
 							{type:'buttons',label:'線',values:{noBorder:'なし',thinBorder:'細',boldBorder:'太'}},
 							{label:'角丸',values:'round'},
@@ -85,16 +85,7 @@ wp.blocks.registerBlockType('catpow/div',{
 		return (
 			<>
 				<div id={anchor} className={classes} style={customColorVars}>
-					{states.hasIcon && 
-						<div className="icon">
-							<CP.SelectResponsiveImage
-								set={setAttributes}
-								attr={attributes}
-								keys={imageKeys.iconImage}
-								size='middle'
-							/>
-						</div>
-					}
+					{states.hasIcon && <CP.OutputIcon item={attributes}/>}
 					{states.hasBackgroundImage && 
 						<div className="background">
 							<CP.ResponsiveImage
@@ -146,14 +137,7 @@ wp.blocks.registerBlockType('catpow/div',{
 		
 		return (
 			<div id={anchor} className={classes} style={customColorVars}>
-				{states.hasIcon && 
-					<div className="icon">
-						<CP.ResponsiveImage
-							attr={attributes}
-							keys={imageKeys.iconImage}
-						/>
-					</div>
-				}
+				{states.hasIcon && <CP.OutputIcon item={attributes}/>}
 				{states.hasBackgroundImage && 
 					<div className="background">
 						<CP.ResponsiveImage

@@ -42,7 +42,7 @@
             sub: {
               frame: [
                 { label: "\u30A2\u30A4\u30B3\u30F3", values: "hasIcon", sub: [
-                  { input: "icon", label: "\u30A2\u30A4\u30B3\u30F3", keys: imageKeys2.iconImage, color }
+                  { input: "icon", label: "\u30A2\u30A4\u30B3\u30F3", color }
                 ] },
                 { type: "buttons", label: "\u7DDA", values: { noBorder: "\u306A\u3057", thinBorder: "\u7D30", boldBorder: "\u592A" } },
                 { label: "\u89D2\u4E38", values: "round" },
@@ -80,15 +80,7 @@
         wp.hooks.applyFilters("catpow.blocks.div.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { id: anchor, className: classes, style: customColorVars }, states.hasIcon && /* @__PURE__ */ wp.element.createElement("div", { className: "icon" }, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectResponsiveImage,
-        {
-          set: setAttributes,
-          attr: attributes,
-          keys: imageKeys.iconImage,
-          size: "middle"
-        }
-      )), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { id: anchor, className: classes, style: customColorVars }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
         CP.ResponsiveImage,
         {
           set: setAttributes,
@@ -120,13 +112,7 @@
       const { customColorVars, anchor, classes = "", color, patternImageCss, frameImageCss, borderImageCss } = attributes;
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys } = CP.config.div;
-      return /* @__PURE__ */ wp.element.createElement("div", { id: anchor, className: classes, style: customColorVars }, states.hasIcon && /* @__PURE__ */ wp.element.createElement("div", { className: "icon" }, /* @__PURE__ */ wp.element.createElement(
-        CP.ResponsiveImage,
-        {
-          attr: attributes,
-          keys: imageKeys.iconImage
-        }
-      )), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("div", { id: anchor, className: classes, style: customColorVars }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
         CP.ResponsiveImage,
         {
           attr: attributes,
