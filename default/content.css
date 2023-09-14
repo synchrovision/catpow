@@ -350,18 +350,18 @@
   --cp-tones-tx-t: var(--cp-tones-i-t);
   --cp-tones-tx-S: var(--cp-tones-i-S);
   --cp-tones-tx-B: var(--cp-tones-i-B);
-  --cp-tones-mx-h: var(--cp-tones-i-h);
-  --cp-tones-mx-s: var(--cp-tones-i-s);
-  --cp-tones-mx-l: var(--cp-tones-i-l);
-  --cp-tones-mx-t: var(--cp-tones-i-t);
-  --cp-tones-mx-S: var(--cp-tones-i-S);
-  --cp-tones-mx-B: var(--cp-tones-i-B);
-  --cp-tones-ax-h: var(--cp-tones-i-h);
-  --cp-tones-ax-s: var(--cp-tones-i-s);
-  --cp-tones-ax-l: var(--cp-tones-i-l);
-  --cp-tones-ax-t: var(--cp-tones-i-t);
-  --cp-tones-ax-S: var(--cp-tones-i-S);
-  --cp-tones-ax-B: var(--cp-tones-i-B);
+  --cp-tones-mx-h: var(--cp-tones-b-h);
+  --cp-tones-mx-s: var(--cp-tones-b-s);
+  --cp-tones-mx-l: var(--cp-tones-b-l);
+  --cp-tones-mx-t: var(--cp-tones-b-t);
+  --cp-tones-mx-S: var(--cp-tones-b-S);
+  --cp-tones-mx-B: var(--cp-tones-b-B);
+  --cp-tones-ax-h: var(--cp-tones-s-h);
+  --cp-tones-ax-s: var(--cp-tones-s-s);
+  --cp-tones-ax-l: var(--cp-tones-s-l);
+  --cp-tones-ax-t: var(--cp-tones-s-t);
+  --cp-tones-ax-S: var(--cp-tones-s-S);
+  --cp-tones-ax-B: var(--cp-tones-s-B);
 }
 div.cp_message {
   margin: 10px;

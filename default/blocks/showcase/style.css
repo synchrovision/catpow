@@ -1,4 +1,3 @@
-@charset "UTF-8";
 .wp-block-catpow-showcase {
   max-width: 75rem;
   width: auto;
@@ -51,7 +50,7 @@
   line-height: 1em;
   color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
   font-weight: 700;
-  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-family: var(--cp-fonts-d);
   word-break: keep-all;
   box-shadow: 0 4px 9px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }

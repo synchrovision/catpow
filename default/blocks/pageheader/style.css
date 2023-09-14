@@ -11,7 +11,7 @@
 .wp-block-catpow-pageheader-body-title {
   padding: 7.5rem 1.25rem;
   text-align: center;
-  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-family: var(--cp-fonts-h);
   font-size: 2rem;
   line-height: 1.5em;
   color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
