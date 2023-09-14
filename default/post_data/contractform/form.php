@@ -24,7 +24,7 @@ $post_data['post_content']=cp::get_block_code('progress',[
 	'step'=>0
 ]);
 $post_data['post_content'].=cp::get_block_code('section',[
-	'clases'=>'article headline',
+	'classes'=>'article headline',
 	'title'=>__('送信先のメールアドレスを入力','catpow')
 ],[
 	cp::get_block_code('paragraph',[
