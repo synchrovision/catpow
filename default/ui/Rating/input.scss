@@ -1,0 +1,20 @@
+@import 'admin_style_config.scss';
+
+.Rating{
+	&-points{
+		@include bnd((pd:8 0));
+		@include flx((w:n,g:4));
+		&-point{
+			@include bnd((f:0 0 20,h:20));
+			&::before{
+				content:'★';
+				@include txt((a:c,p:20,h:1em,c:tx 1 .25));
+			}
+			&.is-active{
+				&::before{
+					@include txt((c:mx));
+				}
+			}
+		}
+	}
+}
