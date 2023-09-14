@@ -23,7 +23,7 @@ class UI extends meta{
 		if(static::$output_type===false){
 			$prm=array_merge((array)$prm,['value'=>$meta->value]);
 			if(static::$is_bulk_output){$prm['value']=array_values($prm['value']);}
-			return self::get_output($meta->the_data_path,$meta->conf,static::fill_param($prm,$meta));
+			return static::get_output($meta->the_data_path,$meta->conf,static::fill_param($prm,$meta));
 		}
 		$class_name=\cp::get_class_name('meta',static::$output_type);
 		return $class_name::output($meta,$prm);
@@ -32,7 +32,7 @@ class UI extends meta{
 		if(static::$input_type===false){
 			$prm=array_merge((array)$prm,['value'=>$meta->value,'name'=>\cp::get_input_name($meta->the_data_path)]);
 			if(static::$is_bulk_input){$prm['value']=array_values($prm['value']);}
-			return self::get_input($meta->the_data_path,$meta->conf,static::fill_param($prm,$meta));
+			return static::get_input($meta->the_data_path,$meta->conf,static::fill_param($prm,$meta));
 		}
 		$class_name=\cp::get_class_name('meta',static::$input_type);
 		return $class_name::input($meta,$prm);
