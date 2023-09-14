@@ -1,0 +1,14 @@
+@import 'admin_style_config.scss';
+
+p{
+	&.is-style-message{
+		@include bnd((pd:1em));
+		@include bg((c:s));
+		@include txt((f:s));
+		@include shd((b:2));
+	}
+	&.is-style-caption{
+		@include bnd((mgt:2em,pd:2em));
+		@include bdr((p:t,s:s,w:1));
+	}
+}
