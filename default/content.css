@@ -1,5 +1,81 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Staatliches&subset=latin-ext");
+.revertTextColor {
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-bx-s: var(--cp-tones-b-s);
+  --cp-tones-bx-l: var(--cp-tones-b-l);
+  --cp-tones-bx-t: var(--cp-tones-b-t);
+  --cp-tones-bx-S: var(--cp-tones-b-S);
+  --cp-tones-bx-B: var(--cp-tones-b-B);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-sx-s: var(--cp-tones-s-s);
+  --cp-tones-sx-l: var(--cp-tones-s-l);
+  --cp-tones-sx-t: var(--cp-tones-s-t);
+  --cp-tones-sx-S: var(--cp-tones-s-S);
+  --cp-tones-sx-B: var(--cp-tones-s-B);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-tx-s: var(--cp-tones-t-s);
+  --cp-tones-tx-l: var(--cp-tones-t-l);
+  --cp-tones-tx-t: var(--cp-tones-t-t);
+  --cp-tones-tx-S: var(--cp-tones-t-S);
+  --cp-tones-tx-B: var(--cp-tones-t-B);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-mx-s: var(--cp-tones-m-s);
+  --cp-tones-mx-l: var(--cp-tones-m-l);
+  --cp-tones-mx-t: var(--cp-tones-m-t);
+  --cp-tones-mx-S: var(--cp-tones-m-S);
+  --cp-tones-mx-B: var(--cp-tones-m-B);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-ax-s: var(--cp-tones-a-s);
+  --cp-tones-ax-l: var(--cp-tones-a-l);
+  --cp-tones-ax-t: var(--cp-tones-a-t);
+  --cp-tones-ax-S: var(--cp-tones-a-S);
+  --cp-tones-ax-B: var(--cp-tones-a-B);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-tones-ix-s: var(--cp-tones-i-s);
+  --cp-tones-ix-l: var(--cp-tones-i-l);
+  --cp-tones-ix-t: var(--cp-tones-i-t);
+  --cp-tones-ix-S: var(--cp-tones-i-S);
+  --cp-tones-ix-B: var(--cp-tones-i-B);
+}
+.invertTextColor {
+  --cp-tones-bx-h: var(--cp-tones-m-h);
+  --cp-tones-bx-s: var(--cp-tones-m-s);
+  --cp-tones-bx-l: var(--cp-tones-m-l);
+  --cp-tones-bx-t: var(--cp-tones-m-t);
+  --cp-tones-bx-S: var(--cp-tones-m-S);
+  --cp-tones-bx-B: var(--cp-tones-m-B);
+  --cp-tones-sx-h: var(--cp-tones-a-h);
+  --cp-tones-sx-s: var(--cp-tones-a-s);
+  --cp-tones-sx-l: var(--cp-tones-a-l);
+  --cp-tones-sx-t: var(--cp-tones-a-t);
+  --cp-tones-sx-S: var(--cp-tones-a-S);
+  --cp-tones-sx-B: var(--cp-tones-a-B);
+  --cp-tones-tx-h: var(--cp-tones-i-h);
+  --cp-tones-tx-s: var(--cp-tones-i-s);
+  --cp-tones-tx-l: var(--cp-tones-i-l);
+  --cp-tones-tx-t: var(--cp-tones-i-t);
+  --cp-tones-tx-S: var(--cp-tones-i-S);
+  --cp-tones-tx-B: var(--cp-tones-i-B);
+  --cp-tones-mx-h: var(--cp-tones-b-h);
+  --cp-tones-mx-s: var(--cp-tones-b-s);
+  --cp-tones-mx-l: var(--cp-tones-b-l);
+  --cp-tones-mx-t: var(--cp-tones-b-t);
+  --cp-tones-mx-S: var(--cp-tones-b-S);
+  --cp-tones-mx-B: var(--cp-tones-b-B);
+  --cp-tones-ax-h: var(--cp-tones-s-h);
+  --cp-tones-ax-s: var(--cp-tones-s-s);
+  --cp-tones-ax-l: var(--cp-tones-s-l);
+  --cp-tones-ax-t: var(--cp-tones-s-t);
+  --cp-tones-ax-S: var(--cp-tones-s-S);
+  --cp-tones-ax-B: var(--cp-tones-s-B);
+  --cp-tones-ix-h: var(--cp-tones-t-h);
+  --cp-tones-ix-s: var(--cp-tones-t-s);
+  --cp-tones-ix-l: var(--cp-tones-t-l);
+  --cp-tones-ix-t: var(--cp-tones-t-t);
+  --cp-tones-ix-S: var(--cp-tones-t-S);
+  --cp-tones-ix-B: var(--cp-tones-t-B);
+}
 .color--0 {
   --cp-tones-s-h: 0;
   --cp-container-tones-s-h: var(--cp-tones-s-h);
@@ -322,46 +398,6 @@
   --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,10%) * 2);
   --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,10%) * 2);
   --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,10%) * 2);
-}
-.revertTextColor {
-  --cp-tones-tx-h: var(--cp-tones-t-h);
-  --cp-tones-tx-s: var(--cp-tones-t-s);
-  --cp-tones-tx-l: var(--cp-tones-t-l);
-  --cp-tones-tx-t: var(--cp-tones-t-t);
-  --cp-tones-tx-S: var(--cp-tones-t-S);
-  --cp-tones-tx-B: var(--cp-tones-t-B);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-mx-s: var(--cp-tones-m-s);
-  --cp-tones-mx-l: var(--cp-tones-m-l);
-  --cp-tones-mx-t: var(--cp-tones-m-t);
-  --cp-tones-mx-S: var(--cp-tones-m-S);
-  --cp-tones-mx-B: var(--cp-tones-m-B);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-tones-ax-s: var(--cp-tones-a-s);
-  --cp-tones-ax-l: var(--cp-tones-a-l);
-  --cp-tones-ax-t: var(--cp-tones-a-t);
-  --cp-tones-ax-S: var(--cp-tones-a-S);
-  --cp-tones-ax-B: var(--cp-tones-a-B);
-}
-.invertTextColor {
-  --cp-tones-tx-h: var(--cp-tones-i-h);
-  --cp-tones-tx-s: var(--cp-tones-i-s);
-  --cp-tones-tx-l: var(--cp-tones-i-l);
-  --cp-tones-tx-t: var(--cp-tones-i-t);
-  --cp-tones-tx-S: var(--cp-tones-i-S);
-  --cp-tones-tx-B: var(--cp-tones-i-B);
-  --cp-tones-mx-h: var(--cp-tones-b-h);
-  --cp-tones-mx-s: var(--cp-tones-b-s);
-  --cp-tones-mx-l: var(--cp-tones-b-l);
-  --cp-tones-mx-t: var(--cp-tones-b-t);
-  --cp-tones-mx-S: var(--cp-tones-b-S);
-  --cp-tones-mx-B: var(--cp-tones-b-B);
-  --cp-tones-ax-h: var(--cp-tones-s-h);
-  --cp-tones-ax-s: var(--cp-tones-s-s);
-  --cp-tones-ax-l: var(--cp-tones-s-l);
-  --cp-tones-ax-t: var(--cp-tones-s-t);
-  --cp-tones-ax-S: var(--cp-tones-s-S);
-  --cp-tones-ax-B: var(--cp-tones-s-B);
 }
 div.cp_message {
   margin: 10px;
@@ -872,7 +908,7 @@ del {
 }
 .rtf-title, #editor .rtf-title {
   display: block;
-  font-family: var(--cp-fonts-h);
+  font-family: h;
 }
 .rtf-title:not(:first-child), #editor .rtf-title:not(:first-child) {
   margin-top: 1em;
@@ -908,7 +944,7 @@ del {
 .rtf-large, #editor .rtf-large {
   display: inline-block;
   font-size: 1.5em;
-  font-family: s;
+  font-family: var(--cp-fonts-s);
   font-weight: 700;
   color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
@@ -920,19 +956,17 @@ del {
   padding: 0.2em 1em;
   margin: 0px 0.2em;
   border-radius: 1em;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
+  color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),1);
   line-height: 1em;
   text-decoration: none;
-}
-.rtf-tag:hover, #editor .rtf-tag:hover {
-  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  cursor: pointer;
 }
 .rtf-annotation, #editor .rtf-annotation {
   display: block;
   position: relative;
   padding-left: 1.5em;
-  font-family: var(--cp-fonts-c);
+  font-family: c;
 }
 .rtf-annotation::before, #editor .rtf-annotation::before {
   content: "※";
