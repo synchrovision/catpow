@@ -52,7 +52,7 @@ wp.blocks.registerBlockType('catpow/showcase',{
 			return selectiveClasses;
 		},[]);
 		const selectiveItemClasses=useMemo(()=>{
-			const {imageKeys}=CP.config.banners;
+			const {imageKeys}=CP.config.showcase;
 			const selectiveItemClasses=[
 				'color',
 				{name:'image',input:'image',label:'画像',keys:imageKeys.image},
@@ -66,7 +66,6 @@ wp.blocks.registerBlockType('catpow/showcase',{
 		const save=()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))});
 		};
-
 		items.map((item,index)=>{
 			if(!item.controlClasses){item.controlClasses='control';}
 			rtn.push(

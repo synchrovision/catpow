@@ -52,7 +52,7 @@
         return selectiveClasses2;
       }, []);
       const selectiveItemClasses = useMemo(() => {
-        const { imageKeys: imageKeys2 } = CP.config.banners;
+        const { imageKeys: imageKeys2 } = CP.config.showcase;
         const selectiveItemClasses2 = [
           "color",
           { name: "image", input: "image", label: "\u753B\u50CF", keys: imageKeys2.image },
