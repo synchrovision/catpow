@@ -39,6 +39,7 @@ wp.blocks.registerBlockType('catpow/showcase',{
 			const {imageKeys}=CP.config.showcase;
 			const selectiveClasses=[
 				'color',
+				'textColor',
 				{name:'counter',label:'番号',values:'hasCounter',sub:[
 					{name:'countPrefix',input:'text',label:'番号前置テキスト',key:'countPrefix'},
 					{name:'countSuffix',input:'text',label:'番号後置テキスト',key:'countSuffix'},

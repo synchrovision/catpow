@@ -4,6 +4,7 @@
   margin: auto;
   padding: 2.5rem 0rem;
   list-style: none;
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),1);
 }
 .wp-block-catpow-showcase > .item {
   padding: 2rem 1rem;
@@ -32,7 +33,7 @@
   flex-basis: 18.75rem;
   padding: 2rem;
   z-index: 1;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  background-color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),1);
   border-radius: 1.25rem;
   box-shadow: 0 8px 17px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
@@ -44,11 +45,11 @@
   border-style: solid;
   border-width: 0.1875rem;
   border-radius: 2em;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  background-color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),1);
   text-align: center;
   font-size: 2em;
   line-height: 1em;
-  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
   font-weight: 700;
   font-family: var(--cp-fonts-d);
   word-break: keep-all;
@@ -59,7 +60,7 @@
 }
 .wp-block-catpow-showcase > .item > .texts > .title {
   font-size: 2em;
-  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
   word-break: keep-all;
 }
 .wp-block-catpow-showcase > .item > .texts > .titleCaption {
@@ -83,7 +84,7 @@
   line-height: 1em;
   text-decoration: none;
   font-weight: 700;
-  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
 }
 @media (max-width:960px) {
   .wp-block-catpow-showcase > .item > .image {
