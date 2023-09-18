@@ -2,9 +2,14 @@
   padding: 0.25em;
   scroll-snap-type: x mandatory;
   overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.wp-block-catpow-slidablemenu::-webkit-scrollbar {
+  display: none;
 }
 .wp-block-catpow-slidablemenu > .items {
-  gap: 0;
+  gap: 0rem;
   margin: 0rem;
   padding: 0rem;
   list-style: none;
@@ -60,7 +65,7 @@
   -moz-columns: var(--columns);
   columns: var(--columns);
   width: calc(100% * var(--columns) / 4);
-  gap: 0;
+  gap: 0rem;
   margin: 0rem;
   padding: 0rem;
 }
@@ -82,7 +87,7 @@
   -moz-columns: var(--columns);
   columns: var(--columns);
   width: calc(100% * var(--columns) / 3);
-  gap: 0;
+  gap: 0rem;
   margin: 0rem;
   padding: 0rem;
 }
@@ -104,7 +109,7 @@
   -moz-columns: var(--columns);
   columns: var(--columns);
   width: calc(100% * var(--columns) / 2);
-  gap: 0;
+  gap: 0rem;
   margin: 0rem;
   padding: 0rem;
 }
