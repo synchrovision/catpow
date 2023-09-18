@@ -9,7 +9,6 @@ wp.blocks.registerBlockType('catpow/leavepopup',{
 		const {useState,useMemo}=wp.element;
 		const {InnerBlocks,InspectorControls}=wp.blockEditor;
 		const [open,setOpen]=useState(false);
-		const {bem}=Catpow.util;
 		
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
@@ -19,13 +18,11 @@ wp.blocks.registerBlockType('catpow/leavepopup',{
 			return selectiveClasses;
 		},[]);
 		
-		console.log(attributes.classes);
-		
 		return (
 			<>
 				<div className={"collapsible_content "+(open?'open':'close')}>
 					<div className="label" onClick={()=>setOpen(!open)}>🐾 leavePopup</div>
-					<div className={attributes.classes}>
+					<div className={attributes.classes.replace('is-close','is-open')}>
 						<div className="body">
 							<div className="contents">
 								<InnerBlocks/>
