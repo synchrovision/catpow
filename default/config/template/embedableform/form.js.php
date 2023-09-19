@@ -14,7 +14,25 @@ window.addEventListener('DOMContentLoaded',async()=>{
 const data=<?=json_encode(['html'=>$html,'cssVars'=>util\style_config::get_css_vars()],0700)?>;
 const defineCssVars=(vars)=>{
 	const root=document.documentElement;
-	Object.keys(vars).forEach((key)=>root.style.setProperty(key,vars[key]));
+	let baseCss='',altCss='';
+	Object.keys(vars).forEach((key)=>{
+		if(Array.isArray(vars[key])){
+			baseCss+=key+':'+vars[key][0]+';'
+			altCss+=key+':'+vars[key][1]+';'
+		}
+		else{
+			baseCss+=key+':'+vars[key]+';'
+		}
+	});
+	const el=document.createElement('style');
+	document.head.appendChild(el);
+	el.textContent=':root{'+baseCss+'}';
+	if(!!altCss){
+		const el=document.createElement('style');
+		document.head.appendChild(el);
+		el.setAttribute('media','screen and (max-width:720px)');
+		el.textContent=':root{'+altCss+'}';
+	}
 };
 const loadStyle=(src)=>{
 	const el=document.createElement('link');
