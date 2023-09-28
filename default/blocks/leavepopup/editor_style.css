@@ -1,4 +1,4 @@
-#editor .wp-block-catpow-leavepopup {
+.wp-site-blocks .wp-block-catpow-leavepopup, #editor .wp-block-catpow-leavepopup {
   position: relative;
   padding: 1.875rem;
   height: 100vh;
