@@ -1226,7 +1226,7 @@ class CP{
 		$type=$conf[$io.'-type']??$conf['type']??'text';
 		$classes[]='cp-meta-item-unit-input';
 		$classes[]='is-type-'.$type;
-		$meta_class="Catpow\\meta\\${type}";
+		$meta_class="Catpow\\meta\\{$type}";
 		$classes[]='is-input-type-'.$meta_class::$input_type;
 		$classes[]='is-value-type-'.$meta_class::$value_type;
 		$rtn.=' class="'.implode(' ',$classes).'"';
