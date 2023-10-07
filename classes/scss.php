@@ -199,6 +199,17 @@ class scss{
 				if(empty($size)){return Compiler::$false;}
 				return [TYPE::T_KEYWORD,$size];
 			});
+			$scssc->registerFunction('translate_weight',function($args){
+				$args=array_map([static::$scssc,'compileValue'],$args);
+				$weight=false;
+				$weights=util\style_config::get_config_json('weights');
+				if(isset($weights[$args[0]])){
+					$weight=sprintf('var(--cp-weights-%s)',$args[0]);
+				}
+				$weight=apply_filters('cp_translate_weight',$weight,$args);
+				if(empty($weight)){return Compiler::$false;}
+				return [TYPE::T_KEYWORD,$weight];
+			});
 		}
 		do_action('cp_scss_compiler_init',$scssc);
 		return static::$scssc=$scssc;
