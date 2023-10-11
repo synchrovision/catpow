@@ -126,41 +126,38 @@
                 value: item.address
               }
             ), states.hasTel && /* @__PURE__ */ wp.element.createElement(
-              "span",
+              RichText,
               {
+                tagName: "div",
                 className: "tel",
-                onInput: (e) => {
-                  item.tel = e.target.innerText;
+                onChange: (tel) => {
+                  item.tel = tel;
+                  save();
                 },
-                onBlur: save,
-                contentEditable: true,
-                suppressContentEditableWarning: true
-              },
-              item.tel
+                value: item.tel
+              }
             ), states.hasMail && /* @__PURE__ */ wp.element.createElement(
-              "span",
+              RichText,
               {
+                tagName: "div",
                 className: "mail",
-                onInput: (e) => {
-                  item.mail = e.target.innerText;
+                onChange: (mail) => {
+                  item.mail = mail;
+                  save();
                 },
-                onBlur: save,
-                contentEditable: true,
-                suppressContentEditableWarning: true
-              },
-              item.mail
+                value: item.mail
+              }
             ), states.hasSite && /* @__PURE__ */ wp.element.createElement(
-              "span",
+              RichText,
               {
-                className: "mail",
-                onInput: (e) => {
-                  item.site = e.target.innerText;
+                tagName: "div",
+                className: "site",
+                onChange: (site) => {
+                  item.site = site;
+                  save();
                 },
-                onBlur: save,
-                contentEditable: true,
-                suppressContentEditableWarning: true
-              },
-              item.site
+                value: item.site
+              }
             ), /* @__PURE__ */ wp.element.createElement(
               RichText,
               {
@@ -259,7 +256,7 @@
           url += `&ll=${item.ll}`;
         }
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("div", { className: "item", key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "map" }, /* @__PURE__ */ wp.element.createElement("iframe", { src: url, frameBorder: "0", className: "gmap", "data-ll": item.ll, "data-q": item.q })), /* @__PURE__ */ wp.element.createElement("div", { className: "access" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: TitleTag, className: "title", value: item.title }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "address", value: item.address }), states.hasTel && /* @__PURE__ */ wp.element.createElement("a", { className: "tel", href: "tel:" + item.tel.replace(/\D/g, "") }, item.tel), states.hasMail && /* @__PURE__ */ wp.element.createElement("a", { className: "mail", href: "mailto:" + item.mail }, item.mail), states.hasSite && /* @__PURE__ */ wp.element.createElement("a", { className: "site", href: item.site, target: "_blank", rel: "noopener noreferer" }, item.site), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "info", value: item.info })))
+          /* @__PURE__ */ wp.element.createElement("div", { className: "item", key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "map" }, /* @__PURE__ */ wp.element.createElement("iframe", { src: url, frameBorder: "0", className: "gmap", "data-ll": item.ll, "data-q": item.q })), /* @__PURE__ */ wp.element.createElement("div", { className: "access" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: TitleTag, className: "title", value: item.title }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "address", value: item.address }), states.hasTel && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "tel", value: item.tel }), states.hasMail && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "mail", value: item.mail }), states.hasSite && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "tel", value: item.site }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "info", value: item.info })))
         );
       });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, rtn), doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));

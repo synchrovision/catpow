@@ -120,31 +120,28 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 							value={item.address}
 						/>
 						{states.hasTel && (
-							<span
+							<RichText
+								tagName='div'
 								className="tel"
-								onInput={(e)=>{item.tel=e.target.innerText;}}
-								onBlur={save}
-								contentEditable={true}
-								suppressContentEditableWarning={true}
-							>{item.tel}</span>
+								onChange={(tel)=>{item.tel=tel;save();}}
+								value={item.tel}
+							/>
 						)}
 						{states.hasMail && (
-							<span
+							<RichText
+								tagName='div'
 								className="mail"
-								onInput={(e)=>{item.mail=e.target.innerText;}}
-								onBlur={save}
-								contentEditable={true}
-								suppressContentEditableWarning={true}
-							>{item.mail}</span>
+								onChange={(mail)=>{item.mail=mail;save();}}
+								value={item.mail}
+							/>
 						)}
 						{states.hasSite && (
-							<span
-								className="mail"
-								onInput={(e)=>{item.site=e.target.innerText;}}
-								onBlur={save}
-								contentEditable={true}
-								suppressContentEditableWarning={true}
-							>{item.site}</span>
+							<RichText
+								tagName='div'
+								className="site"
+								onChange={(site)=>{item.site=site;save();}}
+								value={item.site}
+							/>
 						)}
 						<RichText
 							tagName='div'
@@ -261,9 +258,9 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 					<div className="access">
 						<RichText.Content tagName={TitleTag} className="title" value={item.title}/>
 						<RichText.Content tagName="div" className="address" value={item.address}/>
-						{states.hasTel && (<a className="tel" href={'tel:'+item.tel.replace(/\D/g,'')}>{item.tel}</a>)}
-						{states.hasMail && (<a className="mail" href={'mailto:'+item.mail}>{item.mail}</a>)}
-						{states.hasSite && (<a className="site" href={item.site} target="_blank" rel="noopener noreferer">{item.site}</a>)}
+						{states.hasTel && (<RichText.Content tagName="div" className="tel" value={item.tel}/>)}
+						{states.hasMail && (<RichText.Content tagName="div" className="mail" value={item.mail}/>)}
+						{states.hasSite && (<RichText.Content tagName="div" className="tel" value={item.site}/>)}
 						<RichText.Content tagName="div" className="info" value={item.info}/>
 					</div>
 				</div>
