@@ -422,7 +422,7 @@ del{
 			@include bnd((d:b,p:r,pd:1em));
 			@include bdr((s:n,r:2em));
 			@include bg((c:m));
-			@include txt((a:c,c:m,f:t,w:b,s:n,p:1em));
+			@include txt((a:c,c:m,f:t,w:b,s:n,p:1em,td:n));
 			@include shd((bvo:3,tbv:1));
 			&::before{
 				content:'';
