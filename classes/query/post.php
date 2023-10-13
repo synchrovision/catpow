@@ -9,7 +9,7 @@ class post extends query{
 		$search_keys=[
 			's'=>0,'p'=>0,
 			'nopaging'=>0,'posts_per_page'=>0,'offset'=>0,'paged'=>0,'ignore_sticky_posts'=>0,
-			'post_status'=>1,'post_name'=>0,
+			'post_status'=>1,'name'=>0,'pagename'=>0,'post_parent'=>0,
 			'orderby'=>1,'order'=>1,'date_query'=>1,'meta_key'=>0,'meta_value'=>0,
 			'category__in'=>1, 'category__not_in'=>1, 'category__and'=>1,
 			'post__in'=>1, 'post__not_in'=>1, 'post_name__in'=>1,
