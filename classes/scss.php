@@ -151,6 +151,8 @@ class scss{
 						foreach($val as $k=>$v){
 							$classes['.revertTextColor']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
 							$classes['.invertTextColor']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$ikey}-{$k})";
+							$classes['.revertTextColor']["--cp-container-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
+							$classes['.invertTextColor']["--cp-container-tones-{$key}x-{$k}"]="var(--cp-tones-{$ikey}-{$k})";
 						}
 					}
 				}
