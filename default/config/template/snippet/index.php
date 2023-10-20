@@ -1,0 +1,2 @@
+<?php namespace Catpow; ?>
+Snippet
