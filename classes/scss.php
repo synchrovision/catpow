@@ -138,6 +138,17 @@ class scss{
 								$classes['.color--'.$n]["--cp-container-tones-{$key}-h"]=
 								$classes['.color'.$n]["--cp-container-tones-{$key}-h"]="var(--cp-tones-{$key}-h)";
 							}
+							if(!empty($color_roles_by_shorthand[$key]['invert'])){
+								$ikey=$color_roles_by_shorthand[$key]['invert'];
+								foreach(range(0,12) as $n){
+									$classes['.color--'.$n]["--cp-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+									$classes['.color'.$n]["--cp-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+									$classes['.color_'.$n]["--cp-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+									$classes['.color--'.$n]["--cp-container-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+									$classes['.color'.$n]["--cp-container-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+									$classes['.color_'.$n]["--cp-container-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+								}
+							}	
 						}
 						if(isset($val['s']) && isset($val['l'])){
 							foreach(range(-2,2) as $n){
