@@ -1,0 +1,82 @@
+@import 'admin_style_config.scss';
+
+.Sizes{
+	&-header{
+	}
+	&-graph{
+		@include bnd((p:r,w:240,h:240));
+		@include bdr((p:l b,s:s,w:1));
+		&-lines{
+			&-line{
+				@include svg((s:t 1 .1,f:n,w:.5));
+				&.is-active{
+					@include svg((s:t 1 .5));
+				}
+			}
+		}
+		&-point{
+			@include bnd((d:b,p:a,w:4,h:4,b:calc(var(--point-y) * 15rem),l:calc(var(--point-x) * 15rem)));
+			@include bg((c:t));
+			@include bdr((r:50%));
+			@include usr((c:p,s:n));
+			&.is-master{
+				@include bg((c:m));
+				@include txt((c:m,w:b));
+			}
+			&-label{
+				@include bnd((d:b,p:a,i:-2em));
+				@include txt((a:c,p:10));
+				@include usr((c:p,s:n));
+			}
+			&.is-disabled{
+				@include trn((o:.5));
+				@include usr((e:n));
+			}
+			&.is-disabled &{
+				&-label{
+					@include trn((o:0));
+				}
+			}
+		}
+	}
+	&-control{
+		&-button{
+			@include bnd((pd:.25em 1em,w:8em,mg:.5em a));
+			@include bdr((r:4));
+			@include bg((c:t 1 .5));
+			@include txt((a:c,p:12,c:i));
+			@include usr((c:p));
+			&.is-active{
+				@include bg((c:m));
+			}
+		}
+		&-togglebreakpoints{
+			@include bnd((pd:8 0));
+			@include flx((w:w,g:8));
+			&-item{
+				@include bnd((pd:.25em 1em));
+				@include bdr((r:4));
+				@include bg((c:t 1 .5));
+				@include txt((p:12,c:i));
+				@include usr((c:p));
+				&.is-active{
+					@include bg((c:m));
+				}
+			}
+		}
+		&-togglefocusbreakpoints{
+			@include bnd((pd:0,mg:8 0,o:c));
+			@include flx((w:w));
+			@include bg((c:t 1 .5));
+			@include bdr((r:8));
+			&-item{
+				@include bnd((pd:.1em 1em,f:1 1 a));
+				@include txt((a:c,p:10,c:i));
+				@include usr((c:p));
+				&.is-active{
+					@include bg((c:m));
+				}
+			}
+		}
+	}
+}
