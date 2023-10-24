@@ -167,6 +167,16 @@ class ComposerStaticInit1852ed70731dde04283bbb204d82800a
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'G' => 
+        array (
+            'GifCreator' => 
+            array (
+                0 => __DIR__ . '/..' . '/sybio/gif-creator/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
@@ -202,6 +212,7 @@ class ComposerStaticInit1852ed70731dde04283bbb204d82800a
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit1852ed70731dde04283bbb204d82800a::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit1852ed70731dde04283bbb204d82800a::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit1852ed70731dde04283bbb204d82800a::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit1852ed70731dde04283bbb204d82800a::$classMap;
 
         }, null, ClassLoader::class);

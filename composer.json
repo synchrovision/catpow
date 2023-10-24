@@ -7,7 +7,8 @@
 		"facebook/graph-sdk": "*",
 		"spatie/color": "*",
 		"gettext/json": "^1.0",
-		"voku/css-to-inline-styles": "^2.0"
+		"voku/css-to-inline-styles": "^2.0",
+		"sybio/gif-creator": "^1.0"
 	},
 	"scripts": {
 		"post-update-cmd": "Google\\Task\\Composer::cleanup"
