@@ -1,0 +1,27 @@
+.wp-block-catpow-t-box {
+  margin: auto;
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+.wp-block-catpow-t-box.large {
+  max-width: 60rem;
+  width: 100%;
+}
+.wp-block-catpow-t-box.large > tbody > tr > td {
+  padding: 2.5rem 0.625rem;
+}
+.wp-block-catpow-t-box.medium {
+  max-width: 40rem;
+  width: 100%;
+}
+.wp-block-catpow-t-box.medium > tbody > tr > td {
+  padding: 1.875rem 0.9375rem;
+}
+.wp-block-catpow-t-box.small {
+  max-width: 20rem;
+  width: 100%;
+}
+.wp-block-catpow-t-box.small > tbody > tr > td {
+  padding: 1.25rem 1.25rem;
+}
+/*# sourceMappingURL=./style.css.map */

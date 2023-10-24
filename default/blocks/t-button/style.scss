@@ -1,0 +1,28 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-t-button{
+	@include bnd((d:b,mg:.5em a));
+	@include txt((a:c,td:n));
+	table{
+		@include tbl(());
+		@include bg((c:m));
+		@include bdr((s:n,r:.25em));
+		&>tbody>tr>td{
+			@include bnd((pd:.25em));
+			@include bdr((s:n));
+			@include txt((a:c,w:r,c:b));
+		}
+	}
+	&.large{
+		@include txt((p:24));
+	}
+	&.medium{
+		@include txt((p:16));
+	}
+	&.small{
+		@include txt((p:12));
+	}
+	@include clr(){
+		table{@include bg((c:$i));}
+	}
+}

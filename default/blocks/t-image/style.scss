@@ -1,0 +1,15 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-t-image{
+	@include bnd((w:f));
+	@include tbl(());
+	@include bdr((s:n));
+	&>tbody>tr>td{
+		@include bnd((pd:0,mg:0));
+		@include bdr((s:n));
+		@include txt((a:c));
+		img{
+			@include bnd((w:f,h:a));
+		}
+	}
+}

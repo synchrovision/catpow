@@ -1,0 +1,18 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-t-box{
+	@include bnd((mg:a));
+	@include tbl(());
+	&.large{
+		@include bnd((w:f 960));
+		&>tbody>tr>td{@include bnd((pd:40 10));}
+	}
+	&.medium{
+		@include bnd((w:f 640));
+		&>tbody>tr>td{@include bnd((pd:30 15));}
+	}
+	&.small{
+		@include bnd((w:f 320));
+		&>tbody>tr>td{@include bnd((pd:20 20));}
+	}
+}

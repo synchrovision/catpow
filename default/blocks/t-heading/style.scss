@@ -1,0 +1,54 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-t-heading{
+	@include bnd((mg:.5em a));
+	@include tbl(());
+	@include bdr((s:n));
+	&>tbody>tr>td{
+		@include bnd((pd:.5em 0));
+		@include bdr((s:n));
+		@include txt((f:h,w:r,c:t));
+	}
+	&.header>tbody>tr>td{
+		@include bdr((p:t b,s:s,w:1,c:t));
+	}
+	&.headline>tbody>tr>td{
+		@include bdr((p:b,s:s,w:1,c:t 50));
+	}
+	&.left{
+		td{@include txt((a:l));}
+	}
+	&.center{
+		td{@include txt((a:c));}
+	}
+	&.right{
+		td{@include txt((a:r));}
+	}
+	&.large{
+		@include txt((p:40));
+		&>thead>tr>td,
+		&>tfoot>tr>td{
+			@include bnd((h:20));
+		}
+	}
+	&.medium{
+		@include txt((p:20));
+		&>thead>tr>td,
+		&>tfoot>tr>td{
+			@include bnd((h:10));
+		}
+	}
+	&.small{
+		@include txt((p:15));
+		&>thead>tr>td,
+		&>tfoot>tr>td{
+			@include bnd((h:5));
+		}
+	}
+	@include clr(){
+		&.header>tbody>tr>td{
+			@include txt((c:$i));
+			@include bdr((p:t b,c:$i));
+		}
+	}
+}
