@@ -10,6 +10,7 @@
   -webkit-justify-content: center;
   justify-content: center;
   gap: 0.5em;
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),1);
 }
 .wp-block-catpow-countdown-body-group {
   display: -webkit-box;
@@ -31,7 +32,7 @@
   flex-basis: 1ch;
   padding: 0.25em;
   width: 1ch;
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.1);
+  background-color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),0.1);
   border-radius: 0.25em;
   text-align: center;
   font-size: 1.5em;

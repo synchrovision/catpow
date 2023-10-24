@@ -4,11 +4,12 @@
 	&-body{
 		@include bnd((pd:1em 0));
 		@include flx((w:n,j:c,g:.5em));
+		@include txt((c:tx));
 		&-group{
 			@include flx((w:n,g:.25em,a:e));
 			&-number{
 				@include bnd((d:b,p:r,f:0 0 1ch,pd:.25em,w:1ch));
-				@include bg((c:t 1 .1));
+				@include bg((c:tx 1 .1));
 				@include bdr((r:.25em));
 				@include txt((a:c,p:1.5em,h:1em,w:b,f:d));
 				&.is-leading-zero{
