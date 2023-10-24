@@ -1,0 +1,60 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-countdown{
+	&-body{
+		@include bnd((pd:1em 0));
+		@include flx((w:n,j:c,g:.5em));
+		&-group{
+			@include flx((w:n,g:.25em,a:e));
+			&-number{
+				@include bnd((d:b,p:r,f:0 0 1ch,pd:.25em,w:1ch));
+				@include bg((c:t 1 .1));
+				@include bdr((r:.25em));
+				@include txt((a:c,p:1.5em,h:1em,w:b,f:d));
+				&.is-leading-zero{
+				}
+			}
+			&::after{
+				@include bnd((d:b,f:0 0 a,pd:.25em));
+				@include txt((p:1em,h:1em,w:b,f:t));
+			}
+			&.is-days{
+				&::after{
+					content:'日';
+				}
+			}
+			&.is-days &{
+				&-number{
+					&.is-leading-zero{
+						@include bnd((d:n));
+					}
+				}
+			}
+			&.is-hours{
+				&::after{
+					content:'時間';
+				}
+			}
+			&.is-minutes{
+				&::after{
+					content:'分';
+				}
+			}
+			&.is-seconds{
+				&::after{
+					content:'秒';
+				}
+			}
+		}
+	}
+	&.is-size-small{
+		@include txt((p:12));
+	}
+	&.is-size-medium{
+		@include txt((p:16));
+		
+	}
+	&.is-size-large{
+		@include txt((p:24));
+	}
+}
