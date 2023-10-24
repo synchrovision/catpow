@@ -13,6 +13,8 @@ class style_config{
 	protected static
 		$color_roles,
 		$font_roles,
+		$weight_roles,
+		$size_roles,
 		$cache=[];
 	public static function get_color_roles(){
 		if(isset(static::$color_roles)){return static::$color_roles;}
@@ -35,8 +37,54 @@ class style_config{
 			'text'=>['label'=>'本文','default'=>'sans-serif','shorthand'=>'t'],
 			'code'=>['label'=>'コード','default'=>'monospace','shorthand'=>'c'],
 			'decoration'=>['label'=>'装飾','default'=>'fantasy','shorthand'=>'d'],
-			'script'=>['label'=>'手書き','default'=>'cursive','shorthand'=>'s']
+			'script'=>['label'=>'手書き','default'=>'cursive','shorthand'=>'s'],
+			'bold'=>['label'=>'太字','default'=>'sans-serif','shorthand'=>'b']
 		]);
+	}
+	public static function get_weight_roles(){
+		if(isset(static::$weight_roles)){return static::$weight_roles;}
+		return static::$weight_roles=apply_filters('cp_weight_roles',[
+			'heading'=>['label'=>'見出し','default'=>'700','shorthand'=>'h'],
+			'text'=>['label'=>'本文','default'=>'400','shorthand'=>'t'],
+			'code'=>['label'=>'コード','default'=>'400','shorthand'=>'c'],
+			'decoration'=>['label'=>'装飾','default'=>'700','shorthand'=>'d'],
+			'script'=>['label'=>'手書き','default'=>'cursive','shorthand'=>'s'],
+			'bold'=>['label'=>'太字','default'=>'700','shorthand'=>'b']
+		]);
+	}
+	public static function get_size_roles(){
+		if(isset(static::$size_roles)){return static::$size_roles;}
+		$base_size_roles=[
+			'contents'=>['label'=>'コンテンツ','default'=>'60rem','shorthand'=>'c']
+		];
+		$relative_size_roles=[
+			'large'=>['label'=>'大字','default'=>'1.1em','shorthand'=>'l','relative'=>true],			
+			'small'=>['label'=>'小字','default'=>'0.8em','shorthand'=>'s','relative'=>true]
+		];
+		$heading_size_roles=[];
+		$paragraph_size_roles=[];
+		$get_size=function($min,$max,$p){
+			$size=$min+($max-$min)/5*$p;
+			return ($size/16).'rem';
+		};
+		for($i=1;$i<=6;$i++){
+			$heading_size_roles["heading{$i}"]=[
+				'label'=>"見出し{$i}",
+				'default'=>[$get_size(12,52,6-$i),$get_size(12,22,6-$i)],'shorthand'=>"h{$i}",
+				'responsive'=>true
+			];
+			$paragraph_size_roles["paragraph{$i}"]=[
+				'label'=>"段落{$i}",
+				'default'=>[$get_size(10,20,6-$i),$get_size(10,15,6-$i)],'shorthand'=>"p{$i}",
+				'responsive'=>true
+			];
+		}
+		return static::$size_roles=apply_filters('cp_size_roles',array_merge(
+			$base_size_roles,
+			$heading_size_roles,
+			$paragraph_size_roles,
+			$relative_size_roles
+		));
 	}
 	public static function update($wp_customize_settings=null){
 		if(isset($wp_customize_settings)){
@@ -95,16 +143,29 @@ class style_config{
 		}
 		return $tones;
 	}
+	public static function get_breakpoints(){
+		static $cache;
+		if(isset($cache)){return $cache;}
+		return $cache=apply_filters('cp_breakpoints',[
+			'all'=>'all',
+			'<=960'=>'screen and (max-width:960px)',
+			'<=720'=>'screen and (max-width:720px)',
+			'<=480'=>'screen and (max-width:480px)'
+		]);
+	}
 	public static function get_css_vars(){
 		static $css_vars;
 		if(isset($css_vars)){return $css_vars;}
 		$roles=static::get_color_roles();
-		$css_vars=[];
+		$css_vars=['all'=>[]];
 		$vars=apply_filters('cp_css_vars',[
 			'tones'=>self::get_config_json('tones'),
 			'colors'=>self::get_config_json('colors'),
-			'fonts'=>self::get_config_json('fonts')
+			'fonts'=>self::get_config_json('fonts'),
+			'sizes'=>self::get_config_json('sizes'),
+			'weights'=>self::get_config_json('weights')
 		]);
+		$bps=array_values(self::get_breakpoints());
 		if(isset($vars['tones']['i'])){
 			foreach($roles as $role){
 				if(!empty($role['invert'])){
@@ -115,38 +176,61 @@ class style_config{
 		}
 		foreach($vars as $group=>$vals){
 			foreach($vals as $key=>$val){
-				if(is_array($val)){
+				if(is_array($val) && key($val)!==0){
 					foreach($val as $k=>$v){
-						$css_vars[sprintf('--cp-%s-%s-%s',$group,$key,$k)]=$v;
-						if($group==='tones'){
-							$css_vars[sprintf('--cp-root-%s-%s-%s',$group,$key,$k)]=$v;
-							$css_vars[sprintf('--cp-container-%s-%s-%s',$group,$key,$k)]=$v;
+						if(is_array($v)){
+							foreach($v as $i=>$vv){
+								$css_vars[$bps[$i]][sprintf('--cp-%s-%s-%s',$group,$key,$k)]=$vv;
+							}
+						}
+						else{
+							$css_vars['all'][sprintf('--cp-%s-%s-%s',$group,$key,$k)]=$v;
+							if($group==='tones'){
+								$css_vars['all'][sprintf('--cp-root-%s-%s-%s',$group,$key,$k)]=$v;
+								$css_vars['all'][sprintf('--cp-container-%s-%s-%s',$group,$key,$k)]=$v;
+							}
 						}
 					}
 				}
 				else{
-					$css_vars[sprintf('--cp-%s-%s',$group,$key)]=$val;
+					if(is_array($val)){
+						foreach($val as $i=>$v){
+							$css_vars[$bps[$i]][sprintf('--cp-%s-%s',$group,$key)]=$v;
+						}
+					}
+					else{
+						$css_vars['all'][sprintf('--cp-%s-%s',$group,$key)]=$val;
+					}
 				}
 			}
 		}
-		$css_vars['--wp-background-image']=sprintf('url(%s)',get_background_image());
-		$css_vars['--wp-background-position-x']=get_theme_mod('background_position_x',get_theme_support('custom-background','default-position-x'));
-		$css_vars['--wp-background-position-y']=get_theme_mod('background_position_y',get_theme_support('custom-background','default-position-y'));
-		$css_vars['--wp-background-attachment']=get_theme_mod('background_attachment');
-		$css_vars['--wp-background-repeat']=get_theme_mod('background_repeat');
-		$css_vars['--wp-background-size']=get_theme_mod('background_size',get_theme_support('custom-background','default-size'));
-		$css_vars['--wp-logo-image']=sprintf('url(%s)',wp_get_attachment_url(get_theme_mod('custom_logo')));
-		$css_vars['--wp-icon-image']=sprintf('url(%s)',get_site_icon_url());
+		$css_vars['all']['--wp-background-image']=sprintf('url(%s)',get_background_image());
+		$css_vars['all']['--wp-background-position-x']=get_theme_mod('background_position_x',get_theme_support('custom-background','default-position-x'));
+		$css_vars['all']['--wp-background-position-y']=get_theme_mod('background_position_y',get_theme_support('custom-background','default-position-y'));
+		$css_vars['all']['--wp-background-attachment']=get_theme_mod('background_attachment');
+		$css_vars['all']['--wp-background-repeat']=get_theme_mod('background_repeat');
+		$css_vars['all']['--wp-background-size']=get_theme_mod('background_size',get_theme_support('custom-background','default-size'));
+		$css_vars['all']['--wp-logo-image']=sprintf('url(%s)',wp_get_attachment_url(get_theme_mod('custom_logo')));
+		$css_vars['all']['--wp-icon-image']=sprintf('url(%s)',get_site_icon_url());
 		return $css_vars;
 	}
 	public static function get_css_vars_code(){
 		static $code;
 		if(isset($code)){return $code;}
-		$code=':root{';
-		foreach(self::get_css_vars() as $key=>$val){
-			$code.=sprintf('%s:%s;',$key,$val);
+		$code='';
+		foreach(self::get_css_vars() as $bp=>$vars){
+			$code.=$bp==='all'?':root{':"@media({$bp}){:root{";
+			foreach($vars as $key=>$val){
+				if(is_array($val)){
+					$code.=sprintf('%s:%s;',$key,$val[0]);
+					$altCode.=sprintf('%s:%s;',$key,$val[1]);
+				}
+				else{
+					$code.=sprintf('%s:%s;',$key,$val);
+				}
+			}
+			$code.=$bp==='all'?'}':'}}';
 		}
-		$code.='}';
 		return $code;
 	}
 	public static function print_css_vars(){
@@ -156,8 +240,8 @@ class style_config{
 	}
 	public static function resolve_css_vars($css_code){
 		return str_replace(
-			array_map(function($key){return sprintf('var(%s)',$key);},array_keys(self::get_css_vars())),
-			array_values(self::get_css_vars()),
+			array_map(function($key){return sprintf('var(%s)',$key);},array_keys(self::get_css_vars()['all'])),
+			array_values(self::get_css_vars()['all']),
 			$css_code
 		);
 	}
