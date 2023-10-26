@@ -50,7 +50,7 @@
 .wp-block-catpow-listed.orderd > .item > .header > .text > .title {
   text-align: left;
   font-size: 1.75rem;
-  font-family: h;
+  font-family: var(--cp-fonts-h);
   letter-spacing: 0.1em;
 }
 .wp-block-catpow-listed.orderd > .item > .contents {
