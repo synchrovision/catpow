@@ -286,7 +286,7 @@
 						>.title{
 							@include bnd((f:1 1 f,pd:0,mg:0));
 							@include txt((p:18,h:1.5em,w:r));
-							@include bdr((p:b,s:s,w:1);
+							@include bdr((p:b,s:s,w:1));
 							&+.titlecaption{
 								@include bnd((mgt:.5em));
 							}
