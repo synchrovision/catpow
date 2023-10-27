@@ -172,6 +172,9 @@ body{
 				@include bnd((w:18,h:18));
 			}
 		}
+		.cp-meta-item{
+			img,video{@include bnd((d:b,w:100,h:a));}
+		}
 		a.pdf{
 			@include bnd((d:ib,w:80,h:115,o:h));
 			object{

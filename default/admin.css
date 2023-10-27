@@ -228,6 +228,11 @@ body.login .button.sns_login img {
   width: 1.125rem;
   height: 1.125rem;
 }
+#wpcontent .wp-list-table .cp-meta-item img, #wpcontent .wp-list-table .cp-meta-item video {
+  display: block;
+  width: 6.25rem;
+  height: auto;
+}
 #wpcontent .wp-list-table a.pdf {
   display: inline-block;
   width: 5rem;
