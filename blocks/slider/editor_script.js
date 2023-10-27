@@ -37,7 +37,7 @@
     example: CP.example,
     edit({ attributes, className, setAttributes }) {
       const { useState, useMemo } = wp.element;
-      const { InnerBlocks, InspectorControls, RichText: RichText2 } = wp.blockEditor;
+      const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
       const { classes: classes2 = "", controlClasses = "", config, items, doLoop, EditMode = false, AltMode = false, device } = attributes;
       const states = CP.wordsToFlags(classes2);
@@ -214,7 +214,7 @@
               }
             )),
             (states.hasTitle || states.hasSubTitle || states.hasText) && /* @__PURE__ */ wp.element.createElement("div", { className: "texts" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(
-              RichText2,
+              RichText,
               {
                 tagName: "h3",
                 className: "title",
@@ -225,7 +225,7 @@
                 value: item.title
               }
             ), states.hasSubTitle && /* @__PURE__ */ wp.element.createElement(
-              RichText2,
+              RichText,
               {
                 tagName: "h4",
                 className: "subtitle",
@@ -236,7 +236,7 @@
                 value: item.subTitle
               }
             ), states.hasText && /* @__PURE__ */ wp.element.createElement(
-              RichText2,
+              RichText,
               {
                 tagName: "p",
                 className: "text",
@@ -393,7 +393,7 @@
       )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("div", { className: classes2 }, /* @__PURE__ */ wp.element.createElement("ul", { className: "contents" }, rtn), /* @__PURE__ */ wp.element.createElement("div", { className: controlClasses, "data-config": config }, states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { className: "arrow prev", onClick: prevItem }, " "), states.hasImage && states.hasThumbnail && /* @__PURE__ */ wp.element.createElement("ul", { className: "thumbnail" }, thumbs), states.hasDots && /* @__PURE__ */ wp.element.createElement("ul", { className: "dots" }, dots), states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { className: "arrow next", onClick: nextItem }, " ")))));
     },
     save({ attributes, className }) {
-      const { InnerBlocks, RichText: RichText2 } = wp.blockEditor;
+      const { InnerBlocks, RichText } = wp.blockEditor;
       const { classes: classes2 = "", controlClasses = "", config, items = [], doLoop } = attributes;
       const states = CP.wordsToFlags(classes2);
       const { devices, imageKeys, imageSizes } = CP.config.slider;
@@ -418,7 +418,7 @@
               index,
               isTemplate: states.isTemplate
             }
-          )), (states.hasTitle || states.hasSubTitle || states.hasText) && /* @__PURE__ */ wp.element.createElement("div", { className: "texts" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText2.Content, { tagName: "h3", className: "title", value: item.title }), states.hasSubTitle && /* @__PURE__ */ wp.element.createElement(RichText2.Content, { tagName: "h4", className: "subtitle", value: item.subTitle }), states.hasText && /* @__PURE__ */ wp.element.createElement(RichText2.Content, { tagName: "p", className: "text", value: item.text })), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
+          )), (states.hasTitle || states.hasSubTitle || states.hasText) && /* @__PURE__ */ wp.element.createElement("div", { className: "texts" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "h3", className: "title", value: item.title }), states.hasSubTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "h4", className: "subtitle", value: item.subTitle }), states.hasText && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "text", value: item.text })), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
             CP.ResponsiveImage,
             {
               attr: attributes,
@@ -482,6 +482,7 @@
           }
         },
         save({ attributes, className }) {
+          const { InnerBlocks, RichText } = wp.blockEditor;
           const { classes: classes2 = "", controlClasses = "", config, items = [] } = attributes;
           var classArray = _.uniq(classes2.split(" "));
           var controlClassArray = _.uniq(controlClasses.split(" "));
@@ -535,6 +536,7 @@
       },
       {
         save({ attributes, className }) {
+          const { InnerBlocks, RichText } = wp.blockEditor;
           const { classes: classes2 = "", controlClasses = "", config, items = [] } = attributes;
           var classArray = _.uniq(classes2.split(" "));
           var controlClassArray = _.uniq(controlClasses.split(" "));

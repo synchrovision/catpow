@@ -526,6 +526,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 			},
 
 			save({attributes,className}){
+				const {InnerBlocks,RichText}=wp.blockEditor;
 				const {classes='',controlClasses='',config,items=[]}=attributes;
 				var classArray=_.uniq(classes.split(' '));
 				var controlClassArray=_.uniq(controlClasses.split(' '));
@@ -598,6 +599,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 		},
 		{
 			save({attributes,className}){
+				const {InnerBlocks,RichText}=wp.blockEditor;
 				const {classes='',controlClasses='',config,items=[]}=attributes;
 				var classArray=_.uniq(classes.split(' '));
 				var controlClassArray=_.uniq(controlClasses.split(' '));
