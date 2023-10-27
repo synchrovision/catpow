@@ -6,7 +6,7 @@ class BlockConfig{
 		return [
 			'type'=>'array',
 			'source'=>'query',
-			'selector'=>(empty($selector)?'':' ').'source',
+			'selector'=>(empty($selector)?'':"{$selector} ").'source',
 			'query'=>[
 				'srcset'=>['type'=>'string','source'=>'attribute','attribute'=>'srcset'],
 				'device'=>['type'=>'string','source'=>'attribute','attribute'=>'data-device']
