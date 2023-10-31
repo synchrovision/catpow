@@ -4244,7 +4244,11 @@
     const originalColors = useMemo(() => {
       const originalColors2 = {};
       const selectedBlock = wp.data.select("core/block-editor").getSelectedBlock();
-      const el = document.getElementById("block-" + selectedBlock.clientId);
+      const editorCanvas = document.querySelector('iframe[name="editor-canvas"]');
+      const el = (editorCanvas ? editorCanvas.contentDocument : document).getElementById("block-" + selectedBlock.clientId);
+      if (!el) {
+        return originalColors2;
+      }
       const styles = window.getComputedStyle(el);
       roles.forEach((role) => {
         const hsla = {};
