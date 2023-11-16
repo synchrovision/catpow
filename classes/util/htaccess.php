@@ -35,7 +35,7 @@ RewriteRule .(jpe?g|png|gif)$ %{SCRIPT_FILENAME}.webp [T=image/webp]
 
 RewriteCond %{HTTP:Accept-Encoding} gzip
 RewriteCond %{REQUEST_FILENAME}\.gz -s
-RewriteRule .+ %{REQUEST_URI}.gz
+RewriteRule .+ %{REQUEST_FILENAME}.gz
 
 AddEncoding x-gzip .gz
 
