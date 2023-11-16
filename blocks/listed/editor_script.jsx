@@ -38,7 +38,7 @@ wp.blocks.registerBlockType('catpow/listed',{
 				{name:'titleTag',input:'buttons',filter:'titleTag',key:'TitleTag',label:'タイトルタグ',values:['h2','h3','h4'],effect:(val,{set})=>{
 					if(/^h\d$/.test(val)){set({SubTitleTag:'h'+(parseInt(val[1])+1)})}
 				}},
-				{name:'titleTag',input:'buttons',filter:'subTitleTag',key:'SubTitleTag',label:'サブタイトルタグ',values:['h3','h4','h5'],cond:'hasSubTitle'},
+				{name:'subTitleTag',input:'buttons',filter:'subTitleTag',key:'SubTitleTag',label:'サブタイトルタグ',values:['h3','h4','h5'],cond:'hasSubTitle'},
 				{
 					name:'type',
 					label:'タイプ',
