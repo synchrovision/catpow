@@ -1,6 +1,7 @@
 <?php
 use Catpow\util\BlockConfig;
 $attributes=[
+	'vars'=>['type'=>'object','default'=>['--cp-image-opacity'=>'0.5','--cp-image-blendmode'=>'normal']],
 	"classes"=>["source"=>'attribute',"selector"=>'div',"attribute"=>'class',"default"=>'wp-block-catpow-slider story hasTitle hasText hasImage'],
 	"controlClasses"=>["source"=>'attribute',"selector"=>'div.controls',"attribute"=>'class',"default"=>'controls loop autoplay flickable'],
 	"config"=>[
