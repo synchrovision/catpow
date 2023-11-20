@@ -110,22 +110,15 @@ if(function_exists('register_block_type')){
 Catpow\shortcode::init();
 
 /*plugin*/
-add_filter('extra_plugin_headers',function($headers){
-	$headers[]='GitHub Repository';
-	return $headers;
-});
-add_filter('pre_set_site_transient_update_plugins',function($transient){
-	foreach(get_plugins() as $plugin=>$plugin_data){
-		$repo=Catpow\github\Repo::of_plugin($plugin);
-		if(!empty($repo) && $repo->hasNewerRelease){
-			$transient->response[$plugin]=$repo->dataForTransientUpdatePlugins;
+add_filter('update_plugins_github.com',function($update,$plugin_data,$plugin_file){
+	$repo=Catpow\github\Repo::of_plugin($plugin_file,$plugin_data);
+	if(!empty($repo)){
+		if($repo->hasNewerRelease){
+			return $repo->dataForTransientUpdatePlugins;
 		}
 	}
-	return $transient;
-});
-add_filter('site_transient_update_plugins',function($values){
-	return $values;
-});
+	return $update;
+},10,3);
 add_filter('plugins_api',function($res,$action,$arg){
 	if(in_array($action,['query_plugins','plugin_information'],true)&& isset($arg->slug)){
 		$repo=Catpow\github\Repo::of_plugin($arg->slug);

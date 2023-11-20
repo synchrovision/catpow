@@ -11,13 +11,24 @@ class Repo{
 		$this->repo=$repo??static::DEFAULT_REPO;
 		$this->access_token=$access_token;
 	}
-	public static function of_plugin($plugin){
-		$plugin_data=get_plugin_data(\WP_PLUGIN_DIR.'/'.$plugin);
-		if(empty($plugin_data['GitHub Repository'])){return false;}
-		$rtn=new self($plugin_data['GitHub Repository']);
+	public static function of_plugin($plugin,$plugin_data=null){
+		if(empty($plugin_data)){
+			$plugin_data=get_plugin_data(\WP_PLUGIN_DIR.'/'.$plugin);
+		}
+		$repo=self::get_repo_from_plugin_data($plugin_data);
+		if(empty($repo)){return false;}
+		$rtn=new self($repo);
 		$rtn->plugin=$plugin;
 		$rtn->plugin_data=$plugin_data;
 		return $rtn;
+	}
+	public static function get_repo_from_plugin_data($plugin_data){
+		if(!empty($plugin_data['GitHub Repository'])){return $plugin_data['GitHub Repository'];}
+		if(
+			!empty($plugin_data['UpdateURI']) && 
+			preg_match('@^https://github\.com/(.+?)/?$@',$plugin_data['UpdateURI'],$matches)
+		){return $matches[1];}
+		return false;
 	}
 	public function download($to){
 		if(!$this->latestZipUrl){return false;}
@@ -40,7 +51,7 @@ class Repo{
 	
 	function query($path){
 		$transient="ghres_{$this->repo}/{$path}";
-		if($cache=get_site_transient($transient)){return $cache;}
+		if($cache=get_site_transient($transient)){return json_decode($cache,1);}
 		$url='https://api.github.com/repos/'.$this->repo.'/'.$path;
 		if ($this->token){
 			$url=add_query_arg(['access_token'=>$this->access_token],$url);
