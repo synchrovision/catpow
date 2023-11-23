@@ -86,11 +86,13 @@
 }
 .wp-block-catpow-pageheader.small .wp-block-catpow-pageheader-body-title {
   padding: 2.5rem 1.25rem;
+  font-size: 1.5rem;
 }
 .wp-block-catpow-pageheader.medium .wp-block-catpow-pageheader-body-title {
   padding: 5rem 1.25rem;
 }
 .wp-block-catpow-pageheader.large .wp-block-catpow-pageheader-body-title {
   padding: 10rem 1.25rem;
+  font-size: 3rem;
 }
 /*# sourceMappingURL=./style.css.map */

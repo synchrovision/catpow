@@ -53,6 +53,7 @@
 		&-body{
 			&-title{
 				@include bnd((pd:40 20));
+				@include txt((p:24));
 			}
 		}
 	}
@@ -68,6 +69,7 @@
 		&-body{
 			&-title{
 				@include bnd((pd:160 20));
+				@include txt((p:48));
 			}
 		}
 	}
