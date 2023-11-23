@@ -62,6 +62,7 @@ CP.SelectClassPanel=(props)=>{
 					]
 				},
 				width:{name:'width',type:'buttons',label:__('幅','catpow'),values:{fullWidth:'フル',wideWidth:'ワイド',regularWidth:'レギュラー',narrowWidth:'ナロー'}},
+				size:{name:'size',type:'buttons',label:__('サイズ','catpow'),values:{large:'大',medium:'中',small:'小'}},
 				textColor:{name:'textColor',type:'buttons',label:__('文字色','catpow'),values:{revertTextColor:'通常',invertTextColor:'反転'}}
 			};
 			if(preset.hasOwnProperty(prm)){prm=preset[prm];}
