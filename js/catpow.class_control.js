@@ -11,14 +11,21 @@ Catpow.class_control=(control,target,param)=>{
 			app.goto(index);
 		});
 	};
+	const getRelativeIndex=(i,c,l,lp)=>{
+		if(!lp){return i-c;}
+		const h=l>>1;
+		return (i-c+h+l)%l-h;
+	};
 	const updateItemClassName=(item,index)=>{
-		item.className=bems.get(item)('item'+(index-app.current),{
-			before:index<app.current,
-			prev:index-app.current===-1,
-			active:index===app.current,
-			next:index-app.current===1,
-			after:index>app.current,
+		const p=getRelativeIndex(index,app.current,app.length,app.param.loop);
+		item.className=bems.get(item)('item'+(p),{
+			before:p<0,
+			prev:p===-1,
+			active:p===0,
+			next:p===1,
+			after:p>0,
 		});
+		item.style.setProperty('--item-p',p);
 	};
 	const app=this;
 	app.init=()=>{
