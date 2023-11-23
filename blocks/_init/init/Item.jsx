@@ -16,6 +16,7 @@ CP.Item=(props)=>{
 		tag,
 		{
 			className:classes,
+			style:props.style,
 			"data-index":index,
 			"data-refine-cond":items[index]['cond'],
 			onKeyDown:(e)=>{

@@ -2592,6 +2592,7 @@
       tag,
       {
         className: classes,
+        style: props.style,
         "data-index": index,
         "data-refine-cond": items2[index]["cond"],
         onKeyDown: (e) => {
