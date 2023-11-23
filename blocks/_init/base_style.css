@@ -414,7 +414,7 @@
   min-width: 1em;
   width: fit-content;
   height: 1em;
-  padding: 0.25em;
+  padding: 0.25em 1em;
   bottom: -2em;
   left: -12.5rem;
   right: -12.5rem;
@@ -429,6 +429,10 @@
   opacity: 1;
   transform: -webkit- translateY(0rem);
   transform: translateY(0rem);
+}
+.CP-Link-input:empty:before {
+  content: "Input URL";
+  opacity: 0.5;
 }
 .CP-Link:not(.is-selected) .CP-Link-input {
   opacity: 0;
