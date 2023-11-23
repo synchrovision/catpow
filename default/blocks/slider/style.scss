@@ -107,6 +107,24 @@
 		&.hasDots{
 			@include bnd((pdb:60));
 		}
+		&.hasBackgroundImage{
+			>.contents{
+				>.item{
+					>.background{
+						@include bnd((d:b,p:a,i:0));
+						&::after{
+							content:'';
+							@include bnd((d:b,p:a,i:0));
+							@include bg((c:bx_0));
+							@include trn((o:var(--cp-image-opacity),bm:var(--cp-image-blendmode)));
+						}
+						img,picture,video{
+							@include bnd((w:f,h:f,of:c,op:c));
+						}
+					}
+				}
+			}
+		}
 		>.contents{
 			@include bnd((d:b,p:r,w:f,mg:20 a,pd:0));
 			@include bg((c:bx));
@@ -136,11 +154,6 @@
 					>.text{
 						@include bnd((mg:0,pd:0 20,bs:b));
 						@include txt((a:j,p:15,h:1.5em,f:t,s:r,c:tx));
-					}
-				}
-				.background{
-					img,picture,video{
-						@include bnd((h:125% 120vh));
 					}
 				}
 				>.link{

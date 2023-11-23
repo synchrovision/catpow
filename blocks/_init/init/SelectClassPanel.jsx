@@ -61,6 +61,10 @@ CP.SelectClassPanel=(props)=>{
 						]}
 					]
 				},
+				backgroundImage:{name:'backgroundImage',label:'背景画像',values:'hasBackgroundImage',sub:[
+					{name:'blendmode',label:__('モード','catpow'),vars:'vars',key:'--cp-image-blendmode',input:'blendmode'},
+					{name:'opacity',label:__('不透明度','catpow'),vars:'vars',key:'--cp-image-opacity',input:'range',min:0,max:1,step:0.1}
+				 ]},
 				width:{name:'width',type:'buttons',label:__('幅','catpow'),values:{fullWidth:'フル',wideWidth:'ワイド',regularWidth:'レギュラー',narrowWidth:'ナロー'}},
 				size:{name:'size',type:'buttons',label:__('サイズ','catpow'),values:{large:'大',medium:'中',small:'小'}},
 				textColor:{name:'textColor',type:'buttons',label:__('文字色','catpow'),values:{revertTextColor:'通常',invertTextColor:'反転'}}

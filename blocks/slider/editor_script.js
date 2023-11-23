@@ -87,10 +87,7 @@
                 { name: "image", label: "\u30A4\u30E1\u30FC\u30B8\u753B\u50CF", values: "hasImage", sub: [
                   { name: "thumbnail", label: "\u30B5\u30E0\u30CD\u30FC\u30EB", values: "hasThumbnail" }
                 ] },
-                { name: "backgroundImage", label: "\u80CC\u666F\u753B\u50CF", values: "hasBackgroundImage", sub: [
-                  { name: "blendmode", label: __("\u30E2\u30FC\u30C9", "catpow"), vars: "vars", key: "--cp-image-blendmode", input: "blendmode" },
-                  { name: "opacity", label: __("\u4E0D\u900F\u660E\u5EA6", "catpow"), vars: "vars", key: "--cp-image-opacity", input: "range", min: 0, max: 1, step: 0.1 }
-                ] },
+                "backgroundImage",
                 { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" }
               ],
               story: [
@@ -99,9 +96,7 @@
                 { name: "image", label: "\u753B\u50CF", values: "hasImage", sub: [
                   { name: "thumbnail", label: "\u30B5\u30E0\u30CD\u30FC\u30EB", values: "hasThumbnail" }
                 ] },
-                { name: "backgroundImage", label: "\u80CC\u666F\u753B\u50CF", values: "hasBackgroundImage", sub: [
-                  { name: "paleBG", label: "\u80CC\u666F\u753B\u50CF\u3092\u8584\u304F", values: "paleBG" }
-                ] },
+                "backgroundImage",
                 { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" }
               ],
               articles: [

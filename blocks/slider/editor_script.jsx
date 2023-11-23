@@ -86,10 +86,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 							{name:'image',label:'イメージ画像',values:'hasImage',sub:[
 								{name:'thumbnail',label:'サムネール',values:'hasThumbnail'}
 							]},
-							{name:'backgroundImage',label:'背景画像',values:'hasBackgroundImage',sub:[
-								{name:'blendmode',label:__('モード','catpow'),vars:'vars',key:'--cp-image-blendmode',input:'blendmode'},
-								{name:'opacity',label:__('不透明度','catpow'),vars:'vars',key:'--cp-image-opacity',input:'range',min:0,max:1,step:0.1}
-							 ]},
+							'backgroundImage',
 							{name:'link',label:'リンク',values:'hasLink'}
 						],
 						story:[
@@ -98,9 +95,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 							{name:'image',label:'画像',values:'hasImage',sub:[
 								{name:'thumbnail',label:'サムネール',values:'hasThumbnail'}
 							]},
-							{name:'backgroundImage',label:'背景画像',values:'hasBackgroundImage',sub:[
-								{name:'paleBG',label:'背景画像を薄く',values:'paleBG'}
-							 ]},
+							'backgroundImage',
 							{name:'link',label:'リンク',values:'hasLink'}
 						],
 						articles:[
