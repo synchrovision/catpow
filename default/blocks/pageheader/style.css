@@ -84,4 +84,13 @@
   object-fit: cover;
   z-index: 1;
 }
+.wp-block-catpow-pageheader.small .wp-block-catpow-pageheader-body-title {
+  padding: 2.5rem 1.25rem;
+}
+.wp-block-catpow-pageheader.medium .wp-block-catpow-pageheader-body-title {
+  padding: 5rem 1.25rem;
+}
+.wp-block-catpow-pageheader.large .wp-block-catpow-pageheader-body-title {
+  padding: 10rem 1.25rem;
+}
 /*# sourceMappingURL=./style.css.map */

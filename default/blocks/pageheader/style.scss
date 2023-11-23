@@ -49,4 +49,26 @@
 			@include bnd((d:b,w:f,h:f,op:c,of:c,z:1));
 		}
 	}
+	&.small &{
+		&-body{
+			&-title{
+				@include bnd((pd:40 20));
+			}
+		}
+	}
+	&.medium &{
+		&-body{
+			&-title{
+				@include bnd((pd:80 20));
+			}
+		}
+		
+	}
+	&.large &{
+		&-body{
+			&-title{
+				@include bnd((pd:160 20));
+			}
+		}
+	}
 }
