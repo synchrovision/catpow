@@ -220,6 +220,46 @@ body.login .button.sns_login img {
   padding: 0.625rem;
   background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
 }
+#wpcontent .cp-meta-item img, #wpcontent .cp-meta-item video {
+  display: block;
+  width: 6.25rem;
+  height: auto;
+}
+#wpcontent table.manage {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+#wpcontent table.manage > thead > tr > th, #wpcontent table.manage > thead > tr > td, #wpcontent table.manage > tbody > tr > th, #wpcontent table.manage > tbody > tr > td {
+  padding: 1.25rem 0.3125rem;
+  border-bottom-style: solid;
+  border-bottom-width: 0.0625rem;
+  border-bottom-color: hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+}
+#wpcontent table.manage > thead > tr > th.control, #wpcontent table.manage > thead > tr > td.control, #wpcontent table.manage > tbody > tr > th.control, #wpcontent table.manage > tbody > tr > td.control {
+  width: 5rem;
+}
+#wpcontent table.manage > thead > tr > th, #wpcontent table.manage > tbody > tr > th {
+  width: 10rem;
+  text-align: left;
+  font-size: 0.75rem;
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),1);
+  font-weight: bold;
+}
+#wpcontent table.manage > thead > tr > td, #wpcontent table.manage > tbody > tr > td {
+  background-color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),calc(100% - var(--cp-tones-bx-t) * 100),0.5);
+  text-align: left;
+  font-size: 0.6875rem;
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),1);
+  font-weight: normal;
+}
+#wpcontent table.manage > thead > tr > td textarea.full, #wpcontent table.manage > tbody > tr > td textarea.full {
+  width: 100%;
+  box-sizing: border-box;
+}
+#wpcontent table.manage > thead > tr > td span, #wpcontent table.manage > tbody > tr > td span {
+  display: inline-block;
+}
 #wpcontent .wp-list-table input[type="checkbox"] {
   width: 0.9375rem;
   height: 0.9375rem;
@@ -227,11 +267,6 @@ body.login .button.sns_login img {
 #wpcontent .wp-list-table input[type="checkbox"]:checked::before {
   width: 1.125rem;
   height: 1.125rem;
-}
-#wpcontent .wp-list-table .cp-meta-item img, #wpcontent .wp-list-table .cp-meta-item video {
-  display: block;
-  width: 6.25rem;
-  height: auto;
 }
 #wpcontent .wp-list-table a.pdf {
   display: inline-block;
