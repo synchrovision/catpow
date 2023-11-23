@@ -26,6 +26,7 @@
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
           "color",
+          "size",
           { name: "backgroundImage", label: __("\u80CC\u666F\u753B\u50CF", "catpow"), values: "hasBackgroundImage", sub: [
             { input: "picture", keys: imageKeys.backgroundImage, devices },
             { name: "blendmode", label: __("\u30E2\u30FC\u30C9", "catpow"), vars: "vars", key: "--cp-image-blendmode", input: "blendmode" },
