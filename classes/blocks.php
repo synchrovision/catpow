@@ -28,13 +28,13 @@ class blocks{
 		$data=self::get_block_data_to_register();
 		if(!empty($data['js'])){
 			foreach($data['js'] as $args){
-				call_user_func_array(['cp','register_script'],$args);
+				call_user_func_array('wp_register_script',$args);
 				CP::set_script_translations($args[0]);
 			}
 		}
 		if(!empty($data['css'])){
 			foreach($data['css'] as $args){
-				call_user_func_array(['cp','register_style'],$args);
+				call_user_func_array('wp_register_style',$args);
 			}
 		}
 		if(!empty($data['blocks'])){
