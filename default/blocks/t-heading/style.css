@@ -7,7 +7,7 @@
 .wp-block-catpow-t-heading > tbody > tr > td {
   padding: 0.5em 0rem;
   border-style: none;
-  font-family: h;
+  font-family: var(--cp-fonts-h);
   font-weight: 400;
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
 }
