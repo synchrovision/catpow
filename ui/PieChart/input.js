@@ -1,5 +1,5 @@
 (() => {
-  // ../ui/PieChart/input.jsx
+  // ../../catpow/ui/PieChart/input.jsx
   Catpow.UI.PieChart = class extends wp.element.Component {
     constructor(props) {
       super(props);
@@ -35,10 +35,10 @@
         d += " A " + this.bodyBnd.r + " " + this.bodyBnd.r + " 0 " + (v * 2 > this.total ? "1" : "0") + " 1 " + crrPos.x + " " + crrPos.y;
         d += " L " + this.bodyBnd.ox + " " + this.bodyBnd.oy;
         pies.push(
-          /* @__PURE__ */ React.createElement("path", { d, stroke: "red" })
+          /* @__PURE__ */ wp.element.createElement("path", { d, stroke: "red" })
         );
       }
-      return /* @__PURE__ */ React.createElement("div", { className: "PieChart" }, /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 300 300" }, pies, /* @__PURE__ */ React.createElement(
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "PieChart" }, /* @__PURE__ */ wp.element.createElement("svg", { viewBox: "0 0 300 300" }, pies, /* @__PURE__ */ wp.element.createElement(
         "rect",
         {
           className: "control",
@@ -68,7 +68,7 @@
             });
           }
         }
-      )), /* @__PURE__ */ React.createElement(
+      )), /* @__PURE__ */ wp.element.createElement(
         Catpow.UI.HiddenValues,
         {
           name: this.props.name,
