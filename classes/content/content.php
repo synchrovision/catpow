@@ -317,6 +317,7 @@ class content{
 		if(isset($this->path_data[$name])){return $this->path_data[$name];}
 		switch($name){
 			case 'the_id':
+			case 'the_parent':
 			case 'the_name':
 			case 'the_title':
 			case 'the_content':{
