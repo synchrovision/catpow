@@ -6,6 +6,9 @@ abstract class data_type{
 	public static function get_id($obj){
 		return $obj->{static::$key_translation['id']};
 	}
+	public static function get_parent($obj){
+		return $obj->{static::$key_translation['parent']};
+	}
 	public static function get_name($obj){
 		return $obj->{static::$key_translation['name']};
 	}

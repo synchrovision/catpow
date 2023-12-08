@@ -2,7 +2,7 @@
 namespace Catpow\data_type;
 
 class term extends data_type{
-	public static $data_type='term',$key_traslation=['id'=>'term_id','name'=>'slug','title'=>'name','content'=>'description'];
+	public static $data_type='term',$key_traslation=['id'=>'term_id','parent'=>'parent','name'=>'slug','title'=>'name','content'=>'description'];
 	public static function get_uri($term){
 		$hierarchical_slugs = [];
 		$ancestors=get_ancestors( $term->term_id, $term->taxonomy, 'taxonomy' );
