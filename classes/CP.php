@@ -502,7 +502,7 @@ class CP{
 		return true;
 	}
 	public static function use_components($names){
-		foreach($names as $name){self::use_component($name);}
+		foreach((array)$names as $name){self::use_component($name);}
 	}
 	public static function use_component($name){
 		static $done=[];
