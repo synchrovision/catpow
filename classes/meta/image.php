@@ -14,7 +14,7 @@ class image extends media{
 		else{$dummy=\cp::get_file_url('images/dummy.jpg');}
 		$size=isset($conf['input-size'])?$conf['input-size']:(isset($conf['size'])?$conf['size']:'full');
 		
-		wp_enqueue_script('cp_file_upload');
+		wp_enqueue_script('jquery.catpow.file_upload');
 		
 		if(empty($val)){$src=false;}
 		else{
