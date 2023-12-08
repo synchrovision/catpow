@@ -972,6 +972,9 @@ class CP{
 		$data_path=trim($data_path,'/');
 		if(substr_count($data_path,'/')<3){return null;}
 		if(substr_count($data_path,'/')===3){
+			if($use_alt=substr($data_path,-1)==='?'){
+				$data_path=substr($data_path,0,-1);
+			}
 			if(strpos($data_path,'->')!==false){
 				list($data_path,$relkey)=explode('->',$data_path);
 			}
@@ -992,8 +995,22 @@ class CP{
 				$path_data['meta_path'][0]['meta_name'],
 				$conf
 			);
+			if($use_alt){
+				if(empty($values) && isset($conf['alternative'])){
+					$values=$cache[$data_path.'?'][$tmp]=self::get_the_meta_value(sprintf(
+						'%s/%s/%s/%s?',
+						$path_data['data_type'],
+						$path_data['data_name'],
+						$path_data['data_id'],
+						$conf['alternative']
+					));
+				}
+				else{
+					$cache[$data_path.'?'][$tmp]=$values;
+				}
+			}
 			if(isset($relkey)){
-				return $cache[$data_path.'->'.$relkey][$tmp]=$class_name::get_rel_data_value($relkey,$values,$conf);
+				return $cache[$data_path.'->'.$relkey.($use_alt?'?':'')][$tmp]=$class_name::get_rel_data_value($relkey,$values,$conf);
 			}
 			return $values;
 		}
