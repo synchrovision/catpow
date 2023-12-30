@@ -391,7 +391,8 @@ class content extends \stdClass{
 			case 'url':return $this->url=get_theme_file_uri($this->path);
 			case 'file_path':return $this->file_path=\cp::create_content_file_path($this->path_data);
 			case 'data_path':return $this->data_path=\cp::create_data_path($this->path_data);
-			case 'real_data_path':return $this->data_real_path=\cp::create_data_path(\cp::realize_path_data($this->path_data));
+			case 'real_data_path':return $this->real_data_path=\cp::create_data_path($this->real_path_data);
+			case 'real_path_data':return $this->real_path_data=\cp::realize_path_data($this->path_data);
 			case 'conf_data_path':return $this->conf_data_path=\cp::create_conf_data_path($this->path_data);
 			case 'query':
 				$this->query=[\cp::get_data_type_name($this->data_type)=>$this->data_name];
