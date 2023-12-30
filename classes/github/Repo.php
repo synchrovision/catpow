@@ -2,7 +2,7 @@
 namespace Catpow\github;
 use Michelf\MarkdownExtra;
 
-class Repo{
+class Repo extends \stdClass{
 	protected $repo,$access_token;
 	public $plugin,$plugin_data;
 	const DEFAULT_REPO='synchrovision/catpow';
