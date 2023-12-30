@@ -239,6 +239,16 @@ class content extends \stdClass{
 		return $this->real_data_path;
 	}
 	
+	public function get_the_image_id(){
+		if(isset($this->conf['meta']['image'])){return $this->get_the_data('image?')[0];}
+		if($this->real_path_data['data_type']==='post' && post_type_supports($this->real_path_data['data_name'],'thumbnail')){
+			return get_post_thumbnail_id($this->loop_id);
+		}
+		return null;
+	}
+	public function get_the_image_url($size='full'){
+		return wp_get_attachment_image_url($this->get_the_image_id(),$size);
+	}
 	public function get_the_url(){
 		if(isset($this->path_data['meta_path'])){
 			$meta_class=\cp::get_class_name('meta',$this->conf['type']);
