@@ -453,7 +453,7 @@ class CP{
 				}
 			}
 		}
-		self::enqueue_script('ui/'.$name.'/input.js',$deps);
+		self::enqueue_script('ui/'.$name.'/input.js',$deps,0773);
 		self::set_script_translations('ui/'.$name.'/input.js');
 		if($f=self::get_file_path('ui/'.$name.'/inputInit.php')){include_once $f;}
 		$done[$name]=1;
@@ -462,7 +462,7 @@ class CP{
 	public static function use_ui_output($name){
 		static $done=[];
 		if(isset($done[$name])){return false;}
-		self::enqueue_style('ui/'.$name.'/output.css');
+		self::enqueue_style('ui/'.$name.'/output.css',null,0773);
 		$deps=['wp-element','catpow'];
 		if($f=self::get_file_path('ui/'.$name.'/deps.php')){
 			include $f;
@@ -496,7 +496,7 @@ class CP{
 				}
 			}
 		}
-		self::enqueue_script('ui/'.$name.'/output.js',$deps);
+		self::enqueue_script('ui/'.$name.'/output.js',$deps,0773);
 		self::set_script_translations('ui/'.$name.'/output.js');
 		if($f=self::get_file_path('ui/'.$name.'/outputInit.php')){include_once $f;}
 		$done[$name]=1;
@@ -540,8 +540,8 @@ class CP{
 			self::use_component($useComponent);
 			$deps[]='components/'.$useComponent.'/component.js';
 		}
-		self::enqueue_script('components/'.$name.'/component.js',$deps);
-		self::enqueue_style('components/'.$name.'/style.css');
+		self::enqueue_script('components/'.$name.'/component.js',$deps,0773);
+		self::enqueue_style('components/'.$name.'/style.css',null,0773);
 		self::set_script_translations('components/'.$name.'/component.js');
 		if($f=self::get_file_path('components/'.$name.'/init.php')){include $f;}
 		$done[$name]=1;
