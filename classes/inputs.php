@@ -5,7 +5,7 @@ namespace Catpow;
 * data_pathまたはinput_idを用いて
 * データを操作するメソッドを提供する
 */
-class inputs{
+class inputs extends \stdClass{
 	public $name,$data;
 	
 	public function __construct($name,$data){
