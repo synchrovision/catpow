@@ -29,7 +29,7 @@ class meta extends content{
 				if(isset($format)){$item=sprintf($format,$item);}
 				$items[]=$item;
 			}
-			echo implode((isset($items[0]) && $items[0][0]==='<')?'':'　',$items);
+			echo implode((isset($items[0][0]) && $items[0][0]==='<')?'':'　',$items);
 			unset($this->loop_id,$this->value);
 		}
 		return $this;
