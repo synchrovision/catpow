@@ -339,6 +339,7 @@ class CP{
 		 	if(in_array($path_data['data_type'],self::$data_types)){
 				$class_name=self::get_class_name('template_type',$path_data['tmp_name']);
 				if(class_exists($class_name) and $inc($f=[$class_name,$path_data],$d,$vars))return true;
+				if(empty($vars)){$vars=[];}
 				$vars['path_data']=$path_data;
 				$path_data['data_type']='config';
 				$path_data['data_name']='template';
