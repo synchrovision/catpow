@@ -1,8 +1,8 @@
 export * from './functions.jsx';
 
-export * from './Animation/index.js';
-export * from './Nav/index.js';
-export * from './SVG/index.js';
+export * from './Animation/index.jsx';
+export * from './Nav/index.jsx';
+export * from './SVG/index.jsx';
 
 export * from './Cloak.jsx';
 export * from './ElasticBox.jsx';
