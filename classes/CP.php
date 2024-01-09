@@ -799,6 +799,15 @@ class CP{
 			}
 		}
 	}
+	public static function loop_conf_data(){
+		foreach(self::$data_types as $data_type){
+			$conf_data_name=self::get_conf_data_name($data_type);
+			if(empty($GLOBALS[$conf_data_name])){continue;}
+			foreach($GLOBALS[$conf_data_name] as $data_name=>$conf_data){
+				yield "{$data_type}/{$data_name}"=>$conf_data; 
+			}
+		}
+	}
 	public static function fill_conf_data($data_type,$data_name,&$conf_data){
 		if($data_type==='cpdb'){return;}
 		if(!empty($conf_data['is_filled'])){return;}
