@@ -55,7 +55,7 @@ function cp_jsx_compile($jsx_files){
 function get_entry_files(){
 	$entry_files=[];
 	foreach(glob(WP_CONTENT_DIR.'/{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{js,blocks/*,ui/*,components/*,stores/*,*/*/*}/*/index{,.mjs}.jsx',GLOB_BRACE) as $entry_file){
-		if(strpos($entry_file,'/node_modules/')!==false){continue;}
+		if(strpos($entry_file,'/node_modules/')!==false || strpos($entry_file,'/modules/')!==false){continue;}
 		$entry_files[]=$entry_file;
 	}
 	return $entry_files;
