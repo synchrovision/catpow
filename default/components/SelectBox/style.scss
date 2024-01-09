@@ -1,9 +1,22 @@
 @import 'admin_style_config.scss';
 
 .SelectBox{
-	&,.wp-core-ui &{
-		@include bnd((ap:n,pd:0 .5em,mg:0 .5em));
-		@include bdr((s:s,w:1,c:t 50,r:5));
-		@include bg((i:n,c:b));
+	@include bnd((d:ib,p:r,mg:0 .5em));
+	@include bdr((r:.1em));
+	@include shd((bve:-1));
+	&::after{
+		content:'';
+		@include bnd((d:b,p:a,i:0,w:.5em,h:.3em,mg:a,mgr:.5em));
+		@include bg((c:t 1 .25));
+		clip-path: polygon(0% 0%,100% 0%,50% 100%);
+		@include usr((e:n));
+	}
+	&-select{
+		&,.wp-core-ui &{
+			@include bnd((ap:n,p:r,pd:0 .5em,pdr:1.5em,mg:0));
+			@include bdr((s:n));
+			@include bg((i:n,c:b));
+			
+		}
 	}
 }
