@@ -1012,7 +1012,7 @@ class CP{
 						$path_data['data_type'],
 						$path_data['data_name'],
 						$path_data['data_id'],
-						$conf['alternative']
+						is_array($conf['alternative'])?$conf['alternative'][0]:$conf['alternative']
 					));
 				}
 				else{
