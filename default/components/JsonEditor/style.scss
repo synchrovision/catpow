@@ -1,0 +1,64 @@
+@import 'admin_style_config.scss';
+
+.JsonEditor{
+	@include txt((p:16,f:t));
+	&-Editor{
+		@include bnd((pd:20));
+		&__body{
+			@include bnd((w:a 800,mg:a));
+			@include bg((c:b));
+			@include shd((b:4));
+			&-header{
+				@include bnd((pd:12));
+				@include flx((w:w,j:b,a:c));
+				@include bdr((p:b,s:s,w:1,c:t 1 .5));
+				&-title{
+					@include txt((p:16,f:h,w:b));
+				}
+				&-controls{
+					&-save{
+						@include bnd((pd:8 12));
+						@include bg((c:m));
+						@include txt((a:c,p:14,h:1em,f:t,c:i));
+						@include bdr((r:4));
+						&.is-active{
+							@include usr((c:p));
+							@include shd((b:1));
+						}
+						&:not(.is-active){
+							@include trn((gry:100%,o:.1));
+						}
+					}
+				}
+			}
+			&-contents{
+				@include bnd((pd:20));
+			}
+		}
+	}
+	&-Input{
+		&-ObjectInput{
+			&-Input{
+				@include flx((w:w));
+				&__label{
+					@include bnd((pd:8,f:0 0 120));
+				}
+				&__body{
+					@include bnd((pd:8,f:1 1 a));
+				}
+			}
+		}
+		&-Number{
+		}
+		&-Range{
+		}
+		&-SearchSelect{
+		}
+		&-Text{
+			&-input{
+			}
+		}
+		&-Textarea{
+		}
+	}
+}

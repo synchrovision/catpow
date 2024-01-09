@@ -1,0 +1,80 @@
+.JsonEditor {
+  font-size: 1rem;
+  font-family: var(--cp-fonts-t);
+}
+.JsonEditor-Editor {
+  padding: 1.25rem;
+}
+.JsonEditor-Editor__body {
+  max-width: 50rem;
+  width: auto;
+  margin: auto;
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  box-shadow: 0 4px 9px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+}
+.JsonEditor-Editor__body-header {
+  padding: 0.75rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  align-items: center;
+  border-bottom-style: solid;
+  border-bottom-width: 0.0625rem;
+  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.5);
+}
+.JsonEditor-Editor__body-header-title {
+  font-size: 1rem;
+  font-family: var(--cp-fonts-h);
+  font-weight: 700;
+}
+.JsonEditor-Editor__body-header-controls-save {
+  padding: 0.5rem 0.75rem;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1em;
+  font-family: var(--cp-fonts-t);
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+  border-radius: 0.25rem;
+}
+.JsonEditor-Editor__body-header-controls-save.is-active {
+  cursor: pointer;
+  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+}
+.JsonEditor-Editor__body-header-controls-save:not(.is-active) {
+  opacity: 0.1;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+.JsonEditor-Editor__body-contents {
+  padding: 1.25rem;
+}
+.JsonEditor-Input-ObjectInput-Input {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.JsonEditor-Input-ObjectInput-Input__label {
+  padding: 0.5rem;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 7.5rem;
+}
+.JsonEditor-Input-ObjectInput-Input__body {
+  padding: 0.5rem;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+}
+/*# sourceMappingURL=./style.css.map */

@@ -206,6 +206,7 @@ Catpow.util={
 	},
 	/*datetime*/
 	getDateValue:function(dateObj){
+		if(typeof dateObj === 'string'){dateObj=Catpow.getDateTimeObject(dateObj);}
 		return dateObj.getFullYear()+'-'+ (dateObj.getMonth()+1)+'-'+ dateObj.getDate();
 	},
 	getDateObject:function(dateValue,defaultValue){
@@ -214,6 +215,7 @@ Catpow.util={
 		return Catpow.util.getRelativeDateTimeObject(dateValue,defaultValue);
 	},
 	getDateTimeValue:function(dateTimeObj){
+		if(typeof dateTimeObj === 'string'){dateTimeObj=Catpow.getDateTimeObject(dateTimeObj);}
 		return (
 			dateTimeObj.getFullYear()+'-'+ 
 			(dateTimeObj.getMonth()+1)+'-'+
@@ -224,8 +226,11 @@ Catpow.util={
 		);
 	},
 	getDateTimeObject:function(dateTimeValue,defaultValue){
-		var dt=dateTimeValue.match(/^(\d+)\-(\d+)\-(\d+) (\d+):(\d+):(\d+)$/);
-		if(dt){return new Date(dt[1],dt[2]-1,dt[3],dt[4],dt[5],dt[6]);}
+		var dt=dateTimeValue.match(/^(\d+)[\-\/年](\d+)[\-\/月](\d+)日?([ T](\d+):(\d+):(\d+))?$/);
+		if(dt){
+			if(dt[4]){return new Date(dt[1],dt[2]-1,dt[3],dt[5],dt[6],dt[7]);}
+			return new Date(dt[1],dt[2]-1,dt[3]);
+		}
 		return Catpow.util.getRelativeDateTimeObject(dateTimeValue,defaultValue);
 	},
 	getRelativeDateTimeObject:function(dateTimeValue,defaultValue){
