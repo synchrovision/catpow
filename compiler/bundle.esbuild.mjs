@@ -16,7 +16,7 @@ let pathResolver={
 			}
 			return {path:result.path};
 		});
-		build.onResolve({filter: /^\w/},async(args)=>{
+		build.onResolve({filter: /^@?\w/},async(args)=>{
 			const result=await build.resolve('./'+args.path,{
 				kind:'import-statement',
 				resolveDir:'./node_modules',
