@@ -1,0 +1,50 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-popup{
+	@include bnd((p:f,i:0,z:10000));
+	>.bg{
+		@include bnd((d:b,p:a,i:0));
+		@include bg((c:black));
+		@include trn((o:.3));
+	}
+	>.body{
+		@include bnd((d:b,p:a,i:0,mg:a,w:300 fit 90vw,h:fit,bs:b,z:1));
+		@include bdr((r:20));
+		@include bg((c:b));
+		@include shd((b:5));
+		@include trn((t:.5s,o:1,s:1));
+		>.close{
+			@include bnd((d:b,p:a,t:-10,r:-10,w:30,h:30));
+			@include bdr((r:50%));
+			@include bg((c:t));
+			@include shd((b:2));
+			&::before,&::after{
+				content:'';
+				@include bnd((d:b,p:a,i:0,w:20,h:2,mg:a));
+				@include bg((c:i));
+			}
+			&::before{
+				@include trn((r:45deg));
+			}
+			&::after{
+				@include trn((r:-45deg));
+			}
+		}
+		>.contents{
+			@include bnd((h:50 a 80vh,oy:a));
+			@include bdr((r:20));
+		}
+	}
+	&.is-hidden{
+		@include bnd((d:n));
+	}
+	&:not(.is-open){
+		@include usr((e:n));
+		>.bg{
+			@include trn((o:0));
+		}
+		>.body{
+			@include trn((o:0,s:1.1));
+		}
+	}
+}

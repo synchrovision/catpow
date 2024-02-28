@@ -1,0 +1,25 @@
+(cb=>document.readyState!=='loading'?cb():document.addEventListener('DOMContentLoaded',cb))(()=>{
+	document.querySelectorAll('.wp-block-catpow-popup').forEach(function(block){
+		document.querySelectorAll('a[href="#'+block.id+'"]').forEach((el)=>{
+			el.addEventListener('click',(e)=>{
+				e.preventDefault();
+				block.classList.remove('is-hidden');
+				window.requestAnimationFrame(()=>{
+					block.classList.add('is-open');
+					block.classList.remove('is-close');
+				});
+			});
+		});
+		block.addEventListener('transitionend',()=>{
+			if(block.classList.contains('is-close')){
+				block.classList.add('is-hidden');
+			}
+		});
+		block.querySelectorAll(':scope>.bg, :scope>.body>.close').forEach(function(el){
+			el.addEventListener('click',function(){
+				block.classList.add('is-close');
+				block.classList.remove('is-open');
+			});
+		});
+	});
+});
