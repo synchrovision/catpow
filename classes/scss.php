@@ -53,6 +53,9 @@ class scss{
 			error_log(var_export($args,1));
 			return false;
 		});
+		$scssc->registerFunction('get_real_type',function($args){
+			return [TYPE::T_KEYWORD,$args[0][0]];
+		});
 		$scssc->registerFunction('embed_svg',function($args)use($scssc){
 			if($f=CP::get_file_path($args[0][2][0])){
 				return sprintf('data:image/svg+xml;base64,%s',base64_encode(file_get_contents($f)));
