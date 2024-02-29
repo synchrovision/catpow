@@ -21,7 +21,7 @@ wp.blocks.registerBlockType('catpow/popup',{
 		return (
 			<>
 				<div className={"collapsible_content "+(open?'open':'close')}>
-					<div className="label" onClick={()=>setOpen(!open)}>🐾 Popup</div>
+					<div className="label" onClick={()=>setOpen(!open)}>🐾 Popup #{attributes.anchor}</div>
 					<div className="wp-block-catpow-popup is-open">
 						<div className="body">
 							<div className="contents">
