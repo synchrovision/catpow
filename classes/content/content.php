@@ -9,7 +9,7 @@ namespace Catpow\content;
 * path_dataを保持することを保証しなくてはならない
 * 
 */
-class content{
+class content extends \stdClass{
 	public $parent,$inherit,$childrens;
 	protected $value;
 	
