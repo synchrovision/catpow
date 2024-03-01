@@ -101,7 +101,7 @@
                 { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" }
               ],
               banners: [
-                "size",
+                "itemSize",
                 { name: "title", label: "\u30BF\u30A4\u30C8\u30EB", values: "hasTitle" },
                 { name: "text", label: "\u30C6\u30AD\u30B9\u30C8", values: "hasText" },
                 { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" }

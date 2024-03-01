@@ -100,7 +100,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 							{name:'link',label:'リンク',values:'hasLink'}
 						],
 						banners:[
-							'size',
+							'itemSize',
 							{name:'title',label:'タイトル',values:'hasTitle'},
 							{name:'text',label:'テキスト',values:'hasText'},
 							{name:'link',label:'リンク',values:'hasLink'}
