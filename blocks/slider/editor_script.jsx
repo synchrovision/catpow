@@ -72,7 +72,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 			const selectiveClasses=[
 				{
 					name:'type',
-					label:'タイプ',values:['visual','story','articles','index'],
+					label:'タイプ',values:['visual','story','articles','banners','index'],
 					filter:'type',
 					type:'gridbuttons',
 					sub:{
@@ -82,10 +82,11 @@ wp.blocks.registerBlockType('catpow/slider',{
 								{name:'text',label:'テキスト',values:'hasText'},
 							]},
 							'textColor',
-							{name:'slide',label:'スライド画像',values:'hasSlide'},
-							{name:'image',label:'イメージ画像',values:'hasImage',sub:[
-								{name:'thumbnail',label:'サムネール',values:'hasThumbnail'}
-							]},
+							{name:'image',type:'buttons',label:'画像',values:{hasImage:'イメージ画像',hasSlide:'スライド画像'},sub:{
+								hasImage:[
+									{name:'thumbnail',label:'サムネール',values:'hasThumbnail'}
+								]
+							}},
 							'backgroundImage',
 							{name:'link',label:'リンク',values:'hasLink'}
 						],
@@ -96,6 +97,12 @@ wp.blocks.registerBlockType('catpow/slider',{
 								{name:'thumbnail',label:'サムネール',values:'hasThumbnail'}
 							]},
 							'backgroundImage',
+							{name:'link',label:'リンク',values:'hasLink'}
+						],
+						banners:[
+							'itemSize',
+							{name:'title',label:'タイトル',values:'hasTitle'},
+							{name:'text',label:'テキスト',values:'hasText'},
 							{name:'link',label:'リンク',values:'hasLink'}
 						],
 						articles:[
@@ -112,6 +119,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 					},
 					bind:{
 						story:['hasTitle','hasText'],
+						banners:['hasSlide'],
 						index:['hasTitle','hasText']
 					},
 					item:{

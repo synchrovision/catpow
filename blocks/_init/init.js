@@ -2702,6 +2702,7 @@
           ] },
           width: { name: "width", type: "buttons", label: __2("\u5E45", "catpow"), values: { fullWidth: "\u30D5\u30EB", wideWidth: "\u30EF\u30A4\u30C9", regularWidth: "\u30EC\u30AE\u30E5\u30E9\u30FC", narrowWidth: "\u30CA\u30ED\u30FC" } },
           size: { name: "size", type: "buttons", label: __2("\u30B5\u30A4\u30BA", "catpow"), values: { large: "\u5927", medium: "\u4E2D", small: "\u5C0F" } },
+          itemSize: { name: "itemSize", label: __2("\u30B5\u30A4\u30BA", "catpow"), vars: "vars", key: "--cp-item-size", input: "range", min: 100, max: 1200, step: 10 },
           textColor: { name: "textColor", type: "buttons", label: __2("\u6587\u5B57\u8272", "catpow"), values: { revertTextColor: "\u901A\u5E38", invertTextColor: "\u53CD\u8EE2" } }
         };
         if (preset.hasOwnProperty(prm)) {

@@ -1,0 +1,14 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"textdomain": "catpow",
+	"name":"catpow/popup",
+	"title": "🐾 Popup",
+	"description": "アンカーリンクで開くポップアップ",
+	"icon": "admin-comments",
+	"category": "catpow",
+	"supports": {
+		"anchor": true,
+		"className": false,
+		"color": false
+	}
+}

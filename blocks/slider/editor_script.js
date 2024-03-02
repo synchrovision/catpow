@@ -73,7 +73,7 @@
           {
             name: "type",
             label: "\u30BF\u30A4\u30D7",
-            values: ["visual", "story", "articles", "index"],
+            values: ["visual", "story", "articles", "banners", "index"],
             filter: "type",
             type: "gridbuttons",
             sub: {
@@ -83,10 +83,11 @@
                   { name: "text", label: "\u30C6\u30AD\u30B9\u30C8", values: "hasText" }
                 ] },
                 "textColor",
-                { name: "slide", label: "\u30B9\u30E9\u30A4\u30C9\u753B\u50CF", values: "hasSlide" },
-                { name: "image", label: "\u30A4\u30E1\u30FC\u30B8\u753B\u50CF", values: "hasImage", sub: [
-                  { name: "thumbnail", label: "\u30B5\u30E0\u30CD\u30FC\u30EB", values: "hasThumbnail" }
-                ] },
+                { name: "image", type: "buttons", label: "\u753B\u50CF", values: { hasImage: "\u30A4\u30E1\u30FC\u30B8\u753B\u50CF", hasSlide: "\u30B9\u30E9\u30A4\u30C9\u753B\u50CF" }, sub: {
+                  hasImage: [
+                    { name: "thumbnail", label: "\u30B5\u30E0\u30CD\u30FC\u30EB", values: "hasThumbnail" }
+                  ]
+                } },
                 "backgroundImage",
                 { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" }
               ],
@@ -97,6 +98,12 @@
                   { name: "thumbnail", label: "\u30B5\u30E0\u30CD\u30FC\u30EB", values: "hasThumbnail" }
                 ] },
                 "backgroundImage",
+                { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" }
+              ],
+              banners: [
+                "itemSize",
+                { name: "title", label: "\u30BF\u30A4\u30C8\u30EB", values: "hasTitle" },
+                { name: "text", label: "\u30C6\u30AD\u30B9\u30C8", values: "hasText" },
                 { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" }
               ],
               articles: [
@@ -113,6 +120,7 @@
             },
             bind: {
               story: ["hasTitle", "hasText"],
+              banners: ["hasSlide"],
               index: ["hasTitle", "hasText"]
             },
             item: {
