@@ -6,13 +6,15 @@ wp.blocks.registerBlockType('catpow/popup',{
 	icon:'admin-comments',
 	category:'catpow',
 	edit({attributes,className,setAttributes}){
+		const {anchor,vars}=attributes;
 		const {useState,useMemo}=wp.element;
 		const {InnerBlocks,InspectorControls}=wp.blockEditor;
 		const [open,setOpen]=useState(false);
 		
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
-				{input:'text',name:'anchor',label:'アンカー名',key:'anchor'}
+				{input:'text',name:'anchor',label:'アンカー名',key:'anchor'},
+				{name:'size',label:__('サイズ','catpow'),vars:'vars',key:'--cp-popup-size',input:'range',min:300,max:1200,step:10}
 			];
 			wp.hooks.applyFilters('catpow.blocks.popup.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -22,7 +24,7 @@ wp.blocks.registerBlockType('catpow/popup',{
 			<>
 				<div className={"collapsible_content "+(open?'open':'close')}>
 					<div className="label" onClick={()=>setOpen(!open)}>🐾 Popup #{attributes.anchor}</div>
-					<div className="wp-block-catpow-popup is-open">
+					<div className="wp-block-catpow-popup is-open" style={vars}>
 						<div className="body">
 							<div className="contents">
 								<InnerBlocks/>
@@ -47,10 +49,10 @@ wp.blocks.registerBlockType('catpow/popup',{
 
 
 	save({attributes,className,setAttributes}){
-		const {anchor}=attributes;
+		const {anchor,vars}=attributes;
 		const {InnerBlocks}=wp.blockEditor;
 		return (
-			<div id={anchor} className={attributes.classes}>
+			<div id={anchor} className={attributes.classes} style={vars}>
 				<div className="body">
 					<div className="contents">
 						<InnerBlocks.Content/>

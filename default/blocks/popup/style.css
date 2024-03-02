@@ -1,4 +1,6 @@
 .wp-block-catpow-popup {
+  --popup-size:calc(var(--cp-popup-size,300) * 0.0625rem);
+  display: block;
   position: fixed;
   top: 0rem;
   right: 0rem;
@@ -16,6 +18,8 @@
   left: 0rem;
   inset: 0rem;
   background-color: black;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
   opacity: 0.3;
 }
 .wp-block-catpow-popup > .body {
@@ -27,13 +31,11 @@
   left: 0rem;
   inset: 0rem;
   margin: auto;
-  min-width: 18.75rem;
-  max-width: 90vw;
-  width: fit-content;
+  max-width: 95%;
+  width: var(--popup-size);
   height: fit-content;
   box-sizing: border-box;
   z-index: 1;
-  border-radius: 1.25rem;
   background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
   box-shadow: 0 5px 11px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
   -webkit-transition: 0.5s;
@@ -80,7 +82,6 @@
   max-height: 80vh;
   height: auto;
   overflow-y: auto;
-  border-radius: 1.25rem;
 }
 .wp-block-catpow-popup.is-hidden {
   display: none;
