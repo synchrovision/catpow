@@ -532,11 +532,11 @@
   left: 0rem;
   top: 0rem;
   margin: 0rem;
-  padding: 0.75rem;
+  padding: 0.25rem;
   box-sizing: border-box;
   -webkit-transition: 0.5s;
   transition: 0.5s;
-  opacity: calc(2 - abs(var(--item-p)));
+  opacity: calc(10 - abs(var(--item-p)));
   transform: -webkit- translateX(calc(var(--item-p) * 100%));
   transform: translateX(calc(var(--item-p) * 100%));
 }

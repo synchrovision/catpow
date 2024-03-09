@@ -1,14 +1,30 @@
 /* global Catpow console Proxy WeakMap */
 Catpow.schema=(schema,rootSchema)=>{
 	if(undefined===rootSchema){rootSchema=schema;}
+	
 	return new Proxy((value,params={})=>Catpow.schema.test(value,params.schema!=null?params.schema:schema,rootSchema),{
 		get:(target,prop)=>{
 			switch(prop){
+				case 'schema':{return schema;}
+				case 'rootSchema':{return rootSchema;}
 				case 'getSubSchema':{
 					return (path)=>Catpow.schema(
-						Catpow.schema.getSubSchem(path,schema,rootSchema),
+						Catpow.schema.getSubSchema(path,schema,rootSchema),
 						rootSchema
 					);
+				}
+				case 'editData':{
+					return (data,params)=>Catpow.schema.dataEditor(data,rootSchema,params)
+				}
+				case 'find':{
+					return (target,proactive=true)=>{
+						return Catpow.schema.find(
+							(typeof target === 'string')?((schema)=>{
+								if(schema[target]!=null){return schema[target];}
+							}):target,
+							schema,rootSchema,{proactive}
+						);
+					}
 				}
 			}
 		}
@@ -29,6 +45,11 @@ Catpow.schema.minMaxKeys={
 	minLength:false,maxLength:true,
 	minItems:false,maxItems:true,
 	minContains:false,maxContains:true,
+}
+Catpow.schema.conditionalSchemaKeys={
+	allOf:true,anyOf:true,oneOf:true,
+	if:false,then:false,else:false,
+	dependentSchemas:true,
 }
 Catpow.schema.getMatchedSchemas=(value,schemas,rootSchema,params)=>{
 	return schemas.filter((schema)=>Catpow.schema.test(value,schema,rootSchema,params));
@@ -106,7 +127,10 @@ Catpow.schema.test=(value,schema,rootSchema,params={})=>{
 			if(schema.properties!=null){
 				if(Object.keys(schema.properties).some((key)=>{
 					if(value[key]==null){return false;}
-					return !Catpow.schema.test(value[key],schema.properties[key],rootSchema,{...params,refStack:null});
+					return !Catpow.schema.test(
+						value[key],schema.properties[key],rootSchema,
+						Object.assign({},params,{refStack:null})
+					);
 				})){return false;}
 			}
 			break;
@@ -212,11 +236,22 @@ Catpow.schema.find=(callback,schema,rootSchema,params={})=>{
 		}
 	}
 	if(params.proactive){
+		if(schema.anyOf!=null){
+			for(let i in schema.anyOf){
+				const result=Catpow.schema.find(callback,schema.anyOf[i],rootSchema,params);
+				if(result!=null){return result;}
+			}
+		}
 		if(schema.oneOf!=null){
 			for(let i in schema.oneOf){
 				const result=Catpow.schema.find(callback,schema.oneOf[i],rootSchema,params);
 				if(result!=null){return result;}
 			}
+		}
+		for(let key in ['if','then','else']){
+			if(schema[key]==null){break;}
+			const result=Catpow.schema.find(callback,schema[key],rootSchema,params);
+			if(result!=null){return result;}
 		}
 		const {dependentSchemas}=Catpow.schema.extractDependencies(schema);
 		if(dependentSchemas){
@@ -235,7 +270,7 @@ Catpow.schema.find=(callback,schema,rootSchema,params={})=>{
 }
 Catpow.schema.getPrimaryPropertyName=(schema,rootSchema)=>{
 	if(Catpow.schema.getType(schema,rootSchema)!=='object'){return null;}
-	const mergedSchema=Catpow.schema.mergeSchema(schema,rootSchema);
+	const mergedSchema=Catpow.schema.getMergedSchema(schema,rootSchema);
 	if(mergedSchema.properties['@type']!=null){return '@type';}
 	return Object.keys(mergedSchema.properties).find((key)=>mergedSchema.properties[key].enum!=null);
 }
@@ -247,6 +282,30 @@ Catpow.schema.reservedKeys={
 	"items":1,"prefixItems":1,"minItems":1,"maxItems":1,"contains":1,"minContains":1,"maxContains":1,
 	"properties":1,"required":1,"dependencies":1,"dependentSchemas":1,"dependentRequired":1,
 };
+Catpow.schema.getResolvedSchema=(schema,rootSchema)=>{
+	if(rootSchema==null){rootSchema=schema;}
+	const cache=Catpow.schema.getResolvedSchema.cache;
+	if(cache.has(schema)){return cache.get(schema);}
+	let resolvedSchema;
+	if(schema.hasOwnProperty('$ref')){
+		resolvedSchema=Object.assign({},
+			Catpow.schema.getResolvedSchema(
+				Catpow.schema.getSubSchema(schema.$ref,schema,rootSchema),
+				rootSchema
+			),
+			schema
+		);
+	}
+	else{
+		resolvedSchema=Object.assign({},schema);
+	}
+	if(resolvedSchema.type==null){
+		resolvedSchema.type=Catpow.schema.getType(resolvedSchema,rootSchema);
+	}
+	cache.set(schema,resolvedSchema);
+	return resolvedSchema;
+}
+Catpow.schema.getResolvedSchema.cache=new WeakMap();
 Catpow.schema.getMergedSchema=(schema,rootSchema)=>{
 	if(rootSchema==null){rootSchema=schema;}
 	const cache=Catpow.schema.getMergedSchema.cache;
@@ -259,7 +318,7 @@ Catpow.schema.getMergedSchema=(schema,rootSchema)=>{
 	return mergedSchema;
 }
 Catpow.schema.getMergedSchema.cache=new WeakMap();
-Catpow.schema.getMergedSchemaForValue=(value,schema,rootSchema,params)=>{
+Catpow.schema.getMergedSchemaForValue=(value,schema,rootSchema)=>{
 	if(rootSchema==null){rootSchema=schema;}
 	const mergedSchema={}
 	Catpow.schema.find((schema)=>{
@@ -270,13 +329,11 @@ Catpow.schema.getMergedSchemaForValue=(value,schema,rootSchema,params)=>{
 Catpow.schema.mergeSchema=(targetSchema,schema,rootSchema,params={})=>{
 	const {extend=false,value=null}=params;
 	const forValue=params.hasOwnProperty('value');
-	if(!forValue){console.trace()}
 	for(let key in schema){
 		if(Catpow.schema.reservedKeys[key] && targetSchema[key]==null){
 			targetSchema[key]=schema[key];
 		}
 	}
-	if(schema==null){console.trace();}
 	//scalar
 	if(schema.const!=null){
 		if(extend){
@@ -421,4 +478,223 @@ Catpow.schema.mergeSchema=(targetSchema,schema,rootSchema,params={})=>{
 		}
 		Catpow.schema.mergeSchema(targetSchema,mergedConditionalSchema,rootSchema,params);
 	}
+}
+Catpow.schema.dataEditor=(data,rootSchema,params)=>{
+	const {onChange,onError}=params;
+	//schemaDataは同URIのschemaにそれぞれの祖先の条件スキーマを保持し
+	//agentは各スキーマのステータスを祖先のagentとその情報から取得する
+	//キープロパティ更新時に直接的にステータスが変更されるスキーマ
+	
+	const resolveSchema=(uri,schema,param)=>{
+		const resolvedSchema=Catpow.schema.getResolvedSchema(schema,rootSchema);
+		Object.assign(resolvedSchema,param);
+		const {parent}=param;
+		for(let conditionalSchemaKey in Catpow.schema.conditionalSchemaKeys){
+			if(resolvedSchema[conditionalSchemaKey]==null){continue;}
+			if(Catpow.schema.conditionalSchemaKeys[conditionalSchemaKey]){
+				for(let key in resolvedSchema[conditionalSchemaKey]){
+					resolvedSchema[conditionalSchemaKey][key]=resolveSchema(uri,resolvedSchema[conditionalSchemaKey][key],{parent,isConditional:true});
+				}
+			}
+			else{
+				resolvedSchema[conditionalSchemaKey]=resolveSchema(uri,resolvedSchema[conditionalSchemaKey],{parent,isConditional:true});
+			}
+		}
+		if(resolvedSchema.dependencies!=null){
+			for(let propertyName in resolvedSchema.dependencies){
+				if(Array.isArray(resolvedSchema.dependencies[propertyName])){continue;}
+				resolvedSchema.dependencies[propertyName]=resolveSchema(uri,resolvedSchema.dependencies[propertyName],{parent,isConditional:true});
+			}
+		}
+		if(resolvedSchema.dependentSchemas!=null){
+			for(let propertyName in resolvedSchema.dependentSchemas){
+				resolvedSchema.dependentSchemas[propertyName]=resolveSchema(uri,resolvedSchema.dependentSchemas[propertyName],{parent,isConditional:true});
+			}
+		}
+		
+		if(resolvedSchema.properties!=null){
+			for(let key in resolvedSchema.properties){
+				resolvedSchema.properties[key]=resolveSchema(uri+'/'+key,resolvedSchema.properties[key],{parent:resolvedSchema});
+			}
+		}
+		if(resolvedSchema.prefixItems!=null){
+			for(let index in resolvedSchema.prefixItems){
+				resolvedSchema.prefixItems[index]=resolveSchema(uri+'/'+index,resolvedSchema.prefixItems[index],{parent:resolvedSchema});
+			}
+		}
+		if(resolvedSchema.items!=null){
+			resolvedSchema.items=resolveSchema(uri+'/$',resolvedSchema.items,{parent:resolvedSchema});
+		}
+	};
+	
+	const resolvedSchema=resolveSchema('#',rootSchema,null);
+	const updateHandles=new WeakMap();
+	const getTypeOfValue=(value)=>{
+		if(value == null){return 'null';}
+		if(Array.isArray(value)){return 'array';}
+		return typeof value;
+	}
+	const getPossibleTypes=(schemas)=>{
+		const flags={};
+		schemas.forEach((schema)=>flags[schema.type]=true);
+		return flags;
+	}
+	const getKeyPropertyName=(schemas)=>{
+		return Object.keys(schemas[0].properties).find((key)=>schemas.every((schema)=>schema.properties[key]!=null));
+	}
+	const walkAncestorSchema=(agent,schema,cb)=>{
+		if(cb(agent,schema)===false){return false;}
+		if(agent.parent && schema.parent){
+			return walkAncestorSchema(agent.parent,schema.parent);
+		}
+		return true;
+	}
+	const getSchemaData=(uri,schemas)=>{
+		
+		const updateHandlesList=[];
+		
+		schemas.slice().forEach((schemaCond)=>{
+			const {schema}=schemaCond;
+			const test=(value,schema)=>Catpow.schema.test(value,schema,rootSchema);
+			if(schema.if!=null){
+				//ifは入力制限を取り除いた形でキープロパティとして追加される
+				schemas.push({
+					
+				});
+				updateHandlesList.push((agent)=>{
+					const isValid=test(agent.getValue(),schema.if);
+					if(schema.then!=null){agent.setSchemaStatus(schema.then,isValid?3:0);}
+					if(schema.else!=null){agent.setSchemaStatus(schema.else,isValid?0:3);}
+				});
+			}
+			if(schema.allOf!=null){
+				
+			}
+			if(schema.anyOf!=null){
+			}
+			if(schema.oneOf!=null){
+				const keyPropertyName=getKeyPropertyName(schema.oneOf);
+				updateHandlesList.push((agent)=>{
+					const keyValue=agent.getValue()[keyPropertyName];
+					schema.oneOf.forEach((schema)=>{
+						agent.setSchemaStatus(schema,test(keyValue,schema.properties[keyPropertyName])?3:0);
+					});
+				});
+			}
+			const {dependentRequired,dependentSchemas}=Catpow.schema.extractDependencies(schema);
+			if(dependentSchemas!=null){
+				updateHandlesList.push((agent)=>{
+					const value=agent.getValue();
+					for(let name in schema.dependentSchemas){
+						agent.setSchemaStatus(schema.dependentSchemas[name],(value[name]!=null)?3:0);
+					}
+				});
+			}
+			if(dependentRequired!=null){
+				updateHandlesList.push((agent)=>{
+					const value=agent.getValue();
+					for(let name in dependentRequired){
+						agent.setSchemaStatus(schema.dependentSchemas[name],(value[name]!=null)?3:0);
+					}
+				});
+			}
+		});
+		const schemaData=createSchemaData(schemas);
+		updateHandles.set(schemaData,(agent)=>{
+			updateHandlesList.forEach((cb)=>cb(agent));
+		});
+		
+		schemas.forEach((schema)=>{
+			if(schema.properties!=null){
+				for(let key in schema.properties){
+
+				}
+			}
+			if(schema.prefixItems!=null){
+				for(let index in schema.prefixItems){
+					
+				}
+			}
+			if(schema.items!=null){
+				schemaData.items=schema.items
+			}
+		});
+	};
+	const createSchemaData=(schemas)=>{
+		const possibleTypes=getPossibleTypes(schemas);
+		const getSchemaStatusCurry=(agent)=>{
+			return (schema)=>{
+				if(agent.schemaStatus==null || !agent.schemaStatus.has(schema)){return null;}
+				return agent.schemaStatus.get(schema);
+			}
+		}
+		const setSchemaStatusCurry=(agent)=>{
+			return (schema,status)=>{
+				if(agent.schemaStatus==null){agent.schemaStatus=new WeakMap();}
+				agent.schemaStatus.set(schema,status);
+			}
+		}
+		const getSchemasCurry=(agent)=>{
+			return (status)=>{
+				return schemas.filter((schema)=>{
+					walkAncestorSchema(agent,schema,(agent,schema)=>{
+						return !schema.isConditional || (agent.getSchemaStatus(schema) & status) != 0;
+					});
+				});
+			}
+		};
+		const getValueCurry=(agent)=>{
+			return ()=>agent.ref[agent.key];
+		};
+		const setValueCurry=(agent)=>{
+			return (value)=>{
+				const valueType=getTypeOfValue(value);
+				if(possibleTypes[valueType]==null){return false;}
+				agent.ref[agent.key]=value;
+				if(agent.onChange!=null){agent.onChange(value);}
+				if(onChange!=null){onChange(agent,value);}
+				if(valueType==='object'){
+					
+				}
+				if(valueType==='array'){
+					
+				}
+				updateHandles.get(agent.schemaData)(agent);
+			}
+		};
+		const doValidateCurry=(agent)=>{
+			return ()=>{
+				const value=agent.getValue();
+				const invalidSchema=agent.getSchemas(1).find((schema)=>{
+					return !Catpow.schema.test(value,schema,rootSchema);
+				});
+				if(invalidSchema){
+					if(agent.onError!=null){agent.onError(invalidSchema);}
+					if(onError!=null){onError(agent,invalidSchema);}
+					agent.isValid=false;
+				}
+				else{
+					agent.isValid=true;
+				}
+			}
+		};
+		return {getSchemasCurry,getSchemaStatusCurry,setSchemaStatusCurry,getValueCurry,setValueCurry,doValidateCurry};
+	}
+	const createAgent=(schemaData,ref,key,parent)=>{
+		const agent={schemaData,ref,key,parent};
+		agent.getSchemaStatus=schemaData.getSchemaStatusCurry(agent);
+		agent.setSchemaStatus=schemaData.setSchemaStatusCurry(agent);
+		agent.getSchemas=schemaData.getSchemasCurry(agent);
+		agent.getValue=schemaData.getValueCurry(agent);
+		agent.setValue=schemaData.setValueCurry(agent);
+		agent.doValidate=schemaData.doValidateCurry(agent);
+		agent.onChange=null;
+		agent.onError=null;
+		
+		return agent;
+	}
+
+	const schemaData=getSchemaData([resolvedSchema]);
+	
+	return createAgent(schemaData,{data},'data',null);
 }

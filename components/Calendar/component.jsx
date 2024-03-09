@@ -93,6 +93,10 @@
 		}
 		return weeks;
 	},[state.year,state.month]);
+		if(onChange){
+			let val;
+			if(type === 'string'){
+				for(let key in values){
 	useEffect(()=>{
 		dispatch({
 			type:'goto',
