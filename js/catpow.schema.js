@@ -481,7 +481,6 @@ Catpow.schema.mergeSchema=(targetSchema,schema,rootSchema,params={})=>{
 }
 Catpow.schema.dataEditor=(data,rootSchema,params)=>{
 	const {onChange,onError}=params;
-	//schemaDataは同URIのschemaにそれぞれの祖先の条件スキーマを保持し
 	//agentは各スキーマのステータスを祖先のagentとその情報から取得する
 	//キープロパティ更新時に直接的にステータスが変更されるスキーマ
 	
@@ -622,75 +621,135 @@ Catpow.schema.dataEditor=(data,rootSchema,params)=>{
 	};
 	const createSchemaData=(schemas)=>{
 		const possibleTypes=getPossibleTypes(schemas);
-		const getSchemaStatusCurry=(agent)=>{
-			return (schema)=>{
-				if(agent.schemaStatus==null || !agent.schemaStatus.has(schema)){return null;}
-				return agent.schemaStatus.get(schema);
-			}
-		}
-		const setSchemaStatusCurry=(agent)=>{
-			return (schema,status)=>{
-				if(agent.schemaStatus==null){agent.schemaStatus=new WeakMap();}
-				agent.schemaStatus.set(schema,status);
-			}
-		}
-		const getSchemasCurry=(agent)=>{
-			return (status)=>{
-				return schemas.filter((schema)=>{
-					walkAncestorSchema(agent,schema,(agent,schema)=>{
-						return !schema.isConditional || (agent.getSchemaStatus(schema) & status) != 0;
+		const curries={
+			getSchemaStatus:(agent)=>{
+				return (schema)=>{
+					if(agent.schemaStatus==null || !agent.schemaStatus.has(schema)){return 1;}
+					return agent.schemaStatus.get(schema);
+				}
+			},
+			setSchemaStatus:(agent)=>{
+				return (schema,status)=>{
+					if(agent.schemaStatus==null){agent.schemaStatus=new WeakMap();}
+					agent.schemaStatus.set(schema,status);
+				}
+			},
+			getSchemas:(agent)=>{
+				return (status)=>{
+					return schemas.filter((schema)=>{
+						walkAncestorSchema(agent,schema,(agent,schema)=>{
+							return !schema.isConditional || (agent.getSchemaStatus(schema) & status) != 0;
+						});
 					});
-				});
+				}
+			},
+			getValue:(agent)=>{
+				return ()=>agent.ref[agent.key];
+			},
+			setValue:(agent)=>{
+				return (value)=>{
+					const valueType=getTypeOfValue(value);
+					if(possibleTypes[valueType]==null){return false;}
+					agent.ref[agent.key]=value;
+					if(agent.onChange!=null){agent.onChange(value);}
+					if(onChange!=null){onChange(agent,value);}
+					if(valueType==='object'){
+						
+					}
+					if(valueType==='array'){
+						
+					}
+					updateHandles.get(agent.schemaData)(agent);
+				}
+			},
+			deleteValue:(agent)=>{
+				return ()=>{
+					delete agent.ref[agent.key];
+					if(agent.onChange!=null){agent.onChange(null);}
+					if(onChange!=null){onChange(agent,null);}
+					updateHandles.get(agent.schemaData)(agent);
+				}
+			},
+			update:(agent)=>{
+				return ()=>{
+					const value=agent.ref[agent.key];
+				}
+			},
+			doValidate:(agent)=>{
+				return ()=>{
+					const value=agent.getValue();
+					const invalidSchema=agent.getSchemas(1).find((schema)=>{
+						return !Catpow.schema.test(value,schema,rootSchema);
+					});
+					if(invalidSchema){
+						if(agent.onError!=null){agent.onError(invalidSchema);}
+						if(onError!=null){onError(agent,invalidSchema);}
+						agent.isValid=false;
+					}
+					else{
+						agent.isValid=true;
+					}
+				}
+			},
+			getProperties=(agent)=>{
+				return ()=>{
+					return agent.properties;
+				}
+			},
+			getPrefixItems=(agent)=>{
+				return ()=>{
+					return agent.prefixItems;
+				}
+			},
+			getItems=(agent)=>{
+				return ()=>{
+					return agent.items;
+				}
+			},
+			addItem=(agent)=>{
+				return (item,index)=>{
+					agent.items.splice(index,0,item);
+					agent.items.forEach((item,index)=>item.key=index);
+				}
+			},
+			copyItem=(agent)=>{
+				return (from,to)=>{
+					const item=createAgent(agent.schemaData,agent,ref,to,agent.parent);
+					item.setValue(JSON.parse(JSON.stringify(agent.items[from].getValue())));
+					agent.addItem(to,item);
+				}
+			},
+			moveItem=(agent)=>{
+				return (from,to)=>{
+					agent.items.splice(to,0,agent.items.splice(from,1)[0]);
+					agent.items.forEach((item,index)=>item.key=index);
+				}
+			},
+			removeItem=(agent)=>{
+				return ()=>{
+					agent.items.splice(from,1);
+					agent.items.forEach((item,index)=>item.key=index);
+				}			
 			}
+		}
+		return {
+			possibleTypes,
+			curries
 		};
-		const getValueCurry=(agent)=>{
-			return ()=>agent.ref[agent.key];
-		};
-		const setValueCurry=(agent)=>{
-			return (value)=>{
-				const valueType=getTypeOfValue(value);
-				if(possibleTypes[valueType]==null){return false;}
-				agent.ref[agent.key]=value;
-				if(agent.onChange!=null){agent.onChange(value);}
-				if(onChange!=null){onChange(agent,value);}
-				if(valueType==='object'){
-					
-				}
-				if(valueType==='array'){
-					
-				}
-				updateHandles.get(agent.schemaData)(agent);
-			}
-		};
-		const doValidateCurry=(agent)=>{
-			return ()=>{
-				const value=agent.getValue();
-				const invalidSchema=agent.getSchemas(1).find((schema)=>{
-					return !Catpow.schema.test(value,schema,rootSchema);
-				});
-				if(invalidSchema){
-					if(agent.onError!=null){agent.onError(invalidSchema);}
-					if(onError!=null){onError(agent,invalidSchema);}
-					agent.isValid=false;
-				}
-				else{
-					agent.isValid=true;
-				}
-			}
-		};
-		return {getSchemasCurry,getSchemaStatusCurry,setSchemaStatusCurry,getValueCurry,setValueCurry,doValidateCurry};
 	}
 	const createAgent=(schemaData,ref,key,parent)=>{
 		const agent={schemaData,ref,key,parent};
-		agent.getSchemaStatus=schemaData.getSchemaStatusCurry(agent);
-		agent.setSchemaStatus=schemaData.setSchemaStatusCurry(agent);
-		agent.getSchemas=schemaData.getSchemasCurry(agent);
-		agent.getValue=schemaData.getValueCurry(agent);
-		agent.setValue=schemaData.setValueCurry(agent);
-		agent.doValidate=schemaData.doValidateCurry(agent);
+		for(let functionName in schemaData.curries){
+			agent[functionName]=schemaData.curries[functionName](agent);
+		}
 		agent.onChange=null;
 		agent.onError=null;
-		
+		schemaData.getProperties(){
+
+		}
+		schemaData.getItems(){
+
+		}
 		return agent;
 	}
 
