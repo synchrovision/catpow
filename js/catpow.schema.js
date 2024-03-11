@@ -1,4 +1,4 @@
-/* global Catpow console WeakMap */
+/* global Catpow console Map WeakMap */
 Catpow.schema=(rootSchema)=>{
 	const resolveSchema=(uri,schema,param)=>{
 		const resolvedSchema=Catpow.schema.getResolvedSchema(schema,rootSchema);
@@ -43,6 +43,10 @@ Catpow.schema=(rootSchema)=>{
 		}
 		return resolvedSchema;
 	};
+	const resolvedRootSchema=resolveSchema('#',rootSchema,{});
+	const mergeSchemas=(schemas,extend)=>{
+		return Catpow.schema.mergeSchemas(schemas,resolvedRootSchema,{extend});
+	}
 	
 	const updateHandles=new WeakMap();
 	const getTypeOfValue=(value)=>{
@@ -72,6 +76,22 @@ Catpow.schema=(rootSchema)=>{
 		}
 		return true;
 	}
+	const walkDescendant=(agent,cb)=>{
+		if(cb(agent)===false){return false;}
+		agent.walkChildren((child)=>walkDescendant(child,cb));
+		return true;
+	}
+	const walkDescendantSchema=(agent,schema,cb)=>{
+		if(cb(agent,schema)===false){return false;}
+		agent.walkChildren((child)=>{
+			for(let subSchema of child.matrix.schemas){
+				if(subSchema.parent===schema){
+					walkDescendantSchema(child,subSchema,cb);
+				}
+			}
+		});
+		return true;
+	}
 	const getUnlimietedSchema=(schema)=>{
 		const unlimitedSchema=Object.assign({},schema);
 		delete unlimitedSchema.enum;
@@ -95,12 +115,10 @@ Catpow.schema=(rootSchema)=>{
 				});
 			}
 			if(schema.allOf!=null){
-				//@todo AND merge schema
 				Array.push.apply(schemas,schema.allOf);
 			}
 			if(schema.anyOf!=null){
-				//@todo OR merge schemas
-				Array.push.apply(schemas,schema.anyOf);
+				schemas.push(mergeSchemas(schema.anyOf,true))
 			}
 			if(schema.oneOf!=null){
 				const keyPropertyName=getKeyPropertyName(schema.oneOf);
@@ -197,6 +215,31 @@ Catpow.schema=(rootSchema)=>{
 					}
 				};
 			},
+			walkChildren:(agent)=>{
+				return (cb)=>{
+					if(agent.properties!=null){
+						for(let child of agent.properties){cb(child);}
+					}
+					if(agent.prefixItems!=null){
+						for(let child of agent.prefixItems){cb(child);}
+					}
+					if(agent.items!=null){
+						for(let child of agent.items){cb(child);}
+					}
+				}
+			},
+			getConditionalSchemaStatus:(agent)=>{
+				return (schema)=>{
+					return agent.conditionalSchemaStatus.get(schema);
+				}
+			},
+			setConditionalSchemaStatus:(agent)=>{
+				return (schema,status)=>{
+					if(agent.conditionalSchemaStatus.get(schema)===status){return status;}
+					agent.conditionalSchemaStatus.set(schema,status);
+					agent.setSchemaStatus(schema,agent.parent==null?3:agent.parent.getSchemaStatus(schema.parent) & status);
+				}
+			},
 			getSchemaStatus:(agent)=>{
 				return (schema)=>{
 					if(agent.schemaStatus==null || !agent.schemaStatus.has(schema)){return 1;}
@@ -205,8 +248,17 @@ Catpow.schema=(rootSchema)=>{
 			},
 			setSchemaStatus:(agent)=>{
 				return (schema,status)=>{
-					if(agent.schemaStatus==null){agent.schemaStatus=new WeakMap();}
+					if(agent.schemaStatus.get(schema)===status){return status;}
 					agent.schemaStatus.set(schema,status);
+					walkDescendantSchema(agent,schema,(agent,schema)=>{
+						const currentStatus=agent.schemaStatus.get(schema);
+						let status=agent.parent.schemaStatus.get(schema.parent);
+						if(agent.conditionalSchemaStatus.has(schema)){
+							status&=agent.conditionalSchemaStatus.get(schema);
+						}
+						if(status===currentStatus){return false;}
+						agent.schemaStatus.set(schema,status);
+					});
 				}
 			},
 			getSchemas:(agent)=>{
@@ -315,6 +367,15 @@ Catpow.schema=(rootSchema)=>{
 			agent[functionName]=matrix.curries[functionName](agent);
 		}
 		if(params!=null){Object.assign(agent,params);}
+		agent.schemaStauts=new Map();
+		agent.conditionalSchemaStatus=new WeakMap();
+		for(let schema of matrix.schemas){
+			agent.schemaStauts.set(schema,3);
+			if(schema.isConditional){
+				agent.conditionalSchemaStatus.set(schema,3);
+			}
+			
+		}
 		if(matrix.properties!=null){
 			if(agent.value==null){
 				agent.value=value={};
@@ -344,13 +405,21 @@ Catpow.schema=(rootSchema)=>{
 		return agent;
 	}
 	
-	const rootMatrix=getMatrix([resolveSchema('#',rootSchema,{})]);
+	const rootMatrix=getMatrix([resolvedRootSchema]);
 	rootMatrix.createAgent=(data,params)=>{
 		const rootAgent=createAgent(rootMatrix,{data},'data',data,null,params);
 		return rootAgent;
 	}
 	return rootMatrix;
 }
+Catpow.schema.reservedKeys={
+	"const":1,"enum":1,
+	"oneOf":1,"anyOf":1,"$ref":1,
+	"minimum":1,"maximum":1,"multipleOf":1,
+	"minLength":1,"maxLength":1,
+	"items":1,"prefixItems":1,"minItems":1,"maxItems":1,"contains":1,"minContains":1,"maxContains":1,
+	"properties":1,"required":1,"dependencies":1,"dependentSchemas":1,"dependentRequired":1,
+};
 Catpow.schema.typeSpecificKeys={
 	number:['minimum','maximum','multipleOf'],
 	string:['minLength','maxLength','pattern'],
@@ -596,14 +665,6 @@ Catpow.schema.getPrimaryPropertyName=(schema,rootSchema)=>{
 	if(mergedSchema.properties['@type']!=null){return '@type';}
 	return Object.keys(mergedSchema.properties).find((key)=>mergedSchema.properties[key].enum!=null);
 }
-Catpow.schema.reservedKeys={
-	"const":1,"enum":1,
-	"oneOf":1,"anyOf":1,"$ref":1,
-	"minimum":1,"maximum":1,"multipleOf":1,
-	"minLength":1,"maxLength":1,
-	"items":1,"prefixItems":1,"minItems":1,"maxItems":1,"contains":1,"minContains":1,"maxContains":1,
-	"properties":1,"required":1,"dependencies":1,"dependentSchemas":1,"dependentRequired":1,
-};
 Catpow.schema.getResolvedSchema=(schema,rootSchema)=>{
 	if(rootSchema==null){rootSchema=schema;}
 	const cache=Catpow.schema.getResolvedSchema.cache;
@@ -673,7 +734,13 @@ Catpow.schema.mergeSchema=(targetSchema,schema,rootSchema,params={})=>{
 	}
 	if(schema.enum!=null){
 		if(extend){
-			if(targetSchema.enum==null){targetSchema.enum=[];}
+			if(targetSchema.enum==null){
+				if(targetSchema.const!=null){
+					targetSchema.enum=schema.enum.slice();
+					targetSchema.enum.push(targetSchema.const);
+					targetSchema.const=null;
+				}
+			}
 			else{
 				targetSchema.enum.push.apply(
 					targetSchema.enum,schema.enum.filter((val)=>!targetSchema.enum.includes(val))
@@ -800,4 +867,9 @@ Catpow.schema.mergeSchema=(targetSchema,schema,rootSchema,params={})=>{
 		}
 		Catpow.schema.mergeSchema(targetSchema,mergedConditionalSchema,rootSchema,params);
 	}
+}
+Catpow.schema.mergeSchemas=(schemas,rootSchema,params={})=>{
+	const mergedSchema={};
+	schemas.forEach((schema)=>Catpow.schema.mergeSchema(mergedSchema,schema,rootSchema,params));
+	return mergedSchema;
 }
