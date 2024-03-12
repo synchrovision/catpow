@@ -312,6 +312,15 @@ Catpow.schema=(rootSchema)=>{
 					}
 				}
 			},
+			getMergedSchema:(agent)=>{
+				const cache={};
+				return (status)=>{
+					const key=agent.schemaStatus.values().join('')+status;
+					if(cache[key]!=null){return cache[key];}
+					cache[key]=mergeSchemas(agent.matrix.schemas.filter((schema)=>agent.getSchemaStatus(schema) & status));
+					return cache[key];
+				}
+			},
 			getProperties:(agent)=>{
 				return ()=>{
 					return agent.properties;
