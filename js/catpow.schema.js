@@ -110,8 +110,8 @@ Catpow.schema=(rootSchema)=>{
 				schemas.push(getUnlimietedSchema(schema.if));
 				updateHandlesList.push((agent)=>{
 					const isValid=test(agent.getValue(),schema.if);
-					if(schema.then!=null){agent.setSchemaStatus(schema.then,isValid?3:0);}
-					if(schema.else!=null){agent.setSchemaStatus(schema.else,isValid?0:3);}
+					if(schema.then!=null){agent.setConditionalSchemaStatus(schema.then,isValid?3:0);}
+					if(schema.else!=null){agent.setConditionalSchemaStatus(schema.else,isValid?0:3);}
 				});
 			}
 			if(schema.allOf!=null){
@@ -125,7 +125,7 @@ Catpow.schema=(rootSchema)=>{
 				updateHandlesList.push((agent)=>{
 					const keyValue=agent.getValue()[keyPropertyName];
 					schema.oneOf.forEach((schema)=>{
-						agent.setSchemaStatus(schema,test(keyValue,schema.properties[keyPropertyName])?3:0);
+						agent.setConditionalSchemaStatus(schema,test(keyValue,schema.properties[keyPropertyName])?3:0);
 					});
 				});
 			}
@@ -134,7 +134,7 @@ Catpow.schema=(rootSchema)=>{
 				updateHandlesList.push((agent)=>{
 					const value=agent.getValue();
 					for(let name in schema.dependentSchemas){
-						agent.setSchemaStatus(schema.dependentSchemas[name],(value[name]!=null)?3:0);
+						agent.setConditionalSchemaStatus(schema.dependentSchemas[name],(value[name]!=null)?3:0);
 					}
 				});
 			}
@@ -142,7 +142,7 @@ Catpow.schema=(rootSchema)=>{
 				updateHandlesList.push((agent)=>{
 					const value=agent.getValue();
 					for(let name in dependentRequired){
-						agent.setSchemaStatus(schema.dependentSchemas[name],(value[name]!=null)?3:0);
+						agent.setConditionalSchemaStatus(schema.dependentSchemas[name],(value[name]!=null)?3:0);
 					}
 				});
 			}
@@ -263,11 +263,16 @@ Catpow.schema=(rootSchema)=>{
 			},
 			getSchemas:(agent)=>{
 				return (status)=>{
-					return schemas.filter((schema)=>{
-						walkAncestorSchema(agent,schema,(agent,schema)=>{
-							return !schema.isConditional || (agent.getSchemaStatus(schema) & status) != 0;
-						});
-					});
+					return schemas.filter((schema)=>(agent.getSchemaStatus(schema) & status) != 0);
+				}
+			},
+			getMergedSchema:(agent)=>{
+				const cache={};
+				return (status,extend=true)=>{
+					const key=agent.schemaStatus.values().join('')+'-'+status+'-'+(extend?'e':'');
+					if(cache[key]!=null){return cache[key];}
+					cache[key]=mergeSchemas(agent.getSchemas(status),extend);
+					return cache[key];
 				}
 			},
 			getValue:(agent)=>{
@@ -300,11 +305,11 @@ Catpow.schema=(rootSchema)=>{
 			},
 			validate:(agent)=>{
 				return ()=>{
-					const invalidSchema=agent.getSchemas(1).find((schema)=>{
+					agent.invalidSchema=agent.getSchemas(1).find((schema)=>{
 						return !Catpow.schema.test(agent.value,schema,rootSchema);
 					});
-					if(invalidSchema){
-						if(agent.onError!=null){agent.onError(agent,invalidSchema);}
+					if(agent.invalidSchema){
+						if(agent.onError!=null){agent.onError(agent,agent.invalidSchema);}
 						agent.isValid=false;
 					}
 					else{
@@ -312,13 +317,14 @@ Catpow.schema=(rootSchema)=>{
 					}
 				}
 			},
-			getMergedSchema:(agent)=>{
-				const cache={};
-				return (status)=>{
-					const key=agent.schemaStatus.values().join('')+status;
-					if(cache[key]!=null){return cache[key];}
-					cache[key]=mergeSchemas(agent.matrix.schemas.filter((schema)=>agent.getSchemaStatus(schema) & status));
-					return cache[key];
+			getErrorMessage:(agent)=>{
+				return ()=>{
+					if(agent.isValid){return false;}
+					if(agent.invalidSchema!=null){
+						if(agent.invalidSchema.message!=null){return agent.invalidSchema.message;}
+						
+					}
+					return 'Unknown Error';
 				}
 			},
 			getProperties:(agent)=>{
@@ -451,104 +457,135 @@ Catpow.schema.conditionalSchemaKeys={
 	dependentSchemas:true,
 }
 
+Catpow.schema.getErrorMessage=(key,schema)=>{
+	return Catpow.schema.getErrorMessageFormat(schema).replace(/{\w+}/g,(matches)=>{
+		const key=matches.slice(1,-1);
+		if(schema[key]!=null){return schema[key];}
+		return matches;
+	});
+}
+Catpow.schema.getErrorMessageFormat=(key,schema)=>{
+	if(schema.message!=null){return schema.message;}
+	
+	if(schema.minimum!=null || schema.maximum!=null){
+		let message='';
+		if(schema.minimum!=null){
+			message+=schema.minimum+(schema.exclusiveMinimum?'超':'以上');
+		}
+		if(schema.maximum!=null){
+			message+=schema.maximum+(schema.exclusiveMaximum?'未満':'以下');
+		}
+		message+='の数値を入力してください';
+		return message;
+	}
+	if(schema.exclusiveMinimum!=null || schema.exclusiveMaximum!=null){
+		let message='';
+		if(schema.exclusiveMinimum!=null){message+=schema.exclusiveMinimum+'超';}
+		if(schema.exclusiveMaximum!=null){message+=schema.exclusiveMinimum+'未満';}
+		message+='の数値を入力してください';
+		return message;
+	}
+}
+
 Catpow.schema.getMatchedSchemas=(value,schemas,rootSchema,params)=>{
 	return schemas.filter((schema)=>Catpow.schema.test(value,schema,rootSchema,params));
 }
 Catpow.schema.test=(value,schema,rootSchema,params={})=>{
-	if(schema.const!=null && schema.const!==value){return false;}
-	if(schema.enum!=null && !schema.enum.includes(value)){return false;}
 	const type=Catpow.schema.getType(schema,rootSchema);
-	const {ignoreRequired=false}=params;
-	if(value == null){return type==='null' || ignoreRequired;}
+	const {ignoreRequired=false,onError=false}=params;
+	const cb=(key)=>onError && onError(key,schema);
+	if(schema.const!=null && schema.const!==value){return cb('');}
+	if(schema.enum!=null && !schema.enum.includes(value)){return cb('');}
+	if(value == null){return true;}
 	switch(type){
 		case 'boolean':{
-			if(typeof value !== 'boolean'){return false;}
+			if(typeof value !== 'boolean'){return cb('type');}
 			break;
 		}
 		case 'integer':
 		case 'number':{
-			if(type==='intger' && !Number.isInteger(value)){return false;}
-			if(schema.minimum!=null && value<schema.minimum){return false;}
-			if(schema.maximum!=null && value>schema.maximum){return false;}
+			if(type==='intger' && !Number.isInteger(value)){return cb('type');}
+			if(schema.minimum!=null && value<schema.minimum){return cb('minimum');}
+			if(schema.maximum!=null && value>schema.maximum){return cb('maximum');}
 			if(schema.exclusiveMinimum!=null){
 				if(typeof schema.exclusiveMinimum === 'boolean'){
-					if(schema.exclusiveMinimum===true && value<=schema.minimum){return false;}
+					if(schema.exclusiveMinimum===true && value<=schema.minimum){return cb('minimum');}
 				}
 				else{
-					if(value<=schema.exclusiveMinimum){return false;}
+					if(value<=schema.exclusiveMinimum){return cb('exclusiveMinimum');}
 				}
 			}
 			if(schema.exclusiveMaximum!=null){
 				if(typeof schema.exclusiveMaximum === 'boolean'){
-					if(schema.exclusiveMaximum===true && value>=schema.minimum){return false;}
+					if(schema.exclusiveMaximum===true && value>=schema.maximum){return cb('maximum');}
 				}
 				else{
-					if(value>=schema.exclusiveMaximum){return false;}
+					if(value>=schema.exclusiveMaximum){return cb('exclusiveMaximum');}
 				}
 			}
 			if(schema.multipleOf!=null){
-				if(value%schema.multipleOf!==0){return false;}
+				if(value%schema.multipleOf!==0){return cb('multipleOf');}
 			}
 			break;
 		}
 		case 'string':{
 			if(schema.pattern!=null){
 				const reg=new RegExp(schema.pattern);
-				if(!reg.test(value)){return false;}
+				if(!reg.test(value)){return cb('pattern');}
 			}
-			if(schema.minLength!=null && value.length<schema.minLength){return false;}
-			if(schema.maxLength!=null && value.length>schema.maxLength){return false;}
+			if(schema.minLength!=null && value.length<schema.minLength){return cb('minLength');}
+			if(schema.maxLength!=null && value.length>schema.maxLength){return cb('maxLength');}
 			break;
 		}
 		case 'object':{
-			if(typeof value !== 'object' || Array.isArray(value)){return false;}
+			if(typeof value !== 'object' || Array.isArray(value)){return cb('type');}
 			if(schema.required!=null && !ignoreRequired){
-				if(schema.required.some((key)=>value[key]==null)){return false;}
+				if(schema.required.some((key)=>value[key]==null)){return cb('required');}
 			}
 			if(schema.additionalProperties!=null && schema.additionalProperties===false){
-				if(Object.keys(value).some((key)=>!schema.properties.hasOwnProperty(key))){return false;}
+				if(Object.keys(value).some((key)=>!schema.properties.hasOwnProperty(key))){return cb('additionalProperties');}
 			}
 			const {dependentRequired,dependentSchemas}=Catpow.schema.extractDependencies(schema);
 			if(dependentRequired){
 				if(!ignoreRequired){
 					if(Object.keys(dependentRequired).some((key)=>{
 						return value[key]!=null && dependentRequired[key].some((depKey)=>value[depKey]==null);
-					})){return false;}
+					})){return cb('dependentRequired');}
 				}
 			}
 			if(dependentSchemas){
 				if(Object.keys(dependentSchemas).some((key)=>{
 					return value[key]!=null && !Catpow.schema.test(value,dependentSchemas[key],rootSchema,params);
-				})){return false;}
+				})){return cb('dependentSchemas');}
 			}
 			const length=Object.keys(value).length;
-			if(schema.minProperties!=null && length<schema.minProperties){return false;}
-			if(schema.maxProperties!=null && length>schema.maxProperties){return false;}
+			if(schema.minProperties!=null && length<schema.minProperties){return cb('minProperties');}
+			if(schema.maxProperties!=null && length>schema.maxProperties){return cb('maxProperties');}
 			if(schema.properties!=null){
 				if(Object.keys(schema.properties).some((key)=>{
 					if(value[key]==null){return false;}
-					return !Catpow.schema.test(
+					return Catpow.schema.test(
 						value[key],schema.properties[key],rootSchema,
 						Object.assign({},params,{refStack:null})
-					);
-				})){return false;}
+					) !== true;
+				})){return cb('properties');}
 			}
 			break;
 		}
 		case 'array':{
-			if(schema.minItems!=null && value.length<schema.minItems){return false;}
-			if(schema.maxItems!=null && value.length>schema.maxItems){return false;}
+			if(schema.minItems!=null && value.length<schema.minItems){return cb('minItems');}
+			if(schema.maxItems!=null && value.length>schema.maxItems){return cb('maxItems');}
 			if(schema.prefixItems!=null){
-				if(schema.prefixItems.some((itemSchema,index)=>value[index]!==undefined && !Catpow.schema.test(value[index],itemSchema,rootSchema,params))){return false;}
+				if(schema.prefixItems.some((itemSchema,index)=>value[index]!==undefined && Catpow.schema.test(value[index],itemSchema,rootSchema,params)!==true)){return cb('prefixItems');}
 			}
 			if(schema.contains!=null){
-				const matchedItems=value.filter((item)=>Catpow.schema.test(item,schema.contain,rootSchema,params));
-				if(matchedItems.length===0){return false;}
-				if(schema.minContains!=null && matchedItems.length<schema.minContains){return false;}
-				if(schema.maxContains!=null && matchedItems.length>schema.maxContains){return false;}
+				const matchedItems=value.filter((item)=>Catpow.schema.test(item,schema.contain,rootSchema,params)!==true);
+				if(matchedItems.length===0){return cb('contains');}
+				if(schema.minContains!=null && matchedItems.length<schema.minContains){return cb('minContains');}
+				if(schema.maxContains!=null && matchedItems.length>schema.maxContains){return cb('maxContains');}
 			}
 			if(schema.uniqueItems!=null && schema.uniqueItems===true){
-				if(value.slice(0,-1).some((item,index)=>value.indexOf(item,index+1)!==-1)){return false;}
+				if(value.slice(0,-1).some((item,index)=>value.indexOf(item,index+1)!==-1)){return cb('uniqueItems');}
 			}
 			break;
 		}
@@ -556,26 +593,24 @@ Catpow.schema.test=(value,schema,rootSchema,params={})=>{
 	if(schema.oneOf!=null){
 		const matchedSchemaLength=Catpow.schema.getMatchedSchemas(value,schema.oneOf,rootSchema,params).length;
 		if(ignoreRequired){
-			if(matchedSchemaLength===0){return false;}
+			if(matchedSchemaLength===0){return cb('oneOf');}
 		}
 		else{
-			if(matchedSchemaLength!==1){return false;}
+			if(matchedSchemaLength!==1){return cb('oneOf');}
 		}
 	}
 	if(schema.anyOf!=null){
-		if(schema.anyOf.every((subSchema)=>!Catpow.schema.test(value,subSchema,rootSchema))){return false;}
+		if(schema.anyOf.every((subSchema)=>Catpow.schema.test(value,subSchema,rootSchema)!==true)){return cb('anyOf');}
 	}
 	if(schema.allOf!=null){
-		if(schema.allOf.some((subSchema)=>!Catpow.schema.test(value,subSchema,rootSchema))){return false;}
+		if(schema.allOf.some((subSchema)=>!Catpow.schema.test(value,subSchema,rootSchema)!==true)){return cb('allOf');}
 	}
 	if(schema['$ref']!=null){
 		if(params.refStack==null){params.refStack=new WeakMap();}
 		const refSchema=Catpow.schema.getSubSchema(schema.$ref,schema,rootSchema);
 		if(refSchema && !params.refStack.has(refSchema)){
 			params.refStack.set(refSchema,true);
-			if(!Catpow.schema.test(value,refSchema,rootSchema,params)){
-				return false;
-			}
+			return Catpow.schema.test(value,refSchema,rootSchema,params);
 		}
 	}
 	return true;
