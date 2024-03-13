@@ -494,8 +494,8 @@ Catpow.schema.test=(value,schema,rootSchema,params={})=>{
 	const type=Catpow.schema.getType(schema,rootSchema);
 	const {ignoreRequired=false,onError=false}=params;
 	const cb=(key)=>onError && onError(key,schema);
-	if(schema.const!=null && schema.const!==value){return cb('');}
-	if(schema.enum!=null && !schema.enum.includes(value)){return cb('');}
+	if(schema.const!=null && schema.const!==value){return cb('const');}
+	if(schema.enum!=null && !schema.enum.includes(value)){return cb('enum');}
 	if(value == null){return true;}
 	switch(type){
 		case 'boolean':{
