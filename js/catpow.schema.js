@@ -492,7 +492,8 @@ Catpow.schema.getMatchedSchemas=(value,schemas,rootSchema,params)=>{
 }
 Catpow.schema.test=(value,schema,rootSchema,params={})=>{
 	const type=Catpow.schema.getType(schema,rootSchema);
-	const {ignoreRequired=false,onError=false}=params;
+	schema=Catpow.schema.getResolvedSchema(schema,rootSchema);
+	const {ignoreRequired=false,recursive=false,onError=false}=params;
 	const cb=(key)=>onError && onError(key,schema);
 	if(schema.const!=null && schema.const!==value){return cb('const');}
 	if(schema.enum!=null && !schema.enum.includes(value)){return cb('enum');}
@@ -561,7 +562,7 @@ Catpow.schema.test=(value,schema,rootSchema,params={})=>{
 			const length=Object.keys(value).length;
 			if(schema.minProperties!=null && length<schema.minProperties){return cb('minProperties');}
 			if(schema.maxProperties!=null && length>schema.maxProperties){return cb('maxProperties');}
-			if(schema.properties!=null){
+			if(recursive && schema.properties!=null){
 				if(Object.keys(schema.properties).some((key)=>{
 					if(value[key]==null){return false;}
 					return Catpow.schema.test(
@@ -603,14 +604,9 @@ Catpow.schema.test=(value,schema,rootSchema,params={})=>{
 		if(schema.anyOf.every((subSchema)=>Catpow.schema.test(value,subSchema,rootSchema)!==true)){return cb('anyOf');}
 	}
 	if(schema.allOf!=null){
-		if(schema.allOf.some((subSchema)=>!Catpow.schema.test(value,subSchema,rootSchema)!==true)){return cb('allOf');}
-	}
-	if(schema['$ref']!=null){
-		if(params.refStack==null){params.refStack=new WeakMap();}
-		const refSchema=Catpow.schema.getSubSchema(schema.$ref,schema,rootSchema);
-		if(refSchema && !params.refStack.has(refSchema)){
-			params.refStack.set(refSchema,true);
-			return Catpow.schema.test(value,refSchema,rootSchema,params);
+		for(let subSchema of schema.allOf){
+			const result=Catpow.schema.test(value,subSchema,rootSchema);
+			if(result!==true){return result;}
 		}
 	}
 	return true;
