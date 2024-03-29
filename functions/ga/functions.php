@@ -9,7 +9,7 @@ add_action('cp_setup',function(){
 			];
 			?>
 			<!-- Global site tag (gtag.js) - Google Analytics -->
-			<script async src="https://www.googletagmanager.com/gtag/js?id='<?=$cp_ga_code?>"></script>
+			<script async src="https://www.googletagmanager.com/gtag/js?id=<?=$cp_ga_code?>"></script>
 			<script>
 				window.dataLayer = window.dataLayer || [];
 				function gtag(){dataLayer.push(arguments);}
