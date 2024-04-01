@@ -146,9 +146,9 @@
     }, [roles]);
     const [colors, setColors] = useReducer(colorReducer, value, initColors);
     const ModeSelect = useCallback((props2) => {
-      const { Icon: Icon2 } = wp.components;
+      const { Icon } = wp.components;
       const { value: value2, onChange: onChange2 } = props2;
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet-ModeSelect" }, /* @__PURE__ */ wp.element.createElement(Icon2, { className: "ColorSet-ModeSelect__item" + (value2 === "pane" ? " active" : ""), icon: "admin-settings", onClick: () => onChange2("pane") }), /* @__PURE__ */ wp.element.createElement(Icon2, { className: "ColorSet-ModeSelect__item" + (value2 === "bulk" ? " active" : ""), icon: "media-text", onClick: () => onChange2("bulk") }));
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "ColorSet-ModeSelect" }, /* @__PURE__ */ wp.element.createElement(Icon, { className: "ColorSet-ModeSelect__item" + (value2 === "pane" ? " active" : ""), icon: "admin-settings", onClick: () => onChange2("pane") }), /* @__PURE__ */ wp.element.createElement(Icon, { className: "ColorSet-ModeSelect__item" + (value2 === "bulk" ? " active" : ""), icon: "media-text", onClick: () => onChange2("bulk") }));
     }, []);
     const ColorPicker = useCallback((props2) => {
       const { role, value: value2, open, onClick } = props2;
@@ -200,6 +200,7 @@
       )));
     }, []);
     const BulkInput = useCallback((props2) => {
+      const { Icon } = wp.components;
       const { value: value2 } = props2;
       const [tmp, setTmp] = useState();
       const keyRoleMap = useMemo(() => {

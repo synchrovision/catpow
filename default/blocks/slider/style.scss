@@ -232,8 +232,8 @@
 		>.contents{
 			@include bnd((d:b,p:r,pd:0,mg:50 a,w:var(--slider-size,30rem) f));
 			>.item{
-				@include bnd((d:b,p:a,l:0,t:0,mg:0,pd:4,bs:b));
-				@include trn((t:.5s,x:calc(var(--item-p) * 100%),o:calc(10 - abs(var(--item-p)))));
+				@include bnd((d:b,p:a,l:0,t:0,mg:0,pd:12,bs:b));
+				@include trn((t:.5s,x:calc(var(--item-p) * 100%),o:calc(2 - abs(var(--item-p)))));
 				>.slide{
 					@include bnd((p:r,w:f,z:1));
 					img,video{

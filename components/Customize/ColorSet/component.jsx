@@ -200,6 +200,7 @@
 		);
 	},[]);
 	const BulkInput=useCallback((props)=>{
+		const {Icon}=wp.components;
 		const {value}=props;
 		const [tmp,setTmp]=useState();
 		const keyRoleMap=useMemo(()=>{
