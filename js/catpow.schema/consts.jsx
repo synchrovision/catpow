@@ -1,3 +1,8 @@
+export const schemaStatusFlag=Object.freeze({
+	input:1,
+	validation:2
+});
+
 export const reservedKeys=Object.freeze({
 	"const":1,"enum":1,
 	"oneOf":1,"anyOf":1,"$ref":1,

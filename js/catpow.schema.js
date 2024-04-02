@@ -11,7 +11,12 @@
     conditionalSchemaKeys: () => conditionalSchemaKeys,
     minMaxKeys: () => minMaxKeys,
     reservedKeys: () => reservedKeys,
+    schemaStatusFlag: () => schemaStatusFlag,
     typeSpecificKeys: () => typeSpecificKeys
+  });
+  var schemaStatusFlag = Object.freeze({
+    input: 1,
+    validation: 2
   });
   var reservedKeys = Object.freeze({
     "const": 1,
@@ -1019,6 +1024,12 @@
             return cache3[key];
           };
         },
+        getMergedSchemaForInput: (agent) => {
+          return () => agent.getMergedSchema(1, true);
+        },
+        getMergedSchemaForValidation: (agent) => {
+          return () => agent.getMergedSchema(2, false);
+        },
         getValue: (agent) => {
           return () => agent.value;
         },
@@ -1056,7 +1067,7 @@
         validate: (agent) => {
           return () => {
             if (agent.additionalValidaion != null) {
-              agent.additionalValidaion(agent.value, agent.getMergedSchema());
+              agent.additionalValidaion(agent.value, agent.getMergedSchemaForValidation());
             }
             agent.invalidSchema = agent.getSchemas(1).find((schema) => {
               return !test(agent.value, schema, rootSchema);
@@ -1073,7 +1084,7 @@
         },
         initialize: (agent) => {
           return () => {
-            const mergedSchema = agent.getMergedSchema(2);
+            const mergedSchema = agent.getMergedSchemaForInput();
             if (mergedSchema.hasOwnProperty("default")) {
               agent.setValue(mergedSchema.default);
             }
