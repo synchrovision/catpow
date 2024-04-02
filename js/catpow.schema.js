@@ -275,7 +275,7 @@
     const { extend = false, value = null } = params;
     const forValue = params.hasOwnProperty("value");
     for (let key in schema) {
-      if (reservedKeys[key] && targetSchema[key] == null) {
+      if (targetSchema[key] == null) {
         targetSchema[key] = schema[key];
       }
     }
