@@ -275,7 +275,7 @@
     const { extend = false, value = null } = params;
     const forValue = params.hasOwnProperty("value");
     for (let key in schema) {
-      if (targetSchema[key] == null) {
+      if (!reservedKeys[key] && targetSchema[key] == null) {
         targetSchema[key] = schema[key];
       }
     }
@@ -425,8 +425,8 @@
 
   // ../js/catpow.schema/mergeSchemas.jsx
   var mergeSchemas = (schemas, rootSchema, params = {}) => {
-    const mergedSchema = {};
-    schemas.forEach((schema) => mergeSchema(mergedSchema, schema, rootSchema, params));
+    const mergedSchema = Object.assign({}, schemas[0]);
+    schemas.slice(1).forEach((schema) => mergeSchema(mergedSchema, schema, rootSchema, params));
     return mergedSchema;
   };
 
