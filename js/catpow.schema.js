@@ -908,6 +908,47 @@
     const createMatrix = (schemas) => {
       const possibleTypes = getPossibleTypes(schemas);
       const curries = {
+        on: (agent) => {
+          return (type, callback, arg = null) => {
+            if (agent.eventListeners[type] == null) {
+              agent.eventListeners[type] = /* @__PURE__ */ new Map();
+            }
+            agent.eventListeners[type].set(callback, arg);
+          };
+        },
+        off: (agent) => {
+          return (type, callback) => {
+            if (agent.eventListeners[type] == null) {
+              return;
+            }
+            return agent.eventListeners[type].delete(callback);
+          };
+        },
+        trigger: (agent) => {
+          return (event) => {
+            if (typeof event === "string") {
+              event = { type: event, bubbles: true };
+            }
+            event.target = agent;
+            const cb2 = (agent2) => {
+              if (agent2.eventListeners[event.type] == null) {
+                return true;
+              }
+              let stopPropagation = false;
+              agent2.eventListeners[event.type].forEach((arg, callback) => {
+                if (callback(event, arg) === false) {
+                  stopPropagation = true;
+                }
+              });
+              return !stopPropagation;
+            };
+            if (event.bubbles) {
+              walkAncestor(agent, cb2);
+            } else {
+              cb2(agent);
+            }
+          };
+        },
         getAgent: (agent) => {
           return (path) => {
             if (!Array.isArray(path)) {
@@ -1013,6 +1054,12 @@
             return schemas.filter((schema) => (agent.getSchemaStatus(schema) & status) != 0);
           };
         },
+        getSchemasForInput: (agent) => {
+          return () => agent.getSchemas(1);
+        },
+        getSchemasForValidation: (agent) => {
+          return () => agent.getSchemas(2);
+        },
         getMergedSchema: (agent) => {
           const cache3 = {};
           return (status, extend = true) => {
@@ -1040,6 +1087,7 @@
               agent2.update();
               agent2.validate();
             });
+            agent.trigger({ type: "change", bubbles: true });
           };
         },
         deleteValue: (agent) => {
@@ -1062,6 +1110,7 @@
             }
             agent.ref[agent.key] = agent.value;
             updateHandles.get(agent.matrix)(agent);
+            agent.trigger({ type: "update", bubbles: false });
           };
         },
         validate: (agent) => {
@@ -1080,6 +1129,7 @@
             } else {
               agent.isValid = true;
             }
+            agent.trigger({ type: "validate", bubbles: false });
           };
         },
         initialize: (agent) => {
@@ -1088,6 +1138,7 @@
             if (mergedSchema.hasOwnProperty("default")) {
               agent.setValue(mergedSchema.default);
             }
+            agent.trigger({ type: "initialize", bubbles: false });
           };
         },
         sanitize: (agent) => {
@@ -1100,6 +1151,7 @@
             if (value !== agent.getValue()) {
               agent.setValue(value);
             }
+            agent.trigger({ type: "sanitize", bubbles: false });
           };
         },
         setAdditionalValidaion: (agent) => {
@@ -1185,6 +1237,7 @@
       agent.schemaStatus = /* @__PURE__ */ new Map();
       agent.conditionalSchemaStatus = /* @__PURE__ */ new WeakMap();
       agent.conditionalRequiredFlag = /* @__PURE__ */ new Map();
+      agent.eventListeners = {};
       for (let schema of matrix.schemas) {
         agent.schemaStatus.set(schema, 3);
         if (schema.isConditional) {

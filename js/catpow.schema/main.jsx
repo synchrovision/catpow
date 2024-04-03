@@ -202,6 +202,42 @@ export const main=(rootSchema)=>{
 	const createMatrix=(schemas)=>{
 		const possibleTypes=getPossibleTypes(schemas);
 		const curries={
+			on:(agent)=>{
+				return (type,callback,arg=null)=>{
+					if(agent.eventListeners[type]==null){
+						agent.eventListeners[type]=new Map();
+					}
+					agent.eventListeners[type].set(callback,arg);
+				}
+			},
+			off:(agent)=>{
+				return (type,callback)=>{
+					if(agent.eventListeners[type]==null){return;}
+					return agent.eventListeners[type].delete(callback);
+				}
+			},
+			trigger:(agent)=>{
+				return (event)=>{
+					if(typeof event === 'string'){
+						event={type:event,bubbles:true};
+					}
+					event.target=agent;
+					const cb=(agent)=>{
+						if(agent.eventListeners[event.type]==null){return true;}
+						let stopPropagation=false;
+						agent.eventListeners[event.type].forEach((arg,callback)=>{
+							if(callback(event,arg)===false){stopPropagation=true;}
+						});
+						return !stopPropagation;
+					}
+					if(event.bubbles){
+						walkAncestor(agent,cb);
+					}
+					else{
+						cb(agent);
+					}
+				}
+			},
 			getAgent:(agent)=>{
 				return (path)=>{
 					if(!Array.isArray(path)){path=path.split('/');}
@@ -239,6 +275,7 @@ export const main=(rootSchema)=>{
 					}
 				}
 			},
+			
 			getConditionalSchemaStatus:(agent)=>{
 				return (schema)=>{
 					return agent.conditionalSchemaStatus.get(schema);
@@ -263,6 +300,7 @@ export const main=(rootSchema)=>{
 					}
 				}
 			},
+			
 			getSchemaStatus:(agent)=>{
 				return (schema)=>{
 					if(agent.schemaStatus==null || !agent.schemaStatus.has(schema)){return 1;}
@@ -284,11 +322,19 @@ export const main=(rootSchema)=>{
 					});
 				}
 			},
+			
 			getSchemas:(agent)=>{
 				return (status)=>{
 					return schemas.filter((schema)=>(agent.getSchemaStatus(schema) & status) != 0);
 				}
 			},
+			getSchemasForInput:(agent)=>{
+				return ()=>agent.getSchemas(1);
+			},
+			getSchemasForValidation:(agent)=>{
+				return ()=>agent.getSchemas(2);
+			},
+			
 			getMergedSchema:(agent)=>{
 				const cache={};
 				return (status,extend=true)=>{
@@ -304,6 +350,7 @@ export const main=(rootSchema)=>{
 			getMergedSchemaForValidation:(agent)=>{
 				return ()=>agent.getMergedSchema(2,false);
 			},
+			
 			getValue:(agent)=>{
 				return ()=>agent.value;
 			},
@@ -314,6 +361,7 @@ export const main=(rootSchema)=>{
 						agent.update();
 						agent.validate();
 					});
+					agent.trigger({type:'change',bubbles:true});
 				}
 			},
 			deleteValue:(agent)=>{
@@ -330,6 +378,7 @@ export const main=(rootSchema)=>{
 					if(agent.onChange!=null){agent.onChange(agent);}
 					agent.ref[agent.key]=agent.value;
 					updateHandles.get(agent.matrix)(agent);
+					agent.trigger({type:'update',bubbles:false});
 				}
 			},
 			validate:(agent)=>{
@@ -347,6 +396,7 @@ export const main=(rootSchema)=>{
 					else{
 						agent.isValid=true;
 					}
+					agent.trigger({type:'validate',bubbles:false});
 				}
 			},
 			initialize:(agent)=>{
@@ -355,6 +405,7 @@ export const main=(rootSchema)=>{
 					if(mergedSchema.hasOwnProperty('default')){
 						agent.setValue(mergedSchema.default);
 					}
+					agent.trigger({type:'initialize',bubbles:false});
 				}
 			},
 			sanitize:(agent)=>{
@@ -367,6 +418,7 @@ export const main=(rootSchema)=>{
 					if(value!==agent.getValue()){
 						agent.setValue(value);
 					}
+					agent.trigger({type:'sanitize',bubbles:false});
 				}
 			},
 			setAdditionalValidaion:(agent)=>{
@@ -446,6 +498,7 @@ export const main=(rootSchema)=>{
 		agent.schemaStatus=new Map();
 		agent.conditionalSchemaStatus=new WeakMap();
 		agent.conditionalRequiredFlag=new Map();
+		agent.eventListeners={};
 		for(let schema of matrix.schemas){
 			agent.schemaStatus.set(schema,3);
 			if(schema.isConditional){
