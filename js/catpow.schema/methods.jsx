@@ -13,3 +13,4 @@ export * from './getMergedSchema.jsx';
 export * from './getMergedSchemaForValue.jsx';
 export * from './mergeSchema.jsx';
 export * from './mergeSchemas.jsx';
+export * from './getDefaultValue.jsx';

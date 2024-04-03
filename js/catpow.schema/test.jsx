@@ -9,7 +9,7 @@ export const test=(value,schema,rootSchema,params={})=>{
 	const type=getType(schema,rootSchema);
 	schema=getResolvedSchema(schema,rootSchema);
 	const {ignoreRequired=false,recursive=false,onError=false}=params;
-	const cb=(invalidBy,params={})=>onError && onError(Object.Assign({invalidBy,schema,value},params));
+	const cb=(invalidBy,params={})=>onError && onError(Object.assign({invalidBy,schema,value},params));
 	if(schema.const!=null && schema.const!==value){return cb('const');}
 	if(schema.enum!=null && !schema.enum.includes(value)){return cb('enum');}
 	if(value == null){return true;}
@@ -75,9 +75,11 @@ export const test=(value,schema,rootSchema,params={})=>{
 				}
 			}
 			if(dependentSchemas){
-				if(Object.keys(dependentSchemas).some((key)=>{
-					return value[key]!=null && !test(value,dependentSchemas[key],rootSchema,params);
-				})){return cb('dependentSchemas');}
+				for(let propertyName in dependentSchemas){
+					if(value[key]==null){continue;}
+					const result=test(value,dependentSchemas[propertyName],rootSchema,params);
+					if(result!==true){return result;}
+				}
 			}
 			const length=Object.keys(value).length;
 			if(schema.minProperties!=null && length<schema.minProperties){return cb('minProperties');}
@@ -85,11 +87,8 @@ export const test=(value,schema,rootSchema,params={})=>{
 			if(recursive && schema.properties!=null){
 				if(Object.keys(schema.properties).some((key)=>{
 					if(value[key]==null){return false;}
-					return test(
-						value[key],schema.properties[key],rootSchema,
-						Object.assign({},params,{refStack:null})
-					) !== true;
-				})){return cb('properties');}
+					return test(value[key],schema.properties[key],rootSchema,params) !== true;
+				})){return false;}
 			}
 			break;
 		}
@@ -112,13 +111,8 @@ export const test=(value,schema,rootSchema,params={})=>{
 		}
 	}
 	if(schema.oneOf!=null){
-		const matchedSchemaLength=getMatchedSchemas(value,schema.oneOf,rootSchema,params).length;
-		if(ignoreRequired){
-			if(matchedSchemaLength===0){return cb('oneOf');}
-		}
-		else{
-			if(matchedSchemaLength!==1){return cb('oneOf');}
-		}
+		const matchedSchemaLength=getMatchedSchemas(value,schema.oneOf,rootSchema).length;
+		if(matchedSchemaLength!==1){return cb('oneOf',{matchedSchemaLength});}
 	}
 	if(schema.anyOf!=null){
 		if(schema.anyOf.every((subSchema)=>test(value,subSchema,rootSchema)!==true)){return cb('anyOf');}
@@ -126,7 +120,7 @@ export const test=(value,schema,rootSchema,params={})=>{
 	//@todo implement validation for mergedSchema
 	if(schema.allOf!=null){
 		for(let subSchema of schema.allOf){
-			const result=test(value,subSchema,rootSchema);
+			const result=test(value,subSchema,rootSchema,params);
 			if(result!==true){return result;}
 		}
 	}

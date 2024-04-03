@@ -101,12 +101,12 @@
       keys.shift();
       schema = rootSchema;
     }
-    keys.every((key) => {
-      if (!schema.hasOwnProperty(key)) {
+    keys.every((key2) => {
+      if (!schema.hasOwnProperty(key2)) {
         schema = null;
         return false;
       }
-      schema = schema[key];
+      schema = schema[key2];
       return true;
     });
     return schema;
@@ -153,11 +153,11 @@
           }
         }
       }
-      for (let key in ["if", "then", "else"]) {
-        if (schema[key] == null) {
+      for (let key2 in ["if", "then", "else"]) {
+        if (schema[key2] == null) {
           break;
         }
-        const result2 = find(callback, schema[key], rootSchema, params);
+        const result2 = find(callback, schema[key2], rootSchema, params);
         if (result2 != null) {
           return result2;
         }
@@ -274,9 +274,9 @@
   var mergeSchema = (targetSchema, schema, rootSchema, params = {}) => {
     const { extend = false, value = null } = params;
     const forValue = params.hasOwnProperty("value");
-    for (let key in schema) {
-      if (!reservedKeys[key] && targetSchema[key] == null) {
-        targetSchema[key] = schema[key];
+    for (let key2 in schema) {
+      if (!reservedKeys[key2] && targetSchema[key2] == null) {
+        targetSchema[key2] = schema[key2];
       }
     }
     if (schema.const != null) {
@@ -317,11 +317,11 @@
     } else if (extend && targetSchema.enum != null) {
       targetSchema.enum = null;
     }
-    for (let key in minMaxKeys) {
-      if (schema[key] != null) {
-        targetSchema[key] = Math[minMaxKeys[key] == extend ? "max" : "min"](targetSchema[key], schema[key]);
-      } else if (extend && targetSchema[key] != null) {
-        targetSchema[key] = null;
+    for (let key2 in minMaxKeys) {
+      if (schema[key2] != null) {
+        targetSchema[key2] = Math[minMaxKeys[key2] == extend ? "max" : "min"](targetSchema[key2], schema[key2]);
+      } else if (extend && targetSchema[key2] != null) {
+        targetSchema[key2] = null;
       }
     }
     if (schema.required != null) {
@@ -350,12 +350,12 @@
       if (targetSchema.properties == null) {
         targetSchema.properties = {};
       }
-      for (let key in schema.properties) {
-        const propSchema = forValue ? getMergedSchemaForValue(value || value[key], schema.properties[key], rootSchema) : getMergedSchema(schema.properties[key], rootSchema);
-        if (targetSchema.properties[key] != null) {
-          mergeSchema(targetSchema.properties[key], propSchema, rootSchema, params);
+      for (let key2 in schema.properties) {
+        const propSchema = forValue ? getMergedSchemaForValue(value || value[key2], schema.properties[key2], rootSchema) : getMergedSchema(schema.properties[key2], rootSchema);
+        if (targetSchema.properties[key2] != null) {
+          mergeSchema(targetSchema.properties[key2], propSchema, rootSchema, params);
         } else {
-          targetSchema.properties[key] = propSchema;
+          targetSchema.properties[key2] = propSchema;
         }
       }
     }
@@ -388,9 +388,9 @@
     const { dependentSchemas } = extractDependencies(schema);
     if (dependentSchemas != null) {
       if (forValue) {
-        for (let key in dependentSchemas) {
-          if (value[key] != null) {
-            conditionalSchemas.push(dependentSchemas[key]);
+        for (let key2 in dependentSchemas) {
+          if (value[key2] != null) {
+            conditionalSchemas.push(dependentSchemas[key2]);
           }
         }
       } else {
@@ -430,6 +430,112 @@
     return mergedSchema;
   };
 
+  // ../js/catpow.schema/getDefaultValue.jsx
+  var getDefaultValue = (schema, rootSchema) => {
+    const type = getType(schema, rootSchema);
+    schema = getResolvedSchema(schema, rootSchema);
+    if (schema.default != null) {
+      return schema.default;
+    }
+    if (schema.const != null) {
+      return schema.const;
+    }
+    if (schema.enum != null) {
+      return schema.enum[0];
+    }
+    switch (type) {
+      case "null": {
+        return null;
+      }
+      case "boolean": {
+        return false;
+      }
+      case "integer":
+      case "number": {
+        if (schema.minimum != null) {
+          const unit2 = schema.multipleOf != null ? schema.multipleOf : 1;
+          if (schema.exclusiveMinimum === true) {
+            return schema.minimum + unit2;
+          }
+          return schema.minimum;
+        }
+        if (schema.exclusiveMinimum != null) {
+          return schema.exclusiveMinimum + unit;
+        }
+        return 0;
+      }
+      case "string": {
+        return "";
+      }
+    }
+    return null;
+  };
+
+  // ../js/catpow.schema/getErrorMessageFormat.jsx
+  var getErrorMessageFormat = (params) => {
+    const { invalidBy, schema } = params;
+    if (schema.message != null) {
+      return schema.message;
+    }
+    switch (invalidBy) {
+      case "type":
+        return "\u5165\u529B\u5024\u306E\u578B\u304C\u4E00\u81F4\u3057\u307E\u305B\u3093";
+      case "minimum":
+        return schema.exclusiveMinimum ? "{minimum}\u3088\u308A\u5927\u304D\u3044\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044" : "{minimum}\u4EE5\u4E0A\u306E\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "exclusiveMinimum":
+        return "{exclusiveMinimum}\u3088\u308A\u5927\u304D\u3044\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "maximum":
+        return schema.exclusiveMaximum ? "{maximum}\u3088\u308A\u5C0F\u3055\u3044\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044" : "{maximum}\u4EE5\u4E0B\u306E\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "exclusiveMaximum":
+        return "{exclusiveMaximum}\u3088\u308A\u5C0F\u3055\u3044\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "multipleOf":
+        return "{multipleOf}\u306E\u500D\u6570\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "pattern":
+        return "\u5165\u529B\u5F62\u5F0F\u304C\u4E00\u81F4\u3057\u307E\u305B\u3093";
+      case "minLength":
+        return "{minLength}\u6587\u5B57\u4EE5\u4E0A\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "maxLength":
+        return "{maxLength}\u6587\u5B57\u4EE5\u4E0B\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "required":
+      case "dependentRequired":
+        return "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "additionalProperties":
+        return "\u898F\u5B9A\u306E\u30D7\u30ED\u30D1\u30C6\u30A3\u4EE5\u5916\u5165\u529B\u3067\u304D\u307E\u305B\u3093";
+      case "minProperties":
+        return "{minProperties}\u4EE5\u4E0A\u306E\u30D7\u30ED\u30D1\u30C6\u30A3\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "maxProperties":
+        return "{maxProperties}\u4EE5\u4E0B\u306E\u30D7\u30ED\u30D1\u30C6\u30A3\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "minItems":
+        return "{minItems}\u4EE5\u4E0A\u306E\u30A2\u30A4\u30C6\u30E0\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "maxItems":
+        return "{maxItems}\u4EE5\u4E0B\u306E\u30A2\u30A4\u30C6\u30E0\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "contains":
+        return "\u898F\u5B9A\u306E\u5F62\u5F0F\u306E\u30A2\u30A4\u30C6\u30E0\u3092\u542B\u3081\u3066\u304F\u3060\u3055\u3044";
+      case "minContains":
+        return "\u898F\u5B9A\u306E\u5F62\u5F0F\u306E\u30A2\u30A4\u30C6\u30E0\u3092{maxItems}\u4EE5\u4E0A\u542B\u3081\u3066\u304F\u3060\u3055\u3044";
+      case "maxContains":
+        return "\u898F\u5B9A\u306E\u5F62\u5F0F\u306E\u30A2\u30A4\u30C6\u30E0\u306F{maxContains}\u4EE5\u4E0B\u306B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "uniqueItems":
+        return "\u5024\u304C\u91CD\u8907\u3057\u3066\u3044\u307E\u3059";
+    }
+    return null;
+  };
+
+  // ../js/catpow.schema/getErrorMessage.jsx
+  var getErrorMessage = (params) => {
+    const format = getErrorMessageFormat(params);
+    if (format == null) {
+      return null;
+    }
+    return format.replace(/{\w+}/g, (matches) => {
+      const key2 = matches.slice(1, -1);
+      if (params.schema[key2] != null) {
+        return params.schema[key2];
+      }
+      return matches;
+    });
+  };
+
   // ../js/catpow.schema/getMatchedSchemas.jsx
   var getMatchedSchemas2 = (value, schemas, rootSchema, params) => {
     return schemas.filter((schema) => test(value, schema, rootSchema, params));
@@ -440,7 +546,7 @@
     const type = getType(schema, rootSchema);
     schema = getResolvedSchema(schema, rootSchema);
     const { ignoreRequired = false, recursive = false, onError = false } = params;
-    const cb2 = (invalidBy, params2 = {}) => onError && onError(Object.Assign({ invalidBy, schema, value }, params2));
+    const cb2 = (invalidBy, params2 = {}) => onError && onError(Object.assign({ invalidBy, schema, value }, params2));
     if (schema.const != null && schema.const !== value) {
       return cb2("const");
     }
@@ -524,7 +630,7 @@
           }
         }
         if (schema.additionalProperties != null && schema.additionalProperties === false) {
-          if (Object.keys(value).some((key) => !schema.properties.hasOwnProperty(key))) {
+          if (Object.keys(value).some((key2) => !schema.properties.hasOwnProperty(key2))) {
             return cb2("additionalProperties");
           }
         }
@@ -544,10 +650,14 @@
           }
         }
         if (dependentSchemas) {
-          if (Object.keys(dependentSchemas).some((key) => {
-            return value[key] != null && !test(value, dependentSchemas[key], rootSchema, params);
-          })) {
-            return cb2("dependentSchemas");
+          for (let propertyName in dependentSchemas) {
+            if (value[key] == null) {
+              continue;
+            }
+            const result = test(value, dependentSchemas[propertyName], rootSchema, params);
+            if (result !== true) {
+              return result;
+            }
           }
         }
         const length = Object.keys(value).length;
@@ -558,18 +668,13 @@
           return cb2("maxProperties");
         }
         if (recursive && schema.properties != null) {
-          if (Object.keys(schema.properties).some((key) => {
-            if (value[key] == null) {
+          if (Object.keys(schema.properties).some((key2) => {
+            if (value[key2] == null) {
               return false;
             }
-            return test(
-              value[key],
-              schema.properties[key],
-              rootSchema,
-              Object.assign({}, params, { refStack: null })
-            ) !== true;
+            return test(value[key2], schema.properties[key2], rootSchema, params) !== true;
           })) {
-            return cb2("properties");
+            return false;
           }
         }
         break;
@@ -607,15 +712,9 @@
       }
     }
     if (schema.oneOf != null) {
-      const matchedSchemaLength = getMatchedSchemas2(value, schema.oneOf, rootSchema, params).length;
-      if (ignoreRequired) {
-        if (matchedSchemaLength === 0) {
-          return cb2("oneOf");
-        }
-      } else {
-        if (matchedSchemaLength !== 1) {
-          return cb2("oneOf");
-        }
+      const matchedSchemaLength = getMatchedSchemas2(value, schema.oneOf, rootSchema).length;
+      if (matchedSchemaLength !== 1) {
+        return cb2("oneOf", { matchedSchemaLength });
       }
     }
     if (schema.anyOf != null) {
@@ -625,7 +724,7 @@
     }
     if (schema.allOf != null) {
       for (let subSchema of schema.allOf) {
-        const result = test(value, subSchema, rootSchema);
+        const result = test(value, subSchema, rootSchema, params);
         if (result !== true) {
           return result;
         }
@@ -700,8 +799,8 @@
           continue;
         }
         if (conditionalSchemaKeys[conditionalSchemaKey]) {
-          for (let key in resolvedSchema[conditionalSchemaKey]) {
-            resolvedSchema[conditionalSchemaKey][key] = resolveSchema(uri, resolvedSchema[conditionalSchemaKey][key], { parent, isConditional: true });
+          for (let key2 in resolvedSchema[conditionalSchemaKey]) {
+            resolvedSchema[conditionalSchemaKey][key2] = resolveSchema(uri, resolvedSchema[conditionalSchemaKey][key2], { parent, isConditional: true });
           }
         } else {
           resolvedSchema[conditionalSchemaKey] = resolveSchema(uri, resolvedSchema[conditionalSchemaKey], { parent, isConditional: true });
@@ -714,12 +813,12 @@
         }
       }
       if (resolvedSchema.properties != null) {
-        for (let key in resolvedSchema.properties) {
-          resolvedSchema.properties[key] = resolveSchema(uri + "/" + key, resolvedSchema.properties[key], { parent: resolvedSchema });
+        for (let key2 in resolvedSchema.properties) {
+          resolvedSchema.properties[key2] = resolveSchema(uri + "/" + key2, resolvedSchema.properties[key2], { parent: resolvedSchema });
         }
         if (resolvedSchema.required) {
-          for (let key in resolvedSchema.required) {
-            resolvedSchema.properties[key].isRequired = true;
+          for (let key2 in resolvedSchema.required) {
+            resolvedSchema.properties[key2].isRequired = true;
           }
         }
       }
@@ -753,7 +852,7 @@
       return flags;
     };
     const getKeyPropertyName = (schemas) => {
-      return Object.keys(schemas[0].properties).find((key) => schemas.every((schema) => schema.properties[key] != null));
+      return Object.keys(schemas[0].properties).find((key2) => schemas.every((schema) => schema.properties[key2] != null));
     };
     const walkAncestor = (agent, cb2) => {
       if (cb2(agent) === false) {
@@ -797,9 +896,9 @@
       const unlimitedSchema = Object.assign({}, schema);
       delete unlimitedSchema.enum;
       delete unlimitedSchema.const;
-      for (let key in minMaxKeys) {
-        if (unlimitedSchema[key] != null) {
-          delete unlimitedSchema[key];
+      for (let key2 in minMaxKeys) {
+        if (unlimitedSchema[key2] != null) {
+          delete unlimitedSchema[key2];
         }
       }
       return unlimitedSchema;
@@ -865,11 +964,11 @@
           if (matrix.properties == null) {
             matrix.properties = {};
           }
-          for (let key in schema.properties) {
-            if (matrix.properties[key] == null) {
-              matrix.properties[key] = [];
+          for (let key2 in schema.properties) {
+            if (matrix.properties[key2] == null) {
+              matrix.properties[key2] = [];
             }
-            matrix.properties[key].push(schema.properties[key]);
+            matrix.properties[key2].push(schema.properties[key2]);
           }
         }
         if (schema.prefixItems != null) {
@@ -891,8 +990,8 @@
         }
       });
       if (matrix.properties != null) {
-        for (let key in matrix.properties) {
-          matrix.properties[key] = getMatrix(matrix.properties[key]);
+        for (let key2 in matrix.properties) {
+          matrix.properties[key2] = getMatrix(matrix.properties[key2]);
         }
       }
       if (matrix.prefixItems != null) {
@@ -957,11 +1056,11 @@
             if (path.length === 0) {
               return agent;
             }
-            const key = path.shift();
-            if (isNaN(key)) {
-              return agent.properties[key].getAgent(path);
+            const key2 = path.shift();
+            if (isNaN(key2)) {
+              return agent.properties[key2].getAgent(path);
             } else {
-              const index = parseInt(key);
+              const index = parseInt(key2);
               if (agent.prefixItems != null) {
                 if (index < agent.prefixItems.length) {
                   return agent.prefixItems[index].getAgent(path);
@@ -1063,12 +1162,12 @@
         getMergedSchema: (agent) => {
           const cache3 = {};
           return (status, extend = true) => {
-            const key = Array.from(agent.schemaStatus.values()).join("") + "-" + status + "-" + (extend ? "e" : "");
-            if (cache3[key] != null) {
-              return cache3[key];
+            const key2 = Array.from(agent.schemaStatus.values()).join("") + "-" + status + "-" + (extend ? "e" : "");
+            if (cache3[key2] != null) {
+              return cache3[key2];
             }
-            cache3[key] = mergeSchemasProxy(agent.getSchemas(status), extend);
-            return cache3[key];
+            cache3[key2] = mergeSchemasProxy(agent.getSchemas(status), extend);
+            return cache3[key2];
           };
         },
         getMergedSchemaForInput: (agent) => {
@@ -1078,7 +1177,12 @@
           return () => agent.getMergedSchema(2, false);
         },
         getValue: (agent) => {
-          return () => agent.value;
+          return () => {
+            if (agent.value == null) {
+              return getDefaultValue(agent.getMergedSchemaForInput(), rootSchema);
+            }
+            return agent.value;
+          };
         },
         setValue: (agent) => {
           return (value) => {
@@ -1101,12 +1205,9 @@
         },
         update: (agent) => {
           return () => {
-            const valueType = getTypeOfValue(agent.value);
+            const valueType = getTypeOfValue(agent.getValue());
             if (possibleTypes[valueType] == null) {
               return false;
-            }
-            if (agent.onChange != null) {
-              agent.onChange(agent);
             }
             agent.ref[agent.key] = agent.value;
             updateHandles.get(agent.matrix)(agent);
@@ -1115,20 +1216,13 @@
         },
         validate: (agent) => {
           return () => {
-            if (agent.additionalValidaion != null) {
-              agent.additionalValidaion(agent.value, agent.getMergedSchemaForValidation());
-            }
-            agent.invalidSchema = agent.getSchemas(1).find((schema) => {
-              return !test(agent.value, schema, rootSchema);
+            agent.isValid = agent.getSchemasForValidation().every((schema) => {
+              return test(agent.value, schema, rootSchema, { onError: (params) => {
+                agent.setMessage(getErrorMessage(params));
+                agent.trigger({ type: "error", bubble: false });
+                return false;
+              } });
             });
-            if (agent.invalidSchema) {
-              if (agent.onError != null) {
-                agent.onError(agent, agent.invalidSchema);
-              }
-              agent.isValid = false;
-            } else {
-              agent.isValid = true;
-            }
             agent.trigger({ type: "validate", bubbles: false });
           };
         },
@@ -1144,7 +1238,7 @@
         sanitize: (agent) => {
           return () => {
             let value = agent.getValue();
-            const schemas2 = agent.getSchemas(2);
+            const schemas2 = agent.getSchemasForValidation();
             for (const schema of schemas2) {
               value = sanitize(value, schema, rootSchema);
             }
@@ -1152,21 +1246,6 @@
               agent.setValue(value);
             }
             agent.trigger({ type: "sanitize", bubbles: false });
-          };
-        },
-        setAdditionalValidaion: (agent) => {
-          return (cb2) => {
-            agent.additionalValidaion = cb2;
-          };
-        },
-        setAdditionalInitialization: (agent) => {
-          return (cb2) => {
-            agent.additionalInitialization = cb2;
-          };
-        },
-        setAdditionalSanitization: (agent) => {
-          return (cb2) => {
-            agent.additionalSanitization = cb2;
           };
         },
         getMessage: (agent) => {
@@ -1225,8 +1304,8 @@
       };
       return { possibleTypes, curries, schemas };
     };
-    const createAgent = (matrix, ref, key, value, parent, params) => {
-      const agent = { matrix, ref, key, value, parent };
+    const createAgent = (matrix, ref, key2, value, parent, params) => {
+      const agent = { matrix, ref, key: key2, value, parent };
       for (let functionName in matrix.curries) {
         agent[functionName] = matrix.curries[functionName](agent);
       }
@@ -1287,6 +1366,7 @@
   __export(methods_exports, {
     extractDependencies: () => extractDependencies,
     find: () => find,
+    getDefaultValue: () => getDefaultValue,
     getErrorMessage: () => getErrorMessage,
     getErrorMessageFormat: () => getErrorMessageFormat,
     getMatchedSchemas: () => getMatchedSchemas2,
@@ -1302,46 +1382,6 @@
     test: () => test
   });
 
-  // ../js/catpow.schema/getErrorMessageFormat.jsx
-  var getErrorMessageFormat = (key, schema) => {
-    if (schema.message != null) {
-      return schema.message;
-    }
-    if (schema.minimum != null || schema.maximum != null) {
-      let message = "";
-      if (schema.minimum != null) {
-        message += schema.minimum + (schema.exclusiveMinimum ? "\u8D85" : "\u4EE5\u4E0A");
-      }
-      if (schema.maximum != null) {
-        message += schema.maximum + (schema.exclusiveMaximum ? "\u672A\u6E80" : "\u4EE5\u4E0B");
-      }
-      message += "\u306E\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
-      return message;
-    }
-    if (schema.exclusiveMinimum != null || schema.exclusiveMaximum != null) {
-      let message = "";
-      if (schema.exclusiveMinimum != null) {
-        message += schema.exclusiveMinimum + "\u8D85";
-      }
-      if (schema.exclusiveMaximum != null) {
-        message += schema.exclusiveMinimum + "\u672A\u6E80";
-      }
-      message += "\u306E\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
-      return message;
-    }
-  };
-
-  // ../js/catpow.schema/getErrorMessage.jsx
-  var getErrorMessage = (key, schema) => {
-    return getErrorMessageFormat(schema).replace(/{\w+}/g, (matches) => {
-      const key2 = matches.slice(1, -1);
-      if (schema[key2] != null) {
-        return schema[key2];
-      }
-      return matches;
-    });
-  };
-
   // ../js/catpow.schema/getPrimaryPropertyName.jsx
   var getPrimaryPropertyName = (schema, rootSchema) => {
     if (getType(schema, rootSchema) !== "object") {
@@ -1351,10 +1391,10 @@
     if (mergedSchema.properties["@type"] != null) {
       return "@type";
     }
-    return Object.keys(mergedSchema.properties).find((key) => mergedSchema.properties[key].enum != null);
+    return Object.keys(mergedSchema.properties).find((key2) => mergedSchema.properties[key2].enum != null);
   };
 
   // ../js/catpow.schema/index.jsx
   window.Catpow.schema = main;
-  Object.Assign(window.Catpow.schema, consts_exports, methods_exports);
+  Object.assign(window.Catpow.schema, consts_exports, methods_exports);
 })();

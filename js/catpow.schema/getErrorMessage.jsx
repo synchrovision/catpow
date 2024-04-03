@@ -2,10 +2,12 @@
 
 import {getErrorMessageFormat} from './getErrorMessageFormat.jsx';
 
-export const getErrorMessage=(key,schema)=>{
-	return getErrorMessageFormat(schema).replace(/{\w+}/g,(matches)=>{
+export const getErrorMessage=(params)=>{
+	const format=getErrorMessageFormat(params);
+	if(format==null){return null;}
+	return format.replace(/{\w+}/g,(matches)=>{
 		const key=matches.slice(1,-1);
-		if(schema[key]!=null){return schema[key];}
+		if(params.schema[key]!=null){return params.schema[key];}
 		return matches;
 	});
 }

@@ -4,6 +4,8 @@ import {conditionalSchemaKeys,minMaxKeys} from './consts.jsx';
 import {getResolvedSchema} from './getResolvedSchema.jsx';
 import {extractDependencies} from './extractDependencies.jsx';
 import {mergeSchemas} from './mergeSchemas.jsx';
+import {getDefaultValue} from './getDefaultValue.jsx';
+import {getErrorMessage} from './getErrorMessage.jsx';
 import {test} from './test.jsx';
 import {sanitize} from './sanitize.jsx';
 
@@ -352,7 +354,12 @@ export const main=(rootSchema)=>{
 			},
 			
 			getValue:(agent)=>{
-				return ()=>agent.value;
+				return ()=>{
+					if(agent.value==null){
+						return getDefaultValue(agent.getMergedSchemaForInput(),rootSchema);
+					}
+					return agent.value;
+				}
 			},
 			setValue:(agent)=>{
 				return (value)=>{
@@ -373,9 +380,8 @@ export const main=(rootSchema)=>{
 			},
 			update:(agent)=>{
 				return ()=>{
-					const valueType=getTypeOfValue(agent.value);
+					const valueType=getTypeOfValue(agent.getValue());
 					if(possibleTypes[valueType]==null){return false;}
-					if(agent.onChange!=null){agent.onChange(agent);}
 					agent.ref[agent.key]=agent.value;
 					updateHandles.get(agent.matrix)(agent);
 					agent.trigger({type:'update',bubbles:false});
@@ -383,19 +389,13 @@ export const main=(rootSchema)=>{
 			},
 			validate:(agent)=>{
 				return ()=>{
-					if(agent.additionalValidaion!=null){
-						agent.additionalValidaion(agent.value,agent.getMergedSchemaForValidation());
-					}
-					agent.invalidSchema=agent.getSchemas(1).find((schema)=>{
-						return !test(agent.value,schema,rootSchema);
+					agent.isValid=agent.getSchemasForValidation().every((schema)=>{
+						return test(agent.value,schema,rootSchema,{onError:(params)=>{
+							agent.setMessage(getErrorMessage(params));
+							agent.trigger({type:'error',bubble:false});
+							return false;
+						}});
 					});
-					if(agent.invalidSchema){
-						if(agent.onError!=null){agent.onError(agent,agent.invalidSchema);}
-						agent.isValid=false;
-					}
-					else{
-						agent.isValid=true;
-					}
 					agent.trigger({type:'validate',bubbles:false});
 				}
 			},
@@ -411,7 +411,7 @@ export const main=(rootSchema)=>{
 			sanitize:(agent)=>{
 				return ()=>{
 					let value=agent.getValue();
-					const schemas=agent.getSchemas(2);
+					const schemas=agent.getSchemasForValidation();
 					for(const schema of schemas){
 						value=sanitize(value,schema,rootSchema);
 					}
@@ -419,21 +419,6 @@ export const main=(rootSchema)=>{
 						agent.setValue(value);
 					}
 					agent.trigger({type:'sanitize',bubbles:false});
-				}
-			},
-			setAdditionalValidaion:(agent)=>{
-				return (cb)=>{
-					agent.additionalValidaion=cb;
-				}
-			},
-			setAdditionalInitialization:(agent)=>{
-				return (cb)=>{
-					agent.additionalInitialization=cb;
-				}
-			},
-			setAdditionalSanitization:(agent)=>{
-				return (cb)=>{
-					agent.additionalSanitization=cb;
 				}
 			},
 			getMessage:(agent)=>{
