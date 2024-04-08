@@ -1,0 +1,90 @@
+.cp-news {
+  max-width: 1000px;
+  width: auto;
+  margin: auto;
+  padding: 20px;
+}
+.cp-news > .tabs {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  list-style: none;
+}
+.cp-news > .tabs > .tab {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 100px;
+  padding: 8px 0px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1em;
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+  opacity: 1;
+  background-color: var(--label-color);
+  cursor: pointer;
+}
+.cp-news > .tabs > .tab.is-tab-all {
+  --label-color:hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+}
+.cp-news > .tabs > .tab:not(.is-active) {
+  opacity: 0.8;
+  -webkit-filter: grayscale(90%);
+  filter: grayscale(90%);
+}
+.cp-news > .contents > .items {
+  padding: 20px 0px;
+}
+.cp-news > .contents > .items > .item {
+  padding: 8px 0px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  gap: 8px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.5);
+}
+.cp-news > .contents > .items > .item > .label {
+  padding: 8px 4px;
+  width: 100px;
+  background-color: var(--label-color);
+  text-align: center;
+  font-size: 14px;
+  line-height: 1em;
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+}
+.cp-news > .contents > .items > .item > .date {
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 120px;
+  padding: 6px 4px;
+  font-size: 0.9em;
+}
+.cp-news > .contents > .items > .item > .text {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 200px;
+  padding: 5px 4px;
+}
+.cp-news[x-cloak] > .tabs > .tab.is-tab-all {
+  opacity: 1;
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%);
+}
+.cp-news[x-cloak] > .contents > .items:not(.is-items-all) {
+  display: none;
+}
+/*# sourceMappingURL=./style.css.map */
