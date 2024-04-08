@@ -5,6 +5,8 @@
   padding: 20px;
 }
 .cp-news > .tabs {
+  padding: 0px;
+  margin: 0px;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;

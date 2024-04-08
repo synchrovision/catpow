@@ -3,6 +3,7 @@
 .cp-news{
 	@include bnd((w:a 1000,mg:a,pd:20));
 	>.tabs{
+		@include bnd((pd:0,mg:0));
 		@include flx((w:n));
 		@include txt((l:n));
 		>.tab{
