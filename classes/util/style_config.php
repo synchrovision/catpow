@@ -22,7 +22,7 @@ class style_config{
 			'background'=>['label'=>'背景色','default'=>'#ffffff','shorthand'=>'b','invert'=>'m'],
 			'sheet'=>['label'=>'強調背景色','default'=>'#dddddd','shorthand'=>'s','invert'=>'a','extend'=>true],
 			'text'=>['label'=>'文字色','default'=>'#666666','shorthand'=>'t','invert'=>'i'],
-			'main'=>['label'=>'基本色','default'=>'#CC6600','shorthand'=>'m','extend'=>true,'invert'=>'b'],
+			'main'=>['label'=>'基本色','default'=>'#443322','shorthand'=>'m','extend'=>true,'invert'=>'b'],
 			'accent'=>['label'=>'強調色','default'=>'#FF8800','shorthand'=>'a','extend'=>true,'invert'=>'s'],
 			'inside'=>['label'=>'反転文字色','default'=>'#ffffff','shorthand'=>'i','invert'=>'t'],
 			'light'=>['label'=>'照明色','default'=>'hsla(0,0%,100%,0.5)','shorthand'=>'lt','alphaEnabled'=>true],
