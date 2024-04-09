@@ -9,14 +9,14 @@
 		>.tab{
 			@include bnd((f:1 1 100,pd:8 0));
 			@include txt((a:c,p:16,h:1em,c:i));
-			@include trn((t:.25s,o:1));
+			@include trn((t:.25s));
 			@include bg((c:var(--label-color)));
 			@include usr((c:p));
 			&.is-tab-all{
-				--label-color:#{clr(m)};
+				--label-color:#{clr(a)};
 			}
 			&:not(.is-active){
-				@include trn((gry:90%,o:.8));
+				@include bg((c:m));
 			}
 		}
 	}

@@ -27,17 +27,14 @@
   color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
   -webkit-transition: 0.25s;
   transition: 0.25s;
-  opacity: 1;
   background-color: var(--label-color);
   cursor: pointer;
 }
 .cp-news > .tabs > .tab.is-tab-all {
-  --label-color:hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  --label-color:hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),var(--cp-tones-a-l),1);
 }
 .cp-news > .tabs > .tab:not(.is-active) {
-  opacity: 0.8;
-  -webkit-filter: grayscale(90%);
-  filter: grayscale(90%);
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 .cp-news > .contents > .items {
   padding: 20px 0px;
