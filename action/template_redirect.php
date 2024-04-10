@@ -36,3 +36,12 @@ cp::enqueue_script(cp::$content_path.'/script.js');
 if(!current_user_can('edit_posts')){
 	add_filter('show_admin_bar', '__return_false');
 }
+add_filter(get_query_var('cp_page_type').'_template_hierarchy',function($templates){
+	array_unshift(
+		$templates,
+		get_query_var('cp_page_type').
+		'-'.get_query_var('cp_data_name').
+		'--'.get_query_var('cp_tmp_slug').'.php'
+	);
+	return $templates;
+});
