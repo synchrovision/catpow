@@ -12,5 +12,6 @@ add_action('parse_query',function($wp){
 			$wp->is_attachment=$wp->query_vars['cp_data_name']==='attachment';
 			$wp->is_single=!$wp->is_page && !$wp->is_attachment;
 		}
+		//@todo adjust flags for archive and search 
 	}
 });
