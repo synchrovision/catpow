@@ -13,8 +13,8 @@
           const chunks = action.input.split(",");
           if (chunks.length > 1) {
             const input = chunks.pop();
-            const items2 = state2.items.concat(chunks);
-            return { ...state2, items: items2, input };
+            const items = state2.items.concat(chunks);
+            return { ...state2, items, input };
           }
           return { ...state2, input: action.input };
         }
@@ -24,12 +24,12 @@
             return state2;
           }
           const chunks = state2.input.split(",").filter((chunk) => chunk);
-          const items2 = state2.items.concat(chunks);
-          return { ...state2, input: "", items: items2 };
+          const items = state2.items.concat(chunks);
+          return { ...state2, input: "", items };
         }
         case "REMOVE": {
-          const items2 = state2.items.toSpliced(action.index, 1);
-          return { ...state2, items: items2 };
+          const items = state2.items.toSpliced(action.index, 1);
+          return { ...state2, items };
         }
         case "START_COMPOSE": {
           console.log("START_COMPOSE");
@@ -74,6 +74,6 @@
         list: datalistId,
         ref: setRef
       }
-    ), datalist && /* @__PURE__ */ wp.element.createElement("datalist", { id: datalistId }, datalist.map((val) => /* @__PURE__ */ wp.element.createElement("option", { value: val, disabled: (state, items.includes(val)), key: val }))));
+    ), datalist && /* @__PURE__ */ wp.element.createElement("datalist", { id: datalistId }, datalist.map((val) => /* @__PURE__ */ wp.element.createElement("option", { value: val, disabled: state.items.includes(val), key: val }))));
   };
 })();
