@@ -1,5 +1,5 @@
 ﻿Catpow.InputTextItems=(props)=>{
-	const {className='InputTextItems',value,onChange}=props;
+	const {className='InputTextItems',onChange}=props;
 	const {useState,useMemo,useCallback,useEffect,useReducer}=wp.element;
 	const {bem}=Catpow.util;
 	const classes=bem(className);
@@ -25,7 +25,7 @@
 				return {...state,input:'',items}
 			}
 			case 'REMOVE':{
-				const items=state.items.filter((item)=>item!==action.item);
+				const items=state.items.toSpliced(action.index,1);
 				return {...state,items};
 			}
 			case 'START_COMPOSE':{
@@ -50,12 +50,20 @@
 		onChange(state.items);
 	},[state.items]);
 	
+	const [datalistId,datalist]=useMemo(()=>{
+		if(props.datalist==null){return [null,null];}
+		const datalistId=(performance.now()*1000).toString(16);
+		const datalist=Array.isArray(props.datalist)?props.datalist:props.datalist.split(',');
+		return [datalistId,datalist];
+	},[props.datalist]);
+	
+	
 	return (
 		<div className={classes()}>
 			{state.items.map((item,index)=>(
 				<span className={classes.item()} key={index}>
 					<span className={classes.item.text()}>{item}</span>
-					<span className={classes.item.remove()} onClick={(e)=>dispatch({type:'REMOVE',item})}>×</span>
+					<span className={classes.item.remove()} onClick={(e)=>dispatch({type:'REMOVE',index})}>×</span>
 				</span>	 
 			))}
 			<input
@@ -66,8 +74,14 @@
 				onBlur={(e)=>dispatch({type:'ENTER'})}
 				onCompositionStart={(e)=>dispatch({type:'START_COMPOSE'})}
 				onCompositionEnd={(e)=>setTimeout(()=>dispatch({type:'END_COMPOSE'}),100)}
+				list={datalistId}
 				ref={setRef}
 			/>
+			{datalist && (
+				<datalist id={datalistId}>
+					{datalist.map((val)=><option value={val} disabled={state.items.includes(val)} key={val}></option>)}
+				</datalist>
+			)}
 		</div>
 	);
 }
