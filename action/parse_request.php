@@ -6,12 +6,14 @@ if(!empty($wp->query_vars['cp_callee'])){
 }
 add_action('parse_query',function($wp){
 	if(isset($wp->query_vars['cp_mode'])){
-		if($wp->query_vars['cp_data_type']==='post' && isset($wp->query_vars['cp_data_id'])){
+		if($wp->query_vars['cp_data_type']==='post' && $wp->query_vars['cp_page_type']==='single'){
 			$wp->is_singular=true;
 			$wp->is_page=$wp->query_vars['cp_data_name']==='page';
 			$wp->is_attachment=$wp->query_vars['cp_data_name']==='attachment';
 			$wp->is_single=!$wp->is_page && !$wp->is_attachment;
 		}
-		//@todo adjust flags for archive and search 
+		if($wp->query_vars['cp_data_type']==='post' && $wp->query_vars['cp_page_type']==='archive'){
+			$wp->is_archive=$wp->is_post_type_archive=true;
+		}
 	}
 });
