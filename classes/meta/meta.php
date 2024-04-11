@@ -85,7 +85,7 @@ abstract class meta{
 	
 	public static function output($meta,$prm){
 		$values=$meta->value;
-		return is_array($values)?implode(',',$values):$values;
+		return is_array($values)?implode($meta->conf['delimiter']??',',$values):$values;
 	}
 	public static function input($meta,$prm){
 		return sprintf(
