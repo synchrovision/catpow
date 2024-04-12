@@ -20,7 +20,7 @@ class style_config{
 		if(isset(static::$color_roles)){return static::$color_roles;}
 		return static::$color_roles=apply_filters('cp_color_roles',[
 			'background'=>['label'=>'背景色','default'=>'#ffffff','shorthand'=>'b','invert'=>'m'],
-			'sheet'=>['label'=>'強調背景色','default'=>'#dddddd','shorthand'=>'s','invert'=>'a','extend'=>true],
+			'sheet'=>['label'=>'強調背景色','default'=>'#F8F6F4','shorthand'=>'s','invert'=>'a','extend'=>true],
 			'text'=>['label'=>'文字色','default'=>'#666666','shorthand'=>'t','invert'=>'i'],
 			'main'=>['label'=>'基本色','default'=>'#443322','shorthand'=>'m','extend'=>true,'invert'=>'b'],
 			'accent'=>['label'=>'強調色','default'=>'#FF8800','shorthand'=>'a','extend'=>true,'invert'=>'s'],
