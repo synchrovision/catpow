@@ -1,7 +1,7 @@
 <?php
 namespace Catpow\meta;
 abstract class meta{
-	const USE_ALTERNATIVE=01;
+	const INPUT_LOOP=01,USE_ALTERNATIVE=02;
 	public static
 		$value_type='CHAR',
 		$data_type='longtext',

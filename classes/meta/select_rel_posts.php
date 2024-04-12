@@ -71,6 +71,7 @@ class select_rel_posts extends select{
 		}
 	}
 	public static function loop($meta,$flags=0){
+		if($flags & self::INPUT_LOOP){return parent::loop($meta,$flags);}
 		$q=is_callable($meta->conf['value'])?$meta->conf['value']($meta):$meta->conf['value'];
 		if(is_string($q)){$post_type=$q;}
 		elseif(is_array($q)){$post_type=$q['post_type'];}

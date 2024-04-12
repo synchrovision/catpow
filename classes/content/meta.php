@@ -64,7 +64,7 @@ class meta extends content{
 			echo '</div>';
 		}
 		else{
-			foreach($class_name::loop($this) as $this->loop_id=>$meta_value){
+			foreach($class_name::loop($this,$class_name::INPUT_LOOP) as $this->loop_id=>$meta_value){
 				echo '<div '.$this->get_unit_attr().'>';
 				$tmp=$class_name::input($this,$prm);
 				if(isset($format)){$tmp=printf($format,$tmp);}
