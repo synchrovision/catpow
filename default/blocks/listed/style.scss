@@ -212,7 +212,7 @@
 			@include grd((rc:400,g:20));
 			>.item{
 				@include bnd((p:r,mg:1));
-				@include shd((b:4));
+				@include shd((b:2));
 				>.header{
 					@include flx((w:w));
 					>.image{
