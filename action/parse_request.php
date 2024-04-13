@@ -6,6 +6,7 @@ if(!empty($wp->query_vars['cp_callee'])){
 }
 add_action('parse_query',function($wp){
 	if(isset($wp->query_vars['cp_mode'])){
+		$wp->is_home=false;
 		if($wp->query_vars['cp_data_type']==='post' && $wp->query_vars['cp_page_type']==='single'){
 			$wp->is_singular=true;
 			$wp->is_page=$wp->query_vars['cp_data_name']==='page';
