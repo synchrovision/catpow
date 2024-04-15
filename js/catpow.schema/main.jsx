@@ -354,8 +354,8 @@ export const main=(rootSchema)=>{
 			},
 			
 			getValue:(agent)=>{
-				return ()=>{
-					if(agent.value==null){
+				return (getDefaultValueIfEmpty=true)=>{
+					if(agent.value==null && getDefaultValueIfEmpty){
 						return getDefaultValue(agent.getMergedSchemaForInput(),rootSchema);
 					}
 					return agent.value;
@@ -364,27 +364,35 @@ export const main=(rootSchema)=>{
 			setValue:(agent)=>{
 				return (value)=>{
 					agent.value=value;
-					walkAncestor(agent,(agent)=>{
-						agent.update();
-						agent.validate();
-					});
 					agent.trigger({type:'change',bubbles:true});
 				}
 			},
 			deleteValue:(agent)=>{
 				return ()=>{
-					delete agent.ref[agent.key];
-					if(agent.onChange!=null){agent.onChange(null);}
-					updateHandles.get(agent.matrix)(agent);
+					agent.value=null;
+					agent.trigger({type:'change',bubbles:true});
 				}
 			},
 			update:(agent)=>{
 				return ()=>{
+					agent.validate();
+					if(!agent.isValid){
+						agent.trigger({type:'error',bubbles:false});
+						return false;
+					}
 					const valueType=getTypeOfValue(agent.getValue());
 					if(possibleTypes[valueType]==null){return false;}
-					agent.ref[agent.key]=agent.value;
+					if(agent.value==null){
+						delete agent.ref[agent.key];
+					}
+					else{
+						agent.ref[agent.key]=agent.value;
+					}
 					updateHandles.get(agent.matrix)(agent);
 					agent.trigger({type:'update',bubbles:false});
+					if(agent.parent!=null){
+						agent.parent.update();
+					}
 				}
 			},
 			validate:(agent)=>{
