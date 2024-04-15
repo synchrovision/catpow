@@ -206,7 +206,7 @@ Catpow.util={
 	},
 	/*datetime*/
 	getDateValue:function(dateObj){
-		if(typeof dateObj === 'string'){dateObj=Catpow.getDateTimeObject(dateObj);}
+		if(typeof dateObj === 'string'){dateObj=Catpow.util.getDateTimeObject(dateObj);}
 		return dateObj.getFullYear()+'-'+ (dateObj.getMonth()+1)+'-'+ dateObj.getDate();
 	},
 	getDateObject:function(dateValue,defaultValue){
@@ -215,7 +215,7 @@ Catpow.util={
 		return Catpow.util.getRelativeDateTimeObject(dateValue,defaultValue);
 	},
 	getDateTimeValue:function(dateTimeObj){
-		if(typeof dateTimeObj === 'string'){dateTimeObj=Catpow.getDateTimeObject(dateTimeObj);}
+		if(typeof dateTimeObj === 'string'){dateTimeObj=Catpow.util.getDateTimeObject(dateTimeObj);}
 		return (
 			dateTimeObj.getFullYear()+'-'+ 
 			(dateTimeObj.getMonth()+1)+'-'+
