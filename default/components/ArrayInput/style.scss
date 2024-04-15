@@ -1,0 +1,33 @@
+@import 'admin_style_config.scss';
+
+.ArrayInput{
+	@include txt((l:n));
+	&-items{
+		&-item{
+			@include bnd((p:r,pd:16,mg:16 a));
+			@include bdr((r:8));
+			@include shd((b:2));
+			&-body{
+
+			}
+			&-controls{
+				@include bnd((p:a,w:100,t:4,r:4));
+				@include flx((w:n,g:4,j:e));
+				@include txt((p:14));
+				&-button,&-spacer{
+					@include bnd((pd:2,f:0 0 14,h:14));
+				}
+				&-button{
+					@include bg((c:t 1 .5));
+					@include bdr((r:50%));
+					@include txt((a:c,c:i,p:14,h:1em));
+					@include usr((c:p));
+					@include shd((b:1));
+				}
+			}	
+		}
+		&-insertionPoint{
+			
+		}
+	}
+}
