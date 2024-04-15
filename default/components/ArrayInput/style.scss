@@ -1,8 +1,8 @@
 @import 'admin_style_config.scss';
 
 .ArrayInput{
-	@include txt((l:n));
 	&-items{
+		@include txt((l:n));
 		&-item{
 			@include bnd((p:r,pd:16,mg:16 a));
 			@include bdr((r:8));
