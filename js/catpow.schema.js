@@ -1228,9 +1228,8 @@
         },
         initialize: (agent) => {
           return () => {
-            const mergedSchema = agent.getMergedSchemaForInput();
-            if (mergedSchema.hasOwnProperty("default")) {
-              agent.setValue(mergedSchema.default);
+            if (agent.value == null) {
+              agent.value = getDefaultValue(agent.getMergedSchemaForInput(), rootSchema);
             }
             agent.trigger({ type: "initialize", bubbles: false });
           };
@@ -1272,33 +1271,39 @@
           };
         },
         addItem: (agent) => {
-          return (item, index) => {
+          return (index, value) => {
+            const item = createAgent(
+              agent.matrix.items,
+              agent.value,
+              index,
+              value,
+              agent.parent
+            );
             agent.items.splice(index, 0, item);
             agent.items.forEach((item2, index2) => item2.key = index2);
+            agent.trigger({ type: "addItem", bubbles: false });
+            agent.trigger({ type: "modifyItems", bubbles: false });
           };
         },
         copyItem: (agent) => {
           return (from, to) => {
-            const item = createAgent(
-              agent.matrix,
-              agent.value,
-              to,
-              JSON.parse(JSON.stringify(agent.items[from])),
-              agent.parent
-            );
-            agent.addItem(to, item);
+            agent.addItem(to, JSON.parse(JSON.stringify(agent.items[from].getValue())));
           };
         },
         moveItem: (agent) => {
           return (from, to) => {
             agent.items.splice(to, 0, agent.items.splice(from, 1)[0]);
             agent.items.forEach((item, index) => item.key = index);
+            agent.trigger({ type: "moveItem", bubbles: false });
+            agent.trigger({ type: "modifyItems", bubbles: false });
           };
         },
         removeItem: (agent) => {
           return (index) => {
             agent.items.splice(index, 1);
             agent.items.forEach((item, index2) => item.key = index2);
+            agent.trigger({ type: "removeItem", bubbles: false });
+            agent.trigger({ type: "modifyItems", bubbles: false });
           };
         }
       };
