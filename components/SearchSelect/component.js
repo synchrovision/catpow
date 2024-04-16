@@ -1,7 +1,7 @@
 (() => {
   // ../components/SearchSelect/component.jsx
   Catpow.SearchSelect = (props) => {
-    const { defaultLabel, onChange, col = 5, placeholder = "Search" } = props;
+    const { defaultLabel, onChange, col = 5, multiple = true, placeholder = "Search" } = props;
     const { useState, useReducer, useCallback, useMemo, useRef, useEffect } = wp.element;
     const { bem } = Catpow.util;
     const classes = bem("SearchSelect");
@@ -39,17 +39,28 @@
       if (!selectedLabels2) {
         return [labelToToggle];
       }
-      if (selectedLabels2.includes(labelToToggle)) {
-        return selectedLabels2.filter((val) => val !== labelToToggle);
+      if (multiple) {
+        if (selectedLabels2.includes(labelToToggle)) {
+          return selectedLabels2.filter((val) => val !== labelToToggle);
+        }
+        return [...selectedLabels2, labelToToggle];
+      } else {
+        if (selectedLabels2.includes(labelToToggle)) {
+          return [];
+        }
+        return [labelToToggle];
       }
-      return [...selectedLabels2, labelToToggle];
     }, []);
     const [selectedLabels, toggleLabel] = useReducer(
       toggleLabelReducer,
       useMemo(() => props.value ? props.value.map((value) => valueLabelMap[value]) : [], [])
     );
     useEffect(() => {
-      onChange(selectedLabels.map((label) => labelValueMap[label]));
+      if (multiple) {
+        onChange(selectedLabels.map((label) => labelValueMap[label]));
+      } else {
+        onChange(selectedLabels.length ? labelValueMap[selectedLabels[0]] : null);
+      }
     }, [selectedLabels]);
     const getLabelsForSearch = useCallback((search2) => {
       if (cache.current[search2]) {
@@ -73,7 +84,7 @@
       {
         selections: currentLabels,
         value: selectedLabels,
-        multiple: true,
+        multiple,
         col,
         onChange: toggleLabel
       }
