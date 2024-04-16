@@ -38,8 +38,10 @@ export const main=(rootSchema)=>{
 				resolvedSchema.properties[key]=resolveSchema(uri+'/'+key,resolvedSchema.properties[key],{parent:resolvedSchema});
 			}
 			if(resolvedSchema.required){
-				for(let key in resolvedSchema.required){
-					resolvedSchema.properties[key].isRequired=true;
+				for(let key of resolvedSchema.required){
+					if(resolvedSchema.properties[key]){
+						resolvedSchema.properties[key].isRequired=true;
+					}
 				}
 			}
 		}

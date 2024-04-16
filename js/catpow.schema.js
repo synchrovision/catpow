@@ -820,8 +820,10 @@
           resolvedSchema.properties[key2] = resolveSchema(uri + "/" + key2, resolvedSchema.properties[key2], { parent: resolvedSchema });
         }
         if (resolvedSchema.required) {
-          for (let key2 in resolvedSchema.required) {
-            resolvedSchema.properties[key2].isRequired = true;
+          for (let key2 of resolvedSchema.required) {
+            if (resolvedSchema.properties[key2]) {
+              resolvedSchema.properties[key2].isRequired = true;
+            }
           }
         }
       }
