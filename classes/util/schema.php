@@ -28,10 +28,17 @@ class schema{
 			$crr_schema=$resolver($crr_schema,$this);
 		}
 		if(isset($crr_schema['$ref'])){
-			$crr_schema=array_merge(
-				$this->get_item($this->resolve_path($crr_schema['$ref'],$path)),
-				$crr_schema
-			);
+			$merged=[];
+			while(isset($crr_schema['$ref'])){
+				$ref=$crr_schema['$ref'];
+				unset($crr_schema['$ref']);
+				if(isset($merged[$ref])){break;}
+				$crr_schema=array_merge_recursive(
+					$this->get_item($this->resolve_path($ref,$path)),
+					$crr_schema
+				);
+				$merged[$ref]=true;
+			}
 			$this->set_item($path,$crr_schema);
 		}
 		foreach($crr_schema as $key=>$val){
@@ -43,6 +50,9 @@ class schema{
 	public static function get_default_values_from_schema($schema,$callback=null){
 		if(isset($schema['oneOf'])){
 			$schema=array_merge_recursive($schema,$schema['oneOf'][0]);
+		}
+		if(isset($schema['anyOf'])){
+			$schema=array_merge_recursive($schema,$schema['anyOf'][0]);
 		}
 		if(isset($schema['allOf'])){
 			$schema=array_merge_recursive($schema,call_user_func_array('array_merge_recursive',$schema['allOf']));
