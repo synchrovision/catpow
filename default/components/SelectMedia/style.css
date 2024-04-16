@@ -1,0 +1,12 @@
+.SelectMedia.is-type-video, .SelectMedia.is-type-image {
+  width: 5rem;
+  height: 3.75rem;
+  object-position: center;
+  object-fit: cover;
+  border-style: solid;
+  border-width: 0.25rem;
+  border-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+  cursor: pointer;
+}
+/*# sourceMappingURL=./style.css.map */
