@@ -209,6 +209,9 @@
       if (schema2.enum != null && schema2.enum.length) {
         return typeof schema2.enum[0];
       }
+      if (schema2["@type"] != null) {
+        return "object";
+      }
     }, schema, rootSchema);
   };
 
