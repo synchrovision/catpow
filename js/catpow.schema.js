@@ -224,19 +224,26 @@
     if (cache.has(schema)) {
       return cache.get(schema);
     }
-    let resolvedSchema;
+    const resolvedSchema = {};
+    if (schema.hasOwnProperty("@type")) {
+      Object.assign(
+        resolvedSchema,
+        getResolvedSchema(
+          getSubSchema("#/$defs/" + schema["@type"], schema, rootSchema),
+          rootSchema
+        )
+      );
+    }
     if (schema.hasOwnProperty("$ref")) {
-      resolvedSchema = Object.assign(
-        {},
+      Object.assign(
+        resolvedSchema,
         getResolvedSchema(
           getSubSchema(schema.$ref, schema, rootSchema),
           rootSchema
-        ),
-        schema
+        )
       );
-    } else {
-      resolvedSchema = Object.assign({}, schema);
     }
+    Object.assign(resolvedSchema, schema);
     if (resolvedSchema.type == null) {
       resolvedSchema.type = getType(resolvedSchema, rootSchema);
     }
