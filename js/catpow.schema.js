@@ -218,6 +218,9 @@
   // ../js/catpow.schema/getResolvedSchema.jsx
   var cache = /* @__PURE__ */ new WeakMap();
   var getResolvedSchema = (schema, rootSchema) => {
+    if (schema == null) {
+      return {};
+    }
     if (rootSchema == null) {
       rootSchema = schema;
     }

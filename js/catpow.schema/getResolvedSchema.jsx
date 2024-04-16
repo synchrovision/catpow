@@ -6,6 +6,7 @@ import {getSubSchema} from './getSubSchema.jsx';
 const cache=new WeakMap();
 
 export const getResolvedSchema=(schema,rootSchema)=>{
+	if(schema==null){return {};}
 	if(rootSchema==null){rootSchema=schema;}
 	if(cache.has(schema)){return cache.get(schema);}
 	const resolvedSchema={};
