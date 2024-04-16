@@ -1,0 +1,61 @@
+@import "config/style_config.scss";
+
+.cp-news{
+	@include bnd((w:a 1000,mg:a,pd:20));
+	>.tabs{
+		@include bnd((pd:0,mg:0));
+		@include flx((w:n));
+		@include txt((l:n));
+		>.tab{
+			@include bnd((f:1 1 100,pd:8 0));
+			@include txt((a:c,p:16,h:1em,c:i));
+			@include trn((t:.25s));
+			@include bg((c:var(--label-color)));
+			@include usr((c:p));
+			&.is-tab-all{
+				--label-color:#{clr(a)};
+			}
+			&:not(.is-active){
+				@include bg((c:m));
+			}
+		}
+	}
+	>.contents{
+		>.items{
+			@include bnd((pd:20 0));
+			>.item{
+				@include bnd((pd:8 0));
+				@include flx((w:w,a:s,g:8));
+				@include bdr((p:b,s:s,w:1,c:t 1 .5));
+				>.label{
+					@include bnd((pd:8 4,w:100));
+					@include bg((c:var(--label-color)));
+					@include txt((a:c,p:14,h:1em,c:i));
+				}
+				>.date{
+					@include bnd((f:0 0 120,pd:6 4));
+					@include txt((p:.9em));
+				}
+				>.text{
+					@include bnd((f:1 1 200,pd:5 4));
+				}
+			}
+		}
+	}
+	&[x-cloak]{
+		>.tabs{
+			>.tab{
+				&.is-tab-all{
+					@include trn((gry:0%,o:1));
+				}
+			}
+		}
+		>.contents{
+			>.items{
+				&:not(.is-items-all){
+					@include bnd((d:n));
+				}
+			}
+		}
+	}
+}

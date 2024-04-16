@@ -4,7 +4,7 @@ div.DateSelect .value {
   padding: 0.3125rem;
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: #a2a2a2;
+  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 50),1);
   border-radius: 0.3125rem;
   cursor: pointer;
   text-align: center;

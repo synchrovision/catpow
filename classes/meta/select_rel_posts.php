@@ -70,6 +70,18 @@ class select_rel_posts extends select{
 			return array_key_exists($val,$addition)?$addition[$val]:reset($addition);
 		}
 	}
+	public static function loop($meta,$flags=0){
+		if($flags & self::INPUT_LOOP){return parent::loop($meta,$flags);}
+		$q=is_callable($meta->conf['value'])?$meta->conf['value']($meta):$meta->conf['value'];
+		if(is_string($q)){$post_type=$q;}
+		elseif(is_array($q)){$post_type=$q['post_type'];}
+		else{
+			if(is_object($q) and is_a($q,\cp::get_class_name('query','post'))){$q=$q->query;}
+			$post_type=$q->query_vars['post_type'];
+		}
+		$loop=\cp::$content->query('post/'.$post_type,['post__in'=>$meta->value]);
+		return $loop->loop();
+	}
 	
 	public static function get_selections($meta){
 		$q=is_callable($meta->conf['value'])?$meta->conf['value']($meta):$meta->conf['value'];

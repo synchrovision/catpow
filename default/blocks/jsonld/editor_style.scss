@@ -1,6 +1,6 @@
 @import 'admin_style_config.scss';
 
-#editor{
+.wp-site-blocks,#editor{
 	.wp-block-catpow-jsonld{
 		&-label{
 			@include flx((w:w,j:c,a:c));

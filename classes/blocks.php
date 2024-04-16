@@ -5,7 +5,7 @@ class blocks{
 	public static $deps=[
 		'editor_init'=>['wp-blocks','wp-i18n','wp-element','wp-editor','wp-plugins','wp-edit-post','catpow','catpow.colorTone','wpinfo'],
 		'editor_script'=>['wp-blocks','wp-i18n','wp-element','wp-editor','wp-plugins','wp-edit-post','catpow','catpow.colorTone','wpinfo'],
-		'editor_style'=>['wp-edit-blocks'],
+		'editor_style'=>['wp-edit-blocks','font_awesome'],
 		'view_script'=>['catpow'],
 		'view_style'=>[],
 		'front_script'=>['catpow'],

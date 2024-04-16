@@ -20,11 +20,11 @@ class style_config{
 		if(isset(static::$color_roles)){return static::$color_roles;}
 		return static::$color_roles=apply_filters('cp_color_roles',[
 			'background'=>['label'=>'背景色','default'=>'#ffffff','shorthand'=>'b','invert'=>'m'],
-			'sheet'=>['label'=>'強調背景色','default'=>'#dddddd','shorthand'=>'s','invert'=>'a','extend'=>true],
+			'sheet'=>['label'=>'強調背景色','default'=>'#F8F6F4','shorthand'=>'s','invert'=>'a','extend'=>true],
 			'text'=>['label'=>'文字色','default'=>'#666666','shorthand'=>'t','invert'=>'i'],
-			'main'=>['label'=>'基本色','default'=>'#888888','shorthand'=>'m','extend'=>true,'invert'=>'b'],
-			'accent'=>['label'=>'強調色','default'=>'#EE8800','shorthand'=>'a','extend'=>true,'invert'=>'s'],
-			'inside'=>['label'=>'反転文字色','default'=>'#000000','shorthand'=>'i','invert'=>'t'],
+			'main'=>['label'=>'基本色','default'=>'#443322','shorthand'=>'m','extend'=>true,'invert'=>'b'],
+			'accent'=>['label'=>'強調色','default'=>'#FF8800','shorthand'=>'a','extend'=>true,'invert'=>'s'],
+			'inside'=>['label'=>'反転文字色','default'=>'#ffffff','shorthand'=>'i','invert'=>'t'],
 			'light'=>['label'=>'照明色','default'=>'hsla(0,0%,100%,0.5)','shorthand'=>'lt','alphaEnabled'=>true],
 			'shade'=>['label'=>'陰色','default'=>'hsla(0,0%,0%,0.2)','shorthand'=>'sh','alphaEnabled'=>true],
 			'shadow'=>['label'=>'影色','default'=>'hsla(0,0%,0%,0.3)','shorthand'=>'shd','alphaEnabled'=>true],
@@ -244,6 +244,32 @@ class style_config{
 			array_values(self::get_css_vars()['all']),
 			$css_code
 		);
+	}
+	public static function init_config_json(){
+		$colors=array_merge(
+			array_column(static::get_color_roles(),'default','shorthand'),
+			static::get_config_json('colors')
+		);
+		static::set_config_json('colors',$colors);
+		$tones=static::get_tones($colors);
+		foreach($tones as $key=>$tone){
+			foreach($tone as $k=>$v){
+				if($k!=='h' && $k!=='a')$tones[$key][$k].='%';
+			}
+		}
+		static::set_config_json('tones',$tones);
+		static::set_config_json('fonts',array_merge(
+			array_column(static::get_font_roles(),'default','shorthand'),
+			static::get_config_json('fonts')
+		));
+		static::set_config_json('weight',array_merge(
+			array_column(static::get_weight_roles(),'default','shorthand'),
+			static::get_config_json('weight')
+		));
+		static::set_config_json('size',array_merge(
+			array_column(static::get_size_roles(),'default','shorthand'),
+			static::get_config_json('size')
+		));
 	}
 	public static function update_config_json($domain,$data){
 		if($domain==='colors'){
