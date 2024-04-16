@@ -58,6 +58,17 @@ class schema{
 		}
 		return $values;
 	}
+	public static function merge_schema($schema,$schema_to_merge){
+		foreach($schema_to_merge as $key=>$val){
+			if(is_array($val) && is_array($shcema[$key]??null)){
+				$shcema[$key]=array_merge($shcema[$key],$val);
+			}
+			else{
+				$shcema[$key]=$val;
+			}
+		}
+		return $schema;
+	}
 	public static function resolve_path($path,$base_path){
 		if(preg_match('/^#?\//',$path)){
 			$path=preg_replace('/^#?\//','',$path);
