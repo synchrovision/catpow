@@ -1,5 +1,5 @@
 ﻿Catpow.SearchSelect=(props)=>{
-	const {defaultLabel,onChange,col=5,multiple=true,placeholder='Search'}=props;
+	const {defaultLabel='─',onChange,col=5,multiple=true,placeholder='Search'}=props;
 	const {useState,useReducer,useCallback,useMemo,useRef,useEffect}=wp.element;
 	const {bem}=Catpow.util;
 	const classes=bem('SearchSelect');
@@ -74,7 +74,12 @@
 			<div className={classes.selected()} onClick={()=>setOpen(true)}>
 				<ul className={classes.selected.items()}>
 					{(selectedLabels && selectedLabels.length)?(
-						selectedLabels.map((label)=><li className={classes.selected.items.item()} key={label}>{label}</li>)
+						selectedLabels.map((label)=>(
+							<li className={classes.selected.items.item()} key={label}>
+								{label}
+								<span className={classes.selected.items.item.button()} onClick={()=>toggleLabel(label)}></span>
+							</li>
+						))
 					):(
 						<li className={classes.selected.items.item()}>{defaultLabel}</li>
 					)}

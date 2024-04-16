@@ -1,7 +1,7 @@
 (() => {
   // ../components/SearchSelect/component.jsx
   Catpow.SearchSelect = (props) => {
-    const { defaultLabel, onChange, col = 5, multiple = true, placeholder = "Search" } = props;
+    const { defaultLabel = "\u2500", onChange, col = 5, multiple = true, placeholder = "Search" } = props;
     const { useState, useReducer, useCallback, useMemo, useRef, useEffect } = wp.element;
     const { bem } = Catpow.util;
     const classes = bem("SearchSelect");
@@ -70,7 +70,7 @@
       return cache.current[search2] = search2 ? labels.filter((label) => label.indexOf(search2) >= 0) : labels;
     }, [cache, labelValueMap]);
     const currentLabels = useMemo(() => getLabelsForSearch(search), [getLabelsForSearch, search]);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.selected(), onClick: () => setOpen(true) }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes.selected.items() }, selectedLabels && selectedLabels.length ? selectedLabels.map((label) => /* @__PURE__ */ wp.element.createElement("li", { className: classes.selected.items.item(), key: label }, label)) : /* @__PURE__ */ wp.element.createElement("li", { className: classes.selected.items.item() }, defaultLabel))), /* @__PURE__ */ wp.element.createElement(Catpow.Popup, { open, onClose: () => open && setOpen(false) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.search() }, /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.selected(), onClick: () => setOpen(true) }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes.selected.items() }, selectedLabels && selectedLabels.length ? selectedLabels.map((label) => /* @__PURE__ */ wp.element.createElement("li", { className: classes.selected.items.item(), key: label }, label, /* @__PURE__ */ wp.element.createElement("span", { className: classes.selected.items.item.button(), onClick: () => toggleLabel(label) }))) : /* @__PURE__ */ wp.element.createElement("li", { className: classes.selected.items.item() }, defaultLabel))), /* @__PURE__ */ wp.element.createElement(Catpow.Popup, { open, onClose: () => open && setOpen(false) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.search() }, /* @__PURE__ */ wp.element.createElement(
       "input",
       {
         type: "text",
