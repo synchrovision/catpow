@@ -405,13 +405,13 @@ class CP{
 		if(wp_style_is($src) || isset($missed[$src])){return false;}
 		if(wp_style_is($src,'registered')){return true;}
 		if(empty($file=self::get_file_path_url($src,$flag))){$missed[$src]=1;return false;}
-		if(current_user_can('edit_themes')){scss::compile([substr($src,0,-4)]);}
 		if(empty($ver)){$ver=filemtime(key($file));}
 		wp_register_style($src,reset($file),$deps,$ver,$media);
 		return true;
 	}
 	public static function enqueue_style($src=false,$deps=array(),$flag=0733,$ver=false,$media=false){
 		if(!self::register_style($src,$deps,$flag,$ver,$media)){return false;}
+		if(current_user_can('edit_themes')){scss::compile([substr($src,0,-4)]);}
 		wp_enqueue_style($src);
 		return true;
 	}
