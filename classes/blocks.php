@@ -209,15 +209,25 @@ class blocks{
 					case 'php':
 						if($fname==='deps'){
 							foreach(cp::get_file_paths('blocks/'.$file_name) as $file_path){
-								$deps=include $file_path;
+								$deps=(function($f){return include $f;})($file_path);
 								foreach ([
 									'editor_script'=>'js','editor_style'=>'css',
 									'view_script'=>'js','view_style'=>'css',
 									'script'=>'js','style'=>'css'
 								] as $handler=>$type){
 									if(!empty($deps[$handler])){
+										$handles=[];
+										foreach($deps[$handler] as $dep){
+											if(is_array($dep)){
+												$data[$type][$dep[0]]=$dep;
+												$handles[]=$dep[0];
+											}
+											else{
+												$handles[]=$dep;
+											}
+										}
 										$data[$type]["blocks/{$block_name}/{$handler}.{$type}"][2]=array_merge(
-											$data[$type]["blocks/{$block_name}/{$handler}.{$type}"][2]??[],$deps[$handler]
+											$data[$type]["blocks/{$block_name}/{$handler}.{$type}"][2]??[],$handles
 										);
 									}
 								}
