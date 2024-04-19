@@ -546,6 +546,71 @@ class CP{
 		if($f=self::get_file_path('components/'.$name.'/init.php')){include $f;}
 		$done[$name]=1;
 	}
+	public static function get_components_deps($names){
+		$deps=['js'=>[],'css'=>[]];
+		foreach((array)$names as $name){
+			$sub_deps=self::get_component_deps($name);
+			$deps['js']=array_merge($deps['js'],$sub_deps['js']);
+			$deps['css']=array_merge($deps['css'],$sub_deps['css']);
+		}
+		return $deps;
+	}
+	public static function get_component_deps($name){
+		static $cache=[];
+		if(isset($cache[$name])){return $cache[$name];}
+		$js_handle='components/'.$name.'/component.js';
+		$css_handle='components/'.$name.'/style.css';
+		$deps=['js'=>[],'css'=>[]];
+		if($js_url=self::get_file_url($js_handle,0773)){
+			$deps['js'][$js_handle]=[$js_handle,$js_url,['wp-i18n','wp-api-fetch','wp-element','catpow']];
+		}
+		if($css_url=self::get_file_url($css_handle,0773)){
+			$deps['css'][$css_handle]=[$css_handle,$css_url,[]];
+		}
+		if($f=self::get_file_path('components/'.$name.'/deps.php')){
+			include $f;
+			if(!empty($useScripts)){
+				if(isset($deps['js'][$js_handle])){
+					$deps['js'][$js_handle][2]=array_merge($deps['js'][$js_handle][2],$useScripts);
+				}
+				else{
+					foreach($useScripts as $dep){
+						$handle=is_array($dep)?$dep[0]:$dep;
+						$deps['js'][$handle]=$dep;
+					}
+				}
+			}
+			if(!empty($useStyles)){
+				if(isset($deps['css'][$css_handle])){
+					$deps['css'][$css_handle][2]=array_merge($deps['css'][$css_handle][2],$useStyles);
+				}
+				else{
+					foreach($$useStyles as $dep){
+						$handle=is_array($dep)?$dep[0]:$dep;
+						$deps['css'][$handle]=$dep;
+					}
+				}
+			}
+			if(!empty($useComponents)){
+				$sub_deps=self::get_components_deps($useComponents);
+				$deps['js']=array_merge($deps['js'],$sub_deps['js']);
+				$deps['css']=array_merge($deps['css'],$sub_deps['css']);
+			}
+			if(!empty($useStores)){
+				foreach($useStores as $useStore){
+					$sub_deps=self::get_store_deps($useStore);
+					$deps['js']=array_merge($deps['js'],$sub_deps['js']);
+				}
+			}
+		}
+		if(strpos($name,'/')>0){
+			$useComponent=dirname($name);
+			$sub_deps=self::get_component_deps($useComponent);
+			$deps['js']=array_merge($deps['js'],$sub_deps['js']);
+			$deps['css']=array_merge($deps['css'],$sub_deps['css']);
+		}
+		return $cache[$name]=$deps;
+	}
 	public static function use_store($name){
 		static $done=[];
 		if(isset($done[$name])){return false;}
@@ -562,6 +627,19 @@ class CP{
 		self::enqueue_script('stores/'.$name.'/store.js',$deps);
 		self::set_script_translations('stores/'.$name.'/store.js');
 		$done[$name]=1;
+	}
+	public static function get_store_deps($name){
+		static $cache=[];
+		if(isset($cache[$name])){return $cache[$name];}
+		return $cache[$name]=[
+			'js'=>[
+				[
+					'stores/'.$name.'/store.js',
+					self::get_file_url('stores/'.$name.'/store.js',0773),
+					['wp-data','wp-api-fetch','catpow']
+				]
+			]
+		];
 	}
 	
 	/*post*/
