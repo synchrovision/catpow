@@ -129,8 +129,8 @@
     }
     params.refStack.set(schema, true);
     if (schema.allOf != null) {
-      for (let i in schema.allOf) {
-        const result2 = find(callback, schema.allOf[i], rootSchema, params);
+      for (let i2 in schema.allOf) {
+        const result2 = find(callback, schema.allOf[i2], rootSchema, params);
         if (result2 != null) {
           return result2;
         }
@@ -138,16 +138,16 @@
     }
     if (params.proactive) {
       if (schema.anyOf != null) {
-        for (let i in schema.anyOf) {
-          const result2 = find(callback, schema.anyOf[i], rootSchema, params);
+        for (let i2 in schema.anyOf) {
+          const result2 = find(callback, schema.anyOf[i2], rootSchema, params);
           if (result2 != null) {
             return result2;
           }
         }
       }
       if (schema.oneOf != null) {
-        for (let i in schema.oneOf) {
-          const result2 = find(callback, schema.oneOf[i], rootSchema, params);
+        for (let i2 in schema.oneOf) {
+          const result2 = find(callback, schema.oneOf[i2], rootSchema, params);
           if (result2 != null) {
             return result2;
           }
@@ -164,8 +164,8 @@
       }
       const { dependentSchemas } = extractDependencies(schema);
       if (dependentSchemas) {
-        for (let i in dependentSchemas) {
-          const result2 = find(callback, dependentSchemas[i], rootSchema, params);
+        for (let i2 in dependentSchemas) {
+          const result2 = find(callback, dependentSchemas[i2], rootSchema, params);
           if (result2 != null) {
             return result2;
           }
@@ -281,277 +281,6 @@
     }, schema, rootSchema, { proactive: false });
     cache2.set(schema, mergedSchema);
     return mergedSchema;
-  };
-
-  // ../js/catpow.schema/mergeSchema.jsx
-  var mergeSchema = (targetSchema, schema, rootSchema, params = {}) => {
-    const { extend = false, value = null } = params;
-    const forValue = params.hasOwnProperty("value");
-    for (let key2 in schema) {
-      if (!reservedKeys[key2] && targetSchema[key2] == null) {
-        targetSchema[key2] = schema[key2];
-      }
-    }
-    if (schema.const != null) {
-      if (extend) {
-        if (targetSchema.enum !== null) {
-          if (!targetSchema.enum) {
-            targetSchema.enum = [];
-          }
-          targetSchema.enum.push(schema.const);
-        }
-      } else {
-        targetSchema.const = schema.const;
-      }
-    } else if (extend && targetSchema.const != null) {
-      targetSchema.const = null;
-    }
-    if (schema.enum != null) {
-      if (extend) {
-        if (targetSchema.enum == null) {
-          if (targetSchema.const != null) {
-            targetSchema.enum = schema.enum.slice();
-            targetSchema.enum.push(targetSchema.const);
-            targetSchema.const = null;
-          }
-        } else {
-          targetSchema.enum.push.apply(
-            targetSchema.enum,
-            schema.enum.filter((val) => !targetSchema.enum.includes(val))
-          );
-        }
-      } else {
-        if (targetSchema.enum == null) {
-          targetSchema.enum = schema.enum.slice();
-        } else {
-          targetSchema.enum = targetSchema.enum.filter((val) => schema.enum.includes(val));
-        }
-      }
-    } else if (extend && targetSchema.enum != null) {
-      targetSchema.enum = null;
-    }
-    for (let key2 in minMaxKeys) {
-      if (schema[key2] != null) {
-        targetSchema[key2] = Math[minMaxKeys[key2] == extend ? "max" : "min"](targetSchema[key2], schema[key2]);
-      } else if (extend && targetSchema[key2] != null) {
-        targetSchema[key2] = null;
-      }
-    }
-    if (schema.required != null) {
-      if (extend) {
-        if (targetSchema.required !== null) {
-          if (targetSchema.required == null) {
-            targetSchema.required = schema.required.slice();
-          } else {
-            targetSchema.required = targetSchema.required.filter((val) => schema.required.includes(val));
-          }
-        }
-      } else {
-        if (targetSchema.required == null) {
-          targetSchema.required = schema.required.slice();
-        } else {
-          targetSchema.required.push.apply(
-            targetSchema.required,
-            schema.required.filter((val) => !targetSchema.required.includes(val))
-          );
-        }
-      }
-    } else if (extend && targetSchema.required != null) {
-      targetSchema.required = null;
-    }
-    if (schema.properties != null) {
-      if (targetSchema.properties == null) {
-        targetSchema.properties = {};
-      }
-      for (let key2 in schema.properties) {
-        const propSchema = forValue ? getMergedSchemaForValue(value || value[key2], schema.properties[key2], rootSchema) : getMergedSchema(schema.properties[key2], rootSchema);
-        if (targetSchema.properties[key2] != null) {
-          mergeSchema(targetSchema.properties[key2], propSchema, rootSchema, params);
-        } else {
-          targetSchema.properties[key2] = propSchema;
-        }
-      }
-    }
-    if (schema.items != null) {
-      if (targetSchema.items == null) {
-        targetSchema.items = getMergedSchema(schema.items, rootSchema);
-        if (forValue && value != null) {
-          targetSchema.itemsForValue = [];
-          for (let i in value) {
-            targetSchema.itemsForValue.push(
-              getMergedSchemaForValue(value[i], schema.items, rootSchema)
-            );
-          }
-        }
-      }
-    }
-    const conditionalSchemas = [];
-    if (schema.oneOf != null) {
-      conditionalSchemas.push.apply(
-        conditionalSchemas,
-        forValue ? getMatchedSchemas(value, schema.oneOf, rootSchema, { ignoreRequired: true }) : schema.oneOf
-      );
-    }
-    if (schema.anyOf != null) {
-      conditionalSchemas.push.apply(
-        conditionalSchemas,
-        forValue ? getMatchedSchemas(value, schema.anyOf, rootSchema, { ignoreRequired: true }) : schema.anyOf
-      );
-    }
-    const { dependentSchemas } = extractDependencies(schema);
-    if (dependentSchemas != null) {
-      if (forValue) {
-        for (let key2 in dependentSchemas) {
-          if (value[key2] != null) {
-            conditionalSchemas.push(dependentSchemas[key2]);
-          }
-        }
-      } else {
-        conditionalSchemas.push.apply(
-          conditionalSchemas,
-          Object.values(dependentSchemas)
-        );
-      }
-    }
-    if (conditionalSchemas.length) {
-      const mergedConditionalSchema = {};
-      for (let i in conditionalSchemas) {
-        if (forValue) {
-          mergeSchema(
-            mergedConditionalSchema,
-            getMergedSchemaForValue(value, conditionalSchemas[i], rootSchema),
-            rootSchema,
-            { extend: true, value }
-          );
-        } else {
-          mergeSchema(
-            mergedConditionalSchema,
-            getMergedSchemaForValue(value, conditionalSchemas[i], rootSchema),
-            rootSchema,
-            { extend: true }
-          );
-        }
-      }
-      mergeSchema(targetSchema, mergedConditionalSchema, rootSchema, params);
-    }
-  };
-
-  // ../js/catpow.schema/mergeSchemas.jsx
-  var mergeSchemas = (schemas, rootSchema, params = {}) => {
-    const mergedSchema = Object.assign({}, schemas[0]);
-    schemas.slice(1).forEach((schema) => mergeSchema(mergedSchema, schema, rootSchema, params));
-    return mergedSchema;
-  };
-
-  // ../js/catpow.schema/getDefaultValue.jsx
-  var getDefaultValue = (schema, rootSchema) => {
-    const type = getType(schema, rootSchema);
-    schema = getResolvedSchema(schema, rootSchema);
-    if (schema.default != null) {
-      return schema.default;
-    }
-    if (schema.const != null) {
-      return schema.const;
-    }
-    if (schema.enum != null) {
-      return schema.enum[0];
-    }
-    switch (type) {
-      case "null": {
-        return null;
-      }
-      case "boolean": {
-        return false;
-      }
-      case "integer":
-      case "number": {
-        if (schema.minimum != null) {
-          const unit2 = schema.multipleOf != null ? schema.multipleOf : 1;
-          if (schema.exclusiveMinimum === true) {
-            return schema.minimum + unit2;
-          }
-          return schema.minimum;
-        }
-        if (schema.exclusiveMinimum != null) {
-          return schema.exclusiveMinimum + unit;
-        }
-        return 0;
-      }
-      case "string": {
-        return "";
-      }
-    }
-    return null;
-  };
-
-  // ../js/catpow.schema/getErrorMessageFormat.jsx
-  var getErrorMessageFormat = (params) => {
-    const { invalidBy, schema } = params;
-    if (schema.message != null) {
-      return schema.message;
-    }
-    switch (invalidBy) {
-      case "type":
-        return "\u5165\u529B\u5024\u306E\u578B\u304C\u4E00\u81F4\u3057\u307E\u305B\u3093";
-      case "minimum":
-        return schema.exclusiveMinimum ? "{minimum}\u3088\u308A\u5927\u304D\u3044\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044" : "{minimum}\u4EE5\u4E0A\u306E\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
-      case "exclusiveMinimum":
-        return "{exclusiveMinimum}\u3088\u308A\u5927\u304D\u3044\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
-      case "maximum":
-        return schema.exclusiveMaximum ? "{maximum}\u3088\u308A\u5C0F\u3055\u3044\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044" : "{maximum}\u4EE5\u4E0B\u306E\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
-      case "exclusiveMaximum":
-        return "{exclusiveMaximum}\u3088\u308A\u5C0F\u3055\u3044\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
-      case "multipleOf":
-        return "{multipleOf}\u306E\u500D\u6570\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
-      case "pattern":
-        return "\u5165\u529B\u5F62\u5F0F\u304C\u4E00\u81F4\u3057\u307E\u305B\u3093";
-      case "minLength":
-        return "{minLength}\u6587\u5B57\u4EE5\u4E0A\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
-      case "maxLength":
-        return "{maxLength}\u6587\u5B57\u4EE5\u4E0B\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
-      case "required":
-      case "dependentRequired":
-        return "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
-      case "additionalProperties":
-        return "\u898F\u5B9A\u306E\u30D7\u30ED\u30D1\u30C6\u30A3\u4EE5\u5916\u5165\u529B\u3067\u304D\u307E\u305B\u3093";
-      case "minProperties":
-        return "{minProperties}\u4EE5\u4E0A\u306E\u30D7\u30ED\u30D1\u30C6\u30A3\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
-      case "maxProperties":
-        return "{maxProperties}\u4EE5\u4E0B\u306E\u30D7\u30ED\u30D1\u30C6\u30A3\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
-      case "minItems":
-        return "{minItems}\u4EE5\u4E0A\u306E\u30A2\u30A4\u30C6\u30E0\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
-      case "maxItems":
-        return "{maxItems}\u4EE5\u4E0B\u306E\u30A2\u30A4\u30C6\u30E0\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
-      case "contains":
-        return "\u898F\u5B9A\u306E\u5F62\u5F0F\u306E\u30A2\u30A4\u30C6\u30E0\u3092\u542B\u3081\u3066\u304F\u3060\u3055\u3044";
-      case "minContains":
-        return "\u898F\u5B9A\u306E\u5F62\u5F0F\u306E\u30A2\u30A4\u30C6\u30E0\u3092{maxItems}\u4EE5\u4E0A\u542B\u3081\u3066\u304F\u3060\u3055\u3044";
-      case "maxContains":
-        return "\u898F\u5B9A\u306E\u5F62\u5F0F\u306E\u30A2\u30A4\u30C6\u30E0\u306F{maxContains}\u4EE5\u4E0B\u306B\u3057\u3066\u304F\u3060\u3055\u3044";
-      case "uniqueItems":
-        return "\u5024\u304C\u91CD\u8907\u3057\u3066\u3044\u307E\u3059";
-    }
-    return null;
-  };
-
-  // ../js/catpow.schema/getErrorMessage.jsx
-  var getErrorMessage = (params) => {
-    const format = getErrorMessageFormat(params);
-    if (format == null) {
-      return null;
-    }
-    return format.replace(/{\w+}/g, (matches) => {
-      const key2 = matches.slice(1, -1);
-      if (params.schema[key2] != null) {
-        return params.schema[key2];
-      }
-      return matches;
-    });
-  };
-
-  // ../js/catpow.schema/getMatchedSchemas.jsx
-  var getMatchedSchemas2 = (value, schemas, rootSchema, params) => {
-    return schemas.filter((schema) => test(value, schema, rootSchema, params));
   };
 
   // ../js/catpow.schema/test.jsx
@@ -725,7 +454,7 @@
       }
     }
     if (schema.oneOf != null) {
-      const matchedSchemaLength = getMatchedSchemas2(value, schema.oneOf, rootSchema).length;
+      const matchedSchemaLength = getMatchedSchemas(value, schema.oneOf, rootSchema).length;
       if (matchedSchemaLength !== 1) {
         return cb2("oneOf", { matchedSchemaLength });
       }
@@ -744,6 +473,303 @@
       }
     }
     return true;
+  };
+
+  // ../js/catpow.schema/getMatchedSchemas.jsx
+  var getMatchedSchemas = (value, schemas, rootSchema, params) => {
+    return schemas.filter((schema) => test(value, schema, rootSchema, params));
+  };
+
+  // ../js/catpow.schema/mergeSchema.jsx
+  var mergeSchema = (targetSchema, schema, rootSchema, params = {}) => {
+    const { extend = false, initialize = true, value = null } = params;
+    const forValue = params.hasOwnProperty("value");
+    const includeConditional = forValue || params.includeConditional;
+    for (let key2 in schema) {
+      if (!reservedKeys[key2] && targetSchema[key2] == null) {
+        targetSchema[key2] = schema[key2];
+      }
+    }
+    if (schema.const != null) {
+      if (extend) {
+        if (targetSchema.enum != null) {
+          if (!targetSchema.enum) {
+            targetSchema.enum = [];
+          }
+          if (!targetSchema.enum.includes(schema.const)) {
+            targetSchema.enum.push(schema.const);
+          }
+        } else if (initialize) {
+          targetSchema.const = schema.const;
+        }
+      } else {
+        targetSchema.const = schema.const;
+      }
+    } else {
+      if (extend && targetSchema.const != null) {
+        targetSchema.const = null;
+      }
+      if (schema.enum != null) {
+        if (extend) {
+          if (targetSchema.enum == null) {
+            if (targetSchema.const != null) {
+              targetSchema.enum = schema.enum.slice();
+              if (!targetSchema.enum.includes(targetSchema.cons)) {
+                targetSchema.enum.push(targetSchema.const);
+              }
+              targetSchema.const = null;
+            } else if (initialize) {
+              targetSchema.enum = schema.enum.slice();
+            }
+          } else {
+            targetSchema.enum.push.apply(
+              targetSchema.enum,
+              schema.enum.filter((val) => !targetSchema.enum.includes(val))
+            );
+          }
+        } else {
+          if (targetSchema.enum == null) {
+            targetSchema.enum = schema.enum.slice();
+          } else {
+            targetSchema.enum = targetSchema.enum.filter((val) => schema.enum.includes(val));
+          }
+        }
+      } else if (extend && targetSchema.enum != null) {
+        targetSchema.enum = null;
+      }
+    }
+    for (let key2 in minMaxKeys) {
+      if (schema[key2] != null) {
+        if (targetSchema[key2] != null) {
+          targetSchema[key2] = Math[minMaxKeys[key2] == extend ? "max" : "min"](targetSchema[key2], schema[key2]);
+        } else {
+          if (initialize) {
+            targetSchema[key2] = schema[key2];
+          }
+        }
+      } else if (extend && targetSchema[key2] != null) {
+        targetSchema[key2] = null;
+      }
+    }
+    if (schema.required != null) {
+      if (extend) {
+        if (targetSchema.required !== null) {
+          if (targetSchema.required == null) {
+            targetSchema.required = schema.required.slice();
+          } else {
+            targetSchema.required = targetSchema.required.filter((val) => schema.required.includes(val));
+          }
+        }
+      } else {
+        if (targetSchema.required == null) {
+          targetSchema.required = schema.required.slice();
+        } else {
+          targetSchema.required.push.apply(
+            targetSchema.required,
+            schema.required.filter((val) => !targetSchema.required.includes(val))
+          );
+        }
+      }
+    } else if (extend && targetSchema.required != null) {
+      targetSchema.required = null;
+    }
+    if (schema.properties != null) {
+      if (targetSchema.properties == null) {
+        targetSchema.properties = {};
+      }
+      for (let key2 in schema.properties) {
+        const propParams = Object.assign({}, params);
+        if (forValue) {
+          propParams.value = propParams.value[key2];
+        }
+        if (targetSchema.properties[key2] != null) {
+          mergeSchema(targetSchema.properties[key2], schema.properties[key2], rootSchema, propParams);
+        } else {
+          const propSchema = {};
+          mergeSchema(propSchema, schema.properties[key2], rootSchema, propParams);
+          targetSchema.properties[key2] = propSchema;
+        }
+      }
+    }
+    if (schema.items != null) {
+      if (targetSchema.items == null) {
+        targetSchema.items = getMergedSchema(schema.items, rootSchema);
+        if (forValue && value != null) {
+          targetSchema.itemsForValue = [];
+          for (let i2 in value) {
+            targetSchema.itemsForValue.push(
+              getMergedSchemaForValue(value[i2], schema.items, rootSchema)
+            );
+          }
+        }
+      }
+    }
+    if (!includeConditional) {
+      return targetSchema;
+    }
+    const conditionalSchemas = [];
+    if (schema.oneOf != null) {
+      conditionalSchemas.push.apply(
+        conditionalSchemas,
+        forValue ? getMatchedSchemas(value, schema.oneOf, rootSchema, { ignoreRequired: true }) : schema.oneOf
+      );
+    }
+    if (schema.anyOf != null) {
+      conditionalSchemas.push.apply(
+        conditionalSchemas,
+        forValue ? getMatchedSchemas(value, schema.anyOf, rootSchema, { ignoreRequired: true }) : schema.anyOf
+      );
+    }
+    const { dependentSchemas } = extractDependencies(schema);
+    if (dependentSchemas != null) {
+      if (forValue) {
+        for (let key2 in dependentSchemas) {
+          if (value[key2] != null) {
+            conditionalSchemas.push(dependentSchemas[key2]);
+          }
+        }
+      } else {
+        conditionalSchemas.push.apply(
+          conditionalSchemas,
+          Object.values(dependentSchemas)
+        );
+      }
+    }
+    if (conditionalSchemas.length) {
+      const mergedConditionalSchema = {};
+      for (let i2 in conditionalSchemas) {
+        if (forValue) {
+          mergeSchema(
+            mergedConditionalSchema,
+            getMergedSchemaForValue(value, conditionalSchemas[i2], rootSchema),
+            rootSchema,
+            { extend: true, value }
+          );
+        } else {
+          mergeSchema(
+            mergedConditionalSchema,
+            getMergedSchemaForValue(value, conditionalSchemas[i2], rootSchema),
+            rootSchema,
+            { extend: true }
+          );
+        }
+      }
+      mergeSchema(targetSchema, conditionalSchemas[i], rootSchema, params);
+    }
+    return targetSchema;
+  };
+
+  // ../js/catpow.schema/mergeSchemas.jsx
+  var mergeSchemas = (schemas, rootSchema, params = {}) => {
+    const mergedSchema = {};
+    schemas.forEach((schema) => mergeSchema(mergedSchema, schema, rootSchema, params));
+    return mergedSchema;
+  };
+
+  // ../js/catpow.schema/getDefaultValue.jsx
+  var getDefaultValue = (schema, rootSchema) => {
+    const type = getType(schema, rootSchema);
+    schema = getResolvedSchema(schema, rootSchema);
+    if (schema.default != null) {
+      return schema.default;
+    }
+    if (schema.const != null) {
+      return schema.const;
+    }
+    if (schema.enum != null) {
+      return schema.enum[0];
+    }
+    switch (type) {
+      case "null": {
+        return null;
+      }
+      case "boolean": {
+        return false;
+      }
+      case "integer":
+      case "number": {
+        if (schema.minimum != null) {
+          const unit2 = schema.multipleOf != null ? schema.multipleOf : 1;
+          if (schema.exclusiveMinimum === true) {
+            return schema.minimum + unit2;
+          }
+          return schema.minimum;
+        }
+        if (schema.exclusiveMinimum != null) {
+          return schema.exclusiveMinimum + unit;
+        }
+        return 0;
+      }
+      case "string": {
+        return "";
+      }
+    }
+    return null;
+  };
+
+  // ../js/catpow.schema/getErrorMessageFormat.jsx
+  var getErrorMessageFormat = (params) => {
+    const { invalidBy, schema } = params;
+    if (schema.message != null) {
+      return schema.message;
+    }
+    switch (invalidBy) {
+      case "type":
+        return "\u5165\u529B\u5024\u306E\u578B\u304C\u4E00\u81F4\u3057\u307E\u305B\u3093";
+      case "minimum":
+        return schema.exclusiveMinimum ? "{minimum}\u3088\u308A\u5927\u304D\u3044\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044" : "{minimum}\u4EE5\u4E0A\u306E\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "exclusiveMinimum":
+        return "{exclusiveMinimum}\u3088\u308A\u5927\u304D\u3044\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "maximum":
+        return schema.exclusiveMaximum ? "{maximum}\u3088\u308A\u5C0F\u3055\u3044\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044" : "{maximum}\u4EE5\u4E0B\u306E\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "exclusiveMaximum":
+        return "{exclusiveMaximum}\u3088\u308A\u5C0F\u3055\u3044\u6570\u5024\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "multipleOf":
+        return "{multipleOf}\u306E\u500D\u6570\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "pattern":
+        return "\u5165\u529B\u5F62\u5F0F\u304C\u4E00\u81F4\u3057\u307E\u305B\u3093";
+      case "minLength":
+        return "{minLength}\u6587\u5B57\u4EE5\u4E0A\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "maxLength":
+        return "{maxLength}\u6587\u5B57\u4EE5\u4E0B\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "required":
+      case "dependentRequired":
+        return "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "additionalProperties":
+        return "\u898F\u5B9A\u306E\u30D7\u30ED\u30D1\u30C6\u30A3\u4EE5\u5916\u5165\u529B\u3067\u304D\u307E\u305B\u3093";
+      case "minProperties":
+        return "{minProperties}\u4EE5\u4E0A\u306E\u30D7\u30ED\u30D1\u30C6\u30A3\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "maxProperties":
+        return "{maxProperties}\u4EE5\u4E0B\u306E\u30D7\u30ED\u30D1\u30C6\u30A3\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "minItems":
+        return "{minItems}\u4EE5\u4E0A\u306E\u30A2\u30A4\u30C6\u30E0\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "maxItems":
+        return "{maxItems}\u4EE5\u4E0B\u306E\u30A2\u30A4\u30C6\u30E0\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "contains":
+        return "\u898F\u5B9A\u306E\u5F62\u5F0F\u306E\u30A2\u30A4\u30C6\u30E0\u3092\u542B\u3081\u3066\u304F\u3060\u3055\u3044";
+      case "minContains":
+        return "\u898F\u5B9A\u306E\u5F62\u5F0F\u306E\u30A2\u30A4\u30C6\u30E0\u3092{maxItems}\u4EE5\u4E0A\u542B\u3081\u3066\u304F\u3060\u3055\u3044";
+      case "maxContains":
+        return "\u898F\u5B9A\u306E\u5F62\u5F0F\u306E\u30A2\u30A4\u30C6\u30E0\u306F{maxContains}\u4EE5\u4E0B\u306B\u3057\u3066\u304F\u3060\u3055\u3044";
+      case "uniqueItems":
+        return "\u5024\u304C\u91CD\u8907\u3057\u3066\u3044\u307E\u3059";
+    }
+    return null;
+  };
+
+  // ../js/catpow.schema/getErrorMessage.jsx
+  var getErrorMessage = (params) => {
+    const format = getErrorMessageFormat(params);
+    if (format == null) {
+      return null;
+    }
+    return format.replace(/{\w+}/g, (matches) => {
+      const key2 = matches.slice(1, -1);
+      if (params.schema[key2] != null) {
+        return params.schema[key2];
+      }
+      return matches;
+    });
   };
 
   // ../js/catpow.schema/sanitize.jsx
@@ -813,10 +839,18 @@
         }
         if (conditionalSchemaKeys[conditionalSchemaKey]) {
           for (let key2 in resolvedSchema[conditionalSchemaKey]) {
-            resolvedSchema[conditionalSchemaKey][key2] = resolveSchema(uri, resolvedSchema[conditionalSchemaKey][key2], { parent, isConditional: true });
+            resolvedSchema[conditionalSchemaKey][key2] = resolveSchema(
+              uri,
+              resolvedSchema[conditionalSchemaKey][key2],
+              { parent, isConditional: true }
+            );
           }
         } else {
-          resolvedSchema[conditionalSchemaKey] = resolveSchema(uri, resolvedSchema[conditionalSchemaKey], { parent, isConditional: true });
+          resolvedSchema[conditionalSchemaKey] = resolveSchema(
+            uri,
+            resolvedSchema[conditionalSchemaKey],
+            { parent, isConditional: true }
+          );
         }
       }
       const { dependentSchemas } = extractDependencies(resolvedSchema);
@@ -827,7 +861,11 @@
       }
       if (resolvedSchema.properties != null) {
         for (let key2 in resolvedSchema.properties) {
-          resolvedSchema.properties[key2] = resolveSchema(uri + "/" + key2, resolvedSchema.properties[key2], { parent: resolvedSchema });
+          resolvedSchema.properties[key2] = resolveSchema(
+            uri + "/" + key2,
+            resolvedSchema.properties[key2],
+            { parent: resolvedSchema }
+          );
         }
         if (resolvedSchema.required) {
           for (let key2 of resolvedSchema.required) {
@@ -839,11 +877,19 @@
       }
       if (resolvedSchema.prefixItems != null) {
         for (let index in resolvedSchema.prefixItems) {
-          resolvedSchema.prefixItems[index] = resolveSchema(uri + "/" + index, resolvedSchema.prefixItems[index], { parent: resolvedSchema });
+          resolvedSchema.prefixItems[index] = resolveSchema(
+            uri + "/" + index,
+            resolvedSchema.prefixItems[index],
+            { parent: resolvedSchema }
+          );
         }
       }
       if (resolvedSchema.items != null) {
-        resolvedSchema.items = resolveSchema(uri + "/$", resolvedSchema.items, { parent: resolvedSchema });
+        resolvedSchema.items = resolveSchema(
+          uri + "/$",
+          resolvedSchema.items,
+          { parent: resolvedSchema }
+        );
       }
       return resolvedSchema;
     };
@@ -888,24 +934,22 @@
       return true;
     };
     const walkDescendant = (agent, cb2) => {
-      if (cb2(agent) === false) {
-        return false;
-      }
-      agent.walkChildren((child) => walkDescendant(child, cb2));
-      return true;
+      agent.walkChildren((child) => {
+        if (cb2(child) !== false) {
+          walkDescendant(child, cb2);
+        }
+      });
     };
     const walkDescendantSchema = (agent, schema, cb2) => {
-      if (cb2(agent, schema) === false) {
-        return false;
-      }
       agent.walkChildren((child) => {
         for (let subSchema of child.matrix.schemas) {
           if (subSchema.parent === schema) {
-            walkDescendantSchema(child, subSchema, cb2);
+            if (cb2(child, subSchema) !== false) {
+              walkDescendantSchema(child, subSchema, cb2);
+            }
           }
         }
       });
-      return true;
     };
     const getUnlimietedSchema = (schema) => {
       const unlimitedSchema = Object.assign({}, schema);
@@ -921,11 +965,10 @@
     const getMatrix = (schemas) => {
       const updateHandlesList = [];
       schemas.slice().forEach((schema) => {
-        const test2 = (value, schema2) => test2(value, schema2, rootSchema);
         if (schema.if != null) {
           schemas.push(getUnlimietedSchema(schema.if));
           updateHandlesList.push((agent) => {
-            const isValid = test2(agent.getValue(), schema.if);
+            const isValid = test(agent.getValue(), schema.if, rootSchema);
             if (schema.then != null) {
               agent.setConditionalSchemaStatus(schema.then, isValid ? 3 : 0);
             }
@@ -935,22 +978,29 @@
           });
         }
         if (schema.allOf != null) {
-          Array.push.apply(schemas, schema.allOf);
+          schemas.push.apply(schemas, schema.allOf);
         }
         if (schema.anyOf != null) {
           schemas.push(mergeSchemasProxy(schema.anyOf, true));
         }
         if (schema.oneOf != null) {
+          schemas.push.apply(schemas, schema.oneOf);
           const keyPropertyName = getKeyPropertyName(schema.oneOf);
           updateHandlesList.push((agent) => {
-            const keyValue = agent.getValue()[keyPropertyName];
+            const keyValue = agent.properties[keyPropertyName].getValue();
             schema.oneOf.forEach((schema2) => {
-              agent.setConditionalSchemaStatus(schema2, test2(keyValue, schema2.properties[keyPropertyName]) ? 3 : 0);
+              agent.setConditionalSchemaStatus(
+                schema2,
+                test(keyValue, schema2.properties[keyPropertyName], rootSchema) ? 3 : 0
+              );
             });
           });
         }
         const { dependentRequired, dependentSchemas } = extractDependencies(schema);
         if (dependentSchemas != null) {
+          for (let name in dependentSchemas) {
+            schemas.push(dependentSchemas[name]);
+          }
           updateHandlesList.push((agent) => {
             const value = agent.getValue();
             for (let name in dependentSchemas) {
@@ -1091,8 +1141,8 @@
         walkChildren: (agent) => {
           return (cb2) => {
             if (agent.properties != null) {
-              for (let child of agent.properties) {
-                cb2(child);
+              for (let name in agent.properties) {
+                cb2(agent.properties[name]);
               }
             }
             if (agent.prefixItems != null) {
@@ -1176,13 +1226,18 @@
         },
         getMergedSchema: (agent) => {
           const cache3 = {};
-          return (status, extend = true) => {
-            const key2 = Array.from(agent.schemaStatus.values()).join("") + "-" + status + "-" + (extend ? "e" : "");
+          return (status = 1, extend = true) => {
+            const key2 = agent.getMergedSchemaKey(status, extend);
             if (cache3[key2] != null) {
               return cache3[key2];
             }
             cache3[key2] = mergeSchemasProxy(agent.getSchemas(status), extend);
             return cache3[key2];
+          };
+        },
+        getMergedSchemaKey: (agent) => {
+          return (status = 1, extend = true) => {
+            return Array.from(agent.schemaStatus.values()).join("") + "-" + status + (extend ? "-e" : "");
           };
         },
         getMergedSchemaForInput: (agent) => {
@@ -1213,6 +1268,10 @@
         },
         update: (agent) => {
           return () => {
+            updateHandles.get(agent.matrix)(agent);
+            if (agent.parent != null) {
+              agent.parent.update();
+            }
             agent.validate();
             if (!agent.isValid) {
               agent.trigger({ type: "error", bubbles: false });
@@ -1227,11 +1286,7 @@
             } else {
               agent.ref[agent.key] = agent.value;
             }
-            updateHandles.get(agent.matrix)(agent);
             agent.trigger({ type: "update", bubbles: false });
-            if (agent.parent != null) {
-              agent.parent.update();
-            }
           };
         },
         validate: (agent) => {
@@ -1343,9 +1398,11 @@
       agent.conditionalRequiredFlag = /* @__PURE__ */ new Map();
       agent.eventListeners = {};
       for (let schema of matrix.schemas) {
-        agent.schemaStatus.set(schema, 3);
         if (schema.isConditional) {
-          agent.conditionalSchemaStatus.set(schema, 3);
+          agent.schemaStatus.set(schema, 0);
+          agent.conditionalSchemaStatus.set(schema, 0);
+        } else {
+          agent.schemaStatus.set(schema, parent ? parent.getSchemaStatus(schema.parent) : 3);
         }
       }
       if (matrix.properties != null) {
@@ -1394,7 +1451,7 @@
     getDefaultValue: () => getDefaultValue,
     getErrorMessage: () => getErrorMessage,
     getErrorMessageFormat: () => getErrorMessageFormat,
-    getMatchedSchemas: () => getMatchedSchemas2,
+    getMatchedSchemas: () => getMatchedSchemas,
     getMergedSchema: () => getMergedSchema,
     getMergedSchemaForValue: () => getMergedSchemaForValue,
     getPrimaryPropertyName: () => getPrimaryPropertyName,

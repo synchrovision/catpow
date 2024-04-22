@@ -19,11 +19,17 @@ export const main=(rootSchema)=>{
 			if(resolvedSchema[conditionalSchemaKey]==null){continue;}
 			if(conditionalSchemaKeys[conditionalSchemaKey]){
 				for(let key in resolvedSchema[conditionalSchemaKey]){
-					resolvedSchema[conditionalSchemaKey][key]=resolveSchema(uri,resolvedSchema[conditionalSchemaKey][key],{parent,isConditional:true});
+					resolvedSchema[conditionalSchemaKey][key]=resolveSchema(
+						uri,resolvedSchema[conditionalSchemaKey][key],
+						{parent,isConditional:true}
+					);
 				}
 			}
 			else{
-				resolvedSchema[conditionalSchemaKey]=resolveSchema(uri,resolvedSchema[conditionalSchemaKey],{parent,isConditional:true});
+				resolvedSchema[conditionalSchemaKey]=resolveSchema(
+					uri,resolvedSchema[conditionalSchemaKey],
+					{parent,isConditional:true}
+				);
 			}
 		}
 		const {dependentSchemas}=extractDependencies(resolvedSchema);
@@ -35,7 +41,10 @@ export const main=(rootSchema)=>{
 		
 		if(resolvedSchema.properties!=null){
 			for(let key in resolvedSchema.properties){
-				resolvedSchema.properties[key]=resolveSchema(uri+'/'+key,resolvedSchema.properties[key],{parent:resolvedSchema});
+				resolvedSchema.properties[key]=resolveSchema(
+					uri+'/'+key,resolvedSchema.properties[key],
+					{parent:resolvedSchema}
+				);
 			}
 			if(resolvedSchema.required){
 				for(let key of resolvedSchema.required){
@@ -47,11 +56,17 @@ export const main=(rootSchema)=>{
 		}
 		if(resolvedSchema.prefixItems!=null){
 			for(let index in resolvedSchema.prefixItems){
-				resolvedSchema.prefixItems[index]=resolveSchema(uri+'/'+index,resolvedSchema.prefixItems[index],{parent:resolvedSchema});
+				resolvedSchema.prefixItems[index]=resolveSchema(
+					uri+'/'+index,resolvedSchema.prefixItems[index],
+					{parent:resolvedSchema}
+				);
 			}
 		}
 		if(resolvedSchema.items!=null){
-			resolvedSchema.items=resolveSchema(uri+'/$',resolvedSchema.items,{parent:resolvedSchema});
+			resolvedSchema.items=resolveSchema(
+				uri+'/$',resolvedSchema.items,
+				{parent:resolvedSchema}
+			);
 		}
 		return resolvedSchema;
 	};
@@ -89,20 +104,22 @@ export const main=(rootSchema)=>{
 		return true;
 	}
 	const walkDescendant=(agent,cb)=>{
-		if(cb(agent)===false){return false;}
-		agent.walkChildren((child)=>walkDescendant(child,cb));
-		return true;
+		agent.walkChildren((child)=>{
+			if(cb(child)!==false){
+				walkDescendant(child,cb);
+			}
+		});
 	}
 	const walkDescendantSchema=(agent,schema,cb)=>{
-		if(cb(agent,schema)===false){return false;}
 		agent.walkChildren((child)=>{
 			for(let subSchema of child.matrix.schemas){
 				if(subSchema.parent===schema){
-					walkDescendantSchema(child,subSchema,cb);
+					if(cb(child,subSchema)!==false){
+						walkDescendantSchema(child,subSchema,cb);
+					}
 				}
 			}
 		});
-		return true;
 	}
 	const getUnlimietedSchema=(schema)=>{
 		const unlimitedSchema=Object.assign({},schema);
@@ -117,32 +134,37 @@ export const main=(rootSchema)=>{
 	const getMatrix=(schemas)=>{
 		const updateHandlesList=[];
 		schemas.slice().forEach((schema)=>{
-			const test=(value,schema)=>test(value,schema,rootSchema);
 			if(schema.if!=null){
 				schemas.push(getUnlimietedSchema(schema.if));
 				updateHandlesList.push((agent)=>{
-					const isValid=test(agent.getValue(),schema.if);
+					const isValid=test(agent.getValue(),schema.if,rootSchema);
 					if(schema.then!=null){agent.setConditionalSchemaStatus(schema.then,isValid?3:0);}
 					if(schema.else!=null){agent.setConditionalSchemaStatus(schema.else,isValid?0:3);}
 				});
 			}
 			if(schema.allOf!=null){
-				Array.push.apply(schemas,schema.allOf);
+				schemas.push.apply(schemas,schema.allOf);
 			}
 			if(schema.anyOf!=null){
 				schemas.push(mergeSchemasProxy(schema.anyOf,true))
 			}
 			if(schema.oneOf!=null){
+				schemas.push.apply(schemas,schema.oneOf);
 				const keyPropertyName=getKeyPropertyName(schema.oneOf);
 				updateHandlesList.push((agent)=>{
-					const keyValue=agent.getValue()[keyPropertyName];
+					const keyValue=agent.properties[keyPropertyName].getValue();
 					schema.oneOf.forEach((schema)=>{
-						agent.setConditionalSchemaStatus(schema,test(keyValue,schema.properties[keyPropertyName])?3:0);
+						agent.setConditionalSchemaStatus(
+							schema,test(keyValue,schema.properties[keyPropertyName],rootSchema)?3:0
+						);
 					});
 				});
 			}
 			const {dependentRequired,dependentSchemas}=extractDependencies(schema);
 			if(dependentSchemas!=null){
+				for(let name in dependentSchemas){
+					schemas.push(dependentSchemas[name]);
+				}
 				updateHandlesList.push((agent)=>{
 					const value=agent.getValue();
 					for(let name in dependentSchemas){
@@ -269,7 +291,9 @@ export const main=(rootSchema)=>{
 			walkChildren:(agent)=>{
 				return (cb)=>{
 					if(agent.properties!=null){
-						for(let child of agent.properties){cb(child);}
+						for(let name in agent.properties){
+							cb(agent.properties[name]);
+						}
 					}
 					if(agent.prefixItems!=null){
 						for(let child of agent.prefixItems){cb(child);}
@@ -341,11 +365,16 @@ export const main=(rootSchema)=>{
 			
 			getMergedSchema:(agent)=>{
 				const cache={};
-				return (status,extend=true)=>{
-					const key=Array.from(agent.schemaStatus.values()).join('')+'-'+status+'-'+(extend?'e':'');
+				return (status=1,extend=true)=>{
+					const key=agent.getMergedSchemaKey(status,extend);
 					if(cache[key]!=null){return cache[key];}
 					cache[key]=mergeSchemasProxy(agent.getSchemas(status),extend);
 					return cache[key];
+				}
+			},
+			getMergedSchemaKey:(agent)=>{
+				return (status=1,extend=true)=>{
+					return Array.from(agent.schemaStatus.values()).join('')+'-'+status+(extend?'-e':'');
 				}
 			},
 			getMergedSchemaForInput:(agent)=>{
@@ -377,6 +406,10 @@ export const main=(rootSchema)=>{
 			},
 			update:(agent)=>{
 				return ()=>{
+					updateHandles.get(agent.matrix)(agent);
+					if(agent.parent!=null){
+						agent.parent.update();
+					}
 					agent.validate();
 					if(!agent.isValid){
 						agent.trigger({type:'error',bubbles:false});
@@ -390,11 +423,7 @@ export const main=(rootSchema)=>{
 					else{
 						agent.ref[agent.key]=agent.value;
 					}
-					updateHandles.get(agent.matrix)(agent);
 					agent.trigger({type:'update',bubbles:false});
-					if(agent.parent!=null){
-						agent.parent.update();
-					}
 				}
 			},
 			validate:(agent)=>{
@@ -498,9 +527,12 @@ export const main=(rootSchema)=>{
 		agent.conditionalRequiredFlag=new Map();
 		agent.eventListeners={};
 		for(let schema of matrix.schemas){
-			agent.schemaStatus.set(schema,3);
 			if(schema.isConditional){
-				agent.conditionalSchemaStatus.set(schema,3);
+				agent.schemaStatus.set(schema,0);
+				agent.conditionalSchemaStatus.set(schema,0);
+			}
+			else{
+				agent.schemaStatus.set(schema,parent?parent.getSchemaStatus(schema.parent):3);
 			}
 		}
 		if(matrix.properties!=null){

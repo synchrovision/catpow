@@ -3,11 +3,13 @@
 import {reservedKeys,minMaxKeys} from './consts.jsx';
 import {getMergedSchemaForValue} from './getMergedSchemaForValue.jsx';
 import {getMergedSchema} from './getMergedSchema.jsx';
+import {getMatchedSchemas} from './getMatchedSchemas.jsx';
 import {extractDependencies} from './extractDependencies.jsx';
 
 export const mergeSchema=(targetSchema,schema,rootSchema,params={})=>{
-	const {extend=false,value=null}=params;
+	const {extend=false,initialize=true,value=null}=params;
 	const forValue=params.hasOwnProperty('value');
+	const includeConditional=forValue || params.includeConditional;
 	for(let key in schema){
 		if(!reservedKeys[key] && targetSchema[key]==null){
 			targetSchema[key]=schema[key];
@@ -16,46 +18,63 @@ export const mergeSchema=(targetSchema,schema,rootSchema,params={})=>{
 	//scalar
 	if(schema.const!=null){
 		if(extend){
-			if(targetSchema.enum!==null){
+			if(targetSchema.enum!=null){
 				if(!targetSchema.enum){targetSchema.enum=[];}
-				targetSchema.enum.push(schema.const);
+				if(!targetSchema.enum.includes(schema.const)){
+					targetSchema.enum.push(schema.const);
+				}
+			}
+			else if(initialize){
+				targetSchema.const=schema.const;
 			}
 		}
 		else{
 			targetSchema.const=schema.const;
 		}
 	}
-	else if(extend && targetSchema.const!=null){
-		targetSchema.const=null;
-	}
-	if(schema.enum!=null){
-		if(extend){
-			if(targetSchema.enum==null){
-				if(targetSchema.const!=null){
-					targetSchema.enum=schema.enum.slice();
-					targetSchema.enum.push(targetSchema.const);
-					targetSchema.const=null;
+	else{
+		if(extend && targetSchema.const!=null){
+			targetSchema.const=null;
+		}
+		if(schema.enum!=null){
+			if(extend){
+				if(targetSchema.enum==null){
+					if(targetSchema.const!=null){
+						targetSchema.enum=schema.enum.slice();
+						if(!targetSchema.enum.includes(targetSchema.cons)){
+							targetSchema.enum.push(targetSchema.const);
+						}
+						targetSchema.const=null;
+					}
+					else if(initialize){
+						targetSchema.enum=schema.enum.slice();
+					}
+				}
+				else{
+					targetSchema.enum.push.apply(
+						targetSchema.enum,schema.enum.filter((val)=>!targetSchema.enum.includes(val))
+					);
 				}
 			}
 			else{
-				targetSchema.enum.push.apply(
-					targetSchema.enum,schema.enum.filter((val)=>!targetSchema.enum.includes(val))
-				);
+				if(targetSchema.enum==null){targetSchema.enum=schema.enum.slice();}
+				else{targetSchema.enum=targetSchema.enum.filter((val)=>schema.enum.includes(val));}
 			}
 		}
-		else{
-			if(targetSchema.enum==null){targetSchema.enum=schema.enum.slice();}
-			else{targetSchema.enum=targetSchema.enum.filter((val)=>schema.enum.includes(val));}
+		else if(extend && targetSchema.enum!=null){
+			targetSchema.enum=null;
 		}
-	}
-	else if(extend && targetSchema.enum!=null){
-		targetSchema.enum=null;
-	}
+	 }
 
 	//min max
 	for(let key in minMaxKeys){
 		if(schema[key]!=null){
-			targetSchema[key]=Math[minMaxKeys[key]==extend?'max':'min'](targetSchema[key],schema[key]);
+			if(targetSchema[key]!=null){
+				targetSchema[key]=Math[minMaxKeys[key]==extend?'max':'min'](targetSchema[key],schema[key]);
+			}
+			else{
+				if(initialize){targetSchema[key]=schema[key];}
+			}
 		}
 		else if(extend && targetSchema[key]!=null){
 			targetSchema[key]=null;
@@ -77,7 +96,6 @@ export const mergeSchema=(targetSchema,schema,rootSchema,params={})=>{
 					targetSchema.required,schema.required.filter((val)=>!targetSchema.required.includes(val))
 				);
 			}
-
 		}
 	}
 	else if(extend && targetSchema.required!=null){
@@ -86,13 +104,14 @@ export const mergeSchema=(targetSchema,schema,rootSchema,params={})=>{
 	if(schema.properties!=null){
 		if(targetSchema.properties==null){targetSchema.properties={}}
 		for(let key in schema.properties){
-			const propSchema=forValue?
-				getMergedSchemaForValue(value || value[key],schema.properties[key],rootSchema):
-				getMergedSchema(schema.properties[key],rootSchema);
+			const propParams=Object.assign({},params);
+			if(forValue){propParams.value=propParams.value[key];}
 			if(targetSchema.properties[key]!=null){
-				mergeSchema(targetSchema.properties[key],propSchema,rootSchema,params);
+				mergeSchema(targetSchema.properties[key],schema.properties[key],rootSchema,propParams);
 			}
 			else{
+				const propSchema={};
+				mergeSchema(propSchema,schema.properties[key],rootSchema,propParams);
 				targetSchema.properties[key]=propSchema;
 			}
 		}
@@ -112,8 +131,9 @@ export const mergeSchema=(targetSchema,schema,rootSchema,params={})=>{
 			}
 		}
 	}
-
+	
 	//conditional
+	if(!includeConditional){return targetSchema;}
 	const conditionalSchemas=[];
 	if(schema.oneOf!=null){
 		conditionalSchemas.push.apply(
@@ -161,6 +181,7 @@ export const mergeSchema=(targetSchema,schema,rootSchema,params={})=>{
 				);
 			}
 		}
-		mergeSchema(targetSchema,mergedConditionalSchema,rootSchema,params);
+		mergeSchema(targetSchema,conditionalSchemas[i],rootSchema,params);
 	}
+	return targetSchema;
 }
