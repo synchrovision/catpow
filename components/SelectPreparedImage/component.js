@@ -49,7 +49,6 @@
     }, [state.images]);
     useEffect(() => {
       if (state.image != null && state.image.url !== value) {
-        console.log(state.image.url);
         onChange(state.image.url);
       }
     }, [state.image]);
