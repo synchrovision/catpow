@@ -37,8 +37,11 @@
         if (!contentRef.contains(e.target)) {
           onClose();
         }
+        document.body.removeEventListener("click", cb);
       };
-      document.body.addEventListener("click", cb);
+      requestAnimationFrame(() => {
+        document.body.addEventListener("click", cb);
+      });
       return () => document.body.removeEventListener("click", cb);
     }, [open, onClose, closeOnClickAway, contentRef]);
     return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "PopoverAnchor", ref }), /* @__PURE__ */ wp.element.createElement(Catpow.External, { className: "PopoverContainer", trace: ref.current }, /* @__PURE__ */ wp.element.createElement(

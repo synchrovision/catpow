@@ -28,8 +28,11 @@
 		if(!open || !contentRef || !onClose || !closeOnClickAway){return;}
 		const cb=(e)=>{
 			if(!contentRef.contains(e.target)){onClose();}
+			document.body.removeEventListener('click',cb);
 		};
-		document.body.addEventListener('click',cb);
+		requestAnimationFrame(()=>{
+			document.body.addEventListener('click',cb);
+		});
 		return ()=>document.body.removeEventListener('click',cb);
 	},[open,onClose,closeOnClickAway,contentRef]);
 	
