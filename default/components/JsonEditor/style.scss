@@ -37,15 +37,30 @@
 		}
 	}
 	&-Input{
-		&-ObjectInput{
-			&-Input{
-				@include flx((w:w));
-				&__title{
-					@include bnd((pd:8,f:0 0 120));
+		@include flx((w:w));
+		&.is-invalid{
+			@include bg((c:m 1 .2));
+		}
+		&__title{
+			@include bnd((pd:8,f:0 0 120));
+		}
+		&__body{
+			@include bnd((p:r,pd:8,f:1 1 a));
+			&-message{
+				@include bnd((p:a,b:f,pd:4 20,z:1));
+				@include bdr((r:20));
+				@include bg((c:m));
+				@include txt((p:12,f:t,h:1.5em,c:i));
+				@include shd((b:2));
+				@include trn((t:.2s,o:1,y:0));
+				@include usr((e:n));
+				&:not(.is-show){
+					@include trn((o:0,y:4));
 				}
-				&__body{
-					@include bnd((pd:8,f:1 1 a));
-				}
+			}
+			&-description{
+				@include bnd((d:b,mgt:4,pd:4));
+				@include txt((p:12));
 			}
 		}
 		&-Number{

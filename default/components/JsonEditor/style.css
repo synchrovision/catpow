@@ -55,7 +55,7 @@
 .JsonEditor-Editor__body-contents {
   padding: 1.25rem;
 }
-.JsonEditor-Input-ObjectInput-Input {
+.JsonEditor-Input {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -63,18 +63,52 @@
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-.JsonEditor-Input-ObjectInput-Input__title {
+.JsonEditor-Input.is-invalid {
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 100),0.2);
+}
+.JsonEditor-Input__title {
   padding: 0.5rem;
   -webkit-box-flex: 0;
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: 7.5rem;
 }
-.JsonEditor-Input-ObjectInput-Input__body {
+.JsonEditor-Input__body {
+  position: relative;
   padding: 0.5rem;
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: auto;
+}
+.JsonEditor-Input__body-message {
+  position: absolute;
+  bottom: 100%;
+  padding: 0.25rem 1.25rem;
+  z-index: 1;
+  border-radius: 1.25rem;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  font-size: 0.75rem;
+  font-family: var(--cp-fonts-t);
+  line-height: 1.5em;
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  opacity: 1;
+  transform: -webkit- translateY(0rem);
+  transform: translateY(0rem);
+  pointer-events: none;
+}
+.JsonEditor-Input__body-message:not(.is-show) {
+  opacity: 0;
+  transform: -webkit- translateY(0.25rem);
+  transform: translateY(0.25rem);
+}
+.JsonEditor-Input__body-description {
+  display: block;
+  margin-top: 0.25rem;
+  padding: 0.25rem;
+  font-size: 0.75rem;
 }
 /*# sourceMappingURL=./style.css.map */
