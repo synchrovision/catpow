@@ -111,7 +111,7 @@ export const test=(value,schema,rootSchema,params={})=>{
 		}
 	}
 	if(schema.oneOf!=null){
-		const matchedSchemaLength=getMatchedSchemas(value,schema.oneOf,rootSchema).length;
+		const matchedSchemaLength=getMatchedSchemas(value,schema.oneOf,rootSchema,{recursive:true}).length;
 		if(matchedSchemaLength!==1){return cb('oneOf',{matchedSchemaLength});}
 	}
 	if(schema.anyOf!=null){

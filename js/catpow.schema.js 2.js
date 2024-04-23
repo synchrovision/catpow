@@ -1451,7 +1451,7 @@
         }
       }
       if (matrix.properties != null) {
-        if (agent.value == null || Array.isArray(agent.value) || typeof agent.value !== "object") {
+        if (agent.value == null) {
           agent.value = value = {};
         }
         agent.properties = {};
@@ -1464,8 +1464,9 @@
             agent
           );
         }
-      } else if (matrix.items != null) {
-        if (agent.value == null || !Array.isArray(agent.value)) {
+      }
+      if (matrix.items != null) {
+        if (agent.value == null) {
           agent.value = value = [];
         }
         if (value.length > 0) {

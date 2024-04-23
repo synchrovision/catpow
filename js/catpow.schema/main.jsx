@@ -9,7 +9,8 @@ import {getErrorMessage} from './getErrorMessage.jsx';
 import {test} from './test.jsx';
 import {sanitize} from './sanitize.jsx';
 
-export const main=(rootSchema)=>{
+export const main=(rootSchema,params={})=>{
+	const {debug=false}=params;
 	const resolveSchema=(uri,schema,param)=>{
 		const resolvedSchema=getResolvedSchema(schema,rootSchema);
 		Object.assign(resolvedSchema,param);
@@ -407,29 +408,32 @@ export const main=(rootSchema)=>{
 			update:(agent)=>{
 				return ()=>{
 					updateHandles.get(agent.matrix)(agent);
-					if(agent.parent!=null){
-						agent.parent.update();
-					}
 					agent.validate();
 					if(!agent.isValid){
 						agent.trigger({type:'error',bubbles:false});
-						return false;
 					}
-					const valueType=getTypeOfValue(agent.getValue());
-					if(possibleTypes[valueType]==null){return false;}
 					if(agent.value==null){
 						delete agent.ref[agent.key];
 					}
 					else{
+						console.log({ref:agent.ref,key:agent.key,value:agent.value});
 						agent.ref[agent.key]=agent.value;
 					}
 					agent.trigger({type:'update',bubbles:false});
+					if(agent.parent!=null){
+						agent.parent.update();
+					}
 				}
 			},
 			validate:(agent)=>{
 				return ()=>{
 					agent.isValid=agent.getSchemasForValidation().every((schema)=>{
 						return test(agent.value,schema,rootSchema,{onError:(params)=>{
+							if(debug){
+								console.groupCollapsed('invalid value was found');
+								console.debug(params);
+								console.groupEnd();
+							}
 							agent.setMessage(getErrorMessage(params));
 							agent.trigger({type:'error',bubble:false});
 							return false;
@@ -446,6 +450,12 @@ export const main=(rootSchema)=>{
 					agent.trigger({type:'initialize',bubbles:false});
 				}
 			},
+			initializeRecursive:(agent)=>{
+				return ()=>{
+					agent.initialize();
+					agent.walkChildren((agent)=>agent.initialize());
+				}
+			},
 			sanitize:(agent)=>{
 				return ()=>{
 					let value=agent.getValue();
@@ -457,6 +467,12 @@ export const main=(rootSchema)=>{
 						agent.setValue(value);
 					}
 					agent.trigger({type:'sanitize',bubbles:false});
+				}
+			},
+			sanitizeRecursive:(agent)=>{
+				return ()=>{
+					agent.sanitize();
+					agent.walkChildren((agent)=>agent.sanitize());
 				}
 			},
 			getMessage:(agent)=>{
@@ -536,7 +552,7 @@ export const main=(rootSchema)=>{
 			}
 		}
 		if(matrix.properties!=null){
-			if(agent.value==null){
+			if(agent.value==null || Array.isArray(agent.value) || typeof agent.value !== 'object'){
 				agent.value=value={};
 			}
 			agent.properties={};
@@ -547,8 +563,8 @@ export const main=(rootSchema)=>{
 				);
 			}
 		}
-		if(matrix.items!=null){
-			if(agent.value==null){
+		else if(matrix.items!=null){
+			if(agent.value==null || !Array.isArray(agent.value)){
 				agent.value=value=[];
 			}
 			if(value.length>0){
@@ -561,13 +577,26 @@ export const main=(rootSchema)=>{
 				agent.items=[createAgent(matrix.items,value,0,null,agent)];
 			}
 		}
+		
 		return agent;
 	}
 	
 	const rootMatrix=getMatrix([resolvedRootSchema]);
 	rootMatrix.createAgent=(data,params)=>{
 		const rootAgent=createAgent(rootMatrix,{data},'data',data,null,params);
+		rootAgent.initializeRecursive();
+		rootAgent.sanitizeRecursive();
+		if(debug){
+			console.groupCollapsed('rootAgent was created');
+			console.debug({rootAgent});
+			console.groupEnd();
+		}
 		return rootAgent;
+	}
+	if(debug){
+		console.groupCollapsed('rootMatrix was created');
+		console.debug(rootMatrix);
+		console.groupEnd();
 	}
 	return rootMatrix;
 }

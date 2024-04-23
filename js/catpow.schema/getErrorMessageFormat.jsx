@@ -24,6 +24,8 @@ export const getErrorMessageFormat=(params)=>{
 		case 'minContains':return '規定の形式のアイテムを{maxItems}以上含めてください';
 		case 'maxContains':return '規定の形式のアイテムは{maxContains}以下にしてください';
 		case 'uniqueItems':return '値が重複しています';
+		case 'oneOf':return params.matchedSchemaLength>1?'複数の入力規則に一致しています':'一致する入力規則がありません';
+		case 'anyOf':return '一致する入力規則がありません';
 	}
 	return null;
 }
