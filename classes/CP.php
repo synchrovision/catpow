@@ -585,7 +585,7 @@ class CP{
 					$deps['css'][$css_handle][2]=array_merge($deps['css'][$css_handle][2],$useStyles);
 				}
 				else{
-					foreach($$useStyles as $dep){
+					foreach($useStyles as $dep){
 						$handle=is_array($dep)?$dep[0]:$dep;
 						$deps['css'][$handle]=$dep;
 					}
@@ -608,6 +608,13 @@ class CP{
 			$sub_deps=self::get_component_deps($useComponent);
 			$deps['js']=array_merge($deps['js'],$sub_deps['js']);
 			$deps['css']=array_merge($deps['css'],$sub_deps['css']);
+		}
+		if(!empty($deps['css']) && current_user_can('edit_themes')){
+			foreach($deps['css'] as $handle=>$dep){
+				if(substr($handle,-4)==='.css'){
+					scss::compile([substr($handle,0,-4)]);
+				}
+			}
 		}
 		return $cache[$name]=$deps;
 	}
