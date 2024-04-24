@@ -17,7 +17,8 @@ add_action("add_attachment",function($id){
 	$actions=array_merge($default_actions,$GLOBALS['post_types']['attachment']['bind']??[]);
 	$post=get_post($id);
 	foreach($actions as $pattern=>$action){
-		if(preg_match($pattern,$post->post_title,$matches)){
+		$fname=strstr(basename(get_post_meta($post->ID,'_wp_attached_file',true)),'.',true);
+		if(preg_match($pattern,$fname,$matches)){
 			if(is_string($action)){
 				$path=vsprintf($action,array_slice($matches,1));
 				$path_data=\cp::parse_data_path($path);
