@@ -929,6 +929,11 @@
     const mergeSchemasProxy = (schemas, extend) => {
       return mergeSchemas(schemas, resolvedRootSchema, { extend });
     };
+    const debugLog = (message, object) => {
+      console.groupCollapsed(message);
+      console.debug(object);
+      console.groupEnd();
+    };
     const updateHandles = /* @__PURE__ */ new WeakMap();
     const getTypeOfValue = (value) => {
       if (value == null) {
@@ -1200,6 +1205,9 @@
               return status;
             }
             agent.conditionalSchemaStatus.set(schema, status);
+            if (debug) {
+              debugLog(`\u{1F511} conditionalSchemaStatus of '${agent.key}' was changed`, { schema, status });
+            }
             agent.setSchemaStatus(schema, agent.parent == null ? 3 : agent.parent.getSchemaStatus(schema.parent) & status);
           };
         },
@@ -1232,6 +1240,9 @@
               return status;
             }
             agent.schemaStatus.set(schema, status);
+            if (debug) {
+              debugLog(`\u{1F511} schemaStatus of '${agent.key}' was changed`, { schema, status });
+            }
             walkDescendantSchema(agent, schema, (agent2, schema2) => {
               const currentStatus = agent2.schemaStatus.get(schema2);
               let status2 = agent2.parent.schemaStatus.get(schema2.parent);
@@ -1290,6 +1301,9 @@
           return (value) => {
             agent.value = value;
             agent.trigger({ type: "change", bubbles: true });
+            if (debug) {
+              debugLog(`\u{1F4DD} change value for '${agent.key}'`, { value });
+            }
           };
         },
         deleteValue: (agent) => {
@@ -1300,6 +1314,12 @@
         },
         update: (agent) => {
           return () => {
+            if (debug) {
+              debugLog(`\u2699\uFE0F update process for '${agent.key}' start`, params);
+            }
+            if (agent.parent != null) {
+              agent.parent.update();
+            }
             updateHandles.get(agent.matrix)(agent);
             agent.validate();
             if (!agent.isValid) {
@@ -1308,12 +1328,11 @@
             if (agent.value == null) {
               delete agent.ref[agent.key];
             } else {
-              console.log({ ref: agent.ref, key: agent.key, value: agent.value });
               agent.ref[agent.key] = agent.value;
             }
             agent.trigger({ type: "update", bubbles: false });
-            if (agent.parent != null) {
-              agent.parent.update();
+            if (debug) {
+              debugLog(`\u2699\uFE0F update process for '${agent.key}' end`, params);
             }
           };
         },
@@ -1322,9 +1341,7 @@
             agent.isValid = agent.getSchemasForValidation().every((schema) => {
               return test(agent.value, schema, rootSchema, { onError: (params2) => {
                 if (debug) {
-                  console.groupCollapsed("invalid value was found");
-                  console.debug(params2);
-                  console.groupEnd();
+                  debugLog("\u26A0\uFE0F invalid value was found", params2);
                 }
                 agent.setMessage(getErrorMessage(params2));
                 agent.trigger({ type: "error", bubble: false });
@@ -1485,16 +1502,12 @@
       rootAgent.initializeRecursive();
       rootAgent.sanitizeRecursive();
       if (debug) {
-        console.groupCollapsed("rootAgent was created");
-        console.debug({ rootAgent });
-        console.groupEnd();
+        debugLog("\u2728 rootAgent was created", { rootAgent });
       }
       return rootAgent;
     };
     if (debug) {
-      console.groupCollapsed("rootMatrix was created");
-      console.debug(rootMatrix);
-      console.groupEnd();
+      debugLog("\u2728 rootMatrix was created", { rootMatrix });
     }
     return rootMatrix;
   };
