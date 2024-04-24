@@ -1317,6 +1317,11 @@
             if (debug) {
               debugLog(`\u2699\uFE0F update process for '${agent.key}' start`, params);
             }
+            if (agent.value == null) {
+              delete agent.ref[agent.key];
+            } else {
+              agent.ref[agent.key] = agent.value;
+            }
             if (agent.parent != null) {
               agent.parent.update();
             }
@@ -1324,11 +1329,6 @@
             agent.validate();
             if (!agent.isValid) {
               agent.trigger({ type: "error", bubbles: false });
-            }
-            if (agent.value == null) {
-              delete agent.ref[agent.key];
-            } else {
-              agent.ref[agent.key] = agent.value;
             }
             agent.trigger({ type: "update", bubbles: false });
             if (debug) {

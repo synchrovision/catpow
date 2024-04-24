@@ -416,17 +416,17 @@ export const main=(rootSchema,params={})=>{
 			update:(agent)=>{
 				return ()=>{
 					if(debug){debugLog(`⚙️ update process for '${agent.key}' start`,params);}
-					if(agent.parent!=null){agent.parent.update();}
-					updateHandles.get(agent.matrix)(agent);
-					agent.validate();
-					if(!agent.isValid){
-						agent.trigger({type:'error',bubbles:false});
-					}
 					if(agent.value==null){
 						delete agent.ref[agent.key];
 					}
 					else{
 						agent.ref[agent.key]=agent.value;
+					}
+					if(agent.parent!=null){agent.parent.update();}
+					updateHandles.get(agent.matrix)(agent);
+					agent.validate();
+					if(!agent.isValid){
+						agent.trigger({type:'error',bubbles:false});
 					}
 					agent.trigger({type:'update',bubbles:false});
 					if(debug){debugLog(`⚙️ update process for '${agent.key}' end`,params);}
