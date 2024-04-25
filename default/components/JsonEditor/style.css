@@ -63,9 +63,6 @@
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-.JsonEditor-Input.is-invalid {
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 100),0.2);
-}
 .JsonEditor-Input__title {
   padding: 0.5rem;
   -webkit-box-flex: 0;

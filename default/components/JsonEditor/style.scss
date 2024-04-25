@@ -38,9 +38,6 @@
 	}
 	&-Input{
 		@include flx((w:w));
-		&.is-invalid{
-			@include bg((c:m 1 .2));
-		}
 		&__title{
 			@include bnd((pd:8,f:0 0 120));
 		}
