@@ -1,0 +1,90 @@
+@import 'admin_style_config.scss';
+
+.MegaMenu{
+	@include bg((c:b));
+	@include shd((b:8));
+	&__contents{
+		@include flx((w:n,g:16,j:b));
+	}
+	&-SiteInfo{
+		@include bnd((pd:8));
+		&-title{
+			@include bnd((mg:0,pd:0));
+			&-body{
+				& &-logo{
+					@include bnd((d:b,w:a,h:40));
+				}
+			}
+		}
+	}
+	&-MainMenu{
+		&-items{
+			@include flx((w:n));
+			@include txt((l:n,f:t));
+			&-item{
+				&:not(:first-child){
+					@include bdr((p:l,s:s,w:1,c:t 1 .25));
+				}
+				&-link{
+					@include bnd((d:b,pd:8 20));
+					@include txt((a:c,td:n,c:t));
+					&-title{
+						@include bnd((d:b));
+					}
+					&-name{
+						@include bnd((d:b));
+						@include txt((p:.75em));
+					}
+				}
+			}
+		}
+	}
+	&-MenuButton{
+		@include bnd((d:b,p:r,w:36,h:36,mg:8,as:c));
+		&-icon{
+			@include bnd((d:b,p:a,i:0,mg:a,w:f,h:2));
+			@include bg((c:t));
+			&::before,&::after{
+				content:'';
+				@include bnd((d:b,p:a,i:0,w:f,h:f));
+				@include bg((c:t));
+			}
+		}
+		&.is-close &{
+			&-icon{
+				@include trn((t:.5s,r:0deg));
+				&::before,&::after{
+					@include trn((t:(t .5s .5s,tf .5s)));
+				}
+				&::before{
+					@include bnd((t:-12));
+					@include trn((r:0deg));
+				}
+				&::after{
+					@include bnd((t:12));
+					@include trn((r:0deg));
+				}
+			}
+		}
+		&.is-open &{
+			&-icon{
+				@include trn((t:.5s .5s,r:225deg));
+				&::before,&::after{
+					@include trn((t:(t .5s,tf .5s .5s)));
+				}
+				&::before{
+					@include trn((r:90deg));
+				}
+				&::after{
+					@include trn((r:90deg));
+				}
+			}
+		}
+	}
+	&-PrimaryMenu{
+	}
+	&-Panel{
+		&.is-active{
+		}
+	}
+}

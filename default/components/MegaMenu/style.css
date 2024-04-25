@@ -1,0 +1,129 @@
+.MegaMenu {
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  box-shadow: 0 8px 17px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+}
+.MegaMenu__contents {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+.MegaMenu-SiteInfo {
+  padding: 0.5rem;
+}
+.MegaMenu-SiteInfo-title {
+  margin: 0rem;
+  padding: 0rem;
+}
+.MegaMenu-SiteInfo-title-body .MegaMenu-SiteInfo-title-body-logo {
+  display: block;
+  width: auto;
+  height: 2.5rem;
+}
+.MegaMenu-MainMenu-items {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  list-style: none;
+  font-family: var(--cp-fonts-t);
+}
+.MegaMenu-MainMenu-items-item:not(:first-child) {
+  border-left-style: solid;
+  border-left-width: 0.0625rem;
+  border-left-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.25);
+}
+.MegaMenu-MainMenu-items-item-link {
+  display: block;
+  padding: 0.5rem 1.25rem;
+  text-align: center;
+  text-decoration: none;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
+}
+.MegaMenu-MainMenu-items-item-link-title {
+  display: block;
+}
+.MegaMenu-MainMenu-items-item-link-name {
+  display: block;
+  font-size: 0.75em;
+}
+.MegaMenu-MenuButton {
+  display: block;
+  position: relative;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin: 0.5rem;
+  align-self: center;
+}
+.MegaMenu-MenuButton-icon {
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  margin: auto;
+  width: 100%;
+  height: 0.125rem;
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
+}
+.MegaMenu-MenuButton-icon::before, .MegaMenu-MenuButton-icon::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  width: 100%;
+  height: 100%;
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
+}
+.MegaMenu-MenuButton.is-close .MegaMenu-MenuButton-icon {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  transform: -webkit- rotateZ(0deg);
+  transform: rotateZ(0deg);
+}
+.MegaMenu-MenuButton.is-close .MegaMenu-MenuButton-icon::before, .MegaMenu-MenuButton.is-close .MegaMenu-MenuButton-icon::after {
+  -webkit-transition: top 0.5s 0.5s, transform 0.5s;
+  transition: top 0.5s 0.5s, transform 0.5s;
+}
+.MegaMenu-MenuButton.is-close .MegaMenu-MenuButton-icon::before {
+  top: -0.75rem;
+  transform: -webkit- rotateZ(0deg);
+  transform: rotateZ(0deg);
+}
+.MegaMenu-MenuButton.is-close .MegaMenu-MenuButton-icon::after {
+  top: 0.75rem;
+  transform: -webkit- rotateZ(0deg);
+  transform: rotateZ(0deg);
+}
+.MegaMenu-MenuButton.is-open .MegaMenu-MenuButton-icon {
+  -webkit-transition: 0.5s 0.5s;
+  transition: 0.5s 0.5s;
+  transform: -webkit- rotateZ(225deg);
+  transform: rotateZ(225deg);
+}
+.MegaMenu-MenuButton.is-open .MegaMenu-MenuButton-icon::before, .MegaMenu-MenuButton.is-open .MegaMenu-MenuButton-icon::after {
+  -webkit-transition: top 0.5s, transform 0.5s 0.5s;
+  transition: top 0.5s, transform 0.5s 0.5s;
+}
+.MegaMenu-MenuButton.is-open .MegaMenu-MenuButton-icon::before {
+  transform: -webkit- rotateZ(90deg);
+  transform: rotateZ(90deg);
+}
+.MegaMenu-MenuButton.is-open .MegaMenu-MenuButton-icon::after {
+  transform: -webkit- rotateZ(90deg);
+  transform: rotateZ(90deg);
+}
+/*# sourceMappingURL=./style.css.map */
