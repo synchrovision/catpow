@@ -27,6 +27,7 @@ class MenuManager{
 	protected static function resolve_props_items_for_menu_component($menu_component,&$items){
 		if(empty($items)){return;}
 		foreach($items as $key=>$val){
+			if($key==='url' && is_string($val) && $val[0]==='/'){$items[$key]=home_url($val);}
 			if(is_array($val)){
 				if(isset($val['@query'])){
 					$items[$key]['items']=self::get_menu_items_by_query(
