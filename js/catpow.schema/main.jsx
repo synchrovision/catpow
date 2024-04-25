@@ -71,7 +71,7 @@ export const main=(rootSchema,params={})=>{
 		}
 		return resolvedSchema;
 	};
-	const resolvedRootSchema=resolveSchema('#',rootSchema,{});
+	const resolvedRootSchema=resolveSchema('#',JSON.parse(JSON.stringify(rootSchema)),{});
 	const mergeSchemasProxy=(schemas,extend)=>{
 		return mergeSchemas(schemas,resolvedRootSchema,{extend});
 	}
@@ -450,13 +450,9 @@ export const main=(rootSchema,params={})=>{
 					if(agent.value==null){
 						agent.value=getDefaultValue(agent.getMergedSchemaForInput(),rootSchema);
 					}
-					agent.trigger({type:'initialize',bubbles:false});
-				}
-			},
-			initializeRecursive:(agent)=>{
-				return ()=>{
-					agent.initialize();
 					agent.walkChildren((agent)=>agent.initialize());
+					updateHandles.get(agent.matrix)(agent);
+					agent.trigger({type:'initialize',bubbles:false});
 				}
 			},
 			sanitize:(agent)=>{
@@ -469,13 +465,9 @@ export const main=(rootSchema,params={})=>{
 					if(value!==agent.getValue()){
 						agent.setValue(value);
 					}
-					agent.trigger({type:'sanitize',bubbles:false});
-				}
-			},
-			sanitizeRecursive:(agent)=>{
-				return ()=>{
-					agent.sanitize();
 					agent.walkChildren((agent)=>agent.sanitize());
+					updateHandles.get(agent.matrix)(agent);
+					agent.trigger({type:'sanitize',bubbles:false});
 				}
 			},
 			getMessage:(agent)=>{
@@ -587,8 +579,7 @@ export const main=(rootSchema,params={})=>{
 	const rootMatrix=getMatrix([resolvedRootSchema]);
 	rootMatrix.createAgent=(data,params)=>{
 		const rootAgent=createAgent(rootMatrix,{data},'data',data,null,params);
-		rootAgent.initializeRecursive();
-		rootAgent.sanitizeRecursive();
+		rootAgent.initialize();
 		if(debug){debugLog('✨ rootAgent was created',{rootAgent});}
 		return rootAgent;
 	}
