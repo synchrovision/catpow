@@ -856,7 +856,7 @@
   };
 
   // ../js/catpow.schema/main.jsx
-  var main = (rootSchema, params = {}) => {
+  var main = (originalRootSchema, params = {}) => {
     const { debug = false } = params;
     const resolveSchema = (uri, schema, param) => {
       const resolvedSchema = getResolvedSchema(schema, rootSchema);
@@ -925,14 +925,24 @@
       }
       return resolvedSchema;
     };
-    const resolvedRootSchema = resolveSchema("#", JSON.parse(JSON.stringify(rootSchema)), {});
+    const rootSchema = JSON.parse(JSON.stringify(originalRootSchema));
+    const resolvedRootSchema = resolveSchema("#", rootSchema, {});
     const mergeSchemasProxy = (schemas, extend) => {
       return mergeSchemas(schemas, resolvedRootSchema, { extend });
     };
     const debugLog = (message, object) => {
       console.groupCollapsed(message);
       console.debug(object);
+      console.trace();
       console.groupEnd();
+    };
+    const debugWatch = (object, property) => {
+      Object.defineProperty(object, property, {
+        set: (value) => {
+          debugLog(`\u{1F4DD} ${property} was changed`, value);
+          (void 0)[property] = value;
+        }
+      });
     };
     const updateHandles = /* @__PURE__ */ new WeakMap();
     const getTypeOfValue = (value) => {
@@ -1315,7 +1325,7 @@
         update: (agent) => {
           return () => {
             if (debug) {
-              debugLog(`\u2699\uFE0F update process for '${agent.key}' start`, params);
+              debugLog(`\u2699\uFE0F update process for '${agent.key}' start`, { agent });
             }
             if (agent.value == null) {
               delete agent.ref[agent.key];
@@ -1332,7 +1342,7 @@
             }
             agent.trigger({ type: "update", bubbles: false });
             if (debug) {
-              debugLog(`\u2699\uFE0F update process for '${agent.key}' end`, params);
+              debugLog(`\u2699\uFE0F update process for '${agent.key}' end`, { agent });
             }
           };
         },

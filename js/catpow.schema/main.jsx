@@ -9,7 +9,7 @@ import {getErrorMessage} from './getErrorMessage.jsx';
 import {test} from './test.jsx';
 import {sanitize} from './sanitize.jsx';
 
-export const main=(rootSchema,params={})=>{
+export const main=(originalRootSchema,params={})=>{
 	const {debug=false}=params;
 	const resolveSchema=(uri,schema,param)=>{
 		const resolvedSchema=getResolvedSchema(schema,rootSchema);
@@ -71,14 +71,24 @@ export const main=(rootSchema,params={})=>{
 		}
 		return resolvedSchema;
 	};
-	const resolvedRootSchema=resolveSchema('#',JSON.parse(JSON.stringify(rootSchema)),{});
+	const rootSchema=JSON.parse(JSON.stringify(originalRootSchema));
+	const resolvedRootSchema=resolveSchema('#',rootSchema,{});
 	const mergeSchemasProxy=(schemas,extend)=>{
 		return mergeSchemas(schemas,resolvedRootSchema,{extend});
 	}
 	const debugLog=(message,object)=>{
 		console.groupCollapsed(message);
 		console.debug(object);
+		console.trace();
 		console.groupEnd();
+	}
+	const debugWatch=(object,property)=>{
+		Object.defineProperty(object,property,{
+			set:(value)=>{
+				debugLog(`📝 ${property} was changed`,value);
+				this[property]=value;
+			}
+		});
 	}
 	
 	const updateHandles=new WeakMap();
@@ -415,7 +425,7 @@ export const main=(rootSchema,params={})=>{
 			},
 			update:(agent)=>{
 				return ()=>{
-					if(debug){debugLog(`⚙️ update process for '${agent.key}' start`,params);}
+					if(debug){debugLog(`⚙️ update process for '${agent.key}' start`,{agent});}
 					if(agent.value==null){
 						delete agent.ref[agent.key];
 					}
@@ -429,7 +439,7 @@ export const main=(rootSchema,params={})=>{
 						agent.trigger({type:'error',bubbles:false});
 					}
 					agent.trigger({type:'update',bubbles:false});
-					if(debug){debugLog(`⚙️ update process for '${agent.key}' end`,params);}
+					if(debug){debugLog(`⚙️ update process for '${agent.key}' end`,{agent});}
 				}
 			},
 			validate:(agent)=>{
@@ -537,6 +547,8 @@ export const main=(rootSchema,params={})=>{
 		agent.conditionalSchemaStatus=new WeakMap();
 		agent.conditionalRequiredFlag=new Map();
 		agent.eventListeners={};
+		
+		
 		for(let schema of matrix.schemas){
 			if(schema.isConditional){
 				agent.schemaStatus.set(schema,0);
