@@ -10,6 +10,10 @@ return [
 					'main'=>[
 						'@type'=>'Menu',
 						'title'=>'MainMenu'
+					],
+					'primary'=>[
+						'@type'=>'Menu',
+						'title'=>'PrimaryMenu'
 					]
 				],
 				'required'=>['main']

@@ -135,7 +135,7 @@
       };
       return { dispatch, toggleMenu };
     }, [dispatch]);
-    return /* @__PURE__ */ wp.element.createElement(ControlContext.Provider, { value: controls }, /* @__PURE__ */ wp.element.createElement(DataContext.Provider, { value: data }, /* @__PURE__ */ wp.element.createElement(StateContext.Provider, { value: state }, /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._contents() }, /* @__PURE__ */ wp.element.createElement(SiteInfo, null), /* @__PURE__ */ wp.element.createElement(MainMenu, null), /* @__PURE__ */ wp.element.createElement(PrimaryMenu, null), /* @__PURE__ */ wp.element.createElement(MenuButton, null)), /* @__PURE__ */ wp.element.createElement(Panel, null)))));
+    return /* @__PURE__ */ wp.element.createElement(ControlContext.Provider, { value: controls }, /* @__PURE__ */ wp.element.createElement(DataContext.Provider, { value: data }, /* @__PURE__ */ wp.element.createElement(StateContext.Provider, { value: state }, /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._contents() }, /* @__PURE__ */ wp.element.createElement(SiteInfo, null), /* @__PURE__ */ wp.element.createElement("div", { className: classes._contents.menus({ "is-open": state.menuOpen }) }, /* @__PURE__ */ wp.element.createElement(MainMenu, null), /* @__PURE__ */ wp.element.createElement(PrimaryMenu, null)), /* @__PURE__ */ wp.element.createElement(MenuButton, null)), /* @__PURE__ */ wp.element.createElement(Panel, null)))));
   };
 
   // ../default/components/MegaMenu/component/index.jsx

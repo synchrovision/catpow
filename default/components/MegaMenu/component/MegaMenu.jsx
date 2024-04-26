@@ -79,8 +79,10 @@ export const MegaMenu=(props)=>{
 					<div className={classes()}>
 						<div className={classes._contents()}>
 							<SiteInfo/>
-							<MainMenu/>
-							<PrimaryMenu/>
+							<div className={classes._contents.menus({'is-open':state.menuOpen})}>
+								<MainMenu/>
+								<PrimaryMenu/>
+							</div>
 							<MenuButton/>
 						</div>
 						<Panel/>
