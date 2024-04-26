@@ -29,8 +29,10 @@ class select_rel_posts extends select{
 			else{$addition=array_flip($meta->conf['addition']);}
 		}
 		else{$addition=false;}
-		if(is_numeric($val) && $val>0){
+		if(is_a($val,'WP_Post') || is_numeric($val) && $val>0){
+			$id=is_a($val,'WP_Post')?$val->ID:$val;
 			switch($prm){
+				case null:
 				case false:
 					return '<span class="select_item">'.get_the_title($val).'</span>';
 				case 'title':
@@ -45,7 +47,7 @@ class select_rel_posts extends select{
 				case 'tag':
 					return vsprintf(
 						'<a class="tag %s" href="%s">%s</a>',
-						[implode(' ',get_post_meta($val,'post_class')?:[]),get_permalink($val),get_the_title($val)]
+						[implode(' ',get_post_meta($id,'post_class')?:[]),get_permalink($val),get_the_title($val)]
 					);
 				case 'url':
 					return get_permalink($val);
