@@ -1,6 +1,6 @@
 ﻿Catpow.SelectBox=(props)=>{
-	const {className="SelectBox",useMemo}=wp.element;
-	const {label,value,onChange}=props;
+	const {useMemo}=wp.element;
+	const {className="SelectBox",label,value,onChange}=props;
 	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem(className),[]);
 	
