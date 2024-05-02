@@ -47,7 +47,7 @@
     if (!menuData || !menuData.items) {
       return false;
     }
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes.items() }, menuData.items.map((item2, index) => /* @__PURE__ */ wp.element.createElement("li", { className: classes.items.item(), key: index }, /* @__PURE__ */ wp.element.createElement("a", { className: classes.items.item.link(), href: item2.url }, /* @__PURE__ */ wp.element.createElement("span", { className: classes.items.item.link.title() }, item2.title), /* @__PURE__ */ wp.element.createElement("span", { className: classes.items.item.link.name() }, item2.name))))));
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes.items() }, menuData.items.map((item2, index) => /* @__PURE__ */ wp.element.createElement("li", { className: classes.items.item(), key: index }, /* @__PURE__ */ wp.element.createElement("a", { className: classes.items.item.link(), href: item2.link.url, target: null }, /* @__PURE__ */ wp.element.createElement("span", { className: classes.items.item.link.title() }, item2.title), /* @__PURE__ */ wp.element.createElement("span", { className: classes.items.item.link.name() }, item2.name))))));
   };
 
   // ../default/components/MegaMenu/component/Panel.jsx
