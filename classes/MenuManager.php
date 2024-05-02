@@ -16,10 +16,10 @@ class MenuManager{
 			'name'=>get_bloginfo('name'),
 			'description'=>get_bloginfo('description')
 		];
-		if(current_theme_supports('custom-logo')){
+		if(current_theme_supports('custom-logo') && $logo_id=get_theme_mod('custom_logo')){
 			$data['siteInfo']['logo']=array_combine(
 				['src','width','height','resized'],
-				wp_get_attachment_image_src(get_theme_mod('custom_logo'),'full')
+				wp_get_attachment_image_src($logo_id,'full')
 			);
 		}
 		return json_encode($data,0500);
