@@ -33,7 +33,7 @@
 			}
 		},[attributes.props,config]);
 		
-		const props=useMemo(()=>{
+		const resolvedProps=useMemo(()=>{
 			if(!resolvedPropsJson){return null;}
 			return JSON.parse(resolvedPropsJson);
 		},[resolvedPropsJson]);
@@ -53,7 +53,7 @@
 			setAttributes({props});
 		},[]);
 		
-		if(!config || !props){
+		if(!config || !resolvedProps){
 			return <Catpow.Spinner/>;
 		}
 		
@@ -64,10 +64,15 @@
 					attr={attributes}
 				/>
 				{EditMode?(
-					<Catpow.JsonEditor json={props} debug={true} schema={config.schema} onChange={onChangeHandle}/>
+					<Catpow.JsonEditor
+						json={attributes.props}
+						debug={true}
+						schema={config.schema}
+						onChange={onChangeHandle}
+					/>
 				):(
 					<div className={attributes.classes}>
-						<Catpow.MegaMenu {...props}/>
+						<Catpow.MegaMenu {...resolvedProps}/>
 					</div>
 				)}
 			</>

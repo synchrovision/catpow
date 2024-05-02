@@ -25,12 +25,12 @@
         if (!config) {
           return;
         }
-        const props2 = attributes.props || config.defaultProps;
-        if (props2) {
+        const props = attributes.props || config.defaultProps;
+        if (props) {
           wp.apiFetch({
             path: "/cp/v1/blocks/config/megamenu/resolve",
             method: "POST",
-            data: { props: props2 }
+            data: { props }
           }).then((res) => {
             setAttributes({ resolvedPropsJson: res.props });
           }).catch((e) => {
@@ -38,7 +38,7 @@
           });
         }
       }, [attributes.props, config]);
-      const props = useMemo(() => {
+      const resolvedProps = useMemo(() => {
         if (!resolvedPropsJson) {
           return null;
         }
@@ -48,16 +48,16 @@
         if (schema.hasOwnProperty("@type")) {
           switch (schema["@type"]) {
             case "MenuItemAction":
-              return (props2) => {
+              return (props) => {
               };
           }
         }
         return null;
       }, []);
-      const onChangeHandle = useCallback((props2) => {
-        setAttributes({ props: props2 });
+      const onChangeHandle = useCallback((props) => {
+        setAttributes({ props });
       }, []);
-      if (!config || !props) {
+      if (!config || !resolvedProps) {
         return /* @__PURE__ */ wp.element.createElement(Catpow.Spinner, null);
       }
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
@@ -66,7 +66,15 @@
           set: setAttributes,
           attr: attributes
         }
-      ), EditMode ? /* @__PURE__ */ wp.element.createElement(Catpow.JsonEditor, { json: props, debug: true, schema: config.schema, onChange: onChangeHandle }) : /* @__PURE__ */ wp.element.createElement("div", { className: attributes.classes }, /* @__PURE__ */ wp.element.createElement(Catpow.MegaMenu, { ...props })));
+      ), EditMode ? /* @__PURE__ */ wp.element.createElement(
+        Catpow.JsonEditor,
+        {
+          json: attributes.props,
+          debug: true,
+          schema: config.schema,
+          onChange: onChangeHandle
+        }
+      ) : /* @__PURE__ */ wp.element.createElement("div", { className: attributes.classes }, /* @__PURE__ */ wp.element.createElement(Catpow.MegaMenu, { ...resolvedProps })));
     },
     save({ attributes, className, setAttributes }) {
       return /* @__PURE__ */ wp.element.createElement("div", { className: attributes.classes });
