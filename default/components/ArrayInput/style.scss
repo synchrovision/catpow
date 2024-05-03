@@ -5,7 +5,7 @@
 		@include bnd((mg:0,pd:0));
 		@include txt((l:n));
 		&-item{
-			@include bnd((p:r,pd:16,mg:16 a));
+			@include bnd((p:r,pd:8,mg:16 a));
 			@include bdr((r:8));
 			@include shd((b:2));
 			&-body{
