@@ -33,16 +33,17 @@
       if (!open || !contentRef || !onClose || !closeOnClickAway) {
         return;
       }
+      const doc = contentRef.ownerDocument;
       const cb = (e) => {
         if (!contentRef.contains(e.target)) {
           onClose();
+          doc.body.removeEventListener("click", cb);
         }
-        document.body.removeEventListener("click", cb);
       };
       requestAnimationFrame(() => {
-        document.body.addEventListener("click", cb);
+        doc.body.addEventListener("click", cb);
       });
-      return () => document.body.removeEventListener("click", cb);
+      return () => doc.body.removeEventListener("click", cb);
     }, [open, onClose, closeOnClickAway, contentRef]);
     return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "PopoverAnchor", ref }), /* @__PURE__ */ wp.element.createElement(Catpow.External, { className: "PopoverContainer", trace: ref.current }, /* @__PURE__ */ wp.element.createElement(
       "div",
