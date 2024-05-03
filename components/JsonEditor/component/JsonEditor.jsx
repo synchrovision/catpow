@@ -15,7 +15,10 @@ export const JsonEditor=(props)=>{
 	const [hasChange,setHasChange]=useState(false);
 	const json=useMemo(()=>{
 		if(typeof props.json === 'object'){return props.json;}
-		return JSON.parse(props.json);
+		if(props.json==null){return {};}
+		const json=JSON.parse(props.json);
+		if(json==null){return {};}
+		return json;
 	},[]);
 	
 	

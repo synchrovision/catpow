@@ -7,5 +7,6 @@ $useComponents=[
 	'SelectMedia','SelectPreparedImage','SelectPreparedImageSet',
 	'SelectNumber',
 	'SelectMenuItem',
-	'Toggle','ArrayInput'
+	'Toggle','ArrayInput',
+	'Popover','Popup'
 ];

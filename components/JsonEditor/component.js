@@ -503,11 +503,12 @@
     const classes = useMemo(() => bem2(className), []);
     const schema = agent.getMergedSchemaForInput();
     const { getAdditionalInputComponent } = useContext(DataContext);
-    const { title, description } = schema;
+    const { description } = schema;
     const InputComponent = useMemo(() => {
       return getAdditionalInputComponent && getAdditionalInputComponent(schema) || getInputComponentForSchema(schema);
     }, [schema]);
     const [showMessage, setShowMessage] = useState(false);
+    const [open, setOpen] = useState(schema.initialOpen || false);
     const onChange = useCallback((value) => {
       agent.setValue(value);
       setShowMessage(false);
@@ -527,7 +528,48 @@
       agent.on("change", cb);
       return () => agent.off("change", cb);
     }, []);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-invalid": !agent.isValid }), "data-json-key": agent.key }, title && /* @__PURE__ */ wp.element.createElement("div", { className: classes._title() }, title), /* @__PURE__ */ wp.element.createElement("div", { className: classes._body() }, agent.getMessage() && /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.message(showMessage ? "is-show" : "is-hidden") }, agent.getMessage()), /* @__PURE__ */ wp.element.createElement(InputComponent, { agent, onChange, onUpdate, lastChanged }), description && /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.description() }, description)));
+    const getTitle = useMemo(() => {
+      if (!schema.title) {
+        return () => null;
+      }
+      if (schema.title.includes("{")) {
+        return (agent2) => schema.title.replaceAll(/{(.+?)}/g, (match, p1) => {
+          const names = p1.split("|");
+          for (let name of names) {
+            if (/^("|').+\1$/.test(name)) {
+              return name.slice(1, -1);
+            }
+            if (agent2.properties[name]) {
+              let value = agent2.properties[name].getValue();
+              if (value) {
+                return value;
+              }
+            }
+          }
+          return "";
+        });
+      }
+      return () => schema.title;
+    }, [schema.title]);
+    const title = getTitle(agent);
+    const InputBody = useMemo(() => {
+      if (schema.collapsible) {
+        if (schema.inline) {
+          return ({ classes: classes2, open: open2, onClose, children }) => /* @__PURE__ */ wp.element.createElement(Catpow.Popover, { onClose, open: open2 }, /* @__PURE__ */ wp.element.createElement("div", { className: classes2() }, children));
+        }
+        return ({ classes: classes2, open: open2, onClose, children }) => /* @__PURE__ */ wp.element.createElement(Catpow.Popup, { onClose, open: open2 }, /* @__PURE__ */ wp.element.createElement("div", { className: classes2() }, children));
+      }
+      return ({ classes: classes2, children }) => /* @__PURE__ */ wp.element.createElement("div", { className: classes2() }, children);
+    }, [schema.inline, schema.collapsible]);
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-invalid": !agent.isValid, "is-collapsible": schema.collapsible }, open ? "is-open" : "is-close", schema.inline ? "is-inline" : "is-block"), "data-json-key": agent.key }, schema.collapsible ? /* @__PURE__ */ wp.element.createElement("div", { className: classes._title(), onClick: () => setOpen(!open) }, /* @__PURE__ */ wp.element.createElement("span", { className: classes._title.text() }, getTitle(agent)), /* @__PURE__ */ wp.element.createElement("span", { className: classes._title.arrow() })) : /* @__PURE__ */ wp.element.createElement("div", { className: classes._title() }, /* @__PURE__ */ wp.element.createElement("span", { className: classes._title.text() }, getTitle(agent))), /* @__PURE__ */ wp.element.createElement(InputBody, { classes: classes._body, open, onClose: () => setOpen(false) }, agent.getMessage() && /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.message(showMessage ? "is-show" : "is-hidden") }, agent.getMessage()), /* @__PURE__ */ wp.element.createElement(
+      InputComponent,
+      {
+        agent,
+        onChange,
+        onUpdate,
+        lastChanged
+      }
+    ), description && /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.description() }, description)));
   };
 
   // ../components/JsonEditor/component/inputComponents/ObjectInput.jsx
@@ -562,7 +604,14 @@
       if (typeof props.json === "object") {
         return props.json;
       }
-      return JSON.parse(props.json);
+      if (props.json == null) {
+        return {};
+      }
+      const json2 = JSON.parse(props.json);
+      if (json2 == null) {
+        return {};
+      }
+      return json2;
     }, []);
     const save = useCallback(() => {
       onChange(typeof props.json === "object" ? json : JSON.stringify(json));

@@ -108,4 +108,13 @@
   padding: 0.25rem;
   font-size: 0.75rem;
 }
+.JsonEditor-Input.is-inline {
+  display: inline-block;
+}
+.JsonEditor-Input.is-inline:not(.is-collapsible) .JsonEditor-Input__title {
+  display: none;
+}
+.JsonEditor-Input.is-collapsible > .JsonEditor-Input__title {
+  cursor: pointer;
+}
 /*# sourceMappingURL=./style.css.map */

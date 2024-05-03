@@ -39,6 +39,12 @@
 	&-Input{
 		@include flx((w:w));
 		&__title{
+			&-text{
+				
+			}
+			&-arrow{
+				
+			}
 			@include bnd((pd:8,f:0 0 120));
 		}
 		&__body{
@@ -71,6 +77,18 @@
 			}
 		}
 		&-Textarea{
+		}
+		&.is-inline{
+			@include bnd((d:ib));
+		}
+		&.is-inline:not(.is-collapsible) &{
+			&__title{
+				@include bnd((d:n));
+			}
+		}
+		
+		&.is-collapsible>&__title{
+			@include usr((c:p));
 		}
 	}
 }
