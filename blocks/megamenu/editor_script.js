@@ -66,15 +66,15 @@
           set: setAttributes,
           attr: attributes
         }
-      ), EditMode ? /* @__PURE__ */ wp.element.createElement(
+      ), /* @__PURE__ */ wp.element.createElement("div", { className: attributes.classes }, /* @__PURE__ */ wp.element.createElement(Catpow.MegaMenu, { ...resolvedProps })), EditMode && /* @__PURE__ */ wp.element.createElement(
         Catpow.JsonEditor,
         {
           json: attributes.props,
-          debug: true,
+          debug: false,
           schema: config.schema,
           onChange: onChangeHandle
         }
-      ) : /* @__PURE__ */ wp.element.createElement("div", { className: attributes.classes }, /* @__PURE__ */ wp.element.createElement(Catpow.MegaMenu, { ...resolvedProps })));
+      ));
     },
     save({ attributes, className, setAttributes }) {
       return /* @__PURE__ */ wp.element.createElement("div", { className: attributes.classes });

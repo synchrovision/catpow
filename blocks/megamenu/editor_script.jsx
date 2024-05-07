@@ -63,17 +63,16 @@
 					set={setAttributes}
 					attr={attributes}
 				/>
-				{EditMode?(
+				<div className={attributes.classes}>
+					<Catpow.MegaMenu {...resolvedProps}/>
+				</div>
+				{EditMode && (
 					<Catpow.JsonEditor
 						json={attributes.props}
-						debug={true}
+						debug={false}
 						schema={config.schema}
 						onChange={onChangeHandle}
 					/>
-				):(
-					<div className={attributes.classes}>
-						<Catpow.MegaMenu {...resolvedProps}/>
-					</div>
 				)}
 			</>
 		);
