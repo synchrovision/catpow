@@ -20,7 +20,7 @@ export const MainMenu=(props)=>{
 			<ul className={classes.items()}>
 			{menuData.items.map((item,index)=>(
 				<li className={classes.items.item()} key={index}>
-					<a className={classes.items.item.link()} href={item.link.url}>
+					<a className={classes.items.item.link()} href={item.link && item.link.url}>
 						<span className={classes.items.item.link.title()}>{item.title}</span>
 						<span className={classes.items.item.link.name()}>{item.name}</span>
 					</a>
