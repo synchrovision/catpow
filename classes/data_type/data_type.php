@@ -3,6 +3,9 @@ namespace Catpow\data_type;
 
 abstract class data_type{
 	public static $data_type,$key_translation=[];
+	public static function get_object($data_name,$data_id){
+		return false;
+	}
 	public static function get_id($obj){
 		return $obj->{static::$key_translation['id']};
 	}
