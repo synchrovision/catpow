@@ -24,6 +24,10 @@ abstract class data_type{
 	public static function get_uri($obj){
 		return static::get_name($obj);
 	}
+	public static function get_url($obj){
+		$query_class=\cp::get_class_name('query',substr(strrchr(static::class,'\\'),1));
+		return $query_class::get_the_url($obj);
+	}
 	public static function get_meta($data_name,$data_id,$meta_name,$single=false){
 		return get_metadata(static::$data_type,$data_id,$meta_name,$single);
 	}
