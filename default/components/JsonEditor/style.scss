@@ -74,21 +74,30 @@
 		}
 		&-Text{
 			&-input{
+				@include bnd((pd:4));
+				@include bdr((s:n,r:4));
+				@include shd((b:-1));
 			}
 		}
 		&-Textarea{
+			&-textarea{
+				@include bnd((pd:4));
+				@include bdr((s:n,r:4));
+				@include shd((b:-1));
+			}
 		}
-		&.is-inline{
-			@include bnd((d:ib));
+		&-ObjectInput{
+			&-label{
+				@include bnd((pd:.25em 1em));
+				@include bdr((r:1em));
+				@include shd((bv:1));
+				@include usr((c:p));
+			}
 		}
-		&.is-inline:not(.is-collapsible) &{
+		&.is-compact>&{
 			&__title{
 				@include bnd((d:n));
 			}
-		}
-		
-		&.is-collapsible>&__title{
-			@include usr((c:p));
 		}
 	}
 }

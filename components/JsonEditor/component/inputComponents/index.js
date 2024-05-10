@@ -8,6 +8,7 @@ export * from './Select.jsx';
 export * from './Checkbox.jsx';
 export * from './Radio.jsx';
 export * from './SearchSelect.jsx';
+export * from './StepSelect.jsx';
 
 export * from './Text.jsx';
 export * from './Textarea.jsx';

@@ -108,13 +108,25 @@
   padding: 0.25rem;
   font-size: 0.75rem;
 }
-.JsonEditor-Input.is-inline {
-  display: inline-block;
+.JsonEditor-Input-Text-input {
+  padding: 0.25rem;
+  border-style: none;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a)) inset;
 }
-.JsonEditor-Input.is-inline:not(.is-collapsible) .JsonEditor-Input__title {
-  display: none;
+.JsonEditor-Input-Textarea-textarea {
+  padding: 0.25rem;
+  border-style: none;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a)) inset;
 }
-.JsonEditor-Input.is-collapsible > .JsonEditor-Input__title {
+.JsonEditor-Input-ObjectInput-label {
+  padding: 0.25em 1em;
+  border-radius: 1em;
+  box-shadow: 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, -1px -1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)), -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, 1px 1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a));
   cursor: pointer;
+}
+.JsonEditor-Input.is-compact > .JsonEditor-Input__title {
+  display: none;
 }
 /*# sourceMappingURL=./style.css.map */

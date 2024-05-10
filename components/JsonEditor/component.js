@@ -88,8 +88,44 @@
     ));
   };
 
-  // ../components/JsonEditor/component/inputComponents/Text.jsx
+  // ../components/JsonEditor/component/inputComponents/StepSelect.jsx
   var { __: __6, sprintf: sprintf6 } = wp.i18n;
+  var StepSelect = (props) => {
+    const { className = "JsonEditor-Input-StepSelect", agent, onChange, onUpdate } = props;
+    const { useState, useMemo, useCallback, useEffect } = wp.element;
+    const { bem: bem2 } = Catpow.util;
+    const classes = useMemo(() => bem2(className), []);
+    const options = useMemo(() => {
+      const schema = agent.getMergedSchemaForInput();
+      if (schema.items != null) {
+        if (schema.items.options != null) {
+          return schema.items.options;
+        }
+        if (schema.items.enum != null) {
+          return schema.items.enum;
+        }
+        return [];
+      }
+      if (schema.options != null) {
+        return schema.options;
+      }
+      if (schema.enum != null) {
+        return schema.enum;
+      }
+      return [];
+    }, [agent.getMergedSchemaForInput()]);
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(
+      Catpow.StepSelect,
+      {
+        options,
+        multiple: agent.getMergedSchemaForInput().type === "array",
+        onChange: onUpdate
+      }
+    ));
+  };
+
+  // ../components/JsonEditor/component/inputComponents/Text.jsx
+  var { __: __7, sprintf: sprintf7 } = wp.i18n;
   var Text = (props) => {
     const { className = "JsonEditor-Input-Text", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
@@ -150,7 +186,7 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/Textarea.jsx
-  var { __: __7, sprintf: sprintf7 } = wp.i18n;
+  var { __: __8, sprintf: sprintf8 } = wp.i18n;
   var Textarea = (props) => {
     const { className = "JsonEditor-Input-Textarea", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
@@ -206,7 +242,7 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/DateTime.jsx
-  var { __: __8, sprintf: sprintf8 } = wp.i18n;
+  var { __: __9, sprintf: sprintf9 } = wp.i18n;
   var DateTime = (props) => {
     const { className = "JsonEditor-Input-DateTime", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
@@ -222,7 +258,7 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/Date.jsx
-  var { __: __9, sprintf: sprintf9 } = wp.i18n;
+  var { __: __10, sprintf: sprintf10 } = wp.i18n;
   var Date2 = (props) => {
     const { className = "JsonEditor-Input-Date", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
@@ -238,7 +274,7 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/Time.jsx
-  var { __: __10, sprintf: sprintf10 } = wp.i18n;
+  var { __: __11, sprintf: sprintf11 } = wp.i18n;
   var Time = (props) => {
     const { className = "JsonEditor-Input-Time", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
@@ -254,7 +290,7 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/Duration.jsx
-  var { __: __11, sprintf: sprintf11 } = wp.i18n;
+  var { __: __12, sprintf: sprintf12 } = wp.i18n;
   var Duration = (props) => {
     const { className = "JsonEditor-Input-Duration", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
@@ -264,7 +300,7 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/Range.jsx
-  var { __: __12, sprintf: sprintf12 } = wp.i18n;
+  var { __: __13, sprintf: sprintf13 } = wp.i18n;
   var Range = (props) => {
     const { className = "JsonEditor-Input-Range", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
@@ -305,7 +341,7 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/Number.jsx
-  var { __: __13, sprintf: sprintf13 } = wp.i18n;
+  var { __: __14, sprintf: sprintf14 } = wp.i18n;
   var Number2 = (props) => {
     const { className = "JsonEditor-Input-Number", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
@@ -338,6 +374,9 @@
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
+    const schema = agent.getMergedSchemaForInput();
+    const layout = schema.layout || "table";
+    const size = schema.size || "medium";
     const { minContains: min, maxContains: max, items, prefixItems } = agent.getMergedSchemaForInput();
     const onAddItem = useCallback((index, value) => {
       agent.addItem(index, value);
@@ -369,20 +408,43 @@
         return map.get(item);
       };
     }, []);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(
-      Catpow.ArrayInput,
-      {
-        onAddItem,
-        onCopyItem,
-        onMoveItem,
-        onRemoveItem
-      },
-      agent.items.map((item) => /* @__PURE__ */ wp.element.createElement(Input, { agent: item, key: getItemId(item) }))
-    ));
+    const InputComponent = useMemo(() => {
+      if (layout === "table") {
+        return (props2) => {
+          const schema2 = agent.items[0].getMergedSchemaForInput();
+          const cols = Object.keys(schema2.properties);
+          const labels = cols.map((col) => schema2.properties[col].title || col);
+          return /* @__PURE__ */ wp.element.createElement(
+            Catpow.TableInput,
+            {
+              labels,
+              onAddItem,
+              onCopyItem,
+              onMoveItem,
+              onRemoveItem
+            },
+            props2.agent.items.map((item) => cols.map((col) => /* @__PURE__ */ wp.element.createElement(Input, { agent: item.properties[col], layout: "inline", size: "small", compact: true, key: getItemId(item) })))
+          );
+        };
+      }
+      return (props2) => {
+        return /* @__PURE__ */ wp.element.createElement(
+          Catpow.ArrayInput,
+          {
+            onAddItem,
+            onCopyItem,
+            onMoveItem,
+            onRemoveItem
+          },
+          props2.agent.items.map((item) => /* @__PURE__ */ wp.element.createElement(Input, { agent: item, layout: "inline", size: "small", compact: true, key: getItemId(item) }))
+        );
+      };
+    }, [layout, onAddItem, onCopyItem, onMoveItem, onRemoveItem]);
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes(`is-layout-${layout}`, `is-size-${size}`) }, /* @__PURE__ */ wp.element.createElement(InputComponent, { agent }));
   };
 
   // ../components/JsonEditor/component/inputComponents/SelectIcon.jsx
-  var { __: __14, sprintf: sprintf14 } = wp.i18n;
+  var { __: __15, sprintf: sprintf15 } = wp.i18n;
   var SelectIcon = (props) => {
     const { className = "JsonEditor-Input-SelectIcon", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
@@ -392,7 +454,7 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/SelectImage.jsx
-  var { __: __15, sprintf: sprintf15 } = wp.i18n;
+  var { __: __16, sprintf: sprintf16 } = wp.i18n;
   var SelectImage = (props) => {
     const { className = "JsonEditor-Input-SelectImage", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
@@ -405,7 +467,7 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/SelectMenuItem.jsx
-  var { __: __16, sprintf: sprintf16 } = wp.i18n;
+  var { __: __17, sprintf: sprintf17 } = wp.i18n;
   var SelectMenuItem = (props) => {
     const { className = "JsonEditor-Input-SelectMenuItem", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
@@ -415,7 +477,7 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/SelectMenuItems.jsx
-  var { __: __17, sprintf: sprintf17 } = wp.i18n;
+  var { __: __18, sprintf: sprintf18 } = wp.i18n;
   var SelectMenuItems = (props) => {
     const { className = "JsonEditor-Input-SelectMenuItems", agent, onChange } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
@@ -425,7 +487,7 @@
   };
 
   // ../components/JsonEditor/component/functions.jsx
-  var getInputComponentForSchema = (schema) => {
+  var getInputComponentForSchema = (schema, params) => {
     if (schema.hasOwnProperty("@type")) {
       switch (schema["@type"]) {
         case "Icon":
@@ -438,11 +500,24 @@
           return SelectMenuItems;
       }
     }
+    if (schema.hasOwnProperty("options")) {
+      if (Array.isArray(schema.options) || Object.keys(schema.options).every((key) => typeof schema.options[key] !== "object")) {
+        const length = Array.isArray(schema.options) ? schema.options.length : Object.keys(schema.options).lenght;
+        if (length < 8 && !params.compact) {
+          return Radio;
+        }
+        if (length < 64) {
+          return Select;
+        }
+        return SearchSelect;
+      }
+      return StepSelect;
+    }
     if (schema.type === "null") {
       return None;
     }
     if (schema.enum) {
-      if (schema.enum.length < 8) {
+      if (schema.enum.length < 8 && !params.compact) {
         return Radio;
       }
       if (schema.enum.length < 64) {
@@ -495,9 +570,9 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/Input.jsx
-  var { __: __18, sprintf: sprintf18 } = wp.i18n;
+  var { __: __19, sprintf: sprintf19 } = wp.i18n;
   var Input = (props) => {
-    const { className = "JsonEditor-Input", agent } = props;
+    const { className = "JsonEditor-Input", layout = "block", size = "medium", compact = false, level = 0, agent } = props;
     const { useState, useMemo, useCallback, useEffect, useContext } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
@@ -505,10 +580,9 @@
     const { getAdditionalInputComponent } = useContext(DataContext);
     const { description } = schema;
     const InputComponent = useMemo(() => {
-      return getAdditionalInputComponent && getAdditionalInputComponent(schema) || getInputComponentForSchema(schema);
-    }, [schema]);
+      return getAdditionalInputComponent && getAdditionalInputComponent(schema, { layout, size, compact }) || getInputComponentForSchema(schema, { layout, size, compact });
+    }, [schema, layout, size]);
     const [showMessage, setShowMessage] = useState(false);
-    const [open, setOpen] = useState(schema.initialOpen || false);
     const onChange = useCallback((value) => {
       agent.setValue(value);
       setShowMessage(false);
@@ -528,43 +602,14 @@
       agent.on("change", cb);
       return () => agent.off("change", cb);
     }, []);
-    const getTitle = useMemo(() => {
-      if (!schema.title) {
-        return () => null;
-      }
-      if (schema.title.includes("{")) {
-        return (agent2) => schema.title.replaceAll(/{(.+?)}/g, (match, p1) => {
-          const names = p1.split("|");
-          for (let name of names) {
-            if (/^("|').+\1$/.test(name)) {
-              return name.slice(1, -1);
-            }
-            if (agent2.properties[name]) {
-              let value = agent2.properties[name].getValue();
-              if (value) {
-                return value;
-              }
-            }
-          }
-          return "";
-        });
-      }
-      return () => schema.title;
-    }, [schema.title]);
-    const title = getTitle(agent);
-    const InputBody = useMemo(() => {
-      if (schema.collapsible) {
-        if (schema.inline) {
-          return ({ classes: classes2, open: open2, onClose, children }) => /* @__PURE__ */ wp.element.createElement(Catpow.Popover, { onClose, open: open2 }, /* @__PURE__ */ wp.element.createElement("div", { className: classes2() }, children));
-        }
-        return ({ classes: classes2, open: open2, onClose, children }) => /* @__PURE__ */ wp.element.createElement(Catpow.Popup, { onClose, open: open2 }, /* @__PURE__ */ wp.element.createElement("div", { className: classes2() }, children));
-      }
-      return ({ classes: classes2, children }) => /* @__PURE__ */ wp.element.createElement("div", { className: classes2() }, children);
-    }, [schema.inline, schema.collapsible]);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-invalid": !agent.isValid, "is-collapsible": schema.collapsible }, open ? "is-open" : "is-close", schema.inline ? "is-inline" : "is-block"), "data-json-key": agent.key }, schema.collapsible ? /* @__PURE__ */ wp.element.createElement("div", { className: classes._title(), onClick: () => setOpen(!open) }, /* @__PURE__ */ wp.element.createElement("span", { className: classes._title.text() }, getTitle(agent)), /* @__PURE__ */ wp.element.createElement("span", { className: classes._title.arrow() })) : /* @__PURE__ */ wp.element.createElement("div", { className: classes._title() }, /* @__PURE__ */ wp.element.createElement("span", { className: classes._title.text() }, getTitle(agent))), /* @__PURE__ */ wp.element.createElement(InputBody, { classes: classes._body, open, onClose: () => setOpen(false) }, agent.getMessage() && /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.message(showMessage ? "is-show" : "is-hidden") }, agent.getMessage()), /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-invalid": !agent.isValid, "is-compact": compact }, `is-layout-${layout}`, `is-size-${size}`, `is-level-${level}`), "data-json-key": agent.key }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._title() }, /* @__PURE__ */ wp.element.createElement("span", { className: classes._title.text() }, schema.title || schema.key)), /* @__PURE__ */ wp.element.createElement("div", { className: classes._body() }, agent.getMessage() && /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.message(showMessage ? "is-show" : "is-hidden") }, agent.getMessage()), /* @__PURE__ */ wp.element.createElement(
       InputComponent,
       {
         agent,
+        layout,
+        size,
+        compact,
+        level,
         onChange,
         onUpdate,
         lastChanged
@@ -574,15 +619,55 @@
 
   // ../components/JsonEditor/component/inputComponents/ObjectInput.jsx
   var ObjectInput = (props) => {
-    const { className = "JsonEditor-Input-ObjectInput", agent, lastChanged } = props;
+    const { className = "JsonEditor-Input-ObjectInput", layout = "block", size = "medium", compact = false, level = 0, agent, lastChanged } = props;
     const { useState, useMemo, useCallback, useEffect, useContext } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
-    const activeProperties = agent.getMergedSchemaForInput().properties;
-    if (activeProperties == null) {
+    const schema = agent.getMergedSchemaForInput();
+    const InputComponent = useMemo(() => {
+      if (compact) {
+        return (props2) => {
+          const { agent: agent2 } = props2;
+          const schema2 = agent2.getMergedSchemaForInput();
+          const [open, setOpen] = useState(false);
+          const onClose = useCallback(() => setOpen(false), [setOpen]);
+          const getLabel = useMemo(() => {
+            if (!schema2.label) {
+              return () => schema2.title || schema2.key;
+            }
+            if (schema2.label.includes("{")) {
+              return (agent3) => schema2.label.replaceAll(/{(.+?)}/g, (match, p1) => {
+                const names = p1.split("|");
+                for (let name of names) {
+                  if (/^("|').+\1$/.test(name)) {
+                    return name.slice(1, -1);
+                  }
+                  if (agent3.properties[name]) {
+                    let value = agent3.properties[name].getValue();
+                    if (value) {
+                      return value;
+                    }
+                  }
+                }
+                return "";
+              });
+            }
+            return () => schema2.label;
+          }, [schema2.label]);
+          const label = getLabel(agent2);
+          return /* @__PURE__ */ wp.element.createElement("div", { className: classes(`is-layout-${layout}`, `is-size-${size}`, `is-level-${level}`, open ? "is-open" : "is-close") }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.label(), onClick: () => setOpen(!open) }, label), /* @__PURE__ */ wp.element.createElement(Catpow.Popover, { open, onClose }, Object.keys(schema2.properties).map((name) => agent2.properties[name] && /* @__PURE__ */ wp.element.createElement(Input, { agent: agent2.properties[name], level: level + 1, key: name }))));
+        };
+      }
+      return (props2) => {
+        const { agent: agent2 } = props2;
+        const schema2 = agent2.getMergedSchemaForInput();
+        return /* @__PURE__ */ wp.element.createElement("div", { className: classes(`is-layout-${layout}`, `is-size-${size}`, `is-level-${level}`) }, Object.keys(schema2.properties).map((name) => agent2.properties[name] && /* @__PURE__ */ wp.element.createElement(Input, { agent: agent2.properties[name], level: level + 1, key: name })));
+      };
+    }, [classes, layout, size, compact, level]);
+    if (schema.properties == null) {
       return /* @__PURE__ */ wp.element.createElement("div", { className: classes.message() });
     }
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, Object.keys(activeProperties).map((name) => agent.properties[name] && /* @__PURE__ */ wp.element.createElement(Input, { agent: agent.properties[name], key: name })));
+    return /* @__PURE__ */ wp.element.createElement(InputComponent, { agent });
   };
 
   // ../components/JsonEditor/component/JsonEditor.jsx

@@ -1,12 +1,14 @@
 <?php
 $useScripts=['catpow','catpow.schema'];
 $useComponents=[
-	'Calendar','CheckBox','CheckBoxes',
 	'InputDateTime','InputDuration','InputTextItems',
-	'RadioButtons','SearchSelect',
+	'Calendar','CheckBox','CheckBoxes',
+	'RadioButtons',
+	'SelectBox','SearchSelect','StepSelect',
 	'SelectMedia','SelectPreparedImage','SelectPreparedImageSet',
 	'SelectNumber',
 	'SelectMenuItem',
-	'Toggle','ArrayInput',
-	'Popover','Popup'
+	'Toggle',
+	'ArrayInput','TableInput',
+	'Popover','Popup',
 ];

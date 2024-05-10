@@ -1,6 +1,6 @@
 ﻿import * as inputComponents from './inputComponents/index.js';
 
-export const getInputComponentForSchema=(schema)=>{
+export const getInputComponentForSchema=(schema,params)=>{
 	if(schema.hasOwnProperty('@type')){
 		switch(schema['@type']){
 			case 'Icon':return inputComponents.SelectIcon;
@@ -9,11 +9,23 @@ export const getInputComponentForSchema=(schema)=>{
 			case 'MenuItems':return inputComponents.SelectMenuItems;
 		}
 	}
+	if(schema.hasOwnProperty('options')){
+		if(
+			Array.isArray(schema.options) || 
+			Object.keys(schema.options).every((key)=>typeof schema.options[key]!=='object')
+		){
+			const length=Array.isArray(schema.options)?schema.options.length:Object.keys(schema.options).lenght;
+			if(length<8 && !params.compact){return inputComponents.Radio;}
+			if(length<64){return inputComponents.Select;}
+			return inputComponents.SearchSelect;
+		}
+		return inputComponents.StepSelect;
+	}
 	if(schema.type === 'null'){
 		return inputComponents.None;
 	}
 	if(schema.enum){
-		if(schema.enum.length<8){return inputComponents.Radio;}
+		if(schema.enum.length<8 && !params.compact){return inputComponents.Radio;}
 		if(schema.enum.length<64){return inputComponents.Select;}
 		return inputComponents.SearchSelect;
 	}

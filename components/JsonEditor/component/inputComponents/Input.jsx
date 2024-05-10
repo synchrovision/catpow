@@ -5,7 +5,7 @@ import {throttle} from 'util';
 const {__,sprintf}=wp.i18n;
 
 export const Input=(props)=>{
-	const {className="JsonEditor-Input",agent}=props;
+	const {className="JsonEditor-Input",layout='block',size='medium',compact=false,level=0,agent}=props;
 	const {useState,useMemo,useCallback,useEffect,useContext}=wp.element;
 	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem(className),[]);
@@ -16,11 +16,13 @@ export const Input=(props)=>{
 
 	const {description}=schema;
 	const InputComponent=useMemo(()=>{
-		return (getAdditionalInputComponent && getAdditionalInputComponent(schema)) || getInputComponentForSchema(schema);
-	},[schema]);
+		return (
+			(getAdditionalInputComponent && getAdditionalInputComponent(schema,{layout,size,compact})) || 
+			getInputComponentForSchema(schema,{layout,size,compact})
+		);
+	},[schema,layout,size]);
 	
 	const [showMessage,setShowMessage]=useState(false);
-	const [open,setOpen]=useState(schema.initialOpen || false);
 
 	const onChange=useCallback((value)=>{
 		agent.setValue(value);
@@ -43,69 +45,28 @@ export const Input=(props)=>{
 		return ()=>agent.off('change',cb);
 	},[]);
 	
-	const getTitle=useMemo(()=>{
-		if(!schema.title){return ()=>null;}
-		if(schema.title.includes('{')){
-			return (agent)=>schema.title.replaceAll(/{(.+?)}/g,(match,p1)=>{
-				const names=p1.split('|');
-				for(let name of names){
-					if(/^("|').+\1$/.test(name)){return name.slice(1,-1);}
-					if(agent.properties[name]){
-						let value=agent.properties[name].getValue();
-						if(value){return value;}
-					}
-				}
-				return '';
-			});
-		}
-		return ()=>schema.title;
-	},[schema.title]);
-	const title=getTitle(agent);
-	
-	
-	const InputBody=useMemo(()=>{
-		if(schema.collapsible){
-			if(schema.inline){
-				return ({classes,open,onClose,children})=>(
-					<Catpow.Popover onClose={onClose} open={open}>
-						<div className={classes()}>{children}</div>
-					</Catpow.Popover>
-				);
-			}
-			return ({classes,open,onClose,children})=>(
-				<Catpow.Popup onClose={onClose} open={open}>
-					<div className={classes()}>{children}</div>
-				</Catpow.Popup>
-			);
-		}
-		return ({classes,children})=><div className={classes()}>{children}</div>;
-	},[schema.inline,schema.collapsible]);
-	
 
 	return (
-		<div className={classes({'is-invalid':!agent.isValid,'is-collapsible':schema.collapsible,},open?'is-open':'is-close',schema.inline?'is-inline':'is-block')} data-json-key={agent.key}>
-			{schema.collapsible?(
-				<div className={classes._title()} onClick={()=>setOpen(!open)}>
-					<span className={classes._title.text()}>{getTitle(agent)}</span>
-					<span className={classes._title.arrow()}/>
-				</div>
-			):(
-				<div className={classes._title()}>
-					<span className={classes._title.text()}>{getTitle(agent)}</span>
-				</div>
-			)}
-			<InputBody classes={classes._body} open={open} onClose={()=>setOpen(false)}>
+		<div className={classes({'is-invalid':!agent.isValid,'is-compact':compact},`is-layout-${layout}`,`is-size-${size}`,`is-level-${level}`)} data-json-key={agent.key}>
+			<div className={classes._title()}>
+				<span className={classes._title.text()}>{schema.title || schema.key}</span>
+			</div>
+			<div className={classes._body()}>
 				{agent.getMessage() && (
 					<div className={classes._body.message(showMessage?'is-show':'is-hidden')}>{agent.getMessage()}</div>
 				)}
 				<InputComponent
 					agent={agent}
+					layout={layout}
+					size={size}
+					compact={compact}
+					level={level}
 					onChange={onChange}
 					onUpdate={onUpdate}
 					lastChanged={lastChanged}
 				/>
 				{description && <div className={classes._body.description()}>{description}</div>}
-			</InputBody>
+			</div>
 		</div>
 	);
 }
