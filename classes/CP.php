@@ -38,7 +38,7 @@ class CP{
 			if(substr($class,0,7)==='Catpow\\'){
 				$class=str_replace('\\','/',substr($class,7));
 				foreach($classes_dirs as $dir){
-					if(file_exists($f=$dir.'/'.$class.'.php')){include $f;break;}
+					if(file_exists($f=$dir.'/'.$class.'.php')){include_once $f;break;}
 				}
 			}
 			else{
