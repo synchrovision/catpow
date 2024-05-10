@@ -29,6 +29,10 @@ class MenuManager{
 		foreach($items as $key=>$val){
 			if($key==='url' && is_string($val) && $val[0]==='/'){$items[$key]=home_url($val);}
 			if(is_array($val)){
+				if(isset($val['@link'])){
+					$item=self::get_menu_items_by_query($val['@link']['path'],$val['@link']['flags']??self::USE_IMAGE);
+					$items[$key]=array_merge($val,$item);
+				}
 				if(isset($val['@query'])){
 					$items[$key]['items']=self::get_menu_items_by_query(
 						$val['@query']['path']??'post/page',
@@ -94,6 +98,48 @@ class MenuManager{
 		}
 		return $items;
 	}
+	public static function get_menu_item_by_data_path($data_path,$flags=0){
+		$path_data=is_array($data_path)?$data_path:CP::parse_data_path($data_path);
+		$class_name=CP::get_class_name('data_type',$path_data['data_type']);
+		if(empty($path_data['data_id'])){
+			$conf=CP::get_conf_data($path_data);
+			$item=[
+				'@type'=>'Link',
+				'title'=>$conf['label'],
+				'name'=>$conf['name']
+			];
+			switch($path_data['data_type']){
+				case 'post':{$item['url']=get_post_type_archive_link($path_data['data_name']);break;}
+			}
+		}
+		else{
+			$obj=$class_name::get_object($path_data['data_name'],$path_data['data_id']);
+			$item=[
+				'@type'=>'Link',
+				'title'=>$class_name::get_title($obj),
+				'name'=>$class_name::get_name($obj),
+				'id'=>$class_name::get_title($obj),
+				'parent'=>$class_name::get_parent($obj),
+				'url'=>$class_name::get_url($obj)
+			];
+			if(self::USE_IMAGE & $flags){
+				$conf=CP::get_conf_data($path_data);
+				$real_path_data=CP::realize_path_data($path_data);
+				if(!empty($conf['meta']['image'])){
+					$image_id=CP::get_the_meta_value($data_path.'/image?')[0]??null;
+				}
+				if(
+					empty($image_id) && 
+					$real_path_data['data_type']==='post' && 
+					post_type_supports($real_path_data['data_name'],'thumbnail')
+				){
+					$image_id=get_post_thumbnail_id($path_data['data_id']);
+				}
+				$item['image']=wp_get_attachment_image_url($image_id,'vga');
+			}
+		}
+		return $item;
+	}
 	public static function get_menu_item_for_post_type($post_type){
 		if(is_string($post_type)){$post_type=get_post_type_object($post_type);}
 		if(empty($post_type) || !$post_type->has_archive){return null;}
@@ -144,23 +190,7 @@ class MenuManager{
 				'type'=>'object',
 				'title'=>'Menu',
 				'properties'=>[
-					'isDynamic'=>['type'=>'boolean','title'=>'Dynamic']
-				],
-				'oneOf'=>[
-					[
-						'properties'=>[
-							'isDynamic'=>['const'=>true],
-							'query'=>['$ref'=>'#/$defs/query']
-						],
-						'required'=>['query']
-					],
-					[
-						'properties'=>[
-							'isDynamic'=>['const'=>false],
-							'items'=>['type'=>'array','title'=>'Items','items'=>['$ref'=>'#/$defs/menuItem']]
-						],
-						'required'=>['items']
-					]
+					'items'=>['type'=>'array','title'=>'Items','items'=>['$ref'=>'#/$defs/menuItem']]
 				]
 			],
 			'Column'=>[
@@ -171,7 +201,7 @@ class MenuManager{
 					'grow'=>['type'=>'number','title'=>'Grow'],
 					'contents'=>[
 						'type'=>'array',
-						'items'=>['@type'=>'@Contents']
+						'items'=>['@type'=>'Contents']
 					]
 				]
 			],
@@ -194,7 +224,8 @@ class MenuManager{
 			],
 			'menuItem'=>[
 				'type'=>'object',
-				'title'=>'MenuItem',
+				'label'=>'{title|"Title"}',
+				'collapsible'=>true,
 				'properties'=>[
 					'type'=>['type'=>'string','title'=>'Type','enum'=>['link','panel']],
 					'icon'=>['@type'=>'Icon'],
@@ -218,6 +249,8 @@ class MenuManager{
 				]
 			],
 			'linkSettings'=>[
+				'title'=>'Link',
+				'label'=>'',
 				'properties'=>[
 					'isDynamic'=>['type'=>'boolean','title'=>'Dynamic','default'=>false]
 				],
@@ -239,6 +272,7 @@ class MenuManager{
 				]
 			],
 			'panelSettings'=>[
+				'title'=>'Panel',
 				'properties'=>[
 					'columns'=>[
 						'type'=>'array',
