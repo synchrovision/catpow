@@ -411,26 +411,42 @@
     const InputComponent = useMemo(() => {
       if (layout === "table") {
         return (props2) => {
-          const schema2 = agent.items[0].getMergedSchemaForInput();
-          const cols = Object.keys(schema2.properties);
-          const labels = cols.map((col) => schema2.properties[col].title || col);
+          const { agent: agent2 } = props2;
+          const cols = {};
+          for (const item of agent2.items) {
+            const itemSchema = item.getMergedSchemaForInput();
+            if (itemSchema.properties == null) {
+              continue;
+            }
+            for (const col in itemSchema.properties) {
+              cols[col] = cols[col] || itemSchema.properties[col].title || col;
+            }
+          }
           return /* @__PURE__ */ wp.element.createElement(
             Catpow.TableInput,
             {
-              labels,
+              size,
+              labels: Object.values(cols),
               onAddItem,
               onCopyItem,
               onMoveItem,
               onRemoveItem
             },
-            props2.agent.items.map((item) => cols.map((col) => /* @__PURE__ */ wp.element.createElement(Input, { agent: item.properties[col], layout: "inline", size: "small", compact: true, key: getItemId(item) })))
+            props2.agent.items.map((item) => Object.keys(cols).map((col) => {
+              if (item.getMergedSchemaForInput().properties[col] == null) {
+                return false;
+              }
+              return /* @__PURE__ */ wp.element.createElement(Input, { agent: item.properties[col], layout: "inline", size: "small", compact: true, key: getItemId(item) });
+            }))
           );
         };
       }
       return (props2) => {
+        const { agent: agent2 } = props2;
         return /* @__PURE__ */ wp.element.createElement(
           Catpow.ArrayInput,
           {
+            size,
             onAddItem,
             onCopyItem,
             onMoveItem,
@@ -439,7 +455,7 @@
           props2.agent.items.map((item) => /* @__PURE__ */ wp.element.createElement(Input, { agent: item, layout: "inline", size: "small", compact: true, key: getItemId(item) }))
         );
       };
-    }, [layout, onAddItem, onCopyItem, onMoveItem, onRemoveItem]);
+    }, [layout, size, onAddItem, onCopyItem, onMoveItem, onRemoveItem]);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes(`is-layout-${layout}`, `is-size-${size}`) }, /* @__PURE__ */ wp.element.createElement(InputComponent, { agent }));
   };
 

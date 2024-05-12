@@ -44,28 +44,41 @@ export const ArrayInput=(props)=>{
 	const InputComponent=useMemo(()=>{
 		if(layout==='table'){
 			return (props)=>{
-				const schema=agent.items[0].getMergedSchemaForInput();
-				const cols=Object.keys(schema.properties);
-				const labels=cols.map((col)=>schema.properties[col].title || col);
+				const {agent}=props;
+				
+				const cols={};
+				for(const item of agent.items){
+					const itemSchema=item.getMergedSchemaForInput();
+					if(itemSchema.properties==null){continue;}
+					for(const col in itemSchema.properties){
+						cols[col]=cols[col] || itemSchema.properties[col].title || col;
+					}
+				}
 				
 				return (
 					<Catpow.TableInput
-						labels={labels}
+						size={size}
+						labels={Object.values(cols)}
 						onAddItem={onAddItem}
 						onCopyItem={onCopyItem}
 						onMoveItem={onMoveItem}
 						onRemoveItem={onRemoveItem}
 					>
-						{props.agent.items.map((item)=>cols.map((col)=>(
-							<Input agent={item.properties[col]} layout="inline" size="small" compact={true} key={getItemId(item)}/>
-						)))}
+						{props.agent.items.map((item)=>Object.keys(cols).map((col)=>{
+							if(item.getMergedSchemaForInput().properties[col]==null){return false;}
+							return (
+								<Input agent={item.properties[col]} layout="inline" size="small" compact={true} key={getItemId(item)}/>
+							);
+						}))}
 					</Catpow.TableInput>
 				);
 			};
 		}
 		return (props)=>{
+			const {agent}=props;
 			return (
 				<Catpow.ArrayInput
+					size={size}
 					onAddItem={onAddItem}
 					onCopyItem={onCopyItem}
 					onMoveItem={onMoveItem}
@@ -75,7 +88,7 @@ export const ArrayInput=(props)=>{
 				</Catpow.ArrayInput>
 			);
 		};
-	},[layout,onAddItem,onCopyItem,onMoveItem,onRemoveItem]);
+	},[layout,size,onAddItem,onCopyItem,onMoveItem,onRemoveItem]);
 	
 	
 	return (
