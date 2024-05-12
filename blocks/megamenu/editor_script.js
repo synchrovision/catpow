@@ -22,10 +22,11 @@
         });
       }, []);
       useEffect(() => {
-        if (!config) {
-          return;
+        if (config) {
+          updateResolvedPropsJson(attributes.props || config.defaultProps);
         }
-        const props = attributes.props || config.defaultProps;
+      }, [attributes.props, config]);
+      const updateResolvedPropsJson = useCallback((props) => {
         if (props) {
           wp.apiFetch({
             path: "/cp/v1/blocks/config/megamenu/resolve",
@@ -37,7 +38,7 @@
             console.error(e);
           });
         }
-      }, [attributes.props, config]);
+      }, []);
       const resolvedProps = useMemo(() => {
         if (!resolvedPropsJson) {
           return null;
@@ -55,6 +56,7 @@
         return null;
       }, []);
       const onChangeHandle = useCallback((props) => {
+        updateResolvedPropsJson(props);
         setAttributes({ props });
       }, []);
       if (!config || !resolvedProps) {

@@ -20,8 +20,12 @@
 		},[]);
 		
 		useEffect(()=>{
-			if(!config){return;}
-			const props=attributes.props || config.defaultProps;
+			if(config){
+				updateResolvedPropsJson(attributes.props || config.defaultProps);
+			}
+		},[attributes.props,config]);
+		
+		const updateResolvedPropsJson=useCallback((props)=>{
 			if(props){
 				wp.apiFetch({
 					path:'/cp/v1/blocks/config/megamenu/resolve',
@@ -31,7 +35,7 @@
 					setAttributes({resolvedPropsJson:res.props});
 				}).catch((e)=>{console.error(e);});
 			}
-		},[attributes.props,config]);
+		},[]);
 		
 		const resolvedProps=useMemo(()=>{
 			if(!resolvedPropsJson){return null;}
@@ -50,6 +54,7 @@
 		},[]);
 		
 		const onChangeHandle=useCallback((props)=>{
+			updateResolvedPropsJson(props);
 			setAttributes({props});
 		},[]);
 		

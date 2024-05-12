@@ -1,6 +1,5 @@
 @import 'admin_style_config.scss';
 
-.wp-block-catpow-megamenu{
-	&-editor{
-	}
+.block-editor-block-list__block .wp-block-catpow-megamenu{
+	@include bnd((t:0));
 }
