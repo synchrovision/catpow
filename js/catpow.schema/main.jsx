@@ -263,6 +263,7 @@ export const main=(originalRootSchema,params={})=>{
 					if(typeof event === 'string'){
 						event={type:event,bubbles:true};
 					}
+					if(debug){debugLog(`\u{26A1} trigger event '${event.type}' on '${agent.key}'`,{event,agent});}
 					event.target=agent;
 					const cb=(agent)=>{
 						if(agent.eventListeners[event.type]==null){return true;}
@@ -506,8 +507,10 @@ export const main=(originalRootSchema,params={})=>{
 					const item=createAgent(
 						agent.matrix.items,agent.value,index,value,agent.parent
 					);
+					agent.value.splice(index,0,value);
 					agent.items.splice(index,0,item);
 					agent.items.forEach((item,index)=>item.key=index);
+					item.initialize();
 					agent.trigger({type:'addItem',bubbles:false});
 					agent.trigger({type:'modifyItems',bubbles:false});
 				}
@@ -527,6 +530,7 @@ export const main=(originalRootSchema,params={})=>{
 			},
 			removeItem:(agent)=>{
 				return (index)=>{
+					agent.value.splice(index,1);
 					agent.items.splice(index,1);
 					agent.items.forEach((item,index)=>item.key=index);
 					agent.trigger({type:'removeItem',bubbles:false});

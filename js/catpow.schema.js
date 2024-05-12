@@ -1140,6 +1140,9 @@
             if (typeof event === "string") {
               event = { type: event, bubbles: true };
             }
+            if (debug) {
+              debugLog(`\u26A1 trigger event '${event.type}' on '${agent.key}'`, { event, agent });
+            }
             event.target = agent;
             const cb = (agent2) => {
               if (agent2.eventListeners[event.type] == null) {
@@ -1418,8 +1421,10 @@
               value,
               agent.parent
             );
+            agent.value.splice(index, 0, value);
             agent.items.splice(index, 0, item);
             agent.items.forEach((item2, index2) => item2.key = index2);
+            item.initialize();
             agent.trigger({ type: "addItem", bubbles: false });
             agent.trigger({ type: "modifyItems", bubbles: false });
           };
@@ -1439,6 +1444,7 @@
         },
         removeItem: (agent) => {
           return (index) => {
+            agent.value.splice(index, 1);
             agent.items.splice(index, 1);
             agent.items.forEach((item, index2) => item.key = index2);
             agent.trigger({ type: "removeItem", bubbles: false });
