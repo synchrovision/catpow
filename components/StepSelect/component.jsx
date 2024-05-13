@@ -103,38 +103,41 @@
 				</ul>
 			</div>
 			<Catpow.Popup open={open} onClose={()=>open && setOpen(false)}>
-				<div className={classes.selected()} onClick={()=>setOpen(true)}>
-					<ul className={classes.selected.items()}>
-						{(state.selectedItems && state.selectedItems.length)?(
-							state.selectedItems.map((item)=>(
-								<li className={classes.selected.items.item()} onClick={()=>toggleItem(item)} key={item.value}>
-									{item.label}
-									<span className={classes.selected.items.item.button()}></span>
-								</li>
-							))
-						):false}
-					</ul>
-				</div>
-				<div className={classes.selections()}>
-					{state.activeItems.map((activeItem,index)=>(
-						<div className={classes.selections.options()} key={index}>
-							<ul className={classes.selections.options.items()}>
-								{activeItem.options.map((item,index)=>(
-									<li
-										className={classes.selections.options.items.item({
-											'is-selected':state.selectedItems.includes(item),
-											'is-active':state.activeItems.includes(item),
-										})}
-										onClick={()=>toggleItem(item)}
-										key={item.label}
-									>
+				<div className={classes._body()}>
+					<div className={classes.selected()} onClick={()=>setOpen(true)}>
+						<ul className={classes.selected.items()}>
+							{(state.selectedItems && state.selectedItems.length)?(
+								state.selectedItems.map((item)=>(
+									<li className={classes.selected.items.item()} onClick={()=>toggleItem(item)} key={item.value}>
 										{item.label}
+										<span className={classes.selected.items.item.button()}></span>
 									</li>
-								))}
-							</ul>
-							<div className={classes.selections.options.arrow((index<state.activeItems.length-1)?'is-shown':'is-hidden')}></div>
-						</div>
-					))}
+								))
+							):false}
+						</ul>
+					</div>
+					<div className={classes.selections()}>
+						{state.activeItems.map((activeItem,index)=>(
+							<div className={classes.selections.options()} key={index}>
+								<ul className={classes.selections.options.items()}>
+									{activeItem.options.map((item,index)=>(
+										<li
+											className={classes.selections.options.items.item({
+												'is-selected':state.selectedItems.includes(item),
+												'is-active':state.activeItems.includes(item),
+												'has-children':!item.hasOwnProperty('value')
+											})}
+											onClick={()=>toggleItem(item)}
+											key={item.label}
+										>
+											{item.label}
+										</li>
+									))}
+								</ul>
+								<div className={classes.selections.options.arrow((index<state.activeItems.length-1)?'is-shown':'is-hidden')}></div>
+							</div>
+						))}
+					</div>
 				</div>
 			</Catpow.Popup>
 		</div>
