@@ -874,14 +874,14 @@
             resolvedSchema[conditionalSchemaKey][key2] = resolveSchema(
               uri,
               resolvedSchema[conditionalSchemaKey][key2],
-              { parent, isConditional: true }
+              { parent, isConditional: true, container: resolvedSchema }
             );
           }
         } else {
           resolvedSchema[conditionalSchemaKey] = resolveSchema(
             uri,
             resolvedSchema[conditionalSchemaKey],
-            { parent, isConditional: true }
+            { parent, isConditional: true, container: resolvedSchema }
           );
         }
       }
@@ -1009,9 +1009,10 @@
       }
       return unlimitedSchema;
     };
-    const getMatrix = (schemas) => {
+    const getMatrix = (originalSchemas) => {
       const updateHandlesList = [];
-      schemas.slice().forEach((schema) => {
+      const schemas = originalSchemas.slice();
+      const registerSchema = (schema) => {
         if (schema.if != null) {
           schemas.push(getUnlimietedSchema(schema.if));
           updateHandlesList.push((agent) => {
@@ -1066,7 +1067,10 @@
             }
           });
         }
-      });
+      };
+      for (let i2 = 0; i2 < schemas.length; i2++) {
+        registerSchema(schemas[i2]);
+      }
       const matrix = createMatrix(schemas);
       updateHandles.set(matrix, (agent) => {
         updateHandlesList.forEach((cb) => cb(agent));
@@ -1224,6 +1228,11 @@
             agent.setSchemaStatus(schema, agent.parent == null ? 3 : agent.parent.getSchemaStatus(schema.parent) & status);
           };
         },
+        getParentSchemaStatus: (agent) => {
+          return (schema) => {
+            return agent.conditionalSchemaStatus.get(schema);
+          };
+        },
         setConditionalRequiredFlag: (agent) => {
           return (schema, flag) => {
             if (agent.conditionalRequiredFlag.get(schema) === flag) {
@@ -1261,6 +1270,11 @@
               let status2 = agent2.parent.schemaStatus.get(schema2.parent);
               if (agent2.conditionalSchemaStatus.has(schema2)) {
                 status2 &= agent2.conditionalSchemaStatus.get(schema2);
+                let container = schema2.container;
+                while (agent2.conditionalSchemaStatus.has(container)) {
+                  status2 &= agent2.conditionalSchemaStatus.get(container);
+                  container = container.container;
+                }
               }
               if (status2 === currentStatus) {
                 return false;
