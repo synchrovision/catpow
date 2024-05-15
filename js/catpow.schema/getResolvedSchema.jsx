@@ -10,6 +10,7 @@ export const getResolvedSchema=(schema,rootSchema)=>{
 	if(rootSchema==null){rootSchema=schema;}
 	if(cache.has(schema)){return cache.get(schema);}
 	const resolvedSchema={};
+	const {properties=null,items=null,...otherParams}=schema;
 	if(schema.hasOwnProperty('@type')){
 		Object.assign(resolvedSchema,
 			getResolvedSchema(
@@ -26,7 +27,23 @@ export const getResolvedSchema=(schema,rootSchema)=>{
 			)
 		);
 	}
-	Object.assign(resolvedSchema,schema);
+	if(items!=null){
+		if(resolvedSchema.items){
+			const {properties:itemsProperties=null,...otherItemsParams}=items;
+			if(itemsProperties!=null){
+				resolvedSchema.items.properties=Object.assign(resolvedSchema.items.properties || {},itemsProperties);
+			}
+			Object.assign(resolvedSchema.items,otherItemsParams);
+		}
+		else{
+			resolvedSchema.items=items;
+		}
+	}
+	if(properties!=null){
+		if(resolvedSchema.properties==null){resolvedSchema.properties={};}
+		Object.assign(resolvedSchema.properties,properties);
+	}
+	Object.assign(resolvedSchema,otherParams);
 	if(resolvedSchema.type==null){
 		resolvedSchema.type=getType(resolvedSchema,rootSchema);
 	}
