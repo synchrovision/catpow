@@ -5,7 +5,7 @@
 	&-Editor{
 		@include bnd((pd:20));
 		&__body{
-			@include bnd((w:a 800,mg:a));
+			@include bnd((mg:a));
 			@include bg((c:b));
 			@include shd((b:4));
 			&-header{
@@ -32,12 +32,12 @@
 				}
 			}
 			&-contents{
-				@include bnd((pd:20));
+				@include bnd((pd:20,ox:a));
 			}
 		}
 	}
 	&-Input{
-		@include flx((w:w));
+		@include txt((p:12,f:t));
 		&__title{
 			&-text{
 				
@@ -45,10 +45,10 @@
 			&-arrow{
 				
 			}
-			@include bnd((pd:8,f:0 0 120));
+			@include bnd((pd:8));
 		}
 		&__body{
-			@include bnd((p:r,pd:8,f:1 1 a));
+			@include bnd((p:r,pd:8));
 			&-message{
 				@include bnd((p:a,b:f,pd:4 20,z:1));
 				@include bdr((r:20));
@@ -66,6 +66,46 @@
 				@include txt((p:12));
 			}
 		}
+		&.is-level-1>&{
+			&__title{
+				@include bnd((pd:.25em 1.25em,mgb:.5em));
+				@include bdr((r:1em));
+				@include bg((c:m));
+				@include txt((p:16,c:i));
+			}
+			&__body{
+				
+			}
+		}
+		&.is-level-2>&{
+			&__title{
+				@include bnd((pd:.25em 1.25em,mgb:.5em));
+				@include bdr((r:1em));
+				@include bg((c:t 10));
+				@include txt((p:14));
+			}
+			&__body{
+				
+			}
+		}
+		&.is-level-3>&{
+			&__title{
+				@include bnd((pdb:.25em,mgb:.5em));
+				@include txt((p:14));
+				@include bdr((p:b,s:s,w:1,c:t 1 .5));
+			}
+			&__body{
+				
+			}
+		}
+		&.is-level-4>&{
+			&__title{
+			}
+			&__body{
+				
+			}
+		}
+		
 		&-Number{
 		}
 		&-Range{
@@ -73,16 +113,18 @@
 		&-SearchSelect{
 		}
 		&-Text{
-			&-input{
-				@include bnd((pd:4));
+			&-input,.wp-core-ui &-input{
+				@include bnd((pd:.25em .5em));
 				@include bdr((s:n,r:4));
+				@include txt((p:i));
 				@include shd((b:-1));
 			}
 		}
 		&-Textarea{
 			&-textarea{
-				@include bnd((pd:4));
+				@include bnd((pd:.25em .5em));
 				@include bdr((s:n,r:4));
+				@include txt((p:i));
 				@include shd((b:-1));
 			}
 		}

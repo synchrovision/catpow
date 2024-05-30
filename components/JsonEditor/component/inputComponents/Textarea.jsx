@@ -13,6 +13,12 @@ export const Textarea=(props)=>{
 		onUpdate(e.currentTarget.value);
 	},[onChange]);
 	
+	const {cols,rows}=useMemo(()=>{
+		const schema=agent.getMergedSchemaForInput();
+		const {cols,rows}=schema;
+		return {cols,rows};
+	},[agent.getMergedSchemaForInput()]);
+	
 	return (
 		<div className={classes()}>
 			<textarea
@@ -20,6 +26,8 @@ export const Textarea=(props)=>{
 				onChange={onChangeHandle}
 				onBlur={onUpdateHandle}
 				value={agent.getValue() || ''}
+				cols={cols}
+				rows={rows}
 			/>
 		</div>
 	);

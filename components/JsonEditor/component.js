@@ -166,6 +166,13 @@
       }
       return "text";
     }, [agent.getMergedSchemaForInput()]);
+    const size = useMemo(() => {
+      const schema = agent.getMergedSchemaForInput();
+      if (schema.hasOwnProperty("maxLength")) {
+        return schema.maxLength;
+      }
+      return null;
+    }, [agent.getMergedSchemaForInput()]);
     const onChangeHandle = useCallback((e) => {
       onChange(e.currentTarget.value);
     }, [onChange]);
@@ -177,6 +184,7 @@
       {
         type: inputType,
         value: agent.getValue() || "",
+        size,
         className: classes.input(),
         onChange: onChangeHandle,
         onBlur: onUpdateHandle,
@@ -198,13 +206,20 @@
     const onUpdateHandle = useCallback((e) => {
       onUpdate(e.currentTarget.value);
     }, [onChange]);
+    const { cols, rows } = useMemo(() => {
+      const schema = agent.getMergedSchemaForInput();
+      const { cols: cols2, rows: rows2 } = schema;
+      return { cols: cols2, rows: rows2 };
+    }, [agent.getMergedSchemaForInput()]);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(
       "textarea",
       {
         className: classes.textarea(),
         onChange: onChangeHandle,
         onBlur: onUpdateHandle,
-        value: agent.getValue() || ""
+        value: agent.getValue() || "",
+        cols,
+        rows
       }
     ));
   };

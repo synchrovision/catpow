@@ -6,8 +6,6 @@
   padding: 1.25rem;
 }
 .JsonEditor-Editor__body {
-  max-width: 50rem;
-  width: auto;
   margin: auto;
   background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
   box-shadow: 0 4px 9px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
@@ -54,29 +52,18 @@
 }
 .JsonEditor-Editor__body-contents {
   padding: 1.25rem;
+  overflow-x: auto;
 }
 .JsonEditor-Input {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-lines: multiple;
-  -webkit-flex-wrap: wrap;
-  flex-wrap: wrap;
+  font-size: 0.75rem;
+  font-family: var(--cp-fonts-t);
 }
 .JsonEditor-Input__title {
   padding: 0.5rem;
-  -webkit-box-flex: 0;
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: 7.5rem;
 }
 .JsonEditor-Input__body {
   position: relative;
   padding: 0.5rem;
-  -webkit-box-flex: 1;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: auto;
 }
 .JsonEditor-Input__body-message {
   position: absolute;
@@ -108,16 +95,41 @@
   padding: 0.25rem;
   font-size: 0.75rem;
 }
-.JsonEditor-Input-Text-input {
-  padding: 0.25rem;
+.JsonEditor-Input.is-level-1 > .JsonEditor-Input__title {
+  padding: 0.25em 1.25em;
+  margin-bottom: 0.5em;
+  border-radius: 1em;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  font-size: 1rem;
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+}
+.JsonEditor-Input.is-level-2 > .JsonEditor-Input__title {
+  padding: 0.25em 1.25em;
+  margin-bottom: 0.5em;
+  border-radius: 1em;
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),1);
+  font-size: 0.875rem;
+}
+.JsonEditor-Input.is-level-3 > .JsonEditor-Input__title {
+  padding-bottom: 0.25em;
+  margin-bottom: 0.5em;
+  font-size: 0.875rem;
+  border-bottom-style: solid;
+  border-bottom-width: 0.0625rem;
+  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.5);
+}
+.JsonEditor-Input-Text-input, .wp-core-ui .JsonEditor-Input-Text-input {
+  padding: 0.25em 0.5em;
   border-style: none;
   border-radius: 0.25rem;
+  font-size: inherit;
   box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a)) inset;
 }
 .JsonEditor-Input-Textarea-textarea {
-  padding: 0.25rem;
+  padding: 0.25em 0.5em;
   border-style: none;
   border-radius: 0.25rem;
+  font-size: inherit;
   box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a)) inset;
 }
 .JsonEditor-Input-ObjectInput-label {

@@ -37,6 +37,12 @@ export const Text=(props)=>{
 		return 'text';
 	},[agent.getMergedSchemaForInput()]);
 	
+	const size=useMemo(()=>{
+		const schema=agent.getMergedSchemaForInput();
+		if(schema.hasOwnProperty('maxLength')){return schema.maxLength;}
+		return null;
+	},[agent.getMergedSchemaForInput()]);
+	
 	const onChangeHandle=useCallback((e)=>{
 		onChange(e.currentTarget.value);
 	},[onChange]);
@@ -50,6 +56,7 @@ export const Text=(props)=>{
 			<input
 				type={inputType}
 				value={agent.getValue() || ''}
+				size={size}
 				className={classes.input()}
 				onChange={onChangeHandle}
 				onBlur={onUpdateHandle}
