@@ -16,7 +16,7 @@
 			@include bnd((ap:n,p:r,pd:0 .5em,pdr:1.5em,mg:0));
 			@include bdr((s:n));
 			@include bg((i:n,c:b));
-			
+			@include txt((p:i));
 		}
 	}
 }
