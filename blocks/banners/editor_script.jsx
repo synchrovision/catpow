@@ -39,7 +39,7 @@ wp.blocks.registerBlockType('catpow/banners',{
 			var selectiveClasses=[
 				{label:'サイズ',type:'buttons',values:['small','medium','large','full']},
 				{label:'タイトル',values:'hasTitle'},
-				CP.selectiveClassesPreset.isTemplate
+				'isTemplate'
 			];
 			wp.hooks.applyFilters('catpow.blocks.banners.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;

@@ -38,7 +38,7 @@
         var selectiveClasses2 = [
           { label: "\u30B5\u30A4\u30BA", type: "buttons", values: ["small", "medium", "large", "full"] },
           { label: "\u30BF\u30A4\u30C8\u30EB", values: "hasTitle" },
-          CP.selectiveClassesPreset.isTemplate
+          "isTemplate"
         ];
         wp.hooks.applyFilters("catpow.blocks.banners.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
