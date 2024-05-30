@@ -20,8 +20,8 @@
 }
 .TableInput-table-tbody-tr {
   position: relative;
-  padding: 0.5rem;
-  margin: 1rem auto;
+  padding: 0.5em;
+  margin: 1em auto;
   box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
 .TableInput-table-tbody-tr:not(:first-child) {
@@ -40,28 +40,37 @@
   gap: 0.25rem;
   -webkit-justify-content: flex-end;
   justify-content: flex-end;
-  font-size: 0.875rem;
+  -webkit-align-items: center;
+  align-items: center;
+  font-size: 1em;
 }
 .TableInput-table-tbody-tr-td-controls-button, .TableInput-table-tbody-tr-td-controls-spacer {
   position: relative;
-  padding: 0.125rem;
+  padding: 0.1em;
   -webkit-box-flex: 0;
   flex-grow: 0;
   flex-shrink: 0;
-  flex-basis: 0.875rem;
-  height: 0.875rem;
+  flex-basis: 1em;
+  height: 1em;
 }
 .TableInput-table-tbody-tr-td-controls-button {
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.5);
-  border-radius: 50%;
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.4);
   text-align: center;
   color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
-  font-size: 0.875rem;
+  font-size: 1em;
   line-height: 1em;
   cursor: pointer;
   box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+  -webkit-transition: 2s;
+  transition: 2s;
 }
-.TableInput-table-tbody-tr-td-controls-button::before {
+.TableInput-table-tbody-tr-td-controls-button:hover {
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.6);
+}
+.TableInput-table-tbody-tr-td-controls-button.is-remove, .TableInput-table-tbody-tr-td-controls-button.is-add {
+  border-radius: 50%;
+}
+.TableInput-table-tbody-tr-td-controls-button.is-remove::before, .TableInput-table-tbody-tr-td-controls-button.is-add::before {
   content: "";
   display: block;
   position: absolute;
@@ -71,18 +80,18 @@
   left: 0rem;
   inset: 0rem;
   margin: auto;
-  width: 0.625rem;
-  height: 0.625rem;
+  width: 0.8em;
+  height: 0.8em;
   background-color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
 }
-.TableInput-table-tbody-tr-td-controls-button.is-up::before, .TableInput-table-tbody-tr-td-controls-button.is-down::before {
-  width: 0.5rem;
-  height: 0.375rem;
+.TableInput-table-tbody-tr-td-controls-button.is-up, .TableInput-table-tbody-tr-td-controls-button.is-down {
+  width: 0.8em;
+  height: 0.5em;
 }
-.TableInput-table-tbody-tr-td-controls-button.is-up::before {
+.TableInput-table-tbody-tr-td-controls-button.is-up {
   clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
 }
-.TableInput-table-tbody-tr-td-controls-button.is-down::before {
+.TableInput-table-tbody-tr-td-controls-button.is-down {
   clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
 }
 .TableInput-table-tbody-tr-td-controls-button.is-remove::before {

@@ -15,7 +15,7 @@
 			@include bnd((mg:0,pd:0));
 			@include txt((l:n));
 			&-tr{
-				@include bnd((p:r,pd:8,mg:16 a));
+				@include bnd((p:r,pd:.5em,mg:1em a));
 				@include shd((b:2));
 				&:not(:first-child){
 					@include bdr((p:t,s:s,w:1,c:s));
@@ -23,36 +23,36 @@
 				&-td{
 					&-controls{
 						@include bnd((w:100));
-						@include flx((w:n,g:4,j:e));
-						@include txt((p:14));
+						@include flx((w:n,g:4,j:e,a:c));
+						@include txt((p:1em));
 						&-button,&-spacer{
-							@include bnd((p:r,pd:2,f:0 0 14,h:14));
+							@include bnd((p:r,pd:.1em,f:0 0 1em,h:1em));
 						}
 						&-button{
-							@include bg((c:t 1 .5));
-							@include bdr((r:50%));
-							@include txt((a:c,c:i,p:14,h:1em));
+							@include bg((c:t 1 .4));
+							@include txt((a:c,c:i,p:1em,h:1em));
 							@include usr((c:p));
 							@include shd((b:1));
-							&::before{
-								content:'';
-								@include bnd((d:b,p:a,i:0,mg:a,w:10,h:10));
-								@include bg((c:i));
+							@include trn((t:2s));
+							&:hover{
+								@include bg((c:t 1 .6));
+							}
+							&.is-remove,&.is-add{
+								@include bdr((r:50%));
+								&::before{
+									content:'';
+									@include bnd((d:b,p:a,i:0,mg:a,w:.8em,h:.8em));
+									@include bg((c:i));
+								}
 							}
 							&.is-up,&.is-down{
-								&::before{
-									@include bnd((w:8,h:6));
-								}
+								@include bnd((w:.8em,h:.5em));
 							}
 							&.is-up{
-								&::before{
-									clip-path: polygon(50% 0%,100% 100%,0% 100%);
-								}
+								clip-path: polygon(50% 0%,100% 100%,0% 100%);
 							}
 							&.is-down{
-								&::before{
-									clip-path: polygon(0% 0%,100% 0%,50% 100%);
-								}
+								clip-path: polygon(0% 0%,100% 0%,50% 100%);
 							}
 							&.is-remove{
 								&::before{
