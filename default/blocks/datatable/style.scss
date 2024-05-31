@@ -27,7 +27,11 @@
 				@include bnd((pd:10));
 				@include txt((a:c,p:12,h:1.5em,f:t));
 				@include bg((c:s));
-				@include bdr((s:s,w:1,c:t));
+				@include bdr((s:s,w:1,c:t 50));
+				&.spacer{
+					@include bg((c:n));
+					@include bdr((s:n));
+				}
 			}
 		}
 		tbody{
@@ -35,20 +39,18 @@
 				th,td{
 					@include bnd((p:r,pd:10));
 					@include txt((a:l,p:12,h:1.5em,f:t));
-					@include bdr((s:s,w:1,c:t));
+					@include bdr((s:s,w:1,c:t 50));
 				}
 				th{
-					@include bg((c:s));
+					@include bg((c:s 1 .5));
 					@include txt((a:c));
 				}
 				td{
 					@include bg((c:b));
 				}
 				&:nth-of-type(odd){
-					th{@include bg((c:m 95));}
-				}
-				&:nth-of-type(even){
-					td{@include bg((c:s));}
+					th{@include bg((c:s 1 .75));}
+					td{@include bg((c:s 1 .25));}
 				}
 			}
 		}

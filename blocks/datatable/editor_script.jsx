@@ -81,7 +81,7 @@
 		];
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
-				{name:'type',label:'タイプ',filter:'type',values:['spec','sheet','plan']},
+				{name:'type',type:'buttons',label:'タイプ',values:['spec','sheet','plan']},
 				'color',
 				{name:'loop',input:'bool',label:'ループ',key:'doLoop',sub:[
 					{name:'contentPath',label:'content path',input:'text',key:'content_path'},
