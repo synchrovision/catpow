@@ -1,10 +1,91 @@
-@import 'admin_style_config.scss';
+@import "admin_style_config.scss";
 
-table.wp-block-catpow-simpletable{
-	tbody{
-		tr{
+.wp-block-catpow-datatable{
+	@include tbl((l:f));
+	@include bnd((w:95% 720,mg:20 a));
+	&.spec{
+		thead{
 			th,td{
-				white-space: pre-line;
+				@include bnd((pd:10));
+				@include txt((a:c,p:12,h:1.5em,f:t));
+				@include bdr((p:b,s:s,w:1,c:t));
+			}
+		}
+		tbody{
+			tr{
+				th,td{
+					@include bnd((p:r,pd:10));
+					@include txt((a:c,p:12,h:1.5em,f:t));
+					@include bdr((p:b,s:s,w:1,c:t));
+				}
+			}
+		}
+	}
+	&.sheet{
+		thead{
+			th{
+				@include bnd((pd:10));
+				@include txt((a:c,p:12,h:1.5em,f:t));
+				@include bg((c:s));
+				@include bdr((s:s,w:1,c:t));
+			}
+		}
+		tbody{
+			tr{
+				th,td{
+					@include bnd((p:r,pd:10));
+					@include txt((a:l,p:12,h:1.5em,f:t));
+					@include bdr((s:s,w:1,c:t));
+				}
+				th{
+					@include bg((c:s));
+					@include txt((a:c));
+				}
+				td{
+					@include bg((c:b));
+				}
+				&:nth-of-type(odd){
+					th{@include bg((c:m 95));}
+				}
+				&:nth-of-type(even){
+					td{@include bg((c:s));}
+				}
+			}
+		}
+	}
+	&.plan{
+		thead{
+			th{
+				@include bnd((pd:10));
+				@include txt((a:c,p:12,h:1.5em,f:t,c:i));
+				@include bg((c:m));
+				&.spacer{
+					@include bg((c:n));
+				}
+			}
+		}
+		tbody{
+			tr{
+				th,td{
+					@include bnd((p:r,pd:10));
+					@include txt((a:c,p:12,h:1.5em,f:t));
+				}
+				th{
+					@include bg((c:m));
+					@include txt((c:i));
+				}
+				td{
+					@include bg((c:b));
+					strong{
+						@include txt((p:1.25em,c:m));
+					}
+				}
+				&:nth-of-type(odd){
+					th{@include bg((c:m 95));}
+				}
+				&:nth-of-type(even){
+					td{@include bg((c:s));}
+				}
 			}
 		}
 	}
