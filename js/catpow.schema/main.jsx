@@ -38,8 +38,7 @@ export const main=(originalRootSchema,params={})=>{
 			for(let propertyName in dependentSchemas){
 				dependentSchemas[propertyName]=resolveSchema(uri,dependentSchemas[propertyName],{parent,isConditional:true});
 			}
-		}
-		
+		}		
 		if(resolvedSchema.properties!=null){
 			for(let key in resolvedSchema.properties){
 				resolvedSchema.properties[key]=resolveSchema(
@@ -163,17 +162,40 @@ export const main=(originalRootSchema,params={})=>{
 				schemas.push.apply(schemas,schema.allOf);
 			}
 			if(schema.anyOf!=null){
-				schemas.push(mergeSchemasProxy(schema.anyOf,true))
+				schemas.push.apply(schemas,schema.anyOf);
+				const keyPropertyNames=Object.keys(schema.properties);
+				updateHandlesList.push((agent)=>{
+					schema.anyOf.forEach((subSchema)=>{
+						const isValid=keyPropertyNames.every((keyPropertyName)=>{
+							return (subSchema.properties[keyPropertyName] == null) ||
+								test(agent.properties[keyPropertyName].getValue(),subSchema.properties[keyPropertyName],rootSchema)
+						});
+						agent.setConditionalSchemaStatus(subSchema,isValid?3:0);
+						keyPropertyNames.forEach((keyPropertyName)=>{
+							if(subSchema.properties[keyPropertyName] == null){return;}
+							agent.properties[keyPropertyName].setConditionalSchemaStatus(
+								subSchema.properties[keyPropertyName],0
+							);
+						});
+					});
+				});
 			}
 			if(schema.oneOf!=null){
 				schemas.push.apply(schemas,schema.oneOf);
-				const keyPropertyName=getKeyPropertyName(schema.oneOf);
+				const keyPropertyNames=Object.keys(schema.properties);
 				updateHandlesList.push((agent)=>{
-					const keyValue=agent.properties[keyPropertyName].getValue();
-					schema.oneOf.forEach((schema)=>{
-						agent.setConditionalSchemaStatus(
-							schema,test(keyValue,schema.properties[keyPropertyName],rootSchema)?3:0
-						);
+					schema.oneOf.forEach((subSchema)=>{
+						const isValid=keyPropertyNames.every((keyPropertyName)=>{
+							return (subSchema.properties[keyPropertyName] == null) ||
+								test(agent.properties[keyPropertyName].getValue(),subSchema.properties[keyPropertyName],rootSchema)
+						});
+						agent.setConditionalSchemaStatus(subSchema,isValid?3:0);
+						keyPropertyNames.forEach((keyPropertyName)=>{
+							if(subSchema.properties[keyPropertyName] == null){return;}
+							agent.properties[keyPropertyName].setConditionalSchemaStatus(
+								subSchema.properties[keyPropertyName],0
+							);
+						});
 					});
 				});
 			}
