@@ -1,10 +1,13 @@
 (() => {
   // ../components/Popover/component.jsx
   Catpow.Popover = function(props) {
-    const { children, open, onClose, closeButton = false, closeOnClickAway = true } = props;
+    const { className = "Popover", children, open, onClose, size = "middle", closeButton = false, closeOnClickAway = true } = props;
     const { Fragment, useEffect, useState, useRef } = wp.element;
     const [state, setPopoverState] = useState("closed");
-    const [position, setPosition] = useState("");
+    const [positionX, setPositionX] = useState("");
+    const [positionY, setPositionY] = useState("");
+    const { bem } = Catpow.util;
+    const classes = bem(className);
     useEffect(() => setPopoverState(open ? "open" : state === "closed" ? "closed" : "close"), [open]);
     const ref = useRef({});
     const [contentRef, setContentRef] = useState();
@@ -13,20 +16,8 @@
         const bnd = ref.current.getBoundingClientRect();
         const x = bnd.left + bnd.width / 2;
         const ux = window.innerWidth / 8, cy = window.innerHeight / 2;
-        var classes = "";
-        if (bnd.bottom < cy) {
-          classes += "bottom";
-        } else {
-          classes += "top";
-        }
-        if (x < ux * 3) {
-          classes += " right";
-        } else if (x > ux * 5) {
-          classes += " left";
-        } else {
-          classes += " center";
-        }
-        setPosition(classes);
+        setPositionY(bnd.bottom < cy ? "bottom" : "top");
+        setPositionX(x < ux * 3 ? "right" : x > ux * 5 ? "left" : "center");
       }
     }, [ref, open]);
     useEffect(() => {
@@ -45,10 +36,10 @@
       });
       return () => doc.body.removeEventListener("click", cb);
     }, [open, onClose, closeOnClickAway, contentRef]);
-    return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "PopoverAnchor", ref }), /* @__PURE__ */ wp.element.createElement(Catpow.External, { className: "PopoverContainer", trace: ref.current }, /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes.anchor(), ref }), /* @__PURE__ */ wp.element.createElement(Catpow.External, { className: classes.container(), trace: ref.current }, /* @__PURE__ */ wp.element.createElement(
       "div",
       {
-        className: `Popover ${state} ${position}`,
+        className: classes(`is-size-${size} is-${state} is-${positionX} is-${positionY}`),
         onAnimationEnd: () => {
           if (state === "close") {
             setPopoverState("closed");
@@ -56,7 +47,7 @@
         },
         ref: setContentRef
       },
-      /* @__PURE__ */ wp.element.createElement("div", { className: "PopoverBody" }, /* @__PURE__ */ wp.element.createElement("div", { className: "PopoverArrow" }), /* @__PURE__ */ wp.element.createElement("div", { className: "PopoverContents" }, children), closeButton && /* @__PURE__ */ wp.element.createElement("div", { className: "PopoverControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "close", onClick: onClose })))
+      /* @__PURE__ */ wp.element.createElement("div", { className: classes._body() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.arrow() }), /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.contents() }, children), closeButton && /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.control() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.control.button("is-button-close"), onClick: onClose })))
     )));
   };
 })();

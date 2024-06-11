@@ -1,14 +1,14 @@
-.Popover.open {
+.Popover.is-open {
   animation: PopoverOpen 0.5s alternate 1 forwards;
 }
-.Popover.close {
+.Popover.is-close {
   animation: PopoverClose 0.5s alternate 1 forwards;
 }
-.Popover.closed {
+.Popover.is-closed {
   display: none;
   pointer-events: none;
 }
-.PopoverAnchor {
+.Popover-anchor {
   display: block;
   position: absolute;
   top: 0rem;
@@ -18,21 +18,19 @@
   z-index: 10000;
   pointer-events: none;
 }
-.PopoverContainer {
+.Popover-container {
   position: fixed;
   top: 0rem;
   right: 0rem;
   width: 31.25rem;
   height: 6.25rem;
-  z-index: 1000000;
+  z-index: 150000;
   pointer-events: none;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
 }
-.PopoverBody {
+.Popover__body {
   display: block;
-  max-width: 40rem;
-  width: max-content;
-  max-height: 50vh;
-  height: auto;
   position: absolute;
   margin: auto;
   border-radius: 0.625rem;
@@ -40,42 +38,50 @@
   box-shadow: 0 10px 21px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
   pointer-events: auto;
 }
-.PopoverBody .PopoverContents {
+.Popover__body-contents {
   max-height: 50vh;
   height: auto;
   overflow-x: hidden;
   overflow-y: auto;
   border-radius: 0.625rem;
 }
-.PopoverBody .PopoverControl .close {
+.Popover__body-control-button.is-button-close {
   position: absolute;
   width: 1.875rem;
   height: 1.875rem;
-  top: -2.5rem;
-  right: 0.625rem;
+  top: -0.9375rem;
+  right: -0.9375rem;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  border-radius: 50%;
+  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
-.PopoverBody .PopoverControl .close::before, .PopoverBody .PopoverControl .close::after {
+.Popover__body-control-button.is-button-close::before, .Popover__body-control-button.is-button-close::after {
   content: "";
   position: absolute;
-  top: 0.9375rem;
-  width: 1.875rem;
-  height: 0.0625rem;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  margin: auto;
+  width: 1.25rem;
+  height: 0.125rem;
   background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
 }
-.PopoverBody .PopoverControl .close::before {
+.Popover__body-control-button.is-button-close::before {
   transform: -webkit- rotateZ(45deg);
   transform: rotateZ(45deg);
 }
-.PopoverBody .PopoverControl .close::after {
+.Popover__body-control-button.is-button-close::after {
   transform: -webkit- rotateZ(-45deg);
   transform: rotateZ(-45deg);
 }
-.Popover.top .PopoverBody {
+.Popover.is-top .Popover__body {
   bottom: 100%;
   transform: -webkit- translateY(-0.625rem);
   transform: translateY(-0.625rem);
 }
-.Popover.top .PopoverBody .PopoverArrow {
+.Popover.is-top .Popover__body-arrow {
   display: block;
   position: absolute;
   width: 0.0625rem;
@@ -89,12 +95,12 @@
   right: 0rem;
   border-top-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
 }
-.Popover.bottom .PopoverBody {
+.Popover.is-bottom .Popover__body {
   top: 100%;
   transform: -webkit- translateY(0.625rem);
   transform: translateY(0.625rem);
 }
-.Popover.bottom .PopoverBody .PopoverArrow {
+.Popover.is-bottom .Popover__body-arrow {
   display: block;
   position: absolute;
   width: 0.0625rem;
@@ -108,21 +114,39 @@
   right: 0rem;
   border-bottom-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
 }
-.Popover.left .PopoverBody {
+.Popover.is-left .Popover__body {
   right: 0rem;
 }
-.Popover.left .PopoverBody .PopoverArrow {
+.Popover.is-left .Popover__body-arrow {
   margin-right: 1.875rem;
 }
-.Popover.center .PopoverBody {
+.Popover.is-center .Popover__body {
   left: -30vw;
   right: -30vw;
 }
-.Popover.right .PopoverBody {
+.Popover.is-right .Popover__body {
   left: 0rem;
 }
-.Popover.right .PopoverBody .PopoverArrow {
+.Popover.is-right .Popover__body-arrow {
   margin-left: 1.875rem;
+}
+.Popover.is-size-small .Popover__body {
+  max-width: 20rem;
+  width: max-content;
+  max-height: 10rem;
+  height: auto;
+}
+.Popover.is-size-middle .Popover__body {
+  max-width: 40rem;
+  width: max-content;
+  max-height: 50vh;
+  height: auto;
+}
+.Popover.is-size-large .Popover__body {
+  max-width: 90vw;
+  width: max-content;
+  max-height: 80vh;
+  height: auto;
 }
 @keyframes PopoverOpen {
   0% {
