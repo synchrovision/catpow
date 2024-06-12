@@ -681,6 +681,17 @@
   var mergeSchemas = (schemas, rootSchema, params = {}) => {
     const mergedSchema = {};
     schemas.forEach((schema) => mergeSchema(mergedSchema, schema, rootSchema, params));
+    if (mergedSchema.properties != null) {
+      const sortedProperties = {};
+      Object.keys(mergedSchema.properties).sort((key1, key2) => {
+        return (mergedSchema.properties[key1].order || 10) - (mergedSchema.properties[key2].order || 10);
+      }).forEach((key2) => {
+        sortedProperties[key2] = mergedSchema.properties[key2];
+      });
+      mergedSchema.properties = sortedProperties;
+      console.log({ mergedSchema, sortedProperties });
+    }
+    console.log({ mergedSchema });
     return mergedSchema;
   };
 
@@ -1051,6 +1062,9 @@
           const keyPropertyNames = Object.keys(schema.properties);
           updateHandlesList.push((agent) => {
             schema.anyOf.forEach((subSchema) => {
+              if (subSchema.properties == null) {
+                return;
+              }
               const isValid = keyPropertyNames.every((keyPropertyName) => {
                 return subSchema.properties[keyPropertyName] == null || test(agent.properties[keyPropertyName].getValue(), subSchema.properties[keyPropertyName], rootSchema);
               });
@@ -1072,6 +1086,9 @@
           const keyPropertyNames = Object.keys(schema.properties);
           updateHandlesList.push((agent) => {
             schema.oneOf.forEach((subSchema) => {
+              if (subSchema.properties == null) {
+                return;
+              }
               const isValid = keyPropertyNames.every((keyPropertyName) => {
                 return subSchema.properties[keyPropertyName] == null || test(agent.properties[keyPropertyName].getValue(), subSchema.properties[keyPropertyName], rootSchema);
               });

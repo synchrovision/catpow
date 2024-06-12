@@ -166,6 +166,7 @@ export const main=(originalRootSchema,params={})=>{
 				const keyPropertyNames=Object.keys(schema.properties);
 				updateHandlesList.push((agent)=>{
 					schema.anyOf.forEach((subSchema)=>{
+						if(subSchema.properties==null){return;}
 						const isValid=keyPropertyNames.every((keyPropertyName)=>{
 							return (subSchema.properties[keyPropertyName] == null) ||
 								test(agent.properties[keyPropertyName].getValue(),subSchema.properties[keyPropertyName],rootSchema)
@@ -185,6 +186,7 @@ export const main=(originalRootSchema,params={})=>{
 				const keyPropertyNames=Object.keys(schema.properties);
 				updateHandlesList.push((agent)=>{
 					schema.oneOf.forEach((subSchema)=>{
+						if(subSchema.properties==null){return;}
 						const isValid=keyPropertyNames.every((keyPropertyName)=>{
 							return (subSchema.properties[keyPropertyName] == null) ||
 								test(agent.properties[keyPropertyName].getValue(),subSchema.properties[keyPropertyName],rootSchema)
