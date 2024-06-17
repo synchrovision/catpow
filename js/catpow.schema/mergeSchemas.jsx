@@ -13,8 +13,6 @@ export const mergeSchemas=(schemas,rootSchema,params={})=>{
 			sortedProperties[key]=mergedSchema.properties[key];
 		});
 		mergedSchema.properties=sortedProperties;
-		console.log({mergedSchema,sortedProperties});
 	}
-	console.log({mergedSchema});
 	return mergedSchema;
 }

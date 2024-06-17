@@ -90,6 +90,8 @@ export const main=(originalRootSchema,params={})=>{
 		});
 	}
 	
+	if(debug){debugLog('\u2728 resolve rootSchema',{originalRootSchema,resolvedRootSchema});}
+	
 	const updateHandles=new WeakMap();
 	const getTypeOfValue=(value)=>{
 		if(value == null){return 'null';}

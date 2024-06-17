@@ -251,7 +251,7 @@
       if (resolvedSchema.items) {
         const { properties: itemsProperties = null, ...otherItemsParams } = items;
         if (itemsProperties != null) {
-          resolvedSchema.items.properties = Object.assign(resolvedSchema.items.properties || {}, itemsProperties);
+          resolvedSchema.items.properties = Object.assign({}, resolvedSchema.items.properties || {}, itemsProperties);
         }
         Object.assign(resolvedSchema.items, otherItemsParams);
       } else {
@@ -262,7 +262,7 @@
       if (resolvedSchema.properties == null) {
         resolvedSchema.properties = {};
       }
-      Object.assign(resolvedSchema.properties, properties);
+      resolvedSchema.properties = Object.assign({}, resolvedSchema.properties, properties);
     }
     Object.assign(resolvedSchema, otherParams);
     if (resolvedSchema.type == null) {
@@ -689,9 +689,7 @@
         sortedProperties[key2] = mergedSchema.properties[key2];
       });
       mergedSchema.properties = sortedProperties;
-      console.log({ mergedSchema, sortedProperties });
     }
-    console.log({ mergedSchema });
     return mergedSchema;
   };
 
@@ -973,6 +971,9 @@
         }
       });
     };
+    if (debug) {
+      debugLog("\u2728 resolve rootSchema", { originalRootSchema, resolvedRootSchema });
+    }
     const updateHandles = /* @__PURE__ */ new WeakMap();
     const getTypeOfValue = (value) => {
       if (value == null) {
