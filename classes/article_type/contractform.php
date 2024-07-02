@@ -1,5 +1,6 @@
 <?php
 namespace Catpow\article_type;
+use Catpow\CP;
 /**
 * メール受信確認を経てフォームの入力を行うメールフォーム
 */
@@ -50,7 +51,7 @@ class contractform extends article_type{
 		}
 		if(!isset($GLOBALS['post_types'][$mailconf_post_type])){
 			$GLOBALS['post_types'][$mailconf_post_type]=['article_type'=>'contractconf'];
-			\cp::fill_conf_data('post',$mailconf_post_type,$GLOBALS['post_types'][$mailconf_post_type]);
+			CP::fill_conf_data('post',$mailconf_post_type,$GLOBALS['post_types'][$mailconf_post_type]);
 		}
 		$GLOBALS['post_types'][$mailconf_post_type]['inputs']=$conf_data['inputs']=&$conf_data['meta']['mail']['meta'];
 	}

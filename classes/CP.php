@@ -1487,7 +1487,7 @@ class CP{
 	*/
 	public static function add_holders($data_type,$data_name,$meta_name,$new_holders,$id=false){
 		if($id===false){$id=self::$content->data_id;}
-		$crr_holders=self::get_the_holders_id($data_type,$data_name,$meta_name,$id);
+		$crr_holders=self::get_holders_id($data_type,$data_name,$meta_name,$id);
 		$to_add=array_diff($new_holders,$crr_holders);
 		if(!empty($to_add)){
 			foreach($to_add as $holder_id){
@@ -2229,7 +2229,6 @@ class CP{
 		return ['stock'];
 	}
 }
-class_alias('Catpow\CP','cp');
 
 add_action('plugins_loaded',['CP','init']);
 

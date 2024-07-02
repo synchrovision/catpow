@@ -13,6 +13,7 @@ Requires PHP: 7.4
 */
 include __DIR__.'/vendor/autoload.php';
 include __DIR__.'/classes/CP.php';
+class_alias(Catpow\CP::class,'cp');
 foreach(cp::$core_functions as $n){include(__DIR__.'/core/'.$n.'.php');}
 
 
