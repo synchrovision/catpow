@@ -2,6 +2,7 @@
 
 .wp-block-catpow-container{
 	$this:&;
+	@include bnd((o:c));
 	&:not(.hasBorder){
 		@include bdr((s:n));
 	}

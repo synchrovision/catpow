@@ -1,3 +1,6 @@
+.wp-block-catpow-container {
+  overflow: clip;
+}
 .wp-block-catpow-container:not(.hasBorder) {
   border-style: none;
 }
