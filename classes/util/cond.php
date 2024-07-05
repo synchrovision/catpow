@@ -10,7 +10,7 @@
 namespace Catpow\util;
 class cond{
 	public static
-		$cond_line_regex='/^(?P<key>\w+(?:\->(?P<relkey>\w+))?)(?:\:(?P<type>\w+))?(?:\((?P<name>\w+)\))?\s*(?P<compare>(?:!=|=|>=|>|<=|<|NOT LIKE|LIKE|NOT IN|IN|NOT BETWEEN|BETWEEN|NOT EXISTS|EXISTS))\s*(?P<value>.*)$/',
+		$cond_line_regex='/^(?P<key>\$?\w+(?:\->(?P<relkey>\w+))?)(?:\:(?P<type>\w+))?(?:\((?P<name>\w+)\))?\s*(?P<compare>(?:!=|=|>=|>|<=|<|NOT LIKE|LIKE|NOT IN|IN|NOT BETWEEN|BETWEEN|NOT EXISTS|EXISTS))\s*(?P<value>.*)$/',
 		$orderby_line_regex='/^ORDERBY (?P<orderby>\w+)(?: (?P<order>ASC|DESC))?$/i',
 		$limit_line_regex='/^LIMIT (?P<limit>\-?\d+)$/i';
 	public $relation,$lines=[],$orderby,$limit;
@@ -108,7 +108,7 @@ class cond{
 		return false;
 	}
 	public static function test_values($line,$values){
-		foreach($values as $value){
+		foreach((array)$values as $value){
 			if(self::test_value($line,$value)){return true;}
 		}
 		return false;
