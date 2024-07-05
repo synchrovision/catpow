@@ -1711,10 +1711,11 @@ class CP{
 		}
 		if(isset($path_data['data_id'])){
 			$loop_id=$path_data['data_id'];
+			$object=$query_class_name::get($path_data['data_name'],$path_data['data_id']);
 			unset($path_data['data_id']);
 		}
 		else{$loop_id=null;}
-		return $content=new content\loop(['path_data'=>$path_data,'query'=>$query,'loop_id'=>$loop_id]);
+		return $content=new content\loop(['path_data'=>$path_data,'query'=>$query,'loop_id'=>$loop_id,'object'=>$object]);
 	}
 	public static function get_the_query_value(){
 		static $query_value;
