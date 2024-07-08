@@ -195,6 +195,9 @@ class content extends \stdClass{
 	public function get_the_data($name=null){
 		if(isset($name)){
 			if(!isset($this->loop_id)){return null;}
+			if($name[0]==='$'){
+				return $this->{substr($name,1)};
+			}
 			if(strpos($name,'->')!==false){
 				list($name,$relkey)=explode('->',$name);
 				$class_name=\cp::get_class_name('meta',$this->conf['meta'][$name]['type']??'text');
