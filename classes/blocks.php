@@ -7,6 +7,7 @@ class blocks{
 		'editor_script'=>['wp-blocks','wp-i18n','wp-element','wp-editor','wp-plugins','wp-edit-post','catpow','catpow.colorTone','wpinfo'],
 		'editor_style'=>['wp-edit-blocks','font_awesome'],
 		'view_script'=>['catpow'],
+		'view_script_module'=>['@wordpress/interactivity'],
 		'view_style'=>[],
 		'front_script'=>['catpow'],
 		'front_style'=>[],
@@ -29,6 +30,12 @@ class blocks{
 		if(!empty($data['js'])){
 			foreach($data['js'] as $args){
 				call_user_func_array('wp_register_script',$args);
+				CP::set_script_translations($args[0]);
+			}
+		}
+		if(!empty($data['mjs'])){
+			foreach($data['mjs'] as $args){
+				call_user_func_array('wp_register_script_module',$args);
 				CP::set_script_translations($args[0]);
 			}
 		}
@@ -152,6 +159,7 @@ class blocks{
 				'front_script.js',
 				'front_style.css',
 				'view_script.js',
+				'view_script_module.mjs',
 				'view_style.css',
 				'editor_init.js',
 				'component.js',
@@ -168,6 +176,7 @@ class blocks{
 					case 'css':
 						CP::scss_compile('blocks/'.$block_name.'/'.$fname);
 					case 'js':
+					case 'mjs':
 						$file_path_url=CP::get_file_path_url('blocks/'.$file_name);
 						$file_url=reset($file_path_url);
 				
@@ -192,6 +201,9 @@ class blocks{
 								case 'editor_script':
 									$param[$fname.'_handles'][]=$handle;
 									break;
+								case 'view_script_module':
+									$param['view_script_module_ids'][]=$handle;
+									break;
 								case 'front_style':
 									$param['view_style_handles'][]=$handle;
 									break;
@@ -213,6 +225,7 @@ class blocks{
 								foreach ([
 									'editor_script'=>'js','editor_style'=>'css',
 									'view_script'=>'js','view_style'=>'css',
+									'view_script_module'=>'mjs',
 									'script'=>'js','style'=>'css'
 								] as $handler=>$type){
 									if(!empty($deps[$handler])){
