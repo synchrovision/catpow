@@ -1715,7 +1715,7 @@ class CP{
 			unset($path_data['data_id']);
 		}
 		else{$loop_id=null;}
-		return $content=new content\loop(['path_data'=>$path_data,'query'=>$query,'loop_id'=>$loop_id,'object'=>$object]);
+		return $content=new content\loop(['path_data'=>$path_data,'query'=>$query,'loop_id'=>$loop_id,'object'=>$object??null]);
 	}
 	public static function get_the_query_value(){
 		static $query_value;
