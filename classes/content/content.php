@@ -354,7 +354,8 @@ class content extends \stdClass{
 				else{$file.='.php';}
 				return $this->file=$file;
 			case 'tmp':
-				$tmp=$this->path_data['tmp_name'];
+				$tmp=$this->path_data['tmp_name']??null;
+				if(is_null($tmp)){return $tmp;}
 				if(!empty($this->path_data['tmp_slug'])){$tmp.='-'.$this->path_data['tmp_slug'];}
 				return $this->tmp=$tmp;
 			case 'content_type':return $this->content_type=$this->path_data['data_type'];
