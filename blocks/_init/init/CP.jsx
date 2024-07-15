@@ -446,6 +446,11 @@
 		words.forEach((word)=>{rtn[word]=true;});
 		return rtn;
 	},
+	flagsToClassNames:(flags)=>{
+		if(undefined === flags){return '';}
+		return Object.keys(flags).filter((word)=>flags[word]).map(Catpow.util.camelToKebab).join(' ');
+	},
+	
 	filterFlags:(flags,callback)=>{
 		Object.keys(flags).forEach((key)=>{
 			if(!callback(key)){delete(flags[key]);}
