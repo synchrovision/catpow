@@ -1,9 +1,20 @@
 ﻿import {CP} from './CP.jsx';
 
-CP.ResponsiveImage=({className,attr,keys,index,sizes,devices,device,isTemplate,...otherProps})=>{
-	let type,item;
-	if(keys.items){item=attr[keys.items][index];}
-	else{item=attr;}
+CP.ResponsiveImage=({className,attr,keys,index,subIndex,sizes,devices,device,isTemplate,...otherProps})=>{
+	let type,items,item;
+	
+	if(keys.items){
+		items=attr[keys.items];
+		if(keys.subItems){
+			item=items[index][keys.subItems][subIndex];
+		}
+		else{
+			item=items[index];
+		}
+	}
+	else{
+		item=attr;
+	}
 	if(isTemplate && keys.code && item[keys.code]){
 		return item[keys.code];
 	}
