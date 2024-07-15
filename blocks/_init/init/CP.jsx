@@ -439,6 +439,13 @@
 		return Object.keys(flags).filter((word)=>flags[word]).join(' ');
 	},
 	
+	classNamesToFlags:(words)=>{
+		var rtn={};
+		if(undefined === words){return {};}
+		if(typeof words === 'string'){words=words.split(' ').map(Catpow.util.kebabToCamel);}
+		words.forEach((word)=>{rtn[word]=true;});
+		return rtn;
+	},
 	filterFlags:(flags,callback)=>{
 		Object.keys(flags).forEach((key)=>{
 			if(!callback(key)){delete(flags[key]);}
