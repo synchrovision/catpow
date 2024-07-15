@@ -65,6 +65,21 @@ CP.SelectClassPanel=(props)=>{
 					{name:'blendmode',label:__('モード','catpow'),vars:'vars',key:'--cp-image-blendmode',input:'blendmode'},
 					{name:'opacity',label:__('不透明度','catpow'),vars:'vars',key:'--cp-image-opacity',input:'range',min:0,max:1,step:0.1}
 				 ]},
+				textAlign:{name:'textAlign',type:'buttons',label:__('テキスト揃え','catpow'),values:{
+					'has-text-align-left':__('左揃え','catpow'),
+					'has-text-align-center':__('中央','catpow'),
+					'has-text-align-right':__('右揃え','catpow'),
+				}},
+				verticalAlign:{name:'verticalAlign',type:'buttons',label:__('垂直方向揃え','catpow'),values:{
+					'has-vertical-align-top':__('上揃え','catpow'),
+					'has-vertical-align-middle':__('中央','catpow'),
+					'has-vertical-align-bottom':__('下揃え','catpow'),
+				}},
+				fontSize:{name:'size',type:'buttons',label:__('文字サイズ','catpow'),values:{
+					'has-font-size-large':__('大','catpow'),
+					'has-font-size-middle':__('中','catpow'),
+					'has-font-size-small':__('小','catpow')
+				}},
 				width:{name:'width',type:'buttons',label:__('幅','catpow'),values:{fullWidth:'フル',wideWidth:'ワイド',regularWidth:'レギュラー',narrowWidth:'ナロー'}},
 				size:{name:'size',type:'buttons',label:__('サイズ','catpow'),values:{large:'大',medium:'中',small:'小'}},
 				itemSize:{name:'itemSize',label:__('サイズ','catpow'),vars:'vars',key:'--cp-item-size',input:'range',min:100,max:1200,step:10},
