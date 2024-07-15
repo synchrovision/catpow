@@ -47,21 +47,21 @@ CP.SelectClassPanel=(props)=>{
 		const {props,item,states,save,saveClasses,saveCss}=useContext(CP.SelectClassPanelContext);
 		if(typeof prm ==='string'){
 			const preset={
-				customColorVars:{name:'customColorVars',input:'customColorVars',label:'カスタムカラー',vars:'customColorVars'},
+				customColorVars:{name:'customColorVars',input:'customColorVars',label:__('カスタムカラー','catpow'),vars:'customColorVars'},
 				isTemplate:{
 					name:'template',
 					input:'bool',
 					key:'isTemplate',
-					label:'テンプレート',
+					label:__('テンプレート','catpow'),
 					sub:[
-						{name:'loop',input:'bool',label:'ループ',key:'doLoop',sub:[
+						{name:'loop',input:'bool',label:__('ループ','catpow'),key:'doLoop',sub:[
 							{name:'contentPath',label:'content path',input:'text',key:'content_path'},
 							{name:'query',label:'query',input:'textarea',key:'query'},
-							{name:'loopCount',label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
+							{name:'loopCount',label:__('プレビューループ数','catpow'),input:'range',key:'loopCount',min:1,max:16}
 						]}
 					]
 				},
-				backgroundImage:{name:'backgroundImage',label:'背景画像',values:'hasBackgroundImage',sub:[
+				backgroundImage:{name:'backgroundImage',label:__('背景画像','catpow'),values:'hasBackgroundImage',sub:[
 					{name:'blendmode',label:__('モード','catpow'),vars:'vars',key:'--cp-image-blendmode',input:'blendmode'},
 					{name:'opacity',label:__('不透明度','catpow'),vars:'vars',key:'--cp-image-opacity',input:'range',min:0,max:1,step:0.1}
 				 ]},
@@ -80,10 +80,10 @@ CP.SelectClassPanel=(props)=>{
 					'has-font-size-middle':__('中','catpow'),
 					'has-font-size-small':__('小','catpow')
 				}},
-				width:{name:'width',type:'buttons',label:__('幅','catpow'),values:{fullWidth:'フル',wideWidth:'ワイド',regularWidth:'レギュラー',narrowWidth:'ナロー'}},
-				size:{name:'size',type:'buttons',label:__('サイズ','catpow'),values:{large:'大',medium:'中',small:'小'}},
+				width:{name:'width',type:'buttons',label:__('幅','catpow'),values:{fullWidth:__('フル','catpow'),wideWidth:__('ワイド','catpow'),regularWidth:__('レギュラー','catpow'),narrowWidth:__('ナロー','catpow')}},
+				size:{name:'size',type:'buttons',label:__('サイズ','catpow'),values:{large:__('大','catpow'),medium:__('中','catpow'),small:__('小','catpow')}},
 				itemSize:{name:'itemSize',label:__('サイズ','catpow'),vars:'vars',key:'--cp-item-size',input:'range',min:100,max:1200,step:10},
-				textColor:{name:'textColor',type:'buttons',label:__('文字色','catpow'),values:{revertTextColor:'通常',invertTextColor:'反転'}}
+				textColor:{name:'textColor',type:'buttons',label:__('文字色','catpow'),values:{revertTextColor:__('通常','catpow'),invertTextColor:__('反転','catpow')}}
 			};
 			if(preset.hasOwnProperty(prm)){prm=preset[prm];}
 		}
