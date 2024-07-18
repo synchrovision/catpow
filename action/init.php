@@ -70,6 +70,7 @@ if($GLOBALS['is_IE']){
 /* css vars */
 add_action('admin_head','Catpow\\util\\style_config::print_css_vars');
 add_action('wp_head','Catpow\\util\\style_config::print_css_vars');
+add_action('customize_controls_print_styles','Catpow\\util\\style_config::print_css_vars');
 add_action('admin_init',function(){
 	wp_add_inline_style('wp-block-editor',Catpow\util\style_config::get_css_vars_code());
 },20);
