@@ -13,15 +13,15 @@
 					<div className={classes.body()}><span>{props.id}</span>{children}</div>
 					<div className={classes.controls()}>
 						{index>0?(
-							<div className={classes.controls.button('is-up')} onClick={()=>onMoveItem(index,index-1)}>↑</div>
+							<div className={classes.controls.button('is-up')} onClick={()=>onMoveItem(index,index-1)}></div>
 						):<div className={classes.controls.spacer()}/>}
 						{index<length-1?(
-							<div className={classes.controls.button('is-down')} onClick={()=>onMoveItem(index,index+1)}>↓</div>
+							<div className={classes.controls.button('is-down')} onClick={()=>onMoveItem(index,index+1)}></div>
 						):<div className={classes.controls.spacer()}/>}
 						{length>1?(
-							<div className={classes.controls.button('is-remove')} onClick={()=>onRemoveItem(index)}>-</div>
+							<div className={classes.controls.button('is-remove')} onClick={()=>onRemoveItem(index)}></div>
 						):<div className={classes.controls.spacer()}/>}
-						<div className={classes.controls.button('is-add')} onClick={()=>onAddItem(index+1)}>+</div>
+						<div className={classes.controls.button('is-add')} onClick={()=>onAddItem(index+1)}></div>
 					</div>
 				</li>
 			);
