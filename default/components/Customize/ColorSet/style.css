@@ -84,7 +84,7 @@
 .ColorSet-ModeSelect__item.active {
   color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
-.ColorSet-ColorPicker {
+.ColorSet-Palette {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -92,7 +92,7 @@
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-.ColorSet-ColorPicker__item {
+.ColorSet-Palette__item {
   position: relative;
   -webkit-box-flex: 1;
   flex-grow: 1;
@@ -100,21 +100,21 @@
   flex-basis: 30%;
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAAHnlligAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHJJREFUeNpi+P///4EDBxiAGMgCCCAGFB5AADGCRBgYDh48CCRZIJS9vT2QBAggFBkmBiSAogxFBiCAoHogAKIKAlBUYTELAiAmEtABEECk20G6BOmuIl0CIMBQ/IEMkO0myiSSraaaBhZcbkUOs0HuBwDplz5uFJ3Z4gAAAABJRU5ErkJggg==");
 }
-.ColorSet-ColorPicker__item > .chip {
+.ColorSet-Palette__item > .chip {
   display: block;
   height: 5rem;
   cursor: pointer;
 }
-.ColorSet-ColorPicker__item > .chip > .label {
+.ColorSet-Palette__item > .chip > .label {
   padding: 0.625rem;
 }
-.ColorSet-ColorPicker__item > .chip.is-dark > .label {
+.ColorSet-Palette__item > .chip.is-dark > .label {
   color: white;
 }
-.ColorSet-ColorPicker__item > .chip.is-light > .label {
+.ColorSet-Palette__item > .chip.is-light > .label {
   color: black;
 }
-.ColorSet-ColorPicker__item > .modal {
+.ColorSet-Palette__item > .modal {
   display: block;
   position: absolute;
   top: 100%;
@@ -124,7 +124,7 @@
   border-radius: 0.625rem;
   box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
-.ColorSet-ColorPicker__item > .PopoverAnchor {
+.ColorSet-Palette__item > .PopoverAnchor {
   display: block;
   position: absolute;
   top: 0rem;
@@ -133,10 +133,10 @@
   left: 0rem;
   inset: 0rem;
 }
-.ColorSet-ColorPicker__item.close > .modal {
+.ColorSet-Palette__item.close > .modal {
   display: none;
 }
-.ColorSet-ColorPicker__box {
+.ColorSet-Palette__box {
   padding: 1.25rem;
 }
 .ColorSet-HueRange {

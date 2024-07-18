@@ -1,5 +1,6 @@
 ﻿Catpow.Customize.ColorSet=(props)=>{
 	const {useState,useCallback,useMemo,useEffect,useRef,useReducer}=wp.element;
+	const {ColorPicker}=wp.components;
 	const {id,value,onChange,param}=props;
 	const {roles}=param;
 	const [inputMode,setInputMode]=useState('pane');
@@ -135,33 +136,25 @@
 			</div>
 		);
 	},[]);
-	const ColorPicker=useCallback((props)=>{
+	const Palette=useCallback((props)=>{
 		const {role,value,open,onClick}=props;
 		const ref=useRef(null);
 		
-		useEffect(()=>{
-			jQuery(ref.current).wpColorPicker({
-				hide:false,
-				change:(e,ui)=>{
-					setColors({role,value:ui.color.to_s(roles[role].alphaEnabled?'hsla':'hex')});
-				}
-			});
-		},[ref.current]);
 		
 		return (
-			<div className={"ColorSet-ColorPicker__item "+(open?'open':'close')}>
+			<div className={"ColorSet-Palette__item "+(open?'open':'close')}>
 				<div className={"chip "+(isDarkColor(value[role])?'is-dark':'is-light')} onClick={onClick} style={{backgroundColor:value[role]}}>
 					<div className="label">{roles[role].label}</div>
 				</div>
 				<Catpow.Popover open={open}>
-					<div className="ColorSet-ColorPicker__box">
-						<input
-							ref={ref}
-							type="text"
-							value={value[role]}
-							readOnly={true}
-							data-alpha-enabled={roles[role].alphaEnabled}
-							data-alpha-color-type={roles[role].alphaEnabled?'hsla':'hex'}
+					<div className="ColorSet-Palette__box">
+						<ColorPicker
+							color={value[role]}
+							onChange={(value)=>{
+								setColors({role,value});
+							}}
+							enableAlpha
+							defaultValue="#000"
 						/>
 					</div>
 				</Catpow.Popover>
@@ -285,13 +278,14 @@
 		);
 	},[]);
 	
+	
 	switch(inputMode){
 		case 'pane':{
 			return (
 				<div className="ColorSet">
 					<ModeSelect value={inputMode} onChange={setInputMode}/>
-					<div className="ColorSet-ColorPicker">
-						{Object.keys(roles).map((role)=><ColorPicker role={role} value={colors} open={role===activeRole} onClick={()=>setActiveRole(role===activeRole?null:role)} key={role}/>)}
+					<div className="ColorSet-Palette">
+						{Object.keys(roles).map((role)=><Palette role={role} value={colors} open={role===activeRole} onClick={()=>setActiveRole(role===activeRole?null:role)} key={role}/>)}
 					</div>
 					<HueRange value={colors}/>
 					<Preview value={colors}/>

@@ -44,7 +44,7 @@
 			}
 		}
 	}
-	&-ColorPicker{
+	&-Palette{
 		@include flx((w:w));
 		&__item{
 			@include bnd((p:r,f:1 1 30%));
