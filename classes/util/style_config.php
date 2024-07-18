@@ -251,12 +251,7 @@ class style_config{
 			static::get_config_json('colors')
 		);
 		static::set_config_json('colors',$colors);
-		$tones=static::get_tones($colors);
-		foreach($tones as $key=>$tone){
-			foreach($tone as $k=>$v){
-				if($k!=='h' && $k!=='a')$tones[$key][$k].='%';
-			}
-		}
+		$tones=self::fill_tones_data(static::get_tones($colors));
 		static::set_config_json('tones',$tones);
 		static::set_config_json('fonts',array_merge(
 			array_column(static::get_font_roles(),'default','shorthand'),
@@ -273,12 +268,7 @@ class style_config{
 	}
 	public static function update_config_json($domain,$data){
 		if($domain==='colors'){
-			$tones=$data['tones'];
-			foreach($tones as $key=>$tone){
-				foreach($tone as $k=>$v){
-					if($k!=='h' && $k!=='a')$tones[$key][$k].='%';
-				}
-			}
+			$tones=self::fill_tones_data($data['tones']);
 			$tones['hr']=$data['hueRange'];
 			$tones['hs']=$data['hueShift'];
 			static::set_config_json('tones',$tones);
@@ -291,6 +281,18 @@ class style_config{
 		static::set_config_json($domain,$data);
 		do_action('cp_style_config_update');
 		update_option('cp_style_config_modified_time',time());
+	}
+	public static function fill_tones_data($tones){
+		$inverts=array_column(self::get_color_roles(),'invert','shorthand');
+		foreach($tones as $key=>$tone){
+			foreach($tone as $k=>$v){
+				if($k!=='h' && $k!=='a')$tones[$key][$k].='%';
+			}
+			if($tone['s']==0 && $tone['h']==0 && isset($inverts[$key]) && isset($tones[$inverts[$key]])){
+				$tones[$key]['h']=$tones[$inverts[$key]]['h'];
+			}
+		}
+		return $tones;
 	}
 	public static function set_config_json($domain,$data){
 		static::$cache[$domain]=$data;
