@@ -94,6 +94,10 @@ class scss{
 				$color=false;
 				$colors=util\style_config::get_config_json('colors');
 				$tones=util\style_config::get_config_json('tones');
+				$available_tone_keys=[];
+				foreach($tones as $key=>$tone){
+					$available_tone_keys[$key]=$available_tone_keys[$key.'x']=true;
+				}
 				if($args[0]==='wp'){return 'var(--wp-admin-theme-color)';}
 				if(preg_match('/^([a-z]+)?(_|\-\-)?(\-?\d+)?$/',$args[0],$matches)){
 					$key=$matches[1]?:'m';
@@ -101,7 +105,7 @@ class scss{
 					$staticHue=$sep==='--';
 					$relativeHue=$sep==='_';
 					$num=$matches[3]??null;
-					if(isset($tones[$key]) || (substr($key,-1)==='x' && isset($tones[substr($key,0,-1)]))){
+					if(isset($available_tone_keys[$key])){
 						$f='var(--cp-tones-'.$key.'-%s)';
 						$cf='var(--cp-container-tones-'.$key.'-%s)';
 						$rf='var(--cp-root-tones-'.$key.'-%s)';
@@ -120,6 +124,44 @@ class scss{
 							sprintf($f,'s'),
 							$args[1]==='false'?sprintf($f,'l'):sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]),
 							$args[2]==='false'?(isset($tone['a'])?'var(--cp-tones-'.$key.'-a)':1):(isset($tone['a'])?'calc(var(--cp-tones-'.$key.'-a) * '.$args[2].')':$args[2])
+						);
+					}
+				}
+				elseif(preg_match('/^([a-z]+)\-([a-z]+)$/',$args[0],$matches)){
+					$key1=$matches[1];
+					$key2=$matches[2];
+					if(isset($available_tone_keys[$key1]) && isset($available_tone_keys[$key2])){
+						$t=$args[1]?:50;
+						$t/=100;
+						$f='calc(var(--cp-tones-%2$s-%1$s) * '.$t.' + var(--cp-tones-%3$s-%1$s) * '.(1-$t).')';
+						$tone1=$tones[rtrim($key1,'x')];
+						$tone2=$tones[rtrim($key2,'x')];
+						if(isset($tone1['a'])){
+							if(isset($tone2['a'])){
+								$a=sprintf($f,'a',$key1,$key2);
+							}
+							else{
+								$a='calc(var(--cp-tones-'.$key1.'-a) * '.$t.' + '.(1-$t).')';
+							}
+						}
+						else{
+							if(isset($tone2['a'])){
+								$a='calc('.$t.' + var(--cp-tones-'.$key2.'-a) * '.(1-$t).')';
+							}
+							else{
+								$a='1.0';
+							}
+						}
+						if($args[2]!=='false'){
+							if($a==='1.0'){$a=$args[2];}
+							else{$a=sprintf('calc(%s * %s)',$a,$args[2]);}
+						}
+						$color=sprintf(
+							'hsla(%s,%s,%s,%s)',
+							sprintf($f,'h',$key1,$key2),
+							sprintf($f,'s',$key1,$key2),
+							sprintf($f,'l',$key1,$key2),
+							$a
 						);
 					}
 				}
