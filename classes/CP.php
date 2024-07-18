@@ -508,7 +508,7 @@ class CP{
 	public static function use_component($name){
 		static $done=[];
 		if(isset($done[$name])){return false;}
-		$deps=['wp-i18n','wp-api-fetch','wp-element','catpow'];
+		$deps=['wp-i18n','wp-api-fetch','wp-element','wp-components','catpow'];
 		if($f=self::get_file_path('components/'.$name.'/deps.php')){
 			include $f;
 			if(!empty($useScripts)){
