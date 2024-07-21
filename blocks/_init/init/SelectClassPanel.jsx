@@ -353,7 +353,7 @@ CP.SelectClassPanel=(props)=>{
 								param={prm}
 								value={props.attr[prm.vars][prm.key]}
 								onChange={(val)=>{
-									save({[prm.vars]:{...props.attr[prm.vars],[prm.key]:''+val}});
+									save({[prm.vars]:{...props.attr[prm.vars],[prm.key]:`${val}`}});
 								}}
 							/>
 						);
@@ -382,7 +382,7 @@ CP.SelectClassPanel=(props)=>{
 								label={prm.label}
 								value={props.attr[prm.vars][prm.key]}
 								onChange={(val)=>{
-									save({[prm.vars]:{...props.attr[prm.vars],[prm.key]:val}});
+									save({[prm.vars]:{...props.attr[prm.vars],[prm.key]:`${val}`}});
 								}}
 							/>
 						);
@@ -396,7 +396,7 @@ CP.SelectClassPanel=(props)=>{
 						label={prm.label}
 						value={props.attr[prm.vars][prm.key]}
 						onChange={(val)=>{
-							save({[prm.vars]:{...props.attr[prm.vars],[prm.key]:''+val}});
+							save({[prm.vars]:{...props.attr[prm.vars],[prm.key]:`${val}`}});
 						}}
 					/>
 				);
