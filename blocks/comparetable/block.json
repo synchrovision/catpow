@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"textdomain": "catpow",
+	"name":"catpow/comparetable",
+	"title": "🐾 CompareTable",
+	"description": "比較情報のためのテーブルです",
+	"icon": "editor-table",
+	"category": "catpow",
+	"supports": {
+		"anchor": true,
+		"className": false,
+		"color": false,
+		"interactivity":true,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	}
+}
