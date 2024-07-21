@@ -276,7 +276,7 @@ wp.blocks.registerBlockType('catpow/comparetable',{
 														const cellStates=CP.classNamesToFlags(cell.classes);
 														return (
 															<th
-																className={classes.table.thead.tr.th(rows[0].classes,cols[columnIndex]?.classes,cell.classes,lineClass)}
+																className={classes.table.thead.tr.th(rows[0].classes,cell.classes,lineClass)}
 																data-cell-class={cell.classes}
 																onClick={()=>setAttributes({r:0,c:columnIndex})}
 																style={getCssVarsForCell(0,columnIndex)}
@@ -540,7 +540,7 @@ wp.blocks.registerBlockType('catpow/comparetable',{
 												const cellStates=CP.classNamesToFlags(cell.classes);
 												return (
 													<th
-														className={classes.table.thead.tr.th(rows[0].classes,cols[columnIndex]?.classes,cell.classes,lineClass)}
+														className={classes.table.thead.tr.th(rows[0].classes,cell.classes,lineClass)}
 														data-cell-class={cell.classes}
 														data-index={columnIndex}
 														style={getCssVarsForCell(0,columnIndex)}
