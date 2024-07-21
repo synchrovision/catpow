@@ -24,7 +24,7 @@
   right: 0rem;
   width: 31.25rem;
   height: 6.25rem;
-  z-index: 150000;
+  z-index: 500000;
   pointer-events: none;
   -webkit-transition: 0.1s;
   transition: 0.1s;
