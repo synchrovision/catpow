@@ -26,15 +26,27 @@
 		&-thead,&-tbody{
 			&-tr{
 				&-th{
+					$th:&;
 					&-label{
 						@include bnd((d:b,w:fit,h:fit,pd:.5em 1em));
 						@include bg((c:m));
 						@include bdr((r:1em));
 						@include txt((a:c,p:.6em,h:1em,c:i));
 					}
+					&.is-premium{
+						#{$th}-label{
+							@include bg((c:a));
+						}
+					}
+					&.is-deprecated{
+						#{$th}-label{
+							@include bg((c:t-i 60));
+						}
+					}
 				}
 				&-th,&-td{
 					@include bnd((bs:b));
+					@include txt((h:1.5em,f:t));
 					&.has-text-align-left{
 						@include txt((a:l));
 					}
@@ -389,7 +401,6 @@
 				&-tr{
 					&-th{
 						@include bnd((pd:10));
-						@include txt((h:1.5em,f:t));
 						@include bg((c:b));
 						@include bdr((s:s,w:1,c:t));
 						&.is-spacer{
@@ -416,7 +427,6 @@
 						@include bnd((pd:10));
 						@include bg((c:b));
 						@include bdr((s:s,w:1,c:t));
-						@include txt((h:1.5em,f:t));
 					}
 					&-th{
 						@include txt((a:c));
@@ -471,7 +481,6 @@
 				&-tr{
 					&-th{
 						@include bnd((pd:10));
-						@include txt((h:1.5em,f:t));
 						@include bg((c:m 10));
 						&.is-spacer{
 							@include bdr((s:n));
@@ -488,7 +497,6 @@
 					$row:#{$this}-table-tbody-tr;
 					&-th,&-td{
 						@include bnd((pd:10));
-						@include txt((h:1.5em,f:t));
 					}
 					&-th{
 						@include bg((c:m 10));
