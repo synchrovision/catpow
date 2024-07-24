@@ -68,6 +68,10 @@ class media{
 		}
 	}
 	
+	public static function get_last_attachment_id_with_name($name){
+		global $wpdb;
+		return $wpdb->get_var("SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '_wp_attached_file' AND meta_value LIKE '%{$name}' ORDER BY meta_value DESC");
+	}
 	//hooks
 	public static function callback_wp_generate_attachment_metadata($metadata,$attachment_id){
 		$dir=wp_upload_dir()['basedir'].'/'.dirname($metadata['file']);
