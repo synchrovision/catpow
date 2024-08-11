@@ -22,7 +22,6 @@
   position: relative;
   padding: 0.5em;
   margin: 1em auto;
-  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
 .TableInput-table-tbody-tr:not(:first-child) {
   border-top-style: solid;

@@ -16,7 +16,6 @@
 			@include txt((l:n));
 			&-tr{
 				@include bnd((p:r,pd:.5em,mg:1em a));
-				@include shd((b:2));
 				&:not(:first-child){
 					@include bdr((p:t,s:s,w:1,c:s));
 				}
