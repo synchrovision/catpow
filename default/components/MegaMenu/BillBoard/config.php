@@ -3,8 +3,8 @@ return [
 	'type'=>'Contents',
 	'schema'=>[
 		'properties'=>[
-			'title'=>['type'=>'string'],
-			'image'=>['@type'=>'Image']
+			'title'=>['type'=>'string','title'=>'Title'],
+			'image'=>['@type'=>'Image','title'=>'Image']
 		]
 	]
 ];

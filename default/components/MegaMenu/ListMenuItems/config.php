@@ -2,6 +2,13 @@
 return [
 	'type'=>'Contents',
 	'schema'=>[
-		'@edit'=>'MenuItems'
+		'properties'=>[
+			'items'=>[
+				'items'=>[
+					'@type'=>'MenuItems',
+					'requiredFeatures'=>['image','description']
+				]
+			]
+		]
 	]
 ];

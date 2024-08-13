@@ -5,6 +5,7 @@ return [
 		'type'=>'object',
 		'properties'=>[
 			'menu'=>[
+				'title'=>'Menu',
 				'type'=>'object',
 				'properties'=>[
 					'main'=>[

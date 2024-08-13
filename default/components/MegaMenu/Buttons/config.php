@@ -3,9 +3,9 @@ return [
 	'type'=>'Contents',
 	'schema'=>[
 		'properties'=>[
-			'title'=>['type'=>'string'],
-			'image'=>['@type'=>'Image'],
-			'url'=>['@type'=>'Url']
+			'title'=>['type'=>'string','title'=>'Title'],
+			'image'=>['@type'=>'Image','title'=>'Image'],
+			'link'=>['@type'=>'Link','title'=>'Link']
 		]
 	]
 ];
