@@ -1,5 +1,6 @@
 <?php
 namespace Catpow;
+use Catpow\components;
 use Catpow\util\schema;
 use Catpow\util\Keynames;
 
@@ -235,59 +236,14 @@ class MenuManager{
 	
 	//config
 	public static function get_config_for_menu_component($menu_component){
-		$config_file=\cp::get_file_path("components/{$menu_component}/config.php");
-		$config=include $config_file;
-		$config['schema']['$defs']=array_merge(self::get_basic_definitions(),$config['schema']['$defs']??[]);
-		$config['components']=self::get_all_components_for_menu_component($menu_component);
-		foreach($config['components'] as $component_name=>$component_config){
-			$config['schema']['$defs'][$component_config['type']]['properties']['component']['enum'][]=$component_name;
-			$config['schema']['$defs'][$component_config['type']]['oneOf'][]=array_merge_recursive(
-				['properties'=>['component'=>['const'=>$component_name]]],
-				$component_config['schema']??[]
-			);
-		}
-		$config['defaultProps']=self::get_default_props_from_schema($config['schema']);
-		$config['useEditors']=array_keys(get_object_vars(self::get_required_editor_flags($config['schema'])));
-		return $config;
-	}
-	private static function get_required_editor_flags($schema,$flags=null){
-		if(is_null($flags)){$flags=new \stdClass();}
-		static $schema_keys=[
-			'definitions'=>true,'$defs'=>true,'properties'=>true,'items'=>false,
-			'allOf'=>true,'anyOf'=>true,'oneOf'=>true,
-			'if'=>false,'then'=>false,'else'=>false,
-			'dependentSchemas'=>true
-		];
-		if(!empty($schema['@editor'])){$flags->{$schema['@editor']}=true;}
-		foreach($schema_keys as $key=>$is_multiple){
-			if(isset($schema[$key])){
-				if($is_multiple){
-					foreach($schema[$key] as $sub_schema){
-						self::get_required_editor_flags($sub_schema,$flags);
-					}
-				}
-				else{
-					self::get_required_editor_flags($schema[$key],$flags);
-				}
+		$default_menu_items=self::get_default_menu_items();
+		return components::get_config($menu_component,[
+			'$defs'=>self::get_basic_definitions(),
+			'get_default_value'=>function()use($default_menu_items){
+				if(isset($schema['default'])){return $schema['default'];}
+				if(isset($schema['@menuItems'])){return $default_menu_items[$schema['@menuItems']];}
 			}
-		}
-		return $flags;
-	}
-	public static function get_all_components_for_menu_component($menu_component){
-		static $cache;
-		if(isset($cache[$menu_component])){return $cache[$menu_component];}
-		$components=[];
-		foreach(\cp::get_file_paths("components/{$menu_component}") as $dir){
-			foreach(glob($dir.'/*/config.php') as $config_php){
-				$component_name=basename(dirname($config_php));
-				if(empty($components[$component_name])){$components[$component_name]=include $config_php;}
-			}
-			foreach(glob($dir.'/*/schema.json') as $schema_json){
-				$component_name=basename(dirname($schema_json));
-				if(empty($components[$component_name]['schema'])){$components[$component_name]['schema']=json_decode(file_get_contents($schema_json),true);}
-			}
-		}
-		return $cache[$menu_component]=$components;
+		]);
 	}
 	public static function get_basic_definitions(){
 		$data_paths=[];
@@ -402,20 +358,6 @@ class MenuManager{
 	}
 	
 	//default
-	public static function get_default_props_from_schema($schema){
-		$default_menu_items=self::get_default_menu_items();
-		$schemaObj=new schema($schema,function($schema,$schemaObj){
-			if(isset($schema['@type'])){
-				$schema['$ref']='#/$defs/'.$schema['@type'];
-			}
-			return $schema;
-		});
-		$default_value=$schemaObj->get_default_value(function($schema)use($schemaObj,$default_menu_items){
-			if(isset($schema['default'])){return $schema['default'];}
-			if(isset($schema['@menuItems'])){return $default_menu_items[$schema['@menuItems']];}
-		});
-		return $default_value;
-	}
 	public static function get_default_menu_items(){
 		global $post_types;
 		static $menu_items;
