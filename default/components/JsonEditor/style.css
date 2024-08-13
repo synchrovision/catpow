@@ -58,9 +58,6 @@
   font-size: 0.75rem;
   font-family: var(--cp-fonts-t);
 }
-.JsonEditor-Input__title {
-  padding: 0.5rem;
-}
 .JsonEditor-Input__body {
   position: relative;
   padding: 0.5rem;
@@ -95,29 +92,6 @@
   padding: 0.25rem;
   font-size: 0.75rem;
 }
-.JsonEditor-Input.is-level-1 > .JsonEditor-Input__title {
-  padding: 0.25em 1.25em;
-  margin-bottom: 0.5em;
-  border-radius: 1em;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-  font-size: 1rem;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
-}
-.JsonEditor-Input.is-level-2 > .JsonEditor-Input__title {
-  padding: 0.25em 1.25em;
-  margin-bottom: 0.5em;
-  border-radius: 1em;
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),1);
-  font-size: 0.875rem;
-}
-.JsonEditor-Input.is-level-3 > .JsonEditor-Input__title {
-  padding-bottom: 0.25em;
-  margin-bottom: 0.5em;
-  font-size: 0.875rem;
-  border-bottom-style: solid;
-  border-bottom-width: 0.0625rem;
-  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.5);
-}
 .JsonEditor-Input-Text-input, .wp-core-ui .JsonEditor-Input-Text-input {
   padding: 0.25em 0.5em;
   border-style: none;
@@ -138,7 +112,30 @@
   box-shadow: 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, -1px -1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)), -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, 1px 1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a));
   cursor: pointer;
 }
-.JsonEditor-Input.is-compact > .JsonEditor-Input__title {
-  display: none;
+.JsonEditor-Input-ObjectInput-body {
+  padding: 1em;
+}
+.JsonEditor-Input-ObjectInput-block.is-level-0 > .JsonEditor-Input-ObjectInput-block-item > .JsonEditor-Input-ObjectInput-block-item-title {
+  padding: 0.25em 1.25em;
+  margin-bottom: 0.5em;
+  border-radius: 1em;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  font-size: 1rem;
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+}
+.JsonEditor-Input-ObjectInput-block.is-level-1 > .JsonEditor-Input-ObjectInput-block-item > .JsonEditor-Input-ObjectInput-block-item-title {
+  padding: 0.25em 1.25em;
+  margin-bottom: 0.5em;
+  border-radius: 1em;
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),1);
+  font-size: 0.875rem;
+}
+.JsonEditor-Input-ObjectInput-block.is-level-2 > .JsonEditor-Input-ObjectInput-block-item > .JsonEditor-Input-ObjectInput-block-item-title {
+  padding-bottom: 0.25em;
+  margin-bottom: 0.5em;
+  font-size: 0.875rem;
+  border-bottom-style: solid;
+  border-bottom-width: 0.0625rem;
+  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.5);
 }
 /*# sourceMappingURL=./style.css.map */

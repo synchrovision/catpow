@@ -38,15 +38,6 @@
 	}
 	&-Input{
 		@include txt((p:12,f:t));
-		&__title{
-			&-text{
-				
-			}
-			&-arrow{
-				
-			}
-			@include bnd((pd:8));
-		}
 		&__body{
 			@include bnd((p:r,pd:8));
 			&-message{
@@ -64,45 +55,6 @@
 			&-description{
 				@include bnd((d:b,mgt:4,pd:4));
 				@include txt((p:12));
-			}
-		}
-		&.is-level-1>&{
-			&__title{
-				@include bnd((pd:.25em 1.25em,mgb:.5em));
-				@include bdr((r:1em));
-				@include bg((c:m));
-				@include txt((p:16,c:i));
-			}
-			&__body{
-				
-			}
-		}
-		&.is-level-2>&{
-			&__title{
-				@include bnd((pd:.25em 1.25em,mgb:.5em));
-				@include bdr((r:1em));
-				@include bg((c:t 10));
-				@include txt((p:14));
-			}
-			&__body{
-				
-			}
-		}
-		&.is-level-3>&{
-			&__title{
-				@include bnd((pdb:.25em,mgb:.5em));
-				@include txt((p:14));
-				@include bdr((p:b,s:s,w:1,c:t 1 .5));
-			}
-			&__body{
-				
-			}
-		}
-		&.is-level-4>&{
-			&__title{
-			}
-			&__body{
-				
 			}
 		}
 		
@@ -135,10 +87,62 @@
 				@include shd((bv:1));
 				@include usr((c:p));
 			}
-		}
-		&.is-compact>&{
-			&__title{
-				@include bnd((d:n));
+			&-body{
+				@include bnd((pd:1em));
+			}
+			&-table{
+				
+			}
+			&-block{
+				&.is-level-0>&-item>&-item{
+					&-title{
+						@include bnd((pd:.25em 1.25em,mgb:.5em));
+						@include bdr((r:1em));
+						@include bg((c:m));
+						@include txt((p:16,c:i));
+					}
+					&-body{
+
+					}
+				}
+				&.is-level-1>&-item>&-item{
+					&-title{
+						@include bnd((pd:.25em 1.25em,mgb:.5em));
+						@include bdr((r:1em));
+						@include bg((c:t 10));
+						@include txt((p:14));
+					}
+					&-body{
+
+					}
+				}
+				&.is-level-2>&-item>&-item{
+					&-title{
+						@include bnd((pdb:.25em,mgb:.5em));
+						@include txt((p:14));
+						@include bdr((p:b,s:s,w:1,c:t 1 .5));
+					}
+					&-body{
+					}
+						
+				}
+				&.is-level-3>&-item>&-item{
+					&-title{
+					}
+					&-body{
+
+					}
+				}
+				&.is-level-4>&-item>&-item{
+					&-title{
+					}
+					&-body{
+
+					}
+				}
+			}
+			&-row{
+				
 			}
 		}
 	}
