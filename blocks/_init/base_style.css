@@ -239,6 +239,20 @@
 .selectPosition td.disable {
   background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),1);
 }
+.CP-Message {
+  padding: 1.25rem;
+}
+.CP-Message__body {
+  padding: 1.25rem;
+  border-width: 0.1875rem;
+  border-style: solid;
+  border-radius: 0.625rem;
+  color: hsla(calc(var(--cp-tones-t-h) * 0.6 + var(--cp-tones-i-h) * 0.4),calc(var(--cp-tones-t-s) * 0.6 + var(--cp-tones-i-s) * 0.4),calc(var(--cp-tones-t-l) * 0.6 + var(--cp-tones-i-l) * 0.4),1.0);
+  font-weight: bold;
+  font-family: var(--cp-fonts-t);
+  font-size: 1rem;
+  line-height: 1.5em;
+}
 .CP-BoundingBox {
   position: relative;
   box-sizing: border-box;

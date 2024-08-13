@@ -4380,4 +4380,12 @@
       }
     ))));
   };
+
+  // ../blocks/_init/init/Message.jsx
+  CP.Message = (props) => {
+    const { useMemo } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo(() => bem("CP-Message"), []);
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._body() }, props.children));
+  };
 })();

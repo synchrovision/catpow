@@ -135,6 +135,14 @@ $colors:(
 	}
 }
 .CP{
+	&-Message{
+		@include bnd((pd:20));
+		&__body{
+			@include bnd((pd:20));
+			@include bdr((w:3,s:s,r:10));
+			@include txt((ws:p,c:t-i 60,s:b,f:t,p:16,h:1.5em));
+		}
+	}
 	&-BoundingBox{
 		@include bnd((p:r,bs:b,z:1000));
 		@include bdr((s:s,w:2,c:wp));

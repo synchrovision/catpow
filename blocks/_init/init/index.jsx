@@ -45,3 +45,4 @@ import './PlacedPictures.jsx';
 import './Link.jsx';
 import './Loop.jsx';
 import './CustomColorVars';
+import './Message.jsx';
