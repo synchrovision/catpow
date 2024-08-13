@@ -718,7 +718,7 @@ class CP{
 		}
 	}
 	public static function page_content($name=false,$vars=false){
-		if(is_page() || is_single()){the_post();}
+		if(is_singular() && empty($GLOBALS['post'])){the_post();}
 		echo('<div class="page_content">');
 		if(is_a(self::$content,'Catpow\content\form')){self::$content->render();}
 		else{self::get_template_part(self::get_the_content_file_path(),$name,$vars);}
