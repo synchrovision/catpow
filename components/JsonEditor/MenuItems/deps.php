@@ -1,0 +1,2 @@
+<?php
+$useComponents=['SelectDataPath'];

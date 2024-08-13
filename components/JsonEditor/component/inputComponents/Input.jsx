@@ -1,16 +1,18 @@
-﻿import {DataContext} from '../JsonEditor.jsx';
+﻿import {JsonEditor,DataContext} from '../JsonEditor.jsx';
 import {getInputComponentForSchema} from '../functions.jsx';
 import {throttle} from 'util';
 
 const {__,sprintf}=wp.i18n;
 
 export const Input=(props)=>{
-	const {className="JsonEditor-Input",layout='block',size='medium',compact=false,level=0,agent}=props;
+	const {className="JsonEditor-Input",compact=false,level=0,agent}=props;
 	const {useState,useMemo,useCallback,useEffect,useContext}=wp.element;
 	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem(className),[]);
 
 	const schema=agent.getMergedSchemaForInput();
+	const layout=schema.layout || props.layout || (compact?'table':'block');
+	const size=schema.size || props.size || 'medium';
 	
 	const {getAdditionalInputComponent}=useContext(DataContext);
 
@@ -48,16 +50,12 @@ export const Input=(props)=>{
 
 	return (
 		<div className={classes({'is-invalid':!agent.isValid,'is-compact':compact},`is-layout-${layout}`,`is-size-${size}`,`is-level-${level}`)} data-json-key={agent.key}>
-			<div className={classes._title()}>
-				<span className={classes._title.text()}>{schema.title || schema.key}</span>
-			</div>
 			<div className={classes._body()}>
 				{agent.getMessage() && (
 					<div className={classes._body.message(showMessage?'is-show':'is-hidden')}>{agent.getMessage()}</div>
 				)}
 				<InputComponent
 					agent={agent}
-					layout={layout}
 					size={size}
 					compact={compact}
 					level={level}

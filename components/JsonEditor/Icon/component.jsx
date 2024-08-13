@@ -1,10 +1,8 @@
-﻿const {__,sprintf}=wp.i18n;
-
-export const SelectIcon=(props)=>{
-	const {className="JsonEditor-Input-SelectIcon",agent,onChange,onUpdate}=props;
+﻿window.Catpow.JsonEditor.Icon=(props)=>{
+	const {className="JsonEditor-Input-Icon",agent,onChange,onUpdate}=props;
 	const {useState,useMemo,useCallback,useEffect}=wp.element;
 	const {bem}=Catpow.util;
-	const classes=useMemo(()=>bem(className),[]);
+	const classes=useMemo(()=>bem(className),[]);const {__,sprintf}=wp.i18n;
 	
 	return (
 		<div className={classes()}>

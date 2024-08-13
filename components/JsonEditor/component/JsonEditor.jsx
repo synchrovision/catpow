@@ -1,4 +1,5 @@
 ﻿import {ObjectInput} from './inputComponents/ObjectInput.jsx';
+import {Input} from './inputComponents/Input.jsx';
 import {bem} from 'util';
 
 export const DataContext=wp.element.createContext({});
@@ -46,7 +47,6 @@ export const JsonEditor=(props)=>{
 		});
 		return rootAgent;
 	},[]);
-	
 	return (
 		<DataContext.Provider value={data}>
 			<div className={classes()}>
@@ -68,3 +68,5 @@ export const JsonEditor=(props)=>{
 		</DataContext.Provider>
 	);
 }
+
+JsonEditor.Input=Input;

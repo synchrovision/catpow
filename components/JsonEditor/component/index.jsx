@@ -8,4 +8,4 @@
 import {JsonEditor,DataContext} from './JsonEditor.jsx';
 
 window.Catpow.JsonEditor=JsonEditor;
-window.Catpow.JsonEditor.DataContext=DataContext;
+JsonEditor.DataContext=DataContext;

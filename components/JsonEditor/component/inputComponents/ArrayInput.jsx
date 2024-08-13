@@ -1,16 +1,16 @@
 ﻿import {Input} from './Input.jsx';
 
 export const ArrayInput=(props)=>{
-	const {className="JsonEditor-Input-ArrayInput",agent,onChange,onUpdate}=props;
+	const {className="JsonEditor-Input-ArrayInput",compact=false,agent,onChange,onUpdate}=props;
 	const {useState,useMemo,useCallback,useEffect}=wp.element;
 	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem(className),[]);
 	
 	const schema=agent.getMergedSchemaForInput();
-	const layout=schema.layout || 'table';
-	const size=schema.size || 'medium';
+	const layout=schema.layout || props.layout || (compact?'table':'block');
+	const size=schema.size || props.size || 'medium';
 	
-	const {minContains:min,maxContains:max,items,prefixItems}=agent.getMergedSchemaForInput();
+	const {minContains:min,maxContains:max,items,prefixItems}=schema;
 	
 	const onAddItem=useCallback((index,value)=>{
 		agent.addItem(index,value);
@@ -47,24 +47,27 @@ export const ArrayInput=(props)=>{
 				const {agent}=props;
 				
 				const cols={};
+				
 				for(const item of agent.items){
 					const itemSchema=item.getMergedSchemaForInput();
 					if(itemSchema.properties==null){continue;}
 					for(const col in itemSchema.properties){
-						cols[col]=cols[col] || itemSchema.properties[col].title || col;
+						if(cols[col]==null){cols[col]={}}
+						Object.assign(cols[col],itemSchema.properties[col]);
 					}
 				}
+				const sortedColsKeys=Object.keys(cols).filter((key)=>!cols[key].hidden).sort((key1,key2)=>(cols[key1].order || 10) - (cols[key2].order || 10));
 				
 				return (
 					<Catpow.TableInput
 						size={size}
-						labels={Object.values(cols)}
+						labels={sortedColsKeys.map((key)=>cols[key].title || key)}
 						onAddItem={onAddItem}
 						onCopyItem={onCopyItem}
 						onMoveItem={onMoveItem}
 						onRemoveItem={onRemoveItem}
 					>
-						{props.agent.items.map((item)=>Object.keys(cols).map((col)=>{
+						{props.agent.items.map((item)=>sortedColsKeys.map((col)=>{
 							if(item.getMergedSchemaForInput().properties[col]==null){return false;}
 							return (
 								<Input agent={item.properties[col]} layout="inline" size="small" compact={true} key={getItemId(item)}/>

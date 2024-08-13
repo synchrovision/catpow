@@ -1,12 +1,10 @@
 ﻿import * as inputComponents from './inputComponents/index.js';
+import {JsonEditor} from './JsonEditor.jsx';
 
 export const getInputComponentForSchema=(schema,params)=>{
-	if(schema.hasOwnProperty('@type')){
-		switch(schema['@type']){
-			case 'Icon':return inputComponents.SelectIcon;
-			case 'Image':return inputComponents.SelectImage;
-			case 'MenuItem':return inputComponents.SelectMenuItem;
-			case 'MenuItems':return inputComponents.SelectMenuItems;
+	if(schema.hasOwnProperty('@editor')){
+		if(JsonEditor[schema['@editor']]){
+			return JsonEditor[schema['@editor']];
 		}
 	}
 	if(schema.hasOwnProperty('options')){
@@ -23,6 +21,9 @@ export const getInputComponentForSchema=(schema,params)=>{
 	}
 	if(schema.type === 'null'){
 		return inputComponents.None;
+	}
+	if(schema.const){
+		return inputComponents.ReadOnly;
 	}
 	if(schema.enum){
 		if(schema.enum.length<8 && !params.compact){return inputComponents.Radio;}
@@ -44,7 +45,7 @@ export const getInputComponentForSchema=(schema,params)=>{
 		}
 		if(
 			schema.hasOwnProperty('pattern') ||
-			schema.hasOwnProperty('maxLength') && schema.maxLength< 32
+			schema.hasOwnProperty('maxLength') && schema.maxLength< 40
 		){
 		   return inputComponents.Text;
 		}

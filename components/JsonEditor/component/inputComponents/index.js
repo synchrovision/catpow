@@ -1,6 +1,7 @@
 ﻿export * from './Input.jsx';
 
 export * from './None.jsx';
+export * from './ReadOnly.jsx';
 
 export * from './Toggle.jsx';
 
@@ -23,10 +24,4 @@ export * from './Number.jsx';
 
 export * from './ObjectInput.jsx';
 export * from './ArrayInput.jsx';
-
-export * from './SelectIcon.jsx';
-export * from './SelectImage.jsx';
-export * from './SelectMenuItem.jsx';
-export * from './SelectMenuItems.jsx';
-
 
