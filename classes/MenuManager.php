@@ -4,8 +4,7 @@ use Catpow\util\schema;
 use Catpow\util\Keynames;
 
 class MenuManager{
-	const USE_IMAGE=01,HIERARCHICAL=02;
-	//resolve
+	//resolve props
 	public static function resolve_props_for_menu_component($menu_component,$props){
 		if(empty($props)){$props=[];}
 		$data=is_array($props)?$props:json_decode($props,true);
@@ -27,7 +26,7 @@ class MenuManager{
 	protected static function resolve_props_items_for_menu_component($menu_component,&$items){
 		if(empty($items)){return;}
 		foreach($items as $key=>$val){
-			if($key==='url' && is_string($val) && $val[0]==='/'){$items[$key]=home_url($val);}
+			if($key==='url' && is_string($val) && substr($val,0,1)==='/'){$items[$key]=home_url($val);}
 			if(is_array($val)){
 				if(isset($val['@link'])){
 					$item=self::get_menu_items_by_query($val['@link']['path'],$val['@link']['flags']??self::USE_IMAGE);
@@ -45,6 +44,21 @@ class MenuManager{
 				}
 			}
 		}
+	}
+	//resolve schema
+	public static function resolve_schema($schema,$root_schema){
+		if(isset($schame['@type'])){
+			$type=$schame['@type'];
+			if($type==='MenuItem' || $type==='MenuItems'){
+				foreach($schema['features'] as $featrue){
+					$defs_name='feature'.$type.ucfirst($fature);
+					if(!empty($root_schema['$defs'][$defs_name])){
+						$schema['allOf'][]=['$ref'=>'#/$defs/'.$defs_name];
+					}
+				}
+			}
+		}
+		return $schema;
 	}
 	
 	//items
@@ -68,8 +82,11 @@ class MenuManager{
 		];
 		return $item;
 	}
-	public static function get_menu_items_by_query($path,$query=[],$flags=0){
+	public static function get_menu_items_by_query($path,$query=[],$features=null){
 		$items=[];
+		if(is_null($features)){
+			$features=self::get_all_menu_item_data_types()[$path]['features'];
+		}
 		if(empty($query['limit'])){$query['limit']=-1;}
 		foreach(loop($path,$query) as $obj){
 			$item=[
@@ -80,10 +97,10 @@ class MenuManager{
 				'parent'=>CP::$content->the_parent,
 				'url'=>CP::$content->the_url
 			];
-			if(self::USE_IMAGE & $flags){$item['image']=CP::$content->get_the_image_url('vga');}
+			if(!empty($features['image'])){$item['image']=CP::$content->get_the_image_url('vga');}
 			$items[]=$item;
 		}
-		if(self::HIERARCHICAL & $flags){
+		if(!empty($features['hierarchy'])){
 			$tree=[];
 			$items=array_column($items,null,'id');
 			foreach($items as $id=>$item){
@@ -98,9 +115,12 @@ class MenuManager{
 		}
 		return $items;
 	}
-	public static function get_menu_item_by_data_path($data_path,$flags=0){
+	public static function get_menu_item_by_data_path($data_path,$features=null){
 		$path_data=is_array($data_path)?$data_path:CP::parse_data_path($data_path);
 		$class_name=CP::get_class_name('data_type',$path_data['data_type']);
+		if(is_null($features)){
+			$features=self::get_all_menu_item_data_types()[$path_data['data_type'].'/'.$path_data['data_name']]['features'];
+		}
 		if(empty($path_data['data_id'])){
 			$conf=CP::get_conf_data($path_data);
 			$item=[
@@ -122,7 +142,7 @@ class MenuManager{
 				'parent'=>$class_name::get_parent($obj),
 				'url'=>$class_name::get_url($obj)
 			];
-			if(self::USE_IMAGE & $flags){
+			if(!empty($features['image'])){
 				$conf=CP::get_conf_data($path_data);
 				$real_path_data=CP::realize_path_data($path_data);
 				if(!empty($conf['meta']['image'])){
@@ -150,13 +170,76 @@ class MenuManager{
 			'url'=>get_post_type_archive_link($post_type->name)
 		];
 	}
+	public static function get_all_menu_items(){
+		static $menu_items;
+		if(isset($menu_items)){return $menu_items;}
+		$menu_items=[];
+		
+		global $wp_post_types;
+		$post_type_archive_menu_items=[];
+		foreach(
+			array_merge(
+				[$wp_post_types['post'],$wp_post_types['page']],
+				get_post_types(['public'=>true,'_builtin'=>false],'objects')
+			) as $post_type
+		){
+			$menu_items[]=[
+				'cat'=>'post',
+				'title'=>$post_type->label,
+				'items'=>self::get_menu_items_by_query('post/'.$post_type->name,[])
+			];
+			if($post_type->has_archive){
+				$post_type_archive_menu_items[]=self::get_menu_item_for_post_type($post_type);
+			}
+		}
+		if(!empty($post_type_archive_menu_items)){
+			$post_type_archive_menu_items[]=[
+				'cat'=>'post_type_archive',
+				'items'=>$post_type_archive_menu_items
+			];
+		}
+		return $menu_items;
+	}
+	public static function get_all_menu_item_data_types(){
+		static $types;
+		if(isset($types)){return $types;}
+		$types=[];
+		foreach(CP::loop_conf_data() as $data_path=>$conf_data){
+			$features=[];
+			$real_path_data=CP::realize_path_data(CP::parse_data_path($data_path));
+			$data_type=$real_path_data['data_type'];
+			$data_name=$real_path_data['data_name'];
+			$features['image']=isset($conf_data['meta']['image']);
+			$features['desc']=isset($conf_data['meta']['desc']);
+			$features['icon']=isset($conf_data['meta']['icon']);
+			$features['color']=isset($conf_data['meta']['color']);
+			if($data_type==='post'){
+				$post_type=$GLOBALS['wp_post_types'][$data_name];
+				if($features['image']===false){$features['image']=post_type_supports($data_name,'thumbnail');}
+				if($features['desc']===false){$features['desc']=post_type_supports($data_name,'excerpt');}
+				$features['hierarchy']=is_post_type_hierarchical($data_name);
+			}
+			elseif($data_type==='term'){
+				$features['hierarchy']=is_taxonomy_hierarchical($data_name);
+			}
+			$types[$data_path]=[
+				'label'=>$conf_data['label'],
+				'path'=>$data_path,
+				'data_type'=>$data_type,
+				'data_name'=>$data_name,
+				'features'=>$features
+			];
+		}
+		return $types;
+	}
 	
 	//config
 	public static function get_config_for_menu_component($menu_component){
 		$config_file=\cp::get_file_path("components/{$menu_component}/config.php");
 		$config=include $config_file;
 		$config['schema']['$defs']=array_merge(self::get_basic_definitions(),$config['schema']['$defs']??[]);
-		foreach(self::get_all_components_for_menu_component($menu_component) as $component_name=>$component_config){
+		$config['components']=self::get_all_components_for_menu_component($menu_component);
+		foreach($config['components'] as $component_name=>$component_config){
 			$config['schema']['$defs'][$component_config['type']]['properties']['component']['enum'][]=$component_name;
 			$config['schema']['$defs'][$component_config['type']]['oneOf'][]=array_merge_recursive(
 				['properties'=>['component'=>['const'=>$component_name]]],
@@ -164,7 +247,31 @@ class MenuManager{
 			);
 		}
 		$config['defaultProps']=self::get_default_props_from_schema($config['schema']);
+		$config['useEditors']=array_keys(get_object_vars(self::get_required_editor_flags($config['schema'])));
 		return $config;
+	}
+	private static function get_required_editor_flags($schema,$flags=null){
+		if(is_null($flags)){$flags=new \stdClass();}
+		static $schema_keys=[
+			'definitions'=>true,'$defs'=>true,'properties'=>true,'items'=>false,
+			'allOf'=>true,'anyOf'=>true,'oneOf'=>true,
+			'if'=>false,'then'=>false,'else'=>false,
+			'dependentSchemas'=>true
+		];
+		if(!empty($schema['@editor'])){$flags->{$schema['@editor']}=true;}
+		foreach($schema_keys as $key=>$is_multiple){
+			if(isset($schema[$key])){
+				if($is_multiple){
+					foreach($schema[$key] as $sub_schema){
+						self::get_required_editor_flags($sub_schema,$flags);
+					}
+				}
+				else{
+					self::get_required_editor_flags($schema[$key],$flags);
+				}
+			}
+		}
+		return $flags;
 	}
 	public static function get_all_components_for_menu_component($menu_component){
 		static $cache;
@@ -174,6 +281,10 @@ class MenuManager{
 			foreach(glob($dir.'/*/config.php') as $config_php){
 				$component_name=basename(dirname($config_php));
 				if(empty($components[$component_name])){$components[$component_name]=include $config_php;}
+			}
+			foreach(glob($dir.'/*/schema.json') as $schema_json){
+				$component_name=basename(dirname($schema_json));
+				if(empty($components[$component_name]['schema'])){$components[$component_name]['schema']=json_decode(file_get_contents($schema_json),true);}
 			}
 		}
 		return $cache[$menu_component]=$components;
@@ -190,7 +301,7 @@ class MenuManager{
 				'type'=>'object',
 				'title'=>'Menu',
 				'properties'=>[
-					'items'=>['type'=>'array','title'=>'Items','items'=>['$ref'=>'#/$defs/menuItem']]
+					'items'=>['type'=>'array','layout'=>'table','title'=>'Items','items'=>['@type'=>'MenuItem']]
 				]
 			],
 			'Column'=>[
@@ -209,77 +320,83 @@ class MenuManager{
 				'type'=>'object',
 				'title'=>'Contents',
 				'properties'=>[
-					'component'=>['type'=>'string','enum'=>[]]
+					'@type'=>['const'=>'Contents','hidden'=>true],
+					'component'=>['type'=>'string','title'=>'Component','enum'=>[]]
 				],
 				'oneOf'=>[]
 			],
-			'Icon'=>['type'=>'string','title'=>'Icon'],
-			'query'=>[
+			'Icon'=>['type'=>'string','@editor'=>'Icon','title'=>'Icon'],
+			'Image'=>['type'=>'string','@editor'=>'Image','title'=>'Image'],
+			'Color'=>['type'=>'string','@editor'=>'Color','title'=>'Color'],
+			'DataPath'=>[
+				'type'=>'object',
+				'title'=>'DataPath',
+				'properties'=>[
+					'@type'=>['const'=>'DataPath'],
+					'path'=>['type'=>'string','title'=>'Path']
+				]
+			],
+			'Query'=>[
 				'type'=>'object',
 				'title'=>'Query',
 				'properties'=>[
+					'@type'=>['const'=>'Query'],
 					'path'=>['type'=>'string','title'=>'Path','enum'=>$data_paths],
 					'query'=>['type'=>'string','title'=>'Query']
 				]
 			],
-			'menuItem'=>[
+			'MenuItem'=>[
 				'type'=>'object',
 				'label'=>'{title|"Title"}',
-				'collapsible'=>true,
 				'properties'=>[
-					'type'=>['type'=>'string','title'=>'Type','enum'=>['link','panel']],
-					'icon'=>['@type'=>'Icon'],
-					'title'=>['type'=>'string','title'=>'Title','maxLength'=>8],
-					'name'=>['type'=>'string','title'=>'Name','maxLength'=>16]
+					'@type'=>['type'=>'string','title'=>'Type','enum'=>['Link','Panel'],'order'=>1,'hidden'=>false],
 				],
 				'required'=>['title'],
 				'oneOf'=>[
-					[
-						'properties'=>[
-							'type'=>['const'=>'link'],
-							'link'=>['$ref'=>'#/$defs/linkSettings']
-						]
-					],
-					[
-						'properties'=>[
-							'type'=>['const'=>'panel'],
-							'panel'=>['$ref'=>'#/$defs/panelSettings']
-						]
-					]
+					['@type'=>'Link','feature'=>['icon']],
+					['@type'=>'Panel']
 				]
 			],
-			'linkSettings'=>[
+			'Link'=>[
 				'title'=>'Link',
-				'label'=>'',
 				'properties'=>[
-					'isDynamic'=>['type'=>'boolean','title'=>'Dynamic','default'=>false]
+					'@type'=>['const'=>'Link','hidden'=>true],
+					'custom'=>['type'=>'boolean','title'=>'Custom','order'=>2],
 				],
 				'oneOf'=>[
 					[
 						'properties'=>[
-							'isDynamic'=>['const'=>true],
-							'query'=>['$ref'=>'#/$defs/query'],
-						],
-						'required'=>['query']
+							'@type'=>['const'=>'Link'],
+							'custom'=>['const'=>true],
+							'icon'=>['@type'=>'Icon'],
+							'title'=>['type'=>'string','title'=>'Title','maxLength'=>8],
+							'name'=>['type'=>'string','title'=>'Name','maxLength'=>16],
+							'url'=>['type'=>'string','title'=>'URL','cols'=>24,'rows'=>2]
+						]
 					],
 					[
 						'properties'=>[
-							'isDynamic'=>['const'=>false],
-							'url'=>['type'=>'string','title'=>'URL']
-						],
-						'required'=>['url']
+							'@type'=>['const'=>'Link'],
+							'custom'=>['const'=>false],
+							'linkItem'=>['@type'=>'LinkItem']
+						]
 					]
 				]
 			],
-			'panelSettings'=>[
+			'LinkItem'=>[
+				'title'=>'LinkItem',
+				'@editor'=>'MenuItem'
+			],
+			'Panel'=>[
 				'title'=>'Panel',
 				'properties'=>[
-					'columns'=>[
-						'type'=>'array',
-						'items'=>['@type'=>'Column']
-					],
+					'@type'=>['const'=>'Panel','hidden'=>true],
+					'icon'=>['@type'=>'Icon'],
+					'title'=>['type'=>'string','title'=>'Title','maxLength'=>8],
+					'name'=>['type'=>'string','title'=>'Name','maxLength'=>16],
+					'contents'=>['@type'=>'Contents','order'=>11]
 				]
-			],
+			]
 		];
 		return $types;
 	}
@@ -314,36 +431,6 @@ class MenuManager{
 			if(isset($menu_items_for_pages[$name])){$menu_items['primary'][]=$menu_items_for_pages[$name];}
 		}
 		
-		return $menu_items;
-	}
-	public static function get_all_menu_items(){
-		static $menu_items;
-		if(isset($menu_items)){return $menu_items;}
-		$menu_items=[];
-		
-		global $wp_post_types;
-		$post_type_archive_menu_items=[];
-		foreach(
-			array_merge(
-				[$wp_post_types['post'],$wp_post_types['page']],
-				get_post_types(['public'=>true,'_builtin'=>false],'objects')
-			) as $post_type
-		){
-			$menu_items[]=[
-				'cat'=>'post',
-				'title'=>$post_type->label,
-				'items'=>self::get_menu_items_by_query('post/'.$post_type->name,[],self::USE_IMAGE|($post_type->hierarchical?self::HIERARCHICAL:0))
-			];
-			if($post_type->has_archive){
-				$post_type_archive_menu_items[]=self::get_menu_item_for_post_type($post_type);
-			}
-		}
-		if(!empty($post_type_archive_menu_items)){
-			$post_type_archive_menu_items[]=[
-				'cat'=>'post_type_archive',
-				'items'=>$post_type_archive_menu_items
-			];
-		}
 		return $menu_items;
 	}
 }
