@@ -42,17 +42,6 @@
 			return JSON.parse(resolvedPropsJson);
 		},[resolvedPropsJson]);
 		
-		const getAdditionalInputComponent=useCallback((schema)=>{
-			if(schema.hasOwnProperty('@type')){
-				switch(schema['@type']){
-					case 'MenuItemAction':return (props)=>{
-						
-					}
-				}
-			}
-			return null;
-		},[]);
-		
 		const onChangeHandle=useCallback((props)=>{
 			updateResolvedPropsJson(props);
 			setAttributes({props});
