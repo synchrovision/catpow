@@ -2,7 +2,7 @@
   // ../components/RadioButtons/component.jsx
   Catpow.RadioButtons = (props) => {
     const { className = "RadioButtons", useState, useMemo } = wp.element;
-    const { onChange } = props;
+    const { size = "medium", onChange } = props;
     const { bem } = Catpow.util;
     const classes = useMemo(() => bem(className), []);
     const [value, setValue] = useState(props.value ?? null);
@@ -19,7 +19,7 @@
         return { label, value: props.options[label] };
       });
     }, [props.options]);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, options.map((option) => {
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes(`is-size-${size}`) }, options.map((option) => {
       const selected = option.value === value;
       return /* @__PURE__ */ wp.element.createElement(
         "div",

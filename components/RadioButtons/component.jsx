@@ -1,6 +1,6 @@
 ﻿Catpow.RadioButtons=(props)=>{
 	const {className="RadioButtons",useState,useMemo}=wp.element;
-	const {onChange}=props;
+	const {size='medium',onChange}=props;
 	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem(className),[]);
 	
@@ -19,7 +19,7 @@
 	},[props.options]);
 	
 	return (
-		<div className={classes()}>
+		<div className={classes(`is-size-${size}`)}>
 			{options.map((option)=>{
 				const selected=option.value===value;
 				return (
