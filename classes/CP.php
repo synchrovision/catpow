@@ -1377,11 +1377,13 @@ class CP{
 	
 
 	public static function get_item_attr($data_path,$conf){
+		$meta_class_name=self::get_class_name('meta',$conf['type']??'text');
 		$path_data=self::parse_data_path($data_path);
 		$attr=sprintf(
-			' id="%1$s" class="cp-meta-item is-type-%2$s is-input-%3$s %4$s" data-meta-name="%3$s" data-role="cp-meta-item" data-meta-type="%2$s"',
+			' id="%1$s" class="cp-meta-item is-type-%2$s is-layout-%3$s is-input-%4$s %5$s" data-meta-name="%4$s" data-role="cp-meta-item" data-meta-type="%2$s"',
 			self::get_input_id($data_path),
 			$conf['type']??'text',
+			$meta_class_name::$input_layout,
 			empty($path_data['meta_path'])?'':end($path_data['meta_path'])['meta_name'],
 			empty($conf['multiple'])?'is-single':'is-multiple'
 		);

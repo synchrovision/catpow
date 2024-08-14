@@ -4,6 +4,7 @@ namespace Catpow\meta;
 class checkbox extends select{
 	public static
 		$input_type='checkbox',
+		$input_layout='block',
 		$is_bulk_input=true;
 	
 	public static function input($meta,$prm){

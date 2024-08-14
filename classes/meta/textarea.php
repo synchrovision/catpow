@@ -3,7 +3,7 @@ namespace Catpow\meta;
 
 class textarea extends meta{
 	public static
-		$validation=['text'];
+		$validation=['text'],$input_layout='block';
 	
 	public static function output($meta,$prm){
 		$val=$meta->value;

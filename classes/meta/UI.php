@@ -2,7 +2,7 @@
 namespace Catpow\meta;
 
 class UI extends meta{
-	public static $ui=null,$input_type=false,$output_type=false,$defaultParam=[];
+	public static $ui=null,$input_type=false,$output_type=false,$input_layout='block',$defaultParam=[];
 	
 	public static function export($data_type,$data_name,$id,$meta_name,$conf){
 		if(static::$output_type===false){

@@ -7,6 +7,7 @@ abstract class meta{
 		$data_type='longtext',
 		$input_type='text',
 		$output_type=null,
+		$input_layout='inline',
 		$validation=[],
 		$has_children=false,
 		$can_edit=true,
