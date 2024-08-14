@@ -1,5 +1,5 @@
 (() => {
-  // ui/HiddenValues/input.jsx
+  // ../ui/HiddenValues/input.jsx
   Catpow.UI.HiddenValues = (props) => {
     const { useCallback } = wp.element;
     const hiddenInput = useCallback((name, val) => {
@@ -9,6 +9,6 @@
         return /* @__PURE__ */ wp.element.createElement("input", { type: "hidden", name, value: val, key: name });
       }
     }, [props]);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: "hiddenValues" }, hiddenInput(props.name, props.value));
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "HiddenValues", style: { display: "none" } }, hiddenInput(props.name, props.value));
   };
 })();
