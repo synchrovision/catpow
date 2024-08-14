@@ -1,5 +1,5 @@
 (() => {
-  // ui/PhoneNumber/input.jsx
+  // ../ui/PhoneNumber/input.jsx
   Catpow.UI.PhoneNumber = (props) => {
     const { useState, useMemo, useRef, useCallback, useReducer } = wp.element;
     const init = useCallback((state2) => {
@@ -47,7 +47,7 @@
         type: "text",
         className: "sec" + i,
         size: "4",
-        autocomplete: ["tel-area-code", "tel-local-prefix", "tel-local-suffix"][i],
+        autoComplete: ["tel-area-code", "tel-local-prefix", "tel-local-suffix"][i],
         onChange: (e) => {
           const val = e.target.value;
           dispatch2({ type: "SET_SEC", i, val });
