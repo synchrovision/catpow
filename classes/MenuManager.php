@@ -30,14 +30,14 @@ class MenuManager{
 			if($key==='url' && is_string($val) && substr($val,0,1)==='/'){$items[$key]=home_url($val);}
 			if(is_array($val)){
 				if(isset($val['@link'])){
-					$item=self::get_menu_items_by_query($val['@link']['path'],$val['@link']['flags']??self::USE_IMAGE);
+					$item=self::get_menu_items_by_query($val['@link']['path'],$val['@link']['features']??null);
 					$items[$key]=array_merge($val,$item);
 				}
 				if(isset($val['@query'])){
 					$items[$key]['items']=self::get_menu_items_by_query(
 						$val['@query']['path']??'post/page',
 						$val['@query']['query']??null,
-						$val['@query']['flags']??self::HIERARCHICAL
+						$val['@query']['features']??null
 					);
 				}
 				else{
