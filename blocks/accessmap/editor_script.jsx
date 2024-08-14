@@ -52,8 +52,19 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 		const selectiveItemClasses=useMemo(()=>{
 			const selectiveItemClasses=[
 				'color',
-				{name:'q',key:'q',input:'text',label:'マーカー'},
-				{name:'ll',key:'ll',input:'text',label:'中心座標'}
+				{name:'source',type:'gridbuttons',values:{useQuery:'検索',useEmbedURL:'埋め込みURL'},sub:{
+					useQuery:[
+						{name:'q',key:'q',input:'text',label:'検索ワード'},
+						{name:'ll',key:'ll',input:'text',label:'中心座標'},
+					],
+					useEmbedURL:[
+						{name:'src',key:'src',input:'textarea',label:'埋め込みURL',rows:10,filter:(value,state,props)=>{
+							const matches=value.match(/src="(.+?)"/);
+							if(matches){return matches[1];}
+							return value;
+						}}
+					]
+				}}
 			];
 			wp.hooks.applyFilters('catpow.blocks.accessmap.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
@@ -80,16 +91,23 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 		const {imageKeys}=CP.config.accessmap;
 
 		[...Array(Math.max(items.length,loopCount)).keys()].forEach((i)=>{
+			let url;
 			const index=i%items.length;
 			const item=items[index];
-			let q=item.q || item.address.replace(/<br\/?>|\n/,' ');
-			let url=`https://www.google.com/maps?output=embed&z=${z}&t=${t}&hl=${hl}&q=${q}`;
-			if(!!item.ll){url+=`&ll=${item.ll}`;}
+			const itemState=CP.wordsToFlags(item.classes);
+			if(itemState.useEmbedURL){
+				url=item.src;
+			}
+			else{
+				let q=item.q || item.address.replace(/<br\/?>|\n/,' ');
+				url=`https://www.google.com/maps?output=embed&z=${z}&t=${t}&hl=${hl}&q=${q}`;
+				if(!!item.ll){url+=`&ll=${item.ll}`;}
+			}
 			
 			if(!item.controlClasses){item.controlClasses='control';}
 			rtn.push(
 				<CP.Item
-					tag='li'
+					tag='div'
 					set={setAttributes}
 					attr={attributes}
 					items={items}
@@ -242,11 +260,18 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 
 		let rtn=[];
 		items.map((item,index)=>{
-			let url=`https://www.google.com/maps?output=embed&z=${z}&t=${t}&hl=${hl}&q=`;
-			url+=item.q || item.address;
-			if(!!item.ll){url+=`&ll=${item.ll}`;}
+			let url;
+			const itemState=CP.wordsToFlags(item.classes);
+			if(itemState.useEmbedURL){
+				url=item.src;
+			}
+			else{
+				let q=item.q || item.address.replace(/<br\/?>|\n/,' ');
+				url=`https://www.google.com/maps?output=embed&z=${z}&t=${t}&hl=${hl}&q=${q}`;
+				if(!!item.ll){url+=`&ll=${item.ll}`;}
+			}
 			rtn.push(
-				<div className="item" key={index}>
+				<div className={item.classes} key={index}>
 					<div className="map">
 						<iframe src={url} frameBorder="0" className="gmap" data-ll={item.ll} data-q={item.q}></iframe>
 					</div>
