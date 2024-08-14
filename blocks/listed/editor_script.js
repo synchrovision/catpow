@@ -274,8 +274,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters.listed || {}
+          selectiveClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextareaControl,
@@ -293,8 +292,7 @@
           attr: attributes,
           items,
           index: attributes.currentItemIndex,
-          triggerClasses: selectiveClasses[2],
-          filters: CP.filters.listed || {}
+          triggerClasses: selectiveClasses[2]
         }
       ), states.isTemplate && /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
@@ -305,8 +303,7 @@
           attr: attributes,
           items,
           index: attributes.currentItemIndex,
-          selectiveClasses: selectiveItemTemplateClasses,
-          filters: CP.filters.listed || {}
+          selectiveClasses: selectiveItemTemplateClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,

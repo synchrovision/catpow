@@ -305,8 +305,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters.section || {}
+          selectiveClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "ID", icon: "admin-links", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextControl,

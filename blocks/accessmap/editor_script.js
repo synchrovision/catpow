@@ -25,11 +25,7 @@
         const selectiveClasses2 = [
           { name: "size", type: "buttons", label: "\u30B5\u30A4\u30BA", values: ["small", "medium", "large"] },
           { name: "mapColor", type: "buttons", label: "\u5730\u56F3\u306E\u8272", values: { mapColorNone: "\u901A\u5E38", mapColorGray: "\u30B0\u30EC\u30FC", mapColorSync: "\u540C\u8272" } },
-          { name: "titleTag", input: "buttons", filter: "titleTag", key: "TitleTag", label: "\u30BF\u30A4\u30C8\u30EB\u30BF\u30B0", values: ["h2", "h3", "h4"], effect: (val, { set }) => {
-            if (/^h\d$/.test(val)) {
-              set({ titleTag: "h" + (parseInt(val[1]) + 1) });
-            }
-          } },
+          { name: "titleTag", input: "buttons", key: "TitleTag", label: "\u30BF\u30A4\u30C8\u30EB\u30BF\u30B0", values: ["h2", "h3", "h4"] },
           { name: "hasTel", values: "hasTel", label: "\u96FB\u8A71\u756A\u53F7" },
           { name: "hasMail", values: "hasMail", label: "\u30E1\u30FC\u30EB" },
           { name: "hasSite", values: "hasSite", label: "\u30B5\u30A4\u30C8" },
@@ -189,8 +185,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters.accessmap || {}
+          selectiveClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextareaControl,
@@ -208,8 +203,7 @@
           attr: attributes,
           items,
           index: attributes.currentItemIndex,
-          selectiveClasses: selectiveItemClasses,
-          filters: CP.filters.accessmap || {}
+          selectiveClasses: selectiveItemClasses
         }
       ), states.isTemplate && /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
@@ -220,8 +214,7 @@
           attr: attributes,
           items,
           index: attributes.currentItemIndex,
-          selectiveClasses: selectiveItemTemplateClasses,
-          filters: CP.filters.accessmap || {}
+          selectiveClasses: selectiveItemTemplateClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,

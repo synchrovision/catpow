@@ -134,7 +134,6 @@ wp.blocks.registerBlockType('catpow/slidablemenu',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.slidablemenu || {}}
 					/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl

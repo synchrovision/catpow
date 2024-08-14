@@ -1,5 +1,5 @@
 (() => {
-  // blocks/honeycomb/editor_script.jsx
+  // ../blocks/honeycomb/editor_script.jsx
   CP.config.honeycomb = {
     imageKeys: {
       image: { src: "src", items: "items" }
@@ -45,7 +45,7 @@
       const { id, classes, items = [] } = attributes;
       let { breakpoints, grid } = attributes;
       if (!id) {
-        setAttributes({ id: "hnc" + new Date().getTime().toString(16) });
+        setAttributes({ id: "hnc" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
       }
       if (void 0 == attributes.bp) {
         setAttributes({ bp: breakpoints[0] });
@@ -217,8 +217,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters.buttons || {}
+          selectiveClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
@@ -229,8 +228,7 @@
           attr: attributes,
           items,
           index: attributes.currentItemIndex,
-          selectiveClasses: selectiveItemClasses,
-          filters: CP.filters.honeycomb || {}
+          selectiveClasses: selectiveItemClasses
         }
       ), items[attributes.currentItemIndex] && /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "ITEM CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextareaControl,

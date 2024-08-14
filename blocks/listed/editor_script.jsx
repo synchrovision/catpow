@@ -291,7 +291,6 @@ wp.blocks.registerBlockType('catpow/listed',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.listed || {}}
 					/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl
@@ -308,7 +307,6 @@ wp.blocks.registerBlockType('catpow/listed',{
 						items={items}
 						index={attributes.currentItemIndex}
 						triggerClasses={selectiveClasses[2]}
-						filters={CP.filters.listed || {}}
 					/>
 					{states.isTemplate &&
 						<CP.SelectClassPanel
@@ -319,7 +317,6 @@ wp.blocks.registerBlockType('catpow/listed',{
 							items={items}
 							index={attributes.currentItemIndex}
 							selectiveClasses={selectiveItemTemplateClasses}
-							filters={CP.filters.listed || {}}
 						/>
 					}
 					<CP.ItemControlInfoPanel/>

@@ -57,8 +57,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters.flow || {}
+          selectiveClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement("div", { className: attributes.classes, style: vars }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.body() }, /* @__PURE__ */ wp.element.createElement(
         RichText,

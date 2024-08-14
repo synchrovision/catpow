@@ -183,8 +183,7 @@
           icon: "admin-appearance",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses: statesClasses,
-          filters: CP.filters.datatable || {}
+          selectiveClasses: statesClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
@@ -193,8 +192,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters.datatable || {}
+          selectiveClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextareaControl,

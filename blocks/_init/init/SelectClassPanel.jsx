@@ -94,9 +94,6 @@ CP.SelectClassPanel=(props)=>{
 			if(typeof prm.cond === 'function' && !prm.cond(states,props)){return false;}
 		}
 		let rtn=[];
-		if(prm.filter && props.filters && props.filters[prm.filter]){
-			props.filters[prm.filter](prm);
-		}
 		if(prm.keys){
 			if(props.items){
 				prm.keys.items=prm.keys.items || props.itemsKey;

@@ -80,8 +80,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters.aquarium || {}
+          selectiveClasses
         }
       )));
     },

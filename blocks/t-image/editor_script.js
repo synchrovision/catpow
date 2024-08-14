@@ -1,5 +1,5 @@
 (() => {
-  // blocks/t-image/editor_script.jsx
+  // ../blocks/t-image/editor_script.jsx
   wp.blocks.registerBlockType("catpow/t-image", {
     title: "\u{1F43E} T-Image",
     description: "HTML\u30E1\u30FC\u30EB\u7528\u306E\u753B\u50CF\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
@@ -58,8 +58,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters["t-image"] || {}
+          selectiveClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextareaControl,

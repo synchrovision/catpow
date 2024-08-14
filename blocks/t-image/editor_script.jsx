@@ -67,7 +67,6 @@
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters['t-image'] || {}}
 					/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl

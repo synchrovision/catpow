@@ -59,7 +59,6 @@ wp.blocks.registerBlockType('catpow/pageheader',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.flow || {}}
 					/>
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>

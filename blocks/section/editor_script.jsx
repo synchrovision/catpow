@@ -354,7 +354,6 @@ wp.blocks.registerBlockType('catpow/section',{
 							set={setAttributes}
 							attr={attributes}
 							selectiveClasses={selectiveClasses}
-							filters={CP.filters.section || {}}
 						/>
 						<PanelBody title="ID" icon="admin-links" initialOpen={false}>
 							<TextControl

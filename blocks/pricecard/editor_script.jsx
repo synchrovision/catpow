@@ -212,7 +212,6 @@
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.pricecard || {}}
 					/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl
@@ -229,7 +228,6 @@
 						items={items}
 						index={attributes.currentItemIndex}
 						selectiveClasses={itemSelectiveClasses}
-						filters={CP.filters.pricecard || {}}
 					/>
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>

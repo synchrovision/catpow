@@ -75,7 +75,6 @@ wp.blocks.registerBlockType('catpow/container',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.container || {}}
 					/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl

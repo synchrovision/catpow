@@ -152,7 +152,6 @@ wp.blocks.registerBlockType('catpow/switcher',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.switcher || {}}
 						initialOpen={true}
 					/>
 				</InspectorControls>

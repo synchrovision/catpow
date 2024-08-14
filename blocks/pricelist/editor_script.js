@@ -1,5 +1,5 @@
 (() => {
-  // blocks/pricelist/editor_script.jsx
+  // ../blocks/pricelist/editor_script.jsx
   wp.blocks.registerBlockType("catpow/pricelist", {
     title: "\u{1F43E} PriceList",
     description: "\u4FA1\u683C\u8868\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
@@ -130,8 +130,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters.pricelist || {}
+          selectiveClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextareaControl,
@@ -149,8 +148,7 @@
           attr: attributes,
           items,
           index: attributes.currentItemIndex,
-          selectiveClasses: selectiveItemClasses,
-          filters: CP.filters.pricelist || {}
+          selectiveClasses: selectiveItemClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,

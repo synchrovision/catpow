@@ -328,8 +328,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters.slider || {}
+          selectiveClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
@@ -338,8 +337,7 @@
           icon: "admin-appearance",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses: statesClasses,
-          filters: CP.filters.slider || {}
+          selectiveClasses: statesClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
@@ -349,8 +347,7 @@
           icon: "video-alt3",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses: animateClasses,
-          filters: CP.filters.slider || {}
+          selectiveClasses: animateClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
@@ -360,8 +357,7 @@
           icon: "universal-access",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses: controllerClasses,
-          filters: CP.filters.slider || {}
+          selectiveClasses: controllerClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextareaControl,
@@ -386,8 +382,7 @@
           attr: attributes,
           items,
           index: attributes.currentItemIndex,
-          triggerClasses: selectiveClasses[0],
-          filters: CP.filters.slider || {}
+          triggerClasses: selectiveClasses[0]
         }
       ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,

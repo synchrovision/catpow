@@ -2753,9 +2753,6 @@
         }
       }
       let rtn = [];
-      if (prm.filter && props2.filters && props2.filters[prm.filter]) {
-        props2.filters[prm.filter](prm);
-      }
       if (prm.keys) {
         if (props2.items) {
           prm.keys.items = prm.keys.items || props2.itemsKey;

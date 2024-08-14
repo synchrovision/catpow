@@ -210,7 +210,6 @@
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={statesClasses}
-						filters={CP.filters.datatable || {}}
 					/>
 					<CP.SelectClassPanel
 						title='クラス'
@@ -218,7 +217,6 @@
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.datatable || {}}
 					/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl

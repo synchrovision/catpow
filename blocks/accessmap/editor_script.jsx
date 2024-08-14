@@ -26,9 +26,7 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 			const selectiveClasses=[
 				{name:'size',type:'buttons',label:'サイズ',values:['small','medium','large']},
 				{name:'mapColor',type:'buttons',label:'地図の色',values:{mapColorNone:'通常',mapColorGray:'グレー',mapColorSync:'同色'}},
-				{name:'titleTag',input:'buttons',filter:'titleTag',key:'TitleTag',label:'タイトルタグ',values:['h2','h3','h4'],effect:(val,{set})=>{
-					if(/^h\d$/.test(val)){set({titleTag:'h'+(parseInt(val[1])+1)})}
-				}},
+				{name:'titleTag',input:'buttons',key:'TitleTag',label:'タイトルタグ',values:['h2','h3','h4']},
 				{name:'hasTel',values:'hasTel',label:'電話番号'},
 				{name:'hasMail',values:'hasMail',label:'メール'},
 				{name:'hasSite',values:'hasSite',label:'サイト'},
@@ -167,8 +165,7 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.accessmap || {}}
-					/>
+											/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl
 							label='クラス'
@@ -184,7 +181,6 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 						items={items}
 						index={attributes.currentItemIndex}
 						selectiveClasses={selectiveItemClasses}
-						filters={CP.filters.accessmap || {}}
 					/>
 					{states.isTemplate &&
 						<CP.SelectClassPanel
@@ -195,7 +191,6 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 							items={items}
 							index={attributes.currentItemIndex}
 							selectiveClasses={selectiveItemTemplateClasses}
-							filters={CP.filters.accessmap || {}}
 						/>
 					}
 					<CP.ItemControlInfoPanel/>

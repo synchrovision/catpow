@@ -317,7 +317,6 @@ wp.blocks.registerBlockType('catpow/slider',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.slider || {}}
 					/>
 					<CP.SelectClassPanel
 						title='表示設定'
@@ -325,7 +324,6 @@ wp.blocks.registerBlockType('catpow/slider',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={statesClasses}
-						filters={CP.filters.slider || {}}
 					/>
 					<CP.SelectClassPanel
 						classKey='controlClasses'
@@ -334,7 +332,6 @@ wp.blocks.registerBlockType('catpow/slider',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={animateClasses}
-						filters={CP.filters.slider || {}}
 					/>
 					<CP.SelectClassPanel
 						classKey='controlClasses'
@@ -343,7 +340,6 @@ wp.blocks.registerBlockType('catpow/slider',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={controllerClasses}
-						filters={CP.filters.slider || {}}
 					/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl
@@ -365,7 +361,6 @@ wp.blocks.registerBlockType('catpow/slider',{
 						items={items}
 						index={attributes.currentItemIndex}
 						triggerClasses={selectiveClasses[0]}
-						filters={CP.filters.slider || {}}
 					/>
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>

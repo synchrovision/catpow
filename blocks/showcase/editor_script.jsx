@@ -187,7 +187,6 @@ wp.blocks.registerBlockType('catpow/showcase',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.showcase || {}}
 					/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl
@@ -205,7 +204,6 @@ wp.blocks.registerBlockType('catpow/showcase',{
 							items={items}
 							index={attributes.currentItemIndex}
 							selectiveClasses={selectiveItemTemplateClasses}
-							filters={CP.filters.showcase || {}}
 						/>
 					):(
 						<CP.SelectClassPanel
@@ -216,7 +214,6 @@ wp.blocks.registerBlockType('catpow/showcase',{
 							items={items}
 							index={attributes.currentItemIndex}
 							selectiveClasses={selectiveItemClasses}
-							filters={CP.filters.showcase || {}}
 						/>
 					)}
 					<CP.ItemControlInfoPanel/>
