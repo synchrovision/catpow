@@ -1,0 +1,34 @@
+@import 'admin_style_config.scss';
+
+.TabPanel{
+	@include bnd((w:f));
+	@include bdr((r:.5em));
+	@include shd((b:2));
+	&-tabs{
+		@include flx((w:n));
+		@include bnd((mg:0,o:h));
+		@include bdr((r:.5em .5em 0 0));
+		&-tab{
+			@include bnd((f:1 1 a,pd:.5em 0,mg:0));
+			@include usr((c:p));
+			@include txt((a:c,c:t-b 80));
+			@include bg((c:t-b 20));
+			&.is-selected{
+				@include bg((c:m));
+				@include txt((c:i));
+			}
+		}
+	}
+	&-contents{
+		@include bnd((pd:1em));
+	}
+	&.is-size-small{
+		@include txt((p:14));
+	}
+	&.is-size-medium{
+		@include txt((p:16));
+	}
+	&.is-size-large{
+		@include txt((p:18));
+	}
+}
