@@ -2778,6 +2778,9 @@
                     param: prm,
                     value: JSON.parse(props2.attr[prm.json])[prm.key],
                     onChange: (val) => {
+                      if (prm.filter) {
+                        val = prm.filter(val, states2, props2);
+                      }
                       CP.setJsonValue(props2, prm.json, prm.key, val);
                       if (prm.effect) {
                         prm.effect(val, states2, props2);
@@ -3081,6 +3084,9 @@
                     param: prm,
                     value: props2.attr[prm.vars][prm.key],
                     onChange: (val) => {
+                      if (prm.filter) {
+                        val = prm.filter(val, states2, props2);
+                      }
                       save2({ [prm.vars]: { ...props2.attr[prm.vars], [prm.key]: `${val}` } });
                     }
                   }
@@ -3205,6 +3211,9 @@
                     param: prm,
                     value: item2[prm.key],
                     onChange: (val) => {
+                      if (prm.filter) {
+                        val = prm.filter(val, states2, props2);
+                      }
                       save2({ [prm.key]: val });
                       if (prm.effect) {
                         prm.effect(val, states2, props2);

@@ -118,6 +118,7 @@ CP.SelectClassPanel=(props)=>{
 								param={prm}
 								value={JSON.parse(props.attr[prm.json])[prm.key]}
 								onChange={(val)=>{
+									if(prm.filter){val=prm.filter(val,states,props);}
 									CP.setJsonValue(props,prm.json,prm.key,val);
 									if(prm.effect){prm.effect(val,states,props);}
 								}}
@@ -350,6 +351,7 @@ CP.SelectClassPanel=(props)=>{
 								param={prm}
 								value={props.attr[prm.vars][prm.key]}
 								onChange={(val)=>{
+									if(prm.filter){val=prm.filter(val,states,props);}
 									save({[prm.vars]:{...props.attr[prm.vars],[prm.key]:`${val}`}});
 								}}
 							/>
@@ -454,6 +456,7 @@ CP.SelectClassPanel=(props)=>{
 								param={prm}
 								value={item[prm.key]}
 								onChange={(val)=>{
+									if(prm.filter){val=prm.filter(val,states,props);}
 									save({[prm.key]:val});
 									if(prm.effect){prm.effect(val,states,props);}
 								}}
