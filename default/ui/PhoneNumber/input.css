@@ -1,4 +1,5 @@
 div.PhoneNumber input {
-  width: 5ch;
+  width: 4ch;
+  box-sizing: content-box;
 }
 /*# sourceMappingURL=./input.css.map */

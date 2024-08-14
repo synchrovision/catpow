@@ -3,6 +3,6 @@
 
 div.PhoneNumber{
 	input{
-		@include bnd((w:5ch));
+		@include bnd((w:4ch,bs:c));
 	}
 }
