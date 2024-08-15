@@ -408,6 +408,7 @@ wp.blocks.registerBlockType('catpow/comparetable',{
 							attr={attributes}
 							selectiveClasses={selectiveHeaderRowClasses}
 							items={rows}
+							itemsKey="rows"
 							index={r}
 						/>
 					):(
@@ -418,6 +419,7 @@ wp.blocks.registerBlockType('catpow/comparetable',{
 							attr={attributes}
 							selectiveClasses={selectiveRowClasses}
 							items={rows}
+							itemsKey="rows"
 							index={r}
 						/>
 					)}
@@ -438,6 +440,7 @@ wp.blocks.registerBlockType('catpow/comparetable',{
 							attr={attributes}
 							selectiveClasses={selectiveColClasses}
 							items={cols}
+							itemsKey="cols"
 							index={c}
 						/>
 					)}
@@ -457,8 +460,11 @@ wp.blocks.registerBlockType('catpow/comparetable',{
 							set={setAttributes}
 							attr={attributes}
 							selectiveClasses={(c===0)?selectiveHeaderColCellClasses:selectiveCellClasses}
-							items={rows[r].cells}
-							index={c}
+							items={rows}
+							itemsKey="rows"
+							index={r}
+							subItemsKey="cells"
+							subIndex={c}
 						/>
 					)}
 				</InspectorControls>

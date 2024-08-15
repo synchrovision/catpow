@@ -355,6 +355,7 @@
           attr: attributes,
           selectiveClasses: selectiveHeaderRowClasses,
           items: rows,
+          itemsKey: "rows",
           index: r
         }
       ) : /* @__PURE__ */ wp.element.createElement(
@@ -366,6 +367,7 @@
           attr: attributes,
           selectiveClasses: selectiveRowClasses,
           items: rows,
+          itemsKey: "rows",
           index: r
         }
       ), states.hasHeaderColumn && c === 0 ? /* @__PURE__ */ wp.element.createElement(
@@ -387,6 +389,7 @@
           attr: attributes,
           selectiveClasses: selectiveColClasses,
           items: cols,
+          itemsKey: "cols",
           index: c
         }
       ), states.hasHeaderColumn && r === 0 && c === 0 ? /* @__PURE__ */ wp.element.createElement(
@@ -407,8 +410,11 @@
           set: setAttributes,
           attr: attributes,
           selectiveClasses: c === 0 ? selectiveHeaderColCellClasses : selectiveCellClasses,
-          items: rows[r].cells,
-          index: c
+          items: rows,
+          itemsKey: "rows",
+          index: r,
+          subItemsKey: "cells",
+          subIndex: c
         }
       )));
     },
