@@ -9,7 +9,7 @@
 	
 	const isDarkColor=useCallback((color)=>{
 		if(!color){return true;}
-		if(/^#\w{6}$/.test(color)){return color.match(/#?(\w{2})(\w{2})(\w{2})/).slice(1).reduce((p,c,i)=>p+parseInt(c,16)*([3,6,2][i]),0) < 0x600;}
+		if(/^#(\w{6}|\w{8})$/.test(color)){return color.match(/#?(\w{2})(\w{2})(\w{2})/).slice(1).reduce((p,c,i)=>p+parseInt(c,16)*([3,6,2][i]),0) < 0x600;}
 		if(color.substr(0,3)==='hsl'){return getTones(color).l<60;}
 	},[]);
 	const getTextColorForTone=useCallback((tone)=>{
@@ -24,7 +24,6 @@
 				colors.shadow='hsla(0,0%,0%,'+Math.pround(0.7-bla,3)+')';
 				colors.tones.sh=getTones(colors.shade);
 				colors.tones.shd=getTones(colors.shadow);
-				console.log(colors.shade);
 			}
 		}
 		if(flag & 0o02){
@@ -65,13 +64,14 @@
 	},[]);
 	const getTones=useCallback((color)=>{
 		var hsl,hsb;
-		if(/^#\w{6}$/.test(color)){
+		if(/^#(\w{6}|\w{8})$/.test(color)){
 			hsl=hexToHsl(color);
 			hsb=hexToHsb(color);
 			return {
 				h:hsl.h,
 				s:hsl.s,
 				l:hsl.l,
+				a:color.length===9?(parseInt(color.slice(-2),16)/0xff):1,
 				t:(1-hsl.l/100),
 				S:hsb.s,
 				B:hsb.b,

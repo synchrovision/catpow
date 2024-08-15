@@ -12,7 +12,7 @@
       if (!color) {
         return true;
       }
-      if (/^#\w{6}$/.test(color)) {
+      if (/^#(\w{6}|\w{8})$/.test(color)) {
         return color.match(/#?(\w{2})(\w{2})(\w{2})/).slice(1).reduce((p, c, i) => p + parseInt(c, 16) * [3, 6, 2][i], 0) < 1536;
       }
       if (color.substr(0, 3) === "hsl") {
@@ -33,7 +33,6 @@
           colors2.shadow = "hsla(0,0%,0%," + Math.pround(0.7 - bla, 3) + ")";
           colors2.tones.sh = getTones(colors2.shade);
           colors2.tones.shd = getTones(colors2.shadow);
-          console.log(colors2.shade);
         }
       }
       if (flag & 2) {
@@ -74,13 +73,14 @@
     }, []);
     const getTones = useCallback((color) => {
       var hsl, hsb;
-      if (/^#\w{6}$/.test(color)) {
+      if (/^#(\w{6}|\w{8})$/.test(color)) {
         hsl = hexToHsl(color);
         hsb = hexToHsb(color);
         return {
           h: hsl.h,
           s: hsl.s,
           l: hsl.l,
+          a: color.length === 9 ? parseInt(color.slice(-2), 16) / 255 : 1,
           t: 1 - hsl.l / 100,
           S: hsb.s,
           B: hsb.b
