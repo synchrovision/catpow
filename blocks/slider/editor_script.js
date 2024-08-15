@@ -538,7 +538,7 @@
           items.map(function(item, index) {
             if (states.hasBackgroundImage) {
               if (typeof item.bg === "string") {
-                item.bg = { backgroundImage: item.bg.substr("background-image:".length) };
+                item.bg = { backgroundImage: item.bg.slice("background-image:".length) };
               }
             } else {
               item.bg = {};

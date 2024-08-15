@@ -141,7 +141,7 @@
     },
     switchNumberClass: ({ set, attr }, label, value) => {
       let classArray = (attr.classes || "").split(" ");
-      let i = classArray.findIndex((cls) => cls.substr(0, label.length) === label);
+      let i = classArray.findIndex((cls) => cls.slice(0, label.length) === label);
       if (i === -1) {
         if (value) {
           classArray.push(label + value);
@@ -156,11 +156,11 @@
       set({ classes: classArray.join(" ") });
     },
     getNumberClass: ({ attr }, label) => {
-      let value = (attr.classes || "").split(" ").find((cls) => cls.substr(0, label.length) === label);
+      let value = (attr.classes || "").split(" ").find((cls) => cls.slice(0, label.length) === label);
       if (!value) {
         return 0;
       }
-      return parseInt(value.substr(label.length));
+      return parseInt(value.slice(label.length));
     },
     switchColor: (props, value) => {
       CP.switchNumberClass(props, "color", value);
@@ -331,7 +331,7 @@
         itemsKey = "items";
       }
       let classArray = (items2[index].classes || "").split(" ");
-      let i = classArray.findIndex((cls) => cls.substr(0, 5) === "color");
+      let i = classArray.findIndex((cls) => cls.slice(0, 5) === "color");
       if (i === -1) {
         if (color) {
           classArray.push("color" + color);
@@ -347,18 +347,18 @@
       set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
     },
     getItemColor: ({ items: items2, index }) => {
-      let c = (items2[index].classes || "").split(" ").find((cls) => cls.substr(0, 5) === "color");
+      let c = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 5) === "color");
       if (!c) {
         return 0;
       }
-      return parseInt(c.substr(5));
+      return parseInt(c.slice(5));
     },
     switchItemPattern: ({ items: items2, index, set }, pattern, itemsKey) => {
       if (itemsKey === void 0) {
         itemsKey = "items";
       }
       let classArray = (items2[index].classes || "").split(" ");
-      let i = classArray.findIndex((cls) => cls.substr(0, 7) === "pattern");
+      let i = classArray.findIndex((cls) => cls.slice(0, 7) === "pattern");
       if (i === -1) {
         if (pattern) {
           classArray.push("pattern" + pattern);
@@ -374,11 +374,11 @@
       set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
     },
     getItemPattern: ({ items: items2, index }) => {
-      let p = (items2[index].classes || "").split(" ").find((cls) => cls.substr(0, 7) === "pattern");
+      let p = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 7) === "pattern");
       if (!p) {
         return 0;
       }
-      return parseInt(p.substr(7));
+      return parseInt(p.slice(7));
     },
     switchItemSelectiveClass: ({ items: items2, index, set }, values, value, itemsKey) => {
       if (itemsKey === void 0) {

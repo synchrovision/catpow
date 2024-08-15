@@ -10,7 +10,7 @@
 	const isDarkColor=useCallback((color)=>{
 		if(!color){return true;}
 		if(/^#(\w{6}|\w{8})$/.test(color)){return color.match(/#?(\w{2})(\w{2})(\w{2})/).slice(1).reduce((p,c,i)=>p+parseInt(c,16)*([3,6,2][i]),0) < 0x600;}
-		if(color.substr(0,3)==='hsl'){return getTones(color).l<60;}
+		if(color.slice(0,3)==='hsl'){return getTones(color).l<60;}
 	},[]);
 	const getTextColorForTone=useCallback((tone)=>{
 		if(tone.l<70){return '#FFFFFF';}
@@ -77,7 +77,7 @@
 				B:hsb.b,
 			}
 		}
-		if(color.substr(0,3)==='hsl'){
+		if(color.slice(0,3)==='hsl'){
 			const matches=color.match(/hsla?\((\d+),\s*(\d+)%,\s*(\d+)%(?:,\s*([\d\.]+))?\)/);
 			return {
 				h:matches[1],

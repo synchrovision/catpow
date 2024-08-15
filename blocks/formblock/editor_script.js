@@ -12,7 +12,7 @@
       const { content_path, inputs, data_id, values, actions, EditMode = false } = attributes;
       let postDataSelection = false;
       if (!actions && content_path) {
-        const path = content_path.substr(0, content_path.lastIndexOf("/"));
+        const path = content_path.slice(0, content_path.lastIndexOf("/"));
         wp.apiFetch({ path: "cp/v1/" + path + "/actions" }).then((actions2) => {
           Object.keys(actions2).map((key) => actions2[key].json = "action");
           setAttributes({ actions: actions2 });
@@ -42,7 +42,7 @@
           selectedId: content_path,
           tree: Object.values(cpEmbeddablesTree.formblock),
           onChange: (content_path2) => {
-            const path = content_path2.substr(0, content_path2.lastIndexOf("/"));
+            const path = content_path2.slice(0, content_path2.lastIndexOf("/"));
             wp.apiFetch({ path: "cp/v1/" + path + "/template" }).then((template) => {
               wp.data.dispatch("core/block-editor").replaceInnerBlocks(
                 clientId,

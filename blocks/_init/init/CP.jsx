@@ -67,15 +67,15 @@
 	
 	switchNumberClass:({set,attr},label,value)=>{
 		let classArray=(attr.classes || '').split(' ');
-		let i=classArray.findIndex(cls=>(cls.substr(0,label.length)===label));
+		let i=classArray.findIndex(cls=>(cls.slice(0,label.length)===label));
 		if(i===-1){if(value){classArray.push(label+value);}}
 		else{if(value){classArray.splice(i,1,label+value);}else{classArray.splice(i,1)}}
 		set({classes:classArray.join(' ')});
 	},
 	getNumberClass:({attr},label)=>{
-		let value=(attr.classes || '').split(' ').find(cls=>(cls.substr(0,label.length)===label));
+		let value=(attr.classes || '').split(' ').find(cls=>(cls.slice(0,label.length)===label));
 		if(!value){return 0;}
-		return parseInt(value.substr(label.length));
+		return parseInt(value.slice(label.length));
 	},
 	
 	switchColor:(props,value)=>{
@@ -224,31 +224,31 @@
 	switchItemColor:({items,index,set},color,itemsKey)=>{
 		if(itemsKey === undefined){itemsKey='items';}
 		let classArray=(items[index].classes || '').split(' ');
-		let i=classArray.findIndex(cls=>(cls.substr(0,5)==='color'));
+		let i=classArray.findIndex(cls=>(cls.slice(0,5)==='color'));
 		if(i===-1){if(color){classArray.push('color'+color);}}
 		else{if(color){classArray.splice(i,1,'color'+color);}else{classArray.splice(i,1)}}
 		items[index].classes=classArray.join(' ');
 		set({[itemsKey]:JSON.parse(JSON.stringify(items))});
 	},
 	getItemColor:({items,index})=>{
-		let c=(items[index].classes || '').split(' ').find(cls=>(cls.substr(0,5)==='color'));
+		let c=(items[index].classes || '').split(' ').find(cls=>(cls.slice(0,5)==='color'));
 		if(!c){return 0;}
-		return parseInt(c.substr(5));
+		return parseInt(c.slice(5));
 	},
 	
 	switchItemPattern:({items,index,set},pattern,itemsKey)=>{
 		if(itemsKey === undefined){itemsKey='items';}
 		let classArray=(items[index].classes || '').split(' ');
-		let i=classArray.findIndex(cls=>(cls.substr(0,7)==='pattern'));
+		let i=classArray.findIndex(cls=>(cls.slice(0,7)==='pattern'));
 		if(i===-1){if(pattern){classArray.push('pattern'+pattern);}}
 		else{if(pattern){classArray.splice(i,1,'pattern'+pattern);}else{classArray.splice(i,1)}}
 		items[index].classes=classArray.join(' ');
 		set({[itemsKey]:JSON.parse(JSON.stringify(items))});
 	},
 	getItemPattern:({items,index})=>{
-		let p=(items[index].classes || '').split(' ').find(cls=>(cls.substr(0,7)==='pattern'));
+		let p=(items[index].classes || '').split(' ').find(cls=>(cls.slice(0,7)==='pattern'));
 		if(!p){return 0;}
-		return parseInt(p.substr(7));
+		return parseInt(p.slice(7));
 	},
 	
 	switchItemSelectiveClass:({items,index,set},values,value,itemsKey)=>{

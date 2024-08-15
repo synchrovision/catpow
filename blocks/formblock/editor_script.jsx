@@ -12,7 +12,7 @@
 		let postDataSelection=false;
 
 		if(!actions && content_path){
-			const path=content_path.substr(0,content_path.lastIndexOf('/'));
+			const path=content_path.slice(0,content_path.lastIndexOf('/'));
 			wp.apiFetch({path:'cp/v1/'+path+'/actions'}).then((actions)=>{
 				Object.keys(actions).map((key)=>actions[key].json='action');
 				setAttributes({actions});
@@ -46,7 +46,7 @@
 							selectedId={content_path}
 							tree={Object.values(cpEmbeddablesTree.formblock)}
 							onChange={(content_path)=>{
-								const path=content_path.substr(0,content_path.lastIndexOf('/'));
+								const path=content_path.slice(0,content_path.lastIndexOf('/'));
 								wp.apiFetch({path:'cp/v1/'+path+'/template'}).then((template)=>{
 									wp.data.dispatch('core/block-editor').replaceInnerBlocks(
 										clientId,

@@ -23,7 +23,7 @@
 
 		if(!config){
 		   if(content_path && itemMap[content_path].has_config){
-				const path=content_path.substr(0,content_path.lastIndexOf('/'));
+				const path=content_path.slice(0,content_path.lastIndexOf('/'));
 				wp.apiFetch({path:'/cp/v1/'+path+'/config'}).then((config)=>{
 					Object.keys(config).map((key)=>config[key].json='config');
 					setAttributes({config:JSON.stringify(config)});
@@ -83,7 +83,7 @@
 							selectedId={content_path}
 							tree={Object.values(cpEmbeddablesTree.loop)}
 							onChange={(content_path)=>{
-								const path=content_path.substr(0,content_path.lastIndexOf('/'));
+								const path=content_path.slice(0,content_path.lastIndexOf('/'));
 								const {has_template}=itemMap[content_path]
 								if(has_template){
 									wp.apiFetch({path:'/cp/v1/'+path+'/template'}).then((template)=>{
@@ -96,7 +96,7 @@
 								setAttributes({content_path,config:null});
 							}}
 						/>
-						{content_path && content_path.substr(-8)==='loop.php' &&
+						{content_path && content_path.slice(-8)==='loop.php' &&
 							<TextareaControl
 								label='query'
 								value={query}
