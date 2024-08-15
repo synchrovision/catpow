@@ -4,7 +4,7 @@
 	config:{},
 	
 	listedConvertibles:['catpow/listed','catpow/flow','catpow/faq','catpow/ranking','catpow/dialog','catpow/sphere','catpow/slider','catpow/banners','catpow/lightbox','catpow/panes','catpow/slidablemenu','catpow/showcase'],
-	tableConvertibles:['catpow/simpletable','catpow/datatable','catpow/layouttable'],
+	tableConvertibles:['catpow/simpletable','catpow/datatable','catpow/comparetable','catpow/layouttable'],
 	
 	dummyText:{
 		title:'吾輩は猫である。',
@@ -67,15 +67,15 @@
 	
 	switchNumberClass:({set,attr},label,value)=>{
 		let classArray=(attr.classes || '').split(' ');
-		let i=classArray.findIndex(cls=>(cls.substr(0,label.length)===label));
+		let i=classArray.findIndex(cls=>(cls.slice(0,label.length)===label));
 		if(i===-1){if(value){classArray.push(label+value);}}
 		else{if(value){classArray.splice(i,1,label+value);}else{classArray.splice(i,1)}}
 		set({classes:classArray.join(' ')});
 	},
 	getNumberClass:({attr},label)=>{
-		let value=(attr.classes || '').split(' ').find(cls=>(cls.substr(0,label.length)===label));
+		let value=(attr.classes || '').split(' ').find(cls=>(cls.slice(0,label.length)===label));
 		if(!value){return 0;}
-		return parseInt(value.substr(label.length));
+		return parseInt(value.slice(label.length));
 	},
 	
 	switchColor:(props,value)=>{
@@ -224,31 +224,31 @@
 	switchItemColor:({items,index,set},color,itemsKey)=>{
 		if(itemsKey === undefined){itemsKey='items';}
 		let classArray=(items[index].classes || '').split(' ');
-		let i=classArray.findIndex(cls=>(cls.substr(0,5)==='color'));
+		let i=classArray.findIndex(cls=>(cls.slice(0,5)==='color'));
 		if(i===-1){if(color){classArray.push('color'+color);}}
 		else{if(color){classArray.splice(i,1,'color'+color);}else{classArray.splice(i,1)}}
 		items[index].classes=classArray.join(' ');
 		set({[itemsKey]:JSON.parse(JSON.stringify(items))});
 	},
 	getItemColor:({items,index})=>{
-		let c=(items[index].classes || '').split(' ').find(cls=>(cls.substr(0,5)==='color'));
+		let c=(items[index].classes || '').split(' ').find(cls=>(cls.slice(0,5)==='color'));
 		if(!c){return 0;}
-		return parseInt(c.substr(5));
+		return parseInt(c.slice(5));
 	},
 	
 	switchItemPattern:({items,index,set},pattern,itemsKey)=>{
 		if(itemsKey === undefined){itemsKey='items';}
 		let classArray=(items[index].classes || '').split(' ');
-		let i=classArray.findIndex(cls=>(cls.substr(0,7)==='pattern'));
+		let i=classArray.findIndex(cls=>(cls.slice(0,7)==='pattern'));
 		if(i===-1){if(pattern){classArray.push('pattern'+pattern);}}
 		else{if(pattern){classArray.splice(i,1,'pattern'+pattern);}else{classArray.splice(i,1)}}
 		items[index].classes=classArray.join(' ');
 		set({[itemsKey]:JSON.parse(JSON.stringify(items))});
 	},
 	getItemPattern:({items,index})=>{
-		let p=(items[index].classes || '').split(' ').find(cls=>(cls.substr(0,7)==='pattern'));
+		let p=(items[index].classes || '').split(' ').find(cls=>(cls.slice(0,7)==='pattern'));
 		if(!p){return 0;}
-		return parseInt(p.substr(7));
+		return parseInt(p.slice(7));
 	},
 	
 	switchItemSelectiveClass:({items,index,set},values,value,itemsKey)=>{
@@ -439,6 +439,18 @@
 		return Object.keys(flags).filter((word)=>flags[word]).join(' ');
 	},
 	
+	classNamesToFlags:(words)=>{
+		var rtn={};
+		if(undefined === words){return {};}
+		if(typeof words === 'string'){words=words.split(' ').map(Catpow.util.kebabToCamel);}
+		words.forEach((word)=>{rtn[word]=true;});
+		return rtn;
+	},
+	flagsToClassNames:(flags)=>{
+		if(undefined === flags){return '';}
+		return Object.keys(flags).filter((word)=>flags[word]).map(Catpow.util.camelToKebab).join(' ');
+	},
+	
 	filterFlags:(flags,callback)=>{
 		Object.keys(flags).forEach((key)=>{
 			if(!callback(key)){delete(flags[key]);}
@@ -550,20 +562,6 @@
 					case 'y':return 'repeat-'+val;
 					default:return val;
 				}
-		}
-	},
-	
-	selectiveClassesPreset:{
-		isTemplate:{
-			label:'テンプレート',
-			values:'isTemplate',
-			sub:[
-				{input:'bool',label:'ループ',key:'doLoop',sub:[
-					{label:'content path',input:'text',key:'content_path'},
-					{label:'query',input:'textarea',key:'query'},
-					{label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
-				]}
-			]
 		}
 	},
 	
@@ -726,6 +724,7 @@
 	generateToneClass:(data)=>'tone-'+(data.s?'s':'l')+data.value,
 	toneClassPattern:/^tone\-((s|l)(\-?\d+))$/,
 	colorClassProxy:(state)=>{
+		if(!state){state={};}
 		if(typeof state === 'string' || Array.isArray(state)){
 			state=CP.wordsToFlags(state);
 		}
@@ -782,8 +781,6 @@
 		const {attributes,className,setAttributes}=props;
 		const {anchor,prevAnchor,styleDatas}=attributes;
 		const {useEffect}=wp.element;
-		
-		console.log(attributes);
 		
 		useEffect(()=>{
 			if(!anchor){setAttributes({anchor:'s'+(new Date().getTime().toString(16))})}

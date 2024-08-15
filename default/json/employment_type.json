@@ -1,0 +1,12 @@
+{
+	"フルタイム":"FULL_TIME",
+	"パートタイム":"PART_TIME",
+	"契約社員":"CONTRACTOR",
+	"派遣社員":"TEMPORARY",
+	"インターンシップ":"INTERN",
+	"ボランティア":"VOLUNTEER",
+	"日雇い":"PER_DIEM",
+	"その他":"OTHER"
+}
+
+

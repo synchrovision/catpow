@@ -1,0 +1,26 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-t-media-text{
+	@include bnd((mg:20 a));
+	@include bdr((s:n));
+	&>tbody>tr>td.imageCell{
+		img{
+			@include bnd((w:32vw 200,h:a));
+		}
+	}
+	&>tbody>tr>td.spacerCell{
+		@include bnd((w:20));
+	}
+	&>tbody>tr>td.textCell{
+		@include bnd((w:64%));
+	}
+	&.top>tbody>tr>td{
+		@include txt((v:t));
+	}
+	&.center>tbody>tr>td{
+		@include txt((v:m));
+	}
+	&.bottom>tbody>tr>td{
+		@include txt((v:b));
+	}
+}

@@ -1,4 +1,4 @@
-meta<?php
+<?php
 namespace Catpow\validation;
 
 class text_maxlength extends validation{

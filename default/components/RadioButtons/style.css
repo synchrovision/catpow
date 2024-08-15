@@ -1,11 +1,10 @@
-.RadioButton {
+.RadioButtons-button {
   display: inline-block;
   position: relative;
-  padding: 0.625rem 0.9375rem;
-  margin: 0.46875rem;
-  padding-left: 2.5rem;
-  border-radius: 1.25rem;
-  font-size: 0.9375rem;
+  padding: 0.5em 1em;
+  margin: 0.5em;
+  padding-left: 2.5em;
+  border-radius: 1em;
   line-height: 1em;
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 40),1);
   -webkit-transition: 0.5s;
@@ -13,50 +12,55 @@
   cursor: pointer;
   box-shadow: 1px 1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)), -1px -1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a));
 }
-.RadioButtonIcon {
+.RadioButtons-button.is-selected {
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
+  box-shadow: 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, -1px -1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)), -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, 1px 1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a));
+}
+.RadioButtons-button-icon {
   display: block;
-  position: relative;
-  width: 0.9375rem;
-  margin: 0rem 0.625rem;
-  height: 0.9375rem;
+  position: absolute;
+  top: 0rem;
+  left: 0.75em;
+  bottom: 0rem;
+  width: 1em;
+  height: 1em;
+  margin: auto;
   border-radius: 50%;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   box-shadow: 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)), -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a));
 }
-.RadioButtonIcon::before {
+.RadioButtons-button-icon::before {
   content: "";
   display: block;
   position: absolute;
   top: 0rem;
+  right: 0rem;
   bottom: 0rem;
   left: 0rem;
-  right: 0rem;
-  margin: 0.125rem;
+  inset: 0rem;
+  margin: auto;
   background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),1);
   border-radius: 50%;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   transition-timing-function: cubic-bezier(0.2, 2, 0.4, 0.7);
-  transform: -webkit- scale(0.5);
-  transform: scale(0.5);
+  transform: -webkit- scale(0.4);
+  transform: scale(0.4);
 }
-.RadioButtonIcon.selected::before {
+.RadioButtons-button-icon.is-selected::before {
   background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
   opacity: 1;
-  transform: -webkit- scale(1);
-  transform: scale(1);
+  transform: -webkit- scale(0.8);
+  transform: scale(0.8);
 }
-.RadioButton > .RadioButtonIcon {
-  display: block;
-  position: absolute;
-  top: 0rem;
-  left: 0.625rem;
-  bottom: 0rem;
-  margin: auto;
+.RadioButtons.is-size-small {
+  font-size: 0.875rem;
 }
-.RadioButton.selected {
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
-  box-shadow: 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, -1px -1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)), -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, 1px 1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a));
+.RadioButtons.is-size-medium {
+  font-size: 1rem;
+}
+.RadioButtons.is-size-large {
+  font-size: 1.125rem;
 }
 /*# sourceMappingURL=./style.css.map */

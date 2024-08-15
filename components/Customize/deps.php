@@ -1,0 +1,2 @@
+<?php
+$useScripts=['catpow'];

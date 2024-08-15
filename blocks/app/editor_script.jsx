@@ -20,7 +20,7 @@ wp.blocks.registerBlockType('catpow/app',{
 		const {useSelect}=wp.data;
 		
 		if(!options && content_path){
-			const path=content_path.substr(0,content_path.lastIndexOf('/'));
+			const path=content_path.slice(0,content_path.lastIndexOf('/'));
 			wp.apiFetch({path:'/cp/v1/blocks/config/app/options?path='+path})
 			.catch((res)=>{
 				console.log(res);
@@ -59,7 +59,7 @@ wp.blocks.registerBlockType('catpow/app',{
 							selectedId={content_path}
 							tree={Object.values(cpEmbeddablesTree.app)}
 							onChange={(content_path)=>{
-								const path=content_path.substr(0,content_path.lastIndexOf('/'));
+								const path=content_path.slice(0,content_path.lastIndexOf('/'));
 								setAttributes({content_path,options:false,props:JSON.stringify({path})});
 							}}
 						/>

@@ -135,6 +135,14 @@ $colors:(
 	}
 }
 .CP{
+	&-Message{
+		@include bnd((pd:20));
+		&__body{
+			@include bnd((pd:20));
+			@include bdr((w:3,s:s,r:10));
+			@include txt((ws:p,c:t-i 60,s:b,f:t,p:16,h:1.5em));
+		}
+	}
 	&-BoundingBox{
 		@include bnd((p:r,bs:b,z:1000));
 		@include bdr((s:s,w:2,c:wp));
@@ -225,11 +233,15 @@ $colors:(
 	&-Link{
 		@include bnd((p:r));
 		&-input{
-			@include bnd((d:b,p:a,w:1em fit,h:1em,pd:.25em,b:-2em,l:-200,r:-200,mg:a));
+			@include bnd((d:b,p:a,w:1em fit,h:1em,pd:.25em 1em,b:-2em,l:-200,r:-200,mg:a));
 			@include bg((c:b));
 			@include txt((p:12,h:1em,c:t));
 			@include shd((b:2));
-			@include trn((t:.2s,o:1,y:0))	
+			@include trn((t:.2s,o:1,y:0));
+			&:empty:before{
+				content:'Input URL';
+				@include trn((o:.5));
+			}
 		}
 		&:not(.is-selected) &{
 			&-input{
@@ -239,10 +251,7 @@ $colors:(
 		}
 	}
 	&-SelectResponsiveImage{
-		&.is-video{
-			@include bnd((d:b,w:f,h:a));
-		}
-		&-img{
+		&.is-video,&.is-img,&.is-picture,&-img{
 			@include bnd((d:b,w:f,h:a));
 		}
 	}
@@ -257,6 +266,27 @@ $colors:(
 						@include bg((c:wp));
 						@include txt((a:c,p:12,h:10,f:g,w:r,c:b));
 						@include shd((b:1));
+					}
+				}
+			}
+		}
+	}
+	&-CustomColorVars{
+		&-items{
+			@include bnd((pd:16));
+			@include flx((w:w));
+			&:not(.is-active){
+				@include bnd((d:n));
+			}
+			&-item{
+				@include bnd((f:1 1 30%));
+				@include usr((c:p));
+				&-chip{
+					@include bnd((h:60));
+					@include flx((w:w,a:c,j:c));
+					&-label{
+						@include txt((a:c,p:12,c:white));
+						@include shd((ts:1));
 					}
 				}
 			}
@@ -432,6 +462,12 @@ $colors:(
 .EventInputCard{
 	&__header{
 		
+	}
+	&__body{
+		
+	}
+	&__footer{
+		@include txt((p:10));
 	}
 	&__item{
 		@include flx((w:w,g:5,a:c));

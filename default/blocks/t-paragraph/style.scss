@@ -1,0 +1,29 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-t-paragraph{
+	@include tbl(());
+	@include bdr((s:n));
+	&>tbody>tr>td{
+		@include bnd((pd:.5em 0));
+		@include bdr((s:n));
+		@include txt((f:t,h:2em,w:r,c:t));
+	}
+	&.left{
+		@include txt((a:j));
+	}
+	&.center{
+		@include txt((a:c));
+	}
+	&.right{
+		@include txt((a:r));
+	}
+	&.large{
+		@include txt((p:18));
+	}
+	&.medium{
+		@include txt((p:14));
+	}
+	&.small{
+		@include txt((p:11));
+	}
+}

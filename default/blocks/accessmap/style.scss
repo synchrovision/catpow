@@ -19,6 +19,18 @@
 				@include bnd((pd:0,mg:0,mgb:.5em));
 				@include txt((p:1.5em));
 			}
+			>.tel{
+				@include bnd((d:b));
+				@include txt((p:1.5em,td:n,c:i));
+			}
+			>.mail{
+				@include bnd((d:b));
+				@include txt((p:1.25em,td:n,c:i));
+			}
+			>.site{
+				@include bnd((d:b));
+				@include txt((p:1em,td:n,c:i));
+			}
 			>.address{
 				@include bnd((pd:0,mg:0,mgb:.5em));
 			}

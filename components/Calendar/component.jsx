@@ -1,23 +1,43 @@
 ﻿Catpow.Calendar=(props)=>{
 	const {Fragment}=wp.element;
 	const {useState,useCallback,useEffect,useReducer,useMemo}=wp.element;
-	const {className='medium',min=null,max=null,exclude=null,values,onSelect,showYear=true,showMonth=true,showControl=false}=props;
-	const {bem}=Catpow.util;
+	const {
+		className='Calendar',size='medium',min=null,max=null,exclude=null,onSelect=null,onChange=null,
+		showYear=true,showMonth=true,showControl=false
+	}=props;
+	const {bem,getDateValue,getDateTimeObject}=Catpow.util;
+	const classes=useMemo(()=>bem(className),[]);
 	
-	const minTime=min?Catpow.util.getDateObject(min).getTime():Number.MIN_VALUE;
-	const maxTime=max?Catpow.util.getDateObject(max).getTime():Number.MAX_VALUE;
+	const {type,values}=useMemo(()=>{
+		const val=props.values??props.value??props.default;
+		if(!val){
+			return {type:'string',values:{}};
+		}
+		if(Array.isArray(val)){
+			const values={};
+			val.forEach((v)=>values[getDateValue(props.value)]=true);
+			return {type:'array',values};
+		}
+		if(typeof val === 'string'){
+			return {
+				type:'string',
+				values:{[getDateValue(props.value)]:true}
+			};
+		}
+		return {type:'object',values:props.values};
+	},[props.value,props.values]);
+	
+	const minTime=min?getDateTimeObject(min).getTime():Number.MIN_VALUE;
+	const maxTime=max?getDateTimeObject(max).getTime():Number.MAX_VALUE;
 	
 	const thead=useMemo(()=>(
-		<thead>
-			<tr>
-				{"日,月,火,水,木,金,土".split(',').map((d)=>(
-					<td key={d}>{d}</td>
-				))}
-			</tr>
-		</thead>
 	),[props]);
 	const weekDays=['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
-	const [state,dispatch]=useReducer((state,action)=>{
+	const init=useCallback((state)=>{
+		const d=getDateTimeObject(Object.keys(values)[0]??'now');
+		return {year:d.getFullYear(),month:d.getMonth()+1};
+	},[]);
+	const reducer=useCallback((state,action)=>{
 		switch(action.type){
 			case 'goto':
 				return {
@@ -68,10 +88,9 @@
 					month:d.getMonth()+1
 				};
 		}
-	},{
-		year:props.year,
-		month:props.month
-	});
+		
+	},[]);
+	const [state,dispatch]=useReducer(reducer,{year:props.year,month:props.month},init);
 	const weeks=useMemo(()=>{
 		var r,c,d,dateObject,weeks=[],days;
 		const msOfDay=86400000;
@@ -84,7 +103,7 @@
 				dateObject=new Date(state.year,state.month-1,d);
 				days.push({
 					dateObject,
-					value:Catpow.util.getDateValue(dateObject),
+					value:getDateValue(dateObject),
 					inMonth:dateObject.getMonth()==state.month-1
 				});
 				d++;
@@ -93,83 +112,141 @@
 		}
 		return weeks;
 	},[state.year,state.month]);
+	
+	const onSelectDayHandle=useCallback((day)=>{
+		if(onSelect){
+			onSelect(day.value,{day,value});
+		}
+		if(onChange){
+			let val;
+			if(type === 'string'){
+				for(let key in values){
+					delete values[key];
+				}
+				values[day.value]=true;
+				onChange(day.value);
+			}
+			else if(type === 'array'){
+				if(values[day.value]){delete values[day.value];}
+				else{values[day.value]=true;}
+				onChange(Object.keys(values));
+			}
+			else{
+				console.error('onChange is supported only for string or array type value');
+			}
+		}
+	},[type,values,onSelect,onChange]);
+		
 	useEffect(()=>{
+		if(!props.year || props.month){return;}
 		dispatch({
 			type:'goto',
 			year:props.year,
 			month:props.month
 		});
 	},[props.year,props.month]);
+	
+	console.log({values,state});
+
+	const Thead=useCallback((props)=>{
+		const {classes}=props;
+		return (
+			<thead className={classes()}>
+				<tr className={classes.week()}>
+					{"日,月,火,水,木,金,土".split(',').map((d)=>(
+						<th className={classes.week.day()} key={d}>{d}</th>
+					))}
+				</tr>
+			</thead>
+		);
+	},[]);
+	const Cell=useCallback((props)=>{
+		const {classes,day,values,index}=props;
+		const t=day.dateObject.getTime();
+		const value=values[day.value]?values[day.value]:null;
+		const isValid=(t>=minTime && t<=maxTime) && !(exclude && exclude(day.dateObject));
+		return (
+			<td
+				className={classes(
+					weekDays[index],
+					day.inMonth?'is-in-month':'is-out-month',
+					value && ((value.classes!=null && value.classes) || 'is-active'),
+					{'is-disabled':!isValid},
+					
+				)}
+				onClick={()=>{
+					if(isValid){
+						onSelectDayHandle(day);
+					}
+				}}
+			>
+				<span className={classes.date()}>{day.dateObject.getDate()}</span>
+				{value && value.content && (
+					<div className={classes.date.content()}>{value.content}</div>
+				)}
+			</td>
+		);
+	},[]);
 
 	return (
-		<div className={'Calendar '+className}>
-			<table>
-				<caption>
+		<div className={classes('is-size-'+size)}>
+			<table className={classes.table()}>
+				<caption className={classes.table.caption()}>
 					{showYear && (
-						<div className="year">
+						<div className={classes.table.caption.year()}>
 							{showControl && (
 								<Fragment>
-									<span className="btn prev10" onClick={()=>dispatch({type:'prev10Year'})}></span>
-									<span className="btn prev" onClick={()=>dispatch({type:'prevYear'})}></span>
+									<span
+										className={classes.table.caption.year.button('is-prev10')}
+										onClick={()=>dispatch({type:'prev10Year'})}
+									></span>
+									<span
+										className={classes.table.caption.year.button('is-prev')}
+										onClick={()=>dispatch({type:'prevYear'})}
+									></span>
 								</Fragment>
 							)}
 							<span className="current">{state.year}</span>
 							{showControl && (
 								<Fragment>
-									<span className="btn next" onClick={()=>dispatch({type:'nextYear'})}></span>
-									<span className="btn next10" onClick={()=>dispatch({type:'next10Year'})}></span>
+									<span
+										className={classes.table.caption.year.button('is-next')}
+										onClick={()=>dispatch({type:'nextYear'})}
+									></span>
+									<span
+										className={classes.table.caption.year.button('is-next10')}
+										onClick={()=>dispatch({type:'next10Year'})}
+									></span>
 								</Fragment>
 							)}
 						</div>
 					)}
 					{showMonth && (
-						<div className="month">
+						<div className={classes.table.caption.month()}>
 							{showControl && (
-								<span className="btn prev" onClick={()=>dispatch({type:'prevMonth'})}></span>
+								<span
+									className={classes.table.caption.month.button('is-prev')}
+									onClick={()=>dispatch({type:'prevMonth'})}
+								></span>
 							)}
-							<span className="current">{state.month}</span>
+							<span
+								className={classes.table.caption.month.current()}
+							>{state.month}</span>
 							{showControl && (
-								<span className="btn next" onClick={()=>dispatch({type:'nextMonth'})}></span>
+								<span
+									className={classes.table.caption.month.button('is-next')}
+									onClick={()=>dispatch({type:'nextMonth'})}
+								></span>
 							)}
 						</div>
 					)}
 				</caption>
-				{thead}
-				<tbody>
+				<Thead classes={classes.table.thead}/>
+				<tbody className={classes.table.tbody()}>
 				{weeks.map((week,index)=>{
 					return (
-						<tr className="week" key={index}>
-							{week.days.map((day,i)=>{
-								const t=day.dateObject.getTime();
-								const value=values[day.value]?values[day.value]:null;
-								const isValid=(t>=minTime && t<=maxTime) && !(exclude && exclude(day.dateObject));
-								let classes='day';
-								classes+=' '+weekDays[i];
-								classes+=day.inMonth?' inMonth':' outMonth';
-								classes+=isValid?'':' disabled';
-								if(value){
-									if(typeof value == 'object'){
-										if('classes' in value){classes+=value.classes;}
-									}
-									else{
-										if(value){classes+=' active';}
-									}
-								}
-								return (
-									<td
-										className={classes}
-										onClick={()=>{
-											if(isValid){onSelect(day.value,{day,value});}
-										}}
-										key={i}
-									>
-										<span className="date">{day.dateObject.getDate()}</span>
-										{value && value.content && (
-											<div className="content">{value.content}</div>
-										)}
-									</td>
-								);
-							})}
+						<tr className={classes.table.tbody.week()} key={index}>
+							{week.days.map((day,index)=><Cell classes={classes.table.tbody.week.day} day={day} index={index} values={values} key={index}/>)}
 						</tr>
 					);
 				})}

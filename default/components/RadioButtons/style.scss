@@ -1,39 +1,44 @@
 @import 'admin_style_config.scss';
 
-.RadioButton{
-	@include bnd((d:ib,p:r,pd:10 15,mg:7.5,pdl:40));
-	@include bdr((r:20));
-	@include txt((p:15,h:1em,c:t 40));
-	@include trn((t:.5s));
-	@include usr((c:p));
-	@include shd((bv:-1));
-	&s{
-		
-	}
-	&Icon{
-		@include bnd((d:b,p:r,w:15,mg:0 10,h:15));
-		@include bdr((r:50%));
+.RadioButtons{
+	&-button{
+		@include bnd((d:ib,p:r,pd:.5em 1em,mg:.5em,pdl:2.5em));
+		@include bdr((r:1em));
+		@include txt((h:1em,c:t 40));
 		@include trn((t:.5s));
-		@include shd((bve:-1));
-		&::before{
-			content:'';
-			@include bnd((d:b,p:a,t:0,b:0,l:0,r:0,mg:2));
-			@include bg((c:t 10));
-			@include bdr((r:50%));
-			@include trn((t:.5s,s:.5,e:b));
+		@include usr((c:p));
+		@include shd((bv:-1));
+		&.is-selected{
+			@include txt((c:t));
+			@include shd((bv:1));
 		}
-		&.selected{
+		&-icon{
+			@include bnd((d:b,p:a,t:0,l:.75em,b:0,w:1em,h:1em,mg:a));
+			@include bdr((r:50%));
+			@include trn((t:.5s));
+			@include shd((bve:-1));
 			&::before{
-				@include bg((c:m));
-				@include trn((o:1,s:1));
+				content:'';
+				@include bnd((d:b,p:a,i:0,mg:a));
+				@include bg((c:t 10));
+				@include bdr((r:50%));
+				@include trn((t:.5s,s:.4,e:b));
+			}
+			&.is-selected{
+				&::before{
+					@include bg((c:m));
+					@include trn((o:1,s:.8));
+				}
 			}
 		}
 	}
-	&>&Icon{
-		@include bnd((d:b,p:a,t:0,l:10,b:0,mg:a));
+	&.is-size-small{
+		@include txt((p:14));
 	}
-	&.selected{
-		@include txt((c:t));
-		@include shd((bv:1));
+	&.is-size-medium{
+		@include txt((p:16));
+	}
+	&.is-size-large{
+		@include txt((p:18));
 	}
 }

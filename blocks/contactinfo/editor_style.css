@@ -1,0 +1,9 @@
+.wp-block-catpow-contactinfo__items-item {
+  position: relative;
+}
+.wp-block-catpow-contactinfo__items-item .itemControl {
+  position: absolute;
+  bottom: 100%;
+  right: 0.3125rem;
+}
+/*# sourceMappingURL=./editor_style.css.map */

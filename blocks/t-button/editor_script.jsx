@@ -43,7 +43,7 @@
 							</tr>
 						</tbody>
 					</table>
-				</a>,
+				</a>
 				<InspectorControls>
 					<CP.SelectClassPanel
 						title='クラス'
@@ -51,7 +51,6 @@
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters['t-button'] || {}}
 					/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl

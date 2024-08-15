@@ -1,7 +1,7 @@
 (() => {
   // ../components/InputTextItems/component.jsx
   Catpow.InputTextItems = (props) => {
-    const { className = "InputTextItems", value, onChange } = props;
+    const { className = "InputTextItems", onChange } = props;
     const { useState, useMemo, useCallback, useEffect, useReducer } = wp.element;
     const { bem } = Catpow.util;
     const classes = bem(className);
@@ -28,7 +28,7 @@
           return { ...state2, input: "", items };
         }
         case "REMOVE": {
-          const items = state2.items.filter((item) => item !== action.item);
+          const items = state2.items.toSpliced(action.index, 1);
           return { ...state2, items };
         }
         case "START_COMPOSE": {
@@ -53,7 +53,15 @@
     useEffect(() => {
       onChange(state.items);
     }, [state.items]);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, state.items.map((item, index) => /* @__PURE__ */ wp.element.createElement("span", { className: classes.item(), key: index }, /* @__PURE__ */ wp.element.createElement("span", { className: classes.item.text() }, item), /* @__PURE__ */ wp.element.createElement("span", { className: classes.item.remove(), onClick: (e) => dispatch({ type: "REMOVE", item }) }, "\xD7"))), /* @__PURE__ */ wp.element.createElement(
+    const [datalistId, datalist] = useMemo(() => {
+      if (props.datalist == null) {
+        return [null, null];
+      }
+      const datalistId2 = (performance.now() * 1e3).toString(16);
+      const datalist2 = Array.isArray(props.datalist) ? props.datalist : props.datalist.split(",");
+      return [datalistId2, datalist2];
+    }, [props.datalist]);
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, state.items.map((item, index) => /* @__PURE__ */ wp.element.createElement("span", { className: classes.item(), key: index }, /* @__PURE__ */ wp.element.createElement("span", { className: classes.item.text() }, item), /* @__PURE__ */ wp.element.createElement("span", { className: classes.item.remove(), onClick: (e) => dispatch({ type: "REMOVE", index }) }, "\xD7"))), /* @__PURE__ */ wp.element.createElement(
       "input",
       {
         type: "text",
@@ -63,8 +71,9 @@
         onBlur: (e) => dispatch({ type: "ENTER" }),
         onCompositionStart: (e) => dispatch({ type: "START_COMPOSE" }),
         onCompositionEnd: (e) => setTimeout(() => dispatch({ type: "END_COMPOSE" }), 100),
+        list: datalistId,
         ref: setRef
       }
-    ));
+    ), datalist && /* @__PURE__ */ wp.element.createElement("datalist", { id: datalistId }, datalist.map((val) => /* @__PURE__ */ wp.element.createElement("option", { value: val, disabled: state.items.includes(val), key: val }))));
   };
 })();

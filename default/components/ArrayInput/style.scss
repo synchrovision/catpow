@@ -1,0 +1,70 @@
+@import 'admin_style_config.scss';
+
+.ArrayInput{
+	&-items{
+		@include bnd((mg:0,pd:0));
+		@include txt((l:n));
+		&-item{
+			@include bnd((p:r,pd:8,mg:16 a));
+			@include bdr((r:8));
+			@include shd((b:2));
+			&-body{
+
+			}
+			&-controls{
+				@include bnd((p:a,w:100,t:4,r:4));
+				@include flx((w:n,g:4,j:e,a:c));
+				@include txt((p:14));
+				&-button,&-spacer{
+					@include bnd((p:r,pd:2,f:0 0 14,h:14));
+				}
+				&-button{
+					@include bg((c:t 1 .5));
+					@include txt((a:c,c:i,p:14,h:1em));
+					@include usr((c:p));
+					@include shd((b:1));
+					&:hover{
+						@include bg((c:t 1 .6));
+					}
+					&.is-remove,&.is-add{
+						@include bdr((r:50%));
+						&::before{
+							content:'';
+							@include bnd((d:b,p:a,i:0,mg:a,w:.8em,h:.8em));
+							@include bg((c:i));
+						}
+					}
+					&.is-up,&.is-down{
+						@include bnd((w:.8em,h:.5em));
+					}
+					&.is-up{
+						clip-path: polygon(50% 0%,100% 100%,0% 100%);
+					}
+					&.is-down{
+						clip-path: polygon(0% 0%,100% 0%,50% 100%);
+					}
+					&.is-remove{
+						&::before{
+							clip-path: polygon(0% 40%,100% 40%,100% 60%,0% 60%);
+						}
+					}
+					&.is-add{
+						&::before{
+							clip-path: polygon(
+								40% 0%,60% 0%,
+								60% 40%,100% 40%,
+								100% 60%,60% 60%,
+								60% 100%,40% 100%,
+								40% 60%,0% 60%,
+								0% 40%,40% 40%
+							);
+						}
+					}
+				}
+			}	
+		}
+		&-insertionPoint{
+			
+		}
+	}
+}

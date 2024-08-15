@@ -101,7 +101,7 @@ wp.richText.registerFormatType('catpow/title',{
 		type:'class'
 	},
 	edit(props){
-		const {isActive,value,onChange,activeAttributes}=props;
+		const {isActive,value,onChange,activeAttributes,contentRef}=props;
 		const {BlockControls,RichTextToolbarButton}=wp.blockEditor;
 		const {Popover,Card,CardBody,ToolbarGroup}=wp.components;
 		const {useMemo,useCallback}=wp.element;
@@ -110,7 +110,6 @@ wp.richText.registerFormatType('catpow/title',{
 		const onToggle=()=>{
 			return onChange(toggleFormat(value,{type:'catpow/title',attributes:{type:'iheader'}}));
 		}
-		const el=useMemo(CP.getSelecedFormatElement,[isActive,value.start,value.end]);
 		const setAttributes=useCallback((attr)=>{
 			onChange(applyFormat(value,{type:'catpow/title',attributes:Object.assign(activeAttributes,attr)}));
 		},[value,activeAttributes]);
@@ -128,7 +127,7 @@ wp.richText.registerFormatType('catpow/title',{
 		return (
 			<>
 				{isActive && (
-					<Popover anchor={el} position='bottom left' focusOnMount={false}>
+					<Popover anchor={contentRef.current} position='bottom left' focusOnMount={false}>
 						<Card size="small">
 							<CardBody>
 								<CP.SelectButtons
@@ -169,7 +168,7 @@ wp.richText.registerFormatType('catpow/mark',{
 		color:'class'
 	},
 	edit(props){
-		const {isActive,value,onChange,activeAttributes}=props;
+		const {isActive,value,onChange,activeAttributes,contentRef}=props;
 		const {Popover,Card,CardBody,ToolbarGroup}=wp.components;
 		const {BlockControls,RichTextShortcut,RichTextToolbarButton}=wp.blockEditor;
 		const {useMemo,useCallback}=wp.element;
@@ -178,7 +177,6 @@ wp.richText.registerFormatType('catpow/mark',{
 		const onToggle=()=>{
 			return onChange(toggleFormat(value,{type:'catpow/mark',attributes:{color:'color_0'}}));
 		}
-		const el=useMemo(CP.getSelecedFormatElement,[isActive,value.start,value.end]);
 		const setAttributes=useCallback((attr)=>{
 			onChange(applyFormat(value,{type:'catpow/mark',attributes:Object.assign(activeAttributes,attr)}));
 		},[value,activeAttributes]);
@@ -193,10 +191,10 @@ wp.richText.registerFormatType('catpow/mark',{
 		return (
 			<>
 				{isActive && (
-					<Popover anchor={el} position='bottom center' focusOnMount={false}>
+					<Popover anchor={contentRef.current} position='bottom center' focusOnMount={false}>
 						<Card size="small">
 							<CardBody>
-								<CP.ColorVarTracer target={el.parentElement}>
+								<CP.ColorVarTracer target={contentRef.current}>
 									<CP.SelectThemeColor
 										onChange={(proxy)=>setAttributes({color:proxy.classes})}
 										selected={activeAttributes['color']}
@@ -231,7 +229,7 @@ wp.richText.registerFormatType('catpow/large',{
 		color:'class'
 	},
 	edit(props){
-		const {isActive,value,onChange,activeAttributes}=props;
+		const {isActive,value,onChange,activeAttributes,contentRef}=props;
 		const {Popover,Card,CardBody,ToolbarGroup}=wp.components;
 		const {useMemo,useCallback}=wp.element;
 		const {BlockControls,RichTextToolbarButton}=wp.blockEditor;
@@ -240,7 +238,6 @@ wp.richText.registerFormatType('catpow/large',{
 		const onToggle=()=>{
 			return onChange(toggleFormat(value,{type:'catpow/large',attributes:{color:'color_0'}}));
 		}
-		const el=useMemo(CP.getSelecedFormatElement,[isActive,value.start,value.end]);
 		const setAttributes=useCallback((attr)=>{
 			onChange(applyFormat(value,{type:'catpow/large',attributes:Object.assign(activeAttributes,attr)}));
 		},[value,activeAttributes]);
@@ -258,10 +255,10 @@ wp.richText.registerFormatType('catpow/large',{
 		return (
 			<>
 				{isActive && (
-					<Popover anchor={el} position='bottom center' focusOnMount={false}>
+					<Popover anchor={contentRef.current} position='bottom center' focusOnMount={false}>
 						<Card size="small">
 							<CardBody>
-								<CP.ColorVarTracer target={el.parentElement}>
+								<CP.ColorVarTracer target={contentRef.current}>
 									<CP.SelectThemeColor
 										onChange={(proxy)=>setAttributes({color:proxy.classes})}
 										selected={activeAttributes['color']}
@@ -298,7 +295,7 @@ wp.richText.registerFormatType('catpow/tag',{
 		color:'class'
 	},
 	edit(props){
-		const {isActive,value,onChange,onFocus,activeAttributes,activeObject}=props;
+		const {isActive,value,onChange,onFocus,activeAttributes,activeObject,contentRef}=props;
 		const {Popover,BaseControle,TextControl,Card,CardBody,ToolbarGroup}=wp.components;
 		const {BlockControls,RichTextToolbarButton,RichTextShortcut}=wp.blockEditor;
 		const {useState,useMemo,useCallback}=wp.element;
@@ -307,7 +304,6 @@ wp.richText.registerFormatType('catpow/tag',{
 		const onToggle=()=>{
 			return onChange(toggleFormat(value,{type:'catpow/tag',attributes:{class:'color_0'}}));
 		}
-		const el=useMemo(CP.getSelecedFormatElement,[isActive,value.start,value.end]);
 		const setAttributes=useCallback((attr)=>{
 			onChange(applyFormat(value,{type:'catpow/tag',attributes:Object.assign(activeAttributes,attr)}));
 		},[value,activeAttributes]);
@@ -315,7 +311,7 @@ wp.richText.registerFormatType('catpow/tag',{
 		return (
 			<>
 				{isActive && (
-					<Popover anchor={el} position='bottom center' focusOnMount={false}>
+					<Popover anchor={contentRef.current} position='bottom center' focusOnMount={false}>
 						<Card>
 							<CardBody>
 								<TextControl
@@ -327,7 +323,7 @@ wp.richText.registerFormatType('catpow/tag',{
 						</Card>
 						<Card size="small">
 							<CardBody>
-								<CP.ColorVarTracer target={el.parentElement}>
+								<CP.ColorVarTracer target={contentRef.current}>
 									<CP.SelectThemeColor
 										onChange={(proxy)=>setAttributes({color:proxy.classes})}
 										selected={activeAttributes['color']}
@@ -395,6 +391,139 @@ wp.richText.registerFormatType('catpow/annotation',{
 		);
 	}
 });
+
+wp.richText.registerFormatType('catpow/custom',{
+	title:'custom',
+	tagName:'span',
+	className:'rtf-custom',
+	attributes:{
+		vars:'style'
+	},
+	edit(props){
+		const {isActive,value,onChange,onFocus,activeAttributes,activeObject,contentRef}=props;
+		const {Popover,BaseControl,TextControl,RangeControl,Card,CardBody,ToolbarGroup}=wp.components;
+		const {BlockControls,RichTextToolbarButton,RichTextShortcut}=wp.blockEditor;
+		const {useState,useMemo,useCallback,useReducer,useEffect}=wp.element;
+		const {removeFormat,applyFormat,toggleFormat,insert,create,slice}=wp.richText;
+
+		const onToggle=()=>{
+			return onChange(toggleFormat(value,{type:'catpow/custom',attributes:{vars:'font-size:1em;'}}));
+		}
+		const setAttributes=useCallback((attr)=>{
+			onChange(applyFormat(value,{type:'catpow/custom',attributes:Object.assign(activeAttributes,attr)}));
+		},[value,activeAttributes]);
+		
+		const extractStateFromVars=useCallback((vars)=>{
+			const state={};
+			if(!vars){return state;}
+			const map={
+				color:/(?<!\-)color:(#?\w+);/,
+				bgcolor:/background\-color:(#?\w+);/,
+				size:/font\-size:([\d\.]+)em;/,
+				weight:/font\-weight:(\d+);/
+			};
+			Object.keys(map).forEach((key)=>{
+				const m=vars.match(map[key]);
+				if(m){state[key]=m[1];}
+			});
+			return state;
+		},[]);
+		const extractVarsFromState=useCallback((state)=>{
+			let vars='';
+			const map={
+				color:"color:$;",
+				bgcolor:"background-color:$;",
+				size:"font-size:$em;",
+				weight:"font-weight:$;"
+			};
+			Object.keys(map).forEach((key)=>{
+				if(state.hasOwnProperty(key)){vars+=map[key].replace('$',''+state[key]);}
+			});
+			return vars;
+		},[]);
+		const init=useCallback((state)=>{
+			if(state.vars){
+				const {vars}=state;
+				return {vars,...extractStateFromVars(vars)};
+			}
+			return {color:'inherit',size:1,weight:400,vars:'font-size:1em;'};
+		},[]);
+		const reducer=useCallback((state,action)=>{
+			if(action.hasOwnProperty('vars')){
+				const {vars}=action;
+				return {vars,...extractStateFromVars(vars)};
+			}
+			else{
+				const newState={...state,...action};
+				newState.vars=extractVarsFromState(newState);
+				return newState;
+			}
+		},[]);
+		const [state,update]=useReducer(reducer,{vars:activeAttributes.vars},init);
+		useEffect(()=>{
+			if(isActive){
+				onChange(applyFormat(value,{type:'catpow/custom',attributes:{vars:state.vars}}));
+			}
+		},[state.vars]);
+		useEffect(()=>{
+			update({vars:activeAttributes.vars});
+		},[activeAttributes.vars]);
+		
+
+		return (
+			<>
+				{isActive && (
+					<Popover anchor={contentRef.current} position='bottom center' focusOnMount={false}>
+						<Card>
+							<CardBody style={{width:"20rem"}}>
+								<TextControl
+									label="色"
+									onChange={(color)=>update({color})}
+									value={state.color || ''}
+								/>
+								<TextControl
+									label="背景色"
+									onChange={(bgcolor)=>update({bgcolor})}
+									value={state.bgcolor || ''}
+								/>
+								<RangeControl
+									label="サイズ"
+									onChange={(size)=>update({size})}
+									value={parseFloat(state.size || 1)}
+									min={0.1}
+									max={10}
+									step={0.1}
+								/>
+								<RangeControl
+									label="太さ"
+									onChange={(weight)=>update({weight})}
+									value={parseFloat(state.weight || 400)}
+									min={100}
+									max={1000}
+									step={100}
+								/>
+							</CardBody>
+						</Card>
+					</Popover>
+				)}
+				<BlockControls>
+					<ToolbarGroup
+						controls={[
+							{icon:'admin-generic',onClick:onToggle,isActive}
+						]}
+					/>
+				</BlockControls>
+				<RichTextToolbarButton
+					icon={'admin-generic'}
+					title={'custom'}
+					onClick={onToggle}
+					isActive={isActive}
+				/>
+			</>
+		);
+	}
+});
+
 wp.richText.registerFormatType('catpow/clear',{
 	title:'clear',
 	tagName:'div',

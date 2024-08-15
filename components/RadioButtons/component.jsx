@@ -1,6 +1,10 @@
 ﻿Catpow.RadioButtons=(props)=>{
-	const {useMemo}=wp.element;
-	const {value,onChange}=props;
+	const {className="RadioButtons",useState,useMemo}=wp.element;
+	const {size='medium',onChange}=props;
+	const {bem}=Catpow.util;
+	const classes=useMemo(()=>bem(className),[]);
+	
+	const [value,setValue]=useState(props.value??null);
 	
 	const options=useMemo(()=>{
 		if(Array.isArray(props.options)){
@@ -15,18 +19,21 @@
 	},[props.options]);
 	
 	return (
-		<div className={"RadioButtons"}>
+		<div className={classes(`is-size-${size}`)}>
 			{options.map((option)=>{
 				const selected=option.value===value;
 				return (
 					<div
-						className={"RadioButton"+(selected?' selected':'')}
-						onClick={(e)=>{onChange(option.value);}}
+						className={classes.button({'is-selected':selected})}
+						onClick={(e)=>{
+							setValue(option.value);
+							onChange(option.value);
+						}}
 						role="checkbox"
 						aria-checked={selected}
 						key={option.label}
 					>
-						<div className={"RadioButtonIcon"+(selected?' selected':'')} > </div>
+						<div className={classes.button.icon({'is-selected':selected})} > </div>
 						{option.label}
 					</div>
 				);

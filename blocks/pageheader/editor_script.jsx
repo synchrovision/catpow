@@ -25,6 +25,7 @@ wp.blocks.registerBlockType('catpow/pageheader',{
 		const selectiveClasses=useMemo(()=>{
 			const selectiveClasses=[
 				'color',
+				'size',
 				{name:'backgroundImage',label:__('背景画像','catpow'),values:'hasBackgroundImage',sub:[
 					{input:'picture',keys:imageKeys.backgroundImage,devices},
 					{name:'blendmode',label:__('モード','catpow'),vars:'vars',key:'--cp-image-blendmode',input:'blendmode'},
@@ -58,7 +59,6 @@ wp.blocks.registerBlockType('catpow/pageheader',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.flow || {}}
 					/>
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>

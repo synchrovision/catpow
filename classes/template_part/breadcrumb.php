@@ -64,13 +64,15 @@ abstract class breadcrumb extends template_part{
 			}
 			else{
 				$post_type=$wp_query->posts[0]->post_type;
+				//deprecated: with FSE, there's no reason to use static page as post type archive page
 				if(isset($post_types[$post_type]['archive_page'])){
 					$archive_page_name=basename($post_types[$post_type]['archive_page']);
 					$archive_page_conf=$GLOBALS['static_pages'][$archive_page_name];
-					$links[$archive_page_conf['label']]=get_permalink(get_page_by_path($post_types[$post_type]['archive_page']));
+					$archive_page=get_page_by_path($post_types[$post_type]['archive_page']);
+					$links[$archive_page->post_title]=get_permalink($archive_page);
 				}
 				elseif($wp_post_types[$post_type]->has_archive){
-					$links[$post_types[$post_type]['label']]=get_post_type_archive_link( $post_type );
+					$links[$post_types[$post_type]['label']]=get_post_type_archive_link($post_type);
 				}
 			}
 			if(is_category()){
@@ -100,7 +102,8 @@ abstract class breadcrumb extends template_part{
 			if(isset($post_types[$post_type]['archive_page'])){
 				$archive_page_name=basename($post_types[$post_type]['archive_page']);
 				$archive_page_conf=$GLOBALS['static_pages'][$archive_page_name];
-				$links[$archive_page_conf['label']]=get_permalink(get_page_by_path($post_types[$post_type]['archive_page']));
+				$archive_page=get_page_by_path($post_types[$post_type]['archive_page']);
+				$links[$archive_page->post_title]=get_permalink($archive_page);
 			}
 			elseif($wp_post_types[$post_type]->has_archive){
 				$links[$post_types[$post_type]['label']]=get_post_type_archive_link($post_type);

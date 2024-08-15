@@ -6,12 +6,12 @@
 }
 .wp-block-catpow-pageheader-body {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 .wp-block-catpow-pageheader-body-title {
-  padding: 7.5rem 1.25rem;
+  padding: 5rem 1.25rem;
   text-align: center;
-  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-family: var(--cp-fonts-h);
   font-size: 2rem;
   line-height: 1.5em;
   color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
@@ -59,6 +59,22 @@
   bottom: 0rem;
   left: 0rem;
   inset: 0rem;
+  z-index: 1;
+  overflow: hidden;
+}
+.wp-block-catpow-pageheader-background::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  z-index: 2;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  opacity: var(--cp-image-opacity);
+  mix-blend-mode: var(--cp-image-blendmode);
 }
 .wp-block-catpow-pageheader-background img {
   display: block;
@@ -66,7 +82,17 @@
   height: 100%;
   object-position: center;
   object-fit: cover;
-  opacity: var(--cp-image-opacity);
-  mix-blend-mode: var(--cp-image-blendmode);
+  z-index: 1;
+}
+.wp-block-catpow-pageheader.small .wp-block-catpow-pageheader-body-title {
+  padding: 2.5rem 1.25rem;
+  font-size: 1.5rem;
+}
+.wp-block-catpow-pageheader.medium .wp-block-catpow-pageheader-body-title {
+  padding: 5rem 1.25rem;
+}
+.wp-block-catpow-pageheader.large .wp-block-catpow-pageheader-body-title {
+  padding: 10rem 1.25rem;
+  font-size: 3rem;
 }
 /*# sourceMappingURL=./style.css.map */

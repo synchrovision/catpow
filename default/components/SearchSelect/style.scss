@@ -5,15 +5,18 @@
 		&-items{
 			@include bnd((pd:.5em));
 			@include flx((w:w,g:.5em));
+			@include txt((l:n));
 			&-item{
-				@include bnd((w:5em a,pd:.5em 1em));
+				@include bnd((p:r,w:5em a,pd:.5em 2em .5em 1em));
 				@include bg((c:b));
 				@include txt((a:c,c:t,h:1em));
 				@include bdr((r:1em));
 				@include shd((b:1));
 				@include usr((c:p));
 				&-button{
-					@include bnd((d:ib,w:1em,h:1em,mgl:.5em));
+					@include bnd((d:b,p:a,i:0,mg:a,mgr:.5em,w:1em,h:1em));
+					@include bg((c:t 1 .1));
+					@include bdr((r:50%));
 					&::before{
 						content:'×';
 					}

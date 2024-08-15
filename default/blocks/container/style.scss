@@ -1,0 +1,37 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-container{
+	$this:&;
+	@include bnd((o:c));
+	&:not(.hasBorder){
+		@include bdr((s:n));
+	}
+	&.hasBorder{
+		@include bdr((s:s,w:calc(var(--cp-border-width) * #{$sizeUnit}),c:t 1 .5,r:calc(var(--cp-border-radius) * #{$sizeUnit})));
+	}
+	&.hasInsetShadow{
+		@include shd((b:-4));
+	}
+	&.hasOutsetShadow{
+		@include shd((b:4));
+	}
+	&.hasScrollX{
+		@include bnd((w:a f,ox:a));
+		#{$this}__body{
+			@include bnd((mg:a,w:calc(var(--cp-content-width) * 1px)));
+		}
+	}
+	&.hasScrollY{
+		@include bnd((h:calc(var(--cp-container-height) * 1px),oy:a));
+		#{$this}__body{
+		}
+	}
+	&.hasMargin{
+		@include bnd((mg:calc(var(--cp-margin-y) * #{$sizeUnit}) calc(var(--cp-margin-x) * #{$sizeUnit})));
+	}
+	&.hasPadding{
+		#{$this}__body{
+			@include bnd((pd:calc(var(--cp-padding-y) * #{$sizeUnit}) calc(var(--cp-padding-x) * #{$sizeUnit})));
+		}
+	}
+}

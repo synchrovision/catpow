@@ -5,8 +5,9 @@ class blocks{
 	public static $deps=[
 		'editor_init'=>['wp-blocks','wp-i18n','wp-element','wp-editor','wp-plugins','wp-edit-post','catpow','catpow.colorTone','wpinfo'],
 		'editor_script'=>['wp-blocks','wp-i18n','wp-element','wp-editor','wp-plugins','wp-edit-post','catpow','catpow.colorTone','wpinfo'],
-		'editor_style'=>['wp-edit-blocks'],
+		'editor_style'=>['wp-edit-blocks','font_awesome'],
 		'view_script'=>['catpow'],
+		'view_script_module'=>['@wordpress/interactivity'],
 		'view_style'=>[],
 		'front_script'=>['catpow'],
 		'front_style'=>[],
@@ -29,6 +30,12 @@ class blocks{
 		if(!empty($data['js'])){
 			foreach($data['js'] as $args){
 				call_user_func_array('wp_register_script',$args);
+				CP::set_script_translations($args[0]);
+			}
+		}
+		if(!empty($data['mjs'])){
+			foreach($data['mjs'] as $args){
+				call_user_func_array('wp_register_script_module',$args);
 				CP::set_script_translations($args[0]);
 			}
 		}
@@ -76,7 +83,7 @@ class blocks{
 				include $editor_init_file;
 			}
 		});
-		if(current_user_can('edit_themes')){\cp::gzip_compress(glob(\WP_PLUGIN_DIR.'/catpow/blocks/*/*.{js,css}',defined('GLOB_BRACE')?GLOB_BRACE:0));}
+		if(current_user_can('edit_themes')){CP::gzip_compress(glob(\WP_PLUGIN_DIR.'/catpow/blocks/*/*.{js,css}',defined('GLOB_BRACE')?GLOB_BRACE:0));}
 		add_filter('allowed_block_types_all',function($allowed_block_types,$block_editor_context){
 			$post=$block_editor_context->post;
 			if(empty($post)){return $allowed_block_types;}
@@ -91,7 +98,7 @@ class blocks{
 				return $conf_data['allowed_block_types'];
 			}
 			if(isset($conf_data['article_type'])){
-				$class_name=\cp::get_class_name('article_type',$conf_data['article_type']);
+				$class_name=CP::get_class_name('article_type',$conf_data['article_type']);
 				return $class_name::get_allowed_block_types();
 			}
 			return $allowed_block_types;
@@ -100,7 +107,7 @@ class blocks{
 	public static function get_all_blocks(){
 		static $all_blocks;
 		if(isset($all_blocks)){return $all_blocks;}
-		foreach(\cp::get_file_urls('blocks') as $block_dir=>$block_url){
+		foreach(CP::get_file_urls('blocks') as $block_dir=>$block_url){
 			foreach(glob($block_dir.'/*/editor_script.js') as $editor_script){
 				$all_blocks[]=basename(dirname($editor_script));
 			}
@@ -111,7 +118,7 @@ class blocks{
 		static $supported_blocks;
 		if(isset($supported_blocks)){return $supported_blocks;}
 		$supported_blocks=['loop','form','embed','widget','tool','cond'];
-		foreach(\cp::get_file_paths('blocks',030) as $block_dir){
+		foreach(CP::get_file_paths('blocks',030) as $block_dir){
 			$supported_blocks=array_merge(scandir($block_dir),$supported_blocks);
 		}
 		$supported_blocks=array_intersect(self::get_all_blocks(),$supported_blocks);
@@ -121,8 +128,8 @@ class blocks{
 		$transient='block_data_to_register_for_'.get_stylesheet();
 		if((!current_user_can('edit_themes') || wp_is_json_request()) && $data=get_transient($transient)){return $data;}
 		$data=[];
-		$data['editor_init']=cp::get_file_paths('blocks/_init/_init.php');
-		foreach(cp::get_file_urls('blocks/_init') as $block_init_dir=>$block_init_url){
+		$data['editor_init']=CP::get_file_paths('blocks/_init/_init.php');
+		foreach(CP::get_file_urls('blocks/_init') as $block_init_dir=>$block_init_url){
 			foreach(glob($block_init_dir.'/*.js') as $format_script){
 				$fname=basename($format_script);
 				$code_name=substr(strstr($format_script,'/wp-content/'),12,-3);
@@ -133,7 +140,7 @@ class blocks{
 				$fname=basename($format_style);
 				$code_name=substr(strstr($format_style,'/wp-content/'),12,-4);
 				$data['css'][$code_name]=[$code_name,$block_init_url.'/'.$fname];
-				cp::scss_compile(substr($format_style,0,-3).'scss');
+				CP::scss_compile(substr($format_style,0,-3).'scss');
 				self::$deps['editor_style'][]=$code_name;
 			}
 		}
@@ -152,6 +159,7 @@ class blocks{
 				'front_script.js',
 				'front_style.css',
 				'view_script.js',
+				'view_script_module.mjs',
 				'view_style.css',
 				'editor_init.js',
 				'component.js',
@@ -166,9 +174,10 @@ class blocks{
 				$handle='blocks/'.$block_name.'/'.$fname.'.'.$ext;
 				switch($ext){
 					case 'css':
-						cp::scss_compile('blocks/'.$block_name.'/'.$fname);
+						CP::scss_compile('blocks/'.$block_name.'/'.$fname);
 					case 'js':
-						$file_path_url=cp::get_file_path_url('blocks/'.$file_name);
+					case 'mjs':
+						$file_path_url=CP::get_file_path_url('blocks/'.$file_name);
 						$file_url=reset($file_path_url);
 						$file_path=key($file_path_url);
 				
@@ -193,6 +202,9 @@ class blocks{
 								case 'editor_script':
 									$param[$fname.'_handles'][]=$handle;
 									break;
+								case 'view_script_module':
+									$param['view_script_module_ids'][]=$handle;
+									break;
 								case 'front_style':
 									$param['view_style_handles'][]=$handle;
 									break;
@@ -209,23 +221,34 @@ class blocks{
 						break;
 					case 'php':
 						if($fname==='deps'){
-							foreach(cp::get_file_paths('blocks/'.$file_name) as $file_path){
-								$deps=include $file_path;
+							foreach(CP::get_file_paths('blocks/'.$file_name) as $file_path){
+								$deps=(function($f){return include $f;})($file_path);
 								foreach ([
 									'editor_script'=>'js','editor_style'=>'css',
 									'view_script'=>'js','view_style'=>'css',
+									'view_script_module'=>'mjs',
 									'script'=>'js','style'=>'css'
 								] as $handler=>$type){
 									if(!empty($deps[$handler])){
+										$handles=[];
+										foreach($deps[$handler] as $dep){
+											if(is_array($dep)){
+												$data[$type][$dep[0]]=$dep;
+												$handles[]=$dep[0];
+											}
+											else{
+												$handles[]=$dep;
+											}
+										}
 										$data[$type]["blocks/{$block_name}/{$handler}.{$type}"][2]=array_merge(
-											$data[$type]["blocks/{$block_name}/{$handler}.{$type}"][2]??[],$deps[$handler]
+											$data[$type]["blocks/{$block_name}/{$handler}.{$type}"][2]??[],$handles
 										);
 									}
 								}
 							}
 							break;
 						}
-						$file_path=cp::get_file_path('blocks/'.$file_name);
+						$file_path=CP::get_file_path('blocks/'.$file_name);
 						if(empty($file_path)){break;}
 						if($fname==='conf'){
 							self::apply_conf_file($param,$file_path);
@@ -243,7 +266,7 @@ class blocks{
 				if(!empty($param)){$data['core_block_params'][$block_type]=$param;}
 			}
 			else{
-				if($block_json=cp::get_file_path('blocks/'.$block_name.'/block.json')){
+				if($block_json=CP::get_file_path('blocks/'.$block_name.'/block.json')){
 					$data['blocks'][$block_json]=$param;
 				}
 				else{
@@ -280,11 +303,11 @@ class blocks{
 					strpos($GLOBALS['wp']->query_vars['rest_route'],'/blocks/render/') > 0
 				);
 			ob_start();
-			if(!isset(cp::$content)){
-				cp::$content=new content\loop(['parent'=>false]);
+			if(!isset(CP::$content)){
+				CP::$content=new content\loop(['parent'=>false]);
 			}
 			include $file_path;
-			return shortcode::do_shortcode(do_shortcode(ob_get_clean()));
+			return ob_get_clean();
 		};
 	}
 }

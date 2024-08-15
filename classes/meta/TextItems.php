@@ -2,6 +2,6 @@
 namespace Catpow\meta;
 
 class TextItems extends UI{
-	static $output_type='text';
+	static $output_type='text',$defaultParam=['datalist'=>''];
 }
 ?>

@@ -13,7 +13,7 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo,useCallback,useEffect}=wp.element;
 		const {InnerBlocks,InspectorControls,RichText}=wp.blockEditor;
-		const {Icon,PanelBody,TextareaControl}=wp.components;
+		const {Icon,PanelBody,TextControl,TextareaControl}=wp.components;
 		const {classes,TitleTag,items=[],z,t,hl,loopCount,doLoop}=attributes;
 		const primaryClassName='wp-block-catpow-accessmap';
 		var classArray=_.uniq((className+' '+classes).split(' '));
@@ -26,9 +26,10 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 			const selectiveClasses=[
 				{name:'size',type:'buttons',label:'サイズ',values:['small','medium','large']},
 				{name:'mapColor',type:'buttons',label:'地図の色',values:{mapColorNone:'通常',mapColorGray:'グレー',mapColorSync:'同色'}},
-				{name:'titleTag',input:'buttons',filter:'titleTag',key:'TitleTag',label:'タイトルタグ',values:['h2','h3','h4'],effect:(val,{set})=>{
-					if(/^h\d$/.test(val)){set({titleTag:'h'+(parseInt(val[1])+1)})}
-				}},
+				{name:'titleTag',input:'buttons',key:'TitleTag',label:'タイトルタグ',values:['h2','h3','h4']},
+				{name:'hasTel',values:'hasTel',label:'電話番号'},
+				{name:'hasMail',values:'hasMail',label:'メール'},
+				{name:'hasSite',values:'hasSite',label:'サイト'},
 				{name:'t',key:'t',input:'select',label:'タイプ',values:{m:'地図',k:'航空写真',h:'地図 + 航空写真',p:'地形図',e:'Google Earth'}},
 				{name:'z',key:'z',input:'range',label:'ズーム',min:0,max:23},
 				{name:'hl',key:'hl',input:'buttons',label:'言語',values:['ja','us','zh-CN','zh-TW']},
@@ -51,8 +52,19 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 		const selectiveItemClasses=useMemo(()=>{
 			const selectiveItemClasses=[
 				'color',
-				{name:'q',key:'q',input:'text',label:'マーカー'},
-				{name:'ll',key:'ll',input:'text',label:'中心座標'}
+				{name:'source',type:'gridbuttons',values:{useQuery:'検索',useEmbedURL:'埋め込みURL'},sub:{
+					useQuery:[
+						{name:'q',key:'q',input:'text',label:'検索ワード'},
+						{name:'ll',key:'ll',input:'text',label:'中心座標'},
+					],
+					useEmbedURL:[
+						{name:'src',key:'src',input:'textarea',label:'埋め込みURL',rows:10,filter:(value,state,props)=>{
+							const matches=value.match(/src="(.+?)"/);
+							if(matches){return matches[1];}
+							return value;
+						}}
+					]
+				}}
 			];
 			wp.hooks.applyFilters('catpow.blocks.accessmap.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
@@ -79,16 +91,23 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 		const {imageKeys}=CP.config.accessmap;
 
 		[...Array(Math.max(items.length,loopCount)).keys()].forEach((i)=>{
+			let url;
 			const index=i%items.length;
 			const item=items[index];
-			let q=item.q || item.address.replace(/<br\/?>|\n/,' ');
-			let url=`https://www.google.com/maps?output=embed&z=${z}&t=${t}&hl=${hl}&q=${q}`;
-			if(!!item.ll){url+=`&ll=${item.ll}`;}
+			const itemState=CP.wordsToFlags(item.classes);
+			if(itemState.useEmbedURL){
+				url=item.src;
+			}
+			else{
+				let q=item.q || item.address.replace(/<br\/?>|\n/,' ');
+				url=`https://www.google.com/maps?output=embed&z=${z}&t=${t}&hl=${hl}&q=${q}`;
+				if(!!item.ll){url+=`&ll=${item.ll}`;}
+			}
 			
 			if(!item.controlClasses){item.controlClasses='control';}
 			rtn.push(
 				<CP.Item
-					tag='li'
+					tag='div'
 					set={setAttributes}
 					attr={attributes}
 					items={items}
@@ -116,6 +135,30 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 							onChange={(address)=>{item.address=address;save();}}
 							value={item.address}
 						/>
+						{states.hasTel && (
+							<RichText
+								tagName='div'
+								className="tel"
+								onChange={(tel)=>{item.tel=tel;save();}}
+								value={item.tel}
+							/>
+						)}
+						{states.hasMail && (
+							<RichText
+								tagName='div'
+								className="mail"
+								onChange={(mail)=>{item.mail=mail;save();}}
+								value={item.mail}
+							/>
+						)}
+						{states.hasSite && (
+							<RichText
+								tagName='div'
+								className="site"
+								onChange={(site)=>{item.site=site;save();}}
+								value={item.site}
+							/>
+						)}
 						<RichText
 							tagName='div'
 							className="info"
@@ -140,8 +183,7 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.accessmap || {}}
-					/>
+											/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl
 							label='クラス'
@@ -157,7 +199,6 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 						items={items}
 						index={attributes.currentItemIndex}
 						selectiveClasses={selectiveItemClasses}
-						filters={CP.filters.accessmap || {}}
 					/>
 					{states.isTemplate &&
 						<CP.SelectClassPanel
@@ -168,7 +209,6 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 							items={items}
 							index={attributes.currentItemIndex}
 							selectiveClasses={selectiveItemTemplateClasses}
-							filters={CP.filters.accessmap || {}}
 						/>
 					}
 					<CP.ItemControlInfoPanel/>
@@ -187,9 +227,10 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 								{type:'text',key:'title'},
 								{type:'text',key:'zipcode'},
 								{type:'text',key:'address'},
-								{type:'text',key:'info'},
 								{type:'text',key:'tel'},
-								{type:'text',key:'mail'}
+								{type:'text',key:'mail'},
+								{type:'text',key:'site'},
+								{type:'text',key:'info'}
 							]}
 							isTemplate={states.isTemplate}
 						/>
@@ -219,17 +260,27 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 
 		let rtn=[];
 		items.map((item,index)=>{
-			let url=`https://www.google.com/maps?output=embed&z=${z}&t=${t}&hl=${hl}&q=`;
-			url+=item.q || item.address;
-			if(!!item.ll){url+=`&ll=${item.ll}`;}
+			let url;
+			const itemState=CP.wordsToFlags(item.classes);
+			if(itemState.useEmbedURL){
+				url=item.src;
+			}
+			else{
+				let q=item.q || item.address.replace(/<br\/?>|\n/,' ');
+				url=`https://www.google.com/maps?output=embed&z=${z}&t=${t}&hl=${hl}&q=${q}`;
+				if(!!item.ll){url+=`&ll=${item.ll}`;}
+			}
 			rtn.push(
-				<div className="item" key={index}>
+				<div className={item.classes} key={index}>
 					<div className="map">
-						<iframe src={url} frameBorder="0" className="gmap" ll={item.ll} q={item.q}></iframe>
+						<iframe src={url} frameBorder="0" className="gmap" data-ll={item.ll} data-q={item.q}></iframe>
 					</div>
 					<div className="access">
 						<RichText.Content tagName={TitleTag} className="title" value={item.title}/>
 						<RichText.Content tagName="div" className="address" value={item.address}/>
+						{states.hasTel && (<RichText.Content tagName="div" className="tel" value={item.tel}/>)}
+						{states.hasMail && (<RichText.Content tagName="div" className="mail" value={item.mail}/>)}
+						{states.hasSite && (<RichText.Content tagName="div" className="tel" value={item.site}/>)}
 						<RichText.Content tagName="div" className="info" value={item.info}/>
 					</div>
 				</div>

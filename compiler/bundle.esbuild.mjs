@@ -9,6 +9,16 @@ let pathResolver={
 		build.onResolve({filter: /^\w/},async(args)=>{
 			const result=await build.resolve('./'+args.path,{
 				kind:'import-statement',
+				resolveDir:'./modules',
+			});
+			if(result.errors.length>0){
+				return {errors:result.errors};
+			}
+			return {path:result.path};
+		});
+		build.onResolve({filter: /^@?\w/},async(args)=>{
+			const result=await build.resolve('./'+args.path,{
+				kind:'import-statement',
 				resolveDir:'./node_modules',
 			});
 			if(result.errors.length>0){

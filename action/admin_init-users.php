@@ -29,7 +29,7 @@ add_action('admin_notices',function($wp_admin_bar)use($role){
 		]);
 	}
 	if(empty($_GET['page']) && $content=cp::get_template_contents($path.'.php')){
-		wp_enqueue_script('cp_search');
+		wp_enqueue_script('jquery.catpow.search');
 		?>
 		<form id="cp_search">
 			<div id="cpcf_custom_box" class="cpform_section">

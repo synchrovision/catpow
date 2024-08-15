@@ -2,7 +2,7 @@
 
 .wp-block-catpow-showcase{
 	@include bnd((w:a 1200,mg:a,pd:40 0));
-	@include txt((l:n));
+	@include txt((l:n,c:tx));
 	>.item{
 		@include bnd((pd:32 16));
 		>.image{
@@ -15,21 +15,21 @@
 		}
 		>.texts{
 			@include bnd((p:r,f:1 1 300,pd:32,z:1));
-			@include bg((c:b));
+			@include bg((c:bx));
 			@include bdr((r:20));
 			@include shd((b:8));
 			>.counter{
 				@include bnd((w:fit,h:1em,pd:.5em,mg:-2em a 1em));
 				@include bdr((s:s,w:3,r:2em));
-				@include bg((c:b));
-				@include txt((a:c,p:2em,h:1em,c:m,w:b,f:d,b:k));
+				@include bg((c:bx));
+				@include txt((a:c,p:2em,h:1em,c:mx,w:b,f:d,b:k));
 				@include shd((b:4));
 				>.number{
 					@include txt((p:1.5em));
 				}
 			}
 			>.title{
-				@include txt((p:2em,c:m,b:k));
+				@include txt((p:2em,c:mx,b:k));
 			}
 			>.titleCaption{
 				@include bnd((mgt:.5em));
@@ -42,7 +42,7 @@
 			>.link{
 				@include bnd((d:b,w:fit,mg:1em a 0,pd:.5em 1em));
 				@include bdr((s:s,w:2,r:1em));
-				@include txt((p:1.25em,h:1em,s:n,w:b,c:m));
+				@include txt((p:1.25em,h:1em,s:n,w:b,c:mx));
 			}
 		}
 		@include bp(-960){

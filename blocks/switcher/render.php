@@ -7,7 +7,10 @@ preg_match_all(
 	PREG_SET_ORDER
 );
 $contents=array_column($matches,null,'cond');
-
+if(isset($contents['default'])){
+	$default_content=$contents['default'];
+	unset($contents['default']);
+}
 switch($attr['factor']){
 	case 'schedule':
 		$cond_cb=function($value){
@@ -62,3 +65,4 @@ switch($attr['factor']){
 foreach($contents as $value=>$data){
 	if($cond_cb($value)){echo $data['content'];return;}
 }
+echo $default_content['content'];

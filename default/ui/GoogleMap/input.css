@@ -1,0 +1,52 @@
+.GoogleMap {
+  padding: 1rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 1rem;
+  box-shadow: 2px 2px 2px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)), -2px -2px 2px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a));
+  border-radius: 0.5rem;
+}
+.GoogleMap-preview {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 20rem;
+}
+.GoogleMap-preview-map {
+  width: 100%;
+  min-height: 18.75rem;
+  height: 100%;
+  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+}
+.GoogleMap-inputs {
+  -webkit-box-flex: 4;
+  flex-grow: 4;
+  flex-shrink: 4;
+  flex-basis: 30rem;
+  container-type: inline-size;
+  container-name: inputs;
+}
+.GoogleMap-inputs__dl-dt, .GoogleMap-inputs__dl-dd {
+  padding: 0.5rem;
+  margin: 0rem;
+}
+@container inputs (min-width:600px) {
+  .GoogleMap-inputs__dl {
+    display: -webkit-grid;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 7.5rem 1fr;
+    grid-template-columns: 7.5rem 1fr;
+    grid-gap: 1rem 0.5rem;
+  }
+}
+.GoogleMap-inputs-textarea {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/*# sourceMappingURL=./input.css.map */

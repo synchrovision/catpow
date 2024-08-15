@@ -12,14 +12,16 @@ $post_data['post_content']=cp::get_block_code('t-body',[
 	),
 	'footerText'=>get_bloginfo('name').'<br/>'.home_url(),
 	'textMail'=>implode("\n",array_map(function($conf,$name){
-		return "{$conf['label']}：[output {$name}]";
+		$label=$conf['label']??$name;
+		return "{$label}：[output {$name}]";
 	},$conf_data['inputs'],array_keys($conf_data['inputs'])))
 ],[
 	cp::get_block_code('t-box',[],[
 		implode("\n",array_map(function($conf,$name){
+			$label=$conf['label']??$name;
 			return cp::get_block_code('t-paragraph',[
 				'classes'=>'medium left',
-				'text'=>"{$conf['label']}：[output {$name}]"
+				'text'=>"{$label}：[output {$name}]"
 			]);
 		},$conf_data['inputs'],array_keys($conf_data['inputs'])))
 	])

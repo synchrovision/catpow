@@ -1,0 +1,79 @@
+@charset "UTF-8";
+.wp-block-catpow-countdown-body {
+  padding: 1em 0rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: center;
+  justify-content: center;
+  gap: 0.5em;
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),1);
+}
+.wp-block-catpow-countdown-body-group {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  gap: 0.25em;
+  -webkit-align-items: flex-end;
+  align-items: flex-end;
+}
+.wp-block-catpow-countdown-body-group-number {
+  display: block;
+  position: relative;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 1ch;
+  padding: 0.25em;
+  width: 1ch;
+  background-color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),0.1);
+  border-radius: 0.25em;
+  text-align: center;
+  font-size: 1.5em;
+  line-height: 1em;
+  font-weight: 700;
+  font-family: var(--cp-fonts-d);
+}
+.wp-block-catpow-countdown-body-group::after {
+  display: block;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+  padding: 0.25em;
+  font-size: 1em;
+  line-height: 1em;
+  font-weight: 700;
+  font-family: var(--cp-fonts-t);
+}
+.wp-block-catpow-countdown-body-group.is-days::after {
+  content: "日";
+}
+.wp-block-catpow-countdown-body-group.is-days .wp-block-catpow-countdown-body-group-number.is-leading-zero {
+  display: none;
+}
+.wp-block-catpow-countdown-body-group.is-hours::after {
+  content: "時間";
+}
+.wp-block-catpow-countdown-body-group.is-minutes::after {
+  content: "分";
+}
+.wp-block-catpow-countdown-body-group.is-seconds::after {
+  content: "秒";
+}
+.wp-block-catpow-countdown.is-size-small {
+  font-size: 0.75rem;
+}
+.wp-block-catpow-countdown.is-size-medium {
+  font-size: 1rem;
+}
+.wp-block-catpow-countdown.is-size-large {
+  font-size: 1.5rem;
+}
+/*# sourceMappingURL=./style.css.map */

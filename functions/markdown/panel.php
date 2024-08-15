@@ -3,7 +3,7 @@
 	<li>
 		<h3>MarkDownをアップロード</h3>
 		<p>
-			
+			 「[投稿タイプ]-[投稿ID].md」のファイル名（eg: post-1.md）でマークダウンのファイルをアップロードして、記事の本文を更新します。
 		</p>
 		<label class="file" for="cp_admin_md_upload">
 			<span>アップロードするMarkDownファイルを選択</span>

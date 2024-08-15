@@ -25,7 +25,7 @@
       const item = useMemo(() => content_path && itemMap[content_path], [itemMap, content_path]);
       if (!config) {
         if (content_path && itemMap[content_path].has_config) {
-          const path = content_path.substr(0, content_path.lastIndexOf("/"));
+          const path = content_path.slice(0, content_path.lastIndexOf("/"));
           wp.apiFetch({ path: "/cp/v1/" + path + "/config" }).then((config2) => {
             Object.keys(config2).map((key) => config2[key].json = "config");
             setAttributes({ config: JSON.stringify(config2) });
@@ -63,7 +63,7 @@
           selectedId: content_path,
           tree: Object.values(cpEmbeddablesTree.loop),
           onChange: (content_path2) => {
-            const path = content_path2.substr(0, content_path2.lastIndexOf("/"));
+            const path = content_path2.slice(0, content_path2.lastIndexOf("/"));
             const { has_template } = itemMap[content_path2];
             if (has_template) {
               wp.apiFetch({ path: "/cp/v1/" + path + "/template" }).then((template) => {
@@ -76,7 +76,7 @@
             setAttributes({ content_path: content_path2, config: null });
           }
         }
-      ), content_path && content_path.substr(-8) === "loop.php" && /* @__PURE__ */ wp.element.createElement(
+      ), content_path && content_path.slice(-8) === "loop.php" && /* @__PURE__ */ wp.element.createElement(
         TextareaControl,
         {
           label: "query",

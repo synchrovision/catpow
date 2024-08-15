@@ -15,7 +15,7 @@
       const { PanelBody, TreeSelect } = wp.components;
       const { useSelect } = wp.data;
       if (!options && content_path) {
-        const path = content_path.substr(0, content_path.lastIndexOf("/"));
+        const path = content_path.slice(0, content_path.lastIndexOf("/"));
         wp.apiFetch({ path: "/cp/v1/blocks/config/app/options?path=" + path }).catch((res) => {
           console.log(res);
         }).then((options2) => {
@@ -44,7 +44,7 @@
           selectedId: content_path,
           tree: Object.values(cpEmbeddablesTree.app),
           onChange: (content_path2) => {
-            const path = content_path2.substr(0, content_path2.lastIndexOf("/"));
+            const path = content_path2.slice(0, content_path2.lastIndexOf("/"));
             setAttributes({ content_path: content_path2, options: false, props: JSON.stringify({ path }) });
           }
         }

@@ -226,7 +226,6 @@ wp.blocks.registerBlockType('catpow/honeycomb',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.buttons || {}}
 					/>
 					<CP.SelectClassPanel
 						title='アイテム'
@@ -236,7 +235,6 @@ wp.blocks.registerBlockType('catpow/honeycomb',{
 						items={items}
 						index={attributes.currentItemIndex}
 						selectiveClasses={selectiveItemClasses}
-						filters={CP.filters.honeycomb || {}}
 					/>
 					{items[attributes.currentItemIndex] && 
 						<PanelBody title="ITEM CLASS" icon="admin-generic" initialOpen={false}>

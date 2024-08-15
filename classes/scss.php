@@ -53,6 +53,9 @@ class scss{
 			error_log(var_export($args,1));
 			return false;
 		});
+		$scssc->registerFunction('get_real_type',function($args){
+			return [TYPE::T_KEYWORD,$args[0][0]];
+		});
 		$scssc->registerFunction('embed_svg',function($args)use($scssc){
 			if($f=CP::get_file_path($args[0][2][0])){
 				return sprintf('data:image/svg+xml;base64,%s',base64_encode(file_get_contents($f)));
@@ -91,6 +94,10 @@ class scss{
 				$color=false;
 				$colors=util\style_config::get_config_json('colors');
 				$tones=util\style_config::get_config_json('tones');
+				$available_tone_keys=[];
+				foreach($tones as $key=>$tone){
+					$available_tone_keys[$key]=$available_tone_keys[$key.'x']=true;
+				}
 				if($args[0]==='wp'){return 'var(--wp-admin-theme-color)';}
 				if(preg_match('/^([a-z]+)?(_|\-\-)?(\-?\d+)?$/',$args[0],$matches)){
 					$key=$matches[1]?:'m';
@@ -98,11 +105,11 @@ class scss{
 					$staticHue=$sep==='--';
 					$relativeHue=$sep==='_';
 					$num=$matches[3]??null;
-					if(isset($tones[$key])){
+					if(isset($available_tone_keys[$key])){
 						$f='var(--cp-tones-'.$key.'-%s)';
 						$cf='var(--cp-container-tones-'.$key.'-%s)';
 						$rf='var(--cp-root-tones-'.$key.'-%s)';
-						$tone=$tones[$key];
+						$tone=$tones[$key]??[];
 						$color=sprintf(
 							'hsla(%s,%s,%s,%s)',
 							is_null($num)?
@@ -120,6 +127,44 @@ class scss{
 						);
 					}
 				}
+				elseif(preg_match('/^([a-z]+)\-([a-z]+)$/',$args[0],$matches)){
+					$key1=$matches[1];
+					$key2=$matches[2];
+					if(isset($available_tone_keys[$key1]) && isset($available_tone_keys[$key2])){
+						$t=$args[1]?:50;
+						$t/=100;
+						$f='calc(var(--cp-tones-%2$s-%1$s) * '.$t.' + var(--cp-tones-%3$s-%1$s) * '.(1-$t).')';
+						$tone1=$tones[rtrim($key1,'x')];
+						$tone2=$tones[rtrim($key2,'x')];
+						if(isset($tone1['a'])){
+							if(isset($tone2['a'])){
+								$a=sprintf($f,'a',$key1,$key2);
+							}
+							else{
+								$a='calc(var(--cp-tones-'.$key1.'-a) * '.$t.' + '.(1-$t).')';
+							}
+						}
+						else{
+							if(isset($tone2['a'])){
+								$a='calc('.$t.' + var(--cp-tones-'.$key2.'-a) * '.(1-$t).')';
+							}
+							else{
+								$a='1.0';
+							}
+						}
+						if($args[2]!=='false'){
+							if($a==='1.0'){$a=$args[2];}
+							else{$a=sprintf('calc(%s * %s)',$a,$args[2]);}
+						}
+						$color=sprintf(
+							'hsla(%s,%s,%s,%s)',
+							sprintf($f,'h',$key1,$key2),
+							sprintf($f,'s',$key1,$key2),
+							sprintf($f,'l',$key1,$key2),
+							$a
+						);
+					}
+				}
 				$color=apply_filters('cp_translate_color',$color,$args);
 				if(empty($color)){return Compiler::$false;}
 				return [TYPE::T_KEYWORD,$color];
@@ -128,21 +173,42 @@ class scss{
 				$classes=[];
 				$tones=util\style_config::get_config_json('tones');
 				foreach($tones as $key=>$val){
-					if(empty($color_roles_by_shorthand[$key]['extend'])){continue;}
-					if(isset($val['h'])){
-						foreach(range(0,12) as $n){
-							$m=$n===0?0:$n-6;
-							$classes['.color--'.$n]["--cp-tones-{$key}-h"]=$n*30;
-							$classes['.color'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-root-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
-							$classes['.color_'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-container-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
-							$classes['.color--'.$n]["--cp-container-tones-{$key}-h"]=
-							$classes['.color'.$n]["--cp-container-tones-{$key}-h"]="var(--cp-tones-{$key}-h)";
+					if(!empty($color_roles_by_shorthand[$key]['extend'])){
+						if(isset($val['h'])){
+							foreach(range(0,12) as $n){
+								$m=$n===0?0:$n-6;
+								$classes['.color--'.$n]["--cp-tones-{$key}-h"]=$n*30;
+								$classes['.color'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-root-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
+								$classes['.color_'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-container-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
+								$classes['.color--'.$n]["--cp-container-tones-{$key}-h"]=
+								$classes['.color'.$n]["--cp-container-tones-{$key}-h"]="var(--cp-tones-{$key}-h)";
+							}
+							if(!empty($color_roles_by_shorthand[$key]['invert'])){
+								$ikey=$color_roles_by_shorthand[$key]['invert'];
+								foreach(range(0,12) as $n){
+									$classes['.color--'.$n]["--cp-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+									$classes['.color'.$n]["--cp-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+									$classes['.color_'.$n]["--cp-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+									$classes['.color--'.$n]["--cp-container-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+									$classes['.color'.$n]["--cp-container-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+									$classes['.color_'.$n]["--cp-container-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+								}
+							}	
+						}
+						if(isset($val['s']) && isset($val['l'])){
+							foreach(range(-2,2) as $n){
+								$classes['.tone-s'.$n]["--cp-tones-{$key}-s"]="calc(var(--cp-root-tones-{$key}-s) + var(--cp-tones-ss,20%) * {$n})";
+								$classes['.tone-l'.$n]["--cp-tones-{$key}-l"]="calc(var(--cp-root-tones-{$key}-l) + var(--cp-tones-ls,10%) * {$n})";
+							}
 						}
 					}
-					if(isset($val['s']) && isset($val['l'])){
-						foreach(range(-2,2) as $n){
-							$classes['.tone-s'.$n]["--cp-tones-{$key}-s"]="calc(var(--cp-root-tones-{$key}-s) + var(--cp-tones-ss,20%) * {$n})";
-							$classes['.tone-l'.$n]["--cp-tones-{$key}-l"]="calc(var(--cp-root-tones-{$key}-l) + var(--cp-tones-ls,10%) * {$n})";
+					if(!empty($color_roles_by_shorthand[$key]['invert'])){
+						$ikey=$color_roles_by_shorthand[$key]['invert'];
+						foreach($val as $k=>$v){
+							$classes['.revertTextColor']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
+							$classes['.invertTextColor']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$ikey}-{$k})";
+							$classes['.revertTextColor']["--cp-container-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
+							$classes['.invertTextColor']["--cp-container-tones-{$key}x-{$k}"]="var(--cp-tones-{$ikey}-{$k})";
 						}
 					}
 				}
@@ -190,6 +256,17 @@ class scss{
 				$size=apply_filters('cp_translate_size',$size,$args);
 				if(empty($size)){return Compiler::$false;}
 				return [TYPE::T_KEYWORD,$size];
+			});
+			$scssc->registerFunction('translate_weight',function($args){
+				$args=array_map([static::$scssc,'compileValue'],$args);
+				$weight=false;
+				$weights=util\style_config::get_config_json('weights');
+				if(isset($weights[$args[0]])){
+					$weight=sprintf('var(--cp-weights-%s)',$args[0]);
+				}
+				$weight=apply_filters('cp_translate_weight',$weight,$args);
+				if(empty($weight)){return Compiler::$false;}
+				return [TYPE::T_KEYWORD,$weight];
 			});
 		}
 		do_action('cp_scss_compiler_init',$scssc);

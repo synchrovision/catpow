@@ -1,12 +1,13 @@
 <?php
 namespace Catpow\meta;
 abstract class meta{
-	const USE_ALTERNATIVE=01;
+	const INPUT_LOOP=01,USE_ALTERNATIVE=02;
 	public static
 		$value_type='CHAR',
 		$data_type='longtext',
 		$input_type='text',
 		$output_type=null,
+		$input_layout='inline',
 		$validation=[],
 		$has_children=false,
 		$can_edit=true,
@@ -85,7 +86,7 @@ abstract class meta{
 	
 	public static function output($meta,$prm){
 		$values=$meta->value;
-		return is_array($values)?implode(',',$values):$values;
+		return is_array($values)?implode($meta->conf['delimiter']??',',$values):$values;
 	}
 	public static function input($meta,$prm){
 		return sprintf(
@@ -99,7 +100,7 @@ abstract class meta{
 		if(isset($meta->param)){$loop=$meta->param;}
 		else{
 			$loop=$meta->value;
-			if(empty($loop[0]) && ($flags & self::USE_ALTERNATIVE) && !empty($meta->conf['alternative'])){
+			if(empty(reset($loop)) && ($flags & self::USE_ALTERNATIVE) && !empty($meta->conf['alternative'])){
 				$alternatives=(array)$meta->conf['alternative'];
 				foreach($alternatives as $alternative){
 					if(!empty($loop=$meta->parent->get_the_data($alternative))){break;}
@@ -107,7 +108,7 @@ abstract class meta{
 			}
 			if(empty($meta->conf['multiple'])){
 				$class_name=\cp::get_class_name('meta',$meta->conf['type']?:'text');
-				if(!$class_name::$is_bulk_input){$loop=array_slice($loop,0,1);}
+				if(!$class_name::$is_bulk_input && !empty($loop)){$loop=[key($loop)=>reset($loop)];}
 			}
 			elseif($meta->conf['multiple']>1){
 				$loop=array_pad(array_slice($loop??[],0,$meta->conf['multiple']),$meta->conf['multiple'],null);

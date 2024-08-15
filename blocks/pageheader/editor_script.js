@@ -26,6 +26,7 @@
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
           "color",
+          "size",
           { name: "backgroundImage", label: __("\u80CC\u666F\u753B\u50CF", "catpow"), values: "hasBackgroundImage", sub: [
             { input: "picture", keys: imageKeys.backgroundImage, devices },
             { name: "blendmode", label: __("\u30E2\u30FC\u30C9", "catpow"), vars: "vars", key: "--cp-image-blendmode", input: "blendmode" },
@@ -56,8 +57,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters.flow || {}
+          selectiveClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement("div", { className: attributes.classes, style: vars }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.body() }, /* @__PURE__ */ wp.element.createElement(
         RichText,

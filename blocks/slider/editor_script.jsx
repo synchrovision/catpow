@@ -1,4 +1,6 @@
-﻿CP.config.slider={
+﻿const {__}=wp.i18n;
+
+CP.config.slider={
 	devices:['sp','tb'],
 	imageKeys:{
 		image:{src:"src",alt:"alt",code:'imageCode',items:"items"},
@@ -7,6 +9,9 @@
 	},
 	imageSizes:{
 		image:'vga'
+	},
+	linkKeys:{
+		link:{href:"linkUrl",items:"items"}
 	}
 };
 
@@ -31,14 +36,15 @@ wp.blocks.registerBlockType('catpow/slider',{
 	},
 
 	example:CP.example,
-	edit({attributes,className,setAttributes}){
+	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
 		const {InnerBlocks,InspectorControls,RichText}=wp.blockEditor;
-		const {Icon,PanelBody,TextareaControl} = wp.components;
-		const {classes='',controlClasses='',config,items,doLoop,EditMode=false,AltMode=false,device}=attributes;
+		const {Icon,PanelBody,TextControl,TextareaControl} = wp.components;
+		const {vars,classes='',controlClasses='',config,items,doLoop,EditMode=false,AltMode=false,device}=attributes;
 
 		const states=CP.wordsToFlags(classes);
-		const {devices,imageKeys,imageSizes}=CP.config.slider;
+		const controlStates=CP.wordsToFlags(controlClasses);
+		const {devices,imageKeys,imageSizes,linkKeys}=CP.config.slider;
 
 		var statesClasses=[
 			{label:'アロー',values:'hasArrows'},
@@ -66,7 +72,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 			const selectiveClasses=[
 				{
 					name:'type',
-					label:'タイプ',values:['visual','story','articles','index'],
+					label:'タイプ',values:['visual','story','articles','banners','index'],
 					filter:'type',
 					type:'gridbuttons',
 					sub:{
@@ -74,30 +80,29 @@ wp.blocks.registerBlockType('catpow/slider',{
 							{name:'hasTitle',label:'見出し',values:'hasTitle',sub:[
 								{name:'subTitle',label:'サブタイトル',values:'hasSubTitle'},
 								{name:'text',label:'テキスト',values:'hasText'},
-								{name:'brightText',label:'白文字',values:'brightText',sub:[
-									{name:'colorBG',label:'色付き背景',values:'colorBG'}
-								]}
 							]},
-							{name:'slide',label:'スライド画像',values:'hasSlide'},
-							{name:'image',label:'イメージ画像',values:'hasImage',sub:[
-								{name:'thumbnail',label:'サムネール',values:'hasThumbnail'}
-							]},
-							{name:'backgroundImage',label:'背景画像',values:'hasBackgroundImage',sub:[
-								{name:'paleBG',label:'背景画像を薄く',values:'paleBG'}
-							 ]},
+							'textColor',
+							{name:'image',type:'buttons',label:'画像',values:{hasImage:'イメージ画像',hasSlide:'スライド画像'},sub:{
+								hasImage:[
+									{name:'thumbnail',label:'サムネール',values:'hasThumbnail'}
+								]
+							}},
+							'backgroundImage',
 							{name:'link',label:'リンク',values:'hasLink'}
 						],
 						story:[
 							{name:'subTitle',label:'サブタイトル',values:'hasSubTitle'},
-							{name:'brightText',label:'白文字',values:'brightText',sub:[
-								{name:'colorBG',label:'色付き背景',values:'colorBG'}
-							]},
+							'textColor',
 							{name:'image',label:'画像',values:'hasImage',sub:[
 								{name:'thumbnail',label:'サムネール',values:'hasThumbnail'}
 							]},
-							{name:'backgroundImage',label:'背景画像',values:'hasBackgroundImage',sub:[
-								{name:'paleBG',label:'背景画像を薄く',values:'paleBG'}
-							 ]},
+							'backgroundImage',
+							{name:'link',label:'リンク',values:'hasLink'}
+						],
+						banners:[
+							'itemSize',
+							{name:'title',label:'タイトル',values:'hasTitle'},
+							{name:'text',label:'テキスト',values:'hasText'},
 							{name:'link',label:'リンク',values:'hasLink'}
 						],
 						articles:[
@@ -114,6 +119,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 					},
 					bind:{
 						story:['hasTitle','hasText'],
+						banners:['hasSlide'],
 						index:['hasTitle','hasText']
 					},
 					item:{
@@ -167,19 +173,25 @@ wp.blocks.registerBlockType('catpow/slider',{
 		const nextItem=()=>{
 			gotoItem(configData.initialSlide+1);
 		};
+		const getRelativeIndex=(i,c,l,lp)=>{
+			if(!lp){return i-c;}
+			const h=l>>1;
+			return (i-c+h+l)%l-h;
+		};
 
 		const pushItem=(item,index)=>{
-			var posClass,itemClass,imageIndex;
-			imageIndex=(index-configData.initialSlide+items.length)%items.length;
-			if(imageIndex==0){posClass='active';}
-			else if(imageIndex < Math.floor(items.length/2)){
+			var posClass,itemClass;
+			const p=getRelativeIndex(index,configData.initialSlide,items.length,controlStates.loop);
+			if(p==0){posClass='active';}
+			else if(p>0){
 				posClass='after';
+				if(p===1){posClass+=' next'}
 			}
 			else{
 				posClass='before';
-				imageIndex-=items.length;
+				if(p===1){posClass+=' prev'}
 			}
-			itemClass=posClass+' image'+imageIndex+' thumb'+imageIndex;
+			itemClass=posClass+' item'+p;
 			rtn.push(
 				<CP.Item
 					tag='li'
@@ -188,6 +200,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 					attr={attributes}
 					items={items}
 					index={index}
+					style={{'--item-p':p}}
 					key={index}
 				>
 					{states.hasSlide &&
@@ -256,19 +269,20 @@ wp.blocks.registerBlockType('catpow/slider',{
 						</div>
 					}
 					{states.hasLink &&
-						<div className='link'>
-							<TextControl
-								onChange={(linkUrl)=>{item.linkUrl=linkUrl;save();}}
-								value={item.linkUrl}
-								placeholder='URLを入力'
-							/>
-						</div>
+						<CP.Link.Edit
+							className="link"
+							attr={attributes}
+							set={setAttributes}
+							keys={linkKeys.link}
+							index={index}
+							isSelected={isSelected}
+						/>
 					}
 				</CP.Item>
 			);
 			if(states.hasImage && states.hasThumbnail){
 				thumbs.push(
-					<li className={'item '+posClass+' thumb'+imageIndex} onClick={()=>gotoItem(index)} key={index}>
+					<li className={'item '+posClass+' thumb'+p} onClick={()=>gotoItem(index)} key={index}>
 						<CP.SelectResponsiveImage
 							attr={attributes}
 							set={setAttributes}
@@ -280,7 +294,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 				);
 			}
 			if(states.hasDots){
-				dots.push(<li className={'dot '+posClass+' dot'+imageIndex} onClick={()=>gotoItem(index)} key={index}></li>);
+				dots.push(<li className={'dot '+posClass+' dot'+p} onClick={()=>gotoItem(index)} key={index}></li>);
 			}
 		}
 
@@ -303,7 +317,6 @@ wp.blocks.registerBlockType('catpow/slider',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.slider || {}}
 					/>
 					<CP.SelectClassPanel
 						title='表示設定'
@@ -311,7 +324,6 @@ wp.blocks.registerBlockType('catpow/slider',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={statesClasses}
-						filters={CP.filters.slider || {}}
 					/>
 					<CP.SelectClassPanel
 						classKey='controlClasses'
@@ -320,7 +332,6 @@ wp.blocks.registerBlockType('catpow/slider',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={animateClasses}
-						filters={CP.filters.slider || {}}
 					/>
 					<CP.SelectClassPanel
 						classKey='controlClasses'
@@ -329,7 +340,6 @@ wp.blocks.registerBlockType('catpow/slider',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={controllerClasses}
-						filters={CP.filters.slider || {}}
 					/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl
@@ -351,7 +361,6 @@ wp.blocks.registerBlockType('catpow/slider',{
 						items={items}
 						index={attributes.currentItemIndex}
 						triggerClasses={selectiveClasses[0]}
-						filters={CP.filters.slider || {}}
 					/>
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
@@ -388,7 +397,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 								<InnerBlocks/>
 							</div>
 						):(
-							<div className={classes}>
+							<div className={classes} style={vars}>
 								<ul className="contents">{rtn}</ul>
 								<div className={controlClasses} data-config={config}>
 									{states.hasArrows && <div className='arrow prev' onClick={prevItem}> </div>}
@@ -405,10 +414,10 @@ wp.blocks.registerBlockType('catpow/slider',{
 	},
 	save({attributes,className}){
 		const {InnerBlocks,RichText}=wp.blockEditor;
-		const {classes='',controlClasses='',config,items=[],doLoop}=attributes;
+		const {vars,classes='',controlClasses='',config,items=[],doLoop}=attributes;
 
 		const states=CP.wordsToFlags(classes);
-		const {devices,imageKeys,imageSizes}=CP.config.slider;
+		const {devices,imageKeys,imageSizes,linkKeys}=CP.config.slider;
 
 		var rtn=[];
 		var thumbs=[];
@@ -454,7 +463,14 @@ wp.blocks.registerBlockType('catpow/slider',{
 							/>
 						</div>
 					}
-					{states.hasLink && <div className='link'><a href={item.linkUrl}> </a></div>}
+					{states.hasLink && 
+						<CP.Link
+							className="link"
+							attr={attributes}
+							keys={linkKeys.link}
+							index={index}
+						/>
+					}
 				</li>
 			);
 			if(states.hasImage && states.hasThumbnail){
@@ -473,7 +489,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 
 		return (
 			<>
-				<div className={classes}>
+				<div className={classes} style={vars}>
 					<ul className="contents">
 						{rtn}
 					</ul>
@@ -526,6 +542,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 			},
 
 			save({attributes,className}){
+				const {InnerBlocks,RichText}=wp.blockEditor;
 				const {classes='',controlClasses='',config,items=[]}=attributes;
 				var classArray=_.uniq(classes.split(' '));
 				var controlClassArray=_.uniq(controlClasses.split(' '));
@@ -558,12 +575,12 @@ wp.blocks.registerBlockType('catpow/slider',{
 				items.map(function(item,index){
 					if(states.hasBackgroundImage){
 						if(typeof item.bg === 'string'){
-							item.bg={backgroundImage:item.bg.substr('background-image:'.length)};
+							item.bg={backgroundImage:item.bg.slice('background-image:'.length)};
 						}
 					}
 					else{item.bg={}}
 					rtn.push(
-						<li className={'item'} style={item.bg}>
+						<li className={'item'} style={item.bg} key={index}>
 							{states.hasImage &&
 								<div className='image'>
 									<img src={item.src} alt={item.alt}/>
@@ -598,6 +615,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 		},
 		{
 			save({attributes,className}){
+				const {InnerBlocks,RichText}=wp.blockEditor;
 				const {classes='',controlClasses='',config,items=[]}=attributes;
 				var classArray=_.uniq(classes.split(' '));
 				var controlClassArray=_.uniq(controlClasses.split(' '));
@@ -614,7 +632,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 				var thumbs=[];
 				items.map(function(item,index){
 					rtn.push(
-						<li className={item.classes}>
+						<li className={item.classes} key={index}>
 							{states.hasSlide &&
 								<div className='slide'>
 									<CP.ResponsiveImage

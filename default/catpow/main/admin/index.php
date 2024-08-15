@@ -7,5 +7,5 @@
     </div>
 </div>
 <?php
-cp::enqueue_script('catpow/main/admin/script.js');
+cp::enqueue_script('catpow/main/admin/script.js',['catpow.multiple_input']);
 cp::enqueue_style('catpow/main/admin/style.css',['wp-format-library','dashicons','font_awesome']);

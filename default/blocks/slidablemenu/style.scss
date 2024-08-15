@@ -2,6 +2,7 @@
 
 .wp-block-catpow-slidablemenu{
 	@include bnd((pd:.25em,sst:x m,ox:a));
+	@include hide_scrollbar;
 	>.items{
 		@include bnd((g:0,mg:0,pd:0));
 		@include txt((l:n));

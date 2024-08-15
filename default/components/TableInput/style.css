@@ -1,0 +1,102 @@
+.TableInput-table {
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+.TableInput-table-thead-tr {
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-top-width: 0.0625rem;
+  border-bottom-width: 0.0625rem;
+  border-top-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),1);
+  border-bottom-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),1);
+}
+.TableInput-table-thead-tr-th {
+  font-weight: 400;
+}
+.TableInput-table-tbody {
+  margin: 0rem;
+  padding: 0rem;
+  list-style: none;
+}
+.TableInput-table-tbody-tr {
+  position: relative;
+  padding: 0.5em;
+  margin: 1em auto;
+}
+.TableInput-table-tbody-tr:not(:first-child) {
+  border-top-style: solid;
+  border-top-width: 0.0625rem;
+  border-top-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),1);
+}
+.TableInput-table-tbody-tr-td-controls {
+  width: 6.25rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  gap: 0.25rem;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+  -webkit-align-items: center;
+  align-items: center;
+  font-size: 1em;
+}
+.TableInput-table-tbody-tr-td-controls-button, .TableInput-table-tbody-tr-td-controls-spacer {
+  position: relative;
+  padding: 0.1em;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 1em;
+  height: 1em;
+}
+.TableInput-table-tbody-tr-td-controls-button {
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.4);
+  text-align: center;
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+  font-size: 1em;
+  line-height: 1em;
+  cursor: pointer;
+  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+  -webkit-transition: 2s;
+  transition: 2s;
+}
+.TableInput-table-tbody-tr-td-controls-button:hover {
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.6);
+}
+.TableInput-table-tbody-tr-td-controls-button.is-remove, .TableInput-table-tbody-tr-td-controls-button.is-add {
+  border-radius: 50%;
+}
+.TableInput-table-tbody-tr-td-controls-button.is-remove::before, .TableInput-table-tbody-tr-td-controls-button.is-add::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  margin: auto;
+  width: 0.8em;
+  height: 0.8em;
+  background-color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+}
+.TableInput-table-tbody-tr-td-controls-button.is-up, .TableInput-table-tbody-tr-td-controls-button.is-down {
+  width: 0.8em;
+  height: 0.5em;
+}
+.TableInput-table-tbody-tr-td-controls-button.is-up {
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+.TableInput-table-tbody-tr-td-controls-button.is-down {
+  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+}
+.TableInput-table-tbody-tr-td-controls-button.is-remove::before {
+  clip-path: polygon(0% 40%, 100% 40%, 100% 60%, 0% 60%);
+}
+.TableInput-table-tbody-tr-td-controls-button.is-add::before {
+  clip-path: polygon(40% 0%, 60% 0%, 60% 40%, 100% 40%, 100% 60%, 60% 60%, 60% 100%, 40% 100%, 40% 60%, 0% 60%, 0% 40%, 40% 40%);
+}
+/*# sourceMappingURL=./style.css.map */

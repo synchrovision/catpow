@@ -38,7 +38,7 @@ class CP{
 			if(substr($class,0,7)==='Catpow\\'){
 				$class=str_replace('\\','/',substr($class,7));
 				foreach($classes_dirs as $dir){
-					if(file_exists($f=$dir.'/'.$class.'.php')){include $f;break;}
+					if(file_exists($f=$dir.'/'.$class.'.php')){include_once $f;break;}
 				}
 			}
 			else{
@@ -339,6 +339,7 @@ class CP{
 		 	if(in_array($path_data['data_type'],self::$data_types)){
 				$class_name=self::get_class_name('template_type',$path_data['tmp_name']);
 				if(class_exists($class_name) and $inc($f=[$class_name,$path_data],$d,$vars))return true;
+				if(empty($vars)){$vars=[];}
 				$vars['path_data']=$path_data;
 				$path_data['data_type']='config';
 				$path_data['data_name']='template';
@@ -404,13 +405,13 @@ class CP{
 		if(wp_style_is($src) || isset($missed[$src])){return false;}
 		if(wp_style_is($src,'registered')){return true;}
 		if(empty($file=self::get_file_path_url($src,$flag))){$missed[$src]=1;return false;}
-		if(current_user_can('edit_themes')){scss::compile([substr($src,0,-4)]);}
 		if(empty($ver)){$ver=filemtime(key($file));}
 		wp_register_style($src,reset($file),$deps,$ver,$media);
 		return true;
 	}
 	public static function enqueue_style($src=false,$deps=array(),$flag=0733,$ver=false,$media=false){
 		if(!self::register_style($src,$deps,$flag,$ver,$media)){return false;}
+		if(current_user_can('edit_themes')){scss::compile([substr($src,0,-4)]);}
 		wp_enqueue_style($src);
 		return true;
 	}
@@ -452,7 +453,7 @@ class CP{
 				}
 			}
 		}
-		self::enqueue_script('ui/'.$name.'/input.js',$deps);
+		self::enqueue_script('ui/'.$name.'/input.js',$deps,0773);
 		self::set_script_translations('ui/'.$name.'/input.js');
 		if($f=self::get_file_path('ui/'.$name.'/inputInit.php')){include_once $f;}
 		$done[$name]=1;
@@ -461,7 +462,7 @@ class CP{
 	public static function use_ui_output($name){
 		static $done=[];
 		if(isset($done[$name])){return false;}
-		self::enqueue_style('ui/'.$name.'/output.css');
+		self::enqueue_style('ui/'.$name.'/output.css',null,0773);
 		$deps=['wp-element','catpow'];
 		if($f=self::get_file_path('ui/'.$name.'/deps.php')){
 			include $f;
@@ -495,19 +496,19 @@ class CP{
 				}
 			}
 		}
-		self::enqueue_script('ui/'.$name.'/output.js',$deps);
+		self::enqueue_script('ui/'.$name.'/output.js',$deps,0773);
 		self::set_script_translations('ui/'.$name.'/output.js');
 		if($f=self::get_file_path('ui/'.$name.'/outputInit.php')){include_once $f;}
 		$done[$name]=1;
 		return true;
 	}
 	public static function use_components($names){
-		foreach($names as $name){self::use_component($name);}
+		foreach((array)$names as $name){self::use_component($name);}
 	}
 	public static function use_component($name){
 		static $done=[];
 		if(isset($done[$name])){return false;}
-		$deps=['wp-i18n','wp-api-fetch','wp-element','catpow'];
+		$deps=['wp-i18n','wp-api-fetch','wp-element','wp-components','catpow'];
 		if($f=self::get_file_path('components/'.$name.'/deps.php')){
 			include $f;
 			if(!empty($useScripts)){
@@ -539,11 +540,83 @@ class CP{
 			self::use_component($useComponent);
 			$deps[]='components/'.$useComponent.'/component.js';
 		}
-		self::enqueue_script('components/'.$name.'/component.js',$deps);
-		self::enqueue_style('components/'.$name.'/style.css');
+		self::enqueue_script('components/'.$name.'/component.js',$deps,0773);
+		self::enqueue_style('components/'.$name.'/style.css',null,0773);
 		self::set_script_translations('components/'.$name.'/component.js');
 		if($f=self::get_file_path('components/'.$name.'/init.php')){include $f;}
 		$done[$name]=1;
+	}
+	public static function get_components_deps($names){
+		$deps=['js'=>[],'css'=>[]];
+		foreach((array)$names as $name){
+			$sub_deps=self::get_component_deps($name);
+			$deps['js']=array_merge($deps['js'],$sub_deps['js']);
+			$deps['css']=array_merge($deps['css'],$sub_deps['css']);
+		}
+		return $deps;
+	}
+	public static function get_component_deps($name){
+		static $cache=[];
+		if(isset($cache[$name])){return $cache[$name];}
+		$js_handle='components/'.$name.'/component.js';
+		$css_handle='components/'.$name.'/style.css';
+		$deps=['js'=>[],'css'=>[]];
+		if($js_url=self::get_file_url($js_handle,0773)){
+			$deps['js'][$js_handle]=[$js_handle,$js_url,['wp-i18n','wp-api-fetch','wp-element','catpow']];
+		}
+		if($css_url=self::get_file_url($css_handle,0773)){
+			$deps['css'][$css_handle]=[$css_handle,$css_url,[]];
+		}
+		if($f=self::get_file_path('components/'.$name.'/deps.php')){
+			include $f;
+			if(!empty($useScripts)){
+				if(isset($deps['js'][$js_handle])){
+					$deps['js'][$js_handle][2]=array_merge($deps['js'][$js_handle][2],$useScripts);
+				}
+				else{
+					foreach($useScripts as $dep){
+						$handle=is_array($dep)?$dep[0]:$dep;
+						$deps['js'][$handle]=$dep;
+					}
+				}
+			}
+			if(!empty($useStyles)){
+				if(isset($deps['css'][$css_handle])){
+					$deps['css'][$css_handle][2]=array_merge($deps['css'][$css_handle][2],$useStyles);
+				}
+				else{
+					foreach($useStyles as $dep){
+						$handle=is_array($dep)?$dep[0]:$dep;
+						$deps['css'][$handle]=$dep;
+					}
+				}
+			}
+			if(!empty($useComponents)){
+				$sub_deps=self::get_components_deps($useComponents);
+				$deps['js']=array_merge($deps['js'],$sub_deps['js']);
+				$deps['css']=array_merge($deps['css'],$sub_deps['css']);
+			}
+			if(!empty($useStores)){
+				foreach($useStores as $useStore){
+					$sub_deps=self::get_store_deps($useStore);
+					$deps['js']=array_merge($deps['js'],$sub_deps['js']);
+				}
+			}
+		}
+		if(strpos($name,'/')>0){
+			$useComponent=dirname($name);
+			$sub_deps=self::get_component_deps($useComponent);
+			$deps['js']=array_merge($deps['js'],$sub_deps['js']);
+			$deps['css']=array_merge($deps['css'],$sub_deps['css']);
+		}
+		if(!empty($deps['css']) && current_user_can('edit_themes')){
+			foreach($deps['css'] as $handle=>$dep){
+				if(substr($handle,-4)==='.css'){
+					scss::compile([substr($handle,0,-4)]);
+				}
+			}
+		}
+		return $cache[$name]=$deps;
 	}
 	public static function use_store($name){
 		static $done=[];
@@ -561,6 +634,19 @@ class CP{
 		self::enqueue_script('stores/'.$name.'/store.js',$deps);
 		self::set_script_translations('stores/'.$name.'/store.js');
 		$done[$name]=1;
+	}
+	public static function get_store_deps($name){
+		static $cache=[];
+		if(isset($cache[$name])){return $cache[$name];}
+		return $cache[$name]=[
+			'js'=>[
+				[
+					'stores/'.$name.'/store.js',
+					self::get_file_url('stores/'.$name.'/store.js',0773),
+					['wp-data','wp-api-fetch','catpow']
+				]
+			]
+		];
 	}
 	
 	/*post*/
@@ -632,7 +718,7 @@ class CP{
 		}
 	}
 	public static function page_content($name=false,$vars=false){
-		if(is_page() || is_single()){the_post();}
+		if(is_singular() && empty($GLOBALS['post'])){the_post();}
 		echo('<div class="page_content">');
 		if(is_a(self::$content,'Catpow\content\form')){self::$content->render();}
 		else{self::get_template_part(self::get_the_content_file_path(),$name,$vars);}
@@ -795,6 +881,15 @@ class CP{
 			if(!isset($$conf_data_name)){$$conf_data_name=array();}
 			foreach($$conf_data_name as $data_name=>&$conf_data){
 				$callback($data_type,$data_name,$conf_data);
+			}
+		}
+	}
+	public static function loop_conf_data(){
+		foreach(self::$data_types as $data_type){
+			$conf_data_name=self::get_conf_data_name($data_type);
+			if(empty($GLOBALS[$conf_data_name])){continue;}
+			foreach($GLOBALS[$conf_data_name] as $data_name=>$conf_data){
+				yield "{$data_type}/{$data_name}"=>$conf_data; 
 			}
 		}
 	}
@@ -972,6 +1067,9 @@ class CP{
 		$data_path=trim($data_path,'/');
 		if(substr_count($data_path,'/')<3){return null;}
 		if(substr_count($data_path,'/')===3){
+			if($use_alt=substr($data_path,-1)==='?'){
+				$data_path=substr($data_path,0,-1);
+			}
 			if(strpos($data_path,'->')!==false){
 				list($data_path,$relkey)=explode('->',$data_path);
 			}
@@ -992,8 +1090,22 @@ class CP{
 				$path_data['meta_path'][0]['meta_name'],
 				$conf
 			);
+			if($use_alt){
+				if(empty($values) && isset($conf['alternative'])){
+					$values=$cache[$data_path.'?'][$tmp]=self::get_the_meta_value(sprintf(
+						'%s/%s/%s/%s?',
+						$path_data['data_type'],
+						$path_data['data_name'],
+						$path_data['data_id'],
+						is_array($conf['alternative'])?$conf['alternative'][0]:$conf['alternative']
+					));
+				}
+				else{
+					$cache[$data_path.'?'][$tmp]=$values;
+				}
+			}
 			if(isset($relkey)){
-				return $cache[$data_path.'->'.$relkey][$tmp]=$class_name::get_rel_data_value($relkey,$values,$conf);
+				return $cache[$data_path.'->'.$relkey.($use_alt?'?':'')][$tmp]=$class_name::get_rel_data_value($relkey,$values,$conf);
 			}
 			return $values;
 		}
@@ -1226,7 +1338,7 @@ class CP{
 		$type=$conf[$io.'-type']??$conf['type']??'text';
 		$classes[]='cp-meta-item-unit-input';
 		$classes[]='is-type-'.$type;
-		$meta_class="Catpow\\meta\\${type}";
+		$meta_class="Catpow\\meta\\{$type}";
 		$classes[]='is-input-type-'.$meta_class::$input_type;
 		$classes[]='is-value-type-'.$meta_class::$value_type;
 		$rtn.=' class="'.implode(' ',$classes).'"';
@@ -1265,11 +1377,13 @@ class CP{
 	
 
 	public static function get_item_attr($data_path,$conf){
+		$meta_class_name=self::get_class_name('meta',$conf['type']??'text');
 		$path_data=self::parse_data_path($data_path);
 		$attr=sprintf(
-			' id="%1$s" class="cp-meta-item is-type-%2$s is-input-%3$s %4$s" data-meta-name="%3$s" data-role="cp-meta-item" data-meta-type="%2$s"',
+			' id="%1$s" class="cp-meta-item is-type-%2$s is-layout-%3$s is-input-%4$s %5$s" data-meta-name="%4$s" data-role="cp-meta-item" data-meta-type="%2$s"',
 			self::get_input_id($data_path),
 			$conf['type']??'text',
+			$meta_class_name::$input_layout,
 			empty($path_data['meta_path'])?'':end($path_data['meta_path'])['meta_name'],
 			empty($conf['multiple'])?'is-single':'is-multiple'
 		);
@@ -1375,7 +1489,7 @@ class CP{
 	*/
 	public static function add_holders($data_type,$data_name,$meta_name,$new_holders,$id=false){
 		if($id===false){$id=self::$content->data_id;}
-		$crr_holders=self::get_the_holders_id($data_type,$data_name,$meta_name,$id);
+		$crr_holders=self::get_holders_id($data_type,$data_name,$meta_name,$id);
 		$to_add=array_diff($new_holders,$crr_holders);
 		if(!empty($to_add)){
 			foreach($to_add as $holder_id){
@@ -1599,10 +1713,11 @@ class CP{
 		}
 		if(isset($path_data['data_id'])){
 			$loop_id=$path_data['data_id'];
+			$object=$query_class_name::get($path_data['data_name'],$path_data['data_id']);
 			unset($path_data['data_id']);
 		}
 		else{$loop_id=null;}
-		return $content=new content\loop(['path_data'=>$path_data,'query'=>$query,'loop_id'=>$loop_id]);
+		return $content=new content\loop(['path_data'=>$path_data,'query'=>$query,'loop_id'=>$loop_id,'object'=>$object??null]);
 	}
 	public static function get_the_query_value(){
 		static $query_value;
@@ -1835,16 +1950,19 @@ class CP{
 				foreach($styles as $style=>$flag){
 					$css.=util\style_config::resolve_css_vars(file_get_contents($style));
 				}
+				$cssToInlineStyles=new \voku\CssToInlineStyles\CssToInlineStyles();
 				$conf['message']=
 					'<!DOCTYPE html><html lang="ja">'.
 					'<head>'.
 					'<meta name="viewport" content="width=device-width" />'.
 					'<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />'.
 					'<title>'.shortcode::do_shortcode($conf['subject']).'</title>'.
-					'<style>'.$css.'</style>'.
 					'</head>'.
 					'<body class="mail_body '.$body_class.'">'.$body.'</body>'.
 					'</html>';
+				$cssToInlineStyles->setHTML($conf['message']);
+				$cssToInlineStyles->setCSS($css);
+				$conf['message']=$cssToInlineStyles->convert();
 			}
 		}
 		$conf=array_merge([
@@ -2114,7 +2232,6 @@ class CP{
 		return ['stock'];
 	}
 }
-class_alias('Catpow\CP','cp');
 
 add_action('plugins_loaded',['CP','init']);
 

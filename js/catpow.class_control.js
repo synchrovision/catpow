@@ -2,7 +2,7 @@
 
 Catpow.class_control=(control,target,param)=>{
 	if(!target){target=control.parentNode;}
-	const {bem,el}=Catpow.util;
+	const {bem}=Catpow.util;
 	const bems=new WeakMap();
 	const registerBem=(item)=>bems.set(item,bem(item.className));
 	const initItem=(item,index)=>{
@@ -11,21 +11,42 @@ Catpow.class_control=(control,target,param)=>{
 			app.goto(index);
 		});
 	};
-	const updateItemClassName=(item,index)=>{
-		item.className=bems.get(item)('item'+(index-app.current),{
-			before:index<app.current,
-			prev:index-app.current===-1,
-			active:index===app.current,
-			next:index-app.current===1,
-			after:index>app.current,
+	const getRealIndex=(i,c,l,lp)=>{
+		let d=i-c;
+		while(d>=l){d-=l;}
+		while(d<=-l){d+=l;}
+		if(lp){
+			const h=l>>1;
+			if(c<h && d>h){d+=l;}
+			if(c>h+l && d<-h){d-=l;}
+		}
+		return c+d;
+	};
+	const getRelativeIndex=(i,c,l,lp)=>{
+		if(!lp){return i-c;}
+		const h=l>>1;
+		return (i-c+h+l)%l-h;
+	};
+	const updateClassName=(item,p)=>{
+		item.className=bems.get(item)('item'+(p),{
+			before:p<0,
+			prev:p===-1,
+			active:p===0,
+			next:p===1,
+			after:p>0,
 		});
+		item.style.setProperty('--item-p',p);
+	}
+	const updateItemClassName=(item,index)=>{
+		updateClassName(item,getRelativeIndex(index%app.length,app.current%app.length,app.length,app.param.loop));
+	};
+	const updateImageClassName=(item,index)=>{
+		updateClassName(item,getRelativeIndex(index,app.current,app.imageLength,app.param.loop));
 	};
 	const app=this;
 	app.init=()=>{
 		app.control=control;
 		app.target=target;
-		app.length=target.children.length;
-		app.images=Array.from(app.target.children);
 		app.param={
 			loop:control.classList.contains('loop'),
 			autoplay:control.classList.contains('autoplay'),
@@ -44,13 +65,22 @@ Catpow.class_control=(control,target,param)=>{
 		if(param){
 			Object.assign(app.param,param);
 		}
+		app.length=target.children.length;
+		if(app.param.loopItems){
+			const images=Array.from(app.target.children);
+			for(let i=0;i<2;i++){
+				images.forEach((image)=>app.target.append(image.cloneNode(true)));
+			}
+		}
+		app.images=Array.from(app.target.children);
+		app.imageLength=app.images.length;
 		const dotsContainer=control.querySelector('.dots');
 		const thumbsContainer=control.querySelector('.thumb,.thumbnail');
 		
 		app.images.forEach(initItem);
 		if(dotsContainer){
 			while(dotsContainer.children.length<app.length){
-				dotsContainer.append(el('span',{className:'dot'}));
+				dotsContainer.append(dotsContainer.children[0].cloneNode());
 			}
 			app.dots=Array.from(dotsContainer.children);
 			app.dots.forEach(initItem);
@@ -64,7 +94,10 @@ Catpow.class_control=(control,target,param)=>{
 		const nextButton=control.querySelector('.next');
 		if(prevButton){prevButton.addEventListener('click',()=>app.prev());}
 		if(nextButton){nextButton.addEventListener('click',()=>app.next());}
-		app.goto(app.param.initialSlide);
+		app.current=app.param.initialSlide;
+		app.images.forEach(updateImageClassName);
+		if(app.dots){app.dots.forEach(updateItemClassName);}
+		if(app.thumb){app.thumb.forEach(updateItemClassName);}
 		if(app.param.autoplay){
 			app.play();
 			if(app.param.stopbyhover){
@@ -75,14 +108,17 @@ Catpow.class_control=(control,target,param)=>{
 	}
 	app.goto=(index)=>{
 		if(app.param.loop){
-			while(index<0){index+=app.length;}
-			index%=app.length;
+			while(index<0){index+=app.imageLength;}
+			index%=app.imageLength;
 		}
 		else{
-			index=Math.max(0,Math.min(index,app.length-1));
+			index=Math.max(0,Math.min(index,app.imageLength-1));
+		}
+		if(app.param.loopItems){
+			index=getRealIndex(index,app.current,app.length,app.param.loop);
 		}
 		app.current=index;
-		app.images.forEach(updateItemClassName);
+		app.images.forEach(updateImageClassName);
 		if(app.dots){app.dots.forEach(updateItemClassName);}
 		if(app.thumb){app.thumb.forEach(updateItemClassName);}
 	};

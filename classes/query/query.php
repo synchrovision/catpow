@@ -87,7 +87,7 @@ abstract class query{
 			if(is_object($obj)){
 				$object_data=[];
 				foreach(static::$data_keys as $key){
-					$object_data[$key]=addslashes($obj->$key);
+					$object_data[$key]=$obj->$key;
 				}
 			}
 			else{$object_data=array_replace($tmp,array_intersect_key($obj,$tmp));}

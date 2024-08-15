@@ -45,6 +45,48 @@ CP.SelectClassPanel=(props)=>{
 
 	const SelectClass=useCallback(({prm})=>{
 		const {props,item,states,save,saveClasses,saveCss}=useContext(CP.SelectClassPanelContext);
+		if(typeof prm ==='string'){
+			const preset={
+				customColorVars:{name:'customColorVars',input:'customColorVars',label:__('カスタムカラー','catpow'),vars:'customColorVars'},
+				isTemplate:{
+					name:'template',
+					input:'bool',
+					key:'isTemplate',
+					label:__('テンプレート','catpow'),
+					sub:[
+						{name:'loop',input:'bool',label:__('ループ','catpow'),key:'doLoop',sub:[
+							{name:'contentPath',label:'content path',input:'text',key:'content_path'},
+							{name:'query',label:'query',input:'textarea',key:'query'},
+							{name:'loopCount',label:__('プレビューループ数','catpow'),input:'range',key:'loopCount',min:1,max:16}
+						]}
+					]
+				},
+				backgroundImage:{name:'backgroundImage',label:__('背景画像','catpow'),values:'hasBackgroundImage',sub:[
+					{name:'blendmode',label:__('モード','catpow'),vars:'vars',key:'--cp-image-blendmode',input:'blendmode'},
+					{name:'opacity',label:__('不透明度','catpow'),vars:'vars',key:'--cp-image-opacity',input:'range',min:0,max:1,step:0.1}
+				 ]},
+				textAlign:{name:'textAlign',type:'buttons',label:__('テキスト揃え','catpow'),values:{
+					'has-text-align-left':__('左揃え','catpow'),
+					'has-text-align-center':__('中央','catpow'),
+					'has-text-align-right':__('右揃え','catpow'),
+				}},
+				verticalAlign:{name:'verticalAlign',type:'buttons',label:__('垂直方向揃え','catpow'),values:{
+					'has-vertical-align-top':__('上揃え','catpow'),
+					'has-vertical-align-middle':__('中央','catpow'),
+					'has-vertical-align-bottom':__('下揃え','catpow'),
+				}},
+				fontSize:{name:'size',type:'buttons',label:__('文字サイズ','catpow'),values:{
+					'has-font-size-large':__('大','catpow'),
+					'has-font-size-middle':__('中','catpow'),
+					'has-font-size-small':__('小','catpow')
+				}},
+				width:{name:'width',type:'buttons',label:__('幅','catpow'),values:{fullWidth:__('フル','catpow'),wideWidth:__('ワイド','catpow'),regularWidth:__('レギュラー','catpow'),narrowWidth:__('ナロー','catpow')}},
+				size:{name:'size',type:'buttons',label:__('サイズ','catpow'),values:{large:__('大','catpow'),medium:__('中','catpow'),small:__('小','catpow')}},
+				itemSize:{name:'itemSize',label:__('サイズ','catpow'),vars:'vars',key:'--cp-item-size',input:'range',min:100,max:1200,step:10},
+				textColor:{name:'textColor',type:'buttons',label:__('文字色','catpow'),values:{revertTextColor:__('通常','catpow'),invertTextColor:__('反転','catpow')}}
+			};
+			if(preset.hasOwnProperty(prm)){prm=preset[prm];}
+		}
 		if(prm.hasOwnProperty('cond')){
 			if(prm.cond===false){return false;}
 			if(Array.isArray(prm.cond) && prm.cond.some((className)=>!states[className])){return false;}
@@ -52,9 +94,6 @@ CP.SelectClassPanel=(props)=>{
 			if(typeof prm.cond === 'function' && !prm.cond(states,props)){return false;}
 		}
 		let rtn=[];
-		if(prm.filter && props.filters && props.filters[prm.filter]){
-			props.filters[prm.filter](prm);
-		}
 		if(prm.keys){
 			if(props.items){
 				prm.keys.items=prm.keys.items || props.itemsKey;
@@ -79,6 +118,7 @@ CP.SelectClassPanel=(props)=>{
 								param={prm}
 								value={JSON.parse(props.attr[prm.json])[prm.key]}
 								onChange={(val)=>{
+									if(prm.filter){val=prm.filter(val,states,props);}
 									CP.setJsonValue(props,prm.json,prm.key,val);
 									if(prm.effect){prm.effect(val,states,props);}
 								}}
@@ -311,23 +351,42 @@ CP.SelectClassPanel=(props)=>{
 								param={prm}
 								value={props.attr[prm.vars][prm.key]}
 								onChange={(val)=>{
-									save({[prm.vars]:{...props.attr[prm.vars],[prm.key]:''+val}});
+									if(prm.filter){val=prm.filter(val,states,props);}
+									save({[prm.vars]:{...props.attr[prm.vars],[prm.key]:`${val}`}});
 								}}
 							/>
 						);
 						break;
 					}
-					case 'blendmode':
+					case 'customColorVars':{
+						rtn.push(
+							<CP.CustomColorVars
+								value={props.attr[prm.vars]}
+								onChange={(vars)=>{
+									const newVars={...props.attr[prm.vars]};
+									Object.keys(vars).forEach((key)=>{
+										if(vars[key]===null){delete newVars[key];}
+										else{newVars[key]=vars[key];}
+									});
+									console.log({[prm.vars]:newVars});
+									save({[prm.vars]:newVars});
+								}}
+							/>
+						);
+						break;
+					}
+					case 'blendmode':{
 						rtn.push(
 							<CP.SelectBlendMode
 								label={prm.label}
 								value={props.attr[prm.vars][prm.key]}
 								onChange={(val)=>{
-									save({[prm.vars]:{...props.attr[prm.vars],[prm.key]:val}});
+									save({[prm.vars]:{...props.attr[prm.vars],[prm.key]:`${val}`}});
 								}}
 							/>
 						);
 						break;
+					}
 				}
 			}
 			else{
@@ -336,7 +395,7 @@ CP.SelectClassPanel=(props)=>{
 						label={prm.label}
 						value={props.attr[prm.vars][prm.key]}
 						onChange={(val)=>{
-							save({[prm.vars]:{...props.attr[prm.vars],[prm.key]:''+val}});
+							save({[prm.vars]:{...props.attr[prm.vars],[prm.key]:`${val}`}});
 						}}
 					/>
 				);
@@ -397,6 +456,7 @@ CP.SelectClassPanel=(props)=>{
 								param={prm}
 								value={item[prm.key]}
 								onChange={(val)=>{
+									if(prm.filter){val=prm.filter(val,states,props);}
 									save({[prm.key]:val});
 									if(prm.effect){prm.effect(val,states,props);}
 								}}

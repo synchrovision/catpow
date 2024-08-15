@@ -6,7 +6,7 @@ namespace Catpow\api\blocks;
 * SSRで用いる各種パーツのプレビューのHTMLを返す
 * レスポンスの構造はblocks/renderに倣う
 * 各パーツの出力はblocks/render/[パーツ名]クラスの
-* previewとrendarメソッドによって定義される
+* previewとrenderメソッドによって定義される
 */
 
 class parts extends \Catpow\api{

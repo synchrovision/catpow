@@ -46,9 +46,10 @@ class Process implements \IteratorAggregate{
 	public function __get($name){
 		return $this->{$name};
 	}
-	public function getIterator(){
-		$process=$this;
-		while($this->do_task()['is_completed']!==true){yield $this->status;}
+	public function getIterator():\Traversable{
+		return (function($process){
+			while($process->do_task()['is_completed']!==true){yield $process->status;}
+		})($this);
 	}
 	public static function create($process,$tasks){
 		$instance=new static($process,$tasks);

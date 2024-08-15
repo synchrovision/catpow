@@ -1,5 +1,5 @@
 (() => {
-  // blocks/t-media-text/editor_script.jsx
+  // ../blocks/t-media-text/editor_script.jsx
   wp.blocks.registerBlockType("catpow/t-media-text", {
     title: "\u{1F43E} T-media-text",
     description: "HTML\u30E1\u30FC\u30EB\u7528\u306E\u753B\u50CF\u30FB\u30C6\u30AD\u30B9\u30C8\u306E\u30BB\u30C3\u30C8\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
@@ -54,8 +54,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters["t-media-text"] || {}
+          selectiveClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextareaControl,

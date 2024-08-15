@@ -1,8 +1,9 @@
 <?php
 add_action('cp_setup',function(){
-	if($cp_linetag_code=get_option('cp_linetag_code')){
-		if(is_array($cp_linetag_code)){$cp_linetag_code=reset($cp_linetag_code);}
-		add_action('wp_head',function()use($cp_linetag_code){
+	if($cp_linetag_codes=get_option('cp_linetag_code')){
+		$cp_linetag_codes=(array)$cp_linetag_codes;
+		$cp_linetag_code=reset($cp_linetag_codes);
+		add_action('wp_head',function()use($cp_linetag_codes,$cp_linetag_code){
 			?>
 			<!-- LINE Tag Base Code -->
 			<!-- Do Not Modify -->
@@ -18,8 +19,9 @@ add_action('cp_setup',function(){
 				customerType: 'lap',
 				tagId:'<?=$cp_linetag_code?>'
 			});
-			_lt('send','pv',['<?=$cp_linetag_code?>']);
-			_lt.tagId='<?=$cp_linetag_code?>';
+<?php foreach($cp_linetag_codes as $cp_sub_linetag_code): ?>
+			_lt('send','pv',['<?=$cp_sub_linetag_code?>']);
+<?php endforeach; ?>
 
 			document.addEventListener('DOMContentLoaded',function(){
 				window.Catpow.linetag.initialTagId='<?=$cp_linetag_code?>';
@@ -48,7 +50,9 @@ add_action('cp_setup',function(){
 			});
 			</script>
 			<noscript>
-			  <img height="1" width="1" style="display:none" src="https://tr.line.me/tag.gif?c_t=lap&t_id=<?=$cp_linetag_code?>&e=pv&noscript=1" />
+<?php foreach($cp_linetag_codes as $cp_sub_linetag_code): ?>
+			  <img height="1" width="1" style="display:none" src="https://tr.line.me/tag.gif?c_t=lap&t_id=<?=$cp_sub_linetag_code?>&e=pv&noscript=1" />
+<?php endforeach; ?>
 			</noscript>
 			<!-- End LINE Tag Base Code -->
 			<?php

@@ -29,7 +29,7 @@ class meta extends content{
 				if(isset($format)){$item=sprintf($format,$item);}
 				$items[]=$item;
 			}
-			echo implode((isset($items[0]) && $items[0][0]==='<')?'':'　',$items);
+			echo implode((isset($items[0][0]) && $items[0][0]==='<')?'':'　',$items);
 			unset($this->loop_id,$this->value);
 		}
 		return $this;
@@ -64,7 +64,7 @@ class meta extends content{
 			echo '</div>';
 		}
 		else{
-			foreach($class_name::loop($this) as $this->loop_id=>$meta_value){
+			foreach($class_name::loop($this,$class_name::INPUT_LOOP) as $this->loop_id=>$meta_value){
 				echo '<div '.$this->get_unit_attr().'>';
 				$tmp=$class_name::input($this,$prm);
 				if(isset($format)){$tmp=printf($format,$tmp);}

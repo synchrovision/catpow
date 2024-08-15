@@ -510,7 +510,7 @@ jQuery.catpow.pageTopOffset=0;
 		//swipeleft  左方向に閾値を超えてスワイプ
 		//swileright 右方向に閾値を超えてスワイプ
 		cp_swipeable:function(drc,thr){
-			if(navigator.maxTouchPoints < 1){return;}
+			if(navigator.maxTouchPoints < 1){return $(this);}
 			var $el=$(this),org={x:0,y:0,t:0},diff,crr,path;
 			thr=thr || 100;
 			var keys={

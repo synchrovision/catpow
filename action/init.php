@@ -34,7 +34,6 @@ wp_register_script('axios','https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/
 wp_register_script('remarkable','https://cdnjs.cloudflare.com/ajax/libs/remarkable/2.0.1/remarkable.min.js');
 wp_register_script('mermaid','https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js');
 wp_register_script('jquery-easing','https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js');
-wp_register_script('wp-color-picker-alpha','https://cdn.jsdelivr.net/gh/kallookoo/wp-color-picker-alpha/dist/wp-color-picker-alpha.min.js',['wp-color-picker']);
 wp_register_script('ajaxzip3','https://ajaxzip3.github.io/ajaxzip3.js');
 
 wp_scripts()->add_data('react','global','React');
@@ -70,6 +69,7 @@ if($GLOBALS['is_IE']){
 /* css vars */
 add_action('admin_head','Catpow\\util\\style_config::print_css_vars');
 add_action('wp_head','Catpow\\util\\style_config::print_css_vars');
+add_action('customize_controls_print_styles','Catpow\\util\\style_config::print_css_vars');
 add_action('admin_init',function(){
 	wp_add_inline_style('wp-block-editor',Catpow\util\style_config::get_css_vars_code());
 },20);
@@ -110,22 +110,15 @@ if(function_exists('register_block_type')){
 Catpow\shortcode::init();
 
 /*plugin*/
-add_filter('extra_plugin_headers',function($headers){
-	$headers[]='GitHub Repository';
-	return $headers;
-});
-add_filter('pre_set_site_transient_update_plugins',function($transient){
-	foreach(get_plugins() as $plugin=>$plugin_data){
-		$repo=Catpow\github\Repo::of_plugin($plugin);
-		if(!empty($repo) && $repo->hasNewerRelease){
-			$transient->response[$plugin]=$repo->dataForTransientUpdatePlugins;
+add_filter('update_plugins_github.com',function($update,$plugin_data,$plugin_file){
+	$repo=Catpow\github\Repo::of_plugin($plugin_file,$plugin_data);
+	if(!empty($repo)){
+		if($repo->hasNewerRelease){
+			return $repo->dataForTransientUpdatePlugins;
 		}
 	}
-	return $transient;
-});
-add_filter('site_transient_update_plugins',function($values){
-	return $values;
-});
+	return $update;
+},10,3);
 add_filter('plugins_api',function($res,$action,$arg){
 	if(in_array($action,['query_plugins','plugin_information'],true)&& isset($arg->slug)){
 		$repo=Catpow\github\Repo::of_plugin($arg->slug);
@@ -241,7 +234,7 @@ add_filter('redirect_canonical',function($redirect_url,$request_url){
 	}
 	if(strrpos(basename($request_url),'.')!==false){return rtrim($redirect_url,'/');}
 	return $redirect_url;
-},10,2);
+},100,2);
 add_filter('nav_menu_css_class',function($classes,$item,$args,$depth){
 	if($post_class=get_post_meta($item->ID,'post_class')){
 		$classes+=$post_class;

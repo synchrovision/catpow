@@ -1,0 +1,39 @@
+@import 'admin_style_config.scss';
+
+.mail_body{
+	&.white{@include bg((c:#fff));}
+	&.gray{@include bg((c:#ddd));}
+	&.black{@include bg((c:#222));}
+}
+.wp-block-catpow-t-body{
+	@include tbl(());
+	@include bnd((w:f,pd:0,mg:0 a));
+	@include bdr((s:n));
+	img{
+		@include bnd((d:i));
+	}
+	&>thead>tr>th{
+		@include bnd((pd:20));
+		@include bg((c:m));
+		@include txt((a:c,p:40,h:1em,f:t,w:b,c:b,v:m));
+		small{
+			@include txt((p:40%));
+		}
+	}
+	&>tbody>tr>td{
+		@include bnd((mg:0,pd:0));
+		@include bg((c:b));
+		@include bdr((s:n));
+	}
+	&>tfoot>tr>td{
+		@include bnd((pd:20));
+		@include bdr((p:t,s:s,w:1,c:t 20));
+		@include bg((c:t 5));
+		@include txt((a:c,p:12,h:1em,f:t,c:t,v:m));
+	}
+	@include clr(){
+		&>thead>tr>th{
+			@include bg((c:$i));
+		}
+	}
+}

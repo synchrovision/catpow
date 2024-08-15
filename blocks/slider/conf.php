@@ -1,7 +1,8 @@
 <?php
 use Catpow\util\BlockConfig;
 $attributes=[
-	"classes"=>["source"=>'attribute',"selector"=>'div',"attribute"=>'class',"default"=>'wp-block-catpow-slider story hasTitle hasText hasImage'],
+	'vars'=>['type'=>'object','default'=>['--cp-image-opacity'=>'0.5','--cp-image-blendmode'=>'normal','--cp-item-size'=>'300']],
+	"classes"=>["source"=>'attribute',"selector"=>'div',"attribute"=>'class',"default"=>'wp-block-catpow-slider story hasTitle hasText hasImage hasArrows hasDots'],
 	"controlClasses"=>["source"=>'attribute',"selector"=>'div.controls',"attribute"=>'class',"default"=>'controls loop autoplay flickable'],
 	"config"=>[
 		"source"=>'attribute',
@@ -32,27 +33,27 @@ $attributes=[
 			"backgroundImageCode"=>["source"=>'text',"selector"=>'.background'],
 			"backgroundImageSources"=>BlockConfig::getPictureSoucesAttributes('.background picture')
 		],
-		"default"=>[
-			[
+		"default"=>array_map(function($n){
+			return [
 				"classes"=>'item',
-				"title"=>['Title'],
+				"title"=>["Title{$n}"],
 				"subTitle"=>['SubTitle'],
-				
+
 				"src"=>cp::get_file_url('/images/dummy.jpg'),
 				"alt"=>'dummy',
 				'slideSources'=>BlockConfig::getPictureSoucesAttributesDefaultValueForDevices(['sp','tb']),
-				
-				"slideSrc"=>cp::get_file_url('/images/dummy.jpg'),
+
+				"slideSrc"=>cp::get_file_url('/images/dummy_symbol.svg'),
 				"slideAlt"=>'dummy',
-				
+
 				"text"=>['Text'],
 				"linkUrl"=>'https://',
 				"backgroundImageSrc"=>cp::get_file_url('/images/dummy_bg.jpg'),
 				"backgroundImageAlt"=>'dummy',
 				"backgroundImageSrcset"=>null,
 				'backgroundImageSources'=>BlockConfig::getPictureSoucesAttributesDefaultValueForDevices(['sp','tb'],'dummy_bg.jpg')
-			]
-		]
+			];
+		},range(1,3))
 	],
 	"blockState"=>["type"=>'object',"default"=>["enableBlockFormat"=>false]],
 	"loopParam"=>["type"=>'text',"default"=>''],

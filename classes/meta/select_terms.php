@@ -44,7 +44,11 @@ class select_terms extends select{
 		}
 		else{
 			$terms=array_map('get_term',(array)$vals);
-			usort($terms,function($a,$b){return $a->count<=>$b->count || $b->parent-$a->parent;});
+			usort($terms,function($a,$b){
+				$rtn=$a->count<=>$b->count;
+				if($rtn===0){$rtn=$a->parent<=>$b->parent;}
+				return $rtn;
+			});
 			foreach($terms as $term){
 				$values[]=\cp::get_the_meta_value("term/".$term->taxonomy."/{$term->term_id}/{$relkey}")?:[];
 			}

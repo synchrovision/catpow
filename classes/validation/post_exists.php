@@ -1,4 +1,4 @@
- static<?php
+<?php
 namespace Catpow\validation;
 
 class post_exists extends validation{

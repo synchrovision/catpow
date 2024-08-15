@@ -1,0 +1,25 @@
+.wp-block-catpow-t-media-text {
+  margin: 1.25rem auto;
+  border-style: none;
+}
+.wp-block-catpow-t-media-text > tbody > tr > td.imageCell img {
+  max-width: 12.5rem;
+  width: 32vw;
+  height: auto;
+}
+.wp-block-catpow-t-media-text > tbody > tr > td.spacerCell {
+  width: 1.25rem;
+}
+.wp-block-catpow-t-media-text > tbody > tr > td.textCell {
+  width: 64%;
+}
+.wp-block-catpow-t-media-text.top > tbody > tr > td {
+  vertical-align: top;
+}
+.wp-block-catpow-t-media-text.center > tbody > tr > td {
+  vertical-align: middle;
+}
+.wp-block-catpow-t-media-text.bottom > tbody > tr > td {
+  vertical-align: bottom;
+}
+/*# sourceMappingURL=./style.css.map */

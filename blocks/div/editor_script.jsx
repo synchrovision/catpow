@@ -20,17 +20,16 @@ wp.blocks.registerBlockType('catpow/div',{
 	example:CP.example,
 	edit(props){
 		const {useState,useMemo}=wp.element;
-		const {InnerBlocks,InspectorControls}=wp.blockEditor;
+		const {InnerBlocks,InspectorControls,useBlockProps}=wp.blockEditor;
 		const {PanelBody,TextareaControl} = wp.components;
 		const {attributes,className,setAttributes,context}=props;
-		const {anchor,classes,color,patternImageCss,frameImageCss,borderImageCss}=attributes;
+		const {customColorVars,anchor,classes,color,patternImageCss,frameImageCss,borderImageCss}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.div;
 		
 		CP.inheritColor(props,['iconImageSrc','patternImageCss','frameImageCss','borderImageCss']);
 		CP.manageStyleData(props,['patternImageCss','frameImageCss','borderImageCss']);
-		
 		
 		const selectiveClasses=useMemo(()=>{
 			const {devices,imageKeys}=CP.config.div;
@@ -44,7 +43,7 @@ wp.blocks.registerBlockType('catpow/div',{
 					sub:{
 						frame:[
 							{label:'アイコン',values:'hasIcon',sub:[
-								{input:'icon',label:'アイコン',keys:imageKeys.iconImage,color}
+								{input:'icon',label:'アイコン',color}
 							]},
 							{type:'buttons',label:'線',values:{noBorder:'なし',thinBorder:'細',boldBorder:'太'}},
 							{label:'角丸',values:'round'},
@@ -56,7 +55,9 @@ wp.blocks.registerBlockType('catpow/div',{
 					}
 				},
 				'color',
-				{name:'background',type:'buttons',label:'背景',values:{noBackground:'なし',hasBackgroundColor:'色',hasBackgroundImage:'画像',hasPatternImage:'パターン'},sub:{
+				'customColorVars',
+				'textColor',
+				{name:'background',type:'buttons',label:'背景',values:{noBackground:'なし',hasPaleBackgroundColor:'薄色',hasBackgroundColor:'色',hasBackgroundImage:'画像',hasPatternImage:'パターン'},sub:{
 					hasBackgroundColor:[
 						{label:'パターン',values:'hasPattern',sub:['pattern']}
 					],
@@ -81,19 +82,12 @@ wp.blocks.registerBlockType('catpow/div',{
 			return selectiveClasses;
 		},[]);
 
+		const blockProps=useBlockProps({className:classes,style:customColorVars});
+		
 		return (
 			<>
-				<div id={anchor} className={classes}>
-					{states.hasIcon && 
-						<div className="icon">
-							<CP.SelectResponsiveImage
-								set={setAttributes}
-								attr={attributes}
-								keys={imageKeys.iconImage}
-								size='middle'
-							/>
-						</div>
-					}
+				<div {...blockProps}>
+					{states.hasIcon && <CP.OutputIcon item={attributes}/>}
 					{states.hasBackgroundImage && 
 						<div className="background">
 							<CP.ResponsiveImage
@@ -122,7 +116,6 @@ wp.blocks.registerBlockType('catpow/div',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.div || {}}
 					/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl
@@ -136,24 +129,18 @@ wp.blocks.registerBlockType('catpow/div',{
 		);
 	},
 
-
 	save({attributes,className,setAttributes}){
-		const {InnerBlocks}=wp.blockEditor;
-		const {anchor,classes='',color,patternImageCss,frameImageCss,borderImageCss}=attributes;
+		const {InnerBlocks,useBlockProps}=wp.blockEditor;
+		const {customColorVars,anchor,classes='',color,patternImageCss,frameImageCss,borderImageCss}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.div;
 		
+		const blockProps=useBlockProps.save({className:classes,style:customColorVars});
+		
 		return (
-			<div id={anchor} className={classes}>
-				{states.hasIcon && 
-					<div className="icon">
-						<CP.ResponsiveImage
-							attr={attributes}
-							keys={imageKeys.iconImage}
-						/>
-					</div>
-				}
+			<div {...blockProps}>
+				{states.hasIcon && <CP.OutputIcon item={attributes}/>}
 				{states.hasBackgroundImage && 
 					<div className="background">
 						<CP.ResponsiveImage

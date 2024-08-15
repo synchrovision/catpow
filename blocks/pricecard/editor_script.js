@@ -1,5 +1,5 @@
 (() => {
-  // blocks/pricecard/editor_script.jsx
+  // ../blocks/pricecard/editor_script.jsx
   wp.blocks.registerBlockType("catpow/pricecard", {
     title: "\u{1F43E} PriceCard",
     description: "\u30B5\u30FC\u30D3\u30B9\u30FB\u5546\u54C1\u60C5\u5831\u306E\u4E00\u89A7\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
@@ -192,8 +192,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters.pricecard || {}
+          selectiveClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextareaControl,
@@ -211,8 +210,7 @@
           attr: attributes,
           items,
           index: attributes.currentItemIndex,
-          selectiveClasses: itemSelectiveClasses,
-          filters: CP.filters.pricecard || {}
+          selectiveClasses: itemSelectiveClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,

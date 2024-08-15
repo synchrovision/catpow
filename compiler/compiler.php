@@ -29,7 +29,12 @@ function init(){
 function get_jsx_files(){
 	$jsx_files=[];
 	foreach(glob(WP_CONTENT_DIR.'/{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{js,blocks/*,ui/*,components/*,stores/*,*/*/*}/*.jsx',GLOB_BRACE) as $jsx_file){
-		if(strpos($jsx_file,'/node_modules/')!==false || file_exists(dirname($jsx_file).'/index.jsx') || file_exists(dirname($jsx_file).'/index.mjs.jsx')){continue;}
+		if(
+			strpos($jsx_file,'/node_modules/')!==false || 
+			strpos($jsx_file,'/modules/')!==false || 
+			file_exists(dirname($jsx_file).'/index.jsx') ||
+			file_exists(dirname($jsx_file).'/index.mjs.jsx')
+		){continue;}
 		$jsx_files[]=$jsx_file;
 	}
 	return $jsx_files;
@@ -50,7 +55,7 @@ function cp_jsx_compile($jsx_files){
 function get_entry_files(){
 	$entry_files=[];
 	foreach(glob(WP_CONTENT_DIR.'/{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{js,blocks/*,ui/*,components/*,stores/*,*/*/*}/*/index{,.mjs}.jsx',GLOB_BRACE) as $entry_file){
-		if(strpos($entry_file,'/node_modules/')!==false){continue;}
+		if(strpos($entry_file,'/node_modules/')!==false || strpos($entry_file,'/modules/')!==false){continue;}
 		$entry_files[]=$entry_file;
 	}
 	return $entry_files;

@@ -11,10 +11,11 @@ $html=ob_get_clean();
 ?>
 //<script>
 window.addEventListener('DOMContentLoaded',async()=>{
-const data=<?=json_encode(['html'=>$html,'cssVars'=>util\style_config::get_css_vars()],0700)?>;
-const defineCssVars=(vars)=>{
-	const root=document.documentElement;
-	Object.keys(vars).forEach((key)=>root.style.setProperty(key,vars[key]));
+const data=<?=json_encode(['html'=>$html,'cssVarsCode'=>util\style_config::get_css_vars_code()],0700)?>;
+const defineCssVars=(code)=>{
+	const el=document.createElement('style');
+	document.head.appendChild(el);
+	el.textContent=code;
 };
 const loadStyle=(src)=>{
 	const el=document.createElement('link');
@@ -36,7 +37,7 @@ const loadScript=(src)=>{
 		};
 	});
 };
-defineCssVars(data.cssVars);
+defineCssVars(data.cssVarsCode);
 const container=document.getElementById('cpform');
 container.innerHTML=data.html;
 <?php

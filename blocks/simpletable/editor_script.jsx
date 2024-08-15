@@ -105,7 +105,6 @@
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.simpletable || {}}
 					/>
 					<CP.SelectClassPanel
 						title='行'
@@ -115,7 +114,6 @@
 						items={rows}
 						index={attributes.currentItemIndex}
 						triggerClasses={selectiveClasses[0]}
-						filters={CP.filters.simpletable || {}}
 					/>
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>

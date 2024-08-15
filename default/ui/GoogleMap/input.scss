@@ -1,0 +1,32 @@
+@import 'admin_style_config.scss';
+
+
+.GoogleMap{
+	@include bnd((pd:16));
+	@include flx((w:w,g:16));
+	@include shd((bvi:-2));
+	@include bdr((r:8));
+	&-preview{
+		@include bnd((f:1 1 320));
+		&-map{
+			@include bnd((w:f,h:300 f));
+			@include shd((b:2));
+		}
+	}
+	&-inputs{
+		@include bnd((f:4 4 480,ctn:i inputs));
+		&__dl{
+			&-dt,&-dd{
+				@include bnd((pd:8,mg:0));
+			}
+		}
+		@container inputs (min-width:600px){
+			&__dl{
+				@include grd((tc:120 1fr,g:16 8));
+			}
+		}
+		&-textarea{
+			@include bnd((d:b,w:f,h:a));
+		}
+	}
+}

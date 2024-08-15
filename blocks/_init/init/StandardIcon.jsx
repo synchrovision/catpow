@@ -21,9 +21,9 @@ CP.StandardIcon={
 		);
 	},
 	Output:(props)=>{
-		const {item}=props;
+		const {className='icon',item}=props;
 		return (
-			<span className="icon">
+			<span className={className}>
 				<img src={item.iconSrc} alt={item.iconAlt}/>
 			</span>
 		)

@@ -1,0 +1,11 @@
+@import 'admin_style_config.scss';
+
+
+div.ZipCode{
+	input.sec0{
+		@include bnd((w:3ch,bs:c));
+	}
+	input.sec1{
+		@include bnd((w:4ch,bs:c));
+	}
+}

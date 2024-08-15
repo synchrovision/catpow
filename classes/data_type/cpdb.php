@@ -5,7 +5,7 @@ class cpdb extends data_type{
 	public static
 		$data_type='cpdb',
 		$default_template=[],
-		$key_translation=['id'=>'meta_id'];
+		$key_translation=['id'=>'meta_id','parent'=>'parent_id'];
 	public $table_name,$data;
 	
 	public static function get_title($obj){

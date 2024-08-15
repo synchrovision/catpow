@@ -12,16 +12,29 @@ CP.Link=(props)=>{
 	);
 }
 CP.Link.Edit=(props)=>{
-	const {className,set,attr,keys,index,isSelected,...otherProps}=props;
+	const {className,set,attr,keys,index,isSelected='auto',...otherProps}=props;
 	const {onChange}=props;
-	const {useMemo,useCallback}=wp.element;
+	const {useMemo,useCallback,useEffect,useState}=wp.element;
 	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem('CP-Link '+className),[className]);
 	
 	const item=useMemo(()=>keys.items?attr[keys.items][index]:attr,[attr,keys.items,index]);
 	
+	const [hasCursor,setHasCursor]=useState(false);
+	const [ref,setRef]=useState(false);
+	
+	useEffect(()=>{
+		const cb=()=>{
+			if(!ref){return;}
+			const selection=window.getSelection();
+			setHasCursor(selection.rangeCount>0 && ref.contains(selection.getRangeAt(0).commonAncestorContainer));
+		}
+		document.addEventListener('click',cb);
+		return ()=>document.removeEventListener('click',cb);
+	},[ref,setHasCursor]);
+	
 	return (
-		<span className={classes({'is-selected':isSelected})} {...otherProps}>
+		<span className={classes({'is-selected':isSelected==='auto'?hasCursor:isSelected})} {...otherProps} ref={setRef}>
 			{props.children}
 			<span
 				className={classes.input()}

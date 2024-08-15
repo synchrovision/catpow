@@ -495,7 +495,6 @@ wp.blocks.registerBlockType('catpow/graphics',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.graphics || {}}
 						initialOpen={true}
 					>
 						{!states.hasBaseImage && (
@@ -521,7 +520,6 @@ wp.blocks.registerBlockType('catpow/graphics',{
 							items={items}
 							index={currentItemIndexes[0]}
 							selectiveClasses={selectiveItemClasses}
-							filters={CP.filters.graphics || {}}
 							initialOpen={true}
 						/>
 					}

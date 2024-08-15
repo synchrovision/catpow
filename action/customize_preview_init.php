@@ -5,6 +5,7 @@ add_action('wp_head',function(){
 	jQuery(function($){
 		var rootStyle=document.documentElement.style;
 		const roles=<?=json_encode(Catpow\util\style_config::get_color_roles(),0700)?>;
+		const inverts=<?=json_encode(array_column(Catpow\util\style_config::get_color_roles(),'invert','shorthand'),0700)?>;
 		wp.customize('colors',function(setting){
 			setting.bind(function(colors){
 				var hsl,i;
@@ -20,6 +21,9 @@ add_action('wp_head',function(){
 					}
 				});
 				Object.keys(colors.tones).map((key)=>{
+					if(colors.tones[key].h==0 && colors.tones[key].s==0 && inverts[key]){
+						colors.tones[key].h=colors.tones[inverts[key]].h;
+					}
 					Object.keys(colors.tones[key]).map((k)=>{
 						rootStyle.setProperty('--cp-tones-'+key+'-'+k,colors.tones[key][k]+((k==='h' || k==='a')?'':'%'));
 						if(k==='h'){

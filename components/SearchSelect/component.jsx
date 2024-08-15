@@ -1,5 +1,5 @@
 ﻿Catpow.SearchSelect=(props)=>{
-	const {defaultLabel,onChange,col=5,placeholder='Search'}=props;
+	const {defaultLabel='─',onChange,col=5,multiple=true,placeholder='Search'}=props;
 	const {useState,useReducer,useCallback,useMemo,useRef,useEffect}=wp.element;
 	const {bem}=Catpow.util;
 	const classes=bem('SearchSelect');
@@ -41,15 +41,26 @@
 	
 	const toggleLabelReducer=useCallback((selectedLabels,labelToToggle)=>{
 		if(!selectedLabels){return [labelToToggle];}
-		if(selectedLabels.includes(labelToToggle)){return selectedLabels.filter((val)=>val!==labelToToggle);}
-		return [...selectedLabels,labelToToggle];
+		if(multiple){
+			if(selectedLabels.includes(labelToToggle)){return selectedLabels.filter((val)=>val!==labelToToggle);}
+			return [...selectedLabels,labelToToggle];
+		}
+		else{
+			if(selectedLabels.includes(labelToToggle)){return [];}
+			return [labelToToggle];
+		}
 	},[]);
 	const [selectedLabels,toggleLabel]=useReducer(
 		toggleLabelReducer,
 		useMemo(()=>props.value?props.value.map((value)=>valueLabelMap[value]):[],[])
 	);
 	useEffect(()=>{
-		onChange(selectedLabels.map((label)=>labelValueMap[label]));
+		if(multiple){
+			onChange(selectedLabels.map((label)=>labelValueMap[label]));
+		}
+		else{
+			onChange(selectedLabels.length?labelValueMap[selectedLabels[0]]:null);
+		}
 	},[selectedLabels]);
 	const getLabelsForSearch=useCallback((search)=>{
 		if(cache.current[search]){return cache.current[search];}
@@ -63,7 +74,12 @@
 			<div className={classes.selected()} onClick={()=>setOpen(true)}>
 				<ul className={classes.selected.items()}>
 					{(selectedLabels && selectedLabels.length)?(
-						selectedLabels.map((label)=><li className={classes.selected.items.item()} key={label}>{label}</li>)
+						selectedLabels.map((label)=>(
+							<li className={classes.selected.items.item()} key={label}>
+								{label}
+								<span className={classes.selected.items.item.button()} onClick={()=>toggleLabel(label)}></span>
+							</li>
+						))
 					):(
 						<li className={classes.selected.items.item()}>{defaultLabel}</li>
 					)}
@@ -95,7 +111,7 @@
 					<Catpow.SelectTable
 						selections={currentLabels}
 						value={selectedLabels}
-						multiple={true}
+						multiple={multiple}
 						col={col}
 						onChange={toggleLabel}
 					/>

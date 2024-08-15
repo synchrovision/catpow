@@ -9,7 +9,7 @@
 		}
 	},[props]);
 	return (
-		<div className={'hiddenValues'}>
+		<div className={'HiddenValues'} style={{display:"none"}}>
 			{hiddenInput(props.name,props.value)}
 		</div>
 	);

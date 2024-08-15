@@ -102,8 +102,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters.simpletable || {}
+          selectiveClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
@@ -114,8 +113,7 @@
           attr: attributes,
           items: rows,
           index: attributes.currentItemIndex,
-          triggerClasses: selectiveClasses[0],
-          filters: CP.filters.simpletable || {}
+          triggerClasses: selectiveClasses[0]
         }
       ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement("table", { className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
         return /* @__PURE__ */ wp.element.createElement(

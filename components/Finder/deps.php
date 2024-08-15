@@ -1,3 +1,3 @@
 <?php
-$useScripts=['urljs'];
+$useScripts=['catpow','urljs'];
 $useComponents=['AppManager','Output'];

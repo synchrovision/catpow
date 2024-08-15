@@ -39,11 +39,9 @@
 }
 .PopupBody {
   display: block;
-  max-width: 40rem;
-  width: fit-content;
-  max-height: 90vh;
-  height: auto;
   position: fixed;
+  width: fit-content;
+  height: fit-content;
   left: 0rem;
   right: 0rem;
   top: 50%;
@@ -55,6 +53,10 @@
   transform: translateY(-50%);
 }
 .PopupBody .PopupContents {
+  max-width: 40rem;
+  width: auto;
+  max-height: 90vh;
+  height: auto;
   overflow-y: auto;
 }
 .PopupBody .PopupControl .close {
