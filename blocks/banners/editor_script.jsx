@@ -39,7 +39,7 @@ wp.blocks.registerBlockType('catpow/banners',{
 			var selectiveClasses=[
 				{label:'サイズ',type:'buttons',values:['small','medium','large','full']},
 				{label:'タイトル',values:'hasTitle'},
-				CP.selectiveClassesPreset.isTemplate
+				'isTemplate'
 			];
 			wp.hooks.applyFilters('catpow.blocks.banners.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -125,7 +125,6 @@ wp.blocks.registerBlockType('catpow/banners',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.banners || {}}
 					/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl
@@ -143,7 +142,6 @@ wp.blocks.registerBlockType('catpow/banners',{
 							items={items}
 							index={attributes.currentItemIndex}
 							selectiveClasses={itemTemplateSelectiveClasses}
-							filters={CP.filters.banners || {}}
 						/>
 					):(
 						<CP.SelectClassPanel
@@ -154,7 +152,6 @@ wp.blocks.registerBlockType('catpow/banners',{
 							items={items}
 							index={attributes.currentItemIndex}
 							selectiveClasses={selectiveItemClasses}
-							filters={CP.filters.banners || {}}
 						/>
 					)}
 					<CP.ItemControlInfoPanel/>

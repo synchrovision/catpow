@@ -64,7 +64,7 @@
           { name: "sectionTag", input: "buttons", key: "SectionTag", label: __("\u30BB\u30AF\u30B7\u30E7\u30F3\u30BF\u30B0", "catpow"), values: ["article", "section", "aside", "div"] },
           { name: "headingTag", input: "buttons", key: "HeadingTag", label: __("\u898B\u51FA\u3057\u30BF\u30B0", "catpow"), values: ["h1", "h2", "h3", "h4"], effect: (val, states2, { set }) => {
             for (const key in states2) {
-              if (key.substr(0, 5) === "level") {
+              if (key.slice(0, 5) === "level") {
                 states2[key] = false;
               }
             }
@@ -305,8 +305,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters.section || {}
+          selectiveClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "ID", icon: "admin-links", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextControl,

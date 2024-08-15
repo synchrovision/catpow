@@ -43,7 +43,7 @@
 			type="text"
 			className={"sec"+i}
 			size="4"
-			autocomplete={['tel-area-code','tel-local-prefix','tel-local-suffix'][i]}
+			autoComplete={['tel-area-code','tel-local-prefix','tel-local-suffix'][i]}
 			onChange={(e)=>{
 				const val=e.target.value;
 				dispatch({type:'SET_SEC',i,val});

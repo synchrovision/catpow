@@ -1,7 +1,7 @@
 ﻿import {CP} from './CP.jsx';
 
 CP.SelectResponsiveImage=(props)=>{
-	const {className='',attr,set,keys={},index,size,devices,device,isTemplate,...otherProps}=props;
+	const {className='',attr,set,keys={},index=0,subIndex=0,size,devices,device,isTemplate,...otherProps}=props;
 	const {useMemo}=wp.element;
 	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem('CP-SelectResponsiveImage '+className),[className]);

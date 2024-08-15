@@ -7,7 +7,7 @@ namespace Catpow\util;
 class site_config{
 	public static function update(){
 		$json=WP_CONTENT_DIR.'/config/sites.json';
-		if(!is_dir(dirname($json))){mkdir(dirname($json,0755,true));}
+		if(!is_dir(dirname($json))){mkdir(dirname($json),0755,true);}
 		$sites=[];
 		if(is_multisite()){
 			foreach(get_sites() as $site){

@@ -4,6 +4,7 @@
 		return window.location.hostname === new URL(document.referrer).hostname;
 	})();
 	const popupEl=document.querySelector('.wp-block-catpow-leavepopup');
+	if(!popupEl){return;}
 	popupEl.querySelectorAll(':scope>.bg, :scope>.body>.close').forEach(function(el){
 		el.addEventListener('click',function(){
 			popupEl.classList.remove('is-open');

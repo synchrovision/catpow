@@ -70,7 +70,7 @@
     cache: {},
     config: {},
     listedConvertibles: ["catpow/listed", "catpow/flow", "catpow/faq", "catpow/ranking", "catpow/dialog", "catpow/sphere", "catpow/slider", "catpow/banners", "catpow/lightbox", "catpow/panes", "catpow/slidablemenu", "catpow/showcase"],
-    tableConvertibles: ["catpow/simpletable", "catpow/datatable", "catpow/layouttable"],
+    tableConvertibles: ["catpow/simpletable", "catpow/datatable", "catpow/comparetable", "catpow/layouttable"],
     dummyText: {
       title: "\u543E\u8F29\u306F\u732B\u3067\u3042\u308B\u3002",
       lead: "\u540D\u524D\u306F\u307E\u3060\u306A\u3044\u3002\u3069\u3053\u3067\u751F\u308C\u305F\u304B\u9813\u3068\u898B\u5F53\u304C\u3064\u304B\u306C\u3002\u4F55\u3067\u3082\u8584\u6697\u3044\u3058\u3081\u3058\u3081\u3057\u305F\u6240\u3067\u30CB\u30E3\u30FC\u30CB\u30E3\u30FC\u6CE3\u3044\u3066\u3044\u305F\u4E8B\u3060\u3051\u306F\u8A18\u61B6\u3057\u3066\u3044\u308B\u3002",
@@ -141,7 +141,7 @@
     },
     switchNumberClass: ({ set, attr }, label, value) => {
       let classArray = (attr.classes || "").split(" ");
-      let i = classArray.findIndex((cls) => cls.substr(0, label.length) === label);
+      let i = classArray.findIndex((cls) => cls.slice(0, label.length) === label);
       if (i === -1) {
         if (value) {
           classArray.push(label + value);
@@ -156,11 +156,11 @@
       set({ classes: classArray.join(" ") });
     },
     getNumberClass: ({ attr }, label) => {
-      let value = (attr.classes || "").split(" ").find((cls) => cls.substr(0, label.length) === label);
+      let value = (attr.classes || "").split(" ").find((cls) => cls.slice(0, label.length) === label);
       if (!value) {
         return 0;
       }
-      return parseInt(value.substr(label.length));
+      return parseInt(value.slice(label.length));
     },
     switchColor: (props, value) => {
       CP.switchNumberClass(props, "color", value);
@@ -331,7 +331,7 @@
         itemsKey = "items";
       }
       let classArray = (items2[index].classes || "").split(" ");
-      let i = classArray.findIndex((cls) => cls.substr(0, 5) === "color");
+      let i = classArray.findIndex((cls) => cls.slice(0, 5) === "color");
       if (i === -1) {
         if (color) {
           classArray.push("color" + color);
@@ -347,18 +347,18 @@
       set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
     },
     getItemColor: ({ items: items2, index }) => {
-      let c = (items2[index].classes || "").split(" ").find((cls) => cls.substr(0, 5) === "color");
+      let c = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 5) === "color");
       if (!c) {
         return 0;
       }
-      return parseInt(c.substr(5));
+      return parseInt(c.slice(5));
     },
     switchItemPattern: ({ items: items2, index, set }, pattern, itemsKey) => {
       if (itemsKey === void 0) {
         itemsKey = "items";
       }
       let classArray = (items2[index].classes || "").split(" ");
-      let i = classArray.findIndex((cls) => cls.substr(0, 7) === "pattern");
+      let i = classArray.findIndex((cls) => cls.slice(0, 7) === "pattern");
       if (i === -1) {
         if (pattern) {
           classArray.push("pattern" + pattern);
@@ -374,11 +374,11 @@
       set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
     },
     getItemPattern: ({ items: items2, index }) => {
-      let p = (items2[index].classes || "").split(" ").find((cls) => cls.substr(0, 7) === "pattern");
+      let p = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 7) === "pattern");
       if (!p) {
         return 0;
       }
-      return parseInt(p.substr(7));
+      return parseInt(p.slice(7));
     },
     switchItemSelectiveClass: ({ items: items2, index, set }, values, value, itemsKey) => {
       if (itemsKey === void 0) {
@@ -609,6 +609,25 @@
       }
       return Object.keys(flags).filter((word) => flags[word]).join(" ");
     },
+    classNamesToFlags: (words) => {
+      var rtn = {};
+      if (void 0 === words) {
+        return {};
+      }
+      if (typeof words === "string") {
+        words = words.split(" ").map(Catpow.util.kebabToCamel);
+      }
+      words.forEach((word) => {
+        rtn[word] = true;
+      });
+      return rtn;
+    },
+    flagsToClassNames: (flags) => {
+      if (void 0 === flags) {
+        return "";
+      }
+      return Object.keys(flags).filter((word) => flags[word]).map(Catpow.util.camelToKebab).join(" ");
+    },
     filterFlags: (flags, callback) => {
       Object.keys(flags).forEach((key) => {
         if (!callback(key)) {
@@ -745,19 +764,6 @@
             default:
               return val;
           }
-      }
-    },
-    selectiveClassesPreset: {
-      isTemplate: {
-        label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
-        values: "isTemplate",
-        sub: [
-          { input: "bool", label: "\u30EB\u30FC\u30D7", key: "doLoop", sub: [
-            { label: "content path", input: "text", key: "content_path" },
-            { label: "query", input: "textarea", key: "query" },
-            { label: "\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", input: "range", key: "loopCount", min: 1, max: 16 }
-          ] }
-        ]
       }
     },
     /*datalist*/
@@ -1994,7 +2000,7 @@
 
   // ../blocks/_init/init/SelectResponsiveImage.jsx
   CP.SelectResponsiveImage = (props) => {
-    const { className = "", attr, set, keys = {}, index, size, devices, device, isTemplate, ...otherProps } = props;
+    const { className = "", attr, set, keys = {}, index = 0, subIndex = 0, size, devices, device, isTemplate, ...otherProps } = props;
     const { useMemo } = wp.element;
     const { bem } = Catpow.util;
     const classes = useMemo(() => bem("CP-SelectResponsiveImage " + className), [className]);
@@ -2141,10 +2147,15 @@
   };
 
   // ../blocks/_init/init/ResponsiveImage.jsx
-  CP.ResponsiveImage = ({ className, attr, keys, index, sizes, devices, device, isTemplate }) => {
-    let type, item;
+  CP.ResponsiveImage = ({ className, attr, keys, index, subIndex, sizes, devices, device, isTemplate, ...otherProps }) => {
+    let type, items2, item;
     if (keys.items) {
-      item = attr[keys.items][index];
+      items2 = attr[keys.items];
+      if (keys.subItems) {
+        item = items2[index][keys.subItems][subIndex];
+      } else {
+        item = items2[index];
+      }
     } else {
       item = attr;
     }
@@ -2161,7 +2172,8 @@
         "audio",
         {
           src: item[keys.src],
-          "data-mime": item[keys.mime]
+          "data-mime": item[keys.mime],
+          ...otherProps
         }
       );
     }
@@ -2181,14 +2193,15 @@
           autoplay: 1,
           loop: 1,
           playsinline: 1,
-          muted: 1
+          muted: 1,
+          ...otherProps
         }
       );
     }
     if (keys.sources && item[keys.sources] && item[keys.sources].length) {
       if (device) {
         const source = item[keys.sources].find((source2) => source2.device === device);
-        return /* @__PURE__ */ wp.element.createElement("picture", { className: "selectImage " + className }, /* @__PURE__ */ wp.element.createElement(
+        return /* @__PURE__ */ wp.element.createElement("picture", { className: "selectImage " + className, ...otherProps }, /* @__PURE__ */ wp.element.createElement(
           "img",
           {
             src: source.srcset,
@@ -2196,7 +2209,7 @@
           }
         ));
       }
-      return /* @__PURE__ */ wp.element.createElement("picture", { className: "selectImage " + className }, item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("picture", { className: "selectImage " + className, ...otherProps }, item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement(
         "img",
         {
           src: item[keys.src],
@@ -2212,7 +2225,8 @@
         alt: item[keys.alt],
         srcSet: item[keys.srcset],
         sizes,
-        "data-mime": item[keys.mime]
+        "data-mime": item[keys.mime],
+        ...otherProps
       }
     );
   };
@@ -2592,6 +2606,7 @@
       tag,
       {
         className: classes,
+        style: props.style,
         "data-index": index,
         "data-refine-cond": items2[index]["cond"],
         onKeyDown: (e) => {
@@ -2640,7 +2655,7 @@
     const { Fragment, useMemo, useCallback, useContext, createElement: el } = wp.element;
     const { __: __2 } = wp.i18n;
     const { PanelBody, CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
-    const { classKey = "classes", items: items2, index, subItemsKey, subIndex: subIndex2, set, attr, triggerClasses } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
+    const { classKey = "classes", items: items2, index, subItemsKey, subIndex, set, attr, triggerClasses } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
     let { itemsKey = items2 ? "items" : null, itemClasses } = props;
     const selectiveClasses = useMemo(() => {
       if (!triggerClasses || !triggerClasses.item) {
@@ -2658,10 +2673,10 @@
         return false;
       }
       if (subItemsKey) {
-        return items2[index][subItemsKey][subIndex2];
+        return items2[index][subItemsKey][subIndex];
       }
       return items2[index];
-    }, [attr, items2, index, subItemsKey, subIndex2]);
+    }, [attr, items2, index, subItemsKey, subIndex]);
     const states = useMemo(() => CP.wordsToFlags(item[classKey]), [item[classKey]]);
     const save = useCallback((data) => {
       if (items2) {
@@ -2681,21 +2696,43 @@
       const { props: props2, item: item2, states: states2, save: save2, saveClasses: saveClasses2, saveCss: saveCss2 } = useContext(CP.SelectClassPanelContext);
       if (typeof prm === "string") {
         const preset = {
-          customColorVars: { name: "customColorVars", input: "customColorVars", label: "\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", vars: "customColorVars" },
+          customColorVars: { name: "customColorVars", input: "customColorVars", label: __2("\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", "catpow"), vars: "customColorVars" },
           isTemplate: {
             name: "template",
             input: "bool",
             key: "isTemplate",
-            label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
+            label: __2("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
             sub: [
-              { name: "loop", input: "bool", label: "\u30EB\u30FC\u30D7", key: "doLoop", sub: [
+              { name: "loop", input: "bool", label: __2("\u30EB\u30FC\u30D7", "catpow"), key: "doLoop", sub: [
                 { name: "contentPath", label: "content path", input: "text", key: "content_path" },
                 { name: "query", label: "query", input: "textarea", key: "query" },
-                { name: "loopCount", label: "\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", input: "range", key: "loopCount", min: 1, max: 16 }
+                { name: "loopCount", label: __2("\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", "catpow"), input: "range", key: "loopCount", min: 1, max: 16 }
               ] }
             ]
           },
-          textColor: { name: "textColor", type: "buttons", label: __2("\u6587\u5B57\u8272", "catpow"), values: { revertTextColor: "\u901A\u5E38", invertTextColor: "\u53CD\u8EE2" } }
+          backgroundImage: { name: "backgroundImage", label: __2("\u80CC\u666F\u753B\u50CF", "catpow"), values: "hasBackgroundImage", sub: [
+            { name: "blendmode", label: __2("\u30E2\u30FC\u30C9", "catpow"), vars: "vars", key: "--cp-image-blendmode", input: "blendmode" },
+            { name: "opacity", label: __2("\u4E0D\u900F\u660E\u5EA6", "catpow"), vars: "vars", key: "--cp-image-opacity", input: "range", min: 0, max: 1, step: 0.1 }
+          ] },
+          textAlign: { name: "textAlign", type: "buttons", label: __2("\u30C6\u30AD\u30B9\u30C8\u63C3\u3048", "catpow"), values: {
+            "has-text-align-left": __2("\u5DE6\u63C3\u3048", "catpow"),
+            "has-text-align-center": __2("\u4E2D\u592E", "catpow"),
+            "has-text-align-right": __2("\u53F3\u63C3\u3048", "catpow")
+          } },
+          verticalAlign: { name: "verticalAlign", type: "buttons", label: __2("\u5782\u76F4\u65B9\u5411\u63C3\u3048", "catpow"), values: {
+            "has-vertical-align-top": __2("\u4E0A\u63C3\u3048", "catpow"),
+            "has-vertical-align-middle": __2("\u4E2D\u592E", "catpow"),
+            "has-vertical-align-bottom": __2("\u4E0B\u63C3\u3048", "catpow")
+          } },
+          fontSize: { name: "size", type: "buttons", label: __2("\u6587\u5B57\u30B5\u30A4\u30BA", "catpow"), values: {
+            "has-font-size-large": __2("\u5927", "catpow"),
+            "has-font-size-middle": __2("\u4E2D", "catpow"),
+            "has-font-size-small": __2("\u5C0F", "catpow")
+          } },
+          width: { name: "width", type: "buttons", label: __2("\u5E45", "catpow"), values: { fullWidth: __2("\u30D5\u30EB", "catpow"), wideWidth: __2("\u30EF\u30A4\u30C9", "catpow"), regularWidth: __2("\u30EC\u30AE\u30E5\u30E9\u30FC", "catpow"), narrowWidth: __2("\u30CA\u30ED\u30FC", "catpow") } },
+          size: { name: "size", type: "buttons", label: __2("\u30B5\u30A4\u30BA", "catpow"), values: { large: __2("\u5927", "catpow"), medium: __2("\u4E2D", "catpow"), small: __2("\u5C0F", "catpow") } },
+          itemSize: { name: "itemSize", label: __2("\u30B5\u30A4\u30BA", "catpow"), vars: "vars", key: "--cp-item-size", input: "range", min: 100, max: 1200, step: 10 },
+          textColor: { name: "textColor", type: "buttons", label: __2("\u6587\u5B57\u8272", "catpow"), values: { revertTextColor: __2("\u901A\u5E38", "catpow"), invertTextColor: __2("\u53CD\u8EE2", "catpow") } }
         };
         if (preset.hasOwnProperty(prm)) {
           prm = preset[prm];
@@ -2716,9 +2753,6 @@
         }
       }
       let rtn = [];
-      if (prm.filter && props2.filters && props2.filters[prm.filter]) {
-        props2.filters[prm.filter](prm);
-      }
       if (prm.keys) {
         if (props2.items) {
           prm.keys.items = prm.keys.items || props2.itemsKey;
@@ -2744,6 +2778,9 @@
                     param: prm,
                     value: JSON.parse(props2.attr[prm.json])[prm.key],
                     onChange: (val) => {
+                      if (prm.filter) {
+                        val = prm.filter(val, states2, props2);
+                      }
                       CP.setJsonValue(props2, prm.json, prm.key, val);
                       if (prm.effect) {
                         prm.effect(val, states2, props2);
@@ -3047,7 +3084,10 @@
                     param: prm,
                     value: props2.attr[prm.vars][prm.key],
                     onChange: (val) => {
-                      save2({ [prm.vars]: { ...props2.attr[prm.vars], [prm.key]: "" + val } });
+                      if (prm.filter) {
+                        val = prm.filter(val, states2, props2);
+                      }
+                      save2({ [prm.vars]: { ...props2.attr[prm.vars], [prm.key]: `${val}` } });
                     }
                   }
                 )
@@ -3085,7 +3125,7 @@
                     label: prm.label,
                     value: props2.attr[prm.vars][prm.key],
                     onChange: (val) => {
-                      save2({ [prm.vars]: { ...props2.attr[prm.vars], [prm.key]: val } });
+                      save2({ [prm.vars]: { ...props2.attr[prm.vars], [prm.key]: `${val}` } });
                     }
                   }
                 )
@@ -3101,7 +3141,7 @@
                 label: prm.label,
                 value: props2.attr[prm.vars][prm.key],
                 onChange: (val) => {
-                  save2({ [prm.vars]: { ...props2.attr[prm.vars], [prm.key]: "" + val } });
+                  save2({ [prm.vars]: { ...props2.attr[prm.vars], [prm.key]: `${val}` } });
                 }
               }
             )
@@ -3171,6 +3211,9 @@
                     param: prm,
                     value: item2[prm.key],
                     onChange: (val) => {
+                      if (prm.filter) {
+                        val = prm.filter(val, states2, props2);
+                      }
                       save2({ [prm.key]: val });
                       if (prm.effect) {
                         prm.effect(val, states2, props2);
@@ -4244,7 +4287,11 @@
     const originalColors = useMemo(() => {
       const originalColors2 = {};
       const selectedBlock = wp.data.select("core/block-editor").getSelectedBlock();
-      const el = document.getElementById("block-" + selectedBlock.clientId);
+      const editorCanvas = document.querySelector('iframe[name="editor-canvas"]');
+      const el = (editorCanvas ? editorCanvas.contentDocument : document).getElementById("block-" + selectedBlock.clientId);
+      if (!el) {
+        return originalColors2;
+      }
       const styles = window.getComputedStyle(el);
       roles.forEach((role) => {
         const hsla = {};
@@ -4338,5 +4385,13 @@
         key: role.key
       }
     ))));
+  };
+
+  // ../blocks/_init/init/Message.jsx
+  CP.Message = (props) => {
+    const { useMemo } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo(() => bem("CP-Message"), []);
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._body() }, props.children));
   };
 })();

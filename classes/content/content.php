@@ -9,7 +9,7 @@ namespace Catpow\content;
 * path_dataを保持することを保証しなくてはならない
 * 
 */
-class content{
+class content extends \stdClass{
 	public $parent,$inherit,$childrens;
 	protected $value;
 	
@@ -94,7 +94,7 @@ class content{
 				'conf'=>$conf
 			];
 		}
-		elseif(!is_null($this->conf) && !empty($this->conf['meta'][$name])){$prm['meta']=$this->conf['meta'][$name];}
+		elseif(!is_null($this->conf) && !empty($this->conf['meta'][$name])){$prm['conf']=$this->conf['meta'][$name];}
 		return new meta($prm);
 	}
 	public function rel_meta($name,$param=null){
@@ -195,6 +195,9 @@ class content{
 	public function get_the_data($name=null){
 		if(isset($name)){
 			if(!isset($this->loop_id)){return null;}
+			if($name[0]==='$'){
+				return $this->{substr($name,1)};
+			}
 			if(strpos($name,'->')!==false){
 				list($name,$relkey)=explode('->',$name);
 				$class_name=\cp::get_class_name('meta',$this->conf['meta'][$name]['type']??'text');
@@ -239,6 +242,16 @@ class content{
 		return $this->real_data_path;
 	}
 	
+	public function get_the_image_id(){
+		if(isset($this->conf['meta']['image'])){return $this->get_the_data('image?')[0];}
+		if($this->real_path_data['data_type']==='post' && post_type_supports($this->real_path_data['data_name'],'thumbnail')){
+			return get_post_thumbnail_id($this->loop_id);
+		}
+		return null;
+	}
+	public function get_the_image_url($size='full'){
+		return wp_get_attachment_image_url($this->get_the_image_id(),$size);
+	}
 	public function get_the_url(){
 		if(isset($this->path_data['meta_path'])){
 			$meta_class=\cp::get_class_name('meta',$this->conf['type']);
@@ -317,6 +330,7 @@ class content{
 		if(isset($this->path_data[$name])){return $this->path_data[$name];}
 		switch($name){
 			case 'the_id':
+			case 'the_parent':
 			case 'the_name':
 			case 'the_title':
 			case 'the_content':{
@@ -340,7 +354,8 @@ class content{
 				else{$file.='.php';}
 				return $this->file=$file;
 			case 'tmp':
-				$tmp=$this->path_data['tmp_name'];
+				$tmp=$this->path_data['tmp_name']??null;
+				if(is_null($tmp)){return $tmp;}
 				if(!empty($this->path_data['tmp_slug'])){$tmp.='-'.$this->path_data['tmp_slug'];}
 				return $this->tmp=$tmp;
 			case 'content_type':return $this->content_type=$this->path_data['data_type'];
@@ -380,7 +395,8 @@ class content{
 			case 'url':return $this->url=get_theme_file_uri($this->path);
 			case 'file_path':return $this->file_path=\cp::create_content_file_path($this->path_data);
 			case 'data_path':return $this->data_path=\cp::create_data_path($this->path_data);
-			case 'real_data_path':return $this->data_real_path=\cp::create_data_path(\cp::realize_path_data($this->path_data));
+			case 'real_data_path':return $this->real_data_path=\cp::create_data_path($this->real_path_data);
+			case 'real_path_data':return $this->real_path_data=\cp::realize_path_data($this->path_data);
 			case 'conf_data_path':return $this->conf_data_path=\cp::create_conf_data_path($this->path_data);
 			case 'query':
 				$this->query=[\cp::get_data_type_name($this->data_type)=>$this->data_name];

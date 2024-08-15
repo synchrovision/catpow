@@ -64,6 +64,7 @@ abstract class breadcrumb extends template_part{
 			}
 			else{
 				$post_type=$wp_query->posts[0]->post_type;
+				//deprecated: with FSE, there's no reason to use static page as post type archive page
 				if(isset($post_types[$post_type]['archive_page'])){
 					$archive_page_name=basename($post_types[$post_type]['archive_page']);
 					$archive_page_conf=$GLOBALS['static_pages'][$archive_page_name];

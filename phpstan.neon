@@ -1,0 +1,9 @@
+parameters:
+	paths:
+		- core
+		- classes
+		- default
+		- functions
+	bootstrapFiles:
+		- catpow.php
+	level: 0

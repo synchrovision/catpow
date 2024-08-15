@@ -1,0 +1,17 @@
+@import "admin_style_config.scss";
+
+.SelectPreparedImageSet{
+	@include flx((w:w));
+	@include bg((c:t 20));
+	@include bdr((s:s,w:1,c:t 10));
+	&-item{
+		@include bnd((f:0 0 33%,bs:b));
+		@include usr((c:p));
+		&__img{
+			@include bnd((w:f,h:a));
+		}
+		&.is-active{
+			@include bg((c:wp));
+		}
+	}
+}

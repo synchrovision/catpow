@@ -60,7 +60,6 @@ wp.blocks.registerBlockType('catpow/picture',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.picture || {}}
 					/>
 				</InspectorControls>
 			</>

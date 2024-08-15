@@ -11,10 +11,10 @@ class image extends media{
 		if(!isset($nonce)){$nonce=wp_create_nonce('media-form');}
 		
 		if(isset($conf['dummy'])){$dummy=get_template_directory_uri('/images/'.$conf['dummy']);}
-		else{$dummy=\cp::get_file_url('images/dummy.png');}
+		else{$dummy=\cp::get_file_url('images/dummy.jpg');}
 		$size=isset($conf['input-size'])?$conf['input-size']:(isset($conf['size'])?$conf['size']:'full');
 		
-		wp_enqueue_script('cp_file_upload');
+		wp_enqueue_script('jquery.catpow.file_upload');
 		
 		if(empty($val)){$src=false;}
 		else{

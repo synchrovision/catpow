@@ -280,35 +280,6 @@ table{
 			}
 		}
 	}
-	&.manage{
-		@include bnd((w:f));
-		@include tbl(());
-		&>thead>tr,&>tbody>tr{
-			&>th,&>td{
-				@include bnd((pd:5));
-				@include bdr((s:s,w:1,c:b 60));
-				&.control{
-					@include bnd((w:80));
-				}
-			}
-			&>th{
-				@include bg((c:m 1 .1));
-				@include txt((a:l,p:12,c:t,s:b));
-			}
-			&>td{
-				@include bg((c:b 1 .5));
-				@include txt((a:l,p:11,c:t,s:r));
-				textarea{
-					&.full{
-						@include bnd((w:100%,bs:b));
-					}
-				}
-				span{
-					@include bnd((d:ib));
-				}
-			}
-		}
-	}
 }
 form{
 	&.cpform{

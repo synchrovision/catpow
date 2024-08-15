@@ -154,7 +154,6 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.lightbox || {}}
 					/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl
@@ -176,7 +175,6 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 						items={items}
 						index={attributes.currentItemIndex}
 						selectiveClasses={selectiveItemClasses}
-						filters={CP.filters.lightbox || {}}
 					/>
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>

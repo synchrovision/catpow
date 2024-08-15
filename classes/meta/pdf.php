@@ -33,7 +33,7 @@ class pdf extends media{
 	}
 	public static function get_input($path,$conf,$val){
 		wp_enqueue_media();
-		wp_enqueue_script('cp_media_upload');
+		wp_enqueue_script('jquery.catpow.media_upload');
 		
 		$src=empty($val)?null:wp_get_attachment_url($val);
 		return sprintf(

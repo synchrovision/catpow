@@ -155,7 +155,6 @@ wp.blocks.registerBlockType('catpow/panes',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.panes || {}}
 					/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl
@@ -172,7 +171,6 @@ wp.blocks.registerBlockType('catpow/panes',{
 						items={items}
 						index={attributes.currentItemIndex}
 						selectiveClasses={itemSelectiveClasses}
-						filters={CP.filters.panes || {}}
 					/>
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>

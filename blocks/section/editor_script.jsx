@@ -47,7 +47,7 @@ wp.blocks.registerBlockType('catpow/section',{
 				{name:'sectionTag',input:'buttons',key:'SectionTag',label:__('セクションタグ','catpow'),values:['article','section','aside','div']},
 				{name:'headingTag',input:'buttons',key:'HeadingTag',label:__('見出しタグ','catpow'),values:['h1','h2','h3','h4'],effect:(val,states,{set})=>{
 					for(const key in states){
-						if(key.substr(0,5)==='level'){states[key]=false;}
+						if(key.slice(0,5)==='level'){states[key]=false;}
 					}
 					if(/^h\d$/.test(val)){states['level'+val[1]]=true;}
 					set({classes:CP.flagsToWords(states)});
@@ -354,7 +354,6 @@ wp.blocks.registerBlockType('catpow/section',{
 							set={setAttributes}
 							attr={attributes}
 							selectiveClasses={selectiveClasses}
-							filters={CP.filters.section || {}}
 						/>
 						<PanelBody title="ID" icon="admin-links" initialOpen={false}>
 							<TextControl

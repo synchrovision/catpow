@@ -1,0 +1,149 @@
+@import 'admin_style_config.scss';
+
+.JsonEditor{
+	@include txt((p:16,f:t));
+	&-Editor{
+		@include bnd((pd:20));
+		&__body{
+			@include bnd((mg:a));
+			@include bg((c:b));
+			@include shd((b:4));
+			&-header{
+				@include bnd((pd:12));
+				@include flx((w:w,j:b,a:c));
+				@include bdr((p:b,s:s,w:1,c:t 1 .5));
+				&-title{
+					@include txt((p:16,f:h,w:b));
+				}
+				&-controls{
+					&-save{
+						@include bnd((pd:8 12));
+						@include bg((c:m));
+						@include txt((a:c,p:14,h:1em,f:t,c:i));
+						@include bdr((r:4));
+						&.is-active{
+							@include usr((c:p));
+							@include shd((b:1));
+						}
+						&:not(.is-active){
+							@include trn((gry:100%,o:.1));
+						}
+					}
+				}
+			}
+			&-contents{
+				@include bnd((pd:20,ox:a));
+			}
+		}
+	}
+	&-Input{
+		@include txt((p:12,f:t));
+		&__body{
+			@include bnd((p:r,pd:8));
+			&-message{
+				@include bnd((p:a,b:f,pd:4 20,z:1));
+				@include bdr((r:20));
+				@include bg((c:m));
+				@include txt((p:12,f:t,h:1.5em,c:i));
+				@include shd((b:2));
+				@include trn((t:.2s,o:1,y:0));
+				@include usr((e:n));
+				&:not(.is-show){
+					@include trn((o:0,y:4));
+				}
+			}
+			&-description{
+				@include bnd((d:b,mgt:4,pd:4));
+				@include txt((p:12));
+			}
+		}
+		
+		&-Number{
+		}
+		&-Range{
+		}
+		&-SearchSelect{
+		}
+		&-Text{
+			&-input,.wp-core-ui &-input{
+				@include bnd((pd:.25em .5em));
+				@include bdr((s:n,r:4));
+				@include txt((p:i));
+				@include shd((b:-1));
+			}
+		}
+		&-Textarea{
+			&-textarea{
+				@include bnd((pd:.25em .5em));
+				@include bdr((s:n,r:4));
+				@include txt((p:i));
+				@include shd((b:-1));
+			}
+		}
+		&-ObjectInput{
+			&-label{
+				@include bnd((pd:.25em 1em));
+				@include bdr((r:1em));
+				@include shd((bv:1));
+				@include usr((c:p));
+			}
+			&-body{
+				@include bnd((pd:1em));
+			}
+			&-table{
+				
+			}
+			&-block{
+				&.is-level-0>&-item>&-item{
+					&-title{
+						@include bnd((pd:.25em 1.25em,mgb:.5em));
+						@include bdr((r:1em));
+						@include bg((c:m));
+						@include txt((p:16,c:i));
+					}
+					&-body{
+
+					}
+				}
+				&.is-level-1>&-item>&-item{
+					&-title{
+						@include bnd((pd:.25em 1.25em,mgb:.5em));
+						@include bdr((r:1em));
+						@include bg((c:t 10));
+						@include txt((p:14));
+					}
+					&-body{
+
+					}
+				}
+				&.is-level-2>&-item>&-item{
+					&-title{
+						@include bnd((pdb:.25em,mgb:.5em));
+						@include txt((p:14));
+						@include bdr((p:b,s:s,w:1,c:t 1 .5));
+					}
+					&-body{
+					}
+						
+				}
+				&.is-level-3>&-item>&-item{
+					&-title{
+					}
+					&-body{
+
+					}
+				}
+				&.is-level-4>&-item>&-item{
+					&-title{
+					}
+					&-body{
+
+					}
+				}
+			}
+			&-row{
+				
+			}
+		}
+	}
+}

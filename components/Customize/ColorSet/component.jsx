@@ -1,5 +1,6 @@
 ﻿Catpow.Customize.ColorSet=(props)=>{
 	const {useState,useCallback,useMemo,useEffect,useRef,useReducer}=wp.element;
+	const {ColorPicker}=wp.components;
 	const {id,value,onChange,param}=props;
 	const {roles}=param;
 	const [inputMode,setInputMode]=useState('pane');
@@ -8,8 +9,8 @@
 	
 	const isDarkColor=useCallback((color)=>{
 		if(!color){return true;}
-		if(/^#\w{6}$/.test(color)){return color.match(/#?(\w{2})(\w{2})(\w{2})/).slice(1).reduce((p,c,i)=>p+parseInt(c,16)*([3,6,2][i]),0) < 0x600;}
-		if(color.substr(0,3)==='hsl'){return getTones(color).l<60;}
+		if(/^#(\w{6}|\w{8})$/.test(color)){return color.match(/#?(\w{2})(\w{2})(\w{2})/).slice(1).reduce((p,c,i)=>p+parseInt(c,16)*([3,6,2][i]),0) < 0x600;}
+		if(color.slice(0,3)==='hsl'){return getTones(color).l<60;}
 	},[]);
 	const getTextColorForTone=useCallback((tone)=>{
 		if(tone.l<70){return '#FFFFFF';}
@@ -23,7 +24,6 @@
 				colors.shadow='hsla(0,0%,0%,'+Math.pround(0.7-bla,3)+')';
 				colors.tones.sh=getTones(colors.shade);
 				colors.tones.shd=getTones(colors.shadow);
-				console.log(colors.shade);
 			}
 		}
 		if(flag & 0o02){
@@ -64,19 +64,20 @@
 	},[]);
 	const getTones=useCallback((color)=>{
 		var hsl,hsb;
-		if(/^#\w{6}$/.test(color)){
+		if(/^#(\w{6}|\w{8})$/.test(color)){
 			hsl=hexToHsl(color);
 			hsb=hexToHsb(color);
 			return {
 				h:hsl.h,
 				s:hsl.s,
 				l:hsl.l,
+				a:color.length===9?(parseInt(color.slice(-2),16)/0xff):1,
 				t:(1-hsl.l/100),
 				S:hsb.s,
 				B:hsb.b,
 			}
 		}
-		if(color.substr(0,3)==='hsl'){
+		if(color.slice(0,3)==='hsl'){
 			const matches=color.match(/hsla?\((\d+),\s*(\d+)%,\s*(\d+)%(?:,\s*([\d\.]+))?\)/);
 			return {
 				h:matches[1],
@@ -135,33 +136,25 @@
 			</div>
 		);
 	},[]);
-	const ColorPicker=useCallback((props)=>{
+	const Palette=useCallback((props)=>{
 		const {role,value,open,onClick}=props;
 		const ref=useRef(null);
 		
-		useEffect(()=>{
-			jQuery(ref.current).wpColorPicker({
-				hide:false,
-				change:(e,ui)=>{
-					setColors({role,value:ui.color.to_s(roles[role].alphaEnabled?'hsla':'hex')});
-				}
-			});
-		},[ref.current]);
 		
 		return (
-			<div className={"ColorSet-ColorPicker__item "+(open?'open':'close')}>
+			<div className={"ColorSet-Palette__item "+(open?'open':'close')}>
 				<div className={"chip "+(isDarkColor(value[role])?'is-dark':'is-light')} onClick={onClick} style={{backgroundColor:value[role]}}>
 					<div className="label">{roles[role].label}</div>
 				</div>
 				<Catpow.Popover open={open}>
-					<div className="ColorSet-ColorPicker__box">
-						<input
-							ref={ref}
-							type="text"
-							value={value[role]}
-							readOnly={true}
-							data-alpha-enabled={roles[role].alphaEnabled}
-							data-alpha-color-type={roles[role].alphaEnabled?'hsla':'hex'}
+					<div className="ColorSet-Palette__box">
+						<ColorPicker
+							color={value[role]}
+							onChange={(value)=>{
+								setColors({role,value});
+							}}
+							enableAlpha
+							defaultValue="#000"
 						/>
 					</div>
 				</Catpow.Popover>
@@ -200,6 +193,7 @@
 		);
 	},[]);
 	const BulkInput=useCallback((props)=>{
+		const {Icon}=wp.components;
 		const {value}=props;
 		const [tmp,setTmp]=useState();
 		const keyRoleMap=useMemo(()=>{
@@ -284,13 +278,14 @@
 		);
 	},[]);
 	
+	
 	switch(inputMode){
 		case 'pane':{
 			return (
 				<div className="ColorSet">
 					<ModeSelect value={inputMode} onChange={setInputMode}/>
-					<div className="ColorSet-ColorPicker">
-						{Object.keys(roles).map((role)=><ColorPicker role={role} value={colors} open={role===activeRole} onClick={()=>setActiveRole(role===activeRole?null:role)} key={role}/>)}
+					<div className="ColorSet-Palette">
+						{Object.keys(roles).map((role)=><Palette role={role} value={colors} open={role===activeRole} onClick={()=>setActiveRole(role===activeRole?null:role)} key={role}/>)}
 					</div>
 					<HueRange value={colors}/>
 					<Preview value={colors}/>

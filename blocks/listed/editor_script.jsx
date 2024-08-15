@@ -38,7 +38,7 @@ wp.blocks.registerBlockType('catpow/listed',{
 				{name:'titleTag',input:'buttons',filter:'titleTag',key:'TitleTag',label:'タイトルタグ',values:['h2','h3','h4'],effect:(val,{set})=>{
 					if(/^h\d$/.test(val)){set({SubTitleTag:'h'+(parseInt(val[1])+1)})}
 				}},
-				{name:'titleTag',input:'buttons',filter:'subTitleTag',key:'SubTitleTag',label:'サブタイトルタグ',values:['h3','h4','h5'],cond:'hasSubTitle'},
+				{name:'subTitleTag',input:'buttons',filter:'subTitleTag',key:'SubTitleTag',label:'サブタイトルタグ',values:['h3','h4','h5'],cond:'hasSubTitle'},
 				{
 					name:'type',
 					label:'タイプ',
@@ -291,7 +291,6 @@ wp.blocks.registerBlockType('catpow/listed',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.listed || {}}
 					/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl
@@ -308,7 +307,6 @@ wp.blocks.registerBlockType('catpow/listed',{
 						items={items}
 						index={attributes.currentItemIndex}
 						triggerClasses={selectiveClasses[2]}
-						filters={CP.filters.listed || {}}
 					/>
 					{states.isTemplate &&
 						<CP.SelectClassPanel
@@ -319,7 +317,6 @@ wp.blocks.registerBlockType('catpow/listed',{
 							items={items}
 							index={attributes.currentItemIndex}
 							selectiveClasses={selectiveItemTemplateClasses}
-							filters={CP.filters.listed || {}}
 						/>
 					}
 					<CP.ItemControlInfoPanel/>

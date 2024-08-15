@@ -165,6 +165,40 @@ body{
 		@include bnd((pd:10));
 		@include bg((c:b));
 	}
+	.cp-meta-item{
+		img,video{@include bnd((d:b,w:100,h:a));}
+	}
+	table{
+		&.manage{
+			@include bnd((w:f));
+			@include tbl(());
+			>thead>tr,>tbody>tr{
+				>th,>td{
+					@include bnd((pd:20 5));
+					@include bdr((p:b,s:s,w:1,c:shd));
+					&.control{
+						@include bnd((w:80));
+					}
+				}
+				>th{
+					@include bnd((w:160));
+					@include txt((a:l,p:12,c:tx,s:b));
+				}
+				>td{
+					@include bg((c:bx 1 .5));
+					@include txt((a:l,p:11,c:tx,s:r));
+					textarea{
+						&.full{
+							@include bnd((w:100%,bs:b));
+						}
+					}
+					span{
+						@include bnd((d:ib));
+					}
+				}
+			}
+		}
+	}
 	.wp-list-table{
 		input[type="checkbox"]{
 			@include bnd((w:15,h:15));

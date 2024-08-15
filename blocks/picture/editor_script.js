@@ -1,5 +1,5 @@
 (() => {
-  // blocks/picture/editor_script.jsx
+  // ../blocks/picture/editor_script.jsx
   CP.config.picture = {
     devices: ["sp", "tb"],
     imageKeys: {
@@ -50,8 +50,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters.picture || {}
+          selectiveClasses
         }
       )));
     },

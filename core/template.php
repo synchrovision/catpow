@@ -53,7 +53,7 @@ function categories($tax='category',$prm=false){
 	print('</ul>');
 }
 function article_nav(){
-	wp_enqueue_script('cp_article_nav');
+	wp_enqueue_script('jquery.catpow.articlenav');
 	echo '<div class="article_nav_container"></div>';
 }
 

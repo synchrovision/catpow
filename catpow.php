@@ -7,12 +7,13 @@ Version: 0.4.0-alpha
 Author URI: https://catpow.info
 Text Domain: catpow
 Domain Path: /languages
-GitHub Repository: synchrovision/catpow
+Update URI: https://github.com/synchrovision/catpow
 Requires at least: 6.1
 Requires PHP: 7.4
 */
 include __DIR__.'/vendor/autoload.php';
 include __DIR__.'/classes/CP.php';
+class_alias(Catpow\CP::class,'cp');
 foreach(cp::$core_functions as $n){include(__DIR__.'/core/'.$n.'.php');}
 
 

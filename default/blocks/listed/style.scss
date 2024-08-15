@@ -169,11 +169,10 @@
 			>.item{
 				@include bnd((p:r,bs:b));
 				@include trn((t:.5s));
-				@include shd((b:8));
+				@include shd((b:2));
 				>.header{
 					@include bnd((pd:10));
-					@include flx((w:w,a:c));
-					@include txt((a:c));
+					@include flx((w:w,a:c,g:12));
 					>.image{
 						@include bnd((f:0 0 120));
 						img{
@@ -213,7 +212,7 @@
 			@include grd((rc:400,g:20));
 			>.item{
 				@include bnd((p:r,mg:1));
-				@include shd((b:4));
+				@include shd((b:2));
 				>.header{
 					@include flx((w:w));
 					>.image{
@@ -286,7 +285,7 @@
 						>.title{
 							@include bnd((f:1 1 f,pd:0,mg:0));
 							@include txt((p:18,h:1.5em,w:r));
-							@include bdr((p:b,s:s,w:1);
+							@include bdr((p:b,s:s,w:1));
 							&+.titlecaption{
 								@include bnd((mgt:.5em));
 							}

@@ -24,7 +24,7 @@
   text-align: center;
   font-size: 2.5rem;
   line-height: 1em;
-  font-family: t;
+  font-family: var(--cp-fonts-t);
   font-weight: 700;
   color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
   vertical-align: middle;
@@ -47,7 +47,7 @@
   text-align: center;
   font-size: 0.75rem;
   line-height: 1em;
-  font-family: t;
+  font-family: var(--cp-fonts-t);
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
   vertical-align: middle;
 }

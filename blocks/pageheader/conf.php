@@ -2,7 +2,7 @@
 use Catpow\util\BlockConfig;
 $attributes=[
 	'vars'=>['type'=>'object','default'=>['--cp-image-opacity'=>'0.5','--cp-image-blendmode'=>'normal']],
-	'classes'=>['source'=>'attribute','selector'=>'.wp-block-catpow-pageheader','attribute'=>'class','default'=>'wp-block-catpow-pageheader'],
+	'classes'=>['source'=>'attribute','selector'=>'.wp-block-catpow-pageheader','attribute'=>'class','default'=>'wp-block-catpow-pageheader medium'],
 	'title'=>['source'=>'text','selector'=>'.wp-block-catpow-pageheader-body-title'],
 	
 	'backgroundImageSrc'=>['source'=>'attribute','selector'=>'.wp-block-catpow-pageheader-background [src]','attribute'=>'src','default'=>cp::get_file_url('images/dummy_bg.jpg')],

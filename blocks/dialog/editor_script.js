@@ -134,8 +134,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters.banners || {}
+          selectiveClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
@@ -146,8 +145,7 @@
           attr: attributes,
           items: itemsCopy,
           index: attributes.currentItemIndex,
-          selectiveClasses: selectiveItemClasses,
-          filters: CP.filters.dialog || {}
+          selectiveClasses: selectiveItemClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,

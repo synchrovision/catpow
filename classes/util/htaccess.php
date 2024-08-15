@@ -1,39 +1,28 @@
 <?php
 /**
-* wp-content/.htaccessの作成・更新
+* .htaccessの更新
 */
 namespace Catpow\util;
 class htaccess{
-	static $code_start='### CATPOW',$code_end='### /CATPOW';
+	static $code_start="### CATPOW\n",$code_end="\n### /CATPOW\n";
 	public static function update(){
 		$code_start=self::$code_start;
 		$code_end=self::$code_end;
-		$f=WP_CONTENT_DIR.'/.htaccess';
-		if(file_exists($f)){
-			$code=file_get_contents($f);
-			if(strpos($code,$code_start)!==false && strpos($code,$code_end)!==false){
-				file_put_contents($f,preg_replace("|{$code_start}.+{$code_end}|s",self::get_rules(),$code));
-			}
-			else{
-				file_put_contents($f,$code."\n".self::get_rules());
-			}
-		}
-		else{
-			file_put_contents($f,self::get_rules());
-		}
+		if(file_exists($f=WP_CONTENT_DIR.'/.htaccess')){unlink($f);}
+		$f=ABSPATH.'/.htaccess';
+		$content=file_get_contents($f);
+		$content=preg_replace("|{$code_start}.+{$code_end}|s",'',$content);
+		file_put_contents($f,$code_start.self::get_rules().$code_end.$content);
 	}
 	public static function get_rules(){
-		$code_start=self::$code_start;
-		$code_end=self::$code_end;
 		return
 <<<EOT
-{$code_start}
 RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteCond %{REQUEST_URI} \.svg
 RewriteCond %{QUERY_STRING} .+
-RewriteRule . plugins/catpow/callee/svg.php?uri=%{REQUEST_URI} [L,QSA]
+RewriteRule . wp-content/plugins/catpow/callee/svg.php?uri=%{REQUEST_URI} [L,QSA]
 
 RewriteCond %{HTTP_ACCEPT} image/webp
 RewriteCond %{SCRIPT_FILENAME}.webp -f
@@ -46,7 +35,7 @@ RewriteRule .(jpe?g|png|gif)$ %{SCRIPT_FILENAME}.webp [T=image/webp]
 
 RewriteCond %{HTTP:Accept-Encoding} gzip
 RewriteCond %{REQUEST_FILENAME}\.gz -s
-RewriteRule .+ %{REQUEST_URI}.gz
+RewriteRule .+ %{REQUEST_FILENAME}.gz
 
 AddEncoding x-gzip .gz
 
@@ -57,7 +46,6 @@ AddEncoding x-gzip .gz
 <files *.js.gz>
   AddType text/javascript .gz
 </files>
-{$code_end}
 EOT;
 	}
 }

@@ -135,7 +135,6 @@
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.banners || {}}
 					/>
 					<CP.SelectClassPanel
 						title='リストアイテム'
@@ -145,7 +144,6 @@
 						items={itemsCopy}
 						index={attributes.currentItemIndex}
 						selectiveClasses={selectiveItemClasses}
-						filters={CP.filters.dialog || {}}
 					/>
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>

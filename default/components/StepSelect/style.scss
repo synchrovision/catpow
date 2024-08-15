@@ -1,0 +1,84 @@
+@import 'admin_style_config.scss';
+
+.StepSelect{
+	&-selected{
+		&-items{
+			@include bnd((pd:1em,mg:0,h:5em a));
+			@include flx((w:w,g:.5em,a:c));
+			@include txt((l:n));
+			&-item{
+				@include bnd((p:r,w:5em a,pd:.5em 2em .5em 1em));
+				@include bg((c:b));
+				@include txt((a:c,c:t,h:1em));
+				@include bdr((r:1em));
+				@include shd((b:1));
+				@include usr((c:p));
+				&-button{
+					@include bnd((d:b,p:a,i:0,mg:a,mgr:.5em,w:1em,h:1em));
+					@include bg((c:t 1 .1));
+					@include bdr((r:50%));
+					&::before{
+						content:'×';
+					}
+				}
+			}
+		}
+	}
+	&__body{
+		@include bnd((w:90vw 600));
+	}
+	&-selections{
+		@include bnd((pd:.5em,h:400,oy:a));
+		@include bdr((p:t,s:s,w:1,c:shd));
+		&-options{
+			&-items{
+				@include bnd((pd:.5em,mg:0 a));
+				@include flx((w:w,g:.5em));
+				@include txt((l:n));
+				&-item{
+					@include bnd((p:r,w:5em a,pd:.5em 1em));
+					@include bg((c:b));
+					@include txt((a:c,c:t 1 .5,h:1em));
+					@include bdr((s:s,w:.1em,r:1em));
+					@include shd((b:1));
+					@include usr((c:p));
+					&.is-active{
+						@include txt((c:m));
+					}
+					&.is-selected{
+						@include bg((c:m));
+						@include txt((c:i));
+					}
+					&.has-children{
+						@include bnd((pdr:2em));
+						&::before{
+							content:'';
+							@include bnd((d:b,p:a,i:0,mg:a,mgr:.5em,w:.8em,h:.6em));
+							@include bg((c:t 1 .5));
+							clip-path: polygon(0% 0%,100% 0%,50% 100%);
+						}
+						&.is-active{
+							&::before{
+								@include bg((c:m));
+							}
+						}
+					}
+				}
+			}
+			&-arrow{
+				@include bnd((d:b,p:r,h:16));
+				@include trn((t:.5s,o:1));
+				&.is-hidden{
+					@include bnd((h:0));
+					@include trn((o:0));
+				}
+				&::before{
+					content:'';
+					@include bnd((d:b,p:a,i:0,mg:a,w:16,h:8));
+					@include bg((c:t 1 .5));
+					clip-path: polygon(0% 0%,100% 0%,50% 100%);
+				}
+			}
+		}
+	}
+}

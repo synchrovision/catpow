@@ -136,7 +136,7 @@
       var tgtItem = false;
       useEffect(() => {
         if (!id || document.querySelectorAll("#" + id).length > 1) {
-          setAttributes({ id: "g" + new Date().getTime().toString(16) });
+          setAttributes({ id: "g" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
         }
       }, [!id]);
       const save = useCallback(() => {
@@ -452,7 +452,6 @@
           set: setAttributes,
           attr: attributes,
           selectiveClasses,
-          filters: CP.filters.graphics || {},
           initialOpen: true
         },
         !states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(
@@ -484,7 +483,6 @@
           items,
           index: currentItemIndexes[0],
           selectiveClasses: selectiveItemClasses,
-          filters: CP.filters.graphics || {},
           initialOpen: true
         }
       ), currentItemIndexes.length === 1 && /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "ITEM CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(

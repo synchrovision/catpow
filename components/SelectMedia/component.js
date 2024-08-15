@@ -2,7 +2,9 @@
   // ../components/SelectMedia/component.jsx
   Catpow.SelectMedia = (props) => {
     const { useCallback, useMemo } = wp.element;
-    const { className = "SelectImage", mime, src, onChange, ...otherProps } = props;
+    const { className = "SelectMedia", mime, src, onChange, ...otherProps } = props;
+    const { bem } = Catpow.util;
+    const classes = useMemo(() => bem(className), []);
     const onClick = useCallback(() => {
       if (void 0 === Catpow.uploader) {
         Catpow.uploader = wp.media({
@@ -23,7 +25,7 @@
       return /* @__PURE__ */ wp.element.createElement(
         "audio",
         {
-          className,
+          className: classes("is-type-audio"),
           src,
           onClick,
           ...otherProps
@@ -34,7 +36,7 @@
       return /* @__PURE__ */ wp.element.createElement(
         "video",
         {
-          className,
+          className: classes("is-type-video"),
           src,
           onClick,
           autoplay: 1,
@@ -48,7 +50,7 @@
     return /* @__PURE__ */ wp.element.createElement(
       "img",
       {
-        className,
+        className: classes("is-type-image"),
         src: src || dummy,
         onClick,
         ...otherProps

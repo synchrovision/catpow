@@ -26,9 +26,9 @@ wp.blocks.registerBlockType('catpow/showcase',{
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {useState,useMemo}=wp.element;
-		const {BlockControls,InspectorControls,RichText}=wp.blockEditor;
+		const {BlockControls,InnerBlocks,InspectorControls,RichText,useBlockProps}=wp.blockEditor;
 		const {Icon,PanelBody,TextareaControl,TextControl,ToolbarGroup}=wp.components;
-		const {items=[],classes,TitleTag,countPrefix,countSuffix}=attributes;
+		const {items=[],classes,TitleTag,countPrefix,countSuffix,loopCount,doLoop,EditMode=false,AltMode=false}=attributes;
 		const primaryClass='wp-block-catpow-showcase';
 		var classArray=_.uniq((className+' '+classes).split(' '));
 		
@@ -46,7 +46,19 @@ wp.blocks.registerBlockType('catpow/showcase',{
 				]},
 				{name:'titleCaption',label:'タイトルキャプション',values:'hasTitleCaption'},
 				{name:'size',type:'buttons',label:'サイズ',values:['small','medium','large']},
-				{name:'link',label:'リンク',values:'hasLink'}
+				{name:'link',label:'リンク',values:'hasLink'},
+				{
+					name:'template',
+					label:'テンプレート',
+					values:'isTemplate',
+					sub:[
+						{name:'loop',input:'bool',label:'ループ',key:'doLoop',sub:[
+							{name:'contentPath',label:'content path',input:'text',key:'content_path'},
+							{name:'query',label:'query',input:'textarea',key:'query'},
+							{name:'loopCount',label:'プレビューループ数',input:'range',key:'loopCount',min:1,max:16}
+						]}
+					]
+				}
 			];
 			wp.hooks.applyFilters('catpow.blocks.showcase.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -61,12 +73,26 @@ wp.blocks.registerBlockType('catpow/showcase',{
 			wp.hooks.applyFilters('catpow.blocks.showcase.selectiveItemClasses',CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		},[]);
+		const selectiveItemTemplateClasses=useMemo(()=>{
+			const selectiveItemTemplateClasses=[
+				{
+					name:'imageCode',
+					input:'text',
+					label:'画像コード',
+					key:'imageCode'
+				}
+			];
+			wp.hooks.applyFilters('catpow.blocks.showcase.selectiveItemTemplateClasses',CP.finderProxy(selectiveItemTemplateClasses));
+			return selectiveItemTemplateClasses;
+		},[]);
 
 		let rtn=[];
 		const save=()=>{
 			setAttributes({items:JSON.parse(JSON.stringify(items))});
 		};
-		items.map((item,index)=>{
+		[...Array(Math.max(items.length,loopCount)).keys()].forEach((i)=>{
+			const index=i%items.length;
+			const item=items[index];
 			if(!item.controlClasses){item.controlClasses='control';}
 			rtn.push(
 				<CP.Item
@@ -85,6 +111,7 @@ wp.blocks.registerBlockType('catpow/showcase',{
 							keys={imageKeys.image}
 							index={index}
 							size='full'
+							isTemplate={states.isTemplate}
 						/>
 					</div>
 					<div className="texts">
@@ -137,6 +164,8 @@ wp.blocks.registerBlockType('catpow/showcase',{
 
 		if(attributes.EditMode===undefined){attributes.EditMode=false;}
 
+		const blockProps=useBlockProps({className:classes});
+		
 		return (
 			<>
 				<BlockControls>
@@ -158,7 +187,6 @@ wp.blocks.registerBlockType('catpow/showcase',{
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.showcase || {}}
 					/>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl
@@ -175,8 +203,7 @@ wp.blocks.registerBlockType('catpow/showcase',{
 							attr={attributes}
 							items={items}
 							index={attributes.currentItemIndex}
-							selectiveClasses={itemTemplateSelectiveClasses}
-							filters={CP.filters.showcase || {}}
+							selectiveClasses={selectiveItemTemplateClasses}
 						/>
 					):(
 						<CP.SelectClassPanel
@@ -187,7 +214,6 @@ wp.blocks.registerBlockType('catpow/showcase',{
 							items={items}
 							index={attributes.currentItemIndex}
 							selectiveClasses={selectiveItemClasses}
-							filters={CP.filters.showcase || {}}
 						/>
 					)}
 					<CP.ItemControlInfoPanel/>
@@ -202,6 +228,7 @@ wp.blocks.registerBlockType('catpow/showcase',{
 							attr={attributes}
 							columns={[
 								{type:'image',label:'image',keys:imageKeys.image},
+								{type:'text',key:'imageCode',cond:states.isTemplate},
 								{type:'text',key:'title'},
 								{type:'text',key:'titleCaption',cond:states.hasTitleCaption},
 								{type:'text',key:'text'},
@@ -212,14 +239,25 @@ wp.blocks.registerBlockType('catpow/showcase',{
 						/>
 					</div>
 				):(
-					<ul className={classes}>{rtn}</ul>
+					<>
+						{(AltMode && doLoop)?(
+							<div className="alt_content">
+								<div className="label">
+									<Icon icon="welcome-comments"/>
+								</div>
+								<InnerBlocks/>
+							</div>
+						):(
+							<ul {...blockProps}>{rtn}</ul>
+						)}
+					</>
 				)}
 			</>
 		);
 	},
 	save({attributes,className}){
-		const {RichText}=wp.blockEditor;
-		const {items=[],classes='',TitleTag,countPrefix,countSuffix}=attributes;
+		const {InnerBlocks,RichText,useBlockProps}=wp.blockEditor;
+		const {items=[],classes='',TitleTag,countPrefix,countSuffix,doLoop}=attributes;
 		var classArray=_.uniq(classes.split(' '));
 
 		const states=CP.wordsToFlags(classes);
@@ -275,6 +313,13 @@ wp.blocks.registerBlockType('catpow/showcase',{
 				</li>
 			);
 		});
-		return <ul className={classes}>{rtn}</ul>;
+		return (
+			<>
+				<ul {...useBlockProps.save({className:classes})}>
+					{rtn}
+				</ul>
+				{doLoop && <onEmpty><InnerBlocks.Content/></onEmpty>}
+			</>
+		);
 	}
 });

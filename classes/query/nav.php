@@ -30,6 +30,12 @@ class nav extends post{
 		if(!isset(static::$menu_items[$location])){
 			$menu=wp_get_nav_menu_object(get_nav_menu_locations()[$location]);
 			$menu_items=wp_get_nav_menu_items($menu->term_id,['update_post_term_cache'=>false]);
+			if(empty($menu_items)){
+				static::$menu_items_by_id[$location]=[];
+				static::$menu_items[$location]=[];
+				$this->objects=[];
+				return;
+			}
 			_wp_menu_item_classes_by_context($menu_items);
 			$menu_items_by_id=array_column($menu_items,null,'ID');
 			$menu_items_by_parent_id=[];

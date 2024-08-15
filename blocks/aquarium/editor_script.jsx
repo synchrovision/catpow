@@ -118,7 +118,6 @@
 						set={setAttributes}
 						attr={attributes}
 						selectiveClasses={selectiveClasses}
-						filters={CP.filters.aquarium || {}}
 					/>
 				</InspectorControls>
 			</>

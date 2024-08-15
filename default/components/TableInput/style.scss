@@ -1,0 +1,82 @@
+@import 'admin_style_config.scss';
+
+.TableInput{
+	&-table{
+		@include tbl(());
+		&-thead{
+			&-tr{
+				@include bdr((p:t b,s:s,w:1,c:s));
+				&-th{
+					@include txt((w:r));
+				}
+			}
+		}
+		&-tbody{
+			@include bnd((mg:0,pd:0));
+			@include txt((l:n));
+			&-tr{
+				@include bnd((p:r,pd:.5em,mg:1em a));
+				&:not(:first-child){
+					@include bdr((p:t,s:s,w:1,c:s));
+				}
+				&-td{
+					&-controls{
+						@include bnd((w:100));
+						@include flx((w:n,g:4,j:e,a:c));
+						@include txt((p:1em));
+						&-button,&-spacer{
+							@include bnd((p:r,pd:.1em,f:0 0 1em,h:1em));
+						}
+						&-button{
+							@include bg((c:t 1 .4));
+							@include txt((a:c,c:i,p:1em,h:1em));
+							@include usr((c:p));
+							@include shd((b:1));
+							@include trn((t:2s));
+							&:hover{
+								@include bg((c:t 1 .6));
+							}
+							&.is-remove,&.is-add{
+								@include bdr((r:50%));
+								&::before{
+									content:'';
+									@include bnd((d:b,p:a,i:0,mg:a,w:.8em,h:.8em));
+									@include bg((c:i));
+								}
+							}
+							&.is-up,&.is-down{
+								@include bnd((w:.8em,h:.5em));
+							}
+							&.is-up{
+								clip-path: polygon(50% 0%,100% 100%,0% 100%);
+							}
+							&.is-down{
+								clip-path: polygon(0% 0%,100% 0%,50% 100%);
+							}
+							&.is-remove{
+								&::before{
+									clip-path: polygon(0% 40%,100% 40%,100% 60%,0% 60%);
+								}
+							}
+							&.is-add{
+								&::before{
+									clip-path: polygon(
+										40% 0%,60% 0%,
+										60% 40%,100% 40%,
+										100% 60%,60% 60%,
+										60% 100%,40% 100%,
+										40% 60%,0% 60%,
+										0% 40%,40% 40%
+									);
+								}
+							}
+						}
+					}
+				}
+			}
+			&-insertionPoint{
+
+			}
+		}
+	}
+}

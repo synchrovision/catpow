@@ -1,12 +1,13 @@
 <?php
 namespace Catpow\meta;
 abstract class meta{
-	const USE_ALTERNATIVE=01;
+	const INPUT_LOOP=01,USE_ALTERNATIVE=02;
 	public static
 		$value_type='CHAR',
 		$data_type='longtext',
 		$input_type='text',
 		$output_type=null,
+		$input_layout='inline',
 		$validation=[],
 		$has_children=false,
 		$can_edit=true,
@@ -85,7 +86,7 @@ abstract class meta{
 	
 	public static function output($meta,$prm){
 		$values=$meta->value;
-		return is_array($values)?implode(',',$values):$values;
+		return is_array($values)?implode($meta->conf['delimiter']??',',$values):$values;
 	}
 	public static function input($meta,$prm){
 		return sprintf(

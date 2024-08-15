@@ -148,7 +148,6 @@
           set: setAttributes,
           attr: attributes,
           selectiveClasses,
-          filters: CP.filters.switcher || {},
           initialOpen: true
         }
       )));

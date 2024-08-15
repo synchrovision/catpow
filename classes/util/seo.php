@@ -17,7 +17,7 @@ class seo{
 		if(isset($image)){return $image;}
 		if(is_singular()){
 			global $post_types;
-			$post_type_data=$post_types[get_post_type()];
+			$post_type_data=$post_types[get_post_type()]??null;
 			if(isset($post_type_data['meta']['image'])){
 				if($image_data=wp_get_attachment_image_src(get_post_meta(get_the_ID(),'image',true),'vga')){
 					return $image=$image_data[0];

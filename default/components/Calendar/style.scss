@@ -3,108 +3,125 @@
 
 .Calendar{
 	@include bnd((pd:1em,mg:0 a,w:fit));
-	&>table{
+	&-table{
 		@include bnd((d:ib));
 		@include tbl(());
 		@include usr((c:p));
-		caption{
+		&-caption{
 			@include bnd((p:r,pd:.5em 0));
-			.year{
+			&-year{
 				@include flx((w:w,a:c,j:c));
-				.current{
+				&-current{
 					@include bnd((d:ib,mg:0 1em));
 					@include txt((p:1em,h:1em));
 				}
-				.btn{
+				&-button{
 					@include bnd((pd:0 .5em));
 					&::before{
 						@include txt((f:dashicons,c:t 30));
 					}
-				}
-				.prev{
-					&::before{
-						content:'\f341';
+					&.is-prev{
+						&::before{
+							content:'\f341';
+						}
 					}
-				}
-				.next{
-					&::before{
-						content:'\f345';
+					&.is-next{
+						&::before{
+							content:'\f345';
+						}
 					}
-				}
-				.prev10{
-					&::before{
-						content:'\f141';
+					&.is-prev10{
+						&::before{
+							content:'\f141';
+						}
 					}
-				}
-				.next10{
-					&::before{
-						content:'\f139';
+					&.is-next10{
+						&::before{
+							content:'\f139';
+						}
 					}
 				}
 			}
-			.month{
+			&-month{
 				@include bnd((d:b,p:r));
-				.current{
+				&-current{
 					@include bnd((d:ib,mg:0 1em));
 					@include txt((p:2em,h:1em,v:b));
 					&::after{
 						content:'月';
 					}
 				}
-				.btn{
+				&-button{
 					&::before{
 						@include txt((c:t 30));
 					}
-				}
-				.prev{
-					@include bnd((p:a,b:0,l:0));
-					&::before{
-						content:'＜';
-						@include bnd((d:ib,mgr:.5em));
+					&.is-prev{
+						@include bnd((p:a,b:0,l:0));
+						&::before{
+							content:'＜';
+							@include bnd((d:ib,mgr:.5em));
+						}
+					}
+					&.is-next{
+						@include bnd((p:a,b:0,r:0));
+						&::before{
+							content:'＞';
+							@include bnd((d:ib,mgl:.5em));
+						}
 					}
 				}
-				.next{
-					@include bnd((p:a,b:0,r:0));
-					&::before{
-						content:'＞';
-						@include bnd((d:ib,mgl:.5em));
-					}
+			}
+		}
+		&-thead,&-tbody{
+			&-week{
+				&-day{
+					@include bnd((h:2em,w:2em,pd:.25em));
+					@include bdr((s:s,w:1,c:t 20));
+					@include txt((a:c));
 				}
 			}
 		}
-		th,td{
-			@include bnd((h:2em,w:2em,pd:.25em));
-			@include bdr((s:s,w:1,c:t 20));
-			@include txt((a:c));
-		}
-		.day{
-			&.active{
-			@include bg((c:m 1 .2));
-		}
-			&.sunday{
-				@include txt((c:1));
-			}
-			&.saturday{
-				@include txt((c:8));
-			}
-			&.outMonth,&.disabled{
-				&,.date{@include txt((c:t 10));}
+		&-tbody{
+			&-week{
+				&-day{
+					
+					&.is-active{
+						@include bg((c:m 1 .2));
+					}
+					&.is-sunday{
+						@include txt((c:1));
+					}
+					&.is-saturday{
+						@include txt((c:8));
+					}
+					&.is-out-month,&.is-disabled{
+						&,.date{@include txt((c:t 10));}
+					}
+				}
 			}
 		}
 	}
-	&.small{
+	&.is-size-small{
 		@include txt((p:10));
 	}
-	&.medium{
+	&.is-size-medium{
 		@include txt((p:15));
 	}
-	&.large{
+	&.is-size-large{
 		@include txt((p:15));
-		.day{
-			@include bnd((w:10em,h:10em,pd:10,bs:b));
-			@include txt((a:l,v:t));
-			.date{
-				@include bnd((d:b));
+	}
+	&.is-size-large &{
+		&-table{
+			&-tbody{
+				&-week{
+					&-day{
+						@include bnd((w:10em,h:10em,pd:10,bs:b));
+						@include txt((a:l,v:t));
+						&-date{
+							@include bnd((d:b));
+						}
+					}
+				}
 			}
 		}
 	}

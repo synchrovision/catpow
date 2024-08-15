@@ -14,6 +14,7 @@ class menu_order extends meta{
 	
 	public static function set($data_type,$data_name,$id,$meta_name,$vals,$conf){
 		global $wpdb;
+		$vals=$vals??[0];
 		$wpdb->query($wpdb->prepare(
 			"UPDATE $wpdb->posts SET menu_order = %d WHERE ID = %d",
 			(int)reset($vals),$id

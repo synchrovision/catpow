@@ -1,0 +1,85 @@
+.ArrayInput-items {
+  margin: 0rem;
+  padding: 0rem;
+  list-style: none;
+}
+.ArrayInput-items-item {
+  position: relative;
+  padding: 0.5rem;
+  margin: 1rem auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+}
+.ArrayInput-items-item-controls {
+  position: absolute;
+  width: 6.25rem;
+  top: 0.25rem;
+  right: 0.25rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  gap: 0.25rem;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+  -webkit-align-items: center;
+  align-items: center;
+  font-size: 0.875rem;
+}
+.ArrayInput-items-item-controls-button, .ArrayInput-items-item-controls-spacer {
+  position: relative;
+  padding: 0.125rem;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 0.875rem;
+  height: 0.875rem;
+}
+.ArrayInput-items-item-controls-button {
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.5);
+  text-align: center;
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+  font-size: 0.875rem;
+  line-height: 1em;
+  cursor: pointer;
+  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+}
+.ArrayInput-items-item-controls-button:hover {
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.6);
+}
+.ArrayInput-items-item-controls-button.is-remove, .ArrayInput-items-item-controls-button.is-add {
+  border-radius: 50%;
+}
+.ArrayInput-items-item-controls-button.is-remove::before, .ArrayInput-items-item-controls-button.is-add::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  margin: auto;
+  width: 0.8em;
+  height: 0.8em;
+  background-color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+}
+.ArrayInput-items-item-controls-button.is-up, .ArrayInput-items-item-controls-button.is-down {
+  width: 0.8em;
+  height: 0.5em;
+}
+.ArrayInput-items-item-controls-button.is-up {
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+.ArrayInput-items-item-controls-button.is-down {
+  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+}
+.ArrayInput-items-item-controls-button.is-remove::before {
+  clip-path: polygon(0% 40%, 100% 40%, 100% 60%, 0% 60%);
+}
+.ArrayInput-items-item-controls-button.is-add::before {
+  clip-path: polygon(40% 0%, 60% 0%, 60% 40%, 100% 40%, 100% 60%, 60% 60%, 60% 100%, 40% 100%, 40% 60%, 0% 60%, 0% 40%, 40% 40%);
+}
+/*# sourceMappingURL=./style.css.map */

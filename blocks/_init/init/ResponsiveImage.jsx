@@ -1,9 +1,20 @@
 ﻿import {CP} from './CP.jsx';
 
-CP.ResponsiveImage=({className,attr,keys,index,sizes,devices,device,isTemplate})=>{
-	let type,item;
-	if(keys.items){item=attr[keys.items][index];}
-	else{item=attr;}
+CP.ResponsiveImage=({className,attr,keys,index,subIndex,sizes,devices,device,isTemplate,...otherProps})=>{
+	let type,items,item;
+	
+	if(keys.items){
+		items=attr[keys.items];
+		if(keys.subItems){
+			item=items[index][keys.subItems][subIndex];
+		}
+		else{
+			item=items[index];
+		}
+	}
+	else{
+		item=attr;
+	}
 	if(isTemplate && keys.code && item[keys.code]){
 		return item[keys.code];
 	}
@@ -14,7 +25,8 @@ CP.ResponsiveImage=({className,attr,keys,index,sizes,devices,device,isTemplate})
 			<audio
 				src={item[keys.src]}
 				data-mime={item[keys.mime]}
-				></audio>
+				 {...otherProps}
+			></audio>
 		);
 	}
 	if(item[keys.srcset] && !sizes){
@@ -33,14 +45,15 @@ CP.ResponsiveImage=({className,attr,keys,index,sizes,devices,device,isTemplate})
 				loop={1}
 				playsinline={1}
 				muted={1}
-				></video>
+				 {...otherProps}
+			></video>
 		);
 	}
 	if(keys.sources && item[keys.sources] && item[keys.sources].length){
 		if(device){
 			const source=item[keys.sources].find((source)=>source.device===device);
 			return (
-				<picture className={'selectImage '+className}>
+				<picture className={'selectImage '+className} {...otherProps}>
 					<img
 						src={source.srcset}
 						alt={item[keys.alt]}
@@ -49,7 +62,7 @@ CP.ResponsiveImage=({className,attr,keys,index,sizes,devices,device,isTemplate})
 			);
 		}
 		return (
-			<picture className={'selectImage '+className}>
+			<picture className={'selectImage '+className} {...otherProps}>
 				{item[keys.sources].map((source)=>(
 					<source srcSet={source.srcset} media={CP.devices[source.device].media_query} data-device={source.device} key={source.device}/>
 				))}
@@ -68,6 +81,7 @@ CP.ResponsiveImage=({className,attr,keys,index,sizes,devices,device,isTemplate})
 			srcSet={item[keys.srcset]}
 			sizes={sizes}
 			data-mime={item[keys.mime]}
+			 {...otherProps}
 		/>
 	);
 };

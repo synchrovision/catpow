@@ -1,77 +1,109 @@
 @import 'admin_style_config.scss';
 .Popover{
-	&.open{
+	&.is-open{
 		@include anm((a:PopoverOpen .5s a 1 f));
 	}
-	&.close{
+	&.is-close{
 		@include anm((a:PopoverClose .5s a 1 f));
 	}
-	&.closed{
+	&.is-closed{
 		@include bnd((d:n));
 		@include usr((e:n));
 	}
-	&Anchor{
+	&-anchor{
 		@include bnd((d:b,p:a,t:0,b:0,l:0,r:0,z:10000));
 		@include usr((e:n));
 	}
-	&Container{
-		@include bnd((p:f,t:0,r:0,w:500,h:100,z:1000000));
+	&-container{
+		@include bnd((p:f,t:0,r:0,w:500,h:100,z:500000));
 		@include usr((e:n));
+		@include trn((t:.1s));
 	}
-	&Body{
-		@include bnd((d:b,w:max 640,h:a 50vh,p:a,mg:a));
+	&__body{
+		@include bnd((d:b,p:a,mg:a));
 		@include bdr((r:10));
 		@include bg((c:b));
 		@include shd((b:10));
 		@include usr((e:a));
-		.PopoverContents{
+		&-contents{
 			@include bnd((h:a 50vh,ox:h,oy:a));
 			@include bdr((r:10));
 		}
-		.PopoverControl{
-			.close{
-				@include bnd((p:a,w:30,h:30,t:-40,r:10));
-				&::before,&::after{
-					content:'';
-					@include bnd((p:a,t:15,w:30,h:1));
-					@include bg((c:b));
-				}
-				&::before{
-					@include trn((r:45deg));
-				}
-				&::after{
-					@include trn((r:-45deg));
+		&-control{
+			&-button{
+				&.is-button-close{
+					@include bnd((p:a,w:30,h:30,t:-15,r:-15));
+					@include bg((c:m));
+					@include bdr((r:50%));
+					@include shd((b:2));
+					&::before,&::after{
+						content:'';
+						@include bnd((p:a,i:0,mg:a,w:20,h:2));
+						@include bg((c:b));
+					}
+					&::before{
+						@include trn((r:45deg));
+					}
+					&::after{
+						@include trn((r:-45deg));
+					}
 				}
 			}
 		}
 	}
-	&.top &Body{
-		@include bnd((b:f));
-		@include trn((y:-10));
-		.PopoverArrow{
-			@include tail((p:b,c:b));
+	&.is-top &{
+		&__body{
+			@include bnd((b:f));
+			@include trn((y:-10));
+			&-arrow{
+				@include tail((p:b,c:b));
+			}
 		}
 	}
-	&.bottom &Body{
-		@include bnd((t:f));
-		@include trn((y:10));
-		.PopoverArrow{
-			@include tail((p:t,c:b));
+	&.is-bottom &{
+		&__body{
+			@include bnd((t:f));
+			@include trn((y:10));
+			&-arrow{
+				@include tail((p:t,c:b));
+			}
 		}
 	}
-	&.left &Body{
-		@include bnd((r:0));
-		.PopoverArrow{
-			@include bnd((mgr:30));
+	&.is-left &{
+		&__body{
+			@include bnd((r:0));
+				&-arrow{
+				@include bnd((mgr:30));
+			}
 		}
 	}
-	&.center &Body{
-		@include bnd((l:-30vw,r:-30vw));
+	&.is-center &{
+		&__body{
+			@include bnd((l:-30vw,r:-30vw));
+		}
 	}
-	&.right &Body{
-		@include bnd((l:0));
-		.PopoverArrow{
-			@include bnd((mgl:30));
+	&.is-right &{
+		&__body{
+			@include bnd((l:0));
+			&-arrow{
+				@include bnd((mgl:30));
+			}
+		}
+	}
+	
+	&.is-size-small &{
+		&__body{
+			@include bnd((w:max 320,h:a 160));
+		}
+	}
+	&.is-size-middle &{
+		&__body{
+			@include bnd((w:max 640,h:a 50vh));
+		}
+	}
+	&.is-size-large &{
+		&__body{
+			@include bnd((w:max 90vw,h:a 80vh));
 		}
 	}
 }

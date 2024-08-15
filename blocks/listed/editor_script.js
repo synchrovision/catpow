@@ -38,7 +38,7 @@
               set({ SubTitleTag: "h" + (parseInt(val[1]) + 1) });
             }
           } },
-          { name: "titleTag", input: "buttons", filter: "subTitleTag", key: "SubTitleTag", label: "\u30B5\u30D6\u30BF\u30A4\u30C8\u30EB\u30BF\u30B0", values: ["h3", "h4", "h5"], cond: "hasSubTitle" },
+          { name: "subTitleTag", input: "buttons", filter: "subTitleTag", key: "SubTitleTag", label: "\u30B5\u30D6\u30BF\u30A4\u30C8\u30EB\u30BF\u30B0", values: ["h3", "h4", "h5"], cond: "hasSubTitle" },
           {
             name: "type",
             label: "\u30BF\u30A4\u30D7",
@@ -274,8 +274,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters.listed || {}
+          selectiveClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextareaControl,
@@ -293,8 +292,7 @@
           attr: attributes,
           items,
           index: attributes.currentItemIndex,
-          triggerClasses: selectiveClasses[2],
-          filters: CP.filters.listed || {}
+          triggerClasses: selectiveClasses[2]
         }
       ), states.isTemplate && /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
@@ -305,8 +303,7 @@
           attr: attributes,
           items,
           index: attributes.currentItemIndex,
-          selectiveClasses: selectiveItemTemplateClasses,
-          filters: CP.filters.listed || {}
+          selectiveClasses: selectiveItemTemplateClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,

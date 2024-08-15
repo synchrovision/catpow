@@ -1,6 +1,7 @@
 <?php
 namespace Catpow\markdown;
 use Catpow\CP;
+use Catpow\util\media;
 
 class cpmd{
 	public static function markdown_to_block_code($markdown){
@@ -14,7 +15,11 @@ class cpmd{
 				return CP::get_block_code('heading',['level'=>$matches[1],'content'=>trim($matches[2])]);
 			},$html);
 			$html=preg_replace_callback('|<p>\s*<img src="(.+?)" alt="(.+?)"\s*/>\s*</p>|',function($matches){
-				return CP::get_block_code('image',['src'=>$matches[1],'alt'=>$matches[2]]);
+				$src=$matches[1];
+				if(strpos($src,'://')===false || substr($src,0,1)!=='/'){
+					$src=media::get_last_attachment_file_url_with_name(basename($src));
+				}
+				return CP::get_block_code('image',['src'=>$src,'alt'=>$matches[2]]);
 			},$html);
 			$html=preg_replace_callback('|<p>([^$]*?)</p>|',function($matches){
 				if(empty($matches[1])){return '';}

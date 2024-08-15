@@ -1,0 +1,13 @@
+@import 'admin_style_config.scss';
+
+.SelectMedia{
+	&.is-type-audio{
+		
+	}
+	&.is-type-video,&.is-type-image{
+		@include bnd((w:80,h:60,op:c,of:c));
+		@include bdr((s:s,w:4,c:b));
+		@include shd((b:2));
+		@include usr((c:p));
+	}
+}

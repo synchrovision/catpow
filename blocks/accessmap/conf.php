@@ -13,6 +13,7 @@ $attributes=[
 		"source"=>'query',
 		"selector"=>'.item',
 		"query"=>[
+			"classes"=>["source"=>"attribute","attribute"=>"class"],
 			"title"=>["source"=>'html',"selector"=>'.access .title'],
 			"address"=>["source"=>'html',"selector"=>'.access .address'],
 			"tel"=>["source"=>'html',"selector"=>'.access .tel'],
@@ -22,9 +23,10 @@ $attributes=[
 
 			'll'=>['source'=>'attribute','selector'=>'.map .gmap','attribute'=>'data-ll'],
 			'q'=>['source'=>'attribute','selector'=>'.map .gmap','attribute'=>'data-q'],
+			'src'=>['source'=>'attribute','selector'=>'.map .gmap','attribute'=>'src'],
 		],
 		"default"=>[[
-			"classes"=>'item',
+			"classes"=>'item useQuery',
 			"title"=>'Title',
 			"address"=>'Osaka city',
 			"tel"=>'00-0000-0000',
@@ -33,7 +35,8 @@ $attributes=[
 			"info"=>'info',
 
 			"ll"=>'',
-			"q"=>''
+			"q"=>'',
+			"src"=>''
 		]]
 	],
 	"loopParam"=>["type"=>'string',"default"=>''],

@@ -1,0 +1,14 @@
+.InputDuration {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  gap: 0.25rem;
+}
+.InputDuration-col-unit {
+  display: inline-block;
+  padding: 0rem 0.25rem;
+}
+/*# sourceMappingURL=./style.css.map */

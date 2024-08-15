@@ -8,11 +8,13 @@
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   gap: 0.5em;
+  list-style: none;
 }
 .SearchSelect-selected-items-item {
+  position: relative;
   min-width: 5em;
   width: auto;
-  padding: 0.5em 1em;
+  padding: 0.5em 2em 0.5em 1em;
   background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
   text-align: center;
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
@@ -22,10 +24,19 @@
   cursor: pointer;
 }
 .SearchSelect-selected-items-item-button {
-  display: inline-block;
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  margin: auto;
+  margin-right: 0.5em;
   width: 1em;
   height: 1em;
-  margin-left: 0.5em;
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.1);
+  border-radius: 50%;
 }
 .SearchSelect-selected-items-item-button::before {
   content: "×";

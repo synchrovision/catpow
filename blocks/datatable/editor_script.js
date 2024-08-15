@@ -83,7 +83,7 @@
       ];
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          { name: "type", label: "\u30BF\u30A4\u30D7", filter: "type", values: ["spec", "sheet", "plan"] },
+          { name: "type", type: "buttons", label: "\u30BF\u30A4\u30D7", values: ["spec", "sheet", "plan"] },
           "color",
           { name: "loop", input: "bool", label: "\u30EB\u30FC\u30D7", key: "doLoop", sub: [
             { name: "contentPath", label: "content path", input: "text", key: "content_path" },
@@ -183,8 +183,7 @@
           icon: "admin-appearance",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses: statesClasses,
-          filters: CP.filters.datatable || {}
+          selectiveClasses: statesClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
@@ -193,8 +192,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters.datatable || {}
+          selectiveClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextareaControl,

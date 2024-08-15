@@ -9,7 +9,7 @@
   z-index: 2;
 }
 .wp-block-catpow-pageheader-body-title {
-  padding: 7.5rem 1.25rem;
+  padding: 5rem 1.25rem;
   text-align: center;
   font-family: var(--cp-fonts-h);
   font-size: 2rem;
@@ -60,6 +60,7 @@
   left: 0rem;
   inset: 0rem;
   z-index: 1;
+  overflow: hidden;
 }
 .wp-block-catpow-pageheader-background::before {
   content: "";
@@ -82,5 +83,16 @@
   object-position: center;
   object-fit: cover;
   z-index: 1;
+}
+.wp-block-catpow-pageheader.small .wp-block-catpow-pageheader-body-title {
+  padding: 2.5rem 1.25rem;
+  font-size: 1.5rem;
+}
+.wp-block-catpow-pageheader.medium .wp-block-catpow-pageheader-body-title {
+  padding: 5rem 1.25rem;
+}
+.wp-block-catpow-pageheader.large .wp-block-catpow-pageheader-body-title {
+  padding: 10rem 1.25rem;
+  font-size: 3rem;
 }
 /*# sourceMappingURL=./style.css.map */

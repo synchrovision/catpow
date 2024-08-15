@@ -6,7 +6,7 @@
 	&-body{
 		@include bnd((p:r,z:2));
 		&-title{
-			@include bnd((pd:120 20));
+			@include bnd((pd:80 20));
 			@include txt((a:c,f:h,p:32,h:1.5em,c:i));
 		}
 		&-breadcrumb{
@@ -38,7 +38,7 @@
 		}
 	}
 	&-background{
-		@include bnd((d:b,p:a,i:0,z:1));
+		@include bnd((d:b,p:a,i:0,z:1,o:h));
 		&::before{
 			content:'';
 			@include bnd((d:b,p:a,i:0,z:2));
@@ -47,6 +47,30 @@
 		}
 		img{
 			@include bnd((d:b,w:f,h:f,op:c,of:c,z:1));
+		}
+	}
+	&.small &{
+		&-body{
+			&-title{
+				@include bnd((pd:40 20));
+				@include txt((p:24));
+			}
+		}
+	}
+	&.medium &{
+		&-body{
+			&-title{
+				@include bnd((pd:80 20));
+			}
+		}
+		
+	}
+	&.large &{
+		&-body{
+			&-title{
+				@include bnd((pd:160 20));
+				@include txt((p:48));
+			}
 		}
 	}
 }

@@ -25,11 +25,7 @@
         const selectiveClasses2 = [
           { name: "size", type: "buttons", label: "\u30B5\u30A4\u30BA", values: ["small", "medium", "large"] },
           { name: "mapColor", type: "buttons", label: "\u5730\u56F3\u306E\u8272", values: { mapColorNone: "\u901A\u5E38", mapColorGray: "\u30B0\u30EC\u30FC", mapColorSync: "\u540C\u8272" } },
-          { name: "titleTag", input: "buttons", filter: "titleTag", key: "TitleTag", label: "\u30BF\u30A4\u30C8\u30EB\u30BF\u30B0", values: ["h2", "h3", "h4"], effect: (val, { set }) => {
-            if (/^h\d$/.test(val)) {
-              set({ titleTag: "h" + (parseInt(val[1]) + 1) });
-            }
-          } },
+          { name: "titleTag", input: "buttons", key: "TitleTag", label: "\u30BF\u30A4\u30C8\u30EB\u30BF\u30B0", values: ["h2", "h3", "h4"] },
           { name: "hasTel", values: "hasTel", label: "\u96FB\u8A71\u756A\u53F7" },
           { name: "hasMail", values: "hasMail", label: "\u30E1\u30FC\u30EB" },
           { name: "hasSite", values: "hasSite", label: "\u30B5\u30A4\u30C8" },
@@ -55,8 +51,21 @@
       const selectiveItemClasses = useMemo(() => {
         const selectiveItemClasses2 = [
           "color",
-          { name: "q", key: "q", input: "text", label: "\u30DE\u30FC\u30AB\u30FC" },
-          { name: "ll", key: "ll", input: "text", label: "\u4E2D\u5FC3\u5EA7\u6A19" }
+          { name: "source", type: "gridbuttons", values: { useQuery: "\u691C\u7D22", useEmbedURL: "\u57CB\u3081\u8FBC\u307FURL" }, sub: {
+            useQuery: [
+              { name: "q", key: "q", input: "text", label: "\u691C\u7D22\u30EF\u30FC\u30C9" },
+              { name: "ll", key: "ll", input: "text", label: "\u4E2D\u5FC3\u5EA7\u6A19" }
+            ],
+            useEmbedURL: [
+              { name: "src", key: "src", input: "textarea", label: "\u57CB\u3081\u8FBC\u307FURL", rows: 10, filter: (value, state, props) => {
+                const matches = value.match(/src="(.+?)"/);
+                if (matches) {
+                  return matches[1];
+                }
+                return value;
+              } }
+            ]
+          } }
         ];
         wp.hooks.applyFilters("catpow.blocks.accessmap.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
         return selectiveItemClasses2;
@@ -80,12 +89,18 @@
       let rtn = [];
       const { imageKeys } = CP.config.accessmap;
       [...Array(Math.max(items.length, loopCount)).keys()].forEach((i) => {
+        let url;
         const index = i % items.length;
         const item = items[index];
-        let q = item.q || item.address.replace(/<br\/?>|\n/, " ");
-        let url = `https://www.google.com/maps?output=embed&z=${z}&t=${t}&hl=${hl}&q=${q}`;
-        if (!!item.ll) {
-          url += `&ll=${item.ll}`;
+        const itemState = CP.wordsToFlags(item.classes);
+        if (itemState.useEmbedURL) {
+          url = item.src;
+        } else {
+          let q2 = item.q || item.address.replace(/<br\/?>|\n/, " ");
+          url = `https://www.google.com/maps?output=embed&z=${z}&t=${t}&hl=${hl}&q=${q2}`;
+          if (!!item.ll) {
+            url += `&ll=${item.ll}`;
+          }
         }
         if (!item.controlClasses) {
           item.controlClasses = "control";
@@ -94,7 +109,7 @@
           /* @__PURE__ */ wp.element.createElement(
             CP.Item,
             {
-              tag: "li",
+              tag: "div",
               set: setAttributes,
               attr: attributes,
               items,
@@ -189,8 +204,7 @@
           icon: "art",
           set: setAttributes,
           attr: attributes,
-          selectiveClasses,
-          filters: CP.filters.accessmap || {}
+          selectiveClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextareaControl,
@@ -208,8 +222,7 @@
           attr: attributes,
           items,
           index: attributes.currentItemIndex,
-          selectiveClasses: selectiveItemClasses,
-          filters: CP.filters.accessmap || {}
+          selectiveClasses: selectiveItemClasses
         }
       ), states.isTemplate && /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
@@ -220,8 +233,7 @@
           attr: attributes,
           items,
           index: attributes.currentItemIndex,
-          selectiveClasses: selectiveItemTemplateClasses,
-          filters: CP.filters.accessmap || {}
+          selectiveClasses: selectiveItemTemplateClasses
         }
       ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
@@ -250,13 +262,19 @@
       const { imageKeys } = CP.config.accessmap;
       let rtn = [];
       items.map((item, index) => {
-        let url = `https://www.google.com/maps?output=embed&z=${z}&t=${t}&hl=${hl}&q=`;
-        url += item.q || item.address;
-        if (!!item.ll) {
-          url += `&ll=${item.ll}`;
+        let url;
+        const itemState = CP.wordsToFlags(item.classes);
+        if (itemState.useEmbedURL) {
+          url = item.src;
+        } else {
+          let q2 = item.q || item.address.replace(/<br\/?>|\n/, " ");
+          url = `https://www.google.com/maps?output=embed&z=${z}&t=${t}&hl=${hl}&q=${q2}`;
+          if (!!item.ll) {
+            url += `&ll=${item.ll}`;
+          }
         }
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("div", { className: "item", key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "map" }, /* @__PURE__ */ wp.element.createElement("iframe", { src: url, frameBorder: "0", className: "gmap", "data-ll": item.ll, "data-q": item.q })), /* @__PURE__ */ wp.element.createElement("div", { className: "access" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: TitleTag, className: "title", value: item.title }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "address", value: item.address }), states.hasTel && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "tel", value: item.tel }), states.hasMail && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "mail", value: item.mail }), states.hasSite && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "tel", value: item.site }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "info", value: item.info })))
+          /* @__PURE__ */ wp.element.createElement("div", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "map" }, /* @__PURE__ */ wp.element.createElement("iframe", { src: url, frameBorder: "0", className: "gmap", "data-ll": item.ll, "data-q": item.q })), /* @__PURE__ */ wp.element.createElement("div", { className: "access" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: TitleTag, className: "title", value: item.title }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "address", value: item.address }), states.hasTel && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "tel", value: item.tel }), states.hasMail && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "mail", value: item.mail }), states.hasSite && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "tel", value: item.site }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "info", value: item.info })))
         );
       });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, rtn), doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));

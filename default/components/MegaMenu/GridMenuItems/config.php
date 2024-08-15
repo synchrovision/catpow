@@ -1,0 +1,37 @@
+<?php
+return [
+	'type'=>'Contents',
+	'schema'=>[
+		'properties'=>[
+			'custom'=>['type'=>'boolean','title'=>'Custom'],
+		],
+		'oneOf'=>[
+			[
+				'properties'=>[
+					'custom'=>['const'=>true],
+					'items'=>[
+						'type'=>'array',
+						'title'=>'Items',
+						'layout'=>'table',
+						'items'=>[
+							'@type'=>'Link',
+							'properties'=>[
+								'image'=>['@type'=>'Image','title'=>'Image','order'=>1],
+							]
+						]
+					]
+				]
+			],
+			[
+				'properties'=>[
+					'custom'=>['const'=>false],
+					'items'=>[
+						'@type'=>'MenuItems',
+						'requiredFeatures'=>['image']
+					]
+				]
+			],
+			
+		]
+	]
+];

@@ -1,6 +1,9 @@
 ﻿Catpow.SelectBox=(props)=>{
 	const {useMemo}=wp.element;
-	const {label,value,onChange}=props;
+	const {className="SelectBox",label,value,onChange}=props;
+	const {bem}=Catpow.util;
+	const classes=useMemo(()=>bem(className),[]);
+	
 	const options=useMemo(()=>{
 		if(Array.isArray(props.options)){
 			return props.options.map((option)=>{
@@ -14,9 +17,11 @@
 	},[props.options]);
 	
 	return (
-		<select className={"SelectBox"} value={value} onChange={(e)=>onChange(event.target.value)}>
-			{label && <option value={false}>{label}</option>}
-			{options.map((option)=><option value={option.value} key={option.label}>{option.label}</option>)}
-		</select>
+		<div className={classes()}>
+			<select className={classes.select()} value={value} onChange={(e)=>onChange(event.target.value)}>
+				{label && <option value={false}>{label}</option>}
+				{options.map((option)=><option value={option.value} key={option.label}>{option.label}</option>)}
+			</select>
+		</div>
 	);
 }

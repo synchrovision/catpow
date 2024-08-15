@@ -24,13 +24,13 @@
 		@include bg((c:shd));
 	}
 	&Body{
-		@include bnd((d:b,w:fit 640,h:a 90vh,p:f,l:0,r:0,t:50%,mg:a));
+		@include bnd((d:b,p:f,w:fit,h:fit,l:0,r:0,t:50%,mg:a));
 		@include bdr((r:10));
 		@include bg((c:b));
 		@include shd((b:2));
 		@include trn((y:-50%));
 		.PopupContents{
-			@include bnd((oy:a));
+			@include bnd((w:a 640,h:a 90vh,oy:a));
 		}
 		.PopupControl{
 			.close{
