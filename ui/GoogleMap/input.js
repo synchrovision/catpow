@@ -25,19 +25,23 @@
     const reducer = useCallback((state2, action) => {
       const newState = { ...state2 };
       if (action.value) {
-        const url = new URL(action.value);
-        newState.useQuery = url.searchParams.has("q");
-        newState[newState.useQuery ? "queryUrl" : "embedUrl"] = url;
+        newState.embedUrl = new URL(action.value);
+        newState.value = action.value;
+        if (newState.embedUrl.searchParams.has("q")) {
+          newState.queryUrl = new URL(action.value);
+        }
       }
       if (action.hasOwnProperty("useQuery")) {
         newState.useQuery = action.useQuery;
       }
-      for (const key of ["q", "t", "z", "hl", "ll"]) {
-        if (action.hasOwnProperty(key)) {
-          newState.queryUrl.searchParams.set(key, action[key]);
+      if (newState.useQuery) {
+        for (const key of ["q", "t", "z", "hl", "ll"]) {
+          if (action.hasOwnProperty(key)) {
+            newState.queryUrl.searchParams.set(key, action[key]);
+          }
         }
+        newState.value = newState.queryUrl.toString();
       }
-      newState.value = state2[newState.useQuery ? "queryUrl" : "embedUrl"].toString();
       return newState;
     }, []);
     const [state, update] = useReducer(reducer, {}, init);
