@@ -1232,8 +1232,18 @@ del {
   font-weight: 700;
   color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
+.rtf-u, #editor .rtf-u {
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.05em;
+  text-underline-offset: 0.2em;
+}
 .rtf-mark, #editor .rtf-mark {
-  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),1);
+  background-position: 0% -0.25em;
+  background-image: -webkit-linear-gradient(top, hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),0.15), hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),0.15) 50%, transparent 50.1%, transparent);
+  background-image: -moz-linear-gradient(top, hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),0.15), hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),0.15) 50%, transparent 50.1%, transparent);
+  background-image: -ms-linear-gradient(top, hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),0.15), hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),0.15) 50%, transparent 50.1%, transparent);
+  background-image: -o-linear-gradient(top, hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),0.15), hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),0.15) 50%, transparent 50.1%, transparent);
+  background-image: linear-gradient(0deg, hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),0.15), hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),0.15) 50%, transparent 50.1%, transparent);
 }
 .rtf-tag, #editor .rtf-tag {
   display: inline-block;
