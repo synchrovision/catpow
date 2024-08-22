@@ -337,8 +337,8 @@ del{
 
 .rtf,#editor .rtf{
 	&-title{
-		@include bnd((d:b));
-		@include txt((f:h));
+		@include bnd((d:b,p:r));
+		@include txt((f:h,p:1.25em));
 		&:not(:first-child){
 			@include bnd((mgt:1em));
 		}
@@ -358,6 +358,13 @@ del{
 		&.icatch{
 			@include bnd((mgb:.5em));
 			@include txt((p:1.25em));
+		}
+		img{
+			@include bnd((d:ib,w:a,h:1em));
+			@include txt((v:m));
+			&:only-child{
+				@include bnd((d:b,w:f,h:a));
+			}
 		}
 	}
 	&-large{

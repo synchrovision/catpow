@@ -1179,7 +1179,9 @@ del {
 }
 .rtf-title, #editor .rtf-title {
   display: block;
+  position: relative;
   font-family: var(--cp-fonts-h);
+  font-size: 1.25em;
 }
 .rtf-title:not(:first-child), #editor .rtf-title:not(:first-child) {
   margin-top: 1em;
@@ -1211,6 +1213,17 @@ del {
 .rtf-title.icatch, #editor .rtf-title.icatch {
   margin-bottom: 0.5em;
   font-size: 1.25em;
+}
+.rtf-title img, #editor .rtf-title img {
+  display: inline-block;
+  width: auto;
+  height: 1em;
+  vertical-align: middle;
+}
+.rtf-title img:only-child, #editor .rtf-title img:only-child {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 .rtf-large, #editor .rtf-large {
   display: inline-block;
