@@ -92,6 +92,41 @@ wp.richText.registerFormatType('catpow/small',{
 		);
 	}
 });
+wp.richText.registerFormatType('catpow/u',{
+	title:'underline',
+	tagName:'u',
+	className:'rtf-u',
+	edit({isActive,value,onChange}){
+		const {RichTextToolbarButton,RichTextShortcut}=wp.blockEditor;
+		const {toggleFormat}=wp.richText;
+		const onToggle=()=>onChange(toggleFormat(value,{type:'catpow/u'}));
+
+		const icon=(
+			<svg role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
+				<path d="M6.2,12.1h7.2l2,5.2h2.6L11,0H8.5L1.9,17.3h2.4L6.2,12.1z M8.8,5.1C9.2,4,9.5,2.9,9.7,1.8C10,2.8,10.4,4,10.9,5.4l1.8,4.8
+	H6.9L8.8,5.1z M20,18v2H0v-2H20z"/>
+			</svg>
+		);
+
+		return (
+			<>
+				<RichTextShortcut
+					type={'primary'}
+					character={'_'}
+					onUse={onToggle}
+				/>
+				<RichTextToolbarButton
+					icon={icon}
+					title={'underline'}
+					onClick={onToggle}
+					isActive={isActive}
+					shortcutType={'primary'}
+					shortcutCharacter={'_'}
+				/>
+			</>
+		);
+	}
+});
 
 wp.richText.registerFormatType('catpow/title',{
 	title:'Title',
