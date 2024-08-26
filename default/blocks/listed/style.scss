@@ -251,7 +251,7 @@
 					>.image{
 						@include bnd((f:1 1 100));
 						img{
-							@include bnd((d:b,w:f,h:f,op:c,of:c));
+							@include bnd((d:b,w:f,h:a,op:c,of:c));
 						}
 					}
 					>.header{
