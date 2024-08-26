@@ -21,4 +21,5 @@ export * from './bez.jsx';
 export * from './bsearch.jsx';
 export * from './fib.jsx';
 export * from './rand.jsx';
+export * from './range.jsx';
 export * from './wave.jsx';
