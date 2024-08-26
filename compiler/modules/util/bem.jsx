@@ -4,6 +4,7 @@ export const bem=(className)=>{
 		if(arguments.length>0){
 			const classes=[];let i;
 			for(i=0;i<arguments.length;i++){
+				if(!arguments[i]){continue;}
 				if(typeof(arguments[i])==='string'){
 					classes.push(arguments[i]);
 					continue;
