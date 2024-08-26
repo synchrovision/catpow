@@ -1,4 +1,5 @@
 ﻿import {CP} from './CP.jsx';
+import {bem,classNamesToFlags,flagsToClassNames} from 'util';
 
 CP.CustomColorVars=(props)=>{
 	const {useState,useRef,useMemo,useCallback}=wp.element;
@@ -7,7 +8,6 @@ CP.CustomColorVars=(props)=>{
 	const cache=useRef(value);
 	const [index,setIndex]=useState(-1);
 	const [useCustomColor,setUseCustomColor]=useState(Object.keys(value).length>0);
-	const {bem,classNamesToFlags,flagsToClassNames}=Catpow.util;
 	const classes=bem('CP-CustomColorVars');
 	const roles=[
 		{key:'b',label:'背景色'},

@@ -64,6 +64,43 @@
     }, "allowColumnStyle")
   );
 
+  // modules/util/string.jsx
+  var flagsToClassNames = (flags) => flags && Object.keys(flags).filter((f) => flags[f]).map(camelToKebab).join(" ");
+  var camelToKebab = (str) => str.replace(/(\w)([A-Z])/g, "$1-$2").toLowerCase();
+  var kebabToCamel = (str) => str.replace(/\-(\w)/g, (m2) => m2[1].toUpperCase());
+
+  // modules/util/bem.jsx
+  var bem = (className) => {
+    const children = {};
+    return new Proxy(function() {
+      if (arguments.length > 0) {
+        const classes = [];
+        let i;
+        for (i = 0; i < arguments.length; i++) {
+          if (typeof arguments[i] === "string") {
+            classes.push(arguments[i]);
+            continue;
+          }
+          classes.push.apply(
+            classes,
+            Array.isArray(arguments[i]) ? arguments[i] : Object.keys(arguments[i]).filter((c) => arguments[i][c])
+          );
+        }
+        if (classes.length > 0) {
+          return className + " " + classes.join(" ");
+        }
+      }
+      return className;
+    }, {
+      get: (target, prop) => {
+        if (void 0 === children[prop]) {
+          children[prop] = bem(className.split(" ")[0] + (prop[0] === "_" ? "_" : "-") + prop);
+        }
+        return children[prop];
+      }
+    });
+  };
+
   // ../blocks/_init/init/CP.jsx
   var CP = {
     filters: {},
@@ -471,7 +508,7 @@
         if (!match) {
           return;
         }
-        obj[match[2] ? match[1] : Catpow.util.kebabToCamel(match[3])] = match[4];
+        obj[match[2] ? match[1] : kebabToCamel(match[3])] = match[4];
       });
       return obj;
     },
@@ -480,7 +517,7 @@
         return "";
       }
       return Object.keys(data).map((key) => {
-        return Catpow.util.camelToKebab(key) + ":" + data[key] + ";";
+        return camelToKebab(key) + ":" + data[key] + ";";
       }).join("");
     },
     parseStyleCode: (code) => {
@@ -565,8 +602,8 @@
       if (!code || code.indexOf("url(") === -1) {
         return false;
       }
-      const m = code.match(/url\((.+?)\)/);
-      return m ? m[1] : "";
+      const m2 = code.match(/url\((.+?)\)/);
+      return m2 ? m2[1] : "";
     },
     parseGradientStyleValue: (gradient) => {
       const match = gradient.match(/^(linear|radial)\-gradient\((\d+deg),(.+)\)$/);
@@ -615,7 +652,7 @@
         return {};
       }
       if (typeof words === "string") {
-        words = words.split(" ").map(Catpow.util.kebabToCamel);
+        words = words.split(" ").map(kebabToCamel);
       }
       words.forEach((word) => {
         rtn[word] = true;
@@ -626,7 +663,7 @@
       if (void 0 === flags) {
         return "";
       }
-      return Object.keys(flags).filter((word) => flags[word]).map(Catpow.util.camelToKebab).join(" ");
+      return Object.keys(flags).filter((word) => flags[word]).map(camelToKebab).join(" ");
     },
     filterFlags: (flags, callback) => {
       Object.keys(flags).forEach((key) => {
@@ -866,7 +903,7 @@
             return;
           }
           if (attributes[key].indexOf("url(") !== -1) {
-            atts[key] = attributes[key].replace(/url\((.+?)\)/, (m, p1) => "url(" + setURLparams(p1, { c: color, theme: wpinfo.theme }) + ")");
+            atts[key] = attributes[key].replace(/url\((.+?)\)/, (m2, p1) => "url(" + setURLparams(p1, { c: color, theme: wpinfo.theme }) + ")");
             return;
           }
           atts[key] = setURLparams(attributes[key], { c: color, theme: wpinfo.theme });
@@ -1422,9 +1459,9 @@
           weight: /font\-weight:(\d+);/
         };
         Object.keys(map).forEach((key) => {
-          const m = vars.match(map[key]);
-          if (m) {
-            state2[key] = m[1];
+          const m2 = vars.match(map[key]);
+          if (m2) {
+            state2[key] = m2[1];
           }
         });
         return state2;
@@ -1637,7 +1674,6 @@
   CP.BoundingBox = (props) => {
     const { targets, onDeselect, onDuplicate, onDelete, onChange } = props;
     const { useState, useCallback, useMemo, useEffect, useRef } = wp.element;
-    const { bem } = Catpow.util;
     const classes = useMemo(() => bem("CP-BoundingBox"), []);
     const ref = useRef();
     const [style, setStyle] = useState({});
@@ -1890,7 +1926,6 @@
     const { onChange } = props;
     const { useCallback, useMemo, Fragment } = wp.element;
     const { Icon } = wp.components;
-    const { bem } = Catpow.util;
     const classes = bem("CP-SelectThemeColor");
     const proxy = useMemo(() => CP.colorClassProxy(props.selected), [props.selected]);
     const data = useMemo(() => CP.parseColorClass(proxy.h), [proxy.h]);
@@ -2031,7 +2066,6 @@
   CP.SelectResponsiveImage = (props) => {
     const { className = "", attr, set, keys = {}, index = 0, subIndex = 0, size, devices, device, isTemplate, ...otherProps } = props;
     const { useMemo } = wp.element;
-    const { bem } = Catpow.util;
     const classes = useMemo(() => bem("CP-SelectResponsiveImage " + className), [className]);
     let { sizes } = props;
     let type, onClick, item, items2;
@@ -2263,11 +2297,10 @@
   // ../blocks/_init/init/SelectPictureSources.jsx
   CP.SelectPictureSources = (props) => {
     const { Icon } = wp.components;
-    const { devices } = props;
+    const { devices, compact = false } = props;
     const { useMemo } = wp.element;
-    const { bem } = Catpow.util;
     const classes = useMemo(() => bem("CP-SelectPictureSources"), []);
-    return /* @__PURE__ */ wp.element.createElement("table", { className: classes() }, /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.tbody() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), colSpan: devices.length }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props }))), /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, devices.map((device) => /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: device }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.tbody.tr.td.label() }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement("table", { className: classes({ "is-compact": compact }) }, /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.tbody() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), colSpan: devices.length }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props }))), /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, devices.map((device) => /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: device }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.tbody.tr.td.label() }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(
       CP.SelectResponsiveImage,
       {
         device,
@@ -2618,7 +2651,7 @@
 
   // ../blocks/_init/init/Item.jsx
   CP.Item = (props) => {
-    const { tag, items: items2, itemsKey, index, set, attr, triggerClasses, children } = props;
+    const { tag, items: items2, itemsKey, index, indexKey = "currentItemIndex", set, attr, triggerClasses, children } = props;
     let { itemClasses } = props;
     if (!items2[index].classes) {
       items2[index].classes = "item";
@@ -2629,8 +2662,7 @@
     if (props.className) {
       classes += " " + props.className;
     }
-    const { currentItemIndex = 0 } = attr;
-    const isSelected = props.isSelected === void 0 ? index == currentItemIndex : props.isSelected;
+    const isSelected = props.isSelected === void 0 ? index == attr[indexKey] : props.isSelected;
     return wp.element.createElement(
       tag,
       {
@@ -2665,11 +2697,32 @@
           }
         },
         onClick: (e) => {
-          set({ currentItemIndex: index });
+          set({ [indexKey]: index });
         }
       },
-      /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, children, isSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: (e) => CP.deleteItem(props) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: (e) => CP.cloneItem(props) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn up", onClick: (e) => CP.upItem(props) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn down", onClick: (e) => CP.downItem(props) })))
+      /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, children, isSelected && /* @__PURE__ */ wp.element.createElement(
+        CP.ItemControl,
+        {
+          controls: {
+            "delete": (e) => CP.deleteItem(props),
+            "clone": (e) => CP.cloneItem(props),
+            "up": (e) => CP.upItem(props),
+            "down": (e) => CP.downItem(props)
+          }
+        }
+      ))
     );
+  };
+
+  // ../blocks/_init/init/ItemControl.jsx
+  CP.ItemControl = (props) => {
+    const { controls, float = true, children } = props;
+    const { useState } = wp.element;
+    const classes = bem("CP-ItemControl");
+    const [open, setOpen] = useState(false);
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-open": open, "is-position-absolute": float }) }, Object.keys(controls).map((key) => {
+      return /* @__PURE__ */ wp.element.createElement("div", { className: classes.button("is-" + key), onClick: controls[key], key });
+    }), children && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes.button("is-edit"), onClick: () => setOpen(!open) }), /* @__PURE__ */ wp.element.createElement("div", { className: classes.inputs() }, children)));
   };
 
   // ../blocks/_init/init/ItemControlInfoPanel.jsx
@@ -3715,17 +3768,19 @@
 
   // ../blocks/_init/init/EditItemsTable.jsx
   CP.EditItemsTable = (props) => {
-    const { set, attr, itemsKey = "items", columns, isTemplate } = props;
+    const { set, attr, itemsKey = "items", columns, isTemplate = false } = props;
     const { RichText } = wp.blockEditor;
+    const classes = bem("CP-EditItemsTable");
     const items2 = attr[itemsKey] || [];
     const save = () => {
       set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
     };
-    return /* @__PURE__ */ wp.element.createElement("table", { className: "editItemsTable" }, /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, columns.map((col, c) => !("cond" in col) || col.cond ? /* @__PURE__ */ wp.element.createElement("th", { key: c }, col.label || col.key) : false), /* @__PURE__ */ wp.element.createElement("th", null))), /* @__PURE__ */ wp.element.createElement("tbody", null, items2.map((item, index) => {
+    return /* @__PURE__ */ wp.element.createElement("table", { className: classes() }, /* @__PURE__ */ wp.element.createElement("thead", { className: classes.thead() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.thead.tr() }, columns.map((col, c) => !("cond" in col) || col.cond ? /* @__PURE__ */ wp.element.createElement("th", { className: classes.thead.tr.th(), key: c }, col.label || col.key) : false), /* @__PURE__ */ wp.element.createElement("th", { className: classes.thead.tr.th() }))), /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.tbody() }, items2.map((item, index) => {
       const propsForControl = { tag: "tr", set, itemsKey, items: items2, index };
       return /* @__PURE__ */ wp.element.createElement(
         "tr",
         {
+          className: classes.tbody.tr(),
           onClick: (e) => {
             set({ currentItemIndex: index });
           },
@@ -3737,7 +3792,7 @@
           }
           switch (col.type) {
             case "text":
-              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c }, /* @__PURE__ */ wp.element.createElement(
                 RichText,
                 {
                   value: item[col.key],
@@ -3748,7 +3803,7 @@
                 }
               ));
             case "image":
-              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c }, /* @__PURE__ */ wp.element.createElement(
                 CP.SelectResponsiveImage,
                 {
                   attr,
@@ -3760,7 +3815,7 @@
                 }
               ));
             case "picture":
-              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c }, /* @__PURE__ */ wp.element.createElement(
                 CP.SelectPictureSources,
                 {
                   index,
@@ -3778,7 +3833,7 @@
                   subCol.keys.subItems = col.key;
                 }
               });
-              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c }, /* @__PURE__ */ wp.element.createElement(
                 CP.EditItemsTable,
                 {
                   set: () => {
@@ -3792,7 +3847,18 @@
               ));
           }
         }),
-        /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: (e) => CP.deleteItem(propsForControl) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: (e) => CP.cloneItem(propsForControl) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn up", onClick: (e) => CP.upItem(propsForControl) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn down", onClick: (e) => CP.downItem(propsForControl) })))
+        /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td() }, /* @__PURE__ */ wp.element.createElement(
+          CP.ItemControl,
+          {
+            controls: {
+              "delete": (e) => CP.deleteItem(propsForControl),
+              "clone": (e) => CP.cloneItem(propsForControl),
+              "up": (e) => CP.upItem(propsForControl),
+              "down": (e) => CP.downItem(propsForControl)
+            },
+            float: false
+          }
+        ))
       );
     })));
   };
@@ -4050,7 +4116,6 @@
     const { useState, useMemo, useCallback, useRef, useEffect } = wp.element;
     const { BlockControls, InspectorControls } = wp.blockEditor;
     const { BaseControl, Icon, PanelBody, RangeControl, TextControl, Toolbar, ToolbarGroup, ToolbarButton, ToolbarDropdownMenu } = wp.components;
-    const { bem } = Catpow.util;
     const item = keys.items ? attr[keys.items][index] : attr;
     const pictures = item[keys.pictures];
     const classes = useMemo(() => bem("CP-PlacedPictures " + className), [className]);
@@ -4227,7 +4292,6 @@
     const { className, set, attr, keys, index, isSelected = "auto", ...otherProps } = props;
     const { onChange } = props;
     const { useMemo, useCallback, useEffect, useState } = wp.element;
-    const { bem } = Catpow.util;
     const classes = useMemo(() => bem("CP-Link " + className), [className]);
     const item = useMemo(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
     const [hasCursor, setHasCursor] = useState(false);
@@ -4302,7 +4366,6 @@
     const cache = useRef(value);
     const [index, setIndex] = useState(-1);
     const [useCustomColor, setUseCustomColor] = useState(Object.keys(value).length > 0);
-    const { bem, classNamesToFlags, flagsToClassNames } = Catpow.util;
     const classes = bem("CP-CustomColorVars");
     const roles = [
       { key: "b", label: "\u80CC\u666F\u8272" },
@@ -4419,8 +4482,24 @@
   // ../blocks/_init/init/Message.jsx
   CP.Message = (props) => {
     const { useMemo } = wp.element;
-    const { bem } = Catpow.util;
     const classes = useMemo(() => bem("CP-Message"), []);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._body() }, props.children));
+  };
+
+  // ../blocks/_init/init/NavBar.jsx
+  CP.NavBar = (props) => {
+    const { value, label, onChange } = props;
+    const { useMemo, useState } = wp.element;
+    const classes = bem("CP-NavBar");
+    const { options } = useMemo(() => CP.parseSelections(props.options), [props.options]);
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes.items() }, label && /* @__PURE__ */ wp.element.createElement("li", { className: classes.items.item("is-label") }, label), options.map((option) => /* @__PURE__ */ wp.element.createElement(
+      "li",
+      {
+        className: classes.items.item({ "is-active": option.value === value }),
+        onClick: () => onChange(option.value),
+        key: option.label
+      },
+      option.label
+    ))));
   };
 })();

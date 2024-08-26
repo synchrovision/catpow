@@ -1,4 +1,6 @@
-﻿export const CP={
+﻿import {kebabToCamel,camelToKebab} from 'util';
+
+export const CP={
 	filters:{},
 	cache:{},
 	config:{},
@@ -315,14 +317,14 @@
 		css.replace('&amp;','&').split(';').forEach((pair)=>{
 			const match=pair.match(/^((\-\-)?([^:]+?)):(.+)$/);
 			if(!match){return;}
-			obj[match[2]?match[1]:Catpow.util.kebabToCamel(match[3])]=match[4];
+			obj[match[2]?match[1]:kebabToCamel(match[3])]=match[4];
 		});
 		return obj;
 	},
 	createStyleString:(data)=>{
 		if(!data){return '';}
 		return Object.keys(data).map((key)=>{
-			return Catpow.util.camelToKebab(key)+':'+data[key]+';';
+			return camelToKebab(key)+':'+data[key]+';';
 		}).join('');
 	},
 	parseStyleCode:(code)=>{
@@ -442,13 +444,13 @@
 	classNamesToFlags:(words)=>{
 		var rtn={};
 		if(undefined === words){return {};}
-		if(typeof words === 'string'){words=words.split(' ').map(Catpow.util.kebabToCamel);}
+		if(typeof words === 'string'){words=words.split(' ').map(kebabToCamel);}
 		words.forEach((word)=>{rtn[word]=true;});
 		return rtn;
 	},
 	flagsToClassNames:(flags)=>{
 		if(undefined === flags){return '';}
-		return Object.keys(flags).filter((word)=>flags[word]).map(Catpow.util.camelToKebab).join(' ');
+		return Object.keys(flags).filter((word)=>flags[word]).map(camelToKebab).join(' ');
 	},
 	
 	filterFlags:(flags,callback)=>{

@@ -1,16 +1,14 @@
 ﻿import {CP} from './CP.jsx';
 
 CP.Item=(props)=>{
-	const {tag,items,itemsKey,index,set,attr,triggerClasses,children}=props;
+	const {tag,items,itemsKey,index,indexKey='currentItemIndex',set,attr,triggerClasses,children}=props;
 	let {itemClasses}=props;
 	if(!items[index].classes){items[index].classes='item';}
 	else if(items[index].classes.search(/\bitem\b/)===-1){items[index].classes+=' item';}
 	let classes=items[index].classes;
 	if(props.className){classes+=' '+props.className;}
 
-	const {currentItemIndex=0}=attr;
-
-	const isSelected=(props.isSelected === undefined)?(index==currentItemIndex):props.isSelected;
+	const isSelected=(props.isSelected === undefined)?(index==attr[indexKey]):props.isSelected;
 
 	return wp.element.createElement(
 		tag,
@@ -31,18 +29,20 @@ CP.Item=(props)=>{
 				}
 			},
 			onClick:(e)=>{
-				set({currentItemIndex:index});
+				set({[indexKey]:index});
 			}
 		},
 		<>
 			{children}
 			{isSelected &&
-				<div className='itemControl'>
-					<div className='btn delete' onClick={(e)=>CP.deleteItem(props)}></div>
-					<div className='btn clone' onClick={(e)=>CP.cloneItem(props)}></div>
-					<div className='btn up' onClick={(e)=>CP.upItem(props)}></div>
-					<div className='btn down' onClick={(e)=>CP.downItem(props)}></div>
-				</div>
+				<CP.ItemControl
+					controls={{
+						'delete':(e)=>CP.deleteItem(props),
+						'clone':(e)=>CP.cloneItem(props),
+						'up':(e)=>CP.upItem(props),
+						'down':(e)=>CP.downItem(props)
+					}}
+				/>
 			}
 		</>
 	);

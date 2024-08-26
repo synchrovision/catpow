@@ -1,8 +1,8 @@
 ﻿import {CP} from './CP.jsx';
+import {bem} from 'util';
 
 CP.Message=(props)=>{
 	const {useMemo}=wp.element;
-	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem('CP-Message'),[]);
 	return (
 		<div className={classes()}>

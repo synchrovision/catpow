@@ -1,4 +1,5 @@
 ﻿import {CP} from './CP.jsx';
+import {bem} from 'util';
 
 CP.PlacedPictures=(props)=>{
 	const {className,attr,keys,index}=props;
@@ -30,7 +31,6 @@ CP.PlacedPictures.Edit=(props)=>{
 	const {useState,useMemo,useCallback,useRef,useEffect}=wp.element;
 	const {BlockControls,InspectorControls}=wp.blockEditor;
 	const {BaseControl,Icon,PanelBody,RangeControl,TextControl,Toolbar,ToolbarGroup,ToolbarButton,ToolbarDropdownMenu}=wp.components;
-	const {bem}=Catpow.util;
 	const item=keys.items?attr[keys.items][index]:attr;
 	const pictures=item[keys.pictures];
 	const classes=useMemo(()=>bem('CP-PlacedPictures '+className),[className]);

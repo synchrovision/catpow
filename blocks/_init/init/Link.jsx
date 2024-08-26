@@ -1,4 +1,5 @@
 ﻿import {CP} from './CP.jsx';
+import {bem} from 'util';
 
 CP.Link=(props)=>{
 	const {className,attr,keys,index,...otherProps}=props;
@@ -15,7 +16,6 @@ CP.Link.Edit=(props)=>{
 	const {className,set,attr,keys,index,isSelected='auto',...otherProps}=props;
 	const {onChange}=props;
 	const {useMemo,useCallback,useEffect,useState}=wp.element;
-	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem('CP-Link '+className),[className]);
 	
 	const item=useMemo(()=>keys.items?attr[keys.items][index]:attr,[attr,keys.items,index]);

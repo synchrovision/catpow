@@ -5,67 +5,6 @@ $colors:(
 	c:currentColor
 );
 
-.itemControl{
-	@include bnd((pd:2 5,p:r,z:1000));
-	@include txt((a:c,p:12,h:10));
-	@include bg((c:b));
-	@include bdr((r:10));
-	@include shd((b:1));
-	@include flx((w:n,j:a));
-	div.btn{
-		@include bnd((d:ib,mg:2));
-		@include txt((a:c,p:12,h:10,c:t));
-		@include usr((c:p));
-		@include trn((t:.5s,o:.7));
-		&.delete::before{
-			@include ico('minus');
-		}
-		&.clone::before{
-			@include ico('plus');
-		}
-		&.up::before{
-			@include ico('chevron-circle-up');
-		}
-		&.down::before{
-			@include ico('chevron-circle-down');
-		}
-		&.left::before{
-			@include ico('chevron-circle-left');
-		}
-		&.right::before{
-			@include ico('chevron-circle-right');
-		}
-		&.edit::before{
-			@include ico('pen');
-		}
-		&:hover{
-			@include trn((o:1));
-		}
-	}
-	div.inputs{
-		@include bnd((d:b,p:a,w:200,pd:10,t:f,r:0,mg:0 a,z:1001));
-		@include bg((c:b));
-		@include bdr((r:5));
-		@include txt((a:l));
-		@include trn((t:.5s,o:0,y:-10));
-		@include usr((e:n));
-		div.sub{
-			@include bnd((pdl:10,mgb:20));
-			@include bdr((p:l,s:s,w:5,c:#eee));
-		}
-	}
-	&.open{
-		@include bnd((z:1001));
-		div.btn{
-			&.edit{@include trn((o:1));}
-		}
-		div.inputs{
-			@include bnd((d:b));
-			@include trn((o:.8,y:0));
-			@include usr((e:a));
-		}
-	}
-}
 
 .components-panel{
 	div.sub{
@@ -257,6 +196,9 @@ $colors:(
 	}
 	&-SelectPictureSources{
 		@include bnd((w:f));
+		&.is-compact{
+			@include bnd((w:100));
+		}
 		&-tbody{
 			&-tr{
 				&-td{
@@ -291,6 +233,136 @@ $colors:(
 				}
 			}
 		}
+	}
+	&-NavBar{
+		@include bnd((pd:8));
+		&-items{
+			@include bnd((pd:0,mg:0,w:fit,o:h));
+			@include flx((w:n,j:s));
+			@include shd((b:2));
+			@include bdr((r:2em));
+			@include txt((l:n,p:14,h:1em));
+			&-item{
+				@include bnd((f:0 1 a,pd:.5em));
+				@include usr((c:p));
+				&.is-label{
+					@include bnd((pd:.5em 1em));
+				}
+				&.is-active{
+					@include bg((c:m));
+					@include txt((c:i));
+				}
+				&:not(:first-child){
+					@include bdr((p:l,s:s,w:1,c:shd));
+				}
+			}
+		}
+	}
+	&-EditItemsTable{
+		@include tbl(());
+		@include bnd((mg:20 a));
+		&-thead,&-tbody{
+			&-tr{
+				&-th,&-td{
+					@include bnd((pd:.5em,w:6em a 30em));
+					@include bdr((s:s,w:1,c:t 50));
+					@include txt((p:12));
+				}
+			}
+		}
+		&-thead{
+			&-tr{
+				&-th{
+					@include bg((c:t 5));
+				}
+			}
+		}
+		&-tbody{
+			&-tr{
+				&-th{
+					@include bg((c:t 3));
+				}
+				&-td{
+					&>img{
+						@include bnd((w:6em,h:a));
+					}
+					.itemControl{
+						@include bnd((p:s));
+					}
+					.SelectPictureSources{
+						@include bnd((w:100));
+					}
+				}
+			}
+		}
+	}
+	&-ItemControl{
+		$block:&;
+		@include bnd((pd:2 5,p:r,w:fit));
+		@include txt((a:c,p:12,h:10));
+		@include bg((c:b));
+		@include bdr((r:10));
+		@include shd((b:1));
+		@include flx((w:n,j:a));
+		&.is-position-absolute{
+			@include bnd((p:a,t:0,r:0,z:1000));
+		}
+		&-button{
+			@include bnd((d:ib,mg:2));
+			@include txt((a:c,p:12,h:10,c:t));
+			@include usr((c:p));
+			@include trn((t:.5s,o:.7));
+			&.is-delete::before{
+				@include ico('minus');
+			}
+			&.is-clone::before{
+				@include ico('plus');
+			}
+			&.is-up::before{
+				@include ico('chevron-circle-up');
+			}
+			&.is-down::before{
+				@include ico('chevron-circle-down');
+			}
+			&.is-left::before{
+				@include ico('chevron-circle-left');
+			}
+			&.is-right::before{
+				@include ico('chevron-circle-right');
+			}
+			&.is-edit::before{
+				@include ico('pen');
+			}
+			&:hover{
+				@include trn((o:1));
+			}
+		}
+		&-inputs{
+			@include bnd((d:b,p:a,w:200,pd:10,t:f,r:0,mg:0 a,z:1001));
+			@include bg((c:b));
+			@include bdr((r:5));
+			@include txt((a:l));
+			@include trn((t:.5s,o:0,y:-10));
+			@include usr((e:n));
+			&-sub{
+				@include bnd((pdl:10,mgb:20));
+				@include bdr((p:l,s:s,w:5,c:#eee));
+			}
+		}
+		&.is-open{
+			@include bnd((z:1001));
+			#{$block}{
+				&-btn{
+					&.is-edit{@include trn((o:1));}
+				}
+				&-inputs{
+					@include bnd((d:b));
+					@include trn((o:.8,y:0));
+					@include usr((e:a));
+				}
+			}
+		}
+		
 	}
 }
 .selectColor{
@@ -398,33 +470,6 @@ $colors:(
 	}
 }
 
-.editItemsTable{
-	@include tbl(());
-	@include bnd((mg:20 a));
-	th,td{
-		@include bnd((pd:.5em,w:6em a 30em));
-		@include bdr((s:s,w:1,c:t 50));
-		@include txt((p:12));
-	}
-	thead{
-		th{
-			@include bg((c:t 5));
-		}
-	}
-	tbody{
-		th{
-			@include bg((c:t 3));
-		}
-		td{
-			&>img{
-				@include bnd((w:6em,h:a));
-			}
-			.SelectPictureSources{
-				@include bnd((w:100));
-			}
-		}
-	}
-}
 .dataStructure{
 	.item{
 		@include bnd((pd:0,mg:0));

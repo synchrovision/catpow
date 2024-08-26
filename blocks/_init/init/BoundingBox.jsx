@@ -1,9 +1,9 @@
 ﻿import {CP} from './CP.jsx';
+import {bem} from 'util';
 
 CP.BoundingBox=(props)=>{
 	const {targets,onDeselect,onDuplicate,onDelete,onChange}=props;
 	const {useState,useCallback,useMemo,useEffect,useRef}=wp.element;
-	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem('CP-BoundingBox'),[]);
 	const ref=useRef();
 	const [style,setStyle]=useState({});

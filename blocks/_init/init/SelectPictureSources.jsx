@@ -1,14 +1,14 @@
 ﻿import {CP} from './CP.jsx';
+import {bem} from 'util';
 
 CP.SelectPictureSources=(props)=>{
 	const {Icon}=wp.components;
-	const {devices}=props;
+	const {devices,compact=false}=props;
 	const {useMemo}=wp.element;
-	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem('CP-SelectPictureSources'),[]);
 	
 	return (
-		<table className={classes()}>
+		<table className={classes({'is-compact':compact})}>
 			<tbody className={classes.tbody()}>
 				<tr className={classes.tbody.tr()}>
 					<td className={classes.tbody.tr.td()} colSpan={devices.length}>

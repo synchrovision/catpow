@@ -1,10 +1,10 @@
 ﻿import {CP} from './CP.jsx';
+import {bem} from 'util';
 
 CP.SelectThemeColor=(props)=>{
 	const {onChange}=props;
 	const {useCallback,useMemo,Fragment}=wp.element;
 	const {Icon}=wp.components;
-	const {bem}=Catpow.util;
 	const classes=bem('CP-SelectThemeColor');
 	
 	const proxy=useMemo(()=>CP.colorClassProxy(props.selected),[props.selected]);
