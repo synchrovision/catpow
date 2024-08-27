@@ -239,8 +239,12 @@ class blocks{
 												$handles[]=$dep;
 											}
 										}
-										$data[$type]["blocks/{$block_name}/{$handler}.{$type}"][2]=array_merge(
-											$data[$type]["blocks/{$block_name}/{$handler}.{$type}"][2]??[],$handles
+										$register_handle="blocks/{$block_name}/{$handler}.{$type}";
+										if(empty($data[$type][$register_handle])){
+											$data[$type][$register_handle]=[$register_handle,null,self::$deps[$fname]??[]];
+										}
+										$data[$type][$register_handle][2]=array_merge(
+											$data[$type][$register_handle][2]??[],$handles
 										);
 									}
 								}
