@@ -1,4 +1,4 @@
-@import "config/style_config.scss";
+@import "admin_style_config.scss";
 @import url('https://fonts.googleapis.com/css?family=Staatliches&subset=latin-ext');
 
 @include define_color_classes;
@@ -550,6 +550,132 @@ del{
 					}
 				}
 
+			}
+		}
+	}
+}
+
+.has-clip-path{
+	$a:calc(150% - sqrt(var(--cp-clip-shape-amount,50)) * 10%);
+	$uy:calc(var(--cp-clip-shape-upper-height,40) * #{$sizeUnit});
+	$ux1:calc(50% - var(--cp-clip-shape-upper-width,40) * #{$sizeUnit} / 2);
+	$ux2:calc(50% + var(--cp-clip-shape-upper-width,40) * #{$sizeUnit} / 2);
+	$by:calc(100% - var(--cp-clip-shape-below-height,40) * #{$sizeUnit});
+	$bx1:calc(50% - var(--cp-clip-shape-below-width,40) * #{$sizeUnit} / 2);
+	$bx2:calc(50% + var(--cp-clip-shape-below-width,40) * #{$sizeUnit} / 2);
+	&.has-clip-shape-ellipse{
+		&.has-clip-shape-both{
+			clip-path: ellipse(#{$a} 50% at 50% 50%);	
+		}
+		&.has-clip-shape-upper{
+			clip-path: ellipse(#{$a} 100% at 50% 100%);
+		}
+		&.has-clip-shape-below{
+			clip-path: ellipse(#{$a} 100% at 50% 0%);
+		}
+	}
+	&.has-clip-shape-slope{
+		&.has-clip-shape-upper-none{
+			&.has-clip-shape-below-none{
+				clip-path:polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+			}
+			&.has-clip-shape-below-left{
+				clip-path:polygon(0% 0%, 100% 0%, 100% 100%, 0% #{$by});
+			}
+			&.has-clip-shape-below-right{
+				clip-path:polygon(0% 0%, 100% 0%, 100% #{$by}, 0% 100%);
+			}
+		}
+		&.has-clip-shape-upper-left{
+			&.has-clip-shape-below-none{
+				clip-path:polygon(0% #{$uy}, 100% 0%, 100% 100%, 0% 100%);
+			}
+			&.has-clip-shape-below-left{
+				clip-path:polygon(0% #{$uy}, 100% 0%, 100% 100%, 0% #{$by});
+			}
+			&.has-clip-shape-below-right{
+				clip-path:polygon(0% #{$uy}, 100% 0%, 100% #{$by}, 0% 100%);
+			}
+		}
+		&.has-clip-shape-upper-right{
+			&.has-clip-shape-below-none{
+				clip-path:polygon(0% 0%, 100% #{$uy}, 100% 100%, 0% 100%);
+			}
+			&.has-clip-shape-below-left{
+				clip-path:polygon(0% 0%, 100% #{$uy}, 100% 100%, 0% #{$by});
+			}
+			&.has-clip-shape-below-right{
+				clip-path:polygon(0% 0%, 100% #{$uy}, 100% #{$by}, 0% 100%);
+			}
+		}
+	}
+	&.has-clip-shape-arrow{
+		&.has-clip-shape-upper-none{
+			&.has-clip-shape-below-none{
+				clip-path:polygon(0% 0%, 100% 0%, 100% 100%, 100% 100%, 0% 100%);
+			}
+			&.has-clip-shape-below-in{
+				clip-path:polygon(0% 0%, 100% 0%, 100% 100%, 100% 100%, 50% #{$by}, 0% 100%);
+			}
+			&.has-clip-shape-below-out{
+				clip-path:polygon(0% 0%, 100% 0%, 100% 100%, 100% #{$by}, 50% 100%, 0% #{$by});
+			}
+		}
+		&.has-clip-shape-upper-in{
+			&.has-clip-shape-below-none{
+				clip-path:polygon(0% 0%, 50% #{$uy}, 100% 0%, 100% 100%, 100% 100%, 0% 100%);
+			}
+			&.has-clip-shape-below-in{
+				clip-path:polygon(0% 0%, 50% #{$uy}, 100% 0%, 100% 100%, 100% 100%, 50% #{$by}, 0% 100%);
+			}
+			&.has-clip-shape-below-out{
+				clip-path:polygon(0% 0%, 50% #{$uy}, 100% 0%, 100% 100%, 100% #{$by}, 50% 100%, 0% #{$by});
+			}
+		}
+		&.has-clip-shape-upper-out{
+			&.has-clip-shape-below-none{
+				clip-path:polygon(0% #{$uy}, 50% 0%, 100% #{$uy}, 100% 100%, 0% 100%);
+			}
+			&.has-clip-shape-below-in{
+				clip-path:polygon(0% #{$uy}, 50% 0%, 100% #{$uy}, 100% 100%, 50% #{$by}, 0% 100%);
+			}
+			&.has-clip-shape-below-out{
+				clip-path:polygon(0% #{$uy}, 50% 0%, 100% #{$uy}, 100% #{$by}, 50% 100%, 0% #{$by});
+			}
+		}
+	}
+	&.has-clip-shape-tail{
+		&.has-clip-shape-upper-none{
+			&.has-clip-shape-below-none{
+				clip-path:polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+			}
+			&.has-clip-shape-below-in{
+				clip-path:polygon(0% 0%, 100% 0%, 100% 100%, #{$bx2} 100%, 50% #{$by}, #{$bx1} 100%, 0% 100%);
+			}
+			&.has-clip-shape-below-out{
+				clip-path:polygon(0% 0%, 100% 0%, 100% #{$by}, #{$bx2} #{$by}, 50% 100%, #{$bx1} #{$by}, 0% #{$by});
+			}
+		}
+		&.has-clip-shape-upper-in{
+			&.has-clip-shape-below-none{
+				clip-path:polygon(0% 0%, #{$ux1} 0%, 50% #{$uy}, #{$ux2} 0%, 100% 0%, 100% 100%, 100% 100%, 0% 100%);
+			}
+			&.has-clip-shape-below-in{
+				clip-path:polygon(0% 0%, #{$ux1} 0%, 50% #{$uy}, #{$ux2} 0%, 100% 0%, 100% 100%, 100% 100%, #{$bx2} 100%, 50% #{$by}, #{$bx1} 100%, 0% 100%);
+			}
+			&.has-clip-shape-below-out{
+				clip-path:polygon(0% 0%, #{$ux1} 0%, 50% #{$uy}, #{$ux2} 0%, 100% 0%, 100% 100%, 100% #{$by}, #{$bx2} #{$by}, 50% 100%, #{$bx1} #{$by}, 0% #{$by});
+			}
+		}
+		&.has-clip-shape-upper-out{
+			&.has-clip-shape-below-none{
+				clip-path:polygon(0% #{$uy}, #{$ux1} #{$uy}, 50% 0%, #{$ux2} #{$uy}, 100% #{$uy}, 100% 100%, 0% 100%);
+			}
+			&.has-clip-shape-below-in{
+				clip-path:polygon(0% #{$uy}, #{$ux1} #{$uy}, 50% 0%, #{$ux2} #{$uy}, 100% #{$uy}, 100% 100%, #{$bx2} 100%, 50% #{$by}, #{$bx1} 100%, 0% 100%);
+			}
+			&.has-clip-shape-below-out{
+				clip-path:polygon(0% #{$uy}, #{$ux1} #{$uy}, 50% 0%, #{$ux2} #{$uy}, 100% #{$uy}, 100% #{$by}, #{$bx2} #{$by}, 50% 100%, #{$bx1} #{$by}, 0% #{$by});
 			}
 		}
 	}
