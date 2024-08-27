@@ -2,6 +2,7 @@ import * as esbuild from 'esbuild';
 import fs from 'fs';
 import path from 'path';
 import {transform } from '@svgr/core';
+import inlineImportPlugin from 'esbuild-plugin-inline-import';
 
 let pathResolver={
 	name:'pathResolver',
@@ -52,14 +53,20 @@ let svgAsJsx={
 		})
 	},
 }
+let inlineCssImporter=inlineImportPlugin({
+	filter:/css:/,
+	transform:async (contents,args)=>{
+		return contents;
+	}
+});
 
 
 await esbuild.build({
 	entryPoints:[process.argv[2]],
 	outfile:process.argv[3],
-	format:process.argv[3].substr(-4)==='.mjs'?'esm':'iife',
+	format:process.argv[3].slice(-4)==='.mjs'?'esm':'iife',
 	bundle:true,
 	jsxFactory:'wp.element.createElement',
 	jsxFragment:'wp.element.Fragment',
-	plugins:[pathResolver,svgAsJsx]
+	plugins:[inlineCssImporter,pathResolver,svgAsJsx]
 })
