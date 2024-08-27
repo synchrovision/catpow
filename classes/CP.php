@@ -648,6 +648,24 @@ class CP{
 			]
 		];
 	}
+	public static function use_element($name){
+		static $done=[];
+		if(isset($done[$name])){return false;}
+		if(current_user_can('edit_themes')){scss::compile('elements/'.$name.'/element/style');}
+		self::enqueue_script('elements/'.$name.'/index.js');
+		$done[$name]=1;
+	}
+	public static function get_element_deps($name){
+		static $cache=[];
+		if(isset($cache[$name])){return $cache[$name];}
+		if(current_user_can('edit_themes')){scss::compile('elements/'.$name.'/element/style');}
+		$deps=['js'=>[],'css'=>[]];
+		$js_handle='elements/'.$name.'/element.js';
+		if($js_url=self::get_file_url($js_handle,0773)){
+			$deps['js'][$js_handle]=[$js_handle,$js_url,[]];
+		}
+		return $cache[$name]=$deps;
+	}
 	
 	/*post*/
 	public static function get_post($path){
