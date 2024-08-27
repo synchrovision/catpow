@@ -77,6 +77,9 @@
         const classes = [];
         let i;
         for (i = 0; i < arguments.length; i++) {
+          if (!arguments[i]) {
+            continue;
+          }
           if (typeof arguments[i] === "string") {
             classes.push(arguments[i]);
             continue;
@@ -2814,7 +2817,37 @@
           width: { name: "width", type: "buttons", label: __2("\u5E45", "catpow"), values: { fullWidth: __2("\u30D5\u30EB", "catpow"), wideWidth: __2("\u30EF\u30A4\u30C9", "catpow"), regularWidth: __2("\u30EC\u30AE\u30E5\u30E9\u30FC", "catpow"), narrowWidth: __2("\u30CA\u30ED\u30FC", "catpow") } },
           size: { name: "size", type: "buttons", label: __2("\u30B5\u30A4\u30BA", "catpow"), values: { large: __2("\u5927", "catpow"), medium: __2("\u4E2D", "catpow"), small: __2("\u5C0F", "catpow") } },
           itemSize: { name: "itemSize", label: __2("\u30B5\u30A4\u30BA", "catpow"), vars: "vars", key: "--cp-item-size", input: "range", min: 100, max: 1200, step: 10 },
-          textColor: { name: "textColor", type: "buttons", label: __2("\u6587\u5B57\u8272", "catpow"), values: { revertTextColor: __2("\u901A\u5E38", "catpow"), invertTextColor: __2("\u53CD\u8EE2", "catpow") } }
+          textColor: { name: "textColor", type: "buttons", label: __2("\u6587\u5B57\u8272", "catpow"), values: { revertTextColor: __2("\u901A\u5E38", "catpow"), invertTextColor: __2("\u53CD\u8EE2", "catpow") } },
+          clipPath: wp.hooks.applyFilters("catpow.blocks.selectiveClassesPreset.clipPath", CP.finderProxy(
+            { name: "clipPath", label: __2("\u30AF\u30EA\u30C3\u30D7", "catpow"), values: "has-clip-path", sub: [
+              { name: "shape", label: __2("\u5F62\u72B6", "catpow"), type: "buttons", values: { "has-clip-shape-ellipse": __2("\u6955\u5186", "catpow"), "has-clip-shape-slope": __2("\u50BE\u659C", "catpow"), "has-clip-shape-arrow": __2("\u30A2\u30ED\u30FC", "catpow"), "has-clip-shape-tail": __2("\u30D5\u30AD\u30C0\u30B7", "catpow") }, sub: {
+                "has-clip-shape-ellipse": [
+                  { name: "direction", type: "buttons", values: { "has-clip-shape-both": __2("\u4E21\u65B9", "catpow"), "has-clip-shape-upper": __2("\u4E0A", "catpow"), "has-clip-shape-below": __2("\u4E0B", "catpow") } },
+                  { name: "amount", label: __2("\u91CF", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-amount", min: 1, max: 100 }
+                ],
+                "has-clip-shape-slope": [
+                  { name: "uppper", type: "buttons", values: { "has-clip-shape-upper-none": __2("\u306A\u3057", "catpow"), "has-clip-shape-upper-left": __2("\u5DE6", "catpow"), "has-clip-shape-upper-right": __2("\u53F3", "catpow") } },
+                  { name: "below", type: "buttons", values: { "has-clip-shape-below-none": __2("\u306A\u3057", "catpow"), "has-clip-shape-below-left": __2("\u5DE6", "catpow"), "has-clip-shape-below-right": __2("\u53F3", "catpow") } },
+                  { name: "upperHeight", label: __2("\u4E0A\u9AD8\u3055", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-upper-height", min: 8, max: 400 },
+                  { name: "belowHeight", label: __2("\u4E0B\u9AD8\u3055", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-below-height", min: 8, max: 400 }
+                ],
+                "has-clip-shape-arrow": [
+                  { name: "uppper", type: "buttons", values: { "has-clip-shape-upper-none": __2("\u306A\u3057", "catpow"), "has-clip-shape-upper-in": __2("\u5185", "catpow"), "has-clip-shape-upper-out": __2("\u5916", "catpow") } },
+                  { name: "below", type: "buttons", values: { "has-clip-shape-below-none": __2("\u306A\u3057", "catpow"), "has-clip-shape-below-in": __2("\u5185", "catpow"), "has-clip-shape-below-out": __2("\u5916", "catpow") } },
+                  { name: "upperHeight", label: __2("\u4E0A\u9AD8\u3055", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-upper-height", min: 8, max: 400 },
+                  { name: "belowHeight", label: __2("\u4E0B\u9AD8\u3055", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-below-height", min: 8, max: 400 }
+                ],
+                "has-clip-shape-tail": [
+                  { name: "uppper", type: "buttons", values: { "has-clip-shape-upper-none": __2("\u306A\u3057", "catpow"), "has-clip-shape-upper-in": __2("\u5185", "catpow"), "has-clip-shape-upper-out": __2("\u5916", "catpow") } },
+                  { name: "below", type: "buttons", values: { "has-clip-shape-below-none": __2("\u306A\u3057", "catpow"), "has-clip-shape-below-in": __2("\u5185", "catpow"), "has-clip-shape-below-out": __2("\u5916", "catpow") } },
+                  { name: "upperWidth", label: __2("\u4E0A\u5E45", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-upper-width", min: 8, max: 400 },
+                  { name: "upperHeight", label: __2("\u4E0A\u9AD8\u3055", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-upper-height", min: 8, max: 400 },
+                  { name: "belowWidth", label: __2("\u4E0B\u5E45", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-below-width", min: 8, max: 400 },
+                  { name: "belowHeight", label: __2("\u4E0B\u9AD8\u3055", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-below-height", min: 8, max: 400 }
+                ]
+              } }
+            ] }
+          ))
         };
         if (preset.hasOwnProperty(prm)) {
           prm = preset[prm];

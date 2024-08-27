@@ -83,7 +83,37 @@ CP.SelectClassPanel=(props)=>{
 				width:{name:'width',type:'buttons',label:__('幅','catpow'),values:{fullWidth:__('フル','catpow'),wideWidth:__('ワイド','catpow'),regularWidth:__('レギュラー','catpow'),narrowWidth:__('ナロー','catpow')}},
 				size:{name:'size',type:'buttons',label:__('サイズ','catpow'),values:{large:__('大','catpow'),medium:__('中','catpow'),small:__('小','catpow')}},
 				itemSize:{name:'itemSize',label:__('サイズ','catpow'),vars:'vars',key:'--cp-item-size',input:'range',min:100,max:1200,step:10},
-				textColor:{name:'textColor',type:'buttons',label:__('文字色','catpow'),values:{revertTextColor:__('通常','catpow'),invertTextColor:__('反転','catpow')}}
+				textColor:{name:'textColor',type:'buttons',label:__('文字色','catpow'),values:{revertTextColor:__('通常','catpow'),invertTextColor:__('反転','catpow')}},
+				clipPath:wp.hooks.applyFilters('catpow.blocks.selectiveClassesPreset.clipPath',CP.finderProxy(
+					{name:'clipPath',label:__('クリップ','catpow'),values:'has-clip-path',sub:[
+						{name:'shape',label:__('形状','catpow'),type:'buttons',values:{'has-clip-shape-ellipse':__('楕円','catpow'),'has-clip-shape-slope':__('傾斜','catpow'),'has-clip-shape-arrow':__('アロー','catpow'),'has-clip-shape-tail':__('フキダシ','catpow')},sub:{
+							'has-clip-shape-ellipse':[
+								{name:'direction',type:'buttons',values:{'has-clip-shape-both':__('両方','catpow'),'has-clip-shape-upper':__('上','catpow'),'has-clip-shape-below':__('下','catpow')}},
+								{name:'amount',label:__('量','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-amount',min:1,max:100}
+							],
+							'has-clip-shape-slope':[
+								{name:'uppper',type:'buttons',values:{'has-clip-shape-upper-none':__('なし','catpow'),'has-clip-shape-upper-left':__('左','catpow'),'has-clip-shape-upper-right':__('右','catpow')}},
+								{name:'below',type:'buttons',values:{'has-clip-shape-below-none':__('なし','catpow'),'has-clip-shape-below-left':__('左','catpow'),'has-clip-shape-below-right':__('右','catpow')}},
+								{name:'upperHeight',label:__('上高さ','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-upper-height',min:8,max:400},
+								{name:'belowHeight',label:__('下高さ','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-below-height',min:8,max:400}
+							],
+							'has-clip-shape-arrow':[
+								{name:'uppper',type:'buttons',values:{'has-clip-shape-upper-none':__('なし','catpow'),'has-clip-shape-upper-in':__('内','catpow'),'has-clip-shape-upper-out':__('外','catpow')}},
+								{name:'below',type:'buttons',values:{'has-clip-shape-below-none':__('なし','catpow'),'has-clip-shape-below-in':__('内','catpow'),'has-clip-shape-below-out':__('外','catpow')}},
+								{name:'upperHeight',label:__('上高さ','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-upper-height',min:8,max:400},
+								{name:'belowHeight',label:__('下高さ','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-below-height',min:8,max:400}
+							],
+							'has-clip-shape-tail':[
+								{name:'uppper',type:'buttons',values:{'has-clip-shape-upper-none':__('なし','catpow'),'has-clip-shape-upper-in':__('内','catpow'),'has-clip-shape-upper-out':__('外','catpow')}},
+								{name:'below',type:'buttons',values:{'has-clip-shape-below-none':__('なし','catpow'),'has-clip-shape-below-in':__('内','catpow'),'has-clip-shape-below-out':__('外','catpow')}},
+								{name:'upperWidth',label:__('上幅','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-upper-width',min:8,max:400},
+								{name:'upperHeight',label:__('上高さ','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-upper-height',min:8,max:400},
+								{name:'belowWidth',label:__('下幅','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-below-width',min:8,max:400},
+								{name:'belowHeight',label:__('下高さ','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-below-height',min:8,max:400}
+							],
+						}}
+					]}
+				))
 			};
 			if(preset.hasOwnProperty(prm)){prm=preset[prm];}
 		}
