@@ -31,7 +31,7 @@ wp.blocks.registerBlockType('catpow/section',{
 			imageMime,imageSrc,imageSrcset,imageAlt,imageCode,
 			backgroundImageSrc,backgroundImageCode,
 			headerPatternImageCss,patternImageCss,frameImageCss,borderImageCss,
-			iconSrc,iconAlt
+			iconSrc,iconAlt,vars
 		}=attributes;
 
 		const states=CP.wordsToFlags(classes);
@@ -93,6 +93,7 @@ wp.blocks.registerBlockType('catpow/section',{
 								{input:'image',label:__('アイコン','catpow'),keys:imageKeys.navIcon,size:'thumbnail'}
 							]},
 							{name:'decoration',label:__('デコレーション','catpow'),values:'hasDecoration'},
+							'clipPath',
 							{
 								name:'template',
 								label:__('テンプレート','catpow'),
@@ -236,7 +237,7 @@ wp.blocks.registerBlockType('catpow/section',{
 				<BlockControls>
 					<CP.AlignClassToolbar set={setAttributes} attr={attributes}/>
 				</BlockControls>
-				<SectionTag id={anchor} className={classes} ref={setMainBlock}>
+				<SectionTag id={anchor} className={classes} ref={setMainBlock} style={vars}>
 					{states.hasImage && 
 						<div className="image">
 							{(states.isTemplate && imageCode)?(
@@ -384,7 +385,7 @@ wp.blocks.registerBlockType('catpow/section',{
 			imageSrc,imageSrcset,imageAlt,imageCode,
 			backgroundImageSrc,backgroundImageCode,
 			headerPatternImageCss,patternImageCss,frameImageCss,borderImageCss,
-			iconSrc,iconAlt
+			iconSrc,iconAlt,vars
 		}=attributes;
 
 		var level=CP.getNumberClass({attr:attributes},'level');
@@ -393,7 +394,7 @@ wp.blocks.registerBlockType('catpow/section',{
 		const {devices,imageKeys,imageSizes}=CP.config.section;
 
 		return (
-			<SectionTag id={anchor} className={classes} data-icon={navIcon}>
+			<SectionTag id={anchor} className={classes} data-icon={navIcon} style={vars}>
 				{states.hasImage && 
 					<div className="image">
 						{(states.isTemplate && imageCode)?(

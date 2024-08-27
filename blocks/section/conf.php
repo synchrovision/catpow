@@ -7,6 +7,7 @@ $attributes=[
 	'color'=>['type'=>'string','default'=>"0"],
 	'classes'=>['source'=>'attribute','selector'=>'.wp-block-catpow-section','attribute'=>'class','default'=>'wp-block-catpow-section article level3 center catch'],
 	'navIcon'=>['source'=>'attribute','selector'=>'.wp-block-catpow-section','attribute'=>'data-icon'],
+	'vars'=>['type'=>'object','default'=>['--cp-clip-shape-amount'=>'40','--cp-clip-shape-upper-width'=>'40','--cp-clip-shape-upper-height'=>'40','--cp-clip-shape-below-width'=>'40','--cp-clip-shape-below-height'=>'40']],
 
 	'SectionTag'=>['type'=>'string','default'=>'section'],
 	'HeadingTag'=>['type'=>'string','default'=>'h2'],

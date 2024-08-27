@@ -51,7 +51,8 @@
         frameImageCss,
         borderImageCss,
         iconSrc,
-        iconAlt
+        iconAlt,
+        vars
       } = attributes;
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys, imageSizes } = CP.config.section;
@@ -114,6 +115,7 @@
                   { input: "image", label: __("\u30A2\u30A4\u30B3\u30F3", "catpow"), keys: imageKeys2.navIcon, size: "thumbnail" }
                 ] },
                 { name: "decoration", label: __("\u30C7\u30B3\u30EC\u30FC\u30B7\u30E7\u30F3", "catpow"), values: "hasDecoration" },
+                "clipPath",
                 {
                   name: "template",
                   label: __("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
@@ -251,7 +253,7 @@
         return selectiveClasses2;
       }, []);
       var level = CP.getNumberClass({ attr: attributes }, "level");
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })), /* @__PURE__ */ wp.element.createElement(SectionTag, { id: anchor, className: classes, ref: setMainBlock }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && imageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: imageCode }) : /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })), /* @__PURE__ */ wp.element.createElement(SectionTag, { id: anchor, className: classes, ref: setMainBlock, style: vars }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && imageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: imageCode }) : /* @__PURE__ */ wp.element.createElement(
         CP.SelectResponsiveImage,
         {
           attr: attributes,
@@ -352,12 +354,13 @@
         frameImageCss,
         borderImageCss,
         iconSrc,
-        iconAlt
+        iconAlt,
+        vars
       } = attributes;
       var level = CP.getNumberClass({ attr: attributes }, "level");
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys, imageSizes } = CP.config.section;
-      return /* @__PURE__ */ wp.element.createElement(SectionTag, { id: anchor, className: classes, "data-icon": navIcon }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && imageCode ? imageCode : /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(SectionTag, { id: anchor, className: classes, "data-icon": navIcon, style: vars }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, states.isTemplate && imageCode ? imageCode : /* @__PURE__ */ wp.element.createElement(
         CP.ResponsiveImage,
         {
           attr: attributes,
