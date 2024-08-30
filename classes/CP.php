@@ -446,6 +446,12 @@ class CP{
 					$deps[]='components/'.$useComponent.'/component.js';
 				}
 			}
+			if(!empty($useElements)){
+				foreach($useElements as $useElement){
+					self::use_element($useElement);
+					$deps[]='elements/'.$useElement.'/element.js';
+				}
+			}
 			if(!empty($useStores)){
 				foreach($useStores as $useStore){
 					self::use_store($useStore);
@@ -489,6 +495,12 @@ class CP{
 					$deps[]='components/'.$useComponent.'/component.js';
 				}
 			}
+			if(!empty($useElements)){
+				foreach($useElements as $useElement){
+					self::use_element($useElement);
+					$deps[]='elements/'.$useElement.'/element.js';
+				}
+			}
 			if(!empty($useStores)){
 				foreach($useStores as $useStore){
 					self::use_store($useStore);
@@ -526,6 +538,12 @@ class CP{
 				foreach($useComponents as $useComponent){
 					self::use_component($useComponent);
 					$deps[]='components/'.$useComponent.'/component.js';
+				}
+			}
+			if(!empty($useElements)){
+				foreach($useElements as $useElement){
+					self::use_element($useElement);
+					$deps[]='elements/'.$useElement.'/element.js';
 				}
 			}
 			if(!empty($useStores)){
@@ -596,6 +614,11 @@ class CP{
 				$deps['js']=array_merge($deps['js'],$sub_deps['js']);
 				$deps['css']=array_merge($deps['css'],$sub_deps['css']);
 			}
+			if(!empty($useElements)){
+				$sub_deps=self::get_elements_deps($useElements);
+				$deps['js']=array_merge($deps['js'],$sub_deps['js']);
+				$deps['css']=array_merge($deps['css'],$sub_deps['css']);
+			}
 			if(!empty($useStores)){
 				foreach($useStores as $useStore){
 					$sub_deps=self::get_store_deps($useStore);
@@ -654,6 +677,15 @@ class CP{
 		if(current_user_can('edit_themes')){scss::compile('elements/'.$name.'/element/style');}
 		self::enqueue_script('elements/'.$name.'/index.js');
 		$done[$name]=1;
+	}
+	public static function get_elements_deps($names){
+		$deps=['js'=>[],'css'=>[]];
+		foreach((array)$names as $name){
+			$sub_deps=self::get_element_deps($name);
+			$deps['js']=array_merge($deps['js'],$sub_deps['js']);
+			$deps['css']=array_merge($deps['css'],$sub_deps['css']);
+		}
+		return $deps;
 	}
 	public static function get_element_deps($name){
 		static $cache=[];
