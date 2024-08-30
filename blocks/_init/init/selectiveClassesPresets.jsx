@@ -1,4 +1,5 @@
 ﻿import {CP} from './CP.jsx';
+const {__}=wp.i18n;
 
 export const selectiveClassesPresets={
 	customColorVars:{name:'customColorVars',input:'customColorVars',label:__('カスタムカラー','catpow'),vars:'customColorVars'},
