@@ -600,6 +600,39 @@
   transform: translateY(0rem);
   pointer-events: auto;
 }
+.CP-DataSetInput-row {
+  display: block;
+  position: relative;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+}
+.CP-DataSetInput-row-button {
+  display: block;
+  position: relative;
+  height: 1.25rem;
+  border-radius: 0.5rem;
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.25);
+}
+.CP-DataSetInput-row-button.is-button-append::before, .CP-DataSetInput-row-button.is-button-append::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  margin: auto;
+  width: 1rem;
+  height: 0.125rem;
+  background-color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+}
+.CP-DataSetInput-row-button.is-button-append::after {
+  transform: -webkit- rotateZ(90deg);
+  transform: rotateZ(90deg);
+}
 .selectColor {
   width: 13.75rem;
   list-style: none;

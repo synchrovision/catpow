@@ -426,6 +426,23 @@ CP.SelectClassPanel=(props)=>{
 						);
 						break;
 					}
+					case 'dataset':{
+						if(prm.label){
+							rtn.push(<h5>{prm.label}</h5>);
+						}
+						rtn.push(
+							<CP.DataSetInput
+								param={prm}
+								value={item[prm.key]}
+								onChange={(val)=>{
+									if(prm.filter){val=prm.filter(val,states,props);}
+									save({[prm.key]:val});
+									if(prm.effect){prm.effect(val,states,props);}
+								}}
+							/>
+						);
+						break;
+					}
 					case 'image':{
 						if(prm.label){
 							rtn.push(<h5>{prm.label}</h5>);

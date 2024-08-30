@@ -364,6 +364,33 @@ $colors:(
 		}
 		
 	}
+	&-DataSetInput{
+		&-row{
+			@include bnd((d:b,p:r,mg:8,pd:8));
+			@include bdr((r:8));
+			@include shd((b:1));
+			&-items{
+				&-item{
+					
+				}	
+			}
+			&-button{
+				@include bnd((d:b,p:r,h:20));
+				@include bdr((r:8));
+				@include bg((c:t 1 .25));
+				&.is-button-append{
+					&::before,&::after{
+						content:'';
+						@include bnd((d:b,p:a,i:0,mg:a,w:16,h:2));
+						@include bg((c:i));
+					}
+					&::after{
+						@include trn((r:90deg));
+					}
+				}
+			}
+		}
+	}
 }
 .selectColor{
 	@include bnd((w:220));
