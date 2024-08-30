@@ -26,8 +26,10 @@ class components{
 				$component_config['schema']??[]
 			);
 		}
-		$config['defaultProps']=self::get_default_props_from_schema($config['schema'],$params);
-		$config['useEditors']=array_keys(get_object_vars(self::get_required_editor_flags($config['schema'])));
+		if(!empty($config['schema'])){
+			$config['defaultProps']=self::get_default_props_from_schema($config['schema'],$params);
+			$config['useEditors']=array_keys(get_object_vars(self::get_required_editor_flags($config['schema'])));
+		}
 		return $config;
 	}
 	private static function get_required_editor_flags($schema,$flags=null){
