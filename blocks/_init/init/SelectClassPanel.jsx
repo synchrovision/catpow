@@ -1,4 +1,5 @@
 ﻿import {CP} from './CP.jsx';
+import {selectiveClassesPresets} from './selectiveClassesPresets.jsx';
 
 CP.SelectClassPanelContext=wp.element.createContext({});
 
@@ -46,76 +47,7 @@ CP.SelectClassPanel=(props)=>{
 	const SelectClass=useCallback(({prm})=>{
 		const {props,item,states,save,saveClasses,saveCss}=useContext(CP.SelectClassPanelContext);
 		if(typeof prm ==='string'){
-			const preset={
-				customColorVars:{name:'customColorVars',input:'customColorVars',label:__('カスタムカラー','catpow'),vars:'customColorVars'},
-				isTemplate:{
-					name:'template',
-					input:'bool',
-					key:'isTemplate',
-					label:__('テンプレート','catpow'),
-					sub:[
-						{name:'loop',input:'bool',label:__('ループ','catpow'),key:'doLoop',sub:[
-							{name:'contentPath',label:'content path',input:'text',key:'content_path'},
-							{name:'query',label:'query',input:'textarea',key:'query'},
-							{name:'loopCount',label:__('プレビューループ数','catpow'),input:'range',key:'loopCount',min:1,max:16}
-						]}
-					]
-				},
-				backgroundImage:{name:'backgroundImage',label:__('背景画像','catpow'),values:'hasBackgroundImage',sub:[
-					{name:'blendmode',label:__('モード','catpow'),vars:'vars',key:'--cp-image-blendmode',input:'blendmode'},
-					{name:'opacity',label:__('不透明度','catpow'),vars:'vars',key:'--cp-image-opacity',input:'range',min:0,max:1,step:0.1}
-				 ]},
-				textAlign:{name:'textAlign',type:'buttons',label:__('テキスト揃え','catpow'),values:{
-					'has-text-align-left':__('左揃え','catpow'),
-					'has-text-align-center':__('中央','catpow'),
-					'has-text-align-right':__('右揃え','catpow'),
-				}},
-				verticalAlign:{name:'verticalAlign',type:'buttons',label:__('垂直方向揃え','catpow'),values:{
-					'has-vertical-align-top':__('上揃え','catpow'),
-					'has-vertical-align-middle':__('中央','catpow'),
-					'has-vertical-align-bottom':__('下揃え','catpow'),
-				}},
-				fontSize:{name:'size',type:'buttons',label:__('文字サイズ','catpow'),values:{
-					'has-font-size-large':__('大','catpow'),
-					'has-font-size-middle':__('中','catpow'),
-					'has-font-size-small':__('小','catpow')
-				}},
-				width:{name:'width',type:'buttons',label:__('幅','catpow'),values:{fullWidth:__('フル','catpow'),wideWidth:__('ワイド','catpow'),regularWidth:__('レギュラー','catpow'),narrowWidth:__('ナロー','catpow')}},
-				size:{name:'size',type:'buttons',label:__('サイズ','catpow'),values:{large:__('大','catpow'),medium:__('中','catpow'),small:__('小','catpow')}},
-				itemSize:{name:'itemSize',label:__('サイズ','catpow'),vars:'vars',key:'--cp-item-size',input:'range',min:100,max:1200,step:10},
-				textColor:{name:'textColor',type:'buttons',label:__('文字色','catpow'),values:{revertTextColor:__('通常','catpow'),invertTextColor:__('反転','catpow')}},
-				clipPath:wp.hooks.applyFilters('catpow.blocks.selectiveClassesPreset.clipPath',CP.finderProxy(
-					{name:'clipPath',label:__('クリップ','catpow'),values:'has-clip-path',sub:[
-						{name:'shape',label:__('形状','catpow'),type:'buttons',values:{'has-clip-shape-ellipse':__('楕円','catpow'),'has-clip-shape-slope':__('傾斜','catpow'),'has-clip-shape-arrow':__('アロー','catpow'),'has-clip-shape-tail':__('フキダシ','catpow')},sub:{
-							'has-clip-shape-ellipse':[
-								{name:'direction',type:'buttons',values:{'has-clip-shape-both':__('両方','catpow'),'has-clip-shape-upper':__('上','catpow'),'has-clip-shape-below':__('下','catpow')}},
-								{name:'amount',label:__('量','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-amount',min:1,max:100}
-							],
-							'has-clip-shape-slope':[
-								{name:'uppper',type:'buttons',values:{'has-clip-shape-upper-none':__('なし','catpow'),'has-clip-shape-upper-left':__('左','catpow'),'has-clip-shape-upper-right':__('右','catpow')}},
-								{name:'below',type:'buttons',values:{'has-clip-shape-below-none':__('なし','catpow'),'has-clip-shape-below-left':__('左','catpow'),'has-clip-shape-below-right':__('右','catpow')}},
-								{name:'upperHeight',label:__('上高さ','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-upper-height',min:8,max:400},
-								{name:'belowHeight',label:__('下高さ','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-below-height',min:8,max:400}
-							],
-							'has-clip-shape-arrow':[
-								{name:'uppper',type:'buttons',values:{'has-clip-shape-upper-none':__('なし','catpow'),'has-clip-shape-upper-in':__('内','catpow'),'has-clip-shape-upper-out':__('外','catpow')}},
-								{name:'below',type:'buttons',values:{'has-clip-shape-below-none':__('なし','catpow'),'has-clip-shape-below-in':__('内','catpow'),'has-clip-shape-below-out':__('外','catpow')}},
-								{name:'upperHeight',label:__('上高さ','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-upper-height',min:8,max:400},
-								{name:'belowHeight',label:__('下高さ','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-below-height',min:8,max:400}
-							],
-							'has-clip-shape-tail':[
-								{name:'uppper',type:'buttons',values:{'has-clip-shape-upper-none':__('なし','catpow'),'has-clip-shape-upper-in':__('内','catpow'),'has-clip-shape-upper-out':__('外','catpow')}},
-								{name:'below',type:'buttons',values:{'has-clip-shape-below-none':__('なし','catpow'),'has-clip-shape-below-in':__('内','catpow'),'has-clip-shape-below-out':__('外','catpow')}},
-								{name:'upperWidth',label:__('上幅','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-upper-width',min:8,max:400},
-								{name:'upperHeight',label:__('上高さ','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-upper-height',min:8,max:400},
-								{name:'belowWidth',label:__('下幅','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-below-width',min:8,max:400},
-								{name:'belowHeight',label:__('下高さ','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-below-height',min:8,max:400}
-							],
-						}}
-					]}
-				))
-			};
-			if(preset.hasOwnProperty(prm)){prm=preset[prm];}
+			if(selectiveClassesPresets.hasOwnProperty(prm)){prm=selectiveClassesPresets[prm];}
 		}
 		if(prm.hasOwnProperty('cond')){
 			if(prm.cond===false){return false;}
@@ -483,6 +415,23 @@ CP.SelectClassPanel=(props)=>{
 					case 'textarea':{
 						rtn.push(
 							<CP.DynamicInput
+								param={prm}
+								value={item[prm.key]}
+								onChange={(val)=>{
+									if(prm.filter){val=prm.filter(val,states,props);}
+									save({[prm.key]:val});
+									if(prm.effect){prm.effect(val,states,props);}
+								}}
+							/>
+						);
+						break;
+					}
+					case 'dataset':{
+						if(prm.label){
+							rtn.push(<h5>{prm.label}</h5>);
+						}
+						rtn.push(
+							<CP.DataSetInput
 								param={prm}
 								value={item[prm.key]}
 								onChange={(val)=>{

@@ -353,14 +353,14 @@
       CP.selectNextItem(tag);
     },
     upItem: (props) => {
-      var { tag, items: items2, index } = props;
+      var { items: items2, index } = props;
       if (!items2[index - 1])
         return false;
       items2.splice(index - 1, 2, items2[index], items2[index - 1]);
       CP.saveItem(props);
     },
     downItem: (props) => {
-      var { tag, items: items2, index } = props;
+      var { items: items2, index } = props;
       if (!items2[index + 1])
         return false;
       items2.splice(index, 2, items2[index + 1], items2[index]);
@@ -2652,6 +2652,60 @@
     }
   };
 
+  // ../blocks/_init/init/DataSetInput.jsx
+  CP.DataSetInput = (props) => {
+    const { useMemo, useCallback } = wp.element;
+    const { param, value: dataSet = [], onChange } = props;
+    const classes = bem("CP-DataSetInput");
+    const appendData = useCallback(() => {
+      const data = {};
+      Object.keys(param.items).forEach((key) => {
+        const item = param.items[key];
+        if (item.hasOwnProperty("default")) {
+          data[key] = item.default;
+        } else {
+          data[key] = null;
+        }
+      });
+      dataSet.push(data);
+      onChange(dataSet.slice());
+    }, [param.items, dataSet, onChange]);
+    return /* @__PURE__ */ wp.element.createElement("ul", { className: classes() }, dataSet && dataSet.map((data, index) => {
+      const dataProps = {
+        tag: "li",
+        set: ({ dataSet: dataSet2 }) => {
+          onChange(dataSet2);
+        },
+        items: dataSet,
+        itemsKey: "dataset",
+        index
+      };
+      return /* @__PURE__ */ wp.element.createElement("li", { className: classes.row(), key: index }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes.row.items() }, Object.keys(param.items).map((key) => {
+        return /* @__PURE__ */ wp.element.createElement("li", { className: classes.row.items.item(), key }, /* @__PURE__ */ wp.element.createElement(
+          CP.DynamicInput,
+          {
+            param: param.items[key],
+            value: data[key],
+            onChange: (value) => {
+              data[key] = value;
+              onChange(dataSet.slice());
+            }
+          }
+        ));
+      })), /* @__PURE__ */ wp.element.createElement(
+        CP.ItemControl,
+        {
+          controls: {
+            "delete": (e) => CP.deleteItem(dataProps),
+            "clone": (e) => CP.cloneItem(dataProps),
+            "up": (e) => CP.upItem(dataProps),
+            "down": (e) => CP.downItem(dataProps)
+          }
+        }
+      ));
+    }), /* @__PURE__ */ wp.element.createElement("li", { className: classes.row() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.row.button("is-button-append"), onClick: appendData })));
+  };
+
   // ../blocks/_init/init/Item.jsx
   CP.Item = (props) => {
     const { tag, items: items2, itemsKey, index, indexKey = "currentItemIndex", set, attr, triggerClasses, children } = props;
@@ -2734,11 +2788,84 @@
     return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u64CD\u4F5C", initialOpen: false, icon: "info" }, /* @__PURE__ */ wp.element.createElement("table", null, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + S"), /* @__PURE__ */ wp.element.createElement("td", null, "\u4FDD\u5B58")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + D"), /* @__PURE__ */ wp.element.createElement("td", null, "\u8907\u88FD")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + delete"), /* @__PURE__ */ wp.element.createElement("td", null, "\u524A\u9664")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + \u2191"), /* @__PURE__ */ wp.element.createElement("td", null, "\u524D\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + \u2193"), /* @__PURE__ */ wp.element.createElement("td", null, "\u6B21\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048")))));
   };
 
+  // ../blocks/_init/init/selectiveClassesPresets.jsx
+  var { __: __2 } = wp.i18n;
+  var selectiveClassesPresets = {
+    customColorVars: { name: "customColorVars", input: "customColorVars", label: __2("\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", "catpow"), vars: "customColorVars" },
+    isTemplate: {
+      name: "template",
+      input: "bool",
+      key: "isTemplate",
+      label: __2("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
+      sub: [
+        { name: "loop", input: "bool", label: __2("\u30EB\u30FC\u30D7", "catpow"), key: "doLoop", sub: [
+          { name: "contentPath", label: "content path", input: "text", key: "content_path" },
+          { name: "query", label: "query", input: "textarea", key: "query" },
+          { name: "loopCount", label: __2("\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", "catpow"), input: "range", key: "loopCount", min: 1, max: 16 }
+        ] }
+      ]
+    },
+    backgroundImage: { name: "backgroundImage", label: __2("\u80CC\u666F\u753B\u50CF", "catpow"), values: "hasBackgroundImage", sub: [
+      { name: "blendmode", label: __2("\u30E2\u30FC\u30C9", "catpow"), vars: "vars", key: "--cp-image-blendmode", input: "blendmode" },
+      { name: "opacity", label: __2("\u4E0D\u900F\u660E\u5EA6", "catpow"), vars: "vars", key: "--cp-image-opacity", input: "range", min: 0, max: 1, step: 0.1 }
+    ] },
+    textAlign: { name: "textAlign", type: "buttons", label: __2("\u30C6\u30AD\u30B9\u30C8\u63C3\u3048", "catpow"), values: {
+      "has-text-align-left": __2("\u5DE6\u63C3\u3048", "catpow"),
+      "has-text-align-center": __2("\u4E2D\u592E", "catpow"),
+      "has-text-align-right": __2("\u53F3\u63C3\u3048", "catpow")
+    } },
+    verticalAlign: { name: "verticalAlign", type: "buttons", label: __2("\u5782\u76F4\u65B9\u5411\u63C3\u3048", "catpow"), values: {
+      "has-vertical-align-top": __2("\u4E0A\u63C3\u3048", "catpow"),
+      "has-vertical-align-middle": __2("\u4E2D\u592E", "catpow"),
+      "has-vertical-align-bottom": __2("\u4E0B\u63C3\u3048", "catpow")
+    } },
+    fontSize: { name: "size", type: "buttons", label: __2("\u6587\u5B57\u30B5\u30A4\u30BA", "catpow"), values: {
+      "has-font-size-large": __2("\u5927", "catpow"),
+      "has-font-size-middle": __2("\u4E2D", "catpow"),
+      "has-font-size-small": __2("\u5C0F", "catpow")
+    } },
+    width: { name: "width", type: "buttons", label: __2("\u5E45", "catpow"), values: { fullWidth: __2("\u30D5\u30EB", "catpow"), wideWidth: __2("\u30EF\u30A4\u30C9", "catpow"), regularWidth: __2("\u30EC\u30AE\u30E5\u30E9\u30FC", "catpow"), narrowWidth: __2("\u30CA\u30ED\u30FC", "catpow") } },
+    size: { name: "size", type: "buttons", label: __2("\u30B5\u30A4\u30BA", "catpow"), values: { large: __2("\u5927", "catpow"), medium: __2("\u4E2D", "catpow"), small: __2("\u5C0F", "catpow") } },
+    itemSize: { name: "itemSize", label: __2("\u30B5\u30A4\u30BA", "catpow"), vars: "vars", key: "--cp-item-size", input: "range", min: 100, max: 1200, step: 10 },
+    textColor: { name: "textColor", type: "buttons", label: __2("\u6587\u5B57\u8272", "catpow"), values: { revertTextColor: __2("\u901A\u5E38", "catpow"), invertTextColor: __2("\u53CD\u8EE2", "catpow") } },
+    clipPath: { name: "clipPath", label: __2("\u30AF\u30EA\u30C3\u30D7", "catpow"), values: "has-clip-path", sub: [
+      { name: "shape", label: __2("\u5F62\u72B6", "catpow"), type: "buttons", values: { "has-clip-shape-ellipse": __2("\u6955\u5186", "catpow"), "has-clip-shape-slope": __2("\u50BE\u659C", "catpow"), "has-clip-shape-arrow": __2("\u30A2\u30ED\u30FC", "catpow"), "has-clip-shape-tail": __2("\u30D5\u30AD\u30C0\u30B7", "catpow") }, sub: {
+        "has-clip-shape-ellipse": [
+          { name: "direction", type: "buttons", values: { "has-clip-shape-both": __2("\u4E21\u65B9", "catpow"), "has-clip-shape-upper": __2("\u4E0A", "catpow"), "has-clip-shape-below": __2("\u4E0B", "catpow") } },
+          { name: "amount", label: __2("\u91CF", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-amount", min: 1, max: 100 }
+        ],
+        "has-clip-shape-slope": [
+          { name: "uppper", type: "buttons", values: { "has-clip-shape-upper-none": __2("\u306A\u3057", "catpow"), "has-clip-shape-upper-left": __2("\u5DE6", "catpow"), "has-clip-shape-upper-right": __2("\u53F3", "catpow") } },
+          { name: "below", type: "buttons", values: { "has-clip-shape-below-none": __2("\u306A\u3057", "catpow"), "has-clip-shape-below-left": __2("\u5DE6", "catpow"), "has-clip-shape-below-right": __2("\u53F3", "catpow") } },
+          { name: "upperHeight", label: __2("\u4E0A\u9AD8\u3055", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-upper-height", min: 8, max: 400 },
+          { name: "belowHeight", label: __2("\u4E0B\u9AD8\u3055", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-below-height", min: 8, max: 400 }
+        ],
+        "has-clip-shape-arrow": [
+          { name: "uppper", type: "buttons", values: { "has-clip-shape-upper-none": __2("\u306A\u3057", "catpow"), "has-clip-shape-upper-in": __2("\u5185", "catpow"), "has-clip-shape-upper-out": __2("\u5916", "catpow") } },
+          { name: "below", type: "buttons", values: { "has-clip-shape-below-none": __2("\u306A\u3057", "catpow"), "has-clip-shape-below-in": __2("\u5185", "catpow"), "has-clip-shape-below-out": __2("\u5916", "catpow") } },
+          { name: "upperHeight", label: __2("\u4E0A\u9AD8\u3055", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-upper-height", min: 8, max: 400 },
+          { name: "belowHeight", label: __2("\u4E0B\u9AD8\u3055", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-below-height", min: 8, max: 400 }
+        ],
+        "has-clip-shape-tail": [
+          { name: "uppper", type: "buttons", values: { "has-clip-shape-upper-none": __2("\u306A\u3057", "catpow"), "has-clip-shape-upper-in": __2("\u5185", "catpow"), "has-clip-shape-upper-out": __2("\u5916", "catpow") } },
+          { name: "below", type: "buttons", values: { "has-clip-shape-below-none": __2("\u306A\u3057", "catpow"), "has-clip-shape-below-in": __2("\u5185", "catpow"), "has-clip-shape-below-out": __2("\u5916", "catpow") } },
+          { name: "upperWidth", label: __2("\u4E0A\u5E45", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-upper-width", min: 8, max: 400 },
+          { name: "upperHeight", label: __2("\u4E0A\u9AD8\u3055", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-upper-height", min: 8, max: 400 },
+          { name: "belowWidth", label: __2("\u4E0B\u5E45", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-below-width", min: 8, max: 400 },
+          { name: "belowHeight", label: __2("\u4E0B\u9AD8\u3055", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-below-height", min: 8, max: 400 }
+        ]
+      } }
+    ] }
+  };
+  wp.domReady(() => {
+    wp.hooks.applyFilters("catpow.blocks.selectiveClassesPresets", CP.finderProxy(selectiveClassesPresets));
+  });
+
   // ../blocks/_init/init/SelectClassPanel.jsx
   CP.SelectClassPanelContext = wp.element.createContext({});
   CP.SelectClassPanel = (props) => {
     const { Fragment, useMemo, useCallback, useContext, createElement: el } = wp.element;
-    const { __: __2 } = wp.i18n;
+    const { __: __3 } = wp.i18n;
     const { PanelBody, CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
     const { classKey = "classes", items: items2, index, subItemsKey, subIndex, set, attr, triggerClasses } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
     let { itemsKey = items2 ? "items" : null, itemClasses } = props;
@@ -2780,77 +2907,8 @@
     const SelectClass = useCallback(({ prm }) => {
       const { props: props2, item: item2, states: states2, save: save2, saveClasses: saveClasses2, saveCss: saveCss2 } = useContext(CP.SelectClassPanelContext);
       if (typeof prm === "string") {
-        const preset = {
-          customColorVars: { name: "customColorVars", input: "customColorVars", label: __2("\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", "catpow"), vars: "customColorVars" },
-          isTemplate: {
-            name: "template",
-            input: "bool",
-            key: "isTemplate",
-            label: __2("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
-            sub: [
-              { name: "loop", input: "bool", label: __2("\u30EB\u30FC\u30D7", "catpow"), key: "doLoop", sub: [
-                { name: "contentPath", label: "content path", input: "text", key: "content_path" },
-                { name: "query", label: "query", input: "textarea", key: "query" },
-                { name: "loopCount", label: __2("\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", "catpow"), input: "range", key: "loopCount", min: 1, max: 16 }
-              ] }
-            ]
-          },
-          backgroundImage: { name: "backgroundImage", label: __2("\u80CC\u666F\u753B\u50CF", "catpow"), values: "hasBackgroundImage", sub: [
-            { name: "blendmode", label: __2("\u30E2\u30FC\u30C9", "catpow"), vars: "vars", key: "--cp-image-blendmode", input: "blendmode" },
-            { name: "opacity", label: __2("\u4E0D\u900F\u660E\u5EA6", "catpow"), vars: "vars", key: "--cp-image-opacity", input: "range", min: 0, max: 1, step: 0.1 }
-          ] },
-          textAlign: { name: "textAlign", type: "buttons", label: __2("\u30C6\u30AD\u30B9\u30C8\u63C3\u3048", "catpow"), values: {
-            "has-text-align-left": __2("\u5DE6\u63C3\u3048", "catpow"),
-            "has-text-align-center": __2("\u4E2D\u592E", "catpow"),
-            "has-text-align-right": __2("\u53F3\u63C3\u3048", "catpow")
-          } },
-          verticalAlign: { name: "verticalAlign", type: "buttons", label: __2("\u5782\u76F4\u65B9\u5411\u63C3\u3048", "catpow"), values: {
-            "has-vertical-align-top": __2("\u4E0A\u63C3\u3048", "catpow"),
-            "has-vertical-align-middle": __2("\u4E2D\u592E", "catpow"),
-            "has-vertical-align-bottom": __2("\u4E0B\u63C3\u3048", "catpow")
-          } },
-          fontSize: { name: "size", type: "buttons", label: __2("\u6587\u5B57\u30B5\u30A4\u30BA", "catpow"), values: {
-            "has-font-size-large": __2("\u5927", "catpow"),
-            "has-font-size-middle": __2("\u4E2D", "catpow"),
-            "has-font-size-small": __2("\u5C0F", "catpow")
-          } },
-          width: { name: "width", type: "buttons", label: __2("\u5E45", "catpow"), values: { fullWidth: __2("\u30D5\u30EB", "catpow"), wideWidth: __2("\u30EF\u30A4\u30C9", "catpow"), regularWidth: __2("\u30EC\u30AE\u30E5\u30E9\u30FC", "catpow"), narrowWidth: __2("\u30CA\u30ED\u30FC", "catpow") } },
-          size: { name: "size", type: "buttons", label: __2("\u30B5\u30A4\u30BA", "catpow"), values: { large: __2("\u5927", "catpow"), medium: __2("\u4E2D", "catpow"), small: __2("\u5C0F", "catpow") } },
-          itemSize: { name: "itemSize", label: __2("\u30B5\u30A4\u30BA", "catpow"), vars: "vars", key: "--cp-item-size", input: "range", min: 100, max: 1200, step: 10 },
-          textColor: { name: "textColor", type: "buttons", label: __2("\u6587\u5B57\u8272", "catpow"), values: { revertTextColor: __2("\u901A\u5E38", "catpow"), invertTextColor: __2("\u53CD\u8EE2", "catpow") } },
-          clipPath: wp.hooks.applyFilters("catpow.blocks.selectiveClassesPreset.clipPath", CP.finderProxy(
-            { name: "clipPath", label: __2("\u30AF\u30EA\u30C3\u30D7", "catpow"), values: "has-clip-path", sub: [
-              { name: "shape", label: __2("\u5F62\u72B6", "catpow"), type: "buttons", values: { "has-clip-shape-ellipse": __2("\u6955\u5186", "catpow"), "has-clip-shape-slope": __2("\u50BE\u659C", "catpow"), "has-clip-shape-arrow": __2("\u30A2\u30ED\u30FC", "catpow"), "has-clip-shape-tail": __2("\u30D5\u30AD\u30C0\u30B7", "catpow") }, sub: {
-                "has-clip-shape-ellipse": [
-                  { name: "direction", type: "buttons", values: { "has-clip-shape-both": __2("\u4E21\u65B9", "catpow"), "has-clip-shape-upper": __2("\u4E0A", "catpow"), "has-clip-shape-below": __2("\u4E0B", "catpow") } },
-                  { name: "amount", label: __2("\u91CF", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-amount", min: 1, max: 100 }
-                ],
-                "has-clip-shape-slope": [
-                  { name: "uppper", type: "buttons", values: { "has-clip-shape-upper-none": __2("\u306A\u3057", "catpow"), "has-clip-shape-upper-left": __2("\u5DE6", "catpow"), "has-clip-shape-upper-right": __2("\u53F3", "catpow") } },
-                  { name: "below", type: "buttons", values: { "has-clip-shape-below-none": __2("\u306A\u3057", "catpow"), "has-clip-shape-below-left": __2("\u5DE6", "catpow"), "has-clip-shape-below-right": __2("\u53F3", "catpow") } },
-                  { name: "upperHeight", label: __2("\u4E0A\u9AD8\u3055", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-upper-height", min: 8, max: 400 },
-                  { name: "belowHeight", label: __2("\u4E0B\u9AD8\u3055", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-below-height", min: 8, max: 400 }
-                ],
-                "has-clip-shape-arrow": [
-                  { name: "uppper", type: "buttons", values: { "has-clip-shape-upper-none": __2("\u306A\u3057", "catpow"), "has-clip-shape-upper-in": __2("\u5185", "catpow"), "has-clip-shape-upper-out": __2("\u5916", "catpow") } },
-                  { name: "below", type: "buttons", values: { "has-clip-shape-below-none": __2("\u306A\u3057", "catpow"), "has-clip-shape-below-in": __2("\u5185", "catpow"), "has-clip-shape-below-out": __2("\u5916", "catpow") } },
-                  { name: "upperHeight", label: __2("\u4E0A\u9AD8\u3055", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-upper-height", min: 8, max: 400 },
-                  { name: "belowHeight", label: __2("\u4E0B\u9AD8\u3055", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-below-height", min: 8, max: 400 }
-                ],
-                "has-clip-shape-tail": [
-                  { name: "uppper", type: "buttons", values: { "has-clip-shape-upper-none": __2("\u306A\u3057", "catpow"), "has-clip-shape-upper-in": __2("\u5185", "catpow"), "has-clip-shape-upper-out": __2("\u5916", "catpow") } },
-                  { name: "below", type: "buttons", values: { "has-clip-shape-below-none": __2("\u306A\u3057", "catpow"), "has-clip-shape-below-in": __2("\u5185", "catpow"), "has-clip-shape-below-out": __2("\u5916", "catpow") } },
-                  { name: "upperWidth", label: __2("\u4E0A\u5E45", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-upper-width", min: 8, max: 400 },
-                  { name: "upperHeight", label: __2("\u4E0A\u9AD8\u3055", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-upper-height", min: 8, max: 400 },
-                  { name: "belowWidth", label: __2("\u4E0B\u5E45", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-below-width", min: 8, max: 400 },
-                  { name: "belowHeight", label: __2("\u4E0B\u9AD8\u3055", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-below-height", min: 8, max: 400 }
-                ]
-              } }
-            ] }
-          ))
-        };
-        if (preset.hasOwnProperty(prm)) {
-          prm = preset[prm];
+        if (selectiveClassesPresets.hasOwnProperty(prm)) {
+          prm = selectiveClassesPresets[prm];
         }
       }
       if (prm.hasOwnProperty("cond")) {
@@ -3268,7 +3326,7 @@
             /* @__PURE__ */ wp.element.createElement(
               CP.SelectColorClass,
               {
-                label: __2("\u8272", "catpow"),
+                label: __3("\u8272", "catpow"),
                 selected: states2,
                 onChange: (proxy) => {
                   if (!props2.items) {
@@ -3284,7 +3342,7 @@
             /* @__PURE__ */ wp.element.createElement(
               CP.SelectPatternClass,
               {
-                label: __2("\u30D1\u30BF\u30FC\u30F3", "catpow"),
+                label: __3("\u30D1\u30BF\u30FC\u30F3", "catpow"),
                 set: props2.set,
                 attr: props2.attr,
                 selected: Object.keys(states2).find((key) => /^pattern\d+/.test(key)),
@@ -3301,7 +3359,7 @@
             /* @__PURE__ */ wp.element.createElement(
               TextareaControl,
               {
-                label: __2("\u8868\u793A\u6761\u4EF6", "catpow"),
+                label: __3("\u8868\u793A\u6761\u4EF6", "catpow"),
                 value: item2["cond"],
                 onChange: (cond) => save2({ cond })
               }
@@ -3322,6 +3380,30 @@
               rtn.push(
                 /* @__PURE__ */ wp.element.createElement(
                   CP.DynamicInput,
+                  {
+                    param: prm,
+                    value: item2[prm.key],
+                    onChange: (val) => {
+                      if (prm.filter) {
+                        val = prm.filter(val, states2, props2);
+                      }
+                      save2({ [prm.key]: val });
+                      if (prm.effect) {
+                        prm.effect(val, states2, props2);
+                      }
+                    }
+                  }
+                )
+              );
+              break;
+            }
+            case "dataset": {
+              if (prm.label) {
+                rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
+              }
+              rtn.push(
+                /* @__PURE__ */ wp.element.createElement(
+                  CP.DataSetInput,
                   {
                     param: prm,
                     value: item2[prm.key],
@@ -3801,14 +3883,36 @@
 
   // ../blocks/_init/init/EditItemsTable.jsx
   CP.EditItemsTable = (props) => {
-    const { set, attr, itemsKey = "items", columns, isTemplate = false } = props;
+    const { set, attr, itemsKey = "items", isTemplate = false } = props;
+    const { useCallback } = wp.element;
     const { RichText } = wp.blockEditor;
     const classes = bem("CP-EditItemsTable");
     const items2 = attr[itemsKey] || [];
     const save = () => {
       set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
     };
-    return /* @__PURE__ */ wp.element.createElement("table", { className: classes() }, /* @__PURE__ */ wp.element.createElement("thead", { className: classes.thead() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.thead.tr() }, columns.map((col, c) => !("cond" in col) || col.cond ? /* @__PURE__ */ wp.element.createElement("th", { className: classes.thead.tr.th(), key: c }, col.label || col.key) : false), /* @__PURE__ */ wp.element.createElement("th", { className: classes.thead.tr.th() }))), /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.tbody() }, items2.map((item, index) => {
+    const getActiveColumns = useCallback((props2) => {
+      const columns2 = [];
+      props2.columns.forEach((col) => {
+        if (col.hasOwnProperty("cond")) {
+          if (typeof col.cond === "function") {
+            if (!col.cond(props2.attr)) {
+              return false;
+            }
+          } else if (!col.cond) {
+            return false;
+          }
+        }
+        if (col.type === "dynamic") {
+          columns2.push.apply(columns2, col.getColumns(props2.attr));
+        } else {
+          columns2.push(col);
+        }
+      });
+      return columns2;
+    }, []);
+    const columns = getActiveColumns(props);
+    return /* @__PURE__ */ wp.element.createElement("table", { className: classes() }, /* @__PURE__ */ wp.element.createElement("thead", { className: classes.thead() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.thead.tr() }, columns.map((col, c) => /* @__PURE__ */ wp.element.createElement("th", { className: classes.thead.tr.th(), key: c }, col.label || col.key)), /* @__PURE__ */ wp.element.createElement("th", { className: classes.thead.tr.th() }))), /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.tbody() }, items2.map((item, index) => {
       const propsForControl = { tag: "tr", set, itemsKey, items: items2, index };
       return /* @__PURE__ */ wp.element.createElement(
         "tr",
@@ -3820,11 +3924,8 @@
           key: index
         },
         columns.map((col, c) => {
-          if ("cond" in col && !col.cond) {
-            return false;
-          }
           switch (col.type) {
-            case "text":
+            case "text": {
               return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c }, /* @__PURE__ */ wp.element.createElement(
                 RichText,
                 {
@@ -3835,7 +3936,8 @@
                   }
                 }
               ));
-            case "image":
+            }
+            case "image": {
               return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c }, /* @__PURE__ */ wp.element.createElement(
                 CP.SelectResponsiveImage,
                 {
@@ -3847,7 +3949,8 @@
                   isTemplate
                 }
               ));
-            case "picture":
+            }
+            case "picture": {
               return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c }, /* @__PURE__ */ wp.element.createElement(
                 CP.SelectPictureSources,
                 {
@@ -3860,7 +3963,8 @@
                   isTemplate
                 }
               ));
-            case "items":
+            }
+            case "items": {
               col.columns.forEach((subCol) => {
                 if (subCol.keys) {
                   subCol.keys.subItems = col.key;
@@ -3878,6 +3982,7 @@
                   isTemplate
                 }
               ));
+            }
           }
         }),
         /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td() }, /* @__PURE__ */ wp.element.createElement(

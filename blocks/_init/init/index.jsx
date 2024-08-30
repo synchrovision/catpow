@@ -22,6 +22,7 @@ import './OutputIcon.jsx';
 import './StandardIcon.jsx';
 import './DataInputTable.jsx';
 import './DynamicInput.jsx';
+import './DataSetInput.jsx';
 import './Item.jsx';
 import './ItemControl.jsx';
 import './ItemControlInfoPanel.jsx';

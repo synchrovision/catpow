@@ -2,7 +2,8 @@ import {CP} from './CP.jsx';
 import {bem} from 'util';
 
 CP.EditItemsTable=(props)=>{
-	const {set,attr,itemsKey='items',columns,isTemplate=false}=props;
+	const {set,attr,itemsKey='items',isTemplate=false}=props;
+	const {useCallback}=wp.element;
 	const {RichText}=wp.blockEditor;
 	const classes=bem('CP-EditItemsTable')
 	
@@ -10,12 +11,31 @@ CP.EditItemsTable=(props)=>{
 	const save=()=>{
 		set({[itemsKey]:JSON.parse(JSON.stringify(items))});	
 	};
+	const getActiveColumns=useCallback((props)=>{
+		const columns=[];
+		props.columns.forEach((col)=>{
+			if(col.hasOwnProperty('cond')){
+				if(typeof col.cond === 'function'){
+					if(!col.cond(props.attr)){return false;}
+				}
+				else if(!col.cond){return false;}
+			}
+			if(col.type==='dynamic'){
+				columns.push.apply(columns,col.getColumns(props.attr));
+			}
+			else{
+				columns.push(col);
+			}
+		});
+		return columns;
+	},[]);
+	const columns=getActiveColumns(props);
 	
 	return (
 		<table className={classes()}>
 			<thead className={classes.thead()}>
 				<tr className={classes.thead.tr()}>
-					{columns.map((col,c)=>((!('cond' in col) || col.cond)?<th className={classes.thead.tr.th()} key={c}>{col.label || col.key}</th>:false))}
+					{columns.map((col,c)=><th className={classes.thead.tr.th()} key={c}>{col.label || col.key}</th>)}
 					<th className={classes.thead.tr.th()}></th>
 				</tr>
 			</thead>
@@ -31,9 +51,8 @@ CP.EditItemsTable=(props)=>{
 							key={index}
 						>
 							{columns.map((col,c)=>{
-								if('cond' in col && !col.cond){return false;}
 								switch(col.type){
-									case 'text':
+									case 'text':{
 										return (
 											<td className={classes.tbody.tr.td()} key={c}>
 												<RichText
@@ -45,7 +64,8 @@ CP.EditItemsTable=(props)=>{
 												/>
 											</td>
 										);
-									case 'image':
+									}
+									case 'image':{
 										return (
 											<td className={classes.tbody.tr.td()} key={c}>
 												<CP.SelectResponsiveImage
@@ -58,7 +78,8 @@ CP.EditItemsTable=(props)=>{
 												/>
 											</td>
 										);
-									case 'picture':
+									}
+									case 'picture':{
 										return (
 											<td className={classes.tbody.tr.td()} key={c}>
 												<CP.SelectPictureSources
@@ -72,7 +93,8 @@ CP.EditItemsTable=(props)=>{
 												/>
 											</td>
 										);
-									case 'items':
+									}
+									case 'items':{
 										col.columns.forEach((subCol)=>{
 											if(subCol.keys){subCol.keys.subItems=col.key;}
 										});
@@ -89,6 +111,7 @@ CP.EditItemsTable=(props)=>{
 												/>
 											</td>
 										);
+									}
 								}
 							})}
 							<td className={classes.tbody.tr.td()}>
