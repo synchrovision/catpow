@@ -221,7 +221,7 @@ class schedule{
 		if($matches[2]>12){$matches[2]-=12;$matches[1]++;}
 		$matches[0]=vsprintf('%04d-%02d-%02d %02d:%02d',array_slice($matches,1));
 		$last_matches=$matches;
-		return strtotime($matches[0]);
+		return self::strtotime($matches[0]);
 	}
 	public static function normalize_yearly_date_value($value,$base=null){
 		// m/dで表記された日付や省略された日付をm-dのフォーマットにする
@@ -270,6 +270,11 @@ class schedule{
 		$value=mb_convert_kana($value,'rn');
 		$value=str_replace('：',':',$value);
 		return vsprintf('%02d:%02d',explode(':',$value));
+	}
+	
+	public static function strtotime($date_str){
+		$date=new \DateTime($date_str,wp_timezone());
+		return $date->getTimestamp();
 	}
 }
 
