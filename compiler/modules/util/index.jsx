@@ -13,6 +13,7 @@ export * from './bem.jsx';
 export * from './calc.jsx';
 
 export * from './ready.jsx';
+export * from './lookup.jsx';
 
 export * from './slider.jsx';
 export * from './scrollspy.jsx';
