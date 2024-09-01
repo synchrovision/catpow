@@ -1,4 +1,4 @@
-export const lookup=(selector,callback)=>{
+export const observeSelector=(selector,callback)=>{
 	const observer=new MutationObserver((mutationList)=>{
 		mutationList.forEach((mutation)=>{
 			if(mutation.type==='childList'){

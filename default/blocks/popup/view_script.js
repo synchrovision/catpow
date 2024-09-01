@@ -2,8 +2,8 @@
   // modules/util/ready.jsx
   var ready = (cb) => document.readyState !== "loading" ? cb() : document.addEventListener("DOMContentLoaded", cb);
 
-  // modules/util/lookup.jsx
-  var lookup = (selector, callback) => {
+  // modules/util/observeSelector.jsx
+  var observeSelector = (selector, callback) => {
     const observer = new MutationObserver((mutationList) => {
       mutationList.forEach((mutation) => {
         if (mutation.type === "childList") {
@@ -60,7 +60,7 @@
       return Promise.all(blocks2.map((block) => closeBlock(block)));
     };
     blocks.forEach(function(block) {
-      lookup('a[href="#' + block.id + '"]', (el) => {
+      observeSelector('a[href="#' + block.id + '"]', (el) => {
         el.addEventListener("click", (e) => {
           e.preventDefault();
           closeBlocks(blocks).then(() => openBlock(block));

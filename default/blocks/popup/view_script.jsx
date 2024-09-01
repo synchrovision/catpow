@@ -1,4 +1,4 @@
-import {ready,lookup} from 'util';
+import {ready,observeSelector} from 'util';
 
 /* global Promise console */
 ready(()=>{
@@ -39,7 +39,7 @@ ready(()=>{
 		return Promise.all(blocks.map((block)=>closeBlock(block)));
 	};
 	blocks.forEach(function(block){
-		lookup('a[href="#'+block.id+'"]',(el)=>{
+		observeSelector('a[href="#'+block.id+'"]',(el)=>{
 			el.addEventListener('click',(e)=>{
 				e.preventDefault();
 				closeBlocks(blocks).then(()=>openBlock(block))
