@@ -1,0 +1,39 @@
+@import 'catpow.scss';
+@import 'admin_style_config.scss';
+
+.line-chart{
+	@include bnd((d:b,w:f,h:a));
+	&-grid{
+		@include bnd((p:r,z:1));
+		&-line{
+			@include svg((w:1,s:t 1 .25));
+		}
+	}
+	&-values{
+		@include bnd((p:r,z:2));
+		&-circle{
+			@include svg((f:b,s:m,w:2));
+		}
+		&-line{
+			@include svg((w:2,s:m 1 .5));
+		}
+	}
+	&-labels{
+		&-label{
+		}
+		&.is-column &{
+			&-label{
+				@include svg((ta:c,db:b));
+				@include txt((p:12,f:t));
+			}
+		}
+		&.is-row &{
+			&-label{
+				@include svg((ta:r,db:m));
+				@include txt((p:12,f:t));
+			}
+		}
+	}
+	&.has-labels{
+	}
+}
