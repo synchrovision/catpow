@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"textdomain": "catpow",
+	"name":"catpow/diagnosis",
+	"title": "🐾 Diagnosis",
+	"description": "設問形式の簡易な診断アプリ",
+	"icon": "id-alt",
+	"category": "catpow",
+	"supports": {
+		"anchor": true,
+		"className": false,
+		"color": {
+			"background": false,
+			"button": false,
+			"heading": false
+		},
+		"interactivity":true,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	}
+}

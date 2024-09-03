@@ -1,0 +1,31 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-comparetable{
+	$this:&;
+	@include bnd((w:f));
+	&-box{
+		@include bnd((pdb:60));
+		&__body{
+			
+		}
+	}
+	&-table{
+		&-thead,&-tbody{
+			&-tr{
+				&-th,&-td{
+					.itemControl{
+						@include bnd((w:70));
+						#{$this}:not(.do-transposition) &.columnControl,
+						#{$this}.do-transposition &.rowControl{
+							@include bnd((p:a,b:-20,l:0,r:0,mg:a));
+						}
+						#{$this}.do-transposition &.columnControl,
+						#{$this}:not(.do-transposition) &.rowControl{
+							@include bnd((p:a,t:0,r:-80));
+						}
+					}
+				}
+			}
+		}
+	}
+}
