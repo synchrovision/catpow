@@ -452,14 +452,14 @@ wp.richText.registerFormatType('catpow/custom',{
 			const state={};
 			if(!vars){return state;}
 			const map={
-				color:/(?<!\-)color:(#?\w+);/,
-				bgcolor:/background\-color:(#?\w+);/,
-				size:/font\-size:([\d\.]+)em;/,
-				weight:/font\-weight:(\d+);/
+				'color':'color',
+				'background-color':'bgcolor',
+				'font-size':'size',
+				'font-weight':'weight'
 			};
-			Object.keys(map).forEach((key)=>{
-				const m=vars.match(map[key]);
-				if(m){state[key]=m[1];}
+			vars.split(';').forEach((chunk)=>{
+				const [key,val]=chunk.split(':');
+				state[map[key]]=val;
 			});
 			return state;
 		},[]);
