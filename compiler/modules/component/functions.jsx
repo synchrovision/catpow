@@ -4,3 +4,6 @@ export const renderComponents=()=>{
 		wp.element.render(wp.element.createElement(window[el.dataset.component]),{...el.dataset});
 	});
 };
+export const nl2br=(text)=>{
+	return text.split(/(\n)/).map((line,index)=>line==="\n"?<br/>:line);
+};

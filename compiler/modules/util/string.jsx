@@ -1,6 +1,3 @@
-export const nl2br=(text)=>{
-	return text.split(/(\n)/).map((line,index)=>line==="\n"?<br/>:line);
-};
 export const wordsToFlags=(words)=>{
 	var rtn={};
 	if(undefined === words){return {};}
