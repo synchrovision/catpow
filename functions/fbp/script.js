@@ -167,3 +167,4 @@ window.Catpow.fbp={
 		
 	}
 }
+window.Catpow.eventProcessor.register('fbp',window.Catpow.fb);

@@ -52,7 +52,7 @@ add_action('cp_setup',function(){
 });
 
 add_action('init',function(){
-	cp::enqueue_script('functions/fbp/script.js');
+	cp::enqueue_script('functions/fbp/script.js',['catpow.eventProcessor']);
 });
 add_filter('cp_block_items_attributes_eventDispatcher',function($items,$args){
 	$items['query']['fbpEvent']=array_merge(["source"=>'attribute',"attribute"=>'data-fbp-event'],$args);

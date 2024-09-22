@@ -138,7 +138,7 @@ window.Catpow.ga={
 		var prm={};
 		if(data.category){prm.event_category=data.category;}
 		if(data.event_label){prm.event_label=data.event_label;}
-		if(data.currencyc){prm.currency=data.currency;}
+		if(data.currency){prm.currency=data.currency;}
 		if(data.value){prm.value=data.value;}
 		if(data.items){prm.items=data.items;}
 		if(data.custom){
@@ -149,3 +149,4 @@ window.Catpow.ga={
 		gtag('event',data.eventType,prm);
 	}
 }
+window.Catpow.eventProcessor.register('ga',window.Catpow.ga);
