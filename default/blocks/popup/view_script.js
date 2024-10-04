@@ -8,7 +8,9 @@
       mutationList.forEach((mutation) => {
         if (mutation.type === "childList") {
           mutation.addedNodes.forEach((node) => {
-            node.querySelectorAll(selector).forEach(callback);
+            if (node instanceof Element) {
+              node.querySelectorAll(selector).forEach(callback);
+            }
           });
         }
       });

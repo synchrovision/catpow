@@ -14,6 +14,7 @@ export * from './calc.jsx';
 
 export * from './ready.jsx';
 export * from './observeSelector.jsx';
+export * from './observeIntersection.jsx';
 
 export * from './slider.jsx';
 export * from './scrollspy.jsx';

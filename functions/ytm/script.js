@@ -1,5 +1,6 @@
 /* global ytag */
 window.Catpow = window.Catpow || {};
+
 window.Catpow.yss={
 	processerId:'yss',
 	guideURL:false,
@@ -39,6 +40,7 @@ window.Catpow.yss={
 		ytag({type:'yss_conversion',config});
 	}
 }
+window.Catpow.eventProcessor.register('yss',window.Catpow.yss);
 
 window.Catpow.yjad={
 	processerId:'yjad',
@@ -96,3 +98,4 @@ window.Catpow.yjad={
 		ytag({type:'yjad_conversion',config});
 	}
 }
+window.Catpow.eventProcessor.register('yjad',window.Catpow.yjad);

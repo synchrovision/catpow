@@ -1456,16 +1456,14 @@
           return state2;
         }
         const map = {
-          color: /(?<!\-)color:(#?\w+);/,
-          bgcolor: /background\-color:(#?\w+);/,
-          size: /font\-size:([\d\.]+)em;/,
-          weight: /font\-weight:(\d+);/
+          "color": "color",
+          "background-color": "bgcolor",
+          "font-size": "size",
+          "font-weight": "weight"
         };
-        Object.keys(map).forEach((key) => {
-          const m2 = vars.match(map[key]);
-          if (m2) {
-            state2[key] = m2[1];
-          }
+        vars.split(";").forEach((chunk) => {
+          const [key, val] = chunk.split(":");
+          state2[map[key]] = val;
         });
         return state2;
       }, []);
