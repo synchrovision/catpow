@@ -7,25 +7,29 @@ import inlineImportPlugin from 'esbuild-plugin-inline-import';
 let pathResolver={
 	name:'pathResolver',
 	setup(build) {
-		build.onResolve({filter: /^\w/},async(args)=>{
-			const result=await build.resolve('./'+args.path,{
-				kind:'import-statement',
-				resolveDir:'./modules',
-			});
-			if(result.errors.length>0){
-				return {errors:result.errors};
+		const externalModules = new Set(build.initialOptions.external || []);
+		build.onResolve({filter:/^@?\w/},async(args)=>{
+			if(args.path==='react' || args.path==='react-dom'){
+				return {
+					path: args.path,
+					namespace: 'react-global'
+				};
 			}
-			return {path:result.path};
+			if(externalModules.has(args.path)){return {path:args.path,external:true}};
+			for(const resolveDir of ['./node_modules','./modules']){
+				const result=await build.resolve('./'+args.path,{
+					kind:'import-statement',resolveDir
+				});
+				if(result.errors.length===0){return {path:result.path};}
+			}
 		});
-		build.onResolve({filter: /^@?\w/},async(args)=>{
-			const result=await build.resolve('./'+args.path,{
-				kind:'import-statement',
-				resolveDir:'./node_modules',
-			});
-			if(result.errors.length>0){
-				return {errors:result.errors};
+		build.onLoad({filter:/.*/,namespace:'react-global'}, async(args)=>{
+			if (args.path==='react' || args.path==='react-dom') {
+				return {
+					contents:'export default window.wp.element;',
+					loader:'js',
+				};
 			}
-			return {path:result.path};
 		});
 	},
 }
@@ -66,6 +70,14 @@ await esbuild.build({
 	outfile:process.argv[3],
 	format:process.argv[3].slice(-4)==='.mjs'?'esm':'iife',
 	bundle:true,
+	external:['react','react-dom'],
+	define:{
+		'React':'wp.element',
+		'React.createElement':'wp.element.createElement',
+		'React.Fragment':'wp.element.Fragment',
+		'ReactDOM':'wp.element',
+		'ReactDOM.render':'wp.element.render',
+	},
 	jsxFactory:'wp.element.createElement',
 	jsxFragment:'wp.element.Fragment',
 	plugins:[inlineCssImporter,pathResolver,svgAsJsx]
