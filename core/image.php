@@ -81,7 +81,4 @@ function get_picture($dir,$alt=false,$class=''){
 	uksort($srcs,function($a,$b){if($a==0)return 1;if($b==0)return -1;return $b-$a;});
 	return sprintf('<picture class="%s">%s</picture>',$class,implode('',$srcs));
 }
-function picture($dir,$alt=false,$class=''){
-	echo get_picture($dir,$alt,$class);
-}
 ?>
