@@ -1,4 +1,6 @@
 <?php
+namespace Catpow;
+
 function get_view_id(){
 	static $view_id;
 	if(empty($view_id)){

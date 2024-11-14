@@ -1,4 +1,5 @@
 <?php
+namespace Catpow;
 
 /*action*/
 add_action('user_register',function($id){

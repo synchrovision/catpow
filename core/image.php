@@ -1,4 +1,6 @@
 <?php
+namespace Catpow;
+
 /*画像*/
 function get_images($dir,$alt=false,$class=''){
 	$alt=$alt?:$dir;

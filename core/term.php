@@ -1,4 +1,6 @@
 <?php
+namespace Catpow;
+
 /*action*/
 add_action('create_term',function($id,$tt_id,$tax){
 	cp::get_template_part('term/'.$tax.'/action/create',false,['term_id'=>$id]);

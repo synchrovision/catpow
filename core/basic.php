@@ -1,4 +1,6 @@
 <?php
+namespace Catpow;
+
 /*補助関数*/
 function _a($check,$message){
 	if(false===$check)throw new Exception($message);

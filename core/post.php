@@ -1,4 +1,5 @@
 <?php
+namespace Catpow;
 
 /*action*/
 add_action('wp_insert_post',function($id,$post,$update){

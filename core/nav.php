@@ -1,4 +1,6 @@
 <?php
+namespace Catpow;
+
 add_theme_support('menus');
 /*カスタムメニュー*/
 add_action('init',function(){
