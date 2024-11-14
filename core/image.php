@@ -52,9 +52,6 @@ function get_embed_image($name,$alt=false,$class='',$x2=true){
 function images($dir,$alt=false,$class=''){
 	echo(implode(chr(10),get_images($dir,$alt,$class)));
 }
-function image($name,$alt=false,$class='',$x2=true){
-	echo(get_image($name,$alt,$class,$x2));
-}
 function embed_image($name,$alt=false,$class='',$x2=true){
 	echo(get_embed_image($name,$alt,$class,$x2));
 }
