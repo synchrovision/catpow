@@ -27,6 +27,7 @@ class blocks{
 		},10,2);
 		
 		$data=self::get_block_data_to_register();
+		
 		if(!empty($data['js'])){
 			foreach($data['js'] as $args){
 				call_user_func_array('wp_register_script',$args);
@@ -242,22 +243,22 @@ class blocks{
 										$register_handle="blocks/{$block_name}/{$handler}.{$type}";
 										if(empty($data[$type][$register_handle])){
 											$data[$type][$register_handle]=[$register_handle,null,self::$deps[$fname]??[]];
-											switch($handler){
-												case 'style':
-												case 'script':
-												case 'view_style':
-												case 'view_script':
-												case 'editor_style':
-												case 'editor_script':
-													$param[$handler.'_handles'][]=$register_handle;
-													break;
-												case 'view_script_module':
-													$param['view_script_module_ids'][]=$register_handle;
-											}
-											$data[$type][$register_handle][2]=array_merge(
-												$data[$type][$register_handle][2]??[],$handles
-											);
 										}
+										switch($handler){
+											case 'style':
+											case 'script':
+											case 'view_style':
+											case 'view_script':
+											case 'editor_style':
+											case 'editor_script':
+												$param[$handler.'_handles'][]=$register_handle;
+												break;
+											case 'view_script_module':
+												$param['view_script_module_ids'][]=$register_handle;
+										}
+										$data[$type][$register_handle][2]=array_merge(
+											$data[$type][$register_handle][2]??[],$handles
+										);
 									}
 								}
 							}
