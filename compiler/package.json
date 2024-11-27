@@ -8,6 +8,8 @@
 		"@svgr/core": "*",
 		"esbuild": "*",
 		"js-cookie": "*",
-		"esbuild-plugin-inline-import": "*"
+		"esbuild-plugin-inline-import": "*",
+		"react-error-boundary":"*",
+		"react-use":"*"
 	}
 }
