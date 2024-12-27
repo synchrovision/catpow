@@ -6,7 +6,7 @@
 	example:CP.example,
 	edit({attributes,className,setAttributes,isSelected}){
 		const {Fragment,useMemo,useCallback,useEffect}=wp.element;
-		const {InspectorControls}=wp.blockEditor;
+		const {InspectorControls,RichText}=wp.blockEditor;
 		const {Flex,FlexItem,FlexBlock,PanelBody,Button,Spinner,SelectControl,CheckboxControl,TextControl}=wp.components;
 		const {post,settings,selections,activeLabel,progress,isWaiting=false}=attributes;
 

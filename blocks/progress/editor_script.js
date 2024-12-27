@@ -1,5 +1,5 @@
 (() => {
-  // blocks/progress/editor_script.jsx
+  // ../blocks/progress/editor_script.jsx
   wp.blocks.registerBlockType("catpow/progress", {
     title: "\u{1F43E} Progress",
     description: "\u9032\u6357\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
@@ -8,7 +8,7 @@
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { Fragment, useMemo, useCallback, useEffect } = wp.element;
-      const { InspectorControls } = wp.blockEditor;
+      const { InspectorControls, RichText } = wp.blockEditor;
       const { Flex, FlexItem, FlexBlock, PanelBody, Button, Spinner, SelectControl, CheckboxControl, TextControl } = wp.components;
       const { post, settings, selections, activeLabel, progress, isWaiting = false } = attributes;
       const selectiveClasses = useMemo(() => [
