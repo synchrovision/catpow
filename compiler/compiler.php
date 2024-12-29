@@ -10,6 +10,14 @@ echo "start jsx compile\n";
 while(true){
 	$jsx_files=get_jsx_files();
 	$entry_files=get_entry_files();
+	$is_in_dir_of_entry_file=function($fname)use(&$entry_files){
+		foreach($entry_files as $dirname=>$entry_file){
+			if(str_starts_with($fname,$dirname.'/')){return false;}
+		}
+		return true;
+	};
+	$entry_files=array_filter($entry_files,$is_in_dir_of_entry_file,ARRAY_FILTER_USE_KEY);
+	$jsx_files=array_filter($jsx_files,$is_in_dir_of_entry_file);
 	for($i=0;$i<20;$i++){
 		cp_jsx_compile($jsx_files);
 		cp_jsx_bundle($entry_files);
@@ -28,12 +36,10 @@ function init(){
 
 function get_jsx_files(){
 	$jsx_files=[];
-	foreach(glob(WP_CONTENT_DIR.'/{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{js,blocks/*,ui/*,components/*,elements/*,stores/*,*/*/*}/*.jsx',GLOB_BRACE) as $jsx_file){
+	foreach(glob(WP_CONTENT_DIR.'/{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{js,blocks/*,ui/*,components/*,elements/*,stores/*,*/*/*}/*.{t,j}sx',GLOB_BRACE) as $jsx_file){
 		if(
 			strpos($jsx_file,'/node_modules/')!==false || 
-			strpos($jsx_file,'/modules/')!==false || 
-			file_exists(dirname($jsx_file).'/index.jsx') ||
-			file_exists(dirname($jsx_file).'/index.mjs.jsx')
+			strpos($jsx_file,'/modules/')!==false
 		){continue;}
 		$jsx_files[]=$jsx_file;
 	}
@@ -43,7 +49,7 @@ function get_jsx_files(){
 function cp_jsx_compile($jsx_files){
 	foreach($jsx_files as $jsx_file){
 		if(!file_exists($jsx_file)){continue;}
-		$js_file=substr($jsx_file,0,substr($jsx_file,-8)==='.mjs.jsx'?-4:-1);
+		$js_file=substr($jsx_file,0,is_mjs_former($jsx_file)?-4:-1);
 		if(!file_exists($js_file) or filemtime($js_file) < filemtime($jsx_file)){
 			passthru("node bundle.esbuild.mjs {$jsx_file} {$js_file}");
 			echo "build {$js_file}\n";
@@ -51,21 +57,24 @@ function cp_jsx_compile($jsx_files){
 		}
 	}
 }
+function is_mjs_former($fname){
+	return preg_match('/\.mjs\.[jt]sx?$/',$fname);
+}
 
 function get_entry_files(){
 	$entry_files=[];
-	foreach(glob(WP_CONTENT_DIR.'/{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{js,blocks/*,ui/*,components/*,elements/*,stores/*,*/*/*}/*/index{,.mjs}.jsx',GLOB_BRACE) as $entry_file){
+	foreach(glob(WP_CONTENT_DIR.'/{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{js,blocks/*,ui/*,components/*,elements/*,stores/*,*/*/*}/*/index{,.mjs}.{t,j}s{,x}',GLOB_BRACE) as $entry_file){
 		if(strpos($entry_file,'/node_modules/')!==false || strpos($entry_file,'/modules/')!==false){continue;}
-		$entry_files[]=$entry_file;
+		$entry_files[dirname($entry_file)]=$entry_file;
 	}
 	return $entry_files;
 }
 function cp_jsx_bundle($entry_files){
 	foreach($entry_files as $entry_file){
 		$dirname=dirname($entry_file);
-		$bundle_js_file=$dirname.(substr($entry_file,-8)==='.mjs.jsx'?'.mjs':'.js');
+		$bundle_js_file=$dirname.(is_mjs_former($entry_file)?'.mjs':'.js');
 		$latest_filetime=filemtime($entry_file);
-		foreach(glob($dirname.'/*') as $bundle_file){
+		foreach(glob($dirname.'/{*,*/*,*/*/*}',GLOB_BRACE) as $bundle_file){
 			$latest_filetime=max($latest_filetime,filemtime($bundle_file));
 		}
 		if(!file_exists($bundle_js_file) or filemtime($bundle_js_file) < $latest_filetime){
@@ -73,4 +82,12 @@ function cp_jsx_bundle($entry_files){
 			echo "bundle {$bundle_js_file}\n";
 		}
 	}
+}
+function get_max_filemtime_in_dir($dir,$filemtime){
+	foreach(scandir($dir) as $fname){
+		if(substr($fname,0,1)==='.'){continue;}
+		$f=$dir.'/'.$fname;
+		$filemtime=max($filemtime,is_dir($f)?get_max_filemtime_in_dir($f):filemtime($f));
+	}
+	return $filemtime;
 }
