@@ -22,7 +22,7 @@
   flex-basis: auto;
   padding: 0.25em;
   padding-left: 1em;
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),1);
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),var(--cp-tones-t-a));
   border-radius: 1em;
   text-align: center;
   line-height: 1em;
@@ -34,7 +34,7 @@
   height: 1.2em;
   padding: 0.1em;
   border-radius: 50%;
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 20),1);
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 20),var(--cp-tones-t-a));
   line-height: 1em;
   cursor: pointer;
 }
