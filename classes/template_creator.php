@@ -73,7 +73,7 @@ class template_creator{
 				if(isset($path_data['file_sub_type'])){$file_name.='.'.$path_data['file_sub_type'];}
 				if(isset($path_data['folder'])){$file_name=$path_data['folder'].'/'.$file_name;}
 				$f=\cp::get_file_path(
-					'config/template/'.$path_data['tmp_name'].'/'.$file_name.'.'.$path_data['file_type'],
+					'config/template/'.($path_data['tmp_name']??'primary').'/'.$file_name.'.'.$path_data['file_type'],
 					\cp::FROM_THEME|\cp::FROM_DEFAULT
 				);
 			}
