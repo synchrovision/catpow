@@ -725,12 +725,13 @@ class CP{
 		if(isset($cache[$path])){return $cache[$path];}
 		$path_data=explode('/',$path);
 		$post_type=reset($path_data);
+		$post_name=basename($path);
 		$parent=self::get_post(dirname($path));
 		$conf_data=$GLOBALS['post_types'][$post_type];
 		$post_data=[
 			'post_type'=>$post_type,
 			'post_status'=>'publish',
-			'post_name'=>basename($path),
+			'post_name'=>$post_name,
 			'post_parent'=>$parent?$parent->ID:0
 		];
 		if(isset($conf_data['article_type'])){
@@ -742,6 +743,28 @@ class CP{
 		}
 		if($f=self::get_file_path('post_data/'.preg_replace('/\-[^\-\/]+/','',rtrim($real_path,'/')).'.php',self::FROM_DEFAULT|self::FROM_THEME)){
 			include $f;
+		}
+		if(empty($post_data['post_content'])){
+			if(
+				($post_type==='page' && (
+					($page_conf_data=$GLOBALS['static_pages'][$post_name] && $default_content=$page_conf_data['default_content']) ||
+					($default_content_file=\cp::get_file_path("page/{$post_name}/admin/default_content.php"))
+				)) ||
+				($default_content=$conf_data['default_content']) ||
+				($default_content_file=\cp::get_file_path("post/{$post_type}/admin/default_content.php"))
+			){
+				if(!empty($default_content)){
+					if(is_callable($default_content)){$default_content=$default_content();}
+					$post_data['post_content']=$default_content;
+				}
+				else if(!empty($default_content_file)){
+					$post_data['post_content']=(function()use($default_content_file){
+						ob_start();
+						include $default_content_file;
+						return ob_get_clean();
+					})();
+				}
+			}
 		}
 		return $cache[$path]=$post_data;
 	}

@@ -24,11 +24,6 @@ elseif($current_screen->base=='post'){
 		add_filter('admin_body_class',function($class)use($page_name){
 			return $class.sprintf(' %1$s %1$s-single %1$s-admin',' page-'.$page_name);
 		});
-		add_filter('default_content',function($content){
-			$f=TEMPLATEPATH.'/page/'.$page_name.'/admin/default.php';
-			if(file_exists($f))$content=file_get_contents($f);
-			return $content;
-		});
 	}
 	else{
 		
