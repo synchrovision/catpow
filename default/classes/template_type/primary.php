@@ -6,19 +6,19 @@ namespace Catpow\template_type;
 
 class primary extends template_type{
 	public static function get_template_files($conf_data){
+		if(\wp_is_block_theme()){
+			return [
+				'style.scss'=>'default',
+				'admin.scss'=>'default',
+				'content.scss'=>'default',
+				'config/style_config.scss'=>'default',
+			];
+		}
 		return [
-			'style.scss'=>[
-				'@config',
-			],
-			'admin.scss'=>[
-				'@config',
-			],
-			'content.scss'=>[
-				'@config',
-				'#{sel(m e u)}'=>[
-					
-				]
-			],
+			'style.scss'=>'default',
+			'admin.scss'=>'default',
+			'content.scss'=>'default',
+			'config/style_config.scss'=>'default',
 			'header.php'=>['',
 				'@catpow',
 				'<!DOCTYPE html>',
@@ -63,17 +63,19 @@ class primary extends template_type{
 					]
 				]
 			],
-			'sidebar.php'=>[
-				'',
+			'sidebar.php'=>['',
 				'@catpow',
 				'@menu side',
 				'<div class="sidebar_button"></div>',
 			],
-			'config/style_config.scss'=>[],
-			'404.php'=>['','not found'],
+			'404.php'=>['',
+				'@catpow',
+				'@site_header',
+				['div.message','404 Not Found'],
+				'@site_footer'
+			],
 			'attachment.php'=>['php','header("HTTP/1.1 404 Not Found");','include __DIR__.(\'/404.php\');'],
 			'maintenance.php'=>['php','header (\'HTTP/1.0 503 Service Temporarily Unavailable\')']
-			
 		];
 	}
 }

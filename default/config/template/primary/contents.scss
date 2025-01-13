@@ -1,0 +1,17 @@
+@import "config/style_config.scss";
+
+
+html{
+	@include txt((c:tx,f:t));
+	@include bp(-960){
+		@include txt((p:1.6vw));
+	}
+	@include bp(-720){
+		@include txt((p:2.4vw));
+	}
+	@include bp(-480){
+		@include txt((p:3.2vw));
+	}
+}
+
+@include define_color_classes;
