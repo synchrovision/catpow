@@ -2,6 +2,7 @@
   // ../blocks/app/editor_script.jsx
   wp.blocks.registerBlockType("catpow/app", {
     title: "\u{1F43E} App",
+    description: "\u30C6\u30FC\u30DE\u306B\u5B9A\u7FA9\u3055\u308C\u305F\u30A2\u30D7\u30EA\u3092\u8868\u793A\u3057\u307E\u3059\u3002",
     icon: "editor-code",
     category: "catpow-embed",
     example: CP.example,

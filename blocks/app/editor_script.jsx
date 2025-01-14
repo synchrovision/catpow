@@ -6,6 +6,7 @@
 
 wp.blocks.registerBlockType('catpow/app',{
 	title: '🐾 App',
+	description:'テーマに定義されたアプリを表示します。',
 	icon: 'editor-code',
 	category: 'catpow-embed',
 	example:CP.example,
