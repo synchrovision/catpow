@@ -11,7 +11,8 @@ CP.SelectClassPanel=(props)=>{
 	let {itemsKey=items?'items':null,itemClasses}=props;
 	const selectiveClasses=useMemo(()=>{
 		if(!triggerClasses || !triggerClasses.item){
-			return props.selectiveClasses;
+			if(Array.isArray(props.selectiveClasses)){return props.selectiveClasses;}
+			return Object.values(props.selectiveClasses);
 		}
 		const blockStates=CP.wordsToFlags(attr.classes);
 		return triggerClasses.item[Object.keys(triggerClasses.item).find((value)=>blockStates[value])];
