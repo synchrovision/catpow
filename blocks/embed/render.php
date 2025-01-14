@@ -1,2 +1,2 @@
 <?php
-cp::$content->render_content($attr['content_path'],['content'=>$content]);
+cp::$content->render_content($attr['content_path'],json_decode($attr['props'],true));
