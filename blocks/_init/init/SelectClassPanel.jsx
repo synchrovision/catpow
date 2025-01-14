@@ -88,6 +88,25 @@ CP.SelectClassPanel=(props)=>{
 						);
 						break;
 					}
+					case 'picture':{
+						if(prm.label){rtn.push(<h5>{prm.label}</h5>);}
+						rtn.push(
+							<CP.SelectPictureSources
+								index={props.index}
+								set={(val)=>{
+									if(prm.filter){val=prm.filter(val,states,props);}
+									CP.setJsonValues(props,prm.json,prm.keys,val);
+									if(prm.effect){prm.effect(val,states,props);}
+								}}
+								attr={JSON.parse(props.attr[prm.json])}
+								keys={prm.keys}
+								sizes={prm.sizes}
+								devices={prm.devices}
+								isTemplate={prm.isTemplate}
+							/>
+						);
+						break;
+					}
 					case 'flag':{
 						let value=CP.getJsonValue(props,prm.json,prm.key) || 0;
 						if(prm.label){rtn.push(<h5>{prm.label}</h5>);}

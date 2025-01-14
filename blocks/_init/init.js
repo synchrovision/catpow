@@ -64,14 +64,15 @@
     }, "allowColumnStyle")
   );
 
-  // modules/util/string.jsx
+  // modules/src/util/string.jsx
   var flagsToClassNames = (flags) => flags && Object.keys(flags).filter((f) => flags[f]).map(camelToKebab).join(" ");
   var camelToKebab = (str) => str.replace(/(\w)([A-Z])/g, "$1-$2").toLowerCase();
-  var kebabToCamel = (str) => str.replace(/\-(\w)/g, (m2) => m2[1].toUpperCase());
+  var kebabToCamel = (str) => str.replace(/\-(\w)/g, (m) => m[1].toUpperCase());
 
-  // modules/util/bem.jsx
+  // modules/src/util/bem.jsx
   var bem = (className) => {
     const children = {};
+    const firstClass = className.split(" ")[0];
     return new Proxy(function() {
       if (arguments.length > 0) {
         const classes = [];
@@ -90,14 +91,14 @@
           );
         }
         if (classes.length > 0) {
-          return className + " " + classes.join(" ");
+          return (className + " " + classes.join(" ")).replace(" --", " " + firstClass + "--");
         }
       }
       return className;
     }, {
       get: (target, prop) => {
         if (void 0 === children[prop]) {
-          children[prop] = bem(className.split(" ")[0] + (prop[0] === "_" ? "_" : "-") + prop);
+          children[prop] = bem(firstClass + (prop[0] === "_" ? "_" : "-") + prop);
         }
         return children[prop];
       }
@@ -354,15 +355,13 @@
     },
     upItem: (props) => {
       var { items: items2, index } = props;
-      if (!items2[index - 1])
-        return false;
+      if (!items2[index - 1]) return false;
       items2.splice(index - 1, 2, items2[index], items2[index - 1]);
       CP.saveItem(props);
     },
     downItem: (props) => {
       var { items: items2, index } = props;
-      if (!items2[index + 1])
-        return false;
+      if (!items2[index + 1]) return false;
       items2.splice(index, 2, items2[index + 1], items2[index]);
       CP.saveItem(props);
     },
@@ -482,6 +481,16 @@
       let data = {};
       let jsonData = JSON.parse(attr[json]);
       jsonData[key] = value;
+      data[json] = JSON.stringify(jsonData);
+      set(data);
+    },
+    setJsonValues: ({ attr, set }, json, keys, value) => {
+      let data = {};
+      let jsonData = JSON.parse(attr[json]);
+      console.log({ keys });
+      for (const key in keys) {
+        jsonData[keys[key]] = value[key];
+      }
       data[json] = JSON.stringify(jsonData);
       set(data);
     },
@@ -605,8 +614,8 @@
       if (!code || code.indexOf("url(") === -1) {
         return false;
       }
-      const m2 = code.match(/url\((.+?)\)/);
-      return m2 ? m2[1] : "";
+      const m = code.match(/url\((.+?)\)/);
+      return m ? m[1] : "";
     },
     parseGradientStyleValue: (gradient) => {
       const match = gradient.match(/^(linear|radial)\-gradient\((\d+deg),(.+)\)$/);
@@ -866,8 +875,7 @@
     /*richtext helper*/
     getSelecedFormatElement: () => {
       const sel = window.getSelection();
-      if (!sel.rangeCount)
-        return null;
+      if (!sel.rangeCount) return null;
       const con = sel.getRangeAt(0).startContainer;
       return con.nextElementSibling || con.parentElement;
     },
@@ -906,7 +914,7 @@
             return;
           }
           if (attributes[key].indexOf("url(") !== -1) {
-            atts[key] = attributes[key].replace(/url\((.+?)\)/, (m2, p1) => "url(" + setURLparams(p1, { c: color, theme: wpinfo.theme }) + ")");
+            atts[key] = attributes[key].replace(/url\((.+?)\)/, (m, p1) => "url(" + setURLparams(p1, { c: color, theme: wpinfo.theme }) + ")");
             return;
           }
           atts[key] = setURLparams(attributes[key], { c: color, theme: wpinfo.theme });
@@ -2159,7 +2167,7 @@
     var src = CP.imageSrcOrDummy(item[keys.src]);
     if (keys.sources) {
       if (device) {
-        const source = item[keys.sources].find((source2) => source2.device === device) || { srcset: wpinfo.theme_url + "/images/dummy.jpg" };
+        const source = item[keys.sources] && item[keys.sources].find((source2) => source2.device === device) || { srcset: wpinfo.theme_url + "/images/dummy.jpg" };
         return /* @__PURE__ */ wp.element.createElement(
           "picture",
           {
@@ -2184,7 +2192,7 @@
           onClick,
           ...otherProps
         },
-        item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })),
+        item[keys.sources] && item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })),
         /* @__PURE__ */ wp.element.createElement(
           "img",
           {
@@ -2957,6 +2965,34 @@
                         prm.effect(val, states2, props2);
                       }
                     }
+                  }
+                )
+              );
+              break;
+            }
+            case "picture": {
+              if (prm.label) {
+                rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
+              }
+              rtn.push(
+                /* @__PURE__ */ wp.element.createElement(
+                  CP.SelectPictureSources,
+                  {
+                    index: props2.index,
+                    set: (val) => {
+                      if (prm.filter) {
+                        val = prm.filter(val, states2, props2);
+                      }
+                      CP.setJsonValues(props2, prm.json, prm.keys, val);
+                      if (prm.effect) {
+                        prm.effect(val, states2, props2);
+                      }
+                    },
+                    attr: JSON.parse(props2.attr[prm.json]),
+                    keys: prm.keys,
+                    sizes: prm.sizes,
+                    devices: prm.devices,
+                    isTemplate: prm.isTemplate
                   }
                 )
               );
