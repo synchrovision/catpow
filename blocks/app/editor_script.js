@@ -21,20 +21,21 @@
           console.log(res);
         }).then((options2) => {
           const newProps = JSON.parse(props);
-          const initOption = (option) => {
+          const initOption = (option, key) => {
+            option.key = key;
             option.json = "props";
-            if (option.hasOwnProperty("default") && !newProps.hasOwnProperty(option.key)) {
-              newProps[option.key] = option.default;
+            if (option.hasOwnProperty("default") && !newProps.hasOwnProperty(key)) {
+              newProps[key] = option.default;
             }
             if (option.sub) {
-              if (Array.isArray(option.sub)) {
-                option.sub.forEach(initOption);
-              } else {
-                Object.keys(option.sub).forEach((key) => initOption(option.sub[key]));
+              for (const subKey in option.sub) {
+                initOption(option.sub[subKey], subKey);
               }
             }
           };
-          options2.forEach(initOption);
+          for (const key in options2) {
+            initOption(options2[key], key);
+          }
           setAttributes({ options: options2, props: JSON.stringify(newProps) });
         });
       }

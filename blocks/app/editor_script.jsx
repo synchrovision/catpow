@@ -28,21 +28,17 @@ wp.blocks.registerBlockType('catpow/app',{
 			})
 			.then((options)=>{
 				const newProps=JSON.parse(props);
-				const initOption=(option)=>{
+				const initOption=(option,key)=>{
+					option.key=key;
 					option.json='props';
-					if(option.hasOwnProperty('default') && !newProps.hasOwnProperty(option.key)){
-						newProps[option.key]=option.default;
+					if(option.hasOwnProperty('default') && !newProps.hasOwnProperty(key)){
+						newProps[key]=option.default;
 					}
 					if(option.sub){
-						if(Array.isArray(option.sub)){
-							option.sub.forEach(initOption);
-						}
-						else{
-							Object.keys(option.sub).forEach((key)=>initOption(option.sub[key]));
-						}
+						for(const subKey in option.sub){initOption(option.sub[subKey],subKey);}
 					}
 				};
-				options.forEach(initOption);
+				for(const key in options){initOption(options[key],key);}
 				setAttributes({options,props:JSON.stringify(newProps)});
 			});
 		}

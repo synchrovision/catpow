@@ -1,7 +1,7 @@
 {
 	"name":"SampleApp",
-	"options":[
-		{"input":"text","label":"Title","key":"title","default":"SampleApp"}
-	],
+	"options":{
+		"title":{"input":"text","label":"Title","default":"SampleApp"}
+	},
 	"deps":["catpow"]
 }
