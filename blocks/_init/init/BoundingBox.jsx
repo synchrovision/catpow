@@ -1,5 +1,5 @@
 ﻿import {CP} from './CP.jsx';
-import {bem} from 'util';
+import {bem} from 'catpow/util';
 
 CP.BoundingBox=(props)=>{
 	const {targets,onDeselect,onDuplicate,onDelete,onChange}=props;

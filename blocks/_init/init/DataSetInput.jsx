@@ -1,5 +1,5 @@
 ﻿import {CP} from './CP.jsx';
-import {bem} from 'util';
+import {bem} from 'catpow/util';
 
 CP.DataSetInput=(props)=>{
 	const {useMemo,useCallback}=wp.element;

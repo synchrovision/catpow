@@ -1,5 +1,5 @@
 ﻿import {CP} from './CP.jsx';
-import {bem,classNamesToFlags,flagsToClassNames} from 'util';
+import {bem,classNamesToFlags,flagsToClassNames} from 'catpow/util';
 
 CP.CustomColorVars=(props)=>{
 	const {useState,useRef,useMemo,useCallback}=wp.element;

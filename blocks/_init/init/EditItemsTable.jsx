@@ -1,5 +1,5 @@
 import {CP} from './CP.jsx';
-import {bem} from 'util';
+import {bem} from 'catpow/util';
 
 CP.EditItemsTable=(props)=>{
 	const {set,attr,itemsKey='items',isTemplate=false}=props;

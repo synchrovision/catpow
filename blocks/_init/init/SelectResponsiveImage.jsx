@@ -1,5 +1,5 @@
 ﻿import {CP} from './CP.jsx';
-import {bem} from 'util';
+import {bem} from 'catpow/util';
 
 CP.SelectResponsiveImage=(props)=>{
 	const {className='',attr,set,keys={},index=0,subIndex=0,size,devices,device,isTemplate,...otherProps}=props;
@@ -98,7 +98,7 @@ CP.SelectResponsiveImage=(props)=>{
 	var src=CP.imageSrcOrDummy(item[keys.src]);
 	if(keys.sources){
 		if(device){
-			const source=item[keys.sources].find((source)=>source.device===device) || {srcset:wpinfo.theme_url+'/images/dummy.jpg'};
+			const source=(item[keys.sources] && item[keys.sources].find((source)=>source.device===device)) || {srcset:wpinfo.theme_url+'/images/dummy.jpg'};
 			return (
 				<picture
 					className={classes('is-picture')}
@@ -119,7 +119,7 @@ CP.SelectResponsiveImage=(props)=>{
 				onClick={onClick}
 				{...otherProps}
 			>
-				{item[keys.sources].map((source)=>(
+				{item[keys.sources] && item[keys.sources].map((source)=>(
 					<source srcSet={source.srcset} media={CP.devices[source.device].media_query} data-device={source.device} key={source.device}/>
 				))}
 				<img

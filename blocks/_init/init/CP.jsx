@@ -1,4 +1,5 @@
 ﻿import {kebabToCamel,camelToKebab} from 'util';
+﻿import {kebabToCamel,camelToKebab} from 'catpow/util';
 
 export const CP={
 	filters:{},
