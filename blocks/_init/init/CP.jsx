@@ -16,6 +16,7 @@ export const CP={
 	},
 	
 	selectImage:(keys,set,size,devices)=>{
+		devices=devices || ['sp','tb'];
 		if(CP.uploder===undefined){
 			CP.uploader=wp.media({
 				title:'Select Image',
@@ -31,14 +32,12 @@ export const CP={
 			if(size && image.sizes && image.sizes[size]){data[keys.src]=image.sizes[size].url;}
 			else{data[keys.src]=image.url;}
 			if(keys.sources && image.sizes){
-				devices=devices || ['sp'];
 				data[keys.sources]=devices.map((device)=>{
 					const sizeData=CP.devices[device];
 					return {srcset:image.sizes[sizeData.media_size].url,device};
 				});
 			}
 			if(keys.srcset && image.sizes){
-				devices=devices || ['sp','pc'];
 				data[keys.srcset]='';
 				devices.forEach((device)=>{
 					const sizeData=CP.devices[device];
@@ -303,9 +302,13 @@ export const CP={
     setJsonValues:({attr,set},json,keys,value)=>{
         let data={};
         let jsonData=JSON.parse(attr[json]);
-		console.log({keys});
-		for(const key in keys){
-			jsonData[keys[key]]=value[key];
+		if(keys){
+			for(const key in keys){
+				jsonData[keys[key]]=value[key];
+			}
+		}
+		else{
+			Object.assign(jsonData,value);
 		}
         data[json]=JSON.stringify(jsonData);
         set(data);

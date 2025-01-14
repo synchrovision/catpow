@@ -1,32 +1,32 @@
-﻿import {CP} from './CP.jsx';
+﻿import { useCallback } from 'preact/hooks';
+import {CP} from './CP.jsx';
 import {bem} from 'catpow/util';
 
 CP.SelectResponsiveImage=(props)=>{
 	const {className='',attr,set,keys={},index=0,subIndex=0,size,devices,device,isTemplate,...otherProps}=props;
-	const {useMemo}=wp.element;
+	const {useMemo,useCallback}=wp.element;
 	const classes=useMemo(()=>bem('CP-SelectResponsiveImage '+className),[className]);
 	
 	let {sizes}=props;
-	let type,onClick,item,items;
+	let type,onClick,item,items,subItems;
+	
+	item=attr || {};
 	if(keys.items){
-		items=attr[keys.items];
+		items=item[keys.items] || [];
+		item=items[index] || {};
 		if(keys.subItems){
-			item=items[index][keys.subItems][subIndex];
-		}
-		else{
-			item=items[index];
+			subItems=item[keys.subItems] || [];
+			item=subItems[subIndex];
 		}
 	}
-	else{
-		item=attr;
-	}
+
 	if(device){
 		const sizeData=CP.devices[device];
 		onClick=(e)=>CP.selectImage({src:'src'},function({src}){
 			if(keys.sources){
-				item[keys.sources].forEach((source)=>{
-					if(source.device===device){source.srcset=src;}
-				});
+				const source=item[keys.sources].find(source=>source.device===device);
+				if(source){source.srcset=src;}
+				else{item[keys.sources].push({device,srcset:src});}
 				if(items){
 					set({[keys.items]:JSON.parse(JSON.stringify(items))});
 				}
@@ -35,12 +35,17 @@ CP.SelectResponsiveImage=(props)=>{
 				}
 			}
 			else{
-				if(items){
+				if(item[keys.srcset].match(sizeData.reg)){
 					item[keys.srcset]=item[keys.srcset].replace(sizeData.reg,src+sizeData.rep);
+				}
+				else{
+					item[keys.srcset]+=','+src+sizeData.rep;
+				}
+				if(items){
 					set({[keys.items]:JSON.parse(JSON.stringify(items))});
 				}
 				else{
-					set({[keys.srcset]:item[keys.srcset].replace(sizeData.reg,src+sizeData.rep)});
+					set({[keys.srcset]:item[keys.srcset]});
 				}
 			}
 		},sizeData.media_size);

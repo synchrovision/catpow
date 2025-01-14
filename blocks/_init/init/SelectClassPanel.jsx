@@ -91,15 +91,22 @@ CP.SelectClassPanel=(props)=>{
 					}
 					case 'picture':{
 						if(prm.label){rtn.push(<h5>{prm.label}</h5>);}
+						let attr=JSON.parse(props.attr[prm.json]);
+						if(prm.key){attr=attr[prm.key];}
 						rtn.push(
 							<CP.SelectPictureSources
 								index={props.index}
 								set={(val)=>{
 									if(prm.filter){val=prm.filter(val,states,props);}
-									CP.setJsonValues(props,prm.json,prm.keys,val);
+									if(prm.key){
+										CP.setJsonValue(props,prm.json,prm.key,Object.assign(attr,val));
+									}
+									else{
+										CP.setJsonValues(props,prm.json,prm.keys,val);
+									}
 									if(prm.effect){prm.effect(val,states,props);}
 								}}
-								attr={JSON.parse(props.attr[prm.json])}
+								attr={attr}
 								keys={prm.keys}
 								sizes={prm.sizes}
 								devices={prm.devices}

@@ -65,9 +65,9 @@
   );
 
   // modules/src/util/string.jsx
-  var flagsToClassNames = (flags) => flags && Object.keys(flags).filter((f) => flags[f]).map(camelToKebab).join(" ");
+  var flagsToClassNames = (flags) => flags && Object.keys(flags).filter((f3) => flags[f3]).map(camelToKebab).join(" ");
   var camelToKebab = (str) => str.replace(/(\w)([A-Z])/g, "$1-$2").toLowerCase();
-  var kebabToCamel = (str) => str.replace(/\-(\w)/g, (m) => m[1].toUpperCase());
+  var kebabToCamel = (str) => str.replace(/\-(\w)/g, (m2) => m2[1].toUpperCase());
 
   // modules/src/util/bem.jsx
   var bem = (className) => {
@@ -76,18 +76,18 @@
     return new Proxy(function() {
       if (arguments.length > 0) {
         const classes = [];
-        let i;
-        for (i = 0; i < arguments.length; i++) {
-          if (!arguments[i]) {
+        let i3;
+        for (i3 = 0; i3 < arguments.length; i3++) {
+          if (!arguments[i3]) {
             continue;
           }
-          if (typeof arguments[i] === "string") {
-            classes.push(arguments[i]);
+          if (typeof arguments[i3] === "string") {
+            classes.push(arguments[i3]);
             continue;
           }
           classes.push.apply(
             classes,
-            Array.isArray(arguments[i]) ? arguments[i] : Object.keys(arguments[i]).filter((c) => arguments[i][c])
+            Array.isArray(arguments[i3]) ? arguments[i3] : Object.keys(arguments[i3]).filter((c3) => arguments[i3][c3])
           );
         }
         if (classes.length > 0) {
@@ -119,6 +119,7 @@
       footer: "\u300E\u543E\u8F29\u306F\u732B\u3067\u3042\u308B\u300F\uFF08\u308F\u304C\u306F\u3044\u306F\u306D\u3053\u3067\u3042\u308B\uFF09\u3000\u590F\u76EE\u6F31\u77F3\u3000\u8457"
     },
     selectImage: (keys, set, size, devices) => {
+      devices = devices || ["sp", "tb"];
       if (CP.uploder === void 0) {
         CP.uploader = wp.media({
           title: "Select Image",
@@ -141,14 +142,12 @@
           data[keys.src] = image.url;
         }
         if (keys.sources && image.sizes) {
-          devices = devices || ["sp"];
           data[keys.sources] = devices.map((device) => {
             const sizeData = CP.devices[device];
             return { srcset: image.sizes[sizeData.media_size].url, device };
           });
         }
         if (keys.srcset && image.sizes) {
-          devices = devices || ["sp", "pc"];
           data[keys.srcset] = "";
           devices.forEach((device) => {
             const sizeData = CP.devices[device];
@@ -182,16 +181,16 @@
     },
     switchNumberClass: ({ set, attr }, label, value) => {
       let classArray = (attr.classes || "").split(" ");
-      let i = classArray.findIndex((cls) => cls.slice(0, label.length) === label);
-      if (i === -1) {
+      let i3 = classArray.findIndex((cls) => cls.slice(0, label.length) === label);
+      if (i3 === -1) {
         if (value) {
           classArray.push(label + value);
         }
       } else {
         if (value) {
-          classArray.splice(i, 1, label + value);
+          classArray.splice(i3, 1, label + value);
         } else {
-          classArray.splice(i, 1);
+          classArray.splice(i3, 1);
         }
       }
       set({ classes: classArray.join(" ") });
@@ -314,11 +313,11 @@
         attr[key] = "";
       }
       let classArray = attr[key].split(" ");
-      let i = classArray.indexOf(value);
-      if (i === -1) {
+      let i3 = classArray.indexOf(value);
+      if (i3 === -1) {
         classArray.push(value);
       } else {
-        classArray.splice(i, 1);
+        classArray.splice(i3, 1);
       }
       let data = {};
       data[key] = classArray.join(" ");
@@ -370,54 +369,54 @@
         itemsKey = "items";
       }
       let classArray = (items2[index].classes || "").split(" ");
-      let i = classArray.findIndex((cls) => cls.slice(0, 5) === "color");
-      if (i === -1) {
+      let i3 = classArray.findIndex((cls) => cls.slice(0, 5) === "color");
+      if (i3 === -1) {
         if (color) {
           classArray.push("color" + color);
         }
       } else {
         if (color) {
-          classArray.splice(i, 1, "color" + color);
+          classArray.splice(i3, 1, "color" + color);
         } else {
-          classArray.splice(i, 1);
+          classArray.splice(i3, 1);
         }
       }
       items2[index].classes = classArray.join(" ");
       set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
     },
     getItemColor: ({ items: items2, index }) => {
-      let c = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 5) === "color");
-      if (!c) {
+      let c3 = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 5) === "color");
+      if (!c3) {
         return 0;
       }
-      return parseInt(c.slice(5));
+      return parseInt(c3.slice(5));
     },
     switchItemPattern: ({ items: items2, index, set }, pattern, itemsKey) => {
       if (itemsKey === void 0) {
         itemsKey = "items";
       }
       let classArray = (items2[index].classes || "").split(" ");
-      let i = classArray.findIndex((cls) => cls.slice(0, 7) === "pattern");
-      if (i === -1) {
+      let i3 = classArray.findIndex((cls) => cls.slice(0, 7) === "pattern");
+      if (i3 === -1) {
         if (pattern) {
           classArray.push("pattern" + pattern);
         }
       } else {
         if (pattern) {
-          classArray.splice(i, 1, "pattern" + pattern);
+          classArray.splice(i3, 1, "pattern" + pattern);
         } else {
-          classArray.splice(i, 1);
+          classArray.splice(i3, 1);
         }
       }
       items2[index].classes = classArray.join(" ");
       set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
     },
     getItemPattern: ({ items: items2, index }) => {
-      let p = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 7) === "pattern");
-      if (!p) {
+      let p2 = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 7) === "pattern");
+      if (!p2) {
         return 0;
       }
-      return parseInt(p.slice(7));
+      return parseInt(p2.slice(7));
     },
     switchItemSelectiveClass: ({ items: items2, index, set }, values, value, itemsKey) => {
       if (itemsKey === void 0) {
@@ -451,11 +450,11 @@
         itemsKey = "items";
       }
       let classArray = (items2[index].classes || "").split(" ");
-      let i = classArray.indexOf(value);
-      if (i === -1) {
+      let i3 = classArray.indexOf(value);
+      if (i3 === -1) {
         classArray.push(value);
       } else {
-        classArray.splice(i, 1);
+        classArray.splice(i3, 1);
       }
       items2[index].classes = classArray.join(" ");
       set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
@@ -487,9 +486,12 @@
     setJsonValues: ({ attr, set }, json, keys, value) => {
       let data = {};
       let jsonData = JSON.parse(attr[json]);
-      console.log({ keys });
-      for (const key in keys) {
-        jsonData[keys[key]] = value[key];
+      if (keys) {
+        for (const key in keys) {
+          jsonData[keys[key]] = value[key];
+        }
+      } else {
+        Object.assign(jsonData, value);
       }
       data[json] = JSON.stringify(jsonData);
       set(data);
@@ -499,11 +501,11 @@
       if (!values) {
         values = [];
       }
-      let i = values.indexOf(value);
-      if (i === -1) {
+      let i3 = values.indexOf(value);
+      if (i3 === -1) {
         values.push(value);
       } else {
-        values.splice(i, 1);
+        values.splice(i3, 1);
       }
       CP.setJsonValue(prop, json, key, values);
     },
@@ -569,7 +571,7 @@
         }
         const matches = media.match(/(min|max)\-width:(\d+)px/);
         return { p: parseInt(matches[2]) * { min: 1, max: -1 }[matches[1]], media };
-      }).sort((a, b) => a.p - b.p).map((d) => d.media).map((media) => {
+      }).sort((a3, b2) => a3.p - b2.p).map((d2) => d2.media).map((media) => {
         if (media === "default") {
           return CP.createStyleCode(data[media]);
         }
@@ -614,8 +616,8 @@
       if (!code || code.indexOf("url(") === -1) {
         return false;
       }
-      const m = code.match(/url\((.+?)\)/);
-      return m ? m[1] : "";
+      const m2 = code.match(/url\((.+?)\)/);
+      return m2 ? m2[1] : "";
     },
     parseGradientStyleValue: (gradient) => {
       const match = gradient.match(/^(linear|radial)\-gradient\((\d+deg),(.+)\)$/);
@@ -638,7 +640,7 @@
     },
     /*flags*/
     testFlags: (cond, flags) => cond & flags === cond,
-    filterArrayWithFlags: (array, flags) => array.filter((c, i) => flags & 1 << i),
+    filterArrayWithFlags: (array, flags) => array.filter((c3, i3) => flags & 1 << i3),
     wordsToFlags: (words) => {
       var rtn = {};
       if (void 0 === words) {
@@ -914,7 +916,7 @@
             return;
           }
           if (attributes[key].indexOf("url(") !== -1) {
-            atts[key] = attributes[key].replace(/url\((.+?)\)/, (m, p1) => "url(" + setURLparams(p1, { c: color, theme: wpinfo.theme }) + ")");
+            atts[key] = attributes[key].replace(/url\((.+?)\)/, (m2, p1) => "url(" + setURLparams(p1, { c: color, theme: wpinfo.theme }) + ")");
             return;
           }
           atts[key] = setURLparams(attributes[key], { c: color, theme: wpinfo.theme });
@@ -928,8 +930,8 @@
         classes = classes.split(" ");
       }
       const rtn = {};
-      classes.find((c) => {
-        const matches = c.match(CP.colorToneClassPattern);
+      classes.find((c3) => {
+        const matches = c3.match(CP.colorToneClassPattern);
         if (matches) {
           if (matches[1]) {
             rtn.h = matches[2];
@@ -1016,15 +1018,15 @@
             return CP.flagsToWords(state);
           }
           case "value": {
-            return CP.extractColorToneValue(Object.keys(state).filter((c) => state[c]));
+            return CP.extractColorToneValue(Object.keys(state).filter((c3) => state[c3]));
           }
           case "h": {
-            return Object.keys(state).find((c) => CP.colorClassPattern.test(c));
+            return Object.keys(state).find((c3) => CP.colorClassPattern.test(c3));
           }
           case "s":
           case "l": {
-            return Object.keys(state).find((c) => {
-              const match = c.match(CP.toneClassPattern);
+            return Object.keys(state).find((c3) => {
+              const match = c3.match(CP.toneClassPattern);
               return match && match[2] === prop;
             });
           }
@@ -1040,10 +1042,10 @@
           case "s":
           case "l": {
             if (prop === "h") {
-              CP.filterFlags(state, (c) => !CP.colorClassPattern.test(c));
+              CP.filterFlags(state, (c3) => !CP.colorClassPattern.test(c3));
             } else {
-              CP.filterFlags(state, (c) => {
-                const match = c.match(CP.toneClassPattern);
+              CP.filterFlags(state, (c3) => {
+                const match = c3.match(CP.toneClassPattern);
                 return !(match && match[2] === prop);
               });
             }
@@ -1749,11 +1751,11 @@
       if (!onDeselect) {
         return;
       }
-      const cb = (e) => {
-        if (ref.current && !e.shiftKey) {
+      const cb = (e3) => {
+        if (ref.current && !e3.shiftKey) {
           const bnd = ref.current.getBoundingClientRect();
-          const { clientX: x, clientY: y } = e;
-          if (x < bnd.left || x > bnd.right || y < bnd.top || y > bnd.bottom) {
+          const { clientX: x2, clientY: y2 } = e3;
+          if (x2 < bnd.left || x2 > bnd.right || y2 < bnd.top || y2 > bnd.bottom) {
             onDeselect();
           }
         }
@@ -1765,11 +1767,11 @@
       if (!onDelete) {
         return;
       }
-      const cb = (e) => {
-        if (e.isComposing || e.target.nodeName === "INPUT" || e.target.nodeName === "TEXTAREA" || e.target.isContentEditable) {
+      const cb = (e3) => {
+        if (e3.isComposing || e3.target.nodeName === "INPUT" || e3.target.nodeName === "TEXTAREA" || e3.target.isContentEditable) {
           return;
         }
-        if (e.key === "Backspace") {
+        if (e3.key === "Backspace") {
           onDelete(targets);
         }
       };
@@ -1778,12 +1780,12 @@
     }, [targets, onDelete]);
     const controls = useMemo(() => {
       const controls2 = [];
-      ["top", "middle", "bottom"].forEach((v, vi) => {
-        ["left", "center", "right"].forEach((h, hi) => {
+      ["top", "middle", "bottom"].forEach((v3, vi) => {
+        ["left", "center", "right"].forEach((h2, hi) => {
           const isMove = vi === 1 && hi === 1;
-          const d = isMove ? "move" : vi === 1 ? "ew" : hi === 1 ? "ns" : vi === hi ? "nwse" : "nesw";
+          const d2 = isMove ? "move" : vi === 1 ? "ew" : hi === 1 ? "ns" : vi === hi ? "nwse" : "nesw";
           controls2.push({
-            className: [isMove ? "is-position-control" : "is-size-control", "is-" + v, "is-" + h, "is-" + d],
+            className: [isMove ? "is-position-control" : "is-size-control", "is-" + v3, "is-" + h2, "is-" + d2],
             action: isMove ? "move" : "resize",
             flags: hi << 2 | vi
           });
@@ -1791,14 +1793,14 @@
       });
       return controls2;
     }, []);
-    const onMouseDown = useCallback((e) => {
-      const control = e.target.closest("[data-control-action]");
+    const onMouseDown = useCallback((e3) => {
+      const control = e3.target.closest("[data-control-action]");
       if (!control) {
         return setAction(false);
       }
       const action2 = control.dataset.controlAction;
       const flags = parseInt(control.dataset.controlFlags);
-      if (onDuplicate && e.altKey && action2 === "move") {
+      if (onDuplicate && e3.altKey && action2 === "move") {
         onDuplicate(targets);
       }
       targets.forEach((target) => {
@@ -1817,40 +1819,40 @@
       setAction({
         action: action2,
         flags,
-        org: { x: e.clientX, y: e.clientY, ox, oy },
+        org: { x: e3.clientX, y: e3.clientY, ox, oy },
         orgBnd,
-        keepAspect: e.shiftKey,
-        keepCenter: e.altKey,
+        keepAspect: e3.shiftKey,
+        keepCenter: e3.altKey,
         targets
       });
     }, [ref, targets, onDuplicate]);
-    const onMouseMove = useCallback((e) => {
+    const onMouseMove = useCallback((e3) => {
       if (!action) {
         return;
       }
-      const dx = e.clientX - action.org.x;
-      const dy = e.clientY - action.org.y;
+      const dx = e3.clientX - action.org.x;
+      const dy = e3.clientY - action.org.y;
       if (action.action === "move") {
         targets.forEach((target, index) => {
           target.style.transform = `translate(${dx}px,${dy}px)`;
         });
       } else if (action.action === "resize") {
-        let s;
-        const sx = Math.abs(e.clientX - action.org.ox) / action.orgBnd.width;
-        const sy = Math.abs(e.clientY - action.org.oy) / action.orgBnd.height;
+        let s3;
+        const sx = Math.abs(e3.clientX - action.org.ox) / action.orgBnd.width;
+        const sy = Math.abs(e3.clientY - action.org.oy) / action.orgBnd.height;
         if (action.flags & 1) {
-          s = action.keepAspect ? `scale(${sx})` : `scaleX(${sx})`;
+          s3 = action.keepAspect ? `scale(${sx})` : `scaleX(${sx})`;
         } else if (action.flags & 4) {
-          s = action.keepAspect ? `scale(${sy})` : `scaleY(${sy})`;
+          s3 = action.keepAspect ? `scale(${sy})` : `scaleY(${sy})`;
         } else {
-          s = action.keepAspect ? `scale(${Math.min(sx, sy)})` : `scale(${sx},${sy})`;
+          s3 = action.keepAspect ? `scale(${Math.min(sx, sy)})` : `scale(${sx},${sy})`;
         }
         targets.forEach((target, index) => {
-          target.style.transform = s;
+          target.style.transform = s3;
         });
       }
     }, [action]);
-    const onMouseUp = useCallback((e) => {
+    const onMouseUp = useCallback((e3) => {
       if (onChange) {
         onChange(action.targets);
       }
@@ -1862,7 +1864,7 @@
       });
       setAction(false);
     }, [action, onChange]);
-    const onDoubleClick = useCallback((e) => {
+    const onDoubleClick = useCallback((e3) => {
       targets.forEach((target) => {
         target.style.height = "auto";
         target.style.height = window.getComputedStyle(target).height + "px";
@@ -1885,13 +1887,13 @@
         onMouseUp,
         onDoubleClick
       },
-      /* @__PURE__ */ wp.element.createElement("div", { className: classes.controls() }, controls.map((props2, i) => /* @__PURE__ */ wp.element.createElement(
+      /* @__PURE__ */ wp.element.createElement("div", { className: classes.controls() }, controls.map((props2, i3) => /* @__PURE__ */ wp.element.createElement(
         "span",
         {
           className: classes.controls.control(props2.className),
           "data-control-action": props2.action,
           "data-control-flags": props2.flags,
-          key: i
+          key: i3
         }
       )))
     );
@@ -1940,15 +1942,15 @@
     const data = useMemo(() => CP.parseColorClass(proxy.h), [proxy.h]);
     const ColorSelections = useCallback((props2) => {
       const { fixed = false, absolute = false, relative = false, active = false, proxy: proxy2 } = props2;
-      const { h, s, l } = proxy2;
-      const hsl = { h, s, l };
-      return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.colors({ fixed, absolute, relative, active }) }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active }) }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: fixed ? "lock" : absolute ? "media-default" : "excerpt-view" })), Array.from(Array(13), (v, value) => {
+      const { h: h2, s: s3, l: l3 } = proxy2;
+      const hsl = { h: h2, s: s3, l: l3 };
+      return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.colors({ fixed, absolute, relative, active }) }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active }) }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: fixed ? "lock" : absolute ? "media-default" : "excerpt-view" })), Array.from(Array(13), (v3, value) => {
         const colorClass = CP.generateColorClass({ fixed, absolute, relative, value });
-        const active2 = colorClass === h;
+        const active2 = colorClass === h2;
         return /* @__PURE__ */ wp.element.createElement(
           "li",
           {
-            className: classes.colors.item(colorClass, s, l, { active: active2 }),
+            className: classes.colors.item(colorClass, s3, l3, { active: active2 }),
             onClick: () => {
               proxy2.h = !active2 && colorClass;
               onChange(proxy2);
@@ -1961,18 +1963,18 @@
     }, [onChange]);
     const ToneSelections = useCallback((props2) => {
       const { proxy: proxy2 } = props2;
-      const { h, s, l } = proxy2;
-      const hsl = { h, s, l };
-      return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.tones() }, ["s", "l"].map((r) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: r }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active: !!hsl[r] }) }, /* @__PURE__ */ wp.element.createElement(CP.ConfigIcon, { icon: { s: "contrast", l: "light" }[r] })), Array.from(Array(5), (v, index) => {
+      const { h: h2, s: s3, l: l3 } = proxy2;
+      const hsl = { h: h2, s: s3, l: l3 };
+      return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.tones() }, ["s", "l"].map((r3) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: r3 }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active: !!hsl[r3] }) }, /* @__PURE__ */ wp.element.createElement(CP.ConfigIcon, { icon: { s: "contrast", l: "light" }[r3] })), Array.from(Array(5), (v3, index) => {
         const value = index - 2;
-        const toneClass = CP.generateToneClass({ [r]: true, value });
-        const active = toneClass === hsl[r];
+        const toneClass = CP.generateToneClass({ [r3]: true, value });
+        const active = toneClass === hsl[r3];
         return /* @__PURE__ */ wp.element.createElement(
           "li",
           {
-            className: classes.tones.item(h, r === "s" ? l : s, toneClass, { active }),
+            className: classes.tones.item(h2, r3 === "s" ? l3 : s3, toneClass, { active }),
             onClick: () => {
-              proxy2[r] = !active && toneClass;
+              proxy2[r3] = !active && toneClass;
               onChange(proxy2);
             },
             key: toneClass
@@ -2071,48 +2073,366 @@
     ))));
   };
 
+  // ../../../../../../../node_modules/preact/dist/preact.module.js
+  var n;
+  var l;
+  var u;
+  var t;
+  var i;
+  var o;
+  var r;
+  var f;
+  var e;
+  var c;
+  var s;
+  var a;
+  var h = {};
+  var p = [];
+  var v = /acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;
+  var y = Array.isArray;
+  function d(n2, l3) {
+    for (var u3 in l3) n2[u3] = l3[u3];
+    return n2;
+  }
+  function w(n2) {
+    var l3 = n2.parentNode;
+    l3 && l3.removeChild(n2);
+  }
+  function g(n2, t3, i3, o2, r3) {
+    var f3 = { type: n2, props: t3, key: i3, ref: o2, __k: null, __: null, __b: 0, __e: null, __d: void 0, __c: null, constructor: void 0, __v: null == r3 ? ++u : r3, __i: -1, __u: 0 };
+    return null == r3 && null != l.vnode && l.vnode(f3), f3;
+  }
+  function k(n2) {
+    return n2.children;
+  }
+  function b(n2, l3) {
+    this.props = n2, this.context = l3;
+  }
+  function x(n2, l3) {
+    if (null == l3) return n2.__ ? x(n2.__, n2.__i + 1) : null;
+    for (var u3; l3 < n2.__k.length; l3++) if (null != (u3 = n2.__k[l3]) && null != u3.__e) return u3.__e;
+    return "function" == typeof n2.type ? x(n2) : null;
+  }
+  function C(n2) {
+    var l3, u3;
+    if (null != (n2 = n2.__) && null != n2.__c) {
+      for (n2.__e = n2.__c.base = null, l3 = 0; l3 < n2.__k.length; l3++) if (null != (u3 = n2.__k[l3]) && null != u3.__e) {
+        n2.__e = n2.__c.base = u3.__e;
+        break;
+      }
+      return C(n2);
+    }
+  }
+  function M(n2) {
+    (!n2.__d && (n2.__d = true) && i.push(n2) && !P.__r++ || o !== l.debounceRendering) && ((o = l.debounceRendering) || r)(P);
+  }
+  function P() {
+    var n2, u3, t3, o2, r3, e3, c3, s3;
+    for (i.sort(f); n2 = i.shift(); ) n2.__d && (u3 = i.length, o2 = void 0, e3 = (r3 = (t3 = n2).__v).__e, c3 = [], s3 = [], t3.__P && ((o2 = d({}, r3)).__v = r3.__v + 1, l.vnode && l.vnode(o2), O(t3.__P, o2, r3, t3.__n, t3.__P.namespaceURI, 32 & r3.__u ? [e3] : null, c3, null == e3 ? x(r3) : e3, !!(32 & r3.__u), s3), o2.__v = r3.__v, o2.__.__k[o2.__i] = o2, j(c3, o2, s3), o2.__e != e3 && C(o2)), i.length > u3 && i.sort(f));
+    P.__r = 0;
+  }
+  function S(n2, l3, u3, t3, i3, o2, r3, f3, e3, c3, s3) {
+    var a3, v3, y2, d2, w3, _2 = t3 && t3.__k || p, g2 = l3.length;
+    for (u3.__d = e3, $(u3, l3, _2), e3 = u3.__d, a3 = 0; a3 < g2; a3++) null != (y2 = u3.__k[a3]) && "boolean" != typeof y2 && "function" != typeof y2 && (v3 = -1 === y2.__i ? h : _2[y2.__i] || h, y2.__i = a3, O(n2, y2, v3, i3, o2, r3, f3, e3, c3, s3), d2 = y2.__e, y2.ref && v3.ref != y2.ref && (v3.ref && N(v3.ref, null, y2), s3.push(y2.ref, y2.__c || d2, y2)), null == w3 && null != d2 && (w3 = d2), 65536 & y2.__u || v3.__k === y2.__k ? (e3 && "string" == typeof y2.type && !n2.contains(e3) && (e3 = x(v3)), e3 = I(y2, e3, n2)) : "function" == typeof y2.type && void 0 !== y2.__d ? e3 = y2.__d : d2 && (e3 = d2.nextSibling), y2.__d = void 0, y2.__u &= -196609);
+    u3.__d = e3, u3.__e = w3;
+  }
+  function $(n2, l3, u3) {
+    var t3, i3, o2, r3, f3, e3 = l3.length, c3 = u3.length, s3 = c3, a3 = 0;
+    for (n2.__k = [], t3 = 0; t3 < e3; t3++) r3 = t3 + a3, null != (i3 = n2.__k[t3] = null == (i3 = l3[t3]) || "boolean" == typeof i3 || "function" == typeof i3 ? null : "string" == typeof i3 || "number" == typeof i3 || "bigint" == typeof i3 || i3.constructor == String ? g(null, i3, null, null, null) : y(i3) ? g(k, { children: i3 }, null, null, null) : void 0 === i3.constructor && i3.__b > 0 ? g(i3.type, i3.props, i3.key, i3.ref ? i3.ref : null, i3.__v) : i3) ? (i3.__ = n2, i3.__b = n2.__b + 1, f3 = L(i3, u3, r3, s3), i3.__i = f3, o2 = null, -1 !== f3 && (s3--, (o2 = u3[f3]) && (o2.__u |= 131072)), null == o2 || null === o2.__v ? (-1 == f3 && a3--, "function" != typeof i3.type && (i3.__u |= 65536)) : f3 !== r3 && (f3 == r3 - 1 ? a3 = f3 - r3 : f3 == r3 + 1 ? a3++ : f3 > r3 ? s3 > e3 - r3 ? a3 += f3 - r3 : a3-- : f3 < r3 && a3++, f3 !== t3 + a3 && (i3.__u |= 65536))) : (o2 = u3[r3]) && null == o2.key && o2.__e && 0 == (131072 & o2.__u) && (o2.__e == n2.__d && (n2.__d = x(o2)), V(o2, o2, false), u3[r3] = null, s3--);
+    if (s3) for (t3 = 0; t3 < c3; t3++) null != (o2 = u3[t3]) && 0 == (131072 & o2.__u) && (o2.__e == n2.__d && (n2.__d = x(o2)), V(o2, o2));
+  }
+  function I(n2, l3, u3) {
+    var t3, i3;
+    if ("function" == typeof n2.type) {
+      for (t3 = n2.__k, i3 = 0; t3 && i3 < t3.length; i3++) t3[i3] && (t3[i3].__ = n2, l3 = I(t3[i3], l3, u3));
+      return l3;
+    }
+    n2.__e != l3 && (u3.insertBefore(n2.__e, l3 || null), l3 = n2.__e);
+    do {
+      l3 = l3 && l3.nextSibling;
+    } while (null != l3 && 8 === l3.nodeType);
+    return l3;
+  }
+  function L(n2, l3, u3, t3) {
+    var i3 = n2.key, o2 = n2.type, r3 = u3 - 1, f3 = u3 + 1, e3 = l3[u3];
+    if (null === e3 || e3 && i3 == e3.key && o2 === e3.type && 0 == (131072 & e3.__u)) return u3;
+    if (t3 > (null != e3 && 0 == (131072 & e3.__u) ? 1 : 0)) for (; r3 >= 0 || f3 < l3.length; ) {
+      if (r3 >= 0) {
+        if ((e3 = l3[r3]) && 0 == (131072 & e3.__u) && i3 == e3.key && o2 === e3.type) return r3;
+        r3--;
+      }
+      if (f3 < l3.length) {
+        if ((e3 = l3[f3]) && 0 == (131072 & e3.__u) && i3 == e3.key && o2 === e3.type) return f3;
+        f3++;
+      }
+    }
+    return -1;
+  }
+  function T(n2, l3, u3) {
+    "-" === l3[0] ? n2.setProperty(l3, null == u3 ? "" : u3) : n2[l3] = null == u3 ? "" : "number" != typeof u3 || v.test(l3) ? u3 : u3 + "px";
+  }
+  function A(n2, l3, u3, t3, i3) {
+    var o2;
+    n: if ("style" === l3) if ("string" == typeof u3) n2.style.cssText = u3;
+    else {
+      if ("string" == typeof t3 && (n2.style.cssText = t3 = ""), t3) for (l3 in t3) u3 && l3 in u3 || T(n2.style, l3, "");
+      if (u3) for (l3 in u3) t3 && u3[l3] === t3[l3] || T(n2.style, l3, u3[l3]);
+    }
+    else if ("o" === l3[0] && "n" === l3[1]) o2 = l3 !== (l3 = l3.replace(/(PointerCapture)$|Capture$/i, "$1")), l3 = l3.toLowerCase() in n2 || "onFocusOut" === l3 || "onFocusIn" === l3 ? l3.toLowerCase().slice(2) : l3.slice(2), n2.l || (n2.l = {}), n2.l[l3 + o2] = u3, u3 ? t3 ? u3.u = t3.u : (u3.u = e, n2.addEventListener(l3, o2 ? s : c, o2)) : n2.removeEventListener(l3, o2 ? s : c, o2);
+    else {
+      if ("http://www.w3.org/2000/svg" == i3) l3 = l3.replace(/xlink(H|:h)/, "h").replace(/sName$/, "s");
+      else if ("width" != l3 && "height" != l3 && "href" != l3 && "list" != l3 && "form" != l3 && "tabIndex" != l3 && "download" != l3 && "rowSpan" != l3 && "colSpan" != l3 && "role" != l3 && "popover" != l3 && l3 in n2) try {
+        n2[l3] = null == u3 ? "" : u3;
+        break n;
+      } catch (n3) {
+      }
+      "function" == typeof u3 || (null == u3 || false === u3 && "-" !== l3[4] ? n2.removeAttribute(l3) : n2.setAttribute(l3, "popover" == l3 && 1 == u3 ? "" : u3));
+    }
+  }
+  function F(n2) {
+    return function(u3) {
+      if (this.l) {
+        var t3 = this.l[u3.type + n2];
+        if (null == u3.t) u3.t = e++;
+        else if (u3.t < t3.u) return;
+        return t3(l.event ? l.event(u3) : u3);
+      }
+    };
+  }
+  function O(n2, u3, t3, i3, o2, r3, f3, e3, c3, s3) {
+    var a3, h2, p2, v3, w3, _2, g2, m2, x2, C2, M2, P2, $2, I2, H, L2, T2 = u3.type;
+    if (void 0 !== u3.constructor) return null;
+    128 & t3.__u && (c3 = !!(32 & t3.__u), r3 = [e3 = u3.__e = t3.__e]), (a3 = l.__b) && a3(u3);
+    n: if ("function" == typeof T2) try {
+      if (m2 = u3.props, x2 = "prototype" in T2 && T2.prototype.render, C2 = (a3 = T2.contextType) && i3[a3.__c], M2 = a3 ? C2 ? C2.props.value : a3.__ : i3, t3.__c ? g2 = (h2 = u3.__c = t3.__c).__ = h2.__E : (x2 ? u3.__c = h2 = new T2(m2, M2) : (u3.__c = h2 = new b(m2, M2), h2.constructor = T2, h2.render = q), C2 && C2.sub(h2), h2.props = m2, h2.state || (h2.state = {}), h2.context = M2, h2.__n = i3, p2 = h2.__d = true, h2.__h = [], h2._sb = []), x2 && null == h2.__s && (h2.__s = h2.state), x2 && null != T2.getDerivedStateFromProps && (h2.__s == h2.state && (h2.__s = d({}, h2.__s)), d(h2.__s, T2.getDerivedStateFromProps(m2, h2.__s))), v3 = h2.props, w3 = h2.state, h2.__v = u3, p2) x2 && null == T2.getDerivedStateFromProps && null != h2.componentWillMount && h2.componentWillMount(), x2 && null != h2.componentDidMount && h2.__h.push(h2.componentDidMount);
+      else {
+        if (x2 && null == T2.getDerivedStateFromProps && m2 !== v3 && null != h2.componentWillReceiveProps && h2.componentWillReceiveProps(m2, M2), !h2.__e && (null != h2.shouldComponentUpdate && false === h2.shouldComponentUpdate(m2, h2.__s, M2) || u3.__v === t3.__v)) {
+          for (u3.__v !== t3.__v && (h2.props = m2, h2.state = h2.__s, h2.__d = false), u3.__e = t3.__e, u3.__k = t3.__k, u3.__k.forEach(function(n3) {
+            n3 && (n3.__ = u3);
+          }), P2 = 0; P2 < h2._sb.length; P2++) h2.__h.push(h2._sb[P2]);
+          h2._sb = [], h2.__h.length && f3.push(h2);
+          break n;
+        }
+        null != h2.componentWillUpdate && h2.componentWillUpdate(m2, h2.__s, M2), x2 && null != h2.componentDidUpdate && h2.__h.push(function() {
+          h2.componentDidUpdate(v3, w3, _2);
+        });
+      }
+      if (h2.context = M2, h2.props = m2, h2.__P = n2, h2.__e = false, $2 = l.__r, I2 = 0, x2) {
+        for (h2.state = h2.__s, h2.__d = false, $2 && $2(u3), a3 = h2.render(h2.props, h2.state, h2.context), H = 0; H < h2._sb.length; H++) h2.__h.push(h2._sb[H]);
+        h2._sb = [];
+      } else do {
+        h2.__d = false, $2 && $2(u3), a3 = h2.render(h2.props, h2.state, h2.context), h2.state = h2.__s;
+      } while (h2.__d && ++I2 < 25);
+      h2.state = h2.__s, null != h2.getChildContext && (i3 = d(d({}, i3), h2.getChildContext())), x2 && !p2 && null != h2.getSnapshotBeforeUpdate && (_2 = h2.getSnapshotBeforeUpdate(v3, w3)), S(n2, y(L2 = null != a3 && a3.type === k && null == a3.key ? a3.props.children : a3) ? L2 : [L2], u3, t3, i3, o2, r3, f3, e3, c3, s3), h2.base = u3.__e, u3.__u &= -161, h2.__h.length && f3.push(h2), g2 && (h2.__E = h2.__ = null);
+    } catch (n3) {
+      u3.__v = null, c3 || null != r3 ? (u3.__e = e3, u3.__u |= c3 ? 160 : 32, r3[r3.indexOf(e3)] = null) : (u3.__e = t3.__e, u3.__k = t3.__k), l.__e(n3, u3, t3);
+    }
+    else null == r3 && u3.__v === t3.__v ? (u3.__k = t3.__k, u3.__e = t3.__e) : u3.__e = z(t3.__e, u3, t3, i3, o2, r3, f3, c3, s3);
+    (a3 = l.diffed) && a3(u3);
+  }
+  function j(n2, u3, t3) {
+    u3.__d = void 0;
+    for (var i3 = 0; i3 < t3.length; i3++) N(t3[i3], t3[++i3], t3[++i3]);
+    l.__c && l.__c(u3, n2), n2.some(function(u4) {
+      try {
+        n2 = u4.__h, u4.__h = [], n2.some(function(n3) {
+          n3.call(u4);
+        });
+      } catch (n3) {
+        l.__e(n3, u4.__v);
+      }
+    });
+  }
+  function z(l3, u3, t3, i3, o2, r3, f3, e3, c3) {
+    var s3, a3, p2, v3, d2, _2, g2, m2 = t3.props, k3 = u3.props, b2 = u3.type;
+    if ("svg" === b2 ? o2 = "http://www.w3.org/2000/svg" : "math" === b2 ? o2 = "http://www.w3.org/1998/Math/MathML" : o2 || (o2 = "http://www.w3.org/1999/xhtml"), null != r3) {
+      for (s3 = 0; s3 < r3.length; s3++) if ((d2 = r3[s3]) && "setAttribute" in d2 == !!b2 && (b2 ? d2.localName === b2 : 3 === d2.nodeType)) {
+        l3 = d2, r3[s3] = null;
+        break;
+      }
+    }
+    if (null == l3) {
+      if (null === b2) return document.createTextNode(k3);
+      l3 = document.createElementNS(o2, b2, k3.is && k3), r3 = null, e3 = false;
+    }
+    if (null === b2) m2 === k3 || e3 && l3.data === k3 || (l3.data = k3);
+    else {
+      if (r3 = r3 && n.call(l3.childNodes), m2 = t3.props || h, !e3 && null != r3) for (m2 = {}, s3 = 0; s3 < l3.attributes.length; s3++) m2[(d2 = l3.attributes[s3]).name] = d2.value;
+      for (s3 in m2) if (d2 = m2[s3], "children" == s3) ;
+      else if ("dangerouslySetInnerHTML" == s3) p2 = d2;
+      else if ("key" !== s3 && !(s3 in k3)) {
+        if ("value" == s3 && "defaultValue" in k3 || "checked" == s3 && "defaultChecked" in k3) continue;
+        A(l3, s3, null, d2, o2);
+      }
+      for (s3 in k3) d2 = k3[s3], "children" == s3 ? v3 = d2 : "dangerouslySetInnerHTML" == s3 ? a3 = d2 : "value" == s3 ? _2 = d2 : "checked" == s3 ? g2 = d2 : "key" === s3 || e3 && "function" != typeof d2 || m2[s3] === d2 || A(l3, s3, d2, m2[s3], o2);
+      if (a3) e3 || p2 && (a3.__html === p2.__html || a3.__html === l3.innerHTML) || (l3.innerHTML = a3.__html), u3.__k = [];
+      else if (p2 && (l3.innerHTML = ""), S(l3, y(v3) ? v3 : [v3], u3, t3, i3, "foreignObject" === b2 ? "http://www.w3.org/1999/xhtml" : o2, r3, f3, r3 ? r3[0] : t3.__k && x(t3, 0), e3, c3), null != r3) for (s3 = r3.length; s3--; ) null != r3[s3] && w(r3[s3]);
+      e3 || (s3 = "value", void 0 !== _2 && (_2 !== l3[s3] || "progress" === b2 && !_2 || "option" === b2 && _2 !== m2[s3]) && A(l3, s3, _2, m2[s3], o2), s3 = "checked", void 0 !== g2 && g2 !== l3[s3] && A(l3, s3, g2, m2[s3], o2));
+    }
+    return l3;
+  }
+  function N(n2, u3, t3) {
+    try {
+      "function" == typeof n2 ? n2(u3) : n2.current = u3;
+    } catch (n3) {
+      l.__e(n3, t3);
+    }
+  }
+  function V(n2, u3, t3) {
+    var i3, o2;
+    if (l.unmount && l.unmount(n2), (i3 = n2.ref) && (i3.current && i3.current !== n2.__e || N(i3, null, u3)), null != (i3 = n2.__c)) {
+      if (i3.componentWillUnmount) try {
+        i3.componentWillUnmount();
+      } catch (n3) {
+        l.__e(n3, u3);
+      }
+      i3.base = i3.__P = null;
+    }
+    if (i3 = n2.__k) for (o2 = 0; o2 < i3.length; o2++) i3[o2] && V(i3[o2], u3, t3 || "function" != typeof n2.type);
+    t3 || null == n2.__e || w(n2.__e), n2.__c = n2.__ = n2.__e = n2.__d = void 0;
+  }
+  function q(n2, l3, u3) {
+    return this.constructor(n2, u3);
+  }
+  n = p.slice, l = { __e: function(n2, l3, u3, t3) {
+    for (var i3, o2, r3; l3 = l3.__; ) if ((i3 = l3.__c) && !i3.__) try {
+      if ((o2 = i3.constructor) && null != o2.getDerivedStateFromError && (i3.setState(o2.getDerivedStateFromError(n2)), r3 = i3.__d), null != i3.componentDidCatch && (i3.componentDidCatch(n2, t3 || {}), r3 = i3.__d), r3) return i3.__E = i3;
+    } catch (l4) {
+      n2 = l4;
+    }
+    throw n2;
+  } }, u = 0, t = function(n2) {
+    return null != n2 && null == n2.constructor;
+  }, b.prototype.setState = function(n2, l3) {
+    var u3;
+    u3 = null != this.__s && this.__s !== this.state ? this.__s : this.__s = d({}, this.state), "function" == typeof n2 && (n2 = n2(d({}, u3), this.props)), n2 && d(u3, n2), null != n2 && this.__v && (l3 && this._sb.push(l3), M(this));
+  }, b.prototype.forceUpdate = function(n2) {
+    this.__v && (this.__e = true, n2 && this.__h.push(n2), M(this));
+  }, b.prototype.render = k, i = [], r = "function" == typeof Promise ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, f = function(n2, l3) {
+    return n2.__v.__b - l3.__v.__b;
+  }, P.__r = 0, e = 0, c = F(false), s = F(true), a = 0;
+
+  // ../../../../../../../node_modules/preact/hooks/dist/hooks.module.js
+  var t2;
+  var r2;
+  var u2;
+  var i2;
+  var f2 = [];
+  var c2 = l;
+  var e2 = c2.__b;
+  var a2 = c2.__r;
+  var v2 = c2.diffed;
+  var l2 = c2.__c;
+  var m = c2.unmount;
+  var s2 = c2.__;
+  function j2() {
+    for (var n2; n2 = f2.shift(); ) if (n2.__P && n2.__H) try {
+      n2.__H.__h.forEach(z2), n2.__H.__h.forEach(B), n2.__H.__h = [];
+    } catch (t3) {
+      n2.__H.__h = [], c2.__e(t3, n2.__v);
+    }
+  }
+  c2.__b = function(n2) {
+    r2 = null, e2 && e2(n2);
+  }, c2.__ = function(n2, t3) {
+    n2 && t3.__k && t3.__k.__m && (n2.__m = t3.__k.__m), s2 && s2(n2, t3);
+  }, c2.__r = function(n2) {
+    a2 && a2(n2), t2 = 0;
+    var i3 = (r2 = n2.__c).__H;
+    i3 && (u2 === r2 ? (i3.__h = [], r2.__h = [], i3.__.forEach(function(n3) {
+      n3.__N && (n3.__ = n3.__N), n3.i = n3.__N = void 0;
+    })) : (i3.__h.forEach(z2), i3.__h.forEach(B), i3.__h = [], t2 = 0)), u2 = r2;
+  }, c2.diffed = function(n2) {
+    v2 && v2(n2);
+    var t3 = n2.__c;
+    t3 && t3.__H && (t3.__H.__h.length && (1 !== f2.push(t3) && i2 === c2.requestAnimationFrame || ((i2 = c2.requestAnimationFrame) || w2)(j2)), t3.__H.__.forEach(function(n3) {
+      n3.i && (n3.__H = n3.i), n3.i = void 0;
+    })), u2 = r2 = null;
+  }, c2.__c = function(n2, t3) {
+    t3.some(function(n3) {
+      try {
+        n3.__h.forEach(z2), n3.__h = n3.__h.filter(function(n4) {
+          return !n4.__ || B(n4);
+        });
+      } catch (r3) {
+        t3.some(function(n4) {
+          n4.__h && (n4.__h = []);
+        }), t3 = [], c2.__e(r3, n3.__v);
+      }
+    }), l2 && l2(n2, t3);
+  }, c2.unmount = function(n2) {
+    m && m(n2);
+    var t3, r3 = n2.__c;
+    r3 && r3.__H && (r3.__H.__.forEach(function(n3) {
+      try {
+        z2(n3);
+      } catch (n4) {
+        t3 = n4;
+      }
+    }), r3.__H = void 0, t3 && c2.__e(t3, r3.__v));
+  };
+  var k2 = "function" == typeof requestAnimationFrame;
+  function w2(n2) {
+    var t3, r3 = function() {
+      clearTimeout(u3), k2 && cancelAnimationFrame(t3), setTimeout(n2);
+    }, u3 = setTimeout(r3, 100);
+    k2 && (t3 = requestAnimationFrame(r3));
+  }
+  function z2(n2) {
+    var t3 = r2, u3 = n2.__c;
+    "function" == typeof u3 && (n2.__c = void 0, u3()), r2 = t3;
+  }
+  function B(n2) {
+    var t3 = r2;
+    n2.__c = n2.__(), r2 = t3;
+  }
+
   // ../blocks/_init/init/SelectResponsiveImage.jsx
   CP.SelectResponsiveImage = (props) => {
     const { className = "", attr, set, keys = {}, index = 0, subIndex = 0, size, devices, device, isTemplate, ...otherProps } = props;
-    const { useMemo } = wp.element;
+    const { useMemo, useCallback } = wp.element;
     const classes = useMemo(() => bem("CP-SelectResponsiveImage " + className), [className]);
     let { sizes } = props;
-    let type, onClick, item, items2;
+    let type, onClick, item, items2, subItems;
+    item = attr || {};
     if (keys.items) {
-      items2 = attr[keys.items];
+      items2 = item[keys.items] || [];
+      item = items2[index] || {};
       if (keys.subItems) {
-        item = items2[index][keys.subItems][subIndex];
-      } else {
-        item = items2[index];
+        subItems = item[keys.subItems] || [];
+        item = subItems[subIndex];
       }
-    } else {
-      item = attr;
     }
     if (device) {
       const sizeData = CP.devices[device];
-      onClick = (e) => CP.selectImage({ src: "src" }, function({ src: src2 }) {
+      onClick = (e3) => CP.selectImage({ src: "src" }, function({ src: src2 }) {
         if (keys.sources) {
-          item[keys.sources].forEach((source) => {
-            if (source.device === device) {
-              source.srcset = src2;
-            }
-          });
+          const source = item[keys.sources].find((source2) => source2.device === device);
+          if (source) {
+            source.srcset = src2;
+          } else {
+            item[keys.sources].push({ device, srcset: src2 });
+          }
           if (items2) {
             set({ [keys.items]: JSON.parse(JSON.stringify(items2)) });
           } else {
             set({ [keys.sources]: JSON.parse(JSON.stringify(item[keys.sources])) });
           }
         } else {
-          if (items2) {
+          if (item[keys.srcset].match(sizeData.reg)) {
             item[keys.srcset] = item[keys.srcset].replace(sizeData.reg, src2 + sizeData.rep);
+          } else {
+            item[keys.srcset] += "," + src2 + sizeData.rep;
+          }
+          if (items2) {
             set({ [keys.items]: JSON.parse(JSON.stringify(items2)) });
           } else {
-            set({ [keys.srcset]: item[keys.srcset].replace(sizeData.reg, src2 + sizeData.rep) });
+            set({ [keys.srcset]: item[keys.srcset] });
           }
         }
       }, sizeData.media_size);
     } else {
-      onClick = (e) => CP.selectImage(keys, function(data) {
+      onClick = (e3) => CP.selectImage(keys, function(data) {
         if (keys.items) {
           Object.assign(item, data);
           set({ [keys.items]: JSON.parse(JSON.stringify(items2)) });
@@ -2306,14 +2626,26 @@
   // ../blocks/_init/init/SelectPictureSources.jsx
   CP.SelectPictureSources = (props) => {
     const { Icon } = wp.components;
-    const { devices, compact = false } = props;
+    const {
+      devices = ["sp", "tb"],
+      keys = {
+        "mime": "mime",
+        "src": "src",
+        "alt": "alt",
+        "srcset": "srcset",
+        "sources": "sources"
+      },
+      compact = false
+    } = props;
     const { useMemo } = wp.element;
     const classes = useMemo(() => bem("CP-SelectPictureSources"), []);
-    return /* @__PURE__ */ wp.element.createElement("table", { className: classes({ "is-compact": compact }) }, /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.tbody() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), colSpan: devices.length }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props }))), /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, devices.map((device) => /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: device }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.tbody.tr.td.label() }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement("table", { className: classes({ "is-compact": compact }) }, /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.tbody() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), colSpan: devices.length }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props, keys, devices }))), /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, devices.map((device) => /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: device }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.tbody.tr.td.label() }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(
       CP.SelectResponsiveImage,
       {
-        device,
-        ...props
+        ...props,
+        keys,
+        devices,
+        device
       }
     ))))));
   };
@@ -2478,34 +2810,34 @@
     const el = wp.element.createElement;
     const Row = useCallback((props2) => {
       const { cols: cols2, value: value2, onChange: onChange2 } = props2;
-      return /* @__PURE__ */ wp.element.createElement("tr", { className: "DataInputTable__body__row" }, Object.keys(cols2).map((c) => /* @__PURE__ */ wp.element.createElement("td", { className: "DataInputTable__body__row__cell", key: c }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("tr", { className: "DataInputTable__body__row" }, Object.keys(cols2).map((c3) => /* @__PURE__ */ wp.element.createElement("td", { className: "DataInputTable__body__row__cell", key: c3 }, /* @__PURE__ */ wp.element.createElement(
         CP.DynamicInput,
         {
-          value: value2[c],
+          value: value2[c3],
           onChange: (val) => {
-            value2[c] = val;
+            value2[c3] = val;
             onChange2(value2);
           },
-          param: cols2[c]
+          param: cols2[c3]
         }
       ))));
     }, []);
     const defaultRowValues = useMemo(() => {
       const rowValue = {};
-      Object.keys(cols).forEach((c) => {
-        rowValue[c] = cols[c].default || "";
+      Object.keys(cols).forEach((c3) => {
+        rowValue[c3] = cols[c3].default || "";
       });
       return [rowValue];
     }, [cols]);
     const colsWithoutLabel = useMemo(() => {
       const colsWithoutLabel2 = {};
-      Object.keys(cols).forEach((c) => {
-        const { label, ...otherParams } = cols[c];
-        colsWithoutLabel2[c] = otherParams;
+      Object.keys(cols).forEach((c3) => {
+        const { label, ...otherParams } = cols[c3];
+        colsWithoutLabel2[c3] = otherParams;
       });
       return colsWithoutLabel2;
     }, [cols]);
-    return /* @__PURE__ */ wp.element.createElement("table", { className: "DataInputTable" }, /* @__PURE__ */ wp.element.createElement("thead", { className: "DataInputTable__head" }, /* @__PURE__ */ wp.element.createElement("tr", { className: "DataInputTable__head__row" }, Object.keys(cols).map((c) => /* @__PURE__ */ wp.element.createElement("th", { className: "DataInputTable__head__row__cell", key: c }, cols[c].label || c)))), /* @__PURE__ */ wp.element.createElement("tbody", { className: "DataInputTable__body" }, (value || defaultRowValues).map((rowValue, index) => /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement("table", { className: "DataInputTable" }, /* @__PURE__ */ wp.element.createElement("thead", { className: "DataInputTable__head" }, /* @__PURE__ */ wp.element.createElement("tr", { className: "DataInputTable__head__row" }, Object.keys(cols).map((c3) => /* @__PURE__ */ wp.element.createElement("th", { className: "DataInputTable__head__row__cell", key: c3 }, cols[c3].label || c3)))), /* @__PURE__ */ wp.element.createElement("tbody", { className: "DataInputTable__body" }, (value || defaultRowValues).map((rowValue, index) => /* @__PURE__ */ wp.element.createElement(
       Row,
       {
         cols: colsWithoutLabel,
@@ -2702,10 +3034,10 @@
         CP.ItemControl,
         {
           controls: {
-            "delete": (e) => CP.deleteItem(dataProps),
-            "clone": (e) => CP.cloneItem(dataProps),
-            "up": (e) => CP.upItem(dataProps),
-            "down": (e) => CP.downItem(dataProps)
+            "delete": (e3) => CP.deleteItem(dataProps),
+            "clone": (e3) => CP.cloneItem(dataProps),
+            "up": (e3) => CP.upItem(dataProps),
+            "down": (e3) => CP.downItem(dataProps)
           }
         }
       ));
@@ -2733,33 +3065,33 @@
         style: props.style,
         "data-index": index,
         "data-refine-cond": items2[index]["cond"],
-        onKeyDown: (e) => {
-          if (e.ctrlKey || e.metaKey) {
-            switch (e.key) {
+        onKeyDown: (e3) => {
+          if (e3.ctrlKey || e3.metaKey) {
+            switch (e3.key) {
               case "s":
                 CP.saveItem(props);
-                e.preventDefault();
+                e3.preventDefault();
                 break;
               case "d":
                 CP.cloneItem(props);
-                e.preventDefault();
+                e3.preventDefault();
                 break;
               case "Backspace":
                 CP.deleteItem(props);
-                e.preventDefault();
+                e3.preventDefault();
                 break;
               case "ArrowUp":
                 CP.upItem(props);
-                e.preventDefault();
+                e3.preventDefault();
                 break;
               case "ArrowDown":
                 CP.downItem(props);
-                e.preventDefault();
+                e3.preventDefault();
                 break;
             }
           }
         },
-        onClick: (e) => {
+        onClick: (e3) => {
           set({ [indexKey]: index });
         }
       },
@@ -2767,10 +3099,10 @@
         CP.ItemControl,
         {
           controls: {
-            "delete": (e) => CP.deleteItem(props),
-            "clone": (e) => CP.cloneItem(props),
-            "up": (e) => CP.upItem(props),
-            "down": (e) => CP.downItem(props)
+            "delete": (e3) => CP.deleteItem(props),
+            "clone": (e3) => CP.cloneItem(props),
+            "up": (e3) => CP.upItem(props),
+            "down": (e3) => CP.downItem(props)
           }
         }
       ))
@@ -2977,6 +3309,10 @@
               if (prm.label) {
                 rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
               }
+              let attr2 = JSON.parse(props2.attr[prm.json]);
+              if (prm.key) {
+                attr2 = attr2[prm.key];
+              }
               rtn.push(
                 /* @__PURE__ */ wp.element.createElement(
                   CP.SelectPictureSources,
@@ -2986,12 +3322,16 @@
                       if (prm.filter) {
                         val = prm.filter(val, states2, props2);
                       }
-                      CP.setJsonValues(props2, prm.json, prm.keys, val);
+                      if (prm.key) {
+                        CP.setJsonValue(props2, prm.json, prm.key, Object.assign(attr2, val));
+                      } else {
+                        CP.setJsonValues(props2, prm.json, prm.keys, val);
+                      }
                       if (prm.effect) {
                         prm.effect(val, states2, props2);
                       }
                     },
-                    attr: JSON.parse(props2.attr[prm.json]),
+                    attr: attr2,
                     keys: prm.keys,
                     sizes: prm.sizes,
                     devices: prm.devices,
@@ -3210,7 +3550,7 @@
                       if (!image.conf) {
                         return;
                       }
-                      const { size, width, height, repeat, x, y } = image.conf;
+                      const { size, width, height, repeat, x: x2, y: y2 } = image.conf;
                       tgt["background-image"] = "url(" + image.url + ")";
                       if (width && height) {
                         tgt["background-size"] = width + "px " + height + "px";
@@ -3224,8 +3564,8 @@
                       } else {
                         delete tgt["background-repeat"];
                       }
-                      if (x && y) {
-                        tgt["background-position"] = x + "% " + y + "%";
+                      if (x2 && y2) {
+                        tgt["background-position"] = x2 + "% " + y2 + "%";
                       } else {
                         delete tgt["background-position"];
                       }
@@ -3760,9 +4100,9 @@
   CP.SelectPatternClass = (props) => {
     const { BaseControl } = wp.components;
     const { label, help, selected, onChange } = props;
-    var items2 = Array.from(Array(6), (v, i) => {
-      var classes = "bgPattern" + i;
-      const value = "pattern" + i;
+    var items2 = Array.from(Array(6), (v3, i3) => {
+      var classes = "bgPattern" + i3;
+      const value = "pattern" + i3;
       if (value == selected) {
         classes += " active";
       }
@@ -3817,16 +4157,16 @@
   CP.ImporterCSVPanel = (props) => {
     const { PanelBody, FormFileUpload } = wp.components;
     let reader = new FileReader();
-    reader.onload = (e) => {
-      props.callback(CP.parseCSV(e.target.result));
+    reader.onload = (e3) => {
+      props.callback(CP.parseCSV(e3.target.result));
     };
     return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(
       FormFileUpload,
       {
         label: "CSV",
         accept: "text/csv",
-        onChange: (e) => {
-          reader.readAsText(e.target.files[0]);
+        onChange: (e3) => {
+          reader.readAsText(e3.target.files[0]);
         }
       }
     ));
@@ -3949,21 +4289,21 @@
       return columns2;
     }, []);
     const columns = getActiveColumns(props);
-    return /* @__PURE__ */ wp.element.createElement("table", { className: classes() }, /* @__PURE__ */ wp.element.createElement("thead", { className: classes.thead() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.thead.tr() }, columns.map((col, c) => /* @__PURE__ */ wp.element.createElement("th", { className: classes.thead.tr.th(), key: c }, col.label || col.key)), /* @__PURE__ */ wp.element.createElement("th", { className: classes.thead.tr.th() }))), /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.tbody() }, items2.map((item, index) => {
+    return /* @__PURE__ */ wp.element.createElement("table", { className: classes() }, /* @__PURE__ */ wp.element.createElement("thead", { className: classes.thead() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.thead.tr() }, columns.map((col, c3) => /* @__PURE__ */ wp.element.createElement("th", { className: classes.thead.tr.th(), key: c3 }, col.label || col.key)), /* @__PURE__ */ wp.element.createElement("th", { className: classes.thead.tr.th() }))), /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.tbody() }, items2.map((item, index) => {
       const propsForControl = { tag: "tr", set, itemsKey, items: items2, index };
       return /* @__PURE__ */ wp.element.createElement(
         "tr",
         {
           className: classes.tbody.tr(),
-          onClick: (e) => {
+          onClick: (e3) => {
             set({ currentItemIndex: index });
           },
           key: index
         },
-        columns.map((col, c) => {
+        columns.map((col, c3) => {
           switch (col.type) {
             case "text": {
-              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c3 }, /* @__PURE__ */ wp.element.createElement(
                 RichText,
                 {
                   value: item[col.key],
@@ -3975,7 +4315,7 @@
               ));
             }
             case "image": {
-              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c3 }, /* @__PURE__ */ wp.element.createElement(
                 CP.SelectResponsiveImage,
                 {
                   attr,
@@ -3988,7 +4328,7 @@
               ));
             }
             case "picture": {
-              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c3 }, /* @__PURE__ */ wp.element.createElement(
                 CP.SelectPictureSources,
                 {
                   index,
@@ -4007,7 +4347,7 @@
                   subCol.keys.subItems = col.key;
                 }
               });
-              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c3 }, /* @__PURE__ */ wp.element.createElement(
                 CP.EditItemsTable,
                 {
                   set: () => {
@@ -4026,10 +4366,10 @@
           CP.ItemControl,
           {
             controls: {
-              "delete": (e) => CP.deleteItem(propsForControl),
-              "clone": (e) => CP.cloneItem(propsForControl),
-              "up": (e) => CP.upItem(propsForControl),
-              "down": (e) => CP.downItem(propsForControl)
+              "delete": (e3) => CP.deleteItem(propsForControl),
+              "clone": (e3) => CP.cloneItem(propsForControl),
+              "up": (e3) => CP.upItem(propsForControl),
+              "down": (e3) => CP.downItem(propsForControl)
             },
             float: false
           }
@@ -4219,7 +4559,7 @@
   // ../blocks/_init/init/ServerSideRenderPart.jsx
   CP.ServerSideRenderPart = (props) => {
     const { className, ...otherProps } = props;
-    return /* @__PURE__ */ wp.element.createElement("div", { className }, "[ssr_parts" + Object.keys(otherProps).reduce((p, c) => p += ` ${c}=${otherProps[c]}`, "") + "]");
+    return /* @__PURE__ */ wp.element.createElement("div", { className }, "[ssr_parts" + Object.keys(otherProps).reduce((p2, c3) => p2 += ` ${c3}=${otherProps[c3]}`, "") + "]");
   };
   CP.ServerSideRenderPart.Preview = (props) => {
     const { className, name, ...otherProps } = props;
@@ -4262,10 +4602,10 @@
       const vars2 = {};
       if (target) {
         const styles = getComputedStyle(target);
-        ["b", "s", "t", "m", "a", "i"].forEach((k) => {
-          ["h", "s", "l"].forEach((r) => {
-            ["", "-container"].forEach((p) => {
-              const name = `--cp${p}-tones-${k}-${r}`;
+        ["b", "s", "t", "m", "a", "i"].forEach((k3) => {
+          ["h", "s", "l"].forEach((r3) => {
+            ["", "-container"].forEach((p2) => {
+              const name = `--cp${p2}-tones-${k3}-${r3}`;
               vars2[name] = styles.getPropertyValue(name);
             });
           });
@@ -4327,12 +4667,12 @@
       }
       return style;
     }, []);
-    const onClickItem = useCallback((e) => {
-      const index2 = parseInt(e.currentTarget.dataset.index);
+    const onClickItem = useCallback((e3) => {
+      const index2 = parseInt(e3.currentTarget.dataset.index);
       const selected = currentItemIndexes.includes(index2);
-      if (e.shiftKey) {
+      if (e3.shiftKey) {
         if (selected) {
-          setCurrentItemIndexes(currentItemIndexes.filter((i) => i !== index2));
+          setCurrentItemIndexes(currentItemIndexes.filter((i3) => i3 !== index2));
         } else {
           setCurrentItemIndexes(currentItemIndexes.concat([index2]));
         }
@@ -4410,7 +4750,7 @@
         {
           className: "item",
           style: CP.parseStyleString(style),
-          onClick: (e) => editMode && onClickItem(e),
+          onClick: (e3) => editMode && onClickItem(e3),
           "data-index": index2,
           ref: (el) => targetRefs.current[index2] = el,
           key: index2
@@ -4419,7 +4759,7 @@
           "picture",
           {
             className: "picture",
-            onClick: (e) => editMode && currentItemIndexes.includes(index2) && CP.selectImage({ sources: "sources", src: "src", alt: "alt" }, function(data) {
+            onClick: (e3) => editMode && currentItemIndexes.includes(index2) && CP.selectImage({ sources: "sources", src: "src", alt: "alt" }, function(data) {
               Object.assign(picture, data);
               save();
             }, "full", devices)
@@ -4488,8 +4828,8 @@
         className: classes.input(),
         contentEditable: true,
         suppressContentEditableWarning: true,
-        onBlur: (e) => {
-          const href = e.target.textContent;
+        onBlur: (e3) => {
+          const href = e3.target.textContent;
           if (keys.items) {
             Object.assign(attr[keys.items][index], { [keys.href]: href });
             set({ [keys.items]: JSON.parse(JSON.stringify(attr[keys.items])) });
@@ -4516,8 +4856,8 @@
       return items3;
     })();
     return (() => {
-      const l = items2.length;
-      const h = l >> 1;
+      const l3 = items2.length;
+      const h2 = l3 >> 1;
       return items2.map((item, index) => {
         return /* @__PURE__ */ wp.element.createElement(
           Component,
@@ -4525,7 +4865,7 @@
             ...otherProps,
             ...item,
             index,
-            position: loop ? (index - current + l + h) % l - h : index - current,
+            position: loop ? (index - current + l3 + h2) % l3 - h2 : index - current,
             key: index
           }
         );
