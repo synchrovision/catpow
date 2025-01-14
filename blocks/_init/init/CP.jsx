@@ -1,4 +1,3 @@
-﻿import {kebabToCamel,camelToKebab} from 'util';
 ﻿import {kebabToCamel,camelToKebab} from 'catpow/util';
 
 export const CP={
@@ -298,6 +297,16 @@ export const CP={
         let data={};
         let jsonData=JSON.parse(attr[json]);
         jsonData[key]=value;
+        data[json]=JSON.stringify(jsonData);
+        set(data);
+    },
+    setJsonValues:({attr,set},json,keys,value)=>{
+        let data={};
+        let jsonData=JSON.parse(attr[json]);
+		console.log({keys});
+		for(const key in keys){
+			jsonData[keys[key]]=value[key];
+		}
         data[json]=JSON.stringify(jsonData);
         set(data);
     },
