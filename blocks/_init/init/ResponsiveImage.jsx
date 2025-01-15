@@ -1,60 +1,70 @@
 ﻿import {CP} from './CP.jsx';
 
-CP.ResponsiveImage=({className,attr,keys,index,subIndex,sizes,devices,device,isTemplate,...otherProps})=>{
-	let type,items,item;
+CP.ResponsiveImage=(props)=>{
+	const {className='CP-ResponsiveImage',attr,keys,index,subIndex,sizes,devices,device,isTemplate,...otherProps}=props;
+	let item,items,subItems;
 	
+	item=attr || {};
 	if(keys.items){
-		items=attr[keys.items];
+		items=item[keys.items] || [];
+		item=items[index] || {};
 		if(keys.subItems){
-			item=items[index][keys.subItems][subIndex];
-		}
-		else{
-			item=items[index];
+			subItems=item[keys.subItems] || [];
+			item=subItems[subIndex];
 		}
 	}
-	else{
-		item=attr;
-	}
+
 	if(isTemplate && keys.code && item[keys.code]){
 		return item[keys.code];
 	}
-	if(item[keys.mime]){type=item[keys.mime].split('/')[0];}
-	else{type='image';}
+	return <ResponsiveImageBody {...props} className={className} item={item}/>
+};
+
+export const ResponsiveImageBody=(props)=>{
+	const {className='CP-ResponsiveImage',attr,keys,index,subIndex,devices,device,isTemplate,item,...otherProps}=props;
+	let {sizes}=props;
+	const primaryClassName=className.split(' ')[0];
+	const type=item[keys.mime]?item[keys.mime].split('/')[0]:'image';
 	if(type=='audio'){
 		return (
 			<audio
+				className={className+' is-audio'}
 				src={item[keys.src]}
 				data-mime={item[keys.mime]}
-				 {...otherProps}
-			></audio>
+				{...otherProps}
+				></audio>
 		);
 	}
 	if(item[keys.srcset] && !sizes){
-		devices=devices || ['sp','pc'];
-		sizes=CP.getImageSizesForDevices(devices);
+		if(device){
+			sizes=CP.devices[device].sizes_value;
+		}
+		else{
+			sizes=CP.getImageSizesForDevices(devices || ['sp','pc']);
+		}
 	}
 	if(type=='video'){
+		const videoAtts={'data-mime':item[keys.mime],autoplay:1,loop:1,playsinline:1,muted:1};
 		return (
 			<video
-				className={className}
+				className={className+' is-video'}
 				src={item[keys.src]}
-				srcSet={item[keys.srcset]}
-				sizes={sizes}
-				data-mime={item[keys.mime]}
-				autoplay={1}
-				loop={1}
-				playsinline={1}
-				muted={1}
-				 {...otherProps}
+				{...videoAtts}
+				{...otherProps}
 			></video>
 		);
 	}
-	if(keys.sources && item[keys.sources] && item[keys.sources].length){
+	var src=CP.imageSrcOrDummy(item[keys.src]);
+	if(keys.sources){
 		if(device){
-			const source=item[keys.sources].find((source)=>source.device===device);
+			const source=(item[keys.sources] && item[keys.sources].find((source)=>source.device===device)) || {srcset:wpinfo.theme_url+'/images/dummy.jpg'};
 			return (
-				<picture className={'selectImage '+className} {...otherProps}>
+				<picture
+					className={className+' is-picture'}
+					{...otherProps}
+				>
 					<img
+						className={primaryClassName+'-img'}
 						src={source.srcset}
 						alt={item[keys.alt]}
 					/>
@@ -62,12 +72,16 @@ CP.ResponsiveImage=({className,attr,keys,index,subIndex,sizes,devices,device,isT
 			);
 		}
 		return (
-			<picture className={'selectImage '+className} {...otherProps}>
-				{item[keys.sources].map((source)=>(
+			<picture
+				className={className+' is-picture'}
+				{...otherProps}
+			>
+				{item[keys.sources] && item[keys.sources].map((source)=>(
 					<source srcSet={source.srcset} media={CP.devices[source.device].media_query} data-device={source.device} key={source.device}/>
 				))}
 				<img
-					src={item[keys.src]}
+					className={primaryClassName+'-img'}
+					src={src}
 					alt={item[keys.alt]}
 				/>
 			</picture>
@@ -75,13 +89,13 @@ CP.ResponsiveImage=({className,attr,keys,index,subIndex,sizes,devices,device,isT
 	}
 	return (
 		<img
-			className={className}
-			src={item[keys.src]}
+			className={className+' is-img'}
+			src={src}
 			alt={item[keys.alt]}
 			srcSet={item[keys.srcset]}
 			sizes={sizes}
 			data-mime={item[keys.mime]}
-			 {...otherProps}
+			{...otherProps}
 		/>
 	);
-};
+}

@@ -91,8 +91,8 @@ CP.SelectClassPanel=(props)=>{
 					}
 					case 'picture':{
 						if(prm.label){rtn.push(<h5>{prm.label}</h5>);}
-						let attr=JSON.parse(props.attr[prm.json]);
-						if(prm.key){attr=attr[prm.key];}
+						let attr=JSON.parse(props.attr[prm.json]) || {};
+						if(prm.key){attr=attr[prm.key] || {};}
 						rtn.push(
 							<CP.SelectPictureSources
 								index={props.index}
