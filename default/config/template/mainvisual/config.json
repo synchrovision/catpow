@@ -1,0 +1,6 @@
+{
+	"options":{
+		"logo":{"input":"picture","label":"Logo"},
+		"bg":{"input":"picture","label":"BG Image"}
+	}
+}

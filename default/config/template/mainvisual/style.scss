@@ -1,0 +1,20 @@
+@import "config/style_config.scss";
+
+.cp-mainvisual{
+	@include bnd((p:r,h:100vh));
+	@include flx((j:c,a:c));
+	>.contents{
+		@include bnd((p:r,z:2,pdb:100));
+		>.logo{
+			>.CP-ResponsiveImage{
+				@include bnd((d:b,w:80vw 600,h:a));
+			}
+		}
+	}
+	>.bg{
+		@include bnd((z:1));
+		>.CP-ResponsiveImage{
+			@include bnd((p:a,w:f,h:f,op:c,of:c));
+		}
+	}
+}
