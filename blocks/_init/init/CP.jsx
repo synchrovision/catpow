@@ -31,11 +31,18 @@ export const CP={
 			if(keys.alt){data[keys.alt]=image.alt;}
 			if(size && image.sizes && image.sizes[size]){data[keys.src]=image.sizes[size].url;}
 			else{data[keys.src]=image.url;}
-			if(keys.sources && image.sizes){
-				data[keys.sources]=devices.map((device)=>{
-					const sizeData=CP.devices[device];
-					return {srcset:image.sizes[sizeData.media_size].url,device};
-				});
+			if(keys.sources){
+				if(image.sizes){
+					data[keys.sources]=devices.map((device)=>{
+						const sizeData=CP.devices[device];
+						return {srcset:image.sizes[sizeData.media_size].url,device};
+					});
+				}
+				else{
+					data[keys.sources]=devices.map((device)=>{
+						return {srcset:image.url,device};
+					});
+				}
 			}
 			if(keys.srcset && image.sizes){
 				data[keys.srcset]='';
