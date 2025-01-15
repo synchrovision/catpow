@@ -2122,6 +2122,30 @@
     }
     if (type == "video") {
       const videoAtts = { "data-mime": item[keys.mime], autoplay: 1, loop: 1, playsinline: 1, muted: 1 };
+      if (keys.sources) {
+        if (device) {
+          const source = item[keys.sources] && item[keys.sources].find((source2) => source2.device === device) || { srcset: wpinfo.theme_url + "/images/dummy.mp4" };
+          return /* @__PURE__ */ wp.element.createElement(
+            "video",
+            {
+              className: className + " is-video",
+              src: source.srcset,
+              ...videoAtts,
+              ...otherProps
+            }
+          );
+        }
+        return /* @__PURE__ */ wp.element.createElement(
+          "video",
+          {
+            className: className + " is-picture",
+            ...videoAtts,
+            ...otherProps
+          },
+          item[keys.sources] && item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { src: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })),
+          /* @__PURE__ */ wp.element.createElement("source", { src: item[keys.src] })
+        );
+      }
       return /* @__PURE__ */ wp.element.createElement(
         "video",
         {

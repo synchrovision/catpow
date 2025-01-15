@@ -45,6 +45,31 @@ export const ResponsiveImageBody=(props)=>{
 	}
 	if(type=='video'){
 		const videoAtts={'data-mime':item[keys.mime],autoplay:1,loop:1,playsinline:1,muted:1};
+		if(keys.sources){
+			if(device){
+				const source=(item[keys.sources] && item[keys.sources].find((source)=>source.device===device)) || {srcset:wpinfo.theme_url+'/images/dummy.mp4'};
+				return (
+					<video
+						className={className+' is-video'}
+						src={source.srcset}
+						{...videoAtts}
+						{...otherProps}
+					></video>
+				);
+			}
+			return (
+				<video
+					className={className+' is-picture'}
+					{...videoAtts}
+					{...otherProps}
+				>
+					{item[keys.sources] && item[keys.sources].map((source)=>(
+						<source src={source.srcset} media={CP.devices[source.device].media_query} data-device={source.device} key={source.device}/>
+					))}
+					<source src={item[keys.src]}/>
+				</video>
+			);
+		}
 		return (
 			<video
 				className={className+' is-video'}
