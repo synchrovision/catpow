@@ -159,10 +159,10 @@ window.Catpow.fbp={
 			});
 		}
 		if(data.fb_pixel_id){
-			fbp(isCustomEvent?'trackSingleCustom':'trackSingle',data.fb_pixel_id,data.eventType,prm);
+			fbq(isCustomEvent?'trackSingleCustom':'trackSingle',data.fb_pixel_id,data.eventType,prm);
 		}
 		else{
-			fbp(isCustomEvent?'trackCustom':'track',data.eventType,prm);
+			fbq(isCustomEvent?'trackCustom':'track',data.eventType,prm);
 		}
 		
 	}
