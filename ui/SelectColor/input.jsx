@@ -5,7 +5,7 @@
 	
 	return (
 		<>
-			<Catpow.SelectColorToneClass selected={value} onChange={(proxy)=>setValue(proxy.classes)}/>
+			<Catpow.SelectColorToneClass selected={value} onChange={(proxy)=>setValue(proxy.classes.split(' '))}/>
 			<Catpow.UI.HiddenValues name={name} value={value}/>
 		</>
 	);
