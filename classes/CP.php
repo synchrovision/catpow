@@ -14,7 +14,7 @@ class CP{
 		FROM_STYLESHEET_CONFIG=0100,FROM_TEMPLATE_CONFIG=0200,FROM_THEME_CONFIG=0300,FROM_DEFAULT_CONFIG=0400,FROM_CONFIG=0700;
 	
 	public static
-		$cp,$id,$extensions,$data_types,$content,$content_path,$inputs,$forms,$form,$data,$vars=[],
+		$cp,$id,$extensions,$data_types,$config,$content,$content_path,$inputs,$forms,$form,$data,$vars=[],
 		$core_functions=[
 			'init',
 			'basic',
@@ -875,16 +875,16 @@ class CP{
 	}
 	
 	/*設定データ取得*/
-	public static function get_the_conf_data($content_path){
+	public static function get_the_conf_data($content_path,$data_id=null){
 		static $cache;
 		if(empty($content_path)){return [];}
-		if(isset($cache[$content_path])){return $cache[$content_path];}
+		if(isset($cache[$content_path][$data_id])){return $cache[$content_path][$data_id];}
 		$content_path=trim($content_path,'/');
 		$depth=substr_count($content_path,'/');
 		if($depth<3){
 			if($depth===2){list($data_type,$data_name,$tmp_name)=explode('/',$content_path);}
 			elseif($depth===1){list($data_type,$data_name)=explode('/',$content_path);}
-			else{return $cache[$content_path]=[];}
+			else{return $cache[$content_path][$data_id]=[];}
 			$conf_data_name=self::get_conf_data_name($data_type);
 			if(!isset($GLOBALS[$conf_data_name][$data_name])){
 				if($data_type==='catpow'){
@@ -904,9 +904,20 @@ class CP{
 				include $f;
 				if(isset($meta)){$conf_data['meta']=array_merge($meta,(array)$conf_data['meta']);}
 			}
-			return $cache[$content_path]=$conf_data;
+			if(isset($data_id)){
+				if($data_type==='post' || $data_type==='page'){
+					if(
+						!empty($page_template_name=get_post_meta($data_id,'_wp_page_template',true)) &&
+						!empty($template_meta=cp::$config['page_templates'][$page_template_name]['meta'])
+					){
+						$conf_data['meta']+=$template_meta;
+					}
+				}
+			}
+			return $cache[$content_path][$data_id]=$conf_data;
+			
 		}
-		$conf_data=self::get_the_conf_data(dirname($content_path))['meta'][basename($content_path)]??[];
+		$conf_data=self::get_the_conf_data(dirname($content_path),$data_id)['meta'][basename($content_path)]??[];
 		if($f=self::get_file_path($content_path.'/meta.php')){
 			include $f;
 			if(isset($meta)){$conf_data['meta']=array_merge($meta,(array)$conf_data['meta']);}

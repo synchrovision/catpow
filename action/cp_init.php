@@ -47,4 +47,12 @@ add_filter('option_home',function($url){
 include cp::get_file_path('config/system_config.php',cp::FROM_THEME|cp::FROM_DEFAULT);
 include cp::get_file_path('config/theme_config.php',cp::FROM_THEME|cp::FROM_DEFAULT);
 
+$conf_data_names=['page_templates'];
+foreach(cp::$data_types as $data_type_name){
+	$conf_data_names[]=cp::get_conf_data_name($data_type_name);
+}
+foreach($conf_data_names as $conf_data_name){
+	if(isset($$conf_data_name)){cp::$config[$conf_data_name]=$$conf_data_name;}
+}
+
 cp::$use_functions=array_merge(['catpow'],$use_functions??[]);
