@@ -24,7 +24,7 @@ add_filter('nav_menu_item_title',function($title,$item,$args,$depth){
 	global $nav_datas;
 	if(isset($args->walker->template)){
 		ob_start();
-		catpow\loop('nav/'.$args->theme_location.'/'.$args->walker->template.'/loop.php',['p'=>$item->ID],compact('title','item','args','depth'));
+		loop('nav/'.$args->theme_location.'/'.$args->walker->template.'/loop.php',['p'=>$item->ID],compact('title','item','args','depth'));
 		return ob_get_clean();
 	}
 	return $title;
