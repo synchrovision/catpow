@@ -100,7 +100,6 @@ class content extends \stdClass{
 	public function loop_meta($query,$params=null){
 		foreach($this->conf['meta'] as $name=>$meta_conf){
 			$meta_class="Catpow\\meta\\".($meta_conf['type']??'text');
-			echo($meta_class);
 			foreach($query as $key=>$val){
 				if($meta_class::$$key!=$val){continue 2;}
 			}
