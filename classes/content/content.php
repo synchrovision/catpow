@@ -97,6 +97,16 @@ class content extends \stdClass{
 		elseif(!is_null($this->conf) && !empty($this->conf['meta'][$name])){$prm['conf']=$this->conf['meta'][$name];}
 		return new meta($prm);
 	}
+	public function loop_meta($query,$params=null){
+		foreach($this->conf['meta'] as $name=>$meta_conf){
+			$meta_class="Catpow\\meta\\".($meta_conf['type']??'text');
+			echo($meta_class);
+			foreach($query as $key=>$val){
+				if($meta_class::$$key!=$val){continue 2;}
+			}
+			yield $this->meta($name,$params[$name]??null);
+		}
+	}
 	public function rel_meta($name,$param=null){
 		return new meta([
 			'parent'=>$this,
