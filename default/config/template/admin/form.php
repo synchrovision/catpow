@@ -1,9 +1,9 @@
 <?php namespace Catpow; ?>
 <table class="manage">
-	<!--meta:can_edit-->
+<?php foreach(CP::$content->loop_meta(['can_edit'=>true]) as $name=>$meta): ?>
 	<tr>
-		<th><!--label--></th>
-		<td><?php input('<!--name-->'); ?></td>
+		<th><?=$meta->conf['label']?></th>
+		<td><?php $meta->input(); ?></td>
 	</tr>
-	<!--/meta-->
+<?php endforeach; ?>
 </table>
