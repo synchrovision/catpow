@@ -397,7 +397,7 @@ class content extends \stdClass{
 					else{$path_data=array_merge(\cp::parse_content_path($content_path),$path_data);}
 				}
 				return $this->path_data=$path_data;
-			case 'conf':return $this->conf=\cp::get_the_conf_data($this->path,$this->the_id);
+			case 'conf':return $this->conf=\cp::get_the_conf_data($this->path,$this->data_id??$this->loop_id);
 			case 'input_name':return \cp::get_input_name($this->data_path);
 			case 'input_id':return \cp::get_input_id($this->data_path);
 			case 'path':return $this->path=\cp::create_content_path($this->path_data);

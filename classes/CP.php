@@ -902,15 +902,19 @@ class CP{
 			$conf_data=$GLOBALS[$conf_data_name][$data_name];
 			if(isset($tmp_name) && $f=self::get_file_path($content_path.'/meta.php')){
 				include $f;
-				if(isset($meta)){$conf_data['meta']=array_merge($meta,(array)$conf_data['meta']);}
+				if(isset($meta)){
+					$conf_data['meta']=array_merge($meta,(array)$conf_data['meta']);
+					self::fill_confs($conf_data['meta'],$data_type.'/'.$data_name);
+				}
 			}
 			if(isset($data_id)){
 				if($data_type==='post' || $data_type==='page'){
 					if(
 						!empty($page_template_name=get_post_meta($data_id,'_wp_page_template',true)) &&
-						!empty($template_meta=cp::$config['page_templates'][$page_template_name]['meta'])
+						!empty(cp::$config['page_templates'][$page_template_name]['meta'])
 					){
-						$conf_data['meta']+=$template_meta;
+						$conf_data['meta']+=cp::$config['page_templates'][$page_template_name]['meta'];
+						self::fill_confs($conf_data['meta'],$data_type.'/'.$data_name);
 					}
 				}
 			}
@@ -1158,13 +1162,8 @@ class CP{
 				list($data_path,$relkey)=explode('->',$data_path);
 			}
 			$path_data=self::parse_data_path($data_path);
-			if(isset($tmp)){
-				$path_data['tmp_name']=$tmp;
-				$conf=self::get_the_conf_data(self::create_content_path($path_data));
-			}
-			else{
-				$conf=self::get_conf_data($path_data);
-			}
+			if(isset($tmp)){$path_data['tmp_name']=$tmp;}
+			$conf=self::get_the_conf_data(self::create_content_path($path_data),$path_data['data_id']);
 			if(empty($conf['type'])){return null;}
 			$class_name=self::get_class_name('meta',$conf['type']);
 			$values=$cache[$data_path][$tmp]=$class_name::get(
@@ -1886,7 +1885,7 @@ class CP{
 		
 		
 		if(!isset($req[$data_type][$data_name][$data_id])){return $rtn;}
-		$metas=self::get_conf_data([$data_type,$data_name])['meta'];
+		$metas=self::get_the_conf_data($data_type.'/'.$data_name,$data_id)['meta'];
 		$query_class_name=self::get_class_name('query',$data_type);
 		foreach($req[$data_type][$data_name][$data_id] as $name=>$vals){
 			if(substr($name,0,2)=='__'){continue;}
@@ -1934,7 +1933,10 @@ class CP{
 		$query_class_name=self::get_class_name('query',$data_type);
 		$data_id=$data['data_id'];
 		$conf_data_path=$data_type.'/'.$data_name.'/';
-		
+		$conf_data=self::get_the_conf_data($data_type.'/'.$data_name,$data_id);
+		error_log(var_export($req,1));
+		error_log(var_export($data,1));
+		error_log(var_export($conf_data,1));
 		if($query_class_name::is_available_id($data_id)){
 			if(!empty($data['object_data'])){
 				$data['object_data'][self::get_data_id_name($data_type)]=$data_id;
@@ -1942,16 +1944,16 @@ class CP{
 			}
 			if(!empty($data['meta_data'])){
 				foreach($data['meta_data'] as $meta_name=>$vals){
-					$conf=self::get_conf_data($conf_data_path.$meta_name);
-					$meta_class_name=self::get_class_name('meta',$conf['type']);
+					$meta_conf=$conf_data['meta'][$meta_name];
+					$meta_class_name=self::get_class_name('meta',$meta_conf['type']);
 					if(!class_exists($meta_class_name)){
 						error_log('meta class of '.$conf_data_path.$meta_name.' not found');
 					}
-					if($override || (empty($conf['multiple']) && !$meta_class_name::$is_bulk_input)){
-						$meta_class_name::set($data_type,$data_name,$data_id,$meta_name,$vals,$conf);
+					if($override || (empty($meta_conf['multiple']) && !$meta_class_name::$is_bulk_input)){
+						$meta_class_name::set($data_type,$data_name,$data_id,$meta_name,$vals,$meta_conf);
 					}
 					else{
-						$meta_class_name::add($data_type,$data_name,$data_id,$meta_name,$vals,$conf);
+						$meta_class_name::add($data_type,$data_name,$data_id,$meta_name,$vals,$meta_conf);
 					}
 				}
 			}
@@ -1960,9 +1962,9 @@ class CP{
 			$data_id=$query_class_name::insert($data['object_data']);
 			if(!empty($data['meta_data'])){
 				foreach($data['meta_data'] as $meta_name=>$vals){
-					$conf=self::get_conf_data($conf_data_path.$meta_name);
-					$meta_class_name=self::get_class_name('meta',$conf['type']);
-					$meta_class_name::add($data_type,$data_name,$data_id,$meta_name,$vals,$conf);
+					$meta_conf=$conf_data['meta'][$meta_name];
+					$meta_class_name=self::get_class_name('meta',$meta_conf['type']);
+					$meta_class_name::add($data_type,$data_name,$data_id,$meta_name,$vals,$meta_conf);
 				}
 			}
 		}
