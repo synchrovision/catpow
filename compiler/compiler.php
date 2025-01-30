@@ -49,7 +49,8 @@ function get_jsx_files(){
 function cp_jsx_compile($jsx_files){
 	foreach($jsx_files as $jsx_file){
 		if(!file_exists($jsx_file)){continue;}
-		$js_file=substr($jsx_file,0,is_mjs_former($jsx_file)?-4:-1);
+		$js_file=strrchr($jsx_file,'.',true);
+		if(!is_mjs_former($jsx_file)){$js_file.='.js';}
 		if(!file_exists($js_file) or filemtime($js_file) < filemtime($jsx_file)){
 			passthru("node bundle.esbuild.mjs {$jsx_file} {$js_file}");
 			echo "build {$js_file}\n";
