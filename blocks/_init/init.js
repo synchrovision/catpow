@@ -2081,7 +2081,7 @@
 
   // ../blocks/_init/init/ResponsiveImage.jsx
   CP.ResponsiveImage = (props) => {
-    const { className = "CP-ResponsiveImage", attr, keys, index, subIndex, sizes, devices, device, isTemplate, ...otherProps } = props;
+    const { className = "cp-responsiveimage", attr, set, keys, index, subIndex, sizes, devices, device, isTemplate, ...otherProps } = props;
     let item, items2, subItems;
     item = attr || {};
     if (keys.items) {
@@ -2098,7 +2098,7 @@
     return /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item });
   };
   var ResponsiveImageBody = (props) => {
-    const { className = "CP-ResponsiveImage", attr, keys, index, subIndex, devices, device, isTemplate, item, ...otherProps } = props;
+    const { className = "cp-responsiveimage", attr, set, keys, index, subIndex, devices, device, isTemplate, item, ...otherProps } = props;
     let { sizes } = props;
     const primaryClassName = className.split(" ")[0];
     const type = item[keys.mime] ? item[keys.mime].split("/")[0] : "image";

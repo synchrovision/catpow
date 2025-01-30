@@ -1,7 +1,7 @@
 ﻿import {CP} from './CP.jsx';
 
 CP.ResponsiveImage=(props)=>{
-	const {className='CP-ResponsiveImage',attr,keys,index,subIndex,sizes,devices,device,isTemplate,...otherProps}=props;
+	const {className='cp-responsiveimage',attr,set,keys,index,subIndex,sizes,devices,device,isTemplate,...otherProps}=props;
 	let item,items,subItems;
 	
 	item=attr || {};
@@ -21,7 +21,7 @@ CP.ResponsiveImage=(props)=>{
 };
 
 export const ResponsiveImageBody=(props)=>{
-	const {className='CP-ResponsiveImage',attr,keys,index,subIndex,devices,device,isTemplate,item,...otherProps}=props;
+	const {className='cp-responsiveimage',attr,set,keys,index,subIndex,devices,device,isTemplate,item,...otherProps}=props;
 	let {sizes}=props;
 	const primaryClassName=className.split(' ')[0];
 	const type=item[keys.mime]?item[keys.mime].split('/')[0]:'image';
