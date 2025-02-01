@@ -1934,9 +1934,6 @@ class CP{
 		$data_id=$data['data_id'];
 		$conf_data_path=$data_type.'/'.$data_name.'/';
 		$conf_data=self::get_the_conf_data($data_type.'/'.$data_name,$data_id);
-		error_log(var_export($req,1));
-		error_log(var_export($data,1));
-		error_log(var_export($conf_data,1));
 		if($query_class_name::is_available_id($data_id)){
 			if(!empty($data['object_data'])){
 				$data['object_data'][self::get_data_id_name($data_type)]=$data_id;
