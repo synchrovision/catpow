@@ -346,6 +346,106 @@
   transform: translateY(-0.5em);
   pointer-events: none;
 }
+.CP-RTF {
+  position: relative;
+  cursor: pointer;
+}
+.CP-RTF-contents:empty::before {
+  content: "Text";
+}
+.CP-RTF-portal {
+  position: fixed;
+  max-width: 60rem;
+  width: 100%;
+  left: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  margin-inline: auto;
+  z-index: 10000;
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 0.5rem 0.5rem 0rem 0rem;
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  box-shadow: 0 8px 17px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  transform: -webkit- translateY(0rem);
+  transform: translateY(0rem);
+}
+.CP-RTF-portal:not(.is-active) {
+  transform: -webkit- translateY(100%);
+  transform: translateY(100%);
+}
+.CP-RTF-portal-preview {
+  padding: 1.25rem;
+}
+.CP-RTF-portal-input {
+  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),1);
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr auto;
+  grid-template-rows: 1fr auto;
+}
+.CP-RTF-portal-input-edit {
+  display: block;
+  width: 100%;
+  min-height: 18.75rem;
+  height: auto;
+  padding: 1em;
+  box-sizing: border-box;
+  background-color: transparent;
+  border-style: none;
+  font-size: 1rem;
+  line-height: 1.5em;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  opacity: 1;
+  transform: -webkit- scale(1);
+  transform: scale(1);
+}
+.CP-RTF-portal-input-buttons {
+  padding: 0.75rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
+}
+.CP-RTF-portal-input-buttons-button {
+  padding: 0.5em 1em;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 7.5rem;
+  border-style: solid;
+  border-width: 0.125rem;
+  border-radius: 0.25rem;
+  text-align: center;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.CP-RTF-portal-input-buttons-button.is-reset {
+  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),1);
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
+}
+.CP-RTF-portal-input-buttons-button.is-save {
+  background-color: var(--wp-admin-theme-color);
+  border-color: var(--wp-admin-theme-color);
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+}
+.CP-RTF:not(.is-active) .CP-RTF-portal-input-edit {
+  opacity: 0;
+  transform: -webkit- scale(1.01);
+  transform: scale(1.01);
+  pointer-events: none;
+}
 .CP-SelectResponsiveImage.is-video, .CP-SelectResponsiveImage.is-img, .CP-SelectResponsiveImage.is-picture, .CP-SelectResponsiveImage-img {
   display: block;
   width: 100%;

@@ -1,10 +1,10 @@
 @import 'catpow.scss';
+@import 'fontawesome.scss';
 $sizeUnit:0.0625rem;
 $colors:(
 	at:var(--wp-admin-theme-color),
 	c:currentColor
 );
-
 
 .components-panel{
 	div.sub{
@@ -186,6 +186,69 @@ $colors:(
 			&-input{
 				@include trn((o:0,y:-.5em));
 				@include usr((e:n));
+			}
+		}
+	}
+	&-RTF{
+		@include bnd((p:r));
+		@include usr((c:p));
+		&-contents{
+			&:empty::before{
+				content:'Text';
+			}
+		}
+		&-portal{
+			@include bnd((p:f,w:f 960,l:0,r:0,b:0,mgi:a,z:10000));
+			@include grd((tc:1fr 1fr));
+			@include bdr((r:8 8 0 0));
+			@include bg((c:b));
+			@include shd((b:8));
+			@include trn((t:.5s,y:0));
+			&:not(.is-active){
+				@include trn((y:f));
+			}
+			&-preview{
+				@include bnd((pd:20));
+			}
+			&-input{
+				@include bg((c:s));
+				@include grd((tr:1fr a));
+				&-edit{
+					@include bnd((d:b,w:f,h:300 a,pd:1em,bs:b));
+					@include bg((c:n));
+					@include bdr((s:n));
+					@include txt((p:16,h:1.5em,c:t));
+					@include trn((t:.2s,o:1,s:1));
+				}
+				&-buttons{
+					@include bnd((pd:12));
+					@include flx((w:n,g:12));
+					&-button{
+						@include bnd((pd:.5em 1em,f:1 1 120));
+						@include bdr((s:s,w:2,r:4));
+						@include txt((a:c,p:16));
+						@include usr((c:p));
+						&.is-reset{
+							@include bg((c:s));
+							@include txt((c:t));
+						}
+						&.is-save{
+							@include bg((c:wp));
+							@include bdr((c:wp));
+							@include txt((c:i));
+						}
+					}
+				}
+			}
+		}
+		&:not(.is-active) &{
+			&-portal{
+				&-input{
+					&-edit{
+						@include trn((o:0,s:1.01));
+						@include usr((e:n));
+					}
+				}
 			}
 		}
 	}
