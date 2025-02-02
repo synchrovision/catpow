@@ -2,6 +2,7 @@
 .wp-block-catpow-pageheader {
   display: block;
   position: relative;
+  scroll-snap-align: start;
   background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
 }
 .wp-block-catpow-pageheader-body {

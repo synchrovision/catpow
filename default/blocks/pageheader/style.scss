@@ -1,7 +1,7 @@
 @import "admin_style_config.scss";
 
 .wp-block-catpow-pageheader{
-	@include bnd((d:b,p:r));
+	@include bnd((d:b,p:r,ssa:s));
 	@include bg((c:m));
 	&-body{
 		@include bnd((p:r,z:2));
