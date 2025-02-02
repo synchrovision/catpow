@@ -834,6 +834,7 @@ div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons {
 }
 div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-up, div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-down {
   display: inline-block;
+  aspect-ratio: n;
   padding: 0.0625rem;
   margin: 0.0625rem;
   width: 0.625rem;
@@ -898,6 +899,7 @@ div.cp-meta-item span.pdf object {
   transform: scale(0.5);
 }
 div.cp-meta-item select {
+  aspect-ratio: n;
   padding: 0.3125rem 0.625rem;
   height: auto;
   background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
@@ -1268,6 +1270,158 @@ del {
   position: absolute;
   top: 0rem;
   left: 0rem;
+}
+.rtf-button, #editor .rtf-button {
+  display: inline-block;
+  margin: 0.5em 0rem;
+  min-width: 12.5rem;
+  width: auto;
+  padding: 0.5em 1em;
+  border-radius: 0.2em;
+  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
+  text-align: center;
+  line-height: 1em;
+  text-decoration: none;
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+}
+.rtf-tel, #editor .rtf-tel {
+  font-size: 1.5em;
+  font-family: var(--cp-fonts-d);
+  font-weight: 700;
+  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+}
+.rtf-mailto, #editor .rtf-mailto {
+  font-size: 1.5em;
+  font-family: var(--cp-fonts-d);
+  font-weight: 700;
+  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+}
+.rtf-listed, #editor .rtf-listed {
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto 1fr;
+  grid-template-columns: auto 1fr;
+  grid-gap: 0.5em;
+}
+.rtf-listed__dd, #editor .rtf-listed__dd {
+  padding: 0rem;
+  margin: 0rem;
+}
+.rtf-listed__dt, #editor .rtf-listed__dt {
+  padding: 0rem;
+  margin: 0rem;
+}
+.rtf-dl, #editor .rtf-dl {
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto 1fr;
+  grid-template-columns: auto 1fr;
+  grid-gap: 0.2em;
+  font-size: 0.9em;
+}
+.rtf-dl__dt, #editor .rtf-dl__dt {
+  padding: 0.5em;
+  margin: 0rem;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  border-radius: 0.5em 0rem 0rem 0.5em;
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+}
+.rtf-dl__dd, #editor .rtf-dl__dd {
+  padding: 0.5em;
+  margin: 0rem;
+  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),1);
+  border-radius: 0rem 0.5em 0.5em 0rem;
+}
+.rtf-notes, #editor .rtf-notes {
+  padding: 0.75em;
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto 1fr;
+  grid-template-columns: auto 1fr;
+  grid-gap: 0.25em;
+  font-size: 0.8em;
+  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),1);
+  border-radius: 0.5em;
+}
+.rtf-notes__dt, #editor .rtf-notes__dt {
+  padding: 0rem;
+  margin: 0rem;
+}
+.rtf-notes__dt::after, #editor .rtf-notes__dt::after {
+  content: "：";
+  display: inline-block;
+  float: right;
+}
+.rtf-notes__dd, #editor .rtf-notes__dd {
+  padding: 0rem;
+  margin: 0rem;
+}
+.rtf-ul, #editor .rtf-ul {
+  margin: 0.5em 0rem;
+}
+.rtf-ul__li, #editor .rtf-ul__li {
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1em 1fr;
+  grid-template-columns: 1em 1fr;
+}
+.rtf-ul__li::before, #editor .rtf-ul__li::before {
+  content: "";
+  display: block;
+  margin-top: 0.4em;
+  width: 0.4em;
+  height: 0.4em;
+  border-radius: 50%;
+  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
+  font-size: 1.1em;
+  font-weight: 700;
+  font-family: var(--cp-fonts-d);
+  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
+}
+.rtf-ol, #editor .rtf-ol {
+  counter-reset: rtf-ol;
+  margin: 0.5em 0rem;
+}
+.rtf-ol__li, #editor .rtf-ol__li {
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 2em 1fr;
+  grid-template-columns: 2em 1fr;
+}
+.rtf-ol__li::before, #editor .rtf-ol__li::before {
+  counter-increment: rtf-ol;
+  content: counter(rtf-ol) ".";
+  display: block;
+  font-size: 1.1em;
+  font-weight: 700;
+  font-family: var(--cp-fonts-d);
+  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
+}
+.rtf-del, #editor .rtf-del {
+  text-decoration-style: solid;
+}
+.rtf-small, #editor .rtf-small {
+  font-size: 0.9em;
+}
+.rtf-em, #editor .rtf-em {
+  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
+}
+.rtf-strong, #editor .rtf-strong {
+  font-weight: 700;
+}
+.rtf-stronger, #editor .rtf-stronger {
+  font-size: 1.2em;
+  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
+}
+.rtf-strongest, #editor .rtf-strongest {
+  font-size: 1.5em;
+  font-weight: bx;
+  color: hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),var(--cp-tones-a-l),1);
 }
 .buttons {
   display: -webkit-box;

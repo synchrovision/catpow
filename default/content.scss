@@ -1,4 +1,5 @@
 @import "admin_style_config.scss";
+@import "fontawesome.scss";
 @import url('https://fonts.googleapis.com/css?family=Staatliches&subset=latin-ext');
 
 @include define_color_classes;
@@ -393,6 +394,112 @@ del{
 			@include bnd((d:b,p:a,t:0,l:0));
 		}
 	}
+	&-button{
+		@include bnd((d:ib,mg:.5em 0,w:200 a,pd:.5em 1em));
+		@include bdr((r:.2em));
+		@include bg((c:mx));
+		@include txt((a:c,h:1em,td:n,c:i));
+		&__label{
+		}
+	}
+	&-code{
+	}
+	&-link{
+		&.is-link-external{
+		}
+		&.is-link-pdf{
+		}
+	}
+	&-tel{
+		@include txt((p:1.5em,f:d,w:b,c:m));
+	}
+	&-mailto{
+		@include txt((p:1.5em,f:d,w:b,c:m));
+	}
+	&-listed{
+		@include grd((tc:a 1fr,g:.5em));
+		&__dd{
+			@include bnd((pd:0,mg:0));
+		}
+		&__dt{
+			@include bnd((pd:0,mg:0));
+		}
+	}
+	&-dl{
+		@include grd((tc:a 1fr,g:.2em));
+		@include txt((p:.9em));
+		&__dt{
+			@include bnd((pd:.5em,mg:0));
+			@include bg((c:m));
+			@include bdr((r:.5em 0 0 .5em));
+			@include txt((c:i));
+		}
+		&__dd{
+			@include bnd((pd:.5em,mg:0));
+			@include bg((c:s));
+			@include bdr((r:0 .5em .5em 0));
+		}
+	}
+	&-notes{
+		@include bnd((pd:.75em));
+		@include grd((tc:a 1fr,g:.25em));
+		@include txt((p:.8em));
+		@include bg((c:s));
+		@include bdr((r:.5em));
+		&__dt{
+			@include bnd((pd:0,mg:0));
+			&::after{
+				content:'：';
+				@include bnd((d:ib,fl:r));
+			}
+		}
+		&__dd{
+			@include bnd((pd:0,mg:0));
+		}
+	}
+	&-ul{
+		@include bnd((mg:.5em 0));
+		&__li{
+			@include grd((tc:1em 1fr));
+			&::before{
+				content:'';
+				@include bnd((d:b,mgt:.4em,w:.4em,h:.4em));
+				@include bdr((r:50%));
+				@include bg((c:mx));
+				@include txt((p:1.1em,w:b,f:d,c:mx));
+			}
+		}
+	}
+	&-ol{
+		@include cnt((r:rtf-ol));
+		@include bnd((mg:.5em 0));
+		&__li{
+			@include grd((tc:2em 1fr));
+			&::before{
+				@include cnt((i:rtf-ol,c:n '.'));
+				@include bnd((d:b));
+				@include txt((p:1.1em,w:b,f:d,c:mx));
+			}
+		}
+	}
+	&-del{
+		@include txt((td:s));
+	}
+	&-small{
+		@include txt((p:.9em));
+	}
+	&-em{
+		@include txt((c:mx));
+	}
+	&-strong{
+		@include txt((w:b));
+	}
+	&-stronger{
+		@include txt((p:1.2em,c:mx));
+	}
+	&-strongest{
+		@include txt((p:1.5em,w:bx,c:a));
+	}
 }
 .buttons{
 	@include flx((w:w,j:c,a:c));
@@ -565,7 +672,7 @@ del{
 	$bx2:calc(50% + var(--cp-clip-shape-below-width,40) * #{$sizeUnit} / 2);
 	&.has-clip-shape-ellipse{
 		&.has-clip-shape-both{
-			clip-path: ellipse(#{$a} 50% at 50% 50%);	
+			clip-path: ellipse(#{$a} 50% at 50% 50%);
 		}
 		&.has-clip-shape-upper{
 			clip-path: ellipse(#{$a} 100% at 50% 100%);
@@ -679,4 +786,13 @@ del{
 			}
 		}
 	}
+}
+.has-custom-padding{
+	
+}
+.has-custom-margin{
+	
+}
+.has-custom-radius{
+	
 }
