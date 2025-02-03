@@ -12,7 +12,7 @@
 	}
 	&.hasSmallFontSize{
 		@include txt((p:8));
-		@include bp(2){@include txt((p:12));}
+		@include bp(pc){@include txt((p:12));}
 	}
 	&-tbody{
 		&-tr{

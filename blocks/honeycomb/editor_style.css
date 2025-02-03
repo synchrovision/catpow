@@ -9,9 +9,7 @@
   display: inline-block;
   color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
-  -o-user-select: none;
   user-select: none;
 }
 /*# sourceMappingURL=./editor_style.css.map */
