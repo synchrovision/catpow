@@ -16,7 +16,7 @@ CP.SelectClassPanel=(props)=>{
 		}
 		const blockStates=CP.wordsToFlags(attr.classes);
 		return triggerClasses.item[Object.keys(triggerClasses.item).find((value)=>blockStates[value])];
-	},[props.selectiveClasses,triggerClasses]);
+	},[props.selectiveClasses,triggerClasses && attr.classes]);
 	
 	const {styleDatas}=attr;
 	
