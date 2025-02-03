@@ -418,6 +418,15 @@ del{
 	}
 	&-listed{
 		@include grd((tc:a 1fr,g:.5em));
+		&.is-level-1{
+			@include bnd((pdl:1em));
+		}
+		&.is-level-1{
+			@include bnd((pdl:1em));
+		}
+		&.is-level-1{
+			@include bnd((pdl:1em));
+		}
 		&__dd{
 			@include bnd((pd:0,mg:0));
 		}
@@ -426,6 +435,7 @@ del{
 		}
 	}
 	&-dl{
+		$block:&;
 		@include grd((tc:a 1fr,g:.2em));
 		@include txt((p:.9em));
 		&__dt{
@@ -438,6 +448,14 @@ del{
 			@include bnd((pd:.5em,mg:0));
 			@include bg((c:s));
 			@include bdr((r:0 .5em .5em 0));
+		}
+		&.is-level-1{
+			>#{$block}{
+				&__dt{
+					@include bg((c:m 1 .2));
+					@include txt((c:t));
+				}
+			}
 		}
 	}
 	&-notes{
@@ -458,26 +476,39 @@ del{
 		}
 	}
 	&-ul{
+		$block:&;
 		@include bnd((mg:.5em 0));
+		@include txt((l:n));
 		&__li{
-			@include grd((tc:1em 1fr));
+			@include bnd((p:r,pdl:1em));
 			&::before{
 				content:'';
-				@include bnd((d:b,mgt:.4em,w:.4em,h:.4em));
+				@include bnd((d:b,p:a,t:.4em,l:0,w:.4em,h:.4em));
 				@include bdr((r:50%));
 				@include bg((c:mx));
 				@include txt((p:1.1em,w:b,f:d,c:mx));
+			}
+		}
+		&.is-level-1{
+			>#{$block}{
+				&__li{
+					&::before{
+						@include bnd((t:.5em,w:.2em,h:.2em));
+						@include bg((c:t));
+					}
+				}
 			}
 		}
 	}
 	&-ol{
 		@include cnt((r:rtf-ol));
 		@include bnd((mg:.5em 0));
+		@include txt((l:n));
 		&__li{
-			@include grd((tc:2em 1fr));
+			@include bnd((p:r,pdl:2em));
 			&::before{
 				@include cnt((i:rtf-ol,c:n '.'));
-				@include bnd((d:b));
+				@include bnd((d:b,p:a,l:0,t:0));
 				@include txt((p:1.1em,w:b,f:d,c:mx));
 			}
 		}

@@ -1304,6 +1304,15 @@ del {
   grid-template-columns: auto 1fr;
   grid-gap: 0.5em;
 }
+.rtf-listed.is-level-1, #editor .rtf-listed.is-level-1 {
+  padding-left: 1em;
+}
+.rtf-listed.is-level-1, #editor .rtf-listed.is-level-1 {
+  padding-left: 1em;
+}
+.rtf-listed.is-level-1, #editor .rtf-listed.is-level-1 {
+  padding-left: 1em;
+}
 .rtf-listed__dd, #editor .rtf-listed__dd {
   padding: 0rem;
   margin: 0rem;
@@ -1334,6 +1343,10 @@ del {
   background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),1);
   border-radius: 0rem 0.5em 0.5em 0rem;
 }
+.rtf-dl.is-level-1 > .rtf-dl__dt, .rtf-dl.is-level-1 #editor .rtf-dl__dt, #editor .rtf-dl.is-level-1 > .rtf-dl__dt, #editor .rtf-dl.is-level-1 #editor .rtf-dl__dt {
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 100),0.2);
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
+}
 .rtf-notes, #editor .rtf-notes {
   padding: 0.75em;
   display: -webkit-grid;
@@ -1361,18 +1374,18 @@ del {
 }
 .rtf-ul, #editor .rtf-ul {
   margin: 0.5em 0rem;
+  list-style: none;
 }
 .rtf-ul__li, #editor .rtf-ul__li {
-  display: -webkit-grid;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1em 1fr;
-  grid-template-columns: 1em 1fr;
+  position: relative;
+  padding-left: 1em;
 }
 .rtf-ul__li::before, #editor .rtf-ul__li::before {
   content: "";
   display: block;
-  margin-top: 0.4em;
+  position: absolute;
+  top: 0.4em;
+  left: 0rem;
   width: 0.4em;
   height: 0.4em;
   border-radius: 50%;
@@ -1382,21 +1395,28 @@ del {
   font-family: var(--cp-fonts-d);
   color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
 }
+.rtf-ul.is-level-1 > .rtf-ul__li::before, .rtf-ul.is-level-1 #editor .rtf-ul__li::before, #editor .rtf-ul.is-level-1 > .rtf-ul__li::before, #editor .rtf-ul.is-level-1 #editor .rtf-ul__li::before {
+  top: 0.5em;
+  width: 0.2em;
+  height: 0.2em;
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
+}
 .rtf-ol, #editor .rtf-ol {
   counter-reset: rtf-ol;
   margin: 0.5em 0rem;
+  list-style: none;
 }
 .rtf-ol__li, #editor .rtf-ol__li {
-  display: -webkit-grid;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 2em 1fr;
-  grid-template-columns: 2em 1fr;
+  position: relative;
+  padding-left: 2em;
 }
 .rtf-ol__li::before, #editor .rtf-ol__li::before {
   counter-increment: rtf-ol;
   content: counter(rtf-ol) ".";
   display: block;
+  position: absolute;
+  left: 0rem;
+  top: 0rem;
   font-size: 1.1em;
   font-weight: 700;
   font-family: var(--cp-fonts-d);

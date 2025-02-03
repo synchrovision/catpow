@@ -19,10 +19,10 @@ CP.RTF.Edit=(props)=>{
 	const {useMemo,useCallback,useState}=wp.element;
 	const classes=useMemo(()=>bem('CP-RTF '+className),[className]);
 	
+
 	const item=useMemo(()=>keys.items?attr[keys.items][index]:attr,[attr,keys.items,index]);
 	const text=item[keys.text];
 	const updateText=useCallback((text)=>{
-		console.log(rtf(text));
 		if(keys.items){
 			Object.assign(attr[keys.items][index],{[keys.text]:text});
 			set({[keys.items]:JSON.parse(JSON.stringify(attr[keys.items]))});
@@ -31,6 +31,20 @@ CP.RTF.Edit=(props)=>{
 			set({[keys.text]:text});
 		}
 	},[set,attr,keys]);
+	const editorFunction=useCallback((e)=>{
+		if(e.key==='Tab'){
+			const text=e.target.value;
+			const lineStart=Math.max(0,text.slice(0,e.currentTarget.selectionStart).lastIndexOf("\n"));
+			const lineEnd=e.currentTarget.selectionEnd + Math.max(0,text.slice(e.currentTarget.selectionEnd).indexOf("\n"));
+			let targetText=text.slice(lineStart,lineEnd);
+			if(e.shiftKey){targetText=targetText.replaceAll("\n\t","\n");}
+			else{targetText=targetText.replaceAll("\n","\n\t");}
+			e.target.value=text.slice(0,lineStart)+targetText+text.slice(lineEnd);
+			e.target.setSelectionRange(lineStart?lineStart+1:0,lineStart+targetText.length);
+			updateText(e.target.value);
+			e.preventDefault();
+		}
+	},[updateText]);
 	const [savedText,setSavedText]=useState(text);
 	const [isActive,setIsActive]=useState(false);
 	
@@ -44,6 +58,7 @@ CP.RTF.Edit=(props)=>{
 						<textarea
 							className={classes.portal.input.edit()}
 							value={text}
+							onKeyDown={editorFunction}
 							onChange={(e)=>{updateText(e.target.value)}}
 						/>
 						<div className={classes.portal.input.buttons()}>

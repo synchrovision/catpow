@@ -113,7 +113,7 @@
     const classLevel = level > 0 ? ` is-level-${level}` : "";
     const h2 = "^" + (level > 0 ? `([\u3000\\t]{${level}})` : "()");
     const t3 = "(.+((\\n" + (level > 0 ? "\\1" : "") + "[\u3000\\t]).+)*)$";
-    const c3 = level > 0 ? " is-level-{$level}" : "";
+    const c3 = level > 0 ? ` is-level-${level}` : "";
     const l3 = level + 4;
     const p2 = "$2\n";
     const p22 = "$3\n";
@@ -4950,7 +4950,6 @@
     const item = useMemo3(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
     const text = item[keys.text];
     const updateText = useCallback2((text2) => {
-      console.log(rtf(text2));
       if (keys.items) {
         Object.assign(attr[keys.items][index], { [keys.text]: text2 });
         set({ [keys.items]: JSON.parse(JSON.stringify(attr[keys.items])) });
@@ -4958,6 +4957,23 @@
         set({ [keys.text]: text2 });
       }
     }, [set, attr, keys]);
+    const editorFunction = useCallback2((e3) => {
+      if (e3.key === "Tab") {
+        const text2 = e3.target.value;
+        const lineStart = Math.max(0, text2.slice(0, e3.currentTarget.selectionStart).lastIndexOf("\n"));
+        const lineEnd = e3.currentTarget.selectionEnd + Math.max(0, text2.slice(e3.currentTarget.selectionEnd).indexOf("\n"));
+        let targetText = text2.slice(lineStart, lineEnd);
+        if (e3.shiftKey) {
+          targetText = targetText.replaceAll("\n	", "\n");
+        } else {
+          targetText = targetText.replaceAll("\n", "\n	");
+        }
+        e3.target.value = text2.slice(0, lineStart) + targetText + text2.slice(lineEnd);
+        e3.target.setSelectionRange(lineStart ? lineStart + 1 : 0, lineStart + targetText.length);
+        updateText(e3.target.value);
+        e3.preventDefault();
+      }
+    }, [updateText]);
     const [savedText, setSavedText] = useState2(text);
     const [isActive, setIsActive] = useState2(false);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-active": isSelected && isActive }) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.contents(), onClick: () => setIsActive(!isActive), dangerouslySetInnerHTML: { __html: rtf(item.text, pref) } }), /* @__PURE__ */ wp.element.createElement(Portal, { id: "EditRTF" }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal({ "is-active": isSelected && isActive }) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.preview(), dangerouslySetInnerHTML: { __html: rtf(item.text, pref) } }), /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.input() }, /* @__PURE__ */ wp.element.createElement(
@@ -4965,6 +4981,7 @@
       {
         className: classes.portal.input.edit(),
         value: text,
+        onKeyDown: editorFunction,
         onChange: (e3) => {
           updateText(e3.target.value);
         }
