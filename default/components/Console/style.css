@@ -38,15 +38,15 @@
   min-height: 6.25rem;
   max-height: 50rem;
   height: auto;
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 5),1);
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 5),var(--cp-tones-t-a));
 }
 .cp-console-results > .text.-error {
-  color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -5 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -5 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
 }
 .cp-console-results > .text.-warn {
-  color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -3 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -3 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
 }
 .cp-console-results > .text.-log {
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a));
 }
 /*# sourceMappingURL=./style.css.map */
