@@ -75,7 +75,7 @@ div{
 					@include bdr((r:4 0 4 0));
 					@include txt((h:10));
 					.btn-up,.btn-down{
-						@include bnd((d:ib,a:n,pd:1,mg:1,w:10,h:10));
+						@include bnd((d:ib,ap:n,pd:1,mg:1,w:10,h:10));
 						@include bdr((r:12));
 						@include bg((c:t 5));
 						@include txt((p:9,h:9,a:c,c:t 20));

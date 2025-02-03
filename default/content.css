@@ -834,7 +834,9 @@ div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons {
 }
 div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-up, div.cp-meta-item.multiple-item > .cp-meta-unit .sort-input-buttons .btn-down {
   display: inline-block;
-  aspect-ratio: n;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   padding: 0.0625rem;
   margin: 0.0625rem;
   width: 0.625rem;
