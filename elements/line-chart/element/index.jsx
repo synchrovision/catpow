@@ -1,4 +1,4 @@
-import {el,svgEl,bem,hfloor,hceil,hunit,classNamesToFlags,flagsToClassNames} from 'util';
+import {el,svgEl,bem,hfloor,hceil,hunit,classNamesToFlags,flagsToClassNames} from 'catpow/util';
 import cssCode from 'css:./style.css';
 
 

@@ -1,13 +1,16 @@
 (() => {
-  // modules/util/string.jsx
+  // modules/src/util/string.jsx
   var flagsToClassNames = (flags) => flags && Object.keys(flags).filter((f) => flags[f]).map(camelToKebab).join(" ");
   var camelToKebab = (str) => str.replace(/(\w)([A-Z])/g, "$1-$2").toLowerCase();
 
-  // modules/util/dom.jsx
+  // modules/src/util/dom.jsx
   var el = (tag, props, children, namespace) => {
     const el2 = namespace ? document.createElementNS(namespace, tag) : document.createElement(tag);
     ;
     const appendChild = (child) => {
+      if (child == null) {
+        return;
+      }
       if (child instanceof Node) {
         el2.appendChild(child);
       } else if (typeof child === "string") {
@@ -26,9 +29,10 @@
   };
   var svgEl = (tag, props, children) => el(tag, props, children, "http://www.w3.org/2000/svg");
 
-  // modules/util/bem.jsx
+  // modules/src/util/bem.jsx
   var bem = (className) => {
     const children = {};
+    const firstClass = className.split(" ")[0];
     return new Proxy(function() {
       if (arguments.length > 0) {
         const classes = [];
@@ -47,28 +51,28 @@
           );
         }
         if (classes.length > 0) {
-          return className + " " + classes.join(" ");
+          return (className + " " + classes.join(" ")).replace(" --", " " + firstClass + "--");
         }
       }
       return className;
     }, {
       get: (target, prop) => {
         if (void 0 === children[prop]) {
-          children[prop] = bem(className.split(" ")[0] + (prop[0] === "_" ? "_" : "-") + prop);
+          children[prop] = bem(firstClass + (prop[0] === "_" ? "_" : "-") + prop);
         }
         return children[prop];
       }
     });
   };
 
-  // modules/util/calc.jsx
+  // modules/src/util/calc.jsx
   var pfloor = (n, p) => parseFloat(Math.floor(parseFloat(n + "e" + p)) + "e-" + p);
   var pceil = (n, p) => parseFloat(Math.ceil(parseFloat(n + "e" + p)) + "e-" + p);
-  var hfloor = (n, p) => parseFloat(n.toExponential(p).replace(/^(\-?\d\.\d+)/, (m2) => pfloor(m2, p - 1)));
-  var hceil = (n, p) => parseFloat(n.toExponential(p).replace(/^(\-?\d\.\d+)/, (m2) => pceil(m2, p - 1)));
-  var hunit = (n, p) => parseFloat(n.toExponential(p).replace(/^(\-?\d\.\d+)/, "1.0").replace(/\-?\d+$/, (m2) => 1 + parseFloat(m2) - p));
+  var hfloor = (n, p) => parseFloat(n.toExponential(p).replace(/^(\-?\d\.\d+)/, (m) => pfloor(m, p - 1)));
+  var hceil = (n, p) => parseFloat(n.toExponential(p).replace(/^(\-?\d\.\d+)/, (m) => pceil(m, p - 1)));
+  var hunit = (n, p) => parseFloat(n.toExponential(p).replace(/^(\-?\d\.\d+)/, "1.0").replace(/\-?\d+$/, (m) => 1 + parseFloat(m) - p));
 
-  // _xjx0k54dh:/Users/hatanokazuhiro/Documents/htdocs/catpow/wp-content/plugins/catpow/elements/line-chart/element/style.css
+  // _l8dattjek:/Users/hatanokazuhiro/Documents/htdocs/catpow/wp-content/plugins/catpow/elements/line-chart/element/style.css
   var style_default = ".line-chart {\n  display: block;\n  width: 100%;\n  height: auto;\n}\n.line-chart-grid {\n  position: relative;\n  z-index: 1;\n}\n.line-chart-grid-line {\n  stroke-width: 0.0625rem;\n  stroke: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.25);\n}\n.line-chart-values {\n  position: relative;\n  z-index: 2;\n}\n.line-chart-values-circle {\n  fill: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);\n  stroke: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);\n  stroke-width: 0.125rem;\n}\n.line-chart-values-line {\n  stroke-width: 0.125rem;\n  stroke: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 100),0.5);\n}\n.line-chart-labels.is-column .line-chart-labels-label {\n  text-anchor: middle;\n  dominant-baseline: hanging;\n  font-size: 0.75rem;\n  font-family: var(--cp-fonts-t);\n}\n.line-chart-labels.is-row .line-chart-labels-label {\n  text-anchor: end;\n  dominant-baseline: middle;\n  font-size: 0.75rem;\n  font-family: var(--cp-fonts-t);\n}\n/*# sourceMappingURL=./style.css.map */";
 
   // ../elements/line-chart/element/index.jsx
