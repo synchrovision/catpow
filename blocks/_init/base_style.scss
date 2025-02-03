@@ -208,13 +208,13 @@ $colors:(
 				@include trn((y:f));
 			}
 			&-preview{
-				@include bnd((pd:20));
+				@include bnd((pd:20,h:a 80vh,oy:a));
 			}
 			&-input{
 				@include bg((c:s));
 				@include grd((tr:1fr a));
 				&-edit{
-					@include bnd((d:b,w:f,h:300 a,pd:1em,bs:b));
+					@include bnd((d:b,w:f,h:300 a 80vh,pd:1em,bs:b));
 					@include bg((c:n));
 					@include bdr((s:n));
 					@include txt((p:16,h:1.5em,c:t));

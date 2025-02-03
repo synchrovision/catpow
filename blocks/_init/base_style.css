@@ -381,6 +381,9 @@
 }
 .CP-RTF-portal-preview {
   padding: 1.25rem;
+  max-height: 80vh;
+  height: auto;
+  overflow-y: auto;
 }
 .CP-RTF-portal-input {
   background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),1);
@@ -394,6 +397,7 @@
   display: block;
   width: 100%;
   min-height: 18.75rem;
+  max-height: 80vh;
   height: auto;
   padding: 1em;
   box-sizing: border-box;
