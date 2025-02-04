@@ -4938,13 +4938,13 @@
 
   // ../blocks/_init/init/RTF.jsx
   CP.RTF = (props) => {
-    const { className, pref = "rtf", attr, keys, index, ...otherProps } = props;
+    const { className, pref = "rtf", attr, keys = { text: "text" }, index, ...otherProps } = props;
     const item = keys.items ? attr[keys.items][index] : attr;
     const text = item[keys.text] ? item[keys.text] : "";
-    return /* @__PURE__ */ wp.element.createElement("div", { className, "data-text": text, dangerouslySetInnerHTML: { __html: rtf(text, pref) } });
+    return /* @__PURE__ */ wp.element.createElement("div", { className, ...otherProps, dangerouslySetInnerHTML: { __html: rtf(text, pref) } });
   };
   CP.RTF.Edit = (props) => {
-    const { className, pref = "rtf", set, attr, keys, index, isSelected = true, ...otherProps } = props;
+    const { className, pref = "rtf", set, attr, keys = { text: "text" }, index, isSelected = true, ...otherProps } = props;
     const { useMemo: useMemo3, useCallback: useCallback2, useState: useState2 } = wp.element;
     const classes = useMemo3(() => bem("CP-RTF " + className), [className]);
     const item = useMemo3(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
@@ -4976,7 +4976,7 @@
     }, [updateText]);
     const [savedText, setSavedText] = useState2(text);
     const [isActive, setIsActive] = useState2(false);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-active": isSelected && isActive }) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.contents(), onClick: () => setIsActive(!isActive), dangerouslySetInnerHTML: { __html: rtf(item.text, pref) } }), /* @__PURE__ */ wp.element.createElement(Portal, { id: "EditRTF" }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal({ "is-active": isSelected && isActive }) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.preview(), dangerouslySetInnerHTML: { __html: rtf(item.text, pref) } }), /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.input() }, /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-active": isSelected && isActive }) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.contents(), onClick: () => setIsActive(!isActive), ...otherProps, dangerouslySetInnerHTML: { __html: rtf(item.text, pref) } }), /* @__PURE__ */ wp.element.createElement(Portal, { id: "EditRTF" }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal({ "is-active": isSelected && isActive }) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.preview(), dangerouslySetInnerHTML: { __html: rtf(item.text, pref) } }), /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.input() }, /* @__PURE__ */ wp.element.createElement(
       "textarea",
       {
         className: classes.portal.input.edit(),

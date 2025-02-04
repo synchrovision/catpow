@@ -6,16 +6,16 @@ import { useCallback } from 'preact/hooks';
 
 
 CP.RTF=(props)=>{
-	const {className,pref='rtf',attr,keys,index,...otherProps}=props;
+	const {className,pref='rtf',attr,keys={text:'text'},index,...otherProps}=props;
 	const item=keys.items?attr[keys.items][index]:attr;
 	const text=item[keys.text]?item[keys.text]:'';
 	
 	return (
-		<div className={className} data-text={text} dangerouslySetInnerHTML={{__html:rtf(text,pref)}}/>
+		<div className={className} {...otherProps} dangerouslySetInnerHTML={{__html:rtf(text,pref)}}/>
 	);
 }
 CP.RTF.Edit=(props)=>{
-	const {className,pref='rtf',set,attr,keys,index,isSelected=true,...otherProps}=props;
+	const {className,pref='rtf',set,attr,keys={text:'text'},index,isSelected=true,...otherProps}=props;
 	const {useMemo,useCallback,useState}=wp.element;
 	const classes=useMemo(()=>bem('CP-RTF '+className),[className]);
 	
@@ -50,7 +50,7 @@ CP.RTF.Edit=(props)=>{
 	
 	return (
 		<div className={classes({'is-active':isSelected && isActive})}>
-			<div className={classes.contents()} onClick={()=>setIsActive(!isActive)} dangerouslySetInnerHTML={{__html:rtf(item.text,pref)}}/>
+			<div className={classes.contents()} onClick={()=>setIsActive(!isActive)} {...otherProps} dangerouslySetInnerHTML={{__html:rtf(item.text,pref)}}/>
 			<Portal id="EditRTF">
 				<div className={classes.portal({'is-active':isSelected && isActive})}>
 					<div className={classes.portal.preview()} dangerouslySetInnerHTML={{__html:rtf(item.text,pref)}}/>
