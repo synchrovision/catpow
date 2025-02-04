@@ -1,5 +1,5 @@
 ﻿const {__,sprintf}=wp.i18n;
-import {debounce} from 'util';
+import {debounce} from 'catpow/util';
 
 export const Date=(props)=>{
 	const {className="JsonEditor-Input-Date",agent,onChange,onUpdate}=props;

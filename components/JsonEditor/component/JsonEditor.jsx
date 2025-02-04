@@ -1,6 +1,6 @@
 ﻿import {ObjectInput} from './inputComponents/ObjectInput.jsx';
 import {Input} from './inputComponents/Input.jsx';
-import {bem} from 'util';
+import {bem} from 'catpow/util';
 
 export const DataContext=wp.element.createContext({});
 

@@ -234,14 +234,18 @@
     ));
   };
 
-  // modules/util/bem.jsx
+  // modules/src/util/bem.jsx
   var bem = (className) => {
     const children = {};
+    const firstClass = className.split(" ")[0];
     return new Proxy(function() {
       if (arguments.length > 0) {
         const classes = [];
         let i;
         for (i = 0; i < arguments.length; i++) {
+          if (!arguments[i]) {
+            continue;
+          }
           if (typeof arguments[i] === "string") {
             classes.push(arguments[i]);
             continue;
@@ -252,14 +256,14 @@
           );
         }
         if (classes.length > 0) {
-          return className + " " + classes.join(" ");
+          return (className + " " + classes.join(" ")).replace(" --", " " + firstClass + "--");
         }
       }
       return className;
     }, {
       get: (target, prop) => {
         if (void 0 === children[prop]) {
-          children[prop] = bem(className.split(" ")[0] + (prop[0] === "_" ? "_" : "-") + prop);
+          children[prop] = bem(firstClass + (prop[0] === "_" ? "_" : "-") + prop);
         }
         return children[prop];
       }

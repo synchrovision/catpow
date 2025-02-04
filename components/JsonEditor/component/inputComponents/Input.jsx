@@ -1,6 +1,6 @@
 ﻿import {JsonEditor,DataContext} from '../JsonEditor.jsx';
 import {getInputComponentForSchema} from '../functions.jsx';
-import {throttle} from 'util';
+import {throttle} from 'catpow/util';
 
 const {__,sprintf}=wp.i18n;
 
