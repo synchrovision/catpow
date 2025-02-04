@@ -5,7 +5,7 @@ add_filter('rest_allowed_cors_headers',function($allow_headers){
 });
 register_rest_route(
 	'cp/v1',
-	'/(?P<content_path>(?P<data_type>[a-z]\w*)(?:/(?P<data_name>[a-z]\w*))?(?:/(?P<tmp>(?P<tmp_name>[a-z]\w*)(?:\-(?P<tmp_slug>[a-z]\w*))?))?)(?:/(?P<data_id>\d+))?(?:/(?P<action>[a-z]\w*))?(?:/(?P<param>.+))?/?',
+	'/(?P<content_path>(?P<data_type>[a-z][\-\w]*)(?:/(?P<data_name>[a-z][\-\w]*))?(?:/(?P<tmp>(?P<tmp_name>[a-z]\w*)(?:\-(?P<tmp_slug>[a-z]\w*))?))?)(?:/(?P<data_id>\d+))?(?:/(?P<action>[a-z]\w*))?(?:/(?P<param>.+))?/?',
 	[
 		'methods'=>WP_REST_Server::ALLMETHODS,
 		'permission_callback'=>function($req){
