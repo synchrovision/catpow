@@ -858,8 +858,17 @@ class CP{
 	}
 	
 	public static function get_class_name(){
-		$name=implode('\\',array_filter(func_get_args()));
-		return '\\Catpow\\'.$name;
+		$class_name='\\Catpow';
+		$chunks=array_filter(func_get_args());
+		foreach($chunks as $chunk){
+			if(strpos($chunk,'-')!==false){
+				$class_name.='\\'.implode('',array_map('ucfirst',explode('-',$chunk)));
+			}
+			else{
+				$class_name.='\\'.$chunk;
+			}
+		}
+		return $class_name;
 	}
 	public static function get_preserved_class_names($path){
 		$dirs=self::get_file_paths('classes/'.$path);
