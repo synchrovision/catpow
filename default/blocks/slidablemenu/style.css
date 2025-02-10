@@ -28,7 +28,7 @@
   -webkit-box-lines: single;
   -webkit-flex-wrap: nowrap;
   flex-wrap: nowrap;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
   box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
 .wp-block-catpow-slidablemenu > .items > .item > .contents > .image {

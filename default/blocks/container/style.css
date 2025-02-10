@@ -7,7 +7,7 @@
 .wp-block-catpow-container.hasBorder {
   border-style: solid;
   border-width: calc(var(--cp-border-width) * 0.0625rem);
-  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.5);
+  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a) * 0.5));
   border-radius: calc(var(--cp-border-radius) * 0.0625rem);
 }
 .wp-block-catpow-container.hasInsetShadow {

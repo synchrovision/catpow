@@ -23,7 +23,7 @@ ul.wp-block-catpow-buttons li.item div.button .url {
   font-size: 0.6875rem;
   line-height: 1em;
   letter-spacing: 0rem;
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a));
   box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
 /*# sourceMappingURL=./editor_style.css.map */

@@ -10,7 +10,7 @@
 .ChartText .val {
   text-anchor: middle;
   dominant-baseline: middle;
-  fill: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  fill: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
 }
 .ChartText .val .unit {
   dominant-baseline: middle;
