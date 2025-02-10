@@ -361,7 +361,7 @@ $colors:(
 	}
 	&-ItemControl{
 		$block:&;
-		@include bnd((pd:2 5,p:r,w:fit));
+		@include bnd((pd:2 5,p:r,w:fit,h:fit));
 		@include txt((a:c,p:12,h:10));
 		@include bg((c:b));
 		@include bdr((r:10));
