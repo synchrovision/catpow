@@ -2,14 +2,14 @@
 import {bem} from 'catpow/util';
 
 CP.ItemControl=(props)=>{
-	const {controls,float=true,children}=props;
+	const {className='',controls,float=true,children}=props;
 	const {useState}=wp.element;
 	const classes=bem('CP-ItemControl');
 	
 	const [open,setOpen]=useState(false);
 	
 	return (
-		<div className={classes({'is-open':open,'is-position-absolute':float})}>
+		<div className={classes(className,{'is-open':open,'is-position-absolute':float})}>
 			{Object.keys(controls).map((key)=>{
 				return (
 					<div className={classes.button('is-'+key)} onClick={controls[key]} key={key}></div>
