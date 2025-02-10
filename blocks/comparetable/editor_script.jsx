@@ -13,10 +13,10 @@ wp.blocks.registerBlockType('catpow/comparetable',{
 					if(files[1]){return false;}
 					return files[0].type==='text/csv';
 				},
-				priority: 10,
+				priority: 20,
 				transform:(files)=>{
 					var attributes={
-						classes:'wp-block-catpow-comparetable spec',
+						classes:'wp-block-catpow-comparetable is-style-spec has-tags has-header-column do-transposition',
 						rows:[{classes:'',cells:[{text:['Title'],classes:'th'}]}],
 						file:files[0]
 					};
@@ -27,7 +27,7 @@ wp.blocks.registerBlockType('catpow/comparetable',{
 				type:'block',
 				blocks:CP.tableConvertibles,
 				transform:(attributes)=>{
-					attributes.classes="wp-block-catpow-comparetable spec";
+					attributes.classes="wp-block-catpow-comparetable is-style-spec has-tags has-header-column do-transposition";
 					return wp.blocks.createBlock('catpow/comparetable',attributes);
 				}
 			},
@@ -36,7 +36,7 @@ wp.blocks.registerBlockType('catpow/comparetable',{
 				blocks:['core/table'],
 				transform:(attributes)=>{
 					return wp.blocks.createBlock('catpow/comparetable',{
-						classes:"wp-block-catpow-comparetable spec",
+						classes:"wp-block-catpow-comparetable is-style-spec has-tags has-header-column do-transposition",
 						rows:attributes.body.map((row)=>({
 							cells:row.cells.map((cell)=>({
 								text:wp.blocks.parseWithAttributeSchema(cell.content,{source:'html'})
@@ -308,22 +308,28 @@ wp.blocks.registerBlockType('catpow/comparetable',{
 														var controles=[];
 														if(isSelected && (columnIndex == row.cells.length-1)){
 															controles.push(
-																<div className="itemControl rowControl" key="rowControl">
-																	<div className='btn up' onClick={()=>downRow(rowIndex)}></div>
-																	<div className='btn delete' onClick={()=>deleteRow(rowIndex)}></div>
-																	<div className='btn clone' onClick={()=>addRow(rowIndex)}></div>
-																	<div className='btn down' onClick={()=>upRow(rowIndex)}></div>
-																</div>
+																<CP.ItemControl
+																	className="is-control-row"
+																	controls={{
+																		up:()=>downRow(index),
+																		delete:()=>deleteRow(index),
+																		clone:()=>addRow(index),
+																		down:()=>upRow(index),
+																	}}
+																/>
 															);
 														}
 														if(isSelected && (rowIndex == rows.length-1)){
 															controles.push(
-																<div className="itemControl columnControl" key="columnControl">
-																	<div className='btn left' onClick={()=>downColumn(columnIndex)}></div>
-																	<div className='btn delete' onClick={()=>deleteColumn(columnIndex)}></div>
-																	<div className='btn clone' onClick={()=>addColumn(columnIndex)}></div>
-																	<div className='btn right' onClick={()=>upColumn(columnIndex)}></div>
-																</div>
+																<CP.ItemControl
+																	className="is-control-column"
+																	controls={{
+																		left:()=>downColumn(columnIndex),
+																		delete:()=>deleteColumn(columnIndex),
+																		clone:()=>addColumn(columnIndex),
+																		right:()=>upColumn(columnIndex),
+																	}}
+																/>
 															);
 														}
 														if(hasHeaderColumn && columnIndex==0){

@@ -1,6 +1,6 @@
 <?php
 $attributes=[
-	'classes'=>['type'=>'text','default'=>'is-style-spec has-tags has-header-column'],
+	'classes'=>['type'=>'text','default'=>'is-style-spec has-tags has-header-column do-transposition'],
 	'vars'=>['type'=>'object','default'=>['--cp-table-width'=>'960','--cp-column-width'=>'200','--cp-header-column-width'=>'120']],
 	
 	'headerColClasses'=>['source'=>'attribute','attribute'=>'data-header-col-class','selector'=>'.wp-block-catpow-comparetable','default'=>'has-text-align-center has-vertical-align-middle'],

@@ -15,13 +15,13 @@
 				&-th,&-td{
 					.CP-ItemControl{
 						@include bnd((w:70));
-						#{$block}:not(.do-transposition) &.columnControl,
-						#{$block}.do-transposition &.rowControl{
-							@include bnd((p:a,b:-20,l:0,r:0,mg:a));
+						#{$block}:not(.do-transposition) &.is-control-column,
+						#{$block}.do-transposition &.is-control-row{
+							@include bnd((p:a,i:0,mg:a,mgb:-20));
 						}
-						#{$block}.do-transposition &.columnControl,
-						#{$block}:not(.do-transposition) &.rowControl{
-							@include bnd((p:a,t:0,r:-80));
+						#{$block}.do-transposition &.is-control-column,
+						#{$block}:not(.do-transposition) &.is-control-row{
+							@include bnd((p:a,i:0,mg:a,mgr:-60));
 						}
 					}
 				}

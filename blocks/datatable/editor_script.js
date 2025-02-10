@@ -15,7 +15,7 @@
             }
             return files[0].type === "text/csv";
           },
-          priority: 10,
+          priority: 15,
           transform: (files) => {
             var attributes = {
               classes: "wp-block-catpow-datatable spec",
@@ -162,12 +162,34 @@
           }, value: cell.text, key: "text" })];
           if (isSelected && columnIndex == row.cells.length - 1) {
             children.push(
-              /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl rowControl", key: "rowControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn up", onClick: () => downRow(index) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteRow(index) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addRow(index) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn down", onClick: () => upRow(index) }))
+              /* @__PURE__ */ wp.element.createElement(
+                CP.ItemControl,
+                {
+                  className: "is-control-row",
+                  controls: {
+                    up: () => downRow(index),
+                    delete: () => deleteRow(index),
+                    clone: () => addRow(index),
+                    down: () => upRow(index)
+                  }
+                }
+              )
             );
           }
           if (isSelected && index == rows.length - 1) {
             children.push(
-              /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl columnControl", key: "columnControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn left", onClick: () => downColumn(columnIndex) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteColumn(columnIndex) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addColumn(columnIndex) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn right", onClick: () => upColumn(columnIndex) }))
+              /* @__PURE__ */ wp.element.createElement(
+                CP.ItemControl,
+                {
+                  className: "is-control-column",
+                  controls: {
+                    left: () => downColumn(columnIndex),
+                    delete: () => deleteColumn(columnIndex),
+                    clone: () => addColumn(columnIndex),
+                    right: () => upColumn(columnIndex)
+                  }
+                }
+              )
             );
           }
           return wp.element.createElement(

@@ -17,10 +17,10 @@
             }
             return files[0].type === "text/csv";
           },
-          priority: 10,
+          priority: 20,
           transform: (files) => {
             var attributes = {
-              classes: "wp-block-catpow-comparetable spec",
+              classes: "wp-block-catpow-comparetable is-style-spec has-tags has-header-column do-transposition",
               rows: [{ classes: "", cells: [{ text: ["Title"], classes: "th" }] }],
               file: files[0]
             };
@@ -31,7 +31,7 @@
           type: "block",
           blocks: CP.tableConvertibles,
           transform: (attributes) => {
-            attributes.classes = "wp-block-catpow-comparetable spec";
+            attributes.classes = "wp-block-catpow-comparetable is-style-spec has-tags has-header-column do-transposition";
             return wp.blocks.createBlock("catpow/comparetable", attributes);
           }
         },
@@ -40,7 +40,7 @@
           blocks: ["core/table"],
           transform: (attributes) => {
             return wp.blocks.createBlock("catpow/comparetable", {
-              classes: "wp-block-catpow-comparetable spec",
+              classes: "wp-block-catpow-comparetable is-style-spec has-tags has-header-column do-transposition",
               rows: attributes.body.map((row) => ({
                 cells: row.cells.map((cell) => ({
                   text: wp.blocks.parseWithAttributeSchema(cell.content, { source: "html" })
@@ -171,43 +171,43 @@
       const saveItems = () => {
         setAttributes({ rows: JSON.parse(JSON.stringify(rows)) });
       };
-      const addRow = (index) => {
-        rows.splice(index, 0, rows[index]);
+      const addRow = (index2) => {
+        rows.splice(index2, 0, rows[index2]);
         saveItems();
       };
-      const deleteRow = (index) => {
-        rows.splice(index, 1);
+      const deleteRow = (index2) => {
+        rows.splice(index2, 1);
         saveItems();
       };
-      const upRow = (index) => {
-        rows.splice(rowIndex, 0, rows.splice(index, 1)[0]);
+      const upRow = (index2) => {
+        rows.splice(rowIndex, 0, rows.splice(index2, 1)[0]);
         saveItems();
       };
-      const downRow = (index) => {
-        rows.splice(index - 1, 0, rows.splice(index, 1)[0]);
+      const downRow = (index2) => {
+        rows.splice(index2 - 1, 0, rows.splice(index2, 1)[0]);
         saveItems();
       };
-      const addColumn = (index) => {
-        cols.splice(index, 0, cols[index]);
-        rows.map((row) => row.cells.splice(index, 0, row.cells[index]));
+      const addColumn = (index2) => {
+        cols.splice(index2, 0, cols[index2]);
+        rows.map((row) => row.cells.splice(index2, 0, row.cells[index2]));
         saveItems();
       };
-      const deleteColumn = (index) => {
-        cols.splice(index, 1);
-        rows.map((row) => row.cells.splice(index, 1));
+      const deleteColumn = (index2) => {
+        cols.splice(index2, 1);
+        rows.map((row) => row.cells.splice(index2, 1));
         saveItems();
       };
-      const upColumn = (index) => {
-        cols.splice(rowIndex, 0, cols.splice(index, 1)[0]);
+      const upColumn = (index2) => {
+        cols.splice(rowIndex, 0, cols.splice(index2, 1)[0]);
         rows.map((row) => {
-          row.cells.splice(rowIndex, 0, row.cells.splice(index, 1)[0]);
+          row.cells.splice(rowIndex, 0, row.cells.splice(index2, 1)[0]);
         });
         saveItems();
       };
-      const downColumn = (index) => {
-        cols.splice(index - 1, 0, cols.splice(index, 1)[0]);
+      const downColumn = (index2) => {
+        cols.splice(index2 - 1, 0, cols.splice(index2, 1)[0]);
         rows.map((row) => {
-          row.cells.splice(index - 1, 0, row.cells.splice(index, 1)[0]);
+          row.cells.splice(index2 - 1, 0, row.cells.splice(index2, 1)[0]);
         });
         saveItems();
       };
@@ -227,7 +227,7 @@
           return false;
         }
         return /* @__PURE__ */ wp.element.createElement("li", { className: classes.tags.tag(cell.classes), "data-wp-on--click": "actions.onClickTag", "data-wp-class--is-active": "callbacks.isTagActive", "data-index": tagIndex, key: tagIndex }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: cell.text }));
-      })), /* @__PURE__ */ wp.element.createElement("div", { className: classes.box() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.box._body() }, /* @__PURE__ */ wp.element.createElement("table", { className: classes.table(), style: { "--cp-row-count": `${rows.length}`, "--cp-column-count": `${rows[0].cells.length}` } }, /* @__PURE__ */ wp.element.createElement("colgroup", { className: classes.table.colgroup() }, cols.map((col, index) => /* @__PURE__ */ wp.element.createElement("col", { className: classes.table.colgroup.col(col.classes), "data-col-class": col.classes, key: index }))), hasHeaderRow && /* @__PURE__ */ wp.element.createElement("thead", { className: classes.table.thead() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.table.thead.tr(rows[0].classes), "data-row-class": rows[0].classes }, rows[0].cells.map((cell, columnIndex) => {
+      })), /* @__PURE__ */ wp.element.createElement("div", { className: classes.box() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.box._body() }, /* @__PURE__ */ wp.element.createElement("table", { className: classes.table(), style: { "--cp-row-count": `${rows.length}`, "--cp-column-count": `${rows[0].cells.length}` } }, /* @__PURE__ */ wp.element.createElement("colgroup", { className: classes.table.colgroup() }, cols.map((col, index2) => /* @__PURE__ */ wp.element.createElement("col", { className: classes.table.colgroup.col(col.classes), "data-col-class": col.classes, key: index2 }))), hasHeaderRow && /* @__PURE__ */ wp.element.createElement("thead", { className: classes.table.thead() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.table.thead.tr(rows[0].classes), "data-row-class": rows[0].classes }, rows[0].cells.map((cell, columnIndex) => {
         const lineClass = ["is-even-line", "is-odd-line"][(states.doTransposition ? columnIndex : 0) % 2];
         if (states.hasHeaderColumn && columnIndex == 0) {
           const cellStates2 = CP.classNamesToFlags(firstCellClasses);
@@ -276,12 +276,34 @@
           var controles = [];
           if (isSelected && columnIndex == row.cells.length - 1) {
             controles.push(
-              /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl rowControl", key: "rowControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn up", onClick: () => downRow(rowIndex2) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteRow(rowIndex2) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addRow(rowIndex2) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn down", onClick: () => upRow(rowIndex2) }))
+              /* @__PURE__ */ wp.element.createElement(
+                CP.ItemControl,
+                {
+                  className: "is-control-row",
+                  controls: {
+                    up: () => downRow(index),
+                    delete: () => deleteRow(index),
+                    clone: () => addRow(index),
+                    down: () => upRow(index)
+                  }
+                }
+              )
             );
           }
           if (isSelected && rowIndex2 == rows.length - 1) {
             controles.push(
-              /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl columnControl", key: "columnControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn left", onClick: () => downColumn(columnIndex) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteColumn(columnIndex) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addColumn(columnIndex) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn right", onClick: () => upColumn(columnIndex) }))
+              /* @__PURE__ */ wp.element.createElement(
+                CP.ItemControl,
+                {
+                  className: "is-control-column",
+                  controls: {
+                    left: () => downColumn(columnIndex),
+                    delete: () => deleteColumn(columnIndex),
+                    clone: () => addColumn(columnIndex),
+                    right: () => upColumn(columnIndex)
+                  }
+                }
+              )
             );
           }
           if (hasHeaderColumn && columnIndex == 0) {
@@ -445,7 +467,7 @@
           return false;
         }
         return /* @__PURE__ */ wp.element.createElement("li", { className: classes.tags.tag(cell.classes), "data-wp-on--click": "actions.onClickTag", "data-wp-class--is-active": "callbacks.isTagActive", "data-index": tagIndex, key: tagIndex }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: cell.text }));
-      })), /* @__PURE__ */ wp.element.createElement("div", { className: classes.box() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.box._body() }, /* @__PURE__ */ wp.element.createElement("table", { className: classes.table(), style: { "--cp-row-count": `${rows.length}`, "--cp-column-count": `${rows[0].cells.length}` } }, /* @__PURE__ */ wp.element.createElement("colgroup", { className: classes.table.colgroup() }, cols.map((col, index) => /* @__PURE__ */ wp.element.createElement("col", { className: classes.table.colgroup.col(col.classes), "data-col-class": col.classes, key: index }))), hasHeaderRow && /* @__PURE__ */ wp.element.createElement("thead", { className: classes.table.thead() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.table.thead.tr(rows[0].classes), "data-row-class": rows[0].classes }, rows[0].cells.map((cell, columnIndex) => {
+      })), /* @__PURE__ */ wp.element.createElement("div", { className: classes.box() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.box._body() }, /* @__PURE__ */ wp.element.createElement("table", { className: classes.table(), style: { "--cp-row-count": `${rows.length}`, "--cp-column-count": `${rows[0].cells.length}` } }, /* @__PURE__ */ wp.element.createElement("colgroup", { className: classes.table.colgroup() }, cols.map((col, index2) => /* @__PURE__ */ wp.element.createElement("col", { className: classes.table.colgroup.col(col.classes), "data-col-class": col.classes, key: index2 }))), hasHeaderRow && /* @__PURE__ */ wp.element.createElement("thead", { className: classes.table.thead() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.table.thead.tr(rows[0].classes), "data-row-class": rows[0].classes }, rows[0].cells.map((cell, columnIndex) => {
         const lineClass = ["is-even-line", "is-odd-line"][states.doTransposition ? columnIndex % 2 : 0];
         if (states.hasHeaderColumn && columnIndex == 0) {
           const cellStates2 = CP.classNamesToFlags(firstCellClasses);

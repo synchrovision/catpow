@@ -12,7 +12,7 @@
 					if(files[1]){return false;}
 					return files[0].type==='text/csv';
 				},
-				priority: 10,
+				priority: 15,
 				transform:(files)=>{
 					var attributes={
 						classes:'wp-block-catpow-datatable spec',
@@ -173,22 +173,28 @@
 											var children=[<RichText onChange={(text)=>{cell.text=text;saveItems();}} value={cell.text} key="text"/>];
 											if(isSelected && (columnIndex == row.cells.length-1)){
 												children.push(
-													<div className="itemControl rowControl" key="rowControl">
-														<div className='btn up' onClick={()=>downRow(index)}></div>
-														<div className='btn delete' onClick={()=>deleteRow(index)}></div>
-														<div className='btn clone' onClick={()=>addRow(index)}></div>
-														<div className='btn down' onClick={()=>upRow(index)}></div>
-													</div>
+													<CP.ItemControl
+														className="is-control-row"
+														controls={{
+															up:()=>downRow(index),
+															delete:()=>deleteRow(index),
+															clone:()=>addRow(index),
+															down:()=>upRow(index),
+														}}
+													/>
 												);
 											}
 											if(isSelected && (index == rows.length-1)){
 												children.push(
-													<div className="itemControl columnControl" key="columnControl">
-														<div className='btn left' onClick={()=>downColumn(columnIndex)}></div>
-														<div className='btn delete' onClick={()=>deleteColumn(columnIndex)}></div>
-														<div className='btn clone' onClick={()=>addColumn(columnIndex)}></div>
-														<div className='btn right' onClick={()=>upColumn(columnIndex)}></div>
-													</div>
+													<CP.ItemControl
+														className="is-control-column"
+														controls={{
+															left:()=>downColumn(columnIndex),
+															delete:()=>deleteColumn(columnIndex),
+															clone:()=>addColumn(columnIndex),
+															right:()=>upColumn(columnIndex),
+														}}
+													/>
 												);
 											}
 											return wp.element.createElement(
