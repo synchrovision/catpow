@@ -18,6 +18,20 @@ wp.blocks.registerBlockType('catpow/listed',{
 					return wp.blocks.createBlock('catpow/listed',attributes);
 				},
 			},
+			{
+				type:'block',
+				blocks:['catpow/datatable'],
+				isMatch:({rows})=>{
+					const block=wp.data.select('core/blocks').getBlockType('catpow/listed');
+					return CP.isRowsConvertibleToItems(rows,block.attributes.items);
+				},
+				transform:(attributes)=>{
+					attributes.classes='wp-block-catpow-listed menu medium hasHeader hasTitle hasTitleCaption hasImage hasText';
+					const block=wp.data.select('core/blocks').getBlockType('catpow/listed');
+					attributes.items=CP.convertRowsToItems(attributes.rows,block.attributes.items);
+					return wp.blocks.createBlock('catpow/listed',attributes);
+				}
+			}
 		]
 	},
 	example:CP.example,
