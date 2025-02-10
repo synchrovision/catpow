@@ -1,7 +1,7 @@
 @import 'admin_style_config.scss';
 
 .wp-block-catpow-comparetable{
-	$this:&;
+	$block:&;
 	@include bnd((w:f));
 	&-box{
 		@include bnd((pdb:60));
@@ -13,14 +13,14 @@
 		&-thead,&-tbody{
 			&-tr{
 				&-th,&-td{
-					.itemControl{
+					.CP-ItemControl{
 						@include bnd((w:70));
-						#{$this}:not(.do-transposition) &.columnControl,
-						#{$this}.do-transposition &.rowControl{
+						#{$block}:not(.do-transposition) &.columnControl,
+						#{$block}.do-transposition &.rowControl{
 							@include bnd((p:a,b:-20,l:0,r:0,mg:a));
 						}
-						#{$this}.do-transposition &.columnControl,
-						#{$this}:not(.do-transposition) &.rowControl{
+						#{$block}.do-transposition &.columnControl,
+						#{$block}:not(.do-transposition) &.rowControl{
 							@include bnd((p:a,t:0,r:-80));
 						}
 					}

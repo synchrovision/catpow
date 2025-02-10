@@ -1,15 +1,15 @@
 @import 'admin_style_config.scss';
 
-body table.wp-block-catpow-datatable{
+.wp-block-catpow-datatable{
 	@include bnd((w:f));
-	thead,tbody{
-		tr{
-			th,td{
+	>thead,>tbody{
+		>tr{
+			>th,>td{
 				@include bnd((p:r));
-				div.itemControl{
+				>.CP-ItemControl{
 					@include bnd((w:70));
-					&.columnControl{@include bnd((p:a,b:-20,l:0,r:0,mg:a));}
-					&.rowControl{@include bnd((p:a,t:0,r:-60));}
+					&.is-control-row{@include bnd((p:a,i:0,mg:a,mgr:-60));}
+					&.is-control-column{@include bnd((p:a,i:0,mg:a,mgb:-20));}
 				}
 			}
 		}

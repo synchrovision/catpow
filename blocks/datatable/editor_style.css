@@ -1,22 +1,30 @@
-body table.wp-block-catpow-datatable {
+.wp-block-catpow-datatable {
   width: 100%;
 }
-body table.wp-block-catpow-datatable thead tr th, body table.wp-block-catpow-datatable thead tr td, body table.wp-block-catpow-datatable tbody tr th, body table.wp-block-catpow-datatable tbody tr td {
+.wp-block-catpow-datatable > thead > tr > th, .wp-block-catpow-datatable > thead > tr > td, .wp-block-catpow-datatable > tbody > tr > th, .wp-block-catpow-datatable > tbody > tr > td {
   position: relative;
 }
-body table.wp-block-catpow-datatable thead tr th div.itemControl, body table.wp-block-catpow-datatable thead tr td div.itemControl, body table.wp-block-catpow-datatable tbody tr th div.itemControl, body table.wp-block-catpow-datatable tbody tr td div.itemControl {
+.wp-block-catpow-datatable > thead > tr > th > .CP-ItemControl, .wp-block-catpow-datatable > thead > tr > td > .CP-ItemControl, .wp-block-catpow-datatable > tbody > tr > th > .CP-ItemControl, .wp-block-catpow-datatable > tbody > tr > td > .CP-ItemControl {
   width: 4.375rem;
 }
-body table.wp-block-catpow-datatable thead tr th div.itemControl.columnControl, body table.wp-block-catpow-datatable thead tr td div.itemControl.columnControl, body table.wp-block-catpow-datatable tbody tr th div.itemControl.columnControl, body table.wp-block-catpow-datatable tbody tr td div.itemControl.columnControl {
-  position: absolute;
-  bottom: -1.25rem;
-  left: 0rem;
-  right: 0rem;
-  margin: auto;
-}
-body table.wp-block-catpow-datatable thead tr th div.itemControl.rowControl, body table.wp-block-catpow-datatable thead tr td div.itemControl.rowControl, body table.wp-block-catpow-datatable tbody tr th div.itemControl.rowControl, body table.wp-block-catpow-datatable tbody tr td div.itemControl.rowControl {
+.wp-block-catpow-datatable > thead > tr > th > .CP-ItemControl.is-control-row, .wp-block-catpow-datatable > thead > tr > td > .CP-ItemControl.is-control-row, .wp-block-catpow-datatable > tbody > tr > th > .CP-ItemControl.is-control-row, .wp-block-catpow-datatable > tbody > tr > td > .CP-ItemControl.is-control-row {
   position: absolute;
   top: 0rem;
-  right: -3.75rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  margin: auto;
+  margin-right: -3.75rem;
+}
+.wp-block-catpow-datatable > thead > tr > th > .CP-ItemControl.is-control-column, .wp-block-catpow-datatable > thead > tr > td > .CP-ItemControl.is-control-column, .wp-block-catpow-datatable > tbody > tr > th > .CP-ItemControl.is-control-column, .wp-block-catpow-datatable > tbody > tr > td > .CP-ItemControl.is-control-column {
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  margin: auto;
+  margin-bottom: -1.25rem;
 }
 /*# sourceMappingURL=./editor_style.css.map */
