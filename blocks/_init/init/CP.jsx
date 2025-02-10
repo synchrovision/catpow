@@ -5,6 +5,7 @@ export const CP={
 	cache:{},
 	config:{},
 	
+	/*transform*/
 	listedConvertibles:['catpow/listed','catpow/flow','catpow/faq','catpow/ranking','catpow/dialog','catpow/sphere','catpow/slider','catpow/banners','catpow/lightbox','catpow/panes','catpow/slidablemenu','catpow/showcase'],
 	tableConvertibles:['catpow/simpletable','catpow/datatable','catpow/comparetable','catpow/layouttable'],
 	
@@ -13,6 +14,27 @@ export const CP={
 		lead:'名前はまだない。どこで生れたか頓と見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。',
 		text:'名前はまだない。どこで生れたか頓と見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。この書生というのは時々我々を捕えて煮て食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。',
 		footer:'『吾輩は猫である』（わがはいはねこである）　夏目漱石　著'
+	},
+	isRowsConvertibleToItems:(rows,itemsConf)=>{
+		for(const cell of rows[0].cells){
+			if(itemsConf.query.hasOwnProperty(cell.text)){return true;}
+		}
+		return false;
+	},
+	convertRowsToItems:(rows,itemsConf)=>{
+		const keyIndex=[];
+		rows[0].cells.forEach((cell,index)=>{
+			if(itemsConf.query.hasOwnProperty(cell.text)){
+				keyIndex.push([cell.text,index]);
+			}
+		});
+		return rows.slice(1).map((row)=>{
+			const item={};
+			for(const [key,index] of keyIndex){
+				item[key]=row.cells[index].text;
+			}
+			return item;
+		});
 	},
 	
 	selectImage:(keys,set,size,devices)=>{

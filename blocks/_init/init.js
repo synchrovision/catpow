@@ -195,6 +195,7 @@
     filters: {},
     cache: {},
     config: {},
+    /*transform*/
     listedConvertibles: ["catpow/listed", "catpow/flow", "catpow/faq", "catpow/ranking", "catpow/dialog", "catpow/sphere", "catpow/slider", "catpow/banners", "catpow/lightbox", "catpow/panes", "catpow/slidablemenu", "catpow/showcase"],
     tableConvertibles: ["catpow/simpletable", "catpow/datatable", "catpow/comparetable", "catpow/layouttable"],
     dummyText: {
@@ -202,6 +203,29 @@
       lead: "\u540D\u524D\u306F\u307E\u3060\u306A\u3044\u3002\u3069\u3053\u3067\u751F\u308C\u305F\u304B\u9813\u3068\u898B\u5F53\u304C\u3064\u304B\u306C\u3002\u4F55\u3067\u3082\u8584\u6697\u3044\u3058\u3081\u3058\u3081\u3057\u305F\u6240\u3067\u30CB\u30E3\u30FC\u30CB\u30E3\u30FC\u6CE3\u3044\u3066\u3044\u305F\u4E8B\u3060\u3051\u306F\u8A18\u61B6\u3057\u3066\u3044\u308B\u3002",
       text: "\u540D\u524D\u306F\u307E\u3060\u306A\u3044\u3002\u3069\u3053\u3067\u751F\u308C\u305F\u304B\u9813\u3068\u898B\u5F53\u304C\u3064\u304B\u306C\u3002\u4F55\u3067\u3082\u8584\u6697\u3044\u3058\u3081\u3058\u3081\u3057\u305F\u6240\u3067\u30CB\u30E3\u30FC\u30CB\u30E3\u30FC\u6CE3\u3044\u3066\u3044\u305F\u4E8B\u3060\u3051\u306F\u8A18\u61B6\u3057\u3066\u3044\u308B\u3002\u543E\u8F29\u306F\u3053\u3053\u3067\u59CB\u3081\u3066\u4EBA\u9593\u3068\u3044\u3046\u3082\u306E\u3092\u898B\u305F\u3002\u3057\u304B\u3082\u3042\u3068\u3067\u805E\u304F\u3068\u305D\u308C\u306F\u66F8\u751F\u3068\u3044\u3046\u4EBA\u9593\u4E2D\u3067\u4E00\u756A\u7370\u60AA\u306A\u7A2E\u65CF\u3067\u3042\u3063\u305F\u305D\u3046\u3060\u3002\u3053\u306E\u66F8\u751F\u3068\u3044\u3046\u306E\u306F\u6642\u3005\u6211\u3005\u3092\u6355\u3048\u3066\u716E\u3066\u98DF\u3046\u3068\u3044\u3046\u8A71\u3067\u3042\u308B\u3002\u3057\u304B\u3057\u305D\u306E\u5F53\u6642\u306F\u4F55\u3068\u3044\u3046\u8003\u3082\u306A\u304B\u3063\u305F\u304B\u3089\u5225\u6BB5\u6050\u3057\u3044\u3068\u3082\u601D\u308F\u306A\u304B\u3063\u305F\u3002",
       footer: "\u300E\u543E\u8F29\u306F\u732B\u3067\u3042\u308B\u300F\uFF08\u308F\u304C\u306F\u3044\u306F\u306D\u3053\u3067\u3042\u308B\uFF09\u3000\u590F\u76EE\u6F31\u77F3\u3000\u8457"
+    },
+    isRowsConvertibleToItems: (rows, itemsConf) => {
+      for (const cell of rows[0].cells) {
+        if (itemsConf.query.hasOwnProperty(cell.text)) {
+          return true;
+        }
+      }
+      return false;
+    },
+    convertRowsToItems: (rows, itemsConf) => {
+      const keyIndex = [];
+      rows[0].cells.forEach((cell, index) => {
+        if (itemsConf.query.hasOwnProperty(cell.text)) {
+          keyIndex.push([cell.text, index]);
+        }
+      });
+      return rows.slice(1).map((row) => {
+        const item = {};
+        for (const [key, index] of keyIndex) {
+          item[key] = row.cells[index].text;
+        }
+        return item;
+      });
     },
     selectImage: (keys, set, size, devices) => {
       devices = devices || ["sp", "tb"];
@@ -2837,11 +2861,11 @@
 
   // ../blocks/_init/init/ItemControl.jsx
   CP.ItemControl = (props) => {
-    const { controls, float = true, children } = props;
+    const { className = "", controls, float = true, children } = props;
     const { useState: useState2 } = wp.element;
     const classes = bem("CP-ItemControl");
     const [open, setOpen] = useState2(false);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-open": open, "is-position-absolute": float }) }, Object.keys(controls).map((key) => {
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes(className, { "is-open": open, "is-position-absolute": float }) }, Object.keys(controls).map((key) => {
       return /* @__PURE__ */ wp.element.createElement("div", { className: classes.button("is-" + key), onClick: controls[key], key });
     }), children && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes.button("is-edit"), onClick: () => setOpen(!open) }), /* @__PURE__ */ wp.element.createElement("div", { className: classes.inputs() }, children)));
   };
