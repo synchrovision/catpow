@@ -32,6 +32,20 @@ wp.blocks.registerBlockType('catpow/slider',{
 					return wp.blocks.createBlock('catpow/slider',attributes);
 				},
 			},
+			{
+				type:'block',
+				blocks:['catpow/datatable'],
+				isMatch:({rows})=>{
+					const block=wp.data.select('core/blocks').getBlockType('catpow/slider');
+					return CP.isRowsConvertibleToItems(rows,block.attributes.items);
+				},
+				transform:(attributes)=>{
+					attributes.classes='wp-block-catpow-slider story hasTitle hasText hasImage';
+					const block=wp.data.select('core/blocks').getBlockType('catpow/slider');
+					attributes.items=CP.convertRowsToItems(attributes.rows,block.attributes.items);
+					return wp.blocks.createBlock('catpow/slider',attributes);
+				}
+			}
 		]
 	},
 
