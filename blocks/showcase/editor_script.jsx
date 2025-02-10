@@ -1,4 +1,4 @@
-﻿CP.config.showcase={
+﻿const blockConfig={
 	imageKeys:{
 		image:{src:"src",alt:"alt",code:"imageCode",items:"items"}
 	},
@@ -6,6 +6,8 @@
 		link:{href:"linkUrl",items:"items"}
 	}
 };
+CP.config.showcase=blockConfig;
+
 wp.blocks.registerBlockType('catpow/showcase',{
 	title: '🐾 showcase',
 	description:'画像とテキストを並べて表示します。',
@@ -21,6 +23,20 @@ wp.blocks.registerBlockType('catpow/showcase',{
 					return wp.blocks.createBlock('catpow/showcase',attributes);
 				},
 			},
+			{
+				type:'block',
+				blocks:['catpow/datatable'],
+				isMatch:({rows})=>{
+					const block=wp.data.select('core/blocks').getBlockType('catpow/showcase');
+					return CP.isRowsConvertibleToItems(rows,block.attributes.items);
+				},
+				transform:(attributes)=>{
+					attributes.classes='wp-block-catpow-showcase hasCounter';
+					const block=wp.data.select('core/blocks').getBlockType('catpow/showcase');
+					attributes.items=CP.convertRowsToItems(attributes.rows,block.attributes.items);
+					return wp.blocks.createBlock('catpow/showcase',attributes);
+				}
+			}
 		]
 	},
 	example:CP.example,

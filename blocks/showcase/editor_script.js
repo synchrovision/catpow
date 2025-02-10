@@ -1,6 +1,6 @@
 (() => {
   // ../blocks/showcase/editor_script.jsx
-  CP.config.showcase = {
+  var blockConfig = {
     imageKeys: {
       image: { src: "src", alt: "alt", code: "imageCode", items: "items" }
     },
@@ -8,6 +8,7 @@
       link: { href: "linkUrl", items: "items" }
     }
   };
+  CP.config.showcase = blockConfig;
   wp.blocks.registerBlockType("catpow/showcase", {
     title: "\u{1F43E} showcase",
     description: "\u753B\u50CF\u3068\u30C6\u30AD\u30B9\u30C8\u3092\u4E26\u3079\u3066\u8868\u793A\u3057\u307E\u3059\u3002",
@@ -20,6 +21,20 @@
           blocks: CP.listedConvertibles,
           transform: (attributes) => {
             attributes.classes = "wp-block-catpow-showcase hasCounter";
+            return wp.blocks.createBlock("catpow/showcase", attributes);
+          }
+        },
+        {
+          type: "block",
+          blocks: ["catpow/datatable"],
+          isMatch: ({ rows }) => {
+            const block = wp.data.select("core/blocks").getBlockType("catpow/showcase");
+            return CP.isRowsConvertibleToItems(rows, block.attributes.items);
+          },
+          transform: (attributes) => {
+            attributes.classes = "wp-block-catpow-showcase hasCounter";
+            const block = wp.data.select("core/blocks").getBlockType("catpow/showcase");
+            attributes.items = CP.convertRowsToItems(attributes.rows, block.attributes.items);
             return wp.blocks.createBlock("catpow/showcase", attributes);
           }
         }
