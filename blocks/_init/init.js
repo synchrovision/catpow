@@ -2943,6 +2943,17 @@
           { name: "belowHeight", label: __2("\u4E0B\u9AD8\u3055", "catpow"), input: "range", vars: "vars", key: "--cp-clip-shape-below-height", min: 8, max: 400 }
         ]
       } }
+    ] },
+    customPadding: { name: "customPadding", label: __2("\u4F59\u767D", "catpow"), values: "has-custom-padding", sub: [
+      { name: "paddingTop", label: __2("\u4E0A\u4F59\u767D", "catpow"), input: "range", vars: "vars", key: "--cp-padding-top", min: 0, max: 400 },
+      { name: "paddingBottom", label: __2("\u4E0B\u4F59\u767D", "catpow"), input: "range", vars: "vars", key: "--cp-padding-bottom", min: 0, max: 400 }
+    ] },
+    customMargin: { name: "customMargin", label: __2("\u9593\u9694", "catpow"), values: "has-custom-margin", sub: [
+      { name: "marginTop", label: __2("\u4E0A\u9593\u9694", "catpow"), input: "range", vars: "vars", key: "--cp-margin-top", min: -400, max: 400 },
+      { name: "marginBottom", label: __2("\u4E0B\u9593\u9694", "catpow"), input: "range", vars: "vars", key: "--cp-margin-bottom", min: -400, max: 400 }
+    ] },
+    customContentWidth: { name: "cusotomWidth", label: __2("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"), values: "has-custom-content-width", sub: [
+      { name: "marginTop", label: __2("\u4E0A\u9593\u9694", "catpow"), input: "range", vars: "vars", key: "--cp-content-width", min: 200, max: 1600 }
     ] }
   };
   wp.domReady(() => {

@@ -66,6 +66,17 @@ export const selectiveClassesPresets={
 				{name:'belowHeight',label:__('下高さ','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-below-height',min:8,max:400}
 			],
 		}}
+	]},
+	customPadding:{name:'customPadding',label:__('余白','catpow'),values:'has-custom-padding',sub:[
+		{name:'paddingTop',label:__('上余白','catpow'),input:'range',vars:'vars',key:'--cp-padding-top',min:0,max:400},
+		{name:'paddingBottom',label:__('下余白','catpow'),input:'range',vars:'vars',key:'--cp-padding-bottom',min:0,max:400}
+	]},
+	customMargin:{name:'customMargin',label:__('間隔','catpow'),values:'has-custom-margin',sub:[
+		{name:'marginTop',label:__('上間隔','catpow'),input:'range',vars:'vars',key:'--cp-margin-top',min:-400,max:400},
+		{name:'marginBottom',label:__('下間隔','catpow'),input:'range',vars:'vars',key:'--cp-margin-bottom',min:-400,max:400}
+	]},
+	customContentWidth:{name:'cusotomWidth',label:__('コンテンツ幅','catpow'),values:'has-custom-content-width',sub:[
+		{name:'marginTop',label:__('上間隔','catpow'),input:'range',vars:'vars',key:'--cp-content-width',min:200,max:1600},
 	]}
 };
 wp.domReady(()=>{
