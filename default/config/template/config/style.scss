@@ -1,12 +1,9 @@
 @import "config/style_config.scss";
 
-.cp_lightbox_container{
-	.cp_lightbox_content{
-		.cp_lightbox_content_body{
+.cp-lightbox{
+	&__content{
+		&-body{
 			@include bnd((w:f,h:f,oy:a));
-			table.manage{
-
-			}
 		}
 	}
 }

@@ -322,7 +322,7 @@ jQuery.catpow.pageTopOffset=0;
 			$(this).each(function(){
 				$(this).one('load',function(){
 					var $img=$(this);
-					var $wrap=$img.wrap('<div class="divide_image"></div>').parent();
+					var $wrap=$img.wrap('<div class="cp-divide-image"></div>').parent();
 					for(var y=0;y<row;y++){
 						for(var x=0;x<col;x++){
 							$img.clone().css({
@@ -805,20 +805,21 @@ jQuery.catpow.pageTopOffset=0;
 			if(conf){prm_default=$.extend(prm_default,JSON.parse(conf));}
 			prm=$.extend(prm_default,prm);
 			
-			var $container=$('#cp_lightbox.cp_lightbox_container');
+			var $container=$('#cp-lightbox.cp-lightbox__container');
 			if($container.length===0){
-				$container=$('<div id="cp_lightbox" class="cp_lightbox_container"><div class="cp_lightbox_content"></div></div>').appendTo('body');
+				$container=$('<div id="cp-lightbox" class="cp-lightbox__container"><div class="cp-lightbox__content"></div></div>').appendTo('body');
 			}
-			var $content=$('.cp_lightbox_content',$container);
+			console.log({$container});
+			var $content=$('.cp-lightbox__content',$container);
 			var group=$content.children().length;
 			var $group=$lightbox.group=$(
-				'<div class="cp_lightbox_group" data-group="'+group+'">'+
+				'<div class="cp-lightbox__group" data-group="'+group+'">'+
 				'<ul class="items"></ul>'+
-				'<div class="cp_lightbox_control"></div>'+
+				'<div class="cp-lightbox__control"></div>'+
 				'</div>'
 			).appendTo($content);
 			var $items=$lightbox.items=$('ul.items',$group);
-			var $control=$lightbox.control=$('div.cp_lightbox_control',$group);
+			var $control=$lightbox.control=$('div.cp-lightbox__control',$group);
 			if(prm.arrow){$control.append('<div class="prev"></div>');}
 			if(prm.dots){$control.append('<ul class="dots"></ul>');}
 			if(prm.arrow){$control.append('<div class="next"></div>');}
@@ -869,9 +870,9 @@ jQuery.catpow.pageTopOffset=0;
 			$lightbox.prev=function(){$lightbox.goto($lightbox.current-1);};
 			$lightbox.next=function(){$lightbox.goto($lightbox.current+1);};
 			$lightbox.on('click',function(){$lightbox.goto($(this));});
-			$content.on('click','.cp_lightbox_control .prev',function(){$lightbox.prev();});
-			$content.on('click','.cp_lightbox_control .next',function(){$lightbox.next();});
-			$content.on('click','.cp_lightbox_control .close',function(){$lightbox.close();});
+			$content.on('click','.cp-lightbox__control .prev',function(){$lightbox.prev();});
+			$content.on('click','.cp-lightbox__control .next',function(){$lightbox.next();});
+			$content.on('click','.cp-lightbox__control .close',function(){$lightbox.close();});
 			$content.on('click','[data-index]',function(){$lightbox.goto(this.dataset.index);});
 			return $lightbox;
 		},

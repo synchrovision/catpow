@@ -218,8 +218,8 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 					</>
 				):(
 					<div className="lightbox_preview">
-						<div id="cp_lightbox" className="cp_lightbox_container active">
-							<div className="cp_lightbox_content">
+						<div id="cp_lightbox" className="cp-lightbox__container active">
+							<div className="cp-lightbox__content">
 								<div className="group active">
 									<ul className="items">
 									{items.map((item,index)=>{
@@ -268,7 +268,7 @@ wp.blocks.registerBlockType('catpow/lightbox',{
 										);
 									})}
 									</ul>
-									<div className="cp_lightbox_control">
+									<div className="cp-lightbox__control">
 										<div className="prev active"></div>
 										<ul className="dots active">
 											{items.map((item,index)=>{

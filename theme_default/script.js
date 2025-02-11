@@ -22,6 +22,6 @@ jQuery(function($){
 		$('.page_sidebar').addClass('close').removeClass('open');
 	});
 	$('ul.menu').cp_menu().focusCurrent();
-	$('.cp_lightbox').cp_lightbox();
+	$('.cp-lightbox').cp_lightbox();
 	
 });

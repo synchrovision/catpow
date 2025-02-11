@@ -230,7 +230,7 @@ html{
 							@include bnd((mg:10 20));
 						}
 					}
-					.cp_lightbox_content{
+					.cp-lightbox__content{
 						@include bnd((w:95% 1000));
 						@include flx((w:w));
 						.panel_body{

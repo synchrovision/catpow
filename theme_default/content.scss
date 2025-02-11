@@ -7,19 +7,264 @@ html{
 		@include txt((p:2.5vw));
 	}
 }
+.cp{
+	&-message{
+		@include bnd((mg:10,pd:20));
+		@include bdr((c:tx 15,w:3,s:s,r:10));
+		@include txt((c:tx 15,a:c,s:b,p:18,h:18));
+	}
+	&-caution{
+		@include bnd((mg:10,pd:20));
+		@include bg((c:mx 50));
+		@include bdr((r:10));
+		@include txt((c:bx,a:c,s:b,p:15,h:15));
+	}
+	&-meta-item{
+		@include bnd((p:r));
+		&.is-layout-inline{
+			@include bnd((d:ib));
+		}
+		&.is-multiple &{
+			&-unit{
+				@include bnd((p:r,mg:5,pd:10));
+				@include bg((c:mx 1 0));
+				@include trn((t:.5s,o:1));
+				.multiple-input-buttons{
+					@include bnd((p:a,t:-10,r:0));
+					@include trn((t:.5s,o:0,y:10));
+					.btn-inc,.btn-dec{
+						@include bnd((d:ib,w:10,h:10,mg:2,pd:5));
+						@include bg((c:tx 50));
+						@include bdr((r:50%));
+						@include txt((p:10,h:1em,f:e,a:c,c:bx 1 .5));
+						@include trn((t:.5s));
+						@include usr((c:p));
+						&:hover{
+							@include txt((c:bx));
+						}
+					}
+					.btn-inc::after{
+						@include ico('plus');
+					}
+					.btn-dec::after{
+						@include ico('minus');
+					}
+				}
+				.sort-input-buttons{
+					@include bnd((p:a,r:-1.5em,t:50%));
+					@include bdr((r:4 0 4 0));
+					@include txt((p:14,h:1em));
+					@include trn((y:-50%));
+					.btn-up,.btn-down,.btn-handle{
+						@include bnd((d:b,ap:n,mg:.5em 0));
+						@include txt((a:c,c:tx));
+						@include trn((t:.5s,o:.2));
+						@include usr((c:p));
+						&:hover{
+							@include trn((o:.5));
+						}
+					}
+					.btn-up::after{
+						@include ico('chevron-up');
+					}
+					.btn-handle::after{
+						@include ico('grip-horizontal');
+					}
+					.btn-down::after{
+						@include ico('chevron-down');
+					}
+				}
+				&:hover{
+					@include usr((c:p));
+					@include trn((o:1));
+					.multiple-input-buttons{
+						@include trn((o:1,y:0));
+					}
+				}
+			}
+		}
+		fieldset{
+			@include bnd((mg:10 0,pd:10));
+			@include bdr((s:s,w:1,c:tx 1 .3,r:5));
+			legend{
+				@include txt((c:tx 1 .3));
+			}
+		}
+		select,input[type="text"],textarea{
+			@include bnd((pd:10,mg:5,h:a,ap:n));
+			@include bg((c:tx 1 .1));
+			@include bdr((s:n));
+			@include txt((c:tx,p:16));
+		}
+		&-unit{
+			&-input{
+				&.is-input-type-text{
+					@include bnd((pd:.5em 1em,mg:0 .5em,w:a,ap:n));
+					@include bg((c:tx 1 .1));
+					@include bdr((s:n));
+					@include txt((c:tx,p:16));
+					@include plh((c:tx 1 .3));
+				}
+				&.is-input-type-select{
+					@include bnd((pd:10,mg:5,h:a,ap:n));
+					@include bg((c:tx 1 .1));
+					@include bdr((s:n));
+					@include txt((c:tx,p:16));
+				}
+				&.is-type-number{
+					@include bnd((w:60));
+					@include txt((a:r));
+				}
+				&.is-value-type-number{
+					@include bnd((w:120));
+				}
+			}
+		}
+		img.ajax_upload_media{
+			@include bnd((w:100,h:a));
+		}
+		span.pdf{
+			@include bnd((d:ib,w:160,h:230,o:h));
+			object{
+				@include bnd((w:200%,h:200%));
+				@include trn((s:.5,to:0 0 0));
+			}
+		}
+		span{
+			&.checkbox,&.radio{
+				@include bnd((d:ib,pd:10));
+				@include txt((p:16,f:t,h:1em,c:tx 40));
+				@include usr((c:p));
+				&>.label{
+					@include bnd((d:b,pd:10));
+					@include txt((p:16,h:1em,w:m,c:tx 50));
+					@include trn((t:.5s));
+					&:before{
+						@include bnd((d:ib,mgr:5));
+						@include txt((c:sh));
+					}
+				}
+				&>input:checked+.label{
+					@include txt((c:tx));
+					&:before{
+						@include txt((c:mx));
+					}
+				}
+				&>input:disabled+.label{
+					@include bnd((d:n));
+					@include txt((c:tx 10));
+					&:before{
+						@include txt((c:tx 10));
+					}
+				}
+				input{
+					@include bnd((d:n));
+				}
+			}
+			&.checkbox>.label{
+				&:before{
+					@include ico('square');
+				}
+			}
+			&.checkbox>input:checked+.label{
+				&:before{
+					@include ico('check-square');
+				}
+			}
+			&.radio>.label{
+				&:before{
+					@include ico('dot-circle');
+				}
+			}
+			&.radio>input:checked+.label{
+				&:before{
+					@include ico('circle');
+				}
+			}
+		}
+	}
+	&-lightbox{
+		&__container{
+			@include bnd((p:f,t:0,l:0,z:100000,w:100vw,h:100vh));
+			@include bg((c:#000 1 .6));
+			@include trn((t:.5s,o:1));
+			&:not(.active){
+				@include usr((e:n));
+				@include trn((o:0));
+			}
+		}
+		&__content{
+			@include bnd((p:r,w:a 800,h:a 80vh,p:a,t:50%,l:50%,mg:a));
+			@include bg((c:bx));
+			@include trn((y:-50%,x:-50%));
+			@include shd((b:10));
+			&-body{
+				@include bnd((w:f,h:f,oy:a));
+			}
+		}
+		&__control{
+			.button{
+				@include bnd((mg:0,pd:0));
+				@include bdr((s:n));
+				@include bg((c:n));
+			}
+			.prev,.next{
+				@include bnd((d:n,p:a,b:-50,h:30,mg:a));
+				@include txt((p:20,c:bx));
+				@include trn((o:.8));
+				&.active{@include bnd((d:b));}
+			}
+			.prev{
+				@include bnd((l:5));
+				&::before{
+					content:'＜'
+				}
+			}
+			.next{
+				@include bnd((r:5));
+				&::before{
+					content:'＞'
+				}
+			}
+			.close{
+				@include bnd((p:a,w:30,h:30,t:-50,r:10));
+				&::before,&::after{
+					content:'';
+					@include bnd((p:a,t:15,w:30,h:1));
+					@include bg((c:bx));
+				}
+				&::before{
+					@include trn((r:45deg));
+				}
+				&::after{
+					@include trn((r:-45deg));
+				}
+			}
+			ul.dots{
+				@include bnd((p:a,b:-50,l:20,r:20));
+				@include txt((a:c));
+				li.dot{
+					@include bnd((d:ib,mg:5,w:10,h:10));
+					@include bdr((s:s,c:bx,w:1,r:10));
+					@include bg((c:bx));
+					@include txt((v:m));
+					@include trn((o:.2));
+					&.active{
+						@include trn((o:1));
+					}
+				}
+
+			}
+		}
+		&__group{
+			&:not(.active){
+				@include bnd((d:n));
+			}
+		}
+	}
+}
 body{
 	div{
-		&.cp_message{
-			@include bnd((mg:10,pd:20));
-			@include bdr((c:t 15,w:3,s:s,r:10));
-			@include txt((c:t 15,a:c,s:b,p:18,h:18));
-		}
-		&.cp_caution{
-			@include bnd((mg:10,pd:20));
-			@include bg((c:m 50));
-			@include bdr((r:10));
-			@include txt((c:b,a:c,s:b,p:15,h:15));
-		}
 		&.cpform_message,&.cpform_section_message{
 			.message{
                 @include usr((e:n));
@@ -42,193 +287,6 @@ body{
 						@include bnd((p:a,l:0,t:-25,w:a,mg:0));
                    		@include txt((a:n,h:1em));
 					}
-				}
-			}
-		}
-		&.cp-meta-item{
-			@include bnd((p:r,pd:5));
-			&.multiple-item{
-				@include bnd((mg:5,pd:5));
-				@include bdr((s:s,w:1,c:t 1 .5,r:5));
-				&>.cp-meta-unit{
-					@include bnd((p:r,mg:5,pd:5));
-					@include bdr((s:s,w:1,c:t 1 .2,r:5));
-					.multiple-input-buttons{
-						@include bnd((p:a,t:0,r:0,pd:1 3));
-						@include bg((c:t));
-						@include bdr((r:0 4 0 4));
-						@include txt((h:10));
-						.btn-inc,.btn-dec{
-							@include bnd((d:ib,mg:3));
-							@include txt((p:13,h:1em,f:e,a:c,c:b 1 .5));
-							@include trn((t:.5s));
-							@include usr((c:p));
-							&:hover{
-								@include txt((c:b));
-							}
-						}
-						.btn-inc::after{
-							@include ico('plus');
-						}
-						.btn-dec::after{
-							@include ico('minus');
-						}
-					}
-					.sort-input-buttons{
-						@include bnd((p:a,b:0,r:0,pd:1 3));
-						@include bg((c:t 10));
-						@include bdr((r:4 0 4 0));
-						@include txt((h:10));
-						.btn-up,.btn-down{
-							@include bnd((d:ib,a:n,pd:1,mg:1,w:10,h:10));
-							@include bdr((r:12));
-							@include bg((c:t 5));
-							@include txt((p:9,h:9,f:e,a:c,c:t 20));
-							@include trn((t:.5s));
-							@include usr((c:p));
-							&:hover{
-								@include bg((c:t 0));
-							}
-						}
-						.btn-up::after{
-							@include ico('chevron-up');
-						}
-						.btn-down::after{
-							@include ico('chevron-down');
-						}
-					}
-				}
-			}
-			
-			fieldset{
-				@include bnd((mg:10 0,pd:10));
-				@include bdr((s:s,w:1,c:t 1 .3,r:5));
-				legend{
-					@include txt((c:t 1 .3));
-				}
-			}
-            input.number{
-                @include bnd((w:60));
-                @include txt((a:r));
-            }
-            input.numeric{
-                @include bnd((w:120));
-            }
-			img.ajax_upload_media{
-				@include bnd((w:100,h:a));
-			}
-			span.pdf{
-				@include bnd((d:ib,w:160,h:230,o:h));
-				object{
-					@include bnd((w:200%,h:200%));
-					@include trn((s:.5,to:0 0 0));
-				}
-			}
-			select{
-				@include bnd((a:n,pd:5 10,h:a));
-                @include bg((c:b));
-				@include bdr((r:5,s:s,c:t 25,w:1));
-				@include txt((p:12,h:12,c:t));
-			}
-			label{
-				@include bnd((d:ib,pd:3,mg:3));
-				@include bg((c:b));
-				@include txt((p:13,h:1em,c:t 40));
-				@include trn((t:.5s));
-				@include usr((c:p));
-				&.checkbox,&.radio{
-					@include bnd((d:ib,mg:.3em,pd:.3em 1em));
-					@include bg((c:m 1 0));
-					@include bdr((s:s,w:1,c:t 1 .5,r:1em));
-					@include txt((p:12,h:1em,f:g,w:m,c:t 1 .5));
-					&:before{
-						@include bnd((d:ib,mgr:5));
-						@include txt((c:t 1 .5));
-					}
-					&.active{
-						@include txt((c:i));
-						@include bg((c:m));
-						@include bdr((c:m));
-						&:before{
-							@include txt((c:i));
-						}
-					}
-					&.disabled{
-						@include bnd((d:n));
-						@include txt((c:t 15));
-						&:before{
-							@include txt((c:m 5));
-						}
-					}
-					input{
-						@include bnd((d:n));
-					}
-				}
-				&.checkbox{
-					&:before{
-						@include ico('square');
-					}
-					&.active{
-						&:before{
-							@include ico('check-square');
-						}
-					}
-				}
-				&.radio{
-					&:before{
-						@include ico('circle-o');
-					}
-					&.active{
-						&:before{
-							@include ico('circle');
-						}
-					}
-				}
-			}
-			button.cp_calendar_increase{
-				@include bnd((d:b,p:r,mg:5 a,pd:5));
-				@include bg((c:m 50));
-				@include bdr((s:n,r:10));
-				@include txt((a:c,p:24,h:24,c:b));
-				@include trn((t:.5s));
-				@include usr((c:p));
-				&:hover{
-					@include bg((c:m));
-				}
-			}
-		}
-		&.cp_lightbox_container{
-			@include bnd((p:f,t:0,l:0,z:100000,w:100vw,h:100vh,pd:20,bs:b));
-			@include bg((c:$shd));
-			@include trn((t:1s opacity,o:0,bf:h));
-			@include usr((e:n));
-			.cp_lightbox_content{
-				@include bnd((w:a 960,p:r,h:f,bs:b,pd:20,mg:0 a,oy:a));
-				@include bg((c:b));
-				@include trn((bf:h));
-                ul.buttons.cp_lightbox_control{
-                    @include bnd((p:f,r:5,t:5,mg:0,pd:0));
-                    @media(#{bp(2)}){
-                        @include bnd((r:calc(50vw - 520px)));
-                    }
-                    li{
-                        .button{
-                            @include bnd((pd:3 5));
-                            @include txt((p:32,h:32));
-                            @include shd((b:3));
-                            @include bdr((s:n,r:20));
-                            &::before{
-                                @include bnd((d:ib,mgr:0));
-                            }
-                        }
-                    }
-                }
-			}
-			&.active{
-				@include trn((o:1));
-				@include usr((e:a));
-				.content{
-
 				}
 			}
 		}
@@ -1184,69 +1242,5 @@ body{
 	[data-role="cpform_section_submit"],
 	[data-role="cpform_acion_submit"]{
 		@include usr((c:p));
-	}
-}
-#cp_lightbox{
-	@include bnd((p:f,t:0,l:0,z:100000,w:100vw,h:100vh));
-	@include bg((c:#00000088));
-	@include trn((t:.5s,o:0));
-	@include usr((e:n));
-	.cp_lightbox_content{
-		@include bnd((p:r,w:90vw 800,h:90vh 800,p:a,t:0,b:0,l:0,r:0,mg:a,pd:10,o:v));
-		@include bg((c:b));
-		@include shd((b:10));
-		div.group{
-			ul.items{
-				li.item{
-					img{
-						@include bnd((w:f,h:a));
-					}
-				}
-			}
-			div.control{
-				.prev,.next{
-					@include bnd((d:n,p:a,t:0,b:0,mg:a));
-					@include txt((p:30,c:#888));
-					@include trn((o:.8));
-					&.active{@include bnd((d:b));}
-				}
-				.prev{
-					@include bnd((l:-10));
-					&::before{
-						@include ico('chevron-circle-left');
-					}
-				}
-				.next{
-					@include bnd((r:-10));
-					&::before{
-						@include ico('chevron-circle-right');
-					}
-				}
-				.close{
-					@include bnd((p:a,w:30,h:30,pd:5,t:-20,r:-20));
-					@include txt((a:c,p:30,h:1em,c:a));
-					@include bg((c:b));
-					@include bdr((r:30));
-					@include shd((b:2));
-					&::before{
-						@include ico('times-circle');
-					}
-				}
-				ul.dots{
-					li.dot{
-						&::before{
-							@include ico('square');
-						}
-					}
-				}
-			}
-		}
-	}
-	&.active{
-		@include trn((o:1));
-		@include usr((e:a));
-		.cp_lightbox_content{
-
-		}
 	}
 }

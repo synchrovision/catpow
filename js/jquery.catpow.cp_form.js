@@ -334,10 +334,10 @@ function cpform_submit($item,action,callback,param){
             },
 			
             lightbox:function($item,data){
-                var $cnt=$item.find('.cp_lightbox_container');
+                var $cnt=$item.find('.cp-lightbox__container');
                 var dfr=new $.Deferred();
-                if($cnt.length===0){$cnt=$('<div class="cp_lightbox_container"><div class="cp_lightbox_content"></div></div>').appendTo($item);}
-				var $body=$('.cp_lightbox_content',$cnt);
+                if($cnt.length===0){$cnt=$('<div class="cp-lightbox__container"><div class="cp-lightbox__content"></div></div>').appendTo($item);}
+				var $body=$('.cp-lightbox__content',$cnt);
 				
 				if(data.deps){
 					$.cp_require_styles(data.deps.styles);
@@ -355,27 +355,27 @@ function cpform_submit($item,action,callback,param){
                 return dfr.promise();
             },
             lightbox_close:function($item){
-                var $cnt=$item.find('.cp_lightbox_container');
+                var $cnt=$item.find('.cp-lightbox__container');
                 var dfr=new $.Deferred();
-				var $body=$('.cp_lightbox_content',$cnt);
+				var $body=$('.cp-lightbox__content',$cnt);
                 $cnt.cp_inactivate();
                 setTimeout(function(){$body.html('');dfr.resolve();},1000);
                 return dfr.promise();
             },
             exlightbox:function($item,data){
-                var $cnt=$('#cp_exlightbox.cp_lightbox_container');
+                var $cnt=$('#cp_exlightbox.cp-lightbox__container');
                 var dfr=new $.Deferred();
                 if($cnt.length===0){
-                    $cnt=$('<div id="cp_exlightbox" class="cp_lightbox_container"><div class="cp_lightbox_content"></div></div>').appendTo('.site_main .page_main .content');
+                    $cnt=$('<div id="cp_exlightbox" class="cp-lightbox__container"><div class="cp-lightbox__content"></div></div>').appendTo('.site_main .page_main .content');
                 }
-                $cnt.find('.cp_lightbox_content').html(data.html).trigger('replace');
+                $cnt.find('.cp-lightbox__content').html(data.html).trigger('replace');
                 setTimeout(function(){$cnt.cp_activate();},1);
                 setTimeout(function(){dfr.resolve();},1000);
                 return dfr.promise();
             },
             exlightbox_close:function(){
                 var dfr=new $.Deferred();
-                $('#cp_exlightbox.cp_lightbox_container').cp_inactivate();
+                $('#cp_exlightbox.cp-lightbox__container').cp_inactivate();
                 setTimeout(function(){dfr.resolve();},1000);
                 return dfr.promise();
             },
@@ -383,7 +383,7 @@ function cpform_submit($item,action,callback,param){
             feed:function($form,data){
                 $form=$form.closest('form');
                 data.message.forEach(function(msg){
-                    $form.find(msg.selector).addClass('has_message '+msg.class).after('<span class="message '+msg.class+'">'+msg.message+'</span>');
+                    $form.find(msg.selector).addClass('has-message '+msg.class).after('<span class="message '+msg.class+'">'+msg.message+'</span>');
                 });
                 $form.trigger('update');
                 return true;

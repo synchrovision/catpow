@@ -376,7 +376,7 @@ function §navs($content='navs'){
 	\cp::$content->form->navs($content);
 }
 function §lightbox(){
-	echo '<div class="cp_lightbox_container"><div class="cp_lightbox_content"></div></div>';
+	echo '<div class="cp-lightbox__container"><div class="cp-lightbox__content"></div></div>';
 }
 
 function receive(){

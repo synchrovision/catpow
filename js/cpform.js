@@ -355,10 +355,10 @@ const cpform=(form)=>{
 		script.remove();
 	};
 	const getLightBox=(container)=>{
-		const lightBox=container.querySelector('.cp_lightbox_container');
+		const lightBox=container.querySelector('.cp-lightbox__container');
 		if(lightBox){return lightBox;}
-		const newLightBox=el('div',{className:'cp_lightbox_container'},[
-			el('div',{className:'cp_lightbox_content'})
+		const newLightBox=el('div',{className:'cp-lightbox__container'},[
+			el('div',{className:'cp-lightbox__content'})
 		]);
 		container.append(newLightBox);
 		return newLightBox;
@@ -383,7 +383,7 @@ const cpform=(form)=>{
 				window.console.error(data);
 				return;
 			}
-			msgBox.classList.remove('has_task');
+			msgBox.classList.remove('has-task');
 			msgBox.replaceChildren();
 			
 			data.message.forEach(function(msg){
@@ -396,7 +396,7 @@ const cpform=(form)=>{
 					var tgt;
 					if(form.matches(msg.selector)){
 						tgt=form;
-						msgEl.classList.add('no_target');
+						msgEl.classList.add('has-no-target');
 						msgBox.append(msgEl);
 					}
 					else{
@@ -406,14 +406,14 @@ const cpform=(form)=>{
 							window.console.error(msg.message);
 							return;
 						}
-						msgEl.classList.add('has_target');
+						msgEl.classList.add('has-target');
 						cling(msgEl,tgt);
 						tgt.addEventListener('change',()=>{
 							delayRemove(msgEl);
 						});
 					}
 				}
-				if(msgBox.querySelector('.task')){msgBox.classList.add('has_task');}
+				if(msgBox.querySelector('.task')){msgBox.classList.add('has-task');}
 			});
 			cling.tick();
 			const topMessage=Array.from(form.querySelectorAll('.message')).reduce((p,c)=>{
@@ -534,7 +534,7 @@ const cpform=(form)=>{
 		lightbox:function(target,data){
 			return new Promise((resolve)=>{
 				const lightbox=getLightBox(target);
-				const body=lightbox.querySelector('.cp_lightbox_content');
+				const body=lightbox.querySelector('.cp-lightbox__content');
 
 				if(data.deps){
 					callbacks.require_styles(data.deps.styles);
@@ -556,7 +556,7 @@ const cpform=(form)=>{
 		lightbox_close:function(target){
 			return new Promise((resolve)=>{
 				const lightbox=getLightBox(target);
-				const body=lightbox.querySelector('.cp_lightbox_content');
+				const body=lightbox.querySelector('.cp-lightbox__content');
 				inactivateElement(lightbox);
 				setTimeout(()=>{body.innerHTML='';resolve();},1000);
 				
@@ -565,7 +565,7 @@ const cpform=(form)=>{
 
 		feed:function(target,data){
 			data.message.forEach(function(msg){
-				form.querySelector(msg.selector).classList.add('has_message',msg.class)
+				form.querySelector(msg.selector).classList.add('has-message',msg.class)
 					.after(el('span',{className:'message '+msg.class},msg.message));
 			});
 			form.dispatchEvent(new CustomEvent('update'));

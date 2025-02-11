@@ -171,7 +171,7 @@
 .cp-admin-functions > li .control, .cp-admin-functions > li > .cpform_section .control {
   margin: 0.625rem 1.25rem;
 }
-.cp-admin-functions > li .cp_lightbox_content {
+.cp-admin-functions > li .cp-lightbox__content {
   max-width: 62.5rem;
   width: 95%;
   display: -webkit-box;
@@ -181,7 +181,7 @@
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-.cp-admin-functions > li .cp_lightbox_content .panel_body {
+.cp-admin-functions > li .cp-lightbox__content .panel_body {
   -webkit-box-flex: 10;
   flex-grow: 10;
   flex-shrink: 10;
@@ -192,11 +192,11 @@
   box-sizing: border-box;
   overflow-y: auto;
 }
-.cp-admin-functions > li .cp_lightbox_content .panel_body > ul > li {
+.cp-admin-functions > li .cp-lightbox__content .panel_body > ul > li {
   padding: 0.625rem 0rem;
   text-align: center;
 }
-.cp-admin-functions > li .cp_lightbox_content .panel_body > ul > li h3 {
+.cp-admin-functions > li .cp-lightbox__content .panel_body > ul > li h3 {
   margin-bottom: 0.625rem;
   padding-bottom: 0.625rem;
   border-bottom-style: solid;
@@ -204,14 +204,14 @@
   border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 50),var(--cp-tones-t-a));
   font-size: 1.25rem;
 }
-.cp-admin-functions > li .cp_lightbox_content .panel_body > ul > li p {
+.cp-admin-functions > li .cp-lightbox__content .panel_body > ul > li p {
   width: fit-content;
   margin: 0rem auto;
   padding: 1em;
   text-align: justify;
   font-size: 0.8125rem;
 }
-.cp-admin-functions > li .cp_lightbox_content .panel_body dl {
+.cp-admin-functions > li .cp-lightbox__content .panel_body dl {
   padding: 0.3125rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -222,24 +222,24 @@
   -webkit-align-items: center;
   align-items: center;
 }
-.cp-admin-functions > li .cp_lightbox_content .panel_body dl dt {
+.cp-admin-functions > li .cp-lightbox__content .panel_body dl dt {
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 9.375rem;
   font-size: 0.9375rem;
 }
-.cp-admin-functions > li .cp_lightbox_content .panel_body dl dt i.fab {
+.cp-admin-functions > li .cp-lightbox__content .panel_body dl dt i.fab {
   display: inline-block;
   margin-right: 0.5em;
 }
-.cp-admin-functions > li .cp_lightbox_content .panel_body dl dd {
+.cp-admin-functions > li .cp-lightbox__content .panel_body dl dd {
   -webkit-box-flex: 3;
   flex-grow: 3;
   flex-shrink: 3;
   flex-basis: calc(100% - 200);
 }
-.cp-admin-functions > li .cp_lightbox_content .cpform_results {
+.cp-admin-functions > li .cp-lightbox__content .cpform_results {
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
@@ -250,12 +250,12 @@
   color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
   font-size: 0.75rem;
 }
-.cp-admin-functions > li .cp_lightbox_content .button_close_panel {
+.cp-admin-functions > li .cp-lightbox__content .button_close_panel {
   position: absolute;
   top: -1.25rem;
   right: -1.25rem;
 }
-.cp-admin-functions > li .cp_lightbox_content .button_close_panel .button {
+.cp-admin-functions > li .cp-lightbox__content .button_close_panel .button {
   width: 2.5rem;
   height: 2.5rem;
   padding: 0.625rem;
@@ -268,7 +268,7 @@
   line-height: 1em;
   color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
 }
-.cp-admin-functions > li .cp_lightbox_content .button_close_panel .button::before {
+.cp-admin-functions > li .cp-lightbox__content .button_close_panel .button::before {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;

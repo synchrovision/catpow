@@ -191,7 +191,7 @@
           ],
           isTemplate: states.isTemplate
         }
-      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn))) : /* @__PURE__ */ wp.element.createElement("div", { className: "lightbox_preview" }, /* @__PURE__ */ wp.element.createElement("div", { id: "cp_lightbox", className: "cp_lightbox_container active" }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp_lightbox_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "group active" }, /* @__PURE__ */ wp.element.createElement("ul", { className: "items" }, items.map((item, index) => {
+      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn))) : /* @__PURE__ */ wp.element.createElement("div", { className: "lightbox_preview" }, /* @__PURE__ */ wp.element.createElement("div", { id: "cp_lightbox", className: "cp-lightbox__container active" }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-lightbox__content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "group active" }, /* @__PURE__ */ wp.element.createElement("ul", { className: "items" }, items.map((item, index) => {
         var isActive = currentItemIndex == index;
         return /* @__PURE__ */ wp.element.createElement("li", { className: isActive ? "item active" : "item", key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: boxClasses }, states.hasSubTitle && /* @__PURE__ */ wp.element.createElement("header", { className: "title" }, /* @__PURE__ */ wp.element.createElement("h4", null, /* @__PURE__ */ wp.element.createElement(
           RichText,
@@ -234,7 +234,7 @@
             }
           )
         ))));
-      })), /* @__PURE__ */ wp.element.createElement("div", { className: "cp_lightbox_control" }, /* @__PURE__ */ wp.element.createElement("div", { className: "prev active" }), /* @__PURE__ */ wp.element.createElement("ul", { className: "dots active" }, items.map((item, index) => {
+      })), /* @__PURE__ */ wp.element.createElement("div", { className: "cp-lightbox__control" }, /* @__PURE__ */ wp.element.createElement("div", { className: "prev active" }), /* @__PURE__ */ wp.element.createElement("ul", { className: "dots active" }, items.map((item, index) => {
         var isActive = currentItemIndex == index;
         return /* @__PURE__ */ wp.element.createElement("li", { className: isActive ? "dot active" : "dot", "data-index": index });
       })), /* @__PURE__ */ wp.element.createElement("div", { className: "next active" }), /* @__PURE__ */ wp.element.createElement("div", { className: "close" })))))));

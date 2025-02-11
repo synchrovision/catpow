@@ -13,7 +13,7 @@ class lightbox extends media{
 			'image_attr'=>json_encode(static::get_image_attr_data(array_merge($meta->conf,$prm))),
 			'player_attr'=>json_encode(static::get_player_attr_data(array_merge(['controls'=>1],$meta->conf,$prm)))
 		],$prm);
-		$format='<div class="cp_lightbox %s" data-src="%s" data-type="%1$s" data-title="%s" data-attr=\'%s\'><img src="%s"/></div>';
+		$format='<div class="cp-lightbox %s" data-src="%s" data-type="%1$s" data-title="%s" data-attr=\'%s\'><img src="%s"/></div>';
 		switch($media=substr($post->post_mime_type,0,5)){
 			case 'image':
 				return sprintf(
