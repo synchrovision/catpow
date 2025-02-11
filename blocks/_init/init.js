@@ -2462,32 +2462,34 @@
   };
 
   // ../blocks/_init/init/SelectPreparedImageSet.jsx
-  CP.SelectPreparedImageSet = ({ className, name, value, color, onChange, ...otherProps }) => {
-    let onClick;
+  CP.SelectPreparedImageSet = ({ className, name, value, color = 0, onChange, ...otherProps }) => {
     const { getURLparam, setURLparam, setURLparams, removeURLparam } = Catpow.util;
     const [state, dispatch] = wp.element.useReducer((state2, action) => {
       switch (action.type) {
-        case "update":
+        case "update": {
+          const newState = { ...state2 };
           if (action.imagesets) {
-            state2.imagesets = action.imagesets;
+            newState.imagesets = action.imagesets;
             const bareURL = removeURLparam(value, "c");
-            for (const key in state2.imagesets) {
-              if (state2.imagesets[key].url === bareURL) {
-                state2.imageset = state2.imagesets[key];
+            for (const key in newState.imagesets) {
+              if (newState.imagesets[key].url === bareURL) {
+                newState.imageset = { ...newState.imagesets[key], url: setURLparams(bareURL, { c: color, theme: wpinfo.theme }) };
                 break;
               }
             }
           }
           if (action.imageset) {
-            state2.imageset = action.imageset;
+            newState.imageset = action.imageset;
           }
-          if (state2.imageset) {
-            onChange(state2.imageset.map((item) => {
+          if (newState.imageset) {
+            onChange(newState.imageset.map((item) => {
               return { ...item, url: setURLparams(item.url, { c: color, theme: wpinfo.theme }) };
             }));
           }
+          return newState;
+        }
       }
-      return { ...state2 };
+      return state2;
     }, { page: 0, imagesets: null, imageset: null });
     CP.cache.PreparedImageSets = CP.cache.PreparedImageSets || {};
     if (state.imagesets === null) {
@@ -3284,15 +3286,15 @@
                   CP.SelectPreparedImage,
                   {
                     name: "border",
-                    value: CP.getUrlInStyleCode(tgt["border-image"]),
+                    value: CP.getUrlInStyleCode(tgt.borderImage),
                     color: prm.color || 0,
                     onChange: (image) => {
                       if (!image.conf) {
                         return;
                       }
                       const { slice, width, repeat } = image.conf;
-                      tgt["border-style"] = "solid";
-                      tgt["border-image"] = "url(" + image.url + ") fill " + slice + " / " + width + " " + repeat;
+                      tgt.borderStyle = "solid";
+                      tgt.borderImage = "url(" + image.url + ") fill " + slice + " / " + width + " " + repeat;
                       saveCss2(prm.css);
                     }
                   }
@@ -3305,30 +3307,30 @@
                   CP.SelectPreparedImage,
                   {
                     name: "pattern",
-                    value: CP.getUrlInStyleCode(tgt["background-image"]),
+                    value: CP.getUrlInStyleCode(tgt.backgroundImage),
                     color: prm.color || 0,
                     onChange: (image) => {
                       if (!image.conf) {
                         return;
                       }
                       const { size, width, height, repeat, x: x2, y: y2 } = image.conf;
-                      tgt["background-image"] = "url(" + image.url + ")";
+                      tgt.backgroundImage = "url(" + image.url + ")";
                       if (width && height) {
-                        tgt["background-size"] = width + "px " + height + "px";
+                        tgt.backgroundSize = width + "px " + height + "px";
                       } else if (size) {
-                        tgt["background-size"] = CP.translateCssVal("background-size", size);
+                        tgt.backgroundSize = CP.translateCssVal("background-size", size);
                       } else {
-                        delete tgt["background-size"];
+                        delete tgt.backgroundSize;
                       }
                       if (repeat) {
-                        tgt["background-repeat"] = CP.translateCssVal("background-repeat", repeat);
+                        tgt.backgroundRepeat = CP.translateCssVal("background-repeat", repeat);
                       } else {
-                        delete tgt["background-repeat"];
+                        delete tgt.backgroundRepeat;
                       }
                       if (x2 && y2) {
-                        tgt["background-position"] = x2 + "% " + y2 + "%";
+                        tgt.backgroundPosition = x2 + "% " + y2 + "%";
                       } else {
-                        delete tgt["background-position"];
+                        delete tgt.backgroundPosition;
                       }
                       saveCss2(prm.css);
                     }
@@ -3342,7 +3344,7 @@
                   CP.SelectPreparedImageSet,
                   {
                     name: "frame",
-                    value: CP.getUrlInStyleCode(tgt["border-image"]),
+                    value: CP.getUrlInStyleCode(tgt.borderImage),
                     color: prm.color || 0,
                     onChange: (imageset) => {
                       imageset.forEach((image) => {
@@ -3353,8 +3355,8 @@
                         const media2 = CP.getMediaQueryKeyForDevice(device2);
                         styleDatas[prm.css][media2] = styleDatas[prm.css][media2] || {};
                         styleDatas[prm.css][media2][sel] = styleDatas[prm.css][media2][sel] || {};
-                        styleDatas[prm.css][media2][sel]["border-style"] = "solid";
-                        styleDatas[prm.css][media2][sel]["border-image"] = "url(" + image.url + ") fill " + slice + " / " + width + " " + repeat;
+                        styleDatas[prm.css][media2][sel].borderStyle = "solid";
+                        styleDatas[prm.css][media2][sel].borderImage = "url(" + image.url + ") fill " + slice + " / " + width + " " + repeat;
                       });
                       saveCss2(prm.css);
                     }
@@ -3420,7 +3422,6 @@
                           newVars[key] = vars[key];
                         }
                       });
-                      console.log({ [prm.vars]: newVars });
                       save2({ [prm.vars]: newVars });
                     }
                   }

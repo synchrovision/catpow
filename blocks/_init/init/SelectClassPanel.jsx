@@ -255,13 +255,13 @@ CP.SelectClassPanel=(props)=>{
 						rtn.push(
 							<CP.SelectPreparedImage
 								name="border"
-								value={CP.getUrlInStyleCode(tgt['border-image'])}
+								value={CP.getUrlInStyleCode(tgt.borderImage)}
 								color={prm.color || 0}
 								onChange={(image)=>{
 									if(!image.conf){return;}
 									const {slice,width,repeat}=image.conf;
-									tgt['border-style']='solid';
-									tgt['border-image']='url('+image.url+') fill '+slice+' / '+width+' '+repeat;
+									tgt.borderStyle='solid';
+									tgt.borderImage='url('+image.url+') fill '+slice+' / '+width+' '+repeat;
 									saveCss(prm.css);
 								}}
 							/>
@@ -271,19 +271,19 @@ CP.SelectClassPanel=(props)=>{
 						rtn.push(
 							<CP.SelectPreparedImage
 								name="pattern"
-								value={CP.getUrlInStyleCode(tgt['background-image'])}
+								value={CP.getUrlInStyleCode(tgt.backgroundImage)}
 								color={prm.color || 0}
 								onChange={(image)=>{
 									if(!image.conf){return;}
 									const {size,width,height,repeat,x,y}=image.conf;
-									tgt['background-image']='url('+image.url+')';
-									if(width && height){tgt['background-size']=width+'px '+height+'px';}
-									else if(size){tgt['background-size']=CP.translateCssVal('background-size',size);}
-									else{delete tgt['background-size'];}
-									if(repeat){tgt['background-repeat']=CP.translateCssVal('background-repeat',repeat);}
-									else{delete tgt['background-repeat'];}
-									if(x && y){tgt['background-position']=x+'% '+y+'%';}
-									else{delete tgt['background-position'];}
+									tgt.backgroundImage='url('+image.url+')';
+									if(width && height){tgt.backgroundSize=width+'px '+height+'px';}
+									else if(size){tgt.backgroundSize=CP.translateCssVal('background-size',size);}
+									else{delete tgt.backgroundSize;}
+									if(repeat){tgt.backgroundRepeat=CP.translateCssVal('background-repeat',repeat);}
+									else{delete tgt.backgroundRepeat;}
+									if(x && y){tgt.backgroundPosition=x+'% '+y+'%';}
+									else{delete tgt.backgroundPosition;}
 									saveCss(prm.css);
 								}}
 							/>
@@ -293,7 +293,7 @@ CP.SelectClassPanel=(props)=>{
 						rtn.push(
 							<CP.SelectPreparedImageSet
 								name="frame"
-								value={CP.getUrlInStyleCode(tgt['border-image'])}
+								value={CP.getUrlInStyleCode(tgt.borderImage)}
 								color={prm.color || 0}
 								onChange={(imageset)=>{
 									imageset.forEach((image)=>{
@@ -302,8 +302,8 @@ CP.SelectClassPanel=(props)=>{
 										const media=CP.getMediaQueryKeyForDevice(device);
 										styleDatas[prm.css][media] = styleDatas[prm.css][media] || {};
 										styleDatas[prm.css][media][sel] = styleDatas[prm.css][media][sel] || {};
-										styleDatas[prm.css][media][sel]['border-style']='solid';
-										styleDatas[prm.css][media][sel]['border-image']='url('+image.url+') fill '+slice+' / '+width+' '+repeat;
+										styleDatas[prm.css][media][sel].borderStyle='solid';
+										styleDatas[prm.css][media][sel].borderImage='url('+image.url+') fill '+slice+' / '+width+' '+repeat;
 									});
 									saveCss(prm.css);
 								}}
@@ -357,7 +357,6 @@ CP.SelectClassPanel=(props)=>{
 										if(vars[key]===null){delete newVars[key];}
 										else{newVars[key]=vars[key];}
 									});
-									console.log({[prm.vars]:newVars});
 									save({[prm.vars]:newVars});
 								}}
 							/>
