@@ -116,6 +116,8 @@
                 ] },
                 { name: "decoration", label: __("\u30C7\u30B3\u30EC\u30FC\u30B7\u30E7\u30F3", "catpow"), values: "hasDecoration" },
                 "clipPath",
+                "customPadding",
+                "customMargin",
                 {
                   name: "template",
                   label: __("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
@@ -177,6 +179,9 @@
                   { input: "border", css: "borderImageCss", sel: ({ attr }) => `#${attr.anchor} > .contents`, color }
                 ] },
                 { name: "decoration", label: __("\u30C7\u30B3\u30EC\u30FC\u30B7\u30E7\u30F3", "catpow"), values: "hasDecoration" },
+                "clipPath",
+                "customPadding",
+                "customMargin",
                 {
                   name: "template",
                   label: __("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),

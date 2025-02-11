@@ -94,6 +94,8 @@ wp.blocks.registerBlockType('catpow/section',{
 							]},
 							{name:'decoration',label:__('デコレーション','catpow'),values:'hasDecoration'},
 							'clipPath',
+							'customPadding',
+							'customMargin',
 							{
 								name:'template',
 								label:__('テンプレート','catpow'),
@@ -153,6 +155,9 @@ wp.blocks.registerBlockType('catpow/section',{
 								{input:'border',css:'borderImageCss',sel:({attr})=>`#${attr.anchor} > .contents`,color},
 							]},
 							{name:'decoration',label:__('デコレーション','catpow'),values:'hasDecoration'},
+							'clipPath',
+							'customPadding',
+							'customMargin',
 							{
 								name:'template',
 								label:__('テンプレート','catpow'),
