@@ -1,6 +1,6 @@
 ﻿import {CP} from './CP.jsx';
 
-CP.SelectPreparedImage=({className,name,value,color,onChange,...otherProps})=>{
+CP.SelectPreparedImage=({className,name,value,color=0,onChange,...otherProps})=>{
 	let onClick;
 	const {useEffect,useReducer}=wp.element;
 	const {getURLparam,setURLparam,setURLparams,removeURLparam}=Catpow.util;

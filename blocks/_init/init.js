@@ -1011,7 +1011,7 @@
     inheritColor: (props, images) => {
       const { attributes, className, setAttributes, context } = props;
       const { setURLparams } = Catpow.util;
-      const { classes, color } = attributes;
+      const { classes, color = "0" } = attributes;
       const { useEffect: useEffect2, useMemo: useMemo3 } = wp.element;
       const inheritColor = useMemo3(() => {
         return color === "0" || context["catpow/color"] === color;
@@ -2401,7 +2401,7 @@
   };
 
   // ../blocks/_init/init/SelectPreparedImage.jsx
-  CP.SelectPreparedImage = ({ className, name, value, color, onChange, ...otherProps }) => {
+  CP.SelectPreparedImage = ({ className, name, value, color = 0, onChange, ...otherProps }) => {
     let onClick;
     const { useEffect: useEffect2, useReducer } = wp.element;
     const { getURLparam, setURLparam, setURLparams, removeURLparam } = Catpow.util;

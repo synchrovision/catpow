@@ -665,7 +665,7 @@ export const CP={
 	inheritColor:(props,images)=>{
 		const {attributes,className,setAttributes,context}=props;
 		const {setURLparams}=Catpow.util;
-		const {classes,color}=attributes;
+		const {classes,color="0"}=attributes;
 		const {useEffect,useMemo}=wp.element;
 		const inheritColor=useMemo(()=>{
 			return color === "0" || context['catpow/color'] === color;
