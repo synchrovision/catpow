@@ -1,29 +1,31 @@
 ﻿import {CP} from './CP.jsx';
 
-CP.SelectPreparedImageSet=({className,name,value,color,onChange,...otherProps})=>{
-	let onClick;
+CP.SelectPreparedImageSet=({className,name,value,color=0,onChange,...otherProps})=>{
 	const {getURLparam,setURLparam,setURLparams,removeURLparam}=Catpow.util;
 	const [state,dispatch]=wp.element.useReducer((state,action)=>{
 		switch(action.type){
-			case 'update':
+			case 'update':{
+				const newState={...state};
 				if(action.imagesets){
-					state.imagesets=action.imagesets;
+					newState.imagesets=action.imagesets;
 					const bareURL=removeURLparam(value,'c');
-					for(const key in state.imagesets){
-						if(state.imagesets[key].url===bareURL){
-							state.imageset=state.imagesets[key];
+					for(const key in newState.imagesets){
+						if(newState.imagesets[key].url===bareURL){
+							newState.imageset={...newState.imagesets[key],url:setURLparams(bareURL,{c:color,theme:wpinfo.theme})};
 							break;
 						}
 					}
 				}
-				if(action.imageset){state.imageset=action.imageset;}
-				if(state.imageset){
-					onChange(state.imageset.map((item)=>{
+				if(action.imageset){newState.imageset=action.imageset;}
+				if(newState.imageset){
+					onChange(newState.imageset.map((item)=>{
 						return {...item,url:setURLparams(item.url,{c:color,theme:wpinfo.theme})};
 					}));
 				}
+				return newState;
+			}
 		}
-		return {...state};
+		return state;
 	},{page:0,imagesets:null,imageset:null});
 
 	CP.cache.PreparedImageSets=CP.cache.PreparedImageSets || {};
