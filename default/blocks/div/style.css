@@ -9,8 +9,8 @@
   width: 95%;
   box-sizing: border-box;
   overflow: hidden;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
-  border-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 100),0.5);
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
+  border-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 100),calc(var(--cp-tones-m-a) * 0.5));
 }
 .wp-block-catpow-div.frame.thinBorder {
   border-style: solid;
@@ -42,7 +42,7 @@
   column-gap: 50px;
   column-rule-style: dotted;
   column-rule-width: 1px;
-  column-rule-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
+  column-rule-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a));
 }
 .wp-block-catpow-div.noPad {
   padding: 0px;
@@ -99,10 +99,10 @@
   }
 }
 .wp-block-catpow-div.hasPaleBackgroundColor {
-  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),1);
+  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a));
 }
 .wp-block-catpow-div.hasBackgroundColor {
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
 }
 .wp-block-catpow-div.hasBackgroundImage > .background {
   z-index: -1;

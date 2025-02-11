@@ -7,7 +7,7 @@
   border-radius: 1.25rem;
   font-size: 0.9375rem;
   line-height: 1em;
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 40),1);
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 40),var(--cp-tones-t-a));
   -webkit-transition: 0.5s;
   transition: 0.5s;
   cursor: pointer;
@@ -36,8 +36,8 @@
   border-bottom-style: solid;
   border-left-width: 0.1875rem;
   border-bottom-width: 0.1875rem;
-  border-left-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 60),1);
-  border-bottom-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 60),1);
+  border-left-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 60),var(--cp-tones-m-a));
+  border-bottom-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 60),var(--cp-tones-m-a));
   -webkit-transform-origin: 0 0;
   transform-origin: 0 0;
   opacity: 0;
@@ -62,7 +62,7 @@
   margin: auto;
 }
 .CheckBox.selected {
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a));
   box-shadow: 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, -1px -1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)), -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, 1px 1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a));
 }
 /*# sourceMappingURL=./style.css.map */

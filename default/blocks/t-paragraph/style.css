@@ -9,7 +9,7 @@
   font-family: var(--cp-fonts-t);
   line-height: 2em;
   font-weight: 400;
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),1);
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a));
 }
 .wp-block-catpow-t-paragraph.left {
   text-align: justify;

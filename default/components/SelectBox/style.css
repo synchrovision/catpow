@@ -18,7 +18,7 @@
   height: 0.3em;
   margin: auto;
   margin-right: 0.5em;
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.25);
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a) * 0.25));
   clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
   pointer-events: none;
 }
@@ -32,7 +32,7 @@
   margin: 0rem;
   border-style: none;
   background-image: none;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
   font-size: inherit;
 }
 /*# sourceMappingURL=./style.css.map */

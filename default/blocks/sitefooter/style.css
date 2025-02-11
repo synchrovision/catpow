@@ -1,5 +1,5 @@
 .wp-block-catpow-sitefooter {
-  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),1);
+  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a));
 }
 .wp-block-catpow-sitefooter > .contents {
   padding: 20px;
@@ -9,9 +9,9 @@
 }
 .wp-block-catpow-sitefooter > .copyright {
   padding: 5px;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
   text-align: center;
   font-size: 16px;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a));
 }
 /*# sourceMappingURL=./style.css.map */

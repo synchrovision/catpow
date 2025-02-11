@@ -12,7 +12,7 @@ div.wp-block-catpow-sidebar{
     &.left{
         @include flx((d:rr));
     }
-	@media(#{bp(2)}){
+	@include bp(pc){
 		div.wp-block-catpow-sidecolumn{
 			@include bnd((f:0 0 240));
 		}
