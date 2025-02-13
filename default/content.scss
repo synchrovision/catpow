@@ -675,6 +675,18 @@ del{
 		@include txt((p:10));
 	}
 }
+.has-custom-padding{
+	@include bnd((
+		pdt:calc(var(--cp-padding-top,0) * #{$sizeUnit}),
+		pdb:calc(var(--cp-padding-bottom,0) * #{$sizeUnit})
+	));
+}
+.has-custom-margin{
+	@include bnd((
+		mgt:calc(var(--cp-margin-top,0) * #{$sizeUnit}),
+		mgb:calc(var(--cp-margin-bottom,0) * #{$sizeUnit})
+	));
+}
 .has-clip-path{
 	$a:calc(150% - sqrt(var(--cp-clip-shape-amount,50)) * 10%);
 	$uy:calc(var(--cp-clip-shape-upper-height,40) * #{$sizeUnit});
@@ -683,6 +695,12 @@ del{
 	$by:calc(100% - var(--cp-clip-shape-below-height,40) * #{$sizeUnit});
 	$bx1:calc(50% - var(--cp-clip-shape-below-width,40) * #{$sizeUnit} / 2);
 	$bx2:calc(50% + var(--cp-clip-shape-below-width,40) * #{$sizeUnit} / 2);
+	@include bnd((
+		pdt:calc((var(--cp-padding-top,0) + var(--cp-clip-shape-upper-height,40)) * #{$sizeUnit}),
+		pdb:calc((var(--cp-padding-bottom,0) + var(--cp-clip-shape-below-height,40)) * #{$sizeUnit}),
+		mgt:calc((var(--cp-margin-top,0) - var(--cp-clip-shape-upper-height,40)) * #{$sizeUnit}),
+		mgb:calc((var(--cp-margin-bottom,0) - var(--cp-clip-shape-below-height,40)) * #{$sizeUnit})
+	));
 	&.has-clip-shape-ellipse{
 		&.has-clip-shape-both{
 			clip-path: ellipse(#{$a} 50% at 50% 50%);
@@ -799,12 +817,6 @@ del{
 			}
 		}
 	}
-}
-.has-custom-padding{
-	
-}
-.has-custom-margin{
-	
 }
 .has-custom-radius{
 	
