@@ -1,9 +1,14 @@
-﻿CP.config.picture={
+﻿declare var wp:any,CP:any,React:any;
+
+import { SelectiveClassConfig,CatpowBlockConfig } from "cpdev/type";
+
+const blockConfig:CatpowBlockConfig={
 	devices:['sp','tb'],
 	imageKeys:{
 		image:{sources:'sources',src:"src",alt:"alt",code:"code"}
 	}
 };
+CP.config.picture=blockConfig;
 
 wp.blocks.registerBlockType('catpow/picture',{
 	title: '🐾 Picture',
@@ -17,9 +22,9 @@ wp.blocks.registerBlockType('catpow/picture',{
 		const {classes,sources,src,srcset,alt,code,device}=attributes;
 
 		const states=CP.wordsToFlags(classes);
-		const {devices,imageKeys}=CP.config.picture;
+		const {devices,imageKeys}=blockConfig;
 
-		const selectiveClasses=[
+		const selectiveClasses:SelectiveClassConfig[]=[
 			{input:'picture',label:'画像',keys:imageKeys.image,devices,isTemplate:states.isTemplate},
 			{
 				label:'テンプレート',

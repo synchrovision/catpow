@@ -1,11 +1,12 @@
 (() => {
-  // ../blocks/picture/editor_script.jsx
-  CP.config.picture = {
+  // ../blocks/picture/editor_script.tsx
+  var blockConfig = {
     devices: ["sp", "tb"],
     imageKeys: {
       image: { sources: "sources", src: "src", alt: "alt", code: "code" }
     }
   };
+  CP.config.picture = blockConfig;
   wp.blocks.registerBlockType("catpow/picture", {
     title: "\u{1F43E} Picture",
     description: "\u753B\u9762\u30B5\u30A4\u30BA\u306B\u5FDC\u3058\u3066\u5207\u308A\u66FF\u308F\u308B\u753B\u50CF\u3002",
@@ -17,7 +18,7 @@
       const { Icon } = wp.components;
       const { classes, sources, src, srcset, alt, code, device } = attributes;
       const states = CP.wordsToFlags(classes);
-      const { devices, imageKeys } = CP.config.picture;
+      const { devices, imageKeys } = blockConfig;
       const selectiveClasses = [
         { input: "picture", label: "\u753B\u50CF", keys: imageKeys.image, devices, isTemplate: states.isTemplate },
         {
