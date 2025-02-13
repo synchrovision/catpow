@@ -39,7 +39,8 @@ function get_jsx_files(){
 	foreach(glob(WP_CONTENT_DIR.'/{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{js,blocks/*,ui/*,components/*,elements/*,stores/*,*/*/*}/*.{t,j}sx',GLOB_BRACE) as $jsx_file){
 		if(
 			strpos($jsx_file,'/node_modules/')!==false || 
-			strpos($jsx_file,'/modules/')!==false
+			strpos($jsx_file,'/modules/')!==false || 
+			strpos($jsx_file,'/cpdev/')!==false
 		){continue;}
 		$jsx_files[]=$jsx_file;
 	}

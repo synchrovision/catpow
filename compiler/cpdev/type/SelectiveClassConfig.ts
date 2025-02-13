@@ -1,4 +1,4 @@
-import { selectiveClassesPresets } from "../../_init/init/selectiveClassesPresets";
+import { selectiveClassesPresets } from "blocks/_init/init/selectiveClassesPresets.jsx";
 
 export type SelectiveClassConfig={
 	name?:string,
@@ -11,11 +11,12 @@ export type SelectiveClassConfig={
 	key?:string,
 	keys?:{[key:string]:string},
 	devices?:string[],
-	cond?:string,
+	cond?:string | string[] | boolean | ((states:object,props:object)=>boolean),
 	min?:number,
 	max?:number,
 	item?:SubSelectiveClassConfig,
-	sub?:SubSelectiveClassConfig
+	sub?:SubSelectiveClassConfig,
+	isTemplate?:boolean
 } | 'color'|'pattern'|'cond'|'event'| keyof typeof selectiveClassesPresets;
 type SubSelectiveClassConfig={
 	[key:string]:SelectiveClassConfig[]

@@ -9,6 +9,12 @@ let pathResolver={
 	setup(build) {
 		const externalModules = new Set(build.initialOptions.external || []);
 		
+		build.onResolve({filter:/^cpdev/},async(args)=>{
+			const result=await build.resolve('./'+args.path.slice(6),{
+				kind:'import-statement',resolveDir:'./cpdev'
+			});
+			if(result.errors.length===0){return {path:result.path};}
+		});
 		build.onResolve({filter:/^catpow/},async(args)=>{
 			const result=await build.resolve('./'+args.path.slice(6),{
 				kind:'import-statement',resolveDir:'./modules/src'
@@ -86,5 +92,6 @@ await esbuild.build({
 	},
 	jsxFactory:'wp.element.createElement',
 	jsxFragment:'wp.element.Fragment',
-	plugins:[inlineCssImporter,pathResolver,svgAsJsx]
+	plugins:[inlineCssImporter,pathResolver,svgAsJsx],
+	tsconfigRaw: {}
 })
