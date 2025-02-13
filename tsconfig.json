@@ -1,0 +1,14 @@
+{
+	"compilerOptions":{
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"jsx": "react",
+		"baseUrl": "./",
+		"paths": {
+			"*":["./compiler/node_modules/*"],
+			"blocks/*":["./blocks/*"],
+			"cpdev/*":["./compiler/cpdev/*"],
+			"catpow/*":["./compiler/modules/src/*"],
+		}
+	}
+}
