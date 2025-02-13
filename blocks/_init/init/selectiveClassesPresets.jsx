@@ -76,7 +76,7 @@ export const selectiveClassesPresets={
 		{name:'marginBottom',label:__('下間隔','catpow'),input:'range',vars:'vars',key:'--cp-margin-bottom',min:-400,max:400}
 	]},
 	customContentWidth:{name:'cusotomWidth',label:__('コンテンツ幅','catpow'),values:'has-custom-content-width',sub:[
-		{name:'marginTop',label:__('上間隔','catpow'),input:'range',vars:'vars',key:'--cp-content-width',min:200,max:1600},
+		{name:'contentWidth',label:__('幅','catpow'),input:'range',vars:'vars',key:'--cp-content-width',min:200,max:1600},
 	]}
 };
 wp.domReady(()=>{

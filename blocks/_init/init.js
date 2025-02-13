@@ -2955,7 +2955,7 @@
       { name: "marginBottom", label: __2("\u4E0B\u9593\u9694", "catpow"), input: "range", vars: "vars", key: "--cp-margin-bottom", min: -400, max: 400 }
     ] },
     customContentWidth: { name: "cusotomWidth", label: __2("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"), values: "has-custom-content-width", sub: [
-      { name: "marginTop", label: __2("\u4E0A\u9593\u9694", "catpow"), input: "range", vars: "vars", key: "--cp-content-width", min: 200, max: 1600 }
+      { name: "contentWidth", label: __2("\u5E45", "catpow"), input: "range", vars: "vars", key: "--cp-content-width", min: 200, max: 1600 }
     ] }
   };
   wp.domReady(() => {
