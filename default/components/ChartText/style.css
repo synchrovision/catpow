@@ -1,21 +1,21 @@
 @charset "UTF-8";
-.ChartText {
+.cp-charttext {
   font-size: 0.75rem;
   font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
 }
-.ChartText .title {
+.cp-charttext .title {
   text-anchor: middle;
   font-size: 1.125rem;
 }
-.ChartText .val {
+.cp-charttext .val {
   text-anchor: middle;
   dominant-baseline: middle;
   fill: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
 }
-.ChartText .val .unit {
+.cp-charttext .val .unit {
   dominant-baseline: middle;
 }
-.ChartText .ledgendText {
+.cp-charttext .ledgendText {
   dominant-baseline: middle;
 }
 /*# sourceMappingURL=./style.css.map */

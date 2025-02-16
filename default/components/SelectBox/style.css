@@ -1,11 +1,11 @@
-.SelectBox {
+.cp-selectbox {
   display: inline-block;
   position: relative;
   margin: 0rem 0.5em;
   border-radius: 0.1em;
   box-shadow: 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)), -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a));
 }
-.SelectBox::after {
+.cp-selectbox::after {
   content: "";
   display: block;
   position: absolute;
@@ -22,7 +22,7 @@
   clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
   pointer-events: none;
 }
-.SelectBox-select, .wp-core-ui .SelectBox-select {
+.cp-selectbox-select, .wp-core-ui .cp-selectbox-select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;

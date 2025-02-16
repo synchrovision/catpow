@@ -1,6 +1,6 @@
 @import 'admin_style_config.scss';
 
-.InputTextItems{
+.cp-inputtextitems{
 	@include bnd((pd:.5em 1em,mg:0 .5em));
 	@include bdr((r:1em));
 	@include shd((b:-2));

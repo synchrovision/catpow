@@ -1,6 +1,6 @@
 @import 'admin_style_config.scss';
 
-.MegaMenu{
+.cp-megamenu{
 	@include bg((c:b));
 	@include shd((b:8));
 	&__contents{
@@ -9,7 +9,7 @@
 			
 		}
 	}
-	&-SiteInfo{
+	&-siteinfo{
 		@include bnd((pd:8));
 		&-title{
 			@include bnd((mg:0,pd:0));
@@ -20,7 +20,7 @@
 			}
 		}
 	}
-	&-MainMenu,&-PrimaryMenu{
+	&-mainmenu,&-primarymenu{
 		&-items{
 			@include bnd((pd:0,mg:0));
 			@include txt((l:n,f:t));
@@ -39,7 +39,7 @@
 			}
 		}
 	}
-	&-PrimaryMenu{
+	&-primarymenu{
 		&-items{
 			&-item{
 				&-link{
@@ -52,7 +52,7 @@
 			}
 		}
 	}
-	&-Panel{
+	&-panel{
 		&.is-active{
 		}
 	}
@@ -71,7 +71,7 @@
 				}
 			}
 		}
-		&-SiteInfo{
+		&-siteinfo{
 			@include bnd((pd:8));
 			&-title{
 				@include bnd((mg:0,pd:0));
@@ -82,7 +82,7 @@
 				}
 			}
 		}
-		&-MainMenu,&-PrimaryMenu{
+		&-mainmenu,&-primarymenu{
 			&-items{
 				@include bnd((pd:0,mg:0));
 				@include txt((l:n,f:t));
@@ -104,7 +104,7 @@
 				}
 			}
 		}
-		&-MenuButton{
+		&-menubutton{
 			@include bnd((d:b,p:r,w:36,h:36,mg:8,as:c));
 			&-icon{
 				@include bnd((d:b,p:a,i:0,mg:a,w:f,h:2));
@@ -154,7 +154,7 @@
 				@include bnd((d:c));
 			}
 		}
-		&-SiteInfo{
+		&-siteinfo{
 			@include bnd((pd:8));
 			&-title{
 				@include bnd((mg:0,pd:0));
@@ -165,7 +165,7 @@
 				}
 			}
 		}
-		&-MainMenu,&-PrimaryMenu{
+		&-mainmenu,&-primarymenu{
 			&-items{
 				@include bnd((pd:0,mg:0));
 				@include txt((l:n,f:t));
@@ -188,12 +188,12 @@
 				}
 			}
 		}
-		&-MenuButton{
+		&-menubutton{
 			@include bnd((d:n));
 		}
 	}
 	@include bp(1200){
-		&-MainMenu,&-PrimaryMenu{
+		&-mainMenu,&-primarymenu{
 			&-items{
 				&-item{
 					&-link{

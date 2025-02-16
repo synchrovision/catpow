@@ -1,7 +1,7 @@
 @import 'admin_style_config.scss';
 
 
-.ColorSet{
+.cp-colorset{
 	.panes{
 		@include bnd((p:r,w:f));
 		@include flx((w:w,c:3));

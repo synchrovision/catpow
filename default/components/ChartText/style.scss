@@ -1,7 +1,7 @@
 @import 'admin_style_config.scss';
 
 
-.ChartText{
+.cp-charttext{
 	@include txt((p:12,f:g));
 	.title{@include svg((ta:c));@include txt((p:18));}
 	.val{

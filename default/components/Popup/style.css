@@ -1,24 +1,24 @@
-.Popup {
+.cp-popup {
   position: relative;
   visibility: hidden;
   opacity: 0;
 }
-.Popup.open {
+.cp-popup.open {
   visibility: visible;
   -webkit-transition: visibility 0s, opacity 0.5s;
   transition: visibility 0s, opacity 0.5s;
   opacity: 1;
 }
-.Popup.close {
+.cp-popup.close {
   -webkit-transition: visibility 0s 0.5s, opacity 0.5s;
   transition: visibility 0s 0.5s, opacity 0.5s;
   opacity: 0;
 }
-.Popup.closed {
+.cp-popup.closed {
   display: none;
   pointer-events: none;
 }
-.PopupContainer {
+.cp-popup-container {
   display: block;
   position: fixed;
   top: 0rem;
@@ -26,7 +26,7 @@
   right: 0rem;
   z-index: 10000;
 }
-.PopupBG {
+.cp-popup-bg {
   content: "";
   display: block;
   position: fixed;
@@ -37,7 +37,7 @@
   inset: 0rem;
   background-color: hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
-.PopupBody {
+.cp-popup-body {
   display: block;
   position: fixed;
   width: fit-content;
@@ -52,21 +52,21 @@
   transform: -webkit- translateY(-50%);
   transform: translateY(-50%);
 }
-.PopupBody .PopupContents {
+.cp-popup-body .PopupContents {
   max-width: 40rem;
   width: auto;
   max-height: 90vh;
   height: auto;
   overflow-y: auto;
 }
-.PopupBody .PopupControl .close {
+.cp-popup-body .PopupControl .close {
   position: absolute;
   width: 1.875rem;
   height: 1.875rem;
   top: -2.5rem;
   right: 0.625rem;
 }
-.PopupBody .PopupControl .close::before, .PopupBody .PopupControl .close::after {
+.cp-popup-body .PopupControl .close::before, .cp-popup-body .PopupControl .close::after {
   content: "";
   position: absolute;
   top: 0.9375rem;
@@ -74,11 +74,11 @@
   height: 0.0625rem;
   background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
 }
-.PopupBody .PopupControl .close::before {
+.cp-popup-body .PopupControl .close::before {
   transform: -webkit- rotateZ(45deg);
   transform: rotateZ(45deg);
 }
-.PopupBody .PopupControl .close::after {
+.cp-popup-body .PopupControl .close::after {
   transform: -webkit- rotateZ(-45deg);
   transform: rotateZ(-45deg);
 }

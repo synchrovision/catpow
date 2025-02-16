@@ -1,6 +1,6 @@
 @import "admin_style_config.scss";
 
-.SelectPreparedImageSet{
+.cp-selectpreparedimageset{
 	@include flx((w:w));
 	@include bg((c:t 20));
 	@include bdr((s:s,w:1,c:t 10));

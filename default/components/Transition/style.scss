@@ -1,130 +1,131 @@
 @import 'admin_style_config.scss';
 
-.transition{
+.cp-transition{
+	$block:&;
 	@include bnd((p:r,o:h));
 	@include trn((p:200vw));
-	&_current{
+	&-current{
 		@include bnd((p:r));
 	}
-	&_prev{
+	&-prev{
 		@include bnd((p:a,t:0,l:0,r:0));
 		@include usr((e:n));
 	}
-	&-none>&{
-		&_prev{
+	&.is-type-none &{
+		&-prev{
 			&-from,&-to{
 				@include trn((o:0));
 			}
 		}
 	}
-	&-init>&{
-		&_current{
-			&-from>*{
+	&.is-type-init &{
+		&-current{
+			&.is-from>*{
 				@include trn((s:.9,o:0));
 			}
-			&-to>*{
+			&.is-to>*{
 				@include trn((t:.5s,s:1,o:1));
 			}
 		}
-		&_prev{
-			&-from>*{
+		&-prev{
+			&.is-from>*{
 				@include trn((s:1,o:1));
 			}
-			&-to>*{
+			&.is-to>*{
 				@include trn((t:.5s,s:1.1,o:0));
 			}
 		}
 	}
-	&-focus>&{
-		&_current{
-			&-from>*{
+	&.is-type-focus &{
+		&-current{
+			&.is-from>*{
 				@include trn((o:0,z:-10vw));
 			}
-			&-to>*{
+			&.is-to>*{
 				@include trn((t:.5s .2s,z:0));
 			}
 		}
-		&_prev{
-			&-from>*{
+		&-prev{
+			&.is-from>*{
 				@include trn((o:1,z:0));
 			}
-			&-to>*{
+			&.is-to>*{
 				@include trn((t:.5s,o:0,z:10vw));
 			}
 		}
 	}
-	&-blur>&{
-		&_current{
-			&-from>*{
+	&.is-type-blur &{
+		&-current{
+			&.is-from>*{
 				@include trn((o:0,z:10vw));
 			}
-			&-to>*{
+			&.is-to>*{
 				@include trn((t:.5s .2s,z:0));
 			}
 		}
-		&_prev{
-			&-from>*{
+		&-prev{
+			&.is-from>*{
 				@include trn((o:1,z:0));
 			}
-			&-to>*{
+			&.is-to>*{
 				@include trn((t:.5s,o:0,z:-10vw));
 			}
 		}
 	}
-	&-prev>&{
-		&_current{
-			&-from{
+	&.is-type-prev &{
+		&-current{
+			&.is-from{
 				@include bnd((p:r,l:-100%,r:100%));
 			}
-			&-to{
+			&.is-to{
 				@include bnd((p:r,l:0,r:0));
 				@include trn((t:.5s));
 			}
 		}
-		&_prev{
-			&-from{
+		&-prev{
+			&.is-from{
 				@include bnd((p:a,l:0));
 			}
-			&-to{
+			&.is-to{
 				@include bnd((l:100%,r:-100%));
 				@include trn((t:.5s));
 			}
 		}
 	}
-	&-next>&{
-		&_current{
-			&-from{
+	&.is-type-next &{
+		&-current{
+			&.is-from{
 				@include bnd((p:r,l:100%,r:-100%));
 			}
-			&-to{
+			&.is-to{
 				@include bnd((p:r,l:0));
 				@include trn((t:.5s));
 			}
 		}
-		&_prev{
-			&-from{
+		&-prev{
+			&.is-from{
 				@include bnd((p:a,l:0));
 			}
-			&-to{
+			&.is-to{
 				@include bnd((l:-100%,r:100%));
 				@include trn((t:.5s));
 			}
 		}
 	}
-	&-mod>&{
-		&_current{
-			&-from{
+	&.is-type-mod &{
+		&-current{
+			&.is-from{
 				@include trn((o:0));
 			}
-			&-to{
+			&.is-to{
 				@include trn((t:.5s,o:1));
 			}
 		}
-		&_prev{
-			&-from{
+		&-prev{
+			&.is-from{
 				@include trn((o:1));
 			}
-			&-to{
+			&.is-to{
 				@include trn((t:.5s,o:0));
 			}
 		}

@@ -1,7 +1,7 @@
 @import 'admin_style_config.scss';
 
 
-.Toggle{
+.cp-toggle{
 	@include bnd((w:4em,h:2em,o:h));
 	@include bdr((r:1em));
 	@include bg((c:b));

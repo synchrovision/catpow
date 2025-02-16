@@ -1,7 +1,7 @@
 @import 'admin_style_config.scss';
 
 
-.FinderBulkControl{
+.cp-finderbulkcontrol{
 	@include bnd((d:ib,p:r));
 	&Form{
 		@include bnd((w:80vw 600));

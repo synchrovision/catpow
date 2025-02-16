@@ -1,7 +1,7 @@
 @import 'admin_style_config.scss';
 
 
-.FinderFilterControl{
+.cp-finderfiltercontrol{
 	&__table{
 		@include tbl(());
 		&>.row{

@@ -6,9 +6,9 @@
 	useEffect(()=>setPopupState(open?'open':'close'),[open]);
 	
 	return (
-		<Catpow.External id="PopupContainer" className="PopupContainer">
+		<Catpow.External id="PopupContainer" className="cp-popup-container">
 			<div
-				className={'Popup '+state}
+				className={'cp-popup '+state}
 				onAnimationEnd={()=>{
 					if(state==='close'){
 						setPopupState('closed');
@@ -16,11 +16,11 @@
 					}
 				}}
 			>
-				<div className="PopupBG" onClick={()=>{if(closeOnClickAway){onClose()}}}></div>
-				<div className="PopupBody">
-					<div className="PopupContents">{children}</div>
+				<div className="cp-popup-bg" onClick={()=>{if(closeOnClickAway){onClose()}}}></div>
+				<div className="cp-popup-body">
+					<div className="cp-popup-contents">{children}</div>
 					{closeButton && (
-						<div className="PopupControl">
+						<div className="cp-popup-control">
 							<div className="close" onClick={onClose}></div>
 						</div>
 					)}

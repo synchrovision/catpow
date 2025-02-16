@@ -1,6 +1,6 @@
 @import 'admin_style_config.scss';
 
-.InputDateTime{
+.cp-inputdatetime{
 	@include bnd((pd:10));
 	&.is-invalid &{
 		&-date{

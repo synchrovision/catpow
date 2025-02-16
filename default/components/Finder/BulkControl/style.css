@@ -1,50 +1,49 @@
-@charset "UTF-8";
-.FinderBulkControl {
+.cp-finderbulkcontrol {
   display: inline-block;
   position: relative;
 }
-.FinderBulkControlForm {
+.cp-finderbulkcontrolForm {
   max-width: 37.5rem;
   width: 80vw;
 }
-.FinderBulkControlForm .title {
+.cp-finderbulkcontrolForm .title {
   margin: 0rem;
   margin-bottom: 0.625rem;
   padding: 1.25rem;
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
-  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 30),1);
+  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 30),var(--cp-tones-t-a));
   text-align: center;
   font-size: 1.125rem;
   line-height: 1em;
-  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-family: var(--cp-fonts-t);
   font-weight: 700;
 }
-.FinderBulkControlForm .inputs {
+.cp-finderbulkcontrolForm .inputs {
   margin: 0rem;
   text-align: center;
 }
-.FinderBulkControlForm .inputs .item {
+.cp-finderbulkcontrolForm .inputs .item {
   display: block;
   position: relative;
   margin: 0rem auto;
   padding: 0.625rem 1.875rem;
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
-  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 20),1);
+  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 20),var(--cp-tones-t-a));
 }
-.FinderBulkControlForm .inputs .item .label {
+.cp-finderbulkcontrolForm .inputs .item .label {
   margin: 0rem;
   margin-bottom: 0.625rem;
   font-size: 0.9375rem;
   line-height: 1.5em;
 }
-.FinderBulkControlForm .inputs .item .desc {
+.cp-finderbulkcontrolForm .inputs .item .desc {
   text-align: justify;
   font-size: 0.75rem;
   line-height: 1.5em;
 }
-.FinderBulkControlForm .inputs .item .caption {
+.cp-finderbulkcontrolForm .inputs .item .caption {
   text-align: justify;
   font-size: 0.625rem;
   line-height: 1.5em;

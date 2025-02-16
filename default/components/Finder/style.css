@@ -1,7 +1,7 @@
-.Finder {
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+.cp-finder {
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
 }
-.FinderNavigation {
+.cp-finder-navigation {
   position: relative;
   z-index: 100;
   display: -webkit-box;
@@ -13,17 +13,17 @@
   -webkit-align-items: center;
   align-items: center;
 }
-.FinderNavigation .FinderSpacer {
+.cp-finder-navigation .cp-finderSpacer {
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: auto;
 }
-.FinderControl {
+.cp-finder-control {
   display: inline-block;
   padding: 0.625rem;
 }
-.FinderControl .items {
+.cp-finder-control .items {
   padding: 0rem;
   margin: 0rem;
   display: -webkit-box;
@@ -37,19 +37,19 @@
   border-radius: 0.625rem;
   box-shadow: 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)), -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a));
 }
-.FinderControl .items .item {
+.cp-finder-control .items .item {
   position: relative;
   padding: 0rem;
   margin: 0rem;
 }
-.FinderControl .items .item > .inputs {
+.cp-finder-control .items .item > .inputs {
   padding: 0.625rem;
 }
-.FinderControl .items .item > .icon {
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 50),1);
+.cp-finder-control .items .item > .icon {
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 50),var(--cp-tones-t-a));
   padding: 0.625rem;
 }
-.FinderControl .items .item.active > .icon {
-  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+.cp-finder-control .items .item.active > .icon {
+  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
 }
 /*# sourceMappingURL=./style.css.map */

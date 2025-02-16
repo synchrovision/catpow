@@ -1,16 +1,16 @@
 @import 'admin_style_config.scss';
 
 
-.SelectTable{
+.cp-selecttable{
 	@include bnd((w:f));
 	@include tbl((l:f));
-	&.hasLargeFontSize{
+	&.has-large-font-size{
 		@include txt((p:20));
 	}
-	&.hasRegularFontSize{
+	&.has-regular-font-size{
 		@include txt((p:12));
 	}
-	&.hasSmallFontSize{
+	&.has-small-font-size{
 		@include txt((p:8));
 		@include bp(pc){@include txt((p:12));}
 	}

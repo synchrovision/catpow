@@ -1,4 +1,4 @@
-.InputTextItems {
+.cp-inputtextitems {
   padding: 0.5em 1em;
   margin: 0rem 0.5em;
   border-radius: 1em;
@@ -15,7 +15,7 @@
   font-size: 0.875rem;
   line-height: 1em;
 }
-.InputTextItems-item {
+.cp-inputtextitems-item {
   -webkit-box-flex: 0;
   flex-grow: 0;
   flex-shrink: 0;
@@ -27,7 +27,7 @@
   text-align: center;
   line-height: 1em;
 }
-.InputTextItems-item-remove {
+.cp-inputtextitems-item-remove {
   display: inline-block;
   margin-left: 0.25rem;
   width: 1.2em;
@@ -38,7 +38,7 @@
   line-height: 1em;
   cursor: pointer;
 }
-.InputTextItems .InputTextItems-input {
+.cp-inputtextitems .cp-inputtextitems-input {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;

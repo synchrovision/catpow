@@ -11,7 +11,7 @@
 	},[min,max,step]);
 	
 	return (
-		<select className="SelectNumber" value={value} onChange={(e)=>{onChange(e.currentTarget.value);}}>
+		<select className="cp-selectnumber" value={value} onChange={(e)=>{onChange(e.currentTarget.value);}}>
 			{label && <option>{label}</option>}
 			{selections.map((i)=>(<option value={i} disabled={exclude && exclude.includes(i)} key={i}>{i}</option>))}
 		</select>

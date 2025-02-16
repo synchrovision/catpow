@@ -1,30 +1,30 @@
-.OutputGroup > .item {
+.cp-output-group > .item {
   padding: 0.625rem 0rem;
 }
-.OutputGroup > .item + .item {
+.cp-output-group > .item + .item {
   border-top-style: solid;
   border-top-width: 0.0625rem;
-  border-top-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 30),1);
+  border-top-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 30),var(--cp-tones-t-a));
 }
-.OutputGroup > .item dl {
+.cp-output-group > .item dl {
   margin: 0rem;
   padding: 0.3125rem;
 }
-.OutputGroup > .item dl dt {
+.cp-output-group > .item dl dt {
   clear: both;
   float: left;
   width: 6.25rem;
   padding: 0.125rem;
   margin: 0rem;
 }
-.OutputGroup > .item dl dd {
+.cp-output-group > .item dl dd {
   padding: 0.125rem;
   padding-left: 6.875rem;
   margin: 0rem;
   min-height: 1.5em;
   height: auto;
 }
-.OutputImages > .item > .image {
+.cp-output-images > .item > .image {
   display: block;
   max-width: 18.75rem;
   width: auto;

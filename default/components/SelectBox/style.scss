@@ -1,6 +1,6 @@
 @import 'admin_style_config.scss';
 
-.SelectBox{
+.cp-selectbox{
 	@include bnd((d:ib,p:r,mg:0 .5em));
 	@include bdr((r:.1em));
 	@include shd((bve:-1));

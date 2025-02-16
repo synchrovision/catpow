@@ -1,7 +1,7 @@
 @import 'admin_style_config.scss';
 
 
-.FixedBG{
+.cp-fixedbg{
 	@include bnd((p:f,t:0,b:0,l:0,r:0,z:0,o:h));
 	&__contents{
 		@include bnd((p:a,t:0,l:0,r:0,w:100vw,h:100vh));

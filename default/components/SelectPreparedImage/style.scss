@@ -1,6 +1,6 @@
 @import "admin_style_config.scss";
 
-.SelectPreparedImage{
+.cp-selectpreparedimage{
 	@include bnd((p:r,w:2em,h:2em));
 	&__img{
 		@include bnd((d:b,w:2em,h:2em));

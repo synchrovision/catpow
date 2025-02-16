@@ -10,7 +10,7 @@
       }
       return selections2;
     }, [min, max, step]);
-    return /* @__PURE__ */ wp.element.createElement("select", { className: "SelectNumber", value, onChange: (e) => {
+    return /* @__PURE__ */ wp.element.createElement("select", { className: "cp-selectnumber", value, onChange: (e) => {
       onChange(e.currentTarget.value);
     } }, label && /* @__PURE__ */ wp.element.createElement("option", null, label), selections.map((i) => /* @__PURE__ */ wp.element.createElement("option", { value: i, disabled: exclude && exclude.includes(i), key: i }, i)));
   };

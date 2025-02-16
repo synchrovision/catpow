@@ -1,5 +1,5 @@
 ﻿Catpow.SelectColorToneClass=(props)=>{
-	const {className='SelectColorToneClass',onChange}=props;
+	const {className='cp-selectcolortoneclass',onChange}=props;
 	const {useCallback,useMemo,Fragment}=wp.element;
 	const {bem}=Catpow.util;
 	const classes=bem(className);

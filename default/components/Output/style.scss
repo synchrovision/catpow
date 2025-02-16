@@ -1,7 +1,7 @@
 @import 'admin_style_config.scss';
 
-.Output{
-	&Group{
+.cp-output{
+	&-group{
 		>.item{
 			@include bnd((pd:10 0));
 			+.item{@include bdr((p:t,s:s,w:1,c:t 30));}
@@ -16,12 +16,12 @@
 			}
 		}
 	}
-	&Labels{
+	&-labels{
 		>.item{
 			
 		}
 	}
-	&Images{
+	&-images{
 		>.item{
 			>.image{
 				@include bnd((d:b,w:a 300,h:a));

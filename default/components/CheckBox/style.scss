@@ -1,7 +1,7 @@
 @import 'admin_style_config.scss';
 
 
-.CheckBox{
+.cp-checkbox{
 	@include bnd((d:ib,p:r,pd:10 15,mg:7.5,pdl:40));
 	@include bdr((r:20));
 	@include txt((p:15,h:1em,c:t 40));

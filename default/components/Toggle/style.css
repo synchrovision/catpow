@@ -1,13 +1,13 @@
-.Toggle {
+.cp-toggle {
   width: 4em;
   height: 2em;
   overflow: hidden;
   border-radius: 1em;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
   box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a)) inset;
   cursor: pointer;
 }
-.Toggle-handler {
+.cp-toggle-handler {
   display: block;
   position: relative;
   width: 4em;
@@ -19,7 +19,7 @@
   transform: -webkit- translateX(-2em);
   transform: translateX(-2em);
 }
-.Toggle-handler::before {
+.cp-toggle-handler::before {
   content: "";
   display: block;
   position: absolute;
@@ -33,10 +33,10 @@
   margin: auto;
   margin-right: 0rem;
   border-radius: 1em;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
   box-shadow: 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, -1px -1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)), -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, 1px 1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a));
 }
-.Toggle.is-active .Toggle-handler {
+.cp-toggle.is-active .cp-toggle-handler {
   transform: -webkit- translateX(0rem);
   transform: translateX(0rem);
 }

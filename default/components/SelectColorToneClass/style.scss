@@ -4,7 +4,7 @@ $colors:(
 	c:currentColor
 );
 
-.SelectColorToneClass{
+.cp-selectcolortoneclass{
 	@include bnd((w:200 f 400,mg:a));
 	&-colors,&-tones{
 		&-icon{

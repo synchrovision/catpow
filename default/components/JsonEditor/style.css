@@ -1,16 +1,16 @@
-.JsonEditor {
+.cp-jsoneditor {
   font-size: 1rem;
   font-family: var(--cp-fonts-t);
 }
-.JsonEditor-Editor {
+.cp-jsoneditor-editor {
   padding: 1.25rem;
 }
-.JsonEditor-Editor__body {
+.cp-jsoneditor-editor__body {
   margin: auto;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
   box-shadow: 0 4px 9px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
-.JsonEditor-Editor__body-header {
+.cp-jsoneditor-editor__body-header {
   padding: 0.75rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -24,55 +24,55 @@
   align-items: center;
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
-  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.5);
+  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a) * 0.5));
 }
-.JsonEditor-Editor__body-header-title {
+.cp-jsoneditor-editor__body-header-title {
   font-size: 1rem;
   font-family: var(--cp-fonts-h);
   font-weight: 700;
 }
-.JsonEditor-Editor__body-header-controls-save {
+.cp-jsoneditor-editor__body-header-controls-save {
   padding: 0.5rem 0.75rem;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
   text-align: center;
   font-size: 0.875rem;
   line-height: 1em;
   font-family: var(--cp-fonts-t);
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a));
   border-radius: 0.25rem;
 }
-.JsonEditor-Editor__body-header-controls-save.is-active {
+.cp-jsoneditor-editor__body-header-controls-save.is-active {
   cursor: pointer;
   box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
-.JsonEditor-Editor__body-header-controls-save:not(.is-active) {
+.cp-jsoneditor-editor__body-header-controls-save:not(.is-active) {
   opacity: 0.1;
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
 }
-.JsonEditor-Editor__body-contents {
+.cp-jsoneditor-editor__body-contents {
   padding: 1.25rem;
   overflow-x: auto;
 }
-.JsonEditor-Input {
+.cp-jsoneditor-input {
   font-size: 0.75rem;
   font-family: var(--cp-fonts-t);
 }
-.JsonEditor-Input__body {
+.cp-jsoneditor-input__body {
   position: relative;
   padding: 0.5rem;
 }
-.JsonEditor-Input__body-message {
+.cp-jsoneditor-input__body-message {
   position: absolute;
   bottom: 100%;
   padding: 0.25rem 1.25rem;
   z-index: 1;
   border-radius: 1.25rem;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
   font-size: 0.75rem;
   font-family: var(--cp-fonts-t);
   line-height: 1.5em;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a));
   box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
   -webkit-transition: 0.2s;
   transition: 0.2s;
@@ -81,61 +81,61 @@
   transform: translateY(0rem);
   pointer-events: none;
 }
-.JsonEditor-Input__body-message:not(.is-show) {
+.cp-jsoneditor-input__body-message:not(.is-show) {
   opacity: 0;
   transform: -webkit- translateY(0.25rem);
   transform: translateY(0.25rem);
 }
-.JsonEditor-Input__body-description {
+.cp-jsoneditor-input__body-description {
   display: block;
   margin-top: 0.25rem;
   padding: 0.25rem;
   font-size: 0.75rem;
 }
-.JsonEditor-Input-Text-input, .wp-core-ui .JsonEditor-Input-Text-input {
+.cp-jsoneditor-input-text-input, .wp-core-ui .cp-jsoneditor-input-text-input {
   padding: 0.25em 0.5em;
   border-style: none;
   border-radius: 0.25rem;
   font-size: inherit;
   box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a)) inset;
 }
-.JsonEditor-Input-Textarea-textarea {
+.cp-jsoneditor-input-textarea-textarea {
   padding: 0.25em 0.5em;
   border-style: none;
   border-radius: 0.25rem;
   font-size: inherit;
   box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a)) inset;
 }
-.JsonEditor-Input-ObjectInput-label {
+.cp-jsoneditor-input-objectinput-label {
   padding: 0.25em 1em;
   border-radius: 1em;
   box-shadow: 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, -1px -1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)), -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, 1px 1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a));
   cursor: pointer;
 }
-.JsonEditor-Input-ObjectInput-body {
+.cp-jsoneditor-input-objectinput-body {
   padding: 1em;
 }
-.JsonEditor-Input-ObjectInput-block.is-level-0 > .JsonEditor-Input-ObjectInput-block-item > .JsonEditor-Input-ObjectInput-block-item-title {
+.cp-jsoneditor-input-objectinput-block.is-level-0 > .cp-jsoneditor-input-objectinput-block-item > .cp-jsoneditor-input-objectinput-block-item-title {
   padding: 0.25em 1.25em;
   margin-bottom: 0.5em;
   border-radius: 1em;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
   font-size: 1rem;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),1);
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a));
 }
-.JsonEditor-Input-ObjectInput-block.is-level-1 > .JsonEditor-Input-ObjectInput-block-item > .JsonEditor-Input-ObjectInput-block-item-title {
+.cp-jsoneditor-input-objectinput-block.is-level-1 > .cp-jsoneditor-input-objectinput-block-item > .cp-jsoneditor-input-objectinput-block-item-title {
   padding: 0.25em 1.25em;
   margin-bottom: 0.5em;
   border-radius: 1em;
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),1);
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),var(--cp-tones-t-a));
   font-size: 0.875rem;
 }
-.JsonEditor-Input-ObjectInput-block.is-level-2 > .JsonEditor-Input-ObjectInput-block-item > .JsonEditor-Input-ObjectInput-block-item-title {
+.cp-jsoneditor-input-objectinput-block.is-level-2 > .cp-jsoneditor-input-objectinput-block-item > .cp-jsoneditor-input-objectinput-block-item-title {
   padding-bottom: 0.25em;
   margin-bottom: 0.5em;
   font-size: 0.875rem;
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
-  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.5);
+  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a) * 0.5));
 }
 /*# sourceMappingURL=./style.css.map */

@@ -1,6 +1,6 @@
 @import 'admin_style_config.scss';
 
-.TabPanel{
+.cp-tabpanel{
 	@include bnd((w:f));
 	@include bdr((r:.5em));
 	@include shd((b:2));

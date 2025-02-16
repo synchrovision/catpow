@@ -1,9 +1,9 @@
-.Spinner-circle {
+.cp-spinner-circle {
   position: relative;
   min-height: 18.75rem;
   height: 100%;
 }
-.Spinner-circle > .graphics {
+.cp-spinner-circle > .graphics {
   position: absolute;
   top: 0rem;
   bottom: 0rem;
@@ -13,7 +13,7 @@
   width: 5rem;
   height: 5rem;
 }
-.Spinner-circle > .graphics > .graphic {
+.cp-spinner-circle > .graphics > .graphic {
   position: absolute;
   top: 0rem;
   bottom: 0rem;
@@ -25,17 +25,17 @@
   border-color: transparent;
   border-radius: 50%;
 }
-.Spinner-circle > .graphics > .graphic1 {
+.cp-spinner-circle > .graphics > .graphic1 {
   border-width: 0.1875rem;
-  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),1);
+  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),var(--cp-tones-t-a));
 }
-.Spinner-circle > .graphics > .graphic2, .Spinner-circle > .graphics > .graphic3 {
+.cp-spinner-circle > .graphics > .graphic2, .cp-spinner-circle > .graphics > .graphic3 {
   border-top-width: 0.1875rem;
   border-top-style: solid;
-  border-top-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  border-top-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
   animation: SpinnerCircleRotate 1s infinite ease forwards;
 }
-.Spinner-circle > .graphics > .graphic3 {
+.cp-spinner-circle > .graphics > .graphic3 {
   animation-delay: 0.1s;
 }
 @keyframes SpinnerCircleRotate {

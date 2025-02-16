@@ -1,8 +1,8 @@
 @import 'admin_style_config.scss';
 
-.JsonEditor{
+.cp-jsoneditor{
 	@include txt((p:16,f:t));
-	&-Editor{
+	&-editor{
 		@include bnd((pd:20));
 		&__body{
 			@include bnd((mg:a));
@@ -36,7 +36,7 @@
 			}
 		}
 	}
-	&-Input{
+	&-input{
 		@include txt((p:12,f:t));
 		&__body{
 			@include bnd((p:r,pd:8));
@@ -58,13 +58,13 @@
 			}
 		}
 		
-		&-Number{
+		&-number{
 		}
-		&-Range{
+		&-range{
 		}
-		&-SearchSelect{
+		&-searchselect{
 		}
-		&-Text{
+		&-text{
 			&-input,.wp-core-ui &-input{
 				@include bnd((pd:.25em .5em));
 				@include bdr((s:n,r:4));
@@ -72,7 +72,7 @@
 				@include shd((b:-1));
 			}
 		}
-		&-Textarea{
+		&-textarea{
 			&-textarea{
 				@include bnd((pd:.25em .5em));
 				@include bdr((s:n,r:4));
@@ -80,7 +80,7 @@
 				@include shd((b:-1));
 			}
 		}
-		&-ObjectInput{
+		&-objectinput{
 			&-label{
 				@include bnd((pd:.25em 1em));
 				@include bdr((r:1em));

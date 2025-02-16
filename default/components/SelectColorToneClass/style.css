@@ -1,23 +1,23 @@
-.SelectColorToneClass {
+.cp-selectcolortoneclass {
   min-width: 12.5rem;
   max-width: 25rem;
   width: 100%;
   margin: auto;
 }
-.SelectColorToneClass-colors-icon, .SelectColorToneClass-tones-icon {
+.cp-selectcolortoneclass-colors-icon, .cp-selectcolortoneclass-tones-icon {
   margin: 0rem;
   padding: 0rem 0.25rem;
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a));
 }
-.SelectColorToneClass-colors-icon svg, .SelectColorToneClass-tones-icon svg {
+.cp-selectcolortoneclass-colors-icon svg, .cp-selectcolortoneclass-tones-icon svg {
   width: 1.25rem;
   height: 1.25rem;
   fill: currentColor;
 }
-.SelectColorToneClass-colors-icon:not(.active), .SelectColorToneClass-tones-icon:not(.active) {
+.cp-selectcolortoneclass-colors-icon:not(.active), .cp-selectcolortoneclass-tones-icon:not(.active) {
   opacity: 0.2;
 }
-.SelectColorToneClass-colors-item, .SelectColorToneClass-tones-item {
+.cp-selectcolortoneclass-colors-item, .cp-selectcolortoneclass-tones-item {
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
@@ -32,10 +32,10 @@
   border-top-width: 0.625rem;
   border-top-color: hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),var(--cp-tones-a-l),var(--cp-tones-a-a));
 }
-.SelectColorToneClass-colors-item:not(.active), .SelectColorToneClass-tones-item:not(.active) {
+.cp-selectcolortoneclass-colors-item:not(.active), .cp-selectcolortoneclass-tones-item:not(.active) {
   opacity: 0.2;
 }
-.SelectColorToneClass-colors {
+.cp-selectcolortoneclass-colors {
   width: 13.75rem;
   margin: 0.125rem 0rem;
   display: -webkit-box;
@@ -46,7 +46,7 @@
   flex-wrap: nowrap;
   list-style: none;
 }
-.SelectColorToneClass-tones {
+.cp-selectcolortoneclass-tones {
   width: 13.75rem;
   margin: 0.5rem 0rem;
   display: -webkit-box;

@@ -1,4 +1,4 @@
-.CheckBox {
+.cp-checkbox {
   display: inline-block;
   position: relative;
   padding: 0.625rem 0.9375rem;
@@ -13,7 +13,7 @@
   cursor: pointer;
   box-shadow: 1px 1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)), -1px -1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a));
 }
-.CheckBoxIcon {
+.cp-checkboxIcon {
   display: block;
   position: relative;
   width: 0.9375rem;
@@ -24,7 +24,7 @@
   transition: 0.5s;
   box-shadow: 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)), -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a));
 }
-.CheckBoxIcon::before {
+.cp-checkboxIcon::before {
   content: "";
   display: block;
   position: absolute;
@@ -46,14 +46,14 @@
   -webkit-transition: width 0s 0.2s, height 0s 0.2s, opacity 0.2s;
   transition: width 0s 0.2s, height 0s 0.2s, opacity 0.2s;
 }
-.CheckBoxIcon.selected::before {
+.cp-checkboxIcon.selected::before {
   width: 0.9375rem;
   height: 0.46875rem;
   opacity: 1;
   -webkit-transition: width 0.1s 0.1s, height 0.1s, opacity 0.1s;
   transition: width 0.1s 0.1s, height 0.1s, opacity 0.1s;
 }
-.CheckBox > .CheckBoxIcon {
+.cp-checkbox > .cp-checkboxIcon {
   display: block;
   position: absolute;
   top: 0rem;
@@ -61,7 +61,7 @@
   bottom: 0rem;
   margin: auto;
 }
-.CheckBox.selected {
+.cp-checkbox.selected {
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a));
   box-shadow: 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, -1px -1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)), -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, 1px 1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a));
 }

@@ -56,9 +56,9 @@
 	},[children]);
 	
 	return (
-		<div className={`transition transition-${type}`} ref={refContainer}>
-			<div className={"transition_prev transition_prev-"+(ready?"from":"to")} ref={refPrev}></div>
-			<div className={"transition_current transition_current-"+(ready?"from":"to")} ref={refCurrent}>{contents}</div>
+		<div className={`cp-transition is-type-${type}`} ref={refContainer}>
+			<div className={"cp-transition-prev is-"+(ready?"from":"to")} ref={refPrev}></div>
+			<div className={"cp-transition-current is-"+(ready?"from":"to")} ref={refCurrent}>{contents}</div>
 		</div>
 	);
 }

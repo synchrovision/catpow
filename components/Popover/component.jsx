@@ -1,5 +1,5 @@
 ﻿Catpow.Popover=function(props){
-	const {className='Popover',children,open,onClose,size='middle',closeButton=false,closeOnClickAway=true}=props;
+	const {className='cp-popover',children,open,onClose,size='middle',closeButton=false,closeOnClickAway=true}=props;
 	const {Fragment,useEffect,useState,useRef}=wp.element;
 	const [state,setPopoverState]=useState('closed');
 	const [positionX,setPositionX]=useState('');

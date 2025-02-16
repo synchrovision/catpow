@@ -52,6 +52,6 @@
         }
       };
     }, [children]);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: `transition transition-${type}`, ref: refContainer }, /* @__PURE__ */ wp.element.createElement("div", { className: "transition_prev transition_prev-" + (ready ? "from" : "to"), ref: refPrev }), /* @__PURE__ */ wp.element.createElement("div", { className: "transition_current transition_current-" + (ready ? "from" : "to"), ref: refCurrent }, contents));
+    return /* @__PURE__ */ wp.element.createElement("div", { className: `cp-transition is-type-${type}`, ref: refContainer }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-transition-prev is-" + (ready ? "from" : "to"), ref: refPrev }), /* @__PURE__ */ wp.element.createElement("div", { className: "cp-transition-current is-" + (ready ? "from" : "to"), ref: refCurrent }, contents));
   };
 })();

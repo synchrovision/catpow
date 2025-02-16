@@ -2,7 +2,7 @@
   // ../components/Animation/component.jsx
   Catpow.Animation = (props) => {
     const { useState, useContext, useEffect, useReducer, useRef } = wp.element;
-    const { className = "Animation" } = props;
+    const { className = "cp-animation" } = props;
     const ref = useRef({ pointer: { x: 0, y: 0 }, clicked: false, press: false });
     const [state, dispatch] = useReducer((state2, action) => {
       switch (action.type) {

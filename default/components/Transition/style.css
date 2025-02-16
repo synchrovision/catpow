@@ -1,146 +1,146 @@
-.transition {
+.cp-transition {
   position: relative;
   overflow: hidden;
   perspective: 200vw;
 }
-.transition_current {
+.cp-transition-current {
   position: relative;
 }
-.transition_prev {
+.cp-transition-prev {
   position: absolute;
   top: 0rem;
   left: 0rem;
   right: 0rem;
   pointer-events: none;
 }
-.transition-none > .transition_prev-from, .transition-none > .transition_prev-to {
+.cp-transition.is-type-none .cp-transition-prev-from, .cp-transition.is-type-none .cp-transition-prev-to {
   opacity: 0;
 }
-.transition-init > .transition_current-from > * {
+.cp-transition.is-type-init .cp-transition-current.is-from > * {
   opacity: 0;
   transform: -webkit- scale(0.9);
   transform: scale(0.9);
 }
-.transition-init > .transition_current-to > * {
+.cp-transition.is-type-init .cp-transition-current.is-to > * {
   -webkit-transition: 0.5s;
   transition: 0.5s;
   opacity: 1;
   transform: -webkit- scale(1);
   transform: scale(1);
 }
-.transition-init > .transition_prev-from > * {
+.cp-transition.is-type-init .cp-transition-prev.is-from > * {
   opacity: 1;
   transform: -webkit- scale(1);
   transform: scale(1);
 }
-.transition-init > .transition_prev-to > * {
+.cp-transition.is-type-init .cp-transition-prev.is-to > * {
   -webkit-transition: 0.5s;
   transition: 0.5s;
   opacity: 0;
   transform: -webkit- scale(1.1);
   transform: scale(1.1);
 }
-.transition-focus > .transition_current-from > * {
+.cp-transition.is-type-focus .cp-transition-current.is-from > * {
   opacity: 0;
   transform: -webkit- translateZ(-10vw);
   transform: translateZ(-10vw);
 }
-.transition-focus > .transition_current-to > * {
+.cp-transition.is-type-focus .cp-transition-current.is-to > * {
   -webkit-transition: 0.5s 0.2s;
   transition: 0.5s 0.2s;
   transform: -webkit- translateZ(0rem);
   transform: translateZ(0rem);
 }
-.transition-focus > .transition_prev-from > * {
+.cp-transition.is-type-focus .cp-transition-prev.is-from > * {
   opacity: 1;
   transform: -webkit- translateZ(0rem);
   transform: translateZ(0rem);
 }
-.transition-focus > .transition_prev-to > * {
+.cp-transition.is-type-focus .cp-transition-prev.is-to > * {
   -webkit-transition: 0.5s;
   transition: 0.5s;
   opacity: 0;
   transform: -webkit- translateZ(10vw);
   transform: translateZ(10vw);
 }
-.transition-blur > .transition_current-from > * {
+.cp-transition.is-type-blur .cp-transition-current.is-from > * {
   opacity: 0;
   transform: -webkit- translateZ(10vw);
   transform: translateZ(10vw);
 }
-.transition-blur > .transition_current-to > * {
+.cp-transition.is-type-blur .cp-transition-current.is-to > * {
   -webkit-transition: 0.5s 0.2s;
   transition: 0.5s 0.2s;
   transform: -webkit- translateZ(0rem);
   transform: translateZ(0rem);
 }
-.transition-blur > .transition_prev-from > * {
+.cp-transition.is-type-blur .cp-transition-prev.is-from > * {
   opacity: 1;
   transform: -webkit- translateZ(0rem);
   transform: translateZ(0rem);
 }
-.transition-blur > .transition_prev-to > * {
+.cp-transition.is-type-blur .cp-transition-prev.is-to > * {
   -webkit-transition: 0.5s;
   transition: 0.5s;
   opacity: 0;
   transform: -webkit- translateZ(-10vw);
   transform: translateZ(-10vw);
 }
-.transition-prev > .transition_current-from {
+.cp-transition.is-type-prev .cp-transition-current.is-from {
   position: relative;
   left: -100%;
   right: 100%;
 }
-.transition-prev > .transition_current-to {
+.cp-transition.is-type-prev .cp-transition-current.is-to {
   position: relative;
   left: 0rem;
   right: 0rem;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
-.transition-prev > .transition_prev-from {
+.cp-transition.is-type-prev .cp-transition-prev.is-from {
   position: absolute;
   left: 0rem;
 }
-.transition-prev > .transition_prev-to {
+.cp-transition.is-type-prev .cp-transition-prev.is-to {
   left: 100%;
   right: -100%;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
-.transition-next > .transition_current-from {
+.cp-transition.is-type-next .cp-transition-current.is-from {
   position: relative;
   left: 100%;
   right: -100%;
 }
-.transition-next > .transition_current-to {
+.cp-transition.is-type-next .cp-transition-current.is-to {
   position: relative;
   left: 0rem;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
-.transition-next > .transition_prev-from {
+.cp-transition.is-type-next .cp-transition-prev.is-from {
   position: absolute;
   left: 0rem;
 }
-.transition-next > .transition_prev-to {
+.cp-transition.is-type-next .cp-transition-prev.is-to {
   left: -100%;
   right: 100%;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
-.transition-mod > .transition_current-from {
+.cp-transition.is-type-mod .cp-transition-current.is-from {
   opacity: 0;
 }
-.transition-mod > .transition_current-to {
+.cp-transition.is-type-mod .cp-transition-current.is-to {
   -webkit-transition: 0.5s;
   transition: 0.5s;
   opacity: 1;
 }
-.transition-mod > .transition_prev-from {
+.cp-transition.is-type-mod .cp-transition-prev.is-from {
   opacity: 1;
 }
-.transition-mod > .transition_prev-to {
+.cp-transition.is-type-mod .cp-transition-prev.is-to {
   -webkit-transition: 0.5s;
   transition: 0.5s;
   opacity: 0;

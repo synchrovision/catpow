@@ -1,6 +1,6 @@
 @import 'admin_style_config.scss';
 
-.StepSelect{
+.cp-stepselect{
 	&-selected{
 		&-items{
 			@include bnd((pd:1em,mg:0,h:5em a));

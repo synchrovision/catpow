@@ -1,6 +1,6 @@
 @import 'admin_style_config.scss';
 
-.Spinner{
+.cp-spinner{
 	&-circle{
 		@include bnd((p:r,h:300 f));
 		&>.graphics{

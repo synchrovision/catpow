@@ -1,7 +1,7 @@
-.InputDateTime {
+.cp-inputdatetime {
   padding: 0.625rem;
 }
-.InputDateTime.is-invalid .InputDateTime-date {
-  background-color: hsla(1,var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 100),0.1);
+.cp-inputdatetime.is-invalid .cp-inputdatetime-date {
+  background-color: hsla(1,var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 100),calc(var(--cp-tones-m-a) * 0.1));
 }
 /*# sourceMappingURL=./style.css.map */

@@ -1,4 +1,4 @@
-.ColorSet .panes {
+.cp-colorset .panes {
   position: relative;
   width: 100%;
   display: -webkit-box;
@@ -9,38 +9,38 @@
   flex-wrap: wrap;
   box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
-.ColorSet .panes > * {
+.cp-colorset .panes > * {
   flex-grow: 1;
   box-sizing: border-box;
 }
-.ColorSet .panes > *:first-child:nth-last-child(1), .ColorSet .panes > *:first-child:nth-last-child(1) ~ * {
+.cp-colorset .panes > *:first-child:nth-last-child(1), .cp-colorset .panes > *:first-child:nth-last-child(1) ~ * {
   flex-basis: 100%;
 }
-.ColorSet .panes > *, .ColorSet .panes > *:first-child:nth-last-child(2), .ColorSet .panes > *:first-child:nth-last-child(2) ~ * {
+.cp-colorset .panes > *, .cp-colorset .panes > *:first-child:nth-last-child(2), .cp-colorset .panes > *:first-child:nth-last-child(2) ~ * {
   flex-basis: 50%;
 }
-.ColorSet .panes > *:first-child:nth-last-child(3n), .ColorSet .panes > *:first-child:nth-last-child(3n) ~ *, .ColorSet .panes > *:nth-child(2n):nth-last-child(3n + 1) ~ * {
+.cp-colorset .panes > *:first-child:nth-last-child(3n), .cp-colorset .panes > *:first-child:nth-last-child(3n) ~ *, .cp-colorset .panes > *:nth-child(2n):nth-last-child(3n + 1) ~ * {
   flex-basis: 33%;
 }
-.ColorSet .panes > .pane {
+.cp-colorset .panes > .pane {
   position: relative;
   padding: 0.9375rem;
   box-sizing: border-box;
   cursor: pointer;
 }
-.ColorSet .panes > .pane.is-dark {
+.cp-colorset .panes > .pane.is-dark {
   color: white;
 }
-.ColorSet .panes > .pane > .body {
+.cp-colorset .panes > .pane > .body {
   position: relative;
   z-index: 1;
   text-align: center;
 }
-.ColorSet .panes > .pane > .body > .label {
+.cp-colorset .panes > .pane > .body > .label {
   font-size: 1.25em;
   font-weight: 700;
 }
-.ColorSet .panes > .pane > .body > .text {
+.cp-colorset .panes > .pane > .body > .text {
   display: block;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -52,7 +52,7 @@
   text-align: center;
   color: inherit;
 }
-.ColorSet .panes > .pane > .bg {
+.cp-colorset .panes > .pane > .bg {
   display: block;
   position: absolute;
   top: 0rem;
@@ -61,7 +61,7 @@
   left: 0rem;
   inset: 0rem;
 }
-.ColorSet .panes > .pane > .input_color {
+.cp-colorset .panes > .pane > .input_color {
   display: block;
   position: absolute;
   top: 0rem;
@@ -74,17 +74,17 @@
   opacity: 0;
   pointer-events: none;
 }
-.ColorSet-ModeSelect {
+.cp-colorset-ModeSelect {
   padding: 0.625rem 0rem;
 }
-.ColorSet-ModeSelect__item {
+.cp-colorset-ModeSelect__item {
   font-size: 1.5rem;
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),0.5);
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a) * 0.5));
 }
-.ColorSet-ModeSelect__item.active {
-  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+.cp-colorset-ModeSelect__item.active {
+  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
 }
-.ColorSet-Palette {
+.cp-colorset-Palette {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -92,7 +92,7 @@
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-.ColorSet-Palette__item {
+.cp-colorset-Palette__item {
   position: relative;
   -webkit-box-flex: 1;
   flex-grow: 1;
@@ -100,31 +100,31 @@
   flex-basis: 30%;
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAAHnlligAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHJJREFUeNpi+P///4EDBxiAGMgCCCAGFB5AADGCRBgYDh48CCRZIJS9vT2QBAggFBkmBiSAogxFBiCAoHogAKIKAlBUYTELAiAmEtABEECk20G6BOmuIl0CIMBQ/IEMkO0myiSSraaaBhZcbkUOs0HuBwDplz5uFJ3Z4gAAAABJRU5ErkJggg==");
 }
-.ColorSet-Palette__item > .chip {
+.cp-colorset-Palette__item > .chip {
   display: block;
   height: 5rem;
   cursor: pointer;
 }
-.ColorSet-Palette__item > .chip > .label {
+.cp-colorset-Palette__item > .chip > .label {
   padding: 0.625rem;
 }
-.ColorSet-Palette__item > .chip.is-dark > .label {
+.cp-colorset-Palette__item > .chip.is-dark > .label {
   color: white;
 }
-.ColorSet-Palette__item > .chip.is-light > .label {
+.cp-colorset-Palette__item > .chip.is-light > .label {
   color: black;
 }
-.ColorSet-Palette__item > .modal {
+.cp-colorset-Palette__item > .modal {
   display: block;
   position: absolute;
   top: 100%;
   left: 0rem;
   z-index: 100;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
   border-radius: 0.625rem;
   box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
-.ColorSet-Palette__item > .PopoverAnchor {
+.cp-colorset-Palette__item > .PopoverAnchor {
   display: block;
   position: absolute;
   top: 0rem;
@@ -133,19 +133,19 @@
   left: 0rem;
   inset: 0rem;
 }
-.ColorSet-Palette__item.close > .modal {
+.cp-colorset-Palette__item.close > .modal {
   display: none;
 }
-.ColorSet-Palette__box {
+.cp-colorset-Palette__box {
   padding: 1.25rem;
 }
-.ColorSet-HueRange {
+.cp-colorset-HueRange {
   padding: 0.625rem;
 }
-.ColorSet-HueRange__input {
+.cp-colorset-HueRange__input {
   padding: 0.625rem;
 }
-.ColorSet-Preview__row {
+.cp-colorset-Preview__row {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -153,20 +153,20 @@
   -webkit-flex-wrap: nowrap;
   flex-wrap: nowrap;
 }
-.ColorSet-Preview__row__item {
+.cp-colorset-Preview__row__item {
   height: 1.25rem;
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: auto;
 }
-.ColorSet-BulkInput {
+.cp-colorset-BulkInput {
   position: relative;
 }
-.ColorSet-BulkInput__textarea {
+.cp-colorset-BulkInput__textarea {
   width: 100%;
 }
-.ColorSet-BulkInput__clipboard {
+.cp-colorset-BulkInput__clipboard {
   position: absolute;
   right: 0.3125rem;
   top: 0.3125rem;
@@ -177,11 +177,11 @@
   transform: scale(1);
   cursor: pointer;
 }
-.ColorSet-BulkInput__clipboard:hover {
-  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+.cp-colorset-BulkInput__clipboard:hover {
+  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
   opacity: 1;
 }
-.ColorSet-BulkInput__clipboard:active {
+.cp-colorset-BulkInput__clipboard:active {
   opacity: 1;
   transform: -webkit- scale(0.9);
   transform: scale(0.9);

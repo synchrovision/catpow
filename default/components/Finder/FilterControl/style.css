@@ -1,18 +1,18 @@
-.FinderFilterControl__table {
+.cp-finderfiltercontrol__table {
   border-collapse: collapse;
   border-spacing: 0px;
 }
-.FinderFilterControl__table > .row > .label {
+.cp-finderfiltercontrol__table > .row > .label {
   padding: 0.625rem 1.25rem;
   min-width: 5rem;
   width: auto;
 }
-.FinderFilterControl__table > .row > .inputs {
+.cp-finderfiltercontrol__table > .row > .inputs {
   padding: 0.625rem;
 }
-.FinderFilterControl__table > .row + .row {
+.cp-finderfiltercontrol__table > .row + .row {
   border-top-style: solid;
   border-top-width: 0.0625rem;
-  border-top-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 20),1);
+  border-top-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 20),var(--cp-tones-t-a));
 }
 /*# sourceMappingURL=./style.css.map */

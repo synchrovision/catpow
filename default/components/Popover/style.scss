@@ -1,5 +1,5 @@
 @import 'admin_style_config.scss';
-.Popover{
+.cp-popover{
 	&.is-open{
 		@include anm((a:PopoverOpen .5s a 1 f));
 	}

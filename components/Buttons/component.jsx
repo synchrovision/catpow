@@ -1,9 +1,9 @@
 ﻿Catpow.Buttons=(props)=>{
-	const {className="medium"}=props;
+	const {className="is-medium"}=props;
 	const {useMemo}=wp.element;
 	if(props.children){
 		return (
-			<div className={"Buttons "+className}>
+			<div className={"cp-buttons "+className}>
 				{props.children}
 			</div>
 		);
@@ -23,18 +23,18 @@
 		});
 	},[props.options]);
 	return (
-		<div className={"Buttons "+className}>
+		<div className={"cp-buttons "+className}>
 			{options.map((option,index)=><Catpow.Button onClick={onClick} {...option} key={index}/>)}
 		</div>
 	);
 }
 Catpow.Button=(props)=>{
-	const {className="secondary",label,value,onClick}=props;
-	const disabled=props.disabled || className.split(' ').indexOf('disabled')!==-1;
+	const {className="is-secondary",label,value,onClick}=props;
+	const disabled=props.disabled || className.split(' ').indexOf('is-disabled')!==-1;
 	
 	return (
-		<button className={"Button "+className} onClick={()=>{!props.disabled && onClick(value)}} disabled={props.disabled}>
-			<div className={"ButtonIcon"}> </div>
+		<button className={"cp-button "+className} onClick={()=>{!props.disabled && onClick(value)}} disabled={props.disabled}>
+			<div className={"cp-button__icon"}> </div>
 			{label}
 		</button>
 	);

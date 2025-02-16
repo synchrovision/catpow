@@ -1,10 +1,10 @@
 (() => {
   // ../components/Buttons/component.jsx
   Catpow.Buttons = (props) => {
-    const { className = "medium" } = props;
+    const { className = "is-medium" } = props;
     const { useMemo } = wp.element;
     if (props.children) {
-      return /* @__PURE__ */ React.createElement("div", { className: "Buttons " + className }, props.children);
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-buttons " + className }, props.children);
     }
     const { onClick } = props;
     const options = useMemo(() => {
@@ -22,13 +22,13 @@
         return { label, className: className2, value: props.options[key] };
       });
     }, [props.options]);
-    return /* @__PURE__ */ React.createElement("div", { className: "Buttons " + className }, options.map((option, index) => /* @__PURE__ */ React.createElement(Catpow.Button, { onClick, ...option, key: index })));
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-buttons " + className }, options.map((option, index) => /* @__PURE__ */ wp.element.createElement(Catpow.Button, { onClick, ...option, key: index })));
   };
   Catpow.Button = (props) => {
-    const { className = "secondary", label, value, onClick } = props;
-    const disabled = props.disabled || className.split(" ").indexOf("disabled") !== -1;
-    return /* @__PURE__ */ React.createElement("button", { className: "Button " + className, onClick: () => {
+    const { className = "is-secondary", label, value, onClick } = props;
+    const disabled = props.disabled || className.split(" ").indexOf("is-disabled") !== -1;
+    return /* @__PURE__ */ wp.element.createElement("button", { className: "cp-button " + className, onClick: () => {
       !props.disabled && onClick(value);
-    }, disabled: props.disabled }, /* @__PURE__ */ React.createElement("div", { className: "ButtonIcon" }, " "), label);
+    }, disabled: props.disabled }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-button__icon" }, " "), label);
   };
 })();

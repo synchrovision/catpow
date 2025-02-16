@@ -1,6 +1,6 @@
 @import 'admin_style_config.scss';
 
-.ArrayInput{
+.cp-arrayinput{
 	&-items{
 		@include bnd((mg:0,pd:0));
 		@include txt((l:n));

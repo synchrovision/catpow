@@ -1,4 +1,4 @@
-.FixedBG {
+.cp-fixedbg {
   position: fixed;
   top: 0rem;
   bottom: 0rem;
@@ -7,7 +7,7 @@
   z-index: 0;
   overflow: hidden;
 }
-.FixedBG__contents {
+.cp-fixedbg__contents {
   position: absolute;
   top: 0rem;
   left: 0rem;

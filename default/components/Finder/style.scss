@@ -1,19 +1,19 @@
 @import "admin_style_config.scss";
 
-.Finder{
+.cp-finder{
 	@include bg((c:b));
 	$b:&;
-	&Navigation{
+	&-navigation{
 		@include bnd((p:r,z:100));
 		@include flx((w:w,a:c));
 		#{$b}Spacer{
 			@include bnd((f:1 1 a));
 		}
 	}
-	&Main{
+	&-main{
 		
 	}
-	&Control{
+	&-control{
 		@include bnd((d:ib,pd:10));
 		.items{
 			@include bnd((pd:0,mg:0));
