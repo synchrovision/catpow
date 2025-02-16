@@ -91,7 +91,7 @@
     } }), /* @__PURE__ */ wp.element.createElement("span", { className: "unit" }, "\u65E5"), /* @__PURE__ */ wp.element.createElement("span", { className: "btn calendar", onClick: () => setOpen(true) })), /* @__PURE__ */ wp.element.createElement(Catpow.Popup, { open, onClose: () => setOpen(false), closeButton: true }, /* @__PURE__ */ wp.element.createElement(
       Catpow.Calendar,
       {
-        className: "medium",
+        size: "medium",
         year: state.year || now.getFullYear(),
         month: state.month || now.getMonth() + 1,
         showControl: true,

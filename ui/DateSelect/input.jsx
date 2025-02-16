@@ -99,7 +99,7 @@
 			</div>
 			<Catpow.Popup open={open} onClose={()=>setOpen(false)} closeButton={true}>
 				<Catpow.Calendar
-					className='medium'
+					size='medium'
 					year={state.year || now.getFullYear()}
 					month={state.month || now.getMonth()+1}
 					showControl={true}
