@@ -93,6 +93,9 @@
 			@include bdr((s:n));
 			@include txt((c:tx,p:16));
 		}
+		select{
+			@include bnd((pdr:20));
+		}
 		&-unit{
 			&-input{
 				&.is-input-type-text{

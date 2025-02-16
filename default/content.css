@@ -881,6 +881,9 @@
   color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),1);
   font-size: 1rem;
 }
+.cp-meta-item select {
+  padding-right: 1.25rem;
+}
 .cp-meta-item-unit-input.is-input-type-text {
   padding: 0.5em 1em;
   margin: 0rem 0.5em;
