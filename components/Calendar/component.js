@@ -4,7 +4,7 @@
     const { Fragment } = wp.element;
     const { useState, useCallback, useEffect, useReducer, useMemo } = wp.element;
     const {
-      className = "Calendar",
+      className = "cp-calendar",
       size = "medium",
       min = null,
       max = null,
@@ -37,7 +37,6 @@
     }, [props.value, props.values]);
     const minTime = min ? getDateTimeObject(min).getTime() : Number.MIN_VALUE;
     const maxTime = max ? getDateTimeObject(max).getTime() : Number.MAX_VALUE;
-    const thead = useMemo(() => /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, "\u65E5,\u6708,\u706B,\u6C34,\u6728,\u91D1,\u571F".split(",").map((d) => /* @__PURE__ */ wp.element.createElement("td", { key: d }, d)))), [props]);
     const weekDays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
     const init = useCallback((state2) => {
       const d = getDateTimeObject(Object.keys(values)[0] ?? "now");
@@ -119,10 +118,9 @@
     }, [state.year, state.month]);
     const onSelectDayHandle = useCallback((day) => {
       if (onSelect) {
-        onSelect(day.value, { day, value });
+        onSelect(day.value, { day });
       }
       if (onChange) {
-        let val;
         if (type === "string") {
           for (let key in values) {
             delete values[key];
@@ -152,10 +150,14 @@
       });
     }, [props.year, props.month]);
     console.log({ values, state });
+    const Thead = useCallback((props2) => {
+      const { classes: classes2 } = props2;
+      return /* @__PURE__ */ wp.element.createElement("thead", { className: classes2() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes2.week() }, "\u65E5,\u6708,\u706B,\u6C34,\u6728,\u91D1,\u571F".split(",").map((d) => /* @__PURE__ */ wp.element.createElement("th", { className: classes2.week.day(), key: d }, d))));
+    }, []);
     const Cell = useCallback((props2) => {
       const { classes: classes2, day, values: values2, index } = props2;
       const t = day.dateObject.getTime();
-      const value2 = values2[day.value] ? values2[day.value] : null;
+      const value = values2[day.value] ? values2[day.value] : null;
       const isValid = t >= minTime && t <= maxTime && !(exclude && exclude(day.dateObject));
       return /* @__PURE__ */ wp.element.createElement(
         "td",
@@ -163,8 +165,8 @@
           className: classes2(
             weekDays[index],
             day.inMonth ? "is-in-month" : "is-out-month",
-            value2 && (value2.classes != null && value2.classes || "is-active"),
-            { disabled: !isValid }
+            value && (value.classes != null && value.classes || "is-active"),
+            { "is-disabled": !isValid }
           ),
           onClick: () => {
             if (isValid) {
@@ -173,7 +175,7 @@
           }
         },
         /* @__PURE__ */ wp.element.createElement("span", { className: classes2.date() }, day.dateObject.getDate()),
-        value2 && value2.content && /* @__PURE__ */ wp.element.createElement("div", { className: classes2.date.content() }, value2.content)
+        value && value.content && /* @__PURE__ */ wp.element.createElement("div", { className: classes2.date.content() }, value.content)
       );
     }, []);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes("is-size-" + size) }, /* @__PURE__ */ wp.element.createElement("table", { className: classes.table() }, /* @__PURE__ */ wp.element.createElement("caption", { className: classes.table.caption() }, showYear && /* @__PURE__ */ wp.element.createElement("div", { className: classes.table.caption.year() }, showControl && /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement(
@@ -218,7 +220,7 @@
         className: classes.table.caption.month.button("is-next"),
         onClick: () => dispatch({ type: "nextMonth" })
       }
-    ))), thead, /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.table.tbody() }, weeks.map((week, index) => {
+    ))), /* @__PURE__ */ wp.element.createElement(Thead, { classes: classes.table.thead }), /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.table.tbody() }, weeks.map((week, index) => {
       return /* @__PURE__ */ wp.element.createElement("tr", { className: classes.table.tbody.week(), key: index }, week.days.map((day, index2) => /* @__PURE__ */ wp.element.createElement(Cell, { classes: classes.table.tbody.week.day, day, index: index2, values, key: index2 })));
     }))));
   };

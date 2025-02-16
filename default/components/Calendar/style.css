@@ -1,20 +1,20 @@
 @charset "UTF-8";
-.Calendar {
+.cp-calendar {
   padding: 1em;
   margin: 0rem auto;
   width: fit-content;
 }
-.Calendar-table {
+.cp-calendar-table {
   display: inline-block;
   border-collapse: collapse;
   border-spacing: 0px;
   cursor: pointer;
 }
-.Calendar-table-caption {
+.cp-calendar-table-caption {
   position: relative;
   padding: 0.5em 0rem;
 }
-.Calendar-table-caption-year {
+.cp-calendar-table-caption-year {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -26,69 +26,69 @@
   -webkit-justify-content: center;
   justify-content: center;
 }
-.Calendar-table-caption-year-current {
+.cp-calendar-table-caption-year-current {
   display: inline-block;
   margin: 0rem 1em;
   font-size: 1em;
   line-height: 1em;
 }
-.Calendar-table-caption-year-button {
+.cp-calendar-table-caption-year-button {
   padding: 0rem 0.5em;
 }
-.Calendar-table-caption-year-button::before {
+.cp-calendar-table-caption-year-button::before {
   font-family: dashicons;
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 30),var(--cp-tones-t-a));
 }
-.Calendar-table-caption-year-button.is-prev::before {
+.cp-calendar-table-caption-year-button.is-prev::before {
   content: "";
 }
-.Calendar-table-caption-year-button.is-next::before {
+.cp-calendar-table-caption-year-button.is-next::before {
   content: "";
 }
-.Calendar-table-caption-year-button.is-prev10::before {
+.cp-calendar-table-caption-year-button.is-prev10::before {
   content: "";
 }
-.Calendar-table-caption-year-button.is-next10::before {
+.cp-calendar-table-caption-year-button.is-next10::before {
   content: "";
 }
-.Calendar-table-caption-month {
+.cp-calendar-table-caption-month {
   display: block;
   position: relative;
 }
-.Calendar-table-caption-month-current {
+.cp-calendar-table-caption-month-current {
   display: inline-block;
   margin: 0rem 1em;
   font-size: 2em;
   line-height: 1em;
   vertical-align: bottom;
 }
-.Calendar-table-caption-month-current::after {
+.cp-calendar-table-caption-month-current::after {
   content: "月";
 }
-.Calendar-table-caption-month-button::before {
+.cp-calendar-table-caption-month-button::before {
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 30),var(--cp-tones-t-a));
 }
-.Calendar-table-caption-month-button.is-prev {
+.cp-calendar-table-caption-month-button.is-prev {
   position: absolute;
   bottom: 0rem;
   left: 0rem;
 }
-.Calendar-table-caption-month-button.is-prev::before {
+.cp-calendar-table-caption-month-button.is-prev::before {
   content: "＜";
   display: inline-block;
   margin-right: 0.5em;
 }
-.Calendar-table-caption-month-button.is-next {
+.cp-calendar-table-caption-month-button.is-next {
   position: absolute;
   bottom: 0rem;
   right: 0rem;
 }
-.Calendar-table-caption-month-button.is-next::before {
+.cp-calendar-table-caption-month-button.is-next::before {
   content: "＞";
   display: inline-block;
   margin-left: 0.5em;
 }
-.Calendar-table-thead-week-day, .Calendar-table-tbody-week-day {
+.cp-calendar-table-thead-week-day, .cp-calendar-table-tbody-week-day {
   height: 2em;
   width: 2em;
   padding: 0.25em;
@@ -97,28 +97,28 @@
   border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 20),var(--cp-tones-t-a));
   text-align: center;
 }
-.Calendar-table-tbody-week-day.is-active {
+.cp-calendar-table-tbody-week-day.is-active {
   background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 100),calc(var(--cp-tones-m-a) * 0.2));
 }
-.Calendar-table-tbody-week-day.is-sunday {
+.cp-calendar-table-tbody-week-day.is-sunday {
   color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -5 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
 }
-.Calendar-table-tbody-week-day.is-saturday {
+.cp-calendar-table-tbody-week-day.is-saturday {
   color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 2 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
 }
-.Calendar-table-tbody-week-day.is-out-month, .Calendar-table-tbody-week-day.is-out-month .date, .Calendar-table-tbody-week-day.is-disabled, .Calendar-table-tbody-week-day.is-disabled .date {
+.cp-calendar-table-tbody-week-day.is-out-month, .cp-calendar-table-tbody-week-day.is-out-month .date, .cp-calendar-table-tbody-week-day.is-disabled, .cp-calendar-table-tbody-week-day.is-disabled .date {
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),var(--cp-tones-t-a));
 }
-.Calendar.is-size-small {
+.cp-calendar.is-size-small {
   font-size: 0.625rem;
 }
-.Calendar.is-size-medium {
+.cp-calendar.is-size-medium {
   font-size: 0.9375rem;
 }
-.Calendar.is-size-large {
+.cp-calendar.is-size-large {
   font-size: 0.9375rem;
 }
-.Calendar.is-size-large .Calendar-table-tbody-week-day {
+.cp-calendar.is-size-large .cp-calendar-table-tbody-week-day {
   width: 10em;
   height: 10em;
   padding: 0.625rem;
@@ -126,7 +126,7 @@
   text-align: left;
   vertical-align: top;
 }
-.Calendar.is-size-large .Calendar-table-tbody-week-day-date {
+.cp-calendar.is-size-large .cp-calendar-table-tbody-week-day-date {
   display: block;
 }
 /*# sourceMappingURL=./style.css.map */

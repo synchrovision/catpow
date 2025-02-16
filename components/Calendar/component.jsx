@@ -2,7 +2,7 @@
 	const {Fragment}=wp.element;
 	const {useState,useCallback,useEffect,useReducer,useMemo}=wp.element;
 	const {
-		className='Calendar',size='medium',min=null,max=null,exclude=null,onSelect=null,onChange=null,
+		className='cp-calendar',size='medium',min=null,max=null,exclude=null,onSelect=null,onChange=null,
 		showYear=true,showMonth=true,showControl=false
 	}=props;
 	const {bem,getDateValue,getDateTimeObject}=Catpow.util;
@@ -30,8 +30,6 @@
 	const minTime=min?getDateTimeObject(min).getTime():Number.MIN_VALUE;
 	const maxTime=max?getDateTimeObject(max).getTime():Number.MAX_VALUE;
 	
-	const thead=useMemo(()=>(
-	),[props]);
 	const weekDays=['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
 	const init=useCallback((state)=>{
 		const d=getDateTimeObject(Object.keys(values)[0]??'now');
@@ -115,10 +113,9 @@
 	
 	const onSelectDayHandle=useCallback((day)=>{
 		if(onSelect){
-			onSelect(day.value,{day,value});
+			onSelect(day.value,{day});
 		}
 		if(onChange){
-			let val;
 			if(type === 'string'){
 				for(let key in values){
 					delete values[key];

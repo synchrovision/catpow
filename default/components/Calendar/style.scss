@@ -1,7 +1,7 @@
 @import 'admin_style_config.scss';
 
 
-.Calendar{
+.cp-calendar{
 	@include bnd((pd:1em,mg:0 a,w:fit));
 	&-table{
 		@include bnd((d:ib));
