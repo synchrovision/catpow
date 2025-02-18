@@ -154,7 +154,7 @@
     const Palette = useCallback((props2) => {
       const { role, value: value2, open, onClick } = props2;
       const ref = useRef(null);
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-colorset-palette__item " + (open ? "open" : "close") }, /* @__PURE__ */ wp.element.createElement("div", { className: "chip " + (isDarkColor(value2[role]) ? "is-dark" : "is-light"), onClick, style: { backgroundColor: value2[role] } }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, roles[role].label)), /* @__PURE__ */ wp.element.createElement(Catpow.Popover, { open }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-colorset-palette__box" }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-colorset-palette__item is-" + (open ? "open" : "close") }, /* @__PURE__ */ wp.element.createElement("div", { className: "chip " + (isDarkColor(value2[role]) ? "is-dark" : "is-light"), onClick, style: { backgroundColor: value2[role] } }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, roles[role].label)), /* @__PURE__ */ wp.element.createElement(Catpow.Popover, { open }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-colorset-palette__box" }, /* @__PURE__ */ wp.element.createElement(
         ColorPicker,
         {
           color: value2[role],
@@ -275,7 +275,7 @@
     }, []);
     switch (inputMode) {
       case "pane": {
-        return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-colorset" }, /* @__PURE__ */ wp.element.createElement(ModeSelect, { value: inputMode, onChange: setInputMode }), /* @__PURE__ */ wp.element.createElement("div", { className: "colorset-palette" }, Object.keys(roles).map((role) => /* @__PURE__ */ wp.element.createElement(Palette, { role, value: colors, open: role === activeRole, onClick: () => setActiveRole(role === activeRole ? null : role), key: role }))), /* @__PURE__ */ wp.element.createElement(HueRange, { value: colors }), /* @__PURE__ */ wp.element.createElement(Preview, { value: colors }));
+        return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-colorset" }, /* @__PURE__ */ wp.element.createElement(ModeSelect, { value: inputMode, onChange: setInputMode }), /* @__PURE__ */ wp.element.createElement("div", { className: "cp-colorset-palette" }, Object.keys(roles).map((role) => /* @__PURE__ */ wp.element.createElement(Palette, { role, value: colors, open: role === activeRole, onClick: () => setActiveRole(role === activeRole ? null : role), key: role }))), /* @__PURE__ */ wp.element.createElement(HueRange, { value: colors }), /* @__PURE__ */ wp.element.createElement(Preview, { value: colors }));
       }
       case "bulk": {
         return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-colorset" }, /* @__PURE__ */ wp.element.createElement(ModeSelect, { value: inputMode, onChange: setInputMode }), /* @__PURE__ */ wp.element.createElement(BulkInput, { value: colors }), /* @__PURE__ */ wp.element.createElement(Preview, { value: colors }));

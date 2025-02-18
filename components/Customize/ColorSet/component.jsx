@@ -142,7 +142,7 @@
 		
 		
 		return (
-			<div className={"cp-colorset-palette__item "+(open?'open':'close')}>
+			<div className={"cp-colorset-palette__item is-"+(open?'open':'close')}>
 				<div className={"chip "+(isDarkColor(value[role])?'is-dark':'is-light')} onClick={onClick} style={{backgroundColor:value[role]}}>
 					<div className="label">{roles[role].label}</div>
 				</div>
@@ -284,7 +284,7 @@
 			return (
 				<div className="cp-colorset">
 					<ModeSelect value={inputMode} onChange={setInputMode}/>
-					<div className="colorset-palette">
+					<div className="cp-colorset-palette">
 						{Object.keys(roles).map((role)=><Palette role={role} value={colors} open={role===activeRole} onClick={()=>setActiveRole(role===activeRole?null:role)} key={role}/>)}
 					</div>
 					<HueRange value={colors}/>

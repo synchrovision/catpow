@@ -35,7 +35,7 @@
 			}
 		}
 	}
-	&-ModeSelect{
+	&-modeselect{
 		@include bnd((pd:10 0));
 		&__item{
 			@include txt((p:24,c:t 1 .5));
@@ -44,7 +44,7 @@
 			}
 		}
 	}
-	&-Palette{
+	&-palette{
 		@include flx((w:w));
 		&__item{
 			@include bnd((p:r,f:1 1 30%));
@@ -72,15 +72,15 @@
 				@include bdr((r:10));
 				@include shd((b:3));
 			}
-			>.PopoverAnchor{
+			>.cp-popover-anchor{
 				@include bnd((d:b,p:a,i:0));
 			}
-			&.close{
+			&.is-close{
 				>.modal{
 					@include bnd((d:n));
 				}
 			}
-			&.open{
+			&.is-open{
 				
 			}
 		}
@@ -88,13 +88,13 @@
 			@include bnd((pd:20));
 		}
 	}
-	&-HueRange{
+	&-huerange{
 		@include bnd((pd:10));
 		&__input{
 			@include bnd((pd:10));
 		}
 	}
-	&-Preview{
+	&-preview{
 		&__row{
 			@include flx((w:n));
 			&__item{
@@ -102,7 +102,7 @@
 			}
 		}
 	}
-	&-BulkInput{
+	&-bulkInput{
 		@include bnd((p:r));
 		&__textarea{
 			@include bnd((w:f));

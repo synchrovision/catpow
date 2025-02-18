@@ -25,6 +25,10 @@
 		@include bg((c:b));
 		@include shd((b:10));
 		@include usr((e:a));
+		&-arrow{
+			@include bnd((d:b,p:a,w:32,h:16));
+			@include bg((c:b));
+		}
 		&-contents{
 			@include bnd((h:a 50vh,ox:h,oy:a));
 			@include bdr((r:10));
@@ -56,7 +60,8 @@
 			@include bnd((b:f));
 			@include trn((y:-10));
 			&-arrow{
-				@include tail((p:b,c:b));
+				@include bnd((t:f));
+				clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
 			}
 		}
 	}
@@ -65,7 +70,8 @@
 			@include bnd((t:f));
 			@include trn((y:10));
 			&-arrow{
-				@include tail((p:t,c:b));
+				@include bnd((b:f));
+				clip-path: polygon(0% 100%, 100% 100%, 50% 0%);
 			}
 		}
 	}
