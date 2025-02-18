@@ -5,7 +5,7 @@
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { getDateTimeString } = Catpow.datetime;
     const { bem } = Catpow.util;
-    const classes = bem("InputDateTime");
+    const classes = bem("cp-inputdatetime");
     const [dateStr, setDateStr] = useState("");
     const [isValid, setIsValid] = useState(true);
     useEffect(() => {

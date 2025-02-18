@@ -8,7 +8,7 @@
       { value: "grid", icon: "grid-view" },
       { value: "table", icon: "list-view" }
     ];
-    return /* @__PURE__ */ wp.element.createElement("div", { className: "FinderControl FinderSelectLayout" }, /* @__PURE__ */ wp.element.createElement("ul", { className: "items" }, selections.map((sel) => {
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-finder-control cp-finder-selectlayout" }, /* @__PURE__ */ wp.element.createElement("ul", { className: "items" }, selections.map((sel) => {
       return /* @__PURE__ */ wp.element.createElement(
         "li",
         {

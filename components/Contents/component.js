@@ -2,7 +2,7 @@
   // ../components/Contents/component.jsx
   Catpow.Contents = (props) => {
     const { useEffect, useRef } = wp.element;
-    const { className = "contents", deps, html } = props;
+    const { className = "cp-contents", deps, html } = props;
     const ref = useRef({});
     useEffect(() => {
       ref.current.innerHTML = html;
@@ -37,6 +37,6 @@
         });
       }
     }, [html, deps]);
-    return /* @__PURE__ */ React.createElement("div", { className, ref });
+    return /* @__PURE__ */ wp.element.createElement("div", { className, ref });
   };
 })();

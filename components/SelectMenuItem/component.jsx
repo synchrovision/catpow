@@ -1,6 +1,6 @@
 ﻿Catpow.SelectMenuItem=(props)=>{
 	const {useCallback,useMemo,useState,useEffect}=wp.element;
-	const {className='SelectMenuItem',value,onChange}=props;
+	const {className='cp-selectmenuitem',value,onChange}=props;
 	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem(className),[]);
 	const {cache}=Catpow.SelectMenuItem;

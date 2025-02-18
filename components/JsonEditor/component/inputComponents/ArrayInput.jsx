@@ -1,7 +1,7 @@
 ﻿import {Input} from './Input.jsx';
 
 export const ArrayInput=(props)=>{
-	const {className="JsonEditor-Input-ArrayInput",compact=false,agent,onChange,onUpdate}=props;
+	const {className="cp-jsoneditor-input-arrayinput",compact=false,agent,onChange,onUpdate}=props;
 	const {useState,useMemo,useCallback,useEffect}=wp.element;
 	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem(className),[]);

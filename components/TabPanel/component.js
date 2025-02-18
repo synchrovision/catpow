@@ -1,7 +1,7 @@
 (() => {
   // ../components/TabPanel/component.jsx
   Catpow.TabPanel = (props) => {
-    const { className = "TabPanel", useState, useMemo } = wp.element;
+    const { className = "cp-tabpanel", useState, useMemo } = wp.element;
     const { size = "medium", onChange } = props;
     const { bem } = Catpow.util;
     const classes = useMemo(() => bem(className), []);

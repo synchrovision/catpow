@@ -7,7 +7,7 @@ export const DataContext=wp.element.createContext({});
 export const JsonEditor=(props)=>{
 	const {useState,useCallback,useMemo,useEffect,useRef,useReducer}=wp.element;
 	const {
-		className='JsonEditor-Editor',title='JsonEditor',
+		className='cp-jsoneditor-editor',title='JsonEditor',
 		schema,debug=false,onChange,autoSave=false,
 		children:getAdditionalInputComponent
 	}=props;

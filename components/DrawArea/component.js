@@ -82,7 +82,7 @@
       event.item.style.height = null;
       event.item.style.transform = null;
     };
-    return /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ wp.element.createElement(
       "div",
       {
         onMouseDown: (e) => {

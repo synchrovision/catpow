@@ -5,10 +5,9 @@
 	switch(conf.output_type){
 		case 'group':
 			return (
-				<ul className="OutputGroup">
+				<ul className="cp-output-group">
 					{Object.keys(value).map((key)=>{
 						const row=value[key];
-						console.log(conf);
 						return (
 							<li className="item" key={key}>
 								{Object.keys(conf.meta).map((name)=>(
@@ -28,14 +27,14 @@
 			const labels=(Array.isArray(value)?value:[value]).filter((val)=>!!val).map((val)=>conf.dict?conf.dict[val]:val);
 			if(!labels.length){return false;}
 			return (
-				<ul className="OutputLabels">
+				<ul className="cp-output-labels">
 					{labels.map((label,index)=><li className="item" key={index}>{label}</li>)}
 				</ul>
 			);
 		}
 		case 'image':
 			return (
-				<ul className="OutputImages">
+				<ul className="cp-output-images">
 					<li className="item">
 						{props.images.map((image,index)=>(
 							<img className="image" src={image.url} key={index}/>

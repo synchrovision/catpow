@@ -1,5 +1,5 @@
 ﻿Catpow.SelectTable=(props)=>{
-	const {className="SelectTable",selections,value,onChange,spacer=0,col=5,multipe=false}=props;
+	const {className="cp-selecttable",selections,value,onChange,spacer=0,col=5,multipe=false}=props;
 	var i,items,values,fontSize,rows=[];
 	const {useMemo,useCallback}=wp.element;
 	const {bem}=Catpow.util;

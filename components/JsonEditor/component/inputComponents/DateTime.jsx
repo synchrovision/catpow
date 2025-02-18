@@ -2,7 +2,7 @@
 import {debounce} from 'catpow/util';
 
 export const DateTime=(props)=>{
-	const {className="JsonEditor-Input-DateTime",agent,onChange,onUpdate}=props;
+	const {className="cp-jsoneditor-input-datetime",agent,onChange,onUpdate}=props;
 	const {useState,useMemo,useCallback,useEffect}=wp.element;
 	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem(className),[]);

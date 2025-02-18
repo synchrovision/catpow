@@ -1,7 +1,7 @@
 (() => {
   // ../components/TableInput/component.jsx
   Catpow.TableInput = (props) => {
-    const { className = "TableInput", labels, items, onAddItem, onCopyItem, onMoveItem, onRemoveItem, onChange, children } = props;
+    const { className = "cp-tableinput", labels, items, onAddItem, onCopyItem, onMoveItem, onRemoveItem, onChange, children } = props;
     const { useState, useCallback, useEffect, useReducer, useMemo, useRef, forwardRef } = wp.element;
     const { bem } = Catpow.util;
     const classes = useMemo(() => bem(className), [className]);

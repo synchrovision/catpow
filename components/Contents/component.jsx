@@ -1,6 +1,6 @@
 ﻿Catpow.Contents=(props)=>{
 	const {useEffect,useRef}=wp.element;
-	const {className='contents',deps,html}=props;
+	const {className='cp-contents',deps,html}=props;
 	
 	const ref=useRef({});
 	

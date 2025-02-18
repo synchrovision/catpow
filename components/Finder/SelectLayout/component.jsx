@@ -11,7 +11,7 @@ Catpow.Finder.SelectLayout=(props)=>{
 		{value:'table',icon:'list-view'}
 	];
 	return (
-		<div className="FinderControl FinderSelectLayout">
+		<div className="cp-finder-control cp-finder-selectlayout">
 			<ul className="items">
 				{selections.map((sel)=>{
 					return (

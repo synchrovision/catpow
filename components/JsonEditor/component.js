@@ -7,7 +7,7 @@
   // ../components/JsonEditor/component/inputComponents/ReadOnly.jsx
   var { __, sprintf } = wp.i18n;
   var ReadOnly = (props) => {
-    const { className = "JsonEditor-Input-ReadOnly", agent, onChange, onUpdate } = props;
+    const { className = "cp-jsoneditor-input-readonly", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
@@ -17,7 +17,7 @@
   // ../components/JsonEditor/component/inputComponents/Toggle.jsx
   var { __: __2, sprintf: sprintf2 } = wp.i18n;
   var Toggle = (props) => {
-    const { className = "JsonEditor-Input-Toggle", agent, onChange, onUpdate } = props;
+    const { className = "cp-jsoneditor-input-toggle", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
@@ -27,7 +27,7 @@
   // ../components/JsonEditor/component/inputComponents/Select.jsx
   var { __: __3, sprintf: sprintf3 } = wp.i18n;
   var Select = (props) => {
-    const { className = "JsonEditor-Input-Select", agent, onChange, onUpdate } = props;
+    const { className = "cp-jsoneditor-input-select", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
@@ -37,7 +37,7 @@
   // ../components/JsonEditor/component/inputComponents/Checkbox.jsx
   var { __: __4, sprintf: sprintf4 } = wp.i18n;
   var Checkbox = (props) => {
-    const { className = "JsonEditor-Input-Checkbox", agent, onChange, onUpdate } = props;
+    const { className = "cp-jsoneditor-input-checkbox", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
@@ -54,7 +54,7 @@
   // ../components/JsonEditor/component/inputComponents/Radio.jsx
   var { __: __5, sprintf: sprintf5 } = wp.i18n;
   var Radio = (props) => {
-    const { className = "JsonEditor-Input-Radio", agent, onChange, onUpdate } = props;
+    const { className = "cp-jsoneditor-input-radio", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
@@ -65,7 +65,7 @@
   // ../components/JsonEditor/component/inputComponents/SearchSelect.jsx
   var { __: __6, sprintf: sprintf6 } = wp.i18n;
   var SearchSelect = (props) => {
-    const { className = "JsonEditor-Input-SearchSelect", agent, onChange, onUpdate } = props;
+    const { className = "cp-jsoneditor-input-searchselect", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
@@ -101,7 +101,7 @@
   // ../components/JsonEditor/component/inputComponents/StepSelect.jsx
   var { __: __7, sprintf: sprintf7 } = wp.i18n;
   var StepSelect = (props) => {
-    const { className = "JsonEditor-Input-StepSelect", agent, onChange, onUpdate } = props;
+    const { className = "cp-jsoneditor-input-stepselect", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
@@ -137,7 +137,7 @@
   // ../components/JsonEditor/component/inputComponents/Text.jsx
   var { __: __8, sprintf: sprintf8 } = wp.i18n;
   var Text = (props) => {
-    const { className = "JsonEditor-Input-Text", agent, onChange, onUpdate } = props;
+    const { className = "cp-jsoneditor-input-text", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
@@ -206,7 +206,7 @@
   // ../components/JsonEditor/component/inputComponents/Textarea.jsx
   var { __: __9, sprintf: sprintf9 } = wp.i18n;
   var Textarea = (props) => {
-    const { className = "JsonEditor-Input-Textarea", agent, onChange, onUpdate } = props;
+    const { className = "cp-jsoneditor-input-textarea", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
@@ -273,7 +273,7 @@
   // ../components/JsonEditor/component/inputComponents/DateTime.jsx
   var { __: __10, sprintf: sprintf10 } = wp.i18n;
   var DateTime = (props) => {
-    const { className = "JsonEditor-Input-DateTime", agent, onChange, onUpdate } = props;
+    const { className = "cp-jsoneditor-input-datetime", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
@@ -289,7 +289,7 @@
   // ../components/JsonEditor/component/inputComponents/Date.jsx
   var { __: __11, sprintf: sprintf11 } = wp.i18n;
   var Date2 = (props) => {
-    const { className = "JsonEditor-Input-Date", agent, onChange, onUpdate } = props;
+    const { className = "cp-jsoneditor-input-date", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
@@ -305,7 +305,7 @@
   // ../components/JsonEditor/component/inputComponents/Time.jsx
   var { __: __12, sprintf: sprintf12 } = wp.i18n;
   var Time = (props) => {
-    const { className = "JsonEditor-Input-Time", agent, onChange, onUpdate } = props;
+    const { className = "cp-jsoneditor-input-time", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
@@ -321,7 +321,7 @@
   // ../components/JsonEditor/component/inputComponents/Duration.jsx
   var { __: __13, sprintf: sprintf13 } = wp.i18n;
   var Duration = (props) => {
-    const { className = "JsonEditor-Input-Duration", agent, onChange, onUpdate } = props;
+    const { className = "cp-jsoneditor-input-duration", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
@@ -331,7 +331,7 @@
   // ../components/JsonEditor/component/inputComponents/Range.jsx
   var { __: __14, sprintf: sprintf14 } = wp.i18n;
   var Range = (props) => {
-    const { className = "JsonEditor-Input-Range", agent, onChange, onUpdate } = props;
+    const { className = "cp-jsoneditor-input-range", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
@@ -372,7 +372,7 @@
   // ../components/JsonEditor/component/inputComponents/Number.jsx
   var { __: __15, sprintf: sprintf15 } = wp.i18n;
   var Number2 = (props) => {
-    const { className = "JsonEditor-Input-Number", agent, onChange, onUpdate } = props;
+    const { className = "cp-jsoneditor-input-number", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
@@ -399,7 +399,7 @@
 
   // ../components/JsonEditor/component/inputComponents/ArrayInput.jsx
   var ArrayInput = (props) => {
-    const { className = "JsonEditor-Input-ArrayInput", compact = false, agent, onChange, onUpdate } = props;
+    const { className = "cp-jsoneditor-input-arrayinput", compact = false, agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
@@ -574,7 +574,7 @@
   // ../components/JsonEditor/component/inputComponents/Input.jsx
   var { __: __16, sprintf: sprintf16 } = wp.i18n;
   var Input = (props) => {
-    const { className = "JsonEditor-Input", compact = false, level = 0, agent } = props;
+    const { className = "cp-jsoneditor-input", compact = false, level = 0, agent } = props;
     const { useState, useMemo, useCallback, useEffect, useContext } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
@@ -622,7 +622,7 @@
 
   // ../components/JsonEditor/component/inputComponents/ObjectInput.jsx
   var ObjectInput = (props) => {
-    const { className = "JsonEditor-Input-ObjectInput", compact = false, popoverSize = "large", level = 0, agent, lastChanged } = props;
+    const { className = "cp-jsoneditor-input-objectinput", compact = false, popoverSize = "large", level = 0, agent, lastChanged } = props;
     const { useState, useMemo, useCallback, useEffect, useContext } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
@@ -720,7 +720,7 @@
   var JsonEditor = (props) => {
     const { useState, useCallback, useMemo, useEffect, useRef, useReducer } = wp.element;
     const {
-      className = "JsonEditor-Editor",
+      className = "cp-jsoneditor-editor",
       title = "JsonEditor",
       schema,
       debug = false,

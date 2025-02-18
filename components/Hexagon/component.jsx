@@ -5,7 +5,7 @@
 	if(src){
 		imageBounds=imageBounds || [-30,0,160,120];
 		hexagon=(
-			<svg className="Hexagon" viewBox="0 0 100 120">
+			<svg className="cp-hexagon" viewBox="0 0 100 120">
 				<clipPath id={id+'_clip'}>
 					<polygon points="0,30 0,90 50,120 100,90 100,30 50,0"/>
 				</clipPath>
@@ -17,7 +17,7 @@
 	}
 	else{
 		hexagon=(
-			<svg className="Hexagon" viewBox="0 0 100 120">
+			<svg className="cp-hexagon" viewBox="0 0 100 120">
 				<polygon points="0,30 0,90 50,120 100,90 100,30 50,0"/>
 			</svg>
 		);

@@ -1,7 +1,7 @@
 (() => {
   // ../components/RadioButtons/component.jsx
   Catpow.RadioButtons = (props) => {
-    const { className = "RadioButtons", useState, useMemo } = wp.element;
+    const { className = "cp-radiobuttons", useState, useMemo } = wp.element;
     const { size = "medium", onChange } = props;
     const { bem } = Catpow.util;
     const classes = useMemo(() => bem(className), []);

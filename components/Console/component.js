@@ -1,5 +1,5 @@
 (() => {
-  // components/Console/component.jsx
+  // ../components/Console/component.jsx
   Catpow.Console = (props) => {
     const { className = "cp-console", path } = props;
     const el = wp.element.createElement;

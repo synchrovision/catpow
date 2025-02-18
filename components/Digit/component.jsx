@@ -15,7 +15,7 @@
 	}
 	let flags=Catpow.Digit.flags[props.value];
 	return (
-		<span className={'Digit'}>
+		<span className={'cp-digit'}>
 			<svg viewBox="0 0 200 360">
 				<polygon className={flags[0]?'active':'inactive'} points="40.4,39 21.4,20 40.4,1 159.6,1 178.6,20 159.6,39 "/>
 				<polygon className={flags[1]?'active':'inactive'} points="1,159.6 1,40.4 20,21.4 39,40.4 39,159.6 20,178.6 "/>

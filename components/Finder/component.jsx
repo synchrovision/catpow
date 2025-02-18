@@ -310,20 +310,20 @@ Catpow.Finder=(props)=>{
 	return (
 		<Catpow.AppManager>
 			<Catpow.FinderContext.Provider value={{state,dispatch,info}}>
-				<div className={"Finder "+className}>{props.children}</div>
+				<div className={"cp-finder "+className}>{props.children}</div>
 			</Catpow.FinderContext.Provider>
 		</Catpow.AppManager>
 	);
 }
 Catpow.Finder.Nav=(props)=>{
 	const {className='',children,...otherProps}=props;
-	return <div className={"FinderNavigation "+className} {...otherProps}>{children}</div>
+	return <div className={"cp-finder-navigation "+className} {...otherProps}>{children}</div>
 };
 Catpow.Finder.Spacer=(props)=>{
 	const {className='',...otherProps}=props;
-	return <div className={"FinderSpacer "+className} {...otherProps}></div>
+	return <div className={"cp-finder-spacer "+className} {...otherProps}></div>
 };
 Catpow.Finder.Main=(props)=>{
 	const {className='',children,...otherProps}=props;
-	return <div className={"FinderMain "+className} {...otherProps}>{children}</div>
+	return <div className={"cp-finder-main "+className} {...otherProps}>{children}</div>
 };

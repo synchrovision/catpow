@@ -2,7 +2,7 @@
   // ../components/Parallax/component.jsx
   Catpow.Parallax = (props) => {
     const { useEffect, useRef } = wp.element;
-    const { className = "Parallax" } = props;
+    const { className = "cp-parallax" } = props;
     const ref = useRef({});
     const bg = useRef({});
     useEffect(() => {
@@ -29,6 +29,6 @@
         window.cancelAnimationFrame(requestID);
       };
     }, [props]);
-    return /* @__PURE__ */ React.createElement("div", { className: "Parallax", ref }, /* @__PURE__ */ React.createElement("div", { className: "Parallax__contents", ref: bg }, props.children));
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-parallax", ref }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-parallax__contents", ref: bg }, props.children));
   };
 })();

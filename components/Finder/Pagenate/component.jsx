@@ -8,7 +8,7 @@ Catpow.Finder.Pagenate=(props)=>{
 	
 	if(!state.maxNumPages || state.maxNumPages<2){return false;}
 	return (
-		<div className="FinderPagenate">
+		<div className="cp-finder-pagenate">
 			<div
 				className={"button button_prev"+(state.page<=1?' disable':'')}
 				onClick={()=>{

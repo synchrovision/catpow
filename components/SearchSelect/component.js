@@ -4,7 +4,7 @@
     const { defaultLabel = "\u2500", onChange, col = 5, multiple = true, placeholder = "Search" } = props;
     const { useState, useReducer, useCallback, useMemo, useRef, useEffect } = wp.element;
     const { bem } = Catpow.util;
-    const classes = bem("SearchSelect");
+    const classes = bem("cp-searchselect");
     const [open, setOpen] = useState(false);
     const [search, setSearch] = useState("");
     const cache = useRef({});

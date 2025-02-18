@@ -13,7 +13,7 @@ Catpow.Finder.PerPage=(props)=>{
 	},[dispatch]);
 	
 	return (
-		<div className="FinderControl FinderPerPage">
+		<div className="cp-finder-control cp-finder-perpage">
 			<ul className="items">
 				<li className='item'>
 					<div className="inputs">

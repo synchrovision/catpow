@@ -18,7 +18,7 @@
 	},[state.items,state.itemsInPage,dispatch]);
 	
 	return (
-		<div className="FinderControl FinderDownload">
+		<div className="cp-finder-control cp-finder-download">
 			<ul className="items">
 				<li className={'item'} onClick={download}>
 					<div className={"icon dashicons dashicons-download"}></div>

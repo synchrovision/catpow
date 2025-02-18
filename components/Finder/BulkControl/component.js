@@ -63,7 +63,7 @@
           return;
         }
         setModal(
-          /* @__PURE__ */ React.createElement(
+          /* @__PURE__ */ wp.element.createElement(
             ModalForm,
             {
               onComplete: (values) => {
@@ -75,10 +75,10 @@
                 }
               }
             },
-            /* @__PURE__ */ React.createElement("div", { className: "FinderBulkControlForm" }, /* @__PURE__ */ React.createElement("h3", { className: "title" }, conf.label), /* @__PURE__ */ React.createElement("ul", { className: "inputs" }, conf.inputs.map((props2) => {
+            /* @__PURE__ */ wp.element.createElement("div", { className: "cp-finder-bulkcontrol-form" }, /* @__PURE__ */ wp.element.createElement("h3", { className: "title" }, conf.label), /* @__PURE__ */ wp.element.createElement("ul", { className: "inputs" }, conf.inputs.map((props2) => {
               const { label, desc, caption, ...otherPorps } = props2;
-              return /* @__PURE__ */ React.createElement("li", { className: "item" }, label && /* @__PURE__ */ React.createElement("h4", { className: "label" }, label), desc && /* @__PURE__ */ React.createElement("p", { className: "desc" }, desc), /* @__PURE__ */ React.createElement("div", { className: "input" }, /* @__PURE__ */ React.createElement(Input, { ...otherPorps })), caption && /* @__PURE__ */ React.createElement("p", { className: "caption" }, caption));
-            })), /* @__PURE__ */ React.createElement(Buttons, null, /* @__PURE__ */ React.createElement(
+              return /* @__PURE__ */ wp.element.createElement("li", { className: "item" }, label && /* @__PURE__ */ wp.element.createElement("h4", { className: "label" }, label), desc && /* @__PURE__ */ wp.element.createElement("p", { className: "desc" }, desc), /* @__PURE__ */ wp.element.createElement("div", { className: "input" }, /* @__PURE__ */ wp.element.createElement(Input, { ...otherPorps })), caption && /* @__PURE__ */ wp.element.createElement("p", { className: "caption" }, caption));
+            })), /* @__PURE__ */ wp.element.createElement(Buttons, null, /* @__PURE__ */ wp.element.createElement(
               Button,
               {
                 label: __("\u30AD\u30E3\u30F3\u30BB\u30EB", "catpow"),
@@ -86,7 +86,7 @@
                 name: "accept",
                 value: false
               }
-            ), /* @__PURE__ */ React.createElement(
+            ), /* @__PURE__ */ wp.element.createElement(
               Button,
               {
                 label: __("\u5B9F\u884C", "catpow"),
@@ -99,7 +99,7 @@
         );
       });
     }, [setModal]);
-    return /* @__PURE__ */ React.createElement("div", { className: "FinderControl FinderBulkControl" }, /* @__PURE__ */ React.createElement("ul", { className: "items" }, /* @__PURE__ */ React.createElement("li", { className: "item" + (open ? " active" : "") }, /* @__PURE__ */ React.createElement("div", { className: "inputs" }, /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-finder-control cp-finder-bulkcontrol" }, /* @__PURE__ */ wp.element.createElement("ul", { className: "items" }, /* @__PURE__ */ wp.element.createElement("li", { className: "item" + (open ? " active" : "") }, /* @__PURE__ */ wp.element.createElement("div", { className: "inputs" }, /* @__PURE__ */ wp.element.createElement(
       Catpow.SelectBox,
       {
         label: __("\u4E00\u62EC\u51E6\u7406", "catpow"),
@@ -109,7 +109,7 @@
           setValue(val);
         }
       }
-    ), /* @__PURE__ */ React.createElement(
+    ), /* @__PURE__ */ wp.element.createElement(
       Catpow.Button,
       {
         label: __("\u5B9F\u884C", "catpow"),

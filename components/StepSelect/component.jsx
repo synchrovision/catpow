@@ -2,7 +2,7 @@
 	const {defaultLabel='─',onChange,multiple=true,placeholder='Search'}=props;
 	const {useState,useReducer,useCallback,useMemo,useRef,useEffect}=wp.element;
 	const {bem}=Catpow.util;
-	const classes=bem('StepSelect');
+	const classes=bem('cp-stepselect');
 	
 	const [open,setOpen]=useState(false);
 	const [search,setSearch]=useState('');

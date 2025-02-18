@@ -9,7 +9,7 @@ Catpow.Finder.SelectColumns=(props)=>{
 	const {cols}=state.index;
 	
 	return (
-		<div className="FinderControl FinderSelectColumns">
+		<div className="cp-finder-control cp-finder-selectcolumns">
 			<ul className="items">
 				<li className={'item'+(open?' active':'')}>
 					<div className={"icon dashicons dashicons-visibility"} onClick={()=>setOpen(!open)}></div>

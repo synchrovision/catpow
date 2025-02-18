@@ -37,15 +37,15 @@
         return { x: r * rowStep + rowStep / 2, y: c };
       }
     }, props.pos);
-    return /* @__PURE__ */ React.createElement("g", { className: "ChartText" }, keys.map((key) => {
+    return /* @__PURE__ */ wp.element.createElement("g", { className: "ChartText" }, keys.map((key) => {
       let pos = props.pos[key]();
-      return /* @__PURE__ */ React.createElement("text", { className: key, x: pos.x, y: pos.y }, props[key]);
-    }), /* @__PURE__ */ React.createElement("g", { className: "rowLabel" }, props.rows.map((item, i) => {
+      return /* @__PURE__ */ wp.element.createElement("text", { className: key, x: pos.x, y: pos.y }, props[key]);
+    }), /* @__PURE__ */ wp.element.createElement("g", { className: "rowLabel" }, props.rows.map((item, i) => {
       let pos = props.pos["rowLabel"](i);
-      return /* @__PURE__ */ React.createElement("text", { className: item.classes.replace("row", ""), x: pos.x, y: pos.y }, item.label);
-    })), /* @__PURE__ */ React.createElement("g", { className: "ledgend" }, props.cols.map((col, c) => {
+      return /* @__PURE__ */ wp.element.createElement("text", { className: item.classes.replace("row", ""), x: pos.x, y: pos.y }, item.label);
+    })), /* @__PURE__ */ wp.element.createElement("g", { className: "ledgend" }, props.cols.map((col, c) => {
       const pos = props.pos.legend(c);
-      return /* @__PURE__ */ React.createElement("g", { className: "ledgendItem" }, /* @__PURE__ */ React.createElement(
+      return /* @__PURE__ */ wp.element.createElement("g", { className: "ledgendItem" }, /* @__PURE__ */ wp.element.createElement(
         "rect",
         {
           className: cols[c].classes.replace("col", "ledgendRect"),
@@ -54,11 +54,11 @@
           width: 12,
           height: 12
         }
-      ), /* @__PURE__ */ React.createElement("text", { className: "ledgendText", x: pos.x + 15, y: pos.y }, col.label));
-    })), props.hasValue && /* @__PURE__ */ React.createElement("g", { className: "vals" }, props.rows.map((row, r) => {
+      ), /* @__PURE__ */ wp.element.createElement("text", { className: "ledgendText", x: pos.x + 15, y: pos.y }, col.label));
+    })), props.hasValue && /* @__PURE__ */ wp.element.createElement("g", { className: "vals" }, props.rows.map((row, r) => {
       return row.vals.map((val, c) => {
         let pos = props.pos["val"](r, c);
-        return /* @__PURE__ */ React.createElement(
+        return /* @__PURE__ */ wp.element.createElement(
           "text",
           {
             className: row.classes.replace("row", "") + " " + props.cols[c].classes.replace("col", "val"),
@@ -66,7 +66,7 @@
             y: pos.y
           },
           val.value,
-          props.hasUnit && /* @__PURE__ */ React.createElement("tspan", { className: "unit" }, props.unit)
+          props.hasUnit && /* @__PURE__ */ wp.element.createElement("tspan", { className: "unit" }, props.unit)
         );
       });
     })));

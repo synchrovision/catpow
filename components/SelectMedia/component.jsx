@@ -1,6 +1,6 @@
 ﻿Catpow.SelectMedia=(props)=>{
 	const {useCallback,useMemo}=wp.element;
-	const {className='SelectMedia',mime,src,onChange,...otherProps}=props;
+	const {className='cp-selectmedia',mime,src,onChange,...otherProps}=props;
 	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem(className),[]);
 	

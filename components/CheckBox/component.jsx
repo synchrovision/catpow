@@ -6,13 +6,13 @@
 	
 	if(label){
 		return (
-			<div className={"CheckBox"+(selected?' selected':'')} onClick={(e)=>{onChange(!selected);}} role="checkbox" aria-checked={selected}>
-				<div className={"CheckBoxIcon"+(selected?' selected':'')}> </div>
+			<div className={"cp-checkbox"+(selected?' selected':'')} onClick={(e)=>{onChange(!selected);}} role="checkbox" aria-checked={selected}>
+				<div className={"cp-checkbox__icon"+(selected?' selected':'')}> </div>
 				{label}
 			</div>
 		);
 	}
 	return (
-		<div className={"CheckBoxIcon"+(selected?' selected':'')} onClick={(e)=>{onChange(!selected);}} role="checkbox" aria-checked={selected}> </div>
+		<div className={"cp-checkbox__icon"+(selected?' selected':'')} onClick={(e)=>{onChange(!selected);}} role="checkbox" aria-checked={selected}> </div>
 	);
 }

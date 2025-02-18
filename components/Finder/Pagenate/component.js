@@ -6,7 +6,7 @@
     if (!state.maxNumPages || state.maxNumPages < 2) {
       return false;
     }
-    return /* @__PURE__ */ wp.element.createElement("div", { className: "FinderPagenate" }, /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-finder-pagenate" }, /* @__PURE__ */ wp.element.createElement(
       "div",
       {
         className: "button button_prev" + (state.page <= 1 ? " disable" : ""),

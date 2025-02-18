@@ -1,7 +1,7 @@
 (() => {
   // ../components/CheckBoxes/component.jsx
   Catpow.CheckBoxes = (props) => {
-    const { className = "CheckBoxes", useState, useMemo } = wp.element;
+    const { className = "cp-checkboxes", useState, useMemo } = wp.element;
     const { value = [], onChange } = props;
     const { CheckBox } = Catpow;
     const { bem } = Catpow.util;

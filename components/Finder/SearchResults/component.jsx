@@ -96,10 +96,10 @@
 	
 	
 	return (
-		<div className="FinderSearchResults">
+		<div className="cp-finder-searchresults">
 			<Catpow.Transition type={state.transition}>
 				{state.items.length>0?(
-					<div className={"FinderSearchResultsItems "+state.layout+"-view"} depth={1} page={state.page} view={state.layout}>
+					<div className={"cp-finder-searchresults-items "+state.layout+"-view"} depth={1} page={state.page} view={state.layout}>
 						{el((state.layout === 'table')?TableView:ListView,{state,dispatch,info})}
 					</div>
 				):(

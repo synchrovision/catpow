@@ -2,7 +2,7 @@
 	const {value,onChange}=props;
 	const {useState,useMemo,useCallback,useEffect,useReducer}=wp.element;
 	const {bem}=Catpow.util;
-	const classes=useMemo(()=>bem('InputDuration'),[]);
+	const classes=useMemo(()=>bem('cp-inputduration'),[]);
 	
 	const cols=useMemo(()=>{
 		return {

@@ -313,18 +313,18 @@
         dispatch({ type: "updateDevice" });
       });
     }, [props]);
-    return /* @__PURE__ */ React.createElement(Catpow.AppManager, null, /* @__PURE__ */ React.createElement(Catpow.FinderContext.Provider, { value: { state, dispatch, info } }, /* @__PURE__ */ React.createElement("div", { className: "Finder " + className }, props.children)));
+    return /* @__PURE__ */ wp.element.createElement(Catpow.AppManager, null, /* @__PURE__ */ wp.element.createElement(Catpow.FinderContext.Provider, { value: { state, dispatch, info } }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-finder " + className }, props.children)));
   };
   Catpow.Finder.Nav = (props) => {
     const { className = "", children, ...otherProps } = props;
-    return /* @__PURE__ */ React.createElement("div", { className: "FinderNavigation " + className, ...otherProps }, children);
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-finder-navigation " + className, ...otherProps }, children);
   };
   Catpow.Finder.Spacer = (props) => {
     const { className = "", ...otherProps } = props;
-    return /* @__PURE__ */ React.createElement("div", { className: "FinderSpacer " + className, ...otherProps });
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-finder-spacer " + className, ...otherProps });
   };
   Catpow.Finder.Main = (props) => {
     const { className = "", children, ...otherProps } = props;
-    return /* @__PURE__ */ React.createElement("div", { className: "FinderMain " + className, ...otherProps }, children);
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-finder-main " + className, ...otherProps }, children);
   };
 })();

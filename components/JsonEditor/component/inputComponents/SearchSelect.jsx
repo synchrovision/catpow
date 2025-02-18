@@ -1,7 +1,7 @@
 ﻿const {__,sprintf}=wp.i18n;
 
 export const SearchSelect=(props)=>{
-	const {className="JsonEditor-Input-SearchSelect",agent,onChange,onUpdate}=props;
+	const {className="cp-jsoneditor-input-searchselect",agent,onChange,onUpdate}=props;
 	const {useState,useMemo,useCallback,useEffect}=wp.element;
 	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem(className),[]);

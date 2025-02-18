@@ -1,5 +1,5 @@
 ﻿Catpow.InputTextItems=(props)=>{
-	const {className='InputTextItems',onChange}=props;
+	const {className='cp-inputtextitems',onChange}=props;
 	const {useState,useMemo,useCallback,useEffect,useReducer}=wp.element;
 	const {bem}=Catpow.util;
 	const classes=bem(className);

@@ -1,6 +1,6 @@
 ﻿Catpow.Parallax=(props)=>{
 	const {useEffect,useRef}=wp.element;
-	const {className='Parallax'}=props;
+	const {className='cp-parallax'}=props;
 	
 	const ref=useRef({});
 	const bg=useRef({});
@@ -28,8 +28,8 @@
 	},[props]);
 	
 	return (
-		<div className='Parallax' ref={ref}>
-			<div className='Parallax__contents' ref={bg}>
+		<div className='cp-parallax' ref={ref}>
+			<div className='cp-parallax__contents' ref={bg}>
 				{props.children}
 			</div>
 		</div>

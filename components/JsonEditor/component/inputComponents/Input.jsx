@@ -5,7 +5,7 @@ import {throttle} from 'catpow/util';
 const {__,sprintf}=wp.i18n;
 
 export const Input=(props)=>{
-	const {className="JsonEditor-Input",compact=false,level=0,agent}=props;
+	const {className="cp-jsoneditor-input",compact=false,level=0,agent}=props;
 	const {useState,useMemo,useCallback,useEffect,useContext}=wp.element;
 	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem(className),[]);

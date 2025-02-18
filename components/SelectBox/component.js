@@ -2,7 +2,7 @@
   // ../components/SelectBox/component.jsx
   Catpow.SelectBox = (props) => {
     const { useMemo } = wp.element;
-    const { className = "SelectBox", label, value, onChange } = props;
+    const { className = "cp-selectbox", label, value, onChange } = props;
     const { bem } = Catpow.util;
     const classes = useMemo(() => bem(className), []);
     const options = useMemo(() => {

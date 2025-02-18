@@ -2,7 +2,7 @@
 	const {type='circle'}=props;
 	
 	return (
-		<div className={`Spinner Spinner-${type}`}>
+		<div className={`cp-spinner cp-spinner-${type}`}>
 			<div className="graphics">
 				<div className="graphic graphic1"></div>
 				<div className="graphic graphic2"></div>

@@ -1,7 +1,7 @@
 (() => {
   // ../components/JsonEditor/Image/component.jsx
   window.Catpow.JsonEditor.Image = (props) => {
-    const { className = "JsonEditor-Input-Image", agent, onChange, onUpdate } = props;
+    const { className = "cp-jsoneditor-input-image", agent, onChange, onUpdate } = props;
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem } = Catpow.util;
     const classes = useMemo(() => bem(className), []);

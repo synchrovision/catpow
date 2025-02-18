@@ -5,11 +5,11 @@
     const { useState } = wp.element;
     const selected = props.selected || props.value;
     if (label) {
-      return /* @__PURE__ */ React.createElement("div", { className: "CheckBox" + (selected ? " selected" : ""), onClick: (e) => {
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-checkbox" + (selected ? " selected" : ""), onClick: (e) => {
         onChange(!selected);
-      }, role: "checkbox", "aria-checked": selected }, /* @__PURE__ */ React.createElement("div", { className: "CheckBoxIcon" + (selected ? " selected" : "") }, " "), label);
+      }, role: "checkbox", "aria-checked": selected }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-checkbox__icon" + (selected ? " selected" : "") }, " "), label);
     }
-    return /* @__PURE__ */ React.createElement("div", { className: "CheckBoxIcon" + (selected ? " selected" : ""), onClick: (e) => {
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-checkbox__icon" + (selected ? " selected" : ""), onClick: (e) => {
       onChange(!selected);
     }, role: "checkbox", "aria-checked": selected }, " ");
   };

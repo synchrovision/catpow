@@ -21,6 +21,6 @@
         window.cancelAnimationFrame(requestID);
       };
     }, [props]);
-    return /* @__PURE__ */ React.createElement("div", { className: "FixedBG", ref }, /* @__PURE__ */ React.createElement("div", { className: "FixedBG__contents", ref: bg }, props.children));
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-fixedbg", ref }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-fixedbg__contents", ref: bg }, props.children));
   };
 })();

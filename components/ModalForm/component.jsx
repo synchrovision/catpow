@@ -24,7 +24,7 @@ Catpow.ModalForm=(props)=>{
 	return (
 		<Catpow.Popup open={state.open} closeOnClickAway={false} onClosed={()=>onComplete(state.values)}>
 			<Catpow.ModalFormContext.Provider value={{state,dispatch}}>
-				<div className={"ModalForm"}>
+				<div className={"cp-modalform"}>
 					{children}
 				</div>
 			</Catpow.ModalFormContext.Provider>

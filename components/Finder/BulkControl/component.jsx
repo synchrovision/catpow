@@ -69,7 +69,7 @@ Catpow.Finder.BulkControl=(props)=>{
 						else{reject(false);}
 					}}
 				>
-					<div className="FinderBulkControlForm">
+					<div className="cp-finder-bulkcontrol-form">
 						<h3 className="title">{conf.label}</h3>
 						<ul className="inputs">
 							{conf.inputs.map((props)=>{
@@ -105,7 +105,7 @@ Catpow.Finder.BulkControl=(props)=>{
 	},[setModal]);
 	
 	return (
-		<div className="FinderControl FinderBulkControl">
+		<div className="cp-finder-control cp-finder-bulkcontrol">
 			<ul className="items">
 				<li className={'item'+(open?' active':'')}>
 					<div className="inputs">

@@ -4,7 +4,7 @@
     const { onChange, size = null, map = null } = props;
     const { useState, useMemo, useCallback, useEffect, useReducer } = wp.element;
     const { bem } = Catpow.util;
-    const classes = useMemo(() => bem("InputText"), []);
+    const classes = useMemo(() => bem("cp-inputtext"), []);
     const [value, setValue] = useState(props.value);
     const reverseMap = useMemo(() => {
       if (!map) {

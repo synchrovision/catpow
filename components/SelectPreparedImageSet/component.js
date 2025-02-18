@@ -1,7 +1,7 @@
 (() => {
   // ../components/SelectPreparedImageSet/component.jsx
   Catpow.SelectPreparedImageSet = (props) => {
-    const { className = "SelectPreparedImageSet", name, value, color, onChange, ...otherProps } = props;
+    const { className = "cp-selectpreparedimageset", name, value, color, onChange, ...otherProps } = props;
     const { useEffect, useReducer, useMemo } = wp.element;
     const { getURLparam, setURLparam, setURLparams, removeURLparam, bem } = Catpow.util;
     const classes = useMemo(() => bem(className), []);

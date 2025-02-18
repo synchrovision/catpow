@@ -1,6 +1,6 @@
 ﻿Catpow.Toggle=(props)=>{
 	const {useMemo,useState,useEffect}=wp.element;
-	const {className="Toggle",onChange,threashold=40}=props;
+	const {className="cp-toggle",onChange,threashold=40}=props;
 	const {bem}=Catpow.util;
 	const classes=useMemo(()=>bem(className),[]);
 	

@@ -21,8 +21,8 @@
 	},[props]);
 	
 	return (
-		<div className='FixedBG' ref={ref}>
-			<div className='FixedBG__contents' ref={bg}>
+		<div className='cp-fixedbg' ref={ref}>
+			<div className='cp-fixedbg__contents' ref={bg}>
 				{props.children}
 			</div>
 		</div>

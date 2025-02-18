@@ -10,13 +10,13 @@ Catpow.Finder.FilterControl=(props)=>{
 	const {cols}=state.index;
 	
 	return (
-		<div className="FinderControl FinderFilterControl">
+		<div className="cp-finder-control cp-finder-filtercontrol">
 			<ul className="items">
 				<li className={'item'+(Object.keys(state.query).length?' active':'')}>
 					<div className={"icon dashicons dashicons-filter"} onClick={()=>setOpen(!open)}></div>
 					<Catpow.Popover　open={open}>
-						<table className="FinderFilterControl__table">
-							<tbody className="FinderFilterControl__table-tbody">
+						<table className="cp-finder-filtercontrol__table">
+							<tbody className="cp-finder-filtercontrol__table-tbody">
 							{Object.keys(state.index.cols).map((key)=>{
 								const col=state.index.cols[key];
 								if(col.role==='group'){

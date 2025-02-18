@@ -3,13 +3,11 @@
   Catpow.Output = (props) => {
     const { conf, value } = props;
     const { createElemnt: el } = wp.element;
-    if (!value)
-      return "";
+    if (!value) return "";
     switch (conf.output_type) {
       case "group":
-        return /* @__PURE__ */ wp.element.createElement("ul", { className: "OutputGroup" }, Object.keys(value).map((key) => {
+        return /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-output-group" }, Object.keys(value).map((key) => {
           const row = value[key];
-          console.log(conf);
           return /* @__PURE__ */ wp.element.createElement("li", { className: "item", key }, Object.keys(conf.meta).map((name) => /* @__PURE__ */ wp.element.createElement("dl", { key: name }, /* @__PURE__ */ wp.element.createElement("dt", null, conf.meta[name].label), /* @__PURE__ */ wp.element.createElement("dd", null, /* @__PURE__ */ wp.element.createElement(Catpow.Output, { conf: conf.meta[name], value: row[name] })))));
         }));
       case "select":
@@ -19,10 +17,10 @@
         if (!labels.length) {
           return false;
         }
-        return /* @__PURE__ */ wp.element.createElement("ul", { className: "OutputLabels" }, labels.map((label, index) => /* @__PURE__ */ wp.element.createElement("li", { className: "item", key: index }, label)));
+        return /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-output-labels" }, labels.map((label, index) => /* @__PURE__ */ wp.element.createElement("li", { className: "item", key: index }, label)));
       }
       case "image":
-        return /* @__PURE__ */ wp.element.createElement("ul", { className: "OutputImages" }, /* @__PURE__ */ wp.element.createElement("li", { className: "item" }, props.images.map((image, index) => /* @__PURE__ */ wp.element.createElement("img", { className: "image", src: image.url, key: index }))));
+        return /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-output-images" }, /* @__PURE__ */ wp.element.createElement("li", { className: "item" }, props.images.map((image, index) => /* @__PURE__ */ wp.element.createElement("img", { className: "image", src: image.url, key: index }))));
       default:
         return value.join(",");
     }

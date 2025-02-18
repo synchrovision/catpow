@@ -1,5 +1,5 @@
 (() => {
-  // components/Finder/Focused/component.jsx
+  // ../components/Finder/Focused/component.jsx
   Catpow.Finder.Focused = (props) => {
     const { useState, useCallback, useContext } = wp.element;
     const { __, sprintf } = wp.i18n;
