@@ -130,7 +130,7 @@
 		const {Icon}=wp.components;
 		const {value,onChange}=props;
 		return (
-			<div className="colorset-modeselect">
+			<div className="cp-colorset-modeselect">
 				<Icon className={"colorset-modeselect__item"+(value==='pane'?' active':'')} icon="admin-settings" onClick={()=>onChange('pane')}/>
 				<Icon className={"colorset-modeselect__item"+(value==='bulk'?' active':'')} icon="media-text" onClick={()=>onChange('bulk')}/>
 			</div>
@@ -142,12 +142,12 @@
 		
 		
 		return (
-			<div className={"colorset-Palette__item "+(open?'open':'close')}>
+			<div className={"cp-colorset-palette__item "+(open?'open':'close')}>
 				<div className={"chip "+(isDarkColor(value[role])?'is-dark':'is-light')} onClick={onClick} style={{backgroundColor:value[role]}}>
 					<div className="label">{roles[role].label}</div>
 				</div>
 				<Catpow.Popover open={open}>
-					<div className="colorset-Palette__box">
+					<div className="cp-colorset-palette__box">
 						<ColorPicker
 							color={value[role]}
 							onChange={(value)=>{
@@ -164,8 +164,8 @@
 	const HueRange=useCallback((props)=>{
 		const {value}=props;
 		return (
-			<div className="colorset-huerange">
-				<div className="colorset-huerange__input">
+			<div className="cp-colorset-huerange">
+				<div className="cp-colorset-huerange__input">
 					<label>Range</label>
 					<input
 						type="range"
@@ -177,7 +177,7 @@
 						max={30}
 					/>
 				</div>
-				<div className="colorset-huerange__input">
+				<div className="cp-colorset-huerange__input">
 					<label>Shift</label>
 					<input
 						type="range"
@@ -237,9 +237,9 @@
 			);
 		},[value]);
 		return (
-			<div className="colorset-bulkinput">
+			<div className="cp-colorset-bulkinput">
 				<textarea
-					className="colorset-bulkinput__textarea"
+					className="cp-colorset-bulkinput__textarea"
 					value={tmp}
 					rows={Object.keys(roles).length+2}
 					onChange={(e)=>{
@@ -249,7 +249,7 @@
 					}}
 				/>
 				<Icon
-					className="colorset-bulkinput__clipboard"
+					className="cp-colorset-bulkinput__clipboard"
 					icon="clipboard"
 					onClick={()=>navigator.clipboard.writeText(tmp)}
 				/>
@@ -261,7 +261,7 @@
 		const Row=useCallback((props)=>{
 			const {h,s,l,hr,hs}=props;
 			return (
-				<div className="colorset-preview__row">
+				<div className="cp-colorset-preview__row">
 					{[...Array(12).keys()].map((i)=>(
 						<div className="colorset-preview__row__item" style={{backgroundColor:'hsl('+(h+hr*(i-6)+hs)+','+s+'%,'+l+'%)'}} key={i}></div>
 					))}
@@ -269,7 +269,7 @@
 			);
 		},[]);
 		return (
-			<div className="colorset-preview">
+			<div className="cp-colorset-preview">
 				<Row h={value.tones.b.h} s={value.tones.b.s} l={value.tones.b.l} hr={value.hueRange} hs={value.hueShift}/>
 				<Row h={value.tones.s.h} s={value.tones.s.s} l={value.tones.s.l} hr={value.hueRange} hs={value.hueShift}/>
 				<Row h={value.tones.m.h} s={value.tones.m.s} l={value.tones.m.l} hr={value.hueRange} hs={value.hueShift}/>
@@ -282,7 +282,7 @@
 	switch(inputMode){
 		case 'pane':{
 			return (
-				<div className="colorset">
+				<div className="cp-colorset">
 					<ModeSelect value={inputMode} onChange={setInputMode}/>
 					<div className="colorset-palette">
 						{Object.keys(roles).map((role)=><Palette role={role} value={colors} open={role===activeRole} onClick={()=>setActiveRole(role===activeRole?null:role)} key={role}/>)}
@@ -294,7 +294,7 @@
 		}
 		case 'bulk':{
 			return (
-				<div className="colorset">
+				<div className="cp-colorset">
 					<ModeSelect value={inputMode} onChange={setInputMode}/>
 					<BulkInput value={colors}/>
 					<Preview value={colors}/>
