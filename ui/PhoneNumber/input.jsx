@@ -63,7 +63,7 @@
 	const refs=[useRef({}),useRef({}),useRef({})];
 	
 	return (
-		<div className={'PhoneNumber'}>
+		<div className={'cpui-phonenumber'}>
 			<Input i={0} refs={refs} state={state} dispatch={dispatch}/>
 			<span className="sep">-</span>
 			<Input i={1} refs={refs} state={state} dispatch={dispatch}/>

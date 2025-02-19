@@ -1,7 +1,7 @@
 @import 'admin_style_config.scss';
 
 
-.DateSelect{
+.cpui-dateselect{
 	&>.inputs{
 		@include bnd((d:ib,mg:0 .5em,pd:5));
 		@include usr((c:p));

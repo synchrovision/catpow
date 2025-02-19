@@ -1,5 +1,5 @@
 (() => {
-  // ui/PieChart/output.jsx
+  // ../ui/PieChart/output.jsx
   Catpow.UI.PieChartOutput = (props) => {
     const { useState } = wp.element;
     var { rows, cols, width = 300, height = 300, padding = 50 } = props;
@@ -34,7 +34,7 @@
         )
       );
     });
-    return /* @__PURE__ */ wp.element.createElement("div", { className: "PieChart" }, /* @__PURE__ */ wp.element.createElement("svg", { viewBox: "0 0 " + width + " " + height }, /* @__PURE__ */ wp.element.createElement("g", { className: "graph" }, /* @__PURE__ */ wp.element.createElement("g", { className: rows[0].classes, "data-label": rows[0].label }, pies)), el(Catpow.ChartText, {
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "cpui-piechart" }, /* @__PURE__ */ wp.element.createElement("svg", { viewBox: "0 0 " + width + " " + height }, /* @__PURE__ */ wp.element.createElement("g", { className: "graph" }, /* @__PURE__ */ wp.element.createElement("g", { className: rows[0].classes, "data-label": rows[0].label }, pies)), el(Catpow.ChartText, {
       ...props,
       rowTitle: false,
       rowUnit: false,

@@ -10,7 +10,7 @@ Catpow.UI.Progress=({name,value,max=100,step=1})=>{
 		setVal(Math.round((e.clientX-bnd.left)/bnd.width*max/step)*step);
 	}
 	return (
-		<div className={'Progress'}>
+		<div className={'cpui-progress'}>
 			<progress
 				value={val}
 				max={max}

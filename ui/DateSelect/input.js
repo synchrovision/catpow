@@ -82,7 +82,7 @@
     }, [excludeCond]);
     const [state, dispatch] = useReducer(reducer, {});
     useEffect(() => dispatch({ type: "init" }), []);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: "DateSelect" }, /* @__PURE__ */ wp.element.createElement("div", { className: "inputs" }, /* @__PURE__ */ wp.element.createElement(Catpow.SelectNumber, { label: "---", min: state.minYear, max: state.maxYear, exclude: state.excludeYear, value: state.year, onChange: (year) => {
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "cpui-dateselect" }, /* @__PURE__ */ wp.element.createElement("div", { className: "inputs" }, /* @__PURE__ */ wp.element.createElement(Catpow.SelectNumber, { label: "---", min: state.minYear, max: state.maxYear, exclude: state.excludeYear, value: state.year, onChange: (year) => {
       dispatch({ type: "update", year });
     } }), /* @__PURE__ */ wp.element.createElement("span", { className: "unit" }, "\u5E74"), /* @__PURE__ */ wp.element.createElement(Catpow.SelectNumber, { label: "---", min: state.minMonth, max: state.maxMonth, exclude: state.excludeMonth, value: state.month, onChange: (month) => {
       dispatch({ type: "update", month });

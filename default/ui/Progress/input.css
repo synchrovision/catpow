@@ -1,7 +1,7 @@
-div.Progress progress, div.Progress progress:enabled {
+.cpui-progress progress, .cpui-progress progress:enabled {
   cursor: pointer;
 }
-div.Progress progress + input {
+.cpui-progress progress + input {
   margin-left: 1em;
 }
 /*# sourceMappingURL=./input.css.map */

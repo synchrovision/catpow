@@ -77,7 +77,7 @@
 		};
 		
 		return (
-			<div className={'DateSelect'}>
+			<div className={'cpui-dateselect'}>
 				<div className="value year" onClick={()=>{this.setState({yearSelecting:true})}}>{getDate('Y')}</div>
 				<Catpow.Popup open={this.state.yearSelecting} onClose={()=>this.setState({yearSelecting:false})}>
 					<Catpow.SelectTable

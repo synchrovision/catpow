@@ -41,7 +41,7 @@
 		}
 		
 		return (
-			<div className={'LineChart'}>
+			<div className={'cpui-linechart'}>
 				<svg viewBox="0 0 300 300">
 					{pies}
 				</svg>

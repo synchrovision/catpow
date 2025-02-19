@@ -1,6 +1,6 @@
 @import 'admin_style_config.scss';
 
-div.WeeklySchedule{
+.cpui-weeklyschedule{
 	@include bnd((p:r));
 	@include usr((s:n));
 	table.grid{

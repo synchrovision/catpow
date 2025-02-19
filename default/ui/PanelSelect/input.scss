@@ -1,6 +1,6 @@
 @import 'admin_style_config.scss';
 
-.PanelSelect{
+.cpui-panelselect{
 	@include flx((w:w));
 	&>.item,&>.spacer{
 		@include bnd((f:1 1 200,bs:b));

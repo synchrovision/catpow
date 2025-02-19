@@ -1,4 +1,4 @@
-div.PhoneNumber input {
+.cpui-phonenumber input {
   width: 4ch;
   box-sizing: content-box;
 }

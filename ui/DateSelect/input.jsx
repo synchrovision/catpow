@@ -87,7 +87,7 @@
 	useEffect(()=>dispatch({type:'init'}),[]);
 	
 	return (
-		<div className='DateSelect'>
+		<div className='cpui-dateselect'>
 			<div className="inputs">
 				<Catpow.SelectNumber label="---" min={state.minYear} max={state.maxYear} exclude={state.excludeYear} value={state.year} onChange={(year)=>{dispatch({type:'update',year})}}/>
 				<span className="unit">年</span>

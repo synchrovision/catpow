@@ -1,5 +1,5 @@
 (() => {
-  // ../../catpow/ui/PieChart/input.jsx
+  // ../ui/PieChart/input.jsx
   Catpow.UI.PieChart = class extends wp.element.Component {
     constructor(props) {
       super(props);
@@ -38,7 +38,7 @@
           /* @__PURE__ */ wp.element.createElement("path", { d, stroke: "red" })
         );
       }
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "PieChart" }, /* @__PURE__ */ wp.element.createElement("svg", { viewBox: "0 0 300 300" }, pies, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "cpui-piechart" }, /* @__PURE__ */ wp.element.createElement("svg", { viewBox: "0 0 300 300" }, pies, /* @__PURE__ */ wp.element.createElement(
         "rect",
         {
           className: "control",

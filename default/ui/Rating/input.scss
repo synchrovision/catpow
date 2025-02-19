@@ -1,6 +1,6 @@
 @import 'admin_style_config.scss';
 
-.Rating{
+.cpui-rating{
 	&-points{
 		@include bnd((pd:8 0));
 		@include flx((w:n,g:4));

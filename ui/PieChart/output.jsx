@@ -36,7 +36,7 @@
 	
 		
 	return (
-		<div className={'PieChart'}>
+		<div className={'cpui-piechart'}>
 			<svg viewBox={"0 0 "+width+" "+height}>
 				<g className="graph">
 					<g className={rows[0].classes} data-label={rows[0].label}>

@@ -1,5 +1,5 @@
 (() => {
-  // ui/BarChart/output.jsx
+  // ../ui/BarChart/output.jsx
   Catpow.UI.BarChartOutput = (props) => {
     var colsSvg = [], rowsSvg = [], textsSvg = [];
     var { rows, cols, width = 300, height = 300, padding = 50, total } = props;
@@ -49,6 +49,6 @@
         return valPos[r][c];
       }
     };
-    return /* @__PURE__ */ wp.element.createElement("div", { className: "BarChart" }, /* @__PURE__ */ wp.element.createElement("svg", { viewBox: "0 0 " + width + " " + height }, /* @__PURE__ */ wp.element.createElement("g", { className: "graph" }, /* @__PURE__ */ wp.element.createElement("g", { className: "cols" }, colsSvg), /* @__PURE__ */ wp.element.createElement("g", { className: "rows" }, rowsSvg)), el(Catpow.ChartText, props)));
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "cpui-barchart" }, /* @__PURE__ */ wp.element.createElement("svg", { viewBox: "0 0 " + width + " " + height }, /* @__PURE__ */ wp.element.createElement("g", { className: "graph" }, /* @__PURE__ */ wp.element.createElement("g", { className: "cols" }, colsSvg), /* @__PURE__ */ wp.element.createElement("g", { className: "rows" }, rowsSvg)), el(Catpow.ChartText, props)));
   };
 })();

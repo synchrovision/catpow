@@ -1,7 +1,7 @@
 @import 'admin_style_config.scss';
 
 
-div.ZipCode{
+.cpui-zipcode{
 	input.sec0{
 		@include bnd((w:3ch,bs:c));
 	}

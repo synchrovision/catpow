@@ -1,6 +1,6 @@
 @import 'admin_style_config.scss';
 
-.SelectColor{
+.cpui-selectcolor{
 	@include bnd((w:300));
 	&-items{
 		@include bnd((w:300,mg:4 0));

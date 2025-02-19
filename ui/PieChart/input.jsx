@@ -41,7 +41,7 @@
 		}
 		
 		return (
-			<div className={'PieChart'}>
+			<div className={'cpui-piechart'}>
 				<svg viewBox="0 0 300 300">
 					{pies}
 					<rect

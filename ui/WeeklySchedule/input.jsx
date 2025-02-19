@@ -99,7 +99,7 @@ Catpow.UI.WeeklySchedule=class extends wp.element.Component{
 		
 		
 		return (
-			<div className={'WeeklySchedule'}>
+			<div className={'cpui-weeklyschedule'}>
 				<table className="grid">
 					<thead>
 						<tr>
@@ -119,7 +119,7 @@ Catpow.UI.WeeklySchedule=class extends wp.element.Component{
 					</tbody>
 				</table>
 				<Catpow.DrawArea
-					className="DrawArea"
+					className="cpui-weeklyschedule-drawarea"
 					onCatch={(e)=>{
 						//console.log(e);
 					}}

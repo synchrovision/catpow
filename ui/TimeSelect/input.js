@@ -1,5 +1,5 @@
 (() => {
-  // ui/TimeSelect/input.jsx
+  // ../ui/TimeSelect/input.jsx
   Catpow.UI.TimeSelect = class extends wp.element.Component {
     constructor(props) {
       super(props);
@@ -32,7 +32,7 @@
         vals[i] = val;
         this.setState({ value: vals.join(":") });
       };
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "TimeSelect" }, /* @__PURE__ */ wp.element.createElement("select", { onChange: (e) => {
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "cpui-timeselect" }, /* @__PURE__ */ wp.element.createElement("select", { onChange: (e) => {
         setTime(0, e.target.value);
       }, value: vals[0] }, this.state.selections.hour), /* @__PURE__ */ wp.element.createElement("span", { className: "delimiter" }, ":"), /* @__PURE__ */ wp.element.createElement("select", { onChange: (e) => {
         setTime(1, e.target.value);

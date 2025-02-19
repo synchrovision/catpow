@@ -10,7 +10,7 @@
 		var {cart,payment}=this.props;
 		
 		return (
-			<div className={'Payment'}>
+			<div className={'cpui-payment'}>
 				
 				<Catpow.UI.HiddenValues
 					name={this.props.name}

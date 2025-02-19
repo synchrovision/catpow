@@ -9,7 +9,7 @@ Catpow.UI.SelectPreparedImage=(props)=>{
 	const [value,setValue]=useState(props.value);
 	const [images,setImages]=useState([]);
 	const {bem}=Catpow.util;
-	const classes=bem('SelectPreparedImage')
+	const classes=bem('cpui-selectpreparedimage')
 	const [isOpen,setIsOpen]=useState(false);
 	const [search,setSearch]=useState('');
 	

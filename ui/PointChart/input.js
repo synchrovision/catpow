@@ -1,5 +1,5 @@
 (() => {
-  // ui/PointChart/input.jsx
+  // ../ui/PointChart/input.jsx
   Catpow.UI.PointChart = class extends wp.element.Component {
     constructor(props) {
       super(props);
@@ -35,7 +35,7 @@
     render() {
       var { value, press } = this.state;
       var pos = this.val2pos(value);
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "PointChart" }, /* @__PURE__ */ wp.element.createElement("svg", { viewBox: "0 0 300 300" }, this.base, /* @__PURE__ */ wp.element.createElement("line", { className: "valLine", x1: pos.x, x2: pos.x, y1: this.bodyBnd.t, y2: this.bodyBnd.b }), /* @__PURE__ */ wp.element.createElement("line", { className: "valLine", x1: this.bodyBnd.l, x2: this.bodyBnd.r, y1: pos.y, y2: pos.y }), /* @__PURE__ */ wp.element.createElement("rect", { className: "point", x: pos.x - 5, y: pos.y - 5, width: "10", height: "10" }), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "cpui-pointchart" }, /* @__PURE__ */ wp.element.createElement("svg", { viewBox: "0 0 300 300" }, this.base, /* @__PURE__ */ wp.element.createElement("line", { className: "valLine", x1: pos.x, x2: pos.x, y1: this.bodyBnd.t, y2: this.bodyBnd.b }), /* @__PURE__ */ wp.element.createElement("line", { className: "valLine", x1: this.bodyBnd.l, x2: this.bodyBnd.r, y1: pos.y, y2: pos.y }), /* @__PURE__ */ wp.element.createElement("rect", { className: "point", x: pos.x - 5, y: pos.y - 5, width: "10", height: "10" }), /* @__PURE__ */ wp.element.createElement(
         "rect",
         {
           className: "control",

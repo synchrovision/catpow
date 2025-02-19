@@ -32,7 +32,7 @@
 		};
 		
 		return (
-			<div className={'TimeSelect'}>
+			<div className={'cpui-timeselect'}>
 				<select onChange={(e)=>{setTime(0,e.target.value);}} value={vals[0]}>
 					{this.state.selections.hour}
 				</select>

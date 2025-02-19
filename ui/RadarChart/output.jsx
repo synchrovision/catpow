@@ -41,7 +41,7 @@
 		}
 		
 		return (
-			<div className={'RadarChart'}>
+			<div className={'cpui-radarchart'}>
 				<svg viewBox="0 0 300 300">
 					{pies}
 				</svg>

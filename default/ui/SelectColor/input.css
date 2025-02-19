@@ -1,7 +1,7 @@
-.SelectColor {
+.cpui-selectcolor {
   width: 18.75rem;
 }
-.SelectColor-items {
+.cpui-selectcolor-items {
   width: 18.75rem;
   margin: 0.25rem 0rem;
   display: -webkit-box;
@@ -12,13 +12,13 @@
   flex-wrap: nowrap;
   list-style: none;
 }
-.SelectColor-items-icon {
+.cpui-selectcolor-items-icon {
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a) * 0.2));
 }
-.SelectColor-items-icon.active {
+.cpui-selectcolor-items-icon.active {
   color: at;
 }
-.SelectColor-items-item {
+.cpui-selectcolor-items-item {
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
@@ -30,7 +30,7 @@
   border-top-width: 0.625rem;
   border-top-color: hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),var(--cp-tones-a-l),var(--cp-tones-a-a));
 }
-.SelectColor-items-item:not(.active) {
+.cpui-selectcolor-items-item:not(.active) {
   opacity: 0.2;
 }
 /*# sourceMappingURL=./input.css.map */

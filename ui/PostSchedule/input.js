@@ -23,13 +23,13 @@
     const save = useCallback((key, value, result) => {
       dispatch({ type: "SAVE" });
     }, [dispatch]);
-    return /* @__PURE__ */ React.createElement("div", { className: "PostSchedule" }, /* @__PURE__ */ React.createElement("div", { className: "PostSchedule__contents" }, /* @__PURE__ */ React.createElement(Catpow.CheckBox, { selected: usePostSchedule, onChange: () => setUsePostSchedule(!usePostSchedule) }), usePostSchedule && /* @__PURE__ */ React.createElement(Fragment, null, /* @__PURE__ */ React.createElement(Catpow.InputDateTime, { value: state.value.time * 1e3, onChange: (time) => {
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "cpui-postschedule" }, /* @__PURE__ */ wp.element.createElement("div", { className: "PostSchedule__contents" }, /* @__PURE__ */ wp.element.createElement(Catpow.CheckBox, { selected: usePostSchedule, onChange: () => setUsePostSchedule(!usePostSchedule) }), usePostSchedule && /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement(Catpow.InputDateTime, { value: state.value.time * 1e3, onChange: (time) => {
       state.value.time = Math.floor(time / 1e3);
       save();
-    } }), /* @__PURE__ */ React.createElement(Catpow.SelectBox, { options: statuses, value: state.value.status || "trash", onChange: (status) => {
+    } }), /* @__PURE__ */ wp.element.createElement(Catpow.SelectBox, { options: statuses, value: state.value.status || "trash", onChange: (status) => {
       state.value.status = status;
       save();
-    } }), state.value && /* @__PURE__ */ React.createElement(
+    } }), state.value && /* @__PURE__ */ wp.element.createElement(
       Catpow.UI.HiddenValues,
       {
         name: props.name,

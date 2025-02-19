@@ -32,9 +32,9 @@
 	},[]);
 	
 	return (
-		<div className={'TaskProcess'}>
+		<div className={'cpui-taskprocess'}>
 			{files.map((file)=>(
-				<div className="TaskProcess__content">
+				<div className="cpui-taskprocess__content">
 					<CheckBoxes options={processOptions} value={state.value} onChange={save}/>
 					<CheckBox label={__("タスク発行")} selected={state.value.create} onChange={(value)=>{state.value.create=value?{}:false;save();}}/>
 					{state.value.create && (

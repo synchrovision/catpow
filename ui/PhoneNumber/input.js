@@ -65,7 +65,7 @@
       }
     ), []);
     const refs = [useRef({}), useRef({}), useRef({})];
-    return /* @__PURE__ */ wp.element.createElement("div", { className: "PhoneNumber" }, /* @__PURE__ */ wp.element.createElement(Input, { i: 0, refs, state, dispatch }), /* @__PURE__ */ wp.element.createElement("span", { className: "sep" }, "-"), /* @__PURE__ */ wp.element.createElement(Input, { i: 1, refs, state, dispatch }), /* @__PURE__ */ wp.element.createElement("span", { className: "sep" }, "-"), /* @__PURE__ */ wp.element.createElement(Input, { i: 2, refs, state, dispatch }), /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "cpui-phonenumber" }, /* @__PURE__ */ wp.element.createElement(Input, { i: 0, refs, state, dispatch }), /* @__PURE__ */ wp.element.createElement("span", { className: "sep" }, "-"), /* @__PURE__ */ wp.element.createElement(Input, { i: 1, refs, state, dispatch }), /* @__PURE__ */ wp.element.createElement("span", { className: "sep" }, "-"), /* @__PURE__ */ wp.element.createElement(Input, { i: 2, refs, state, dispatch }), /* @__PURE__ */ wp.element.createElement(
       Catpow.UI.HiddenValues,
       {
         name: props.name,

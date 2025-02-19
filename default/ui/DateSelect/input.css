@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.DateSelect > .inputs {
+.cpui-dateselect > .inputs {
   display: inline-block;
   margin: 0rem 0.5em;
   padding: 0.3125rem;
@@ -7,21 +7,21 @@
   text-align: center;
   font-size: 0.9375rem;
 }
-.DateSelect > .inputs .input {
+.cpui-dateselect > .inputs .input {
   text-align: right;
 }
-.DateSelect > .inputs .input.year {
+.cpui-dateselect > .inputs .input.year {
   width: 7ch;
 }
-.DateSelect > .inputs .input.month, .DateSelect > .inputs .input.date {
+.cpui-dateselect > .inputs .input.month, .cpui-dateselect > .inputs .input.date {
   width: 5ch;
 }
-.DateSelect > .inputs .btn {
+.cpui-dateselect > .inputs .btn {
   display: inline-block;
   margin-left: 0.5em;
   vertical-align: middle;
 }
-.DateSelect > .inputs .btn::before {
+.cpui-dateselect > .inputs .btn::before {
   content: "";
   font-family: dashicons;
 }

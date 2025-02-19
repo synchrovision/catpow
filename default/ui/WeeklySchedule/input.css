@@ -1,51 +1,49 @@
-div.WeeklySchedule {
+.cpui-weeklyschedule {
   position: relative;
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
-  -o-user-select: none;
   user-select: none;
 }
-div.WeeklySchedule table.grid {
+.cpui-weeklyschedule table.grid {
   position: relative;
   width: 100%;
   text-align: center;
   font-size: 0.625rem;
-  color: #c7c7c7;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 30),var(--cp-tones-t-a));
   table-layout: fixed;
   border-collapse: collapse;
   border-spacing: 0px;
 }
-div.WeeklySchedule table.grid td, div.WeeklySchedule table.grid th {
+.cpui-weeklyschedule table.grid td, .cpui-weeklyschedule table.grid th {
   height: 1.25rem;
   box-sizing: border-box;
 }
-div.WeeklySchedule table.grid tbody td {
+.cpui-weeklyschedule table.grid tbody td {
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: #c7c7c7;
+  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 30),var(--cp-tones-t-a));
 }
-div.WeeklySchedule .DrawArea {
+.cpui-weeklyschedule .DrawArea {
   position: absolute;
   top: 1.25rem;
   bottom: 0rem;
   left: 12.5%;
   right: 0rem;
 }
-div.WeeklySchedule .DrawArea:hover {
+.cpui-weeklyschedule .DrawArea:hover {
   cursor: grab;
 }
-div.WeeklySchedule .DrawArea .base {
+.cpui-weeklyschedule .DrawArea .base {
   position: absolute;
   top: 0rem;
   bottom: 0rem;
   left: 0rem;
   right: 0rem;
 }
-div.WeeklySchedule .DrawArea .rect {
-  background-color: rgba(0, 124, 186, 0.5);
+.cpui-weeklyschedule .DrawArea .rect {
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 100),calc(var(--cp-tones-m-a) * 0.5));
 }
-div.WeeklySchedule .DrawArea .rect .handler.moveStart {
+.cpui-weeklyschedule .DrawArea .rect .handler.moveStart {
   position: absolute;
   height: 0.375rem;
   top: -0.1875rem;
@@ -53,7 +51,7 @@ div.WeeklySchedule .DrawArea .rect .handler.moveStart {
   right: 0rem;
   cursor: row-resize;
 }
-div.WeeklySchedule .DrawArea .rect .handler.moveEnd {
+.cpui-weeklyschedule .DrawArea .rect .handler.moveEnd {
   position: absolute;
   height: 0.375rem;
   bottom: -0.1875rem;

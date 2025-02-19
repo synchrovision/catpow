@@ -1,7 +1,7 @@
 @import 'admin_style_config.scss';
 
 
-div.PointChart{
+.cpui-pointchart{
 	@include bnd((w:300));
 	svg{
 		rect.control{@include svg((f:n));@include usr((c:p));}

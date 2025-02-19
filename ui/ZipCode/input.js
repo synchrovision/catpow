@@ -1,5 +1,5 @@
 (() => {
-  // ui/ZipCode/input.jsx
+  // ../ui/ZipCode/input.jsx
   Catpow.UI.ZipCode = (props) => {
     const { useState, useCallback, useReducer, useMemo, useEffect, useRef } = wp.element;
     const [isComposing, setIsComposing] = useState(false);
@@ -55,7 +55,7 @@
         }
       );
     }, [update, refs]);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: "ZipCode" }, /* @__PURE__ */ wp.element.createElement(Input, { index: 0, value: state.secs[0] }), /* @__PURE__ */ wp.element.createElement("span", { className: "sep" }, "-"), /* @__PURE__ */ wp.element.createElement(Input, { index: 1, value: state.secs[1] }), /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "cpui-zipcode" }, /* @__PURE__ */ wp.element.createElement(Input, { index: 0, value: state.secs[0] }), /* @__PURE__ */ wp.element.createElement("span", { className: "sep" }, "-"), /* @__PURE__ */ wp.element.createElement(Input, { index: 1, value: state.secs[1] }), /* @__PURE__ */ wp.element.createElement(
       Catpow.UI.HiddenValues,
       {
         name: props.name,

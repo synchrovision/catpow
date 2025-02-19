@@ -1,6 +1,6 @@
 @import 'admin_style_config.scss';
 
-.SelectPreparedImage{
+.cpui-selectpreparedimage{
 	@include bnd((p:r));
 	&-icon{
 		@include bnd((d:b,w:fit,pd:4));

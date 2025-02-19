@@ -48,7 +48,7 @@
 		var pos=this.val2pos(value);
 		
 		return (
-			<div className={'PointChart'}>
+			<div className={'cpui-pointchart'}>
 				<svg viewBox="0 0 300 300">
 					{this.base}
 					<line className="valLine" x1={pos.x} x2={pos.x} y1={this.bodyBnd.t} y2={this.bodyBnd.b}></line>

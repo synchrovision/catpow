@@ -22,7 +22,7 @@
 	},[dispatch]);
     
 	return (
-		<div className={'PostSchedule'}>
+		<div className={'cpui-postschedule'}>
 			<div className="PostSchedule__contents">
 				<Catpow.CheckBox selected={usePostSchedule} onChange={()=>setUsePostSchedule(!usePostSchedule)}/>
 				{usePostSchedule && (

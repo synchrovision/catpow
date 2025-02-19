@@ -3,7 +3,7 @@ Catpow.UI.Rating=({name,value,max=5})=>{
 	const {useState,useCallback}=wp.element;
 	const [val,setVal]=useState(value);
 	const {bem}=Catpow.util;
-	const classes=bem('Rating');
+	const classes=bem('cpui-rating');
 	
 	return (
 		<div className={classes()} style={{'--rating-max':max,'--rating-value':val,'--rating-ratio':val/max}}>

@@ -4,7 +4,7 @@
     const { useState, useReducer, useMemo, useCallback } = wp.element;
     const { __ } = wp.i18n;
     const { bem } = Catpow.util;
-    const classes = useMemo(() => bem("GoogleMap"), []);
+    const classes = useMemo(() => bem("cpui-googlemap"), []);
     const init = useCallback((state2) => {
       if (props.value && typeof props.value === "string" && props.value.startsWith("https://www.google.com/maps")) {
         state2.value = props.value;

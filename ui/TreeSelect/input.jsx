@@ -59,7 +59,7 @@ Catpow.UI.TreeSelect=class extends wp.element.Component{
 		var items=this.state.openPath.map((key,i)=>{
 			var crr=sels;
 			sels=sels[key] || [];
-			var classes='selectBox level'+i;
+			var classes='cpui-selectbox level'+i;
 			if(i==currentLevel){classes+=' active';}
 			else if(i==currentLevel-1){classes+=' prev';}
 			return (
@@ -69,10 +69,10 @@ Catpow.UI.TreeSelect=class extends wp.element.Component{
 							this.setState({openPath:this.state.openPath.slice(0,i)});
 						}}> </div>
 					}
-					<ul className='selectBoxItems'>
+					<ul className='cpui-selectbox-items'>
 						{Object.keys(crr).map(k=>{
 							return (
-								<li className={'selectBoxItem '+(k==key?'selected':'')}>
+								<li className={'cpui-selectbox-items__item '+(k==key?'selected':'')}>
 									<h3 onClick={(e)=>{
 										var openPath=this.state.openPath.slice(0,i);
 										openPath.push(k);
@@ -97,7 +97,7 @@ Catpow.UI.TreeSelect=class extends wp.element.Component{
 			);
 		});
 		
-		var classes='treeSelect depth'+currentLevel;
+		var classes='cpui-treeselect depth'+currentLevel;
 		if(this.state.selecting){classes+=' selecting'}
 		return (
 			<div className={classes}>

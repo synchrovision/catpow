@@ -34,7 +34,7 @@
           this.setState({ value: value2 });
         }).open();
       };
-      return /* @__PURE__ */ React.createElement("div", { className: "Media" }, el(type, { src, className: "preview", onClick: selectMedia }), /* @__PURE__ */ React.createElement(
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "cpui-media" }, el(type, { src, className: "preview", onClick: selectMedia }), /* @__PURE__ */ wp.element.createElement(
         Catpow.UI.HiddenValues,
         {
           name: this.props.name,

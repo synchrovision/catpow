@@ -35,10 +35,10 @@
         d += " A " + this.bodyBnd.r + " " + this.bodyBnd.r + " 0 " + (v * 2 > this.total ? "1" : "0") + " 1 " + crrPos.x + " " + crrPos.y;
         d += " L " + this.bodyBnd.ox + " " + this.bodyBnd.oy;
         pies.push(
-          /* @__PURE__ */ React.createElement("path", { d, stroke: "red" })
+          /* @__PURE__ */ wp.element.createElement("path", { d, stroke: "red" })
         );
       }
-      return /* @__PURE__ */ React.createElement("div", { className: "RadarChart" }, /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 300 300" }, pies));
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "cpui-radarchart" }, /* @__PURE__ */ wp.element.createElement("svg", { viewBox: "0 0 300 300" }, pies));
     }
   };
 })();

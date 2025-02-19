@@ -1,6 +1,6 @@
 @import 'admin_style_config.scss';
 
-div.Progress{
+.cpui-progress{
 	progress{
 		&,&:enabled{@include usr((c:p));}
 		&+input{

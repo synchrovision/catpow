@@ -1,35 +1,35 @@
-div.PointChart {
+.cpui-pointchart {
   width: 18.75rem;
 }
-div.PointChart svg rect.control {
+.cpui-pointchart svg rect.control {
   fill: transparent;
   cursor: pointer;
 }
-div.PointChart svg .valLine {
-  stroke: rgba(68, 68, 68, 0.3);
+.cpui-pointchart svg .valLine {
+  stroke: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a) * 0.3));
   stroke-width: 0.0625rem;
 }
-div.PointChart svg .base rect.bg {
+.cpui-pointchart svg .base rect.bg {
   stroke: transparent;
-  fill: rgba(68, 68, 68, 0.1);
+  fill: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a) * 0.1));
 }
-div.PointChart svg .base line.baseLine {
-  stroke: #444;
+.cpui-pointchart svg .base line.baseLine {
+  stroke: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a));
   stroke-width: 0.0625rem;
 }
-div.PointChart svg .base text.label.left {
+.cpui-pointchart svg .base text.label.left {
   text-anchor: end;
   dominant-baseline: middle;
 }
-div.PointChart svg .base text.label.right {
+.cpui-pointchart svg .base text.label.right {
   text-anchor: start;
   dominant-baseline: middle;
 }
-div.PointChart svg .base text.label.top {
+.cpui-pointchart svg .base text.label.top {
   text-anchor: middle;
   dominant-baseline: baseline;
 }
-div.PointChart svg .base text.label.bottom {
+.cpui-pointchart svg .base text.label.bottom {
   text-anchor: middle;
   dominant-baseline: hanging;
 }

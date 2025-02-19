@@ -1,6 +1,6 @@
 @import 'admin_style_config.scss';
 
-div.SearchSelect{
+.cpui-searchselect{
 	.currentLabel{
 		@include bnd((d:ib,mg:0 .5em,pd:5 10));
 		@include bdr((s:s,w:1,c:t 50,r:5));

@@ -9,7 +9,7 @@
 		}
 	},[props]);
 	return (
-		<div className={'HiddenValues'} style={{display:"none"}}>
+		<div className={'cpui-hiddenvalues'} style={{display:"none"}}>
 			{hiddenInput(props.name,props.value)}
 		</div>
 	);

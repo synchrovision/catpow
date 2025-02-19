@@ -1,4 +1,4 @@
-.PanelSelect {
+.cpui-panelselect {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -6,7 +6,7 @@
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-.PanelSelect > .item, .PanelSelect > .spacer {
+.cpui-panelselect > .item, .cpui-panelselect > .spacer {
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;

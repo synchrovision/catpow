@@ -6,7 +6,7 @@
 	const [month,setMonth]=useState(d.getMonth()+1);
 	
 	return (
-		<div className='CalendarSelect'>
+		<div className='cpui-calendarselect'>
 			<Catpow.Calendar
 				className='medium'
 				year={year}

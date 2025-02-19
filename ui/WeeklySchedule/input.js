@@ -1,5 +1,5 @@
 (() => {
-  // ui/WeeklySchedule/input.jsx
+  // ../ui/WeeklySchedule/input.jsx
   Catpow.UI.WeeklySchedule = class extends wp.element.Component {
     constructor(props) {
       super(props);
@@ -18,7 +18,7 @@
       let { value, step, range, id } = this.state;
       var hs = [];
       if (!id) {
-        this.setState({ id: "ws" + new Date().getTime().toString(16) });
+        this.setState({ id: "ws" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
       }
       const save = () => {
         this.setState({ value: JSON.parse(JSON.stringify(value)) });
@@ -93,12 +93,12 @@
         return /* @__PURE__ */ wp.element.createElement("div", { className: "item event", "data-index": index }, rcts.map((rectProps) => /* @__PURE__ */ wp.element.createElement(Rect, { className: "rect", "data-drawaction": "move", ...rectProps })));
       };
       var events = value.map((eventProps, index) => /* @__PURE__ */ wp.element.createElement(Event, { index, ...eventProps }));
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "WeeklySchedule" }, /* @__PURE__ */ wp.element.createElement("table", { className: "grid" }, /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "spacer" }), Array.from({ length: 7 }).map((_, i) => /* @__PURE__ */ wp.element.createElement("th", null, this.dayLabels[i])))), /* @__PURE__ */ wp.element.createElement("tbody", null, Array.from({ length: 24 }).map((_, i) => {
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "cpui-weeklyschedule" }, /* @__PURE__ */ wp.element.createElement("table", { className: "grid" }, /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "spacer" }), Array.from({ length: 7 }).map((_, i) => /* @__PURE__ */ wp.element.createElement("th", null, this.dayLabels[i])))), /* @__PURE__ */ wp.element.createElement("tbody", null, Array.from({ length: 24 }).map((_, i) => {
         return /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, i, ":00"), Array.from({ length: 7 }).map((_2, i2) => /* @__PURE__ */ wp.element.createElement("td", null)));
       }))), /* @__PURE__ */ wp.element.createElement(
         Catpow.DrawArea,
         {
-          className: "DrawArea",
+          className: "cpui-weeklyschedule-drawarea",
           onCatch: (e) => {
           },
           onDraw: (e) => {

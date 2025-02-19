@@ -6,7 +6,7 @@
     }
     render() {
       var { cart, payment } = this.props;
-      return /* @__PURE__ */ React.createElement("div", { className: "Payment" }, /* @__PURE__ */ React.createElement(
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "cpui-payment" }, /* @__PURE__ */ wp.element.createElement(
         Catpow.UI.HiddenValues,
         {
           name: this.props.name,

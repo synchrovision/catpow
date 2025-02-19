@@ -56,7 +56,7 @@
 	},[update,refs]);
 
 	return (
-		<div className={'ZipCode'}>
+		<div className={'cpui-zipcode'}>
 			<Input index={0} value={state.secs[0]}/>
 			<span className="sep">-</span>
 			<Input index={1} value={state.secs[1]}/>

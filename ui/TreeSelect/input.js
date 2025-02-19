@@ -53,16 +53,16 @@
       var items = this.state.openPath.map((key, i) => {
         var crr = sels;
         sels = sels[key] || [];
-        var classes2 = "selectBox level" + i;
+        var classes2 = "cpui-selectbox level" + i;
         if (i == currentLevel) {
           classes2 += " active";
         } else if (i == currentLevel - 1) {
           classes2 += " prev";
         }
-        return /* @__PURE__ */ React.createElement("div", { className: classes2 }, i > 0 && /* @__PURE__ */ React.createElement("div", { className: "backToPrev", onClick: (e) => {
+        return /* @__PURE__ */ wp.element.createElement("div", { className: classes2 }, i > 0 && /* @__PURE__ */ wp.element.createElement("div", { className: "backToPrev", onClick: (e) => {
           this.setState({ openPath: this.state.openPath.slice(0, i) });
-        } }, " "), /* @__PURE__ */ React.createElement("ul", { className: "selectBoxItems" }, Object.keys(crr).map((k) => {
-          return /* @__PURE__ */ React.createElement("li", { className: "selectBoxItem " + (k == key ? "selected" : "") }, /* @__PURE__ */ React.createElement("h3", { onClick: (e) => {
+        } }, " "), /* @__PURE__ */ wp.element.createElement("ul", { className: "cpui-selectbox-items" }, Object.keys(crr).map((k) => {
+          return /* @__PURE__ */ wp.element.createElement("li", { className: "cpui-selectbox-items__item " + (k == key ? "selected" : "") }, /* @__PURE__ */ wp.element.createElement("h3", { onClick: (e) => {
             var openPath = this.state.openPath.slice(0, i);
             openPath.push(k);
             if (crr[k] instanceof Object) {
@@ -79,11 +79,11 @@
           } }, crr instanceof Array ? crr[k] : k));
         })));
       });
-      var classes = "treeSelect depth" + currentLevel;
+      var classes = "cpui-treeselect depth" + currentLevel;
       if (this.state.selecting) {
         classes += " selecting";
       }
-      return /* @__PURE__ */ React.createElement("div", { className: classes }, /* @__PURE__ */ React.createElement(
+      return /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement(
         "div",
         {
           className: "currentLabel",
@@ -91,8 +91,8 @@
             this.setState({ selecting: !this.state.selecting });
           }
         },
-        /* @__PURE__ */ React.createElement("h3", null, currentLabel || this.props.defaultLabel)
-      ), /* @__PURE__ */ React.createElement(Catpow.Popup, { open: this.state.selecting, onClose: () => this.setState({ selecting: false }) }, /* @__PURE__ */ React.createElement("div", { className: "selectBoxes" }, items)), /* @__PURE__ */ React.createElement(Catpow.UI.HiddenValues, { name: this.props.name, value: this.state.value }));
+        /* @__PURE__ */ wp.element.createElement("h3", null, currentLabel || this.props.defaultLabel)
+      ), /* @__PURE__ */ wp.element.createElement(Catpow.Popup, { open: this.state.selecting, onClose: () => this.setState({ selecting: false }) }, /* @__PURE__ */ wp.element.createElement("div", { className: "selectBoxes" }, items)), /* @__PURE__ */ wp.element.createElement(Catpow.UI.HiddenValues, { name: this.props.name, value: this.state.value }));
     }
   };
 })();

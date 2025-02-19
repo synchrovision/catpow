@@ -1,19 +1,19 @@
-div.SearchSelect .currentLabel {
+.cpui-searchselect .currentLabel {
   display: inline-block;
   margin: 0rem 0.5em;
   padding: 0.3125rem 0.625rem;
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 50),1);
+  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 50),var(--cp-tones-t-a));
   border-radius: 0.3125rem;
   text-align: center;
   font-size: 0.9375rem;
   cursor: pointer;
 }
-div.SearchSelect .searchBox {
+.cpui-searchselect .searchBox {
   padding: 0.625rem;
 }
-div.SearchSelect .searchBox input.searchInput {
+.cpui-searchselect .searchBox input.searchInput {
   display: block;
   width: 100%;
   box-sizing: border-box;
@@ -24,7 +24,7 @@ div.SearchSelect .searchBox input.searchInput {
   background-repeat: no-repeat;
   background-position: 0.625rem 50%;
 }
-div.SearchSelect .selectBox {
+.cpui-searchselect .selectBox {
   min-height: 18.75rem;
   height: auto;
   padding: 0.625rem;

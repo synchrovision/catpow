@@ -32,7 +32,7 @@
 		}
 		
 		return (
-			<div className={'Media'}>
+			<div className={'cpui-media'}>
 				{el(type,{src,className:'preview',onClick:selectMedia})}
 				<Catpow.UI.HiddenValues
 					name={this.props.name}

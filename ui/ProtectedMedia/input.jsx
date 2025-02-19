@@ -4,7 +4,7 @@
 	const [value,setValue]=useState(props.value);
 	
 	return (
-		<div className={'ProtectedMedia'}>
+		<div className={'cpui-protectedmedia'}>
 			<SelectMedia
 				src={value.url || props.default.url}
 				mime={value.mime || props.default.mime}

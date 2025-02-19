@@ -55,7 +55,7 @@
 	};
 
 	return (
-		<div className={'BarChart'}>
+		<div className={'cpui-barchart'}>
 			<svg viewBox={"0 0 "+width+" "+height}>
 				<g className="graph">
 					<g className="cols">{colsSvg}</g>

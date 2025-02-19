@@ -11,7 +11,7 @@
       const bnd = e.currentTarget.getBoundingClientRect();
       setVal(Math.round((e.clientX - bnd.left) / bnd.width * max / step) * step);
     };
-    return /* @__PURE__ */ React.createElement("div", { className: "Progress" }, /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ wp.element.createElement("div", { className: "cpui-progress" }, /* @__PURE__ */ wp.element.createElement(
       "progress",
       {
         value: val,
@@ -22,7 +22,7 @@
         onMouseLeave: () => setDrawing(false)
       },
       val
-    ), /* @__PURE__ */ React.createElement(
+    ), /* @__PURE__ */ wp.element.createElement(
       "input",
       {
         type: "numer",
@@ -35,6 +35,6 @@
         size: 3,
         step
       }
-    ), /* @__PURE__ */ React.createElement(Catpow.UI.HiddenValues, { name, value: val }));
+    ), /* @__PURE__ */ wp.element.createElement(Catpow.UI.HiddenValues, { name, value: val }));
   };
 })();

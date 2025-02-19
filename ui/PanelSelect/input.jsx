@@ -3,13 +3,13 @@
 
 */
 Catpow.UI.PanelSelect=(props)=>{
-	var classes='PanelSelect';
+	var classes='cpui-panelselect';
 	const {useState}=wp.element;
 	const [value,setValue]=useState(props.value);
 	const limit=props.limit || false;
 	
 	return (
-		<div className={'PanelSelect'}>
+		<div className={'cpui-panelselect'}>
 			<ul className="items">
 				{props.items.map((item)=>{
 					const isActive=value.indexOf(item.value)>0;
