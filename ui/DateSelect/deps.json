@@ -1,0 +1,6 @@
+{
+	"input": {
+		"component": ["Popup","Calendar","SelectNumber"],
+		"script": ["date_cond"]
+	}
+}

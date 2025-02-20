@@ -1,3 +1,0 @@
-<?php
-$useStyles=['dashicons'];
-$useComponents=[];

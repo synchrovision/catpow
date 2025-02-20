@@ -1,0 +1,4 @@
+{
+	"style": ["dashicons"],
+	"component": ["CheckBox","Popover"]
+}

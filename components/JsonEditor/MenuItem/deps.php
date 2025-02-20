@@ -1,2 +1,0 @@
-<?php
-$useComponents=['SelectMenuItem'];

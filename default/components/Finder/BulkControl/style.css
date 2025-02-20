@@ -1,12 +1,12 @@
-.cp-finderbulkcontrol {
+.cp-finder-bulkcontrol {
   display: inline-block;
   position: relative;
 }
-.cp-finderbulkcontrolForm {
+.cp-finder-bulkcontrol-form {
   max-width: 37.5rem;
   width: 80vw;
 }
-.cp-finderbulkcontrolForm .title {
+.cp-finder-bulkcontrol-form .title {
   margin: 0rem;
   margin-bottom: 0.625rem;
   padding: 1.25rem;
@@ -19,11 +19,11 @@
   font-family: var(--cp-fonts-t);
   font-weight: 700;
 }
-.cp-finderbulkcontrolForm .inputs {
+.cp-finder-bulkcontrol-form .inputs {
   margin: 0rem;
   text-align: center;
 }
-.cp-finderbulkcontrolForm .inputs .item {
+.cp-finder-bulkcontrol-form .inputs .item {
   display: block;
   position: relative;
   margin: 0rem auto;
@@ -32,18 +32,18 @@
   border-bottom-width: 0.0625rem;
   border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 20),var(--cp-tones-t-a));
 }
-.cp-finderbulkcontrolForm .inputs .item .label {
+.cp-finder-bulkcontrol-form .inputs .item .label {
   margin: 0rem;
   margin-bottom: 0.625rem;
   font-size: 0.9375rem;
   line-height: 1.5em;
 }
-.cp-finderbulkcontrolForm .inputs .item .desc {
+.cp-finder-bulkcontrol-form .inputs .item .desc {
   text-align: justify;
   font-size: 0.75rem;
   line-height: 1.5em;
 }
-.cp-finderbulkcontrolForm .inputs .item .caption {
+.cp-finder-bulkcontrol-form .inputs .item .caption {
   text-align: justify;
   font-size: 0.625rem;
   line-height: 1.5em;

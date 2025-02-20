@@ -1,2 +1,0 @@
-<?php
-$useScripts=['ajaxzip3'];

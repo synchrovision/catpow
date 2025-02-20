@@ -1,0 +1,4 @@
+{
+	"style": ["dashicons"],
+	"component": ["SelectBox","RadioButtons","Buttons","Popover","ModalForm"]
+}

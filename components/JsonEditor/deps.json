@@ -1,0 +1,15 @@
+{
+	"script": ["catpow","catpow.schema"],
+	"component": [
+		"InputDateTime","InputDuration","InputTextItems",
+		"Calendar","CheckBox","CheckBoxes",
+		"RadioButtons",
+		"SelectBox","SearchSelect","StepSelect",
+		"SelectMedia","SelectPreparedImage","SelectPreparedImageSet",
+		"SelectNumber",
+		"SelectMenuItem",
+		"Toggle",
+		"ArrayInput","TableInput",
+		"Popover","Popup"
+	]
+}

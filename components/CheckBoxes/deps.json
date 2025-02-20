@@ -1,0 +1,4 @@
+{
+	"script": ["catpow"],
+	"component": ["CheckBox"]
+}

@@ -421,47 +421,27 @@ class CP{
 		self::enqueue_script('ui/HiddenValues/input.js',['cpui']);
 		self::enqueue_style('ui/'.$name.'/input.css');
 		$deps=['ui/HiddenValues/input.js'];
-		if($f=self::get_file_path('ui/'.$name.'/deps.php')){
-			include $f;
-			if(!empty($inputDeps)){
-				foreach($inputDeps as $inputDep){
-					self::use_ui_output($inputDep);
-					$deps[]='ui/'.$inputDep.'/input.js';
-				}
-			}
-			if(!empty($useScripts)){
-				foreach($useScripts as $useScript){
-					self::enqueue_script($useScript);
-					$deps[]=$useScript;
-				}
-			}
-			if(!empty($useStyles)){
-				foreach($useStyles as $useStyle){
-					self::enqueue_style($useStyle);
-				}
-			}
-			if(!empty($useComponents)){
-				foreach($useComponents as $useComponent){
-					self::use_component($useComponent);
-					$deps[]='components/'.$useComponent.'/component.js';
-				}
-			}
-			if(!empty($useElements)){
-				foreach($useElements as $useElement){
-					self::use_element($useElement);
-					$deps[]='elements/'.$useElement.'/element.js';
-				}
-			}
-			if(!empty($useStores)){
-				foreach($useStores as $useStore){
-					self::use_store($useStore);
-					$deps[]='stores/'.$useStore.'/store.js';
+		if($f=self::get_file_path('ui/'.$name.'/deps.json')){
+			$deps_data=json_decode(file_get_contents($f),true);
+			if(!empty($deps_data['input'])){
+				foreach($deps_data['input'] as $type=>$handles){
+					list($method,$format)=[
+						'ui'=>['use_ui_input','ui/%s/input.js'],
+						'component'=>['use_component','components/%s/component.js'],
+						'element'=>['use_element','elements/%s/element.js'],
+						'script'=>['enqueue_script','%s'],
+						'style'=>['enqueue_style',null]
+					][$type];
+					foreach($handles as $handle){
+						call_user_func([self::class,$method],$handle);
+						if(isset($format)){$deps[]=sprintf($format,$handle);}
+					}
 				}
 			}
 		}
 		self::enqueue_script('ui/'.$name.'/input.js',$deps,0773);
 		self::set_script_translations('ui/'.$name.'/input.js');
-		if($f=self::get_file_path('ui/'.$name.'/inputInit.php')){include_once $f;}
+		if($f=self::get_file_path('ui/'.$name.'/input_init.php')){include_once $f;}
 		$done[$name]=1;
 		return true;
 	}
@@ -470,47 +450,27 @@ class CP{
 		if(isset($done[$name])){return false;}
 		self::enqueue_style('ui/'.$name.'/output.css',null,0773);
 		$deps=['wp-element','catpow'];
-		if($f=self::get_file_path('ui/'.$name.'/deps.php')){
-			include $f;
-			if(!empty($outputDeps)){
-				foreach($outputDeps as $outputDep){
-					self::use_ui_output($outputDep);
-					$deps[]='ui/'.$outputDep.'/output.js';
-				}
-			}
-			if(!empty($useScripts)){
-				foreach($useScripts as $useScript){
-					self::enqueue_script($useScript);
-					$deps[]=$useScript;
-				}
-			}
-			if(!empty($useStyles)){
-				foreach($useStyles as $useStyle){
-					self::enqueue_style($useStyle);
-				}
-			}
-			if(!empty($useComponents)){
-				foreach($useComponents as $useComponent){
-					self::use_component($useComponent);
-					$deps[]='components/'.$useComponent.'/component.js';
-				}
-			}
-			if(!empty($useElements)){
-				foreach($useElements as $useElement){
-					self::use_element($useElement);
-					$deps[]='elements/'.$useElement.'/element.js';
-				}
-			}
-			if(!empty($useStores)){
-				foreach($useStores as $useStore){
-					self::use_store($useStore);
-					$deps[]='stores/'.$useStore.'/store.js';
+		if($f=self::get_file_path('ui/'.$name.'/deps.json')){
+			$deps_data=json_decode(file_get_contents($f),true);
+			if(!empty($deps_data['output'])){
+				foreach($deps_data['output'] as $type=>$handles){
+					list($method,$format)=[
+						'ui'=>['use_ui_output','ui/%s/output.js'],
+						'component'=>['use_component','components/%s/component.js'],
+						'element'=>['use_element','elements/%s/element.js'],
+						'script'=>['enqueue_script','%s'],
+						'style'=>['enqueue_style',null]
+					][$type];
+					foreach($handles as $handle){
+						call_user_func([self::class,$method],$handle);
+						if(isset($format)){$deps[]=sprintf($format,$handle);}
+					}
 				}
 			}
 		}
 		self::enqueue_script('ui/'.$name.'/output.js',$deps,0773);
 		self::set_script_translations('ui/'.$name.'/output.js');
-		if($f=self::get_file_path('ui/'.$name.'/outputInit.php')){include_once $f;}
+		if($f=self::get_file_path('ui/'.$name.'/output_init.php')){include_once $f;}
 		$done[$name]=1;
 		return true;
 	}
@@ -521,35 +481,20 @@ class CP{
 		static $done=[];
 		if(isset($done[$name])){return false;}
 		$deps=['wp-i18n','wp-api-fetch','wp-element','wp-components','catpow'];
-		if($f=self::get_file_path('components/'.$name.'/deps.php')){
-			include $f;
-			if(!empty($useScripts)){
-				foreach($useScripts as $useScript){
-					self::enqueue_script($useScript);
-					$deps[]=$useScript;
-				}
-			}
-			if(!empty($useStyles)){
-				foreach($useStyles as $useStyle){
-					self::enqueue_style($useStyle);
-				}
-			}
-			if(!empty($useComponents)){
-				foreach($useComponents as $useComponent){
-					self::use_component($useComponent);
-					$deps[]='components/'.$useComponent.'/component.js';
-				}
-			}
-			if(!empty($useElements)){
-				foreach($useElements as $useElement){
-					self::use_element($useElement);
-					$deps[]='elements/'.$useElement.'/element.js';
-				}
-			}
-			if(!empty($useStores)){
-				foreach($useStores as $useStore){
-					self::use_store($useStore);
-					$deps[]='stores/'.$useStore.'/store.js';
+		if($f=self::get_file_path('components/'.$name.'/deps.json')){
+			$deps_data=json_decode(file_get_contents($f),true);
+			if(!empty($deps_data)){
+				foreach($deps_data as $type=>$handles){
+					list($method,$format)=[
+						'component'=>['use_component','components/%s/component.js'],
+						'element'=>['use_element','elements/%s/element.js'],
+						'script'=>['enqueue_script','%s'],
+						'style'=>['enqueue_style',null]
+					][$type];
+					foreach($handles as $handle){
+						call_user_func([self::class,$method],$handle);
+						if(isset($format)){$deps[]=sprintf($format,$handle);}
+					}
 				}
 			}
 		}
@@ -585,50 +530,44 @@ class CP{
 		if($css_url=self::get_file_url($css_handle,0773)){
 			$deps['css'][$css_handle]=[$css_handle,$css_url,[]];
 		}
-		if($f=self::get_file_path('components/'.$name.'/deps.php')){
-			include $f;
-			if(!empty($useScripts)){
+		if($f=self::get_file_path('components/'.$name.'/deps.json')){
+			$deps_data=json_decode(file_get_contents($f),true);
+			if(!empty($deps_data['script'])){
 				if(isset($deps['js'][$js_handle])){
-					$deps['js'][$js_handle][2]=array_merge($deps['js'][$js_handle][2],$useScripts);
+					$deps['js'][$js_handle][2]=array_merge($deps['js'][$js_handle][2],$deps_data['script']);
 				}
 				else{
-					foreach($useScripts as $dep){
+					foreach($deps_data['script'] as $dep){
 						$handle=is_array($dep)?$dep[0]:$dep;
 						$deps['js'][$handle]=$dep;
 					}
 				}
 			}
-			if(!empty($useStyles)){
+			if(!empty($deps_data['style'])){
 				if(isset($deps['css'][$css_handle])){
-					$deps['css'][$css_handle][2]=array_merge($deps['css'][$css_handle][2],$useStyles);
+					$deps['css'][$css_handle][2]=array_merge($deps['css'][$css_handle][2],$deps_data['style']);
 				}
 				else{
-					foreach($useStyles as $dep){
+					foreach($deps_data['style'] as $dep){
 						$handle=is_array($dep)?$dep[0]:$dep;
 						$deps['css'][$handle]=$dep;
 					}
 				}
 			}
-			if(!empty($useComponents)){
-				$sub_deps=self::get_components_deps($useComponents);
+			if(!empty($deps_data['component'])){
+				$sub_deps=self::get_components_deps($deps_data['component']);
 				$deps['js']=array_merge($deps['js'],$sub_deps['js']);
 				$deps['css']=array_merge($deps['css'],$sub_deps['css']);
 			}
-			if(!empty($useElements)){
-				$sub_deps=self::get_elements_deps($useElements);
+			if(!empty($deps_data['element'])){
+				$sub_deps=self::get_elements_deps($deps_data['element']);
 				$deps['js']=array_merge($deps['js'],$sub_deps['js']);
 				$deps['css']=array_merge($deps['css'],$sub_deps['css']);
-			}
-			if(!empty($useStores)){
-				foreach($useStores as $useStore){
-					$sub_deps=self::get_store_deps($useStore);
-					$deps['js']=array_merge($deps['js'],$sub_deps['js']);
-				}
 			}
 		}
 		if(strpos($name,'/')>0){
-			$useComponent=dirname($name);
-			$sub_deps=self::get_component_deps($useComponent);
+			$rootComponent=dirname($name);
+			$sub_deps=self::get_component_deps($rootComponent);
 			$deps['js']=array_merge($deps['js'],$sub_deps['js']);
 			$deps['css']=array_merge($deps['css'],$sub_deps['css']);
 		}
