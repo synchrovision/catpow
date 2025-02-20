@@ -3072,6 +3072,9 @@
     ] },
     customContentWidth: { name: "cusotomWidth", label: __2("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"), values: "has-custom-content-width", sub: [
       { name: "contentWidth", label: __2("\u5E45", "catpow"), input: "range", vars: "vars", key: "--cp-content-width", min: 200, max: 1600 }
+    ] },
+    customBorderRadius: { name: "cusotomRadius", label: __2("\u89D2\u4E38", "catpow"), values: "has-custom-border-radius", sub: [
+      { name: "borderRadius", label: __2("\u5F84", "catpow"), input: "range", vars: "vars", key: "--cp-border-radius", min: 1, max: 100 }
     ] }
   };
   wp.domReady(() => {

@@ -77,6 +77,9 @@ export const selectiveClassesPresets={
 	]},
 	customContentWidth:{name:'cusotomWidth',label:__('コンテンツ幅','catpow'),values:'has-custom-content-width',sub:[
 		{name:'contentWidth',label:__('幅','catpow'),input:'range',vars:'vars',key:'--cp-content-width',min:200,max:1600},
+	]},
+	customBorderRadius:{name:'cusotomRadius',label:__('角丸','catpow'),values:'has-custom-border-radius',sub:[
+		{name:'borderRadius',label:__('径','catpow'),input:'range',vars:'vars',key:'--cp-border-radius',min:1,max:100},
 	]}
 };
 wp.domReady(()=>{
