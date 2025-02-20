@@ -1,0 +1,17 @@
+{
+	"$defs":{
+		"deps":{
+			"properties":{
+				"ui":{"items":{"type":"string"}},
+				"component":{"items":{"type":"string"}},
+				"element":{"items":{"type":"string"}},
+				"script":{"items":{"type":"string"}},
+				"style":{"items":{"type":"string"}}
+			}
+		}
+	},
+	"properties":{
+		"input":{"$ref":"#/$defs/deps"},
+		"output":{"$ref":"#/$defs/deps"}
+	}
+}
