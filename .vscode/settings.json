@@ -1,5 +1,15 @@
 {
 	"html.customData": [
 		".vscode/custom-element.json"
+	],
+	"json.schemas":[
+		{
+			"fileMatch": ["components/*/deps.json","default/components/*/deps.json"],
+			"url": "./schema/component.deps.json"
+		},
+		{
+			"fileMatch": ["ui/*/deps.json","default/ui/*/deps.json"],
+			"url": "./schema/ui.deps.json"
+		}
 	]
 }

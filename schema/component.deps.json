@@ -1,0 +1,8 @@
+{
+	"properties":{
+		"component":{"items":{"type":"string"}},
+		"element":{"items":{"type":"string"}},
+		"script":{"items":{"type":"string"}},
+		"style":{"items":{"type":"string"}}
+	}
+}
