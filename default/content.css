@@ -1337,7 +1337,6 @@ del {
 .rtf-large, #editor .rtf-large {
   display: inline-block;
   font-size: 1.5em;
-  font-family: var(--cp-fonts-s);
   font-weight: 700;
   color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
 }
@@ -1369,7 +1368,6 @@ del {
   display: block;
   position: relative;
   padding-left: 1.5em;
-  font-family: var(--cp-fonts-c);
 }
 .rtf-annotation::before, #editor .rtf-annotation::before {
   content: "※";

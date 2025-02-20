@@ -433,7 +433,7 @@ del{
 	}
 	&-large{
 		@include bnd((d:ib));
-		@include txt((p:1.5em,f:s,w:b,c:m));
+		@include txt((p:1.5em,w:b,c:m));
 	}
 	&-u{
 		@include txt((td:u .05em .2em));
@@ -451,7 +451,6 @@ del{
 	}
 	&-annotation{
 		@include bnd((d:b,p:r,pdl:1.5em));
-		@include txt((f:c));
 		&::before{
 			content:'※';
 			@include bnd((d:b,p:a,t:0,l:0));
