@@ -1,7 +1,12 @@
-@import "config/style_config.scss";
+@import "admin_style_config.scss";
 
 .wp-block-catpow-picture{
 	img{
 		@include bnd((d:b,w:f,h:a));
+	}
+	&.has-custom-content-width{
+		img{
+			@include bnd((w:200 f calc(var(--cp-content-width,960) * #{$sizeUnit}),mgi:a));
+		}
 	}
 }

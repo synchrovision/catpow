@@ -19,13 +19,15 @@ wp.blocks.registerBlockType('catpow/picture',{
 	edit({attributes,className,setAttributes,isSelected}){
 		const {InspectorControls}=wp.blockEditor;
 		const {Icon}=wp.components;
-		const {classes,sources,src,srcset,alt,code,device}=attributes;
+		const {classes,vars,sources,src,srcset,alt,code,device}=attributes;
 
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=blockConfig;
 
 		const selectiveClasses:SelectiveClassConfig[]=[
 			{input:'picture',label:'画像',keys:imageKeys.image,devices,isTemplate:states.isTemplate},
+			"customMargin",
+			"customContentWidth",
 			{
 				label:'テンプレート',
 				values:'isTemplate',
@@ -43,7 +45,7 @@ wp.blocks.registerBlockType('catpow/picture',{
 		return (
 			<>
 				<CP.SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices}/>
-				<div className={classes+(device?' alt_content '+device:'')}>
+				<div className={classes+(device?' alt_content '+device:'')} style={vars}>
 					{device &&
 						<div className="label">
 							<Icon icon={CP.devices[device].icon}/>
@@ -71,13 +73,13 @@ wp.blocks.registerBlockType('catpow/picture',{
 		);
 	},
 	save({attributes,className,setAttributes}){
-		const {classes,srouces,src,srcset,alt,code}=attributes;
+		const {classes,vars,srouces,src,srcset,alt,code}=attributes;
 
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.picture;
 
 		return (
-			<div className={classes}>
+			<div className={classes} style={vars}>
 				<CP.ResponsiveImage
 					attr={attributes}
 					keys={imageKeys.image}

@@ -16,11 +16,13 @@
     edit({ attributes, className, setAttributes, isSelected }) {
       const { InspectorControls } = wp.blockEditor;
       const { Icon } = wp.components;
-      const { classes, sources, src, srcset, alt, code, device } = attributes;
+      const { classes, vars, sources, src, srcset, alt, code, device } = attributes;
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys } = blockConfig;
       const selectiveClasses = [
         { input: "picture", label: "\u753B\u50CF", keys: imageKeys.image, devices, isTemplate: states.isTemplate },
+        "customMargin",
+        "customContentWidth",
         {
           label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
           values: "isTemplate",
@@ -34,7 +36,7 @@
           ]
         }
       ];
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices }), /* @__PURE__ */ wp.element.createElement("div", { className: classes + (device ? " alt_content " + device : "") }, device && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices }), /* @__PURE__ */ wp.element.createElement("div", { className: classes + (device ? " alt_content " + device : ""), style: vars }, device && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(
         CP.SelectResponsiveImage,
         {
           attr: attributes,
@@ -56,10 +58,10 @@
       )));
     },
     save({ attributes, className, setAttributes }) {
-      const { classes, srouces, src, srcset, alt, code } = attributes;
+      const { classes, vars, srouces, src, srcset, alt, code } = attributes;
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys } = CP.config.picture;
-      return /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("div", { className: classes, style: vars }, /* @__PURE__ */ wp.element.createElement(
         CP.ResponsiveImage,
         {
           attr: attributes,
