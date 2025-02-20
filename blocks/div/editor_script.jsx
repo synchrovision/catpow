@@ -23,7 +23,7 @@ wp.blocks.registerBlockType('catpow/div',{
 		const {InnerBlocks,InspectorControls,useBlockProps}=wp.blockEditor;
 		const {PanelBody,TextareaControl} = wp.components;
 		const {attributes,className,setAttributes,context}=props;
-		const {customColorVars,anchor,classes,color,patternImageCss,frameImageCss,borderImageCss}=attributes;
+		const {customColorVars,anchor,classes,vars,color,patternImageCss,frameImageCss,borderImageCss}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.div;
@@ -47,7 +47,8 @@ wp.blocks.registerBlockType('catpow/div',{
 							]},
 							{type:'buttons',label:'線',values:{noBorder:'なし',thinBorder:'細',boldBorder:'太'}},
 							{label:'角丸',values:'round'},
-							{label:'影',values:'shadow',sub:[{label:'内側',values:'inset'}]}
+							{label:'影',values:'shadow',sub:[{label:'内側',values:'inset'}]},
+							'customContentWidth'
 						],
 						columns:[
 							{type:'buttons',label:'幅',values:{narrow:'狭い',regular:'普通',wide:'広い'}}
@@ -76,13 +77,14 @@ wp.blocks.registerBlockType('catpow/div',{
 						{input:'border',css:'borderImageCss',sel:({attr})=>'#'+attr.anchor,color}
 					]
 				}},
-				{name:'pad',type:'buttons',label:'余白','values':{noPad:'なし',thinPad:'極細',lightPad:'細',mediumPad:'中',boldPad:'太',heavyPad:'極太'}}
+				{name:'pad',type:'buttons',label:'余白','values':{noPad:'なし',thinPad:'極細',lightPad:'細',mediumPad:'中',boldPad:'太',heavyPad:'極太'}},
+				'customMargin',
 			];
 			wp.hooks.applyFilters('catpow.blocks.div.selectiveClasses',CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		},[]);
 
-		const blockProps=useBlockProps({className:classes,style:customColorVars});
+		const blockProps=useBlockProps({className:classes,style:{...customColorVars,...vars}});
 		
 		return (
 			<>
@@ -131,12 +133,12 @@ wp.blocks.registerBlockType('catpow/div',{
 
 	save({attributes,className,setAttributes}){
 		const {InnerBlocks,useBlockProps}=wp.blockEditor;
-		const {customColorVars,anchor,classes='',color,patternImageCss,frameImageCss,borderImageCss}=attributes;
+		const {customColorVars,anchor,classes='',vars,color,patternImageCss,frameImageCss,borderImageCss}=attributes;
 		
 		const states=CP.wordsToFlags(classes);
 		const {devices,imageKeys}=CP.config.div;
 		
-		const blockProps=useBlockProps.save({className:classes,style:customColorVars});
+		const blockProps=useBlockProps.save({className:classes,style:{...customColorVars,...vars}});
 		
 		return (
 			<div {...blockProps}>

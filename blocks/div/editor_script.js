@@ -25,7 +25,7 @@
       const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
       const { PanelBody, TextareaControl } = wp.components;
       const { attributes, className, setAttributes, context } = props;
-      const { customColorVars, anchor, classes, color, patternImageCss, frameImageCss, borderImageCss } = attributes;
+      const { customColorVars, anchor, classes, vars, color, patternImageCss, frameImageCss, borderImageCss } = attributes;
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys } = CP.config.div;
       CP.inheritColor(props, ["iconImageSrc", "patternImageCss", "frameImageCss", "borderImageCss"]);
@@ -46,7 +46,8 @@
                 ] },
                 { type: "buttons", label: "\u7DDA", values: { noBorder: "\u306A\u3057", thinBorder: "\u7D30", boldBorder: "\u592A" } },
                 { label: "\u89D2\u4E38", values: "round" },
-                { label: "\u5F71", values: "shadow", sub: [{ label: "\u5185\u5074", values: "inset" }] }
+                { label: "\u5F71", values: "shadow", sub: [{ label: "\u5185\u5074", values: "inset" }] },
+                "customContentWidth"
               ],
               columns: [
                 { type: "buttons", label: "\u5E45", values: { narrow: "\u72ED\u3044", regular: "\u666E\u901A", wide: "\u5E83\u3044" } }
@@ -75,12 +76,13 @@
               { input: "border", css: "borderImageCss", sel: ({ attr }) => "#" + attr.anchor, color }
             ]
           } },
-          { name: "pad", type: "buttons", label: "\u4F59\u767D", "values": { noPad: "\u306A\u3057", thinPad: "\u6975\u7D30", lightPad: "\u7D30", mediumPad: "\u4E2D", boldPad: "\u592A", heavyPad: "\u6975\u592A" } }
+          { name: "pad", type: "buttons", label: "\u4F59\u767D", "values": { noPad: "\u306A\u3057", thinPad: "\u6975\u7D30", lightPad: "\u7D30", mediumPad: "\u4E2D", boldPad: "\u592A", heavyPad: "\u6975\u592A" } },
+          "customMargin"
         ];
         wp.hooks.applyFilters("catpow.blocks.div.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      const blockProps = useBlockProps({ className: classes, style: customColorVars });
+      const blockProps = useBlockProps({ className: classes, style: { ...customColorVars, ...vars } });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
         CP.ResponsiveImage,
         {
@@ -109,10 +111,10 @@
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks, useBlockProps } = wp.blockEditor;
-      const { customColorVars, anchor, classes = "", color, patternImageCss, frameImageCss, borderImageCss } = attributes;
+      const { customColorVars, anchor, classes = "", vars, color, patternImageCss, frameImageCss, borderImageCss } = attributes;
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys } = CP.config.div;
-      const blockProps = useBlockProps.save({ className: classes, style: customColorVars });
+      const blockProps = useBlockProps.save({ className: classes, style: { ...customColorVars, ...vars } });
       return /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
         CP.ResponsiveImage,
         {
