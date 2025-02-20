@@ -7,6 +7,7 @@ import './CP.jsx';
 import './AlignmentIcon.jsx';
 import './ConfigIcon.jsx';
 import './BoundingBox.jsx';
+import './Bem.jsx';
 import './SelectBlendMode.jsx';
 import './SelectThemeColor.jsx';
 import './SelectColors.jsx';

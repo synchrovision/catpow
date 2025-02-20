@@ -1,8 +1,6 @@
 ﻿import {CP} from './CP.jsx';
 import {bem,rtf} from 'catpow/util';
-import {Portal,Transition} from 'catpow/component';
-import { useCallback } from 'preact/hooks';
-
+import {Portal} from 'catpow/component';
 
 
 CP.RTF=(props)=>{
