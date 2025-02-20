@@ -1,4 +1,5 @@
 @import "admin_style_config.scss";
+@import "fontawesome.scss";
 @include wp_admin_color(b,m,a,t);
 
 body{
@@ -40,9 +41,9 @@ body{
 	}
 }
 #wpcontent{
-	@include bp((
-		-2:(bnd:(pd:10))
-	));
+	@include bp(-pc){
+		@include bnd((pd:10));
+	}
 	#wpadminbar{
 		@include shd((b:3));
 		#wp-admin-bar-clone_post{
