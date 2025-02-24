@@ -1,0 +1,375 @@
+@import "admin_style_config.scss";
+
+.wp-block-catpow-pagenavigation{
+	$block:&;
+	$item:&__item;
+	@include txt((l:n));
+	&__item{
+		&-image{
+		}
+		&-contents{
+			&-link{
+				@include txt((c:t,td:n));
+			}
+			&-toggle{
+			}
+		}
+		&.has-children{
+		}
+		&.is-active{
+		}
+		&.is-open{
+		}
+	}
+	&-submenu{
+		$block:&;
+		@include bnd((pdl:1em));
+		@include txt((l:n));
+		&__item{
+			$item:&;
+			&-link{
+				@include txt((c:t,td:n));
+			}
+			&-toggle{
+			}
+			&.has-children{
+			}
+			&.is-active{
+			}
+			&.is-open{
+			}
+		}
+	}
+	&-endmenu{
+		$block:&;
+		@include bnd((pdl:1em));
+		@include txt((l:n));
+		&__item{
+			$item:&;
+			&-link{
+				@include txt((c:t,td:n));
+			}
+			&.is-active{
+			}
+			&.is-open{
+			}
+		}
+	}
+	&.is-style-tree{
+		@include bnd((pd:1em,w:a 240));
+		#{$block}{
+			&__item{
+				&-contents{
+					@include grd((tc:1fr a));
+					&-link{
+						@include bnd((mgb:.5em));
+						@include grd((tc:.5em 1fr,g:.2em,ai:c));
+						@include txt((p:18,f:h,c:tx,td:n));
+						&::before{
+							content:'';
+							@include bnd((d:b,w:.25em,h:.5em));
+							@include bg((c:m));
+							clip-path: polygon(0% 0%,100% 50%,0% 100%);
+						}
+					}
+					&-toggle{
+						@include usr((c:p));
+					}
+				}
+				&.has-children{
+				}
+				&.is-active{
+					#{$block}__item{
+						&-contents{
+							&-link{
+								@include txt((c:a));
+							}
+							&-toggle{
+								
+							}
+						}
+					}
+				}
+				&:not(.is-open){
+					#{$block}{
+						&-submenu{
+							@include bnd((d:n));
+						}
+					}
+				}
+			}
+			&-submenu{
+				$submenu:#{$block}-submenu;
+				$item:#{$submenu}__item;
+				@include bnd((pdl:1em,gc:span 2));
+				@include txt((l:n));
+				&__item{
+					@include bnd((pdb:8));
+					@include grd((tc:1fr a));
+					&-link{
+						@include grd((tc:.5em 1fr,g:.2em,ai:c));
+						@include txt((p:16,f:t,c:tx,td:n));
+						&::before{
+							content:'';
+							@include bnd((d:b,w:.25em,h:.5em));
+							@include bg((c:t-b 50));
+							clip-path: polygon(0% 0%,100% 50%,0% 100%);
+						}
+					}
+					&-toggle{
+						@include usr((c:p));
+					}
+					&.is-active{
+						#{$item}{
+							&-link{
+								@include txt((c:a));
+							}
+							&-toggle{
+								
+							}
+						}
+					}
+					&:not(.is-open){
+						#{$block}{
+							&-endmenu{
+								@include bnd((d:n));
+							}
+						}
+					}
+				}
+			}
+			&-endmenu{
+				$endmenu:#{$block}-endmenu;
+				$item:#{$endmenu}__item;
+				@include bnd((gc:span 2));
+				@include txt((l:n));
+				&__item{
+					&-link{
+						@include txt((p:14,f:t,c:tx,td:n));
+					}
+					&.is-active{
+						#{$item}{
+							&-link{
+								@include txt((c:a));
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	&.is-style-list{
+		@include bnd((w:90% c,pd:40,mgi:a,c:240,g:20));
+		@include bdr((s:s,w:2,c:m,r:20));
+		#{$block}{
+			&__item{
+				$item:&;
+				@include bnd((bi:a,pdb:12));
+				@include bdr((r:20));
+				@include bg((c:bx));
+				&-contents{
+					&-link{
+						@include bnd((mgb:.5em));
+						@include grd((tc:.5em 1fr,g:.2em,ai:c));
+						@include txt((p:18,f:h,c:tx,td:n));
+						&::before{
+							content:'';
+							@include bnd((d:b,w:.25em,h:.5em));
+							@include bg((c:m));
+							clip-path: polygon(0% 0%,100% 50%,0% 100%);
+						}
+					}
+					&-toggle{
+						@include bnd((d:n));
+					}
+				}
+				&.has-children{
+				}
+				&.is-active{
+				}
+				&.is-open{
+				}
+			}
+			&-submenu{
+				$block:&;
+				@include bnd((pdl:1em));
+				@include txt((l:n));
+				&__item{
+					$item:&;
+					@include bnd((pdb:8));
+					&-link{
+						@include grd((tc:.5em 1fr,g:.2em,ai:c));
+						@include txt((p:16,f:t,c:tx,td:n));
+						&::before{
+							content:'';
+							@include bnd((d:b,w:.25em,h:.5em));
+							@include bg((c:t-b 50));
+							clip-path: polygon(0% 0%,100% 50%,0% 100%);
+						}
+					}
+					&-toggle{
+						@include bnd((d:n));
+					}
+					&.is-active{
+					}
+					&.is-open{
+					}
+				}
+			}
+			&-endmenu{
+				$block:&;
+				@include txt((l:n));
+				&__item{
+					$item:&;
+					&-link{
+						@include txt((p:14,f:t,c:tx,td:n));
+					}
+					&.is-active{
+					}
+					&.is-open{
+					}
+				}
+			}
+		}
+	}
+	&.is-style-card{
+		@include bnd((pd:20));
+		@include grd((rc:400,g:20));
+		#{$block}{
+			&__item{
+				@include bnd((o:h));
+				@include grd((tc:160 1fr));
+				@include bdr((r:20));
+				@include bg((c:bx));
+				@include shd((b:2));
+				&-image{
+					@include bnd((d:b,w:160,h:f,op:c,of:c));
+				}
+				&-contents{
+					@include bnd((pd:32));
+					&-link{
+						@include bnd((d:b,mgb:.5em));
+						@include txt((p:28,f:h,c:tx,td:n));
+					}
+					&-toggle{
+						@include bnd((d:n));
+					}
+				}
+				&.has-children{
+				}
+				&.is-active{
+				}
+				&.is-open{
+				}
+			}
+			&-submenu{
+				$block:&;
+				@include bnd((pdl:1em));
+				@include txt((l:n));
+				&__item{
+					$item:&;
+					&-link{
+						@include grd((tc:.5em 1fr,g:.2em,ai:c));
+						@include txt((p:16,f:t,c:tx,td:n));
+						&::before{
+							content:'';
+							@include bnd((d:b,w:.25em,h:.5em));
+							@include bg((c:t-b 50));
+							clip-path: polygon(0% 0%,100% 50%,0% 100%);
+						}
+					}
+					&-toggle{
+						@include bnd((d:n));
+					}
+					&.is-active{
+					}
+					&.is-open{
+					}
+				}
+			}
+			&-endmenu{
+				$block:&;
+				@include txt((l:n));
+				&__item{
+					$item:&;
+					&-link{
+						@include txt((p:14,f:t,c:tx,td:n));
+					}
+					&.is-active{
+					}
+					&.is-open{
+					}
+				}
+			}
+		}
+	}
+	&.is-style-grid{
+		@include grd((rc:400));
+		#{$block}{
+			&__item{
+				@include bnd((p:r,h:240 a));
+				@include grd(());
+				&-image{
+					@include bnd((d:b,p:a,i:0,w:f,h:f,op:c,of:c,z:0));
+				}
+				&-contents{
+					@include bnd((p:r,pd:40,z:1));
+					@include bg((c:m 1 .6));
+					&-link{
+						@include bnd((d:b,mgb:.5em));
+						@include txt((p:32,c:i,td:n));
+					}
+					&-toggle{
+						@include bnd((d:n));
+					}
+				}
+				&.has-children{
+				}
+				&.is-active{
+				}
+				&.is-open{
+				}
+			}
+			&-submenu{
+				$block:&;
+				@include bnd((pdl:1em,c:200));
+				@include txt((l:n));
+				&__item{
+					$item:&;
+					@include bnd((bi:a,mgb:.5em));
+					&-link{
+						@include grd((tc:.5em 1fr,g:.2em,ai:c));
+						@include txt((p:14,f:t,c:i,td:n));
+						&::before{
+							content:'';
+							@include bnd((d:b,w:.25em,h:.5em));
+							@include bg((c:i 1 .6));
+							clip-path: polygon(0% 0%,100% 50%,0% 100%);
+						}
+					}
+					&-toggle{
+						@include bnd((d:n));
+					}
+					&.is-active{
+					}
+					&.is-open{
+					}
+				}
+			}
+			&-endmenu{
+				$block:&;
+				@include txt((l:n));
+				&__item{
+					$item:&;
+					&-link{
+						@include txt((p:12,f:t,c:i,td:n));
+					}
+					&.is-active{
+					}
+					&.is-open{
+					}
+				}
+			}
+		}
+	}
+}
