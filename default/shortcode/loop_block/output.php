@@ -4,15 +4,15 @@ $prm=shortcode_atts([0=>false],$atts);
 $data=$GLOBALS['loop_block_data'][$prm[0]];
 
 
-if(cp::$content){
+if(CP::$content){
 	$path=$data['path']??null;
 	if(!empty($data['values'])){
-		$org_vars=cp::$vars;
+		$org_vars=CP::$vars;
 		foreach($data['values'] as $values){
-			cp::$vars=array_merge(cp::$vars,$values);
+			CP::$vars=array_merge(CP::$vars,$values);
 			echo apply_filters('the_content',$data['content']);
 		}
-		cp::$vars=$org_vars;
+		CP::$vars=$org_vars;
 		return;
 	}
 	if(empty($data['query'])){
@@ -33,14 +33,14 @@ if(cp::$content){
 	}
 	if(!empty($path)){
 		if(strpos($path,'/')===false){
-			$loop=\cp::$content->meta($path,$query);
+			$loop=CP::$content->meta($path,$query);
 		}
 		else{
 			if(substr_count($path,'/')==1){$path.='/default';}
-			$loop=\cp::$content->query($path,$query);
+			$loop=CP::$content->query($path,$query);
 		}
 	}
-	else{$loop=\cp::$content;}
+	else{$loop=CP::$content;}
 
 	if(is_null($loop->query)){return;}
 
@@ -57,8 +57,8 @@ if(cp::$content){
 		}
 	}
 	else{
-		\cp::enqueue_script($path.'/script.js');
-		\cp::enqueue_style($path.'/style.css');
+		CP::enqueue_script($path.'/script.js');
+		CP::enqueue_style($path.'/style.css');
 		$loop->render($data['file'],$data['vars']??[]);
 	}
 }
