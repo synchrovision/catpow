@@ -48,11 +48,11 @@ class MenuManager{
 	}
 	//resolve schema
 	public static function resolve_schema($schema,$root_schema){
-		if(isset($schame['@type'])){
-			$type=$schame['@type'];
+		if(isset($schema['@type'])){
+			$type=$schema['@type'];
 			if($type==='MenuItem' || $type==='MenuItems'){
 				foreach($schema['features'] as $featrue){
-					$defs_name='feature'.$type.ucfirst($fature);
+					$defs_name='feature'.$type.ucfirst($feature);
 					if(!empty($root_schema['$defs'][$defs_name])){
 						$schema['allOf'][]=['$ref'=>'#/$defs/'.$defs_name];
 					}
