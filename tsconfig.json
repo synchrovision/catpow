@@ -4,6 +4,7 @@
 		"moduleResolution": "Node",
 		"jsx": "react",
 		"baseUrl": "./",
+		"lib": ["ESNext"],
 		"paths": {
 			"*":["./compiler/node_modules/*"],
 			"blocks/*":["./blocks/*"],
