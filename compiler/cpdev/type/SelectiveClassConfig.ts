@@ -10,11 +10,12 @@ export type SelectiveClassConfig={
 	bind?:{[key:string]:string[]},
 	key?:string,
 	keys?:{[key:string]:string},
+	vars?:string,
 	devices?:string[],
 	cond?:string | string[] | boolean | ((states:object,props:object)=>boolean),
 	min?:number,
 	max?:number,
-	item?:SubSelectiveClassConfig,
+	step?:number,
 	sub?:SubSelectiveClassConfig,
 	isTemplate?:boolean
 } | 'color'|'pattern'|'cond'|'event'| keyof typeof selectiveClassesPresets;
