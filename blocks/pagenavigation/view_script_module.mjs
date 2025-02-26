@@ -8,7 +8,6 @@ store("pagenavigation",{
 		onClickToggle(e){
 			const openItems=getContext().openItems;
 			const id=e.currentTarget.closest('[data-post-id]').dataset.postId;
-			console.log({id});
 			openItems[id]=!openItems[id];
 		}
 	},
