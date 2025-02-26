@@ -44,7 +44,7 @@ HTML::render([
 	'class'=>$attr['classes'],
 	'style'=>$attr['vars'],
 	'data-wp-interactive'=>"pagenavigation",
-	'data-wp-context'=>json_encode($context,0540),
+	'data-wp-context'=>$context,
 	'children'=>array_map(fn($item)=>[
 		'li._item',
 		'class'=>['has-children'=>!empty($item['children'])],
