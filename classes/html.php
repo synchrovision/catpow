@@ -1,7 +1,7 @@
 <?php
 namespace Catpow;
 
-class html{
+class HTML{
 	public static function parse_tag_data($tag_data){
 		if(preg_match('/^\w+/',$tag_data,$tag)){$tag=$tag[0];}else{$tag=false;}
 		$base_tag_data=preg_replace('/\[.+?\]/','',$tag_data);
@@ -30,6 +30,60 @@ class html{
 		}
 		$tags[]=$tag_data['tag'];
 		printf('<%s%s>',$tag_data['tag'],$tag_data['attr']);
+	}
+	public static function render($data,$context=[]){
+		$props=[];
+		$children=[];
+		foreach($data as $key=>$val){
+			if($key===0){$tag=$val;}
+			elseif(is_int($key)){$children[]=$val;}
+			elseif($key==='children'){$children=array_merge($children,$val);}
+			else{$props[$key]=$val;}
+		}
+		$classes=[];
+		$tag=preg_replace_callback('/(\.|#)([\w\-]++)/',function($matches)use(&$props,&$classes){
+			if($matches[1]==='#'){$props['id']=$matches[2];}
+			else{$classes[]=$matches[2];}
+		},$tag);
+		if(empty($tag)){$tag='div';}
+		if(!empty($classes)){
+			if(empty($props['class'])){$props['class']=$classes;}
+			elseif(is_array($props['class'])){$props['class']=array_merge($classes,$props['class']);}
+			else{$props['class']=implode(' ',$classes).' '.$props['class'];}
+		}
+		if(empty($props['class'])){$props['class']='_'.$tag;}
+
+		if(empty($context['bem'])){$context['bem']=$bem=new Bem();}
+		else{$bem=$context['bem'];}
+		$props['class']=$bem->start($props['class']);
+
+		$attr='';
+		foreach($props as $key=>$val){
+			if(is_bool($val)){
+				if($val===true){$attr.=' '.$key;}
+				continue;
+			}
+			if($key==='style' && is_array($val)){
+				$style='';
+				foreach($val as $k=>$v){$style.="{$k}:{$v};";}
+				$val=$style;
+			}
+			$attr.=sprintf(" %s='%s'",$key,$val);
+		}
+
+		printf('<%s%s>',$tag,$attr);
+		if(!empty($children)){
+			foreach($children as $child){
+				if(is_array($child)){
+					self::render($child,$context);
+				}
+				else{
+					echo $child;
+				}
+			}
+		}
+		printf('</%s>',$tag);
+		$bem->end();
 	}
 }
 
