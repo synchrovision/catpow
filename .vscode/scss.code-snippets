@@ -1,0 +1,79 @@
+{
+	"catpow-scss bnd":{
+		"scope":"scss",
+		"prefix":"bnd",
+		"body":[
+			"@include bnd(($1));"
+		]
+	},
+	"catpow-scss flx":{
+		"scope":"scss",
+		"prefix":"flx",
+		"body":[
+			"@include flx(($1));"
+		]
+	},
+	"catpow-scss grd":{
+		"scope":"scss",
+		"prefix":"grd",
+		"body":[
+			"@include grd(($1));"
+		]
+	},
+	"catpow-scss bg":{
+		"scope":"scss",
+		"prefix":"bg",
+		"body":[
+			"@include bg(($1));"
+		]
+	},
+	"catpow-scss bdr":{
+		"scope":"scss",
+		"prefix":"bdr",
+		"body":[
+			"@include bdr(($1));"
+		]
+	},
+	"catpow-scss txt":{
+		"scope":"scss",
+		"prefix":"txt",
+		"body":[
+			"@include txt(($1));"
+		]
+	},
+	"catpow-scss shd":{
+		"scope":"scss",
+		"prefix":"shd",
+		"body":[
+			"@include shd(($1));"
+		]
+	},
+	"catpow-scss trn":{
+		"scope":"scss",
+		"prefix":"trn",
+		"body":[
+			"@include trn(($1));"
+		]
+	},
+	"catpow-scss usr":{
+		"scope":"scss",
+		"prefix":"usr",
+		"body":[
+			"@include usr(($1));"
+		]
+	},
+	"catpow-scss bp":{
+		"scope":"scss",
+		"prefix":"bp",
+		"body":[
+			"@include bp($1){","\t$2","}"
+		]
+	},
+	"catpow-scss ctn":{
+		"scope":"scss",
+		"prefix":"ctn",
+		"body":[
+			"@include ctn($1){","\t$2","}"
+		]
+	}
+}

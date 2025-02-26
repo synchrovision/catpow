@@ -11,5 +11,6 @@
 			"fileMatch": ["ui/**/deps.json","default/ui/**/deps.json"],
 			"url": "./schema/ui.deps.json"
 		}
-	]
+	],
+	"prettier.useTabs": true
 }
