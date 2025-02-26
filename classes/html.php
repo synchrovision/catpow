@@ -59,16 +59,22 @@ class HTML{
 
 		$attr='';
 		foreach($props as $key=>$val){
-			if(is_bool($val)){
-				if($val===true){$attr.=' '.$key;}
-				continue;
+			if(empty($val)){continue;}
+			if($val===true){$attr.=' '.$key;continue;}
+			if(is_array($val)){
+				if($key==='style'){
+					$style='';
+					foreach($val as $k=>$v){$style.="{$k}:{$v};";}
+					$attr.=sprintf(' %s="%s"',$key,$style);
+				}
+				else{
+					$attr.=sprintf(" %s='%s'",$key,json_encode($val,0540));
+				}
 			}
-			if($key==='style' && is_array($val)){
-				$style='';
-				foreach($val as $k=>$v){$style.="{$k}:{$v};";}
-				$val=$style;
+			else{
+				$attr.=sprintf(' %s="%s"',$key,$val);
 			}
-			$attr.=sprintf(" %s='%s'",$key,$val);
+			
 		}
 
 		printf('<%s%s>',$tag,$attr);
