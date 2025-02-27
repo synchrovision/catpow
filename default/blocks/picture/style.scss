@@ -2,7 +2,7 @@
 
 .wp-block-catpow-picture{
 	img{
-		@include bnd((d:b,w:f,h:a));
+		@include bnd((d:b,w:f,h:a,mgi:a));
 	}
 	&.has-custom-content-width{
 		img{

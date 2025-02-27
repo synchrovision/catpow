@@ -2,6 +2,7 @@
   display: block;
   width: 100%;
   height: auto;
+  margin-inline: auto;
 }
 .wp-block-catpow-picture.has-custom-content-width img {
   min-width: 12.5rem;
