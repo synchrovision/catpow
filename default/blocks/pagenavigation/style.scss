@@ -165,8 +165,6 @@
 			&__item{
 				$item:&;
 				@include bnd((bi:a,pdb:12));
-				@include bdr((r:20));
-				@include bg((c:bx));
 				&-contents{
 					&-link{
 						@include bnd((mgb:.5em));

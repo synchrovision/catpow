@@ -137,8 +137,6 @@
 .wp-block-catpow-pagenavigation.is-style-list .wp-block-catpow-pagenavigation__item {
   break-inside: avoid;
   padding-bottom: 0.75rem;
-  border-radius: 1.25rem;
-  background-color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),1);
 }
 .wp-block-catpow-pagenavigation.is-style-list .wp-block-catpow-pagenavigation__item-contents-link {
   margin-bottom: 0.5em;
