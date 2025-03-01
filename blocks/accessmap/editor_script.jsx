@@ -117,7 +117,7 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 				>
 					<div className="map">
 						{states.isTemplate?(
-							<CP.DummyImage className="gmap" text={q}/>
+							<CP.DummyImage className="gmap" text={item.q || item.address.replace(/<br\/?>|\n/,' ')}/>
 						):(
 							<iframe src={url} frameBorder="0" className="gmap" data-ll={item.ll || false} data-q={item.q || false}></iframe>
 						)}
@@ -280,7 +280,7 @@ wp.blocks.registerBlockType('catpow/accessmap',{
 						<RichText.Content tagName="div" className="address" value={item.address}/>
 						{states.hasTel && (<RichText.Content tagName="div" className="tel" value={item.tel}/>)}
 						{states.hasMail && (<RichText.Content tagName="div" className="mail" value={item.mail}/>)}
-						{states.hasSite && (<RichText.Content tagName="div" className="tel" value={item.site}/>)}
+						{states.hasSite && (<RichText.Content tagName="div" className="site" value={item.site}/>)}
 						<RichText.Content tagName="div" className="info" value={item.info}/>
 					</div>
 				</div>
