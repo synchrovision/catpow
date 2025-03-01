@@ -31,7 +31,12 @@ class HTML{
 		$tags[]=$tag_data['tag'];
 		printf('<%s%s>',$tag_data['tag'],$tag_data['attr']);
 	}
-	public static function render($data,$context=[]){
+	public static function get_html($data,$return=false){
+		ob_start();
+		self::render($data);
+		return ob_get_clean();
+	}
+	protected static function render($data,$context=[]){
 		$props=[];
 		$children=[];
 		foreach($data as $key=>$val){
