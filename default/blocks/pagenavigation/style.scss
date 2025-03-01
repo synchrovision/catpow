@@ -58,42 +58,102 @@
 	&.is-style-tree{
 		@include bnd((pd:1em,w:a 240));
 		#{$block}{
-			&__item{
-				&-contents{
-					@include grd((tc:1fr a));
-					&-link{
-						@include bnd((mgb:.5em));
-						@include grd((tc:.5em 1fr,g:.2em,ai:c));
-						@include txt((p:18,f:h,c:tx,td:n));
-						&::before{
-							content:'';
-							@include bnd((d:b,w:.25em,h:.5em));
-							@include bg((c:m));
-							clip-path: polygon(0% 0%,100% 50%,0% 100%);
-						}
-					}
-					&-toggle{
-						@include usr((c:p));
-					}
+			&-title{
+				@include bnd((mgb:1em));
+				@include txt((p:24));
+				&__link{
+					@include txt((c:t,td:n));
 				}
-				&.has-children{
-				}
-				&.is-active{
-					#{$block}__item{
-						&-contents{
-							&-link{
-								@include txt((c:a));
-							}
-							&-toggle{
-								
+			}
+			&-menu{
+				@include bnd((pd:0));
+				@include txt((l:n));
+				&__item{
+					@include bnd((pd:.2em 0));
+					&-contents{
+						@include grd((tc:a 1fr a,g:.2em));
+						&-arrow{
+							@include bnd((p:r,w:1em,h:1em,as:c));
+							&-graphic{
+								@include bnd((d:b,p:a,i:0,mg:a,w:.25em,h:.5em));
+								@include bg((c:m));
+								clip-path: polygon(0% 0%,100% 50%,0% 100%);
+								@include trn((t:.4s,r:90deg));
 							}
 						}
+						&-link{
+							@include txt((p:18,f:h,c:tx,td:n));
+						}
+						&-toggle{
+							@include bnd((p:r,w:1em,h:1em,as:c));
+							@include usr((c:p));
+							&-graphic{
+								&::before,&::after{
+									content:'';
+									@include bnd((d:b,p:a,i:0,mg:a,w:f,h:1));
+									@include bg((c:m));
+									@include trn((t:.4s,r:0deg));
+								}
+							}
+						}
 					}
-				}
-				&:not(.is-open){
-					#{$block}{
-						&-submenu{
-							@include bnd((d:n));
+					&:not(.has-children){
+						#{$block}{
+							&-menu{
+								&__item{
+									&-contents{
+										&-arrow,&-toggle{
+											@include bnd((v:h));
+										}
+									}
+								}
+							}
+						}
+					}
+					&.is-active{
+						#{$block}{
+							&-menu{
+								&__item{
+									&-contents{
+										&-arrow,&-toggle{
+											&-graphic{
+												@include bg((c:a));
+											}
+										}
+										&-link{
+											@include txt((c:a));
+										}
+									}
+								}
+							}
+						}
+					}
+					&:not(.is-open){
+						#{$block}{
+							&-menu{
+								&__item{
+									&-contents{
+										&-arrow{
+											&-graphic{
+												@include trn((r:0deg));
+											}
+										}
+										&-toggle{
+											&-graphic{
+												&::before{
+													@include trn((r:180deg));
+												}
+												&::after{
+													@include trn((r:90deg));
+												}
+											}
+										}
+									}
+								}
+							}
+							&-submenu{
+								@include bnd((d:n));
+							}
 						}
 					}
 				}
@@ -101,11 +161,11 @@
 			&-submenu{
 				$submenu:#{$block}-submenu;
 				$item:#{$submenu}__item;
-				@include bnd((pdl:1em,gc:span 2));
+				@include bnd((pdl:1em,mgt:.5em,gc:span 2));
 				@include txt((l:n));
 				&__item{
 					@include bnd((pdb:8));
-					@include grd((tc:1fr a));
+					@include grd((tc:a 1fr a));
 					&-link{
 						@include grd((tc:.5em 1fr,g:.2em,ai:c));
 						@include txt((p:16,f:t,c:tx,td:n));
@@ -121,6 +181,9 @@
 					}
 					&.is-active{
 						#{$item}{
+							&-arrow{
+								
+							}
 							&-link{
 								@include txt((c:a));
 							}
@@ -141,7 +204,7 @@
 			&-endmenu{
 				$endmenu:#{$block}-endmenu;
 				$item:#{$endmenu}__item;
-				@include bnd((gc:span 2));
+				@include bnd((gc:span 2,mgt:.5em));
 				@include txt((l:n));
 				&__item{
 					&-link{
@@ -159,33 +222,54 @@
 		}
 	}
 	&.is-style-list{
-		@include bnd((w:90% c,pd:40,mgi:a,c:240,g:20));
+		@include bnd((w:90% c,pd:40,mgi:a));
 		@include bdr((s:s,w:2,c:m,r:20));
+		&:not(.has-custom-margin){
+			@include bnd((mg:40 a));
+		}
 		#{$block}{
-			&__item{
-				$item:&;
-				@include bnd((bi:a,pdb:12));
-				&-contents{
-					&-link{
-						@include bnd((mgb:.5em));
-						@include grd((tc:.5em 1fr,g:.2em,ai:c));
-						@include txt((p:18,f:h,c:tx,td:n));
-						&::before{
-							content:'';
-							@include bnd((d:b,w:.25em,h:.5em));
-							@include bg((c:m));
-							clip-path: polygon(0% 0%,100% 50%,0% 100%);
+			&-title{
+				@include bnd((mgb:1em,pdb:.25em));
+				@include bdr((p:b,s:s,w:1));
+				@include txt((p:24));
+				&__link{
+					@include grd((tc:1em 1fr,g:.5em,ai:c));
+					@include txt((c:t,td:n));
+					&::before{
+						content:'';
+						@include bnd((d:b,h:1em));
+						@include bg((c:m));
+						@include msk((i:'../../images/icon/menu.svg',r:n,p:c,s:c));
+					}
+				}
+			}
+			&-menu{
+				@include bnd((c:240,g:20));
+				&__item{
+					$item:&;
+					@include bnd((bi:a,pdb:12));
+					&-contents{
+						&-link{
+							@include bnd((mgb:.5em));
+							@include grd((tc:.5em 1fr,g:.2em,ai:c));
+							@include txt((p:18,f:h,c:tx,td:n));
+							&::before{
+								content:'';
+								@include bnd((d:b,w:.25em,h:.5em));
+								@include bg((c:m));
+								clip-path: polygon(0% 0%,100% 50%,0% 100%);
+							}
+						}
+						&-arrow,&-toggle{
+							@include bnd((d:n));
 						}
 					}
-					&-toggle{
-						@include bnd((d:n));
+					&.has-children{
 					}
-				}
-				&.has-children{
-				}
-				&.is-active{
-				}
-				&.is-open{
+					&.is-active{
+					}
+					&.is-open{
+					}
 				}
 			}
 			&-submenu{
@@ -205,7 +289,7 @@
 							clip-path: polygon(0% 0%,100% 50%,0% 100%);
 						}
 					}
-					&-toggle{
+					&-arrow,&-toggle{
 						@include bnd((d:n));
 					}
 					&.is-active{
@@ -232,34 +316,36 @@
 	}
 	&.is-style-card{
 		@include bnd((pd:20));
-		@include grd((rc:400,g:20));
 		#{$block}{
-			&__item{
-				@include bnd((o:h));
-				@include grd((tc:160 1fr));
-				@include bdr((r:20));
-				@include bg((c:bx));
-				@include shd((b:2));
-				&-image{
-					@include bnd((d:b,w:160,h:f,op:c,of:c));
-				}
-				&-contents{
-					@include bnd((pd:32));
-					&-link{
-						@include bnd((d:b,mgb:.5em));
-						@include txt((p:28,f:h,c:tx,td:n));
+			&-menu{
+				@include grd((rc:400,g:20));
+				&__item{
+					@include bnd((o:h));
+					@include grd((tc:160 1fr));
+					@include bdr((r:20));
+					@include bg((c:bx));
+					@include shd((b:2));
+					&-image{
+						@include bnd((d:b,w:160,h:f,op:c,of:c));
 					}
-					&-toggle{
-						@include bnd((d:n));
+					&-contents{
+						@include bnd((pd:32));
+						&-link{
+							@include bnd((d:b,mgb:.5em));
+							@include txt((p:28,f:h,c:tx,td:n));
+						}
+						&-arrow,&-toggle{
+							@include bnd((d:n));
+						}
+					}
+					&.has-children{
+					}
+					&.is-active{
+					}
+					&.is-open{
 					}
 				}
-				&.has-children{
-				}
-				&.is-active{
-				}
-				&.is-open{
-				}
-			}
+		}
 			&-submenu{
 				$block:&;
 				@include bnd((pdl:1em));
@@ -276,7 +362,7 @@
 							clip-path: polygon(0% 0%,100% 50%,0% 100%);
 						}
 					}
-					&-toggle{
+					&-arrow,&-toggle{
 						@include bnd((d:n));
 					}
 					&.is-active{
@@ -302,30 +388,32 @@
 		}
 	}
 	&.is-style-grid{
-		@include grd((rc:400));
 		#{$block}{
-			&__item{
-				@include bnd((p:r,h:240 a));
-				@include grd(());
-				&-image{
-					@include bnd((d:b,p:a,i:0,w:f,h:f,op:c,of:c,z:0));
-				}
-				&-contents{
-					@include bnd((p:r,pd:40,z:1));
-					@include bg((c:m 1 .6));
-					&-link{
-						@include bnd((d:b,mgb:.5em));
-						@include txt((p:32,c:i,td:n));
+			&-menu{
+				@include grd((rc:400));
+				&__item{
+					@include bnd((p:r,h:240 a));
+					@include grd(());
+					&-image{
+						@include bnd((d:b,p:a,i:0,w:f,h:f,op:c,of:c,z:0));
 					}
-					&-toggle{
-						@include bnd((d:n));
+					&-contents{
+						@include bnd((p:r,pd:40,z:1));
+						@include bg((c:m 1 .6));
+						&-link{
+							@include bnd((d:b,mgb:.5em));
+							@include txt((p:32,c:i,td:n));
+						}
+						&-arrow,&-toggle{
+							@include bnd((d:n));
+						}
 					}
-				}
-				&.has-children{
-				}
-				&.is-active{
-				}
-				&.is-open{
+					&.has-children{
+					}
+					&.is-active{
+					}
+					&.is-open{
+					}
 				}
 			}
 			&-submenu{
@@ -345,7 +433,7 @@
 							clip-path: polygon(0% 0%,100% 50%,0% 100%);
 						}
 					}
-					&-toggle{
+					&-arrow,&-toggle{
 						@include bnd((d:n));
 					}
 					&.is-active{

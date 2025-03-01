@@ -31,7 +31,11 @@ $get_nav_items=function($query,$depth=0)use(&$get_nav_items){
 	}
 	return $items;
 };
-$items=$get_nav_items(array_merge($query,['post_parent'=>$ancestors[$attr['level']]]),$attr['depth']);
+$root_post_id=$ancestors[$attr['level']];
+$root_post=$root_post_id===0?((object)['post_title'=>get_bloginfo('name')]):get_post($root_post_id);
+$items=$get_nav_items(array_merge($query,['post_parent'=>$root_post_id]),$attr['depth']);
+
+
 
 $states=[];
 foreach(explode(' ',$attr['classes']) as $stateClass){$states[$stateClass]=true;}
@@ -40,47 +44,63 @@ $has_image=$states['is-style-card']??$states['is-style-grid']??false;
 $dummy_image_url=CP::get_file_url('images/dummy.jpg');
 
 HTML::render([
-	'ul.wp-block-catpow-pagenavigation--',
+	'.wp-block-catpow-pagenavigation--',
 	'class'=>$attr['classes'],
 	'style'=>$attr['vars'],
 	'data-wp-interactive'=>"pagenavigation",
 	'data-wp-context'=>$context,
-	'children'=>array_map(fn($item)=>[
-		'li._item',
-		'class'=>['has-children'=>!empty($item['children'])],
-		'data-post-id'=>$item['post']->ID,
-		'data-wp-class--is-active'=>"callbacks.isItemActive",
-		'data-wp-class--is-open'=>"callbacks.isItemOpen",
-		$has_image?[
-			'img._image',
-			'src'=>wp_get_attachment_image_src(get_post_thumbnail_id($id_d1),'full')[0]??$dummy_image_url,
-			'alt'=>$item['post']->title
-		]:'',
+	[
+		'h3.title-',
 		[
-			'._contents',
-			['a._link','href'=>get_permalink($item['post']),$item['post']->post_title],
-			isset($item['children'])?['._toggle','data-wp-on--click'=>"actions.onClickToggle",'+']:'',
-			isset($item['children'])?[
-				'ul.submenu-',
-				'children'=>array_map(fn($item)=>[
-					'li._item',
-					'data-post-id'=>$item['post']->ID,
-					'data-wp-class--is-active'=>"callbacks.isItemActive",
-					'data-wp-class--is-open'=>"callbacks.isItemOpen",
-					['a._link','href'=>get_permalink($item['post']),$item['post']->post_title],
-					isset($item['children'])?['._toggle','data-wp-on--click'=>"actions.onClickToggle"]:'',
-					isset($item['children'])?[
-						'ul.endmenu-',
-						'children'=>array_map(fn($item)=>[
-							'li._item',
-							'data-post-id'=>$item['post']->ID,
-							'data-wp-class--is-active'=>"callbacks.isItemActive",
-							'data-wp-class--is-open'=>"callbacks.isItemOpen",
-							['a._link',$item['post']->post_title]
-						],$item['children'])
-					]:''
-				],$item['children'])
-			]:''
+			'a._link',
+			'href'=>$root_post_id==0?home_url():get_permalink($root_post),
+			$attr['hasOwnTitle']?$attr['title']:$root_post->post_title
 		]
-	],$items)
+	],
+	[
+		'ul.menu-',
+		'data-wp-init'=>'callbacks.onInitMenu',
+		'children'=>array_map(fn($item)=>[
+			'li._item',
+			'class'=>['has-children'=>!empty($item['children'])],
+			'data-post-id'=>$item['post']->ID,
+			'data-wp-class--is-active'=>"callbacks.isItemActive",
+			'data-wp-class--is-open'=>"callbacks.isItemOpen",
+			$has_image?[
+				'img._image',
+				'src'=>wp_get_attachment_image_src(get_post_thumbnail_id($id_d1),'full')[0]??$dummy_image_url,
+				'alt'=>$item['post']->title
+			]:'',
+			[
+				'._contents',
+				!empty($item['children'])?['._arrow','data-wp-on--click'=>"actions.onClickToggle",['span._graphic']]:['._spacer'],
+				['a._link','href'=>get_permalink($item['post']),$item['post']->post_title],
+				!empty($item['children'])?['._toggle','data-wp-on--click'=>"actions.onClickToggle",['span._graphic']]:['._spacer'],
+				!empty($item['children'])?[
+					'ul.submenu-',
+					'data-wp-init'=>'callbacks.onInitMenu',
+					'children'=>array_map(fn($item)=>[
+						'li._item',
+						'data-post-id'=>$item['post']->ID,
+						'data-wp-class--is-active'=>"callbacks.isItemActive",
+						'data-wp-class--is-open'=>"callbacks.isItemOpen",
+						!empty($item['children'])?['._arrow','data-wp-on--click'=>"actions.onClickToggle",['span._graphic']]:['._spacer'],
+						['a._link','href'=>get_permalink($item['post']),$item['post']->post_title],
+						!empty($item['children'])?['._toggle','data-wp-on--click'=>"actions.onClickToggle",['span._graphic']]:['._spacer'],
+						!empty($item['children'])?[
+							'ul.endmenu-',
+							'data-wp-init'=>'callbacks.onInitMenu',
+							'children'=>array_map(fn($item)=>[
+								'li._item',
+								'data-post-id'=>$item['post']->ID,
+								'data-wp-class--is-active'=>"callbacks.isItemActive",
+								'data-wp-class--is-open'=>"callbacks.isItemOpen",
+								['a._link',$item['post']->post_title]
+							],$item['children'])
+						]:''
+					],$item['children'])
+				]:''
+			]
+		],$items)
+	]
 ]);

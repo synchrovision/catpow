@@ -48,6 +48,13 @@
 			"@include shd(($1));"
 		]
 	},
+	"catpow-scss msk":{
+		"scope":"scss",
+		"prefix":"msk",
+		"body":[
+			"@include msk(($1));"
+		]
+	},
 	"catpow-scss trn":{
 		"scope":"scss",
 		"prefix":"trn",
