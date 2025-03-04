@@ -34,7 +34,7 @@ class CP{
 		
 		spl_autoload_register(function($class){
 			static $classes_dirs;
-			if(!isset($classes_dirs)){$classes_dirs=self::get_file_paths('classes');}
+			$classes_dirs=self::get_file_paths('classes');
 			if(substr($class,0,7)==='Catpow\\'){
 				$class=str_replace('\\','/',substr($class,7));
 				foreach($classes_dirs as $dir){
