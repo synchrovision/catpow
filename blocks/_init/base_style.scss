@@ -192,10 +192,8 @@ $colors:(
 	&-rtf{
 		@include bnd((p:r));
 		@include usr((c:p));
-		&-contents{
-			&:empty::before{
-				content:'Text';
-			}
+		&:empty::before{
+			content:'Text';
 		}
 		&-portal{
 			@include bnd((p:f,w:f 960,l:0,r:0,b:0,mgi:a,z:10000));

@@ -5861,6 +5861,7 @@
     } = props;
     const { useMemo: useMemo3, useCallback: useCallback2, useState: useState2 } = wp.element;
     const classes = useMemo3(() => bem("cp-rtf " + className), [className]);
+    console.log(classes());
     const item = useMemo3(
       () => keys.items ? attr[keys.items][index] : attr,
       [attr, keys.items, index]
@@ -5905,10 +5906,10 @@
     );
     const [savedText, setSavedText] = useState2(text);
     const [isActive, setIsActive] = useState2(false);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-active": isSelected && isActive }) }, /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
       "div",
       {
-        className: classes.contents(),
+        className: classes({ "is-active": isSelected && isActive }),
         onClick: () => setIsActive(!isActive),
         ...otherProps,
         dangerouslySetInnerHTML: { __html: rtf(item.text, pref) }
