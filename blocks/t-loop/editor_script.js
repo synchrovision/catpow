@@ -1,5 +1,5 @@
 (() => {
-  // blocks/t-loop/editor_script.jsx
+  // ../blocks/t-loop/editor_script.jsx
   wp.blocks.registerBlockType("catpow/t-loop", {
     title: "\u{1F43E} T-loop",
     description: "\u30AF\u30A8\u30EA\u306E\u6295\u7A3F\u306E\u60C5\u5831\u3092\u8868\u793A\u3059\u308B\u305F\u3081\u306E\u30B3\u30F3\u30C6\u30CA\u3067\u3059\u3002",
@@ -23,7 +23,23 @@
             }
           ]
         }
-      )), /* @__PURE__ */ wp.element.createElement("div", { className: "wp-block-catpow-t-loop " + (AltMode ? "alt_content altMode" : "embedded_content") }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, AltMode ? /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" }) : content_path), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/t-loopcontent"], ["catpow/t-loopcontent", { name: "on_empty" }]], templateLock: "all" })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
+      )), /* @__PURE__ */ wp.element.createElement(
+        "div",
+        {
+          className: "wp-block-catpow-t-loop " + (AltMode ? "cp-altcontent altMode" : "embedded_content")
+        },
+        /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, AltMode ? /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" }) : content_path),
+        /* @__PURE__ */ wp.element.createElement(
+          InnerBlocks,
+          {
+            template: [
+              ["catpow/t-loopcontent"],
+              ["catpow/t-loopcontent", { name: "on_empty" }]
+            ],
+            templateLock: "all"
+          }
+        )
+      ), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
           label: "content path",
@@ -54,7 +70,13 @@
     category: "catpow",
     parent: ["catpow/t-loop"],
     attributes: {
-      name: { type: "attribute", label: "\u540D\u524D", selector: "t-loopContent", attribute: "name", default: "content" }
+      name: {
+        type: "attribute",
+        label: "\u540D\u524D",
+        selector: "t-loopContent",
+        attribute: "name",
+        default: "content"
+      }
     },
     edit({ attributes, className, setAttributes, clientId }) {
       const { InnerBlocks } = wp.blockEditor;

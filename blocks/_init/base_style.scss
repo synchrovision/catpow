@@ -6,75 +6,75 @@ $colors:(
 	c:currentColor
 );
 
-.components-panel{
-	div.sub{
-		@include bnd((pdl:10,mgb:20));
-		@include bdr((p:l,s:s,w:5,c:#eee));
-	}
-	img.selectImage{
-		@include bnd((w:100,h:a));
-	}
-}
-.selectButtons{
-	@include bnd((w:max));
-}
-.embedded_content{
-	@include bnd((p:r,h:50 a,pdt:20));
-	&>.label{
-		@include bnd((p:a,r:0,t:0,pd:5 10,z:10));
-		@include bg((c:b));
-		@include txt((a:c,p:10,h:10,f:g,w:r,c:t));
-		@include shd((b:1));
-	}
-}
-.alt_content{
-	@include bnd((p:r,h:50 a,pdt:20,mg:0 a));
-	@include bdr((s:s,w:1,c:t 50));
-	&>.label{
-		@include bnd((p:a,r:0,t:0,pd:.25em,z:10));
-		@include bg((c:wp));
-		@include txt((a:c,p:12,h:10,f:g,w:r,c:b));
-		@include shd((b:1));
-	}
-}
-.collapsible_content{
-	@include bnd((pdt:70,h:a 0,o:h));
-	@include trn((t:.5s));
-	>.label{
-		@include bnd((d:b,p:a,t:10,l:0,r:0,w:fit,h:fit,mg:a,pd:10 40));
-		@include bg((c:b));
-		@include bdr((s:s,w:2,r:30));
-		@include shd((b:2));
-		@include usr((c:p));
-		&::before{
-			content:'';
-			@include bnd((d:b,p:a,i:0,mg:a,mgl:10,w:10,h:10));
-			@include bdr((p:b r,s:s,w:2));
-			@include trn((t:.5s,r:-45deg,y:0));
+.cp{
+	&-components-panel{
+		div.sub{
+			@include bnd((pdl:10,mgb:20));
+			@include bdr((p:l,s:s,w:5,c:#eee));
+		}
+		img.selectImage{
+			@include bnd((w:100,h:a));
 		}
 	}
-	&.open{
-		@include bnd((h:a 100vh));
-		>.label::before{
-			@include trn((r:45deg,y:-5));
+	&-selectbuttons{
+		@include bnd((w:max));
+	}
+	&-embeddedcontent{
+		@include bnd((p:r,h:50 a,pdt:20));
+		&>.label{
+			@include bnd((p:a,r:0,t:0,pd:5 10,z:10));
+			@include bg((c:b));
+			@include txt((a:c,p:10,h:10,f:g,w:r,c:t));
+			@include shd((b:1));
 		}
 	}
-}
-.selectPosition{
-	@include tbl(());
-	td{
-		@include bnd((w:20,h:20));
-		@include bdr((s:s,w:1,c:t 20));
-		&.active{
+	&-altcontent{
+		@include bnd((p:r,h:50 a,pdt:20,mg:0 a));
+		@include bdr((s:s,w:1,c:t 50));
+		&>.label{
+			@include bnd((p:a,r:0,t:0,pd:.25em,z:10));
 			@include bg((c:wp));
-		}
-		&.disable{
-			@include bg((c:t 10));
+			@include txt((a:c,p:12,h:10,f:g,w:r,c:b));
+			@include shd((b:1));
 		}
 	}
-}
-.CP{
-	&-Message{
+	&-collapsible_content{
+		@include bnd((pdt:70,h:a 0,o:h));
+		@include trn((t:.5s));
+		>.label{
+			@include bnd((d:b,p:a,t:10,l:0,r:0,w:fit,h:fit,mg:a,pd:10 40));
+			@include bg((c:b));
+			@include bdr((s:s,w:2,r:30));
+			@include shd((b:2));
+			@include usr((c:p));
+			&::before{
+				content:'';
+				@include bnd((d:b,p:a,i:0,mg:a,mgl:10,w:10,h:10));
+				@include bdr((p:b r,s:s,w:2));
+				@include trn((t:.5s,r:-45deg,y:0));
+			}
+		}
+		&.open{
+			@include bnd((h:a 100vh));
+			>.label::before{
+				@include trn((r:45deg,y:-5));
+			}
+		}
+	}
+	&-selectposition{
+		@include tbl(());
+		td{
+			@include bnd((w:20,h:20));
+			@include bdr((s:s,w:1,c:t 20));
+			&.active{
+				@include bg((c:wp));
+			}
+			&.disable{
+				@include bg((c:t 10));
+			}
+		}
+	}
+	&-message{
 		@include bnd((pd:20));
 		&__body{
 			@include bnd((pd:20));
@@ -82,7 +82,7 @@ $colors:(
 			@include txt((ws:p,c:t-i 60,s:b,f:t,p:16,h:1.5em));
 		}
 	}
-	&-BoundingBox{
+	&-boundingbox{
 		@include bnd((p:r,bs:b,z:1000));
 		@include bdr((s:s,w:2,c:wp));
 		@include usr((e:n));
@@ -116,7 +116,7 @@ $colors:(
 			}
 		}
 	}
-	&-SelectThemeColor{
+	&-selectthemecolor{
 		&-colors,&-tones{
 			&-icon{
 				@include bnd((mg:0,pd:0 4));
@@ -148,7 +148,7 @@ $colors:(
 			@include txt((l:n));
 		}
 	}
-	&-PlacedPictures{
+	&-placedpictures{
 		&.is-edit-mode{
 			@include bnd((z:1000));
 			@include bdr((s:s,w:1,c:wp));
@@ -169,7 +169,7 @@ $colors:(
 			}
 		}
 	}
-	&-Link{
+	&-link{
 		@include bnd((p:r));
 		&-input{
 			@include bnd((d:b,p:a,w:1em fit,h:1em,pd:.25em 1em,b:-2em,l:-200,r:-200,mg:a));
@@ -189,7 +189,7 @@ $colors:(
 			}
 		}
 	}
-	&-RTF{
+	&-rtf{
 		@include bnd((p:r));
 		@include usr((c:p));
 		&-contents{
@@ -252,12 +252,12 @@ $colors:(
 			}
 		}
 	}
-	&-SelectResponsiveImage{
+	&-selectresponsiveimage{
 		&.is-video,&.is-img,&.is-picture,&-img{
 			@include bnd((d:b,w:f,h:a));
 		}
 	}
-	&-SelectPictureSources{
+	&-selectpicturesources{
 		@include bnd((w:f));
 		&.is-compact{
 			@include bnd((w:100));
@@ -276,7 +276,7 @@ $colors:(
 			}
 		}
 	}
-	&-CustomColorVars{
+	&-customcolorvars{
 		&-items{
 			@include bnd((pd:16));
 			@include flx((w:w));
@@ -297,7 +297,7 @@ $colors:(
 			}
 		}
 	}
-	&-NavBar{
+	&-navbar{
 		@include bnd((pd:8));
 		&-items{
 			@include bnd((pd:0,mg:0,w:fit,o:h));
@@ -321,7 +321,7 @@ $colors:(
 			}
 		}
 	}
-	&-EditItemsTable{
+	&-edititemstable{
 		@include tbl(());
 		@include bnd((mg:20 a));
 		&-thead,&-tbody{
@@ -359,7 +359,7 @@ $colors:(
 			}
 		}
 	}
-	&-ItemControl{
+	&-itemcontrol{
 		$block:&;
 		@include bnd((pd:2 5,p:r,w:fit,h:fit));
 		@include txt((a:c,p:12,h:10));
@@ -427,7 +427,7 @@ $colors:(
 		}
 		
 	}
-	&-DataSetInput{
+	&-datasetinput{
 		&-row{
 			@include bnd((d:b,p:r,mg:8,pd:8));
 			@include bdr((r:8));
@@ -454,174 +454,174 @@ $colors:(
 			}
 		}
 	}
-}
-.selectColor{
-	@include bnd((w:220));
-	@include txt((l:n));
-	li{
-		@include bnd((d:ib,p:r,w:20,h:20,mg:5));
-		@include usr((c:p));
-		&.fillColor{
-			@include bg((c:m));
-			&.color0{
-				@include bg((c:shd));
-			}
-		}
-		&::after{
-			content: ' ';
-			@include bnd((d:b,p:a,t:1,b:1,l:1,r:1));
-			@include bg((c:b));
-		}
-		&.relative{
-			@include bdr((r:50%));
-			&::after{
-				@include bdr((r:50%));
-			}
-		}
-		&.active::after{@include bnd((d:n));}
-	}
-}
-.selectPattern{
-	@include txt((l:n));
-	@include flx((w:w));
-	li{
-		@include bnd((f:1 1 30%,pdt:30%,mg:0));
-		@include bg((c:t 50,s:50% a));
-		@include usr((c:p));
-		&.active{@include bg((c:wp));}
-	}
-}
-.selectPreparedImage{
-	@include flx((w:w));
-	@include bg((c:t 20));
-	@include bdr((s:s,w:1,c:t 10));
-	.item{
-		@include bnd((f:0 0 10%,bs:b));
-		@include usr((c:p));
-		img{
-			@include bnd((w:f,h:a));
-		}
-		&.active{
-			@include bg((c:wp));
-		}
-	}
-}
-.selectPreparedImageSet{
-	@include flx((w:w));
-	@include bg((c:t 20));
-	@include bdr((s:s,w:1,c:t 10));
-	.item{
-		@include bnd((f:0 0 33%,bs:b));
-		@include usr((c:p));
-		img{
-			@include bnd((w:f,h:a));
-		}
-		&.active{
-			@include bg((c:wp));
-		}
-	}
-}
-.selectGridButtons{
-	@include bnd((mg:0));
-	@for $c from 2 through 6{
-		&.col#{$c}{
-			@include flx((w:w,c:$c));
-		}
-	}
-	.item{
-		@include bnd((pd:10 5,mg:0 0 -1 -1,bs:b));
-		@include bdr((s:s,w:1,c:t));
-		@include txt((a:c,p:13,h:1em,c:t));
-		@include usr((c:p));
-		&.active{
-			@include bg((c:wp));
-			@include txt((c:b));
-		}
-	}
-}
-.DataInputTable{
-	@include tbl((s:2));
-	&__head{
-		&__row{
-			&__cell{
-				@include bnd((pd:4));
-				@include txt((w:r));
-				@include bg((c:t 10));
-			}
-		}
-	}
-	&__body{
-		&__row{
-			&__cell{
-				@include bnd((pd:4));
-				@include bg((c:t 5));
-			}
-		}
-	}
-}
-
-.dataStructure{
-	.item{
-		@include bnd((pd:0,mg:0));
-		.title{
-			@include bnd((pd:.1em 0,pdl:1em,p:r,mg:0));
-			@include txt((p:12,w:r));
+	&-selectcolor{
+		@include bnd((w:220));
+		@include txt((l:n));
+		li{
+			@include bnd((d:ib,p:r,w:20,h:20,mg:5));
 			@include usr((c:p));
-			.name{
-				@include bnd((d:ib,mgl:1em));
-				@include txt((p:.8em,c:t 50));
-			}
-		}
-		&.hasChildren{
-			&>.title{
-				&::before{
-					content:'▶︎';
-					@include bnd((d:b,p:a,t:.3em,b:0,l:0,mg:a));
-					@include txt((p:.7em,c:t 50));
+			&.fillColor{
+				@include bg((c:m));
+				&.color0{
+					@include bg((c:shd));
 				}
 			}
-			&.open{
+			&::after{
+				content: ' ';
+				@include bnd((d:b,p:a,t:1,b:1,l:1,r:1));
+				@include bg((c:b));
+			}
+			&.relative{
+				@include bdr((r:50%));
+				&::after{
+					@include bdr((r:50%));
+				}
+			}
+			&.active::after{@include bnd((d:n));}
+		}
+	}
+	&-selectpattern{
+		@include txt((l:n));
+		@include flx((w:w));
+		li{
+			@include bnd((f:1 1 30%,pdt:30%,mg:0));
+			@include bg((c:t 50,s:50% a));
+			@include usr((c:p));
+			&.active{@include bg((c:wp));}
+		}
+	}
+	&-selectpreparedimage{
+		@include flx((w:w));
+		@include bg((c:t 20));
+		@include bdr((s:s,w:1,c:t 10));
+		.item{
+			@include bnd((f:0 0 10%,bs:b));
+			@include usr((c:p));
+			img{
+				@include bnd((w:f,h:a));
+			}
+			&.active{
+				@include bg((c:wp));
+			}
+		}
+	}
+	&-selectpreparedimageset{
+		@include flx((w:w));
+		@include bg((c:t 20));
+		@include bdr((s:s,w:1,c:t 10));
+		.item{
+			@include bnd((f:0 0 33%,bs:b));
+			@include usr((c:p));
+			img{
+				@include bnd((w:f,h:a));
+			}
+			&.active{
+				@include bg((c:wp));
+			}
+		}
+	}
+	&-selectgridbuttons{
+		@include bnd((mg:0));
+		@for $c from 2 through 6{
+			&.col#{$c}{
+				@include flx((w:w,c:$c));
+			}
+		}
+		.item{
+			@include bnd((pd:10 5,mg:0 0 -1 -1,bs:b));
+			@include bdr((s:s,w:1,c:t));
+			@include txt((a:c,p:13,h:1em,c:t));
+			@include usr((c:p));
+			&.active{
+				@include bg((c:wp));
+				@include txt((c:b));
+			}
+		}
+	}
+	&-datainputtable{
+		@include tbl((s:2));
+		&__head{
+			&__row{
+				&__cell{
+					@include bnd((pd:4));
+					@include txt((w:r));
+					@include bg((c:t 10));
+				}
+			}
+		}
+		&__body{
+			&__row{
+				&__cell{
+					@include bnd((pd:4));
+					@include bg((c:t 5));
+				}
+			}
+		}
+	}
+
+	&-datastructure{
+		.item{
+			@include bnd((pd:0,mg:0));
+			.title{
+				@include bnd((pd:.1em 0,pdl:1em,p:r,mg:0));
+				@include txt((p:12,w:r));
+				@include usr((c:p));
+				.name{
+					@include bnd((d:ib,mgl:1em));
+					@include txt((p:.8em,c:t 50));
+				}
+			}
+			&.hasChildren{
 				&>.title{
 					&::before{
-						@include trn((r:90deg));
+						content:'▶︎';
+						@include bnd((d:b,p:a,t:.3em,b:0,l:0,mg:a));
+						@include txt((p:.7em,c:t 50));
+					}
+				}
+				&.open{
+					&>.title{
+						&::before{
+							@include trn((r:90deg));
+						}
 					}
 				}
 			}
-		}
-		.children{
-			@include bnd((pdl:1em));
+			.children{
+				@include bnd((pdl:1em));
+			}
 		}
 	}
-}
 
-.EventInputCard{
-	&__header{
-		
-	}
-	&__body{
-		
-	}
-	&__footer{
-		@include txt((p:10));
-	}
-	&__item{
-		@include flx((w:w,g:5,a:c));
-		@include bnd((pd:5 0));
-		&__pref{
-			@include bnd((f:0 0 a,mgb:8));
+	&-eventinputcard{
+		&__header{
+			
 		}
-		&__title{
-			@include bnd((f:0 0 80,mgb:8));
-			@include txt((b:k));
+		&__body{
+			
 		}
-		&__inputs{
-			@include bnd((f:1 1 80));
+		&__footer{
+			@include txt((p:10));
 		}
-		&.is-type-data &,
-		&.is-type-buttons &,
-		&.is-type-gridbuttons &{
+		&__item{
+			@include flx((w:w,g:5,a:c));
+			@include bnd((pd:5 0));
+			&__pref{
+				@include bnd((f:0 0 a,mgb:8));
+			}
+			&__title{
+				@include bnd((f:0 0 80,mgb:8));
+				@include txt((b:k));
+			}
 			&__inputs{
-				@include bnd((f:1 1 f));
+				@include bnd((f:1 1 80));
+			}
+			&.is-type-data &,
+			&.is-type-buttons &,
+			&.is-type-gridbuttons &{
+				&__inputs{
+					@include bnd((f:1 1 f));
+				}
 			}
 		}
 	}

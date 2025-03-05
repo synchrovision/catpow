@@ -10,7 +10,16 @@
       const { useState, useMemo } = wp.element;
       const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
-      const { items = [], classes, loopParam, loopCount, doLoop, EditMode = false, AltMode = false, currentItemIndex } = attributes;
+      const {
+        items = [],
+        classes,
+        loopParam,
+        loopCount,
+        doLoop,
+        EditMode = false,
+        AltMode = false,
+        currentItemIndex
+      } = attributes;
       const primaryClass = "wp-block-catpow-materials";
       var states = CP.wordsToFlags(classes);
       const selectiveClasses = useMemo(() => {
@@ -20,15 +29,41 @@
             label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
             values: "isTemplate",
             sub: [
-              { name: "loop", input: "bool", label: "\u30EB\u30FC\u30D7", key: "doLoop", sub: [
-                { name: "contentPath", label: "content path", input: "text", key: "content_path" },
-                { name: "query", label: "query", input: "textarea", key: "query" },
-                { name: "loopCount", label: "\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", input: "range", key: "loopCount", min: 1, max: 16 }
-              ] }
+              {
+                name: "loop",
+                input: "bool",
+                label: "\u30EB\u30FC\u30D7",
+                key: "doLoop",
+                sub: [
+                  {
+                    name: "contentPath",
+                    label: "content path",
+                    input: "text",
+                    key: "content_path"
+                  },
+                  {
+                    name: "query",
+                    label: "query",
+                    input: "textarea",
+                    key: "query"
+                  },
+                  {
+                    name: "loopCount",
+                    label: "\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570",
+                    input: "range",
+                    key: "loopCount",
+                    min: 1,
+                    max: 16
+                  }
+                ]
+              }
             ]
           }
         ];
-        wp.hooks.applyFilters("catpow.blocks.materials.selectiveClasses", CP.finderProxy(selectiveClasses2));
+        wp.hooks.applyFilters(
+          "catpow.blocks.materials.selectiveClasses",
+          CP.finderProxy(selectiveClasses2)
+        );
         return selectiveClasses2;
       }, []);
       const selectiveItemClasses = useMemo(() => {
@@ -36,12 +71,20 @@
           "color",
           { name: "label", label: "\u30E9\u30D9\u30EB", values: "hasLabel" }
         ];
-        wp.hooks.applyFilters("catpow.blocks.materials.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
+        wp.hooks.applyFilters(
+          "catpow.blocks.materials.selectiveItemClasses",
+          CP.finderProxy(selectiveItemClasses2)
+        );
         return selectiveItemClasses2;
       }, []);
       let rtn = [];
       const imageKeys = {
-        image: { src: "imageSrc", alt: "imageAlt", code: "imageCode", items: "items" }
+        image: {
+          src: "imageSrc",
+          alt: "imageAlt",
+          code: "imageCode",
+          items: "items"
+        }
       };
       const save = () => {
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });
@@ -130,13 +173,7 @@
           rtn.push(rtn[rtn.length % len]);
         }
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectModeToolbar,
-        {
-          set: setAttributes,
-          attr: attributes
-        }
-      ), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
           title: "\u30AF\u30E9\u30B9",
@@ -163,26 +200,37 @@
           index: attributes.currentItemIndex,
           selectiveClasses: selectiveItemClasses
         }
-      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           set: setAttributes,
           attr: attributes,
           columns: [
             { type: "text", key: "label", cond: true },
-            { type: "items", key: "items", columns: [
-              { type: "text", key: "title", cond: true },
-              { type: "text", key: "amount", cond: true },
-              { type: "text", key: "caption", cond: true }
-            ], cond: true }
+            {
+              type: "items",
+              key: "items",
+              columns: [
+                { type: "text", key: "title", cond: true },
+                { type: "text", key: "amount", cond: true },
+                { type: "text", key: "caption", cond: true }
+              ],
+              cond: true
+            }
           ],
           isTemplate: states.isTemplate
         }
-      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn))));
+      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn))));
     },
     save({ attributes, className }) {
       const { InnerBlocks, RichText } = wp.blockEditor;
-      const { items = [], classes = "", loopParam, loopCount, doLoop } = attributes;
+      const {
+        items = [],
+        classes = "",
+        loopParam,
+        loopCount,
+        doLoop
+      } = attributes;
       var classArray = _.uniq(classes.split(" "));
       var states = CP.wordsToFlags(classes);
       let rtn = [];

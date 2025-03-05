@@ -1,7 +1,7 @@
 @import 'admin_style_config.scss';
 
 .wp-block-catpow-picture{
-	&.alt_content{
+	&.cp-altcontent{
 		@include bnd((pdt:0));
 		&.sp{
 			@include bnd((w:375));

@@ -34,7 +34,10 @@
           transform: (attributes) => {
             attributes.classes = "wp-block-catpow-showcase hasCounter";
             const block = wp.data.select("core/blocks").getBlockType("catpow/showcase");
-            attributes.items = CP.convertRowsToItems(attributes.rows, block.attributes.items);
+            attributes.items = CP.convertRowsToItems(
+              attributes.rows,
+              block.attributes.items
+            );
             return wp.blocks.createBlock("catpow/showcase", attributes);
           }
         }
@@ -43,9 +46,25 @@
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useState, useMemo } = wp.element;
-      const { BlockControls, InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
+      const {
+        BlockControls,
+        InnerBlocks,
+        InspectorControls,
+        RichText,
+        useBlockProps
+      } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
-      const { items = [], classes, TitleTag, countPrefix, countSuffix, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+      const {
+        items = [],
+        classes,
+        TitleTag,
+        countPrefix,
+        countSuffix,
+        loopCount,
+        doLoop,
+        EditMode = false,
+        AltMode = false
+      } = attributes;
       const primaryClass = "wp-block-catpow-showcase";
       var classArray = _.uniq((className + " " + classes).split(" "));
       const states = CP.wordsToFlags(classes);
@@ -55,27 +74,77 @@
         const selectiveClasses2 = [
           "color",
           "textColor",
-          { name: "counter", label: "\u756A\u53F7", values: "hasCounter", sub: [
-            { name: "countPrefix", input: "text", label: "\u756A\u53F7\u524D\u7F6E\u30C6\u30AD\u30B9\u30C8", key: "countPrefix" },
-            { name: "countSuffix", input: "text", label: "\u756A\u53F7\u5F8C\u7F6E\u30C6\u30AD\u30B9\u30C8", key: "countSuffix" }
-          ] },
-          { name: "titleCaption", label: "\u30BF\u30A4\u30C8\u30EB\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "hasTitleCaption" },
-          { name: "size", type: "buttons", label: "\u30B5\u30A4\u30BA", values: ["small", "medium", "large"] },
+          {
+            name: "counter",
+            label: "\u756A\u53F7",
+            values: "hasCounter",
+            sub: [
+              {
+                name: "countPrefix",
+                input: "text",
+                label: "\u756A\u53F7\u524D\u7F6E\u30C6\u30AD\u30B9\u30C8",
+                key: "countPrefix"
+              },
+              {
+                name: "countSuffix",
+                input: "text",
+                label: "\u756A\u53F7\u5F8C\u7F6E\u30C6\u30AD\u30B9\u30C8",
+                key: "countSuffix"
+              }
+            ]
+          },
+          {
+            name: "titleCaption",
+            label: "\u30BF\u30A4\u30C8\u30EB\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3",
+            values: "hasTitleCaption"
+          },
+          {
+            name: "size",
+            type: "buttons",
+            label: "\u30B5\u30A4\u30BA",
+            values: ["small", "medium", "large"]
+          },
           { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" },
           {
             name: "template",
             label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
             values: "isTemplate",
             sub: [
-              { name: "loop", input: "bool", label: "\u30EB\u30FC\u30D7", key: "doLoop", sub: [
-                { name: "contentPath", label: "content path", input: "text", key: "content_path" },
-                { name: "query", label: "query", input: "textarea", key: "query" },
-                { name: "loopCount", label: "\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", input: "range", key: "loopCount", min: 1, max: 16 }
-              ] }
+              {
+                name: "loop",
+                input: "bool",
+                label: "\u30EB\u30FC\u30D7",
+                key: "doLoop",
+                sub: [
+                  {
+                    name: "contentPath",
+                    label: "content path",
+                    input: "text",
+                    key: "content_path"
+                  },
+                  {
+                    name: "query",
+                    label: "query",
+                    input: "textarea",
+                    key: "query"
+                  },
+                  {
+                    name: "loopCount",
+                    label: "\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570",
+                    input: "range",
+                    key: "loopCount",
+                    min: 1,
+                    max: 16
+                  }
+                ]
+              }
             ]
           }
         ];
-        wp.hooks.applyFilters("catpow.blocks.showcase.selectiveClasses", CP.finderProxy(selectiveClasses2));
+        wp.hooks.applyFilters(
+          "catpow.blocks.showcase.selectiveClasses",
+          CP.finderProxy(selectiveClasses2)
+        );
         return selectiveClasses2;
       }, []);
       const selectiveItemClasses = useMemo(() => {
@@ -85,7 +154,10 @@
           { name: "image", input: "image", label: "\u753B\u50CF", keys: imageKeys2.image },
           "event"
         ];
-        wp.hooks.applyFilters("catpow.blocks.showcase.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
+        wp.hooks.applyFilters(
+          "catpow.blocks.showcase.selectiveItemClasses",
+          CP.finderProxy(selectiveItemClasses2)
+        );
         return selectiveItemClasses2;
       }, []);
       const selectiveItemTemplateClasses = useMemo(() => {
@@ -97,7 +169,10 @@
             key: "imageCode"
           }
         ];
-        wp.hooks.applyFilters("catpow.blocks.showcase.selectiveItemTemplateClasses", CP.finderProxy(selectiveItemTemplateClasses2));
+        wp.hooks.applyFilters(
+          "catpow.blocks.showcase.selectiveItemTemplateClasses",
+          CP.finderProxy(selectiveItemTemplateClasses2)
+        );
         return selectiveItemTemplateClasses2;
       }, []);
       let rtn = [];
@@ -155,18 +230,25 @@
                 },
                 value: item.titleCaption
               }
-            ), /* @__PURE__ */ wp.element.createElement("div", { className: "text", onFocus: () => {
-              attributes.blockState.enableBlockFormat = true;
-            } }, /* @__PURE__ */ wp.element.createElement(
-              RichText,
+            ), /* @__PURE__ */ wp.element.createElement(
+              "div",
               {
-                onChange: (text) => {
-                  items[index].text = text;
-                  save();
-                },
-                value: item.text
-              }
-            )), states.hasLink && /* @__PURE__ */ wp.element.createElement(
+                className: "text",
+                onFocus: () => {
+                  attributes.blockState.enableBlockFormat = true;
+                }
+              },
+              /* @__PURE__ */ wp.element.createElement(
+                RichText,
+                {
+                  onChange: (text) => {
+                    items[index].text = text;
+                    save();
+                  },
+                  value: item.text
+                }
+              )
+            ), states.hasLink && /* @__PURE__ */ wp.element.createElement(
               CP.Link.Edit,
               {
                 className: "link",
@@ -244,7 +326,7 @@
           index: attributes.currentItemIndex,
           selectiveClasses: selectiveItemClasses
         }
-      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           set: setAttributes,
@@ -253,18 +335,29 @@
             { type: "image", label: "image", keys: imageKeys.image },
             { type: "text", key: "imageCode", cond: states.isTemplate },
             { type: "text", key: "title" },
-            { type: "text", key: "titleCaption", cond: states.hasTitleCaption },
+            {
+              type: "text",
+              key: "titleCaption",
+              cond: states.hasTitleCaption
+            },
             { type: "text", key: "text" },
             { type: "text", key: "linkText", cond: states.hasLink },
             { type: "text", key: "linkUrl", cond: states.hasLink }
           ],
           isTemplate: states.isTemplate
         }
-      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { ...blockProps }, rtn)));
+      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { ...blockProps }, rtn)));
     },
     save({ attributes, className }) {
       const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-      const { items = [], classes = "", TitleTag, countPrefix, countSuffix, doLoop } = attributes;
+      const {
+        items = [],
+        classes = "",
+        TitleTag,
+        countPrefix,
+        countSuffix,
+        doLoop
+      } = attributes;
       var classArray = _.uniq(classes.split(" "));
       const states = CP.wordsToFlags(classes);
       const { imageKeys, linkKeys } = CP.config.showcase;

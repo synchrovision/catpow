@@ -9,7 +9,14 @@
       text: { type: "string", default: "" }
     },
     example: CP.example,
-    edit({ attributes, className, setAttributes, onReplace, mergeBlocks, isSelected }) {
+    edit({
+      attributes,
+      className,
+      setAttributes,
+      onReplace,
+      mergeBlocks,
+      isSelected
+    }) {
       return /* @__PURE__ */ wp.element.createElement(
         CP.RTF.Edit,
         {

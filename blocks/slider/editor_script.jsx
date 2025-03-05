@@ -379,7 +379,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 					<CP.ItemControlInfoPanel/>
 				</InspectorControls>
 				{attributes.EditMode?(
-					<div className="alt_content">
+					<div className="cp-altcontent">
 						<div className="label">
 							<Icon icon="edit"/>
 						</div>
@@ -404,7 +404,7 @@ wp.blocks.registerBlockType('catpow/slider',{
 				):(
 					<>
 						{(AltMode && doLoop)?(
-							<div className="alt_content">
+							<div className="cp-altcontent">
 								<div className="label">
 									<Icon icon="welcome-comments"/>
 								</div>

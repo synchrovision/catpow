@@ -22,7 +22,23 @@
             }
           ]
         }
-      )), /* @__PURE__ */ wp.element.createElement("div", { className: "loopBlock " + (AltMode ? "alt_content altMode" : "embedded_content") }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, AltMode ? /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" }) : content_path), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/loopblockcontent"], ["catpow/loopblockcontent", { name: "on_empty" }]], templateLock: "all" })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
+      )), /* @__PURE__ */ wp.element.createElement(
+        "div",
+        {
+          className: "loopBlock " + (AltMode ? "cp-altcontent altMode" : "cp-embeddedcontent")
+        },
+        /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, AltMode ? /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" }) : content_path),
+        /* @__PURE__ */ wp.element.createElement(
+          InnerBlocks,
+          {
+            template: [
+              ["catpow/loopblockcontent"],
+              ["catpow/loopblockcontent", { name: "on_empty" }]
+            ],
+            templateLock: "all"
+          }
+        )
+      ), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
           label: "content path",
@@ -53,7 +69,13 @@
     category: "catpow",
     parent: ["catpow/loopblock"],
     attributes: {
-      name: { type: "attribute", label: "\u540D\u524D", selector: "loopBlockContent", attribute: "name", default: "content" }
+      name: {
+        type: "attribute",
+        label: "\u540D\u524D",
+        selector: "loopBlockContent",
+        attribute: "name",
+        default: "content"
+      }
     },
     edit({ attributes, className, setAttributes, clientId }) {
       const { InnerBlocks } = wp.blockEditor;

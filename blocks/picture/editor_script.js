@@ -20,7 +20,13 @@
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys } = blockConfig;
       const selectiveClasses = [
-        { input: "picture", label: "\u753B\u50CF", keys: imageKeys.image, devices, isTemplate: states.isTemplate },
+        {
+          input: "picture",
+          label: "\u753B\u50CF",
+          keys: imageKeys.image,
+          devices,
+          isTemplate: states.isTemplate
+        },
         "customMargin",
         "customContentWidth",
         {
@@ -36,17 +42,32 @@
           ]
         }
       ];
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices }), /* @__PURE__ */ wp.element.createElement("div", { className: classes + (device ? " alt_content " + device : ""), style: vars }, device && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(
-        CP.SelectResponsiveImage,
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectDeviceToolbar,
         {
           attr: attributes,
           set: setAttributes,
-          keys: imageKeys.image,
-          device,
-          devices,
-          isTemplate: states.isTemplate
+          devices
         }
-      )), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+      ), /* @__PURE__ */ wp.element.createElement(
+        "div",
+        {
+          className: classes + (device ? " cp-altcontent " + device : ""),
+          style: vars
+        },
+        device && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })),
+        /* @__PURE__ */ wp.element.createElement(
+          CP.SelectResponsiveImage,
+          {
+            attr: attributes,
+            set: setAttributes,
+            keys: imageKeys.image,
+            device,
+            devices,
+            isTemplate: states.isTemplate
+          }
+        )
+      ), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
           title: "\u30AF\u30E9\u30B9",

@@ -2,7 +2,7 @@
 
 .wp-block-catpow-graphics{
 	@include usr((s:n,c:p));
-	&.alt_content{
+	&.cp-altcontent{
 		@include bnd((pdt:0));
 		&.sp{
 			@include bnd((w:375));

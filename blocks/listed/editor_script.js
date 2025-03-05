@@ -3,9 +3,24 @@
   CP.config.listed = {
     imageKeys: {
       image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
-      headerImage: { src: "headerImageSrc", alt: "headerImageAlt", code: "headerImageCode", items: "items" },
-      subImage: { src: "subImageSrc", alt: "subImageAlt", code: "subImageCode", items: "items" },
-      backgroundImage: { src: "backgroundImageSrc", srcset: "backgroundImageSrcset", code: "backgroundImageCode", items: "items" }
+      headerImage: {
+        src: "headerImageSrc",
+        alt: "headerImageAlt",
+        code: "headerImageCode",
+        items: "items"
+      },
+      subImage: {
+        src: "subImageSrc",
+        alt: "subImageAlt",
+        code: "subImageCode",
+        items: "items"
+      },
+      backgroundImage: {
+        src: "backgroundImageSrc",
+        srcset: "backgroundImageSrcset",
+        code: "backgroundImageCode",
+        items: "items"
+      }
     }
   };
   wp.blocks.registerBlockType("catpow/listed", {
@@ -29,7 +44,10 @@
           transform: (attributes) => {
             attributes.classes = "wp-block-catpow-listed menu medium hasHeader hasTitle hasTitleCaption hasImage hasText";
             const block = wp.data.select("core/blocks").getBlockType("catpow/listed");
-            attributes.items = CP.convertRowsToItems(attributes.rows, block.attributes.items);
+            attributes.items = CP.convertRowsToItems(
+              attributes.rows,
+              block.attributes.items
+            );
             return wp.blocks.createBlock("catpow/listed", attributes);
           }
         }
@@ -40,19 +58,48 @@
       const { useState, useMemo } = wp.element;
       const { InnerBlocks, InspectorControls, RichText: RichText2, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
-      const { items = [], TitleTag, SubTitleTag, classes: classes2 = "", countPrefix, countSuffix, subCountPrefix, subCountSuffix, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+      const {
+        items = [],
+        TitleTag,
+        SubTitleTag,
+        classes: classes2 = "",
+        countPrefix,
+        countSuffix,
+        subCountPrefix,
+        subCountSuffix,
+        loopCount,
+        doLoop,
+        EditMode = false,
+        AltMode = false
+      } = attributes;
       const primaryClass = "wp-block-catpow-listed";
       var classArray = _.uniq((className + " " + classes2).split(" "));
       var classNameArray = className.split(" ");
       var states = CP.wordsToFlags(classes2);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          { name: "titleTag", input: "buttons", filter: "titleTag", key: "TitleTag", label: "\u30BF\u30A4\u30C8\u30EB\u30BF\u30B0", values: ["h2", "h3", "h4"], effect: (val, { set }) => {
-            if (/^h\d$/.test(val)) {
-              set({ SubTitleTag: "h" + (parseInt(val[1]) + 1) });
+          {
+            name: "titleTag",
+            input: "buttons",
+            filter: "titleTag",
+            key: "TitleTag",
+            label: "\u30BF\u30A4\u30C8\u30EB\u30BF\u30B0",
+            values: ["h2", "h3", "h4"],
+            effect: (val, { set }) => {
+              if (/^h\d$/.test(val)) {
+                set({ SubTitleTag: "h" + (parseInt(val[1]) + 1) });
+              }
             }
-          } },
-          { name: "subTitleTag", input: "buttons", filter: "subTitleTag", key: "SubTitleTag", label: "\u30B5\u30D6\u30BF\u30A4\u30C8\u30EB\u30BF\u30B0", values: ["h3", "h4", "h5"], cond: "hasSubTitle" },
+          },
+          {
+            name: "subTitleTag",
+            input: "buttons",
+            filter: "subTitleTag",
+            key: "SubTitleTag",
+            label: "\u30B5\u30D6\u30BF\u30A4\u30C8\u30EB\u30BF\u30B0",
+            values: ["h3", "h4", "h5"],
+            cond: "hasSubTitle"
+          },
           {
             name: "type",
             label: "\u30BF\u30A4\u30D7",
@@ -67,27 +114,73 @@
             sub: {
               orderd: [
                 { name: "image", label: "\u753B\u50CF", values: "hasImage" },
-                { name: "countPrefix", input: "text", label: "\u756A\u53F7\u524D\u7F6E\u30C6\u30AD\u30B9\u30C8", key: "countPrefix" },
-                { name: "countSuffix", input: "text", label: "\u756A\u53F7\u5F8C\u7F6E\u30C6\u30AD\u30B9\u30C8", key: "countSuffix" },
-                { name: "titleCaption", label: "\u30BF\u30A4\u30C8\u30EB\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "hasTitleCaption" },
-                { name: "subTitle", label: "\u30B5\u30D6\u30BF\u30A4\u30C8\u30EB", values: "hasSubTitle" },
+                {
+                  name: "countPrefix",
+                  input: "text",
+                  label: "\u756A\u53F7\u524D\u7F6E\u30C6\u30AD\u30B9\u30C8",
+                  key: "countPrefix"
+                },
+                {
+                  name: "countSuffix",
+                  input: "text",
+                  label: "\u756A\u53F7\u5F8C\u7F6E\u30C6\u30AD\u30B9\u30C8",
+                  key: "countSuffix"
+                },
+                {
+                  name: "titleCaption",
+                  label: "\u30BF\u30A4\u30C8\u30EB\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3",
+                  values: "hasTitleCaption"
+                },
+                {
+                  name: "subTitle",
+                  label: "\u30B5\u30D6\u30BF\u30A4\u30C8\u30EB",
+                  values: "hasSubTitle"
+                },
                 { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" }
               ],
-              news: [
-                { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" }
-              ],
+              news: [{ name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" }],
               index: [
-                { name: "level", type: "gridbuttons", label: "\u30EC\u30D9\u30EB", "values": ["level0", "level1", "level2", "level3"] }
+                {
+                  name: "level",
+                  type: "gridbuttons",
+                  label: "\u30EC\u30D9\u30EB",
+                  values: ["level0", "level1", "level2", "level3"]
+                }
               ],
               menu: [
-                { name: "size", type: "buttons", label: "\u30B5\u30A4\u30BA", values: ["small", "medium", "large"] },
-                { name: "image", type: "buttons", label: "\u753B\u50CF", values: { noImage: "\u306A\u3057", hasImage: "\u5927", hasHeaderImage: "\u5C0F" } },
-                { name: "backgroundImage", label: "\u80CC\u666F\u753B\u50CF", values: "hasBackgroundImage", sub: [
-                  { name: "paleBG", label: "\u8584\u304F", values: "paleBG" }
-                ] },
-                { name: "backgroundColor", label: "\u80CC\u666F\u8272", values: "hasBackgroundColor" },
+                {
+                  name: "size",
+                  type: "buttons",
+                  label: "\u30B5\u30A4\u30BA",
+                  values: ["small", "medium", "large"]
+                },
+                {
+                  name: "image",
+                  type: "buttons",
+                  label: "\u753B\u50CF",
+                  values: {
+                    noImage: "\u306A\u3057",
+                    hasImage: "\u5927",
+                    hasHeaderImage: "\u5C0F"
+                  }
+                },
+                {
+                  name: "backgroundImage",
+                  label: "\u80CC\u666F\u753B\u50CF",
+                  values: "hasBackgroundImage",
+                  sub: [{ name: "paleBG", label: "\u8584\u304F", values: "paleBG" }]
+                },
+                {
+                  name: "backgroundColor",
+                  label: "\u80CC\u666F\u8272",
+                  values: "hasBackgroundColor"
+                },
                 "textColor",
-                { name: "titleCaption", label: "\u30BF\u30A4\u30C8\u30EB\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "hasTitleCaption" },
+                {
+                  name: "titleCaption",
+                  label: "\u30BF\u30A4\u30C8\u30EB\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3",
+                  values: "hasTitleCaption"
+                },
                 { name: "text", label: "\u30C6\u30AD\u30B9\u30C8", values: "hasText" },
                 { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" }
               ]
@@ -110,15 +203,41 @@
             label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
             values: "isTemplate",
             sub: [
-              { name: "loop", input: "bool", label: "\u30EB\u30FC\u30D7", key: "doLoop", sub: [
-                { name: "contentPath", label: "content path", input: "text", key: "content_path" },
-                { name: "query", label: "query", input: "textarea", key: "query" },
-                { name: "loopCount", label: "\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", input: "range", key: "loopCount", min: 1, max: 16 }
-              ] }
+              {
+                name: "loop",
+                input: "bool",
+                label: "\u30EB\u30FC\u30D7",
+                key: "doLoop",
+                sub: [
+                  {
+                    name: "contentPath",
+                    label: "content path",
+                    input: "text",
+                    key: "content_path"
+                  },
+                  {
+                    name: "query",
+                    label: "query",
+                    input: "textarea",
+                    key: "query"
+                  },
+                  {
+                    name: "loopCount",
+                    label: "\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570",
+                    input: "range",
+                    key: "loopCount",
+                    min: 1,
+                    max: 16
+                  }
+                ]
+              }
             ]
           }
         ];
-        wp.hooks.applyFilters("catpow.blocks.listed.selectiveClasses", CP.finderProxy(selectiveClasses2));
+        wp.hooks.applyFilters(
+          "catpow.blocks.listed.selectiveClasses",
+          CP.finderProxy(selectiveClasses2)
+        );
         return selectiveClasses2;
       }, []);
       const selectiveItemTemplateClasses = useMemo(() => {
@@ -145,7 +264,10 @@
             cond: "hasSubImage"
           }
         ];
-        wp.hooks.applyFilters("catpow.blocks.listed.selectiveItemTemplateClasses", CP.finderProxy(selectiveItemTemplateClasses2));
+        wp.hooks.applyFilters(
+          "catpow.blocks.listed.selectiveItemTemplateClasses",
+          CP.finderProxy(selectiveItemTemplateClasses2)
+        );
         return selectiveItemTemplateClasses2;
       }, []);
       const save = () => {
@@ -275,13 +397,7 @@
         );
       });
       const blockProps = useBlockProps({ className: classes2 });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectModeToolbar,
-        {
-          set: setAttributes,
-          attr: attributes
-        }
-      ), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
           title: "\u30AF\u30E9\u30B9",
@@ -319,33 +435,86 @@
           index: attributes.currentItemIndex,
           selectiveClasses: selectiveItemTemplateClasses
         }
-      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           set: setAttributes,
           attr: attributes,
           columns: [
-            { type: "image", label: "image", keys: imageKeys.image, cond: states.hasImage },
-            { type: "text", key: "imageCode", cond: states.isTemplate && states.hasImage },
-            { type: "image", label: "sub", keys: imageKeys.subImage, cond: states.hasSubImage },
-            { type: "text", key: "subImageCode", cond: states.isTemplate && states.hasSubImage },
-            { type: "image", label: "header", keys: imageKeys.headerImage, cond: states.hasHeaderImage },
-            { type: "text", key: "headerImageCode", cond: states.isTemplate && states.hasHeaderImage },
-            { type: "image", label: "bg", keys: imageKeys.backgroundImage, cond: states.hasBackgroundImage },
-            { type: "text", key: "backgroundImageCode", cond: states.isTemplate && states.hasBackgroundImage },
+            {
+              type: "image",
+              label: "image",
+              keys: imageKeys.image,
+              cond: states.hasImage
+            },
+            {
+              type: "text",
+              key: "imageCode",
+              cond: states.isTemplate && states.hasImage
+            },
+            {
+              type: "image",
+              label: "sub",
+              keys: imageKeys.subImage,
+              cond: states.hasSubImage
+            },
+            {
+              type: "text",
+              key: "subImageCode",
+              cond: states.isTemplate && states.hasSubImage
+            },
+            {
+              type: "image",
+              label: "header",
+              keys: imageKeys.headerImage,
+              cond: states.hasHeaderImage
+            },
+            {
+              type: "text",
+              key: "headerImageCode",
+              cond: states.isTemplate && states.hasHeaderImage
+            },
+            {
+              type: "image",
+              label: "bg",
+              keys: imageKeys.backgroundImage,
+              cond: states.hasBackgroundImage
+            },
+            {
+              type: "text",
+              key: "backgroundImageCode",
+              cond: states.isTemplate && states.hasBackgroundImage
+            },
             { type: "text", key: "title", cond: states.hasTitle },
-            { type: "text", key: "titleCaption", cond: states.hasTitleCaption },
+            {
+              type: "text",
+              key: "titleCaption",
+              cond: states.hasTitleCaption
+            },
             { type: "text", key: "subTitle", cond: states.hasSubTitle },
             { type: "text", key: "text", cond: states.hasText },
             { type: "text", key: "linkUrl", cond: states.hasLink }
           ],
           isTemplate: states.isTemplate
         }
-      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { ...blockProps }, rtn)));
+      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { ...blockProps }, rtn)));
     },
     save({ attributes, className }) {
       const { InnerBlocks, RichText: RichText2, useBlockProps } = wp.blockEditor;
-      const { items = [], TitleTag, SubTitleTag, classes: classes2 = "", countPrefix, countSuffix, subCountPrefix, subCountSuffix, linkUrl, linkText, loopParam, doLoop } = attributes;
+      const {
+        items = [],
+        TitleTag,
+        SubTitleTag,
+        classes: classes2 = "",
+        countPrefix,
+        countSuffix,
+        subCountPrefix,
+        subCountSuffix,
+        linkUrl,
+        linkText,
+        loopParam,
+        doLoop
+      } = attributes;
       const states = CP.wordsToFlags(classes2);
       const { imageKeys } = CP.config.listed;
       let rtn = [];
@@ -367,7 +536,21 @@
               index,
               isTemplate: states.isTemplate
             }
-          )), /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText2.Content, { tagName: TitleTag, className: "title", value: item.title }), states.hasTitle && states.hasTitleCaption && /* @__PURE__ */ wp.element.createElement(RichText2.Content, { tagName: "p", className: "titlecaption", value: item.titleCaption }))), (states.hasSubImage || states.hasSubTitle || states.hasText) && /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, states.hasSubCounter && /* @__PURE__ */ wp.element.createElement("div", { className: "subcounter" }, subCountPrefix && /* @__PURE__ */ wp.element.createElement("span", { className: "prefix" }, subCountPrefix), /* @__PURE__ */ wp.element.createElement("span", { className: "number" }, index + 1), subCountSuffix && /* @__PURE__ */ wp.element.createElement("span", { className: "suffix" }, subCountSuffix)), states.hasSubImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(
+          )), /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(
+            RichText2.Content,
+            {
+              tagName: TitleTag,
+              className: "title",
+              value: item.title
+            }
+          ), states.hasTitle && states.hasTitleCaption && /* @__PURE__ */ wp.element.createElement(
+            RichText2.Content,
+            {
+              tagName: "p",
+              className: "titlecaption",
+              value: item.titleCaption
+            }
+          ))), (states.hasSubImage || states.hasSubTitle || states.hasText) && /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, states.hasSubCounter && /* @__PURE__ */ wp.element.createElement("div", { className: "subcounter" }, subCountPrefix && /* @__PURE__ */ wp.element.createElement("span", { className: "prefix" }, subCountPrefix), /* @__PURE__ */ wp.element.createElement("span", { className: "number" }, index + 1), subCountSuffix && /* @__PURE__ */ wp.element.createElement("span", { className: "suffix" }, subCountSuffix)), states.hasSubImage && /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(
             CP.ResponsiveImage,
             {
               attr: attributes,
@@ -375,7 +558,21 @@
               index,
               isTemplate: states.isTemplate
             }
-          )), states.hasSubTitle && /* @__PURE__ */ wp.element.createElement(RichText2.Content, { tagName: SubTitleTag, className: "subtitle", value: item.subTitle }), states.hasText && /* @__PURE__ */ wp.element.createElement(RichText2.Content, { tagName: "p", className: "text", value: item.text })), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
+          )), states.hasSubTitle && /* @__PURE__ */ wp.element.createElement(
+            RichText2.Content,
+            {
+              tagName: SubTitleTag,
+              className: "subtitle",
+              value: item.subTitle
+            }
+          ), states.hasText && /* @__PURE__ */ wp.element.createElement(
+            RichText2.Content,
+            {
+              tagName: "p",
+              className: "text",
+              value: item.text
+            }
+          )), states.hasBackgroundImage && /* @__PURE__ */ wp.element.createElement("div", { className: "background" }, /* @__PURE__ */ wp.element.createElement(
             CP.ResponsiveImage,
             {
               attr: attributes,
@@ -391,14 +588,39 @@
     deprecated: [
       {
         save({ attributes, className }) {
-          const { items = [], classes: classes2 = "", countPrefix, countSuffix, subCountPrefix, subCountSuffix, linkUrl, linkText, loopParam } = attributes;
+          const {
+            items = [],
+            classes: classes2 = "",
+            countPrefix,
+            countSuffix,
+            subCountPrefix,
+            subCountSuffix,
+            linkUrl,
+            linkText,
+            loopParam
+          } = attributes;
           var classArray = _.uniq(classes2.split(" "));
           var states = CP.wordsToFlags(classes2);
           const imageKeys = {
             image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
-            headerImage: { src: "headerImageSrc", alt: "headerImageAlt", code: "headerImageCode", items: "items" },
-            subImage: { src: "subImageSrc", alt: "subImageAlt", code: "subImageCode", items: "items" },
-            backgroundImage: { src: "backgroundImageSrc", srcset: "backgroundImageSrcset", code: "backgroundImageCode", items: "items" }
+            headerImage: {
+              src: "headerImageSrc",
+              alt: "headerImageAlt",
+              code: "headerImageCode",
+              items: "items"
+            },
+            subImage: {
+              src: "subImageSrc",
+              alt: "subImageAlt",
+              code: "subImageCode",
+              items: "items"
+            },
+            backgroundImage: {
+              src: "backgroundImageSrc",
+              srcset: "backgroundImageSrcset",
+              code: "backgroundImageCode",
+              items: "items"
+            }
           };
           let rtn = [];
           items.map((item, index) => {

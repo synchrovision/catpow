@@ -19,7 +19,9 @@
           transform: (files) => {
             var attributes = {
               classes: "wp-block-catpow-datatable spec",
-              rows: [{ classes: "", cells: [{ text: ["Title"], classes: "th" }] }],
+              rows: [
+                { classes: "", cells: [{ text: ["Title"], classes: "th" }] }
+              ],
               file: files[0]
             };
             return wp.blocks.createBlock("catpow/datatable", attributes);
@@ -41,7 +43,9 @@
               classes: "wp-block-catpow-datatable spec",
               rows: attributes.body.map((row) => ({
                 cells: row.cells.map((cell) => ({
-                  text: wp.blocks.parseWithAttributeSchema(cell.content, { source: "html" })
+                  text: wp.blocks.parseWithAttributeSchema(cell.content, {
+                    source: "html"
+                  })
                 }))
               }))
             });
@@ -69,9 +73,12 @@
           };
           var csvData = CP.parseCSV(reader.result);
           csvData.map((row, r) => {
-            attr.rows.push({ classes: "", cells: row.map((val) => {
-              return { text: [val], classes: "" };
-            }) });
+            attr.rows.push({
+              classes: "",
+              cells: row.map((val) => {
+                return { text: [val], classes: "" };
+              })
+            });
           });
           setAttributes(attr);
         });
@@ -83,14 +90,33 @@
       ];
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          { name: "type", type: "buttons", label: "\u30BF\u30A4\u30D7", values: ["spec", "sheet", "plan"] },
+          {
+            name: "type",
+            type: "buttons",
+            label: "\u30BF\u30A4\u30D7",
+            values: ["spec", "sheet", "plan"]
+          },
           "color",
-          { name: "loop", input: "bool", label: "\u30EB\u30FC\u30D7", key: "doLoop", sub: [
-            { name: "contentPath", label: "content path", input: "text", key: "content_path" },
-            { name: "query", label: "query", input: "textarea", key: "query" }
-          ] }
+          {
+            name: "loop",
+            input: "bool",
+            label: "\u30EB\u30FC\u30D7",
+            key: "doLoop",
+            sub: [
+              {
+                name: "contentPath",
+                label: "content path",
+                input: "text",
+                key: "content_path"
+              },
+              { name: "query", label: "query", input: "textarea", key: "query" }
+            ]
+          }
         ];
-        wp.hooks.applyFilters("catpow.blocks.datatable.selectiveClasses", CP.finderProxy(selectiveClasses2));
+        wp.hooks.applyFilters(
+          "catpow.blocks.datatable.selectiveClasses",
+          CP.finderProxy(selectiveClasses2)
+        );
         return selectiveClasses2;
       }, []);
       const saveItems = () => {
@@ -139,7 +165,7 @@
           attr: attributes,
           modes: ["AltMode"]
         }
-      ), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("table", { className: classes2 }, states.hasHeaderRow && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, rows[0].cells.map((cell, index) => {
+      ), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("table", { className: classes2 }, states.hasHeaderRow && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, rows[0].cells.map((cell, index) => {
         if (index === 0) {
           if (states.hasHeaderColumn && cell.text.length === 0) {
             cell.classes = "spacer";
@@ -147,19 +173,34 @@
             cell.classes = "";
           }
         }
-        return /* @__PURE__ */ wp.element.createElement("th", { className: cell.classes, key: index }, /* @__PURE__ */ wp.element.createElement(RichText2, { onChange: (text) => {
-          cell.text = text;
-          saveItems();
-        }, value: cell.text }));
+        return /* @__PURE__ */ wp.element.createElement("th", { className: cell.classes, key: index }, /* @__PURE__ */ wp.element.createElement(
+          RichText2,
+          {
+            onChange: (text) => {
+              cell.text = text;
+              saveItems();
+            },
+            value: cell.text
+          }
+        ));
       }))), /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
         if (states.hasHeaderRow && index == 0) {
           return false;
         }
         return /* @__PURE__ */ wp.element.createElement("tr", { key: index }, row.cells.map((cell, columnIndex) => {
-          var children = [/* @__PURE__ */ wp.element.createElement(RichText2, { onChange: (text) => {
-            cell.text = text;
-            saveItems();
-          }, value: cell.text, key: "text" })];
+          var children = [
+            /* @__PURE__ */ wp.element.createElement(
+              RichText2,
+              {
+                onChange: (text) => {
+                  cell.text = text;
+                  saveItems();
+                },
+                value: cell.text,
+                key: "text"
+              }
+            )
+          ];
           if (isSelected && columnIndex == row.cells.length - 1) {
             children.push(
               /* @__PURE__ */ wp.element.createElement(

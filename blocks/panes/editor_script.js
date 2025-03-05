@@ -3,7 +3,12 @@
   CP.config.panes = {
     imageKeys: {
       image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
-      symbol: { src: "symbolSrc", alt: "symbolAlt", code: "symbolCode", items: "items" }
+      symbol: {
+        src: "symbolSrc",
+        alt: "symbolAlt",
+        code: "symbolCode",
+        items: "items"
+      }
     }
   };
   wp.blocks.registerBlockType("catpow/panes", {
@@ -27,7 +32,14 @@
     edit({ attributes, className, setAttributes, isSelected }) {
       const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
-      const { items = [], classes = "", loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+      const {
+        items = [],
+        classes = "",
+        loopCount,
+        doLoop,
+        EditMode = false,
+        AltMode = false
+      } = attributes;
       var states = CP.wordsToFlags(classes);
       const { imageKeys } = CP.config.panes;
       var selectiveClasses = [
@@ -36,11 +48,22 @@
           label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
           values: "isTemplate",
           sub: [
-            { input: "bool", label: "\u30EB\u30FC\u30D7", key: "doLoop", sub: [
-              { label: "content path", input: "text", key: "content_path" },
-              { label: "query", input: "textarea", key: "query" },
-              { label: "\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", input: "range", key: "loopCount", min: 1, max: 16 }
-            ] }
+            {
+              input: "bool",
+              label: "\u30EB\u30FC\u30D7",
+              key: "doLoop",
+              sub: [
+                { label: "content path", input: "text", key: "content_path" },
+                { label: "query", input: "textarea", key: "query" },
+                {
+                  label: "\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570",
+                  input: "range",
+                  key: "loopCount",
+                  min: 1,
+                  max: 16
+                }
+              ]
+            }
           ]
         }
       ];
@@ -141,13 +164,7 @@
           rtn.push(rtn[rtn.length % len]);
         }
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectModeToolbar,
-        {
-          set: setAttributes,
-          attr: attributes
-        }
-      ), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
           title: "\u30AF\u30E9\u30B9",
@@ -174,21 +191,30 @@
           index: attributes.currentItemIndex,
           selectiveClasses: itemSelectiveClasses
         }
-      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           set: setAttributes,
           attr: attributes,
           columns: [
-            { type: "image", label: "image", keys: imageKeys.image, cond: true },
+            {
+              type: "image",
+              label: "image",
+              keys: imageKeys.image,
+              cond: true
+            },
             { type: "text", key: "imageCode", cond: states.isTemplate },
             { type: "text", key: "title", cond: states.hasTitle },
-            { type: "text", key: "titleCaption", cond: states.hasTitleCaption },
+            {
+              type: "text",
+              key: "titleCaption",
+              cond: states.hasTitleCaption
+            },
             { type: "text", key: "linkUrl", cond: states.hasLink }
           ],
           isTemplate: states.isTemplate
         }
-      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn)));
+      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn)));
     },
     save({ attributes, className }) {
       const { InnerBlocks, RichText } = wp.blockEditor;

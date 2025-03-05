@@ -1,6 +1,6 @@
 @import 'admin_style_config.scss';
 
-span.star{
+.cpsc-star{
 	@include bnd((d:ib,w:75,h:15));
 	@include bg((i:'images/star_g.svg',s:15 a,p:0% 50%,r:x));
 	.value{

@@ -1,87 +1,396 @@
-﻿import {CP} from './CP.jsx';
-const {__}=wp.i18n;
+﻿import { CP } from "./CP.jsx";
+const { __ } = wp.i18n;
 
-export const selectiveClassesPresets={
-	customColorVars:{name:'customColorVars',input:'customColorVars',label:__('カスタムカラー','catpow'),vars:'customColorVars'},
-	isTemplate:{
-		name:'template',
-		input:'bool',
-		key:'isTemplate',
-		label:__('テンプレート','catpow'),
-		sub:[
-			{name:'loop',input:'bool',label:__('ループ','catpow'),key:'doLoop',sub:[
-				{name:'contentPath',label:'content path',input:'text',key:'content_path'},
-				{name:'query',label:'query',input:'textarea',key:'query'},
-				{name:'loopCount',label:__('プレビューループ数','catpow'),input:'range',key:'loopCount',min:1,max:16}
-			]}
-		]
-	},
-	backgroundImage:{name:'backgroundImage',label:__('背景画像','catpow'),values:'hasBackgroundImage',sub:[
-		{name:'blendmode',label:__('モード','catpow'),vars:'vars',key:'--cp-image-blendmode',input:'blendmode'},
-		{name:'opacity',label:__('不透明度','catpow'),vars:'vars',key:'--cp-image-opacity',input:'range',min:0,max:1,step:0.1}
-	]},
-	textAlign:{name:'textAlign',type:'buttons',label:__('テキスト揃え','catpow'),values:{
-		'has-text-align-left':__('左揃え','catpow'),
-		'has-text-align-center':__('中央','catpow'),
-		'has-text-align-right':__('右揃え','catpow'),
-	}},
-	verticalAlign:{name:'verticalAlign',type:'buttons',label:__('垂直方向揃え','catpow'),values:{
-		'has-vertical-align-top':__('上揃え','catpow'),
-		'has-vertical-align-middle':__('中央','catpow'),
-		'has-vertical-align-bottom':__('下揃え','catpow'),
-	}},
-	fontSize:{name:'size',type:'buttons',label:__('文字サイズ','catpow'),values:{
-		'has-font-size-large':__('大','catpow'),
-		'has-font-size-middle':__('中','catpow'),
-		'has-font-size-small':__('小','catpow')
-	}},
-	width:{name:'width',type:'buttons',label:__('幅','catpow'),values:{fullWidth:__('フル','catpow'),wideWidth:__('ワイド','catpow'),regularWidth:__('レギュラー','catpow'),narrowWidth:__('ナロー','catpow')}},
-	size:{name:'size',type:'buttons',label:__('サイズ','catpow'),values:{large:__('大','catpow'),medium:__('中','catpow'),small:__('小','catpow')}},
-	itemSize:{name:'itemSize',label:__('サイズ','catpow'),vars:'vars',key:'--cp-item-size',input:'range',min:100,max:1200,step:10},
-	textColor:{name:'textColor',type:'buttons',label:__('文字色','catpow'),values:{revertTextColor:__('通常','catpow'),invertTextColor:__('反転','catpow')}},
-	clipPath:{name:'clipPath',label:__('クリップ','catpow'),values:'has-clip-path',sub:[
-		{name:'shape',label:__('形状','catpow'),type:'buttons',values:{'has-clip-shape-ellipse':__('楕円','catpow'),'has-clip-shape-slope':__('傾斜','catpow'),'has-clip-shape-arrow':__('アロー','catpow'),'has-clip-shape-tail':__('フキダシ','catpow')},sub:{
-			'has-clip-shape-ellipse':[
-				{name:'direction',type:'buttons',values:{'has-clip-shape-both':__('両方','catpow'),'has-clip-shape-upper':__('上','catpow'),'has-clip-shape-below':__('下','catpow')}},
-				{name:'amount',label:__('量','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-amount',min:1,max:100}
-			],
-			'has-clip-shape-slope':[
-				{name:'uppper',type:'buttons',values:{'has-clip-shape-upper-none':__('なし','catpow'),'has-clip-shape-upper-left':__('左','catpow'),'has-clip-shape-upper-right':__('右','catpow')}},
-				{name:'below',type:'buttons',values:{'has-clip-shape-below-none':__('なし','catpow'),'has-clip-shape-below-left':__('左','catpow'),'has-clip-shape-below-right':__('右','catpow')}},
-				{name:'upperHeight',label:__('上高さ','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-upper-height',min:8,max:400},
-				{name:'belowHeight',label:__('下高さ','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-below-height',min:8,max:400}
-			],
-			'has-clip-shape-arrow':[
-				{name:'uppper',type:'buttons',values:{'has-clip-shape-upper-none':__('なし','catpow'),'has-clip-shape-upper-in':__('内','catpow'),'has-clip-shape-upper-out':__('外','catpow')}},
-				{name:'below',type:'buttons',values:{'has-clip-shape-below-none':__('なし','catpow'),'has-clip-shape-below-in':__('内','catpow'),'has-clip-shape-below-out':__('外','catpow')}},
-				{name:'upperHeight',label:__('上高さ','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-upper-height',min:8,max:400},
-				{name:'belowHeight',label:__('下高さ','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-below-height',min:8,max:400}
-			],
-			'has-clip-shape-tail':[
-				{name:'uppper',type:'buttons',values:{'has-clip-shape-upper-none':__('なし','catpow'),'has-clip-shape-upper-in':__('内','catpow'),'has-clip-shape-upper-out':__('外','catpow')}},
-				{name:'below',type:'buttons',values:{'has-clip-shape-below-none':__('なし','catpow'),'has-clip-shape-below-in':__('内','catpow'),'has-clip-shape-below-out':__('外','catpow')}},
-				{name:'upperWidth',label:__('上幅','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-upper-width',min:8,max:400},
-				{name:'upperHeight',label:__('上高さ','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-upper-height',min:8,max:400},
-				{name:'belowWidth',label:__('下幅','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-below-width',min:8,max:400},
-				{name:'belowHeight',label:__('下高さ','catpow'),input:'range',vars:'vars',key:'--cp-clip-shape-below-height',min:8,max:400}
-			],
-		}}
-	]},
-	customPadding:{name:'customPadding',label:__('余白','catpow'),values:'has-custom-padding',sub:[
-		{name:'paddingTop',label:__('上余白','catpow'),input:'range',vars:'vars',key:'--cp-padding-top',min:0,max:400},
-		{name:'paddingBottom',label:__('下余白','catpow'),input:'range',vars:'vars',key:'--cp-padding-bottom',min:0,max:400}
-	]},
-	customMargin:{name:'customMargin',label:__('間隔','catpow'),values:'has-custom-margin',sub:[
-		{name:'marginTop',label:__('上間隔','catpow'),input:'range',vars:'vars',key:'--cp-margin-top',min:-400,max:400},
-		{name:'marginBottom',label:__('下間隔','catpow'),input:'range',vars:'vars',key:'--cp-margin-bottom',min:-400,max:400}
-	]},
-	customContentWidth:{name:'cusotomWidth',label:__('コンテンツ幅','catpow'),values:'has-custom-content-width',sub:[
-		{name:'contentWidth',label:__('幅','catpow'),input:'range',vars:'vars',key:'--cp-content-width',min:200,max:1600},
-	]},
-	customBorderRadius:{name:'cusotomRadius',label:__('角丸','catpow'),values:'has-custom-border-radius',sub:[
-		{name:'borderRadius',label:__('径','catpow'),input:'range',vars:'vars',key:'--cp-border-radius',min:1,max:100},
-	]}
+export const selectiveClassesPresets = {
+  customColorVars: {
+    name: "customColorVars",
+    input: "customColorVars",
+    label: __("カスタムカラー", "catpow"),
+    vars: "customColorVars",
+  },
+  isTemplate: {
+    name: "template",
+    input: "bool",
+    key: "isTemplate",
+    label: __("テンプレート", "catpow"),
+    sub: [
+      {
+        name: "loop",
+        input: "bool",
+        label: __("ループ", "catpow"),
+        key: "doLoop",
+        sub: [
+          {
+            name: "contentPath",
+            label: "content path",
+            input: "text",
+            key: "content_path",
+          },
+          { name: "query", label: "query", input: "textarea", key: "query" },
+          {
+            name: "loopCount",
+            label: __("プレビューループ数", "catpow"),
+            input: "range",
+            key: "loopCount",
+            min: 1,
+            max: 16,
+          },
+        ],
+      },
+    ],
+  },
+  backgroundImage: {
+    name: "backgroundImage",
+    label: __("背景画像", "catpow"),
+    values: "hasBackgroundImage",
+    sub: [
+      {
+        name: "blendmode",
+        label: __("モード", "catpow"),
+        vars: "vars",
+        key: "--cp-image-blendmode",
+        input: "blendmode",
+      },
+      {
+        name: "opacity",
+        label: __("不透明度", "catpow"),
+        vars: "vars",
+        key: "--cp-image-opacity",
+        input: "range",
+        min: 0,
+        max: 1,
+        step: 0.1,
+      },
+    ],
+  },
+  textAlign: {
+    name: "textAlign",
+    type: "buttons",
+    label: __("テキスト揃え", "catpow"),
+    values: {
+      "has-text-align-left": __("左揃え", "catpow"),
+      "has-text-align-center": __("中央", "catpow"),
+      "has-text-align-right": __("右揃え", "catpow"),
+    },
+  },
+  verticalAlign: {
+    name: "verticalAlign",
+    type: "buttons",
+    label: __("垂直方向揃え", "catpow"),
+    values: {
+      "has-vertical-align-top": __("上揃え", "catpow"),
+      "has-vertical-align-middle": __("中央", "catpow"),
+      "has-vertical-align-bottom": __("下揃え", "catpow"),
+    },
+  },
+  fontSize: {
+    name: "size",
+    type: "buttons",
+    label: __("文字サイズ", "catpow"),
+    values: {
+      "has-font-size-large": __("大", "catpow"),
+      "has-font-size-middle": __("中", "catpow"),
+      "has-font-size-small": __("小", "catpow"),
+    },
+  },
+  width: {
+    name: "width",
+    type: "buttons",
+    label: __("幅", "catpow"),
+    values: {
+      fullWidth: __("フル", "catpow"),
+      wideWidth: __("ワイド", "catpow"),
+      regularWidth: __("レギュラー", "catpow"),
+      narrowWidth: __("ナロー", "catpow"),
+    },
+  },
+  size: {
+    name: "size",
+    type: "buttons",
+    label: __("サイズ", "catpow"),
+    values: {
+      large: __("大", "catpow"),
+      medium: __("中", "catpow"),
+      small: __("小", "catpow"),
+    },
+  },
+  itemSize: {
+    name: "itemSize",
+    label: __("サイズ", "catpow"),
+    vars: "vars",
+    key: "--cp-item-size",
+    input: "range",
+    min: 100,
+    max: 1200,
+    step: 10,
+  },
+  textColor: {
+    name: "textColor",
+    type: "buttons",
+    label: __("文字色", "catpow"),
+    values: {
+      revertTextColor: __("通常", "catpow"),
+      invertTextColor: __("反転", "catpow"),
+    },
+  },
+  clipPath: {
+    name: "clipPath",
+    label: __("クリップ", "catpow"),
+    values: "has-clip-path",
+    sub: [
+      {
+        name: "shape",
+        label: __("形状", "catpow"),
+        type: "buttons",
+        values: {
+          "has-clip-shape-ellipse": __("楕円", "catpow"),
+          "has-clip-shape-slope": __("傾斜", "catpow"),
+          "has-clip-shape-arrow": __("アロー", "catpow"),
+          "has-clip-shape-tail": __("フキダシ", "catpow"),
+        },
+        sub: {
+          "has-clip-shape-ellipse": [
+            {
+              name: "direction",
+              type: "buttons",
+              values: {
+                "has-clip-shape-both": __("両方", "catpow"),
+                "has-clip-shape-upper": __("上", "catpow"),
+                "has-clip-shape-below": __("下", "catpow"),
+              },
+            },
+            {
+              name: "amount",
+              label: __("量", "catpow"),
+              input: "range",
+              vars: "vars",
+              key: "--cp-clip-shape-amount",
+              min: 1,
+              max: 100,
+            },
+          ],
+          "has-clip-shape-slope": [
+            {
+              name: "uppper",
+              type: "buttons",
+              values: {
+                "has-clip-shape-upper-none": __("なし", "catpow"),
+                "has-clip-shape-upper-left": __("左", "catpow"),
+                "has-clip-shape-upper-right": __("右", "catpow"),
+              },
+            },
+            {
+              name: "below",
+              type: "buttons",
+              values: {
+                "has-clip-shape-below-none": __("なし", "catpow"),
+                "has-clip-shape-below-left": __("左", "catpow"),
+                "has-clip-shape-below-right": __("右", "catpow"),
+              },
+            },
+            {
+              name: "upperHeight",
+              label: __("上高さ", "catpow"),
+              input: "range",
+              vars: "vars",
+              key: "--cp-clip-shape-upper-height",
+              min: 8,
+              max: 400,
+            },
+            {
+              name: "belowHeight",
+              label: __("下高さ", "catpow"),
+              input: "range",
+              vars: "vars",
+              key: "--cp-clip-shape-below-height",
+              min: 8,
+              max: 400,
+            },
+          ],
+          "has-clip-shape-arrow": [
+            {
+              name: "uppper",
+              type: "buttons",
+              values: {
+                "has-clip-shape-upper-none": __("なし", "catpow"),
+                "has-clip-shape-upper-in": __("内", "catpow"),
+                "has-clip-shape-upper-out": __("外", "catpow"),
+              },
+            },
+            {
+              name: "below",
+              type: "buttons",
+              values: {
+                "has-clip-shape-below-none": __("なし", "catpow"),
+                "has-clip-shape-below-in": __("内", "catpow"),
+                "has-clip-shape-below-out": __("外", "catpow"),
+              },
+            },
+            {
+              name: "upperHeight",
+              label: __("上高さ", "catpow"),
+              input: "range",
+              vars: "vars",
+              key: "--cp-clip-shape-upper-height",
+              min: 8,
+              max: 400,
+            },
+            {
+              name: "belowHeight",
+              label: __("下高さ", "catpow"),
+              input: "range",
+              vars: "vars",
+              key: "--cp-clip-shape-below-height",
+              min: 8,
+              max: 400,
+            },
+          ],
+          "has-clip-shape-tail": [
+            {
+              name: "uppper",
+              type: "buttons",
+              values: {
+                "has-clip-shape-upper-none": __("なし", "catpow"),
+                "has-clip-shape-upper-in": __("内", "catpow"),
+                "has-clip-shape-upper-out": __("外", "catpow"),
+              },
+            },
+            {
+              name: "below",
+              type: "buttons",
+              values: {
+                "has-clip-shape-below-none": __("なし", "catpow"),
+                "has-clip-shape-below-in": __("内", "catpow"),
+                "has-clip-shape-below-out": __("外", "catpow"),
+              },
+            },
+            {
+              name: "upperWidth",
+              label: __("上幅", "catpow"),
+              input: "range",
+              vars: "vars",
+              key: "--cp-clip-shape-upper-width",
+              min: 8,
+              max: 400,
+            },
+            {
+              name: "upperHeight",
+              label: __("上高さ", "catpow"),
+              input: "range",
+              vars: "vars",
+              key: "--cp-clip-shape-upper-height",
+              min: 8,
+              max: 400,
+            },
+            {
+              name: "belowWidth",
+              label: __("下幅", "catpow"),
+              input: "range",
+              vars: "vars",
+              key: "--cp-clip-shape-below-width",
+              min: 8,
+              max: 400,
+            },
+            {
+              name: "belowHeight",
+              label: __("下高さ", "catpow"),
+              input: "range",
+              vars: "vars",
+              key: "--cp-clip-shape-below-height",
+              min: 8,
+              max: 400,
+            },
+          ],
+        },
+      },
+    ],
+  },
+  customPadding: {
+    name: "customPadding",
+    label: __("余白", "catpow"),
+    values: "has-custom-padding",
+    sub: [
+      {
+        name: "paddingTop",
+        label: __("上余白", "catpow"),
+        input: "range",
+        vars: "vars",
+        key: "--cp-padding-top",
+        min: 0,
+        max: 400,
+      },
+      {
+        name: "paddingBottom",
+        label: __("下余白", "catpow"),
+        input: "range",
+        vars: "vars",
+        key: "--cp-padding-bottom",
+        min: 0,
+        max: 400,
+      },
+    ],
+  },
+  customMargin: {
+    name: "customMargin",
+    label: __("間隔", "catpow"),
+    values: "has-custom-margin",
+    sub: [
+      {
+        name: "marginTop",
+        label: __("上間隔", "catpow"),
+        input: "range",
+        vars: "vars",
+        key: "--cp-margin-top",
+        min: -400,
+        max: 400,
+      },
+      {
+        name: "marginBottom",
+        label: __("下間隔", "catpow"),
+        input: "range",
+        vars: "vars",
+        key: "--cp-margin-bottom",
+        min: -400,
+        max: 400,
+      },
+    ],
+  },
+  customContentWidth: {
+    name: "cusotomWidth",
+    label: __("コンテンツ幅", "catpow"),
+    values: "has-custom-content-width",
+    sub: [
+      {
+        name: "contentWidth",
+        label: __("幅", "catpow"),
+        input: "range",
+        vars: "vars",
+        key: "--cp-content-width",
+        min: 200,
+        max: 1600,
+      },
+    ],
+  },
+  customBorderRadius: {
+    name: "cusotomRadius",
+    label: __("角丸", "catpow"),
+    values: "has-custom-border-radius",
+    sub: [
+      {
+        name: "borderRadius",
+        label: __("径", "catpow"),
+        input: "range",
+        vars: "vars",
+        key: "--cp-border-radius",
+        min: 1,
+        max: 100,
+      },
+    ],
+  },
 };
-wp.domReady(()=>{
-	wp.hooks.applyFilters('catpow.blocks.selectiveClassesPresets',CP.finderProxy(selectiveClassesPresets));
+wp.domReady(() => {
+  wp.hooks.applyFilters(
+    "catpow.blocks.selectiveClassesPresets",
+    CP.finderProxy(selectiveClassesPresets)
+  );
 });

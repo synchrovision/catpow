@@ -11,36 +11,70 @@
       const { useState, useMemo, useEffect } = wp.element;
       const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
-      const { items = [], title, lead, caption, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+      const {
+        items = [],
+        title,
+        lead,
+        caption,
+        loopCount,
+        doLoop,
+        EditMode = false,
+        AltMode = false
+      } = attributes;
       const primaryClass = "wp-block-catpow-contactinfo";
       const { bem, classNamesToFlags, flagsToClassNames } = Catpow.util;
-      const states = useMemo(() => classNamesToFlags(attributes.classes), [attributes.classes]);
-      const classes = useMemo(() => bem(attributes.classes), [attributes.classes]);
+      const states = useMemo(
+        () => classNamesToFlags(attributes.classes),
+        [attributes.classes]
+      );
+      const classes = useMemo(
+        () => bem(attributes.classes),
+        [attributes.classes]
+      );
       const { linkKeys } = CP.config.contactinfo;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          { name: "size", label: "\u30B5\u30A4\u30BA", type: "buttons", values: { "is-size-small": "\u5C0F", "is-size-medium": "\u4E2D", "is-size-large": "\u5927" } },
+          {
+            name: "size",
+            label: "\u30B5\u30A4\u30BA",
+            type: "buttons",
+            values: {
+              "is-size-small": "\u5C0F",
+              "is-size-medium": "\u4E2D",
+              "is-size-large": "\u5927"
+            }
+          },
           { name: "title", label: "\u30BF\u30A4\u30C8\u30EB", values: "has-title" },
           { name: "lead", label: "\u30EA\u30FC\u30C9", values: "has-lead" },
           { name: "caption", label: "\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "has-caption" },
-          { name: "icon", label: "\u30A2\u30A4\u30B3\u30F3", values: "has-icon", sub: [
-            { input: "icon" }
-          ] },
+          {
+            name: "icon",
+            label: "\u30A2\u30A4\u30B3\u30F3",
+            values: "has-icon",
+            sub: [{ input: "icon" }]
+          },
           { name: "itemTitle", label: "\u500B\u5225\u30BF\u30A4\u30C8\u30EB", values: "has-item-title" },
           { name: "itemLead", label: "\u500B\u5225\u30EA\u30FC\u30C9", values: "has-item-lead" },
-          { name: "itemCaption", label: "\u500B\u5225\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "has-item-caption" },
+          {
+            name: "itemCaption",
+            label: "\u500B\u5225\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3",
+            values: "has-item-caption"
+          },
           "isTemplate"
         ];
-        wp.hooks.applyFilters("catpow.blocks.contactinfo.selectiveClasses", CP.finderProxy(selectiveClasses2));
+        wp.hooks.applyFilters(
+          "catpow.blocks.contactinfo.selectiveClasses",
+          CP.finderProxy(selectiveClasses2)
+        );
         return selectiveClasses2;
       }, []);
       const selectiveItemClasses = useMemo(() => {
         const { imageKeys: imageKeys2 } = CP.config.banners;
-        const selectiveItemClasses2 = [
-          "color",
-          "event"
-        ];
-        wp.hooks.applyFilters("catpow.blocks.contactinfo.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
+        const selectiveItemClasses2 = ["color", "event"];
+        wp.hooks.applyFilters(
+          "catpow.blocks.contactinfo.selectiveItemClasses",
+          CP.finderProxy(selectiveItemClasses2)
+        );
         return selectiveItemClasses2;
       }, []);
       const save = () => {
@@ -101,7 +135,13 @@
                 keys: linkKeys.link,
                 index
               },
-              states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: itemClasses.link.icon(), item: attributes }),
+              states.hasIcon && /* @__PURE__ */ wp.element.createElement(
+                CP.OutputIcon,
+                {
+                  className: itemClasses.link.icon(),
+                  item: attributes
+                }
+              ),
               /* @__PURE__ */ wp.element.createElement(
                 RichText,
                 {
@@ -135,13 +175,7 @@
         setAttributes({ classes: flagsToClassNames(states) });
       }, [len > 1]);
       const blockProps = useBlockProps({ className: classes() });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectModeToolbar,
-        {
-          set: setAttributes,
-          attr: attributes
-        }
-      ), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
           title: "\u30AF\u30E9\u30B9",
@@ -168,7 +202,7 @@
           index: attributes.currentItemIndex,
           selectiveClasses: selectiveItemClasses
         }
-      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           set: setAttributes,
@@ -182,7 +216,7 @@
           ],
           isTemplate: states.isTemplate
         }
-      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(
+      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(
         RichText,
         {
           tagName: "h3",
@@ -216,7 +250,15 @@
     },
     save({ attributes, className }) {
       const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-      const { items = [], title, lead, caption, doLoop, EditMode = false, AltMode = false } = attributes;
+      const {
+        items = [],
+        title,
+        lead,
+        caption,
+        doLoop,
+        EditMode = false,
+        AltMode = false
+      } = attributes;
       const states = Catpow.util.classNamesToFlags(attributes.classes);
       const classes = Catpow.util.bem(attributes.classes);
       const { linkKeys } = CP.config.contactinfo;
@@ -247,7 +289,13 @@
               index,
               ...CP.extractEventDispatcherAttributes("catpow/contactinfo", item)
             },
-            states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: itemClasses.link.icon(), item: attributes }),
+            states.hasIcon && /* @__PURE__ */ wp.element.createElement(
+              CP.OutputIcon,
+              {
+                className: itemClasses.link.icon(),
+                item: attributes
+              }
+            ),
             /* @__PURE__ */ wp.element.createElement(
               RichText.Content,
               {

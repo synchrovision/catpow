@@ -27,7 +27,14 @@
       const { useState, useMemo } = wp.element;
       const { BlockControls, InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
-      const { items = [], classes, columnsCount, loopCount, doLoop, AltMode = false } = attributes;
+      const {
+        items = [],
+        classes,
+        columnsCount,
+        loopCount,
+        doLoop,
+        AltMode = false
+      } = attributes;
       const primaryClassName = "wp-block-catpow-slidablemenu";
       var classArray = _.uniq((className + " " + classes).split(" "));
       const states = CP.wordsToFlags(classes);
@@ -35,22 +42,60 @@
       const selectiveClasses = useMemo(() => {
         const { imageKeys: imageKeys2 } = CP.config.slidablemenu;
         const selectiveClasses2 = [
-          { name: "size", type: "buttons", label: "\u30B5\u30A4\u30BA", values: ["small", "medium", "large"] },
-          { name: "columnsCount", input: "range", label: "\u30AB\u30E9\u30E0\u6570", key: "columnsCount", min: 2, max: 10 },
+          {
+            name: "size",
+            type: "buttons",
+            label: "\u30B5\u30A4\u30BA",
+            values: ["small", "medium", "large"]
+          },
+          {
+            name: "columnsCount",
+            input: "range",
+            label: "\u30AB\u30E9\u30E0\u6570",
+            key: "columnsCount",
+            min: 2,
+            max: 10
+          },
           {
             name: "template",
             label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
             values: "isTemplate",
             sub: [
-              { name: "loop", input: "bool", label: "\u30EB\u30FC\u30D7", key: "doLoop", sub: [
-                { name: "contentPath", label: "content path", input: "text", key: "content_path" },
-                { name: "query", label: "query", input: "textarea", key: "query" },
-                { name: "loopCount", label: "\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", input: "range", key: "loopCount", min: 1, max: 64 }
-              ] }
+              {
+                name: "loop",
+                input: "bool",
+                label: "\u30EB\u30FC\u30D7",
+                key: "doLoop",
+                sub: [
+                  {
+                    name: "contentPath",
+                    label: "content path",
+                    input: "text",
+                    key: "content_path"
+                  },
+                  {
+                    name: "query",
+                    label: "query",
+                    input: "textarea",
+                    key: "query"
+                  },
+                  {
+                    name: "loopCount",
+                    label: "\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570",
+                    input: "range",
+                    key: "loopCount",
+                    min: 1,
+                    max: 64
+                  }
+                ]
+              }
             ]
           }
         ];
-        wp.hooks.applyFilters("catpow.blocks.slidablemenu.selectiveClasses", CP.finderProxy(selectiveClasses2));
+        wp.hooks.applyFilters(
+          "catpow.blocks.slidablemenu.selectiveClasses",
+          CP.finderProxy(selectiveClasses2)
+        );
         return selectiveClasses2;
       }, []);
       let rtn = [];
@@ -134,13 +179,7 @@
       if (attributes.EditMode === void 0) {
         attributes.EditMode = false;
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectModeToolbar,
-        {
-          set: setAttributes,
-          attr: attributes
-        }
-      ), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
           title: "\u30AF\u30E9\u30B9",
@@ -156,7 +195,7 @@
           onChange: (classes2) => setAttributes({ classes: classes2 }),
           value: classes
         }
-      )), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+      )), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           set: setAttributes,
@@ -170,7 +209,7 @@
           ],
           isTemplate: states.isTemplate
         }
-      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "alt_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("div", { className: classes, style: { "--columns": columnsCount } }, /* @__PURE__ */ wp.element.createElement("ul", { className: "items" }, rtn))));
+      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("div", { className: classes, style: { "--columns": columnsCount } }, /* @__PURE__ */ wp.element.createElement("ul", { className: "items" }, rtn))));
     },
     save({ attributes, className }) {
       const { InnerBlocks, RichText } = wp.blockEditor;

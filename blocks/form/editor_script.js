@@ -17,7 +17,10 @@
           if (item.id === content_path && item.post_data_paths) {
             postDataSelection = [];
             Object.keys(item.post_data_paths).forEach(function(key) {
-              postDataSelection.push({ id: key, name: item.post_data_paths[key] });
+              postDataSelection.push({
+                id: key,
+                name: item.post_data_paths[key]
+              });
             });
           }
         });
@@ -31,7 +34,7 @@
           setAttributes({ post_data_path: postDataSelection[0]["id"] });
         }
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "embedded_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/form", attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u30D5\u30A9\u30FC\u30E0" }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-embeddedcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/form", attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u30D5\u30A9\u30FC\u30E0" }, /* @__PURE__ */ wp.element.createElement(
         TreeSelect,
         {
           label: "path",

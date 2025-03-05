@@ -35,15 +35,22 @@
           setAttributes({ options: options2, props: JSON.stringify(newProps) });
         });
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "embedded_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/embed", attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-embeddedcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/embed", attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" }, /* @__PURE__ */ wp.element.createElement(
         TreeSelect,
         {
           label: "path",
           selectedId: content_path,
           tree: Object.values(cpEmbeddablesTree.embed),
           onChange: (content_path2) => {
-            const path = content_path2.slice(0, content_path2.lastIndexOf("/"));
-            setAttributes({ content_path: content_path2, options: false, props: JSON.stringify({ path }) });
+            const path = content_path2.slice(
+              0,
+              content_path2.lastIndexOf("/")
+            );
+            setAttributes({
+              content_path: content_path2,
+              options: false,
+              props: JSON.stringify({ path })
+            });
           }
         }
       )), options && /* @__PURE__ */ wp.element.createElement(
