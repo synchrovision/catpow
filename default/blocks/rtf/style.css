@@ -1,0 +1,6 @@
+.wp-block-catpow-rtf.has-custom-content-width {
+  max-width: calc(var(--cp-content-width,960) * 0.0625rem);
+  width: auto;
+  margin-inline: auto;
+}
+/*# sourceMappingURL=./style.css.map */
