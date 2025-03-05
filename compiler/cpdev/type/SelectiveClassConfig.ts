@@ -1,4 +1,5 @@
 import { selectiveClassesPresets } from "blocks/_init/init/selectiveClassesPresets.jsx";
+import {SelectiveClassPanelProps} from './SelectiveClassPanelProps';
 
 export type SelectiveClassConfig={
 	name?:string,
@@ -12,7 +13,7 @@ export type SelectiveClassConfig={
 	keys?:{[key:string]:string},
 	vars?:string,
 	devices?:string[],
-	cond?:string | string[] | boolean | ((states:object,props:object)=>boolean),
+	cond?:string | string[] | boolean | ((states:object,props:SelectiveClassPanelProps)=>boolean),
 	min?:number,
 	max?:number,
 	step?:number,
