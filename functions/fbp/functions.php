@@ -19,14 +19,14 @@ add_action('cp_setup',function(){
 
 				document.addEventListener('DOMContentLoaded',function(){
 					var cb=function(el){
-						if(!el.dataset.event || el.dataset.eventRegistered){return;}
-						var datas=window.Catpow.ga.parseEventValue(el.dataset.event);
+						if(!el.dataset.fbpEvent || el.dataset.fbpEventRegistered){return;}
+						var datas=window.Catpow.fbp.parseEventValue(el.dataset.fbpEvent);
 						datas.map(function(data){
 							el.addEventListener(data.event,function(){
-								window.Catpow.ga.send(data);
+								window.Catpow.fbp.send(data);
 							});
 						});
-						el.dataset.eventRegistered=true;
+						el.dataset.fbpEventRegistered=true;
 					};
 					document.querySelectorAll('[data-fbp-event]').forEach(cb);
 					var o=new MutationObserver(function(mutations){
