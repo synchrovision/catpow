@@ -3418,7 +3418,17 @@
 
   // ../blocks/_init/init/Item.jsx
   CP.Item = (props) => {
-    const { tag, items: items2, itemsKey, index, indexKey = "currentItemIndex", set, attr, triggerClasses, children } = props;
+    const {
+      tag,
+      items: items2,
+      itemsKey,
+      index,
+      indexKey = "currentItemIndex",
+      set,
+      attr,
+      triggerClasses,
+      children
+    } = props;
     let { itemClasses } = props;
     if (!items2[index].classes) {
       items2[index].classes = "item";
@@ -3470,11 +3480,12 @@
       /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, children, isSelected && /* @__PURE__ */ wp.element.createElement(
         CP.ItemControl,
         {
+          tag: tag === "tr" ? "td" : "div",
           controls: {
-            "delete": (e) => CP.deleteItem(props),
-            "clone": (e) => CP.cloneItem(props),
-            "up": (e) => CP.upItem(props),
-            "down": (e) => CP.downItem(props)
+            delete: (e) => CP.deleteItem(props),
+            clone: (e) => CP.cloneItem(props),
+            up: (e) => CP.upItem(props),
+            down: (e) => CP.downItem(props)
           }
         }
       ))
@@ -3483,12 +3494,18 @@
 
   // ../blocks/_init/init/ItemControl.jsx
   CP.ItemControl = (props) => {
-    const { className = "", controls, float = true, children } = props;
+    const {
+      className = "",
+      tag: Tag = "div",
+      controls,
+      float = true,
+      children
+    } = props;
     const { useState: useState2 } = wp.element;
     const classes = bem("cp-itemcontrol");
     const [open, setOpen] = useState2(false);
     return /* @__PURE__ */ wp.element.createElement(
-      "div",
+      Tag,
       {
         className: classes(className, {
           "is-open": open,
