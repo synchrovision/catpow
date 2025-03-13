@@ -1,19 +1,19 @@
-.cp-finderfocused > .items {
+.cp-finder-focused > .items {
   border-collapse: collapse;
   border-spacing: 0px;
   width: 100%;
 }
-.cp-finderfocused > .items > .item {
+.cp-finder-focused > .items > .item {
   background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 5),var(--cp-tones-t-a));
 }
-.cp-finderfocused > .items > .item:nth-of-type(odd) {
+.cp-finder-focused > .items > .item:nth-of-type(odd) {
   background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),var(--cp-tones-t-a));
 }
-.cp-finderfocused > .items > .item > .label {
+.cp-finder-focused > .items > .item > .label {
   padding: 0.625rem;
   width: 12.5rem;
 }
-.cp-finderfocused > .items > .item > .value {
+.cp-finder-focused > .items > .item > .value {
   padding: 0.625rem;
 }
 /*# sourceMappingURL=./style.css.map */
