@@ -3928,10 +3928,7 @@
     }
   };
   wp.domReady(() => {
-    wp.hooks.applyFilters(
-      "catpow.blocks.selectiveClassesPresets",
-      CP.finderProxy(selectiveClassesPresets)
-    );
+    wp.hooks.applyFilters("catpow.blocks.selectiveClassesPresets", CP.finderProxy(selectiveClassesPresets));
   });
 
   // ../blocks/_init/init/SelectClassPanel.jsx
