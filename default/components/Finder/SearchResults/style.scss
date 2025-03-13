@@ -1,6 +1,6 @@
 @import "admin_style_config.scss";
 .cp-findersearchresults{
-	&Items{
+	&-items{
 		@include bg((c:b));
 		@include txt((l:n));
 		&>.list{
