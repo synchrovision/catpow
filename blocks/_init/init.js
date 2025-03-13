@@ -3163,13 +3163,13 @@
   };
 
   // ../blocks/_init/init/DataInputTable.jsx
-  CP.datainputtable = (props) => {
+  CP.DataInputTable = (props) => {
     const { cols, value, onChange } = props;
     const { useCallback: useCallback2, useMemo: useMemo3 } = wp.element;
     const el = wp.element.createElement;
     const Row = useCallback2((props2) => {
       const { cols: cols2, value: value2, onChange: onChange2 } = props2;
-      return /* @__PURE__ */ wp.element.createElement("tr", { className: "datainputtable__body__row" }, Object.keys(cols2).map((c) => /* @__PURE__ */ wp.element.createElement("td", { className: "datainputtable__body__row__cell", key: c }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("tr", { className: "cp-datainputtable__body__row" }, Object.keys(cols2).map((c) => /* @__PURE__ */ wp.element.createElement("td", { className: "cp-datainputtable__body__row__cell", key: c }, /* @__PURE__ */ wp.element.createElement(
         CP.DynamicInput,
         {
           value: value2[c],
@@ -3196,7 +3196,7 @@
       });
       return colsWithoutLabel2;
     }, [cols]);
-    return /* @__PURE__ */ wp.element.createElement("table", { className: "datainputtable" }, /* @__PURE__ */ wp.element.createElement("thead", { className: "datainputtable__head" }, /* @__PURE__ */ wp.element.createElement("tr", { className: "datainputtable__head__row" }, Object.keys(cols).map((c) => /* @__PURE__ */ wp.element.createElement("th", { className: "datainputtable__head__row__cell", key: c }, cols[c].label || c)))), /* @__PURE__ */ wp.element.createElement("tbody", { className: "datainputtable__body" }, (value || defaultRowValues).map((rowValue, index) => /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement("table", { className: "cp-datainputtable" }, /* @__PURE__ */ wp.element.createElement("thead", { className: "cp-datainputtable__head" }, /* @__PURE__ */ wp.element.createElement("tr", { className: "cp-datainputtable__head__row" }, Object.keys(cols).map((c) => /* @__PURE__ */ wp.element.createElement("th", { className: "cp-datainputtable__head__row__cell", key: c }, cols[c].label || c)))), /* @__PURE__ */ wp.element.createElement("tbody", { className: "cp-datainputtable__body" }, (value || defaultRowValues).map((rowValue, index) => /* @__PURE__ */ wp.element.createElement(
       Row,
       {
         cols: colsWithoutLabel,
@@ -3233,14 +3233,7 @@
   // ../blocks/_init/init/DynamicInput.jsx
   CP.DynamicInput = (props) => {
     const { useMemo: useMemo3 } = wp.element;
-    const {
-      RadioControl,
-      RangeControl,
-      SelectControl,
-      TextControl,
-      TextareaControl,
-      ToggleControl
-    } = wp.components;
+    const { RadioControl, RangeControl, SelectControl, TextControl, TextareaControl, ToggleControl } = wp.components;
     const { param, value, onChange } = props;
     const type = param.type || param.input || "text";
     const { options } = useMemo3(() => {
@@ -3251,107 +3244,34 @@
     }, [param.options, param.values]);
     switch (type) {
       case "radio": {
-        return /* @__PURE__ */ wp.element.createElement(
-          RadioControl,
-          {
-            label: param.label || null,
-            onChange,
-            selected: value,
-            options
-          }
-        );
+        return /* @__PURE__ */ wp.element.createElement(RadioControl, { label: param.label || null, onChange, selected: value, options });
       }
       case "select": {
-        return /* @__PURE__ */ wp.element.createElement(
-          SelectControl,
-          {
-            label: param.label || null,
-            onChange,
-            value,
-            options
-          }
-        );
+        return /* @__PURE__ */ wp.element.createElement(SelectControl, { label: param.label || null, onChange, value, options });
       }
       case "buttons": {
-        return /* @__PURE__ */ wp.element.createElement(
-          CP.SelectButtons,
-          {
-            label: param.label || null,
-            onChange,
-            selected: value,
-            options
-          }
-        );
+        return /* @__PURE__ */ wp.element.createElement(CP.SelectButtons, { label: param.label || null, onChange, selected: value, options });
       }
       case "gridbuttons": {
-        return /* @__PURE__ */ wp.element.createElement(
-          CP.SelectGridButtons,
-          {
-            label: param.label || null,
-            onChange,
-            selected: value,
-            options
-          }
-        );
+        return /* @__PURE__ */ wp.element.createElement(CP.SelectGridButtons, { label: param.label || null, onChange, selected: value, options });
       }
       case "range": {
         if (!param.coef) {
           param.coef = 1;
         }
-        return /* @__PURE__ */ wp.element.createElement(
-          RangeControl,
-          {
-            label: param.label || null,
-            onChange: (value2) => onChange(value2 * param.coef),
-            value: value / param.coef,
-            min: param.min || 0,
-            max: param.max || 10,
-            step: param.step || 1
-          }
-        );
+        return /* @__PURE__ */ wp.element.createElement(RangeControl, { label: param.label || null, onChange: (value2) => onChange(value2 * param.coef), value: value / param.coef, min: param.min || 0, max: param.max || 10, step: param.step || 1 });
       }
       case "bool": {
-        return /* @__PURE__ */ wp.element.createElement(
-          ToggleControl,
-          {
-            label: param.label || null,
-            checked: value,
-            onChange
-          }
-        );
+        return /* @__PURE__ */ wp.element.createElement(ToggleControl, { label: param.label || null, checked: value, onChange });
       }
       case "data": {
-        return /* @__PURE__ */ wp.element.createElement(
-          CP.DataInputTable,
-          {
-            label: param.label || null,
-            cols: param.cols,
-            value,
-            onChange
-          }
-        );
+        return /* @__PURE__ */ wp.element.createElement(CP.DataInputTable, { label: param.label || null, cols: param.cols, value, onChange });
       }
       case "textarea": {
-        return /* @__PURE__ */ wp.element.createElement(
-          TextareaControl,
-          {
-            label: param.label || null,
-            value,
-            onChange
-          }
-        );
+        return /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: param.label || null, value, onChange });
       }
       default: {
-        return /* @__PURE__ */ wp.element.createElement(
-          TextControl,
-          {
-            label: param.label || null,
-            type: param.type,
-            value,
-            onChange,
-            list: param.list && CP.getDataListId(param.list, param.values)
-          }
-        );
+        return /* @__PURE__ */ wp.element.createElement(TextControl, { label: param.label || null, type: param.type, value, onChange, list: param.list && CP.getDataListId(param.list, param.values) });
       }
     }
   };
