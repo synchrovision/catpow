@@ -21,7 +21,12 @@
       ]
     },
     attributes: {
-      classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-simpletable color0 spec" },
+      classes: {
+        source: "attribute",
+        selector: "table",
+        attribute: "class",
+        default: "wp-block-catpow-simpletable color0 spec"
+      },
       rows: {
         source: "query",
         selector: "table tr",
@@ -39,18 +44,27 @@
           }
         },
         default: [
-          { classes: "", cells: [
-            { text: ["Title"], classes: "" },
-            { text: ["Content"], classes: "" }
-          ] },
-          { classes: "", cells: [
-            { text: ["Title"], classes: "" },
-            { text: ["Content"], classes: "" }
-          ] },
-          { classes: "", cells: [
-            { text: ["Title"], classes: "" },
-            { text: ["Content"], classes: "" }
-          ] }
+          {
+            classes: "",
+            cells: [
+              { text: ["Title"], classes: "" },
+              { text: ["Content"], classes: "" }
+            ]
+          },
+          {
+            classes: "",
+            cells: [
+              { text: ["Title"], classes: "" },
+              { text: ["Content"], classes: "" }
+            ]
+          },
+          {
+            classes: "",
+            cells: [
+              { text: ["Title"], classes: "" },
+              { text: ["Content"], classes: "" }
+            ]
+          }
         ]
       },
       blockState: { type: "object", default: { enableBlockFormat: true } }
@@ -69,27 +83,39 @@
             values: ["spec", "info", "history", "inputs"],
             item: {
               spec: [
-                { name: "type", label: "\u7A2E\u5225", values: {
-                  normal: "\u306A\u3057",
-                  important: "\u91CD\u8981",
-                  caution: "\u6CE8\u610F"
-                } }
+                {
+                  name: "type",
+                  label: "\u7A2E\u5225",
+                  values: {
+                    normal: "\u306A\u3057",
+                    important: "\u91CD\u8981",
+                    caution: "\u6CE8\u610F"
+                  }
+                }
               ],
               inputs: [
-                { name: "type", label: "\u7A2E\u5225", type: "buttons", values: {
-                  normal: "\u306A\u3057",
-                  required: "\u5FC5\u9808",
-                  recommended: "\u63A8\u5968",
-                  optional: "\u4EFB\u610F",
-                  readonly: "\u56FA\u5B9A"
-                } },
+                {
+                  name: "type",
+                  label: "\u7A2E\u5225",
+                  type: "buttons",
+                  values: {
+                    normal: "\u306A\u3057",
+                    required: "\u5FC5\u9808",
+                    recommended: "\u63A8\u5968",
+                    optional: "\u4EFB\u610F",
+                    readonly: "\u56FA\u5B9A"
+                  }
+                },
                 "cond"
               ]
             }
           },
           "color"
         ];
-        wp.hooks.applyFilters("catpow.blocks.simpletable.selectiveClasses", CP.finderProxy(selectiveClasses2));
+        wp.hooks.applyFilters(
+          "catpow.blocks.simpletable.selectiveClasses",
+          CP.finderProxy(selectiveClasses2)
+        );
         return selectiveClasses2;
       }, []);
       const saveItems = () => {
@@ -155,7 +181,16 @@
       const { RichText } = wp.blockEditor;
       const { classes, rows } = attributes;
       return /* @__PURE__ */ wp.element.createElement("table", { className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
-        return /* @__PURE__ */ wp.element.createElement("tr", { className: row.classes, "data-refine-cond": row.cond, key: index }, /* @__PURE__ */ wp.element.createElement("th", { className: row.cells[0].classes }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: row.cells[0].text })), /* @__PURE__ */ wp.element.createElement("td", { className: row.cells[1].classes }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: row.cells[1].text })));
+        return /* @__PURE__ */ wp.element.createElement(
+          "tr",
+          {
+            className: row.classes,
+            "data-refine-cond": row.cond,
+            key: index
+          },
+          /* @__PURE__ */ wp.element.createElement("th", { className: row.cells[0].classes }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: row.cells[0].text })),
+          /* @__PURE__ */ wp.element.createElement("td", { className: row.cells[1].classes }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: row.cells[1].text }))
+        );
       })));
     }
   });
