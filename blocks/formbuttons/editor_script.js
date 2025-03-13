@@ -16,22 +16,49 @@
       var classNameArray = className.split(" ");
       const selectiveClasses = useMemo(() => {
         var selectiveClasses2 = [
-          { name: "size", label: "\u30B5\u30A4\u30BA", filter: "size", values: { l: "\u5927", m: "\u4E2D", s: "\u5C0F", ss: "\u6975\u5C0F" } },
+          {
+            name: "size",
+            label: "\u30B5\u30A4\u30BA",
+            filter: "size",
+            values: { l: "\u5927", m: "\u4E2D", s: "\u5C0F", ss: "\u6975\u5C0F" }
+          },
           { name: "inline", label: "\u30A4\u30F3\u30E9\u30A4\u30F3", values: "i" }
         ];
-        wp.hooks.applyFilters("catpow.blocks.formbuttons.selectiveClasses", CP.finderProxy(selectiveClasses2));
+        wp.hooks.applyFilters(
+          "catpow.blocks.formbuttons.selectiveClasses",
+          CP.finderProxy(selectiveClasses2)
+        );
         return selectiveClasses2;
       }, []);
       const selectiveItemClasses = useMemo(() => {
         const selectiveItemClasses2 = [
           "color",
-          { name: "rank", type: "gridbuttons", label: "\u5C5E\u6027", filter: "rank", values: ["default", "primary", "secondary", "negative", "danger", "secure"] },
-          { name: "icon", label: "\u30A2\u30A4\u30B3\u30F3", values: "hasIcon", sub: [
-            { input: "icon" }
-          ] },
+          {
+            name: "rank",
+            type: "gridbuttons",
+            label: "\u5C5E\u6027",
+            filter: "rank",
+            values: [
+              "default",
+              "primary",
+              "secondary",
+              "negative",
+              "danger",
+              "secure"
+            ]
+          },
+          {
+            name: "icon",
+            label: "\u30A2\u30A4\u30B3\u30F3",
+            values: "hasIcon",
+            sub: [{ input: "icon" }]
+          },
           "event"
         ];
-        wp.hooks.applyFilters("catpow.blocks.formbuttons.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
+        wp.hooks.applyFilters(
+          "catpow.blocks.formbuttons.selectiveItemClasses",
+          CP.finderProxy(selectiveItemClasses2)
+        );
         return selectiveItemClasses2;
       }, []);
       const saveItems = () => {
@@ -123,9 +150,11 @@
         const itemStates = CP.wordsToFlags(item.classes);
         const eventDispatcherAttributes = {};
         if (blockType.attributes.items.eventDispatcherAttributes) {
-          blockType.attributes.items.eventDispatcherAttributes.map((attr_name) => {
-            eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute] = item[attr_name];
-          });
+          blockType.attributes.items.eventDispatcherAttributes.map(
+            (attr_name) => {
+              eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute] = item[attr_name];
+            }
+          );
         }
         rtn.push(
           /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement(
@@ -149,7 +178,12 @@
       {
         attributes: {
           version: { type: "number", default: 0 },
-          classes: { source: "attribute", selector: "ul", attribute: "class", default: "wp-block-catpow-formbuttons buttons" },
+          classes: {
+            source: "attribute",
+            selector: "ul",
+            attribute: "class",
+            default: "wp-block-catpow-formbuttons buttons"
+          },
           items: {
             source: "query",
             selector: "li.item",
@@ -158,9 +192,7 @@
               event: { source: "attribute", attribute: "data-event" },
               button: { source: "text" }
             },
-            default: [
-              { classes: "item", button: "[button \u9001\u4FE1 send]" }
-            ]
+            default: [{ classes: "item", button: "[button \u9001\u4FE1 send]" }]
           }
         },
         save({ attributes, className }) {
@@ -177,7 +209,9 @@
         migrate(attributes) {
           const { items = [] } = attributes;
           const parseButtonShortCode = (code) => {
-            let matches = code.match(/^\[button ([^ ]+) ([^ ]+)( ignore_message\=1)?\]$/);
+            let matches = code.match(
+              /^\[button ([^ ]+) ([^ ]+)( ignore_message\=1)?\]$/
+            );
             if (matches) {
               let rtn = { content: matches[1], action: matches[2] };
               if (matches[3]) {
