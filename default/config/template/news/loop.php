@@ -25,10 +25,9 @@ cp::enqueue_script('alpine');
 				<div class="label"><?php output('label->name')?></div>
 				<div class="date"><!--@date--></div>
 				<div class="text">
-					<span class="title"><!--@title--></span>
+					<a class="title" href="<?=url()?>"><!--@title--></a>
 					<span class="desc"><!--@desc--></span>
 				</div>
-				<!--@link-->
 			</li>
 			<?php endforeach; ?>
 		</ul>
@@ -39,10 +38,9 @@ cp::enqueue_script('alpine');
 				<div class="label"><?php output('label->name')?></div>
 				<div class="date"><!--@date--></div>
 				<div class="text">
-					<span class="title"><!--@title--></span>
+					<a class="title" href="<?=url()?>"><!--@title--></a>
 					<span class="desc"><!--@desc--></span>
 				</div>
-				<!--@link-->
 			</li>
 			<?php endforeach; ?>
 		</ul>
