@@ -215,9 +215,6 @@ body{
 			}
 		}
 	}
-	.wp-block{
-		@include bnd((w:a f));
-	}
 	.form-table{
 		input[type="radio"]{
 			@include bnd((w:15,h:15));

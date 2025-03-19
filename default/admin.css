@@ -287,10 +287,6 @@ body.login .button.sns_login img {
   transform: -webkit- scale(0.25);
   transform: scale(0.25);
 }
-#wpcontent .wp-block {
-  max-width: 100%;
-  width: auto;
-}
 #wpcontent .form-table input[type="radio"] {
   width: 0.9375rem;
   height: 0.9375rem;
