@@ -5572,43 +5572,16 @@
 
   // ../blocks/_init/init/RTF.jsx
   CP.RTF = (props) => {
-    const {
-      className,
-      pref = "rtf",
-      attr,
-      keys = { text: "text" },
-      index,
-      ...otherProps
-    } = props;
+    const { className, pref = "rtf", attr, keys = { text: "text" }, index, ...otherProps } = props;
     const item = keys.items ? attr[keys.items][index] : attr;
     const text = item[keys.text] ? item[keys.text] : "";
-    return /* @__PURE__ */ wp.element.createElement(
-      "div",
-      {
-        className,
-        ...otherProps,
-        dangerouslySetInnerHTML: { __html: rtf(text, pref) }
-      }
-    );
+    return /* @__PURE__ */ wp.element.createElement("div", { className, ...otherProps, dangerouslySetInnerHTML: { __html: rtf(text, pref) } });
   };
   CP.RTF.Edit = (props) => {
-    const {
-      className,
-      pref = "rtf",
-      set,
-      attr,
-      keys = { text: "text" },
-      index,
-      isSelected = true,
-      ...otherProps
-    } = props;
+    const { className, pref = "rtf", set, attr, keys = { text: "text" }, index, isSelected = true, ...otherProps } = props;
     const { useMemo: useMemo3, useCallback: useCallback2, useState: useState2 } = wp.element;
     const classes = useMemo3(() => bem("cp-rtf " + className), [className]);
-    console.log(classes());
-    const item = useMemo3(
-      () => keys.items ? attr[keys.items][index] : attr,
-      [attr, keys.items, index]
-    );
+    const item = useMemo3(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
     const text = item[keys.text];
     const updateText = useCallback2(
       (text2) => {
@@ -5625,10 +5598,7 @@
       (e) => {
         if (e.key === "Tab") {
           const text2 = e.target.value;
-          const lineStart = Math.max(
-            0,
-            text2.slice(0, e.currentTarget.selectionStart).lastIndexOf("\n")
-          );
+          const lineStart = Math.max(0, text2.slice(0, e.currentTarget.selectionStart).lastIndexOf("\n"));
           const lineEnd = e.currentTarget.selectionEnd + Math.max(0, text2.slice(e.currentTarget.selectionEnd).indexOf("\n"));
           let targetText = text2.slice(lineStart, lineEnd);
           if (e.shiftKey) {
@@ -5637,10 +5607,7 @@
             targetText = targetText.replaceAll("\n", "\n	");
           }
           e.target.value = text2.slice(0, lineStart) + targetText + text2.slice(lineEnd);
-          e.target.setSelectionRange(
-            lineStart ? lineStart + 1 : 0,
-            lineStart + targetText.length
-          );
+          e.target.setSelectionRange(lineStart ? lineStart + 1 : 0, lineStart + targetText.length);
           updateText(e.target.value);
           e.preventDefault();
         }
@@ -5649,55 +5616,27 @@
     );
     const [savedText, setSavedText] = useState2(text);
     const [isActive, setIsActive] = useState2(false);
-    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
-      "div",
+    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-active": isSelected && isActive }), onClick: () => setIsActive(!isActive), ...otherProps, dangerouslySetInnerHTML: { __html: rtf(item.text, pref) } }), /* @__PURE__ */ wp.element.createElement(Portal, { id: "EditRTF" }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal({ "is-active": isSelected && isActive }) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.preview(), dangerouslySetInnerHTML: { __html: rtf(item.text, pref) } }), /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.input() }, /* @__PURE__ */ wp.element.createElement(
+      "textarea",
       {
-        className: classes({ "is-active": isSelected && isActive }),
-        onClick: () => setIsActive(!isActive),
-        ...otherProps,
-        dangerouslySetInnerHTML: { __html: rtf(item.text, pref) }
+        className: classes.portal.input.edit(),
+        value: text,
+        onKeyDown: editorFunction,
+        onChange: (e) => {
+          updateText(e.target.value);
+        }
       }
-    ), /* @__PURE__ */ wp.element.createElement(Portal, { id: "EditRTF" }, /* @__PURE__ */ wp.element.createElement(
+    ), /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.input.buttons() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.input.buttons.button("is-reset"), onClick: () => updateText(savedText) }, "Reset"), /* @__PURE__ */ wp.element.createElement(
       "div",
       {
-        className: classes.portal({ "is-active": isSelected && isActive })
+        className: classes.portal.input.buttons.button("is-save"),
+        onClick: () => {
+          setSavedText(text);
+          setIsActive(false);
+        }
       },
-      /* @__PURE__ */ wp.element.createElement(
-        "div",
-        {
-          className: classes.portal.preview(),
-          dangerouslySetInnerHTML: { __html: rtf(item.text, pref) }
-        }
-      ),
-      /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.input() }, /* @__PURE__ */ wp.element.createElement(
-        "textarea",
-        {
-          className: classes.portal.input.edit(),
-          value: text,
-          onKeyDown: editorFunction,
-          onChange: (e) => {
-            updateText(e.target.value);
-          }
-        }
-      ), /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.input.buttons() }, /* @__PURE__ */ wp.element.createElement(
-        "div",
-        {
-          className: classes.portal.input.buttons.button("is-reset"),
-          onClick: () => updateText(savedText)
-        },
-        "Reset"
-      ), /* @__PURE__ */ wp.element.createElement(
-        "div",
-        {
-          className: classes.portal.input.buttons.button("is-save"),
-          onClick: () => {
-            setSavedText(text);
-            setIsActive(false);
-          }
-        },
-        "Save"
-      )))
-    )));
+      "Save"
+    ))))));
   };
 
   // ../blocks/_init/init/Loop.jsx

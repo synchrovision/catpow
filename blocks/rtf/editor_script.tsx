@@ -19,34 +19,16 @@ wp.blocks.registerBlockType("catpow/rtf", {
 		const { InspectorControls } = wp.blockEditor;
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses: SelectiveClassConfig[] = [
-				"customMargin",
-				"customContentWidth",
-			];
-			wp.hooks.applyFilters(
-				"catpow.blocks.rtf.selectiveClasses",
-				CP.finderProxy(selectiveClasses)
-			);
+			const selectiveClasses: SelectiveClassConfig[] = ["customMargin", "customContentWidth"];
+			wp.hooks.applyFilters("catpow.blocks.rtf.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
 
 		return (
 			<>
-				<CP.RTF.Edit
-					className={"wp-block-catpow-rtf" + classes}
-					set={setAttributes}
-					attr={attributes}
-					isSelected={isSelected}
-					style={vars}
-				/>
+				<CP.RTF.Edit className={"wp-block-catpow-rtf" + classes} set={setAttributes} attr={attributes} isSelected={isSelected} style={vars} />
 				<InspectorControls>
-					<CP.SelectClassPanel
-						title="クラス"
-						icon="art"
-						set={setAttributes}
-						attr={attributes}
-						selectiveClasses={selectiveClasses}
-					/>
+					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 			</>
 		);
