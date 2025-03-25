@@ -10,13 +10,7 @@
       const { InnerBlocks: InnerBlocks2, BlockControls, InspectorControls } = wp.blockEditor;
       const { Icon, PanelBody, TreeSelect, TextareaControl, ToolbarGroup } = wp.components;
       const { serverSideRender: ServerSideRender } = wp;
-      const {
-        content_path,
-        deps = {},
-        query,
-        config,
-        EditMode = false
-      } = attributes;
+      const { content_path, deps = {}, query, config, EditMode = false } = attributes;
       const { useMemo } = wp.element;
       let configData;
       const itemMap = useMemo(() => {
@@ -28,10 +22,7 @@
         });
         return map;
       }, []);
-      const item = useMemo(
-        () => content_path && itemMap[content_path],
-        [itemMap, content_path]
-      );
+      const item = useMemo(() => content_path && itemMap[content_path], [itemMap, content_path]);
       if (!config) {
         if (content_path && itemMap[content_path].has_config) {
           const path = content_path.slice(0, content_path.lastIndexOf("/"));
@@ -58,34 +49,19 @@
             }
           ]
         }
-      )), configData.template && EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent loopContents" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
-        InnerBlocks2,
-        {
-          allowedBlocks: ["catpow/loopcontent"],
-          template: configData.template,
-          templateLock: configData.templateLock || "ALL"
-        }
-      )) : /* @__PURE__ */ wp.element.createElement("div", { className: "cp-embeddedcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/loop", attributes })), item?.deps?.css && /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: item.deps.css }), item?.deps?.js && /* @__PURE__ */ wp.element.createElement("script", { type: "text/javascript", src: item.deps.js }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
+      )), configData.template && EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent loopContents" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks2, { allowedBlocks: ["catpow/loopcontent"], template: configData.template, templateLock: configData.templateLock || "ALL" })) : /* @__PURE__ */ wp.element.createElement("div", { className: "cp-embeddedcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/loop", attributes })), item?.deps?.css && /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: item.deps.css }), item?.deps?.js && /* @__PURE__ */ wp.element.createElement("script", { type: "text/javascript", src: item.deps.js }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
         TreeSelect,
         {
           label: "content path",
           selectedId: content_path,
           tree: Object.values(cpEmbeddablesTree.loop),
           onChange: (content_path2) => {
-            const path = content_path2.slice(
-              0,
-              content_path2.lastIndexOf("/")
-            );
+            const path = content_path2.slice(0, content_path2.lastIndexOf("/"));
             const { has_template } = itemMap[content_path2];
             if (has_template) {
-              wp.apiFetch({ path: "/cp/v1/" + path + "/template" }).then(
-                (template) => {
-                  wp.data.dispatch("core/block-editor").replaceInnerBlocks(
-                    clientId,
-                    CP.createBlocks(template)
-                  );
-                }
-              );
+              wp.apiFetch({ path: "/cp/v1/" + path + "/template" }).then((template) => {
+                wp.data.dispatch("core/block-editor").replaceInnerBlocks(clientId, CP.createBlocks(template));
+              });
             }
             setAttributes({ content_path: content_path2, config: null });
           }
