@@ -248,11 +248,11 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 			saveItems();
 		};
 		const upRow = (index) => {
-			rows.splice(rowIndex, 0, rows.splice(index, 1)[0]);
+			rows.splice(index - 1, 0, rows.splice(index, 1)[0]);
 			saveItems();
 		};
 		const downRow = (index) => {
-			rows.splice(index - 1, 0, rows.splice(index, 1)[0]);
+			rows.splice(index + 1, 0, rows.splice(index, 1)[0]);
 			saveItems();
 		};
 
@@ -413,10 +413,10 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 																	<CP.ItemControl
 																		className="is-control-row"
 																		controls={{
-																			up: () => downRow(rowIndex),
+																			up: () => upRow(rowIndex),
 																			delete: () => deleteRow(rowIndex),
 																			clone: () => addRow(rowIndex),
-																			down: () => upRow(rowIndex),
+																			down: () => downRow(rowIndex),
 																		}}
 																	/>
 																);

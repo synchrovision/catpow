@@ -245,11 +245,11 @@
         saveItems();
       };
       const upRow = (index) => {
-        rows.splice(rowIndex, 0, rows.splice(index, 1)[0]);
+        rows.splice(index - 1, 0, rows.splice(index, 1)[0]);
         saveItems();
       };
       const downRow = (index) => {
-        rows.splice(index - 1, 0, rows.splice(index, 1)[0]);
+        rows.splice(index + 1, 0, rows.splice(index, 1)[0]);
         saveItems();
       };
       const addColumn = (index) => {
@@ -371,10 +371,10 @@
                   {
                     className: "is-control-row",
                     controls: {
-                      up: () => downRow(rowIndex2),
+                      up: () => upRow(rowIndex2),
                       delete: () => deleteRow(rowIndex2),
                       clone: () => addRow(rowIndex2),
-                      down: () => upRow(rowIndex2)
+                      down: () => downRow(rowIndex2)
                     }
                   }
                 )
