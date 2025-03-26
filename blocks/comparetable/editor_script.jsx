@@ -267,9 +267,9 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 			saveItems();
 		};
 		const upColumn = (index) => {
-			cols.splice(rowIndex, 0, cols.splice(index, 1)[0]);
+			cols.splice(index + 1, 0, cols.splice(index, 1)[0]);
 			rows.map((row) => {
-				row.cells.splice(rowIndex, 0, row.cells.splice(index, 1)[0]);
+				row.cells.splice(index + 1, 0, row.cells.splice(index, 1)[0]);
 			});
 			saveItems();
 		};

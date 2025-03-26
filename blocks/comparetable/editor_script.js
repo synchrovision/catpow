@@ -263,9 +263,9 @@
         saveItems();
       };
       const upColumn = (index) => {
-        cols.splice(rowIndex, 0, cols.splice(index, 1)[0]);
+        cols.splice(index + 1, 0, cols.splice(index, 1)[0]);
         rows.map((row) => {
-          row.cells.splice(rowIndex, 0, row.cells.splice(index, 1)[0]);
+          row.cells.splice(index + 1, 0, row.cells.splice(index, 1)[0]);
         });
         saveItems();
       };
@@ -355,14 +355,14 @@
             ))
           );
         }))),
-        /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.table.tbody() }, rows.map((row, rowIndex2) => {
-          if (hasHeaderRow && rowIndex2 === 0) {
+        /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.table.tbody() }, rows.map((row, rowIndex) => {
+          if (hasHeaderRow && rowIndex === 0) {
             return false;
           }
-          return /* @__PURE__ */ wp.element.createElement("tr", { className: classes.table.tbody.tr(row.classes), "data-row-class": row.classes, key: rowIndex2 }, row.cells.map((cell, columnIndex) => {
+          return /* @__PURE__ */ wp.element.createElement("tr", { className: classes.table.tbody.tr(row.classes), "data-row-class": row.classes, key: rowIndex }, row.cells.map((cell, columnIndex) => {
             const colStates = CP.classNamesToFlags(cols[columnIndex]?.classes);
             const cellStates = CP.classNamesToFlags(cell.classes);
-            const lineClass = ["is-even-line", "is-odd-line"][(states.doTransposition ? columnIndex : rowIndex2) % 2];
+            const lineClass = ["is-even-line", "is-odd-line"][(states.doTransposition ? columnIndex : rowIndex) % 2];
             var controles = [];
             if (isSelected && columnIndex == row.cells.length - 1) {
               controles.push(
@@ -371,16 +371,16 @@
                   {
                     className: "is-control-row",
                     controls: {
-                      up: () => upRow(rowIndex2),
-                      delete: () => deleteRow(rowIndex2),
-                      clone: () => addRow(rowIndex2),
-                      down: () => downRow(rowIndex2)
+                      up: () => upRow(rowIndex),
+                      delete: () => deleteRow(rowIndex),
+                      clone: () => addRow(rowIndex),
+                      down: () => downRow(rowIndex)
                     }
                   }
                 )
               );
             }
-            if (isSelected && rowIndex2 == rows.length - 1) {
+            if (isSelected && rowIndex == rows.length - 1) {
               controles.push(
                 /* @__PURE__ */ wp.element.createElement(
                   CP.ItemControl,
@@ -403,10 +403,10 @@
                   className: classes.table.tbody.tr.th(row.classes, headerColClasses, cell.classes, lineClass),
                   "data-cell-class": cell.classes,
                   onClick: () => setAttributes({
-                    r: rowIndex2,
+                    r: rowIndex,
                     c: columnIndex
                   }),
-                  style: getCssVarsForCell(rowIndex2, columnIndex),
+                  style: getCssVarsForCell(rowIndex, columnIndex),
                   key: columnIndex
                 },
                 cellStates.hasLabel && /* @__PURE__ */ wp.element.createElement("div", { className: classes.table.tbody.tr.th.label(), "data-role": "label" }, /* @__PURE__ */ wp.element.createElement(
@@ -438,10 +438,10 @@
                 className: classes.table.tbody.tr.td(row.classes, cols[columnIndex]?.classes, cell.classes, lineClass),
                 "data-cell-class": cell.classes,
                 onClick: () => setAttributes({
-                  r: rowIndex2,
+                  r: rowIndex,
                   c: columnIndex
                 }),
-                style: getCssVarsForCell(rowIndex2, columnIndex),
+                style: getCssVarsForCell(rowIndex, columnIndex),
                 key: columnIndex
               },
               cellStates.hasLabel && /* @__PURE__ */ wp.element.createElement("div", { className: classes.table.tbody.tr.td.label(), "data-role": "label" }, /* @__PURE__ */ wp.element.createElement(
@@ -461,7 +461,7 @@
                   attr: attributes,
                   set: setAttributes,
                   keys: imageKeys.image,
-                  index: rowIndex2,
+                  index: rowIndex,
                   subIndex: columnIndex,
                   size: "large",
                   isTemplate: states.isTemplate
@@ -567,21 +567,21 @@
             /* @__PURE__ */ wp.element.createElement("div", { className: classes.table.thead.tr.th.contents(), "data-role": "contents" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: cell.text }))
           );
         }))),
-        /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.table.tbody() }, rows.map((row, rowIndex2) => {
-          if (hasHeaderRow && rowIndex2 === 0) {
+        /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.table.tbody() }, rows.map((row, rowIndex) => {
+          if (hasHeaderRow && rowIndex === 0) {
             return false;
           }
-          return /* @__PURE__ */ wp.element.createElement("tr", { className: classes.table.tbody.tr(), "data-row-class": row.classes, key: rowIndex2 }, row.cells.map((cell, columnIndex) => {
+          return /* @__PURE__ */ wp.element.createElement("tr", { className: classes.table.tbody.tr(), "data-row-class": row.classes, key: rowIndex }, row.cells.map((cell, columnIndex) => {
             const colStates = CP.classNamesToFlags(cols[columnIndex]?.classes);
             const cellStates = CP.classNamesToFlags(cell.classes);
-            const lineClass = ["is-even-line", "is-odd-line"][(states.doTransposition ? columnIndex : rowIndex2) % 2];
+            const lineClass = ["is-even-line", "is-odd-line"][(states.doTransposition ? columnIndex : rowIndex) % 2];
             if (hasHeaderColumn && columnIndex == 0) {
               return /* @__PURE__ */ wp.element.createElement(
                 "th",
                 {
                   className: classes.table.tbody.tr.th(row.classes, headerColClasses, cell.classes, lineClass),
                   "data-cell-class": cell.classes,
-                  style: getCssVarsForCell(rowIndex2, columnIndex),
+                  style: getCssVarsForCell(rowIndex, columnIndex),
                   key: columnIndex
                 },
                 cellStates.hasLabel && /* @__PURE__ */ wp.element.createElement("div", { className: classes.table.thead.tr.th.label(), "data-role": "label" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: cell.label })),
@@ -593,7 +593,7 @@
               {
                 className: classes.table.tbody.tr.td(row.classes, cols[columnIndex]?.classes, cell.classes, lineClass),
                 "data-cell-class": cell.classes,
-                style: getCssVarsForCell(rowIndex2, columnIndex),
+                style: getCssVarsForCell(rowIndex, columnIndex),
                 key: columnIndex
               },
               cellStates.hasLabel && /* @__PURE__ */ wp.element.createElement("div", { className: classes.table.tbody.tr.td.label(), "data-role": "label" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: cell.label })),
@@ -603,7 +603,7 @@
                   className: classes.table.tbody.tr.td.image._img(),
                   attr: attributes,
                   keys: imageKeys.image,
-                  index: rowIndex2,
+                  index: rowIndex,
                   subIndex: columnIndex,
                   isTemplate: states.isTemplate
                 }
