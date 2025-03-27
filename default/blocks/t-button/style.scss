@@ -1,16 +1,21 @@
 @import 'admin_style_config.scss';
 
 .wp-block-catpow-t-button{
-	@include bnd((d:b,mg:.5em a));
-	@include txt((a:c,td:n));
-	table{
+	&__table{
 		@include tbl(());
+		@include bnd((w:f));
+	}
+	&__spacer{
+		@include bnd((h:1em,w:1em));
+	}
+	&__button{
+		@include bnd((pd:1em,w:3em));
 		@include bg((c:m));
 		@include bdr((s:n,r:.25em));
-		&>tbody>tr>td{
-			@include bnd((pd:.25em));
-			@include bdr((s:n));
-			@include txt((a:c,w:r,c:b));
+		@include txt((a:c));
+		&-link{
+			@include bnd((d:b));
+			@include txt((a:c,td:n,w:r,c:i));
 		}
 	}
 	&.large{
@@ -21,8 +26,5 @@
 	}
 	&.small{
 		@include txt((p:12));
-	}
-	@include clr(){
-		table{@include bg((c:$i));}
 	}
 }
