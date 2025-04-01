@@ -8,7 +8,7 @@
 	@include trn((t:.5s));
 	@include usr((c:p));
 	@include shd((bv:-1));
-	&Icon{
+	&__icon{
 		@include bnd((d:b,p:r,w:15,mg:0 10,h:15));
 		@include bdr((r:3));
 		@include trn((t:.5s));
@@ -28,7 +28,7 @@
 			}
 		}
 	}
-	&>&Icon{
+	&>&__icon{
 		@include bnd((d:b,p:a,t:0,l:10,b:0,mg:a));
 	}
 	&.selected{
