@@ -7,12 +7,14 @@
 		@include bnd((p:r,z:2,pdb:100));
 		>.logo{
 			>.CP-ResponsiveImage{
-				@include bnd((d:b,w:80vw 600,h:a));
+				&,img{
+					@include bnd((d:b,w:100 80vw 600,h:a));
+				}
 			}
 		}
 	}
 	>.bg{
-		@include bnd((z:1));
+		@include bnd((w:100vw,h:100vh,l:0,r:0,t:0,z:1));
 		>.CP-ResponsiveImage{
 			@include bnd((p:a,w:f,h:f,op:c,of:c));
 		}
