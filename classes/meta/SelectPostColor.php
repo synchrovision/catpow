@@ -26,7 +26,7 @@ class SelectPostColor extends UI{
 			"AND (meta_value LIKE 'color%' OR meta_value LIKE 'tone%')",
 			$id
 		));
-		foreach(explode(' ',$vals[0]) as $val){
+		foreach($vals[0] as $val){
 			add_post_meta($id,'post_class',$val);
 		}
 	}
