@@ -17,7 +17,6 @@ class SelectPostColor extends UI{
 		return ['color0'];
 	}
 	public static function set($data_type,$data_name,$id,$meta_name,$vals,$conf){
-		error_log(var_export($vals,1).__FILE__.__LINE__);
 		global $wpdb;
 		$wpdb->query($wpdb->prepare(
 			"DELETE FROM {$wpdb->postmeta} ".
