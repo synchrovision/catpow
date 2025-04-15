@@ -52,7 +52,7 @@ class shortcode{
 		}
 
 		$tag=$m[2];
-		$attr=shortcode_parse_atts( $m[3] );
+		$attr=shortcode_parse_atts( html_entity_decode($m[3]) );
 		$return=apply_filters('pre_do_shortcode_tag',false,$tag,$attr,$m);
 		if(false !== $return){
 			return $return;
