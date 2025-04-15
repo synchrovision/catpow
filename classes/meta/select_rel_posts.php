@@ -51,6 +51,8 @@ class select_rel_posts extends select{
 					);
 				case 'url':
 					return get_permalink($val);
+				case 'href':
+					return preg_replace('@^https?://@','',get_permalink($val));
 				default:
 					global $post_types;
 					$post_type=get_post_type($val);
