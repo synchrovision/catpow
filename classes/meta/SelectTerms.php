@@ -13,6 +13,9 @@ class SelectTerms extends UI{
 	public static function get_rel_data_value($relkey,$vals,$conf){
 		return checkbox_terms::get_rel_data_value($relkey,$vals,$conf);
 	}
+	public static function get_rel_data_conf($conf){
+		return checkbox_terms::get_rel_data_conf($conf);
+	}
 	public static function fill_param($param,$meta){
 		$param=parent::fill_param($param,$meta);
 		$param['options']=checkbox_terms::get_selections($meta);

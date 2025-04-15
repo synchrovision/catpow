@@ -6,6 +6,12 @@ class select_rel_terms extends select{
 		$value_type='NUMERIC',
 		$data_type='bigint(20)';
 	
+	public static function get_rel_data_value($relkey,$vals,$conf){
+		return select_terms::get_rel_data_value($relkey,$vals,$conf);
+	}
+	public static function get_rel_data_conf($conf){
+		return select_terms::get_rel_data_conf($conf);
+	}
 	public static function output($meta,$prm){
 		$val=$meta->value;
 		if(empty($val))return false;

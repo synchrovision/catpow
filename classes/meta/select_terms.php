@@ -55,6 +55,10 @@ class select_terms extends select{
 		}
 		return call_user_func_array('array_merge',$values);
 	}
+	public static function get_rel_data_conf($conf){
+		$taxonomy=is_string($conf['value'])?$conf['value']:$conf['value']['taxonomy'];
+		return \CP::get_the_conf_data("term/{$taxonomy}");
+	}
 	
 	public static function export($data_type,$data_name,$id,$meta_name,$conf){
 		$vals=static::get($data_type,$data_name,$id,$meta_name,$conf);
