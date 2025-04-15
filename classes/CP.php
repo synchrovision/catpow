@@ -869,7 +869,14 @@ class CP{
 			return $cache[$content_path][$data_id]=$conf_data;
 			
 		}
-		$conf_data=self::get_the_conf_data(dirname($content_path),$data_id)['meta'][basename($content_path)]??[];
+		$meta_name=basename($content_path);
+		if(strpos($meta_name,'->')!==false){
+			list($meta_name,$relkey)=explode('->',$meta_name);
+			$conf_data=self::get_the_conf_data(dirname($content_path),$data_id)['meta'][$meta_name]??[];
+			$class_name=self::get_class_name('meta',$conf_data['type']);
+			return $cache[$content_path]=$class_name::get_rel_data_conf($conf_data)['meta'][$relkey]??[];
+		}
+		$conf_data=self::get_the_conf_data(dirname($content_path),$data_id)['meta'][$meta_name]??[];
 		if($f=self::get_file_path($content_path.'/meta.php')){
 			include $f;
 			if(isset($meta)){$conf_data['meta']=array_merge($meta,(array)$conf_data['meta']);}

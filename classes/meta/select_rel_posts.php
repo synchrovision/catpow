@@ -21,6 +21,10 @@ class select_rel_posts extends select{
 		}
 		return call_user_func_array('array_merge',$values);
 	}
+	public static function get_rel_data_conf($conf){
+		$post_type=is_string($conf['value'])?$conf['value']:$conf['value']['post_type'];
+		return \CP::get_the_conf_data("post/{$post_type}");
+	}
 	public static function output($meta,$prm){
 		$val=$meta->value;
 		if(empty($val))return false;

@@ -83,6 +83,9 @@ abstract class meta{
 	public static function get_rel_data_value($relkey,$vals,$conf){
 		return array_column($vals,$relkey);
 	}
+	public static function get_rel_data_conf($conf){
+		return $conf;
+	}
 	
 	public static function output($meta,$prm){
 		$values=$meta->value;
