@@ -27,9 +27,46 @@ class media extends meta{
 	}
 	
 	public static function get_output($conf,$val,$prm){
-		if($prm=='url'){return wp_get_attachment_url($val);}
-		if(empty($post=get_post($val))){return '';}
-		if($prm=='type'){return $post->post_mime_type;}
+		if($prm=='url'){
+			if($url=wp_get_attachment_url($val)){
+				return $url;
+			}
+			if(isset($conf['default'])){
+				if(is_array($conf['default'])){
+					return $conf['default']['src'];
+				}
+				if(is_numeric($conf['default'])){
+					return wp_get_attachment_url($conf['default']);
+				}
+				if(is_string($conf['default'])){
+					return $conf['default'];
+				}
+			}
+			return false;
+		}
+		if(empty($post=get_post($val))){
+			if(empty($conf['default'])){
+				return false;
+			}
+			if(is_numeric($conf['default'])){
+				$post=get_post($conf['default']);
+			}
+			else{
+				if($prm==='type' || $prm==='alt'){
+					return false;
+				}
+				if(is_array($conf['default'])){
+					$src=$conf['default']['src']??null;
+					$alt=$conf['default']['alt']??null;
+				}
+				else{
+					$src=$conf['default'];
+					$alt='';
+				}
+				return sprintf('<img src="%s" alt="%s"/>',$src,$alt);
+			}
+		}
+		if($prm==='type'){return $post->post_mime_type;}
 		if($prm==='alt'){return $post->_wp_attachment_image_alt;}
 		switch(substr($post->post_mime_type,0,5)){
 			case 'image':
@@ -50,7 +87,6 @@ class media extends meta{
 					static::get_player_attr(array_merge($conf,(array)$prm))
 				);
 		}
-		
 	}
 	public static function get_input($path,$conf,$val){
 		if(isset($conf['dummy'])){$dummy=get_template_directory_uri('/images/'.$conf['dummy']);}
