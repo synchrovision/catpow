@@ -1,7 +1,7 @@
 <?php
 namespace Catpow\meta;
 abstract class meta{
-	const INPUT_LOOP=01,USE_ALTERNATIVE=02;
+	const INPUT_LOOP=01,USE_ALTERNATIVE=02,USE_DEFAULT=04;
 	public static
 		$value_type='CHAR',
 		$data_type='longtext',
@@ -109,6 +109,9 @@ abstract class meta{
 					if(!empty($loop=$meta->parent->get_the_data($alternative))){break;}
 				}
 			}
+			if(empty($loop) && ($flags & self::USE_DEFAULT) && !empty($meta->conf['default'])){
+				$loop=(array)self::default_value($meta->conf);
+			}
 			if(empty($meta->conf['multiple'])){
 				$class_name=\cp::get_class_name('meta',$meta->conf['type']?:'text');
 				if(!$class_name::$is_bulk_input && !empty($loop)){$loop=[key($loop)=>reset($loop)];}
@@ -116,6 +119,9 @@ abstract class meta{
 			elseif($meta->conf['multiple']>1){
 				$loop=array_pad(array_slice($loop??[],0,$meta->conf['multiple']),$meta->conf['multiple'],null);
 			}
+		}
+		if(empty($loop) && ($flags & self::INPUT_LOOP)){
+			$loop=[0=>null];
 		}
 		
 		if(is_iterable($loop)){
