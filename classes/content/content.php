@@ -228,6 +228,7 @@ class content extends \stdClass{
 			if(is_null($this->loop_id)){if(!empty($this->data)){return $this->data;}}
 			elseif(isset($this->data[$this->loop_id])){return $this->data[$this->loop_id];}
 			if(is_a($this,meta::class) && $val=\cp::get_the_meta_value($this->the_data_path,$this->tmp_name)){return $val;}
+			if(isset($this->loop_id)){return '';}
 			return [];
 		}
 	}
