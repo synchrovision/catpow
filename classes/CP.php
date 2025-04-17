@@ -1130,17 +1130,19 @@ class CP{
 			);
 			if($use_alt){
 				if(empty($values) && isset($conf['alternative'])){
-					$values=$cache[$data_path.'?'][$tmp]=self::get_the_meta_value(sprintf(
-						'%s/%s/%s/%s?',
-						$path_data['data_type'],
-						$path_data['data_name'],
-						$path_data['data_id'],
-						is_array($conf['alternative'])?$conf['alternative'][0]:$conf['alternative']
-					));
+					foreach((array)$conf['alternative'] as $i=>$alt){
+						$values=self::get_the_meta_value(sprintf(
+							'%s/%s/%s/%s?',
+							$path_data['data_type'],
+							$path_data['data_name'],
+							$path_data['data_id'],
+							$alt
+						));
+						if(!empty($values)){break;}
+					}
+					
 				}
-				else{
-					$cache[$data_path.'?'][$tmp]=$values;
-				}
+				$cache[$data_path.'?'][$tmp]=$values;
 			}
 			if(isset($relkey)){
 				return $cache[$data_path.'->'.$relkey.($use_alt?'?':'')][$tmp]=$class_name::get_rel_data_value($relkey,$values,$conf);
