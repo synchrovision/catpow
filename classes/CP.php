@@ -873,7 +873,7 @@ class CP{
 		if(strpos($meta_name,'->')!==false){
 			list($meta_name,$relkey)=explode('->',$meta_name);
 			$conf_data=self::get_the_conf_data(dirname($content_path),$data_id)['meta'][$meta_name]??[];
-			$class_name=self::get_class_name('meta',$conf_data['type']);
+			$class_name=self::get_class_name('meta',$conf_data['type']??'text');
 			return $cache[$content_path]=$class_name::get_rel_data_conf($conf_data)['meta'][$relkey]??[];
 		}
 		$conf_data=self::get_the_conf_data(dirname($content_path),$data_id)['meta'][$meta_name]??[];
