@@ -21,16 +21,18 @@ switch($prm[0]){
 		$confs=CP::get_conf_data('post/'.$post->post_type)['taxonomies']??null;
 		if(empty($confs)){break;}
 		$tax_names=$atts[1]??array_keys($confs);
+		echo '<div class="cpsc-tags">';
 		foreach($tax_names as $tax_name){
 			foreach(get_the_terms($post,$tax_name)?:[] as $term){
 				printf(
-					'<a class="cpsc-tag %s" href="%s">%s</a>',
+					'<a class="cpsc-tags__tag %s" href="%s">%s</a>',
 					implode(' ',get_term_meta($term->term_id,'term_class')?:['color0']),
 					get_term_link($term),
 					$term->name
 				);
 			}
 		}
+		echo '</div>';
 		break;
 	default: echo $GLOBALS['post']->{$prm[0]};
 }
