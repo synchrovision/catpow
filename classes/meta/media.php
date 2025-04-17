@@ -55,7 +55,11 @@ class media extends meta{
 			return sprintf('<img src="%s" alt="%s"/>',$url,$alt);
 		}
 		if($prm=='url'){return wp_get_attachment_url($val);}
-		if(empty($post=get_post($val))){return;}
+		if(empty($post=get_post($val))){
+			if(isset($conf['dummy'])){$dummy=get_template_directory_uri('/images/'.$conf['dummy']);}
+			else{$dummy=\cp::get_file_url('images/dummy.jpg');}
+			return sprintf('<img src="%s" alt="%s"/>',$dummy,$conf['alt']??$conf['label']??'');
+		}
 		if($prm==='type'){return $post->post_mime_type;}
 		if($prm==='alt'){return $post->_wp_attachment_image_alt;}
 		switch(substr($post->post_mime_type,0,5)){
