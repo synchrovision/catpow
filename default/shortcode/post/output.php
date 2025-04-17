@@ -24,7 +24,7 @@ switch($prm[0]){
 		foreach($tax_names as $tax_name){
 			foreach(get_the_terms($post,$tax_name)?:[] as $term){
 				printf(
-					'<a class="tag %s" href="%s">%s</a>',
+					'<a class="cpsc-tag %s" href="%s">%s</a>',
 					implode(' ',get_term_meta($term->term_id,'term_class')?:['color0']),
 					get_term_link($term),
 					$term->name

@@ -26,5 +26,5 @@ if(!is_null(\cp::$content->form??null)){
 	\cp::$content->form->button($content,$action,$prm['param'],$prm['target'],$prm['ignore_message']);
 }
 else{
-	echo '<a class="button" href="'.$action.'">'.$content.'</a>';
+	echo '<a class="cpsc-button" href="'.$action.'">'.$content.'</a>';
 }
