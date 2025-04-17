@@ -27,45 +27,35 @@ class media extends meta{
 	}
 	
 	public static function get_output($conf,$val,$prm){
-		if($prm=='url'){
-			if($url=wp_get_attachment_url($val)){
-				return $url;
+		if(!is_numeric($val)){
+			$path_url=\cp::get_file_path_url($val);
+			if(empty($path_url)){return;}
+			$path=key($path_url);
+			$url=$path_url[$path];
+			if($prm==='url'){return $url;}
+			$type=mime_content_type($path);
+			$alt=$conf['alt']??$conf['label']??'';
+			if($prm==='type'){return $type;}
+			if($prm==='alt'){return $alt;}
+			switch(substr($type,0,5)){
+				case 'image':return sprintf('<img src="%s" alt="%s"/>',$url,$alt);
+				case 'video':
+					return sprintf(
+						'<video src="%s"%s></video>',
+						$url,
+						static::get_player_attr(array_merge($conf,(array)$prm))
+					);
+				case 'audio':
+					return sprintf(
+						'<audio src="%s"%s></audio>',
+						$url,
+						static::get_player_attr(array_merge($conf,(array)$prm))
+					);
 			}
-			if(isset($conf['default'])){
-				if(is_array($conf['default'])){
-					return $conf['default']['src'];
-				}
-				if(is_numeric($conf['default'])){
-					return wp_get_attachment_url($conf['default']);
-				}
-				if(is_string($conf['default'])){
-					return $conf['default'];
-				}
-			}
-			return false;
+			return sprintf('<img src="%s" alt="%s"/>',$url,$alt);
 		}
-		if(empty($post=get_post($val))){
-			if(empty($conf['default'])){
-				return false;
-			}
-			if(is_numeric($conf['default'])){
-				$post=get_post($conf['default']);
-			}
-			else{
-				if($prm==='type' || $prm==='alt'){
-					return false;
-				}
-				if(is_array($conf['default'])){
-					$src=$conf['default']['src']??null;
-					$alt=$conf['default']['alt']??null;
-				}
-				else{
-					$src=$conf['default'];
-					$alt='';
-				}
-				return sprintf('<img src="%s" alt="%s"/>',$src,$alt);
-			}
-		}
+		if($prm=='url'){return wp_get_attachment_url($val);}
+		if(empty($post=get_post($val))){return;}
 		if($prm==='type'){return $post->post_mime_type;}
 		if($prm==='alt'){return $post->_wp_attachment_image_alt;}
 		switch(substr($post->post_mime_type,0,5)){
