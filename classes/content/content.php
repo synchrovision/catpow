@@ -216,11 +216,8 @@ class content extends \stdClass{
 			if(!is_null($this->form)){
 				if(!empty($val=$this->form->inputs->get($this->get_the_data_path($name)))){return $val;}
 			}
-			
 			if($vals=\cp::get_the_meta_value($this->the_data_path.'/'.$name,$this->tmp_name)){return $vals;}
-			
-			$class_name=\cp::get_class_name('meta',$this->conf['meta'][$name]['type']??'text');
-			return (array)$class_name::default_value($this->conf['meta'][$name]??[]);
+			return [];
 		}
 		else{
 			if(!is_null($this->form)){
@@ -230,14 +227,8 @@ class content extends \stdClass{
 			if(isset($this->object)){return $this->object;}
 			if(is_null($this->loop_id)){if(!empty($this->data)){return $this->data;}}
 			elseif(isset($this->data[$this->loop_id])){return $this->data[$this->loop_id];}
-
 			if(is_a($this,meta::class) && $val=\cp::get_the_meta_value($this->the_data_path,$this->tmp_name)){return $val;}
-			
-			
-			if(isset($this->loop_id)){
-				return $class_name::default_value($this->conf);
-			}
-			return (array)$class_name::default_value($this->conf);
+			return [];
 		}
 	}
 	public function get_the_data_path($name=null){
