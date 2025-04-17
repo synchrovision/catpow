@@ -1,7 +1,7 @@
 <?php
 namespace Catpow;
 $prm=shortcode_atts(array(0=>null),$atts);
-if(cp::$content):
+if(CP::$content):
 «($prm[0])->allow_input();
 ?>
 <div <?php _item(); ?>>
