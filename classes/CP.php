@@ -827,7 +827,7 @@ class CP{
 		static $cache;
 		if(empty($content_path)){return [];}
 		if(isset($cache[$content_path][$data_id])){return $cache[$content_path][$data_id];}
-		$content_path=trim($content_path,'/');
+		$content_path=trim($content_path,'/?');
 		$depth=substr_count($content_path,'/');
 		if($depth<3){
 			if($depth===2){list($data_type,$data_name,$tmp_name)=explode('/',$content_path);}
