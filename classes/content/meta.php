@@ -24,7 +24,7 @@ class meta extends content{
 		}
 		else{
 			$items=[];
-			foreach($class_name::loop($this,$class_name::USE_ALTERNATIVE) as $this->loop_id=>$this->value){
+			foreach($class_name::loop($this,$class_name::USE_ALTERNATIVE|$class_name::USE_DEFAULT) as $this->loop_id=>$this->value){
 				$item=$class_name::output($this,$prm);
 				if(isset($format)){$item=sprintf($format,$item);}
 				$items[]=$item;
