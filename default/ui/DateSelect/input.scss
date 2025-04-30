@@ -2,8 +2,10 @@
 
 
 .cpui-dateselect{
+	@include bnd((d:ib));
 	&>.inputs{
-		@include bnd((d:ib,mg:0 .5em,pd:5));
+		@include bnd((mg:0 .5em,pd:5));
+		@include flx((a:c));
 		@include usr((c:p));
 		@include txt((a:c,p:15));
 		.input{
