@@ -1250,6 +1250,7 @@ class CP{
 	
 	public static function parse_content_file_path($path){
 		static $path_datas;
+		if(is_array($path)){return $path;}
 		if(isset($path_datas[$path]))return $path_datas[$path];
 		self::sanitize_path($path);
 		$path_data=self::parse_content_path(dirname($path));
