@@ -6,8 +6,8 @@ $colors:(
 	c:currentColor
 );
 
-.cp{
-	&-components-panel{
+.components{
+	&-panel{
 		div.sub{
 			@include bnd((pdl:10,mgb:20));
 			@include bdr((p:l,s:s,w:5,c:#eee));
@@ -16,6 +16,8 @@ $colors:(
 			@include bnd((w:100,h:a));
 		}
 	}
+}
+.cp{
 	&-selectbuttons{
 		@include bnd((w:max));
 	}
@@ -267,7 +269,7 @@ $colors:(
 					&-label{
 						@include bnd((p:a,r:0,t:0,pd:.25em,z:10));
 						@include bg((c:wp));
-						@include txt((a:c,p:12,h:10,f:g,w:r,c:b));
+						@include txt((a:c,p:12,h:10,f:g,w:r,c:i));
 						@include shd((b:1));
 					}
 				}
@@ -532,7 +534,7 @@ $colors:(
 			@include usr((c:p));
 			&.active{
 				@include bg((c:wp));
-				@include txt((c:b));
+				@include txt((c:i));
 			}
 		}
 	}

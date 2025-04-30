@@ -1,12 +1,12 @@
 @charset "UTF-8";
-.cp-components-panel div.sub {
+.components-panel div.sub {
   padding-left: 0.625rem;
   margin-bottom: 1.25rem;
   border-left-style: solid;
   border-left-width: 0.3125rem;
   border-left-color: #eee;
 }
-.cp-components-panel img.selectImage {
+.components-panel img.selectImage {
   width: 6.25rem;
   height: auto;
 }
@@ -476,7 +476,7 @@
   line-height: 0.625rem;
   font-family: g;
   font-weight: 400;
-  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a));
   box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
 }
 .cp-customcolorvars-items {
@@ -981,7 +981,7 @@
 }
 .cp-selectgridbuttons .item.active {
   background-color: var(--wp-admin-theme-color);
-  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a));
 }
 .cp-datainputtable {
   border-collapse: separate;
