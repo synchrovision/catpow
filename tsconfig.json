@@ -1,15 +1,16 @@
 {
-	"compilerOptions":{
+	"compilerOptions": {
 		"module": "ESNext",
 		"moduleResolution": "Node",
 		"jsx": "react",
 		"baseUrl": "./",
 		"lib": ["ESNext"],
+		"types": ["jest", "jsdom"],
 		"paths": {
-			"*":["./compiler/node_modules/*"],
-			"blocks/*":["./blocks/*"],
-			"cpdev/*":["./compiler/cpdev/*"],
-			"catpow/*":["./compiler/modules/src/*"],
+			"*": ["./compiler/node_modules/*"],
+			"blocks/*": ["./blocks/*"],
+			"cpdev/*": ["./compiler/cpdev/*"],
+			"catpow/*": ["./compiler/modules/src/*"]
 		}
 	}
 }
