@@ -32,7 +32,7 @@ class primary extends template_type{
 				 	],
 				 	['body/[<?php body_class(\'base\') ?>]',
 					 	'<?php wp_body_open(); ?>',
-					 	['header.site_header',
+					 	['header.site-header',
 						 	[
 								'div.contents',
 								['h1.logo',
@@ -55,7 +55,7 @@ class primary extends template_type{
 				['/html',
 					['/body',
 						['/main'],
-						['footer.site_footer',
+						['footer.site-footer',
 							'@menu footer',
 							['p.copyright','Copyights(c) <?= bloginfo(\'title\');?>. All Rights Reserved.']
 						],

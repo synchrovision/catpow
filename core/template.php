@@ -146,10 +146,10 @@ function page_header_bg_style(){
 	}
 }
 function site_main_class(){
-	echo 'site_main';
-	if(is_home()){echo ' site_main-home';}
-	if(is_front_page()){echo ' site_main-front';}
-	echo ' site_main-'.cp::get_the_path_data()['tmp_name'];
+	echo 'site-main';
+	if(is_home()){echo ' is-home-page';}
+	if(is_front_page()){echo ' is-front-page';}
+	echo ' is-'.cp::get_the_path_data()['tmp_name'].'-page';
 }
 
 /*content*/
