@@ -125,11 +125,7 @@
       `<dl class="${pref}-notes${c}"><dt class="${pref}-notes__dt">$2</dt><dd class="${pref}-notes__dd">${p2}</dd></dl><!--/notes-->`,
       text
     );
-    text = text.replace(
-      new RegExp(h + "([^\\s\u3000].{0,20}?) [:\uFF1A] " + t, "gum"),
-      `<dl class="${pref}-dl${c}"><dt class="${pref}-dl__dt">$2</dt><dd class="${pref}-dl__dd">${p2}</dd></dl>`,
-      text
-    );
+    text = text.replace(new RegExp(h + "([^\\s\u3000].{0,20}?) [:\uFF1A] " + t, "gum"), `<dl class="${pref}-dl${c}"><dt class="${pref}-dl__dt">$2</dt><dd class="${pref}-dl__dd">${p2}</dd></dl>`, text);
     text = text.replace(new RegExp(h + "\u203B" + t, "gum"), `<span class="${pref}-annotation${c}">${p}</span>`);
     text = text.replace(new RegExp(h + "\u25A0 " + t, "gum"), `<h${l} class="${pref}-title${c}">${p}</h${l}>`);
     text = text.replace(new RegExp(h + "\u30FB " + t, "gum"), `<ul class="${pref}-ul${c}"><li class="${pref}-ul__li">${p}</li></ul>`);
@@ -158,36 +154,36 @@
   var bem = (className) => {
     const children = {};
     const firstClass = className.split(" ")[0];
-    return new Proxy(function() {
-      if (arguments.length > 0) {
-        const classes = [];
-        let i;
-        for (i = 0; i < arguments.length; i++) {
-          if (!arguments[i]) {
-            continue;
+    return new Proxy(
+      function() {
+        if (arguments.length > 0) {
+          const classes = [];
+          let i;
+          for (i = 0; i < arguments.length; i++) {
+            if (!arguments[i]) {
+              continue;
+            }
+            if (typeof arguments[i] === "string") {
+              classes.push(arguments[i]);
+              continue;
+            }
+            classes.push.apply(classes, Array.isArray(arguments[i]) ? arguments[i] : Object.keys(arguments[i]).filter((c) => arguments[i][c]));
           }
-          if (typeof arguments[i] === "string") {
-            classes.push(arguments[i]);
-            continue;
+          if (classes.length > 0) {
+            return (className + " " + classes.join(" ")).replace(" --", " " + firstClass + "--");
           }
-          classes.push.apply(
-            classes,
-            Array.isArray(arguments[i]) ? arguments[i] : Object.keys(arguments[i]).filter((c) => arguments[i][c])
-          );
         }
-        if (classes.length > 0) {
-          return (className + " " + classes.join(" ")).replace(" --", " " + firstClass + "--");
+        return className;
+      },
+      {
+        get: (target, prop) => {
+          if (void 0 === children[prop]) {
+            children[prop] = bem(firstClass + (prop[0] === "_" ? "_" : "-") + prop);
+          }
+          return children[prop];
         }
       }
-      return className;
-    }, {
-      get: (target, prop) => {
-        if (void 0 === children[prop]) {
-          children[prop] = bem(firstClass + (prop[0] === "_" ? "_" : "-") + prop);
-        }
-        return children[prop];
-      }
-    });
+    );
   };
 
   // ../blocks/_init/init/CP.jsx
@@ -2314,7 +2310,12 @@
 
   // modules/src/component/Bem.jsx
   var applyBem = (component, { ...ctx }) => {
-    const { props: { className, children } } = component;
+    if (component == null || component.props == null) {
+      return;
+    }
+    const {
+      props: { className, children }
+    } = component;
     if (className) {
       component.props.className = className.split(" ").map((className2) => {
         if (className2.slice(0, 2) === "--") {
@@ -2335,7 +2336,7 @@
         return className2;
       }).join(" ");
       if (component.props.className === className) {
-        const matches = className.match(/\b((\w+)\-\w+(\-\w+)*)(__\w+(\-\w+)*)?\b/);
+        const matches = className.match(/\b(([a-z]+)\-[a-z]+(\-[a-z]+)*)(__[a-z]+(\-[a-z]+)*)?\b/);
         if (!matches) {
           return;
         }
