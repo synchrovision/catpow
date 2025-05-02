@@ -26,7 +26,7 @@ class loop_manage_table extends \Catpow\template_item\php{
 			if(isset($conf['alias'])){continue;}
 			$rtn['thead']['tr'][]=['th',$conf['label']];
 		}
-		return ['div.table_wrapper',$rtn];
+		return ['div.table-wrapper',$rtn];
 	}
 }
 

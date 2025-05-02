@@ -8,7 +8,7 @@ class user_panel extends \Catpow\template_item\php{
 	public static function get_code_data($path_data,$conf_data,$param){
 		return [
 			'',
-			['div.user_panel',
+			['div.user-panel',
 				'<?php if(is_user_logged_in()):foreach(loop() as $obj): ?>',
 			 	['div.image','<?= get_avatar($obj->email) ?>'],
 			 	['div.text',
