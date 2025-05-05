@@ -98,7 +98,7 @@ class content extends \stdClass{
 		return new meta($prm);
 	}
 	public function loop_meta($query,$params=null){
-		foreach($this->conf['meta'] as $name=>$meta_conf){
+		foreach($this->conf['meta']??[] as $name=>$meta_conf){
 			$meta_class="Catpow\\meta\\".($meta_conf['type']??'text');
 			foreach($query as $key=>$val){
 				if($meta_class::$$key!=$val){continue 2;}
