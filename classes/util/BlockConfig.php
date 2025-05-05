@@ -45,12 +45,12 @@ class BlockConfig{
 			]
 		];
 	}
-	public static function getPictureSoucesAttributesForDevices($devices,$selector='picture',$image='dummy.jpg'){
+	public static function getPictureSoucesAttributesForDevices($devices=['tb','sp'],$selector='picture',$image='dummy.jpg'){
 		$attr=self::getPictureSoucesAttributes($selector);
 		$attr['default']=self::getPictureSoucesAttributesDefaultValueForDevices($devices,$image);
 		return $attr;
 	}
-	public static function getPictureSoucesAttributesDefaultValueForDevices($devices,$image='dummy.jpg'){
+	public static function getPictureSoucesAttributesDefaultValueForDevices($devices=['tb','sp'],$image='dummy.jpg'){
 		return array_map(function($device)use($image){
 			return ['srcset'=>\cp::get_file_url('images/'.$image),'device'=>$device];
 		},$devices);
