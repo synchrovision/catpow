@@ -192,7 +192,20 @@
     cache: {},
     config: {},
     /*transform*/
-    listedConvertibles: ["catpow/listed", "catpow/flow", "catpow/faq", "catpow/ranking", "catpow/dialog", "catpow/sphere", "catpow/slider", "catpow/banners", "catpow/lightbox", "catpow/panes", "catpow/slidablemenu", "catpow/showcase"],
+    listedConvertibles: [
+      "catpow/listed",
+      "catpow/flow",
+      "catpow/faq",
+      "catpow/ranking",
+      "catpow/dialog",
+      "catpow/sphere",
+      "catpow/slider",
+      "catpow/banners",
+      "catpow/lightbox",
+      "catpow/panes",
+      "catpow/slidablemenu",
+      "catpow/showcase"
+    ],
     tableConvertibles: ["catpow/simpletable", "catpow/datatable", "catpow/comparetable", "catpow/layouttable"],
     dummyText: {
       title: "\u543E\u8F29\u306F\u732B\u3067\u3042\u308B\u3002",
@@ -694,7 +707,7 @@
     },
     createGridStyleCodeData: (bnd) => {
       var rtn = {
-        "display": "grid",
+        display: "grid",
         " display": "-ms-grid",
         "-ms-grid-columns": "1fr ".repeat(bnd[0]),
         "grid-template-columns": "repeat(" + bnd[0] + ",1fr)",
@@ -885,7 +898,7 @@
         selector: (selector || "picture") + " source",
         query: {
           srcset: { source: "attribute", attribute: "srcset" },
-          device: { source: "attribute", "attribute": "data-device" }
+          device: { source: "attribute", attribute: "data-device" }
         }
       };
     },
@@ -951,17 +964,7 @@
     },
     dataListPresets: {
       currency: ["AUD", "CAD", "CNY", "DKK", "HKD", "INR", "IDR", "JPY", "KRW", "MYR", "NOK", "PHP", "RUB", "SGD", "VND", "SEK", "CHF", "THB", "GBP", "USD", "TWD", "EUR", "BRL"],
-      mouseEvent: [
-        "click",
-        "dblclick",
-        "mouseup",
-        "mousedown",
-        "mouseenter",
-        "mouseleave",
-        "mouseover",
-        "mouseout",
-        "contextmenu"
-      ],
+      mouseEvent: ["click", "dblclick", "mouseup", "mousedown", "mouseenter", "mouseleave", "mouseover", "mouseout", "contextmenu"],
       playerEvent: [
         "canplay",
         "canplaythrough",
@@ -2310,6 +2313,12 @@
 
   // modules/src/component/Bem.jsx
   var applyBem = (component, { ...ctx }) => {
+    if (Array.isArray(component)) {
+      component.forEach((child) => {
+        applyBem(child, ctx);
+      });
+      return;
+    }
     if (component == null || component.props == null) {
       return;
     }
@@ -2362,13 +2371,7 @@
   };
   var Bem = ({ prefix = "cp", block, element, children }) => {
     const ctx = { prefix, block, element };
-    if (Array.isArray(children)) {
-      children.forEach((child) => {
-        applyBem(child, ctx);
-      });
-    } else {
-      applyBem(children, ctx);
-    }
+    applyBem(children, ctx);
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, children);
   };
 
@@ -2820,19 +2823,7 @@
 
   // ../blocks/_init/init/SelectResponsiveImage.jsx
   CP.SelectResponsiveImage = (props) => {
-    const {
-      className = "cp-selectresponsiveimage",
-      attr,
-      set,
-      keys = {},
-      index = 0,
-      subIndex = 0,
-      size,
-      devices,
-      device,
-      isTemplate,
-      ...otherProps
-    } = props;
+    const { className = "cp-selectresponsiveimage", attr, set, keys = {}, index = 0, subIndex = 0, size, devices, device, isTemplate, ...otherProps } = props;
     let onClick, item, items2, subItems;
     item = attr || {};
     if (keys.items) {
@@ -2849,9 +2840,7 @@
         { src: "src" },
         function({ src }) {
           if (keys.sources) {
-            const source = item[keys.sources].find(
-              (source2) => source2.device === device
-            );
+            const source = item[keys.sources].find((source2) => source2.device === device);
             if (source) {
               source.srcset = src;
             } else {
@@ -2866,10 +2855,7 @@
             }
           } else {
             if (item[keys.srcset].match(sizeData.reg)) {
-              item[keys.srcset] = item[keys.srcset].replace(
-                sizeData.reg,
-                src + sizeData.rep
-              );
+              item[keys.srcset] = item[keys.srcset].replace(sizeData.reg, src + sizeData.rep);
             } else {
               item[keys.srcset] += "," + src + sizeData.rep;
             }
@@ -2900,15 +2886,7 @@
     if (isTemplate && keys.code && item[keys.code]) {
       return /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: item[keys.code] });
     }
-    return /* @__PURE__ */ wp.element.createElement(
-      ResponsiveImageBody,
-      {
-        ...props,
-        className,
-        item,
-        onClick
-      }
-    );
+    return /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item, onClick });
   };
 
   // ../blocks/_init/init/SelectPictureSources.jsx
@@ -3339,22 +3317,11 @@
 
   // ../blocks/_init/init/Item.jsx
   CP.Item = (props) => {
-    const {
-      tag,
-      items: items2,
-      itemsKey,
-      index,
-      indexKey = "currentItemIndex",
-      set,
-      attr,
-      triggerClasses,
-      children
-    } = props;
-    let { itemClasses } = props;
+    const { tag = "div", items: items2, index, indexKey = "currentItemIndex", set, attr, children } = props;
     if (!items2[index].classes) {
-      items2[index].classes = "item";
+      items2[index].classes = "cp-item";
     } else if (items2[index].classes.search(/\bitem\b/) === -1) {
-      items2[index].classes += " item";
+      items2[index].classes += " cp-item";
     }
     let classes = items2[index].classes;
     if (props.className) {
