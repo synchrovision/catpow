@@ -1,30 +1,18 @@
 ﻿import { CP } from "./CP.jsx";
 
 CP.Item = (props) => {
-	const {
-		tag,
-		items,
-		itemsKey,
-		index,
-		indexKey = "currentItemIndex",
-		set,
-		attr,
-		triggerClasses,
-		children,
-	} = props;
-	let { itemClasses } = props;
+	const { tag = "div", items, index, indexKey = "currentItemIndex", set, attr, children } = props;
 	if (!items[index].classes) {
-		items[index].classes = "item";
+		items[index].classes = "cp-item";
 	} else if (items[index].classes.search(/\bitem\b/) === -1) {
-		items[index].classes += " item";
+		items[index].classes += " cp-item";
 	}
 	let classes = items[index].classes;
 	if (props.className) {
 		classes += " " + props.className;
 	}
 
-	const isSelected =
-		props.isSelected === undefined ? index == attr[indexKey] : props.isSelected;
+	const isSelected = props.isSelected === undefined ? index == attr[indexKey] : props.isSelected;
 
 	return wp.element.createElement(
 		tag,
