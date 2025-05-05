@@ -2,6 +2,38 @@
 namespace Catpow\util;
 class BlockConfig{
 	//picture
+	public static function getPictureAttributes($selector,$prefix=null,$devices=['tb','sp'],$default='dummy.jpg'){
+		$keys=['mime','src','srcset','alt','code','sources'];
+		if(!empty($prefix)){
+			foreach($keys as $i=>$key){
+				$keys[$i]=$prefix.ucfirst($key);
+			}
+		}
+		return [
+			$keys[0]=>['source'=>'attribute','selector'=>"{$selector} [src]",'attribute'=>'data-mime'],
+			$keys[1]=>['source'=>'attribute','selector'=>"{$selector} [src]",'attribute'=>'src','default'=>\cp::get_file_url('images/'.$default)],
+			$keys[2]=>['source'=>'attribute','selector'=>"{$selector} [src]",'attribute'=>'srcset'],
+			$keys[3]=>['source'=>'attribute','selector'=>"{$selector} [src]",'attribute'=>'alt'],
+			$keys[4]=>['source'=>'text','selector'=>$selector],
+			$keys[5]=>self::getPictureSoucesAttributesForDevices($devices,$selector,$default)
+		];
+	}
+	public static function getPicturAttributesDefaultValueForDevices($prefix=null,$devices=['tb','sp'],$default='dummy.jpg'){
+		$keys=['mime','src','srcset','alt','code','sources'];
+		if(!empty($prefix)){
+			foreach($keys as $i=>$key){
+				$keys[$i]=$prefix.ucfirst($key);
+			}
+		}
+		return [
+			$keys[0]=>'image/jpeg',
+			$keys[1]=>\cp::get_file_url('images/'.$default),
+			$keys[2]=>\cp::get_file_url('images/'.$default),
+			$keys[3]=>'',
+			$keys[4]=>'',
+			$keys[5]=>self::getPictureSoucesAttributesDefaultValueForDevices($devices,$default)
+		];
+	}
 	public static function getPictureSoucesAttributes($selector='picture'){
 		return [
 			'type'=>'array',
