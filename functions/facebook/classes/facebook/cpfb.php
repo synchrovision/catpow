@@ -60,7 +60,8 @@ class cpfb{
 				];
 				if(empty($args['app_id']) || empty($args['app_secret'])){return false;}
 				$fb=new \Facebook\Facebook($args);
-			}catch(Exception $e){
+			}
+			catch(\Exception $e){
 				return false;
 			}
 		}
@@ -83,8 +84,9 @@ class cpfb{
 		$fb=self::get_fb();
 		if(empty($fb)){return false;}
 		session_start();
-		return $fb->getRedirectLoginHelper()->getLogoutUrl(
-			$access_token,
+		$helper=$fb->getRedirectLoginHelper();
+		return $helper->getLogoutUrl(
+			$helper->getAccessToken(),
 			self::get_login_callback_url()
 		);
 	}
