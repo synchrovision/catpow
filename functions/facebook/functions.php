@@ -1,7 +1,7 @@
 <?php
 use Catpow\facebook\cpfb;
 
-add_action('body_start',function(){
+add_action('wp_body_open',function(){
 	?>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
