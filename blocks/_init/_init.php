@@ -48,7 +48,7 @@ foreach(cp::$use_functions as $func){
 		$data['widget'][$func]=[
 			'name'=>$class_name::$label,
 			'id'=>$func,
-			'conf'=>$class_name::get_conf()
+			'conf'=>Catpow\util\BlockConfig::initAsJsonAttribute($class_name::get_conf(),'param')
 		];
 	}
 }
