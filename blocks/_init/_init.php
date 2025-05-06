@@ -43,9 +43,8 @@ $data['widget']['none']=[
 	'conf'=>[],
 ];
 foreach(cp::$use_functions as $func){
-	if($f=\cp::get_file_path('functions/'.$func.'/block.php')){
-		include_once($f);
-		$class_name='\\Catpow\\blocks\\'.$func;
+	$class_name=cp::get_class_name($func,'Widget');
+	if(class_exists($class_name)){
 		$data['widget'][$func]=[
 			'name'=>$class_name::$label,
 			'id'=>$func,

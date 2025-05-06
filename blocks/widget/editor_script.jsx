@@ -1,7 +1,6 @@
 ﻿/*
- * 有効化されている機能が提供する埋め込み用コード
- * functions/[funciton]/blocks.php を埋め込み、もしくは
- * Catpow\blocks\[funciton]::render();を実行
+ * $use_functionsで有効化されている機能が提供するウィジェットを埋め込み
+ * Catpow\[funciton]\widget::render();を実行
  */
 wp.blocks.registerBlockType("catpow/widget", {
 	title: "🐾 Widget",
@@ -25,7 +24,7 @@ wp.blocks.registerBlockType("catpow/widget", {
 
 		return (
 			<>
-				<div className="widgetded_content">
+				<div className="cp-embeddedcontent">
 					<div className="label">{func}</div>
 					<ServerSideRender block="catpow/widget" attributes={attributes} />
 				</div>
