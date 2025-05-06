@@ -22,14 +22,7 @@
       const { useState, useMemo } = wp.element;
       const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
-      const {
-        items = [],
-        classes = "",
-        loopCount,
-        doLoop,
-        EditMode = false,
-        AltMode = false
-      } = attributes;
+      const { items = [], classes = "", loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
       const primaryClass = "wp-block-catpow-definition";
       var classArray = _.uniq((className + " " + classes).split(" "));
       var states = CP.wordsToFlags(classes);
@@ -71,10 +64,7 @@
             ]
           }
         ];
-        wp.hooks.applyFilters(
-          "catpow.blocks.definition.selectiveClasses",
-          CP.finderProxy(selectiveClasses2)
-        );
+        wp.hooks.applyFilters("catpow.blocks.definition.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
       const save = () => {
@@ -86,38 +76,25 @@
           item.controlClasses = "control";
         }
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement(
-            CP.Item,
+          /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "dl", set: setAttributes, attr: attributes, items, index, isSelected, key: index }, /* @__PURE__ */ wp.element.createElement("dt", { className: "title" }, /* @__PURE__ */ wp.element.createElement(
+            RichText,
             {
-              tag: "dl",
-              set: setAttributes,
-              attr: attributes,
-              items,
-              index,
-              isSelected,
-              key: index
-            },
-            /* @__PURE__ */ wp.element.createElement("dt", { className: "title" }, /* @__PURE__ */ wp.element.createElement(
-              RichText,
-              {
-                onChange: (title) => {
-                  item.title = title;
-                  save();
-                },
-                value: item.title
-              }
-            )),
-            /* @__PURE__ */ wp.element.createElement("dd", { className: "text" }, /* @__PURE__ */ wp.element.createElement(
-              RichText,
-              {
-                onChange: (text) => {
-                  item.text = text;
-                  save();
-                },
-                value: item.text
-              }
-            ))
-          )
+              onChange: (title) => {
+                item.title = title;
+                save();
+              },
+              value: item.title
+            }
+          )), /* @__PURE__ */ wp.element.createElement("dd", { className: "text" }, /* @__PURE__ */ wp.element.createElement(
+            RichText,
+            {
+              onChange: (text) => {
+                item.text = text;
+                save();
+              },
+              value: item.text
+            }
+          )))
         );
       });
       if (rtn.length < loopCount) {
@@ -126,23 +103,7 @@
           rtn.push(rtn[rtn.length % len]);
         }
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u30AF\u30E9\u30B9",
-          icon: "art",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses
-        }
-      ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-        TextareaControl,
-        {
-          label: "\u30AF\u30E9\u30B9",
-          onChange: (clss) => setAttributes({ classes: clss }),
-          value: classArray.join(" ")
-        }
-      )), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (clss) => setAttributes({ classes: clss }), value: classArray.join(" ") })), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           set: setAttributes,

@@ -33,43 +33,24 @@
       itemsCopy.map((item, index) => {
         var className2 = currentIndex == index ? "active" : currentIndex > index ? "before" : "after";
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement(
-            CP.Item,
+          /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", className: className2, set: setAttributes, attr: attributes, items: itemsCopy, index, isSelected, key: index }, /* @__PURE__ */ wp.element.createElement(
+            RichText,
             {
-              tag: "li",
-              className: className2,
-              set: setAttributes,
-              attr: attributes,
-              items: itemsCopy,
-              index,
-              isSelected,
-              key: index
-            },
-            /* @__PURE__ */ wp.element.createElement(
-              RichText,
-              {
-                tagName: "h3",
-                className: "title",
-                onClick: () => {
-                  setAttributes({ currentIndex: index });
-                },
-                onChange: (title) => {
-                  itemsCopy[index].title = title;
-                  setAttributes({ items: itemsCopy });
-                },
-                value: item.title
-              }
-            )
-          )
+              tagName: "h3",
+              className: "title",
+              onClick: () => {
+                setAttributes({ currentIndex: index });
+              },
+              onChange: (title) => {
+                itemsCopy[index].title = title;
+                setAttributes({ items: itemsCopy });
+              },
+              value: item.title
+            }
+          ))
         );
       });
-      return /* @__PURE__ */ wp.element.createElement("div", { className: classes, "data-current-index": currentIndex }, /* @__PURE__ */ wp.element.createElement("ul", { className: "tab" }, rtn), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement(
-        InnerBlocks,
-        {
-          template,
-          templateLock: "all"
-        }
-      )));
+      return /* @__PURE__ */ wp.element.createElement("div", { className: classes, "data-current-index": currentIndex }, /* @__PURE__ */ wp.element.createElement("ul", { className: "tab" }, rtn), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template, templateLock: "all" })));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks, RichText } = wp.blockEditor;

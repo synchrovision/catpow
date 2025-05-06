@@ -46,10 +46,7 @@
           selectedId: content_path,
           tree: Object.values(cpEmbeddablesTree.app),
           onChange: (content_path2) => {
-            const path = content_path2.slice(
-              0,
-              content_path2.lastIndexOf("/")
-            );
+            const path = content_path2.slice(0, content_path2.lastIndexOf("/"));
             setAttributes({
               content_path: content_path2,
               options: false,
@@ -57,17 +54,7 @@
             });
           }
         }
-      )), options && /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u8A2D\u5B9A",
-          icon: "edit",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses: options,
-          initialOpen: true
-        }
-      )));
+      )), options && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u8A2D\u5B9A", icon: "edit", set: setAttributes, attr: attributes, selectiveClasses: options, initialOpen: true })));
     },
     save({ attributes, className, setAttributes }) {
       return "null";

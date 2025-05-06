@@ -22,17 +22,7 @@
         return selectiveClasses2;
       }, []);
       console.log(attributes);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(Catpow.CountDown, { className: classes.body(), target })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, selectiveClasses && /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u8A2D\u5B9A",
-          icon: "edit",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses,
-          initialOpen: true
-        }
-      )));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(Catpow.CountDown, { className: classes.body(), target })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, selectiveClasses && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u8A2D\u5B9A", icon: "edit", set: setAttributes, attr: attributes, selectiveClasses, initialOpen: true })));
     },
     save({ attributes, className, setAttributes }) {
       const { classes = "", target } = attributes;

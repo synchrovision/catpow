@@ -22,18 +22,7 @@
       const { useState, useMemo } = wp.element;
       const { InnerBlocks, InspectorControls, RichText: RichText2 } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
-      const {
-        items = [],
-        classes: classes2 = "",
-        countPrefix,
-        countSuffix,
-        subCountPrefix,
-        subCountSuffix,
-        loopCount,
-        doLoop,
-        EditMode = false,
-        AltMode = false
-      } = attributes;
+      const { items = [], classes: classes2 = "", countPrefix, countSuffix, subCountPrefix, subCountSuffix, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
       const primaryClass = "wp-block-catpow-dialog";
       var classArray = _.uniq((className + " " + classes2).split(" "));
       var classNameArray = className.split(" ");
@@ -76,10 +65,7 @@
             ]
           }
         ];
-        wp.hooks.applyFilters(
-          "catpow.blocks.dialog.selectiveClasses",
-          CP.finderProxy(selectiveClasses2)
-        );
+        wp.hooks.applyFilters("catpow.blocks.dialog.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
       const selectiveItemClasses = useMemo(() => {
@@ -99,10 +85,7 @@
             values: ["say", "shout", "think", "whisper"]
           }
         ];
-        wp.hooks.applyFilters(
-          "catpow.blocks.dialog.selectiveItemClasses",
-          CP.finderProxy(selectiveItemClasses2)
-        );
+        wp.hooks.applyFilters("catpow.blocks.dialog.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
         return selectiveItemClasses2;
       }, []);
       let itemsCopy = items.map((obj) => jQuery.extend(true, {}, obj));
@@ -120,48 +103,25 @@
           item.controlClasses = "control";
         }
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement(
-            CP.Item,
+          /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", set: setAttributes, attr: attributes, items: itemsCopy, index, isSelected, key: index }, /* @__PURE__ */ wp.element.createElement("header", null, /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { attr: attributes, set: setAttributes, keys: imageKeys.headerImage, index, size: "thumbnail", isTemplate: states.isTemplate })), /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(
+            RichText2,
             {
-              tag: "li",
-              set: setAttributes,
-              attr: attributes,
-              items: itemsCopy,
-              index,
-              isSelected,
-              key: index
-            },
-            /* @__PURE__ */ wp.element.createElement("header", null, /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(
-              CP.SelectResponsiveImage,
-              {
-                attr: attributes,
-                set: setAttributes,
-                keys: imageKeys.headerImage,
-                index,
-                size: "thumbnail",
-                isTemplate: states.isTemplate
-              }
-            )), /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(
-              RichText2,
-              {
-                onChange: (text) => {
-                  itemsCopy[index].title = text;
-                  setAttributes({ items: itemsCopy });
-                },
-                value: item.title
-              }
-            )))),
-            /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(
-              RichText2,
-              {
-                onChange: (text) => {
-                  itemsCopy[index].text = text;
-                  setAttributes({ items: itemsCopy });
-                },
-                value: item.text
-              }
-            )))
-          )
+              onChange: (text) => {
+                itemsCopy[index].title = text;
+                setAttributes({ items: itemsCopy });
+              },
+              value: item.title
+            }
+          )))), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(
+            RichText2,
+            {
+              onChange: (text) => {
+                itemsCopy[index].text = text;
+                setAttributes({ items: itemsCopy });
+              },
+              value: item.text
+            }
+          ))))
         );
       });
       if (rtn.length < loopCount) {
@@ -170,34 +130,7 @@
           rtn.push(rtn[rtn.length % len]);
         }
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-        TextareaControl,
-        {
-          label: "\u30AF\u30E9\u30B9",
-          onChange: (clss) => setAttributes({ classes: clss }),
-          value: classArray.join(" ")
-        }
-      )), /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u30AF\u30E9\u30B9",
-          icon: "art",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses
-        }
-      ), /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0",
-          icon: "edit",
-          set: setAttributes,
-          attr: attributes,
-          items: itemsCopy,
-          index: attributes.currentItemIndex,
-          selectiveClasses: selectiveItemClasses
-        }
-      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (clss) => setAttributes({ classes: clss }), value: classArray.join(" ") })), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0", icon: "edit", set: setAttributes, attr: attributes, items: itemsCopy, index: attributes.currentItemIndex, selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           set: setAttributes,
@@ -223,18 +156,7 @@
     },
     save({ attributes, className }) {
       const { InnerBlocks, RichText: RichText2 } = wp.blockEditor;
-      const {
-        items = [],
-        classes: classes2 = "",
-        countPrefix,
-        countSuffix,
-        subCountPrefix,
-        subCountSuffix,
-        linkUrl,
-        linkText,
-        loopParam,
-        doLoop
-      } = attributes;
+      const { items = [], classes: classes2 = "", countPrefix, countSuffix, subCountPrefix, subCountSuffix, linkUrl, linkText, loopParam, doLoop } = attributes;
       var classArray = _.uniq(classes2.split(" "));
       var states = CP.wordsToFlags(classes2);
       const imageKeys = {
@@ -248,15 +170,7 @@
       let rtn = [];
       items.map((item, index) => {
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("header", null, /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(
-            CP.ResponsiveImage,
-            {
-              attr: attributes,
-              keys: imageKeys.headerImage,
-              index,
-              isTemplate: states.isTemplate
-            }
-          )), /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: item.title })))), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: item.text }))))
+          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("header", null, /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attr: attributes, keys: imageKeys.headerImage, index, isTemplate: states.isTemplate })), /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: item.title })))), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: item.text }))))
         );
       });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, rtn), doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
@@ -264,17 +178,7 @@
     deprecated: [
       {
         save({ attributes, className }) {
-          const {
-            items = [],
-            classes: classes2 = "",
-            countPrefix,
-            countSuffix,
-            subCountPrefix,
-            subCountSuffix,
-            linkUrl,
-            linkText,
-            loopParam
-          } = attributes;
+          const { items = [], classes: classes2 = "", countPrefix, countSuffix, subCountPrefix, subCountSuffix, linkUrl, linkText, loopParam } = attributes;
           var classArray = _.uniq(classes2.split(" "));
           var states = CP.wordsToFlags(classes2);
           let rtn = [];

@@ -18,7 +18,7 @@
           return conf;
         });
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "widgetded_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, func), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/widget", attributes })), ",", /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "widgetded_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, func), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/widget", attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" }, /* @__PURE__ */ wp.element.createElement(
         TreeSelect,
         {
           label: "path",
@@ -28,16 +28,7 @@
             setAttributes({ func: func2 });
           }
         }
-      )), statesClasses && /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u8A2D\u5B9A",
-          icon: "admin-appearance",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses: statesClasses
-        }
-      )));
+      )), statesClasses && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u8A2D\u5B9A", icon: "admin-appearance", set: setAttributes, attr: attributes, selectiveClasses: statesClasses })));
     },
     save({ attributes, className, setAttributes }) {
       return "null";

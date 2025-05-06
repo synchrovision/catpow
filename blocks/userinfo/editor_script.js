@@ -8,17 +8,7 @@
     example: CP.example,
     edit({ attributes, setAttributes, className }) {
       const { InnerBlocks } = wp.blockEditor;
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-embeddedcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, "UserInfo"), /* @__PURE__ */ wp.element.createElement(
-        InnerBlocks,
-        {
-          template: [
-            [
-              "core/paragraph",
-              { content: "[output last_name] [output first_name]" }
-            ]
-          ]
-        }
-      ));
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-embeddedcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, "UserInfo"), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph", { content: "[output last_name] [output first_name]" }]] }));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks } = wp.blockEditor;

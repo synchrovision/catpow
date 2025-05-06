@@ -112,10 +112,7 @@
 				},
 				"color",
 			];
-			wp.hooks.applyFilters(
-				"catpow.blocks.simpletable.selectiveClasses",
-				CP.finderProxy(selectiveClasses)
-			);
+			wp.hooks.applyFilters("catpow.blocks.simpletable.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
 
@@ -125,38 +122,15 @@
 		return (
 			<>
 				<InspectorControls>
-					<CP.SelectClassPanel
-						title="クラス"
-						icon="art"
-						set={setAttributes}
-						attr={attributes}
-						selectiveClasses={selectiveClasses}
-					/>
-					<CP.SelectClassPanel
-						title="行"
-						icon="edit"
-						set={setAttributes}
-						attr={attributes}
-						items={rows}
-						index={attributes.currentItemIndex}
-						triggerClasses={selectiveClasses[0]}
-					/>
+					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="行" icon="edit" set={setAttributes} attr={attributes} items={rows} index={attributes.currentItemIndex} triggerClasses={selectiveClasses[0]} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<table className={classes}>
 					<tbody>
 						{rows.map((row, index) => {
 							return (
-								<CP.Item
-									tag="tr"
-									set={setAttributes}
-									attr={attributes}
-									items={rows}
-									itemskey="rows"
-									index={index}
-									isSelected={isSelected}
-									key={index}
-								>
+								<CP.Item tag="tr" set={setAttributes} attr={attributes} items={rows} itemskey="rows" index={index} isSelected={isSelected} key={index}>
 									<th>
 										<RichText
 											onChange={(text) => {
@@ -192,11 +166,7 @@
 				<tbody>
 					{rows.map((row, index) => {
 						return (
-							<tr
-								className={row.classes}
-								data-refine-cond={row.cond}
-								key={index}
-							>
+							<tr className={row.classes} data-refine-cond={row.cond} key={index}>
 								<th className={row.cells[0].classes}>
 									<RichText.Content value={row.cells[0].text} />
 								</th>

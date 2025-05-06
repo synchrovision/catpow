@@ -133,24 +133,7 @@
           key: index
         },
         cond
-      )) : false), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement(
-        InnerBlocks,
-        {
-          template: values.map((cond) => ["catpow/switchercontent", { cond }]),
-          allowedBlocks: ["catpow/switchercontent"]
-        }
-      ))), currentBlockId && /* @__PURE__ */ wp.element.createElement("style", null, CP.createStyleCode({ ["#" + currentBlockId]: { display: "block" } })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u30AF\u30E9\u30B9",
-          icon: "art",
-          classKey: "factor",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses,
-          initialOpen: true
-        }
-      )));
+      )) : false), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: values.map((cond) => ["catpow/switchercontent", { cond }]), allowedBlocks: ["catpow/switchercontent"] }))), currentBlockId && /* @__PURE__ */ wp.element.createElement("style", null, CP.createStyleCode({ ["#" + currentBlockId]: { display: "block" } })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", classKey: "factor", set: setAttributes, attr: attributes, selectiveClasses, initialOpen: true })));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks } = wp.blockEditor;

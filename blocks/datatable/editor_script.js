@@ -19,9 +19,7 @@
           transform: (files) => {
             var attributes = {
               classes: "wp-block-catpow-datatable spec",
-              rows: [
-                { classes: "", cells: [{ text: ["Title"], classes: "th" }] }
-              ],
+              rows: [{ classes: "", cells: [{ text: ["Title"], classes: "th" }] }],
               file: files[0]
             };
             return wp.blocks.createBlock("catpow/datatable", attributes);
@@ -113,10 +111,7 @@
             ]
           }
         ];
-        wp.hooks.applyFilters(
-          "catpow.blocks.datatable.selectiveClasses",
-          CP.finderProxy(selectiveClasses2)
-        );
+        wp.hooks.applyFilters("catpow.blocks.datatable.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
       const saveItems = () => {
@@ -158,14 +153,7 @@
         });
         saveItems();
       };
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectModeToolbar,
-        {
-          set: setAttributes,
-          attr: attributes,
-          modes: ["AltMode"]
-        }
-      ), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("table", { className: classes2 }, states.hasHeaderRow && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, rows[0].cells.map((cell, index) => {
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes, modes: ["AltMode"] }), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("table", { className: classes2 }, states.hasHeaderRow && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, rows[0].cells.map((cell, index) => {
         if (index === 0) {
           if (states.hasHeaderColumn && cell.text.length === 0) {
             cell.classes = "spacer";
@@ -233,38 +221,9 @@
               )
             );
           }
-          return wp.element.createElement(
-            states.hasHeaderColumn && columnIndex == 0 ? "th" : "td",
-            { className: cell.classes, key: columnIndex },
-            children
-          );
+          return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? "th" : "td", { className: cell.classes, key: columnIndex }, children);
         }));
-      })))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u8868\u793A\u8A2D\u5B9A",
-          icon: "admin-appearance",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses: statesClasses
-        }
-      ), /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u30AF\u30E9\u30B9",
-          icon: "art",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses
-        }
-      ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-        TextareaControl,
-        {
-          label: "\u30AF\u30E9\u30B9",
-          onChange: (clss) => setAttributes({ classes: clss }),
-          value: classArray.join(" ")
-        }
-      ))));
+      })))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u8868\u793A\u8A2D\u5B9A", icon: "admin-appearance", set: setAttributes, attr: attributes, selectiveClasses: statesClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (clss) => setAttributes({ classes: clss }), value: classArray.join(" ") }))));
     },
     save({ attributes, className }) {
       const { InnerBlocks, RichText: RichText2 } = wp.blockEditor;
@@ -278,11 +237,7 @@
           return false;
         }
         return /* @__PURE__ */ wp.element.createElement("tr", { key: index }, row.cells.map((cell, columnIndex) => {
-          return wp.element.createElement(
-            states.hasHeaderColumn && columnIndex == 0 ? "th" : "td",
-            { className: cell.classes, key: columnIndex },
-            /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: cell.text })
-          );
+          return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? "th" : "td", { className: cell.classes, key: columnIndex }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: cell.text }));
         }));
       }))), doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     },
@@ -299,11 +254,7 @@
               return false;
             }
             return /* @__PURE__ */ wp.element.createElement("tr", null, row.cells.map((cell, columnIndex) => {
-              return wp.element.createElement(
-                states.hasHeaderColumn && columnIndex == 0 ? "th" : "td",
-                { className: cell.classes },
-                cell.text
-              );
+              return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? "th" : "td", { className: cell.classes }, cell.text);
             }));
           }), states.doLoop && "[/loop_template]"));
         },

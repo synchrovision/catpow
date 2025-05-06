@@ -27,9 +27,7 @@
             name: "template",
             label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
             values: "isTemplate",
-            sub: [
-              { name: "imageCode", label: "\u753B\u50CF\u51FA\u529B\u30B3\u30FC\u30C9", input: "text", key: "imageCode" }
-            ]
+            sub: [{ name: "imageCode", label: "\u753B\u50CF\u51FA\u529B\u30B3\u30FC\u30C9", input: "text", key: "imageCode" }]
           },
           { name: "range", input: "range", label: "\u753B\u50CF\u306E\u5E45", key: "width", min: 50, max: 400, step: 10 }
         ];
@@ -47,40 +45,14 @@
           height: "auto",
           isTemplate: states.isTemplate
         }
-      )), /* @__PURE__ */ wp.element.createElement("td", { className: "spacerCell" }), /* @__PURE__ */ wp.element.createElement("td", { className: "textCell" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.VerticalAlignClassToolbar, { set: setAttributes, attr: attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u30AF\u30E9\u30B9",
-          icon: "art",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses
-        }
-      ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-        TextareaControl,
-        {
-          label: "\u30AF\u30E9\u30B9",
-          onChange: (classes2) => setAttributes({ classes: classes2 }),
-          value: classes
-        }
-      ))));
+      )), /* @__PURE__ */ wp.element.createElement("td", { className: "spacerCell" }), /* @__PURE__ */ wp.element.createElement("td", { className: "textCell" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.VerticalAlignClassToolbar, { set: setAttributes, attr: attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks } = wp.blockEditor;
       const { classes, src, alt, imageCode, width } = attributes;
       const primaryClass = "wp-block-catpow-t-media-text";
       var states = CP.wordsToFlags(classes);
-      return /* @__PURE__ */ wp.element.createElement("table", { width: "100%", className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "imageCell", width }, /* @__PURE__ */ wp.element.createElement(
-        CP.ResponsiveImage,
-        {
-          attr: attributes,
-          keys: { src: "src", alt: "alt", code: "imageCode" },
-          size: "large",
-          width: "100%",
-          height: "auto",
-          isTemplate: states.isTemplate
-        }
-      )), /* @__PURE__ */ wp.element.createElement("td", { className: "spacerCell" }), /* @__PURE__ */ wp.element.createElement("td", { className: "textCell" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)))));
+      return /* @__PURE__ */ wp.element.createElement("table", { width: "100%", className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "imageCell", width }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attr: attributes, keys: { src: "src", alt: "alt", code: "imageCode" }, size: "large", width: "100%", height: "auto", isTemplate: states.isTemplate })), /* @__PURE__ */ wp.element.createElement("td", { className: "spacerCell" }), /* @__PURE__ */ wp.element.createElement("td", { className: "textCell" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)))));
     }
   });
 })();

@@ -21,16 +21,7 @@
         wp.hooks.applyFilters("catpow.blocks.pagenavigation.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/pagenavigation", attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u8A2D\u5B9A",
-          icon: "admin-generic",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses
-        }
-      )));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/pagenavigation", attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u8A2D\u5B9A", icon: "admin-generic", set: setAttributes, attr: attributes, selectiveClasses })));
     },
     save({ attributes, className }) {
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null);

@@ -19,8 +19,7 @@ wp.blocks.registerBlockType("catpow/picture", {
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { InspectorControls } = wp.blockEditor;
 		const { Icon } = wp.components;
-		const { classes, vars, sources, src, srcset, alt, code, device } =
-			attributes;
+		const { classes, vars, sources, src, srcset, alt, code, device } = attributes;
 
 		const states = CP.wordsToFlags(classes);
 		const { devices, imageKeys } = blockConfig;
@@ -51,37 +50,17 @@ wp.blocks.registerBlockType("catpow/picture", {
 
 		return (
 			<>
-				<CP.SelectDeviceToolbar
-					attr={attributes}
-					set={setAttributes}
-					devices={devices}
-				/>
-				<div
-					className={classes + (device ? " cp-altcontent " + device : "")}
-					style={vars}
-				>
+				<CP.SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices} />
+				<div className={classes + (device ? " cp-altcontent " + device : "")} style={vars}>
 					{device && (
 						<div className="label">
 							<Icon icon={CP.devices[device].icon} />
 						</div>
 					)}
-					<CP.SelectResponsiveImage
-						attr={attributes}
-						set={setAttributes}
-						keys={imageKeys.image}
-						device={device}
-						devices={devices}
-						isTemplate={states.isTemplate}
-					/>
+					<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} device={device} devices={devices} isTemplate={states.isTemplate} />
 				</div>
 				<InspectorControls>
-					<CP.SelectClassPanel
-						title="クラス"
-						icon="art"
-						set={setAttributes}
-						attr={attributes}
-						selectiveClasses={selectiveClasses}
-					/>
+					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 			</>
 		);
@@ -94,12 +73,7 @@ wp.blocks.registerBlockType("catpow/picture", {
 
 		return (
 			<div className={classes} style={vars}>
-				<CP.ResponsiveImage
-					attr={attributes}
-					keys={imageKeys.image}
-					devices={devices}
-					isTemplate={states.isTemplate}
-				/>
+				<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} devices={devices} isTemplate={states.isTemplate} />
 			</div>
 		);
 	},

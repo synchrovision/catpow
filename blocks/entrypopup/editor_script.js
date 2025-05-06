@@ -11,22 +11,11 @@
       const { InnerBlocks, InspectorControls } = wp.blockEditor;
       const [open, setOpen] = useState(false);
       const selectiveClasses = useMemo(() => {
-        const selectiveClasses2 = [
-          { input: "buttons", name: "target", label: "\u8868\u793A\u6761\u4EF6", values: { site: "\u30B5\u30A4\u30C8\u3067\u4E00\u56DE", page: "\u30DA\u30FC\u30B8\u3067\u4E00\u56DE", every: "\u6BCE\u56DE\u8868\u793A" }, key: "target" }
-        ];
+        const selectiveClasses2 = [{ input: "buttons", name: "target", label: "\u8868\u793A\u6761\u4EF6", values: { site: "\u30B5\u30A4\u30C8\u3067\u4E00\u56DE", page: "\u30DA\u30FC\u30B8\u3067\u4E00\u56DE", every: "\u6BCE\u56DE\u8868\u793A" }, key: "target" }];
         wp.hooks.applyFilters("catpow.blocks.entrypopup.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "collapsible_content " + (open ? "open" : "close") }, /* @__PURE__ */ wp.element.createElement("div", { className: "label", onClick: () => setOpen(!open) }, "\u{1F43E} EntryPopup"), /* @__PURE__ */ wp.element.createElement("div", { className: attributes.classes }, /* @__PURE__ */ wp.element.createElement("div", { className: "body" }, /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)), /* @__PURE__ */ wp.element.createElement("div", { className: "close", onClick: () => setOpen(false) })), /* @__PURE__ */ wp.element.createElement("div", { className: "bg" }))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: __("\u30AF\u30E9\u30B9", "catpow"),
-          icon: "art",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses
-        }
-      )));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "collapsible_content " + (open ? "open" : "close") }, /* @__PURE__ */ wp.element.createElement("div", { className: "label", onClick: () => setOpen(!open) }, "\u{1F43E} EntryPopup"), /* @__PURE__ */ wp.element.createElement("div", { className: attributes.classes }, /* @__PURE__ */ wp.element.createElement("div", { className: "body" }, /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)), /* @__PURE__ */ wp.element.createElement("div", { className: "close", onClick: () => setOpen(false) })), /* @__PURE__ */ wp.element.createElement("div", { className: "bg" }))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", set: setAttributes, attr: attributes, selectiveClasses })));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks } = wp.blockEditor;

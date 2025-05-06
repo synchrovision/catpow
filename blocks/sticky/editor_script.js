@@ -39,9 +39,7 @@
             filter: "type",
             values: { label: "\u30E9\u30D9\u30EB", container: "\u30B3\u30F3\u30C6\u30CA", collapsible: "\u6298\u308A\u7573\u307F" },
             sub: {
-              label: [
-                "color"
-              ],
+              label: ["color"],
               collapsible: [
                 "color",
                 {
@@ -62,44 +60,26 @@
         wp.hooks.applyFilters("catpow.blocks.sticky.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, states.collapsible && /* @__PURE__ */ wp.element.createElement("div", { className: "stickyButton" }, /* @__PURE__ */ wp.element.createElement("div", { className: "stickyButtonIcon" }, states.labelButton && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(RichText2, { onChange: (labelText2) => {
-        setAttributes({ labelText: labelText2 });
-      }, value: labelText })), states.imageButton && [
-        /* @__PURE__ */ wp.element.createElement(
-          ResponsiveImage,
-          {
-            className: "open",
-            attr: attributes,
-            keys: imageKeys.openButtonImage
-          }
-        ),
-        /* @__PURE__ */ wp.element.createElement(
-          ResponsiveImage,
-          {
-            className: "close",
-            attr: attributes,
-            keys: imageKeys.closeButtonImage
-          }
-        )
-      ])), /* @__PURE__ */ wp.element.createElement("div", { className: "content" }, states.label && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(RichText2, { onChange: (labelText2) => {
-        setAttributes({ labelText: labelText2 });
-      }, value: labelText })), (states.container || states.collapsible) && /* @__PURE__ */ wp.element.createElement(InnerBlocks2, null))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, states.collapsible && /* @__PURE__ */ wp.element.createElement("div", { className: "stickyButton" }, /* @__PURE__ */ wp.element.createElement("div", { className: "stickyButtonIcon" }, states.labelButton && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(
+        RichText2,
         {
-          title: "\u30AF\u30E9\u30B9",
-          icon: "art",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses
+          onChange: (labelText2) => {
+            setAttributes({ labelText: labelText2 });
+          },
+          value: labelText
         }
-      ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-        TextareaControl,
+      )), states.imageButton && [
+        /* @__PURE__ */ wp.element.createElement(ResponsiveImage, { className: "open", attr: attributes, keys: imageKeys.openButtonImage }),
+        /* @__PURE__ */ wp.element.createElement(ResponsiveImage, { className: "close", attr: attributes, keys: imageKeys.closeButtonImage })
+      ])), /* @__PURE__ */ wp.element.createElement("div", { className: "content" }, states.label && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(
+        RichText2,
         {
-          label: "\u30AF\u30E9\u30B9",
-          onChange: (classes2) => setAttributes({ classes: classes2 }),
-          value: classes
+          onChange: (labelText2) => {
+            setAttributes({ labelText: labelText2 });
+          },
+          value: labelText
         }
-      ))));
+      )), (states.container || states.collapsible) && /* @__PURE__ */ wp.element.createElement(InnerBlocks2, null))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks: InnerBlocks2, RichText: RichText2 } = wp.blockEditor;
@@ -107,22 +87,8 @@
       const states = CP.wordsToFlags(classes);
       const { imageKeys } = CP.config.sticky;
       return /* @__PURE__ */ wp.element.createElement("div", { className: classes }, states.collapsible && /* @__PURE__ */ wp.element.createElement("div", { className: "stickyButton" }, /* @__PURE__ */ wp.element.createElement("div", { className: "stickyButtonIcon" }, states.labelButton && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: labelText })), states.imageButton && [
-        /* @__PURE__ */ wp.element.createElement(
-          ResponsiveImage,
-          {
-            className: "open",
-            attr: attributes,
-            keys: imageKeys.openButtonImage
-          }
-        ),
-        /* @__PURE__ */ wp.element.createElement(
-          ResponsiveImage,
-          {
-            className: "close",
-            attr: attributes,
-            keys: imageKeys.closeButtonImage
-          }
-        )
+        /* @__PURE__ */ wp.element.createElement(ResponsiveImage, { className: "open", attr: attributes, keys: imageKeys.openButtonImage }),
+        /* @__PURE__ */ wp.element.createElement(ResponsiveImage, { className: "close", attr: attributes, keys: imageKeys.closeButtonImage })
       ])), /* @__PURE__ */ wp.element.createElement("div", { className: "content" }, states.label && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: labelText })), (states.container || states.collapsible) && /* @__PURE__ */ wp.element.createElement(InnerBlocks2.Content, null)));
     },
     deplicated: [
@@ -132,22 +98,8 @@
           const states = CP.wordsToFlags(classes);
           const { imageKeys } = CP.config.sticky;
           return /* @__PURE__ */ wp.element.createElement("div", { className: classes }, states.collapsible && /* @__PURE__ */ wp.element.createElement("div", { className: "stickyMenuButton" }, /* @__PURE__ */ wp.element.createElement("div", { className: "stickyMenuButtonIcon" }, states.labelButton && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: labelText })), states.imageButton && [
-            /* @__PURE__ */ wp.element.createElement(
-              ResponsiveImage,
-              {
-                className: "open",
-                attr: attributes,
-                keys: imageKeys.openButtonImage
-              }
-            ),
-            /* @__PURE__ */ wp.element.createElement(
-              ResponsiveImage,
-              {
-                className: "close",
-                attr: attributes,
-                keys: imageKeys.closeButtonImage
-              }
-            )
+            /* @__PURE__ */ wp.element.createElement(ResponsiveImage, { className: "open", attr: attributes, keys: imageKeys.openButtonImage }),
+            /* @__PURE__ */ wp.element.createElement(ResponsiveImage, { className: "close", attr: attributes, keys: imageKeys.closeButtonImage })
           ])), /* @__PURE__ */ wp.element.createElement("div", { className: "content" }, states.label && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: labelText })), (states.container || states.collapsible) && /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
         }
       }

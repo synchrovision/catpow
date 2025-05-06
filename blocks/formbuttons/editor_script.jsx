@@ -23,10 +23,7 @@
 				},
 				{ name: "inline", label: "インライン", values: "i" },
 			];
-			wp.hooks.applyFilters(
-				"catpow.blocks.formbuttons.selectiveClasses",
-				CP.finderProxy(selectiveClasses)
-			);
+			wp.hooks.applyFilters("catpow.blocks.formbuttons.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
 		const selectiveItemClasses = useMemo(() => {
@@ -37,14 +34,7 @@
 					type: "gridbuttons",
 					label: "属性",
 					filter: "rank",
-					values: [
-						"default",
-						"primary",
-						"secondary",
-						"negative",
-						"danger",
-						"secure",
-					],
+					values: ["default", "primary", "secondary", "negative", "danger", "secure"],
 				},
 				{
 					name: "icon",
@@ -54,10 +44,7 @@
 				},
 				"event",
 			];
-			wp.hooks.applyFilters(
-				"catpow.blocks.formbuttons.selectiveItemClasses",
-				CP.finderProxy(selectiveItemClasses)
-			);
+			wp.hooks.applyFilters("catpow.blocks.formbuttons.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		}, []);
 
@@ -73,15 +60,7 @@
 			}
 			const itemStates = CP.wordsToFlags(item.classes);
 			rtn.push(
-				<CP.Item
-					tag="li"
-					set={setAttributes}
-					attr={attributes}
-					items={items}
-					index={index}
-					isSelected={isSelected}
-					key={index}
-				>
+				<CP.Item tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
 					<div className="button">
 						{itemStates.hasIcon && <CP.OutputIcon item={item} />}
 						<span
@@ -118,28 +97,10 @@
 			<>
 				<ul className={classes}>{rtn}</ul>
 				<InspectorControls>
-					<CP.SelectClassPanel
-						title="クラス"
-						icon="art"
-						set={setAttributes}
-						attr={attributes}
-						selectiveClasses={selectiveClasses}
-					/>
-					<CP.SelectClassPanel
-						title="ボタン"
-						icon="edit"
-						set={setAttributes}
-						attr={attributes}
-						items={items}
-						index={attributes.currentItemIndex}
-						selectiveClasses={selectiveItemClasses}
-					/>
+					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="ボタン" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} selectiveClasses={selectiveItemClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl
-							label="クラス"
-							onChange={(clss) => setAttributes({ classes: clss })}
-							value={classArray.join(" ")}
-						/>
+						<TextareaControl label="クラス" onChange={(clss) => setAttributes({ classes: clss })} value={classArray.join(" ")} />
 					</PanelBody>
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
@@ -152,33 +113,20 @@
 	save({ attributes, className }) {
 		const { items = [], classes = "" } = attributes;
 		var classArray = _.uniq(classes.split(" "));
-		const blockType = wp.data
-			.select("core/blocks")
-			.getBlockType("catpow/formbuttons");
+		const blockType = wp.data.select("core/blocks").getBlockType("catpow/formbuttons");
 
 		let rtn = [];
 		items.map((item, index) => {
 			const itemStates = CP.wordsToFlags(item.classes);
 			const eventDispatcherAttributes = {};
 			if (blockType.attributes.items.eventDispatcherAttributes) {
-				blockType.attributes.items.eventDispatcherAttributes.map(
-					(attr_name) => {
-						eventDispatcherAttributes[
-							blockType.attributes.items.query[attr_name].attribute
-						] = item[attr_name];
-					}
-				);
+				blockType.attributes.items.eventDispatcherAttributes.map((attr_name) => {
+					eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute] = item[attr_name];
+				});
 			}
 			rtn.push(
 				<li className={item.classes} key={index}>
-					<div
-						className="button"
-						data-action={item.action}
-						data-callback={item.callback}
-						data-target={item.target}
-						ignore-message={item.ignoreMessage}
-						{...eventDispatcherAttributes}
-					>
+					<div className="button" data-action={item.action} data-callback={item.callback} data-target={item.target} ignore-message={item.ignoreMessage} {...eventDispatcherAttributes}>
 						{itemStates.hasIcon && <CP.OutputIcon item={item} />}
 						{item.text}
 					</div>
@@ -225,9 +173,7 @@
 			migrate(attributes) {
 				const { items = [] } = attributes;
 				const parseButtonShortCode = (code) => {
-					let matches = code.match(
-						/^\[button ([^ ]+) ([^ ]+)( ignore_message\=1)?\]$/
-					);
+					let matches = code.match(/^\[button ([^ ]+) ([^ ]+)( ignore_message\=1)?\]$/);
 					if (matches) {
 						let rtn = { content: matches[1], action: matches[2] };
 						if (matches[3]) {

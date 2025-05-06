@@ -42,55 +42,13 @@
           ]
         }
       ];
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectDeviceToolbar,
-        {
-          attr: attributes,
-          set: setAttributes,
-          devices
-        }
-      ), /* @__PURE__ */ wp.element.createElement(
-        "div",
-        {
-          className: classes + (device ? " cp-altcontent " + device : ""),
-          style: vars
-        },
-        device && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })),
-        /* @__PURE__ */ wp.element.createElement(
-          CP.SelectResponsiveImage,
-          {
-            attr: attributes,
-            set: setAttributes,
-            keys: imageKeys.image,
-            device,
-            devices,
-            isTemplate: states.isTemplate
-          }
-        )
-      ), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u30AF\u30E9\u30B9",
-          icon: "art",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses
-        }
-      )));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices }), /* @__PURE__ */ wp.element.createElement("div", { className: classes + (device ? " cp-altcontent " + device : ""), style: vars }, device && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { attr: attributes, set: setAttributes, keys: imageKeys.image, device, devices, isTemplate: states.isTemplate })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses })));
     },
     save({ attributes, className, setAttributes }) {
       const { classes, vars, srouces, src, srcset, alt, code } = attributes;
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys } = CP.config.picture;
-      return /* @__PURE__ */ wp.element.createElement("div", { className: classes, style: vars }, /* @__PURE__ */ wp.element.createElement(
-        CP.ResponsiveImage,
-        {
-          attr: attributes,
-          keys: imageKeys.image,
-          devices,
-          isTemplate: states.isTemplate
-        }
-      ));
+      return /* @__PURE__ */ wp.element.createElement("div", { className: classes, style: vars }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attr: attributes, keys: imageKeys.image, devices, isTemplate: states.isTemplate }));
     }
   });
 })();

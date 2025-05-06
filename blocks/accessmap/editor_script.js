@@ -20,16 +20,7 @@
       const { useState, useMemo, useCallback, useEffect } = wp.element;
       const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
       const { Icon, PanelBody, TextControl, TextareaControl } = wp.components;
-      const {
-        classes,
-        TitleTag,
-        items = [],
-        z,
-        t,
-        hl,
-        loopCount,
-        doLoop
-      } = attributes;
+      const { classes, TitleTag, items = [], z, t, hl, loopCount, doLoop } = attributes;
       const primaryClassName = "wp-block-catpow-accessmap";
       var classArray = _.uniq((className + " " + classes).split(" "));
       var classNameArray = className.split(" ");
@@ -115,10 +106,7 @@
             ]
           }
         ];
-        wp.hooks.applyFilters(
-          "catpow.blocks.accessmap.selectiveClasses",
-          CP.finderProxy(selectiveClasses2)
-        );
+        wp.hooks.applyFilters("catpow.blocks.accessmap.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
       const selectiveItemClasses = useMemo(() => {
@@ -152,10 +140,7 @@
             }
           }
         ];
-        wp.hooks.applyFilters(
-          "catpow.blocks.accessmap.selectiveItemClasses",
-          CP.finderProxy(selectiveItemClasses2)
-        );
+        wp.hooks.applyFilters("catpow.blocks.accessmap.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
         return selectiveItemClasses2;
       }, []);
       const selectiveItemTemplateClasses = useMemo(() => {
@@ -168,10 +153,7 @@
             cond: "hasImage"
           }
         ];
-        wp.hooks.applyFilters(
-          "catpow.blocks.accessmap.selectiveItemTemplateClasses",
-          CP.finderProxy(selectiveItemTemplateClasses2)
-        );
+        wp.hooks.applyFilters("catpow.blocks.accessmap.selectiveItemTemplateClasses", CP.finderProxy(selectiveItemTemplateClasses2));
         return selectiveItemTemplateClasses2;
       }, []);
       const save = () => {
@@ -197,134 +179,79 @@
           item.controlClasses = "control";
         }
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement(
-            CP.Item,
+          /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "div", set: setAttributes, attr: attributes, items, index, isSelected, key: i }, /* @__PURE__ */ wp.element.createElement("div", { className: "map" }, states.isTemplate ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { className: "gmap", text: item.q || item.address.replace(/<br\/?>|\n/, " ") }) : /* @__PURE__ */ wp.element.createElement("iframe", { src: url, frameBorder: "0", className: "gmap", "data-ll": item.ll || false, "data-q": item.q || false })), /* @__PURE__ */ wp.element.createElement("div", { className: "access" }, /* @__PURE__ */ wp.element.createElement(
+            RichText,
             {
-              tag: "div",
-              set: setAttributes,
-              attr: attributes,
-              items,
-              index,
-              isSelected,
-              key: i
-            },
-            /* @__PURE__ */ wp.element.createElement("div", { className: "map" }, states.isTemplate ? /* @__PURE__ */ wp.element.createElement(
-              CP.DummyImage,
-              {
-                className: "gmap",
-                text: item.q || item.address.replace(/<br\/?>|\n/, " ")
-              }
-            ) : /* @__PURE__ */ wp.element.createElement(
-              "iframe",
-              {
-                src: url,
-                frameBorder: "0",
-                className: "gmap",
-                "data-ll": item.ll || false,
-                "data-q": item.q || false
-              }
-            )),
-            /* @__PURE__ */ wp.element.createElement("div", { className: "access" }, /* @__PURE__ */ wp.element.createElement(
-              RichText,
-              {
-                tagName: TitleTag,
-                className: "title",
-                onChange: (title) => {
-                  item.title = title;
-                  save();
-                },
-                value: item.title
-              }
-            ), /* @__PURE__ */ wp.element.createElement(
-              RichText,
-              {
-                tagName: "div",
-                className: "address",
-                onChange: (address) => {
-                  item.address = address;
-                  save();
-                },
-                value: item.address
-              }
-            ), states.hasTel && /* @__PURE__ */ wp.element.createElement(
-              RichText,
-              {
-                tagName: "div",
-                className: "tel",
-                onChange: (tel) => {
-                  item.tel = tel;
-                  save();
-                },
-                value: item.tel
-              }
-            ), states.hasMail && /* @__PURE__ */ wp.element.createElement(
-              RichText,
-              {
-                tagName: "div",
-                className: "mail",
-                onChange: (mail) => {
-                  item.mail = mail;
-                  save();
-                },
-                value: item.mail
-              }
-            ), states.hasSite && /* @__PURE__ */ wp.element.createElement(
-              RichText,
-              {
-                tagName: "div",
-                className: "site",
-                onChange: (site) => {
-                  item.site = site;
-                  save();
-                },
-                value: item.site
-              }
-            ), /* @__PURE__ */ wp.element.createElement(
-              RichText,
-              {
-                tagName: "div",
-                className: "info",
-                onChange: (info) => {
-                  item.info = info;
-                  save();
-                },
-                value: item.info
-              }
-            ))
-          )
+              tagName: TitleTag,
+              className: "title",
+              onChange: (title) => {
+                item.title = title;
+                save();
+              },
+              value: item.title
+            }
+          ), /* @__PURE__ */ wp.element.createElement(
+            RichText,
+            {
+              tagName: "div",
+              className: "address",
+              onChange: (address) => {
+                item.address = address;
+                save();
+              },
+              value: item.address
+            }
+          ), states.hasTel && /* @__PURE__ */ wp.element.createElement(
+            RichText,
+            {
+              tagName: "div",
+              className: "tel",
+              onChange: (tel) => {
+                item.tel = tel;
+                save();
+              },
+              value: item.tel
+            }
+          ), states.hasMail && /* @__PURE__ */ wp.element.createElement(
+            RichText,
+            {
+              tagName: "div",
+              className: "mail",
+              onChange: (mail) => {
+                item.mail = mail;
+                save();
+              },
+              value: item.mail
+            }
+          ), states.hasSite && /* @__PURE__ */ wp.element.createElement(
+            RichText,
+            {
+              tagName: "div",
+              className: "site",
+              onChange: (site) => {
+                item.site = site;
+                save();
+              },
+              value: item.site
+            }
+          ), /* @__PURE__ */ wp.element.createElement(
+            RichText,
+            {
+              tagName: "div",
+              className: "info",
+              onChange: (info) => {
+                item.info = info;
+                save();
+              },
+              value: item.info
+            }
+          )))
         );
       });
       if (attributes.EditMode === void 0) {
         attributes.EditMode = false;
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u30AF\u30E9\u30B9",
-          icon: "art",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses
-        }
-      ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-        TextareaControl,
-        {
-          label: "\u30AF\u30E9\u30B9",
-          onChange: (clss) => setAttributes({ classes: clss }),
-          value: classArray.join(" ")
-        }
-      )), /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0",
-          icon: "edit",
-          set: setAttributes,
-          attr: attributes,
-          items,
-          index: attributes.currentItemIndex,
-          selectiveClasses: selectiveItemClasses
-        }
-      ), states.isTemplate && /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (clss) => setAttributes({ classes: clss }), value: classArray.join(" ") })), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0", icon: "edit", set: setAttributes, attr: attributes, items, index: attributes.currentItemIndex, selectiveClasses: selectiveItemClasses }), states.isTemplate && /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
           title: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
@@ -374,58 +301,7 @@
           }
         }
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("div", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "map" }, /* @__PURE__ */ wp.element.createElement(
-            "iframe",
-            {
-              src: url,
-              frameBorder: "0",
-              className: "gmap",
-              "data-ll": item.ll,
-              "data-q": item.q
-            }
-          )), /* @__PURE__ */ wp.element.createElement("div", { className: "access" }, /* @__PURE__ */ wp.element.createElement(
-            RichText.Content,
-            {
-              tagName: TitleTag,
-              className: "title",
-              value: item.title
-            }
-          ), /* @__PURE__ */ wp.element.createElement(
-            RichText.Content,
-            {
-              tagName: "div",
-              className: "address",
-              value: item.address
-            }
-          ), states.hasTel && /* @__PURE__ */ wp.element.createElement(
-            RichText.Content,
-            {
-              tagName: "div",
-              className: "tel",
-              value: item.tel
-            }
-          ), states.hasMail && /* @__PURE__ */ wp.element.createElement(
-            RichText.Content,
-            {
-              tagName: "div",
-              className: "mail",
-              value: item.mail
-            }
-          ), states.hasSite && /* @__PURE__ */ wp.element.createElement(
-            RichText.Content,
-            {
-              tagName: "div",
-              className: "site",
-              value: item.site
-            }
-          ), /* @__PURE__ */ wp.element.createElement(
-            RichText.Content,
-            {
-              tagName: "div",
-              className: "info",
-              value: item.info
-            }
-          )))
+          /* @__PURE__ */ wp.element.createElement("div", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "map" }, /* @__PURE__ */ wp.element.createElement("iframe", { src: url, frameBorder: "0", className: "gmap", "data-ll": item.ll, "data-q": item.q })), /* @__PURE__ */ wp.element.createElement("div", { className: "access" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: TitleTag, className: "title", value: item.title }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "address", value: item.address }), states.hasTel && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "tel", value: item.tel }), states.hasMail && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "mail", value: item.mail }), states.hasSite && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "site", value: item.site }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "info", value: item.info })))
         );
       });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, rtn), doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));

@@ -55,21 +55,30 @@
           }
         },
         default: [
-          { classes: "", cells: [
-            { text: ["Title"], classes: "th" },
-            { text: ["Title"], classes: "th" },
-            { text: ["Title"], classes: "th" }
-          ] },
-          { classes: "", cells: [
-            { text: ["Content"], classes: "" },
-            { text: ["Content"], classes: "" },
-            { text: ["Content"], classes: "" }
-          ] },
-          { classes: "", cells: [
-            { text: ["Content"], classes: "" },
-            { text: ["Content"], classes: "" },
-            { text: ["Content"], classes: "" }
-          ] }
+          {
+            classes: "",
+            cells: [
+              { text: ["Title"], classes: "th" },
+              { text: ["Title"], classes: "th" },
+              { text: ["Title"], classes: "th" }
+            ]
+          },
+          {
+            classes: "",
+            cells: [
+              { text: ["Content"], classes: "" },
+              { text: ["Content"], classes: "" },
+              { text: ["Content"], classes: "" }
+            ]
+          },
+          {
+            classes: "",
+            cells: [
+              { text: ["Content"], classes: "" },
+              { text: ["Content"], classes: "" },
+              { text: ["Content"], classes: "" }
+            ]
+          }
         ]
       },
       file: { type: "object" },
@@ -92,19 +101,19 @@
           };
           var csvData = CP.parseCSV(reader.result);
           csvData.map((row, r) => {
-            attr.rows.push({ classes: "", cells: row.map((val) => {
-              return { text: val, classes: "" };
-            }) });
+            attr.rows.push({
+              classes: "",
+              cells: row.map((val) => {
+                return { text: val, classes: "" };
+              })
+            });
           });
           setAttributes(attr);
         });
         reader.readAsText(attributes.file);
       }
       const selectiveClasses = useMemo(() => {
-        var selectiveClasses2 = [
-          { name: "type", label: "\u30BF\u30A4\u30D7", filter: "type", values: ["spec", "sheet", "plan"] },
-          "color"
-        ];
+        var selectiveClasses2 = [{ name: "type", label: "\u30BF\u30A4\u30D7", filter: "type", values: ["spec", "sheet", "plan"] }, "color"];
         wp.hooks.applyFilters("catpow.blocks.layouttable.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
@@ -141,10 +150,12 @@
         });
       });
       const saverows = () => {
-        setAttributes({ rows: rowsCopy.map((row) => {
-          row.cells = row.cells.filter((cell) => !cell.mergedTo);
-          return row;
-        }) });
+        setAttributes({
+          rows: rowsCopy.map((row) => {
+            row.cells = row.cells.filter((cell) => !cell.mergedTo);
+            return row;
+          })
+        });
       };
       const addRow = (r) => {
         rowsCopy.splice(r, 0, rowsCopy[r]);
@@ -242,8 +253,7 @@
           if (org) {
             for (var crrR = Math.min(org[0], r); crrR <= Math.max(org[0], r); crrR++) {
               for (var crrC = Math.min(org[1], c); crrC <= Math.max(org[1], c); crrC++) {
-                if (rowsCopy[crrR].cells[crrC].mergedTo)
-                  continue;
+                if (rowsCopy[crrR].cells[crrC].mergedTo) continue;
                 rowsCopy[crrR].cells[crrC].isSelected = true;
               }
             }
@@ -460,36 +470,45 @@
               onClick: (e) => selectCells(e, r, c),
               key: c
             },
-            /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RichText, { onChange: (text) => {
-              cell.text = text;
-              saverows();
-            }, value: cell.text }), isSelected && c == colLen - parseInt(cell.colspan ? cell.colspan : 1) && /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl rowControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn up", onClick: () => downRow(r) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteRow(r) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addRow(r) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn down", onClick: () => upRow(r) })), isSelected && r == rowLen - parseInt(cell.rowspan ? cell.rowspan : 1) && /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl columnControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn left", onClick: () => downColumn(c) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteColumn(c) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addColumn(c) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn right", onClick: () => upColumn(c) })), isSelected && cell.isSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "selectBox" }))
+            /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
+              RichText,
+              {
+                onChange: (text) => {
+                  cell.text = text;
+                  saverows();
+                },
+                value: cell.text
+              }
+            ), isSelected && c == colLen - parseInt(cell.colspan ? cell.colspan : 1) && /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl rowControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn up", onClick: () => downRow(r) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteRow(r) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addRow(r) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn down", onClick: () => upRow(r) })), isSelected && r == rowLen - parseInt(cell.rowspan ? cell.rowspan : 1) && /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl columnControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn left", onClick: () => downColumn(c) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteColumn(c) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addColumn(c) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn right", onClick: () => upColumn(c) })), isSelected && cell.isSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "selectBox" }))
           );
         }));
-      }))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u30AF\u30E9\u30B9",
-          icon: "art",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses
+      }))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u30BB\u30EB" }, selectCellClasses({
+        label: "\u30BF\u30A4\u30D7",
+        filter: "role",
+        values: {
+          default: "\u901A\u5E38",
+          th: "\u898B\u51FA\u3057",
+          spacer: "\u7A7A\u767D"
         }
-      ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u30BB\u30EB" }, selectCellClasses({ label: "\u30BF\u30A4\u30D7", filter: "role", values: {
-        "default": "\u901A\u5E38",
-        "th": "\u898B\u51FA\u3057",
-        "spacer": "\u7A7A\u767D"
-      } }), selectCellClasses({ label: "\u30AB\u30E9\u30FC", filter: "color", values: {
-        "default": "\u306A\u3057",
-        "pale": "\u8584\u8272",
-        "primary": "\u63A8\u5968",
-        "deprecated": "\u975E\u63A8\u5968"
-      } }), selectCellClasses({ label: "\u6587\u5B57", filter: "size", values: {
-        "default": "\u306A\u3057",
-        "large": "\u5927",
-        "medium": "\u4E2D",
-        "small": "\u5C0F"
-      } }), /* @__PURE__ */ wp.element.createElement(
+      }), selectCellClasses({
+        label: "\u30AB\u30E9\u30FC",
+        filter: "color",
+        values: {
+          default: "\u306A\u3057",
+          pale: "\u8584\u8272",
+          primary: "\u63A8\u5968",
+          deprecated: "\u975E\u63A8\u5968"
+        }
+      }), selectCellClasses({
+        label: "\u6587\u5B57",
+        filter: "size",
+        values: {
+          default: "\u306A\u3057",
+          large: "\u5927",
+          medium: "\u4E2D",
+          small: "\u5C0F"
+        }
+      }), /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
           label: "\u5E45",

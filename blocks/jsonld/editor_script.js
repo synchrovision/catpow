@@ -21,9 +21,7 @@
       const convertDefaultValue = useCallback((value, conf) => {
         switch (conf.input) {
           case "datetime": {
-            return Catpow.util.getDateTimeValue(
-              Catpow.util.getRelativeDateTimeObject(value)
-            );
+            return Catpow.util.getDateTimeValue(Catpow.util.getRelativeDateTimeObject(value));
           }
           default: {
             return value;
@@ -103,62 +101,76 @@
         });
         return data2;
       }, []);
-      const SelectType = useCallback((props) => {
-        const { classes: classes2, types: types2, formals: formals2, data: data2, setAttributes: setAttributes2 } = props;
-        const cache = useRef({});
-        const updateType = useCallback((type) => {
-          cache.current[data2["@type"]] = JSON.parse(JSON.stringify(data2));
-          if (cache.current[type]) {
-            setAttributes2({ data: cache.current[type] });
-          } else {
-            const data3 = extractDefaultData(types2[type], type);
-            fillUndefinedData(data3, types2[type]);
-            setAttributes2({ data: data3 });
-          }
-        }, [data2, cache, setAttributes2, fillUndefinedData, extractDefaultData]);
-        return /* @__PURE__ */ wp.element.createElement("select", { className: classes2(), value: data2["@type"], onChange: (e) => updateType(e.target.value) }, Object.keys(types2).map((type) => /* @__PURE__ */ wp.element.createElement("option", { value: type, key: type }, types2[type].label || types2[type].name)));
-      }, [convertDefaultValue, extractDefaultData]);
+      const SelectType = useCallback(
+        (props) => {
+          const { classes: classes2, types: types2, formals: formals2, data: data2, setAttributes: setAttributes2 } = props;
+          const cache = useRef({});
+          const updateType = useCallback(
+            (type) => {
+              cache.current[data2["@type"]] = JSON.parse(JSON.stringify(data2));
+              if (cache.current[type]) {
+                setAttributes2({ data: cache.current[type] });
+              } else {
+                const data3 = extractDefaultData(types2[type], type);
+                fillUndefinedData(data3, types2[type]);
+                setAttributes2({ data: data3 });
+              }
+            },
+            [data2, cache, setAttributes2, fillUndefinedData, extractDefaultData]
+          );
+          return /* @__PURE__ */ wp.element.createElement("select", { className: classes2(), value: data2["@type"], onChange: (e) => updateType(e.target.value) }, Object.keys(types2).map((type) => /* @__PURE__ */ wp.element.createElement("option", { value: type, key: type }, types2[type].label || types2[type].name)));
+        },
+        [convertDefaultValue, extractDefaultData]
+      );
       const Input = useCallback((props) => {
         const { classes: classes2, itemClasses, data: data2, name, index, conf, level } = props;
         let value = index !== void 0 ? data2[name][index] : data2[name];
         const { save: save2 } = useContext(CP.JsonLdBlockContext);
-        const updateValue = useCallback((value2) => {
-          if (index !== void 0) {
-            if (!Array.isArray(data2[name])) {
-              data2[name] = [];
+        const updateValue = useCallback(
+          (value2) => {
+            if (index !== void 0) {
+              if (!Array.isArray(data2[name])) {
+                data2[name] = [];
+              }
+              data2[name][index] = value2;
+            } else {
+              data2[name] = value2;
             }
-            data2[name][index] = value2;
-          } else {
-            data2[name] = value2;
-          }
-          save2();
-        }, [data2, name, index, save2]);
+            save2();
+          },
+          [data2, name, index, save2]
+        );
         switch (conf.input) {
           case "object":
             if (typeof data2[name] !== "object") {
               data2[name] = {};
             }
             return /* @__PURE__ */ wp.element.createElement("div", { className: classes2.object() }, conf.items && conf.items.map((item) => {
-              return /* @__PURE__ */ wp.element.createElement(
-                InputItem,
-                {
-                  classes: itemClasses,
-                  data: index !== void 0 ? data2[name][index] : data2[name],
-                  name: item.name,
-                  conf: item,
-                  level: level + 1,
-                  key: item.name
-                }
-              );
+              return /* @__PURE__ */ wp.element.createElement(InputItem, { classes: itemClasses, data: index !== void 0 ? data2[name][index] : data2[name], name: item.name, conf: item, level: level + 1, key: item.name });
             }));
           case "text":
-            return /* @__PURE__ */ wp.element.createElement("input", { className: classes2.text(), type: "text", value, onChange: (e) => {
-              updateValue(e.target.value);
-            } });
+            return /* @__PURE__ */ wp.element.createElement(
+              "input",
+              {
+                className: classes2.text(),
+                type: "text",
+                value,
+                onChange: (e) => {
+                  updateValue(e.target.value);
+                }
+              }
+            );
           case "textarea":
-            return /* @__PURE__ */ wp.element.createElement("textarea", { className: classes2.textarea(), onChange: (e) => {
-              updateValue(e.target.value);
-            }, value });
+            return /* @__PURE__ */ wp.element.createElement(
+              "textarea",
+              {
+                className: classes2.textarea(),
+                onChange: (e) => {
+                  updateValue(e.target.value);
+                },
+                value
+              }
+            );
           case "number":
           case "range": {
             return /* @__PURE__ */ wp.element.createElement(
@@ -192,84 +204,63 @@
             return /* @__PURE__ */ wp.element.createElement("div", null, conf.input);
         }
       }, []);
-      const InputItem = useCallback((props) => {
-        const { classes: classes2, data: data2, name, conf, level } = props;
-        let value = data2[name];
-        const { save: save2 } = useContext(CP.JsonLdBlockContext);
-        const cache = useRef({});
-        const itemConf = useMemo(() => {
-          if (conf && conf.isDynamicType) {
-            if (!value["@type"] || !conf.confs[value["@type"]]) {
-              value["@type"] = Object.keys(conf.confs)[0];
+      const InputItem = useCallback(
+        (props) => {
+          const { classes: classes2, data: data2, name, conf, level } = props;
+          let value = data2[name];
+          const { save: save2 } = useContext(CP.JsonLdBlockContext);
+          const cache = useRef({});
+          const itemConf = useMemo(() => {
+            if (conf && conf.isDynamicType) {
+              if (!value["@type"] || !conf.confs[value["@type"]]) {
+                value["@type"] = Object.keys(conf.confs)[0];
+              }
+              return conf.confs[value["@type"]];
             }
-            return conf.confs[value["@type"]];
-          }
-          return conf;
-        }, [conf.isDynamicType && value && value["@type"]]);
-        const onChangeType = useCallback((e) => {
-          const type = e.target.value;
-          if (Array.isArray(data2[name])) {
-            const prevType = data2[name][0]["@type"];
-            cache.current[prevType] = JSON.parse(JSON.stringify(data2[name]));
-            data2[name] = cache.current[type] || [extractDefaultData(conf, type)];
-            data2[name].forEach((item) => item["@type"] = type);
-          } else {
-            const prevType = data2[name]["@type"];
-            cache.current[prevType] = JSON.parse(JSON.stringify(data2[name]));
-            data2[name] = cache.current[type] || extractDefaultData(conf, type);
-            data2[name]["@type"] = type;
-          }
-          save2();
-        }, [save2, data2]);
-        const cloneItem = useCallback((index) => {
-          if (!Array.isArray(data2[name])) {
-            return;
-          }
-          data2[name].splice(index, 0, JSON.parse(JSON.stringify(data2[name][index])));
-          save2();
-        }, [data2, name, save2]);
-        const removeItem = useCallback((index) => {
-          if (!Array.isArray(data2[name])) {
-            return;
-          }
-          data2[name].splice(index, 1);
-          save2();
-        }, [data2, name, save2]);
-        return /* @__PURE__ */ wp.element.createElement("div", { className: classes2("is-level-" + level) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes2.label() }, conf.label || conf.name, conf.url && /* @__PURE__ */ wp.element.createElement("a", { className: classes2.label.help(), href: conf.url, target: "_blank", rel: "noopener noreferer" })), /* @__PURE__ */ wp.element.createElement("div", { className: classes2.inputs() }, conf.isDynamicType && /* @__PURE__ */ wp.element.createElement("select", { className: classes2.selecttype(), value: value["@type"], onChange: onChangeType }, conf["@type"].map((type) => /* @__PURE__ */ wp.element.createElement("option", { value: type, key: type }, conf.confs[type].label || type))), itemConf.multiple ? /* @__PURE__ */ wp.element.createElement("div", { className: classes2.inputs.group() }, data2[name].map((item, index) => /* @__PURE__ */ wp.element.createElement("div", { className: classes2.inputs.group.item(), key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: classes2.inputs.group.item.body() }, /* @__PURE__ */ wp.element.createElement(
-          Input,
-          {
-            classes: classes2.inputs.input,
-            itemClasses: classes2,
-            data: data2,
-            name,
-            index,
-            conf: itemConf,
-            level
-          }
-        )), /* @__PURE__ */ wp.element.createElement("div", { className: classes2.inputs.group.item.control() }, data2[name].length > 1 && /* @__PURE__ */ wp.element.createElement(
-          "div",
-          {
-            className: classes2.inputs.group.item.control.decrease(),
-            onClick: () => removeItem(index)
-          }
-        ), /* @__PURE__ */ wp.element.createElement(
-          "div",
-          {
-            className: classes2.inputs.group.item.control.increase(),
-            onClick: () => cloneItem(index)
-          }
-        ))))) : /* @__PURE__ */ wp.element.createElement(
-          Input,
-          {
-            classes: classes2.inputs.input,
-            itemClasses: classes2,
-            data: data2,
-            name,
-            conf: itemConf,
-            level
-          }
-        )));
-      }, [Input]);
+            return conf;
+          }, [conf.isDynamicType && value && value["@type"]]);
+          const onChangeType = useCallback(
+            (e) => {
+              const type = e.target.value;
+              if (Array.isArray(data2[name])) {
+                const prevType = data2[name][0]["@type"];
+                cache.current[prevType] = JSON.parse(JSON.stringify(data2[name]));
+                data2[name] = cache.current[type] || [extractDefaultData(conf, type)];
+                data2[name].forEach((item) => item["@type"] = type);
+              } else {
+                const prevType = data2[name]["@type"];
+                cache.current[prevType] = JSON.parse(JSON.stringify(data2[name]));
+                data2[name] = cache.current[type] || extractDefaultData(conf, type);
+                data2[name]["@type"] = type;
+              }
+              save2();
+            },
+            [save2, data2]
+          );
+          const cloneItem = useCallback(
+            (index) => {
+              if (!Array.isArray(data2[name])) {
+                return;
+              }
+              data2[name].splice(index, 0, JSON.parse(JSON.stringify(data2[name][index])));
+              save2();
+            },
+            [data2, name, save2]
+          );
+          const removeItem = useCallback(
+            (index) => {
+              if (!Array.isArray(data2[name])) {
+                return;
+              }
+              data2[name].splice(index, 1);
+              save2();
+            },
+            [data2, name, save2]
+          );
+          return /* @__PURE__ */ wp.element.createElement("div", { className: classes2("is-level-" + level) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes2.label() }, conf.label || conf.name, conf.url && /* @__PURE__ */ wp.element.createElement("a", { className: classes2.label.help(), href: conf.url, target: "_blank", rel: "noopener noreferer" })), /* @__PURE__ */ wp.element.createElement("div", { className: classes2.inputs() }, conf.isDynamicType && /* @__PURE__ */ wp.element.createElement("select", { className: classes2.selecttype(), value: value["@type"], onChange: onChangeType }, conf["@type"].map((type) => /* @__PURE__ */ wp.element.createElement("option", { value: type, key: type }, conf.confs[type].label || type))), itemConf.multiple ? /* @__PURE__ */ wp.element.createElement("div", { className: classes2.inputs.group() }, data2[name].map((item, index) => /* @__PURE__ */ wp.element.createElement("div", { className: classes2.inputs.group.item(), key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: classes2.inputs.group.item.body() }, /* @__PURE__ */ wp.element.createElement(Input, { classes: classes2.inputs.input, itemClasses: classes2, data: data2, name, index, conf: itemConf, level })), /* @__PURE__ */ wp.element.createElement("div", { className: classes2.inputs.group.item.control() }, data2[name].length > 1 && /* @__PURE__ */ wp.element.createElement("div", { className: classes2.inputs.group.item.control.decrease(), onClick: () => removeItem(index) }), /* @__PURE__ */ wp.element.createElement("div", { className: classes2.inputs.group.item.control.increase(), onClick: () => cloneItem(index) }))))) : /* @__PURE__ */ wp.element.createElement(Input, { classes: classes2.inputs.input, itemClasses: classes2, data: data2, name, conf: itemConf, level })));
+        },
+        [Input]
+      );
       const typeLabel = useMemo(() => types && data["@type"] && (types[data["@type"]]?.label || data["@type"]), [types, data["@type"]]);
       useEffect(() => {
         wp.apiFetch({ path: "/cp/v1/blocks/config/jsonld/types" }).then((res) => {
@@ -376,26 +367,7 @@
       if (!types || !data) {
         return false;
       }
-      return /* @__PURE__ */ wp.element.createElement(CP.JsonLdBlockContext.Provider, { value: { types, save } }, /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { attr: attributes, set: setAttributes }), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: classes.editor() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.editor.type() }, /* @__PURE__ */ wp.element.createElement(
-        SelectType,
-        {
-          classes: classes.editor.type.select,
-          types,
-          formals,
-          data,
-          setAttributes
-        }
-      ), types[data["@type"]] && /* @__PURE__ */ wp.element.createElement("a", { className: classes.editor.type.help(), href: types[data["@type"]].url, target: "_blank", rel: "noopener noreferer" })), /* @__PURE__ */ wp.element.createElement("div", { className: classes.editor.items() }, types[data["@type"]].items.map((conf) => /* @__PURE__ */ wp.element.createElement(
-        InputItem,
-        {
-          classes: classes.editor.items.item,
-          conf,
-          data,
-          name: conf.name,
-          level: 0,
-          key: conf.name
-        }
-      )))) : /* @__PURE__ */ wp.element.createElement("div", { className: classes.label() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.label.icon() }, /* @__PURE__ */ wp.element.createElement(CP.ConfigIcon, { icon: "json" })), /* @__PURE__ */ wp.element.createElement("div", { className: classes.label.text() }, "JSON-LD : ", typeLabel))));
+      return /* @__PURE__ */ wp.element.createElement(CP.JsonLdBlockContext.Provider, { value: { types, save } }, /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { attr: attributes, set: setAttributes }), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: classes.editor() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.editor.type() }, /* @__PURE__ */ wp.element.createElement(SelectType, { classes: classes.editor.type.select, types, formals, data, setAttributes }), types[data["@type"]] && /* @__PURE__ */ wp.element.createElement("a", { className: classes.editor.type.help(), href: types[data["@type"]].url, target: "_blank", rel: "noopener noreferer" })), /* @__PURE__ */ wp.element.createElement("div", { className: classes.editor.items() }, types[data["@type"]].items.map((conf) => /* @__PURE__ */ wp.element.createElement(InputItem, { classes: classes.editor.items.item, conf, data, name: conf.name, level: 0, key: conf.name })))) : /* @__PURE__ */ wp.element.createElement("div", { className: classes.label() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.label.icon() }, /* @__PURE__ */ wp.element.createElement(CP.ConfigIcon, { icon: "json" })), /* @__PURE__ */ wp.element.createElement("div", { className: classes.label.text() }, "JSON-LD : ", typeLabel))));
     },
     save({ attributes, className, setAttributes }) {
       return /* @__PURE__ */ wp.element.createElement("script", { type: "application/ld+json" }, attributes.json);

@@ -24,10 +24,7 @@
           },
           { name: "inline", label: "\u30A4\u30F3\u30E9\u30A4\u30F3", values: "i" }
         ];
-        wp.hooks.applyFilters(
-          "catpow.blocks.formbuttons.selectiveClasses",
-          CP.finderProxy(selectiveClasses2)
-        );
+        wp.hooks.applyFilters("catpow.blocks.formbuttons.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
       const selectiveItemClasses = useMemo(() => {
@@ -38,14 +35,7 @@
             type: "gridbuttons",
             label: "\u5C5E\u6027",
             filter: "rank",
-            values: [
-              "default",
-              "primary",
-              "secondary",
-              "negative",
-              "danger",
-              "secure"
-            ]
+            values: ["default", "primary", "secondary", "negative", "danger", "secure"]
           },
           {
             name: "icon",
@@ -55,10 +45,7 @@
           },
           "event"
         ];
-        wp.hooks.applyFilters(
-          "catpow.blocks.formbuttons.selectiveItemClasses",
-          CP.finderProxy(selectiveItemClasses2)
-        );
+        wp.hooks.applyFilters("catpow.blocks.formbuttons.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
         return selectiveItemClasses2;
       }, []);
       const saveItems = () => {
@@ -71,75 +58,36 @@
         }
         const itemStates = CP.wordsToFlags(item.classes);
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement(
-            CP.Item,
+          /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", set: setAttributes, attr: attributes, items, index, isSelected, key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "button" }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), /* @__PURE__ */ wp.element.createElement(
+            "span",
             {
-              tag: "li",
-              set: setAttributes,
-              attr: attributes,
-              items,
-              index,
-              isSelected,
-              key: index
+              onInput: (e) => {
+                item.text = e.target.innerText;
+              },
+              onBlur: saveItems,
+              contentEditable: true,
+              suppressContentEditableWarning: true
             },
-            /* @__PURE__ */ wp.element.createElement("div", { className: "button" }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), /* @__PURE__ */ wp.element.createElement(
-              "span",
-              {
-                onInput: (e) => {
-                  item.text = e.target.innerText;
-                },
-                onBlur: saveItems,
-                contentEditable: true,
-                suppressContentEditableWarning: true
+            item.text
+          ), /* @__PURE__ */ wp.element.createElement(
+            "span",
+            {
+              className: "action",
+              onInput: (e) => {
+                item.action = e.target.innerText;
               },
-              item.text
-            ), /* @__PURE__ */ wp.element.createElement(
-              "span",
-              {
-                className: "action",
-                onInput: (e) => {
-                  item.action = e.target.innerText;
-                },
-                onBlur: saveItems,
-                contentEditable: true,
-                suppressContentEditableWarning: true
-              },
-              item.action
-            ))
-          )
+              onBlur: saveItems,
+              contentEditable: true,
+              suppressContentEditableWarning: true
+            },
+            item.action
+          )))
         );
       });
       if (attributes.EditMode === void 0) {
         attributes.EditMode = false;
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u30AF\u30E9\u30B9",
-          icon: "art",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses
-        }
-      ), /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u30DC\u30BF\u30F3",
-          icon: "edit",
-          set: setAttributes,
-          attr: attributes,
-          items,
-          index: attributes.currentItemIndex,
-          selectiveClasses: selectiveItemClasses
-        }
-      ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-        TextareaControl,
-        {
-          label: "\u30AF\u30E9\u30B9",
-          onChange: (clss) => setAttributes({ classes: clss }),
-          value: classArray.join(" ")
-        }
-      )), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30DC\u30BF\u30F3", icon: "edit", set: setAttributes, attr: attributes, items, index: attributes.currentItemIndex, selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (clss) => setAttributes({ classes: clss }), value: classArray.join(" ") })), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })));
     },
     save({ attributes, className }) {
       const { items = [], classes = "" } = attributes;
@@ -150,26 +98,12 @@
         const itemStates = CP.wordsToFlags(item.classes);
         const eventDispatcherAttributes = {};
         if (blockType.attributes.items.eventDispatcherAttributes) {
-          blockType.attributes.items.eventDispatcherAttributes.map(
-            (attr_name) => {
-              eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute] = item[attr_name];
-            }
-          );
+          blockType.attributes.items.eventDispatcherAttributes.map((attr_name) => {
+            eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute] = item[attr_name];
+          });
         }
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement(
-            "div",
-            {
-              className: "button",
-              "data-action": item.action,
-              "data-callback": item.callback,
-              "data-target": item.target,
-              "ignore-message": item.ignoreMessage,
-              ...eventDispatcherAttributes
-            },
-            itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }),
-            item.text
-          ))
+          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "button", "data-action": item.action, "data-callback": item.callback, "data-target": item.target, "ignore-message": item.ignoreMessage, ...eventDispatcherAttributes }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), item.text))
         );
       });
       return /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn);
@@ -209,9 +143,7 @@
         migrate(attributes) {
           const { items = [] } = attributes;
           const parseButtonShortCode = (code) => {
-            let matches = code.match(
-              /^\[button ([^ ]+) ([^ ]+)( ignore_message\=1)?\]$/
-            );
+            let matches = code.match(/^\[button ([^ ]+) ([^ ]+)( ignore_message\=1)?\]$/);
             if (matches) {
               let rtn = { content: matches[1], action: matches[2] };
               if (matches[3]) {

@@ -51,19 +51,13 @@
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
           { name: "size", label: "\u30B5\u30A4\u30BA", filter: "size", values: ["small", "medium", "large"] },
-          { name: "filled", label: "\u5857\u308A", values: "filled", sub: [
-            { name: "shape", label: "\u5F62\u72B6", filter: "shape", values: { circle: "\u4E38", square: "\u56DB\u89D2" } }
-          ] }
+          { name: "filled", label: "\u5857\u308A", values: "filled", sub: [{ name: "shape", label: "\u5F62\u72B6", filter: "shape", values: { circle: "\u4E38", square: "\u56DB\u89D2" } }] }
         ];
         wp.hooks.applyFilters("catpow.blocks.icons.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
       const selectiveItemClasses = useMemo(() => {
-        const selectiveItemClasses2 = [
-          { name: "image", input: "image", keys: { src: "src", alt: "alt" }, size: "thumbnail" },
-          { name: "link", input: "text", key: "href", label: "\u30EA\u30F3\u30AF" },
-          "color"
-        ];
+        const selectiveItemClasses2 = [{ name: "image", input: "image", keys: { src: "src", alt: "alt" }, size: "thumbnail" }, { name: "link", input: "text", key: "href", label: "\u30EA\u30F3\u30AF" }, "color"];
         wp.hooks.applyFilters("catpow.blocks.icons.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
         return selectiveItemClasses2;
       }, []);
@@ -73,19 +67,7 @@
           item.controlClasses = "control";
         }
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement(
-            CP.Item,
-            {
-              tag: "li",
-              set: setAttributes,
-              attr: attributes,
-              items,
-              index,
-              isSelected: attributes.currentItemIndex == index,
-              key: index
-            },
-            /* @__PURE__ */ wp.element.createElement("a", null, /* @__PURE__ */ wp.element.createElement("img", { src: item.src, alt: item.alt }))
-          )
+          /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", set: setAttributes, attr: attributes, items, index, isSelected: attributes.currentItemIndex == index, key: index }, /* @__PURE__ */ wp.element.createElement("a", null, /* @__PURE__ */ wp.element.createElement("img", { src: item.src, alt: item.alt })))
         );
       });
       if (attributes.EditMode === void 0) {
@@ -103,40 +85,7 @@
             }
           ]
         }
-      ), /* @__PURE__ */ wp.element.createElement(
-        CP.AlignClassToolbar,
-        {
-          set: setAttributes,
-          attr: attributes
-        }
-      )), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u30AF\u30E9\u30B9",
-          icon: "art",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses
-        }
-      ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-        TextareaControl,
-        {
-          label: "\u30AF\u30E9\u30B9",
-          onChange: (clss) => setAttributes({ classes: clss }),
-          value: classArray.join(" ")
-        }
-      )), /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u30A2\u30A4\u30C6\u30E0",
-          icon: "edit",
-          set: setAttributes,
-          attr: attributes,
-          items,
-          index: attributes.currentItemIndex,
-          selectiveClasses: selectiveItemClasses
-        }
-      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement("ul", { className: attributes.EditMode ? primaryClass + " edit" : classes }, rtn));
+      ), /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (clss) => setAttributes({ classes: clss }), value: classArray.join(" ") })), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30A2\u30A4\u30C6\u30E0", icon: "edit", set: setAttributes, attr: attributes, items, index: attributes.currentItemIndex, selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement("ul", { className: attributes.EditMode ? primaryClass + " edit" : classes }, rtn));
     },
     save({ attributes, className }) {
       const { items = [], classes, countPrefix, countSuffix } = attributes;

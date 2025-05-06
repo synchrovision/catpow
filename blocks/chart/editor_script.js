@@ -40,24 +40,26 @@
             }
           }
         },
-        default: [{
-          title: "\u30B9\u30C6\u30FC\u30BF\u30B9",
-          unit: "pt",
-          rowTitle: "\u65E5\u6570",
-          rowUnit: "\u65E5",
-          rows: [
-            { classes: "row weak", label: "1", vals: [{ value: 30 }, { value: 40 }, { value: 40 }, { value: 40 }, { value: 40 }] },
-            { classes: "row normal", label: "2", vals: [{ value: 40 }, { value: 60 }, { value: 30 }, { value: 20 }, { value: 50 }] },
-            { classes: "row strong", label: "3", vals: [{ value: 50 }, { value: 80 }, { value: 20 }, { value: 30 }, { value: 60 }] }
-          ],
-          cols: [
-            { classes: "col color1", label: "VIT" },
-            { classes: "col color2", label: "STR" },
-            { classes: "col color3", label: "AGR" },
-            { classes: "col color4", label: "INT" },
-            { classes: "col color5", label: "MND" }
-          ]
-        }]
+        default: [
+          {
+            title: "\u30B9\u30C6\u30FC\u30BF\u30B9",
+            unit: "pt",
+            rowTitle: "\u65E5\u6570",
+            rowUnit: "\u65E5",
+            rows: [
+              { classes: "row weak", label: "1", vals: [{ value: 30 }, { value: 40 }, { value: 40 }, { value: 40 }, { value: 40 }] },
+              { classes: "row normal", label: "2", vals: [{ value: 40 }, { value: 60 }, { value: 30 }, { value: 20 }, { value: 50 }] },
+              { classes: "row strong", label: "3", vals: [{ value: 50 }, { value: 80 }, { value: 20 }, { value: 30 }, { value: 60 }] }
+            ],
+            cols: [
+              { classes: "col color1", label: "VIT" },
+              { classes: "col color2", label: "STR" },
+              { classes: "col color3", label: "AGR" },
+              { classes: "col color4", label: "INT" },
+              { classes: "col color5", label: "MND" }
+            ]
+          }
+        ]
       }
     },
     example: CP.example,
@@ -82,9 +84,7 @@
               RadarChart: "\u30EC\u30FC\u30C0\u30FC\u30C1\u30E3\u30FC\u30C8"
             }
           },
-          { name: "value", label: "\u5024\u3092\u8868\u793A", values: "hasValue", sub: [
-            { label: "\u5358\u4F4D\u3092\u8868\u793A", values: "hasUnit" }
-          ] },
+          { name: "value", label: "\u5024\u3092\u8868\u793A", values: "hasValue", sub: [{ label: "\u5358\u4F4D\u3092\u8868\u793A", values: "hasUnit" }] },
           { name: "frame", label: "\u67A0\u7DDA\u3092\u8868\u793A", values: "hasFrame" },
           { name: "grid", label: "\u7F6B\u7DDA\u3092\u8868\u793A", values: "hasGrid" }
         ];
@@ -167,23 +167,7 @@
             }
           ]
         }
-      )), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u30AF\u30E9\u30B9",
-          icon: "art",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses
-        }
-      ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-        TextareaControl,
-        {
-          label: "\u30AF\u30E9\u30B9",
-          onChange: (clss) => setAttributes({ classes: clss }),
-          value: classArray.join(" ")
-        }
-      ))), EditMode ? DataTable() : /* @__PURE__ */ wp.element.createElement("div", { className: classes }, Catpow[type + "Output"] ? el(Catpow[type + "Output"], { ...states, ...graph[0] }) : /* @__PURE__ */ wp.element.createElement("div", { className: "alert" }, "Invalid Chart Type")));
+      )), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (clss) => setAttributes({ classes: clss }), value: classArray.join(" ") }))), EditMode ? DataTable() : /* @__PURE__ */ wp.element.createElement("div", { className: classes }, Catpow[type + "Output"] ? el(Catpow[type + "Output"], { ...states, ...graph[0] }) : /* @__PURE__ */ wp.element.createElement("div", { className: "alert" }, "Invalid Chart Type")));
     },
     save({ attributes, className }) {
       const { classes, graph } = attributes;

@@ -65,59 +65,21 @@
       const { __ } = wp.i18n;
       const { useState, useMemo, useCallback, useEffect, useReducer, useRef } = wp.element;
       const { BlockControls, InspectorControls, RichText } = wp.blockEditor;
-      const {
-        BaseControl,
-        Icon,
-        PanelBody,
-        RangeControl,
-        TextareaControl,
-        TextControl,
-        Toolbar,
-        ToolbarGroup,
-        ToolbarButton,
-        ToolbarDropdownMenu
-      } = wp.components;
-      const {
-        id,
-        classes = "",
-        src,
-        srcset,
-        alt,
-        heights,
-        items = [],
-        device
-      } = attributes;
+      const { BaseControl, Icon, PanelBody, RangeControl, TextareaControl, TextControl, Toolbar, ToolbarGroup, ToolbarButton, ToolbarDropdownMenu } = wp.components;
+      const { id, classes = "", src, srcset, alt, heights, items = [], device } = attributes;
       const { bem } = Catpow.util;
       const [currentItemNodes, setCurrentItemNodes] = useState([]);
       const [currentItemIndexes, setCurrentItemIndexes] = useState([]);
       const [containerNode, setContainerNode] = useState(false);
       const targetRefs = useRef([]);
       useEffect(() => {
-        setCurrentItemNodes(
-          currentItemIndexes.sort().map((index) => targetRefs.current[index])
-        );
+        setCurrentItemNodes(currentItemIndexes.sort().map((index) => targetRefs.current[index]));
       }, [currentItemIndexes, targetRefs, setCurrentItemNodes]);
       const states = CP.wordsToFlags(classes);
-      const {
-        devices,
-        devicesForCss,
-        imageKeys,
-        getCssDatas,
-        renderCssDatas,
-        parseRectAttr,
-        getRectAttr
-      } = CP.config.graphics;
+      const { devices, devicesForCss, imageKeys, getCssDatas, renderCssDatas, parseRectAttr, getRectAttr } = CP.config.graphics;
       const cssDatas = getCssDatas(attributes, states);
       const selectiveClasses = useMemo(() => {
-        const {
-          devices: devices2,
-          devicesForCss: devicesForCss2,
-          imageKeys: imageKeys2,
-          getCssDatas: getCssDatas2,
-          renderCssDatas: renderCssDatas2,
-          parseRectAttr: parseRectAttr2,
-          getRectAttr: getRectAttr2
-        } = CP.config.graphics;
+        const { devices: devices2, devicesForCss: devicesForCss2, imageKeys: imageKeys2, getCssDatas: getCssDatas2, renderCssDatas: renderCssDatas2, parseRectAttr: parseRectAttr2, getRectAttr: getRectAttr2 } = CP.config.graphics;
         const selectiveClasses2 = [
           {
             name: "baseImage",
@@ -133,22 +95,11 @@
             ]
           }
         ];
-        wp.hooks.applyFilters(
-          "catpow.blocks.graphics.selectiveClasses",
-          CP.finderProxy(selectiveClasses2)
-        );
+        wp.hooks.applyFilters("catpow.blocks.graphics.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
       const selectiveItemClasses = useMemo(() => {
-        const {
-          devices: devices2,
-          devicesForCss: devicesForCss2,
-          imageKeys: imageKeys2,
-          getCssDatas: getCssDatas2,
-          renderCssDatas: renderCssDatas2,
-          parseRectAttr: parseRectAttr2,
-          getRectAttr: getRectAttr2
-        } = CP.config.graphics;
+        const { devices: devices2, devicesForCss: devicesForCss2, imageKeys: imageKeys2, getCssDatas: getCssDatas2, renderCssDatas: renderCssDatas2, parseRectAttr: parseRectAttr2, getRectAttr: getRectAttr2 } = CP.config.graphics;
         const selectiveItemClasses2 = [
           {
             name: "type",
@@ -273,10 +224,7 @@
             ]
           }
         ];
-        wp.hooks.applyFilters(
-          "catpow.blocks.graphics.selectiveItemClasses",
-          CP.finderProxy(selectiveItemClasses2)
-        );
+        wp.hooks.applyFilters("catpow.blocks.graphics.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
         return selectiveItemClasses2;
       }, []);
       var tgtItem = false;
@@ -350,9 +298,7 @@
           const selected = currentItemIndexes.includes(index);
           if (e.shiftKey) {
             if (selected) {
-              setCurrentItemIndexes(
-                currentItemIndexes.filter((i) => i !== index)
-              );
+              setCurrentItemIndexes(currentItemIndexes.filter((i) => i !== index));
             } else {
               setCurrentItemIndexes(currentItemIndexes.concat([index]));
             }
@@ -366,12 +312,8 @@
         (direction) => {
           const deviceIndex = device ? devicesForCss.indexOf(device) : 0;
           const l = currentItemIndexes.length;
-          const rectDatasList = currentItemIndexes.map(
-            (itemIndex) => parseRectAttr(items[itemIndex].rect)
-          );
-          const targetRectDatas = rectDatasList.map(
-            (rectDatas) => rectDatas[deviceIndex]
-          );
+          const rectDatasList = currentItemIndexes.map((itemIndex) => parseRectAttr(items[itemIndex].rect));
+          const targetRectDatas = rectDatasList.map((rectDatas) => rectDatas[deviceIndex]);
           const lefts = targetRectDatas.map((c) => c[0]);
           const centers = targetRectDatas.map((c) => c[0] + c[2] / 2);
           const rights = targetRectDatas.map((c) => c[0] + c[2]);
@@ -426,32 +368,13 @@
         },
         [save, device, currentItemIndexes, items]
       );
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectDeviceToolbar,
-        {
-          attr: attributes,
-          set: setAttributes,
-          devices: CP.config.graphics.devicesForCss,
-          defaultInput: "pc"
-        }
-      ), /* @__PURE__ */ wp.element.createElement(BlockControls, null, device !== "pc" && /* @__PURE__ */ wp.element.createElement(
-        ToolbarButton,
-        {
-          icon: "update",
-          label: "update",
-          onClick: copyFirstRect
-        }
-      ), currentItemIndexes.length > 0 && /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { label: "control" }, currentItemIndexes.length === 1 && /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices: CP.config.graphics.devicesForCss, defaultInput: "pc" }), /* @__PURE__ */ wp.element.createElement(BlockControls, null, device !== "pc" && /* @__PURE__ */ wp.element.createElement(ToolbarButton, { icon: "update", label: "update", onClick: copyFirstRect }), currentItemIndexes.length > 0 && /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { label: "control" }, currentItemIndexes.length === 1 && /* @__PURE__ */ wp.element.createElement(
         ToolbarButton,
         {
           icon: "insert",
           label: "insert",
           onClick: () => {
-            items.splice(
-              currentItemIndexes[0],
-              0,
-              JSON.parse(JSON.stringify(items[currentItemIndexes[0]]))
-            );
+            items.splice(currentItemIndexes[0], 0, JSON.parse(JSON.stringify(items[currentItemIndexes[0]])));
             save();
           }
         }
@@ -462,9 +385,7 @@
           label: "remove",
           onClick: () => {
             setAttributes({
-              items: items.filter(
-                (item, index) => !currentItemIndexes.includes(index)
-              )
+              items: items.filter((item, index) => !currentItemIndexes.includes(index))
             });
             setCurrentItemIndexes([]);
           }
@@ -547,193 +468,135 @@
             }
           ]
         }
-      ))), /* @__PURE__ */ wp.element.createElement(
-        "div",
+      ))), /* @__PURE__ */ wp.element.createElement("div", { id, className: classes + (isSelected ? " cp-altcontent " + device : ""), ref: setContainerNode }, isSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement("div", { className: "base" }, states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attr: attributes, keys: imageKeys.base, devices, device: device === "pc" ? null : device })), isSelected && /* @__PURE__ */ wp.element.createElement(
+        CP.BoundingBox,
         {
-          id,
-          className: classes + (isSelected ? " cp-altcontent " + device : ""),
-          ref: setContainerNode
-        },
-        isSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })),
-        /* @__PURE__ */ wp.element.createElement("div", { className: "base" }, states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(
-          CP.ResponsiveImage,
-          {
-            attr: attributes,
-            keys: imageKeys.base,
-            devices,
-            device: device === "pc" ? null : device
-          }
-        )),
-        isSelected && /* @__PURE__ */ wp.element.createElement(
-          CP.BoundingBox,
-          {
-            targets: currentItemNodes,
-            container: containerNode,
-            onChange: () => {
-              const bnd = containerNode.getBoundingClientRect();
-              const deviceIndex = device ? devicesForCss.indexOf(device) : 0;
-              currentItemNodes.forEach((el) => {
-                const { index } = el.dataset;
-                const tgtBnd = el.getBoundingClientRect();
-                const rectDatas = parseRectAttr(items[index].rect);
-                rectDatas[deviceIndex] = [
-                  Math.pround(
-                    (tgtBnd.left - bnd.left) / bnd.width * 100,
-                    2
-                  ),
-                  Math.pround((tgtBnd.top - bnd.top) / bnd.height * 100, 2),
-                  Math.pround(tgtBnd.width / bnd.width * 100, 2),
-                  Math.pround(tgtBnd.height / bnd.height * 100, 2)
-                ];
-                items[index].rect = getRectAttr(rectDatas);
-              });
-              save();
-            },
-            onDeselect: () => {
-              setCurrentItemIndexes([]);
-            },
-            onDuplicate: () => {
-              items.push.apply(
-                items,
-                items.filter(
-                  (item, index) => currentItemIndexes.includes(index)
-                )
-              );
-              save();
-            },
-            onDelete: () => {
-              setAttributes({
-                items: items.filter(
-                  (item, index) => !currentItemIndexes.includes(index)
-                )
-              });
-            },
-            viewMode: device
-          }
-        ),
-        items.map((item, index) => {
-          var itemStates = CP.wordsToFlags(item.classes);
-          var itemClasses = item.classes;
-          var itemSelected = currentItemIndexes.includes(index);
-          if (isSelected) {
-            itemClasses += " visible active actived";
-          }
-          if (itemSelected) {
-            itemClasses += " selected";
-          }
-          const itemBody = () => {
-            if (itemSelected && currentItemIndexes.length === 1) {
-              if (itemStates.isText) {
-                return /* @__PURE__ */ wp.element.createElement("span", { className: "body" }, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement(
-                  RichText,
-                  {
-                    tagName: "h3",
-                    className: "title",
-                    placeholder: "Title",
-                    onChange: (title) => {
-                      console.log(title);
-                      item.title = title;
-                      save();
-                    },
-                    value: item.title
-                  }
-                ), itemStates.hasLead && /* @__PURE__ */ wp.element.createElement(
-                  RichText,
-                  {
-                    tagName: "h4",
-                    className: "lead",
-                    placeholder: "Lead",
-                    onChange: (lead) => {
-                      item.lead = lead;
-                      save();
-                    },
-                    value: item.lead
-                  }
-                ), itemStates.hasText && /* @__PURE__ */ wp.element.createElement(
-                  RichText,
-                  {
-                    tagName: "p",
-                    className: "text",
-                    placeholder: "Text",
-                    onChange: (text) => {
-                      item.text = text;
-                      save();
-                    },
-                    value: item.text
-                  }
-                ));
-              }
-              return /* @__PURE__ */ wp.element.createElement(
-                CP.SelectResponsiveImage,
-                {
-                  attr: attributes,
-                  set: setAttributes,
-                  devices,
-                  device: device === "pc" ? null : device,
-                  keys: imageKeys.image,
-                  index
-                }
-              );
-            }
-            if (itemStates.isText) {
-              return /* @__PURE__ */ wp.element.createElement("span", { className: "body" }, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", { className: "title" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), itemStates.hasLead && /* @__PURE__ */ wp.element.createElement("h4", { className: "lead" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.lead })), itemStates.hasText && /* @__PURE__ */ wp.element.createElement("p", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })));
-            }
-            return /* @__PURE__ */ wp.element.createElement(
-              CP.ResponsiveImage,
-              {
-                attr: attributes,
-                keys: imageKeys.image,
-                devices,
-                device: device === "pc" ? null : device,
-                index
-              }
+          targets: currentItemNodes,
+          container: containerNode,
+          onChange: () => {
+            const bnd = containerNode.getBoundingClientRect();
+            const deviceIndex = device ? devicesForCss.indexOf(device) : 0;
+            currentItemNodes.forEach((el) => {
+              const { index } = el.dataset;
+              const tgtBnd = el.getBoundingClientRect();
+              const rectDatas = parseRectAttr(items[index].rect);
+              rectDatas[deviceIndex] = [
+                Math.pround((tgtBnd.left - bnd.left) / bnd.width * 100, 2),
+                Math.pround((tgtBnd.top - bnd.top) / bnd.height * 100, 2),
+                Math.pround(tgtBnd.width / bnd.width * 100, 2),
+                Math.pround(tgtBnd.height / bnd.height * 100, 2)
+              ];
+              items[index].rect = getRectAttr(rectDatas);
+            });
+            save();
+          },
+          onDeselect: () => {
+            setCurrentItemIndexes([]);
+          },
+          onDuplicate: () => {
+            items.push.apply(
+              items,
+              items.filter((item, index) => currentItemIndexes.includes(index))
             );
-          };
-          return wp.element.createElement(
-            "span",
-            {
-              id: id + "_item_" + index,
-              className: itemClasses,
-              "data-index": index,
-              "data-rect": item.rect,
-              ref: (el) => targetRefs.current[index] = el,
-              onClick: onClickItem,
-              key: index
-            },
-            itemBody()
-          );
-        }),
-        /* @__PURE__ */ wp.element.createElement("style", null, device !== "pc" ? CP.createStyleCode(cssDatas[device]) : renderCssDatas(cssDatas))
-      ), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u30AF\u30E9\u30B9",
-          icon: "art",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses,
-          initialOpen: true
-        },
-        !states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(
-          InputHeights,
-          {
-            value: heights,
-            onChange: (heights2, device2) => {
-              setAttributes({ heights: heights2, device: device2 });
+            save();
+          },
+          onDelete: () => {
+            setAttributes({
+              items: items.filter((item, index) => !currentItemIndexes.includes(index))
+            });
+          },
+          viewMode: device
+        }
+      ), items.map((item, index) => {
+        var itemStates = CP.wordsToFlags(item.classes);
+        var itemClasses = item.classes;
+        var itemSelected = currentItemIndexes.includes(index);
+        if (isSelected) {
+          itemClasses += " visible active actived";
+        }
+        if (itemSelected) {
+          itemClasses += " selected";
+        }
+        const itemBody = () => {
+          if (itemSelected && currentItemIndexes.length === 1) {
+            if (itemStates.isText) {
+              return /* @__PURE__ */ wp.element.createElement("span", { className: "body" }, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement(
+                RichText,
+                {
+                  tagName: "h3",
+                  className: "title",
+                  placeholder: "Title",
+                  onChange: (title) => {
+                    console.log(title);
+                    item.title = title;
+                    save();
+                  },
+                  value: item.title
+                }
+              ), itemStates.hasLead && /* @__PURE__ */ wp.element.createElement(
+                RichText,
+                {
+                  tagName: "h4",
+                  className: "lead",
+                  placeholder: "Lead",
+                  onChange: (lead) => {
+                    item.lead = lead;
+                    save();
+                  },
+                  value: item.lead
+                }
+              ), itemStates.hasText && /* @__PURE__ */ wp.element.createElement(
+                RichText,
+                {
+                  tagName: "p",
+                  className: "text",
+                  placeholder: "Text",
+                  onChange: (text) => {
+                    item.text = text;
+                    save();
+                  },
+                  value: item.text
+                }
+              ));
             }
+            return /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { attr: attributes, set: setAttributes, devices, device: device === "pc" ? null : device, keys: imageKeys.image, index });
           }
-        ),
-        /* @__PURE__ */ wp.element.createElement(
-          TextControl,
+          if (itemStates.isText) {
+            return /* @__PURE__ */ wp.element.createElement("span", { className: "body" }, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", { className: "title" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), itemStates.hasLead && /* @__PURE__ */ wp.element.createElement("h4", { className: "lead" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.lead })), itemStates.hasText && /* @__PURE__ */ wp.element.createElement("p", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })));
+          }
+          return /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attr: attributes, keys: imageKeys.image, devices, device: device === "pc" ? null : device, index });
+        };
+        return wp.element.createElement(
+          "span",
           {
-            label: "ID",
-            onChange: (id2) => {
-              setAttributes({ id: id2 });
-            },
-            value: id
+            id: id + "_item_" + index,
+            className: itemClasses,
+            "data-index": index,
+            "data-rect": item.rect,
+            ref: (el) => targetRefs.current[index] = el,
+            onClick: onClickItem,
+            key: index
+          },
+          itemBody()
+        );
+      }), /* @__PURE__ */ wp.element.createElement("style", null, device !== "pc" ? CP.createStyleCode(cssDatas[device]) : renderCssDatas(cssDatas))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses, initialOpen: true }, !states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(
+        InputHeights,
+        {
+          value: heights,
+          onChange: (heights2, device2) => {
+            setAttributes({ heights: heights2, device: device2 });
           }
-        )
-      ), currentItemIndexes.length === 1 && /* @__PURE__ */ wp.element.createElement(
+        }
+      ), /* @__PURE__ */ wp.element.createElement(
+        TextControl,
+        {
+          label: "ID",
+          onChange: (id2) => {
+            setAttributes({ id: id2 });
+          },
+          value: id
+        }
+      )), currentItemIndexes.length === 1 && /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
           title: "\u30A2\u30A4\u30C6\u30E0",
@@ -745,25 +608,17 @@
           selectiveClasses: selectiveItemClasses,
           initialOpen: true
         }
-      ), currentItemIndexes.length === 1 && /* @__PURE__ */ wp.element.createElement(
-        PanelBody,
+      ), currentItemIndexes.length === 1 && /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "ITEM CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+        TextareaControl,
         {
-          title: "ITEM CLASS",
-          icon: "admin-generic",
-          initialOpen: false
-        },
-        /* @__PURE__ */ wp.element.createElement(
-          TextareaControl,
-          {
-            label: "\u30AF\u30E9\u30B9",
-            onChange: (classes2) => {
-              items[currentItemIndexes[0]].classes = classes2;
-              save();
-            },
-            value: items[currentItemIndexes[0]].classes
-          }
-        )
-      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)));
+          label: "\u30AF\u30E9\u30B9",
+          onChange: (classes2) => {
+            items[currentItemIndexes[0]].classes = classes2;
+            save();
+          },
+          value: items[currentItemIndexes[0]].classes
+        }
+      )), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)));
     },
     save({ attributes, className, setAttributes }) {
       const { RichText } = wp.blockEditor;
@@ -772,28 +627,13 @@
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys, getCssDatas, renderCssDatas } = CP.config.graphics;
       const cssDatas = getCssDatas(attributes, states);
-      return /* @__PURE__ */ wp.element.createElement("div", { id, className: classes, "data-heights": heights }, /* @__PURE__ */ wp.element.createElement("div", { className: "base" }, states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(
-        CP.ResponsiveImage,
-        {
-          attr: attributes,
-          keys: imageKeys.base,
-          devices
-        }
-      )), items.map((item, index) => {
+      return /* @__PURE__ */ wp.element.createElement("div", { id, className: classes, "data-heights": heights }, /* @__PURE__ */ wp.element.createElement("div", { className: "base" }, states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attr: attributes, keys: imageKeys.base, devices })), items.map((item, index) => {
         var itemStates = CP.wordsToFlags(item.classes);
         const itemBody = () => {
           if (itemStates.isText) {
             return /* @__PURE__ */ wp.element.createElement("span", { className: "body" }, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", { className: "title" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), itemStates.hasLead && /* @__PURE__ */ wp.element.createElement("h4", { className: "lead" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.lead })), itemStates.hasText && /* @__PURE__ */ wp.element.createElement("p", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })));
           }
-          return /* @__PURE__ */ wp.element.createElement(
-            CP.ResponsiveImage,
-            {
-              attr: attributes,
-              keys: imageKeys.image,
-              index,
-              devices
-            }
-          );
+          return /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attr: attributes, keys: imageKeys.image, index, devices });
         };
         return wp.element.createElement(
           item.link ? "a" : "span",

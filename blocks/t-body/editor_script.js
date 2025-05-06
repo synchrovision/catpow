@@ -27,29 +27,30 @@
       var states = CP.wordsToFlags(classes);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          { name: "type", input: "buttons", label: "\u30E1\u30FC\u30EB\u30BF\u30A4\u30D7", key: "type", values: ["plain", "html"], sub: {
-            html: [
-              { name: "textMode", input: "bool", label: "\u30C6\u30AD\u30B9\u30C8\u30E1\u30FC\u30EB\u7DE8\u96C6\u30E2\u30FC\u30C9", key: "TextMode" },
-              "color",
-              { name: "header", label: "\u30D8\u30C3\u30C0", values: "hasHeader" },
-              { name: "footer", label: "\u30D5\u30C3\u30BF", values: "hasFooter" },
-              { name: "body", type: "buttons", label: "\u80CC\u666F\u8272", values: ["white", "gray", "black"], key: "body_class" }
-            ]
-          }, effect: (val, states2, { set }) => {
-            set({ isHtmlMail: val === "html" });
-          } }
+          {
+            name: "type",
+            input: "buttons",
+            label: "\u30E1\u30FC\u30EB\u30BF\u30A4\u30D7",
+            key: "type",
+            values: ["plain", "html"],
+            sub: {
+              html: [
+                { name: "textMode", input: "bool", label: "\u30C6\u30AD\u30B9\u30C8\u30E1\u30FC\u30EB\u7DE8\u96C6\u30E2\u30FC\u30C9", key: "TextMode" },
+                "color",
+                { name: "header", label: "\u30D8\u30C3\u30C0", values: "hasHeader" },
+                { name: "footer", label: "\u30D5\u30C3\u30BF", values: "hasFooter" },
+                { name: "body", type: "buttons", label: "\u80CC\u666F\u8272", values: ["white", "gray", "black"], key: "body_class" }
+              ]
+            },
+            effect: (val, states2, { set }) => {
+              set({ isHtmlMail: val === "html" });
+            }
+          }
         ];
         wp.hooks.applyFilters("catpow.blocks.t-body.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, !isHtmlMail || TextMode ? /* @__PURE__ */ wp.element.createElement(
-        TextareaControl,
-        {
-          value: textMail,
-          onChange: (textMail2) => setAttributes({ textMail: textMail2 }),
-          rows: 20
-        }
-      ) : /* @__PURE__ */ wp.element.createElement("div", { className: "mail_body " + body_class }, /* @__PURE__ */ wp.element.createElement("table", { width: "100%", align: "center", valign: "top", className: classes }, states.hasHeader && /* @__PURE__ */ wp.element.createElement("thead", { className: "wp-block-catpow-t-body__header" }, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, !isHtmlMail || TextMode ? /* @__PURE__ */ wp.element.createElement(TextareaControl, { value: textMail, onChange: (textMail2) => setAttributes({ textMail: textMail2 }), rows: 20 }) : /* @__PURE__ */ wp.element.createElement("div", { className: "mail_body " + body_class }, /* @__PURE__ */ wp.element.createElement("table", { width: "100%", align: "center", valign: "top", className: classes }, states.hasHeader && /* @__PURE__ */ wp.element.createElement("thead", { className: "wp-block-catpow-t-body__header" }, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, /* @__PURE__ */ wp.element.createElement(
         RichText,
         {
           onChange: (headerText2) => {
@@ -77,23 +78,7 @@
             }
           ]
         }
-      )), /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: "\u30AF\u30E9\u30B9",
-          icon: "art",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses
-        }
-      ), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-        TextareaControl,
-        {
-          label: "\u30AF\u30E9\u30B9",
-          onChange: (classes2) => setAttributes({ classes: classes2 }),
-          value: classes
-        }
-      ))));
+      )), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks, RichText } = wp.blockEditor;

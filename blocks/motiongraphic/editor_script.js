@@ -42,18 +42,7 @@
         return false;
       }
       const SelectedComponent = component && Catpow.Animation[component] ? Catpow.Animation[component] : false;
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-embeddedcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, component), /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement("div", { className: "wp-block-catpow-motiongraphic__background" }, SelectedComponent ? /* @__PURE__ */ wp.element.createElement(Catpow.FixedBG, null, /* @__PURE__ */ wp.element.createElement(Catpow.Animation, null, /* @__PURE__ */ wp.element.createElement(SelectedComponent, { ...JSON.parse(props) }))) : /* @__PURE__ */ wp.element.createElement("p", null, "Select Component")), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, selections && /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          classKey: "component",
-          title: "\u8A2D\u5B9A",
-          icon: "edit",
-          set: setAttributes,
-          attr: attributes,
-          selectiveClasses: selections,
-          initialOpen: true
-        }
-      )));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-embeddedcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, component), /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement("div", { className: "wp-block-catpow-motiongraphic__background" }, SelectedComponent ? /* @__PURE__ */ wp.element.createElement(Catpow.FixedBG, null, /* @__PURE__ */ wp.element.createElement(Catpow.Animation, null, /* @__PURE__ */ wp.element.createElement(SelectedComponent, { ...JSON.parse(props) }))) : /* @__PURE__ */ wp.element.createElement("p", null, "Select Component")), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, selections && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { classKey: "component", title: "\u8A2D\u5B9A", icon: "edit", set: setAttributes, attr: attributes, selectiveClasses: selections, initialOpen: true })));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks } = wp.blockEditor;

@@ -4,7 +4,18 @@
 
   // modules/src/component/Bem.jsx
   var applyBem = (component, { ...ctx }) => {
-    const { props: { className, children } } = component;
+    if (Array.isArray(component)) {
+      component.forEach((child) => {
+        applyBem(child, ctx);
+      });
+      return;
+    }
+    if (component == null || component.props == null) {
+      return;
+    }
+    const {
+      props: { className, children }
+    } = component;
     if (className) {
       component.props.className = className.split(" ").map((className2) => {
         if (className2.slice(0, 2) === "--") {
@@ -25,7 +36,7 @@
         return className2;
       }).join(" ");
       if (component.props.className === className) {
-        const matches = className.match(/\b((\w+)\-\w+(\-\w+)*)(__\w+(\-\w+)*)?\b/);
+        const matches = className.match(/\b(([a-z]+)\-[a-z]+(\-[a-z]+)*)(__[a-z]+(\-[a-z]+)*)?\b/);
         if (!matches) {
           return;
         }
@@ -51,13 +62,7 @@
   };
   var Bem = ({ prefix = "cp", block, element, children }) => {
     const ctx = { prefix, block, element };
-    if (Array.isArray(children)) {
-      children.forEach((child) => {
-        applyBem(child, ctx);
-      });
-    } else {
-      applyBem(children, ctx);
-    }
+    applyBem(children, ctx);
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, children);
   };
 
