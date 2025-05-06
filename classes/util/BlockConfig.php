@@ -88,6 +88,23 @@ class BlockConfig{
 			]
 		];
 	}
+	//json
+	public static function initAsJsonAttribute($confs,$json='props'){
+		foreach($confs as $i=>$conf){
+			$confs[$i]['json']=$json;
+			if(!empty($conf['sub'])){
+				if(is_numeric(key($conf['sub']))){
+					$confs[$i]['sub']=self::initAsJsonAttribute($conf['sub'],$json);
+				}
+				else{
+					foreach($conf['sub'] as $cond=>$sub_confs){
+						$confs[$i]['sub'][$cond]=self::initAsJsonAttribute($sub_confs,$json);
+					}
+				}
+			}
+		}
+		return $confs;
+	}
 }
 
 ?>
