@@ -455,6 +455,19 @@
   width: 100%;
   height: auto;
 }
+.cp-selectresponsiveimage__controls {
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  max-width: 10rem;
+  width: 60%;
+  height: auto;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
+  box-shadow: 0 4px 9px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+}
 .cp-selectpicturesources {
   width: 100%;
 }
@@ -463,6 +476,7 @@
 }
 .cp-selectpicturesources-tbody-tr-td {
   position: relative;
+  background-color: #eee;
 }
 .cp-selectpicturesources-tbody-tr-td-label {
   position: absolute;
