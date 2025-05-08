@@ -52,7 +52,7 @@ CP.SelectResponsiveImage = (props) => {
 				sizeData.media_size
 			);
 	} else {
-		onClick = (e) =>
+		onClick = (e) => {
 			CP.selectImage(
 				keys,
 				function (data) {
@@ -66,6 +66,7 @@ CP.SelectResponsiveImage = (props) => {
 				size,
 				devices
 			);
+		};
 	}
 	if (isTemplate && keys.code && item[keys.code]) {
 		return <CP.DummyImage text={item[keys.code]} />;

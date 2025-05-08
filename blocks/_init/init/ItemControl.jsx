@@ -2,13 +2,7 @@
 import { bem } from "catpow/util";
 
 CP.ItemControl = (props) => {
-	const {
-		className = "",
-		tag: Tag = "div",
-		controls,
-		float = true,
-		children,
-	} = props;
+	const { className = "", tag: Tag = "div", controls, float = true, children } = props;
 	const { useState } = wp.element;
 	const classes = bem("cp-itemcontrol");
 
@@ -22,20 +16,11 @@ CP.ItemControl = (props) => {
 			})}
 		>
 			{Object.keys(controls).map((key) => {
-				return (
-					<div
-						className={classes.button("is-" + key)}
-						onClick={controls[key]}
-						key={key}
-					></div>
-				);
+				return <div className={classes.button("is-" + key)} onClick={controls[key]} key={key}></div>;
 			})}
 			{children && (
 				<>
-					<div
-						className={classes.button("is-edit")}
-						onClick={() => setOpen(!open)}
-					></div>
+					<div className={classes.button("is-edit")} onClick={() => setOpen(!open)}></div>
 					<div className={classes.inputs()}>{children}</div>
 				</>
 			)}

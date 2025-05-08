@@ -1,4 +1,4 @@
-﻿import {CP} from './CP.jsx';
-import {Bem} from 'catpow/component';
+﻿import { CP } from "./CP.jsx";
+import { Bem } from "catpow/component";
 
-CP.Bem=Bem;
+CP.Bem = Bem;

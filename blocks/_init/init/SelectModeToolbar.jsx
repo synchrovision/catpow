@@ -1,34 +1,38 @@
-﻿import {CP} from './CP.jsx';
+﻿import { CP } from "./CP.jsx";
 
-CP.SelectModeToolbar=(props)=>{
-	const {BlockControls}=wp.blockEditor;
-	const {ToolbarGroup}=wp.components;
+CP.SelectModeToolbar = (props) => {
+	const { BlockControls } = wp.blockEditor;
+	const { ToolbarGroup } = wp.components;
 
-	const {set,attr,modes=['EditMode','AltMode']}=props;
-	const SomeMode=modes.some((mode)=>attr[mode]);
-	const icons={
-		EditMode:'edit',
-		OpenMode:'video-alt3',
-		AltMode:'welcome-comments',
-		TextMode:'media-text'
+	const { set, attr, modes = ["EditMode", "AltMode"] } = props;
+	const SomeMode = modes.some((mode) => attr[mode]);
+	const icons = {
+		EditMode: "edit",
+		OpenMode: "video-alt3",
+		AltMode: "welcome-comments",
+		TextMode: "media-text",
 	};
-	const cond={
-		AltMode:'doLoop'
+	const cond = {
+		AltMode: "doLoop",
 	};
 	return (
 		<BlockControls>
-			{modes.map((mode)=>{
-				if(!attr[mode] && SomeMode){return false;}
-				if(cond[mode] && !attr[cond[mode]]){return false;}
+			{modes.map((mode) => {
+				if (!attr[mode] && SomeMode) {
+					return false;
+				}
+				if (cond[mode] && !attr[cond[mode]]) {
+					return false;
+				}
 				return (
 					<ToolbarGroup
 						controls={[
 							{
-								icon:icons[mode],
-								title:mode,
-								isActive:attr[mode],
-								onClick:()=>set({[mode]:!attr[mode]})
-							}
+								icon: icons[mode],
+								title: mode,
+								isActive: attr[mode],
+								onClick: () => set({ [mode]: !attr[mode] }),
+							},
 						]}
 						key={mode}
 					/>

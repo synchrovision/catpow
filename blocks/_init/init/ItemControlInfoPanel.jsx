@@ -1,7 +1,7 @@
-﻿import {CP} from './CP.jsx';
+﻿import { CP } from "./CP.jsx";
 
-CP.ItemControlInfoPanel=()=>{
-	const {PanelBody}=wp.components;
+CP.ItemControlInfoPanel = () => {
+	const { PanelBody } = wp.components;
 	return (
 		<PanelBody title="操作" initialOpen={false} icon="info">
 			<table>
