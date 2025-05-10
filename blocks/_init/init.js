@@ -1,4 +1,31 @@
 (() => {
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __esm = (fn, res) => function __init() {
+    return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+  };
+
+  // react-global:react
+  var react_default, useState, useEffect, useLayoutEffect, useRef, forwardRef, useMemo2, useCallback, createContext, useContext, useReducer, createElement, cloneElement, isValidElement, Fragment;
+  var init_react = __esm({
+    "react-global:react"() {
+      react_default = window.wp.element;
+      useState = wp.element.useState;
+      useEffect = wp.element.useEffect;
+      useLayoutEffect = wp.element.useLayoutEffect;
+      useRef = wp.element.useRef;
+      forwardRef = wp.element.forwardRef;
+      useMemo2 = wp.element.useMemo;
+      useCallback = wp.element.useCallback;
+      createContext = wp.element.createContext;
+      useContext = wp.element.useContext;
+      useReducer = wp.element.useReducer;
+      createElement = wp.element.createElement;
+      cloneElement = wp.element.cloneElement;
+      isValidElement = wp.element.isValidElement;
+      Fragment = wp.element.Fragment;
+    }
+  });
+
   // ../blocks/_init/init/filter.jsx
   wp.blocks.registerBlockStyle("core/heading", { name: "header", label: "header" });
   wp.blocks.registerBlockStyle("core/heading", { name: "headline", label: "headline" });
@@ -147,9 +174,9 @@
   };
 
   // modules/src/util/bem.jsx
-  var bem = (className) => {
+  var bem = (className2) => {
     const children = {};
-    const firstClass = className.split(" ")[0];
+    const firstClass = className2.split(" ")[0];
     return new Proxy(
       function() {
         if (arguments.length > 0) {
@@ -166,10 +193,10 @@
             classes.push.apply(classes, Array.isArray(arguments[i]) ? arguments[i] : Object.keys(arguments[i]).filter((c) => arguments[i][c]));
           }
           if (classes.length > 0) {
-            return (className + " " + classes.join(" ")).replace(" --", " " + firstClass + "--");
+            return (className2 + " " + classes.join(" ")).replace(" --", " " + firstClass + "--");
           }
         }
-        return className;
+        return className2;
       },
       {
         get: (target, prop) => {
@@ -252,8 +279,10 @@
         }
         if (size && image.sizes && image.sizes[size]) {
           data[keys.src] = image.sizes[size].url;
-        } else {
+        } else if (keys.src) {
           data[keys.src] = image.url;
+        } else if (keys.url) {
+          data[keys.url] = `url(${image.url})`;
         }
         if (keys.sources) {
           if (image.sizes) {
@@ -862,19 +891,19 @@
       }
     },
     parseSelections: (sels) => {
-      let options, values;
+      let options3, values;
       if (Array.isArray(sels)) {
         values = sels;
-        options = sels.map((cls) => {
+        options3 = sels.map((cls) => {
           return { label: cls, value: cls };
         });
       } else {
         values = Object.keys(sels);
-        options = values.map((cls) => {
+        options3 = values.map((cls) => {
           return { label: sels[cls], value: cls };
         });
       }
-      return { options, values };
+      return { options: options3, values };
     },
     createBlocks: (blocks) => {
       return blocks.map((block) => {
@@ -1004,20 +1033,20 @@
     },
     /*color inherit*/
     inheritColor: (props, images) => {
-      const { attributes, className, setAttributes, context } = props;
+      const { attributes, className: className2, setAttributes, context } = props;
       const { setURLparams } = Catpow.util;
       const { classes, color = "0" } = attributes;
-      const { useEffect: useEffect2, useMemo: useMemo3 } = wp.element;
-      const inheritColor = useMemo3(() => {
+      const { useEffect: useEffect4, useMemo: useMemo5 } = wp.element;
+      const inheritColor = useMemo5(() => {
         return color === "0" || context["catpow/color"] === color;
       }, [color, context["catpow/color"]]);
-      useEffect2(() => {
+      useEffect4(() => {
         if (inheritColor && context["catpow/color"] !== "0") {
           setAttributes({ color: context["catpow/color"] });
         }
         setAttributes({ inheritColor: color === context["catpow/color"] });
       }, [context["catpow/color"]]);
-      useEffect2(() => {
+      useEffect4(() => {
         const atts = {
           classes: classes.split(" ").filter((str) => !CP.colorToneClassPattern.test(str)).concat(CP.colorToneValueToClasses(color)).join(" ")
         };
@@ -1170,10 +1199,10 @@
     },
     /*id reflection*/
     manageStyleData: (props, csss) => {
-      const { attributes, className, setAttributes } = props;
+      const { attributes, className: className2, setAttributes } = props;
       const { anchor, prevAnchor, styleDatas } = attributes;
-      const { useEffect: useEffect2 } = wp.element;
-      useEffect2(() => {
+      const { useEffect: useEffect4 } = wp.element;
+      useEffect4(() => {
         if (!anchor) {
           setAttributes({ anchor: "s" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
         }
@@ -1185,7 +1214,7 @@
           setAttributes({ styleDatas: styleDatas2 });
         }
       }, []);
-      useEffect2(() => {
+      useEffect4(() => {
         if (anchor && anchor.length > 2) {
           if (document.querySelectorAll("#" + anchor).length > 1) {
             setAttributes({ anchor: "s" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
@@ -1319,7 +1348,7 @@
       const { isActive, value, onChange, activeAttributes, contentRef } = props;
       const { BlockControls, RichTextToolbarButton } = wp.blockEditor;
       const { Popover, Card, CardBody, ToolbarGroup } = wp.components;
-      const { useMemo: useMemo3, useCallback: useCallback2 } = wp.element;
+      const { useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
       const { applyFormat, toggleFormat } = wp.richText;
       const onToggle = () => {
         return onChange(
@@ -1329,7 +1358,7 @@
           })
         );
       };
-      const setAttributes = useCallback2(
+      const setAttributes = useCallback4(
         (attr) => {
           onChange(
             applyFormat(value, {
@@ -1366,7 +1395,7 @@
       const { isActive, value, onChange, activeAttributes, contentRef } = props;
       const { Popover, Card, CardBody, ToolbarGroup } = wp.components;
       const { BlockControls, RichTextShortcut, RichTextToolbarButton } = wp.blockEditor;
-      const { useMemo: useMemo3, useCallback: useCallback2 } = wp.element;
+      const { useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
       const { applyFormat, toggleFormat } = wp.richText;
       const onToggle = () => {
         return onChange(
@@ -1376,7 +1405,7 @@
           })
         );
       };
-      const setAttributes = useCallback2(
+      const setAttributes = useCallback4(
         (attr) => {
           onChange(
             applyFormat(value, {
@@ -1401,7 +1430,7 @@
     edit(props) {
       const { isActive, value, onChange, activeAttributes, contentRef } = props;
       const { Popover, Card, CardBody, ToolbarGroup } = wp.components;
-      const { useMemo: useMemo3, useCallback: useCallback2 } = wp.element;
+      const { useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
       const { BlockControls, RichTextToolbarButton } = wp.blockEditor;
       const { applyFormat, toggleFormat } = wp.richText;
       const onToggle = () => {
@@ -1412,7 +1441,7 @@
           })
         );
       };
-      const setAttributes = useCallback2(
+      const setAttributes = useCallback4(
         (attr) => {
           onChange(
             applyFormat(value, {
@@ -1444,7 +1473,7 @@
       const { isActive, value, onChange, onFocus, activeAttributes, activeObject, contentRef } = props;
       const { Popover, BaseControle, TextControl, Card, CardBody, ToolbarGroup } = wp.components;
       const { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
-      const { useState: useState2, useMemo: useMemo3, useCallback: useCallback2 } = wp.element;
+      const { useState: useState4, useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
       const { removeFormat, applyFormat, toggleFormat, insert, create, slice } = wp.richText;
       const onToggle = () => {
         return onChange(
@@ -1454,7 +1483,7 @@
           })
         );
       };
-      const setAttributes = useCallback2(
+      const setAttributes = useCallback4(
         (attr) => {
           onChange(
             applyFormat(value, {
@@ -1497,7 +1526,7 @@
       const { isActive, value, onChange, onFocus, activeAttributes, activeObject, contentRef } = props;
       const { Popover, BaseControl, TextControl, RangeControl, Card, CardBody, ToolbarGroup } = wp.components;
       const { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
-      const { useState: useState2, useMemo: useMemo3, useCallback: useCallback2, useReducer, useEffect: useEffect2 } = wp.element;
+      const { useState: useState4, useMemo: useMemo5, useCallback: useCallback4, useReducer: useReducer3, useEffect: useEffect4 } = wp.element;
       const { removeFormat, applyFormat, toggleFormat, insert, create, slice } = wp.richText;
       const onToggle = () => {
         return onChange(
@@ -1507,7 +1536,7 @@
           })
         );
       };
-      const setAttributes = useCallback2(
+      const setAttributes = useCallback4(
         (attr) => {
           onChange(
             applyFormat(value, {
@@ -1518,7 +1547,7 @@
         },
         [value, activeAttributes]
       );
-      const extractStateFromVars = useCallback2((vars) => {
+      const extractStateFromVars = useCallback4((vars) => {
         const state2 = {};
         if (!vars) {
           return state2;
@@ -1535,7 +1564,7 @@
         });
         return state2;
       }, []);
-      const extractVarsFromState = useCallback2((state2) => {
+      const extractVarsFromState = useCallback4((state2) => {
         let vars = "";
         const map = {
           color: "color:$;",
@@ -1550,14 +1579,14 @@
         });
         return vars;
       }, []);
-      const init = useCallback2((state2) => {
+      const init = useCallback4((state2) => {
         if (state2.vars) {
           const { vars } = state2;
           return { vars, ...extractStateFromVars(vars) };
         }
         return { color: "inherit", size: 1, weight: 400, vars: "font-size:1em;" };
       }, []);
-      const reducer = useCallback2((state2, action) => {
+      const reducer = useCallback4((state2, action) => {
         if (action.hasOwnProperty("vars")) {
           const { vars } = action;
           return { vars, ...extractStateFromVars(vars) };
@@ -1567,8 +1596,8 @@
           return newState;
         }
       }, []);
-      const [state, update] = useReducer(reducer, { vars: activeAttributes.vars }, init);
-      useEffect2(() => {
+      const [state, update] = useReducer3(reducer, { vars: activeAttributes.vars }, init);
+      useEffect4(() => {
         if (isActive) {
           onChange(
             applyFormat(value, {
@@ -1578,7 +1607,7 @@
           );
         }
       }, [state.vars]);
-      useEffect2(() => {
+      useEffect4(() => {
         update({ vars: activeAttributes.vars });
       }, [activeAttributes.vars]);
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, null, /* @__PURE__ */ wp.element.createElement(CardBody, { style: { width: "20rem" } }, /* @__PURE__ */ wp.element.createElement(TextControl, { label: "\u8272", onChange: (color) => update({ color }), value: state.color || "" }), /* @__PURE__ */ wp.element.createElement(TextControl, { label: "\u80CC\u666F\u8272", onChange: (bgcolor) => update({ bgcolor }), value: state.bgcolor || "" }), /* @__PURE__ */ wp.element.createElement(RangeControl, { label: "\u30B5\u30A4\u30BA", onChange: (size) => update({ size }), value: parseFloat(state.size || 1), min: 0.1, max: 10, step: 0.1 }), /* @__PURE__ */ wp.element.createElement(RangeControl, { label: "\u592A\u3055", onChange: (weight) => update({ weight }), value: parseFloat(state.weight || 400), min: 100, max: 1e3, step: 100 })))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { controls: [{ icon: "admin-generic", onClick: onToggle, isActive }] })), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon: "admin-generic", title: "custom", onClick: onToggle, isActive }));
@@ -1598,17 +1627,17 @@
   // ../blocks/_init/init/plugins.jsx
   wp.plugins.registerPlugin("catpow-sidebar", {
     render: (props) => {
-      const { useState: useState2, useMemo: useMemo3, useCallback: useCallback2 } = wp.element;
+      const { useState: useState4, useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
       const { PluginSidebarMoreMenuItem, PluginSidebar } = wp.editPost;
       const { PanelBody } = wp.components;
-      const [structure, setStructure] = useState2(false);
+      const [structure, setStructure] = useState4(false);
       const { DataStructure, DataStructureItem } = CP;
       if (!structure) {
         wp.apiFetch({ path: "/cp/v1/config/structure" }).then((structure2) => {
           setStructure(structure2);
         });
       }
-      const RenderMeta = useCallback2(
+      const RenderMeta = useCallback4(
         ({ meta }) => {
           return /* @__PURE__ */ wp.element.createElement(DataStructure, null, meta.map((item) => {
             if (item.value) {
@@ -1619,7 +1648,7 @@
         },
         [props]
       );
-      const RenderMetaValue = useCallback2(
+      const RenderMetaValue = useCallback4(
         ({ value }) => {
           if (Array.isArray(value)) {
             return value.map((val) => /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: val }));
@@ -1728,16 +1757,16 @@
   // ../blocks/_init/init/BoundingBox.jsx
   CP.BoundingBox = (props) => {
     const { targets, onDeselect, onDuplicate, onDelete, onChange } = props;
-    const { useState: useState2, useCallback: useCallback2, useMemo: useMemo3, useEffect: useEffect2, useRef: useRef2 } = wp.element;
-    const classes = useMemo3(() => bem("cp-boundingbox"), []);
-    const ref = useRef2();
-    const [style, setStyle] = useState2({});
-    const [action, setAction] = useState2(false);
-    const container = useMemo3(
+    const { useState: useState4, useCallback: useCallback4, useMemo: useMemo5, useEffect: useEffect4, useRef: useRef4 } = wp.element;
+    const classes = useMemo5(() => bem("cp-boundingbox"), []);
+    const ref = useRef4();
+    const [style, setStyle] = useState4({});
+    const [action, setAction] = useState4(false);
+    const container = useMemo5(
       () => props.container || document,
       [props.container]
     );
-    const tracePosition = useCallback2(
+    const tracePosition = useCallback4(
       (targets2) => {
         const cBnd = container.getBoundingClientRect();
         const bnd = targets2.length === 1 ? targets2[0].getBoundingClientRect() : targets2.reduce((bnd2, target) => {
@@ -1762,7 +1791,7 @@
       },
       [container]
     );
-    const getRelBnd = useCallback2(
+    const getRelBnd = useCallback4(
       (el) => {
         const bnd1 = container.getBoundingClientRect();
         const bnd2 = el.getBoundingClientRect();
@@ -1776,12 +1805,12 @@
       },
       [container]
     );
-    const observer = useMemo3(() => {
+    const observer = useMemo5(() => {
       return new MutationObserver((mutations) => {
         tracePosition(targets);
       });
     }, [tracePosition, targets]);
-    useEffect2(() => {
+    useEffect4(() => {
       if (!targets.length) {
         return;
       }
@@ -1794,7 +1823,7 @@
       });
       return () => observer.disconnect();
     }, [targets, observer]);
-    useEffect2(() => {
+    useEffect4(() => {
       if (!targets.length) {
         return;
       }
@@ -1803,7 +1832,7 @@
       window.addEventListener("resize", cb);
       return () => window.removeEventListener("resize", cb);
     }, [targets, props.viewMode]);
-    useEffect2(() => {
+    useEffect4(() => {
       if (!onDeselect) {
         return;
       }
@@ -1819,7 +1848,7 @@
       container.addEventListener("click", cb);
       return () => container.removeEventListener("click", cb);
     }, [targets, container, onDeselect]);
-    useEffect2(() => {
+    useEffect4(() => {
       if (!onDelete) {
         return;
       }
@@ -1834,7 +1863,7 @@
       document.addEventListener("keydown", cb);
       return () => document.removeEventListener("keydown", cb);
     }, [targets, onDelete]);
-    const controls = useMemo3(() => {
+    const controls = useMemo5(() => {
       const controls2 = [];
       ["top", "middle", "bottom"].forEach((v, vi) => {
         ["left", "center", "right"].forEach((h, hi) => {
@@ -1854,7 +1883,7 @@
       });
       return controls2;
     }, []);
-    const onMouseDown = useCallback2(
+    const onMouseDown = useCallback4(
       (e) => {
         const control = e.target.closest("[data-control-action]");
         if (!control) {
@@ -1890,7 +1919,7 @@
       },
       [ref, targets, onDuplicate]
     );
-    const onMouseMove = useCallback2(
+    const onMouseMove = useCallback4(
       (e) => {
         if (!action) {
           return;
@@ -1919,7 +1948,7 @@
       },
       [action]
     );
-    const onMouseUp = useCallback2(
+    const onMouseUp = useCallback4(
       (e) => {
         if (onChange) {
           onChange(action.targets);
@@ -1934,7 +1963,7 @@
       },
       [action, onChange]
     );
-    const onDoubleClick = useCallback2(
+    const onDoubleClick = useCallback4(
       (e) => {
         targets.forEach((target) => {
           target.style.height = "auto";
@@ -1972,10 +2001,50 @@
     );
   };
 
-  // react-global:react
-  var react_default = window.wp.element;
+  // modules/src/component/Animation/Animation.jsx
+  init_react();
+
+  // modules/src/component/Animation/MosaicWave.jsx
+  init_react();
+
+  // modules/src/component/Input/SelectPosition.jsx
+  init_react();
+
+  // modules/src/component/Nav/Nav.jsx
+  init_react();
+
+  // modules/src/component/Nav/Menu.jsx
+  init_react();
+
+  // modules/src/component/Nav/MenuItem.jsx
+  init_react();
+
+  // modules/src/component/Nav/MainMenu.jsx
+  init_react();
+
+  // modules/src/component/Nav/SubMenu.jsx
+  init_react();
+
+  // modules/src/component/Nav/SubMenuContents.jsx
+  init_react();
+
+  // modules/src/component/SVG/ComputeLine.jsx
+  init_react();
+
+  // modules/src/component/SVG/Honycomb.jsx
+  init_react();
+
+  // modules/src/component/SVG/Flux.jsx
+  init_react();
+
+  // modules/src/component/SVG/Star.jsx
+  init_react();
+
+  // modules/src/component/SVG/SVG.jsx
+  init_react();
 
   // modules/src/component/Bem.jsx
+  init_react();
   var applyBem = (component, { ...ctx }) => {
     if (Array.isArray(component)) {
       component.forEach((child) => {
@@ -1987,29 +2056,29 @@
       return;
     }
     const {
-      props: { className, children }
+      props: { className: className2, children }
     } = component;
-    if (className) {
-      component.props.className = className.split(" ").map((className2) => {
-        if (className2.slice(0, 2) === "--") {
-          return ctx.element + className2;
+    if (className2) {
+      component.props.className = className2.split(" ").map((className3) => {
+        if (className3.slice(0, 2) === "--") {
+          return ctx.element + className3;
         }
-        if (className2[0] === "-") {
-          return ctx.block = ctx.element = ctx.block + className2;
+        if (className3[0] === "-") {
+          return ctx.block = ctx.element = ctx.block + className3;
         }
-        if (className2[0] === "_") {
-          return ctx.element = ctx.element + (ctx.element === ctx.block ? "__" : "-") + className2.slice(1);
+        if (className3[0] === "_") {
+          return ctx.element = ctx.element + (ctx.element === ctx.block ? "__" : "-") + className3.slice(1);
         }
-        if (className2.slice(-1) === "-") {
-          return ctx.block = ctx.element = ctx.prefix + "-" + className2.slice(0, -1);
+        if (className3.slice(-1) === "-") {
+          return ctx.block = ctx.element = ctx.prefix + "-" + className3.slice(0, -1);
         }
-        if (className2.slice(-1) === "_") {
-          return ctx.element = ctx.block + "__" + className2.slice(0, -1);
+        if (className3.slice(-1) === "_") {
+          return ctx.element = ctx.block + "__" + className3.slice(0, -1);
         }
-        return className2;
+        return className3;
       }).join(" ");
-      if (component.props.className === className) {
-        const matches = className.match(/\b(([a-z]+)\-[a-z]+(\-[a-z]+)*)(__[a-z]+(\-[a-z]+)*)?\b/);
+      if (component.props.className === className2) {
+        const matches = className2.match(/\b(([a-z]+)\-[a-z]+(\-[a-z]+)*)(__[a-z]+(\-[a-z]+)*)?\b/);
         if (!matches) {
           return;
         }
@@ -2039,17 +2108,43 @@
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, children);
   };
 
+  // modules/src/component/Cloak.jsx
+  init_react();
+
+  // modules/src/component/ElasticBox.jsx
+  init_react();
+
+  // modules/src/component/Parallax.jsx
+  init_react();
+
+  // modules/src/component/Portal.jsx
+  init_react();
+
   // react-global:react-dom
   var react_dom_default = window.wp.element;
+  var useState2 = wp.element.useState;
+  var useEffect2 = wp.element.useEffect;
+  var useLayoutEffect2 = wp.element.useLayoutEffect;
+  var useRef2 = wp.element.useRef;
+  var forwardRef2 = wp.element.forwardRef;
+  var useMemo3 = wp.element.useMemo;
+  var useCallback2 = wp.element.useCallback;
+  var createContext2 = wp.element.createContext;
+  var useContext2 = wp.element.useContext;
+  var useReducer2 = wp.element.useReducer;
+  var createElement2 = wp.element.createElement;
+  var cloneElement2 = wp.element.cloneElement;
+  var isValidElement2 = wp.element.isValidElement;
+  var Fragment2 = wp.element.Fragment;
 
   // modules/src/component/Portal.jsx
   var Portal = (props) => {
     const { children, trace } = props;
-    const { render, useState: useState2, useMemo: useMemo3, useCallback: useCallback2, useEffect: useEffect2, useRef: useRef2 } = react_default;
+    const { render, useState: useState4, useMemo: useMemo5, useCallback: useCallback4, useEffect: useEffect4, useRef: useRef4 } = react_default;
     const { createPortal } = react_dom_default;
-    const ref = useRef2({ contents: false, setContents: () => {
+    const ref = useRef4({ contents: false, setContents: () => {
     } });
-    const el = useMemo3(() => {
+    const el = useMemo5(() => {
       if (props.id) {
         const exEl = document.getElementById(props.id);
         if (exEl) {
@@ -2066,7 +2161,7 @@
       document.body.appendChild(el2);
       return el2;
     }, []);
-    useEffect2(() => {
+    useEffect4(() => {
       const { trace: trace2 } = props;
       if (!trace2) {
         return;
@@ -2086,51 +2181,89 @@
     return createPortal(children, el);
   };
 
+  // modules/src/component/PortalWindow.jsx
+  init_react();
+
+  // modules/src/component/RawNode.jsx
+  init_react();
+
+  // modules/src/component/ScrollSpy.jsx
+  init_react();
+
+  // modules/src/component/Slider.jsx
+  init_react();
+
+  // modules/src/component/TabPanel.jsx
+  init_react();
+
+  // modules/src/component/TextBuild.jsx
+  init_react();
+
+  // modules/src/component/Transition.jsx
+  init_react();
+
   // modules/src/hooks/useAgent.jsx
-  var { useMemo: useMemo2, useState, useCallback, useRef, useEffect, createContext, useContext } = react_default;
-  var AgentContext = createContext();
+  init_react();
+  var { useMemo: useMemo4, useState: useState3, useCallback: useCallback3, useRef: useRef3, useEffect: useEffect3, createContext: createContext3, useContext: useContext3 } = react_default;
+  var AgentContext = createContext3();
+
+  // modules/src/hooks/useBem.jsx
+  init_react();
+
+  // modules/src/hooks/useCache.jsx
+  init_react();
+
+  // modules/src/hooks/useQuery.jsx
+  init_react();
+
+  // modules/src/hooks/useTransition.jsx
+  init_react();
+
+  // modules/src/hooks/useLazyProvider.jsx
+  init_react();
+
+  // modules/src/hooks/useLazyComponent.jsx
+  init_react();
+
+  // modules/src/component/Loop.jsx
+  init_react();
 
   // ../blocks/_init/init/Bem.jsx
   CP.Bem = Bem;
 
   // ../blocks/_init/init/SelectBlendMode.jsx
+  var options = [
+    { value: "normal", label: "\u901A\u5E38" },
+    { value: "multiply", label: "\u4E57\u7B97" },
+    { value: "screen", label: "\u30B9\u30AF\u30EA\u30FC\u30F3" },
+    { value: "overlay", label: "\u30AA\u30FC\u30D0\u30FC\u30EC\u30A4" },
+    { value: "darken", label: "\u6BD4\u8F03\uFF08\u6697\uFF09" },
+    { value: "lighten", label: "\u6BD4\u8F03\uFF08\u660E\uFF09" },
+    { value: "color-dodge", label: "\u8986\u3044\u713C\u304D" },
+    { value: "color-burn", label: "\u713C\u304D\u8FBC\u307F" },
+    { value: "hard-light", label: "\u30CF\u30FC\u30C9\u30E9\u30A4\u30C8" },
+    { value: "soft-light", label: "\u30BD\u30D5\u30C8\u30E9\u30A4\u30C8" },
+    { value: "difference", label: "\u5DEE\u306E\u7D76\u5BFE\u5024" },
+    { value: "exclusion", label: "\u9664\u5916" },
+    { value: "hue", label: "\u8272\u76F8" },
+    { value: "saturation", label: "\u5F69\u5EA6" },
+    { value: "color", label: "\u30AB\u30E9\u30FC" },
+    { value: "luminosity", label: "\u660E\u5EA6" }
+  ];
   CP.SelectBlendMode = (props) => {
-    const { BlockControls } = wp.blockEditor;
     const { SelectControl } = wp.components;
-    const {
-      set,
-      attr,
-      options = [
-        { value: "normal", label: "\u901A\u5E38" },
-        { value: "multiply", label: "\u4E57\u7B97" },
-        { value: "screen", label: "\u30B9\u30AF\u30EA\u30FC\u30F3" },
-        { value: "overlay", label: "\u30AA\u30FC\u30D0\u30FC\u30EC\u30A4" },
-        { value: "darken", label: "\u6BD4\u8F03\uFF08\u6697\uFF09" },
-        { value: "lighten", label: "\u6BD4\u8F03\uFF08\u660E\uFF09" },
-        { value: "color-dodge", label: "\u8986\u3044\u713C\u304D" },
-        { value: "color-burn", label: "\u713C\u304D\u8FBC\u307F" },
-        { value: "hard-light", label: "\u30CF\u30FC\u30C9\u30E9\u30A4\u30C8" },
-        { value: "soft-light", label: "\u30BD\u30D5\u30C8\u30E9\u30A4\u30C8" },
-        { value: "difference", label: "\u5DEE\u306E\u7D76\u5BFE\u5024" },
-        { value: "exclusion", label: "\u9664\u5916" },
-        { value: "hue", label: "\u8272\u76F8" },
-        { value: "saturation", label: "\u5F69\u5EA6" },
-        { value: "color", label: "\u30AB\u30E9\u30FC" },
-        { value: "luminosity", label: "\u660E\u5EA6" }
-      ]
-    } = props;
     return /* @__PURE__ */ wp.element.createElement(SelectControl, { label: props.label, onChange: props.onChange, value: props.value, options });
   };
 
   // ../blocks/_init/init/SelectThemeColor.jsx
   CP.SelectThemeColor = (props) => {
     const { onChange } = props;
-    const { useCallback: useCallback2, useMemo: useMemo3, Fragment } = wp.element;
+    const { useCallback: useCallback4, useMemo: useMemo5, Fragment: Fragment3 } = wp.element;
     const { Icon } = wp.components;
     const classes = bem("cp-selectthemecolor");
-    const proxy = useMemo3(() => CP.colorClassProxy(props.selected), [props.selected]);
-    const data = useMemo3(() => CP.parseColorClass(proxy.h), [proxy.h]);
-    const ColorSelections = useCallback2(
+    const proxy = useMemo5(() => CP.colorClassProxy(props.selected), [props.selected]);
+    const data = useMemo5(() => CP.parseColorClass(proxy.h), [proxy.h]);
+    const ColorSelections = useCallback4(
       (props2) => {
         const { fixed = false, absolute = false, relative = false, active = false, proxy: proxy2 } = props2;
         const { h, s, l } = proxy2;
@@ -2159,21 +2292,21 @@
       },
       [onChange]
     );
-    const ToneSelections = useCallback2(
+    const ToneSelections = useCallback4(
       (props2) => {
         const { proxy: proxy2 } = props2;
         const { h, s, l } = proxy2;
         const hsl = { h, s, l };
-        return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.tones() }, ["s", "l"].map((r) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: r }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active: !!hsl[r] }) }, /* @__PURE__ */ wp.element.createElement(CP.ConfigIcon, { icon: { s: "contrast", l: "light" }[r] })), Array.from(Array(5), (v, index) => {
+        return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.tones() }, ["s", "l"].map((r2) => /* @__PURE__ */ wp.element.createElement(Fragment3, { key: r2 }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active: !!hsl[r2] }) }, /* @__PURE__ */ wp.element.createElement(CP.ConfigIcon, { icon: { s: "contrast", l: "light" }[r2] })), Array.from(Array(5), (v, index) => {
           const value = index - 2;
-          const toneClass = CP.generateToneClass({ [r]: true, value });
-          const active = toneClass === hsl[r];
+          const toneClass = CP.generateToneClass({ [r2]: true, value });
+          const active = toneClass === hsl[r2];
           return /* @__PURE__ */ wp.element.createElement(
             "li",
             {
-              className: classes.tones.item(h, r === "s" ? l : s, toneClass, { active }),
+              className: classes.tones.item(h, r2 === "s" ? l : s, toneClass, { active }),
               onClick: () => {
-                proxy2[r] = !active && toneClass;
+                proxy2[r2] = !active && toneClass;
                 onChange(proxy2);
               },
               key: toneClass
@@ -2189,11 +2322,11 @@
 
   // ../blocks/_init/init/SelectColors.jsx
   CP.SelectColors = (props) => {
-    const { useState: useState2, useRef: useRef2, useReducer, useCallback: useCallback2 } = wp.element;
+    const { useState: useState4, useRef: useRef4, useReducer: useReducer3, useCallback: useCallback4 } = wp.element;
     const { ColorPicker, ColorPalette, Popover } = wp.components;
     const { onChange } = props;
-    const [index, setIndex] = useState2(-1);
-    const init = useCallback2((colors2) => {
+    const [index, setIndex] = useState4(-1);
+    const init = useCallback4((colors2) => {
       const colorValues = colors2.map((color) => {
         if (typeof color === "string") {
           return color;
@@ -2213,20 +2346,20 @@
         return { name: color, color };
       });
     }, []);
-    const reducer = useCallback2((colors2, action) => {
+    const reducer = useCallback4((colors2, action) => {
       const { index: index2, color } = action;
       const newColors = [...colors2];
       newColors.splice(index2, 1, { name: color, color });
       return newColors;
     }, []);
-    const [colors, updateColors] = useReducer(reducer, props.colors, init);
-    const onChangeOfColorPalette = useCallback2(
+    const [colors, updateColors] = useReducer3(reducer, props.colors, init);
+    const onChangeOfColorPalette = useCallback4(
       (value) => {
         setIndex(colors.findIndex((color) => color.color == value));
       },
       [colors]
     );
-    const onChangeOfColorPicker = useCallback2(
+    const onChangeOfColorPicker = useCallback4(
       (value) => {
         updateColors({ index, color: value.hex });
         onChange(index, value);
@@ -2252,7 +2385,7 @@
 
   // ../blocks/_init/init/ResponsiveImage.jsx
   CP.ResponsiveImage = (props) => {
-    const { className = "cp-responsiveimage", attr, set, keys, index, subIndex, sizes, devices, device, isTemplate, ...otherProps } = props;
+    const { className: className2 = "cp-responsiveimage", attr, set, keys, index, subIndex, sizes, devices, device, isTemplate, ...otherProps } = props;
     let item, items2, subItems;
     item = attr || {};
     if (keys.items) {
@@ -2266,15 +2399,15 @@
     if (isTemplate && keys.code && item[keys.code]) {
       return item[keys.code];
     }
-    return /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item });
+    return /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className: className2, item });
   };
   var ResponsiveImageBody = (props) => {
-    const { className = "cp-responsiveimage", attr, set, keys, index, subIndex, devices, device, isTemplate, item, ...otherProps } = props;
+    const { className: className2 = "cp-responsiveimage", attr, set, keys, index, subIndex, devices, device, isTemplate, item, ...otherProps } = props;
     let { sizes } = props;
-    const primaryClassName = className.split(" ")[0];
+    const primaryClassName = className2.split(" ")[0];
     const type = item[keys.mime] ? item[keys.mime].split("/")[0] : "image";
     if (type == "audio") {
-      return /* @__PURE__ */ wp.element.createElement("audio", { className: className + " is-audio", src: item[keys.src], "data-mime": item[keys.mime], ...otherProps });
+      return /* @__PURE__ */ wp.element.createElement("audio", { className: className2 + " is-audio", src: item[keys.src], "data-mime": item[keys.mime], ...otherProps });
     }
     if (item[keys.srcset] && !sizes) {
       if (device) {
@@ -2296,28 +2429,28 @@
           const source = item[keys.sources] && item[keys.sources].find((source2) => source2.device === device) || {
             srcset: wpinfo.theme_url + "/images/dummy.mp4"
           };
-          return /* @__PURE__ */ wp.element.createElement("video", { className: className + " is-video", src: source.srcset, ...videoAtts, ...otherProps });
+          return /* @__PURE__ */ wp.element.createElement("video", { className: className2 + " is-video", src: source.srcset, ...videoAtts, ...otherProps });
         }
-        return /* @__PURE__ */ wp.element.createElement("video", { className: className + " is-picture", ...videoAtts, ...otherProps }, item[keys.sources] && item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { src: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("source", { src: item[keys.src] }));
+        return /* @__PURE__ */ wp.element.createElement("video", { className: className2 + " is-picture", ...videoAtts, ...otherProps }, item[keys.sources] && item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { src: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("source", { src: item[keys.src] }));
       }
-      return /* @__PURE__ */ wp.element.createElement("video", { className: className + " is-video", src: item[keys.src], ...videoAtts, ...otherProps });
+      return /* @__PURE__ */ wp.element.createElement("video", { className: className2 + " is-video", src: item[keys.src], ...videoAtts, ...otherProps });
     }
-    var src = CP.imageSrcOrDummy(item[keys.src]);
+    var src = CP.imageSrcOrDummy(keys.src ? item[keys.src] : item[keys.url].slice(4, -1));
     if (keys.sources) {
       if (device) {
         const source = item[keys.sources] && item[keys.sources].find((source2) => source2.device === device) || {
           srcset: wpinfo.theme_url + "/images/dummy.jpg"
         };
-        return /* @__PURE__ */ wp.element.createElement("picture", { className: className + " is-picture", ...otherProps }, /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src: source.srcset, alt: item[keys.alt] }));
+        return /* @__PURE__ */ wp.element.createElement("picture", { className: className2 + " is-picture", ...otherProps }, /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src: source.srcset, alt: item[keys.alt] }));
       }
-      return /* @__PURE__ */ wp.element.createElement("picture", { className: className + " is-picture", ...otherProps }, item[keys.sources] && item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src, alt: item[keys.alt] }));
+      return /* @__PURE__ */ wp.element.createElement("picture", { className: className2 + " is-picture", ...otherProps }, item[keys.sources] && item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src, alt: item[keys.alt] }));
     }
-    return /* @__PURE__ */ wp.element.createElement("img", { className: className + " is-img", src, alt: item[keys.alt], srcSet: item[keys.srcset], sizes, "data-mime": item[keys.mime], ...otherProps });
+    return /* @__PURE__ */ wp.element.createElement("img", { className: className2 + " is-img", src, alt: item[keys.alt], srcSet: item[keys.srcset], sizes, "data-mime": item[keys.mime], ...otherProps });
   };
 
   // ../blocks/_init/init/SelectResponsiveImage.jsx
   CP.SelectResponsiveImage = (props) => {
-    const { className = "cp-selectresponsiveimage", attr, set, keys = {}, index = 0, subIndex = 0, size, devices, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
+    const { className: className2 = "cp-selectresponsiveimage", attr, set, keys = {}, index = 0, subIndex = 0, size, devices, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
     let onClick, item, items2, subItems;
     item = attr || {};
     if (keys.items) {
@@ -2382,7 +2515,7 @@
     if (isTemplate && keys.code && item[keys.code]) {
       return /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: item[keys.code] });
     }
-    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, showSelectPictureSources ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item, keys }), /* @__PURE__ */ wp.element.createElement("div", { className: "cp-selectresponsiveimage__controls" }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { attr, set, keys, index, subIndex, size, devices }))) : /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item, keys, onClick }));
+    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, showSelectPictureSources ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className: className2, item, keys }), /* @__PURE__ */ wp.element.createElement("div", { className: "cp-selectresponsiveimage__controls" }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { attr, set, keys, index, subIndex, size, devices }))) : /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className: className2, item, keys, onClick }));
   };
 
   // ../blocks/_init/init/SelectPictureSources.jsx
@@ -2399,17 +2532,17 @@
       },
       compact = false
     } = props;
-    const { useMemo: useMemo3 } = wp.element;
-    const classes = useMemo3(() => bem("cp-selectpicturesources"), []);
+    const { useMemo: useMemo5 } = wp.element;
+    const classes = useMemo5(() => bem("cp-selectpicturesources"), []);
     return /* @__PURE__ */ wp.element.createElement("table", { className: classes({ "is-compact": compact }) }, /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.tbody() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), colSpan: devices.length }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props, keys, devices }))), /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, devices.map((device) => /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: device }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.tbody.tr.td.label() }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props, keys, devices, device }))))));
   };
 
   // ../blocks/_init/init/SelectPreparedImage.jsx
-  CP.SelectPreparedImage = ({ className, name, value, color = 0, onChange, ...otherProps }) => {
+  CP.SelectPreparedImage = ({ className: className2, name, value, color = 0, onChange, ...otherProps }) => {
     let onClick;
-    const { useEffect: useEffect2, useReducer } = wp.element;
+    const { useEffect: useEffect4, useReducer: useReducer3 } = wp.element;
     const { getURLparam, setURLparam, setURLparams, removeURLparam } = Catpow.util;
-    const [state, dispatch] = useReducer(
+    const [state, dispatch] = useReducer3(
       (state2, action) => {
         const newState = { ...state2 };
         switch (action.type) {
@@ -2437,7 +2570,7 @@
       { page: 0, images: null, image: null }
     );
     CP.cache.PreparedImage = CP.cache.PreparedImage || {};
-    useEffect2(() => {
+    useEffect4(() => {
       if (state.images === null) {
         if (CP.cache.PreparedImage[name]) {
           dispatch({ type: "update", images: CP.cache.PreparedImage[name] });
@@ -2449,7 +2582,7 @@
         }
       }
     }, [state.images]);
-    useEffect2(() => {
+    useEffect4(() => {
       onChange({
         ...state.image,
         url: setURLparams(state.image ? state.image.url : value, {
@@ -2461,14 +2594,14 @@
     if (state.images === null) {
       return false;
     }
-    return /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectpreparedimage " + name + " " + className, ...otherProps }, state.images.map((image) => {
+    return /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectpreparedimage " + name + " " + className2, ...otherProps }, state.images.map((image) => {
       const url = setURLparams(image.url, { c: color, theme: wpinfo.theme });
       return /* @__PURE__ */ wp.element.createElement("li", { className: "item " + (value == url ? "active" : ""), key: image.url }, /* @__PURE__ */ wp.element.createElement("img", { src: url, alt: image.alt, onClick: () => dispatch({ type: "update", image }) }));
     }));
   };
 
   // ../blocks/_init/init/SelectPreparedImageSet.jsx
-  CP.SelectPreparedImageSet = ({ className, name, value, color = 0, onChange, ...otherProps }) => {
+  CP.SelectPreparedImageSet = ({ className: className2, name, value, color = 0, onChange, ...otherProps }) => {
     const { getURLparam, setURLparam, setURLparams, removeURLparam } = Catpow.util;
     const [state, dispatch] = wp.element.useReducer(
       (state2, action) => {
@@ -2523,7 +2656,7 @@
       }
       return false;
     }
-    return /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectpreparedimageset " + name + " " + className, ...otherProps }, Object.keys(state.imagesets).map((key) => {
+    return /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectpreparedimageset " + name + " " + className2, ...otherProps }, Object.keys(state.imagesets).map((key) => {
       const imageset = state.imagesets[key];
       const url = setURLparams(imageset[0].url, {
         c: color,
@@ -2566,17 +2699,17 @@
       );
     },
     Output: (props) => {
-      const { className = "icon", item } = props;
-      return /* @__PURE__ */ wp.element.createElement("span", { className }, /* @__PURE__ */ wp.element.createElement("img", { src: item.iconSrc, alt: item.iconAlt }));
+      const { className: className2 = "icon", item } = props;
+      return /* @__PURE__ */ wp.element.createElement("span", { className: className2 }, /* @__PURE__ */ wp.element.createElement("img", { src: item.iconSrc, alt: item.iconAlt }));
     }
   };
 
   // ../blocks/_init/init/DataInputTable.jsx
   CP.DataInputTable = (props) => {
     const { cols, value, onChange } = props;
-    const { useCallback: useCallback2, useMemo: useMemo3 } = wp.element;
+    const { useCallback: useCallback4, useMemo: useMemo5 } = wp.element;
     const el = wp.element.createElement;
-    const Row = useCallback2((props2) => {
+    const Row = useCallback4((props2) => {
       const { cols: cols2, value: value2, onChange: onChange2 } = props2;
       return /* @__PURE__ */ wp.element.createElement("tr", { className: "cp-datainputtable__body__row" }, Object.keys(cols2).map((c) => /* @__PURE__ */ wp.element.createElement("td", { className: "cp-datainputtable__body__row__cell", key: c }, /* @__PURE__ */ wp.element.createElement(
         CP.DynamicInput,
@@ -2590,14 +2723,14 @@
         }
       ))));
     }, []);
-    const defaultRowValues = useMemo3(() => {
+    const defaultRowValues = useMemo5(() => {
       const rowValue = {};
       Object.keys(cols).forEach((c) => {
         rowValue[c] = cols[c].default || "";
       });
       return [rowValue];
     }, [cols]);
-    const colsWithoutLabel = useMemo3(() => {
+    const colsWithoutLabel = useMemo5(() => {
       const colsWithoutLabel2 = {};
       Object.keys(cols).forEach((c) => {
         const { label, ...otherParams } = cols[c];
@@ -2641,11 +2774,11 @@
 
   // ../blocks/_init/init/DynamicInput.jsx
   CP.DynamicInput = (props) => {
-    const { useMemo: useMemo3 } = wp.element;
+    const { useMemo: useMemo5 } = wp.element;
     const { RadioControl, RangeControl, SelectControl, TextControl, TextareaControl, ToggleControl } = wp.components;
     const { param, value, onChange } = props;
     const type = param.type || param.input || "text";
-    const { options } = useMemo3(() => {
+    const { options: options3 } = useMemo5(() => {
       if (!param.options && !param.values) {
         return {};
       }
@@ -2653,16 +2786,16 @@
     }, [param.options, param.values]);
     switch (type) {
       case "radio": {
-        return /* @__PURE__ */ wp.element.createElement(RadioControl, { label: param.label || null, onChange, selected: value, options });
+        return /* @__PURE__ */ wp.element.createElement(RadioControl, { label: param.label || null, onChange, selected: value, options: options3 });
       }
       case "select": {
-        return /* @__PURE__ */ wp.element.createElement(SelectControl, { label: param.label || null, onChange, value, options });
+        return /* @__PURE__ */ wp.element.createElement(SelectControl, { label: param.label || null, onChange, value, options: options3 });
       }
       case "buttons": {
-        return /* @__PURE__ */ wp.element.createElement(CP.SelectButtons, { label: param.label || null, onChange, selected: value, options });
+        return /* @__PURE__ */ wp.element.createElement(CP.SelectButtons, { label: param.label || null, onChange, selected: value, options: options3 });
       }
       case "gridbuttons": {
-        return /* @__PURE__ */ wp.element.createElement(CP.SelectGridButtons, { label: param.label || null, onChange, selected: value, options });
+        return /* @__PURE__ */ wp.element.createElement(CP.SelectGridButtons, { label: param.label || null, onChange, selected: value, options: options3 });
       }
       case "range": {
         if (!param.coef) {
@@ -2687,10 +2820,10 @@
 
   // ../blocks/_init/init/DataSetInput.jsx
   CP.DataSetInput = (props) => {
-    const { useMemo: useMemo3, useCallback: useCallback2 } = wp.element;
+    const { useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
     const { param, value: dataSet = [], onChange } = props;
     const classes = bem("cp-datasetinput");
-    const appendData = useCallback2(() => {
+    const appendData = useCallback4(() => {
       const data = {};
       Object.keys(param.items).forEach((key) => {
         const item = param.items[key];
@@ -2806,14 +2939,14 @@
 
   // ../blocks/_init/init/ItemControl.jsx
   CP.ItemControl = (props) => {
-    const { className = "", tag: Tag = "div", controls, float = true, children } = props;
-    const { useState: useState2 } = wp.element;
+    const { className: className2 = "", tag: Tag = "div", controls, float = true, children } = props;
+    const { useState: useState4 } = wp.element;
     const classes = bem("cp-itemcontrol");
-    const [open, setOpen] = useState2(false);
+    const [open, setOpen] = useState4(false);
     return /* @__PURE__ */ wp.element.createElement(
       Tag,
       {
-        className: classes(className, {
+        className: classes(className2, {
           "is-open": open,
           "is-position-absolute": float
         })
@@ -2892,6 +3025,42 @@
           min: 0,
           max: 1,
           step: 0.1
+        }
+      ]
+    },
+    backgroundPattern: {
+      name: "backgroundPattern",
+      label: __2("\u80CC\u666F\u30D1\u30BF\u30FC\u30F3", "catpow"),
+      values: "has-background-pattern",
+      sub: [
+        {
+          name: "image",
+          label: __2("\u753B\u50CF", "catpow"),
+          vars: "vars",
+          key: "--cp-background-pattern-image",
+          input: "image"
+        },
+        {
+          name: "repeat",
+          label: __2("\u7E70\u308A\u8FD4\u3057", "catpow"),
+          vars: "vars",
+          key: "--cp-background-pattern-repeat",
+          input: "buttons",
+          values: { repeat: "\u4E21\u65B9", "repeat-x": "\u6A2A", "repeat-y": "\u7E26", "no-repeat": "\u306A\u3057" }
+        },
+        {
+          name: "position",
+          label: __2("\u4F4D\u7F6E", "catpow"),
+          vars: "vars",
+          key: "--cp-background-pattern-position",
+          input: "position"
+        },
+        {
+          name: "size",
+          label: __2("\u30B5\u30A4\u30BA", "catpow"),
+          vars: "vars",
+          key: "--cp-background-pattern-size",
+          input: "size"
         }
       ]
     },
@@ -3227,12 +3396,12 @@
   // ../blocks/_init/init/SelectClassPanel.jsx
   CP.SelectClassPanelContext = wp.element.createContext({});
   CP.SelectClassPanel = (props) => {
-    const { Fragment, useMemo: useMemo3, useCallback: useCallback2, useContext: useContext2, createElement: el } = wp.element;
+    const { Fragment: Fragment3, useMemo: useMemo5, useCallback: useCallback4, useContext: useContext4, createElement: el } = wp.element;
     const { __: __3 } = wp.i18n;
     const { PanelBody, CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
     const { classKey = "classes", items: items2, index, subItemsKey, subIndex, set, attr, triggerClasses } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
     let { itemsKey = items2 ? "items" : null, itemClasses } = props;
-    const selectiveClasses = useMemo3(() => {
+    const selectiveClasses = useMemo5(() => {
       if (!triggerClasses || !triggerClasses.item) {
         if (Array.isArray(props.selectiveClasses)) {
           return props.selectiveClasses;
@@ -3243,7 +3412,7 @@
       return triggerClasses.item[Object.keys(triggerClasses.item).find((value) => blockStates[value])];
     }, [props.selectiveClasses, triggerClasses && attr.classes]);
     const { styleDatas } = attr;
-    const item = useMemo3(() => {
+    const item = useMemo5(() => {
       if (!items2) {
         return attr;
       }
@@ -3255,8 +3424,8 @@
       }
       return items2[index];
     }, [attr, items2, index, subItemsKey, subIndex]);
-    const states = useMemo3(() => CP.wordsToFlags(item[classKey]), [item[classKey]]);
-    const save = useCallback2(
+    const states = useMemo5(() => CP.wordsToFlags(item[classKey]), [item[classKey]]);
+    const save = useCallback4(
       (data) => {
         if (items2) {
           Object.assign(item, data);
@@ -3267,17 +3436,17 @@
       },
       [set, index, items2, itemsKey]
     );
-    const saveClasses = useCallback2(() => {
+    const saveClasses = useCallback4(() => {
       save({ [classKey]: CP.flagsToWords(states) });
     }, [save, classKey, states]);
-    const saveCss = useCallback2(
+    const saveCss = useCallback4(
       (cssKey) => {
         set({ [cssKey]: CP.createStyleCodeWithMediaQuery(styleDatas[cssKey]) });
       },
       [set, styleDatas]
     );
-    const SelectClass = useCallback2(({ prm }) => {
-      const { props: props2, item: item2, states: states2, save: save2, saveClasses: saveClasses2, saveCss: saveCss2 } = useContext2(CP.SelectClassPanelContext);
+    const SelectClass = useCallback4(({ prm }) => {
+      const { props: props2, item: item2, states: states2, save: save2, saveClasses: saveClasses2, saveCss: saveCss2 } = useContext4(CP.SelectClassPanelContext);
       if (typeof prm === "string") {
         if (selectiveClassesPresets.hasOwnProperty(prm)) {
           prm = selectiveClassesPresets[prm];
@@ -3287,7 +3456,7 @@
         if (prm.cond === false) {
           return false;
         }
-        if (Array.isArray(prm.cond) && prm.cond.some((className) => !states2[className])) {
+        if (Array.isArray(prm.cond) && prm.cond.some((className2) => !states2[className2])) {
           return false;
         }
         if (typeof prm.cond === "string" && !states2[prm.cond]) {
@@ -3481,7 +3650,7 @@
             }
           }
         } else if (_.isObject(prm.values)) {
-          let { options: options2, values: values2 } = CP.parseSelections(prm.values);
+          let { options: options4, values: values2 } = CP.parseSelections(prm.values);
           rtn.push(
             /* @__PURE__ */ wp.element.createElement(
               SelectControl,
@@ -3491,7 +3660,7 @@
                 onChange: (val) => {
                   CP.setJsonValue(props2, prm.json, prm.key, val);
                 },
-                options: options2
+                options: options4
               }
             )
           );
@@ -3725,6 +3894,66 @@
               );
               break;
             }
+            case "image": {
+              rtn.push(
+                /* @__PURE__ */ wp.element.createElement(
+                  CP.SelectResponsiveImage,
+                  {
+                    attr: props2.attr[prm.vars],
+                    set: (data) => {
+                      save2({
+                        [prm.vars]: {
+                          ...props2.attr[prm.vars],
+                          ...data
+                        }
+                      });
+                    },
+                    keys: { url: prm.key }
+                  }
+                )
+              );
+              break;
+            }
+            case "position": {
+              rtn.push(
+                /* @__PURE__ */ wp.element.createElement(
+                  CP.SelectPosition,
+                  {
+                    label: prm.label,
+                    value: props2.attr[prm.vars][prm.key],
+                    onChange: (val) => {
+                      save2({
+                        [prm.vars]: {
+                          ...props2.attr[prm.vars],
+                          [prm.key]: `${val}`
+                        }
+                      });
+                    }
+                  }
+                )
+              );
+              break;
+            }
+            case "size": {
+              rtn.push(
+                /* @__PURE__ */ wp.element.createElement(
+                  CP.SelectSize,
+                  {
+                    label: prm.label,
+                    value: props2.attr[prm.vars][prm.key],
+                    onChange: (val) => {
+                      save2({
+                        [prm.vars]: {
+                          ...props2.attr[prm.vars],
+                          [prm.key]: `${val}`
+                        }
+                      });
+                    }
+                  }
+                )
+              );
+              break;
+            }
           }
         } else {
           rtn.push(
@@ -3779,7 +4008,7 @@
         } else if (prm === "cond") {
           rtn.push(/* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __3("\u8868\u793A\u6761\u4EF6", "catpow"), value: item2["cond"], onChange: (cond) => save2({ cond }) }));
         } else if (prm === "event") {
-          const EventInputs = useMemo3(() => wp.hooks.applyFilters("catpow.EventInputs", [], { item: item2, save: save2 }), [item2, save2]);
+          const EventInputs = useMemo5(() => wp.hooks.applyFilters("catpow.EventInputs", [], { item: item2, save: save2 }), [item2, save2]);
           rtn.push(...EventInputs);
         } else if (prm.input) {
           switch (prm.input) {
@@ -3927,7 +4156,7 @@
         } else if (_.isObject(prm.values)) {
           let subClasses = CP.getSubClasses(prm);
           let bindClasses = CP.getBindClasses(prm);
-          var { options, values } = CP.parseSelections(prm.values);
+          var { options: options3, values } = CP.parseSelections(prm.values);
           const currentClass = values.find((value) => states2[value]);
           let onChangeCB = (newClass) => {
             if (currentClass) {
@@ -3963,26 +4192,26 @@
           };
           switch (prm.type) {
             case "radio": {
-              rtn.push(/* @__PURE__ */ wp.element.createElement(RadioControl, { label: prm.label, onChange: onChangeCB, selected: currentClass, options }));
+              rtn.push(/* @__PURE__ */ wp.element.createElement(RadioControl, { label: prm.label, onChange: onChangeCB, selected: currentClass, options: options3 }));
               break;
             }
             case "buttons": {
-              rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectButtons, { label: prm.label, onChange: onChangeCB, selected: currentClass, options }));
+              rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectButtons, { label: prm.label, onChange: onChangeCB, selected: currentClass, options: options3 }));
               break;
             }
             case "gridbuttons": {
-              rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectGridButtons, { label: prm.label, onChange: onChangeCB, selected: currentClass, options }));
+              rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectGridButtons, { label: prm.label, onChange: onChangeCB, selected: currentClass, options: options3 }));
               break;
             }
             default: {
-              rtn.push(/* @__PURE__ */ wp.element.createElement(SelectControl, { label: prm.label, onChange: onChangeCB, value: currentClass, options }));
+              rtn.push(/* @__PURE__ */ wp.element.createElement(SelectControl, { label: prm.label, onChange: onChangeCB, value: currentClass, options: options3 }));
             }
           }
           if (prm.sub) {
             if (currentClass && prm.sub[currentClass]) {
               let sub = [];
               prm.sub[currentClass].forEach((prm2, index2) => {
-                sub.push(/* @__PURE__ */ wp.element.createElement(Fragment, { key: index2 }, el(SelectClass, { prm: prm2 })));
+                sub.push(/* @__PURE__ */ wp.element.createElement(Fragment3, { key: index2 }, el(SelectClass, { prm: prm2 })));
               });
               rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
             }
@@ -4005,19 +4234,19 @@
             if (states2[prm.values]) {
               let sub = [];
               prm.sub.forEach((prm2, index2) => {
-                sub.push(/* @__PURE__ */ wp.element.createElement(Fragment, { key: index2 }, el(SelectClass, { prm: prm2 })));
+                sub.push(/* @__PURE__ */ wp.element.createElement(Fragment3, { key: index2 }, el(SelectClass, { prm: prm2 })));
               });
               rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
             }
           }
         }
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, rtn.map((item3, index2) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: index2 }, item3)));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, rtn.map((item3, index2) => /* @__PURE__ */ wp.element.createElement(Fragment3, { key: index2 }, item3)));
     }, []);
     if (!item || !selectiveClasses) {
       return false;
     }
-    return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanelContext.Provider, { value: { props, item, states, save, saveClasses, saveCss } }, selectiveClasses.map((prm, index2) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: index2 }, el(SelectClass, { prm }))), props.children));
+    return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanelContext.Provider, { value: { props, item, states, save, saveClasses, saveCss } }, selectiveClasses.map((prm, index2) => /* @__PURE__ */ wp.element.createElement(Fragment3, { key: index2 }, el(SelectClass, { prm }))), props.children));
   };
 
   // ../blocks/_init/init/AlignClassToolbar.jsx
@@ -4074,6 +4303,49 @@
     return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectpattern" }, items2));
   };
 
+  // node_modules/clsx/dist/clsx.mjs
+  function r(e) {
+    var t, f, n = "";
+    if ("string" == typeof e || "number" == typeof e) n += e;
+    else if ("object" == typeof e) if (Array.isArray(e)) {
+      var o = e.length;
+      for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
+    } else for (f in e) e[f] && (n && (n += " "), n += f);
+    return n;
+  }
+  function clsx() {
+    for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
+    return n;
+  }
+
+  // ../blocks/_init/init/SelectPosition.jsx
+  CP.SelectPosition = (props) => {
+    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("table", { className: "selectposition-" }, /* @__PURE__ */ wp.element.createElement("tbody", { className: "_body" }, ["top", "center", "bottom"].map((v) => /* @__PURE__ */ wp.element.createElement("tr", { className: "_row" }, ["left", "center", "right"].map((h) => {
+      const val = `${v} ${h}`;
+      return /* @__PURE__ */ wp.element.createElement("td", { className: clsx("_cell", { "is-active": val === props.value }), onClick: () => props.onChange(val) });
+    }))))));
+  };
+
+  // ../blocks/_init/init/SelectSize.jsx
+  init_react();
+  var options2 = [
+    { value: "cover", label: "\u5916\u63A5" },
+    { value: "contain", label: "\u5185\u63A5" },
+    { value: "auto", label: "\u81EA\u52D5" },
+    { value: "custom", label: "\u30AB\u30B9\u30BF\u30E0" }
+  ];
+  var regularTypes = ["cover", "contain", "auto"];
+  CP.SelectSize = (props) => {
+    const { onChange } = props;
+    const { RangeControl } = wp.components;
+    const [type, setType] = useState(regularTypes.includes(props.value) ? props.value : "custom");
+    const [size, setSize] = useState(parseInt(props.value) || 100);
+    useEffect(() => {
+      onChange(type === "custom" ? size + "px" : type);
+    }, [type, size]);
+    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectButtons, { label: props.label, onChange: setType, selected: type, options: options2 }), type === "custom" && /* @__PURE__ */ wp.element.createElement(RangeControl, { onChange: setSize, value: size, min: props.min || 5, max: props.max || 1e3, step: props.step || 5 }));
+  };
+
   // ../blocks/_init/init/SelectPositionClass.jsx
   CP.SelectPositionClass = (props) => {
     const { BaseControl } = wp.components;
@@ -4085,15 +4357,15 @@
     const values = _.flatten(rows);
     const { label, help, itemsKey, index, disable } = props;
     let value = itemsKey ? CP.getItemSelectiveClass(props, values) : CP.getSelectiveClass(props, values);
-    return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement("table", { className: "cp-selectposition" }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((cols, index2) => /* @__PURE__ */ wp.element.createElement("tr", { key: index2 }, cols.map((col) => {
+    return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("table", { className: "selectposition-" }, /* @__PURE__ */ wp.element.createElement("tbody", { className: "_body" }, rows.map((cols, index2) => /* @__PURE__ */ wp.element.createElement("tr", { className: "_row", key: index2 }, cols.map((col) => {
       var isChecked = value == col;
       if (disable && disable.includes(col)) {
-        return /* @__PURE__ */ wp.element.createElement("td", { className: "disable", key: col }, " ");
+        return /* @__PURE__ */ wp.element.createElement("td", { className: "_cell is-disabled", key: col }, " ");
       }
       return /* @__PURE__ */ wp.element.createElement(
         "td",
         {
-          className: isChecked ? "active" : "",
+          className: clsx("_cell", { "is-active": isChecked }),
           onClick: () => {
             if (itemsKey) {
               CP.switchItemSelectiveClass(props, values, col, props.key);
@@ -4105,7 +4377,7 @@
         },
         " "
       );
-    }))))));
+    })))))));
   };
 
   // ../blocks/_init/init/ImporterCSVPanel.jsx
@@ -4216,14 +4488,14 @@
   // ../blocks/_init/init/EditItemsTable.jsx
   CP.EditItemsTable = (props) => {
     const { set, attr, itemsKey = "items", isTemplate = false } = props;
-    const { useCallback: useCallback2 } = wp.element;
+    const { useCallback: useCallback4 } = wp.element;
     const { RichText } = wp.blockEditor;
     const classes = bem("cp-edititemstable");
     const items2 = attr[itemsKey] || [];
     const save = () => {
       set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
     };
-    const getActiveColumns = useCallback2((props2) => {
+    const getActiveColumns = useCallback4((props2) => {
       const columns2 = [];
       props2.columns.forEach((col) => {
         if (col.hasOwnProperty("cond")) {
@@ -4313,8 +4585,8 @@
   };
 
   // ../blocks/_init/init/DummyImage.jsx
-  CP.DummyImage = ({ className = "cp-dummyimage", text }) => {
-    return /* @__PURE__ */ wp.element.createElement("img", { className, src: wpinfo.plugins_url + "/catpow/callee/dummy_image.php?text=" + text });
+  CP.DummyImage = ({ className: className2 = "cp-dummyimage", text }) => {
+    return /* @__PURE__ */ wp.element.createElement("img", { className: className2, src: wpinfo.plugins_url + "/catpow/callee/dummy_image.php?text=" + text });
   };
 
   // ../blocks/_init/init/DataStructure.jsx
@@ -4322,18 +4594,18 @@
     return /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-datastructure" }, props.children);
   };
   CP.DataStructureItem = (props) => {
-    const { useState: useState2 } = wp.element;
-    const [open, setOpen] = useState2(false);
+    const { useState: useState4 } = wp.element;
+    const [open, setOpen] = useState4(false);
     return /* @__PURE__ */ wp.element.createElement("li", { className: "item " + (props.children ? "hasChildren " + (open ? "open" : "close") : "noChildren") }, /* @__PURE__ */ wp.element.createElement("h5", { className: "title", onClick: () => setOpen(!open) }, props.title, void 0 !== props.name && /* @__PURE__ */ wp.element.createElement("span", { className: "name" }, props.name)), !!open && !!props.children && /* @__PURE__ */ wp.element.createElement("div", { className: "children" }, props.children));
   };
 
   // ../blocks/_init/init/EventInputCards.jsx
   CP.EventInputCards = (props) => {
     const { title, onChange } = props;
-    const { useState: useState2, useReducer, useCallback: useCallback2, useEffect: useEffect2, useMemo: useMemo3 } = wp.element;
+    const { useState: useState4, useReducer: useReducer3, useCallback: useCallback4, useEffect: useEffect4, useMemo: useMemo5 } = wp.element;
     const { BaseControl, Card, CardHeader, CardBody, CardFooter, Flex, FlexItem, FlexBlock, Icon, TextControl } = wp.components;
     const { processerId, eventTypes, parseEventValue, createEventValue, createEventString, eventParams } = props.processer;
-    const reducer = useCallback2((state2, action) => {
+    const reducer = useCallback4((state2, action) => {
       switch (action.type) {
         case "UPDATE_ALL": {
           return { events: action.events };
@@ -4356,8 +4628,8 @@
       }
       return state2;
     }, []);
-    const [state, dispatch] = useReducer(reducer, { events: [] });
-    const eventParamsWithoutLabel = useMemo3(() => {
+    const [state, dispatch] = useReducer3(reducer, { events: [] });
+    const eventParamsWithoutLabel = useMemo5(() => {
       const eventParamsWithoutLabel2 = {};
       Object.keys(eventParams).forEach((name) => {
         const { label, ...otherParams } = eventParams[name];
@@ -4365,19 +4637,19 @@
       });
       return eventParamsWithoutLabel2;
     }, [eventParams]);
-    const eventTypeList = useMemo3(() => {
+    const eventTypeList = useMemo5(() => {
       if (!eventTypes) {
         return [];
       }
       return Object.keys(eventTypes).filter((eventType) => eventType !== "_custom");
     }, [eventTypes]);
-    useEffect2(() => {
+    useEffect4(() => {
       const timer = setTimeout(() => {
         onChange(createEventValue(state.events));
       }, 500);
       return () => clearTimeout(timer);
     }, [state]);
-    useEffect2(() => {
+    useEffect4(() => {
       const events = parseEventValue(props.value);
       if (events) {
         if (state.events.length < 1) {
@@ -4385,10 +4657,10 @@
         }
       }
     }, [props.value]);
-    const EventInputCard = useCallback2((props2) => {
+    const EventInputCard = useCallback4((props2) => {
       const { event, index, canRemove } = props2;
-      const [editMode, setEditMode] = useState2(false);
-      const activeEventParamNames = useMemo3(() => {
+      const [editMode, setEditMode] = useState4(false);
+      const activeEventParamNames = useMemo5(() => {
         if (eventTypes && event.eventType) {
           const eventType = eventTypes[event.eventType] || eventTypes["_custom"];
           if (eventType) {
@@ -4460,13 +4732,13 @@
 
   // ../blocks/_init/init/ServerSideRender.jsx
   CP.ServerSideRender = (props) => {
-    const { className, block, attributes } = props;
-    const { RawHTML, useState: useState2, useMemo: useMemo3, useRef: useRef2, useEffect: useEffect2 } = wp.element;
+    const { className: className2, block, attributes } = props;
+    const { RawHTML, useState: useState4, useMemo: useMemo5, useRef: useRef4, useEffect: useEffect4 } = wp.element;
     const { useDebounce } = wp.compose;
-    const [response, setResponse] = useState2(false);
-    const [hold, setHold] = useState2(false);
-    const [stylesheets, setStylesheets] = useState2([]);
-    useEffect2(() => {
+    const [response, setResponse] = useState4(false);
+    const [hold, setHold] = useState4(false);
+    const [stylesheets, setStylesheets] = useState4([]);
+    useEffect4(() => {
       if (hold) {
         return;
       }
@@ -4492,21 +4764,21 @@
       });
       setHold(true);
     }, [JSON.stringify(attributes)]);
-    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RawHTML, { className }, response), stylesheets.map((stylesheet) => /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: stylesheet, key: stylesheet })));
+    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RawHTML, { className: className2 }, response), stylesheets.map((stylesheet) => /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: stylesheet, key: stylesheet })));
   };
 
   // ../blocks/_init/init/ServerSideRenderPart.jsx
   CP.ServerSideRenderPart = (props) => {
-    const { className, ...otherProps } = props;
-    return /* @__PURE__ */ wp.element.createElement("div", { className }, "[ssr_parts" + Object.keys(otherProps).reduce((p, c) => p += ` ${c}=${otherProps[c]}`, "") + "]");
+    const { className: className2, ...otherProps } = props;
+    return /* @__PURE__ */ wp.element.createElement("div", { className: className2 }, "[ssr_parts" + Object.keys(otherProps).reduce((p, c) => p += ` ${c}=${otherProps[c]}`, "") + "]");
   };
   CP.ServerSideRenderPart.Preview = (props) => {
-    const { className, name, ...otherProps } = props;
-    const { RawHTML, useState: useState2, useMemo: useMemo3, useRef: useRef2, useEffect: useEffect2 } = wp.element;
-    const [response, setResponse] = useState2(false);
-    const [hold, setHold] = useState2(false);
-    const [stylesheets, setStylesheets] = useState2([]);
-    useEffect2(() => {
+    const { className: className2, name, ...otherProps } = props;
+    const { RawHTML, useState: useState4, useMemo: useMemo5, useRef: useRef4, useEffect: useEffect4 } = wp.element;
+    const [response, setResponse] = useState4(false);
+    const [hold, setHold] = useState4(false);
+    const [stylesheets, setStylesheets] = useState4([]);
+    useEffect4(() => {
       if (hold) {
         return;
       }
@@ -4530,21 +4802,21 @@
       });
       setHold(true);
     }, [name, JSON.stringify(otherProps)]);
-    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RawHTML, { className }, response), stylesheets.map((stylesheet) => /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: stylesheet, key: stylesheet })));
+    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RawHTML, { className: className2 }, response), stylesheets.map((stylesheet) => /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: stylesheet, key: stylesheet })));
   };
 
   // ../blocks/_init/init/ColorVarTracer.jsx
   CP.ColorVarTracer = (props) => {
     const { target } = props;
-    const { useMemo: useMemo3 } = wp.element;
-    const vars = useMemo3(() => {
+    const { useMemo: useMemo5 } = wp.element;
+    const vars = useMemo5(() => {
       const vars2 = {};
       if (target) {
         const styles = getComputedStyle(target);
         ["b", "s", "t", "m", "a", "i"].forEach((k) => {
-          ["h", "s", "l"].forEach((r) => {
+          ["h", "s", "l"].forEach((r2) => {
             ["", "-container"].forEach((p) => {
-              const name = `--cp${p}-tones-${k}-${r}`;
+              const name = `--cp${p}-tones-${k}-${r2}`;
               vars2[name] = styles.getPropertyValue(name);
             });
           });
@@ -4557,32 +4829,32 @@
 
   // ../blocks/_init/init/PlacedPictures.jsx
   CP.PlacedPictures = (props) => {
-    const { className, attr, keys, index } = props;
+    const { className: className2, attr, keys, index } = props;
     const item = keys.items ? attr[keys.items][index] : attr;
     const pictures = item[keys.pictures];
-    return /* @__PURE__ */ wp.element.createElement("div", { className }, pictures && pictures.map((picture, index2) => {
+    return /* @__PURE__ */ wp.element.createElement("div", { className: className2 }, pictures && pictures.map((picture, index2) => {
       const { style, code, sources, src, alt } = picture;
       return /* @__PURE__ */ wp.element.createElement("div", { className: "item", style: CP.parseStyleString(style), key: index2 }, code || /* @__PURE__ */ wp.element.createElement("picture", { className: "picture" }, sources && sources.map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: "img", src, alt })));
     }));
   };
   CP.PlacedPictures.Edit = (props) => {
-    const { className, set, attr, keys, index, devices } = props;
-    const { useState: useState2, useMemo: useMemo3, useCallback: useCallback2, useRef: useRef2, useEffect: useEffect2 } = wp.element;
+    const { className: className2, set, attr, keys, index, devices } = props;
+    const { useState: useState4, useMemo: useMemo5, useCallback: useCallback4, useRef: useRef4, useEffect: useEffect4 } = wp.element;
     const { BlockControls, InspectorControls } = wp.blockEditor;
     const { BaseControl, Icon, PanelBody, RangeControl, TextControl, Toolbar, ToolbarGroup, ToolbarButton, ToolbarDropdownMenu } = wp.components;
     const item = keys.items ? attr[keys.items][index] : attr;
     const pictures = item[keys.pictures];
-    const classes = useMemo3(() => bem("cp-placedpictures " + className), [className]);
-    const [editMode, setEditMode] = useState2(false);
-    const [currentItemNodes, setCurrentItemNodes] = useState2([]);
-    const [currentItemIndexes, setCurrentItemIndexes] = useState2([]);
-    const [containerNode, setContainerNode] = useState2(false);
-    const targetRefs = useRef2([]);
-    useEffect2(() => {
+    const classes = useMemo5(() => bem("cp-placedpictures " + className2), [className2]);
+    const [editMode, setEditMode] = useState4(false);
+    const [currentItemNodes, setCurrentItemNodes] = useState4([]);
+    const [currentItemIndexes, setCurrentItemIndexes] = useState4([]);
+    const [containerNode, setContainerNode] = useState4(false);
+    const targetRefs = useRef4([]);
+    useEffect4(() => {
       setCurrentItemNodes(currentItemIndexes.sort().map((index2) => targetRefs.current[index2]));
     }, [currentItemIndexes, targetRefs, setCurrentItemNodes]);
-    const remPx = useMemo3(() => parseFloat(getComputedStyle(document.documentElement).fontSize), []);
-    const getPlaceStyle = useCallback2((bnd, tgtBnd) => {
+    const remPx = useMemo5(() => parseFloat(getComputedStyle(document.documentElement).fontSize), []);
+    const getPlaceStyle = useCallback4((bnd, tgtBnd) => {
       const style = {
         position: "absolute",
         width: Math.pround(tgtBnd.width / remPx, 2) + "rem",
@@ -4606,7 +4878,7 @@
       }
       return style;
     }, []);
-    const onClickItem = useCallback2(
+    const onClickItem = useCallback4(
       (e) => {
         const index2 = parseInt(e.currentTarget.dataset.index);
         const selected = currentItemIndexes.includes(index2);
@@ -4622,7 +4894,7 @@
       },
       [currentItemIndexes, setCurrentItemIndexes]
     );
-    const updatePictures = useCallback2(
+    const updatePictures = useCallback4(
       (pictures2) => {
         if (keys.items) {
           const items2 = attr[keys.iteems];
@@ -4634,7 +4906,7 @@
       },
       [attr, set, keys, index]
     );
-    const save = useCallback2(() => {
+    const save = useCallback4(() => {
       if (keys.items) {
         items[index][keys.pictures] = JSON.parse(JSON.stringify(pictures));
         set({ [keys.items]: [...items] });
@@ -4739,21 +5011,21 @@
 
   // ../blocks/_init/init/Link.jsx
   CP.Link = (props) => {
-    const { className, attr, keys, index, ...otherProps } = props;
+    const { className: className2, attr, keys, index, ...otherProps } = props;
     const item = keys.items ? attr[keys.items][index] : attr;
     const href = item[keys.href] || "";
     const target = href.indexOf("://") !== -1 ? "_brank" : null;
-    return /* @__PURE__ */ wp.element.createElement("a", { className, href, target, rel: target && "noopener", ...otherProps }, props.children);
+    return /* @__PURE__ */ wp.element.createElement("a", { className: className2, href, target, rel: target && "noopener", ...otherProps }, props.children);
   };
   CP.Link.Edit = (props) => {
-    const { className, set, attr, keys, index, isSelected = "auto", ...otherProps } = props;
+    const { className: className2, set, attr, keys, index, isSelected = "auto", ...otherProps } = props;
     const { onChange } = props;
-    const { useMemo: useMemo3, useCallback: useCallback2, useEffect: useEffect2, useState: useState2 } = wp.element;
-    const classes = useMemo3(() => bem("cp-link " + className), [className]);
-    const item = useMemo3(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
-    const [hasCursor, setHasCursor] = useState2(false);
-    const [ref, setRef] = useState2(false);
-    useEffect2(() => {
+    const { useMemo: useMemo5, useCallback: useCallback4, useEffect: useEffect4, useState: useState4 } = wp.element;
+    const classes = useMemo5(() => bem("cp-link " + className2), [className2]);
+    const item = useMemo5(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
+    const [hasCursor, setHasCursor] = useState4(false);
+    const [ref, setRef] = useState4(false);
+    useEffect4(() => {
       const cb = () => {
         if (!ref) {
           return;
@@ -4797,18 +5069,18 @@
 
   // ../blocks/_init/init/RTF.jsx
   CP.RTF = (props) => {
-    const { className, pref = "rtf", attr, keys = { text: "text" }, index, ...otherProps } = props;
+    const { className: className2, pref = "rtf", attr, keys = { text: "text" }, index, ...otherProps } = props;
     const item = keys.items ? attr[keys.items][index] : attr;
     const text = item[keys.text] ? item[keys.text] : "";
-    return /* @__PURE__ */ wp.element.createElement("div", { className, ...otherProps, dangerouslySetInnerHTML: { __html: rtf(text, pref) } });
+    return /* @__PURE__ */ wp.element.createElement("div", { className: className2, ...otherProps, dangerouslySetInnerHTML: { __html: rtf(text, pref) } });
   };
   CP.RTF.Edit = (props) => {
-    const { className, pref = "rtf", set, attr, keys = { text: "text" }, index, isSelected = true, ...otherProps } = props;
-    const { useMemo: useMemo3, useCallback: useCallback2, useState: useState2 } = wp.element;
-    const classes = useMemo3(() => bem("cp-rtf " + className), [className]);
-    const item = useMemo3(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
+    const { className: className2, pref = "rtf", set, attr, keys = { text: "text" }, index, isSelected = true, ...otherProps } = props;
+    const { useMemo: useMemo5, useCallback: useCallback4, useState: useState4 } = wp.element;
+    const classes = useMemo5(() => bem("cp-rtf " + className2), [className2]);
+    const item = useMemo5(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
     const text = item[keys.text];
-    const updateText = useCallback2(
+    const updateText = useCallback4(
       (text2) => {
         if (keys.items) {
           Object.assign(attr[keys.items][index], { [keys.text]: text2 });
@@ -4819,7 +5091,7 @@
       },
       [set, attr, keys]
     );
-    const editorFunction = useCallback2(
+    const editorFunction = useCallback4(
       (e) => {
         if (e.key === "Tab") {
           const text2 = e.target.value;
@@ -4839,8 +5111,8 @@
       },
       [updateText]
     );
-    const [savedText, setSavedText] = useState2(text);
-    const [isActive, setIsActive] = useState2(false);
+    const [savedText, setSavedText] = useState4(text);
+    const [isActive, setIsActive] = useState4(false);
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-active": isSelected && isActive }), onClick: () => setIsActive(!isActive), ...otherProps, dangerouslySetInnerHTML: { __html: rtf(item.text, pref) } }), /* @__PURE__ */ wp.element.createElement(Portal, { id: "EditRTF" }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal({ "is-active": isSelected && isActive }) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.preview(), dangerouslySetInnerHTML: { __html: rtf(item.text, pref) } }), /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.input() }, /* @__PURE__ */ wp.element.createElement(
       "textarea",
       {
@@ -4867,7 +5139,7 @@
   // ../blocks/_init/init/Loop.jsx
   CP.Loop = (props) => {
     const { current = 0, Component = "div", loop = false, ...otherProps } = props;
-    const { useState: useState2, useMemo: useMemo3, useCallback: useCallback2, useEffect: useEffect2, useRef: useRef2 } = wp.element;
+    const { useState: useState4, useMemo: useMemo5, useCallback: useCallback4, useEffect: useEffect4, useRef: useRef4 } = wp.element;
     const items2 = (() => {
       const items3 = Array.isArray(props.items) ? props.items : Number.isInteger(props.items) ? [...Array(props.items).keys()] : Array.from(props.items);
       items3.forEach((value, index) => {
@@ -4888,12 +5160,12 @@
 
   // ../blocks/_init/init/CustomColorVars.jsx
   CP.CustomColorVars = (props) => {
-    const { useState: useState2, useRef: useRef2, useMemo: useMemo3, useCallback: useCallback2 } = wp.element;
+    const { useState: useState4, useRef: useRef4, useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
     const { ColorPicker, CheckboxControl, Flex, FlexItem, FlexBlock, Button, Popover } = wp.components;
     const { label = "\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", value, onChange } = props;
-    const cache = useRef2(value);
-    const [index, setIndex] = useState2(-1);
-    const [useCustomColor, setUseCustomColor] = useState2(Object.keys(value).length > 0);
+    const cache = useRef4(value);
+    const [index, setIndex] = useState4(-1);
+    const [useCustomColor, setUseCustomColor] = useState4(Object.keys(value).length > 0);
     const classes = bem("cp-customcolorvars");
     const roles = [
       { key: "b", label: "\u80CC\u666F\u8272" },
@@ -4904,7 +5176,7 @@
       { key: "i", label: "\u53CD\u8EE2\u6587\u5B57\u8272" }
     ];
     const keys = ["h", "s", "l"];
-    const originalColors = useMemo3(() => {
+    const originalColors = useMemo5(() => {
       const originalColors2 = {};
       const selectedBlock = wp.data.select("core/block-editor").getSelectedBlock();
       const editorCanvas = document.querySelector('iframe[name="editor-canvas"]');
@@ -4922,7 +5194,7 @@
       });
       return originalColors2;
     }, []);
-    const colors = useMemo3(() => {
+    const colors = useMemo5(() => {
       const colors2 = {};
       roles.forEach((role) => {
         const hsla = {};
@@ -4939,12 +5211,12 @@
       });
       return colors2;
     }, []);
-    const Item = useCallback2((props2) => {
+    const Item = useCallback4((props2) => {
       const { classes: classes2, role, originalColor, onChange: onChange2 } = props2;
-      const [isOpen, setIsOpen] = useState2(false);
-      const [isCustomized, setIsCustomized] = useState2(!!props2.color);
-      const [color, setColor] = useState2(props2.color || originalColor);
-      const onChangeComplete = useCallback2(
+      const [isOpen, setIsOpen] = useState4(false);
+      const [isCustomized, setIsCustomized] = useState4(!!props2.color);
+      const [color, setColor] = useState4(props2.color || originalColor);
+      const onChangeComplete = useCallback4(
         (color2) => {
           setIsCustomized(true);
           setColor(color2.hex);
@@ -4956,7 +5228,7 @@
         },
         [onChange2, role, setColor]
       );
-      const clearColorVars = useCallback2(() => {
+      const clearColorVars = useCallback4(() => {
         setIsCustomized(false);
         setColor(originalColor);
         onChange2({
@@ -4967,7 +5239,7 @@
       }, [onChange2, role, originalColor, setColor, setIsCustomized]);
       return /* @__PURE__ */ wp.element.createElement("div", { className: classes2(flagsToClassNames({ isCustomized })) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes2.chip(), onClick: () => setIsOpen(!isOpen), style: { backgroundColor: color } }, /* @__PURE__ */ wp.element.createElement("div", { className: classes2.chip.label() }, role.label)), isOpen && /* @__PURE__ */ wp.element.createElement(Popover, { onClose: () => setIsOpen(false) }, /* @__PURE__ */ wp.element.createElement(ColorPicker, { color, onChangeComplete }), /* @__PURE__ */ wp.element.createElement(Flex, { justify: "center" }, /* @__PURE__ */ wp.element.createElement(FlexItem, null, /* @__PURE__ */ wp.element.createElement(Button, { text: "CLEAR", onClick: clearColorVars })))));
     }, []);
-    const clearAllColorVars = useCallback2(() => {
+    const clearAllColorVars = useCallback4(() => {
       const vars = {};
       roles.forEach((role) => {
         keys.forEach((key) => {
@@ -4996,18 +5268,18 @@
 
   // ../blocks/_init/init/Message.jsx
   CP.Message = (props) => {
-    const { useMemo: useMemo3 } = wp.element;
-    const classes = useMemo3(() => bem("cp-message"), []);
+    const { useMemo: useMemo5 } = wp.element;
+    const classes = useMemo5(() => bem("cp-message"), []);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._body() }, props.children));
   };
 
   // ../blocks/_init/init/NavBar.jsx
   CP.NavBar = (props) => {
     const { value, label, onChange } = props;
-    const { useMemo: useMemo3, useState: useState2 } = wp.element;
+    const { useMemo: useMemo5, useState: useState4 } = wp.element;
     const classes = bem("cp-navbar");
-    const { options } = useMemo3(() => CP.parseSelections(props.options), [props.options]);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes.items() }, label && /* @__PURE__ */ wp.element.createElement("li", { className: classes.items.item("is-label") }, label), options.map((option) => /* @__PURE__ */ wp.element.createElement(
+    const { options: options3 } = useMemo5(() => CP.parseSelections(props.options), [props.options]);
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes.items() }, label && /* @__PURE__ */ wp.element.createElement("li", { className: classes.items.item("is-label") }, label), options3.map((option) => /* @__PURE__ */ wp.element.createElement(
       "li",
       {
         className: classes.items.item({
