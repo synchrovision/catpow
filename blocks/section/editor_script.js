@@ -135,6 +135,7 @@
                     { name: "paleBG", label: __("\u8584\u304F", "catpow"), values: "paleBG" }
                   ]
                 },
+                "backgroundPattern",
                 { name: "backgroundColor", label: __("\u80CC\u666F\u8272", "catpow"), values: "hasBackgroundColor" },
                 "textColor",
                 {
@@ -203,6 +204,7 @@
                     { label: __("\u8584\u304F", "catpow"), values: "paleBG" }
                   ]
                 },
+                "backgroundPattern",
                 { name: "backgroundColor", label: __("\u80CC\u666F\u8272", "catpow"), values: "hasBackgroundColor" },
                 "textColor",
                 {
@@ -264,6 +266,7 @@
                     { label: __("\u8584\u304F", "catpow"), values: "paleBG" }
                   ]
                 },
+                "backgroundPattern",
                 { name: "border", label: __("\u7DDA", "catpow"), values: { no_border: __("\u306A\u3057", "catpow"), thin_border: __("\u7D30", "catpow"), bold_border: __("\u592A", "catpow") } },
                 { name: "round", label: __("\u89D2\u4E38", "catpow"), values: "round" },
                 { name: "shadow", label: __("\u5F71", "catpow"), values: "shadow", sub: [{ label: __("\u5185\u5074", "catpow"), values: "inset" }] },

@@ -137,6 +137,7 @@ wp.blocks.registerBlockType("catpow/section", {
 									{ name: "paleBG", label: __("薄く", "catpow"), values: "paleBG" },
 								],
 							},
+							"backgroundPattern",
 							{ name: "backgroundColor", label: __("背景色", "catpow"), values: "hasBackgroundColor" },
 							"textColor",
 							{
@@ -205,6 +206,7 @@ wp.blocks.registerBlockType("catpow/section", {
 									{ label: __("薄く", "catpow"), values: "paleBG" },
 								],
 							},
+							"backgroundPattern",
 							{ name: "backgroundColor", label: __("背景色", "catpow"), values: "hasBackgroundColor" },
 							"textColor",
 							{
@@ -266,6 +268,7 @@ wp.blocks.registerBlockType("catpow/section", {
 									{ label: __("薄く", "catpow"), values: "paleBG" },
 								],
 							},
+							"backgroundPattern",
 							{ name: "border", label: __("線", "catpow"), values: { no_border: __("なし", "catpow"), thin_border: __("細", "catpow"), bold_border: __("太", "catpow") } },
 							{ name: "round", label: __("角丸", "catpow"), values: "round" },
 							{ name: "shadow", label: __("影", "catpow"), values: "shadow", sub: [{ label: __("内側", "catpow"), values: "inset" }] },
