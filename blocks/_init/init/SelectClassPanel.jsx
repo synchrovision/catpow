@@ -461,6 +461,57 @@ CP.SelectClassPanel = (props) => {
 						);
 						break;
 					}
+					case "image": {
+						rtn.push(
+							<CP.SelectResponsiveImage
+								attr={props.attr[prm.vars]}
+								set={(data) => {
+									save({
+										[prm.vars]: {
+											...props.attr[prm.vars],
+											...data,
+										},
+									});
+								}}
+								keys={{ url: prm.key }}
+							/>
+						);
+						break;
+					}
+					case "position": {
+						rtn.push(
+							<CP.SelectPosition
+								label={prm.label}
+								value={props.attr[prm.vars][prm.key]}
+								onChange={(val) => {
+									save({
+										[prm.vars]: {
+											...props.attr[prm.vars],
+											[prm.key]: `${val}`,
+										},
+									});
+								}}
+							/>
+						);
+						break;
+					}
+					case "size": {
+						rtn.push(
+							<CP.SelectSize
+								label={prm.label}
+								value={props.attr[prm.vars][prm.key]}
+								onChange={(val) => {
+									save({
+										[prm.vars]: {
+											...props.attr[prm.vars],
+											[prm.key]: `${val}`,
+										},
+									});
+								}}
+							/>
+						);
+						break;
+					}
 				}
 			} else {
 				rtn.push(
