@@ -1,7 +1,7 @@
 ﻿import { CP } from "./CP.jsx";
 import { clsx } from "clsx";
 
-const isCustomPosition = (pos) => !pos.split(" ").every((p) => ["top", "bottom", "left", "right", "center"].includes(p));
+const isRegularPosition = (pos) => pos.match(/^(top|center|bottom) (left|center|right)$/);
 
 CP.SelectPosition = (props) => {
 	return (
