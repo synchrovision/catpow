@@ -74,8 +74,10 @@ export const CP = {
 				}
 				if (size && image.sizes && image.sizes[size]) {
 					data[keys.src] = image.sizes[size].url;
-				} else {
+				} else if (keys.src) {
 					data[keys.src] = image.url;
+				} else if (keys.url) {
+					data[keys.url] = `url(${image.url})`;
 				}
 				if (keys.sources) {
 					if (image.sizes) {
