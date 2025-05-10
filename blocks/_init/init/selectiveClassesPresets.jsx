@@ -63,6 +63,42 @@ export const selectiveClassesPresets = {
 			},
 		],
 	},
+	backgroundPattern: {
+		name: "backgroundPattern",
+		label: __("背景パターン", "catpow"),
+		values: "has-background-pattern",
+		sub: [
+			{
+				name: "image",
+				label: __("画像", "catpow"),
+				vars: "vars",
+				key: "--cp-background-pattern-image",
+				input: "image",
+			},
+			{
+				name: "repeat",
+				label: __("繰り返し", "catpow"),
+				vars: "vars",
+				key: "--cp-background-pattern-repeat",
+				input: "buttons",
+				values: { repeat: "両方", "repeat-x": "横", "repeat-y": "縦", "no-repeat": "なし" },
+			},
+			{
+				name: "position",
+				label: __("位置", "catpow"),
+				vars: "vars",
+				key: "--cp-background-pattern-position",
+				input: "position",
+			},
+			{
+				name: "size",
+				label: __("サイズ", "catpow"),
+				vars: "vars",
+				key: "--cp-background-pattern-size",
+				input: "size",
+			},
+		],
+	},
 	textAlign: {
 		name: "textAlign",
 		type: "buttons",
