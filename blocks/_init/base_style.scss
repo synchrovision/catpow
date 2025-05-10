@@ -65,14 +65,18 @@ $colors:(
 	}
 	&-selectposition{
 		@include tbl(());
-		td{
-			@include bnd((w:20,h:20));
-			@include bdr((s:s,w:1,c:t 20));
-			&.active{
-				@include bg((c:wp));
-			}
-			&.disable{
-				@include bg((c:t 10));
+		&__body{
+			&-row{
+				&-cell{
+					@include bnd((w:20,h:20));
+					@include bdr((s:s,w:1,c:t 20));
+					&.is-active{
+						@include bg((c:wp));
+					}
+					&.is-disabled{
+						@include bg((c:t 10));
+					}
+				}
 			}
 		}
 	}

@@ -1,4 +1,5 @@
 import { CP } from "./CP.jsx";
+import { clsx } from "clsx";
 
 CP.SelectPositionClass = (props) => {
 	const { BaseControl } = wp.components;
@@ -13,39 +14,41 @@ CP.SelectPositionClass = (props) => {
 
 	return (
 		<BaseControl label={label} help={help}>
-			<table className="cp-selectposition">
-				<tbody>
-					{rows.map((cols, index) => (
-						<tr key={index}>
-							{cols.map((col) => {
-								var isChecked = value == col;
-								if (disable && disable.includes(col)) {
+			<CP.Bem prefix="cp">
+				<table className="selectposition-">
+					<tbody className="_body">
+						{rows.map((cols, index) => (
+							<tr className="_row" key={index}>
+								{cols.map((col) => {
+									var isChecked = value == col;
+									if (disable && disable.includes(col)) {
+										return (
+											<td className="_cell is-disabled" key={col}>
+												{" "}
+											</td>
+										);
+									}
 									return (
-										<td className="disable" key={col}>
+										<td
+											className={clsx("_cell", { "is-active": isChecked })}
+											onClick={() => {
+												if (itemsKey) {
+													CP.switchItemSelectiveClass(props, values, col, props.key);
+												} else {
+													CP.switchSelectiveClass(props, values, col, props.key);
+												}
+											}}
+											key={col}
+										>
 											{" "}
 										</td>
 									);
-								}
-								return (
-									<td
-										className={isChecked ? "active" : ""}
-										onClick={() => {
-											if (itemsKey) {
-												CP.switchItemSelectiveClass(props, values, col, props.key);
-											} else {
-												CP.switchSelectiveClass(props, values, col, props.key);
-											}
-										}}
-										key={col}
-									>
-										{" "}
-									</td>
-								);
-							})}
-						</tr>
-					))}
-				</tbody>
-			</table>
+								})}
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</CP.Bem>
 		</BaseControl>
 	);
 };
