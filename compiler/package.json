@@ -7,6 +7,7 @@
 	},
 	"dependencies": {
 		"@svgr/core": "*",
+		"clsx": "*",
 		"esbuild": "*",
 		"esbuild-plugin-inline-import": "*",
 		"js-cookie": "*",
