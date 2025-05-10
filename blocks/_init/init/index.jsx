@@ -32,6 +32,7 @@ import "./AlignClassToolbar.jsx";
 import "./VerticalAlignClassToolbar.jsx";
 import "./SelectColorClass.jsx";
 import "./SelectPatternClass.jsx";
+import "./SelectSize.jsx";
 import "./SelectPositionClass.jsx";
 import "./ImporterCSVPanel.jsx";
 import "./SelectBreakPointToolbar.jsx";
