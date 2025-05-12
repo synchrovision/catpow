@@ -59,7 +59,7 @@ export const ResponsiveImageBody = (props) => {
 		}
 		return <video className={className + " is-video"} src={item[keys.src]} {...videoAtts} {...otherProps}></video>;
 	}
-	var src = CP.imageSrcOrDummy(keys.src ? item[keys.src] : item[keys.url].slice(4, -1));
+	var src = CP.imageSrcOrDummy(keys.src ? item[keys.src] : keys.url && item[keys.url] ? item[keys.url].slice(4, -1) : null);
 	if (keys.sources) {
 		if (device) {
 			const source = (item[keys.sources] && item[keys.sources].find((source) => source.device === device)) || {
