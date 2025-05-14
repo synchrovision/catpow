@@ -46,10 +46,11 @@ let pathResolver = {
 			}
 		});
 		build.onLoad({ filter: /.*/, namespace: "react-global" }, async (args) => {
-			if (args.path === "react" || args.path === "react-dom") {
+			if (args.path === "react") {
 				return {
 					contents:
 						"export default window.wp.element;\n" +
+						"export const version='18.0.0';\n" +
 						[
 							"useState",
 							"useEffect",
