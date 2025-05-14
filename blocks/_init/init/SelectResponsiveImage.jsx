@@ -81,7 +81,7 @@ CP.SelectResponsiveImage = (props) => {
 					</div>
 				</>
 			) : (
-				<ResponsiveImageBody {...props} className={className} item={item} keys={keys} onClick={onClick} />
+				<ResponsiveImageBody {...props} className={className} item={item} keys={keys} style={{ pointerEvents: "auto" }} onClick={onClick} />
 			)}
 		</>
 	);
