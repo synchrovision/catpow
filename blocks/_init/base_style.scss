@@ -465,6 +465,20 @@ $colors:(
 			}
 		}
 	}
+	&-positioninput{
+		@include bnd((w:fit,mgi:a));
+		@include grd((tc:a a,ai:c,g:8));
+		&__input{
+
+		}
+		&__controls{
+			&-icon{
+				&.is-active{
+					@include txt((c:wp));
+				}
+			}
+		}
+	}
 	&-selectcolor{
 		@include bnd((w:220));
 		@include txt((l:n));

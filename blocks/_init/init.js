@@ -1,14 +1,63 @@
 (() => {
+  var __create = Object.create;
+  var __defProp = Object.defineProperty;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
   var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getProtoOf = Object.getPrototypeOf;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
   var __esm = (fn, res) => function __init() {
     return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
   };
+  var __commonJS = (cb, mod) => function __require() {
+    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  };
+  var __export = (target, all) => {
+    for (var name in all)
+      __defProp(target, name, { get: all[name], enumerable: true });
+  };
+  var __copyProps = (to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames(from))
+        if (!__hasOwnProp.call(to, key) && key !== except)
+          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+    }
+    return to;
+  };
+  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+    // If the importer is in node compatibility mode or this is not an ESM
+    // file that has been converted to a CommonJS file using a Babel-
+    // compatible transform (i.e. "__esModule" has not been set), then set
+    // "default" to the CommonJS "module.exports" for node compatibility.
+    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+    mod
+  ));
+  var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
   // react-global:react
-  var react_default, useState, useEffect, useLayoutEffect, useRef, forwardRef, useMemo2, useCallback, createContext, useContext, useReducer, createElement, cloneElement, isValidElement, Fragment;
+  var react_exports = {};
+  __export(react_exports, {
+    Fragment: () => Fragment,
+    cloneElement: () => cloneElement,
+    createContext: () => createContext,
+    createElement: () => createElement,
+    default: () => react_default,
+    forwardRef: () => forwardRef,
+    isValidElement: () => isValidElement,
+    useCallback: () => useCallback,
+    useContext: () => useContext,
+    useEffect: () => useEffect,
+    useLayoutEffect: () => useLayoutEffect,
+    useMemo: () => useMemo2,
+    useReducer: () => useReducer,
+    useRef: () => useRef,
+    useState: () => useState,
+    version: () => version
+  });
+  var react_default, version, useState, useEffect, useLayoutEffect, useRef, forwardRef, useMemo2, useCallback, createContext, useContext, useReducer, createElement, cloneElement, isValidElement, Fragment;
   var init_react = __esm({
     "react-global:react"() {
       react_default = window.wp.element;
+      version = "18.0.0";
       useState = wp.element.useState;
       useEffect = wp.element.useEffect;
       useLayoutEffect = wp.element.useLayoutEffect;
@@ -23,6 +72,720 @@
       cloneElement = wp.element.cloneElement;
       isValidElement = wp.element.isValidElement;
       Fragment = wp.element.Fragment;
+    }
+  });
+
+  // node_modules/tslib/tslib.es6.js
+  var tslib_es6_exports = {};
+  __export(tslib_es6_exports, {
+    __addDisposableResource: () => __addDisposableResource,
+    __assign: () => __assign,
+    __asyncDelegator: () => __asyncDelegator,
+    __asyncGenerator: () => __asyncGenerator,
+    __asyncValues: () => __asyncValues,
+    __await: () => __await,
+    __awaiter: () => __awaiter,
+    __classPrivateFieldGet: () => __classPrivateFieldGet,
+    __classPrivateFieldIn: () => __classPrivateFieldIn,
+    __classPrivateFieldSet: () => __classPrivateFieldSet,
+    __createBinding: () => __createBinding,
+    __decorate: () => __decorate,
+    __disposeResources: () => __disposeResources,
+    __esDecorate: () => __esDecorate,
+    __exportStar: () => __exportStar,
+    __extends: () => __extends,
+    __generator: () => __generator,
+    __importDefault: () => __importDefault,
+    __importStar: () => __importStar,
+    __makeTemplateObject: () => __makeTemplateObject,
+    __metadata: () => __metadata,
+    __param: () => __param,
+    __propKey: () => __propKey,
+    __read: () => __read,
+    __rest: () => __rest,
+    __rewriteRelativeImportExtension: () => __rewriteRelativeImportExtension,
+    __runInitializers: () => __runInitializers,
+    __setFunctionName: () => __setFunctionName,
+    __spread: () => __spread,
+    __spreadArray: () => __spreadArray,
+    __spreadArrays: () => __spreadArrays,
+    __values: () => __values,
+    default: () => tslib_es6_default
+  });
+  function __extends(d, b) {
+    if (typeof b !== "function" && b !== null)
+      throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    extendStatics(d, b);
+    function __3() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__3.prototype = b.prototype, new __3());
+  }
+  function __rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+      t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+      for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+        if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+          t[p[i]] = s[p[i]];
+      }
+    return t;
+  }
+  function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r2 = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r2 = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r2 = (c < 3 ? d(r2) : c > 3 ? d(target, key, r2) : d(target, key)) || r2;
+    return c > 3 && r2 && Object.defineProperty(target, key, r2), r2;
+  }
+  function __param(paramIndex, decorator) {
+    return function(target, key) {
+      decorator(target, key, paramIndex);
+    };
+  }
+  function __esDecorate(ctor, descriptorIn, decorators, contextIn, initializers, extraInitializers) {
+    function accept(f) {
+      if (f !== void 0 && typeof f !== "function") throw new TypeError("Function expected");
+      return f;
+    }
+    var kind = contextIn.kind, key = kind === "getter" ? "get" : kind === "setter" ? "set" : "value";
+    var target = !descriptorIn && ctor ? contextIn["static"] ? ctor : ctor.prototype : null;
+    var descriptor = descriptorIn || (target ? Object.getOwnPropertyDescriptor(target, contextIn.name) : {});
+    var _2, done = false;
+    for (var i = decorators.length - 1; i >= 0; i--) {
+      var context = {};
+      for (var p in contextIn) context[p] = p === "access" ? {} : contextIn[p];
+      for (var p in contextIn.access) context.access[p] = contextIn.access[p];
+      context.addInitializer = function(f) {
+        if (done) throw new TypeError("Cannot add initializers after decoration has completed");
+        extraInitializers.push(accept(f || null));
+      };
+      var result = (0, decorators[i])(kind === "accessor" ? { get: descriptor.get, set: descriptor.set } : descriptor[key], context);
+      if (kind === "accessor") {
+        if (result === void 0) continue;
+        if (result === null || typeof result !== "object") throw new TypeError("Object expected");
+        if (_2 = accept(result.get)) descriptor.get = _2;
+        if (_2 = accept(result.set)) descriptor.set = _2;
+        if (_2 = accept(result.init)) initializers.unshift(_2);
+      } else if (_2 = accept(result)) {
+        if (kind === "field") initializers.unshift(_2);
+        else descriptor[key] = _2;
+      }
+    }
+    if (target) Object.defineProperty(target, contextIn.name, descriptor);
+    done = true;
+  }
+  function __runInitializers(thisArg, initializers, value) {
+    var useValue = arguments.length > 2;
+    for (var i = 0; i < initializers.length; i++) {
+      value = useValue ? initializers[i].call(thisArg, value) : initializers[i].call(thisArg);
+    }
+    return useValue ? value : void 0;
+  }
+  function __propKey(x) {
+    return typeof x === "symbol" ? x : "".concat(x);
+  }
+  function __setFunctionName(f, name, prefix) {
+    if (typeof name === "symbol") name = name.description ? "[".concat(name.description, "]") : "";
+    return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name) : name });
+  }
+  function __metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+  }
+  function __awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) {
+      return value instanceof P ? value : new P(function(resolve) {
+        resolve(value);
+      });
+    }
+    return new (P || (P = Promise))(function(resolve, reject) {
+      function fulfilled(value) {
+        try {
+          step(generator.next(value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function rejected(value) {
+        try {
+          step(generator["throw"](value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function step(result) {
+        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+      }
+      step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+  }
+  function __generator(thisArg, body) {
+    var _2 = { label: 0, sent: function() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() {
+      return this;
+    }), g;
+    function verb(n) {
+      return function(v) {
+        return step([n, v]);
+      };
+    }
+    function step(op) {
+      if (f) throw new TypeError("Generator is already executing.");
+      while (g && (g = 0, op[0] && (_2 = 0)), _2) try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+          case 4:
+            _2.label++;
+            return { value: op[1], done: false };
+          case 5:
+            _2.label++;
+            y = op[1];
+            op = [0];
+            continue;
+          case 7:
+            op = _2.ops.pop();
+            _2.trys.pop();
+            continue;
+          default:
+            if (!(t = _2.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _2 = 0;
+              continue;
+            }
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _2.label = op[1];
+              break;
+            }
+            if (op[0] === 6 && _2.label < t[1]) {
+              _2.label = t[1];
+              t = op;
+              break;
+            }
+            if (t && _2.label < t[2]) {
+              _2.label = t[2];
+              _2.ops.push(op);
+              break;
+            }
+            if (t[2]) _2.ops.pop();
+            _2.trys.pop();
+            continue;
+        }
+        op = body.call(thisArg, _2);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+      if (op[0] & 5) throw op[1];
+      return { value: op[0] ? op[1] : void 0, done: true };
+    }
+  }
+  function __exportStar(m, o) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) __createBinding(o, m, p);
+  }
+  function __values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+      next: function() {
+        if (o && i >= o.length) o = void 0;
+        return { value: o && o[i++], done: !o };
+      }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+  }
+  function __read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r2, ar = [], e;
+    try {
+      while ((n === void 0 || n-- > 0) && !(r2 = i.next()).done) ar.push(r2.value);
+    } catch (error) {
+      e = { error };
+    } finally {
+      try {
+        if (r2 && !r2.done && (m = i["return"])) m.call(i);
+      } finally {
+        if (e) throw e.error;
+      }
+    }
+    return ar;
+  }
+  function __spread() {
+    for (var ar = [], i = 0; i < arguments.length; i++)
+      ar = ar.concat(__read(arguments[i]));
+    return ar;
+  }
+  function __spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r2 = Array(s), k = 0, i = 0; i < il; i++)
+      for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+        r2[k] = a[j];
+    return r2;
+  }
+  function __spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+      if (ar || !(i in from)) {
+        if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+        ar[i] = from[i];
+      }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+  }
+  function __await(v) {
+    return this instanceof __await ? (this.v = v, this) : new __await(v);
+  }
+  function __asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = Object.create((typeof AsyncIterator === "function" ? AsyncIterator : Object).prototype), verb("next"), verb("throw"), verb("return", awaitReturn), i[Symbol.asyncIterator] = function() {
+      return this;
+    }, i;
+    function awaitReturn(f) {
+      return function(v) {
+        return Promise.resolve(v).then(f, reject);
+      };
+    }
+    function verb(n, f) {
+      if (g[n]) {
+        i[n] = function(v) {
+          return new Promise(function(a, b) {
+            q.push([n, v, a, b]) > 1 || resume(n, v);
+          });
+        };
+        if (f) i[n] = f(i[n]);
+      }
+    }
+    function resume(n, v) {
+      try {
+        step(g[n](v));
+      } catch (e) {
+        settle(q[0][3], e);
+      }
+    }
+    function step(r2) {
+      r2.value instanceof __await ? Promise.resolve(r2.value.v).then(fulfill, reject) : settle(q[0][2], r2);
+    }
+    function fulfill(value) {
+      resume("next", value);
+    }
+    function reject(value) {
+      resume("throw", value);
+    }
+    function settle(f, v) {
+      if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]);
+    }
+  }
+  function __asyncDelegator(o) {
+    var i, p;
+    return i = {}, verb("next"), verb("throw", function(e) {
+      throw e;
+    }), verb("return"), i[Symbol.iterator] = function() {
+      return this;
+    }, i;
+    function verb(n, f) {
+      i[n] = o[n] ? function(v) {
+        return (p = !p) ? { value: __await(o[n](v)), done: false } : f ? f(v) : v;
+      } : f;
+    }
+  }
+  function __asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function() {
+      return this;
+    }, i);
+    function verb(n) {
+      i[n] = o[n] && function(v) {
+        return new Promise(function(resolve, reject) {
+          v = o[n](v), settle(resolve, reject, v.done, v.value);
+        });
+      };
+    }
+    function settle(resolve, reject, d, v) {
+      Promise.resolve(v).then(function(v2) {
+        resolve({ value: v2, done: d });
+      }, reject);
+    }
+  }
+  function __makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) {
+      Object.defineProperty(cooked, "raw", { value: raw });
+    } else {
+      cooked.raw = raw;
+    }
+    return cooked;
+  }
+  function __importStar(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) {
+      for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+    }
+    __setModuleDefault(result, mod);
+    return result;
+  }
+  function __importDefault(mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  }
+  function __classPrivateFieldGet(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+  }
+  function __classPrivateFieldSet(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+  }
+  function __classPrivateFieldIn(state, receiver) {
+    if (receiver === null || typeof receiver !== "object" && typeof receiver !== "function") throw new TypeError("Cannot use 'in' operator on non-object");
+    return typeof state === "function" ? receiver === state : state.has(receiver);
+  }
+  function __addDisposableResource(env, value, async) {
+    if (value !== null && value !== void 0) {
+      if (typeof value !== "object" && typeof value !== "function") throw new TypeError("Object expected.");
+      var dispose, inner;
+      if (async) {
+        if (!Symbol.asyncDispose) throw new TypeError("Symbol.asyncDispose is not defined.");
+        dispose = value[Symbol.asyncDispose];
+      }
+      if (dispose === void 0) {
+        if (!Symbol.dispose) throw new TypeError("Symbol.dispose is not defined.");
+        dispose = value[Symbol.dispose];
+        if (async) inner = dispose;
+      }
+      if (typeof dispose !== "function") throw new TypeError("Object not disposable.");
+      if (inner) dispose = function() {
+        try {
+          inner.call(this);
+        } catch (e) {
+          return Promise.reject(e);
+        }
+      };
+      env.stack.push({ value, dispose, async });
+    } else if (async) {
+      env.stack.push({ async: true });
+    }
+    return value;
+  }
+  function __disposeResources(env) {
+    function fail(e) {
+      env.error = env.hasError ? new _SuppressedError(e, env.error, "An error was suppressed during disposal.") : e;
+      env.hasError = true;
+    }
+    var r2, s = 0;
+    function next() {
+      while (r2 = env.stack.pop()) {
+        try {
+          if (!r2.async && s === 1) return s = 0, env.stack.push(r2), Promise.resolve().then(next);
+          if (r2.dispose) {
+            var result = r2.dispose.call(r2.value);
+            if (r2.async) return s |= 2, Promise.resolve(result).then(next, function(e) {
+              fail(e);
+              return next();
+            });
+          } else s |= 1;
+        } catch (e) {
+          fail(e);
+        }
+      }
+      if (s === 1) return env.hasError ? Promise.reject(env.error) : Promise.resolve();
+      if (env.hasError) throw env.error;
+    }
+    return next();
+  }
+  function __rewriteRelativeImportExtension(path, preserveJsx) {
+    if (typeof path === "string" && /^\.\.?\//.test(path)) {
+      return path.replace(/\.(tsx)$|((?:\.d)?)((?:\.[^./]+?)?)\.([cm]?)ts$/i, function(m, tsx, d, ext, cm) {
+        return tsx ? preserveJsx ? ".jsx" : ".js" : d && (!ext || !cm) ? m : d + ext + "." + cm.toLowerCase() + "js";
+      });
+    }
+    return path;
+  }
+  var extendStatics, __assign, __createBinding, __setModuleDefault, ownKeys, _SuppressedError, tslib_es6_default;
+  var init_tslib_es6 = __esm({
+    "node_modules/tslib/tslib.es6.js"() {
+      extendStatics = function(d, b) {
+        extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
+          d2.__proto__ = b2;
+        } || function(d2, b2) {
+          for (var p in b2) if (Object.prototype.hasOwnProperty.call(b2, p)) d2[p] = b2[p];
+        };
+        return extendStatics(d, b);
+      };
+      __assign = function() {
+        __assign = Object.assign || function __assign2(t) {
+          for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+          }
+          return t;
+        };
+        return __assign.apply(this, arguments);
+      };
+      __createBinding = Object.create ? function(o, m, k, k2) {
+        if (k2 === void 0) k2 = k;
+        var desc = Object.getOwnPropertyDescriptor(m, k);
+        if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+          desc = { enumerable: true, get: function() {
+            return m[k];
+          } };
+        }
+        Object.defineProperty(o, k2, desc);
+      } : function(o, m, k, k2) {
+        if (k2 === void 0) k2 = k;
+        o[k2] = m[k];
+      };
+      __setModuleDefault = Object.create ? function(o, v) {
+        Object.defineProperty(o, "default", { enumerable: true, value: v });
+      } : function(o, v) {
+        o["default"] = v;
+      };
+      ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function(o2) {
+          var ar = [];
+          for (var k in o2) if (Object.prototype.hasOwnProperty.call(o2, k)) ar[ar.length] = k;
+          return ar;
+        };
+        return ownKeys(o);
+      };
+      _SuppressedError = typeof SuppressedError === "function" ? SuppressedError : function(error, suppressed, message) {
+        var e = new Error(message);
+        return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+      };
+      tslib_es6_default = {
+        __extends,
+        __assign,
+        __rest,
+        __decorate,
+        __param,
+        __esDecorate,
+        __runInitializers,
+        __propKey,
+        __setFunctionName,
+        __metadata,
+        __awaiter,
+        __generator,
+        __createBinding,
+        __exportStar,
+        __values,
+        __read,
+        __spread,
+        __spreadArrays,
+        __spreadArray,
+        __await,
+        __asyncGenerator,
+        __asyncDelegator,
+        __asyncValues,
+        __makeTemplateObject,
+        __importStar,
+        __importDefault,
+        __classPrivateFieldGet,
+        __classPrivateFieldSet,
+        __classPrivateFieldIn,
+        __addDisposableResource,
+        __disposeResources,
+        __rewriteRelativeImportExtension
+      };
+    }
+  });
+
+  // node_modules/react-universal-interface/lib/render.js
+  var require_render = __commonJS({
+    "node_modules/react-universal-interface/lib/render.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      var tslib_1 = (init_tslib_es6(), __toCommonJS(tslib_es6_exports));
+      var react_1 = (init_react(), __toCommonJS(react_exports));
+      var isReact16Plus = parseInt(react_1.version.substr(0, react_1.version.indexOf("."))) > 15;
+      var isFn = function(fn) {
+        return typeof fn === "function";
+      };
+      var render2 = function(props, data) {
+        var more = [];
+        for (var _i = 2; _i < arguments.length; _i++) {
+          more[_i - 2] = arguments[_i];
+        }
+        if (true) {
+          if (typeof props !== "object") {
+            throw new TypeError("renderChildren(props, data) first argument must be a props object.");
+          }
+          var children_1 = props.children, render_1 = props.render;
+          if (isFn(children_1) && isFn(render_1)) {
+            console.warn('Both "render" and "children" are specified for in a universal interface component. Children will be used.');
+            console.trace();
+          }
+          if (typeof data !== "object") {
+            console.warn("Universal component interface normally expects data to be an object, " + ('"' + typeof data + '" received.'));
+            console.trace();
+          }
+        }
+        var render3 = props.render, _a = props.children, children = _a === void 0 ? render3 : _a, component = props.component, _b = props.comp, comp = _b === void 0 ? component : _b;
+        if (isFn(children))
+          return children.apply(void 0, tslib_1.__spreadArrays([data], more));
+        if (comp) {
+          return react_1.createElement(comp, data);
+        }
+        if (children instanceof Array)
+          return isReact16Plus ? children : react_1.createElement.apply(void 0, tslib_1.__spreadArrays(["div", null], children));
+        if (children && children instanceof Object) {
+          if (true) {
+            if (!children.type || typeof children.type !== "string" && typeof children.type !== "function" && typeof children.type !== "symbol") {
+              console.warn('Universal component interface received object as children, expected React element, but received unexpected React "type".');
+              console.trace();
+            }
+            if (typeof children.type === "string")
+              return children;
+            return react_1.cloneElement(children, Object.assign({}, children.props, data));
+          } else {
+            if (typeof children.type === "string")
+              return children;
+            return react_1.cloneElement(children, Object.assign({}, children.props, data));
+          }
+        }
+        return children || null;
+      };
+      exports.default = render2;
+    }
+  });
+
+  // node_modules/react-universal-interface/lib/wrapInStatefulComponent.js
+  var require_wrapInStatefulComponent = __commonJS({
+    "node_modules/react-universal-interface/lib/wrapInStatefulComponent.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      var tslib_1 = (init_tslib_es6(), __toCommonJS(tslib_es6_exports));
+      var React2 = tslib_1.__importStar((init_react(), __toCommonJS(react_exports)));
+      var wrapInStatefulComponent = function(Comp) {
+        var Decorated = function(_super) {
+          tslib_1.__extends(class_1, _super);
+          function class_1() {
+            return _super !== null && _super.apply(this, arguments) || this;
+          }
+          class_1.prototype.render = function() {
+            return Comp(this.props, this.context);
+          };
+          return class_1;
+        }(React2.Component);
+        if (true) {
+          Decorated.displayName = "Decorated(" + (Comp.displayName || Comp.name) + ")";
+        }
+        return Decorated;
+      };
+      exports.default = wrapInStatefulComponent;
+    }
+  });
+
+  // node_modules/react-universal-interface/lib/addClassDecoratorSupport.js
+  var require_addClassDecoratorSupport = __commonJS({
+    "node_modules/react-universal-interface/lib/addClassDecoratorSupport.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      var tslib_1 = (init_tslib_es6(), __toCommonJS(tslib_es6_exports));
+      var wrapInStatefulComponent_1 = tslib_1.__importDefault(require_wrapInStatefulComponent());
+      var addClassDecoratorSupport = function(Comp) {
+        var isSFC = !Comp.prototype;
+        return !isSFC ? Comp : wrapInStatefulComponent_1.default(Comp);
+      };
+      exports.default = addClassDecoratorSupport;
+    }
+  });
+
+  // node_modules/react-universal-interface/lib/createEnhancer.js
+  var require_createEnhancer = __commonJS({
+    "node_modules/react-universal-interface/lib/createEnhancer.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.divWrapper = void 0;
+      var tslib_1 = (init_tslib_es6(), __toCommonJS(tslib_es6_exports));
+      var React2 = tslib_1.__importStar((init_react(), __toCommonJS(react_exports)));
+      var addClassDecoratorSupport_1 = tslib_1.__importDefault(require_addClassDecoratorSupport());
+      var h = React2.createElement;
+      var noWrap = function(Comp, propName, props, state) {
+        var _a;
+        return h(Comp, propName ? tslib_1.__assign((_a = {}, _a[propName] = state, _a), props) : tslib_1.__assign(tslib_1.__assign({}, state), props));
+      };
+      exports.divWrapper = function(Comp, propName, props, state) {
+        return h("div", null, noWrap(Comp, propName, props, state));
+      };
+      var createEnhancer = function(Facc, prop, wrapper) {
+        if (wrapper === void 0) {
+          wrapper = noWrap;
+        }
+        var enhancer = function(Comp, propName, faccProps) {
+          if (propName === void 0) {
+            propName = prop;
+          }
+          if (faccProps === void 0) {
+            faccProps = null;
+          }
+          var isClassDecoratorMethodCall = typeof Comp === "string";
+          if (isClassDecoratorMethodCall) {
+            return function(Klass) {
+              return enhancer(Klass, Comp || prop, propName);
+            };
+          }
+          var Enhanced = function(props) {
+            return h(Facc, faccProps, function(state) {
+              return wrapper(Comp, propName, props, state);
+            });
+          };
+          if (true) {
+            Enhanced.displayName = (Facc.displayName || Facc.name) + "(" + (Comp.displayName || Comp.name) + ")";
+          }
+          return isClassDecoratorMethodCall ? addClassDecoratorSupport_1.default(Enhanced) : Enhanced;
+        };
+        return enhancer;
+      };
+      exports.default = createEnhancer;
+    }
+  });
+
+  // node_modules/react-universal-interface/lib/hookToRenderProp.js
+  var require_hookToRenderProp = __commonJS({
+    "node_modules/react-universal-interface/lib/hookToRenderProp.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      var tslib_1 = (init_tslib_es6(), __toCommonJS(tslib_es6_exports));
+      var render_1 = tslib_1.__importDefault(require_render());
+      var defaultMapPropsToArgs = function(props) {
+        return [props];
+      };
+      var hookToRenderProp = function(hook, mapPropsToArgs) {
+        if (mapPropsToArgs === void 0) {
+          mapPropsToArgs = defaultMapPropsToArgs;
+        }
+        return function(props) {
+          return render_1.default(props, hook.apply(void 0, mapPropsToArgs(props)));
+        };
+      };
+      exports.default = hookToRenderProp;
+    }
+  });
+
+  // node_modules/react-universal-interface/lib/index.js
+  var require_lib = __commonJS({
+    "node_modules/react-universal-interface/lib/index.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.hookToRenderProp = exports.createEnhancer = exports.render = void 0;
+      var tslib_1 = (init_tslib_es6(), __toCommonJS(tslib_es6_exports));
+      var render_1 = tslib_1.__importDefault(require_render());
+      exports.render = render_1.default;
+      var createEnhancer_1 = tslib_1.__importDefault(require_createEnhancer());
+      exports.createEnhancer = createEnhancer_1.default;
+      var hookToRenderProp_1 = tslib_1.__importDefault(require_hookToRenderProp());
+      exports.hookToRenderProp = hookToRenderProp_1.default;
     }
   });
 
@@ -174,9 +937,9 @@
   };
 
   // modules/src/util/bem.jsx
-  var bem = (className2) => {
+  var bem = (className) => {
     const children = {};
-    const firstClass = className2.split(" ")[0];
+    const firstClass = className.split(" ")[0];
     return new Proxy(
       function() {
         if (arguments.length > 0) {
@@ -193,10 +956,10 @@
             classes.push.apply(classes, Array.isArray(arguments[i]) ? arguments[i] : Object.keys(arguments[i]).filter((c) => arguments[i][c]));
           }
           if (classes.length > 0) {
-            return (className2 + " " + classes.join(" ")).replace(" --", " " + firstClass + "--");
+            return (className + " " + classes.join(" ")).replace(" --", " " + firstClass + "--");
           }
         }
-        return className2;
+        return className;
       },
       {
         get: (target, prop) => {
@@ -1033,11 +1796,11 @@
     },
     /*color inherit*/
     inheritColor: (props, images) => {
-      const { attributes, className: className2, setAttributes, context } = props;
+      const { attributes, className, setAttributes, context } = props;
       const { setURLparams } = Catpow.util;
       const { classes, color = "0" } = attributes;
-      const { useEffect: useEffect5, useMemo: useMemo5 } = wp.element;
-      const inheritColor = useMemo5(() => {
+      const { useEffect: useEffect5, useMemo: useMemo4 } = wp.element;
+      const inheritColor = useMemo4(() => {
         return color === "0" || context["catpow/color"] === color;
       }, [color, context["catpow/color"]]);
       useEffect5(() => {
@@ -1199,7 +1962,7 @@
     },
     /*id reflection*/
     manageStyleData: (props, csss) => {
-      const { attributes, className: className2, setAttributes } = props;
+      const { attributes, className, setAttributes } = props;
       const { anchor, prevAnchor, styleDatas } = attributes;
       const { useEffect: useEffect5 } = wp.element;
       useEffect5(() => {
@@ -1348,7 +2111,7 @@
       const { isActive, value, onChange, activeAttributes, contentRef } = props;
       const { BlockControls, RichTextToolbarButton } = wp.blockEditor;
       const { Popover, Card, CardBody, ToolbarGroup } = wp.components;
-      const { useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
+      const { useMemo: useMemo4, useCallback: useCallback3 } = wp.element;
       const { applyFormat, toggleFormat } = wp.richText;
       const onToggle = () => {
         return onChange(
@@ -1358,7 +2121,7 @@
           })
         );
       };
-      const setAttributes = useCallback4(
+      const setAttributes = useCallback3(
         (attr) => {
           onChange(
             applyFormat(value, {
@@ -1395,7 +2158,7 @@
       const { isActive, value, onChange, activeAttributes, contentRef } = props;
       const { Popover, Card, CardBody, ToolbarGroup } = wp.components;
       const { BlockControls, RichTextShortcut, RichTextToolbarButton } = wp.blockEditor;
-      const { useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
+      const { useMemo: useMemo4, useCallback: useCallback3 } = wp.element;
       const { applyFormat, toggleFormat } = wp.richText;
       const onToggle = () => {
         return onChange(
@@ -1405,7 +2168,7 @@
           })
         );
       };
-      const setAttributes = useCallback4(
+      const setAttributes = useCallback3(
         (attr) => {
           onChange(
             applyFormat(value, {
@@ -1430,7 +2193,7 @@
     edit(props) {
       const { isActive, value, onChange, activeAttributes, contentRef } = props;
       const { Popover, Card, CardBody, ToolbarGroup } = wp.components;
-      const { useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
+      const { useMemo: useMemo4, useCallback: useCallback3 } = wp.element;
       const { BlockControls, RichTextToolbarButton } = wp.blockEditor;
       const { applyFormat, toggleFormat } = wp.richText;
       const onToggle = () => {
@@ -1441,7 +2204,7 @@
           })
         );
       };
-      const setAttributes = useCallback4(
+      const setAttributes = useCallback3(
         (attr) => {
           onChange(
             applyFormat(value, {
@@ -1473,7 +2236,7 @@
       const { isActive, value, onChange, onFocus, activeAttributes, activeObject, contentRef } = props;
       const { Popover, BaseControle, TextControl, Card, CardBody, ToolbarGroup } = wp.components;
       const { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
-      const { useState: useState5, useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
+      const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3 } = wp.element;
       const { removeFormat, applyFormat, toggleFormat, insert, create, slice } = wp.richText;
       const onToggle = () => {
         return onChange(
@@ -1483,7 +2246,7 @@
           })
         );
       };
-      const setAttributes = useCallback4(
+      const setAttributes = useCallback3(
         (attr) => {
           onChange(
             applyFormat(value, {
@@ -1526,7 +2289,7 @@
       const { isActive, value, onChange, onFocus, activeAttributes, activeObject, contentRef } = props;
       const { Popover, BaseControl, TextControl, RangeControl, Card, CardBody, ToolbarGroup } = wp.components;
       const { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
-      const { useState: useState5, useMemo: useMemo5, useCallback: useCallback4, useReducer: useReducer3, useEffect: useEffect5 } = wp.element;
+      const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useReducer: useReducer2, useEffect: useEffect5 } = wp.element;
       const { removeFormat, applyFormat, toggleFormat, insert, create, slice } = wp.richText;
       const onToggle = () => {
         return onChange(
@@ -1536,7 +2299,7 @@
           })
         );
       };
-      const setAttributes = useCallback4(
+      const setAttributes = useCallback3(
         (attr) => {
           onChange(
             applyFormat(value, {
@@ -1547,7 +2310,7 @@
         },
         [value, activeAttributes]
       );
-      const extractStateFromVars = useCallback4((vars) => {
+      const extractStateFromVars = useCallback3((vars) => {
         const state2 = {};
         if (!vars) {
           return state2;
@@ -1564,7 +2327,7 @@
         });
         return state2;
       }, []);
-      const extractVarsFromState = useCallback4((state2) => {
+      const extractVarsFromState = useCallback3((state2) => {
         let vars = "";
         const map = {
           color: "color:$;",
@@ -1579,14 +2342,14 @@
         });
         return vars;
       }, []);
-      const init = useCallback4((state2) => {
+      const init = useCallback3((state2) => {
         if (state2.vars) {
           const { vars } = state2;
           return { vars, ...extractStateFromVars(vars) };
         }
         return { color: "inherit", size: 1, weight: 400, vars: "font-size:1em;" };
       }, []);
-      const reducer = useCallback4((state2, action) => {
+      const reducer = useCallback3((state2, action) => {
         if (action.hasOwnProperty("vars")) {
           const { vars } = action;
           return { vars, ...extractStateFromVars(vars) };
@@ -1596,7 +2359,7 @@
           return newState;
         }
       }, []);
-      const [state, update] = useReducer3(reducer, { vars: activeAttributes.vars }, init);
+      const [state, update] = useReducer2(reducer, { vars: activeAttributes.vars }, init);
       useEffect5(() => {
         if (isActive) {
           onChange(
@@ -1627,17 +2390,17 @@
   // ../blocks/_init/init/plugins.jsx
   wp.plugins.registerPlugin("catpow-sidebar", {
     render: (props) => {
-      const { useState: useState5, useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
+      const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3 } = wp.element;
       const { PluginSidebarMoreMenuItem, PluginSidebar } = wp.editPost;
       const { PanelBody } = wp.components;
-      const [structure, setStructure] = useState5(false);
+      const [structure, setStructure] = useState3(false);
       const { DataStructure, DataStructureItem } = CP;
       if (!structure) {
         wp.apiFetch({ path: "/cp/v1/config/structure" }).then((structure2) => {
           setStructure(structure2);
         });
       }
-      const RenderMeta = useCallback4(
+      const RenderMeta = useCallback3(
         ({ meta }) => {
           return /* @__PURE__ */ wp.element.createElement(DataStructure, null, meta.map((item) => {
             if (item.value) {
@@ -1648,7 +2411,7 @@
         },
         [props]
       );
-      const RenderMetaValue = useCallback4(
+      const RenderMetaValue = useCallback3(
         ({ value }) => {
           if (Array.isArray(value)) {
             return value.map((val) => /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: val }));
@@ -1757,16 +2520,16 @@
   // ../blocks/_init/init/BoundingBox.jsx
   CP.BoundingBox = (props) => {
     const { targets, onDeselect, onDuplicate, onDelete, onChange } = props;
-    const { useState: useState5, useCallback: useCallback4, useMemo: useMemo5, useEffect: useEffect5, useRef: useRef4 } = wp.element;
-    const classes = useMemo5(() => bem("cp-boundingbox"), []);
+    const { useState: useState3, useCallback: useCallback3, useMemo: useMemo4, useEffect: useEffect5, useRef: useRef4 } = wp.element;
+    const classes = useMemo4(() => bem("cp-boundingbox"), []);
     const ref = useRef4();
-    const [style, setStyle] = useState5({});
-    const [action, setAction] = useState5(false);
-    const container = useMemo5(
+    const [style, setStyle] = useState3({});
+    const [action, setAction] = useState3(false);
+    const container = useMemo4(
       () => props.container || document,
       [props.container]
     );
-    const tracePosition = useCallback4(
+    const tracePosition = useCallback3(
       (targets2) => {
         const cBnd = container.getBoundingClientRect();
         const bnd = targets2.length === 1 ? targets2[0].getBoundingClientRect() : targets2.reduce((bnd2, target) => {
@@ -1791,7 +2554,7 @@
       },
       [container]
     );
-    const getRelBnd = useCallback4(
+    const getRelBnd = useCallback3(
       (el) => {
         const bnd1 = container.getBoundingClientRect();
         const bnd2 = el.getBoundingClientRect();
@@ -1805,7 +2568,7 @@
       },
       [container]
     );
-    const observer = useMemo5(() => {
+    const observer = useMemo4(() => {
       return new MutationObserver((mutations) => {
         tracePosition(targets);
       });
@@ -1863,7 +2626,7 @@
       document.addEventListener("keydown", cb);
       return () => document.removeEventListener("keydown", cb);
     }, [targets, onDelete]);
-    const controls = useMemo5(() => {
+    const controls = useMemo4(() => {
       const controls2 = [];
       ["top", "middle", "bottom"].forEach((v, vi) => {
         ["left", "center", "right"].forEach((h, hi) => {
@@ -1883,7 +2646,7 @@
       });
       return controls2;
     }, []);
-    const onMouseDown = useCallback4(
+    const onMouseDown = useCallback3(
       (e) => {
         const control = e.target.closest("[data-control-action]");
         if (!control) {
@@ -1919,7 +2682,7 @@
       },
       [ref, targets, onDuplicate]
     );
-    const onMouseMove = useCallback4(
+    const onMouseMove = useCallback3(
       (e) => {
         if (!action) {
           return;
@@ -1948,7 +2711,7 @@
       },
       [action]
     );
-    const onMouseUp = useCallback4(
+    const onMouseUp = useCallback3(
       (e) => {
         if (onChange) {
           onChange(action.targets);
@@ -1963,7 +2726,7 @@
       },
       [action, onChange]
     );
-    const onDoubleClick = useCallback4(
+    const onDoubleClick = useCallback3(
       (e) => {
         targets.forEach((target) => {
           target.style.height = "auto";
@@ -2007,8 +2770,158 @@
   // modules/src/component/Animation/MosaicWave.jsx
   init_react();
 
-  // modules/src/component/Input/InputPosition.jsx
+  // modules/src/component/Input/PositionInput.jsx
   init_react();
+
+  // node_modules/react-use/esm/misc/util.js
+  var noop = function() {
+  };
+  function on(obj) {
+    var args = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+      args[_i - 1] = arguments[_i];
+    }
+    if (obj && obj.addEventListener) {
+      obj.addEventListener.apply(obj, args);
+    }
+  }
+  function off(obj) {
+    var args = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+      args[_i - 1] = arguments[_i];
+    }
+    if (obj && obj.removeEventListener) {
+      obj.removeEventListener.apply(obj, args);
+    }
+  }
+
+  // node_modules/react-use/esm/useLatest.js
+  init_react();
+  var useLatest = function(value) {
+    var ref = useRef(value);
+    ref.current = value;
+    return ref;
+  };
+  var useLatest_default = useLatest;
+
+  // node_modules/react-use/esm/useScratch.js
+  init_tslib_es6();
+  init_react();
+  var import_react_universal_interface = __toESM(require_lib());
+  var useScratch = function(params) {
+    if (params === void 0) {
+      params = {};
+    }
+    var disabled = params.disabled;
+    var paramsRef = useLatest_default(params);
+    var _a = useState({ isScratching: false }), state = _a[0], setState = _a[1];
+    var refState = useRef(state);
+    var refScratching = useRef(false);
+    var refAnimationFrame = useRef(null);
+    var _b = useState(null), el = _b[0], setEl = _b[1];
+    useEffect(function() {
+      if (disabled)
+        return;
+      if (!el)
+        return;
+      var onMoveEvent = function(docX, docY) {
+        cancelAnimationFrame(refAnimationFrame.current);
+        refAnimationFrame.current = requestAnimationFrame(function() {
+          var _a2 = el.getBoundingClientRect(), left = _a2.left, top = _a2.top;
+          var elX = left + window.scrollX;
+          var elY = top + window.scrollY;
+          var x = docX - elX;
+          var y = docY - elY;
+          setState(function(oldState) {
+            var newState = __assign(__assign({}, oldState), { dx: x - (oldState.x || 0), dy: y - (oldState.y || 0), end: Date.now(), isScratching: true });
+            refState.current = newState;
+            (paramsRef.current.onScratch || noop)(newState);
+            return newState;
+          });
+        });
+      };
+      var onMouseMove = function(event) {
+        onMoveEvent(event.pageX, event.pageY);
+      };
+      var onTouchMove = function(event) {
+        onMoveEvent(event.changedTouches[0].pageX, event.changedTouches[0].pageY);
+      };
+      var onMouseUp;
+      var onTouchEnd;
+      var stopScratching = function() {
+        if (!refScratching.current)
+          return;
+        refScratching.current = false;
+        refState.current = __assign(__assign({}, refState.current), { isScratching: false });
+        (paramsRef.current.onScratchEnd || noop)(refState.current);
+        setState({ isScratching: false });
+        off(window, "mousemove", onMouseMove);
+        off(window, "touchmove", onTouchMove);
+        off(window, "mouseup", onMouseUp);
+        off(window, "touchend", onTouchEnd);
+      };
+      onMouseUp = stopScratching;
+      onTouchEnd = stopScratching;
+      var startScratching = function(docX, docY) {
+        if (!refScratching.current)
+          return;
+        var _a2 = el.getBoundingClientRect(), left = _a2.left, top = _a2.top;
+        var elX = left + window.scrollX;
+        var elY = top + window.scrollY;
+        var x = docX - elX;
+        var y = docY - elY;
+        var time = Date.now();
+        var newState = {
+          isScratching: true,
+          start: time,
+          end: time,
+          docX,
+          docY,
+          x,
+          y,
+          dx: 0,
+          dy: 0,
+          elH: el.offsetHeight,
+          elW: el.offsetWidth,
+          elX,
+          elY
+        };
+        refState.current = newState;
+        (paramsRef.current.onScratchStart || noop)(newState);
+        setState(newState);
+        on(window, "mousemove", onMouseMove);
+        on(window, "touchmove", onTouchMove);
+        on(window, "mouseup", onMouseUp);
+        on(window, "touchend", onTouchEnd);
+      };
+      var onMouseDown = function(event) {
+        refScratching.current = true;
+        startScratching(event.pageX, event.pageY);
+      };
+      var onTouchStart = function(event) {
+        refScratching.current = true;
+        startScratching(event.changedTouches[0].pageX, event.changedTouches[0].pageY);
+      };
+      on(el, "mousedown", onMouseDown);
+      on(el, "touchstart", onTouchStart);
+      return function() {
+        off(el, "mousedown", onMouseDown);
+        off(el, "touchstart", onTouchStart);
+        off(window, "mousemove", onMouseMove);
+        off(window, "touchmove", onTouchMove);
+        off(window, "mouseup", onMouseUp);
+        off(window, "touchend", onTouchEnd);
+        if (refAnimationFrame.current)
+          cancelAnimationFrame(refAnimationFrame.current);
+        refAnimationFrame.current = null;
+        refScratching.current = false;
+        refState.current = { isScratching: false };
+        setState(refState.current);
+      };
+    }, [el, disabled, paramsRef]);
+    return [setEl, state];
+  };
+  var useScratch_default = useScratch;
 
   // modules/src/component/Bem.jsx
   init_react();
@@ -2019,33 +2932,37 @@
       });
       return;
     }
+    if (component.type == react_default.Fragment) {
+      applyBem(component.props.children, ctx);
+      return;
+    }
     if (component == null || component.props == null) {
       return;
     }
     const {
-      props: { className: className2, children }
+      props: { className, children }
     } = component;
-    if (className2) {
-      component.props.className = className2.split(" ").map((className3) => {
-        if (className3.slice(0, 2) === "--") {
-          return ctx.element + className3;
+    if (className) {
+      component.props.className = className.split(" ").map((className2) => {
+        if (className2.slice(0, 2) === "--") {
+          return ctx.element + className2;
         }
-        if (className3[0] === "-") {
-          return ctx.block = ctx.element = ctx.block + className3;
+        if (className2[0] === "-") {
+          return ctx.block = ctx.element = ctx.block + className2;
         }
-        if (className3[0] === "_") {
-          return ctx.element = ctx.element + (ctx.element === ctx.block ? "__" : "-") + className3.slice(1);
+        if (className2[0] === "_") {
+          return ctx.element = ctx.element + (ctx.element === ctx.block ? "__" : "-") + className2.slice(1);
         }
-        if (className3.slice(-1) === "-") {
-          return ctx.block = ctx.element = ctx.prefix + "-" + className3.slice(0, -1);
+        if (className2.slice(-1) === "-") {
+          return ctx.block = ctx.element = ctx.prefix + "-" + className2.slice(0, -1);
         }
-        if (className3.slice(-1) === "_") {
-          return ctx.element = ctx.block + "__" + className3.slice(0, -1);
+        if (className2.slice(-1) === "_") {
+          return ctx.element = ctx.block + "__" + className2.slice(0, -1);
         }
-        return className3;
+        return className2;
       }).join(" ");
-      if (component.props.className === className2) {
-        const matches = className2.match(/\b(([a-z]+)\-[a-z]+(\-[a-z]+)*)(__[a-z]+(\-[a-z]+)*)?\b/);
+      if (component.props.className === className) {
+        const matches = className.match(/\b(([a-z]+)\-[a-z]+(\-[a-z]+)*)(__[a-z]+(\-[a-z]+)*)?\b/);
         if (!matches) {
           return;
         }
@@ -2075,8 +2992,63 @@
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, children);
   };
 
-  // modules/src/component/Input/InputPosition.jsx
-  var { useState: useState2, useEffect: useEffect2 } = react_default;
+  // modules/src/hooks/useThrottle.jsx
+  init_react();
+  var { useEffect: useEffect2, useRef: useRef2 } = react_default;
+  var useThrottle = (callback, interval, deps) => {
+    const ref = useRef2(false);
+    useEffect2(() => {
+      if (ref.current) {
+        const timer = setTimeout(callback, interval);
+        return () => clearTimeout(timer);
+      }
+      ref.current = true;
+      callback();
+      setTimeout(() => {
+        ref.current = false;
+      }, interval);
+    }, deps);
+  };
+
+  // modules/src/component/Input/PositionInput.jsx
+  var PositionInput = (props) => {
+    const { className = "cp-positioninput", width = 100, height = 100, margin = 10, grid = 10, snap = false, x = 50, y = 50, r: r2 = 6, onChange, ...otherProps } = props;
+    const [ref, state] = useScratch_default();
+    const [pos, setPos] = useState({ x, y });
+    useThrottle(() => onChange({ x: pos.x, y: pos.y }), 50, [pos.x, pos.y]);
+    useEffect(() => {
+      if (!state.isScratching) {
+        return;
+      }
+      let x2 = parseInt(Math.max(0, Math.min(state.x + state.dx - margin, width)));
+      let y2 = parseInt(Math.max(0, Math.min(state.y + state.dy - margin, height)));
+      if (isNaN(x2) || isNaN(y2)) {
+        return;
+      }
+      if (snap) {
+        x2 = Math.round(x2 / grid) * grid;
+        y2 = Math.round(y2 / grid) * grid;
+      }
+      setPos({ x: x2, y: y2 });
+    }, [state.dx, state.dy]);
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement(
+      "svg",
+      {
+        className,
+        width: width + margin * 2,
+        height: height + margin * 2,
+        viewBox: `0 0 ${width + margin * 2} ${height + margin * 2}`,
+        xmlns: "http://www.w3.org/2000/svg",
+        ref,
+        style: { cursor: state.isScratching ? "grabbing" : "grab" },
+        ...otherProps
+      },
+      /* @__PURE__ */ wp.element.createElement("rect", { className: "_bg", x: margin, y: margin, width, height, fill: "none", stroke: "currentColor", strokeOpacity: 0.5 }),
+      /* @__PURE__ */ wp.element.createElement("circle", { fill: "none", stroke: "currentColor", strokeOpacity: 0.75, className: "_circle", cx: pos.x + margin, cy: pos.y + margin, r: r2 }),
+      /* @__PURE__ */ wp.element.createElement("circle", { fill: "currentColor", className: "_dot", cx: pos.x + margin, cy: pos.y + margin, r: 2 }),
+      grid > 0 && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, Array.from({ length: Math.floor(width / grid) }, (_2, i) => /* @__PURE__ */ wp.element.createElement("line", { key: i, stroke: "currentColor", strokeOpacity: 0.1, className: "_grid", x1: i * grid + margin, y1: margin, x2: i * grid + margin, y2: height + margin })), Array.from({ length: Math.floor(height / grid) }, (_2, i) => /* @__PURE__ */ wp.element.createElement("line", { key: i, stroke: "currentColor", strokeOpacity: 0.1, className: "_grid", x1: margin, y1: i * grid + margin, x2: width + margin, y2: i * grid + margin })), /* @__PURE__ */ wp.element.createElement("line", { stroke: "currentColor", strokeOpacity: 0.2, className: "_grid is-center", x1: width / 2 + margin, y1: margin, x2: width / 2 + margin, y2: height + margin }), /* @__PURE__ */ wp.element.createElement("line", { stroke: "currentColor", strokeOpacity: 0.2, className: "_grid is-center", x1: margin, y1: height / 2 + margin, x2: width + margin, y2: height / 2 + margin }))
+    ));
+  };
 
   // modules/src/component/Nav/Nav.jsx
   init_react();
@@ -2125,29 +3097,17 @@
 
   // react-global:react-dom
   var react_dom_default = window.wp.element;
-  var useState3 = wp.element.useState;
-  var useEffect3 = wp.element.useEffect;
-  var useLayoutEffect2 = wp.element.useLayoutEffect;
-  var useRef2 = wp.element.useRef;
-  var forwardRef2 = wp.element.forwardRef;
-  var useMemo3 = wp.element.useMemo;
-  var useCallback2 = wp.element.useCallback;
-  var createContext2 = wp.element.createContext;
-  var useContext2 = wp.element.useContext;
-  var useReducer2 = wp.element.useReducer;
-  var createElement2 = wp.element.createElement;
-  var cloneElement2 = wp.element.cloneElement;
-  var isValidElement2 = wp.element.isValidElement;
-  var Fragment2 = wp.element.Fragment;
+  var createPortal = wp.element.createPortal;
+  var flushSync = wp.element.flushSync;
 
   // modules/src/component/Portal.jsx
   var Portal = (props) => {
     const { children, trace } = props;
-    const { render, useState: useState5, useMemo: useMemo5, useCallback: useCallback4, useEffect: useEffect5, useRef: useRef4 } = react_default;
-    const { createPortal } = react_dom_default;
+    const { render: render2, useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5, useRef: useRef4 } = react_default;
+    const { createPortal: createPortal2 } = react_dom_default;
     const ref = useRef4({ contents: false, setContents: () => {
     } });
-    const el = useMemo5(() => {
+    const el = useMemo4(() => {
       if (props.id) {
         const exEl = document.getElementById(props.id);
         if (exEl) {
@@ -2181,7 +3141,7 @@
       }, 50);
       return () => clearInterval(timer);
     }, [props.trace]);
-    return createPortal(children, el);
+    return createPortal2(children, el);
   };
 
   // modules/src/component/PortalWindow.jsx
@@ -2207,8 +3167,8 @@
 
   // modules/src/hooks/useAgent.jsx
   init_react();
-  var { useMemo: useMemo4, useState: useState4, useCallback: useCallback3, useRef: useRef3, useEffect: useEffect4, createContext: createContext3, useContext: useContext3 } = react_default;
-  var AgentContext = createContext3();
+  var { useMemo: useMemo3, useState: useState2, useCallback: useCallback2, useRef: useRef3, useEffect: useEffect3, createContext: createContext2, useContext: useContext2 } = react_default;
+  var AgentContext = createContext2();
 
   // modules/src/hooks/useBem.jsx
   init_react();
@@ -2227,6 +3187,10 @@
 
   // modules/src/hooks/useLazyComponent.jsx
   init_react();
+
+  // modules/src/hooks/useDebounce.jsx
+  init_react();
+  var { useEffect: useEffect4 } = react_default;
 
   // modules/src/component/Loop.jsx
   init_react();
@@ -2261,12 +3225,12 @@
   // ../blocks/_init/init/SelectThemeColor.jsx
   CP.SelectThemeColor = (props) => {
     const { onChange } = props;
-    const { useCallback: useCallback4, useMemo: useMemo5, Fragment: Fragment3 } = wp.element;
+    const { useCallback: useCallback3, useMemo: useMemo4, Fragment: Fragment2 } = wp.element;
     const { Icon } = wp.components;
     const classes = bem("cp-selectthemecolor");
-    const proxy = useMemo5(() => CP.colorClassProxy(props.selected), [props.selected]);
-    const data = useMemo5(() => CP.parseColorClass(proxy.h), [proxy.h]);
-    const ColorSelections = useCallback4(
+    const proxy = useMemo4(() => CP.colorClassProxy(props.selected), [props.selected]);
+    const data = useMemo4(() => CP.parseColorClass(proxy.h), [proxy.h]);
+    const ColorSelections = useCallback3(
       (props2) => {
         const { fixed = false, absolute = false, relative = false, active = false, proxy: proxy2 } = props2;
         const { h, s, l } = proxy2;
@@ -2295,21 +3259,21 @@
       },
       [onChange]
     );
-    const ToneSelections = useCallback4(
+    const ToneSelections = useCallback3(
       (props2) => {
         const { proxy: proxy2 } = props2;
         const { h, s, l } = proxy2;
         const hsl = { h, s, l };
-        return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.tones() }, ["s", "l"].map((r3) => /* @__PURE__ */ wp.element.createElement(Fragment3, { key: r3 }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active: !!hsl[r3] }) }, /* @__PURE__ */ wp.element.createElement(CP.ConfigIcon, { icon: { s: "contrast", l: "light" }[r3] })), Array.from(Array(5), (v, index) => {
+        return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.tones() }, ["s", "l"].map((r2) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: r2 }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active: !!hsl[r2] }) }, /* @__PURE__ */ wp.element.createElement(CP.ConfigIcon, { icon: { s: "contrast", l: "light" }[r2] })), Array.from(Array(5), (v, index) => {
           const value = index - 2;
-          const toneClass = CP.generateToneClass({ [r3]: true, value });
-          const active = toneClass === hsl[r3];
+          const toneClass = CP.generateToneClass({ [r2]: true, value });
+          const active = toneClass === hsl[r2];
           return /* @__PURE__ */ wp.element.createElement(
             "li",
             {
-              className: classes.tones.item(h, r3 === "s" ? l : s, toneClass, { active }),
+              className: classes.tones.item(h, r2 === "s" ? l : s, toneClass, { active }),
               onClick: () => {
-                proxy2[r3] = !active && toneClass;
+                proxy2[r2] = !active && toneClass;
                 onChange(proxy2);
               },
               key: toneClass
@@ -2325,11 +3289,11 @@
 
   // ../blocks/_init/init/SelectColors.jsx
   CP.SelectColors = (props) => {
-    const { useState: useState5, useRef: useRef4, useReducer: useReducer3, useCallback: useCallback4 } = wp.element;
+    const { useState: useState3, useRef: useRef4, useReducer: useReducer2, useCallback: useCallback3 } = wp.element;
     const { ColorPicker, ColorPalette, Popover } = wp.components;
     const { onChange } = props;
-    const [index, setIndex] = useState5(-1);
-    const init = useCallback4((colors2) => {
+    const [index, setIndex] = useState3(-1);
+    const init = useCallback3((colors2) => {
       const colorValues = colors2.map((color) => {
         if (typeof color === "string") {
           return color;
@@ -2349,20 +3313,20 @@
         return { name: color, color };
       });
     }, []);
-    const reducer = useCallback4((colors2, action) => {
+    const reducer = useCallback3((colors2, action) => {
       const { index: index2, color } = action;
       const newColors = [...colors2];
       newColors.splice(index2, 1, { name: color, color });
       return newColors;
     }, []);
-    const [colors, updateColors] = useReducer3(reducer, props.colors, init);
-    const onChangeOfColorPalette = useCallback4(
+    const [colors, updateColors] = useReducer2(reducer, props.colors, init);
+    const onChangeOfColorPalette = useCallback3(
       (value) => {
         setIndex(colors.findIndex((color) => color.color == value));
       },
       [colors]
     );
-    const onChangeOfColorPicker = useCallback4(
+    const onChangeOfColorPicker = useCallback3(
       (value) => {
         updateColors({ index, color: value.hex });
         onChange(index, value);
@@ -2388,7 +3352,7 @@
 
   // ../blocks/_init/init/ResponsiveImage.jsx
   CP.ResponsiveImage = (props) => {
-    const { className: className2 = "cp-responsiveimage", attr, set, keys, index, subIndex, sizes, devices, device, isTemplate, ...otherProps } = props;
+    const { className = "cp-responsiveimage", attr, set, keys, index, subIndex, sizes, devices, device, isTemplate, ...otherProps } = props;
     let item, items2, subItems;
     item = attr || {};
     if (keys.items) {
@@ -2402,15 +3366,15 @@
     if (isTemplate && keys.code && item[keys.code]) {
       return item[keys.code];
     }
-    return /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className: className2, item });
+    return /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item });
   };
   var ResponsiveImageBody = (props) => {
-    const { className: className2 = "cp-responsiveimage", attr, set, keys, index, subIndex, devices, device, isTemplate, item, ...otherProps } = props;
+    const { className = "cp-responsiveimage", attr, set, keys, index, subIndex, devices, device, isTemplate, item, ...otherProps } = props;
     let { sizes } = props;
-    const primaryClassName = className2.split(" ")[0];
+    const primaryClassName = className.split(" ")[0];
     const type = item[keys.mime] ? item[keys.mime].split("/")[0] : "image";
     if (type == "audio") {
-      return /* @__PURE__ */ wp.element.createElement("audio", { className: className2 + " is-audio", src: item[keys.src], "data-mime": item[keys.mime], ...otherProps });
+      return /* @__PURE__ */ wp.element.createElement("audio", { className: className + " is-audio", src: item[keys.src], "data-mime": item[keys.mime], ...otherProps });
     }
     if (item[keys.srcset] && !sizes) {
       if (device) {
@@ -2432,11 +3396,11 @@
           const source = item[keys.sources] && item[keys.sources].find((source2) => source2.device === device) || {
             srcset: wpinfo.theme_url + "/images/dummy.mp4"
           };
-          return /* @__PURE__ */ wp.element.createElement("video", { className: className2 + " is-video", src: source.srcset, ...videoAtts, ...otherProps });
+          return /* @__PURE__ */ wp.element.createElement("video", { className: className + " is-video", src: source.srcset, ...videoAtts, ...otherProps });
         }
-        return /* @__PURE__ */ wp.element.createElement("video", { className: className2 + " is-picture", ...videoAtts, ...otherProps }, item[keys.sources] && item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { src: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("source", { src: item[keys.src] }));
+        return /* @__PURE__ */ wp.element.createElement("video", { className: className + " is-picture", ...videoAtts, ...otherProps }, item[keys.sources] && item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { src: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("source", { src: item[keys.src] }));
       }
-      return /* @__PURE__ */ wp.element.createElement("video", { className: className2 + " is-video", src: item[keys.src], ...videoAtts, ...otherProps });
+      return /* @__PURE__ */ wp.element.createElement("video", { className: className + " is-video", src: item[keys.src], ...videoAtts, ...otherProps });
     }
     var src = CP.imageSrcOrDummy(keys.src ? item[keys.src] : keys.url && item[keys.url] ? item[keys.url].slice(4, -1) : null);
     if (keys.sources) {
@@ -2444,16 +3408,16 @@
         const source = item[keys.sources] && item[keys.sources].find((source2) => source2.device === device) || {
           srcset: wpinfo.theme_url + "/images/dummy.jpg"
         };
-        return /* @__PURE__ */ wp.element.createElement("picture", { className: className2 + " is-picture", ...otherProps }, /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src: source.srcset, alt: item[keys.alt] }));
+        return /* @__PURE__ */ wp.element.createElement("picture", { className: className + " is-picture", ...otherProps }, /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src: source.srcset, alt: item[keys.alt] }));
       }
-      return /* @__PURE__ */ wp.element.createElement("picture", { className: className2 + " is-picture", ...otherProps }, item[keys.sources] && item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src, alt: item[keys.alt] }));
+      return /* @__PURE__ */ wp.element.createElement("picture", { className: className + " is-picture", ...otherProps }, item[keys.sources] && item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src, alt: item[keys.alt] }));
     }
-    return /* @__PURE__ */ wp.element.createElement("img", { className: className2 + " is-img", src, alt: item[keys.alt], srcSet: item[keys.srcset], sizes, "data-mime": item[keys.mime], ...otherProps });
+    return /* @__PURE__ */ wp.element.createElement("img", { className: className + " is-img", src, alt: item[keys.alt], srcSet: item[keys.srcset], sizes, "data-mime": item[keys.mime], ...otherProps });
   };
 
   // ../blocks/_init/init/SelectResponsiveImage.jsx
   CP.SelectResponsiveImage = (props) => {
-    const { className: className2 = "cp-selectresponsiveimage", attr, set, keys = {}, index = 0, subIndex = 0, size, devices, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
+    const { className = "cp-selectresponsiveimage", attr, set, keys = {}, index = 0, subIndex = 0, size, devices, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
     let onClick, item, items2, subItems;
     item = attr || {};
     if (keys.items) {
@@ -2518,7 +3482,7 @@
     if (isTemplate && keys.code && item[keys.code]) {
       return /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: item[keys.code] });
     }
-    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, showSelectPictureSources ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className: className2, item, keys }), /* @__PURE__ */ wp.element.createElement("div", { className: "cp-selectresponsiveimage__controls" }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { attr, set, keys, index, subIndex, size, devices }))) : /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className: className2, item, keys, onClick }));
+    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, showSelectPictureSources ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item, keys }), /* @__PURE__ */ wp.element.createElement("div", { className: "cp-selectresponsiveimage__controls" }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { attr, set, keys, index, subIndex, size, devices }))) : /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item, keys, onClick }));
   };
 
   // ../blocks/_init/init/SelectPictureSources.jsx
@@ -2535,17 +3499,17 @@
       },
       compact = false
     } = props;
-    const { useMemo: useMemo5 } = wp.element;
-    const classes = useMemo5(() => bem("cp-selectpicturesources"), []);
+    const { useMemo: useMemo4 } = wp.element;
+    const classes = useMemo4(() => bem("cp-selectpicturesources"), []);
     return /* @__PURE__ */ wp.element.createElement("table", { className: classes({ "is-compact": compact }) }, /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.tbody() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), colSpan: devices.length }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props, keys, devices }))), /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, devices.map((device) => /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: device }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.tbody.tr.td.label() }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props, keys, devices, device }))))));
   };
 
   // ../blocks/_init/init/SelectPreparedImage.jsx
-  CP.SelectPreparedImage = ({ className: className2, name, value, color = 0, onChange, ...otherProps }) => {
+  CP.SelectPreparedImage = ({ className, name, value, color = 0, onChange, ...otherProps }) => {
     let onClick;
-    const { useEffect: useEffect5, useReducer: useReducer3 } = wp.element;
+    const { useEffect: useEffect5, useReducer: useReducer2 } = wp.element;
     const { getURLparam, setURLparam, setURLparams, removeURLparam } = Catpow.util;
-    const [state, dispatch] = useReducer3(
+    const [state, dispatch] = useReducer2(
       (state2, action) => {
         const newState = { ...state2 };
         switch (action.type) {
@@ -2597,14 +3561,14 @@
     if (state.images === null) {
       return false;
     }
-    return /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectpreparedimage " + name + " " + className2, ...otherProps }, state.images.map((image) => {
+    return /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectpreparedimage " + name + " " + className, ...otherProps }, state.images.map((image) => {
       const url = setURLparams(image.url, { c: color, theme: wpinfo.theme });
       return /* @__PURE__ */ wp.element.createElement("li", { className: "item " + (value == url ? "active" : ""), key: image.url }, /* @__PURE__ */ wp.element.createElement("img", { src: url, alt: image.alt, onClick: () => dispatch({ type: "update", image }) }));
     }));
   };
 
   // ../blocks/_init/init/SelectPreparedImageSet.jsx
-  CP.SelectPreparedImageSet = ({ className: className2, name, value, color = 0, onChange, ...otherProps }) => {
+  CP.SelectPreparedImageSet = ({ className, name, value, color = 0, onChange, ...otherProps }) => {
     const { getURLparam, setURLparam, setURLparams, removeURLparam } = Catpow.util;
     const [state, dispatch] = wp.element.useReducer(
       (state2, action) => {
@@ -2659,7 +3623,7 @@
       }
       return false;
     }
-    return /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectpreparedimageset " + name + " " + className2, ...otherProps }, Object.keys(state.imagesets).map((key) => {
+    return /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectpreparedimageset " + name + " " + className, ...otherProps }, Object.keys(state.imagesets).map((key) => {
       const imageset = state.imagesets[key];
       const url = setURLparams(imageset[0].url, {
         c: color,
@@ -2702,17 +3666,17 @@
       );
     },
     Output: (props) => {
-      const { className: className2 = "icon", item } = props;
-      return /* @__PURE__ */ wp.element.createElement("span", { className: className2 }, /* @__PURE__ */ wp.element.createElement("img", { src: item.iconSrc, alt: item.iconAlt }));
+      const { className = "icon", item } = props;
+      return /* @__PURE__ */ wp.element.createElement("span", { className }, /* @__PURE__ */ wp.element.createElement("img", { src: item.iconSrc, alt: item.iconAlt }));
     }
   };
 
   // ../blocks/_init/init/DataInputTable.jsx
   CP.DataInputTable = (props) => {
     const { cols, value, onChange } = props;
-    const { useCallback: useCallback4, useMemo: useMemo5 } = wp.element;
+    const { useCallback: useCallback3, useMemo: useMemo4 } = wp.element;
     const el = wp.element.createElement;
-    const Row = useCallback4((props2) => {
+    const Row = useCallback3((props2) => {
       const { cols: cols2, value: value2, onChange: onChange2 } = props2;
       return /* @__PURE__ */ wp.element.createElement("tr", { className: "cp-datainputtable__body__row" }, Object.keys(cols2).map((c) => /* @__PURE__ */ wp.element.createElement("td", { className: "cp-datainputtable__body__row__cell", key: c }, /* @__PURE__ */ wp.element.createElement(
         CP.DynamicInput,
@@ -2726,14 +3690,14 @@
         }
       ))));
     }, []);
-    const defaultRowValues = useMemo5(() => {
+    const defaultRowValues = useMemo4(() => {
       const rowValue = {};
       Object.keys(cols).forEach((c) => {
         rowValue[c] = cols[c].default || "";
       });
       return [rowValue];
     }, [cols]);
-    const colsWithoutLabel = useMemo5(() => {
+    const colsWithoutLabel = useMemo4(() => {
       const colsWithoutLabel2 = {};
       Object.keys(cols).forEach((c) => {
         const { label, ...otherParams } = cols[c];
@@ -2777,11 +3741,11 @@
 
   // ../blocks/_init/init/DynamicInput.jsx
   CP.DynamicInput = (props) => {
-    const { useMemo: useMemo5 } = wp.element;
+    const { useMemo: useMemo4 } = wp.element;
     const { RadioControl, RangeControl, SelectControl, TextControl, TextareaControl, ToggleControl } = wp.components;
     const { param, value, onChange } = props;
     const type = param.type || param.input || "text";
-    const { options: options3 } = useMemo5(() => {
+    const { options: options3 } = useMemo4(() => {
       if (!param.options && !param.values) {
         return {};
       }
@@ -2823,10 +3787,10 @@
 
   // ../blocks/_init/init/DataSetInput.jsx
   CP.DataSetInput = (props) => {
-    const { useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
+    const { useMemo: useMemo4, useCallback: useCallback3 } = wp.element;
     const { param, value: dataSet = [], onChange } = props;
     const classes = bem("cp-datasetinput");
-    const appendData = useCallback4(() => {
+    const appendData = useCallback3(() => {
       const data = {};
       Object.keys(param.items).forEach((key) => {
         const item = param.items[key];
@@ -2942,14 +3906,14 @@
 
   // ../blocks/_init/init/ItemControl.jsx
   CP.ItemControl = (props) => {
-    const { className: className2 = "", tag: Tag = "div", controls, float = true, children } = props;
-    const { useState: useState5 } = wp.element;
+    const { className = "", tag: Tag = "div", controls, float = true, children } = props;
+    const { useState: useState3 } = wp.element;
     const classes = bem("cp-itemcontrol");
-    const [open, setOpen] = useState5(false);
+    const [open, setOpen] = useState3(false);
     return /* @__PURE__ */ wp.element.createElement(
       Tag,
       {
-        className: classes(className2, {
+        className: classes(className, {
           "is-open": open,
           "is-position-absolute": float
         })
@@ -3399,12 +4363,12 @@
   // ../blocks/_init/init/SelectClassPanel.jsx
   CP.SelectClassPanelContext = wp.element.createContext({});
   CP.SelectClassPanel = (props) => {
-    const { Fragment: Fragment3, useMemo: useMemo5, useCallback: useCallback4, useContext: useContext4, createElement: el } = wp.element;
+    const { Fragment: Fragment2, useMemo: useMemo4, useCallback: useCallback3, useContext: useContext3, createElement: el } = wp.element;
     const { __: __3 } = wp.i18n;
     const { PanelBody, CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
     const { classKey = "classes", items: items2, index, subItemsKey, subIndex, set, attr, triggerClasses } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
     let { itemsKey = items2 ? "items" : null, itemClasses } = props;
-    const selectiveClasses = useMemo5(() => {
+    const selectiveClasses = useMemo4(() => {
       if (!triggerClasses || !triggerClasses.item) {
         if (Array.isArray(props.selectiveClasses)) {
           return props.selectiveClasses;
@@ -3415,7 +4379,7 @@
       return triggerClasses.item[Object.keys(triggerClasses.item).find((value) => blockStates[value])];
     }, [props.selectiveClasses, triggerClasses && attr.classes]);
     const { styleDatas } = attr;
-    const item = useMemo5(() => {
+    const item = useMemo4(() => {
       if (!items2) {
         return attr;
       }
@@ -3427,8 +4391,8 @@
       }
       return items2[index];
     }, [attr, items2, index, subItemsKey, subIndex]);
-    const states = useMemo5(() => CP.wordsToFlags(item[classKey]), [item[classKey]]);
-    const save = useCallback4(
+    const states = useMemo4(() => CP.wordsToFlags(item[classKey]), [item[classKey]]);
+    const save = useCallback3(
       (data) => {
         if (items2) {
           Object.assign(item, data);
@@ -3439,17 +4403,17 @@
       },
       [set, index, items2, itemsKey]
     );
-    const saveClasses = useCallback4(() => {
+    const saveClasses = useCallback3(() => {
       save({ [classKey]: CP.flagsToWords(states) });
     }, [save, classKey, states]);
-    const saveCss = useCallback4(
+    const saveCss = useCallback3(
       (cssKey) => {
         set({ [cssKey]: CP.createStyleCodeWithMediaQuery(styleDatas[cssKey]) });
       },
       [set, styleDatas]
     );
-    const SelectClass = useCallback4(({ prm }) => {
-      const { props: props2, item: item2, states: states2, save: save2, saveClasses: saveClasses2, saveCss: saveCss2 } = useContext4(CP.SelectClassPanelContext);
+    const SelectClass = useCallback3(({ prm }) => {
+      const { props: props2, item: item2, states: states2, save: save2, saveClasses: saveClasses2, saveCss: saveCss2 } = useContext3(CP.SelectClassPanelContext);
       if (typeof prm === "string") {
         if (selectiveClassesPresets.hasOwnProperty(prm)) {
           prm = selectiveClassesPresets[prm];
@@ -3459,7 +4423,7 @@
         if (prm.cond === false) {
           return false;
         }
-        if (Array.isArray(prm.cond) && prm.cond.some((className2) => !states2[className2])) {
+        if (Array.isArray(prm.cond) && prm.cond.some((className) => !states2[className])) {
           return false;
         }
         if (typeof prm.cond === "string" && !states2[prm.cond]) {
@@ -3920,7 +4884,7 @@
             case "position": {
               rtn.push(
                 /* @__PURE__ */ wp.element.createElement(
-                  CP.SelectPosition,
+                  CP.PositionInput,
                   {
                     label: prm.label,
                     value: props2.attr[prm.vars][prm.key],
@@ -4011,7 +4975,7 @@
         } else if (prm === "cond") {
           rtn.push(/* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __3("\u8868\u793A\u6761\u4EF6", "catpow"), value: item2["cond"], onChange: (cond) => save2({ cond }) }));
         } else if (prm === "event") {
-          const EventInputs = useMemo5(() => wp.hooks.applyFilters("catpow.EventInputs", [], { item: item2, save: save2 }), [item2, save2]);
+          const EventInputs = useMemo4(() => wp.hooks.applyFilters("catpow.EventInputs", [], { item: item2, save: save2 }), [item2, save2]);
           rtn.push(...EventInputs);
         } else if (prm.input) {
           switch (prm.input) {
@@ -4214,7 +5178,7 @@
             if (currentClass && prm.sub[currentClass]) {
               let sub = [];
               prm.sub[currentClass].forEach((prm2, index2) => {
-                sub.push(/* @__PURE__ */ wp.element.createElement(Fragment3, { key: index2 }, el(SelectClass, { prm: prm2 })));
+                sub.push(/* @__PURE__ */ wp.element.createElement(Fragment2, { key: index2 }, el(SelectClass, { prm: prm2 })));
               });
               rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
             }
@@ -4237,19 +5201,19 @@
             if (states2[prm.values]) {
               let sub = [];
               prm.sub.forEach((prm2, index2) => {
-                sub.push(/* @__PURE__ */ wp.element.createElement(Fragment3, { key: index2 }, el(SelectClass, { prm: prm2 })));
+                sub.push(/* @__PURE__ */ wp.element.createElement(Fragment2, { key: index2 }, el(SelectClass, { prm: prm2 })));
               });
               rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
             }
           }
         }
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, rtn.map((item3, index2) => /* @__PURE__ */ wp.element.createElement(Fragment3, { key: index2 }, item3)));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, rtn.map((item3, index2) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index2 }, item3)));
     }, []);
     if (!item || !selectiveClasses) {
       return false;
     }
-    return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanelContext.Provider, { value: { props, item, states, save, saveClasses, saveCss } }, selectiveClasses.map((prm, index2) => /* @__PURE__ */ wp.element.createElement(Fragment3, { key: index2 }, el(SelectClass, { prm }))), props.children));
+    return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanelContext.Provider, { value: { props, item, states, save, saveClasses, saveCss } }, selectiveClasses.map((prm, index2) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index2 }, el(SelectClass, { prm }))), props.children));
   };
 
   // ../blocks/_init/init/AlignClassToolbar.jsx
@@ -4284,6 +5248,85 @@
     );
   };
 
+  // node_modules/clsx/dist/clsx.mjs
+  function r(e) {
+    var t, f, n = "";
+    if ("string" == typeof e || "number" == typeof e) n += e;
+    else if ("object" == typeof e) if (Array.isArray(e)) {
+      var o = e.length;
+      for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
+    } else for (f in e) e[f] && (n && (n += " "), n += f);
+    return n;
+  }
+  function clsx() {
+    for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
+    return n;
+  }
+
+  // ../blocks/_init/init/PositionInput.jsx
+  init_react();
+  var valueToPosition = (val) => {
+    let [y, x] = val.split(" ");
+    if (x === void 0 || x === "center") {
+      x = 50;
+    } else if (x === "left") {
+      x = 0;
+    } else if (x === "right") {
+      x = 100;
+    } else {
+      x = parseInt(x);
+      if (isNaN(x)) {
+        x = 50;
+      }
+    }
+    if (y === void 0 || y === "center") {
+      y = 50;
+    } else if (y === "top") {
+      y = 0;
+    } else if (y === "bottom") {
+      y = 100;
+    } else {
+      y = parseInt(y);
+      if (isNaN(y)) {
+        y = 50;
+      }
+    }
+    return { x, y };
+  };
+  var positionToValue = (pos) => {
+    let { x, y } = pos;
+    if (x === 0) x = "left";
+    else if (x === 50) x = "center";
+    else if (x === 100) x = "right";
+    else {
+      x += "%";
+    }
+    if (y === 0) y = "top";
+    else if (y === 50) y = "center";
+    else if (y === 100) y = "bottom";
+    else {
+      y += "%";
+    }
+    return `${y} ${x}`;
+  };
+  CP.PositionInput = (props) => {
+    const { Button, ButtonGroup, Icon } = wp.components;
+    const { onChange } = props;
+    const pos = useMemo2(() => valueToPosition(props.value), [props.value]);
+    const [showGrid, setShowGrid] = useState(pos.x % 10 === 0 && pos.y % 10 === 0);
+    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("div", { className: "positioninput-" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_input" }, /* @__PURE__ */ wp.element.createElement(PositionInput, { onChange: (pos2) => onChange(positionToValue(pos2)), ...pos, grid: showGrid ? 10 : 0, snap: showGrid })), /* @__PURE__ */ wp.element.createElement("div", { className: "_controls" }, /* @__PURE__ */ wp.element.createElement(
+      Icon,
+      {
+        className: clsx("_icon", { "is-active": showGrid }),
+        icon: "grid-view",
+        size: 16,
+        onClick: () => {
+          setShowGrid(!showGrid);
+        }
+      }
+    ))));
+  };
+
   // ../blocks/_init/init/SelectColorClass.jsx
   CP.SelectColorClass = (props) => {
     const { BaseControl } = wp.components;
@@ -4304,29 +5347,6 @@
       return /* @__PURE__ */ wp.element.createElement("li", { className: classes, onClick: () => onChange(value), key: value }, " ");
     });
     return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectpattern" }, items2));
-  };
-
-  // node_modules/clsx/dist/clsx.mjs
-  function r2(e) {
-    var t, f, n = "";
-    if ("string" == typeof e || "number" == typeof e) n += e;
-    else if ("object" == typeof e) if (Array.isArray(e)) {
-      var o = e.length;
-      for (t = 0; t < o; t++) e[t] && (f = r2(e[t])) && (n && (n += " "), n += f);
-    } else for (f in e) e[f] && (n && (n += " "), n += f);
-    return n;
-  }
-  function clsx() {
-    for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r2(e)) && (n && (n += " "), n += t);
-    return n;
-  }
-
-  // ../blocks/_init/init/SelectPosition.jsx
-  CP.SelectPosition = (props) => {
-    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("table", { className: "selectposition-" }, /* @__PURE__ */ wp.element.createElement("tbody", { className: "_body" }, ["top", "center", "bottom"].map((v) => /* @__PURE__ */ wp.element.createElement("tr", { className: "_row" }, ["left", "center", "right"].map((h) => {
-      const val = `${v} ${h}`;
-      return /* @__PURE__ */ wp.element.createElement("td", { className: clsx("_cell", { "is-active": val === props.value }), onClick: () => props.onChange(val) });
-    }))))));
   };
 
   // ../blocks/_init/init/SelectSize.jsx
@@ -4491,14 +5511,14 @@
   // ../blocks/_init/init/EditItemsTable.jsx
   CP.EditItemsTable = (props) => {
     const { set, attr, itemsKey = "items", isTemplate = false } = props;
-    const { useCallback: useCallback4 } = wp.element;
+    const { useCallback: useCallback3 } = wp.element;
     const { RichText } = wp.blockEditor;
     const classes = bem("cp-edititemstable");
     const items2 = attr[itemsKey] || [];
     const save = () => {
       set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
     };
-    const getActiveColumns = useCallback4((props2) => {
+    const getActiveColumns = useCallback3((props2) => {
       const columns2 = [];
       props2.columns.forEach((col) => {
         if (col.hasOwnProperty("cond")) {
@@ -4588,8 +5608,8 @@
   };
 
   // ../blocks/_init/init/DummyImage.jsx
-  CP.DummyImage = ({ className: className2 = "cp-dummyimage", text }) => {
-    return /* @__PURE__ */ wp.element.createElement("img", { className: className2, src: wpinfo.plugins_url + "/catpow/callee/dummy_image.php?text=" + text });
+  CP.DummyImage = ({ className = "cp-dummyimage", text }) => {
+    return /* @__PURE__ */ wp.element.createElement("img", { className, src: wpinfo.plugins_url + "/catpow/callee/dummy_image.php?text=" + text });
   };
 
   // ../blocks/_init/init/DataStructure.jsx
@@ -4597,18 +5617,18 @@
     return /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-datastructure" }, props.children);
   };
   CP.DataStructureItem = (props) => {
-    const { useState: useState5 } = wp.element;
-    const [open, setOpen] = useState5(false);
+    const { useState: useState3 } = wp.element;
+    const [open, setOpen] = useState3(false);
     return /* @__PURE__ */ wp.element.createElement("li", { className: "item " + (props.children ? "hasChildren " + (open ? "open" : "close") : "noChildren") }, /* @__PURE__ */ wp.element.createElement("h5", { className: "title", onClick: () => setOpen(!open) }, props.title, void 0 !== props.name && /* @__PURE__ */ wp.element.createElement("span", { className: "name" }, props.name)), !!open && !!props.children && /* @__PURE__ */ wp.element.createElement("div", { className: "children" }, props.children));
   };
 
   // ../blocks/_init/init/EventInputCards.jsx
   CP.EventInputCards = (props) => {
     const { title, onChange } = props;
-    const { useState: useState5, useReducer: useReducer3, useCallback: useCallback4, useEffect: useEffect5, useMemo: useMemo5 } = wp.element;
+    const { useState: useState3, useReducer: useReducer2, useCallback: useCallback3, useEffect: useEffect5, useMemo: useMemo4 } = wp.element;
     const { BaseControl, Card, CardHeader, CardBody, CardFooter, Flex, FlexItem, FlexBlock, Icon, TextControl } = wp.components;
     const { processerId, eventTypes, parseEventValue, createEventValue, createEventString, eventParams } = props.processer;
-    const reducer = useCallback4((state2, action) => {
+    const reducer = useCallback3((state2, action) => {
       switch (action.type) {
         case "UPDATE_ALL": {
           return { events: action.events };
@@ -4631,8 +5651,8 @@
       }
       return state2;
     }, []);
-    const [state, dispatch] = useReducer3(reducer, { events: [] });
-    const eventParamsWithoutLabel = useMemo5(() => {
+    const [state, dispatch] = useReducer2(reducer, { events: [] });
+    const eventParamsWithoutLabel = useMemo4(() => {
       const eventParamsWithoutLabel2 = {};
       Object.keys(eventParams).forEach((name) => {
         const { label, ...otherParams } = eventParams[name];
@@ -4640,7 +5660,7 @@
       });
       return eventParamsWithoutLabel2;
     }, [eventParams]);
-    const eventTypeList = useMemo5(() => {
+    const eventTypeList = useMemo4(() => {
       if (!eventTypes) {
         return [];
       }
@@ -4660,10 +5680,10 @@
         }
       }
     }, [props.value]);
-    const EventInputCard = useCallback4((props2) => {
+    const EventInputCard = useCallback3((props2) => {
       const { event, index, canRemove } = props2;
-      const [editMode, setEditMode] = useState5(false);
-      const activeEventParamNames = useMemo5(() => {
+      const [editMode, setEditMode] = useState3(false);
+      const activeEventParamNames = useMemo4(() => {
         if (eventTypes && event.eventType) {
           const eventType = eventTypes[event.eventType] || eventTypes["_custom"];
           if (eventType) {
@@ -4735,12 +5755,12 @@
 
   // ../blocks/_init/init/ServerSideRender.jsx
   CP.ServerSideRender = (props) => {
-    const { className: className2, block, attributes } = props;
-    const { RawHTML, useState: useState5, useMemo: useMemo5, useRef: useRef4, useEffect: useEffect5 } = wp.element;
+    const { className, block, attributes } = props;
+    const { RawHTML, useState: useState3, useMemo: useMemo4, useRef: useRef4, useEffect: useEffect5 } = wp.element;
     const { useDebounce } = wp.compose;
-    const [response, setResponse] = useState5(false);
-    const [hold, setHold] = useState5(false);
-    const [stylesheets, setStylesheets] = useState5([]);
+    const [response, setResponse] = useState3(false);
+    const [hold, setHold] = useState3(false);
+    const [stylesheets, setStylesheets] = useState3([]);
     useEffect5(() => {
       if (hold) {
         return;
@@ -4767,20 +5787,20 @@
       });
       setHold(true);
     }, [JSON.stringify(attributes)]);
-    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RawHTML, { className: className2 }, response), stylesheets.map((stylesheet) => /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: stylesheet, key: stylesheet })));
+    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RawHTML, { className }, response), stylesheets.map((stylesheet) => /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: stylesheet, key: stylesheet })));
   };
 
   // ../blocks/_init/init/ServerSideRenderPart.jsx
   CP.ServerSideRenderPart = (props) => {
-    const { className: className2, ...otherProps } = props;
-    return /* @__PURE__ */ wp.element.createElement("div", { className: className2 }, "[ssr_parts" + Object.keys(otherProps).reduce((p, c) => p += ` ${c}=${otherProps[c]}`, "") + "]");
+    const { className, ...otherProps } = props;
+    return /* @__PURE__ */ wp.element.createElement("div", { className }, "[ssr_parts" + Object.keys(otherProps).reduce((p, c) => p += ` ${c}=${otherProps[c]}`, "") + "]");
   };
   CP.ServerSideRenderPart.Preview = (props) => {
-    const { className: className2, name, ...otherProps } = props;
-    const { RawHTML, useState: useState5, useMemo: useMemo5, useRef: useRef4, useEffect: useEffect5 } = wp.element;
-    const [response, setResponse] = useState5(false);
-    const [hold, setHold] = useState5(false);
-    const [stylesheets, setStylesheets] = useState5([]);
+    const { className, name, ...otherProps } = props;
+    const { RawHTML, useState: useState3, useMemo: useMemo4, useRef: useRef4, useEffect: useEffect5 } = wp.element;
+    const [response, setResponse] = useState3(false);
+    const [hold, setHold] = useState3(false);
+    const [stylesheets, setStylesheets] = useState3([]);
     useEffect5(() => {
       if (hold) {
         return;
@@ -4805,21 +5825,21 @@
       });
       setHold(true);
     }, [name, JSON.stringify(otherProps)]);
-    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RawHTML, { className: className2 }, response), stylesheets.map((stylesheet) => /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: stylesheet, key: stylesheet })));
+    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RawHTML, { className }, response), stylesheets.map((stylesheet) => /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: stylesheet, key: stylesheet })));
   };
 
   // ../blocks/_init/init/ColorVarTracer.jsx
   CP.ColorVarTracer = (props) => {
     const { target } = props;
-    const { useMemo: useMemo5 } = wp.element;
-    const vars = useMemo5(() => {
+    const { useMemo: useMemo4 } = wp.element;
+    const vars = useMemo4(() => {
       const vars2 = {};
       if (target) {
         const styles = getComputedStyle(target);
         ["b", "s", "t", "m", "a", "i"].forEach((k) => {
-          ["h", "s", "l"].forEach((r3) => {
+          ["h", "s", "l"].forEach((r2) => {
             ["", "-container"].forEach((p) => {
-              const name = `--cp${p}-tones-${k}-${r3}`;
+              const name = `--cp${p}-tones-${k}-${r2}`;
               vars2[name] = styles.getPropertyValue(name);
             });
           });
@@ -4832,32 +5852,32 @@
 
   // ../blocks/_init/init/PlacedPictures.jsx
   CP.PlacedPictures = (props) => {
-    const { className: className2, attr, keys, index } = props;
+    const { className, attr, keys, index } = props;
     const item = keys.items ? attr[keys.items][index] : attr;
     const pictures = item[keys.pictures];
-    return /* @__PURE__ */ wp.element.createElement("div", { className: className2 }, pictures && pictures.map((picture, index2) => {
+    return /* @__PURE__ */ wp.element.createElement("div", { className }, pictures && pictures.map((picture, index2) => {
       const { style, code, sources, src, alt } = picture;
       return /* @__PURE__ */ wp.element.createElement("div", { className: "item", style: CP.parseStyleString(style), key: index2 }, code || /* @__PURE__ */ wp.element.createElement("picture", { className: "picture" }, sources && sources.map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: "img", src, alt })));
     }));
   };
   CP.PlacedPictures.Edit = (props) => {
-    const { className: className2, set, attr, keys, index, devices } = props;
-    const { useState: useState5, useMemo: useMemo5, useCallback: useCallback4, useRef: useRef4, useEffect: useEffect5 } = wp.element;
+    const { className, set, attr, keys, index, devices } = props;
+    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useRef: useRef4, useEffect: useEffect5 } = wp.element;
     const { BlockControls, InspectorControls } = wp.blockEditor;
     const { BaseControl, Icon, PanelBody, RangeControl, TextControl, Toolbar, ToolbarGroup, ToolbarButton, ToolbarDropdownMenu } = wp.components;
     const item = keys.items ? attr[keys.items][index] : attr;
     const pictures = item[keys.pictures];
-    const classes = useMemo5(() => bem("cp-placedpictures " + className2), [className2]);
-    const [editMode, setEditMode] = useState5(false);
-    const [currentItemNodes, setCurrentItemNodes] = useState5([]);
-    const [currentItemIndexes, setCurrentItemIndexes] = useState5([]);
-    const [containerNode, setContainerNode] = useState5(false);
+    const classes = useMemo4(() => bem("cp-placedpictures " + className), [className]);
+    const [editMode, setEditMode] = useState3(false);
+    const [currentItemNodes, setCurrentItemNodes] = useState3([]);
+    const [currentItemIndexes, setCurrentItemIndexes] = useState3([]);
+    const [containerNode, setContainerNode] = useState3(false);
     const targetRefs = useRef4([]);
     useEffect5(() => {
       setCurrentItemNodes(currentItemIndexes.sort().map((index2) => targetRefs.current[index2]));
     }, [currentItemIndexes, targetRefs, setCurrentItemNodes]);
-    const remPx = useMemo5(() => parseFloat(getComputedStyle(document.documentElement).fontSize), []);
-    const getPlaceStyle = useCallback4((bnd, tgtBnd) => {
+    const remPx = useMemo4(() => parseFloat(getComputedStyle(document.documentElement).fontSize), []);
+    const getPlaceStyle = useCallback3((bnd, tgtBnd) => {
       const style = {
         position: "absolute",
         width: Math.pround(tgtBnd.width / remPx, 2) + "rem",
@@ -4881,7 +5901,7 @@
       }
       return style;
     }, []);
-    const onClickItem = useCallback4(
+    const onClickItem = useCallback3(
       (e) => {
         const index2 = parseInt(e.currentTarget.dataset.index);
         const selected = currentItemIndexes.includes(index2);
@@ -4897,7 +5917,7 @@
       },
       [currentItemIndexes, setCurrentItemIndexes]
     );
-    const updatePictures = useCallback4(
+    const updatePictures = useCallback3(
       (pictures2) => {
         if (keys.items) {
           const items2 = attr[keys.iteems];
@@ -4909,7 +5929,7 @@
       },
       [attr, set, keys, index]
     );
-    const save = useCallback4(() => {
+    const save = useCallback3(() => {
       if (keys.items) {
         items[index][keys.pictures] = JSON.parse(JSON.stringify(pictures));
         set({ [keys.items]: [...items] });
@@ -5014,20 +6034,20 @@
 
   // ../blocks/_init/init/Link.jsx
   CP.Link = (props) => {
-    const { className: className2, attr, keys, index, ...otherProps } = props;
+    const { className, attr, keys, index, ...otherProps } = props;
     const item = keys.items ? attr[keys.items][index] : attr;
     const href = item[keys.href] || "";
     const target = href.indexOf("://") !== -1 ? "_brank" : null;
-    return /* @__PURE__ */ wp.element.createElement("a", { className: className2, href, target, rel: target && "noopener", ...otherProps }, props.children);
+    return /* @__PURE__ */ wp.element.createElement("a", { className, href, target, rel: target && "noopener", ...otherProps }, props.children);
   };
   CP.Link.Edit = (props) => {
-    const { className: className2, set, attr, keys, index, isSelected = "auto", ...otherProps } = props;
+    const { className, set, attr, keys, index, isSelected = "auto", ...otherProps } = props;
     const { onChange } = props;
-    const { useMemo: useMemo5, useCallback: useCallback4, useEffect: useEffect5, useState: useState5 } = wp.element;
-    const classes = useMemo5(() => bem("cp-link " + className2), [className2]);
-    const item = useMemo5(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
-    const [hasCursor, setHasCursor] = useState5(false);
-    const [ref, setRef] = useState5(false);
+    const { useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5, useState: useState3 } = wp.element;
+    const classes = useMemo4(() => bem("cp-link " + className), [className]);
+    const item = useMemo4(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
+    const [hasCursor, setHasCursor] = useState3(false);
+    const [ref, setRef] = useState3(false);
     useEffect5(() => {
       const cb = () => {
         if (!ref) {
@@ -5072,18 +6092,18 @@
 
   // ../blocks/_init/init/RTF.jsx
   CP.RTF = (props) => {
-    const { className: className2, pref = "rtf", attr, keys = { text: "text" }, index, ...otherProps } = props;
+    const { className, pref = "rtf", attr, keys = { text: "text" }, index, ...otherProps } = props;
     const item = keys.items ? attr[keys.items][index] : attr;
     const text = item[keys.text] ? item[keys.text] : "";
-    return /* @__PURE__ */ wp.element.createElement("div", { className: className2, ...otherProps, dangerouslySetInnerHTML: { __html: rtf(text, pref) } });
+    return /* @__PURE__ */ wp.element.createElement("div", { className, ...otherProps, dangerouslySetInnerHTML: { __html: rtf(text, pref) } });
   };
   CP.RTF.Edit = (props) => {
-    const { className: className2, pref = "rtf", set, attr, keys = { text: "text" }, index, isSelected = true, ...otherProps } = props;
-    const { useMemo: useMemo5, useCallback: useCallback4, useState: useState5 } = wp.element;
-    const classes = useMemo5(() => bem("cp-rtf " + className2), [className2]);
-    const item = useMemo5(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
+    const { className, pref = "rtf", set, attr, keys = { text: "text" }, index, isSelected = true, ...otherProps } = props;
+    const { useMemo: useMemo4, useCallback: useCallback3, useState: useState3 } = wp.element;
+    const classes = useMemo4(() => bem("cp-rtf " + className), [className]);
+    const item = useMemo4(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
     const text = item[keys.text];
-    const updateText = useCallback4(
+    const updateText = useCallback3(
       (text2) => {
         if (keys.items) {
           Object.assign(attr[keys.items][index], { [keys.text]: text2 });
@@ -5094,7 +6114,7 @@
       },
       [set, attr, keys]
     );
-    const editorFunction = useCallback4(
+    const editorFunction = useCallback3(
       (e) => {
         if (e.key === "Tab") {
           const text2 = e.target.value;
@@ -5114,8 +6134,8 @@
       },
       [updateText]
     );
-    const [savedText, setSavedText] = useState5(text);
-    const [isActive, setIsActive] = useState5(false);
+    const [savedText, setSavedText] = useState3(text);
+    const [isActive, setIsActive] = useState3(false);
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-active": isSelected && isActive }), onClick: () => setIsActive(!isActive), ...otherProps, dangerouslySetInnerHTML: { __html: rtf(item.text, pref) } }), /* @__PURE__ */ wp.element.createElement(Portal, { id: "EditRTF" }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal({ "is-active": isSelected && isActive }) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.preview(), dangerouslySetInnerHTML: { __html: rtf(item.text, pref) } }), /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.input() }, /* @__PURE__ */ wp.element.createElement(
       "textarea",
       {
@@ -5142,7 +6162,7 @@
   // ../blocks/_init/init/Loop.jsx
   CP.Loop = (props) => {
     const { current = 0, Component = "div", loop = false, ...otherProps } = props;
-    const { useState: useState5, useMemo: useMemo5, useCallback: useCallback4, useEffect: useEffect5, useRef: useRef4 } = wp.element;
+    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5, useRef: useRef4 } = wp.element;
     const items2 = (() => {
       const items3 = Array.isArray(props.items) ? props.items : Number.isInteger(props.items) ? [...Array(props.items).keys()] : Array.from(props.items);
       items3.forEach((value, index) => {
@@ -5163,12 +6183,12 @@
 
   // ../blocks/_init/init/CustomColorVars.jsx
   CP.CustomColorVars = (props) => {
-    const { useState: useState5, useRef: useRef4, useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
+    const { useState: useState3, useRef: useRef4, useMemo: useMemo4, useCallback: useCallback3 } = wp.element;
     const { ColorPicker, CheckboxControl, Flex, FlexItem, FlexBlock, Button, Popover } = wp.components;
     const { label = "\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", value, onChange } = props;
     const cache = useRef4(value);
-    const [index, setIndex] = useState5(-1);
-    const [useCustomColor, setUseCustomColor] = useState5(Object.keys(value).length > 0);
+    const [index, setIndex] = useState3(-1);
+    const [useCustomColor, setUseCustomColor] = useState3(Object.keys(value).length > 0);
     const classes = bem("cp-customcolorvars");
     const roles = [
       { key: "b", label: "\u80CC\u666F\u8272" },
@@ -5179,7 +6199,7 @@
       { key: "i", label: "\u53CD\u8EE2\u6587\u5B57\u8272" }
     ];
     const keys = ["h", "s", "l"];
-    const originalColors = useMemo5(() => {
+    const originalColors = useMemo4(() => {
       const originalColors2 = {};
       const selectedBlock = wp.data.select("core/block-editor").getSelectedBlock();
       const editorCanvas = document.querySelector('iframe[name="editor-canvas"]');
@@ -5197,7 +6217,7 @@
       });
       return originalColors2;
     }, []);
-    const colors = useMemo5(() => {
+    const colors = useMemo4(() => {
       const colors2 = {};
       roles.forEach((role) => {
         const hsla = {};
@@ -5214,12 +6234,12 @@
       });
       return colors2;
     }, []);
-    const Item = useCallback4((props2) => {
+    const Item = useCallback3((props2) => {
       const { classes: classes2, role, originalColor, onChange: onChange2 } = props2;
-      const [isOpen, setIsOpen] = useState5(false);
-      const [isCustomized, setIsCustomized] = useState5(!!props2.color);
-      const [color, setColor] = useState5(props2.color || originalColor);
-      const onChangeComplete = useCallback4(
+      const [isOpen, setIsOpen] = useState3(false);
+      const [isCustomized, setIsCustomized] = useState3(!!props2.color);
+      const [color, setColor] = useState3(props2.color || originalColor);
+      const onChangeComplete = useCallback3(
         (color2) => {
           setIsCustomized(true);
           setColor(color2.hex);
@@ -5231,7 +6251,7 @@
         },
         [onChange2, role, setColor]
       );
-      const clearColorVars = useCallback4(() => {
+      const clearColorVars = useCallback3(() => {
         setIsCustomized(false);
         setColor(originalColor);
         onChange2({
@@ -5242,7 +6262,7 @@
       }, [onChange2, role, originalColor, setColor, setIsCustomized]);
       return /* @__PURE__ */ wp.element.createElement("div", { className: classes2(flagsToClassNames({ isCustomized })) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes2.chip(), onClick: () => setIsOpen(!isOpen), style: { backgroundColor: color } }, /* @__PURE__ */ wp.element.createElement("div", { className: classes2.chip.label() }, role.label)), isOpen && /* @__PURE__ */ wp.element.createElement(Popover, { onClose: () => setIsOpen(false) }, /* @__PURE__ */ wp.element.createElement(ColorPicker, { color, onChangeComplete }), /* @__PURE__ */ wp.element.createElement(Flex, { justify: "center" }, /* @__PURE__ */ wp.element.createElement(FlexItem, null, /* @__PURE__ */ wp.element.createElement(Button, { text: "CLEAR", onClick: clearColorVars })))));
     }, []);
-    const clearAllColorVars = useCallback4(() => {
+    const clearAllColorVars = useCallback3(() => {
       const vars = {};
       roles.forEach((role) => {
         keys.forEach((key) => {
@@ -5271,17 +6291,17 @@
 
   // ../blocks/_init/init/Message.jsx
   CP.Message = (props) => {
-    const { useMemo: useMemo5 } = wp.element;
-    const classes = useMemo5(() => bem("cp-message"), []);
+    const { useMemo: useMemo4 } = wp.element;
+    const classes = useMemo4(() => bem("cp-message"), []);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._body() }, props.children));
   };
 
   // ../blocks/_init/init/NavBar.jsx
   CP.NavBar = (props) => {
     const { value, label, onChange } = props;
-    const { useMemo: useMemo5, useState: useState5 } = wp.element;
+    const { useMemo: useMemo4, useState: useState3 } = wp.element;
     const classes = bem("cp-navbar");
-    const { options: options3 } = useMemo5(() => CP.parseSelections(props.options), [props.options]);
+    const { options: options3 } = useMemo4(() => CP.parseSelections(props.options), [props.options]);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes.items() }, label && /* @__PURE__ */ wp.element.createElement("li", { className: classes.items.item("is-label") }, label), options3.map((option) => /* @__PURE__ */ wp.element.createElement(
       "li",
       {

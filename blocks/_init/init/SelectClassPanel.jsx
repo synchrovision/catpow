@@ -480,7 +480,7 @@ CP.SelectClassPanel = (props) => {
 					}
 					case "position": {
 						rtn.push(
-							<CP.SelectPosition
+							<CP.PositionInput
 								label={prm.label}
 								value={props.attr[prm.vars][prm.key]}
 								onChange={(val) => {

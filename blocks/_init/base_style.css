@@ -752,6 +752,20 @@
   transform: -webkit- rotateZ(90deg);
   transform: rotateZ(90deg);
 }
+.cp-positioninput {
+  width: fit-content;
+  margin-inline: auto;
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+  grid-template-columns: auto auto;
+  align-items: center;
+  grid-gap: 0.5rem;
+}
+.cp-positioninput__controls-icon.is-active {
+  color: var(--wp-admin-theme-color);
+}
 .cp-selectcolor {
   width: 13.75rem;
   list-style: none;
