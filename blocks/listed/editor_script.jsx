@@ -160,7 +160,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 								label: "背景色",
 								values: "hasBackgroundColor",
 							},
-							"textColor",
+							"colorScheme",
 							{
 								name: "titleCaption",
 								label: "タイトルキャプション",

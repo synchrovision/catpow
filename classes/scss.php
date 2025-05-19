@@ -205,10 +205,10 @@ class scss{
 					if(!empty($color_roles_by_shorthand[$key]['invert'])){
 						$ikey=$color_roles_by_shorthand[$key]['invert'];
 						foreach($val as $k=>$v){
-							$classes['.revertTextColor']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
-							$classes['.invertTextColor']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$ikey}-{$k})";
-							$classes['.revertTextColor']["--cp-container-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
-							$classes['.invertTextColor']["--cp-container-tones-{$key}x-{$k}"]="var(--cp-tones-{$ikey}-{$k})";
+							$classes['.has-color-scheme-reverted']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
+							$classes['.has-color-scheme-inverted']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$ikey}-{$k})";
+							$classes['.has-color-scheme-reverted']["--cp-container-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
+							$classes['.has-color-scheme-inverted']["--cp-container-tones-{$key}x-{$k}"]="var(--cp-tones-{$ikey}-{$k})";
 						}
 					}
 				}

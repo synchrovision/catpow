@@ -53,7 +53,7 @@ wp.blocks.registerBlockType("catpow/div", {
 				},
 				"color",
 				"customColorVars",
-				"textColor",
+				"colorScheme",
 				{
 					name: "background",
 					type: "buttons",

@@ -107,7 +107,7 @@ wp.blocks.registerBlockType("catpow/slider", {
 									{ name: "text", label: "テキスト", values: "hasText" },
 								],
 							},
-							"textColor",
+							"colorScheme",
 							{
 								name: "image",
 								type: "buttons",
@@ -122,7 +122,7 @@ wp.blocks.registerBlockType("catpow/slider", {
 						],
 						story: [
 							{ name: "subTitle", label: "サブタイトル", values: "hasSubTitle" },
-							"textColor",
+							"colorScheme",
 							{ name: "image", label: "画像", values: "hasImage", sub: [{ name: "thumbnail", label: "サムネール", values: "hasThumbnail" }] },
 							"backgroundImage",
 							{ name: "link", label: "リンク", values: "hasLink" },

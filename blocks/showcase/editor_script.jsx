@@ -55,7 +55,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 			const { imageKeys } = CP.config.showcase;
 			const selectiveClasses = [
 				"color",
-				"textColor",
+				"colorScheme",
 				{
 					name: "counter",
 					label: "番号",
