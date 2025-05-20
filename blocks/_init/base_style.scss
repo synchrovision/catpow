@@ -257,8 +257,11 @@ $colors:(
 		}
 	}
 	&-selectresponsiveimage{
-		&.is-video,&.is-img,&.is-picture,&-img{
+		&.is-video,&.is-img,&.is-picture{
 			@include bnd((d:b,w:f,h:a));
+		}
+		&-img{
+			@include bnd((d:b,w:f,h:32 a,op:c,of:i));
 		}
 		&__controls{
 			@include bnd((d:b,p:a,t:0,r:0,w:60% 160,h:a,pd:4));
@@ -276,7 +279,7 @@ $colors:(
 			&-tr{
 				&-td{
 					@include bnd((p:r));
-					@include bg((c:#eee));
+					@include bg((c:#ddd));
 					&-label{
 						@include bnd((p:a,r:0,t:0,pd:.25em,z:10));
 						@include bg((c:wp));
