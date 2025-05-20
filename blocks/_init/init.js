@@ -2932,11 +2932,11 @@
       });
       return;
     }
-    if (component.type == react_default.Fragment) {
-      applyBem(component.props.children, ctx);
+    if (component?.props == null) {
       return;
     }
-    if (component == null || component.props == null) {
+    if (component.type == react_default.Fragment) {
+      applyBem(component.props.children, ctx);
       return;
     }
     const {
@@ -3351,18 +3351,30 @@
   };
 
   // ../blocks/_init/init/ResponsiveImage.jsx
-  CP.ResponsiveImage = (props) => {
-    const { className = "cp-responsiveimage", attr, set, keys, index, subIndex, sizes, devices, device, isTemplate, ...otherProps } = props;
-    let item, items2, subItems;
-    item = attr || {};
+  var getItemByKeyAndIndex = (attr, keys, index, subIndex) => {
+    let item = attr || {};
     if (keys.items) {
-      items2 = item[keys.items] || [];
-      item = items2[index] || {};
-      if (keys.subItems) {
-        subItems = item[keys.subItems] || [];
-        item = subItems[subIndex];
+      if (Array.isArray(keys.items)) {
+        console.assert(Array.isArray(index) && index.length === keys.items.length, "index and keys.items should be same length");
+        for (let i in keys.items) {
+          item = item?.[keys.items[i]]?.[index[i]];
+        }
+        return item || {};
+      } else {
+        const items2 = item[keys.items] || [];
+        item = items2[index] || {};
+        if (keys.subItems) {
+          console.assert(subIndex !== void 0, "subIndex should be defined if keys.subItems is defined");
+          const subItems = item[keys.subItems] || [];
+          item = item?.[keys.subItems]?.[subIndex];
+        }
       }
     }
+    return item;
+  };
+  CP.ResponsiveImage = (props) => {
+    const { className = "cp-responsiveimage", attr, set, keys, index, subIndex, sizes, devices, device, isTemplate, ...otherProps } = props;
+    let item = getItemByKeyAndIndex(attr, keys, index, subIndex);
     if (isTemplate && keys.code && item[keys.code]) {
       return item[keys.code];
     }
@@ -3418,16 +3430,10 @@
   // ../blocks/_init/init/SelectResponsiveImage.jsx
   CP.SelectResponsiveImage = (props) => {
     const { className = "cp-selectresponsiveimage", attr, set, keys = {}, index = 0, subIndex = 0, size, devices, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
-    let onClick, item, items2, subItems;
-    item = attr || {};
-    if (keys.items) {
-      items2 = item[keys.items] || [];
-      item = items2[index] || {};
-      if (keys.subItems) {
-        subItems = item[keys.subItems] || [];
-        item = subItems[subIndex];
-      }
-    }
+    let onClick;
+    const itemsKey = keys.items && Array.isArray(keys.items) ? keys.items[0] : keys.items;
+    const items2 = itemsKey && attr[itemsKey];
+    const item = getItemByKeyAndIndex(attr, keys, index, subIndex);
     if (device) {
       const sizeData = CP.devices[device];
       onClick = (e) => CP.selectImage(
@@ -3441,7 +3447,7 @@
               item[keys.sources].push({ device, srcset: src });
             }
             if (items2) {
-              set({ [keys.items]: JSON.parse(JSON.stringify(items2)) });
+              set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
             } else {
               set({
                 [keys.sources]: JSON.parse(JSON.stringify(item[keys.sources]))
@@ -3454,7 +3460,7 @@
               item[keys.srcset] += "," + src + sizeData.rep;
             }
             if (items2) {
-              set({ [keys.items]: JSON.parse(JSON.stringify(items2)) });
+              set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
             } else {
               set({ [keys.srcset]: item[keys.srcset] });
             }
@@ -3467,9 +3473,9 @@
         CP.selectImage(
           keys,
           function(data) {
-            if (keys.items) {
+            if (itemsKey) {
               Object.assign(item, data);
-              set({ [keys.items]: JSON.parse(JSON.stringify(items2)) });
+              set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
             } else {
               set(data);
             }

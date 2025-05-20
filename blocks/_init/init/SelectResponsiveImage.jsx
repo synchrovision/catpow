@@ -1,20 +1,14 @@
 ﻿import { CP } from "./CP.jsx";
-import { ResponsiveImageBody } from "./ResponsiveImage.jsx";
+import { ResponsiveImageBody, getItemByKeyAndIndex } from "./ResponsiveImage.jsx";
 
 CP.SelectResponsiveImage = (props) => {
 	const { className = "cp-selectresponsiveimage", attr, set, keys = {}, index = 0, subIndex = 0, size, devices, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
 
-	let onClick, item, items, subItems;
+	let onClick;
 
-	item = attr || {};
-	if (keys.items) {
-		items = item[keys.items] || [];
-		item = items[index] || {};
-		if (keys.subItems) {
-			subItems = item[keys.subItems] || [];
-			item = subItems[subIndex];
-		}
-	}
+	const itemsKey = keys.items && Array.isArray(keys.items) ? keys.items[0] : keys.items;
+	const items = itemsKey && attr[itemsKey];
+	const item = getItemByKeyAndIndex(attr, keys, index, subIndex);
 
 	if (device) {
 		const sizeData = CP.devices[device];
@@ -30,7 +24,7 @@ CP.SelectResponsiveImage = (props) => {
 							item[keys.sources].push({ device, srcset: src });
 						}
 						if (items) {
-							set({ [keys.items]: JSON.parse(JSON.stringify(items)) });
+							set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
 						} else {
 							set({
 								[keys.sources]: JSON.parse(JSON.stringify(item[keys.sources])),
@@ -43,7 +37,7 @@ CP.SelectResponsiveImage = (props) => {
 							item[keys.srcset] += "," + src + sizeData.rep;
 						}
 						if (items) {
-							set({ [keys.items]: JSON.parse(JSON.stringify(items)) });
+							set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
 						} else {
 							set({ [keys.srcset]: item[keys.srcset] });
 						}
@@ -56,9 +50,9 @@ CP.SelectResponsiveImage = (props) => {
 			CP.selectImage(
 				keys,
 				function (data) {
-					if (keys.items) {
+					if (itemsKey) {
 						Object.assign(item, data);
-						set({ [keys.items]: JSON.parse(JSON.stringify(items)) });
+						set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
 					} else {
 						set(data);
 					}
