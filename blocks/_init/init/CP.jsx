@@ -293,6 +293,7 @@ export const CP = {
 		return attr[key].split(" ").indexOf(value) !== -1;
 	},
 
+	/*items*/
 	selectPrevItem: (tag) => {
 		window.getSelection().anchorNode.parentNode.closest(tag).previousElementSibling.querySelector("[contentEditable]").focus();
 	},
@@ -446,6 +447,7 @@ export const CP = {
 		return classArray.indexOf(value) !== -1;
 	},
 
+	/*json*/
 	getJsonValue: ({ attr }, json, key) => {
 		if (!attr[json]) {
 			return null;
@@ -493,6 +495,7 @@ export const CP = {
 		CP.setJsonValue(prop, json, key, values);
 	},
 
+	/*style*/
 	parseStyleString: (css) => {
 		if (css instanceof Object) {
 			return css;
@@ -751,6 +754,7 @@ export const CP = {
 		},
 	},
 
+	/*selectiveClass*/
 	parseSelections: (sels) => {
 		let options, values;
 		if (Array.isArray(sels)) {
@@ -767,6 +771,7 @@ export const CP = {
 		return { options, values };
 	},
 
+	/*block*/
 	createBlocks: (blocks) => {
 		return blocks.map((block) => {
 			if (block[2]) {
@@ -776,6 +781,7 @@ export const CP = {
 		});
 	},
 
+	/*media*/
 	devices: Catpow.util.devices,
 	getImageSizesForDevices: (devices) => {
 		return Object.keys(CP.devices)
