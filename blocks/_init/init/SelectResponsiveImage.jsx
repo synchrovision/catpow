@@ -14,7 +14,6 @@ CP.SelectResponsiveImage = (props) => {
 		const sizeData = CP.devices[device];
 		onClick = (e) =>
 			CP.selectImage(
-				{ src: "src" },
 				function ({ src }) {
 					if (keys.sources) {
 						const source = item[keys.sources].find((source) => source.device === device);
@@ -43,12 +42,11 @@ CP.SelectResponsiveImage = (props) => {
 						}
 					}
 				},
-				{ type, size: sizeData.media_size }
+				{ keys: { src: "src" }, type, size: sizeData.media_size }
 			);
 	} else {
 		onClick = (e) => {
 			CP.selectImage(
-				keys,
 				function (data) {
 					if (itemsKey) {
 						Object.assign(item, data);
@@ -57,7 +55,7 @@ CP.SelectResponsiveImage = (props) => {
 						set(data);
 					}
 				},
-				{ type, size, devices }
+				{ keys, type, size, devices }
 			);
 		};
 	}
