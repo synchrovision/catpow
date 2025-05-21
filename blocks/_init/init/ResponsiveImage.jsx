@@ -2,7 +2,7 @@
 
 CP.ResponsiveImage = (props) => {
 	const { className = "cp-responsiveimage", attr, set, keys, index, sizes, devices, device, isTemplate, ...otherProps } = props;
-	let item = CP.getItemByKeyAndIndex(attr, keys?.items, index);
+	let item = CP.getItemByKeyAndIndex(props, keys?.items, index);
 
 	if (isTemplate && keys.code && item[keys.code]) {
 		return item[keys.code];

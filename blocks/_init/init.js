@@ -1283,7 +1283,7 @@
       items2.splice(index, 2, items2[index + 1], items2[index]);
       CP.saveItem(props);
     },
-    getItemByKeyAndIndex(attr, keys, index) {
+    getItemByKeyAndIndex({ attr }, keys, index) {
       let item = attr || {};
       if (keys) {
         if (Array.isArray(keys)) {
@@ -3381,7 +3381,7 @@
   // ../blocks/_init/init/ResponsiveImage.jsx
   CP.ResponsiveImage = (props) => {
     const { className = "cp-responsiveimage", attr, set, keys, index, sizes, devices, device, isTemplate, ...otherProps } = props;
-    let item = CP.getItemByKeyAndIndex(attr, keys?.items, index);
+    let item = CP.getItemByKeyAndIndex(props, keys?.items, index);
     if (isTemplate && keys.code && item[keys.code]) {
       return item[keys.code];
     }
@@ -3440,7 +3440,7 @@
     let onClick;
     const itemsKey = keys.items && Array.isArray(keys.items) ? keys.items[0] : keys.items;
     const items2 = itemsKey && attr[itemsKey];
-    const item = CP.getItemByKeyAndIndex(attr, keys?.items, index);
+    const item = CP.getItemByKeyAndIndex(props, keys?.items, index);
     if (device) {
       const sizeData = CP.devices[device];
       onClick = (e) => CP.selectImage(

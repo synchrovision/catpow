@@ -327,7 +327,7 @@ export const CP = {
 		CP.saveItem(props);
 	},
 
-	getItemByKeyAndIndex(attr, keys, index) {
+	getItemByKeyAndIndex({ attr }, keys, index) {
 		let item = attr || {};
 		if (keys) {
 			if (Array.isArray(keys)) {

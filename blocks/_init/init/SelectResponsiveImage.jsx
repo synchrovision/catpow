@@ -8,7 +8,7 @@ CP.SelectResponsiveImage = (props) => {
 
 	const itemsKey = keys.items && Array.isArray(keys.items) ? keys.items[0] : keys.items;
 	const items = itemsKey && attr[itemsKey];
-	const item = CP.getItemByKeyAndIndex(attr, keys?.items, index);
+	const item = CP.getItemByKeyAndIndex(props, keys?.items, index);
 
 	if (device) {
 		const sizeData = CP.devices[device];
