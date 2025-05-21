@@ -14,6 +14,9 @@ export const ResponsiveImageBody = (props) => {
 	const { className = "cp-responsiveimage", attr, set, keys, index, devices, device, isTemplate, item, ...otherProps } = props;
 	let { sizes } = props;
 	const primaryClassName = className.split(" ")[0];
+	if (item?.[keys.mime] == "application/pdf") {
+		return <iframe className={className + " is-pdf"} src={item[keys.src]} data-mime={item[keys.mime]} {...otherProps}></iframe>;
+	}
 	const type = item[keys.mime] ? item[keys.mime].split("/")[0] : "image";
 	if (type == "audio") {
 		return <audio className={className + " is-audio"} src={item[keys.src]} data-mime={item[keys.mime]} {...otherProps}></audio>;
