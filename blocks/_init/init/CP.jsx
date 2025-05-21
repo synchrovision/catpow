@@ -326,6 +326,23 @@ export const CP = {
 		CP.saveItem(props);
 	},
 
+	getItemByKeyAndIndex(attr, keys, index) {
+		let item = attr || {};
+		if (keys) {
+			if (Array.isArray(keys)) {
+				console.assert(Array.isArray(index) && index.length === keys.length, "index and keys should be same length");
+				for (let i in keys) {
+					item = item?.[keys[i]]?.[index[i]];
+				}
+				return item || {};
+			} else {
+				const items = item[keys] || [];
+				item = items[index] || {};
+			}
+		}
+		return item;
+	},
+
 	switchItemColor: ({ items, index, set }, color, itemsKey) => {
 		if (itemsKey === undefined) {
 			itemsKey = "items";

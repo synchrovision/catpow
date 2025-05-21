@@ -1,33 +1,8 @@
 ﻿import { CP } from "./CP.jsx";
 
-//@todo: Getting item by subItems and subIndex is fallback features for the old code.
-// They should be removed when the old code is removed.
-export const getItemByKeyAndIndex = (attr, keys, index, subIndex) => {
-	let item = attr || {};
-	if (keys.items) {
-		if (Array.isArray(keys.items)) {
-			console.assert(Array.isArray(index) && index.length === keys.items.length, "index and keys.items should be same length");
-			for (let i in keys.items) {
-				item = item?.[keys.items[i]]?.[index[i]];
-			}
-			return item || {};
-		} else {
-			const items = item[keys.items] || [];
-			item = items[index] || {};
-			//@deprecated: subItems and subIndex are fallback features for the old code.
-			if (keys.subItems) {
-				console.assert(subIndex !== undefined, "subIndex should be defined if keys.subItems is defined");
-				const subItems = item[keys.subItems] || [];
-				item = item?.[keys.subItems]?.[subIndex];
-			}
-		}
-	}
-	return item;
-};
-
 CP.ResponsiveImage = (props) => {
 	const { className = "cp-responsiveimage", attr, set, keys, index, subIndex, sizes, devices, device, isTemplate, ...otherProps } = props;
-	let item = getItemByKeyAndIndex(attr, keys, index, subIndex);
+	let item = CP.getItemByKeyAndIndex(attr, keys?.items, index);
 
 	if (isTemplate && keys.code && item[keys.code]) {
 		return item[keys.code];

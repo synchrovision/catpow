@@ -1,5 +1,5 @@
 ﻿import { CP } from "./CP.jsx";
-import { ResponsiveImageBody, getItemByKeyAndIndex } from "./ResponsiveImage.jsx";
+import { ResponsiveImageBody } from "./ResponsiveImage.jsx";
 
 CP.SelectResponsiveImage = (props) => {
 	const { className = "cp-selectresponsiveimage", type, attr, set, keys = {}, index = 0, subIndex = 0, size, devices, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
@@ -8,7 +8,7 @@ CP.SelectResponsiveImage = (props) => {
 
 	const itemsKey = keys.items && Array.isArray(keys.items) ? keys.items[0] : keys.items;
 	const items = itemsKey && attr[itemsKey];
-	const item = getItemByKeyAndIndex(attr, keys, index, subIndex);
+	const item = CP.getItemByKeyAndIndex(attr, keys?.items, index);
 
 	if (device) {
 		const sizeData = CP.devices[device];
