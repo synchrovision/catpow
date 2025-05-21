@@ -1,6 +1,7 @@
 ﻿declare var wp: any, CP: any, React: any;
 
 import { SelectiveClassConfig, CatpowBlockConfig } from "cpdev/type";
+import { clsx } from "clsx";
 
 const blockConfig: CatpowBlockConfig = {
 	devices: ["sp", "tb"],
@@ -17,11 +18,11 @@ wp.blocks.registerBlockType("catpow/picture", {
 	category: "catpow",
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
-		const { InspectorControls } = wp.blockEditor;
+		const { InspectorControls, useBlockProps } = wp.blockEditor;
 		const { Icon } = wp.components;
 		const { classes, vars, sources, src, srcset, alt, code, device } = attributes;
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys } = blockConfig;
 
 		const selectiveClasses: SelectiveClassConfig[] = [
@@ -33,7 +34,7 @@ wp.blocks.registerBlockType("catpow/picture", {
 				isTemplate: states.isTemplate,
 			},
 			"customMargin",
-			"customContentWidth",
+			"contentWidth",
 			{
 				label: "テンプレート",
 				values: "isTemplate",
@@ -47,18 +48,33 @@ wp.blocks.registerBlockType("catpow/picture", {
 				],
 			},
 		];
+		const blockProps = useBlockProps({
+			className: clsx("picture-", classes, device, { "cp-altcontent": device }),
+			style: vars,
+		});
 
 		return (
 			<>
 				<CP.SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices} />
-				<div className={classes + (device ? " cp-altcontent " + device : "")} style={vars}>
-					{device && (
-						<div className="label">
-							<Icon icon={CP.devices[device].icon} />
-						</div>
-					)}
-					<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} device={device} devices={devices} isTemplate={states.isTemplate} />
-				</div>
+				<CP.Bem prefix="wp-block-catpow">
+					<div {...blockProps}>
+						{device && (
+							<div className="label">
+								<Icon icon={CP.devices[device].icon} />
+							</div>
+						)}
+						<CP.SelectResponsiveImage
+							className="_picture"
+							attr={attributes}
+							set={setAttributes}
+							keys={imageKeys.image}
+							device={device}
+							devices={devices}
+							isTemplate={states.isTemplate}
+							showSelectPictureSources={isSelected}
+						/>
+					</div>
+				</CP.Bem>
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
@@ -66,15 +82,22 @@ wp.blocks.registerBlockType("catpow/picture", {
 		);
 	},
 	save({ attributes, className, setAttributes }) {
+		const { useBlockProps } = wp.blockEditor;
 		const { classes, vars, srouces, src, srcset, alt, code } = attributes;
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys } = CP.config.picture;
+		const blockProps = useBlockProps.save({
+			className: clsx("picture-", classes),
+			style: vars,
+		});
 
 		return (
-			<div className={classes} style={vars}>
-				<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} devices={devices} isTemplate={states.isTemplate} />
-			</div>
+			<CP.Bem prefix="wp-block-catpow">
+				<div {...blockProps}>
+					<CP.ResponsiveImage className="_picture" attr={attributes} keys={imageKeys.image} devices={devices} isTemplate={states.isTemplate} />
+				</div>
+			</CP.Bem>
 		);
 	},
 });
