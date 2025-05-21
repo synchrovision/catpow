@@ -1022,7 +1022,7 @@
         return item;
       });
     },
-    selectImage: (keys, set, { size, devices = ["sp", "tb"], type = "image" }) => {
+    selectImage: (set, { keys, size, devices = ["sp", "tb"], type = "image" }) => {
       if (CP.uploder === void 0) {
         CP.uploader = wp.media({
           title: "Select Image",
@@ -1250,6 +1250,7 @@
       }
       return attr[key].split(" ").indexOf(value) !== -1;
     },
+    /*items*/
     selectPrevItem: (tag) => {
       window.getSelection().anchorNode.parentNode.closest(tag).previousElementSibling.querySelector("[contentEditable]").focus();
     },
@@ -1281,6 +1282,22 @@
       if (!items2[index + 1]) return false;
       items2.splice(index, 2, items2[index + 1], items2[index]);
       CP.saveItem(props);
+    },
+    getItemByKeyAndIndex(attr, keys, index) {
+      let item = attr || {};
+      if (keys) {
+        if (Array.isArray(keys)) {
+          console.assert(Array.isArray(index) && index.length === keys.length, "index and keys should be same length");
+          for (let i in keys) {
+            item = item?.[keys[i]]?.[index[i]];
+          }
+          return item || {};
+        } else {
+          const items2 = item[keys] || [];
+          item = items2[index] || {};
+        }
+      }
+      return item;
     },
     switchItemColor: ({ items: items2, index, set }, color, itemsKey) => {
       if (itemsKey === void 0) {
@@ -1381,6 +1398,7 @@
       let classArray = (items2[index].classes || "").split(" ");
       return classArray.indexOf(value) !== -1;
     },
+    /*json*/
     getJsonValue: ({ attr }, json, key) => {
       if (!attr[json]) {
         return null;
@@ -1427,6 +1445,7 @@
       }
       CP.setJsonValue(prop, json, key, values);
     },
+    /*style*/
     parseStyleString: (css) => {
       if (css instanceof Object) {
         return css;
@@ -1659,6 +1678,7 @@
         delete obj[prop];
       }
     },
+    /*selectiveClass*/
     parseSelections: (sels) => {
       let options3, values;
       if (Array.isArray(sels)) {
@@ -1674,6 +1694,7 @@
       }
       return { options: options3, values };
     },
+    /*block*/
     createBlocks: (blocks) => {
       return blocks.map((block) => {
         if (block[2]) {
@@ -1682,6 +1703,7 @@
         return wp.blocks.createBlock(...block);
       });
     },
+    /*media*/
     devices: Catpow.util.devices,
     getImageSizesForDevices: (devices) => {
       return Object.keys(CP.devices).filter((device) => devices.includes(device)).map((device) => CP.devices[device].sizes).join(",");
@@ -3357,37 +3379,16 @@
   };
 
   // ../blocks/_init/init/ResponsiveImage.jsx
-  var getItemByKeyAndIndex = (attr, keys, index, subIndex) => {
-    let item = attr || {};
-    if (keys.items) {
-      if (Array.isArray(keys.items)) {
-        console.assert(Array.isArray(index) && index.length === keys.items.length, "index and keys.items should be same length");
-        for (let i in keys.items) {
-          item = item?.[keys.items[i]]?.[index[i]];
-        }
-        return item || {};
-      } else {
-        const items2 = item[keys.items] || [];
-        item = items2[index] || {};
-        if (keys.subItems) {
-          console.assert(subIndex !== void 0, "subIndex should be defined if keys.subItems is defined");
-          const subItems = item[keys.subItems] || [];
-          item = item?.[keys.subItems]?.[subIndex];
-        }
-      }
-    }
-    return item;
-  };
   CP.ResponsiveImage = (props) => {
-    const { className = "cp-responsiveimage", attr, set, keys, index, subIndex, sizes, devices, device, isTemplate, ...otherProps } = props;
-    let item = getItemByKeyAndIndex(attr, keys, index, subIndex);
+    const { className = "cp-responsiveimage", attr, set, keys, index, sizes, devices, device, isTemplate, ...otherProps } = props;
+    let item = CP.getItemByKeyAndIndex(attr, keys?.items, index);
     if (isTemplate && keys.code && item[keys.code]) {
       return item[keys.code];
     }
     return /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item });
   };
   var ResponsiveImageBody = (props) => {
-    const { className = "cp-responsiveimage", attr, set, keys, index, subIndex, devices, device, isTemplate, item, ...otherProps } = props;
+    const { className = "cp-responsiveimage", attr, set, keys, index, devices, device, isTemplate, item, ...otherProps } = props;
     let { sizes } = props;
     const primaryClassName = className.split(" ")[0];
     const type = item[keys.mime] ? item[keys.mime].split("/")[0] : "image";
@@ -3435,15 +3436,14 @@
 
   // ../blocks/_init/init/SelectResponsiveImage.jsx
   CP.SelectResponsiveImage = (props) => {
-    const { className = "cp-selectresponsiveimage", type, attr, set, keys = {}, index = 0, subIndex = 0, size, devices, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
+    const { className = "cp-selectresponsiveimage", type, attr, set, keys = {}, index = 0, size, devices, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
     let onClick;
     const itemsKey = keys.items && Array.isArray(keys.items) ? keys.items[0] : keys.items;
     const items2 = itemsKey && attr[itemsKey];
-    const item = getItemByKeyAndIndex(attr, keys, index, subIndex);
+    const item = CP.getItemByKeyAndIndex(attr, keys?.items, index);
     if (device) {
       const sizeData = CP.devices[device];
       onClick = (e) => CP.selectImage(
-        { src: "src" },
         function({ src }) {
           if (keys.sources) {
             const source = item[keys.sources].find((source2) => source2.device === device);
@@ -3472,12 +3472,11 @@
             }
           }
         },
-        { type, size: sizeData.media_size }
+        { keys: { src: "src" }, type, size: sizeData.media_size }
       );
     } else {
       onClick = (e) => {
         CP.selectImage(
-          keys,
           function(data) {
             if (itemsKey) {
               Object.assign(item, data);
@@ -3486,14 +3485,14 @@
               set(data);
             }
           },
-          { type, size, devices }
+          { keys, type, size, devices }
         );
       };
     }
     if (isTemplate && keys.code && item[keys.code]) {
       return /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: item[keys.code] });
     }
-    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, showSelectPictureSources ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item, keys }), /* @__PURE__ */ wp.element.createElement("div", { className: "cp-selectresponsiveimage__controls" }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { attr, set, keys, index, subIndex, size, devices }))) : /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item, keys, style: { pointerEvents: "auto" }, onClick }));
+    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, showSelectPictureSources ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item, keys }), /* @__PURE__ */ wp.element.createElement("div", { className: "cp-selectresponsiveimage__controls" }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { attr, set, keys, index, size, devices }))) : /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item, keys, style: { pointerEvents: "auto" }, onClick }));
   };
 
   // ../blocks/_init/init/SelectPictureSources.jsx
@@ -6007,12 +6006,11 @@
         {
           className: "picture",
           onClick: (e) => editMode && currentItemIndexes.includes(index2) && CP.selectImage(
-            { sources: "sources", src: "src", alt: "alt" },
             function(data) {
               Object.assign(picture, data);
               save();
             },
-            { size: "full", devices }
+            { keys: { sources: "sources", src: "src", alt: "alt" }, size: "full", devices }
           )
         },
         sources && sources.map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })),
