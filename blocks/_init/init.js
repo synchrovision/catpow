@@ -4330,8 +4330,8 @@
       ]
     },
     customContentWidth: {
-      name: "cusotomWidth",
-      label: __2("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
+      name: "customContentWidth",
+      label: __2("\u30AB\u30B9\u30BF\u30E0\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
       values: "has-custom-content-width",
       sub: [
         {
@@ -4344,6 +4344,12 @@
           max: 1600
         }
       ]
+    },
+    contentWidth: {
+      name: "contentWidth",
+      label: __2("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
+      values: "has-content-width",
+      sub: ["customContentWidth"]
     },
     customBorderRadius: {
       name: "cusotomRadius",
