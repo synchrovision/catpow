@@ -2,7 +2,7 @@
 import { ResponsiveImageBody, getItemByKeyAndIndex } from "./ResponsiveImage.jsx";
 
 CP.SelectResponsiveImage = (props) => {
-	const { className = "cp-selectresponsiveimage", attr, set, keys = {}, index = 0, subIndex = 0, size, devices, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
+	const { className = "cp-selectresponsiveimage", type, attr, set, keys = {}, index = 0, subIndex = 0, size, devices, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
 
 	let onClick;
 
@@ -43,7 +43,7 @@ CP.SelectResponsiveImage = (props) => {
 						}
 					}
 				},
-				sizeData.media_size
+				{ type, size: sizeData.media_size }
 			);
 	} else {
 		onClick = (e) => {
@@ -57,8 +57,7 @@ CP.SelectResponsiveImage = (props) => {
 						set(data);
 					}
 				},
-				size,
-				devices
+				{ type, size, devices }
 			);
 		};
 	}

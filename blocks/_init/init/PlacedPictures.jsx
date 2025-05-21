@@ -182,8 +182,7 @@ CP.PlacedPictures.Edit = (props) => {
 												Object.assign(picture, data);
 												save();
 											},
-											"full",
-											devices
+											{ size: "full", devices }
 										)
 									}
 								>

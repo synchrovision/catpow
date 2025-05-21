@@ -52,13 +52,13 @@ export const CP = {
 		});
 	},
 
-	selectImage: (keys, set, size, devices) => {
-		devices = devices || ["sp", "tb"];
+	selectImage: (keys, set, { size, devices = ["sp", "tb"], type = "image" }) => {
 		if (CP.uploder === undefined) {
 			CP.uploader = wp.media({
 				title: "Select Image",
 				button: { text: "Select" },
 				multiple: false,
+				library: { type },
 			});
 		}
 		CP.uploader
@@ -102,6 +102,14 @@ export const CP = {
 					data[keys.data] = image;
 				}
 				set(data);
+			})
+			.off("open")
+			.on("open", () => {
+				const library = CP.uploader.state().get("library");
+				if (library.props.get("type") !== type) {
+					library.props.set({ type });
+					library.reset();
+				}
 			})
 			.open();
 	},
