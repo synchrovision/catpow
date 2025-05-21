@@ -343,6 +343,27 @@ export const CP = {
 		}
 		return item;
 	},
+	updateItemByKeyAndIndex({ attr, set }, keys, index, item) {
+		if (keys) {
+			if (Array.isArray(keys)) {
+				console.assert(Array.isArray(index) && index.length === keys.length, "index and keys should be same length");
+				let oldItem = attr;
+				for (let i in keys) {
+					if (!oldItem[keys[i]]) {
+						oldItem[keys[i]] = [];
+					}
+					if (!oldItem[keys[i]][index[i]]) {
+						oldItem[keys[i]][index[i]] = {};
+					}
+					oldItem = oldItem[keys[i]][index[i]];
+				}
+				Object.assign(oldItem, item);
+				set({ [keys[0]]: JSON.parse(JSON.stringify(attr[keys[0]])) });
+			} else {
+				set({ [keys]: Object.assign({}, attr[keys] || {}, item) });
+			}
+		}
+	},
 
 	switchItemColor: ({ items, index, set }, color, itemsKey) => {
 		if (itemsKey === undefined) {
