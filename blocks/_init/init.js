@@ -1022,7 +1022,7 @@
         return item;
       });
     },
-    selectImage: (set, { keys, size, devices = ["sp", "tb"], type = "image" }) => {
+    selectImage: (set, { attr, keys, index, size, devices = ["sp", "tb"], type = "image" }) => {
       if (CP.uploder === void 0) {
         CP.uploader = wp.media({
           title: "Select Image",
@@ -1069,7 +1069,11 @@
         if (keys.data) {
           data[keys.data] = image;
         }
-        set(data);
+        if (attr && keys.items && index) {
+          CP.updateItemByKeyAndIndex({ attr, set }, keys.items, index, data);
+        } else {
+          set(data);
+        }
       }).off("open").on("open", () => {
         const library = CP.uploader.state().get("library");
         if (library.props.get("type") !== type) {
@@ -3412,6 +3416,9 @@
     const { className = "cp-responsiveimage", attr, set, keys, index, devices, device, isTemplate, item, ...otherProps } = props;
     let { sizes } = props;
     const primaryClassName = className.split(" ")[0];
+    if (item?.[keys.mime] == "application/pdf") {
+      return /* @__PURE__ */ wp.element.createElement("iframe", { className: className + " is-pdf", src: item[keys.src], "data-mime": item[keys.mime], ...otherProps });
+    }
     const type = item[keys.mime] ? item[keys.mime].split("/")[0] : "image";
     if (type == "audio") {
       return /* @__PURE__ */ wp.element.createElement("audio", { className: className + " is-audio", src: item[keys.src], "data-mime": item[keys.mime], ...otherProps });

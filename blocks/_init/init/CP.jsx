@@ -52,7 +52,7 @@ export const CP = {
 		});
 	},
 
-	selectImage: (set, { keys, size, devices = ["sp", "tb"], type = "image" }) => {
+	selectImage: (set, { attr, keys, index, size, devices = ["sp", "tb"], type = "image" }) => {
 		if (CP.uploder === undefined) {
 			CP.uploader = wp.media({
 				title: "Select Image",
@@ -101,7 +101,11 @@ export const CP = {
 				if (keys.data) {
 					data[keys.data] = image;
 				}
-				set(data);
+				if (attr && keys.items && index) {
+					CP.updateItemByKeyAndIndex({ attr, set }, keys.items, index, data);
+				} else {
+					set(data);
+				}
 			})
 			.off("open")
 			.on("open", () => {
