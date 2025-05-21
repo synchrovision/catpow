@@ -5,8 +5,7 @@ CP.config.comparetable = {
 			src: "src",
 			alt: "alt",
 			code: "imageCode",
-			items: "rows",
-			subItems: "cells",
+			items: ["rows", "cells"],
 		},
 	},
 };
@@ -503,8 +502,7 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 																				attr={attributes}
 																				set={setAttributes}
 																				keys={imageKeys.image}
-																				index={rowIndex}
-																				subIndex={columnIndex}
+																				index={[rowIndex, columnIndex]}
 																				size="large"
 																				isTemplate={states.isTemplate}
 																			/>
@@ -723,8 +721,7 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 																		className={classes.table.tbody.tr.td.image._img()}
 																		attr={attributes}
 																		keys={imageKeys.image}
-																		index={rowIndex}
-																		subIndex={columnIndex}
+																		index={[rowIndex, columnIndex]}
 																		isTemplate={states.isTemplate}
 																	/>
 																</div>

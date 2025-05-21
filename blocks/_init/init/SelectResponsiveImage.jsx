@@ -2,7 +2,7 @@
 import { ResponsiveImageBody } from "./ResponsiveImage.jsx";
 
 CP.SelectResponsiveImage = (props) => {
-	const { className = "cp-selectresponsiveimage", type, attr, set, keys = {}, index = 0, subIndex = 0, size, devices, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
+	const { className = "cp-selectresponsiveimage", type, attr, set, keys = {}, index = 0, size, devices, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
 
 	let onClick;
 
@@ -68,7 +68,7 @@ CP.SelectResponsiveImage = (props) => {
 				<>
 					<ResponsiveImageBody {...props} className={className} item={item} keys={keys} />
 					<div className="cp-selectresponsiveimage__controls">
-						<CP.SelectPictureSources attr={attr} set={set} keys={keys} index={index} subIndex={subIndex} size={size} devices={devices} />
+						<CP.SelectPictureSources attr={attr} set={set} keys={keys} index={index} size={size} devices={devices} />
 					</div>
 				</>
 			) : (

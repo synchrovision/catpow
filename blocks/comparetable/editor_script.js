@@ -7,8 +7,7 @@
         src: "src",
         alt: "alt",
         code: "imageCode",
-        items: "rows",
-        subItems: "cells"
+        items: ["rows", "cells"]
       }
     }
   };
@@ -461,8 +460,7 @@
                   attr: attributes,
                   set: setAttributes,
                   keys: imageKeys.image,
-                  index: rowIndex,
-                  subIndex: columnIndex,
+                  index: [rowIndex, columnIndex],
                   size: "large",
                   isTemplate: states.isTemplate
                 }
@@ -603,8 +601,7 @@
                   className: classes.table.tbody.tr.td.image._img(),
                   attr: attributes,
                   keys: imageKeys.image,
-                  index: rowIndex,
-                  subIndex: columnIndex,
+                  index: [rowIndex, columnIndex],
                   isTemplate: states.isTemplate
                 }
               )) : /* @__PURE__ */ wp.element.createElement("div", { className: classes.table.tbody.tr.td.contents(), "data-role": "contents" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: cell.text }))
