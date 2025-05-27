@@ -1,12 +1,15 @@
 ﻿import { CP } from "./CP.jsx";
+const { __ } = wp.i18n;
+const { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
+const { Popover, BaseControle, TextControl, RangeControl, Card, CardBody, ToolbarGroup } = wp.components;
+const { useState, useMemo, useCallback, useReducer, useEffect } = wp.element;
+const { removeFormat, applyFormat, toggleFormat, insert, create, slice } = wp.richText;
 
 wp.richText.registerFormatType("catpow/ruby", {
 	title: "Ruby",
 	tagName: "ruby",
-	className: null,
+	className: "rtf-ruby",
 	edit({ isActive, value, onChange }) {
-		const { RichTextShortcut, RichTextToolbarButton } = wp.blockEditor;
-		const { toggleFormat } = wp.richText;
 		const onToggle = () => {
 			if (isActive) {
 				return onChange(toggleFormat(value, { type: "catpow/ruby" }));
@@ -23,7 +26,7 @@ wp.richText.registerFormatType("catpow/ruby", {
 				wp.richText.insert(
 					value,
 					wp.richText.create({
-						html: "<ruby>" + wp.richText.slice(value).text + "<rt>" + rt + "</rt></ruby>",
+						html: `<ruby class="rtf-ruby">${wp.richText.slice(value).text}<rt class="rtf-ruby__rt">${rt}</rt></ruby>`,
 					}),
 					value.start,
 					value.end
@@ -60,15 +63,13 @@ wp.richText.registerFormatType("catpow/ruby", {
 wp.richText.registerFormatType("catpow/rt", {
 	title: "RubyText",
 	tagName: "rt",
-	className: null,
+	className: "rtf-ruby__rt",
 });
 wp.richText.registerFormatType("catpow/small", {
 	title: "small",
 	tagName: "small",
-	className: null,
+	className: "rtf-small",
 	edit({ isActive, value, onChange }) {
-		const { RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
-		const { toggleFormat } = wp.richText;
 		const onToggle = () => onChange(toggleFormat(value, { type: "catpow/small" }));
 
 		const icon = (
@@ -93,8 +94,6 @@ wp.richText.registerFormatType("catpow/u", {
 	tagName: "u",
 	className: "rtf-u",
 	edit({ isActive, value, onChange }) {
-		const { RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
-		const { toggleFormat } = wp.richText;
 		const onToggle = () => onChange(toggleFormat(value, { type: "catpow/u" }));
 
 		const icon = (
@@ -124,16 +123,12 @@ wp.richText.registerFormatType("catpow/title", {
 	},
 	edit(props) {
 		const { isActive, value, onChange, activeAttributes, contentRef } = props;
-		const { BlockControls, RichTextToolbarButton } = wp.blockEditor;
-		const { Popover, Card, CardBody, ToolbarGroup } = wp.components;
-		const { useMemo, useCallback } = wp.element;
-		const { applyFormat, toggleFormat } = wp.richText;
 
 		const onToggle = () => {
 			return onChange(
 				toggleFormat(value, {
 					type: "catpow/title",
-					attributes: { type: "iheader" },
+					attributes: { type: "is-header" },
 				})
 			);
 		};
@@ -162,14 +157,14 @@ wp.richText.registerFormatType("catpow/title", {
 		return (
 			<>
 				{isActive && (
-					<Popover anchor={contentRef.current} position="bottom left" focusOnMount={false}>
-						<Card size="small">
+					<Popover anchor={contentRef.current} position="bottom center" focusOnMount={false}>
+						<Card>
 							<CardBody>
 								<CP.SelectButtons
 									options={[
-										{ label: "header", value: "iheader" },
-										{ label: "headline", value: "iheadline" },
-										{ label: "catch", value: "icatch" },
+										{ label: "header", value: "is-header" },
+										{ label: "headline", value: "is-headline" },
+										{ label: "catch", value: "is-catch" },
 									]}
 									selected={activeAttributes["type"]}
 									onChange={(type) => setAttributes({ type })}
@@ -195,10 +190,6 @@ wp.richText.registerFormatType("catpow/mark", {
 	},
 	edit(props) {
 		const { isActive, value, onChange, activeAttributes, contentRef } = props;
-		const { Popover, Card, CardBody, ToolbarGroup } = wp.components;
-		const { BlockControls, RichTextShortcut, RichTextToolbarButton } = wp.blockEditor;
-		const { useMemo, useCallback } = wp.element;
-		const { applyFormat, toggleFormat } = wp.richText;
 
 		const onToggle = () => {
 			return onChange(
@@ -257,10 +248,6 @@ wp.richText.registerFormatType("catpow/large", {
 	},
 	edit(props) {
 		const { isActive, value, onChange, activeAttributes, contentRef } = props;
-		const { Popover, Card, CardBody, ToolbarGroup } = wp.components;
-		const { useMemo, useCallback } = wp.element;
-		const { BlockControls, RichTextToolbarButton } = wp.blockEditor;
-		const { applyFormat, toggleFormat } = wp.richText;
 
 		const onToggle = () => {
 			return onChange(
@@ -326,10 +313,6 @@ wp.richText.registerFormatType("catpow/tag", {
 	},
 	edit(props) {
 		const { isActive, value, onChange, onFocus, activeAttributes, activeObject, contentRef } = props;
-		const { Popover, BaseControle, TextControl, Card, CardBody, ToolbarGroup } = wp.components;
-		const { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
-		const { useState, useMemo, useCallback } = wp.element;
-		const { removeFormat, applyFormat, toggleFormat, insert, create, slice } = wp.richText;
 
 		const onToggle = () => {
 			return onChange(
@@ -383,10 +366,6 @@ wp.richText.registerFormatType("catpow/annotation", {
 	tagName: "small",
 	className: "rtf-annotation",
 	edit({ isActive, value, onChange }) {
-		const { BlockControls, RichTextToolbarButton } = wp.blockEditor;
-		const { ToolbarGroup } = wp.components;
-		const { toggleFormat } = wp.richText;
-
 		const onToggle = () => onChange(toggleFormat(value, { type: "catpow/annotation" }));
 
 		const icon = (
@@ -421,10 +400,6 @@ wp.richText.registerFormatType("catpow/custom", {
 	},
 	edit(props) {
 		const { isActive, value, onChange, onFocus, activeAttributes, activeObject, contentRef } = props;
-		const { Popover, BaseControl, TextControl, RangeControl, Card, CardBody, ToolbarGroup } = wp.components;
-		const { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
-		const { useState, useMemo, useCallback, useReducer, useEffect } = wp.element;
-		const { removeFormat, applyFormat, toggleFormat, insert, create, slice } = wp.richText;
 
 		const onToggle = () => {
 			return onChange(
@@ -538,8 +513,6 @@ wp.richText.registerFormatType("catpow/clear", {
 	tagName: "div",
 	className: null,
 	edit({ isActive, value, onChange }) {
-		const { RichTextToolbarButton } = wp.blockEditor;
-		const { create } = wp.richText;
 		return <RichTextToolbarButton icon={"dismiss"} title={"🧹全てのスタイルをクリア"} onClick={() => onChange(create({ html: value.text }))} isActive={false} />;
 	},
 });

@@ -1,13 +1,10 @@
-.wp-block-catpow-picture img {
+.wp-block-catpow-picture {
+  margin-inline: auto;
+}
+.wp-block-catpow-picture__picture-img {
   display: block;
   width: 100%;
   height: auto;
-  margin-inline: auto;
-}
-.wp-block-catpow-picture.has-custom-content-width img {
-  min-width: 12.5rem;
-  max-width: calc(var(--cp-content-width,960) * 0.0625rem);
-  width: 100%;
   margin-inline: auto;
 }
 /*# sourceMappingURL=./style.css.map */

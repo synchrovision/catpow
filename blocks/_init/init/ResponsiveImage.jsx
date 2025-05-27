@@ -1,18 +1,8 @@
 ﻿import { CP } from "./CP.jsx";
 
 CP.ResponsiveImage = (props) => {
-	const { className = "cp-responsiveimage", attr, set, keys, index, subIndex, sizes, devices, device, isTemplate, ...otherProps } = props;
-	let item, items, subItems;
-
-	item = attr || {};
-	if (keys.items) {
-		items = item[keys.items] || [];
-		item = items[index] || {};
-		if (keys.subItems) {
-			subItems = item[keys.subItems] || [];
-			item = subItems[subIndex];
-		}
-	}
+	const { className = "cp-responsiveimage", attr, set, keys, index, sizes, devices, device, isTemplate, ...otherProps } = props;
+	let item = CP.getItemByKeyAndIndex(props, keys?.items, index);
 
 	if (isTemplate && keys.code && item[keys.code]) {
 		return item[keys.code];
@@ -21,9 +11,12 @@ CP.ResponsiveImage = (props) => {
 };
 
 export const ResponsiveImageBody = (props) => {
-	const { className = "cp-responsiveimage", attr, set, keys, index, subIndex, devices, device, isTemplate, item, ...otherProps } = props;
+	const { className = "cp-responsiveimage", attr, set, keys, index, devices, device, isTemplate, item, ...otherProps } = props;
 	let { sizes } = props;
 	const primaryClassName = className.split(" ")[0];
+	if (item?.[keys.mime] == "application/pdf") {
+		return <iframe className={className + " is-pdf"} src={item[keys.src]} data-mime={item[keys.mime]} {...otherProps}></iframe>;
+	}
 	const type = item[keys.mime] ? item[keys.mime].split("/")[0] : "image";
 	if (type == "audio") {
 		return <audio className={className + " is-audio"} src={item[keys.src]} data-mime={item[keys.mime]} {...otherProps}></audio>;

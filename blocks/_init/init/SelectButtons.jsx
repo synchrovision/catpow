@@ -4,7 +4,7 @@ CP.SelectButtons = (props) => {
 	const { BaseControl, Button, ButtonGroup } = wp.components;
 	return (
 		<BaseControl label={props.label} help={props.help} id={"cp-slectbuttons-" + wp.compose.useInstanceId(CP.SelectButtons)}>
-			<div className="cp-selectButtons">
+			<div className="cp-selectbuttons">
 				<ButtonGroup>
 					{props.options.map((option) => (
 						<Button onClick={() => props.onChange(option.value)} isPrimary={props.selected === option.value} key={option.value}>

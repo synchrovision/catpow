@@ -392,8 +392,8 @@ export const selectiveClassesPresets = {
 		],
 	},
 	customContentWidth: {
-		name: "cusotomWidth",
-		label: __("コンテンツ幅", "catpow"),
+		name: "customContentWidth",
+		label: __("カスタムコンテンツ幅", "catpow"),
 		values: "has-custom-content-width",
 		sub: [
 			{
@@ -406,6 +406,12 @@ export const selectiveClassesPresets = {
 				max: 1600,
 			},
 		],
+	},
+	contentWidth: {
+		name: "contentWidth",
+		label: __("コンテンツ幅", "catpow"),
+		values: "has-content-width",
+		sub: ["customContentWidth"],
 	},
 	customBorderRadius: {
 		name: "cusotomRadius",

@@ -177,13 +177,11 @@ CP.PlacedPictures.Edit = (props) => {
 										editMode &&
 										currentItemIndexes.includes(index) &&
 										CP.selectImage(
-											{ sources: "sources", src: "src", alt: "alt" },
 											function (data) {
 												Object.assign(picture, data);
 												save();
 											},
-											"full",
-											devices
+											{ keys: { sources: "sources", src: "src", alt: "alt" }, size: "full", devices }
 										)
 									}
 								>

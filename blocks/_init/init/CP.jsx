@@ -52,13 +52,13 @@ export const CP = {
 		});
 	},
 
-	selectImage: (keys, set, size, devices) => {
-		devices = devices || ["sp", "tb"];
+	selectImage: (set, { attr, keys, index, size, devices = ["sp", "tb"], type = "image" }) => {
 		if (CP.uploder === undefined) {
 			CP.uploader = wp.media({
 				title: "Select Image",
 				button: { text: "Select" },
 				multiple: false,
+				library: { type },
 			});
 		}
 		CP.uploader
@@ -101,7 +101,19 @@ export const CP = {
 				if (keys.data) {
 					data[keys.data] = image;
 				}
-				set(data);
+				if (attr && keys.items && index) {
+					CP.updateItemByKeyAndIndex({ attr, set }, keys.items, index, data);
+				} else {
+					set(data);
+				}
+			})
+			.off("open")
+			.on("open", () => {
+				const library = CP.uploader.state().get("library");
+				if (library.props.get("type") !== type) {
+					library.props.set({ type });
+					library.reset();
+				}
 			})
 			.open();
 	},
@@ -285,6 +297,7 @@ export const CP = {
 		return attr[key].split(" ").indexOf(value) !== -1;
 	},
 
+	/*items*/
 	selectPrevItem: (tag) => {
 		window.getSelection().anchorNode.parentNode.closest(tag).previousElementSibling.querySelector("[contentEditable]").focus();
 	},
@@ -316,6 +329,44 @@ export const CP = {
 		if (!items[index + 1]) return false;
 		items.splice(index, 2, items[index + 1], items[index]);
 		CP.saveItem(props);
+	},
+
+	getItemByKeyAndIndex({ attr }, keys, index) {
+		let item = attr || {};
+		if (keys) {
+			if (Array.isArray(keys)) {
+				console.assert(Array.isArray(index) && index.length === keys.length, "index and keys should be same length");
+				for (let i in keys) {
+					item = item?.[keys[i]]?.[index[i]];
+				}
+				return item || {};
+			} else {
+				const items = item[keys] || [];
+				item = items[index] || {};
+			}
+		}
+		return item;
+	},
+	updateItemByKeyAndIndex({ attr, set }, keys, index, item) {
+		if (keys) {
+			if (Array.isArray(keys)) {
+				console.assert(Array.isArray(index) && index.length === keys.length, "index and keys should be same length");
+				let oldItem = attr;
+				for (let i in keys) {
+					if (!oldItem[keys[i]]) {
+						oldItem[keys[i]] = [];
+					}
+					if (!oldItem[keys[i]][index[i]]) {
+						oldItem[keys[i]][index[i]] = {};
+					}
+					oldItem = oldItem[keys[i]][index[i]];
+				}
+				Object.assign(oldItem, item);
+				set({ [keys[0]]: JSON.parse(JSON.stringify(attr[keys[0]])) });
+			} else {
+				set({ [keys]: Object.assign({}, attr[keys] || {}, item) });
+			}
+		}
 	},
 
 	switchItemColor: ({ items, index, set }, color, itemsKey) => {
@@ -421,6 +472,7 @@ export const CP = {
 		return classArray.indexOf(value) !== -1;
 	},
 
+	/*json*/
 	getJsonValue: ({ attr }, json, key) => {
 		if (!attr[json]) {
 			return null;
@@ -468,6 +520,7 @@ export const CP = {
 		CP.setJsonValue(prop, json, key, values);
 	},
 
+	/*style*/
 	parseStyleString: (css) => {
 		if (css instanceof Object) {
 			return css;
@@ -726,6 +779,7 @@ export const CP = {
 		},
 	},
 
+	/*selectiveClass*/
 	parseSelections: (sels) => {
 		let options, values;
 		if (Array.isArray(sels)) {
@@ -742,6 +796,7 @@ export const CP = {
 		return { options, values };
 	},
 
+	/*block*/
 	createBlocks: (blocks) => {
 		return blocks.map((block) => {
 			if (block[2]) {
@@ -751,6 +806,7 @@ export const CP = {
 		});
 	},
 
+	/*media*/
 	devices: Catpow.util.devices,
 	getImageSizesForDevices: (devices) => {
 		return Object.keys(CP.devices)

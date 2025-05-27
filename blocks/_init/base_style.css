@@ -450,10 +450,18 @@
   transform: scale(1.01);
   pointer-events: none;
 }
-.cp-selectresponsiveimage.is-video, .cp-selectresponsiveimage.is-img, .cp-selectresponsiveimage.is-picture, .cp-selectresponsiveimage-img {
+.cp-selectresponsiveimage.is-video, .cp-selectresponsiveimage.is-img, .cp-selectresponsiveimage.is-picture {
   display: block;
   width: 100%;
   height: auto;
+}
+.cp-selectresponsiveimage-img {
+  display: block;
+  width: 100%;
+  min-height: 2rem;
+  height: auto;
+  object-position: center;
+  object-fit: contain;
 }
 .cp-selectresponsiveimage__controls {
   display: block;
@@ -476,7 +484,7 @@
 }
 .cp-selectpicturesources-tbody-tr-td {
   position: relative;
-  background-color: #eee;
+  background-color: #ddd;
 }
 .cp-selectpicturesources-tbody-tr-td-label {
   position: absolute;

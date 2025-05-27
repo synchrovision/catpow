@@ -1,4 +1,22 @@
 (() => {
+	// node_modules/clsx/dist/clsx.mjs
+	function r(e) {
+		var t,
+			f,
+			n = "";
+		if ("string" == typeof e || "number" == typeof e) n += e;
+		else if ("object" == typeof e)
+			if (Array.isArray(e)) {
+				var o = e.length;
+				for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), (n += f));
+			} else for (f in e) e[f] && (n && (n += " "), (n += f));
+		return n;
+	}
+	function clsx() {
+		for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), (n += t));
+		return n;
+	}
+
 	// ../blocks/section/editor_script.jsx
 	var { __ } = wp.i18n;
 	CP.config.section = {
@@ -60,7 +78,7 @@
 				iconAlt,
 				vars,
 			} = attributes;
-			const states = CP.wordsToFlags(classes);
+			const states = CP.classNamesToFlags(classes);
 			const { devices, imageKeys, imageSizes } = CP.config.section;
 			const [mainBlock, setMainBlock] = useState();
 			CP.inheritColor(props, ["iconSrc", "patternImageCss", "headerPatternImageCss", "frameImageCss", "borderImageCss"]);
@@ -147,7 +165,7 @@
 								},
 								"backgroundPattern",
 								{ name: "backgroundColor", label: __("\u80CC\u666F\u8272", "catpow"), values: "hasBackgroundColor" },
-								"colorScheme",
+								"textColor",
 								{
 									name: "navIcon",
 									label: __("\u30E1\u30CB\u30E5\u30FC\u30A2\u30A4\u30B3\u30F3", "catpow"),
@@ -216,7 +234,7 @@
 								},
 								"backgroundPattern",
 								{ name: "backgroundColor", label: __("\u80CC\u666F\u8272", "catpow"), values: "hasBackgroundColor" },
-								"colorScheme",
+								"textColor",
 								{
 									name: "navIcon",
 									label: __("\u30E1\u30CB\u30E5\u30FC\u30A2\u30A4\u30B3\u30F3", "catpow"),
@@ -271,7 +289,7 @@
 								{ name: "icon", label: __("\u30A2\u30A4\u30B3\u30F3", "catpow"), values: "hasIcon", sub: [{ input: "icon", color }] },
 								{ name: "image", label: __("\u753B\u50CF", "catpow"), values: "hasImage", sub: [{ input: "image", keys: imageKeys2.image }] },
 								{ name: "backgroundColor", label: __("\u80CC\u666F\u8272", "catpow"), values: "hasBackgroundColor" },
-								"colorScheme",
+								"textColor",
 								{
 									name: "backgroundImage",
 									label: __("\u80CC\u666F\u753B\u50CF", "catpow"),
@@ -320,7 +338,7 @@
 							],
 						},
 						bind: {
-							scene: ["level2"],
+							scene: ["level2", "has-wide-contents"],
 							column: ["level3"],
 						},
 					},
@@ -346,7 +364,7 @@
 						),
 					/* @__PURE__ */ wp.element.createElement(
 						"div",
-						{ className: "contents" },
+						{ className: clsx("contents", { "has-content-width": !states.hasWideContents }) },
 						states.hasDecoration &&
 							/* @__PURE__ */ wp.element.createElement(CP.PlacedPictures.Edit, { className: "decoration", set: setAttributes, attr: attributes, devices, keys: imageKeys.decoration }),
 						/* @__PURE__ */ wp.element.createElement(
@@ -469,7 +487,7 @@
 				vars,
 			} = attributes;
 			var level = CP.getNumberClass({ attr: attributes }, "level");
-			const states = CP.wordsToFlags(classes);
+			const states = CP.classNamesToFlags(classes);
 			const { devices, imageKeys, imageSizes } = CP.config.section;
 			return /* @__PURE__ */ wp.element.createElement(
 				SectionTag,
@@ -484,7 +502,7 @@
 					),
 				/* @__PURE__ */ wp.element.createElement(
 					"div",
-					{ className: "contents" },
+					{ className: clsx("contents", { "has-content-width": !states.hasWideContents }) },
 					states.hasDecoration && /* @__PURE__ */ wp.element.createElement(CP.PlacedPictures, { className: "decoration", attr: attributes, keys: imageKeys.decoration }),
 					/* @__PURE__ */ wp.element.createElement(
 						"header",

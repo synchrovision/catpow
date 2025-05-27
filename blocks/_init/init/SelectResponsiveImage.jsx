@@ -2,25 +2,18 @@
 import { ResponsiveImageBody } from "./ResponsiveImage.jsx";
 
 CP.SelectResponsiveImage = (props) => {
-	const { className = "cp-selectresponsiveimage", attr, set, keys = {}, index = 0, subIndex = 0, size, devices, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
+	const { className = "cp-selectresponsiveimage", type, attr, set, keys = {}, index = 0, size, devices, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
 
-	let onClick, item, items, subItems;
+	let onClick;
 
-	item = attr || {};
-	if (keys.items) {
-		items = item[keys.items] || [];
-		item = items[index] || {};
-		if (keys.subItems) {
-			subItems = item[keys.subItems] || [];
-			item = subItems[subIndex];
-		}
-	}
+	const itemsKey = keys.items && Array.isArray(keys.items) ? keys.items[0] : keys.items;
+	const items = itemsKey && attr[itemsKey];
+	const item = CP.getItemByKeyAndIndex(props, keys?.items, index);
 
 	if (device) {
 		const sizeData = CP.devices[device];
 		onClick = (e) =>
 			CP.selectImage(
-				{ src: "src" },
 				function ({ src }) {
 					if (keys.sources) {
 						const source = item[keys.sources].find((source) => source.device === device);
@@ -30,7 +23,7 @@ CP.SelectResponsiveImage = (props) => {
 							item[keys.sources].push({ device, srcset: src });
 						}
 						if (items) {
-							set({ [keys.items]: JSON.parse(JSON.stringify(items)) });
+							set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
 						} else {
 							set({
 								[keys.sources]: JSON.parse(JSON.stringify(item[keys.sources])),
@@ -43,28 +36,26 @@ CP.SelectResponsiveImage = (props) => {
 							item[keys.srcset] += "," + src + sizeData.rep;
 						}
 						if (items) {
-							set({ [keys.items]: JSON.parse(JSON.stringify(items)) });
+							set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
 						} else {
 							set({ [keys.srcset]: item[keys.srcset] });
 						}
 					}
 				},
-				sizeData.media_size
+				{ keys: { src: "src" }, type, size: sizeData.media_size }
 			);
 	} else {
 		onClick = (e) => {
 			CP.selectImage(
-				keys,
 				function (data) {
-					if (keys.items) {
+					if (itemsKey) {
 						Object.assign(item, data);
-						set({ [keys.items]: JSON.parse(JSON.stringify(items)) });
+						set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
 					} else {
 						set(data);
 					}
 				},
-				size,
-				devices
+				{ keys, type, size, devices }
 			);
 		};
 	}
@@ -77,7 +68,7 @@ CP.SelectResponsiveImage = (props) => {
 				<>
 					<ResponsiveImageBody {...props} className={className} item={item} keys={keys} />
 					<div className="cp-selectresponsiveimage__controls">
-						<CP.SelectPictureSources attr={attr} set={set} keys={keys} index={index} subIndex={subIndex} size={size} devices={devices} />
+						<CP.SelectPictureSources attr={attr} set={set} keys={keys} index={index} size={size} devices={devices} />
 					</div>
 				</>
 			) : (

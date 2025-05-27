@@ -1,4 +1,5 @@
 ﻿const { __ } = wp.i18n;
+import { clsx } from "clsx";
 
 CP.config.section = {
 	devices: ["sp", "tb"],
@@ -60,7 +61,7 @@ wp.blocks.registerBlockType("catpow/section", {
 			vars,
 		} = attributes;
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, imageSizes } = CP.config.section;
 		const [mainBlock, setMainBlock] = useState();
 
@@ -307,7 +308,7 @@ wp.blocks.registerBlockType("catpow/section", {
 						],
 					},
 					bind: {
-						scene: ["level2"],
+						scene: ["level2", "has-wide-contents"],
 						column: ["level3"],
 					},
 				},
@@ -333,7 +334,7 @@ wp.blocks.registerBlockType("catpow/section", {
 							)}
 						</div>
 					)}
-					<div className="contents">
+					<div className={clsx("contents", { "has-content-width": !states.hasWideContents })}>
 						{states.hasDecoration && <CP.PlacedPictures.Edit className="decoration" set={setAttributes} attr={attributes} devices={devices} keys={imageKeys.decoration} />}
 						<header className="header">
 							<div className="title">
@@ -447,7 +448,7 @@ wp.blocks.registerBlockType("catpow/section", {
 
 		var level = CP.getNumberClass({ attr: attributes }, "level");
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, imageSizes } = CP.config.section;
 
 		return (
@@ -455,7 +456,7 @@ wp.blocks.registerBlockType("catpow/section", {
 				{states.hasImage && (
 					<div className="image">{states.isTemplate && imageCode ? imageCode : <CP.ResponsiveImage className="image" attr={attributes} keys={imageKeys.image} size="medium_large" />}</div>
 				)}
-				<div className="contents">
+				<div className={clsx("contents", { "has-content-width": !states.hasWideContents })}>
 					{states.hasDecoration && <CP.PlacedPictures className="decoration" attr={attributes} keys={imageKeys.decoration} />}
 					<header className="header">
 						<div className="title">
