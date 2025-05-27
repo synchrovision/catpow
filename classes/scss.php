@@ -89,7 +89,7 @@ class scss{
 			return self::create_map_data($fonts);
 		});
 		if(apply_filters('cp_use_css_vars',true)){
-			$scssc->registerFunction('translate_color',function($args){
+			$scssc->registerFunction('translate_color',function($args)use($color_roles_by_shorthand){
 				$args=array_map([static::$scssc,'compileValue'],$args);
 				$color=false;
 				$available_tone_keys=[];
