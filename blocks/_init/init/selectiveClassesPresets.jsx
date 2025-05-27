@@ -160,13 +160,13 @@ export const selectiveClassesPresets = {
 		max: 1200,
 		step: 10,
 	},
-	textColor: {
-		name: "textColor",
+	colorScheme: {
+		name: "colorScheme",
 		type: "buttons",
-		label: __("文字色", "catpow"),
+		label: __("配色", "catpow"),
 		values: {
-			revertTextColor: __("通常", "catpow"),
-			invertTextColor: __("反転", "catpow"),
+			"has-color-scheme-reverted": __("通常", "catpow"),
+			"has-color-scheme-inverted": __("反転", "catpow"),
 		},
 	},
 	clipPath: {

@@ -92,10 +92,8 @@ class scss{
 			$scssc->registerFunction('translate_color',function($args){
 				$args=array_map([static::$scssc,'compileValue'],$args);
 				$color=false;
-				$colors=util\style_config::get_config_json('colors');
-				$tones=util\style_config::get_config_json('tones');
 				$available_tone_keys=[];
-				foreach($tones as $key=>$tone){
+				foreach($color_roles_by_shorthand as $key=>$color_role){
 					$available_tone_keys[$key]=$available_tone_keys[$key.'x']=true;
 				}
 				if($args[0]==='wp'){return 'var(--wp-admin-theme-color)';}
@@ -109,7 +107,6 @@ class scss{
 						$f='var(--cp-tones-'.$key.'-%s)';
 						$cf='var(--cp-container-tones-'.$key.'-%s)';
 						$rf='var(--cp-root-tones-'.$key.'-%s)';
-						$tone=$tones[$key]??[];
 						$color=sprintf(
 							'hsla(%s,%s,%s,%s)',
 							is_null($num)?
@@ -123,7 +120,7 @@ class scss{
 							),
 							sprintf($f,'s'),
 							$args[1]==='false'?sprintf($f,'l'):sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]),
-							$args[2]==='false'?(isset($tone['a'])?'var(--cp-tones-'.$key.'-a)':1):(isset($tone['a'])?'calc(var(--cp-tones-'.$key.'-a) * '.$args[2].')':$args[2])
+							$args[2]==='false'?'var(--cp-tones-'.$key.'-a,1)':'calc(var(--cp-tones-'.$key.'-a,1) * '.$args[2].')'
 						);
 					}
 				}
@@ -171,44 +168,39 @@ class scss{
 			});
 			$scssc->registerFunction('get_color_classes',function($args)use($color_roles_by_shorthand){
 				$classes=[];
-				$tones=util\style_config::get_config_json('tones');
-				foreach($tones as $key=>$val){
-					if(!empty($color_roles_by_shorthand[$key]['extend'])){
-						if(isset($val['h'])){
-							foreach(range(0,12) as $n){
-								$m=$n===0?0:$n-6;
-								$classes['.color--'.$n]["--cp-tones-{$key}-h"]=$n*30;
-								$classes['.color'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-root-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
-								$classes['.color_'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-container-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
-								$classes['.color--'.$n]["--cp-container-tones-{$key}-h"]=
-								$classes['.color'.$n]["--cp-container-tones-{$key}-h"]="var(--cp-tones-{$key}-h)";
-							}
-							if(!empty($color_roles_by_shorthand[$key]['invert'])){
-								$ikey=$color_roles_by_shorthand[$key]['invert'];
-								foreach(range(0,12) as $n){
-									$classes['.color--'.$n]["--cp-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
-									$classes['.color'.$n]["--cp-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
-									$classes['.color_'.$n]["--cp-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
-									$classes['.color--'.$n]["--cp-container-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
-									$classes['.color'.$n]["--cp-container-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
-									$classes['.color_'.$n]["--cp-container-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
-								}
-							}	
+				foreach($color_roles_by_shorthand as $key=>$color_role){
+					if(!empty($color_role['extend'])){
+						foreach(range(0,12) as $n){
+							$m=$n===0?0:$n-6;
+							$classes['.color--'.$n]["--cp-tones-{$key}-h"]=$n*30;
+							$classes['.color'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-root-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
+							$classes['.color_'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-container-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
+							$classes['.color--'.$n]["--cp-container-tones-{$key}-h"]=
+							$classes['.color'.$n]["--cp-container-tones-{$key}-h"]="var(--cp-tones-{$key}-h)";
 						}
-						if(isset($val['s']) && isset($val['l'])){
-							foreach(range(-2,2) as $n){
-								$classes['.tone-s'.$n]["--cp-tones-{$key}-s"]="calc(var(--cp-root-tones-{$key}-s) + var(--cp-tones-ss,20%) * {$n})";
-								$classes['.tone-l'.$n]["--cp-tones-{$key}-l"]="calc(var(--cp-root-tones-{$key}-l) + var(--cp-tones-ls,10%) * {$n})";
+						if(!empty($color_role['invert'])){
+							$ikey=$color_role['invert'];
+							foreach(range(0,12) as $n){
+								$classes['.color--'.$n]["--cp-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+								$classes['.color'.$n]["--cp-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+								$classes['.color_'.$n]["--cp-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+								$classes['.color--'.$n]["--cp-container-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+								$classes['.color'.$n]["--cp-container-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+								$classes['.color_'.$n]["--cp-container-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
 							}
+						}	
+						foreach(range(-2,2) as $n){
+							$classes['.tone-s'.$n]["--cp-tones-{$key}-s"]="calc(var(--cp-root-tones-{$key}-s) + var(--cp-tones-ss,20%) * {$n})";
+							$classes['.tone-l'.$n]["--cp-tones-{$key}-l"]="calc(var(--cp-root-tones-{$key}-l) + var(--cp-tones-ls,10%) * {$n})";
 						}
 					}
-					if(!empty($color_roles_by_shorthand[$key]['invert'])){
-						$ikey=$color_roles_by_shorthand[$key]['invert'];
+					if(!empty($color_role['invert'])){
+						$ikey=$color_role['invert'];
 						foreach($val as $k=>$v){
-							$classes['.revertTextColor']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
-							$classes['.invertTextColor']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$ikey}-{$k})";
-							$classes['.revertTextColor']["--cp-container-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
-							$classes['.invertTextColor']["--cp-container-tones-{$key}x-{$k}"]="var(--cp-tones-{$ikey}-{$k})";
+							$classes['.has-color-scheme-reverted']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
+							$classes['.has-color-scheme-inverted']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$ikey}-{$k})";
+							$classes['.has-color-scheme-reverted']["--cp-container-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
+							$classes['.has-color-scheme-inverted']["--cp-container-tones-{$key}x-{$k}"]="var(--cp-tones-{$ikey}-{$k})";
 						}
 					}
 				}

@@ -140,7 +140,7 @@ wp.blocks.registerBlockType("catpow/section", {
 							},
 							"backgroundPattern",
 							{ name: "backgroundColor", label: __("背景色", "catpow"), values: "hasBackgroundColor" },
-							"textColor",
+							"colorScheme",
 							{
 								name: "navIcon",
 								label: __("メニューアイコン", "catpow"),
@@ -209,7 +209,7 @@ wp.blocks.registerBlockType("catpow/section", {
 							},
 							"backgroundPattern",
 							{ name: "backgroundColor", label: __("背景色", "catpow"), values: "hasBackgroundColor" },
-							"textColor",
+							"colorScheme",
 							{
 								name: "navIcon",
 								label: __("メニューアイコン", "catpow"),
@@ -259,7 +259,7 @@ wp.blocks.registerBlockType("catpow/section", {
 							{ name: "icon", label: __("アイコン", "catpow"), values: "hasIcon", sub: [{ input: "icon", color }] },
 							{ name: "image", label: __("画像", "catpow"), values: "hasImage", sub: [{ input: "image", keys: imageKeys.image }] },
 							{ name: "backgroundColor", label: __("背景色", "catpow"), values: "hasBackgroundColor" },
-							"textColor",
+							"colorScheme",
 							{
 								name: "backgroundImage",
 								label: __("背景画像", "catpow"),
