@@ -195,7 +195,7 @@ class scss{
 					}
 					if(!empty($color_role['invert'])){
 						$ikey=$color_role['invert'];
-						foreach(['h','s','l','a'] as $k){
+						foreach(['h','s','l','a','t','S','B'] as $k){
 							$classes['.has-color-scheme-reverted']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
 							$classes['.has-color-scheme-inverted']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$ikey}-{$k})";
 							$classes['.has-color-scheme-reverted']["--cp-container-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
