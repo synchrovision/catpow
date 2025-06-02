@@ -343,23 +343,24 @@ $colors:(
 				&-th,&-td{
 					@include bnd((pd:.5em,w:6em a 30em));
 					@include bdr((s:s,w:1,c:t 50));
-					@include txt((p:12));
+					@include txt((p:12,c:t));
 				}
 			}
 		}
 		&-thead{
 			&-tr{
 				&-th{
-					@include bg((c:t 5));
+					@include bg((c:s));
 				}
 			}
 		}
 		&-tbody{
 			&-tr{
 				&-th{
-					@include bg((c:t 3));
+					@include bg((c:s));
 				}
 				&-td{
+					@include bg((c:b));
 					&>img{
 						@include bnd((w:6em,h:a));
 					}
