@@ -92,7 +92,7 @@
 		items.map((item, index) => {
 			const itemStates = CP.wordsToFlags(item.classes);
 			rtn.push(
-				<CP.Item tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+				<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
 					<div className="button">
 						{itemStates.hasIcon && <CP.OutputIcon item={item} />}
 						<span
@@ -177,7 +177,9 @@
 									<InnerBlocks />
 								</div>
 							) : (
-								<ul className={classes}>{rtn}</ul>
+								<CP.Bem prefix="wp-block-catpow">
+									<ul className={classes}>{rtn}</ul>
+								</CP.Bem>
 							)}
 						</>
 					)}
