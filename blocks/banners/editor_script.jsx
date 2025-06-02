@@ -92,7 +92,6 @@ wp.blocks.registerBlockType("catpow/banners", {
 					<CP.Link.Edit className="_link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index} isSelected={isSelected}>
 						<CP.SelectResponsiveImage
 							className="_image"
-							size="regular_banner"
 							attr={attributes}
 							set={setAttributes}
 							keys={imageKeys.image}

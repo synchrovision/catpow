@@ -102,7 +102,6 @@
             CP.SelectResponsiveImage,
             {
               className: "_image",
-              size: "regular_banner",
               attr: attributes,
               set: setAttributes,
               keys: imageKeys.image,
