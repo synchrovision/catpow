@@ -11,7 +11,7 @@ CP.ResponsiveImage = (props) => {
 };
 
 export const ResponsiveImageBody = (props) => {
-	const { className = "cp-responsiveimage", attr, set, keys, index, devices, device, isTemplate, item, ...otherProps } = props;
+	const { className = "cp-responsiveimage", attr, set, keys, index, devices, device, isTemplate, item, size, ...otherProps } = props;
 	let { sizes } = props;
 	const primaryClassName = className.split(" ")[0];
 	if (item?.[keys.mime] == "application/pdf") {
@@ -52,7 +52,7 @@ export const ResponsiveImageBody = (props) => {
 		}
 		return <video className={className + " is-video"} src={item[keys.src]} {...videoAtts} {...otherProps}></video>;
 	}
-	var src = CP.imageSrcOrDummy(keys.src ? item[keys.src] : keys.url && item[keys.url] ? item[keys.url].slice(4, -1) : null);
+	var src = CP.imageSrcOrDummy(keys.src ? item[keys.src] : keys.url && item[keys.url] ? item[keys.url].slice(4, -1) : null, size);
 	if (keys.sources) {
 		if (device) {
 			const source = (item[keys.sources] && item[keys.sources].find((source) => source.device === device)) || {
