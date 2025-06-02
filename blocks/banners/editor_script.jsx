@@ -1,4 +1,6 @@
-﻿CP.config.banners = {
+﻿import { clsx } from "clsx";
+
+CP.config.banners = {
 	devices: ["sp", "tb"],
 	imageKeys: {
 		image: {
@@ -34,23 +36,15 @@ wp.blocks.registerBlockType("catpow/banners", {
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { useState, useMemo } = wp.element;
-		const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
+		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { items = [], classes, loopCount, imageCode, doLoop, device, EditMode = false, AltMode = false } = attributes;
+		const { classes, vars, items = [], loopCount, imageCode, doLoop, device, EditMode = false, AltMode = false } = attributes;
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, linkKeys } = CP.config.banners;
 
 		const selectiveClasses = useMemo(() => {
-			var selectiveClasses = [
-				{
-					label: "サイズ",
-					type: "buttons",
-					values: ["small", "medium", "large", "full"],
-				},
-				{ label: "タイトル", values: "hasTitle" },
-				"isTemplate",
-			];
+			var selectiveClasses = ["itemSize", "contentWidth", "customMargin", "customPadding", { label: "タイトル", values: "has-title" }, "isTemplate"];
 			wp.hooks.applyFilters("catpow.blocks.banners.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
@@ -83,11 +77,11 @@ wp.blocks.registerBlockType("catpow/banners", {
 				item.controlClasses = "control";
 			}
 			rtn.push(
-				<CP.Item tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+				<CP.Item className="_item" tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
 					{states.hasTitle && (
 						<RichText
 							tagName="h3"
-							className="title"
+							className="_title"
 							onChange={(title) => {
 								item.title = title;
 								save();
@@ -95,8 +89,10 @@ wp.blocks.registerBlockType("catpow/banners", {
 							value={item.title}
 						/>
 					)}
-					<CP.Link.Edit className="link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index} isSelected={isSelected}>
+					<CP.Link.Edit className="_link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index} isSelected={isSelected}>
 						<CP.SelectResponsiveImage
+							className="_image"
+							size="regular_banner"
 							attr={attributes}
 							set={setAttributes}
 							keys={imageKeys.image}
@@ -119,6 +115,10 @@ wp.blocks.registerBlockType("catpow/banners", {
 				rtn.push(rtn[rtn.length % len]);
 			}
 		}
+		const blockProps = useBlockProps({
+			className: clsx("banners-", classes),
+			style: vars,
+		});
 
 		return (
 			<>
@@ -179,7 +179,9 @@ wp.blocks.registerBlockType("catpow/banners", {
 								<InnerBlocks />
 							</div>
 						) : (
-							<ul className={classes}>{rtn}</ul>
+							<CP.Bem prefix="wp-block-catpow">
+								<ul {...blockProps}>{rtn}</ul>
+							</CP.Bem>
 						)}
 					</>
 				)}
@@ -187,27 +189,33 @@ wp.blocks.registerBlockType("catpow/banners", {
 		);
 	},
 	save({ attributes, className }) {
-		const { InnerBlocks, RichText } = wp.blockEditor;
-		const { items = [], classes, loopParam, doLoop } = attributes;
+		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
+		const { classes, vars, items = [], loopParam, doLoop } = attributes;
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, linkKeys } = CP.config.banners;
+		const blockProps = useBlockProps.save({
+			className: clsx("banners-", classes),
+			style: vars,
+		});
 
 		return (
 			<>
-				<ul className={classes}>
-					{items.map((item, index) => {
-						return (
-							<li className={item.classes} key={index}>
-								{states.hasTitle && <RichText.Content tagName="h3" className="title" value={item.title} />}
+				<CP.Bem prefix="wp-block-catpow">
+					<ul {...blockProps}>
+						{items.map((item, index) => {
+							return (
+								<li className={item.classes} key={index}>
+									{states.hasTitle && <RichText.Content tagName="h3" className="_title" value={item.title} />}
 
-								<CP.Link className="link" attr={attributes} keys={linkKeys.link} index={index} {...CP.extractEventDispatcherAttributes("catpow/banners", item)}>
-									<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} devices={devices} isTemplate={states.isTemplate} />
-								</CP.Link>
-							</li>
-						);
-					})}
-				</ul>
+									<CP.Link className="_link" attr={attributes} keys={linkKeys.link} index={index} {...CP.extractEventDispatcherAttributes("catpow/banners", item)}>
+										<CP.ResponsiveImage className="_image" size="regular_banner" attr={attributes} keys={imageKeys.image} index={index} devices={devices} isTemplate={states.isTemplate} />
+									</CP.Link>
+								</li>
+							);
+						})}
+					</ul>
+				</CP.Bem>
 				{doLoop && (
 					<onEmpty>
 						<InnerBlocks.Content />
