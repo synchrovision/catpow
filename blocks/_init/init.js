@@ -201,22 +201,22 @@
     return new (P || (P = Promise))(function(resolve, reject) {
       function fulfilled(value) {
         try {
-          step(generator.next(value));
+          step2(generator.next(value));
         } catch (e) {
           reject(e);
         }
       }
       function rejected(value) {
         try {
-          step(generator["throw"](value));
+          step2(generator["throw"](value));
         } catch (e) {
           reject(e);
         }
       }
-      function step(result) {
+      function step2(result) {
         result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
       }
-      step((generator = generator.apply(thisArg, _arguments || [])).next());
+      step2((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   }
   function __generator(thisArg, body) {
@@ -229,10 +229,10 @@
     }), g;
     function verb(n) {
       return function(v) {
-        return step([n, v]);
+        return step2([n, v]);
       };
     }
-    function step(op) {
+    function step2(op) {
       if (f) throw new TypeError("Generator is already executing.");
       while (g && (g = 0, op[0] && (_2 = 0)), _2) try {
         if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
@@ -366,12 +366,12 @@
     }
     function resume(n, v) {
       try {
-        step(g[n](v));
+        step2(g[n](v));
       } catch (e) {
         settle(q[0][3], e);
       }
     }
-    function step(r2) {
+    function step2(r2) {
       r2.value instanceof __await ? Promise.resolve(r2.value.v).then(fulfill, reject) : settle(q[0][2], r2);
     }
     function fulfill(value) {
@@ -2952,10 +2952,10 @@
 
   // modules/src/component/Bem.jsx
   init_react();
-  var applyBem = (component, { ...ctx }) => {
+  var applyBem2 = (component, { ...ctx }) => {
     if (Array.isArray(component)) {
       component.forEach((child) => {
-        applyBem(child, ctx);
+        applyBem2(child, ctx);
       });
       return;
     }
@@ -2963,7 +2963,7 @@
       return;
     }
     if (component.type == react_default.Fragment) {
-      applyBem(component.props.children, ctx);
+      applyBem2(component.props.children, ctx);
       return;
     }
     const {
@@ -2993,7 +2993,9 @@
         if (!matches) {
           return;
         }
-        ctx.prefix = matches[2];
+        if (!matches[1].startsWith(ctx.prefix)) {
+          ctx.prefix = matches[2];
+        }
         ctx.block = matches[1];
         ctx.element = matches[0];
       }
@@ -3007,15 +3009,15 @@
     }
     if (Array.isArray(children)) {
       children.forEach((child) => {
-        applyBem(child, ctx);
+        applyBem2(child, ctx);
       });
     } else {
-      applyBem(children, ctx);
+      applyBem2(children, ctx);
     }
   };
   var Bem = ({ prefix = "cp", block, element, children }) => {
     const ctx = { prefix, block, element };
-    applyBem(children, ctx);
+    applyBem2(children, ctx);
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, children);
   };
 
@@ -3039,7 +3041,7 @@
 
   // modules/src/component/Input/PositionInput.jsx
   var PositionInput = (props) => {
-    const { className = "cp-positioninput", width = 100, height = 100, margin = 10, grid = 10, snap = false, x = 50, y = 50, r: r2 = 6, onChange, ...otherProps } = props;
+    const { className = "cp-positioninput", width = 100, height = 100, margin: margin2 = 10, grid = 10, snap = false, x = 50, y = 50, r: r2 = 6, onChange, ...otherProps } = props;
     const [ref, state] = useScratch_default();
     const [pos, setPos] = useState2({ x, y });
     useThrottle(() => onChange({ x: pos.x, y: pos.y }), 50, [pos.x, pos.y]);
@@ -3047,8 +3049,8 @@
       if (!state.isScratching) {
         return;
       }
-      let x2 = parseInt(Math.max(0, Math.min(state.x + state.dx - margin, width)));
-      let y2 = parseInt(Math.max(0, Math.min(state.y + state.dy - margin, height)));
+      let x2 = parseInt(Math.max(0, Math.min(state.x + state.dx - margin2, width)));
+      let y2 = parseInt(Math.max(0, Math.min(state.y + state.dy - margin2, height)));
       if (isNaN(x2) || isNaN(y2)) {
         return;
       }
@@ -3062,20 +3064,24 @@
       "svg",
       {
         className,
-        width: width + margin * 2,
-        height: height + margin * 2,
-        viewBox: `0 0 ${width + margin * 2} ${height + margin * 2}`,
+        width: width + margin2 * 2,
+        height: height + margin2 * 2,
+        viewBox: `0 0 ${width + margin2 * 2} ${height + margin2 * 2}`,
         xmlns: "http://www.w3.org/2000/svg",
         ref,
         style: { cursor: state.isScratching ? "grabbing" : "grab" },
         ...otherProps
       },
-      /* @__PURE__ */ wp.element.createElement("rect", { className: "_bg", x: margin, y: margin, width, height, fill: "none", stroke: "currentColor", strokeOpacity: 0.5 }),
-      /* @__PURE__ */ wp.element.createElement("circle", { fill: "none", stroke: "currentColor", strokeOpacity: 0.75, className: "_circle", cx: pos.x + margin, cy: pos.y + margin, r: r2 }),
-      /* @__PURE__ */ wp.element.createElement("circle", { fill: "currentColor", className: "_dot", cx: pos.x + margin, cy: pos.y + margin, r: 2 }),
-      grid > 0 && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, Array.from({ length: Math.floor(width / grid) }, (_2, i) => /* @__PURE__ */ wp.element.createElement("line", { key: i, stroke: "currentColor", strokeOpacity: 0.1, className: "_grid", x1: i * grid + margin, y1: margin, x2: i * grid + margin, y2: height + margin })), Array.from({ length: Math.floor(height / grid) }, (_2, i) => /* @__PURE__ */ wp.element.createElement("line", { key: i, stroke: "currentColor", strokeOpacity: 0.1, className: "_grid", x1: margin, y1: i * grid + margin, x2: width + margin, y2: i * grid + margin })), /* @__PURE__ */ wp.element.createElement("line", { stroke: "currentColor", strokeOpacity: 0.2, className: "_grid is-center", x1: width / 2 + margin, y1: margin, x2: width / 2 + margin, y2: height + margin }), /* @__PURE__ */ wp.element.createElement("line", { stroke: "currentColor", strokeOpacity: 0.2, className: "_grid is-center", x1: margin, y1: height / 2 + margin, x2: width + margin, y2: height / 2 + margin }))
+      /* @__PURE__ */ wp.element.createElement("rect", { className: "_bg", x: margin2, y: margin2, width, height, fill: "none", stroke: "currentColor", strokeOpacity: 0.5 }),
+      /* @__PURE__ */ wp.element.createElement("circle", { fill: "none", stroke: "currentColor", strokeOpacity: 0.75, className: "_circle", cx: pos.x + margin2, cy: pos.y + margin2, r: r2 }),
+      /* @__PURE__ */ wp.element.createElement("circle", { fill: "currentColor", className: "_dot", cx: pos.x + margin2, cy: pos.y + margin2, r: 2 }),
+      grid > 0 && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, Array.from({ length: Math.floor(width / grid) }, (_2, i) => /* @__PURE__ */ wp.element.createElement("line", { key: i, stroke: "currentColor", strokeOpacity: 0.1, className: "_grid", x1: i * grid + margin2, y1: margin2, x2: i * grid + margin2, y2: height + margin2 })), Array.from({ length: Math.floor(height / grid) }, (_2, i) => /* @__PURE__ */ wp.element.createElement("line", { key: i, stroke: "currentColor", strokeOpacity: 0.1, className: "_grid", x1: margin2, y1: i * grid + margin2, x2: width + margin2, y2: i * grid + margin2 })), /* @__PURE__ */ wp.element.createElement("line", { stroke: "currentColor", strokeOpacity: 0.2, className: "_grid is-center", x1: width / 2 + margin2, y1: margin2, x2: width / 2 + margin2, y2: height + margin2 }), /* @__PURE__ */ wp.element.createElement("line", { stroke: "currentColor", strokeOpacity: 0.2, className: "_grid is-center", x1: margin2, y1: height / 2 + margin2, x2: width + margin2, y2: height / 2 + margin2 }))
     ));
   };
+
+  // modules/src/component/Input/SizingInput.jsx
+  init_react();
+  var SizingContext = createContext();
 
   // modules/src/component/Nav/Nav.jsx
   init_react();
@@ -3387,7 +3393,7 @@
     return /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item });
   };
   var ResponsiveImageBody = (props) => {
-    const { className = "cp-responsiveimage", attr, set, keys, index, devices, device, isTemplate, item, ...otherProps } = props;
+    const { className = "cp-responsiveimage", attr, set, keys, index, devices, device, isTemplate, item, size, ...otherProps } = props;
     let { sizes } = props;
     const primaryClassName = className.split(" ")[0];
     if (item?.[keys.mime] == "application/pdf") {
@@ -3423,7 +3429,7 @@
       }
       return /* @__PURE__ */ wp.element.createElement("video", { className: className + " is-video", src: item[keys.src], ...videoAtts, ...otherProps });
     }
-    var src = CP.imageSrcOrDummy(keys.src ? item[keys.src] : keys.url && item[keys.url] ? item[keys.url].slice(4, -1) : null);
+    var src = CP.imageSrcOrDummy(keys.src ? item[keys.src] : keys.url && item[keys.url] ? item[keys.url].slice(4, -1) : null, size);
     if (keys.sources) {
       if (device) {
         const source = item[keys.sources] && item[keys.sources].find((source2) => source2.device === device) || {
@@ -3780,7 +3786,17 @@
         if (!param.coef) {
           param.coef = 1;
         }
-        return /* @__PURE__ */ wp.element.createElement(RangeControl2, { label: param.label || null, onChange: (value2) => onChange(value2 * param.coef), value: value / param.coef, min: param.min || 0, max: param.max || 10, step: param.step || 1 });
+        return /* @__PURE__ */ wp.element.createElement(
+          RangeControl2,
+          {
+            label: param.label || null,
+            onChange: (value2) => onChange(param.unit ? value2 * param.coef + param.unit : value2 * param.coef),
+            value: parseFloat(value) / param.coef,
+            min: param.min || 0,
+            max: param.max || 10,
+            step: param.step || 1
+          }
+        );
       }
       case "bool": {
         return /* @__PURE__ */ wp.element.createElement(ToggleControl, { label: param.label || null, checked: value, onChange });
@@ -3851,23 +3867,30 @@
     }), /* @__PURE__ */ wp.element.createElement("li", { className: classes.row() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.row.button("is-button-append"), onClick: appendData })));
   };
 
+  // node_modules/clsx/dist/clsx.mjs
+  function r(e) {
+    var t, f, n = "";
+    if ("string" == typeof e || "number" == typeof e) n += e;
+    else if ("object" == typeof e) if (Array.isArray(e)) {
+      var o = e.length;
+      for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
+    } else for (f in e) e[f] && (n && (n += " "), n += f);
+    return n;
+  }
+  function clsx() {
+    for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
+    return n;
+  }
+  var clsx_default = clsx;
+
   // ../blocks/_init/init/Item.jsx
   CP.Item = (props) => {
     const { tag = "div", items: items2, index, indexKey = "currentItemIndex", set, attr, children } = props;
-    if (!items2[index].classes) {
-      items2[index].classes = "cp-item";
-    } else if (items2[index].classes.search(/\bitem\b/) === -1) {
-      items2[index].classes += " cp-item";
-    }
-    let classes = items2[index].classes;
-    if (props.className) {
-      classes += " " + props.className;
-    }
     const isSelected = props.isSelected === void 0 ? index == attr[indexKey] : props.isSelected;
     return wp.element.createElement(
       tag,
       {
-        className: classes,
+        className: clsx_default(props.className || items2[index].classes, "cp-item"),
         style: props.style,
         "data-index": index,
         "data-refine-cond": items2[index]["cond"],
@@ -3920,21 +3943,20 @@
   CP.ItemControl = (props) => {
     const { className = "", tag: Tag = "div", controls, float = true, children } = props;
     const { useState: useState4 } = wp.element;
-    const classes = bem("cp-itemcontrol");
     const [open, setOpen] = useState4(false);
-    return /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement(
       Tag,
       {
-        className: classes(className, {
+        className: clsx_default("itemcontrol-", className, {
           "is-open": open,
           "is-position-absolute": float
         })
       },
       Object.keys(controls).map((key) => {
-        return /* @__PURE__ */ wp.element.createElement("div", { className: classes.button("is-" + key), onClick: controls[key], key });
+        return /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default("-button", "is-" + key), onClick: controls[key], key });
       }),
-      children && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes.button("is-edit"), onClick: () => setOpen(!open) }), /* @__PURE__ */ wp.element.createElement("div", { className: classes.inputs() }, children))
-    );
+      children && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default("-button", "is-edit"), onClick: () => setOpen(!open) }), /* @__PURE__ */ wp.element.createElement("div", { className: "-inputs" }, children))
+    ));
   };
 
   // ../blocks/_init/init/ItemControlInfoPanel.jsx
@@ -4078,10 +4100,10 @@
       type: "buttons",
       label: __2("\u5E45", "catpow"),
       values: {
-        fullWidth: __2("\u30D5\u30EB", "catpow"),
-        wideWidth: __2("\u30EF\u30A4\u30C9", "catpow"),
-        regularWidth: __2("\u30EC\u30AE\u30E5\u30E9\u30FC", "catpow"),
-        narrowWidth: __2("\u30CA\u30ED\u30FC", "catpow")
+        "has-width-full": __2("\u30D5\u30EB", "catpow"),
+        "has-width-wide": __2("\u30EF\u30A4\u30C9", "catpow"),
+        "has-width-regular": __2("\u30EC\u30AE\u30E5\u30E9\u30FC", "catpow"),
+        "has-width-narrow": __2("\u30CA\u30ED\u30FC", "catpow")
       }
     },
     size: {
@@ -4089,9 +4111,9 @@
       type: "buttons",
       label: __2("\u30B5\u30A4\u30BA", "catpow"),
       values: {
-        large: __2("\u5927", "catpow"),
-        medium: __2("\u4E2D", "catpow"),
-        small: __2("\u5C0F", "catpow")
+        "is-size-large": __2("\u5927", "catpow"),
+        "is-size-medium": __2("\u4E2D", "catpow"),
+        "is-size-small": __2("\u5C0F", "catpow")
       }
     },
     itemSize: {
@@ -4102,15 +4124,18 @@
       input: "range",
       min: 100,
       max: 1200,
-      step: 10
+      step: 10,
+      coef: 0.0625,
+      unit: "rem"
     },
-    textColor: {
-      name: "textColor",
+    colorScheme: {
+      name: "colorScheme",
       type: "buttons",
-      label: __2("\u6587\u5B57\u8272", "catpow"),
+      label: __2("\u914D\u8272", "catpow"),
       values: {
-        revertTextColor: __2("\u901A\u5E38", "catpow"),
-        invertTextColor: __2("\u53CD\u8EE2", "catpow")
+        "has-color-scheme-inherit": __2("\u7D99\u627F", "catpow"),
+        "has-color-scheme-reverted": __2("\u901A\u5E38", "catpow"),
+        "has-color-scheme-inverted": __2("\u53CD\u8EE2", "catpow")
       }
     },
     clipPath: {
@@ -4297,7 +4322,9 @@
           vars: "vars",
           key: "--cp-padding-top",
           min: 0,
-          max: 400
+          max: 400,
+          coef: 0.0625,
+          unit: "rem"
         },
         {
           name: "paddingBottom",
@@ -4306,7 +4333,20 @@
           vars: "vars",
           key: "--cp-padding-bottom",
           min: 0,
-          max: 400
+          max: 400,
+          coef: 0.0625,
+          unit: "rem"
+        },
+        {
+          name: "paddingInline",
+          label: __2("\u6A2A\u4F59\u767D", "catpow"),
+          input: "range",
+          vars: "vars",
+          key: "--cp-padding-inline",
+          min: 0,
+          max: 100,
+          coef: 0.0625,
+          unit: "rem"
         }
       ]
     },
@@ -4322,7 +4362,9 @@
           vars: "vars",
           key: "--cp-margin-top",
           min: -400,
-          max: 400
+          max: 400,
+          coef: 0.0625,
+          unit: "rem"
         },
         {
           name: "marginBottom",
@@ -4331,7 +4373,9 @@
           vars: "vars",
           key: "--cp-margin-bottom",
           min: -400,
-          max: 400
+          max: 400,
+          coef: 0.0625,
+          unit: "rem"
         }
       ]
     },
@@ -4346,8 +4390,20 @@
           input: "range",
           vars: "vars",
           key: "--cp-content-width",
+          min: 50,
+          max: 100,
+          unit: "vw"
+        },
+        {
+          name: "contentMaxWidth",
+          label: __2("\u6700\u5927\u5E45", "catpow"),
+          input: "range",
+          vars: "vars",
+          key: "--cp-content-max-width",
           min: 200,
-          max: 1600
+          max: 1600,
+          coef: 0.0625,
+          unit: "rem"
         }
       ]
     },
@@ -5265,21 +5321,6 @@
       }
     );
   };
-
-  // node_modules/clsx/dist/clsx.mjs
-  function r(e) {
-    var t, f, n = "";
-    if ("string" == typeof e || "number" == typeof e) n += e;
-    else if ("object" == typeof e) if (Array.isArray(e)) {
-      var o = e.length;
-      for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
-    } else for (f in e) e[f] && (n && (n += " "), n += f);
-    return n;
-  }
-  function clsx() {
-    for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
-    return n;
-  }
 
   // ../blocks/_init/init/PositionInput.jsx
   init_react();
