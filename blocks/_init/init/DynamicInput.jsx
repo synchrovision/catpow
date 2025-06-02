@@ -31,7 +31,14 @@ CP.DynamicInput = (props) => {
 				param.coef = 1;
 			}
 			return (
-				<RangeControl label={param.label || null} onChange={(value) => onChange(value * param.coef)} value={value / param.coef} min={param.min || 0} max={param.max || 10} step={param.step || 1} />
+				<RangeControl
+					label={param.label || null}
+					onChange={(value) => onChange(param.unit ? value * param.coef + param.unit : value * param.coef)}
+					value={parseFloat(value) / param.coef}
+					min={param.min || 0}
+					max={param.max || 10}
+					step={param.step || 1}
+				/>
 			);
 		}
 		case "bool": {
