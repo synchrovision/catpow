@@ -1,23 +1,14 @@
 ﻿import { CP } from "./CP.jsx";
+import clsx from "clsx";
 
 CP.Item = (props) => {
 	const { tag = "div", items, index, indexKey = "currentItemIndex", set, attr, children } = props;
-	if (!items[index].classes) {
-		items[index].classes = "cp-item";
-	} else if (items[index].classes.search(/\bitem\b/) === -1) {
-		items[index].classes += " cp-item";
-	}
-	let classes = items[index].classes;
-	if (props.className) {
-		classes += " " + props.className;
-	}
-
 	const isSelected = props.isSelected === undefined ? index == attr[indexKey] : props.isSelected;
 
 	return wp.element.createElement(
 		tag,
 		{
-			className: classes,
+			className: clsx(props.className || items[index].classes, "cp-item"),
 			style: props.style,
 			"data-index": index,
 			"data-refine-cond": items[index]["cond"],
