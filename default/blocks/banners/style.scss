@@ -20,6 +20,7 @@
 		}
 		&-link{
 			@include bnd((d:b,p:r));
+			@include usr((c:p));
 			&-image{
 				@include bnd((d:b));
 				&-img{

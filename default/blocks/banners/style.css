@@ -32,6 +32,7 @@
 .wp-block-catpow-banners__item-link {
   display: block;
   position: relative;
+  cursor: pointer;
 }
 .wp-block-catpow-banners__item-link-image {
   display: block;
