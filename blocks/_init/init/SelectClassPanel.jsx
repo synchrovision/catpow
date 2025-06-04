@@ -58,9 +58,17 @@ CP.SelectClassPanel = (props) => {
 
 	const SelectClass = useCallback(({ prm }) => {
 		const { props, item, states, save, saveClasses, saveCss } = useContext(CP.SelectClassPanelContext);
-		if (typeof prm === "string") {
-			if (selectiveClassesPresets.hasOwnProperty(prm)) {
-				prm = selectiveClassesPresets[prm];
+		if (typeof prm === "string" && selectiveClassesPresets.hasOwnProperty(prm)) {
+			prm = { preset: prm };
+		}
+		if (prm.preset) {
+			if (selectiveClassesPresets.hasOwnProperty(prm.preset)) {
+				const preset = selectiveClassesPresets[prm.preset];
+				if (typeof preset === "function") {
+					prm = preset(prm);
+				} else {
+					prm = { ...preset, ...prm };
+				}
 			}
 		}
 		if (prm.hasOwnProperty("cond")) {
