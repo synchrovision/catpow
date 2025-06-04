@@ -4,7 +4,7 @@ import { PositionInput } from "catpow/component/Input";
 import { useState, useMemo } from "react";
 
 const valueToPosition = (val) => {
-	let [y, x] = val.split(" ");
+	let [x, y] = val ? val.split(" ") : [50, 50];
 	if (x === undefined || x === "center") {
 		x = 50;
 	} else if (x === "left") {
@@ -45,7 +45,7 @@ const positionToValue = (pos) => {
 	else {
 		y += "%";
 	}
-	return `${y} ${x}`;
+	return `${x} ${y}`;
 };
 
 CP.PositionInput = (props) => {
