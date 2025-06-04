@@ -409,7 +409,7 @@ CP.SelectClassPanel = (props) => {
 						rtn.push(
 							<CP.DynamicInput
 								param={prm}
-								value={props.attr[prm.vars][prm.key]}
+								value={props.attr?.[prm.vars]?.[prm.key]}
 								onChange={(val) => {
 									if (prm.filter) {
 										val = prm.filter(val, states, props);
@@ -448,7 +448,7 @@ CP.SelectClassPanel = (props) => {
 						rtn.push(
 							<CP.SelectBlendMode
 								label={prm.label}
-								value={props.attr[prm.vars][prm.key]}
+								value={props.attr?.[prm.vars]?.[prm.key]}
 								onChange={(val) => {
 									save({
 										[prm.vars]: {
@@ -482,7 +482,7 @@ CP.SelectClassPanel = (props) => {
 						rtn.push(
 							<CP.PositionInput
 								label={prm.label}
-								value={props.attr[prm.vars][prm.key]}
+								value={props.attr?.[prm.vars]?.[prm.key]}
 								onChange={(val) => {
 									save({
 										[prm.vars]: {
@@ -499,7 +499,7 @@ CP.SelectClassPanel = (props) => {
 						rtn.push(
 							<CP.SelectSize
 								label={prm.label}
-								value={props.attr[prm.vars][prm.key]}
+								value={props.attr?.[prm.vars]?.[prm.key]}
 								onChange={(val) => {
 									save({
 										[prm.vars]: {
@@ -517,7 +517,7 @@ CP.SelectClassPanel = (props) => {
 				rtn.push(
 					<TextControl
 						label={prm.label}
-						value={props.attr[prm.vars][prm.key]}
+						value={props.attr?.[prm.vars]?.[prm.key]}
 						onChange={(val) => {
 							save({
 								[prm.vars]: { ...props.attr[prm.vars], [prm.key]: `${val}` },
