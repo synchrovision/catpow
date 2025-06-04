@@ -6,7 +6,7 @@ export const selectiveClassesPresets = {
 		name: "customColorVars",
 		input: "customColorVars",
 		label: __("カスタムカラー", "catpow"),
-		vars: "customColorVars",
+		vars: "vars",
 	},
 	isTemplate: {
 		name: "template",
