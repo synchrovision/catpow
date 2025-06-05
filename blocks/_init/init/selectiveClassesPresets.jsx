@@ -2,6 +2,32 @@
 import { ucFirst } from "catpow/util";
 const { __ } = wp.i18n;
 
+export const resolveSelectiveClassesPresets = (prms) => {
+	prms.forEach((prm, index) => {
+		if (typeof prm === "string" && selectiveClassesPresets.hasOwnProperty(prm)) {
+			prms[index] = prm = { preset: prm };
+		}
+		if (prm.preset) {
+			if (selectiveClassesPresets.hasOwnProperty(prm.preset)) {
+				const preset = selectiveClassesPresets[prm.preset];
+				if (typeof preset === "function") {
+					prms[index] = preset(prm);
+				} else {
+					prms[index] = { ...preset, ...prm };
+				}
+			}
+		}
+		if (prm.sub) {
+			if (Array.isArray(prm.sub)) {
+				resolveSelectiveClassesPresets(prm.sub);
+			} else {
+				Object.values(prm.sub).forEach(resolveSelectiveClassesPresets);
+			}
+		}
+	});
+	return prms;
+};
+
 export const selectiveClassesPresets = {
 	customColorVars: {
 		name: "customColorVars",
