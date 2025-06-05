@@ -39,32 +39,23 @@ wp.blocks.registerBlockType("catpow/div", {
 					label: "タイプ",
 					filter: "type",
 					type: "buttons",
-					values: ["block", "frame", "columns"],
+					values: { isTypeBlock: "block", isTypeFrame: "frame", isTypeColumns: "columns" },
 					sub: {
-						frame: [
+						isTypeFrame: [
 							{ label: "アイコン", values: "hasIcon", sub: [{ input: "icon", label: "アイコン", color }] },
 							{ type: "buttons", label: "線", values: { noBorder: "なし", thinBorder: "細", boldBorder: "太" } },
-							{ label: "角丸", values: "round" },
-							{ label: "影", values: "shadow", sub: [{ label: "内側", values: "inset" }] },
+							{ label: "角丸", values: "hasBorderRadius" },
+							{ label: "影", values: "hasShadow", sub: [{ label: "内側", values: "inset" }] },
 							"customContentWidth",
 						],
-						columns: [{ type: "buttons", label: "幅", values: { narrow: "狭い", regular: "普通", wide: "広い" } }],
+						isTypeColumns: [{ type: "buttons", label: "幅", values: { narrow: "狭い", regular: "普通", wide: "広い" } }],
 					},
 				},
 				"color",
-				"customColorVars",
 				"colorScheme",
-				{
-					name: "background",
-					type: "buttons",
-					label: "背景",
-					values: { noBackground: "なし", hasPaleBackgroundColor: "薄色", hasBackgroundColor: "色", hasBackgroundImage: "画像", hasPatternImage: "パターン" },
-					sub: {
-						hasBackgroundColor: [{ label: "パターン", values: "hasPattern", sub: ["pattern"] }],
-						hasBackgroundImage: [{ input: "picture", label: "背景画像", keys: imageKeys.backgroundImage, devices }],
-						hasPatternImage: [{ input: "pattern", css: "patternImageCss", sel: ({ attr }) => "#" + attr.anchor, color }],
-					},
-				},
+				"backgroundColor",
+				"backgroundImage",
+				"backgroundPattern",
 				{
 					name: "borderImage",
 					type: "buttons",
@@ -75,14 +66,14 @@ wp.blocks.registerBlockType("catpow/div", {
 						hasBorderImage: [{ input: "border", css: "borderImageCss", sel: ({ attr }) => "#" + attr.anchor, color }],
 					},
 				},
-				{ name: "pad", type: "buttons", label: "余白", values: { noPad: "なし", thinPad: "極細", lightPad: "細", mediumPad: "中", boldPad: "太", heavyPad: "極太" } },
+				"customPadding",
 				"customMargin",
 			];
 			wp.hooks.applyFilters("catpow.blocks.div.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
 
-		const blockProps = useBlockProps({ className: classes, style: { ...customColorVars, ...vars } });
+		const blockProps = useBlockProps({ className: classes, style: vars });
 
 		return (
 			<>
@@ -115,7 +106,7 @@ wp.blocks.registerBlockType("catpow/div", {
 		const states = CP.wordsToFlags(classes);
 		const { devices, imageKeys } = CP.config.div;
 
-		const blockProps = useBlockProps.save({ className: classes, style: { ...customColorVars, ...vars } });
+		const blockProps = useBlockProps.save({ className: classes, style: vars });
 
 		return (
 			<div {...blockProps}>
