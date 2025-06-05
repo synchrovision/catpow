@@ -175,12 +175,12 @@
     if (target) Object.defineProperty(target, contextIn.name, descriptor);
     done = true;
   }
-  function __runInitializers(thisArg, initializers, value) {
+  function __runInitializers(thisArg, initializers, value2) {
     var useValue = arguments.length > 2;
     for (var i = 0; i < initializers.length; i++) {
-      value = useValue ? initializers[i].call(thisArg, value) : initializers[i].call(thisArg);
+      value2 = useValue ? initializers[i].call(thisArg, value2) : initializers[i].call(thisArg);
     }
-    return useValue ? value : void 0;
+    return useValue ? value2 : void 0;
   }
   function __propKey(x) {
     return typeof x === "symbol" ? x : "".concat(x);
@@ -193,22 +193,22 @@
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
   }
   function __awaiter(thisArg, _arguments, P, generator) {
-    function adopt(value) {
-      return value instanceof P ? value : new P(function(resolve) {
-        resolve(value);
+    function adopt(value2) {
+      return value2 instanceof P ? value2 : new P(function(resolve) {
+        resolve(value2);
       });
     }
     return new (P || (P = Promise))(function(resolve, reject) {
-      function fulfilled(value) {
+      function fulfilled(value2) {
         try {
-          step2(generator.next(value));
+          step2(generator.next(value2));
         } catch (e) {
           reject(e);
         }
       }
-      function rejected(value) {
+      function rejected(value2) {
         try {
-          step2(generator["throw"](value));
+          step2(generator["throw"](value2));
         } catch (e) {
           reject(e);
         }
@@ -374,11 +374,11 @@
     function step2(r2) {
       r2.value instanceof __await ? Promise.resolve(r2.value.v).then(fulfill, reject) : settle(q[0][2], r2);
     }
-    function fulfill(value) {
-      resume("next", value);
+    function fulfill(value2) {
+      resume("next", value2);
     }
-    function reject(value) {
-      resume("throw", value);
+    function reject(value2) {
+      resume("throw", value2);
     }
     function settle(f, v) {
       if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]);
@@ -441,27 +441,27 @@
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
   }
-  function __classPrivateFieldSet(receiver, state, value, kind, f) {
+  function __classPrivateFieldSet(receiver, state, value2, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
-    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+    return kind === "a" ? f.call(receiver, value2) : f ? f.value = value2 : state.set(receiver, value2), value2;
   }
   function __classPrivateFieldIn(state, receiver) {
     if (receiver === null || typeof receiver !== "object" && typeof receiver !== "function") throw new TypeError("Cannot use 'in' operator on non-object");
     return typeof state === "function" ? receiver === state : state.has(receiver);
   }
-  function __addDisposableResource(env, value, async) {
-    if (value !== null && value !== void 0) {
-      if (typeof value !== "object" && typeof value !== "function") throw new TypeError("Object expected.");
+  function __addDisposableResource(env, value2, async) {
+    if (value2 !== null && value2 !== void 0) {
+      if (typeof value2 !== "object" && typeof value2 !== "function") throw new TypeError("Object expected.");
       var dispose, inner;
       if (async) {
         if (!Symbol.asyncDispose) throw new TypeError("Symbol.asyncDispose is not defined.");
-        dispose = value[Symbol.asyncDispose];
+        dispose = value2[Symbol.asyncDispose];
       }
       if (dispose === void 0) {
         if (!Symbol.dispose) throw new TypeError("Symbol.dispose is not defined.");
-        dispose = value[Symbol.dispose];
+        dispose = value2[Symbol.dispose];
         if (async) inner = dispose;
       }
       if (typeof dispose !== "function") throw new TypeError("Object not disposable.");
@@ -472,11 +472,11 @@
           return Promise.reject(e);
         }
       };
-      env.stack.push({ value, dispose, async });
+      env.stack.push({ value: value2, dispose, async });
     } else if (async) {
       env.stack.push({ async: true });
     }
-    return value;
+    return value2;
   }
   function __disposeResources(env) {
     function fail(e) {
@@ -936,6 +936,45 @@
     return text;
   };
 
+  // modules/src/util/data.jsx
+  var deepMap = () => {
+    const maps = {};
+    const getMap = (keys, shift = 0) => {
+      const depth = keys.length + shift;
+      if (maps[depth] == null) {
+        maps[depth] = /* @__PURE__ */ new Map();
+      }
+      let currentMap = maps[depth];
+      for (const key of keys) {
+        if (!currentMap.has(key)) {
+          currentMap.set(key, /* @__PURE__ */ new Map());
+        }
+        currentMap = currentMap.get(key);
+      }
+      return currentMap;
+    };
+    return {
+      getMap(keys, shift = 1) {
+        return getMap(keys, shift);
+      },
+      has(keys) {
+        return getMap(keys.slice(0, -1)).has(keys[keys.length - 1]);
+      },
+      get(keys) {
+        return getMap(keys.slice(0, -1)).get(keys[keys.length - 1]);
+      },
+      set(keys, value2) {
+        return getMap(keys.slice(0, -1)).set(keys[keys.length - 1], value2);
+      },
+      forEach(keys, callback) {
+        return getMap(keys).forEach(callback);
+      },
+      map(keys, callback) {
+        return [...getMap(keys)].map(callback);
+      }
+    };
+  };
+
   // modules/src/util/bem.jsx
   var bem = (className) => {
     const children = {};
@@ -973,6 +1012,7 @@
   };
 
   // ../blocks/_init/init/CP.jsx
+  var cache = deepMap();
   var CP = {
     filters: {},
     cache: {},
@@ -1101,16 +1141,16 @@
         return row.split(",").map((val) => val === "[TMP]" ? tmp.shift() : val);
       });
     },
-    switchNumberClass: ({ set, attr }, label, value) => {
+    switchNumberClass: ({ set, attr }, label, value2) => {
       let classArray = (attr.classes || "").split(" ");
       let i = classArray.findIndex((cls) => cls.slice(0, label.length) === label);
       if (i === -1) {
-        if (value) {
-          classArray.push(label + value);
+        if (value2) {
+          classArray.push(label + value2);
         }
       } else {
-        if (value) {
-          classArray.splice(i, 1, label + value);
+        if (value2) {
+          classArray.splice(i, 1, label + value2);
         } else {
           classArray.splice(i, 1);
         }
@@ -1118,25 +1158,25 @@
       set({ classes: classArray.join(" ") });
     },
     getNumberClass: ({ attr }, label) => {
-      let value = (attr.classes || "").split(" ").find((cls) => cls.slice(0, label.length) === label);
-      if (!value) {
+      let value2 = (attr.classes || "").split(" ").find((cls) => cls.slice(0, label.length) === label);
+      if (!value2) {
         return 0;
       }
-      return parseInt(value.slice(label.length));
+      return parseInt(value2.slice(label.length));
     },
-    switchColor: (props, value) => {
-      CP.switchNumberClass(props, "color", value);
+    switchColor: (props, value2) => {
+      CP.switchNumberClass(props, "color", value2);
     },
     getColor: (props) => {
       return CP.getNumberClass(props, "color");
     },
-    switchPattern: (props, value) => {
-      CP.switchNumberClass(props, "pattern", value);
+    switchPattern: (props, value2) => {
+      CP.switchNumberClass(props, "pattern", value2);
     },
     getPattern: (props) => {
       return CP.getNumberClass(props, "pattern");
     },
-    switchSelectiveClass: ({ set, attr }, values, value, key) => {
+    switchSelectiveClass: ({ set, attr }, values, value2, key) => {
       if (key === void 0) {
         key = "classes";
       }
@@ -1145,10 +1185,10 @@
         values = Object.keys(values);
       }
       classArray = _.difference(classArray, values);
-      if (Array.isArray(value)) {
-        classArray = classArray.concat(value);
+      if (Array.isArray(value2)) {
+        classArray = classArray.concat(value2);
       } else {
-        classArray.push(value);
+        classArray.push(value2);
       }
       let data = {};
       data[key] = classArray.join(" ");
@@ -1167,6 +1207,7 @@
       }
       return _.intersection(classArray, values).shift();
     },
+    //@deprecated
     getSubClasses: (prm) => {
       let rtn = {};
       let values;
@@ -1184,6 +1225,7 @@
       });
       return rtn;
     },
+    //@deprecated
     getAllSubClasses: (prms) => {
       let rtn = [];
       prms.forEach((prm) => {
@@ -1210,6 +1252,7 @@
       });
       return rtn;
     },
+    //@deprecated
     getBindClasses: (prm) => {
       let rtn = {};
       let values;
@@ -1227,7 +1270,155 @@
       });
       return rtn;
     },
-    toggleClass: ({ attr, set }, value, key) => {
+    getClassFlagsByValue: (prm, primaryClassKey = "classes") => {
+      const cacheKeys = [CP.getClassFlagsByValue, prm, primaryClassKey];
+      if (cache.has(cacheKeys)) {
+        return cache.get(cacheKeys);
+      }
+      const flags = {};
+      cache.set(cacheKeys, flags);
+      if (!prm || typeof prm !== "object" || !prm.values) {
+        return flags;
+      }
+      const values = typeof prm.values === "string" ? [prm.values] : Array.isArray(prm.values) ? prm.values : Object.keys(prm.values);
+      for (const value2 of values) {
+        flags[value2] = { [prm.classKey || primaryClassKey]: { [value2]: true } };
+        if (prm.sub) {
+          if (Array.isArray(prm.sub)) {
+            CP.addAllClassFlags(flags[value2], prm.sub, primaryClassKey);
+          } else if (prm.sub[value2]) {
+            CP.addAllClassFlags(flags[value2], prm.sub[value2], primaryClassKey);
+          }
+        }
+        if (prm.bind) {
+          if (Array.isArray(prm.bind)) {
+            CP.addBindClassFlags(flags[value2], prm.bind, primaryClassKey);
+          } else if (prm.bind[value2]) {
+            CP.addBindClassFlags(flags[value2], prm.bind[value2], primaryClassKey);
+          }
+        }
+      }
+      return flags;
+    },
+    getAllClassFlags: (prm, primaryClassKey = "classes") => {
+      const cacheKeys = [CP.getAllClassFlags, prm, primaryClassKey];
+      if (cache.has(cacheKeys)) {
+        return cache.get(cacheKeys);
+      }
+      const flags = {};
+      cache.set(cacheKeys, flags);
+      if (!prm || typeof prm !== "object" || !prm.values) {
+        return flags;
+      }
+      CP.addAllClassFlags(flags, [prm], primaryClassKey);
+      return flags;
+    },
+    getBindClassFlagsByValue: (prm, primaryClassKey = "classes") => {
+      const cacheKeys = [CP.getBindClassFlagsByValue, prm, primaryClassKey];
+      if (cache.has(cacheKeys)) {
+        return cache.get(cacheKeys);
+      }
+      const flags = {};
+      cache.set(cacheKeys, flags);
+      if (!prm || typeof prm !== "object" || !prm.values) {
+        return flags;
+      }
+      const values = typeof prm.values === "string" ? [prm.values] : Array.isArray(prm.values) ? prm.values : Object.keys(prm.values);
+      for (let value2 of values) {
+        flags[value2] = { [prm.classKey || primaryClassKey]: { [value2]: true } };
+        if (prm.bind) {
+          if (typeof prm.values === "string") {
+            CP.addBindClassFlags(flags[value2], prm.bind, primaryClassKey);
+          } else {
+            if (prm.bind[value2]) {
+              CP.addBindClassFlags(flags[value2], prm.bind[value2], primaryClassKey);
+            }
+          }
+        }
+      }
+      return flags;
+    },
+    addAllClassFlags: (flags, prms, primaryClassKey = "classes") => {
+      if (!flags[primaryClassKey]) {
+        flags[primaryClassKey] = {};
+      }
+      for (const prm of prms) {
+        if (prm.key || prm.json || prm.css || prm.vars) {
+          continue;
+        }
+        if (prm.values) {
+          const values = typeof prm.values === "string" ? [prm.values] : Array.isArray(prm.values) ? prm.values : Object.keys(prm.values);
+          for (const value2 of values) {
+            const classKey = prm.classKey || primaryClassKey;
+            if (!flags[classKey]) {
+              flags[classKey] = {};
+            }
+            flags[classKey][value2] = true;
+          }
+        }
+        if (prm.sub) {
+          if (Array.isArray(prm.sub)) {
+            CP.addAllClassFlags(flags, prm.sub, primaryClassKey);
+          } else {
+            for (const subPrm of Object.values(prm.sub)) {
+              CP.addAllClassFlags(flags, subPrm, primaryClassKey);
+            }
+          }
+        }
+        if (prm.bind) {
+          if (typeof prm.values === "string") {
+            CP.addBindClassFlags(flags, prm.bind, primaryClassKey);
+          } else {
+            for (const bindClasses of Object.values(prm.bind)) {
+              CP.addBindClassFlags(flags, bindClasses, primaryClassKey);
+            }
+          }
+        }
+      }
+    },
+    addBindClassFlags: (flags, bindClasses, primaryClassKey = "classes") => {
+      if (!flags[primaryClassKey]) {
+        flags[primaryClassKey] = {};
+      }
+      if (Array.isArray(bindClasses)) {
+        for (const bindClass of bindClasses) {
+          flags[primaryClassKey][bindClass] = true;
+        }
+      } else {
+        for (const [classKey, classes] of Object.entries(bindClasses)) {
+          if (classKey === "_") {
+            for (const bindClass of classes) {
+              flags[primaryClassKey][bindClass] = true;
+            }
+          } else {
+            if (!flags[classKey]) {
+              flags[classKey] = {};
+            }
+            for (const bindClass of classes) {
+              flags[classKey][bindClass] = true;
+            }
+          }
+        }
+      }
+    },
+    getUpdatesFromStatesAndClasssFlags: ({ allStates, allClassFlags, classFlags, bindClassFlags }) => {
+      const updates = {};
+      for (const [classKey, allClassFlag] of Object.entries(allClassFlags)) {
+        console.assert(!!allStates[classKey], `allStates should have ${classKey} states`);
+        const states = allStates[classKey];
+        for (const value2 of Object.keys(states)) {
+          if (allClassFlag[value2] && !classFlags?.[classKey]?.[value2]) {
+            states[value2] = false;
+          }
+        }
+        if (bindClassFlags?.[classKey]) {
+          Object.assign(states, bindClassFlags[classKey]);
+        }
+        updates[classKey] = CP.flagsToClassNames(states);
+      }
+      return updates;
+    },
+    toggleClass: ({ attr, set }, value2, key) => {
       if (key === void 0) {
         key = "classes";
       }
@@ -1235,9 +1426,9 @@
         attr[key] = "";
       }
       let classArray = attr[key].split(" ");
-      let i = classArray.indexOf(value);
+      let i = classArray.indexOf(value2);
       if (i === -1) {
-        classArray.push(value);
+        classArray.push(value2);
       } else {
         classArray.splice(i, 1);
       }
@@ -1245,14 +1436,14 @@
       data[key] = classArray.join(" ");
       set(data);
     },
-    hasClass: ({ attr }, value, key) => {
+    hasClass: ({ attr }, value2, key) => {
       if (key === void 0) {
         key = "classes";
       }
       if (attr[key] === void 0) {
         attr[key] = "";
       }
-      return attr[key].split(" ").indexOf(value) !== -1;
+      return attr[key].split(" ").indexOf(value2) !== -1;
     },
     /*items*/
     selectPrevItem: (tag) => {
@@ -1378,7 +1569,7 @@
       }
       return parseInt(p.slice(7));
     },
-    switchItemSelectiveClass: ({ items: items2, index, set }, values, value, itemsKey) => {
+    switchItemSelectiveClass: ({ items: items2, index, set }, values, value2, itemsKey) => {
       if (itemsKey === void 0) {
         itemsKey = "items";
       }
@@ -1387,10 +1578,10 @@
         values = Object.keys(values);
       }
       classArray = _.difference(classArray, values);
-      if (Array.isArray(value)) {
-        classArray = classArray.concat(value);
+      if (Array.isArray(value2)) {
+        classArray = classArray.concat(value2);
       } else {
-        classArray.push(value);
+        classArray.push(value2);
       }
       items2[index].classes = classArray.join(" ");
       set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
@@ -1405,23 +1596,23 @@
       }
       return _.intersection(classArray, values).shift();
     },
-    toggleItemClass: ({ items: items2, index, set }, value, itemsKey) => {
+    toggleItemClass: ({ items: items2, index, set }, value2, itemsKey) => {
       if (itemsKey === void 0) {
         itemsKey = "items";
       }
       let classArray = (items2[index].classes || "").split(" ");
-      let i = classArray.indexOf(value);
+      let i = classArray.indexOf(value2);
       if (i === -1) {
-        classArray.push(value);
+        classArray.push(value2);
       } else {
         classArray.splice(i, 1);
       }
       items2[index].classes = classArray.join(" ");
       set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
     },
-    hasItemClass: ({ items: items2, index }, value) => {
+    hasItemClass: ({ items: items2, index }, value2) => {
       let classArray = (items2[index].classes || "").split(" ");
-      return classArray.indexOf(value) !== -1;
+      return classArray.indexOf(value2) !== -1;
     },
     /*json*/
     getJsonValue: ({ attr }, json, key) => {
@@ -1430,41 +1621,41 @@
       }
       return JSON.parse(attr[json])[key];
     },
-    hasJsonValue: (prop, json, key, value) => {
+    hasJsonValue: (prop, json, key, value2) => {
       let values = CP.getJsonValue(prop, json, key);
       if (!values) {
         return false;
       }
-      return values.indexOf(value) !== -1;
+      return values.indexOf(value2) !== -1;
     },
-    setJsonValue: ({ attr, set }, json, key, value) => {
+    setJsonValue: ({ attr, set }, json, key, value2) => {
       let data = {};
       let jsonData = JSON.parse(attr[json]);
-      jsonData[key] = value;
+      jsonData[key] = value2;
       data[json] = JSON.stringify(jsonData);
       set(data);
     },
-    setJsonValues: ({ attr, set }, json, keys, value) => {
+    setJsonValues: ({ attr, set }, json, keys, value2) => {
       let data = {};
       let jsonData = JSON.parse(attr[json]);
       if (keys) {
         for (const key in keys) {
-          jsonData[keys[key]] = value[key];
+          jsonData[keys[key]] = value2[key];
         }
       } else {
-        Object.assign(jsonData, value);
+        Object.assign(jsonData, value2);
       }
       data[json] = JSON.stringify(jsonData);
       set(data);
     },
-    switchJsonValue: (prop, json, key, value) => {
+    switchJsonValue: (prop, json, key, value2) => {
       let values = CP.getJsonValue(prop, json, key);
       if (!values) {
         values = [];
       }
-      let i = values.indexOf(value);
+      let i = values.indexOf(value2);
       if (i === -1) {
-        values.push(value);
+        values.push(value2);
       } else {
         values.splice(i, 1);
       }
@@ -1794,9 +1985,9 @@
         }
         const datalist = document.createElement("datalist");
         datalist.id = id;
-        values.forEach((value) => {
+        values.forEach((value2) => {
           const option = document.createElement("option");
-          option.value = value;
+          option.value = value2;
           datalist.appendChild(option);
         });
         document.body.appendChild(datalist);
@@ -1900,16 +2091,16 @@
       });
       return rtn;
     },
-    parseColorToneValue: (value) => {
-      if (value) {
-        const matches = value.match(CP.colorToneValuePattern);
+    parseColorToneValue: (value2) => {
+      if (value2) {
+        const matches = value2.match(CP.colorToneValuePattern);
         if (matches) {
           return { h: matches[1], s: matches[5], l: matches[7] };
         }
       }
       return { h: "0" };
     },
-    colorToneValueToClasses: (value) => CP.generateColorToneClasses(CP.parseColorToneValue(value)),
+    colorToneValueToClasses: (value2) => CP.generateColorToneClasses(CP.parseColorToneValue(value2)),
     generateColorToneValue: (values) => (values.h || "0") + (values.s ? "s" + values.s : "") + (values.l ? "l" + values.l : ""),
     generateColorToneClasses: (values) => {
       const classes = [];
@@ -2079,12 +2270,12 @@
     title: "Ruby",
     tagName: "ruby",
     className: "rtf-ruby",
-    edit({ isActive, value, onChange }) {
+    edit({ isActive, value: value2, onChange }) {
       const onToggle = () => {
         if (isActive) {
-          return onChange(toggleFormat(value, { type: "catpow/ruby" }));
+          return onChange(toggleFormat(value2, { type: "catpow/ruby" }));
         }
-        if (wp.richText.isCollapsed(value)) {
+        if (wp.richText.isCollapsed(value2)) {
           alert(__("\u30EB\u30D3\u3092\u3064\u3051\u305F\u3044\u30C6\u30AD\u30B9\u30C8\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"));
           return;
         }
@@ -2094,12 +2285,12 @@
         }
         return onChange(
           wp.richText.insert(
-            value,
+            value2,
             wp.richText.create({
-              html: `<ruby class="rtf-ruby">${wp.richText.slice(value).text}<rt class="rtf-ruby__rt">${rt}</rt></ruby>`
+              html: `<ruby class="rtf-ruby">${wp.richText.slice(value2).text}<rt class="rtf-ruby__rt">${rt}</rt></ruby>`
             }),
-            value.start,
-            value.end
+            value2.start,
+            value2.end
           )
         );
       };
@@ -2126,8 +2317,8 @@
     title: "small",
     tagName: "small",
     className: "rtf-small",
-    edit({ isActive, value, onChange }) {
-      const onToggle = () => onChange(toggleFormat(value, { type: "catpow/small" }));
+    edit({ isActive, value: value2, onChange }) {
+      const onToggle = () => onChange(toggleFormat(value2, { type: "catpow/small" }));
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement(
         "path",
         {
@@ -2141,8 +2332,8 @@
     title: "underline",
     tagName: "u",
     className: "rtf-u",
-    edit({ isActive, value, onChange }) {
-      const onToggle = () => onChange(toggleFormat(value, { type: "catpow/u" }));
+    edit({ isActive, value: value2, onChange }) {
+      const onToggle = () => onChange(toggleFormat(value2, { type: "catpow/u" }));
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement(
         "path",
         {
@@ -2160,10 +2351,10 @@
       type: "class"
     },
     edit(props) {
-      const { isActive, value, onChange, activeAttributes, contentRef } = props;
+      const { isActive, value: value2, onChange, activeAttributes, contentRef } = props;
       const onToggle = () => {
         return onChange(
-          toggleFormat(value, {
+          toggleFormat(value2, {
             type: "catpow/title",
             attributes: { type: "is-header" }
           })
@@ -2172,13 +2363,13 @@
       const setAttributes = useCallback(
         (attr) => {
           onChange(
-            applyFormat(value, {
+            applyFormat(value2, {
               type: "catpow/title",
               attributes: Object.assign(activeAttributes, attr)
             })
           );
         },
-        [value, activeAttributes]
+        [value2, activeAttributes]
       );
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("g", null, /* @__PURE__ */ wp.element.createElement("path", { d: "M6.9,15.9V2.6h2.7v5.2h5.3V2.6h2.7v13.3h-2.7v-5.8H9.6v5.8H6.9z" })), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "1", width: "4", height: "18" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "5", y: "18", width: "14", height: "1" }));
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, null, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
@@ -2203,10 +2394,10 @@
       color: "class"
     },
     edit(props) {
-      const { isActive, value, onChange, activeAttributes, contentRef } = props;
+      const { isActive, value: value2, onChange, activeAttributes, contentRef } = props;
       const onToggle = () => {
         return onChange(
-          toggleFormat(value, {
+          toggleFormat(value2, {
             type: "catpow/mark",
             attributes: { color: "color_0" }
           })
@@ -2215,13 +2406,13 @@
       const setAttributes = useCallback(
         (attr) => {
           onChange(
-            applyFormat(value, {
+            applyFormat(value2, {
               type: "catpow/mark",
               attributes: Object.assign(activeAttributes, attr)
             })
           );
         },
-        [value, activeAttributes]
+        [value2, activeAttributes]
       );
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("polygon", { points: "7.9,10.8 12.1,10.8 10,5.3 	" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M0,2v16h20V2H0z M13.7,15.3L12.5,12h-5l-1.2,3.4H4.7L9,4h1.9l4.3,11.3H13.7z" }));
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: contentRef.current }, /* @__PURE__ */ wp.element.createElement(CP.SelectThemeColor, { onChange: (proxy) => setAttributes({ color: proxy.classes }), selected: activeAttributes["color"] }))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { controls: [{ icon, onClick: onToggle, isActive }] })), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon, title: "Mark", onClick: onToggle, isActive }));
@@ -2235,10 +2426,10 @@
       color: "class"
     },
     edit(props) {
-      const { isActive, value, onChange, activeAttributes, contentRef } = props;
+      const { isActive, value: value2, onChange, activeAttributes, contentRef } = props;
       const onToggle = () => {
         return onChange(
-          toggleFormat(value, {
+          toggleFormat(value2, {
             type: "catpow/large",
             attributes: { color: "color_0" }
           })
@@ -2247,13 +2438,13 @@
       const setAttributes = useCallback(
         (attr) => {
           onChange(
-            applyFormat(value, {
+            applyFormat(value2, {
               type: "catpow/large",
               attributes: Object.assign(activeAttributes, attr)
             })
           );
         },
-        [value, activeAttributes]
+        [value2, activeAttributes]
       );
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement(
         "path",
@@ -2273,10 +2464,10 @@
       color: "class"
     },
     edit(props) {
-      const { isActive, value, onChange, onFocus, activeAttributes, activeObject, contentRef } = props;
+      const { isActive, value: value2, onChange, onFocus, activeAttributes, activeObject, contentRef } = props;
       const onToggle = () => {
         return onChange(
-          toggleFormat(value, {
+          toggleFormat(value2, {
             type: "catpow/tag",
             attributes: { class: "color_0" }
           })
@@ -2285,13 +2476,13 @@
       const setAttributes = useCallback(
         (attr) => {
           onChange(
-            applyFormat(value, {
+            applyFormat(value2, {
               type: "catpow/tag",
               attributes: Object.assign(activeAttributes, attr)
             })
           );
         },
-        [value, activeAttributes]
+        [value2, activeAttributes]
       );
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, null, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(TextControl, { label: "URL", value: activeAttributes["url"], onChange: (url) => setAttributes({ url }) }))), /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: contentRef.current }, /* @__PURE__ */ wp.element.createElement(CP.SelectThemeColor, { onChange: (proxy) => setAttributes({ color: proxy.classes }), selected: activeAttributes["color"] }))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { controls: [{ icon: "tag", onClick: onToggle, isActive }] })), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon: "tag", title: "tag", onClick: onToggle, isActive }));
     }
@@ -2300,8 +2491,8 @@
     title: "annotation",
     tagName: "small",
     className: "rtf-annotation",
-    edit({ isActive, value, onChange }) {
-      const onToggle = () => onChange(toggleFormat(value, { type: "catpow/annotation" }));
+    edit({ isActive, value: value2, onChange }) {
+      const onToggle = () => onChange(toggleFormat(value2, { type: "catpow/annotation" }));
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement(
         "path",
         {
@@ -2319,10 +2510,10 @@
       vars: "style"
     },
     edit(props) {
-      const { isActive, value, onChange, onFocus, activeAttributes, activeObject, contentRef } = props;
+      const { isActive, value: value2, onChange, onFocus, activeAttributes, activeObject, contentRef } = props;
       const onToggle = () => {
         return onChange(
-          toggleFormat(value, {
+          toggleFormat(value2, {
             type: "catpow/custom",
             attributes: { vars: "font-size:1em;" }
           })
@@ -2331,13 +2522,13 @@
       const setAttributes = useCallback(
         (attr) => {
           onChange(
-            applyFormat(value, {
+            applyFormat(value2, {
               type: "catpow/custom",
               attributes: Object.assign(activeAttributes, attr)
             })
           );
         },
-        [value, activeAttributes]
+        [value2, activeAttributes]
       );
       const extractStateFromVars = useCallback((vars) => {
         const state2 = {};
@@ -2392,7 +2583,7 @@
       useEffect(() => {
         if (isActive) {
           onChange(
-            applyFormat(value, {
+            applyFormat(value2, {
               type: "catpow/custom",
               attributes: { vars: state.vars }
             })
@@ -2409,8 +2600,8 @@
     title: "clear",
     tagName: "div",
     className: null,
-    edit({ isActive, value, onChange }) {
-      return /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon: "dismiss", title: "\u{1F9F9}\u5168\u3066\u306E\u30B9\u30BF\u30A4\u30EB\u3092\u30AF\u30EA\u30A2", onClick: () => onChange(create({ html: value.text })), isActive: false });
+    edit({ isActive, value: value2, onChange }) {
+      return /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon: "dismiss", title: "\u{1F9F9}\u5168\u3066\u306E\u30B9\u30BF\u30A4\u30EB\u3092\u30AF\u30EA\u30A2", onClick: () => onChange(create({ html: value2.text })), isActive: false });
     }
   });
 
@@ -2439,15 +2630,15 @@
         [props]
       );
       const RenderMetaValue = useCallback4(
-        ({ value }) => {
-          if (Array.isArray(value)) {
-            return value.map((val) => /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: val }));
+        ({ value: value2 }) => {
+          if (Array.isArray(value2)) {
+            return value2.map((val) => /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: val }));
           }
-          return Object.keys(value).map((key) => {
-            if (typeof value[key] === "object") {
-              return /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: key }, /* @__PURE__ */ wp.element.createElement(RenderMetaValue, { value: value[key] }));
+          return Object.keys(value2).map((key) => {
+            if (typeof value2[key] === "object") {
+              return /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: key }, /* @__PURE__ */ wp.element.createElement(RenderMetaValue, { value: value2[key] }));
             }
-            return /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: key, name: value[key] });
+            return /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: key, name: value2[key] });
           });
         },
         [props]
@@ -2824,9 +3015,9 @@
 
   // node_modules/react-use/esm/useLatest.js
   init_react();
-  var useLatest = function(value) {
-    var ref = useRef(value);
-    ref.current = value;
+  var useLatest = function(value2) {
+    var ref = useRef(value2);
+    ref.current = value2;
     return ref;
   };
   var useLatest_default = useLatest;
@@ -3200,7 +3391,7 @@
 
   // modules/src/hooks/useAgent.jsx
   init_react();
-  var { useMemo: useMemo4, useState: useState3, useCallback: useCallback3, useRef: useRef3, useEffect: useEffect4, createContext: createContext2, useContext: useContext2 } = react_default;
+  var { useMemo: useMemo4, useState: useState3, useCallback: useCallback3, useRef: useRef3, useEffect: useEffect4, createContext: createContext2, useContext: useContext2, lazy } = react_default;
   var AgentContext = createContext2();
 
   // modules/src/hooks/useBem.jsx
@@ -3268,12 +3459,12 @@
         const { fixed = false, absolute = false, relative = false, active = false, proxy: proxy2 } = props2;
         const { h, s, l } = proxy2;
         const hsl = { h, s, l };
-        return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.colors({ fixed, absolute, relative, active }) }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active }) }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: fixed ? "lock" : absolute ? "media-default" : "excerpt-view" })), Array.from(Array(13), (v, value) => {
+        return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.colors({ fixed, absolute, relative, active }) }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active }) }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: fixed ? "lock" : absolute ? "media-default" : "excerpt-view" })), Array.from(Array(13), (v, value2) => {
           const colorClass = CP.generateColorClass({
             fixed,
             absolute,
             relative,
-            value
+            value: value2
           });
           const active2 = colorClass === h;
           return /* @__PURE__ */ wp.element.createElement(
@@ -3298,8 +3489,8 @@
         const { h, s, l } = proxy2;
         const hsl = { h, s, l };
         return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.tones() }, ["s", "l"].map((r2) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: r2 }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active: !!hsl[r2] }) }, /* @__PURE__ */ wp.element.createElement(CP.ConfigIcon, { icon: { s: "contrast", l: "light" }[r2] })), Array.from(Array(5), (v, index) => {
-          const value = index - 2;
-          const toneClass = CP.generateToneClass({ [r2]: true, value });
+          const value2 = index - 2;
+          const toneClass = CP.generateToneClass({ [r2]: true, value: value2 });
           const active = toneClass === hsl[r2];
           return /* @__PURE__ */ wp.element.createElement(
             "li",
@@ -3354,15 +3545,15 @@
     }, []);
     const [colors, updateColors] = useReducer3(reducer, props.colors, init);
     const onChangeOfColorPalette = useCallback4(
-      (value) => {
-        setIndex(colors.findIndex((color) => color.color == value));
+      (value2) => {
+        setIndex(colors.findIndex((color) => color.color == value2));
       },
       [colors]
     );
     const onChangeOfColorPicker = useCallback4(
-      (value) => {
-        updateColors({ index, color: value.hex });
-        onChange(index, value);
+      (value2) => {
+        updateColors({ index, color: value2.hex });
+        onChange(index, value2);
       },
       [onChange, index, updateColors]
     );
@@ -3523,7 +3714,7 @@
   };
 
   // ../blocks/_init/init/SelectPreparedImage.jsx
-  CP.SelectPreparedImage = ({ className, name, value, color = 0, onChange, ...otherProps }) => {
+  CP.SelectPreparedImage = ({ className, name, value: value2, color = 0, onChange, ...otherProps }) => {
     let onClick;
     const { useEffect: useEffect6, useReducer: useReducer3 } = wp.element;
     const { getURLparam, setURLparam, setURLparams, removeURLparam } = Catpow.util;
@@ -3543,7 +3734,7 @@
           case "update":
             if (action.images) {
               newState.images = action.images;
-              const bareURL = removeURLparam(value, "c");
+              const bareURL = removeURLparam(value2, "c");
               newState.image = action.images.find((image) => image.url === bareURL);
             }
             if (action.image) {
@@ -3570,7 +3761,7 @@
     useEffect6(() => {
       onChange({
         ...state.image,
-        url: setURLparams(state.image ? state.image.url : value, {
+        url: setURLparams(state.image ? state.image.url : value2, {
           c: color,
           theme: wpinfo.theme
         })
@@ -3581,12 +3772,12 @@
     }
     return /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectpreparedimage " + name + " " + className, ...otherProps }, state.images.map((image) => {
       const url = setURLparams(image.url, { c: color, theme: wpinfo.theme });
-      return /* @__PURE__ */ wp.element.createElement("li", { className: "item " + (value == url ? "active" : ""), key: image.url }, /* @__PURE__ */ wp.element.createElement("img", { src: url, alt: image.alt, onClick: () => dispatch({ type: "update", image }) }));
+      return /* @__PURE__ */ wp.element.createElement("li", { className: "item " + (value2 == url ? "active" : ""), key: image.url }, /* @__PURE__ */ wp.element.createElement("img", { src: url, alt: image.alt, onClick: () => dispatch({ type: "update", image }) }));
     }));
   };
 
   // ../blocks/_init/init/SelectPreparedImageSet.jsx
-  CP.SelectPreparedImageSet = ({ className, name, value, color = 0, onChange, ...otherProps }) => {
+  CP.SelectPreparedImageSet = ({ className, name, value: value2, color = 0, onChange, ...otherProps }) => {
     const { getURLparam, setURLparam, setURLparams, removeURLparam } = Catpow.util;
     const [state, dispatch] = wp.element.useReducer(
       (state2, action) => {
@@ -3595,7 +3786,7 @@
             const newState = { ...state2 };
             if (action.imagesets) {
               newState.imagesets = action.imagesets;
-              const bareURL = removeURLparam(value, "c");
+              const bareURL = removeURLparam(value2, "c");
               for (const key in newState.imagesets) {
                 if (newState.imagesets[key].url === bareURL) {
                   newState.imageset = {
@@ -3647,7 +3838,7 @@
         c: color,
         theme: wpinfo.theme
       });
-      return /* @__PURE__ */ wp.element.createElement("li", { className: "item " + (value == url ? "active" : ""), key }, /* @__PURE__ */ wp.element.createElement("img", { src: url, alt: imageset[0].alt, onClick: () => dispatch({ type: "update", imageset }) }));
+      return /* @__PURE__ */ wp.element.createElement("li", { className: "item " + (value2 == url ? "active" : ""), key }, /* @__PURE__ */ wp.element.createElement("img", { src: url, alt: imageset[0].alt, onClick: () => dispatch({ type: "update", imageset }) }));
     }));
   };
 
@@ -3691,18 +3882,18 @@
 
   // ../blocks/_init/init/DataInputTable.jsx
   CP.DataInputTable = (props) => {
-    const { cols, value, onChange } = props;
+    const { cols, value: value2, onChange } = props;
     const { useCallback: useCallback4, useMemo: useMemo5 } = wp.element;
     const el = wp.element.createElement;
     const Row = useCallback4((props2) => {
-      const { cols: cols2, value: value2, onChange: onChange2 } = props2;
+      const { cols: cols2, value: value3, onChange: onChange2 } = props2;
       return /* @__PURE__ */ wp.element.createElement("tr", { className: "cp-datainputtable__body__row" }, Object.keys(cols2).map((c) => /* @__PURE__ */ wp.element.createElement("td", { className: "cp-datainputtable__body__row__cell", key: c }, /* @__PURE__ */ wp.element.createElement(
         CP.DynamicInput,
         {
-          value: value2[c],
+          value: value3[c],
           onChange: (val) => {
-            value2[c] = val;
-            onChange2(value2);
+            value3[c] = val;
+            onChange2(value3);
           },
           param: cols2[c]
         }
@@ -3723,34 +3914,34 @@
       });
       return colsWithoutLabel2;
     }, [cols]);
-    return /* @__PURE__ */ wp.element.createElement("table", { className: "cp-datainputtable" }, /* @__PURE__ */ wp.element.createElement("thead", { className: "cp-datainputtable__head" }, /* @__PURE__ */ wp.element.createElement("tr", { className: "cp-datainputtable__head__row" }, Object.keys(cols).map((c) => /* @__PURE__ */ wp.element.createElement("th", { className: "cp-datainputtable__head__row__cell", key: c }, cols[c].label || c)))), /* @__PURE__ */ wp.element.createElement("tbody", { className: "cp-datainputtable__body" }, (value || defaultRowValues).map((rowValue, index) => /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement("table", { className: "cp-datainputtable" }, /* @__PURE__ */ wp.element.createElement("thead", { className: "cp-datainputtable__head" }, /* @__PURE__ */ wp.element.createElement("tr", { className: "cp-datainputtable__head__row" }, Object.keys(cols).map((c) => /* @__PURE__ */ wp.element.createElement("th", { className: "cp-datainputtable__head__row__cell", key: c }, cols[c].label || c)))), /* @__PURE__ */ wp.element.createElement("tbody", { className: "cp-datainputtable__body" }, (value2 || defaultRowValues).map((rowValue, index) => /* @__PURE__ */ wp.element.createElement(
       Row,
       {
         cols: colsWithoutLabel,
         value: rowValue,
         onChange: (rowValue2) => {
-          if (!value) {
+          if (!value2) {
             onChange([rowValue2]);
             return;
           }
-          value[index] = rowValue2;
-          onChange(value);
+          value2[index] = rowValue2;
+          onChange(value2);
         },
         onDelete: () => {
-          if (!value) {
+          if (!value2) {
             onChange([]);
             return;
           }
-          value.splice(index, 1);
-          onChange(value);
+          value2.splice(index, 1);
+          onChange(value2);
         },
         onClone: () => {
-          if (!value) {
+          if (!value2) {
             onChange([defaultRowValues]);
             return;
           }
-          value.splice(index, 0, JSON.parse(JSON.stringify(rowValue)));
-          onChange(value);
+          value2.splice(index, 0, JSON.parse(JSON.stringify(rowValue)));
+          onChange(value2);
         },
         key: index
       }
@@ -3761,7 +3952,7 @@
   CP.DynamicInput = (props) => {
     const { useMemo: useMemo5 } = wp.element;
     const { RadioControl, RangeControl: RangeControl2, SelectControl, TextControl: TextControl2, TextareaControl, ToggleControl } = wp.components;
-    const { param, value, onChange } = props;
+    const { param, value: value2, onChange } = props;
     const type = param.type || param.input || "text";
     const { options: options3 } = useMemo5(() => {
       if (!param.options && !param.values) {
@@ -3771,16 +3962,16 @@
     }, [param.options, param.values]);
     switch (type) {
       case "radio": {
-        return /* @__PURE__ */ wp.element.createElement(RadioControl, { label: param.label || null, onChange, selected: value, options: options3 });
+        return /* @__PURE__ */ wp.element.createElement(RadioControl, { label: param.label || null, onChange, selected: value2, options: options3 });
       }
       case "select": {
-        return /* @__PURE__ */ wp.element.createElement(SelectControl, { label: param.label || null, onChange, value, options: options3 });
+        return /* @__PURE__ */ wp.element.createElement(SelectControl, { label: param.label || null, onChange, value: value2, options: options3 });
       }
       case "buttons": {
-        return /* @__PURE__ */ wp.element.createElement(CP.SelectButtons, { label: param.label || null, onChange, selected: value, options: options3 });
+        return /* @__PURE__ */ wp.element.createElement(CP.SelectButtons, { label: param.label || null, onChange, selected: value2, options: options3 });
       }
       case "gridbuttons": {
-        return /* @__PURE__ */ wp.element.createElement(CP.SelectGridButtons, { label: param.label || null, onChange, selected: value, options: options3 });
+        return /* @__PURE__ */ wp.element.createElement(CP.SelectGridButtons, { label: param.label || null, onChange, selected: value2, options: options3 });
       }
       case "range": {
         if (!param.coef) {
@@ -3790,8 +3981,8 @@
           RangeControl2,
           {
             label: param.label || null,
-            onChange: (value2) => onChange(param.unit ? value2 * param.coef + param.unit : value2 * param.coef),
-            value: parseFloat(value) / param.coef,
+            onChange: (value3) => onChange(param.unit ? value3 * param.coef + param.unit : value3 * param.coef),
+            value: parseFloat(value2) / param.coef,
             min: param.min || 0,
             max: param.max || 10,
             step: param.step || 1
@@ -3799,16 +3990,16 @@
         );
       }
       case "bool": {
-        return /* @__PURE__ */ wp.element.createElement(ToggleControl, { label: param.label || null, checked: value, onChange });
+        return /* @__PURE__ */ wp.element.createElement(ToggleControl, { label: param.label || null, checked: value2, onChange });
       }
       case "data": {
-        return /* @__PURE__ */ wp.element.createElement(CP.DataInputTable, { label: param.label || null, cols: param.cols, value, onChange });
+        return /* @__PURE__ */ wp.element.createElement(CP.DataInputTable, { label: param.label || null, cols: param.cols, value: value2, onChange });
       }
       case "textarea": {
-        return /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: param.label || null, value, onChange });
+        return /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: param.label || null, value: value2, onChange });
       }
       default: {
-        return /* @__PURE__ */ wp.element.createElement(TextControl2, { label: param.label || null, type: param.type, value, onChange, list: param.list && CP.getDataListId(param.list, param.values) });
+        return /* @__PURE__ */ wp.element.createElement(TextControl2, { label: param.label || null, type: param.type, value: value2, onChange, list: param.list && CP.getDataListId(param.list, param.values) });
       }
     }
   };
@@ -3847,8 +4038,8 @@
           {
             param: param.items[key],
             value: data[key],
-            onChange: (value) => {
-              data[key] = value;
+            onChange: (value2) => {
+              data[key] = value2;
               onChange(dataSet.slice());
             }
           }
@@ -3967,12 +4158,37 @@
 
   // ../blocks/_init/init/selectiveClassesPresets.jsx
   var { __: __2 } = wp.i18n;
+  var resolveSelectiveClassesPresets = (prms) => {
+    prms.forEach((prm, index) => {
+      if (typeof prm === "string" && selectiveClassesPresets.hasOwnProperty(prm)) {
+        prms[index] = prm = { preset: prm };
+      }
+      if (prm.preset) {
+        if (selectiveClassesPresets.hasOwnProperty(prm.preset)) {
+          const preset = selectiveClassesPresets[prm.preset];
+          if (typeof preset === "function") {
+            prms[index] = preset(prm);
+          } else {
+            prms[index] = { ...preset, ...prm };
+          }
+        }
+      }
+      if (prm.sub) {
+        if (Array.isArray(prm.sub)) {
+          resolveSelectiveClassesPresets(prm.sub);
+        } else {
+          Object.values(prm.sub).forEach(resolveSelectiveClassesPresets);
+        }
+      }
+    });
+    return prms;
+  };
   var selectiveClassesPresets = {
     customColorVars: {
       name: "customColorVars",
       input: "customColorVars",
       label: __2("\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", "catpow"),
-      vars: "customColorVars"
+      vars: "vars"
     },
     isTemplate: {
       name: "template",
@@ -4005,74 +4221,124 @@
         }
       ]
     },
-    backgroundImage: {
-      name: "backgroundImage",
-      label: __2("\u80CC\u666F\u753B\u50CF", "catpow"),
-      values: "hasBackgroundImage",
-      sub: [
-        {
-          name: "blendmode",
-          label: __2("\u30E2\u30FC\u30C9", "catpow"),
-          vars: "vars",
-          key: "--cp-image-blendmode",
-          input: "blendmode"
-        },
-        {
-          name: "opacity",
-          label: __2("\u4E0D\u900F\u660E\u5EA6", "catpow"),
-          vars: "vars",
-          key: "--cp-image-opacity",
-          input: "range",
-          min: 0,
-          max: 1,
-          step: 0.1
-        }
-      ]
+    backgroundColor: {
+      name: "backgroundColor",
+      type: "buttons",
+      label: __2("\u80CC\u666F\u8272", "catpow"),
+      values: {
+        hasBackgroundColorNone: __2("\u306A\u3057", "catpow"),
+        hasBackgroundColor: __2("\u901A\u5E38", "catpow"),
+        hasBackgroundColorAlt: __2("\u5F37\u8ABF", "catpow")
+      }
     },
-    backgroundPattern: {
-      name: "backgroundPattern",
-      label: __2("\u80CC\u666F\u30D1\u30BF\u30FC\u30F3", "catpow"),
-      values: "has-background-pattern",
-      sub: [
-        {
-          name: "image",
-          label: __2("\u753B\u50CF", "catpow"),
-          vars: "vars",
-          key: "--cp-background-pattern-image",
-          input: "image"
-        },
-        {
-          name: "repeat",
-          label: __2("\u7E70\u308A\u8FD4\u3057", "catpow"),
-          vars: "vars",
-          key: "--cp-background-pattern-repeat",
-          input: "buttons",
-          values: { repeat: "\u4E21\u65B9", "repeat-x": "\u6A2A", "repeat-y": "\u7E26", "no-repeat": "\u306A\u3057" }
-        },
-        {
-          name: "position",
-          label: __2("\u4F4D\u7F6E", "catpow"),
-          vars: "vars",
-          key: "--cp-background-pattern-position",
-          input: "position"
-        },
-        {
-          name: "size",
-          label: __2("\u30B5\u30A4\u30BA", "catpow"),
-          vars: "vars",
-          key: "--cp-background-pattern-size",
-          input: "size"
-        }
-      ]
+    backgroundImage({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "backgroundImage",
+        label: __2("\u80CC\u666F\u753B\u50CF", "catpow"),
+        values: "hasBackgroundImage",
+        sub: [
+          {
+            name: "fixed",
+            label: __2("\u56FA\u5B9A", "catpow"),
+            values: "hasBackgroundImageFixed"
+          },
+          {
+            name: "image",
+            label: __2("\u753B\u50CF", "catpow"),
+            vars,
+            key: "--cp-background-image",
+            input: "image"
+          },
+          {
+            name: "repeat",
+            label: __2("\u7E70\u308A\u8FD4\u3057", "catpow"),
+            vars,
+            key: "--cp-background-image-repeat",
+            input: "buttons",
+            values: { repeat: "\u4E21\u65B9", "repeat-x": "\u6A2A", "repeat-y": "\u7E26", "no-repeat": "\u306A\u3057" }
+          },
+          {
+            name: "position",
+            label: __2("\u4F4D\u7F6E", "catpow"),
+            vars,
+            key: "--cp-background-image-position",
+            input: "position"
+          },
+          {
+            name: "size",
+            label: __2("\u30B5\u30A4\u30BA", "catpow"),
+            vars,
+            key: "--cp-background-image-size",
+            input: "size"
+          },
+          {
+            name: "blendmode",
+            label: __2("\u30E2\u30FC\u30C9", "catpow"),
+            vars,
+            key: "--cp-background-image-blendmode",
+            input: "blendmode"
+          },
+          {
+            name: "opacity",
+            label: __2("\u4E0D\u900F\u660E\u5EA6", "catpow"),
+            vars,
+            key: "--cp-background-image-opacity",
+            input: "range",
+            min: 0,
+            max: 1,
+            step: 0.1
+          }
+        ],
+        ...otherParams
+      };
+    },
+    backgroundPattern({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "backgroundPattern",
+        label: __2("\u80CC\u666F\u30D1\u30BF\u30FC\u30F3", "catpow"),
+        values: "hasBackgroundPattern",
+        sub: [
+          {
+            name: "image",
+            label: __2("\u753B\u50CF", "catpow"),
+            vars,
+            key: "--cp-background-pattern-image",
+            input: "image"
+          },
+          {
+            name: "repeat",
+            label: __2("\u7E70\u308A\u8FD4\u3057", "catpow"),
+            vars,
+            key: "--cp-background-pattern-repeat",
+            input: "buttons",
+            values: { repeat: "\u4E21\u65B9", "repeat-x": "\u6A2A", "repeat-y": "\u7E26", "no-repeat": "\u306A\u3057" }
+          },
+          {
+            name: "position",
+            label: __2("\u4F4D\u7F6E", "catpow"),
+            vars,
+            key: "--cp-background-pattern-position",
+            input: "position"
+          },
+          {
+            name: "size",
+            label: __2("\u30B5\u30A4\u30BA", "catpow"),
+            vars,
+            key: "--cp-background-pattern-size",
+            input: "size"
+          }
+        ],
+        ...otherParams
+      };
     },
     textAlign: {
       name: "textAlign",
       type: "buttons",
       label: __2("\u30C6\u30AD\u30B9\u30C8\u63C3\u3048", "catpow"),
       values: {
-        "has-text-align-left": __2("\u5DE6\u63C3\u3048", "catpow"),
-        "has-text-align-center": __2("\u4E2D\u592E", "catpow"),
-        "has-text-align-right": __2("\u53F3\u63C3\u3048", "catpow")
+        hasTextAlignLeft: __2("\u5DE6\u63C3\u3048", "catpow"),
+        hasTextAlignCenter: __2("\u4E2D\u592E", "catpow"),
+        hasTextAlignRight: __2("\u53F3\u63C3\u3048", "catpow")
       }
     },
     verticalAlign: {
@@ -4080,9 +4346,9 @@
       type: "buttons",
       label: __2("\u5782\u76F4\u65B9\u5411\u63C3\u3048", "catpow"),
       values: {
-        "has-vertical-align-top": __2("\u4E0A\u63C3\u3048", "catpow"),
-        "has-vertical-align-middle": __2("\u4E2D\u592E", "catpow"),
-        "has-vertical-align-bottom": __2("\u4E0B\u63C3\u3048", "catpow")
+        hasVerticalAlignTop: __2("\u4E0A\u63C3\u3048", "catpow"),
+        hasVerticalAlignMiddle: __2("\u4E2D\u592E", "catpow"),
+        hasVerticalAlignBottom: __2("\u4E0B\u63C3\u3048", "catpow")
       }
     },
     fontSize: {
@@ -4090,9 +4356,9 @@
       type: "buttons",
       label: __2("\u6587\u5B57\u30B5\u30A4\u30BA", "catpow"),
       values: {
-        "has-font-size-large": __2("\u5927", "catpow"),
-        "has-font-size-middle": __2("\u4E2D", "catpow"),
-        "has-font-size-small": __2("\u5C0F", "catpow")
+        hasFontSizeLarge: __2("\u5927", "catpow"),
+        hasFontSizeMiddle: __2("\u4E2D", "catpow"),
+        hasFontSizeSmall: __2("\u5C0F", "catpow")
       }
     },
     width: {
@@ -4100,10 +4366,10 @@
       type: "buttons",
       label: __2("\u5E45", "catpow"),
       values: {
-        "has-width-full": __2("\u30D5\u30EB", "catpow"),
-        "has-width-wide": __2("\u30EF\u30A4\u30C9", "catpow"),
-        "has-width-regular": __2("\u30EC\u30AE\u30E5\u30E9\u30FC", "catpow"),
-        "has-width-narrow": __2("\u30CA\u30ED\u30FC", "catpow")
+        hasWidthFull: __2("\u30D5\u30EB", "catpow"),
+        hasWidthWide: __2("\u30EF\u30A4\u30C9", "catpow"),
+        hasWidthRegular: __2("\u30EC\u30AE\u30E5\u30E9\u30FC", "catpow"),
+        hasWidthNarrow: __2("\u30CA\u30ED\u30FC", "catpow")
       }
     },
     size: {
@@ -4111,9 +4377,9 @@
       type: "buttons",
       label: __2("\u30B5\u30A4\u30BA", "catpow"),
       values: {
-        "is-size-large": __2("\u5927", "catpow"),
-        "is-size-medium": __2("\u4E2D", "catpow"),
-        "is-size-small": __2("\u5C0F", "catpow")
+        isSizeLarge: __2("\u5927", "catpow"),
+        isSizeMedium: __2("\u4E2D", "catpow"),
+        isSizeSmall: __2("\u5C0F", "catpow")
       }
     },
     itemSize: {
@@ -4133,301 +4399,319 @@
       type: "buttons",
       label: __2("\u914D\u8272", "catpow"),
       values: {
-        "has-color-scheme-inherit": __2("\u7D99\u627F", "catpow"),
-        "has-color-scheme-reverted": __2("\u901A\u5E38", "catpow"),
-        "has-color-scheme-inverted": __2("\u53CD\u8EE2", "catpow")
+        hasColorSchemeInherit: __2("\u7D99\u627F", "catpow"),
+        hasColorSchemeReverted: __2("\u901A\u5E38", "catpow"),
+        hasColorSchemeInverted: __2("\u53CD\u8EE2", "catpow")
       }
     },
-    clipPath: {
-      name: "clipPath",
-      label: __2("\u30AF\u30EA\u30C3\u30D7", "catpow"),
-      values: "has-clip-path",
-      sub: [
-        {
-          name: "shape",
-          label: __2("\u5F62\u72B6", "catpow"),
-          type: "buttons",
-          values: {
-            "has-clip-shape-ellipse": __2("\u6955\u5186", "catpow"),
-            "has-clip-shape-slope": __2("\u50BE\u659C", "catpow"),
-            "has-clip-shape-arrow": __2("\u30A2\u30ED\u30FC", "catpow"),
-            "has-clip-shape-tail": __2("\u30D5\u30AD\u30C0\u30B7", "catpow")
-          },
-          sub: {
-            "has-clip-shape-ellipse": [
-              {
-                name: "direction",
-                type: "buttons",
-                values: {
-                  "has-clip-shape-both": __2("\u4E21\u65B9", "catpow"),
-                  "has-clip-shape-upper": __2("\u4E0A", "catpow"),
-                  "has-clip-shape-below": __2("\u4E0B", "catpow")
+    clipPath({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "clipPath",
+        label: __2("\u30AF\u30EA\u30C3\u30D7", "catpow"),
+        values: "hasClipPath",
+        sub: [
+          {
+            name: "shape",
+            label: __2("\u5F62\u72B6", "catpow"),
+            type: "buttons",
+            values: {
+              hasClipShapeEllipse: __2("\u6955\u5186", "catpow"),
+              hasClipShapeSlope: __2("\u50BE\u659C", "catpow"),
+              hasClipShapeArrow: __2("\u30A2\u30ED\u30FC", "catpow"),
+              hasClipShapeTail: __2("\u30D5\u30AD\u30C0\u30B7", "catpow")
+            },
+            sub: {
+              hasClipShapeEllipse: [
+                {
+                  name: "direction",
+                  type: "buttons",
+                  values: {
+                    hasClipShapeBoth: __2("\u4E21\u65B9", "catpow"),
+                    hasClipShapeUpper: __2("\u4E0A", "catpow"),
+                    hasClipShapeBelow: __2("\u4E0B", "catpow")
+                  }
+                },
+                {
+                  name: "amount",
+                  label: __2("\u91CF", "catpow"),
+                  input: "range",
+                  vars,
+                  key: "--cp-clip-shape-amount",
+                  min: 1,
+                  max: 100
                 }
-              },
-              {
-                name: "amount",
-                label: __2("\u91CF", "catpow"),
-                input: "range",
-                vars: "vars",
-                key: "--cp-clip-shape-amount",
-                min: 1,
-                max: 100
-              }
-            ],
-            "has-clip-shape-slope": [
-              {
-                name: "uppper",
-                type: "buttons",
-                values: {
-                  "has-clip-shape-upper-none": __2("\u306A\u3057", "catpow"),
-                  "has-clip-shape-upper-left": __2("\u5DE6", "catpow"),
-                  "has-clip-shape-upper-right": __2("\u53F3", "catpow")
+              ],
+              hasClipShapeSlope: [
+                {
+                  name: "uppper",
+                  type: "buttons",
+                  values: {
+                    hasClipShapeUpperNone: __2("\u306A\u3057", "catpow"),
+                    hasClipShapeUpperLeft: __2("\u5DE6", "catpow"),
+                    hasClipShapeUpperRight: __2("\u53F3", "catpow")
+                  }
+                },
+                {
+                  name: "below",
+                  type: "buttons",
+                  values: {
+                    hasClipShapeBelowNone: __2("\u306A\u3057", "catpow"),
+                    hasClipShapeBelowLeft: __2("\u5DE6", "catpow"),
+                    hasClipShapeBelowRight: __2("\u53F3", "catpow")
+                  }
+                },
+                {
+                  name: "upperHeight",
+                  label: __2("\u4E0A\u9AD8\u3055", "catpow"),
+                  input: "range",
+                  vars,
+                  key: "--cp-clip-shape-upper-height",
+                  min: 8,
+                  max: 400
+                },
+                {
+                  name: "belowHeight",
+                  label: __2("\u4E0B\u9AD8\u3055", "catpow"),
+                  input: "range",
+                  vars,
+                  key: "--cp-clip-shape-below-height",
+                  min: 8,
+                  max: 400
                 }
-              },
-              {
-                name: "below",
-                type: "buttons",
-                values: {
-                  "has-clip-shape-below-none": __2("\u306A\u3057", "catpow"),
-                  "has-clip-shape-below-left": __2("\u5DE6", "catpow"),
-                  "has-clip-shape-below-right": __2("\u53F3", "catpow")
+              ],
+              hasClipShapeArrow: [
+                {
+                  name: "uppper",
+                  type: "buttons",
+                  values: {
+                    hasClipShapeUpperNone: __2("\u306A\u3057", "catpow"),
+                    hasClipShapeUpperIn: __2("\u5185", "catpow"),
+                    hasClipShapeUpperOut: __2("\u5916", "catpow")
+                  }
+                },
+                {
+                  name: "below",
+                  type: "buttons",
+                  values: {
+                    hasClipShapeBelowNone: __2("\u306A\u3057", "catpow"),
+                    hasClipShapeBelowIn: __2("\u5185", "catpow"),
+                    hasClipShapeBelowOut: __2("\u5916", "catpow")
+                  }
+                },
+                {
+                  name: "upperHeight",
+                  label: __2("\u4E0A\u9AD8\u3055", "catpow"),
+                  input: "range",
+                  vars,
+                  key: "--cp-clip-shape-upper-height",
+                  min: 8,
+                  max: 400
+                },
+                {
+                  name: "belowHeight",
+                  label: __2("\u4E0B\u9AD8\u3055", "catpow"),
+                  input: "range",
+                  vars,
+                  key: "--cp-clip-shape-below-height",
+                  min: 8,
+                  max: 400
                 }
-              },
-              {
-                name: "upperHeight",
-                label: __2("\u4E0A\u9AD8\u3055", "catpow"),
-                input: "range",
-                vars: "vars",
-                key: "--cp-clip-shape-upper-height",
-                min: 8,
-                max: 400
-              },
-              {
-                name: "belowHeight",
-                label: __2("\u4E0B\u9AD8\u3055", "catpow"),
-                input: "range",
-                vars: "vars",
-                key: "--cp-clip-shape-below-height",
-                min: 8,
-                max: 400
-              }
-            ],
-            "has-clip-shape-arrow": [
-              {
-                name: "uppper",
-                type: "buttons",
-                values: {
-                  "has-clip-shape-upper-none": __2("\u306A\u3057", "catpow"),
-                  "has-clip-shape-upper-in": __2("\u5185", "catpow"),
-                  "has-clip-shape-upper-out": __2("\u5916", "catpow")
+              ],
+              hasClipShapeTail: [
+                {
+                  name: "uppper",
+                  type: "buttons",
+                  values: {
+                    hasClipShapeUpperNone: __2("\u306A\u3057", "catpow"),
+                    hasClipShapeUpperIn: __2("\u5185", "catpow"),
+                    hasClipShapeUpperOut: __2("\u5916", "catpow")
+                  }
+                },
+                {
+                  name: "below",
+                  type: "buttons",
+                  values: {
+                    hasClipShapeBelowNone: __2("\u306A\u3057", "catpow"),
+                    hasClipShapeBelowIn: __2("\u5185", "catpow"),
+                    hasClipShapeBelowOut: __2("\u5916", "catpow")
+                  }
+                },
+                {
+                  name: "upperWidth",
+                  label: __2("\u4E0A\u5E45", "catpow"),
+                  input: "range",
+                  vars,
+                  key: "--cp-clip-shape-upper-width",
+                  min: 8,
+                  max: 400
+                },
+                {
+                  name: "upperHeight",
+                  label: __2("\u4E0A\u9AD8\u3055", "catpow"),
+                  input: "range",
+                  vars,
+                  key: "--cp-clip-shape-upper-height",
+                  min: 8,
+                  max: 400
+                },
+                {
+                  name: "belowWidth",
+                  label: __2("\u4E0B\u5E45", "catpow"),
+                  input: "range",
+                  vars,
+                  key: "--cp-clip-shape-below-width",
+                  min: 8,
+                  max: 400
+                },
+                {
+                  name: "belowHeight",
+                  label: __2("\u4E0B\u9AD8\u3055", "catpow"),
+                  input: "range",
+                  vars,
+                  key: "--cp-clip-shape-below-height",
+                  min: 8,
+                  max: 400
                 }
-              },
-              {
-                name: "below",
-                type: "buttons",
-                values: {
-                  "has-clip-shape-below-none": __2("\u306A\u3057", "catpow"),
-                  "has-clip-shape-below-in": __2("\u5185", "catpow"),
-                  "has-clip-shape-below-out": __2("\u5916", "catpow")
-                }
-              },
-              {
-                name: "upperHeight",
-                label: __2("\u4E0A\u9AD8\u3055", "catpow"),
-                input: "range",
-                vars: "vars",
-                key: "--cp-clip-shape-upper-height",
-                min: 8,
-                max: 400
-              },
-              {
-                name: "belowHeight",
-                label: __2("\u4E0B\u9AD8\u3055", "catpow"),
-                input: "range",
-                vars: "vars",
-                key: "--cp-clip-shape-below-height",
-                min: 8,
-                max: 400
-              }
-            ],
-            "has-clip-shape-tail": [
-              {
-                name: "uppper",
-                type: "buttons",
-                values: {
-                  "has-clip-shape-upper-none": __2("\u306A\u3057", "catpow"),
-                  "has-clip-shape-upper-in": __2("\u5185", "catpow"),
-                  "has-clip-shape-upper-out": __2("\u5916", "catpow")
-                }
-              },
-              {
-                name: "below",
-                type: "buttons",
-                values: {
-                  "has-clip-shape-below-none": __2("\u306A\u3057", "catpow"),
-                  "has-clip-shape-below-in": __2("\u5185", "catpow"),
-                  "has-clip-shape-below-out": __2("\u5916", "catpow")
-                }
-              },
-              {
-                name: "upperWidth",
-                label: __2("\u4E0A\u5E45", "catpow"),
-                input: "range",
-                vars: "vars",
-                key: "--cp-clip-shape-upper-width",
-                min: 8,
-                max: 400
-              },
-              {
-                name: "upperHeight",
-                label: __2("\u4E0A\u9AD8\u3055", "catpow"),
-                input: "range",
-                vars: "vars",
-                key: "--cp-clip-shape-upper-height",
-                min: 8,
-                max: 400
-              },
-              {
-                name: "belowWidth",
-                label: __2("\u4E0B\u5E45", "catpow"),
-                input: "range",
-                vars: "vars",
-                key: "--cp-clip-shape-below-width",
-                min: 8,
-                max: 400
-              },
-              {
-                name: "belowHeight",
-                label: __2("\u4E0B\u9AD8\u3055", "catpow"),
-                input: "range",
-                vars: "vars",
-                key: "--cp-clip-shape-below-height",
-                min: 8,
-                max: 400
-              }
-            ]
+              ]
+            }
           }
-        }
-      ]
+        ],
+        ...otherParams
+      };
     },
-    customPadding: {
-      name: "customPadding",
-      label: __2("\u4F59\u767D", "catpow"),
-      values: "has-custom-padding",
-      sub: [
-        {
-          name: "paddingTop",
-          label: __2("\u4E0A\u4F59\u767D", "catpow"),
-          input: "range",
-          vars: "vars",
-          key: "--cp-padding-top",
-          min: 0,
-          max: 400,
-          coef: 0.0625,
-          unit: "rem"
-        },
-        {
-          name: "paddingBottom",
-          label: __2("\u4E0B\u4F59\u767D", "catpow"),
-          input: "range",
-          vars: "vars",
-          key: "--cp-padding-bottom",
-          min: 0,
-          max: 400,
-          coef: 0.0625,
-          unit: "rem"
-        },
-        {
-          name: "paddingInline",
-          label: __2("\u6A2A\u4F59\u767D", "catpow"),
-          input: "range",
-          vars: "vars",
-          key: "--cp-padding-inline",
-          min: 0,
-          max: 100,
-          coef: 0.0625,
-          unit: "rem"
-        }
-      ]
+    customPadding({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "customPadding",
+        label: __2("\u4F59\u767D", "catpow"),
+        values: "hasCustomPadding",
+        sub: [
+          {
+            name: "paddingTop",
+            label: __2("\u4E0A\u4F59\u767D", "catpow"),
+            input: "range",
+            vars,
+            key: "--cp-padding-top",
+            min: 0,
+            max: 400,
+            coef: 0.0625,
+            unit: "rem"
+          },
+          {
+            name: "paddingBottom",
+            label: __2("\u4E0B\u4F59\u767D", "catpow"),
+            input: "range",
+            vars,
+            key: "--cp-padding-bottom",
+            min: 0,
+            max: 400,
+            coef: 0.0625,
+            unit: "rem"
+          },
+          {
+            name: "paddingInline",
+            label: __2("\u6A2A\u4F59\u767D", "catpow"),
+            input: "range",
+            vars,
+            key: "--cp-padding-inline",
+            min: 0,
+            max: 100,
+            coef: 0.0625,
+            unit: "rem"
+          }
+        ],
+        ...otherParams
+      };
     },
-    customMargin: {
-      name: "customMargin",
-      label: __2("\u9593\u9694", "catpow"),
-      values: "has-custom-margin",
-      sub: [
-        {
-          name: "marginTop",
-          label: __2("\u4E0A\u9593\u9694", "catpow"),
-          input: "range",
-          vars: "vars",
-          key: "--cp-margin-top",
-          min: -400,
-          max: 400,
-          coef: 0.0625,
-          unit: "rem"
-        },
-        {
-          name: "marginBottom",
-          label: __2("\u4E0B\u9593\u9694", "catpow"),
-          input: "range",
-          vars: "vars",
-          key: "--cp-margin-bottom",
-          min: -400,
-          max: 400,
-          coef: 0.0625,
-          unit: "rem"
-        }
-      ]
+    customMargin({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "customMargin",
+        label: __2("\u9593\u9694", "catpow"),
+        values: "hasCustomMargin",
+        sub: [
+          {
+            name: "marginTop",
+            label: __2("\u4E0A\u9593\u9694", "catpow"),
+            input: "range",
+            vars,
+            key: "--cp-margin-top",
+            min: -400,
+            max: 400,
+            coef: 0.0625,
+            unit: "rem"
+          },
+          {
+            name: "marginBottom",
+            label: __2("\u4E0B\u9593\u9694", "catpow"),
+            input: "range",
+            vars,
+            key: "--cp-margin-bottom",
+            min: -400,
+            max: 400,
+            coef: 0.0625,
+            unit: "rem"
+          }
+        ],
+        ...otherParams
+      };
     },
-    customContentWidth: {
-      name: "customContentWidth",
-      label: __2("\u30AB\u30B9\u30BF\u30E0\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
-      values: "has-custom-content-width",
-      sub: [
-        {
-          name: "contentWidth",
-          label: __2("\u5E45", "catpow"),
-          input: "range",
-          vars: "vars",
-          key: "--cp-content-width",
-          min: 50,
-          max: 100,
-          unit: "vw"
-        },
-        {
-          name: "contentMaxWidth",
-          label: __2("\u6700\u5927\u5E45", "catpow"),
-          input: "range",
-          vars: "vars",
-          key: "--cp-content-max-width",
-          min: 200,
-          max: 1600,
-          coef: 0.0625,
-          unit: "rem"
-        }
-      ]
+    customContentWidth({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "customContentWidth",
+        label: __2("\u30AB\u30B9\u30BF\u30E0\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
+        values: "hasCustomContentWidth",
+        sub: [
+          {
+            name: "contentWidth",
+            label: __2("\u5E45", "catpow"),
+            input: "range",
+            vars,
+            key: "--cp-custom-content-width",
+            min: 50,
+            max: 100,
+            unit: "vw"
+          },
+          {
+            name: "contentMaxWidth",
+            label: __2("\u6700\u5927\u5E45", "catpow"),
+            input: "range",
+            vars,
+            key: "--cp-custom-content-max-width",
+            min: 200,
+            max: 1600,
+            coef: 0.0625,
+            unit: "rem"
+          }
+        ],
+        ...otherParams
+      };
     },
-    contentWidth: {
-      name: "contentWidth",
-      label: __2("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
-      values: "has-content-width",
-      sub: ["customContentWidth"]
+    contentWidth({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "contentWidth",
+        label: __2("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
+        values: "hasContentWidth",
+        sub: [{ preset: "customContentWidth", vars }],
+        ...otherParams
+      };
     },
-    customBorderRadius: {
-      name: "cusotomRadius",
-      label: __2("\u89D2\u4E38", "catpow"),
-      values: "has-custom-border-radius",
-      sub: [
-        {
-          name: "borderRadius",
-          label: __2("\u5F84", "catpow"),
-          input: "range",
-          vars: "vars",
-          key: "--cp-border-radius",
-          min: 1,
-          max: 100
-        }
-      ]
+    customBorderRadius({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "cusotomRadius",
+        label: __2("\u89D2\u4E38", "catpow"),
+        values: "hasCustomBorderRadius",
+        sub: [
+          {
+            name: "borderRadius",
+            label: __2("\u5F84", "catpow"),
+            input: "range",
+            vars,
+            key: "--cp-border-radius",
+            min: 1,
+            max: 100
+          }
+        ],
+        ...otherParams
+      };
     }
   };
   wp.domReady(() => {
@@ -4440,18 +4724,28 @@
     const { Fragment: Fragment2, useMemo: useMemo5, useCallback: useCallback4, useContext: useContext3, createElement: el } = wp.element;
     const { __: __3 } = wp.i18n;
     const { PanelBody, CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl: TextControl2, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
-    const { classKey = "classes", items: items2, index, subItemsKey, subIndex, set, attr, triggerClasses } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
+    const {
+      blockClasssKey = "classes",
+      classKey: primaryClassKey = "classes",
+      items: items2,
+      index,
+      subItemsKey,
+      subIndex,
+      set,
+      attr,
+      triggerClasses
+    } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
     let { itemsKey = items2 ? "items" : null, itemClasses } = props;
     const selectiveClasses = useMemo5(() => {
       if (!triggerClasses || !triggerClasses.item) {
         if (Array.isArray(props.selectiveClasses)) {
-          return props.selectiveClasses;
+          return resolveSelectiveClassesPresets(props.selectiveClasses);
         }
-        return Object.values(props.selectiveClasses);
+        return resolveSelectiveClassesPresets(Object.values(props.selectiveClasses));
       }
-      const blockStates = CP.wordsToFlags(attr.classes);
-      return triggerClasses.item[Object.keys(triggerClasses.item).find((value) => blockStates[value])];
-    }, [props.selectiveClasses, triggerClasses && attr.classes]);
+      const blockStates = CP.classNamesToFlags(attr[blockClasssKey]);
+      return resolveSelectiveClassesPresets(triggerClasses.item[Object.keys(triggerClasses.item).find((value2) => blockStates[value2])]);
+    }, [props.selectiveClasses, triggerClasses && attr[blockClasssKey]]);
     const { styleDatas } = attr;
     const item = useMemo5(() => {
       if (!items2) {
@@ -4465,7 +4759,53 @@
       }
       return items2[index];
     }, [attr, items2, index, subItemsKey, subIndex]);
-    const states = useMemo5(() => CP.wordsToFlags(item[classKey]), [item[classKey]]);
+    const states = useMemo5(() => CP.classNamesToFlags(item[primaryClassKey]), [item[primaryClassKey]]);
+    const allStates = useMemo5(() => {
+      const allStates2 = { [primaryClassKey]: states };
+      const addClassKeyFlagsInPrm = (prm, flags) => {
+        if (prm.classKey) {
+          flags[prm.classKey] = true;
+        }
+        if (prm.sub) {
+          if (Array.isArray(prm.sub)) {
+            prm.sub.forEach((subPrm) => addClassKeyFlagsInPrm(subPrm, flags));
+          } else {
+            for (const subPrms of Object.values(prm.sub)) {
+              subPrms.forEach((subPrm) => addClassKeyFlagsInPrm(subPrm, flags));
+            }
+          }
+        }
+        if (prm.bind) {
+          console.log({ prm });
+          if (typeof prm.values === "string") {
+            if (!Array.isArray(prm.bind)) {
+              Object.keys(prm.bind).forEach((classKey) => {
+                if (classKey !== "_") {
+                  flags[classKey] = true;
+                }
+              });
+            }
+          } else {
+            for (const bindClasses of Object.values(prm.bind)) {
+              if (!Array.isArray(bindClasses)) {
+                Object.keys(bindClasses).forEach((classKey) => {
+                  if (classKey !== "_") {
+                    flags[classKey] = true;
+                  }
+                });
+              }
+            }
+          }
+        }
+      };
+      const classKeyFlags = {};
+      props.selectiveClasses.forEach((prm) => addClassKeyFlagsInPrm(prm, classKeyFlags));
+      console.log({ classKeyFlags });
+      Object.keys(classKeyFlags).forEach((classKey) => {
+        allStates2[classKey] = CP.classNamesToFlags(item[classKey]);
+      });
+      return allStates2;
+    }, [props.selectiveClasses, item, states, primaryClassKey]);
     const save = useCallback4(
       (data) => {
         if (items2) {
@@ -4477,9 +4817,12 @@
       },
       [set, index, items2, itemsKey]
     );
-    const saveClasses = useCallback4(() => {
-      save({ [classKey]: CP.flagsToWords(states) });
-    }, [save, classKey, states]);
+    const saveClasses = useCallback4(
+      (classKey) => {
+        save({ [classKey]: CP.flagsToClassNames(allStates[classKey]) });
+      },
+      [save, allStates]
+    );
     const saveCss = useCallback4(
       (cssKey) => {
         set({ [cssKey]: CP.createStyleCodeWithMediaQuery(styleDatas[cssKey]) });
@@ -4487,12 +4830,7 @@
       [set, styleDatas]
     );
     const SelectClass = useCallback4(({ prm }) => {
-      const { props: props2, item: item2, states: states2, save: save2, saveClasses: saveClasses2, saveCss: saveCss2 } = useContext3(CP.SelectClassPanelContext);
-      if (typeof prm === "string") {
-        if (selectiveClassesPresets.hasOwnProperty(prm)) {
-          prm = selectiveClassesPresets[prm];
-        }
-      }
+      const { props: props2, item: item2, states: states2, allStates: allStates2, set: set2, save: save2, saveClasses: saveClasses2, saveCss: saveCss2, primaryClassKey: primaryClassKey2 } = useContext3(CP.SelectClassPanelContext);
       if (prm.hasOwnProperty("cond")) {
         if (prm.cond === false) {
           return false;
@@ -4583,7 +4921,7 @@
               break;
             }
             case "flag": {
-              let value = CP.getJsonValue(props2, prm.json, prm.key) || 0;
+              let value2 = CP.getJsonValue(props2, prm.json, prm.key) || 0;
               if (prm.label) {
                 rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
               }
@@ -4594,13 +4932,13 @@
                     {
                       label: key,
                       onChange: (flag) => {
-                        value |= prm.values[key];
+                        value2 |= prm.values[key];
                         if (!flag) {
-                          value ^= prm.values[key];
+                          value2 ^= prm.values[key];
                         }
-                        CP.setJsonValue(props2, prm.json, prm.key, value);
+                        CP.setJsonValue(props2, prm.json, prm.key, value2);
                       },
-                      checked: value & prm.values[key],
+                      checked: value2 & prm.values[key],
                       key
                     }
                   )
@@ -4617,8 +4955,8 @@
                   ColorPicker,
                   {
                     color: CP.getJsonValue(props2, prm.json, prm.key) || "#FFFFFF",
-                    onChangeComplete: (value) => {
-                      CP.setJsonValue(props2, prm.json, prm.key, value.hex);
+                    onChangeComplete: (value2) => {
+                      CP.setJsonValue(props2, prm.json, prm.key, value2.hex);
                     }
                   }
                 )
@@ -4653,8 +4991,8 @@
                 /* @__PURE__ */ wp.element.createElement(
                   GradientPicker,
                   {
-                    onChange: (value) => {
-                      console.log(CP.parseGradientStyleValue(value));
+                    onChange: (value2) => {
+                      console.log(CP.parseGradientStyleValue(value2));
                     }
                   }
                 )
@@ -4876,7 +5214,7 @@
                   CP.DynamicInput,
                   {
                     param: prm,
-                    value: props2.attr[prm.vars][prm.key],
+                    value: props2.attr?.[prm.vars]?.[prm.key],
                     onChange: (val) => {
                       if (prm.filter) {
                         val = prm.filter(val, states2, props2);
@@ -4921,7 +5259,7 @@
                   CP.SelectBlendMode,
                   {
                     label: prm.label,
-                    value: props2.attr[prm.vars][prm.key],
+                    value: props2.attr?.[prm.vars]?.[prm.key],
                     onChange: (val) => {
                       save2({
                         [prm.vars]: {
@@ -4961,7 +5299,7 @@
                   CP.PositionInput,
                   {
                     label: prm.label,
-                    value: props2.attr[prm.vars][prm.key],
+                    value: props2.attr?.[prm.vars]?.[prm.key],
                     onChange: (val) => {
                       save2({
                         [prm.vars]: {
@@ -4981,7 +5319,7 @@
                   CP.SelectSize,
                   {
                     label: prm.label,
-                    value: props2.attr[prm.vars][prm.key],
+                    value: props2.attr?.[prm.vars]?.[prm.key],
                     onChange: (val) => {
                       save2({
                         [prm.vars]: {
@@ -5002,7 +5340,7 @@
               TextControl2,
               {
                 label: prm.label,
-                value: props2.attr[prm.vars][prm.key],
+                value: props2.attr?.[prm.vars]?.[prm.key],
                 onChange: (val) => {
                   save2({
                     [prm.vars]: { ...props2.attr[prm.vars], [prm.key]: `${val}` }
@@ -5022,7 +5360,7 @@
                 selected: states2,
                 onChange: (proxy) => {
                   if (!props2.items) {
-                    set({ color: proxy.value });
+                    set2({ color: proxy.value });
                   }
                   saveClasses2();
                 }
@@ -5194,90 +5532,95 @@
               break;
             }
           }
-        } else if (_.isObject(prm.values)) {
-          let subClasses = CP.getSubClasses(prm);
-          let bindClasses = CP.getBindClasses(prm);
-          var { options: options3, values } = CP.parseSelections(prm.values);
-          const currentClass = values.find((value) => states2[value]);
-          let onChangeCB = (newClass) => {
-            if (currentClass) {
-              states2[currentClass] = false;
-              let currentSels = [];
-              if (subClasses[currentClass]) {
-                currentSels = currentSels.concat(subClasses[currentClass]);
-              }
-              if (bindClasses[currentClass]) {
-                currentSels = currentSels.concat(bindClasses[currentClass]);
-              }
-              let newSels = [];
-              if (subClasses[newClass]) {
-                newSels = newSels.concat(subClasses[newClass]);
-              }
-              if (bindClasses[newClass]) {
-                newSels = newSels.concat(bindClasses[newClass]);
-              }
-              currentSels.forEach((value) => {
-                if (!newSels.includes(value)) {
-                  states2[value] = false;
-                }
-              });
-            }
-            bindClasses[newClass].forEach((value) => {
-              states2[value] = true;
-            });
-            states2[newClass] = true;
-            saveClasses2();
-            if (prm.effect) {
-              prm.effect(currentClass, newClass, states2, props2);
-            }
-          };
-          switch (prm.type) {
-            case "radio": {
-              rtn.push(/* @__PURE__ */ wp.element.createElement(RadioControl, { label: prm.label, onChange: onChangeCB, selected: currentClass, options: options3 }));
-              break;
-            }
-            case "buttons": {
-              rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectButtons, { label: prm.label, onChange: onChangeCB, selected: currentClass, options: options3 }));
-              break;
-            }
-            case "gridbuttons": {
-              rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectGridButtons, { label: prm.label, onChange: onChangeCB, selected: currentClass, options: options3 }));
-              break;
-            }
-            default: {
-              rtn.push(/* @__PURE__ */ wp.element.createElement(SelectControl, { label: prm.label, onChange: onChangeCB, value: currentClass, options: options3 }));
-            }
-          }
-          if (prm.sub) {
-            if (currentClass && prm.sub[currentClass]) {
-              let sub = [];
-              prm.sub[currentClass].forEach((prm2, index2) => {
-                sub.push(/* @__PURE__ */ wp.element.createElement(Fragment2, { key: index2 }, el(SelectClass, { prm: prm2 })));
-              });
-              rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
-            }
-          }
         } else {
-          rtn.push(
-            /* @__PURE__ */ wp.element.createElement(
-              CheckboxControl,
-              {
-                label: prm.label,
-                onChange: () => {
-                  states2[prm.values] = !states2[prm.values];
-                  saveClasses2();
-                },
-                checked: !!states2[prm.values]
-              }
-            )
-          );
-          if (prm.sub) {
-            if (states2[prm.values]) {
-              let sub = [];
-              prm.sub.forEach((prm2, index2) => {
-                sub.push(/* @__PURE__ */ wp.element.createElement(Fragment2, { key: index2 }, el(SelectClass, { prm: prm2 })));
+          const classKey = prm.classKey ? prm.classKey : primaryClassKey2;
+          const targetStates = allStates2[classKey];
+          const allClassFlags = CP.getAllClassFlags(prm, primaryClassKey2);
+          const classFlagsByValue = CP.getClassFlagsByValue(prm, primaryClassKey2);
+          const bindClasseFlagsByValue = CP.getBindClassFlagsByValue(prm, primaryClassKey2);
+          if (_.isObject(prm.values)) {
+            var { options: options3, values } = CP.parseSelections(prm.values);
+            const currentClass2 = values.find((value2) => targetStates[kebabToCamel(value2)]);
+            const onChangeCB = (value2) => {
+              const updates = CP.getUpdatesFromStatesAndClasssFlags({
+                states: states2,
+                allStates: allStates2,
+                allClassFlags,
+                classFlags: classFlagsByValue[value2],
+                bindClassFlags: bindClasseFlagsByValue[value2]
               });
-              rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
+              console.log({ bindClasseFlagsByValue, updates });
+              set2(updates);
+              if (prm.effect) {
+                prm.effect(currentClass2, value2, targetStates, props2);
+              }
+            };
+            switch (prm.type) {
+              case "radio": {
+                rtn.push(/* @__PURE__ */ wp.element.createElement(RadioControl, { label: prm.label, onChange: onChangeCB, selected: currentClass2, options: options3 }));
+                break;
+              }
+              case "buttons": {
+                rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectButtons, { label: prm.label, onChange: onChangeCB, selected: currentClass2, options: options3 }));
+                break;
+              }
+              case "gridbuttons": {
+                rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectGridButtons, { label: prm.label, onChange: onChangeCB, selected: currentClass2, options: options3 }));
+                break;
+              }
+              default: {
+                rtn.push(/* @__PURE__ */ wp.element.createElement(SelectControl, { label: prm.label, onChange: onChangeCB, value: currentClass2, options: options3 }));
+              }
+            }
+            if (prm.sub) {
+              if (currentClass2 && prm.sub[currentClass2]) {
+                let sub = [];
+                prm.sub[currentClass2].forEach((prm2, index2) => {
+                  sub.push(/* @__PURE__ */ wp.element.createElement(Fragment2, { key: index2 }, el(SelectClass, { prm: prm2 })));
+                });
+                rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
+              }
+            }
+          } else {
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                CheckboxControl,
+                {
+                  label: prm.label,
+                  onChange: () => {
+                    if (targetStates[prm.values]) {
+                      const updates = CP.getUpdatesFromStatesAndClasssFlags({
+                        allStates: allStates2,
+                        allClassFlags
+                      });
+                      console.log({ allClassFlags, bindClasseFlagsByValue, updates });
+                      set2(updates);
+                    } else {
+                      const updates = CP.getUpdatesFromStatesAndClasssFlags({
+                        allStates: allStates2,
+                        allClassFlags,
+                        classFlags: classFlagsByValue[prm.values],
+                        bindClassFlags: bindClasseFlagsByValue[prm.values]
+                      });
+                      console.log({ allClassFlags, bindClasseFlagsByValue, updates });
+                      set2(updates);
+                    }
+                    if (prm.effect) {
+                      prm.effect(currentClass, value, targetStates, props2);
+                    }
+                  },
+                  checked: !!targetStates[prm.values]
+                }
+              )
+            );
+            if (prm.sub) {
+              if (targetStates[prm.values]) {
+                let sub = [];
+                prm.sub.forEach((prm2, index2) => {
+                  sub.push(/* @__PURE__ */ wp.element.createElement(Fragment2, { key: index2 }, el(SelectClass, { prm: prm2 })));
+                });
+                rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
+              }
             }
           }
         }
@@ -5287,7 +5630,7 @@
     if (!item || !selectiveClasses) {
       return false;
     }
-    return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanelContext.Provider, { value: { props, item, states, save, saveClasses, saveCss } }, selectiveClasses.map((prm, index2) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index2 }, el(SelectClass, { prm }))), props.children));
+    return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanelContext.Provider, { value: { props, item, states, allStates, set, save, saveClasses, saveCss, primaryClassKey } }, selectiveClasses.map((prm, index2) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index2 }, el(SelectClass, { prm }))), props.children));
   };
 
   // ../blocks/_init/init/AlignClassToolbar.jsx
@@ -5325,7 +5668,7 @@
   // ../blocks/_init/init/PositionInput.jsx
   init_react();
   var valueToPosition = (val) => {
-    let [y, x] = val.split(" ");
+    let [x, y] = val ? val.split(" ") : [50, 50];
     if (x === void 0 || x === "center") {
       x = 50;
     } else if (x === "left") {
@@ -5366,7 +5709,7 @@
     else {
       y += "%";
     }
-    return `${y} ${x}`;
+    return `${x} ${y}`;
   };
   CP.PositionInput = (props) => {
     const { Button, ButtonGroup, Icon } = wp.components;
@@ -5399,11 +5742,11 @@
     const { label, help, selected, onChange } = props;
     var items2 = Array.from(Array(6), (v, i) => {
       var classes = "bgPattern" + i;
-      const value = "pattern" + i;
-      if (value == selected) {
+      const value2 = "pattern" + i;
+      if (value2 == selected) {
         classes += " active";
       }
-      return /* @__PURE__ */ wp.element.createElement("li", { className: classes, onClick: () => onChange(value), key: value }, " ");
+      return /* @__PURE__ */ wp.element.createElement("li", { className: classes, onClick: () => onChange(value2), key: value2 }, " ");
     });
     return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectpattern" }, items2));
   };
@@ -5438,9 +5781,9 @@
     ];
     const values = _.flatten(rows);
     const { label, help, itemsKey, index, disable } = props;
-    let value = itemsKey ? CP.getItemSelectiveClass(props, values) : CP.getSelectiveClass(props, values);
+    let value2 = itemsKey ? CP.getItemSelectiveClass(props, values) : CP.getSelectiveClass(props, values);
     return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("table", { className: "selectposition-" }, /* @__PURE__ */ wp.element.createElement("tbody", { className: "_body" }, rows.map((cols, index2) => /* @__PURE__ */ wp.element.createElement("tr", { className: "_row", key: index2 }, cols.map((col) => {
-      var isChecked = value == col;
+      var isChecked = value2 == col;
       if (disable && disable.includes(col)) {
         return /* @__PURE__ */ wp.element.createElement("td", { className: "_cell is-disabled", key: col }, " ");
       }
@@ -5616,8 +5959,8 @@
                 RichText,
                 {
                   value: item[col.key],
-                  onChange: (value) => {
-                    item[col.key] = value;
+                  onChange: (value2) => {
+                    item[col.key] = value2;
                     save();
                   }
                 }
@@ -6222,9 +6565,9 @@
     const { useState: useState4, useMemo: useMemo5, useCallback: useCallback4, useEffect: useEffect6, useRef: useRef4 } = wp.element;
     const items2 = (() => {
       const items3 = Array.isArray(props.items) ? props.items : Number.isInteger(props.items) ? [...Array(props.items).keys()] : Array.from(props.items);
-      items3.forEach((value, index) => {
-        if (typeof value !== "object") {
-          items3[index] = { value };
+      items3.forEach((value2, index) => {
+        if (typeof value2 !== "object") {
+          items3[index] = { value: value2 };
         }
       });
       return items3;
@@ -6242,10 +6585,10 @@
   CP.CustomColorVars = (props) => {
     const { useState: useState4, useRef: useRef4, useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
     const { ColorPicker, CheckboxControl, Flex, FlexItem, FlexBlock, Button, Popover: Popover2 } = wp.components;
-    const { label = "\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", value, onChange } = props;
-    const cache = useRef4(value);
+    const { label = "\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", value: value2, onChange } = props;
+    const cache2 = useRef4(value2);
     const [index, setIndex] = useState4(-1);
-    const [useCustomColor, setUseCustomColor] = useState4(Object.keys(value).length > 0);
+    const [useCustomColor, setUseCustomColor] = useState4(Object.keys(value2).length > 0);
     const classes = bem("cp-customcolorvars");
     const roles = [
       { key: "b", label: "\u80CC\u666F\u8272" },
@@ -6280,10 +6623,10 @@
         const hsla = {};
         if (keys.every((key) => {
           const name = `--cp-tones-${role.key}-${key}`;
-          if (!value.hasOwnProperty(name)) {
+          if (!value2.hasOwnProperty(name)) {
             return false;
           }
-          hsla[key] = value[name];
+          hsla[key] = value2[name];
           return true;
         })) {
           colors2[role.key] = `hsl(${hsla.h},${hsla.s},${hsla.l})`;
@@ -6334,10 +6677,10 @@
         label,
         onChange: () => {
           if (useCustomColor) {
-            cache.current = value;
+            cache2.current = value2;
             clearAllColorVars();
           } else {
-            onChange(cache.current);
+            onChange(cache2.current);
           }
           setUseCustomColor(!useCustomColor);
         },
@@ -6355,7 +6698,7 @@
 
   // ../blocks/_init/init/NavBar.jsx
   CP.NavBar = (props) => {
-    const { value, label, onChange } = props;
+    const { value: value2, label, onChange } = props;
     const { useMemo: useMemo5, useState: useState4 } = wp.element;
     const classes = bem("cp-navbar");
     const { options: options3 } = useMemo5(() => CP.parseSelections(props.options), [props.options]);
@@ -6363,7 +6706,7 @@
       "li",
       {
         className: classes.items.item({
-          "is-active": option.value === value
+          "is-active": option.value === value2
         }),
         onClick: () => onChange(option.value),
         key: option.label
