@@ -71,21 +71,21 @@ export const selectiveClassesPresets = {
 		type: "buttons",
 		label: __("背景色", "catpow"),
 		values: {
-			"has-background-color-none": __("なし", "catpow"),
-			"has-background-color": __("通常", "catpow"),
-			"has-background-color-alt": __("強調", "catpow"),
+			hasBackgroundColorNone: __("なし", "catpow"),
+			hasBackgroundColor: __("通常", "catpow"),
+			hasBackgroundColorAlt: __("強調", "catpow"),
 		},
 	},
 	backgroundImage({ preset, vars = "vars", ...otherParams }) {
 		return {
 			name: "backgroundImage",
 			label: __("背景画像", "catpow"),
-			values: "has-background-image",
+			values: "hasBackgroundImage",
 			sub: [
 				{
 					name: "fixed",
 					label: __("固定", "catpow"),
-					values: "has-background-image-fixed",
+					values: "hasBackgroundImageFixed",
 				},
 				{
 					name: "image",
@@ -141,7 +141,7 @@ export const selectiveClassesPresets = {
 		return {
 			name: "backgroundPattern",
 			label: __("背景パターン", "catpow"),
-			values: "has-background-pattern",
+			values: "hasBackgroundPattern",
 			sub: [
 				{
 					name: "image",
@@ -181,9 +181,9 @@ export const selectiveClassesPresets = {
 		type: "buttons",
 		label: __("テキスト揃え", "catpow"),
 		values: {
-			"has-text-align-left": __("左揃え", "catpow"),
-			"has-text-align-center": __("中央", "catpow"),
-			"has-text-align-right": __("右揃え", "catpow"),
+			hasTextAlignLeft: __("左揃え", "catpow"),
+			hasTextAlignCenter: __("中央", "catpow"),
+			hasTextAlignRight: __("右揃え", "catpow"),
 		},
 	},
 	verticalAlign: {
@@ -191,9 +191,9 @@ export const selectiveClassesPresets = {
 		type: "buttons",
 		label: __("垂直方向揃え", "catpow"),
 		values: {
-			"has-vertical-align-top": __("上揃え", "catpow"),
-			"has-vertical-align-middle": __("中央", "catpow"),
-			"has-vertical-align-bottom": __("下揃え", "catpow"),
+			hasVerticalAlignTop: __("上揃え", "catpow"),
+			hasVerticalAlignMiddle: __("中央", "catpow"),
+			hasVerticalAlignBottom: __("下揃え", "catpow"),
 		},
 	},
 	fontSize: {
@@ -201,9 +201,9 @@ export const selectiveClassesPresets = {
 		type: "buttons",
 		label: __("文字サイズ", "catpow"),
 		values: {
-			"has-font-size-large": __("大", "catpow"),
-			"has-font-size-middle": __("中", "catpow"),
-			"has-font-size-small": __("小", "catpow"),
+			hasFontSizeLarge: __("大", "catpow"),
+			hasFontSizeMiddle: __("中", "catpow"),
+			hasFontSizeSmall: __("小", "catpow"),
 		},
 	},
 	width: {
@@ -211,10 +211,10 @@ export const selectiveClassesPresets = {
 		type: "buttons",
 		label: __("幅", "catpow"),
 		values: {
-			"has-width-full": __("フル", "catpow"),
-			"has-width-wide": __("ワイド", "catpow"),
-			"has-width-regular": __("レギュラー", "catpow"),
-			"has-width-narrow": __("ナロー", "catpow"),
+			hasWidthFull: __("フル", "catpow"),
+			hasWidthWide: __("ワイド", "catpow"),
+			hasWidthRegular: __("レギュラー", "catpow"),
+			hasWidthNarrow: __("ナロー", "catpow"),
 		},
 	},
 	size: {
@@ -222,9 +222,9 @@ export const selectiveClassesPresets = {
 		type: "buttons",
 		label: __("サイズ", "catpow"),
 		values: {
-			"is-size-large": __("大", "catpow"),
-			"is-size-medium": __("中", "catpow"),
-			"is-size-small": __("小", "catpow"),
+			isSizeLarge: __("大", "catpow"),
+			isSizeMedium: __("中", "catpow"),
+			isSizeSmall: __("小", "catpow"),
 		},
 	},
 	itemSize: {
@@ -244,36 +244,36 @@ export const selectiveClassesPresets = {
 		type: "buttons",
 		label: __("配色", "catpow"),
 		values: {
-			"has-color-scheme-inherit": __("継承", "catpow"),
-			"has-color-scheme-reverted": __("通常", "catpow"),
-			"has-color-scheme-inverted": __("反転", "catpow"),
+			hasColorSchemeInherit: __("継承", "catpow"),
+			hasColorSchemeReverted: __("通常", "catpow"),
+			hasColorSchemeInverted: __("反転", "catpow"),
 		},
 	},
 	clipPath({ preset, vars = "vars", ...otherParams }) {
 		return {
 			name: "clipPath",
 			label: __("クリップ", "catpow"),
-			values: "has-clip-path",
+			values: "hasClipPath",
 			sub: [
 				{
 					name: "shape",
 					label: __("形状", "catpow"),
 					type: "buttons",
 					values: {
-						"has-clip-shape-ellipse": __("楕円", "catpow"),
-						"has-clip-shape-slope": __("傾斜", "catpow"),
-						"has-clip-shape-arrow": __("アロー", "catpow"),
-						"has-clip-shape-tail": __("フキダシ", "catpow"),
+						hasClipShapeEllipse: __("楕円", "catpow"),
+						hasClipShapeSlope: __("傾斜", "catpow"),
+						hasClipShapeArrow: __("アロー", "catpow"),
+						hasClipShapeTail: __("フキダシ", "catpow"),
 					},
 					sub: {
-						"has-clip-shape-ellipse": [
+						hasClipShapeEllipse: [
 							{
 								name: "direction",
 								type: "buttons",
 								values: {
-									"has-clip-shape-both": __("両方", "catpow"),
-									"has-clip-shape-upper": __("上", "catpow"),
-									"has-clip-shape-below": __("下", "catpow"),
+									hasClipShapeBoth: __("両方", "catpow"),
+									hasClipShapeUpper: __("上", "catpow"),
+									hasClipShapeBelow: __("下", "catpow"),
 								},
 							},
 							{
@@ -286,23 +286,23 @@ export const selectiveClassesPresets = {
 								max: 100,
 							},
 						],
-						"has-clip-shape-slope": [
+						hasClipShapeSlope: [
 							{
 								name: "uppper",
 								type: "buttons",
 								values: {
-									"has-clip-shape-upper-none": __("なし", "catpow"),
-									"has-clip-shape-upper-left": __("左", "catpow"),
-									"has-clip-shape-upper-right": __("右", "catpow"),
+									hasClipShapeUpperNone: __("なし", "catpow"),
+									hasClipShapeUpperLeft: __("左", "catpow"),
+									hasClipShapeUpperRight: __("右", "catpow"),
 								},
 							},
 							{
 								name: "below",
 								type: "buttons",
 								values: {
-									"has-clip-shape-below-none": __("なし", "catpow"),
-									"has-clip-shape-below-left": __("左", "catpow"),
-									"has-clip-shape-below-right": __("右", "catpow"),
+									hasClipShapeBelowNone: __("なし", "catpow"),
+									hasClipShapeBelowLeft: __("左", "catpow"),
+									hasClipShapeBelowRight: __("右", "catpow"),
 								},
 							},
 							{
@@ -324,23 +324,23 @@ export const selectiveClassesPresets = {
 								max: 400,
 							},
 						],
-						"has-clip-shape-arrow": [
+						hasClipShapeArrow: [
 							{
 								name: "uppper",
 								type: "buttons",
 								values: {
-									"has-clip-shape-upper-none": __("なし", "catpow"),
-									"has-clip-shape-upper-in": __("内", "catpow"),
-									"has-clip-shape-upper-out": __("外", "catpow"),
+									hasClipShapeUpperNone: __("なし", "catpow"),
+									hasClipShapeUpperIn: __("内", "catpow"),
+									hasClipShapeUpperOut: __("外", "catpow"),
 								},
 							},
 							{
 								name: "below",
 								type: "buttons",
 								values: {
-									"has-clip-shape-below-none": __("なし", "catpow"),
-									"has-clip-shape-below-in": __("内", "catpow"),
-									"has-clip-shape-below-out": __("外", "catpow"),
+									hasClipShapeBelowNone: __("なし", "catpow"),
+									hasClipShapeBelowIn: __("内", "catpow"),
+									hasClipShapeBelowOut: __("外", "catpow"),
 								},
 							},
 							{
@@ -362,23 +362,23 @@ export const selectiveClassesPresets = {
 								max: 400,
 							},
 						],
-						"has-clip-shape-tail": [
+						hasClipShapeTail: [
 							{
 								name: "uppper",
 								type: "buttons",
 								values: {
-									"has-clip-shape-upper-none": __("なし", "catpow"),
-									"has-clip-shape-upper-in": __("内", "catpow"),
-									"has-clip-shape-upper-out": __("外", "catpow"),
+									hasClipShapeUpperNone: __("なし", "catpow"),
+									hasClipShapeUpperIn: __("内", "catpow"),
+									hasClipShapeUpperOut: __("外", "catpow"),
 								},
 							},
 							{
 								name: "below",
 								type: "buttons",
 								values: {
-									"has-clip-shape-below-none": __("なし", "catpow"),
-									"has-clip-shape-below-in": __("内", "catpow"),
-									"has-clip-shape-below-out": __("外", "catpow"),
+									hasClipShapeBelowNone: __("なし", "catpow"),
+									hasClipShapeBelowIn: __("内", "catpow"),
+									hasClipShapeBelowOut: __("外", "catpow"),
 								},
 							},
 							{
@@ -428,7 +428,7 @@ export const selectiveClassesPresets = {
 		return {
 			name: "customPadding",
 			label: __("余白", "catpow"),
-			values: "has-custom-padding",
+			values: "hasCustomPadding",
 			sub: [
 				{
 					name: "paddingTop",
@@ -471,7 +471,7 @@ export const selectiveClassesPresets = {
 		return {
 			name: "customMargin",
 			label: __("間隔", "catpow"),
-			values: "has-custom-margin",
+			values: "hasCustomMargin",
 			sub: [
 				{
 					name: "marginTop",
@@ -503,14 +503,14 @@ export const selectiveClassesPresets = {
 		return {
 			name: "customContentWidth",
 			label: __("カスタムコンテンツ幅", "catpow"),
-			values: "has-custom-content-width",
+			values: "hasCustomContentWidth",
 			sub: [
 				{
 					name: "contentWidth",
 					label: __("幅", "catpow"),
 					input: "range",
 					vars,
-					key: "--cp-content-width",
+					key: "--cp-custom-content-width",
 					min: 50,
 					max: 100,
 					unit: "vw",
@@ -520,7 +520,7 @@ export const selectiveClassesPresets = {
 					label: __("最大幅", "catpow"),
 					input: "range",
 					vars,
-					key: "--cp-content-max-width",
+					key: "--cp-custom-content-max-width",
 					min: 200,
 					max: 1600,
 					coef: 0.0625,
@@ -534,7 +534,7 @@ export const selectiveClassesPresets = {
 		return {
 			name: "contentWidth",
 			label: __("コンテンツ幅", "catpow"),
-			values: "has-content-width",
+			values: "hasContentWidth",
 			sub: [{ preset: "customContentWidth", vars }],
 			...otherParams,
 		};
@@ -543,7 +543,7 @@ export const selectiveClassesPresets = {
 		return {
 			name: "cusotomRadius",
 			label: __("角丸", "catpow"),
-			values: "has-custom-border-radius",
+			values: "hasCustomBorderRadius",
 			sub: [
 				{
 					name: "borderRadius",
