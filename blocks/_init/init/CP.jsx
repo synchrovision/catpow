@@ -1,4 +1,6 @@
-﻿import { kebabToCamel, camelToKebab } from "catpow/util";
+﻿import { kebabToCamel, camelToKebab, deepMap } from "catpow/util";
+
+export const cache = deepMap();
 
 export const CP = {
 	filters: {},
@@ -270,6 +272,154 @@ export const CP = {
 			}
 		});
 		return rtn;
+	},
+	getClassFlagsByValue: (prm, primaryClassKey = "classes") => {
+		const cacheKeys = [CP.getClassFlagsByValue, prm, primaryClassKey];
+		if (cache.has(cacheKeys)) {
+			return cache.get(cacheKeys);
+		}
+		const flags = {};
+		cache.set(cacheKeys, flags);
+		if (!prm || typeof prm !== "object" || !prm.values) {
+			return flags;
+		}
+		const values = typeof prm.values === "string" ? [prm.values] : Array.isArray(prm.values) ? prm.values : Object.keys(prm.values);
+		for (const value of values) {
+			flags[value] = { [prm.classKey || primaryClassKey]: { [value]: true } };
+			if (prm.sub) {
+				if (Array.isArray(prm.sub)) {
+					CP.addAllClassFlags(flags[value], prm.sub, primaryClassKey);
+				} else if (prm.sub[value]) {
+					CP.addAllClassFlags(flags[value], prm.sub[value], primaryClassKey);
+				}
+			}
+			if (prm.bind) {
+				if (Array.isArray(prm.bind)) {
+					CP.addBindClassFlags(flags[value], prm.bind, primaryClassKey);
+				} else if (prm.bind[value]) {
+					CP.addBindClassFlags(flags[value], prm.bind[value], primaryClassKey);
+				}
+			}
+		}
+		return flags;
+	},
+	getAllClassFlags: (prm, primaryClassKey = "classes") => {
+		const cacheKeys = [CP.getAllClassFlags, prm, primaryClassKey];
+		if (cache.has(cacheKeys)) {
+			return cache.get(cacheKeys);
+		}
+		const flags = {};
+		cache.set(cacheKeys, flags);
+		if (!prm || typeof prm !== "object" || !prm.values) {
+			return flags;
+		}
+		CP.addAllClassFlags(flags, [prm], primaryClassKey);
+		return flags;
+	},
+	getBindClassFlagsByValue: (prm, primaryClassKey = "classes") => {
+		const cacheKeys = [CP.getBindClassFlagsByValue, prm, primaryClassKey];
+		if (cache.has(cacheKeys)) {
+			return cache.get(cacheKeys);
+		}
+		const flags = {};
+		cache.set(cacheKeys, flags);
+		if (!prm || typeof prm !== "object" || !prm.values) {
+			return flags;
+		}
+		const values = typeof prm.values === "string" ? [prm.values] : Array.isArray(prm.values) ? prm.values : Object.keys(prm.values);
+		for (let value of values) {
+			flags[value] = { [prm.classKey || primaryClassKey]: { [value]: true } };
+			if (prm.bind) {
+				if (typeof prm.values === "string") {
+					CP.addBindClassFlags(flags[value], prm.bind, primaryClassKey);
+				} else {
+					if (prm.bind[value]) {
+						CP.addBindClassFlags(flags[value], prm.bind[value], primaryClassKey);
+					}
+				}
+			}
+		}
+		return flags;
+	},
+	addAllClassFlags: (flags, prms, primaryClassKey = "classes") => {
+		if (!flags[primaryClassKey]) {
+			flags[primaryClassKey] = {};
+		}
+		for (const prm of prms) {
+			if (prm.key || prm.json || prm.css || prm.vars) {
+				continue;
+			}
+			if (prm.values) {
+				const values = typeof prm.values === "string" ? [prm.values] : Array.isArray(prm.values) ? prm.values : Object.keys(prm.values);
+				for (const value of values) {
+					const classKey = prm.classKey || primaryClassKey;
+					if (!flags[classKey]) {
+						flags[classKey] = {};
+					}
+					flags[classKey][value] = true;
+				}
+			}
+			if (prm.sub) {
+				if (Array.isArray(prm.sub)) {
+					CP.addAllClassFlags(flags, prm.sub, primaryClassKey);
+				} else {
+					for (const subPrm of Object.values(prm.sub)) {
+						CP.addAllClassFlags(flags, subPrm, primaryClassKey);
+					}
+				}
+			}
+			if (prm.bind) {
+				if (typeof prm.values === "string") {
+					CP.addBindClassFlags(flags, prm.bind, primaryClassKey);
+				} else {
+					for (const bindClasses of Object.values(prm.bind)) {
+						CP.addBindClassFlags(flags, bindClasses, primaryClassKey);
+					}
+				}
+			}
+		}
+	},
+	addBindClassFlags: (flags, bindClasses, primaryClassKey = "classes") => {
+		if (!flags[primaryClassKey]) {
+			flags[primaryClassKey] = {};
+		}
+		if (Array.isArray(bindClasses)) {
+			for (const bindClass of bindClasses) {
+				flags[primaryClassKey][bindClass] = true;
+			}
+		} else {
+			for (const [classKey, classes] of Object.entries(bindClasses)) {
+				if (classKey === "_") {
+					for (const bindClass of classes) {
+						flags[primaryClassKey][bindClass] = true;
+					}
+				} else {
+					if (!flags[classKey]) {
+						flags[classKey] = {};
+					}
+					for (const bindClass of classes) {
+						flags[classKey][bindClass] = true;
+					}
+				}
+			}
+		}
+	},
+	getUpdatesFromStatesAndClasssFlags: ({ allStates, allClassFlags, classFlags, bindClassFlags }) => {
+		const updates = {};
+		for (const [classKey, allClassFlag] of Object.entries(allClassFlags)) {
+			console.assert(!!allStates[classKey], `allStates should have ${classKey} states`);
+			const states = allStates[classKey];
+			for (const value of Object.keys(states)) {
+				if (allClassFlag[value] && !classFlags?.[classKey]?.[value]) {
+					states[value] = false;
+				}
+			}
+			if (bindClassFlags?.[classKey]) {
+				Object.assign(states, bindClassFlags[classKey]);
+			}
+			updates[classKey] = CP.flagsToClassNames(states);
+		}
+		return updates;
 	},
 
 	toggleClass: ({ attr, set }, value, key) => {
