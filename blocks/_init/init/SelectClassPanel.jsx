@@ -1,5 +1,6 @@
 ﻿import { CP } from "./CP.jsx";
-import { selectiveClassesPresets } from "./selectiveClassesPresets.jsx";
+import { kebabToCamel, camelToKebab, deepMap } from "catpow/util";
+import { resolveSelectiveClassesPresets, selectiveClassesPresets } from "./selectiveClassesPresets.jsx";
 
 CP.SelectClassPanelContext = wp.element.createContext({});
 
@@ -7,18 +8,28 @@ CP.SelectClassPanel = (props) => {
 	const { Fragment, useMemo, useCallback, useContext, createElement: el } = wp.element;
 	const { __ } = wp.i18n;
 	const { PanelBody, CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
-	const { classKey = "classes", items, index, subItemsKey, subIndex, set, attr, triggerClasses } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
+	const {
+		blockClasssKey = "classes",
+		classKey: primaryClassKey = "classes",
+		items,
+		index,
+		subItemsKey,
+		subIndex,
+		set,
+		attr,
+		triggerClasses,
+	} = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
 	let { itemsKey = items ? "items" : null, itemClasses } = props;
 	const selectiveClasses = useMemo(() => {
 		if (!triggerClasses || !triggerClasses.item) {
 			if (Array.isArray(props.selectiveClasses)) {
-				return props.selectiveClasses;
+				return resolveSelectiveClassesPresets(props.selectiveClasses);
 			}
-			return Object.values(props.selectiveClasses);
+			return resolveSelectiveClassesPresets(Object.values(props.selectiveClasses));
 		}
-		const blockStates = CP.wordsToFlags(attr.classes);
-		return triggerClasses.item[Object.keys(triggerClasses.item).find((value) => blockStates[value])];
-	}, [props.selectiveClasses, triggerClasses && attr.classes]);
+		const blockStates = CP.classNamesToFlags(attr[blockClasssKey]);
+		return resolveSelectiveClassesPresets(triggerClasses.item[Object.keys(triggerClasses.item).find((value) => blockStates[value])]);
+	}, [props.selectiveClasses, triggerClasses && attr[blockClasssKey]]);
 
 	const { styleDatas } = attr;
 
@@ -34,7 +45,53 @@ CP.SelectClassPanel = (props) => {
 		}
 		return items[index];
 	}, [attr, items, index, subItemsKey, subIndex]);
-	const states = useMemo(() => CP.wordsToFlags(item[classKey]), [item[classKey]]);
+	const states = useMemo(() => CP.classNamesToFlags(item[primaryClassKey]), [item[primaryClassKey]]);
+	const allStates = useMemo(() => {
+		const allStates = { [primaryClassKey]: states };
+		const addClassKeyFlagsInPrm = (prm, flags) => {
+			if (prm.classKey) {
+				flags[prm.classKey] = true;
+			}
+			if (prm.sub) {
+				if (Array.isArray(prm.sub)) {
+					prm.sub.forEach((subPrm) => addClassKeyFlagsInPrm(subPrm, flags));
+				} else {
+					for (const subPrms of Object.values(prm.sub)) {
+						subPrms.forEach((subPrm) => addClassKeyFlagsInPrm(subPrm, flags));
+					}
+				}
+			}
+			if (prm.bind) {
+				console.log({ prm });
+				if (typeof prm.values === "string") {
+					if (!Array.isArray(prm.bind)) {
+						Object.keys(prm.bind).forEach((classKey) => {
+							if (classKey !== "_") {
+								flags[classKey] = true;
+							}
+						});
+					}
+				} else {
+					for (const bindClasses of Object.values(prm.bind)) {
+						if (!Array.isArray(bindClasses)) {
+							Object.keys(bindClasses).forEach((classKey) => {
+								if (classKey !== "_") {
+									flags[classKey] = true;
+								}
+							});
+						}
+					}
+				}
+			}
+		};
+		const classKeyFlags = {};
+		props.selectiveClasses.forEach((prm) => addClassKeyFlagsInPrm(prm, classKeyFlags));
+		console.log({ classKeyFlags });
+		Object.keys(classKeyFlags).forEach((classKey) => {
+			allStates[classKey] = CP.classNamesToFlags(item[classKey]);
+		});
+		return allStates;
+	}, [props.selectiveClasses, item, states, primaryClassKey]);
 	const save = useCallback(
 		(data) => {
 			if (items) {
@@ -46,9 +103,12 @@ CP.SelectClassPanel = (props) => {
 		},
 		[set, index, items, itemsKey]
 	);
-	const saveClasses = useCallback(() => {
-		save({ [classKey]: CP.flagsToWords(states) });
-	}, [save, classKey, states]);
+	const saveClasses = useCallback(
+		(classKey) => {
+			save({ [classKey]: CP.flagsToClassNames(allStates[classKey]) });
+		},
+		[save, allStates]
+	);
 	const saveCss = useCallback(
 		(cssKey) => {
 			set({ [cssKey]: CP.createStyleCodeWithMediaQuery(styleDatas[cssKey]) });
@@ -57,20 +117,7 @@ CP.SelectClassPanel = (props) => {
 	);
 
 	const SelectClass = useCallback(({ prm }) => {
-		const { props, item, states, save, saveClasses, saveCss } = useContext(CP.SelectClassPanelContext);
-		if (typeof prm === "string" && selectiveClassesPresets.hasOwnProperty(prm)) {
-			prm = { preset: prm };
-		}
-		if (prm.preset) {
-			if (selectiveClassesPresets.hasOwnProperty(prm.preset)) {
-				const preset = selectiveClassesPresets[prm.preset];
-				if (typeof preset === "function") {
-					prm = preset(prm);
-				} else {
-					prm = { ...preset, ...prm };
-				}
-			}
-		}
+		const { props, item, states, allStates, set, save, saveClasses, saveCss, primaryClassKey } = useContext(CP.SelectClassPanelContext);
 		if (prm.hasOwnProperty("cond")) {
 			if (prm.cond === false) {
 				return false;
@@ -94,7 +141,6 @@ CP.SelectClassPanel = (props) => {
 				}
 			}
 		}
-
 		if (prm.json) {
 			if (prm.input) {
 				switch (prm.input) {
@@ -698,94 +744,95 @@ CP.SelectClassPanel = (props) => {
 						break;
 					}
 				}
-			} else if (_.isObject(prm.values)) {
-				let subClasses = CP.getSubClasses(prm);
-				let bindClasses = CP.getBindClasses(prm);
-
-				var { options, values } = CP.parseSelections(prm.values);
-				const currentClass = values.find((value) => states[value]);
-
-				let onChangeCB = (newClass) => {
-					if (currentClass) {
-						states[currentClass] = false;
-
-						let currentSels = [];
-						if (subClasses[currentClass]) {
-							currentSels = currentSels.concat(subClasses[currentClass]);
-						}
-						if (bindClasses[currentClass]) {
-							currentSels = currentSels.concat(bindClasses[currentClass]);
-						}
-
-						let newSels = [];
-						if (subClasses[newClass]) {
-							newSels = newSels.concat(subClasses[newClass]);
-						}
-						if (bindClasses[newClass]) {
-							newSels = newSels.concat(bindClasses[newClass]);
-						}
-						currentSels.forEach((value) => {
-							if (!newSels.includes(value)) {
-								states[value] = false;
-							}
-						});
-					}
-					bindClasses[newClass].forEach((value) => {
-						states[value] = true;
-					});
-					states[newClass] = true;
-
-					saveClasses();
-					if (prm.effect) {
-						prm.effect(currentClass, newClass, states, props);
-					}
-				};
-
-				switch (prm.type) {
-					case "radio": {
-						rtn.push(<RadioControl label={prm.label} onChange={onChangeCB} selected={currentClass} options={options} />);
-						break;
-					}
-					case "buttons": {
-						rtn.push(<CP.SelectButtons label={prm.label} onChange={onChangeCB} selected={currentClass} options={options} />);
-						break;
-					}
-					case "gridbuttons": {
-						rtn.push(<CP.SelectGridButtons label={prm.label} onChange={onChangeCB} selected={currentClass} options={options} />);
-						break;
-					}
-					default: {
-						rtn.push(<SelectControl label={prm.label} onChange={onChangeCB} value={currentClass} options={options} />);
-					}
-				}
-
-				if (prm.sub) {
-					if (currentClass && prm.sub[currentClass]) {
-						let sub = [];
-						prm.sub[currentClass].forEach((prm, index) => {
-							sub.push(<Fragment key={index}>{el(SelectClass, { prm })}</Fragment>);
-						});
-						rtn.push(<div className="sub">{sub}</div>);
-					}
-				}
 			} else {
-				rtn.push(
-					<CheckboxControl
-						label={prm.label}
-						onChange={() => {
-							states[prm.values] = !states[prm.values];
-							saveClasses();
-						}}
-						checked={!!states[prm.values]}
-					/>
-				);
-				if (prm.sub) {
-					if (states[prm.values]) {
-						let sub = [];
-						prm.sub.forEach((prm, index) => {
-							sub.push(<Fragment key={index}>{el(SelectClass, { prm })}</Fragment>);
+				const classKey = prm.classKey ? prm.classKey : primaryClassKey;
+				const targetStates = allStates[classKey];
+				const allClassFlags = CP.getAllClassFlags(prm, primaryClassKey);
+				const classFlagsByValue = CP.getClassFlagsByValue(prm, primaryClassKey);
+				const bindClasseFlagsByValue = CP.getBindClassFlagsByValue(prm, primaryClassKey);
+				if (_.isObject(prm.values)) {
+					var { options, values } = CP.parseSelections(prm.values);
+					const currentClass = values.find((value) => targetStates[kebabToCamel(value)]);
+
+					const onChangeCB = (value) => {
+						const updates = CP.getUpdatesFromStatesAndClasssFlags({
+							states,
+							allStates,
+							allClassFlags,
+							classFlags: classFlagsByValue[value],
+							bindClassFlags: bindClasseFlagsByValue[value],
 						});
-						rtn.push(<div className="sub">{sub}</div>);
+						console.log({ bindClasseFlagsByValue, updates });
+						set(updates);
+						if (prm.effect) {
+							prm.effect(currentClass, value, targetStates, props);
+						}
+					};
+
+					switch (prm.type) {
+						case "radio": {
+							rtn.push(<RadioControl label={prm.label} onChange={onChangeCB} selected={currentClass} options={options} />);
+							break;
+						}
+						case "buttons": {
+							rtn.push(<CP.SelectButtons label={prm.label} onChange={onChangeCB} selected={currentClass} options={options} />);
+							break;
+						}
+						case "gridbuttons": {
+							rtn.push(<CP.SelectGridButtons label={prm.label} onChange={onChangeCB} selected={currentClass} options={options} />);
+							break;
+						}
+						default: {
+							rtn.push(<SelectControl label={prm.label} onChange={onChangeCB} value={currentClass} options={options} />);
+						}
+					}
+
+					if (prm.sub) {
+						if (currentClass && prm.sub[currentClass]) {
+							let sub = [];
+							prm.sub[currentClass].forEach((prm, index) => {
+								sub.push(<Fragment key={index}>{el(SelectClass, { prm })}</Fragment>);
+							});
+							rtn.push(<div className="sub">{sub}</div>);
+						}
+					}
+				} else {
+					rtn.push(
+						<CheckboxControl
+							label={prm.label}
+							onChange={() => {
+								if (targetStates[prm.values]) {
+									const updates = CP.getUpdatesFromStatesAndClasssFlags({
+										allStates,
+										allClassFlags,
+									});
+									console.log({ allClassFlags, bindClasseFlagsByValue, updates });
+									set(updates);
+								} else {
+									const updates = CP.getUpdatesFromStatesAndClasssFlags({
+										allStates,
+										allClassFlags,
+										classFlags: classFlagsByValue[prm.values],
+										bindClassFlags: bindClasseFlagsByValue[prm.values],
+									});
+									console.log({ allClassFlags, bindClasseFlagsByValue, updates });
+									set(updates);
+								}
+								if (prm.effect) {
+									prm.effect(currentClass, value, targetStates, props);
+								}
+							}}
+							checked={!!targetStates[prm.values]}
+						/>
+					);
+					if (prm.sub) {
+						if (targetStates[prm.values]) {
+							let sub = [];
+							prm.sub.forEach((prm, index) => {
+								sub.push(<Fragment key={index}>{el(SelectClass, { prm })}</Fragment>);
+							});
+							rtn.push(<div className="sub">{sub}</div>);
+						}
 					}
 				}
 			}
@@ -805,7 +852,7 @@ CP.SelectClassPanel = (props) => {
 
 	return (
 		<PanelBody title={props.title} initialOpen={props.initialOpen || false} icon={props.icon}>
-			<CP.SelectClassPanelContext.Provider value={{ props, item, states, save, saveClasses, saveCss }}>
+			<CP.SelectClassPanelContext.Provider value={{ props, item, states, allStates, set, save, saveClasses, saveCss, primaryClassKey }}>
 				{selectiveClasses.map((prm, index) => (
 					<Fragment key={index}>{el(SelectClass, { prm })}</Fragment>
 				))}
