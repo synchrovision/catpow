@@ -208,6 +208,7 @@ export const CP = {
 		return _.intersection(classArray, values).shift();
 	},
 
+	//@deprecated
 	getSubClasses: (prm) => {
 		let rtn = {};
 		let values;
@@ -225,6 +226,7 @@ export const CP = {
 		});
 		return rtn;
 	},
+	//@deprecated
 	getAllSubClasses: (prms) => {
 		let rtn = [];
 		prms.forEach((prm) => {
@@ -251,6 +253,7 @@ export const CP = {
 		});
 		return rtn;
 	},
+	//@deprecated
 	getBindClasses: (prm) => {
 		let rtn = {};
 		let values;
