@@ -8,14 +8,6 @@ CP.config.section = {
 		image: { mime: "imageMime", src: "imageSrc", alt: "imageAlt", srcset: "imageSrcset" },
 		titleImage: { mime: "titleImageMime", src: "titleImageSrc", alt: "titleImageAlt", srcset: "titleImageSrcset", sources: "titleImageSources" },
 		headerImage: { mime: "headerImageMime", src: "headerImageSrc", alt: "headerImageAlt", srcset: "headerImageSrcset" },
-		headerBackgroundImage: {
-			mime: "headerBackgroundImageMime",
-			src: "headerBackgroundImageSrc",
-			alt: "headerBackgroundImageAlt",
-			srcset: "headerBackgroundImageSrcset",
-			sources: "headerBackgroundImageSources",
-		},
-		backgroundImage: { src: "backgroundImageSrc", srcset: "backgroundImageSrcset", sources: "backgroundImageSources" },
 		decoration: { pictures: "decoration" },
 	},
 	imageSizes: {
@@ -26,9 +18,9 @@ CP.config.section = {
 wp.blocks.registerBlockType("catpow/section", {
 	example: CP.example,
 	edit(props) {
-		const { InnerBlocks, BlockControls, InspectorControls, RichText } = wp.blockEditor;
+		const { InnerBlocks, BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl, TextControl } = wp.components;
-		const { attributes, className, setAttributes } = props;
+		const { attributes, setAttributes } = props;
 		const { useMemo, useState } = wp.element;
 		const {
 			SectionTag,
@@ -36,29 +28,20 @@ wp.blocks.registerBlockType("catpow/section", {
 			color,
 			anchor,
 			classes,
+			bodyClasses,
+			headerClasses,
+			titleClasses,
+			vars,
+			headerVars,
 			prefix,
 			title,
 			lead,
-			headerImageMime,
-			headerImageSrc,
-			headerImageSrcset,
-			headerImageAlt,
+			titleImageCode,
 			headerImageCode,
-			headerBackgroundImageCode,
-			imageMime,
-			imageSrc,
-			imageSrcset,
-			imageAlt,
-			imageCode,
-			backgroundImageSrc,
-			backgroundImageCode,
 			headerPatternImageCss,
 			patternImageCss,
 			frameImageCss,
 			borderImageCss,
-			iconSrc,
-			iconAlt,
-			vars,
 		} = attributes;
 
 		const states = CP.classNamesToFlags(classes);
@@ -94,53 +77,26 @@ wp.blocks.registerBlockType("catpow/section", {
 					name: "type",
 					label: __("タイプ", "catpow"),
 					type: "gridbuttons",
-					values: ["scene", "article", "column"],
+					values: { isTypeScene: "scene", isTypeArticle: "aticle", isTypeColumn: "column" },
 					sub: {
-						scene: [
-							"color",
+						isTypeScene: [
+							{
+								name: "headerContentWidth",
+								preset: "customContentWidth",
+								label: __("ヘッダコンテンツ幅", "catpow"),
+								vars: "headerVars",
+								classKey: "headerClasses",
+								bind: {
+									titleClasses: ["hasContentWidth"],
+								},
+							},
 							{ name: "prefix", label: __("プレフィクス", "catpow"), values: "hasPrefix" },
 							{ name: "titleImage", label: __("タイトル画像", "catpow"), values: "hasTitleImage", sub: [{ input: "picture", keys: imageKeys.titleImage, devices }] },
 							{ name: "headerImage", label: __("ヘッダ画像", "catpow"), values: "hasHeaderImage", sub: [{ input: "image", keys: imageKeys.headerImage, size: imageSizes.headerImage }] },
-							{
-								name: "headerBackgroundImage",
-								label: __("ヘッダ背景画像", "catpow"),
-								values: "hasHeaderBackgroundImage",
-								sub: [
-									{ input: "picture", label: __("背景画像", "catpow"), keys: imageKeys.headerBackgroundImage, devices },
-									{ label: __("薄く", "catpow"), values: "paleHeaderBG" },
-								],
-							},
-							{
-								name: "inverseText",
-								label: __("抜き色文字", "catpow"),
-								values: "inverseText",
-								sub: [
-									{
-										label: __("ヘッダ背景色", "catpow"),
-										values: "hasHeaderBackgroundColor",
-										sub: [
-											{
-												label: __("パターン画像", "catpow"),
-												values: "hasHeaderPatternImage",
-												sub: [{ input: "pattern", css: "headerPatternImageCss", sel: ({ attr }) => "#" + attr.anchor + " > .contents > .header" }],
-											},
-										],
-									},
-								],
-							},
 							{ name: "lead", label: __("リード", "catpow"), values: "hasLead" },
-							{
-								name: "backgroundImage",
-								label: __("背景画像", "catpow"),
-								values: "hasBackgroundImage",
-								sub: [
-									{ input: "picture", label: __("背景画像", "catpow"), keys: imageKeys.backgroundImage, devices },
-									{ name: "paleBG", label: __("薄く", "catpow"), values: "paleBG" },
-								],
-							},
-							"backgroundPattern",
-							{ name: "backgroundColor", label: __("背景色", "catpow"), values: "hasBackgroundColor" },
-							"colorScheme",
+							{ preset: "backgroundColor", label: __("ヘッダ背景色", "catpow"), name: "headerBackgroundColor", classKey: "headerClasses" },
+							{ preset: "backgroundImage", label: __("ヘッダ背景画像", "catpow"), name: "headerBackgroundImage", classKey: "headerClasses", vars: "headerVars" },
+							{ preset: "backgroundPattern", label: __("ヘッダ背景パターン", "catpow"), name: "headerBackgroundPattern", classKey: "headerClasses", vars: "headerVars" },
 							{
 								name: "navIcon",
 								label: __("メニューアイコン", "catpow"),
@@ -154,7 +110,7 @@ wp.blocks.registerBlockType("catpow/section", {
 							{
 								name: "template",
 								label: __("テンプレート", "catpow"),
-								values: "isTemplate",
+								values: "is-template",
 								sub: [
 									{
 										name: "headerImageCode",
@@ -180,36 +136,11 @@ wp.blocks.registerBlockType("catpow/section", {
 								],
 							},
 						],
-						article: [
-							"color",
+						isTypeArticle: [
 							{ name: "level", type: "buttons", label: __("レベル", "catpow"), values: { level1: "1", level2: "2", level3: "3", level4: "4" } },
 							{ name: "headingType", type: "gridbuttons", label: __("見出しタイプ", "catpow"), filter: "heading_type", values: ["header", "headline", "catch"] },
-							{
-								name: "headerImage",
-								label: __("ヘッダ画像", "catpow"),
-								values: "hasHeaderImage",
-								sub: [
-									{
-										input: "image",
-										keys: imageKeys.headerImage,
-										size: imageSizes.headerImage,
-										cond: (states, { attr }) => !states.isTemplate || !attr.headerImageCode,
-									},
-								],
-							},
+							{ name: "headerImage", label: __("ヘッダ画像", "catpow"), values: "hasHeaderImage", sub: [{ input: "image", keys: imageKeys.headerImage, size: imageSizes.headerImage }] },
 							{ name: "lead", label: __("リード", "catpow"), values: "hasLead" },
-							{
-								name: "backgroundImage",
-								label: __("背景画像", "catpow"),
-								values: "hasBackgroundImage",
-								sub: [
-									{ input: "picture", keys: imageKeys.backgroundImage, devices, cond: (states, { attr }) => !states.isTemplate || !attr.backgroundImageCode },
-									{ label: __("薄く", "catpow"), values: "paleBG" },
-								],
-							},
-							"backgroundPattern",
-							{ name: "backgroundColor", label: __("背景色", "catpow"), values: "hasBackgroundColor" },
-							"colorScheme",
 							{
 								name: "navIcon",
 								label: __("メニューアイコン", "catpow"),
@@ -236,7 +167,7 @@ wp.blocks.registerBlockType("catpow/section", {
 							{
 								name: "template",
 								label: __("テンプレート", "catpow"),
-								values: "isTemplate",
+								values: "is-template",
 								sub: [
 									{
 										input: "text",
@@ -253,23 +184,9 @@ wp.blocks.registerBlockType("catpow/section", {
 								],
 							},
 						],
-						column: [
-							"color",
-							"pattern",
+						isTypeColumn: [
 							{ name: "icon", label: __("アイコン", "catpow"), values: "hasIcon", sub: [{ input: "icon", color }] },
 							{ name: "image", label: __("画像", "catpow"), values: "hasImage", sub: [{ input: "image", keys: imageKeys.image }] },
-							{ name: "backgroundColor", label: __("背景色", "catpow"), values: "hasBackgroundColor" },
-							"colorScheme",
-							{
-								name: "backgroundImage",
-								label: __("背景画像", "catpow"),
-								values: "hasBackgroundImage",
-								sub: [
-									{ input: "picture", keys: imageKeys.backgroundImage, devices, cond: (states, { attr }) => !states.isTemplate || !attr.backgroundImageCode },
-									{ label: __("薄く", "catpow"), values: "paleBG" },
-								],
-							},
-							"backgroundPattern",
 							{ name: "border", label: __("線", "catpow"), values: { no_border: __("なし", "catpow"), thin_border: __("細", "catpow"), bold_border: __("太", "catpow") } },
 							{ name: "round", label: __("角丸", "catpow"), values: "round" },
 							{ name: "shadow", label: __("影", "catpow"), values: "shadow", sub: [{ label: __("内側", "catpow"), values: "inset" }] },
@@ -308,93 +225,86 @@ wp.blocks.registerBlockType("catpow/section", {
 						],
 					},
 					bind: {
-						scene: ["level2", "has-wide-contents"],
-						column: ["level3"],
+						isTypeScene: {
+							_: ["level2"],
+						},
+						isTypeArticle: {
+							_: ["level3"],
+							bodyClasses: ["hasContentWidth"],
+						},
+						isTypeColumn: {
+							_: ["level3"],
+							bodyClasses: ["hasContentWidth"],
+						},
 					},
 				},
+				"color",
+				"colorScheme",
+				"backgroundColor",
+				"backgroundImage",
+				"backgroundPattern",
+				"customContentWidth",
 			];
 			wp.hooks.applyFilters("catpow.blocks.section.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
 
-		var level = CP.getNumberClass({ attr: attributes }, "level");
+		const blockProps = useBlockProps({
+			id: anchor,
+			className: clsx("section-", classes),
+			style: vars,
+		});
 
 		return (
 			<>
 				<BlockControls>
 					<CP.AlignClassToolbar set={setAttributes} attr={attributes} />
 				</BlockControls>
-				<SectionTag id={anchor} className={classes} ref={setMainBlock} style={vars}>
-					{states.hasImage && (
-						<div className="image">
-							{states.isTemplate && imageCode ? (
-								<CP.DummyImage text={imageCode} />
-							) : (
-								<CP.SelectResponsiveImage className="image" attr={attributes} set={setAttributes} keys={imageKeys.image} size={imageSizes.image} />
-							)}
-						</div>
-					)}
-					<div className={clsx("contents", { "has-content-width": !states.hasWideContents })}>
-						{states.hasDecoration && <CP.PlacedPictures.Edit className="decoration" set={setAttributes} attr={attributes} devices={devices} keys={imageKeys.decoration} />}
-						<header className="header">
-							<div className="title">
-								{states.hasIcon && <CP.OutputIcon item={attributes} />}
-								{states.hasPrefix && (
-									<div className="prefix">
-										<RichText tagName="div" value={prefix} onChange={(prefix) => setAttributes({ prefix })} />
-									</div>
-								)}
-								{states.hasHeaderImage && (
-									<div className="image">
-										{states.isTemplate && headerImageCode ? (
-											<CP.DummyImage text={headerImageCode} />
-										) : (
-											<CP.SelectResponsiveImage className="image" set={setAttributes} attr={attributes} keys={imageKeys.headerImage} size={imageSizes.headerImage} />
-										)}
-									</div>
-								)}
-								{states.hasTitleImage ? (
-									<HeadingTag className="titleImage">
-										{states.isTemplate && titleImageCode ? (
-											<CP.DummyImage text={titleImageCode} />
-										) : (
-											<CP.SelectResponsiveImage className="image" set={setAttributes} attr={attributes} keys={imageKeys.titleImage} devices={devices} />
-										)}
-									</HeadingTag>
-								) : (
-									<RichText tagName={HeadingTag} className="heading" value={title} onChange={(title) => setAttributes({ title })} />
-								)}
-								{states.hasLead && <RichText tagName="div" className="lead" value={lead} onChange={(lead) => setAttributes({ lead })} />}
-							</div>
-
-							{states.hasHeaderBackgroundImage && (
-								<div className="background">
-									{states.isTemplate && headerBackgroundImageCode ? (
-										<CP.DummyImage text={headerBackgroundImageCode} />
-									) : (
-										<CP.SelectResponsiveImage className="image" set={setAttributes} attr={attributes} keys={imageKeys.headerBackgroundImage} />
+				<CP.Bem prefix="wp-block-catpow">
+					<SectionTag ref={setMainBlock} {...blockProps}>
+						<div className={clsx("body_", bodyClasses)}>
+							{states.hasDecoration && <CP.PlacedPictures.Edit className="decoration_" set={setAttributes} attr={attributes} devices={devices} keys={imageKeys.decoration} />}
+							<header className={clsx("header_", headerClasses)} style={headerVars}>
+								<div className={clsx("_title", titleClasses)}>
+									{states.hasIcon && <CP.OutputIcon className="_icon" item={attributes} />}
+									{states.hasPrefix && (
+										<div className="_prefix">
+											<RichText tagName="div" value={prefix} onChange={(prefix) => setAttributes({ prefix })} />
+										</div>
 									)}
+									{states.hasHeaderImage && (
+										<div className="_image">
+											{states.isTemplate && headerImageCode ? (
+												<CP.DummyImage text={headerImageCode} />
+											) : (
+												<CP.SelectResponsiveImage className="_image" set={setAttributes} attr={attributes} keys={imageKeys.headerImage} size={imageSizes.headerImage} />
+											)}
+										</div>
+									)}
+									{states.hasTitleImage ? (
+										<HeadingTag className="_titleimage">
+											{states.isTemplate && titleImageCode ? (
+												<CP.DummyImage text={titleImageCode} />
+											) : (
+												<CP.SelectResponsiveImage className="_image" set={setAttributes} attr={attributes} keys={imageKeys.titleImage} devices={devices} />
+											)}
+										</HeadingTag>
+									) : (
+										<RichText tagName={HeadingTag} className="_heading" value={title} onChange={(title) => setAttributes({ title })} />
+									)}
+									{states.hasLead && <RichText tagName="div" className="_lead" value={lead} onChange={(lead) => setAttributes({ lead })} />}
 								</div>
-							)}
-						</header>
-						<div className="text">
-							<InnerBlocks />
+							</header>
+							<div className="contents_">
+								<InnerBlocks />
+							</div>
 						</div>
-					</div>
-					{states.hasBackgroundImage && (
-						<div className="background">
-							{states.isTemplate && backgroundImageCode ? (
-								<CP.DummyImage text={backgroundImageCode} />
-							) : (
-								<CP.SelectResponsiveImage className="image" set={setAttributes} attr={attributes} keys={imageKeys.backgroundImage} />
-							)}
-						</div>
-					)}
-					{states.hasPatternImage && <style>{patternImageCss}</style>}
-					{states.hasHeaderPatternImage && <style>{headerPatternImageCss}</style>}
-					{states.hasBorderImage && <style>{borderImageCss}</style>}
-					{states.hasFrameImage && <style>{frameImageCss}</style>}
-				</SectionTag>
+						{states.hasPatternImage && <style>{patternImageCss}</style>}
+						{states.hasHeaderPatternImage && <style>{headerPatternImageCss}</style>}
+						{states.hasBorderImage && <style>{borderImageCss}</style>}
+						{states.hasFrameImage && <style>{frameImageCss}</style>}
+					</SectionTag>
+				</CP.Bem>
 				<InspectorControls>
 					<CP.ColorVarTracer target={mainBlock}>
 						<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
@@ -416,98 +326,80 @@ wp.blocks.registerBlockType("catpow/section", {
 		);
 	},
 	save({ attributes, className }) {
-		const { InnerBlocks, RichText } = wp.blockEditor;
+		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
 		const {
 			SectionTag,
 			HeadingTag,
 			anchor,
 			navIcon,
 			classes,
+			bodyClasses,
+			headerClasses,
+			titleClasses,
+			vars,
+			headerVars,
 			prefix,
 			title,
 			lead,
-			headerImageSrc,
-			headerImageSrcset,
-			headerImageAlt,
+			titleImageCode,
 			headerImageCode,
-			headerBackgroundImageCode,
-			imageSrc,
-			imageSrcset,
-			imageAlt,
-			imageCode,
-			backgroundImageSrc,
-			backgroundImageCode,
 			headerPatternImageCss,
 			patternImageCss,
 			frameImageCss,
 			borderImageCss,
-			iconSrc,
-			iconAlt,
-			vars,
 		} = attributes;
-
-		var level = CP.getNumberClass({ attr: attributes }, "level");
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, imageSizes } = CP.config.section;
 
+		const blockProps = useBlockProps.save({
+			id: anchor,
+			className: clsx("section-", classes),
+			style: vars,
+		});
+
 		return (
-			<SectionTag id={anchor} className={classes} data-icon={navIcon} style={vars}>
-				{states.hasImage && (
-					<div className="image">{states.isTemplate && imageCode ? imageCode : <CP.ResponsiveImage className="image" attr={attributes} keys={imageKeys.image} size="medium_large" />}</div>
-				)}
-				<div className={clsx("contents", { "has-content-width": !states.hasWideContents })}>
-					{states.hasDecoration && <CP.PlacedPictures className="decoration" attr={attributes} keys={imageKeys.decoration} />}
-					<header className="header">
-						<div className="title">
-							{states.hasIcon && <CP.OutputIcon item={attributes} />}
-							{states.hasPrefix && (
-								<div className="prefix">
-									<RichText.Content value={prefix} />
-								</div>
-							)}
-							{states.hasHeaderImage && (
-								<div className="image">{states.isTemplate && headerImageCode ? headerImageCode : <CP.ResponsiveImage className="image" attr={attributes} keys={imageKeys.headerImage} />}</div>
-							)}
-							{states.hasTitleImage ? (
-								<HeadingTag className="titleImage">
-									{states.isTemplate && titleImageCode ? titleImageCode : <CP.ResponsiveImage className="image" attr={attributes} keys={imageKeys.titleImage} devices={devices} />}
-								</HeadingTag>
-							) : (
-								<HeadingTag className="heading">
-									<RichText.Content value={title} />
-								</HeadingTag>
-							)}
-							{states.hasLead && (
-								<div className="lead">
-									<RichText.Content value={lead} />
-								</div>
-							)}
-						</div>
-						{states.hasHeaderBackgroundImage && (
-							<div className="background">
-								{states.isTemplate && headerBackgroundImageCode ? (
-									headerBackgroundImageCode
+			<CP.Bem prefix="wp-block-catpow">
+				<SectionTag data-icon={navIcon} {...blockProps}>
+					<div className={clsx("body_", bodyClasses)}>
+						{states.hasDecoration && <CP.PlacedPictures className="decoration_" attr={attributes} keys={imageKeys.decoration} />}
+						<header className={clsx("header_", headerClasses)} style={headerVars}>
+							<div className={clsx("_title", titleClasses)}>
+								{states.hasIcon && <CP.OutputIcon className="_icon" item={attributes} />}
+								{states.hasPrefix && (
+									<div className="_prefix">
+										<RichText.Content value={prefix} />
+									</div>
+								)}
+								{states.hasHeaderImage && (
+									<div className="_image">{states.isTemplate && headerImageCode ? headerImageCode : <CP.ResponsiveImage className="_image" attr={attributes} keys={imageKeys.headerImage} />}</div>
+								)}
+								{states.hasTitleImage ? (
+									<HeadingTag className="_titleimage">
+										{states.isTemplate && titleImageCode ? titleImageCode : <CP.ResponsiveImage className="_image" attr={attributes} keys={imageKeys.titleImage} devices={devices} />}
+									</HeadingTag>
 								) : (
-									<CP.ResponsiveImage className="image" attr={attributes} keys={imageKeys.headerBackgroundImage} devices={devices} />
+									<HeadingTag className="_heading">
+										<RichText.Content value={title} />
+									</HeadingTag>
+								)}
+								{states.hasLead && (
+									<div className="_lead">
+										<RichText.Content value={lead} />
+									</div>
 								)}
 							</div>
-						)}
-					</header>
-					<div className="text">
-						<InnerBlocks.Content />
+						</header>
+						<div className="contents_">
+							<InnerBlocks.Content />
+						</div>
 					</div>
-				</div>
-				{states.hasBackgroundImage && (
-					<div className="background">
-						{states.isTemplate && backgroundImageCode ? backgroundImageCode : <CP.ResponsiveImage className="image" attr={attributes} keys={imageKeys.backgroundImage} devices={devices} />}
-					</div>
-				)}
-				{states.hasPatternImage && <style className="patternImageCss">{patternImageCss}</style>}
-				{states.hasHeaderPatternImage && <style className="headerPatternImageCss">{headerPatternImageCss}</style>}
-				{states.hasBorderImage && <style className="borderImageCss">{borderImageCss}</style>}
-				{states.hasFrameImage && <style className="frameImageCss">{frameImageCss}</style>}
-			</SectionTag>
+					{states.hasPatternImage && <style className="patternImageCss">{patternImageCss}</style>}
+					{states.hasHeaderPatternImage && <style className="headerPatternImageCss">{headerPatternImageCss}</style>}
+					{states.hasBorderImage && <style className="borderImageCss">{borderImageCss}</style>}
+					{states.hasFrameImage && <style className="frameImageCss">{frameImageCss}</style>}
+				</SectionTag>
+			</CP.Bem>
 		);
 	},
 });

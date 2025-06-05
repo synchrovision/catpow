@@ -1,0 +1,92 @@
+@import "config/style_config.scss";
+
+.wp-block-catpow-section{
+	$block:&;
+	@include bnd((d:b,mg:0 a));
+	&__body{
+		@include bnd((mgi:a));
+	}
+	&.is-type-scene &{
+		@include bnd((p:r));
+		@include bg((c:bx));
+		&__body{
+			@include bnd((p:r,z:1));
+		}
+		&__header{
+			@include bnd((p:r));
+			&-image{
+				@include bnd((d:b));
+				@include txt((a:c));
+				&-img{
+					@include bnd((w:a,h:8rem,of:c,op:c));
+				}
+			}
+			&-title{
+				@include bnd((mgi:a));
+				&-heading{
+					@include bnd((pd:2rem 1rem,p:r));
+					@include txt((a:c,p:5rem,w:l,c:i,b:k));
+				}
+				&-titleimage{
+					@include bnd((w:a c,pd:0,mg:0 a));
+					&-image{
+						&-img{
+							@include bnd((d:b,w:f,h:a));
+						}
+					}
+				}
+				&-lead{
+					@include bnd((pd:2rem 1rem,p:r));
+					@include txt((a:c,p:2rem,w:l,c:i));
+				}
+			}
+		}
+		&__contents{
+		}
+	}
+	&.is-type-article &{
+		&__body{
+			@include bnd((p:r,z:1));
+		}
+		&__header{
+			&-title{
+				&-heading{
+					@include bnd((pd:1rem 0,p:r));
+					@include bdr((p:b,s:s,w:1));
+					@include txt((a:l,p:2rem,w:r,c:ax,b:k));
+				}
+				&-lead{
+					@include bnd((pd:1rem 2rem));
+					@include txt((a:j,p:1.4rem,w:r,c:tx));
+				}
+			}
+		}
+		&__contents{
+		}
+	}
+	&.is-type-column{
+		@include bnd((w:a 120rem,mg:2rem a,o:h));
+		@include bg((c:bx));
+		@include shd((b:3));
+		@include bdr((s:s,w:1,c:m 30,r:10));
+		&__body{
+			@include bnd((pd:2rem,bs:b,p:r,z:1));
+		}
+		&__header{
+			@include bnd((pd:3rem a));
+			&-title{
+				&-heading{
+					@include bnd((pd:1rem 1rem,mgb:6rem,p:r));
+					@include bdr((p:b,s:s,w:1));
+					@include txt((a:c,p:2rem,w:l,c:ax,b:k));
+				}
+					&-lead{
+					@include bnd((pd:3rem 1rem,p:r));
+					@include txt((a:c,p:1.5rem,w:l,c:tx));
+				}
+			}
+		}
+		&__contents{
+		}
+	}
+}
