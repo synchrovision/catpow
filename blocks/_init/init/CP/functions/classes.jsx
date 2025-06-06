@@ -139,11 +139,11 @@ export const getBindClasses = (prm) => {
 };
 export const getClassFlagsByValue = (prm, primaryClassKey = "classes") => {
 	const cacheKeys = [CP.getClassFlagsByValue, prm, primaryClassKey];
-	if (cache.has(cacheKeys)) {
-		return cache.get(cacheKeys);
+	if (CP.cache.has(cacheKeys)) {
+		return CP.cache.get(cacheKeys);
 	}
 	const flags = {};
-	cache.set(cacheKeys, flags);
+	CP.cache.set(cacheKeys, flags);
 	if (!prm || typeof prm !== "object" || !prm.values) {
 		return flags;
 	}
@@ -169,11 +169,11 @@ export const getClassFlagsByValue = (prm, primaryClassKey = "classes") => {
 };
 export const getAllClassFlags = (prm, primaryClassKey = "classes") => {
 	const cacheKeys = [CP.getAllClassFlags, prm, primaryClassKey];
-	if (cache.has(cacheKeys)) {
-		return cache.get(cacheKeys);
+	if (CP.cache.has(cacheKeys)) {
+		return CP.cache.get(cacheKeys);
 	}
 	const flags = {};
-	cache.set(cacheKeys, flags);
+	CP.cache.set(cacheKeys, flags);
 	if (!prm || typeof prm !== "object" || !prm.values) {
 		return flags;
 	}
@@ -182,11 +182,11 @@ export const getAllClassFlags = (prm, primaryClassKey = "classes") => {
 };
 export const getBindClassFlagsByValue = (prm, primaryClassKey = "classes") => {
 	const cacheKeys = [CP.getBindClassFlagsByValue, prm, primaryClassKey];
-	if (cache.has(cacheKeys)) {
-		return cache.get(cacheKeys);
+	if (CP.cache.has(cacheKeys)) {
+		return CP.cache.get(cacheKeys);
 	}
 	const flags = {};
-	cache.set(cacheKeys, flags);
+	CP.cache.set(cacheKeys, flags);
 	if (!prm || typeof prm !== "object" || !prm.values) {
 		return flags;
 	}

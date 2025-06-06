@@ -846,7 +846,7 @@
     VerticalAlignClassToolbar: () => VerticalAlignClassToolbar,
     addAllClassFlags: () => addAllClassFlags,
     addBindClassFlags: () => addBindClassFlags,
-    cache: () => cache2,
+    cache: () => cache,
     classNamesToFlags: () => classNamesToFlags,
     cloneItem: () => cloneItem,
     colorClassPattern: () => colorClassPattern,
@@ -4436,7 +4436,7 @@
     const { useState: useState4, useRef: useRef4, useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
     const { ColorPicker, CheckboxControl, Flex, FlexItem, FlexBlock, Button, Popover: Popover2 } = wp.components;
     const { label = "\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", value: value2, onChange } = props;
-    const cache3 = useRef4(value2);
+    const cache2 = useRef4(value2);
     const [index, setIndex] = useState4(-1);
     const [useCustomColor, setUseCustomColor] = useState4(Object.keys(value2).length > 0);
     const classes = bem("cp-customcolorvars");
@@ -4527,10 +4527,10 @@
         label,
         onChange: () => {
           if (useCustomColor) {
-            cache3.current = value2;
+            cache2.current = value2;
             clearAllColorVars();
           } else {
-            onChange(cache3.current);
+            onChange(cache2.current);
           }
           setUseCustomColor(!useCustomColor);
         },
@@ -4591,7 +4591,7 @@
   };
 
   // ../blocks/_init/init/CP/data/store.js
-  var cache2 = deepMap();
+  var cache = deepMap();
   var filters = {};
   var config = {};
 
@@ -5352,11 +5352,11 @@
   };
   var getClassFlagsByValue = (prm, primaryClassKey = "classes") => {
     const cacheKeys = [CP.getClassFlagsByValue, prm, primaryClassKey];
-    if (cache.has(cacheKeys)) {
-      return cache.get(cacheKeys);
+    if (CP.cache.has(cacheKeys)) {
+      return CP.cache.get(cacheKeys);
     }
     const flags = {};
-    cache.set(cacheKeys, flags);
+    CP.cache.set(cacheKeys, flags);
     if (!prm || typeof prm !== "object" || !prm.values) {
       return flags;
     }
@@ -5382,11 +5382,11 @@
   };
   var getAllClassFlags = (prm, primaryClassKey = "classes") => {
     const cacheKeys = [CP.getAllClassFlags, prm, primaryClassKey];
-    if (cache.has(cacheKeys)) {
-      return cache.get(cacheKeys);
+    if (CP.cache.has(cacheKeys)) {
+      return CP.cache.get(cacheKeys);
     }
     const flags = {};
-    cache.set(cacheKeys, flags);
+    CP.cache.set(cacheKeys, flags);
     if (!prm || typeof prm !== "object" || !prm.values) {
       return flags;
     }
@@ -5395,11 +5395,11 @@
   };
   var getBindClassFlagsByValue = (prm, primaryClassKey = "classes") => {
     const cacheKeys = [CP.getBindClassFlagsByValue, prm, primaryClassKey];
-    if (cache.has(cacheKeys)) {
-      return cache.get(cacheKeys);
+    if (CP.cache.has(cacheKeys)) {
+      return CP.cache.get(cacheKeys);
     }
     const flags = {};
-    cache.set(cacheKeys, flags);
+    CP.cache.set(cacheKeys, flags);
     if (!prm || typeof prm !== "object" || !prm.values) {
       return flags;
     }
