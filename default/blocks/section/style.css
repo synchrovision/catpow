@@ -27,6 +27,7 @@
   object-position: center;
 }
 .wp-block-catpow-section.is-type-scene .wp-block-catpow-section__header-title {
+  position: relative;
   margin-inline: auto;
 }
 .wp-block-catpow-section.is-type-scene .wp-block-catpow-section__header-title-heading {

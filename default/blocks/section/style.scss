@@ -22,7 +22,7 @@
 				}
 			}
 			&-title{
-				@include bnd((mgi:a));
+				@include bnd((p:r,mgi:a));
 				&-heading{
 					@include bnd((pd:2rem 1rem,p:r));
 					@include txt((a:c,p:5rem,w:l,c:i,b:k));
