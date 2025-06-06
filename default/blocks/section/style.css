@@ -1,6 +1,6 @@
 .wp-block-catpow-section {
   display: block;
-  margin: 0px auto;
+  margin-inline: auto;
 }
 .wp-block-catpow-section__body {
   margin-inline: auto;

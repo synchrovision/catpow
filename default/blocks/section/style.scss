@@ -2,7 +2,7 @@
 
 .wp-block-catpow-section{
 	$block:&;
-	@include bnd((d:b,mg:0 a));
+	@include bnd((d:b,mgi:a));
 	&__body{
 		@include bnd((mgi:a));
 	}
