@@ -1299,7 +1299,7 @@ CP.example = {
 		title: [CP.dummyText.title],
 		headerText: [CP.dummyText.title],
 		footerText: [CP.dummyText.footer],
-		read: [CP.dummyText.lead],
+		lead: [CP.dummyText.lead],
 		text: [CP.dummyText.text],
 	},
 	innerBlocks: [
