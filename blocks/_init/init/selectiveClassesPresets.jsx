@@ -76,15 +76,17 @@ export const selectiveClassesPresets = {
 			hasBackgroundColorAlt: __("強調", "catpow"),
 		},
 	},
-	backgroundImage({ preset, vars = "vars", ...otherParams }) {
+	backgroundImage({ preset, vars = "vars", classKey, ...otherParams }) {
 		return {
 			name: "backgroundImage",
 			label: __("背景画像", "catpow"),
 			values: "hasBackgroundImage",
+			classKey,
 			sub: [
 				{
 					name: "fixed",
 					label: __("固定", "catpow"),
+					classKey,
 					values: "hasBackgroundImageFixed",
 				},
 				{
