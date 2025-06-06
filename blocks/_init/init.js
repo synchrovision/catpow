@@ -4589,6 +4589,10 @@
       }
     ]
   };
+  wp.domReady(() => {
+    wp.hooks.applyFilters("catpow.blocks.dummyText", dummyText);
+    wp.hooks.applyFilters("catpow.blocks.example", example);
+  });
 
   // ../blocks/_init/init/CP/data/store.js
   var cache = deepMap();
