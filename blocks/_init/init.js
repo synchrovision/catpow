@@ -2246,7 +2246,7 @@
       title: [CP.dummyText.title],
       headerText: [CP.dummyText.title],
       footerText: [CP.dummyText.footer],
-      read: [CP.dummyText.lead],
+      lead: [CP.dummyText.lead],
       text: [CP.dummyText.text]
     },
     innerBlocks: [
@@ -4231,15 +4231,17 @@
         hasBackgroundColorAlt: __2("\u5F37\u8ABF", "catpow")
       }
     },
-    backgroundImage({ preset, vars = "vars", ...otherParams }) {
+    backgroundImage({ preset, vars = "vars", classKey, ...otherParams }) {
       return {
         name: "backgroundImage",
         label: __2("\u80CC\u666F\u753B\u50CF", "catpow"),
         values: "hasBackgroundImage",
+        classKey,
         sub: [
           {
             name: "fixed",
             label: __2("\u56FA\u5B9A", "catpow"),
+            classKey,
             values: "hasBackgroundImageFixed"
           },
           {
