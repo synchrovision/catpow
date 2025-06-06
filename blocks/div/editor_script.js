@@ -28,8 +28,8 @@
       const { customColorVars, anchor, classes, vars, color, patternImageCss, frameImageCss, borderImageCss } = attributes;
       const states = CP.wordsToFlags(classes);
       const { devices, imageKeys } = CP.config.div;
-      CP.inheritColor(props, ["iconImageSrc", "patternImageCss", "frameImageCss", "borderImageCss"]);
-      CP.manageStyleData(props, ["patternImageCss", "frameImageCss", "borderImageCss"]);
+      CP.useInheritColor(props, ["iconImageSrc", "patternImageCss", "frameImageCss", "borderImageCss"]);
+      CP.useManageStyleData(props, ["patternImageCss", "frameImageCss", "borderImageCss"]);
       const selectiveClasses = useMemo(() => {
         const { devices: devices2, imageKeys: imageKeys2 } = CP.config.div;
         const selectiveClasses2 = [
