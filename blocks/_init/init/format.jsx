@@ -1,5 +1,4 @@
-﻿import { CP } from "./CP.jsx";
-const { __ } = wp.i18n;
+﻿const { __ } = wp.i18n;
 const { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
 const { Popover, BaseControle, TextControl, RangeControl, Card, CardBody, ToolbarGroup } = wp.components;
 const { useState, useMemo, useCallback, useReducer, useEffect } = wp.element;

@@ -43,31 +43,31 @@
     default: () => react_default,
     forwardRef: () => forwardRef,
     isValidElement: () => isValidElement,
-    useCallback: () => useCallback2,
+    useCallback: () => useCallback,
     useContext: () => useContext,
-    useEffect: () => useEffect2,
+    useEffect: () => useEffect,
     useLayoutEffect: () => useLayoutEffect,
-    useMemo: () => useMemo3,
-    useReducer: () => useReducer2,
+    useMemo: () => useMemo2,
+    useReducer: () => useReducer,
     useRef: () => useRef,
-    useState: () => useState2,
+    useState: () => useState,
     version: () => version
   });
-  var react_default, version, useState2, useEffect2, useLayoutEffect, useRef, forwardRef, useMemo3, useCallback2, createContext, useContext, useReducer2, createElement, cloneElement, isValidElement, Fragment;
+  var react_default, version, useState, useEffect, useLayoutEffect, useRef, forwardRef, useMemo2, useCallback, createContext, useContext, useReducer, createElement, cloneElement, isValidElement, Fragment;
   var init_react = __esm({
     "react-global:react"() {
       react_default = window.wp.element;
       version = "18.0.0";
-      useState2 = wp.element.useState;
-      useEffect2 = wp.element.useEffect;
+      useState = wp.element.useState;
+      useEffect = wp.element.useEffect;
       useLayoutEffect = wp.element.useLayoutEffect;
       useRef = wp.element.useRef;
       forwardRef = wp.element.forwardRef;
-      useMemo3 = wp.element.useMemo;
-      useCallback2 = wp.element.useCallback;
+      useMemo2 = wp.element.useMemo;
+      useCallback = wp.element.useCallback;
       createContext = wp.element.createContext;
       useContext = wp.element.useContext;
-      useReducer2 = wp.element.useReducer;
+      useReducer = wp.element.useReducer;
       createElement = wp.element.createElement;
       cloneElement = wp.element.cloneElement;
       isValidElement = wp.element.isValidElement;
@@ -789,69 +789,236 @@
     }
   });
 
-  // ../blocks/_init/init/filter.jsx
-  wp.blocks.registerBlockStyle("core/heading", { name: "header", label: "header" });
-  wp.blocks.registerBlockStyle("core/heading", { name: "headline", label: "headline" });
-  wp.blocks.registerBlockStyle("core/heading", { name: "catch", label: "catch" });
-  wp.blocks.registerBlockStyle("core/paragraph", { name: "message", label: "message" });
-  wp.blocks.registerBlockStyle("core/paragraph", { name: "caption", label: "caption" });
-  wp.blocks.registerBlockStyle("core/list", { name: "annotation", label: "annotation" });
-  wp.blocks.registerBlockStyle("core/list", { name: "circle", label: "circle" });
-  wp.blocks.registerBlockStyle("core/list", { name: "caret", label: "caret" });
-  wp.blocks.registerBlockStyle("core/list", { name: "square", label: "square" });
-  wp.blocks.registerBlockStyle("core/list", { name: "star", label: "star" });
-  wp.blocks.registerBlockStyle("core/list", { name: "check", label: "check" });
-  wp.blocks.registerBlockStyle("core/list", { name: "alert", label: "alert" });
-  wp.blocks.registerBlockStyle("core/list", { name: "caution", label: "caution" });
-  wp.blocks.registerBlockStyle("core/columns", { name: "regular", label: "regular" });
-  wp.blocks.registerBlockStyle("core/columns", { name: "panel", label: "panel" });
-  wp.blocks.registerBlockStyle("core/image", { name: "snap", label: "snap" });
-  wp.blocks.registerBlockStyle("core/image", { name: "circle", label: "circle" });
-  wp.blocks.registerBlockStyle("core/image", { name: "cover", label: "cover" });
-  wp.blocks.registerBlockStyle("core/video", { name: "thumbnail", label: "thumbnail" });
-  wp.blocks.registerBlockStyle("core/video", { name: "medium", label: "medium" });
-  wp.blocks.registerBlockStyle("core/video", { name: "large", label: "large" });
-  wp.blocks.registerBlockStyle("core/video", { name: "cover", label: "cover" });
-  wp.blocks.registerBlockStyle("core/media-text", { name: "snap", label: "snap" });
-  wp.blocks.registerBlockStyle("core/media-text", { name: "panel", label: "panel" });
-  wp.blocks.registerBlockStyle("core/code", { name: "js", label: "js" });
-  wp.blocks.registerBlockStyle("core/code", { name: "css", label: "css" });
-  wp.blocks.registerBlockStyle("core/code", { name: "scss", label: "scss" });
-  wp.blocks.registerBlockStyle("core/code", { name: "php", label: "php" });
-  wp.blocks.registerBlockStyle("core/code", { name: "html", label: "html" });
-  wp.hooks.addFilter("blocks.registerBlockType", "catpow/editor", function(settings, name) {
-    switch (name) {
-      case "core/heading":
-        settings.attributes.className.default = "is-style-headline";
-        break;
-      case "core/paragraph":
-        settings.attributes.fontSize.default = "regular";
-        break;
-      case "core/list":
-        settings.attributes.className.default = "is-style-check";
-        break;
-      case "core/columns":
-        settings.attributes.className.default = "is-style-panel";
-        break;
-    }
-    return settings;
+  // ../blocks/_init/init/CP/index.js
+  var CP_exports = {};
+  __export(CP_exports, {
+    AlignClassToolbar: () => AlignClassToolbar,
+    AlignmentIcon: () => AlignmentIcon,
+    Bem: () => Bem,
+    BoundingBox: () => BoundingBox,
+    ColorVarTracer: () => ColorVarTracer,
+    ConfigIcon: () => ConfigIcon,
+    CustomColorVars: () => CustomColorVars,
+    DataInputTable: () => DataInputTable,
+    DataSetInput: () => DataSetInput,
+    DataStructure: () => DataStructure,
+    DataStructureItem: () => DataStructureItem,
+    DummyImage: () => DummyImage,
+    DynamicInput: () => DynamicInput,
+    EditItemsTable: () => EditItemsTable,
+    EventInputCards: () => EventInputCards,
+    ImporterCSVPanel: () => ImporterCSVPanel,
+    InputIcon: () => InputIcon,
+    Item: () => Item,
+    ItemControl: () => ItemControl,
+    ItemControlInfoPanel: () => ItemControlInfoPanel,
+    Link: () => Link,
+    Loop: () => Loop,
+    Message: () => Message,
+    NavBar: () => NavBar,
+    OutputIcon: () => OutputIcon,
+    PlacedPictures: () => PlacedPictures,
+    PositionInput: () => PositionInput2,
+    RTF: () => RTF,
+    ResponsiveImage: () => ResponsiveImage,
+    ResponsiveImageBody: () => ResponsiveImageBody,
+    SelectBlendMode: () => SelectBlendMode,
+    SelectBreakPointToolbar: () => SelectBreakPointToolbar,
+    SelectButtons: () => SelectButtons,
+    SelectClassPanel: () => SelectClassPanel,
+    SelectClassPanelContext: () => SelectClassPanelContext,
+    SelectColorClass: () => SelectColorClass,
+    SelectColors: () => SelectColors,
+    SelectDeviceToolbar: () => SelectDeviceToolbar,
+    SelectGridButtons: () => SelectGridButtons,
+    SelectModeToolbar: () => SelectModeToolbar,
+    SelectPatternClass: () => SelectPatternClass,
+    SelectPictureSources: () => SelectPictureSources,
+    SelectPositionClass: () => SelectPositionClass,
+    SelectPreparedImage: () => SelectPreparedImage,
+    SelectPreparedImageSet: () => SelectPreparedImageSet,
+    SelectResponsiveImage: () => SelectResponsiveImage,
+    SelectSize: () => SelectSize,
+    SelectThemeColor: () => SelectThemeColor,
+    ServerSideRender: () => ServerSideRender,
+    ServerSideRenderPart: () => ServerSideRenderPart,
+    StandardIcon: () => StandardIcon,
+    VerticalAlignClassToolbar: () => VerticalAlignClassToolbar,
+    addAllClassFlags: () => addAllClassFlags,
+    addBindClassFlags: () => addBindClassFlags,
+    cache: () => cache2,
+    classNamesToFlags: () => classNamesToFlags,
+    cloneItem: () => cloneItem,
+    colorClassPattern: () => colorClassPattern,
+    colorClassProxy: () => colorClassProxy,
+    colorClassProxyHandler: () => colorClassProxyHandler,
+    colorToneClassPattern: () => colorToneClassPattern,
+    colorToneValuePattern: () => colorToneValuePattern,
+    colorToneValueToClasses: () => colorToneValueToClasses,
+    config: () => config,
+    convertRowsToItems: () => convertRowsToItems,
+    createBlocks: () => createBlocks,
+    createGridItemStyleCode: () => createGridItemStyleCode,
+    createGridItemStyleCodeData: () => createGridItemStyleCodeData,
+    createGridStyleCode: () => createGridStyleCode,
+    createGridStyleCodeData: () => createGridStyleCodeData,
+    createStyleCode: () => createStyleCode,
+    createStyleCodeWithMediaQuery: () => createStyleCodeWithMediaQuery,
+    createStyleString: () => createStyleString,
+    dataListPresets: () => dataListPresets,
+    deleteItem: () => deleteItem,
+    devices: () => devices,
+    downItem: () => downItem,
+    dummyText: () => dummyText,
+    example: () => example,
+    extractColorToneValue: () => extractColorToneValue,
+    extractColorToneValues: () => extractColorToneValues,
+    extractEventDispatcherAttributes: () => extractEventDispatcherAttributes,
+    filterArrayWithFlags: () => filterArrayWithFlags,
+    filterFlags: () => filterFlags,
+    filters: () => filters,
+    finderProxy: () => finderProxy,
+    flagsToClassNames: () => flagsToClassNames,
+    flagsToWords: () => flagsToWords,
+    generateColorClass: () => generateColorClass,
+    generateColorToneClasses: () => generateColorToneClasses,
+    generateColorToneValue: () => generateColorToneValue,
+    generateToneClass: () => generateToneClass,
+    getAllClassFlags: () => getAllClassFlags,
+    getAllSubClasses: () => getAllSubClasses,
+    getBindClassFlagsByValue: () => getBindClassFlagsByValue,
+    getBindClasses: () => getBindClasses,
+    getClassFlagsByValue: () => getClassFlagsByValue,
+    getColor: () => getColor,
+    getDataListId: () => getDataListId,
+    getImageSizesForDevices: () => getImageSizesForDevices,
+    getItemByKeyAndIndex: () => getItemByKeyAndIndex,
+    getItemColor: () => getItemColor,
+    getItemPattern: () => getItemPattern,
+    getItemSelectiveClass: () => getItemSelectiveClass,
+    getJsonValue: () => getJsonValue,
+    getMediaQueryKeyForDevice: () => getMediaQueryKeyForDevice,
+    getNumberClass: () => getNumberClass,
+    getPattern: () => getPattern,
+    getPictureSoucesAttributes: () => getPictureSoucesAttributes,
+    getPictureSoucesAttributesDefaultValueForDevices: () => getPictureSoucesAttributesDefaultValueForDevices,
+    getPictureSoucesAttributesForDevices: () => getPictureSoucesAttributesForDevices,
+    getSelecedFormatElement: () => getSelecedFormatElement,
+    getSelectiveClass: () => getSelectiveClass,
+    getSubClasses: () => getSubClasses,
+    getUpdatesFromStatesAndClasssFlags: () => getUpdatesFromStatesAndClasssFlags,
+    getUrlInStyleCode: () => getUrlInStyleCode,
+    hasClass: () => hasClass,
+    hasItemClass: () => hasItemClass,
+    hasJsonValue: () => hasJsonValue,
+    imageSrcOrDummy: () => imageSrcOrDummy,
+    isRowsConvertibleToItems: () => isRowsConvertibleToItems,
+    listedConvertibles: () => listedConvertibles,
+    parseCSV: () => parseCSV,
+    parseColorClass: () => parseColorClass,
+    parseColorToneValue: () => parseColorToneValue,
+    parseGradientStyleValue: () => parseGradientStyleValue,
+    parseSelections: () => parseSelections,
+    parseStyleCode: () => parseStyleCode,
+    parseStyleCodeWithMediaQuery: () => parseStyleCodeWithMediaQuery,
+    parseStyleString: () => parseStyleString,
+    parseToneClass: () => parseToneClass,
+    resolveSelectiveClassesPresets: () => resolveSelectiveClassesPresets,
+    saveItem: () => saveItem,
+    selectImage: () => selectImage,
+    selectNextItem: () => selectNextItem,
+    selectPrevItem: () => selectPrevItem,
+    selectiveClassesPresets: () => selectiveClassesPresets,
+    setJsonValue: () => setJsonValue,
+    setJsonValues: () => setJsonValues,
+    switchColor: () => switchColor,
+    switchItemColor: () => switchItemColor,
+    switchItemPattern: () => switchItemPattern,
+    switchItemSelectiveClass: () => switchItemSelectiveClass,
+    switchJsonValue: () => switchJsonValue,
+    switchNumberClass: () => switchNumberClass,
+    switchPattern: () => switchPattern,
+    switchSelectiveClass: () => switchSelectiveClass,
+    tableConvertibles: () => tableConvertibles,
+    testFlags: () => testFlags,
+    toggleClass: () => toggleClass,
+    toggleItemClass: () => toggleItemClass,
+    toneClassPattern: () => toneClassPattern,
+    translateCssVal: () => translateCssVal,
+    upItem: () => upItem,
+    updateItemByKeyAndIndex: () => updateItemByKeyAndIndex,
+    useInheritColor: () => useInheritColor,
+    useManageStyleData: () => useManageStyleData,
+    wordsToFlags: () => wordsToFlags
   });
-  wp.hooks.addFilter(
-    "editor.BlockEdit",
-    "catpow/editor",
-    wp.compose.createHigherOrderComponent(function(BlockEdit) {
-      return function(props) {
-        var content = wp.element.createElement(BlockEdit, props);
-        if ((props.name === "core/columns" || props.name === "core/media-text") && typeof props.insertBlocksAfter === "undefined") {
-          return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", null));
-        }
-        return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, content);
-      };
-    }, "allowColumnStyle")
-  );
+
+  // ../blocks/_init/init/CP/components/AlignmentIcon.jsx
+  var AlignmentIcon = (props) => {
+    const { icon } = props;
+    switch (icon) {
+      case "top":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "10", y: "3", width: "8", height: "11" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "3", width: "7", height: "15" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "1", width: "18", height: "1" }));
+      case "middle":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("polygon", { points: "1.5 17.5 8.5 17.5 8.5 10.5 9.5 10.5 9.5 15.5 17.5 15.5 17.5 10.5 18.5 10.5 18.5 9.5 17.5 9.5 17.5 4.5 9.5 4.5 9.5 9.5 8.5 9.5 8.5 2.5 1.5 2.5 1.5 9.5 .5 9.5 .5 10.5 1.5 10.5 1.5 17.5" }));
+      case "bottom":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "10", y: "6", width: "8", height: "11" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "2", width: "7", height: "15" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "18", width: "18", height: "1" }));
+      case "left":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "3", y: "2", width: "11", height: "8" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "3", y: "11", width: "15", height: "7" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "1", width: "1", height: "18" }));
+      case "center":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("polygon", { points: "9 19 10 19 10 18 17 18 17 11 10 11 10 10 15 10 15 2 10 2 10 1 9 1 9 2 4 2 4 10 9 10 9 11 2 11 2 18 9 18 9 19" }));
+      case "right":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "6", y: "2", width: "11", height: "8" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "11", width: "15", height: "7" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "18", y: "1", width: "1", height: "18" }));
+      case "evenTop":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "3", y: "3", width: "14", height: "5" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "12", width: "16", height: "7" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "1", width: "18", height: "1" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "10", width: "18", height: "1" }));
+      case "evenMiddle":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("polygon", { points: "17 2 3 2 3 4 1 4 1 5 3 5 3 7 17 7 17 5 19 5 19 4 17 4 17 2" }), /* @__PURE__ */ wp.element.createElement("polygon", { points: "18 11 2 11 2 14 1 14 1 15 2 15 2 18 18 18 18 15 19 15 19 14 18 14 18 11" }));
+      case "evenBottom":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "3", y: "1", width: "14", height: "5" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "10", width: "16", height: "7" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "7", width: "18", height: "1" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "18", width: "18", height: "1" }));
+      case "evenLeft":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "3", y: "3", width: "5", height: "14" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "12", y: "2", width: "7", height: "16" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "1", width: "1", height: "18" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "10", y: "1", width: "1", height: "18" }));
+      case "evenCenter":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("polygon", { points: "4 1 4 3 2 3 2 17 4 17 4 19 5 19 5 17 7 17 7 3 5 3 5 1 4 1" }), /* @__PURE__ */ wp.element.createElement("polygon", { points: "15 1 14 1 14 2 11 2 11 18 14 18 14 19 15 19 15 18 18 18 18 2 15 2 15 1" }));
+      case "evenRight":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "3", width: "5", height: "14" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "10", y: "2", width: "7", height: "16" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "7", y: "1", width: "1", height: "18" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "18", y: "1", width: "1", height: "18" }));
+      case "evenSpaceV":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "4", y: "2", width: "13", height: "6" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "4", y: "11", width: "14", height: "7" }), /* @__PURE__ */ wp.element.createElement("polygon", { points: "3 10 3 9 4 9 4 8 3 8 3 7 2 7 2 8 1 8 1 9 2 9 2 10 1 10 1 11 2 11 2 12 3 12 3 11 4 11 4 10 3 10" }));
+      case "evenSpaceH":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "4", width: "6", height: "13" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "11", y: "4", width: "7", height: "14" }), /* @__PURE__ */ wp.element.createElement("polygon", { points: "12 3 12 2 11 2 11 1 10 1 10 2 9 2 9 1 8 1 8 2 7 2 7 3 8 3 8 4 9 4 9 3 10 3 10 4 11 4 11 3 12 3" }));
+    }
+  };
+
+  // ../blocks/_init/init/CP/components/ConfigIcon.jsx
+  var ConfigIcon = (props) => {
+    const { icon } = props;
+    switch (icon) {
+      case "json":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, " ", /* @__PURE__ */ wp.element.createElement("path", { d: "m.23,11.13v-2.28c.46-.03.81-.1,1.05-.21.23-.11.44-.31.61-.57.17-.27.29-.61.35-1.01.05-.3.08-.83.08-1.59,0-1.23.06-2.09.17-2.57.11-.48.32-.87.62-1.17.3-.29.73-.53,1.3-.7.39-.11.99-.17,1.82-.17h.5v2.27c-.7,0-1.15.04-1.35.12-.2.08-.35.2-.44.36-.1.16-.14.44-.14.83s-.03,1.16-.09,2.27c-.03.63-.11,1.14-.25,1.52-.13.39-.3.71-.51.96-.21.25-.52.52-.95.79.37.21.68.47.92.75.24.29.42.64.55,1.05.13.41.21.96.25,1.65.04,1.05.07,1.72.07,2.01,0,.42.05.71.15.87.1.16.25.29.46.38.21.08.65.13,1.33.13v2.28h-.5c-.85,0-1.51-.07-1.97-.2-.46-.14-.84-.36-1.15-.68s-.52-.71-.63-1.17c-.11-.47-.16-1.2-.16-2.2,0-1.17-.05-1.92-.15-2.27-.14-.51-.35-.87-.63-1.09-.28-.22-.71-.34-1.3-.38Z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "m19.56,11.13c-.46.03-.81.1-1.04.21-.23.11-.44.31-.6.58s-.29.61-.36,1.01c-.05.3-.08.83-.08,1.58,0,1.23-.06,2.09-.17,2.57-.11.49-.31.88-.61,1.17-.3.29-.74.53-1.31.7-.39.11-.99.17-1.82.17h-.5v-2.28c.68,0,1.12-.04,1.33-.13.21-.09.36-.21.46-.37.1-.16.15-.44.15-.82,0-.39.03-1.12.08-2.21.03-.66.12-1.19.26-1.58.14-.4.32-.73.56-1.01.23-.28.53-.52.89-.73-.47-.3-.81-.6-1.03-.89-.3-.42-.5-.95-.61-1.6-.07-.44-.12-1.42-.15-2.93,0-.48-.05-.79-.13-.95-.08-.16-.22-.28-.43-.37s-.67-.13-1.38-.13V.86h.5c.86,0,1.51.07,1.97.2s.84.36,1.15.68c.31.32.52.71.63,1.18.11.47.17,1.2.17,2.2,0,1.16.05,1.92.14,2.27.14.51.35.87.64,1.09.29.22.72.34,1.3.38v2.28Z" }));
+      case "light":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("path", { d: "m10,5c-2.76,0-5,2.24-5,5s2.24,5,5,5,5-2.24,5-5-2.24-5-5-5Zm0,9c-2.21,0-4-1.79-4-4s1.79-4,4-4,4,1.79,4,4-1.79,4-4,4Z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "m3.5,10.5H1c-.28,0-.5-.22-.5-.5s.22-.5.5-.5h2.5c.28,0,.5.22.5.5s-.22.5-.5.5ZM10,.5c-.28,0-.5.22-.5.5v2.5c0,.28.22.5.5.5s.5-.22.5-.5V1c0-.28-.22-.5-.5-.5Zm0,15.5c-.28,0-.5.22-.5.5v2.5c0,.28.22.5.5.5s.5-.22.5-.5v-2.5c0-.28-.22-.5-.5-.5ZM3.99,3.28c-.2-.2-.51-.2-.71,0-.2.2-.2.51,0,.71l1.77,1.77c.2.2.51.2.71,0,.2-.2.2-.51,0-.71l-1.77-1.77Zm10.96,10.96c-.2-.2-.51-.2-.71,0s-.2.51,0,.71l1.77,1.77c.2.2.51.2.71,0s.2-.51,0-.71l-1.77-1.77Zm4.05-4.74h-2.5c-.28,0-.5.22-.5.5s.22.5.5.5h2.5c.28,0,.5-.22.5-.5s-.22-.5-.5-.5Zm-13.95,4.74l-1.77,1.77c-.2.2-.2.51,0,.71.2.2.51.2.71,0l1.77-1.77c.2-.2.2-.51,0-.71-.2-.2-.51-.2-.71,0ZM14.95,5.76l1.77-1.77c.2-.2.2-.51,0-.71s-.51-.2-.71,0l-1.77,1.77c-.2.2-.2.51,0,.71s.51.2.71,0Z" }));
+      case "contrast":
+        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "10", y: "3", width: "8", height: "11" }), /* @__PURE__ */ wp.element.createElement("path", { d: "m10,1C5.03,1,1,5.03,1,10s4.03,9,9,9,9-4.03,9-9S14.97,1,10,1Zm0,17c-4.42,0-8-3.58-8-8S5.58,2,10,2v16Z" }));
+    }
+  };
 
   // modules/src/util/string.jsx
+  var wordsToFlags = (words) => words && words.split(" ").reduce((p, c) => {
+    p[c] = true;
+    return p;
+  }, {});
+  var flagsToWords = (flags) => flags && Object.keys(flags).filter((word) => flags[word]).join(" ");
+  var classNamesToFlags = (classNames) => classNames && classNames.split(" ").map(kebabToCamel).reduce((p, c) => {
+    p[c] = true;
+    return p;
+  }, {});
   var flagsToClassNames = (flags) => flags && Object.keys(flags).filter((f) => flags[f]).map(camelToKebab).join(" ");
+  var filterFlags = (flags, callback) => {
+    Object.keys(flags).forEach((key) => {
+      if (!callback(key)) {
+        delete flags[key];
+      }
+    });
+    return flags;
+  };
   var camelToKebab = (str) => str.replace(/(\w)([A-Z])/g, "$1-$2").toLowerCase();
   var kebabToCamel = (str) => str.replace(/\-(\w)/g, (m) => m[1].toUpperCase());
 
@@ -1011,1742 +1178,15 @@
     );
   };
 
-  // ../blocks/_init/init/CP.jsx
-  var cache = deepMap();
-  var CP = {
-    filters: {},
-    cache: {},
-    config: {},
-    /*transform*/
-    listedConvertibles: [
-      "catpow/listed",
-      "catpow/flow",
-      "catpow/faq",
-      "catpow/ranking",
-      "catpow/dialog",
-      "catpow/sphere",
-      "catpow/slider",
-      "catpow/banners",
-      "catpow/lightbox",
-      "catpow/panes",
-      "catpow/slidablemenu",
-      "catpow/showcase"
-    ],
-    tableConvertibles: ["catpow/simpletable", "catpow/datatable", "catpow/comparetable", "catpow/layouttable"],
-    dummyText: {
-      title: "\u543E\u8F29\u306F\u732B\u3067\u3042\u308B\u3002",
-      lead: "\u540D\u524D\u306F\u307E\u3060\u306A\u3044\u3002\u3069\u3053\u3067\u751F\u308C\u305F\u304B\u9813\u3068\u898B\u5F53\u304C\u3064\u304B\u306C\u3002\u4F55\u3067\u3082\u8584\u6697\u3044\u3058\u3081\u3058\u3081\u3057\u305F\u6240\u3067\u30CB\u30E3\u30FC\u30CB\u30E3\u30FC\u6CE3\u3044\u3066\u3044\u305F\u4E8B\u3060\u3051\u306F\u8A18\u61B6\u3057\u3066\u3044\u308B\u3002",
-      text: "\u540D\u524D\u306F\u307E\u3060\u306A\u3044\u3002\u3069\u3053\u3067\u751F\u308C\u305F\u304B\u9813\u3068\u898B\u5F53\u304C\u3064\u304B\u306C\u3002\u4F55\u3067\u3082\u8584\u6697\u3044\u3058\u3081\u3058\u3081\u3057\u305F\u6240\u3067\u30CB\u30E3\u30FC\u30CB\u30E3\u30FC\u6CE3\u3044\u3066\u3044\u305F\u4E8B\u3060\u3051\u306F\u8A18\u61B6\u3057\u3066\u3044\u308B\u3002\u543E\u8F29\u306F\u3053\u3053\u3067\u59CB\u3081\u3066\u4EBA\u9593\u3068\u3044\u3046\u3082\u306E\u3092\u898B\u305F\u3002\u3057\u304B\u3082\u3042\u3068\u3067\u805E\u304F\u3068\u305D\u308C\u306F\u66F8\u751F\u3068\u3044\u3046\u4EBA\u9593\u4E2D\u3067\u4E00\u756A\u7370\u60AA\u306A\u7A2E\u65CF\u3067\u3042\u3063\u305F\u305D\u3046\u3060\u3002\u3053\u306E\u66F8\u751F\u3068\u3044\u3046\u306E\u306F\u6642\u3005\u6211\u3005\u3092\u6355\u3048\u3066\u716E\u3066\u98DF\u3046\u3068\u3044\u3046\u8A71\u3067\u3042\u308B\u3002\u3057\u304B\u3057\u305D\u306E\u5F53\u6642\u306F\u4F55\u3068\u3044\u3046\u8003\u3082\u306A\u304B\u3063\u305F\u304B\u3089\u5225\u6BB5\u6050\u3057\u3044\u3068\u3082\u601D\u308F\u306A\u304B\u3063\u305F\u3002",
-      footer: "\u300E\u543E\u8F29\u306F\u732B\u3067\u3042\u308B\u300F\uFF08\u308F\u304C\u306F\u3044\u306F\u306D\u3053\u3067\u3042\u308B\uFF09\u3000\u590F\u76EE\u6F31\u77F3\u3000\u8457"
-    },
-    isRowsConvertibleToItems: (rows, itemsConf) => {
-      for (const cell of rows[0].cells) {
-        if (itemsConf.query.hasOwnProperty(cell.text)) {
-          return true;
-        }
-      }
-      return false;
-    },
-    convertRowsToItems: (rows, itemsConf) => {
-      const keyIndex = [];
-      rows[0].cells.forEach((cell, index) => {
-        if (itemsConf.query.hasOwnProperty(cell.text)) {
-          keyIndex.push([cell.text, index]);
-        }
-      });
-      return rows.slice(1).map((row) => {
-        const item = {};
-        for (const [key, index] of keyIndex) {
-          item[key] = row.cells[index].text;
-        }
-        return item;
-      });
-    },
-    selectImage: (set, { attr, keys, index, size, devices = ["sp", "tb"], type = "image" }) => {
-      if (CP.uploder === void 0) {
-        CP.uploader = wp.media({
-          title: "Select Image",
-          button: { text: "Select" },
-          multiple: false,
-          library: { type }
-        });
-      }
-      CP.uploader.off("select").on("select", () => {
-        let image = CP.uploader.state().get("selection").first().toJSON();
-        let data = {};
-        if (keys.mime) {
-          data[keys.mime] = image.mime;
-        }
-        if (keys.alt) {
-          data[keys.alt] = image.alt;
-        }
-        if (size && image.sizes && image.sizes[size]) {
-          data[keys.src] = image.sizes[size].url;
-        } else if (keys.src) {
-          data[keys.src] = image.url;
-        } else if (keys.url) {
-          data[keys.url] = `url(${image.url})`;
-        }
-        if (keys.sources) {
-          if (image.sizes) {
-            data[keys.sources] = devices.map((device) => {
-              const sizeData = CP.devices[device];
-              return { srcset: image.sizes[sizeData.media_size].url, device };
-            });
-          } else {
-            data[keys.sources] = devices.map((device) => {
-              return { srcset: image.url, device };
-            });
-          }
-        }
-        if (keys.srcset && image.sizes) {
-          data[keys.srcset] = "";
-          devices.forEach((device) => {
-            const sizeData = CP.devices[device];
-            data[keys.srcset] += image.sizes[sizeData.media_size].url + sizeData.rep;
-          });
-        }
-        if (keys.data) {
-          data[keys.data] = image;
-        }
-        if (attr && keys.items && index) {
-          CP.updateItemByKeyAndIndex({ attr, set }, keys.items, index, data);
-        } else {
-          set(data);
-        }
-      }).off("open").on("open", () => {
-        const library = CP.uploader.state().get("library");
-        if (library.props.get("type") !== type) {
-          library.props.set({ type });
-          library.reset();
-        }
-      }).open();
-    },
-    imageSrcOrDummy: (src) => {
-      if (!src) {
-        return wpinfo.theme_url + "/images/dummy.jpg";
-      }
-      if (src[0] == "[") {
-        return wpinfo.plugins_url + "/catpow/callee/dummy_image.php?text=" + src;
-      }
-      return src;
-    },
-    parseCSV: (csv) => {
-      let tmp = [];
-      csv = csv.replace(/("[^"]*")+/g, (match) => {
-        tmp.push(match.slice(1, -1).replace(/""/g, '"'));
-        return "[TMP]";
-      });
-      return csv.split("\r\n").map((row) => {
-        return row.split(",").map((val) => val === "[TMP]" ? tmp.shift() : val);
-      });
-    },
-    switchNumberClass: ({ set, attr }, label, value2) => {
-      let classArray = (attr.classes || "").split(" ");
-      let i = classArray.findIndex((cls) => cls.slice(0, label.length) === label);
-      if (i === -1) {
-        if (value2) {
-          classArray.push(label + value2);
-        }
-      } else {
-        if (value2) {
-          classArray.splice(i, 1, label + value2);
-        } else {
-          classArray.splice(i, 1);
-        }
-      }
-      set({ classes: classArray.join(" ") });
-    },
-    getNumberClass: ({ attr }, label) => {
-      let value2 = (attr.classes || "").split(" ").find((cls) => cls.slice(0, label.length) === label);
-      if (!value2) {
-        return 0;
-      }
-      return parseInt(value2.slice(label.length));
-    },
-    switchColor: (props, value2) => {
-      CP.switchNumberClass(props, "color", value2);
-    },
-    getColor: (props) => {
-      return CP.getNumberClass(props, "color");
-    },
-    switchPattern: (props, value2) => {
-      CP.switchNumberClass(props, "pattern", value2);
-    },
-    getPattern: (props) => {
-      return CP.getNumberClass(props, "pattern");
-    },
-    switchSelectiveClass: ({ set, attr }, values, value2, key) => {
-      if (key === void 0) {
-        key = "classes";
-      }
-      let classArray = attr[key].split(" ");
-      if (!Array.isArray(values) && _.isObject(values)) {
-        values = Object.keys(values);
-      }
-      classArray = _.difference(classArray, values);
-      if (Array.isArray(value2)) {
-        classArray = classArray.concat(value2);
-      } else {
-        classArray.push(value2);
-      }
-      let data = {};
-      data[key] = classArray.join(" ");
-      set(data);
-    },
-    getSelectiveClass: ({ attr }, values, key) => {
-      if (key === void 0) {
-        key = "classes";
-      }
-      if (attr[key] === void 0) {
-        attr[key] = "";
-      }
-      let classArray = attr[key].split(" ");
-      if (!Array.isArray(values) && _.isObject(values)) {
-        values = Object.keys(values);
-      }
-      return _.intersection(classArray, values).shift();
-    },
-    //@deprecated
-    getSubClasses: (prm) => {
-      let rtn = {};
-      let values;
-      if (Array.isArray(prm.values)) {
-        values = prm.values;
-      } else {
-        values = Object.keys(prm.values);
-      }
-      values.forEach((val) => {
-        if (prm.sub && prm.sub[val]) {
-          rtn[val] = CP.getAllSubClasses(prm.sub[val]);
-        } else {
-          rtn[val] = [];
-        }
-      });
-      return rtn;
-    },
-    //@deprecated
-    getAllSubClasses: (prms) => {
-      let rtn = [];
-      prms.forEach((prm) => {
-        if (typeof prm === "object") {
-          if (prm.values) {
-            if (Array.isArray(prm.values)) {
-              rtn = rtn.concat(prm.values);
-            } else if (_.isObject(prm.values)) {
-              rtn = rtn.concat(Object.keys(prm.values));
-            } else {
-              rtn.push(prm.values);
-            }
-          }
-          if (prm.sub) {
-            if (Array.isArray(prm.sub)) {
-              rtn = rtn.concat(CP.getAllSubClasses(prm.sub));
-            } else {
-              Object.keys(prm.sub).forEach((key) => {
-                rtn = rtn.concat(CP.getAllSubClasses(prm.sub[key]));
-              });
-            }
-          }
-        }
-      });
-      return rtn;
-    },
-    //@deprecated
-    getBindClasses: (prm) => {
-      let rtn = {};
-      let values;
-      if (Array.isArray(prm.values)) {
-        values = prm.values;
-      } else {
-        values = Object.keys(prm.values);
-      }
-      values.forEach((val) => {
-        if (prm.bind && prm.bind[val]) {
-          rtn[val] = prm.bind[val];
-        } else {
-          rtn[val] = [];
-        }
-      });
-      return rtn;
-    },
-    getClassFlagsByValue: (prm, primaryClassKey = "classes") => {
-      const cacheKeys = [CP.getClassFlagsByValue, prm, primaryClassKey];
-      if (cache.has(cacheKeys)) {
-        return cache.get(cacheKeys);
-      }
-      const flags = {};
-      cache.set(cacheKeys, flags);
-      if (!prm || typeof prm !== "object" || !prm.values) {
-        return flags;
-      }
-      const values = typeof prm.values === "string" ? [prm.values] : Array.isArray(prm.values) ? prm.values : Object.keys(prm.values);
-      for (const value2 of values) {
-        flags[value2] = { [prm.classKey || primaryClassKey]: { [value2]: true } };
-        if (prm.sub) {
-          if (Array.isArray(prm.sub)) {
-            CP.addAllClassFlags(flags[value2], prm.sub, primaryClassKey);
-          } else if (prm.sub[value2]) {
-            CP.addAllClassFlags(flags[value2], prm.sub[value2], primaryClassKey);
-          }
-        }
-        if (prm.bind) {
-          if (Array.isArray(prm.bind)) {
-            CP.addBindClassFlags(flags[value2], prm.bind, primaryClassKey);
-          } else if (prm.bind[value2]) {
-            CP.addBindClassFlags(flags[value2], prm.bind[value2], primaryClassKey);
-          }
-        }
-      }
-      return flags;
-    },
-    getAllClassFlags: (prm, primaryClassKey = "classes") => {
-      const cacheKeys = [CP.getAllClassFlags, prm, primaryClassKey];
-      if (cache.has(cacheKeys)) {
-        return cache.get(cacheKeys);
-      }
-      const flags = {};
-      cache.set(cacheKeys, flags);
-      if (!prm || typeof prm !== "object" || !prm.values) {
-        return flags;
-      }
-      CP.addAllClassFlags(flags, [prm], primaryClassKey);
-      return flags;
-    },
-    getBindClassFlagsByValue: (prm, primaryClassKey = "classes") => {
-      const cacheKeys = [CP.getBindClassFlagsByValue, prm, primaryClassKey];
-      if (cache.has(cacheKeys)) {
-        return cache.get(cacheKeys);
-      }
-      const flags = {};
-      cache.set(cacheKeys, flags);
-      if (!prm || typeof prm !== "object" || !prm.values) {
-        return flags;
-      }
-      const values = typeof prm.values === "string" ? [prm.values] : Array.isArray(prm.values) ? prm.values : Object.keys(prm.values);
-      for (let value2 of values) {
-        flags[value2] = { [prm.classKey || primaryClassKey]: { [value2]: true } };
-        if (prm.bind) {
-          if (typeof prm.values === "string") {
-            CP.addBindClassFlags(flags[value2], prm.bind, primaryClassKey);
-          } else {
-            if (prm.bind[value2]) {
-              CP.addBindClassFlags(flags[value2], prm.bind[value2], primaryClassKey);
-            }
-          }
-        }
-      }
-      return flags;
-    },
-    addAllClassFlags: (flags, prms, primaryClassKey = "classes") => {
-      if (!flags[primaryClassKey]) {
-        flags[primaryClassKey] = {};
-      }
-      for (const prm of prms) {
-        if (prm.key || prm.json || prm.css || prm.vars) {
-          continue;
-        }
-        if (prm.values) {
-          const values = typeof prm.values === "string" ? [prm.values] : Array.isArray(prm.values) ? prm.values : Object.keys(prm.values);
-          for (const value2 of values) {
-            const classKey = prm.classKey || primaryClassKey;
-            if (!flags[classKey]) {
-              flags[classKey] = {};
-            }
-            flags[classKey][value2] = true;
-          }
-        }
-        if (prm.sub) {
-          if (Array.isArray(prm.sub)) {
-            CP.addAllClassFlags(flags, prm.sub, primaryClassKey);
-          } else {
-            for (const subPrm of Object.values(prm.sub)) {
-              CP.addAllClassFlags(flags, subPrm, primaryClassKey);
-            }
-          }
-        }
-        if (prm.bind) {
-          if (typeof prm.values === "string") {
-            CP.addBindClassFlags(flags, prm.bind, primaryClassKey);
-          } else {
-            for (const bindClasses of Object.values(prm.bind)) {
-              CP.addBindClassFlags(flags, bindClasses, primaryClassKey);
-            }
-          }
-        }
-      }
-    },
-    addBindClassFlags: (flags, bindClasses, primaryClassKey = "classes") => {
-      if (!flags[primaryClassKey]) {
-        flags[primaryClassKey] = {};
-      }
-      if (Array.isArray(bindClasses)) {
-        for (const bindClass of bindClasses) {
-          flags[primaryClassKey][bindClass] = true;
-        }
-      } else {
-        for (const [classKey, classes] of Object.entries(bindClasses)) {
-          if (classKey === "_") {
-            for (const bindClass of classes) {
-              flags[primaryClassKey][bindClass] = true;
-            }
-          } else {
-            if (!flags[classKey]) {
-              flags[classKey] = {};
-            }
-            for (const bindClass of classes) {
-              flags[classKey][bindClass] = true;
-            }
-          }
-        }
-      }
-    },
-    getUpdatesFromStatesAndClasssFlags: ({ allStates, allClassFlags, classFlags, bindClassFlags }) => {
-      const updates = {};
-      for (const [classKey, allClassFlag] of Object.entries(allClassFlags)) {
-        console.assert(!!allStates[classKey], `allStates should have ${classKey} states`);
-        const states = allStates[classKey];
-        for (const value2 of Object.keys(states)) {
-          if (allClassFlag[value2] && !classFlags?.[classKey]?.[value2]) {
-            states[value2] = false;
-          }
-        }
-        if (bindClassFlags?.[classKey]) {
-          Object.assign(states, bindClassFlags[classKey]);
-        }
-        updates[classKey] = CP.flagsToClassNames(states);
-      }
-      return updates;
-    },
-    toggleClass: ({ attr, set }, value2, key) => {
-      if (key === void 0) {
-        key = "classes";
-      }
-      if (attr[key] === void 0) {
-        attr[key] = "";
-      }
-      let classArray = attr[key].split(" ");
-      let i = classArray.indexOf(value2);
-      if (i === -1) {
-        classArray.push(value2);
-      } else {
-        classArray.splice(i, 1);
-      }
-      let data = {};
-      data[key] = classArray.join(" ");
-      set(data);
-    },
-    hasClass: ({ attr }, value2, key) => {
-      if (key === void 0) {
-        key = "classes";
-      }
-      if (attr[key] === void 0) {
-        attr[key] = "";
-      }
-      return attr[key].split(" ").indexOf(value2) !== -1;
-    },
-    /*items*/
-    selectPrevItem: (tag) => {
-      window.getSelection().anchorNode.parentNode.closest(tag).previousElementSibling.querySelector("[contentEditable]").focus();
-    },
-    selectNextItem: (tag) => {
-      window.getSelection().anchorNode.parentNode.closest(tag).nextElementSibling.querySelector("[contentEditable]").focus();
-    },
-    saveItem: ({ items: items2, itemsKey, set }) => {
-      set({ [itemsKey || "items"]: JSON.parse(JSON.stringify(items2)) });
-    },
-    deleteItem: (props) => {
-      var { items: items2, index } = props;
-      items2.splice(index, 1);
-      CP.saveItem(props);
-    },
-    cloneItem: (props) => {
-      var { tag, items: items2, index } = props;
-      items2.splice(index, 0, JSON.parse(JSON.stringify(items2[index])));
-      CP.saveItem(props);
-      CP.selectNextItem(tag);
-    },
-    upItem: (props) => {
-      var { items: items2, index } = props;
-      if (!items2[index - 1]) return false;
-      items2.splice(index - 1, 2, items2[index], items2[index - 1]);
-      CP.saveItem(props);
-    },
-    downItem: (props) => {
-      var { items: items2, index } = props;
-      if (!items2[index + 1]) return false;
-      items2.splice(index, 2, items2[index + 1], items2[index]);
-      CP.saveItem(props);
-    },
-    getItemByKeyAndIndex({ attr }, keys, index) {
-      let item = attr || {};
-      if (keys) {
-        if (Array.isArray(keys)) {
-          console.assert(Array.isArray(index) && index.length === keys.length, "index and keys should be same length");
-          for (let i in keys) {
-            item = item?.[keys[i]]?.[index[i]];
-          }
-          return item || {};
-        } else {
-          const items2 = item[keys] || [];
-          item = items2[index] || {};
-        }
-      }
-      return item;
-    },
-    updateItemByKeyAndIndex({ attr, set }, keys, index, item) {
-      if (keys) {
-        if (Array.isArray(keys)) {
-          console.assert(Array.isArray(index) && index.length === keys.length, "index and keys should be same length");
-          let oldItem = attr;
-          for (let i in keys) {
-            if (!oldItem[keys[i]]) {
-              oldItem[keys[i]] = [];
-            }
-            if (!oldItem[keys[i]][index[i]]) {
-              oldItem[keys[i]][index[i]] = {};
-            }
-            oldItem = oldItem[keys[i]][index[i]];
-          }
-          Object.assign(oldItem, item);
-          set({ [keys[0]]: JSON.parse(JSON.stringify(attr[keys[0]])) });
-        } else {
-          set({ [keys]: Object.assign({}, attr[keys] || {}, item) });
-        }
-      }
-    },
-    switchItemColor: ({ items: items2, index, set }, color, itemsKey) => {
-      if (itemsKey === void 0) {
-        itemsKey = "items";
-      }
-      let classArray = (items2[index].classes || "").split(" ");
-      let i = classArray.findIndex((cls) => cls.slice(0, 5) === "color");
-      if (i === -1) {
-        if (color) {
-          classArray.push("color" + color);
-        }
-      } else {
-        if (color) {
-          classArray.splice(i, 1, "color" + color);
-        } else {
-          classArray.splice(i, 1);
-        }
-      }
-      items2[index].classes = classArray.join(" ");
-      set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
-    },
-    getItemColor: ({ items: items2, index }) => {
-      let c = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 5) === "color");
-      if (!c) {
-        return 0;
-      }
-      return parseInt(c.slice(5));
-    },
-    switchItemPattern: ({ items: items2, index, set }, pattern, itemsKey) => {
-      if (itemsKey === void 0) {
-        itemsKey = "items";
-      }
-      let classArray = (items2[index].classes || "").split(" ");
-      let i = classArray.findIndex((cls) => cls.slice(0, 7) === "pattern");
-      if (i === -1) {
-        if (pattern) {
-          classArray.push("pattern" + pattern);
-        }
-      } else {
-        if (pattern) {
-          classArray.splice(i, 1, "pattern" + pattern);
-        } else {
-          classArray.splice(i, 1);
-        }
-      }
-      items2[index].classes = classArray.join(" ");
-      set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
-    },
-    getItemPattern: ({ items: items2, index }) => {
-      let p = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 7) === "pattern");
-      if (!p) {
-        return 0;
-      }
-      return parseInt(p.slice(7));
-    },
-    switchItemSelectiveClass: ({ items: items2, index, set }, values, value2, itemsKey) => {
-      if (itemsKey === void 0) {
-        itemsKey = "items";
-      }
-      let classArray = (items2[index].classes || "").split(" ");
-      if (!Array.isArray(values) && _.isObject(values)) {
-        values = Object.keys(values);
-      }
-      classArray = _.difference(classArray, values);
-      if (Array.isArray(value2)) {
-        classArray = classArray.concat(value2);
-      } else {
-        classArray.push(value2);
-      }
-      items2[index].classes = classArray.join(" ");
-      set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
-    },
-    getItemSelectiveClass: ({ items: items2, index }, values) => {
-      if (!items2[index].classes) {
-        return false;
-      }
-      let classArray = (items2[index].classes || "").split(" ");
-      if (!Array.isArray(values) && _.isObject(values)) {
-        values = Object.keys(values);
-      }
-      return _.intersection(classArray, values).shift();
-    },
-    toggleItemClass: ({ items: items2, index, set }, value2, itemsKey) => {
-      if (itemsKey === void 0) {
-        itemsKey = "items";
-      }
-      let classArray = (items2[index].classes || "").split(" ");
-      let i = classArray.indexOf(value2);
-      if (i === -1) {
-        classArray.push(value2);
-      } else {
-        classArray.splice(i, 1);
-      }
-      items2[index].classes = classArray.join(" ");
-      set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
-    },
-    hasItemClass: ({ items: items2, index }, value2) => {
-      let classArray = (items2[index].classes || "").split(" ");
-      return classArray.indexOf(value2) !== -1;
-    },
-    /*json*/
-    getJsonValue: ({ attr }, json, key) => {
-      if (!attr[json]) {
-        return null;
-      }
-      return JSON.parse(attr[json])[key];
-    },
-    hasJsonValue: (prop, json, key, value2) => {
-      let values = CP.getJsonValue(prop, json, key);
-      if (!values) {
-        return false;
-      }
-      return values.indexOf(value2) !== -1;
-    },
-    setJsonValue: ({ attr, set }, json, key, value2) => {
-      let data = {};
-      let jsonData = JSON.parse(attr[json]);
-      jsonData[key] = value2;
-      data[json] = JSON.stringify(jsonData);
-      set(data);
-    },
-    setJsonValues: ({ attr, set }, json, keys, value2) => {
-      let data = {};
-      let jsonData = JSON.parse(attr[json]);
-      if (keys) {
-        for (const key in keys) {
-          jsonData[keys[key]] = value2[key];
-        }
-      } else {
-        Object.assign(jsonData, value2);
-      }
-      data[json] = JSON.stringify(jsonData);
-      set(data);
-    },
-    switchJsonValue: (prop, json, key, value2) => {
-      let values = CP.getJsonValue(prop, json, key);
-      if (!values) {
-        values = [];
-      }
-      let i = values.indexOf(value2);
-      if (i === -1) {
-        values.push(value2);
-      } else {
-        values.splice(i, 1);
-      }
-      CP.setJsonValue(prop, json, key, values);
-    },
-    /*style*/
-    parseStyleString: (css) => {
-      if (css instanceof Object) {
-        return css;
-      }
-      if (!css) {
-        return {};
-      }
-      var obj = {};
-      css.replace("&amp;", "&").split(";").forEach((pair) => {
-        const match = pair.match(/^((\-\-)?([^:]+?)):(.+)$/);
-        if (!match) {
-          return;
-        }
-        obj[match[2] ? match[1] : kebabToCamel(match[3])] = match[4];
-      });
-      return obj;
-    },
-    createStyleString: (data) => {
-      if (!data) {
-        return "";
-      }
-      return Object.keys(data).map((key) => {
-        return camelToKebab(key) + ":" + data[key] + ";";
-      }).join("");
-    },
-    parseStyleCode: (code) => {
-      let rtn = {};
-      for (const match of code.matchAll(/(\S.+?){([^}]+)}/g)) {
-        rtn[match[1]] = CP.parseStyleString(match[2]);
-      }
-      return rtn;
-    },
-    createStyleCode: (data) => {
-      if (!data) {
-        return "";
-      }
-      return Object.keys(data).map((sel) => {
-        return sel + "{" + CP.createStyleString(data[sel]) + "}";
-      }).join("");
-    },
-    parseStyleCodeWithMediaQuery: (code) => {
-      if (!code) {
-        return {};
-      }
-      var rtn = {};
-      const reg = /@media\s*\((.+?)\)\s*{([^}]+})\s*}/;
-      const defaultCode = code.replace(new RegExp(reg, "g"), (str) => {
-        const matches = str.match(reg);
-        rtn[matches[1]] = CP.parseStyleCode(matches[2]);
-        return "";
-      });
-      rtn["default"] = CP.parseStyleCode(defaultCode);
-      return rtn;
-    },
-    createStyleCodeWithMediaQuery: (data) => {
-      var rtn = "";
-      return Object.keys(data).map((media) => {
-        if (media === "default") {
-          return { p: -1e4, media };
-        }
-        const matches = media.match(/(min|max)\-width:(\d+)px/);
-        return { p: parseInt(matches[2]) * { min: 1, max: -1 }[matches[1]], media };
-      }).sort((a, b) => a.p - b.p).map((d) => d.media).map((media) => {
-        if (media === "default") {
-          return CP.createStyleCode(data[media]);
-        }
-        return "@media(" + media + "){" + CP.createStyleCode(data[media]) + "}";
-      }).join("");
-    },
-    createGridStyleCode: (sel, bnd) => {
-      return sel + "{" + CP.createStyleString(CP.createGridStyleCodeData(bnd)) + "}";
-    },
-    createGridStyleCodeData: (bnd) => {
-      var rtn = {
-        display: "grid",
-        " display": "-ms-grid",
-        "-ms-grid-columns": "1fr ".repeat(bnd[0]),
-        "grid-template-columns": "repeat(" + bnd[0] + ",1fr)",
-        "-ms-grid-rows": "1fr ".repeat(bnd[1]),
-        "grid-template-rows": "repeat(" + bnd[1] + ",1fr)"
-      };
-      return rtn;
-    },
-    createGridItemStyleCode: (sel, bnd) => {
-      return sel + "{" + CP.createStyleString(CP.createGridItemStyleCodeData(bnd)) + "}";
-    },
-    createGridItemStyleCodeData: (bnd) => {
-      var rtn = {
-        "-ms-grid-column": bnd[0],
-        "-ms-grid-row": bnd[1],
-        "grid-column": bnd[0],
-        "grid-row": bnd[1]
-      };
-      if (bnd[2] && bnd[2] > 1) {
-        rtn["grid-column"] += " / span " + bnd[2];
-        rtn["-ms-grid-column-span"] = bnd[2];
-      }
-      if (bnd[3] && bnd[3] > 1) {
-        rtn["grid-row"] += " / span " + bnd[3];
-        rtn["-ms-grid-row-span"] = bnd[3];
-      }
-      return rtn;
-    },
-    getUrlInStyleCode: (code) => {
-      if (!code || code.indexOf("url(") === -1) {
-        return false;
-      }
-      const m = code.match(/url\((.+?)\)/);
-      return m ? m[1] : "";
-    },
-    parseGradientStyleValue: (gradient) => {
-      const match = gradient.match(/^(linear|radial)\-gradient\((\d+deg),(.+)\)$/);
-      return {
-        type: match[1],
-        angle: match[2],
-        colors: match[3].match(/rgba?\([\d,]+?\) \d+%/g).map((color) => {
-          const match2 = color.match(/((rgba?)\((\d+),(\d+),(\d+)(,(\d+))?\)) (\d+%)/);
-          return {
-            color: match2[1],
-            type: match2[2],
-            r: match2[3],
-            g: match2[4],
-            b: match2[5],
-            a: match2[7] === void 0 ? 1 : match2[7],
-            position: match2[8]
-          };
-        })
-      };
-    },
-    /*flags*/
-    testFlags: (cond, flags) => cond & flags === cond,
-    filterArrayWithFlags: (array, flags) => array.filter((c, i) => flags & 1 << i),
-    wordsToFlags: (words) => {
-      var rtn = {};
-      if (void 0 === words) {
-        return {};
-      }
-      if (typeof words === "string") {
-        words = words.split(" ");
-      }
-      words.forEach((word) => {
-        rtn[word] = true;
-      });
-      return rtn;
-    },
-    flagsToWords: (flags) => {
-      if (void 0 === flags) {
-        return "";
-      }
-      return Object.keys(flags).filter((word) => flags[word]).join(" ");
-    },
-    classNamesToFlags: (words) => {
-      var rtn = {};
-      if (void 0 === words) {
-        return {};
-      }
-      if (typeof words === "string") {
-        words = words.split(" ").map(kebabToCamel);
-      }
-      words.forEach((word) => {
-        rtn[word] = true;
-      });
-      return rtn;
-    },
-    flagsToClassNames: (flags) => {
-      if (void 0 === flags) {
-        return "";
-      }
-      return Object.keys(flags).filter((word) => flags[word]).map(camelToKebab).join(" ");
-    },
-    filterFlags: (flags, callback) => {
-      Object.keys(flags).forEach((key) => {
-        if (!callback(key)) {
-          delete flags[key];
-        }
-      });
-      return flags;
-    },
-    /*proxy*/
-    finderProxy: (obj) => new Proxy(obj, CP.finderProxyHandler),
-    finderProxyHandler: {
-      get: (obj, prop) => {
-        if (prop === "isFinderProxy") {
-          return true;
-        }
-        if (prop === "finderProxyTarget") {
-          return obj;
-        }
-        var rtn;
-        if (Array.isArray(obj) && !/^\d+$/.test(prop)) {
-          rtn = obj.find((item) => typeof item === "object" && item.hasOwnProperty("name") && item.name === prop);
-          if (!rtn && prop in obj) {
-            return obj[prop];
-          }
-        } else {
-          rtn = obj[prop];
-        }
-        if (typeof rtn === "object") {
-          return new Proxy(rtn, CP.finderProxyHandler);
-        }
-        return rtn;
-      },
-      set: (obj, prop, val) => {
-        if (typeof val === "object" && val.isFinderProxy) {
-          val = val.finderProxyTarget;
-        }
-        if (Array.isArray(obj) && !/^\d+$/.test(prop) && !(prop in obj)) {
-          if (typeof val !== "object") {
-            return false;
-          }
-          val.name = prop;
-          const index = obj.findIndex((item) => typeof item === "object" && item.hasOwnProperty("name") && item.name === prop);
-          if (index < 0) {
-            obj.push(val);
-          } else {
-            obj[index] = val;
-          }
-        } else {
-          obj[prop] = val;
-        }
-        return true;
-      },
-      deleteProperty: (obj, prop) => {
-        if (Array.isArray(obj) && !/^\d+$/.test(prop)) {
-          prop = obj.findIndex((item) => item === prop || typeof item === "object" && item.hasOwnProperty("name") && item.name === prop);
-          if (prop < 0) {
-            return;
-          }
-        }
-        delete obj[prop];
-      }
-    },
-    /*selectiveClass*/
-    parseSelections: (sels) => {
-      let options3, values;
-      if (Array.isArray(sels)) {
-        values = sels;
-        options3 = sels.map((cls) => {
-          return { label: cls, value: cls };
-        });
-      } else {
-        values = Object.keys(sels);
-        options3 = values.map((cls) => {
-          return { label: sels[cls], value: cls };
-        });
-      }
-      return { options: options3, values };
-    },
-    /*block*/
-    createBlocks: (blocks) => {
-      return blocks.map((block) => {
-        if (block[2]) {
-          block[2] = CP.createBlocks(block[2]);
-        }
-        return wp.blocks.createBlock(...block);
-      });
-    },
-    /*media*/
-    devices: Catpow.util.devices,
-    getImageSizesForDevices: (devices) => {
-      return Object.keys(CP.devices).filter((device) => devices.includes(device)).map((device) => CP.devices[device].sizes).join(",");
-    },
-    getPictureSoucesAttributes: (selector) => {
-      return {
-        source: "query",
-        selector: (selector || "picture") + " source",
-        query: {
-          srcset: { source: "attribute", attribute: "srcset" },
-          device: { source: "attribute", attribute: "data-device" }
-        }
-      };
-    },
-    getPictureSoucesAttributesForDevices: (devices, selector, image) => {
-      let attr = CP.getPictureSoucesAttributes(selector);
-      attr.default = CP.getPictureSoucesAttributesDefaultValueForDevices(devices, image);
-      return attr;
-    },
-    getPictureSoucesAttributesDefaultValueForDevices: (devices, image) => {
-      return devices.map((device) => ({ srcset: wpinfo.theme_url + "/images/" + (image || "dummy.jpg"), device }));
-    },
-    getMediaQueryKeyForDevice: (device) => {
-      if (!CP.devices[device].media_query) {
-        return "default";
-      }
-      return CP.devices[device].media_query.slice(1, -1);
-    },
-    translateCssVal: (type, val) => {
-      switch (type) {
-        case "background-size":
-          switch (val) {
-            case "c":
-              return "cover";
-            case "i":
-              return "contain";
-            case "f":
-              return "100% 100%";
-            default:
-              return val;
-          }
-        case "background-repeat":
-          switch (val) {
-            case "n":
-              return "no-repeat";
-            case "x":
-            case "y":
-              return "repeat-" + val;
-            default:
-              return val;
-          }
-      }
-    },
-    /*datalist*/
-    getDataListId(name, values) {
-      const id = "datalist-" + name;
-      if (!document.getElementById(id)) {
-        if (!values) {
-          if (!CP.dataListPresets.hasOwnProperty(name)) {
-            return null;
-          }
-          values = CP.dataListPresets[name];
-        }
-        const datalist = document.createElement("datalist");
-        datalist.id = id;
-        values.forEach((value2) => {
-          const option = document.createElement("option");
-          option.value = value2;
-          datalist.appendChild(option);
-        });
-        document.body.appendChild(datalist);
-      }
-      return id;
-    },
-    dataListPresets: {
-      currency: ["AUD", "CAD", "CNY", "DKK", "HKD", "INR", "IDR", "JPY", "KRW", "MYR", "NOK", "PHP", "RUB", "SGD", "VND", "SEK", "CHF", "THB", "GBP", "USD", "TWD", "EUR", "BRL"],
-      mouseEvent: ["click", "dblclick", "mouseup", "mousedown", "mouseenter", "mouseleave", "mouseover", "mouseout", "contextmenu"],
-      playerEvent: [
-        "canplay",
-        "canplaythrough",
-        "complete",
-        "durationchange",
-        "emptied",
-        "ended",
-        "loadeddata",
-        "loadedmetadata",
-        "pause",
-        "play",
-        "playing",
-        "progress",
-        "ratechange",
-        "seeked",
-        "seeking",
-        "stalled",
-        "suspend",
-        "timeupdate",
-        "volumechange",
-        "waiting"
-      ]
-    },
-    /*richtext helper*/
-    getSelecedFormatElement: () => {
-      const sel = window.getSelection();
-      if (!sel.rangeCount) return null;
-      const con = sel.getRangeAt(0).startContainer;
-      return con.nextElementSibling || con.parentElement;
-    },
-    /*event*/
-    extractEventDispatcherAttributes: (blockTypeName, item) => {
-      const blockType = wp.data.select("core/blocks").getBlockType(blockTypeName);
-      const eventDispatcherAttributes = {};
-      if (blockType.attributes.items.eventDispatcherAttributes) {
-        blockType.attributes.items.eventDispatcherAttributes.map((attr_name) => {
-          eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute] = item[attr_name];
-        });
-      }
-      return eventDispatcherAttributes;
-    },
-    /*color inherit*/
-    inheritColor: (props, images) => {
-      const { attributes, className, setAttributes, context } = props;
-      const { setURLparams } = Catpow.util;
-      const { classes, color = "0" } = attributes;
-      const { useEffect: useEffect6, useMemo: useMemo5 } = wp.element;
-      const inheritColor = useMemo5(() => {
-        return color === "0" || context["catpow/color"] === color;
-      }, [color, context["catpow/color"]]);
-      useEffect6(() => {
-        if (inheritColor && context["catpow/color"] !== "0") {
-          setAttributes({ color: context["catpow/color"] });
-        }
-        setAttributes({ inheritColor: color === context["catpow/color"] });
-      }, [context["catpow/color"]]);
-      useEffect6(() => {
-        const atts = {
-          classes: classes.split(" ").filter((str) => !CP.colorToneClassPattern.test(str)).concat(CP.colorToneValueToClasses(color)).join(" ")
-        };
-        images.forEach((key) => {
-          if (!attributes[key]) {
-            return;
-          }
-          if (attributes[key].indexOf("url(") !== -1) {
-            atts[key] = attributes[key].replace(/url\((.+?)\)/, (m, p1) => "url(" + setURLparams(p1, { c: color, theme: wpinfo.theme }) + ")");
-            return;
-          }
-          atts[key] = setURLparams(attributes[key], { c: color, theme: wpinfo.theme });
-        });
-        setAttributes(atts);
-      }, [color]);
-    },
-    extractColorToneValue: (classes) => CP.generateColorToneValue(CP.extractColorToneValues(classes)),
-    extractColorToneValues: (classes) => {
-      if (!Array.isArray(classes)) {
-        classes = classes.split(" ");
-      }
-      const rtn = {};
-      classes.find((c) => {
-        const matches = c.match(CP.colorToneClassPattern);
-        if (matches) {
-          if (matches[1]) {
-            rtn.h = matches[2];
-          }
-          if (matches[5]) {
-            rtn[matches[7]] = matches[8];
-          }
-          return rtn.hasOwnProperty("h") && rtn.hasOwnProperty("s") && rtn.hasOwnProperty("l");
-        }
-        return false;
-      });
-      return rtn;
-    },
-    parseColorToneValue: (value2) => {
-      if (value2) {
-        const matches = value2.match(CP.colorToneValuePattern);
-        if (matches) {
-          return { h: matches[1], s: matches[5], l: matches[7] };
-        }
-      }
-      return { h: "0" };
-    },
-    colorToneValueToClasses: (value2) => CP.generateColorToneClasses(CP.parseColorToneValue(value2)),
-    generateColorToneValue: (values) => (values.h || "0") + (values.s ? "s" + values.s : "") + (values.l ? "l" + values.l : ""),
-    generateColorToneClasses: (values) => {
-      const classes = [];
-      if (values.h) {
-        classes.push("color" + values.h);
-      }
-      if (values.s) {
-        classes.push("tone-s" + values.s);
-      }
-      if (values.l) {
-        classes.push("tone-l" + values.l);
-      }
-      return classes;
-    },
-    colorToneValuePattern: /^((|_|\-\-)(\-?\d+))?(s(\-?\d+))?(l(\-?\d+))?$/,
-    colorToneClassPattern: /^(color((|_|\-\-)(\-?\d+)))|(tone\-((s|l)(\-?\d+)))$/,
-    parseColorClass: (colorClass) => {
-      if (colorClass) {
-        const matches = colorClass.match(CP.colorClassPattern);
-        if (matches) {
-          return {
-            fixed: matches[2] === "--",
-            absolute: matches[2] === "",
-            relative: matches[2] === "_",
-            value: matches[3]
-          };
-        }
-      }
-      return { fixed: false, absolute: false, relative: false, value: 0 };
-    },
-    generateColorClass: (data) => "color" + (data.fixed ? "--" : data.relative ? "_" : "") + data.value,
-    colorClassPattern: /^color((|_|\-\-)(\-?\d+))$/,
-    parseToneClass: (toneClass) => {
-      if (toneClass) {
-        const matches = toneClass.match(CP.toneClassPattern);
-        if (matches) {
-          return {
-            s: matches[2] === "s",
-            l: matches[2] === "l",
-            value: matches[3]
-          };
-        }
-      }
-      return { s: false, l: false, value: 0 };
-    },
-    generateToneClass: (data) => "tone-" + (data.s ? "s" : "l") + data.value,
-    toneClassPattern: /^tone\-((s|l)(\-?\d+))$/,
-    colorClassProxy: (state) => {
-      if (!state) {
-        state = {};
-      }
-      if (typeof state === "string" || Array.isArray(state)) {
-        state = CP.wordsToFlags(state);
-      }
-      return new Proxy(state, CP.colorClassProxyHandler);
-    },
-    colorClassProxyHandler: {
-      get(state, prop) {
-        switch (prop) {
-          case "classes": {
-            return CP.flagsToWords(state);
-          }
-          case "value": {
-            return CP.extractColorToneValue(Object.keys(state).filter((c) => state[c]));
-          }
-          case "h": {
-            return Object.keys(state).find((c) => CP.colorClassPattern.test(c));
-          }
-          case "s":
-          case "l": {
-            return Object.keys(state).find((c) => {
-              const match = c.match(CP.toneClassPattern);
-              return match && match[2] === prop;
-            });
-          }
-        }
-        return Reflect.get(...arguments);
-      },
-      set(state, prop, val) {
-        switch (prop) {
-          case "state": {
-            return state;
-          }
-          case "h":
-          case "s":
-          case "l": {
-            if (prop === "h") {
-              CP.filterFlags(state, (c) => !CP.colorClassPattern.test(c));
-            } else {
-              CP.filterFlags(state, (c) => {
-                const match = c.match(CP.toneClassPattern);
-                return !(match && match[2] === prop);
-              });
-            }
-            if (val) {
-              state[val] = true;
-            }
-            return;
-          }
-        }
-        return Reflect.set(...arguments);
-      }
-    },
-    /*id reflection*/
-    manageStyleData: (props, csss) => {
-      const { attributes, className, setAttributes } = props;
-      const { anchor, prevAnchor, styleDatas } = attributes;
-      const { useEffect: useEffect6 } = wp.element;
-      useEffect6(() => {
-        if (!anchor) {
-          setAttributes({ anchor: "s" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
-        }
-        if (void 0 === styleDatas) {
-          const styleDatas2 = {};
-          csss.forEach((key) => {
-            styleDatas2[key] = CP.parseStyleCodeWithMediaQuery(attributes[key]);
-          });
-          setAttributes({ styleDatas: styleDatas2 });
-        }
-      }, []);
-      useEffect6(() => {
-        if (anchor && anchor.length > 2) {
-          if (document.querySelectorAll("#" + anchor).length > 1) {
-            setAttributes({ anchor: "s" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
-          }
-          const atts = {};
-          atts.prevAnchor = anchor;
-          atts.styleDatas = {};
-          csss.forEach((key) => {
-            if (!attributes[key]) {
-              return;
-            }
-            atts[key] = attributes[key].replace("#" + prevAnchor, "#" + anchor);
-            atts.styleDatas[key] = CP.parseStyleCodeWithMediaQuery(atts[key]);
-          });
-          setAttributes(atts);
-        }
-      }, [anchor]);
-    }
-  };
-  CP.example = {
-    attributes: {
-      title: [CP.dummyText.title],
-      headerText: [CP.dummyText.title],
-      footerText: [CP.dummyText.footer],
-      lead: [CP.dummyText.lead],
-      text: [CP.dummyText.text]
-    },
-    innerBlocks: [
-      {
-        name: "core/paragraph",
-        attributes: {
-          content: CP.dummyText.text
-        }
-      }
-    ]
-  };
-  window.CP = CP;
-
-  // ../blocks/_init/init/format.jsx
-  var { __ } = wp.i18n;
-  var { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
-  var { Popover, BaseControle, TextControl, RangeControl, Card, CardBody, ToolbarGroup } = wp.components;
-  var { useState, useMemo: useMemo2, useCallback, useReducer, useEffect } = wp.element;
-  var { removeFormat, applyFormat, toggleFormat, insert, create, slice } = wp.richText;
-  wp.richText.registerFormatType("catpow/ruby", {
-    title: "Ruby",
-    tagName: "ruby",
-    className: "rtf-ruby",
-    edit({ isActive, value: value2, onChange }) {
-      const onToggle = () => {
-        if (isActive) {
-          return onChange(toggleFormat(value2, { type: "catpow/ruby" }));
-        }
-        if (wp.richText.isCollapsed(value2)) {
-          alert(__("\u30EB\u30D3\u3092\u3064\u3051\u305F\u3044\u30C6\u30AD\u30B9\u30C8\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"));
-          return;
-        }
-        let rt = prompt(__("\u30EB\u30D3\u3092\u5165\u529B"));
-        if (rt === null) {
-          return;
-        }
-        return onChange(
-          wp.richText.insert(
-            value2,
-            wp.richText.create({
-              html: `<ruby class="rtf-ruby">${wp.richText.slice(value2).text}<rt class="rtf-ruby__rt">${rt}</rt></ruby>`
-            }),
-            value2.start,
-            value2.end
-          )
-        );
-      };
-      const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement(
-        "path",
-        {
-          d: "M3.6,19.8L8.9,6.2h1.9l5.6,13.6h-2l-1.6-4.1H7l-1.5,4.1H3.6z M7.6,14.2h4.6l-1.4-3.8c-0.4-1.1-0.8-2.1-1-2.8\n				c-0.2,0.9-0.4,1.7-0.7,2.6L7.6,14.2z"
-        }
-      ), /* @__PURE__ */ wp.element.createElement(
-        "path",
-        {
-          d: "M10.7,4.4C10.4,4.7,10.1,4.9,9.8,5C9.6,5.1,9.3,5.1,9,5.1C8.4,5.2,8,5,7.7,4.8c-0.3-0.3-0.4-0.6-0.4-1c0-0.2,0-0.4,0.2-0.6\n					C7.6,3,7.7,2.8,7.9,2.7C8,2.6,8.2,2.5,8.5,2.4c0.2,0,0.4-0.1,0.7-0.1c0.7-0.1,1.1-0.2,1.4-0.3c0-0.1,0-0.2,0-0.2\n					c0-0.3-0.1-0.6-0.2-0.7c-0.2-0.2-0.5-0.3-0.9-0.3C9.1,0.8,8.8,0.9,8.6,1C8.4,1.2,8.3,1.4,8.2,1.8L7.4,1.7C7.5,1.3,7.6,1,7.8,0.8\n					c0.2-0.2,0.4-0.4,0.7-0.5c0.3-0.1,0.7-0.2,1.1-0.2c0.4,0,0.7,0,1,0.1c0.3,0.1,0.4,0.2,0.6,0.4c0.1,0.1,0.2,0.3,0.3,0.5\n					c0,0.1,0,0.4,0,0.7l0,1.1c0,0.8,0,1.2,0.1,1.4c0,0.2,0.1,0.4,0.2,0.6l-0.8,0C10.8,4.9,10.7,4.7,10.7,4.4z M10.6,2.6\n					C10.3,2.8,9.9,2.9,9.3,3C9,3,8.7,3.1,8.6,3.1C8.5,3.2,8.4,3.3,8.3,3.4C8.2,3.5,8.2,3.6,8.2,3.8c0,0.2,0.1,0.4,0.3,0.5\n					c0.2,0.1,0.4,0.2,0.7,0.2c0.3,0,0.6-0.1,0.8-0.2s0.4-0.3,0.5-0.6c0.1-0.2,0.1-0.5,0.1-0.8L10.6,2.6z"
-        }
-      ));
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RichTextShortcut, { type: "primary", character: "r", onUse: onToggle }), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon, title: "Ruby", onClick: onToggle, isActive, shortcutType: "primary", shortcutCharacter: "r" }));
-    }
-  });
-  wp.richText.registerFormatType("catpow/rt", {
-    title: "RubyText",
-    tagName: "rt",
-    className: "rtf-ruby__rt"
-  });
-  wp.richText.registerFormatType("catpow/small", {
-    title: "small",
-    tagName: "small",
-    className: "rtf-small",
-    edit({ isActive, value: value2, onChange }) {
-      const onToggle = () => onChange(toggleFormat(value2, { type: "catpow/small" }));
-      const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement(
-        "path",
-        {
-          d: "M5.6,16.7l3.6-9.4h1.3l3.8,9.4H13l-1.1-2.8H8l-1,2.8H5.6z M8.3,12.9h3.2l-1-2.6C10.2,9.5,10,8.9,9.9,8.4\n		C9.7,9,9.6,9.6,9.3,10.1L8.3,12.9z"
-        }
-      ));
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RichTextShortcut, { type: "primary", character: "-", onUse: onToggle }), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon, title: "small", onClick: onToggle, isActive, shortcutType: "primary", shortcutCharacter: "-" }));
-    }
-  });
-  wp.richText.registerFormatType("catpow/u", {
-    title: "underline",
-    tagName: "u",
-    className: "rtf-u",
-    edit({ isActive, value: value2, onChange }) {
-      const onToggle = () => onChange(toggleFormat(value2, { type: "catpow/u" }));
-      const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement(
-        "path",
-        {
-          d: "M6.2,12.1h7.2l2,5.2h2.6L11,0H8.5L1.9,17.3h2.4L6.2,12.1z M8.8,5.1C9.2,4,9.5,2.9,9.7,1.8C10,2.8,10.4,4,10.9,5.4l1.8,4.8\n	H6.9L8.8,5.1z M20,18v2H0v-2H20z"
-        }
-      ));
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RichTextShortcut, { type: "primary", character: "_", onUse: onToggle }), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon, title: "underline", onClick: onToggle, isActive, shortcutType: "primary", shortcutCharacter: "_" }));
-    }
-  });
-  wp.richText.registerFormatType("catpow/title", {
-    title: "Title",
-    tagName: "span",
-    className: "rtf-title",
-    attributes: {
-      type: "class"
-    },
-    edit(props) {
-      const { isActive, value: value2, onChange, activeAttributes, contentRef } = props;
-      const onToggle = () => {
-        return onChange(
-          toggleFormat(value2, {
-            type: "catpow/title",
-            attributes: { type: "is-header" }
-          })
-        );
-      };
-      const setAttributes = useCallback(
-        (attr) => {
-          onChange(
-            applyFormat(value2, {
-              type: "catpow/title",
-              attributes: Object.assign(activeAttributes, attr)
-            })
-          );
-        },
-        [value2, activeAttributes]
-      );
-      const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("g", null, /* @__PURE__ */ wp.element.createElement("path", { d: "M6.9,15.9V2.6h2.7v5.2h5.3V2.6h2.7v13.3h-2.7v-5.8H9.6v5.8H6.9z" })), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "1", width: "4", height: "18" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "5", y: "18", width: "14", height: "1" }));
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, null, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
-        CP.SelectButtons,
-        {
-          options: [
-            { label: "header", value: "is-header" },
-            { label: "headline", value: "is-headline" },
-            { label: "catch", value: "is-catch" }
-          ],
-          selected: activeAttributes["type"],
-          onChange: (type) => setAttributes({ type })
-        }
-      )))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { controls: [{ icon, onClick: onToggle, isActive }] })), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon, title: "Title", onClick: onToggle, isActive }));
-    }
-  });
-  wp.richText.registerFormatType("catpow/mark", {
-    title: "Mark",
-    tagName: "mark",
-    className: "rtf-mark",
-    attributes: {
-      color: "class"
-    },
-    edit(props) {
-      const { isActive, value: value2, onChange, activeAttributes, contentRef } = props;
-      const onToggle = () => {
-        return onChange(
-          toggleFormat(value2, {
-            type: "catpow/mark",
-            attributes: { color: "color_0" }
-          })
-        );
-      };
-      const setAttributes = useCallback(
-        (attr) => {
-          onChange(
-            applyFormat(value2, {
-              type: "catpow/mark",
-              attributes: Object.assign(activeAttributes, attr)
-            })
-          );
-        },
-        [value2, activeAttributes]
-      );
-      const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("polygon", { points: "7.9,10.8 12.1,10.8 10,5.3 	" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M0,2v16h20V2H0z M13.7,15.3L12.5,12h-5l-1.2,3.4H4.7L9,4h1.9l4.3,11.3H13.7z" }));
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: contentRef.current }, /* @__PURE__ */ wp.element.createElement(CP.SelectThemeColor, { onChange: (proxy) => setAttributes({ color: proxy.classes }), selected: activeAttributes["color"] }))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { controls: [{ icon, onClick: onToggle, isActive }] })), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon, title: "Mark", onClick: onToggle, isActive }));
-    }
-  });
-  wp.richText.registerFormatType("catpow/large", {
-    title: "Large",
-    tagName: "strong",
-    className: "rtf-large",
-    attributes: {
-      color: "class"
-    },
-    edit(props) {
-      const { isActive, value: value2, onChange, activeAttributes, contentRef } = props;
-      const onToggle = () => {
-        return onChange(
-          toggleFormat(value2, {
-            type: "catpow/large",
-            attributes: { color: "color_0" }
-          })
-        );
-      };
-      const setAttributes = useCallback(
-        (attr) => {
-          onChange(
-            applyFormat(value2, {
-              type: "catpow/large",
-              attributes: Object.assign(activeAttributes, attr)
-            })
-          );
-        },
-        [value2, activeAttributes]
-      );
-      const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement(
-        "path",
-        {
-          d: "M4.8,0.5h5c1.6,0,2.8,0.1,3.6,0.4c0.8,0.2,1.5,0.7,2,1.5c0.5,0.8,0.8,2,0.8,3.6c0,1.1-0.2,1.9-0.5,2.4\n		c-0.4,0.4-1.1,0.8-2.1,1c1.2,0.3,1.9,0.7,2.4,1.3c0.4,0.6,0.6,1.5,0.6,2.8v1.8c0,1.3-0.1,2.3-0.4,2.9c-0.3,0.6-0.8,1.1-1.4,1.3\n		c-0.7,0.2-2,0.3-4,0.3H4.8V0.5z M9.8,3.8v4.3c0.2,0,0.4,0,0.5,0c0.5,0,0.8-0.1,0.9-0.4c0.1-0.2,0.2-0.9,0.2-2.1\n		c0-0.6-0.1-1-0.2-1.3s-0.3-0.4-0.4-0.5C10.7,3.8,10.4,3.8,9.8,3.8z M9.8,11.1v5.4c0.7,0,1.2-0.1,1.4-0.3c0.2-0.2,0.3-0.7,0.3-1.5\n		v-1.8c0-0.8-0.1-1.3-0.3-1.5C11.1,11.2,10.6,11.1,9.8,11.1z"
-        }
-      ));
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: contentRef.current }, /* @__PURE__ */ wp.element.createElement(CP.SelectThemeColor, { onChange: (proxy) => setAttributes({ color: proxy.classes }), selected: activeAttributes["color"] }))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { controls: [{ icon, onClick: onToggle, isActive }] })), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon, title: "Large", onClick: onToggle, isActive }));
-    }
-  });
-  wp.richText.registerFormatType("catpow/tag", {
-    title: "tag",
-    tagName: "a",
-    className: "rtf-tag",
-    attributes: {
-      url: "href",
-      color: "class"
-    },
-    edit(props) {
-      const { isActive, value: value2, onChange, onFocus, activeAttributes, activeObject, contentRef } = props;
-      const onToggle = () => {
-        return onChange(
-          toggleFormat(value2, {
-            type: "catpow/tag",
-            attributes: { class: "color_0" }
-          })
-        );
-      };
-      const setAttributes = useCallback(
-        (attr) => {
-          onChange(
-            applyFormat(value2, {
-              type: "catpow/tag",
-              attributes: Object.assign(activeAttributes, attr)
-            })
-          );
-        },
-        [value2, activeAttributes]
-      );
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, null, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(TextControl, { label: "URL", value: activeAttributes["url"], onChange: (url) => setAttributes({ url }) }))), /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: contentRef.current }, /* @__PURE__ */ wp.element.createElement(CP.SelectThemeColor, { onChange: (proxy) => setAttributes({ color: proxy.classes }), selected: activeAttributes["color"] }))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { controls: [{ icon: "tag", onClick: onToggle, isActive }] })), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon: "tag", title: "tag", onClick: onToggle, isActive }));
-    }
-  });
-  wp.richText.registerFormatType("catpow/annotation", {
-    title: "annotation",
-    tagName: "small",
-    className: "rtf-annotation",
-    edit({ isActive, value: value2, onChange }) {
-      const onToggle = () => onChange(toggleFormat(value2, { type: "catpow/annotation" }));
-      const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement(
-        "path",
-        {
-          d: "M2.99,2.01l7.04,7.04l7.04-7.04l0.62,0.62l-7.04,7.04l7.04,7.04l-0.62,0.62l-7.04-7.04l-7.06,7.06l-0.62-0.62l7.06-7.06\n		L2.37,2.62L2.99,2.01z M3.95,11.26c-0.87,0-1.6-0.73-1.6-1.6s0.73-1.6,1.6-1.6s1.6,0.73,1.6,1.6C5.55,10.58,4.78,11.26,3.95,11.26z\n		 M8.43,3.58c0-0.87,0.73-1.6,1.6-1.6s1.6,0.73,1.6,1.6s-0.73,1.6-1.6,1.6C9.11,5.18,8.43,4.42,8.43,3.58z M11.63,15.74\n		c0,0.87-0.73,1.6-1.6,1.6s-1.6-0.73-1.6-1.6c0-0.88,0.73-1.6,1.6-1.6C10.94,14.14,11.63,14.91,11.63,15.74z M16.11,8.06\n		c0.87,0,1.6,0.73,1.6,1.6s-0.73,1.6-1.6,1.6c-0.88,0-1.6-0.73-1.6-1.6C14.51,8.75,15.28,8.06,16.11,8.06z"
-        }
-      ));
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { controls: [{ icon, onClick: onToggle, isActive }] })), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon, title: "annotation", onClick: onToggle, isActive }));
-    }
-  });
-  wp.richText.registerFormatType("catpow/custom", {
-    title: "custom",
-    tagName: "span",
-    className: "rtf-custom",
-    attributes: {
-      vars: "style"
-    },
-    edit(props) {
-      const { isActive, value: value2, onChange, onFocus, activeAttributes, activeObject, contentRef } = props;
-      const onToggle = () => {
-        return onChange(
-          toggleFormat(value2, {
-            type: "catpow/custom",
-            attributes: { vars: "font-size:1em;" }
-          })
-        );
-      };
-      const setAttributes = useCallback(
-        (attr) => {
-          onChange(
-            applyFormat(value2, {
-              type: "catpow/custom",
-              attributes: Object.assign(activeAttributes, attr)
-            })
-          );
-        },
-        [value2, activeAttributes]
-      );
-      const extractStateFromVars = useCallback((vars) => {
-        const state2 = {};
-        if (!vars) {
-          return state2;
-        }
-        const map = {
-          color: "color",
-          "background-color": "bgcolor",
-          "font-size": "size",
-          "font-weight": "weight"
-        };
-        vars.split(";").forEach((chunk) => {
-          const [key, val] = chunk.split(":");
-          state2[map[key]] = val;
-        });
-        return state2;
-      }, []);
-      const extractVarsFromState = useCallback((state2) => {
-        let vars = "";
-        const map = {
-          color: "color:$;",
-          bgcolor: "background-color:$;",
-          size: "font-size:$em;",
-          weight: "font-weight:$;"
-        };
-        Object.keys(map).forEach((key) => {
-          if (state2.hasOwnProperty(key)) {
-            vars += map[key].replace("$", "" + state2[key]);
-          }
-        });
-        return vars;
-      }, []);
-      const init = useCallback((state2) => {
-        if (state2.vars) {
-          const { vars } = state2;
-          return { vars, ...extractStateFromVars(vars) };
-        }
-        return { color: "inherit", size: 1, weight: 400, vars: "font-size:1em;" };
-      }, []);
-      const reducer = useCallback((state2, action) => {
-        if (action.hasOwnProperty("vars")) {
-          const { vars } = action;
-          return { vars, ...extractStateFromVars(vars) };
-        } else {
-          const newState = { ...state2, ...action };
-          newState.vars = extractVarsFromState(newState);
-          return newState;
-        }
-      }, []);
-      const [state, update] = useReducer(reducer, { vars: activeAttributes.vars }, init);
-      useEffect(() => {
-        if (isActive) {
-          onChange(
-            applyFormat(value2, {
-              type: "catpow/custom",
-              attributes: { vars: state.vars }
-            })
-          );
-        }
-      }, [state.vars]);
-      useEffect(() => {
-        update({ vars: activeAttributes.vars });
-      }, [activeAttributes.vars]);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, null, /* @__PURE__ */ wp.element.createElement(CardBody, { style: { width: "20rem" } }, /* @__PURE__ */ wp.element.createElement(TextControl, { label: "\u8272", onChange: (color) => update({ color }), value: state.color || "" }), /* @__PURE__ */ wp.element.createElement(TextControl, { label: "\u80CC\u666F\u8272", onChange: (bgcolor) => update({ bgcolor }), value: state.bgcolor || "" }), /* @__PURE__ */ wp.element.createElement(RangeControl, { label: "\u30B5\u30A4\u30BA", onChange: (size) => update({ size }), value: parseFloat(state.size || 1), min: 0.1, max: 10, step: 0.1 }), /* @__PURE__ */ wp.element.createElement(RangeControl, { label: "\u592A\u3055", onChange: (weight) => update({ weight }), value: parseFloat(state.weight || 400), min: 100, max: 1e3, step: 100 })))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { controls: [{ icon: "admin-generic", onClick: onToggle, isActive }] })), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon: "admin-generic", title: "custom", onClick: onToggle, isActive }));
-    }
-  });
-  wp.richText.registerFormatType("catpow/clear", {
-    title: "clear",
-    tagName: "div",
-    className: null,
-    edit({ isActive, value: value2, onChange }) {
-      return /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon: "dismiss", title: "\u{1F9F9}\u5168\u3066\u306E\u30B9\u30BF\u30A4\u30EB\u3092\u30AF\u30EA\u30A2", onClick: () => onChange(create({ html: value2.text })), isActive: false });
-    }
-  });
-
-  // ../blocks/_init/init/plugins.jsx
-  wp.plugins.registerPlugin("catpow-sidebar", {
-    render: (props) => {
-      const { useState: useState4, useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
-      const { PluginSidebarMoreMenuItem, PluginSidebar } = wp.editPost;
-      const { PanelBody } = wp.components;
-      const [structure, setStructure] = useState4(false);
-      const { DataStructure, DataStructureItem } = CP;
-      if (!structure) {
-        wp.apiFetch({ path: "/cp/v1/config/structure" }).then((structure2) => {
-          setStructure(structure2);
-        });
-      }
-      const RenderMeta = useCallback4(
-        ({ meta }) => {
-          return /* @__PURE__ */ wp.element.createElement(DataStructure, null, meta.map((item) => {
-            if (item.value) {
-              return /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: item.label, name: item.name }, /* @__PURE__ */ wp.element.createElement(RenderMetaValue, { value: item.value }));
-            }
-            return /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: item.label, name: item.name }, item.meta.length && /* @__PURE__ */ wp.element.createElement(RenderMeta, { meta: item.meta }));
-          }));
-        },
-        [props]
-      );
-      const RenderMetaValue = useCallback4(
-        ({ value: value2 }) => {
-          if (Array.isArray(value2)) {
-            return value2.map((val) => /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: val }));
-          }
-          return Object.keys(value2).map((key) => {
-            if (typeof value2[key] === "object") {
-              return /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: key }, /* @__PURE__ */ wp.element.createElement(RenderMetaValue, { value: value2[key] }));
-            }
-            return /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: key, name: value2[key] });
-          });
-        },
-        [props]
-      );
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(PluginSidebarMoreMenuItem, { target: "catpow-sidebar" }, "\u{1F43E}Catpow"), /* @__PURE__ */ wp.element.createElement(
-        PluginSidebar,
-        {
-          name: "catpow-sidebar",
-          title: "\u{1F43E}Catpow",
-          icon: /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("g", null, /* @__PURE__ */ wp.element.createElement(
-            "path",
-            {
-              d: "M10.1,14.5c0-0.9,0.5-1.4,1.3-1.5c0.6-0.1,1.1-0.5,1.6-0.8c0.8-0.5,2.3-0.4,3,0.1c0.4,0.3,0.8,0.6,1,1.1\n								c0.2,0.5,0.1,1,0.1,1.5c-0.1,0.8,0.1,1.6,0.1,2.4c0,1.3-1.4,1.7-2.3,1.4c-0.6-0.3-0.9-0.8-1.3-1.3c-0.4-0.4-0.9-0.7-1.4-0.9\n								c-0.8-0.3-1.7-0.6-2.1-1.6C10,14.8,10.1,14.6,10.1,14.5z"
-            }
-          ), /* @__PURE__ */ wp.element.createElement(
-            "path",
-            {
-              d: "M2.8,8.6c0.3-1,0.5-2.2,0.9-3.3c0.3-0.8,1.9-1.3,2.7-1c0.9,0.3,1.7,0.9,2.5,1.4c0.5,0.3,1.1,0.5,1.4,1.1\n								c0.2,0.5,0.2,0.9,0,1.4c-0.6,1.2-1.7,1-2.7,1.1c-0.8,0.1-1.4,0.5-2,0.9c-0.5,0.3-1,0.5-1.6,0.4C3.2,10.2,2.7,9.7,2.8,8.6z"
-            }
-          ), /* @__PURE__ */ wp.element.createElement(
-            "path",
-            {
-              d: "M4.9,2.2C4.8,2.8,4.8,3.6,4,3.9C3.5,4.1,3.2,3.8,2.9,3.5C2,2.6,2.2,1.6,2.7,0.6c0.2-0.3,0.5-0.5,0.9-0.4\n								c0.4,0,0.7,0.3,0.9,0.6C4.8,1.2,4.9,1.7,4.9,2.2z"
-            }
-          ), /* @__PURE__ */ wp.element.createElement(
-            "path",
-            {
-              d: "M1,3.5c0.8,0,1.3,0.8,1.5,1.4c0.2,0.7,0.1,1.2-0.4,1.7C1.6,7.1,0.9,6.8,0.5,6.2C0.1,5.6,0.1,4.9,0.2,4.3\n								C0.2,3.8,0.4,3.4,1,3.5z"
-            }
-          ), /* @__PURE__ */ wp.element.createElement(
-            "path",
-            {
-              d: "M5.8,1.8c0-1.2,0.4-1.6,1.3-1.5c0.6,0.1,1,0.6,1.1,1.2c0.1,0.8,0,1.5-0.6,2.1C7.1,4,6.7,3.7,6.5,3.4C6,3,5.7,2.4,5.8,1.8z\n								"
-            }
-          ), /* @__PURE__ */ wp.element.createElement("path", { d: "M15.3,11.5c-0.7,0-1-0.3-1-1c0-0.9,0.9-1.8,1.8-1.8c0.6,0,1.1,0.6,1.1,1.3C17.2,10.7,16.3,11.5,15.3,11.5z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M17.3,12.5c0-1.1,0.3-1.5,1.1-1.5c0.8,0,1.3,0.5,1.3,1.2c0,1-0.6,1.7-1.3,1.7C17.6,13.9,17.3,13.5,17.3,12.5z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M11.6,11.8c-0.5,0.1-0.9-0.2-0.9-0.8c0-1,0.6-1.9,1.3-2c0.8,0,1.3,0.4,1.3,1.2C13.3,11.1,12.7,11.7,11.6,11.8z" }), /* @__PURE__ */ wp.element.createElement(
-            "path",
-            {
-              d: "M18.9,17.7c-0.7,0-1.2-0.9-1-1.5c0.2-0.4,0.1-0.8,0.4-1.2c0.3-0.3,1.2-0.3,1.4,0.1c0.4,0.8,0.3,1.7-0.3,2.4\n								C19.3,17.6,19.1,17.7,18.9,17.7z"
-            }
-          ), /* @__PURE__ */ wp.element.createElement("path", { d: "M8.7,3.4c0-0.6,0.4-1.1,0.9-1.1C10.2,2.3,11,3.2,11,4c0,0.6-0.5,0.9-1.1,1C9.2,4.9,8.7,4.3,8.7,3.4z" })))
-        },
-        /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u30C7\u30FC\u30BF\u69CB\u9020", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(DataStructure, null, structure && Object.keys(structure).map((data_type) => {
-          return /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: data_type, key: data_type }, structure[data_type].length && /* @__PURE__ */ wp.element.createElement(DataStructure, null, structure[data_type].map((item) => /* @__PURE__ */ wp.element.createElement(DataStructureItem, { title: item.label, name: item.name, key: item.name }, item.meta.length && /* @__PURE__ */ wp.element.createElement(RenderMeta, { meta: item.meta })))));
-        })))
-      ));
-    }
-  });
-
-  // ../blocks/_init/init/AlignmentIcon.jsx
-  CP.AlignmentIcon = (props) => {
-    const { icon } = props;
-    switch (icon) {
-      case "top":
-        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "10", y: "3", width: "8", height: "11" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "3", width: "7", height: "15" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "1", width: "18", height: "1" }));
-      case "middle":
-        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("polygon", { points: "1.5 17.5 8.5 17.5 8.5 10.5 9.5 10.5 9.5 15.5 17.5 15.5 17.5 10.5 18.5 10.5 18.5 9.5 17.5 9.5 17.5 4.5 9.5 4.5 9.5 9.5 8.5 9.5 8.5 2.5 1.5 2.5 1.5 9.5 .5 9.5 .5 10.5 1.5 10.5 1.5 17.5" }));
-      case "bottom":
-        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "10", y: "6", width: "8", height: "11" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "2", width: "7", height: "15" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "18", width: "18", height: "1" }));
-      case "left":
-        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "3", y: "2", width: "11", height: "8" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "3", y: "11", width: "15", height: "7" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "1", width: "1", height: "18" }));
-      case "center":
-        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("polygon", { points: "9 19 10 19 10 18 17 18 17 11 10 11 10 10 15 10 15 2 10 2 10 1 9 1 9 2 4 2 4 10 9 10 9 11 2 11 2 18 9 18 9 19" }));
-      case "right":
-        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "6", y: "2", width: "11", height: "8" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "11", width: "15", height: "7" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "18", y: "1", width: "1", height: "18" }));
-      case "evenTop":
-        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "3", y: "3", width: "14", height: "5" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "12", width: "16", height: "7" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "1", width: "18", height: "1" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "10", width: "18", height: "1" }));
-      case "evenMiddle":
-        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("polygon", { points: "17 2 3 2 3 4 1 4 1 5 3 5 3 7 17 7 17 5 19 5 19 4 17 4 17 2" }), /* @__PURE__ */ wp.element.createElement("polygon", { points: "18 11 2 11 2 14 1 14 1 15 2 15 2 18 18 18 18 15 19 15 19 14 18 14 18 11" }));
-      case "evenBottom":
-        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "3", y: "1", width: "14", height: "5" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "10", width: "16", height: "7" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "7", width: "18", height: "1" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "18", width: "18", height: "1" }));
-      case "evenLeft":
-        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "3", y: "3", width: "5", height: "14" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "12", y: "2", width: "7", height: "16" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "1", width: "1", height: "18" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "10", y: "1", width: "1", height: "18" }));
-      case "evenCenter":
-        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("polygon", { points: "4 1 4 3 2 3 2 17 4 17 4 19 5 19 5 17 7 17 7 3 5 3 5 1 4 1" }), /* @__PURE__ */ wp.element.createElement("polygon", { points: "15 1 14 1 14 2 11 2 11 18 14 18 14 19 15 19 15 18 18 18 18 2 15 2 15 1" }));
-      case "evenRight":
-        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "3", width: "5", height: "14" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "10", y: "2", width: "7", height: "16" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "7", y: "1", width: "1", height: "18" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "18", y: "1", width: "1", height: "18" }));
-      case "evenSpaceV":
-        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "4", y: "2", width: "13", height: "6" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "4", y: "11", width: "14", height: "7" }), /* @__PURE__ */ wp.element.createElement("polygon", { points: "3 10 3 9 4 9 4 8 3 8 3 7 2 7 2 8 1 8 1 9 2 9 2 10 1 10 1 11 2 11 2 12 3 12 3 11 4 11 4 10 3 10" }));
-      case "evenSpaceH":
-        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "4", width: "6", height: "13" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "11", y: "4", width: "7", height: "14" }), /* @__PURE__ */ wp.element.createElement("polygon", { points: "12 3 12 2 11 2 11 1 10 1 10 2 9 2 9 1 8 1 8 2 7 2 7 3 8 3 8 4 9 4 9 3 10 3 10 4 11 4 11 3 12 3" }));
-    }
-  };
-
-  // ../blocks/_init/init/ConfigIcon.jsx
-  CP.ConfigIcon = (props) => {
-    const { icon } = props;
-    switch (icon) {
-      case "json":
-        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, " ", /* @__PURE__ */ wp.element.createElement("path", { d: "m.23,11.13v-2.28c.46-.03.81-.1,1.05-.21.23-.11.44-.31.61-.57.17-.27.29-.61.35-1.01.05-.3.08-.83.08-1.59,0-1.23.06-2.09.17-2.57.11-.48.32-.87.62-1.17.3-.29.73-.53,1.3-.7.39-.11.99-.17,1.82-.17h.5v2.27c-.7,0-1.15.04-1.35.12-.2.08-.35.2-.44.36-.1.16-.14.44-.14.83s-.03,1.16-.09,2.27c-.03.63-.11,1.14-.25,1.52-.13.39-.3.71-.51.96-.21.25-.52.52-.95.79.37.21.68.47.92.75.24.29.42.64.55,1.05.13.41.21.96.25,1.65.04,1.05.07,1.72.07,2.01,0,.42.05.71.15.87.1.16.25.29.46.38.21.08.65.13,1.33.13v2.28h-.5c-.85,0-1.51-.07-1.97-.2-.46-.14-.84-.36-1.15-.68s-.52-.71-.63-1.17c-.11-.47-.16-1.2-.16-2.2,0-1.17-.05-1.92-.15-2.27-.14-.51-.35-.87-.63-1.09-.28-.22-.71-.34-1.3-.38Z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "m19.56,11.13c-.46.03-.81.1-1.04.21-.23.11-.44.31-.6.58s-.29.61-.36,1.01c-.05.3-.08.83-.08,1.58,0,1.23-.06,2.09-.17,2.57-.11.49-.31.88-.61,1.17-.3.29-.74.53-1.31.7-.39.11-.99.17-1.82.17h-.5v-2.28c.68,0,1.12-.04,1.33-.13.21-.09.36-.21.46-.37.1-.16.15-.44.15-.82,0-.39.03-1.12.08-2.21.03-.66.12-1.19.26-1.58.14-.4.32-.73.56-1.01.23-.28.53-.52.89-.73-.47-.3-.81-.6-1.03-.89-.3-.42-.5-.95-.61-1.6-.07-.44-.12-1.42-.15-2.93,0-.48-.05-.79-.13-.95-.08-.16-.22-.28-.43-.37s-.67-.13-1.38-.13V.86h.5c.86,0,1.51.07,1.97.2s.84.36,1.15.68c.31.32.52.71.63,1.18.11.47.17,1.2.17,2.2,0,1.16.05,1.92.14,2.27.14.51.35.87.64,1.09.29.22.72.34,1.3.38v2.28Z" }));
-      case "light":
-        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("path", { d: "m10,5c-2.76,0-5,2.24-5,5s2.24,5,5,5,5-2.24,5-5-2.24-5-5-5Zm0,9c-2.21,0-4-1.79-4-4s1.79-4,4-4,4,1.79,4,4-1.79,4-4,4Z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "m3.5,10.5H1c-.28,0-.5-.22-.5-.5s.22-.5.5-.5h2.5c.28,0,.5.22.5.5s-.22.5-.5.5ZM10,.5c-.28,0-.5.22-.5.5v2.5c0,.28.22.5.5.5s.5-.22.5-.5V1c0-.28-.22-.5-.5-.5Zm0,15.5c-.28,0-.5.22-.5.5v2.5c0,.28.22.5.5.5s.5-.22.5-.5v-2.5c0-.28-.22-.5-.5-.5ZM3.99,3.28c-.2-.2-.51-.2-.71,0-.2.2-.2.51,0,.71l1.77,1.77c.2.2.51.2.71,0,.2-.2.2-.51,0-.71l-1.77-1.77Zm10.96,10.96c-.2-.2-.51-.2-.71,0s-.2.51,0,.71l1.77,1.77c.2.2.51.2.71,0s.2-.51,0-.71l-1.77-1.77Zm4.05-4.74h-2.5c-.28,0-.5.22-.5.5s.22.5.5.5h2.5c.28,0,.5-.22.5-.5s-.22-.5-.5-.5Zm-13.95,4.74l-1.77,1.77c-.2.2-.2.51,0,.71.2.2.51.2.71,0l1.77-1.77c.2-.2.2-.51,0-.71-.2-.2-.51-.2-.71,0ZM14.95,5.76l1.77-1.77c.2-.2.2-.51,0-.71s-.51-.2-.71,0l-1.77,1.77c-.2.2-.2.51,0,.71s.51.2.71,0Z" }));
-      case "contrast":
-        return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "10", y: "3", width: "8", height: "11" }), /* @__PURE__ */ wp.element.createElement("path", { d: "m10,1C5.03,1,1,5.03,1,10s4.03,9,9,9,9-4.03,9-9S14.97,1,10,1Zm0,17c-4.42,0-8-3.58-8-8S5.58,2,10,2v16Z" }));
-    }
-  };
-
-  // ../blocks/_init/init/BoundingBox.jsx
-  CP.BoundingBox = (props) => {
+  // ../blocks/_init/init/CP/components/BoundingBox.jsx
+  var BoundingBox = (props) => {
     const { targets, onDeselect, onDuplicate, onDelete, onChange } = props;
     const { useState: useState4, useCallback: useCallback4, useMemo: useMemo5, useEffect: useEffect6, useRef: useRef4 } = wp.element;
     const classes = useMemo5(() => bem("cp-boundingbox"), []);
     const ref = useRef4();
     const [style, setStyle] = useState4({});
     const [action, setAction] = useState4(false);
-    const container = useMemo5(
-      () => props.container || document,
-      [props.container]
-    );
+    const container = useMemo5(() => props.container || document, [props.container]);
     const tracePosition = useCallback4(
       (targets2) => {
         const cBnd = container.getBoundingClientRect();
@@ -2851,12 +1291,7 @@
           const isMove = vi === 1 && hi === 1;
           const d = isMove ? "move" : vi === 1 ? "ew" : hi === 1 ? "ns" : vi === hi ? "nwse" : "nesw";
           controls2.push({
-            className: [
-              isMove ? "is-position-control" : "is-size-control",
-              "is-" + v,
-              "is-" + h,
-              "is-" + d
-            ],
+            className: [isMove ? "is-position-control" : "is-size-control", "is-" + v, "is-" + h, "is-" + d],
             action: isMove ? "move" : "resize",
             flags: hi << 2 | vi
           });
@@ -2959,27 +1394,7 @@
     if (!targets.length) {
       return false;
     }
-    return /* @__PURE__ */ wp.element.createElement(
-      "div",
-      {
-        className: classes({ "is-doing-action": !!action }),
-        style,
-        ref,
-        onMouseDown,
-        onMouseMove,
-        onMouseUp,
-        onDoubleClick
-      },
-      /* @__PURE__ */ wp.element.createElement("div", { className: classes.controls() }, controls.map((props2, i) => /* @__PURE__ */ wp.element.createElement(
-        "span",
-        {
-          className: classes.controls.control(props2.className),
-          "data-control-action": props2.action,
-          "data-control-flags": props2.flags,
-          key: i
-        }
-      )))
-    );
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-doing-action": !!action }), style, ref, onMouseDown, onMouseMove, onMouseUp, onDoubleClick }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.controls() }, controls.map((props2, i) => /* @__PURE__ */ wp.element.createElement("span", { className: classes.controls.control(props2.className), "data-control-action": props2.action, "data-control-flags": props2.flags, key: i }))));
   };
 
   // modules/src/component/Animation/Animation.jsx
@@ -3032,12 +1447,12 @@
     }
     var disabled = params.disabled;
     var paramsRef = useLatest_default(params);
-    var _a = useState2({ isScratching: false }), state = _a[0], setState = _a[1];
+    var _a = useState({ isScratching: false }), state = _a[0], setState = _a[1];
     var refState = useRef(state);
     var refScratching = useRef(false);
     var refAnimationFrame = useRef(null);
-    var _b = useState2(null), el = _b[0], setEl = _b[1];
-    useEffect2(function() {
+    var _b = useState(null), el = _b[0], setEl = _b[1];
+    useEffect(function() {
       if (disabled)
         return;
       if (!el)
@@ -3214,10 +1629,10 @@
 
   // modules/src/hooks/useThrottle.jsx
   init_react();
-  var { useEffect: useEffect3, useRef: useRef2 } = react_default;
+  var { useEffect: useEffect2, useRef: useRef2 } = react_default;
   var useThrottle = (callback, interval, deps) => {
     const ref = useRef2(false);
-    useEffect3(() => {
+    useEffect2(() => {
       if (ref.current) {
         const timer = setTimeout(callback, interval);
         return () => clearTimeout(timer);
@@ -3234,9 +1649,9 @@
   var PositionInput = (props) => {
     const { className = "cp-positioninput", width = 100, height = 100, margin: margin2 = 10, grid = 10, snap = false, x = 50, y = 50, r: r2 = 6, onChange, ...otherProps } = props;
     const [ref, state] = useScratch_default();
-    const [pos, setPos] = useState2({ x, y });
+    const [pos, setPos] = useState({ x, y });
     useThrottle(() => onChange({ x: pos.x, y: pos.y }), 50, [pos.x, pos.y]);
-    useEffect2(() => {
+    useEffect(() => {
       if (!state.isScratching) {
         return;
       }
@@ -3391,7 +1806,7 @@
 
   // modules/src/hooks/useAgent.jsx
   init_react();
-  var { useMemo: useMemo4, useState: useState3, useCallback: useCallback3, useRef: useRef3, useEffect: useEffect4, createContext: createContext2, useContext: useContext2, lazy } = react_default;
+  var { useMemo: useMemo3, useState: useState2, useCallback: useCallback2, useRef: useRef3, useEffect: useEffect3, createContext: createContext2, useContext: useContext2, lazy } = react_default;
   var AgentContext = createContext2();
 
   // modules/src/hooks/useBem.jsx
@@ -3414,15 +1829,12 @@
 
   // modules/src/hooks/useDebounce.jsx
   init_react();
-  var { useEffect: useEffect5 } = react_default;
+  var { useEffect: useEffect4 } = react_default;
 
   // modules/src/component/Loop.jsx
   init_react();
 
-  // ../blocks/_init/init/Bem.jsx
-  CP.Bem = Bem;
-
-  // ../blocks/_init/init/SelectBlendMode.jsx
+  // ../blocks/_init/init/CP/components/SelectBlendMode.jsx
   var options = [
     { value: "normal", label: "\u901A\u5E38" },
     { value: "multiply", label: "\u4E57\u7B97" },
@@ -3441,13 +1853,13 @@
     { value: "color", label: "\u30AB\u30E9\u30FC" },
     { value: "luminosity", label: "\u660E\u5EA6" }
   ];
-  CP.SelectBlendMode = (props) => {
+  var SelectBlendMode = (props) => {
     const { SelectControl } = wp.components;
     return /* @__PURE__ */ wp.element.createElement(SelectControl, { label: props.label, onChange: props.onChange, value: props.value, options });
   };
 
-  // ../blocks/_init/init/SelectThemeColor.jsx
-  CP.SelectThemeColor = (props) => {
+  // ../blocks/_init/init/CP/components/SelectThemeColor.jsx
+  var SelectThemeColor = (props) => {
     const { onChange } = props;
     const { useCallback: useCallback4, useMemo: useMemo5, Fragment: Fragment2 } = wp.element;
     const { Icon } = wp.components;
@@ -3511,8 +1923,8 @@
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(ColorSelections, { proxy, fixed: true, active: data.fixed }), /* @__PURE__ */ wp.element.createElement(ColorSelections, { proxy, absolute: true, active: data.absolute }), /* @__PURE__ */ wp.element.createElement(ColorSelections, { proxy, relative: true, active: data.relative }), /* @__PURE__ */ wp.element.createElement(ToneSelections, { proxy }));
   };
 
-  // ../blocks/_init/init/SelectColors.jsx
-  CP.SelectColors = (props) => {
+  // ../blocks/_init/init/CP/components/SelectColors.jsx
+  var SelectColors = (props) => {
     const { useState: useState4, useRef: useRef4, useReducer: useReducer3, useCallback: useCallback4 } = wp.element;
     const { ColorPicker, ColorPalette, Popover: Popover2 } = wp.components;
     const { onChange } = props;
@@ -3560,82 +1972,23 @@
     return /* @__PURE__ */ wp.element.createElement("div", null, /* @__PURE__ */ wp.element.createElement(ColorPalette, { colors, value: index > -1 ? colors[index].color : "rgba(0,0,0,0)", onChange: onChangeOfColorPalette, disableCustomColors: true }), index > -1 && /* @__PURE__ */ wp.element.createElement(Popover2, { onClose: () => setIndex(-1) }, /* @__PURE__ */ wp.element.createElement(ColorPicker, { color: colors[index].color, onChangeComplete: onChangeOfColorPicker })));
   };
 
-  // ../blocks/_init/init/SelectButtons.jsx
-  CP.SelectButtons = (props) => {
+  // ../blocks/_init/init/CP/components/SelectButtons.jsx
+  var SelectButtons = (props) => {
     const { BaseControl, Button, ButtonGroup } = wp.components;
-    return /* @__PURE__ */ wp.element.createElement(BaseControl, { label: props.label, help: props.help, id: "cp-slectbuttons-" + wp.compose.useInstanceId(CP.SelectButtons) }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-selectbuttons" }, /* @__PURE__ */ wp.element.createElement(ButtonGroup, null, props.options.map((option) => /* @__PURE__ */ wp.element.createElement(Button, { onClick: () => props.onChange(option.value), isPrimary: props.selected === option.value, key: option.value }, option.label)))));
+    return /* @__PURE__ */ wp.element.createElement(BaseControl, { label: props.label, help: props.help, id: "cp-slectbuttons-" + wp.compose.useInstanceId(SelectButtons) }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-selectbuttons" }, /* @__PURE__ */ wp.element.createElement(ButtonGroup, null, props.options.map((option) => /* @__PURE__ */ wp.element.createElement(Button, { onClick: () => props.onChange(option.value), isPrimary: props.selected === option.value, key: option.value }, option.label)))));
   };
 
-  // ../blocks/_init/init/SelectGridButtons.jsx
-  CP.SelectGridButtons = (props) => {
+  // ../blocks/_init/init/CP/components/SelectGridButtons.jsx
+  var SelectGridButtons = (props) => {
     const { BaseControl } = wp.components;
     const maxStrlen = props.options.reduce((acc, cur) => Math.max(acc, cur.label.length + cur.label.replace(/[ -~]+/, "").length), 3);
     const colNum = Math.min(6, Math.floor(36 / (maxStrlen + 2)));
-    return /* @__PURE__ */ wp.element.createElement(BaseControl, { label: props.label, help: props.help, id: "cp-selectgridbuttons-" + wp.compose.useInstanceId(CP.SelectGridButtons) }, /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectgridbuttons col" + colNum }, props.options.map((option) => /* @__PURE__ */ wp.element.createElement("li", { onClick: () => props.onChange(option.value), className: "item" + (props.selected === option.value ? " active" : ""), key: option.value }, option.label))));
+    return /* @__PURE__ */ wp.element.createElement(BaseControl, { label: props.label, help: props.help, id: "cp-selectgridbuttons-" + wp.compose.useInstanceId(SelectGridButtons) }, /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectgridbuttons col" + colNum }, props.options.map((option) => /* @__PURE__ */ wp.element.createElement("li", { onClick: () => props.onChange(option.value), className: "item" + (props.selected === option.value ? " active" : ""), key: option.value }, option.label))));
   };
 
-  // ../blocks/_init/init/ResponsiveImage.jsx
-  CP.ResponsiveImage = (props) => {
-    const { className = "cp-responsiveimage", attr, set, keys, index, sizes, devices, device, isTemplate, ...otherProps } = props;
-    let item = CP.getItemByKeyAndIndex(props, keys?.items, index);
-    if (isTemplate && keys.code && item[keys.code]) {
-      return item[keys.code];
-    }
-    return /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item });
-  };
-  var ResponsiveImageBody = (props) => {
-    const { className = "cp-responsiveimage", attr, set, keys, index, devices, device, isTemplate, item, size, ...otherProps } = props;
-    let { sizes } = props;
-    const primaryClassName = className.split(" ")[0];
-    if (item?.[keys.mime] == "application/pdf") {
-      return /* @__PURE__ */ wp.element.createElement("iframe", { className: className + " is-pdf", src: item[keys.src], "data-mime": item[keys.mime], ...otherProps });
-    }
-    const type = item[keys.mime] ? item[keys.mime].split("/")[0] : "image";
-    if (type == "audio") {
-      return /* @__PURE__ */ wp.element.createElement("audio", { className: className + " is-audio", src: item[keys.src], "data-mime": item[keys.mime], ...otherProps });
-    }
-    if (item[keys.srcset] && !sizes) {
-      if (device) {
-        sizes = CP.devices[device].sizes_value;
-      } else {
-        sizes = CP.getImageSizesForDevices(devices || ["sp", "pc"]);
-      }
-    }
-    if (type == "video") {
-      const videoAtts = {
-        "data-mime": item[keys.mime],
-        autoplay: 1,
-        loop: 1,
-        playsinline: 1,
-        muted: 1
-      };
-      if (keys.sources) {
-        if (device) {
-          const source = item[keys.sources] && item[keys.sources].find((source2) => source2.device === device) || {
-            srcset: wpinfo.theme_url + "/images/dummy.mp4"
-          };
-          return /* @__PURE__ */ wp.element.createElement("video", { className: className + " is-video", src: source.srcset, ...videoAtts, ...otherProps });
-        }
-        return /* @__PURE__ */ wp.element.createElement("video", { className: className + " is-picture", ...videoAtts, ...otherProps }, item[keys.sources] && item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { src: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("source", { src: item[keys.src] }));
-      }
-      return /* @__PURE__ */ wp.element.createElement("video", { className: className + " is-video", src: item[keys.src], ...videoAtts, ...otherProps });
-    }
-    var src = CP.imageSrcOrDummy(keys.src ? item[keys.src] : keys.url && item[keys.url] ? item[keys.url].slice(4, -1) : null, size);
-    if (keys.sources) {
-      if (device) {
-        const source = item[keys.sources] && item[keys.sources].find((source2) => source2.device === device) || {
-          srcset: wpinfo.theme_url + "/images/dummy.jpg"
-        };
-        return /* @__PURE__ */ wp.element.createElement("picture", { className: className + " is-picture", ...otherProps }, /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src: source.srcset, alt: item[keys.alt] }));
-      }
-      return /* @__PURE__ */ wp.element.createElement("picture", { className: className + " is-picture", ...otherProps }, item[keys.sources] && item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src, alt: item[keys.alt] }));
-    }
-    return /* @__PURE__ */ wp.element.createElement("img", { className: className + " is-img", src, alt: item[keys.alt], srcSet: item[keys.srcset], sizes, "data-mime": item[keys.mime], ...otherProps });
-  };
-
-  // ../blocks/_init/init/SelectResponsiveImage.jsx
-  CP.SelectResponsiveImage = (props) => {
-    const { className = "cp-selectresponsiveimage", type, attr, set, keys = {}, index = 0, size, devices, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
+  // ../blocks/_init/init/CP/components/SelectResponsiveImage.jsx
+  var SelectResponsiveImage = (props) => {
+    const { className = "cp-selectresponsiveimage", type, attr, set, keys = {}, index = 0, size, devices: devices2, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
     let onClick;
     const itemsKey = keys.items && Array.isArray(keys.items) ? keys.items[0] : keys.items;
     const items2 = itemsKey && attr[itemsKey];
@@ -3684,21 +2037,80 @@
               set(data);
             }
           },
-          { keys, type, size, devices }
+          { keys, type, size, devices: devices2 }
         );
       };
     }
     if (isTemplate && keys.code && item[keys.code]) {
       return /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: item[keys.code] });
     }
-    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, showSelectPictureSources ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item, keys }), /* @__PURE__ */ wp.element.createElement("div", { className: "cp-selectresponsiveimage__controls" }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { attr, set, keys, index, size, devices }))) : /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item, keys, style: { pointerEvents: "auto" }, onClick }));
+    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, showSelectPictureSources ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImageBody, { ...props, className, item, keys }), /* @__PURE__ */ wp.element.createElement("div", { className: "cp-selectresponsiveimage__controls" }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { attr, set, keys, index, size, devices: devices2 }))) : /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImageBody, { ...props, className, item, keys, style: { pointerEvents: "auto" }, onClick }));
   };
 
-  // ../blocks/_init/init/SelectPictureSources.jsx
-  CP.SelectPictureSources = (props) => {
+  // ../blocks/_init/init/CP/components/ResponsiveImage.jsx
+  var ResponsiveImage = (props) => {
+    const { className = "cp-responsiveimage", attr, set, keys, index, sizes, devices: devices2, device, isTemplate, ...otherProps } = props;
+    let item = CP.getItemByKeyAndIndex(props, keys?.items, index);
+    if (isTemplate && keys.code && item[keys.code]) {
+      return item[keys.code];
+    }
+    return /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item });
+  };
+  var ResponsiveImageBody = (props) => {
+    const { className = "cp-responsiveimage", attr, set, keys, index, devices: devices2, device, isTemplate, item, size, ...otherProps } = props;
+    let { sizes } = props;
+    const primaryClassName = className.split(" ")[0];
+    if (item?.[keys.mime] == "application/pdf") {
+      return /* @__PURE__ */ wp.element.createElement("iframe", { className: className + " is-pdf", src: item[keys.src], "data-mime": item[keys.mime], ...otherProps });
+    }
+    const type = item[keys.mime] ? item[keys.mime].split("/")[0] : "image";
+    if (type == "audio") {
+      return /* @__PURE__ */ wp.element.createElement("audio", { className: className + " is-audio", src: item[keys.src], "data-mime": item[keys.mime], ...otherProps });
+    }
+    if (item[keys.srcset] && !sizes) {
+      if (device) {
+        sizes = CP.devices[device].sizes_value;
+      } else {
+        sizes = CP.getImageSizesForDevices(devices2 || ["sp", "pc"]);
+      }
+    }
+    if (type == "video") {
+      const videoAtts = {
+        "data-mime": item[keys.mime],
+        autoplay: 1,
+        loop: 1,
+        playsinline: 1,
+        muted: 1
+      };
+      if (keys.sources) {
+        if (device) {
+          const source = item[keys.sources] && item[keys.sources].find((source2) => source2.device === device) || {
+            srcset: wpinfo.theme_url + "/images/dummy.mp4"
+          };
+          return /* @__PURE__ */ wp.element.createElement("video", { className: className + " is-video", src: source.srcset, ...videoAtts, ...otherProps });
+        }
+        return /* @__PURE__ */ wp.element.createElement("video", { className: className + " is-picture", ...videoAtts, ...otherProps }, item[keys.sources] && item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { src: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("source", { src: item[keys.src] }));
+      }
+      return /* @__PURE__ */ wp.element.createElement("video", { className: className + " is-video", src: item[keys.src], ...videoAtts, ...otherProps });
+    }
+    var src = CP.imageSrcOrDummy(keys.src ? item[keys.src] : keys.url && item[keys.url] ? item[keys.url].slice(4, -1) : null, size);
+    if (keys.sources) {
+      if (device) {
+        const source = item[keys.sources] && item[keys.sources].find((source2) => source2.device === device) || {
+          srcset: wpinfo.theme_url + "/images/dummy.jpg"
+        };
+        return /* @__PURE__ */ wp.element.createElement("picture", { className: className + " is-picture", ...otherProps }, /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src: source.srcset, alt: item[keys.alt] }));
+      }
+      return /* @__PURE__ */ wp.element.createElement("picture", { className: className + " is-picture", ...otherProps }, item[keys.sources] && item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src, alt: item[keys.alt] }));
+    }
+    return /* @__PURE__ */ wp.element.createElement("img", { className: className + " is-img", src, alt: item[keys.alt], srcSet: item[keys.srcset], sizes, "data-mime": item[keys.mime], ...otherProps });
+  };
+
+  // ../blocks/_init/init/CP/components/SelectPictureSources.jsx
+  var SelectPictureSources = (props) => {
     const { Icon } = wp.components;
     const {
-      devices = ["sp", "tb"],
+      devices: devices2 = ["sp", "tb"],
       keys = {
         mime: "mime",
         src: "src",
@@ -3710,11 +2122,11 @@
     } = props;
     const { useMemo: useMemo5 } = wp.element;
     const classes = useMemo5(() => bem("cp-selectpicturesources"), []);
-    return /* @__PURE__ */ wp.element.createElement("table", { className: classes({ "is-compact": compact }) }, /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.tbody() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), colSpan: devices.length }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props, keys, devices }))), /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, devices.map((device) => /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: device }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.tbody.tr.td.label() }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props, keys, devices, device }))))));
+    return /* @__PURE__ */ wp.element.createElement("table", { className: classes({ "is-compact": compact }) }, /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.tbody() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), colSpan: devices2.length }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props, keys, devices: devices2 }))), /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, devices2.map((device) => /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: device }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.tbody.tr.td.label() }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props, keys, devices: devices2, device }))))));
   };
 
-  // ../blocks/_init/init/SelectPreparedImage.jsx
-  CP.SelectPreparedImage = ({ className, name, value: value2, color = 0, onChange, ...otherProps }) => {
+  // ../blocks/_init/init/CP/components/SelectPreparedImage.jsx
+  var SelectPreparedImage = ({ className, name, value: value2, color = 0, onChange, ...otherProps }) => {
     let onClick;
     const { useEffect: useEffect6, useReducer: useReducer3 } = wp.element;
     const { getURLparam, setURLparam, setURLparams, removeURLparam } = Catpow.util;
@@ -3776,8 +2188,8 @@
     }));
   };
 
-  // ../blocks/_init/init/SelectPreparedImageSet.jsx
-  CP.SelectPreparedImageSet = ({ className, name, value: value2, color = 0, onChange, ...otherProps }) => {
+  // ../blocks/_init/init/CP/components/SelectPreparedImageSet.jsx
+  var SelectPreparedImageSet = ({ className, name, value: value2, color = 0, onChange, ...otherProps }) => {
     const { getURLparam, setURLparam, setURLparams, removeURLparam } = Catpow.util;
     const [state, dispatch] = wp.element.useReducer(
       (state2, action) => {
@@ -3842,18 +2254,18 @@
     }));
   };
 
-  // ../blocks/_init/init/InputIcon.jsx
-  CP.InputIcon = (props) => {
+  // ../blocks/_init/init/CP/components/InputIcon.jsx
+  var InputIcon = (props) => {
     return wp.element.createElement(CP[wp.hooks.applyFilters("catpow.IconComponent", "StandardIcon")].Input, props);
   };
 
-  // ../blocks/_init/init/OutputIcon.jsx
-  CP.OutputIcon = (props) => {
+  // ../blocks/_init/init/CP/components/OutputIcon.jsx
+  var OutputIcon = (props) => {
     return wp.element.createElement(CP[wp.hooks.applyFilters("catpow.IconComponent", "StandardIcon")].Output, props);
   };
 
-  // ../blocks/_init/init/StandardIcon.jsx
-  CP.StandardIcon = {
+  // ../blocks/_init/init/CP/components/StandardIcon.jsx
+  var StandardIcon = {
     Input: (props) => {
       const { item, prm, save } = props;
       prm.keys = prm.keys || {};
@@ -3880,8 +2292,8 @@
     }
   };
 
-  // ../blocks/_init/init/DataInputTable.jsx
-  CP.DataInputTable = (props) => {
+  // ../blocks/_init/init/CP/components/DataInputTable.jsx
+  var DataInputTable = (props) => {
     const { cols, value: value2, onChange } = props;
     const { useCallback: useCallback4, useMemo: useMemo5 } = wp.element;
     const el = wp.element.createElement;
@@ -3948,8 +2360,8 @@
     ))));
   };
 
-  // ../blocks/_init/init/DynamicInput.jsx
-  CP.DynamicInput = (props) => {
+  // ../blocks/_init/init/CP/components/DynamicInput.jsx
+  var DynamicInput = (props) => {
     const { useMemo: useMemo5 } = wp.element;
     const { RadioControl, RangeControl: RangeControl2, SelectControl, TextControl: TextControl2, TextareaControl, ToggleControl } = wp.components;
     const { param, value: value2, onChange } = props;
@@ -4004,8 +2416,8 @@
     }
   };
 
-  // ../blocks/_init/init/DataSetInput.jsx
-  CP.DataSetInput = (props) => {
+  // ../blocks/_init/init/CP/components/DataSetInput.jsx
+  var DataSetInput = (props) => {
     const { useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
     const { param, value: dataSet = [], onChange } = props;
     const classes = bem("cp-datasetinput");
@@ -4074,8 +2486,8 @@
   }
   var clsx_default = clsx;
 
-  // ../blocks/_init/init/Item.jsx
-  CP.Item = (props) => {
+  // ../blocks/_init/init/CP/components/Item.jsx
+  var Item = (props) => {
     const { tag = "div", items: items2, index, indexKey = "currentItemIndex", set, attr, children } = props;
     const isSelected = props.isSelected === void 0 ? index == attr[indexKey] : props.isSelected;
     return wp.element.createElement(
@@ -4130,8 +2542,8 @@
     );
   };
 
-  // ../blocks/_init/init/ItemControl.jsx
-  CP.ItemControl = (props) => {
+  // ../blocks/_init/init/CP/components/ItemControl.jsx
+  var ItemControl = (props) => {
     const { className = "", tag: Tag = "div", controls, float = true, children } = props;
     const { useState: useState4 } = wp.element;
     const [open, setOpen] = useState4(false);
@@ -4150,579 +2562,15 @@
     ));
   };
 
-  // ../blocks/_init/init/ItemControlInfoPanel.jsx
-  CP.ItemControlInfoPanel = () => {
+  // ../blocks/_init/init/CP/components/ItemControlInfoPanel.jsx
+  var ItemControlInfoPanel = () => {
     const { PanelBody } = wp.components;
     return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u64CD\u4F5C", initialOpen: false, icon: "info" }, /* @__PURE__ */ wp.element.createElement("table", null, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + S"), /* @__PURE__ */ wp.element.createElement("td", null, "\u4FDD\u5B58")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + D"), /* @__PURE__ */ wp.element.createElement("td", null, "\u8907\u88FD")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + delete"), /* @__PURE__ */ wp.element.createElement("td", null, "\u524A\u9664")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + \u2191"), /* @__PURE__ */ wp.element.createElement("td", null, "\u524D\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + \u2193"), /* @__PURE__ */ wp.element.createElement("td", null, "\u6B21\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048")))));
   };
 
-  // ../blocks/_init/init/selectiveClassesPresets.jsx
-  var { __: __2 } = wp.i18n;
-  var resolveSelectiveClassesPresets = (prms) => {
-    prms.forEach((prm, index) => {
-      if (typeof prm === "string" && selectiveClassesPresets.hasOwnProperty(prm)) {
-        prms[index] = prm = { preset: prm };
-      }
-      if (prm.preset) {
-        if (selectiveClassesPresets.hasOwnProperty(prm.preset)) {
-          const preset = selectiveClassesPresets[prm.preset];
-          if (typeof preset === "function") {
-            prms[index] = preset(prm);
-          } else {
-            prms[index] = { ...preset, ...prm };
-          }
-        }
-      }
-      if (prm.sub) {
-        if (Array.isArray(prm.sub)) {
-          resolveSelectiveClassesPresets(prm.sub);
-        } else {
-          Object.values(prm.sub).forEach(resolveSelectiveClassesPresets);
-        }
-      }
-    });
-    return prms;
-  };
-  var selectiveClassesPresets = {
-    customColorVars: {
-      name: "customColorVars",
-      input: "customColorVars",
-      label: __2("\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", "catpow"),
-      vars: "vars"
-    },
-    isTemplate: {
-      name: "template",
-      input: "bool",
-      key: "isTemplate",
-      label: __2("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
-      sub: [
-        {
-          name: "loop",
-          input: "bool",
-          label: __2("\u30EB\u30FC\u30D7", "catpow"),
-          key: "doLoop",
-          sub: [
-            {
-              name: "contentPath",
-              label: "content path",
-              input: "text",
-              key: "content_path"
-            },
-            { name: "query", label: "query", input: "textarea", key: "query" },
-            {
-              name: "loopCount",
-              label: __2("\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", "catpow"),
-              input: "range",
-              key: "loopCount",
-              min: 1,
-              max: 16
-            }
-          ]
-        }
-      ]
-    },
-    backgroundColor: {
-      name: "backgroundColor",
-      type: "buttons",
-      label: __2("\u80CC\u666F\u8272", "catpow"),
-      values: {
-        hasBackgroundColorNone: __2("\u306A\u3057", "catpow"),
-        hasBackgroundColor: __2("\u901A\u5E38", "catpow"),
-        hasBackgroundColorAlt: __2("\u5F37\u8ABF", "catpow")
-      }
-    },
-    backgroundImage({ preset, vars = "vars", classKey, ...otherParams }) {
-      return {
-        name: "backgroundImage",
-        label: __2("\u80CC\u666F\u753B\u50CF", "catpow"),
-        values: "hasBackgroundImage",
-        classKey,
-        sub: [
-          {
-            name: "fixed",
-            label: __2("\u56FA\u5B9A", "catpow"),
-            classKey,
-            values: "hasBackgroundImageFixed"
-          },
-          {
-            name: "image",
-            label: __2("\u753B\u50CF", "catpow"),
-            vars,
-            key: "--cp-background-image",
-            input: "image"
-          },
-          {
-            name: "repeat",
-            label: __2("\u7E70\u308A\u8FD4\u3057", "catpow"),
-            vars,
-            key: "--cp-background-image-repeat",
-            input: "buttons",
-            values: { repeat: "\u4E21\u65B9", "repeat-x": "\u6A2A", "repeat-y": "\u7E26", "no-repeat": "\u306A\u3057" }
-          },
-          {
-            name: "position",
-            label: __2("\u4F4D\u7F6E", "catpow"),
-            vars,
-            key: "--cp-background-image-position",
-            input: "position"
-          },
-          {
-            name: "size",
-            label: __2("\u30B5\u30A4\u30BA", "catpow"),
-            vars,
-            key: "--cp-background-image-size",
-            input: "size"
-          },
-          {
-            name: "blendmode",
-            label: __2("\u30E2\u30FC\u30C9", "catpow"),
-            vars,
-            key: "--cp-background-image-blendmode",
-            input: "blendmode"
-          },
-          {
-            name: "opacity",
-            label: __2("\u4E0D\u900F\u660E\u5EA6", "catpow"),
-            vars,
-            key: "--cp-background-image-opacity",
-            input: "range",
-            min: 0,
-            max: 1,
-            step: 0.1
-          }
-        ],
-        ...otherParams
-      };
-    },
-    backgroundPattern({ preset, vars = "vars", ...otherParams }) {
-      return {
-        name: "backgroundPattern",
-        label: __2("\u80CC\u666F\u30D1\u30BF\u30FC\u30F3", "catpow"),
-        values: "hasBackgroundPattern",
-        sub: [
-          {
-            name: "image",
-            label: __2("\u753B\u50CF", "catpow"),
-            vars,
-            key: "--cp-background-pattern-image",
-            input: "image"
-          },
-          {
-            name: "repeat",
-            label: __2("\u7E70\u308A\u8FD4\u3057", "catpow"),
-            vars,
-            key: "--cp-background-pattern-repeat",
-            input: "buttons",
-            values: { repeat: "\u4E21\u65B9", "repeat-x": "\u6A2A", "repeat-y": "\u7E26", "no-repeat": "\u306A\u3057" }
-          },
-          {
-            name: "position",
-            label: __2("\u4F4D\u7F6E", "catpow"),
-            vars,
-            key: "--cp-background-pattern-position",
-            input: "position"
-          },
-          {
-            name: "size",
-            label: __2("\u30B5\u30A4\u30BA", "catpow"),
-            vars,
-            key: "--cp-background-pattern-size",
-            input: "size"
-          }
-        ],
-        ...otherParams
-      };
-    },
-    textAlign: {
-      name: "textAlign",
-      type: "buttons",
-      label: __2("\u30C6\u30AD\u30B9\u30C8\u63C3\u3048", "catpow"),
-      values: {
-        hasTextAlignLeft: __2("\u5DE6\u63C3\u3048", "catpow"),
-        hasTextAlignCenter: __2("\u4E2D\u592E", "catpow"),
-        hasTextAlignRight: __2("\u53F3\u63C3\u3048", "catpow")
-      }
-    },
-    verticalAlign: {
-      name: "verticalAlign",
-      type: "buttons",
-      label: __2("\u5782\u76F4\u65B9\u5411\u63C3\u3048", "catpow"),
-      values: {
-        hasVerticalAlignTop: __2("\u4E0A\u63C3\u3048", "catpow"),
-        hasVerticalAlignMiddle: __2("\u4E2D\u592E", "catpow"),
-        hasVerticalAlignBottom: __2("\u4E0B\u63C3\u3048", "catpow")
-      }
-    },
-    fontSize: {
-      name: "size",
-      type: "buttons",
-      label: __2("\u6587\u5B57\u30B5\u30A4\u30BA", "catpow"),
-      values: {
-        hasFontSizeLarge: __2("\u5927", "catpow"),
-        hasFontSizeMiddle: __2("\u4E2D", "catpow"),
-        hasFontSizeSmall: __2("\u5C0F", "catpow")
-      }
-    },
-    width: {
-      name: "width",
-      type: "buttons",
-      label: __2("\u5E45", "catpow"),
-      values: {
-        hasWidthFull: __2("\u30D5\u30EB", "catpow"),
-        hasWidthWide: __2("\u30EF\u30A4\u30C9", "catpow"),
-        hasWidthRegular: __2("\u30EC\u30AE\u30E5\u30E9\u30FC", "catpow"),
-        hasWidthNarrow: __2("\u30CA\u30ED\u30FC", "catpow")
-      }
-    },
-    size: {
-      name: "size",
-      type: "buttons",
-      label: __2("\u30B5\u30A4\u30BA", "catpow"),
-      values: {
-        isSizeLarge: __2("\u5927", "catpow"),
-        isSizeMedium: __2("\u4E2D", "catpow"),
-        isSizeSmall: __2("\u5C0F", "catpow")
-      }
-    },
-    itemSize: {
-      name: "itemSize",
-      label: __2("\u30B5\u30A4\u30BA", "catpow"),
-      vars: "vars",
-      key: "--cp-item-size",
-      input: "range",
-      min: 100,
-      max: 1200,
-      step: 10,
-      coef: 0.0625,
-      unit: "rem"
-    },
-    colorScheme: {
-      name: "colorScheme",
-      type: "buttons",
-      label: __2("\u914D\u8272", "catpow"),
-      values: {
-        hasColorSchemeInherit: __2("\u7D99\u627F", "catpow"),
-        hasColorSchemeReverted: __2("\u901A\u5E38", "catpow"),
-        hasColorSchemeInverted: __2("\u53CD\u8EE2", "catpow")
-      }
-    },
-    clipPath({ preset, vars = "vars", ...otherParams }) {
-      return {
-        name: "clipPath",
-        label: __2("\u30AF\u30EA\u30C3\u30D7", "catpow"),
-        values: "hasClipPath",
-        sub: [
-          {
-            name: "shape",
-            label: __2("\u5F62\u72B6", "catpow"),
-            type: "buttons",
-            values: {
-              hasClipShapeEllipse: __2("\u6955\u5186", "catpow"),
-              hasClipShapeSlope: __2("\u50BE\u659C", "catpow"),
-              hasClipShapeArrow: __2("\u30A2\u30ED\u30FC", "catpow"),
-              hasClipShapeTail: __2("\u30D5\u30AD\u30C0\u30B7", "catpow")
-            },
-            sub: {
-              hasClipShapeEllipse: [
-                {
-                  name: "direction",
-                  type: "buttons",
-                  values: {
-                    hasClipShapeBoth: __2("\u4E21\u65B9", "catpow"),
-                    hasClipShapeUpper: __2("\u4E0A", "catpow"),
-                    hasClipShapeBelow: __2("\u4E0B", "catpow")
-                  }
-                },
-                {
-                  name: "amount",
-                  label: __2("\u91CF", "catpow"),
-                  input: "range",
-                  vars,
-                  key: "--cp-clip-shape-amount",
-                  min: 1,
-                  max: 100
-                }
-              ],
-              hasClipShapeSlope: [
-                {
-                  name: "uppper",
-                  type: "buttons",
-                  values: {
-                    hasClipShapeUpperNone: __2("\u306A\u3057", "catpow"),
-                    hasClipShapeUpperLeft: __2("\u5DE6", "catpow"),
-                    hasClipShapeUpperRight: __2("\u53F3", "catpow")
-                  }
-                },
-                {
-                  name: "below",
-                  type: "buttons",
-                  values: {
-                    hasClipShapeBelowNone: __2("\u306A\u3057", "catpow"),
-                    hasClipShapeBelowLeft: __2("\u5DE6", "catpow"),
-                    hasClipShapeBelowRight: __2("\u53F3", "catpow")
-                  }
-                },
-                {
-                  name: "upperHeight",
-                  label: __2("\u4E0A\u9AD8\u3055", "catpow"),
-                  input: "range",
-                  vars,
-                  key: "--cp-clip-shape-upper-height",
-                  min: 8,
-                  max: 400
-                },
-                {
-                  name: "belowHeight",
-                  label: __2("\u4E0B\u9AD8\u3055", "catpow"),
-                  input: "range",
-                  vars,
-                  key: "--cp-clip-shape-below-height",
-                  min: 8,
-                  max: 400
-                }
-              ],
-              hasClipShapeArrow: [
-                {
-                  name: "uppper",
-                  type: "buttons",
-                  values: {
-                    hasClipShapeUpperNone: __2("\u306A\u3057", "catpow"),
-                    hasClipShapeUpperIn: __2("\u5185", "catpow"),
-                    hasClipShapeUpperOut: __2("\u5916", "catpow")
-                  }
-                },
-                {
-                  name: "below",
-                  type: "buttons",
-                  values: {
-                    hasClipShapeBelowNone: __2("\u306A\u3057", "catpow"),
-                    hasClipShapeBelowIn: __2("\u5185", "catpow"),
-                    hasClipShapeBelowOut: __2("\u5916", "catpow")
-                  }
-                },
-                {
-                  name: "upperHeight",
-                  label: __2("\u4E0A\u9AD8\u3055", "catpow"),
-                  input: "range",
-                  vars,
-                  key: "--cp-clip-shape-upper-height",
-                  min: 8,
-                  max: 400
-                },
-                {
-                  name: "belowHeight",
-                  label: __2("\u4E0B\u9AD8\u3055", "catpow"),
-                  input: "range",
-                  vars,
-                  key: "--cp-clip-shape-below-height",
-                  min: 8,
-                  max: 400
-                }
-              ],
-              hasClipShapeTail: [
-                {
-                  name: "uppper",
-                  type: "buttons",
-                  values: {
-                    hasClipShapeUpperNone: __2("\u306A\u3057", "catpow"),
-                    hasClipShapeUpperIn: __2("\u5185", "catpow"),
-                    hasClipShapeUpperOut: __2("\u5916", "catpow")
-                  }
-                },
-                {
-                  name: "below",
-                  type: "buttons",
-                  values: {
-                    hasClipShapeBelowNone: __2("\u306A\u3057", "catpow"),
-                    hasClipShapeBelowIn: __2("\u5185", "catpow"),
-                    hasClipShapeBelowOut: __2("\u5916", "catpow")
-                  }
-                },
-                {
-                  name: "upperWidth",
-                  label: __2("\u4E0A\u5E45", "catpow"),
-                  input: "range",
-                  vars,
-                  key: "--cp-clip-shape-upper-width",
-                  min: 8,
-                  max: 400
-                },
-                {
-                  name: "upperHeight",
-                  label: __2("\u4E0A\u9AD8\u3055", "catpow"),
-                  input: "range",
-                  vars,
-                  key: "--cp-clip-shape-upper-height",
-                  min: 8,
-                  max: 400
-                },
-                {
-                  name: "belowWidth",
-                  label: __2("\u4E0B\u5E45", "catpow"),
-                  input: "range",
-                  vars,
-                  key: "--cp-clip-shape-below-width",
-                  min: 8,
-                  max: 400
-                },
-                {
-                  name: "belowHeight",
-                  label: __2("\u4E0B\u9AD8\u3055", "catpow"),
-                  input: "range",
-                  vars,
-                  key: "--cp-clip-shape-below-height",
-                  min: 8,
-                  max: 400
-                }
-              ]
-            }
-          }
-        ],
-        ...otherParams
-      };
-    },
-    customPadding({ preset, vars = "vars", ...otherParams }) {
-      return {
-        name: "customPadding",
-        label: __2("\u4F59\u767D", "catpow"),
-        values: "hasCustomPadding",
-        sub: [
-          {
-            name: "paddingTop",
-            label: __2("\u4E0A\u4F59\u767D", "catpow"),
-            input: "range",
-            vars,
-            key: "--cp-padding-top",
-            min: 0,
-            max: 400,
-            coef: 0.0625,
-            unit: "rem"
-          },
-          {
-            name: "paddingBottom",
-            label: __2("\u4E0B\u4F59\u767D", "catpow"),
-            input: "range",
-            vars,
-            key: "--cp-padding-bottom",
-            min: 0,
-            max: 400,
-            coef: 0.0625,
-            unit: "rem"
-          },
-          {
-            name: "paddingInline",
-            label: __2("\u6A2A\u4F59\u767D", "catpow"),
-            input: "range",
-            vars,
-            key: "--cp-padding-inline",
-            min: 0,
-            max: 100,
-            coef: 0.0625,
-            unit: "rem"
-          }
-        ],
-        ...otherParams
-      };
-    },
-    customMargin({ preset, vars = "vars", ...otherParams }) {
-      return {
-        name: "customMargin",
-        label: __2("\u9593\u9694", "catpow"),
-        values: "hasCustomMargin",
-        sub: [
-          {
-            name: "marginTop",
-            label: __2("\u4E0A\u9593\u9694", "catpow"),
-            input: "range",
-            vars,
-            key: "--cp-margin-top",
-            min: -400,
-            max: 400,
-            coef: 0.0625,
-            unit: "rem"
-          },
-          {
-            name: "marginBottom",
-            label: __2("\u4E0B\u9593\u9694", "catpow"),
-            input: "range",
-            vars,
-            key: "--cp-margin-bottom",
-            min: -400,
-            max: 400,
-            coef: 0.0625,
-            unit: "rem"
-          }
-        ],
-        ...otherParams
-      };
-    },
-    customContentWidth({ preset, vars = "vars", ...otherParams }) {
-      return {
-        name: "customContentWidth",
-        label: __2("\u30AB\u30B9\u30BF\u30E0\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
-        values: "hasCustomContentWidth",
-        sub: [
-          {
-            name: "contentWidth",
-            label: __2("\u5E45", "catpow"),
-            input: "range",
-            vars,
-            key: "--cp-custom-content-width",
-            min: 50,
-            max: 100,
-            unit: "vw"
-          },
-          {
-            name: "contentMaxWidth",
-            label: __2("\u6700\u5927\u5E45", "catpow"),
-            input: "range",
-            vars,
-            key: "--cp-custom-content-max-width",
-            min: 200,
-            max: 1600,
-            coef: 0.0625,
-            unit: "rem"
-          }
-        ],
-        ...otherParams
-      };
-    },
-    contentWidth({ preset, vars = "vars", ...otherParams }) {
-      return {
-        name: "contentWidth",
-        label: __2("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
-        values: "hasContentWidth",
-        sub: [{ preset: "customContentWidth", vars }],
-        ...otherParams
-      };
-    },
-    customBorderRadius({ preset, vars = "vars", ...otherParams }) {
-      return {
-        name: "cusotomRadius",
-        label: __2("\u89D2\u4E38", "catpow"),
-        values: "hasCustomBorderRadius",
-        sub: [
-          {
-            name: "borderRadius",
-            label: __2("\u5F84", "catpow"),
-            input: "range",
-            vars,
-            key: "--cp-border-radius",
-            min: 1,
-            max: 100
-          }
-        ],
-        ...otherParams
-      };
-    }
-  };
-  wp.domReady(() => {
-    wp.hooks.applyFilters("catpow.blocks.selectiveClassesPresets", CP.finderProxy(selectiveClassesPresets));
-  });
-
-  // ../blocks/_init/init/SelectClassPanel.jsx
-  CP.SelectClassPanelContext = wp.element.createContext({});
-  CP.SelectClassPanel = (props) => {
+  // ../blocks/_init/init/CP/components/SelectClassPanel.jsx
+  var SelectClassPanelContext = wp.element.createContext({});
+  var SelectClassPanel = (props) => {
     const { Fragment: Fragment2, useMemo: useMemo5, useCallback: useCallback4, useContext: useContext3, createElement: el } = wp.element;
     const { __: __3 } = wp.i18n;
     const { PanelBody, CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl: TextControl2, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
@@ -4741,12 +2589,12 @@
     const selectiveClasses = useMemo5(() => {
       if (!triggerClasses || !triggerClasses.item) {
         if (Array.isArray(props.selectiveClasses)) {
-          return resolveSelectiveClassesPresets(props.selectiveClasses);
+          return CP.resolveSelectiveClassesPresets(props.selectiveClasses);
         }
-        return resolveSelectiveClassesPresets(Object.values(props.selectiveClasses));
+        return CP.resolveSelectiveClassesPresets(Object.values(props.selectiveClasses));
       }
       const blockStates = CP.classNamesToFlags(attr[blockClasssKey]);
-      return resolveSelectiveClassesPresets(triggerClasses.item[Object.keys(triggerClasses.item).find((value2) => blockStates[value2])]);
+      return CP.resolveSelectiveClassesPresets(triggerClasses.item[Object.keys(triggerClasses.item).find((value2) => blockStates[value2])]);
     }, [props.selectiveClasses, triggerClasses && attr[blockClasssKey]]);
     const { styleDatas } = attr;
     const item = useMemo5(() => {
@@ -5635,8 +3483,8 @@
     return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanelContext.Provider, { value: { props, item, states, allStates, set, save, saveClasses, saveCss, primaryClassKey } }, selectiveClasses.map((prm, index2) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index2 }, el(SelectClass, { prm }))), props.children));
   };
 
-  // ../blocks/_init/init/AlignClassToolbar.jsx
-  CP.AlignClassToolbar = (props) => {
+  // ../blocks/_init/init/CP/components/AlignClassToolbar.jsx
+  var AlignClassToolbar = (props) => {
     const { BlockAlignmentToolbar } = wp.blockEditor;
     const aligns = ["left", "center", "right"];
     return /* @__PURE__ */ wp.element.createElement(
@@ -5651,8 +3499,8 @@
     );
   };
 
-  // ../blocks/_init/init/VerticalAlignClassToolbar.jsx
-  CP.VerticalAlignClassToolbar = (props) => {
+  // ../blocks/_init/init/CP/components/VerticalAlignClassToolbar.jsx
+  var VerticalAlignClassToolbar = (props) => {
     const { BlockVerticalAlignmentToolbar } = wp.blockEditor;
     const aligns = ["top", "center", "bottom"];
     return /* @__PURE__ */ wp.element.createElement(
@@ -5667,7 +3515,7 @@
     );
   };
 
-  // ../blocks/_init/init/PositionInput.jsx
+  // ../blocks/_init/init/CP/components/PositionInput.jsx
   init_react();
   var valueToPosition = (val) => {
     let [x, y] = val ? val.split(" ") : [50, 50];
@@ -5713,11 +3561,11 @@
     }
     return `${x} ${y}`;
   };
-  CP.PositionInput = (props) => {
+  var PositionInput2 = (props) => {
     const { Button, ButtonGroup, Icon } = wp.components;
     const { onChange } = props;
-    const pos = useMemo3(() => valueToPosition(props.value), [props.value]);
-    const [showGrid, setShowGrid] = useState2(pos.x % 10 === 0 && pos.y % 10 === 0);
+    const pos = useMemo2(() => valueToPosition(props.value), [props.value]);
+    const [showGrid, setShowGrid] = useState(pos.x % 10 === 0 && pos.y % 10 === 0);
     return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("div", { className: "positioninput-" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_input" }, /* @__PURE__ */ wp.element.createElement(PositionInput, { onChange: (pos2) => onChange(positionToValue(pos2)), ...pos, grid: showGrid ? 10 : 0, snap: showGrid })), /* @__PURE__ */ wp.element.createElement("div", { className: "_controls" }, /* @__PURE__ */ wp.element.createElement(
       Icon,
       {
@@ -5731,15 +3579,15 @@
     ))));
   };
 
-  // ../blocks/_init/init/SelectColorClass.jsx
-  CP.SelectColorClass = (props) => {
+  // ../blocks/_init/init/CP/components/SelectColorClass.jsx
+  var SelectColorClass = (props) => {
     const { BaseControl } = wp.components;
     const { label, help } = props;
     return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement(CP.SelectThemeColor, { onChange: props.onChange, selected: props.selected }));
   };
 
-  // ../blocks/_init/init/SelectPatternClass.jsx
-  CP.SelectPatternClass = (props) => {
+  // ../blocks/_init/init/CP/components/SelectPatternClass.jsx
+  var SelectPatternClass = (props) => {
     const { BaseControl } = wp.components;
     const { label, help, selected, onChange } = props;
     var items2 = Array.from(Array(6), (v, i) => {
@@ -5753,7 +3601,7 @@
     return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectpattern" }, items2));
   };
 
-  // ../blocks/_init/init/SelectSize.jsx
+  // ../blocks/_init/init/CP/components/SelectSize.jsx
   init_react();
   var options2 = [
     { value: "cover", label: "\u5916\u63A5" },
@@ -5762,19 +3610,19 @@
     { value: "custom", label: "\u30AB\u30B9\u30BF\u30E0" }
   ];
   var regularTypes = ["cover", "contain", "auto"];
-  CP.SelectSize = (props) => {
+  var SelectSize = (props) => {
     const { onChange } = props;
     const { RangeControl: RangeControl2 } = wp.components;
-    const [type, setType] = useState2(regularTypes.includes(props.value) ? props.value : "custom");
-    const [size, setSize] = useState2(parseInt(props.value) || 100);
-    useEffect2(() => {
+    const [type, setType] = useState(regularTypes.includes(props.value) ? props.value : "custom");
+    const [size, setSize] = useState(parseInt(props.value) || 100);
+    useEffect(() => {
       onChange(type === "custom" ? size + "px" : type);
     }, [type, size]);
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectButtons, { label: props.label, onChange: setType, selected: type, options: options2 }), type === "custom" && /* @__PURE__ */ wp.element.createElement(RangeControl2, { onChange: setSize, value: size, min: props.min || 5, max: props.max || 1e3, step: props.step || 5 }));
   };
 
-  // ../blocks/_init/init/SelectPositionClass.jsx
-  CP.SelectPositionClass = (props) => {
+  // ../blocks/_init/init/CP/components/SelectPositionClass.jsx
+  var SelectPositionClass = (props) => {
     const { BaseControl } = wp.components;
     const rows = [
       ["topLeft", "top", "topRight"],
@@ -5807,8 +3655,8 @@
     })))))));
   };
 
-  // ../blocks/_init/init/ImporterCSVPanel.jsx
-  CP.ImporterCSVPanel = (props) => {
+  // ../blocks/_init/init/CP/components/ImporterCSVPanel.jsx
+  var ImporterCSVPanel = (props) => {
     const { PanelBody, FormFileUpload } = wp.components;
     let reader = new FileReader();
     reader.onload = (e) => {
@@ -5826,8 +3674,8 @@
     ));
   };
 
-  // ../blocks/_init/init/SelectBreakPointToolbar.jsx
-  CP.SelectBreakPointToolbar = (props) => {
+  // ../blocks/_init/init/CP/components/SelectBreakPointToolbar.jsx
+  var SelectBreakPointToolbar = (props) => {
     const { ToolbarGroup: ToolbarGroup2 } = wp.components;
     return /* @__PURE__ */ wp.element.createElement(
       ToolbarGroup2,
@@ -5844,8 +3692,8 @@
     );
   };
 
-  // ../blocks/_init/init/SelectModeToolbar.jsx
-  CP.SelectModeToolbar = (props) => {
+  // ../blocks/_init/init/CP/components/SelectModeToolbar.jsx
+  var SelectModeToolbar = (props) => {
     const { BlockControls: BlockControls2 } = wp.blockEditor;
     const { ToolbarGroup: ToolbarGroup2 } = wp.components;
     const { set, attr, modes = ["EditMode", "AltMode"] } = props;
@@ -5883,12 +3731,12 @@
     }));
   };
 
-  // ../blocks/_init/init/SelectDeviceToolbar.jsx
-  CP.SelectDeviceToolbar = (props) => {
+  // ../blocks/_init/init/CP/components/SelectDeviceToolbar.jsx
+  var SelectDeviceToolbar = (props) => {
     const { BlockControls: BlockControls2 } = wp.blockEditor;
     const { ToolbarGroup: ToolbarGroup2 } = wp.components;
-    const { set, attr, devices = ["sp", "pc"], defaultInput } = props;
-    return /* @__PURE__ */ wp.element.createElement(BlockControls2, null, devices.map((device) => {
+    const { set, attr, devices: devices2 = ["sp", "pc"], defaultInput } = props;
+    return /* @__PURE__ */ wp.element.createElement(BlockControls2, null, devices2.map((device) => {
       return /* @__PURE__ */ wp.element.createElement(
         ToolbarGroup2,
         {
@@ -5912,8 +3760,8 @@
     }));
   };
 
-  // ../blocks/_init/init/EditItemsTable.jsx
-  CP.EditItemsTable = (props) => {
+  // ../blocks/_init/init/CP/components/EditItemsTable.jsx
+  var EditItemsTable = (props) => {
     const { set, attr, itemsKey = "items", isTemplate = false } = props;
     const { useCallback: useCallback4 } = wp.element;
     const { RichText } = wp.blockEditor;
@@ -6011,23 +3859,23 @@
     })));
   };
 
-  // ../blocks/_init/init/DummyImage.jsx
-  CP.DummyImage = ({ className = "cp-dummyimage", text }) => {
+  // ../blocks/_init/init/CP/components/DummyImage.jsx
+  var DummyImage = ({ className = "cp-dummyimage", text }) => {
     return /* @__PURE__ */ wp.element.createElement("img", { className, src: wpinfo.plugins_url + "/catpow/callee/dummy_image.php?text=" + text });
   };
 
-  // ../blocks/_init/init/DataStructure.jsx
-  CP.DataStructure = (props) => {
+  // ../blocks/_init/init/CP/components/DataStructure.jsx
+  var DataStructure = (props) => {
     return /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-datastructure" }, props.children);
   };
-  CP.DataStructureItem = (props) => {
+  var DataStructureItem = (props) => {
     const { useState: useState4 } = wp.element;
     const [open, setOpen] = useState4(false);
     return /* @__PURE__ */ wp.element.createElement("li", { className: "item " + (props.children ? "hasChildren " + (open ? "open" : "close") : "noChildren") }, /* @__PURE__ */ wp.element.createElement("h5", { className: "title", onClick: () => setOpen(!open) }, props.title, void 0 !== props.name && /* @__PURE__ */ wp.element.createElement("span", { className: "name" }, props.name)), !!open && !!props.children && /* @__PURE__ */ wp.element.createElement("div", { className: "children" }, props.children));
   };
 
-  // ../blocks/_init/init/EventInputCards.jsx
-  CP.EventInputCards = (props) => {
+  // ../blocks/_init/init/CP/components/EventInputCards.jsx
+  var EventInputCards = (props) => {
     const { title, onChange } = props;
     const { useState: useState4, useReducer: useReducer3, useCallback: useCallback4, useEffect: useEffect6, useMemo: useMemo5 } = wp.element;
     const { BaseControl, Card: Card2, CardHeader, CardBody: CardBody2, CardFooter, Flex, FlexItem, FlexBlock, Icon, TextControl: TextControl2 } = wp.components;
@@ -6157,8 +4005,8 @@
     return /* @__PURE__ */ wp.element.createElement(BaseControl, null, state.events.length > 0 ? state.events.map((event, index) => /* @__PURE__ */ wp.element.createElement(EventInputCard, { event, index, canRemove: state.events.length > 1, key: index })) : /* @__PURE__ */ wp.element.createElement(EventInputCard, { event: {}, index: 0 }));
   };
 
-  // ../blocks/_init/init/ServerSideRender.jsx
-  CP.ServerSideRender = (props) => {
+  // ../blocks/_init/init/CP/components/ServerSideRender.jsx
+  var ServerSideRender = (props) => {
     const { className, block, attributes } = props;
     const { RawHTML, useState: useState4, useMemo: useMemo5, useRef: useRef4, useEffect: useEffect6 } = wp.element;
     const { useDebounce } = wp.compose;
@@ -6194,12 +4042,12 @@
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RawHTML, { className }, response), stylesheets.map((stylesheet) => /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: stylesheet, key: stylesheet })));
   };
 
-  // ../blocks/_init/init/ServerSideRenderPart.jsx
-  CP.ServerSideRenderPart = (props) => {
+  // ../blocks/_init/init/CP/components/ServerSideRenderPart.jsx
+  var ServerSideRenderPart = (props) => {
     const { className, ...otherProps } = props;
     return /* @__PURE__ */ wp.element.createElement("div", { className }, "[ssr_parts" + Object.keys(otherProps).reduce((p, c) => p += ` ${c}=${otherProps[c]}`, "") + "]");
   };
-  CP.ServerSideRenderPart.Preview = (props) => {
+  ServerSideRenderPart.Preview = (props) => {
     const { className, name, ...otherProps } = props;
     const { RawHTML, useState: useState4, useMemo: useMemo5, useRef: useRef4, useEffect: useEffect6 } = wp.element;
     const [response, setResponse] = useState4(false);
@@ -6232,8 +4080,8 @@
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RawHTML, { className }, response), stylesheets.map((stylesheet) => /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: stylesheet, key: stylesheet })));
   };
 
-  // ../blocks/_init/init/ColorVarTracer.jsx
-  CP.ColorVarTracer = (props) => {
+  // ../blocks/_init/init/CP/components/ColorVarTracer.jsx
+  var ColorVarTracer = (props) => {
     const { target } = props;
     const { useMemo: useMemo5 } = wp.element;
     const vars = useMemo5(() => {
@@ -6254,8 +4102,8 @@
     return /* @__PURE__ */ wp.element.createElement("div", { style: vars }, props.children);
   };
 
-  // ../blocks/_init/init/PlacedPictures.jsx
-  CP.PlacedPictures = (props) => {
+  // ../blocks/_init/init/CP/components/PlacedPictures.jsx
+  var PlacedPictures = (props) => {
     const { className, attr, keys, index } = props;
     const item = keys.items ? attr[keys.items][index] : attr;
     const pictures = item[keys.pictures];
@@ -6264,8 +4112,8 @@
       return /* @__PURE__ */ wp.element.createElement("div", { className: "item", style: CP.parseStyleString(style), key: index2 }, code || /* @__PURE__ */ wp.element.createElement("picture", { className: "picture" }, sources && sources.map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: "img", src, alt })));
     }));
   };
-  CP.PlacedPictures.Edit = (props) => {
-    const { className, set, attr, keys, index, devices } = props;
+  PlacedPictures.Edit = (props) => {
+    const { className, set, attr, keys, index, devices: devices2 } = props;
     const { useState: useState4, useMemo: useMemo5, useCallback: useCallback4, useRef: useRef4, useEffect: useEffect6 } = wp.element;
     const { BlockControls: BlockControls2, InspectorControls } = wp.blockEditor;
     const { BaseControl, Icon, PanelBody, RangeControl: RangeControl2, TextControl: TextControl2, Toolbar, ToolbarGroup: ToolbarGroup2, ToolbarButton, ToolbarDropdownMenu } = wp.components;
@@ -6355,7 +4203,7 @@
               left: "0rem"
             },
             code: false,
-            sources: devices.map((device) => {
+            sources: devices2.map((device) => {
               return { device, srcset: CP.imageSrcOrDummy() };
             }),
             src: CP.imageSrcOrDummy(),
@@ -6398,7 +4246,7 @@
               Object.assign(picture, data);
               save();
             },
-            { keys: { sources: "sources", src: "src", alt: "alt" }, size: "full", devices }
+            { keys: { sources: "sources", src: "src", alt: "alt" }, size: "full", devices: devices2 }
           )
         },
         sources && sources.map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })),
@@ -6434,15 +4282,15 @@
     ));
   };
 
-  // ../blocks/_init/init/Link.jsx
-  CP.Link = (props) => {
+  // ../blocks/_init/init/CP/components/Link.jsx
+  var Link = (props) => {
     const { className, attr, keys, index, ...otherProps } = props;
     const item = keys.items ? attr[keys.items][index] : attr;
     const href = item[keys.href] || "";
     const target = href.indexOf("://") !== -1 ? "_brank" : null;
     return /* @__PURE__ */ wp.element.createElement("a", { className, href, target, rel: target && "noopener", ...otherProps }, props.children);
   };
-  CP.Link.Edit = (props) => {
+  Link.Edit = (props) => {
     const { className, set, attr, keys, index, isSelected = "auto", ...otherProps } = props;
     const { onChange } = props;
     const { useMemo: useMemo5, useCallback: useCallback4, useEffect: useEffect6, useState: useState4 } = wp.element;
@@ -6492,14 +4340,14 @@
     );
   };
 
-  // ../blocks/_init/init/RTF.jsx
-  CP.RTF = (props) => {
+  // ../blocks/_init/init/CP/components/RTF.jsx
+  var RTF = (props) => {
     const { className, pref = "rtf", attr, keys = { text: "text" }, index, ...otherProps } = props;
     const item = keys.items ? attr[keys.items][index] : attr;
     const text = item[keys.text] ? item[keys.text] : "";
     return /* @__PURE__ */ wp.element.createElement("div", { className, ...otherProps, dangerouslySetInnerHTML: { __html: rtf(text, pref) } });
   };
-  CP.RTF.Edit = (props) => {
+  RTF.Edit = (props) => {
     const { className, pref = "rtf", set, attr, keys = { text: "text" }, index, isSelected = true, ...otherProps } = props;
     const { useMemo: useMemo5, useCallback: useCallback4, useState: useState4 } = wp.element;
     const classes = useMemo5(() => bem("cp-rtf " + className), [className]);
@@ -6561,8 +4409,8 @@
     ))))));
   };
 
-  // ../blocks/_init/init/Loop.jsx
-  CP.Loop = (props) => {
+  // ../blocks/_init/init/CP/components/Loop.jsx
+  var Loop = (props) => {
     const { current = 0, Component = "div", loop = false, ...otherProps } = props;
     const { useState: useState4, useMemo: useMemo5, useCallback: useCallback4, useEffect: useEffect6, useRef: useRef4 } = wp.element;
     const items2 = (() => {
@@ -6583,12 +4431,12 @@
     })();
   };
 
-  // ../blocks/_init/init/CustomColorVars.jsx
-  CP.CustomColorVars = (props) => {
+  // ../blocks/_init/init/CP/components/CustomColorVars.jsx
+  var CustomColorVars = (props) => {
     const { useState: useState4, useRef: useRef4, useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
     const { ColorPicker, CheckboxControl, Flex, FlexItem, FlexBlock, Button, Popover: Popover2 } = wp.components;
     const { label = "\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", value: value2, onChange } = props;
-    const cache2 = useRef4(value2);
+    const cache3 = useRef4(value2);
     const [index, setIndex] = useState4(-1);
     const [useCustomColor, setUseCustomColor] = useState4(Object.keys(value2).length > 0);
     const classes = bem("cp-customcolorvars");
@@ -6636,7 +4484,7 @@
       });
       return colors2;
     }, []);
-    const Item = useCallback4((props2) => {
+    const Item2 = useCallback4((props2) => {
       const { classes: classes2, role, originalColor, onChange: onChange2 } = props2;
       const [isOpen, setIsOpen] = useState4(false);
       const [isCustomized, setIsCustomized] = useState4(!!props2.color);
@@ -6679,27 +4527,27 @@
         label,
         onChange: () => {
           if (useCustomColor) {
-            cache2.current = value2;
+            cache3.current = value2;
             clearAllColorVars();
           } else {
-            onChange(cache2.current);
+            onChange(cache3.current);
           }
           setUseCustomColor(!useCustomColor);
         },
         checked: useCustomColor
       }
-    ), /* @__PURE__ */ wp.element.createElement("div", { className: classes.items({ "is-active": useCustomColor }) }, roles.map((role) => /* @__PURE__ */ wp.element.createElement(Item, { role, classes: classes.items.item, onChange, color: colors[role.key] || false, originalColor: originalColors[role.key], key: role.key }))));
+    ), /* @__PURE__ */ wp.element.createElement("div", { className: classes.items({ "is-active": useCustomColor }) }, roles.map((role) => /* @__PURE__ */ wp.element.createElement(Item2, { role, classes: classes.items.item, onChange, color: colors[role.key] || false, originalColor: originalColors[role.key], key: role.key }))));
   };
 
-  // ../blocks/_init/init/Message.jsx
-  CP.Message = (props) => {
+  // ../blocks/_init/init/CP/components/Message.jsx
+  var Message = (props) => {
     const { useMemo: useMemo5 } = wp.element;
     const classes = useMemo5(() => bem("cp-message"), []);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._body() }, props.children));
   };
 
-  // ../blocks/_init/init/NavBar.jsx
-  CP.NavBar = (props) => {
+  // ../blocks/_init/init/CP/components/NavBar.jsx
+  var NavBar = (props) => {
     const { value: value2, label, onChange } = props;
     const { useMemo: useMemo5, useState: useState4 } = wp.element;
     const classes = bem("cp-navbar");
@@ -6716,4 +4564,2318 @@
       option.label
     ))));
   };
+
+  // ../blocks/_init/init/CP/data/example.js
+  var dummyText = {
+    title: "\u543E\u8F29\u306F\u732B\u3067\u3042\u308B\u3002",
+    lead: "\u540D\u524D\u306F\u307E\u3060\u306A\u3044\u3002\u3069\u3053\u3067\u751F\u308C\u305F\u304B\u9813\u3068\u898B\u5F53\u304C\u3064\u304B\u306C\u3002\u4F55\u3067\u3082\u8584\u6697\u3044\u3058\u3081\u3058\u3081\u3057\u305F\u6240\u3067\u30CB\u30E3\u30FC\u30CB\u30E3\u30FC\u6CE3\u3044\u3066\u3044\u305F\u4E8B\u3060\u3051\u306F\u8A18\u61B6\u3057\u3066\u3044\u308B\u3002",
+    text: "\u540D\u524D\u306F\u307E\u3060\u306A\u3044\u3002\u3069\u3053\u3067\u751F\u308C\u305F\u304B\u9813\u3068\u898B\u5F53\u304C\u3064\u304B\u306C\u3002\u4F55\u3067\u3082\u8584\u6697\u3044\u3058\u3081\u3058\u3081\u3057\u305F\u6240\u3067\u30CB\u30E3\u30FC\u30CB\u30E3\u30FC\u6CE3\u3044\u3066\u3044\u305F\u4E8B\u3060\u3051\u306F\u8A18\u61B6\u3057\u3066\u3044\u308B\u3002\u543E\u8F29\u306F\u3053\u3053\u3067\u59CB\u3081\u3066\u4EBA\u9593\u3068\u3044\u3046\u3082\u306E\u3092\u898B\u305F\u3002\u3057\u304B\u3082\u3042\u3068\u3067\u805E\u304F\u3068\u305D\u308C\u306F\u66F8\u751F\u3068\u3044\u3046\u4EBA\u9593\u4E2D\u3067\u4E00\u756A\u7370\u60AA\u306A\u7A2E\u65CF\u3067\u3042\u3063\u305F\u305D\u3046\u3060\u3002\u3053\u306E\u66F8\u751F\u3068\u3044\u3046\u306E\u306F\u6642\u3005\u6211\u3005\u3092\u6355\u3048\u3066\u716E\u3066\u98DF\u3046\u3068\u3044\u3046\u8A71\u3067\u3042\u308B\u3002\u3057\u304B\u3057\u305D\u306E\u5F53\u6642\u306F\u4F55\u3068\u3044\u3046\u8003\u3082\u306A\u304B\u3063\u305F\u304B\u3089\u5225\u6BB5\u6050\u3057\u3044\u3068\u3082\u601D\u308F\u306A\u304B\u3063\u305F\u3002",
+    footer: "\u300E\u543E\u8F29\u306F\u732B\u3067\u3042\u308B\u300F\uFF08\u308F\u304C\u306F\u3044\u306F\u306D\u3053\u3067\u3042\u308B\uFF09\u3000\u590F\u76EE\u6F31\u77F3\u3000\u8457"
+  };
+  var example = {
+    attributes: {
+      title: [dummyText.title],
+      headerText: [dummyText.title],
+      footerText: [dummyText.footer],
+      lead: [dummyText.lead],
+      text: [dummyText.text]
+    },
+    innerBlocks: [
+      {
+        name: "core/paragraph",
+        attributes: {
+          content: dummyText.text
+        }
+      }
+    ]
+  };
+
+  // ../blocks/_init/init/CP/data/store.js
+  var cache2 = deepMap();
+  var filters = {};
+  var config = {};
+
+  // ../blocks/_init/init/CP/data/convertibles.js
+  var listedConvertibles = [
+    "catpow/listed",
+    "catpow/flow",
+    "catpow/faq",
+    "catpow/ranking",
+    "catpow/dialog",
+    "catpow/sphere",
+    "catpow/slider",
+    "catpow/banners",
+    "catpow/lightbox",
+    "catpow/panes",
+    "catpow/slidablemenu",
+    "catpow/showcase"
+  ];
+  var tableConvertibles = ["catpow/simpletable", "catpow/datatable", "catpow/comparetable", "catpow/layouttable"];
+
+  // ../blocks/_init/init/CP/data/devices.js
+  var devices = {
+    sp: {
+      icon: "smartphone",
+      width: 480,
+      media_query: "(max-width:640px)",
+      sizes: "(max-width:640px) 480px",
+      sizes_value: "480px",
+      media_size: "medium_large",
+      reg: /[^,]+ 480w,/,
+      rep: " 480w,"
+    },
+    tb: {
+      icon: "tablet",
+      width: 960,
+      media_query: "(max-width:1280px)",
+      sizes: "(max-width:1280px) 960px",
+      sizes_value: "960px",
+      media_size: "full",
+      reg: /[^,]+ 960w,/,
+      rep: " 960w,"
+    },
+    lt: {
+      icon: "laptop",
+      width: 1440,
+      media_query: "(max-width:1920px)",
+      sizes: "(max-width:1920px) 1440px",
+      sizes_value: "1440px",
+      media_size: "full",
+      reg: /[^,]+ 1440w,/,
+      rep: " 1440w,"
+    },
+    pc: {
+      icon: "desktop",
+      width: 1920,
+      media_query: false,
+      sizes: "100vw",
+      sizes_value: "100vw",
+      media_size: "full",
+      reg: /[^,]+$/,
+      rep: ""
+    }
+  };
+
+  // ../blocks/_init/init/CP/data/datalist.js
+  var dataListPresets = {
+    currency: ["AUD", "CAD", "CNY", "DKK", "HKD", "INR", "IDR", "JPY", "KRW", "MYR", "NOK", "PHP", "RUB", "SGD", "VND", "SEK", "CHF", "THB", "GBP", "USD", "TWD", "EUR", "BRL"],
+    mouseEvent: ["click", "dblclick", "mouseup", "mousedown", "mouseenter", "mouseleave", "mouseover", "mouseout", "contextmenu"],
+    playerEvent: [
+      "canplay",
+      "canplaythrough",
+      "complete",
+      "durationchange",
+      "emptied",
+      "ended",
+      "loadeddata",
+      "loadedmetadata",
+      "pause",
+      "play",
+      "playing",
+      "progress",
+      "ratechange",
+      "seeked",
+      "seeking",
+      "stalled",
+      "suspend",
+      "timeupdate",
+      "volumechange",
+      "waiting"
+    ]
+  };
+
+  // ../blocks/_init/init/CP/data/selectiveClasses.js
+  var { __ } = wp.i18n;
+  var selectiveClassesPresets = {
+    customColorVars: {
+      name: "customColorVars",
+      input: "customColorVars",
+      label: __("\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", "catpow"),
+      vars: "vars"
+    },
+    isTemplate: {
+      name: "template",
+      input: "bool",
+      key: "isTemplate",
+      label: __("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
+      sub: [
+        {
+          name: "loop",
+          input: "bool",
+          label: __("\u30EB\u30FC\u30D7", "catpow"),
+          key: "doLoop",
+          sub: [
+            {
+              name: "contentPath",
+              label: "content path",
+              input: "text",
+              key: "content_path"
+            },
+            { name: "query", label: "query", input: "textarea", key: "query" },
+            {
+              name: "loopCount",
+              label: __("\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", "catpow"),
+              input: "range",
+              key: "loopCount",
+              min: 1,
+              max: 16
+            }
+          ]
+        }
+      ]
+    },
+    backgroundColor: {
+      name: "backgroundColor",
+      type: "buttons",
+      label: __("\u80CC\u666F\u8272", "catpow"),
+      values: {
+        hasBackgroundColorNone: __("\u306A\u3057", "catpow"),
+        hasBackgroundColor: __("\u901A\u5E38", "catpow"),
+        hasBackgroundColorAlt: __("\u5F37\u8ABF", "catpow")
+      }
+    },
+    backgroundImage({ preset, vars = "vars", classKey, ...otherParams }) {
+      return {
+        name: "backgroundImage",
+        label: __("\u80CC\u666F\u753B\u50CF", "catpow"),
+        values: "hasBackgroundImage",
+        classKey,
+        sub: [
+          {
+            name: "fixed",
+            label: __("\u56FA\u5B9A", "catpow"),
+            classKey,
+            values: "hasBackgroundImageFixed"
+          },
+          {
+            name: "image",
+            label: __("\u753B\u50CF", "catpow"),
+            vars,
+            key: "--cp-background-image",
+            input: "image"
+          },
+          {
+            name: "repeat",
+            label: __("\u7E70\u308A\u8FD4\u3057", "catpow"),
+            vars,
+            key: "--cp-background-image-repeat",
+            input: "buttons",
+            values: { repeat: "\u4E21\u65B9", "repeat-x": "\u6A2A", "repeat-y": "\u7E26", "no-repeat": "\u306A\u3057" }
+          },
+          {
+            name: "position",
+            label: __("\u4F4D\u7F6E", "catpow"),
+            vars,
+            key: "--cp-background-image-position",
+            input: "position"
+          },
+          {
+            name: "size",
+            label: __("\u30B5\u30A4\u30BA", "catpow"),
+            vars,
+            key: "--cp-background-image-size",
+            input: "size"
+          },
+          {
+            name: "blendmode",
+            label: __("\u30E2\u30FC\u30C9", "catpow"),
+            vars,
+            key: "--cp-background-image-blendmode",
+            input: "blendmode"
+          },
+          {
+            name: "opacity",
+            label: __("\u4E0D\u900F\u660E\u5EA6", "catpow"),
+            vars,
+            key: "--cp-background-image-opacity",
+            input: "range",
+            min: 0,
+            max: 1,
+            step: 0.1
+          }
+        ],
+        ...otherParams
+      };
+    },
+    backgroundPattern({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "backgroundPattern",
+        label: __("\u80CC\u666F\u30D1\u30BF\u30FC\u30F3", "catpow"),
+        values: "hasBackgroundPattern",
+        sub: [
+          {
+            name: "image",
+            label: __("\u753B\u50CF", "catpow"),
+            vars,
+            key: "--cp-background-pattern-image",
+            input: "image"
+          },
+          {
+            name: "repeat",
+            label: __("\u7E70\u308A\u8FD4\u3057", "catpow"),
+            vars,
+            key: "--cp-background-pattern-repeat",
+            input: "buttons",
+            values: { repeat: "\u4E21\u65B9", "repeat-x": "\u6A2A", "repeat-y": "\u7E26", "no-repeat": "\u306A\u3057" }
+          },
+          {
+            name: "position",
+            label: __("\u4F4D\u7F6E", "catpow"),
+            vars,
+            key: "--cp-background-pattern-position",
+            input: "position"
+          },
+          {
+            name: "size",
+            label: __("\u30B5\u30A4\u30BA", "catpow"),
+            vars,
+            key: "--cp-background-pattern-size",
+            input: "size"
+          }
+        ],
+        ...otherParams
+      };
+    },
+    textAlign: {
+      name: "textAlign",
+      type: "buttons",
+      label: __("\u30C6\u30AD\u30B9\u30C8\u63C3\u3048", "catpow"),
+      values: {
+        hasTextAlignLeft: __("\u5DE6\u63C3\u3048", "catpow"),
+        hasTextAlignCenter: __("\u4E2D\u592E", "catpow"),
+        hasTextAlignRight: __("\u53F3\u63C3\u3048", "catpow")
+      }
+    },
+    verticalAlign: {
+      name: "verticalAlign",
+      type: "buttons",
+      label: __("\u5782\u76F4\u65B9\u5411\u63C3\u3048", "catpow"),
+      values: {
+        hasVerticalAlignTop: __("\u4E0A\u63C3\u3048", "catpow"),
+        hasVerticalAlignMiddle: __("\u4E2D\u592E", "catpow"),
+        hasVerticalAlignBottom: __("\u4E0B\u63C3\u3048", "catpow")
+      }
+    },
+    fontSize: {
+      name: "size",
+      type: "buttons",
+      label: __("\u6587\u5B57\u30B5\u30A4\u30BA", "catpow"),
+      values: {
+        hasFontSizeLarge: __("\u5927", "catpow"),
+        hasFontSizeMiddle: __("\u4E2D", "catpow"),
+        hasFontSizeSmall: __("\u5C0F", "catpow")
+      }
+    },
+    width: {
+      name: "width",
+      type: "buttons",
+      label: __("\u5E45", "catpow"),
+      values: {
+        hasWidthFull: __("\u30D5\u30EB", "catpow"),
+        hasWidthWide: __("\u30EF\u30A4\u30C9", "catpow"),
+        hasWidthRegular: __("\u30EC\u30AE\u30E5\u30E9\u30FC", "catpow"),
+        hasWidthNarrow: __("\u30CA\u30ED\u30FC", "catpow")
+      }
+    },
+    size: {
+      name: "size",
+      type: "buttons",
+      label: __("\u30B5\u30A4\u30BA", "catpow"),
+      values: {
+        isSizeLarge: __("\u5927", "catpow"),
+        isSizeMedium: __("\u4E2D", "catpow"),
+        isSizeSmall: __("\u5C0F", "catpow")
+      }
+    },
+    itemSize: {
+      name: "itemSize",
+      label: __("\u30B5\u30A4\u30BA", "catpow"),
+      vars: "vars",
+      key: "--cp-item-size",
+      input: "range",
+      min: 100,
+      max: 1200,
+      step: 10,
+      coef: 0.0625,
+      unit: "rem"
+    },
+    colorScheme: {
+      name: "colorScheme",
+      type: "buttons",
+      label: __("\u914D\u8272", "catpow"),
+      values: {
+        hasColorSchemeInherit: __("\u7D99\u627F", "catpow"),
+        hasColorSchemeReverted: __("\u901A\u5E38", "catpow"),
+        hasColorSchemeInverted: __("\u53CD\u8EE2", "catpow")
+      }
+    },
+    clipPath({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "clipPath",
+        label: __("\u30AF\u30EA\u30C3\u30D7", "catpow"),
+        values: "hasClipPath",
+        sub: [
+          {
+            name: "shape",
+            label: __("\u5F62\u72B6", "catpow"),
+            type: "buttons",
+            values: {
+              hasClipShapeEllipse: __("\u6955\u5186", "catpow"),
+              hasClipShapeSlope: __("\u50BE\u659C", "catpow"),
+              hasClipShapeArrow: __("\u30A2\u30ED\u30FC", "catpow"),
+              hasClipShapeTail: __("\u30D5\u30AD\u30C0\u30B7", "catpow")
+            },
+            sub: {
+              hasClipShapeEllipse: [
+                {
+                  name: "direction",
+                  type: "buttons",
+                  values: {
+                    hasClipShapeBoth: __("\u4E21\u65B9", "catpow"),
+                    hasClipShapeUpper: __("\u4E0A", "catpow"),
+                    hasClipShapeBelow: __("\u4E0B", "catpow")
+                  }
+                },
+                {
+                  name: "amount",
+                  label: __("\u91CF", "catpow"),
+                  input: "range",
+                  vars,
+                  key: "--cp-clip-shape-amount",
+                  min: 1,
+                  max: 100
+                }
+              ],
+              hasClipShapeSlope: [
+                {
+                  name: "uppper",
+                  type: "buttons",
+                  values: {
+                    hasClipShapeUpperNone: __("\u306A\u3057", "catpow"),
+                    hasClipShapeUpperLeft: __("\u5DE6", "catpow"),
+                    hasClipShapeUpperRight: __("\u53F3", "catpow")
+                  }
+                },
+                {
+                  name: "below",
+                  type: "buttons",
+                  values: {
+                    hasClipShapeBelowNone: __("\u306A\u3057", "catpow"),
+                    hasClipShapeBelowLeft: __("\u5DE6", "catpow"),
+                    hasClipShapeBelowRight: __("\u53F3", "catpow")
+                  }
+                },
+                {
+                  name: "upperHeight",
+                  label: __("\u4E0A\u9AD8\u3055", "catpow"),
+                  input: "range",
+                  vars,
+                  key: "--cp-clip-shape-upper-height",
+                  min: 8,
+                  max: 400
+                },
+                {
+                  name: "belowHeight",
+                  label: __("\u4E0B\u9AD8\u3055", "catpow"),
+                  input: "range",
+                  vars,
+                  key: "--cp-clip-shape-below-height",
+                  min: 8,
+                  max: 400
+                }
+              ],
+              hasClipShapeArrow: [
+                {
+                  name: "uppper",
+                  type: "buttons",
+                  values: {
+                    hasClipShapeUpperNone: __("\u306A\u3057", "catpow"),
+                    hasClipShapeUpperIn: __("\u5185", "catpow"),
+                    hasClipShapeUpperOut: __("\u5916", "catpow")
+                  }
+                },
+                {
+                  name: "below",
+                  type: "buttons",
+                  values: {
+                    hasClipShapeBelowNone: __("\u306A\u3057", "catpow"),
+                    hasClipShapeBelowIn: __("\u5185", "catpow"),
+                    hasClipShapeBelowOut: __("\u5916", "catpow")
+                  }
+                },
+                {
+                  name: "upperHeight",
+                  label: __("\u4E0A\u9AD8\u3055", "catpow"),
+                  input: "range",
+                  vars,
+                  key: "--cp-clip-shape-upper-height",
+                  min: 8,
+                  max: 400
+                },
+                {
+                  name: "belowHeight",
+                  label: __("\u4E0B\u9AD8\u3055", "catpow"),
+                  input: "range",
+                  vars,
+                  key: "--cp-clip-shape-below-height",
+                  min: 8,
+                  max: 400
+                }
+              ],
+              hasClipShapeTail: [
+                {
+                  name: "uppper",
+                  type: "buttons",
+                  values: {
+                    hasClipShapeUpperNone: __("\u306A\u3057", "catpow"),
+                    hasClipShapeUpperIn: __("\u5185", "catpow"),
+                    hasClipShapeUpperOut: __("\u5916", "catpow")
+                  }
+                },
+                {
+                  name: "below",
+                  type: "buttons",
+                  values: {
+                    hasClipShapeBelowNone: __("\u306A\u3057", "catpow"),
+                    hasClipShapeBelowIn: __("\u5185", "catpow"),
+                    hasClipShapeBelowOut: __("\u5916", "catpow")
+                  }
+                },
+                {
+                  name: "upperWidth",
+                  label: __("\u4E0A\u5E45", "catpow"),
+                  input: "range",
+                  vars,
+                  key: "--cp-clip-shape-upper-width",
+                  min: 8,
+                  max: 400
+                },
+                {
+                  name: "upperHeight",
+                  label: __("\u4E0A\u9AD8\u3055", "catpow"),
+                  input: "range",
+                  vars,
+                  key: "--cp-clip-shape-upper-height",
+                  min: 8,
+                  max: 400
+                },
+                {
+                  name: "belowWidth",
+                  label: __("\u4E0B\u5E45", "catpow"),
+                  input: "range",
+                  vars,
+                  key: "--cp-clip-shape-below-width",
+                  min: 8,
+                  max: 400
+                },
+                {
+                  name: "belowHeight",
+                  label: __("\u4E0B\u9AD8\u3055", "catpow"),
+                  input: "range",
+                  vars,
+                  key: "--cp-clip-shape-below-height",
+                  min: 8,
+                  max: 400
+                }
+              ]
+            }
+          }
+        ],
+        ...otherParams
+      };
+    },
+    customPadding({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "customPadding",
+        label: __("\u4F59\u767D", "catpow"),
+        values: "hasCustomPadding",
+        sub: [
+          {
+            name: "paddingTop",
+            label: __("\u4E0A\u4F59\u767D", "catpow"),
+            input: "range",
+            vars,
+            key: "--cp-padding-top",
+            min: 0,
+            max: 400,
+            coef: 0.0625,
+            unit: "rem"
+          },
+          {
+            name: "paddingBottom",
+            label: __("\u4E0B\u4F59\u767D", "catpow"),
+            input: "range",
+            vars,
+            key: "--cp-padding-bottom",
+            min: 0,
+            max: 400,
+            coef: 0.0625,
+            unit: "rem"
+          },
+          {
+            name: "paddingInline",
+            label: __("\u6A2A\u4F59\u767D", "catpow"),
+            input: "range",
+            vars,
+            key: "--cp-padding-inline",
+            min: 0,
+            max: 100,
+            coef: 0.0625,
+            unit: "rem"
+          }
+        ],
+        ...otherParams
+      };
+    },
+    customMargin({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "customMargin",
+        label: __("\u9593\u9694", "catpow"),
+        values: "hasCustomMargin",
+        sub: [
+          {
+            name: "marginTop",
+            label: __("\u4E0A\u9593\u9694", "catpow"),
+            input: "range",
+            vars,
+            key: "--cp-margin-top",
+            min: -400,
+            max: 400,
+            coef: 0.0625,
+            unit: "rem"
+          },
+          {
+            name: "marginBottom",
+            label: __("\u4E0B\u9593\u9694", "catpow"),
+            input: "range",
+            vars,
+            key: "--cp-margin-bottom",
+            min: -400,
+            max: 400,
+            coef: 0.0625,
+            unit: "rem"
+          }
+        ],
+        ...otherParams
+      };
+    },
+    customContentWidth({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "customContentWidth",
+        label: __("\u30AB\u30B9\u30BF\u30E0\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
+        values: "hasCustomContentWidth",
+        sub: [
+          {
+            name: "contentWidth",
+            label: __("\u5E45", "catpow"),
+            input: "range",
+            vars,
+            key: "--cp-custom-content-width",
+            min: 50,
+            max: 100,
+            unit: "vw"
+          },
+          {
+            name: "contentMaxWidth",
+            label: __("\u6700\u5927\u5E45", "catpow"),
+            input: "range",
+            vars,
+            key: "--cp-custom-content-max-width",
+            min: 200,
+            max: 1600,
+            coef: 0.0625,
+            unit: "rem"
+          }
+        ],
+        ...otherParams
+      };
+    },
+    contentWidth({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "contentWidth",
+        label: __("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
+        values: "hasContentWidth",
+        sub: [{ preset: "customContentWidth", vars }],
+        ...otherParams
+      };
+    },
+    customBorderRadius({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "cusotomRadius",
+        label: __("\u89D2\u4E38", "catpow"),
+        values: "hasCustomBorderRadius",
+        sub: [
+          {
+            name: "borderRadius",
+            label: __("\u5F84", "catpow"),
+            input: "range",
+            vars,
+            key: "--cp-border-radius",
+            min: 1,
+            max: 100
+          }
+        ],
+        ...otherParams
+      };
+    }
+  };
+  wp.domReady(() => {
+    wp.hooks.applyFilters("catpow.blocks.selectiveClassesPresets", CP.finderProxy(selectiveClassesPresets));
+  });
+
+  // ../blocks/_init/init/CP/functions/classes.jsx
+  var switchNumberClass = ({ set, attr }, label, value2) => {
+    let classArray = (attr.classes || "").split(" ");
+    let i = classArray.findIndex((cls) => cls.slice(0, label.length) === label);
+    if (i === -1) {
+      if (value2) {
+        classArray.push(label + value2);
+      }
+    } else {
+      if (value2) {
+        classArray.splice(i, 1, label + value2);
+      } else {
+        classArray.splice(i, 1);
+      }
+    }
+    set({ classes: classArray.join(" ") });
+  };
+  var getNumberClass = ({ attr }, label) => {
+    let value2 = (attr.classes || "").split(" ").find((cls) => cls.slice(0, label.length) === label);
+    if (!value2) {
+      return 0;
+    }
+    return parseInt(value2.slice(label.length));
+  };
+  var switchColor = (props, value2) => {
+    CP.switchNumberClass(props, "color", value2);
+  };
+  var getColor = (props) => {
+    return CP.getNumberClass(props, "color");
+  };
+  var switchPattern = (props, value2) => {
+    CP.switchNumberClass(props, "pattern", value2);
+  };
+  var getPattern = (props) => {
+    return CP.getNumberClass(props, "pattern");
+  };
+  var switchSelectiveClass = ({ set, attr }, values, value2, key) => {
+    if (key === void 0) {
+      key = "classes";
+    }
+    let classArray = attr[key].split(" ");
+    if (!Array.isArray(values) && _.isObject(values)) {
+      values = Object.keys(values);
+    }
+    classArray = _.difference(classArray, values);
+    if (Array.isArray(value2)) {
+      classArray = classArray.concat(value2);
+    } else {
+      classArray.push(value2);
+    }
+    let data = {};
+    data[key] = classArray.join(" ");
+    set(data);
+  };
+  var getSelectiveClass = ({ attr }, values, key) => {
+    if (key === void 0) {
+      key = "classes";
+    }
+    if (attr[key] === void 0) {
+      attr[key] = "";
+    }
+    let classArray = attr[key].split(" ");
+    if (!Array.isArray(values) && _.isObject(values)) {
+      values = Object.keys(values);
+    }
+    return _.intersection(classArray, values).shift();
+  };
+  var getSubClasses = (prm) => {
+    let rtn = {};
+    let values;
+    if (Array.isArray(prm.values)) {
+      values = prm.values;
+    } else {
+      values = Object.keys(prm.values);
+    }
+    values.forEach((val) => {
+      if (prm.sub && prm.sub[val]) {
+        rtn[val] = CP.getAllSubClasses(prm.sub[val]);
+      } else {
+        rtn[val] = [];
+      }
+    });
+    return rtn;
+  };
+  var getAllSubClasses = (prms) => {
+    let rtn = [];
+    prms.forEach((prm) => {
+      if (typeof prm === "object") {
+        if (prm.values) {
+          if (Array.isArray(prm.values)) {
+            rtn = rtn.concat(prm.values);
+          } else if (_.isObject(prm.values)) {
+            rtn = rtn.concat(Object.keys(prm.values));
+          } else {
+            rtn.push(prm.values);
+          }
+        }
+        if (prm.sub) {
+          if (Array.isArray(prm.sub)) {
+            rtn = rtn.concat(CP.getAllSubClasses(prm.sub));
+          } else {
+            Object.keys(prm.sub).forEach((key) => {
+              rtn = rtn.concat(CP.getAllSubClasses(prm.sub[key]));
+            });
+          }
+        }
+      }
+    });
+    return rtn;
+  };
+  var getBindClasses = (prm) => {
+    let rtn = {};
+    let values;
+    if (Array.isArray(prm.values)) {
+      values = prm.values;
+    } else {
+      values = Object.keys(prm.values);
+    }
+    values.forEach((val) => {
+      if (prm.bind && prm.bind[val]) {
+        rtn[val] = prm.bind[val];
+      } else {
+        rtn[val] = [];
+      }
+    });
+    return rtn;
+  };
+  var getClassFlagsByValue = (prm, primaryClassKey = "classes") => {
+    const cacheKeys = [CP.getClassFlagsByValue, prm, primaryClassKey];
+    if (cache.has(cacheKeys)) {
+      return cache.get(cacheKeys);
+    }
+    const flags = {};
+    cache.set(cacheKeys, flags);
+    if (!prm || typeof prm !== "object" || !prm.values) {
+      return flags;
+    }
+    const values = typeof prm.values === "string" ? [prm.values] : Array.isArray(prm.values) ? prm.values : Object.keys(prm.values);
+    for (const value2 of values) {
+      flags[value2] = { [prm.classKey || primaryClassKey]: { [value2]: true } };
+      if (prm.sub) {
+        if (Array.isArray(prm.sub)) {
+          CP.addAllClassFlags(flags[value2], prm.sub, primaryClassKey);
+        } else if (prm.sub[value2]) {
+          CP.addAllClassFlags(flags[value2], prm.sub[value2], primaryClassKey);
+        }
+      }
+      if (prm.bind) {
+        if (Array.isArray(prm.bind)) {
+          CP.addBindClassFlags(flags[value2], prm.bind, primaryClassKey);
+        } else if (prm.bind[value2]) {
+          CP.addBindClassFlags(flags[value2], prm.bind[value2], primaryClassKey);
+        }
+      }
+    }
+    return flags;
+  };
+  var getAllClassFlags = (prm, primaryClassKey = "classes") => {
+    const cacheKeys = [CP.getAllClassFlags, prm, primaryClassKey];
+    if (cache.has(cacheKeys)) {
+      return cache.get(cacheKeys);
+    }
+    const flags = {};
+    cache.set(cacheKeys, flags);
+    if (!prm || typeof prm !== "object" || !prm.values) {
+      return flags;
+    }
+    CP.addAllClassFlags(flags, [prm], primaryClassKey);
+    return flags;
+  };
+  var getBindClassFlagsByValue = (prm, primaryClassKey = "classes") => {
+    const cacheKeys = [CP.getBindClassFlagsByValue, prm, primaryClassKey];
+    if (cache.has(cacheKeys)) {
+      return cache.get(cacheKeys);
+    }
+    const flags = {};
+    cache.set(cacheKeys, flags);
+    if (!prm || typeof prm !== "object" || !prm.values) {
+      return flags;
+    }
+    const values = typeof prm.values === "string" ? [prm.values] : Array.isArray(prm.values) ? prm.values : Object.keys(prm.values);
+    for (let value2 of values) {
+      flags[value2] = { [prm.classKey || primaryClassKey]: { [value2]: true } };
+      if (prm.bind) {
+        if (typeof prm.values === "string") {
+          CP.addBindClassFlags(flags[value2], prm.bind, primaryClassKey);
+        } else {
+          if (prm.bind[value2]) {
+            CP.addBindClassFlags(flags[value2], prm.bind[value2], primaryClassKey);
+          }
+        }
+      }
+    }
+    return flags;
+  };
+  var addAllClassFlags = (flags, prms, primaryClassKey = "classes") => {
+    if (!flags[primaryClassKey]) {
+      flags[primaryClassKey] = {};
+    }
+    for (const prm of prms) {
+      if (prm.key || prm.json || prm.css || prm.vars) {
+        continue;
+      }
+      if (prm.values) {
+        const values = typeof prm.values === "string" ? [prm.values] : Array.isArray(prm.values) ? prm.values : Object.keys(prm.values);
+        for (const value2 of values) {
+          const classKey = prm.classKey || primaryClassKey;
+          if (!flags[classKey]) {
+            flags[classKey] = {};
+          }
+          flags[classKey][value2] = true;
+        }
+      }
+      if (prm.sub) {
+        if (Array.isArray(prm.sub)) {
+          CP.addAllClassFlags(flags, prm.sub, primaryClassKey);
+        } else {
+          for (const subPrm of Object.values(prm.sub)) {
+            CP.addAllClassFlags(flags, subPrm, primaryClassKey);
+          }
+        }
+      }
+      if (prm.bind) {
+        if (typeof prm.values === "string") {
+          CP.addBindClassFlags(flags, prm.bind, primaryClassKey);
+        } else {
+          for (const bindClasses of Object.values(prm.bind)) {
+            CP.addBindClassFlags(flags, bindClasses, primaryClassKey);
+          }
+        }
+      }
+    }
+  };
+  var addBindClassFlags = (flags, bindClasses, primaryClassKey = "classes") => {
+    if (!flags[primaryClassKey]) {
+      flags[primaryClassKey] = {};
+    }
+    if (Array.isArray(bindClasses)) {
+      for (const bindClass of bindClasses) {
+        flags[primaryClassKey][bindClass] = true;
+      }
+    } else {
+      for (const [classKey, classes] of Object.entries(bindClasses)) {
+        if (classKey === "_") {
+          for (const bindClass of classes) {
+            flags[primaryClassKey][bindClass] = true;
+          }
+        } else {
+          if (!flags[classKey]) {
+            flags[classKey] = {};
+          }
+          for (const bindClass of classes) {
+            flags[classKey][bindClass] = true;
+          }
+        }
+      }
+    }
+  };
+  var getUpdatesFromStatesAndClasssFlags = ({ allStates, allClassFlags, classFlags, bindClassFlags }) => {
+    const updates = {};
+    for (const [classKey, allClassFlag] of Object.entries(allClassFlags)) {
+      console.assert(!!allStates[classKey], `allStates should have ${classKey} states`);
+      const states = allStates[classKey];
+      for (const value2 of Object.keys(states)) {
+        if (allClassFlag[value2] && !classFlags?.[classKey]?.[value2]) {
+          states[value2] = false;
+        }
+      }
+      if (bindClassFlags?.[classKey]) {
+        Object.assign(states, bindClassFlags[classKey]);
+      }
+      updates[classKey] = CP.flagsToClassNames(states);
+    }
+    return updates;
+  };
+  var toggleClass = ({ attr, set }, value2, key) => {
+    if (key === void 0) {
+      key = "classes";
+    }
+    if (attr[key] === void 0) {
+      attr[key] = "";
+    }
+    let classArray = attr[key].split(" ");
+    let i = classArray.indexOf(value2);
+    if (i === -1) {
+      classArray.push(value2);
+    } else {
+      classArray.splice(i, 1);
+    }
+    let data = {};
+    data[key] = classArray.join(" ");
+    set(data);
+  };
+  var hasClass = ({ attr }, value2, key) => {
+    if (key === void 0) {
+      key = "classes";
+    }
+    if (attr[key] === void 0) {
+      attr[key] = "";
+    }
+    return attr[key].split(" ").indexOf(value2) !== -1;
+  };
+  var parseSelections = (sels) => {
+    let options3, values;
+    if (Array.isArray(sels)) {
+      values = sels;
+      options3 = sels.map((cls) => {
+        return { label: cls, value: cls };
+      });
+    } else {
+      values = Object.keys(sels);
+      options3 = values.map((cls) => {
+        return { label: sels[cls], value: cls };
+      });
+    }
+    return { options: options3, values };
+  };
+  var resolveSelectiveClassesPresets = (prms) => {
+    prms.forEach((prm, index) => {
+      if (typeof prm === "string" && CP.selectiveClassesPresets.hasOwnProperty(prm)) {
+        prms[index] = prm = { preset: prm };
+      }
+      if (prm.preset) {
+        if (CP.selectiveClassesPresets.hasOwnProperty(prm.preset)) {
+          const preset = CP.selectiveClassesPresets[prm.preset];
+          if (typeof preset === "function") {
+            prms[index] = preset(prm);
+          } else {
+            prms[index] = { ...preset, ...prm };
+          }
+        }
+      }
+      if (prm.sub) {
+        if (Array.isArray(prm.sub)) {
+          resolveSelectiveClassesPresets(prm.sub);
+        } else {
+          Object.values(prm.sub).forEach(resolveSelectiveClassesPresets);
+        }
+      }
+    });
+    return prms;
+  };
+
+  // ../blocks/_init/init/CP/functions/items.js
+  var selectPrevItem = (tag) => {
+    window.getSelection().anchorNode.parentNode.closest(tag).previousElementSibling.querySelector("[contentEditable]").focus();
+  };
+  var selectNextItem = (tag) => {
+    window.getSelection().anchorNode.parentNode.closest(tag).nextElementSibling.querySelector("[contentEditable]").focus();
+  };
+  var saveItem = ({ items: items2, itemsKey, set }) => {
+    set({ [itemsKey || "items"]: JSON.parse(JSON.stringify(items2)) });
+  };
+  var deleteItem = (props) => {
+    var { items: items2, index } = props;
+    items2.splice(index, 1);
+    saveItem(props);
+  };
+  var cloneItem = (props) => {
+    var { tag, items: items2, index } = props;
+    items2.splice(index, 0, JSON.parse(JSON.stringify(items2[index])));
+    saveItem(props);
+    selectNextItem(tag);
+  };
+  var upItem = (props) => {
+    var { items: items2, index } = props;
+    if (!items2[index - 1]) return false;
+    items2.splice(index - 1, 2, items2[index], items2[index - 1]);
+    saveItem(props);
+  };
+  var downItem = (props) => {
+    var { items: items2, index } = props;
+    if (!items2[index + 1]) return false;
+    items2.splice(index, 2, items2[index + 1], items2[index]);
+    saveItem(props);
+  };
+  var getItemByKeyAndIndex = ({ attr }, keys, index) => {
+    let item = attr || {};
+    if (keys) {
+      if (Array.isArray(keys)) {
+        console.assert(Array.isArray(index) && index.length === keys.length, "index and keys should be same length");
+        for (let i in keys) {
+          item = item?.[keys[i]]?.[index[i]];
+        }
+        return item || {};
+      } else {
+        const items2 = item[keys] || [];
+        item = items2[index] || {};
+      }
+    }
+    return item;
+  };
+  var updateItemByKeyAndIndex = ({ attr, set }, keys, index, item) => {
+    if (keys) {
+      if (Array.isArray(keys)) {
+        console.assert(Array.isArray(index) && index.length === keys.length, "index and keys should be same length");
+        let oldItem = attr;
+        for (let i in keys) {
+          if (!oldItem[keys[i]]) {
+            oldItem[keys[i]] = [];
+          }
+          if (!oldItem[keys[i]][index[i]]) {
+            oldItem[keys[i]][index[i]] = {};
+          }
+          oldItem = oldItem[keys[i]][index[i]];
+        }
+        Object.assign(oldItem, item);
+        set({ [keys[0]]: JSON.parse(JSON.stringify(attr[keys[0]])) });
+      } else {
+        set({ [keys]: Object.assign({}, attr[keys] || {}, item) });
+      }
+    }
+  };
+  var switchItemColor = ({ items: items2, index, set }, color, itemsKey) => {
+    if (itemsKey === void 0) {
+      itemsKey = "items";
+    }
+    let classArray = (items2[index].classes || "").split(" ");
+    let i = classArray.findIndex((cls) => cls.slice(0, 5) === "color");
+    if (i === -1) {
+      if (color) {
+        classArray.push("color" + color);
+      }
+    } else {
+      if (color) {
+        classArray.splice(i, 1, "color" + color);
+      } else {
+        classArray.splice(i, 1);
+      }
+    }
+    items2[index].classes = classArray.join(" ");
+    set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
+  };
+  var getItemColor = ({ items: items2, index }) => {
+    let c = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 5) === "color");
+    if (!c) {
+      return 0;
+    }
+    return parseInt(c.slice(5));
+  };
+  var switchItemPattern = ({ items: items2, index, set }, pattern, itemsKey) => {
+    if (itemsKey === void 0) {
+      itemsKey = "items";
+    }
+    let classArray = (items2[index].classes || "").split(" ");
+    let i = classArray.findIndex((cls) => cls.slice(0, 7) === "pattern");
+    if (i === -1) {
+      if (pattern) {
+        classArray.push("pattern" + pattern);
+      }
+    } else {
+      if (pattern) {
+        classArray.splice(i, 1, "pattern" + pattern);
+      } else {
+        classArray.splice(i, 1);
+      }
+    }
+    items2[index].classes = classArray.join(" ");
+    set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
+  };
+  var getItemPattern = ({ items: items2, index }) => {
+    let p = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 7) === "pattern");
+    if (!p) {
+      return 0;
+    }
+    return parseInt(p.slice(7));
+  };
+  var switchItemSelectiveClass = ({ items: items2, index, set }, values, value2, itemsKey) => {
+    if (itemsKey === void 0) {
+      itemsKey = "items";
+    }
+    let classArray = (items2[index].classes || "").split(" ");
+    if (!Array.isArray(values) && _.isObject(values)) {
+      values = Object.keys(values);
+    }
+    classArray = _.difference(classArray, values);
+    if (Array.isArray(value2)) {
+      classArray = classArray.concat(value2);
+    } else {
+      classArray.push(value2);
+    }
+    items2[index].classes = classArray.join(" ");
+    set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
+  };
+  var getItemSelectiveClass = ({ items: items2, index }, values) => {
+    if (!items2[index].classes) {
+      return false;
+    }
+    let classArray = (items2[index].classes || "").split(" ");
+    if (!Array.isArray(values) && _.isObject(values)) {
+      values = Object.keys(values);
+    }
+    return _.intersection(classArray, values).shift();
+  };
+  var toggleItemClass = ({ items: items2, index, set }, value2, itemsKey) => {
+    if (itemsKey === void 0) {
+      itemsKey = "items";
+    }
+    let classArray = (items2[index].classes || "").split(" ");
+    let i = classArray.indexOf(value2);
+    if (i === -1) {
+      classArray.push(value2);
+    } else {
+      classArray.splice(i, 1);
+    }
+    items2[index].classes = classArray.join(" ");
+    set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
+  };
+  var hasItemClass = ({ items: items2, index }, value2) => {
+    let classArray = (items2[index].classes || "").split(" ");
+    return classArray.indexOf(value2) !== -1;
+  };
+
+  // ../blocks/_init/init/CP/functions/json.js
+  var getJsonValue = ({ attr }, json, key) => {
+    if (!attr[json]) {
+      return null;
+    }
+    return JSON.parse(attr[json])[key];
+  };
+  var hasJsonValue = (prop, json, key, value2) => {
+    let values = getJsonValue(prop, json, key);
+    if (!values) {
+      return false;
+    }
+    return values.indexOf(value2) !== -1;
+  };
+  var setJsonValue = ({ attr, set }, json, key, value2) => {
+    let data = {};
+    let jsonData = JSON.parse(attr[json]);
+    jsonData[key] = value2;
+    data[json] = JSON.stringify(jsonData);
+    set(data);
+  };
+  var setJsonValues = ({ attr, set }, json, keys, value2) => {
+    let data = {};
+    let jsonData = JSON.parse(attr[json]);
+    if (keys) {
+      for (const key in keys) {
+        jsonData[keys[key]] = value2[key];
+      }
+    } else {
+      Object.assign(jsonData, value2);
+    }
+    data[json] = JSON.stringify(jsonData);
+    set(data);
+  };
+  var switchJsonValue = (prop, json, key, value2) => {
+    let values = CP.getJsonValue(prop, json, key);
+    if (!values) {
+      values = [];
+    }
+    let i = values.indexOf(value2);
+    if (i === -1) {
+      values.push(value2);
+    } else {
+      values.splice(i, 1);
+    }
+    setJsonValue(prop, json, key, values);
+  };
+
+  // ../blocks/_init/init/CP/functions/style.js
+  var parseStyleString = (css) => {
+    if (css instanceof Object) {
+      return css;
+    }
+    if (!css) {
+      return {};
+    }
+    var obj = {};
+    css.replace("&amp;", "&").split(";").forEach((pair) => {
+      const match = pair.match(/^((\-\-)?([^:]+?)):(.+)$/);
+      if (!match) {
+        return;
+      }
+      obj[match[2] ? match[1] : kebabToCamel(match[3])] = match[4];
+    });
+    return obj;
+  };
+  var createStyleString = (data) => {
+    if (!data) {
+      return "";
+    }
+    return Object.keys(data).map((key) => {
+      return camelToKebab(key) + ":" + data[key] + ";";
+    }).join("");
+  };
+  var parseStyleCode = (code) => {
+    let rtn = {};
+    for (const match of code.matchAll(/(\S.+?){([^}]+)}/g)) {
+      rtn[match[1]] = parseStyleString(match[2]);
+    }
+    return rtn;
+  };
+  var createStyleCode = (data) => {
+    if (!data) {
+      return "";
+    }
+    return Object.keys(data).map((sel) => {
+      return sel + "{" + createStyleString(data[sel]) + "}";
+    }).join("");
+  };
+  var parseStyleCodeWithMediaQuery = (code) => {
+    if (!code) {
+      return {};
+    }
+    var rtn = {};
+    const reg = /@media\s*\((.+?)\)\s*{([^}]+})\s*}/;
+    const defaultCode = code.replace(new RegExp(reg, "g"), (str) => {
+      const matches = str.match(reg);
+      rtn[matches[1]] = parseStyleCode(matches[2]);
+      return "";
+    });
+    rtn["default"] = parseStyleCode(defaultCode);
+    return rtn;
+  };
+  var createStyleCodeWithMediaQuery = (data) => {
+    var rtn = "";
+    return Object.keys(data).map((media) => {
+      if (media === "default") {
+        return { p: -1e4, media };
+      }
+      const matches = media.match(/(min|max)\-width:(\d+)px/);
+      return { p: parseInt(matches[2]) * { min: 1, max: -1 }[matches[1]], media };
+    }).sort((a, b) => a.p - b.p).map((d) => d.media).map((media) => {
+      if (media === "default") {
+        return createStyleCode(data[media]);
+      }
+      return "@media(" + media + "){" + createStyleCode(data[media]) + "}";
+    }).join("");
+  };
+  var createGridStyleCode = (sel, bnd) => {
+    return sel + "{" + createStyleString(CP.createGridStyleCodeData(bnd)) + "}";
+  };
+  var createGridStyleCodeData = (bnd) => {
+    var rtn = {
+      display: "grid",
+      " display": "-ms-grid",
+      "-ms-grid-columns": "1fr ".repeat(bnd[0]),
+      "grid-template-columns": "repeat(" + bnd[0] + ",1fr)",
+      "-ms-grid-rows": "1fr ".repeat(bnd[1]),
+      "grid-template-rows": "repeat(" + bnd[1] + ",1fr)"
+    };
+    return rtn;
+  };
+  var createGridItemStyleCode = (sel, bnd) => {
+    return sel + "{" + createStyleString(CP.createGridItemStyleCodeData(bnd)) + "}";
+  };
+  var createGridItemStyleCodeData = (bnd) => {
+    var rtn = {
+      "-ms-grid-column": bnd[0],
+      "-ms-grid-row": bnd[1],
+      "grid-column": bnd[0],
+      "grid-row": bnd[1]
+    };
+    if (bnd[2] && bnd[2] > 1) {
+      rtn["grid-column"] += " / span " + bnd[2];
+      rtn["-ms-grid-column-span"] = bnd[2];
+    }
+    if (bnd[3] && bnd[3] > 1) {
+      rtn["grid-row"] += " / span " + bnd[3];
+      rtn["-ms-grid-row-span"] = bnd[3];
+    }
+    return rtn;
+  };
+  var getUrlInStyleCode = (code) => {
+    if (!code || code.indexOf("url(") === -1) {
+      return false;
+    }
+    const m = code.match(/url\((.+?)\)/);
+    return m ? m[1] : "";
+  };
+  var parseGradientStyleValue = (gradient) => {
+    const match = gradient.match(/^(linear|radial)\-gradient\((\d+deg),(.+)\)$/);
+    return {
+      type: match[1],
+      angle: match[2],
+      colors: match[3].match(/rgba?\([\d,]+?\) \d+%/g).map((color) => {
+        const match2 = color.match(/((rgba?)\((\d+),(\d+),(\d+)(,(\d+))?\)) (\d+%)/);
+        return {
+          color: match2[1],
+          type: match2[2],
+          r: match2[3],
+          g: match2[4],
+          b: match2[5],
+          a: match2[7] === void 0 ? 1 : match2[7],
+          position: match2[8]
+        };
+      })
+    };
+  };
+  var translateCssVal = (type, val) => {
+    switch (type) {
+      case "background-size":
+        switch (val) {
+          case "c":
+            return "cover";
+          case "i":
+            return "contain";
+          case "f":
+            return "100% 100%";
+          default:
+            return val;
+        }
+      case "background-repeat":
+        switch (val) {
+          case "n":
+            return "no-repeat";
+          case "x":
+          case "y":
+            return "repeat-" + val;
+          default:
+            return val;
+        }
+    }
+  };
+  var useManageStyleData = (props, csss) => {
+    const { attributes, className, setAttributes } = props;
+    const { anchor, prevAnchor, styleDatas } = attributes;
+    const { useEffect: useEffect6 } = wp.element;
+    useEffect6(() => {
+      if (!anchor) {
+        setAttributes({ anchor: "s" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
+      }
+      if (void 0 === styleDatas) {
+        const styleDatas2 = {};
+        csss.forEach((key) => {
+          styleDatas2[key] = CP.parseStyleCodeWithMediaQuery(attributes[key]);
+        });
+        setAttributes({ styleDatas: styleDatas2 });
+      }
+    }, []);
+    useEffect6(() => {
+      if (anchor && anchor.length > 2) {
+        if (document.querySelectorAll("#" + anchor).length > 1) {
+          setAttributes({ anchor: "s" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
+        }
+        const atts = {};
+        atts.prevAnchor = anchor;
+        atts.styleDatas = {};
+        csss.forEach((key) => {
+          if (!attributes[key]) {
+            return;
+          }
+          atts[key] = attributes[key].replace("#" + prevAnchor, "#" + anchor);
+          atts.styleDatas[key] = CP.parseStyleCodeWithMediaQuery(atts[key]);
+        });
+        setAttributes(atts);
+      }
+    }, [anchor]);
+  };
+
+  // ../blocks/_init/init/CP/functions/flags.js
+  var testFlags = (cond, flags) => cond & flags === cond;
+  var filterArrayWithFlags = (array, flags) => array.filter((c, i) => flags & 1 << i);
+
+  // ../blocks/_init/init/CP/functions/transform.js
+  var isRowsConvertibleToItems = (rows, itemsConf) => {
+    for (const cell of rows[0].cells) {
+      if (itemsConf.query.hasOwnProperty(cell.text)) {
+        return true;
+      }
+    }
+    return false;
+  };
+  var convertRowsToItems = (rows, itemsConf) => {
+    const keyIndex = [];
+    rows[0].cells.forEach((cell, index) => {
+      if (itemsConf.query.hasOwnProperty(cell.text)) {
+        keyIndex.push([cell.text, index]);
+      }
+    });
+    return rows.slice(1).map((row) => {
+      const item = {};
+      for (const [key, index] of keyIndex) {
+        item[key] = row.cells[index].text;
+      }
+      return item;
+    });
+  };
+
+  // ../blocks/_init/init/CP/functions/csv.js
+  var parseCSV = (csv) => {
+    let tmp = [];
+    csv = csv.replace(/("[^"]*")+/g, (match) => {
+      tmp.push(match.slice(1, -1).replace(/""/g, '"'));
+      return "[TMP]";
+    });
+    return csv.split("\r\n").map((row) => {
+      return row.split(",").map((val) => val === "[TMP]" ? tmp.shift() : val);
+    });
+  };
+
+  // ../blocks/_init/init/CP/functions/color.js
+  var useInheritColor = (props, images) => {
+    const { attributes, className, setAttributes, context } = props;
+    const { setURLparams } = Catpow.util;
+    const { classes, color = "0" } = attributes;
+    const { useEffect: useEffect6, useMemo: useMemo5 } = wp.element;
+    const inheritColor = useMemo5(() => {
+      return color === "0" || context["catpow/color"] === color;
+    }, [color, context["catpow/color"]]);
+    useEffect6(() => {
+      if (inheritColor && context["catpow/color"] !== "0") {
+        setAttributes({ color: context["catpow/color"] });
+      }
+      setAttributes({ inheritColor: color === context["catpow/color"] });
+    }, [context["catpow/color"]]);
+    useEffect6(() => {
+      const atts = {
+        classes: classes.split(" ").filter((str) => !colorToneClassPattern.test(str)).concat(colorToneValueToClasses(color)).join(" ")
+      };
+      images.forEach((key) => {
+        if (!attributes[key]) {
+          return;
+        }
+        if (attributes[key].indexOf("url(") !== -1) {
+          atts[key] = attributes[key].replace(/url\((.+?)\)/, (m, p1) => "url(" + setURLparams(p1, { c: color, theme: wpinfo.theme }) + ")");
+          return;
+        }
+        atts[key] = setURLparams(attributes[key], { c: color, theme: wpinfo.theme });
+      });
+      setAttributes(atts);
+    }, [color]);
+  };
+  var extractColorToneValue = (classes) => generateColorToneValue(extractColorToneValues(classes));
+  var extractColorToneValues = (classes) => {
+    if (!Array.isArray(classes)) {
+      classes = classes.split(" ");
+    }
+    const rtn = {};
+    classes.find((c) => {
+      const matches = c.match(colorToneClassPattern);
+      if (matches) {
+        if (matches[1]) {
+          rtn.h = matches[2];
+        }
+        if (matches[5]) {
+          rtn[matches[7]] = matches[8];
+        }
+        return rtn.hasOwnProperty("h") && rtn.hasOwnProperty("s") && rtn.hasOwnProperty("l");
+      }
+      return false;
+    });
+    return rtn;
+  };
+  var parseColorToneValue = (value2) => {
+    if (value2) {
+      const matches = value2.match(colorToneValuePattern);
+      if (matches) {
+        return { h: matches[1], s: matches[5], l: matches[7] };
+      }
+    }
+    return { h: "0" };
+  };
+  var colorToneValueToClasses = (value2) => generateColorToneClasses(parseColorToneValue(value2));
+  var generateColorToneValue = (values) => (values.h || "0") + (values.s ? "s" + values.s : "") + (values.l ? "l" + values.l : "");
+  var generateColorToneClasses = (values) => {
+    const classes = [];
+    if (values.h) {
+      classes.push("color" + values.h);
+    }
+    if (values.s) {
+      classes.push("tone-s" + values.s);
+    }
+    if (values.l) {
+      classes.push("tone-l" + values.l);
+    }
+    return classes;
+  };
+  var colorToneValuePattern = /^((|_|\-\-)(\-?\d+))?(s(\-?\d+))?(l(\-?\d+))?$/;
+  var colorToneClassPattern = /^(color((|_|\-\-)(\-?\d+)))|(tone\-((s|l)(\-?\d+)))$/;
+  var parseColorClass = (colorClass) => {
+    if (colorClass) {
+      const matches = colorClass.match(colorClassPattern);
+      if (matches) {
+        return {
+          fixed: matches[2] === "--",
+          absolute: matches[2] === "",
+          relative: matches[2] === "_",
+          value: matches[3]
+        };
+      }
+    }
+    return { fixed: false, absolute: false, relative: false, value: 0 };
+  };
+  var generateColorClass = (data) => "color" + (data.fixed ? "--" : data.relative ? "_" : "") + data.value;
+  var colorClassPattern = /^color((|_|\-\-)(\-?\d+))$/;
+  var parseToneClass = (toneClass) => {
+    if (toneClass) {
+      const matches = toneClass.match(toneClassPattern);
+      if (matches) {
+        return {
+          s: matches[2] === "s",
+          l: matches[2] === "l",
+          value: matches[3]
+        };
+      }
+    }
+    return { s: false, l: false, value: 0 };
+  };
+  var generateToneClass = (data) => "tone-" + (data.s ? "s" : "l") + data.value;
+  var toneClassPattern = /^tone\-((s|l)(\-?\d+))$/;
+  var colorClassProxy = (state) => {
+    if (!state) {
+      state = {};
+    }
+    if (typeof state === "string" || Array.isArray(state)) {
+      state = CP.wordsToFlags(state);
+    }
+    return new Proxy(state, colorClassProxyHandler);
+  };
+  var colorClassProxyHandler = {
+    get(state, prop) {
+      switch (prop) {
+        case "classes": {
+          return CP.flagsToWords(state);
+        }
+        case "value": {
+          return extractColorToneValue(Object.keys(state).filter((c) => state[c]));
+        }
+        case "h": {
+          return Object.keys(state).find((c) => colorClassPattern.test(c));
+        }
+        case "s":
+        case "l": {
+          return Object.keys(state).find((c) => {
+            const match = c.match(toneClassPattern);
+            return match && match[2] === prop;
+          });
+        }
+      }
+      return Reflect.get(...arguments);
+    },
+    set(state, prop, val) {
+      switch (prop) {
+        case "state": {
+          return state;
+        }
+        case "h":
+        case "s":
+        case "l": {
+          if (prop === "h") {
+            CP.filterFlags(state, (c) => !colorClassPattern.test(c));
+          } else {
+            CP.filterFlags(state, (c) => {
+              const match = c.match(toneClassPattern);
+              return !(match && match[2] === prop);
+            });
+          }
+          if (val) {
+            state[val] = true;
+          }
+          return;
+        }
+      }
+      return Reflect.set(...arguments);
+    }
+  };
+
+  // ../blocks/_init/init/CP/functions/media.js
+  var selectImage = (set, { attr, keys, index, size, devices: devices2 = ["sp", "tb"], type = "image" }) => {
+    if (CP.uploder === void 0) {
+      CP.uploader = wp.media({
+        title: "Select Image",
+        button: { text: "Select" },
+        multiple: false,
+        library: { type }
+      });
+    }
+    CP.uploader.off("select").on("select", () => {
+      let image = CP.uploader.state().get("selection").first().toJSON();
+      let data = {};
+      if (keys.mime) {
+        data[keys.mime] = image.mime;
+      }
+      if (keys.alt) {
+        data[keys.alt] = image.alt;
+      }
+      if (size && image.sizes && image.sizes[size]) {
+        data[keys.src] = image.sizes[size].url;
+      } else if (keys.src) {
+        data[keys.src] = image.url;
+      } else if (keys.url) {
+        data[keys.url] = `url(${image.url})`;
+      }
+      if (keys.sources) {
+        if (image.sizes) {
+          data[keys.sources] = devices2.map((device) => {
+            const sizeData = CP.devices[device];
+            return { srcset: image.sizes[sizeData.media_size].url, device };
+          });
+        } else {
+          data[keys.sources] = devices2.map((device) => {
+            return { srcset: image.url, device };
+          });
+        }
+      }
+      if (keys.srcset && image.sizes) {
+        data[keys.srcset] = "";
+        devices2.forEach((device) => {
+          const sizeData = CP.devices[device];
+          data[keys.srcset] += image.sizes[sizeData.media_size].url + sizeData.rep;
+        });
+      }
+      if (keys.data) {
+        data[keys.data] = image;
+      }
+      if (attr && keys.items && index) {
+        CP.updateItemByKeyAndIndex({ attr, set }, keys.items, index, data);
+      } else {
+        set(data);
+      }
+    }).off("open").on("open", () => {
+      const library = CP.uploader.state().get("library");
+      if (library.props.get("type") !== type) {
+        library.props.set({ type });
+        library.reset();
+      }
+    }).open();
+  };
+  var imageSrcOrDummy = (src) => {
+    if (!src) {
+      return wpinfo.theme_url + "/images/dummy.jpg";
+    }
+    if (src[0] == "[") {
+      return wpinfo.plugins_url + "/catpow/callee/dummy_image.php?text=" + src;
+    }
+    return src;
+  };
+  var getImageSizesForDevices = (devices2) => {
+    return Object.keys(CP.devices).filter((device) => devices2.includes(device)).map((device) => CP.devices[device].sizes).join(",");
+  };
+  var getPictureSoucesAttributes = (selector) => {
+    return {
+      source: "query",
+      selector: (selector || "picture") + " source",
+      query: {
+        srcset: { source: "attribute", attribute: "srcset" },
+        device: { source: "attribute", attribute: "data-device" }
+      }
+    };
+  };
+  var getPictureSoucesAttributesForDevices = (devices2, selector, image) => {
+    let attr = CP.getPictureSoucesAttributes(selector);
+    attr.default = CP.getPictureSoucesAttributesDefaultValueForDevices(devices2, image);
+    return attr;
+  };
+  var getPictureSoucesAttributesDefaultValueForDevices = (devices2, image) => {
+    return devices2.map((device) => ({ srcset: wpinfo.theme_url + "/images/" + (image || "dummy.jpg"), device }));
+  };
+  var getMediaQueryKeyForDevice = (device) => {
+    if (!CP.devices[device].media_query) {
+      return "default";
+    }
+    return CP.devices[device].media_query.slice(1, -1);
+  };
+
+  // ../blocks/_init/init/CP/functions/datalist.js
+  var getDataListId = (name, values) => {
+    const id = "datalist-" + name;
+    if (!document.getElementById(id)) {
+      if (!values) {
+        if (!CP.dataListPresets.hasOwnProperty(name)) {
+          return null;
+        }
+        values = CP.dataListPresets[name];
+      }
+      const datalist = document.createElement("datalist");
+      datalist.id = id;
+      values.forEach((value2) => {
+        const option = document.createElement("option");
+        option.value = value2;
+        datalist.appendChild(option);
+      });
+      document.body.appendChild(datalist);
+    }
+    return id;
+  };
+
+  // ../blocks/_init/init/CP/functions/richtext.js
+  var getSelecedFormatElement = () => {
+    const sel = window.getSelection();
+    if (!sel.rangeCount) return null;
+    const con = sel.getRangeAt(0).startContainer;
+    return con.nextElementSibling || con.parentElement;
+  };
+
+  // ../blocks/_init/init/CP/functions/event.js
+  var extractEventDispatcherAttributes = (blockTypeName, item) => {
+    const blockType = wp.data.select("core/blocks").getBlockType(blockTypeName);
+    const eventDispatcherAttributes = {};
+    if (blockType.attributes.items.eventDispatcherAttributes) {
+      blockType.attributes.items.eventDispatcherAttributes.map((attr_name) => {
+        eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute] = item[attr_name];
+      });
+    }
+    return eventDispatcherAttributes;
+  };
+
+  // ../blocks/_init/init/CP/functions/block.js
+  var createBlocks = (blocks) => {
+    return blocks.map((block) => {
+      if (block[2]) {
+        block[2] = CP.createBlocks(block[2]);
+      }
+      return wp.blocks.createBlock(...block);
+    });
+  };
+
+  // ../blocks/_init/init/CP/functions/proxy.js
+  var finderProxy = (obj) => new Proxy(obj, finderProxyHandler);
+  var finderProxyHandler = {
+    get: (obj, prop) => {
+      if (prop === "isFinderProxy") {
+        return true;
+      }
+      if (prop === "finderProxyTarget") {
+        return obj;
+      }
+      var rtn;
+      if (Array.isArray(obj) && !/^\d+$/.test(prop)) {
+        rtn = obj.find((item) => typeof item === "object" && item.hasOwnProperty("name") && item.name === prop);
+        if (!rtn && prop in obj) {
+          return obj[prop];
+        }
+      } else {
+        rtn = obj[prop];
+      }
+      if (typeof rtn === "object") {
+        return new Proxy(rtn, CP.finderProxyHandler);
+      }
+      return rtn;
+    },
+    set: (obj, prop, val) => {
+      if (typeof val === "object" && val.isFinderProxy) {
+        val = val.finderProxyTarget;
+      }
+      if (Array.isArray(obj) && !/^\d+$/.test(prop) && !(prop in obj)) {
+        if (typeof val !== "object") {
+          return false;
+        }
+        val.name = prop;
+        const index = obj.findIndex((item) => typeof item === "object" && item.hasOwnProperty("name") && item.name === prop);
+        if (index < 0) {
+          obj.push(val);
+        } else {
+          obj[index] = val;
+        }
+      } else {
+        obj[prop] = val;
+      }
+      return true;
+    },
+    deleteProperty: (obj, prop) => {
+      if (Array.isArray(obj) && !/^\d+$/.test(prop)) {
+        prop = obj.findIndex((item) => item === prop || typeof item === "object" && item.hasOwnProperty("name") && item.name === prop);
+        if (prop < 0) {
+          return;
+        }
+      }
+      delete obj[prop];
+    }
+  };
+
+  // ../blocks/_init/init/filter.jsx
+  wp.blocks.registerBlockStyle("core/heading", { name: "header", label: "header" });
+  wp.blocks.registerBlockStyle("core/heading", { name: "headline", label: "headline" });
+  wp.blocks.registerBlockStyle("core/heading", { name: "catch", label: "catch" });
+  wp.blocks.registerBlockStyle("core/paragraph", { name: "message", label: "message" });
+  wp.blocks.registerBlockStyle("core/paragraph", { name: "caption", label: "caption" });
+  wp.blocks.registerBlockStyle("core/list", { name: "annotation", label: "annotation" });
+  wp.blocks.registerBlockStyle("core/list", { name: "circle", label: "circle" });
+  wp.blocks.registerBlockStyle("core/list", { name: "caret", label: "caret" });
+  wp.blocks.registerBlockStyle("core/list", { name: "square", label: "square" });
+  wp.blocks.registerBlockStyle("core/list", { name: "star", label: "star" });
+  wp.blocks.registerBlockStyle("core/list", { name: "check", label: "check" });
+  wp.blocks.registerBlockStyle("core/list", { name: "alert", label: "alert" });
+  wp.blocks.registerBlockStyle("core/list", { name: "caution", label: "caution" });
+  wp.blocks.registerBlockStyle("core/columns", { name: "regular", label: "regular" });
+  wp.blocks.registerBlockStyle("core/columns", { name: "panel", label: "panel" });
+  wp.blocks.registerBlockStyle("core/image", { name: "snap", label: "snap" });
+  wp.blocks.registerBlockStyle("core/image", { name: "circle", label: "circle" });
+  wp.blocks.registerBlockStyle("core/image", { name: "cover", label: "cover" });
+  wp.blocks.registerBlockStyle("core/video", { name: "thumbnail", label: "thumbnail" });
+  wp.blocks.registerBlockStyle("core/video", { name: "medium", label: "medium" });
+  wp.blocks.registerBlockStyle("core/video", { name: "large", label: "large" });
+  wp.blocks.registerBlockStyle("core/video", { name: "cover", label: "cover" });
+  wp.blocks.registerBlockStyle("core/media-text", { name: "snap", label: "snap" });
+  wp.blocks.registerBlockStyle("core/media-text", { name: "panel", label: "panel" });
+  wp.blocks.registerBlockStyle("core/code", { name: "js", label: "js" });
+  wp.blocks.registerBlockStyle("core/code", { name: "css", label: "css" });
+  wp.blocks.registerBlockStyle("core/code", { name: "scss", label: "scss" });
+  wp.blocks.registerBlockStyle("core/code", { name: "php", label: "php" });
+  wp.blocks.registerBlockStyle("core/code", { name: "html", label: "html" });
+  wp.hooks.addFilter("blocks.registerBlockType", "catpow/editor", function(settings, name) {
+    switch (name) {
+      case "core/heading":
+        settings.attributes.className.default = "is-style-headline";
+        break;
+      case "core/paragraph":
+        settings.attributes.fontSize.default = "regular";
+        break;
+      case "core/list":
+        settings.attributes.className.default = "is-style-check";
+        break;
+      case "core/columns":
+        settings.attributes.className.default = "is-style-panel";
+        break;
+    }
+    return settings;
+  });
+  wp.hooks.addFilter(
+    "editor.BlockEdit",
+    "catpow/editor",
+    wp.compose.createHigherOrderComponent(function(BlockEdit) {
+      return function(props) {
+        var content = wp.element.createElement(BlockEdit, props);
+        if ((props.name === "core/columns" || props.name === "core/media-text") && typeof props.insertBlocksAfter === "undefined") {
+          return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", null));
+        }
+        return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, content);
+      };
+    }, "allowColumnStyle")
+  );
+
+  // ../blocks/_init/init/format.jsx
+  var { __: __2 } = wp.i18n;
+  var { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
+  var { Popover, BaseControle, TextControl, RangeControl, Card, CardBody, ToolbarGroup } = wp.components;
+  var { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useReducer: useReducer2, useEffect: useEffect5 } = wp.element;
+  var { removeFormat, applyFormat, toggleFormat, insert, create, slice } = wp.richText;
+  wp.richText.registerFormatType("catpow/ruby", {
+    title: "Ruby",
+    tagName: "ruby",
+    className: "rtf-ruby",
+    edit({ isActive, value: value2, onChange }) {
+      const onToggle = () => {
+        if (isActive) {
+          return onChange(toggleFormat(value2, { type: "catpow/ruby" }));
+        }
+        if (wp.richText.isCollapsed(value2)) {
+          alert(__2("\u30EB\u30D3\u3092\u3064\u3051\u305F\u3044\u30C6\u30AD\u30B9\u30C8\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"));
+          return;
+        }
+        let rt = prompt(__2("\u30EB\u30D3\u3092\u5165\u529B"));
+        if (rt === null) {
+          return;
+        }
+        return onChange(
+          wp.richText.insert(
+            value2,
+            wp.richText.create({
+              html: `<ruby class="rtf-ruby">${wp.richText.slice(value2).text}<rt class="rtf-ruby__rt">${rt}</rt></ruby>`
+            }),
+            value2.start,
+            value2.end
+          )
+        );
+      };
+      const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement(
+        "path",
+        {
+          d: "M3.6,19.8L8.9,6.2h1.9l5.6,13.6h-2l-1.6-4.1H7l-1.5,4.1H3.6z M7.6,14.2h4.6l-1.4-3.8c-0.4-1.1-0.8-2.1-1-2.8\n				c-0.2,0.9-0.4,1.7-0.7,2.6L7.6,14.2z"
+        }
+      ), /* @__PURE__ */ wp.element.createElement(
+        "path",
+        {
+          d: "M10.7,4.4C10.4,4.7,10.1,4.9,9.8,5C9.6,5.1,9.3,5.1,9,5.1C8.4,5.2,8,5,7.7,4.8c-0.3-0.3-0.4-0.6-0.4-1c0-0.2,0-0.4,0.2-0.6\n					C7.6,3,7.7,2.8,7.9,2.7C8,2.6,8.2,2.5,8.5,2.4c0.2,0,0.4-0.1,0.7-0.1c0.7-0.1,1.1-0.2,1.4-0.3c0-0.1,0-0.2,0-0.2\n					c0-0.3-0.1-0.6-0.2-0.7c-0.2-0.2-0.5-0.3-0.9-0.3C9.1,0.8,8.8,0.9,8.6,1C8.4,1.2,8.3,1.4,8.2,1.8L7.4,1.7C7.5,1.3,7.6,1,7.8,0.8\n					c0.2-0.2,0.4-0.4,0.7-0.5c0.3-0.1,0.7-0.2,1.1-0.2c0.4,0,0.7,0,1,0.1c0.3,0.1,0.4,0.2,0.6,0.4c0.1,0.1,0.2,0.3,0.3,0.5\n					c0,0.1,0,0.4,0,0.7l0,1.1c0,0.8,0,1.2,0.1,1.4c0,0.2,0.1,0.4,0.2,0.6l-0.8,0C10.8,4.9,10.7,4.7,10.7,4.4z M10.6,2.6\n					C10.3,2.8,9.9,2.9,9.3,3C9,3,8.7,3.1,8.6,3.1C8.5,3.2,8.4,3.3,8.3,3.4C8.2,3.5,8.2,3.6,8.2,3.8c0,0.2,0.1,0.4,0.3,0.5\n					c0.2,0.1,0.4,0.2,0.7,0.2c0.3,0,0.6-0.1,0.8-0.2s0.4-0.3,0.5-0.6c0.1-0.2,0.1-0.5,0.1-0.8L10.6,2.6z"
+        }
+      ));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RichTextShortcut, { type: "primary", character: "r", onUse: onToggle }), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon, title: "Ruby", onClick: onToggle, isActive, shortcutType: "primary", shortcutCharacter: "r" }));
+    }
+  });
+  wp.richText.registerFormatType("catpow/rt", {
+    title: "RubyText",
+    tagName: "rt",
+    className: "rtf-ruby__rt"
+  });
+  wp.richText.registerFormatType("catpow/small", {
+    title: "small",
+    tagName: "small",
+    className: "rtf-small",
+    edit({ isActive, value: value2, onChange }) {
+      const onToggle = () => onChange(toggleFormat(value2, { type: "catpow/small" }));
+      const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement(
+        "path",
+        {
+          d: "M5.6,16.7l3.6-9.4h1.3l3.8,9.4H13l-1.1-2.8H8l-1,2.8H5.6z M8.3,12.9h3.2l-1-2.6C10.2,9.5,10,8.9,9.9,8.4\n		C9.7,9,9.6,9.6,9.3,10.1L8.3,12.9z"
+        }
+      ));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RichTextShortcut, { type: "primary", character: "-", onUse: onToggle }), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon, title: "small", onClick: onToggle, isActive, shortcutType: "primary", shortcutCharacter: "-" }));
+    }
+  });
+  wp.richText.registerFormatType("catpow/u", {
+    title: "underline",
+    tagName: "u",
+    className: "rtf-u",
+    edit({ isActive, value: value2, onChange }) {
+      const onToggle = () => onChange(toggleFormat(value2, { type: "catpow/u" }));
+      const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement(
+        "path",
+        {
+          d: "M6.2,12.1h7.2l2,5.2h2.6L11,0H8.5L1.9,17.3h2.4L6.2,12.1z M8.8,5.1C9.2,4,9.5,2.9,9.7,1.8C10,2.8,10.4,4,10.9,5.4l1.8,4.8\n	H6.9L8.8,5.1z M20,18v2H0v-2H20z"
+        }
+      ));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(RichTextShortcut, { type: "primary", character: "_", onUse: onToggle }), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon, title: "underline", onClick: onToggle, isActive, shortcutType: "primary", shortcutCharacter: "_" }));
+    }
+  });
+  wp.richText.registerFormatType("catpow/title", {
+    title: "Title",
+    tagName: "span",
+    className: "rtf-title",
+    attributes: {
+      type: "class"
+    },
+    edit(props) {
+      const { isActive, value: value2, onChange, activeAttributes, contentRef } = props;
+      const onToggle = () => {
+        return onChange(
+          toggleFormat(value2, {
+            type: "catpow/title",
+            attributes: { type: "is-header" }
+          })
+        );
+      };
+      const setAttributes = useCallback3(
+        (attr) => {
+          onChange(
+            applyFormat(value2, {
+              type: "catpow/title",
+              attributes: Object.assign(activeAttributes, attr)
+            })
+          );
+        },
+        [value2, activeAttributes]
+      );
+      const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("g", null, /* @__PURE__ */ wp.element.createElement("path", { d: "M6.9,15.9V2.6h2.7v5.2h5.3V2.6h2.7v13.3h-2.7v-5.8H9.6v5.8H6.9z" })), /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "1", width: "4", height: "18" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "5", y: "18", width: "14", height: "1" }));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, null, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectButtons,
+        {
+          options: [
+            { label: "header", value: "is-header" },
+            { label: "headline", value: "is-headline" },
+            { label: "catch", value: "is-catch" }
+          ],
+          selected: activeAttributes["type"],
+          onChange: (type) => setAttributes({ type })
+        }
+      )))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { controls: [{ icon, onClick: onToggle, isActive }] })), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon, title: "Title", onClick: onToggle, isActive }));
+    }
+  });
+  wp.richText.registerFormatType("catpow/mark", {
+    title: "Mark",
+    tagName: "mark",
+    className: "rtf-mark",
+    attributes: {
+      color: "class"
+    },
+    edit(props) {
+      const { isActive, value: value2, onChange, activeAttributes, contentRef } = props;
+      const onToggle = () => {
+        return onChange(
+          toggleFormat(value2, {
+            type: "catpow/mark",
+            attributes: { color: "color_0" }
+          })
+        );
+      };
+      const setAttributes = useCallback3(
+        (attr) => {
+          onChange(
+            applyFormat(value2, {
+              type: "catpow/mark",
+              attributes: Object.assign(activeAttributes, attr)
+            })
+          );
+        },
+        [value2, activeAttributes]
+      );
+      const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("polygon", { points: "7.9,10.8 12.1,10.8 10,5.3 	" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M0,2v16h20V2H0z M13.7,15.3L12.5,12h-5l-1.2,3.4H4.7L9,4h1.9l4.3,11.3H13.7z" }));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: contentRef.current }, /* @__PURE__ */ wp.element.createElement(CP.SelectThemeColor, { onChange: (proxy) => setAttributes({ color: proxy.classes }), selected: activeAttributes["color"] }))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { controls: [{ icon, onClick: onToggle, isActive }] })), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon, title: "Mark", onClick: onToggle, isActive }));
+    }
+  });
+  wp.richText.registerFormatType("catpow/large", {
+    title: "Large",
+    tagName: "strong",
+    className: "rtf-large",
+    attributes: {
+      color: "class"
+    },
+    edit(props) {
+      const { isActive, value: value2, onChange, activeAttributes, contentRef } = props;
+      const onToggle = () => {
+        return onChange(
+          toggleFormat(value2, {
+            type: "catpow/large",
+            attributes: { color: "color_0" }
+          })
+        );
+      };
+      const setAttributes = useCallback3(
+        (attr) => {
+          onChange(
+            applyFormat(value2, {
+              type: "catpow/large",
+              attributes: Object.assign(activeAttributes, attr)
+            })
+          );
+        },
+        [value2, activeAttributes]
+      );
+      const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement(
+        "path",
+        {
+          d: "M4.8,0.5h5c1.6,0,2.8,0.1,3.6,0.4c0.8,0.2,1.5,0.7,2,1.5c0.5,0.8,0.8,2,0.8,3.6c0,1.1-0.2,1.9-0.5,2.4\n		c-0.4,0.4-1.1,0.8-2.1,1c1.2,0.3,1.9,0.7,2.4,1.3c0.4,0.6,0.6,1.5,0.6,2.8v1.8c0,1.3-0.1,2.3-0.4,2.9c-0.3,0.6-0.8,1.1-1.4,1.3\n		c-0.7,0.2-2,0.3-4,0.3H4.8V0.5z M9.8,3.8v4.3c0.2,0,0.4,0,0.5,0c0.5,0,0.8-0.1,0.9-0.4c0.1-0.2,0.2-0.9,0.2-2.1\n		c0-0.6-0.1-1-0.2-1.3s-0.3-0.4-0.4-0.5C10.7,3.8,10.4,3.8,9.8,3.8z M9.8,11.1v5.4c0.7,0,1.2-0.1,1.4-0.3c0.2-0.2,0.3-0.7,0.3-1.5\n		v-1.8c0-0.8-0.1-1.3-0.3-1.5C11.1,11.2,10.6,11.1,9.8,11.1z"
+        }
+      ));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: contentRef.current }, /* @__PURE__ */ wp.element.createElement(CP.SelectThemeColor, { onChange: (proxy) => setAttributes({ color: proxy.classes }), selected: activeAttributes["color"] }))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { controls: [{ icon, onClick: onToggle, isActive }] })), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon, title: "Large", onClick: onToggle, isActive }));
+    }
+  });
+  wp.richText.registerFormatType("catpow/tag", {
+    title: "tag",
+    tagName: "a",
+    className: "rtf-tag",
+    attributes: {
+      url: "href",
+      color: "class"
+    },
+    edit(props) {
+      const { isActive, value: value2, onChange, onFocus, activeAttributes, activeObject, contentRef } = props;
+      const onToggle = () => {
+        return onChange(
+          toggleFormat(value2, {
+            type: "catpow/tag",
+            attributes: { class: "color_0" }
+          })
+        );
+      };
+      const setAttributes = useCallback3(
+        (attr) => {
+          onChange(
+            applyFormat(value2, {
+              type: "catpow/tag",
+              attributes: Object.assign(activeAttributes, attr)
+            })
+          );
+        },
+        [value2, activeAttributes]
+      );
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, null, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(TextControl, { label: "URL", value: activeAttributes["url"], onChange: (url) => setAttributes({ url }) }))), /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: contentRef.current }, /* @__PURE__ */ wp.element.createElement(CP.SelectThemeColor, { onChange: (proxy) => setAttributes({ color: proxy.classes }), selected: activeAttributes["color"] }))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { controls: [{ icon: "tag", onClick: onToggle, isActive }] })), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon: "tag", title: "tag", onClick: onToggle, isActive }));
+    }
+  });
+  wp.richText.registerFormatType("catpow/annotation", {
+    title: "annotation",
+    tagName: "small",
+    className: "rtf-annotation",
+    edit({ isActive, value: value2, onChange }) {
+      const onToggle = () => onChange(toggleFormat(value2, { type: "catpow/annotation" }));
+      const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement(
+        "path",
+        {
+          d: "M2.99,2.01l7.04,7.04l7.04-7.04l0.62,0.62l-7.04,7.04l7.04,7.04l-0.62,0.62l-7.04-7.04l-7.06,7.06l-0.62-0.62l7.06-7.06\n		L2.37,2.62L2.99,2.01z M3.95,11.26c-0.87,0-1.6-0.73-1.6-1.6s0.73-1.6,1.6-1.6s1.6,0.73,1.6,1.6C5.55,10.58,4.78,11.26,3.95,11.26z\n		 M8.43,3.58c0-0.87,0.73-1.6,1.6-1.6s1.6,0.73,1.6,1.6s-0.73,1.6-1.6,1.6C9.11,5.18,8.43,4.42,8.43,3.58z M11.63,15.74\n		c0,0.87-0.73,1.6-1.6,1.6s-1.6-0.73-1.6-1.6c0-0.88,0.73-1.6,1.6-1.6C10.94,14.14,11.63,14.91,11.63,15.74z M16.11,8.06\n		c0.87,0,1.6,0.73,1.6,1.6s-0.73,1.6-1.6,1.6c-0.88,0-1.6-0.73-1.6-1.6C14.51,8.75,15.28,8.06,16.11,8.06z"
+        }
+      ));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { controls: [{ icon, onClick: onToggle, isActive }] })), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon, title: "annotation", onClick: onToggle, isActive }));
+    }
+  });
+  wp.richText.registerFormatType("catpow/custom", {
+    title: "custom",
+    tagName: "span",
+    className: "rtf-custom",
+    attributes: {
+      vars: "style"
+    },
+    edit(props) {
+      const { isActive, value: value2, onChange, onFocus, activeAttributes, activeObject, contentRef } = props;
+      const onToggle = () => {
+        return onChange(
+          toggleFormat(value2, {
+            type: "catpow/custom",
+            attributes: { vars: "font-size:1em;" }
+          })
+        );
+      };
+      const setAttributes = useCallback3(
+        (attr) => {
+          onChange(
+            applyFormat(value2, {
+              type: "catpow/custom",
+              attributes: Object.assign(activeAttributes, attr)
+            })
+          );
+        },
+        [value2, activeAttributes]
+      );
+      const extractStateFromVars = useCallback3((vars) => {
+        const state2 = {};
+        if (!vars) {
+          return state2;
+        }
+        const map = {
+          color: "color",
+          "background-color": "bgcolor",
+          "font-size": "size",
+          "font-weight": "weight"
+        };
+        vars.split(";").forEach((chunk) => {
+          const [key, val] = chunk.split(":");
+          state2[map[key]] = val;
+        });
+        return state2;
+      }, []);
+      const extractVarsFromState = useCallback3((state2) => {
+        let vars = "";
+        const map = {
+          color: "color:$;",
+          bgcolor: "background-color:$;",
+          size: "font-size:$em;",
+          weight: "font-weight:$;"
+        };
+        Object.keys(map).forEach((key) => {
+          if (state2.hasOwnProperty(key)) {
+            vars += map[key].replace("$", "" + state2[key]);
+          }
+        });
+        return vars;
+      }, []);
+      const init = useCallback3((state2) => {
+        if (state2.vars) {
+          const { vars } = state2;
+          return { vars, ...extractStateFromVars(vars) };
+        }
+        return { color: "inherit", size: 1, weight: 400, vars: "font-size:1em;" };
+      }, []);
+      const reducer = useCallback3((state2, action) => {
+        if (action.hasOwnProperty("vars")) {
+          const { vars } = action;
+          return { vars, ...extractStateFromVars(vars) };
+        } else {
+          const newState = { ...state2, ...action };
+          newState.vars = extractVarsFromState(newState);
+          return newState;
+        }
+      }, []);
+      const [state, update] = useReducer2(reducer, { vars: activeAttributes.vars }, init);
+      useEffect5(() => {
+        if (isActive) {
+          onChange(
+            applyFormat(value2, {
+              type: "catpow/custom",
+              attributes: { vars: state.vars }
+            })
+          );
+        }
+      }, [state.vars]);
+      useEffect5(() => {
+        update({ vars: activeAttributes.vars });
+      }, [activeAttributes.vars]);
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, null, /* @__PURE__ */ wp.element.createElement(CardBody, { style: { width: "20rem" } }, /* @__PURE__ */ wp.element.createElement(TextControl, { label: "\u8272", onChange: (color) => update({ color }), value: state.color || "" }), /* @__PURE__ */ wp.element.createElement(TextControl, { label: "\u80CC\u666F\u8272", onChange: (bgcolor) => update({ bgcolor }), value: state.bgcolor || "" }), /* @__PURE__ */ wp.element.createElement(RangeControl, { label: "\u30B5\u30A4\u30BA", onChange: (size) => update({ size }), value: parseFloat(state.size || 1), min: 0.1, max: 10, step: 0.1 }), /* @__PURE__ */ wp.element.createElement(RangeControl, { label: "\u592A\u3055", onChange: (weight) => update({ weight }), value: parseFloat(state.weight || 400), min: 100, max: 1e3, step: 100 })))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { controls: [{ icon: "admin-generic", onClick: onToggle, isActive }] })), /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon: "admin-generic", title: "custom", onClick: onToggle, isActive }));
+    }
+  });
+  wp.richText.registerFormatType("catpow/clear", {
+    title: "clear",
+    tagName: "div",
+    className: null,
+    edit({ isActive, value: value2, onChange }) {
+      return /* @__PURE__ */ wp.element.createElement(RichTextToolbarButton, { icon: "dismiss", title: "\u{1F9F9}\u5168\u3066\u306E\u30B9\u30BF\u30A4\u30EB\u3092\u30AF\u30EA\u30A2", onClick: () => onChange(create({ html: value2.text })), isActive: false });
+    }
+  });
+
+  // ../blocks/_init/init/plugins.jsx
+  wp.plugins.registerPlugin("catpow-sidebar", {
+    render: (props) => {
+      const { useState: useState4, useMemo: useMemo5, useCallback: useCallback4 } = wp.element;
+      const { PluginSidebarMoreMenuItem, PluginSidebar } = wp.editPost;
+      const { PanelBody } = wp.components;
+      const [structure, setStructure] = useState4(false);
+      const { DataStructure: DataStructure2, DataStructureItem: DataStructureItem2 } = CP;
+      if (!structure) {
+        wp.apiFetch({ path: "/cp/v1/config/structure" }).then((structure2) => {
+          setStructure(structure2);
+        });
+      }
+      const RenderMeta = useCallback4(
+        ({ meta }) => {
+          return /* @__PURE__ */ wp.element.createElement(DataStructure2, null, meta.map((item) => {
+            if (item.value) {
+              return /* @__PURE__ */ wp.element.createElement(DataStructureItem2, { title: item.label, name: item.name }, /* @__PURE__ */ wp.element.createElement(RenderMetaValue, { value: item.value }));
+            }
+            return /* @__PURE__ */ wp.element.createElement(DataStructureItem2, { title: item.label, name: item.name }, item.meta.length && /* @__PURE__ */ wp.element.createElement(RenderMeta, { meta: item.meta }));
+          }));
+        },
+        [props]
+      );
+      const RenderMetaValue = useCallback4(
+        ({ value: value2 }) => {
+          if (Array.isArray(value2)) {
+            return value2.map((val) => /* @__PURE__ */ wp.element.createElement(DataStructureItem2, { title: val }));
+          }
+          return Object.keys(value2).map((key) => {
+            if (typeof value2[key] === "object") {
+              return /* @__PURE__ */ wp.element.createElement(DataStructureItem2, { title: key }, /* @__PURE__ */ wp.element.createElement(RenderMetaValue, { value: value2[key] }));
+            }
+            return /* @__PURE__ */ wp.element.createElement(DataStructureItem2, { title: key, name: value2[key] });
+          });
+        },
+        [props]
+      );
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(PluginSidebarMoreMenuItem, { target: "catpow-sidebar" }, "\u{1F43E}Catpow"), /* @__PURE__ */ wp.element.createElement(
+        PluginSidebar,
+        {
+          name: "catpow-sidebar",
+          title: "\u{1F43E}Catpow",
+          icon: /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("g", null, /* @__PURE__ */ wp.element.createElement(
+            "path",
+            {
+              d: "M10.1,14.5c0-0.9,0.5-1.4,1.3-1.5c0.6-0.1,1.1-0.5,1.6-0.8c0.8-0.5,2.3-0.4,3,0.1c0.4,0.3,0.8,0.6,1,1.1\n								c0.2,0.5,0.1,1,0.1,1.5c-0.1,0.8,0.1,1.6,0.1,2.4c0,1.3-1.4,1.7-2.3,1.4c-0.6-0.3-0.9-0.8-1.3-1.3c-0.4-0.4-0.9-0.7-1.4-0.9\n								c-0.8-0.3-1.7-0.6-2.1-1.6C10,14.8,10.1,14.6,10.1,14.5z"
+            }
+          ), /* @__PURE__ */ wp.element.createElement(
+            "path",
+            {
+              d: "M2.8,8.6c0.3-1,0.5-2.2,0.9-3.3c0.3-0.8,1.9-1.3,2.7-1c0.9,0.3,1.7,0.9,2.5,1.4c0.5,0.3,1.1,0.5,1.4,1.1\n								c0.2,0.5,0.2,0.9,0,1.4c-0.6,1.2-1.7,1-2.7,1.1c-0.8,0.1-1.4,0.5-2,0.9c-0.5,0.3-1,0.5-1.6,0.4C3.2,10.2,2.7,9.7,2.8,8.6z"
+            }
+          ), /* @__PURE__ */ wp.element.createElement(
+            "path",
+            {
+              d: "M4.9,2.2C4.8,2.8,4.8,3.6,4,3.9C3.5,4.1,3.2,3.8,2.9,3.5C2,2.6,2.2,1.6,2.7,0.6c0.2-0.3,0.5-0.5,0.9-0.4\n								c0.4,0,0.7,0.3,0.9,0.6C4.8,1.2,4.9,1.7,4.9,2.2z"
+            }
+          ), /* @__PURE__ */ wp.element.createElement(
+            "path",
+            {
+              d: "M1,3.5c0.8,0,1.3,0.8,1.5,1.4c0.2,0.7,0.1,1.2-0.4,1.7C1.6,7.1,0.9,6.8,0.5,6.2C0.1,5.6,0.1,4.9,0.2,4.3\n								C0.2,3.8,0.4,3.4,1,3.5z"
+            }
+          ), /* @__PURE__ */ wp.element.createElement(
+            "path",
+            {
+              d: "M5.8,1.8c0-1.2,0.4-1.6,1.3-1.5c0.6,0.1,1,0.6,1.1,1.2c0.1,0.8,0,1.5-0.6,2.1C7.1,4,6.7,3.7,6.5,3.4C6,3,5.7,2.4,5.8,1.8z\n								"
+            }
+          ), /* @__PURE__ */ wp.element.createElement("path", { d: "M15.3,11.5c-0.7,0-1-0.3-1-1c0-0.9,0.9-1.8,1.8-1.8c0.6,0,1.1,0.6,1.1,1.3C17.2,10.7,16.3,11.5,15.3,11.5z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M17.3,12.5c0-1.1,0.3-1.5,1.1-1.5c0.8,0,1.3,0.5,1.3,1.2c0,1-0.6,1.7-1.3,1.7C17.6,13.9,17.3,13.5,17.3,12.5z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M11.6,11.8c-0.5,0.1-0.9-0.2-0.9-0.8c0-1,0.6-1.9,1.3-2c0.8,0,1.3,0.4,1.3,1.2C13.3,11.1,12.7,11.7,11.6,11.8z" }), /* @__PURE__ */ wp.element.createElement(
+            "path",
+            {
+              d: "M18.9,17.7c-0.7,0-1.2-0.9-1-1.5c0.2-0.4,0.1-0.8,0.4-1.2c0.3-0.3,1.2-0.3,1.4,0.1c0.4,0.8,0.3,1.7-0.3,2.4\n								C19.3,17.6,19.1,17.7,18.9,17.7z"
+            }
+          ), /* @__PURE__ */ wp.element.createElement("path", { d: "M8.7,3.4c0-0.6,0.4-1.1,0.9-1.1C10.2,2.3,11,3.2,11,4c0,0.6-0.5,0.9-1.1,1C9.2,4.9,8.7,4.3,8.7,3.4z" })))
+        },
+        /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u30C7\u30FC\u30BF\u69CB\u9020", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(DataStructure2, null, structure && Object.keys(structure).map((data_type) => {
+          return /* @__PURE__ */ wp.element.createElement(DataStructureItem2, { title: data_type, key: data_type }, structure[data_type].length && /* @__PURE__ */ wp.element.createElement(DataStructure2, null, structure[data_type].map((item) => /* @__PURE__ */ wp.element.createElement(DataStructureItem2, { title: item.label, name: item.name, key: item.name }, item.meta.length && /* @__PURE__ */ wp.element.createElement(RenderMeta, { meta: item.meta })))));
+        })))
+      ));
+    }
+  });
+
+  // ../blocks/_init/init/index.jsx
+  window.CP = CP_exports;
 })();
