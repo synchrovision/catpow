@@ -117,9 +117,9 @@ export const CP = {
 			})
 			.open();
 	},
-	imageSrcOrDummy: (src) => {
+	imageSrcOrDummy: (src, size = "vga") => {
 		if (!src) {
-			return wpinfo.theme_url + "/images/dummy.jpg";
+			return wpinfo.plugins_url + "/catpow/callee/dummy_image.php?size=" + size;
 		}
 		if (src[0] == "[") {
 			return wpinfo.plugins_url + "/catpow/callee/dummy_image.php?text=" + src;
