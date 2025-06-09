@@ -1,3 +1,3 @@
-﻿export const None=(props)=>{
+﻿export const None = (props) => {
 	return false;
-}
+};

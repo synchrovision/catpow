@@ -41,14 +41,7 @@
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
-    return /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement(
-      Catpow.CheckBoxes,
-      {
-        value: agent.getValue(),
-        options: agent.getMergedSchemaForInput().items.enum,
-        onChange: onUpdate
-      }
-    ));
+    return /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement(Catpow.CheckBoxes, { value: agent.getValue(), options: agent.getMergedSchemaForInput().items.enum, onChange: onUpdate }));
   };
 
   // ../components/JsonEditor/component/inputComponents/Radio.jsx
@@ -88,14 +81,7 @@
       }
       return [];
     }, [agent.getMergedSchemaForInput()]);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(
-      Catpow.SearchSelect,
-      {
-        options,
-        multiple: agent.getMergedSchemaForInput().type === "array",
-        onChange: onUpdate
-      }
-    ));
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(Catpow.SearchSelect, { options, multiple: agent.getMergedSchemaForInput().type === "array", onChange: onUpdate }));
   };
 
   // ../components/JsonEditor/component/inputComponents/StepSelect.jsx
@@ -124,14 +110,7 @@
       }
       return [];
     }, [agent.getMergedSchemaForInput()]);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(
-      Catpow.StepSelect,
-      {
-        options,
-        multiple: agent.getMergedSchemaForInput().type === "array",
-        onChange: onUpdate
-      }
-    ));
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(Catpow.StepSelect, { options, multiple: agent.getMergedSchemaForInput().type === "array", onChange: onUpdate }));
   };
 
   // ../components/JsonEditor/component/inputComponents/Text.jsx
@@ -183,24 +162,19 @@
       }
       return null;
     }, [agent.getMergedSchemaForInput()]);
-    const onChangeHandle = useCallback((e) => {
-      onChange(e.currentTarget.value);
-    }, [onChange]);
-    const onUpdateHandle = useCallback((e) => {
-      onUpdate(e.currentTarget.value);
-    }, [onChange]);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(
-      "input",
-      {
-        type: inputType,
-        value: agent.getValue() || "",
-        size,
-        className: classes.input(),
-        onChange: onChangeHandle,
-        onBlur: onUpdateHandle,
-        autoComplete
-      }
-    ));
+    const onChangeHandle = useCallback(
+      (e) => {
+        onChange(e.currentTarget.value);
+      },
+      [onChange]
+    );
+    const onUpdateHandle = useCallback(
+      (e) => {
+        onUpdate(e.currentTarget.value);
+      },
+      [onChange]
+    );
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("input", { type: inputType, value: agent.getValue() || "", size, className: classes.input(), onChange: onChangeHandle, onBlur: onUpdateHandle, autoComplete }));
   };
 
   // ../components/JsonEditor/component/inputComponents/Textarea.jsx
@@ -210,64 +184,60 @@
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
-    const onChangeHandle = useCallback((e) => {
-      onChange(e.currentTarget.value);
-    }, [onChange]);
-    const onUpdateHandle = useCallback((e) => {
-      onUpdate(e.currentTarget.value);
-    }, [onChange]);
+    const onChangeHandle = useCallback(
+      (e) => {
+        onChange(e.currentTarget.value);
+      },
+      [onChange]
+    );
+    const onUpdateHandle = useCallback(
+      (e) => {
+        onUpdate(e.currentTarget.value);
+      },
+      [onChange]
+    );
     const { cols, rows } = useMemo(() => {
       const schema = agent.getMergedSchemaForInput();
       const { cols: cols2, rows: rows2 } = schema;
       return { cols: cols2, rows: rows2 };
     }, [agent.getMergedSchemaForInput()]);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(
-      "textarea",
-      {
-        className: classes.textarea(),
-        onChange: onChangeHandle,
-        onBlur: onUpdateHandle,
-        value: agent.getValue() || "",
-        cols,
-        rows
-      }
-    ));
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("textarea", { className: classes.textarea(), onChange: onChangeHandle, onBlur: onUpdateHandle, value: agent.getValue() || "", cols, rows }));
   };
 
   // modules/src/util/bem.jsx
   var bem = (className) => {
     const children = {};
     const firstClass = className.split(" ")[0];
-    return new Proxy(function() {
-      if (arguments.length > 0) {
-        const classes = [];
-        let i;
-        for (i = 0; i < arguments.length; i++) {
-          if (!arguments[i]) {
-            continue;
+    return new Proxy(
+      function() {
+        if (arguments.length > 0) {
+          const classes = [];
+          let i;
+          for (i = 0; i < arguments.length; i++) {
+            if (!arguments[i]) {
+              continue;
+            }
+            if (typeof arguments[i] === "string") {
+              classes.push(arguments[i]);
+              continue;
+            }
+            classes.push.apply(classes, Array.isArray(arguments[i]) ? arguments[i] : Object.keys(arguments[i]).filter((c) => arguments[i][c]));
           }
-          if (typeof arguments[i] === "string") {
-            classes.push(arguments[i]);
-            continue;
+          if (classes.length > 0) {
+            return (className + " " + classes.join(" ")).replace(" --", " " + firstClass + "--");
           }
-          classes.push.apply(
-            classes,
-            Array.isArray(arguments[i]) ? arguments[i] : Object.keys(arguments[i]).filter((c) => arguments[i][c])
-          );
         }
-        if (classes.length > 0) {
-          return (className + " " + classes.join(" ")).replace(" --", " " + firstClass + "--");
+        return className;
+      },
+      {
+        get: (target, prop) => {
+          if (void 0 === children[prop]) {
+            children[prop] = bem(firstClass + (prop[0] === "_" ? "_" : "-") + prop);
+          }
+          return children[prop];
         }
       }
-      return className;
-    }, {
-      get: (target, prop) => {
-        if (void 0 === children[prop]) {
-          children[prop] = bem(firstClass + (prop[0] === "_" ? "_" : "-") + prop);
-        }
-        return children[prop];
-      }
-    });
+    );
   };
 
   // ../components/JsonEditor/component/inputComponents/DateTime.jsx
@@ -277,12 +247,18 @@
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
-    const onChangeHandle = useCallback((e) => {
-      onChange(e.currentTarget.value);
-    }, [onChange]);
-    const onUpdateHandle = useCallback((e) => {
-      onUpdate(e.currentTarget.value);
-    }, [onUpdate]);
+    const onChangeHandle = useCallback(
+      (e) => {
+        onChange(e.currentTarget.value);
+      },
+      [onChange]
+    );
+    const onUpdateHandle = useCallback(
+      (e) => {
+        onUpdate(e.currentTarget.value);
+      },
+      [onUpdate]
+    );
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("input", { type: "datetime-local", value: agent.getValue() || "", onChange: onChangeHandle, onBlur: onUpdateHandle }));
   };
 
@@ -293,12 +269,18 @@
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
-    const onChangeHandle = useCallback((e) => {
-      onChange(e.currentTarget.value);
-    }, [onChange]);
-    const onUpdateHandle = useCallback((e) => {
-      onUpdate(e.currentTarget.value);
-    }, [onUpdate]);
+    const onChangeHandle = useCallback(
+      (e) => {
+        onChange(e.currentTarget.value);
+      },
+      [onChange]
+    );
+    const onUpdateHandle = useCallback(
+      (e) => {
+        onUpdate(e.currentTarget.value);
+      },
+      [onUpdate]
+    );
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("input", { type: "date", value: agent.getValue() || "", onChange: onChangeHandle, onBlur: onUpdateHandle }));
   };
 
@@ -309,12 +291,18 @@
     const { useState, useMemo, useCallback, useEffect } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
-    const onChangeHandle = useCallback((e) => {
-      onChange(e.currentTarget.value);
-    }, [onChange]);
-    const onUpdateHandle = useCallback((e) => {
-      onUpdate(e.currentTarget.value);
-    }, [onUpdate]);
+    const onChangeHandle = useCallback(
+      (e) => {
+        onChange(e.currentTarget.value);
+      },
+      [onChange]
+    );
+    const onUpdateHandle = useCallback(
+      (e) => {
+        onUpdate(e.currentTarget.value);
+      },
+      [onUpdate]
+    );
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("input", { type: "time", value: agent.getValue() || "", onChange: onChangeHandle, onBlur: onUpdateHandle }));
   };
 
@@ -336,37 +324,19 @@
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
     const { minimum: min, maximum: max, multipleOf: step } = agent.getMergedSchemaForInput();
-    const onChangeHandle = useCallback((e) => {
-      onChange(parseFloat(e.currentTarget.value));
-    }, [onChange]);
-    const onUpdateHandle = useCallback((e) => {
-      onUpdate(parseFloat(e.currentTarget.value));
-    }, [onUpdate]);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(
-      "input",
-      {
-        className: classes.range(),
-        type: "range",
-        value: agent.getValue(),
-        min,
-        max,
-        step,
-        onChange: onChangeHandle,
-        onBlur: onUpdateHandle
-      }
-    ), /* @__PURE__ */ wp.element.createElement(
-      "input",
-      {
-        className: classes.input(),
-        type: "number",
-        value: agent.getValue(),
-        min,
-        max,
-        step,
-        onChange: onChangeHandle,
-        onBlur: onUpdateHandle
-      }
-    ));
+    const onChangeHandle = useCallback(
+      (e) => {
+        onChange(parseFloat(e.currentTarget.value));
+      },
+      [onChange]
+    );
+    const onUpdateHandle = useCallback(
+      (e) => {
+        onUpdate(parseFloat(e.currentTarget.value));
+      },
+      [onUpdate]
+    );
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("input", { className: classes.range(), type: "range", value: agent.getValue(), min, max, step, onChange: onChangeHandle, onBlur: onUpdateHandle }), /* @__PURE__ */ wp.element.createElement("input", { className: classes.input(), type: "number", value: agent.getValue(), min, max, step, onChange: onChangeHandle, onBlur: onUpdateHandle }));
   };
 
   // ../components/JsonEditor/component/inputComponents/Number.jsx
@@ -377,24 +347,19 @@
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo(() => bem2(className), []);
     const { minimum: min, maximum: max, multipleOf: step } = agent.getMergedSchemaForInput();
-    const onChangeHandle = useCallback((e) => {
-      onChange(parseFloat(e.currentTarget.value));
-    }, [onChange]);
-    const onUpdateHandle = useCallback((e) => {
-      onUpdate(parseFloat(e.currentTarget.value));
-    }, [onUpdate]);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(
-      "input",
-      {
-        type: "number",
-        value: agent.getValue(),
-        min,
-        max,
-        step,
-        onChange: onChangeHandle,
-        onBlur: onUpdateHandle
-      }
-    ));
+    const onChangeHandle = useCallback(
+      (e) => {
+        onChange(parseFloat(e.currentTarget.value));
+      },
+      [onChange]
+    );
+    const onUpdateHandle = useCallback(
+      (e) => {
+        onUpdate(parseFloat(e.currentTarget.value));
+      },
+      [onUpdate]
+    );
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("input", { type: "number", value: agent.getValue(), min, max, step, onChange: onChangeHandle, onBlur: onUpdateHandle }));
   };
 
   // ../components/JsonEditor/component/inputComponents/ArrayInput.jsx
@@ -407,18 +372,30 @@
     const layout = schema.layout || props.layout || (compact ? "table" : "block");
     const size = schema.size || props.size || "medium";
     const { minContains: min, maxContains: max, items, prefixItems } = schema;
-    const onAddItem = useCallback((index, value) => {
-      agent.addItem(index, value);
-    }, [agent]);
-    const onCopyItem = useCallback((from, to) => {
-      agent.copyItem(from, to);
-    }, [agent]);
-    const onMoveItem = useCallback((from, to) => {
-      agent.moveItem(from, to);
-    }, [agent]);
-    const onRemoveItem = useCallback((index) => {
-      agent.removeItem(index);
-    }, [agent]);
+    const onAddItem = useCallback(
+      (index, value) => {
+        agent.addItem(index, value);
+      },
+      [agent]
+    );
+    const onCopyItem = useCallback(
+      (from, to) => {
+        agent.copyItem(from, to);
+      },
+      [agent]
+    );
+    const onMoveItem = useCallback(
+      (from, to) => {
+        agent.moveItem(from, to);
+      },
+      [agent]
+    );
+    const onRemoveItem = useCallback(
+      (index) => {
+        agent.removeItem(index);
+      },
+      [agent]
+    );
     const [lastUpdated, setLastUpdated] = useState(Date.now());
     useEffect(() => {
       const cb = (e) => {
@@ -455,38 +432,19 @@
             }
           }
           const sortedColsKeys = Object.keys(cols).filter((key) => !cols[key].hidden).sort((key1, key2) => (cols[key1].order || 10) - (cols[key2].order || 10));
-          return /* @__PURE__ */ wp.element.createElement(
-            Catpow.TableInput,
-            {
-              size,
-              labels: sortedColsKeys.map((key) => cols[key].title || key),
-              onAddItem,
-              onCopyItem,
-              onMoveItem,
-              onRemoveItem
-            },
-            props2.agent.items.map((item) => sortedColsKeys.map((col) => {
+          return /* @__PURE__ */ wp.element.createElement(Catpow.TableInput, { size, labels: sortedColsKeys.map((key) => cols[key].title || key), onAddItem, onCopyItem, onMoveItem, onRemoveItem }, props2.agent.items.map(
+            (item) => sortedColsKeys.map((col) => {
               if (item.getMergedSchemaForInput().properties[col] == null) {
                 return false;
               }
               return /* @__PURE__ */ wp.element.createElement(Input, { agent: item.properties[col], layout: "inline", size: "small", compact: true, key: getItemId(item) });
-            }))
-          );
+            })
+          ));
         };
       }
       return (props2) => {
         const { agent: agent2 } = props2;
-        return /* @__PURE__ */ wp.element.createElement(
-          Catpow.ArrayInput,
-          {
-            size,
-            onAddItem,
-            onCopyItem,
-            onMoveItem,
-            onRemoveItem
-          },
-          props2.agent.items.map((item) => /* @__PURE__ */ wp.element.createElement(Input, { agent: item, layout: "inline", size: "small", compact: true, key: getItemId(item) }))
-        );
+        return /* @__PURE__ */ wp.element.createElement(Catpow.ArrayInput, { size, onAddItem, onCopyItem, onMoveItem, onRemoveItem }, props2.agent.items.map((item) => /* @__PURE__ */ wp.element.createElement(Input, { agent: item, layout: "inline", size: "small", compact: true, key: getItemId(item) })));
       };
     }, [layout, size, onAddItem, onCopyItem, onMoveItem, onRemoveItem]);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes(`is-layout-${layout}`, `is-size-${size}`) }, /* @__PURE__ */ wp.element.createElement(InputComponent, { agent }));
@@ -587,17 +545,23 @@
       return getAdditionalInputComponent && getAdditionalInputComponent(schema, { layout, size, compact }) || getInputComponentForSchema(schema, { layout, size, compact });
     }, [schema, layout, size]);
     const [showMessage, setShowMessage] = useState(false);
-    const onChange = useCallback((value) => {
-      agent.setValue(value);
-      setShowMessage(false);
-    }, [agent, setShowMessage]);
-    const onUpdate = useCallback((value) => {
-      agent.setValue(value);
-      agent.update();
-      window.requestAnimationFrame(() => {
-        setShowMessage(true);
-      });
-    }, [agent, setShowMessage]);
+    const onChange = useCallback(
+      (value) => {
+        agent.setValue(value);
+        setShowMessage(false);
+      },
+      [agent, setShowMessage]
+    );
+    const onUpdate = useCallback(
+      (value) => {
+        agent.setValue(value);
+        agent.update();
+        window.requestAnimationFrame(() => {
+          setShowMessage(true);
+        });
+      },
+      [agent, setShowMessage]
+    );
     const [lastChanged, setLastChanged] = useState(Date.now());
     useEffect(() => {
       const cb = (e) => {
@@ -606,18 +570,7 @@
       agent.on("change", cb);
       return () => agent.off("change", cb);
     }, []);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-invalid": !agent.isValid, "is-compact": compact }, `is-layout-${layout}`, `is-size-${size}`, `is-level-${level}`), "data-json-key": agent.key }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._body() }, agent.getMessage() && /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.message(showMessage ? "is-show" : "is-hidden") }, agent.getMessage()), /* @__PURE__ */ wp.element.createElement(
-      InputComponent,
-      {
-        agent,
-        size,
-        compact,
-        level,
-        onChange,
-        onUpdate,
-        lastChanged
-      }
-    ), description && /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.description() }, description)));
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-invalid": !agent.isValid, "is-compact": compact }, `is-layout-${layout}`, `is-size-${size}`, `is-level-${level}`), "data-json-key": agent.key }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._body() }, agent.getMessage() && /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.message(showMessage ? "is-show" : "is-hidden") }, agent.getMessage()), /* @__PURE__ */ wp.element.createElement(InputComponent, { agent, size, compact, level, onChange, onUpdate, lastChanged }), description && /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.description() }, description)));
   };
 
   // ../components/JsonEditor/component/inputComponents/ObjectInput.jsx
@@ -719,15 +672,7 @@
   var DataContext = wp.element.createContext({});
   var JsonEditor = (props) => {
     const { useState, useCallback, useMemo, useEffect, useRef, useReducer } = wp.element;
-    const {
-      className = "cp-jsoneditor-editor",
-      title = "JsonEditor",
-      schema,
-      debug = false,
-      onChange,
-      autoSave = false,
-      children: getAdditionalInputComponent
-    } = props;
+    const { className = "cp-jsoneditor-editor", title = "JsonEditor", schema, debug = false, onChange, autoSave = false, children: getAdditionalInputComponent } = props;
     const classes = bem(className);
     const [hasChange, setHasChange] = useState(false);
     const json = useMemo(() => {
@@ -763,14 +708,7 @@
       });
       return rootAgent2;
     }, []);
-    return /* @__PURE__ */ wp.element.createElement(DataContext.Provider, { value: data }, /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._body() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.header() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.header.title() }, title), /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.header.controls() }, /* @__PURE__ */ wp.element.createElement(
-      "div",
-      {
-        className: classes._body.header.controls.save({ "is-active": hasChange }),
-        onClick: () => save()
-      },
-      "Save"
-    ))), /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.contents() }, /* @__PURE__ */ wp.element.createElement(ObjectInput, { agent: rootAgent })))));
+    return /* @__PURE__ */ wp.element.createElement(DataContext.Provider, { value: data }, /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._body() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.header() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.header.title() }, title), /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.header.controls() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.header.controls.save({ "is-active": hasChange }), onClick: () => save() }, "Save"))), /* @__PURE__ */ wp.element.createElement("div", { className: classes._body.contents() }, /* @__PURE__ */ wp.element.createElement(ObjectInput, { agent: rootAgent })))));
   };
   JsonEditor.Input = Input;
 
