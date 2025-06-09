@@ -110,7 +110,7 @@ wp.blocks.registerBlockType("catpow/section", {
 							{
 								name: "template",
 								label: __("テンプレート", "catpow"),
-								values: "is-template",
+								values: "isTemplate",
 								sub: [
 									{
 										name: "headerImageCode",
@@ -167,7 +167,7 @@ wp.blocks.registerBlockType("catpow/section", {
 							{
 								name: "template",
 								label: __("テンプレート", "catpow"),
-								values: "is-template",
+								values: "isTemplate",
 								sub: [
 									{
 										input: "text",
