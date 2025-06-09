@@ -1,6 +1,4 @@
-﻿import { CP } from "./CP.jsx";
-
-wp.plugins.registerPlugin("catpow-sidebar", {
+﻿wp.plugins.registerPlugin("catpow-sidebar", {
 	render: (props) => {
 		const { useState, useMemo, useCallback } = wp.element;
 		const { PluginSidebarMoreMenuItem, PluginSidebar } = wp.editPost;

@@ -78,7 +78,6 @@ class scss{
 			foreach($color_roles as $color_role=>$color_role_settings){
 				$colors[$color_role_settings['shorthand']]=$theme_customize_values[$color_role.'_color'];
 			}
-			$colors=util\style_config::extend_colors($colors);
 			return self::create_map_data($colors);
 		});
 		$scssc->registerFunction('import_fonts',function($args)use($scssc,$font_roles,$theme_customize_values){
@@ -89,7 +88,7 @@ class scss{
 			return self::create_map_data($fonts);
 		});
 		if(apply_filters('cp_use_css_vars',true)){
-			$scssc->registerFunction('translate_color',function($args){
+			$scssc->registerFunction('translate_color',function($args)use($color_roles_by_shorthand){
 				$args=array_map([static::$scssc,'compileValue'],$args);
 				$color=false;
 				$available_tone_keys=[];
@@ -196,7 +195,7 @@ class scss{
 					}
 					if(!empty($color_role['invert'])){
 						$ikey=$color_role['invert'];
-						foreach($val as $k=>$v){
+						foreach(['h','s','l','a','t','S','B'] as $k){
 							$classes['.has-color-scheme-reverted']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
 							$classes['.has-color-scheme-inverted']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$ikey}-{$k})";
 							$classes['.has-color-scheme-reverted']["--cp-container-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";

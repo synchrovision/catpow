@@ -1,22 +1,29 @@
 <?php
+$block_class='wp-block-catpow-buttons';
+$buttons_class='cp-buttons';
+$button_class='cp-button';
 $attributes=[
-	"classes"=>["source"=>'attribute',"selector"=>'ul',"attribute"=>'class',"default"=>'wp-block-catpow-buttons buttons m'],
+	"classes"=>["source"=>'attribute',"selector"=>".{$block_class}","attribute"=>'class',"default"=>"{$block_class} {$buttons_class} m"],
 	"items"=>[
 		"source"=>'query',
-		"selector"=>'li.item',
+		"selector"=>".{$block_class}__item",
 		'filters'=>[
-			'iconHolder'=>['selector'=>'.icon'],
-			'eventDispatcher'=>['selector'=>'.button']
+			'iconHolder'=>['selector'=>".{$block_class}-button__icon"],
+			'eventDispatcher'=>['selector'=>".{$block_class}-button"]
 		],
 		"query"=>[
 			"classes"=>["source"=>'attribute',"attribute"=>'class'],
-			"text"=>["source"=>'text',"selector"=>'.button'],
-			"url"=>["source"=>'attribute',"selector"=>'.button',"attribute"=>'href'],
-			"iconSrc"=>["source"=>'attribute',"selector"=>'.icon img',"attribute"=>'src'],
-			"iconAlt"=>["source"=>'attribute',"selector"=>'.icon img',"attribute"=>'alt'],
+			"text"=>["source"=>'text',"selector"=>".{$block_class}-button"],
+			"url"=>["source"=>'attribute',"selector"=>".{$block_class}-button","attribute"=>'href'],
+			"iconSrc"=>["source"=>'attribute',"selector"=>".{$block_class}-button__icon-img","attribute"=>'src'],
+			"iconAlt"=>["source"=>'attribute',"selector"=>".{$block_class}-button__icon-img","attribute"=>'alt'],
 		],
 		"default"=>[
-			["classes"=>'item mail default',"event"=>'',"text"=>'お問合せ',"url"=>'[home_url]/contact']
+			[
+				"classes"=>".{$block_class}__item is-default",
+				"text"=>'お問合せ',
+				"url"=>'[home_url]/contact'
+			]
 		]
 	],
 	"loopParam"=>["type"=>'text'],

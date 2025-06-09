@@ -1,0 +1,124 @@
+.wp-block-catpow-section {
+  display: block;
+  margin-inline: auto;
+}
+.wp-block-catpow-section__body {
+  margin-inline: auto;
+}
+.wp-block-catpow-section.is-type-scene .wp-block-catpow-section {
+  position: relative;
+  background-color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),var(--cp-tones-bx-a,1));
+}
+.wp-block-catpow-section.is-type-scene .wp-block-catpow-section__body {
+  position: relative;
+  z-index: 1;
+}
+.wp-block-catpow-section.is-type-scene .wp-block-catpow-section__header {
+  position: relative;
+}
+.wp-block-catpow-section.is-type-scene .wp-block-catpow-section__header-image {
+  display: block;
+  text-align: center;
+}
+.wp-block-catpow-section.is-type-scene .wp-block-catpow-section__header-image-img {
+  width: auto;
+  height: 8rem;
+  object-fit: cover;
+  object-position: center;
+}
+.wp-block-catpow-section.is-type-scene .wp-block-catpow-section__header-title {
+  position: relative;
+  margin-inline: auto;
+}
+.wp-block-catpow-section.is-type-scene .wp-block-catpow-section__header-title-heading {
+  padding: 2rem 1rem;
+  position: relative;
+  text-align: center;
+  font-size: 5rem;
+  font-weight: 300;
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+  word-break: keep-all;
+}
+.wp-block-catpow-section.is-type-scene .wp-block-catpow-section__header-title-titleimage {
+  max-width: c;
+  width: auto;
+  padding: 0px;
+  margin: 0px auto;
+}
+.wp-block-catpow-section.is-type-scene .wp-block-catpow-section__header-title-titleimage-image-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.wp-block-catpow-section.is-type-scene .wp-block-catpow-section__header-title-lead {
+  padding: 2rem 1rem;
+  position: relative;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 300;
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+}
+.wp-block-catpow-section.is-type-article .wp-block-catpow-section__body {
+  position: relative;
+  z-index: 1;
+}
+.wp-block-catpow-section.is-type-article .wp-block-catpow-section__header-title-heading {
+  padding: 1rem 0px;
+  position: relative;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  text-align: left;
+  font-size: 2rem;
+  font-weight: 400;
+  color: hsla(var(--cp-tones-ax-h),var(--cp-tones-ax-s),var(--cp-tones-ax-l),var(--cp-tones-ax-a,1));
+  word-break: keep-all;
+}
+.wp-block-catpow-section.is-type-article .wp-block-catpow-section__header-title-lead {
+  padding: 1rem 2rem;
+  text-align: justify;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
+}
+.wp-block-catpow-section.is-type-column {
+  max-width: 120rem;
+  width: auto;
+  margin: 2rem auto;
+  overflow: hidden;
+  background-color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),var(--cp-tones-bx-a,1));
+  box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  border-style: solid;
+  border-width: 1px;
+  border-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 30),var(--cp-tones-m-a,1));
+  border-radius: 10px;
+}
+.wp-block-catpow-section.is-type-column__body {
+  padding: 2rem;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+.wp-block-catpow-section.is-type-column__header {
+  padding: 3rem auto;
+}
+.wp-block-catpow-section.is-type-column__header-title-heading {
+  padding: 1rem 1rem;
+  margin-bottom: 6rem;
+  position: relative;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 300;
+  color: hsla(var(--cp-tones-ax-h),var(--cp-tones-ax-s),var(--cp-tones-ax-l),var(--cp-tones-ax-a,1));
+  word-break: keep-all;
+}
+.wp-block-catpow-section.is-type-column__header-title-lead {
+  padding: 3rem 1rem;
+  position: relative;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
+}
+/*# sourceMappingURL=./style.css.map */

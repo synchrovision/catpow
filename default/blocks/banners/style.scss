@@ -1,48 +1,43 @@
 @import 'admin_style_config.scss';
 
 .wp-block-catpow-banners{
+	$block:&;
+	@include bnd((mgi:a));
+	@include grd((rc:calc(var(--cp-item-size,20rem))));
 	@include txt((l:n));
-	>.item{
+	&:not(.has-custom-padding){
+		@include bnd((pd:0));
+	}
+	&__item{
+		$item:&;
 		@include bnd((bs:b));
 		@include trn((t:.5s,s:1));
-		>.title{
+		&-title{
 			@include bnd((p:r,pd:.5em 1em,w:10em fit,mg:0 0 -1em -.5em,z:1));
 			@include bg((c:m));
 			@include txt((a:c,c:i,p:12));
 			@include shd((b:2));
 		}
-		>.link{
+		&-link{
 			@include bnd((d:b,p:r));
-			img{
-				@include bnd((d:b,p:r,w:f,h:a));
-				@include shd((b:2));
-				@include trn((t:.5s));
+			@include usr((c:p));
+			&-image{
+				@include bnd((d:b));
+				&-img{
+					@include bnd((d:b,p:r,w:f,h:a));
+					@include shd((b:2));
+					@include trn((t:.5s));
+				}
 			}
-		}
-		&:hover{
-			@include trn((s:1.01));
-			>.link{
+			#{$item}:hover &{
 				@include bnd((d:b));
 				img{
 					@include shd((b:8));
 				}
 			}
 		}
-	}
-	&.small,&.medium,&.large{
-		@include bnd((mg:0 a,w:fit 1000,pd:10));
-		@include flx((w:w,g:16));
-	}
-	&.small{
-		>.item{@include bnd((f:1 1 150));}
-	}
-	&.medium{
-		>.item{@include bnd((f:1 1 300));}
-	}
-	&.large{
-		>.item{@include bnd((f:1 1 600));}
-	}
-	&.full{
-		>.item{@include bnd((f:1 1 f));}
+		&:hover{
+			@include trn((s:1.01));
+		}
 	}
 }
