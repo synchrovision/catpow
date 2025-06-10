@@ -263,6 +263,52 @@ class CP{
 		}
 		return [];
 	}
+	public static function glob($pattern,$flag=073){
+		$dirs=[];
+		if($flag&self::FROM_PLUGIN){
+			foreach(self::$extensions as $catpow_extension){
+				$dirs[]=WP_PLUGIN_DIR.'/'.$catpow_extension;
+			}
+			$dirs[]=WP_PLUGIN_DIR.'/catpow';
+		}
+		if($flag&self::FROM_CONTENT_DIR && isset(self::$content_path)){
+			$dirs[]=get_stylesheet_directory().'/'.self::$content_path;
+			$dirs[]=get_template_directory().'/'.self::$content_path;
+		}
+		if($flag&self::FROM_STYLESHEET_DIR){
+			$dirs[]=get_stylesheet_directory();
+		}
+		if($flag&self::FROM_TEMPLATE_DIR){
+			$dirs[]=get_template_directory();
+		}
+		if($flag&self::FROM_FUNCTIONS){
+			$dirs+=self::get_use_functions_dir();
+		}
+		if($flag&self::FROM_DEFAULT){
+			foreach(self::$extensions as $catpow_extension){
+				$dirs[]=WP_PLUGIN_DIR.'/'.$catpow_extension.'/default';
+			}
+			$dirs[]=WP_PLUGIN_DIR.'/catpow/default';
+		}
+		array_reverse($dirs);
+		$files=[];
+		if($flag&self::FROM_CONFIG){
+			$config_pattern=self::get_config_file_path($pattern);
+			if($config_pattern!==$pattern){
+				$path_data_rep=array_intersect_key(self::parse_content_file_path($pattern),['data_type'=>1,'data_name'=>1,'tmp_slug'=>1]);
+				foreach(self::glob($config_pattern,(self::FROM_CONFIG&$flag)>>3) as $key=>$path){
+					$files[self::create_content_file_path(array_merge(self::parse_content_file_path($key),$path_data_rep))]=$path;
+				}
+			}
+		}
+		foreach($dirs as $dir){
+			chdir($dir);
+			foreach(glob($pattern) as $file){
+				$files[$file]=$dir.'/'.$file;
+			}
+		}
+		return $files;
+	}
 	public static function include_plugin_file($name,$vars=false){
 		if($vars!==false){extract($vars);}
 		if(substr($name,-4)!=='.php'){$name.='.php';}
