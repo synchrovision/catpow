@@ -100,10 +100,10 @@
   animation: "slideUpBit" 1s cubic-bezier(0.2, 10, 0.8, 10) both infinite;
 }
 .wp-block-catpow-graphics .item.hasBackground {
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
 }
 .wp-block-catpow-graphics .item.hasBoxShadow {
-  box-shadow: 0 5px 11px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+  box-shadow: 0 5px 11px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
 }
 .wp-block-catpow-graphics .item.isEllipse {
   overflow: hidden;
@@ -123,7 +123,7 @@
 }
 .wp-block-catpow-graphics .item.isText.type1 {
   padding: 1em;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),calc(100% - var(--cp-tones-b-t) * 100),calc(var(--cp-tones-b-a) * 0.8));
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),calc(100% - var(--cp-tones-b-t) * 100),calc(var(--cp-tones-b-a,1) * 0.8));
 }
 .wp-block-catpow-graphics .item.isText.type1 .title {
   padding-bottom: 0.25em;
@@ -140,7 +140,7 @@
 }
 .wp-block-catpow-graphics .item.isText.type2 {
   padding: 1em;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),calc(100% - var(--cp-tones-b-t) * 100),calc(var(--cp-tones-b-a) * 0.8));
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),calc(100% - var(--cp-tones-b-t) * 100),calc(var(--cp-tones-b-a,1) * 0.8));
 }
 .wp-block-catpow-graphics .item.isText.type2 .title {
   padding-bottom: 0.25em;
@@ -157,7 +157,7 @@
 }
 .wp-block-catpow-graphics .item.isText.type3 {
   padding: 1em;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),calc(100% - var(--cp-tones-b-t) * 100),calc(var(--cp-tones-b-a) * 0.8));
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),calc(100% - var(--cp-tones-b-t) * 100),calc(var(--cp-tones-b-a,1) * 0.8));
 }
 .wp-block-catpow-graphics .item.isText.type3 .title {
   padding-bottom: 0.25em;
@@ -173,13 +173,13 @@
   font-size: 0.8em;
 }
 .wp-block-catpow-graphics .item.isText.inverse {
-  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
+  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
 }
 .wp-block-catpow-graphics .item.isText.inverse.type1 {
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a) * 0.8));
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a,1) * 0.8));
 }
 .wp-block-catpow-graphics .item.isText.inverse.type1 .title {
-  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
+  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
 }
 .wp-block-catpow-graphics .item.isText.isEllipse {
   padding: 2em 1em;

@@ -14,7 +14,7 @@
   font-family: var(--cp-fonts-t);
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
-  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a));
+  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
 }
 .wp-block-catpow-datatable.spec tbody tr th, .wp-block-catpow-datatable.spec tbody tr td {
   position: relative;
@@ -25,7 +25,7 @@
   font-family: var(--cp-fonts-t);
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
-  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a));
+  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
 }
 .wp-block-catpow-datatable.sheet thead th {
   padding: 0.625rem;
@@ -33,10 +33,10 @@
   font-size: 0.75rem;
   line-height: 1.5em;
   font-family: var(--cp-fonts-t);
-  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a));
+  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a,1));
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 50),var(--cp-tones-t-a));
+  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 50),var(--cp-tones-t-a,1));
 }
 .wp-block-catpow-datatable.sheet thead th.spacer {
   background-color: transparent;
@@ -51,20 +51,20 @@
   font-family: var(--cp-fonts-t);
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 50),var(--cp-tones-t-a));
+  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 50),var(--cp-tones-t-a,1));
 }
 .wp-block-catpow-datatable.sheet tbody tr th {
-  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),calc(100% - var(--cp-tones-s-t) * 100),calc(var(--cp-tones-s-a) * 0.5));
+  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),calc(100% - var(--cp-tones-s-t) * 100),calc(var(--cp-tones-s-a,1) * 0.5));
   text-align: center;
 }
 .wp-block-catpow-datatable.sheet tbody tr td {
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
 }
 .wp-block-catpow-datatable.sheet tbody tr:nth-of-type(odd) th {
-  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),calc(100% - var(--cp-tones-s-t) * 100),calc(var(--cp-tones-s-a) * 0.75));
+  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),calc(100% - var(--cp-tones-s-t) * 100),calc(var(--cp-tones-s-a,1) * 0.75));
 }
 .wp-block-catpow-datatable.sheet tbody tr:nth-of-type(odd) td {
-  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),calc(100% - var(--cp-tones-s-t) * 100),calc(var(--cp-tones-s-a) * 0.25));
+  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),calc(100% - var(--cp-tones-s-t) * 100),calc(var(--cp-tones-s-a,1) * 0.25));
 }
 .wp-block-catpow-datatable.plan thead th {
   padding: 0.625rem;
@@ -72,8 +72,8 @@
   font-size: 0.75rem;
   line-height: 1.5em;
   font-family: var(--cp-fonts-t);
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a));
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
 }
 .wp-block-catpow-datatable.plan thead th.spacer {
   background-color: transparent;
@@ -87,20 +87,20 @@
   font-family: var(--cp-fonts-t);
 }
 .wp-block-catpow-datatable.plan tbody tr th {
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a));
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
 }
 .wp-block-catpow-datatable.plan tbody tr td {
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
 }
 .wp-block-catpow-datatable.plan tbody tr td strong {
   font-size: 1.25em;
-  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
+  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
 }
 .wp-block-catpow-datatable.plan tbody tr:nth-of-type(odd) th {
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 95),var(--cp-tones-m-a));
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 95),var(--cp-tones-m-a,1));
 }
 .wp-block-catpow-datatable.plan tbody tr:nth-of-type(even) td {
-  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a));
+  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a,1));
 }
 /*# sourceMappingURL=./style.css.map */

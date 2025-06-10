@@ -1,6 +1,1022 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Staatliches&subset=latin-ext");
-.revertTextColor {
+.color--0 {
+  --cp-tones-b-h: 0;
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: 0;
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: 0;
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: 0;
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: 0;
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: 0;
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color0 {
+  --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-root-tones-t-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-root-tones-i-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color_0 {
+  --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-container-tones-t-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-container-tones-i-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color--1 {
+  --cp-tones-b-h: 30;
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: 30;
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: 30;
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: 30;
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: 30;
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: 30;
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color1 {
+  --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-root-tones-t-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-root-tones-i-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color_1 {
+  --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-container-tones-t-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-container-tones-i-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color--2 {
+  --cp-tones-b-h: 60;
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: 60;
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: 60;
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: 60;
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: 60;
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: 60;
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color2 {
+  --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-root-tones-t-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-root-tones-i-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color_2 {
+  --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-container-tones-t-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-container-tones-i-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color--3 {
+  --cp-tones-b-h: 90;
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: 90;
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: 90;
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: 90;
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: 90;
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: 90;
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color3 {
+  --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-root-tones-t-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-root-tones-i-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color_3 {
+  --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-container-tones-t-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-container-tones-i-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color--4 {
+  --cp-tones-b-h: 120;
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: 120;
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: 120;
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: 120;
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: 120;
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: 120;
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color4 {
+  --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-root-tones-t-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-root-tones-i-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color_4 {
+  --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-container-tones-t-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-container-tones-i-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color--5 {
+  --cp-tones-b-h: 150;
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: 150;
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: 150;
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: 150;
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: 150;
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: 150;
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color5 {
+  --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-root-tones-t-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-root-tones-i-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color_5 {
+  --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-container-tones-t-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-container-tones-i-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color--6 {
+  --cp-tones-b-h: 180;
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: 180;
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: 180;
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: 180;
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: 180;
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: 180;
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color6 {
+  --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-root-tones-t-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-root-tones-i-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color_6 {
+  --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-container-tones-t-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-container-tones-i-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color--7 {
+  --cp-tones-b-h: 210;
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: 210;
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: 210;
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: 210;
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: 210;
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: 210;
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color7 {
+  --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-root-tones-t-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-root-tones-i-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color_7 {
+  --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-container-tones-t-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-container-tones-i-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color--8 {
+  --cp-tones-b-h: 240;
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: 240;
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: 240;
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: 240;
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: 240;
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: 240;
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color8 {
+  --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-root-tones-t-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-root-tones-i-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color_8 {
+  --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-container-tones-t-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-container-tones-i-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color--9 {
+  --cp-tones-b-h: 270;
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: 270;
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: 270;
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: 270;
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: 270;
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: 270;
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color9 {
+  --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-root-tones-t-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-root-tones-i-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color_9 {
+  --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-container-tones-t-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-container-tones-i-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color--10 {
+  --cp-tones-b-h: 300;
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: 300;
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: 300;
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: 300;
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: 300;
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: 300;
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color10 {
+  --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-root-tones-t-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-root-tones-i-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color_10 {
+  --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-container-tones-t-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-container-tones-i-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color--11 {
+  --cp-tones-b-h: 330;
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: 330;
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: 330;
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: 330;
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: 330;
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: 330;
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color11 {
+  --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-root-tones-t-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-root-tones-i-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color_11 {
+  --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-container-tones-t-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-container-tones-i-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color--12 {
+  --cp-tones-b-h: 360;
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: 360;
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: 360;
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: 360;
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: 360;
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: 360;
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color12 {
+  --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
+  --cp-container-tones-b-h: var(--cp-tones-b-h);
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
+  --cp-container-tones-s-h: var(--cp-tones-s-h);
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-root-tones-t-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
+  --cp-container-tones-t-h: var(--cp-tones-t-h);
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
+  --cp-container-tones-m-h: var(--cp-tones-m-h);
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
+  --cp-container-tones-a-h: var(--cp-tones-a-h);
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-root-tones-i-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
+  --cp-container-tones-i-h: var(--cp-tones-i-h);
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.color_12 {
+  --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
+  --cp-tones-bx-h: var(--cp-tones-b-h);
+  --cp-container-tones-bx-h: var(--cp-tones-b-h);
+  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
+  --cp-tones-sx-h: var(--cp-tones-s-h);
+  --cp-container-tones-sx-h: var(--cp-tones-s-h);
+  --cp-tones-t-h: calc(var(--cp-container-tones-t-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
+  --cp-tones-tx-h: var(--cp-tones-t-h);
+  --cp-container-tones-tx-h: var(--cp-tones-t-h);
+  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
+  --cp-tones-mx-h: var(--cp-tones-m-h);
+  --cp-container-tones-mx-h: var(--cp-tones-m-h);
+  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
+  --cp-tones-ax-h: var(--cp-tones-a-h);
+  --cp-container-tones-ax-h: var(--cp-tones-a-h);
+  --cp-tones-i-h: calc(var(--cp-container-tones-i-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
+  --cp-tones-ix-h: var(--cp-tones-i-h);
+  --cp-container-tones-ix-h: var(--cp-tones-i-h);
+}
+.tone-s-2 {
+  --cp-tones-b-s: calc(var(--cp-root-tones-b-s) + var(--cp-tones-ss,20%) * -2);
+  --cp-tones-s-s: calc(var(--cp-root-tones-s-s) + var(--cp-tones-ss,20%) * -2);
+  --cp-tones-t-s: calc(var(--cp-root-tones-t-s) + var(--cp-tones-ss,20%) * -2);
+  --cp-tones-m-s: calc(var(--cp-root-tones-m-s) + var(--cp-tones-ss,20%) * -2);
+  --cp-tones-a-s: calc(var(--cp-root-tones-a-s) + var(--cp-tones-ss,20%) * -2);
+  --cp-tones-i-s: calc(var(--cp-root-tones-i-s) + var(--cp-tones-ss,20%) * -2);
+}
+.tone-l-2 {
+  --cp-tones-b-l: calc(var(--cp-root-tones-b-l) + var(--cp-tones-ls,10%) * -2);
+  --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,10%) * -2);
+  --cp-tones-t-l: calc(var(--cp-root-tones-t-l) + var(--cp-tones-ls,10%) * -2);
+  --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,10%) * -2);
+  --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,10%) * -2);
+  --cp-tones-i-l: calc(var(--cp-root-tones-i-l) + var(--cp-tones-ls,10%) * -2);
+}
+.tone-s-1 {
+  --cp-tones-b-s: calc(var(--cp-root-tones-b-s) + var(--cp-tones-ss,20%) * -1);
+  --cp-tones-s-s: calc(var(--cp-root-tones-s-s) + var(--cp-tones-ss,20%) * -1);
+  --cp-tones-t-s: calc(var(--cp-root-tones-t-s) + var(--cp-tones-ss,20%) * -1);
+  --cp-tones-m-s: calc(var(--cp-root-tones-m-s) + var(--cp-tones-ss,20%) * -1);
+  --cp-tones-a-s: calc(var(--cp-root-tones-a-s) + var(--cp-tones-ss,20%) * -1);
+  --cp-tones-i-s: calc(var(--cp-root-tones-i-s) + var(--cp-tones-ss,20%) * -1);
+}
+.tone-l-1 {
+  --cp-tones-b-l: calc(var(--cp-root-tones-b-l) + var(--cp-tones-ls,10%) * -1);
+  --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,10%) * -1);
+  --cp-tones-t-l: calc(var(--cp-root-tones-t-l) + var(--cp-tones-ls,10%) * -1);
+  --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,10%) * -1);
+  --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,10%) * -1);
+  --cp-tones-i-l: calc(var(--cp-root-tones-i-l) + var(--cp-tones-ls,10%) * -1);
+}
+.tone-s0 {
+  --cp-tones-b-s: calc(var(--cp-root-tones-b-s) + var(--cp-tones-ss,20%) * 0);
+  --cp-tones-s-s: calc(var(--cp-root-tones-s-s) + var(--cp-tones-ss,20%) * 0);
+  --cp-tones-t-s: calc(var(--cp-root-tones-t-s) + var(--cp-tones-ss,20%) * 0);
+  --cp-tones-m-s: calc(var(--cp-root-tones-m-s) + var(--cp-tones-ss,20%) * 0);
+  --cp-tones-a-s: calc(var(--cp-root-tones-a-s) + var(--cp-tones-ss,20%) * 0);
+  --cp-tones-i-s: calc(var(--cp-root-tones-i-s) + var(--cp-tones-ss,20%) * 0);
+}
+.tone-l0 {
+  --cp-tones-b-l: calc(var(--cp-root-tones-b-l) + var(--cp-tones-ls,10%) * 0);
+  --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,10%) * 0);
+  --cp-tones-t-l: calc(var(--cp-root-tones-t-l) + var(--cp-tones-ls,10%) * 0);
+  --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,10%) * 0);
+  --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,10%) * 0);
+  --cp-tones-i-l: calc(var(--cp-root-tones-i-l) + var(--cp-tones-ls,10%) * 0);
+}
+.tone-s1 {
+  --cp-tones-b-s: calc(var(--cp-root-tones-b-s) + var(--cp-tones-ss,20%) * 1);
+  --cp-tones-s-s: calc(var(--cp-root-tones-s-s) + var(--cp-tones-ss,20%) * 1);
+  --cp-tones-t-s: calc(var(--cp-root-tones-t-s) + var(--cp-tones-ss,20%) * 1);
+  --cp-tones-m-s: calc(var(--cp-root-tones-m-s) + var(--cp-tones-ss,20%) * 1);
+  --cp-tones-a-s: calc(var(--cp-root-tones-a-s) + var(--cp-tones-ss,20%) * 1);
+  --cp-tones-i-s: calc(var(--cp-root-tones-i-s) + var(--cp-tones-ss,20%) * 1);
+}
+.tone-l1 {
+  --cp-tones-b-l: calc(var(--cp-root-tones-b-l) + var(--cp-tones-ls,10%) * 1);
+  --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,10%) * 1);
+  --cp-tones-t-l: calc(var(--cp-root-tones-t-l) + var(--cp-tones-ls,10%) * 1);
+  --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,10%) * 1);
+  --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,10%) * 1);
+  --cp-tones-i-l: calc(var(--cp-root-tones-i-l) + var(--cp-tones-ls,10%) * 1);
+}
+.tone-s2 {
+  --cp-tones-b-s: calc(var(--cp-root-tones-b-s) + var(--cp-tones-ss,20%) * 2);
+  --cp-tones-s-s: calc(var(--cp-root-tones-s-s) + var(--cp-tones-ss,20%) * 2);
+  --cp-tones-t-s: calc(var(--cp-root-tones-t-s) + var(--cp-tones-ss,20%) * 2);
+  --cp-tones-m-s: calc(var(--cp-root-tones-m-s) + var(--cp-tones-ss,20%) * 2);
+  --cp-tones-a-s: calc(var(--cp-root-tones-a-s) + var(--cp-tones-ss,20%) * 2);
+  --cp-tones-i-s: calc(var(--cp-root-tones-i-s) + var(--cp-tones-ss,20%) * 2);
+}
+.tone-l2 {
+  --cp-tones-b-l: calc(var(--cp-root-tones-b-l) + var(--cp-tones-ls,10%) * 2);
+  --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,10%) * 2);
+  --cp-tones-t-l: calc(var(--cp-root-tones-t-l) + var(--cp-tones-ls,10%) * 2);
+  --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,10%) * 2);
+  --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,10%) * 2);
+  --cp-tones-i-l: calc(var(--cp-root-tones-i-l) + var(--cp-tones-ls,10%) * 2);
+}
+.has-color-scheme-reverted {
   --cp-tones-bx-h: var(--cp-tones-b-h);
   --cp-container-tones-bx-h: var(--cp-tones-b-h);
   --cp-tones-bx-s: var(--cp-tones-b-s);
@@ -86,7 +1102,7 @@
   --cp-tones-ix-B: var(--cp-tones-i-B);
   --cp-container-tones-ix-B: var(--cp-tones-i-B);
 }
-.invertTextColor {
+.has-color-scheme-inverted {
   --cp-tones-bx-h: var(--cp-tones-m-h);
   --cp-container-tones-bx-h: var(--cp-tones-m-h);
   --cp-tones-bx-s: var(--cp-tones-m-s);
@@ -172,571 +1188,14 @@
   --cp-tones-ix-B: var(--cp-tones-t-B);
   --cp-container-tones-ix-B: var(--cp-tones-t-B);
 }
-.color--0 {
-  --cp-tones-s-h: 0;
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: 0;
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: 0;
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color0 {
-  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color_0 {
-  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color--1 {
-  --cp-tones-s-h: 30;
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: 30;
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: 30;
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color1 {
-  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color_1 {
-  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color--2 {
-  --cp-tones-s-h: 60;
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: 60;
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: 60;
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color2 {
-  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color_2 {
-  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color--3 {
-  --cp-tones-s-h: 90;
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: 90;
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: 90;
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color3 {
-  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color_3 {
-  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color--4 {
-  --cp-tones-s-h: 120;
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: 120;
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: 120;
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color4 {
-  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color_4 {
-  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color--5 {
-  --cp-tones-s-h: 150;
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: 150;
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: 150;
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color5 {
-  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color_5 {
-  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color--6 {
-  --cp-tones-s-h: 180;
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: 180;
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: 180;
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color6 {
-  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color_6 {
-  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color--7 {
-  --cp-tones-s-h: 210;
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: 210;
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: 210;
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color7 {
-  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color_7 {
-  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color--8 {
-  --cp-tones-s-h: 240;
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: 240;
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: 240;
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color8 {
-  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color_8 {
-  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color--9 {
-  --cp-tones-s-h: 270;
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: 270;
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: 270;
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color9 {
-  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color_9 {
-  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color--10 {
-  --cp-tones-s-h: 300;
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: 300;
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: 300;
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color10 {
-  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color_10 {
-  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color--11 {
-  --cp-tones-s-h: 330;
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: 330;
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: 330;
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color11 {
-  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color_11 {
-  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color--12 {
-  --cp-tones-s-h: 360;
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: 360;
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: 360;
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color12 {
-  --cp-tones-s-h: calc(var(--cp-root-tones-s-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
-  --cp-container-tones-s-h: var(--cp-tones-s-h);
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
-  --cp-container-tones-m-h: var(--cp-tones-m-h);
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-root-tones-a-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
-  --cp-container-tones-a-h: var(--cp-tones-a-h);
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.color_12 {
-  --cp-tones-s-h: calc(var(--cp-container-tones-s-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
-  --cp-tones-sx-h: var(--cp-tones-s-h);
-  --cp-container-tones-sx-h: var(--cp-tones-s-h);
-  --cp-tones-m-h: calc(var(--cp-container-tones-m-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
-  --cp-tones-mx-h: var(--cp-tones-m-h);
-  --cp-container-tones-mx-h: var(--cp-tones-m-h);
-  --cp-tones-a-h: calc(var(--cp-container-tones-a-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
-  --cp-tones-ax-h: var(--cp-tones-a-h);
-  --cp-container-tones-ax-h: var(--cp-tones-a-h);
-}
-.tone-s-2 {
-  --cp-tones-s-s: calc(var(--cp-root-tones-s-s) + var(--cp-tones-ss,20%) * -2);
-  --cp-tones-m-s: calc(var(--cp-root-tones-m-s) + var(--cp-tones-ss,20%) * -2);
-  --cp-tones-a-s: calc(var(--cp-root-tones-a-s) + var(--cp-tones-ss,20%) * -2);
-}
-.tone-l-2 {
-  --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,10%) * -2);
-  --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,10%) * -2);
-  --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,10%) * -2);
-}
-.tone-s-1 {
-  --cp-tones-s-s: calc(var(--cp-root-tones-s-s) + var(--cp-tones-ss,20%) * -1);
-  --cp-tones-m-s: calc(var(--cp-root-tones-m-s) + var(--cp-tones-ss,20%) * -1);
-  --cp-tones-a-s: calc(var(--cp-root-tones-a-s) + var(--cp-tones-ss,20%) * -1);
-}
-.tone-l-1 {
-  --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,10%) * -1);
-  --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,10%) * -1);
-  --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,10%) * -1);
-}
-.tone-s0 {
-  --cp-tones-s-s: calc(var(--cp-root-tones-s-s) + var(--cp-tones-ss,20%) * 0);
-  --cp-tones-m-s: calc(var(--cp-root-tones-m-s) + var(--cp-tones-ss,20%) * 0);
-  --cp-tones-a-s: calc(var(--cp-root-tones-a-s) + var(--cp-tones-ss,20%) * 0);
-}
-.tone-l0 {
-  --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,10%) * 0);
-  --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,10%) * 0);
-  --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,10%) * 0);
-}
-.tone-s1 {
-  --cp-tones-s-s: calc(var(--cp-root-tones-s-s) + var(--cp-tones-ss,20%) * 1);
-  --cp-tones-m-s: calc(var(--cp-root-tones-m-s) + var(--cp-tones-ss,20%) * 1);
-  --cp-tones-a-s: calc(var(--cp-root-tones-a-s) + var(--cp-tones-ss,20%) * 1);
-}
-.tone-l1 {
-  --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,10%) * 1);
-  --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,10%) * 1);
-  --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,10%) * 1);
-}
-.tone-s2 {
-  --cp-tones-s-s: calc(var(--cp-root-tones-s-s) + var(--cp-tones-ss,20%) * 2);
-  --cp-tones-m-s: calc(var(--cp-root-tones-m-s) + var(--cp-tones-ss,20%) * 2);
-  --cp-tones-a-s: calc(var(--cp-root-tones-a-s) + var(--cp-tones-ss,20%) * 2);
-}
-.tone-l2 {
-  --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,10%) * 2);
-  --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,10%) * 2);
-  --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,10%) * 2);
-}
 .cp-message {
   margin: 0.625rem;
   padding: 1.25rem;
-  border-color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 15),1);
+  border-color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 15),var(--cp-tones-tx-a,1));
   border-width: 0.1875rem;
   border-style: solid;
   border-radius: 0.625rem;
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 15),1);
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 15),var(--cp-tones-tx-a,1));
   text-align: center;
   font-weight: bold;
   font-size: 1.125rem;
@@ -745,9 +1204,9 @@
 .cp-caution {
   margin: 0.625rem;
   padding: 1.25rem;
-  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),calc(100% - var(--cp-tones-mx-t) * 50),1);
+  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),calc(100% - var(--cp-tones-mx-t) * 50),var(--cp-tones-mx-a,1));
   border-radius: 0.625rem;
-  color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),1);
+  color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),var(--cp-tones-bx-a,1));
   text-align: center;
   font-weight: bold;
   font-size: 0.9375rem;
@@ -763,7 +1222,7 @@
   position: relative;
   margin: 0.3125rem;
   padding: 0.625rem;
-  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),calc(100% - var(--cp-tones-mx-t) * 100),0);
+  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),calc(100% - var(--cp-tones-mx-t) * 100),calc(var(--cp-tones-mx-a,1) * 0));
   -webkit-transition: 0.5s;
   transition: 0.5s;
   opacity: 1;
@@ -784,19 +1243,19 @@
   height: 0.625rem;
   margin: 0.125rem;
   padding: 0.3125rem;
-  background-color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 50),1);
+  background-color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 50),var(--cp-tones-tx-a,1));
   border-radius: 50%;
   font-size: 0.625rem;
   line-height: 1em;
   font-family: "times";
   text-align: center;
-  color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),calc(100% - var(--cp-tones-bx-t) * 100),0.5);
+  color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),calc(100% - var(--cp-tones-bx-t) * 100),calc(var(--cp-tones-bx-a,1) * 0.5));
   -webkit-transition: 0.5s;
   transition: 0.5s;
   cursor: pointer;
 }
 .cp-meta-item.is-multiple .cp-meta-item-unit .multiple-input-buttons .btn-inc:hover, .cp-meta-item.is-multiple .cp-meta-item-unit .multiple-input-buttons .btn-dec:hover {
-  color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),1);
+  color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),var(--cp-tones-bx-a,1));
 }
 .cp-meta-item.is-multiple .cp-meta-item-unit .multiple-input-buttons .btn-inc::after {
   content: "";
@@ -825,7 +1284,7 @@
   appearance: none;
   margin: 0.5em 0rem;
   text-align: center;
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),1);
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
   -webkit-transition: 0.5s;
   transition: 0.5s;
   opacity: 0.2;
@@ -863,11 +1322,11 @@
   padding: 0.625rem;
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),0.3);
+  border-color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),calc(var(--cp-tones-tx-a,1) * 0.3));
   border-radius: 0.3125rem;
 }
 .cp-meta-item fieldset legend {
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),0.3);
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),calc(var(--cp-tones-tx-a,1) * 0.3));
 }
 .cp-meta-item select, .cp-meta-item input[type="text"], .cp-meta-item textarea {
   padding: 0.625rem;
@@ -876,9 +1335,9 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),0.1);
+  background-color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),calc(var(--cp-tones-tx-a,1) * 0.1));
   border-style: none;
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),1);
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
   font-size: 1rem;
 }
 .cp-meta-item select {
@@ -891,22 +1350,22 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),0.1);
+  background-color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),calc(var(--cp-tones-tx-a,1) * 0.1));
   border-style: none;
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),1);
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
   font-size: 1rem;
 }
 .cp-meta-item-unit-input.is-input-type-text:placeholder {
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),0.3);
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),calc(var(--cp-tones-tx-a,1) * 0.3));
 }
 .cp-meta-item-unit-input.is-input-type-text::-webkit-input-placeholder {
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),0.3);
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),calc(var(--cp-tones-tx-a,1) * 0.3));
 }
 .cp-meta-item-unit-input.is-input-type-text:-ms-input-placeholder {
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),0.3);
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),calc(var(--cp-tones-tx-a,1) * 0.3));
 }
 .cp-meta-item-unit-input.is-input-type-text::-moz-placeholder {
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),0.3);
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),calc(var(--cp-tones-tx-a,1) * 0.3));
 }
 .cp-meta-item-unit-input.is-input-type-select {
   padding: 0.625rem;
@@ -915,9 +1374,9 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),0.1);
+  background-color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),calc(var(--cp-tones-tx-a,1) * 0.1));
   border-style: none;
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),1);
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
   font-size: 1rem;
 }
 .cp-meta-item-unit-input.is-type-number {
@@ -951,7 +1410,7 @@
   font-size: 1rem;
   font-family: var(--cp-fonts-t);
   line-height: 1em;
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 40),1);
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 40),var(--cp-tones-tx-a,1));
   cursor: pointer;
 }
 .cp-meta-item span.checkbox > .label, .cp-meta-item span.radio > .label {
@@ -960,27 +1419,27 @@
   font-size: 1rem;
   line-height: 1em;
   font-weight: 500;
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 50),1);
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 50),var(--cp-tones-tx-a,1));
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 .cp-meta-item span.checkbox > .label:before, .cp-meta-item span.radio > .label:before {
   display: inline-block;
   margin-right: 0.3125rem;
-  color: hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a));
+  color: hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1));
 }
 .cp-meta-item span.checkbox > input:checked + .label, .cp-meta-item span.radio > input:checked + .label {
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),1);
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
 }
 .cp-meta-item span.checkbox > input:checked + .label:before, .cp-meta-item span.radio > input:checked + .label:before {
-  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
+  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
 }
 .cp-meta-item span.checkbox > input:disabled + .label, .cp-meta-item span.radio > input:disabled + .label {
   display: none;
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 10),1);
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 10),var(--cp-tones-tx-a,1));
 }
 .cp-meta-item span.checkbox > input:disabled + .label:before, .cp-meta-item span.radio > input:disabled + .label:before {
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 10),1);
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 10),var(--cp-tones-tx-a,1));
 }
 .cp-meta-item span.checkbox input, .cp-meta-item span.radio input {
   display: none;
@@ -1031,10 +1490,10 @@
   top: 50%;
   left: 50%;
   margin: auto;
-  background-color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),1);
+  background-color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),var(--cp-tones-bx-a,1));
   transform: -webkit- translateY(-50%) translateX(-50%);
   transform: translateY(-50%) translateX(-50%);
-  box-shadow: 0 10px 21px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+  box-shadow: 0 10px 21px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
 }
 .cp-lightbox__content-body {
   width: 100%;
@@ -1054,7 +1513,7 @@
   height: 1.875rem;
   margin: auto;
   font-size: 1.25rem;
-  color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),1);
+  color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),var(--cp-tones-bx-a,1));
   opacity: 0.8;
 }
 .cp-lightbox__control .prev.active, .cp-lightbox__control .next.active {
@@ -1085,7 +1544,7 @@
   top: 0.9375rem;
   width: 1.875rem;
   height: 0.0625rem;
-  background-color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),1);
+  background-color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),var(--cp-tones-bx-a,1));
 }
 .cp-lightbox__control .close::before {
   transform: -webkit- rotateZ(45deg);
@@ -1108,10 +1567,10 @@
   width: 0.625rem;
   height: 0.625rem;
   border-style: solid;
-  border-color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),1);
+  border-color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),var(--cp-tones-bx-a,1));
   border-width: 0.0625rem;
   border-radius: 0.625rem;
-  background-color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),1);
+  background-color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),var(--cp-tones-bx-a,1));
   vertical-align: middle;
   opacity: 0.2;
 }
@@ -1129,13 +1588,13 @@
   width: 100%;
   box-sizing: border-box;
   z-index: 1000;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
   opacity: 0;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   transform: -webkit- translateY(-3.75rem);
   transform: translateY(-3.75rem);
-  box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+  box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
 }
 .cpform.lead div.cpform_nav {
   opacity: 0.9;
@@ -1179,19 +1638,19 @@ table.inputs {
   border-spacing: 0px;
 }
 table.inputs * {
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a));
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
 }
 table.inputs > thead > tr > th, table.inputs > thead > tr > td, table.inputs > tbody > tr > th, table.inputs > tbody > tr > td {
   padding: 0.3125rem;
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),calc(100% - var(--cp-tones-b-t) * 60),var(--cp-tones-b-a));
+  border-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),calc(100% - var(--cp-tones-b-t) * 60),var(--cp-tones-b-a,1));
 }
 table.inputs > thead > tr > th, table.inputs > tbody > tr > th {
   width: 7.5rem;
   text-align: left;
   font-size: 0.75rem;
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a));
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
   font-weight: bold;
 }
 table.inputs > thead > tr > th i, table.inputs > tbody > tr > th i {
@@ -1205,9 +1664,9 @@ table.inputs > thead > tr > th.required:after, table.inputs > tbody > tr > th.re
   display: inline-block;
   padding: 0.125rem 0.3125rem;
   margin-left: 0.3125rem;
-  background-color: hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),var(--cp-tones-a-l),var(--cp-tones-a-a));
+  background-color: hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),var(--cp-tones-a-l),var(--cp-tones-a-a,1));
   border-radius: 0.1875rem;
-  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
+  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
   font-size: 0.625rem;
   line-height: 0.625rem;
   font-family: var(--cp-fonts-t);
@@ -1215,18 +1674,18 @@ table.inputs > thead > tr > th.required:after, table.inputs > tbody > tr > th.re
   vertical-align: 3px;
 }
 table.inputs > thead > tr > td, table.inputs > tbody > tr > td {
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),calc(100% - var(--cp-tones-b-t) * 100),calc(var(--cp-tones-b-a) * 0.5));
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),calc(100% - var(--cp-tones-b-t) * 100),calc(var(--cp-tones-b-a,1) * 0.5));
   text-align: left;
   font-size: 0.6875rem;
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a));
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
   font-weight: normal;
 }
 table.inputs > thead > tr > td input, table.inputs > thead > tr > td textarea, table.inputs > tbody > tr > td input, table.inputs > tbody > tr > td textarea {
   padding: 0.5em 1em;
   border-style: none;
   border-radius: 1em;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
-  box-shadow: 1px 1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)), -1px -1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a));
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
+  box-shadow: 1px 1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1)) inset, -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1)), -1px -1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a,1)) inset, 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a,1));
 }
 table.inputs > thead > tr > td textarea.full, table.inputs > tbody > tr > td textarea.full {
   width: 100%;
@@ -1317,7 +1776,7 @@ del {
   left: 0rem;
   width: 1em;
   height: 1em;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
 }
 .rtf-title.icatch, #editor .rtf-title.icatch {
   margin-bottom: 0.5em;
@@ -1338,7 +1797,7 @@ del {
   display: inline-block;
   font-size: 1.5em;
   font-weight: 700;
-  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
+  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
 }
 .rtf-u, #editor .rtf-u {
   text-decoration-line: underline;
@@ -1347,19 +1806,19 @@ del {
 }
 .rtf-mark, #editor .rtf-mark {
   background-position: 0% -0.25em;
-  background-image: -webkit-linear-gradient(top, hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a) * 0.15)), hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a) * 0.15)) 50%, transparent 50.1%, transparent);
-  background-image: -moz-linear-gradient(top, hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a) * 0.15)), hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a) * 0.15)) 50%, transparent 50.1%, transparent);
-  background-image: -ms-linear-gradient(top, hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a) * 0.15)), hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a) * 0.15)) 50%, transparent 50.1%, transparent);
-  background-image: -o-linear-gradient(top, hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a) * 0.15)), hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a) * 0.15)) 50%, transparent 50.1%, transparent);
-  background-image: linear-gradient(0deg, hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a) * 0.15)), hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a) * 0.15)) 50%, transparent 50.1%, transparent);
+  background-image: -webkit-linear-gradient(top, hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a,1) * 0.15)), hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a,1) * 0.15)) 50%, transparent 50.1%, transparent);
+  background-image: -moz-linear-gradient(top, hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a,1) * 0.15)), hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a,1) * 0.15)) 50%, transparent 50.1%, transparent);
+  background-image: -ms-linear-gradient(top, hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a,1) * 0.15)), hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a,1) * 0.15)) 50%, transparent 50.1%, transparent);
+  background-image: -o-linear-gradient(top, hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a,1) * 0.15)), hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a,1) * 0.15)) 50%, transparent 50.1%, transparent);
+  background-image: linear-gradient(0deg, hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a,1) * 0.15)), hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),calc(100% - var(--cp-tones-a-t) * 100),calc(var(--cp-tones-a-a,1) * 0.15)) 50%, transparent 50.1%, transparent);
 }
 .rtf-tag, #editor .rtf-tag {
   display: inline-block;
   padding: 0.2em 1em;
   margin: 0rem 0.2em;
   border-radius: 1em;
-  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
-  color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),1);
+  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
+  color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),var(--cp-tones-bx-a,1));
   line-height: 1em;
   text-decoration: none;
   cursor: pointer;
@@ -1383,23 +1842,23 @@ del {
   width: auto;
   padding: 0.5em 1em;
   border-radius: 0.2em;
-  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
+  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
   text-align: center;
   line-height: 1em;
   text-decoration: none;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a));
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
 }
 .rtf-tel, #editor .rtf-tel {
   font-size: 1.5em;
   font-family: var(--cp-fonts-d);
   font-weight: 700;
-  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
+  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
 }
 .rtf-mailto, #editor .rtf-mailto {
   font-size: 1.5em;
   font-family: var(--cp-fonts-d);
   font-weight: 700;
-  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
+  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
 }
 .rtf-listed, #editor .rtf-listed {
   display: -webkit-grid;
@@ -1438,19 +1897,19 @@ del {
 .rtf-dl__dt, #editor .rtf-dl__dt {
   padding: 0.5em;
   margin: 0rem;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
   border-radius: 0.5em 0rem 0rem 0.5em;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a));
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
 }
 .rtf-dl__dd, #editor .rtf-dl__dd {
   padding: 0.5em;
   margin: 0rem;
-  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a));
+  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a,1));
   border-radius: 0rem 0.5em 0.5em 0rem;
 }
 .rtf-dl.is-level-1 > .rtf-dl__dt, .rtf-dl.is-level-1 #editor .rtf-dl__dt, #editor .rtf-dl.is-level-1 > .rtf-dl__dt, #editor .rtf-dl.is-level-1 #editor .rtf-dl__dt {
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 100),calc(var(--cp-tones-m-a) * 0.2));
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a));
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 100),calc(var(--cp-tones-m-a,1) * 0.2));
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
 }
 .rtf-notes, #editor .rtf-notes {
   padding: 0.75em;
@@ -1461,7 +1920,7 @@ del {
   grid-template-columns: auto 1fr;
   grid-gap: 0.25em;
   font-size: 0.8em;
-  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a));
+  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a,1));
   border-radius: 0.5em;
 }
 .rtf-notes__dt, #editor .rtf-notes__dt {
@@ -1494,17 +1953,17 @@ del {
   width: 0.4em;
   height: 0.4em;
   border-radius: 50%;
-  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
+  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
   font-size: 1.1em;
   font-weight: 700;
   font-family: var(--cp-fonts-d);
-  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
+  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
 }
 .rtf-ul.is-level-1 > .rtf-ul__li::before, .rtf-ul.is-level-1 #editor .rtf-ul__li::before, #editor .rtf-ul.is-level-1 > .rtf-ul__li::before, #editor .rtf-ul.is-level-1 #editor .rtf-ul__li::before {
   top: 0.5em;
   width: 0.2em;
   height: 0.2em;
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a));
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
 }
 .rtf-ol, #editor .rtf-ol {
   counter-reset: rtf-ol;
@@ -1525,7 +1984,7 @@ del {
   font-size: 1.1em;
   font-weight: 700;
   font-family: var(--cp-fonts-d);
-  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
+  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
 }
 .rtf-del, #editor .rtf-del {
   text-decoration-style: solid;
@@ -1534,19 +1993,19 @@ del {
   font-size: 0.9em;
 }
 .rtf-em, #editor .rtf-em {
-  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
+  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
 }
 .rtf-strong, #editor .rtf-strong {
   font-weight: 700;
 }
 .rtf-stronger, #editor .rtf-stronger {
   font-size: 1.2em;
-  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
+  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
 }
 .rtf-strongest, #editor .rtf-strongest {
   font-size: 1.5em;
   font-weight: bx;
-  color: hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),var(--cp-tones-a-l),var(--cp-tones-a-a));
+  color: hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),var(--cp-tones-a-l),var(--cp-tones-a-a,1));
 }
 .buttons {
   display: -webkit-box;
@@ -1576,16 +2035,16 @@ del {
   padding: 1em;
   border-style: none;
   border-radius: 2em;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
   text-align: center;
-  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
+  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
   font-family: var(--cp-fonts-t);
   font-weight: 700;
   text-decoration: none;
   font-size: 1em;
   text-decoration: none;
-  box-shadow: 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)) inset, -3px -3px 3px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)), -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a)) inset, 3px 3px 3px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a));
-  text-shadow: -1px -1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a)), 1px 1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a));
+  box-shadow: 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a,1)) inset, -3px -3px 3px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a,1)), -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1)) inset, 3px 3px 3px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1));
+  text-shadow: -1px -1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a,1)), 1px 1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1));
 }
 .buttons .item .button::before {
   content: "";
@@ -1597,7 +2056,7 @@ del {
   right: 0.25em;
   border-style: solid;
   border-width: 0.125rem;
-  border-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
+  border-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
   border-radius: 1.8em;
 }
 .buttons .item.hasIcon .button {
@@ -1613,7 +2072,7 @@ del {
   margin: auto;
 }
 .buttons .item.hasIcon .button .icon svg {
-  fill: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
+  fill: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
 }
 .buttons .item.hasIcon .button .icon img {
   display: block;
@@ -1621,13 +2080,13 @@ del {
   height: auto;
 }
 .buttons .item.primary .button {
-  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
+  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
 }
 .buttons .item.primary .button::before {
-  border-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
+  border-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
 }
 .buttons .item.primary .button .icon svg {
-  fill: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a));
+  fill: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
 }
 .buttons .item.default .button, .buttons .item.secondary .button {
   background-color: transparent;
