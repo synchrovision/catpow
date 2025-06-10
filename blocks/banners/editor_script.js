@@ -186,15 +186,15 @@
               items: "items"
             }
           };
-          return /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, states.doLoop && "[loop_template " + loopParam + "]", items.map((item, index) => {
+          return /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, states?.doLoop && "[loop_template " + loopParam + "]", items.map((item, index) => {
             return /* @__PURE__ */ wp.element.createElement("li", { className: item.classes }, states.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), /* @__PURE__ */ wp.element.createElement("a", { href: item.linkUrl, target: item.target, "data-event": item.event, rel: item.target ? "noopener noreferrer" : "" }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attr: attributes, keys: imageKeys.image, index, isTemplate: states.isTemplate })));
-          }), states.doLoop && "[/loop_template]");
+          }), states?.doLoop && "[/loop_template]");
         },
         migrate(attributes) {
           var states = CP.wordsToFlags(classes);
           attributes.content_path = attributes.loopParam.split(" ")[0];
           attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
-          attributes.doLoop = states.doLoop;
+          attributes.doLoop = states?.doLoop;
           return attributes;
         }
       }

@@ -241,7 +241,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 
 				return (
 					<ul className={classes}>
-						{states.doLoop && "[loop_template " + loopParam + "]"}
+						{states?.doLoop && "[loop_template " + loopParam + "]"}
 						{items.map((item, index) => {
 							return (
 								<li className={item.classes}>
@@ -256,7 +256,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 								</li>
 							);
 						})}
-						{states.doLoop && "[/loop_template]"}
+						{states?.doLoop && "[/loop_template]"}
 					</ul>
 				);
 			},
@@ -264,7 +264,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 				var states = CP.wordsToFlags(classes);
 				attributes.content_path = attributes.loopParam.split(" ")[0];
 				attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
-				attributes.doLoop = states.doLoop;
+				attributes.doLoop = states?.doLoop;
 				return attributes;
 			},
 		},
