@@ -4,7 +4,7 @@
   padding: 1em;
   margin: 1em auto;
   text-align: center;
-  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
 }
 .wp-block-catpow-contactinfo__title {
   padding-bottom: 0.25em;
@@ -47,7 +47,7 @@
   font-size: 2.5em;
   font-family: var(--cp-fonts-d);
   text-decoration: none;
-  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),1);
+  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
 }
 @media (max-width:720px) {
   .wp-block-catpow-contactinfo__items-item-link {

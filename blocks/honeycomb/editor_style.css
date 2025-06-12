@@ -7,7 +7,7 @@
 }
 .wp-block-catpow-honeycomb .item .handlers .handler {
   display: inline-block;
-  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;

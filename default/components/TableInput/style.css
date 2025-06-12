@@ -7,8 +7,8 @@
   border-bottom-style: solid;
   border-top-width: 0.0625rem;
   border-bottom-width: 0.0625rem;
-  border-top-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a));
-  border-bottom-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a));
+  border-top-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a,1));
+  border-bottom-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a,1));
 }
 .cp-tableinput-table-thead-tr-th {
   font-weight: 400;
@@ -26,7 +26,7 @@
 .cp-tableinput-table-tbody-tr:not(:first-child) {
   border-top-style: solid;
   border-top-width: 0.0625rem;
-  border-top-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a));
+  border-top-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a,1));
 }
 .cp-tableinput-table-tbody-tr-td-controls {
   width: 6.25rem;
@@ -53,18 +53,18 @@
   height: 1em;
 }
 .cp-tableinput-table-tbody-tr-td-controls-button {
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a) * 0.4));
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a,1) * 0.4));
   text-align: center;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a));
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
   font-size: 1em;
   line-height: 1em;
   cursor: pointer;
-  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a));
+  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
   -webkit-transition: 2s;
   transition: 2s;
 }
 .cp-tableinput-table-tbody-tr-td-controls-button:hover {
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a) * 0.6));
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a,1) * 0.6));
 }
 .cp-tableinput-table-tbody-tr-td-controls-button.is-remove, .cp-tableinput-table-tbody-tr-td-controls-button.is-add {
   border-radius: 50%;
@@ -81,7 +81,7 @@
   margin: auto;
   width: 0.8em;
   height: 0.8em;
-  background-color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a));
+  background-color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
 }
 .cp-tableinput-table-tbody-tr-td-controls-button.is-up, .cp-tableinput-table-tbody-tr-td-controls-button.is-down {
   width: 0.8em;

@@ -2,7 +2,7 @@
   padding: 0.5em 1em;
   margin: 0rem 0.5em;
   border-radius: 1em;
-  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a)) inset;
+  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1)) inset;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -22,7 +22,7 @@
   flex-basis: auto;
   padding: 0.25em;
   padding-left: 1em;
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),var(--cp-tones-t-a));
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),var(--cp-tones-t-a,1));
   border-radius: 1em;
   text-align: center;
   line-height: 1em;
@@ -34,7 +34,7 @@
   height: 1.2em;
   padding: 0.1em;
   border-radius: 50%;
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 20),var(--cp-tones-t-a));
+  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 20),var(--cp-tones-t-a,1));
   line-height: 1em;
   cursor: pointer;
 }
