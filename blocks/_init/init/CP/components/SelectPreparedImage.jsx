@@ -30,15 +30,13 @@
 		{ page: 0, images: null, image: null }
 	);
 
-	CP.cache.PreparedImage = CP.cache.PreparedImage || {};
-
 	useEffect(() => {
 		if (state.images === null) {
-			if (CP.cache.PreparedImage[name]) {
+			if (CP.cache.get([SelectPreparedImage, name])) {
 				dispatch({ type: "update", images: CP.cache.PreparedImage[name] });
 			} else {
 				wp.apiFetch({ path: "cp/v1/images/" + name }).then((images) => {
-					CP.cache.PreparedImage[name] = images;
+					CP.cache.set([SelectPreparedImage, name], images);
 					dispatch({ type: "update", images });
 				});
 			}
