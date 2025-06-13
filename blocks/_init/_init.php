@@ -1,4 +1,6 @@
 <?php
+\cp::use_component('JsonEditor');
+
 $data=[];
 \cp::conf_data_walk(function($data_type,$data_name,$conf_data)use(&$data){
 	if($data_type==='nav'){return false;}
