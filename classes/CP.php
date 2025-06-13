@@ -673,7 +673,7 @@ class CP{
 		static $done=[];
 		if(isset($done[$name])){return false;}
 		if(current_user_can('edit_themes')){scss::compile('elements/'.$name.'/element/style');}
-		self::enqueue_script('elements/'.$name.'/element.js');
+		self::enqueue_script_module('elements/'.$name.'/element.mjs');
 		$done[$name]=1;
 	}
 	public static function get_elements_deps($names){
