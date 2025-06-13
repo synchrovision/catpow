@@ -485,6 +485,9 @@ export const SelectClassPanelBlock = ({ prm }) => {
 				/>
 			);
 		} else if (prm === "pattern") {
+			/**
+			 * @deprecated This feature should merge to backgroundPattern preset
+			 */
 			rtn.push(
 				<CP.SelectPatternClass
 					label={__("パターン", "catpow")}
@@ -588,6 +591,9 @@ export const SelectClassPanelBlock = ({ prm }) => {
 				}
 				case "symbol":
 				case "pattern": {
+					/**
+					 * @deprecated This feature should merge to backgroundPattern preset
+					 */
 					prm.keys = prm.keys || {};
 					prm.keys.src = prm.keys.src || prm.input + "Src";
 					prm.keys.alt = prm.keys.alt || prm.input + "Alt";

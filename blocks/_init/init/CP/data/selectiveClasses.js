@@ -112,6 +112,9 @@ export const selectiveClassesPresets = {
 		};
 	},
 	backgroundPattern({ preset, vars = "vars", ...otherParams }) {
+		/**
+		 * @todo enable to select image and get size from prepared image
+		 */
 		return {
 			name: "backgroundPattern",
 			label: __("背景パターン", "catpow"),
