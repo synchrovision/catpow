@@ -116,10 +116,10 @@
     if (typeof b !== "function" && b !== null)
       throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
     extendStatics(d, b);
-    function __3() {
+    function __5() {
       this.constructor = d;
     }
-    d.prototype = b === null ? Object.create(b) : (__3.prototype = b.prototype, new __3());
+    d.prototype = b === null ? Object.create(b) : (__5.prototype = b.prototype, new __5());
   }
   function __rest(s, e) {
     var t = {};
@@ -1990,8 +1990,8 @@
   var SelectResponsiveImage = (props) => {
     const { className = "cp-selectresponsiveimage", type, attr, set, keys = {}, index = 0, size, devices: devices2, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
     let onClick;
-    const itemsKey = keys.items && Array.isArray(keys.items) ? keys.items[0] : keys.items;
-    const items2 = itemsKey && attr[itemsKey];
+    const itemsKey2 = keys.items && Array.isArray(keys.items) ? keys.items[0] : keys.items;
+    const items2 = itemsKey2 && attr[itemsKey2];
     const item = CP.getItemByKeyAndIndex(props, keys?.items, index);
     if (device) {
       const sizeData = CP.devices[device];
@@ -2005,7 +2005,7 @@
               item[keys.sources].push({ device, srcset: src });
             }
             if (items2) {
-              set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
+              set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
             } else {
               set({
                 [keys.sources]: JSON.parse(JSON.stringify(item[keys.sources]))
@@ -2018,7 +2018,7 @@
               item[keys.srcset] += "," + src + sizeData.rep;
             }
             if (items2) {
-              set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
+              set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
             } else {
               set({ [keys.srcset]: item[keys.srcset] });
             }
@@ -2030,9 +2030,9 @@
       onClick = (e) => {
         CP.selectImage(
           function(data) {
-            if (itemsKey) {
+            if (itemsKey2) {
               Object.assign(item, data);
-              set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
+              set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
             } else {
               set(data);
             }
@@ -2157,14 +2157,13 @@
       },
       { page: 0, images: null, image: null }
     );
-    CP.cache.PreparedImage = CP.cache.PreparedImage || {};
     useEffect6(() => {
       if (state.images === null) {
-        if (CP.cache.PreparedImage[name]) {
+        if (CP.cache.get([SelectPreparedImage, name])) {
           dispatch({ type: "update", images: CP.cache.PreparedImage[name] });
         } else {
           wp.apiFetch({ path: "cp/v1/images/" + name }).then((images) => {
-            CP.cache.PreparedImage[name] = images;
+            CP.cache.set([SelectPreparedImage, name], images);
             dispatch({ type: "update", images });
           });
         }
@@ -2568,12 +2567,843 @@
     return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u64CD\u4F5C", initialOpen: false, icon: "info" }, /* @__PURE__ */ wp.element.createElement("table", null, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + S"), /* @__PURE__ */ wp.element.createElement("td", null, "\u4FDD\u5B58")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + D"), /* @__PURE__ */ wp.element.createElement("td", null, "\u8907\u88FD")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + delete"), /* @__PURE__ */ wp.element.createElement("td", null, "\u524A\u9664")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + \u2191"), /* @__PURE__ */ wp.element.createElement("td", null, "\u524D\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + \u2193"), /* @__PURE__ */ wp.element.createElement("td", null, "\u6B21\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048")))));
   };
 
+  // ../blocks/_init/init/CP/components/SelectClassPanelBlock.jsx
+  var { __ } = wp.i18n;
+  var SelectClassPanelBlock = ({ prm }) => {
+    const { Fragment: Fragment2, useMemo: useMemo5, useContext: useContext3, createElement: el } = wp.element;
+    const { CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl: TextControl2, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
+    const { props, item, states, allStates, set, save, saveClasses, saveCss, primaryClassKey } = useContext3(SelectClassPanelContext);
+    const { subItemsKey } = props;
+    if (prm.hasOwnProperty("cond")) {
+      if (prm.cond === false) {
+        return false;
+      }
+      if (Array.isArray(prm.cond) && prm.cond.some((className) => !states[className])) {
+        return false;
+      }
+      if (typeof prm.cond === "string" && !states[prm.cond]) {
+        return false;
+      }
+      if (typeof prm.cond === "function" && !prm.cond(states, props)) {
+        return false;
+      }
+    }
+    let rtn = [];
+    if (prm.keys) {
+      if (props.items) {
+        prm.keys.items = prm.keys.items || props.itemsKey;
+        if (subItemsKey) {
+          prm.keys.subItems = prm.keys.subItems || subItemsKey;
+        }
+      }
+    }
+    if (prm.json) {
+      if (prm.input) {
+        switch (prm.input) {
+          case "select":
+          case "buttons":
+          case "gridbuttons":
+          case "bool":
+          case "range":
+          case "text":
+          case "textarea": {
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                CP.DynamicInput,
+                {
+                  param: prm,
+                  value: JSON.parse(props.attr[prm.json])[prm.key],
+                  onChange: (val) => {
+                    if (prm.filter) {
+                      val = prm.filter(val, states, props);
+                    }
+                    CP.setJsonValue(props, prm.json, prm.key, val);
+                    if (prm.effect) {
+                      prm.effect(val, states, props);
+                    }
+                  }
+                }
+              )
+            );
+            break;
+          }
+          case "picture": {
+            if (prm.label) {
+              rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
+            }
+            let attr = JSON.parse(props.attr[prm.json]) || {};
+            if (prm.key) {
+              attr = attr[prm.key] || {};
+            }
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                CP.SelectPictureSources,
+                {
+                  index: props.index,
+                  set: (val) => {
+                    if (prm.filter) {
+                      val = prm.filter(val, states, props);
+                    }
+                    if (prm.key) {
+                      CP.setJsonValue(props, prm.json, prm.key, Object.assign(attr, val));
+                    } else {
+                      CP.setJsonValues(props, prm.json, prm.keys, val);
+                    }
+                    if (prm.effect) {
+                      prm.effect(val, states, props);
+                    }
+                  },
+                  attr,
+                  keys: prm.keys,
+                  sizes: prm.sizes,
+                  devices: prm.devices,
+                  isTemplate: prm.isTemplate
+                }
+              )
+            );
+            break;
+          }
+          case "flag": {
+            let value2 = CP.getJsonValue(props, prm.json, prm.key) || 0;
+            if (prm.label) {
+              rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
+            }
+            Object.keys(prm.values).forEach((key) => {
+              rtn.push(
+                /* @__PURE__ */ wp.element.createElement(
+                  CheckboxControl,
+                  {
+                    label: key,
+                    onChange: (flag) => {
+                      value2 |= prm.values[key];
+                      if (!flag) {
+                        value2 ^= prm.values[key];
+                      }
+                      CP.setJsonValue(props, prm.json, prm.key, value2);
+                    },
+                    checked: value2 & prm.values[key],
+                    key
+                  }
+                )
+              );
+            });
+            break;
+          }
+          case "color": {
+            if (prm.label) {
+              rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
+            }
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                ColorPicker,
+                {
+                  color: CP.getJsonValue(props, prm.json, prm.key) || "#FFFFFF",
+                  onChangeComplete: (value2) => {
+                    CP.setJsonValue(props, prm.json, prm.key, value2.hex);
+                  }
+                }
+              )
+            );
+            break;
+          }
+          case "colors": {
+            if (prm.label) {
+              rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
+            }
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                CP.SelectColors,
+                {
+                  colors: CP.getJsonValue(props, prm.json, prm.key) || [
+                    { h: "40", s: "80%", l: "50%" },
+                    { h: "60", s: "80%", l: "50%" }
+                  ],
+                  onChange: (colors) => {
+                    CP.setJsonValue(props, prm.json, prm.key, colors);
+                  }
+                }
+              )
+            );
+            break;
+          }
+          case "gradient": {
+            if (prm.label) {
+              rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
+            }
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                GradientPicker,
+                {
+                  onChange: (value2) => {
+                    console.log(CP.parseGradientStyleValue(value2));
+                  }
+                }
+              )
+            );
+            break;
+          }
+        }
+        switch (prm.input) {
+          case "select":
+          case "buttons":
+          case "gridbuttons": {
+            if (prm.sub) {
+              if (prm.sub[JSON.parse(props.attr[prm.json])[prm.key]]) {
+                let sub = [];
+                prm.sub[JSON.parse(props.attr[prm.json])[prm.key]].forEach((prm2) => {
+                  sub.push(el(SelectClass, { prm: prm2 }));
+                });
+                rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
+              }
+            }
+            break;
+          }
+          case "bool": {
+            if (prm.sub) {
+              if (JSON.parse(props.attr[prm.json])[prm.key]) {
+                let sub = [];
+                prm.sub.forEach((prm2) => {
+                  sub.push(el(SelectClass, { prm: prm2 }));
+                });
+                rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
+              }
+            }
+            break;
+          }
+        }
+      } else if (_.isObject(prm.values)) {
+        let { options: options4, values: values2 } = CP.parseSelections(prm.values);
+        rtn.push(
+          /* @__PURE__ */ wp.element.createElement(
+            SelectControl,
+            {
+              label: prm.label,
+              value: CP.getJsonValue(props, prm.json, prm.key),
+              onChange: (val) => {
+                CP.setJsonValue(props, prm.json, prm.key, val);
+              },
+              options: options4
+            }
+          )
+        );
+        if (prm.sub) {
+          let currentValue = CP.getJsonValue(props, prm.json, prm.key);
+          if (currentValue && prm.sub[currentValue]) {
+            let sub = [];
+            prm.sub[currentValue].forEach((prm2) => {
+              sub.push(el(SelectClass, { prm: prm2 }));
+            });
+            rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
+          }
+        }
+      } else if (prm.values) {
+        rtn.push(
+          /* @__PURE__ */ wp.element.createElement(
+            CheckboxControl,
+            {
+              label: prm.label,
+              onChange: () => {
+                CP.switchJsonValue(props, prm.json, prm.key, prm.values);
+              },
+              checked: CP.hasJsonValue(props, prm.json, prm.key, prm.values)
+            }
+          )
+        );
+        if (prm.sub) {
+          if (CP.getJsonValue(props, prm.json, prm.key)) {
+            let sub = [];
+            prm.sub.forEach((prm2) => {
+              sub.push(el(SelectClass, { prm: prm2 }));
+            });
+            rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
+          }
+        }
+      } else {
+        rtn.push(
+          /* @__PURE__ */ wp.element.createElement(
+            TextControl2,
+            {
+              label: prm.label,
+              value: JSON.parse(props.attr[prm.json])[prm.key],
+              onChange: (val) => {
+                CP.setJsonValue(props, prm.json, prm.key, val);
+              }
+            }
+          )
+        );
+      }
+    } else if (prm.css) {
+      const { device = "pc" } = prm;
+      const media = CP.getMediaQueryKeyForDevice(device);
+      const sel = typeof prm.sel === "function" ? prm.sel(props) : prm.sel;
+      styleDatas[prm.css] = styleDatas[prm.css] || {};
+      styleDatas[prm.css][media] = styleDatas[prm.css][media] || {};
+      styleDatas[prm.css][media][sel] = styleDatas[prm.css][media][sel] || {};
+      const tgt = styleDatas[prm.css][media][sel];
+      if (prm.input) {
+        switch (prm.input) {
+          case "border":
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                CP.SelectPreparedImage,
+                {
+                  name: "border",
+                  value: CP.getUrlInStyleCode(tgt.borderImage),
+                  color: prm.color || 0,
+                  onChange: (image) => {
+                    if (!image.conf) {
+                      return;
+                    }
+                    const { slice: slice2, width, repeat } = image.conf;
+                    tgt.borderStyle = "solid";
+                    tgt.borderImage = "url(" + image.url + ") fill " + slice2 + " / " + width + " " + repeat;
+                    saveCss(prm.css);
+                  }
+                }
+              )
+            );
+            break;
+          case "pattern":
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                CP.SelectPreparedImage,
+                {
+                  name: "pattern",
+                  value: CP.getUrlInStyleCode(tgt.backgroundImage),
+                  color: prm.color || 0,
+                  onChange: (image) => {
+                    if (!image.conf) {
+                      return;
+                    }
+                    const { size, width, height, repeat, x, y } = image.conf;
+                    tgt.backgroundImage = "url(" + image.url + ")";
+                    if (width && height) {
+                      tgt.backgroundSize = width + "px " + height + "px";
+                    } else if (size) {
+                      tgt.backgroundSize = CP.translateCssVal("background-size", size);
+                    } else {
+                      delete tgt.backgroundSize;
+                    }
+                    if (repeat) {
+                      tgt.backgroundRepeat = CP.translateCssVal("background-repeat", repeat);
+                    } else {
+                      delete tgt.backgroundRepeat;
+                    }
+                    if (x && y) {
+                      tgt.backgroundPosition = x + "% " + y + "%";
+                    } else {
+                      delete tgt.backgroundPosition;
+                    }
+                    saveCss(prm.css);
+                  }
+                }
+              )
+            );
+            break;
+          case "frame":
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                CP.SelectPreparedImageSet,
+                {
+                  name: "frame",
+                  value: CP.getUrlInStyleCode(tgt.borderImage),
+                  color: prm.color || 0,
+                  onChange: (imageset) => {
+                    imageset.forEach((image) => {
+                      if (!image.conf) {
+                        return;
+                      }
+                      const { device: device2, slice: slice2, width, repeat } = image.conf;
+                      const media2 = CP.getMediaQueryKeyForDevice(device2);
+                      styleDatas[prm.css][media2] = styleDatas[prm.css][media2] || {};
+                      styleDatas[prm.css][media2][sel] = styleDatas[prm.css][media2][sel] || {};
+                      styleDatas[prm.css][media2][sel].borderStyle = "solid";
+                      styleDatas[prm.css][media2][sel].borderImage = "url(" + image.url + ") fill " + slice2 + " / " + width + " " + repeat;
+                    });
+                    saveCss(prm.css);
+                  }
+                }
+              )
+            );
+            break;
+        }
+      } else {
+        rtn.push(
+          /* @__PURE__ */ wp.element.createElement(
+            TextControl2,
+            {
+              label: prm.label,
+              value: tgt[prm.attr],
+              onChange: (val) => {
+                tgt[prm.attr] = val;
+                saveCss(prm.css);
+              }
+            }
+          )
+        );
+      }
+    } else if (prm.vars) {
+      if (prm.input) {
+        switch (prm.input) {
+          case "select":
+          case "buttons":
+          case "gridbuttons":
+          case "bool":
+          case "range":
+          case "text":
+          case "textarea": {
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                CP.DynamicInput,
+                {
+                  param: prm,
+                  value: props.attr?.[prm.vars]?.[prm.key],
+                  onChange: (val) => {
+                    if (prm.filter) {
+                      val = prm.filter(val, states, props);
+                    }
+                    save({
+                      [prm.vars]: {
+                        ...props.attr[prm.vars],
+                        [prm.key]: `${val}`
+                      }
+                    });
+                  }
+                }
+              )
+            );
+            break;
+          }
+          case "customColorVars": {
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                CP.CustomColorVars,
+                {
+                  value: props.attr[prm.vars],
+                  onChange: (vars) => {
+                    const newVars = { ...props.attr[prm.vars] };
+                    Object.keys(vars).forEach((key) => {
+                      if (vars[key] === null) {
+                        delete newVars[key];
+                      } else {
+                        newVars[key] = vars[key];
+                      }
+                    });
+                    save({ [prm.vars]: newVars });
+                  }
+                }
+              )
+            );
+            break;
+          }
+          case "blendmode": {
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                CP.SelectBlendMode,
+                {
+                  label: prm.label,
+                  value: props.attr?.[prm.vars]?.[prm.key],
+                  onChange: (val) => {
+                    save({
+                      [prm.vars]: {
+                        ...props.attr[prm.vars],
+                        [prm.key]: `${val}`
+                      }
+                    });
+                  }
+                }
+              )
+            );
+            break;
+          }
+          case "image": {
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                CP.SelectResponsiveImage,
+                {
+                  attr: props.attr[prm.vars],
+                  set: (data) => {
+                    save({
+                      [prm.vars]: {
+                        ...props.attr[prm.vars],
+                        ...data
+                      }
+                    });
+                  },
+                  keys: { url: prm.key }
+                }
+              )
+            );
+            break;
+          }
+          case "position": {
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                CP.PositionInput,
+                {
+                  label: prm.label,
+                  value: props.attr?.[prm.vars]?.[prm.key],
+                  onChange: (val) => {
+                    save({
+                      [prm.vars]: {
+                        ...props.attr[prm.vars],
+                        [prm.key]: `${val}`
+                      }
+                    });
+                  }
+                }
+              )
+            );
+            break;
+          }
+          case "size": {
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                CP.SelectSize,
+                {
+                  label: prm.label,
+                  value: props.attr?.[prm.vars]?.[prm.key],
+                  onChange: (val) => {
+                    save({
+                      [prm.vars]: {
+                        ...props.attr[prm.vars],
+                        [prm.key]: `${val}`
+                      }
+                    });
+                  }
+                }
+              )
+            );
+            break;
+          }
+        }
+      } else {
+        rtn.push(
+          /* @__PURE__ */ wp.element.createElement(
+            TextControl2,
+            {
+              label: prm.label,
+              value: props.attr?.[prm.vars]?.[prm.key],
+              onChange: (val) => {
+                save({
+                  [prm.vars]: { ...props.attr[prm.vars], [prm.key]: `${val}` }
+                });
+              }
+            }
+          )
+        );
+      }
+    } else {
+      if (prm === "color") {
+        rtn.push(
+          /* @__PURE__ */ wp.element.createElement(
+            CP.SelectColorClass,
+            {
+              label: __("\u8272", "catpow"),
+              selected: states,
+              onChange: (proxy) => {
+                if (!props.items) {
+                  set({ color: proxy.value });
+                }
+                saveClasses();
+              }
+            }
+          )
+        );
+      } else if (prm === "pattern") {
+        rtn.push(
+          /* @__PURE__ */ wp.element.createElement(
+            CP.SelectPatternClass,
+            {
+              label: __("\u30D1\u30BF\u30FC\u30F3", "catpow"),
+              set: props.set,
+              attr: props.attr,
+              selected: Object.keys(states).find((key) => /^pattern\d+/.test(key)),
+              onChange: (pattern) => {
+                CP.filterFlags(states, (key) => !/^pattern\d+/.test(key));
+                states[pattern] = true;
+                saveClasses();
+              }
+            }
+          )
+        );
+      } else if (prm === "cond") {
+        rtn.push(/* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u8868\u793A\u6761\u4EF6", "catpow"), value: item["cond"], onChange: (cond) => save({ cond }) }));
+      } else if (prm === "event") {
+        const EventInputs = useMemo5(() => wp.hooks.applyFilters("catpow.EventInputs", [], { item, save }), [item, save]);
+        rtn.push(...EventInputs);
+      } else if (prm.input) {
+        switch (prm.input) {
+          case "select":
+          case "buttons":
+          case "gridbuttons":
+          case "bool":
+          case "range":
+          case "text":
+          case "textarea": {
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                CP.DynamicInput,
+                {
+                  param: prm,
+                  value: item[prm.key],
+                  onChange: (val) => {
+                    if (prm.filter) {
+                      val = prm.filter(val, states, props);
+                    }
+                    save({ [prm.key]: val });
+                    if (prm.effect) {
+                      prm.effect(val, states, props);
+                    }
+                  }
+                }
+              )
+            );
+            break;
+          }
+          case "dataset": {
+            if (prm.label) {
+              rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
+            }
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                CP.DataSetInput,
+                {
+                  param: prm,
+                  value: item[prm.key],
+                  onChange: (val) => {
+                    if (prm.filter) {
+                      val = prm.filter(val, states, props);
+                    }
+                    save({ [prm.key]: val });
+                    if (prm.effect) {
+                      prm.effect(val, states, props);
+                    }
+                  }
+                }
+              )
+            );
+            break;
+          }
+          case "image": {
+            if (prm.label) {
+              rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
+            }
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                CP.SelectResponsiveImage,
+                {
+                  index: props.index,
+                  set: props.set,
+                  attr: props.attr,
+                  keys: prm.keys,
+                  size: prm.size,
+                  sizes: prm.sizes,
+                  device: prm.device,
+                  devices: prm.devices,
+                  isTemplate: prm.isTemplate
+                }
+              )
+            );
+            break;
+          }
+          case "picture": {
+            if (prm.label) {
+              rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
+            }
+            rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { index: props.index, set: props.set, attr: props.attr, keys: prm.keys, sizes: prm.sizes, devices: prm.devices, isTemplate: prm.isTemplate }));
+            break;
+          }
+          case "position": {
+            rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectPositionClass, { set: props.set, attr: props.attr, label: prm.label, key: prm.key, help: prm.help, disable: prm.disable, itemsKey, index: props.index }));
+          }
+          case "icon": {
+            if (prm.label) {
+              rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
+            }
+            rtn.push(/* @__PURE__ */ wp.element.createElement(CP.InputIcon, { prm, item, save }));
+            break;
+          }
+          case "symbol":
+          case "pattern": {
+            prm.keys = prm.keys || {};
+            prm.keys.src = prm.keys.src || prm.input + "Src";
+            prm.keys.alt = prm.keys.alt || prm.input + "Alt";
+            if (prm.label) {
+              rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
+            }
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                CP.SelectPreparedImage,
+                {
+                  name: prm.input,
+                  value: item[prm.keys.src],
+                  color: prm.color || CP.getColor({ attr: item }) || 0,
+                  onChange: (image) => {
+                    save({
+                      [prm.keys.src]: image.url,
+                      [prm.keys.alt]: image.alt
+                    });
+                  }
+                }
+              )
+            );
+            break;
+          }
+          case "config": {
+            if (prm.label) {
+              rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
+            }
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                CP.BlockConfigInput,
+                {
+                  param: prm,
+                  value: item[prm.key],
+                  onChange: (val) => {
+                    if (prm.filter) {
+                      val = prm.filter(val, states, props);
+                    }
+                    save({ [prm.key]: val });
+                    if (prm.effect) {
+                      prm.effect(val, states, props);
+                    }
+                  }
+                }
+              )
+            );
+            break;
+          }
+        }
+        switch (prm.input) {
+          case "select":
+          case "buttons":
+          case "gridbuttons": {
+            if (prm.sub && prm.sub[item[prm.key]]) {
+              let sub = [];
+              prm.sub[item[prm.key]].forEach((prm2) => {
+                sub.push(el(SelectClass, { prm: prm2 }));
+              });
+              rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
+            }
+            break;
+          }
+          case "bool": {
+            if (prm.sub && item[prm.key]) {
+              let sub = [];
+              prm.sub.forEach((prm2) => {
+                sub.push(el(SelectClass, { prm: prm2 }));
+              });
+              rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
+            }
+            break;
+          }
+        }
+      } else {
+        const classKey = prm.classKey ? prm.classKey : primaryClassKey;
+        const targetStates = allStates[classKey] || {};
+        const allClassFlags = CP.getAllClassFlags(prm, primaryClassKey);
+        const classFlagsByValue = CP.getClassFlagsByValue(prm, primaryClassKey);
+        const bindClasseFlagsByValue = CP.getBindClassFlagsByValue(prm, primaryClassKey);
+        if (_.isObject(prm.values)) {
+          var { options: options3, values } = CP.parseSelections(prm.values);
+          const currentClass2 = values.find((value2) => targetStates[kebabToCamel(value2)]);
+          const onChangeCB = (value2) => {
+            const updates = CP.getUpdatesFromStatesAndClasssFlags({
+              states,
+              allStates,
+              allClassFlags,
+              classFlags: classFlagsByValue[value2],
+              bindClassFlags: bindClasseFlagsByValue[value2]
+            });
+            set(updates);
+            if (prm.effect) {
+              prm.effect(currentClass2, value2, targetStates, props);
+            }
+          };
+          switch (prm.type) {
+            case "radio": {
+              rtn.push(/* @__PURE__ */ wp.element.createElement(RadioControl, { label: prm.label, onChange: onChangeCB, selected: currentClass2, options: options3 }));
+              break;
+            }
+            case "buttons": {
+              rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectButtons, { label: prm.label, onChange: onChangeCB, selected: currentClass2, options: options3 }));
+              break;
+            }
+            case "gridbuttons": {
+              rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectGridButtons, { label: prm.label, onChange: onChangeCB, selected: currentClass2, options: options3 }));
+              break;
+            }
+            default: {
+              rtn.push(/* @__PURE__ */ wp.element.createElement(SelectControl, { label: prm.label, onChange: onChangeCB, value: currentClass2, options: options3 }));
+            }
+          }
+          if (prm.sub) {
+            if (currentClass2 && prm.sub[currentClass2]) {
+              let sub = [];
+              prm.sub[currentClass2].forEach((prm2, index) => {
+                sub.push(
+                  /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index }, /* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm: prm2 }))
+                );
+              });
+              rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
+            }
+          }
+        } else {
+          rtn.push(
+            /* @__PURE__ */ wp.element.createElement(
+              CheckboxControl,
+              {
+                label: prm.label,
+                onChange: () => {
+                  if (targetStates[prm.values]) {
+                    const updates = CP.getUpdatesFromStatesAndClasssFlags({
+                      allStates,
+                      allClassFlags
+                    });
+                    console.log({ allClassFlags, bindClasseFlagsByValue, updates });
+                    set(updates);
+                  } else {
+                    const updates = CP.getUpdatesFromStatesAndClasssFlags({
+                      allStates,
+                      allClassFlags,
+                      classFlags: classFlagsByValue[prm.values],
+                      bindClassFlags: bindClasseFlagsByValue[prm.values]
+                    });
+                    console.log({ allClassFlags, bindClasseFlagsByValue, updates });
+                    set(updates);
+                  }
+                  if (prm.effect) {
+                    prm.effect(currentClass, value, targetStates, props);
+                  }
+                },
+                checked: !!targetStates[prm.values]
+              }
+            )
+          );
+          if (prm.sub) {
+            if (targetStates[prm.values]) {
+              let sub = [];
+              prm.sub.forEach((prm2, index) => {
+                sub.push(
+                  /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index }, /* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm: prm2 }))
+                );
+              });
+              rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
+            }
+          }
+        }
+      }
+    }
+    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, rtn.map((item2, index) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index }, item2)));
+  };
+
   // ../blocks/_init/init/CP/components/SelectClassPanel.jsx
+  var { __: __2 } = wp.i18n;
   var SelectClassPanelContext = wp.element.createContext({});
   var SelectClassPanel = (props) => {
-    const { Fragment: Fragment2, useMemo: useMemo5, useCallback: useCallback4, useContext: useContext3, createElement: el } = wp.element;
-    const { __: __3 } = wp.i18n;
-    const { PanelBody, CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl: TextControl2, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
+    const { Fragment: Fragment2, useMemo: useMemo5, useCallback: useCallback4, createElement: el } = wp.element;
+    const { PanelBody } = wp.components;
     const {
       blockClasssKey = "classes",
       classKey: primaryClassKey = "classes",
@@ -2585,7 +3415,7 @@
       attr,
       triggerClasses
     } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
-    let { itemsKey = items2 ? "items" : null, itemClasses } = props;
+    let { itemsKey: itemsKey2 = items2 ? "items" : null, itemClasses } = props;
     const selectiveClasses = useMemo5(() => {
       if (!triggerClasses || !triggerClasses.item) {
         if (Array.isArray(props.selectiveClasses)) {
@@ -2596,7 +3426,7 @@
       const blockStates = CP.classNamesToFlags(attr[blockClasssKey]);
       return CP.resolveSelectiveClassesPresets(triggerClasses.item[Object.keys(triggerClasses.item).find((value2) => blockStates[value2])]);
     }, [props.selectiveClasses, triggerClasses && attr[blockClasssKey]]);
-    const { styleDatas } = attr;
+    const { styleDatas: styleDatas2 } = attr;
     const item = useMemo5(() => {
       if (!items2) {
         return attr;
@@ -2626,7 +3456,6 @@
           }
         }
         if (prm.bind) {
-          console.log({ prm });
           if (typeof prm.values === "string") {
             if (!Array.isArray(prm.bind)) {
               Object.keys(prm.bind).forEach((classKey) => {
@@ -2650,7 +3479,6 @@
       };
       const classKeyFlags = {};
       props.selectiveClasses.forEach((prm) => addClassKeyFlagsInPrm(prm, classKeyFlags));
-      console.log({ classKeyFlags });
       Object.keys(classKeyFlags).forEach((classKey) => {
         allStates2[classKey] = CP.classNamesToFlags(item[classKey]);
       });
@@ -2660,12 +3488,12 @@
       (data) => {
         if (items2) {
           Object.assign(item, data);
-          set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
+          set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
         } else {
           set(data);
         }
       },
-      [set, index, items2, itemsKey]
+      [set, index, items2, itemsKey2]
     );
     const saveClasses = useCallback4(
       (classKey) => {
@@ -2675,812 +3503,14 @@
     );
     const saveCss = useCallback4(
       (cssKey) => {
-        set({ [cssKey]: CP.createStyleCodeWithMediaQuery(styleDatas[cssKey]) });
+        set({ [cssKey]: CP.createStyleCodeWithMediaQuery(styleDatas2[cssKey]) });
       },
-      [set, styleDatas]
+      [set, styleDatas2]
     );
-    const SelectClass = useCallback4(({ prm }) => {
-      const { props: props2, item: item2, states: states2, allStates: allStates2, set: set2, save: save2, saveClasses: saveClasses2, saveCss: saveCss2, primaryClassKey: primaryClassKey2 } = useContext3(CP.SelectClassPanelContext);
-      if (prm.hasOwnProperty("cond")) {
-        if (prm.cond === false) {
-          return false;
-        }
-        if (Array.isArray(prm.cond) && prm.cond.some((className) => !states2[className])) {
-          return false;
-        }
-        if (typeof prm.cond === "string" && !states2[prm.cond]) {
-          return false;
-        }
-        if (typeof prm.cond === "function" && !prm.cond(states2, props2)) {
-          return false;
-        }
-      }
-      let rtn = [];
-      if (prm.keys) {
-        if (props2.items) {
-          prm.keys.items = prm.keys.items || props2.itemsKey;
-          if (subItemsKey) {
-            prm.keys.subItems = prm.keys.subItems || subItemsKey;
-          }
-        }
-      }
-      if (prm.json) {
-        if (prm.input) {
-          switch (prm.input) {
-            case "select":
-            case "buttons":
-            case "gridbuttons":
-            case "bool":
-            case "range":
-            case "text":
-            case "textarea": {
-              rtn.push(
-                /* @__PURE__ */ wp.element.createElement(
-                  CP.DynamicInput,
-                  {
-                    param: prm,
-                    value: JSON.parse(props2.attr[prm.json])[prm.key],
-                    onChange: (val) => {
-                      if (prm.filter) {
-                        val = prm.filter(val, states2, props2);
-                      }
-                      CP.setJsonValue(props2, prm.json, prm.key, val);
-                      if (prm.effect) {
-                        prm.effect(val, states2, props2);
-                      }
-                    }
-                  }
-                )
-              );
-              break;
-            }
-            case "picture": {
-              if (prm.label) {
-                rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
-              }
-              let attr2 = JSON.parse(props2.attr[prm.json]) || {};
-              if (prm.key) {
-                attr2 = attr2[prm.key] || {};
-              }
-              rtn.push(
-                /* @__PURE__ */ wp.element.createElement(
-                  CP.SelectPictureSources,
-                  {
-                    index: props2.index,
-                    set: (val) => {
-                      if (prm.filter) {
-                        val = prm.filter(val, states2, props2);
-                      }
-                      if (prm.key) {
-                        CP.setJsonValue(props2, prm.json, prm.key, Object.assign(attr2, val));
-                      } else {
-                        CP.setJsonValues(props2, prm.json, prm.keys, val);
-                      }
-                      if (prm.effect) {
-                        prm.effect(val, states2, props2);
-                      }
-                    },
-                    attr: attr2,
-                    keys: prm.keys,
-                    sizes: prm.sizes,
-                    devices: prm.devices,
-                    isTemplate: prm.isTemplate
-                  }
-                )
-              );
-              break;
-            }
-            case "flag": {
-              let value2 = CP.getJsonValue(props2, prm.json, prm.key) || 0;
-              if (prm.label) {
-                rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
-              }
-              Object.keys(prm.values).forEach((key) => {
-                rtn.push(
-                  /* @__PURE__ */ wp.element.createElement(
-                    CheckboxControl,
-                    {
-                      label: key,
-                      onChange: (flag) => {
-                        value2 |= prm.values[key];
-                        if (!flag) {
-                          value2 ^= prm.values[key];
-                        }
-                        CP.setJsonValue(props2, prm.json, prm.key, value2);
-                      },
-                      checked: value2 & prm.values[key],
-                      key
-                    }
-                  )
-                );
-              });
-              break;
-            }
-            case "color": {
-              if (prm.label) {
-                rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
-              }
-              rtn.push(
-                /* @__PURE__ */ wp.element.createElement(
-                  ColorPicker,
-                  {
-                    color: CP.getJsonValue(props2, prm.json, prm.key) || "#FFFFFF",
-                    onChangeComplete: (value2) => {
-                      CP.setJsonValue(props2, prm.json, prm.key, value2.hex);
-                    }
-                  }
-                )
-              );
-              break;
-            }
-            case "colors": {
-              if (prm.label) {
-                rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
-              }
-              rtn.push(
-                /* @__PURE__ */ wp.element.createElement(
-                  CP.SelectColors,
-                  {
-                    colors: CP.getJsonValue(props2, prm.json, prm.key) || [
-                      { h: "40", s: "80%", l: "50%" },
-                      { h: "60", s: "80%", l: "50%" }
-                    ],
-                    onChange: (colors) => {
-                      CP.setJsonValue(props2, prm.json, prm.key, colors);
-                    }
-                  }
-                )
-              );
-              break;
-            }
-            case "gradient": {
-              if (prm.label) {
-                rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
-              }
-              rtn.push(
-                /* @__PURE__ */ wp.element.createElement(
-                  GradientPicker,
-                  {
-                    onChange: (value2) => {
-                      console.log(CP.parseGradientStyleValue(value2));
-                    }
-                  }
-                )
-              );
-              break;
-            }
-          }
-          switch (prm.input) {
-            case "select":
-            case "buttons":
-            case "gridbuttons": {
-              if (prm.sub) {
-                if (prm.sub[JSON.parse(props2.attr[prm.json])[prm.key]]) {
-                  let sub = [];
-                  prm.sub[JSON.parse(props2.attr[prm.json])[prm.key]].forEach((prm2) => {
-                    sub.push(el(SelectClass, { prm: prm2 }));
-                  });
-                  rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
-                }
-              }
-              break;
-            }
-            case "bool": {
-              if (prm.sub) {
-                if (JSON.parse(props2.attr[prm.json])[prm.key]) {
-                  let sub = [];
-                  prm.sub.forEach((prm2) => {
-                    sub.push(el(SelectClass, { prm: prm2 }));
-                  });
-                  rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
-                }
-              }
-              break;
-            }
-          }
-        } else if (_.isObject(prm.values)) {
-          let { options: options4, values: values2 } = CP.parseSelections(prm.values);
-          rtn.push(
-            /* @__PURE__ */ wp.element.createElement(
-              SelectControl,
-              {
-                label: prm.label,
-                value: CP.getJsonValue(props2, prm.json, prm.key),
-                onChange: (val) => {
-                  CP.setJsonValue(props2, prm.json, prm.key, val);
-                },
-                options: options4
-              }
-            )
-          );
-          if (prm.sub) {
-            let currentValue = CP.getJsonValue(props2, prm.json, prm.key);
-            if (currentValue && prm.sub[currentValue]) {
-              let sub = [];
-              prm.sub[currentValue].forEach((prm2) => {
-                sub.push(el(SelectClass, { prm: prm2 }));
-              });
-              rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
-            }
-          }
-        } else if (prm.values) {
-          rtn.push(
-            /* @__PURE__ */ wp.element.createElement(
-              CheckboxControl,
-              {
-                label: prm.label,
-                onChange: () => {
-                  CP.switchJsonValue(props2, prm.json, prm.key, prm.values);
-                },
-                checked: CP.hasJsonValue(props2, prm.json, prm.key, prm.values)
-              }
-            )
-          );
-          if (prm.sub) {
-            if (CP.getJsonValue(props2, prm.json, prm.key)) {
-              let sub = [];
-              prm.sub.forEach((prm2) => {
-                sub.push(el(SelectClass, { prm: prm2 }));
-              });
-              rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
-            }
-          }
-        } else {
-          rtn.push(
-            /* @__PURE__ */ wp.element.createElement(
-              TextControl2,
-              {
-                label: prm.label,
-                value: JSON.parse(props2.attr[prm.json])[prm.key],
-                onChange: (val) => {
-                  CP.setJsonValue(props2, prm.json, prm.key, val);
-                }
-              }
-            )
-          );
-        }
-      } else if (prm.css) {
-        const { device = "pc" } = prm;
-        const media = CP.getMediaQueryKeyForDevice(device);
-        const sel = typeof prm.sel === "function" ? prm.sel(props2) : prm.sel;
-        styleDatas[prm.css] = styleDatas[prm.css] || {};
-        styleDatas[prm.css][media] = styleDatas[prm.css][media] || {};
-        styleDatas[prm.css][media][sel] = styleDatas[prm.css][media][sel] || {};
-        const tgt = styleDatas[prm.css][media][sel];
-        if (prm.input) {
-          switch (prm.input) {
-            case "border":
-              rtn.push(
-                /* @__PURE__ */ wp.element.createElement(
-                  CP.SelectPreparedImage,
-                  {
-                    name: "border",
-                    value: CP.getUrlInStyleCode(tgt.borderImage),
-                    color: prm.color || 0,
-                    onChange: (image) => {
-                      if (!image.conf) {
-                        return;
-                      }
-                      const { slice: slice2, width, repeat } = image.conf;
-                      tgt.borderStyle = "solid";
-                      tgt.borderImage = "url(" + image.url + ") fill " + slice2 + " / " + width + " " + repeat;
-                      saveCss2(prm.css);
-                    }
-                  }
-                )
-              );
-              break;
-            case "pattern":
-              rtn.push(
-                /* @__PURE__ */ wp.element.createElement(
-                  CP.SelectPreparedImage,
-                  {
-                    name: "pattern",
-                    value: CP.getUrlInStyleCode(tgt.backgroundImage),
-                    color: prm.color || 0,
-                    onChange: (image) => {
-                      if (!image.conf) {
-                        return;
-                      }
-                      const { size, width, height, repeat, x, y } = image.conf;
-                      tgt.backgroundImage = "url(" + image.url + ")";
-                      if (width && height) {
-                        tgt.backgroundSize = width + "px " + height + "px";
-                      } else if (size) {
-                        tgt.backgroundSize = CP.translateCssVal("background-size", size);
-                      } else {
-                        delete tgt.backgroundSize;
-                      }
-                      if (repeat) {
-                        tgt.backgroundRepeat = CP.translateCssVal("background-repeat", repeat);
-                      } else {
-                        delete tgt.backgroundRepeat;
-                      }
-                      if (x && y) {
-                        tgt.backgroundPosition = x + "% " + y + "%";
-                      } else {
-                        delete tgt.backgroundPosition;
-                      }
-                      saveCss2(prm.css);
-                    }
-                  }
-                )
-              );
-              break;
-            case "frame":
-              rtn.push(
-                /* @__PURE__ */ wp.element.createElement(
-                  CP.SelectPreparedImageSet,
-                  {
-                    name: "frame",
-                    value: CP.getUrlInStyleCode(tgt.borderImage),
-                    color: prm.color || 0,
-                    onChange: (imageset) => {
-                      imageset.forEach((image) => {
-                        if (!image.conf) {
-                          return;
-                        }
-                        const { device: device2, slice: slice2, width, repeat } = image.conf;
-                        const media2 = CP.getMediaQueryKeyForDevice(device2);
-                        styleDatas[prm.css][media2] = styleDatas[prm.css][media2] || {};
-                        styleDatas[prm.css][media2][sel] = styleDatas[prm.css][media2][sel] || {};
-                        styleDatas[prm.css][media2][sel].borderStyle = "solid";
-                        styleDatas[prm.css][media2][sel].borderImage = "url(" + image.url + ") fill " + slice2 + " / " + width + " " + repeat;
-                      });
-                      saveCss2(prm.css);
-                    }
-                  }
-                )
-              );
-              break;
-          }
-        } else {
-          rtn.push(
-            /* @__PURE__ */ wp.element.createElement(
-              TextControl2,
-              {
-                label: prm.label,
-                value: tgt[prm.attr],
-                onChange: (val) => {
-                  tgt[prm.attr] = val;
-                  saveCss2(prm.css);
-                }
-              }
-            )
-          );
-        }
-      } else if (prm.vars) {
-        if (prm.input) {
-          switch (prm.input) {
-            case "select":
-            case "buttons":
-            case "gridbuttons":
-            case "bool":
-            case "range":
-            case "text":
-            case "textarea": {
-              rtn.push(
-                /* @__PURE__ */ wp.element.createElement(
-                  CP.DynamicInput,
-                  {
-                    param: prm,
-                    value: props2.attr?.[prm.vars]?.[prm.key],
-                    onChange: (val) => {
-                      if (prm.filter) {
-                        val = prm.filter(val, states2, props2);
-                      }
-                      save2({
-                        [prm.vars]: {
-                          ...props2.attr[prm.vars],
-                          [prm.key]: `${val}`
-                        }
-                      });
-                    }
-                  }
-                )
-              );
-              break;
-            }
-            case "customColorVars": {
-              rtn.push(
-                /* @__PURE__ */ wp.element.createElement(
-                  CP.CustomColorVars,
-                  {
-                    value: props2.attr[prm.vars],
-                    onChange: (vars) => {
-                      const newVars = { ...props2.attr[prm.vars] };
-                      Object.keys(vars).forEach((key) => {
-                        if (vars[key] === null) {
-                          delete newVars[key];
-                        } else {
-                          newVars[key] = vars[key];
-                        }
-                      });
-                      save2({ [prm.vars]: newVars });
-                    }
-                  }
-                )
-              );
-              break;
-            }
-            case "blendmode": {
-              rtn.push(
-                /* @__PURE__ */ wp.element.createElement(
-                  CP.SelectBlendMode,
-                  {
-                    label: prm.label,
-                    value: props2.attr?.[prm.vars]?.[prm.key],
-                    onChange: (val) => {
-                      save2({
-                        [prm.vars]: {
-                          ...props2.attr[prm.vars],
-                          [prm.key]: `${val}`
-                        }
-                      });
-                    }
-                  }
-                )
-              );
-              break;
-            }
-            case "image": {
-              rtn.push(
-                /* @__PURE__ */ wp.element.createElement(
-                  CP.SelectResponsiveImage,
-                  {
-                    attr: props2.attr[prm.vars],
-                    set: (data) => {
-                      save2({
-                        [prm.vars]: {
-                          ...props2.attr[prm.vars],
-                          ...data
-                        }
-                      });
-                    },
-                    keys: { url: prm.key }
-                  }
-                )
-              );
-              break;
-            }
-            case "position": {
-              rtn.push(
-                /* @__PURE__ */ wp.element.createElement(
-                  CP.PositionInput,
-                  {
-                    label: prm.label,
-                    value: props2.attr?.[prm.vars]?.[prm.key],
-                    onChange: (val) => {
-                      save2({
-                        [prm.vars]: {
-                          ...props2.attr[prm.vars],
-                          [prm.key]: `${val}`
-                        }
-                      });
-                    }
-                  }
-                )
-              );
-              break;
-            }
-            case "size": {
-              rtn.push(
-                /* @__PURE__ */ wp.element.createElement(
-                  CP.SelectSize,
-                  {
-                    label: prm.label,
-                    value: props2.attr?.[prm.vars]?.[prm.key],
-                    onChange: (val) => {
-                      save2({
-                        [prm.vars]: {
-                          ...props2.attr[prm.vars],
-                          [prm.key]: `${val}`
-                        }
-                      });
-                    }
-                  }
-                )
-              );
-              break;
-            }
-          }
-        } else {
-          rtn.push(
-            /* @__PURE__ */ wp.element.createElement(
-              TextControl2,
-              {
-                label: prm.label,
-                value: props2.attr?.[prm.vars]?.[prm.key],
-                onChange: (val) => {
-                  save2({
-                    [prm.vars]: { ...props2.attr[prm.vars], [prm.key]: `${val}` }
-                  });
-                }
-              }
-            )
-          );
-        }
-      } else {
-        if (prm === "color") {
-          rtn.push(
-            /* @__PURE__ */ wp.element.createElement(
-              CP.SelectColorClass,
-              {
-                label: __3("\u8272", "catpow"),
-                selected: states2,
-                onChange: (proxy) => {
-                  if (!props2.items) {
-                    set2({ color: proxy.value });
-                  }
-                  saveClasses2();
-                }
-              }
-            )
-          );
-        } else if (prm === "pattern") {
-          rtn.push(
-            /* @__PURE__ */ wp.element.createElement(
-              CP.SelectPatternClass,
-              {
-                label: __3("\u30D1\u30BF\u30FC\u30F3", "catpow"),
-                set: props2.set,
-                attr: props2.attr,
-                selected: Object.keys(states2).find((key) => /^pattern\d+/.test(key)),
-                onChange: (pattern) => {
-                  CP.filterFlags(states2, (key) => !/^pattern\d+/.test(key));
-                  states2[pattern] = true;
-                  saveClasses2();
-                }
-              }
-            )
-          );
-        } else if (prm === "cond") {
-          rtn.push(/* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __3("\u8868\u793A\u6761\u4EF6", "catpow"), value: item2["cond"], onChange: (cond) => save2({ cond }) }));
-        } else if (prm === "event") {
-          const EventInputs = useMemo5(() => wp.hooks.applyFilters("catpow.EventInputs", [], { item: item2, save: save2 }), [item2, save2]);
-          rtn.push(...EventInputs);
-        } else if (prm.input) {
-          switch (prm.input) {
-            case "select":
-            case "buttons":
-            case "gridbuttons":
-            case "bool":
-            case "range":
-            case "text":
-            case "textarea": {
-              rtn.push(
-                /* @__PURE__ */ wp.element.createElement(
-                  CP.DynamicInput,
-                  {
-                    param: prm,
-                    value: item2[prm.key],
-                    onChange: (val) => {
-                      if (prm.filter) {
-                        val = prm.filter(val, states2, props2);
-                      }
-                      save2({ [prm.key]: val });
-                      if (prm.effect) {
-                        prm.effect(val, states2, props2);
-                      }
-                    }
-                  }
-                )
-              );
-              break;
-            }
-            case "dataset": {
-              if (prm.label) {
-                rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
-              }
-              rtn.push(
-                /* @__PURE__ */ wp.element.createElement(
-                  CP.DataSetInput,
-                  {
-                    param: prm,
-                    value: item2[prm.key],
-                    onChange: (val) => {
-                      if (prm.filter) {
-                        val = prm.filter(val, states2, props2);
-                      }
-                      save2({ [prm.key]: val });
-                      if (prm.effect) {
-                        prm.effect(val, states2, props2);
-                      }
-                    }
-                  }
-                )
-              );
-              break;
-            }
-            case "image": {
-              if (prm.label) {
-                rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
-              }
-              rtn.push(
-                /* @__PURE__ */ wp.element.createElement(
-                  CP.SelectResponsiveImage,
-                  {
-                    index: props2.index,
-                    set: props2.set,
-                    attr: props2.attr,
-                    keys: prm.keys,
-                    size: prm.size,
-                    sizes: prm.sizes,
-                    device: prm.device,
-                    devices: prm.devices,
-                    isTemplate: prm.isTemplate
-                  }
-                )
-              );
-              break;
-            }
-            case "picture": {
-              if (prm.label) {
-                rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
-              }
-              rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { index: props2.index, set: props2.set, attr: props2.attr, keys: prm.keys, sizes: prm.sizes, devices: prm.devices, isTemplate: prm.isTemplate }));
-              break;
-            }
-            case "position": {
-              rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectPositionClass, { set: props2.set, attr: props2.attr, label: prm.label, key: prm.key, help: prm.help, disable: prm.disable, itemsKey, index: props2.index }));
-            }
-            case "icon": {
-              if (prm.label) {
-                rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
-              }
-              rtn.push(/* @__PURE__ */ wp.element.createElement(CP.InputIcon, { prm, item: item2, save: save2 }));
-              break;
-            }
-            case "symbol":
-            case "pattern": {
-              prm.keys = prm.keys || {};
-              prm.keys.src = prm.keys.src || prm.input + "Src";
-              prm.keys.alt = prm.keys.alt || prm.input + "Alt";
-              if (prm.label) {
-                rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
-              }
-              rtn.push(
-                /* @__PURE__ */ wp.element.createElement(
-                  CP.SelectPreparedImage,
-                  {
-                    name: prm.input,
-                    value: item2[prm.keys.src],
-                    color: prm.color || CP.getColor({ attr: item2 }) || 0,
-                    onChange: (image) => {
-                      save2({
-                        [prm.keys.src]: image.url,
-                        [prm.keys.alt]: image.alt
-                      });
-                    }
-                  }
-                )
-              );
-              break;
-            }
-          }
-          switch (prm.input) {
-            case "select":
-            case "buttons":
-            case "gridbuttons": {
-              if (prm.sub && prm.sub[item2[prm.key]]) {
-                let sub = [];
-                prm.sub[item2[prm.key]].forEach((prm2) => {
-                  sub.push(el(SelectClass, { prm: prm2 }));
-                });
-                rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
-              }
-              break;
-            }
-            case "bool": {
-              if (prm.sub && item2[prm.key]) {
-                let sub = [];
-                prm.sub.forEach((prm2) => {
-                  sub.push(el(SelectClass, { prm: prm2 }));
-                });
-                rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
-              }
-              break;
-            }
-          }
-        } else {
-          const classKey = prm.classKey ? prm.classKey : primaryClassKey2;
-          const targetStates = allStates2[classKey];
-          const allClassFlags = CP.getAllClassFlags(prm, primaryClassKey2);
-          const classFlagsByValue = CP.getClassFlagsByValue(prm, primaryClassKey2);
-          const bindClasseFlagsByValue = CP.getBindClassFlagsByValue(prm, primaryClassKey2);
-          if (_.isObject(prm.values)) {
-            var { options: options3, values } = CP.parseSelections(prm.values);
-            const currentClass2 = values.find((value2) => targetStates[kebabToCamel(value2)]);
-            const onChangeCB = (value2) => {
-              const updates = CP.getUpdatesFromStatesAndClasssFlags({
-                states: states2,
-                allStates: allStates2,
-                allClassFlags,
-                classFlags: classFlagsByValue[value2],
-                bindClassFlags: bindClasseFlagsByValue[value2]
-              });
-              console.log({ bindClasseFlagsByValue, updates });
-              set2(updates);
-              if (prm.effect) {
-                prm.effect(currentClass2, value2, targetStates, props2);
-              }
-            };
-            switch (prm.type) {
-              case "radio": {
-                rtn.push(/* @__PURE__ */ wp.element.createElement(RadioControl, { label: prm.label, onChange: onChangeCB, selected: currentClass2, options: options3 }));
-                break;
-              }
-              case "buttons": {
-                rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectButtons, { label: prm.label, onChange: onChangeCB, selected: currentClass2, options: options3 }));
-                break;
-              }
-              case "gridbuttons": {
-                rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectGridButtons, { label: prm.label, onChange: onChangeCB, selected: currentClass2, options: options3 }));
-                break;
-              }
-              default: {
-                rtn.push(/* @__PURE__ */ wp.element.createElement(SelectControl, { label: prm.label, onChange: onChangeCB, value: currentClass2, options: options3 }));
-              }
-            }
-            if (prm.sub) {
-              if (currentClass2 && prm.sub[currentClass2]) {
-                let sub = [];
-                prm.sub[currentClass2].forEach((prm2, index2) => {
-                  sub.push(/* @__PURE__ */ wp.element.createElement(Fragment2, { key: index2 }, el(SelectClass, { prm: prm2 })));
-                });
-                rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
-              }
-            }
-          } else {
-            rtn.push(
-              /* @__PURE__ */ wp.element.createElement(
-                CheckboxControl,
-                {
-                  label: prm.label,
-                  onChange: () => {
-                    if (targetStates[prm.values]) {
-                      const updates = CP.getUpdatesFromStatesAndClasssFlags({
-                        allStates: allStates2,
-                        allClassFlags
-                      });
-                      console.log({ allClassFlags, bindClasseFlagsByValue, updates });
-                      set2(updates);
-                    } else {
-                      const updates = CP.getUpdatesFromStatesAndClasssFlags({
-                        allStates: allStates2,
-                        allClassFlags,
-                        classFlags: classFlagsByValue[prm.values],
-                        bindClassFlags: bindClasseFlagsByValue[prm.values]
-                      });
-                      console.log({ allClassFlags, bindClasseFlagsByValue, updates });
-                      set2(updates);
-                    }
-                    if (prm.effect) {
-                      prm.effect(currentClass, value, targetStates, props2);
-                    }
-                  },
-                  checked: !!targetStates[prm.values]
-                }
-              )
-            );
-            if (prm.sub) {
-              if (targetStates[prm.values]) {
-                let sub = [];
-                prm.sub.forEach((prm2, index2) => {
-                  sub.push(/* @__PURE__ */ wp.element.createElement(Fragment2, { key: index2 }, el(SelectClass, { prm: prm2 })));
-                });
-                rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
-              }
-            }
-          }
-        }
-      }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, rtn.map((item3, index2) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index2 }, item3)));
-    }, []);
     if (!item || !selectiveClasses) {
       return false;
     }
-    return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanelContext.Provider, { value: { props, item, states, allStates, set, save, saveClasses, saveCss, primaryClassKey } }, selectiveClasses.map((prm, index2) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index2 }, el(SelectClass, { prm }))), props.children));
+    return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanelContext.Provider, { value: { props, item, states, allStates, set, save, saveClasses, saveCss, primaryClassKey } }, selectiveClasses.map((prm, index2) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index2 }, /* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm }))), props.children));
   };
 
   // ../blocks/_init/init/CP/components/AlignClassToolbar.jsx
@@ -3630,8 +3660,8 @@
       ["bottomLeft", "bottom", "bottomRight"]
     ];
     const values = _.flatten(rows);
-    const { label, help, itemsKey, index, disable } = props;
-    let value2 = itemsKey ? CP.getItemSelectiveClass(props, values) : CP.getSelectiveClass(props, values);
+    const { label, help, itemsKey: itemsKey2, index, disable } = props;
+    let value2 = itemsKey2 ? CP.getItemSelectiveClass(props, values) : CP.getSelectiveClass(props, values);
     return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("table", { className: "selectposition-" }, /* @__PURE__ */ wp.element.createElement("tbody", { className: "_body" }, rows.map((cols, index2) => /* @__PURE__ */ wp.element.createElement("tr", { className: "_row", key: index2 }, cols.map((col) => {
       var isChecked = value2 == col;
       if (disable && disable.includes(col)) {
@@ -3642,7 +3672,7 @@
         {
           className: clsx("_cell", { "is-active": isChecked }),
           onClick: () => {
-            if (itemsKey) {
+            if (itemsKey2) {
               CP.switchItemSelectiveClass(props, values, col, props.key);
             } else {
               CP.switchSelectiveClass(props, values, col, props.key);
@@ -3762,13 +3792,13 @@
 
   // ../blocks/_init/init/CP/components/EditItemsTable.jsx
   var EditItemsTable = (props) => {
-    const { set, attr, itemsKey = "items", isTemplate = false } = props;
+    const { set, attr, itemsKey: itemsKey2 = "items", isTemplate = false } = props;
     const { useCallback: useCallback4 } = wp.element;
     const { RichText } = wp.blockEditor;
     const classes = bem("cp-edititemstable");
-    const items2 = attr[itemsKey] || [];
+    const items2 = attr[itemsKey2] || [];
     const save = () => {
-      set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
+      set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
     };
     const getActiveColumns = useCallback4((props2) => {
       const columns2 = [];
@@ -3792,7 +3822,7 @@
     }, []);
     const columns = getActiveColumns(props);
     return /* @__PURE__ */ wp.element.createElement("table", { className: classes() }, /* @__PURE__ */ wp.element.createElement("thead", { className: classes.thead() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.thead.tr() }, columns.map((col, c) => /* @__PURE__ */ wp.element.createElement("th", { className: classes.thead.tr.th(), key: c }, col.label || col.key)), /* @__PURE__ */ wp.element.createElement("th", { className: classes.thead.tr.th() }))), /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.tbody() }, items2.map((item, index) => {
-      const propsForControl = { tag: "tr", set, itemsKey, items: items2, index };
+      const propsForControl = { tag: "tr", set, itemsKey: itemsKey2, items: items2, index };
       return /* @__PURE__ */ wp.element.createElement(
         "tr",
         {
@@ -3817,10 +3847,10 @@
               ));
             }
             case "image": {
-              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { attr, set, keys: { items: itemsKey, src: col.key, ...col.keys }, index, size: col.size || "vga", isTemplate }));
+              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { attr, set, keys: { items: itemsKey2, src: col.key, ...col.keys }, index, size: col.size || "vga", isTemplate }));
             }
             case "picture": {
-              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { index, attr, set, keys: { items: itemsKey, ...col.keys }, sizes: col.sizes, devices: col.devices, isTemplate }));
+              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { index, attr, set, keys: { items: itemsKey2, ...col.keys }, sizes: col.sizes, devices: col.devices, isTemplate }));
             }
             case "items": {
               col.columns.forEach((subCol) => {
@@ -4689,24 +4719,24 @@
   };
 
   // ../blocks/_init/init/CP/data/selectiveClasses.js
-  var { __ } = wp.i18n;
+  var { __: __3 } = wp.i18n;
   var selectiveClassesPresets = {
     customColorVars: {
       name: "customColorVars",
       input: "customColorVars",
-      label: __("\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", "catpow"),
+      label: __3("\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", "catpow"),
       vars: "vars"
     },
     isTemplate: {
       name: "template",
       input: "bool",
       key: "isTemplate",
-      label: __("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
+      label: __3("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
       sub: [
         {
           name: "loop",
           input: "bool",
-          label: __("\u30EB\u30FC\u30D7", "catpow"),
+          label: __3("\u30EB\u30FC\u30D7", "catpow"),
           key: "doLoop",
           sub: [
             {
@@ -4718,7 +4748,7 @@
             { name: "query", label: "query", input: "textarea", key: "query" },
             {
               name: "loopCount",
-              label: __("\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", "catpow"),
+              label: __3("\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", "catpow"),
               input: "range",
               key: "loopCount",
               min: 1,
@@ -4731,36 +4761,36 @@
     backgroundColor: {
       name: "backgroundColor",
       type: "buttons",
-      label: __("\u80CC\u666F\u8272", "catpow"),
+      label: __3("\u80CC\u666F\u8272", "catpow"),
       values: {
-        hasBackgroundColorNone: __("\u306A\u3057", "catpow"),
-        hasBackgroundColor: __("\u901A\u5E38", "catpow"),
-        hasBackgroundColorAlt: __("\u5F37\u8ABF", "catpow")
+        hasBackgroundColorNone: __3("\u306A\u3057", "catpow"),
+        hasBackgroundColor: __3("\u901A\u5E38", "catpow"),
+        hasBackgroundColorAlt: __3("\u5F37\u8ABF", "catpow")
       }
     },
     backgroundImage({ preset, vars = "vars", classKey, ...otherParams }) {
       return {
         name: "backgroundImage",
-        label: __("\u80CC\u666F\u753B\u50CF", "catpow"),
+        label: __3("\u80CC\u666F\u753B\u50CF", "catpow"),
         values: "hasBackgroundImage",
         classKey,
         sub: [
           {
             name: "fixed",
-            label: __("\u56FA\u5B9A", "catpow"),
+            label: __3("\u56FA\u5B9A", "catpow"),
             classKey,
             values: "hasBackgroundImageFixed"
           },
           {
             name: "image",
-            label: __("\u753B\u50CF", "catpow"),
+            label: __3("\u753B\u50CF", "catpow"),
             vars,
             key: "--cp-background-image",
             input: "image"
           },
           {
             name: "repeat",
-            label: __("\u7E70\u308A\u8FD4\u3057", "catpow"),
+            label: __3("\u7E70\u308A\u8FD4\u3057", "catpow"),
             vars,
             key: "--cp-background-image-repeat",
             input: "buttons",
@@ -4768,28 +4798,28 @@
           },
           {
             name: "position",
-            label: __("\u4F4D\u7F6E", "catpow"),
+            label: __3("\u4F4D\u7F6E", "catpow"),
             vars,
             key: "--cp-background-image-position",
             input: "position"
           },
           {
             name: "size",
-            label: __("\u30B5\u30A4\u30BA", "catpow"),
+            label: __3("\u30B5\u30A4\u30BA", "catpow"),
             vars,
             key: "--cp-background-image-size",
             input: "size"
           },
           {
             name: "blendmode",
-            label: __("\u30E2\u30FC\u30C9", "catpow"),
+            label: __3("\u30E2\u30FC\u30C9", "catpow"),
             vars,
             key: "--cp-background-image-blendmode",
             input: "blendmode"
           },
           {
             name: "opacity",
-            label: __("\u4E0D\u900F\u660E\u5EA6", "catpow"),
+            label: __3("\u4E0D\u900F\u660E\u5EA6", "catpow"),
             vars,
             key: "--cp-background-image-opacity",
             input: "range",
@@ -4804,19 +4834,19 @@
     backgroundPattern({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "backgroundPattern",
-        label: __("\u80CC\u666F\u30D1\u30BF\u30FC\u30F3", "catpow"),
+        label: __3("\u80CC\u666F\u30D1\u30BF\u30FC\u30F3", "catpow"),
         values: "hasBackgroundPattern",
         sub: [
           {
             name: "image",
-            label: __("\u753B\u50CF", "catpow"),
+            label: __3("\u753B\u50CF", "catpow"),
             vars,
             key: "--cp-background-pattern-image",
             input: "image"
           },
           {
             name: "repeat",
-            label: __("\u7E70\u308A\u8FD4\u3057", "catpow"),
+            label: __3("\u7E70\u308A\u8FD4\u3057", "catpow"),
             vars,
             key: "--cp-background-pattern-repeat",
             input: "buttons",
@@ -4824,14 +4854,14 @@
           },
           {
             name: "position",
-            label: __("\u4F4D\u7F6E", "catpow"),
+            label: __3("\u4F4D\u7F6E", "catpow"),
             vars,
             key: "--cp-background-pattern-position",
             input: "position"
           },
           {
             name: "size",
-            label: __("\u30B5\u30A4\u30BA", "catpow"),
+            label: __3("\u30B5\u30A4\u30BA", "catpow"),
             vars,
             key: "--cp-background-pattern-size",
             input: "size"
@@ -4843,57 +4873,57 @@
     textAlign: {
       name: "textAlign",
       type: "buttons",
-      label: __("\u30C6\u30AD\u30B9\u30C8\u63C3\u3048", "catpow"),
+      label: __3("\u30C6\u30AD\u30B9\u30C8\u63C3\u3048", "catpow"),
       values: {
-        hasTextAlignLeft: __("\u5DE6\u63C3\u3048", "catpow"),
-        hasTextAlignCenter: __("\u4E2D\u592E", "catpow"),
-        hasTextAlignRight: __("\u53F3\u63C3\u3048", "catpow")
+        hasTextAlignLeft: __3("\u5DE6\u63C3\u3048", "catpow"),
+        hasTextAlignCenter: __3("\u4E2D\u592E", "catpow"),
+        hasTextAlignRight: __3("\u53F3\u63C3\u3048", "catpow")
       }
     },
     verticalAlign: {
       name: "verticalAlign",
       type: "buttons",
-      label: __("\u5782\u76F4\u65B9\u5411\u63C3\u3048", "catpow"),
+      label: __3("\u5782\u76F4\u65B9\u5411\u63C3\u3048", "catpow"),
       values: {
-        hasVerticalAlignTop: __("\u4E0A\u63C3\u3048", "catpow"),
-        hasVerticalAlignMiddle: __("\u4E2D\u592E", "catpow"),
-        hasVerticalAlignBottom: __("\u4E0B\u63C3\u3048", "catpow")
+        hasVerticalAlignTop: __3("\u4E0A\u63C3\u3048", "catpow"),
+        hasVerticalAlignMiddle: __3("\u4E2D\u592E", "catpow"),
+        hasVerticalAlignBottom: __3("\u4E0B\u63C3\u3048", "catpow")
       }
     },
     fontSize: {
       name: "size",
       type: "buttons",
-      label: __("\u6587\u5B57\u30B5\u30A4\u30BA", "catpow"),
+      label: __3("\u6587\u5B57\u30B5\u30A4\u30BA", "catpow"),
       values: {
-        hasFontSizeLarge: __("\u5927", "catpow"),
-        hasFontSizeMiddle: __("\u4E2D", "catpow"),
-        hasFontSizeSmall: __("\u5C0F", "catpow")
+        hasFontSizeLarge: __3("\u5927", "catpow"),
+        hasFontSizeMiddle: __3("\u4E2D", "catpow"),
+        hasFontSizeSmall: __3("\u5C0F", "catpow")
       }
     },
     width: {
       name: "width",
       type: "buttons",
-      label: __("\u5E45", "catpow"),
+      label: __3("\u5E45", "catpow"),
       values: {
-        hasWidthFull: __("\u30D5\u30EB", "catpow"),
-        hasWidthWide: __("\u30EF\u30A4\u30C9", "catpow"),
-        hasWidthRegular: __("\u30EC\u30AE\u30E5\u30E9\u30FC", "catpow"),
-        hasWidthNarrow: __("\u30CA\u30ED\u30FC", "catpow")
+        hasWidthFull: __3("\u30D5\u30EB", "catpow"),
+        hasWidthWide: __3("\u30EF\u30A4\u30C9", "catpow"),
+        hasWidthRegular: __3("\u30EC\u30AE\u30E5\u30E9\u30FC", "catpow"),
+        hasWidthNarrow: __3("\u30CA\u30ED\u30FC", "catpow")
       }
     },
     size: {
       name: "size",
       type: "buttons",
-      label: __("\u30B5\u30A4\u30BA", "catpow"),
+      label: __3("\u30B5\u30A4\u30BA", "catpow"),
       values: {
-        isSizeLarge: __("\u5927", "catpow"),
-        isSizeMedium: __("\u4E2D", "catpow"),
-        isSizeSmall: __("\u5C0F", "catpow")
+        isSizeLarge: __3("\u5927", "catpow"),
+        isSizeMedium: __3("\u4E2D", "catpow"),
+        isSizeSmall: __3("\u5C0F", "catpow")
       }
     },
     itemSize: {
       name: "itemSize",
-      label: __("\u30B5\u30A4\u30BA", "catpow"),
+      label: __3("\u30B5\u30A4\u30BA", "catpow"),
       vars: "vars",
       key: "--cp-item-size",
       input: "range",
@@ -4906,28 +4936,28 @@
     colorScheme: {
       name: "colorScheme",
       type: "buttons",
-      label: __("\u914D\u8272", "catpow"),
+      label: __3("\u914D\u8272", "catpow"),
       values: {
-        hasColorSchemeInherit: __("\u7D99\u627F", "catpow"),
-        hasColorSchemeReverted: __("\u901A\u5E38", "catpow"),
-        hasColorSchemeInverted: __("\u53CD\u8EE2", "catpow")
+        hasColorSchemeInherit: __3("\u7D99\u627F", "catpow"),
+        hasColorSchemeReverted: __3("\u901A\u5E38", "catpow"),
+        hasColorSchemeInverted: __3("\u53CD\u8EE2", "catpow")
       }
     },
     clipPath({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "clipPath",
-        label: __("\u30AF\u30EA\u30C3\u30D7", "catpow"),
+        label: __3("\u30AF\u30EA\u30C3\u30D7", "catpow"),
         values: "hasClipPath",
         sub: [
           {
             name: "shape",
-            label: __("\u5F62\u72B6", "catpow"),
+            label: __3("\u5F62\u72B6", "catpow"),
             type: "buttons",
             values: {
-              hasClipShapeEllipse: __("\u6955\u5186", "catpow"),
-              hasClipShapeSlope: __("\u50BE\u659C", "catpow"),
-              hasClipShapeArrow: __("\u30A2\u30ED\u30FC", "catpow"),
-              hasClipShapeTail: __("\u30D5\u30AD\u30C0\u30B7", "catpow")
+              hasClipShapeEllipse: __3("\u6955\u5186", "catpow"),
+              hasClipShapeSlope: __3("\u50BE\u659C", "catpow"),
+              hasClipShapeArrow: __3("\u30A2\u30ED\u30FC", "catpow"),
+              hasClipShapeTail: __3("\u30D5\u30AD\u30C0\u30B7", "catpow")
             },
             sub: {
               hasClipShapeEllipse: [
@@ -4935,14 +4965,14 @@
                   name: "direction",
                   type: "buttons",
                   values: {
-                    hasClipShapeBoth: __("\u4E21\u65B9", "catpow"),
-                    hasClipShapeUpper: __("\u4E0A", "catpow"),
-                    hasClipShapeBelow: __("\u4E0B", "catpow")
+                    hasClipShapeBoth: __3("\u4E21\u65B9", "catpow"),
+                    hasClipShapeUpper: __3("\u4E0A", "catpow"),
+                    hasClipShapeBelow: __3("\u4E0B", "catpow")
                   }
                 },
                 {
                   name: "amount",
-                  label: __("\u91CF", "catpow"),
+                  label: __3("\u91CF", "catpow"),
                   input: "range",
                   vars,
                   key: "--cp-clip-shape-amount",
@@ -4955,23 +4985,23 @@
                   name: "uppper",
                   type: "buttons",
                   values: {
-                    hasClipShapeUpperNone: __("\u306A\u3057", "catpow"),
-                    hasClipShapeUpperLeft: __("\u5DE6", "catpow"),
-                    hasClipShapeUpperRight: __("\u53F3", "catpow")
+                    hasClipShapeUpperNone: __3("\u306A\u3057", "catpow"),
+                    hasClipShapeUpperLeft: __3("\u5DE6", "catpow"),
+                    hasClipShapeUpperRight: __3("\u53F3", "catpow")
                   }
                 },
                 {
                   name: "below",
                   type: "buttons",
                   values: {
-                    hasClipShapeBelowNone: __("\u306A\u3057", "catpow"),
-                    hasClipShapeBelowLeft: __("\u5DE6", "catpow"),
-                    hasClipShapeBelowRight: __("\u53F3", "catpow")
+                    hasClipShapeBelowNone: __3("\u306A\u3057", "catpow"),
+                    hasClipShapeBelowLeft: __3("\u5DE6", "catpow"),
+                    hasClipShapeBelowRight: __3("\u53F3", "catpow")
                   }
                 },
                 {
                   name: "upperHeight",
-                  label: __("\u4E0A\u9AD8\u3055", "catpow"),
+                  label: __3("\u4E0A\u9AD8\u3055", "catpow"),
                   input: "range",
                   vars,
                   key: "--cp-clip-shape-upper-height",
@@ -4980,7 +5010,7 @@
                 },
                 {
                   name: "belowHeight",
-                  label: __("\u4E0B\u9AD8\u3055", "catpow"),
+                  label: __3("\u4E0B\u9AD8\u3055", "catpow"),
                   input: "range",
                   vars,
                   key: "--cp-clip-shape-below-height",
@@ -4993,23 +5023,23 @@
                   name: "uppper",
                   type: "buttons",
                   values: {
-                    hasClipShapeUpperNone: __("\u306A\u3057", "catpow"),
-                    hasClipShapeUpperIn: __("\u5185", "catpow"),
-                    hasClipShapeUpperOut: __("\u5916", "catpow")
+                    hasClipShapeUpperNone: __3("\u306A\u3057", "catpow"),
+                    hasClipShapeUpperIn: __3("\u5185", "catpow"),
+                    hasClipShapeUpperOut: __3("\u5916", "catpow")
                   }
                 },
                 {
                   name: "below",
                   type: "buttons",
                   values: {
-                    hasClipShapeBelowNone: __("\u306A\u3057", "catpow"),
-                    hasClipShapeBelowIn: __("\u5185", "catpow"),
-                    hasClipShapeBelowOut: __("\u5916", "catpow")
+                    hasClipShapeBelowNone: __3("\u306A\u3057", "catpow"),
+                    hasClipShapeBelowIn: __3("\u5185", "catpow"),
+                    hasClipShapeBelowOut: __3("\u5916", "catpow")
                   }
                 },
                 {
                   name: "upperHeight",
-                  label: __("\u4E0A\u9AD8\u3055", "catpow"),
+                  label: __3("\u4E0A\u9AD8\u3055", "catpow"),
                   input: "range",
                   vars,
                   key: "--cp-clip-shape-upper-height",
@@ -5018,7 +5048,7 @@
                 },
                 {
                   name: "belowHeight",
-                  label: __("\u4E0B\u9AD8\u3055", "catpow"),
+                  label: __3("\u4E0B\u9AD8\u3055", "catpow"),
                   input: "range",
                   vars,
                   key: "--cp-clip-shape-below-height",
@@ -5031,23 +5061,23 @@
                   name: "uppper",
                   type: "buttons",
                   values: {
-                    hasClipShapeUpperNone: __("\u306A\u3057", "catpow"),
-                    hasClipShapeUpperIn: __("\u5185", "catpow"),
-                    hasClipShapeUpperOut: __("\u5916", "catpow")
+                    hasClipShapeUpperNone: __3("\u306A\u3057", "catpow"),
+                    hasClipShapeUpperIn: __3("\u5185", "catpow"),
+                    hasClipShapeUpperOut: __3("\u5916", "catpow")
                   }
                 },
                 {
                   name: "below",
                   type: "buttons",
                   values: {
-                    hasClipShapeBelowNone: __("\u306A\u3057", "catpow"),
-                    hasClipShapeBelowIn: __("\u5185", "catpow"),
-                    hasClipShapeBelowOut: __("\u5916", "catpow")
+                    hasClipShapeBelowNone: __3("\u306A\u3057", "catpow"),
+                    hasClipShapeBelowIn: __3("\u5185", "catpow"),
+                    hasClipShapeBelowOut: __3("\u5916", "catpow")
                   }
                 },
                 {
                   name: "upperWidth",
-                  label: __("\u4E0A\u5E45", "catpow"),
+                  label: __3("\u4E0A\u5E45", "catpow"),
                   input: "range",
                   vars,
                   key: "--cp-clip-shape-upper-width",
@@ -5056,7 +5086,7 @@
                 },
                 {
                   name: "upperHeight",
-                  label: __("\u4E0A\u9AD8\u3055", "catpow"),
+                  label: __3("\u4E0A\u9AD8\u3055", "catpow"),
                   input: "range",
                   vars,
                   key: "--cp-clip-shape-upper-height",
@@ -5065,7 +5095,7 @@
                 },
                 {
                   name: "belowWidth",
-                  label: __("\u4E0B\u5E45", "catpow"),
+                  label: __3("\u4E0B\u5E45", "catpow"),
                   input: "range",
                   vars,
                   key: "--cp-clip-shape-below-width",
@@ -5074,7 +5104,7 @@
                 },
                 {
                   name: "belowHeight",
-                  label: __("\u4E0B\u9AD8\u3055", "catpow"),
+                  label: __3("\u4E0B\u9AD8\u3055", "catpow"),
                   input: "range",
                   vars,
                   key: "--cp-clip-shape-below-height",
@@ -5091,12 +5121,12 @@
     customPadding({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "customPadding",
-        label: __("\u4F59\u767D", "catpow"),
+        label: __3("\u4F59\u767D", "catpow"),
         values: "hasCustomPadding",
         sub: [
           {
             name: "paddingTop",
-            label: __("\u4E0A\u4F59\u767D", "catpow"),
+            label: __3("\u4E0A\u4F59\u767D", "catpow"),
             input: "range",
             vars,
             key: "--cp-padding-top",
@@ -5107,7 +5137,7 @@
           },
           {
             name: "paddingBottom",
-            label: __("\u4E0B\u4F59\u767D", "catpow"),
+            label: __3("\u4E0B\u4F59\u767D", "catpow"),
             input: "range",
             vars,
             key: "--cp-padding-bottom",
@@ -5118,7 +5148,7 @@
           },
           {
             name: "paddingInline",
-            label: __("\u6A2A\u4F59\u767D", "catpow"),
+            label: __3("\u6A2A\u4F59\u767D", "catpow"),
             input: "range",
             vars,
             key: "--cp-padding-inline",
@@ -5134,12 +5164,12 @@
     customMargin({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "customMargin",
-        label: __("\u9593\u9694", "catpow"),
+        label: __3("\u9593\u9694", "catpow"),
         values: "hasCustomMargin",
         sub: [
           {
             name: "marginTop",
-            label: __("\u4E0A\u9593\u9694", "catpow"),
+            label: __3("\u4E0A\u9593\u9694", "catpow"),
             input: "range",
             vars,
             key: "--cp-margin-top",
@@ -5150,7 +5180,7 @@
           },
           {
             name: "marginBottom",
-            label: __("\u4E0B\u9593\u9694", "catpow"),
+            label: __3("\u4E0B\u9593\u9694", "catpow"),
             input: "range",
             vars,
             key: "--cp-margin-bottom",
@@ -5166,12 +5196,12 @@
     customContentWidth({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "customContentWidth",
-        label: __("\u30AB\u30B9\u30BF\u30E0\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
+        label: __3("\u30AB\u30B9\u30BF\u30E0\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
         values: "hasCustomContentWidth",
         sub: [
           {
             name: "contentWidth",
-            label: __("\u5E45", "catpow"),
+            label: __3("\u5E45", "catpow"),
             input: "range",
             vars,
             key: "--cp-custom-content-width",
@@ -5181,7 +5211,7 @@
           },
           {
             name: "contentMaxWidth",
-            label: __("\u6700\u5927\u5E45", "catpow"),
+            label: __3("\u6700\u5927\u5E45", "catpow"),
             input: "range",
             vars,
             key: "--cp-custom-content-max-width",
@@ -5197,7 +5227,7 @@
     contentWidth({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "contentWidth",
-        label: __("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
+        label: __3("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
         values: "hasContentWidth",
         sub: [{ preset: "customContentWidth", vars }],
         ...otherParams
@@ -5206,12 +5236,12 @@
     customBorderRadius({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "cusotomRadius",
-        label: __("\u89D2\u4E38", "catpow"),
+        label: __3("\u89D2\u4E38", "catpow"),
         values: "hasCustomBorderRadius",
         sub: [
           {
             name: "borderRadius",
-            label: __("\u5F84", "catpow"),
+            label: __3("\u5F84", "catpow"),
             input: "range",
             vars,
             key: "--cp-border-radius",
@@ -5577,8 +5607,8 @@
   var selectNextItem = (tag) => {
     window.getSelection().anchorNode.parentNode.closest(tag).nextElementSibling.querySelector("[contentEditable]").focus();
   };
-  var saveItem = ({ items: items2, itemsKey, set }) => {
-    set({ [itemsKey || "items"]: JSON.parse(JSON.stringify(items2)) });
+  var saveItem = ({ items: items2, itemsKey: itemsKey2, set }) => {
+    set({ [itemsKey2 || "items"]: JSON.parse(JSON.stringify(items2)) });
   };
   var deleteItem = (props) => {
     var { items: items2, index } = props;
@@ -5640,9 +5670,9 @@
       }
     }
   };
-  var switchItemColor = ({ items: items2, index, set }, color, itemsKey) => {
-    if (itemsKey === void 0) {
-      itemsKey = "items";
+  var switchItemColor = ({ items: items2, index, set }, color, itemsKey2) => {
+    if (itemsKey2 === void 0) {
+      itemsKey2 = "items";
     }
     let classArray = (items2[index].classes || "").split(" ");
     let i = classArray.findIndex((cls) => cls.slice(0, 5) === "color");
@@ -5658,7 +5688,7 @@
       }
     }
     items2[index].classes = classArray.join(" ");
-    set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
+    set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
   };
   var getItemColor = ({ items: items2, index }) => {
     let c = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 5) === "color");
@@ -5667,9 +5697,9 @@
     }
     return parseInt(c.slice(5));
   };
-  var switchItemPattern = ({ items: items2, index, set }, pattern, itemsKey) => {
-    if (itemsKey === void 0) {
-      itemsKey = "items";
+  var switchItemPattern = ({ items: items2, index, set }, pattern, itemsKey2) => {
+    if (itemsKey2 === void 0) {
+      itemsKey2 = "items";
     }
     let classArray = (items2[index].classes || "").split(" ");
     let i = classArray.findIndex((cls) => cls.slice(0, 7) === "pattern");
@@ -5685,7 +5715,7 @@
       }
     }
     items2[index].classes = classArray.join(" ");
-    set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
+    set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
   };
   var getItemPattern = ({ items: items2, index }) => {
     let p = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 7) === "pattern");
@@ -5694,9 +5724,9 @@
     }
     return parseInt(p.slice(7));
   };
-  var switchItemSelectiveClass = ({ items: items2, index, set }, values, value2, itemsKey) => {
-    if (itemsKey === void 0) {
-      itemsKey = "items";
+  var switchItemSelectiveClass = ({ items: items2, index, set }, values, value2, itemsKey2) => {
+    if (itemsKey2 === void 0) {
+      itemsKey2 = "items";
     }
     let classArray = (items2[index].classes || "").split(" ");
     if (!Array.isArray(values) && _.isObject(values)) {
@@ -5709,7 +5739,7 @@
       classArray.push(value2);
     }
     items2[index].classes = classArray.join(" ");
-    set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
+    set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
   };
   var getItemSelectiveClass = ({ items: items2, index }, values) => {
     if (!items2[index].classes) {
@@ -5721,9 +5751,9 @@
     }
     return _.intersection(classArray, values).shift();
   };
-  var toggleItemClass = ({ items: items2, index, set }, value2, itemsKey) => {
-    if (itemsKey === void 0) {
-      itemsKey = "items";
+  var toggleItemClass = ({ items: items2, index, set }, value2, itemsKey2) => {
+    if (itemsKey2 === void 0) {
+      itemsKey2 = "items";
     }
     let classArray = (items2[index].classes || "").split(" ");
     let i = classArray.indexOf(value2);
@@ -5733,7 +5763,7 @@
       classArray.splice(i, 1);
     }
     items2[index].classes = classArray.join(" ");
-    set({ [itemsKey]: JSON.parse(JSON.stringify(items2)) });
+    set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
   };
   var hasItemClass = ({ items: items2, index }, value2) => {
     let classArray = (items2[index].classes || "").split(" ");
@@ -5945,18 +5975,18 @@
   };
   var useManageStyleData = (props, csss) => {
     const { attributes, className, setAttributes } = props;
-    const { anchor, prevAnchor, styleDatas } = attributes;
+    const { anchor, prevAnchor, styleDatas: styleDatas2 } = attributes;
     const { useEffect: useEffect6 } = wp.element;
     useEffect6(() => {
       if (!anchor) {
         setAttributes({ anchor: "s" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
       }
-      if (void 0 === styleDatas) {
-        const styleDatas2 = {};
+      if (void 0 === styleDatas2) {
+        const styleDatas3 = {};
         csss.forEach((key) => {
-          styleDatas2[key] = CP.parseStyleCodeWithMediaQuery(attributes[key]);
+          styleDatas3[key] = CP.parseStyleCodeWithMediaQuery(attributes[key]);
         });
-        setAttributes({ styleDatas: styleDatas2 });
+        setAttributes({ styleDatas: styleDatas3 });
       }
     }, []);
     useEffect6(() => {
@@ -6454,7 +6484,7 @@
   );
 
   // ../blocks/_init/init/format.jsx
-  var { __: __2 } = wp.i18n;
+  var { __: __4 } = wp.i18n;
   var { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
   var { Popover, BaseControle, TextControl, RangeControl, Card, CardBody, ToolbarGroup } = wp.components;
   var { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useReducer: useReducer2, useEffect: useEffect5 } = wp.element;
@@ -6469,10 +6499,10 @@
           return onChange(toggleFormat(value2, { type: "catpow/ruby" }));
         }
         if (wp.richText.isCollapsed(value2)) {
-          alert(__2("\u30EB\u30D3\u3092\u3064\u3051\u305F\u3044\u30C6\u30AD\u30B9\u30C8\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"));
+          alert(__4("\u30EB\u30D3\u3092\u3064\u3051\u305F\u3044\u30C6\u30AD\u30B9\u30C8\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"));
           return;
         }
-        let rt = prompt(__2("\u30EB\u30D3\u3092\u5165\u529B"));
+        let rt = prompt(__4("\u30EB\u30D3\u3092\u5165\u529B"));
         if (rt === null) {
           return;
         }
