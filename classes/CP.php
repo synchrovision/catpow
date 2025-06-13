@@ -442,6 +442,19 @@ class CP{
 		wp_enqueue_script($src);
 		return true;
 	}
+	public static function register_script_module($src=false,$deps=array(),$flag=0733,$ver=false,$in_footer=true){
+		static $missed=[];
+		if(isset($missed[$src])){return false;}
+		if(empty($file=self::get_file_path_url($src,$flag))){$missed[$src]=1;return false;}
+		if(empty($ver)){$ver=filemtime(key($file));}
+		wp_register_script_module($src,reset($file),$deps,$ver,$in_footer);
+		return true;
+	}
+	public static function enqueue_script_module($src=false,$deps=array(),$flag=0733,$ver=false,$in_footer=true){
+		if(!self::register_script_module($src,$deps,$flag,$ver,$in_footer)){return false;}
+		wp_enqueue_script_module($src);
+		return true;
+	}
 	public static function set_script_translations($src){
 		if(current_user_can('edit_themes')){util\i18n::make_json_for_script($src);}
 		wp_set_script_translations($src,'catpow',WP_PLUGIN_DIR.'/catpow/languages');
