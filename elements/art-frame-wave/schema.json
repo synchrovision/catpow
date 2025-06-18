@@ -1,8 +1,8 @@
 {
 	"properties": {
-		"dx": { "type": "integer", "minimum": 4, "maximum": 200, "default": 60 },
-		"dy": { "type": "integer", "minimum": 4, "maximum": 200, "default": 30 },
-		"r": { "type": "integer", "minimum": 0, "maximum": 200, "default": 100 },
+		"dx": { "type": "integer", "minimum": 5, "maximum": 800, "multipleOf": 5, "default": 60 },
+		"dy": { "type": "integer", "minimum": 5, "maximum": 200, "multipleOf": 5, "default": 30 },
+		"r": { "type": "integer", "minimum": 0, "maximum": 200, "multipleOf": 5, "default": 100 },
 		"direction": {
 			"type": "string",
 			"enum": ["top", "bottom", "both"],
