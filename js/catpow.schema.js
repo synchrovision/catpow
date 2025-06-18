@@ -771,6 +771,17 @@
         targetSchema[key2] = null;
       }
     }
+    if (schema2.multipleOf != null) {
+      if (targetSchema.multipleOf != null) {
+        targetSchema.multipleOf = Math.max(targetSchema.multipleOf, schema2.multipleOf);
+      } else {
+        if (initialize) {
+          targetSchema.multipleOf = schema2.multipleOf;
+        }
+      }
+    } else if (extend && targetSchema.multipleOf != null) {
+      targetSchema.multipleOf = null;
+    }
     if (schema2.required != null) {
       if (extend) {
         if (targetSchema.required !== null) {
