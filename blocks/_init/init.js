@@ -2754,7 +2754,7 @@
               if (prm.sub[JSON.parse(props.attr[prm.json])[prm.key]]) {
                 let sub = [];
                 prm.sub[JSON.parse(props.attr[prm.json])[prm.key]].forEach((prm2) => {
-                  sub.push(el(SelectClass, { prm: prm2 }));
+                  sub.push(/* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm: prm2 }));
                 });
                 rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
               }
@@ -2766,7 +2766,7 @@
               if (JSON.parse(props.attr[prm.json])[prm.key]) {
                 let sub = [];
                 prm.sub.forEach((prm2) => {
-                  sub.push(el(SelectClass, { prm: prm2 }));
+                  sub.push(/* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm: prm2 }));
                 });
                 rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
               }
@@ -2794,7 +2794,7 @@
           if (currentValue && prm.sub[currentValue]) {
             let sub = [];
             prm.sub[currentValue].forEach((prm2) => {
-              sub.push(el(SelectClass, { prm: prm2 }));
+              sub.push(/* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm: prm2 }));
             });
             rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
           }
@@ -2816,7 +2816,7 @@
           if (CP.getJsonValue(props, prm.json, prm.key)) {
             let sub = [];
             prm.sub.forEach((prm2) => {
-              sub.push(el(SelectClass, { prm: prm2 }));
+              sub.push(/* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm: prm2 }));
             });
             rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
           }
@@ -3291,7 +3291,7 @@
             if (prm.sub && prm.sub[item[prm.key]]) {
               let sub = [];
               prm.sub[item[prm.key]].forEach((prm2) => {
-                sub.push(el(SelectClass, { prm: prm2 }));
+                sub.push(/* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm: prm2 }));
               });
               rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
             }
@@ -3301,7 +3301,7 @@
             if (prm.sub && item[prm.key]) {
               let sub = [];
               prm.sub.forEach((prm2) => {
-                sub.push(el(SelectClass, { prm: prm2 }));
+                sub.push(/* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm: prm2 }));
               });
               rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
             }

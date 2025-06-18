@@ -170,7 +170,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 						if (prm.sub[JSON.parse(props.attr[prm.json])[prm.key]]) {
 							let sub = [];
 							prm.sub[JSON.parse(props.attr[prm.json])[prm.key]].forEach((prm) => {
-								sub.push(el(SelectClass, { prm }));
+								sub.push(<SelectClassPanelBlock prm={prm} />);
 							});
 							rtn.push(<div className="sub">{sub}</div>);
 						}
@@ -182,7 +182,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 						if (JSON.parse(props.attr[prm.json])[prm.key]) {
 							let sub = [];
 							prm.sub.forEach((prm) => {
-								sub.push(el(SelectClass, { prm }));
+								sub.push(<SelectClassPanelBlock prm={prm} />);
 							});
 							rtn.push(<div className="sub">{sub}</div>);
 						}
@@ -207,7 +207,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 				if (currentValue && prm.sub[currentValue]) {
 					let sub = [];
 					prm.sub[currentValue].forEach((prm) => {
-						sub.push(el(SelectClass, { prm }));
+						sub.push(<SelectClassPanelBlock prm={prm} />);
 					});
 					rtn.push(<div className="sub">{sub}</div>);
 				}
@@ -226,7 +226,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 				if (CP.getJsonValue(props, prm.json, prm.key)) {
 					let sub = [];
 					prm.sub.forEach((prm) => {
-						sub.push(el(SelectClass, { prm }));
+						sub.push(<SelectClassPanelBlock prm={prm} />);
 					});
 					rtn.push(<div className="sub">{sub}</div>);
 				}
@@ -650,7 +650,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					if (prm.sub && prm.sub[item[prm.key]]) {
 						let sub = [];
 						prm.sub[item[prm.key]].forEach((prm) => {
-							sub.push(el(SelectClass, { prm }));
+							sub.push(<SelectClassPanelBlock prm={prm} />);
 						});
 						rtn.push(<div className="sub">{sub}</div>);
 					}
@@ -660,7 +660,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					if (prm.sub && item[prm.key]) {
 						let sub = [];
 						prm.sub.forEach((prm) => {
-							sub.push(el(SelectClass, { prm }));
+							sub.push(<SelectClassPanelBlock prm={prm} />);
 						});
 						rtn.push(<div className="sub">{sub}</div>);
 					}
