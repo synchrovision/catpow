@@ -625,6 +625,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 							schema={prm.schema}
 							json={item[prm.key]}
 							autoSave={100}
+							showHeader={false}
 							debug={prm.debug}
 							onChange={(val) => {
 								val = { ...val };

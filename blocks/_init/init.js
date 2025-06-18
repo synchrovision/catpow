@@ -1831,6 +1831,9 @@
   init_react();
   var { useEffect: useEffect4 } = react_default;
 
+  // modules/src/hooks/useChangeEffect.jsx
+  init_react();
+
   // modules/src/component/Loop.jsx
   init_react();
 
@@ -3262,6 +3265,7 @@
                   schema: prm.schema,
                   json: item[prm.key],
                   autoSave: 100,
+                  showHeader: false,
                   debug: prm.debug,
                   onChange: (val) => {
                     val = { ...val };
