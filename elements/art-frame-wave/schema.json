@@ -1,0 +1,12 @@
+{
+	"properties": {
+		"dx": { "type": "integer", "minimum": 4, "maximum": 200, "default": 60 },
+		"dy": { "type": "integer", "minimum": 4, "maximum": 200, "default": 30 },
+		"r": { "type": "integer", "minimum": 0, "maximum": 200, "default": 100 },
+		"direction": {
+			"type": "string",
+			"enum": ["top", "bottom", "both"],
+			"default": "both"
+		}
+	}
+}
