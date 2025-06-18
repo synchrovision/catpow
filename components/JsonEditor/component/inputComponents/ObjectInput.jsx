@@ -27,7 +27,7 @@ export const ObjectInput = (props) => {
 									const schema = agent.properties[name].getMergedSchemaForInput();
 									return (
 										<div className={classes.block.item()} key={name}>
-											<div className={classes.block.item.title()}>{schema.title || schema.key}</div>
+											<div className={classes.block.item.title()}>{schema.title || schema.key || name}</div>
 											<div className={classes.block.item.body()}>
 												<Input agent={agent.properties[name]} level={level + 1} layout={layout} size={size} />
 											</div>

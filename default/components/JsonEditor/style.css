@@ -1,9 +1,10 @@
 .cp-jsoneditor {
-  font-size: 1rem;
+  container-type: inline-size;
+  font-size: 0.875rem;
   font-family: var(--cp-fonts-t);
 }
 .cp-jsoneditor-editor {
-  padding: 1.25rem;
+  padding: 0.25rem;
 }
 .cp-jsoneditor-editor__body {
   margin: auto;
@@ -51,7 +52,7 @@
   filter: grayscale(100%);
 }
 .cp-jsoneditor-editor__body-contents {
-  padding: 1.25rem;
+  padding: 0.5rem;
   overflow-x: auto;
 }
 .cp-jsoneditor-input {
@@ -113,7 +114,15 @@
   cursor: pointer;
 }
 .cp-jsoneditor-input-objectinput-body {
-  padding: 1em;
+  padding: 0.25em;
+}
+.cp-jsoneditor-input-objectinput-block {
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+  grid-template-columns: 1fr;
+  grid-gap: 1em;
 }
 .cp-jsoneditor-input-objectinput-block.is-level-0 > .cp-jsoneditor-input-objectinput-block-item > .cp-jsoneditor-input-objectinput-block-item-title {
   padding: 0.25em 1.25em;

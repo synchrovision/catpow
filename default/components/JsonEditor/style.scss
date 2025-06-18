@@ -1,9 +1,10 @@
 @import 'admin_style_config.scss';
 
 .cp-jsoneditor{
-	@include txt((p:16,f:t));
+	@include bnd((ctn:i));
+	@include txt((p:14,f:t));
 	&-editor{
-		@include bnd((pd:20));
+		@include bnd((pd:4));
 		&__body{
 			@include bnd((mg:a));
 			@include bg((c:b));
@@ -32,7 +33,7 @@
 				}
 			}
 			&-contents{
-				@include bnd((pd:20,ox:a));
+				@include bnd((pd:8,ox:a));
 			}
 		}
 	}
@@ -88,12 +89,13 @@
 				@include usr((c:p));
 			}
 			&-body{
-				@include bnd((pd:1em));
+				@include bnd((pd:.25em));
 			}
 			&-table{
 				
 			}
 			&-block{
+				@include grd((tc:1fr,g:1em));
 				&.is-level-0>&-item>&-item{
 					&-title{
 						@include bnd((pd:.25em 1.25em,mgb:.5em));

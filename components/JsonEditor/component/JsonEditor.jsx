@@ -1,13 +1,13 @@
 ﻿import { ObjectInput } from "./inputComponents/ObjectInput.jsx";
 import { Input } from "./inputComponents/Input.jsx";
-import { bem } from "catpow/util";
-
+import { Bem } from "catpow/component";
+import { useThrottle } from "catpow/hooks";
+import clsx from "clsx";
 export const DataContext = wp.element.createContext({});
 
 export const JsonEditor = (props) => {
 	const { useState, useCallback, useMemo, useEffect, useRef, useReducer } = wp.element;
-	const { className = "cp-jsoneditor-editor", title = "JsonEditor", schema, debug = false, onChange, autoSave = false, children: getAdditionalInputComponent } = props;
-	const classes = bem(className);
+	const { className = "cp-jsoneditor-editor", title = "JsonEditor", schema, debug = false, onChange, autoSave = false, showHeader = true, children: getAdditionalInputComponent } = props;
 
 	const [hasChange, setHasChange] = useState(false);
 	const json = useMemo(() => {
@@ -24,46 +24,63 @@ export const JsonEditor = (props) => {
 		return json;
 	}, []);
 
-	const save = useCallback(() => {
-		onChange(typeof props.json === "object" ? json : JSON.stringify(json));
-		setHasChange(false);
-	}, [json, setHasChange, onChange]);
+	const rootAgent = useMemo(() => {
+		const rootAgent = Catpow.schema(schema, { debug }).createAgent(json);
+		let timer,
+			isHold = false;
+		rootAgent.on("change", (e) => {
+			setHasChange(true);
+		});
+		rootAgent.on("update", (e) => {
+			if (autoSave) {
+				if (!isHold) {
+					save();
+					isHold = true;
+					setTimeout(
+						() => {
+							isHold = false;
+						},
+						autoSave === true ? 1000 : autoSave
+					);
+				} else {
+					clearTimeout(timer);
+					timer = setTimeout(save, autoSave === true ? 1000 : autoSave);
+				}
+			}
+		});
+		return rootAgent;
+	}, []);
 
-	useEffect(() => {
-		if (hasChange && autoSave) {
-			const timer = setTimeout(save, 1000);
-			return () => clearTimeout(timer);
-		}
-	}, [hasChange]);
+	const save = useCallback(() => {
+		onChange(typeof props.json === "object" ? rootAgent.value : JSON.stringify(rootAgent.value));
+		setHasChange(false);
+	}, [rootAgent, setHasChange, onChange]);
 
 	const data = useMemo(() => {
 		return { getAdditionalInputComponent };
 	}, [getAdditionalInputComponent]);
 
-	const rootAgent = useMemo(() => {
-		const rootAgent = Catpow.schema(schema, { debug }).createAgent(json);
-		rootAgent.on("change", (e) => {
-			setHasChange(true);
-		});
-		return rootAgent;
-	}, []);
 	return (
 		<DataContext.Provider value={data}>
-			<div className={classes()}>
-				<div className={classes._body()}>
-					<div className={classes._body.header()}>
-						<div className={classes._body.header.title()}>{title}</div>
-						<div className={classes._body.header.controls()}>
-							<div className={classes._body.header.controls.save({ "is-active": hasChange })} onClick={() => save()}>
-								Save
+			<Bem>
+				<div className={className}>
+					<div className="_body">
+						{showHeader && (
+							<div className="_header">
+								<div className="_title">{title}</div>
+								<div className="_controls">
+									<div className={clsx("_save", { "is-active": hasChange })} onClick={() => save()}>
+										Save
+									</div>
+								</div>
 							</div>
+						)}
+						<div className="_contents">
+							<ObjectInput agent={rootAgent} />
 						</div>
 					</div>
-					<div className={classes._body.contents()}>
-						<ObjectInput agent={rootAgent} />
-					</div>
 				</div>
-			</div>
+			</Bem>
 		</DataContext.Provider>
 	);
 };
