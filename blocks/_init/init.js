@@ -1009,7 +1009,7 @@
   var classNamesToFlags = (classNames) => classNames && classNames.split(" ").map(kebabToCamel).reduce((p, c) => {
     p[c] = true;
     return p;
-  }, {});
+  }, {}) || {};
   var flagsToClassNames = (flags) => flags && Object.keys(flags).filter((f) => flags[f]).map(camelToKebab).join(" ");
   var filterFlags = (flags, callback) => {
     Object.keys(flags).forEach((key) => {
@@ -3250,17 +3250,22 @@
             );
             break;
           }
-          case "config": {
+          case "json": {
             if (prm.label) {
               rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
             }
             rtn.push(
               /* @__PURE__ */ wp.element.createElement(
-                CP.BlockConfigInput,
+                Catpow.JsonEditor,
                 {
-                  param: prm,
-                  value: item[prm.key],
+                  title: prm.label,
+                  schema: prm.schema,
+                  json: item[prm.key],
+                  autoSave: 100,
+                  debug: prm.debug,
                   onChange: (val) => {
+                    val = { ...val };
+                    console.log(val);
                     if (prm.filter) {
                       val = prm.filter(val, states, props);
                     }

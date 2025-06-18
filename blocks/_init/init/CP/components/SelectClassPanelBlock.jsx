@@ -615,15 +615,20 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					);
 					break;
 				}
-				case "config": {
+				case "json": {
 					if (prm.label) {
 						rtn.push(<h5>{prm.label}</h5>);
 					}
 					rtn.push(
-						<CP.BlockConfigInput
-							param={prm}
-							value={item[prm.key]}
+						<Catpow.JsonEditor
+							title={prm.label}
+							schema={prm.schema}
+							json={item[prm.key]}
+							autoSave={100}
+							debug={prm.debug}
 							onChange={(val) => {
+								val = { ...val };
+								console.log(val);
 								if (prm.filter) {
 									val = prm.filter(val, states, props);
 								}
