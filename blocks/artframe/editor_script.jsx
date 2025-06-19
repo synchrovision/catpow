@@ -30,7 +30,7 @@ wp.blocks.registerBlockType("catpow/artframe", {
 		}, []);
 
 		useChangeEffect(() => {
-			setAttributes({ params: artframeSelectiveClasses.sub[Element][0].default });
+			setAttributes({ params: { ...artframeSelectiveClasses.sub[Element][0].default, ...params } });
 		}, [Element]);
 
 		return (

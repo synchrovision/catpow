@@ -68,7 +68,7 @@
         return selectiveClasses2;
       }, []);
       useChangeEffect(() => {
-        setAttributes({ params: artframeSelectiveClasses.sub[Element2][0].default });
+        setAttributes({ params: { ...artframeSelectiveClasses.sub[Element2][0].default, ...params } });
       }, [Element2]);
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(Element2, { ...params }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph", { content: CP.dummyText.text }]], templateLock: false })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses })));
     },
