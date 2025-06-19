@@ -902,7 +902,7 @@
         }
       });
       return rootAgent2;
-    }, []);
+    }, [schema]);
     const save = useCallback3(() => {
       onChange(typeof props.json === "object" ? rootAgent.value : JSON.stringify(rootAgent.value));
       setHasChange(false);

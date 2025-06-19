@@ -49,7 +49,7 @@ export const JsonEditor = (props) => {
 			}
 		});
 		return rootAgent;
-	}, []);
+	}, [schema]);
 
 	const save = useCallback(() => {
 		onChange(typeof props.json === "object" ? rootAgent.value : JSON.stringify(rootAgent.value));
