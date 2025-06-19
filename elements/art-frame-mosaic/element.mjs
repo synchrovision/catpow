@@ -94,8 +94,8 @@ var srand = (w = 88675123) => {
   };
 };
 
-// _ybl9n5m6w:/Users/hatanokazuhiro/Documents/repos.nosync/mandai/mandai_cup/wp-content/plugins/catpow/elements/art-frame-mosaic/element/style.css
-var style_default = ".art-frame-mosiac {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 10px;\n}\n/*# sourceMappingURL=./style.css.map */";
+// _rnhkol7dq:/Users/hatanokazuhiro/Documents/repos.nosync/mandai/mandai_cup/wp-content/plugins/catpow/elements/art-frame-mosaic/element/style.css
+var style_default = "";
 
 // ../elements/art-frame-mosaic/element/index.mjs.jsx
 var ArtFrameMosaic = class extends HTMLElement {
