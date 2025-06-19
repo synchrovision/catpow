@@ -51,6 +51,7 @@
   right: -0.625rem;
   width: 1.875rem;
   height: 1.875rem;
+  z-index: 2;
   border-radius: 50%;
   background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
   box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
@@ -78,10 +79,12 @@
   transform: rotateZ(-45deg);
 }
 .wp-block-catpow-popup > .body > .contents {
+  position: relative;
   min-height: 3.125rem;
   max-height: 80vh;
   height: auto;
   overflow-y: auto;
+  z-index: 1;
 }
 .wp-block-catpow-popup.is-hidden {
   display: none;

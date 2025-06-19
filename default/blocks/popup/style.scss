@@ -14,7 +14,7 @@
 		@include shd((b:5));
 		@include trn((t:.5s,o:1,s:1));
 		>.close{
-			@include bnd((d:b,p:a,t:-10,r:-10,w:30,h:30));
+			@include bnd((d:b,p:a,t:-10,r:-10,w:30,h:30,z:2));
 			@include bdr((r:50%));
 			@include bg((c:t));
 			@include shd((b:2));
@@ -31,7 +31,7 @@
 			}
 		}
 		>.contents{
-			@include bnd((h:50 a 80vh,oy:a));
+			@include bnd((p:r,h:50 a 80vh,oy:a,z:1));
 		}
 	}
 	&.is-hidden{
