@@ -3269,7 +3269,6 @@
                   debug: prm.debug,
                   onChange: (val) => {
                     val = { ...val };
-                    console.log(val);
                     if (prm.filter) {
                       val = prm.filter(val, states, props);
                     }
