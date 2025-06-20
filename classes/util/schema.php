@@ -28,7 +28,7 @@ class schema{
 			$crr_schema=$resolver($crr_schema,$this);
 		}
 		else if(isset($crr_schema['@type'])){
-			$schema['$ref']='#/$defs/'.$schema['@type'];
+			$crr_schema['$ref']='#/$defs/'.$crr_schema['@type'];
 		}
 		if(isset($crr_schema['$ref'])){
 			$merged=[];
