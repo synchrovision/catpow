@@ -69,9 +69,12 @@ class ArtFrameCloud extends HTMLElement {
 			}
 			if (direction === "both" || direction === "bottom") {
 				d += ` L ${width} ${height - h - uah}`;
+				let pRad = -cRad / 2;
 				for (let rad = uRad - cRad / 2; rad < cRad / 2; rad += uRad) {
-					const ur = r * (urc + rnd(0, f) / 200);
 					const tRad = rad - (uRad * f) / 200 + (uRad * rnd(0, f)) / 100;
+					const tr = cr * Math.sin(tRad - pRad);
+					pRad = tRad;
+					const ur = tr * (urc + rnd(0, f) / 200);
 					const x = width / 2 - cr * Math.sin(tRad);
 					const y = height - (cr - cr * Math.cos(tRad) + uah);
 					d += ` A ${ur} ${ur} 0 0 1 ${x} ${y}`;
