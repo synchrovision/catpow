@@ -57,6 +57,9 @@ $colors:(
 				@include trn((t:.5s,r:-45deg,y:0));
 			}
 		}
+		&__body{
+			@include bnd((p:r));
+		}
 		&.is-open{
 			@include bnd((h:a 100vh));
 			#{$block}{

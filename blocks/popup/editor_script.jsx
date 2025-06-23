@@ -26,14 +26,16 @@ wp.blocks.registerBlockType("catpow/popup", {
 					<div className="cp-collapsiblecontent__label" onClick={() => setOpen(!open)}>
 						🐾 Popup #{attributes.anchor}
 					</div>
-					<div className="wp-block-catpow-popup is-open" style={vars}>
-						<div className="body">
-							<div className="contents">
-								<InnerBlocks />
+					<div className="cp-collapsiblecontent__body">
+						<div className="wp-block-catpow-popup is-open" style={vars}>
+							<div className="body">
+								<div className="contents">
+									<InnerBlocks />
+								</div>
+								<div className="close" onClick={() => setOpen(false)}></div>
 							</div>
-							<div className="close" onClick={() => setOpen(false)}></div>
+							<div className="bg"></div>
 						</div>
-						<div className="bg"></div>
 					</div>
 				</div>
 				<InspectorControls>
