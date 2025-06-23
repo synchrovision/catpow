@@ -30,12 +30,11 @@ wp.blocks.registerBlockType("catpow/switcher", {
 	category: "catpow-functional",
 	example: CP.example,
 	edit(props) {
-		const { attributes, className, setAttributes, isSelected, clientId } = props;
-		const { useState, useRef, useEffect, useMemo, useCallback } = wp.element;
+		const { attributes, setAttributes, clientId } = props;
+		const { useRef, useEffect, useMemo } = wp.element;
 		const { Icon } = wp.components;
 		const { InnerBlocks, InspectorControls } = wp.blockEditor;
 		const { currentIndex = 0 } = attributes;
-		const [newBlocks, setNewBlocks] = useState(false);
 		const { factors, factorFlags, flagValues } = CP.config.switcher;
 		const isFirstRenderRef = useRef(true);
 
@@ -97,20 +96,9 @@ wp.blocks.registerBlockType("catpow/switcher", {
 					}
 					return blocksByCond[cond];
 				});
-				setNewBlocks(newBlocks);
+				editor.replaceInnerBlocks(clientId, newBlocks);
 			}
 		}, [values]);
-		useEffect(() => {
-			if (newBlocks) {
-				const editor = wp.data.dispatch("core/block-editor");
-				editor.replaceInnerBlocks(clientId, newBlocks);
-				const blocks = wp.data.select("core/block-editor").getBlock(clientId).innerBlocks;
-				values.map((cond, index) => {
-					editor.updateBlockAttributes(blocks[index].clientId, { cond });
-				});
-				setNewBlocks(false);
-			}
-		}, [currentIndex]);
 		useEffect(() => {
 			if (isFirstRenderRef.current) {
 				isFirstRenderRef.current = false;
@@ -174,7 +162,7 @@ wp.blocks.registerBlockType("catpow/switcher", {
 			</>
 		);
 	},
-	save({ attributes, className, setAttributes }) {
+	save() {
 		const { InnerBlocks } = wp.blockEditor;
 		return <InnerBlocks.Content />;
 	},
@@ -188,8 +176,7 @@ wp.blocks.registerBlockType("catpow/switchercontent", {
 	attributes: {
 		cond: { source: "attribute", label: "条件", selector: "switcherContent", attribute: "cond", default: "content" },
 	},
-	edit({ attributes, className, setAttributes, clientId }) {
-		const { cond } = attributes;
+	edit() {
 		const { InnerBlocks } = wp.blockEditor;
 
 		return (
@@ -198,7 +185,7 @@ wp.blocks.registerBlockType("catpow/switchercontent", {
 			</div>
 		);
 	},
-	save({ attributes, className, setAttributes }) {
+	save({ attributes }) {
 		const { cond } = attributes;
 		const { InnerBlocks } = wp.blockEditor;
 		return (

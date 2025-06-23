@@ -32,12 +32,11 @@
     category: "catpow-functional",
     example: CP.example,
     edit(props) {
-      const { attributes, className, setAttributes, isSelected, clientId } = props;
-      const { useState, useRef, useEffect, useMemo, useCallback } = wp.element;
+      const { attributes, setAttributes, clientId } = props;
+      const { useRef, useEffect, useMemo } = wp.element;
       const { Icon } = wp.components;
       const { InnerBlocks, InspectorControls } = wp.blockEditor;
       const { currentIndex = 0 } = attributes;
-      const [newBlocks, setNewBlocks] = useState(false);
       const { factors, factorFlags, flagValues } = CP.config.switcher;
       const isFirstRenderRef = useRef(true);
       const selectiveClasses = useMemo(() => {
@@ -89,7 +88,7 @@
         } else {
           const blocksByCond = blocks.reduce((p, c) => Object.assign(p, { [c.attributes.cond]: c }), {});
           const remainningBlocks = blocks.filter((block) => !values.includes(block.attributes.cond));
-          const newBlocks2 = values.map((cond, index) => {
+          const newBlocks = values.map((cond, index) => {
             if (void 0 === blocksByCond[cond]) {
               if (remainningBlocks.length) {
                 return remainningBlocks.shift();
@@ -98,20 +97,9 @@
             }
             return blocksByCond[cond];
           });
-          setNewBlocks(newBlocks2);
+          editor.replaceInnerBlocks(clientId, newBlocks);
         }
       }, [values]);
-      useEffect(() => {
-        if (newBlocks) {
-          const editor = wp.data.dispatch("core/block-editor");
-          editor.replaceInnerBlocks(clientId, newBlocks);
-          const blocks = wp.data.select("core/block-editor").getBlock(clientId).innerBlocks;
-          values.map((cond, index) => {
-            editor.updateBlockAttributes(blocks[index].clientId, { cond });
-          });
-          setNewBlocks(false);
-        }
-      }, [currentIndex]);
       useEffect(() => {
         if (isFirstRenderRef.current) {
           isFirstRenderRef.current = false;
@@ -145,7 +133,7 @@
         cond
       )) : false), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: values.map((cond) => ["catpow/switchercontent", { cond }]), allowedBlocks: ["catpow/switchercontent"] }))), currentBlockId && /* @__PURE__ */ wp.element.createElement("style", null, CP.createStyleCode({ ["#" + currentBlockId]: { display: "block" } })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", classKey: "factor", set: setAttributes, attr: attributes, selectiveClasses, initialOpen: true })));
     },
-    save({ attributes, className, setAttributes }) {
+    save() {
       const { InnerBlocks } = wp.blockEditor;
       return /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null);
     }
@@ -158,12 +146,11 @@
     attributes: {
       cond: { source: "attribute", label: "\u6761\u4EF6", selector: "switcherContent", attribute: "cond", default: "content" }
     },
-    edit({ attributes, className, setAttributes, clientId }) {
-      const { cond } = attributes;
+    edit() {
       const { InnerBlocks } = wp.blockEditor;
       return /* @__PURE__ */ wp.element.createElement("div", { className: "switcherContent" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph"]], templateLock: false }));
     },
-    save({ attributes, className, setAttributes }) {
+    save({ attributes }) {
       const { cond } = attributes;
       const { InnerBlocks } = wp.blockEditor;
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("switcherContent", { cond }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
