@@ -76,18 +76,28 @@
         wp.hooks.applyFilters("catpow.blocks.switcher.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      const values = useMemo(() => attributes.values.split("\n"), [attributes.values]);
+      const values = useMemo(() => [...new Set(attributes.values.split("\n").filter((val) => val))], [attributes.values]);
       useEffect(() => {
         const editor = wp.data.dispatch("core/block-editor");
         const blocks = wp.data.select("core/block-editor").getBlock(clientId).innerBlocks;
-        const newBlocks2 = values.map((cond, index) => {
-          if (void 0 === blocks[index]) {
-            return wp.blocks.createBlock("catpow/switchercontent", { cond });
-          }
-          editor.updateBlockAttributes(blocks[index].clientId, { cond });
-          return blocks[index];
-        });
-        if (blocks.length !== newBlocks2.length) {
+        if (blocks.length === values.length) {
+          blocks.forEach((block, index) => {
+            if (block.attributes.cond !== values[index]) {
+              editor.updateBlockAttributes(block.clientId, { cond: values[index] });
+            }
+          });
+        } else {
+          const blocksByCond = blocks.reduce((p, c) => Object.assign(p, { [c.attributes.cond]: c }), {});
+          const remainningBlocks = blocks.filter((block) => !values.includes(block.attributes.cond));
+          const newBlocks2 = values.map((cond, index) => {
+            if (void 0 === blocksByCond[cond]) {
+              if (remainningBlocks.length) {
+                return remainningBlocks.shift();
+              }
+              return wp.blocks.createBlock("catpow/switchercontent", { cond });
+            }
+            return blocksByCond[cond];
+          });
           setNewBlocks(newBlocks2);
         }
       }, [values]);
