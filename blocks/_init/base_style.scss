@@ -40,10 +40,11 @@ $colors:(
 			@include shd((b:1));
 		}
 	}
-	&-collapsible_content{
+	&-collapsiblecontent{
+		$block:&;
 		@include bnd((pdt:70,h:a 0,o:h));
 		@include trn((t:.5s));
-		>.label{
+		&__label{
 			@include bnd((d:b,p:a,t:10,l:0,r:0,w:fit,h:fit,mg:a,pd:10 40));
 			@include bg((c:b));
 			@include bdr((s:s,w:2,r:30));
@@ -56,10 +57,12 @@ $colors:(
 				@include trn((t:.5s,r:-45deg,y:0));
 			}
 		}
-		&.open{
+		&.is-open{
 			@include bnd((h:a 100vh));
-			>.label::before{
-				@include trn((r:45deg,y:-5));
+			#{$block}{
+				&__label::before{
+					@include trn((r:45deg,y:-5));
+				}
 			}
 		}
 	}

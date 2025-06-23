@@ -18,8 +18,8 @@ wp.blocks.registerBlockType("catpow/entrypopup", {
 
 		return (
 			<>
-				<div className={"collapsible_content " + (open ? "open" : "close")}>
-					<div className="label" onClick={() => setOpen(!open)}>
+				<div className={"cp-collapsiblecontent " + (open ? "is-open" : "is-close")}>
+					<div className="cp-collapsiblecontent__label" onClick={() => setOpen(!open)}>
 						🐾 EntryPopup
 					</div>
 					<div className={attributes.classes}>

@@ -18,8 +18,8 @@ wp.blocks.registerBlockType("catpow/leavepopup", {
 
 		return (
 			<>
-				<div className={"collapsible_content " + (open ? "open" : "close")}>
-					<div className="label" onClick={() => setOpen(!open)}>
+				<div className={"cp-collapsiblecontent " + (open ? "is-open" : "is-close")}>
+					<div className="cp-collapsiblecontent__label" onClick={() => setOpen(!open)}>
 						🐾 leavePopup
 					</div>
 					<div className={attributes.classes.replace("is-close", "is-open")}>
