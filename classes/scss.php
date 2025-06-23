@@ -130,27 +130,9 @@ class scss{
 						$t=$args[1]?:50;
 						$t/=100;
 						$f='calc(var(--cp-tones-%2$s-%1$s) * '.$t.' + var(--cp-tones-%3$s-%1$s) * '.(1-$t).')';
-						$tone1=$tones[rtrim($key1,'x')];
-						$tone2=$tones[rtrim($key2,'x')];
-						if(isset($tone1['a'])){
-							if(isset($tone2['a'])){
-								$a=sprintf($f,'a',$key1,$key2);
-							}
-							else{
-								$a='calc(var(--cp-tones-'.$key1.'-a) * '.$t.' + '.(1-$t).')';
-							}
-						}
-						else{
-							if(isset($tone2['a'])){
-								$a='calc('.$t.' + var(--cp-tones-'.$key2.'-a) * '.(1-$t).')';
-							}
-							else{
-								$a='1.0';
-							}
-						}
+						$a=sprintf($f,'a',$key1,$key2);
 						if($args[2]!=='false'){
-							if($a==='1.0'){$a=$args[2];}
-							else{$a=sprintf('calc(%s * %s)',$a,$args[2]);}
+							$a=sprintf('calc(%s * %s)',$a,$args[2]);
 						}
 						$color=sprintf(
 							'hsla(%s,%s,%s,%s)',
