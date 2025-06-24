@@ -146,8 +146,13 @@
     attributes: {
       cond: { source: "attribute", label: "\u6761\u4EF6", selector: "switcherContent", attribute: "cond", default: "content" }
     },
-    edit() {
+    edit({ attributes, setAttributes }) {
       const { InnerBlocks } = wp.blockEditor;
+      const { cond } = attributes;
+      const { useEffect } = wp.element;
+      useEffect(() => {
+        setAttributes({ anchor: cond });
+      }, [cond]);
       return /* @__PURE__ */ wp.element.createElement("div", { className: "switcherContent" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph"]], templateLock: false }));
     },
     save({ attributes }) {

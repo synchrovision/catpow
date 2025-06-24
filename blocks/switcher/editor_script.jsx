@@ -176,8 +176,14 @@ wp.blocks.registerBlockType("catpow/switchercontent", {
 	attributes: {
 		cond: { source: "attribute", label: "条件", selector: "switcherContent", attribute: "cond", default: "content" },
 	},
-	edit() {
+	edit({ attributes, setAttributes }) {
 		const { InnerBlocks } = wp.blockEditor;
+		const { cond } = attributes;
+		const { useEffect } = wp.element;
+
+		useEffect(() => {
+			setAttributes({ anchor: cond });
+		}, [cond]);
 
 		return (
 			<div className={"switcherContent"}>
