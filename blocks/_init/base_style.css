@@ -60,19 +60,16 @@
   box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
 }
 .cp-collapsiblecontent {
-  padding-top: 4.375rem;
-  max-height: 0rem;
-  height: auto;
-  overflow: hidden;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+  position: relative;
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 5rem auto;
+  grid-template-rows: 5rem auto;
 }
 .cp-collapsiblecontent__label {
   display: block;
-  position: absolute;
-  top: 0.625rem;
-  left: 0rem;
-  right: 0rem;
+  position: relative;
   width: fit-content;
   height: fit-content;
   margin: auto;
@@ -103,19 +100,24 @@
   border-right-width: 0.125rem;
   -webkit-transition: 0.5s;
   transition: 0.5s;
-  transform: -webkit- rotateZ(-45deg) translateY(0rem);
-  transform: rotateZ(-45deg) translateY(0rem);
+  transform: -webkit- rotateZ(45deg) translateY(-0.3125rem);
+  transform: rotateZ(45deg) translateY(-0.3125rem);
 }
 .cp-collapsiblecontent__body {
   position: relative;
-}
-.cp-collapsiblecontent.is-open {
   max-height: 100vh;
   height: auto;
+  overflow: hidden;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
-.cp-collapsiblecontent.is-open .cp-collapsiblecontent__label::before {
-  transform: -webkit- rotateZ(45deg) translateY(-0.3125rem);
-  transform: rotateZ(45deg) translateY(-0.3125rem);
+.cp-collapsiblecontent.is-close .cp-collapsiblecontent__label::before {
+  transform: -webkit- rotateZ(-45deg) translateY(0rem);
+  transform: rotateZ(-45deg) translateY(0rem);
+}
+.cp-collapsiblecontent.is-close .cp-collapsiblecontent__body {
+  max-height: 0rem;
+  height: auto;
 }
 .cp-selectposition {
   border-collapse: collapse;
