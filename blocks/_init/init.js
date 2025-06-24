@@ -5591,17 +5591,19 @@
         if (CP.selectiveClassesPresets.hasOwnProperty(prm.preset)) {
           const preset = CP.selectiveClassesPresets[prm.preset];
           if (typeof preset === "function") {
-            prms[index] = preset(prm);
+            prms[index] = prm = preset(prm);
           } else {
-            prms[index] = { ...preset, ...prm };
+            prms[index] = prm = { ...preset, ...prm };
           }
         }
       }
       if (prm.sub) {
         if (Array.isArray(prm.sub)) {
           resolveSelectiveClassesPresets(prm.sub);
-        } else {
+        } else if (typeof prm.values === "object") {
           Object.values(prm.sub).forEach(resolveSelectiveClassesPresets);
+        } else {
+          resolveSelectiveClassesPresets([prm.sub]);
         }
       }
     });
