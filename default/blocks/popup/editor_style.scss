@@ -2,6 +2,6 @@
 
 .wp-site-blocks,#editor{
 	.wp-block-catpow-popup{
-		@include bnd((p:r,pd:30,h:100vh,z:1));
+		@include bnd((p:r,h:100vh,z:1));
 	}
 }
