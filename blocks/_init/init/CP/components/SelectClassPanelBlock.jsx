@@ -342,6 +342,14 @@ export const SelectClassPanelBlock = ({ prm }) => {
 		}
 	} else if (prm.vars) {
 		if (prm.input) {
+			if (props.attr?.[prm.vars]?.[prm.key] === undefined && prm.default != null) {
+				save({
+					[prm.vars]: {
+						...props.attr[prm.vars],
+						[prm.key]: prm.default,
+					},
+				});
+			}
 			switch (prm.input) {
 				case "select":
 				case "buttons":
@@ -507,6 +515,9 @@ export const SelectClassPanelBlock = ({ prm }) => {
 			const EventInputs = useMemo(() => wp.hooks.applyFilters("catpow.EventInputs", [], { item, save }), [item, save]);
 			rtn.push(...EventInputs);
 		} else if (prm.input) {
+			if (item[prm.key] === undefined && prm.default != null) {
+				save({ [prm.key]: prm.default });
+			}
 			switch (prm.input) {
 				case "select":
 				case "buttons":

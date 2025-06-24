@@ -2947,6 +2947,14 @@
       }
     } else if (prm.vars) {
       if (prm.input) {
+        if (props.attr?.[prm.vars]?.[prm.key] === void 0 && prm.default != null) {
+          save({
+            [prm.vars]: {
+              ...props.attr[prm.vars],
+              [prm.key]: prm.default
+            }
+          });
+        }
         switch (prm.input) {
           case "select":
           case "buttons":
@@ -3136,6 +3144,9 @@
         const EventInputs = useMemo5(() => wp.hooks.applyFilters("catpow.EventInputs", [], { item, save }), [item, save]);
         rtn.push(...EventInputs);
       } else if (prm.input) {
+        if (item[prm.key] === void 0 && prm.default != null) {
+          save({ [prm.key]: prm.default });
+        }
         switch (prm.input) {
           case "select":
           case "buttons":
@@ -5215,6 +5226,7 @@
             key: "--cp-custom-content-width",
             min: 50,
             max: 100,
+            default: "90vw",
             unit: "vw"
           },
           {
@@ -5223,8 +5235,10 @@
             input: "range",
             vars,
             key: "--cp-custom-content-max-width",
-            min: 200,
+            min: 160,
             max: 1600,
+            default: "60rem",
+            step: 10,
             coef: 0.0625,
             unit: "rem"
           }
