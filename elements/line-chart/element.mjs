@@ -19,9 +19,11 @@ var el = (tag, props, children, namespace) => {
       console.error("can not append child : ", child);
     }
   };
-  Object.keys(props).forEach((key) => {
-    el2.setAttribute(key, props[key]);
-  });
+  if (props) {
+    Object.keys(props).forEach((key) => {
+      el2.setAttribute(key, props[key]);
+    });
+  }
   appendChild(children);
   return el2;
 };
@@ -72,7 +74,7 @@ var hunit = (n, p) => parseFloat(
   n.toExponential(p).replace(/^(\-?\d\.\d+)/, "1.0").replace(/\-?\d+$/, (m) => 1 + parseFloat(m) - p)
 );
 
-// _2eroex9jn:/Users/hatanokazuhiro/Documents/repos.nosync/mandai/mandai_cup/wp-content/plugins/catpow/elements/line-chart/element/style.css
+// _5hl8sg98l:/Users/hatanokazuhiro/Documents/repos.nosync/mandai/mandai_cup/wp-content/plugins/catpow/elements/line-chart/element/style.css
 var style_default = ".line-chart {\n  display: block;\n  width: 100%;\n  height: auto;\n}\n.line-chart-grid {\n  position: relative;\n  z-index: 1;\n}\n.line-chart-grid-line {\n  stroke-width: 0.0625rem;\n  stroke: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a,1) * 0.25));\n}\n.line-chart-values {\n  position: relative;\n  z-index: 2;\n}\n.line-chart-values-circle {\n  fill: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));\n  stroke: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));\n  stroke-width: 0.125rem;\n}\n.line-chart-values-line {\n  stroke-width: 0.125rem;\n  stroke: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 100),calc(var(--cp-tones-m-a,1) * 0.5));\n}\n.line-chart-labels.is-column .line-chart-labels-label {\n  text-anchor: middle;\n  dominant-baseline: hanging;\n  font-size: 0.75rem;\n  font-family: var(--cp-fonts-t);\n}\n.line-chart-labels.is-row .line-chart-labels-label {\n  text-anchor: end;\n  dominant-baseline: middle;\n  font-size: 0.75rem;\n  font-family: var(--cp-fonts-t);\n}\n/*# sourceMappingURL=./style.css.map */";
 
 // ../elements/line-chart/element/index.mjs.jsx
@@ -85,14 +87,35 @@ var LineChart = class extends HTMLElement {
     const classes = bem("line-chart");
     const values = JSON.parse(this.getAttribute("values"));
     const flags = { hasLabels: this.hasAttribute("labels") };
-    const min = this.hasAttribute("min") ? parseFloat(this.getAttribute("min")) : hfloor(Math.min(0, Math.min.apply(null, values.map((row) => Math.min.apply(null, row)))), 1);
-    const max = this.hasAttribute("max") ? parseFloat(this.getAttribute("max")) : hceil(Math.max(0, Math.max.apply(null, values.map((row) => Math.max.apply(null, row)))), 1);
+    const min = this.hasAttribute("min") ? parseFloat(this.getAttribute("min")) : hfloor(
+      Math.min(
+        0,
+        Math.min.apply(
+          null,
+          values.map((row) => Math.min.apply(null, row))
+        )
+      ),
+      1
+    );
+    const max = this.hasAttribute("max") ? parseFloat(this.getAttribute("max")) : hceil(
+      Math.max(
+        0,
+        Math.max.apply(
+          null,
+          values.map((row) => Math.max.apply(null, row))
+        )
+      ),
+      1
+    );
     const len = max - min;
     const step = this.hasAttribute("step") ? this.getAttribute("step") : hunit(len, 2);
     const rowLabels = [];
     const colLabels = flags.hasLabels ? JSON.parse(this.getAttribute("labels")) : null;
     const maxValueLength = flags.hasLabels ? Math.max(min.toString().length, max.toString().length) : 0;
-    const maxLabelLength = flags.hasLabels ? Math.max.apply(null, colLabels.map((label) => label.length)) : 2;
+    const maxLabelLength = flags.hasLabels ? Math.max.apply(
+      null,
+      colLabels.map((label) => label.length)
+    ) : 2;
     const pdl = maxValueLength * 12 + 20;
     const pdr = maxLabelLength * 6 + 10;
     const pdt = 10;
@@ -118,21 +141,31 @@ var LineChart = class extends HTMLElement {
       grid.x.push(x);
     }
     shadow.appendChild(el("style", {}, [style_default]));
-    shadow.appendChild(svgEl("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: `0 0 ${width} ${height}`, class: classes(flagsToClassNames(flags)) }, [
-      values.map((row) => {
-        const points = row.map((val, c) => pdl + colWidth * c + " " + (pdt + rowUnit * (max - val))).join(",");
-        return svgEl("g", { class: classes.values() }, [
-          svgEl("polyline", { points, fill: "none", class: classes.values.line() }),
-          row.map((val, c) => svgEl("circle", { cx: pdl + colWidth * c, cy: pdt + rowUnit * (max - val), r: 4, class: classes.values.circle() }))
-        ]);
-      }),
-      svgEl("g", { class: classes.grid() }, [
-        grid.x.map((x2) => svgEl("line", { x1: x2, x2, y1: pdt, y2: height - pdb, class: classes.grid.line("is-x") })),
-        grid.y.map((y2) => svgEl("line", { x1: pdl, x2: width - pdr, y1: y2, y2, class: classes.grid.line("is-y") }))
-      ]),
-      colLabels && svgEl("g", { class: classes.labels("is-column") }, colLabels.map((label, c) => svgEl("text", { class: classes.labels.label(), x: pdl + colWidth * c, y: height - pdb + 10 }, label))),
-      rowLabels && svgEl("g", { class: classes.labels("is-row") }, rowLabels.map((label, r) => svgEl("text", { class: classes.labels.label(), x: pdl - 10, y: pdt + rowHeight * r }, label)))
-    ]));
+    shadow.appendChild(
+      svgEl("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: `0 0 ${width} ${height}`, class: classes(flagsToClassNames(flags)) }, [
+        values.map((row) => {
+          const points = row.map((val, c) => pdl + colWidth * c + " " + (pdt + rowUnit * (max - val))).join(",");
+          return svgEl("g", { class: classes.values() }, [
+            svgEl("polyline", { points, fill: "none", class: classes.values.line() }),
+            row.map((val, c) => svgEl("circle", { cx: pdl + colWidth * c, cy: pdt + rowUnit * (max - val), r: 4, class: classes.values.circle() }))
+          ]);
+        }),
+        svgEl("g", { class: classes.grid() }, [
+          grid.x.map((x2) => svgEl("line", { x1: x2, x2, y1: pdt, y2: height - pdb, class: classes.grid.line("is-x") })),
+          grid.y.map((y2) => svgEl("line", { x1: pdl, x2: width - pdr, y1: y2, y2, class: classes.grid.line("is-y") }))
+        ]),
+        colLabels && svgEl(
+          "g",
+          { class: classes.labels("is-column") },
+          colLabels.map((label, c) => svgEl("text", { class: classes.labels.label(), x: pdl + colWidth * c, y: height - pdb + 10 }, label))
+        ),
+        rowLabels && svgEl(
+          "g",
+          { class: classes.labels("is-row") },
+          rowLabels.map((label, r) => svgEl("text", { class: classes.labels.label(), x: pdl - 10, y: pdt + rowHeight * r }, label))
+        )
+      ])
+    );
   }
 };
 customElements.define("line-chart", LineChart);
