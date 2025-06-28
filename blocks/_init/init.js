@@ -3515,10 +3515,10 @@
       [set, index, items2, itemsKey2]
     );
     const saveClasses = useCallback4(
-      (classKey) => {
+      (classKey = primaryClassKey) => {
         save({ [classKey]: CP.flagsToClassNames(allStates[classKey]) });
       },
-      [save, allStates]
+      [primaryClassKey, save, allStates]
     );
     const saveCss = useCallback4(
       (cssKey) => {
@@ -5226,8 +5226,8 @@
             key: "--cp-custom-content-width",
             min: 50,
             max: 100,
-            default: "90vw",
-            unit: "vw"
+            default: "95%",
+            unit: "%"
           },
           {
             name: "contentMaxWidth",
