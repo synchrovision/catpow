@@ -1,5 +1,15 @@
 @import 'catpow.scss';
 @import 'admin_style_config.scss';
 
-.art-frame-mosiac {
+.art-frame-mosaic {
+	@include bnd((p:r));
+	&__body{
+		@include bg((c:sx));
+	}
+	&__arts{
+		@include bnd((d:b,p:a,i:0,w:f,h:f));
+		&-fills{
+
+		}
+	}
 }

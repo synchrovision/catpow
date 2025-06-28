@@ -2,6 +2,7 @@
 	"properties": {
 		"w": { "type": "integer", "minimum": 8, "maximum": 160, "multipleOf": 4, "default": 20 },
 		"h": { "type": "integer", "minimum": 16, "maximum": 400, "multipleOf": 4, "default": 120 },
+		"fill": { "type": "integer", "minimum": 0, "maximum": 100, "default": 20 },
 		"seed": { "type": "integer", "minimum": 1, "maximum": 100, "default": 16 },
 		"direction": {
 			"type": "string",
