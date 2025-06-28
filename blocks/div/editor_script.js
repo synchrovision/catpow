@@ -40,20 +40,25 @@
             type: "buttons",
             values: { isTypeBlock: "block", isTypeFrame: "frame", isTypeColumns: "columns" },
             sub: {
+              isTypeBlock: [
+                "contentWidth"
+              ],
               isTypeFrame: [
                 { label: "\u30A2\u30A4\u30B3\u30F3", values: "hasIcon", sub: [{ input: "icon", label: "\u30A2\u30A4\u30B3\u30F3", color }] },
-                { type: "buttons", label: "\u7DDA", values: { noBorder: "\u306A\u3057", thinBorder: "\u7D30", boldBorder: "\u592A" } },
+                { type: "buttons", label: "\u7DDA", values: { hasNoBorder: "\u306A\u3057", hasThinBorder: "\u7D30", hasBoldBorder: "\u592A" } },
                 { label: "\u89D2\u4E38", values: "hasBorderRadius" },
-                { label: "\u5F71", values: "hasShadow", sub: [{ label: "\u5185\u5074", values: "inset" }] },
+                { label: "\u5F71", values: "hasShadow", sub: [{ label: "\u5185\u5074", values: "has-shadow-inset" }] },
                 "customContentWidth"
               ],
               isTypeColumns: [{ type: "buttons", label: "\u5E45", values: { narrow: "\u72ED\u3044", regular: "\u666E\u901A", wide: "\u5E83\u3044" } }]
+            },
+            bind: {
+              isTypeFrame: ["hasContentWidth"]
             }
           },
           "color",
           "colorScheme",
           "backgroundColor",
-          "backgroundImage",
           "backgroundPattern",
           {
             name: "borderImage",
