@@ -490,8 +490,8 @@ export const selectiveClassesPresets = {
 					key: "--cp-custom-content-width",
 					min: 50,
 					max: 100,
-					default: "90vw",
-					unit: "vw",
+					default: "95%",
+					unit: "%",
 				},
 				{
 					name: "contentMaxWidth",
