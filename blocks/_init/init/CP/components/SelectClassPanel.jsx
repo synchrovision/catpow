@@ -100,10 +100,10 @@ export const SelectClassPanel = (props) => {
 		[set, index, items, itemsKey]
 	);
 	const saveClasses = useCallback(
-		(classKey) => {
+		(classKey=primaryClassKey) => {
 			save({ [classKey]: CP.flagsToClassNames(allStates[classKey]) });
 		},
-		[save, allStates]
+		[primaryClassKey,save, allStates]
 	);
 	const saveCss = useCallback(
 		(cssKey) => {
