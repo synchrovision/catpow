@@ -32,29 +32,35 @@ var applyBem = (el2, { ...ctx }) => {
     });
     return el2;
   }
-  if (!(el2 instanceof HTMLElement)) {
+  if (!(el2 instanceof Element)) {
     return el2;
   }
   let { className } = el2;
+  if (el2 instanceof SVGElement && className instanceof SVGAnimatedString) {
+    className = className.baseVal;
+  }
   if (className) {
-    el2.className = className.split(" ").map((className2) => {
-      if (className2.slice(0, 2) === "--") {
-        return ctx.element + className2;
-      }
-      if (className2[0] === "-") {
-        return ctx.block = ctx.element = ctx.block + className2;
-      }
-      if (className2[0] === "_") {
-        return ctx.element = ctx.element + (ctx.element === ctx.block ? "__" : "-") + className2.slice(1);
-      }
-      if (className2.slice(-1) === "-") {
-        return ctx.block = ctx.element = ctx.prefix + "-" + className2.slice(0, -1);
-      }
-      if (className2.slice(-1) === "_") {
-        return ctx.element = ctx.block + "__" + className2.slice(0, -1);
-      }
-      return className2;
-    }).join(" ");
+    el2.setAttribute(
+      "class",
+      className.split(" ").map((className2) => {
+        if (className2.slice(0, 2) === "--") {
+          return ctx.element + className2;
+        }
+        if (className2[0] === "-") {
+          return ctx.block = ctx.element = ctx.block + className2;
+        }
+        if (className2[0] === "_") {
+          return ctx.element = ctx.element + (ctx.element === ctx.block ? "__" : "-") + className2.slice(1);
+        }
+        if (className2.slice(-1) === "-") {
+          return ctx.block = ctx.element = ctx.prefix + "-" + className2.slice(0, -1);
+        }
+        if (className2.slice(-1) === "_") {
+          return ctx.element = ctx.block + "__" + className2.slice(0, -1);
+        }
+        return className2;
+      }).join(" ")
+    );
     if (el2.className === className) {
       const matches = className.match(/\b(([a-z]+)\-[a-z]+(\-[a-z]+)*)(__[a-z]+(\-[a-z]+)*)?\b/);
       if (!matches) {
@@ -67,7 +73,7 @@ var applyBem = (el2, { ...ctx }) => {
       ctx.element = matches[0];
     }
   } else {
-    el2.className = ctx.element = ctx.element + (ctx.element === ctx.block ? "__" : "-") + el2.tagName.toLowerCase();
+    el2.setAttribute("class", ctx.element = ctx.element + (ctx.element === ctx.block ? "__" : "-") + el2.tagName.toLowerCase());
   }
   for (let i = 0; i < el2.children.length; i++) {
     applyBem(el2.children[i], ctx);
@@ -94,8 +100,8 @@ var srand = (w = 88675123) => {
   };
 };
 
-// _6pzidx4vk:/Users/hatanokazuhiro/Documents/repos.nosync/mandai/mandai_cup/wp-content/plugins/catpow/elements/art-frame-cloud/element/style.css
-var style_default = "";
+// _6ldy2z1hi:/Users/hatanokazuhiro/Documents/repos.nosync/mandai/mandai_cup/wp-content/plugins/catpow/elements/art-frame-cloud/element/style.css
+var style_default = ".art-frame-cloud__body {\n  background-color: hsla(var(--cp-tones-sx-h),var(--cp-tones-sx-s),var(--cp-tones-sx-l),var(--cp-tones-sx-a,1));\n}\n/*# sourceMappingURL=./style.css.map */";
 
 // ../elements/art-frame-cloud/element/index.mjs.jsx
 var ArtFrameCloud = class extends HTMLElement {
