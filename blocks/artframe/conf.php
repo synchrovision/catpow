@@ -1,6 +1,9 @@
 <?php
 $block_class='wp-block-catpow-artframe';
 $attributes=[
+	'color'=>['type'=>'string','default'=>"0"],
+	'classes'=>['type'=>'string',"selector"=>'div',"attribute"=>'class','default'=>'wp-block-catpow-artframe'],
+	'vars'=>['type'=>'object','default'=>[]],
 	"element"=>["type"=>"string"],
 	'params'=>['type'=>'object','default'=>[]],
 ];
