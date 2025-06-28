@@ -2,4 +2,7 @@
 @import 'admin_style_config.scss';
 
 .art-frame-wave{
+	&__body{
+		@include bg((c:sx));
+	}
 }
