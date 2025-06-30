@@ -17,15 +17,19 @@ wp.blocks.registerBlockType("catpow/artframe", {
 		const { useMemo } = wp.element;
 		const { InnerBlocks, InspectorControls,useBlockProps } = wp.blockEditor;
 		const { attributes, setAttributes } = props;
-		const { classes,vars,params, element: Element = "div" } = attributes;
+		const { classes,contentsClasses,contentsBodyClasses,vars,params, element: Element = "div" } = attributes;
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
 				"color",
 				"colorScheme",
-				"backgroundColor",
-				"backgroundPattern",
+				"zIndex",
+				{preset:"backgroundColor",classKey:"contentsClasses"},
+				{preset:"backgroundImage",classKey:"contentsClasses"},
+				{preset:"backgroundPattern",classKey:"contentsClasses"},
+				{preset:"contentWidth",classKey:"contentsBodyClasses"},
 				"customMargin",
+				{preset:"customPadding",classKey:"contentsBodyClasses"},
 				artframeSelectiveClasses
 			];
 			wp.hooks.applyFilters("catpow.blocks.artframe.selectiveClasses", CP.finderProxy(selectiveClasses));
@@ -42,7 +46,11 @@ wp.blocks.registerBlockType("catpow/artframe", {
 			<>
 				<div {...blockProps}>
 					<Element {...params}>
-						<InnerBlocks template={[["core/paragraph", { content: CP.dummyText.text }]]} templateLock={false} />
+						<div className={contentsClasses}>
+							<div className={contentsBodyClasses}>
+								<InnerBlocks template={[["core/paragraph", { content: CP.dummyText.text }]]} templateLock={false} />
+							</div>
+						</div>
 					</Element>
 				</div>
 				<InspectorControls>
@@ -54,14 +62,18 @@ wp.blocks.registerBlockType("catpow/artframe", {
 
 	save({ attributes }) {
 		const { InnerBlocks,useBlockProps } = wp.blockEditor;
-		const { classes,vars,params, element: Element = "div" } = attributes;
+		const { classes,contentsClasses,contentsBodyClasses,vars,params, element: Element = "div" } = attributes;
 		const blockProps = useBlockProps.save({ className: classes, style: vars });
 		return (
 			<>
 				<script type="module" src={artframeSelectiveClasses.mjs[Element]} />
 				<div {...blockProps}>
 					<Element {...params}>
-						<InnerBlocks.Content />
+						<div className={contentsClasses}>
+							<div className={contentsBodyClasses}>
+								<InnerBlocks.Content />
+							</div>
+						</div>
 					</Element>
 				</div>
 			</>

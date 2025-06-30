@@ -1,0 +1,9 @@
+.wp-block-catpow-artframe {
+  position: relative;
+  z-index: var(--cp-z-index, 1);
+}
+.wp-block-catpow-artframe__contents-body {
+  position: relative;
+  margin-inline: auto;
+}
+/*# sourceMappingURL=./style.css.map */

@@ -2,7 +2,9 @@
 $block_class='wp-block-catpow-artframe';
 $attributes=[
 	'color'=>['type'=>'string','default'=>"0"],
-	'classes'=>['type'=>'string',"selector"=>'div',"attribute"=>'class','default'=>'wp-block-catpow-artframe'],
+	'classes'=>['type'=>'string',"selector"=>'.wp-block-catpow-artframe',"attribute"=>'class','default'=>'wp-block-catpow-artframe'],
+	'contentsClasses'=>['type'=>'string',"selector"=>'.wp-block-catpow-artframe__contents',"attribute"=>'class','default'=>'wp-block-catpow-artframe__contents'],
+	'contentsBodyClasses'=>['type'=>'string',"selector"=>'.wp-block-catpow-artframe__contents-body',"attribute"=>'class','default'=>'wp-block-catpow-artframe__contents-body'],
 	'vars'=>['type'=>'object','default'=>[]],
 	"element"=>["type"=>"string"],
 	'params'=>['type'=>'object','default'=>[]],

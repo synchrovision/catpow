@@ -1,0 +1,10 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-artframe{
+	@include bnd((p:r,z:var(--cp-z-index,1)));
+	&__contents{
+		&-body{
+			@include bnd((p:r,mgi:a));
+		}
+	}
+}

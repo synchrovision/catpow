@@ -57,14 +57,18 @@
       const { useMemo: useMemo3 } = wp.element;
       const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
       const { attributes, setAttributes } = props;
-      const { classes, vars, params, element: Element2 = "div" } = attributes;
+      const { classes, contentsClasses, contentsBodyClasses, vars, params, element: Element2 = "div" } = attributes;
       const selectiveClasses = useMemo3(() => {
         const selectiveClasses2 = [
           "color",
           "colorScheme",
-          "backgroundColor",
-          "backgroundPattern",
+          "zIndex",
+          { preset: "backgroundColor", classKey: "contentsClasses" },
+          { preset: "backgroundImage", classKey: "contentsClasses" },
+          { preset: "backgroundPattern", classKey: "contentsClasses" },
+          { preset: "contentWidth", classKey: "contentsBodyClasses" },
           "customMargin",
+          { preset: "customPadding", classKey: "contentsBodyClasses" },
           artframeSelectiveClasses
         ];
         wp.hooks.applyFilters("catpow.blocks.artframe.selectiveClasses", CP.finderProxy(selectiveClasses2));
@@ -74,13 +78,13 @@
         setAttributes({ params: { ...artframeSelectiveClasses.sub[Element2][0].default, ...params } });
       }, [Element2]);
       const blockProps = useBlockProps({ className: classes, style: vars });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(Element2, { ...params }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph", { content: CP.dummyText.text }]], templateLock: false }))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", initialOpen: true, icon: "art", set: setAttributes, attr: attributes, selectiveClasses })));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(Element2, { ...params }, /* @__PURE__ */ wp.element.createElement("div", { className: contentsClasses }, /* @__PURE__ */ wp.element.createElement("div", { className: contentsBodyClasses }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph", { content: CP.dummyText.text }]], templateLock: false }))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", initialOpen: true, icon: "art", set: setAttributes, attr: attributes, selectiveClasses })));
     },
     save({ attributes }) {
       const { InnerBlocks, useBlockProps } = wp.blockEditor;
-      const { classes, vars, params, element: Element2 = "div" } = attributes;
+      const { classes, contentsClasses, contentsBodyClasses, vars, params, element: Element2 = "div" } = attributes;
       const blockProps = useBlockProps.save({ className: classes, style: vars });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("script", { type: "module", src: artframeSelectiveClasses.mjs[Element2] }), /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(Element2, { ...params }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null))));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("script", { type: "module", src: artframeSelectiveClasses.mjs[Element2] }), /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(Element2, { ...params }, /* @__PURE__ */ wp.element.createElement("div", { className: contentsClasses }, /* @__PURE__ */ wp.element.createElement("div", { className: contentsBodyClasses }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null))))));
     }
   });
 })();
