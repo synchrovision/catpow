@@ -502,7 +502,7 @@ export const selectiveClassesPresets = {
 					input: "range",
 					vars,
 					key: "--cp-custom-content-width",
-					min: 50,
+					min: 70,
 					max: 100,
 					default: "95%",
 					unit: "%",
