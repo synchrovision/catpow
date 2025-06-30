@@ -222,8 +222,8 @@ var translateColor = (color, tint, alpha) => {
   return color;
 };
 
-// _7n6znt3vu:/Users/hatanokazuhiro/Documents/repos.nosync/mandai/mandai_cup/wp-content/plugins/catpow/elements/art-frame-mosaic/element/style.css
-var style_default = ".art-frame-mosaic {\n  position: relative;\n}\n.art-frame-mosaic__body {\n  background-color: hsla(var(--cp-tones-sx-h),var(--cp-tones-sx-s),var(--cp-tones-sx-l),var(--cp-tones-sx-a,1));\n}\n.art-frame-mosaic__arts {\n  display: block;\n  position: absolute;\n  top: 0rem;\n  right: 0rem;\n  bottom: 0rem;\n  left: 0rem;\n  inset: 0rem;\n  width: 100%;\n  height: 100%;\n}\n/*# sourceMappingURL=./style.css.map */";
+// _g3w1a9okm:/Users/hatanokazuhiro/Documents/repos.nosync/mandai/mandai_cup/wp-content/plugins/catpow/elements/art-frame-mosaic/element/style.css
+var style_default = ".art-frame-mosaic {\n  position: relative;\n}\n.art-frame-mosaic__arts {\n  display: block;\n  position: absolute;\n  top: 0rem;\n  right: 0rem;\n  bottom: 0rem;\n  left: 0rem;\n  inset: 0rem;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n/*# sourceMappingURL=./style.css.map */";
 
 // ../elements/art-frame-mosaic/element/index.mjs.jsx
 var ArtFrameMosaic = class extends HTMLElement {

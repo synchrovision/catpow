@@ -4,10 +4,10 @@
 .art-frame-mosaic {
 	@include bnd((p:r));
 	&__body{
-		@include bg((c:sx));
 	}
 	&__arts{
 		@include bnd((d:b,p:a,i:0,w:f,h:f));
+		@include usr((e:n));
 		&-fills{
 
 		}
