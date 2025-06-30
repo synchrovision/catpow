@@ -266,11 +266,10 @@ $colors:(
 		}
 	}
 	&-selectresponsiveimage{
-		&.is-video,&.is-img,&.is-picture{
-			@include bnd((d:b,w:f,h:a));
-		}
-		&-img{
-			@include bnd((d:b,w:f,h:32 a,op:c,of:i));
+		&.is-video,&.is-img,&.is-picture,&-img{
+			@include bnd((d:b,w:160,h:90,mgb:16,op:c,of:i));
+			@include shd((b:2));
+			@include bg((c:#ccc));
 		}
 		&__controls{
 			@include bnd((d:b,p:a,t:0,r:0,w:60% 160,h:a,pd:4));
