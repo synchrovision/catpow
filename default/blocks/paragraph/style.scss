@@ -1,6 +1,7 @@
 @import 'admin_style_config.scss';
 
 p{
+	@include txt((c:tx));
 	&.is-style-message{
 		@include bnd((pd:1em));
 		@include bg((c:s));
