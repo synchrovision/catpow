@@ -3319,7 +3319,7 @@
           }
         }
       } else {
-        const classKey = prm.classKey ? prm.classKey : primaryClassKey;
+        const { classKey = primaryClassKey } = prm;
         const targetStates = allStates[classKey] || {};
         const allClassFlags = CP.getAllClassFlags(prm, primaryClassKey);
         const classFlagsByValue = CP.getClassFlagsByValue(prm, primaryClassKey);
@@ -4787,6 +4787,15 @@
         hasBackgroundColorAlt: __3("\u5F37\u8ABF", "catpow")
       }
     },
+    zIndex: {
+      name: "zIndex",
+      label: __3("z-index", "catpow"),
+      input: "range",
+      vars: "vars",
+      key: "--cp-z-index",
+      min: 1,
+      max: 20
+    },
     backgroundImage({ preset, vars = "vars", classKey, ...otherParams }) {
       return {
         name: "backgroundImage",
@@ -5151,6 +5160,7 @@
             key: "--cp-padding-top",
             min: 0,
             max: 400,
+            step: 5,
             coef: 0.0625,
             unit: "rem"
           },
@@ -5162,6 +5172,7 @@
             key: "--cp-padding-bottom",
             min: 0,
             max: 400,
+            step: 5,
             coef: 0.0625,
             unit: "rem"
           },
@@ -5173,6 +5184,7 @@
             key: "--cp-padding-inline",
             min: 0,
             max: 100,
+            step: 5,
             coef: 0.0625,
             unit: "rem"
           }
@@ -5194,6 +5206,7 @@
             key: "--cp-margin-top",
             min: -400,
             max: 400,
+            step: 5,
             coef: 0.0625,
             unit: "rem"
           },
@@ -5205,6 +5218,7 @@
             key: "--cp-margin-bottom",
             min: -400,
             max: 400,
+            step: 5,
             coef: 0.0625,
             unit: "rem"
           }
@@ -5224,7 +5238,7 @@
             input: "range",
             vars,
             key: "--cp-custom-content-width",
-            min: 50,
+            min: 70,
             max: 100,
             default: "95%",
             unit: "%"
