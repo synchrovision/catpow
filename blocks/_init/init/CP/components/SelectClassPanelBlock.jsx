@@ -678,7 +678,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 				}
 			}
 		} else {
-			const classKey = prm.classKey ? prm.classKey : primaryClassKey;
+			const {classKey=primaryClassKey}=prm;
 			const targetStates = allStates[classKey] || {};
 			const allClassFlags = CP.getAllClassFlags(prm, primaryClassKey);
 			const classFlagsByValue = CP.getClassFlagsByValue(prm, primaryClassKey);
