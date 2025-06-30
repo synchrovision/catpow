@@ -48,6 +48,15 @@ export const selectiveClassesPresets = {
 			hasBackgroundColorAlt: __("強調", "catpow"),
 		},
 	},
+	zIndex:{
+		name:"zIndex",
+		label: __("z-index", "catpow"),
+		input: "range",
+		vars:"vars",
+		key: "--cp-z-index",
+		min: 1,
+		max: 20
+	},
 	backgroundImage({ preset, vars = "vars", classKey, ...otherParams }) {
 		return {
 			name: "backgroundImage",
