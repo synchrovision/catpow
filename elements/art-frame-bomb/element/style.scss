@@ -1,0 +1,8 @@
+@import 'catpow.scss';
+@import 'admin_style_config.scss';
+
+.art-frame-bomb {
+	&__body{
+		@include bg((c:sx));
+	}
+}

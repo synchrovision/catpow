@@ -1,0 +1,14 @@
+{
+	"properties": {
+		"w": { "type": "integer", "minimum": 30, "maximum": 300, "default": 200 },
+		"b": { "type": "integer", "minimum": 1, "maximum": 100, "default": 50 },
+		"h": { "type": "integer", "minimum": 20, "maximum": 200, "default": 60 },
+		"f": { "type": "integer", "minimum": 0, "maximum": 100, "default": 50 },
+		"seed": { "type": "integer", "minimum": 1, "maximum": 100, "default": 16 },
+		"direction": {
+			"type": "string",
+			"enum": ["top", "bottom", "both"],
+			"default": "both"
+		}
+	}
+}
