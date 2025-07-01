@@ -100,12 +100,12 @@ var srand = (w = 88675123) => {
   };
 };
 
-// _6ldy2z1hi:/Users/hatanokazuhiro/Documents/repos.nosync/mandai/mandai_cup/wp-content/plugins/catpow/elements/art-frame-cloud/element/style.css
+// _b45uau48z:/Users/hatanokazuhiro/Documents/repos.nosync/mandai/mandai_cup/wp-content/plugins/catpow/elements/art-frame-cloud/element/style.css
 var style_default = ".art-frame-cloud__body {\n  background-color: hsla(var(--cp-tones-sx-h),var(--cp-tones-sx-s),var(--cp-tones-sx-l),var(--cp-tones-sx-a,1));\n}\n/*# sourceMappingURL=./style.css.map */";
 
 // ../elements/art-frame-cloud/element/index.mjs.jsx
 var ArtFrameCloud = class extends HTMLElement {
-  static observedAttributes = ["r", "b", "h", "f", "seed", "direction"];
+  static observedAttributes = ["w", "b", "h", "f", "seed", "direction"];
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -117,7 +117,7 @@ var ArtFrameCloud = class extends HTMLElement {
     this.render();
   }
   render() {
-    const params = { r: 6, b: 30, h: 60, f: 50, seed: 16, direction: "both" };
+    const params = { w: 30, b: 30, h: 60, f: 50, seed: 16, direction: "both" };
     for (const key of Object.keys(params)) {
       if (this.hasAttribute(key)) {
         switch (typeof params[key]) {
@@ -140,14 +140,14 @@ var ArtFrameCloud = class extends HTMLElement {
     const body = el("div", { class: "_body" }, [el("slot")]);
     const resizeObserver = new ResizeObserver((entries) => {
       const { width, height } = entries[0].contentRect;
-      const { r, b, h, f, seed, direction } = params;
+      const { w, b, h, f, seed, direction } = params;
       let d = "";
       const rnd = srand(seed);
       const cr = h / 2 + width * width / h / 8;
       const cRad = Math.asin(width / (2 * cr)) * 2;
       const urc = 1 - b / 200;
-      const ur = r * urc;
-      const uRad = cRad / Math.ceil(cRad / (Math.asin(r / 2 / cr) * 2));
+      const ur = w * urc;
+      const uRad = cRad / Math.ceil(cRad / (Math.asin(w / 2 / cr) * 2));
       const maxURad = uRad + uRad * f / 200;
       const maxR = cr * Math.sin(maxURad / 2) * 2;
       const maxUr = maxR * urc;
@@ -164,7 +164,7 @@ var ArtFrameCloud = class extends HTMLElement {
           const y = cr - cr * Math.cos(tRad) + uah;
           d += ` A ${ur3} ${ur3} 0 0 1 ${x} ${y}`;
         }
-        const ur2 = r * urc;
+        const ur2 = w * urc;
         d += ` A ${ur2} ${ur2} 0 0 1 ${width} ${h + uah}`;
       } else {
         d += ` M 0 0 L ${width} 0`;

@@ -2,7 +2,7 @@ import { el, svgEl, bem, hfloor, hceil, hunit, applyBem, srand } from "catpow/ut
 import cssCode from "css:./style.css";
 
 class ArtFrameCloud extends HTMLElement {
-	static observedAttributes = ["r", "b", "h", "f", "seed", "direction"];
+	static observedAttributes = ["w", "b", "h", "f", "seed", "direction"];
 	constructor() {
 		super();
 		this.attachShadow({ mode: "open" });
@@ -14,7 +14,7 @@ class ArtFrameCloud extends HTMLElement {
 		this.render();
 	}
 	render() {
-		const params = { r: 6, b: 30, h: 60, f: 50, seed: 16, direction: "both" };
+		const params = { w: 30, b: 30, h: 60, f: 50, seed: 16, direction: "both" };
 		for (const key of Object.keys(params)) {
 			if (this.hasAttribute(key)) {
 				switch (typeof params[key]) {
@@ -37,14 +37,14 @@ class ArtFrameCloud extends HTMLElement {
 		const body = el("div", { class: "_body" }, [el("slot")]);
 		const resizeObserver = new ResizeObserver((entries) => {
 			const { width, height } = entries[0].contentRect;
-			const { r, b, h, f, seed, direction } = params;
+			const { w, b, h, f, seed, direction } = params;
 			let d = "";
 			const rnd = srand(seed);
 			const cr = h / 2 + (width * width) / h / 8;
 			const cRad = Math.asin(width / (2 * cr)) * 2;
 			const urc = 1 - b / 200;
-			const ur = r * urc;
-			const uRad = cRad / Math.ceil(cRad / (Math.asin(r / 2 / cr) * 2));
+			const ur = w * urc;
+			const uRad = cRad / Math.ceil(cRad / (Math.asin(w / 2 / cr) * 2));
 			const maxURad = uRad + (uRad * f) / 200;
 			const maxR = cr * Math.sin(maxURad / 2) * 2;
 			const maxUr = maxR * urc;
@@ -62,7 +62,7 @@ class ArtFrameCloud extends HTMLElement {
 					const y = cr - cr * Math.cos(tRad) + uah;
 					d += ` A ${ur} ${ur} 0 0 1 ${x} ${y}`;
 				}
-				const ur = r * urc;
+				const ur = w * urc;
 				d += ` A ${ur} ${ur} 0 0 1 ${width} ${h + uah}`;
 			} else {
 				d += ` M 0 0 L ${width} 0`;
