@@ -484,11 +484,11 @@
 .cp-selectpicturesources.is-compact {
   width: 6.25rem;
 }
-.cp-selectpicturesources-tbody-tr-td {
+.cp-selectpicturesources__tbody-tr-td {
   position: relative;
   background-color: #ddd;
 }
-.cp-selectpicturesources-tbody-tr-td-label {
+.cp-selectpicturesources__tbody-tr-td-label {
   position: absolute;
   right: 0rem;
   top: 0rem;
@@ -502,6 +502,19 @@
   font-weight: 400;
   color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
   box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+}
+.cp-selectpicturesources-image-img {
+  object-position: center;
+  object-fit: contain;
+}
+.cp-selectpicturesources-image.is-device-pc .cp-selectpicturesources-image-img {
+  aspect-ratio: 1.7777777778;
+}
+.cp-selectpicturesources-image.is-device-tb .cp-selectpicturesources-image-img {
+  aspect-ratio: 1.5;
+}
+.cp-selectpicturesources-image.is-device-sp .cp-selectpicturesources-image-img {
+  aspect-ratio: 0.6666666667;
 }
 .cp-customcolorvars-items {
   padding: 1rem;

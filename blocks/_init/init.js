@@ -1992,6 +1992,7 @@
   // ../blocks/_init/init/CP/components/SelectResponsiveImage.jsx
   var SelectResponsiveImage = (props) => {
     const { className = "cp-selectresponsiveimage", type, attr, set, keys = {}, index = 0, size, devices: devices2, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
+    const primaryClassName = className.split(" ")[0];
     let onClick;
     const itemsKey2 = keys.items && Array.isArray(keys.items) ? keys.items[0] : keys.items;
     const items2 = itemsKey2 && attr[itemsKey2];
@@ -2047,7 +2048,7 @@
     if (isTemplate && keys.code && item[keys.code]) {
       return /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: item[keys.code] });
     }
-    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, showSelectPictureSources ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImageBody, { ...props, className, item, keys }), /* @__PURE__ */ wp.element.createElement("div", { className: "cp-selectresponsiveimage__controls" }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { attr, set, keys, index, size, devices: devices2 }))) : /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImageBody, { ...props, className, item, keys, style: { pointerEvents: "auto" }, onClick }));
+    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, showSelectPictureSources ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImageBody, { ...props, className, item, keys }), /* @__PURE__ */ wp.element.createElement("div", { className: `${primaryClassName}__controls` }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { attr, set, keys, index, size, devices: devices2 }))) : /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImageBody, { ...props, className, item, keys, style: { pointerEvents: "auto" }, onClick }));
   };
 
   // ../blocks/_init/init/CP/components/ResponsiveImage.jsx
@@ -2109,11 +2110,27 @@
     return /* @__PURE__ */ wp.element.createElement("img", { className: className + " is-img", src, alt: item[keys.alt], srcSet: item[keys.srcset], sizes, "data-mime": item[keys.mime], ...otherProps });
   };
 
+  // node_modules/clsx/dist/clsx.mjs
+  function r(e) {
+    var t, f, n = "";
+    if ("string" == typeof e || "number" == typeof e) n += e;
+    else if ("object" == typeof e) if (Array.isArray(e)) {
+      var o = e.length;
+      for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
+    } else for (f in e) e[f] && (n && (n += " "), n += f);
+    return n;
+  }
+  function clsx() {
+    for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
+    return n;
+  }
+  var clsx_default = clsx;
+
   // ../blocks/_init/init/CP/components/SelectPictureSources.jsx
   var SelectPictureSources = (props) => {
     const { Icon } = wp.components;
     const {
-      devices: devices2 = ["sp", "tb"],
+      devices: devices2 = ["tb", "sp"],
       keys = {
         mime: "mime",
         src: "src",
@@ -2123,9 +2140,7 @@
       },
       compact = false
     } = props;
-    const { useMemo: useMemo5 } = wp.element;
-    const classes = useMemo5(() => bem("cp-selectpicturesources"), []);
-    return /* @__PURE__ */ wp.element.createElement("table", { className: classes({ "is-compact": compact }) }, /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.tbody() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), colSpan: devices2.length }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props, keys, devices: devices2 }))), /* @__PURE__ */ wp.element.createElement("tr", { className: classes.tbody.tr() }, devices2.map((device) => /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: device }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.tbody.tr.td.label() }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props, keys, devices: devices2, device }))))));
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("table", { className: clsx_default("cp-selectpicturesources", { "is-compact": compact }) }, /* @__PURE__ */ wp.element.createElement("tbody", { className: "_tbody" }, /* @__PURE__ */ wp.element.createElement("tr", { className: "_tr" }, /* @__PURE__ */ wp.element.createElement("td", { className: "_td", colSpan: devices2.length }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props, className: "-image is-device-pc", keys, devices: devices2 }))), /* @__PURE__ */ wp.element.createElement("tr", { className: "_tr" }, devices2.map((device) => /* @__PURE__ */ wp.element.createElement("td", { className: "_td", key: device }, /* @__PURE__ */ wp.element.createElement("div", { className: "_label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props, className: clsx_default("-image", `is-device-${device}`), keys, devices: devices2, device })))))));
   };
 
   // ../blocks/_init/init/CP/components/SelectPreparedImage.jsx
@@ -2471,22 +2486,6 @@
       ));
     }), /* @__PURE__ */ wp.element.createElement("li", { className: classes.row() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.row.button("is-button-append"), onClick: appendData })));
   };
-
-  // node_modules/clsx/dist/clsx.mjs
-  function r(e) {
-    var t, f, n = "";
-    if ("string" == typeof e || "number" == typeof e) n += e;
-    else if ("object" == typeof e) if (Array.isArray(e)) {
-      var o = e.length;
-      for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
-    } else for (f in e) e[f] && (n && (n += " "), n += f);
-    return n;
-  }
-  function clsx() {
-    for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
-    return n;
-  }
-  var clsx_default = clsx;
 
   // ../blocks/_init/init/CP/components/Item.jsx
   var Item = (props) => {

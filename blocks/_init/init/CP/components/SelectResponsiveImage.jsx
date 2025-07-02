@@ -1,5 +1,6 @@
 ﻿export const SelectResponsiveImage = (props) => {
 	const { className = "cp-selectresponsiveimage", type, attr, set, keys = {}, index = 0, size, devices, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
+	const primaryClassName = className.split(" ")[0];
 
 	let onClick;
 
@@ -64,7 +65,7 @@
 			{showSelectPictureSources ? (
 				<>
 					<CP.ResponsiveImageBody {...props} className={className} item={item} keys={keys} />
-					<div className="cp-selectresponsiveimage__controls">
+					<div className={`${primaryClassName}__controls`}>
 						<CP.SelectPictureSources attr={attr} set={set} keys={keys} index={index} size={size} devices={devices} />
 					</div>
 				</>

@@ -1,9 +1,10 @@
-﻿import { bem } from "catpow/util";
+﻿import { Bem } from "catpow/component";
+import clsx from "clsx";
 
 export const SelectPictureSources = (props) => {
 	const { Icon } = wp.components;
 	const {
-		devices = ["sp", "tb"],
+		devices = ["tb", "sp"],
 		keys = {
 			mime: "mime",
 			src: "src",
@@ -13,28 +14,28 @@ export const SelectPictureSources = (props) => {
 		},
 		compact = false,
 	} = props;
-	const { useMemo } = wp.element;
-	const classes = useMemo(() => bem("cp-selectpicturesources"), []);
 
 	return (
-		<table className={classes({ "is-compact": compact })}>
-			<tbody className={classes.tbody()}>
-				<tr className={classes.tbody.tr()}>
-					<td className={classes.tbody.tr.td()} colSpan={devices.length}>
-						<CP.SelectResponsiveImage {...props} keys={keys} devices={devices} />
-					</td>
-				</tr>
-				<tr className={classes.tbody.tr()}>
-					{devices.map((device) => (
-						<td className={classes.tbody.tr.td()} key={device}>
-							<div className={classes.tbody.tr.td.label()}>
-								<Icon icon={CP.devices[device].icon} />
-							</div>
-							<CP.SelectResponsiveImage {...props} keys={keys} devices={devices} device={device} />
+		<Bem>
+			<table className={clsx("cp-selectpicturesources", { "is-compact": compact })}>
+				<tbody className="_tbody">
+					<tr className="_tr">
+						<td className="_td" colSpan={devices.length}>
+							<CP.SelectResponsiveImage {...props} className="-image is-device-pc" keys={keys} devices={devices} />
 						</td>
-					))}
-				</tr>
-			</tbody>
-		</table>
+					</tr>
+					<tr className="_tr">
+						{devices.map((device) => (
+							<td className="_td" key={device}>
+								<div className="_label">
+									<Icon icon={CP.devices[device].icon} />
+								</div>
+								<CP.SelectResponsiveImage {...props} className={clsx("-image", `is-device-${device}`)} keys={keys} devices={devices} device={device} />
+							</td>
+						))}
+					</tr>
+				</tbody>
+			</table>
+		</Bem>
 	);
 };

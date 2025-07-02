@@ -283,7 +283,7 @@ $colors:(
 		&.is-compact{
 			@include bnd((w:100));
 		}
-		&-tbody{
+		&__tbody{
 			&-tr{
 				&-td{
 					@include bnd((p:r));
@@ -294,6 +294,21 @@ $colors:(
 						@include txt((a:c,p:12,h:10,f:g,w:r,c:i));
 						@include shd((b:1));
 					}
+				}
+			}
+		}
+		&-image{
+			$block:&;
+			&-img{
+				@include bnd((op:c,of:i));
+				#{$block}.is-device-pc &{
+					@include bnd((a:16/9));
+				}
+				#{$block}.is-device-tb &{
+					@include bnd((a:6/4));
+				}
+				#{$block}.is-device-sp &{
+					@include bnd((a:2/3));
 				}
 			}
 		}
