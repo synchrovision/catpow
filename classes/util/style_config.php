@@ -19,15 +19,18 @@ class style_config{
 	public static function get_color_roles(){
 		if(isset(static::$color_roles)){return static::$color_roles;}
 		return static::$color_roles=apply_filters('cp_color_roles',[
-			'background'=>['label'=>'背景色','default'=>'#ffffff','shorthand'=>'b','extend'=>true,'invert'=>'m'],
-			'sheet'=>['label'=>'強調背景色','default'=>'#F8F6F4','shorthand'=>'s','extend'=>true,'invert'=>'a'],
-			'text'=>['label'=>'文字色','default'=>'#666666','shorthand'=>'t','extend'=>true,'invert'=>'i'],
-			'main'=>['label'=>'基本色','default'=>'#443322','shorthand'=>'m','extend'=>true,'invert'=>'b'],
-			'accent'=>['label'=>'強調色','default'=>'#FF8800','shorthand'=>'a','extend'=>true,'invert'=>'s'],
-			'inside'=>['label'=>'反転文字色','default'=>'#ffffff','shorthand'=>'i','extend'=>true,'invert'=>'t'],
-			'light'=>['label'=>'照明色','default'=>'hsla(0,0%,100%,0.5)','shorthand'=>'lt','alphaEnabled'=>true],
-			'shade'=>['label'=>'陰色','default'=>'hsla(0,0%,0%,0.2)','shorthand'=>'sh','alphaEnabled'=>true],
-			'shadow'=>['label'=>'影色','default'=>'hsla(0,0%,0%,0.3)','shorthand'=>'shd','alphaEnabled'=>true],
+			'background'=>['label'=>'背景','default'=>'#ffffff','shorthand'=>'b','extend'=>true,'invert'=>'m'],
+			'sheet'=>['label'=>'強調背景','default'=>'#F8F6F4','shorthand'=>'s','extend'=>true,'invert'=>'a'],
+			'text'=>['label'=>'文字','default'=>'#666666','shorthand'=>'t','extend'=>true,'invert'=>'i'],
+			'highlight'=>['label'=>'強調文字','default'=>'#AA1100','shorthand'=>'h','extend'=>true,'invert'=>'e'],
+			'main'=>['label'=>'基本','default'=>'#443322','shorthand'=>'m','extend'=>true,'invert'=>'b'],
+			'accent'=>['label'=>'強調','default'=>'#FF8800','shorthand'=>'a','extend'=>true,'invert'=>'s'],
+			'inside'=>['label'=>'抜文字','default'=>'#ffffff','shorthand'=>'i','extend'=>true,'invert'=>'t'],
+			'emphasis'=>['label'=>'抜強調文字','default'=>'#FF3300','shorthand'=>'e','extend'=>true,'invert'=>'h'],
+			'light'=>['label'=>'照明','default'=>'hsla(0,0%,100%,0.6)','shorthand'=>'lt','alphaEnabled'=>true],
+			'lust'=>['label'=>'光沢','default'=>'hsla(0,0%,100%,0.9)','shorthand'=>'lst','alphaEnabled'=>true],
+			'shade'=>['label'=>'陰','default'=>'hsla(0,0%,0%,0.2)','shorthand'=>'sh','alphaEnabled'=>true],
+			'shadow'=>['label'=>'影','default'=>'hsla(0,0%,0%,0.3)','shorthand'=>'shd','alphaEnabled'=>true],
 		]);
 	}
 	public static function get_font_roles(){
