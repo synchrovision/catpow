@@ -36,6 +36,7 @@
 					min={param.min || 0}
 					max={param.max || 10}
 					step={param.step || 1}
+					renderTooltipContent={param.unit && ((value) => value * param.coef + param.unit)}
 				/>
 			);
 		}

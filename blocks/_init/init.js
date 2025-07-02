@@ -2414,7 +2414,8 @@
             value: parseFloat(value2) / param.coef,
             min: param.min || 0,
             max: param.max || 10,
-            step: param.step || 1
+            step: param.step || 1,
+            renderTooltipContent: param.unit && ((value3) => value3 * param.coef + param.unit)
           }
         );
       }
