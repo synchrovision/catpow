@@ -45,15 +45,17 @@
 		}
 	}
 	&-palette{
-		@include flx((w:w));
+		@include bnd((w:f));
+		@include grd((tc:repeat(4,1fr)));
 		&__item{
-			@include bnd((p:r,f:1 1 30%));
+			@include bnd((p:r,a:1));
 			background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAAHnlligAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHJJREFUeNpi+P///4EDBxiAGMgCCCAGFB5AADGCRBgYDh48CCRZIJS9vT2QBAggFBkmBiSAogxFBiCAoHogAKIKAlBUYTELAiAmEtABEECk20G6BOmuIl0CIMBQ/IEMkO0myiSSraaaBhZcbkUOs0HuBwDplz5uFJ3Z4gAAAABJRU5ErkJggg==");
 			>.chip{
-				@include bnd((d:b,h:80));
+				@include bnd((d:b,w:f,h:f));
 				@include usr((c:p));
 				>.label{
-					@include bnd((pd:10));
+					@include bnd((pd:.5em));
+					@include txt((p:12,h:1.5em));
 				}
 				&.is-dark{
 					>.label{

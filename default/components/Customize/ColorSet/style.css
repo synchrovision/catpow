@@ -85,28 +85,28 @@
   color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
 }
 .cp-colorset-palette {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-lines: multiple;
-  -webkit-flex-wrap: wrap;
-  flex-wrap: wrap;
+  width: 100%;
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
 .cp-colorset-palette__item {
   position: relative;
-  -webkit-box-flex: 1;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 30%;
+  aspect-ratio: 1;
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAAHnlligAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHJJREFUeNpi+P///4EDBxiAGMgCCCAGFB5AADGCRBgYDh48CCRZIJS9vT2QBAggFBkmBiSAogxFBiCAoHogAKIKAlBUYTELAiAmEtABEECk20G6BOmuIl0CIMBQ/IEMkO0myiSSraaaBhZcbkUOs0HuBwDplz5uFJ3Z4gAAAABJRU5ErkJggg==");
 }
 .cp-colorset-palette__item > .chip {
   display: block;
-  height: 5rem;
+  width: 100%;
+  height: 100%;
   cursor: pointer;
 }
 .cp-colorset-palette__item > .chip > .label {
-  padding: 0.625rem;
+  padding: 0.5em;
+  font-size: 0.75rem;
+  line-height: 1.5em;
 }
 .cp-colorset-palette__item > .chip.is-dark > .label {
   color: white;
