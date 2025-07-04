@@ -163,11 +163,11 @@
   };
 
   // modules/src/schema/methods/getSubSchema.js
-  var getSubSchema = (path, schema2, rootSchema2) => {
+  var getSubSchema = (path, schema2, rootSchema) => {
     let keys = path.split("/");
     if (keys[0] === "#") {
       keys.shift();
-      schema2 = rootSchema2;
+      schema2 = rootSchema;
     }
     keys.every((key2) => {
       if (!schema2.hasOwnProperty(key2)) {
@@ -181,11 +181,11 @@
   };
 
   // modules/src/schema/methods/find.js
-  var find = (callback, schema2, rootSchema2, params = {}) => {
+  var find = (callback, schema2, rootSchema, params = {}) => {
     if (schema2 == null) {
       return null;
     }
-    const result = callback(schema2, rootSchema2);
+    const result = callback(schema2, rootSchema);
     if (result != null) {
       return result;
     }
@@ -198,7 +198,7 @@
     params.refStack.set(schema2, true);
     if (schema2.allOf != null) {
       for (let i2 in schema2.allOf) {
-        const result2 = find(callback, schema2.allOf[i2], rootSchema2, params);
+        const result2 = find(callback, schema2.allOf[i2], rootSchema, params);
         if (result2 != null) {
           return result2;
         }
@@ -207,7 +207,7 @@
     if (params.proactive) {
       if (schema2.anyOf != null) {
         for (let i2 in schema2.anyOf) {
-          const result2 = find(callback, schema2.anyOf[i2], rootSchema2, params);
+          const result2 = find(callback, schema2.anyOf[i2], rootSchema, params);
           if (result2 != null) {
             return result2;
           }
@@ -215,7 +215,7 @@
       }
       if (schema2.oneOf != null) {
         for (let i2 in schema2.oneOf) {
-          const result2 = find(callback, schema2.oneOf[i2], rootSchema2, params);
+          const result2 = find(callback, schema2.oneOf[i2], rootSchema, params);
           if (result2 != null) {
             return result2;
           }
@@ -225,7 +225,7 @@
         if (schema2[key2] == null) {
           break;
         }
-        const result2 = find(callback, schema2[key2], rootSchema2, params);
+        const result2 = find(callback, schema2[key2], rootSchema, params);
         if (result2 != null) {
           return result2;
         }
@@ -233,7 +233,7 @@
       const { dependentSchemas } = extractDependencies(schema2);
       if (dependentSchemas) {
         for (let i2 in dependentSchemas) {
-          const result2 = find(callback, dependentSchemas[i2], rootSchema2, params);
+          const result2 = find(callback, dependentSchemas[i2], rootSchema, params);
           if (result2 != null) {
             return result2;
           }
@@ -241,8 +241,8 @@
       }
     }
     if (schema2["$ref"] != null) {
-      const refSchema = getSubSchema(schema2.$ref, schema2, rootSchema2);
-      const result2 = find(callback, refSchema, rootSchema2, params);
+      const refSchema = getSubSchema(schema2.$ref, schema2, rootSchema);
+      const result2 = find(callback, refSchema, rootSchema, params);
       if (result2 != null) {
         return result2;
       }
@@ -251,7 +251,7 @@
   };
 
   // modules/src/schema/methods/getType.js
-  var getType = (schema2, rootSchema2) => {
+  var getType = (schema2, rootSchema) => {
     return find(
       (schema3) => {
         if (schema3.type != null) {
@@ -283,18 +283,18 @@
         }
       },
       schema2,
-      rootSchema2
+      rootSchema
     );
   };
 
   // modules/src/schema/methods/getResolvedSchema.js
   var cache = /* @__PURE__ */ new WeakMap();
-  var getResolvedSchema = (schema2, rootSchema2) => {
+  var getResolvedSchema = (schema2, rootSchema) => {
     if (schema2 == null) {
       return {};
     }
-    if (rootSchema2 == null) {
-      rootSchema2 = schema2;
+    if (rootSchema == null) {
+      rootSchema = schema2;
     }
     if (cache.has(schema2)) {
       return cache.get(schema2);
@@ -302,10 +302,10 @@
     const resolvedSchema = {};
     const { properties = null, items = null, ...otherParams } = schema2;
     if (schema2.hasOwnProperty("@type")) {
-      Object.assign(resolvedSchema, getResolvedSchema(getSubSchema("#/$defs/" + schema2["@type"], schema2, rootSchema2), rootSchema2));
+      Object.assign(resolvedSchema, getResolvedSchema(getSubSchema("#/$defs/" + schema2["@type"], schema2, rootSchema), rootSchema));
     }
     if (schema2.hasOwnProperty("$ref")) {
-      Object.assign(resolvedSchema, getResolvedSchema(getSubSchema(schema2.$ref, schema2, rootSchema2), rootSchema2));
+      Object.assign(resolvedSchema, getResolvedSchema(getSubSchema(schema2.$ref, schema2, rootSchema), rootSchema));
     }
     if (items != null) {
       if (resolvedSchema.items) {
@@ -326,16 +326,16 @@
     }
     Object.assign(resolvedSchema, otherParams);
     if (resolvedSchema.type == null) {
-      resolvedSchema.type = getType(resolvedSchema, rootSchema2);
+      resolvedSchema.type = getType(resolvedSchema, rootSchema);
     }
     cache.set(schema2, resolvedSchema);
     return resolvedSchema;
   };
 
   // modules/src/schema/methods/test.js
-  var test = (value, schema2, rootSchema2, params = {}) => {
-    const type = getType(schema2, rootSchema2);
-    schema2 = getResolvedSchema(schema2, rootSchema2);
+  var test = (value, schema2, rootSchema, params = {}) => {
+    const type = getType(schema2, rootSchema);
+    schema2 = getResolvedSchema(schema2, rootSchema);
     const { ignoreRequired = false, recursive = false, onError = false, onSuccess = false } = params;
     const cb = (invalidBy, params2 = {}) => onError && onError(Object.assign({ invalidBy, schema: schema2, value }, params2));
     if (schema2.const != null && schema2.const !== value) {
@@ -445,7 +445,7 @@
             if (value[key] == null) {
               continue;
             }
-            const result = test(value, dependentSchemas[propertyName], rootSchema2, params);
+            const result = test(value, dependentSchemas[propertyName], rootSchema, params);
             if (result !== true) {
               return result;
             }
@@ -463,7 +463,7 @@
             if (value[key2] == null) {
               return false;
             }
-            return test(value[key2], schema2.properties[key2], rootSchema2, params) !== true;
+            return test(value[key2], schema2.properties[key2], rootSchema, params) !== true;
           })) {
             return false;
           }
@@ -478,12 +478,12 @@
           return cb("maxItems");
         }
         if (schema2.prefixItems != null) {
-          if (schema2.prefixItems.some((itemSchema, index) => value[index] !== void 0 && test(value[index], itemSchema, rootSchema2, params) !== true)) {
+          if (schema2.prefixItems.some((itemSchema, index) => value[index] !== void 0 && test(value[index], itemSchema, rootSchema, params) !== true)) {
             return cb("prefixItems");
           }
         }
         if (schema2.contains != null) {
-          const matchedItems = value.filter((item) => test(item, schema2.contain, rootSchema2, params) !== true);
+          const matchedItems = value.filter((item) => test(item, schema2.contain, rootSchema, params) !== true);
           if (matchedItems.length === 0) {
             return cb("contains");
           }
@@ -503,19 +503,19 @@
       }
     }
     if (schema2.oneOf != null) {
-      const matchedSchemaLength = getMatchedSchemas(value, schema2.oneOf, rootSchema2, { recursive: true }).length;
+      const matchedSchemaLength = getMatchedSchemas(value, schema2.oneOf, rootSchema, { recursive: true }).length;
       if (matchedSchemaLength !== 1) {
         return cb("oneOf", { matchedSchemaLength });
       }
     }
     if (schema2.anyOf != null) {
-      if (schema2.anyOf.every((subSchema) => test(value, subSchema, rootSchema2) !== true)) {
+      if (schema2.anyOf.every((subSchema) => test(value, subSchema, rootSchema) !== true)) {
         return cb("anyOf");
       }
     }
     if (schema2.allOf != null) {
       for (let subSchema of schema2.allOf) {
-        const result = test(value, subSchema, rootSchema2, params);
+        const result = test(value, subSchema, rootSchema, params);
         if (result !== true) {
           return result;
         }
@@ -528,14 +528,14 @@
   };
 
   // modules/src/schema/methods/getMatchedSchemas.js
-  var getMatchedSchemas = (value, schemas, rootSchema2, params) => {
-    return schemas.filter((schema2) => test(value, schema2, rootSchema2, params) === true);
+  var getMatchedSchemas = (value, schemas, rootSchema, params) => {
+    return schemas.filter((schema2) => test(value, schema2, rootSchema, params) === true);
   };
 
   // modules/src/schema/methods/sanitize.js
-  var sanitize = (value, schema2, rootSchema2) => {
-    const type = getType(schema2, rootSchema2);
-    schema2 = getResolvedSchema(schema2, rootSchema2);
+  var sanitize = (value, schema2, rootSchema) => {
+    const type = getType(schema2, rootSchema);
+    schema2 = getResolvedSchema(schema2, rootSchema);
     if (value == null) {
       return value;
     }
@@ -684,24 +684,24 @@
   });
 
   // modules/src/schema/methods/getMergedSchemaForValue.js
-  var getMergedSchemaForValue = (value, schema2, rootSchema2) => {
-    if (rootSchema2 == null) {
-      rootSchema2 = schema2;
+  var getMergedSchemaForValue = (value, schema2, rootSchema) => {
+    if (rootSchema == null) {
+      rootSchema = schema2;
     }
     const mergedSchema = {};
     find(
       (schema3) => {
-        mergeSchema(mergedSchema, schema3, rootSchema2, { extend: false, value });
+        mergeSchema(mergedSchema, schema3, rootSchema, { extend: false, value });
       },
       schema2,
-      rootSchema2,
+      rootSchema,
       { proactive: false }
     );
     return mergedSchema;
   };
 
   // modules/src/schema/methods/mergeSchema.js
-  var mergeSchema = (targetSchema, schema2, rootSchema2, params = {}) => {
+  var mergeSchema = (targetSchema, schema2, rootSchema, params = {}) => {
     const { extend = false, initialize = true, value = null } = params;
     const forValue = params.hasOwnProperty("value");
     const includeConditional = forValue || params.includeConditional;
@@ -814,21 +814,21 @@
           propParams.value = propParams.value[key2];
         }
         if (targetSchema.properties[key2] != null) {
-          mergeSchema(targetSchema.properties[key2], schema2.properties[key2], rootSchema2, propParams);
+          mergeSchema(targetSchema.properties[key2], schema2.properties[key2], rootSchema, propParams);
         } else {
           const propSchema = {};
-          mergeSchema(propSchema, schema2.properties[key2], rootSchema2, propParams);
+          mergeSchema(propSchema, schema2.properties[key2], rootSchema, propParams);
           targetSchema.properties[key2] = propSchema;
         }
       }
     }
     if (schema2.items != null) {
       if (targetSchema.items == null) {
-        targetSchema.items = getMergedSchema(schema2.items, rootSchema2);
+        targetSchema.items = getMergedSchema(schema2.items, rootSchema);
         if (forValue && value != null) {
           targetSchema.itemsForValue = [];
           for (let i2 in value) {
-            targetSchema.itemsForValue.push(getMergedSchemaForValue(value[i2], schema2.items, rootSchema2));
+            targetSchema.itemsForValue.push(getMergedSchemaForValue(value[i2], schema2.items, rootSchema));
           }
         }
       }
@@ -838,10 +838,10 @@
     }
     const conditionalSchemas = [];
     if (schema2.oneOf != null) {
-      conditionalSchemas.push.apply(conditionalSchemas, forValue ? getMatchedSchemas(value, schema2.oneOf, rootSchema2, { ignoreRequired: true }) : schema2.oneOf);
+      conditionalSchemas.push.apply(conditionalSchemas, forValue ? getMatchedSchemas(value, schema2.oneOf, rootSchema, { ignoreRequired: true }) : schema2.oneOf);
     }
     if (schema2.anyOf != null) {
-      conditionalSchemas.push.apply(conditionalSchemas, forValue ? getMatchedSchemas(value, schema2.anyOf, rootSchema2, { ignoreRequired: true }) : schema2.anyOf);
+      conditionalSchemas.push.apply(conditionalSchemas, forValue ? getMatchedSchemas(value, schema2.anyOf, rootSchema, { ignoreRequired: true }) : schema2.anyOf);
     }
     const { dependentSchemas } = extractDependencies(schema2);
     if (dependentSchemas != null) {
@@ -859,21 +859,21 @@
       const mergedConditionalSchema = {};
       for (let i2 in conditionalSchemas) {
         if (forValue) {
-          mergeSchema(mergedConditionalSchema, getMergedSchemaForValue(value, conditionalSchemas[i2], rootSchema2), rootSchema2, { extend: true, value });
+          mergeSchema(mergedConditionalSchema, getMergedSchemaForValue(value, conditionalSchemas[i2], rootSchema), rootSchema, { extend: true, value });
         } else {
-          mergeSchema(mergedConditionalSchema, getMergedSchemaForValue(value, conditionalSchemas[i2], rootSchema2), rootSchema2, { extend: true });
+          mergeSchema(mergedConditionalSchema, getMergedSchemaForValue(value, conditionalSchemas[i2], rootSchema), rootSchema, { extend: true });
         }
       }
-      mergeSchema(targetSchema, conditionalSchemas[i], rootSchema2, params);
+      mergeSchema(targetSchema, conditionalSchemas[i], rootSchema, params);
     }
     return targetSchema;
   };
 
   // modules/src/schema/methods/getMergedSchema.js
   var cache2 = /* @__PURE__ */ new WeakMap();
-  var getMergedSchema = (schema2, rootSchema2) => {
-    if (rootSchema2 == null) {
-      rootSchema2 = schema2;
+  var getMergedSchema = (schema2, rootSchema) => {
+    if (rootSchema == null) {
+      rootSchema = schema2;
     }
     if (cache2.has(schema2)) {
       return cache2.get(schema2);
@@ -881,10 +881,10 @@
     const mergedSchema = {};
     find(
       (schema3) => {
-        mergeSchema(mergedSchema, schema3, rootSchema2, { extend: false });
+        mergeSchema(mergedSchema, schema3, rootSchema, { extend: false });
       },
       schema2,
-      rootSchema2,
+      rootSchema,
       { proactive: false }
     );
     cache2.set(schema2, mergedSchema);
@@ -892,11 +892,11 @@
   };
 
   // modules/src/schema/methods/getPrimaryPropertyName.js
-  var getPrimaryPropertyName = (schema2, rootSchema2) => {
-    if (getType(schema2, rootSchema2) !== "object") {
+  var getPrimaryPropertyName = (schema2, rootSchema) => {
+    if (getType(schema2, rootSchema) !== "object") {
       return null;
     }
-    const mergedSchema = getMergedSchema(schema2, rootSchema2);
+    const mergedSchema = getMergedSchema(schema2, rootSchema);
     if (mergedSchema.properties["@type"] != null) {
       return "@type";
     }
@@ -904,9 +904,9 @@
   };
 
   // modules/src/schema/methods/mergeSchemas.js
-  var mergeSchemas = (schemas, rootSchema2, params = {}) => {
+  var mergeSchemas = (schemas, rootSchema, params = {}) => {
     const mergedSchema = {};
-    schemas.forEach((schema2) => mergeSchema(mergedSchema, schema2, rootSchema2, params));
+    schemas.forEach((schema2) => mergeSchema(mergedSchema, schema2, rootSchema, params));
     if (mergedSchema.properties != null) {
       const sortedProperties = {};
       Object.keys(mergedSchema.properties).sort((key1, key2) => {
@@ -920,9 +920,9 @@
   };
 
   // modules/src/schema/methods/getDefaultValue.js
-  var getDefaultValue = (schema2, rootSchema2) => {
-    const type = getType(schema2, rootSchema2);
-    schema2 = getResolvedSchema(schema2, rootSchema2);
+  var getDefaultValue = (schema2, rootSchema) => {
+    const type = getType(schema2, rootSchema);
+    schema2 = getResolvedSchema(schema2, rootSchema);
     if (schema2.default != null) {
       return schema2.default;
     }
@@ -1357,7 +1357,7 @@
       if (schema2.if != null) {
         schemas.push(getUnlimietedSchema(schema2.if));
         updateHandlesList.push((agent) => {
-          const isValid = test(agent.getValue(), schema2.if, rootSchema);
+          const isValid = test(agent.getValue(), schema2.if, agent.rootSchema);
           if (schema2.then != null) {
             agent.setConditionalSchemaStatus(schema2.then, isValid ? 3 : 0);
           }
@@ -1378,7 +1378,7 @@
               return;
             }
             const isValid = keyPropertyNames.every((keyPropertyName) => {
-              return subSchema.properties[keyPropertyName] == null || test(agent.properties[keyPropertyName].getValue(), subSchema.properties[keyPropertyName], rootSchema);
+              return subSchema.properties[keyPropertyName] == null || test(agent.properties[keyPropertyName].getValue(), subSchema.properties[keyPropertyName], agent.rootSchema);
             });
             agent.setConditionalSchemaStatus(subSchema, isValid ? 3 : 0);
             keyPropertyNames.forEach((keyPropertyName) => {
@@ -1399,7 +1399,7 @@
               return;
             }
             const isValid = keyPropertyNames.every((keyPropertyName) => {
-              return subSchema.properties[keyPropertyName] == null || test(agent.properties[keyPropertyName].getValue(), subSchema.properties[keyPropertyName], rootSchema);
+              return subSchema.properties[keyPropertyName] == null || test(agent.properties[keyPropertyName].getValue(), subSchema.properties[keyPropertyName], agent.rootSchema);
             });
             agent.setConditionalSchemaStatus(subSchema, isValid ? 3 : 0);
             keyPropertyNames.forEach((keyPropertyName) => {
@@ -1489,8 +1489,8 @@
   };
 
   // modules/src/schema/functions/resolveSchema.js
-  var resolveSchema = (uri, schema2, rootSchema2, param) => {
-    const resolvedSchema = getResolvedSchema(schema2, rootSchema2);
+  var resolveSchema = (uri, schema2, rootSchema, param) => {
+    const resolvedSchema = getResolvedSchema(schema2, rootSchema);
     Object.assign(resolvedSchema, param);
     if (resolvedSchema.$ref != null) {
       delete resolvedSchema.$ref;
@@ -1502,21 +1502,21 @@
       }
       if (conditionalSchemaKeys[conditionalSchemaKey]) {
         for (let key2 in resolvedSchema[conditionalSchemaKey]) {
-          resolvedSchema[conditionalSchemaKey][key2] = resolveSchema(uri, resolvedSchema[conditionalSchemaKey][key2], rootSchema2, { parent, isConditional: true, container: resolvedSchema });
+          resolvedSchema[conditionalSchemaKey][key2] = resolveSchema(uri, resolvedSchema[conditionalSchemaKey][key2], rootSchema, { parent, isConditional: true, container: resolvedSchema });
         }
       } else {
-        resolvedSchema[conditionalSchemaKey] = resolveSchema(uri, resolvedSchema[conditionalSchemaKey], rootSchema2, { parent, isConditional: true, container: resolvedSchema });
+        resolvedSchema[conditionalSchemaKey] = resolveSchema(uri, resolvedSchema[conditionalSchemaKey], rootSchema, { parent, isConditional: true, container: resolvedSchema });
       }
     }
     const { dependentSchemas } = extractDependencies(resolvedSchema);
     if (dependentSchemas != null) {
       for (let propertyName in dependentSchemas) {
-        dependentSchemas[propertyName] = resolveSchema(uri, dependentSchemas[propertyName], rootSchema2, { parent, isConditional: true });
+        dependentSchemas[propertyName] = resolveSchema(uri, dependentSchemas[propertyName], rootSchema, { parent, isConditional: true });
       }
     }
     if (resolvedSchema.properties != null) {
       for (let key2 in resolvedSchema.properties) {
-        resolvedSchema.properties[key2] = resolveSchema(uri + "/" + key2, resolvedSchema.properties[key2], rootSchema2, { parent: resolvedSchema });
+        resolvedSchema.properties[key2] = resolveSchema(uri + "/" + key2, resolvedSchema.properties[key2], rootSchema, { parent: resolvedSchema });
       }
       if (resolvedSchema.required) {
         for (let key2 of resolvedSchema.required) {
@@ -1528,11 +1528,11 @@
     }
     if (resolvedSchema.prefixItems != null) {
       for (let index in resolvedSchema.prefixItems) {
-        resolvedSchema.prefixItems[index] = resolveSchema(uri + "/" + index, resolvedSchema.prefixItems[index], rootSchema2, { parent: resolvedSchema });
+        resolvedSchema.prefixItems[index] = resolveSchema(uri + "/" + index, resolvedSchema.prefixItems[index], rootSchema, { parent: resolvedSchema });
       }
     }
     if (resolvedSchema.items != null) {
-      resolvedSchema.items = resolveSchema(uri + "/$", resolvedSchema.items, rootSchema2, { parent: resolvedSchema });
+      resolvedSchema.items = resolveSchema(uri + "/$", resolvedSchema.items, rootSchema, { parent: resolvedSchema });
     }
     return resolvedSchema;
   };
@@ -1540,8 +1540,8 @@
   // modules/src/schema/main.js
   var main = (originalRootSchema, matrixParams = {}) => {
     const { debug = false } = matrixParams;
-    const rootSchema2 = JSON.parse(JSON.stringify(originalRootSchema));
-    const resolvedRootSchema = resolveSchema("#", rootSchema2, rootSchema2, {});
+    const rootSchema = JSON.parse(JSON.stringify(originalRootSchema));
+    const resolvedRootSchema = resolveSchema("#", rootSchema, rootSchema, {});
     if (debug) {
       debugLog2("\u2728 resolve rootSchema", { originalRootSchema, resolvedRootSchema });
     }
