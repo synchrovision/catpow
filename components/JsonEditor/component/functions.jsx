@@ -6,6 +6,9 @@ export const getInputComponentForSchema = (schema, params) => {
 		if (JsonEditor[schema["@editor"]]) {
 			return JsonEditor[schema["@editor"]];
 		}
+		if (inputComponents[schema["@editor"]]) {
+			return inputComponents[schema["@editor"]];
+		}
 	}
 	if (schema.hasOwnProperty("options")) {
 		if (Array.isArray(schema.options) || Object.keys(schema.options).every((key) => typeof schema.options[key] !== "object")) {
