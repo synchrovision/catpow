@@ -1,8 +1,6 @@
-﻿const { __, sprintf } = wp.i18n;
-
-export const Text = (props) => {
+﻿export const Text = (props) => {
 	const { className = "cp-jsoneditor-input-text", agent, onChange, onUpdate } = props;
-	const { useState, useMemo, useCallback, useEffect } = wp.element;
+	const { useMemo, useCallback } = wp.element;
 	const { bem } = Catpow.util;
 	const classes = useMemo(() => bem(className), []);
 

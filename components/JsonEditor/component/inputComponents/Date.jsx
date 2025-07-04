@@ -1,7 +1,4 @@
-﻿const { __, sprintf } = wp.i18n;
-import { debounce } from "catpow/util";
-
-export const Date = (props) => {
+﻿export const Date = (props) => {
 	const { className = "cp-jsoneditor-input-date", agent, onChange, onUpdate } = props;
 	const { useState, useMemo, useCallback, useEffect } = wp.element;
 	const { bem } = Catpow.util;

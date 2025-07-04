@@ -1,8 +1,6 @@
-﻿const { __, sprintf } = wp.i18n;
-
-export const ReadOnly = (props) => {
+﻿export const ReadOnly = (props) => {
 	const { className = "cp-jsoneditor-input-readonly", agent, onChange, onUpdate } = props;
-	const { useState, useMemo, useCallback, useEffect } = wp.element;
+	const { useMemo } = wp.element;
 	const { bem } = Catpow.util;
 	const classes = useMemo(() => bem(className), []);
 

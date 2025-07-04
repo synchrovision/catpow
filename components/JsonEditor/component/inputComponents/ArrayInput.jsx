@@ -1,7 +1,7 @@
 ﻿import { Input } from "./Input.jsx";
 
 export const ArrayInput = (props) => {
-	const { className = "cp-jsoneditor-input-arrayinput", compact = false, agent, onChange, onUpdate } = props;
+	const { className = "cp-jsoneditor-input-arrayinput", compact = false, agent } = props;
 	const { useState, useMemo, useCallback, useEffect } = wp.element;
 	const { bem } = Catpow.util;
 	const classes = useMemo(() => bem(className), []);
@@ -9,8 +9,6 @@ export const ArrayInput = (props) => {
 	const schema = agent.getMergedSchemaForInput();
 	const layout = schema.layout || props.layout || (compact ? "table" : "block");
 	const size = schema.size || props.size || "medium";
-
-	const { minContains: min, maxContains: max, items, prefixItems } = schema;
 
 	const onAddItem = useCallback(
 		(index, value) => {

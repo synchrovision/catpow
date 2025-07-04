@@ -1,6 +1,4 @@
-﻿const { __, sprintf } = wp.i18n;
-
-export const Number = (props) => {
+﻿export const Number = (props) => {
 	const { className = "cp-jsoneditor-input-number", agent, onChange, onUpdate } = props;
 	const { useState, useMemo, useCallback, useEffect } = wp.element;
 	const { bem } = Catpow.util;

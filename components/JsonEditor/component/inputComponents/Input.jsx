@@ -1,8 +1,5 @@
-﻿import { JsonEditor, DataContext } from "../JsonEditor.jsx";
+﻿import { DataContext } from "../JsonEditor.jsx";
 import { getInputComponentForSchema } from "../functions.jsx";
-import { throttle } from "catpow/util";
-
-const { __, sprintf } = wp.i18n;
 
 export const Input = (props) => {
 	const { className = "cp-jsoneditor-input", compact = false, level = 0, agent } = props;

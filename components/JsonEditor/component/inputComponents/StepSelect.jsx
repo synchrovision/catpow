@@ -1,8 +1,6 @@
-﻿const { __, sprintf } = wp.i18n;
-
-export const StepSelect = (props) => {
+﻿export const StepSelect = (props) => {
 	const { className = "cp-jsoneditor-input-stepselect", agent, onChange, onUpdate } = props;
-	const { useState, useMemo, useCallback, useEffect } = wp.element;
+	const { useMemo } = wp.element;
 	const { bem } = Catpow.util;
 	const classes = useMemo(() => bem(className), []);
 

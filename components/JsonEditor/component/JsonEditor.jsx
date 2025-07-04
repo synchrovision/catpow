@@ -1,7 +1,6 @@
 ﻿import { ObjectInput } from "./inputComponents/ObjectInput.jsx";
 import { Input } from "./inputComponents/Input.jsx";
 import { Bem } from "catpow/component";
-import { useThrottle } from "catpow/hooks";
 import clsx from "clsx";
 export const DataContext = wp.element.createContext({});
 
