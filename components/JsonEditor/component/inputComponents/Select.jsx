@@ -6,9 +6,11 @@ export const Select = (props) => {
 	const { bem } = Catpow.util;
 	const classes = useMemo(() => bem(className), []);
 
+	const mergedSchemaForInput = agent.getMergedSchemaForInput();
+
 	return (
 		<div className={classes()}>
-			<Catpow.SelectBox value={agent.getValue()} options={agent.getMergedSchemaForInput().enum} onChange={onUpdate} />
+			<Catpow.SelectBox value={agent.getValue()} options={mergedSchemaForInput.options || mergedSchemaForInput.enum} onChange={onUpdate} />
 		</div>
 	);
 };
