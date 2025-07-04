@@ -1,7 +1,12 @@
 (() => {
+  var __defProp = Object.defineProperty;
   var __getOwnPropNames = Object.getOwnPropertyNames;
   var __esm = (fn, res) => function __init() {
     return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+  };
+  var __export = (target, all) => {
+    for (var name in all)
+      __defProp(target, name, { get: all[name], enumerable: true });
   };
 
   // react-global:react
@@ -26,56 +31,73 @@
     }
   });
 
+  // ../components/JsonEditor/component/inputComponents/index.js
+  var inputComponents_exports = {};
+  __export(inputComponents_exports, {
+    ArrayInput: () => ArrayInput,
+    Checkbox: () => Checkbox,
+    Date: () => Date2,
+    DateTime: () => DateTime,
+    Duration: () => Duration,
+    Input: () => Input,
+    None: () => None,
+    Number: () => Number2,
+    ObjectInput: () => ObjectInput,
+    Radio: () => Radio,
+    Range: () => Range,
+    ReadOnly: () => ReadOnly,
+    SearchSelect: () => SearchSelect,
+    Select: () => Select,
+    StepSelect: () => StepSelect,
+    Text: () => Text,
+    Textarea: () => Textarea,
+    Time: () => Time,
+    Toggle: () => Toggle
+  });
+
   // ../components/JsonEditor/component/inputComponents/None.jsx
   var None = (props) => {
     return false;
   };
 
   // ../components/JsonEditor/component/inputComponents/ReadOnly.jsx
-  var { __, sprintf } = wp.i18n;
   var ReadOnly = (props) => {
     const { className = "cp-jsoneditor-input-readonly", agent, onChange, onUpdate } = props;
-    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
+    const { useMemo: useMemo4 } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo4(() => bem2(className), []);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, agent.getValue() || "");
   };
 
   // ../components/JsonEditor/component/inputComponents/Toggle.jsx
-  var { __: __2, sprintf: sprintf2 } = wp.i18n;
   var Toggle = (props) => {
-    const { className = "cp-jsoneditor-input-toggle", agent, onChange, onUpdate } = props;
-    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
+    const { className = "cp-jsoneditor-input-toggle", agent, onUpdate } = props;
+    const { useMemo: useMemo4 } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo4(() => bem2(className), []);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(Catpow.Toggle, { value: agent.getValue(), onChange: onUpdate }));
   };
 
   // ../components/JsonEditor/component/inputComponents/Select.jsx
-  var { __: __3, sprintf: sprintf3 } = wp.i18n;
   var Select = (props) => {
-    const { className = "cp-jsoneditor-input-select", agent, onChange, onUpdate } = props;
-    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
+    const { className = "cp-jsoneditor-input-select", agent, onUpdate } = props;
+    const { useMemo: useMemo4 } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo4(() => bem2(className), []);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(Catpow.SelectBox, { value: agent.getValue(), options: agent.getMergedSchemaForInput().enum, onChange: onUpdate }));
+    const mergedSchemaForInput = agent.getMergedSchemaForInput();
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(Catpow.SelectBox, { value: agent.getValue(), options: mergedSchemaForInput.options || mergedSchemaForInput.enum, onChange: onUpdate }));
   };
 
   // ../components/JsonEditor/component/inputComponents/Checkbox.jsx
-  var { __: __4, sprintf: sprintf4 } = wp.i18n;
   var Checkbox = (props) => {
-    const { className = "cp-jsoneditor-input-checkbox", agent, onChange, onUpdate } = props;
-    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
-    const { bem: bem2 } = Catpow.util;
-    const classes = useMemo4(() => bem2(className), []);
+    const { className = "cp-jsoneditor-input-checkbox", agent, onUpdate } = props;
     return /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement(Catpow.CheckBoxes, { value: agent.getValue(), options: agent.getMergedSchemaForInput().items.enum, onChange: onUpdate }));
   };
 
   // ../components/JsonEditor/component/inputComponents/Radio.jsx
-  var { __: __5, sprintf: sprintf5 } = wp.i18n;
   var Radio = (props) => {
-    const { className = "cp-jsoneditor-input-radio", agent, onChange, onUpdate } = props;
-    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
+    const { className = "cp-jsoneditor-input-radio", agent, onUpdate } = props;
+    const { useMemo: useMemo4 } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo4(() => bem2(className), []);
     const schema = agent.getMergedSchemaForInput();
@@ -83,10 +105,9 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/SearchSelect.jsx
-  var { __: __6, sprintf: sprintf6 } = wp.i18n;
   var SearchSelect = (props) => {
-    const { className = "cp-jsoneditor-input-searchselect", agent, onChange, onUpdate } = props;
-    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
+    const { className = "cp-jsoneditor-input-searchselect", agent, onUpdate } = props;
+    const { useMemo: useMemo4 } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo4(() => bem2(className), []);
     const options = useMemo4(() => {
@@ -112,10 +133,9 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/StepSelect.jsx
-  var { __: __7, sprintf: sprintf7 } = wp.i18n;
   var StepSelect = (props) => {
     const { className = "cp-jsoneditor-input-stepselect", agent, onChange, onUpdate } = props;
-    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
+    const { useMemo: useMemo4 } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo4(() => bem2(className), []);
     const options = useMemo4(() => {
@@ -141,10 +161,9 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/Text.jsx
-  var { __: __8, sprintf: sprintf8 } = wp.i18n;
   var Text = (props) => {
     const { className = "cp-jsoneditor-input-text", agent, onChange, onUpdate } = props;
-    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
+    const { useMemo: useMemo4, useCallback: useCallback3 } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo4(() => bem2(className), []);
     const autoComplete = useMemo4(() => {
@@ -205,10 +224,9 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/Textarea.jsx
-  var { __: __9, sprintf: sprintf9 } = wp.i18n;
   var Textarea = (props) => {
     const { className = "cp-jsoneditor-input-textarea", agent, onChange, onUpdate } = props;
-    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
+    const { useMemo: useMemo4, useCallback: useCallback3 } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo4(() => bem2(className), []);
     const onChangeHandle = useCallback3(
@@ -232,7 +250,6 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/DateTime.jsx
-  var { __: __10, sprintf: sprintf10 } = wp.i18n;
   var DateTime = (props) => {
     const { className = "cp-jsoneditor-input-datetime", agent, onChange, onUpdate } = props;
     const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
@@ -254,7 +271,6 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/Date.jsx
-  var { __: __11, sprintf: sprintf11 } = wp.i18n;
   var Date2 = (props) => {
     const { className = "cp-jsoneditor-input-date", agent, onChange, onUpdate } = props;
     const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
@@ -276,10 +292,9 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/Time.jsx
-  var { __: __12, sprintf: sprintf12 } = wp.i18n;
   var Time = (props) => {
     const { className = "cp-jsoneditor-input-time", agent, onChange, onUpdate } = props;
-    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
+    const { useMemo: useMemo4, useCallback: useCallback3 } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo4(() => bem2(className), []);
     const onChangeHandle = useCallback3(
@@ -298,10 +313,9 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/Duration.jsx
-  var { __: __13, sprintf: sprintf13 } = wp.i18n;
   var Duration = (props) => {
     const { className = "cp-jsoneditor-input-duration", agent, onChange, onUpdate } = props;
-    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
+    const { useMemo: useMemo4 } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo4(() => bem2(className), []);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(Catpow.InputDuration, { value: agent.getValue() || "", onChange: onUpdate }));
@@ -500,10 +514,9 @@
   init_react();
 
   // ../components/JsonEditor/component/inputComponents/Range.jsx
-  var { __: __14, sprintf: sprintf14 } = wp.i18n;
   var Range = (props) => {
     const { className = "cp-jsoneditor-input-range", agent, onChange, onUpdate } = props;
-    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
+    const { useCallback: useCallback3 } = wp.element;
     const { minimum: min, maximum: max, multipleOf: step2 } = agent.getMergedSchemaForInput();
     const onUpdateHandle = useCallback3(
       (e) => {
@@ -515,7 +528,6 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/Number.jsx
-  var { __: __15, sprintf: sprintf15 } = wp.i18n;
   var Number2 = (props) => {
     const { className = "cp-jsoneditor-input-number", agent, onChange, onUpdate } = props;
     const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
@@ -539,14 +551,13 @@
 
   // ../components/JsonEditor/component/inputComponents/ArrayInput.jsx
   var ArrayInput = (props) => {
-    const { className = "cp-jsoneditor-input-arrayinput", compact = false, agent, onChange, onUpdate } = props;
+    const { className = "cp-jsoneditor-input-arrayinput", compact = false, agent } = props;
     const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo4(() => bem2(className), []);
     const schema = agent.getMergedSchemaForInput();
     const layout = schema.layout || props.layout || (compact ? "table" : "block");
     const size = schema.size || props.size || "medium";
-    const { minContains: min, maxContains: max, items, prefixItems } = schema;
     const onAddItem = useCallback3(
       (index, value) => {
         agent.addItem(index, value);
@@ -631,6 +642,9 @@
       if (JsonEditor[schema["@editor"]]) {
         return JsonEditor[schema["@editor"]];
       }
+      if (inputComponents_exports[schema["@editor"]]) {
+        return inputComponents_exports[schema["@editor"]];
+      }
     }
     if (schema.hasOwnProperty("options")) {
       if (Array.isArray(schema.options) || Object.keys(schema.options).every((key) => typeof schema.options[key] !== "object")) {
@@ -705,7 +719,6 @@
   };
 
   // ../components/JsonEditor/component/inputComponents/Input.jsx
-  var { __: __16, sprintf: sprintf16 } = wp.i18n;
   var Input = (props) => {
     const { className = "cp-jsoneditor-input", compact = false, level = 0, agent } = props;
     const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5, useContext: useContext3 } = wp.element;
@@ -751,7 +764,7 @@
   // ../components/JsonEditor/component/inputComponents/ObjectInput.jsx
   var ObjectInput = (props) => {
     const { className = "cp-jsoneditor-input-objectinput", compact = false, popoverSize = "large", level = 0, agent, lastChanged } = props;
-    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5, useContext: useContext3 } = wp.element;
+    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3 } = wp.element;
     const { bem: bem2 } = Catpow.util;
     const classes = useMemo4(() => bem2(className), []);
     const schema = agent.getMergedSchemaForInput();
