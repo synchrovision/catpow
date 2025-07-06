@@ -1093,7 +1093,7 @@
           if (agent.debug) {
             debugLog2(`\u{1F511} conditionalSchemaStatus of '${agent.key}' was changed`, { schema: schema2, status });
           }
-          agent.setSchemaStatus(schema2, agent.parent == null ? 3 : agent.parent.getSchemaStatus(schema2.parent) & status);
+          agent.setSchemaStatus(schema2, (agent.parent == null ? 3 : agent.parent.getSchemaStatus(schema2.parent)) & status);
         };
       },
       getParentSchemaStatus: (agent) => {
