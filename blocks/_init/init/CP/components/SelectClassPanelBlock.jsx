@@ -430,6 +430,27 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					);
 					break;
 				}
+				case "backgroundimage": {
+					const d = new Date();
+					console.log(d.toLocaleString());
+					rtn.push(
+						<CP.InputBackgroundImage
+							attr={props.attr[prm.vars]}
+							set={(data) => {
+								console.log(d.toLocaleString());
+								save({
+									[prm.vars]: {
+										...props.attr[prm.vars],
+										...data,
+									},
+								});
+							}}
+							keys={prm.keys}
+							prefix={prm.prefix}
+						/>
+					);
+					break;
+				}
 				case "position": {
 					rtn.push(
 						<CP.PositionInput
@@ -590,6 +611,13 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					rtn.push(<CP.SelectPictureSources index={props.index} set={props.set} attr={props.attr} keys={prm.keys} sizes={prm.sizes} devices={prm.devices} isTemplate={prm.isTemplate} />);
 					break;
 				}
+				case "backgroundimage": {
+					if (prm.label) {
+						rtn.push(<h5>{prm.label}</h5>);
+					}
+					rtn.push(<CP.InputBackgroundImage index={props.index} set={props.set} attr={props.attr} keys={prm.keys} sizes={prm.sizes} devices={prm.devices} isTemplate={prm.isTemplate} />);
+					break;
+				}
 				case "position": {
 					rtn.push(<CP.SelectPositionClass set={props.set} attr={props.attr} label={prm.label} key={prm.key} help={prm.help} disable={prm.disable} itemsKey={itemsKey} index={props.index} />);
 				}
@@ -678,7 +706,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 				}
 			}
 		} else {
-			const {classKey=primaryClassKey}=prm;
+			const { classKey = primaryClassKey } = prm;
 			const targetStates = allStates[classKey] || {};
 			const allClassFlags = CP.getAllClassFlags(prm, primaryClassKey);
 			const classFlagsByValue = CP.getClassFlagsByValue(prm, primaryClassKey);

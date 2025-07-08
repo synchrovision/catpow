@@ -12,6 +12,7 @@ export * from "./ResponsiveImage.jsx";
 export * from "./SelectPictureSources.jsx";
 export * from "./SelectPreparedImage.jsx";
 export * from "./SelectPreparedImageSet.jsx";
+export * from "./InputBackgroundImage.jsx";
 export * from "./InputIcon.jsx";
 export * from "./OutputIcon.jsx";
 export * from "./StandardIcon.jsx";
