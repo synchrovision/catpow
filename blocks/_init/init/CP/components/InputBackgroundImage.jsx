@@ -186,7 +186,6 @@ export const InputBackgroundImage = (props) => {
 	return (
 		<CP.Bem>
 			<div className="cp-inputbackgroundimage">
-				{getPreview({ ...data })}
 				<Catpow.JsonEditor
 					title={title}
 					schema={schema}
@@ -206,19 +205,4 @@ export const InputBackgroundImage = (props) => {
 			</div>
 		</CP.Bem>
 	);
-};
-
-const getPreview = (data) => {
-	const { image = [], repeat = ["repeat"], position = ["center"], size = ["cover"], blendmode = ["normal"] } = data;
-	const style = {
-		width: "160px",
-		height: "90px",
-		backgroundImage: image.join(","),
-		backgroundRepeat: repeat.join(","),
-		backgroundPosition: position.join(","),
-		backgroundSize: size.join(","),
-		backgroundBlendMode: blendmode.join(","),
-		backgroundColor: "cyan",
-	};
-	return <div className="cp-inputbackgroundimage-preview" style={style}></div>;
 };
