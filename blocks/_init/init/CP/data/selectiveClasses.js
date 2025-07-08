@@ -65,13 +65,6 @@ export const selectiveClassesPresets = {
 			classKey,
 			sub: [
 				{
-					name: "backgroundimage",
-					label: __("背景画像", "catpow"),
-					vars,
-					prefix: "--cp-background-image",
-					input: "backgroundimage",
-				},
-				{
 					name: "fixed",
 					label: __("固定", "catpow"),
 					classKey,
@@ -93,6 +86,13 @@ export const selectiveClassesPresets = {
 					min: 0,
 					max: 1,
 					step: 0.1,
+				},
+				{
+					name: "backgroundimage",
+					label: __("背景画像", "catpow"),
+					vars,
+					prefix: "--cp-background-image",
+					input: "backgroundimage",
 				},
 			],
 			...otherParams,
