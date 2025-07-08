@@ -247,9 +247,9 @@
 				});
 				return (
 					<ul className={classes}>
-						{states.doLoop && "[loop_template " + loopParam + "]"}
+						{states?.doLoop && "[loop_template " + loopParam + "]"}
 						{rtn}
-						{states.doLoop && "[/loop_template]"}
+						{states?.doLoop && "[/loop_template]"}
 					</ul>
 				);
 			},
@@ -257,7 +257,7 @@
 				var states = CP.wordsToFlags(classes);
 				attributes.content_path = attributes.loopParam.split(" ")[0];
 				attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
-				attributes.doLoop = states.doLoop;
+				attributes.doLoop = states?.doLoop;
 				return attributes;
 			},
 		},

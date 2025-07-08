@@ -172,13 +172,13 @@
               /* @__PURE__ */ wp.element.createElement("li", { className: item.classes }, /* @__PURE__ */ wp.element.createElement("a", { href: item.url, className: "button", "data-event": item.event }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement("span", { className: "icon" }, /* @__PURE__ */ wp.element.createElement("img", { src: item.iconSrc, alt: item.iconAlt })), item.text))
             );
           });
-          return /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, states.doLoop && "[loop_template " + loopParam + "]", rtn, states.doLoop && "[/loop_template]");
+          return /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, states?.doLoop && "[loop_template " + loopParam + "]", rtn, states?.doLoop && "[/loop_template]");
         },
         migrate(attributes) {
           var states = CP.wordsToFlags(classes);
           attributes.content_path = attributes.loopParam.split(" ")[0];
           attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
-          attributes.doLoop = states.doLoop;
+          attributes.doLoop = states?.doLoop;
           return attributes;
         }
       }
