@@ -49,13 +49,15 @@ const getValuesFromData = (data, keys) => {
 };
 
 const baseGradientParams = {
+	useAccentColor: { type: "boolean" },
 	baseGradientRotate: { minimum: 0, maximum: 360, multipleOf: 5 },
 	baseGradientColor1: { minimum: 1, maximum: 12 },
 	baseGradientColor2: { minimum: 1, maximum: 12 },
 };
 const getBaseGradientCode = (params) => {
-	const { baseGradientRotate = 0, baseGradientColor1 = 6, baseGradientColor2 = 7 } = params;
-	return `linear-gradient(${baseGradientRotate}deg in hsl,${translateColor("sx" + baseGradientColor1)},${translateColor("sx" + baseGradientColor2)})`;
+	const { useAccentColor = true, baseGradientRotate = 0, baseGradientColor1 = 6, baseGradientColor2 = 7 } = params;
+	const colorKey = useAccentColor ? "sx" : "bx";
+	return `linear-gradient(${baseGradientRotate}deg in hsl,${translateColor(colorKey + baseGradientColor1)},${translateColor(colorKey + baseGradientColor2)})`;
 };
 
 const BackgroundImageDataGenerators = {
@@ -207,7 +209,7 @@ export const InputBackgroundImage = (props) => {
 };
 
 const getPreview = (data) => {
-	const { image, repeat = ["repeat"], position = ["center"], size = ["cover"], blendmode = ["normal"] } = data;
+	const { image = [], repeat = ["repeat"], position = ["center"], size = ["cover"], blendmode = ["normal"] } = data;
 	const style = {
 		width: "160px",
 		height: "90px",

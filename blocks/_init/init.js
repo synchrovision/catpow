@@ -201,22 +201,22 @@
     return new (P || (P = Promise))(function(resolve, reject) {
       function fulfilled(value2) {
         try {
-          step2(generator.next(value2));
+          step(generator.next(value2));
         } catch (e) {
           reject(e);
         }
       }
       function rejected(value2) {
         try {
-          step2(generator["throw"](value2));
+          step(generator["throw"](value2));
         } catch (e) {
           reject(e);
         }
       }
-      function step2(result) {
+      function step(result) {
         result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
       }
-      step2((generator = generator.apply(thisArg, _arguments || [])).next());
+      step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   }
   function __generator(thisArg, body) {
@@ -229,10 +229,10 @@
     }), g;
     function verb(n) {
       return function(v) {
-        return step2([n, v]);
+        return step([n, v]);
       };
     }
-    function step2(op) {
+    function step(op) {
       if (f) throw new TypeError("Generator is already executing.");
       while (g && (g = 0, op[0] && (_2 = 0)), _2) try {
         if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
@@ -366,12 +366,12 @@
     }
     function resume(n, v) {
       try {
-        step2(g[n](v));
+        step(g[n](v));
       } catch (e) {
         settle(q[0][3], e);
       }
     }
-    function step2(r2) {
+    function step(r2) {
       r2.value instanceof __await ? Promise.resolve(r2.value.v).then(fulfill, reject) : settle(q[0][2], r2);
     }
     function fulfill(value2) {
@@ -1559,10 +1559,10 @@
 
   // modules/src/component/Bem.jsx
   init_react();
-  var applyBem2 = (component, { ...ctx }) => {
+  var applyBem = (component, { ...ctx }) => {
     if (Array.isArray(component)) {
       component.forEach((child) => {
-        applyBem2(child, ctx);
+        applyBem(child, ctx);
       });
       return;
     }
@@ -1570,7 +1570,7 @@
       return;
     }
     if (component.type == react_default.Fragment) {
-      applyBem2(component.props.children, ctx);
+      applyBem(component.props.children, ctx);
       return;
     }
     const {
@@ -1616,15 +1616,15 @@
     }
     if (Array.isArray(children)) {
       children.forEach((child) => {
-        applyBem2(child, ctx);
+        applyBem(child, ctx);
       });
     } else {
-      applyBem2(children, ctx);
+      applyBem(children, ctx);
     }
   };
   var Bem = ({ prefix = "cp", block, element, children }) => {
     const ctx = { prefix, block, element };
-    applyBem2(children, ctx);
+    applyBem(children, ctx);
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, children);
   };
 
@@ -1648,7 +1648,7 @@
 
   // modules/src/component/Input/PositionInput.jsx
   var PositionInput = (props) => {
-    const { className = "cp-positioninput", width = 100, height = 100, margin: margin2 = 10, grid = 10, snap = false, x = 50, y = 50, r: r2 = 6, onChange, ...otherProps } = props;
+    const { className = "cp-positioninput", width = 100, height = 100, margin = 10, grid = 10, snap = false, x = 50, y = 50, r: r2 = 6, onChange, ...otherProps } = props;
     const [ref, state] = useScratch_default();
     const [pos, setPos] = useState({ x, y });
     useThrottle(() => onChange({ x: pos.x, y: pos.y }), 50, [pos.x, pos.y]);
@@ -1656,8 +1656,8 @@
       if (!state.isScratching) {
         return;
       }
-      let x2 = parseInt(Math.max(0, Math.min(state.x + state.dx - margin2, width)));
-      let y2 = parseInt(Math.max(0, Math.min(state.y + state.dy - margin2, height)));
+      let x2 = parseInt(Math.max(0, Math.min(state.x + state.dx - margin, width)));
+      let y2 = parseInt(Math.max(0, Math.min(state.y + state.dy - margin, height)));
       if (isNaN(x2) || isNaN(y2)) {
         return;
       }
@@ -1671,24 +1671,20 @@
       "svg",
       {
         className,
-        width: width + margin2 * 2,
-        height: height + margin2 * 2,
-        viewBox: `0 0 ${width + margin2 * 2} ${height + margin2 * 2}`,
+        width: width + margin * 2,
+        height: height + margin * 2,
+        viewBox: `0 0 ${width + margin * 2} ${height + margin * 2}`,
         xmlns: "http://www.w3.org/2000/svg",
         ref,
         style: { cursor: state.isScratching ? "grabbing" : "grab" },
         ...otherProps
       },
-      /* @__PURE__ */ wp.element.createElement("rect", { className: "_bg", x: margin2, y: margin2, width, height, fill: "none", stroke: "currentColor", strokeOpacity: 0.5 }),
-      /* @__PURE__ */ wp.element.createElement("circle", { fill: "none", stroke: "currentColor", strokeOpacity: 0.75, className: "_circle", cx: pos.x + margin2, cy: pos.y + margin2, r: r2 }),
-      /* @__PURE__ */ wp.element.createElement("circle", { fill: "currentColor", className: "_dot", cx: pos.x + margin2, cy: pos.y + margin2, r: 2 }),
-      grid > 0 && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, Array.from({ length: Math.floor(width / grid) }, (_2, i) => /* @__PURE__ */ wp.element.createElement("line", { key: i, stroke: "currentColor", strokeOpacity: 0.1, className: "_grid", x1: i * grid + margin2, y1: margin2, x2: i * grid + margin2, y2: height + margin2 })), Array.from({ length: Math.floor(height / grid) }, (_2, i) => /* @__PURE__ */ wp.element.createElement("line", { key: i, stroke: "currentColor", strokeOpacity: 0.1, className: "_grid", x1: margin2, y1: i * grid + margin2, x2: width + margin2, y2: i * grid + margin2 })), /* @__PURE__ */ wp.element.createElement("line", { stroke: "currentColor", strokeOpacity: 0.2, className: "_grid is-center", x1: width / 2 + margin2, y1: margin2, x2: width / 2 + margin2, y2: height + margin2 }), /* @__PURE__ */ wp.element.createElement("line", { stroke: "currentColor", strokeOpacity: 0.2, className: "_grid is-center", x1: margin2, y1: height / 2 + margin2, x2: width + margin2, y2: height / 2 + margin2 }))
+      /* @__PURE__ */ wp.element.createElement("rect", { className: "_bg", x: margin, y: margin, width, height, fill: "none", stroke: "currentColor", strokeOpacity: 0.5 }),
+      /* @__PURE__ */ wp.element.createElement("circle", { fill: "none", stroke: "currentColor", strokeOpacity: 0.75, className: "_circle", cx: pos.x + margin, cy: pos.y + margin, r: r2 }),
+      /* @__PURE__ */ wp.element.createElement("circle", { fill: "currentColor", className: "_dot", cx: pos.x + margin, cy: pos.y + margin, r: 2 }),
+      grid > 0 && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, Array.from({ length: Math.floor(width / grid) }, (_2, i) => /* @__PURE__ */ wp.element.createElement("line", { key: i, stroke: "currentColor", strokeOpacity: 0.1, className: "_grid", x1: i * grid + margin, y1: margin, x2: i * grid + margin, y2: height + margin })), Array.from({ length: Math.floor(height / grid) }, (_2, i) => /* @__PURE__ */ wp.element.createElement("line", { key: i, stroke: "currentColor", strokeOpacity: 0.1, className: "_grid", x1: margin, y1: i * grid + margin, x2: width + margin, y2: i * grid + margin })), /* @__PURE__ */ wp.element.createElement("line", { stroke: "currentColor", strokeOpacity: 0.2, className: "_grid is-center", x1: width / 2 + margin, y1: margin, x2: width / 2 + margin, y2: height + margin }), /* @__PURE__ */ wp.element.createElement("line", { stroke: "currentColor", strokeOpacity: 0.2, className: "_grid is-center", x1: margin, y1: height / 2 + margin, x2: width + margin, y2: height / 2 + margin }))
     ));
   };
-
-  // modules/src/component/Input/SizingInput.jsx
-  init_react();
-  var SizingContext = createContext();
 
   // modules/src/component/Nav/Nav.jsx
   init_react();
@@ -2442,13 +2438,15 @@
     return values;
   };
   var baseGradientParams = {
+    useAccentColor: { type: "boolean" },
     baseGradientRotate: { minimum: 0, maximum: 360, multipleOf: 5 },
     baseGradientColor1: { minimum: 1, maximum: 12 },
     baseGradientColor2: { minimum: 1, maximum: 12 }
   };
   var getBaseGradientCode = (params) => {
-    const { baseGradientRotate = 0, baseGradientColor1 = 6, baseGradientColor2 = 7 } = params;
-    return `linear-gradient(${baseGradientRotate}deg in hsl,${translateColor("sx" + baseGradientColor1)},${translateColor("sx" + baseGradientColor2)})`;
+    const { useAccentColor = true, baseGradientRotate = 0, baseGradientColor1 = 6, baseGradientColor2 = 7 } = params;
+    const colorKey = useAccentColor ? "sx" : "bx";
+    return `linear-gradient(${baseGradientRotate}deg in hsl,${translateColor(colorKey + baseGradientColor1)},${translateColor(colorKey + baseGradientColor2)})`;
   };
   var BackgroundImageDataGenerators = {
     prepared: {
@@ -2589,7 +2587,7 @@
     )));
   };
   var getPreview = (data) => {
-    const { image, repeat = ["repeat"], position = ["center"], size = ["cover"], blendmode = ["normal"] } = data;
+    const { image = [], repeat = ["repeat"], position = ["center"], size = ["cover"], blendmode = ["normal"] } = data;
     const style = {
       width: "160px",
       height: "90px",
