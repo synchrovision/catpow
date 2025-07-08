@@ -1,4 +1,4 @@
 {
-	"script": ["dashicons"],
-	"component": ["SelectBox","CheckBoxes","RadioButtons","Buttons","ModalForm"]
+	"style": ["dashicons"],
+	"component": ["SelectBox", "CheckBoxes", "RadioButtons", "Buttons", "ModalForm"]
 }
