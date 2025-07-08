@@ -853,6 +853,7 @@
     colorClassPattern: () => colorClassPattern,
     colorClassProxy: () => colorClassProxy,
     colorClassProxyHandler: () => colorClassProxyHandler,
+    colorStatePattern: () => colorStatePattern,
     colorToneClassPattern: () => colorToneClassPattern,
     colorToneValuePattern: () => colorToneValuePattern,
     colorToneValueToClasses: () => colorToneValueToClasses,
@@ -945,6 +946,7 @@
     toggleClass: () => toggleClass,
     toggleItemClass: () => toggleItemClass,
     toneClassPattern: () => toneClassPattern,
+    toneStatePattern: () => toneStatePattern,
     translateCssVal: () => translateCssVal,
     upItem: () => upItem,
     updateItemByKeyAndIndex: () => updateItemByKeyAndIndex,
@@ -1021,7 +1023,7 @@
     return flags;
   };
   var camelToKebab = (str) => str.replace(/(\w)([A-Z])/g, "$1-$2").toLowerCase();
-  var kebabToCamel = (str) => str.replace(/\-(\w)/g, (m) => m[1].toUpperCase());
+  var kebabToCamel = (str) => str.replace(/\-([a-z])/g, (m) => m[1].toUpperCase());
 
   // modules/src/util/rtf.jsx
   var rtf = (text, pref = "rtf") => {
@@ -1178,6 +1180,9 @@
       }
     );
   };
+
+  // modules/src/util/calc.jsx
+  var pfloor = (n, p) => parseFloat(Math.floor(parseFloat(n + "e" + p)) + "e-" + p);
 
   // ../blocks/_init/init/CP/components/BoundingBox.jsx
   var BoundingBox = (props) => {
@@ -1871,18 +1876,19 @@
         const { fixed = false, absolute = false, relative = false, active = false, proxy: proxy2 } = props2;
         const { h, s, l } = proxy2;
         const hsl = { h, s, l };
-        return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.colors({ fixed, absolute, relative, active }) }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active }) }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: fixed ? "lock" : absolute ? "media-default" : "excerpt-view" })), Array.from(Array(13), (v, value2) => {
+        console.log(hsl);
+        return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.colors({ "is-color-fixed": fixed, "is-color-absolute": absolute, "is-color-relative": relative, "is-active": active }) }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active }) }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: fixed ? "lock" : absolute ? "media-default" : "excerpt-view" })), Array.from(Array(13), (v, value2) => {
           const colorClass = CP.generateColorClass({
             fixed,
             absolute,
             relative,
             value: value2
           });
-          const active2 = colorClass === h;
+          const active2 = kebabToCamel(colorClass) === h;
           return /* @__PURE__ */ wp.element.createElement(
             "li",
             {
-              className: classes.colors.item(colorClass, s, l, { active: active2 }),
+              className: classes.colors.item(colorClass, s, l, { "is-active": active2 }),
               onClick: () => {
                 proxy2.h = !active2 && colorClass;
                 onChange(proxy2);
@@ -1900,14 +1906,14 @@
         const { proxy: proxy2 } = props2;
         const { h, s, l } = proxy2;
         const hsl = { h, s, l };
-        return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.tones() }, ["s", "l"].map((r2) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: r2 }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active: !!hsl[r2] }) }, /* @__PURE__ */ wp.element.createElement(CP.ConfigIcon, { icon: { s: "contrast", l: "light" }[r2] })), Array.from(Array(5), (v, index) => {
+        return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.tones() }, ["s", "l"].map((r2) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: r2 }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ "is-active": !!hsl[r2] }) }, /* @__PURE__ */ wp.element.createElement(CP.ConfigIcon, { icon: { s: "contrast", l: "light" }[r2] })), Array.from(Array(5), (v, index) => {
           const value2 = index - 2;
           const toneClass = CP.generateToneClass({ [r2]: true, value: value2 });
-          const active = toneClass === hsl[r2];
+          const active = kebabToCamel(toneClass) === hsl[r2];
           return /* @__PURE__ */ wp.element.createElement(
             "li",
             {
-              className: classes.tones.item(h, r2 === "s" ? l : s, toneClass, { active }),
+              className: classes.tones.item(h, r2 === "s" ? l : s, toneClass, { "is-active": active }),
               onClick: () => {
                 proxy2[r2] = !active && toneClass;
                 onChange(proxy2);
@@ -2523,13 +2529,15 @@
       params: {
         ...baseGradientParams,
         w: { minimum: 5, maximum: 200 },
+        h: { minimum: 5, maximum: 200 },
         alpha: { minimum: 0, maximum: 100, multipleOf: 10 }
       },
       getData(params = {}) {
-        const { w = 50, alpha = 25 } = params;
-        const gradient1 = `radial-gradient(${100 + w}% 100% at 40% 0%,rgba(255,255,255,0),rgba(255,255,255,0) 60%,rgba(255,255,255,${alpha / 100}) 60%,rgba(255,255,255,0))`;
-        const gradient2 = `radial-gradient(${120 + w * 2}% 100% at 25% 100%,rgba(255,255,255,0),rgba(255,255,255,${alpha / 100}) 60%,rgba(255,255,255,0) 60%,rgba(255,255,255,0))`;
-        const gradient3 = `radial-gradient(${120 + w * 2}% 100% at 100% 100%,rgba(255,255,255,0),rgba(255,255,255,${alpha / 100}) 70%,rgba(255,255,255,0) 70%,rgba(255,255,255,0))`;
+        const { w = 50, h = 50, alpha = 25 } = params;
+        const p1 = 50 + pfloor(h / 5, 1), p2 = 50 + pfloor(h / 10, 1), p3 = 50 + pfloor(h / 3, 1);
+        const gradient1 = `radial-gradient(${80 + w / 2}% 100% at 40% 0%,rgba(255,255,255,0),rgba(255,255,255,0) ${p1}%,rgba(255,255,255,${alpha / 100}) ${p1}%,rgba(255,255,255,0))`;
+        const gradient2 = `radial-gradient(${100 + w}% 100% at 25% 100%,rgba(255,255,255,0),rgba(255,255,255,${alpha / 100}) ${p2}%,rgba(255,255,255,0) ${p2}%,rgba(255,255,255,0))`;
+        const gradient3 = `radial-gradient(${100 + w}% 100% at 100% 100%,rgba(255,255,255,0),rgba(255,255,255,${alpha / 100}) ${p3}%,rgba(255,255,255,0) ${p3}%,rgba(255,255,255,0))`;
         const gradient4 = getBaseGradientCode(params);
         return {
           image: [gradient1, gradient2, gradient3, gradient4],
@@ -2566,7 +2574,7 @@
       }
       return schema2;
     }, []);
-    return /* @__PURE__ */ wp.element.createElement(CP.Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-inputbackgroundimage" }, getPreview({ ...data }), /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement(CP.Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-inputbackgroundimage" }, /* @__PURE__ */ wp.element.createElement(
       Catpow.JsonEditor,
       {
         title,
@@ -2585,20 +2593,6 @@
         }
       }
     )));
-  };
-  var getPreview = (data) => {
-    const { image = [], repeat = ["repeat"], position = ["center"], size = ["cover"], blendmode = ["normal"] } = data;
-    const style = {
-      width: "160px",
-      height: "90px",
-      backgroundImage: image.join(","),
-      backgroundRepeat: repeat.join(","),
-      backgroundPosition: position.join(","),
-      backgroundSize: size.join(","),
-      backgroundBlendMode: blendmode.join(","),
-      backgroundColor: "cyan"
-    };
-    return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-inputbackgroundimage-preview", style });
   };
 
   // ../blocks/_init/init/CP/components/InputIcon.jsx
@@ -3378,15 +3372,12 @@
             break;
           }
           case "backgroundimage": {
-            const d = /* @__PURE__ */ new Date();
-            console.log(d.toLocaleString());
             rtn.push(
               /* @__PURE__ */ wp.element.createElement(
                 CP.InputBackgroundImage,
                 {
                   attr: props.attr[prm.vars],
                   set: (data) => {
-                    console.log(d.toLocaleString());
                     save({
                       [prm.vars]: {
                         ...props.attr[prm.vars],
@@ -3741,7 +3732,6 @@
                       allStates,
                       allClassFlags
                     });
-                    console.log({ allClassFlags, bindClasseFlagsByValue, updates });
                     set(updates);
                   } else {
                     const updates = CP.getUpdatesFromStatesAndClasssFlags({
@@ -3750,7 +3740,6 @@
                       classFlags: classFlagsByValue[prm.values],
                       bindClassFlags: bindClasseFlagsByValue[prm.values]
                     });
-                    console.log({ allClassFlags, bindClasseFlagsByValue, updates });
                     set(updates);
                   }
                   if (prm.effect) {
@@ -5165,13 +5154,6 @@
         classKey,
         sub: [
           {
-            name: "backgroundimage",
-            label: __4("\u80CC\u666F\u753B\u50CF", "catpow"),
-            vars,
-            prefix: "--cp-background-image",
-            input: "backgroundimage"
-          },
-          {
             name: "fixed",
             label: __4("\u56FA\u5B9A", "catpow"),
             classKey,
@@ -5193,6 +5175,13 @@
             min: 0,
             max: 1,
             step: 0.1
+          },
+          {
+            name: "backgroundimage",
+            label: __4("\u80CC\u666F\u753B\u50CF", "catpow"),
+            vars,
+            prefix: "--cp-background-image",
+            input: "backgroundimage"
           }
         ],
         ...otherParams
@@ -6505,7 +6494,7 @@
     return classes;
   };
   var colorToneValuePattern = /^((|_|\-\-)(\-?\d+))?(s(\-?\d+))?(l(\-?\d+))?$/;
-  var colorToneClassPattern = /^(color((|_|\-\-)(\-?\d+)))|(tone\-((s|l)(\-?\d+)))$/;
+  var colorToneClassPattern = /^(has\-color((|_|\-\-)(\-?\d+)))|(tone\-((s|l)(\-?\d+)))$/;
   var parseColorClass = (colorClass) => {
     if (colorClass) {
       const matches = colorClass.match(colorClassPattern);
@@ -6520,8 +6509,9 @@
     }
     return { fixed: false, absolute: false, relative: false, value: 0 };
   };
-  var generateColorClass = (data) => "color" + (data.fixed ? "--" : data.relative ? "_" : "") + data.value;
-  var colorClassPattern = /^color((|_|\-\-)(\-?\d+))$/;
+  var generateColorClass = (data) => "has-color" + (data.fixed ? "--" : data.relative ? "_" : "") + data.value;
+  var colorClassPattern = /^has\-color((|_|\-\-)(\-?\d+))$/;
+  var colorStatePattern = /^hasColor(_?(\-*\d+))$/;
   var parseToneClass = (toneClass) => {
     if (toneClass) {
       const matches = toneClass.match(toneClassPattern);
@@ -6535,8 +6525,9 @@
     }
     return { s: false, l: false, value: 0 };
   };
-  var generateToneClass = (data) => "tone-" + (data.s ? "s" : "l") + data.value;
-  var toneClassPattern = /^tone\-((s|l)(\-?\d+))$/;
+  var generateToneClass = (data) => "has-tone-" + (data.s ? "s" : "l") + data.value;
+  var toneClassPattern = /^has\-tone\-((s|l)(\-?\d+))$/;
+  var toneStatePattern = /^hasTone((S|L)(\-*\d+))$/;
   var colorClassProxy = (state) => {
     if (!state) {
       state = {};
@@ -6556,13 +6547,14 @@
           return extractColorToneValue(Object.keys(state).filter((c) => state[c]));
         }
         case "h": {
-          return Object.keys(state).find((c) => colorClassPattern.test(c));
+          return Object.keys(state).find((c) => colorStatePattern.test(c));
         }
         case "s":
         case "l": {
+          const r2 = prop.toUpperCase();
           return Object.keys(state).find((c) => {
-            const match = c.match(toneClassPattern);
-            return match && match[2] === prop;
+            const match = c.match(toneStatePattern);
+            return match && match[2] === r2;
           });
         }
       }
@@ -6577,11 +6569,12 @@
         case "s":
         case "l": {
           if (prop === "h") {
-            CP.filterFlags(state, (c) => !colorClassPattern.test(c));
+            CP.filterFlags(state, (c) => !colorStatePattern.test(c));
           } else {
+            const r2 = prop.toUpperCase();
             CP.filterFlags(state, (c) => {
-              const match = c.match(toneClassPattern);
-              return !(match && match[2] === prop);
+              const match = c.match(toneStatePattern);
+              return !(match && match[2] === r2);
             });
           }
           if (val) {
