@@ -15,22 +15,22 @@ wp.blocks.registerBlockType("catpow/artframe", {
 	example: CP.example,
 	edit(props) {
 		const { useMemo } = wp.element;
-		const { InnerBlocks, InspectorControls,useBlockProps } = wp.blockEditor;
+		const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { attributes, setAttributes } = props;
-		const { classes,contentsClasses,contentsBodyClasses,vars,params, element: Element = "div" } = attributes;
+		const { classes, contentsClasses, contentsBodyClasses, vars, params, element: Element = "div" } = attributes;
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
 				"color",
 				"colorScheme",
 				"zIndex",
-				{preset:"backgroundColor",classKey:"contentsClasses"},
-				{preset:"backgroundImage",classKey:"contentsClasses"},
-				{preset:"backgroundPattern",classKey:"contentsClasses"},
-				{preset:"contentWidth",classKey:"contentsBodyClasses"},
+				{ preset: "backgroundColor", classKey: "contentsClasses" },
+				{ preset: "backgroundImage", classKey: "contentsClasses" },
+				{ preset: "backgroundPattern", classKey: "contentsClasses" },
+				{ preset: "contentWidth", classKey: "contentsBodyClasses" },
 				"customMargin",
-				{preset:"customPadding",classKey:"contentsBodyClasses"},
-				artframeSelectiveClasses
+				{ preset: "customPadding", classKey: "contentsBodyClasses" },
+				artframeSelectiveClasses,
 			];
 			wp.hooks.applyFilters("catpow.blocks.artframe.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -61,8 +61,8 @@ wp.blocks.registerBlockType("catpow/artframe", {
 	},
 
 	save({ attributes }) {
-		const { InnerBlocks,useBlockProps } = wp.blockEditor;
-		const { classes,contentsClasses,contentsBodyClasses,vars,params, element: Element = "div" } = attributes;
+		const { InnerBlocks, useBlockProps } = wp.blockEditor;
+		const { classes, contentsClasses, contentsBodyClasses, vars, params, element: Element = "div" } = attributes;
 		const blockProps = useBlockProps.save({ className: classes, style: vars });
 		return (
 			<>
