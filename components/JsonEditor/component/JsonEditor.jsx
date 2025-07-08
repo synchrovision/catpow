@@ -25,12 +25,25 @@ export const JsonEditor = (props) => {
 
 	const rootAgent = useMemo(() => {
 		const rootAgent = Catpow.schema(schema, { debug }).createAgent(json);
-		let timer,
-			isHold = false;
 		rootAgent.on("change", (e) => {
 			setHasChange(true);
 		});
-		rootAgent.on("update", (e) => {
+		return rootAgent;
+	}, [schema]);
+
+	const save = useCallback(() => {
+		onChange(typeof props.json === "object" ? rootAgent.value : JSON.stringify(rootAgent.value));
+		setHasChange(false);
+	}, [rootAgent, setHasChange, onChange]);
+
+	const data = useMemo(() => {
+		return { getAdditionalInputComponent };
+	}, [getAdditionalInputComponent]);
+
+	useEffect(() => {
+		let timer,
+			isHold = false;
+		const cb = (e) => {
 			if (autoSave) {
 				if (!isHold) {
 					save();
@@ -46,18 +59,10 @@ export const JsonEditor = (props) => {
 					timer = setTimeout(save, autoSave === true ? 1000 : autoSave);
 				}
 			}
-		});
-		return rootAgent;
-	}, [schema]);
-
-	const save = useCallback(() => {
-		onChange(typeof props.json === "object" ? rootAgent.value : JSON.stringify(rootAgent.value));
-		setHasChange(false);
-	}, [rootAgent, setHasChange, onChange]);
-
-	const data = useMemo(() => {
-		return { getAdditionalInputComponent };
-	}, [getAdditionalInputComponent]);
+		};
+		rootAgent.on("update", cb);
+		return () => rootAgent.off("update", cb);
+	}, [rootAgent, setHasChange, save]);
 
 	return (
 		<DataContext.Provider value={data}>

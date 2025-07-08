@@ -893,11 +893,21 @@
     }, []);
     const rootAgent = useMemo4(() => {
       const rootAgent2 = Catpow.schema(schema, { debug }).createAgent(json);
-      let timer, isHold = false;
       rootAgent2.on("change", (e) => {
         setHasChange(true);
       });
-      rootAgent2.on("update", (e) => {
+      return rootAgent2;
+    }, [schema]);
+    const save = useCallback3(() => {
+      onChange(typeof props.json === "object" ? rootAgent.value : JSON.stringify(rootAgent.value));
+      setHasChange(false);
+    }, [rootAgent, setHasChange, onChange]);
+    const data = useMemo4(() => {
+      return { getAdditionalInputComponent };
+    }, [getAdditionalInputComponent]);
+    useEffect5(() => {
+      let timer, isHold = false;
+      const cb = (e) => {
         if (autoSave) {
           if (!isHold) {
             save();
@@ -913,16 +923,10 @@
             timer = setTimeout(save, autoSave === true ? 1e3 : autoSave);
           }
         }
-      });
-      return rootAgent2;
-    }, [schema]);
-    const save = useCallback3(() => {
-      onChange(typeof props.json === "object" ? rootAgent.value : JSON.stringify(rootAgent.value));
-      setHasChange(false);
-    }, [rootAgent, setHasChange, onChange]);
-    const data = useMemo4(() => {
-      return { getAdditionalInputComponent };
-    }, [getAdditionalInputComponent]);
+      };
+      rootAgent.on("update", cb);
+      return () => rootAgent.off("update", cb);
+    }, [rootAgent, setHasChange, save]);
     return /* @__PURE__ */ wp.element.createElement(DataContext.Provider, { value: data }, /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body" }, showHeader && /* @__PURE__ */ wp.element.createElement("div", { className: "_header" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_title" }, title), /* @__PURE__ */ wp.element.createElement("div", { className: "_controls" }, /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default("_save", { "is-active": hasChange }), onClick: () => save() }, "Save"))), /* @__PURE__ */ wp.element.createElement("div", { className: "_contents" }, /* @__PURE__ */ wp.element.createElement(ObjectInput, { agent: rootAgent }))))));
   };
   JsonEditor.Input = Input;
