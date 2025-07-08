@@ -153,26 +153,26 @@ class scss{
 					if(!empty($color_role['extend'])){
 						foreach(range(0,12) as $n){
 							$m=$n===0?0:$n-6;
-							$classes['.color--'.$n]["--cp-tones-{$key}-h"]=$n*30;
-							$classes['.color'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-root-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
-							$classes['.color_'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-container-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
-							$classes['.color--'.$n]["--cp-container-tones-{$key}-h"]=
-							$classes['.color'.$n]["--cp-container-tones-{$key}-h"]="var(--cp-tones-{$key}-h)";
+							$classes['.has-color--'.$n]["--cp-tones-{$key}-h"]=$n*30;
+							$classes['.has-color'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-root-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
+							$classes['.has-color_'.$n]["--cp-tones-{$key}-h"]="calc(var(--cp-container-tones-{$key}-h) + var(--cp-tones-hr,20) * {$m} + var(--cp-tones-hs,0))";
+							$classes['.has-color--'.$n]["--cp-container-tones-{$key}-h"]=
+							$classes['.has-color'.$n]["--cp-container-tones-{$key}-h"]="var(--cp-tones-{$key}-h)";
 						}
 						if(!empty($color_role['invert'])){
 							$ikey=$color_role['invert'];
 							foreach(range(0,12) as $n){
-								$classes['.color--'.$n]["--cp-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
-								$classes['.color'.$n]["--cp-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
-								$classes['.color_'.$n]["--cp-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
-								$classes['.color--'.$n]["--cp-container-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
-								$classes['.color'.$n]["--cp-container-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
-								$classes['.color_'.$n]["--cp-container-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+								$classes['.has-color--'.$n]["--cp-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+								$classes['.has-color'.$n]["--cp-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+								$classes['.has-color_'.$n]["--cp-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+								$classes['.has-color--'.$n]["--cp-container-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+								$classes['.has-color'.$n]["--cp-container-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
+								$classes['.has-color_'.$n]["--cp-container-tones-{$key}x-h"]="var(--cp-tones-{$key}-h)";
 							}
 						}	
 						foreach(range(-2,2) as $n){
-							$classes['.tone-s'.$n]["--cp-tones-{$key}-s"]="calc(var(--cp-root-tones-{$key}-s) + var(--cp-tones-ss,20%) * {$n})";
-							$classes['.tone-l'.$n]["--cp-tones-{$key}-l"]="calc(var(--cp-root-tones-{$key}-l) + var(--cp-tones-ls,10%) * {$n})";
+							$classes['.has-tone-s'.$n]["--cp-tones-{$key}-s"]="calc(var(--cp-root-tones-{$key}-s) + var(--cp-tones-ss,20%) * {$n})";
+							$classes['.has-tone-l'.$n]["--cp-tones-{$key}-l"]="calc(var(--cp-root-tones-{$key}-l) + var(--cp-tones-ls,10%) * {$n})";
 						}
 					}
 					if(!empty($color_role['invert'])){
