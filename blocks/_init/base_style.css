@@ -242,7 +242,7 @@
   height: 1.25rem;
   fill: currentColor;
 }
-.cp-selectthemecolor-colors-icon.active, .cp-selectthemecolor-tones-icon.active {
+.cp-selectthemecolor-colors-icon.is-active, .cp-selectthemecolor-tones-icon.is-active {
   color: var(--wp-admin-theme-color);
 }
 .cp-selectthemecolor-colors-item, .cp-selectthemecolor-tones-item {
@@ -259,7 +259,7 @@
   border-top-width: 0.625rem;
   border-top-color: hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),var(--cp-tones-a-l),var(--cp-tones-a-a,1));
 }
-.cp-selectthemecolor-colors-item:not(.active), .cp-selectthemecolor-tones-item:not(.active) {
+.cp-selectthemecolor-colors-item:not(.is-active), .cp-selectthemecolor-tones-item:not(.is-active) {
   opacity: 0.2;
 }
 .cp-selectthemecolor-colors {

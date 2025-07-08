@@ -140,7 +140,7 @@ $colors:(
 					@include bnd((w:20,h:20));
 					@include svg((f:c));
 				}
-				&.active{
+				&.is-active{
 					@include txt((c:at));
 				}
 			}
@@ -149,7 +149,7 @@ $colors:(
 				@include usr((c:p));
 				@include bg((c:m));
 				@include bdr((p:t,s:s,w:10,c:a));
-				&:not(.active){@include trn((o:.2));}
+				&:not(.is-active){@include trn((o:.2));}
 			}
 		}
 		&-colors{
