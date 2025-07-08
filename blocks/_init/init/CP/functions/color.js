@@ -79,7 +79,7 @@ export const generateColorToneClasses = (values) => {
 	return classes;
 };
 export const colorToneValuePattern = /^((|_|\-\-)(\-?\d+))?(s(\-?\d+))?(l(\-?\d+))?$/;
-export const colorToneClassPattern = /^(color((|_|\-\-)(\-?\d+)))|(tone\-((s|l)(\-?\d+)))$/;
+export const colorToneClassPattern = /^(has\-color((|_|\-\-)(\-?\d+)))|(tone\-((s|l)(\-?\d+)))$/;
 export const parseColorClass = (colorClass) => {
 	if (colorClass) {
 		const matches = colorClass.match(colorClassPattern);
@@ -94,8 +94,9 @@ export const parseColorClass = (colorClass) => {
 	}
 	return { fixed: false, absolute: false, relative: false, value: 0 };
 };
-export const generateColorClass = (data) => "color" + (data.fixed ? "--" : data.relative ? "_" : "") + data.value;
-export const colorClassPattern = /^color((|_|\-\-)(\-?\d+))$/;
+export const generateColorClass = (data) => "has-color" + (data.fixed ? "--" : data.relative ? "_" : "") + data.value;
+export const colorClassPattern = /^has\-color((|_|\-\-)(\-?\d+))$/;
+export const colorStatePattern = /^hasColor(_?(\-*\d+))$/;
 export const parseToneClass = (toneClass) => {
 	if (toneClass) {
 		const matches = toneClass.match(toneClassPattern);
@@ -109,8 +110,9 @@ export const parseToneClass = (toneClass) => {
 	}
 	return { s: false, l: false, value: 0 };
 };
-export const generateToneClass = (data) => "tone-" + (data.s ? "s" : "l") + data.value;
-export const toneClassPattern = /^tone\-((s|l)(\-?\d+))$/;
+export const generateToneClass = (data) => "has-tone-" + (data.s ? "s" : "l") + data.value;
+export const toneClassPattern = /^has\-tone\-((s|l)(\-?\d+))$/;
+export const toneStatePattern = /^hasTone((S|L)(\-*\d+))$/;
 export const colorClassProxy = (state) => {
 	if (!state) {
 		state = {};
@@ -130,13 +132,14 @@ export const colorClassProxyHandler = {
 				return extractColorToneValue(Object.keys(state).filter((c) => state[c]));
 			}
 			case "h": {
-				return Object.keys(state).find((c) => colorClassPattern.test(c));
+				return Object.keys(state).find((c) => colorStatePattern.test(c));
 			}
 			case "s":
 			case "l": {
+				const r = prop.toUpperCase();
 				return Object.keys(state).find((c) => {
-					const match = c.match(toneClassPattern);
-					return match && match[2] === prop;
+					const match = c.match(toneStatePattern);
+					return match && match[2] === r;
 				});
 			}
 		}
@@ -151,11 +154,12 @@ export const colorClassProxyHandler = {
 			case "s":
 			case "l": {
 				if (prop === "h") {
-					CP.filterFlags(state, (c) => !colorClassPattern.test(c));
+					CP.filterFlags(state, (c) => !colorStatePattern.test(c));
 				} else {
+					const r = prop.toUpperCase();
 					CP.filterFlags(state, (c) => {
-						const match = c.match(toneClassPattern);
-						return !(match && match[2] === prop);
+						const match = c.match(toneStatePattern);
+						return !(match && match[2] === r);
 					});
 				}
 				if (val) {
