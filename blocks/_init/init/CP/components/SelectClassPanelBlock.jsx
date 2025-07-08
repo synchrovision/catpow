@@ -431,13 +431,10 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					break;
 				}
 				case "backgroundimage": {
-					const d = new Date();
-					console.log(d.toLocaleString());
 					rtn.push(
 						<CP.InputBackgroundImage
 							attr={props.attr[prm.vars]}
 							set={(data) => {
-								console.log(d.toLocaleString());
 								save({
 									[prm.vars]: {
 										...props.attr[prm.vars],
@@ -770,7 +767,6 @@ export const SelectClassPanelBlock = ({ prm }) => {
 									allStates,
 									allClassFlags,
 								});
-								console.log({ allClassFlags, bindClasseFlagsByValue, updates });
 								set(updates);
 							} else {
 								const updates = CP.getUpdatesFromStatesAndClasssFlags({
@@ -779,7 +775,6 @@ export const SelectClassPanelBlock = ({ prm }) => {
 									classFlags: classFlagsByValue[prm.values],
 									bindClassFlags: bindClasseFlagsByValue[prm.values],
 								});
-								console.log({ allClassFlags, bindClasseFlagsByValue, updates });
 								set(updates);
 							}
 							if (prm.effect) {
