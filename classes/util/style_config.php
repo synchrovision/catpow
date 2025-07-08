@@ -173,7 +173,7 @@ class style_config{
 			foreach($roles as $role){
 				if(!empty($role['invert'])){
 					$key=$role['shorthand'];
-					$vars['tones'][$key.'x']=$vars['tones'][$key];
+					$vars['tones'][$key.'x']=$vars['tones'][$key]??[];
 				}
 			}
 		}
