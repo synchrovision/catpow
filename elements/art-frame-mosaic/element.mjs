@@ -203,7 +203,7 @@ var translateColor = (color, tint, alpha) => {
       const h = num ? staticHue ? num : num === "0" || num === "6" ? f("h") : `calc(${relativeHue ? cf("h") : rf("h")} + var(--cp-tones-hr) * ${num - 6} + var(--cp-tones-hs))` : f("h");
       const s = f("s");
       const l = tint ? `calc(100% - ${f("l")} * ${tint})` : `${f("l")}`;
-      const a = alpha ? `calc(${f("a")} * ${alpah}` : f("a");
+      const a = alpha ? `calc(${f("a")} * ${alpha})` : f("a");
       return `hsla(${h}, ${s}, ${l}, ${a})`;
     }
   } else {
@@ -222,7 +222,7 @@ var translateColor = (color, tint, alpha) => {
   return color;
 };
 
-// _g3w1a9okm:/Users/hatanokazuhiro/Documents/repos.nosync/mandai/mandai_cup/wp-content/plugins/catpow/elements/art-frame-mosaic/element/style.css
+// _fd70ioiy9:/Users/hatanokazuhiro/Documents/repos.nosync/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-mosaic/element/style.css
 var style_default = ".art-frame-mosaic {\n  position: relative;\n}\n.art-frame-mosaic__arts {\n  display: block;\n  position: absolute;\n  top: 0rem;\n  right: 0rem;\n  bottom: 0rem;\n  left: 0rem;\n  inset: 0rem;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n/*# sourceMappingURL=./style.css.map */";
 
 // ../elements/art-frame-mosaic/element/index.mjs.jsx
