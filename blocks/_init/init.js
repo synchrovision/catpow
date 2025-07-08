@@ -1875,8 +1875,6 @@
       (props2) => {
         const { fixed = false, absolute = false, relative = false, active = false, proxy: proxy2 } = props2;
         const { h, s, l } = proxy2;
-        const hsl = { h, s, l };
-        console.log(hsl);
         return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.colors({ "is-color-fixed": fixed, "is-color-absolute": absolute, "is-color-relative": relative, "is-active": active }) }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active }) }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: fixed ? "lock" : absolute ? "media-default" : "excerpt-view" })), Array.from(Array(13), (v, value2) => {
           const colorClass = CP.generateColorClass({
             fixed,

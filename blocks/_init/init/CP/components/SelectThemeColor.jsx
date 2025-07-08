@@ -13,8 +13,6 @@ export const SelectThemeColor = (props) => {
 		(props) => {
 			const { fixed = false, absolute = false, relative = false, active = false, proxy } = props;
 			const { h, s, l } = proxy;
-			const hsl = { h, s, l };
-			console.log(hsl);
 			return (
 				<ul className={classes.colors({ "is-color-fixed": fixed, "is-color-absolute": absolute, "is-color-relative": relative, "is-active": active })}>
 					<li className={classes.colors.icon({ active })}>
