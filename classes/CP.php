@@ -302,6 +302,7 @@ class CP{
 			}
 		}
 		foreach($dirs as $dir){
+			if(!is_dir($dir)){continue;}
 			chdir($dir);
 			foreach(glob($pattern) as $file){
 				$files[$file]=$dir.'/'.$file;
