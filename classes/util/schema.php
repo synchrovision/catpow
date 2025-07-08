@@ -8,7 +8,10 @@ class schema{
 	public function __construct($schema,$resolver=null){
 		if(is_string($schema)){
 			if(substr($schema,-5)==='.json'){
-				$f=\cp::get_file_path($schema);
+				$f=$schema;
+				if(!file_exists($f)){
+					$f=\cp::get_file_path($f);
+				}
 				if(!empty($f)){
 					$this->file=$f;
 					$schema=file_get_contents($f);
@@ -118,6 +121,17 @@ class schema{
 	public function get_json(){
 		return json_encode($this->schema,0700);
 	}
+	public function __get($name){
+		switch($name){
+			case'schema':
+				return $this->schema;
+			case'file':
+				return $this->file;
+			default:
+				if(isset($this->schema[$name])){
+					return $this->schema[$name];
+				}
+				return null;
+		}
+	}
 }
-
-?>
