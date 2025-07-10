@@ -3749,7 +3749,7 @@
               classFlags: classFlagsByValue[value2],
               bindClassFlags: bindClasseFlagsByValue[value2]
             });
-            set(updates);
+            save(updates);
             if (prm.effect) {
               prm.effect(currentClass2, value2, targetStates, props);
             }

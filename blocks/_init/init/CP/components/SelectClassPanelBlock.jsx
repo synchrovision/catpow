@@ -720,7 +720,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 						classFlags: classFlagsByValue[value],
 						bindClassFlags: bindClasseFlagsByValue[value],
 					});
-					set(updates);
+					save(updates);
 					if (prm.effect) {
 						prm.effect(currentClass, value, targetStates, props);
 					}
