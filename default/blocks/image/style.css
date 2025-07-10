@@ -1,0 +1,13 @@
+.wp-block-image {
+  width: fit-content;
+}
+.wp-block-image.alignleft {
+  margin-right: auto;
+}
+.wp-block-image.aligncenter {
+  margin-inline: auto;
+}
+.wp-block-image.alignright {
+  margin-left: auto;
+}
+/*# sourceMappingURL=./style.css.map */
