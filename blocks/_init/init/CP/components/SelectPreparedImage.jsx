@@ -32,8 +32,8 @@
 
 	useEffect(() => {
 		if (state.images === null) {
-			if (CP.cache.get([SelectPreparedImage, name])) {
-				dispatch({ type: "update", images: CP.cache.PreparedImage[name] });
+			if (CP.cache.has([SelectPreparedImage, name])) {
+				dispatch({ type: "update", images: CP.cache.get([SelectPreparedImage, name]) });
 			} else {
 				wp.apiFetch({ path: "cp/v1/images/" + name }).then((images) => {
 					CP.cache.set([SelectPreparedImage, name], images);
