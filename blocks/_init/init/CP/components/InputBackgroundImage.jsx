@@ -1,5 +1,5 @@
 ﻿import { translateColor } from "catpow/scssc";
-import { pfloor } from "catpow/util";
+import { pfloor, srand } from "catpow/util";
 const { useState, useMemo } = wp.element;
 const { __ } = wp.i18n;
 
@@ -109,6 +109,27 @@ const BackgroundImageDataGenerators = {
 			};
 		},
 	},
+	ripple: {
+		label: __("リップル", "catpow"),
+		params: {
+			...baseGradientParams,
+			x: { minimum: -100, maximum: 200, multipleOf: 10 },
+			y: { minimum: -100, maximum: 200, multipleOf: 10 },
+			w1: { minimum: 1, maximum: 100 },
+			w2: { minimum: 1, maximum: 100 },
+			alpha: { minimum: 0, maximum: 100, multipleOf: 10 },
+		},
+		getData(params = {}) {
+			const { x = 50, y = 50, w1 = 10, w2 = 10, alpha = 50 } = params;
+			const gradient1 = `repeating-radial-gradient(circle at ${x}% ${y}%,#0000,#0000 ${w1}px,rgba(255,255,255,${alpha / 100}) ${w1}px,rgba(255,255,255,${alpha / 100}) ${w1 + w2}px)`;
+			const gradient2 = getBaseGradientCode(params);
+			return {
+				image: [gradient1, gradient2],
+				size: ["cover"],
+				blendmode: ["screen", "normal"],
+			};
+		},
+	},
 	check: {
 		label: __("チェック", "catpow"),
 		params: {
@@ -154,6 +175,34 @@ const BackgroundImageDataGenerators = {
 				size: ["cover"],
 				blendmode: ["overlay", "overlay", "overlay", "normal"],
 			};
+		},
+	},
+	bubble: {
+		label: __("バブル", "catpow"),
+		params: {
+			...baseGradientParams,
+			a: { minimum: 1, maximum: 10 },
+			w: { minimum: 5, maximum: 200 },
+			alpha: { minimum: 0, maximum: 100, multipleOf: 10 },
+			seed: { minimum: 1, maximum: 100 },
+		},
+		getData(params = {}) {
+			const { a = 5, w = 50, alpha = 25, seed = 10 } = params;
+			const rand = srand(seed);
+			const image = [];
+			const blendmode = [];
+			for (let i = 0; i < a; i++) {
+				const s = 10 + w / 4 + rand(0, Math.floor(w / 8));
+				image.push(
+					`radial-gradient(circle farthest-side at ${rand(-w, 100 + w)}% ${rand(-w, 100 + w)}%,rgba(255,255,255,0),rgba(255,255,255,0) ${s - s / 5}%,rgba(255,255,255,${
+						alpha / 200
+					}) ${s}%,rgba(255,255,255,0) ${s}%,rgba(255,255,255,0) 100%)`
+				);
+				blendmode.push("overlay");
+			}
+			image.push(getBaseGradientCode(params));
+			blendmode.push("normal");
+			return { image, size: ["cover"], blendmode, repeat: ["no-repeat"] };
 		},
 	},
 };
