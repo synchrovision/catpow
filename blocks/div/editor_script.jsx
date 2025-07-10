@@ -41,9 +41,7 @@ wp.blocks.registerBlockType("catpow/div", {
 					type: "buttons",
 					values: { isTypeBlock: "block", isTypeFrame: "frame", isTypeColumns: "columns" },
 					sub: {
-						isTypeBlock:[
-							'contentWidth'
-						],
+						isTypeBlock: ["contentWidth"],
 						isTypeFrame: [
 							{ label: "アイコン", values: "hasIcon", sub: [{ input: "icon", label: "アイコン", color }] },
 							{ type: "buttons", label: "線", values: { hasNoBorder: "なし", hasThinBorder: "細", hasBoldBorder: "太" } },
@@ -53,9 +51,9 @@ wp.blocks.registerBlockType("catpow/div", {
 						],
 						isTypeColumns: [{ type: "buttons", label: "幅", values: { narrow: "狭い", regular: "普通", wide: "広い" } }],
 					},
-					bind:{
-						isTypeFrame:['hasContentWidth']
-					}
+					bind: {
+						isTypeFrame: ["hasContentWidth"],
+					},
 				},
 				"color",
 				"colorScheme",

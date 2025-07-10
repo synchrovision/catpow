@@ -40,9 +40,7 @@
             type: "buttons",
             values: { isTypeBlock: "block", isTypeFrame: "frame", isTypeColumns: "columns" },
             sub: {
-              isTypeBlock: [
-                "contentWidth"
-              ],
+              isTypeBlock: ["contentWidth"],
               isTypeFrame: [
                 { label: "\u30A2\u30A4\u30B3\u30F3", values: "hasIcon", sub: [{ input: "icon", label: "\u30A2\u30A4\u30B3\u30F3", color }] },
                 { type: "buttons", label: "\u7DDA", values: { hasNoBorder: "\u306A\u3057", hasThinBorder: "\u7D30", hasBoldBorder: "\u592A" } },
