@@ -17,7 +17,7 @@ const finderProxyHandler = {
 			rtn = obj[prop];
 		}
 		if (typeof rtn === "object") {
-			return new Proxy(rtn, CP.finderProxyHandler);
+			return new Proxy(rtn, finderProxyHandler);
 		}
 		return rtn;
 	},

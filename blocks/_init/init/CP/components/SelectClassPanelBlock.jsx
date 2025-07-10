@@ -6,7 +6,7 @@ import { SelectClassPanelContext } from "./SelectClassPanel.jsx";
 export const SelectClassPanelBlock = ({ prm }) => {
 	const { Fragment, useMemo, useContext, createElement: el } = wp.element;
 	const { CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
-	const { props, item, states, allStates, set, save, saveClasses, saveCss, primaryClassKey } = useContext(SelectClassPanelContext);
+	const { props, item, states, allStates, set, save, saveClasses, styleDatas, saveCss, primaryClassKey } = useContext(SelectClassPanelContext);
 	const { subItemsKey } = props;
 	if (prm.hasOwnProperty("cond")) {
 		if (prm.cond === false) {

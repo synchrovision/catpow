@@ -2961,7 +2961,7 @@
   var SelectClassPanelBlock = ({ prm }) => {
     const { Fragment: Fragment2, useMemo: useMemo6, useContext: useContext3, createElement: el } = wp.element;
     const { CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl: TextControl2, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
-    const { props, item, states, allStates, set, save, saveClasses, saveCss, primaryClassKey } = useContext3(SelectClassPanelContext);
+    const { props, item, states, allStates, set, save, saveClasses, styleDatas, saveCss, primaryClassKey } = useContext3(SelectClassPanelContext);
     const { subItemsKey } = props;
     if (prm.hasOwnProperty("cond")) {
       if (prm.cond === false) {
@@ -3857,7 +3857,7 @@
       const blockStates = CP.classNamesToFlags(attr[blockClasssKey]);
       return CP.resolveSelectiveClassesPresets(triggerClasses.item[Object.keys(triggerClasses.item).find((value2) => blockStates[value2])]);
     }, [props.selectiveClasses, triggerClasses && attr[blockClasssKey]]);
-    const { styleDatas: styleDatas2 } = attr;
+    const { styleDatas } = attr;
     const item = useMemo6(() => {
       if (!items2) {
         return attr;
@@ -3934,14 +3934,14 @@
     );
     const saveCss = useCallback4(
       (cssKey) => {
-        set({ [cssKey]: CP.createStyleCodeWithMediaQuery(styleDatas2[cssKey]) });
+        set({ [cssKey]: CP.createStyleCodeWithMediaQuery(styleDatas[cssKey]) });
       },
-      [set, styleDatas2]
+      [set, styleDatas]
     );
     if (!item || !selectiveClasses) {
       return false;
     }
-    return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanelContext.Provider, { value: { props, item, states, allStates, set, save, saveClasses, saveCss, primaryClassKey } }, selectiveClasses.map((prm, index2) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index2 }, /* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm }))), props.children));
+    return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanelContext.Provider, { value: { props, item, states, allStates, set, save, saveClasses, styleDatas, saveCss, primaryClassKey } }, selectiveClasses.map((prm, index2) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index2 }, /* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm }))), props.children));
   };
 
   // ../blocks/_init/init/CP/components/AlignClassToolbar.jsx
@@ -5256,33 +5256,11 @@
         values: "hasBackgroundPattern",
         sub: [
           {
-            name: "image",
-            label: __4("\u753B\u50CF", "catpow"),
+            name: "backgroundimage",
+            label: __4("\u80CC\u666F\u753B\u50CF", "catpow"),
             vars,
-            key: "--cp-background-pattern-image",
-            input: "image"
-          },
-          {
-            name: "repeat",
-            label: __4("\u7E70\u308A\u8FD4\u3057", "catpow"),
-            vars,
-            key: "--cp-background-pattern-repeat",
-            input: "buttons",
-            values: { repeat: "\u4E21\u65B9", "repeat-x": "\u6A2A", "repeat-y": "\u7E26", "no-repeat": "\u306A\u3057" }
-          },
-          {
-            name: "position",
-            label: __4("\u4F4D\u7F6E", "catpow"),
-            vars,
-            key: "--cp-background-pattern-position",
-            input: "position"
-          },
-          {
-            name: "size",
-            label: __4("\u30B5\u30A4\u30BA", "catpow"),
-            vars,
-            key: "--cp-background-pattern-size",
-            input: "size"
+            prefix: "--cp-background-pattern",
+            input: "backgroundimage"
           }
         ],
         ...otherParams
@@ -6403,18 +6381,18 @@
   };
   var useManageStyleData = (props, csss) => {
     const { attributes, className, setAttributes } = props;
-    const { anchor, prevAnchor, styleDatas: styleDatas2 } = attributes;
+    const { anchor, prevAnchor, styleDatas } = attributes;
     const { useEffect: useEffect6 } = wp.element;
     useEffect6(() => {
       if (!anchor) {
         setAttributes({ anchor: "s" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
       }
-      if (void 0 === styleDatas2) {
-        const styleDatas3 = {};
+      if (void 0 === styleDatas) {
+        const styleDatas2 = {};
         csss.forEach((key) => {
-          styleDatas3[key] = CP.parseStyleCodeWithMediaQuery(attributes[key]);
+          styleDatas2[key] = CP.parseStyleCodeWithMediaQuery(attributes[key]);
         });
-        setAttributes({ styleDatas: styleDatas3 });
+        setAttributes({ styleDatas: styleDatas2 });
       }
     }, []);
     useEffect6(() => {
@@ -6819,7 +6797,7 @@
         rtn = obj[prop];
       }
       if (typeof rtn === "object") {
-        return new Proxy(rtn, CP.finderProxyHandler);
+        return new Proxy(rtn, finderProxyHandler);
       }
       return rtn;
     },

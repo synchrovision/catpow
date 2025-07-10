@@ -183,6 +183,10 @@ class scss{
 							$classes['.has-color-scheme-reverted']["--cp-container-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
 							$classes['.has-color-scheme-inverted']["--cp-container-tones-{$key}x-{$k}"]="var(--cp-tones-{$ikey}-{$k})";
 						}
+						foreach(range(-2,2) as $n){
+							$classes['.has-tone-s'.$n]["--cp-tones-{$key}x-s"]="var(--cp-tones-{$key}-s)";
+							$classes['.has-tone-l'.$n]["--cp-tones-{$key}x-l"]="var(--cp-tones-{$key}-l)";
+						}
 					}
 				}
 				return self::create_map_data($classes);
