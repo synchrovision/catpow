@@ -116,13 +116,13 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 				{
 					name: "source",
 					type: "gridbuttons",
-					values: { useQuery: "検索", useEmbedURL: "埋め込みURL" },
+					values: { useQuery: "検索", useEmbedUrl: "埋め込みURL" },
 					sub: {
 						useQuery: [
 							{ name: "q", key: "q", input: "text", label: "検索ワード" },
 							{ name: "ll", key: "ll", input: "text", label: "中心座標" },
 						],
-						useEmbedURL: [
+						useEmbedUrl: [
 							{
 								name: "src",
 								key: "src",
@@ -266,7 +266,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(clss) => setAttributes({ classes: clss })} value={classArray.join(" ")} />
+						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classArray.join(" ")} />
 					</PanelBody>
 					<CP.SelectClassPanel title="リストアイテム" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} selectiveClasses={selectiveItemClasses} />
 					{states.isTemplate && (
