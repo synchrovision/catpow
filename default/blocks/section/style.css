@@ -36,7 +36,7 @@
   text-align: center;
   font-size: 5rem;
   font-weight: 300;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
   word-break: keep-all;
 }
 .wp-block-catpow-section.is-type-scene .wp-block-catpow-section__header-title-titleimage {

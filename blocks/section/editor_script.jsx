@@ -68,7 +68,7 @@ wp.blocks.registerBlockType("catpow/section", {
 						if (/^h\d$/.test(val)) {
 							states["level" + val[1]] = true;
 						}
-						set({ classes: CP.flagsToWords(states) });
+						set({ classes: CP.flagsToClassNames(states) });
 					},
 				},
 				{

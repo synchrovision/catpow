@@ -80,7 +80,7 @@
               if (/^h\d$/.test(val)) {
                 states2["level" + val[1]] = true;
               }
-              set({ classes: CP.flagsToWords(states2) });
+              set({ classes: CP.flagsToClassNames(states2) });
             }
           },
           {

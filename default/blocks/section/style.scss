@@ -25,7 +25,7 @@
 				@include bnd((p:r,mgi:a));
 				&-heading{
 					@include bnd((pd:2rem 1rem,p:r));
-					@include txt((a:c,p:5rem,w:l,c:i,b:k));
+					@include txt((a:c,p:5rem,w:l,c:tx,b:k));
 				}
 				&-titleimage{
 					@include bnd((w:a c,pd:0,mg:0 a));
