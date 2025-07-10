@@ -38,8 +38,6 @@ wp.blocks.registerBlockType("catpow/section", {
 			lead,
 			titleImageCode,
 			headerImageCode,
-			headerPatternImageCss,
-			patternImageCss,
 			frameImageCss,
 			borderImageCss,
 		} = attributes;
@@ -49,7 +47,7 @@ wp.blocks.registerBlockType("catpow/section", {
 		const [mainBlock, setMainBlock] = useState();
 
 		CP.useInheritColor(props, ["iconSrc", "patternImageCss", "headerPatternImageCss", "frameImageCss", "borderImageCss"]);
-		CP.useManageStyleData(props, ["patternImageCss", "headerPatternImageCss", "frameImageCss", "borderImageCss"]);
+		CP.useManageStyleData(props, ["frameImageCss", "borderImageCss"]);
 
 		const selectiveClasses = useMemo(() => {
 			const { devices, imageKeys, imageSizes } = CP.config.section;
@@ -146,12 +144,6 @@ wp.blocks.registerBlockType("catpow/section", {
 								label: __("メニューアイコン", "catpow"),
 								values: "hasNavIcon",
 								sub: [{ input: "image", label: __("アイコン", "catpow"), keys: imageKeys.navIcon, size: "thumbnail" }],
-							},
-							{
-								name: "patternImage",
-								label: __("パターン画像", "catpow"),
-								values: "hasPatternImage",
-								sub: [{ input: "pattern", css: "patternImageCss", sel: ({ attr }) => `#${attr.anchor}`, color }],
 							},
 							{ name: "frameImage", label: __("フレーム画像", "catpow"), values: "hasFrameImage", sub: [{ input: "frame", css: "frameImageCss", sel: ({ attr }) => `#${attr.anchor}`, color }] },
 							{
@@ -299,8 +291,6 @@ wp.blocks.registerBlockType("catpow/section", {
 								<InnerBlocks />
 							</div>
 						</div>
-						{states.hasPatternImage && <style>{patternImageCss}</style>}
-						{states.hasHeaderPatternImage && <style>{headerPatternImageCss}</style>}
 						{states.hasBorderImage && <style>{borderImageCss}</style>}
 						{states.hasFrameImage && <style>{frameImageCss}</style>}
 					</SectionTag>
@@ -343,8 +333,6 @@ wp.blocks.registerBlockType("catpow/section", {
 			lead,
 			titleImageCode,
 			headerImageCode,
-			headerPatternImageCss,
-			patternImageCss,
 			frameImageCss,
 			borderImageCss,
 		} = attributes;
@@ -394,8 +382,6 @@ wp.blocks.registerBlockType("catpow/section", {
 							<InnerBlocks.Content />
 						</div>
 					</div>
-					{states.hasPatternImage && <style className="patternImageCss">{patternImageCss}</style>}
-					{states.hasHeaderPatternImage && <style className="headerPatternImageCss">{headerPatternImageCss}</style>}
 					{states.hasBorderImage && <style className="borderImageCss">{borderImageCss}</style>}
 					{states.hasFrameImage && <style className="frameImageCss">{frameImageCss}</style>}
 				</SectionTag>
