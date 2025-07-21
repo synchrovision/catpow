@@ -28,6 +28,8 @@
       var states = useMemo(() => CP.wordsToFlags(classes), [classes]);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
+          "color",
+          "colorScheme",
           {
             name: "size",
             type: "buttons",

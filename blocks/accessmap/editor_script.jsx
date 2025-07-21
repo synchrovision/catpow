@@ -29,6 +29,8 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
+				"color",
+				"colorScheme",
 				{
 					name: "size",
 					type: "buttons",

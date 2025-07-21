@@ -12,8 +12,8 @@
   -webkit-box-lines: multiple;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+  background-color: hsla(var(--cp-tones-sx-h),var(--cp-tones-sx-s),var(--cp-tones-sx-l),var(--cp-tones-sx-a,1));
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
   box-shadow: 0 4px 9px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
 }
 .wp-block-catpow-accessmap > .item > .map > .gmap {
@@ -33,19 +33,19 @@
   display: block;
   font-size: 1.5em;
   text-decoration: none;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
 }
 .wp-block-catpow-accessmap > .item > .access > .mail {
   display: block;
   font-size: 1.25em;
   text-decoration: none;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
 }
 .wp-block-catpow-accessmap > .item > .access > .site {
   display: block;
   font-size: 1em;
   text-decoration: none;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
 }
 .wp-block-catpow-accessmap > .item > .access > .address {
   padding: 0rem;
@@ -121,21 +121,13 @@
   margin: auto;
   padding: 0.625rem;
   font-size: 0.75rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-lines: multiple;
-  -webkit-flex-wrap: wrap;
-  flex-wrap: wrap;
-  gap: 0.625rem;
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(30em, 100%), 1fr));
+  grid-gap: 0.625rem;
 }
 .wp-block-catpow-accessmap.small > .item {
-  -webkit-box-flex: 1;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 30em;
-  min-height: 20em;
-  height: auto;
   min-height: 10em;
   height: auto;
 }
@@ -152,11 +144,11 @@
   flex-basis: 10em;
   padding: 2em;
 }
-.wp-block-catpow-accessmap.mapColorGray > .item > .map {
+.wp-block-catpow-accessmap.map-color-gray > .item > .map {
   -webkit-filter: grayscale(1);
   filter: grayscale(1);
 }
-.wp-block-catpow-accessmap.mapColorSync > .item > .map {
+.wp-block-catpow-accessmap.map-color-sync > .item > .map {
   mix-blend-mode: hard-light;
   -webkit-filter: grayscale(0.8);
   filter: grayscale(0.8);

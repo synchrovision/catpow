@@ -6,8 +6,8 @@
 	>.item{
 		@include bnd((pd:0));
 		@include flx((w:w));
-		@include bg((c:m));
-		@include txt((c:i));
+		@include bg((c:sx));
+		@include txt((c:tx));
 		@include shd((b:4));
 		>.map{
 			>.gmap{
@@ -21,15 +21,15 @@
 			}
 			>.tel{
 				@include bnd((d:b));
-				@include txt((p:1.5em,td:n,c:i));
+				@include txt((p:1.5em,td:n,c:tx));
 			}
 			>.mail{
 				@include bnd((d:b));
-				@include txt((p:1.25em,td:n,c:i));
+				@include txt((p:1.25em,td:n,c:tx));
 			}
 			>.site{
 				@include bnd((d:b));
-				@include txt((p:1em,td:n,c:i));
+				@include txt((p:1em,td:n,c:tx));
 			}
 			>.address{
 				@include bnd((pd:0,mg:0,mgb:.5em));
@@ -69,9 +69,8 @@
 	&.small{
 		@include bnd((w:a 1000,mg:a,pd:10));
 		@include txt((p:12));
-		@include flx((w:w,g:10));
+		@include grd((rc:30em,g:10));
 		>.item{
-			@include bnd((f:1 1 30em,h:20em a));
 			@include bnd((h:10em a));
 			>.map{
 				@include bnd((f:1 1 10em));
@@ -81,15 +80,15 @@
 			}
 		}
 	}
-	&.mapColor{
-		&Gray{
+	&.map-color{
+		&-gray{
 			>.item{
 				>.map{
 					@include trn((gry:1));
 				}
 			}
 		}
-		&Sync{
+		&-sync{
 			>.item{
 				>.map{
 					@include trn((gry:.8,bm:hl));
