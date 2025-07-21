@@ -7,9 +7,14 @@ use Spatie\Color\Hsl;
 use Spatie\Color\Rgba;
 
 class scss{
-	public static $scssc;
-	public static function get_scssc(){
-		if(isset(static::$scssc)){return static::$scssc;}
+	public static $scssc,$admin_scssc;
+	public static function get_scssc($for_admin=false){
+		if($for_admin){
+			if(isset(static::$admin_scssc)){return static::$admin_scssc;}
+		}
+		else{
+			if(isset(static::$scssc)){return static::$scssc;}
+		}
 		$scssc = new Compiler();
 		$scssc->addImportPath(ABSPATH.'/wp-admin/css/colors/');
 		$catpow_scss_dir=WP_PLUGIN_DIR.'/catpow/scss/';
@@ -87,9 +92,9 @@ class scss{
 			}
 			return self::create_map_data($fonts);
 		});
-		if(apply_filters('cp_use_css_vars',true)){
-			$scssc->registerFunction('translate_color',function($args)use($color_roles_by_shorthand){
-				$args=array_map([static::$scssc,'compileValue'],$args);
+		if($for_admin || apply_filters('cp_use_css_vars',true)){
+			$scssc->registerFunction('translate_color',function($args)use($color_roles_by_shorthand,$scssc){
+				$args=array_map([$scssc,'compileValue'],$args);
 				$color=false;
 				$available_tone_keys=[];
 				foreach($color_roles_by_shorthand as $key=>$color_role){
@@ -147,7 +152,7 @@ class scss{
 				if(empty($color)){return Compiler::$false;}
 				return [TYPE::T_KEYWORD,$color];
 			});
-			$scssc->registerFunction('get_color_classes',function($args)use($color_roles_by_shorthand){
+			$scssc->registerFunction('get_color_classes',function($args)use($color_roles_by_shorthand,$scssc){
 				$classes=[];
 				foreach($color_roles_by_shorthand as $key=>$color_role){
 					if(!empty($color_role['extend'])){
@@ -191,8 +196,8 @@ class scss{
 				}
 				return self::create_map_data($classes);
 			});
-			$scssc->registerFunction('extract_color_tone',function($args){
-				$args=array_map([static::$scssc,'compileValue'],$args);
+			$scssc->registerFunction('extract_color_tone',function($args)use($scssc){
+				$args=array_map([$scssc,'compileValue'],$args);
 				$tones=util\style_config::get_config_json('tones');
 				$tone=null;
 				if(preg_match('/^([a-z]+)?(\d+)?$/',$args[0],$matches)){
@@ -212,8 +217,8 @@ class scss{
 				$tone=apply_filters('cp_extract_color_tone',$tone,$args);
 				return self::create_map_data($tone);
 			});
-			$scssc->registerFunction('translate_font',function($args){
-				$args=array_map([static::$scssc,'compileValue'],$args);
+			$scssc->registerFunction('translate_font',function($args)use($scssc){
+				$args=array_map([$scssc,'compileValue'],$args);
 				$font=false;
 				$fonts=util\style_config::get_config_json('fonts');
 				if(isset($fonts[$args[0]])){
@@ -223,8 +228,8 @@ class scss{
 				if(empty($font)){return Compiler::$false;}
 				return [TYPE::T_KEYWORD,$font];
 			});
-			$scssc->registerFunction('translate_size',function($args){
-				$args=array_map([static::$scssc,'compileValue'],$args);
+			$scssc->registerFunction('translate_size',function($args)use($scssc){
+				$args=array_map([$scssc,'compileValue'],$args);
 				$size=false;
 				$sizes=util\style_config::get_config_json('sizes');
 				if(isset($sizes[$args[0]])){
@@ -234,8 +239,8 @@ class scss{
 				if(empty($size)){return Compiler::$false;}
 				return [TYPE::T_KEYWORD,$size];
 			});
-			$scssc->registerFunction('translate_weight',function($args){
-				$args=array_map([static::$scssc,'compileValue'],$args);
+			$scssc->registerFunction('translate_weight',function($args)use($scssc){
+				$args=array_map([$scssc,'compileValue'],$args);
 				$weight=false;
 				$weights=util\style_config::get_config_json('weights');
 				if(isset($weights[$args[0]])){
@@ -247,8 +252,10 @@ class scss{
 			});
 		}
 		do_action('cp_scss_compiler_init',$scssc);
+		if($for_admin){
+			return static::$admin_scssc=$scssc;
+		}
 		return static::$scssc=$scssc;
-		
 	}
 	public static function compile($scss_names){
 		if(!current_user_can('edit_themes'))return;
@@ -284,7 +291,7 @@ class scss{
 					$is_theme_file?$style_config_modified_time:$admin_style_config_modified_time
 				)
 			){
-				$scssc=self::get_scssc();
+				$scssc=self::get_scssc(!$is_theme_file);
 				try{
 					$scssc->addVariables([
 						'is_plugins_scss'=>(strpos($scss_name,WP_PLUGIN_DIR)===0)?Compiler::$true:Compiler::$false,
@@ -322,8 +329,8 @@ class scss{
 	public static function export_map_data($name,$args){
 		if(empty($args[0]) || $args[0][0]!=='map'){return false;}
 		$data=array_combine(
-			array_map([static::$scssc,'compileValue'],$args[0][1]),
-			array_map([static::$scssc,'compileValue'],$args[0][2])
+			array_map([static::$scssc??static::$admin_scssc,'compileValue'],$args[0][1]),
+			array_map([static::$scssc??static::$admin_scssc,'compileValue'],$args[0][2])
 		);
 		$dir=get_stylesheet_directory().'/json';
 		if(!is_dir($dir)){mkdir($dir,0777,true);}
