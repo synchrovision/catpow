@@ -68,13 +68,13 @@ export const generateColorToneValue = (values) => (values.h || "0") + (values.s 
 export const generateColorToneClasses = (values) => {
 	const classes = [];
 	if (values.h) {
-		classes.push("color" + values.h);
+		classes.push("has-color" + values.h);
 	}
 	if (values.s) {
-		classes.push("tone-s" + values.s);
+		classes.push("has-tone-s" + values.s);
 	}
 	if (values.l) {
-		classes.push("tone-l" + values.l);
+		classes.push("has-tone-l" + values.l);
 	}
 	return classes;
 };
