@@ -35,7 +35,7 @@ class mailconf extends article_type{
 				'from'=>['type'=>'text','label'=>'送信元','size'=>30]
 			],
 			'supports'=>['title','editor','custom-fields'],
-			'default_content'=>[['catpow/t-body']]
+			'template_content'=>[['catpow/t-body']]
 		],$conf_data);
 		register_post_meta($conf_data['data_name'],'type',['type'=>'string','show_in_rest'=>true,'single'=>true]);
 	}
