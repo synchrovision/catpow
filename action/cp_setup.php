@@ -77,6 +77,8 @@ foreach($post_types as $type=>&$type_vals){
 				'show_in_rest'=>$type_vals['richedit']??true,
 				'show_in_menu'=>$type_vals['show_in_menu']??empty($type_vals['parent']),
 				'hierarchical'=>$type_vals['hierarchical']??false,
+				'template'=>$type_vals['template_content']??null,
+				'template_lock'=>$type_vals['template_content_lock']??null,
 				'supports'=>$supports,
 			];
 			$ico=get_stylesheet_directory().'/config/menu_icon/'.$type.'.png';
