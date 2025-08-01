@@ -145,148 +145,150 @@ class blocks{
 				self::$deps['editor_style'][]=$code_name;
 			}
 		}
-		foreach(scandir(get_stylesheet_directory().'/blocks') as $block_name){
-			if($block_name[0]==='.' || $block_name[0]==='_'){continue;}
-			$editor_script=CP::get_file_url('blocks/'.$block_name.'/editor_script.js');
-			$is_core_block=empty($editor_script);
-			$block_type=($is_core_block?'core/':'catpow/').str_replace('_','-',$block_name);
-			$param=[];
-			foreach([
-				'conf.php',
-				'editor_script.js',
-				'editor_style.css',
-				'script.js',
-				'style.css',
-				'front_script.js',
-				'front_style.css',
-				'view_script.js',
-				'view_script_module.mjs',
-				'view_style.css',
-				'editor_init.js',
-				'component.js',
-				'render.php',
-				'init.php',
-				'deps.php',
-				'editor_init.php',
-				'front_init.php'
-			] as $fname){
-				list($fname,$ext)=explode('.',$fname);
-				$file_name=$block_name.'/'.$fname.'.'.$ext;
-				$handle='blocks/'.$block_name.'/'.$fname.'.'.$ext;
-				switch($ext){
-					case 'css':
-						CP::scss_compile('blocks/'.$block_name.'/'.$fname);
-					case 'js':
-					case 'mjs':
-						$file_path_url=CP::get_file_path_url('blocks/'.$file_name);
-						$file_url=reset($file_path_url);
-				
-						if(empty($file_url)){break;}
-						$data[$ext][$handle]=[$handle,(string)$file_url,self::$deps[$fname]??[]];
-						if($is_core_block){
-							$key=$fname;
-							if(substr($key,0,6)==='front_'){
-								$key=substr($key,6);
+		if(is_dir(get_stylesheet_directory().'/blocks')){
+			foreach(scandir(get_stylesheet_directory().'/blocks') as $block_name){
+				if($block_name[0]==='.' || $block_name[0]==='_'){continue;}
+				$editor_script=CP::get_file_url('blocks/'.$block_name.'/editor_script.js');
+				$is_core_block=empty($editor_script);
+				$block_type=($is_core_block?'core/':'catpow/').str_replace('_','-',$block_name);
+				$param=[];
+				foreach([
+					'conf.php',
+					'editor_script.js',
+					'editor_style.css',
+					'script.js',
+					'style.css',
+					'front_script.js',
+					'front_style.css',
+					'view_script.js',
+					'view_script_module.mjs',
+					'view_style.css',
+					'editor_init.js',
+					'component.js',
+					'render.php',
+					'init.php',
+					'deps.php',
+					'editor_init.php',
+					'front_init.php'
+				] as $fname){
+					list($fname,$ext)=explode('.',$fname);
+					$file_name=$block_name.'/'.$fname.'.'.$ext;
+					$handle='blocks/'.$block_name.'/'.$fname.'.'.$ext;
+					switch($ext){
+						case 'css':
+							CP::scss_compile('blocks/'.$block_name.'/'.$fname);
+						case 'js':
+						case 'mjs':
+							$file_path_url=CP::get_file_path_url('blocks/'.$file_name);
+							$file_url=reset($file_path_url);
+					
+							if(empty($file_url)){break;}
+							$data[$ext][$handle]=[$handle,(string)$file_url,self::$deps[$fname]??[]];
+							if($is_core_block){
+								$key=$fname;
+								if(substr($key,0,6)==='front_'){
+									$key=substr($key,6);
+								}
+								if(in_array($key,['style','script'])){
+									$param[$fname]=$handle;
+								}
 							}
-							if(in_array($key,['style','script'])){
-								$param[$fname]=$handle;
-							}
-						}
-						else{
-							switch($fname){
-								case 'style':
-								case 'script':
-								case 'view_style':
-								case 'view_script':
-								case 'editor_style':
-								case 'editor_script':
-									$param[$fname.'_handles'][]=$handle;
-									break;
-								case 'view_script_module':
-									$param['view_script_module_ids'][]=$handle;
-									break;
-								case 'front_style':
-									$param['view_style_handles'][]=$handle;
-									break;
-								case 'front_script':
-									$param['view_script_handles'][]=$handle;
-									break;
-								default:
-									$param[
-										((substr($fname,0,7)==='editor')?'editor_':'').
-										['js'=>'script','css'=>'style'][$ext].'_handles'
-									][]=$handle;
-							}
-						}
-						break;
-					case 'php':
-						if($fname==='deps'){
-							foreach(CP::get_file_paths('blocks/'.$file_name) as $file_path){
-								$deps=(function($f){return include $f;})($file_path);
-								foreach ([
-									'editor_script'=>'js','editor_style'=>'css',
-									'view_script'=>'js','view_style'=>'css',
-									'view_script_module'=>'mjs',
-									'script'=>'js','style'=>'css'
-								] as $handler=>$type){
-									if(!empty($deps[$handler])){
-										$handles=[];
-										foreach($deps[$handler] as $dep){
-											if(is_array($dep)){
-												$data[$type][$dep[0]]=$dep;
-												$handles[]=$dep[0];
-											}
-											else{
-												$handles[]=$dep;
-											}
-										}
-										$register_handle="blocks/{$block_name}/{$handler}.{$type}";
-										if(empty($data[$type][$register_handle])){
-											$data[$type][$register_handle]=[$register_handle,null,self::$deps[$fname]??[]];
-										}
-										switch($handler){
-											case 'style':
-											case 'script':
-											case 'view_style':
-											case 'view_script':
-											case 'editor_style':
-											case 'editor_script':
-												$param[$handler.'_handles'][]=$register_handle;
-												break;
-											case 'view_script_module':
-												$param['view_script_module_ids'][]=$register_handle;
-										}
-										$data[$type][$register_handle][2]=array_merge(
-											$data[$type][$register_handle][2]??[],$handles
-										);
-									}
+							else{
+								switch($fname){
+									case 'style':
+									case 'script':
+									case 'view_style':
+									case 'view_script':
+									case 'editor_style':
+									case 'editor_script':
+										$param[$fname.'_handles'][]=$handle;
+										break;
+									case 'view_script_module':
+										$param['view_script_module_ids'][]=$handle;
+										break;
+									case 'front_style':
+										$param['view_style_handles'][]=$handle;
+										break;
+									case 'front_script':
+										$param['view_script_handles'][]=$handle;
+										break;
+									default:
+										$param[
+											((substr($fname,0,7)==='editor')?'editor_':'').
+											['js'=>'script','css'=>'style'][$ext].'_handles'
+										][]=$handle;
 								}
 							}
 							break;
-						}
-						$file_path=CP::get_file_path('blocks/'.$file_name);
-						if(empty($file_path)){break;}
-						if($fname==='conf'){
-							self::apply_conf_file($param,$file_path);
-						}
-						elseif($fname==='render'){
-							$param['render_callback']=$file_path;
-						}
-						else{
-							$data[$fname][$block_type]=$file_path;
-						}
-						break;
+						case 'php':
+							if($fname==='deps'){
+								foreach(CP::get_file_paths('blocks/'.$file_name) as $file_path){
+									$deps=(function($f){return include $f;})($file_path);
+									foreach ([
+										'editor_script'=>'js','editor_style'=>'css',
+										'view_script'=>'js','view_style'=>'css',
+										'view_script_module'=>'mjs',
+										'script'=>'js','style'=>'css'
+									] as $handler=>$type){
+										if(!empty($deps[$handler])){
+											$handles=[];
+											foreach($deps[$handler] as $dep){
+												if(is_array($dep)){
+													$data[$type][$dep[0]]=$dep;
+													$handles[]=$dep[0];
+												}
+												else{
+													$handles[]=$dep;
+												}
+											}
+											$register_handle="blocks/{$block_name}/{$handler}.{$type}";
+											if(empty($data[$type][$register_handle])){
+												$data[$type][$register_handle]=[$register_handle,null,self::$deps[$fname]??[]];
+											}
+											switch($handler){
+												case 'style':
+												case 'script':
+												case 'view_style':
+												case 'view_script':
+												case 'editor_style':
+												case 'editor_script':
+													$param[$handler.'_handles'][]=$register_handle;
+													break;
+												case 'view_script_module':
+													$param['view_script_module_ids'][]=$register_handle;
+											}
+											$data[$type][$register_handle][2]=array_merge(
+												$data[$type][$register_handle][2]??[],$handles
+											);
+										}
+									}
+								}
+								break;
+							}
+							$file_path=CP::get_file_path('blocks/'.$file_name);
+							if(empty($file_path)){break;}
+							if($fname==='conf'){
+								self::apply_conf_file($param,$file_path);
+							}
+							elseif($fname==='render'){
+								$param['render_callback']=$file_path;
+							}
+							else{
+								$data[$fname][$block_type]=$file_path;
+							}
+							break;
+					}
 				}
-			}
-			if($is_core_block){
-				if(!empty($param)){$data['core_block_params'][$block_type]=$param;}
-			}
-			else{
-				if($block_json=CP::get_file_path('blocks/'.$block_name.'/block.json')){
-					$data['blocks'][$block_json]=$param;
+				if($is_core_block){
+					if(!empty($param)){$data['core_block_params'][$block_type]=$param;}
 				}
 				else{
-					$data['blocks'][$block_type]=$param;
+					if($block_json=CP::get_file_path('blocks/'.$block_name.'/block.json')){
+						$data['blocks'][$block_json]=$param;
+					}
+					else{
+						$data['blocks'][$block_type]=$param;
+					}
 				}
 			}
 		}
