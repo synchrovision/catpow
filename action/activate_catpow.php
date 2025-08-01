@@ -30,5 +30,6 @@ if(basename($dir)!=='catpow'){
 	},10,2);
 }
 add_action('activated_plugin',function(){
+	cp::init();
 	Catpow\util\site_config::update();
 });
