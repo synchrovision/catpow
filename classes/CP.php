@@ -214,6 +214,10 @@ class CP{
 		return $rtn;
 	}
 	public static function get_file_path_url($name,$flag=073){
+		if(!is_string($name)){
+			error_log('file name should be string');
+			return [];
+		}
 		if($flag&self::FROM_PLUGIN){
 			foreach(self::$extensions as $catpow_extension){
 				if(file_exists($f=WP_PLUGIN_DIR.'/'.$catpow_extension.'/'.$name)){
