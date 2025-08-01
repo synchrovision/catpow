@@ -63,9 +63,10 @@ class BlockComponent{
 				$sources.=sprintf('<source %s="%s" media="%s"/>',$src_attr,$source['srcset'],self::$devices[$source['device']]['media_query']);
 			}
 		}
-		$attr=sprintf('class="%s"',$props['className']?:'CP-ResponsiveImage');
+		$class_name=!empty($props['className'])?$props['className']:'cp-responsiveimage';
+		$attr=sprintf('class="%s"',$class_name);
 		if($type==='image'){
-			$base=sprintf('<img class="%s" src="%s" alt="%s"/>',$props['className'],$props['src'],$props['alt']);
+			$base=sprintf('<img class="%s" src="%s" alt="%s"/>',$class_name,$props['src'],$props['alt']);
 		}
 		else{
 			$attr.=sprintf(' autoplay loop playsinline muted');
