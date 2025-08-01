@@ -13,6 +13,6 @@
 .cp-finder-filtercontrol__table > .row + .row {
   border-top-style: solid;
   border-top-width: 0.0625rem;
-  border-top-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 20),var(--cp-tones-t-a));
+  border-top-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 20),var(--cp-tones-t-a,1));
 }
 /*# sourceMappingURL=./style.css.map */
