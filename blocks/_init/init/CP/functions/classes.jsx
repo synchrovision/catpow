@@ -74,6 +74,30 @@ export const getSelectiveClass = ({ attr }, values, key) => {
 	return _.intersection(classArray, values).shift();
 };
 
+export const getSelectiveClassLabel = ({ attr }, values, key) => {
+	if (key === undefined) {
+		key = "classes";
+	}
+	if (attr[key] === undefined) {
+		attr[key] = "";
+	}
+	const flags = CP.classNamesToFlags(attr[key]);
+	if (Array.isArray(values)) {
+		for (const value of values) {
+			if (flags[value]) {
+				return value;
+			}
+		}
+		return null;
+	}
+	for (const key in values) {
+		if (flags[key]) {
+			return values[key];
+		}
+	}
+	return null;
+};
+
 //@deprecated
 export const getSubClasses = (prm) => {
 	let rtn = {};
