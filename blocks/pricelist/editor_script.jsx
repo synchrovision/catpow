@@ -11,7 +11,7 @@
 		const { items = [], classes, loopParam, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 		const primaryClass = "wp-block-catpow-pricelist";
 
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
@@ -86,7 +86,7 @@
 			if (!item.controlClasses) {
 				item.controlClasses = "control";
 			}
-			const itemStates = CP.wordsToFlags(item.classes);
+			const itemStates = CP.classNamesToFlags(item.classes);
 			rtn.push(
 				<CP.Item tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
 					{itemStates.hasImage && (
@@ -204,7 +204,7 @@
 		const { items = [], classes = "", loopParam, loopCount, doLoop } = attributes;
 		var classArray = _.uniq(classes.split(" "));
 
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 
 		const imageKeys = {
 			image: { src: "imageSrc", alt: "imageAlt", items: "items" },
@@ -212,7 +212,7 @@
 
 		let rtn = [];
 		items.map((item, index) => {
-			const itemStates = CP.wordsToFlags(item.classes);
+			const itemStates = CP.classNamesToFlags(item.classes);
 			rtn.push(
 				<li className={item.classes} key={index}>
 					{itemStates.hasImage && (
@@ -256,7 +256,7 @@
 				const { items = [], classes = "", loopParam, loopCount } = attributes;
 				var classArray = _.uniq(classes.split(" "));
 
-				var states = CP.wordsToFlags(classes);
+				var states = CP.classNamesToFlags(classes);
 
 				const imageKeys = {
 					image: { src: "imageSrc", alt: "imageAlt", items: "items" },
@@ -264,7 +264,7 @@
 
 				let rtn = [];
 				items.map((item, index) => {
-					const itemStates = CP.wordsToFlags(item.classes);
+					const itemStates = CP.classNamesToFlags(item.classes);
 					rtn.push(
 						<li className={item.classes}>
 							{itemStates.hasImage && (
@@ -300,7 +300,7 @@
 				);
 			},
 			migrate(attributes) {
-				var states = CP.wordsToFlags(classes);
+				var states = CP.classNamesToFlags(classes);
 				attributes.content_path = attributes.loopParam.split(" ")[0];
 				attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
 				attributes.doLoop = states.doLoop;

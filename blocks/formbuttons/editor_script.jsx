@@ -58,7 +58,7 @@
 			if (!item.controlClasses) {
 				item.controlClasses = "control";
 			}
-			const itemStates = CP.wordsToFlags(item.classes);
+			const itemStates = CP.classNamesToFlags(item.classes);
 			rtn.push(
 				<CP.Item tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
 					<div className="button">
@@ -117,7 +117,7 @@
 
 		let rtn = [];
 		items.map((item, index) => {
-			const itemStates = CP.wordsToFlags(item.classes);
+			const itemStates = CP.classNamesToFlags(item.classes);
 			const eventDispatcherAttributes = {};
 			if (blockType.attributes.items.eventDispatcherAttributes) {
 				blockType.attributes.items.eventDispatcherAttributes.map((attr_name) => {

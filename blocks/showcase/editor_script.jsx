@@ -48,7 +48,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 		const primaryClass = "wp-block-catpow-showcase";
 		var classArray = _.uniq((className + " " + classes).split(" "));
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { imageKeys, linkKeys } = CP.config.showcase;
 
 		const selectiveClasses = useMemo(() => {
@@ -304,7 +304,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 		const { items = [], classes = "", TitleTag, countPrefix, countSuffix, doLoop } = attributes;
 		var classArray = _.uniq(classes.split(" "));
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { imageKeys, linkKeys } = CP.config.showcase;
 
 		let rtn = [];

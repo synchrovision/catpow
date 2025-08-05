@@ -82,7 +82,7 @@ wp.blocks.registerBlockType("catpow/flow", {
 		const primaryClass = "wp-block-catpow-flow";
 		var classArray = _.uniq((className + " " + classes).split(" "));
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.flow;
 
 		const selectiveClasses = useMemo(() => {
@@ -287,7 +287,7 @@ wp.blocks.registerBlockType("catpow/flow", {
 		const { items = [], classes = "", countPrefix, countSuffix } = attributes;
 		var classArray = _.uniq(classes.split(" "));
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.flow;
 
 		let rtn = [];

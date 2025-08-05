@@ -79,7 +79,7 @@ wp.blocks.registerBlockType("catpow/honeycomb", {
 			};
 		});
 
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [];
@@ -155,7 +155,7 @@ wp.blocks.registerBlockType("catpow/honeycomb", {
 				>
 					{items.map((item, index) => {
 						var itemID = id + "_item_" + index;
-						var itemStates = CP.wordsToFlags(item.classes);
+						var itemStates = CP.classNamesToFlags(item.classes);
 						var itemClasses = item.classes;
 						var itemSelected = attributes.currentItemIndex == index;
 						var order = item.order.split(",").map((val) => val.split(" "));
@@ -269,14 +269,14 @@ wp.blocks.registerBlockType("catpow/honeycomb", {
 			};
 		});
 
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.honeycomb;
 
 		return (
 			<div id={id} className={classes} data-breakpoints={breakpoints} data-grid={grid}>
 				{items.map((item, index) => {
 					var itemID = id + "_item_" + index;
-					var itemStates = CP.wordsToFlags(item.classes);
+					var itemStates = CP.classNamesToFlags(item.classes);
 					item.order = item.order || "";
 					var order = item.order.split(",").map((val) => val.split(" "));
 					breakpoints.map((bp, bpIndex) => {

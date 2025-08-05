@@ -30,7 +30,7 @@ wp.blocks.registerBlockType("catpow/accordion", {
 		const { PanelBody, TextareaControl } = wp.components;
 		const { classes, title, imageMime, imageSrc, imageAlt, imageCode } = attributes;
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, imageSizes } = CP.config.accordion;
 
 		const selectiveClasses = useMemo(() => {
@@ -93,7 +93,7 @@ wp.blocks.registerBlockType("catpow/accordion", {
 	},
 	save({ attributes, className, setAttributes }) {
 		const { classes, title, imageMime, imageSrc, imageAlt, imageCode } = attributes;
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, imageSizes } = CP.config.accordion;
 		const { InnerBlocks, RichText } = wp.blockEditor;
 

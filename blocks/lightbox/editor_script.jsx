@@ -35,7 +35,7 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 		const { items = [], classes, boxClasses, blockState, loopCount, doLoop, EditMode = false, AltMode = false, OpenMode = false, currentItemIndex = 0 } = attributes;
 		const { imageKeys } = CP.config.lightbox;
 
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
@@ -325,7 +325,7 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 		const { InnerBlocks, RichText } = wp.blockEditor;
 		const { items = [], classes = "", boxClasses, blockState, doLoop } = attributes;
 
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 
 		const { imageKeys } = CP.config.lightbox;
 

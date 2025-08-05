@@ -22,7 +22,7 @@
 		const { PanelBody, TextareaControl, ToolbarGroup } = wp.components;
 		const { type, isHtmlMail, classes, headerText, footerText, body_class, textMail, TextMode = false } = attributes;
 		const primaryClass = "wp-block-catpow-t-body";
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
@@ -123,7 +123,7 @@
 		const { InnerBlocks, RichText } = wp.blockEditor;
 		const { type, isHtmlMail, classes, headerText, textMail, footerText } = attributes;
 		const primaryClass = "wp-block-catpow-t-body";
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 		return (
 			<>
 				{(!isHtmlMail || textMail) && <textmail>{textMail}</textmail>}

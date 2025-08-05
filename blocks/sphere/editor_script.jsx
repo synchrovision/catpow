@@ -57,7 +57,7 @@ wp.blocks.registerBlockType("catpow/sphere", {
 		const { items = [], classes = "", countPrefix, countSuffix } = attributes;
 		const primaryClass = "wp-block-catpow-sphere";
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.sphere;
 
 		const selectiveClasses = useMemo(() => {
@@ -155,7 +155,7 @@ wp.blocks.registerBlockType("catpow/sphere", {
 		const { RichText } = wp.blockEditor;
 		const { items = [], classes = "", countPrefix, countSuffix } = attributes;
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.sphere;
 
 		let rtn = [];

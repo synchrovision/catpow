@@ -11,7 +11,7 @@
 		const { items = [], classes, loopParam, loopCount, doLoop, EditMode = false, AltMode = false, currentItemIndex } = attributes;
 		const primaryClass = "wp-block-catpow-materials";
 
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
@@ -77,7 +77,7 @@
 			if (!item.controlClasses) {
 				item.controlClasses = "control";
 			}
-			const itemStates = CP.wordsToFlags(item.classes);
+			const itemStates = CP.classNamesToFlags(item.classes);
 			rtn.push(
 				<CP.Item tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected && currentItemIndex == index} key={index}>
 					{itemStates.hasLabel && (
@@ -93,7 +93,7 @@
 					)}
 					<ul className="items">
 						{item.items.map((subItem, subIndex) => {
-							const subItemStates = CP.wordsToFlags(subItem.classes);
+							const subItemStates = CP.classNamesToFlags(subItem.classes);
 							return (
 								<CP.Item
 									tag="li"
@@ -215,11 +215,11 @@
 		const { items = [], classes = "", loopParam, loopCount, doLoop } = attributes;
 		var classArray = _.uniq(classes.split(" "));
 
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 
 		let rtn = [];
 		items.map((item, index) => {
-			const itemStates = CP.wordsToFlags(item.classes);
+			const itemStates = CP.classNamesToFlags(item.classes);
 			rtn.push(
 				<li className={item.classes} key={index}>
 					{itemStates.hasLabel && (
@@ -229,7 +229,7 @@
 					)}
 					<ul className="items">
 						{item.items.map((subItem, subIndex) => {
-							const subItemStates = CP.wordsToFlags(subItem.classes);
+							const subItemStates = CP.classNamesToFlags(subItem.classes);
 							return (
 								<li className={subItem.classes}>
 									<div className="text">

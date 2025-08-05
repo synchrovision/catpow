@@ -25,7 +25,7 @@ wp.blocks.registerBlockType("catpow/div", {
 		const { attributes, className, setAttributes, context } = props;
 		const { customColorVars, anchor, classes, vars, color, patternImageCss, frameImageCss, borderImageCss } = attributes;
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys } = CP.config.div;
 
 		CP.useInheritColor(props, ["iconImageSrc", "patternImageCss", "frameImageCss", "borderImageCss"]);
@@ -106,7 +106,7 @@ wp.blocks.registerBlockType("catpow/div", {
 		const { InnerBlocks, useBlockProps } = wp.blockEditor;
 		const { customColorVars, anchor, classes = "", vars, color, patternImageCss, frameImageCss, borderImageCss } = attributes;
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys } = CP.config.div;
 
 		const blockProps = useBlockProps.save({ className: classes, style: vars });

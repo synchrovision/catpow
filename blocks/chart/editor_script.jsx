@@ -92,7 +92,7 @@
 		}, []);
 		let type = CP.getSelectiveClass({ attr: attributes }, selectiveClasses[0].values);
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const save = () => {
 			setAttributes({ graph: JSON.parse(JSON.stringify(graph)) });
 		};
@@ -215,7 +215,7 @@
 			},
 		];
 		let type = CP.getSelectiveClass({ attr: attributes }, selectiveClasses[0].values);
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 
 		return <div className={classes}>{el(Catpow[type + "Output"], { ...states, ...graph[0] })}</div>;
 	},

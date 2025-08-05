@@ -60,8 +60,8 @@ wp.blocks.registerBlockType("catpow/slider", {
 		const { Icon, PanelBody, TextControl, TextareaControl } = wp.components;
 		const { vars, classes = "", controlClasses = "", config, items, doLoop, EditMode = false, AltMode = false, device } = attributes;
 
-		const states = CP.wordsToFlags(classes);
-		const controlStates = CP.wordsToFlags(controlClasses);
+		const states = CP.classNamesToFlags(classes);
+		const controlStates = CP.classNamesToFlags(controlClasses);
 		const { devices, imageKeys, imageSizes, linkKeys } = CP.config.slider;
 
 		var statesClasses = [
@@ -228,7 +228,7 @@ wp.blocks.registerBlockType("catpow/slider", {
 					posClass += " prev";
 				}
 			}
-			itemClass = posClass + " item" + p;
+			itemClass = posClass + " item item" + p;
 			rtn.push(
 				<CP.Item tag="li" className={itemClass} set={setAttributes} attr={attributes} items={items} index={index} style={{ "--item-p": p }} key={index}>
 					{states.hasSlide && (
@@ -382,7 +382,7 @@ wp.blocks.registerBlockType("catpow/slider", {
 		const { InnerBlocks, RichText } = wp.blockEditor;
 		const { vars, classes = "", controlClasses = "", config, items = [], doLoop } = attributes;
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, imageSizes, linkKeys } = CP.config.slider;
 
 		var rtn = [];
@@ -586,7 +586,7 @@ wp.blocks.registerBlockType("catpow/slider", {
 				var classArray = _.uniq(classes.split(" "));
 				var controlClassArray = _.uniq(controlClasses.split(" "));
 
-				var states = CP.wordsToFlags(classes);
+				var states = CP.classNamesToFlags(classes);
 
 				const imageKeys = {
 					image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
@@ -670,7 +670,7 @@ wp.blocks.registerBlockType("catpow/slider", {
 				);
 			},
 			migrate(attributes) {
-				var states = CP.wordsToFlags(classes);
+				var states = CP.classNamesToFlags(classes);
 				attributes.content_path = attributes.loopParam.split(" ")[0];
 				attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
 				attributes.doLoop = states.doLoop;

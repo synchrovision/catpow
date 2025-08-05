@@ -21,7 +21,7 @@
 		var classArray = _.uniq((className + " " + classes).split(" "));
 		var classNameArray = className.split(" ");
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
@@ -90,7 +90,7 @@
 		let rtn = [];
 
 		items.map((item, index) => {
-			const itemStates = CP.wordsToFlags(item.classes);
+			const itemStates = CP.classNamesToFlags(item.classes);
 			rtn.push(
 				<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
 					<div className="button">
@@ -191,11 +191,11 @@
 		const { InnerBlocks } = wp.blockEditor;
 		const { attributes, className } = props;
 		const { items = [], classes, loopParam, doLoop } = attributes;
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const blockType = wp.data.select("core/blocks").getBlockType("catpow/buttons");
 		let rtn = [];
 		items.map((item, index) => {
-			const itemStates = CP.wordsToFlags(item.classes);
+			const itemStates = CP.classNamesToFlags(item.classes);
 			const eventDispatcherAttributes = {};
 			if (blockType.attributes.items.eventDispatcherAttributes) {
 				blockType.attributes.items.eventDispatcherAttributes.map((attr_name) => {
@@ -227,11 +227,11 @@
 		{
 			save({ attributes, className }) {
 				const { items = [], classes, loopParam } = attributes;
-				const states = CP.wordsToFlags(classes);
+				const states = CP.classNamesToFlags(classes);
 
 				let rtn = [];
 				items.map((item, index) => {
-					const itemStates = CP.wordsToFlags(item.classes);
+					const itemStates = CP.classNamesToFlags(item.classes);
 					rtn.push(
 						<li className={item.classes}>
 							<a href={item.url} className="button" data-event={item.event}>
@@ -254,7 +254,7 @@
 				);
 			},
 			migrate(attributes) {
-				var states = CP.wordsToFlags(classes);
+				var states = CP.classNamesToFlags(classes);
 				attributes.content_path = attributes.loopParam.split(" ")[0];
 				attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
 				attributes.doLoop = states?.doLoop;

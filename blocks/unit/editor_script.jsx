@@ -36,7 +36,7 @@ wp.blocks.registerBlockType("catpow/unit", {
 		const { PanelBody, TextareaControl } = wp.components;
 		const { classes } = attributes;
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys } = CP.config.unit;
 
 		var selectiveClasses = [
@@ -89,7 +89,7 @@ wp.blocks.registerBlockType("catpow/unit", {
 		const { InnerBlocks } = wp.blockEditor;
 		const { classes = "" } = attributes;
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys } = CP.config.unit;
 
 		return (

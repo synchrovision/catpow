@@ -59,7 +59,7 @@
 			const primaryClass = "wp-block-catpow-listed";
 			var classArray = _.uniq((className + " " + classes2).split(" "));
 			var classNameArray = className.split(" ");
-			var states = CP.wordsToFlags(classes2);
+			var states = CP.classNamesToFlags(classes2);
 			const selectiveClasses = useMemo(() => {
 				const selectiveClasses2 = [
 					{
@@ -512,7 +512,7 @@
 		save({ attributes, className }) {
 			const { InnerBlocks, RichText: RichText2, useBlockProps } = wp.blockEditor;
 			const { items = [], TitleTag, SubTitleTag, classes: classes2 = "", countPrefix, countSuffix, subCountPrefix, subCountSuffix, linkUrl, linkText, loopParam, doLoop } = attributes;
-			const states = CP.wordsToFlags(classes2);
+			const states = CP.classNamesToFlags(classes2);
 			const { imageKeys } = CP.config.listed;
 			let rtn = [];
 			items.map((item, index) => {
@@ -594,7 +594,7 @@
 				save({ attributes, className }) {
 					const { items = [], classes: classes2 = "", countPrefix, countSuffix, subCountPrefix, subCountSuffix, linkUrl, linkText, loopParam } = attributes;
 					var classArray = _.uniq(classes2.split(" "));
-					var states = CP.wordsToFlags(classes2);
+					var states = CP.classNamesToFlags(classes2);
 					const imageKeys = {
 						image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
 						headerImage: {
@@ -689,7 +689,7 @@
 					return /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, states.doLoop && "[loop_template " + (loopParam || "") + "]", rtn, states.doLoop && "[/loop_template]");
 				},
 				migrate(attributes) {
-					var states = CP.wordsToFlags(classes);
+					var states = CP.classNamesToFlags(classes);
 					attributes.content_path = attributes.loopParam.split(" ")[0];
 					attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
 					attributes.doLoop = states.doLoop;

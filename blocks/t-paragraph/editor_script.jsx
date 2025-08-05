@@ -44,7 +44,7 @@
 		const { PanelBody, TextareaControl } = wp.components;
 		const { classes, text } = attributes;
 		const primaryClass = "wp-block-catpow-t-paragraph";
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [{ name: "size", label: "サイズ", values: ["large", "medium", "small"] }];

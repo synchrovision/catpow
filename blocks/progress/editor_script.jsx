@@ -66,7 +66,7 @@
 		const Items = useCallback(
 			(props) => {
 				const { countPrefix, countSuffix } = settings;
-				const states = CP.wordsToFlags(settings.classes);
+				const states = CP.classNamesToFlags(settings.classes);
 				return settings.items.map((item, index) => (
 					<li
 						className={"item " + (index == attributes.step ? "active" : "")}
@@ -121,7 +121,7 @@
 			setAttributes({ settings: false });
 		}, [post]);
 
-		const states = settings && settings.classes ? CP.wordsToFlags(settings.classes) : {};
+		const states = settings && settings.classes ? CP.classNamesToFlags(settings.classes) : {};
 
 		return (
 			<>

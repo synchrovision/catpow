@@ -27,7 +27,7 @@ wp.blocks.registerBlockType("catpow/sticky", {
 		const { PanelBody, TextareaControl } = wp.components;
 		const { classes, labelText } = attributes;
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.sticky;
 
 		const selectiveClasses = useMemo(() => {
@@ -113,7 +113,7 @@ wp.blocks.registerBlockType("catpow/sticky", {
 		const { InnerBlocks, RichText } = wp.blockEditor;
 		const { classes = "", labelText } = attributes;
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.sticky;
 
 		return (
@@ -149,7 +149,7 @@ wp.blocks.registerBlockType("catpow/sticky", {
 			save({ attributes, className, setAttributes }) {
 				const { classes = "", labelText } = attributes;
 
-				const states = CP.wordsToFlags(classes);
+				const states = CP.classNamesToFlags(classes);
 				const { imageKeys } = CP.config.sticky;
 
 				return (

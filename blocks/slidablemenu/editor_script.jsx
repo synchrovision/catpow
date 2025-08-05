@@ -29,7 +29,7 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 		const primaryClassName = "wp-block-catpow-slidablemenu";
 		var classArray = _.uniq((className + " " + classes).split(" "));
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.slidablemenu;
 
 		const selectiveClasses = useMemo(() => {
@@ -209,7 +209,7 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 		const { items = [], classes = "", columnsCount, doLoop } = attributes;
 		var classArray = _.uniq(classes.split(" "));
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.slidablemenu;
 
 		let rtn = [];

@@ -228,7 +228,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 			save({ attributes, className }) {
 				const { items = [], classes, loopParam } = attributes;
 
-				var states = CP.wordsToFlags(classes);
+				var states = CP.classNamesToFlags(classes);
 				const imageKeys = {
 					image: {
 						src: "src",
@@ -261,7 +261,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 				);
 			},
 			migrate(attributes) {
-				var states = CP.wordsToFlags(classes);
+				var states = CP.classNamesToFlags(classes);
 				attributes.content_path = attributes.loopParam.split(" ")[0];
 				attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
 				attributes.doLoop = states?.doLoop;

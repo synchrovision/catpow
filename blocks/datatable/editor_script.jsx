@@ -60,7 +60,7 @@
 		var classArray = _.uniq((className + " " + classes).split(" "));
 		var classNameArray = className.split(" ");
 
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 
 		if (attributes.file) {
 			var reader = new FileReader();
@@ -267,7 +267,7 @@
 		const { classes = "", rows = [], loopParam, doLoop } = attributes;
 		var classArray = classes.split(" ");
 
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 
 		return (
 			<>
@@ -314,7 +314,7 @@
 				const { classes = "", rows = [], loopParam } = attributes;
 				var classArray = classes.split(" ");
 
-				var states = CP.wordsToFlags(classes);
+				var states = CP.classNamesToFlags(classes);
 
 				return (
 					<table className={classes}>
@@ -351,7 +351,7 @@
 				);
 			},
 			migrate(attributes) {
-				var states = CP.wordsToFlags(classes);
+				var states = CP.classNamesToFlags(classes);
 				attributes.content_path = attributes.loopParam.split(" ")[0];
 				attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
 				attributes.doLoop = states.doLoop;

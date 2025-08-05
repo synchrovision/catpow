@@ -44,7 +44,7 @@
 		const { PanelBody, TextareaControl } = wp.components;
 		const { classes, title } = attributes;
 		const primaryClass = "wp-block-catpow-t-heading";
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = ["color", { name: "type", label: "タイプ", values: ["header", "headline", "catch"] }, { name: "size", label: "サイズ", values: ["large", "medium", "small"] }];

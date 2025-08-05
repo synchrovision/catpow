@@ -76,7 +76,7 @@ wp.blocks.registerBlockType("catpow/motiongraphic", {
 	save({ attributes, className, setAttributes }) {
 		const { InnerBlocks } = wp.blockEditor;
 		const { classes = "" } = attributes;
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 
 		return <InnerBlocks.Content />;
 	},

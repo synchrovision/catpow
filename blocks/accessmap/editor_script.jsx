@@ -25,7 +25,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 		var classNameArray = className.split(" ");
 		const { bem, classNamesToFlags, flagsToClassNames } = Catpow.util;
 
-		var states = useMemo(() => CP.wordsToFlags(classes), [classes]);
+		var states = useMemo(() => CP.classNamesToFlags(classes), [classes]);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
@@ -171,7 +171,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 			let url;
 			const index = i % items.length;
 			const item = items[index];
-			const itemState = CP.wordsToFlags(item.classes);
+			const itemState = CP.classNamesToFlags(item.classes);
 			if (itemState.useEmbedURL) {
 				url = item.src;
 			} else {
@@ -326,13 +326,13 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 	save({ attributes, className }) {
 		const { InnerBlocks, RichText } = wp.blockEditor;
 		const { classes, TitleTag, items = [], z, t, hl, doLoop } = attributes;
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.accessmap;
 
 		let rtn = [];
 		items.map((item, index) => {
 			let url;
-			const itemState = CP.wordsToFlags(item.classes);
+			const itemState = CP.classNamesToFlags(item.classes);
 			if (itemState.useEmbedURL) {
 				url = item.src;
 			} else {

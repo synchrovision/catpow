@@ -118,7 +118,7 @@ export const colorClassProxy = (state) => {
 		state = {};
 	}
 	if (typeof state === "string" || Array.isArray(state)) {
-		state = CP.wordsToFlags(state);
+		state = CP.classNamesToFlags(state);
 	}
 	return new Proxy(state, colorClassProxyHandler);
 };
@@ -126,7 +126,7 @@ export const colorClassProxyHandler = {
 	get(state, prop) {
 		switch (prop) {
 			case "classes": {
-				return CP.flagsToWords(state);
+				return CP.flagsToClassNames(state);
 			}
 			case "value": {
 				return extractColorToneValue(Object.keys(state).filter((c) => state[c]));

@@ -19,7 +19,7 @@ wp.blocks.registerBlockType("catpow/t-button", {
 		const { InspectorControls, RichText } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
 		const { classes, title } = attributes;
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = ["color", { name: "size", type: "buttons", label: "サイズ", values: ["large", "medium", "small"] }, { name: "url", input: "text", label: "URL", key: "url" }];

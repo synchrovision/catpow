@@ -19,7 +19,7 @@ wp.blocks.registerBlockType("catpow/pageheader", {
 		const { content_path, query, config, EditMode = false } = attributes;
 		const { devices, imageKeys } = CP.config.pageheader;
 		const { bem } = Catpow.util;
-		const states = CP.wordsToFlags(attributes.classes);
+		const states = CP.classNamesToFlags(attributes.classes);
 		const classes = useMemo(() => bem(attributes.classes), []);
 
 		const selectiveClasses = useMemo(() => {
@@ -94,7 +94,7 @@ wp.blocks.registerBlockType("catpow/pageheader", {
 		const { devices, imageKeys } = CP.config.pageheader;
 		const { RichText } = wp.blockEditor;
 		const { bem } = Catpow.util;
-		const states = CP.wordsToFlags(attributes.classes);
+		const states = CP.classNamesToFlags(attributes.classes);
 		const classes = bem(attributes.classes);
 
 		return (

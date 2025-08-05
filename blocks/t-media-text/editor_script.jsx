@@ -18,7 +18,7 @@
 		const { PanelBody, TextareaControl } = wp.components;
 		const { classes, src, alt, imageCode, width } = attributes;
 		const primaryClass = "wp-block-catpow-t-media-text";
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
@@ -74,7 +74,7 @@
 		const { InnerBlocks } = wp.blockEditor;
 		const { classes, src, alt, imageCode, width } = attributes;
 		const primaryClass = "wp-block-catpow-t-media-text";
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 		return (
 			<table width="100%" className={classes}>
 				<tbody>

@@ -30,7 +30,7 @@
       const { items = [], classes, columnsCount, loopCount, doLoop, AltMode = false } = attributes;
       const primaryClassName = "wp-block-catpow-slidablemenu";
       var classArray = _.uniq((className + " " + classes).split(" "));
-      const states = CP.wordsToFlags(classes);
+      const states = CP.classNamesToFlags(classes);
       const { imageKeys } = CP.config.slidablemenu;
       const selectiveClasses = useMemo(() => {
         const { imageKeys: imageKeys2 } = CP.config.slidablemenu;
@@ -166,7 +166,7 @@
       const { InnerBlocks, RichText } = wp.blockEditor;
       const { items = [], classes = "", columnsCount, doLoop } = attributes;
       var classArray = _.uniq(classes.split(" "));
-      const states = CP.wordsToFlags(classes);
+      const states = CP.classNamesToFlags(classes);
       const { imageKeys } = CP.config.slidablemenu;
       let rtn = [];
       items.map((item, index) => {

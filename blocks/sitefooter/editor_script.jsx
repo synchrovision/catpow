@@ -17,7 +17,7 @@ wp.blocks.registerBlockType("catpow/sitefooter", {
 		const { classes = "" } = attributes;
 		const { Fragment } = wp.element;
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [];
@@ -44,7 +44,7 @@ wp.blocks.registerBlockType("catpow/sitefooter", {
 		const { InnerBlocks, RichText } = wp.blockEditor;
 		const { classes = "" } = attributes;
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 
 		return (
 			<div id="SiteFooter" className={classes}>

@@ -32,7 +32,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 		const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
 		const { items = [], classes = "", loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.panes;
 
 		var selectiveClasses = [
@@ -203,7 +203,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 	save({ attributes, className }) {
 		const { InnerBlocks, RichText } = wp.blockEditor;
 		const { items = [], classes = "", linkUrl, loopParam, doLoop } = attributes;
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.panes;
 
 		let rtn = [];

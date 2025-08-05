@@ -24,7 +24,7 @@
 		const primaryClass = "wp-block-catpow-dialog";
 		var classArray = _.uniq((className + " " + classes).split(" "));
 		var classNameArray = className.split(" ");
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
@@ -206,7 +206,7 @@
 		const { items = [], classes = "", countPrefix, countSuffix, subCountPrefix, subCountSuffix, linkUrl, linkText, loopParam, doLoop } = attributes;
 		var classArray = _.uniq(classes.split(" "));
 
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 		const imageKeys = {
 			headerImage: {
 				src: "headerImageSrc",
@@ -255,7 +255,7 @@
 				const { items = [], classes = "", countPrefix, countSuffix, subCountPrefix, subCountSuffix, linkUrl, linkText, loopParam } = attributes;
 				var classArray = _.uniq(classes.split(" "));
 
-				var states = CP.wordsToFlags(classes);
+				var states = CP.classNamesToFlags(classes);
 
 				let rtn = [];
 				items.map((item, index) => {
@@ -288,7 +288,7 @@
 				);
 			},
 			migrate(attributes) {
-				var states = CP.wordsToFlags(classes);
+				var states = CP.classNamesToFlags(classes);
 				attributes.content_path = attributes.loopParam.split(" ")[0];
 				attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
 				attributes.doLoop = states.doLoop;

@@ -62,7 +62,7 @@ wp.blocks.registerBlockType("catpow/ranking", {
 		const { items = [], classes = "", countPrefix, countSuffix } = attributes;
 		const primaryClass = "wp-block-catpow-ranking";
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.ranking;
 
 		var selectiveClasses = [
@@ -191,7 +191,7 @@ wp.blocks.registerBlockType("catpow/ranking", {
 		const { RichText } = wp.blockEditor;
 		const { items = [], classes = "", countPrefix, countSuffix } = attributes;
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.ranking;
 
 		let rtn = [];

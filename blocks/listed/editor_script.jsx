@@ -59,7 +59,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 		var classArray = _.uniq((className + " " + classes).split(" "));
 		var classNameArray = className.split(" ");
 
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
@@ -482,7 +482,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 	save({ attributes, className }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
 		const { items = [], TitleTag, SubTitleTag, classes = "", countPrefix, countSuffix, subCountPrefix, subCountSuffix, linkUrl, linkText, loopParam, doLoop } = attributes;
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.listed;
 
 		let rtn = [];
@@ -562,7 +562,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 				const { items = [], classes = "", countPrefix, countSuffix, subCountPrefix, subCountSuffix, linkUrl, linkText, loopParam } = attributes;
 				var classArray = _.uniq(classes.split(" "));
 
-				var states = CP.wordsToFlags(classes);
+				var states = CP.classNamesToFlags(classes);
 
 				const imageKeys = {
 					image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
@@ -671,7 +671,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 				);
 			},
 			migrate(attributes) {
-				var states = CP.wordsToFlags(classes);
+				var states = CP.classNamesToFlags(classes);
 				attributes.content_path = attributes.loopParam.split(" ")[0];
 				attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
 				attributes.doLoop = states.doLoop;

@@ -24,7 +24,7 @@
 		const primaryClass = "wp-block-catpow-definition";
 		var classArray = _.uniq((className + " " + classes).split(" "));
 
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
@@ -154,7 +154,7 @@
 	save({ attributes, className }) {
 		const { InnerBlocks, RichText } = wp.blockEditor;
 		const { items = [], classes = "", loopCount, doLoop } = attributes;
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 
 		let rtn = [];
 		items.map((item, index) => {

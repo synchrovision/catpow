@@ -14,7 +14,7 @@
 		const { PanelBody, TextareaControl } = wp.components;
 		const { classes } = attributes;
 		const primaryClass = "wp-block-catpow-t-box";
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [{ name: "size", label: "サイズ", values: ["large", "medium", "small"] }];
@@ -47,7 +47,7 @@
 		const { InnerBlocks } = wp.blockEditor;
 		const { classes } = attributes;
 		const primaryClass = "wp-block-catpow-t-box";
-		var states = CP.wordsToFlags(classes);
+		var states = CP.classNamesToFlags(classes);
 		return (
 			<table className={classes}>
 				<tbody>

@@ -79,7 +79,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 			setCurrentItemNodes(currentItemIndexes.sort().map((index) => targetRefs.current[index]));
 		}, [currentItemIndexes, targetRefs, setCurrentItemNodes]);
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { devices, devicesForCss, imageKeys, getCssDatas, renderCssDatas, parseRectAttr, getRectAttr } = CP.config.graphics;
 		const cssDatas = getCssDatas(attributes, states);
 
@@ -548,7 +548,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 						/>
 					)}
 					{items.map((item, index) => {
-						var itemStates = CP.wordsToFlags(item.classes);
+						var itemStates = CP.classNamesToFlags(item.classes);
 						var itemClasses = item.classes;
 						var itemSelected = currentItemIndexes.includes(index);
 						if (isSelected) {
@@ -697,7 +697,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 		const { id, classes, heights, items = [] } = attributes;
 		const { bem } = Catpow.util;
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, getCssDatas, renderCssDatas } = CP.config.graphics;
 
 		const cssDatas = getCssDatas(attributes, states);
@@ -706,7 +706,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 			<div id={id} className={classes} data-heights={heights}>
 				<div className="base">{states.hasBaseImage && <CP.ResponsiveImage attr={attributes} keys={imageKeys.base} devices={devices} />}</div>
 				{items.map((item, index) => {
-					var itemStates = CP.wordsToFlags(item.classes);
+					var itemStates = CP.classNamesToFlags(item.classes);
 					const itemBody = () => {
 						if (itemStates.isText) {
 							return (

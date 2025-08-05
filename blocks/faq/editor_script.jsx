@@ -60,7 +60,7 @@ wp.blocks.registerBlockType("catpow/faq", {
 		const { items = [], classes = "", countPrefix, countSuffix } = attributes;
 		const primaryClass = "wp-block-catpow-faq";
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.faq;
 
 		const selectiveClasses = useMemo(() => {
@@ -193,7 +193,7 @@ wp.blocks.registerBlockType("catpow/faq", {
 		const { RichText } = wp.blockEditor;
 		const { items = [], classes = "", countPrefix, countSuffix } = attributes;
 
-		const states = CP.wordsToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.faq;
 
 		let rtn = [];
