@@ -193,6 +193,20 @@ export const selectiveClassesPresets = {
 			hasColorSchemeInverted: __("反転", "catpow"),
 		},
 	},
+	rate: {
+		name: "rate",
+		type: "bottons",
+		label: __("レート", "catpow"),
+		values: {
+			isRateDefault: __("デフォルト", "catpow"),
+			isRatePrimary: __("優先", "catpow"),
+			isRateSecondary: __("通常", "catpow"),
+			isRateRecommended: __("推奨", "catpow"),
+			isRateDeprecated: __("非推奨", "catpow"),
+			isRateDanger: __("危険", "catpow"),
+			isRateSafe: __("安全", "catpow"),
+		},
+	},
 	clipPath({ preset, vars = "vars", ...otherParams }) {
 		return {
 			name: "clipPath",
