@@ -61,12 +61,12 @@ wp.blocks.registerBlockType("catpow/section", {
 					values: ["h1", "h2", "h3", "h4"],
 					effect: (val, states, { set }) => {
 						for (const key in states) {
-							if (key.slice(0, 5) === "level") {
+							if (key.slice(0, 7) === "isLevel") {
 								states[key] = false;
 							}
 						}
 						if (/^h\d$/.test(val)) {
-							states["level" + val[1]] = true;
+							states["isLevel" + val[1]] = true;
 						}
 						set({ classes: CP.flagsToClassNames(states) });
 					},
@@ -135,8 +135,14 @@ wp.blocks.registerBlockType("catpow/section", {
 							},
 						],
 						isTypeArticle: [
-							{ name: "level", type: "buttons", label: __("レベル", "catpow"), values: { level1: "1", level2: "2", level3: "3", level4: "4" } },
-							{ name: "headingType", type: "gridbuttons", label: __("見出しタイプ", "catpow"), filter: "heading_type", values: ["header", "headline", "catch"] },
+							{ name: "level", type: "buttons", label: __("レベル", "catpow"), values: { isLevel1: "1", isLevel2: "2", isLevel3: "3", isLevel4: "4" } },
+							{
+								name: "headingType",
+								type: "gridbuttons",
+								label: __("見出しタイプ", "catpow"),
+								filter: "heading_type",
+								values: { hasHeadingTypeHeader: "header", hasHeadingTypeHeadline: "headline", hasHeadingTypeCatch: "catch" },
+							},
 							{ name: "headerImage", label: __("ヘッダ画像", "catpow"), values: "hasHeaderImage", sub: [{ input: "image", keys: imageKeys.headerImage, size: imageSizes.headerImage }] },
 							{ name: "lead", label: __("リード", "catpow"), values: "hasLead" },
 							{
@@ -180,8 +186,8 @@ wp.blocks.registerBlockType("catpow/section", {
 							{ name: "icon", label: __("アイコン", "catpow"), values: "hasIcon", sub: [{ input: "icon", color }] },
 							{ name: "image", label: __("画像", "catpow"), values: "hasImage", sub: [{ input: "image", keys: imageKeys.image }] },
 							{ name: "border", label: __("線", "catpow"), values: { no_border: __("なし", "catpow"), thin_border: __("細", "catpow"), bold_border: __("太", "catpow") } },
-							{ name: "round", label: __("角丸", "catpow"), values: "round" },
-							{ name: "shadow", label: __("影", "catpow"), values: "shadow", sub: [{ label: __("内側", "catpow"), values: "inset" }] },
+							{ name: "round", label: __("角丸", "catpow"), values: "hasBorderRadius" },
+							{ name: "shadow", label: __("影", "catpow"), values: "hasBoxShadow", sub: [{ label: __("内側", "catpow"), values: "hasBoxShadowInset" }] },
 							{
 								name: "navIcon",
 								label: __("メニューアイコン", "catpow"),
@@ -218,14 +224,14 @@ wp.blocks.registerBlockType("catpow/section", {
 					},
 					bind: {
 						isTypeScene: {
-							_: ["level2"],
+							_: ["is-level2"],
 						},
 						isTypeArticle: {
-							_: ["level3"],
+							_: ["is-level3"],
 							bodyClasses: ["hasContentWidth"],
 						},
 						isTypeColumn: {
-							_: ["level3"],
+							_: ["is-level3"],
 							bodyClasses: ["hasContentWidth"],
 						},
 					},

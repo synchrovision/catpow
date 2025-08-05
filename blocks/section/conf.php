@@ -6,7 +6,7 @@ $filters=[
 ];
 $attributes=[
 	'color'=>['type'=>'string','default'=>"0"],
-	'classes'=>['type'=>'string','default'=>'is-type-article level3 center catch'],
+	'classes'=>['type'=>'string','default'=>'is-type-article is-level3 is-align-center has-heading-type-catch'],
 	'bodyClasses'=>['type'=>'string','default'=>''],
 	'headerClasses'=>['type'=>'string','default'=>''],
 	'titleClasses'=>['type'=>'string','default'=>''],

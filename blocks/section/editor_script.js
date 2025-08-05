@@ -73,12 +73,12 @@
             values: ["h1", "h2", "h3", "h4"],
             effect: (val, states2, { set }) => {
               for (const key in states2) {
-                if (key.slice(0, 5) === "level") {
+                if (key.slice(0, 7) === "isLevel") {
                   states2[key] = false;
                 }
               }
               if (/^h\d$/.test(val)) {
-                states2["level" + val[1]] = true;
+                states2["isLevel" + val[1]] = true;
               }
               set({ classes: CP.flagsToClassNames(states2) });
             }
@@ -147,8 +147,14 @@
                 }
               ],
               isTypeArticle: [
-                { name: "level", type: "buttons", label: __("\u30EC\u30D9\u30EB", "catpow"), values: { level1: "1", level2: "2", level3: "3", level4: "4" } },
-                { name: "headingType", type: "gridbuttons", label: __("\u898B\u51FA\u3057\u30BF\u30A4\u30D7", "catpow"), filter: "heading_type", values: ["header", "headline", "catch"] },
+                { name: "level", type: "buttons", label: __("\u30EC\u30D9\u30EB", "catpow"), values: { isLevel1: "1", isLevel2: "2", isLevel3: "3", isLevel4: "4" } },
+                {
+                  name: "headingType",
+                  type: "gridbuttons",
+                  label: __("\u898B\u51FA\u3057\u30BF\u30A4\u30D7", "catpow"),
+                  filter: "heading_type",
+                  values: { hasHeadingTypeHeader: "header", hasHeadingTypeHeadline: "headline", hasHeadingTypeCatch: "catch" }
+                },
                 { name: "headerImage", label: __("\u30D8\u30C3\u30C0\u753B\u50CF", "catpow"), values: "hasHeaderImage", sub: [{ input: "image", keys: imageKeys2.headerImage, size: imageSizes2.headerImage }] },
                 { name: "lead", label: __("\u30EA\u30FC\u30C9", "catpow"), values: "hasLead" },
                 {
@@ -192,8 +198,8 @@
                 { name: "icon", label: __("\u30A2\u30A4\u30B3\u30F3", "catpow"), values: "hasIcon", sub: [{ input: "icon", color }] },
                 { name: "image", label: __("\u753B\u50CF", "catpow"), values: "hasImage", sub: [{ input: "image", keys: imageKeys2.image }] },
                 { name: "border", label: __("\u7DDA", "catpow"), values: { no_border: __("\u306A\u3057", "catpow"), thin_border: __("\u7D30", "catpow"), bold_border: __("\u592A", "catpow") } },
-                { name: "round", label: __("\u89D2\u4E38", "catpow"), values: "round" },
-                { name: "shadow", label: __("\u5F71", "catpow"), values: "shadow", sub: [{ label: __("\u5185\u5074", "catpow"), values: "inset" }] },
+                { name: "round", label: __("\u89D2\u4E38", "catpow"), values: "hasBorderRadius" },
+                { name: "shadow", label: __("\u5F71", "catpow"), values: "hasBoxShadow", sub: [{ label: __("\u5185\u5074", "catpow"), values: "hasBoxShadowInset" }] },
                 {
                   name: "navIcon",
                   label: __("\u30E1\u30CB\u30E5\u30FC\u30A2\u30A4\u30B3\u30F3", "catpow"),
@@ -230,14 +236,14 @@
             },
             bind: {
               isTypeScene: {
-                _: ["level2"]
+                _: ["is-level2"]
               },
               isTypeArticle: {
-                _: ["level3"],
+                _: ["is-level3"],
                 bodyClasses: ["hasContentWidth"]
               },
               isTypeColumn: {
-                _: ["level3"],
+                _: ["is-level3"],
                 bodyClasses: ["hasContentWidth"]
               }
             }
