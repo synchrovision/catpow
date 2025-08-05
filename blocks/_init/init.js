@@ -907,6 +907,7 @@
     getPictureSoucesAttributesForDevices: () => getPictureSoucesAttributesForDevices,
     getSelecedFormatElement: () => getSelecedFormatElement,
     getSelectiveClass: () => getSelectiveClass,
+    getSelectiveClassLabel: () => getSelectiveClassLabel,
     getSubClasses: () => getSubClasses,
     getUpdatesFromStatesAndClasssFlags: () => getUpdatesFromStatesAndClasssFlags,
     getUrlInStyleCode: () => getUrlInStyleCode,
@@ -1204,12 +1205,12 @@
   // ../blocks/_init/init/CP/components/BoundingBox.jsx
   var BoundingBox = (props) => {
     const { targets, onDeselect, onDuplicate, onDelete, onChange } = props;
-    const { useState: useState5, useCallback: useCallback4, useMemo: useMemo6, useEffect: useEffect6, useRef: useRef4 } = wp.element;
-    const classes = useMemo6(() => bem("cp-boundingbox"), []);
+    const { useState: useState5, useCallback: useCallback4, useMemo: useMemo7, useEffect: useEffect6, useRef: useRef4 } = wp.element;
+    const classes = useMemo7(() => bem("cp-boundingbox"), []);
     const ref = useRef4();
     const [style, setStyle] = useState5({});
     const [action, setAction] = useState5(false);
-    const container = useMemo6(() => props.container || document, [props.container]);
+    const container = useMemo7(() => props.container || document, [props.container]);
     const tracePosition = useCallback4(
       (targets2) => {
         const cBnd = container.getBoundingClientRect();
@@ -1249,7 +1250,7 @@
       },
       [container]
     );
-    const observer = useMemo6(() => {
+    const observer = useMemo7(() => {
       return new MutationObserver((mutations) => {
         tracePosition(targets);
       });
@@ -1307,7 +1308,7 @@
       document.addEventListener("keydown", cb);
       return () => document.removeEventListener("keydown", cb);
     }, [targets, onDelete]);
-    const controls = useMemo6(() => {
+    const controls = useMemo7(() => {
       const controls2 = [];
       ["top", "middle", "bottom"].forEach((v, vi) => {
         ["left", "center", "right"].forEach((h, hi) => {
@@ -1761,11 +1762,11 @@
   // modules/src/component/Portal.jsx
   var Portal = (props) => {
     const { children, trace } = props;
-    const { render: render2, useState: useState5, useMemo: useMemo6, useCallback: useCallback4, useEffect: useEffect6, useRef: useRef4 } = react_default;
+    const { render: render2, useState: useState5, useMemo: useMemo7, useCallback: useCallback4, useEffect: useEffect6, useRef: useRef4 } = react_default;
     const { createPortal: createPortal2 } = react_dom_default;
     const ref = useRef4({ contents: false, setContents: () => {
     } });
-    const el = useMemo6(() => {
+    const el = useMemo7(() => {
       if (props.id) {
         const exEl = document.getElementById(props.id);
         if (exEl) {
@@ -1883,11 +1884,11 @@
   // ../blocks/_init/init/CP/components/SelectThemeColor.jsx
   var SelectThemeColor = (props) => {
     const { onChange } = props;
-    const { useCallback: useCallback4, useMemo: useMemo6, Fragment: Fragment2 } = wp.element;
+    const { useCallback: useCallback4, useMemo: useMemo7, Fragment: Fragment2 } = wp.element;
     const { Icon } = wp.components;
     const classes = bem("cp-selectthemecolor");
-    const proxy = useMemo6(() => CP.colorClassProxy(props.selected), [props.selected]);
-    const data = useMemo6(() => CP.parseColorClass(proxy.h), [proxy.h]);
+    const proxy = useMemo7(() => CP.colorClassProxy(props.selected), [props.selected]);
+    const data = useMemo7(() => CP.parseColorClass(proxy.h), [proxy.h]);
     const ColorSelections = useCallback4(
       (props2) => {
         const { fixed = false, absolute = false, relative = false, active = false, proxy: proxy2 } = props2;
@@ -2698,7 +2699,7 @@
   // ../blocks/_init/init/CP/components/DataInputTable.jsx
   var DataInputTable = (props) => {
     const { cols, value: value2, onChange } = props;
-    const { useCallback: useCallback4, useMemo: useMemo6 } = wp.element;
+    const { useCallback: useCallback4, useMemo: useMemo7 } = wp.element;
     const el = wp.element.createElement;
     const Row = useCallback4((props2) => {
       const { cols: cols2, value: value3, onChange: onChange2 } = props2;
@@ -2714,14 +2715,14 @@
         }
       ))));
     }, []);
-    const defaultRowValues = useMemo6(() => {
+    const defaultRowValues = useMemo7(() => {
       const rowValue = {};
       Object.keys(cols).forEach((c) => {
         rowValue[c] = cols[c].default || "";
       });
       return [rowValue];
     }, [cols]);
-    const colsWithoutLabel = useMemo6(() => {
+    const colsWithoutLabel = useMemo7(() => {
       const colsWithoutLabel2 = {};
       Object.keys(cols).forEach((c) => {
         const { label, ...otherParams } = cols[c];
@@ -2765,11 +2766,11 @@
 
   // ../blocks/_init/init/CP/components/DynamicInput.jsx
   var DynamicInput = (props) => {
-    const { useMemo: useMemo6 } = wp.element;
+    const { useMemo: useMemo7 } = wp.element;
     const { RadioControl, RangeControl: RangeControl2, SelectControl, TextControl: TextControl2, TextareaControl, ToggleControl } = wp.components;
     const { param, value: value2, onChange } = props;
     const type = param.type || param.input || "text";
-    const { options: options3 } = useMemo6(() => {
+    const { options: options3 } = useMemo7(() => {
       if (!param.options && !param.values) {
         return {};
       }
@@ -2822,7 +2823,7 @@
 
   // ../blocks/_init/init/CP/components/DataSetInput.jsx
   var DataSetInput = (props) => {
-    const { useMemo: useMemo6, useCallback: useCallback4 } = wp.element;
+    const { useMemo: useMemo7, useCallback: useCallback4 } = wp.element;
     const { param, value: dataSet = [], onChange } = props;
     const classes = bem("cp-datasetinput");
     const appendData = useCallback4(() => {
@@ -2959,7 +2960,7 @@
   // ../blocks/_init/init/CP/components/SelectClassPanelBlock.jsx
   var { __: __2 } = wp.i18n;
   var SelectClassPanelBlock = ({ prm }) => {
-    const { Fragment: Fragment2, useMemo: useMemo6, useContext: useContext3, createElement: el } = wp.element;
+    const { Fragment: Fragment2, useMemo: useMemo7, useContext: useContext3, createElement: el } = wp.element;
     const { CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl: TextControl2, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
     const { props, item, states, allStates, set, save, saveClasses, styleDatas, saveCss, primaryClassKey } = useContext3(SelectClassPanelContext);
     const { subItemsKey } = props;
@@ -3548,7 +3549,7 @@
       } else if (prm === "cond") {
         rtn.push(/* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __2("\u8868\u793A\u6761\u4EF6", "catpow"), value: item["cond"], onChange: (cond) => save({ cond }) }));
       } else if (prm === "event") {
-        const EventInputs = useMemo6(() => wp.hooks.applyFilters("catpow.EventInputs", [], { item, save }), [item, save]);
+        const EventInputs = useMemo7(() => wp.hooks.applyFilters("catpow.EventInputs", [], { item, save }), [item, save]);
         rtn.push(...EventInputs);
       } else if (prm.input) {
         if (item[prm.key] === void 0 && prm.default != null) {
@@ -3833,7 +3834,7 @@
   var { __: __3 } = wp.i18n;
   var SelectClassPanelContext = wp.element.createContext({});
   var SelectClassPanel = (props) => {
-    const { Fragment: Fragment2, useMemo: useMemo6, useCallback: useCallback4, createElement: el } = wp.element;
+    const { Fragment: Fragment2, useMemo: useMemo7, useCallback: useCallback4, createElement: el } = wp.element;
     const { PanelBody } = wp.components;
     const {
       blockClasssKey = "classes",
@@ -3847,7 +3848,7 @@
       triggerClasses
     } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
     let { itemsKey: itemsKey2 = items2 ? "items" : null, itemClasses } = props;
-    const selectiveClasses = useMemo6(() => {
+    const selectiveClasses = useMemo7(() => {
       if (!triggerClasses || !triggerClasses.item) {
         if (Array.isArray(props.selectiveClasses)) {
           return CP.resolveSelectiveClassesPresets(props.selectiveClasses);
@@ -3858,7 +3859,7 @@
       return CP.resolveSelectiveClassesPresets(triggerClasses.item[Object.keys(triggerClasses.item).find((value2) => blockStates[value2])]);
     }, [props.selectiveClasses, triggerClasses && attr[blockClasssKey]]);
     const { styleDatas } = attr;
-    const item = useMemo6(() => {
+    const item = useMemo7(() => {
       if (!items2) {
         return attr;
       }
@@ -3870,8 +3871,8 @@
       }
       return items2[index];
     }, [attr, items2, index, subItemsKey, subIndex]);
-    const states = useMemo6(() => CP.classNamesToFlags(item[primaryClassKey]), [item[primaryClassKey]]);
-    const allStates = useMemo6(() => {
+    const states = useMemo7(() => CP.classNamesToFlags(item[primaryClassKey]), [item[primaryClassKey]]);
+    const allStates = useMemo7(() => {
       const allStates2 = { [primaryClassKey]: states };
       const addClassKeyFlagsInPrm = (prm, flags) => {
         if (prm.classKey) {
@@ -3909,7 +3910,7 @@
         }
       };
       const classKeyFlags = {};
-      props.selectiveClasses.forEach((prm) => addClassKeyFlagsInPrm(prm, classKeyFlags));
+      props?.selectiveClasses?.forEach((prm) => addClassKeyFlagsInPrm(prm, classKeyFlags));
       Object.keys(classKeyFlags).forEach((classKey) => {
         allStates2[classKey] = CP.classNamesToFlags(item[classKey]);
       });
@@ -3945,16 +3946,30 @@
   };
 
   // ../blocks/_init/init/CP/components/AlignClassToolbar.jsx
+  var { useMemo: useMemo5 } = wp.element;
   var AlignClassToolbar = (props) => {
     const { BlockAlignmentToolbar } = wp.blockEditor;
-    const aligns = ["left", "center", "right"];
+    const { aligns = { isAlignLeft: "left", isAlignCenter: "center", isAlignRight: "right" } } = props;
+    const options3 = useMemo5(() => {
+      const options4 = {};
+      if (Array.isArray(aligns)) {
+        for (const val of aligns) {
+          options4[val] = val;
+        }
+      } else {
+        for (const [key, val] of Object.entries(aligns)) {
+          options4[val] = key;
+        }
+      }
+      return options4;
+    }, [aligns]);
     return /* @__PURE__ */ wp.element.createElement(
       BlockAlignmentToolbar,
       {
-        value: CP.getSelectiveClass(props, aligns),
-        controls: props.aligns || aligns,
+        value: CP.getSelectiveClassLabel(props, aligns),
+        controls: Object.keys(options3),
         onChange: (align) => {
-          CP.switchSelectiveClass(props, aligns, align, props.key);
+          CP.switchSelectiveClass(props, Object.values(options3), options3[align], props.key);
         }
       }
     );
@@ -4338,7 +4353,7 @@
   // ../blocks/_init/init/CP/components/EventInputCards.jsx
   var EventInputCards = (props) => {
     const { title, onChange } = props;
-    const { useState: useState5, useReducer: useReducer3, useCallback: useCallback4, useEffect: useEffect6, useMemo: useMemo6 } = wp.element;
+    const { useState: useState5, useReducer: useReducer3, useCallback: useCallback4, useEffect: useEffect6, useMemo: useMemo7 } = wp.element;
     const { BaseControl, Card: Card2, CardHeader, CardBody: CardBody2, CardFooter, Flex, FlexItem, FlexBlock, Icon, TextControl: TextControl2 } = wp.components;
     const { processerId, eventTypes, parseEventValue, createEventValue, createEventString, eventParams } = props.processer;
     const reducer = useCallback4((state2, action) => {
@@ -4365,7 +4380,7 @@
       return state2;
     }, []);
     const [state, dispatch] = useReducer3(reducer, { events: [] });
-    const eventParamsWithoutLabel = useMemo6(() => {
+    const eventParamsWithoutLabel = useMemo7(() => {
       const eventParamsWithoutLabel2 = {};
       Object.keys(eventParams).forEach((name) => {
         const { label, ...otherParams } = eventParams[name];
@@ -4373,7 +4388,7 @@
       });
       return eventParamsWithoutLabel2;
     }, [eventParams]);
-    const eventTypeList = useMemo6(() => {
+    const eventTypeList = useMemo7(() => {
       if (!eventTypes) {
         return [];
       }
@@ -4396,7 +4411,7 @@
     const EventInputCard = useCallback4((props2) => {
       const { event, index, canRemove } = props2;
       const [editMode, setEditMode] = useState5(false);
-      const activeEventParamNames = useMemo6(() => {
+      const activeEventParamNames = useMemo7(() => {
         if (eventTypes && event.eventType) {
           const eventType = eventTypes[event.eventType] || eventTypes["_custom"];
           if (eventType) {
@@ -4469,7 +4484,7 @@
   // ../blocks/_init/init/CP/components/ServerSideRender.jsx
   var ServerSideRender = (props) => {
     const { className, block, attributes } = props;
-    const { RawHTML, useState: useState5, useMemo: useMemo6, useRef: useRef4, useEffect: useEffect6 } = wp.element;
+    const { RawHTML, useState: useState5, useMemo: useMemo7, useRef: useRef4, useEffect: useEffect6 } = wp.element;
     const { useDebounce } = wp.compose;
     const [response, setResponse] = useState5(false);
     const [hold, setHold] = useState5(false);
@@ -4510,7 +4525,7 @@
   };
   ServerSideRenderPart.Preview = (props) => {
     const { className, name, ...otherProps } = props;
-    const { RawHTML, useState: useState5, useMemo: useMemo6, useRef: useRef4, useEffect: useEffect6 } = wp.element;
+    const { RawHTML, useState: useState5, useMemo: useMemo7, useRef: useRef4, useEffect: useEffect6 } = wp.element;
     const [response, setResponse] = useState5(false);
     const [hold, setHold] = useState5(false);
     const [stylesheets, setStylesheets] = useState5([]);
@@ -4544,8 +4559,8 @@
   // ../blocks/_init/init/CP/components/ColorVarTracer.jsx
   var ColorVarTracer = (props) => {
     const { target } = props;
-    const { useMemo: useMemo6 } = wp.element;
-    const vars = useMemo6(() => {
+    const { useMemo: useMemo7 } = wp.element;
+    const vars = useMemo7(() => {
       const vars2 = {};
       if (target) {
         const styles = getComputedStyle(target);
@@ -4575,12 +4590,12 @@
   };
   PlacedPictures.Edit = (props) => {
     const { className, set, attr, keys, index, devices: devices2 } = props;
-    const { useState: useState5, useMemo: useMemo6, useCallback: useCallback4, useRef: useRef4, useEffect: useEffect6 } = wp.element;
+    const { useState: useState5, useMemo: useMemo7, useCallback: useCallback4, useRef: useRef4, useEffect: useEffect6 } = wp.element;
     const { BlockControls: BlockControls2, InspectorControls } = wp.blockEditor;
     const { BaseControl, Icon, PanelBody, RangeControl: RangeControl2, TextControl: TextControl2, Toolbar, ToolbarGroup: ToolbarGroup2, ToolbarButton, ToolbarDropdownMenu } = wp.components;
     const item = keys.items ? attr[keys.items][index] : attr;
     const pictures = item[keys.pictures];
-    const classes = useMemo6(() => bem("cp-placedpictures " + className), [className]);
+    const classes = useMemo7(() => bem("cp-placedpictures " + className), [className]);
     const [editMode, setEditMode] = useState5(false);
     const [currentItemNodes, setCurrentItemNodes] = useState5([]);
     const [currentItemIndexes, setCurrentItemIndexes] = useState5([]);
@@ -4589,7 +4604,7 @@
     useEffect6(() => {
       setCurrentItemNodes(currentItemIndexes.sort().map((index2) => targetRefs.current[index2]));
     }, [currentItemIndexes, targetRefs, setCurrentItemNodes]);
-    const remPx = useMemo6(() => parseFloat(getComputedStyle(document.documentElement).fontSize), []);
+    const remPx = useMemo7(() => parseFloat(getComputedStyle(document.documentElement).fontSize), []);
     const getPlaceStyle = useCallback4((bnd, tgtBnd) => {
       const style = {
         position: "absolute",
@@ -4754,9 +4769,9 @@
   Link.Edit = (props) => {
     const { className, set, attr, keys, index, isSelected = "auto", ...otherProps } = props;
     const { onChange } = props;
-    const { useMemo: useMemo6, useCallback: useCallback4, useEffect: useEffect6, useState: useState5 } = wp.element;
-    const classes = useMemo6(() => bem("cp-link " + className), [className]);
-    const item = useMemo6(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
+    const { useMemo: useMemo7, useCallback: useCallback4, useEffect: useEffect6, useState: useState5 } = wp.element;
+    const classes = useMemo7(() => bem("cp-link " + className), [className]);
+    const item = useMemo7(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
     const [hasCursor, setHasCursor] = useState5(false);
     const [ref, setRef] = useState5(false);
     useEffect6(() => {
@@ -4810,9 +4825,9 @@
   };
   RTF.Edit = (props) => {
     const { className, pref = "rtf", set, attr, keys = { text: "text" }, index, isSelected = true, ...otherProps } = props;
-    const { useMemo: useMemo6, useCallback: useCallback4, useState: useState5 } = wp.element;
-    const classes = useMemo6(() => bem("cp-rtf " + className), [className]);
-    const item = useMemo6(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
+    const { useMemo: useMemo7, useCallback: useCallback4, useState: useState5 } = wp.element;
+    const classes = useMemo7(() => bem("cp-rtf " + className), [className]);
+    const item = useMemo7(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
     const text = item[keys.text];
     const updateText = useCallback4(
       (text2) => {
@@ -4873,7 +4888,7 @@
   // ../blocks/_init/init/CP/components/Loop.jsx
   var Loop = (props) => {
     const { current = 0, Component = "div", loop = false, ...otherProps } = props;
-    const { useState: useState5, useMemo: useMemo6, useCallback: useCallback4, useEffect: useEffect6, useRef: useRef4 } = wp.element;
+    const { useState: useState5, useMemo: useMemo7, useCallback: useCallback4, useEffect: useEffect6, useRef: useRef4 } = wp.element;
     const items2 = (() => {
       const items3 = Array.isArray(props.items) ? props.items : Number.isInteger(props.items) ? [...Array(props.items).keys()] : Array.from(props.items);
       items3.forEach((value2, index) => {
@@ -4894,7 +4909,7 @@
 
   // ../blocks/_init/init/CP/components/CustomColorVars.jsx
   var CustomColorVars = (props) => {
-    const { useState: useState5, useRef: useRef4, useMemo: useMemo6, useCallback: useCallback4 } = wp.element;
+    const { useState: useState5, useRef: useRef4, useMemo: useMemo7, useCallback: useCallback4 } = wp.element;
     const { ColorPicker, CheckboxControl, Flex, FlexItem, FlexBlock, Button, Popover: Popover2 } = wp.components;
     const { label = "\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", value: value2, onChange } = props;
     const cache2 = useRef4(value2);
@@ -4910,7 +4925,7 @@
       { key: "i", label: "\u53CD\u8EE2\u6587\u5B57\u8272" }
     ];
     const keys = ["h", "s", "l"];
-    const originalColors = useMemo6(() => {
+    const originalColors = useMemo7(() => {
       const originalColors2 = {};
       const selectedBlock = wp.data.select("core/block-editor").getSelectedBlock();
       const editorCanvas = document.querySelector('iframe[name="editor-canvas"]');
@@ -4928,7 +4943,7 @@
       });
       return originalColors2;
     }, []);
-    const colors = useMemo6(() => {
+    const colors = useMemo7(() => {
       const colors2 = {};
       roles.forEach((role) => {
         const hsla = {};
@@ -5002,17 +5017,17 @@
 
   // ../blocks/_init/init/CP/components/Message.jsx
   var Message = (props) => {
-    const { useMemo: useMemo6 } = wp.element;
-    const classes = useMemo6(() => bem("cp-message"), []);
+    const { useMemo: useMemo7 } = wp.element;
+    const classes = useMemo7(() => bem("cp-message"), []);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes._body() }, props.children));
   };
 
   // ../blocks/_init/init/CP/components/NavBar.jsx
   var NavBar = (props) => {
     const { value: value2, label, onChange } = props;
-    const { useMemo: useMemo6, useState: useState5 } = wp.element;
+    const { useMemo: useMemo7, useState: useState5 } = wp.element;
     const classes = bem("cp-navbar");
-    const { options: options3 } = useMemo6(() => CP.parseSelections(props.options), [props.options]);
+    const { options: options3 } = useMemo7(() => CP.parseSelections(props.options), [props.options]);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes.items() }, label && /* @__PURE__ */ wp.element.createElement("li", { className: classes.items.item("is-label") }, label), options3.map((option) => /* @__PURE__ */ wp.element.createElement(
       "li",
       {
@@ -5312,9 +5327,11 @@
       type: "buttons",
       label: __4("\u30B5\u30A4\u30BA", "catpow"),
       values: {
+        isSizeXlarge: __4("\u6975\u5927", "catpow"),
         isSizeLarge: __4("\u5927", "catpow"),
         isSizeMedium: __4("\u4E2D", "catpow"),
-        isSizeSmall: __4("\u5C0F", "catpow")
+        isSizeSmall: __4("\u5C0F", "catpow"),
+        isSizeXsmall: __4("\u6975\u5C0F", "catpow")
       }
     },
     itemSize: {
@@ -5337,6 +5354,20 @@
         hasColorSchemeInherit: __4("\u7D99\u627F", "catpow"),
         hasColorSchemeReverted: __4("\u901A\u5E38", "catpow"),
         hasColorSchemeInverted: __4("\u53CD\u8EE2", "catpow")
+      }
+    },
+    rate: {
+      name: "rate",
+      type: "bottons",
+      label: __4("\u30EC\u30FC\u30C8", "catpow"),
+      values: {
+        isRateDefault: __4("\u30C7\u30D5\u30A9\u30EB\u30C8", "catpow"),
+        isRatePrimary: __4("\u512A\u5148", "catpow"),
+        isRateSecondary: __4("\u901A\u5E38", "catpow"),
+        isRateRecommended: __4("\u63A8\u5968", "catpow"),
+        isRateDeprecated: __4("\u975E\u63A8\u5968", "catpow"),
+        isRateDanger: __4("\u5371\u967A", "catpow"),
+        isRateSafe: __4("\u5B89\u5168", "catpow")
       }
     },
     clipPath({ preset, vars = "vars", ...otherParams }) {
@@ -5728,6 +5759,29 @@
     }
     return _.intersection(classArray, values).shift();
   };
+  var getSelectiveClassLabel = ({ attr }, values, key) => {
+    if (key === void 0) {
+      key = "classes";
+    }
+    if (attr[key] === void 0) {
+      attr[key] = "";
+    }
+    const flags = CP.classNamesToFlags(attr[key]);
+    if (Array.isArray(values)) {
+      for (const value2 of values) {
+        if (flags[value2]) {
+          return value2;
+        }
+      }
+      return null;
+    }
+    for (const key2 in values) {
+      if (flags[key2]) {
+        return values[key2];
+      }
+    }
+    return null;
+  };
   var getSubClasses = (prm) => {
     let rtn = {};
     let values;
@@ -5979,6 +6033,9 @@
     return { options: options3, values };
   };
   var resolveSelectiveClassesPresets = (prms) => {
+    if (prms == null) {
+      return [];
+    }
     prms.forEach((prm, index) => {
       if (typeof prm === "string" && CP.selectiveClassesPresets.hasOwnProperty(prm)) {
         prms[index] = prm = { preset: prm };
@@ -6461,8 +6518,8 @@
     const { attributes, className, setAttributes, context } = props;
     const { setURLparams } = Catpow.util;
     const { classes, color = "0" } = attributes;
-    const { useEffect: useEffect6, useMemo: useMemo6 } = wp.element;
-    const inheritColor = useMemo6(() => {
+    const { useEffect: useEffect6, useMemo: useMemo7 } = wp.element;
+    const inheritColor = useMemo7(() => {
       return color === "0" || context["catpow/color"] === color;
     }, [color, context["catpow/color"]]);
     useEffect6(() => {
@@ -6573,7 +6630,7 @@
       state = {};
     }
     if (typeof state === "string" || Array.isArray(state)) {
-      state = CP.wordsToFlags(state);
+      state = CP.classNamesToFlags(state);
     }
     return new Proxy(state, colorClassProxyHandler);
   };
@@ -6581,7 +6638,7 @@
     get(state, prop) {
       switch (prop) {
         case "classes": {
-          return CP.flagsToWords(state);
+          return CP.flagsToClassNames(state);
         }
         case "value": {
           return extractColorToneValue(Object.keys(state).filter((c) => state[c]));
@@ -6897,7 +6954,7 @@
   var { __: __5 } = wp.i18n;
   var { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
   var { Popover, BaseControle, TextControl, RangeControl, Card, CardBody, ToolbarGroup } = wp.components;
-  var { useState: useState4, useMemo: useMemo5, useCallback: useCallback3, useReducer: useReducer2, useEffect: useEffect5 } = wp.element;
+  var { useState: useState4, useMemo: useMemo6, useCallback: useCallback3, useReducer: useReducer2, useEffect: useEffect5 } = wp.element;
   var { removeFormat, applyFormat, toggleFormat, insert, create, slice } = wp.richText;
   wp.richText.registerFormatType("catpow/ruby", {
     title: "Ruby",
@@ -7241,7 +7298,7 @@
   // ../blocks/_init/init/plugins.jsx
   wp.plugins.registerPlugin("catpow-sidebar", {
     render: (props) => {
-      const { useState: useState5, useMemo: useMemo6, useCallback: useCallback4 } = wp.element;
+      const { useState: useState5, useMemo: useMemo7, useCallback: useCallback4 } = wp.element;
       const { PluginSidebarMoreMenuItem, PluginSidebar } = wp.editPost;
       const { PanelBody } = wp.components;
       const [structure, setStructure] = useState5(false);
