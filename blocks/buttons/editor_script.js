@@ -20,54 +20,16 @@
       const primaryClass = "wp-block-catpow-buttons";
       var classArray = _.uniq((className + " " + classes2).split(" "));
       var classNameArray = className.split(" ");
-      const states = CP.wordsToFlags(classes2);
+      const states = CP.classNamesToFlags(classes2);
       const selectiveClasses = useMemo(() => {
-        const selectiveClasses2 = [
-          {
-            name: "size",
-            type: "buttons",
-            label: "\u30B5\u30A4\u30BA",
-            filter: "size",
-            values: { l: "\u5927", m: "\u4E2D", s: "\u5C0F", ss: "\u6975\u5C0F" }
-          },
-          { name: "inline", label: "\u30A4\u30F3\u30E9\u30A4\u30F3", values: "i" },
-          {
-            name: "template",
-            label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
-            values: "isTemplate",
-            sub: [
-              {
-                input: "bool",
-                label: "\u30EB\u30FC\u30D7",
-                key: "doLoop",
-                sub: [
-                  { label: "content path", input: "text", key: "content_path" },
-                  { label: "query", input: "textarea", key: "query" },
-                  {
-                    label: "\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570",
-                    input: "range",
-                    key: "loopCount",
-                    min: 1,
-                    max: 16
-                  }
-                ]
-              }
-            ]
-          }
-        ];
+        const selectiveClasses2 = ["size", { name: "inline", label: "\u30A4\u30F3\u30E9\u30A4\u30F3", values: "is-inline" }, "isTemplate"];
         wp.hooks.applyFilters("catpow.blocks.buttons.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
       const selectiveItemClasses = useMemo(() => {
         const selectiveItemClasses2 = [
           "color",
-          {
-            name: "rank",
-            type: "gridbuttons",
-            label: "\u5C5E\u6027",
-            filter: "rank",
-            values: ["default", "primary", "secondary", "negative", "danger", "secure"]
-          },
+          "rate",
           {
             name: "icon",
             label: "\u30A2\u30A4\u30B3\u30F3",
@@ -84,9 +46,9 @@
       };
       let rtn = [];
       items.map((item, index) => {
-        const itemStates = CP.wordsToFlags(item.classes);
+        const itemStates = CP.classNamesToFlags(item.classes);
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", className: item.classes, set: setAttributes, attr: attributes, items, index, isSelected, key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "button" }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), /* @__PURE__ */ wp.element.createElement(
+          /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", className: item.classes, set: setAttributes, attr: attributes, items, index, isSelected, key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "-button" }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), /* @__PURE__ */ wp.element.createElement(
             "span",
             {
               onInput: (e) => {
@@ -142,11 +104,11 @@
       const { InnerBlocks } = wp.blockEditor;
       const { attributes, className } = props;
       const { items = [], classes: classes2, loopParam, doLoop } = attributes;
-      const states = CP.wordsToFlags(classes2);
+      const states = CP.classNamesToFlags(classes2);
       const blockType = wp.data.select("core/blocks").getBlockType("catpow/buttons");
       let rtn = [];
       items.map((item, index) => {
-        const itemStates = CP.wordsToFlags(item.classes);
+        const itemStates = CP.classNamesToFlags(item.classes);
         const eventDispatcherAttributes = {};
         if (blockType.attributes.items.eventDispatcherAttributes) {
           blockType.attributes.items.eventDispatcherAttributes.map((attr_name) => {
@@ -155,19 +117,19 @@
         }
         const shouldOpenWithOtherWindow = /^\w+:\/\//.test(item.url);
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("a", { href: item.url, className: "button", target: shouldOpenWithOtherWindow ? "_blank" : null, rel: shouldOpenWithOtherWindow ? "noopener" : null, ...eventDispatcherAttributes }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), item.text))
+          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("a", { href: item.url, className: "-button", target: shouldOpenWithOtherWindow ? "_blank" : null, rel: shouldOpenWithOtherWindow ? "noopener" : null, ...eventDispatcherAttributes }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), item.text))
         );
       });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, rtn), doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, rtn)), doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     },
     deprecated: [
       {
         save({ attributes, className }) {
           const { items = [], classes: classes2, loopParam } = attributes;
-          const states = CP.wordsToFlags(classes2);
+          const states = CP.classNamesToFlags(classes2);
           let rtn = [];
           items.map((item, index) => {
-            const itemStates = CP.wordsToFlags(item.classes);
+            const itemStates = CP.classNamesToFlags(item.classes);
             rtn.push(
               /* @__PURE__ */ wp.element.createElement("li", { className: item.classes }, /* @__PURE__ */ wp.element.createElement("a", { href: item.url, className: "button", "data-event": item.event }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement("span", { className: "icon" }, /* @__PURE__ */ wp.element.createElement("img", { src: item.iconSrc, alt: item.iconAlt })), item.text))
             );
@@ -175,7 +137,7 @@
           return /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, states?.doLoop && "[loop_template " + loopParam + "]", rtn, states?.doLoop && "[/loop_template]");
         },
         migrate(attributes) {
-          var states = CP.wordsToFlags(classes);
+          var states = CP.classNamesToFlags(classes);
           attributes.content_path = attributes.loopParam.split(" ")[0];
           attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
           attributes.doLoop = states?.doLoop;

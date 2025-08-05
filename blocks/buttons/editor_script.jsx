@@ -1,4 +1,6 @@
-﻿wp.blocks.registerBlockType("catpow/buttons", {
+﻿import { clsx } from "clsx";
+
+wp.blocks.registerBlockType("catpow/buttons", {
 	title: "🐾 Buttons",
 	description: "ボタンのブロックです。",
 	icon: (
@@ -24,39 +26,7 @@
 		const states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = [
-				{
-					name: "size",
-					type: "buttons",
-					label: "サイズ",
-					filter: "size",
-					values: { l: "大", m: "中", s: "小", ss: "極小" },
-				},
-				{ name: "inline", label: "インライン", values: "i" },
-				{
-					name: "template",
-					label: "テンプレート",
-					values: "isTemplate",
-					sub: [
-						{
-							input: "bool",
-							label: "ループ",
-							key: "doLoop",
-							sub: [
-								{ label: "content path", input: "text", key: "content_path" },
-								{ label: "query", input: "textarea", key: "query" },
-								{
-									label: "プレビューループ数",
-									input: "range",
-									key: "loopCount",
-									min: 1,
-									max: 16,
-								},
-							],
-						},
-					],
-				},
-			];
+			const selectiveClasses = ["size", { name: "inline", label: "インライン", values: "is-inline" }, "isTemplate"];
 			wp.hooks.applyFilters("catpow.blocks.buttons.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
@@ -64,13 +34,7 @@
 		const selectiveItemClasses = useMemo(() => {
 			const selectiveItemClasses = [
 				"color",
-				{
-					name: "rank",
-					type: "gridbuttons",
-					label: "属性",
-					filter: "rank",
-					values: ["default", "primary", "secondary", "negative", "danger", "secure"],
-				},
+				"rate",
 				{
 					name: "icon",
 					label: "アイコン",
@@ -93,7 +57,7 @@
 			const itemStates = CP.classNamesToFlags(item.classes);
 			rtn.push(
 				<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
-					<div className="button">
+					<div className="-button">
 						{itemStates.hasIcon && <CP.OutputIcon item={item} />}
 						<span
 							onInput={(e) => {
@@ -205,7 +169,7 @@
 			const shouldOpenWithOtherWindow = /^\w+:\/\//.test(item.url);
 			rtn.push(
 				<li className={item.classes} key={index}>
-					<a href={item.url} className="button" target={shouldOpenWithOtherWindow ? "_blank" : null} rel={shouldOpenWithOtherWindow ? "noopener" : null} {...eventDispatcherAttributes}>
+					<a href={item.url} className="-button" target={shouldOpenWithOtherWindow ? "_blank" : null} rel={shouldOpenWithOtherWindow ? "noopener" : null} {...eventDispatcherAttributes}>
 						{itemStates.hasIcon && <CP.OutputIcon item={item} />}
 						{item.text}
 					</a>
@@ -214,7 +178,9 @@
 		});
 		return (
 			<>
-				<ul className={classes}>{rtn}</ul>
+				<CP.Bem prefix="wp-block-catpow">
+					<ul className={classes}>{rtn}</ul>
+				</CP.Bem>
 				{doLoop && (
 					<onEmpty>
 						<InnerBlocks.Content />
