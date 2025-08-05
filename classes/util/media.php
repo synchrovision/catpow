@@ -97,6 +97,7 @@ class media{
 					default:
 						continue 2;
 				}
+				if(empty($im)){continue;}
 				imagepalettetotruecolor($im);
 				imagewebp($im,$f.'.webp');
 			}
