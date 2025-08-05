@@ -1,19 +1,19 @@
-.cp-finder-focused > .items {
+.cp-finder-focused__items {
   border-collapse: collapse;
   border-spacing: 0px;
   width: 100%;
 }
-.cp-finder-focused > .items > .item {
+.cp-finder-focused__items-item {
   background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 5),var(--cp-tones-t-a,1));
 }
-.cp-finder-focused > .items > .item:nth-of-type(odd) {
+.cp-finder-focused__items-item:nth-of-type(odd) {
   background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),var(--cp-tones-t-a,1));
 }
-.cp-finder-focused > .items > .item > .label {
+.cp-finder-focused__items-item-label {
   padding: 0.625rem;
   width: 12.5rem;
 }
-.cp-finder-focused > .items > .item > .value {
+.cp-finder-focused__items-item-value {
   padding: 0.625rem;
 }
 /*# sourceMappingURL=./style.css.map */

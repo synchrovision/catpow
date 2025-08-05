@@ -1,17 +1,17 @@
 @import "admin_style_config.scss";
 .cp-finder-focused{
-	&>.items{
+	&__items{
 		@include tbl(());
 		@include bnd((w:f));
-		&>.item{
+		&-item{
 			@include bg((c:t 5));
 			&:nth-of-type(odd){
 				@include bg((c:t 10));
 			}
-			&>.label{
+			&-label{
 				@include bnd((pd:10,w:200));
 			}
-			&>.value{
+			&-value{
 				@include bnd((pd:10));
 			}
 		}
