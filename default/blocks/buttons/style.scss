@@ -1,0 +1,93 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-buttons{
+	$block:&;
+	@include flx((w:w,j:c,a:c,g:1em));
+	@include bnd((pd:1em 0));
+	&-button{
+		@include bnd((d:b,p:r,pd:1em 2em 1em 1.5em));
+		@include bg((c:n));
+		@include txt((a:c,c:mx,f:t,p:1em,td:n,b:k));
+		@include trn((t:.2s));
+		@include usr((c:p));
+		&:active{
+			@include shd((b:0 0 0 clr(mx 1 .2)));
+		}
+		&::after{
+			content:'';
+			@include bnd((d:b,p:a,i:0,mg:a,mgr:1em,w:.8em,h:.8em));
+			@include bdr((p:r b,s:s,w:1));
+			@include trn((r:-45deg));
+		}
+	}
+	&__item{
+		@include bnd((p:r,f:0 0 16em,mg:0,o:h));
+		@include bdr((s:s,w:1,r:2em));
+		@include txt((l:n,c:mx));
+		&.has-icon{
+			#{$block}{
+				&-button{
+					.icon{
+						@include bnd((p:a,w:1.8em,h:1.8em,t:0,b:0,l:1em,mg:a));
+						svg{
+							@include svg((f:mx));
+						}
+						img{
+							@include bnd((d:b,w:f,h:a));
+						}
+					}
+				}
+			}
+		}
+		&.is-rate-primary{
+			&::before{
+				content:'';
+				@include bnd((d:b,p:a,i:0,r:f));
+				@include bdr((r:2em));
+				@include bg((c:mx));
+				@include trn((t:.3s));
+			}
+			&:hover{
+				&::before{
+					@include bnd((r:0));
+				}
+			}
+			#{$block}{
+				&-button{
+					@include txt((c:ix));
+					@include bg((c:mx 1 .6));
+					.icon{
+						svg{
+							@include svg((f:bx));
+						}
+					}
+				}
+			}
+		}
+		&.negative{
+			@include trn((gry:100%,o:.5));
+		}
+		&.secure{
+			.button{
+				&::before{
+					@include bdr((s:w,w:6));
+				}
+			}
+		}
+	}
+	&.is-size-xlarge{
+		@include txt((p:32));
+	}
+	&.is-size-large{
+		@include txt((p:24));
+	}
+	&.is-size-medium{
+		@include txt((p:18));
+	}
+	&.is-size-small{
+		@include txt((p:12));
+	}
+	&.is-size-xsmall{
+		@include txt((p:10));
+	}
+}
