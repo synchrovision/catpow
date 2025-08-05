@@ -164,9 +164,11 @@ export const selectiveClassesPresets = {
 		type: "buttons",
 		label: __("サイズ", "catpow"),
 		values: {
+			isSizeXlarge: __("極大", "catpow"),
 			isSizeLarge: __("大", "catpow"),
 			isSizeMedium: __("中", "catpow"),
 			isSizeSmall: __("小", "catpow"),
+			isSizeXsmall: __("極小", "catpow"),
 		},
 	},
 	itemSize: {
