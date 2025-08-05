@@ -117,6 +117,7 @@ await esbuild.build({
 	outfile: process.argv[3],
 	format: process.argv[3].slice(-4) === ".mjs" ? "esm" : "iife",
 	bundle: true,
+	treeShaking: true,
 	external: ["react", "react-dom"],
 	define: {
 		React: "wp.element",
