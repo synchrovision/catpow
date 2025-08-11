@@ -3809,7 +3809,9 @@
         }
       };
       const classKeyFlags = {};
-      props?.selectiveClasses?.forEach((prm) => addClassKeyFlagsInPrm(prm, classKeyFlags));
+      if (Array.isArray(props?.selectiveClasses)) {
+        props.selectiveClasses.forEach((prm) => addClassKeyFlagsInPrm(prm, classKeyFlags));
+      }
       Object.keys(classKeyFlags).forEach((classKey) => {
         allStates2[classKey] = CP.classNamesToFlags(item[classKey]);
       });
