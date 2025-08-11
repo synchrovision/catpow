@@ -75,16 +75,46 @@ const BackgroundImageDataGenerators = {
 		},
 	},
 	custom: {
-		label: __("カスタム", "catpow"),
+		label: __("アップロード画像", "catpow"),
 		params: {
 			image: { "@editor": "Image" },
-			w: { minimum: 5, maximum: 200 },
+			size: {
+				properties: {
+					type: { enum: ["cover", "contain", "custom"] },
+				},
+				oneOf: [
+					{
+						properties: {
+							type: { const: "custom" },
+							value: { minimum: 10, maximum: 2000, multipleOf: 10, defaut: 300 },
+						},
+					},
+					{
+						properties: {
+							type: { enum: ["cover", "contain"] },
+						},
+					},
+				],
+			},
+			position: {
+				properties: {
+					x: { minimum: 0, maximum: 100, multipleOf: 5, default: 50 },
+					y: { minimum: 0, maximum: 100, multipleOf: 5, default: 50 },
+				},
+			},
+			repeat: {
+				enum: ["no-repeat", "repeat-x", "repeat-y", "repeat"],
+				default: "repeat",
+			},
 		},
 		getData(params = {}) {
-			const { image, w } = params;
+			const { image, size = "cover", position = { x: 50, y: 50 }, repeat = "repeat" } = params;
+			const { x, y } = position;
 			return {
 				image: [`url('${image.url}')`],
-				size: [`${w}px`],
+				size: [size.type === "custom" ? `${size.value}px` : size.type],
+				position: [`${x}% ${y}%`],
+				repeat: [repeat],
 				blendmode: ["normal"],
 			};
 		},
