@@ -185,7 +185,7 @@ $colors:(
 		}
 	}
 	&-link{
-		@include bnd((p:r));
+		@include bnd((d:b,p:r));
 		&-input{
 			@include bnd((d:b,p:a,w:1em fit,h:1em,pd:.25em 1em,b:-2em,l:-200,r:-200,mg:a));
 			@include bg((c:b));
@@ -267,9 +267,12 @@ $colors:(
 	}
 	&-selectresponsiveimage{
 		&.is-video,&.is-img,&.is-picture,&-img{
-			@include bnd((d:b,w:160,h:90,mgb:16,op:c,of:i));
+			@include bnd((d:b,op:c,of:i));
 			@include shd((b:2));
 			@include bg((c:#ccc));
+			.editor-sidebar &{
+				@include bnd((w:160,h:90,mgb:16));
+			}
 		}
 		&__controls{
 			@include bnd((d:b,p:a,t:0,r:0,w:60% 160,h:a,pd:4));

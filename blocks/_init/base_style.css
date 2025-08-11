@@ -317,6 +317,7 @@
   border-right-style: none;
 }
 .cp-link {
+  display: block;
   position: relative;
 }
 .cp-link-input {
@@ -457,13 +458,15 @@
 }
 .cp-selectresponsiveimage.is-video, .cp-selectresponsiveimage.is-img, .cp-selectresponsiveimage.is-picture, .cp-selectresponsiveimage-img {
   display: block;
-  width: 10rem;
-  height: 5.625rem;
-  margin-bottom: 1rem;
   object-position: center;
   object-fit: contain;
   box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
   background-color: #ccc;
+}
+.editor-sidebar .cp-selectresponsiveimage.is-video, .editor-sidebar .cp-selectresponsiveimage.is-img, .editor-sidebar .cp-selectresponsiveimage.is-picture, .editor-sidebar .cp-selectresponsiveimage-img {
+  width: 10rem;
+  height: 5.625rem;
+  margin-bottom: 1rem;
 }
 .cp-selectresponsiveimage__controls {
   display: block;
