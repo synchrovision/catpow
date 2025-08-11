@@ -20,7 +20,7 @@ $attributes=[
 		],
 		"default"=>[
 			[
-				"classes"=>".{$block_class}__item is-default",
+				"classes"=>"{$block_class}__item is-default",
 				"text"=>'お問合せ',
 				"url"=>'[home_url]/contact'
 			]
