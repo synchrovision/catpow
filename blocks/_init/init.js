@@ -5267,13 +5267,25 @@
     },
     itemSize: {
       name: "itemSize",
-      label: __4("\u30B5\u30A4\u30BA", "catpow"),
+      label: __4("\u30A2\u30A4\u30C6\u30E0\u30B5\u30A4\u30BA", "catpow"),
       vars: "vars",
       key: "--cp-item-size",
       input: "range",
       min: 100,
       max: 1200,
       step: 10,
+      coef: 0.0625,
+      unit: "rem"
+    },
+    itemGap: {
+      name: "itemGap",
+      label: __4("\u30A2\u30A4\u30C6\u30E0\u9593\u9694", "catpow"),
+      vars: "vars",
+      key: "--cp-item-gap",
+      input: "range",
+      min: 0,
+      max: 40,
+      step: 1,
       coef: 0.0625,
       unit: "rem"
     },
