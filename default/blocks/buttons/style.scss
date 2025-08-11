@@ -21,7 +21,7 @@
 		}
 	}
 	&__item{
-		@include bnd((p:r,f:0 0 16em,mg:0,o:h));
+		@include bnd((p:r,f:0 0 16em,mg:0));
 		@include bdr((s:s,w:1,r:2em));
 		@include txt((l:n,c:mx));
 		&.has-icon{

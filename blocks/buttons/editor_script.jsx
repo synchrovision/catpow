@@ -1,5 +1,12 @@
 ﻿import { clsx } from "clsx";
 
+const blockConfig = {
+	linkKeys: {
+		link: { href: "url", items: "items" },
+	},
+};
+CP.config.buttons = blockConfig;
+
 wp.blocks.registerBlockType("catpow/buttons", {
 	title: "🐾 Buttons",
 	description: "ボタンのブロックです。",
@@ -19,6 +26,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 		const { Icon, PanelBody, TextareaControl } = wp.components;
 		const { attributes, className, setAttributes, isSelected } = props;
 		const { items = [], classes, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { linkKeys } = blockConfig;
 		const primaryClass = "wp-block-catpow-buttons";
 		var classArray = _.uniq((className + " " + classes).split(" "));
 		var classNameArray = className.split(" ");
@@ -57,7 +65,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 			const itemStates = CP.classNamesToFlags(item.classes);
 			rtn.push(
 				<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
-					<div className="-button">
+					<CP.Link.Edit className="-button" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index} isSelected={isSelected}>
 						{itemStates.hasIcon && <CP.OutputIcon item={item} />}
 						<span
 							onInput={(e) => {
@@ -71,22 +79,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 						>
 							{item.text}
 						</span>
-						{isSelected && (
-							<span
-								className="url"
-								onInput={(e) => {
-									item.url = e.target.innerText;
-								}}
-								onBlur={(e) => {
-									saveItems();
-								}}
-								contentEditable={true}
-								suppressContentEditableWarning={true}
-							>
-								{item.url}
-							</span>
-						)}
-					</div>
+					</CP.Link.Edit>
 				</CP.Item>
 			);
 		});

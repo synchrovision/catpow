@@ -1,5 +1,11 @@
 (() => {
   // ../blocks/buttons/editor_script.jsx
+  var blockConfig = {
+    linkKeys: {
+      link: { href: "url", items: "items" }
+    }
+  };
+  CP.config.buttons = blockConfig;
   wp.blocks.registerBlockType("catpow/buttons", {
     title: "\u{1F43E} Buttons",
     description: "\u30DC\u30BF\u30F3\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
@@ -17,6 +23,7 @@
       const { Icon, PanelBody, TextareaControl } = wp.components;
       const { attributes, className, setAttributes, isSelected } = props;
       const { items = [], classes: classes2, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+      const { linkKeys } = blockConfig;
       const primaryClass = "wp-block-catpow-buttons";
       var classArray = _.uniq((className + " " + classes2).split(" "));
       var classNameArray = className.split(" ");
@@ -48,7 +55,7 @@
       items.map((item, index) => {
         const itemStates = CP.classNamesToFlags(item.classes);
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", className: item.classes, set: setAttributes, attr: attributes, items, index, isSelected, key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "-button" }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), /* @__PURE__ */ wp.element.createElement(
+          /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", className: item.classes, set: setAttributes, attr: attributes, items, index, isSelected, key: index }, /* @__PURE__ */ wp.element.createElement(CP.Link.Edit, { className: "-button", attr: attributes, set: setAttributes, keys: linkKeys.link, index, isSelected }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), /* @__PURE__ */ wp.element.createElement(
             "span",
             {
               onInput: (e) => {
@@ -61,20 +68,6 @@
               suppressContentEditableWarning: true
             },
             item.text
-          ), isSelected && /* @__PURE__ */ wp.element.createElement(
-            "span",
-            {
-              className: "url",
-              onInput: (e) => {
-                item.url = e.target.innerText;
-              },
-              onBlur: (e) => {
-                saveItems();
-              },
-              contentEditable: true,
-              suppressContentEditableWarning: true
-            },
-            item.url
           )))
         );
       });
