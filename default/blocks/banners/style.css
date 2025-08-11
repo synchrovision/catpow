@@ -3,7 +3,8 @@
   display: -webkit-grid;
   display: -ms-grid;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(calc(var(--cp-item-size,20rem)), 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--cp-item-size, 20rem), 100%), 1fr));
+  grid-gap: var(--cp-item-gap, 1rem);
   list-style: none;
 }
 .wp-block-catpow-banners:not(.has-custom-padding) {
