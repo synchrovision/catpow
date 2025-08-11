@@ -53,7 +53,7 @@
       )), options && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u8A2D\u5B9A", icon: "edit", set: setAttributes, attr: attributes, selectiveClasses: options, initialOpen: true })));
     },
     save({ attributes, className, setAttributes }) {
-      return "null";
+      return false;
     }
   });
 })();

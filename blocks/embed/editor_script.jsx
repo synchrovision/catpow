@@ -68,6 +68,6 @@ wp.blocks.registerBlockType("catpow/embed", {
 		);
 	},
 	save({ attributes, className, setAttributes }) {
-		return "null";
+		return false;
 	},
 });
