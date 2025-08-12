@@ -2,7 +2,7 @@
 use Catpow\util\BlockConfig;
 $block_class='wp-block-catpow-banners';
 $attributes=[
-	"classes"=>["type"=>"string","default"=>"{$block_class} is-size-medium has-title"],
+	"classes"=>["type"=>"string","default"=>"has-title"],
 	'vars'=>['type'=>'object','default'=>[]],
 	"items"=>[
 		"source"=>'query',

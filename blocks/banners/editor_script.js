@@ -41,7 +41,7 @@
           type: "block",
           blocks: CP.listedConvertibles,
           transform: (attributes) => {
-            attributes.classes = "wp-block-catpow-banners medium hasTitle";
+            attributes.classes = "wp-block-catpow-banners has-title";
             return wp.blocks.createBlock("catpow/banners", attributes);
           }
         }
