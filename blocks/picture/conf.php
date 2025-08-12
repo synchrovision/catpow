@@ -1,7 +1,7 @@
 <?php
 use Catpow\util\BlockConfig;
 $attributes=[
-	"classes"=>["type"=>'string','default'=>'wp-block-catpow-picture'],
+	"classes"=>["type"=>'string','default'=>''],
 	'vars'=>['type'=>'object','default'=>[]],
 
 	"sources"=>BlockConfig::getPictureSoucesAttributesForDevices(['sp','tb'],'picture','dummy.jpg'),

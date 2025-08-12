@@ -84,7 +84,7 @@
         className: clsx("picture-", classes),
         style: vars
       });
-      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_picture", attr: attributes, keys: imageKeys.image, devices, isTemplate: states.isTemplate })));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_picture", attr: attributes, keys: imageKeys.image, devices, isTemplate: states.isTemplate }))));
     }
   });
 })();

@@ -93,11 +93,13 @@ wp.blocks.registerBlockType("catpow/picture", {
 		});
 
 		return (
-			<CP.Bem prefix="wp-block-catpow">
-				<div {...blockProps}>
-					<CP.ResponsiveImage className="_picture" attr={attributes} keys={imageKeys.image} devices={devices} isTemplate={states.isTemplate} />
-				</div>
-			</CP.Bem>
+			<>
+				<CP.Bem prefix="wp-block-catpow">
+					<div {...blockProps}>
+						<CP.ResponsiveImage className="_picture" attr={attributes} keys={imageKeys.image} devices={devices} isTemplate={states.isTemplate} />
+					</div>
+				</CP.Bem>
+			</>
 		);
 	},
 });
