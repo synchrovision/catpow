@@ -111,6 +111,11 @@
   left: -30vw;
   right: -30vw;
 }
+.cp-popover.is-center .cp-popover__body-arrow {
+  left: -30vw;
+  right: -30vw;
+  margin-inline: auto;
+}
 .cp-popover.is-right .cp-popover__body {
   left: 0rem;
 }

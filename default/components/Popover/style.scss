@@ -86,6 +86,9 @@
 	&.is-center &{
 		&__body{
 			@include bnd((l:-30vw,r:-30vw));
+			&-arrow{
+				@include bnd((l:-30vw,r:-30vw,mgi:a));
+			}
 		}
 	}
 	&.is-right &{
