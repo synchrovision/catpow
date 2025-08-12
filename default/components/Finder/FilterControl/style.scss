@@ -4,15 +4,17 @@
 .cp-finder-filtercontrol{
 	&__table{
 		@include tbl(());
-		&>.row{
-			&>.label{
-				@include bnd((pd:10 20,w:80 a));
-			}
-			&>.inputs{
-				@include bnd((pd:10));
-			}
-			&+.row{
-				@include bdr((p:t,s:s,w:1,c:t 20));
+		&-tbody{
+			&-tr{
+				&-th{
+					@include bnd((pd:10 20,w:80 a));
+				}
+				&-td{
+					@include bnd((pd:10));
+				}
+				&+&{
+					@include bdr((p:t,s:s,w:1,c:t 20));
+				}
 			}
 		}
 	}
