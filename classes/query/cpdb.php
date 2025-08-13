@@ -51,7 +51,7 @@ class cpdb extends query{
 		}
 		if(isset($q['parent'])){$q['where']['parent_id']=$q['parent'];}
 		if(isset($q['root_object'])){$q['where']['root_object_id']=$q['root_object'];}
-		if(isset($q['include'])){$q['meta_id']=$q['include'];}
+		if(isset($q['include'])){$q['where']['meta_id']=$q['include'];}
 		return $q;
 	}
 	
