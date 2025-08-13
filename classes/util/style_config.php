@@ -242,11 +242,11 @@ class style_config{
 		echo '</style>';
 	}
 	public static function resolve_css_vars($css_code){
-		return str_replace(
-			array_map(function($key){return sprintf('var(%s)',$key);},array_keys(self::get_css_vars()['all'])),
-			array_values(self::get_css_vars()['all']),
-			$css_code
-		);
+		$vars=self::get_css_vars()['all'];
+		return preg_replace_callback('/var\((\-\-[\w\-]+)(,\w+)?\)/',function($matches)use($vars){
+			if(isset($vars[$matches[1]])){return $vars[$matches[1]];}
+			return $matches[0];
+		},$css_code);
 	}
 	public static function init_config_json(){
 		$colors=array_merge(
