@@ -1,4 +1,6 @@
-﻿wp.blocks.registerBlockType("catpow/t-media-text", {
+﻿const { __ } = wp.i18n;
+
+wp.blocks.registerBlockType("catpow/t-media-text", {
 	title: "🐾 T-media-text",
 	description: "HTMLメール用の画像・テキストのセットのブロックです。",
 	icon: "editor-code",
@@ -8,8 +10,8 @@
 		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-media-text" },
 		src: { source: "attribute", selector: "[src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy.jpg" },
 		alt: { source: "attribute", selector: "[src]", attribute: "alt" },
-		imageCode: { source: "text", selector: "td.imageCell", default: wpinfo.theme_url + "/images/dummy.jpg" },
-		width: { source: "attribute", selector: "td.imageCell", attribute: "width", default: "200" },
+		imageCode: { source: "text", selector: "td.is-image-cell", default: wpinfo.theme_url + "/images/dummy.jpg" },
+		width: { source: "attribute", selector: "td.is-image-cell", attribute: "width", default: "200" },
 	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes }) {
@@ -22,6 +24,7 @@
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
+				{ name: "valign", type: "buttons", label: "垂直方向揃え", values: { isValignTop: __("上揃え", "catpow"), isValignCenter: __("中央揃え", "catpow"), isValignBottom: __("下揃え", "catpow") } },
 				{
 					name: "template",
 					label: "テンプレート",
@@ -36,27 +39,29 @@
 
 		return (
 			<>
-				<table width="100%" className={classes}>
-					<tbody>
-						<tr>
-							<td className="imageCell" width={width}>
-								<CP.SelectResponsiveImage
-									set={setAttributes}
-									attr={attributes}
-									keys={{ src: "src", alt: "alt", code: "imageCode" }}
-									size="large"
-									width="100%"
-									height="auto"
-									isTemplate={states.isTemplate}
-								/>
-							</td>
-							<td className="spacerCell"></td>
-							<td className="textCell">
-								<InnerBlocks />
-							</td>
-						</tr>
-					</tbody>
-				</table>
+				<CP.Bem prefix="wp-block-catpow">
+					<table width="100%" className={classes}>
+						<tbody>
+							<tr>
+								<td className="_td is-image-cell" width={width}>
+									<CP.SelectResponsiveImage
+										set={setAttributes}
+										attr={attributes}
+										keys={{ src: "src", alt: "alt", code: "imageCode" }}
+										size="large"
+										width="100%"
+										height="auto"
+										isTemplate={states.isTemplate}
+									/>
+								</td>
+								<td className="_td is-spacer-cell"></td>
+								<td className="_td is-text-cell">
+									<InnerBlocks />
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</CP.Bem>
 				<BlockControls>
 					<CP.VerticalAlignClassToolbar set={setAttributes} attr={attributes} />
 				</BlockControls>
@@ -76,19 +81,21 @@
 		const primaryClass = "wp-block-catpow-t-media-text";
 		var states = CP.classNamesToFlags(classes);
 		return (
-			<table width="100%" className={classes}>
-				<tbody>
-					<tr>
-						<td className="imageCell" width={width}>
-							<CP.ResponsiveImage attr={attributes} keys={{ src: "src", alt: "alt", code: "imageCode" }} size="large" width="100%" height="auto" isTemplate={states.isTemplate} />
-						</td>
-						<td className="spacerCell"></td>
-						<td className="textCell">
-							<InnerBlocks.Content />
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			<CP.Bem prefix="wp-block-catpow">
+				<table width="100%" className={classes}>
+					<tbody>
+						<tr>
+							<td className="_td is-image-cell" width={width}>
+								<CP.ResponsiveImage attr={attributes} keys={{ src: "src", alt: "alt", code: "imageCode" }} size="large" width="100%" height="auto" isTemplate={states.isTemplate} />
+							</td>
+							<td className="_td is-spacer-cell"></td>
+							<td className="_td is-text-cell">
+								<InnerBlocks.Content />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</CP.Bem>
 		);
 	},
 });
