@@ -4,17 +4,24 @@
   Catpow.Finder = (props) => {
     const { useState, useCallback, useMemo, useEffect, useRef, useReducer } = wp.element;
     const { basepath, baseurl, className = "" } = props;
-    const pushState = useCallback((state2) => {
-      const { path = "", query } = state2;
-      let q = {};
-      if (query) {
-        Object.keys(query).map((key) => {
-          q["q[" + key + "]" + (Array.isArray(query[key]) ? "[]" : "")] = query[key];
-        });
-      }
-      const uri = URI(baseurl);
-      history.pushState(state2, "", uri.directory(uri.directory() + "/" + path).addQuery(q).toString());
-    }, [props]);
+    const pushState = useCallback(
+      (state2) => {
+        const { path = "", query } = state2;
+        let q = {};
+        if (query) {
+          Object.keys(query).map((key) => {
+            q["q[" + key + "]" + (Array.isArray(query[key]) ? "[]" : "")] = query[key];
+          });
+        }
+        const uri = URI(baseurl);
+        history.pushState(
+          state2,
+          "",
+          uri.directory(uri.directory() + "/" + path).addQuery(q).toString()
+        );
+      },
+      [props]
+    );
     const updateResults = useCallback((state2) => {
       state2.items = state2.index.rows.filter((row) => {
         return Object.keys(state2.query).every((key) => {
@@ -155,6 +162,13 @@
           state2.colsToShow = Object.keys(state2.index.cols).map((key) => state2.index.cols[key]).filter((col) => !col.hide);
           state2.colsToShowByRole[role] = state2.colsToShow.filter((col) => col.role === role);
           return { ...state2 };
+        }
+        case "showMessage": {
+          const { message } = action;
+          return { ...state2, message, showMessage: true };
+        }
+        case "hideMessage": {
+          return { ...state2, showMessage: false };
         }
         case "selectRow":
         case "deselectRow": {
@@ -303,11 +317,14 @@
         if (!e.state) {
           return;
         }
-        dispatch({ type: "update", data: {
-          path: e.state.path,
-          query: e.state.query,
-          ignorePushState: true
-        } });
+        dispatch({
+          type: "update",
+          data: {
+            path: e.state.path,
+            query: e.state.query,
+            ignorePushState: true
+          }
+        });
       });
       window.addEventListener("resize", (e) => {
         dispatch({ type: "updateDevice" });
