@@ -3,7 +3,7 @@
 	description: "HTMLメール用の画像・テキストのセットのブロックです。",
 	icon: "editor-code",
 	category: "catpow-mail",
-	parent: ["catpow/t-body", "catpow/t-box", "catpow/t-loop"],
+	parent: CP.mailContensContainer,
 	attributes: {
 		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-media-text" },
 		src: { source: "attribute", selector: "[src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy.jpg" },

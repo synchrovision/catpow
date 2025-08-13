@@ -5,7 +5,7 @@
     description: "\u30AF\u30A8\u30EA\u306E\u6295\u7A3F\u306E\u60C5\u5831\u3092\u8868\u793A\u3059\u308B\u305F\u3081\u306E\u30B3\u30F3\u30C6\u30CA\u3067\u3059\u3002",
     icon: "editor-code",
     category: "catpow-functional",
-    parent: ["catpow/t-body", "catpow/t-box", "catpow/t-loop"],
+    parent: CP.mailContensContainer,
     example: CP.example,
     edit({ attributes, setAttributes, className }) {
       const { InnerBlocks, BlockControls, InspectorControls } = wp.blockEditor;

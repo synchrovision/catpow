@@ -5,7 +5,7 @@ wp.blocks.registerBlockType("catpow/t-button", {
 	description: "HTMLメール用のテーブルレイアウトのボタンです。",
 	icon: "editor-code",
 	category: "catpow-mail",
-	parent: ["catpow/t-body", "catpow/t-box", "catpow/t-loop"],
+	parent: CP.mailContensContainer,
 	attributes: {
 		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-button is-size-medium" },
 		title: { source: "html", selector: "a", default: "Title" },

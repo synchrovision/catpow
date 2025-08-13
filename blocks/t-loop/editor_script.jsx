@@ -3,7 +3,7 @@
 	description: "クエリの投稿の情報を表示するためのコンテナです。",
 	icon: "editor-code",
 	category: "catpow-functional",
-	parent: ["catpow/t-body", "catpow/t-box", "catpow/t-loop"],
+	parent: CP.mailContensContainer,
 	example: CP.example,
 	edit({ attributes, setAttributes, className }) {
 		const { InnerBlocks, BlockControls, InspectorControls } = wp.blockEditor;

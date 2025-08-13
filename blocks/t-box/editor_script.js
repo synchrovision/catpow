@@ -6,7 +6,7 @@
     description: "HTML\u30E1\u30FC\u30EB\u7528\u306E\u30EC\u30A4\u30A2\u30A6\u30C8\u8ABF\u6574\u7528\u30B3\u30F3\u30C6\u30CA\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
     icon: "editor-code",
     category: "catpow-mail",
-    parent: ["catpow/t-body", "catpow/t-box", "catpow/t-loop"],
+    parent: CP.mailContensContainer,
     attributes: {
       classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-box has-mail-content-width" }
     },

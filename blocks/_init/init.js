@@ -917,6 +917,7 @@
     imageSrcOrDummy: () => imageSrcOrDummy,
     isRowsConvertibleToItems: () => isRowsConvertibleToItems,
     listedConvertibles: () => listedConvertibles,
+    mailContentsContainers: () => mailContentsContainers,
     parseCSV: () => parseCSV,
     parseColorClass: () => parseColorClass,
     parseColorToneValue: () => parseColorToneValue,
@@ -5022,6 +5023,9 @@
     "catpow/showcase"
   ];
   var tableConvertibles = ["catpow/simpletable", "catpow/datatable", "catpow/comparetable", "catpow/layouttable"];
+
+  // ../blocks/_init/init/CP/data/containers.js
+  var mailContentsContainers = ["catpow/t-body", "catpow/t-box", "catpow/t-loop", "catpow/t-media-text"];
 
   // ../blocks/_init/init/CP/data/devices.js
   var devices = {

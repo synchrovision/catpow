@@ -5,7 +5,7 @@ wp.blocks.registerBlockType("catpow/t-box", {
 	description: "HTMLメール用のレイアウト調整用コンテナブロックです。",
 	icon: "editor-code",
 	category: "catpow-mail",
-	parent: ["catpow/t-body", "catpow/t-box", "catpow/t-loop"],
+	parent: CP.mailContensContainer,
 	attributes: {
 		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-box has-mail-content-width" },
 	},
