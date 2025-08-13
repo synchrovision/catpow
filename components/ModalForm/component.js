@@ -39,8 +39,15 @@
     const onClick = props.onClick || useCallback(({ state: state2, dispatch: dispatch2, name: name2, value: value2 }) => {
       dispatch2({ type: "complete", name: name2, value: value2 });
     });
-    return /* @__PURE__ */ wp.element.createElement(Catpow.Button, { className, onClick: () => {
-      onClick({ state, dispatch, name, value });
-    }, label });
+    return /* @__PURE__ */ wp.element.createElement(
+      Catpow.Button,
+      {
+        className,
+        onClick: () => {
+          onClick({ state, dispatch, name, value });
+        },
+        label
+      }
+    );
   };
 })();
