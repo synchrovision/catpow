@@ -1,4 +1,6 @@
-﻿wp.blocks.registerBlockType("catpow/t-body", {
+﻿const { __ } = wp.i18n;
+
+wp.blocks.registerBlockType("catpow/t-body", {
 	title: "🐾 T-Body",
 	description: "HTMLメールのベースとなるヘッダ・フッタのブロックです。",
 	icon: "editor-code",
@@ -9,10 +11,12 @@
 	attributes: {
 		type: { type: "string", source: "meta", meta: "type", default: "html" },
 		isHtmlMail: { type: "boolean", default: false },
-		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-body hasHeader hasFooter" },
+		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-body has-header has-footer" },
+		headerClasses: { source: "attribute", selector: "thead", attribute: "class", default: "wp-block-catpow-t-body__thead has-color-scheme-inverted" },
+		footerClasses: { source: "attribute", selector: "tfoot", attribute: "class", default: "wp-block-catpow-t-body__tfoot has-background-color-alt" },
 		headerText: { source: "html", selector: "thead th", default: "Title" },
 		footerText: { source: "html", selector: "tfoot td", default: "caption" },
-		body_class: { type: "string", default: "white" },
+		body_class: { type: "string", default: "has-bg-white" },
 		textMail: { source: "text", selector: "textmail" },
 	},
 	example: CP.example,
@@ -20,7 +24,7 @@
 		const { useState, useMemo } = wp.element;
 		const { InnerBlocks, BlockControls, InspectorControls, RichText } = wp.blockEditor;
 		const { PanelBody, TextareaControl, ToolbarGroup } = wp.components;
-		const { type, isHtmlMail, classes, headerText, footerText, body_class, textMail, TextMode = false } = attributes;
+		const { type, isHtmlMail, classes, headerClasses, footerClasses, headerText, footerText, body_class, textMail, TextMode = false } = attributes;
 		const primaryClass = "wp-block-catpow-t-body";
 		var states = CP.classNamesToFlags(classes);
 
@@ -35,10 +39,26 @@
 					sub: {
 						html: [
 							{ name: "textMode", input: "bool", label: "テキストメール編集モード", key: "TextMode" },
-							"color",
-							{ name: "header", label: "ヘッダ", values: "hasHeader" },
-							{ name: "footer", label: "フッタ", values: "hasFooter" },
-							{ name: "body", type: "buttons", label: "背景色", values: ["white", "gray", "black"], key: "body_class" },
+							{ preset: "colorScheme", classKey: "body_class" },
+							{ name: "body", type: "buttons", label: "背景色", values: { hasBgWhite: "白", hasBgNormal: "通常", hasBgStrong: "強調", hasBgBlack: "黒" }, classKey: "body_class" },
+							{
+								name: "header",
+								label: "ヘッダ",
+								values: "hasHeader",
+								sub: [
+									{ preset: "colorScheme", classKey: "headerClasses" },
+									{ preset: "backgroundColor", label: __("ヘッダ背景色", "catpow"), name: "headerBackgroundColor", classKey: "headerClasses" },
+								],
+							},
+							{
+								name: "footer",
+								label: "フッタ",
+								values: "hasFooter",
+								sub: [
+									{ preset: "colorScheme", classKey: "footerClasses" },
+									{ preset: "backgroundColor", label: __("フッタ背景色", "catpow"), name: "footerBackgroundColor", classKey: "footerClasses" },
+								],
+							},
 						],
 					},
 					effect: (val, states, { set }) => {
@@ -55,46 +75,48 @@
 				{!isHtmlMail || TextMode ? (
 					<TextareaControl value={textMail} onChange={(textMail) => setAttributes({ textMail })} rows={20} />
 				) : (
-					<div className={"mail_body " + body_class}>
-						<table width="100%" align="center" valign="top" className={classes}>
-							{states.hasHeader && (
-								<thead className="wp-block-catpow-t-body__header">
+					<div className={"cp-mail-body " + body_class}>
+						<CP.Bem prefix="wp-block-catpow">
+							<table width="100%" align="center" valign="top" className={classes}>
+								{states.hasHeader && (
+									<thead className={headerClasses}>
+										<tr>
+											<th align="center">
+												<RichText
+													onChange={(headerText) => {
+														setAttributes({ headerText });
+													}}
+													value={headerText}
+												/>
+											</th>
+										</tr>
+									</thead>
+								)}
+								<tbody>
 									<tr>
-										<th>
-											<RichText
-												onChange={(headerText) => {
-													setAttributes({ headerText });
-												}}
-												value={headerText}
-											/>
-										</th>
-									</tr>
-								</thead>
-							)}
-							<tbody className="wp-block-catpow-t-body__body">
-								<tr>
-									<td>
-										<div className="wp-block-catpow-t-body__body__contents">
-											<InnerBlocks />
-										</div>
-									</td>
-								</tr>
-							</tbody>
-							{states.hasFooter && (
-								<tfoot className="wp-block-catpow-t-body__footer">
-									<tr>
-										<td>
-											<RichText
-												onChange={(footerText) => {
-													setAttributes({ footerText });
-												}}
-												value={footerText}
-											/>
+										<td align="center">
+											<div className="-contents">
+												<InnerBlocks />
+											</div>
 										</td>
 									</tr>
-								</tfoot>
-							)}
-						</table>
+								</tbody>
+								{states.hasFooter && (
+									<tfoot className={footerClasses}>
+										<tr>
+											<td align="center">
+												<RichText
+													onChange={(footerText) => {
+														setAttributes({ footerText });
+													}}
+													value={footerText}
+												/>
+											</td>
+										</tr>
+									</tfoot>
+								)}
+							</table>
+						</CP.Bem>
 					</div>
 				)}
 				<InspectorControls>
@@ -121,42 +143,43 @@
 
 	save({ attributes, className, setAttributes }) {
 		const { InnerBlocks, RichText } = wp.blockEditor;
-		const { type, isHtmlMail, classes, headerText, textMail, footerText } = attributes;
-		const primaryClass = "wp-block-catpow-t-body";
+		const { type, isHtmlMail, classes, headerClasses, footerClasses, headerText, textMail, footerText } = attributes;
 		var states = CP.classNamesToFlags(classes);
 		return (
 			<>
 				{(!isHtmlMail || textMail) && <textmail>{textMail}</textmail>}
 				{isHtmlMail && (
-					<table width="100%" align="center" className={classes}>
-						{states.hasHeader && (
-							<thead className="wp-block-catpow-t-body__header">
+					<CP.Bem prefix="wp-block-catpow">
+						<table width="100%" align="center" className={classes}>
+							{states.hasHeader && (
+								<thead className={headerClasses}>
+									<tr>
+										<th align="center">
+											<RichText.Content value={headerText} />
+										</th>
+									</tr>
+								</thead>
+							)}
+							<tbody>
 								<tr>
-									<th>
-										<RichText.Content value={headerText} />
-									</th>
-								</tr>
-							</thead>
-						)}
-						<tbody className="wp-block-catpow-t-body__body">
-							<tr>
-								<td>
-									<div className="wp-block-catpow-t-body__body__contents">
-										<InnerBlocks.Content />
-									</div>
-								</td>
-							</tr>
-						</tbody>
-						{states.hasFooter && (
-							<tfoot className="wp-block-catpow-t-body__footer">
-								<tr>
-									<td>
-										<RichText.Content value={footerText} />
+									<td align="center">
+										<div className="-contents">
+											<InnerBlocks.Content />
+										</div>
 									</td>
 								</tr>
-							</tfoot>
-						)}
-					</table>
+							</tbody>
+							{states.hasFooter && (
+								<tfoot className={footerClasses}>
+									<tr>
+										<td align="center">
+											<RichText.Content value={footerText} />
+										</td>
+									</tr>
+								</tfoot>
+							)}
+						</table>
+					</CP.Bem>
 				)}
 			</>
 		);

@@ -2063,7 +2063,7 @@ class CP{
 					'<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />'.
 					'<title>'.shortcode::do_shortcode($conf['subject']).'</title>'.
 					'</head>'.
-					'<body class="mail_body '.$body_class.'">'.$body.'</body>'.
+					'<body class="cp-mail-body '.$body_class.'">'.$body.'</body>'.
 					'</html>';
 				$cssToInlineStyles->setHTML($conf['message']);
 				$cssToInlineStyles->setCSS($css);

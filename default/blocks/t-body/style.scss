@@ -1,9 +1,15 @@
 @import 'admin_style_config.scss';
 
-.mail_body{
-	&.white{@include bg((c:#fff));}
-	&.gray{@include bg((c:#ddd));}
-	&.black{@include bg((c:#222));}
+.cp-mail-body{
+	&.has-bg-white{@include bg((c:white));}
+	&.has-bg-normal{@include bg((c:b));}
+	&.has-bg-strong{@include bg((c:s));}
+	&.has-bg-black{@include bg((c:black));}
+	&.has-color-scheme-inverted{
+		p{@include txt((c:i));}
+		&.has-bg-normal{@include bg((c:m));}
+		&.has-bg-strong{@include bg((c:a));}
+	}
 }
 .wp-block-catpow-t-body{
 	@include tbl(());
@@ -12,28 +18,57 @@
 	img{
 		@include bnd((d:i));
 	}
-	&>thead>tr>th{
-		@include bnd((pd:20));
-		@include bg((c:m));
-		@include txt((a:c,p:40,h:1em,f:t,w:b,c:b,v:m));
-		small{
-			@include txt((p:40%));
+	&__thead,&__tfoot{
+		&.has-background-color{
+			@include bg((c:b));
+		}
+		&.has-background-color-alt{
+			@include bg((c:s));
+		}
+		.has-color-scheme-inverted &.has-background-color,
+		&.has-color-scheme-inverted.has-background-color{
+			@include bg((c:m));
+		}
+		.has-color-scheme-inverted &.has-background-color-alt,
+		&.has-color-scheme-inverted.has-background-color-alt{
+			@include bg((c:a));
 		}
 	}
-	&>tbody>tr>td{
-		@include bnd((mg:0,pd:0));
-		@include bg((c:b));
-		@include bdr((s:n));
-	}
-	&>tfoot>tr>td{
-		@include bnd((pd:20));
-		@include bdr((p:t,s:s,w:1,c:t 20));
-		@include bg((c:t 5));
-		@include txt((a:c,p:12,h:1em,f:t,c:t,v:m));
-	}
-	@include clr(){
-		&>thead>tr>th{
-			@include bg((c:$i));
+	&__thead{
+		&-tr{
+			&-th{
+				@include bnd((pd:20));
+				@include txt((a:c,p:40,h:1em,f:t,w:b,c:m,v:m));
+				small{
+					@include txt((p:40%));
+				}
+				.has-color-scheme-inverted &{
+					@include txt((c:i));
+				}
+			}
 		}
+	}
+	&__tbody{
+		&-tr{
+			&-td{
+				@include bnd((mg:0,pd:0));
+				@include bdr((s:n));
+			}
+		}
+	}
+	&__tfoot{
+		&-tr{
+			&-td{
+				@include bnd((pd:20));
+				@include bdr((p:t,s:s,w:1,c:t 20));
+				@include txt((a:c,p:14,h:1em,f:t,c:t,v:m));
+				.has-color-scheme-inverted &{
+					@include txt((c:i));
+				}
+			}
+		}
+	}
+	&-contents{
+
 	}
 }
