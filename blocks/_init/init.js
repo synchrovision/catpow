@@ -1023,7 +1023,7 @@
     });
     return flags;
   };
-  var camelToKebab = (str) => str.replace(/(\w)([A-Z])/g, "$1-$2").toLowerCase();
+  var camelToKebab = (str) => str.replace(/(?=\w)([A-Z])/g, "-$1").toLowerCase();
   var kebabToCamel = (str) => str.replace(/\-([a-z])/g, (m) => m[1].toUpperCase());
 
   // modules/src/util/rtf.jsx
