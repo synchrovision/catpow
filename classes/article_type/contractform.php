@@ -38,6 +38,7 @@ class contractform extends article_type{
 			'label'=>$conf_data['label'],
 			'menu_icon'=>'dashicons-email-alt',
 			'form'=>$conf_data['data_name'].'/form',
+			'mail_conf'=>$mailconf_post_type,
 			'alias_template'=>['contractform','manage']
 		];
 		if(isset($conf_data['inputs'])){
