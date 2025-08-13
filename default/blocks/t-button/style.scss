@@ -9,22 +9,35 @@
 		@include bnd((h:1em,w:1em));
 	}
 	&__button{
-		@include bnd((pd:1em,w:3em));
+		@include bnd((pd:.5em 1em,w:3em));
 		@include bg((c:m));
 		@include bdr((s:n,r:.25em));
 		@include txt((a:c));
+		@include shd((b:2));
 		&-link{
 			@include bnd((d:b));
-			@include txt((a:c,td:n,w:r,c:i));
+			@include txt((a:c,td:n,w:b,c:i));
+		}
+		.has-color-scheme-inverted &{
+			@include bg((c:b));
+			&-link{
+				@include txt((c:m));
+			}
 		}
 	}
-	&.large{
+	&.is-size-xlarge{
+		@include txt((p:32));
+	}
+	&.is-size-large{
 		@include txt((p:24));
 	}
-	&.medium{
+	&.is-size-medium{
 		@include txt((p:16));
 	}
-	&.small{
+	&.is-size-small{
 		@include txt((p:12));
+	}
+	&.is-size-xsmall{
+		@include txt((p:10));
 	}
 }

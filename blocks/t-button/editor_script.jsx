@@ -1,6 +1,4 @@
-﻿import { Bem } from "catpow/component";
-
-const blockClassName = "wp-block-catpow-t-button";
+﻿const blockClassName = "wp-block-catpow-t-button";
 
 wp.blocks.registerBlockType("catpow/t-button", {
 	title: "🐾 T-Button",
@@ -9,7 +7,7 @@ wp.blocks.registerBlockType("catpow/t-button", {
 	category: "catpow-mail",
 	parent: ["catpow/t-body", "catpow/t-box", "catpow/t-loop"],
 	attributes: {
-		classes: { type: "string", default: "medium" },
+		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-button is-size-medium" },
 		title: { source: "html", selector: "a", default: "Title" },
 		url: { source: "attribute", selector: "a", attribute: "href", default: wpinfo.home_url },
 	},
@@ -22,15 +20,15 @@ wp.blocks.registerBlockType("catpow/t-button", {
 		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = ["color", { name: "size", type: "buttons", label: "サイズ", values: ["large", "medium", "small"] }, { name: "url", input: "text", label: "URL", key: "url" }];
+			const selectiveClasses = ["color", "size", { name: "url", input: "text", label: "URL", key: "url" }];
 			wp.hooks.applyFilters("catpow.blocks.t-button.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
 
 		return (
 			<>
-				<Bem block={blockClassName}>
-					<table className={"table_ " + classes} width="100%">
+				<CP.Bem prefix="wp-block-catpow">
+					<table className={classes} align="center" width="100%">
 						<tbody>
 							<tr>
 								<td className="spacer_" colspan="3"></td>
@@ -54,7 +52,7 @@ wp.blocks.registerBlockType("catpow/t-button", {
 							</tr>
 						</tbody>
 					</table>
-				</Bem>
+				</CP.Bem>
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
@@ -69,8 +67,8 @@ wp.blocks.registerBlockType("catpow/t-button", {
 		const { RichText } = wp.blockEditor;
 		const { classes, title, url } = attributes;
 		return (
-			<Bem block={blockClassName}>
-				<table className={"table_ " + classes} width="100%">
+			<CP.Bem prefix="wp-block-catpow">
+				<table className={classes} align="center" width="100%">
 					<tbody>
 						<tr>
 							<td className="spacer_" colspan="3"></td>
@@ -89,7 +87,7 @@ wp.blocks.registerBlockType("catpow/t-button", {
 						</tr>
 					</tbody>
 				</table>
-			</Bem>
+			</CP.Bem>
 		);
 	},
 });

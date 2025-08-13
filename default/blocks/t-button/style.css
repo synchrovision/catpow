@@ -1,102 +1,47 @@
-.wp-block-catpow-t-button {
-  display: block;
-  margin: 0.5em auto;
-  text-align: center;
-  text-decoration: none;
-}
-.wp-block-catpow-t-button table {
+.wp-block-catpow-t-button__table {
   border-collapse: collapse;
   border-spacing: 0px;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+  width: 100%;
+}
+.wp-block-catpow-t-button__spacer {
+  height: 1em;
+  width: 1em;
+}
+.wp-block-catpow-t-button__button {
+  padding: 0.5em 1em;
+  width: 3em;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
   border-style: none;
   border-radius: 0.25em;
-}
-.wp-block-catpow-t-button table > tbody > tr > td {
-  padding: 0.25em;
-  border-style: none;
   text-align: center;
-  font-weight: 400;
-  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),1);
+  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
 }
-.wp-block-catpow-t-button.large {
+.wp-block-catpow-t-button__button-link {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 700;
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+}
+.has-color-scheme-inverted .wp-block-catpow-t-button__button {
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
+}
+.has-color-scheme-inverted .wp-block-catpow-t-button__button-link {
+  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
+}
+.wp-block-catpow-t-button.is-size-xlarge {
+  font-size: 2rem;
+}
+.wp-block-catpow-t-button.is-size-large {
   font-size: 1.5rem;
 }
-.wp-block-catpow-t-button.medium {
+.wp-block-catpow-t-button.is-size-medium {
   font-size: 1rem;
 }
-.wp-block-catpow-t-button.small {
+.wp-block-catpow-t-button.is-size-small {
   font-size: 0.75rem;
 }
-.color1 .wp-block-catpow-t-button table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -5 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.color2 .wp-block-catpow-t-button table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -4 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.color3 .wp-block-catpow-t-button table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -3 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.color4 .wp-block-catpow-t-button table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -2 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.color5 .wp-block-catpow-t-button table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -1 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.color6 .wp-block-catpow-t-button table {
-  background-color: hsla(var(--cp-root-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.color7 .wp-block-catpow-t-button table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 1 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.color8 .wp-block-catpow-t-button table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 2 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.color9 .wp-block-catpow-t-button table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 3 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.color10 .wp-block-catpow-t-button table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 4 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.color11 .wp-block-catpow-t-button table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 5 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.color12 .wp-block-catpow-t-button table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 6 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.wp-block-catpow-t-button.color1 table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -5 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.wp-block-catpow-t-button.color2 table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -4 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.wp-block-catpow-t-button.color3 table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -3 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.wp-block-catpow-t-button.color4 table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -2 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.wp-block-catpow-t-button.color5 table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -1 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.wp-block-catpow-t-button.color6 table {
-  background-color: hsla(var(--cp-root-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.wp-block-catpow-t-button.color7 table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 1 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.wp-block-catpow-t-button.color8 table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 2 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.wp-block-catpow-t-button.color9 table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 3 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.wp-block-catpow-t-button.color10 table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 4 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.wp-block-catpow-t-button.color11 table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 5 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
-}
-.wp-block-catpow-t-button.color12 table {
-  background-color: hsla(calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 6 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l),1);
+.wp-block-catpow-t-button.is-size-xsmall {
+  font-size: 0.625rem;
 }
 /*# sourceMappingURL=./style.css.map */
