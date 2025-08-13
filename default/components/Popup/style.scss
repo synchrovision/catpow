@@ -4,48 +4,51 @@
 .cp-popup{
 	@include bnd((p:r,v:h));
 	@include trn((o:0));
-	&.open{
+	&.is-open{
 		@include bnd((v:v));
 		@include trn((t:(v 0s, o .5s),o:1));
 	}
-	&.close{
+	&.is-close{
 		@include trn((t:(v 0s .5s, o .5s),o:0));
 	}
-	&.closed{
+	&.is-closed{
 		@include bnd((d:n));
 		@include usr((e:n));
 	}
-	&-container{
+	&__container{
 		@include bnd((d:b,p:f,t:0,l:0,r:0,z:10000));
 	}
-	&-bg{
+	&__bg{
 		content:'';
 		@include bnd((d:b,p:f,i:0));
 		@include bg((c:shd));
 	}
-	&-body{
+	&__body{
 		@include bnd((d:b,p:f,w:fit,h:fit,l:0,r:0,t:50%,mg:a));
 		@include bdr((r:10));
 		@include bg((c:b));
 		@include shd((b:2));
 		@include trn((y:-50%));
-		.PopupContents{
-			@include bnd((w:a 640,h:a 90vh,oy:a));
-		}
-		.PopupControl{
-			.close{
-				@include bnd((p:a,w:30,h:30,t:-40,r:10));
-				&::before,&::after{
-					content:'';
-					@include bnd((p:a,t:15,w:30,h:1));
-					@include bg((c:b));
-				}
-				&::before{
-					@include trn((r:45deg));
-				}
-				&::after{
-					@include trn((r:-45deg));
-				}
+	}
+	&-contents{
+		@include bnd((w:a 640,h:a 90vh,oy:a));
+	}
+	&-control{
+		&__close{
+			@include bnd((p:a,w:20,h:20,t:-8,r:-8));
+			@include bg((c:m));
+			@include bdr((r:50%));
+			@include shd((b:1));
+			&::before,&::after{
+				content:'';
+				@include bnd((p:a,i:0,mg:a,w:12,h:2));
+				@include bg((c:b));
+			}
+			&::before{
+				@include trn((r:45deg));
+			}
+			&::after{
+				@include trn((r:-45deg));
 			}
 		}
 	}

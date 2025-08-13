@@ -3,22 +3,22 @@
   visibility: hidden;
   opacity: 0;
 }
-.cp-popup.open {
+.cp-popup.is-open {
   visibility: visible;
   -webkit-transition: visibility 0s, opacity 0.5s;
   transition: visibility 0s, opacity 0.5s;
   opacity: 1;
 }
-.cp-popup.close {
+.cp-popup.is-close {
   -webkit-transition: visibility 0s 0.5s, opacity 0.5s;
   transition: visibility 0s 0.5s, opacity 0.5s;
   opacity: 0;
 }
-.cp-popup.closed {
+.cp-popup.is-closed {
   display: none;
   pointer-events: none;
 }
-.cp-popup-container {
+.cp-popup__container {
   display: block;
   position: fixed;
   top: 0rem;
@@ -26,7 +26,7 @@
   right: 0rem;
   z-index: 10000;
 }
-.cp-popup-bg {
+.cp-popup__bg {
   content: "";
   display: block;
   position: fixed;
@@ -37,7 +37,7 @@
   inset: 0rem;
   background-color: hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
 }
-.cp-popup-body {
+.cp-popup__body {
   display: block;
   position: fixed;
   width: fit-content;
@@ -52,33 +52,41 @@
   transform: -webkit- translateY(-50%);
   transform: translateY(-50%);
 }
-.cp-popup-body .PopupContents {
+.cp-popup-contents {
   max-width: 40rem;
   width: auto;
   max-height: 90vh;
   height: auto;
   overflow-y: auto;
 }
-.cp-popup-body .PopupControl .close {
+.cp-popup-control__close {
   position: absolute;
-  width: 1.875rem;
-  height: 1.875rem;
-  top: -2.5rem;
-  right: 0.625rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  top: -0.5rem;
+  right: -0.5rem;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
+  border-radius: 50%;
+  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
 }
-.cp-popup-body .PopupControl .close::before, .cp-popup-body .PopupControl .close::after {
+.cp-popup-control__close::before, .cp-popup-control__close::after {
   content: "";
   position: absolute;
-  top: 0.9375rem;
-  width: 1.875rem;
-  height: 0.0625rem;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  margin: auto;
+  width: 0.75rem;
+  height: 0.125rem;
   background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
 }
-.cp-popup-body .PopupControl .close::before {
+.cp-popup-control__close::before {
   transform: -webkit- rotateZ(45deg);
   transform: rotateZ(45deg);
 }
-.cp-popup-body .PopupControl .close::after {
+.cp-popup-control__close::after {
   transform: -webkit- rotateZ(-45deg);
   transform: rotateZ(-45deg);
 }
