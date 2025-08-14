@@ -139,13 +139,15 @@ export const selectiveClassesPresets = {
 		},
 	},
 	fontSize: {
-		name: "size",
+		name: "fontSize",
 		type: "buttons",
 		label: __("文字サイズ", "catpow"),
 		values: {
+			hasFontSizeXLarge: __("極大", "catpow"),
 			hasFontSizeLarge: __("大", "catpow"),
 			hasFontSizeMiddle: __("中", "catpow"),
 			hasFontSizeSmall: __("小", "catpow"),
+			hasFontSizeXSmall: __("極小", "catpow"),
 		},
 	},
 	width: {
