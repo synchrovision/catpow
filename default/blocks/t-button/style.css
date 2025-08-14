@@ -3,24 +3,18 @@
   border-spacing: 0px;
   width: 100%;
 }
-.wp-block-catpow-t-button__spacer {
-  height: 1em;
-  width: 1em;
-}
 .wp-block-catpow-t-button__button {
-  padding: 0.5em 1em;
-  width: 3em;
   background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
   border-style: none;
   border-radius: 0.25em;
   text-align: center;
+  font-family: var(--cp-fonts-t);
   box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
 }
 .wp-block-catpow-t-button__button-link {
   display: block;
-  text-align: center;
+  padding: 0.5em 1em;
   text-decoration: none;
-  font-weight: 700;
   color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
 }
 .has-color-scheme-inverted .wp-block-catpow-t-button__button {

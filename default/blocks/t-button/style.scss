@@ -5,18 +5,14 @@
 		@include tbl(());
 		@include bnd((w:f));
 	}
-	&__spacer{
-		@include bnd((h:1em,w:1em));
-	}
 	&__button{
-		@include bnd((pd:.5em 1em,w:3em));
 		@include bg((c:m));
 		@include bdr((s:n,r:.25em));
-		@include txt((a:c));
+		@include txt((a:c,f:t));
 		@include shd((b:2));
 		&-link{
-			@include bnd((d:b));
-			@include txt((a:c,td:n,w:b,c:i));
+			@include bnd((d:b,pd:.5em 1em));
+			@include txt((td:n,c:i));
 		}
 		.has-color-scheme-inverted &{
 			@include bg((c:b));
