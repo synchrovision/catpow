@@ -15,6 +15,9 @@
 	@include tbl(());
 	@include bnd((w:f,pd:0,mg:0 a));
 	@include bdr((s:n));
+	[class^="wp-image-"]{
+		@include bnd((d:i));
+	}
 	&__thead,&__tfoot{
 		&.has-background-color{
 			@include bg((c:b));
@@ -36,9 +39,6 @@
 			&-th{
 				@include bnd((pd:20));
 				@include txt((a:c,p:40,h:1em,f:t,w:b,c:m,v:m));
-				small{
-					@include txt((p:40%));
-				}
 				.has-color-scheme-inverted &{
 					@include txt((c:i));
 				}
