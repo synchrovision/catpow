@@ -27,9 +27,6 @@
   margin: 0rem auto;
   border-style: none;
 }
-.wp-block-catpow-t-body img {
-  display: inline;
-}
 .wp-block-catpow-t-body__thead.has-background-color, .wp-block-catpow-t-body__tfoot.has-background-color {
   background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
 }

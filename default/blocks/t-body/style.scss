@@ -15,9 +15,6 @@
 	@include tbl(());
 	@include bnd((w:f,pd:0,mg:0 a));
 	@include bdr((s:n));
-	img{
-		@include bnd((d:i));
-	}
 	&__thead,&__tfoot{
 		&.has-background-color{
 			@include bg((c:b));
