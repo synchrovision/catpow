@@ -1,0 +1,32 @@
+.wp-block-catpow-t-list {
+  border-collapse: collapse;
+  border-spacing: 0px;
+  border-style: none;
+}
+.wp-block-catpow-t-list__item-marker, .wp-block-catpow-t-list__item-text {
+  padding-bottom: 0.5em;
+  border-style: none;
+  font-family: var(--cp-fonts-t);
+  line-height: 2em;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
+  vertical-align: top;
+}
+.has-color-scheme-inverted .wp-block-catpow-t-list__item-marker, .has-color-scheme-inverted .wp-block-catpow-t-list__item-text {
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+}
+.wp-block-catpow-t-list.has-font-size-x-small {
+  font-size: 0.75rem;
+}
+.wp-block-catpow-t-list.has-font-size-small {
+  font-size: 0.875rem;
+}
+.wp-block-catpow-t-list.has-font-size-middle {
+  font-size: 1rem;
+}
+.wp-block-catpow-t-list.has-font-size-large {
+  font-size: 1.25rem;
+}
+.wp-block-catpow-t-list.has-font-size-x-large {
+  font-size: 1.5rem;
+}
+/*# sourceMappingURL=./style.css.map */

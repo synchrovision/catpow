@@ -18,6 +18,7 @@ class mailconf extends article_type{
 		
 		'catpow/t-heading',
 		'catpow/t-paragraph',
+		'catpow/t-list',
 		
 		'catpow/t-button',
 		'catpow/t-banner',

@@ -1,0 +1,37 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-t-list{
+	$block:&;
+	@include tbl(());
+	@include bdr((s:n));
+	&__item{
+		&-marker,&-text{
+			@include bnd((pdb:.5em));
+			@include bdr((s:n));
+			@include txt((f:t,h:2em,c:t,v:t));
+			.has-color-scheme-inverted &{
+				@include txt((c:i));
+			}
+		}
+		&-marker{
+		}
+		&-text{
+
+		}
+	}
+	&.has-font-size-x-small{
+		@include txt((p:12));
+	}
+	&.has-font-size-small{
+		@include txt((p:14));
+	}
+	&.has-font-size-middle{
+		@include txt((p:16));
+	}
+	&.has-font-size-large{
+		@include txt((p:20));
+	}
+	&.has-font-size-x-large{
+		@include txt((p:24));
+	}
+}
