@@ -7,13 +7,13 @@
 	&__tbody{
 		&-tr{
 			&-td{
-				#{$block}.is-valign-top &{
+				#{$block}.has-vertical-align-top &{
 					@include txt((v:t));
 				}
-				#{$block}.is-valign-center &{
+				#{$block}.has-vertical-align-center &{
 					@include txt((v:m));
 				}
-				#{$block}.is-valign-bottom &{
+				#{$block}.has-vertical-align-bottom &{
 					@include txt((v:b));
 				}
 				&.is-image-cell{
