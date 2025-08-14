@@ -2,40 +2,40 @@
 
 .wp-block-catpow-t-heading{
 	$block:&;
-	@include bnd((mg:.5em a));
 	@include tbl(());
 	@include bdr((s:n));
 	&__tbody{
 		&-tr{
 			&-td{
-				@include bnd((pd:.5em 0));
 				@include bdr((s:n));
 				@include txt((f:h,c:t));
 				.has-color-scheme-inverted &{
 					@include txt((c:i));
 				}
 				#{$block}.has-heading-type-header &{
+					@include bnd((pd:.5em 0));
 					@include bdr((p:t b,s:s,w:1));
 				}
 				#{$block}.has-heading-type-headline &{
+					@include bnd((pdb:.5em));
 					@include bdr((p:b,s:s,w:1));
 				}
 			}
 		}
 	}
 	&.has-font-size-x-small{
-		@include txt((p:10));
+		@include txt((p:14));
 	}
 	&.has-font-size-small{
-		@include txt((p:12));
+		@include txt((p:18));
 	}
-	&.has-font-size-medium{
-		@include txt((p:16));
-	}
-	&.has-font-size-large{
+	&.has-font-size-middle{
 		@include txt((p:24));
 	}
+	&.has-font-size-large{
+		@include txt((p:32));
+	}
 	&.has-font-size-x-large{
-		@include txt((p:40));
+		@include txt((p:48));
 	}
 }
