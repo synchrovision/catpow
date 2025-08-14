@@ -2,7 +2,6 @@
 
 .wp-block-catpow-t-media-text{
 	$block:&;
-	@include bnd((mg:20 a));
 	@include bdr((s:n));
 	&__tbody{
 		&-tr{

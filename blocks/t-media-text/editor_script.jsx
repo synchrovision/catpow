@@ -12,14 +12,15 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 		alt: { source: "attribute", selector: "[src]", attribute: "alt" },
 		imageCode: { source: "text", selector: "td.is-image-cell", default: wpinfo.theme_url + "/images/dummy.jpg" },
 		width: { source: "attribute", selector: "td.is-image-cell", attribute: "width", default: "200" },
+		marginTop: { type: "number", default: 1 },
+		marginBottom: { type: "number", default: 1 },
 	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes }) {
 		const { useState, useMemo } = wp.element;
 		const { InnerBlocks, BlockControls, InspectorControls } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
-		const { classes, src, alt, imageCode, width } = attributes;
-		const primaryClass = "wp-block-catpow-t-media-text";
+		const { classes, marginTop, marginBottom, src, alt, imageCode, width } = attributes;
 		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
@@ -27,6 +28,8 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 				"imagePosition",
 				"verticalAlign",
 				{ name: "range", input: "range", label: "画像の幅", key: "width", min: 50, max: 400, step: 10 },
+				{ name: "marginTop", input: "range", label: "上余白", key: "marginTop", min: 0, max: 10 },
+				{ name: "marginBottom", input: "range", label: "下余白", key: "marginBottom", min: 0, max: 10 },
 				{
 					name: "template",
 					label: "テンプレート",
@@ -43,6 +46,11 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 				<CP.Bem prefix="wp-block-catpow">
 					<table width="100%" className={classes}>
 						<tbody>
+							{marginTop > 0 && (
+								<tr>
+									<td className="_td is-spacer-cell" style={{ height: `${marginTop}rem` }}></td>
+								</tr>
+							)}
 							{states.hasImageLeft ? (
 								<tr>
 									<td className="_td is-image-cell" width={width}>
@@ -80,6 +88,11 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 									</td>
 								</tr>
 							)}
+							{marginBottom > 0 && (
+								<tr>
+									<td className="_td is-spacer-cell" style={{ height: `${marginBottom}rem` }}></td>
+								</tr>
+							)}
 						</tbody>
 					</table>
 				</CP.Bem>
@@ -88,7 +101,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 					<CP.VerticalAlignClassToolbar set={setAttributes} attr={attributes} />
 				</BlockControls>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} initialOpen={true} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
@@ -99,13 +112,17 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 
 	save({ attributes, className, setAttributes }) {
 		const { InnerBlocks } = wp.blockEditor;
-		const { classes, src, alt, imageCode, width } = attributes;
-		const primaryClass = "wp-block-catpow-t-media-text";
+		const { classes, marginTop, marginBottom, src, alt, imageCode, width } = attributes;
 		var states = CP.classNamesToFlags(classes);
 		return (
 			<CP.Bem prefix="wp-block-catpow">
 				<table width="100%" className={classes}>
 					<tbody>
+						{marginTop > 0 && (
+							<tr>
+								<td className="_td is-spacer-cell" style={{ height: `${marginTop}rem` }}></td>
+							</tr>
+						)}
 						{states.hasImageLeft ? (
 							<tr>
 								<td className="_td is-image-cell" width={width}>
@@ -125,6 +142,11 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 								<td className="_td is-image-cell" width={width}>
 									<CP.ResponsiveImage attr={attributes} keys={{ src: "src", alt: "alt", code: "imageCode" }} size="large" width="100%" height="auto" isTemplate={states.isTemplate} />
 								</td>
+							</tr>
+						)}
+						{marginBottom > 0 && (
+							<tr>
+								<td className="_td is-spacer-cell" style={{ height: `${marginBottom}rem` }}></td>
 							</tr>
 						)}
 					</tbody>
