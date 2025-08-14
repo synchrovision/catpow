@@ -171,6 +171,16 @@ export const selectiveClassesPresets = {
 			hasFontWeightHeavy: "H",
 		},
 	},
+	headingType: {
+		name: "headingType",
+		type: "buttons",
+		label: __("見出しタイプ", "catpow"),
+		values: {
+			hasHeadingTypeHeader: __("ヘッダー", "catpow"),
+			hasHeadingTypeHeadline: __("ヘッドライン", "catpow"),
+			hasHeadingTypeCatch: __("キャッチ", "catpow"),
+		},
+	},
 	width: {
 		name: "width",
 		type: "buttons",
