@@ -8,15 +8,15 @@
 		&-tr{
 			&-td{
 				@include bdr((s:n));
-				@include txt((f:h,c:t));
+				@include txt((f:h,h:1.5em,c:t));
 				.has-color-scheme-inverted &{
 					@include txt((c:i));
 				}
-				#{$block}.has-heading-type-header &{
+				#{$block}.has-heading-type-header &.is-text-cell{
 					@include bnd((pd:.5em 0));
 					@include bdr((p:t b,s:s,w:1));
 				}
-				#{$block}.has-heading-type-headline &{
+				#{$block}.has-heading-type-headline &.is-text-cell{
 					@include bnd((pdb:.5em));
 					@include bdr((p:b,s:s,w:1));
 				}

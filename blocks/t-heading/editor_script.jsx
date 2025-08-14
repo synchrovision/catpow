@@ -34,10 +34,15 @@
 		};
 	},
 	attributes: {
-		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-heading header medium center" },
+		classes: {
+			source: "attribute",
+			selector: "table",
+			attribute: "class",
+			default: "wp-block-catpow-t-heading has-text-align-left has-font-weight-medium has-font-size-middle has-heading-type-headline",
+		},
 		marginTop: { type: "number", default: 1 },
 		marginBottom: { type: "number", default: 0.5 },
-		title: { source: "html", selector: "tbody td", default: "Title" },
+		title: { source: "html", selector: ".is-text-cell", default: "Title" },
 	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes, onReplace, mergeBlocks }) {
@@ -68,11 +73,11 @@
 						<tbody>
 							{marginTop > 0 && (
 								<tr>
-									<td style={{ height: `${marginTop}em` }}></td>
+									<td className="_td is-spacer-cell" style={{ height: `${marginTop}em` }}></td>
 								</tr>
 							)}
 							<tr>
-								<td>
+								<td className="_td is-text-cell">
 									<RichText
 										identifier="content"
 										onMerge={mergeBlocks}
@@ -99,7 +104,7 @@
 							</tr>
 							{marginBottom > 0 && (
 								<tr>
-									<td style={{ height: `${marginBottom}em` }}></td>
+									<td className="_td is-spacer-cell" style={{ height: `${marginBottom}em` }}></td>
 								</tr>
 							)}
 						</tbody>
@@ -109,7 +114,7 @@
 					<CP.AlignClassToolbar set={setAttributes} attr={attributes} />
 				</BlockControls>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} initialOpen={true} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
@@ -127,17 +132,17 @@
 					<tbody>
 						{marginTop > 0 && (
 							<tr>
-								<td style={{ height: `${marginTop}em` }}></td>
+								<td className="_td is-spacer-cell" style={{ height: `${marginTop}em` }}></td>
 							</tr>
 						)}
 						<tr>
-							<td>
+							<td className="_td is-text-cell">
 								<RichText.Content value={title} />
 							</td>
 						</tr>
 						{marginBottom > 0 && (
 							<tr>
-								<td style={{ height: `${marginBottom}em` }}></td>
+								<td className="_td is-spacer-cell" style={{ height: `${marginBottom}em` }}></td>
 							</tr>
 						)}
 					</tbody>
