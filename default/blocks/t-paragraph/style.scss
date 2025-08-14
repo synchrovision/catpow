@@ -1,29 +1,33 @@
 @import 'admin_style_config.scss';
 
 .wp-block-catpow-t-paragraph{
+	$block:&;
 	@include tbl(());
 	@include bdr((s:n));
-	&>tbody>tr>td{
-		@include bnd((pd:.5em 0));
-		@include bdr((s:n));
-		@include txt((f:t,h:2em,w:r,c:t));
+	&__tbody{
+		&-tr{
+			&-td{
+				@include bdr((s:n));
+				@include txt((f:t,h:2em,c:t));
+				.has-color-scheme-inverted &{
+					@include txt((c:i));
+				}
+			}
+		}
 	}
-	&.left{
-		@include txt((a:j));
+	&.has-font-size-x-small{
+		@include txt((p:12));
 	}
-	&.center{
-		@include txt((a:c));
-	}
-	&.right{
-		@include txt((a:r));
-	}
-	&.large{
-		@include txt((p:18));
-	}
-	&.medium{
+	&.has-font-size-small{
 		@include txt((p:14));
 	}
-	&.small{
-		@include txt((p:11));
+	&.has-font-size-middle{
+		@include txt((p:16));
+	}
+	&.has-font-size-large{
+		@include txt((p:20));
+	}
+	&.has-font-size-x-large{
+		@include txt((p:24));
 	}
 }
