@@ -47,43 +47,45 @@
 		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = ["color", { name: "type", label: "タイプ", values: ["header", "headline", "catch"] }, { name: "size", label: "サイズ", values: ["large", "medium", "small"] }];
+			const selectiveClasses = ["headingType", "textAlign", "fontSize", "fontWeight"];
 			wp.hooks.applyFilters("catpow.blocks.t-heading.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
 
 		return (
 			<>
-				<table width="100%" className={classes}>
-					<tbody>
-						<tr>
-							<td>
-								<RichText
-									identifier="content"
-									onMerge={mergeBlocks}
-									multiline={false}
-									onSplit={(val) => {
-										if (!val) {
-											return wp.blocks.createBlock("catpow/t-paragraph", {
-												classes: "wp-block-catpow-t-paragraph left medium",
+				<CP.Bem prefix="wp-block-catpow">
+					<table width="100%" className={classes}>
+						<tbody>
+							<tr>
+								<td>
+									<RichText
+										identifier="content"
+										onMerge={mergeBlocks}
+										multiline={false}
+										onSplit={(val) => {
+											if (!val) {
+												return wp.blocks.createBlock("catpow/t-paragraph", {
+													classes: "wp-block-catpow-t-paragraph has-text-align-left has-font-size-medium",
+												});
+											}
+											return wp.blocks.createBlock("catpow/t-heading", {
+												...attributes,
+												title: val,
 											});
-										}
-										return wp.blocks.createBlock("catpow/t-heading", {
-											...attributes,
-											title: val,
-										});
-									}}
-									onReplace={onReplace}
-									onRemove={() => onReplace([])}
-									onChange={(title) => {
-										setAttributes({ title });
-									}}
-									value={title}
-								/>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+										}}
+										onReplace={onReplace}
+										onRemove={() => onReplace([])}
+										onChange={(title) => {
+											setAttributes({ title });
+										}}
+										value={title}
+									/>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</CP.Bem>
 				<BlockControls>
 					<CP.AlignClassToolbar set={setAttributes} attr={attributes} />
 				</BlockControls>
@@ -100,17 +102,18 @@
 	save({ attributes, className, setAttributes }) {
 		const { RichText } = wp.blockEditor;
 		const { classes, title } = attributes;
-		const primaryClass = "wp-block-catpow-t-heading";
 		return (
-			<table width="100%" className={classes}>
-				<tbody>
-					<tr>
-						<td>
-							<RichText.Content value={title} />
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			<CP.Bem prefix="wp-block-catpow">
+				<table width="100%" className={classes}>
+					<tbody>
+						<tr>
+							<td>
+								<RichText.Content value={title} />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</CP.Bem>
 		);
 	},
 });
