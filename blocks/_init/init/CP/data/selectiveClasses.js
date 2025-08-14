@@ -138,6 +138,15 @@ export const selectiveClassesPresets = {
 			hasVerticalAlignBottom: __("下揃え", "catpow"),
 		},
 	},
+	imagePosition: {
+		name: "imagePosition",
+		type: "buttons",
+		label: __("画像位置", "catpow"),
+		values: {
+			hasImageLeft: __("左", "catpow"),
+			hasImageRight: __("右", "catpow"),
+		},
+	},
 	fontSize: {
 		name: "fontSize",
 		type: "buttons",
