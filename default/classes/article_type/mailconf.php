@@ -20,6 +20,7 @@ class mailconf extends article_type{
 		'catpow/t-paragraph',
 		
 		'catpow/t-button',
+		'catpow/t-banner',
 	];
 	public function __construct($data_path,$conf,$data){
 		
