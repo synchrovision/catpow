@@ -150,6 +150,18 @@ export const selectiveClassesPresets = {
 			hasFontSizeXSmall: __("極小", "catpow"),
 		},
 	},
+	fontWeight: {
+		name: "fontWeight",
+		type: "buttons",
+		label: __("文字ウェイト", "catpow"),
+		values: {
+			hasFontWeightLight: "L",
+			hasFontWeightRegular: "R",
+			hasFontWeightMedium: "M",
+			hasFontWeightBold: "B",
+			hasFontWeightHeavy: "H",
+		},
+	},
 	width: {
 		name: "width",
 		type: "buttons",
