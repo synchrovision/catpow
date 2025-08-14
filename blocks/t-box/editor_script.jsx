@@ -8,20 +8,21 @@ wp.blocks.registerBlockType("catpow/t-box", {
 	parent: CP.mailContensContainer,
 	attributes: {
 		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-box has-mail-content-width" },
+		width: { source: "attribute", selector: "table", attribute: "width", default: "600" },
+		padding: { source: "attribute", selector: "table", attribute: "cellpadding", default: "0" },
 	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes }) {
 		const { useState, useMemo } = wp.element;
 		const { InnerBlocks, InspectorControls } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
-		const { classes } = attributes;
-		const primaryClass = "wp-block-catpow-t-box";
+		const { classes, width, padding } = attributes;
 		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				{ label: __("メールコンテンツ幅", "catpow"), values: "hasMailContentWidth" },
-				{ label: __("余白", "catpow"), values: "hasPadding" },
+				{ name: "range", input: "range", label: __("幅", "catpow"), key: "width", min: 400, max: 800, step: 10 },
+				{ name: "range", input: "range", label: __("余白", "catpow"), key: "padding", min: 0, max: 100, step: 5 },
 			];
 			wp.hooks.applyFilters("catpow.blocks.t-box.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -30,7 +31,7 @@ wp.blocks.registerBlockType("catpow/t-box", {
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<table width={states.hasMailContentWidth ? "600" : "100%"} align="center" className={classes}>
+					<table width={width} cellPadding={padding} style={{ width: `${width}px`, padding: `${padding}px` }} align="center" className={classes}>
 						<tbody>
 							<tr>
 								<td>
@@ -52,11 +53,11 @@ wp.blocks.registerBlockType("catpow/t-box", {
 
 	save({ attributes, className, setAttributes }) {
 		const { InnerBlocks } = wp.blockEditor;
-		const { classes } = attributes;
+		const { classes, width, padding } = attributes;
 		var states = CP.classNamesToFlags(classes);
 		return (
 			<CP.Bem prefix="wp-block-catpow">
-				<table width={states.hasMailContentWidth ? "600" : "100%"} align="center" className={classes}>
+				<table width={width} cellPadding={padding} style={{ width: `${width}px`, padding: `${padding}px` }} align="center" className={classes}>
 					<tbody>
 						<tr>
 							<td>

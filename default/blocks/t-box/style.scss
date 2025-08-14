@@ -2,13 +2,4 @@
 
 .wp-block-catpow-t-box{
 	@include tbl(());
-	&.has-padding &{
-		&__tbody{
-			&-tr{
-				&-td{
-					@include bnd((pd:1.5em));
-				}
-			}
-		}
-	}
 }
