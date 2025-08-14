@@ -25,6 +25,7 @@ export * from "./ItemControlInfoPanel.jsx";
 export * from "./SelectClassPanel.jsx";
 export * from "./AlignClassToolbar.jsx";
 export * from "./VerticalAlignClassToolbar.jsx";
+export * from "./ImagePositionClassToolbar.jsx";
 export * from "./PositionInput.jsx";
 export * from "./SelectColorClass.jsx";
 export * from "./SelectPatternClass.jsx";
