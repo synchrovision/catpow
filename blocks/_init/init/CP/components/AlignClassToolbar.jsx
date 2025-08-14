@@ -1,29 +1,18 @@
 ﻿const { useMemo } = wp.element;
 
 export const AlignClassToolbar = (props) => {
+	const { set, attr, classKey = "classes", aligns = { left: "is-align-left", center: "is-align-center", right: "is-align-right" } } = props;
 	const { BlockAlignmentToolbar } = wp.blockEditor;
-	const { aligns = { isAlignLeft: "left", isAlignCenter: "center", isAlignRight: "right" } } = props;
 
-	const options = useMemo(() => {
-		const options = {};
-		if (Array.isArray(aligns)) {
-			for (const val of aligns) {
-				options[val] = val;
-			}
-		} else {
-			for (const [key, val] of Object.entries(aligns)) {
-				options[val] = key;
-			}
-		}
-		return options;
-	}, [aligns]);
+	const classSet = useMemo(() => new Set(attr[classKey]?.split(" ") || []), [attr[classKey]]);
+	const alignClassSet = useMemo(() => new Set(Object.values(aligns)), [aligns]);
 
 	return (
 		<BlockAlignmentToolbar
-			value={CP.getSelectiveClassLabel(props, aligns)}
-			controls={Object.keys(options)}
+			value={Object.entries(aligns).find(([key, val]) => classSet.has(val))?.[0] || "left"}
+			controls={Object.keys(aligns)}
 			onChange={(align) => {
-				CP.switchSelectiveClass(props, Object.values(options), options[align], props.key);
+				set({ [classKey]: [...classSet.difference(alignClassSet).add(aligns[align])].join(" ") });
 			}}
 		/>
 	);
