@@ -35,6 +35,8 @@
 	},
 	attributes: {
 		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-heading header medium center" },
+		marginTop: { type: "number", default: 1 },
+		marginBottom: { type: "number", default: 0.5 },
 		title: { source: "html", selector: "tbody td", default: "Title" },
 	},
 	example: CP.example,
@@ -42,12 +44,19 @@
 		const { useState, useMemo } = wp.element;
 		const { BlockControls, InspectorControls, RichText } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
-		const { classes, title } = attributes;
+		const { classes, marginTop, marginBottom, title } = attributes;
 		const primaryClass = "wp-block-catpow-t-heading";
 		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = ["headingType", "textAlign", "fontSize", "fontWeight"];
+			const selectiveClasses = [
+				"headingType",
+				"textAlign",
+				"fontSize",
+				"fontWeight",
+				{ name: "marginTop", input: "range", label: "上余白", key: "marginTop", min: 0, max: 2, step: 0.25 },
+				{ name: "marginBottom", input: "range", label: "下余白", key: "marginBottom", min: 0, max: 2, step: 0.25 },
+			];
 			wp.hooks.applyFilters("catpow.blocks.t-heading.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
@@ -57,6 +66,11 @@
 				<CP.Bem prefix="wp-block-catpow">
 					<table width="100%" className={classes}>
 						<tbody>
+							{marginTop > 0 && (
+								<tr>
+									<td style={{ height: `${marginTop}em` }}></td>
+								</tr>
+							)}
 							<tr>
 								<td>
 									<RichText
@@ -83,6 +97,11 @@
 									/>
 								</td>
 							</tr>
+							{marginBottom > 0 && (
+								<tr>
+									<td style={{ height: `${marginBottom}em` }}></td>
+								</tr>
+							)}
 						</tbody>
 					</table>
 				</CP.Bem>
@@ -101,16 +120,26 @@
 
 	save({ attributes, className, setAttributes }) {
 		const { RichText } = wp.blockEditor;
-		const { classes, title } = attributes;
+		const { classes, marginTop, marginBottom, title } = attributes;
 		return (
 			<CP.Bem prefix="wp-block-catpow">
 				<table width="100%" className={classes}>
 					<tbody>
+						{marginTop > 0 && (
+							<tr>
+								<td style={{ height: `${marginTop}em` }}></td>
+							</tr>
+						)}
 						<tr>
 							<td>
 								<RichText.Content value={title} />
 							</td>
 						</tr>
+						{marginBottom > 0 && (
+							<tr>
+								<td style={{ height: `${marginBottom}em` }}></td>
+							</tr>
+						)}
 					</tbody>
 				</table>
 			</CP.Bem>
