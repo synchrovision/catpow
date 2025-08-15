@@ -9,6 +9,7 @@ wp.blocks.registerBlockType("catpow/t-list", {
 	attributes: {
 		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-list has-font-weight-regular is-ordered has-font-size-middle has-marker-color-main" },
 		marginTop: { type: "number", default: 0.5 },
+		marginBetween: { type: "number", default: 0.5 },
 		marginBottom: { type: "number", default: 0.5 },
 		markerSize: { type: "string", default: "1em" },
 		markerWidth: { type: "string", default: "1.5em" },
@@ -43,15 +44,16 @@ wp.blocks.registerBlockType("catpow/t-list", {
 		const { useState, useMemo } = wp.element;
 		const { InspectorControls, RichText } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
-		const { classes, marginTop, marginBottom, markerSize, markerWidth, markerAlign, markerMargin, markerClasses, markerIndexSize, markerIndexPad, prefix, suffix, items } = attributes;
+		const { classes, marginTop, marginBottom, marginBetween, markerSize, markerWidth, markerAlign, markerMargin, markerClasses, markerIndexSize, markerIndexPad, prefix, suffix, items } = attributes;
 		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
 				"fontSize",
 				"fontWeight",
-				{ name: "marginTop", input: "range", label: "上余白", key: "marginTop", min: 0, max: 2, step: 0.25 },
-				{ name: "marginBottom", input: "range", label: "下余白", key: "marginBottom", min: 0, max: 2, step: 0.25 },
+				{ name: "marginTop", input: "range", label: "上間隔", key: "marginTop", min: 0, max: 4, step: 0.25 },
+				{ name: "marginBetween", input: "range", label: "間隔", key: "marginBetween", min: 0, max: 4, step: 0.25 },
+				{ name: "marginBottom", input: "range", label: "下間隔", key: "marginBottom", min: 0, max: 4, step: 0.25 },
 				{
 					name: "isOrdered",
 					label: __("番号付きリスト", "catpow"),
@@ -93,43 +95,50 @@ wp.blocks.registerBlockType("catpow/t-list", {
 								</tr>
 							)}
 							{items.map((item, index) => (
-								<tr className="item_">
-									<td className={markerClasses} width={markerWidth} align={markerAlign} style={{ width: markerWidth, textAlign: markerAlign, fontSize: markerSize }}>
+								<>
+									{index > 0 && (
+										<tr>
+											<td className="_td is-spacer-cell" style={{ height: `${marginBetween}em` }} colspan="3"></td>
+										</tr>
+									)}
+									<tr className="item_">
+										<td className={markerClasses} width={markerWidth} align={markerAlign} style={{ width: markerWidth, textAlign: markerAlign, fontSize: markerSize }}>
+											<RichText
+												className="_prefix"
+												tagName="span"
+												onChange={(prefix) => {
+													setAttributes({ prefix });
+												}}
+												value={prefix}
+											/>
+											{states.isOrdered && (
+												<>
+													<span className="_index" style={{ fontSize: markerIndexSize }}>
+														{markerIndexPad > 1 ? (index + 1).toString().padStart(markerIndexPad, "0") : index + 1}
+													</span>
+													<RichText
+														className="_suffix"
+														tagName="span"
+														onChange={(suffix) => {
+															setAttributes({ suffix });
+														}}
+														value={suffix}
+													/>
+												</>
+											)}
+										</td>
+										<td className="_spacer" width={markerMargin} style={{ width: markerMargin }}></td>
 										<RichText
-											className="_prefix"
-											tagName="span"
-											onChange={(prefix) => {
-												setAttributes({ prefix });
+											className="_text"
+											tagName="td"
+											onChange={(text) => {
+												items[index].text = text;
+												setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 											}}
-											value={prefix}
+											value={item.text}
 										/>
-										{states.isOrdered && (
-											<>
-												<span className="_index" style={{ fontSize: markerIndexSize }}>
-													{markerIndexPad > 1 ? (index + 1).toString().padStart(markerIndexPad, "0") : index + 1}
-												</span>
-												<RichText
-													className="_suffix"
-													tagName="span"
-													onChange={(suffix) => {
-														setAttributes({ suffix });
-													}}
-													value={suffix}
-												/>
-											</>
-										)}
-									</td>
-									<td className="_spacer" width={markerMargin} style={{ width: markerMargin }}></td>
-									<RichText
-										className="_text"
-										tagName="td"
-										onChange={(text) => {
-											items[index].text = text;
-											setAttributes({ items: JSON.parse(JSON.stringify(items)) });
-										}}
-										value={item.text}
-									/>
-								</tr>
+									</tr>
+								</>
 							))}
 							{marginBottom > 0 && (
 								<tr>
@@ -151,7 +160,7 @@ wp.blocks.registerBlockType("catpow/t-list", {
 
 	save({ attributes, className, setAttributes }) {
 		const { RichText } = wp.blockEditor;
-		const { classes, marginTop, marginBottom, markerSize, markerWidth, markerAlign, markerMargin, markerClasses, markerIndexSize, markerIndexPad, prefix, suffix, items } = attributes;
+		const { classes, marginTop, marginBottom, marginBetween, markerSize, markerWidth, markerAlign, markerMargin, markerClasses, markerIndexSize, markerIndexPad, prefix, suffix, items } = attributes;
 		var states = CP.classNamesToFlags(classes);
 
 		return (
@@ -164,21 +173,28 @@ wp.blocks.registerBlockType("catpow/t-list", {
 							</tr>
 						)}
 						{items.map((item, index) => (
-							<tr className="item_">
-								<td className={markerClasses} width={markerWidth} align={markerAlign} style={{ width: markerWidth, textAlign: markerAlign, fontSize: markerSize }}>
-									<RichText.Content className="_prefix" tagName="span" value={prefix} />
-									{states.isOrdered && (
-										<>
-											<span className="_index" style={{ fontSize: markerIndexSize }}>
-												{markerIndexPad > 1 ? (index + 1).toString().padStart(markerIndexPad, "0") : index + 1}
-											</span>
-											<RichText.Content className="_suffix" tagName="span" value={suffix} />
-										</>
-									)}
-								</td>
-								<td className="_spacer" width={markerMargin} style={{ width: markerMargin }}></td>
-								<RichText.Content className="_text" tagName="td" value={item.text} />
-							</tr>
+							<>
+								{index > 0 && (
+									<tr>
+										<td className="_td is-spacer-cell" style={{ height: `${marginBetween}em` }} colspan="3"></td>
+									</tr>
+								)}
+								<tr className="item_">
+									<td className={markerClasses} width={markerWidth} align={markerAlign} style={{ width: markerWidth, textAlign: markerAlign, fontSize: markerSize }}>
+										<RichText.Content className="_prefix" tagName="span" value={prefix} />
+										{states.isOrdered && (
+											<>
+												<span className="_index" style={{ fontSize: markerIndexSize }}>
+													{markerIndexPad > 1 ? (index + 1).toString().padStart(markerIndexPad, "0") : index + 1}
+												</span>
+												<RichText.Content className="_suffix" tagName="span" value={suffix} />
+											</>
+										)}
+									</td>
+									<td className="_spacer" width={markerMargin} style={{ width: markerMargin }}></td>
+									<RichText.Content className="_text" tagName="td" value={item.text} />
+								</tr>
+							</>
 						))}
 						{marginBottom > 0 && (
 							<tr>

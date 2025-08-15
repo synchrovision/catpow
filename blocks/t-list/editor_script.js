@@ -10,6 +10,7 @@
     attributes: {
       classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-list has-font-weight-regular is-ordered has-font-size-middle has-marker-color-main" },
       marginTop: { type: "number", default: 0.5 },
+      marginBetween: { type: "number", default: 0.5 },
       marginBottom: { type: "number", default: 0.5 },
       markerSize: { type: "string", default: "1em" },
       markerWidth: { type: "string", default: "1.5em" },
@@ -44,14 +45,15 @@
       const { useState, useMemo } = wp.element;
       const { InspectorControls, RichText } = wp.blockEditor;
       const { PanelBody, TextareaControl } = wp.components;
-      const { classes, marginTop, marginBottom, markerSize, markerWidth, markerAlign, markerMargin, markerClasses, markerIndexSize, markerIndexPad, prefix, suffix, items } = attributes;
+      const { classes, marginTop, marginBottom, marginBetween, markerSize, markerWidth, markerAlign, markerMargin, markerClasses, markerIndexSize, markerIndexPad, prefix, suffix, items } = attributes;
       var states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
           "fontSize",
           "fontWeight",
-          { name: "marginTop", input: "range", label: "\u4E0A\u4F59\u767D", key: "marginTop", min: 0, max: 2, step: 0.25 },
-          { name: "marginBottom", input: "range", label: "\u4E0B\u4F59\u767D", key: "marginBottom", min: 0, max: 2, step: 0.25 },
+          { name: "marginTop", input: "range", label: "\u4E0A\u9593\u9694", key: "marginTop", min: 0, max: 4, step: 0.25 },
+          { name: "marginBetween", input: "range", label: "\u9593\u9694", key: "marginBetween", min: 0, max: 4, step: 0.25 },
+          { name: "marginBottom", input: "range", label: "\u4E0B\u9593\u9694", key: "marginBottom", min: 0, max: 4, step: 0.25 },
           {
             name: "isOrdered",
             label: __("\u756A\u53F7\u4ED8\u304D\u30EA\u30B9\u30C8", "catpow"),
@@ -81,7 +83,7 @@
         wp.hooks.applyFilters("catpow.blocks.t-list.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { className: classes, width: "100%", align: "center" }, /* @__PURE__ */ wp.element.createElement("tbody", null, marginTop > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginTop}em` }, colspan: "3" })), items.map((item, index) => /* @__PURE__ */ wp.element.createElement("tr", { className: "item_" }, /* @__PURE__ */ wp.element.createElement("td", { className: markerClasses, width: markerWidth, align: markerAlign, style: { width: markerWidth, textAlign: markerAlign, fontSize: markerSize } }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { className: classes, width: "100%", align: "center" }, /* @__PURE__ */ wp.element.createElement("tbody", null, marginTop > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginTop}em` }, colspan: "3" })), items.map((item, index) => /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, index > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginBetween}em` }, colspan: "3" })), /* @__PURE__ */ wp.element.createElement("tr", { className: "item_" }, /* @__PURE__ */ wp.element.createElement("td", { className: markerClasses, width: markerWidth, align: markerAlign, style: { width: markerWidth, textAlign: markerAlign, fontSize: markerSize } }, /* @__PURE__ */ wp.element.createElement(
         RichText,
         {
           className: "_prefix",
@@ -112,13 +114,13 @@
           },
           value: item.text
         }
-      ))), marginBottom > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginBottom}em` }, colspan: "3" }))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
+      )))), marginBottom > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginBottom}em` }, colspan: "3" }))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
     },
     save({ attributes, className, setAttributes }) {
       const { RichText } = wp.blockEditor;
-      const { classes, marginTop, marginBottom, markerSize, markerWidth, markerAlign, markerMargin, markerClasses, markerIndexSize, markerIndexPad, prefix, suffix, items } = attributes;
+      const { classes, marginTop, marginBottom, marginBetween, markerSize, markerWidth, markerAlign, markerMargin, markerClasses, markerIndexSize, markerIndexPad, prefix, suffix, items } = attributes;
       var states = CP.classNamesToFlags(classes);
-      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { className: classes, width: "100%", align: "center" }, /* @__PURE__ */ wp.element.createElement("tbody", null, marginTop > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginTop}em` }, colspan: "3" })), items.map((item, index) => /* @__PURE__ */ wp.element.createElement("tr", { className: "item_" }, /* @__PURE__ */ wp.element.createElement("td", { className: markerClasses, width: markerWidth, align: markerAlign, style: { width: markerWidth, textAlign: markerAlign, fontSize: markerSize } }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { className: "_prefix", tagName: "span", value: prefix }), states.isOrdered && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("span", { className: "_index", style: { fontSize: markerIndexSize } }, markerIndexPad > 1 ? (index + 1).toString().padStart(markerIndexPad, "0") : index + 1), /* @__PURE__ */ wp.element.createElement(RichText.Content, { className: "_suffix", tagName: "span", value: suffix }))), /* @__PURE__ */ wp.element.createElement("td", { className: "_spacer", width: markerMargin, style: { width: markerMargin } }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { className: "_text", tagName: "td", value: item.text }))), marginBottom > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginBottom}em` }, colspan: "3" })))));
+      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { className: classes, width: "100%", align: "center" }, /* @__PURE__ */ wp.element.createElement("tbody", null, marginTop > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginTop}em` }, colspan: "3" })), items.map((item, index) => /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, index > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginBetween}em` }, colspan: "3" })), /* @__PURE__ */ wp.element.createElement("tr", { className: "item_" }, /* @__PURE__ */ wp.element.createElement("td", { className: markerClasses, width: markerWidth, align: markerAlign, style: { width: markerWidth, textAlign: markerAlign, fontSize: markerSize } }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { className: "_prefix", tagName: "span", value: prefix }), states.isOrdered && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("span", { className: "_index", style: { fontSize: markerIndexSize } }, markerIndexPad > 1 ? (index + 1).toString().padStart(markerIndexPad, "0") : index + 1), /* @__PURE__ */ wp.element.createElement(RichText.Content, { className: "_suffix", tagName: "span", value: suffix }))), /* @__PURE__ */ wp.element.createElement("td", { className: "_spacer", width: markerMargin, style: { width: markerMargin } }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { className: "_text", tagName: "td", value: item.text })))), marginBottom > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginBottom}em` }, colspan: "3" })))));
     }
   });
 })();
