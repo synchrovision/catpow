@@ -17,6 +17,7 @@
   position: relative;
   padding: 1em 2em 1em 1.5em;
   background-color: transparent;
+  border-radius: 2em;
   text-align: center;
   color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
   font-family: var(--cp-fonts-t);
@@ -57,6 +58,7 @@
   flex-shrink: 0;
   flex-basis: 16em;
   margin: 0rem;
+  overflow: hidden;
   border-style: solid;
   border-width: 0.0625rem;
   border-radius: 2em;
