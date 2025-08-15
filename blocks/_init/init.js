@@ -6517,12 +6517,16 @@
       return color === "0" || context["catpow/color"] === color;
     }, [color, context["catpow/color"]]);
     useEffect4(() => {
+      if (context["catpow/color"] == null) {
+        return;
+      }
       if (inheritColor && context["catpow/color"] !== "0") {
         setAttributes({ color: context["catpow/color"] });
       }
       setAttributes({ inheritColor: color === context["catpow/color"] });
     }, [context["catpow/color"]]);
     useEffect4(() => {
+      return;
       const atts = {
         classes: classes.split(" ").filter((str) => !colorToneClassPattern.test(str)).concat(colorToneValueToClasses(color)).join(" ")
       };
@@ -6585,7 +6589,7 @@
     return classes;
   };
   var colorToneValuePattern = /^((|_|\-\-)(\-?\d+))?(s(\-?\d+))?(l(\-?\d+))?$/;
-  var colorToneClassPattern = /^(has\-color((|_|\-\-)(\-?\d+)))|(tone\-((s|l)(\-?\d+)))$/;
+  var colorToneClassPattern = /^(has\-color((|_|\-\-)(\-?\d+)))|(has\-tone\-((s|l)(\-?\d+)))$/;
   var parseColorClass = (colorClass) => {
     if (colorClass) {
       const matches = colorClass.match(colorClassPattern);
