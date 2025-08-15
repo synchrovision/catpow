@@ -11,10 +11,10 @@ class SelectPostColor extends UI{
 			"SELECT meta_value FROM {$wpdb->postmeta} ".
 			"WHERE post_id = %d ".
 			"AND meta_key = 'post_class' ".
-			"AND (meta_value LIKE 'color%' OR meta_value LIKE 'tone%')",
+			"AND (meta_value LIKE 'has-color%' OR meta_value LIKE 'has-tone%')",
 			$id
 		),0)){return [implode(' ',$colors)];}
-		return ['color0'];
+		return ['has-color0'];
 	}
 	public static function set($data_type,$data_name,$id,$meta_name,$vals,$conf){
 		global $wpdb;
@@ -22,7 +22,7 @@ class SelectPostColor extends UI{
 			"DELETE FROM {$wpdb->postmeta} ".
 			"WHERE post_id = %d ".
 			"AND meta_key = 'post_class' ".
-			"AND (meta_value LIKE 'color%' OR meta_value LIKE 'tone%')",
+			"AND (meta_value LIKE 'has-color%' OR meta_value LIKE 'has-tone%')",
 			$id
 		));
 		foreach($vals[0] as $val){

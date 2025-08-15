@@ -47,7 +47,7 @@ Catpow.colorTone = {
 		return classes;
 	},
 	colorToneValuePattern: /^((|_|\-\-)(\-?\d+))?(s(\-?\d+))?(l(\-?\d+))?$/,
-	colorToneClassPattern: /^(color((|_|\-\-)(\-?\d+)))|(tone\-((s|l)(\-?\d+)))$/,
+	colorToneClassPattern: /^(has\-color((|_|\-\-)(\-?\d+)))|(has\-tone\-((s|l)(\-?\d+)))$/,
 	parseColorClass: (colorClass) => {
 		if (colorClass) {
 			const matches = colorClass.match(Catpow.colorTone.colorClassPattern);
@@ -62,8 +62,8 @@ Catpow.colorTone = {
 		}
 		return { fixed: false, absolute: false, relative: false, value: 0 };
 	},
-	generateColorClass: (data) => "color" + (data.fixed ? "--" : data.relative ? "_" : "") + data.value,
-	colorClassPattern: /^color((|_|\-\-)(\-?\d+))$/,
+	generateColorClass: (data) => "has-color" + (data.fixed ? "--" : data.relative ? "_" : "") + data.value,
+	colorClassPattern: /^has\-color((|_|\-\-)(\-?\d+))$/,
 	parseToneClass: (toneClass) => {
 		if (toneClass) {
 			const matches = toneClass.match(Catpow.colorTone.toneClassPattern);
@@ -77,8 +77,8 @@ Catpow.colorTone = {
 		}
 		return { s: false, l: false, value: 0 };
 	},
-	generateToneClass: (data) => "tone-" + (data.s ? "s" : "l") + data.value,
-	toneClassPattern: /^tone\-((s|l)(\-?\d+))$/,
+	generateToneClass: (data) => "has-tone-" + (data.s ? "s" : "l") + data.value,
+	toneClassPattern: /^has\-tone\-((s|l)(\-?\d+))$/,
 	colorClassProxy: (state) => {
 		if (typeof state === "string" || Array.isArray(state)) {
 			state = Catpow.util.wordsToFlags(state);
