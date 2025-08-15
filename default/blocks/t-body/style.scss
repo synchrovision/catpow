@@ -2,14 +2,11 @@
 
 .cp-mail-body{
 	&.has-bg-white{@include bg((c:white));}
-	&.has-bg-normal{@include bg((c:b));}
-	&.has-bg-strong{@include bg((c:s));}
+	&.has-bg-b{@include bg((c:b));}
+	&.has-bg-s{@include bg((c:s));}
 	&.has-bg-black{@include bg((c:black));}
-	&.has-color-scheme-inverted{
-		p{@include txt((c:i));}
-		&.has-bg-normal{@include bg((c:m));}
-		&.has-bg-strong{@include bg((c:a));}
-	}
+	&.has-bg-m{@include bg((c:m));}
+	&.has-bg-a{@include bg((c:a));}
 }
 .wp-block-catpow-t-body{
 	@include tbl(());

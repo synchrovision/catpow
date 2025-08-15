@@ -1,22 +1,19 @@
 .cp-mail-body.has-bg-white {
   background-color: white;
 }
-.cp-mail-body.has-bg-normal {
+.cp-mail-body.has-bg-b {
   background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
 }
-.cp-mail-body.has-bg-strong {
+.cp-mail-body.has-bg-s {
   background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a,1));
 }
 .cp-mail-body.has-bg-black {
   background-color: black;
 }
-.cp-mail-body.has-color-scheme-inverted p {
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
-}
-.cp-mail-body.has-color-scheme-inverted.has-bg-normal {
+.cp-mail-body.has-bg-m {
   background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
 }
-.cp-mail-body.has-color-scheme-inverted.has-bg-strong {
+.cp-mail-body.has-bg-a {
   background-color: hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),var(--cp-tones-a-l),var(--cp-tones-a-a,1));
 }
 .wp-block-catpow-t-body {

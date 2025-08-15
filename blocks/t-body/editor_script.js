@@ -39,8 +39,13 @@
             sub: {
               html: [
                 { name: "textMode", input: "bool", label: "\u30C6\u30AD\u30B9\u30C8\u30E1\u30FC\u30EB\u7DE8\u96C6\u30E2\u30FC\u30C9", key: "TextMode" },
-                { preset: "colorScheme", classKey: "body_class" },
-                { name: "body", type: "buttons", label: "\u80CC\u666F\u8272", values: { hasBgWhite: "\u767D", hasBgNormal: "\u901A\u5E38", hasBgStrong: "\u5F37\u8ABF", hasBgBlack: "\u9ED2" }, classKey: "body_class" },
+                {
+                  name: "body",
+                  type: "gridbuttons",
+                  label: "\u80CC\u666F\u8272",
+                  values: { hasBgWhite: "\u767D", hasBgB: "\u80CC\u666F\u8272", hasBgS: "\u5F37\u8ABF\u80CC\u666F\u8272", hasBgBlack: "\u9ED2", hasBgM: "\u57FA\u672C\u8272", hasBgA: "\u5F37\u8ABF\u8272" },
+                  classKey: "body_class"
+                },
                 {
                   name: "header",
                   label: "\u30D8\u30C3\u30C0",
@@ -97,7 +102,7 @@
             }
           ]
         }
-      )), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
+      )), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks, RichText } = wp.blockEditor;

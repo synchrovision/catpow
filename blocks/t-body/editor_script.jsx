@@ -39,8 +39,13 @@ wp.blocks.registerBlockType("catpow/t-body", {
 					sub: {
 						html: [
 							{ name: "textMode", input: "bool", label: "テキストメール編集モード", key: "TextMode" },
-							{ preset: "colorScheme", classKey: "body_class" },
-							{ name: "body", type: "buttons", label: "背景色", values: { hasBgWhite: "白", hasBgNormal: "通常", hasBgStrong: "強調", hasBgBlack: "黒" }, classKey: "body_class" },
+							{
+								name: "body",
+								type: "gridbuttons",
+								label: "背景色",
+								values: { hasBgWhite: "白", hasBgB: "背景色", hasBgS: "強調背景色", hasBgBlack: "黒", hasBgM: "基本色", hasBgA: "強調色" },
+								classKey: "body_class",
+							},
 							{
 								name: "header",
 								label: "ヘッダ",
@@ -132,7 +137,7 @@ wp.blocks.registerBlockType("catpow/t-body", {
 							]}
 						/>
 					</BlockControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} initialOpen={true} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
