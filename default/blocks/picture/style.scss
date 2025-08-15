@@ -3,7 +3,7 @@
 .wp-block-catpow-picture{
 	@include bnd((mgi:a));
 	&__picture{
-		&-img{
+		img,video,&-img{
 			@include bnd((d:b,w:f,h:a,mgi:a));
 		}
 	}
