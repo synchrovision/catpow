@@ -2036,6 +2036,7 @@ class CP{
 			if(is_array($conf['type'])){$conf['type']=reset($conf['type']);}
 			
 			if($conf['type']==='html'){
+				if(current_user_can('edit_themes')){scss::compile(['mail']);}
 				$styles=[self::get_file_path('mail.css',0733)=>true];
 				$body_class='';
 				$GLOBALS['wp_filter']['render_block']->callbacks[10]['collect_styles']=[
