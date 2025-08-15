@@ -7,7 +7,7 @@ wp.blocks.registerBlockType("catpow/t-box", {
 	category: "catpow-mail",
 	parent: CP.mailContensContainer,
 	attributes: {
-		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-box has-mail-content-width" },
+		classes: { source: "attribute", selector: ".wp-block-catpow-t-box", attribute: "class", default: "wp-block-catpow-t-box has-mail-content-width" },
 		width: { source: "attribute", selector: "table", attribute: "width", default: "600" },
 		padding: { source: "attribute", selector: "table", attribute: "cellpadding", default: "0" },
 	},
@@ -21,6 +21,8 @@ wp.blocks.registerBlockType("catpow/t-box", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
+				"colorScheme",
+				{ name: "body", type: "buttons", label: "背景色", values: { hasBgNone: "なし", hasBgNormal: "通常", hasBgStrong: "強調", hasBgAchromatic: "白黒" } },
 				{ name: "range", input: "range", label: __("幅", "catpow"), key: "width", min: 400, max: 800, step: 10 },
 				{ name: "range", input: "range", label: __("余白", "catpow"), key: "padding", min: 0, max: 100, step: 5 },
 			];
@@ -31,18 +33,20 @@ wp.blocks.registerBlockType("catpow/t-box", {
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<table width={width} cellPadding={padding} style={{ width: `${width}px`, padding: `${padding}px` }} align="center" className={classes}>
-						<tbody>
-							<tr>
-								<td>
-									<InnerBlocks />
-								</td>
-							</tr>
-						</tbody>
-					</table>
+					<div className={classes}>
+						<table width={width} cellPadding={padding} style={{ width: `${width}px`, padding: `${padding}px` }} align="center">
+							<tbody>
+								<tr>
+									<td>
+										<InnerBlocks />
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</CP.Bem>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} initialOpen={true} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
@@ -57,15 +61,17 @@ wp.blocks.registerBlockType("catpow/t-box", {
 		var states = CP.classNamesToFlags(classes);
 		return (
 			<CP.Bem prefix="wp-block-catpow">
-				<table width={width} cellPadding={padding} style={{ width: `${width}px`, padding: `${padding}px` }} align="center" className={classes}>
-					<tbody>
-						<tr>
-							<td>
-								<InnerBlocks.Content />
-							</td>
-						</tr>
-					</tbody>
-				</table>
+				<div className={classes}>
+					<table width={width} cellPadding={padding} style={{ width: `${width}px`, padding: `${padding}px` }} align="center">
+						<tbody>
+							<tr>
+								<td>
+									<InnerBlocks.Content />
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</CP.Bem>
 		);
 	},

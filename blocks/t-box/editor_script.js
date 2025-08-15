@@ -8,7 +8,7 @@
     category: "catpow-mail",
     parent: CP.mailContensContainer,
     attributes: {
-      classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-box has-mail-content-width" },
+      classes: { source: "attribute", selector: ".wp-block-catpow-t-box", attribute: "class", default: "wp-block-catpow-t-box has-mail-content-width" },
       width: { source: "attribute", selector: "table", attribute: "width", default: "600" },
       padding: { source: "attribute", selector: "table", attribute: "cellpadding", default: "0" }
     },
@@ -21,19 +21,21 @@
       var states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
+          "colorScheme",
+          { name: "body", type: "buttons", label: "\u80CC\u666F\u8272", values: { hasBgNone: "\u306A\u3057", hasBgNormal: "\u901A\u5E38", hasBgStrong: "\u5F37\u8ABF", hasBgAchromatic: "\u767D\u9ED2" } },
           { name: "range", input: "range", label: __("\u5E45", "catpow"), key: "width", min: 400, max: 800, step: 10 },
           { name: "range", input: "range", label: __("\u4F59\u767D", "catpow"), key: "padding", min: 0, max: 100, step: 5 }
         ];
         wp.hooks.applyFilters("catpow.blocks.t-box.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { width, cellPadding: padding, style: { width: `${width}px`, padding: `${padding}px` }, align: "center", className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement("table", { width, cellPadding: padding, style: { width: `${width}px`, padding: `${padding}px` }, align: "center" }, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null))))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks } = wp.blockEditor;
       const { classes, width, padding } = attributes;
       var states = CP.classNamesToFlags(classes);
-      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { width, cellPadding: padding, style: { width: `${width}px`, padding: `${padding}px` }, align: "center", className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null))))));
+      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, /* @__PURE__ */ wp.element.createElement("table", { width, cellPadding: padding, style: { width: `${width}px`, padding: `${padding}px` }, align: "center" }, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)))))));
     }
   });
 })();

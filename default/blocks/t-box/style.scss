@@ -1,5 +1,15 @@
 @import 'admin_style_config.scss';
 
 .wp-block-catpow-t-box{
-	@include tbl(());
+	&.has-bg-achromatic{@include bg((c:white));}
+	&.has-bg-normal{@include bg((c:b));}
+	&.has-bg-strong{@include bg((c:s));}
+	&.has-color-scheme-inverted{
+		&.has-bg-achromatic{@include bg((c:black));}
+		&.has-bg-normal{@include bg((c:m));}
+		&.has-bg-strong{@include bg((c:a));}
+	}
+	&-table{
+		@include tbl(());
+	}
 }
