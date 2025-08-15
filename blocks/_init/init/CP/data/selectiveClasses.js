@@ -171,6 +171,24 @@ export const selectiveClassesPresets = {
 			hasFontWeightHeavy: "H",
 		},
 	},
+	safeFontFamily: {
+		name: "safeFontFamily",
+		type: "buttons",
+		label: __("フォント", "catpow"),
+		values: {
+			hasFontSafeSerif: __("セリフ", "catpow"),
+			hasFontSafeSansSerif: __("サンセリフ", "catpow"),
+			hasFontSafeMonoSpaced: __("等幅", "catpow"),
+			hasFontSafeGothic: __("ゴシック", "catpow"),
+			hasFontSafeMincho: __("明朝", "catpow"),
+		},
+	},
+	safeFontWeight: {
+		name: "safeFontWeight",
+		type: "buttons",
+		label: __("太字", "catpow"),
+		values: "hasFontWeightSafeBold",
+	},
 	headingType: {
 		name: "headingType",
 		type: "buttons",

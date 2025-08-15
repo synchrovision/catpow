@@ -5265,6 +5265,24 @@
         hasFontWeightHeavy: "H"
       }
     },
+    safeFontFamily: {
+      name: "safeFontFamily",
+      type: "buttons",
+      label: __4("\u30D5\u30A9\u30F3\u30C8", "catpow"),
+      values: {
+        hasFontSafeSerif: __4("\u30BB\u30EA\u30D5", "catpow"),
+        hasFontSafeSansSerif: __4("\u30B5\u30F3\u30BB\u30EA\u30D5", "catpow"),
+        hasFontSafeMonoSpaced: __4("\u7B49\u5E45", "catpow"),
+        hasFontSafeGothic: __4("\u30B4\u30B7\u30C3\u30AF", "catpow"),
+        hasFontSafeMincho: __4("\u660E\u671D", "catpow")
+      }
+    },
+    safeFontWeight: {
+      name: "safeFontWeight",
+      type: "buttons",
+      label: __4("\u592A\u5B57", "catpow"),
+      values: "hasFontWeightSafeBold"
+    },
     headingType: {
       name: "headingType",
       type: "buttons",
