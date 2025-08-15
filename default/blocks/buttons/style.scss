@@ -56,7 +56,7 @@
 			#{$block}{
 				&-button{
 					@include txt((c:ix));
-					@include bg((c:mx 1 .6));
+					@include bg((c:mx 1 .75));
 					.icon{
 						svg{
 							@include svg((f:bx));

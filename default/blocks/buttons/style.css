@@ -102,7 +102,7 @@
 }
 .wp-block-catpow-buttons__item.is-rate-primary .wp-block-catpow-buttons-button {
   color: hsla(var(--cp-tones-ix-h),var(--cp-tones-ix-s),var(--cp-tones-ix-l),var(--cp-tones-ix-a,1));
-  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),calc(100% - var(--cp-tones-mx-t) * 100),calc(var(--cp-tones-mx-a,1) * 0.6));
+  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),calc(100% - var(--cp-tones-mx-t) * 100),calc(var(--cp-tones-mx-a,1) * 0.75));
 }
 .wp-block-catpow-buttons__item.is-rate-primary .wp-block-catpow-buttons-button .icon svg {
   fill: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),var(--cp-tones-bx-a,1));
