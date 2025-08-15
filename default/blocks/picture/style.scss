@@ -2,8 +2,11 @@
 
 .wp-block-catpow-picture{
 	@include bnd((mgi:a));
+	img,video{
+		@include bnd((d:b,w:f,h:a,mgi:a));
+	}
 	&__picture{
-		img,video,&-img{
+		&-img{
 			@include bnd((d:b,w:f,h:a,mgi:a));
 		}
 	}

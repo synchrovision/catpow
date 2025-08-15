@@ -1,7 +1,13 @@
 .wp-block-catpow-picture {
   margin-inline: auto;
 }
-.wp-block-catpow-picture__picture img, .wp-block-catpow-picture__picture video, .wp-block-catpow-picture__picture-img {
+.wp-block-catpow-picture img, .wp-block-catpow-picture video {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+.wp-block-catpow-picture__picture-img {
   display: block;
   width: 100%;
   height: auto;
