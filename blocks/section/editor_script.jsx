@@ -46,9 +46,6 @@ wp.blocks.registerBlockType("catpow/section", {
 		const { devices, imageKeys, imageSizes } = CP.config.section;
 		const [mainBlock, setMainBlock] = useState();
 
-		CP.useInheritColor(props, ["iconSrc", "patternImageCss", "headerPatternImageCss", "frameImageCss", "borderImageCss"]);
-		CP.useManageStyleData(props, ["frameImageCss", "borderImageCss"]);
-
 		const selectiveClasses = useMemo(() => {
 			const { devices, imageKeys, imageSizes } = CP.config.section;
 			const selectiveClasses = [

@@ -28,9 +28,6 @@ wp.blocks.registerBlockType("catpow/div", {
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys } = CP.config.div;
 
-		CP.useInheritColor(props, ["iconImageSrc", "patternImageCss", "frameImageCss", "borderImageCss"]);
-		CP.useManageStyleData(props, ["patternImageCss", "frameImageCss", "borderImageCss"]);
-
 		const selectiveClasses = useMemo(() => {
 			const { devices, imageKeys } = CP.config.div;
 			const selectiveClasses = [

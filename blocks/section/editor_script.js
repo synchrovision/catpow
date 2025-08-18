@@ -59,8 +59,6 @@
       const states = CP.classNamesToFlags(classes);
       const { devices, imageKeys, imageSizes } = CP.config.section;
       const [mainBlock, setMainBlock] = useState();
-      CP.useInheritColor(props, ["iconSrc", "patternImageCss", "headerPatternImageCss", "frameImageCss", "borderImageCss"]);
-      CP.useManageStyleData(props, ["frameImageCss", "borderImageCss"]);
       const selectiveClasses = useMemo(() => {
         const { devices: devices2, imageKeys: imageKeys2, imageSizes: imageSizes2 } = CP.config.section;
         const selectiveClasses2 = [
