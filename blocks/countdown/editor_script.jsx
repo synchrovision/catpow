@@ -24,8 +24,6 @@ wp.blocks.registerBlockType("catpow/countdown", {
 			return selectiveClasses;
 		}, []);
 
-		console.log(attributes);
-
 		return (
 			<>
 				<div className={classes()}>
