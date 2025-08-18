@@ -65,12 +65,11 @@
 		}
 	}
 	&.is-type-column{
-		@include bnd((w:a 120rem,mg:2rem a,o:h));
+		@include bnd((mg:2rem a,o:h));
 		@include bg((c:bx));
-		@include shd((b:3));
 		@include bdr((s:s,w:1,c:m 30,r:10));
 		&__body{
-			@include bnd((pd:2rem,bs:b,p:r,z:1));
+			@include bnd((pd:2rem,bs:b,p:r,z:1,mgi:a));
 		}
 		&__header{
 			@include bnd((pd:3rem a));
@@ -87,6 +86,40 @@
 			}
 		}
 		&__contents{
+		}
+
+		&.has-thin-border{
+			#{$block}{
+				&__body{
+					@include bdr((s:s,w:1));
+				}
+			}
+		}
+		&.has-bold-border{
+			#{$block}{
+				&__body{
+					@include bdr((s:s,w:3));
+				}
+			}
+		}
+		&.has-border-radius{
+			#{$block}{
+				&__body{
+					@include bdr((r:10));
+				}
+			}
+		}
+		&.has-box-shadow{
+			#{$block}{
+				&__body{
+					&:not(.inset){
+						@include shd((b:3));
+					}
+					&.has-box-shadow-inset{
+						@include shd((b:-3));
+					}
+				}
+			}
 		}
 	}
 }

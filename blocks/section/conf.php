@@ -6,10 +6,10 @@ $filters=[
 ];
 $attributes=[
 	'color'=>['type'=>'string','default'=>"0"],
-	'classes'=>['type'=>'string','default'=>'is-type-article is-level3 is-align-center has-heading-type-catch'],
-	'bodyClasses'=>['type'=>'string','default'=>''],
-	'headerClasses'=>['type'=>'string','default'=>''],
-	'titleClasses'=>['type'=>'string','default'=>''],
+	'classes'=>["source"=>'attribute',"selector"=>".{$block_class}","attribute"=>'class','default'=>"{$block_class} is-type-article is-level3 is-align-center has-heading-type-catch"],
+	'bodyClasses'=>["source"=>'attribute',"selector"=>".{$block_class}__body","attribute"=>'class','default'=>"{$block_class}__body has-content-width"],
+	'headerClasses'=>["source"=>'attribute',"selector"=>".{$block_class}__header","attribute"=>'class','default'=>"{$block_class}__header"],
+	'titleClasses'=>["source"=>'attribute',"selector"=>".{$block_class}__header-title","attribute"=>'class','default'=>"{$block_class}__header-title"],
 	'navIcon'=>['source'=>'attribute','selector'=>".{$block_class}",'attribute'=>'data-icon'],
 	'vars'=>['type'=>'object','default'=>['--cp-clip-shape-amount'=>'40','--cp-clip-shape-upper-width'=>'40','--cp-clip-shape-upper-height'=>'40',
 	'--cp-clip-shape-below-width'=>'40','--cp-clip-shape-below-height'=>'40']],

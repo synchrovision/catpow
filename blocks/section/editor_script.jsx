@@ -181,10 +181,10 @@ wp.blocks.registerBlockType("catpow/section", {
 						],
 						isTypeColumn: [
 							{ name: "icon", label: __("アイコン", "catpow"), values: "hasIcon", sub: [{ input: "icon", color }] },
-							{ name: "image", label: __("画像", "catpow"), values: "hasImage", sub: [{ input: "image", keys: imageKeys.image }] },
-							{ name: "border", label: __("線", "catpow"), values: { no_border: __("なし", "catpow"), thin_border: __("細", "catpow"), bold_border: __("太", "catpow") } },
+							{ name: "border", type: "buttons", label: __("線", "catpow"), values: { hasNoBorder: __("なし", "catpow"), hasThinBorder: __("細", "catpow"), hasBoldBorder: __("太", "catpow") } },
 							{ name: "round", label: __("角丸", "catpow"), values: "hasBorderRadius" },
 							{ name: "shadow", label: __("影", "catpow"), values: "hasBoxShadow", sub: [{ label: __("内側", "catpow"), values: "hasBoxShadowInset" }] },
+							"customContentWidth",
 							{
 								name: "navIcon",
 								label: __("メニューアイコン", "catpow"),
@@ -203,12 +203,6 @@ wp.blocks.registerBlockType("catpow/section", {
 								label: __("テンプレート", "catpow"),
 								values: "isTemplate",
 								sub: [
-									{
-										input: "text",
-										label: __("画像コード", "catpow"),
-										key: "imageCode",
-										cond: "hasImage",
-									},
 									{
 										input: "text",
 										label: __("背景画像コード", "catpow"),
@@ -257,10 +251,10 @@ wp.blocks.registerBlockType("catpow/section", {
 				</BlockControls>
 				<CP.Bem prefix="wp-block-catpow">
 					<SectionTag ref={setMainBlock} {...blockProps}>
-						<div className={clsx("body_", bodyClasses)}>
+						<div className={bodyClasses}>
 							{states.hasDecoration && <CP.PlacedPictures.Edit className="decoration_" set={setAttributes} attr={attributes} devices={devices} keys={imageKeys.decoration} />}
-							<header className={clsx("header_", headerClasses)} style={headerVars}>
-								<div className={clsx("_title", titleClasses)}>
+							<header className={headerClasses} style={headerVars}>
+								<div className={titleClasses}>
 									{states.hasIcon && <CP.OutputIcon className="_icon" item={attributes} />}
 									{states.hasPrefix && (
 										<div className="_prefix">
@@ -352,10 +346,10 @@ wp.blocks.registerBlockType("catpow/section", {
 		return (
 			<CP.Bem prefix="wp-block-catpow">
 				<SectionTag data-icon={navIcon} {...blockProps}>
-					<div className={clsx("body_", bodyClasses)}>
+					<div className={bodyClasses}>
 						{states.hasDecoration && <CP.PlacedPictures className="decoration_" attr={attributes} keys={imageKeys.decoration} />}
-						<header className={clsx("header_", headerClasses)} style={headerVars}>
-							<div className={clsx("_title", titleClasses)}>
+						<header className={headerClasses} style={headerVars}>
+							<div className={titleClasses}>
 								{states.hasIcon && <CP.OutputIcon className="_icon" item={attributes} />}
 								{states.hasPrefix && (
 									<div className="_prefix">
