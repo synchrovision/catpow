@@ -51,7 +51,6 @@
   background-color: hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),var(--cp-tones-a-l),var(--cp-tones-a-a,1));
 }
 .wp-block-catpow-t-body__thead-tr-th {
-  padding: 1.25rem;
   text-align: center;
   font-size: 2.5rem;
   font-family: var(--cp-fonts-t);
@@ -67,7 +66,6 @@
   border-style: none;
 }
 .wp-block-catpow-t-body__tfoot-tr-td {
-  padding: 1.25rem;
   font-size: 0.875rem;
   font-family: var(--cp-fonts-t);
 }

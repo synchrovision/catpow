@@ -15,7 +15,11 @@ wp.blocks.registerBlockType("catpow/t-body", {
 		headerClasses: { source: "attribute", selector: "thead", attribute: "class", default: "wp-block-catpow-t-body__thead has-color-scheme-inverted" },
 		footerClasses: { source: "attribute", selector: "tfoot", attribute: "class", default: "wp-block-catpow-t-body__tfoot has-background-color-alt" },
 		headerText: { source: "html", selector: "thead th", default: "Title" },
+		headerPaddingTop: { type: "number", default: 1 },
+		headerPaddingBottom: { type: "number", default: 1 },
 		footerText: { source: "html", selector: "tfoot td", default: "caption" },
+		footerPaddingTop: { type: "number", default: 1 },
+		footerPaddingBottom: { type: "number", default: 1 },
 		body_class: { type: "string", default: "has-bg-white" },
 		textMail: { source: "text", selector: "textmail" },
 	},
@@ -24,7 +28,22 @@ wp.blocks.registerBlockType("catpow/t-body", {
 		const { useState, useMemo } = wp.element;
 		const { InnerBlocks, BlockControls, InspectorControls, RichText } = wp.blockEditor;
 		const { PanelBody, TextareaControl, ToolbarGroup } = wp.components;
-		const { type, isHtmlMail, classes, headerClasses, footerClasses, headerText, footerText, body_class, textMail, TextMode = false } = attributes;
+		const {
+			type,
+			isHtmlMail,
+			classes,
+			headerClasses,
+			footerClasses,
+			headerText,
+			headerPaddingTop,
+			headerPaddingBottom,
+			footerText,
+			footerPaddingTop,
+			footerPaddingBottom,
+			body_class,
+			textMail,
+			TextMode = false,
+		} = attributes;
 		const primaryClass = "wp-block-catpow-t-body";
 		var states = CP.classNamesToFlags(classes);
 
@@ -59,6 +78,8 @@ wp.blocks.registerBlockType("catpow/t-body", {
 										values: { hasBgNone: "なし", hasBgNormal: "通常", hasBgStrong: "強調", hasBgAchromatic: "白黒" },
 										classKey: "headerClasses",
 									},
+									{ name: "range", input: "range", label: __("上余白", "catpow"), key: "headerPaddingTop", min: 0, max: 10 },
+									{ name: "range", input: "range", label: __("下余白", "catpow"), key: "headerPaddingBottom", min: 0, max: 10 },
 								],
 							},
 							{
@@ -74,6 +95,8 @@ wp.blocks.registerBlockType("catpow/t-body", {
 										values: { hasBgNone: "なし", hasBgNormal: "通常", hasBgStrong: "強調", hasBgAchromatic: "白黒" },
 										classKey: "footerClasses",
 									},
+									{ name: "range", input: "range", label: __("上余白", "catpow"), key: "footerPaddingTop", min: 0, max: 10 },
+									{ name: "range", input: "range", label: __("下余白", "catpow"), key: "footerPaddingBottom", min: 0, max: 10 },
 								],
 							},
 						],
@@ -97,6 +120,11 @@ wp.blocks.registerBlockType("catpow/t-body", {
 							<table width="100%" align="center" valign="top" className={classes}>
 								{states.hasHeader && (
 									<thead className={headerClasses}>
+										{headerPaddingTop > 0 && (
+											<tr>
+												<td className="_td is-spacer-cell" style={{ height: `${headerPaddingTop}rem` }}></td>
+											</tr>
+										)}
 										<tr>
 											<th align="center">
 												<RichText
@@ -107,6 +135,11 @@ wp.blocks.registerBlockType("catpow/t-body", {
 												/>
 											</th>
 										</tr>
+										{headerPaddingBottom > 0 && (
+											<tr>
+												<td className="_td is-spacer-cell" style={{ height: `${headerPaddingBottom}rem` }}></td>
+											</tr>
+										)}
 									</thead>
 								)}
 								<tbody>
@@ -120,6 +153,11 @@ wp.blocks.registerBlockType("catpow/t-body", {
 								</tbody>
 								{states.hasFooter && (
 									<tfoot className={footerClasses}>
+										{footerPaddingTop > 0 && (
+											<tr>
+												<td className="_td is-spacer-cell" style={{ height: `${footerPaddingTop}rem` }}></td>
+											</tr>
+										)}
 										<tr>
 											<td align="center">
 												<RichText
@@ -130,6 +168,11 @@ wp.blocks.registerBlockType("catpow/t-body", {
 												/>
 											</td>
 										</tr>
+										{footerPaddingBottom > 0 && (
+											<tr>
+												<td className="_td is-spacer-cell" style={{ height: `${footerPaddingBottom}rem` }}></td>
+											</tr>
+										)}
 									</tfoot>
 								)}
 							</table>
@@ -160,7 +203,8 @@ wp.blocks.registerBlockType("catpow/t-body", {
 
 	save({ attributes, className, setAttributes }) {
 		const { InnerBlocks, RichText } = wp.blockEditor;
-		const { type, isHtmlMail, classes, headerClasses, footerClasses, headerText, textMail, footerText } = attributes;
+		const { isHtmlMail, classes, headerClasses, footerClasses, headerText, headerPaddingTop, headerPaddingBottom, footerText, footerPaddingTop, footerPaddingBottom, body_class, textMail } =
+			attributes;
 		var states = CP.classNamesToFlags(classes);
 		return (
 			<>
@@ -170,11 +214,21 @@ wp.blocks.registerBlockType("catpow/t-body", {
 						<table width="100%" align="center" className={classes}>
 							{states.hasHeader && (
 								<thead className={headerClasses}>
+									{headerPaddingTop > 0 && (
+										<tr>
+											<td className="_td is-spacer-cell" style={{ height: `${headerPaddingTop}rem` }}></td>
+										</tr>
+									)}
 									<tr>
 										<th align="center">
 											<RichText.Content value={headerText} />
 										</th>
 									</tr>
+									{headerPaddingBottom > 0 && (
+										<tr>
+											<td className="_td is-spacer-cell" style={{ height: `${headerPaddingBottom}rem` }}></td>
+										</tr>
+									)}
 								</thead>
 							)}
 							<tbody>
@@ -188,11 +242,21 @@ wp.blocks.registerBlockType("catpow/t-body", {
 							</tbody>
 							{states.hasFooter && (
 								<tfoot className={footerClasses}>
+									{footerPaddingTop > 0 && (
+										<tr>
+											<td className="_td is-spacer-cell" style={{ height: `${footerPaddingTop}rem` }}></td>
+										</tr>
+									)}
 									<tr>
 										<td align="center">
 											<RichText.Content value={footerText} />
 										</td>
 									</tr>
+									{footerPaddingBottom > 0 && (
+										<tr>
+											<td className="_td is-spacer-cell" style={{ height: `${footerPaddingBottom}rem` }}></td>
+										</tr>
+									)}
 								</tfoot>
 							)}
 						</table>
