@@ -3,6 +3,6 @@
   max-width: 18.75rem;
   width: 100%;
   margin: 0rem auto;
-  fill: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a));
+  fill: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
 }
 /*# sourceMappingURL=./output.css.map */

@@ -51,7 +51,7 @@
   background-color: hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),var(--cp-tones-a-l),var(--cp-tones-a-a,1));
 }
 .wp-block-catpow-comparetable-table-thead-tr-th.is-deprecated .wp-block-catpow-comparetable-table-thead-tr-th, .wp-block-catpow-comparetable-table-thead-tr-th.is-deprecated .wp-block-catpow-comparetable-table-tbody-tr-th-label, .wp-block-catpow-comparetable-table-tbody-tr-th.is-deprecated .wp-block-catpow-comparetable-table-thead-tr-th, .wp-block-catpow-comparetable-table-tbody-tr-th.is-deprecated .wp-block-catpow-comparetable-table-tbody-tr-th-label {
-  background-color: hsla(calc(var(--cp-tones-t-h) * 0.6 + var(--cp-tones-i-h) * 0.4),calc(var(--cp-tones-t-s) * 0.6 + var(--cp-tones-i-s) * 0.4),calc(var(--cp-tones-t-l) * 0.6 + var(--cp-tones-i-l) * 0.4),1.0);
+  background-color: hsla(calc(var(--cp-tones-t-h) * 0.6 + var(--cp-tones-i-h) * 0.4),calc(var(--cp-tones-t-s) * 0.6 + var(--cp-tones-i-s) * 0.4),calc(var(--cp-tones-t-l) * 0.6 + var(--cp-tones-i-l) * 0.4),calc(var(--cp-tones-t-a) * 0.6 + var(--cp-tones-i-a) * 0.4));
 }
 .wp-block-catpow-comparetable-table-thead-tr-th, .wp-block-catpow-comparetable-table-thead-tr-td, .wp-block-catpow-comparetable-table-tbody-tr-th, .wp-block-catpow-comparetable-table-tbody-tr-td {
   box-sizing: border-box;
@@ -406,7 +406,7 @@
 }
 .wp-block-catpow-comparetable.is-style-plan .wp-block-catpow-comparetable-tags-tag {
   padding: 0.5em 1em;
-  background-color: hsla(calc(var(--cp-tones-t-h) * 0.5 + var(--cp-tones-b-h) * 0.5),calc(var(--cp-tones-t-s) * 0.5 + var(--cp-tones-b-s) * 0.5),calc(var(--cp-tones-t-l) * 0.5 + var(--cp-tones-b-l) * 0.5),1.0);
+  background-color: hsla(calc(var(--cp-tones-t-h) * 0.5 + var(--cp-tones-b-h) * 0.5),calc(var(--cp-tones-t-s) * 0.5 + var(--cp-tones-b-s) * 0.5),calc(var(--cp-tones-t-l) * 0.5 + var(--cp-tones-b-l) * 0.5),calc(var(--cp-tones-t-a) * 0.5 + var(--cp-tones-b-a) * 0.5));
   color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
   border-radius: 1em;
 }
@@ -436,37 +436,37 @@
   color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
 }
 .wp-block-catpow-comparetable.is-style-plan .wp-block-catpow-comparetable-table-tbody-tr-th.is-recommended {
-  background-color: hsla(calc(var(--cp-tones-m-h) * 0.6 + var(--cp-tones-b-h) * 0.4),calc(var(--cp-tones-m-s) * 0.6 + var(--cp-tones-b-s) * 0.4),calc(var(--cp-tones-m-l) * 0.6 + var(--cp-tones-b-l) * 0.4),1.0);
+  background-color: hsla(calc(var(--cp-tones-m-h) * 0.6 + var(--cp-tones-b-h) * 0.4),calc(var(--cp-tones-m-s) * 0.6 + var(--cp-tones-b-s) * 0.4),calc(var(--cp-tones-m-l) * 0.6 + var(--cp-tones-b-l) * 0.4),calc(var(--cp-tones-m-a) * 0.6 + var(--cp-tones-b-a) * 0.4));
   color: hsla(var(--cp-tones-ix-h),var(--cp-tones-ix-s),var(--cp-tones-ix-l),var(--cp-tones-ix-a,1));
 }
 .wp-block-catpow-comparetable.is-style-plan .wp-block-catpow-comparetable-table-tbody-tr-th.is-deprecated {
-  background-color: hsla(calc(var(--cp-tones-t-h) * 0.2 + var(--cp-tones-b-h) * 0.8),calc(var(--cp-tones-t-s) * 0.2 + var(--cp-tones-b-s) * 0.8),calc(var(--cp-tones-t-l) * 0.2 + var(--cp-tones-b-l) * 0.8),1.0);
-  color: hsla(calc(var(--cp-tones-t-h) * 0.6 + var(--cp-tones-b-h) * 0.4),calc(var(--cp-tones-t-s) * 0.6 + var(--cp-tones-b-s) * 0.4),calc(var(--cp-tones-t-l) * 0.6 + var(--cp-tones-b-l) * 0.4),1.0);
+  background-color: hsla(calc(var(--cp-tones-t-h) * 0.2 + var(--cp-tones-b-h) * 0.8),calc(var(--cp-tones-t-s) * 0.2 + var(--cp-tones-b-s) * 0.8),calc(var(--cp-tones-t-l) * 0.2 + var(--cp-tones-b-l) * 0.8),calc(var(--cp-tones-t-a) * 0.2 + var(--cp-tones-b-a) * 0.8));
+  color: hsla(calc(var(--cp-tones-t-h) * 0.6 + var(--cp-tones-b-h) * 0.4),calc(var(--cp-tones-t-s) * 0.6 + var(--cp-tones-b-s) * 0.4),calc(var(--cp-tones-t-l) * 0.6 + var(--cp-tones-b-l) * 0.4),calc(var(--cp-tones-t-a) * 0.6 + var(--cp-tones-b-a) * 0.4));
 }
 .wp-block-catpow-comparetable.is-style-plan .wp-block-catpow-comparetable-table-tbody-tr-td {
   background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
 }
 .wp-block-catpow-comparetable.is-style-plan .wp-block-catpow-comparetable-table-tbody-tr-td.is-premium {
-  background-color: hsla(calc(var(--cp-tones-s-h) * 0.5 + var(--cp-tones-b-h) * 0.5),calc(var(--cp-tones-s-s) * 0.5 + var(--cp-tones-b-s) * 0.5),calc(var(--cp-tones-s-l) * 0.5 + var(--cp-tones-b-l) * 0.5),1.0);
+  background-color: hsla(calc(var(--cp-tones-s-h) * 0.5 + var(--cp-tones-b-h) * 0.5),calc(var(--cp-tones-s-s) * 0.5 + var(--cp-tones-b-s) * 0.5),calc(var(--cp-tones-s-l) * 0.5 + var(--cp-tones-b-l) * 0.5),calc(var(--cp-tones-s-a) * 0.5 + var(--cp-tones-b-a) * 0.5));
 }
 .wp-block-catpow-comparetable.is-style-plan .wp-block-catpow-comparetable-table-tbody-tr-td.is-recommended {
-  background-color: hsla(calc(var(--cp-tones-s-h) * 0.2 + var(--cp-tones-b-h) * 0.8),calc(var(--cp-tones-s-s) * 0.2 + var(--cp-tones-b-s) * 0.8),calc(var(--cp-tones-s-l) * 0.2 + var(--cp-tones-b-l) * 0.8),1.0);
+  background-color: hsla(calc(var(--cp-tones-s-h) * 0.2 + var(--cp-tones-b-h) * 0.8),calc(var(--cp-tones-s-s) * 0.2 + var(--cp-tones-b-s) * 0.8),calc(var(--cp-tones-s-l) * 0.2 + var(--cp-tones-b-l) * 0.8),calc(var(--cp-tones-s-a) * 0.2 + var(--cp-tones-b-a) * 0.8));
 }
 .wp-block-catpow-comparetable.is-style-plan .wp-block-catpow-comparetable-table-tbody-tr-td.is-deprecated {
-  background-color: hsla(calc(var(--cp-tones-tx-h) * 0.1 + var(--cp-tones-bx-h) * 0.9),calc(var(--cp-tones-tx-s) * 0.1 + var(--cp-tones-bx-s) * 0.9),calc(var(--cp-tones-tx-l) * 0.1 + var(--cp-tones-bx-l) * 0.9),1.0);
-  color: hsla(calc(var(--cp-tones-tx-h) * 0.6 + var(--cp-tones-tx-h) * 0.4),calc(var(--cp-tones-tx-s) * 0.6 + var(--cp-tones-tx-s) * 0.4),calc(var(--cp-tones-tx-l) * 0.6 + var(--cp-tones-tx-l) * 0.4),1.0);
+  background-color: hsla(calc(var(--cp-tones-tx-h) * 0.1 + var(--cp-tones-bx-h) * 0.9),calc(var(--cp-tones-tx-s) * 0.1 + var(--cp-tones-bx-s) * 0.9),calc(var(--cp-tones-tx-l) * 0.1 + var(--cp-tones-bx-l) * 0.9),calc(var(--cp-tones-tx-a) * 0.1 + var(--cp-tones-bx-a) * 0.9));
+  color: hsla(calc(var(--cp-tones-tx-h) * 0.6 + var(--cp-tones-tx-h) * 0.4),calc(var(--cp-tones-tx-s) * 0.6 + var(--cp-tones-tx-s) * 0.4),calc(var(--cp-tones-tx-l) * 0.6 + var(--cp-tones-tx-l) * 0.4),calc(var(--cp-tones-tx-a) * 0.6 + var(--cp-tones-tx-a) * 0.4));
 }
 .wp-block-catpow-comparetable.is-style-plan .wp-block-catpow-comparetable-table-tbody-tr-td:nth-of-type(even) {
-  background-color: hsla(calc(var(--cp-tones-s-h) * 0.4 + var(--cp-tones-b-h) * 0.6),calc(var(--cp-tones-s-s) * 0.4 + var(--cp-tones-b-s) * 0.6),calc(var(--cp-tones-s-l) * 0.4 + var(--cp-tones-b-l) * 0.6),1.0);
+  background-color: hsla(calc(var(--cp-tones-s-h) * 0.4 + var(--cp-tones-b-h) * 0.6),calc(var(--cp-tones-s-s) * 0.4 + var(--cp-tones-b-s) * 0.6),calc(var(--cp-tones-s-l) * 0.4 + var(--cp-tones-b-l) * 0.6),calc(var(--cp-tones-s-a) * 0.4 + var(--cp-tones-b-a) * 0.6));
 }
 .wp-block-catpow-comparetable.is-style-plan .wp-block-catpow-comparetable-table-tbody-tr-td:nth-of-type(even).is-premium {
   background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a,1));
 }
 .wp-block-catpow-comparetable.is-style-plan .wp-block-catpow-comparetable-table-tbody-tr-td:nth-of-type(even).is-recommended {
-  background-color: hsla(calc(var(--cp-tones-s-h) * 0.6 + var(--cp-tones-b-h) * 0.4),calc(var(--cp-tones-s-s) * 0.6 + var(--cp-tones-b-s) * 0.4),calc(var(--cp-tones-s-l) * 0.6 + var(--cp-tones-b-l) * 0.4),1.0);
+  background-color: hsla(calc(var(--cp-tones-s-h) * 0.6 + var(--cp-tones-b-h) * 0.4),calc(var(--cp-tones-s-s) * 0.6 + var(--cp-tones-b-s) * 0.4),calc(var(--cp-tones-s-l) * 0.6 + var(--cp-tones-b-l) * 0.4),calc(var(--cp-tones-s-a) * 0.6 + var(--cp-tones-b-a) * 0.4));
 }
 .wp-block-catpow-comparetable.is-style-plan .wp-block-catpow-comparetable-table-tbody-tr-td:nth-of-type(even).is-deprecated {
-  background-color: hsla(calc(var(--cp-tones-t-h) * 0.2 + var(--cp-tones-b-h) * 0.8),calc(var(--cp-tones-t-s) * 0.2 + var(--cp-tones-b-s) * 0.8),calc(var(--cp-tones-t-l) * 0.2 + var(--cp-tones-b-l) * 0.8),1.0);
+  background-color: hsla(calc(var(--cp-tones-t-h) * 0.2 + var(--cp-tones-b-h) * 0.8),calc(var(--cp-tones-t-s) * 0.2 + var(--cp-tones-b-s) * 0.8),calc(var(--cp-tones-t-l) * 0.2 + var(--cp-tones-b-l) * 0.8),calc(var(--cp-tones-t-a) * 0.2 + var(--cp-tones-b-a) * 0.8));
 }
 .wp-block-catpow-comparetable.is-style-plan:not(.do-transposition) .wp-block-catpow-comparetable-table-thead-tr-th {
   border-radius: 1em 1em 0rem 0rem;
