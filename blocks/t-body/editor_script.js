@@ -52,7 +52,13 @@
                   values: "hasHeader",
                   sub: [
                     { preset: "colorScheme", classKey: "headerClasses" },
-                    { preset: "backgroundColor", label: __("\u30D8\u30C3\u30C0\u80CC\u666F\u8272", "catpow"), name: "headerBackgroundColor", classKey: "headerClasses" }
+                    {
+                      name: "headerBackgroundColor",
+                      type: "buttons",
+                      label: __("\u30D8\u30C3\u30C0\u80CC\u666F\u8272", "catpow"),
+                      values: { hasBgNone: "\u306A\u3057", hasBgNormal: "\u901A\u5E38", hasBgStrong: "\u5F37\u8ABF", hasBgAchromatic: "\u767D\u9ED2" },
+                      classKey: "headerClasses"
+                    }
                   ]
                 },
                 {
@@ -61,7 +67,13 @@
                   values: "hasFooter",
                   sub: [
                     { preset: "colorScheme", classKey: "footerClasses" },
-                    { preset: "backgroundColor", label: __("\u30D5\u30C3\u30BF\u80CC\u666F\u8272", "catpow"), name: "footerBackgroundColor", classKey: "footerClasses" }
+                    {
+                      name: "footerBackgroundColor",
+                      type: "buttons",
+                      label: __("\u30D5\u30C3\u30BF\u80CC\u666F\u8272", "catpow"),
+                      values: { hasBgNone: "\u306A\u3057", hasBgNormal: "\u901A\u5E38", hasBgStrong: "\u5F37\u8ABF", hasBgAchromatic: "\u767D\u9ED2" },
+                      classKey: "footerClasses"
+                    }
                   ]
                 }
               ]

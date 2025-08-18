@@ -52,7 +52,13 @@ wp.blocks.registerBlockType("catpow/t-body", {
 								values: "hasHeader",
 								sub: [
 									{ preset: "colorScheme", classKey: "headerClasses" },
-									{ preset: "backgroundColor", label: __("ヘッダ背景色", "catpow"), name: "headerBackgroundColor", classKey: "headerClasses" },
+									{
+										name: "headerBackgroundColor",
+										type: "buttons",
+										label: __("ヘッダ背景色", "catpow"),
+										values: { hasBgNone: "なし", hasBgNormal: "通常", hasBgStrong: "強調", hasBgAchromatic: "白黒" },
+										classKey: "headerClasses",
+									},
 								],
 							},
 							{
@@ -61,7 +67,13 @@ wp.blocks.registerBlockType("catpow/t-body", {
 								values: "hasFooter",
 								sub: [
 									{ preset: "colorScheme", classKey: "footerClasses" },
-									{ preset: "backgroundColor", label: __("フッタ背景色", "catpow"), name: "footerBackgroundColor", classKey: "footerClasses" },
+									{
+										name: "footerBackgroundColor",
+										type: "buttons",
+										label: __("フッタ背景色", "catpow"),
+										values: { hasBgNone: "なし", hasBgNormal: "通常", hasBgStrong: "強調", hasBgAchromatic: "白黒" },
+										classKey: "footerClasses",
+									},
 								],
 							},
 						],

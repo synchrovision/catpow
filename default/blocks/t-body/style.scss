@@ -16,27 +16,23 @@
 		@include bnd((d:i));
 	}
 	&__thead,&__tfoot{
-		&.has-background-color{
-			@include bg((c:b));
-		}
-		&.has-background-color-alt{
-			@include bg((c:s));
-		}
-		.has-color-scheme-inverted &.has-background-color,
-		&.has-color-scheme-inverted.has-background-color{
-			@include bg((c:m));
-		}
-		.has-color-scheme-inverted &.has-background-color-alt,
-		&.has-color-scheme-inverted.has-background-color-alt{
-			@include bg((c:a));
+		@include txt((a:c,c:t,v:m));
+		&.has-bg-achromatic{@include bg((c:white));}
+		&.has-bg-normal{@include bg((c:b));}
+		&.has-bg-strong{@include bg((c:s));}
+		&.has-color-scheme-inverted{
+			&.has-bg-achromatic{@include bg((c:black));}
+			&.has-bg-normal{@include bg((c:m));}
+			&.has-bg-strong{@include bg((c:a));}
 		}
 	}
 	&__thead{
+		$element: &;
 		&-tr{
 			&-th{
 				@include bnd((pd:20));
-				@include txt((a:c,p:40,h:1em,f:t,w:b,c:m,v:m));
-				.has-color-scheme-inverted &{
+				@include txt((a:c,p:40,f:t,w:b,c:m));
+				#{$element}.has-color-scheme-inverted &{
 					@include txt((c:i));
 				}
 			}
@@ -51,12 +47,12 @@
 		}
 	}
 	&__tfoot{
+		$element: &;
 		&-tr{
 			&-td{
 				@include bnd((pd:20));
-				@include bdr((p:t,s:s,w:1,c:t 20));
-				@include txt((a:c,p:14,h:1em,f:t,c:t,v:m));
-				.has-color-scheme-inverted &{
+				@include txt((p:14,f:t));
+				#{$element}.has-color-scheme-inverted &{
 					@include txt((c:i));
 				}
 			}
