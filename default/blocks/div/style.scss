@@ -1,6 +1,7 @@
 @import "config/style_config.scss";
 
 .wp-block-catpow-div{
+	$block:&;
 	@include bnd((mgi:a,p:r,z:1));
 	@include txt((c:tx));
 	&.is-type-block{
@@ -17,11 +18,11 @@
 		&.has-border-radius{
 			@include bdr((r:10));
 		}
-		&.has-shadow{
-			&:not(.inset){
+		&.has-box-shadow{
+			&:not(.has-box-shadow-inset){
 				@include shd((b:3));
 			}
-			&.inset{
+			&.has-box-shadow-inset{
 				@include shd((b:-3));
 			}
 		}

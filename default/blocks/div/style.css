@@ -20,10 +20,10 @@
 .wp-block-catpow-div.is-type-frame.has-border-radius {
   border-radius: 10px;
 }
-.wp-block-catpow-div.is-type-frame.has-shadow:not(.inset) {
+.wp-block-catpow-div.is-type-frame.has-box-shadow:not(.has-box-shadow-inset) {
   box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
 }
-.wp-block-catpow-div.is-type-frame.has-shadow.inset {
+.wp-block-catpow-div.is-type-frame.has-box-shadow.has-box-shadow-inset {
   box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1)) inset;
 }
 .wp-block-catpow-div.is-type-columns.narrow {

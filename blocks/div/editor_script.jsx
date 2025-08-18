@@ -23,7 +23,7 @@ wp.blocks.registerBlockType("catpow/div", {
 		const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
 		const { attributes, className, setAttributes, context } = props;
-		const { customColorVars, anchor, classes, vars, color, patternImageCss, frameImageCss, borderImageCss } = attributes;
+		const { classes, vars, color, frameImageCss, borderImageCss } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys } = CP.config.div;
@@ -43,7 +43,7 @@ wp.blocks.registerBlockType("catpow/div", {
 							{ label: "アイコン", values: "hasIcon", sub: [{ input: "icon", label: "アイコン", color }] },
 							{ type: "buttons", label: "線", values: { hasNoBorder: "なし", hasThinBorder: "細", hasBoldBorder: "太" } },
 							{ label: "角丸", values: "hasBorderRadius" },
-							{ label: "影", values: "hasShadow", sub: [{ label: "内側", values: "has-shadow-inset" }] },
+							{ label: "影", values: "hasBoxShadow", sub: [{ label: "内側", values: "hasBoxShadowInset" }] },
 							"customContentWidth",
 						],
 						isTypeColumns: [{ type: "buttons", label: "幅", values: { narrow: "狭い", regular: "普通", wide: "広い" } }],
@@ -79,13 +79,7 @@ wp.blocks.registerBlockType("catpow/div", {
 			<>
 				<div {...blockProps}>
 					{states.hasIcon && <CP.OutputIcon item={attributes} />}
-					{states.hasBackgroundImage && (
-						<div className="background">
-							<CP.ResponsiveImage set={setAttributes} attr={attributes} keys={imageKeys.backgroundImage} devices={devices} />
-						</div>
-					)}
 					<InnerBlocks template={[["core/paragraph", { content: CP.dummyText.text }]]} templateLock={false} />
-					{states.hasPatternImage && <style className="patternImageCss">{patternImageCss}</style>}
 					{states.hasBorderImage && <style className="borderImageCss">{borderImageCss}</style>}
 					{states.hasFrameImage && <style className="frameImageCss">{frameImageCss}</style>}
 				</div>
@@ -101,23 +95,16 @@ wp.blocks.registerBlockType("catpow/div", {
 
 	save({ attributes, className, setAttributes }) {
 		const { InnerBlocks, useBlockProps } = wp.blockEditor;
-		const { customColorVars, anchor, classes = "", vars, color, patternImageCss, frameImageCss, borderImageCss } = attributes;
+		const { classes = "", vars, frameImageCss, borderImageCss } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
-		const { devices, imageKeys } = CP.config.div;
 
 		const blockProps = useBlockProps.save({ className: classes, style: vars });
 
 		return (
 			<div {...blockProps}>
 				{states.hasIcon && <CP.OutputIcon item={attributes} />}
-				{states.hasBackgroundImage && (
-					<div className="background">
-						<CP.ResponsiveImage attr={attributes} keys={imageKeys.backgroundImage} devices={devices} />
-					</div>
-				)}
 				<InnerBlocks.Content />
-				{states.hasPatternImage && <style className="patternImageCss">{patternImageCss}</style>}
 				{states.hasBorderImage && <style className="borderImageCss">{borderImageCss}</style>}
 				{states.hasFrameImage && <style className="frameImageCss">{frameImageCss}</style>}
 			</div>
