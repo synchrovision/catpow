@@ -46,19 +46,11 @@ wp.blocks.registerBlockType("catpow/t-box", {
 									</tr>
 								)}
 								<tr>
-									{paddingInline > 0 && (
-										<tr>
-											<td className="_td is-spacer-cell" style={{ width: `${paddingInline}rem` }} width={`${paddingInline}rem`}></td>
-										</tr>
-									)}
+									{paddingInline > 0 && <td className="_td is-spacer-cell" style={{ width: `${paddingInline}rem` }} width={`${paddingInline}rem`}></td>}
 									<td>
 										<InnerBlocks />
 									</td>
-									{paddingInline > 0 && (
-										<tr>
-											<td className="_td is-spacer-cell" style={{ width: `${paddingInline}rem` }} width={`${paddingInline}rem`}></td>
-										</tr>
-									)}
+									{paddingInline > 0 && <td className="_td is-spacer-cell" style={{ width: `${paddingInline}rem` }} width={`${paddingInline}rem`}></td>}
 								</tr>
 								{paddingBottom > 0 && (
 									<tr>
@@ -94,19 +86,11 @@ wp.blocks.registerBlockType("catpow/t-box", {
 								</tr>
 							)}
 							<tr>
-								{paddingInline > 0 && (
-									<tr>
-										<td className="_td is-spacer-cell" style={{ width: `${paddingInline}rem` }} width={`${paddingInline}rem`}></td>
-									</tr>
-								)}
+								{paddingInline > 0 && <td className="_td is-spacer-cell" style={{ width: `${paddingInline}rem` }} width={`${paddingInline}rem`}></td>}
 								<td>
 									<InnerBlocks.Content />
 								</td>
-								{paddingInline > 0 && (
-									<tr>
-										<td className="_td is-spacer-cell" style={{ width: `${paddingInline}rem` }} width={`${paddingInline}rem`}></td>
-									</tr>
-								)}
+								{paddingInline > 0 && <td className="_td is-spacer-cell" style={{ width: `${paddingInline}rem` }} width={`${paddingInline}rem`}></td>}
 							</tr>
 							{paddingBottom > 0 && (
 								<tr>
