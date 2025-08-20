@@ -216,9 +216,9 @@ wp.blocks.registerBlockType("catpow/banners", {
 					</ul>
 				</CP.Bem>
 				{doLoop && (
-					<onEmpty>
+					<on-empty>
 						<InnerBlocks.Content />
-					</onEmpty>
+					</on-empty>
 				)}
 			</>
 		);

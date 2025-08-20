@@ -549,9 +549,9 @@ wp.blocks.registerBlockType("catpow/listed", {
 			<>
 				<ul {...useBlockProps.save({ className: classes })}>{rtn}</ul>
 				{doLoop && (
-					<onEmpty>
+					<on-empty>
 						<InnerBlocks.Content />
-					</onEmpty>
+					</on-empty>
 				)}
 			</>
 		);

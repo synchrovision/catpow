@@ -742,9 +742,9 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 					</div>
 				</div>
 				{doLoop && (
-					<onEmpty>
+					<on-empty>
 						<InnerBlocks.Content />
-					</onEmpty>
+					</on-empty>
 				)}
 			</>
 		);

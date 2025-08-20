@@ -340,9 +340,9 @@ wp.blocks.registerBlockType("catpow/showcase", {
 			<>
 				<ul {...useBlockProps.save({ className: classes })}>{rtn}</ul>
 				{doLoop && (
-					<onEmpty>
+					<on-empty>
 						<InnerBlocks.Content />
-					</onEmpty>
+					</on-empty>
 				)}
 			</>
 		);

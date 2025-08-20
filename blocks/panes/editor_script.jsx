@@ -240,9 +240,9 @@ wp.blocks.registerBlockType("catpow/panes", {
 			<>
 				<ul className={classes}>{rtn}</ul>
 				{doLoop && (
-					<onEmpty>
+					<on-empty>
 						<InnerBlocks.Content />
-					</onEmpty>
+					</on-empty>
 				)}
 			</>
 		);

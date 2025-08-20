@@ -440,9 +440,9 @@ wp.blocks.registerBlockType("catpow/slider", {
 					</div>
 				</div>
 				{doLoop && (
-					<onEmpty>
+					<on-empty>
 						<InnerBlocks.Content />
-					</onEmpty>
+					</on-empty>
 				)}
 			</>
 		);

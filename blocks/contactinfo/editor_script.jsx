@@ -243,9 +243,9 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 					{states.hasLead && <RichText.Content tagName="small" className={classes._caption()} value={caption} />}
 				</div>
 				{doLoop && (
-					<onEmpty>
+					<on-empty>
 						<InnerBlocks.Content />
-					</onEmpty>
+					</on-empty>
 				)}
 			</>
 		);

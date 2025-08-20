@@ -173,9 +173,9 @@
 			<>
 				<div className={classes}>{rtn}</div>
 				{doLoop && (
-					<onEmpty>
+					<on-empty>
 						<InnerBlocks.Content />
-					</onEmpty>
+					</on-empty>
 				)}
 			</>
 		);

@@ -586,7 +586,7 @@
 				wp.element.Fragment,
 				null,
 				/* @__PURE__ */ wp.element.createElement("ul", { ...useBlockProps.save({ className: classes2 }) }, rtn),
-				doLoop && /* @__PURE__ */ wp.element.createElement("onEmpty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null))
+				doLoop && /* @__PURE__ */ wp.element.createElement("on-empty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null))
 			);
 		},
 		deprecated: [

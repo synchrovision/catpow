@@ -27,5 +27,5 @@ $rows=$attr['rows'];
 <?php endwhile; ?>
 	</tbody>
 </table>
-<onEmpty><?=$children??''?></onEmpty>
+<on-empty><?=$children??''?></on-empty>
 <!-- /wp:catpow/datatable -->

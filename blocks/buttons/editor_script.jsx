@@ -175,9 +175,9 @@ wp.blocks.registerBlockType("catpow/buttons", {
 					<ul className={classes}>{rtn}</ul>
 				</CP.Bem>
 				{doLoop && (
-					<onEmpty>
+					<on-empty>
 						<InnerBlocks.Content />
-					</onEmpty>
+					</on-empty>
 				)}
 			</>
 		);

@@ -238,9 +238,9 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 					<ul className="items">{rtn}</ul>
 				</div>
 				{doLoop && (
-					<onEmpty>
+					<on-empty>
 						<InnerBlocks.Content />
-					</onEmpty>
+					</on-empty>
 				)}
 			</>
 		);
