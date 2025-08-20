@@ -12,12 +12,6 @@
 		$item:&;
 		@include bnd((bs:b));
 		@include trn((t:.5s,s:1));
-		&-title{
-			@include bnd((p:r,pd:.5em 1em,w:10em fit,mg:0 0 -1em -.5em,z:1));
-			@include bg((c:m));
-			@include txt((a:c,c:i,p:12));
-			@include shd((b:2));
-		}
 		&-link{
 			@include bnd((d:b,p:r));
 			@include usr((c:p));
@@ -25,19 +19,40 @@
 				@include bnd((d:b));
 				&-img{
 					@include bnd((d:b,p:r,w:f,h:a));
-					@include shd((b:2));
 					@include trn((t:.5s));
-				}
-			}
-			#{$item}:hover &{
-				@include bnd((d:b));
-				img{
-					@include shd((b:8));
 				}
 			}
 		}
 		&:hover{
 			@include trn((s:1.01));
+		}
+	}
+	&.has-title &{
+		&__item{
+			$item:&;
+			@include bnd((bs:b));
+			@include trn((t:.5s,s:1));
+			&-title{
+				@include bnd((p:r,pd:.5em 1em,w:10em fit,mg:0 0 -1em -.5em,z:1));
+				@include bg((c:m));
+				@include txt((a:c,c:i,p:12));
+				@include shd((b:2));
+			}
+			&-link{
+				&-image{
+					&-img{
+						@include shd((b:2));
+					}
+				}
+				#{$item}:hover &{
+					img{
+						@include shd((b:8));
+					}
+				}
+			}
+			&:hover{
+				@include trn((s:1.01));
+			}
 		}
 	}
 }
