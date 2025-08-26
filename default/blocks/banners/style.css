@@ -1,5 +1,6 @@
 .wp-block-catpow-banners {
   margin-inline: auto;
+  box-sizing: border-box;
   display: -webkit-grid;
   display: -ms-grid;
   display: grid;

@@ -2,7 +2,7 @@
 
 .wp-block-catpow-banners{
 	$block:&;
-	@include bnd((mgi:a));
+	@include bnd((mgi:a,bs:b));
 	@include grd((rc:var(--cp-item-size,20rem),g:var(--cp-item-gap,1rem)));
 	@include txt((l:n));
 	&:not(.has-custom-padding){
