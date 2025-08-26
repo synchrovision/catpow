@@ -1,5 +1,6 @@
 .wp-block-image {
   width: fit-content;
+  margin: 0rem;
 }
 .wp-block-image.alignleft {
   margin-right: auto;
