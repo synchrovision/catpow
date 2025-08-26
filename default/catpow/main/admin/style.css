@@ -213,31 +213,24 @@
 }
 .cp-admin-functions > li .cp-lightbox__content .panel_body dl {
   padding: 0.3125rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-lines: multiple;
-  -webkit-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -webkit-align-items: center;
-  align-items: center;
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto 1fr;
+  grid-template-columns: auto 1fr;
+  grid-gap: 0.5rem;
 }
 .cp-admin-functions > li .cp-lightbox__content .panel_body dl dt {
-  -webkit-box-flex: 1;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 9.375rem;
+  padding: 0.5rem 0rem;
   font-size: 0.9375rem;
 }
-.cp-admin-functions > li .cp-lightbox__content .panel_body dl dt i.fab {
+.cp-admin-functions > li .cp-lightbox__content .panel_body dl dt i.fa, .cp-admin-functions > li .cp-lightbox__content .panel_body dl dt i.fab, .cp-admin-functions > li .cp-lightbox__content .panel_body dl dt i.fas {
   display: inline-block;
   margin-right: 0.5em;
 }
 .cp-admin-functions > li .cp-lightbox__content .panel_body dl dd {
-  -webkit-box-flex: 3;
-  flex-grow: 3;
-  flex-shrink: 3;
-  flex-basis: calc(100% - 200);
+  margin: 0rem;
+  padding: 0rem;
 }
 .cp-admin-functions > li .cp-lightbox__content .cpform_results {
   -webkit-box-flex: 1;

@@ -122,16 +122,16 @@
 					}
 					dl{
 						@include bnd((pd:5));
-						@include flx((w:w,a:c));
+						@include grd((tc:a 1fr,g:8));
 						dt{
-							@include bnd((f:1 1 150));
+							@include bnd((pd:8 0));
 							@include txt((p:15));
-							i.fab{
+							i.fa,i.fab,i.fas{
 								@include bnd((d:ib,mgr:.5em));
 							}
 						}
 						dd{
-							@include bnd((f:3 3 calc(100% - 200)));
+							@include bnd((mg:0,pd:0));
 						}
 					}
 				}
