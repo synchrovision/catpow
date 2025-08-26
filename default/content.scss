@@ -1,6 +1,22 @@
 @import "admin_style_config.scss";
 @import "fontawesome.scss";
 @import url('https://fonts.googleapis.com/css?family=Staatliches&subset=latin-ext');
+@import "block-variants.scss";
+@import "text-variants.scss";
+@import "color-variants.scss";
+
+html{
+	@include txt((c:tx,f:t));
+	@include bp(-960){
+		@include txt((p:2vw));
+	}
+	@include bp(-720){
+		@include txt((p:3vw));
+	}
+	@include bp(-480){
+		@include txt((p:4vw));
+	}
+}
 
 @include define_color_classes;
 
@@ -676,150 +692,4 @@ del{
 	&.ss{
 		@include txt((p:10));
 	}
-}
-.has-custom-padding{
-	@include bnd((
-		pdt:calc(var(--cp-padding-top,0) * #{$sizeUnit}),
-		pdb:calc(var(--cp-padding-bottom,0) * #{$sizeUnit})
-	));
-}
-.has-custom-margin{
-	@include bnd((
-		mgt:calc(var(--cp-margin-top,0) * #{$sizeUnit}),
-		mgb:calc(var(--cp-margin-bottom,0) * #{$sizeUnit})
-	));
-}
-.has-clip-path{
-	$a:calc(150% - sqrt(var(--cp-clip-shape-amount,50)) * 10%);
-	$uy:calc(var(--cp-clip-shape-upper-height,40) * #{$sizeUnit});
-	$ux1:calc(50% - var(--cp-clip-shape-upper-width,40) * #{$sizeUnit} / 2);
-	$ux2:calc(50% + var(--cp-clip-shape-upper-width,40) * #{$sizeUnit} / 2);
-	$by:calc(100% - var(--cp-clip-shape-below-height,40) * #{$sizeUnit});
-	$bx1:calc(50% - var(--cp-clip-shape-below-width,40) * #{$sizeUnit} / 2);
-	$bx2:calc(50% + var(--cp-clip-shape-below-width,40) * #{$sizeUnit} / 2);
-	@include bnd((
-		pdt:calc((var(--cp-padding-top,0) + var(--cp-clip-shape-upper-height,40)) * #{$sizeUnit}),
-		pdb:calc((var(--cp-padding-bottom,0) + var(--cp-clip-shape-below-height,40)) * #{$sizeUnit}),
-		mgt:calc((var(--cp-margin-top,0) - var(--cp-clip-shape-upper-height,40)) * #{$sizeUnit}),
-		mgb:calc((var(--cp-margin-bottom,0) - var(--cp-clip-shape-below-height,40)) * #{$sizeUnit})
-	));
-	&.has-clip-shape-ellipse{
-		&.has-clip-shape-both{
-			clip-path: ellipse(#{$a} 50% at 50% 50%);
-		}
-		&.has-clip-shape-upper{
-			clip-path: ellipse(#{$a} 100% at 50% 100%);
-		}
-		&.has-clip-shape-below{
-			clip-path: ellipse(#{$a} 100% at 50% 0%);
-		}
-	}
-	&.has-clip-shape-slope{
-		&.has-clip-shape-upper-none{
-			&.has-clip-shape-below-none{
-				clip-path:polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-			}
-			&.has-clip-shape-below-left{
-				clip-path:polygon(0% 0%, 100% 0%, 100% 100%, 0% #{$by});
-			}
-			&.has-clip-shape-below-right{
-				clip-path:polygon(0% 0%, 100% 0%, 100% #{$by}, 0% 100%);
-			}
-		}
-		&.has-clip-shape-upper-left{
-			&.has-clip-shape-below-none{
-				clip-path:polygon(0% #{$uy}, 100% 0%, 100% 100%, 0% 100%);
-			}
-			&.has-clip-shape-below-left{
-				clip-path:polygon(0% #{$uy}, 100% 0%, 100% 100%, 0% #{$by});
-			}
-			&.has-clip-shape-below-right{
-				clip-path:polygon(0% #{$uy}, 100% 0%, 100% #{$by}, 0% 100%);
-			}
-		}
-		&.has-clip-shape-upper-right{
-			&.has-clip-shape-below-none{
-				clip-path:polygon(0% 0%, 100% #{$uy}, 100% 100%, 0% 100%);
-			}
-			&.has-clip-shape-below-left{
-				clip-path:polygon(0% 0%, 100% #{$uy}, 100% 100%, 0% #{$by});
-			}
-			&.has-clip-shape-below-right{
-				clip-path:polygon(0% 0%, 100% #{$uy}, 100% #{$by}, 0% 100%);
-			}
-		}
-	}
-	&.has-clip-shape-arrow{
-		&.has-clip-shape-upper-none{
-			&.has-clip-shape-below-none{
-				clip-path:polygon(0% 0%, 100% 0%, 100% 100%, 100% 100%, 0% 100%);
-			}
-			&.has-clip-shape-below-in{
-				clip-path:polygon(0% 0%, 100% 0%, 100% 100%, 100% 100%, 50% #{$by}, 0% 100%);
-			}
-			&.has-clip-shape-below-out{
-				clip-path:polygon(0% 0%, 100% 0%, 100% 100%, 100% #{$by}, 50% 100%, 0% #{$by});
-			}
-		}
-		&.has-clip-shape-upper-in{
-			&.has-clip-shape-below-none{
-				clip-path:polygon(0% 0%, 50% #{$uy}, 100% 0%, 100% 100%, 100% 100%, 0% 100%);
-			}
-			&.has-clip-shape-below-in{
-				clip-path:polygon(0% 0%, 50% #{$uy}, 100% 0%, 100% 100%, 100% 100%, 50% #{$by}, 0% 100%);
-			}
-			&.has-clip-shape-below-out{
-				clip-path:polygon(0% 0%, 50% #{$uy}, 100% 0%, 100% 100%, 100% #{$by}, 50% 100%, 0% #{$by});
-			}
-		}
-		&.has-clip-shape-upper-out{
-			&.has-clip-shape-below-none{
-				clip-path:polygon(0% #{$uy}, 50% 0%, 100% #{$uy}, 100% 100%, 0% 100%);
-			}
-			&.has-clip-shape-below-in{
-				clip-path:polygon(0% #{$uy}, 50% 0%, 100% #{$uy}, 100% 100%, 50% #{$by}, 0% 100%);
-			}
-			&.has-clip-shape-below-out{
-				clip-path:polygon(0% #{$uy}, 50% 0%, 100% #{$uy}, 100% #{$by}, 50% 100%, 0% #{$by});
-			}
-		}
-	}
-	&.has-clip-shape-tail{
-		&.has-clip-shape-upper-none{
-			&.has-clip-shape-below-none{
-				clip-path:polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-			}
-			&.has-clip-shape-below-in{
-				clip-path:polygon(0% 0%, 100% 0%, 100% 100%, #{$bx2} 100%, 50% #{$by}, #{$bx1} 100%, 0% 100%);
-			}
-			&.has-clip-shape-below-out{
-				clip-path:polygon(0% 0%, 100% 0%, 100% #{$by}, #{$bx2} #{$by}, 50% 100%, #{$bx1} #{$by}, 0% #{$by});
-			}
-		}
-		&.has-clip-shape-upper-in{
-			&.has-clip-shape-below-none{
-				clip-path:polygon(0% 0%, #{$ux1} 0%, 50% #{$uy}, #{$ux2} 0%, 100% 0%, 100% 100%, 100% 100%, 0% 100%);
-			}
-			&.has-clip-shape-below-in{
-				clip-path:polygon(0% 0%, #{$ux1} 0%, 50% #{$uy}, #{$ux2} 0%, 100% 0%, 100% 100%, 100% 100%, #{$bx2} 100%, 50% #{$by}, #{$bx1} 100%, 0% 100%);
-			}
-			&.has-clip-shape-below-out{
-				clip-path:polygon(0% 0%, #{$ux1} 0%, 50% #{$uy}, #{$ux2} 0%, 100% 0%, 100% 100%, 100% #{$by}, #{$bx2} #{$by}, 50% 100%, #{$bx1} #{$by}, 0% #{$by});
-			}
-		}
-		&.has-clip-shape-upper-out{
-			&.has-clip-shape-below-none{
-				clip-path:polygon(0% #{$uy}, #{$ux1} #{$uy}, 50% 0%, #{$ux2} #{$uy}, 100% #{$uy}, 100% 100%, 0% 100%);
-			}
-			&.has-clip-shape-below-in{
-				clip-path:polygon(0% #{$uy}, #{$ux1} #{$uy}, 50% 0%, #{$ux2} #{$uy}, 100% #{$uy}, 100% 100%, #{$bx2} 100%, 50% #{$by}, #{$bx1} 100%, 0% 100%);
-			}
-			&.has-clip-shape-below-out{
-				clip-path:polygon(0% #{$uy}, #{$ux1} #{$uy}, 50% 0%, #{$ux2} #{$uy}, 100% #{$uy}, 100% #{$by}, #{$bx2} #{$by}, 50% 100%, #{$bx1} #{$by}, 0% #{$by});
-			}
-		}
-	}
-}
-.has-custom-radius{
-	
 }
