@@ -194,7 +194,6 @@
 }
 .cp-admin-functions > li .cp-lightbox__content .panel_body > ul > li {
   padding: 0.625rem 0rem;
-  text-align: center;
 }
 .cp-admin-functions > li .cp-lightbox__content .panel_body > ul > li h3 {
   margin-bottom: 0.625rem;
@@ -202,7 +201,8 @@
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
   border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 50),var(--cp-tones-t-a,1));
-  font-size: 1.25rem;
+  text-align: center;
+  font-size: 1.5rem;
 }
 .cp-admin-functions > li .cp-lightbox__content .panel_body > ul > li p {
   width: fit-content;
@@ -213,6 +213,8 @@
 }
 .cp-admin-functions > li .cp-lightbox__content .panel_body dl {
   padding: 0.3125rem;
+  width: fit-content;
+  margin-inline: auto;
   display: -webkit-grid;
   display: -ms-grid;
   display: grid;

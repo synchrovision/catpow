@@ -108,11 +108,10 @@
 					&>ul{
 						&>li{
 							@include bnd((pd:10 0));
-							@include txt((a:c));
 							h3{
 								@include bnd((mgb:10,pdb:10));
 								@include bdr((p:b,s:s,w:1,c:t 50));
-								@include txt((p:20));
+								@include txt((a:c,p:24));
 							}
 							p{
 								@include bnd((w:fit,mg:0 a,pd:1em));
@@ -121,7 +120,7 @@
 						}
 					}
 					dl{
-						@include bnd((pd:5));
+						@include bnd((pd:5,w:fit,mgi:a));
 						@include grd((tc:a 1fr,g:8));
 						dt{
 							@include bnd((pd:8 0));
