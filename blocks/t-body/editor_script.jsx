@@ -159,7 +159,7 @@ wp.blocks.registerBlockType("catpow/t-body", {
 											</tr>
 										)}
 										<tr>
-											<td align="center">
+											<td className="_td is-text-cell" align="center">
 												<RichText
 													onChange={(footerText) => {
 														setAttributes({ footerText });
@@ -220,7 +220,7 @@ wp.blocks.registerBlockType("catpow/t-body", {
 										</tr>
 									)}
 									<tr>
-										<th align="center">
+										<th className="_th is-text-cell" align="center">
 											<RichText.Content value={headerText} />
 										</th>
 									</tr>
