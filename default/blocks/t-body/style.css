@@ -52,7 +52,7 @@
 }
 .wp-block-catpow-t-body__thead-tr-th {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 24px;
   font-family: var(--cp-fonts-t);
   font-weight: 700;
   color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
@@ -66,7 +66,7 @@
   border-style: none;
 }
 .wp-block-catpow-t-body__tfoot-tr-td {
-  font-size: 0.875rem;
+  font-size: 14px;
   font-family: var(--cp-fonts-t);
 }
 .wp-block-catpow-t-body__tfoot.has-color-scheme-inverted .wp-block-catpow-t-body__tfoot-tr-td {

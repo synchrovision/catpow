@@ -13,18 +13,18 @@
   color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
 }
 .wp-block-catpow-t-paragraph.has-font-size-x-small {
-  font-size: 0.75rem;
+  font-size: 12px;
 }
 .wp-block-catpow-t-paragraph.has-font-size-small {
-  font-size: 0.875rem;
+  font-size: 14px;
 }
 .wp-block-catpow-t-paragraph.has-font-size-middle {
-  font-size: 1rem;
+  font-size: 16px;
 }
 .wp-block-catpow-t-paragraph.has-font-size-large {
-  font-size: 1.25rem;
+  font-size: 20px;
 }
 .wp-block-catpow-t-paragraph.has-font-size-x-large {
-  font-size: 1.5rem;
+  font-size: 24px;
 }
 /*# sourceMappingURL=./style.css.map */

@@ -20,18 +20,18 @@
 		}
 	}
 	&.has-font-size-x-small{
-		@include txt((p:12));
+		@include txt((p:12px));
 	}
 	&.has-font-size-small{
-		@include txt((p:14));
+		@include txt((p:14px));
 	}
 	&.has-font-size-middle{
-		@include txt((p:16));
+		@include txt((p:16px));
 	}
 	&.has-font-size-large{
-		@include txt((p:20));
+		@include txt((p:20px));
 	}
 	&.has-font-size-x-large{
-		@include txt((p:24));
+		@include txt((p:24px));
 	}
 }

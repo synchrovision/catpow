@@ -21,7 +21,7 @@
 					}
 				}
 				&.is-spacer-cell{
-					@include bnd((w:20));
+					@include bnd((w:20px));
 				}
 				&.is-text-cell{
 					

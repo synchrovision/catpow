@@ -22,18 +22,18 @@
 		}
 	}
 	&.is-size-xlarge{
-		@include txt((p:32));
+		@include txt((p:32px));
 	}
 	&.is-size-large{
-		@include txt((p:24));
+		@include txt((p:24px));
 	}
 	&.is-size-medium{
-		@include txt((p:16));
+		@include txt((p:16px));
 	}
 	&.is-size-small{
-		@include txt((p:12));
+		@include txt((p:12px));
 	}
 	&.is-size-xsmall{
-		@include txt((p:10));
+		@include txt((p:10px));
 	}
 }
