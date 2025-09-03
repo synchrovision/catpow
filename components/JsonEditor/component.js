@@ -10,7 +10,7 @@
   };
 
   // react-global:react
-  var react_default, useState, useEffect, useLayoutEffect, useRef, forwardRef, useMemo2, useCallback, createContext, useContext, useReducer, createElement, cloneElement, isValidElement, Fragment;
+  var react_default, useState, useEffect, useLayoutEffect, useRef, forwardRef, useMemo, useCallback, createContext, useContext, useReducer, createElement, cloneElement, isValidElement, Fragment;
   var init_react = __esm({
     "react-global:react"() {
       react_default = window.wp.element;
@@ -19,7 +19,7 @@
       useLayoutEffect = wp.element.useLayoutEffect;
       useRef = wp.element.useRef;
       forwardRef = wp.element.forwardRef;
-      useMemo2 = wp.element.useMemo;
+      useMemo = wp.element.useMemo;
       useCallback = wp.element.useCallback;
       createContext = wp.element.createContext;
       useContext = wp.element.useContext;
@@ -41,7 +41,7 @@
     Duration: () => Duration,
     Input: () => Input,
     None: () => None,
-    Number: () => Number2,
+    Number: () => Number,
     ObjectInput: () => ObjectInput,
     Radio: () => Radio,
     Range: () => Range,
@@ -63,27 +63,27 @@
   // ../components/JsonEditor/component/inputComponents/ReadOnly.jsx
   var ReadOnly = (props) => {
     const { className = "cp-jsoneditor-input-readonly", agent, onChange, onUpdate } = props;
-    const { useMemo: useMemo4 } = wp.element;
-    const { bem: bem2 } = Catpow.util;
-    const classes = useMemo4(() => bem2(className), []);
+    const { useMemo: useMemo2 } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo2(() => bem(className), []);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, agent.getValue() || "");
   };
 
   // ../components/JsonEditor/component/inputComponents/Toggle.jsx
   var Toggle = (props) => {
     const { className = "cp-jsoneditor-input-toggle", agent, onUpdate } = props;
-    const { useMemo: useMemo4 } = wp.element;
-    const { bem: bem2 } = Catpow.util;
-    const classes = useMemo4(() => bem2(className), []);
+    const { useMemo: useMemo2 } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo2(() => bem(className), []);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(Catpow.Toggle, { value: agent.getValue(), onChange: onUpdate }));
   };
 
   // ../components/JsonEditor/component/inputComponents/Select.jsx
   var Select = (props) => {
     const { className = "cp-jsoneditor-input-select", agent, onUpdate } = props;
-    const { useMemo: useMemo4 } = wp.element;
-    const { bem: bem2 } = Catpow.util;
-    const classes = useMemo4(() => bem2(className), []);
+    const { useMemo: useMemo2 } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo2(() => bem(className), []);
     const mergedSchemaForInput = agent.getMergedSchemaForInput();
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(Catpow.SelectBox, { value: agent.getValue(), options: mergedSchemaForInput.options || mergedSchemaForInput.enum, onChange: onUpdate }));
   };
@@ -97,9 +97,9 @@
   // ../components/JsonEditor/component/inputComponents/Radio.jsx
   var Radio = (props) => {
     const { className = "cp-jsoneditor-input-radio", agent, onUpdate } = props;
-    const { useMemo: useMemo4 } = wp.element;
-    const { bem: bem2 } = Catpow.util;
-    const classes = useMemo4(() => bem2(className), []);
+    const { useMemo: useMemo2 } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo2(() => bem(className), []);
     const schema = agent.getMergedSchemaForInput();
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(Catpow.RadioButtons, { value: agent.getValue(), options: schema.enum, onChange: onUpdate }));
   };
@@ -107,10 +107,10 @@
   // ../components/JsonEditor/component/inputComponents/SearchSelect.jsx
   var SearchSelect = (props) => {
     const { className = "cp-jsoneditor-input-searchselect", agent, onUpdate } = props;
-    const { useMemo: useMemo4 } = wp.element;
-    const { bem: bem2 } = Catpow.util;
-    const classes = useMemo4(() => bem2(className), []);
-    const options = useMemo4(() => {
+    const { useMemo: useMemo2 } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo2(() => bem(className), []);
+    const options = useMemo2(() => {
       const schema = agent.getMergedSchemaForInput();
       if (schema.items != null) {
         if (schema.items.options != null) {
@@ -135,10 +135,10 @@
   // ../components/JsonEditor/component/inputComponents/StepSelect.jsx
   var StepSelect = (props) => {
     const { className = "cp-jsoneditor-input-stepselect", agent, onChange, onUpdate } = props;
-    const { useMemo: useMemo4 } = wp.element;
-    const { bem: bem2 } = Catpow.util;
-    const classes = useMemo4(() => bem2(className), []);
-    const options = useMemo4(() => {
+    const { useMemo: useMemo2 } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo2(() => bem(className), []);
+    const options = useMemo2(() => {
       const schema = agent.getMergedSchemaForInput();
       if (schema.items != null) {
         if (schema.items.options != null) {
@@ -163,10 +163,10 @@
   // ../components/JsonEditor/component/inputComponents/Text.jsx
   var Text = (props) => {
     const { className = "cp-jsoneditor-input-text", agent, onChange, onUpdate } = props;
-    const { useMemo: useMemo4, useCallback: useCallback3 } = wp.element;
-    const { bem: bem2 } = Catpow.util;
-    const classes = useMemo4(() => bem2(className), []);
-    const autoComplete = useMemo4(() => {
+    const { useMemo: useMemo2, useCallback: useCallback2 } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo2(() => bem(className), []);
+    const autoComplete = useMemo2(() => {
       const schema = agent.getMergedSchemaForInput();
       if (schema.hasOwnProperty("autoComplete")) {
         return schema.autoComplete;
@@ -183,7 +183,7 @@
       }
       return null;
     }, [agent.getMergedSchemaForInput()]);
-    const inputType = useMemo4(() => {
+    const inputType = useMemo2(() => {
       const schema = agent.getMergedSchemaForInput();
       if (schema.hasOwnProperty("format")) {
         switch (schema.format) {
@@ -201,20 +201,20 @@
       }
       return "text";
     }, [agent.getMergedSchemaForInput()]);
-    const size = useMemo4(() => {
+    const size = useMemo2(() => {
       const schema = agent.getMergedSchemaForInput();
       if (schema.hasOwnProperty("maxLength")) {
         return schema.maxLength;
       }
       return null;
     }, [agent.getMergedSchemaForInput()]);
-    const onChangeHandle = useCallback3(
+    const onChangeHandle = useCallback2(
       (e) => {
         onChange(e.currentTarget.value);
       },
       [onChange]
     );
-    const onUpdateHandle = useCallback3(
+    const onUpdateHandle = useCallback2(
       (e) => {
         onUpdate(e.currentTarget.value);
       },
@@ -226,22 +226,22 @@
   // ../components/JsonEditor/component/inputComponents/Textarea.jsx
   var Textarea = (props) => {
     const { className = "cp-jsoneditor-input-textarea", agent, onChange, onUpdate } = props;
-    const { useMemo: useMemo4, useCallback: useCallback3 } = wp.element;
-    const { bem: bem2 } = Catpow.util;
-    const classes = useMemo4(() => bem2(className), []);
-    const onChangeHandle = useCallback3(
+    const { useMemo: useMemo2, useCallback: useCallback2 } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo2(() => bem(className), []);
+    const onChangeHandle = useCallback2(
       (e) => {
         onChange(e.currentTarget.value);
       },
       [onChange]
     );
-    const onUpdateHandle = useCallback3(
+    const onUpdateHandle = useCallback2(
       (e) => {
         onUpdate(e.currentTarget.value);
       },
       [onChange]
     );
-    const { cols, rows } = useMemo4(() => {
+    const { cols, rows } = useMemo2(() => {
       const schema = agent.getMergedSchemaForInput();
       const { cols: cols2, rows: rows2 } = schema;
       return { cols: cols2, rows: rows2 };
@@ -252,16 +252,16 @@
   // ../components/JsonEditor/component/inputComponents/DateTime.jsx
   var DateTime = (props) => {
     const { className = "cp-jsoneditor-input-datetime", agent, onChange, onUpdate } = props;
-    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
-    const { bem: bem2 } = Catpow.util;
-    const classes = useMemo4(() => bem2(className), []);
-    const onChangeHandle = useCallback3(
+    const { useState: useState2, useMemo: useMemo2, useCallback: useCallback2, useEffect: useEffect2 } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo2(() => bem(className), []);
+    const onChangeHandle = useCallback2(
       (e) => {
         onChange(e.currentTarget.value);
       },
       [onChange]
     );
-    const onUpdateHandle = useCallback3(
+    const onUpdateHandle = useCallback2(
       (e) => {
         onUpdate(e.currentTarget.value);
       },
@@ -273,16 +273,16 @@
   // ../components/JsonEditor/component/inputComponents/Date.jsx
   var Date2 = (props) => {
     const { className = "cp-jsoneditor-input-date", agent, onChange, onUpdate } = props;
-    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
-    const { bem: bem2 } = Catpow.util;
-    const classes = useMemo4(() => bem2(className), []);
-    const onChangeHandle = useCallback3(
+    const { useState: useState2, useMemo: useMemo2, useCallback: useCallback2, useEffect: useEffect2 } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo2(() => bem(className), []);
+    const onChangeHandle = useCallback2(
       (e) => {
         onChange(e.currentTarget.value);
       },
       [onChange]
     );
-    const onUpdateHandle = useCallback3(
+    const onUpdateHandle = useCallback2(
       (e) => {
         onUpdate(e.currentTarget.value);
       },
@@ -294,16 +294,16 @@
   // ../components/JsonEditor/component/inputComponents/Time.jsx
   var Time = (props) => {
     const { className = "cp-jsoneditor-input-time", agent, onChange, onUpdate } = props;
-    const { useMemo: useMemo4, useCallback: useCallback3 } = wp.element;
-    const { bem: bem2 } = Catpow.util;
-    const classes = useMemo4(() => bem2(className), []);
-    const onChangeHandle = useCallback3(
+    const { useMemo: useMemo2, useCallback: useCallback2 } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo2(() => bem(className), []);
+    const onChangeHandle = useCallback2(
       (e) => {
         onChange(e.currentTarget.value);
       },
       [onChange]
     );
-    const onUpdateHandle = useCallback3(
+    const onUpdateHandle = useCallback2(
       (e) => {
         onUpdate(e.currentTarget.value);
       },
@@ -315,27 +315,18 @@
   // ../components/JsonEditor/component/inputComponents/Duration.jsx
   var Duration = (props) => {
     const { className = "cp-jsoneditor-input-duration", agent, onChange, onUpdate } = props;
-    const { useMemo: useMemo4 } = wp.element;
-    const { bem: bem2 } = Catpow.util;
-    const classes = useMemo4(() => bem2(className), []);
+    const { useMemo: useMemo2 } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo2(() => bem(className), []);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(Catpow.InputDuration, { value: agent.getValue() || "", onChange: onUpdate }));
   };
 
-  // modules/src/component/Animation/Animation.jsx
-  init_react();
-
-  // modules/src/component/Animation/MosaicWave.jsx
-  init_react();
-
-  // modules/src/component/Input/PositionInput.jsx
-  init_react();
-
   // modules/src/component/Bem.jsx
   init_react();
-  var applyBem2 = (component, { ...ctx }) => {
+  var applyBem = (component, { ...ctx }) => {
     if (Array.isArray(component)) {
       component.forEach((child) => {
-        applyBem2(child, ctx);
+        applyBem(child, ctx);
       });
       return;
     }
@@ -343,7 +334,7 @@
       return;
     }
     if (component.type == react_default.Fragment) {
-      applyBem2(component.props.children, ctx);
+      applyBem(component.props.children, ctx);
       return;
     }
     const {
@@ -389,208 +380,96 @@
     }
     if (Array.isArray(children)) {
       children.forEach((child) => {
-        applyBem2(child, ctx);
+        applyBem(child, ctx);
       });
     } else {
-      applyBem2(children, ctx);
+      applyBem(children, ctx);
     }
   };
   var Bem = ({ prefix = "cp", block, element, children }) => {
     const ctx = { prefix, block, element };
-    applyBem2(children, ctx);
+    applyBem(children, ctx);
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, children);
   };
-
-  // modules/src/hooks/useThrottle.jsx
-  init_react();
-  var { useEffect: useEffect2, useRef: useRef2 } = react_default;
-
-  // modules/src/component/Input/SizingInput.jsx
-  init_react();
-  var SizingContext = createContext();
-
-  // modules/src/component/Nav/Nav.jsx
-  init_react();
-
-  // modules/src/component/Nav/Menu.jsx
-  init_react();
-
-  // modules/src/component/Nav/MenuItem.jsx
-  init_react();
-
-  // modules/src/component/Nav/MainMenu.jsx
-  init_react();
-
-  // modules/src/component/Nav/SubMenu.jsx
-  init_react();
-
-  // modules/src/component/Nav/SubMenuContents.jsx
-  init_react();
-
-  // modules/src/component/SVG/ComputeLine.jsx
-  init_react();
-
-  // modules/src/component/SVG/Honycomb.jsx
-  init_react();
-
-  // modules/src/component/SVG/Flux.jsx
-  init_react();
-
-  // modules/src/component/SVG/Star.jsx
-  init_react();
-
-  // modules/src/component/SVG/SVG.jsx
-  init_react();
-
-  // modules/src/component/Cloak.jsx
-  init_react();
-
-  // modules/src/component/ElasticBox.jsx
-  init_react();
-
-  // modules/src/component/Parallax.jsx
-  init_react();
-
-  // modules/src/component/Portal.jsx
-  init_react();
-
-  // react-global:react-dom
-  var react_dom_default = window.wp.element;
-  var createPortal = wp.element.createPortal;
-  var flushSync = wp.element.flushSync;
-
-  // modules/src/component/PortalWindow.jsx
-  init_react();
-
-  // modules/src/component/RawNode.jsx
-  init_react();
-
-  // modules/src/component/ScrollSpy.jsx
-  init_react();
-
-  // modules/src/component/Slider.jsx
-  init_react();
-
-  // modules/src/component/TabPanel.jsx
-  init_react();
-
-  // modules/src/component/TextBuild.jsx
-  init_react();
-
-  // modules/src/component/Transition.jsx
-  init_react();
-
-  // modules/src/hooks/useAgent.jsx
-  init_react();
-  var { useMemo: useMemo3, useState: useState2, useCallback: useCallback2, useRef: useRef3, useEffect: useEffect3, createContext: createContext2, useContext: useContext2, lazy } = react_default;
-  var AgentContext = createContext2();
-
-  // modules/src/hooks/useBem.jsx
-  init_react();
-
-  // modules/src/hooks/useCache.jsx
-  init_react();
-
-  // modules/src/hooks/useQuery.jsx
-  init_react();
-
-  // modules/src/hooks/useTransition.jsx
-  init_react();
-
-  // modules/src/hooks/useLazyProvider.jsx
-  init_react();
-
-  // modules/src/hooks/useLazyComponent.jsx
-  init_react();
-
-  // modules/src/hooks/useDebounce.jsx
-  init_react();
-  var { useEffect: useEffect4 } = react_default;
-
-  // modules/src/hooks/useChangeEffect.jsx
-  init_react();
-
-  // modules/src/component/Loop.jsx
-  init_react();
 
   // ../components/JsonEditor/component/inputComponents/Range.jsx
   var Range = (props) => {
     const { className = "cp-jsoneditor-input-range", agent, onChange, onUpdate } = props;
-    const { useCallback: useCallback3 } = wp.element;
-    const { minimum: min, maximum: max, multipleOf: step2 } = agent.getMergedSchemaForInput();
-    const onUpdateHandle = useCallback3(
+    const { useCallback: useCallback2 } = wp.element;
+    const { minimum: min, maximum: max, multipleOf: step } = agent.getMergedSchemaForInput();
+    const onUpdateHandle = useCallback2(
       (e) => {
         onUpdate(parseFloat(e.currentTarget.value));
       },
       [onUpdate]
     );
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("input", { className: "_range", type: "range", value: agent.getValue(), min, max, step: step2, onChange: onUpdateHandle }), /* @__PURE__ */ wp.element.createElement("input", { className: "_input", type: "number", value: agent.getValue(), min, max, step: step2, onChange: onUpdateHandle })));
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("input", { className: "_range", type: "range", value: agent.getValue(), min, max, step, onChange: onUpdateHandle }), /* @__PURE__ */ wp.element.createElement("input", { className: "_input", type: "number", value: agent.getValue(), min, max, step, onChange: onUpdateHandle })));
   };
 
   // ../components/JsonEditor/component/inputComponents/Number.jsx
-  var Number2 = (props) => {
+  var Number = (props) => {
     const { className = "cp-jsoneditor-input-number", agent, onChange, onUpdate } = props;
-    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
-    const { bem: bem2 } = Catpow.util;
-    const classes = useMemo4(() => bem2(className), []);
-    const { minimum: min, maximum: max, multipleOf: step2 } = agent.getMergedSchemaForInput();
-    const onChangeHandle = useCallback3(
+    const { useState: useState2, useMemo: useMemo2, useCallback: useCallback2, useEffect: useEffect2 } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo2(() => bem(className), []);
+    const { minimum: min, maximum: max, multipleOf: step } = agent.getMergedSchemaForInput();
+    const onChangeHandle = useCallback2(
       (e) => {
         onChange(parseFloat(e.currentTarget.value));
       },
       [onChange]
     );
-    const onUpdateHandle = useCallback3(
+    const onUpdateHandle = useCallback2(
       (e) => {
         onUpdate(parseFloat(e.currentTarget.value));
       },
       [onUpdate]
     );
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("input", { type: "number", value: agent.getValue(), min, max, step: step2, onChange: onChangeHandle, onBlur: onUpdateHandle }));
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("input", { type: "number", value: agent.getValue(), min, max, step, onChange: onChangeHandle, onBlur: onUpdateHandle }));
   };
 
   // ../components/JsonEditor/component/inputComponents/ArrayInput.jsx
   var ArrayInput = (props) => {
     const { className = "cp-jsoneditor-input-arrayinput", compact = false, agent } = props;
-    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5 } = wp.element;
-    const { bem: bem2 } = Catpow.util;
-    const classes = useMemo4(() => bem2(className), []);
+    const { useState: useState2, useMemo: useMemo2, useCallback: useCallback2, useEffect: useEffect2 } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo2(() => bem(className), []);
     const schema = agent.getMergedSchemaForInput();
     const layout = schema.layout || props.layout || (compact ? "table" : "block");
     const size = schema.size || props.size || "medium";
-    const onAddItem = useCallback3(
+    const onAddItem = useCallback2(
       (index, value) => {
         agent.addItem(index, value);
       },
       [agent]
     );
-    const onCopyItem = useCallback3(
+    const onCopyItem = useCallback2(
       (from, to) => {
         agent.copyItem(from, to);
       },
       [agent]
     );
-    const onMoveItem = useCallback3(
+    const onMoveItem = useCallback2(
       (from, to) => {
         agent.moveItem(from, to);
       },
       [agent]
     );
-    const onRemoveItem = useCallback3(
+    const onRemoveItem = useCallback2(
       (index) => {
         agent.removeItem(index);
       },
       [agent]
     );
-    const [lastUpdated, setLastUpdated] = useState3(Date.now());
-    useEffect5(() => {
+    const [lastUpdated, setLastUpdated] = useState2(Date.now());
+    useEffect2(() => {
       const cb = (e) => {
         setLastUpdated(Date.now());
       };
       agent.on("modifyItems", cb);
       return () => agent.off("modifyItems", cb);
     }, []);
-    const getItemId = useMemo4(() => {
+    const getItemId = useMemo2(() => {
       const map = /* @__PURE__ */ new WeakMap();
       let maxId = 0;
       return (item) => {
@@ -600,7 +479,7 @@
         return map.get(item);
       };
     }, []);
-    const InputComponent = useMemo4(() => {
+    const InputComponent = useMemo2(() => {
       if (layout === "table") {
         return (props2) => {
           const { agent: agent2 } = props2;
@@ -701,7 +580,7 @@
       if (schema.hasOwnProperty("minimum") && schema.hasOwnProperty("maximum")) {
         return Range;
       }
-      return Number2;
+      return Number;
     }
     if (schema.type === "array") {
       if (schema.items.enum) {
@@ -721,26 +600,26 @@
   // ../components/JsonEditor/component/inputComponents/Input.jsx
   var Input = (props) => {
     const { className = "cp-jsoneditor-input", compact = false, level = 0, agent } = props;
-    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3, useEffect: useEffect5, useContext: useContext3 } = wp.element;
-    const { bem: bem2 } = Catpow.util;
-    const classes = useMemo4(() => bem2(className), []);
+    const { useState: useState2, useMemo: useMemo2, useCallback: useCallback2, useEffect: useEffect2, useContext: useContext2 } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo2(() => bem(className), []);
     const schema = agent.getMergedSchemaForInput();
     const layout = schema.layout || props.layout || (compact ? "table" : "block");
     const size = schema.size || props.size || "medium";
-    const { getAdditionalInputComponent } = useContext3(DataContext);
+    const { getAdditionalInputComponent } = useContext2(DataContext);
     const { description } = schema;
-    const InputComponent = useMemo4(() => {
+    const InputComponent = useMemo2(() => {
       return getAdditionalInputComponent && getAdditionalInputComponent(schema, { layout, size, compact }) || getInputComponentForSchema(schema, { layout, size, compact });
     }, [schema, layout, size]);
-    const [showMessage, setShowMessage] = useState3(false);
-    const onChange = useCallback3(
+    const [showMessage, setShowMessage] = useState2(false);
+    const onChange = useCallback2(
       (value) => {
         agent.setValue(value);
         setShowMessage(false);
       },
       [agent, setShowMessage]
     );
-    const onUpdate = useCallback3(
+    const onUpdate = useCallback2(
       (value) => {
         agent.setValue(value);
         agent.update();
@@ -750,8 +629,8 @@
       },
       [agent, setShowMessage]
     );
-    const [lastChanged, setLastChanged] = useState3(Date.now());
-    useEffect5(() => {
+    const [lastChanged, setLastChanged] = useState2(Date.now());
+    useEffect2(() => {
       const cb = (e) => {
         setLastChanged(Date.now());
       };
@@ -764,13 +643,13 @@
   // ../components/JsonEditor/component/inputComponents/ObjectInput.jsx
   var ObjectInput = (props) => {
     const { className = "cp-jsoneditor-input-objectinput", compact = false, popoverSize = "large", level = 0, agent, lastChanged } = props;
-    const { useState: useState3, useMemo: useMemo4, useCallback: useCallback3 } = wp.element;
-    const { bem: bem2 } = Catpow.util;
-    const classes = useMemo4(() => bem2(className), []);
+    const { useState: useState2, useMemo: useMemo2, useCallback: useCallback2 } = wp.element;
+    const { bem } = Catpow.util;
+    const classes = useMemo2(() => bem(className), []);
     const schema = agent.getMergedSchemaForInput();
     const layout = schema.layout || props.layout || "block";
     const size = schema.size || props.size || "medium";
-    const InputComponent = useMemo4(() => {
+    const InputComponent = useMemo2(() => {
       const InputBodyComponent = (() => {
         const stateClassNames = `is-layout-${layout} is-size-${size} is-level-${level}`;
         switch (layout) {
@@ -819,9 +698,9 @@
         return (props2) => {
           const { agent: agent2 } = props2;
           const schema2 = agent2.getMergedSchemaForInput();
-          const [open, setOpen] = useState3(false);
-          const onClose = useCallback3(() => setOpen(false), [setOpen]);
-          const getLabel = useMemo4(() => {
+          const [open, setOpen] = useState2(false);
+          const onClose = useCallback2(() => setOpen(false), [setOpen]);
+          const getLabel = useMemo2(() => {
             if (!schema2.label) {
               return () => schema2.title || schema2.key;
             }
@@ -875,10 +754,10 @@
   // ../components/JsonEditor/component/JsonEditor.jsx
   var DataContext = wp.element.createContext({});
   var JsonEditor = (props) => {
-    const { useState: useState3, useCallback: useCallback3, useMemo: useMemo4, useEffect: useEffect5, useRef: useRef4, useReducer: useReducer2 } = wp.element;
+    const { useState: useState2, useCallback: useCallback2, useMemo: useMemo2, useEffect: useEffect2, useRef: useRef2, useReducer: useReducer2 } = wp.element;
     const { className = "cp-jsoneditor-editor", title = "JsonEditor", schema, debug = false, onChange, autoSave = false, showHeader = true, children: getAdditionalInputComponent } = props;
-    const [hasChange, setHasChange] = useState3(false);
-    const json = useMemo4(() => {
+    const [hasChange, setHasChange] = useState2(false);
+    const json = useMemo2(() => {
       if (typeof props.json === "object") {
         return props.json;
       }
@@ -891,21 +770,21 @@
       }
       return json2;
     }, []);
-    const rootAgent = useMemo4(() => {
+    const rootAgent = useMemo2(() => {
       const rootAgent2 = Catpow.schema(schema, { debug }).createAgent(json);
       rootAgent2.on("change", (e) => {
         setHasChange(true);
       });
       return rootAgent2;
     }, [schema]);
-    const save = useCallback3(() => {
+    const save = useCallback2(() => {
       onChange(typeof props.json === "object" ? rootAgent.value : JSON.stringify(rootAgent.value));
       setHasChange(false);
     }, [rootAgent, setHasChange, onChange]);
-    const data = useMemo4(() => {
+    const data = useMemo2(() => {
       return { getAdditionalInputComponent };
     }, [getAdditionalInputComponent]);
-    useEffect5(() => {
+    useEffect2(() => {
       let timer, isHold = false;
       const cb = (e) => {
         if (autoSave) {
