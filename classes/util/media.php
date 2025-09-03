@@ -139,6 +139,7 @@ class media{
 		foreach($sizes as $size){
 			if($response['type']==='image'){
 				$src=wp_get_attachment_image_src($response['id'],$size);
+				if(empty($src)){continue;}
 				$response['sizes'][$size]=[
 					'url'=>$src[0],
 					'width'=>$src[1],
