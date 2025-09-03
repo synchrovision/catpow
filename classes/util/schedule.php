@@ -202,7 +202,14 @@ class schedule{
 			$matches[1]=$last_matches[1];
 			$matches[2]=$last_matches[2];
 			$matches[3]=$last_matches[3];
-			if($last_matches[4].$last_matches[5]>$matches[4].$matches[5]){
+			if(
+				isset($last_matches[4]) && 
+				isset($last_matches[5]) && 
+				isset($matches[4]) && 
+				isset($matches[5]) && 
+				$last_matches[4].$last_matches[5] >
+				$matches[4].$matches[5]
+			){
 				$matches[3]++;
 			}
 		}
