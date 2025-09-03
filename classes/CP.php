@@ -439,6 +439,13 @@ class CP{
 		if(wp_script_is($src,'registered')){return true;}
 		if(empty($file=self::get_file_path_url($src,$flag))){$missed[$src]=1;return false;}
 		if(empty($ver)){$ver=filemtime(key($file));}
+		$deps=array_filter($deps,function($handle)use($src){
+			if(empty(wp_scripts()->registered[$handle])){
+				error_log("{$handle} in deps of {$src} was not registered");
+				return substr($handle,-3)==='.js' && self::register_script($handle);
+			}
+			return true;
+		});
 		wp_register_script($src,reset($file),$deps,$ver,$in_footer);
 		return true;
 	}
