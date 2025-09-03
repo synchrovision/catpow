@@ -1,4 +1,3 @@
 {
-	"script": ["catpow"],
-	"component": ["Popup","SelectTable"]
+	"component": ["Popup", "SelectTable"]
 }

@@ -1,5 +1,5 @@
 {
-	"script": ["catpow", "catpow.schema"],
+	"script": ["catpow.schema"],
 	"component": [
 		"InputDateTime",
 		"InputDuration",

@@ -1,4 +1,4 @@
 {
-	"script": ["catpow","urljs"],
-	"component": ["AppManager","Output"]
+	"script": ["urljs"],
+	"component": ["AppManager", "Output"]
 }

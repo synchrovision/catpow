@@ -1,5 +1,5 @@
 {
 	"component": ["Popover"],
 	"style": ["wp-color-picker"],
-	"script": ["wp-color-picker","catpow"]
+	"script": ["wp-color-picker"]
 }
