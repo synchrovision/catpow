@@ -1,15 +1,25 @@
 {
-	"script": ["catpow","catpow.schema"],
+	"script": ["catpow", "catpow.schema"],
 	"component": [
-		"InputDateTime","InputDuration","InputTextItems",
-		"Calendar","CheckBox","CheckBoxes",
+		"InputDateTime",
+		"InputDuration",
+		"InputTextItems",
+		"Calendar",
+		"CheckBox",
+		"CheckBoxes",
 		"RadioButtons",
-		"SelectBox","SearchSelect","StepSelect",
-		"SelectMedia","SelectPreparedImage","SelectPreparedImageSet",
+		"SelectBox",
+		"SearchSelect",
+		"StepSelect",
+		"SelectMedia",
+		"SelectPreparedImage",
+		"SelectPreparedImageSet",
 		"SelectNumber",
 		"SelectMenuItem",
 		"Toggle",
-		"ArrayInput","TableInput",
-		"Popover","Popup"
+		"ArrayInput",
+		"TableInput",
+		"Popover",
+		"Popup"
 	]
 }
