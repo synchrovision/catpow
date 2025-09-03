@@ -268,7 +268,7 @@ export const InputBackgroundImage = (props) => {
 	}, []);
 
 	console.assert(CP.Bem != null, "CP.Bem is not defined. Make sure to import the CP module.");
-	console.assert(CP.JsonEditor != null, "Catpow.JsonEditor is not defined. Make sure to import the Catpow module.");
+	console.assert(Catpow.JsonEditor != null, "Catpow.JsonEditor is not defined. Make sure to import the Catpow module.");
 
 	return (
 		<CP.Bem>

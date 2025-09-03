@@ -2568,7 +2568,7 @@
       return schema2;
     }, []);
     console.assert(CP.Bem != null, "CP.Bem is not defined. Make sure to import the CP module.");
-    console.assert(CP.JsonEditor != null, "Catpow.JsonEditor is not defined. Make sure to import the Catpow module.");
+    console.assert(Catpow.JsonEditor != null, "Catpow.JsonEditor is not defined. Make sure to import the Catpow module.");
     return /* @__PURE__ */ wp.element.createElement(CP.Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-inputbackgroundimage" }, /* @__PURE__ */ wp.element.createElement(
       Catpow.JsonEditor,
       {
