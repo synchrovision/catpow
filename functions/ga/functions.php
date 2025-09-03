@@ -54,7 +54,7 @@ function cpga_send_event($cat,$action,$label=false,$value=false){
 	printf("<script>gtag('event','%s',%s);</script>",$action,json_encode($event));
 }
 
-add_action('init',function(){
+add_action('wp_enqueue_scripts',function(){
 	cp::enqueue_script('functions/ga/script.js',['catpow.eventProcessor']);
 });
 add_filter('cp_block_items_attributes_eventDispatcher',function($items,$args){
