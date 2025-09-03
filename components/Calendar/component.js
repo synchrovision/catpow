@@ -3,18 +3,7 @@
   Catpow.Calendar = (props) => {
     const { Fragment } = wp.element;
     const { useState, useCallback, useEffect, useReducer, useMemo } = wp.element;
-    const {
-      className = "cp-calendar",
-      size = "medium",
-      min = null,
-      max = null,
-      exclude = null,
-      onSelect = null,
-      onChange = null,
-      showYear = true,
-      showMonth = true,
-      showControl = false
-    } = props;
+    const { className = "cp-calendar", size = "medium", min = null, max = null, exclude = null, onSelect = null, onChange = null, showYear = true, showMonth = true, showControl = false } = props;
     const { bem, getDateValue, getDateTimeObject } = Catpow.util;
     const classes = useMemo(() => bem(className), []);
     const { type, values } = useMemo(() => {
@@ -75,19 +64,13 @@
             month: state2.month
           };
         case "prevMonth":
-          var d = new Date(
-            state2.year,
-            state2.month - 2
-          );
+          var d = new Date(state2.year, state2.month - 2);
           return {
             year: d.getFullYear(),
             month: d.getMonth() + 1
           };
         case "nextMonth":
-          var d = new Date(
-            state2.year,
-            state2.month
-          );
+          var d = new Date(state2.year, state2.month);
           return {
             year: d.getFullYear(),
             month: d.getMonth() + 1
@@ -116,29 +99,32 @@
       }
       return weeks2;
     }, [state.year, state.month]);
-    const onSelectDayHandle = useCallback((day) => {
-      if (onSelect) {
-        onSelect(day.value, { day });
-      }
-      if (onChange) {
-        if (type === "string") {
-          for (let key in values) {
-            delete values[key];
-          }
-          values[day.value] = true;
-          onChange(day.value);
-        } else if (type === "array") {
-          if (values[day.value]) {
-            delete values[day.value];
-          } else {
-            values[day.value] = true;
-          }
-          onChange(Object.keys(values));
-        } else {
-          console.error("onChange is supported only for string or array type value");
+    const onSelectDayHandle = useCallback(
+      (day) => {
+        if (onSelect) {
+          onSelect(day.value, { day });
         }
-      }
-    }, [type, values, onSelect, onChange]);
+        if (onChange) {
+          if (type === "string") {
+            for (let key in values) {
+              delete values[key];
+            }
+            values[day.value] = true;
+            onChange(day.value);
+          } else if (type === "array") {
+            if (values[day.value]) {
+              delete values[day.value];
+            } else {
+              values[day.value] = true;
+            }
+            onChange(Object.keys(values));
+          } else {
+            console.error("onChange is supported only for string or array type value");
+          }
+        }
+      },
+      [type, values, onSelect, onChange]
+    );
     useEffect(() => {
       if (!props.year || props.month) {
         return;
@@ -162,12 +148,7 @@
       return /* @__PURE__ */ wp.element.createElement(
         "td",
         {
-          className: classes2(
-            weekDays[index],
-            day.inMonth ? "is-in-month" : "is-out-month",
-            value && (value.classes != null && value.classes || "is-active"),
-            { "is-disabled": !isValid }
-          ),
+          className: classes2(weekDays[index], day.inMonth ? "is-in-month" : "is-out-month", value && (value.classes != null && value.classes || "is-active"), { "is-disabled": !isValid }),
           onClick: () => {
             if (isValid) {
               onSelectDayHandle(day);
@@ -178,49 +159,7 @@
         value && value.content && /* @__PURE__ */ wp.element.createElement("div", { className: classes2.date.content() }, value.content)
       );
     }, []);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes("is-size-" + size) }, /* @__PURE__ */ wp.element.createElement("table", { className: classes.table() }, /* @__PURE__ */ wp.element.createElement("caption", { className: classes.table.caption() }, showYear && /* @__PURE__ */ wp.element.createElement("div", { className: classes.table.caption.year() }, showControl && /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement(
-      "span",
-      {
-        className: classes.table.caption.year.button("is-prev10"),
-        onClick: () => dispatch({ type: "prev10Year" })
-      }
-    ), /* @__PURE__ */ wp.element.createElement(
-      "span",
-      {
-        className: classes.table.caption.year.button("is-prev"),
-        onClick: () => dispatch({ type: "prevYear" })
-      }
-    )), /* @__PURE__ */ wp.element.createElement("span", { className: "current" }, state.year), showControl && /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement(
-      "span",
-      {
-        className: classes.table.caption.year.button("is-next"),
-        onClick: () => dispatch({ type: "nextYear" })
-      }
-    ), /* @__PURE__ */ wp.element.createElement(
-      "span",
-      {
-        className: classes.table.caption.year.button("is-next10"),
-        onClick: () => dispatch({ type: "next10Year" })
-      }
-    ))), showMonth && /* @__PURE__ */ wp.element.createElement("div", { className: classes.table.caption.month() }, showControl && /* @__PURE__ */ wp.element.createElement(
-      "span",
-      {
-        className: classes.table.caption.month.button("is-prev"),
-        onClick: () => dispatch({ type: "prevMonth" })
-      }
-    ), /* @__PURE__ */ wp.element.createElement(
-      "span",
-      {
-        className: classes.table.caption.month.current()
-      },
-      state.month
-    ), showControl && /* @__PURE__ */ wp.element.createElement(
-      "span",
-      {
-        className: classes.table.caption.month.button("is-next"),
-        onClick: () => dispatch({ type: "nextMonth" })
-      }
-    ))), /* @__PURE__ */ wp.element.createElement(Thead, { classes: classes.table.thead }), /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.table.tbody() }, weeks.map((week, index) => {
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes("is-size-" + size) }, /* @__PURE__ */ wp.element.createElement("table", { className: classes.table() }, /* @__PURE__ */ wp.element.createElement("caption", { className: classes.table.caption() }, showYear && /* @__PURE__ */ wp.element.createElement("div", { className: classes.table.caption.year() }, showControl && /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("span", { className: classes.table.caption.year.button("is-prev10"), onClick: () => dispatch({ type: "prev10Year" }) }), /* @__PURE__ */ wp.element.createElement("span", { className: classes.table.caption.year.button("is-prev"), onClick: () => dispatch({ type: "prevYear" }) })), /* @__PURE__ */ wp.element.createElement("span", { className: "current" }, state.year), showControl && /* @__PURE__ */ wp.element.createElement(Fragment, null, /* @__PURE__ */ wp.element.createElement("span", { className: classes.table.caption.year.button("is-next"), onClick: () => dispatch({ type: "nextYear" }) }), /* @__PURE__ */ wp.element.createElement("span", { className: classes.table.caption.year.button("is-next10"), onClick: () => dispatch({ type: "next10Year" }) }))), showMonth && /* @__PURE__ */ wp.element.createElement("div", { className: classes.table.caption.month() }, showControl && /* @__PURE__ */ wp.element.createElement("span", { className: classes.table.caption.month.button("is-prev"), onClick: () => dispatch({ type: "prevMonth" }) }), /* @__PURE__ */ wp.element.createElement("span", { className: classes.table.caption.month.current() }, state.month), showControl && /* @__PURE__ */ wp.element.createElement("span", { className: classes.table.caption.month.button("is-next"), onClick: () => dispatch({ type: "nextMonth" }) }))), /* @__PURE__ */ wp.element.createElement(Thead, { classes: classes.table.thead }), /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.table.tbody() }, weeks.map((week, index) => {
       return /* @__PURE__ */ wp.element.createElement("tr", { className: classes.table.tbody.week(), key: index }, week.days.map((day, index2) => /* @__PURE__ */ wp.element.createElement(Cell, { classes: classes.table.tbody.week.day, day, index: index2, values, key: index2 })));
     }))));
   };
