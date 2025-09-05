@@ -23,16 +23,13 @@
   position: relative;
   cursor: pointer;
 }
-.wp-block-catpow-banners__item-link-image {
+.wp-block-catpow-banners__item-link img, .wp-block-catpow-banners__item-link video, .wp-block-catpow-banners__item-link iframe {
   display: block;
-}
-.wp-block-catpow-banners__item-link-image-img {
-  display: block;
-  position: relative;
   width: 100%;
   height: auto;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+}
+.wp-block-catpow-banners__item-link-image {
+  display: block;
 }
 .wp-block-catpow-banners__item:hover {
   transform: -webkit- scale(1.01);

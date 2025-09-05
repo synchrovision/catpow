@@ -15,12 +15,11 @@
 		&-link{
 			@include bnd((d:b,p:r));
 			@include usr((c:p));
+			img,video,iframe{
+				@include bnd((d:b,w:f,h:a));
+			}
 			&-image{
 				@include bnd((d:b));
-				&-img{
-					@include bnd((d:b,p:r,w:f,h:a));
-					@include trn((t:.5s));
-				}
 			}
 		}
 		&:hover{
