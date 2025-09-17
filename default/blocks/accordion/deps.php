@@ -1,4 +1,4 @@
 <?php
 return [
-	'scripts'=>['jquery.catpow']
+	'script'=>['jquery.catpow']
 ];
