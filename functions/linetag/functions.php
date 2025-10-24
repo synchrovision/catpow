@@ -60,7 +60,7 @@ add_action('cp_setup',function(){
 	}
 });
 
-add_action('init',function(){
+add_action('enqueue_block_assets',function(){
 	cp::enqueue_script('functions/linetag/script.js');
 });
 add_filter('cp_block_items_attributes_eventDispatcher',function($items,$args){

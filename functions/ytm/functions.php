@@ -100,7 +100,7 @@ add_action('cp_setup',function(){
 	}
 });
 
-add_action('wp_enqueue_scripts',function(){
+add_action('enqueue_block_assets',function(){
 	cp::enqueue_script('functions/ytm/script.js',['catpow.eventProcessor']);
 });
 add_filter('cp_block_items_attributes_eventDispatcher',function($items,$args){
