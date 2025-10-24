@@ -1,5 +1,4 @@
 ﻿wp.hooks.addFilter("catpow.EventInputs", "catpow/editor", function (EventInputs, { item, save }) {
-	console.log(CP);
 	EventInputs.push(
 		<CP.EventInputCards
 			title={"Google Analitics Event"}

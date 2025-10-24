@@ -1,7 +1,6 @@
 (() => {
   // ../functions/ga/blocks/_init/filter.jsx
   wp.hooks.addFilter("catpow.EventInputs", "catpow/editor", function(EventInputs, { item, save }) {
-    console.log(CP);
     EventInputs.push(
       /* @__PURE__ */ wp.element.createElement(
         CP.EventInputCards,
