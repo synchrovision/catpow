@@ -5312,7 +5312,8 @@
         name: "borderRadius",
         type: "buttons",
         label: __4("\u89D2\u4E38", "catpow"),
-        value: {
+        values: {
+          hasBorderRadiusNone: __4("\u306A\u3057", "catpow"),
           hasBorderRadiusSmall: __4("\u5C0F", "catpow"),
           hasBorderRadiusMedium: __4("\u4E2D", "catpow"),
           hasBorderRadiusLarge: __4("\u5927", "catpow"),
@@ -5325,12 +5326,12 @@
               label: __4("\u89D2\u4E38", "catpow"),
               input: "range",
               vars,
-              key: "--cp-custom--border-radius",
-              min: 1,
-              max: 64,
-              default: "1rem",
-              coef: 0.0625,
-              unit: "rem"
+              key: "--cp-custom-border-radius",
+              min: 0,
+              max: 5,
+              default: "1em",
+              step: 0.25,
+              unit: "em"
             }
           ]
         }
