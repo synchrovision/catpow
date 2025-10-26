@@ -370,7 +370,7 @@ $colors:(
 		&-thead,&-tbody{
 			&-tr{
 				&-th,&-td{
-					@include bnd((pd:.5em,w:6em a 30em));
+					@include bnd((p:r,pd:.5em,w:6em a 30em));
 					@include bdr((s:s,w:1,c:t 50));
 					@include txt((p:12,c:t));
 				}

@@ -608,6 +608,7 @@
   margin: 1.25rem auto;
 }
 .cp-edititemstable-thead-tr-th, .cp-edititemstable-thead-tr-td, .cp-edititemstable-tbody-tr-th, .cp-edititemstable-tbody-tr-td {
+  position: relative;
   padding: 0.5em;
   min-width: 6em;
   max-width: 30em;
