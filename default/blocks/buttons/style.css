@@ -9,8 +9,10 @@
   justify-content: center;
   -webkit-align-items: center;
   align-items: center;
-  gap: 1em;
+  gap: var(--cp-item-gap, 1rem);
+  width: min(var(--cp-content-width, 95%), var(--cp-content-max-width, 60rem));
   padding: 1em 0rem;
+  margin-inline: auto;
 }
 .wp-block-catpow-buttons-button {
   display: block;
@@ -19,7 +21,7 @@
   background-color: transparent;
   border-style: solid;
   border-width: 0.0625rem;
-  border-radius: 2em;
+  border-radius: var(--cp-border-radius, 0.5rem);
   text-align: center;
   color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
   font-family: var(--cp-fonts-t);
@@ -94,7 +96,7 @@
   -webkit-box-flex: 0;
   flex-grow: 0;
   flex-shrink: 0;
-  flex-basis: 16em;
+  flex-basis: var(--cp-item-size, 20rem);
   margin: 0rem;
   list-style: none;
   color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
@@ -133,7 +135,7 @@
   left: 0rem;
   inset: 0rem;
   right: 100%;
-  border-radius: 2em;
+  border-radius: var(--cp-border-radius, 0.5rem);
   background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
   -webkit-transition: 0.3s;
   transition: 0.3s;

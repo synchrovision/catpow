@@ -32,6 +32,8 @@
         const selectiveClasses2 = [
           "size",
           "fontSize",
+          "borderRadius",
+          "contentWidth",
           "itemSize",
           "itemGap",
           { name: "microcopy", label: "\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", values: "hasMicroCopy" },

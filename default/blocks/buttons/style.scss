@@ -2,12 +2,12 @@
 
 .wp-block-catpow-buttons{
 	$block:&;
-	@include flx((w:w,j:c,a:c,g:1em));
-	@include bnd((pd:1em 0));
+	@include flx((w:w,j:c,a:c,g:g));
+	@include bnd((w:c,pd:1em 0,mgi:a));
 	&-button{
 		@include bnd((d:b,p:r,pd:1em 2em 1em 1.5em));
 		@include bg((c:n));
-		@include bdr((s:s,w:1,r:2em));
+		@include bdr((s:s,w:1,r:r));
 		@include txt((a:c,c:mx,f:t,p:t,td:n,b:k));
 		@include trn((t:.2s));
 		@include usr((c:p));
@@ -36,7 +36,7 @@
 		}
 	}
 	&__item{
-		@include bnd((p:r,f:0 0 16em,mg:0));
+		@include bnd((p:r,f:0 0 i,mg:0));
 		@include txt((l:n,c:mx));
 		&.has-icon{
 			#{$block}{
@@ -62,7 +62,7 @@
 					&::before{
 						content:'';
 						@include bnd((d:b,p:a,i:0,r:f));
-						@include bdr((r:2em));
+						@include bdr((r:r));
 						@include bg((c:mx));
 						@include trn((t:.3s));
 					}
