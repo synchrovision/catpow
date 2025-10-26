@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.components-button-group {
+  display: flex;
+}
 .components-panel div.sub {
   padding-left: 0.625rem;
   margin-bottom: 1.25rem;

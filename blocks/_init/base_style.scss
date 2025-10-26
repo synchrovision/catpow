@@ -7,6 +7,9 @@ $colors:(
 );
 
 .components{
+	&-button-group{
+		@include bnd((d:f));
+	}
 	&-panel{
 		div.sub{
 			@include bnd((pdl:10,mgb:20));
