@@ -1897,7 +1897,10 @@
   // ../blocks/_init/init/CP/components/SelectButtons.jsx
   var SelectButtons = (props) => {
     const { BaseControl, Button, ButtonGroup } = wp.components;
-    return /* @__PURE__ */ wp.element.createElement(BaseControl, { label: props.label, help: props.help, id: "cp-slectbuttons-" + wp.compose.useInstanceId(SelectButtons) }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-selectbuttons" }, /* @__PURE__ */ wp.element.createElement(ButtonGroup, null, props.options.map((option) => /* @__PURE__ */ wp.element.createElement(Button, { onClick: () => props.onChange(option.value), isPrimary: props.selected === option.value, key: option.value }, option.label)))));
+    return /* @__PURE__ */ wp.element.createElement(BaseControl, { label: props.label, help: props.help, id: "cp-slectbuttons-" + wp.compose.useInstanceId(SelectButtons) }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-selectbuttons" }, /* @__PURE__ */ wp.element.createElement(ButtonGroup, null, props.options.map((option) => {
+      const [, icon, label] = option.label.match(/^(?::([\w\-]+):)?(.*)$/u);
+      return /* @__PURE__ */ wp.element.createElement(Button, { icon, onClick: () => props.onChange(option.value), isPrimary: props.selected === option.value, key: option.value }, label);
+    }))));
   };
 
   // ../blocks/_init/init/CP/components/SelectGridButtons.jsx
@@ -5243,17 +5246,36 @@
         hasImageRight: __4("\u53F3", "catpow")
       }
     },
-    fontSize: {
-      name: "fontSize",
-      type: "buttons",
-      label: __4("\u6587\u5B57\u30B5\u30A4\u30BA", "catpow"),
-      values: {
-        hasFontSizeXLarge: __4("\u6975\u5927", "catpow"),
-        hasFontSizeLarge: __4("\u5927", "catpow"),
-        hasFontSizeMiddle: __4("\u4E2D", "catpow"),
-        hasFontSizeSmall: __4("\u5C0F", "catpow"),
-        hasFontSizeXSmall: __4("\u6975\u5C0F", "catpow")
-      }
+    fontSize({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "fontSize",
+        type: "buttons",
+        label: __4("\u6587\u5B57\u30B5\u30A4\u30BA", "catpow"),
+        values: {
+          hasFontSizeXLarge: __4("\u6975\u5927", "catpow"),
+          hasFontSizeLarge: __4("\u5927", "catpow"),
+          hasFontSizeMiddle: __4("\u4E2D", "catpow"),
+          hasFontSizeSmall: __4("\u5C0F", "catpow"),
+          hasFontSizeXSmall: __4("\u6975\u5C0F", "catpow"),
+          hasCustomFontSize: ":admin-generic:"
+        },
+        sub: {
+          hasCustomFontSize: [
+            {
+              name: "fontSize",
+              label: __4("\u6587\u5B57\u30B5\u30A4\u30BA", "catpow"),
+              input: "range",
+              vars,
+              key: "--cp-custom-font-size",
+              min: 10,
+              max: 160,
+              default: "1rem",
+              coef: 0.0625,
+              unit: "rem"
+            }
+          ]
+        }
+      };
     },
     fontWeight: {
       name: "fontWeight",
@@ -5284,6 +5306,35 @@
       type: "buttons",
       label: __4("\u592A\u5B57", "catpow"),
       values: "hasFontWeightSafeBold"
+    },
+    borderRadius(preset, vars = "vars", ...otherParams) {
+      return {
+        name: "borderRadius",
+        type: "buttons",
+        label: __4("\u89D2\u4E38", "catpow"),
+        value: {
+          hasBorderRadiusSmall: __4("\u5C0F", "catpow"),
+          hasBorderRadiusMedium: __4("\u4E2D", "catpow"),
+          hasBorderRadiusLarge: __4("\u5927", "catpow"),
+          hasCustomBorderRadius: ":admin-generic:"
+        },
+        sub: {
+          hasCustomBorderRadius: [
+            {
+              name: "borderRadius",
+              label: __4("\u89D2\u4E38", "catpow"),
+              input: "range",
+              vars,
+              key: "--cp-custom--border-radius",
+              min: 1,
+              max: 64,
+              default: "1rem",
+              coef: 0.0625,
+              unit: "rem"
+            }
+          ]
+        }
+      };
     },
     headingType: {
       name: "headingType",
@@ -5354,12 +5405,13 @@
     },
     rate: {
       name: "rate",
-      type: "bottons",
+      type: "gridbuttons",
       label: __4("\u30EC\u30FC\u30C8", "catpow"),
       values: {
-        isRateDefault: __4("\u30C7\u30D5\u30A9\u30EB\u30C8", "catpow"),
+        isRateDefault: __4("\u306A\u3057", "catpow"),
         isRatePrimary: __4("\u512A\u5148", "catpow"),
-        isRateSecondary: __4("\u901A\u5E38", "catpow"),
+        isRateSecondary: __4("\u4E8C\u6B21", "catpow"),
+        isRateTertiart: __4("\u4E09\u6B21", "catpow"),
         isRateRecommended: __4("\u63A8\u5968", "catpow"),
         isRateDeprecated: __4("\u975E\u63A8\u5968", "catpow"),
         isRateDanger: __4("\u5371\u967A", "catpow"),

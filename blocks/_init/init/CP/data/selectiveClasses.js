@@ -147,17 +147,36 @@ export const selectiveClassesPresets = {
 			hasImageRight: __("右", "catpow"),
 		},
 	},
-	fontSize: {
-		name: "fontSize",
-		type: "buttons",
-		label: __("文字サイズ", "catpow"),
-		values: {
-			hasFontSizeXLarge: __("極大", "catpow"),
-			hasFontSizeLarge: __("大", "catpow"),
-			hasFontSizeMiddle: __("中", "catpow"),
-			hasFontSizeSmall: __("小", "catpow"),
-			hasFontSizeXSmall: __("極小", "catpow"),
-		},
+	fontSize({ preset, vars = "vars", ...otherParams }) {
+		return {
+			name: "fontSize",
+			type: "buttons",
+			label: __("文字サイズ", "catpow"),
+			values: {
+				hasFontSizeXLarge: __("極大", "catpow"),
+				hasFontSizeLarge: __("大", "catpow"),
+				hasFontSizeMiddle: __("中", "catpow"),
+				hasFontSizeSmall: __("小", "catpow"),
+				hasFontSizeXSmall: __("極小", "catpow"),
+				hasCustomFontSize: ":admin-generic:",
+			},
+			sub: {
+				hasCustomFontSize: [
+					{
+						name: "fontSize",
+						label: __("文字サイズ", "catpow"),
+						input: "range",
+						vars,
+						key: "--cp-custom-font-size",
+						min: 10,
+						max: 160,
+						default: "1rem",
+						coef: 0.0625,
+						unit: "rem",
+					},
+				],
+			},
+		};
 	},
 	fontWeight: {
 		name: "fontWeight",
@@ -188,6 +207,35 @@ export const selectiveClassesPresets = {
 		type: "buttons",
 		label: __("太字", "catpow"),
 		values: "hasFontWeightSafeBold",
+	},
+	borderRadius(preset, vars = "vars", ...otherParams) {
+		return {
+			name: "borderRadius",
+			type: "buttons",
+			label: __("角丸", "catpow"),
+			value: {
+				hasBorderRadiusSmall: __("小", "catpow"),
+				hasBorderRadiusMedium: __("中", "catpow"),
+				hasBorderRadiusLarge: __("大", "catpow"),
+				hasCustomBorderRadius: ":admin-generic:",
+			},
+			sub: {
+				hasCustomBorderRadius: [
+					{
+						name: "borderRadius",
+						label: __("角丸", "catpow"),
+						input: "range",
+						vars,
+						key: "--cp-custom--border-radius",
+						min: 1,
+						max: 64,
+						default: "1rem",
+						coef: 0.0625,
+						unit: "rem",
+					},
+				],
+			},
+		};
 	},
 	headingType: {
 		name: "headingType",
@@ -258,12 +306,13 @@ export const selectiveClassesPresets = {
 	},
 	rate: {
 		name: "rate",
-		type: "bottons",
+		type: "gridbuttons",
 		label: __("レート", "catpow"),
 		values: {
-			isRateDefault: __("デフォルト", "catpow"),
+			isRateDefault: __("なし", "catpow"),
 			isRatePrimary: __("優先", "catpow"),
-			isRateSecondary: __("通常", "catpow"),
+			isRateSecondary: __("二次", "catpow"),
+			isRateTertiart: __("三次", "catpow"),
 			isRateRecommended: __("推奨", "catpow"),
 			isRateDeprecated: __("非推奨", "catpow"),
 			isRateDanger: __("危険", "catpow"),
