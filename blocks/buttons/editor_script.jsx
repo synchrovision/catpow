@@ -22,10 +22,10 @@ wp.blocks.registerBlockType("catpow/buttons", {
 	example: CP.example,
 	edit(props) {
 		const { useState, useMemo } = wp.element;
-		const { BlockControls, InnerBlocks, InspectorControls } = wp.blockEditor;
+		const { BlockControls, InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
 		const { attributes, className, setAttributes, isSelected } = props;
-		const { items = [], classes, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { items = [], classes, vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 		const { linkKeys } = blockConfig;
 		const primaryClass = "wp-block-catpow-buttons";
 		var classArray = _.uniq((className + " " + classes).split(" "));
@@ -34,7 +34,15 @@ wp.blocks.registerBlockType("catpow/buttons", {
 		const states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = ["size", { name: "inline", label: "インライン", values: "is-inline" }, "isTemplate"];
+			const selectiveClasses = [
+				"size",
+				"fontSize",
+				"itemSize",
+				"itemGap",
+				{ name: "microcopy", label: "マイクロコピー", values: "hasMicroCopy" },
+				{ name: "caption", label: "キャプション", values: "hasCaption" },
+				"isTemplate",
+			];
 			wp.hooks.applyFilters("catpow.blocks.buttons.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
@@ -66,8 +74,24 @@ wp.blocks.registerBlockType("catpow/buttons", {
 			rtn.push(
 				<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
 					<CP.Link.Edit className="-button" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index} isSelected={isSelected}>
+						{states.hasMicroCopy && (
+							<span
+								className="_copy"
+								onInput={(e) => {
+									item.copy = e.target.innerText;
+								}}
+								onBlur={(e) => {
+									saveItems();
+								}}
+								contentEditable={true}
+								suppressContentEditableWarning={true}
+							>
+								{item.copy}
+							</span>
+						)}
 						{itemStates.hasIcon && <CP.OutputIcon item={item} />}
 						<span
+							className="_text"
 							onInput={(e) => {
 								item.text = e.target.innerText;
 							}}
@@ -79,6 +103,21 @@ wp.blocks.registerBlockType("catpow/buttons", {
 						>
 							{item.text}
 						</span>
+						{states.hasCaption && (
+							<span
+								className="_caption"
+								onInput={(e) => {
+									item.caption = e.target.innerText;
+								}}
+								onBlur={(e) => {
+									saveItems();
+								}}
+								contentEditable={true}
+								suppressContentEditableWarning={true}
+							>
+								{item.caption}
+							</span>
+						)}
 					</CP.Link.Edit>
 				</CP.Item>
 			);
@@ -135,7 +174,9 @@ wp.blocks.registerBlockType("catpow/buttons", {
 								</div>
 							) : (
 								<CP.Bem prefix="wp-block-catpow">
-									<ul className={classes}>{rtn}</ul>
+									<ul className={classes} style={vars}>
+										{rtn}
+									</ul>
 								</CP.Bem>
 							)}
 						</>
@@ -147,7 +188,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 	save(props) {
 		const { InnerBlocks } = wp.blockEditor;
 		const { attributes, className } = props;
-		const { items = [], classes, loopParam, doLoop } = attributes;
+		const { items = [], classes, vars, loopParam, doLoop } = attributes;
 		const states = CP.classNamesToFlags(classes);
 		const blockType = wp.data.select("core/blocks").getBlockType("catpow/buttons");
 		let rtn = [];
@@ -163,8 +204,10 @@ wp.blocks.registerBlockType("catpow/buttons", {
 			rtn.push(
 				<li className={item.classes} key={index}>
 					<a href={item.url} className="-button" target={shouldOpenWithOtherWindow ? "_blank" : null} rel={shouldOpenWithOtherWindow ? "noopener" : null} {...eventDispatcherAttributes}>
+						{states.hasMicroCopy && <span className="_copy">{item.copy}</span>}
 						{itemStates.hasIcon && <CP.OutputIcon item={item} />}
-						{item.text}
+						<span className="_text">{item.text}</span>
+						{states.hasCaption && <span className="_caption">{item.caption}</span>}
 					</a>
 				</li>
 			);
@@ -172,7 +215,9 @@ wp.blocks.registerBlockType("catpow/buttons", {
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<ul className={classes}>{rtn}</ul>
+					<ul className={classes} style={vars}>
+						{rtn}
+					</ul>
 				</CP.Bem>
 				{doLoop && (
 					<on-empty>

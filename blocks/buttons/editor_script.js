@@ -19,17 +19,25 @@
     example: CP.example,
     edit(props) {
       const { useState, useMemo } = wp.element;
-      const { BlockControls, InnerBlocks, InspectorControls } = wp.blockEditor;
+      const { BlockControls, InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
       const { attributes, className, setAttributes, isSelected } = props;
-      const { items = [], classes: classes2, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+      const { items = [], classes: classes2, vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
       const { linkKeys } = blockConfig;
       const primaryClass = "wp-block-catpow-buttons";
       var classArray = _.uniq((className + " " + classes2).split(" "));
       var classNameArray = className.split(" ");
       const states = CP.classNamesToFlags(classes2);
       const selectiveClasses = useMemo(() => {
-        const selectiveClasses2 = ["size", { name: "inline", label: "\u30A4\u30F3\u30E9\u30A4\u30F3", values: "is-inline" }, "isTemplate"];
+        const selectiveClasses2 = [
+          "size",
+          "fontSize",
+          "itemSize",
+          "itemGap",
+          { name: "microcopy", label: "\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", values: "hasMicroCopy" },
+          { name: "caption", label: "\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "hasCaption" },
+          "isTemplate"
+        ];
         wp.hooks.applyFilters("catpow.blocks.buttons.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
@@ -55,9 +63,24 @@
       items.map((item, index) => {
         const itemStates = CP.classNamesToFlags(item.classes);
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", className: item.classes, set: setAttributes, attr: attributes, items, index, isSelected, key: index }, /* @__PURE__ */ wp.element.createElement(CP.Link.Edit, { className: "-button", attr: attributes, set: setAttributes, keys: linkKeys.link, index, isSelected }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), /* @__PURE__ */ wp.element.createElement(
+          /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", className: item.classes, set: setAttributes, attr: attributes, items, index, isSelected, key: index }, /* @__PURE__ */ wp.element.createElement(CP.Link.Edit, { className: "-button", attr: attributes, set: setAttributes, keys: linkKeys.link, index, isSelected }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement(
             "span",
             {
+              className: "_copy",
+              onInput: (e) => {
+                item.copy = e.target.innerText;
+              },
+              onBlur: (e) => {
+                saveItems();
+              },
+              contentEditable: true,
+              suppressContentEditableWarning: true
+            },
+            item.copy
+          ), itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), /* @__PURE__ */ wp.element.createElement(
+            "span",
+            {
+              className: "_text",
               onInput: (e) => {
                 item.text = e.target.innerText;
               },
@@ -68,6 +91,20 @@
               suppressContentEditableWarning: true
             },
             item.text
+          ), states.hasCaption && /* @__PURE__ */ wp.element.createElement(
+            "span",
+            {
+              className: "_caption",
+              onInput: (e) => {
+                item.caption = e.target.innerText;
+              },
+              onBlur: (e) => {
+                saveItems();
+              },
+              contentEditable: true,
+              suppressContentEditableWarning: true
+            },
+            item.caption
           )))
         );
       });
@@ -91,12 +128,12 @@
           ],
           isTemplate: states.isTemplate
         }
-      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, rtn)))));
+      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes2, style: vars }, rtn)))));
     },
     save(props) {
       const { InnerBlocks } = wp.blockEditor;
       const { attributes, className } = props;
-      const { items = [], classes: classes2, loopParam, doLoop } = attributes;
+      const { items = [], classes: classes2, vars, loopParam, doLoop } = attributes;
       const states = CP.classNamesToFlags(classes2);
       const blockType = wp.data.select("core/blocks").getBlockType("catpow/buttons");
       let rtn = [];
@@ -110,10 +147,10 @@
         }
         const shouldOpenWithOtherWindow = /^\w+:\/\//.test(item.url);
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("a", { href: item.url, className: "-button", target: shouldOpenWithOtherWindow ? "_blank" : null, rel: shouldOpenWithOtherWindow ? "noopener" : null, ...eventDispatcherAttributes }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), item.text))
+          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("a", { href: item.url, className: "-button", target: shouldOpenWithOtherWindow ? "_blank" : null, rel: shouldOpenWithOtherWindow ? "noopener" : null, ...eventDispatcherAttributes }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement("span", { className: "_copy" }, item.copy), itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), /* @__PURE__ */ wp.element.createElement("span", { className: "_text" }, item.text), states.hasCaption && /* @__PURE__ */ wp.element.createElement("span", { className: "_caption" }, item.caption)))
         );
       });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, rtn)), doLoop && /* @__PURE__ */ wp.element.createElement("on-empty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes2, style: vars }, rtn)), doLoop && /* @__PURE__ */ wp.element.createElement("on-empty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     },
     deprecated: [
       {

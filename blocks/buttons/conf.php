@@ -4,6 +4,7 @@ $buttons_class='cp-buttons';
 $button_class='cp-button';
 $attributes=[
 	"classes"=>["source"=>'attribute',"selector"=>".{$block_class}","attribute"=>'class',"default"=>"{$block_class} {$buttons_class} is-size-medium"],
+	'vars'=>['type'=>'object','default'=>[]],
 	"items"=>[
 		"source"=>'query',
 		"selector"=>".{$block_class}__item",
@@ -13,7 +14,9 @@ $attributes=[
 		],
 		"query"=>[
 			"classes"=>["source"=>'attribute',"attribute"=>'class'],
-			"text"=>["source"=>'text',"selector"=>".{$block_class}-button"],
+			"copy"=>["source"=>'html',"selector"=>".{$block_class}-button__copy"],
+			"text"=>["source"=>'html',"selector"=>".{$block_class}-button__text"],
+			"caption"=>["source"=>'html',"selector"=>".{$block_class}-button__caption"],
 			"url"=>["source"=>'attribute',"selector"=>".{$block_class}-button","attribute"=>'href'],
 			"iconSrc"=>["source"=>'attribute',"selector"=>".{$block_class}-button__icon-img","attribute"=>'src'],
 			"iconAlt"=>["source"=>'attribute',"selector"=>".{$block_class}-button__icon-img","attribute"=>'alt'],

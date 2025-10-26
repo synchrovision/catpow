@@ -1,7 +1,16 @@
 @import 'admin_style_config.scss';
 
-ul.wp-block-catpow-buttons{
-	li.item{
+.wp-block-catpow-buttons{
+	&-button{
+		&__copy,&__text,&__caption{
+			&:empty{
+				&::before{
+					content:'Input Text';
+				}
+			}
+		}
+	}
+	&__item{
 		@include bnd((p:r));
 		@include txt((l:n));
 		.itemControl{
