@@ -75,22 +75,22 @@ wp.blocks.registerBlockType("catpow/buttons", {
 			const itemStates = CP.classNamesToFlags(item.classes);
 			rtn.push(
 				<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+					{states.hasMicroCopy && (
+						<span
+							className="_copy"
+							onInput={(e) => {
+								item.copy = e.target.innerText;
+							}}
+							onBlur={(e) => {
+								saveItems();
+							}}
+							contentEditable={true}
+							suppressContentEditableWarning={true}
+						>
+							{item.copy}
+						</span>
+					)}
 					<CP.Link.Edit className="-button" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index} isSelected={isSelected}>
-						{states.hasMicroCopy && (
-							<span
-								className="_copy"
-								onInput={(e) => {
-									item.copy = e.target.innerText;
-								}}
-								onBlur={(e) => {
-									saveItems();
-								}}
-								contentEditable={true}
-								suppressContentEditableWarning={true}
-							>
-								{item.copy}
-							</span>
-						)}
 						{itemStates.hasIcon && <CP.OutputIcon item={item} />}
 						<span
 							className="_text"
@@ -105,22 +105,22 @@ wp.blocks.registerBlockType("catpow/buttons", {
 						>
 							{item.text}
 						</span>
-						{states.hasCaption && (
-							<span
-								className="_caption"
-								onInput={(e) => {
-									item.caption = e.target.innerText;
-								}}
-								onBlur={(e) => {
-									saveItems();
-								}}
-								contentEditable={true}
-								suppressContentEditableWarning={true}
-							>
-								{item.caption}
-							</span>
-						)}
 					</CP.Link.Edit>
+					{states.hasCaption && (
+						<span
+							className="_caption"
+							onInput={(e) => {
+								item.caption = e.target.innerText;
+							}}
+							onBlur={(e) => {
+								saveItems();
+							}}
+							contentEditable={true}
+							suppressContentEditableWarning={true}
+						>
+							{item.caption}
+						</span>
+					)}
 				</CP.Item>
 			);
 		});
@@ -205,12 +205,12 @@ wp.blocks.registerBlockType("catpow/buttons", {
 			const shouldOpenWithOtherWindow = /^\w+:\/\//.test(item.url);
 			rtn.push(
 				<li className={item.classes} key={index}>
+					{states.hasMicroCopy && <span className="_copy">{item.copy}</span>}
 					<a href={item.url} className="-button" target={shouldOpenWithOtherWindow ? "_blank" : null} rel={shouldOpenWithOtherWindow ? "noopener" : null} {...eventDispatcherAttributes}>
-						{states.hasMicroCopy && <span className="_copy">{item.copy}</span>}
 						{itemStates.hasIcon && <CP.OutputIcon item={item} />}
 						<span className="_text">{item.text}</span>
-						{states.hasCaption && <span className="_caption">{item.caption}</span>}
 					</a>
+					{states.hasCaption && <span className="_caption">{item.caption}</span>}
 				</li>
 			);
 		});

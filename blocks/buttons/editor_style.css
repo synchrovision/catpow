@@ -1,9 +1,12 @@
-.wp-block-catpow-buttons-button__copy:empty::before, .wp-block-catpow-buttons-button__text:empty::before, .wp-block-catpow-buttons-button__caption:empty::before {
+.wp-block-catpow-buttons-button__text:empty::before {
   content: "Input Text";
 }
 .wp-block-catpow-buttons__item {
   position: relative;
   list-style: none;
+}
+.wp-block-catpow-buttons__item-copy:empty::before, .wp-block-catpow-buttons__item-caption:empty::before {
+  content: "Input Text";
 }
 .wp-block-catpow-buttons__item .itemControl {
   position: absolute;

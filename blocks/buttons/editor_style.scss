@@ -2,7 +2,7 @@
 
 .wp-block-catpow-buttons{
 	&-button{
-		&__copy,&__text,&__caption{
+		&__text{
 			&:empty{
 				&::before{
 					content:'Input Text';
@@ -13,6 +13,13 @@
 	&__item{
 		@include bnd((p:r));
 		@include txt((l:n));
+		&-copy,&-caption{
+			&:empty{
+				&::before{
+					content:'Input Text';
+				}
+			}
+		}
 		.itemControl{
 			@include bnd((p:a,t:-20,r:0));
 		}

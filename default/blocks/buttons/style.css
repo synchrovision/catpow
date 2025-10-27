@@ -32,41 +32,12 @@
   transition: 0.2s;
   cursor: pointer;
 }
-.wp-block-catpow-buttons-button__copy {
-  display: block;
-  position: absolute;
-  top: 0rem;
-  right: 0rem;
-  bottom: 0rem;
-  left: 0rem;
-  inset: 0rem;
-  margin: auto;
-  margin-top: -1em;
-  padding: 0.5em 1em;
-  width: fit-content;
-  height: fit-content;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
-  border-radius: 1em;
-  font-size: 0.75em;
-  line-height: 1em;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
-}
 .wp-block-catpow-buttons-button__text {
   display: block;
   position: relative;
   z-index: 1;
   font-size: 1em;
   font-weight: 700;
-}
-.wp-block-catpow-buttons-button__caption {
-  display: block;
-  padding-left: 1em;
-  width: fit-content;
-  margin: auto;
-  text-align: left;
-  font-size: 0.75rem;
-  line-height: 1.5em;
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
 }
 .wp-block-catpow-buttons-button:active {
   box-shadow: 0 0 0 hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),calc(100% - var(--cp-tones-mx-t) * 100),calc(var(--cp-tones-mx-a,1) * 0.2));
@@ -100,6 +71,37 @@
   margin: 0rem;
   list-style: none;
   color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
+}
+.wp-block-catpow-buttons__item-copy {
+  display: block;
+  position: relative;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  margin: auto;
+  margin-bottom: -1em;
+  padding: 0.5em 1em;
+  width: fit-content;
+  height: fit-content;
+  z-index: 1;
+  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
+  border-radius: 1em;
+  font-size: 0.75em;
+  line-height: 1em;
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+}
+.wp-block-catpow-buttons__item-caption {
+  display: block;
+  padding-left: 1em;
+  width: fit-content;
+  margin: auto;
+  z-index: 1;
+  text-align: left;
+  font-size: 0.75rem;
+  line-height: 1.5em;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
 }
 .wp-block-catpow-buttons__item.has-icon .wp-block-catpow-buttons-button .icon {
   position: absolute;
