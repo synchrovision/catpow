@@ -5257,16 +5257,16 @@
           hasFontSizeMiddle: __4("\u4E2D", "catpow"),
           hasFontSizeSmall: __4("\u5C0F", "catpow"),
           hasFontSizeXSmall: __4("\u6975\u5C0F", "catpow"),
-          hasCustomFontSize: ":admin-generic:"
+          hasFontSizeCustom: ":admin-generic:"
         },
         sub: {
-          hasCustomFontSize: [
+          hasFontSizeCustom: [
             {
               name: "fontSize",
               label: __4("\u6587\u5B57\u30B5\u30A4\u30BA", "catpow"),
               input: "range",
               vars,
-              key: "--cp-custom-font-size",
+              key: "--cp-font-size-custom",
               min: 10,
               max: 160,
               default: "1rem",
@@ -5317,16 +5317,16 @@
           hasBorderRadiusSmall: __4("\u5C0F", "catpow"),
           hasBorderRadiusMedium: __4("\u4E2D", "catpow"),
           hasBorderRadiusLarge: __4("\u5927", "catpow"),
-          hasCustomBorderRadius: ":admin-generic:"
+          hasBorderRadiusCustom: ":admin-generic:"
         },
         sub: {
-          hasCustomBorderRadius: [
+          hasBorderRadiusCustom: [
             {
               name: "borderRadius",
               label: __4("\u89D2\u4E38", "catpow"),
               input: "range",
               vars,
-              key: "--cp-custom-border-radius",
+              key: "--cp-border-radius-custom",
               min: 0,
               max: 5,
               default: "1em",
@@ -5370,29 +5370,63 @@
         isSizeXsmall: __4("\u6975\u5C0F", "catpow")
       }
     },
-    itemSize: {
-      name: "itemSize",
-      label: __4("\u30A2\u30A4\u30C6\u30E0\u30B5\u30A4\u30BA", "catpow"),
-      vars: "vars",
-      key: "--cp-item-size",
-      input: "range",
-      min: 100,
-      max: 1200,
-      step: 10,
-      coef: 0.0625,
-      unit: "rem"
+    itemSize(preset, vars = "vars", ...otherParams) {
+      return {
+        name: "itemSize",
+        type: "buttons",
+        label: __4("\u30A2\u30A4\u30C6\u30E0\u30B5\u30A4\u30BA", "catpow"),
+        values: {
+          hasItemSizeSmall: __4("\u5C0F", "catpow"),
+          hasItemSizeMedium: __4("\u4E2D", "catpow"),
+          hasItemSizeLarge: __4("\u5927", "catpow"),
+          hasItemSizeCustom: ":admin-generic:"
+        },
+        sub: {
+          hasItemSizeCustom: [
+            {
+              name: "itemSize",
+              label: __4("\u30A2\u30A4\u30C6\u30E0\u30B5\u30A4\u30BA", "catpow"),
+              vars: "vars",
+              key: "--cp-item-size-custom",
+              input: "range",
+              min: 100,
+              max: 1200,
+              step: 10,
+              coef: 0.0625,
+              unit: "rem"
+            }
+          ]
+        }
+      };
     },
-    itemGap: {
-      name: "itemGap",
-      label: __4("\u30A2\u30A4\u30C6\u30E0\u9593\u9694", "catpow"),
-      vars: "vars",
-      key: "--cp-item-gap",
-      input: "range",
-      min: 0,
-      max: 40,
-      step: 1,
-      coef: 0.0625,
-      unit: "rem"
+    itemGap(preset, vars = "vars", ...otherParams) {
+      return {
+        name: "itemGap",
+        type: "buttons",
+        label: __4("\u30A2\u30A4\u30C6\u30E0\u9593\u9694", "catpow"),
+        values: {
+          hasItemGapSmall: __4("\u5C0F", "catpow"),
+          hasItemGapMedium: __4("\u4E2D", "catpow"),
+          hasItemGapLarge: __4("\u5927", "catpow"),
+          hasItemGapCustom: ":admin-generic:"
+        },
+        sub: {
+          hasItemGapCustom: [
+            {
+              name: "itemSize",
+              label: __4("\u30A2\u30A4\u30C6\u30E0\u9593\u9694", "catpow"),
+              vars: "vars",
+              key: "--cp-item-gap-custom",
+              input: "range",
+              min: 0,
+              max: 200,
+              step: 4,
+              coef: 0.0625,
+              unit: "rem"
+            }
+          ]
+        }
+      };
     },
     colorScheme: {
       name: "colorScheme",
@@ -5674,65 +5708,47 @@
         ...otherParams
       };
     },
-    customContentWidth({ preset, vars = "vars", ...otherParams }) {
-      return {
-        name: "customContentWidth",
-        label: __4("\u30AB\u30B9\u30BF\u30E0\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
-        values: "hasCustomContentWidth",
-        sub: [
-          {
-            name: "contentWidth",
-            label: __4("\u5E45", "catpow"),
-            input: "range",
-            vars,
-            key: "--cp-custom-content-width",
-            min: 70,
-            max: 100,
-            default: "95%",
-            unit: "%"
-          },
-          {
-            name: "contentMaxWidth",
-            label: __4("\u6700\u5927\u5E45", "catpow"),
-            input: "range",
-            vars,
-            key: "--cp-custom-content-max-width",
-            min: 160,
-            max: 1600,
-            default: "60rem",
-            step: 10,
-            coef: 0.0625,
-            unit: "rem"
-          }
-        ],
-        ...otherParams
-      };
-    },
     contentWidth({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "contentWidth",
+        type: "buttons",
         label: __4("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
-        values: "hasContentWidth",
-        sub: [{ preset: "customContentWidth", vars }],
-        ...otherParams
-      };
-    },
-    customBorderRadius({ preset, vars = "vars", ...otherParams }) {
-      return {
-        name: "cusotomRadius",
-        label: __4("\u89D2\u4E38", "catpow"),
-        values: "hasCustomBorderRadius",
-        sub: [
-          {
-            name: "borderRadius",
-            label: __4("\u5F84", "catpow"),
-            input: "range",
-            vars,
-            key: "--cp-border-radius",
-            min: 1,
-            max: 100
-          }
-        ],
+        values: {
+          hasContentWidthFit: __4("\u6700\u5C0F", "catpow"),
+          hasContentWidthNarrow: __4("\u72ED", "catpow"),
+          hasContentWidthRegular: __4("\u4E2D", "catpow"),
+          hasContentWidthWide: __4("\u5E83", "catpow"),
+          hasContentWidthFull: __4("\u5168", "catpow"),
+          hasContentWidthCustom: ":admin-generic:"
+        },
+        sub: {
+          hasContentWidthCustom: [
+            {
+              name: "contentWidth",
+              label: __4("\u5E45", "catpow"),
+              input: "range",
+              vars,
+              key: "--cp-content-width-custom",
+              min: 70,
+              max: 100,
+              default: "95%",
+              unit: "%"
+            },
+            {
+              name: "contentMaxWidth",
+              label: __4("\u6700\u5927\u5E45", "catpow"),
+              input: "range",
+              vars,
+              key: "--cp-content-max-width-custom",
+              min: 160,
+              max: 1600,
+              default: "60rem",
+              step: 10,
+              coef: 0.0625,
+              unit: "rem"
+            }
+          ]
+        },
         ...otherParams
       };
     }

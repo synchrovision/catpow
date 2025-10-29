@@ -158,16 +158,16 @@ export const selectiveClassesPresets = {
 				hasFontSizeMiddle: __("中", "catpow"),
 				hasFontSizeSmall: __("小", "catpow"),
 				hasFontSizeXSmall: __("極小", "catpow"),
-				hasCustomFontSize: ":admin-generic:",
+				hasFontSizeCustom: ":admin-generic:",
 			},
 			sub: {
-				hasCustomFontSize: [
+				hasFontSizeCustom: [
 					{
 						name: "fontSize",
 						label: __("文字サイズ", "catpow"),
 						input: "range",
 						vars,
-						key: "--cp-custom-font-size",
+						key: "--cp-font-size-custom",
 						min: 10,
 						max: 160,
 						default: "1rem",
@@ -218,16 +218,16 @@ export const selectiveClassesPresets = {
 				hasBorderRadiusSmall: __("小", "catpow"),
 				hasBorderRadiusMedium: __("中", "catpow"),
 				hasBorderRadiusLarge: __("大", "catpow"),
-				hasCustomBorderRadius: ":admin-generic:",
+				hasBorderRadiusCustom: ":admin-generic:",
 			},
 			sub: {
-				hasCustomBorderRadius: [
+				hasBorderRadiusCustom: [
 					{
 						name: "borderRadius",
 						label: __("角丸", "catpow"),
 						input: "range",
 						vars,
-						key: "--cp-custom-border-radius",
+						key: "--cp-border-radius-custom",
 						min: 0,
 						max: 5,
 						default: "1em",
@@ -271,29 +271,63 @@ export const selectiveClassesPresets = {
 			isSizeXsmall: __("極小", "catpow"),
 		},
 	},
-	itemSize: {
-		name: "itemSize",
-		label: __("アイテムサイズ", "catpow"),
-		vars: "vars",
-		key: "--cp-item-size",
-		input: "range",
-		min: 100,
-		max: 1200,
-		step: 10,
-		coef: 0.0625,
-		unit: "rem",
+	itemSize(preset, vars = "vars", ...otherParams) {
+		return {
+			name: "itemSize",
+			type: "buttons",
+			label: __("アイテムサイズ", "catpow"),
+			values: {
+				hasItemSizeSmall: __("小", "catpow"),
+				hasItemSizeMedium: __("中", "catpow"),
+				hasItemSizeLarge: __("大", "catpow"),
+				hasItemSizeCustom: ":admin-generic:",
+			},
+			sub: {
+				hasItemSizeCustom: [
+					{
+						name: "itemSize",
+						label: __("アイテムサイズ", "catpow"),
+						vars: "vars",
+						key: "--cp-item-size-custom",
+						input: "range",
+						min: 100,
+						max: 1200,
+						step: 10,
+						coef: 0.0625,
+						unit: "rem",
+					},
+				],
+			},
+		};
 	},
-	itemGap: {
-		name: "itemGap",
-		label: __("アイテム間隔", "catpow"),
-		vars: "vars",
-		key: "--cp-item-gap",
-		input: "range",
-		min: 0,
-		max: 40,
-		step: 1,
-		coef: 0.0625,
-		unit: "rem",
+	itemGap(preset, vars = "vars", ...otherParams) {
+		return {
+			name: "itemGap",
+			type: "buttons",
+			label: __("アイテム間隔", "catpow"),
+			values: {
+				hasItemGapSmall: __("小", "catpow"),
+				hasItemGapMedium: __("中", "catpow"),
+				hasItemGapLarge: __("大", "catpow"),
+				hasItemGapCustom: ":admin-generic:",
+			},
+			sub: {
+				hasItemGapCustom: [
+					{
+						name: "itemSize",
+						label: __("アイテム間隔", "catpow"),
+						vars: "vars",
+						key: "--cp-item-gap-custom",
+						input: "range",
+						min: 0,
+						max: 200,
+						step: 4,
+						coef: 0.0625,
+						unit: "rem",
+					},
+				],
+			},
+		};
 	},
 	colorScheme: {
 		name: "colorScheme",
@@ -575,65 +609,47 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	customContentWidth({ preset, vars = "vars", ...otherParams }) {
-		return {
-			name: "customContentWidth",
-			label: __("カスタムコンテンツ幅", "catpow"),
-			values: "hasCustomContentWidth",
-			sub: [
-				{
-					name: "contentWidth",
-					label: __("幅", "catpow"),
-					input: "range",
-					vars,
-					key: "--cp-custom-content-width",
-					min: 70,
-					max: 100,
-					default: "95%",
-					unit: "%",
-				},
-				{
-					name: "contentMaxWidth",
-					label: __("最大幅", "catpow"),
-					input: "range",
-					vars,
-					key: "--cp-custom-content-max-width",
-					min: 160,
-					max: 1600,
-					default: "60rem",
-					step: 10,
-					coef: 0.0625,
-					unit: "rem",
-				},
-			],
-			...otherParams,
-		};
-	},
 	contentWidth({ preset, vars = "vars", ...otherParams }) {
 		return {
 			name: "contentWidth",
+			type: "buttons",
 			label: __("コンテンツ幅", "catpow"),
-			values: "hasContentWidth",
-			sub: [{ preset: "customContentWidth", vars }],
-			...otherParams,
-		};
-	},
-	customBorderRadius({ preset, vars = "vars", ...otherParams }) {
-		return {
-			name: "cusotomRadius",
-			label: __("角丸", "catpow"),
-			values: "hasCustomBorderRadius",
-			sub: [
-				{
-					name: "borderRadius",
-					label: __("径", "catpow"),
-					input: "range",
-					vars,
-					key: "--cp-border-radius",
-					min: 1,
-					max: 100,
-				},
-			],
+			values: {
+				hasContentWidthFit: __("最小", "catpow"),
+				hasContentWidthNarrow: __("狭", "catpow"),
+				hasContentWidthRegular: __("中", "catpow"),
+				hasContentWidthWide: __("広", "catpow"),
+				hasContentWidthFull: __("全", "catpow"),
+				hasContentWidthCustom: ":admin-generic:",
+			},
+			sub: {
+				hasContentWidthCustom: [
+					{
+						name: "contentWidth",
+						label: __("幅", "catpow"),
+						input: "range",
+						vars,
+						key: "--cp-content-width-custom",
+						min: 70,
+						max: 100,
+						default: "95%",
+						unit: "%",
+					},
+					{
+						name: "contentMaxWidth",
+						label: __("最大幅", "catpow"),
+						input: "range",
+						vars,
+						key: "--cp-content-max-width-custom",
+						min: 160,
+						max: 1600,
+						default: "60rem",
+						step: 10,
+						coef: 0.0625,
+						unit: "rem",
+					},
+				],
+			},
 			...otherParams,
 		};
 	},
