@@ -12,24 +12,12 @@ window.Catpow.fbp = {
 		},
 		AddToCart: {
 			label: "カートに追加",
-			options: [
-				"content_name",
-				"content_type",
-				"contents",
-				"currency",
-				"value",
-			],
+			options: ["content_name", "content_type", "contents", "currency", "value"],
 			require: ["content_type", "contents"],
 		},
 		AddToWishlist: {
 			label: "ウィッシュリストに追加",
-			options: [
-				"content_name",
-				"content_category",
-				"contents",
-				"currency",
-				"value",
-			],
+			options: ["content_name", "content_category", "contents", "currency", "value"],
 			require: [],
 		},
 		CompleteRegistration: {
@@ -43,13 +31,7 @@ window.Catpow.fbp = {
 		FindLocation: { label: "場所の検索", options: [], require: [] },
 		InitiateCheckout: {
 			label: "チェックアウト開始",
-			options: [
-				"content_category",
-				"contents",
-				"currency",
-				"num_items",
-				"value",
-			],
+			options: ["content_category", "contents", "currency", "num_items", "value"],
 			require: [],
 		},
 		Lead: {
@@ -59,26 +41,13 @@ window.Catpow.fbp = {
 		},
 		Purchase: {
 			label: "購入",
-			options: [
-				"content_name",
-				"content_type",
-				"contents",
-				"currency",
-				"num_items",
-				"value",
-			],
+			options: ["content_name", "content_type", "contents", "currency", "num_items", "value"],
 			require: ["currency", "value"],
 		},
 		Schedule: { label: "日時を指定", options: [], require: [] },
 		Search: {
 			label: "検索",
-			options: [
-				"content_category",
-				"contents",
-				"currency",
-				"search_string",
-				"value",
-			],
+			options: ["content_category", "contents", "currency", "search_string", "value"],
 			require: [],
 		},
 		StartTrial: {
@@ -94,14 +63,7 @@ window.Catpow.fbp = {
 		},
 		ViewContent: {
 			label: "コンテンツビュー",
-			options: [
-				"content_category",
-				"content_name",
-				"content_type",
-				"contents",
-				"currency",
-				"value",
-			],
+			options: ["content_category", "content_name", "content_type", "contents", "currency", "value"],
 			require: [],
 		},
 		_custom: { options: ["custom"] },
@@ -299,19 +261,7 @@ window.Catpow.fbp = {
 		var prm = {};
 		var isCustomEvent = !window.Catpow.fbp.eventTypes[data.eventType];
 		var eventParams = isCustomEvent
-			? [
-					"content_name",
-					"content_category",
-					"num_items",
-					"contents",
-					"content_type",
-					"currency",
-					"value",
-					"currency",
-					"predicted_ltv",
-					"search_string",
-					"status",
-			  ]
+			? ["content_name", "content_category", "num_items", "contents", "content_type", "currency", "value", "currency", "predicted_ltv", "search_string", "status"]
 			: window.Catpow.fbp.eventTypes[data.eventType].options;
 		eventParams.map(function (eventParam) {
 			if (data[eventParam] !== undefined) {
@@ -324,12 +274,7 @@ window.Catpow.fbp = {
 			});
 		}
 		if (data.fb_pixel_id) {
-			fbq(
-				isCustomEvent ? "trackSingleCustom" : "trackSingle",
-				data.fb_pixel_id,
-				data.eventType,
-				prm
-			);
+			fbq(isCustomEvent ? "trackSingleCustom" : "trackSingle", data.fb_pixel_id, data.eventType, prm);
 		} else {
 			fbq(isCustomEvent ? "trackCustom" : "track", data.eventType, prm);
 		}
