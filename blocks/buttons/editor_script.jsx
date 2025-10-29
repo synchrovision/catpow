@@ -35,7 +35,6 @@ wp.blocks.registerBlockType("catpow/buttons", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"size",
 				"fontSize",
 				"borderRadius",
 				"contentWidth",
@@ -159,7 +158,9 @@ wp.blocks.registerBlockType("catpow/buttons", {
 								set={setAttributes}
 								attr={attributes}
 								columns={[
+									{ type: "text", key: "copy", cond: states.hasMicroCopy },
 									{ type: "text", key: "text", cond: true },
+									{ type: "text", key: "caption", cond: states.hasCaption },
 									{ type: "text", key: "url", cond: true },
 								]}
 								isTemplate={states.isTemplate}

@@ -30,7 +30,6 @@
       const states = CP.classNamesToFlags(classes2);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          "size",
           "fontSize",
           "borderRadius",
           "contentWidth",
@@ -125,7 +124,9 @@
           set: setAttributes,
           attr: attributes,
           columns: [
+            { type: "text", key: "copy", cond: states.hasMicroCopy },
             { type: "text", key: "text", cond: true },
+            { type: "text", key: "caption", cond: states.hasCaption },
             { type: "text", key: "url", cond: true }
           ],
           isTemplate: states.isTemplate

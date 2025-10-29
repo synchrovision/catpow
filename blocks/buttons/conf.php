@@ -14,9 +14,9 @@ $attributes=[
 		],
 		"query"=>[
 			"classes"=>["source"=>'attribute',"attribute"=>'class'],
-			"copy"=>["source"=>'html',"selector"=>".{$block_class}-button__copy"],
+			"copy"=>["source"=>'html',"selector"=>".{$block_class}__item-copy"],
 			"text"=>["source"=>'html',"selector"=>".{$block_class}-button__text"],
-			"caption"=>["source"=>'html',"selector"=>".{$block_class}-button__caption"],
+			"caption"=>["source"=>'html',"selector"=>".{$block_class}__item-caption"],
 			"url"=>["source"=>'attribute',"selector"=>".{$block_class}-button","attribute"=>'href'],
 			"iconSrc"=>["source"=>'attribute',"selector"=>".{$block_class}-button__icon-img","attribute"=>'src'],
 			"iconAlt"=>["source"=>'attribute',"selector"=>".{$block_class}-button__icon-img","attribute"=>'alt'],

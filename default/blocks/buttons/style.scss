@@ -2,13 +2,13 @@
 
 .wp-block-catpow-buttons{
 	$block:&;
-	@include flx((w:w,j:c,a:c,g:g));
+	@include flx((w:w,j:c,a:s,g:g));
 	@include bnd((w:c,pd:1em 0,mgi:a));
 	&-button{
 		@include bnd((d:b,p:r,pd:1em 2em 1em 1.5em));
 		@include bg((c:n));
 		@include bdr((s:s,w:1,r:r));
-		@include txt((a:c,c:mx,f:t,p:t,td:n,b:k));
+		@include txt((a:c,c:mx,f:t,td:n,b:k));
 		@include trn((t:.2s));
 		@include usr((c:p));
 		&__text{
@@ -27,12 +27,12 @@
 	}
 	&__item{
 		@include bnd((p:r,f:0 1 i,mg:0));
-		@include txt((l:n,c:mx));
+		@include txt((l:n,a:c,c:mx,f:t,p:t));
 		&-copy{
 			@include bnd((d:b,p:r,i:0,mg:a,mgb:-1em,pd:.5em 1em,w:fit,h:fit,z:1));
 			@include bg((c:m));
 			@include bdr((r:1em));
-			@include txt((p:.75em,h:1em,c:i));
+			@include txt((p:.6em,h:1em,c:i));
 		}
 		&-caption{
 			@include bnd((d:b,pdl:1em,w:fit,mg:a,z:1));
@@ -89,20 +89,5 @@
 				}
 			}
 		}
-	}
-	&.is-size-xlarge{
-		@include txt((p:32));
-	}
-	&.is-size-large{
-		@include txt((p:24));
-	}
-	&.is-size-medium{
-		@include txt((p:18));
-	}
-	&.is-size-small{
-		@include txt((p:12));
-	}
-	&.is-size-xsmall{
-		@include txt((p:10));
 	}
 }
