@@ -1,16 +1,22 @@
 {
-	"html.customData": [
-		".vscode/custom-element.json"
-	],
-	"json.schemas":[
+	"html.customData": [".vscode/custom-element.json"],
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"prettier.bracketSameLine": false,
+	"prettier.printWidth": 200,
+	"prettier.tabWidth": 2,
+	"prettier.useTabs": true,
+	"[scss]": {
+		"editor.formatOnSave": false
+	},
+	"json.schemas": [
 		{
-			"fileMatch": ["components/**/deps.json","default/components/**/deps.json"],
+			"fileMatch": ["components/**/deps.json", "default/components/**/deps.json"],
 			"url": "./schema/component.deps.json"
 		},
 		{
-			"fileMatch": ["ui/**/deps.json","default/ui/**/deps.json"],
+			"fileMatch": ["ui/**/deps.json", "default/ui/**/deps.json"],
 			"url": "./schema/ui.deps.json"
 		}
-	],
-	"prettier.useTabs": true
+	]
 }
