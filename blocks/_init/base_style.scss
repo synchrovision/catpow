@@ -659,7 +659,7 @@ $colors:(
 			
 		}
 		&__footer{
-			@include txt((p:10));
+			@include txt((p:10,b:b));
 		}
 		&__item{
 			@include flx((w:w,g:5,a:c));

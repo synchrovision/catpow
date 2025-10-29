@@ -10,11 +10,42 @@
 				return { events: action.events };
 			}
 			case "UPDATE": {
-				state.events[action.index] = {
-					...state.events[action.index],
-					...action.event,
-				};
-				return { ...state };
+				const events = [...state.events];
+				const targetEvent = { ...events[action.index], ...action.event };
+				events[action.index] = targetEvent;
+				if (action.event.eventType) {
+					const eventType = eventTypes[action.event.eventType] || eventTypes._custom;
+					for (let key in targetEvent) {
+						if (key === "eventType") {
+							continue;
+						}
+						if (key === "extra") {
+							const newExtra = { ...targetEvent.extra };
+							for (let extraKey in newExtra) {
+								if (eventType[extraKey] == null) {
+									delete newExtra[extraKey];
+								}
+							}
+							targetEvent.extra = newExtra;
+						} else {
+							if (eventType[key] == null) {
+								delete targetEvent[key];
+							}
+						}
+					}
+				}
+				for (let key in targetEvent) {
+					if (key === "extra") {
+						for (let extraKey in targetEvent.extra) {
+							if (targetEvent.extra[extraKey] === "") {
+								delete targetEvent.extra[extraKey];
+							}
+						}
+					} else if (targetEvent[key] === "") {
+						delete targetEvent[key];
+					}
+				}
+				return { ...state, events };
 			}
 			case "CLONE": {
 				state.events.splice(action.index, 0, { ...state.events[action.index] });
@@ -134,11 +165,11 @@
 									<div className="cp-eventinputcard__item__inputs">
 										<CP.DynamicInput
 											param={eventParamsWithoutLabel[paramName]}
-											value={event[paramName] || ""}
+											value={param.extra ? event?.extra?.[paramName] : event[paramName] || ""}
 											onChange={(val) => {
 												dispatch({
 													type: "UPDATE",
-													event: { [paramName]: val },
+													event: param.extra ? { extra: { ...event.extra, [paramName]: val } } : { [paramName]: val },
 													index,
 												});
 											}}
