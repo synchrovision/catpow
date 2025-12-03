@@ -1,5 +1,6 @@
 <?php
 namespace Catpow\meta;
+use cp;
 
 class select_rel_posts extends select{
 	public static
@@ -58,15 +59,14 @@ class select_rel_posts extends select{
 				case 'href':
 					return preg_replace('@^https?://@','',get_permalink($val));
 				default:
-					global $post_types;
 					$post_type=get_post_type($val);
-					if(in_array($prm,$post_types[$post_type]['template'])){
+					if(in_array($prm,cp::$config['post_types'][$post_type]['template'])){
 						$class_name=\cp::get_class_name('content');
 						ob_start();
 						$class_name::from_object(get_post($val))->render($prm);
 						return ob_get_clean();
 					}
-					elseif(isset($post_types[$post_type]['meta'][$prm])){
+					elseif(isset(cp::$config['post_types'][$post_type]['meta'][$prm])){
 						$meta=new \Catpow\content\meta(['data_path'=>'post/'.$post_type.'/'.$val.'/'.$prm]);
 						return $meta->get_output();
 					}
@@ -102,9 +102,8 @@ class select_rel_posts extends select{
 			else{$rtn=$meta->conf['addition'];}
 		}
 		if(isset($meta->conf['sortby'])){
-			global $post_types;
 			$sortby=$meta->conf['sortby'];
-			$sortby_meta=$post_types[$q->query_vars['post_type']]['meta'][$sortby];
+			$sortby_meta=cp::$config['post_types'][$q->query_vars['post_type']]['meta'][$sortby];
 			$meta_class_name=\cp::get_class_name('content','meta');
 		}
 		if(empty($meta->conf['input_loop'])){

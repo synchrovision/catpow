@@ -905,20 +905,20 @@ class CP{
 			elseif($depth===1){list($data_type,$data_name)=explode('/',$content_path);}
 			else{return $cache[$content_path][$data_id]=[];}
 			$conf_data_name=self::get_conf_data_name($data_type);
-			if(!isset($GLOBALS[$conf_data_name][$data_name])){
+			if(!isset(self::$config[$conf_data_name][$data_name])){
 				if($data_type==='catpow'){
 					if($f=self::get_file_path('functions/'.$data_name.'/conf.php',1)){
 						include $f;
-						$GLOBALS[$conf_data_name][$data_name]=$conf;
-						self::fill_confs($GLOBALS[$conf_data_name][$data_name]['meta'],'catpow/'.$data_name);
+						self::$config[$conf_data_name][$data_name]=$conf;
+						self::fill_confs(self::$config[$conf_data_name][$data_name]['meta'],'catpow/'.$data_name);
 					}
-					else{$GLOBALS[$conf_data_name][$data_name]=[];}
+					else{self::$config[$conf_data_name][$data_name]=[];}
 				}
 				else{
-					$GLOBALS[$conf_data_name][$data_name]=['name'=>$data_name,'label'=>$data_name,'path'=>$data_type.'/'.$data_name];
+					self::$config[$conf_data_name][$data_name]=['name'=>$data_name,'label'=>$data_name,'path'=>$data_type.'/'.$data_name];
 				}
 			}
-			$conf_data=$GLOBALS[$conf_data_name][$data_name];
+			$conf_data=self::$config[$conf_data_name][$data_name];
 			if(isset($tmp_name) && $f=self::get_file_path($content_path.'/meta.php')){
 				include $f;
 				if(isset($meta)){
@@ -972,17 +972,17 @@ class CP{
 		$data_type=array_shift($path_arr);
 		$data_name=array_shift($path_arr);
 		$conf_data_name=self::get_conf_data_name($data_type);
-		if($data_type==='catpow' && !isset($GLOBALS[$conf_data_name][$data_name])){
+		if($data_type==='catpow' && !isset(self::$config[$conf_data_name][$data_name])){
 			if($f=self::get_file_path('functions/'.$data_name.'/conf.php',self::FROM_PLUGIN)){
 				include $f;
-				$GLOBALS[$conf_data_name][$data_name]=$conf;
+				self::$config[$conf_data_name][$data_name]=$conf;
 				if(isset($conf['meta'])){
-					self::fill_confs($GLOBALS[$conf_data_name][$data_name]['meta'],'catpow/'.$data_name);
+					self::fill_confs(self::$config[$conf_data_name][$data_name]['meta'],'catpow/'.$data_name);
 				}
 			}
-			else{$GLOBALS[$conf_data_name][$data_name]=[];}
+			else{self::$config[$conf_data_name][$data_name]=[];}
 		}
-		if(empty($path_arr)){$cache[$conf_data_path]=&$GLOBALS[$conf_data_name][$data_name];return $cache[$conf_data_path];}
+		if(empty($path_arr)){$cache[$conf_data_path]=&self::$config[$conf_data_name][$data_name];return $cache[$conf_data_path];}
 		eval("\$cache['{$conf_data_path}']=&\$GLOBALS['{$conf_data_name}']['{$data_name}']['meta']['".implode("']['meta']['",$path_arr)."'];");
 		return $cache[$conf_data_path];
 	}
@@ -1002,8 +1002,8 @@ class CP{
 	public static function loop_conf_data(){
 		foreach(self::$data_types as $data_type){
 			$conf_data_name=self::get_conf_data_name($data_type);
-			if(empty($GLOBALS[$conf_data_name])){continue;}
-			foreach($GLOBALS[$conf_data_name] as $data_name=>$conf_data){
+			if(empty(self::$config[$conf_data_name])){continue;}
+			foreach(self::$config[$conf_data_name] as $data_name=>$conf_data){
 				yield "{$data_type}/{$data_name}"=>$conf_data; 
 			}
 		}
@@ -1098,15 +1098,13 @@ class CP{
 			}
 		}
 		elseif($data_type==='term'){
-			global $post_types,$taxonomies;
 			foreach($conf_data['post_type'] as $i=>$post_type_name){
-				$post_types[$post_type_name]['taxonomies'][$data_name]=&$taxonomies[$data_name];
+				self::$config['post_types'][$post_type_name]['taxonomies'][$data_name]=&self::$config['taxonomies'][$data_name];
 			}
 		}
 		elseif($data_type==='comment'){
-			global $post_types,$comment_datas;
 			foreach($conf_data['post_type'] as $i=>$post_type_name){
-				$post_types[$post_type_name]['comment'][$data_name]=&$comment_datas[$data_name];
+				self::$config['post_types'][$post_type_name]['comment'][$data_name]=&self::$config['comment_datas'][$data_name];
 			}
 		}
 		$conf_data['is_filled']=true;

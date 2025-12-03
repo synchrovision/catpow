@@ -359,7 +359,6 @@ class MenuManager{
 	
 	//default
 	public static function get_default_menu_items(){
-		global $post_types;
 		static $menu_items;
 		if(isset($menu_items)){return $menu_items;}
 		$menu_items=[];
@@ -367,7 +366,7 @@ class MenuManager{
 		
 		foreach(Keynames::get('main') as $name){
 			if(isset($menu_items_for_pages[$name])){$menu_items['main'][]=$menu_items_for_pages[$name];}
-			elseif(isset($post_types[$name])){$menu_items['main'][]=self::get_panel_menu_item_for_post_type($name);}
+			elseif(isset(cp::$config['post_types'][$name])){$menu_items['main'][]=self::get_panel_menu_item_for_post_type($name);}
 		}
 		foreach(Keynames::get('primary') as $name){
 			if(isset($menu_items_for_pages[$name])){$menu_items['primary'][]=$menu_items_for_pages[$name];}
