@@ -9,7 +9,7 @@ class rewrite{
 			'callback/(.+)/?$'=>'index.php?cp_callee=$matches[1]'
 		];
 		foreach(\cp::$data_types as $data_type){
-			$datas=$GLOBALS[\cp::get_conf_data_name($data_type)];
+			$datas=\cp::$config[\cp::get_conf_data_name($data_type)];
 			if(empty($datas)){continue;}
 			foreach($datas as $data_name=>$data){
 				foreach(['','alias_'] as $pref){

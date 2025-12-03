@@ -46,8 +46,7 @@ class select_rel_rows extends select{
 			else{$rtn=$meta->conf['addition'];}
 		}
 		$conf_data_name=\cp::get_conf_data_name($table[0]);
-		global $$conf_data_name;
-		$database_meta=$$conf_data_name[$table[1]]['meta'][$table[2]];
+		$database_meta=\cp::$config[$conf_data_name][$table[1]]['meta'][$table[2]];
 		if(isset($meta->conf['sortby'])){
 			$sortby=$meta->conf['sortby'];
 			$sortby_meta=$database_meta['meta'][$sortby];

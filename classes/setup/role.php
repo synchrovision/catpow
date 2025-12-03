@@ -3,10 +3,9 @@ namespace Catpow\setup;
 
 class roles implements iSetup{
 	static function exec(){
-		global $user_datas;
 		$cnt1=$cnt2=0;
 		$role_datas=get_option('wp_user_roles');
-		foreach($user_datas as $role_name=>$user_data){
+		foreach(\cp::$config['user_datas'] as $role_name=>$user_data){
 			if($role_name==='guest' || $role_name==='common'){continue;}
 			if(isset($user_data['capabilities'])){
 				if(is_array($user_data['capabilities'])){

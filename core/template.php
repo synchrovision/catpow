@@ -20,7 +20,6 @@ function menu($path,$args=null){
 	}
 	if(isset($args)){$args['theme_location']=$location;}
 	else{
-		global $nav_datas;
 		$args=[
 			'container_class'=>"menu-{$location}-container",
 			'theme_location'=>$location,

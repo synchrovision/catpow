@@ -64,7 +64,7 @@ class MenuManager{
 	
 	//items
 	public static function get_panel_menu_item_for_post_type($post_type){
-		$config=$GLOBALS['post_types'][$post_type];
+		$config=\cp::$config['post_types'][$post_type];
 		$is_hierarchical=is_post_type_hierarchical($post_type);
 		post_type_supports($post_type,'thumbnail');
 		$item=[

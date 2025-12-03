@@ -14,7 +14,7 @@ class select_rel_users extends select{
 			if(is_string($meta->conf['value'])){$role=$meta->conf['value'];}
 			elseif(isset($meta->conf['value']['role'])){$role=$meta->conf['value']['role'];}
 			else{return [];}
-			global $user_datas;
+			$user_datas=\cp::$config['user_datas'];
 			if(in_array($prm,$user_datas[$role]['template'])){
 				$class_name=\cp::get_class_name('content');
 				ob_start();
@@ -38,7 +38,7 @@ class select_rel_users extends select{
 				case 'url':
 					return home_url(sprintf('/%s/%d',get_user_role($val),$val));
 				default:
-					global $user_datas;
+					$user_datas=\cp::$config['user_datas'];
 					$role=get_user_role($val);
 					if(in_array($prm,$user_datas[$role]['template'])){
 						$class_name=\cp::get_class_name('content');
@@ -69,7 +69,7 @@ class select_rel_users extends select{
 			else{$rtn=$meta->conf['addition'];}
 		}
 		if(isset($meta->conf['sortby'])){
-			global $user_datas;
+			$user_datas=\cp::$config['user_datas'];
 			$sortby=$meta->conf['sortby'];
 			$sortby_meta=$user_datas[$q->query_vars['role']]['meta'][$sortby];
 		}

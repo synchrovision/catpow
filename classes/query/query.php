@@ -1,5 +1,6 @@
 <?php
 namespace Catpow\query;
+use cp;
 /**
 * オリジナルのdata_typeとWPの各種のクエリに共通のインターフェースを提供するクラス
 */
@@ -92,7 +93,7 @@ abstract class query{
 			}
 			else{$object_data=array_replace($tmp,array_intersect_key($obj,$tmp));}
 			$data_name=$object_data[$name_key];
-			$conf=$GLOBALS[$conf_data_name][$object_data[$name_key]];
+			$conf=cp::$config[$conf_data_name][$object_data[$name_key]];
 			$meta_data=[];
 			if(!empty($conf['meta'])){
 				foreach($conf['meta'] as $meta_name=>$meta_conf){
@@ -116,7 +117,7 @@ abstract class query{
 		foreach($datas as $data){
 			$object_data=array_intersect_key($data,$tmp);
 			$data_name=$object_data[$name_key];
-			$conf=$GLOBALS[$conf_data_name][$object_data[$name_key]];
+			$conf=cp::$config[$conf_data_name][$object_data[$name_key]];
 			$id=static::insert($data);
 			$inserted_ids[]=$id;
 			if(!empty($conf['meta'])){

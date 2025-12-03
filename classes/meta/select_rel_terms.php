@@ -35,14 +35,13 @@ class select_rel_terms extends select{
 				case 'url':
 					return get_term_link($val);
 				default:
-					global $taxonomies;
-					if(in_array($prm,$taxonomies[$term->taxonomy]['template'])){
+					if(in_array($prm,\cp::$config['taxonomies'][$term->taxonomy]['template'])){
 						$class_name=\cp::get_class_name('content');
 						ob_start();
 						$class_name::from_object($term)->render($prm);
 						return ob_get_clean();
 					}
-					elseif(isset($taxonomies[$term->taxonomy]['meta'][$prm])){
+					elseif(isset(\cp::$config['taxonomies'][$term->taxonomy]['meta'][$prm])){
 						$meta=new \Catpow\content\meta(['data_path'=>'term/'.$term->taxonomy.'/'.$val.'/'.$prm]);
 						return $meta->get_output();
 					}
@@ -66,9 +65,8 @@ class select_rel_terms extends select{
 			else{$rtn=$meta->conf['addition'];}
 		}
 		if(isset($meta->conf['sortby'])){
-			global $taxonomies;
 			$sortby=$meta->conf['sortby'];
-			$sortby_meta=$taxonomies[$q->query_vars['taxonomy']]['meta'][$sortby];
+			$sortby_meta=\cp::$config['taxonomies'][$q->query_vars['taxonomy']]['meta'][$sortby];
 			$meta_class_name=\cp::get_class_name('content','meta');
 		}
 		if(empty($meta->conf['input_loop'])){

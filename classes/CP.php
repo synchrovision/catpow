@@ -737,7 +737,7 @@ class CP{
 		$post_type=reset($path_data);
 		$post_name=basename($path);
 		$parent=self::get_post(dirname($path));
-		$conf_data=$GLOBALS['post_types'][$post_type];
+		$conf_data=self::$config['post_types'][$post_type];
 		$post_data=[
 			'post_type'=>$post_type,
 			'post_status'=>'publish',
@@ -757,7 +757,7 @@ class CP{
 		if(empty($post_data['post_content'])){
 			if(
 				($post_type==='page' && (
-					($page_conf_data=$GLOBALS['static_pages'][$post_name] && $default_content=$page_conf_data['default_content']) ||
+					($page_conf_data=self::$config['static_pages'][$post_name] && $default_content=$page_conf_data['default_content']) ||
 					($default_content_file=\cp::get_file_path("page/{$post_name}/admin/default_content.php"))
 				)) ||
 				($default_content=$conf_data['default_content']) ||
@@ -983,7 +983,7 @@ class CP{
 			else{self::$config[$conf_data_name][$data_name]=[];}
 		}
 		if(empty($path_arr)){$cache[$conf_data_path]=&self::$config[$conf_data_name][$data_name];return $cache[$conf_data_path];}
-		eval("\$cache['{$conf_data_path}']=&\$GLOBALS['{$conf_data_name}']['{$data_name}']['meta']['".implode("']['meta']['",$path_arr)."'];");
+		eval("\$cache['{$conf_data_path}']=&\self::\$config['{$conf_data_name}']['{$data_name}']['meta']['".implode("']['meta']['",$path_arr)."'];");
 		return $cache[$conf_data_path];
 	}
 	
@@ -1032,19 +1032,18 @@ class CP{
 		}
 		if(!isset($conf_data['label'])){$conf_data['label']=$data_name;}
 		if($data_type==='post'){
-			global $taxonomies,$comment_datas;
 			$conf_data['name']=$data_name;
 			if(isset($conf_data['taxonomies'])){
 				foreach($conf_data['taxonomies'] as $key => $val){
 					$tax_name=is_string($val)?$val:$key;
-					if(isset($taxonomies[$tax_name])){
-						if(!isset($taxonomies[$tax_name]['post_type']))$taxonomies[$tax_name]['post_type']=[];
-						$taxonomies[$tax_name]['post_type'][]=$data_name;
+					if(isset(self::$config['taxonomies'][$tax_name])){
+						if(!isset(self::$config['taxonomies'][$tax_name]['post_type']))self::$config['taxonomies'][$tax_name]['post_type']=[];
+						self::$config['taxonomies'][$tax_name]['post_type'][]=$data_name;
 					}else{
-						$taxonomies[$tax_name]=['post_type'=>[$data_name]];
+						self::$config['taxonomies'][$tax_name]=['post_type'=>[$data_name]];
 					}
 					if(is_array($val)){
-						$taxonomies[$tax_name]=array_merge($val,$taxonomies[$tax_name]);
+						self::$config['taxonomies'][$tax_name]=array_merge($val,self::$config['taxonomies'][$tax_name]);
 					}
 				}
 			}
@@ -1052,14 +1051,14 @@ class CP{
 			if(isset($conf_data['comments'])){
 				foreach($conf_data['comments'] as $key => $val){
 					$comment_data_type=is_string($val)?$val:$key;
-					if(isset($comment_datas[$comment_data_type])){
-						if(!isset($comment_datas[$comment_data_type]['post_type']))$comment_datas[$comment_data_type]['post_type']=[];
-						$comment_datas[$comment_data_type]['post_type'][]=$post_type_name;
+					if(isset(self::$config['comment_datas'][$comment_data_type])){
+						if(!isset(self::$config['comment_datas'][$comment_data_type]['post_type']))self::$config['comment_datas'][$comment_data_type]['post_type']=[];
+						self::$config['comment_datas'][$comment_data_type]['post_type'][]=$post_type_name;
 					}else{
-						$comment_datas[$comment_data_type]=['post_type'=>[$data_name]];
+						self::$config['comment_datas'][$comment_data_type]=['post_type'=>[$data_name]];
 					}
 					if(is_array($val)){
-						$comment_datas[$comment_data_type]=array_merge($val,$comment_datas[$comment_data_type]);
+						self::$config['comment_datas'][$comment_data_type]=array_merge($val,self::$config['comment_datas'][$comment_data_type]);
 					}
 				}
 			}
@@ -1078,13 +1077,13 @@ class CP{
 					$child_page_conf['page_name']=$child_page_name;
 					$child_page_conf['parent']=$conf_data['page_path'];
 					$child_data_name=$data_name.'-'.$child_page_name;
-					$GLOBALS['static_pages'][$child_data_name]=$child_page_conf;
-					self::fill_conf_data($data_type,$child_data_name,$GLOBALS['static_pages'][$child_data_name]);
+					self::$config['static_pages'][$child_data_name]=$child_page_conf;
+					self::fill_conf_data($data_type,$child_data_name,self::$config['static_pages'][$child_data_name]);
 				}
 			}
-			if(isset($GLOBALS['post_types']['page']['meta'])){
-				foreach($GLOBALS['post_types']['page']['meta'] as $meta_name=>$meta_conf){
-					$conf_data['meta'][$meta_name]=&$GLOBALS['post_types']['page']['meta'][$meta_name];
+			if(isset(self::$config['post_types']['page']['meta'])){
+				foreach(self::$config['post_types']['page']['meta'] as $meta_name=>$meta_conf){
+					$conf_data['meta'][$meta_name]=&self::$config['post_types']['page']['meta'][$meta_name];
 				}
 			}
 		}
@@ -1092,7 +1091,7 @@ class CP{
 			if($data_name==='common' && !empty($conf_data['meta'])){
 				foreach(wp_roles()->role_names as $role=>$role_name){
 					foreach($conf_data['meta'] as $meta_name=>$meta_conf){
-						$GLOBALS['user_datas'][$role]['meta'][$meta_name]=&$conf_data['meta'][$meta_name];
+						self::$config['user_datas'][$role]['meta'][$meta_name]=&$conf_data['meta'][$meta_name];
 					}
 				}
 			}
@@ -1163,7 +1162,7 @@ class CP{
 			switch($data_name){
 				case 'page':
 					$page_name=str_replace('/','-',get_page_uri($object));
-					if(isset($GLOBALS['static_pages'][$page_name])){
+					if(isset(self::$config['static_pages'][$page_name])){
 						$data_type='page';$data_name=$page_name;
 					}
 					break;

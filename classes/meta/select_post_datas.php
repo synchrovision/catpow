@@ -43,7 +43,7 @@ class select_post_datas extends select{
 			if(is_object($q) and is_a($q,\cp::get_class_name('query','post'))){
 				$post_type=$q->query->query_vars['post_type'];
 			}
-			$conf_data=$GLOBALS['post_types'][$post_type];
+			$conf_data=\cp::$config['post_types'][$post_type];
 			if(isset($conf_data['article_type'])){
 				$class_name=\cp::get_class_name('article_type',$conf_data['article_type']);
 				foreach($class_name::get_default_post_datas($conf_data) as $path=>$post_data){

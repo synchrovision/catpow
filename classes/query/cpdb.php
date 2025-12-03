@@ -113,7 +113,7 @@ class cpdb extends query{
 	public static function import($datas){
 		global $cpdb;
 		foreach($datas as $row){
-			$conf=$GLOBALS['cpdb_datas'][$cpdb->structure[$row['table']]['alias']];
+			$conf=\cp::$config['cpdb_datas'][$cpdb->structure[$row['table']]['alias']];
 			foreach($conf['meta'] as $meta_name=>$meta_conf){
 				if(!isset($row[$meta_name])){continue;}
 				$meta_class=\cp::get_class_name('meta',$meta_conf['type']);

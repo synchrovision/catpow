@@ -5,10 +5,7 @@ init and register post types,taxonomies,theme supports ...etc, with global vars
 this file is included in plugins_loaded hook 
 so you have chance to extend them with other plugins 
 */
-global $is_auth_ip,$auth_ip,
-$taxonomies,$static_pages,$comment_datas,
-$menu_datas,$user_datas,$site_datas,$view_datas,$sidebar_datas,$use_widgets,
-$wp_query,$cp_mode;
+global $is_auth_ip,$auth_ip,$use_widgets,$wp_query,$cp_mode;
 
 cp::conf_data_walk(function($data_type,$data_name,&$conf_data){
 	cp::fill_conf_data($data_type,$data_name,$conf_data);
@@ -93,12 +90,11 @@ add_action('after_setup_theme',function()use($post_formats_to_support,$is_suppor
 	if($is_support_post_thumbnails)add_theme_support('post-thumbnails');
 });
 add_action('init',function()use($post_types_to_register){
-	global $taxonomies;
 	foreach($post_types_to_register as $type=>$prm){
 		register_post_type($type,$prm);
 	}
 	$default_tax_data=array('sort'=>true,'hierarchical'=>true,'show_in_rest'=>true);
-	foreach($taxonomies as $tax_name=>$tax_data){
+	foreach(\cp::$config['taxonomies'] as $tax_name=>$tax_data){
 		register_taxonomy($tax_name,$tax_data['post_type'],array_merge($default_tax_data,(array)$tax_data));
 	}
 });

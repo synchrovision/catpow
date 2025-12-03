@@ -94,14 +94,13 @@ class select_terms extends select{
 			if(empty($term)){return '';}
 			if(empty($prm)){return $term->name;}
 			$tax=$term->taxonomy;
-			global $taxonomies;
-			if(in_array($prm,$taxonomies[$tax]['template'])){
+			if(in_array($prm,\cp::$config['taxonomies'][$tax]['template'])){
 				$class_name=\cp::get_class_name('content','loop');
 				ob_start();
 				$class_name::from_object($term)->render($prm);
 				return ob_get_clean();
 			}
-			elseif(isset($taxonomies[$tax]['meta'][$prm])){
+			elseif(isset(\cp::$config['taxonomies'][$tax]['meta'][$prm])){
 				$meta=new \Catpow\content\meta(['data_path'=>'term/'.$tax.'/'.$val.'/'.$prm]);
 				return $meta->get_output();
 			}
@@ -165,9 +164,8 @@ class select_terms extends select{
 			else{$rtn=$meta->conf['addition'];}
 		}
 		if(isset($meta->conf['sortby'])){
-			global $taxonomies;
 			$sortby=$meta->conf['sortby'];
-			$sortby_conf=$taxonomies[$q->query_vars['taxonomy']]['meta'][$sortby];
+			$sortby_conf=\cp::$config['taxonomies'][$q->query_vars['taxonomy']]['meta'][$sortby];
 		}
 		if(isset($q)){
 			if(empty($meta->conf['input_loop'])){
