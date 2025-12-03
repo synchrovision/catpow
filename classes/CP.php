@@ -991,9 +991,10 @@ class CP{
 	public static function conf_data_walk($callback){
 		foreach(self::$data_types as $data_type){
 			$conf_data_name=self::get_conf_data_name($data_type);
-			global $$conf_data_name;
-			if(!isset($$conf_data_name)){$$conf_data_name=array();}
-			foreach($$conf_data_name as $data_name=>&$conf_data){
+			if(!isset(self::$config[$conf_data_name])){
+				self::$config[$conf_data_name]=[];
+			}
+			foreach(self::$config[$conf_data_name] as $data_name=>&$conf_data){
 				$callback($data_type,$data_name,$conf_data);
 			}
 		}

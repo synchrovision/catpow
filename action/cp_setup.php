@@ -6,13 +6,14 @@ this file is included in plugins_loaded hook
 so you have chance to extend them with other plugins 
 */
 global $is_auth_ip,$auth_ip,
-$post_types,$taxonomies,$static_pages,$comment_datas,
+$taxonomies,$static_pages,$comment_datas,
 $menu_datas,$user_datas,$site_datas,$view_datas,$sidebar_datas,$use_widgets,
 $wp_query,$cp_mode;
 
 cp::conf_data_walk(function($data_type,$data_name,&$conf_data){
 	cp::fill_conf_data($data_type,$data_name,$conf_data);
 });
+$post_types=cp::$config['post_types'];
 
 $post_types_to_register=array();
 $post_formats_to_support=array();
