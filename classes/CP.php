@@ -1718,11 +1718,11 @@ class CP{
 		if($path_data['data_type']==='post'){
 			switch($path_data['data_name']){
 				case 'page':
-					global $static_pages,$post;
+					global $post;
 					$data_name=str_replace('/','-',get_page_uri($post));
 					if(
-						isset($static_pages[$data_name]) && 
-						in_array('single',$static_pages[$data_name]['template'])
+						isset(self::$config['static_pages'][$data_name]) && 
+						in_array('single',self::$config['static_pages'][$data_name]['template'])
 					){
 						$path_data['data_type']='page';
 						$path_data['data_name']=$data_name;
