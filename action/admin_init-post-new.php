@@ -1,5 +1,6 @@
 <?php
 namespace Catpow;
+use cp;
 
 add_filter('default_title',function($title,$post){
 	if(!empty($title)){return $title;}
@@ -24,8 +25,8 @@ add_filter('default_content',function($content,$post){
 	return ob_get_clean();
 },10,2);
 add_filter('user_can_richedit',function($can_richedit){
-	if(isset($GLOBALS['post_types'][get_post_type()]['richedit'])){
-		return $GLOBALS['post_types'][get_post_type()]['richedit'];
+	if(isset(cp::$config['post_types'][get_post_type()]['richedit'])){
+		return cp::$config['post_types'][get_post_type()]['richedit'];
 	}
 	return $can_richedit;
 });

@@ -35,7 +35,7 @@ register_rest_route(
 			$res=new WP_REST_Response([],200);
 			try{
 				if(!empty($req['tmp'])){
-					$conf=$GLOBALS[cp::get_conf_data_name($req['data_type'])][$req['data_name']]??null;
+					$conf=cp::$config[cp::get_conf_data_name($req['data_type'])][$req['data_name']]??null;
 					if(
 						isset($conf) && (in_array($req['tmp'],$conf['template']??[]) || in_array($req['tmp'],$conf['alias_template']??[])) ||
 						wp_verify_nonce($_SERVER['HTTP_X_CP_NONCE']??'',$req['content_path'])
