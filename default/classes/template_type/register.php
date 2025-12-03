@@ -1,5 +1,6 @@
 <?php
 namespace Catpow\template_type;
+use cp;
 /**
 * テンプレートの情報
 * テンプレート生成・パーマリンク生成時に使用される
@@ -25,8 +26,8 @@ class register extends template_type{
 		];
 	}
 	public static function fill_conf_data(&$conf_data){
-		if(!isset($GLOBALS['post_types']['register_form'])){
-			$GLOBALS['post_types']['register_form']=[
+		if(!isset(cp::$config['post_types']['register_form'])){
+			cp::$config['post_types']['register_form']=[
 				'label'=>'登録フォーム',
 				'public'=>false,
 				'show_in_menu'=>false,
@@ -39,10 +40,10 @@ class register extends template_type{
 					'send_mail'=>['type'=>'checkbox_post_datas','label'=>'メール送信','value'=>'register_mail']
 				]
 			];
-			\cp::fill_conf_data('post','register_form',$GLOBALS['post_types']['register_form']);
+			\cp::fill_conf_data('post','register_form',cp::$config['post_types']['register_form']);
 		}
-		if(!isset($GLOBALS['post_types']['register_mail'])){
-			$GLOBALS['post_types']['register_mail']=[
+		if(!isset(cp::$config['post_types']['register_mail'])){
+			cp::$config['post_types']['register_mail']=[
 				'label'=>'登録メール',
 				'public'=>false,
 				'show_in_menu'=>false,
@@ -54,7 +55,7 @@ class register extends template_type{
 					'type'=>['type'=>'radio','label'=>'メールタイプ','value'=>['plain','html']]
 				]
 			];
-			\cp::fill_conf_data('post','register_mail',$GLOBALS['post_types']['register_mail']);
+			\cp::fill_conf_data('post','register_mail',cp::$config['post_types']['register_mail']);
 		}
 	}
 	public static function get_default_post_datas($conf_data){

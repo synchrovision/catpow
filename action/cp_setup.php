@@ -13,16 +13,15 @@ $wp_query,$cp_mode;
 cp::conf_data_walk(function($data_type,$data_name,&$conf_data){
 	cp::fill_conf_data($data_type,$data_name,$conf_data);
 });
-$post_types=cp::$config['post_types'];
 
 $post_types_to_register=array();
 $post_formats_to_support=array();
 $is_support_post_thumbnails=false;
-foreach($post_types as $type=>&$type_vals){
+foreach(cp::$config['post_types'] as $type=>&$type_vals){
 	if(!empty($type_vals['children'])){
 		foreach($type_vals['children'] as $child_type=>$child_type_vals){
-			$post_types[$child_type]=&$type_vals['children'][$child_type];
-			$post_types[$child_type]['parent']=$type;
+			cp::$config['post_types'][$child_type]=&$type_vals['children'][$child_type];
+			cp::$config['post_types'][$child_type]['parent']=$type;
 		}
 	}
 	$supports=array('title');

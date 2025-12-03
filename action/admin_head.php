@@ -55,7 +55,7 @@ elseif($current_screen->base=='toplevel_page_catpow'){
 }
 
 /*post_meta*/
-global $wp_query,$post_types,$static_pages;
+global $wp_query;
 function _cp_post_edit_form($post,$box){
 	$sec_class=\cp::get_class_name('content','form_section');
 	$sec=$sec_class::from_object($post,'admin/form.php');
@@ -71,7 +71,7 @@ function _cp_post_edit_form($post,$box){
 	$sec->render();
 	
 }
-foreach($post_types as $post_type=>$data){
+foreach(cp::$config['post_types'] as $post_type=>$data){
 	if(empty($data['meta'])){continue;}
 	add_meta_box('cpcf_custom_box',"CF <small>{$post_type}</small>",'_cp_post_edit_form',$post_type,'normal','high');
 }
@@ -81,7 +81,6 @@ add_meta_box('cpcf_custom_box','CF <small>page</small>','_cp_post_edit_form','pa
 add_action('post_edit_form_tag', function(){echo ' enctype="multipart/form-data"';});
 
 /*term_meta*/
-global $post_types;
 if($current_screen->base=='term'){
 	add_action($current_screen->taxonomy.'_term_edit_form_tag',function($term){
 		echo('enctype="multipart/form-data"');

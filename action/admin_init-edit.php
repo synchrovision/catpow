@@ -1,12 +1,11 @@
 <?php
 namespace Catpow;
+use cp;
 
-
-global $post_types;
 $post_type=$_GET['post_type']??'post';
-if(isset($post_types[$post_type]['bulk'])){
-	$post_type_label=isset($post_types[$post_type]['label'])?$post_types[$post_type]['label']:$post_type;
-	$bulks=$post_types[$post_type]['bulk'];
+if(isset(cp::$config['post_types'][$post_type]['bulk'])){
+	$post_type_label=isset(cp::$config['post_types'][$post_type]['label'])?cp::$config['post_types'][$post_type]['label']:$post_type;
+	$bulks=cp::$config['post_types'][$post_type]['bulk'];
 	add_filter("bulk_actions-edit-{$post_type}",function($bulk_actions)use($bulks){
 		$rtn=array();
 		foreach($bulks as $bulk_name=>$bulk){
@@ -80,7 +79,7 @@ add_action('admin_notices',function($wp_admin_bar)use($post_type){
 	}
 });
 
-if(isset($post_types[$post_type]['meta']) and $metas=$post_types[$post_type]['meta']){
+if(isset(cp::$config['post_types'][$post_type]['meta']) and $metas=cp::$config['post_types'][$post_type]['meta']){
 	add_filter( 'manage_edit-'.$post_type.'_sortable_columns',function($columns)use($post_type,$metas){
 		global $wp_query;
 		$columns['ID']=['ID',(isset($wp_query->query['order']) and $wp_query->query['order']!=='desc')];

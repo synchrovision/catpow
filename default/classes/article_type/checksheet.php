@@ -1,5 +1,6 @@
 <?php
 namespace Catpow\article_type;
+use cp;
 /**
 * チェックシート
 */
@@ -31,8 +32,8 @@ class checksheet extends article_type{
 			'template'=>['checksheet']
 		],$conf_data);
 		
-		if(!isset($GLOBALS['post_types'][$question_post_type])){
-			$GLOBALS['post_types'][$question_post_type]=['article_type'=>'question'];
+		if(!isset(cp::$config['post_types'][$question_post_type])){
+			cp::$config['post_types'][$question_post_type]=['article_type'=>'question'];
 			\cp::fill_conf_data('post',$question_post_type,$GLOBALS['post_types'][$question_post_type]);
 		}
 	}

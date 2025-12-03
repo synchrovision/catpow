@@ -1,5 +1,6 @@
 <?php 
 namespace Catpow;
+use cp;
 add_menu_page('CATPOW','CATPOW','edit_themes','catpow-main',function(){
 	this()->render();
 },'dashicons-pets');
@@ -47,12 +48,11 @@ function add_menus($path_data,$conf_data,$menus){
 */
 function get_menu_link($slug,$path_data){
 	static $hooks;
-	global $post_types;
 	if($slug==='sub'){$slug=$path_data['data_type'].'/'.$path_data['data_name'];}
 	if($slug==='post' || $slug==='post/post'){return 'edit.php';}
 	if($slug==='attachment' || $slug==='post/attachment'){return 'upload.php';}
 	if($slug==='user' || substr($slug,0,5)==='user/'){return 'users.php';}
-	if(isset($post_types[$slug])){return 'edit.php?post_type='.$slug;}
+	if(isset(cp::$config['post_types'][$slug])){return 'edit.php?post_type='.$slug;}
 	
 	if(substr($slug,-4)==='.php'){
 		$slug_path_data=\cp::parse_content_file_path($slug);
@@ -60,7 +60,7 @@ function get_menu_link($slug,$path_data){
 	}
 	else{
 		$slug_path_data=\cp::parse_content_path($slug);
-		if(isset($slug_path_data['data_type']) && $slug_path_data['data_type']==='post' && isset($post_types[$slug_path_data['data_name']]) && empty($slug_path_data['tmp_name'])){
+		if(isset($slug_path_data['data_type']) && $slug_path_data['data_type']==='post' && isset(cp::$config['post_types'][$slug_path_data['data_name']]) && empty($slug_path_data['tmp_name'])){
 			return 'edit.php?post_type='.$slug_path_data['data_name'];
 		}
 		$path_data=array_merge($path_data,['file_name'=>'admin','file_type'=>'php'],$slug_path_data);

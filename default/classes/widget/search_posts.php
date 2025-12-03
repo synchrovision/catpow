@@ -1,5 +1,6 @@
 <?php
 namespace Catpow\widget;
+use cp;
 class search_posts extends \WP_Widget {
 
 	function __construct() {
@@ -9,7 +10,7 @@ class search_posts extends \WP_Widget {
 	}
 
 	function widget($args, $instance) {
-		global $post_types,$page_cft;
+		global $page_cft;
 
 		if ( !is_array($cache) )
 			$cache = array();
@@ -53,7 +54,7 @@ class search_posts extends \WP_Widget {
 		tax[(name)][form_type,operator]
 		meta[(name)][form_type,type,compare]
 		*/
-		global $post_types,$page_cft;
+		global $page_cft;
 		$title = isset($instance['title']) ? esc_attr($instance['title']) : '';
 		$type = isset($instance['post_type']) ? $instance['post_type'] : array();
 		$cat = isset($instance['cat']) ? $instance['cat'] : array();
@@ -73,7 +74,7 @@ class search_posts extends \WP_Widget {
 		
 		printf('<p><label for="%s">検索する投稿タイプ</label>'.chr(10),$type_fid);
 		printf('<select class="widefat" id="%s" name="%s">'.chr(10),$type_fid,$type_fname);
-		foreach($post_types as $post_type=>$type_vals){
+		foreach(cp::$config['post_types'] as $post_type=>$type_vals){
 			if(isset($type_vals['name']))printf('<option value="%1$s">%2$s</option>'.chr(10),$post_type,$type_vals['name']);
 		}
 		echo('</select></p>');
@@ -84,7 +85,7 @@ class search_posts extends \WP_Widget {
 		$cmp_for_chrarr=array('IN','NOT IN');
 		$cmp_for_num=array('=','!=','>','>=','<','<=');
 		$cmp_for_numarr=array('BETWEEN','NOT BETWEEN');
-		foreach($post_types as $post_type=>$post_type_vals){
+		foreach(cp::$config['post_types'] as $post_type=>$post_type_vals){
 			printf('<h3>%s</h3>',$post_type_vals['name']?$post_type_vals['name']:$post_type);
 			if(isset($post_type_vals['taxonomies'])){foreach($post_type_vals['taxonomies'] as $tax_name => $tax_prm){
 				printf('<p>%s</p>',$tax_prm['label']?$tax_prm['label']:$tax_name);

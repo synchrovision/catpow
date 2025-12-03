@@ -1,5 +1,5 @@
 <?php
-$article_conf_data=$GLOBALS['post_types'][substr($post_type,0,-5)]??[];
+$article_conf_data=cp::$config['post_types'][substr($post_type,0,-5)]??[];
 $post_data['post_title']=$article_conf_data['label'];
 $metas_primary=[];
 $metas_has_children=[];

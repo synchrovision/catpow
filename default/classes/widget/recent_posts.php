@@ -13,7 +13,7 @@ class recent_posts extends \WP_Widget {
 	}
 
 	function widget($args, $instance) {
-		global $post_types,$page_cft;
+		global $page_cft;
 		$cache = wp_cache_get('widget_recent_custom_entries', 'widget');
 
 		if ( !is_array($cache) )
@@ -60,7 +60,7 @@ class recent_posts extends \WP_Widget {
 	}
 
 	function form( $instance ) {
-		global $post_types,$page_cft;
+		global $page_cft;
 		$title = isset($instance['title']) ? esc_attr($instance['title']) : '';
 		$number = isset($instance['number']) ? absint($instance['number']) : 5;
 		$type = isset($instance['type']) ? esc_attr($instance['type']) : '';
@@ -73,7 +73,7 @@ class recent_posts extends \WP_Widget {
 		
 		<p><label for="<?php echo $this->get_field_id('type'); ?>">表示投稿タイプ</label>
 		<select id="<?php echo $this->get_field_id('type'); ?>" name="<?php echo $this->get_field_name('type'); ?>">
-		<?php foreach($post_types as $post_type=>$type_vals){if(isset($type_vals['name']))printf('<option value="%1$s">%2$s</option>'.chr(10),$post_type,$type_vals['name']);} ?>
+		<?php foreach(cp::$config['post_types'] as $post_type=>$type_vals){if(isset($type_vals['name']))printf('<option value="%1$s">%2$s</option>'.chr(10),$post_type,$type_vals['name']);} ?>
 		</select>
 		</p>
 <?php

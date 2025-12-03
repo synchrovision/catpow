@@ -4,7 +4,7 @@ including catpow => cp_init:10
 include config files from stylesheet or template directory
 */
 global $auth_ip,
-$post_types,$taxonomies,$static_pages,$comment_datas,
+$taxonomies,$static_pages,$comment_datas,
 $nav_datas,$user_datas,$site_datas,$sidebar_datas,$use_widgets,
 $wp_query,$cp_mode;
 
