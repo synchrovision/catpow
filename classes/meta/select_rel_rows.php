@@ -13,11 +13,11 @@ class select_rel_rows extends select{
 	public static function output($meta,$prm){
 		$val=$meta->value;
 		if(empty($val)){return false;}
-		global $cpdb,$cpdb_datas;
+		global $cpdb;
 		
 		$alias_name=\cpdb::get_alias_name($meta->conf['table']);
 		
-		$database_meta=$cpdb_datas[$alias_name];
+		$database_meta=\cp::$config['cpdb_datas'][$alias_name];
 		if(empty($prm)){
 			if(isset($meta->conf['key'])){$key=$meta->conf['key'];}
 			else{$key=key($database_meta['meta']);}

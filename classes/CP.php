@@ -1138,10 +1138,9 @@ class CP{
 			self::fill_confs($conf['meta'],$conf['path']);
 		}
 		if($class_name::$is_database){
-			global $cpdb_datas;
 			$alias_name=cpdb::get_alias_name(explode('/',$conf['path']))??$conf['alias']??str_replace('/','_',$conf['path']);
 			$conf['alias_path']='cpdb/'.$alias_name;
-			$cpdb_datas[$alias_name]=&$conf;
+			self::$config['cpdb_datas'][$alias_name]=&$conf;
 		}
 		$conf['is_filled']=true;
 	}
