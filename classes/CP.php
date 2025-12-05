@@ -983,7 +983,7 @@ class CP{
 			else{self::$config[$conf_data_name][$data_name]=[];}
 		}
 		if(empty($path_arr)){$cache[$conf_data_path]=&self::$config[$conf_data_name][$data_name];return $cache[$conf_data_path];}
-		eval("\$cache['{$conf_data_path}']=&\self::\$config['{$conf_data_name}']['{$data_name}']['meta']['".implode("']['meta']['",$path_arr)."'];");
+		eval("\$cache['{$conf_data_path}']=&self::\$config['{$conf_data_name}']['{$data_name}']['meta']['".implode("']['meta']['",$path_arr)."'];");
 		return $cache[$conf_data_path];
 	}
 	
