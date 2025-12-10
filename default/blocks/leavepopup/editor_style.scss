@@ -1,7 +1,5 @@
 @import 'admin_style_config.scss';
 
-.wp-site-blocks,#editor{
-	.wp-block-catpow-leavepopup{
-		@include bnd((p:r,pd:30,h:100vh,z:1));
-	}
+.wp-block-catpow-leavepopup{
+	@include bnd((p:r,pd:30,h:100vh,z:1));
 }

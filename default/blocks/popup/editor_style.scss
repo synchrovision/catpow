@@ -1,7 +1,5 @@
 @import 'admin_style_config.scss';
 
-.wp-site-blocks,#editor{
-	.wp-block-catpow-popup{
-		@include bnd((p:r,h:100vh,z:1));
-	}
+.wp-block-catpow-popup{
+	@include bnd((p:r,h:100vh,z:1));
 }
