@@ -115,7 +115,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 			}
 		}
 		const blockProps = useBlockProps({
-			className: clsx("banners-", classes),
+			className: classes,
 			style: vars,
 		});
 
@@ -187,14 +187,14 @@ wp.blocks.registerBlockType("catpow/banners", {
 			</>
 		);
 	},
-	save({ attributes, className }) {
+	save({ attributes }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
 		const { classes, vars, items = [], loopParam, doLoop } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, linkKeys } = CP.config.banners;
 		const blockProps = useBlockProps.save({
-			className: clsx("banners-", classes),
+			className: classes,
 			style: vars,
 		});
 

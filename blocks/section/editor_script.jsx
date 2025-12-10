@@ -240,7 +240,7 @@ wp.blocks.registerBlockType("catpow/section", {
 
 		const blockProps = useBlockProps({
 			id: anchor,
-			className: clsx("section-", classes),
+			className: classes,
 			style: vars,
 		});
 
@@ -312,7 +312,7 @@ wp.blocks.registerBlockType("catpow/section", {
 			</>
 		);
 	},
-	save({ attributes, className }) {
+	save({ attributes }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
 		const {
 			SectionTag,
@@ -339,7 +339,7 @@ wp.blocks.registerBlockType("catpow/section", {
 
 		const blockProps = useBlockProps.save({
 			id: anchor,
-			className: clsx("section-", classes),
+			className: classes,
 			style: vars,
 		});
 
