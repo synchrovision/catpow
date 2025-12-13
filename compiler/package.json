@@ -12,7 +12,8 @@
 		"esbuild-plugin-inline-import": "*",
 		"js-cookie": "*",
 		"react-error-boundary": "*",
-		"react-use": "*"
+		"react-use": "*",
+		"sass": "^1.96.0"
 	},
 	"devDependencies": {
 		"@types/react": "^19.0.8",

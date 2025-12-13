@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import { transform } from "@svgr/core";
 import inlineImportPlugin from "esbuild-plugin-inline-import";
+import * as sass from "sass";
 
 let pathResolver = {
 	name: "pathResolver",
@@ -111,6 +112,15 @@ let inlineCssImporter = inlineImportPlugin({
 		return contents;
 	},
 });
+let scssImporter = inlineImportPlugin({
+	filter: /^scss:/,
+	transform: async (contents, args) => {
+		let { css } = sass.compileString(contents, {
+			loadPaths: ["./", "./node_modules-included/"],
+		});
+		return css;
+	},
+});
 
 await esbuild.build({
 	entryPoints: [process.argv[2]],
@@ -128,6 +138,6 @@ await esbuild.build({
 	},
 	jsxFactory: "wp.element.createElement",
 	jsxFragment: "wp.element.Fragment",
-	plugins: [inlineCssImporter, pathResolver, svgAsJsx],
+	plugins: [inlineCssImporter, scssImporter, pathResolver, svgAsJsx],
 	tsconfigRaw: {},
 });
