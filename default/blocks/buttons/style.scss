@@ -53,7 +53,7 @@
 				}
 			}
 		}
-		&.is-rate-primary{
+		&.is-rank-primary{
 			#{$block}{
 				&-button{
 					@include bnd((d:b,p:r,o:h));
@@ -78,6 +78,12 @@
 					}
 				}
 			}
+		}
+		&.is-rank-secondary{
+			
+		}
+		&.is-rank-tertiary{
+			
 		}
 		&.negative{
 			@include trn((gry:100%,o:.5));

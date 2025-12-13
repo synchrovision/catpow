@@ -51,7 +51,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 		const selectiveItemClasses = useMemo(() => {
 			const selectiveItemClasses = [
 				"color",
-				"rate",
+				"rank",
 				{
 					name: "icon",
 					label: "アイコン",

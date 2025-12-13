@@ -10,7 +10,7 @@
   -webkit-align-items: flex-start;
   align-items: flex-start;
   gap: var(--cp-item-gap, 1rem);
-  width: min(var(--cp-content-width, 95%), var(--cp-content-max-width, 60rem));
+  width: min(var(--cp-content-width, 90vw), var(--cp-content-max-width, 60rem), 100%);
   padding: 1em 0rem;
   margin-inline: auto;
 }

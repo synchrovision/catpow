@@ -45,7 +45,7 @@
       const selectiveItemClasses = useMemo(() => {
         const selectiveItemClasses2 = [
           "color",
-          "rate",
+          "rank",
           {
             name: "icon",
             label: "\u30A2\u30A4\u30B3\u30F3",
