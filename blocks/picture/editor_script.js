@@ -43,7 +43,7 @@
           isTemplate: states.isTemplate
         },
         "customMargin",
-        "contentWidth",
+        "hasContentWidth",
         {
           label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
           values: "isTemplate",
