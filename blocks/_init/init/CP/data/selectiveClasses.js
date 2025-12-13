@@ -155,7 +155,7 @@ export const selectiveClassesPresets = {
 			values: {
 				hasFontSizeXLarge: __("極大", "catpow"),
 				hasFontSizeLarge: __("大", "catpow"),
-				hasFontSizeMiddle: __("中", "catpow"),
+				hasFontSizeMedium: __("中", "catpow"),
 				hasFontSizeSmall: __("小", "catpow"),
 				hasFontSizeXSmall: __("極小", "catpow"),
 				hasFontSizeCustom: ":admin-generic:",
@@ -339,19 +339,27 @@ export const selectiveClassesPresets = {
 			hasColorSchemeInverted: __("反転", "catpow"),
 		},
 	},
+	rank: {
+		name: "rank",
+		type: "gridbuttons",
+		label: __("ランク", "catpow"),
+		values: {
+			isRankPrimary: __("優先", "catpow"),
+			isRankSecondary: __("標準", "catpow"),
+			isRankTertiary: __("副次", "catpow"),
+		},
+	},
 	rate: {
 		name: "rate",
 		type: "gridbuttons",
 		label: __("レート", "catpow"),
 		values: {
-			isRateDefault: __("なし", "catpow"),
-			isRatePrimary: __("優先", "catpow"),
-			isRateSecondary: __("二次", "catpow"),
-			isRateTertiart: __("三次", "catpow"),
 			isRateRecommended: __("推奨", "catpow"),
+			isRateDefault: __("標準", "catpow"),
 			isRateDeprecated: __("非推奨", "catpow"),
-			isRateDanger: __("危険", "catpow"),
 			isRateSafe: __("安全", "catpow"),
+			isRateWarn: __("注意", "catpow"),
+			isRateDanger: __("危険", "catpow"),
 		},
 	},
 	clipPath({ preset, vars = "vars", ...otherParams }) {
@@ -606,6 +614,15 @@ export const selectiveClassesPresets = {
 					unit: "rem",
 				},
 			],
+			...otherParams,
+		};
+	},
+	hasContentWidth({ preset, vars = "vars", ...otherParams }) {
+		return {
+			name: "hasContentWidth",
+			label: __("コンテンツ幅", "catpow"),
+			values: "hasContentWidth",
+			sub: [{ preset: "contentWidth", vars, label: null }],
 			...otherParams,
 		};
 	},

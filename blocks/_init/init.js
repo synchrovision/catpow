@@ -5285,7 +5285,7 @@
         values: {
           hasFontSizeXLarge: __4("\u6975\u5927", "catpow"),
           hasFontSizeLarge: __4("\u5927", "catpow"),
-          hasFontSizeMiddle: __4("\u4E2D", "catpow"),
+          hasFontSizeMedium: __4("\u4E2D", "catpow"),
           hasFontSizeSmall: __4("\u5C0F", "catpow"),
           hasFontSizeXSmall: __4("\u6975\u5C0F", "catpow"),
           hasFontSizeCustom: ":admin-generic:"
@@ -5469,19 +5469,27 @@
         hasColorSchemeInverted: __4("\u53CD\u8EE2", "catpow")
       }
     },
+    rank: {
+      name: "rank",
+      type: "gridbuttons",
+      label: __4("\u30E9\u30F3\u30AF", "catpow"),
+      values: {
+        isRankPrimary: __4("\u512A\u5148", "catpow"),
+        isRankSecondary: __4("\u6A19\u6E96", "catpow"),
+        isRankTertiary: __4("\u526F\u6B21", "catpow")
+      }
+    },
     rate: {
       name: "rate",
       type: "gridbuttons",
       label: __4("\u30EC\u30FC\u30C8", "catpow"),
       values: {
-        isRateDefault: __4("\u306A\u3057", "catpow"),
-        isRatePrimary: __4("\u512A\u5148", "catpow"),
-        isRateSecondary: __4("\u4E8C\u6B21", "catpow"),
-        isRateTertiart: __4("\u4E09\u6B21", "catpow"),
         isRateRecommended: __4("\u63A8\u5968", "catpow"),
+        isRateDefault: __4("\u6A19\u6E96", "catpow"),
         isRateDeprecated: __4("\u975E\u63A8\u5968", "catpow"),
-        isRateDanger: __4("\u5371\u967A", "catpow"),
-        isRateSafe: __4("\u5B89\u5168", "catpow")
+        isRateSafe: __4("\u5B89\u5168", "catpow"),
+        isRateWarn: __4("\u6CE8\u610F", "catpow"),
+        isRateDanger: __4("\u5371\u967A", "catpow")
       }
     },
     clipPath({ preset, vars = "vars", ...otherParams }) {
@@ -5736,6 +5744,15 @@
             unit: "rem"
           }
         ],
+        ...otherParams
+      };
+    },
+    hasContentWidth({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "hasContentWidth",
+        label: __4("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
+        values: "hasContentWidth",
+        sub: [{ preset: "contentWidth", vars, label: null }],
         ...otherParams
       };
     },
