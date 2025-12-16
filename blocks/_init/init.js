@@ -789,6 +789,16 @@
     }
   });
 
+  // react-global:react-dom
+  var react_dom_default, createPortal, flushSync;
+  var init_react_dom = __esm({
+    "react-global:react-dom"() {
+      react_dom_default = window.wp.element;
+      createPortal = wp.element.createPortal;
+      flushSync = wp.element.flushSync;
+    }
+  });
+
   // ../blocks/_init/init/CP/index.js
   var CP_exports = {};
   __export(CP_exports, {
@@ -1006,17 +1016,114 @@
     }
   };
 
-  // modules/src/util/string.jsx
-  var wordsToFlags = (words) => words && words.split(" ").reduce((p, c) => {
-    p[c] = true;
-    return p;
-  }, {});
-  var flagsToWords = (flags) => flags && Object.keys(flags).filter((word) => flags[word]).join(" ");
+  // node_modules-included/catpow/src/util/bem/bem.js
+  var bem = (className) => {
+    const children = {};
+    const firstClass = className.split(" ")[0];
+    return new Proxy(
+      function() {
+        if (arguments.length > 0) {
+          const classes = [];
+          let i;
+          for (i = 0; i < arguments.length; i++) {
+            if (!arguments[i]) {
+              continue;
+            }
+            if (typeof arguments[i] === "string") {
+              classes.push(arguments[i]);
+              continue;
+            }
+            classes.push.apply(classes, Array.isArray(arguments[i]) ? arguments[i] : Object.keys(arguments[i]).filter((c) => arguments[i][c]));
+          }
+          if (classes.length > 0) {
+            return (className + " " + classes.join(" ")).replace(" --", " " + firstClass + "--");
+          }
+        }
+        return className;
+      },
+      {
+        get: (target, prop) => {
+          if (void 0 === children[prop]) {
+            children[prop] = bem(firstClass + (prop[0] === "_" ? "_" : "-") + prop);
+          }
+          return children[prop];
+        }
+      }
+    );
+  };
+
+  // node_modules-included/catpow/src/util/calc/round.js
+  var pfloor = (n, p) => parseFloat(Math.floor(parseFloat(n + "e" + p)) + "e-" + p);
+
+  // node_modules-included/catpow/src/util/calc/srand.js
+  var srand = (w = 88675123) => {
+    var x = 123456789, y = 362436069, z = 521288629;
+    return function() {
+      let t;
+      t = x ^ x << 11;
+      [x, y, z] = [y, z, w];
+      w = w ^ w >>> 19 ^ (t ^ t >>> 8);
+      if (arguments.length === 0) {
+        return w;
+      }
+      if (arguments.length === 1) {
+        return w % (arguments[0] + 1);
+      }
+      const [min, max] = arguments;
+      return min + Math.abs(w) % (max + 1 - min);
+    };
+  };
+
+  // node_modules-included/catpow/src/util/data/deepMap.js
+  var deepMap = () => {
+    const maps = {};
+    const getMap = (keys, shift = 0) => {
+      const depth = keys.length + shift;
+      if (maps[depth] == null) {
+        maps[depth] = /* @__PURE__ */ new Map();
+      }
+      let currentMap = maps[depth];
+      for (const key of keys) {
+        if (!currentMap.has(key)) {
+          currentMap.set(key, /* @__PURE__ */ new Map());
+        }
+        currentMap = currentMap.get(key);
+      }
+      return currentMap;
+    };
+    return {
+      getMap(keys, shift = 1) {
+        return getMap(keys, shift);
+      },
+      has(keys) {
+        return getMap(keys.slice(0, -1)).has(keys[keys.length - 1]);
+      },
+      get(keys) {
+        return getMap(keys.slice(0, -1)).get(keys[keys.length - 1]);
+      },
+      set(keys, value2) {
+        return getMap(keys.slice(0, -1)).set(keys[keys.length - 1], value2);
+      },
+      forEach(keys, callback) {
+        return getMap(keys).forEach(callback);
+      },
+      map(keys, callback) {
+        return [...getMap(keys)].map(callback);
+      }
+    };
+  };
+
+  // node_modules-included/catpow/src/util/string/case.js
+  var camelToKebab = (str) => str.replace(/(?=\w)([A-Z])/g, "-$1").toLowerCase();
+  var kebabToCamel = (str) => str.replace(/\-([a-z])/g, (m) => m[1].toUpperCase());
+
+  // node_modules-included/catpow/src/util/string/classNamesToFlags.js
   var classNamesToFlags = (classNames) => classNames && classNames.split(" ").map(kebabToCamel).reduce((p, c) => {
     p[c] = true;
     return p;
   }, {}) || {};
-  var flagsToClassNames = (flags) => flags && Object.keys(flags).filter((f) => flags[f]).map(camelToKebab).join(" ");
+
+  // node_modules-included/catpow/src/util/string/filterFlags.js
   var filterFlags = (flags, callback) => {
     Object.keys(flags).forEach((key) => {
       if (!callback(key)) {
@@ -1025,10 +1132,20 @@
     });
     return flags;
   };
-  var camelToKebab = (str) => str.replace(/(?=\w)([A-Z])/g, "-$1").toLowerCase();
-  var kebabToCamel = (str) => str.replace(/\-([a-z])/g, (m) => m[1].toUpperCase());
 
-  // modules/src/util/rtf.jsx
+  // node_modules-included/catpow/src/util/string/flagsToClassNames.js
+  var flagsToClassNames = (flags) => flags && Object.keys(flags).filter((f) => flags[f]).map(camelToKebab).join(" ");
+
+  // node_modules-included/catpow/src/util/string/flagsToWords.js
+  var flagsToWords = (flags) => flags && Object.keys(flags).filter((word) => flags[word]).join(" ");
+
+  // node_modules-included/catpow/src/util/string/wordsToFlags.js
+  var wordsToFlags = (words) => words && words.split(" ").reduce((p, c) => {
+    p[c] = true;
+    return p;
+  }, {});
+
+  // node_modules-included/catpow/src/util/rtf.js
   var rtf = (text, pref = "rtf") => {
     if (typeof text !== "string") {
       if (text.toString == null) {
@@ -1107,101 +1224,6 @@
     text = text.replace(/\s*(<\/(h\d|dl|dt|dd|ul|ol|li)+?>)\s*/g, "$1");
     text = text.replace(/(\n[　\t]*|\n[　\t]+)/g, "<br/>");
     return text;
-  };
-
-  // modules/src/util/data.jsx
-  var deepMap = () => {
-    const maps = {};
-    const getMap = (keys, shift = 0) => {
-      const depth = keys.length + shift;
-      if (maps[depth] == null) {
-        maps[depth] = /* @__PURE__ */ new Map();
-      }
-      let currentMap = maps[depth];
-      for (const key of keys) {
-        if (!currentMap.has(key)) {
-          currentMap.set(key, /* @__PURE__ */ new Map());
-        }
-        currentMap = currentMap.get(key);
-      }
-      return currentMap;
-    };
-    return {
-      getMap(keys, shift = 1) {
-        return getMap(keys, shift);
-      },
-      has(keys) {
-        return getMap(keys.slice(0, -1)).has(keys[keys.length - 1]);
-      },
-      get(keys) {
-        return getMap(keys.slice(0, -1)).get(keys[keys.length - 1]);
-      },
-      set(keys, value2) {
-        return getMap(keys.slice(0, -1)).set(keys[keys.length - 1], value2);
-      },
-      forEach(keys, callback) {
-        return getMap(keys).forEach(callback);
-      },
-      map(keys, callback) {
-        return [...getMap(keys)].map(callback);
-      }
-    };
-  };
-
-  // modules/src/util/bem.jsx
-  var bem = (className) => {
-    const children = {};
-    const firstClass = className.split(" ")[0];
-    return new Proxy(
-      function() {
-        if (arguments.length > 0) {
-          const classes = [];
-          let i;
-          for (i = 0; i < arguments.length; i++) {
-            if (!arguments[i]) {
-              continue;
-            }
-            if (typeof arguments[i] === "string") {
-              classes.push(arguments[i]);
-              continue;
-            }
-            classes.push.apply(classes, Array.isArray(arguments[i]) ? arguments[i] : Object.keys(arguments[i]).filter((c) => arguments[i][c]));
-          }
-          if (classes.length > 0) {
-            return (className + " " + classes.join(" ")).replace(" --", " " + firstClass + "--");
-          }
-        }
-        return className;
-      },
-      {
-        get: (target, prop) => {
-          if (void 0 === children[prop]) {
-            children[prop] = bem(firstClass + (prop[0] === "_" ? "_" : "-") + prop);
-          }
-          return children[prop];
-        }
-      }
-    );
-  };
-
-  // modules/src/util/calc.jsx
-  var pfloor = (n, p) => parseFloat(Math.floor(parseFloat(n + "e" + p)) + "e-" + p);
-  var srand = (w = 88675123) => {
-    var x = 123456789, y = 362436069, z = 521288629;
-    return function() {
-      let t;
-      t = x ^ x << 11;
-      [x, y, z] = [y, z, w];
-      w = w ^ w >>> 19 ^ (t ^ t >>> 8);
-      if (arguments.length === 0) {
-        return w;
-      }
-      if (arguments.length === 1) {
-        return w % (arguments[0] + 1);
-      }
-      const [min, max] = arguments;
-      return min + Math.abs(w) % (max + 1 - min);
-    };
   };
 
   // ../blocks/_init/init/CP/components/BoundingBox.jsx
@@ -1423,7 +1445,7 @@
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-doing-action": !!action }), style, ref, onMouseDown, onMouseMove, onMouseUp, onDoubleClick }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.controls() }, controls.map((props2, i) => /* @__PURE__ */ wp.element.createElement("span", { className: classes.controls.control(props2.className), "data-control-action": props2.action, "data-control-flags": props2.flags, key: i }))));
   };
 
-  // modules/src/component/Input/PositionInput.jsx
+  // node_modules-included/catpow/src/component/Input/PositionInput.jsx
   init_react();
 
   // node_modules/react-use/esm/misc/util.js
@@ -1576,7 +1598,7 @@
   };
   var useScratch_default = useScratch;
 
-  // modules/src/component/Bem.jsx
+  // node_modules-included/catpow/src/component/Bem.jsx
   init_react();
   var applyBem = (component, { ...ctx }) => {
     if (Array.isArray(component)) {
@@ -1647,7 +1669,7 @@
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, children);
   };
 
-  // modules/src/hooks/useThrottle.jsx
+  // node_modules-included/catpow/src/hooks/useThrottle.jsx
   init_react();
   var { useEffect: useEffect2, useRef: useRef2 } = react_default;
   var useThrottle = (callback, interval, deps) => {
@@ -1665,7 +1687,7 @@
     }, deps);
   };
 
-  // modules/src/component/Input/PositionInput.jsx
+  // node_modules-included/catpow/src/component/Input/PositionInput.jsx
   var PositionInput = (props) => {
     const { className = "cp-positioninput", width = 100, height = 100, margin = 10, grid = 10, snap = false, x = 50, y = 50, r: r2 = 6, onChange, ...otherProps } = props;
     const [ref, state] = useScratch_default();
@@ -1705,15 +1727,25 @@
     ));
   };
 
-  // modules/src/component/Portal.jsx
+  // node_modules/clsx/dist/clsx.mjs
+  function r(e) {
+    var t, f, n = "";
+    if ("string" == typeof e || "number" == typeof e) n += e;
+    else if ("object" == typeof e) if (Array.isArray(e)) {
+      var o = e.length;
+      for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
+    } else for (f in e) e[f] && (n && (n += " "), n += f);
+    return n;
+  }
+  function clsx() {
+    for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
+    return n;
+  }
+  var clsx_default = clsx;
+
+  // node_modules-included/catpow/src/component/Portal.jsx
   init_react();
-
-  // react-global:react-dom
-  var react_dom_default = window.wp.element;
-  var createPortal = wp.element.createPortal;
-  var flushSync = wp.element.flushSync;
-
-  // modules/src/component/Portal.jsx
+  init_react_dom();
   var Portal = (props) => {
     const { children, trace } = props;
     const { render: render2, useState: useState4, useMemo: useMemo6, useCallback: useCallback3, useEffect: useEffect4, useRef: useRef3 } = react_default;
@@ -2032,22 +2064,6 @@
     return /* @__PURE__ */ wp.element.createElement("img", { className: className + " is-img", src, alt: item[keys.alt], srcSet: item[keys.srcset], sizes, "data-mime": item[keys.mime], ...otherProps });
   };
 
-  // node_modules/clsx/dist/clsx.mjs
-  function r(e) {
-    var t, f, n = "";
-    if ("string" == typeof e || "number" == typeof e) n += e;
-    else if ("object" == typeof e) if (Array.isArray(e)) {
-      var o = e.length;
-      for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
-    } else for (f in e) e[f] && (n && (n += " "), n += f);
-    return n;
-  }
-  function clsx() {
-    for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
-    return n;
-  }
-  var clsx_default = clsx;
-
   // ../blocks/_init/init/CP/components/SelectPictureSources.jsx
   var SelectPictureSources = (props) => {
     const { Icon } = wp.components;
@@ -2193,7 +2209,7 @@
     }));
   };
 
-  // modules/src/scssc/settings.js
+  // node_modules-included/catpow/src/scssc/settings.js
   var colorRoles = {
     b: {
       name: "background",
@@ -2269,7 +2285,7 @@
     }
   };
 
-  // modules/src/scssc/translateColor.js
+  // node_modules-included/catpow/src/scssc/translateColor.js
   var translateColor = (color, tint, alpha) => {
     const availableToneKeys = {};
     for (const key of Object.keys(colorRoles)) {
@@ -5762,7 +5778,7 @@
         type: "buttons",
         label: __4("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
         values: {
-          hasContentWidthFit: __4("\u6700\u5C0F", "catpow"),
+          hasContentWidthFit: __4("\u9069", "catpow"),
           hasContentWidthNarrow: __4("\u72ED", "catpow"),
           hasContentWidthRegular: __4("\u4E2D", "catpow"),
           hasContentWidthWide: __4("\u5E83", "catpow"),

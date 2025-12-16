@@ -632,7 +632,7 @@ export const selectiveClassesPresets = {
 			type: "buttons",
 			label: __("コンテンツ幅", "catpow"),
 			values: {
-				hasContentWidthFit: __("最小", "catpow"),
+				hasContentWidthFit: __("適", "catpow"),
 				hasContentWidthNarrow: __("狭", "catpow"),
 				hasContentWidthRegular: __("中", "catpow"),
 				hasContentWidthWide: __("広", "catpow"),
