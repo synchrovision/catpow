@@ -1,7 +1,11 @@
-﻿export const SelectPreparedImage = ({ className, name, value, color = 0, onChange, ...otherProps }) => {
-	let onClick;
-	const { useEffect, useReducer } = wp.element;
-	const { getURLparam, setURLparam, setURLparams, removeURLparam } = Catpow.util;
+﻿import clsx from "clsx";
+
+export const SelectPreparedImage = ({ className = "cp-selectpreparedimage", name, value, color = 0, onChange, ...otherProps }) => {
+	const { useState, useEffect, useReducer } = wp.element;
+	const { setURLparams, removeURLparam } = Catpow.util;
+
+	const [open, setOpen] = useState(false);
+
 	const [state, dispatch] = useReducer(
 		(state, action) => {
 			const newState = { ...state };
@@ -56,15 +60,24 @@
 		return false;
 	}
 	return (
-		<ul className={"cp-selectpreparedimage " + name + " " + className} {...otherProps}>
-			{state.images.map((image) => {
-				const url = setURLparams(image.url, { c: color, theme: wpinfo.theme });
-				return (
-					<li className={"item " + (value == url ? "active" : "")} key={image.url}>
-						<img src={url} alt={image.alt} onClick={() => dispatch({ type: "update", image })} />
-					</li>
-				);
-			})}
-		</ul>
+		<CP.Bem>
+			<div className={clsx(className, "is-" + name, open ? "is-open" : "is-close")} {...otherProps}>
+				<img className="_img" src={value} alt="" width="40" height="40" onClick={() => setOpen(true)} />
+				<Catpow.Popover open={open} onClose={() => setOpen(false)}>
+					<CP.Bem>
+						<ul className={className + "-items"}>
+							{state.images.map((image) => {
+								const url = setURLparams(image.url, { c: color, theme: wpinfo.theme });
+								return (
+									<li className={clsx("-item", { "is-active": value == url })} key={image.url}>
+										<img src={url} alt={image.alt} onClick={() => dispatch({ type: "update", image })} />
+									</li>
+								);
+							})}
+						</ul>
+					</CP.Bem>
+				</Catpow.Popover>
+			</div>
+		</CP.Bem>
 	);
 };

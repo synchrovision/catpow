@@ -2082,10 +2082,10 @@
   };
 
   // ../blocks/_init/init/CP/components/SelectPreparedImage.jsx
-  var SelectPreparedImage = ({ className, name, value: value2, color = 0, onChange, ...otherProps }) => {
-    let onClick;
-    const { useEffect: useEffect4, useReducer: useReducer3 } = wp.element;
-    const { getURLparam, setURLparam, setURLparams, removeURLparam } = Catpow.util;
+  var SelectPreparedImage = ({ className = "cp-selectpreparedimage", name, value: value2, color = 0, onChange, ...otherProps }) => {
+    const { useState: useState4, useEffect: useEffect4, useReducer: useReducer3 } = wp.element;
+    const { setURLparams, removeURLparam } = Catpow.util;
+    const [open, setOpen] = useState4(false);
     const [state, dispatch] = useReducer3(
       (state2, action) => {
         const newState = { ...state2 };
@@ -2137,10 +2137,10 @@
     if (state.images === null) {
       return false;
     }
-    return /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectpreparedimage " + name + " " + className, ...otherProps }, state.images.map((image) => {
+    return /* @__PURE__ */ wp.element.createElement(CP.Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default(className, "is-" + name, open ? "is-open" : "is-close"), ...otherProps }, /* @__PURE__ */ wp.element.createElement("img", { className: "_img", src: value2, alt: "", width: "40", height: "40", onClick: () => setOpen(true) }), /* @__PURE__ */ wp.element.createElement(Catpow.Popover, { open, onClose: () => setOpen(false) }, /* @__PURE__ */ wp.element.createElement(CP.Bem, null, /* @__PURE__ */ wp.element.createElement("ul", { className: className + "-items" }, state.images.map((image) => {
       const url = setURLparams(image.url, { c: color, theme: wpinfo.theme });
-      return /* @__PURE__ */ wp.element.createElement("li", { className: "item " + (value2 == url ? "active" : ""), key: image.url }, /* @__PURE__ */ wp.element.createElement("img", { src: url, alt: image.alt, onClick: () => dispatch({ type: "update", image }) }));
-    }));
+      return /* @__PURE__ */ wp.element.createElement("li", { className: clsx_default("-item", { "is-active": value2 == url }), key: image.url }, /* @__PURE__ */ wp.element.createElement("img", { src: url, alt: image.alt, onClick: () => dispatch({ type: "update", image }) }));
+    }))))));
   };
 
   // ../blocks/_init/init/CP/components/SelectPreparedImageSet.jsx
@@ -3736,35 +3736,27 @@
             }
           }
         } else {
-          rtn.push(
-            /* @__PURE__ */ wp.element.createElement(
-              CheckboxControl,
-              {
-                label: prm.label,
-                onChange: () => {
-                  if (targetStates[prm.values]) {
-                    const updates = CP.getUpdatesFromStatesAndClasssFlags({
-                      allStates,
-                      allClassFlags
-                    });
-                    set(updates);
-                  } else {
-                    const updates = CP.getUpdatesFromStatesAndClasssFlags({
-                      allStates,
-                      allClassFlags,
-                      classFlags: classFlagsByValue[prm.values],
-                      bindClassFlags: bindClasseFlagsByValue[prm.values]
-                    });
-                    set(updates);
-                  }
-                  if (prm.effect) {
-                    prm.effect(currentClass, value, targetStates, props);
-                  }
-                },
-                checked: !!targetStates[prm.values]
-              }
-            )
-          );
+          const onChangeCB = () => {
+            if (targetStates[prm.values]) {
+              const updates = CP.getUpdatesFromStatesAndClasssFlags({
+                allStates,
+                allClassFlags
+              });
+              save(updates);
+            } else {
+              const updates = CP.getUpdatesFromStatesAndClasssFlags({
+                allStates,
+                allClassFlags,
+                classFlags: classFlagsByValue[prm.values],
+                bindClassFlags: bindClasseFlagsByValue[prm.values]
+              });
+              save(updates);
+            }
+            if (prm.effect) {
+              prm.effect(currentClass, value, targetStates, props);
+            }
+          };
+          rtn.push(/* @__PURE__ */ wp.element.createElement(CheckboxControl, { label: prm.label, onChange: onChangeCB, checked: !!targetStates[prm.values] }));
           if (prm.sub) {
             if (targetStates[prm.values]) {
               let sub = [];

@@ -758,32 +758,27 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					}
 				}
 			} else {
-				rtn.push(
-					<CheckboxControl
-						label={prm.label}
-						onChange={() => {
-							if (targetStates[prm.values]) {
-								const updates = CP.getUpdatesFromStatesAndClasssFlags({
-									allStates,
-									allClassFlags,
-								});
-								set(updates);
-							} else {
-								const updates = CP.getUpdatesFromStatesAndClasssFlags({
-									allStates,
-									allClassFlags,
-									classFlags: classFlagsByValue[prm.values],
-									bindClassFlags: bindClasseFlagsByValue[prm.values],
-								});
-								set(updates);
-							}
-							if (prm.effect) {
-								prm.effect(currentClass, value, targetStates, props);
-							}
-						}}
-						checked={!!targetStates[prm.values]}
-					/>
-				);
+				const onChangeCB = () => {
+					if (targetStates[prm.values]) {
+						const updates = CP.getUpdatesFromStatesAndClasssFlags({
+							allStates,
+							allClassFlags,
+						});
+						save(updates);
+					} else {
+						const updates = CP.getUpdatesFromStatesAndClasssFlags({
+							allStates,
+							allClassFlags,
+							classFlags: classFlagsByValue[prm.values],
+							bindClassFlags: bindClasseFlagsByValue[prm.values],
+						});
+						save(updates);
+					}
+					if (prm.effect) {
+						prm.effect(currentClass, value, targetStates, props);
+					}
+				};
+				rtn.push(<CheckboxControl label={prm.label} onChange={onChangeCB} checked={!!targetStates[prm.values]} />);
 				if (prm.sub) {
 					if (targetStates[prm.values]) {
 						let sub = [];
