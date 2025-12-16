@@ -1,10 +1,6 @@
 (() => {
   // ../functions/embed_icon/blocks/_init/components.jsx
-  wp.hooks.addFilter(
-    "catpow.IconComponent",
-    "catpow/editor",
-    () => "EmbedIcon"
-  );
+  wp.hooks.addFilter("catpow.IconComponent", "catpow/editor", () => "EmbedIcon");
   CP.EmbedIcon = {
     Input: (props) => {
       const { item, prm, save } = props;
