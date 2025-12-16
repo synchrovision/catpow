@@ -1,5 +1,6 @@
 .wp-block-catpow-buttons-button__text:empty::before {
   content: "Input Text";
+  opacity: 0.25;
 }
 .wp-block-catpow-buttons__item {
   position: relative;
@@ -7,6 +8,7 @@
 }
 .wp-block-catpow-buttons__item-copy:empty::before, .wp-block-catpow-buttons__item-caption:empty::before {
   content: "Input Text";
+  opacity: 0.25;
 }
 .wp-block-catpow-buttons__item .itemControl {
   position: absolute;

@@ -6,6 +6,7 @@
 			&:empty{
 				&::before{
 					content:'Input Text';
+					@include trn((o:.25));
 				}
 			}
 		}
@@ -17,6 +18,7 @@
 			&:empty{
 				&::before{
 					content:'Input Text';
+					@include trn((o:.25));
 				}
 			}
 		}
