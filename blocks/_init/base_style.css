@@ -950,14 +950,11 @@
 .cp-selectgridbuttons.col3 > *:first-child:nth-last-child(1), .cp-selectgridbuttons.col3 > *:first-child:nth-last-child(1) ~ * {
   flex-basis: 100%;
 }
-.cp-selectgridbuttons.col3 > *, .cp-selectgridbuttons.col3 > *:first-child:nth-last-child(2), .cp-selectgridbuttons.col3 > *:first-child:nth-last-child(2) ~ *, .cp-selectgridbuttons.col3 .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(2), .cp-selectgridbuttons.col3 .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(2) ~ *, .cp-selectgridbuttons.col3 .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(5), .cp-selectgridbuttons.col3 .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(5) ~ * {
+.cp-selectgridbuttons.col3 > *, .cp-selectgridbuttons.col3 > *:first-child:nth-last-child(2), .cp-selectgridbuttons.col3 > *:first-child:nth-last-child(2) ~ * {
   flex-basis: 50%;
 }
-.cp-selectgridbuttons.col3 > *:first-child:nth-last-child(3n), .cp-selectgridbuttons.col3 > *:first-child:nth-last-child(3n) ~ *, .cp-selectgridbuttons.col3 > *:nth-child(2n):nth-last-child(3n + 1) ~ *, .cp-selectgridbuttons.col3 .cp-selectgridbuttons.col4 > *, .cp-selectgridbuttons.col3 .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(3), .cp-selectgridbuttons.col3 .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(3) ~ *, .cp-selectgridbuttons.col3 .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(5) ~ *:nth-child(2n):nth-last-child(3n + 1) ~ * {
+.cp-selectgridbuttons.col3 > *:first-child:nth-last-child(3n), .cp-selectgridbuttons.col3 > *:first-child:nth-last-child(3n) ~ *, .cp-selectgridbuttons.col3 > *:nth-child(2n):nth-last-child(3n + 1) ~ * {
   flex-basis: 33%;
-}
-.cp-selectgridbuttons.col3 .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(4n), .cp-selectgridbuttons.col3 .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(4n) ~ *, .cp-selectgridbuttons.col3 .cp-selectgridbuttons.col4 > *:nth-child(3n):nth-last-child(4n + 1) ~ * {
-  flex-basis: 25%;
 }
 .cp-selectgridbuttons.col4 {
   display: -webkit-box;
@@ -971,13 +968,10 @@
   flex-grow: 1;
   box-sizing: border-box;
 }
-.cp-selectgridbuttons.col4 .cp-selectgridbuttons.col3 > *:first-child:nth-last-child(1), .cp-selectgridbuttons.col4 .cp-selectgridbuttons.col3 > *:first-child:nth-last-child(1) ~ * {
-  flex-basis: 100%;
-}
-.cp-selectgridbuttons.col4 .cp-selectgridbuttons.col3 > *, .cp-selectgridbuttons.col4 .cp-selectgridbuttons.col3 > *:first-child:nth-last-child(2), .cp-selectgridbuttons.col4 .cp-selectgridbuttons.col3 > *:first-child:nth-last-child(2) ~ *, .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(2), .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(2) ~ *, .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(5), .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(5) ~ * {
+.cp-selectgridbuttons.col4 > *:first-child:nth-last-child(2), .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(2) ~ *, .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(5), .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(5) ~ * {
   flex-basis: 50%;
 }
-.cp-selectgridbuttons.col4 .cp-selectgridbuttons.col3 > *:first-child:nth-last-child(3n), .cp-selectgridbuttons.col4 .cp-selectgridbuttons.col3 > *:first-child:nth-last-child(3n) ~ *, .cp-selectgridbuttons.col4 .cp-selectgridbuttons.col3 > *:nth-child(2n):nth-last-child(3n + 1) ~ *, .cp-selectgridbuttons.col4 > *, .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(3), .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(3) ~ *, .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(5) ~ *:nth-child(2n):nth-last-child(3n + 1) ~ * {
+.cp-selectgridbuttons.col4 > *, .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(3), .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(3) ~ *, .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(5) ~ *:nth-child(2n):nth-last-child(3n + 1) ~ * {
   flex-basis: 33%;
 }
 .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(4n), .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(4n) ~ *, .cp-selectgridbuttons.col4 > *:nth-child(3n):nth-last-child(4n + 1) ~ * {
