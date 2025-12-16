@@ -19,10 +19,11 @@ let pathResolver = {
 				return { path: result.path };
 			}
 		});
+		build.onResolve({ filter: /^mjs:/ }, (args) => ({ path: args.path.slice(4), external: true }));
 		build.onResolve({ filter: /^catpow/ }, async (args) => {
 			const result = await build.resolve("./" + args.path.slice(6), {
 				kind: "import-statement",
-				resolveDir: "./modules/src",
+				resolveDir: "./node_modules-included/catpow/src",
 			});
 			if (result.errors.length === 0) {
 				return { path: result.path };
@@ -107,7 +108,7 @@ let svgAsJsx = {
 	},
 };
 let inlineCssImporter = inlineImportPlugin({
-	filter: /css:/,
+	filter: /^css:/,
 	transform: async (contents, args) => {
 		return contents;
 	},
