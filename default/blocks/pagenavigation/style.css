@@ -187,7 +187,7 @@
   color: hsla(var(--cp-tones-a-h),var(--cp-tones-a-s),var(--cp-tones-a-l),var(--cp-tones-a-a,1));
 }
 .wp-block-catpow-pagenavigation.is-style-list {
-  max-width: min(var(--cp-content-width, 95%), var(--cp-content-max-width, 60rem));
+  max-width: min(var(--cp-content-width, 90vw), var(--cp-content-max-width, 60rem), 100%);
   width: 90%;
   padding: 2.5rem;
   margin-inline: auto;
