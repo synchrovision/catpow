@@ -39,7 +39,7 @@ function get_jsx_files(){
 	foreach(glob(WP_CONTENT_DIR.'/{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{js,blocks/*,ui/*,components/*,elements/*,stores/*,*/*/*}/*.{t,j}sx',GLOB_BRACE) as $jsx_file){
 		if(
 			strpos($jsx_file,'/node_modules/')!==false || 
-			strpos($jsx_file,'/modules/')!==false || 
+			strpos($jsx_file,'/node_modules-included/')!==false || 
 			strpos($jsx_file,'/cpdev/')!==false
 		){continue;}
 		$jsx_files[]=$jsx_file;
@@ -66,7 +66,7 @@ function is_mjs_former($fname){
 function get_entry_files(){
 	$entry_files=[];
 	foreach(glob(WP_CONTENT_DIR.'/{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{js,blocks/*,ui/*,components/*,elements/*,stores/*,*/*/*}/*/index{,.mjs}.{t,j}s{,x}',GLOB_BRACE) as $entry_file){
-		if(strpos($entry_file,'/node_modules/')!==false || strpos($entry_file,'/modules/')!==false){continue;}
+		if(strpos($entry_file,'/node_modules/')!==false || strpos($entry_file,'/node_modules-included/')!==false){continue;}
 		$entry_files[dirname($entry_file)]=$entry_file;
 	}
 	return $entry_files;
