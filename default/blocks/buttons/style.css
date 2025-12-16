@@ -122,14 +122,14 @@
   width: 100%;
   height: auto;
 }
-.wp-block-catpow-buttons__item.is-rate-primary .wp-block-catpow-buttons-button {
+.wp-block-catpow-buttons__item.is-rank-primary .wp-block-catpow-buttons-button {
   display: block;
   position: relative;
   overflow: hidden;
   color: hsla(var(--cp-tones-ix-h),var(--cp-tones-ix-s),var(--cp-tones-ix-l),var(--cp-tones-ix-a,1));
   background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),calc(100% - var(--cp-tones-mx-t) * 100),calc(var(--cp-tones-mx-a,1) * 0.75));
 }
-.wp-block-catpow-buttons__item.is-rate-primary .wp-block-catpow-buttons-button::before {
+.wp-block-catpow-buttons__item.is-rank-primary .wp-block-catpow-buttons-button::before {
   content: "";
   display: block;
   position: absolute;
@@ -144,10 +144,10 @@
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
-.wp-block-catpow-buttons__item.is-rate-primary .wp-block-catpow-buttons-button:hover::before {
+.wp-block-catpow-buttons__item.is-rank-primary .wp-block-catpow-buttons-button:hover::before {
   right: 0rem;
 }
-.wp-block-catpow-buttons__item.is-rate-primary .wp-block-catpow-buttons-button .icon svg {
+.wp-block-catpow-buttons__item.is-rank-primary .wp-block-catpow-buttons-button .icon svg {
   fill: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),var(--cp-tones-bx-a,1));
 }
 .wp-block-catpow-buttons__item.negative {
