@@ -226,7 +226,7 @@ class schedule{
 		}
 		if($matches[3]>31){$matches[3]-=31;$matches[2]++;}
 		if($matches[2]>12){$matches[2]-=12;$matches[1]++;}
-		$matches[0]=vsprintf('%04d-%02d-%02d %02d:%02d',array_slice($matches,1));
+		$matches[0]=vsprintf('%04d-%02d-%02d %02d:%02d',array_pad(array_slice($matches,1),5,''));
 		$last_matches=$matches;
 		return self::strtotime($matches[0]);
 	}
