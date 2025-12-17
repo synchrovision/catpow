@@ -1,0 +1,16 @@
+{
+	"$schema": "./schema.json",
+	"name": "Organization",
+	"label": "組織",
+	"url": "https://developers.google.com/search/docs/appearance/structured-data/organization",
+	"items": [
+		{ "name": "address", "label": "住所", "@type": "PostalAddress", "required": true, "multiple": true },
+		{ "name": "alternateName", "label": "名称", "input": "text" },
+		{ "name": "contactPoint", "label": "連絡先", "@type": "ContactPoint" },
+		{ "name": "description", "label": "詳細説明", "input": "textarea" },
+		{ "name": "email", "label": "メール", "input": "text" },
+		{ "name": "telephone", "label": "電話番号", "input": "text" },
+		{ "name": "foundingDate", "label": "設立日", "input": "datetime" },
+		{ "name": "url", "label": "URL", "input": "text" }
+	]
+}

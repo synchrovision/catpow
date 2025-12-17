@@ -1,5 +1,7 @@
 ﻿const { __ } = wp.i18n;
 
+import clsx from "clsx";
+
 CP.JsonLdBlockContext = wp.element.createContext({});
 
 wp.blocks.registerBlockType("catpow/jsonld", {
@@ -13,7 +15,6 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 		const { InspectorControls } = wp.blockEditor;
 		const { types, formals, data = {}, EditMode } = attributes;
 		const { SelectBox, RadioButtons, CheckBoxes, Toggle, SelectMedia, InputDateTime } = Catpow;
-		const classes = useMemo(() => Catpow.util.bem("wp-block-catpow-jsonld"), []);
 
 		const save = useCallback(() => {
 			setAttributes({ data: { ...data } });
@@ -107,7 +108,7 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 		}, []);
 		const SelectType = useCallback(
 			(props) => {
-				const { classes, types, formals, data, setAttributes } = props;
+				const { className, types, formals, data, setAttributes } = props;
 				const cache = useRef({});
 
 				const updateType = useCallback(
@@ -125,19 +126,21 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 				);
 
 				return (
-					<select className={classes()} value={data["@type"]} onChange={(e) => updateType(e.target.value)}>
-						{Object.keys(types).map((type) => (
-							<option value={type} key={type}>
-								{types[type].label || types[type].name}
-							</option>
-						))}
-					</select>
+					<CP.Bem prefix="wp-block-catpow">
+						<select className={className} value={data["@type"]} onChange={(e) => updateType(e.target.value)}>
+							{Object.keys(types).map((type) => (
+								<option value={type} key={type}>
+									{types[type].label || types[type].name}
+								</option>
+							))}
+						</select>
+					</CP.Bem>
 				);
 			},
 			[convertDefaultValue, extractDefaultData]
 		);
 		const Input = useCallback((props) => {
-			const { classes, itemClasses, data, name, index, conf, level } = props;
+			const { className, data, name, index, conf, level } = props;
 			let value = index !== undefined ? data[name][index] : data[name];
 			const { save } = useContext(CP.JsonLdBlockContext);
 
@@ -162,17 +165,21 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 						data[name] = {};
 					}
 					return (
-						<div className={classes.object()}>
-							{conf.items &&
-								conf.items.map((item) => {
-									return <InputItem classes={itemClasses} data={index !== undefined ? data[name][index] : data[name]} name={item.name} conf={item} level={level + 1} key={item.name} />;
-								})}
-						</div>
+						<CP.Bem prefix="wp-block-catpow">
+							<div className={className + "-object"}>
+								<div className="subitems_">
+									{conf.items &&
+										conf.items.map((item) => {
+											return <InputItem className="_item" data={index !== undefined ? data[name][index] : data[name]} name={item.name} conf={item} level={level + 1} key={item.name} />;
+										})}
+								</div>
+							</div>
+						</CP.Bem>
 					);
 				case "text":
 					return (
 						<input
-							className={classes.text()}
+							className={className + "-text"}
 							type="text"
 							value={value}
 							onChange={(e) => {
@@ -183,7 +190,7 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 				case "textarea":
 					return (
 						<textarea
-							className={classes.textarea()}
+							className={className + "-textarea"}
 							onChange={(e) => {
 								updateValue(e.target.value);
 							}}
@@ -194,7 +201,7 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 				case "range": {
 					return (
 						<input
-							className={classes.number()}
+							className={className + "-number"}
 							type="number"
 							min={conf.min || 0}
 							max={conf.max || 100}
@@ -224,7 +231,7 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 		}, []);
 		const InputItem = useCallback(
 			(props) => {
-				const { classes, data, name, conf, level } = props;
+				const { className, data, name, conf, level } = props;
 				let value = data[name];
 				const { save } = useContext(CP.JsonLdBlockContext);
 				const cache = useRef({});
@@ -279,40 +286,42 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 				);
 
 				return (
-					<div className={classes("is-level-" + level)}>
-						<div className={classes.label()}>
-							{conf.label || conf.name}
-							{conf.url && <a className={classes.label.help()} href={conf.url} target="_blank" rel="noopener noreferer"></a>}
-						</div>
-						<div className={classes.inputs()}>
-							{conf.isDynamicType && (
-								<select className={classes.selecttype()} value={value["@type"]} onChange={onChangeType}>
-									{conf["@type"].map((type) => (
-										<option value={type} key={type}>
-											{conf.confs[type].label || type}
-										</option>
-									))}
-								</select>
-							)}
-							{itemConf.multiple ? (
-								<div className={classes.inputs.group()}>
-									{data[name].map((item, index) => (
-										<div className={classes.inputs.group.item()} key={index}>
-											<div className={classes.inputs.group.item.body()}>
-												<Input classes={classes.inputs.input} itemClasses={classes} data={data} name={name} index={index} conf={itemConf} level={level} />
+					<CP.Bem prefix="wp-block-catpow">
+						<div className={clsx(className, "is-level-" + level)}>
+							<div className="_label">
+								{conf.label || conf.name}
+								{conf.url && <a className="_label" href={conf.url} target="_blank" rel="noopener noreferer"></a>}
+							</div>
+							<div className="_inputs">
+								{conf.isDynamicType && (
+									<select className="_selecttype" value={value["@type"]} onChange={onChangeType}>
+										{conf["@type"].map((type) => (
+											<option value={type} key={type}>
+												{conf.confs[type].label || type}
+											</option>
+										))}
+									</select>
+								)}
+								{itemConf.multiple ? (
+									<div className="_group">
+										{data[name].map((item, index) => (
+											<div className="_item" key={index}>
+												<div className="_body">
+													<Input className="input_" data={data} name={name} index={index} conf={itemConf} level={level} />
+												</div>
+												<div className="_control">
+													{data[name].length > 1 && <div className="_decrease" onClick={() => removeItem(index)}></div>}
+													<div className="_increase" onClick={() => cloneItem(index)}></div>
+												</div>
 											</div>
-											<div className={classes.inputs.group.item.control()}>
-												{data[name].length > 1 && <div className={classes.inputs.group.item.control.decrease()} onClick={() => removeItem(index)}></div>}
-												<div className={classes.inputs.group.item.control.increase()} onClick={() => cloneItem(index)}></div>
-											</div>
-										</div>
-									))}
-								</div>
-							) : (
-								<Input classes={classes.inputs.input} itemClasses={classes} data={data} name={name} conf={itemConf} level={level} />
-							)}
+										))}
+									</div>
+								) : (
+									<Input className="input_" data={data} name={name} conf={itemConf} level={level} />
+								)}
+							</div>
 						</div>
-					</div>
+					</CP.Bem>
 				);
 			},
 			[Input]
@@ -427,29 +436,31 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 		}
 		return (
 			<CP.JsonLdBlockContext.Provider value={{ types, save }}>
-				<div className={classes()}>
-					<CP.SelectModeToolbar attr={attributes} set={setAttributes} />
-					{EditMode ? (
-						<div className={classes.editor()}>
-							<div className={classes.editor.type()}>
-								<SelectType classes={classes.editor.type.select} types={types} formals={formals} data={data} setAttributes={setAttributes} />
-								{types[data["@type"]] && <a className={classes.editor.type.help()} href={types[data["@type"]].url} target="_blank" rel="noopener noreferer"></a>}
+				<CP.Bem prefix="wp-block-catpow">
+					<div className="wp-block-catpow-jsonld">
+						<CP.SelectModeToolbar attr={attributes} set={setAttributes} />
+						{EditMode ? (
+							<div className="-editor">
+								<div className="_type">
+									<SelectType className="_select" types={types} formals={formals} data={data} setAttributes={setAttributes} />
+									{types[data["@type"]] && <a className="_help" href={types[data["@type"]].url} target="_blank" rel="noopener noreferer"></a>}
+								</div>
+								<div className="_items">
+									{types[data["@type"]].items.map((conf) => (
+										<InputItem className="_item" conf={conf} data={data} name={conf.name} level={0} key={conf.name} />
+									))}
+								</div>
 							</div>
-							<div className={classes.editor.items()}>
-								{types[data["@type"]].items.map((conf) => (
-									<InputItem classes={classes.editor.items.item} conf={conf} data={data} name={conf.name} level={0} key={conf.name} />
-								))}
+						) : (
+							<div className="_label">
+								<div className="_icon">
+									<CP.ConfigIcon icon="json" />
+								</div>
+								<div className="_text">JSON-LD : {typeLabel}</div>
 							</div>
-						</div>
-					) : (
-						<div className={classes.label()}>
-							<div className={classes.label.icon()}>
-								<CP.ConfigIcon icon="json" />
-							</div>
-							<div className={classes.label.text()}>JSON-LD : {typeLabel}</div>
-						</div>
-					)}
-				</div>
+						)}
+					</div>
+				</CP.Bem>
 			</CP.JsonLdBlockContext.Provider>
 		);
 	},

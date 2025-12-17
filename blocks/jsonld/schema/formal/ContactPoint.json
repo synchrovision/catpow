@@ -1,0 +1,10 @@
+{
+	"$schema": "../schema.json",
+	"name": "ContactPoint",
+	"label": "連絡先",
+	"url": "https://schema.org/ContactPoint",
+	"items": [
+		{ "name": "email", "label": "メール", "input": "text" },
+		{ "name": "telephone", "label": "電話", "input": "text" }
+	]
+}

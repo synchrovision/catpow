@@ -1,7 +1,7 @@
 @import 'admin_style_config.scss';
 
 .wp-block-catpow-jsonld{
-	&-label{
+	&__label{
 		@include flx((w:w,j:c,a:c));
 		@include bnd((mg:20,pd:20));
 		@include bdr((s:s,w:1));
@@ -21,7 +21,7 @@
 		@include bnd((d:b,p:r,mg:20));
 		@include bdr((r:8));
 		@include shd((b:4));
-		&-type{
+		&__type{
 			@include bnd((pd:8));
 			@include flx((a:c,j:b));
 			@include bg((c:s));
@@ -45,7 +45,7 @@
 				}
 			}
 		}
-		&-items{
+		&__items{
 			&-item{
 				@include bnd((pd:8));
 				@include flx((w:w));
@@ -73,17 +73,9 @@
 				}
 				&-inputs{
 					@include bnd((f:10 10 96));
-					&-input{
-						&-object{
-						}
-						&-text{
-						}
-						&-textarea{
-						}
-					}
 					&-group{
 						&-item{
-							@include bnd((p:r,pd:8));
+							@include bnd((p:r,pd:16));
 							@include bdr((r:8));
 							@include shd((b:1));
 							&-body{
@@ -133,6 +125,30 @@
 					&-inputs{
 					}
 				}
+			}
+		}
+		&__subitems{
+			@include grd((tc:a 1fr,g:12));
+			&-item{
+				@include bnd((d:c));
+				&-label{
+					@include bnd((f:0 0 200));
+				}
+				&-inputs{
+					@include bnd((f:1 1 400));
+				}
+			}
+		}
+		&__input{
+			&-inputs{
+			}
+			&-label{
+			}
+			&-object{
+			}
+			&-text{
+			}
+			&.is-level-1{
 			}
 		}
 	}
