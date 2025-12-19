@@ -8,9 +8,6 @@
   grid-gap: var(--cp-item-gap, 1rem);
   list-style: none;
 }
-.wp-block-catpow-banners:not(.has-custom-padding) {
-  padding: 0rem;
-}
 .wp-block-catpow-banners__item {
   box-sizing: border-box;
   -webkit-transition: 0.5s;
