@@ -1,6 +1,7 @@
-﻿export const Radio = (props) => {
+﻿import { useMemo } from "react";
+
+export const Radio = (props) => {
 	const { className = "cp-jsoneditor-input-radio", agent, onUpdate } = props;
-	const { useMemo } = wp.element;
 	const { bem } = Catpow.util;
 	const classes = useMemo(() => bem(className), []);
 

@@ -1,8 +1,8 @@
-﻿import { Input } from "./Input.jsx";
+﻿import { useMemo, useCallback, useState } from "react";
+import { Input } from "./Input.jsx";
 
 export const ObjectInput = (props) => {
 	const { className = "cp-jsoneditor-input-objectinput", compact = false, popoverSize = "large", level = 0, agent, lastChanged } = props;
-	const { useState, useMemo, useCallback } = wp.element;
 	const { bem } = Catpow.util;
 	const classes = useMemo(() => bem(className), []);
 

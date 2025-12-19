@@ -1,6 +1,7 @@
-﻿export const StepSelect = (props) => {
+﻿import { useMemo } from "react";
+
+export const StepSelect = (props) => {
 	const { className = "cp-jsoneditor-input-stepselect", agent, onChange, onUpdate } = props;
-	const { useMemo } = wp.element;
 	const { bem } = Catpow.util;
 	const classes = useMemo(() => bem(className), []);
 

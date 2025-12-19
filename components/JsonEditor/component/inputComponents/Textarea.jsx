@@ -1,6 +1,7 @@
-﻿export const Textarea = (props) => {
+﻿import {useMemo,useCallback} from "react";
+
+export const Textarea = (props) => {
 	const { className = "cp-jsoneditor-input-textarea", agent, onChange, onUpdate } = props;
-	const { useMemo, useCallback } = wp.element;
 	const { bem } = Catpow.util;
 	const classes = useMemo(() => bem(className), []);
 

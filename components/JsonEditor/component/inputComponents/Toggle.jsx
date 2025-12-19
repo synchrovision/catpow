@@ -1,6 +1,7 @@
-﻿export const Toggle = (props) => {
+﻿import { useMemo } from "react";
+
+export const Toggle = (props) => {
 	const { className = "cp-jsoneditor-input-toggle", agent, onUpdate } = props;
-	const { useMemo } = wp.element;
 	const { bem } = Catpow.util;
 	const classes = useMemo(() => bem(className), []);
 

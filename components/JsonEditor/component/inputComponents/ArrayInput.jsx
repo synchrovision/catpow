@@ -1,8 +1,8 @@
 ﻿import { Input } from "./Input.jsx";
+import { useState, useMemo, useCallback, useEffect } from "react";
 
 export const ArrayInput = (props) => {
 	const { className = "cp-jsoneditor-input-arrayinput", compact = false, agent } = props;
-	const { useState, useMemo, useCallback, useEffect } = wp.element;
 	const { bem } = Catpow.util;
 	const classes = useMemo(() => bem(className), []);
 

@@ -1,8 +1,8 @@
-﻿import { Bem } from "catpow/component";
+﻿import { useCallback } from "react";
+import { Bem } from "catpow/component";
 
 export const Range = (props) => {
 	const { className = "cp-jsoneditor-input-range", agent, onChange, onUpdate } = props;
-	const { useCallback } = wp.element;
 
 	const { minimum: min, maximum: max, multipleOf: step } = agent.getMergedSchemaForInput();
 

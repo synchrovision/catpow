@@ -1,6 +1,7 @@
-﻿export const SearchSelect = (props) => {
+﻿import { useMemo } from "react";
+
+export const SearchSelect = (props) => {
 	const { className = "cp-jsoneditor-input-searchselect", agent, onUpdate } = props;
-	const { useMemo } = wp.element;
 	const { bem } = Catpow.util;
 	const classes = useMemo(() => bem(className), []);
 

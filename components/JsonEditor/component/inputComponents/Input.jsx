@@ -1,9 +1,10 @@
-﻿import { DataContext } from "../JsonEditor.jsx";
+﻿import { useState, useMemo, useCallback, useEffect, useContext } from "react";
+
+import { DataContext } from "../JsonEditor.jsx";
 import { getInputComponentForSchema } from "../functions.jsx";
 
 export const Input = (props) => {
 	const { className = "cp-jsoneditor-input", compact = false, level = 0, agent } = props;
-	const { useState, useMemo, useCallback, useEffect, useContext } = wp.element;
 	const { bem } = Catpow.util;
 	const classes = useMemo(() => bem(className), []);
 

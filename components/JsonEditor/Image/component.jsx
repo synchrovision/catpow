@@ -1,16 +1,14 @@
-﻿window.Catpow.JsonEditor.Image=(props)=>{
-	const {className="cp-jsoneditor-input-image",agent,onChange,onUpdate}=props;
-	const {useState,useMemo,useCallback,useEffect}=wp.element;
-	const {bem}=Catpow.util;
-	const classes=useMemo(()=>bem(className),[]);
-	const {__,sprintf}=wp.i18n;
+﻿import {useCallback} from 'react';
+
+window.Catpow.JsonEditor.Image=(props)=>{
+	const {className="cp-jsoneditor-input-image",agent,onUpdate}=props;
 	
 	const onChangeHandle=useCallback((value)=>{
 		onUpdate(value)
 	},[onUpdate]);
 	
 	return (
-		<div className={classes()}>
+		<div className={className}>
 			<Catpow.SelectMedia src={agent.getValue() && agent.getValue().url} onChange={onChangeHandle}/>
 		</div>
 	);

@@ -1,6 +1,7 @@
-﻿export const Time = (props) => {
+﻿import {useMemo,useCallback} from "react";
+
+export const Time = (props) => {
 	const { className = "cp-jsoneditor-input-time", agent, onChange, onUpdate } = props;
-	const { useMemo, useCallback } = wp.element;
 	const { bem } = Catpow.util;
 	const classes = useMemo(() => bem(className), []);
 

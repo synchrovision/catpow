@@ -1,12 +1,8 @@
 ﻿window.Catpow.JsonEditor.MenuItems=(props)=>{
-	const {className="cp-jsoneditor-input-menuitems",agent,onChange,onUpdate}=props;
-	const {useState,useMemo,useCallback,useEffect}=wp.element;
-	const {bem}=Catpow.util;
-	const classes=useMemo(()=>bem(className),[]);
-	const {__,sprintf}=wp.i18n;
+	const {className="cp-jsoneditor-input-menuitems",agent,onUpdate}=props;
 	
 	return (
-		<div className={classes()}>
+		<div className={className}>
 			<Catpow.SelectMenuItem name='icon' value={agent.getValue()} onChange={onUpdate}/>
 		</div>
 	);
