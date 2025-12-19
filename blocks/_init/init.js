@@ -5396,6 +5396,7 @@
         hasWidthFull: __4("\u30D5\u30EB", "catpow"),
         hasWidthWide: __4("\u30EF\u30A4\u30C9", "catpow"),
         hasWidthRegular: __4("\u30EC\u30AE\u30E5\u30E9\u30FC", "catpow"),
+        hasWidthCompact: __4("\u30B3\u30F3\u30D1\u30AF\u30C8", "catpow"),
         hasWidthNarrow: __4("\u30CA\u30ED\u30FC", "catpow")
       }
     },
@@ -5677,6 +5678,80 @@
         ...otherParams
       };
     },
+    hasPadding({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "hasPadding",
+        label: __4("\u30D1\u30C7\u30A3\u30F3\u30B0", "catpow"),
+        values: "hasPadding",
+        sub: [
+          { preset: "paddingTop", vars },
+          { preset: "paddingBottom", vars }
+        ],
+        ...otherParams
+      };
+    },
+    paddingTop({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "paddingTop",
+        type: "buttons",
+        label: __4("\u4E0A\u30D1\u30C7\u30A3\u30F3\u30B0", "catpow"),
+        values: {
+          hasPaddingTopXLarge: __4("\u6975\u5927", "catpow"),
+          hasPaddingTopLarge: __4("\u5927", "catpow"),
+          hasPaddingTopMedium: __4("\u4E2D", "catpow"),
+          hasPaddingTopSmall: __4("\u5C0F", "catpow"),
+          hasPaddingTopXSmall: __4("\u6975\u5C0F", "catpow"),
+          hasPaddingTopCustom: ":admin-generic:"
+        },
+        sub: {
+          hasPaddingTopCustom: [
+            {
+              name: "paddingTopCustom",
+              input: "range",
+              vars,
+              key: "--cp-padding-top-custom",
+              min: -400,
+              max: 400,
+              step: 5,
+              coef: 0.0625,
+              unit: "rem"
+            }
+          ]
+        },
+        ...otherParams
+      };
+    },
+    paddingBottom({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "paddingBottom",
+        type: "buttons",
+        label: __4("\u4E0B\u30D1\u30C7\u30A3\u30F3\u30B0", "catpow"),
+        values: {
+          hasPaddingBottomXLarge: __4("\u6975\u5927", "catpow"),
+          hasPaddingBottomLarge: __4("\u5927", "catpow"),
+          hasPaddingBottomMedium: __4("\u4E2D", "catpow"),
+          hasPaddingBottomSmall: __4("\u5C0F", "catpow"),
+          hasPaddingBottomXSmall: __4("\u6975\u5C0F", "catpow"),
+          hasPaddingBottomCustom: ":admin-generic:"
+        },
+        sub: {
+          hasPaddingBottomCustom: [
+            {
+              name: "paddingBottomCustom",
+              input: "range",
+              vars,
+              key: "--cp-padding-bottom-custom",
+              min: -400,
+              max: 400,
+              step: 5,
+              coef: 0.0625,
+              unit: "rem"
+            }
+          ]
+        },
+        ...otherParams
+      };
+    },
     customPadding({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "customPadding",
@@ -5720,6 +5795,80 @@
             unit: "rem"
           }
         ],
+        ...otherParams
+      };
+    },
+    hasMargin({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "hasMargin",
+        label: __4("\u30DE\u30FC\u30B8\u30F3", "catpow"),
+        values: "hasMargin",
+        sub: [
+          { preset: "marginTop", vars },
+          { preset: "marginBottom", vars }
+        ],
+        ...otherParams
+      };
+    },
+    marginTop({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "margin",
+        type: "buttons",
+        label: __4("\u4E0A\u30DE\u30FC\u30B8\u30F3", "catpow"),
+        values: {
+          hasMarginTopXLarge: __4("\u6975\u5927", "catpow"),
+          hasMarginTopLarge: __4("\u5927", "catpow"),
+          hasMarginTopMedium: __4("\u4E2D", "catpow"),
+          hasMarginTopSmall: __4("\u5C0F", "catpow"),
+          hasMarginTopXSmall: __4("\u6975\u5C0F", "catpow"),
+          hasMarginTopCustom: ":admin-generic:"
+        },
+        sub: {
+          hasMarginTopCustom: [
+            {
+              name: "marginTop",
+              input: "range",
+              vars,
+              key: "--cp-margin-top-custom",
+              min: -400,
+              max: 400,
+              step: 5,
+              coef: 0.0625,
+              unit: "rem"
+            }
+          ]
+        },
+        ...otherParams
+      };
+    },
+    marginBottom({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "margin",
+        type: "buttons",
+        label: __4("\u4E0B\u30DE\u30FC\u30B8\u30F3", "catpow"),
+        values: {
+          hasMarginBottomXLarge: __4("\u6975\u5927", "catpow"),
+          hasMarginBottomLarge: __4("\u5927", "catpow"),
+          hasMarginBottomMedium: __4("\u4E2D", "catpow"),
+          hasMarginBottomSmall: __4("\u5C0F", "catpow"),
+          hasMarginBottomXSmall: __4("\u6975\u5C0F", "catpow"),
+          hasMarginBottomCustom: ":admin-generic:"
+        },
+        sub: {
+          hasMarginBottomCustom: [
+            {
+              name: "marginBottom",
+              input: "range",
+              vars,
+              key: "--cp-margin-bottom-custom",
+              min: -400,
+              max: 400,
+              step: 5,
+              coef: 0.0625,
+              unit: "rem"
+            }
+          ]
+        },
         ...otherParams
       };
     },
@@ -5774,6 +5923,7 @@
         values: {
           hasContentWidthFit: __4("\u9069", "catpow"),
           hasContentWidthNarrow: __4("\u72ED", "catpow"),
+          hasContentWidthCompact: __4("\u7E2E", "catpow"),
           hasContentWidthRegular: __4("\u4E2D", "catpow"),
           hasContentWidthWide: __4("\u5E83", "catpow"),
           hasContentWidthFull: __4("\u5168", "catpow"),

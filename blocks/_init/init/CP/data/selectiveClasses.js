@@ -256,6 +256,7 @@ export const selectiveClassesPresets = {
 			hasWidthFull: __("フル", "catpow"),
 			hasWidthWide: __("ワイド", "catpow"),
 			hasWidthRegular: __("レギュラー", "catpow"),
+			hasWidthCompact: __("コンパクト", "catpow"),
 			hasWidthNarrow: __("ナロー", "catpow"),
 		},
 	},
@@ -537,6 +538,80 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
+	hasPadding({ preset, vars = "vars", ...otherParams }) {
+		return {
+			name: "hasPadding",
+			label: __("パディング", "catpow"),
+			values: "hasPadding",
+			sub: [
+				{ preset: "paddingTop", vars },
+				{ preset: "paddingBottom", vars },
+			],
+			...otherParams,
+		};
+	},
+	paddingTop({ preset, vars = "vars", ...otherParams }) {
+		return {
+			name: "paddingTop",
+			type: "buttons",
+			label: __("上パディング", "catpow"),
+			values: {
+				hasPaddingTopXLarge: __("極大", "catpow"),
+				hasPaddingTopLarge: __("大", "catpow"),
+				hasPaddingTopMedium: __("中", "catpow"),
+				hasPaddingTopSmall: __("小", "catpow"),
+				hasPaddingTopXSmall: __("極小", "catpow"),
+				hasPaddingTopCustom: ":admin-generic:",
+			},
+			sub: {
+				hasPaddingTopCustom: [
+					{
+						name: "paddingTopCustom",
+						input: "range",
+						vars,
+						key: "--cp-padding-top-custom",
+						min: -400,
+						max: 400,
+						step: 5,
+						coef: 0.0625,
+						unit: "rem",
+					},
+				],
+			},
+			...otherParams,
+		};
+	},
+	paddingBottom({ preset, vars = "vars", ...otherParams }) {
+		return {
+			name: "paddingBottom",
+			type: "buttons",
+			label: __("下パディング", "catpow"),
+			values: {
+				hasPaddingBottomXLarge: __("極大", "catpow"),
+				hasPaddingBottomLarge: __("大", "catpow"),
+				hasPaddingBottomMedium: __("中", "catpow"),
+				hasPaddingBottomSmall: __("小", "catpow"),
+				hasPaddingBottomXSmall: __("極小", "catpow"),
+				hasPaddingBottomCustom: ":admin-generic:",
+			},
+			sub: {
+				hasPaddingBottomCustom: [
+					{
+						name: "paddingBottomCustom",
+						input: "range",
+						vars,
+						key: "--cp-padding-bottom-custom",
+						min: -400,
+						max: 400,
+						step: 5,
+						coef: 0.0625,
+						unit: "rem",
+					},
+				],
+			},
+			...otherParams,
+		};
+	},
 	customPadding({ preset, vars = "vars", ...otherParams }) {
 		return {
 			name: "customPadding",
@@ -580,6 +655,80 @@ export const selectiveClassesPresets = {
 					unit: "rem",
 				},
 			],
+			...otherParams,
+		};
+	},
+	hasMargin({ preset, vars = "vars", ...otherParams }) {
+		return {
+			name: "hasMargin",
+			label: __("マージン", "catpow"),
+			values: "hasMargin",
+			sub: [
+				{ preset: "marginTop", vars },
+				{ preset: "marginBottom", vars },
+			],
+			...otherParams,
+		};
+	},
+	marginTop({ preset, vars = "vars", ...otherParams }) {
+		return {
+			name: "margin",
+			type: "buttons",
+			label: __("上マージン", "catpow"),
+			values: {
+				hasMarginTopXLarge: __("極大", "catpow"),
+				hasMarginTopLarge: __("大", "catpow"),
+				hasMarginTopMedium: __("中", "catpow"),
+				hasMarginTopSmall: __("小", "catpow"),
+				hasMarginTopXSmall: __("極小", "catpow"),
+				hasMarginTopCustom: ":admin-generic:",
+			},
+			sub: {
+				hasMarginTopCustom: [
+					{
+						name: "marginTop",
+						input: "range",
+						vars,
+						key: "--cp-margin-top-custom",
+						min: -400,
+						max: 400,
+						step: 5,
+						coef: 0.0625,
+						unit: "rem",
+					},
+				],
+			},
+			...otherParams,
+		};
+	},
+	marginBottom({ preset, vars = "vars", ...otherParams }) {
+		return {
+			name: "margin",
+			type: "buttons",
+			label: __("下マージン", "catpow"),
+			values: {
+				hasMarginBottomXLarge: __("極大", "catpow"),
+				hasMarginBottomLarge: __("大", "catpow"),
+				hasMarginBottomMedium: __("中", "catpow"),
+				hasMarginBottomSmall: __("小", "catpow"),
+				hasMarginBottomXSmall: __("極小", "catpow"),
+				hasMarginBottomCustom: ":admin-generic:",
+			},
+			sub: {
+				hasMarginBottomCustom: [
+					{
+						name: "marginBottom",
+						input: "range",
+						vars,
+						key: "--cp-margin-bottom-custom",
+						min: -400,
+						max: 400,
+						step: 5,
+						coef: 0.0625,
+						unit: "rem",
+					},
+				],
+			},
 			...otherParams,
 		};
 	},
@@ -634,6 +783,7 @@ export const selectiveClassesPresets = {
 			values: {
 				hasContentWidthFit: __("適", "catpow"),
 				hasContentWidthNarrow: __("狭", "catpow"),
+				hasContentWidthCompact: __("縮", "catpow"),
 				hasContentWidthRegular: __("中", "catpow"),
 				hasContentWidthWide: __("広", "catpow"),
 				hasContentWidthFull: __("全", "catpow"),
