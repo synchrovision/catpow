@@ -31,6 +31,9 @@
     }
   });
 
+  // ../components/JsonEditor/component/JsonEditor.jsx
+  init_react();
+
   // ../components/JsonEditor/component/inputComponents/ObjectInput.jsx
   init_react();
 
@@ -762,10 +765,9 @@
   // ../components/JsonEditor/component/JsonEditor.jsx
   var DataContext = wp.element.createContext({});
   var JsonEditor = (props) => {
-    const { useState: useState2, useCallback: useCallback2, useMemo: useMemo2, useEffect: useEffect2, useRef: useRef2, useReducer: useReducer2 } = wp.element;
     const { className = "cp-jsoneditor-editor", title = "JsonEditor", schema, debug = false, onChange, autoSave = false, showHeader = true, children: getAdditionalInputComponent } = props;
-    const [hasChange, setHasChange] = useState2(false);
-    const json = useMemo2(() => {
+    const [hasChange, setHasChange] = useState(false);
+    const json = useMemo(() => {
       if (typeof props.json === "object") {
         return props.json;
       }
@@ -778,21 +780,21 @@
       }
       return json2;
     }, []);
-    const rootAgent = useMemo2(() => {
+    const rootAgent = useMemo(() => {
       const rootAgent2 = Catpow.schema(schema, { debug }).createAgent(json);
       rootAgent2.on("change", (e) => {
         setHasChange(true);
       });
       return rootAgent2;
     }, [schema]);
-    const save = useCallback2(() => {
+    const save = useCallback(() => {
       onChange(typeof props.json === "object" ? rootAgent.value : JSON.stringify(rootAgent.value));
       setHasChange(false);
     }, [rootAgent, setHasChange, onChange]);
-    const data = useMemo2(() => {
+    const data = useMemo(() => {
       return { getAdditionalInputComponent };
     }, [getAdditionalInputComponent]);
-    useEffect2(() => {
+    useEffect(() => {
       let timer, isHold = false;
       const cb = (e) => {
         if (autoSave) {

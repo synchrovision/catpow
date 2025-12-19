@@ -1,11 +1,12 @@
-﻿import { ObjectInput } from "./inputComponents/ObjectInput.jsx";
+﻿import { useState, useCallback, useMemo, useEffect} from "react";
+
+import { ObjectInput } from "./inputComponents/ObjectInput.jsx";
 import { Input } from "./inputComponents/Input.jsx";
 import { Bem } from "catpow/component";
 import clsx from "clsx";
 export const DataContext = wp.element.createContext({});
 
 export const JsonEditor = (props) => {
-	const { useState, useCallback, useMemo, useEffect, useRef, useReducer } = wp.element;
 	const { className = "cp-jsoneditor-editor", title = "JsonEditor", schema, debug = false, onChange, autoSave = false, showHeader = true, children: getAdditionalInputComponent } = props;
 
 	const [hasChange, setHasChange] = useState(false);
