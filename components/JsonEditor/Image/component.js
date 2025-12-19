@@ -18,8 +18,14 @@
 
   // ../components/JsonEditor/Image/component.jsx
   window.Catpow.JsonEditor.Image = (props) => {
-    const { className = "cp-jsoneditor-input-image", agent, onUpdate } = props;
-    const onChangeHandle = useCallback((value) => {
+    const { className = "cp-jsoneditor-input-image", agent, onUpdate, keys = ["url", "alt", "width", "height", "id", "mime"] } = props;
+    const onChangeHandle = useCallback((originalValue) => {
+      const value = keys.reduce((value2, key) => {
+        if (originalValue[key] !== void 0) {
+          value2[key] = originalValue[key];
+        }
+        return value2;
+      }, {});
       onUpdate(value);
     }, [onUpdate]);
     return /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement(Catpow.SelectMedia, { src: agent.getValue() && agent.getValue().url, onChange: onChangeHandle }));
