@@ -33,7 +33,7 @@ wp.blocks.registerBlockType("catpow/picture", {
 				devices,
 				isTemplate: states.isTemplate,
 			},
-			"customMargin",
+			"hasMargin",
 			"hasContentWidth",
 			{
 				label: "テンプレート",

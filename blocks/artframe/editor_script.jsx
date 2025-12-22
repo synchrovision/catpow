@@ -28,8 +28,8 @@ wp.blocks.registerBlockType("catpow/artframe", {
 				{ preset: "backgroundImage", classKey: "contentsClasses" },
 				{ preset: "backgroundPattern", classKey: "contentsClasses" },
 				{ preset: "contentWidth", classKey: "contentsBodyClasses" },
-				"customMargin",
-				{ preset: "customPadding", classKey: "contentsBodyClasses" },
+				"hasMargin",
+				{ preset: "hasPadding", classKey: "contentsBodyClasses" },
 				artframeSelectiveClasses,
 			];
 			wp.hooks.applyFilters("catpow.blocks.artframe.selectiveClasses", CP.finderProxy(selectiveClasses));

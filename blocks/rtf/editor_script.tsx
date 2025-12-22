@@ -19,7 +19,7 @@ wp.blocks.registerBlockType("catpow/rtf", {
 		const { InspectorControls } = wp.blockEditor;
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses: SelectiveClassConfig[] = ["customMargin", "customContentWidth"];
+			const selectiveClasses: SelectiveClassConfig[] = ["hasMargin", "hasContentWidth"];
 			wp.hooks.applyFilters("catpow.blocks.rtf.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);

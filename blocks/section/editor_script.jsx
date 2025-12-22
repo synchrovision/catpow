@@ -105,8 +105,8 @@ wp.blocks.registerBlockType("catpow/section", {
 							},
 							{ name: "decoration", label: __("デコレーション", "catpow"), values: "hasDecoration" },
 							"clipPath",
-							"customPadding",
-							"customMargin",
+							"hasPadding",
+							"hasMargin",
 							{
 								name: "template",
 								label: __("テンプレート", "catpow"),
@@ -162,8 +162,8 @@ wp.blocks.registerBlockType("catpow/section", {
 							},
 							{ name: "decoration", label: __("デコレーション", "catpow"), values: "hasDecoration" },
 							"clipPath",
-							"customPadding",
-							"customMargin",
+							"hasPadding",
+							"hasMargin",
 							{
 								name: "template",
 								label: __("テンプレート", "catpow"),

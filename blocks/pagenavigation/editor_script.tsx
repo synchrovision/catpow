@@ -20,7 +20,7 @@ wp.blocks.registerBlockType("catpow/pagenavigation", {
 				{ name: "level", label: "level", input: "range", key: "level", min: 0, max: 3 },
 				{ name: "depth", label: "depth", input: "range", key: "depth", min: 0, max: 2 },
 				{ name: "query", label: "query", input: "textarea", key: "query" },
-				"customMargin",
+				"hasMargin",
 			];
 			wp.hooks.applyFilters("catpow.blocks.pagenavigation.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;

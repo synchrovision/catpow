@@ -66,8 +66,8 @@ wp.blocks.registerBlockType("catpow/div", {
 						hasBorderImage: [{ input: "border", css: "borderImageCss", sel: ({ attr }) => "#" + attr.anchor, color }],
 					},
 				},
-				"customPadding",
-				"customMargin",
+				"hasPadding",
+				"hasMargin",
 			];
 			wp.hooks.applyFilters("catpow.blocks.div.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
