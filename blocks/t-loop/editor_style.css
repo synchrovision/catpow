@@ -1,7 +1,7 @@
-.loopBlock:not(.altMode) > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block:not(:first-child) {
+.loop-block:not(.altMode) > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block:not(:first-child) {
   display: none;
 }
-.loopBlock.altMode > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block:first-child {
+.loop-block.altMode > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block:first-child {
   display: none;
 }
 /*# sourceMappingURL=./editor_style.css.map */
