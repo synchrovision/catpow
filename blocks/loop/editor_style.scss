@@ -1,8 +1,8 @@
 @import 'admin_style_config.scss';
 
-.loopContents{
+.loop-contents{
 	&:not(.editMode)>.block-editor-inner-blocks{
-		.loopContent>.label{
+		.loop-content>.label{
 			@include bnd((d:n));
 		}
 		&>.block-editor-block-list__layout{

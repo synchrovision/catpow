@@ -1,6 +1,6 @@
 <?php
 add_filter('wp_kses_allowed_html',function($allowedposttags){
-	$allowedposttags['loopBlockContent']=['name'=>true];
+	$allowedposttags['t-loop-content']=['name'=>true];
 	return $allowedposttags;
 });
 $attributes=[

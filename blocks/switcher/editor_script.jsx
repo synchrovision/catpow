@@ -123,7 +123,7 @@ wp.blocks.registerBlockType("catpow/switcher", {
 
 		return (
 			<>
-				<div className="switcherEdit" data-current-index={currentIndex}>
+				<div className="switcher-edit" data-current-index={currentIndex}>
 					<ul className="tabs">
 						<li className="tab icon">
 							<Icon icon="networking" />
@@ -174,7 +174,7 @@ wp.blocks.registerBlockType("catpow/switchercontent", {
 	category: "catpow",
 	parent: ["catpow/switcher"],
 	attributes: {
-		cond: { source: "attribute", label: "条件", selector: "switcherContent", attribute: "cond", default: "content" },
+		cond: { source: "attribute", label: "条件", selector: "switcher-content", attribute: "cond", default: "content" },
 	},
 	edit({ attributes, setAttributes }) {
 		const { InnerBlocks } = wp.blockEditor;
@@ -186,7 +186,7 @@ wp.blocks.registerBlockType("catpow/switchercontent", {
 		}, [cond]);
 
 		return (
-			<div className={"switcherContent"}>
+			<div className={"switcher-content"}>
 				<InnerBlocks template={[["core/paragraph"]]} templateLock={false} />
 			</div>
 		);
@@ -196,9 +196,9 @@ wp.blocks.registerBlockType("catpow/switchercontent", {
 		const { InnerBlocks } = wp.blockEditor;
 		return (
 			<>
-				<switcherContent cond={cond}>
+				<switcher-content cond={cond}>
 					<InnerBlocks.Content />
-				</switcherContent>
+				</switcher-content>
 			</>
 		);
 	},

@@ -23,7 +23,7 @@
 						]}
 					/>
 				</BlockControls>
-				<div className={"loopBlock " + (AltMode ? "cp-altcontent altMode" : "cp-embeddedcontent")}>
+				<div className={"loop-block " + (AltMode ? "cp-altcontent altMode" : "cp-embeddedcontent")}>
 					<div className="label">{AltMode ? <Icon icon="welcome-comments" /> : content_path}</div>
 					<InnerBlocks template={[["catpow/loopblockcontent"], ["catpow/loopblockcontent", { name: "on_empty" }]]} templateLock="all" />
 				</div>
@@ -64,7 +64,7 @@ wp.blocks.registerBlockType("catpow/loopblockcontent", {
 		name: {
 			type: "attribute",
 			label: "名前",
-			selector: "loopBlockContent",
+			selector: "loop-block-content",
 			attribute: "name",
 			default: "content",
 		},
@@ -76,7 +76,7 @@ wp.blocks.registerBlockType("catpow/loopblockcontent", {
 		const template = name == "on_empty" ? [["core/paragraph", { align: "center", content: "Not Found" }]] : [["catpow/section"]];
 
 		return (
-			<div className={"loopBlockContent"}>
+			<div className={"loop-block-content"}>
 				<InnerBlocks template={template} templateLock={false} />
 			</div>
 		);
@@ -86,9 +86,9 @@ wp.blocks.registerBlockType("catpow/loopblockcontent", {
 		const { name } = attributes;
 		return (
 			<>
-				<loopBlockContent name={name}>
+				<loop-block-content name={name}>
 					<InnerBlocks.Content />
-				</loopBlockContent>
+				</loop-block-content>
 			</>
 		);
 	},

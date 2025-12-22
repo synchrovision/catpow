@@ -57,7 +57,7 @@
 					</BlockControls>
 				)}
 				{configData.template && EditMode ? (
-					<div className="cp-altcontent loopContents">
+					<div className="cp-altcontent loop-contents">
 						<div className="label">
 							<Icon icon="edit" />
 						</div>
@@ -126,7 +126,7 @@ wp.blocks.registerBlockType("catpow/loopcontent", {
 		name: {
 			type: "attribute",
 			label: "名前",
-			selector: "loopContent",
+			selector: "loop-content",
 			attribute: "name",
 			default: "content",
 		},
@@ -137,7 +137,7 @@ wp.blocks.registerBlockType("catpow/loopcontent", {
 		const template = name == "on_empty" ? [["core/paragraph", { align: "center", content: "Not Found" }]] : [["catpow/section"]];
 
 		return (
-			<div className={"loopContent"}>
+			<div className={"loop-content"}>
 				<InnerBlocks template={template} templateLock={false} />
 			</div>
 		);
@@ -146,9 +146,9 @@ wp.blocks.registerBlockType("catpow/loopcontent", {
 		const { name } = attributes;
 		return (
 			<>
-				<loopContent name={name}>
+				<loop-content name={name}>
 					<InnerBlocks.Content />
-				</loopContent>
+				</loop-content>
 			</>
 		);
 	},

@@ -65,7 +65,7 @@ wp.blocks.registerBlockType("catpow/t-loopcontent", {
 		name: {
 			type: "attribute",
 			label: "名前",
-			selector: "t-loopContent",
+			selector: "t-loop-content",
 			attribute: "name",
 			default: "content",
 		},
@@ -77,7 +77,7 @@ wp.blocks.registerBlockType("catpow/t-loopcontent", {
 		const template = name == "on_empty" ? [["catpow/t-paragraph", { align: "center", content: "Not Found" }]] : [["catpow/t-paragraph"]];
 
 		return (
-			<div className={"wp-block-catpow-t-loopContent"}>
+			<div className={"wp-block-catpow-t-loop-content"}>
 				<InnerBlocks template={template} templateLock={false} />
 			</div>
 		);
@@ -87,9 +87,9 @@ wp.blocks.registerBlockType("catpow/t-loopcontent", {
 		const { name } = attributes;
 		return (
 			<>
-				<t-loopContent name={name}>
+				<t-loop-content name={name}>
 					<InnerBlocks.Content />
-				</t-loopContent>
+				</t-loop-content>
 			</>
 		);
 	},

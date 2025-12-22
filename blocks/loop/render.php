@@ -1,6 +1,6 @@
 <?php
 preg_match_all(
-	'|<loopContent name="(?P<name>[\w_]+)">(?P<content>.*?)</loopContent>|s',
+	'|<loop\-content name="(?P<name>[\w_]+)">(?P<content>.*?)</loop\-content>|s',
 	$content,
 	$matches,
 	PREG_SET_ORDER

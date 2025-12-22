@@ -1,6 +1,6 @@
 @import 'admin_style_config.scss';
 
-.switcherEdit{
+.switcher-edit{
 	@include bnd((p:r,pdt:2em));
 	&>.tabs{
 		@include bnd((p:a,t:0,r:0,mg:0,pd:0,z:10));

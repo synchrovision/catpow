@@ -1,6 +1,6 @@
 <?php
 add_filter('wp_kses_allowed_html',function($allowedposttags){
-	$allowedposttags['swicherContent']=['cond'=>true];
+	$allowedposttags['swicher-content']=['cond'=>true];
 	return $allowedposttags;
 });
 $attributes=[

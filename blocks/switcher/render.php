@@ -1,7 +1,7 @@
 <?php
 namespace Catpow;
 preg_match_all(
-	'|<switcherContent cond="(?P<cond>.+?)">(?P<content>.*?)</switcherContent>|s',
+	'|<switcher\-content cond="(?P<cond>.+?)">(?P<content>.*?)</switcher\-content>|s',
 	$content,
 	$matches,
 	PREG_SET_ORDER

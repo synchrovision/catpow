@@ -57,7 +57,7 @@
       name: {
         type: "attribute",
         label: "\u540D\u524D",
-        selector: "t-loopContent",
+        selector: "t-loop-content",
         attribute: "name",
         default: "content"
       }
@@ -66,12 +66,12 @@
       const { InnerBlocks } = wp.blockEditor;
       const { name } = attributes;
       const template = name == "on_empty" ? [["catpow/t-paragraph", { align: "center", content: "Not Found" }]] : [["catpow/t-paragraph"]];
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "wp-block-catpow-t-loopContent" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template, templateLock: false }));
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "wp-block-catpow-t-loop-content" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template, templateLock: false }));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks } = wp.blockEditor;
       const { name } = attributes;
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("t-loopContent", { name }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("t-loop-content", { name }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }
   });
 })();

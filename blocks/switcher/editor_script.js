@@ -121,7 +121,7 @@
         }
       }, [attributes.factor]);
       const currentBlockId = "block-" + wp.data.select("core/block-editor").getBlock(clientId).innerBlocks[currentIndex]?.clientId;
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "switcherEdit", "data-current-index": currentIndex }, /* @__PURE__ */ wp.element.createElement("ul", { className: "tabs" }, /* @__PURE__ */ wp.element.createElement("li", { className: "tab icon" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "networking" })), /* @__PURE__ */ wp.element.createElement("li", { className: "tab" }, factors[attributes.factor]), factorFlags[attributes.factor] & flagValues["field"] ? /* @__PURE__ */ wp.element.createElement("li", { className: "tab" }, attributes.field, !!(factorFlags[attributes.factor] & flagValues["compare"]) && "\u3000" + attributes.compare) : false, factorFlags[attributes.factor] & flagValues["values"] ? values.map((cond, index) => /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "switcher-edit", "data-current-index": currentIndex }, /* @__PURE__ */ wp.element.createElement("ul", { className: "tabs" }, /* @__PURE__ */ wp.element.createElement("li", { className: "tab icon" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "networking" })), /* @__PURE__ */ wp.element.createElement("li", { className: "tab" }, factors[attributes.factor]), factorFlags[attributes.factor] & flagValues["field"] ? /* @__PURE__ */ wp.element.createElement("li", { className: "tab" }, attributes.field, !!(factorFlags[attributes.factor] & flagValues["compare"]) && "\u3000" + attributes.compare) : false, factorFlags[attributes.factor] & flagValues["values"] ? values.map((cond, index) => /* @__PURE__ */ wp.element.createElement(
         "li",
         {
           className: "tab" + (index === currentIndex ? " active" : ""),
@@ -144,7 +144,7 @@
     category: "catpow",
     parent: ["catpow/switcher"],
     attributes: {
-      cond: { source: "attribute", label: "\u6761\u4EF6", selector: "switcherContent", attribute: "cond", default: "content" }
+      cond: { source: "attribute", label: "\u6761\u4EF6", selector: "switcher-content", attribute: "cond", default: "content" }
     },
     edit({ attributes, setAttributes }) {
       const { InnerBlocks } = wp.blockEditor;
@@ -153,12 +153,12 @@
       useEffect(() => {
         setAttributes({ anchor: cond });
       }, [cond]);
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "switcherContent" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph"]], templateLock: false }));
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "switcher-content" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph"]], templateLock: false }));
     },
     save({ attributes }) {
       const { cond } = attributes;
       const { InnerBlocks } = wp.blockEditor;
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("switcherContent", { cond }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("switcher-content", { cond }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }
   });
 })();

@@ -49,7 +49,7 @@
             }
           ]
         }
-      )), configData.template && EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent loopContents" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks2, { allowedBlocks: ["catpow/loopcontent"], template: configData.template, templateLock: configData.templateLock || "ALL" })) : /* @__PURE__ */ wp.element.createElement("div", { className: "cp-embeddedcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/loop", attributes })), item?.deps?.css && /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: item.deps.css }), item?.deps?.js && /* @__PURE__ */ wp.element.createElement("script", { type: "text/javascript", src: item.deps.js }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
+      )), configData.template && EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent loop-contents" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks2, { allowedBlocks: ["catpow/loopcontent"], template: configData.template, templateLock: configData.templateLock || "ALL" })) : /* @__PURE__ */ wp.element.createElement("div", { className: "cp-embeddedcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/loop", attributes })), item?.deps?.css && /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: item.deps.css }), item?.deps?.js && /* @__PURE__ */ wp.element.createElement("script", { type: "text/javascript", src: item.deps.js }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
         TreeSelect,
         {
           label: "content path",
@@ -98,7 +98,7 @@
       name: {
         type: "attribute",
         label: "\u540D\u524D",
-        selector: "loopContent",
+        selector: "loop-content",
         attribute: "name",
         default: "content"
       }
@@ -106,11 +106,11 @@
     edit({ attributes, className, setAttributes, clientId }) {
       const { name } = attributes;
       const template = name == "on_empty" ? [["core/paragraph", { align: "center", content: "Not Found" }]] : [["catpow/section"]];
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "loopContent" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template, templateLock: false }));
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "loop-content" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template, templateLock: false }));
     },
     save({ attributes, className, setAttributes }) {
       const { name } = attributes;
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("loopContent", { name }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("loop-content", { name }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }
   });
 })();
