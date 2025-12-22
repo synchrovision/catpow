@@ -31,7 +31,7 @@ CP::conf_data_walk(function($data_type,$data_name,&$conf_data){
 
 add_action('wp_nav_menu_item_custom_fields',function($item_id,$item,$depth,$args,$id){
 	foreach((array)get_menu_location($item->ID) as $i=>$location_name){
-		if(empty($location_name) || empty($GLOBALS['nav_datas'][$location_name]['meta'])){continue;}
+		if(empty($location_name) || empty(CP::$config['nav_datas'][$location_name]['meta'])){continue;}
 		echo("<div class=\"wp_nav_menu_item_custom_fields wp-clearfix {$location_name}\">");
 		$sec=\cp::$content->sec('nav/'.$location_name.'/admin/form.php',$item->ID);
 		printf('<input type="hidden" name="cpform_section_ids[]" value="%s"/>',$sec->form_id);

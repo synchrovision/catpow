@@ -86,11 +86,10 @@ add_action('cp_save_post',function($id,$post){
 },10,2);
 add_filter('use_block_editor_for_post',function($use_block_editor,$post){
 	if($post->post_type==='page'){
-		global $static_pages;
-		if(!empty($static_pages[$post->post_name]['noeditor'])){
+		if(!empty(CP::$config['static_pages'][$post->post_name]['noeditor'])){
 			remove_post_type_support('page','editor');
 			return false;
 		}
 	}
-	return $GLOBALS['post_types'][$post->post_type]['richedit']??$use_block_editor;
+	return CP::$config['post_types'][$post->post_type]['richedit']??$use_block_editor;
 },11,2);

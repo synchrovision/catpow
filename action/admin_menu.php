@@ -102,8 +102,8 @@ cp::conf_data_walk(function($data_type,$data_name,&$conf_data){
 	}
 });
 
-if(isset($GLOBALS['post_types']['wp_block'])){
-	$conf=$GLOBALS['post_types']['wp_block'];
+if(isset(CP::$config['post_types']['wp_block'])){
+	$conf=CP::$config['post_types']['wp_block'];
 	$label=$conf['label']??_('再利用可能ブロック','catpow');
 	if($conf['show_in_menu']??true){
 		add_menu_page(
