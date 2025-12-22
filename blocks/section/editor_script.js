@@ -74,11 +74,19 @@
             sub: {
               isTypeScene: [
                 {
-                  name: "headerContentWidth",
-                  preset: "hasContentWidth",
+                  name: "hasContentWidth",
                   label: __("\u30D8\u30C3\u30C0\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
-                  vars: "headerVars",
-                  classKey: "headerClasses"
+                  classKey: "titleClasses",
+                  values: "hasContentWidth",
+                  sub: [
+                    {
+                      name: "headerContentWidth",
+                      preset: "contentWidth",
+                      label: false,
+                      vars: "headerVars",
+                      classKey: "headerClasses"
+                    }
+                  ]
                 },
                 { name: "prefix", label: __("\u30D7\u30EC\u30D5\u30A3\u30AF\u30B9", "catpow"), values: "hasPrefix" },
                 { name: "titleImage", label: __("\u30BF\u30A4\u30C8\u30EB\u753B\u50CF", "catpow"), values: "hasTitleImage", sub: [{ input: "picture", keys: imageKeys2.titleImage, devices: devices2 }] },

@@ -76,11 +76,19 @@ wp.blocks.registerBlockType("catpow/section", {
 					sub: {
 						isTypeScene: [
 							{
-								name: "headerContentWidth",
-								preset: "hasContentWidth",
+								name: "hasContentWidth",
 								label: __("ヘッダコンテンツ幅", "catpow"),
-								vars: "headerVars",
-								classKey: "headerClasses",
+								classKey: "titleClasses",
+								values: "hasContentWidth",
+								sub: [
+									{
+										name: "headerContentWidth",
+										preset: "contentWidth",
+										label: false,
+										vars: "headerVars",
+										classKey: "headerClasses",
+									},
+								],
 							},
 							{ name: "prefix", label: __("プレフィクス", "catpow"), values: "hasPrefix" },
 							{ name: "titleImage", label: __("タイトル画像", "catpow"), values: "hasTitleImage", sub: [{ input: "picture", keys: imageKeys.titleImage, devices }] },
