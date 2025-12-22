@@ -14,7 +14,7 @@ add_action("add_attachment",function($id){
 			add_post_meta($post->ID,'conf',$class_name::parse_file_name(basename($post->guid)));
 		}
 	];
-	$actions=array_merge($default_actions,$GLOBALS['post_types']['attachment']['bind']??[]);
+	$actions=array_merge($default_actions,CP::$config['post_types']['attachment']['bind']??[]);
 	$post=get_post($id);
 	foreach($actions as $pattern=>$action){
 		$fname=strstr(basename(get_post_meta($post->ID,'_wp_attached_file',true)),'.',true);
