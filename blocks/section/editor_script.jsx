@@ -77,13 +77,10 @@ wp.blocks.registerBlockType("catpow/section", {
 						isTypeScene: [
 							{
 								name: "headerContentWidth",
-								preset: "customContentWidth",
+								preset: "hasContentWidth",
 								label: __("ヘッダコンテンツ幅", "catpow"),
 								vars: "headerVars",
 								classKey: "headerClasses",
-								bind: {
-									titleClasses: ["hasContentWidth"],
-								},
 							},
 							{ name: "prefix", label: __("プレフィクス", "catpow"), values: "hasPrefix" },
 							{ name: "titleImage", label: __("タイトル画像", "catpow"), values: "hasTitleImage", sub: [{ input: "picture", keys: imageKeys.titleImage, devices }] },
