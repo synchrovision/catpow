@@ -1,4 +1,4 @@
-@import "config/style_config.scss";
+@import "admin_style_config.scss";
 
 .wp-block-catpow-div{
 	$block:&;
@@ -7,7 +7,7 @@
 	&.is-type-block{
 	}
 	&.is-type-frame{
-		@include bnd((bs:b,o:h));
+		@include bnd((w:c,bs:b,o:h));
 		@include bdr((c:m 1 .5));
 		&.has-thin-border{
 			@include bdr((s:s,w:1));

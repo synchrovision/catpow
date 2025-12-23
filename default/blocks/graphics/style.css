@@ -27,20 +27,20 @@
   opacity: 1;
 }
 .wp-block-catpow-graphics .item.slideIn.slideInLeft {
-  transform: -webkit- translateX(40px);
-  transform: translateX(40px);
+  transform: -webkit- translateX(2.5rem);
+  transform: translateX(2.5rem);
 }
 .wp-block-catpow-graphics .item.slideIn.slideInRight {
-  transform: -webkit- translateX(-40px);
-  transform: translateX(-40px);
+  transform: -webkit- translateX(-2.5rem);
+  transform: translateX(-2.5rem);
 }
 .wp-block-catpow-graphics .item.slideIn.slideInUp {
-  transform: -webkit- translateY(40px);
-  transform: translateY(40px);
+  transform: -webkit- translateY(2.5rem);
+  transform: translateY(2.5rem);
 }
 .wp-block-catpow-graphics .item.slideIn.slideInDown {
-  transform: -webkit- translateY(-40px);
-  transform: translateY(-40px);
+  transform: -webkit- translateY(-2.5rem);
+  transform: translateY(-2.5rem);
 }
 .wp-block-catpow-graphics .item.slideIn.slideInFront {
   transform: -webkit- scale(0.9);
@@ -53,8 +53,8 @@
 .wp-block-catpow-graphics .item.slideIn.visible {
   -webkit-transition: 1s;
   transition: 1s;
-  transform: -webkit- translateX(0px) translateY(0px);
-  transform: translateX(0px) translateY(0px);
+  transform: -webkit- translateX(0rem) translateY(0rem);
+  transform: translateX(0rem) translateY(0rem);
 }
 .wp-block-catpow-graphics .item.roll.rollLeft.rollSlow img {
   animation: "rollLeft" 10s linear infinite;
@@ -89,12 +89,12 @@
 .wp-block-catpow-graphics .item.hoverLift {
   -webkit-transition: 0.5s;
   transition: 0.5s;
-  transform: -webkit- translateY(0px);
-  transform: translateY(0px);
+  transform: -webkit- translateY(0rem);
+  transform: translateY(0rem);
 }
 .wp-block-catpow-graphics .item.hoverLift:hover {
-  transform: -webkit- translateY(-10px);
-  transform: translateY(-10px);
+  transform: -webkit- translateY(-0.625rem);
+  transform: translateY(-0.625rem);
 }
 .wp-block-catpow-graphics .item.hoverJump:hover {
   animation: "slideUpBit" 1s cubic-bezier(0.2, 10, 0.8, 10) both infinite;
@@ -127,9 +127,9 @@
 }
 .wp-block-catpow-graphics .item.isText.type1 .title {
   padding-bottom: 0.25em;
-  margin: 0px auto 0.25em;
+  margin: 0rem auto 0.25em;
   border-bottom-style: solid;
-  border-bottom-width: 1px;
+  border-bottom-width: 0.0625rem;
   font-size: 3em;
 }
 .wp-block-catpow-graphics .item.isText.type1 .lead {
@@ -144,9 +144,9 @@
 }
 .wp-block-catpow-graphics .item.isText.type2 .title {
   padding-bottom: 0.25em;
-  margin: 0px auto 0.25em;
+  margin: 0rem auto 0.25em;
   border-bottom-style: solid;
-  border-bottom-width: 1px;
+  border-bottom-width: 0.0625rem;
   font-size: 3em;
 }
 .wp-block-catpow-graphics .item.isText.type2 .lead {
@@ -161,9 +161,9 @@
 }
 .wp-block-catpow-graphics .item.isText.type3 .title {
   padding-bottom: 0.25em;
-  margin: 0px auto 0.25em;
+  margin: 0rem auto 0.25em;
   border-bottom-style: solid;
-  border-bottom-width: 1px;
+  border-bottom-width: 0.0625rem;
   font-size: 3em;
 }
 .wp-block-catpow-graphics .item.isText.type3 .lead {
@@ -194,12 +194,12 @@
 }
 @keyframes slideUpBit {
   0% {
-    transform: -webkit- translateY(0px);
-    transform: translateY(0px);
+    transform: -webkit- translateY(0rem);
+    transform: translateY(0rem);
   }
   100% {
-    transform: -webkit- translateY(-3px);
-    transform: translateY(-3px);
+    transform: -webkit- translateY(-0.1875rem);
+    transform: translateY(-0.1875rem);
   }
 }
 @keyframes rollLeft {

@@ -5,20 +5,21 @@
   color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
 }
 .wp-block-catpow-div.is-type-frame {
+  width: min(var(--cp-content-width, 90vw), var(--cp-content-max-width, 60rem), 100%);
   box-sizing: border-box;
   overflow: hidden;
   border-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 100),calc(var(--cp-tones-m-a,1) * 0.5));
 }
 .wp-block-catpow-div.is-type-frame.has-thin-border {
   border-style: solid;
-  border-width: 1px;
+  border-width: 0.0625rem;
 }
 .wp-block-catpow-div.is-type-frame.has-bold-border {
   border-style: solid;
-  border-width: 3px;
+  border-width: 0.1875rem;
 }
 .wp-block-catpow-div.is-type-frame.has-border-radius {
-  border-radius: 10px;
+  border-radius: 0.625rem;
 }
 .wp-block-catpow-div.is-type-frame.has-box-shadow:not(.has-box-shadow-inset) {
   box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
@@ -27,44 +28,44 @@
   box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1)) inset;
 }
 .wp-block-catpow-div.is-type-columns.narrow {
-  column-width: 160px;
-  column-gap: 20px;
+  column-width: 10rem;
+  column-gap: 1.25rem;
 }
 .wp-block-catpow-div.is-type-columns.regular {
-  column-width: 320px;
-  column-gap: 30px;
+  column-width: 20rem;
+  column-gap: 1.875rem;
 }
 .wp-block-catpow-div.is-type-columns.wide {
-  column-width: 480px;
-  column-gap: 50px;
+  column-width: 30rem;
+  column-gap: 3.125rem;
   column-rule-style: dotted;
-  column-rule-width: 1px;
+  column-rule-width: 0.0625rem;
   column-rule-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
 }
 .wp-block-catpow-div.has-no-pad {
-  padding: 0px;
+  padding: 0rem;
 }
 .wp-block-catpow-div.has-thin-pad {
-  padding: 5px;
+  padding: 0.3125rem;
 }
 .wp-block-catpow-div.has-light-pad {
-  padding: 10px;
+  padding: 0.625rem;
 }
 .wp-block-catpow-div.has-medium-pad {
-  padding: 20px;
+  padding: 1.25rem;
 }
 .wp-block-catpow-div.has-bold-pad {
-  padding: 40px;
+  padding: 2.5rem;
 }
 .wp-block-catpow-div.has-heavy-pad {
-  padding: 80px;
+  padding: 5rem;
 }
 @media (max-width:960px) {
   .wp-block-catpow-div.has-bold-pad {
-    padding: 40px 20px;
+    padding: 2.5rem 1.25rem;
   }
   .wp-block-catpow-div.has-heavy-pad {
-    padding: 80px 20px;
+    padding: 5rem 1.25rem;
   }
 }
 .wp-block-catpow-div.has-icon > .icon svg {
@@ -72,13 +73,13 @@
 }
 @media (min-width:960px) {
   .wp-block-catpow-div.has-icon {
-    padding-left: 140px;
+    padding-left: 8.75rem;
   }
   .wp-block-catpow-div.has-icon > .icon {
     position: absolute;
-    left: 20px;
-    top: 20px;
-    width: 100px;
+    left: 1.25rem;
+    top: 1.25rem;
+    width: 6.25rem;
   }
   .wp-block-catpow-div.has-icon > .icon img {
     width: 100%;
@@ -87,11 +88,11 @@
 }
 @media (max-width:960px) {
   .wp-block-catpow-div.has-icon > .icon {
-    padding: 20px;
+    padding: 1.25rem;
     text-align: center;
   }
   .wp-block-catpow-div.has-icon > .icon img {
-    width: 100px;
+    width: 6.25rem;
     height: auto;
   }
 }
