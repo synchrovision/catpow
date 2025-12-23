@@ -49,7 +49,7 @@ wp.blocks.registerBlockType("catpow/picture", {
 			},
 		];
 		const blockProps = useBlockProps({
-			className: clsx("picture-", classes, device, { "cp-altcontent": device }),
+			className: clsx(classes, device, { "cp-altcontent": device }),
 			style: vars,
 		});
 
@@ -88,7 +88,7 @@ wp.blocks.registerBlockType("catpow/picture", {
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys } = CP.config.picture;
 		const blockProps = useBlockProps.save({
-			className: clsx("picture-", classes),
+			className: classes,
 			style: vars,
 		});
 

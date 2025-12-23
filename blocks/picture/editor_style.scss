@@ -1,6 +1,7 @@
 @import 'admin_style_config.scss';
 
 .wp-block-catpow-picture{
+	$block:&;
 	&.cp-altcontent{
 		@include bnd((pdt:0));
 		&.sp{
@@ -12,5 +13,25 @@
 		&.lt{
 			@include bnd((w:f 1125));
 		}
+	}
+	&__picture{
+		&-img{
+			@include trn((t:1s,o:1));
+		}
+	}
+	&__controls{
+		@include bnd((p:a,i:0,mg:a,w:200,h:fit,z:2));
+		@include bg((c:b));
+		@include shd((b:4));
+	}
+	&.is-selected{
+		#{$block}{
+			&__picture{
+				&-img{
+					@include trn((o:.25));
+				}
+			}
+		}
+		
 	}
 }
