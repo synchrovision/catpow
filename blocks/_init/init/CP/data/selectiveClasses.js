@@ -208,13 +208,90 @@ export const selectiveClassesPresets = {
 		label: __("太字", "catpow"),
 		values: "hasFontWeightSafeBold",
 	},
+	hasBoxShadow({ preset, vars = "vars", ...otherParams }) {
+		return {
+			name: "hasBoxShadow",
+			label: __("影", "catpow"),
+			values: "hasBoxShadow",
+			sub: [
+				{ label: __("内側", "catpow"), values: "hasBoxShadowInset" },
+				{ preset: "boxShadow", vars, label: null },
+			],
+			...otherParams,
+		};
+	},
+	boxShadow(preset, vars = "vars", ...otherParams) {
+		return {
+			name: "boxShadow",
+			type: "buttons",
+			label: __("影", "catpow"),
+			values: {
+				hasBoxShadowSmall: __("小", "catpow"),
+				hasBoxShadowMedium: __("中", "catpow"),
+				hasBoxShadowLarge: __("大", "catpow"),
+				hasBoxShadowCustom: ":admin-generic:",
+			},
+			sub: {
+				hasBoxShadowCustom: [
+					{
+						name: "boxShadow",
+						input: "text",
+						vars,
+						key: "--cp-box-shadow-custom",
+					},
+				],
+			},
+			...otherParams,
+		};
+	},
+	hasTextShadow({ preset, vars = "vars", ...otherParams }) {
+		return {
+			name: "hasTextShadow",
+			label: __("文字影", "catpow"),
+			values: "hasTextShadow",
+			sub: [{ preset: "textShadow", vars, label: null }],
+			...otherParams,
+		};
+	},
+	textShadow(preset, vars = "vars", ...otherParams) {
+		return {
+			name: "textShadow",
+			type: "buttons",
+			label: __("文字影", "catpow"),
+			values: {
+				hasTextShadowSmall: __("小", "catpow"),
+				hasTextShadowMedium: __("中", "catpow"),
+				hasTextShadowLarge: __("大", "catpow"),
+				hasTextShadowCustom: ":admin-generic:",
+			},
+			sub: {
+				hasTextShadowCustom: [
+					{
+						name: "textShadow",
+						input: "text",
+						vars,
+						key: "--cp-text-shadow-custom",
+					},
+				],
+			},
+			...otherParams,
+		};
+	},
+	hasBorderRadius({ preset, vars = "vars", ...otherParams }) {
+		return {
+			name: "hasBorderRadius",
+			label: __("角丸", "catpow"),
+			values: "hasBorderRadius",
+			sub: [{ preset: "borderRadius", vars, label: null }],
+			...otherParams,
+		};
+	},
 	borderRadius(preset, vars = "vars", ...otherParams) {
 		return {
 			name: "borderRadius",
 			type: "buttons",
 			label: __("角丸", "catpow"),
 			values: {
-				hasBorderRadiusNone: __("なし", "catpow"),
 				hasBorderRadiusSmall: __("小", "catpow"),
 				hasBorderRadiusMedium: __("中", "catpow"),
 				hasBorderRadiusLarge: __("大", "catpow"),
@@ -236,6 +313,7 @@ export const selectiveClassesPresets = {
 					},
 				],
 			},
+			...otherParams,
 		};
 	},
 	headingType: {

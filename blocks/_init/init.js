@@ -5372,13 +5372,90 @@
       label: __4("\u592A\u5B57", "catpow"),
       values: "hasFontWeightSafeBold"
     },
+    hasBoxShadow({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "hasBoxShadow",
+        label: __4("\u5F71", "catpow"),
+        values: "hasBoxShadow",
+        sub: [
+          { label: __4("\u5185\u5074", "catpow"), values: "hasBoxShadowInset" },
+          { preset: "boxShadow", vars, label: null }
+        ],
+        ...otherParams
+      };
+    },
+    boxShadow(preset, vars = "vars", ...otherParams) {
+      return {
+        name: "boxShadow",
+        type: "buttons",
+        label: __4("\u5F71", "catpow"),
+        values: {
+          hasBoxShadowSmall: __4("\u5C0F", "catpow"),
+          hasBoxShadowMedium: __4("\u4E2D", "catpow"),
+          hasBoxShadowLarge: __4("\u5927", "catpow"),
+          hasBoxShadowCustom: ":admin-generic:"
+        },
+        sub: {
+          hasBoxShadowCustom: [
+            {
+              name: "boxShadow",
+              input: "text",
+              vars,
+              key: "--cp-box-shadow-custom"
+            }
+          ]
+        },
+        ...otherParams
+      };
+    },
+    hasTextShadow({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "hasTextShadow",
+        label: __4("\u6587\u5B57\u5F71", "catpow"),
+        values: "hasTextShadow",
+        sub: [{ preset: "textShadow", vars, label: null }],
+        ...otherParams
+      };
+    },
+    textShadow(preset, vars = "vars", ...otherParams) {
+      return {
+        name: "textShadow",
+        type: "buttons",
+        label: __4("\u6587\u5B57\u5F71", "catpow"),
+        values: {
+          hasTextShadowSmall: __4("\u5C0F", "catpow"),
+          hasTextShadowMedium: __4("\u4E2D", "catpow"),
+          hasTextShadowLarge: __4("\u5927", "catpow"),
+          hasTextShadowCustom: ":admin-generic:"
+        },
+        sub: {
+          hasTextShadowCustom: [
+            {
+              name: "textShadow",
+              input: "text",
+              vars,
+              key: "--cp-text-shadow-custom"
+            }
+          ]
+        },
+        ...otherParams
+      };
+    },
+    hasBorderRadius({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "hasBorderRadius",
+        label: __4("\u89D2\u4E38", "catpow"),
+        values: "hasBorderRadius",
+        sub: [{ preset: "borderRadius", vars, label: null }],
+        ...otherParams
+      };
+    },
     borderRadius(preset, vars = "vars", ...otherParams) {
       return {
         name: "borderRadius",
         type: "buttons",
         label: __4("\u89D2\u4E38", "catpow"),
         values: {
-          hasBorderRadiusNone: __4("\u306A\u3057", "catpow"),
           hasBorderRadiusSmall: __4("\u5C0F", "catpow"),
           hasBorderRadiusMedium: __4("\u4E2D", "catpow"),
           hasBorderRadiusLarge: __4("\u5927", "catpow"),
@@ -5399,7 +5476,8 @@
               unit: "em"
             }
           ]
-        }
+        },
+        ...otherParams
       };
     },
     headingType: {
