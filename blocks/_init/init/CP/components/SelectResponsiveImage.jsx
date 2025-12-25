@@ -65,9 +65,11 @@
 			{showSelectPictureSources ? (
 				<>
 					<CP.ResponsiveImageBody {...props} className={className} item={item} keys={keys} />
-					<div className={`${primaryClassName}__controls`}>
-						<CP.SelectPictureSources attr={attr} set={set} keys={keys} index={index} size={size} devices={devices} />
-					</div>
+					<CP.Bem element={primaryClassName}>
+						<div className="controls_">
+							<CP.SelectPictureSources attr={attr} set={set} keys={keys} index={index} size={size} devices={devices} />
+						</div>
+					</CP.Bem>
 				</>
 			) : (
 				<CP.ResponsiveImageBody {...props} className={className} item={item} keys={keys} style={{ pointerEvents: "auto" }} onClick={onClick} />
