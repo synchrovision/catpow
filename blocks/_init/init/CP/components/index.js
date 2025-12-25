@@ -41,6 +41,7 @@ export * from "./DataStructure.jsx";
 export * from "./EventInputCards.jsx";
 export * from "./ServerSideRender.jsx";
 export * from "./ServerSideRenderPart.jsx";
+export * from "./TextAlignClassToolbar.jsx";
 export * from "./ColorVarTracer.jsx";
 export * from "./PlacedPictures.jsx";
 export * from "./Link.jsx";
