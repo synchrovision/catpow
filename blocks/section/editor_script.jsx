@@ -32,6 +32,7 @@ wp.blocks.registerBlockType("catpow/section", {
 			headerClasses,
 			titleClasses,
 			vars,
+			clipVars,
 			headerVars,
 			prefix,
 			title,
@@ -104,7 +105,7 @@ wp.blocks.registerBlockType("catpow/section", {
 								sub: [{ input: "image", label: __("アイコン", "catpow"), keys: imageKeys.navIcon, size: "thumbnail" }],
 							},
 							{ name: "decoration", label: __("デコレーション", "catpow"), values: "hasDecoration" },
-							"clipPath",
+							{ preset: "clipPath", vars: "clipVars" },
 							"hasPadding",
 							"hasMargin",
 							{
@@ -161,7 +162,7 @@ wp.blocks.registerBlockType("catpow/section", {
 								sub: [{ input: "border", css: "borderImageCss", sel: ({ attr }) => `#${attr.anchor} > .contents`, color }],
 							},
 							{ name: "decoration", label: __("デコレーション", "catpow"), values: "hasDecoration" },
-							"clipPath",
+							{ preset: "clipPath", vars: "clipVars" },
 							"hasPadding",
 							"hasMargin",
 							{
@@ -246,7 +247,7 @@ wp.blocks.registerBlockType("catpow/section", {
 		const blockProps = useBlockProps({
 			id: anchor,
 			className: classes,
-			style: vars,
+			style: states.hasClipPath?{...vars,...clipVars}:vars,
 		});
 
 		return (
@@ -329,6 +330,7 @@ wp.blocks.registerBlockType("catpow/section", {
 			headerClasses,
 			titleClasses,
 			vars,
+			clipVars,
 			headerVars,
 			prefix,
 			title,
@@ -345,7 +347,7 @@ wp.blocks.registerBlockType("catpow/section", {
 		const blockProps = useBlockProps.save({
 			id: anchor,
 			className: classes,
-			style: vars,
+			style: states.hasClipPath?{...vars,...clipVars}:vars,
 		});
 
 		return (
