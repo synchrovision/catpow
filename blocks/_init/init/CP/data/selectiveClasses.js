@@ -545,6 +545,7 @@ export const selectiveClassesPresets = {
 			values: "hasPadding",
 			sub: [
 				{ preset: "paddingTop", vars },
+				{ preset: "paddingInline", vars },
 				{ preset: "paddingBottom", vars },
 			],
 			...otherParams,
@@ -570,6 +571,37 @@ export const selectiveClassesPresets = {
 						input: "range",
 						vars,
 						key: "--cp-padding-top-custom",
+						min: -400,
+						max: 400,
+						step: 5,
+						coef: 0.0625,
+						unit: "rem",
+					},
+				],
+			},
+			...otherParams,
+		};
+	},
+	paddingInline({ preset, vars = "vars", ...otherParams }) {
+		return {
+			name: "paddingInline",
+			type: "buttons",
+			label: __("横パディング", "catpow"),
+			values: {
+				hasPaddingInlineXLarge: __("極大", "catpow"),
+				hasPaddingInlineLarge: __("大", "catpow"),
+				hasPaddingInlineMedium: __("中", "catpow"),
+				hasPaddingInlineSmall: __("小", "catpow"),
+				hasPaddingInlineXSmall: __("極小", "catpow"),
+				hasPaddingInlineCustom: ":admin-generic:",
+			},
+			sub: {
+				hasPaddingInlineCustom: [
+					{
+						name: "paddingInlineCustom",
+						input: "range",
+						vars,
+						key: "--cp-padding-inline-custom",
 						min: -400,
 						max: 400,
 						step: 5,
