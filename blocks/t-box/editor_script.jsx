@@ -24,7 +24,7 @@ wp.blocks.registerBlockType("catpow/t-box", {
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
 				"colorScheme",
-				{ name: "body", type: "buttons", label: "背景色", values: { hasBgNone: "なし", hasBgNormal: "通常", hasBgStrong: "強調", hasBgAchromatic: "白黒" } },
+				{ name: "body", type: "buttons", label: __("背景色", "catpow"), values: { hasBgNone: "なし", hasBgNormal: "通常", hasBgStrong: "強調", hasBgAchromatic: "白黒" } },
 				{ name: "range", input: "range", label: __("幅", "catpow"), key: "width", min: 400, max: 800, step: 10 },
 				{ name: "range", input: "range", label: __("上余白", "catpow"), key: "paddingTop", min: 0, max: 10 },
 				{ name: "range", input: "range", label: __("横余白", "catpow"), key: "paddingInline", min: 0, max: 10 },
