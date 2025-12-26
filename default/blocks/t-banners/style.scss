@@ -1,0 +1,19 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-t-banners{
+	@include tbl(());
+	@include bdr((s:n));
+	&__tbody{
+		&-tr{
+			&-td{
+				@include bnd((pd:0,mg:0));
+				@include bdr((s:n));
+				&-link{
+					&-img{
+						@include bnd((d:b,w:f,h:a));
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,11 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-t-banners{
+	&__tbody{
+		&-tr{
+			&-td{
+				@include bnd((p:r));
+			}
+		}
+	}
+}
