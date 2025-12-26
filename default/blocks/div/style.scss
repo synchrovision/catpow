@@ -9,38 +9,11 @@
 	&.is-type-frame{
 		@include bnd((w:c,bs:b,o:h));
 		@include bdr((c:m 1 .5));
-		&.has-thin-border{
-			@include bdr((s:s,w:1));
-		}
-		&.has-bold-border{
-			@include bdr((s:s,w:3));
-		}
-		&.has-border-radius{
-			@include bdr((r:10));
-		}
-		&.has-box-shadow{
-			&:not(.has-box-shadow-inset){
-				@include shd((b:3));
-			}
-			&.has-box-shadow-inset{
-				@include shd((b:-3));
-			}
-		}
 	}
 	&.is-type-columns{
 		&.narrow{@include col((w:160,g:20));}
 		&.regular{@include col((w:320,g:30));}
 		&.wide{@include col((w:480,g:50,rs:d,rw:1,rc:t));}
-	}
-	&.has-no-pad{@include bnd((pd:0));}
-	&.has-thin-pad{@include bnd((pd:5));}
-	&.has-light-pad{@include bnd((pd:10));}
-	&.has-medium-pad{@include bnd((pd:20));}
-	&.has-bold-pad{@include bnd((pd:40));}
-	&.has-heavy-pad{@include bnd((pd:80));}
-	@include bp(-960){
-		&.has-bold-pad{@include bnd((pd:40 20));}
-		&.has-heavy-pad{@include bnd((pd:80 20));}
 	}
 	&.has-icon{
 		&>.icon{
