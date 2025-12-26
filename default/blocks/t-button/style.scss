@@ -1,10 +1,7 @@
 @import 'admin_style_config.scss';
 
 .wp-block-catpow-t-button{
-	&__table{
-		@include tbl(());
-		@include bnd((w:f));
-	}
+	@include tbl(());
 	&__button{
 		@include bg((c:m));
 		@include bdr((s:n,r:.25em));

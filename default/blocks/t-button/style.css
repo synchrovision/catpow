@@ -1,7 +1,6 @@
-.wp-block-catpow-t-button__table {
+.wp-block-catpow-t-button {
   border-collapse: collapse;
   border-spacing: 0px;
-  width: 100%;
 }
 .wp-block-catpow-t-button__button {
   background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
