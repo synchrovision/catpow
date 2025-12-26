@@ -5441,6 +5441,45 @@
         ...otherParams
       };
     },
+    hasBorder({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "hasBorder",
+        label: __4("\u67A0\u7DDA", "catpow"),
+        values: "hasBorder",
+        sub: [{ preset: "borderWidth", vars, label: null }],
+        ...otherParams
+      };
+    },
+    borderWidth(preset, vars = "vars", ...otherParams) {
+      return {
+        name: "borderWidth",
+        type: "buttons",
+        label: __4("\u67A0\u7DDA", "catpow"),
+        values: {
+          hasBorderWidthThin: __4("\u7D30", "catpow"),
+          hasBorderWidthMedium: __4("\u4E2D", "catpow"),
+          hasBorderWidthBold: __4("\u592A", "catpow"),
+          hasBorderWidthCustom: ":admin-generic:"
+        },
+        sub: {
+          hasBorderWidthCustom: [
+            {
+              name: "borderWidthCustom",
+              label: __4("\u67A0\u7DDA", "catpow"),
+              input: "range",
+              vars,
+              key: "--cp-border-width-custom",
+              min: 0,
+              max: 4,
+              default: ".2rem",
+              step: 0.1,
+              unit: "rem"
+            }
+          ]
+        },
+        ...otherParams
+      };
+    },
     hasBorderRadius({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "hasBorderRadius",

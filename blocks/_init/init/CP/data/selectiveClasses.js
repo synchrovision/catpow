@@ -277,6 +277,45 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
+	hasBorder({ preset, vars = "vars", ...otherParams }) {
+		return {
+			name: "hasBorder",
+			label: __("枠線", "catpow"),
+			values: "hasBorder",
+			sub: [{ preset: "borderWidth", vars, label: null }],
+			...otherParams,
+		};
+	},
+	borderWidth(preset, vars = "vars", ...otherParams) {
+		return {
+			name: "borderWidth",
+			type: "buttons",
+			label: __("枠線", "catpow"),
+			values: {
+				hasBorderWidthThin: __("細", "catpow"),
+				hasBorderWidthMedium: __("中", "catpow"),
+				hasBorderWidthBold: __("太", "catpow"),
+				hasBorderWidthCustom: ":admin-generic:",
+			},
+			sub: {
+				hasBorderWidthCustom: [
+					{
+						name: "borderWidthCustom",
+						label: __("枠線", "catpow"),
+						input: "range",
+						vars,
+						key: "--cp-border-width-custom",
+						min: 0,
+						max: 4,
+						default: ".2rem",
+						step: 0.1,
+						unit: "rem",
+					},
+				],
+			},
+			...otherParams,
+		};
+	},
 	hasBorderRadius({ preset, vars = "vars", ...otherParams }) {
 		return {
 			name: "hasBorderRadius",
