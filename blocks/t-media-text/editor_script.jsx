@@ -12,6 +12,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 		alt: { source: "attribute", selector: "[src]", attribute: "alt" },
 		imageCode: { source: "text", selector: "td.is-image-cell", default: wpinfo.theme_url + "/images/dummy.jpg" },
 		width: { source: "attribute", selector: "td.is-image-cell", attribute: "width", default: "200" },
+		gap: { source: "attribute", selector: "tr:has(td.is-image-cell) td.is-spacer-cell", attribute: "width", default: "20" },
 		marginTop: { type: "number", default: 1 },
 		marginBottom: { type: "number", default: 1 },
 	},
@@ -20,7 +21,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 		const { useState, useMemo } = wp.element;
 		const { InnerBlocks, BlockControls, InspectorControls } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
-		const { classes, marginTop, marginBottom, src, alt, imageCode, width } = attributes;
+		const { classes, marginTop, marginBottom, src, alt, imageCode, width, gap } = attributes;
 		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
@@ -28,6 +29,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 				"imagePosition",
 				"verticalAlign",
 				{ name: "range", input: "range", label: "画像の幅", key: "width", min: 50, max: 400, step: 10 },
+				{ name: "range", input: "range", label: "間隔", key: "gap", min: 0, max: 100, step: 5 },
 				{ name: "marginTop", input: "range", label: "上余白", key: "marginTop", min: 0, max: 10 },
 				{ name: "marginBottom", input: "range", label: "下余白", key: "marginBottom", min: 0, max: 10 },
 				{
@@ -48,7 +50,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 						<tbody>
 							{marginTop > 0 && (
 								<tr>
-									<td className="_td is-spacer-cell" style={{ height: `${marginTop}rem` }}></td>
+									<td className="_td is-spacer-cell" style={{ height: `${marginTop}rem` }} colSpan="3"></td>
 								</tr>
 							)}
 							{states.hasImageLeft ? (
@@ -64,7 +66,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 											isTemplate={states.isTemplate}
 										/>
 									</td>
-									<td className="_td is-spacer-cell"></td>
+									<td className="_td is-spacer-cell" style={{ width: `${gap}px` }} width={gap}></td>
 									<td className="_td is-text-cell">
 										<InnerBlocks />
 									</td>
@@ -74,7 +76,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 									<td className="_td is-text-cell">
 										<InnerBlocks />
 									</td>
-									<td className="_td is-spacer-cell"></td>
+									<td className="_td is-spacer-cell" style={{ width: `${gap}px` }} width={gap}></td>
 									<td className="_td is-image-cell" width={width}>
 										<CP.SelectResponsiveImage
 											set={setAttributes}
@@ -90,7 +92,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 							)}
 							{marginBottom > 0 && (
 								<tr>
-									<td className="_td is-spacer-cell" style={{ height: `${marginBottom}rem` }}></td>
+									<td className="_td is-spacer-cell" style={{ height: `${marginBottom}rem` }} colSpan="3"></td>
 								</tr>
 							)}
 						</tbody>
@@ -112,7 +114,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 
 	save({ attributes, className, setAttributes }) {
 		const { InnerBlocks } = wp.blockEditor;
-		const { classes, marginTop, marginBottom, src, alt, imageCode, width } = attributes;
+		const { classes, marginTop, marginBottom, src, alt, imageCode, width, gap } = attributes;
 		var states = CP.classNamesToFlags(classes);
 		return (
 			<CP.Bem prefix="wp-block-catpow">
@@ -120,7 +122,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 					<tbody>
 						{marginTop > 0 && (
 							<tr>
-								<td className="_td is-spacer-cell" style={{ height: `${marginTop}rem` }}></td>
+								<td className="_td is-spacer-cell" style={{ height: `${marginTop}rem` }} colSpan="3"></td>
 							</tr>
 						)}
 						{states.hasImageLeft ? (
@@ -128,7 +130,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 								<td className="_td is-image-cell" width={width}>
 									<CP.ResponsiveImage attr={attributes} keys={{ src: "src", alt: "alt", code: "imageCode" }} size="large" width="100%" height="auto" isTemplate={states.isTemplate} />
 								</td>
-								<td className="_td is-spacer-cell"></td>
+								<td className="_td is-spacer-cell" style={{ width: `${gap}px` }} width={gap}></td>
 								<td className="_td is-text-cell">
 									<InnerBlocks.Content />
 								</td>
@@ -138,7 +140,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 								<td className="_td is-text-cell">
 									<InnerBlocks.Content />
 								</td>
-								<td className="_td is-spacer-cell"></td>
+								<td className="_td is-spacer-cell" style={{ width: `${gap}px` }} width={gap}></td>
 								<td className="_td is-image-cell" width={width}>
 									<CP.ResponsiveImage attr={attributes} keys={{ src: "src", alt: "alt", code: "imageCode" }} size="large" width="100%" height="auto" isTemplate={states.isTemplate} />
 								</td>
@@ -146,7 +148,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 						)}
 						{marginBottom > 0 && (
 							<tr>
-								<td className="_td is-spacer-cell" style={{ height: `${marginBottom}rem` }}></td>
+								<td className="_td is-spacer-cell" style={{ height: `${marginBottom}rem` }} colSpan="3"></td>
 							</tr>
 						)}
 					</tbody>
