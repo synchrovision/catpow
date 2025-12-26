@@ -23,7 +23,7 @@ wp.blocks.registerBlockType("catpow/div", {
 		const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
 		const { attributes, className, setAttributes, context } = props;
-		const { classes, vars, color, frameImageCss, borderImageCss } = attributes;
+		const { classes, vars, clipVars, color, frameImageCss, borderImageCss } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys } = CP.config.div;
@@ -38,15 +38,16 @@ wp.blocks.registerBlockType("catpow/div", {
 					type: "buttons",
 					values: { isTypeBlock: "block", isTypeFrame: "frame", isTypeColumns: "columns" },
 					sub: {
-						isTypeBlock: ["contentWidth"],
+						isTypeBlock: ["contentWidth", { preset: "clipPath", vars: "clipVars" }],
 						isTypeFrame: [
+							"contentWidth",
 							{ label: "アイコン", values: "hasIcon", sub: [{ input: "icon", label: "アイコン", color }] },
-							{ type: "buttons", label: "線", values: { hasNoBorder: "なし", hasThinBorder: "細", hasBoldBorder: "太" } },
-							{ label: "角丸", values: "hasBorderRadius" },
-							{ label: "影", values: "hasBoxShadow", sub: [{ label: "内側", values: "hasBoxShadowInset" }] },
-							"customContentWidth",
+							"hasBorder",
+							"hasBorderRadius",
+							"hasBoxShadow",
+							"hasTextShadow",
 						],
-						isTypeColumns: [{ type: "buttons", label: "幅", values: { narrow: "狭い", regular: "普通", wide: "広い" } }],
+						isTypeColumns: ["contentWidth", { preset: "clipPath", vars: "clipVars" }, { type: "buttons", label: "幅", values: { narrow: "狭い", regular: "普通", wide: "広い" } }],
 					},
 					bind: {
 						isTypeFrame: ["hasContentWidth"],
@@ -73,7 +74,7 @@ wp.blocks.registerBlockType("catpow/div", {
 			return selectiveClasses;
 		}, []);
 
-		const blockProps = useBlockProps({ className: classes, style: vars });
+		const blockProps = useBlockProps({ className: classes, style: states.hasClipPath ? { ...vars, ...clipVars } : vars });
 
 		return (
 			<>
@@ -95,11 +96,11 @@ wp.blocks.registerBlockType("catpow/div", {
 
 	save({ attributes, className, setAttributes }) {
 		const { InnerBlocks, useBlockProps } = wp.blockEditor;
-		const { classes = "", vars, frameImageCss, borderImageCss } = attributes;
+		const { classes = "", vars, clipVars, frameImageCss, borderImageCss } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 
-		const blockProps = useBlockProps.save({ className: classes, style: vars });
+		const blockProps = useBlockProps.save({ className: classes, style: states.hasClipPath ? { ...vars, ...clipVars } : vars });
 
 		return (
 			<div {...blockProps}>
