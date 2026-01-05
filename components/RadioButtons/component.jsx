@@ -1,6 +1,6 @@
 ﻿Catpow.RadioButtons = (props) => {
 	const { className = "cp-radiobuttons", useState, useMemo } = wp.element;
-	const { size = "medium", onChange } = props;
+	const { size = "medium", onChange, required = false } = props;
 	const { bem } = Catpow.util;
 	const classes = useMemo(() => bem(className), []);
 
@@ -28,8 +28,13 @@
 					<div
 						className={classes.button({ "is-selected": selected })}
 						onClick={(e) => {
-							setValue(option.value);
-							onChange(option.value);
+							if (selected && !required) {
+								setValue(null);
+								onChange(null);
+							} else {
+								setValue(option.value);
+								onChange(option.value);
+							}
 						}}
 						role="checkbox"
 						aria-checked={selected}
