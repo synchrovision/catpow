@@ -59,7 +59,6 @@
             data2["@type"] = itemConf["@type"];
           }
           const cloneData = JSON.parse(JSON.stringify(data2));
-          console.log({ phase: "extractDefaultData", conf, data: data2, cloneData });
           return conf.multiple ? [data2] : data2;
         }
         if (conf.hasOwnProperty("default")) {
@@ -149,6 +148,8 @@
                 data2[name] = [];
               }
               data2[name][index] = value2;
+            } else if (value2 == null) {
+              delete data2[name];
             } else {
               data2[name] = value2;
             }

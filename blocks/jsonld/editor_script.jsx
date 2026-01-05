@@ -49,7 +49,6 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 					data["@type"] = itemConf["@type"];
 				}
 				const cloneData = JSON.parse(JSON.stringify(data));
-				console.log({ phase: "extractDefaultData", conf, data, cloneData });
 				return conf.multiple ? [data] : data;
 			}
 			if (conf.hasOwnProperty("default")) {
@@ -167,6 +166,8 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 							data[name] = [];
 						}
 						data[name][index] = value;
+					} else if (value == null) {
+						delete data[name];
 					} else {
 						data[name] = value;
 					}

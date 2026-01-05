@@ -13,7 +13,7 @@
 		{
 			"name": "jobLocationType",
 			"label": "勤務地タイプ",
-			"input": "checkbox",
+			"input": "radio",
 			"options": [{ "label": "リモートワーク", "value": "TELECOMMUTE" }]
 		},
 		{ "name": "applicantLocationRequirements", "label": "リモート可能地域", "@type": ["AdministrativeArea", "State", "Country", "City"] },
