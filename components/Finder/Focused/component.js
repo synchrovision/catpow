@@ -26,11 +26,13 @@
     }
   });
 
-  // modules/src/util/string.jsx
-  var flagsToClassNames = (flags) => flags && Object.keys(flags).filter((f) => flags[f]).map(camelToKebab).join(" ");
-  var camelToKebab = (str) => str.replace(/(\w)([A-Z])/g, "$1-$2").toLowerCase();
+  // node_modules-included/catpow/src/util/string/case.js
+  var camelToKebab = (str) => str.replace(/(?=\w)([A-Z])/g, "-$1").toLowerCase();
 
-  // modules/src/component/Bem.jsx
+  // node_modules-included/catpow/src/util/string/flagsToClassNames.js
+  var flagsToClassNames = (flags) => flags && Object.keys(flags).filter((f) => flags[f]).map(camelToKebab).join(" ");
+
+  // node_modules-included/catpow/src/component/Bem.jsx
   init_react();
   var applyBem = (component, { ...ctx }) => {
     if (Array.isArray(component)) {
@@ -69,7 +71,7 @@
         return className2;
       }).join(" ");
       if (component.props.className === className) {
-        const matches = className.match(/\b(([a-z]+)\-[a-z]+(\-[a-z]+)*)(__[a-z]+(\-[a-z]+)*)?\b/);
+        const matches = ctx.prefix && className.match(new RegExp(`\\b((${ctx.prefix.replaceAll("-", "\\-")})\\-[a-z]+(\\-[a-z]+)*)(__[a-z]+(\\-[a-z]+)*)?\\b`)) || className.match(/\b(([a-z]+)\-[a-z]+(\-[a-z]+)*)(__[a-z]+(\-[a-z]+)*)?\b/);
         if (!matches) {
           return;
         }
@@ -96,6 +98,12 @@
     }
   };
   var Bem = ({ prefix = "cp", block, element, children }) => {
+    if (element == null && block != null) {
+      element = block;
+    }
+    if (block == null && element != null) {
+      block = element.split("__")[0];
+    }
     const ctx = { prefix, block, element };
     applyBem(children, ctx);
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, children);

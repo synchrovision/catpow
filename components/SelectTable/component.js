@@ -7,20 +7,39 @@
     const { bem } = Catpow.util;
     const classes = bem(className);
     const itemClasses = classes.tbody.tr.td;
-    const isActiveValue = useCallback((val) => {
-      if (Array.isArray(value)) {
-        return value.includes(val);
-      }
-      return value === val;
-    }, [value]);
+    const isActiveValue = useCallback(
+      (val) => {
+        if (Array.isArray(value)) {
+          return value.includes(val);
+        }
+        return value === val;
+      },
+      [value]
+    );
     if (Array.isArray(selections)) {
-      items = selections.map((val) => /* @__PURE__ */ wp.element.createElement("td", { className: itemClasses({ "is-active": isActiveValue(val) }), onClick: () => {
-        onChange(val);
-      }, key: val }, val));
+      items = selections.map((val) => /* @__PURE__ */ wp.element.createElement(
+        "td",
+        {
+          className: itemClasses({ "is-active": isActiveValue(val) }),
+          onClick: () => {
+            onChange(val);
+          },
+          key: val
+        },
+        val
+      ));
     } else {
-      items = Object.keys(selections).map((key) => /* @__PURE__ */ wp.element.createElement("td", { className: itemClasses({ "is-active": isActiveValue(selections[key]) }), onClick: () => {
-        onChange(selections[key]);
-      }, key }, key));
+      items = Object.keys(selections).map((key) => /* @__PURE__ */ wp.element.createElement(
+        "td",
+        {
+          className: itemClasses({ "is-active": isActiveValue(selections[key]) }),
+          onClick: () => {
+            onChange(selections[key]);
+          },
+          key
+        },
+        key
+      ));
     }
     const allLabels = useMemo(() => Array.isArray(selections) ? selections : Object.keys(selections), [selections]);
     const fontSizeClass = useMemo(() => {

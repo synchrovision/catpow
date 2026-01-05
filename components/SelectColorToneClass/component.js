@@ -23,49 +23,55 @@
           return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "10", y: "3", width: "8", height: "11" }), /* @__PURE__ */ wp.element.createElement("path", { d: "m10,1C5.03,1,1,5.03,1,10s4.03,9,9,9,9-4.03,9-9S14.97,1,10,1Zm0,17c-4.42,0-8-3.58-8-8S5.58,2,10,2v16Z" }));
       }
     }, []);
-    const ColorSelections = useCallback((props2) => {
-      const { fixed = false, absolute = false, relative = false, active = false, proxy: proxy2 } = props2;
-      const { h, s, l } = proxy2;
-      const hsl = { h, s, l };
-      return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.colors({ fixed, absolute, relative, active }) }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active }) }, /* @__PURE__ */ wp.element.createElement(ConfigIcon, { icon: fixed ? "fixed" : absolute ? "absolute" : "relative" })), Array.from(Array(13), (v, value) => {
-        const colorClass = generateColorClass({ fixed, absolute, relative, value });
-        const active2 = colorClass === h;
-        return /* @__PURE__ */ wp.element.createElement(
-          "li",
-          {
-            className: classes.colors.item(colorClass, s, l, { active: active2 }),
-            onClick: () => {
-              proxy2.h = !active2 && colorClass;
-              onChange(proxy2);
+    const ColorSelections = useCallback(
+      (props2) => {
+        const { fixed = false, absolute = false, relative = false, active = false, proxy: proxy2 } = props2;
+        const { h, s, l } = proxy2;
+        const hsl = { h, s, l };
+        return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.colors({ fixed, absolute, relative, active }) }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active }) }, /* @__PURE__ */ wp.element.createElement(ConfigIcon, { icon: fixed ? "fixed" : absolute ? "absolute" : "relative" })), Array.from(Array(13), (v, value) => {
+          const colorClass = generateColorClass({ fixed, absolute, relative, value });
+          const active2 = colorClass === h;
+          return /* @__PURE__ */ wp.element.createElement(
+            "li",
+            {
+              className: classes.colors.item(colorClass, s, l, { active: active2 }),
+              onClick: () => {
+                proxy2.h = !active2 && colorClass;
+                onChange(proxy2);
+              },
+              key: colorClass
             },
-            key: colorClass
-          },
-          " "
-        );
-      }));
-    }, [onChange]);
-    const ToneSelections = useCallback((props2) => {
-      const { proxy: proxy2 } = props2;
-      const { h, s, l } = proxy2;
-      const hsl = { h, s, l };
-      return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.tones() }, ["s", "l"].map((r) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: r }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active: !!hsl[r] }) }, /* @__PURE__ */ wp.element.createElement(ConfigIcon, { icon: { s: "contrast", l: "light" }[r] })), Array.from(Array(5), (v, index) => {
-        const value = index - 2;
-        const toneClass = generateToneClass({ [r]: true, value });
-        const active = toneClass === hsl[r];
-        return /* @__PURE__ */ wp.element.createElement(
-          "li",
-          {
-            className: classes.tones.item(h, r === "s" ? l : s, toneClass, { active }),
-            onClick: () => {
-              proxy2[r] = !active && toneClass;
-              onChange(proxy2);
+            " "
+          );
+        }));
+      },
+      [onChange]
+    );
+    const ToneSelections = useCallback(
+      (props2) => {
+        const { proxy: proxy2 } = props2;
+        const { h, s, l } = proxy2;
+        const hsl = { h, s, l };
+        return /* @__PURE__ */ wp.element.createElement("ul", { className: classes.tones() }, ["s", "l"].map((r) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: r }, /* @__PURE__ */ wp.element.createElement("li", { className: classes.colors.icon({ active: !!hsl[r] }) }, /* @__PURE__ */ wp.element.createElement(ConfigIcon, { icon: { s: "contrast", l: "light" }[r] })), Array.from(Array(5), (v, index) => {
+          const value = index - 2;
+          const toneClass = generateToneClass({ [r]: true, value });
+          const active = toneClass === hsl[r];
+          return /* @__PURE__ */ wp.element.createElement(
+            "li",
+            {
+              className: classes.tones.item(h, r === "s" ? l : s, toneClass, { active }),
+              onClick: () => {
+                proxy2[r] = !active && toneClass;
+                onChange(proxy2);
+              },
+              key: toneClass
             },
-            key: toneClass
-          },
-          " "
-        );
-      }))));
-    }, [onChange]);
+            " "
+          );
+        }))));
+      },
+      [onChange]
+    );
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(ColorSelections, { proxy, fixed: true, active: data.fixed }), /* @__PURE__ */ wp.element.createElement(ColorSelections, { proxy, absolute: true, active: data.absolute }), /* @__PURE__ */ wp.element.createElement(ColorSelections, { proxy, relative: true, active: data.relative }), /* @__PURE__ */ wp.element.createElement(ToneSelections, { proxy }));
   };
 })();

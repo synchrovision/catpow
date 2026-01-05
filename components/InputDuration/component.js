@@ -53,16 +53,7 @@
       }
     }, [onChange, state.value]);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, Object.keys(cols).map((key) => {
-      return /* @__PURE__ */ wp.element.createElement("div", { className: classes.col("is-col-" + key), key }, /* @__PURE__ */ wp.element.createElement(
-        "input",
-        {
-          type: "number",
-          className: classes.col.input("is-input-" + key),
-          min: cols[key].min,
-          max: cols[key].max,
-          onChange: (e) => update({ [key]: e.currentTarget.value })
-        }
-      ), /* @__PURE__ */ wp.element.createElement("span", { className: classes.col.unit() }, cols[key].unit));
+      return /* @__PURE__ */ wp.element.createElement("div", { className: classes.col("is-col-" + key), key }, /* @__PURE__ */ wp.element.createElement("input", { type: "number", className: classes.col.input("is-input-" + key), min: cols[key].min, max: cols[key].max, onChange: (e) => update({ [key]: e.currentTarget.value }) }), /* @__PURE__ */ wp.element.createElement("span", { className: classes.col.unit() }, cols[key].unit));
     }));
   };
 })();

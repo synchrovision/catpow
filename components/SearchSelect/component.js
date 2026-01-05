@@ -62,32 +62,17 @@
         onChange(selectedLabels.length ? labelValueMap[selectedLabels[0]] : null);
       }
     }, [selectedLabels]);
-    const getLabelsForSearch = useCallback((search2) => {
-      if (cache.current[search2]) {
-        return cache.current[search2];
-      }
-      const labels = search2.length > 2 ? getLabelsForSearch(search2.slice(0, -1)) : Object.keys(labelValueMap);
-      return cache.current[search2] = search2 ? labels.filter((label) => label.indexOf(search2) >= 0) : labels;
-    }, [cache, labelValueMap]);
+    const getLabelsForSearch = useCallback(
+      (search2) => {
+        if (cache.current[search2]) {
+          return cache.current[search2];
+        }
+        const labels = search2.length > 2 ? getLabelsForSearch(search2.slice(0, -1)) : Object.keys(labelValueMap);
+        return cache.current[search2] = search2 ? labels.filter((label) => label.indexOf(search2) >= 0) : labels;
+      },
+      [cache, labelValueMap]
+    );
     const currentLabels = useMemo(() => getLabelsForSearch(search), [getLabelsForSearch, search]);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.selected(), onClick: () => setOpen(true) }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes.selected.items() }, selectedLabels && selectedLabels.length ? selectedLabels.map((label) => /* @__PURE__ */ wp.element.createElement("li", { className: classes.selected.items.item(), key: label }, label, /* @__PURE__ */ wp.element.createElement("span", { className: classes.selected.items.item.button(), onClick: () => toggleLabel(label) }))) : /* @__PURE__ */ wp.element.createElement("li", { className: classes.selected.items.item() }, defaultLabel))), /* @__PURE__ */ wp.element.createElement(Catpow.Popup, { open, onClose: () => open && setOpen(false) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.search() }, /* @__PURE__ */ wp.element.createElement(
-      "input",
-      {
-        type: "text",
-        className: classes.search.input(),
-        value: search,
-        placeholder,
-        onChange: (e) => setSearch(e.currentTarget.value)
-      }
-    )), /* @__PURE__ */ wp.element.createElement("div", { className: classes.selected() }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes.selected.items() }, selectedLabels && selectedLabels.length > 0 && selectedLabels.map((label) => /* @__PURE__ */ wp.element.createElement("li", { className: classes.selected.items.item(), key: label }, label, /* @__PURE__ */ wp.element.createElement("span", { className: classes.selected.items.item.button(), onClick: () => toggleLabel(label) }))))), /* @__PURE__ */ wp.element.createElement("div", { className: classes.selections() }, /* @__PURE__ */ wp.element.createElement(
-      Catpow.SelectTable,
-      {
-        selections: currentLabels,
-        value: selectedLabels,
-        multiple,
-        col,
-        onChange: toggleLabel
-      }
-    ))));
+    return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.selected(), onClick: () => setOpen(true) }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes.selected.items() }, selectedLabels && selectedLabels.length ? selectedLabels.map((label) => /* @__PURE__ */ wp.element.createElement("li", { className: classes.selected.items.item(), key: label }, label, /* @__PURE__ */ wp.element.createElement("span", { className: classes.selected.items.item.button(), onClick: () => toggleLabel(label) }))) : /* @__PURE__ */ wp.element.createElement("li", { className: classes.selected.items.item() }, defaultLabel))), /* @__PURE__ */ wp.element.createElement(Catpow.Popup, { open, onClose: () => open && setOpen(false) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.search() }, /* @__PURE__ */ wp.element.createElement("input", { type: "text", className: classes.search.input(), value: search, placeholder, onChange: (e) => setSearch(e.currentTarget.value) })), /* @__PURE__ */ wp.element.createElement("div", { className: classes.selected() }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes.selected.items() }, selectedLabels && selectedLabels.length > 0 && selectedLabels.map((label) => /* @__PURE__ */ wp.element.createElement("li", { className: classes.selected.items.item(), key: label }, label, /* @__PURE__ */ wp.element.createElement("span", { className: classes.selected.items.item.button(), onClick: () => toggleLabel(label) }))))), /* @__PURE__ */ wp.element.createElement("div", { className: classes.selections() }, /* @__PURE__ */ wp.element.createElement(Catpow.SelectTable, { selections: currentLabels, value: selectedLabels, multiple, col, onChange: toggleLabel }))));
   };
 })();

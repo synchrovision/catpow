@@ -27,8 +27,17 @@
   Catpow.Button = (props) => {
     const { className = "is-secondary", label, value, onClick } = props;
     const disabled = props.disabled || className.split(" ").indexOf("is-disabled") !== -1;
-    return /* @__PURE__ */ wp.element.createElement("button", { className: "cp-button " + className, onClick: () => {
-      !props.disabled && onClick(value);
-    }, disabled: props.disabled }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-button__icon" }, " "), label);
+    return /* @__PURE__ */ wp.element.createElement(
+      "button",
+      {
+        className: "cp-button " + className,
+        onClick: () => {
+          !props.disabled && onClick(value);
+        },
+        disabled: props.disabled
+      },
+      /* @__PURE__ */ wp.element.createElement("div", { className: "cp-button__icon" }, " "),
+      label
+    );
   };
 })();

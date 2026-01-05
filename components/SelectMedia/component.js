@@ -22,39 +22,11 @@
     }, [props.dummy]);
     const type = useMemo(() => !mime ? "image" : mime.split("/")[0], [mime]);
     if (type === "audio") {
-      return /* @__PURE__ */ wp.element.createElement(
-        "audio",
-        {
-          className: classes("is-type-audio"),
-          src,
-          onClick,
-          ...otherProps
-        }
-      );
+      return /* @__PURE__ */ wp.element.createElement("audio", { className: classes("is-type-audio"), src, onClick, ...otherProps });
     }
     if (type === "video") {
-      return /* @__PURE__ */ wp.element.createElement(
-        "video",
-        {
-          className: classes("is-type-video"),
-          src,
-          onClick,
-          autoplay: 1,
-          loop: 1,
-          playsinline: 1,
-          muted: 1,
-          ...otherProps
-        }
-      );
+      return /* @__PURE__ */ wp.element.createElement("video", { className: classes("is-type-video"), src, onClick, autoplay: 1, loop: 1, playsinline: 1, muted: 1, ...otherProps });
     }
-    return /* @__PURE__ */ wp.element.createElement(
-      "img",
-      {
-        className: classes("is-type-image"),
-        src: src || dummy,
-        onClick,
-        ...otherProps
-      }
-    );
+    return /* @__PURE__ */ wp.element.createElement("img", { className: classes("is-type-image"), src: src || dummy, onClick, ...otherProps });
   };
 })();

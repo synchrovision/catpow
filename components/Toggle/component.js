@@ -30,8 +30,16 @@
         onChange(value);
       }
     }, [props.value, value, onChange]);
-    return /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-active": value }), onClick: () => {
-      setValue(!value);
-    }, ref: setHandler }, /* @__PURE__ */ wp.element.createElement("span", { className: classes.handler() }));
+    return /* @__PURE__ */ wp.element.createElement(
+      "div",
+      {
+        className: classes({ "is-active": value }),
+        onClick: () => {
+          setValue(!value);
+        },
+        ref: setHandler
+      },
+      /* @__PURE__ */ wp.element.createElement("span", { className: classes.handler() })
+    );
   };
 })();

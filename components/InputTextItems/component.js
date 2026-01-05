@@ -48,7 +48,6 @@
         ref.addEventListener("keydown", cb, true);
         return () => ref.removeEventListener("keydown", cb, true);
       }
-      ;
     }, [ref, dispatch]);
     useEffect(() => {
       onChange(state.items);

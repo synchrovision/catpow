@@ -1,10 +1,50 @@
 (() => {
-  // react-global:react
-  var react_default = window.wp.element;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __esm = (fn, res) => function __init() {
+    return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+  };
 
-  // modules/src/component/Bem.jsx
+  // react-global:react
+  var react_default, useState, useEffect, useLayoutEffect, useRef, forwardRef, useMemo, useCallback, createContext, useContext, useReducer, createElement, cloneElement, isValidElement, Fragment;
+  var init_react = __esm({
+    "react-global:react"() {
+      react_default = window.wp.element;
+      useState = wp.element.useState;
+      useEffect = wp.element.useEffect;
+      useLayoutEffect = wp.element.useLayoutEffect;
+      useRef = wp.element.useRef;
+      forwardRef = wp.element.forwardRef;
+      useMemo = wp.element.useMemo;
+      useCallback = wp.element.useCallback;
+      createContext = wp.element.createContext;
+      useContext = wp.element.useContext;
+      useReducer = wp.element.useReducer;
+      createElement = wp.element.createElement;
+      cloneElement = wp.element.cloneElement;
+      isValidElement = wp.element.isValidElement;
+      Fragment = wp.element.Fragment;
+    }
+  });
+
+  // node_modules-included/catpow/src/component/Bem.jsx
+  init_react();
   var applyBem = (component, { ...ctx }) => {
-    const { props: { className, children } } = component;
+    if (Array.isArray(component)) {
+      component.forEach((child) => {
+        applyBem(child, ctx);
+      });
+      return;
+    }
+    if (component?.props == null) {
+      return;
+    }
+    if (component.type == react_default.Fragment) {
+      applyBem(component.props.children, ctx);
+      return;
+    }
+    const {
+      props: { className, children }
+    } = component;
     if (className) {
       component.props.className = className.split(" ").map((className2) => {
         if (className2.slice(0, 2) === "--") {
@@ -25,11 +65,13 @@
         return className2;
       }).join(" ");
       if (component.props.className === className) {
-        const matches = className.match(/\b((\w+)\-\w+(\-\w+)*)(__\w+(\-\w+)*)?\b/);
+        const matches = ctx.prefix && className.match(new RegExp(`\\b((${ctx.prefix.replaceAll("-", "\\-")})\\-[a-z]+(\\-[a-z]+)*)(__[a-z]+(\\-[a-z]+)*)?\\b`)) || className.match(/\b(([a-z]+)\-[a-z]+(\-[a-z]+)*)(__[a-z]+(\-[a-z]+)*)?\b/);
         if (!matches) {
           return;
         }
-        ctx.prefix = matches[2];
+        if (!matches[1].startsWith(ctx.prefix)) {
+          ctx.prefix = matches[2];
+        }
         ctx.block = matches[1];
         ctx.element = matches[0];
       }
@@ -50,23 +92,16 @@
     }
   };
   var Bem = ({ prefix = "cp", block, element, children }) => {
-    const ctx = { prefix, block, element };
-    if (Array.isArray(children)) {
-      children.forEach((child) => {
-        applyBem(child, ctx);
-      });
-    } else {
-      applyBem(children, ctx);
+    if (element == null && block != null) {
+      element = block;
     }
+    if (block == null && element != null) {
+      block = element.split("__")[0];
+    }
+    const ctx = { prefix, block, element };
+    applyBem(children, ctx);
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, children);
   };
-
-  // react-global:react-dom
-  var react_dom_default = window.wp.element;
-
-  // modules/src/hooks/useAgent.jsx
-  var { useMemo: useMemo2, useState, useCallback, useRef, useEffect, createContext, useContext } = react_default;
-  var AgentContext = createContext();
 
   // ../components/Bem/component.jsx
   Catpow.Bem = Bem;

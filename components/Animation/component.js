@@ -4,41 +4,44 @@
     const { useState, useContext, useEffect, useReducer, useRef } = wp.element;
     const { className = "cp-animation" } = props;
     const ref = useRef({ pointer: { x: 0, y: 0 }, clicked: false, press: false });
-    const [state, dispatch] = useReducer((state2, action) => {
-      switch (action.type) {
-        case "tick":
-          var clicked = false, bnd = ref.current.getBoundingClientRect();
-          if (bnd.top > window.innerHeight || bnd.bottom < 0) {
-            return state2;
-          }
-          if (ref.clicked) {
-            var clicked = true;
-            ref.clicked = false;
-          }
-          return {
-            ...state2,
-            step: state2.step + 1,
-            container: ref.current,
-            bnd,
-            width: bnd.width,
-            height: bnd.height,
-            focus: { x: window.innerWidth / 2 - bnd.left, y: window.innerHeight / 2 - bnd.top },
-            pointer: ref.pointer,
-            clicked,
-            press: ref.press
-          };
+    const [state, dispatch] = useReducer(
+      (state2, action) => {
+        switch (action.type) {
+          case "tick":
+            var clicked = false, bnd = ref.current.getBoundingClientRect();
+            if (bnd.top > window.innerHeight || bnd.bottom < 0) {
+              return state2;
+            }
+            if (ref.clicked) {
+              var clicked = true;
+              ref.clicked = false;
+            }
+            return {
+              ...state2,
+              step: state2.step + 1,
+              container: ref.current,
+              bnd,
+              width: bnd.width,
+              height: bnd.height,
+              focus: { x: window.innerWidth / 2 - bnd.left, y: window.innerHeight / 2 - bnd.top },
+              pointer: ref.pointer,
+              clicked,
+              press: ref.press
+            };
+        }
+        return state2;
+      },
+      {
+        step: 0,
+        bnd: {},
+        width: 1920,
+        height: 1080,
+        focus: {},
+        pointer: {},
+        clicked: false,
+        press: false
       }
-      return state2;
-    }, {
-      step: 0,
-      bnd: {},
-      width: 1920,
-      height: 1080,
-      focus: {},
-      pointer: {},
-      clicked: false,
-      press: false
-    });
+    );
     useEffect(() => {
       var requestID;
       const tick = (t) => {

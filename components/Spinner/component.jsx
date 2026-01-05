@@ -1,6 +1,6 @@
-﻿Catpow.Spinner=(props)=>{
-	const {type='circle'}=props;
-	
+﻿Catpow.Spinner = (props) => {
+	const { type = "circle" } = props;
+
 	return (
 		<div className={`cp-spinner cp-spinner-${type}`}>
 			<div className="graphics">
@@ -10,4 +10,4 @@
 			</div>
 		</div>
 	);
-}
+};

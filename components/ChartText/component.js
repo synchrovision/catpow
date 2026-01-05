@@ -14,29 +14,32 @@
         y: legendItemPos[c].y
       });
     });
-    props.pos = Object.assign({
-      title: () => {
-        return { x: width / 2, y: padding / 2 };
+    props.pos = Object.assign(
+      {
+        title: () => {
+          return { x: width / 2, y: padding / 2 };
+        },
+        unit: () => {
+          return { x: width - padding / 2, y: padding / 2 };
+        },
+        rowTitle: () => {
+          return { x: padding / 2, y: height - padding + 15 };
+        },
+        rowUnit: () => {
+          return { x: width - padding / 2, y: height - padding + 15 };
+        },
+        rowLabel: (r) => {
+          return { x: r * rowStep + rowStep / 2 + padding, y: height - padding + 15 };
+        },
+        legend: (c) => {
+          return legendItemPos[c];
+        },
+        val: (r, c) => {
+          return { x: r * rowStep + rowStep / 2, y: c };
+        }
       },
-      unit: () => {
-        return { x: width - padding / 2, y: padding / 2 };
-      },
-      rowTitle: () => {
-        return { x: padding / 2, y: height - padding + 15 };
-      },
-      rowUnit: () => {
-        return { x: width - padding / 2, y: height - padding + 15 };
-      },
-      rowLabel: (r) => {
-        return { x: r * rowStep + rowStep / 2 + padding, y: height - padding + 15 };
-      },
-      legend: (c) => {
-        return legendItemPos[c];
-      },
-      val: (r, c) => {
-        return { x: r * rowStep + rowStep / 2, y: c };
-      }
-    }, props.pos);
+      props.pos
+    );
     return /* @__PURE__ */ wp.element.createElement("g", { className: "ChartText" }, keys.map((key) => {
       let pos = props.pos[key]();
       return /* @__PURE__ */ wp.element.createElement("text", { className: key, x: pos.x, y: pos.y }, props[key]);
@@ -45,29 +48,11 @@
       return /* @__PURE__ */ wp.element.createElement("text", { className: item.classes.replace("row", ""), x: pos.x, y: pos.y }, item.label);
     })), /* @__PURE__ */ wp.element.createElement("g", { className: "ledgend" }, props.cols.map((col, c) => {
       const pos = props.pos.legend(c);
-      return /* @__PURE__ */ wp.element.createElement("g", { className: "ledgendItem" }, /* @__PURE__ */ wp.element.createElement(
-        "rect",
-        {
-          className: cols[c].classes.replace("col", "ledgendRect"),
-          x: pos.x,
-          y: pos.y - 6,
-          width: 12,
-          height: 12
-        }
-      ), /* @__PURE__ */ wp.element.createElement("text", { className: "ledgendText", x: pos.x + 15, y: pos.y }, col.label));
+      return /* @__PURE__ */ wp.element.createElement("g", { className: "ledgendItem" }, /* @__PURE__ */ wp.element.createElement("rect", { className: cols[c].classes.replace("col", "ledgendRect"), x: pos.x, y: pos.y - 6, width: 12, height: 12 }), /* @__PURE__ */ wp.element.createElement("text", { className: "ledgendText", x: pos.x + 15, y: pos.y }, col.label));
     })), props.hasValue && /* @__PURE__ */ wp.element.createElement("g", { className: "vals" }, props.rows.map((row, r) => {
       return row.vals.map((val, c) => {
         let pos = props.pos["val"](r, c);
-        return /* @__PURE__ */ wp.element.createElement(
-          "text",
-          {
-            className: row.classes.replace("row", "") + " " + props.cols[c].classes.replace("col", "val"),
-            x: pos.x,
-            y: pos.y
-          },
-          val.value,
-          props.hasUnit && /* @__PURE__ */ wp.element.createElement("tspan", { className: "unit" }, props.unit)
-        );
+        return /* @__PURE__ */ wp.element.createElement("text", { className: row.classes.replace("row", "") + " " + props.cols[c].classes.replace("col", "val"), x: pos.x, y: pos.y }, val.value, props.hasUnit && /* @__PURE__ */ wp.element.createElement("tspan", { className: "unit" }, props.unit));
       });
     })));
   };

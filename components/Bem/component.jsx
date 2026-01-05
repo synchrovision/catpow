@@ -1,2 +1,2 @@
-﻿import {Bem} from 'catpow/component';
-Catpow.Bem=Bem;
+﻿import { Bem } from "catpow/component";
+Catpow.Bem = Bem;

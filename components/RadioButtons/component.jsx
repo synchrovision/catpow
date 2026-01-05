@@ -1,31 +1,33 @@
-﻿Catpow.RadioButtons=(props)=>{
-	const {className="cp-radiobuttons",useState,useMemo}=wp.element;
-	const {size='medium',onChange}=props;
-	const {bem}=Catpow.util;
-	const classes=useMemo(()=>bem(className),[]);
-	
-	const [value,setValue]=useState(props.value??null);
-	
-	const options=useMemo(()=>{
-		if(Array.isArray(props.options)){
-			return props.options.map((option)=>{
-				if(typeof option === 'object'){return option;}
-				return {label:option,value:option};
+﻿Catpow.RadioButtons = (props) => {
+	const { className = "cp-radiobuttons", useState, useMemo } = wp.element;
+	const { size = "medium", onChange } = props;
+	const { bem } = Catpow.util;
+	const classes = useMemo(() => bem(className), []);
+
+	const [value, setValue] = useState(props.value ?? null);
+
+	const options = useMemo(() => {
+		if (Array.isArray(props.options)) {
+			return props.options.map((option) => {
+				if (typeof option === "object") {
+					return option;
+				}
+				return { label: option, value: option };
 			});
 		}
-		return Object.keys(props.options).map((label)=>{
-			return {label,value:props.options[label]};
+		return Object.keys(props.options).map((label) => {
+			return { label, value: props.options[label] };
 		});
-	},[props.options]);
-	
+	}, [props.options]);
+
 	return (
 		<div className={classes(`is-size-${size}`)}>
-			{options.map((option)=>{
-				const selected=option.value===value;
+			{options.map((option) => {
+				const selected = option.value === value;
 				return (
 					<div
-						className={classes.button({'is-selected':selected})}
-						onClick={(e)=>{
+						className={classes.button({ "is-selected": selected })}
+						onClick={(e) => {
 							setValue(option.value);
 							onChange(option.value);
 						}}
@@ -33,11 +35,11 @@
 						aria-checked={selected}
 						key={option.label}
 					>
-						<div className={classes.button.icon({'is-selected':selected})} > </div>
+						<div className={classes.button.icon({ "is-selected": selected })}> </div>
 						{option.label}
 					</div>
 				);
 			})}
 		</div>
 	);
-}
+};

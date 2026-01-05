@@ -118,33 +118,36 @@
       onChange(newColors);
       return newColors;
     }, []);
-    const initColors = useCallback((colors2) => {
-      if (!colors2) {
-        colors2 = {};
-      }
-      if (!colors2.tones) {
-        colors2.tones = {};
-      }
-      if (!colors2.hueRange) {
-        colors2.hueRange = 30;
-      }
-      if (!colors2.hueShift) {
-        colors2.hueShift = 0;
-      }
-      Object.keys(roles).map((role) => {
-        const key = roles[role].shorthand;
-        if (!colors2[role]) {
-          colors2[role] = roles[role].default;
+    const initColors = useCallback(
+      (colors2) => {
+        if (!colors2) {
+          colors2 = {};
         }
-        if (!colors2.tones[key]) {
-          colors2.tones[key] = getTones(colors2[role]);
+        if (!colors2.tones) {
+          colors2.tones = {};
         }
-      });
-      if (void 0 === colors2.useAutoDefine) {
-        colors2.autoDefine = 63;
-      }
-      return colors2;
-    }, [roles]);
+        if (!colors2.hueRange) {
+          colors2.hueRange = 30;
+        }
+        if (!colors2.hueShift) {
+          colors2.hueShift = 0;
+        }
+        Object.keys(roles).map((role) => {
+          const key = roles[role].shorthand;
+          if (!colors2[role]) {
+            colors2[role] = roles[role].default;
+          }
+          if (!colors2.tones[key]) {
+            colors2.tones[key] = getTones(colors2[role]);
+          }
+        });
+        if (void 0 === colors2.useAutoDefine) {
+          colors2.autoDefine = 63;
+        }
+        return colors2;
+      },
+      [roles]
+    );
     const [colors, setColors] = useReducer(colorReducer, value, initColors);
     const ModeSelect = useCallback((props2) => {
       const { Icon } = wp.components;
@@ -192,79 +195,75 @@
         }
       )));
     }, []);
-    const BulkInput = useCallback((props2) => {
-      const { Icon } = wp.components;
-      const { value: value2 } = props2;
-      const [tmp, setTmp] = useState();
-      const keyRoleMap = useMemo(() => {
-        const map = { hr: "hueRange", hs: "hueShift" };
-        Object.keys(roles).map((role) => {
-          map[roles[role].shorthand] = role;
-        });
-        return map;
-      }, [roles]);
-      const checkValue = useCallback((tmp2) => {
-        const lines = tmp2.split("\n");
-        if (lines.some((line) => {
-          if (!line) {
-            return true;
+    const BulkInput = useCallback(
+      (props2) => {
+        const { Icon } = wp.components;
+        const { value: value2 } = props2;
+        const [tmp, setTmp] = useState();
+        const keyRoleMap = useMemo(() => {
+          const map = { hr: "hueRange", hs: "hueShift" };
+          Object.keys(roles).map((role) => {
+            map[roles[role].shorthand] = role;
+          });
+          return map;
+        }, [roles]);
+        const checkValue = useCallback((tmp2) => {
+          const lines = tmp2.split("\n");
+          if (lines.some((line) => {
+            if (!line) {
+              return true;
+            }
+            const [key, val] = line.split(" : ");
+            const role = keyRoleMap[key];
+            if (key === "hr" || key === "hs") {
+              return !/^-?\d+$/.test(val);
+            }
+            if (roles[role].alphaEnabled) {
+              return !/^hsla?\(\d+,\d+%,\d+%(,[\d\.]+)?\)$/.test(val);
+            }
+            return !/^#\w{6}$/.test(val);
+          })) {
+            return false;
           }
-          const [key, val] = line.split(" : ");
-          const role = keyRoleMap[key];
-          if (key === "hr" || key === "hs") {
-            return !/^-?\d+$/.test(val);
-          }
-          if (roles[role].alphaEnabled) {
-            return !/^hsla?\(\d+,\d+%,\d+%(,[\d\.]+)?\)$/.test(val);
-          }
-          return !/^#\w{6}$/.test(val);
-        })) {
-          return false;
-        }
-        return true;
-      }, []);
-      const commitValue = useCallback((tmp2) => {
-        const lines = tmp2.split("\n"), colors2 = {};
-        lines.map((line) => {
-          const [key, val] = line.split(" : ");
-          const role = keyRoleMap[key];
-          if (key === "hr" || key === "hs") {
-            colors2[role] = parseInt(val);
-          } else {
-            colors2[role] = val;
-            value2.tones[key] = getTones(val);
-          }
-        });
-        onChange({ ...value2, ...colors2 });
-      }, []);
-      useEffect(() => {
-        setTmp(
-          Object.keys(roles).map((role) => roles[role].shorthand + " : " + value2[role]).join("\n") + "\nhr : " + value2.hueRange + "\nhs : " + value2.hueShift
-        );
-      }, [value2]);
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-colorset-bulkinput" }, /* @__PURE__ */ wp.element.createElement(
-        "textarea",
-        {
-          className: "cp-colorset-bulkinput__textarea",
-          value: tmp,
-          rows: Object.keys(roles).length + 2,
-          onChange: (e) => {
-            const tmp2 = e.currentTarget.value;
-            setTmp(tmp2);
-            if (checkValue(tmp2)) {
-              commitValue(tmp2);
+          return true;
+        }, []);
+        const commitValue = useCallback((tmp2) => {
+          const lines = tmp2.split("\n"), colors2 = {};
+          lines.map((line) => {
+            const [key, val] = line.split(" : ");
+            const role = keyRoleMap[key];
+            if (key === "hr" || key === "hs") {
+              colors2[role] = parseInt(val);
+            } else {
+              colors2[role] = val;
+              value2.tones[key] = getTones(val);
+            }
+          });
+          onChange({ ...value2, ...colors2 });
+        }, []);
+        useEffect(() => {
+          setTmp(
+            Object.keys(roles).map((role) => roles[role].shorthand + " : " + value2[role]).join("\n") + "\nhr : " + value2.hueRange + "\nhs : " + value2.hueShift
+          );
+        }, [value2]);
+        return /* @__PURE__ */ wp.element.createElement("div", { className: "cp-colorset-bulkinput" }, /* @__PURE__ */ wp.element.createElement(
+          "textarea",
+          {
+            className: "cp-colorset-bulkinput__textarea",
+            value: tmp,
+            rows: Object.keys(roles).length + 2,
+            onChange: (e) => {
+              const tmp2 = e.currentTarget.value;
+              setTmp(tmp2);
+              if (checkValue(tmp2)) {
+                commitValue(tmp2);
+              }
             }
           }
-        }
-      ), /* @__PURE__ */ wp.element.createElement(
-        Icon,
-        {
-          className: "cp-colorset-bulkinput__clipboard",
-          icon: "clipboard",
-          onClick: () => navigator.clipboard.writeText(tmp)
-        }
-      ));
-    }, [roles]);
+        ), /* @__PURE__ */ wp.element.createElement(Icon, { className: "cp-colorset-bulkinput__clipboard", icon: "clipboard", onClick: () => navigator.clipboard.writeText(tmp) }));
+      },
+      [roles]
+    );
     const Preview = useCallback((props2) => {
       const { value: value2 } = props2;
       const Row = useCallback((props3) => {
