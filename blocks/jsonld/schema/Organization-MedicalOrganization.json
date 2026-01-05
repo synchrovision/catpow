@@ -1,0 +1,6 @@
+{
+	"$schema": "./schema.json",
+	"name": "MedicalOrganization",
+	"label": "医療機関",
+	"extends": "Organization"
+}

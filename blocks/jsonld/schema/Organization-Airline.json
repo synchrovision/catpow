@@ -1,0 +1,6 @@
+{
+	"$schema": "./schema.json",
+	"name": "Airline",
+	"label": "航空会社",
+	"extends": "Organization"
+}

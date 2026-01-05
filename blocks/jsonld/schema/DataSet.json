@@ -10,18 +10,18 @@
 		{ "name": "creator", "label": "作者", "@type": "Person" },
 		{ "name": "citation", "label": "引用元" },
 		{ "name": "funder", "label": "出資元", "@type": ["Person", "Organization"] },
-		{ "name": "hasPart", "label": "分割データURL", "multiple": true },
-		{ "name": "isPartOf", "label": "統合データURL" },
+		{ "name": "hasPart", "label": "分割データURL", "input": "url", "multiple": true },
+		{ "name": "isPartOf", "label": "統合データURL", "input": "url" },
 		{ "name": "identifier", "label": "識別子", "multiple": true },
 		{ "name": "isAccessibleForFree", "label": "閲覧無料", "input": "toggle" },
 		{ "name": "keywords", "label": "キーワード" },
 		{ "name": "license", "label": "ライセンス" },
 		{ "name": "measurementTechnique", "label": "解析手法" },
-		{ "name": "sameAs", "label": "識別URL" },
+		{ "name": "sameAs", "label": "識別URL", "input": "url" },
 		{ "name": "spatialCoverage", "label": "座標" },
 		{ "name": "temporalCoverage", "label": "期間" },
 		{ "name": "variableMeasured", "label": "測定変数" },
 		{ "name": "version", "label": "バージョン" },
-		{ "name": "url", "label": "URL" }
+		{ "name": "url", "label": "URL", "input": "url" }
 	]
 }

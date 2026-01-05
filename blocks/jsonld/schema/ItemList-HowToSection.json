@@ -1,0 +1,6 @@
+{
+	"$schema": "./schema.json",
+	"name": "HowToSection",
+	"label": "HowToセクション",
+	"extends": "ItemList"
+}

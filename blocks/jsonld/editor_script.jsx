@@ -82,7 +82,6 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 			return data;
 		}, []);
 		const filterEmptyData = useCallback((data, conf) => {
-			return data;
 			Object.keys(data).forEach((key) => {
 				if (Array.isArray(data[key])) {
 					data[key] = data[key].filter((item, index) => {
@@ -110,6 +109,8 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 			(props) => {
 				const { className, types, formals, data, setAttributes } = props;
 				const cache = useRef({});
+				const currentType = types[data["@type"]];
+				const [mainType, setMainType] = useState(currentType.extends || currentType.name);
 
 				const updateType = useCallback(
 					(type) => {
@@ -127,13 +128,28 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 
 				return (
 					<CP.Bem prefix="wp-block-catpow">
-						<select className={className} value={data["@type"]} onChange={(e) => updateType(e.target.value)}>
-							{Object.keys(types).map((type) => (
-								<option value={type} key={type}>
-									{types[type].label || types[type].name}
-								</option>
-							))}
-						</select>
+						<div className={className}>
+							<select className="_select is-select-maintype" value={mainType} onChange={(e) => setMainType(e.target.value)}>
+								{Object.keys(types)
+									.filter((type) => types[type].extends == null)
+									.map((type) => (
+										<option value={type} key={type}>
+											{types[type].label || types[type].name}
+										</option>
+									))}
+							</select>
+							<span className="_arrow"></span>
+							<select className="_select is-select-subtype" value={data["@type"]} onChange={(e) => updateType(e.target.value)}>
+								<option value="">─</option>
+								{Object.keys(types)
+									.filter((type) => types[type].name === mainType || types[type].extends === mainType)
+									.map((type) => (
+										<option value={type} key={type}>
+											{types[type].label || types[type].name}
+										</option>
+									))}
+							</select>
+						</div>
 					</CP.Bem>
 				);
 			},
@@ -176,11 +192,15 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 							</div>
 						</CP.Bem>
 					);
+				case "url":
+				case "email":
+				case "tel":
 				case "text":
+				case "date":
 					return (
 						<input
-							className={className + "-text"}
-							type="text"
+							className={className + "-" + conf.input}
+							type={conf.input}
 							value={value}
 							onChange={(e) => {
 								updateValue(e.target.value);
@@ -414,10 +434,27 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 				});
 				Object.keys(types).forEach((key) => {
 					types[key].type = "object";
-					types[key].items.forEach(fillConf);
+					if (Array.isArray(types[key].items)) {
+						types[key].items.forEach(fillConf);
+					}
+					if (types[key].extends != null && types[types[key].extends] != null) {
+						const { items, ...otherProps } = types[types[key].extends];
+						Object.keys(otherProps).forEach((prop) => {
+							if (!types[key].hasOwnProperty(prop)) {
+								types[key][prop] = otherProps[prop];
+							}
+						});
+						if (types[key].items != null) {
+							types[key].items.push(...items);
+						} else {
+							types[key].items = items;
+						}
+					}
 				});
 				const data = JSON.parse(attributes.json);
-				setAttributes({ data: fillUndefinedData(data, types[data["@type"]]), types, formals });
+				if (data["@type"] != null && types[data["@type"]] != null) {
+					setAttributes({ data: fillUndefinedData(data, types[data["@type"]]), types, formals });
+				}
 			});
 		}, []);
 		useEffect(() => {
@@ -442,7 +479,7 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 						{EditMode ? (
 							<div className="-editor">
 								<div className="_type">
-									<SelectType className="_select" types={types} formals={formals} data={data} setAttributes={setAttributes} />
+									<SelectType className="_selecttype" types={types} formals={formals} data={data} setAttributes={setAttributes} />
 									{types[data["@type"]] && <a className="_help" href={types[data["@type"]].url} target="_blank" rel="noopener noreferer"></a>}
 								</div>
 								<div className="_items">

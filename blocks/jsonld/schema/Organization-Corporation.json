@@ -1,0 +1,6 @@
+{
+	"$schema": "./schema.json",
+	"name": "Corporation",
+	"label": "企業",
+	"extends": "Organization"
+}

@@ -1,0 +1,6 @@
+{
+	"$schema": "./schema.json",
+	"name": "SearchRescueOrganization",
+	"label": "救助隊",
+	"extends": "Organization"
+}

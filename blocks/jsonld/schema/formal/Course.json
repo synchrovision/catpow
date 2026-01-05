@@ -1,12 +1,12 @@
 {
-    "$schema": "../schema.json",
-    "name": "Course",
-    "label": "コース",
-    "url": "https://schema.org/Course",
-    "items": [
-        {"name": "name","label": "名称"},
-        {"name": "url","label": "URL"},
-        {"name": "description","label": "説明","input": "textarea"},
-        {"name": "provider","label": "公開組織","@type": "Organization"}
-    ]
+	"$schema": "../schema.json",
+	"name": "Course",
+	"label": "コース",
+	"url": "https://schema.org/Course",
+	"items": [
+		{ "name": "name", "label": "名称" },
+		{ "name": "url", "label": "URL", "input": "url" },
+		{ "name": "description", "label": "説明", "input": "textarea" },
+		{ "name": "provider", "label": "公開組織", "@type": "Organization" }
+	]
 }

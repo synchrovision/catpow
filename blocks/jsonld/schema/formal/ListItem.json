@@ -1,11 +1,11 @@
 {
-    "$schema": "../schema.json",
-    "name": "ListItem",
-    "label": "リストアイテム",
-    "url": "https://schema.org/ListItem",
-    "items": [
-        {"name": "position","input": "number","label": "位置","min": 1},
-        {"name": "url","label": "URL"},
-        {"name": "item","@type": ["Course","Movie","Recipe","Restaurant"]}
-    ]
+	"$schema": "../schema.json",
+	"name": "ListItem",
+	"label": "リストアイテム",
+	"url": "https://schema.org/ListItem",
+	"items": [
+		{ "name": "position", "input": "number", "label": "位置", "min": 1 },
+		{ "name": "url", "label": "URL", "input": "url" },
+		{ "name": "item", "label": "アイテム", "@type": ["Course", "Movie", "Recipe", "Restaurant"] }
+	]
 }

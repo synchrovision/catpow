@@ -1,0 +1,6 @@
+{
+	"$schema": "./schema.json",
+	"name": "NewsMediaOrganization",
+	"label": "オンラインビジネス",
+	"extends": "Organization"
+}

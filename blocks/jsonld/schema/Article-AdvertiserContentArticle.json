@@ -1,0 +1,6 @@
+{
+	"$schema": "./schema.json",
+	"name": "AdvertiserContentArticle",
+	"label": "広告",
+	"extends": "Article"
+}

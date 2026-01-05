@@ -1,0 +1,6 @@
+{
+	"$schema": "./schema.json",
+	"name": "WorkersUnion",
+	"label": "労働組合",
+	"extends": "Organization"
+}

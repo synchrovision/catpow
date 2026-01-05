@@ -92,7 +92,6 @@
         return data2;
       }, []);
       const filterEmptyData = useCallback((data2, conf) => {
-        return data2;
         Object.keys(data2).forEach((key) => {
           if (Array.isArray(data2[key])) {
             data2[key] = data2[key].filter((item, index) => {
@@ -120,6 +119,8 @@
         (props) => {
           const { className: className2, types: types2, formals: formals2, data: data2, setAttributes: setAttributes2 } = props;
           const cache = useRef({});
+          const currentType = types2[data2["@type"]];
+          const [mainType, setMainType] = useState(currentType.extends || currentType.name);
           const updateType = useCallback(
             (type) => {
               cache.current[data2["@type"]] = JSON.parse(JSON.stringify(data2));
@@ -133,7 +134,7 @@
             },
             [data2, cache, setAttributes2, fillUndefinedData, extractDefaultData]
           );
-          return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("select", { className: className2, value: data2["@type"], onChange: (e) => updateType(e.target.value) }, Object.keys(types2).map((type) => /* @__PURE__ */ wp.element.createElement("option", { value: type, key: type }, types2[type].label || types2[type].name))));
+          return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { className: className2 }, /* @__PURE__ */ wp.element.createElement("select", { className: "_select is-select-maintype", value: mainType, onChange: (e) => setMainType(e.target.value) }, Object.keys(types2).filter((type) => types2[type].extends == null).map((type) => /* @__PURE__ */ wp.element.createElement("option", { value: type, key: type }, types2[type].label || types2[type].name))), /* @__PURE__ */ wp.element.createElement("span", { className: "_arrow" }), /* @__PURE__ */ wp.element.createElement("select", { className: "_select is-select-subtype", value: data2["@type"], onChange: (e) => updateType(e.target.value) }, /* @__PURE__ */ wp.element.createElement("option", { value: "" }, "\u2500"), Object.keys(types2).filter((type) => types2[type].name === mainType || types2[type].extends === mainType).map((type) => /* @__PURE__ */ wp.element.createElement("option", { value: type, key: type }, types2[type].label || types2[type].name)))));
         },
         [convertDefaultValue, extractDefaultData]
       );
@@ -163,12 +164,16 @@
             return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { className: className2 + "-object" }, /* @__PURE__ */ wp.element.createElement("div", { className: "subitems_" }, conf.items && conf.items.map((item) => {
               return /* @__PURE__ */ wp.element.createElement(InputItem, { className: "_item", data: index !== void 0 ? data2[name][index] : data2[name], name: item.name, conf: item, level: level + 1, key: item.name });
             }))));
+          case "url":
+          case "email":
+          case "tel":
           case "text":
+          case "date":
             return /* @__PURE__ */ wp.element.createElement(
               "input",
               {
-                className: className2 + "-text",
-                type: "text",
+                className: className2 + "-" + conf.input,
+                type: conf.input,
                 value,
                 onChange: (e) => {
                   updateValue(e.target.value);
@@ -363,10 +368,27 @@
           });
           Object.keys(types2).forEach((key) => {
             types2[key].type = "object";
-            types2[key].items.forEach(fillConf);
+            if (Array.isArray(types2[key].items)) {
+              types2[key].items.forEach(fillConf);
+            }
+            if (types2[key].extends != null && types2[types2[key].extends] != null) {
+              const { items, ...otherProps } = types2[types2[key].extends];
+              Object.keys(otherProps).forEach((prop) => {
+                if (!types2[key].hasOwnProperty(prop)) {
+                  types2[key][prop] = otherProps[prop];
+                }
+              });
+              if (types2[key].items != null) {
+                types2[key].items.push(...items);
+              } else {
+                types2[key].items = items;
+              }
+            }
           });
           const data2 = JSON.parse(attributes.json);
-          setAttributes({ data: fillUndefinedData(data2, types2[data2["@type"]]), types: types2, formals: formals2 });
+          if (data2["@type"] != null && types2[data2["@type"]] != null) {
+            setAttributes({ data: fillUndefinedData(data2, types2[data2["@type"]]), types: types2, formals: formals2 });
+          }
         });
       }, []);
       useEffect(() => {
@@ -382,7 +404,7 @@
       if (!types || !data) {
         return false;
       }
-      return /* @__PURE__ */ wp.element.createElement(CP.JsonLdBlockContext.Provider, { value: { types, save } }, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { className: "wp-block-catpow-jsonld" }, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { attr: attributes, set: setAttributes }), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "-editor" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_type" }, /* @__PURE__ */ wp.element.createElement(SelectType, { className: "_select", types, formals, data, setAttributes }), types[data["@type"]] && /* @__PURE__ */ wp.element.createElement("a", { className: "_help", href: types[data["@type"]].url, target: "_blank", rel: "noopener noreferer" })), /* @__PURE__ */ wp.element.createElement("div", { className: "_items" }, types[data["@type"]].items.map((conf) => /* @__PURE__ */ wp.element.createElement(InputItem, { className: "_item", conf, data, name: conf.name, level: 0, key: conf.name })))) : /* @__PURE__ */ wp.element.createElement("div", { className: "_label" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_icon" }, /* @__PURE__ */ wp.element.createElement(CP.ConfigIcon, { icon: "json" })), /* @__PURE__ */ wp.element.createElement("div", { className: "_text" }, "JSON-LD : ", typeLabel)))));
+      return /* @__PURE__ */ wp.element.createElement(CP.JsonLdBlockContext.Provider, { value: { types, save } }, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { className: "wp-block-catpow-jsonld" }, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { attr: attributes, set: setAttributes }), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "-editor" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_type" }, /* @__PURE__ */ wp.element.createElement(SelectType, { className: "_selecttype", types, formals, data, setAttributes }), types[data["@type"]] && /* @__PURE__ */ wp.element.createElement("a", { className: "_help", href: types[data["@type"]].url, target: "_blank", rel: "noopener noreferer" })), /* @__PURE__ */ wp.element.createElement("div", { className: "_items" }, types[data["@type"]].items.map((conf) => /* @__PURE__ */ wp.element.createElement(InputItem, { className: "_item", conf, data, name: conf.name, level: 0, key: conf.name })))) : /* @__PURE__ */ wp.element.createElement("div", { className: "_label" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_icon" }, /* @__PURE__ */ wp.element.createElement(CP.ConfigIcon, { icon: "json" })), /* @__PURE__ */ wp.element.createElement("div", { className: "_text" }, "JSON-LD : ", typeLabel)))));
     },
     save({ attributes, className, setAttributes }) {
       return /* @__PURE__ */ wp.element.createElement("script", { type: "application/ld+json" }, attributes.json);

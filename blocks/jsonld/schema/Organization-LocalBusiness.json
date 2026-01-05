@@ -1,0 +1,6 @@
+{
+	"$schema": "./schema.json",
+	"name": "LocalBusiness",
+	"label": "ローカルビジネス",
+	"extends": "Organization"
+}

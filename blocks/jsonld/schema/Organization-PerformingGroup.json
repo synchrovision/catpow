@@ -1,0 +1,6 @@
+{
+	"$schema": "./schema.json",
+	"name": "PerformingGroup",
+	"label": "公演団体",
+	"extends": "Organization"
+}

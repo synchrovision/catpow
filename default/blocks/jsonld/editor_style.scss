@@ -1,6 +1,7 @@
 @import "admin_style_config.scss";
 
 .wp-block-catpow-jsonld{
+	@include txt((f:t));
 	&__label{
 		@include flx((w:w,j:c,a:c));
 		@include bnd((mg:20,pd:20));
@@ -29,9 +30,17 @@
 			&-icon{
 				@include bnd((f:0 0 32));
 			}
-			&-select{
-				@include bnd((ap:n,d:b,p:r,mg:10,pd:.5em,pdr:1.5em));
-				@include txt((p:20,h:1em));
+			&-selecttype{
+				@include flx((a:c,g:.5em));
+				&-select{
+					@include bnd((ap:n,d:b,p:r,pd:.5em,pdr:1.5em));
+					@include txt((p:20,h:1em));
+				}
+				&-arrow{
+					@include bnd((d:b,f:0 0 .5em,h:1em));
+					@include bg((c:t 1 .5));
+					@include clp((t:r 100%));
+				}
 			}
 			&-help{
 				@include bnd((f:0 0 1em,h:1em,pd:.5em));
@@ -47,14 +56,10 @@
 		}
 		&__items{
 			&-item{
-				@include bnd((pd:8));
+				@include bnd((pd:1em .5em));
 				@include flx((w:w));
 				&:not(:last-child){
 					@include bdr((p:b,s:s,w:1,c:shd));
-				}
-				&-selecttype{
-					@include bnd((mgb:12));
-					@include txt((p:18));
 				}
 				&-label{
 					@include bnd((f:1 1 96));
@@ -73,6 +78,10 @@
 				}
 				&-inputs{
 					@include bnd((f:10 10 96));
+					&-selecttype{
+						@include bnd((mgb:12));
+						@include txt((p:18));
+					}
 					&-group{
 						&-item{
 							@include bnd((p:r,pd:16));
@@ -147,6 +156,16 @@
 			&-object{
 			}
 			&-text{
+				@include bnd((w:50em f));
+			}
+			&-url{
+				@include bnd((w:30em f));
+			}
+			&-email,&-tel{
+				@include bnd((w:20em f));
+			}
+			&-textarea{
+				@include bnd((w:50em f));
 			}
 			&.is-level-1{
 			}

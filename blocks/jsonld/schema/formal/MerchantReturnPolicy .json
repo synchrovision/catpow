@@ -3,5 +3,5 @@
 	"name": "MerchantReturnPolicy ",
 	"label": "返品対応",
 	"url": "https://schema.org/MerchantReturnPolicy",
-	"items": [{ "name": "url", "label": "URL", "input": "text" }]
+	"items": [{ "name": "url", "label": "URL", "input": "url" }]
 }

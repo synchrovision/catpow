@@ -1,0 +1,6 @@
+{
+	"$schema": "./schema.json",
+	"name": "ScholarlyArticle",
+	"label": "学術論文",
+	"extends": "Article"
+}

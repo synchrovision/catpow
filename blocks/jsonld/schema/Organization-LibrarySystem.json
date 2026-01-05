@@ -1,0 +1,6 @@
+{
+	"$schema": "./schema.json",
+	"name": "LibrarySystem",
+	"label": "ライブラリ",
+	"extends": "Organization"
+}

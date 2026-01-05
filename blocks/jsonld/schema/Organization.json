@@ -8,9 +8,9 @@
 		{ "name": "alternateName", "label": "名称", "input": "text" },
 		{ "name": "contactPoint", "label": "連絡先", "@type": "ContactPoint" },
 		{ "name": "description", "label": "詳細説明", "input": "textarea" },
-		{ "name": "email", "label": "メール", "input": "text" },
-		{ "name": "telephone", "label": "電話番号", "input": "text" },
+		{ "name": "email", "label": "メール", "input": "email" },
+		{ "name": "telephone", "label": "電話番号", "input": "tel" },
 		{ "name": "foundingDate", "label": "設立日", "input": "datetime" },
-		{ "name": "url", "label": "URL", "input": "text" }
+		{ "name": "url", "label": "URL", "input": "url" }
 	]
 }

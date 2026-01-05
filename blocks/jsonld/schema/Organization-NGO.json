@@ -1,0 +1,6 @@
+{
+	"$schema": "./schema.json",
+	"name": "NGO",
+	"label": "NGO",
+	"extends": "Organization"
+}

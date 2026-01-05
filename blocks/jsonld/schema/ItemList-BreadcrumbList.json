@@ -1,0 +1,6 @@
+{
+	"$schema": "./schema.json",
+	"name": "BreadcrumbList",
+	"label": "パンくずリスト",
+	"extends": "ItemList"
+}

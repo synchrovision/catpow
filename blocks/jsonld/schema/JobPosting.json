@@ -10,7 +10,12 @@
 		{ "name": "description", "label": "詳細説明", "input": "textarea", "required": true },
 		{ "name": "hiringOrganization", "label": "雇用主組織名", "@type": "Organization", "required": true },
 		{ "name": "jobLocation", "label": "勤務地", "@type": "Place", "required": true },
-		{ "name": "jobLocationType", "label": "勤務地タイプ", "input": "checkbox", "options": [{ "label": "リモートワーク", "value": "TELECOMMUTE" }] },
+		{
+			"name": "jobLocationType",
+			"label": "勤務地タイプ",
+			"input": "checkbox",
+			"options": [{ "label": "リモートワーク", "value": "TELECOMMUTE" }]
+		},
 		{ "name": "applicantLocationRequirements", "label": "リモート可能地域", "@type": ["AdministrativeArea", "State", "Country", "City"] },
 		{ "name": "baseSalary", "label": "基本給", "@type": "MonetaryAmount" },
 		{ "name": "directApply", "label": "直接応募可能", "input": "toggle" },

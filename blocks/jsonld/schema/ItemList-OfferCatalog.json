@@ -1,0 +1,6 @@
+{
+	"$schema": "./schema.json",
+	"name": "OfferCatalog",
+	"label": "カタログ一覧",
+	"extends": "ItemList"
+}

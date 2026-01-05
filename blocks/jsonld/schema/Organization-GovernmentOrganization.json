@@ -1,0 +1,6 @@
+{
+	"$schema": "./schema.json",
+	"name": "GovernmentOrganization",
+	"label": "政治団体",
+	"extends": "Organization"
+}

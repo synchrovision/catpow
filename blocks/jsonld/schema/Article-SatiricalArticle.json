@@ -1,0 +1,6 @@
+{
+	"$schema": "./schema.json",
+	"name": "SatiricalArticle",
+	"label": "風刺",
+	"extends": "Article"
+}

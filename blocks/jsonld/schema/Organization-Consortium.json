@@ -1,0 +1,6 @@
+{
+	"$schema": "./schema.json",
+	"name": "Consortium",
+	"label": "協会",
+	"extends": "Organization"
+}
