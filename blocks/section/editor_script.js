@@ -236,7 +236,7 @@
           "backgroundColor",
           "backgroundImage",
           "backgroundPattern",
-          "customContentWidth"
+          "contentWidth"
         ];
         wp.hooks.applyFilters("catpow.blocks.section.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;

@@ -238,7 +238,7 @@ wp.blocks.registerBlockType("catpow/section", {
 				"backgroundColor",
 				"backgroundImage",
 				"backgroundPattern",
-				"customContentWidth",
+				"contentWidth",
 			];
 			wp.hooks.applyFilters("catpow.blocks.section.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -247,7 +247,7 @@ wp.blocks.registerBlockType("catpow/section", {
 		const blockProps = useBlockProps({
 			id: anchor,
 			className: classes,
-			style: states.hasClipPath?{...vars,...clipVars}:vars,
+			style: states.hasClipPath ? { ...vars, ...clipVars } : vars,
 		});
 
 		return (
@@ -347,7 +347,7 @@ wp.blocks.registerBlockType("catpow/section", {
 		const blockProps = useBlockProps.save({
 			id: anchor,
 			className: classes,
-			style: states.hasClipPath?{...vars,...clipVars}:vars,
+			style: states.hasClipPath ? { ...vars, ...clipVars } : vars,
 		});
 
 		return (
