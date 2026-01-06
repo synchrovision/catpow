@@ -5,8 +5,8 @@
 	"url": "https://developers.google.com/search/docs/appearance/structured-data/job-posting",
 	"items": [
 		{ "name": "title", "label": "職務の名称", "input": "text", "required": true },
-		{ "name": "datePosted", "label": "掲載開始日時", "input": "datetime", "default": "+1 day", "required": true },
-		{ "name": "validThrough", "label": "有効期限", "input": "datetime", "default": "+3 month" },
+		{ "name": "datePosted", "label": "掲載開始日時", "input": "date", "default": "+1 day", "required": true },
+		{ "name": "validThrough", "label": "有効期限", "input": "date", "default": "+3 month" },
 		{ "name": "description", "label": "詳細説明", "input": "textarea", "required": true },
 		{ "name": "hiringOrganization", "label": "雇用主組織名", "@type": "Organization", "required": true },
 		{ "name": "jobLocation", "label": "勤務地", "@type": "Place", "required": true },

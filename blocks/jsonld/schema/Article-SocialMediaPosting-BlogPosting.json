@@ -1,0 +1,6 @@
+{
+	"$schema": "./schema.json",
+	"name": "BlogPosting",
+	"label": "ブログ記事（推奨）",
+	"extends": ["Article", "SocialMediaPosting"]
+}

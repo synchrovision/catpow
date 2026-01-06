@@ -5,8 +5,8 @@
 	"url": "https://developers.google.com/search/docs/appearance/structured-data/article",
 	"items": [
 		{ "name": "author", "label": "作成者", "@type": "Person", "multiple": true },
-		{ "name": "dateModified", "label": "変更日", "input": "datetime" },
-		{ "name": "datePublished", "label": "公開日", "input": "datetime" },
+		{ "name": "dateModified", "label": "変更日", "input": "date" },
+		{ "name": "datePublished", "label": "公開日", "input": "date" },
 		{ "name": "headline", "label": "見出し", "input": "text" },
 		{ "name": "image", "label": "イメージURL", "input": "url", "multiple": true }
 	]
