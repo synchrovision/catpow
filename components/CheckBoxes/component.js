@@ -19,35 +19,35 @@
         return { label, value: props.options[label] };
       });
     }, [props.options]);
-    if (Array.isArray(value)) {
-      const flags = {};
-      value.map((val) => flags[val] = true);
+    if (!Array.isArray(value) && typeof value === "object") {
       return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, options.map((option) => /* @__PURE__ */ wp.element.createElement(
         CheckBox,
         {
           label: option.label,
           onChange: (selected) => {
-            if (selected) {
-              flags[option.value] = true;
-            } else {
-              delete flags[option.value];
-            }
-            onChange(Object.keys(flags));
+            value[option.value] = selected;
+            onChange(option.value, selected, value);
           },
-          selected: flags[option.value],
+          selected: value[option.value],
           key: option.label
         }
       )));
     }
+    const flags = {};
+    value.map((val) => flags[val] = true);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, options.map((option) => /* @__PURE__ */ wp.element.createElement(
       CheckBox,
       {
         label: option.label,
         onChange: (selected) => {
-          value[option.value] = selected;
-          onChange(option.value, selected, value);
+          if (selected) {
+            flags[option.value] = true;
+          } else {
+            delete flags[option.value];
+          }
+          onChange(Object.keys(flags));
         },
-        selected: value[option.value],
+        selected: flags[option.value],
         key: option.label
       }
     )));
