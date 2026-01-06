@@ -200,56 +200,6 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 		const save = useCallback(() => {
 			setAttributes({ data: { ...data } });
 		}, [data, setAttributes]);
-		const SelectType = useCallback(
-			(props) => {
-				const { className, types, formals, data, setAttributes } = props;
-				const cache = useRef({});
-				const currentType = types[data["@type"]];
-				const [mainType, setMainType] = useState(getMainType(currentType));
-
-				const updateType = useCallback(
-					(type) => {
-						cache.current[data["@type"]] = JSON.parse(JSON.stringify(data));
-						if (cache.current[type]) {
-							setAttributes({ data: cache.current[type] });
-						} else {
-							const data = extractDefaultData(types[type], type);
-							fillUndefinedData(data, types[type]);
-							setAttributes({ data });
-						}
-					},
-					[data, cache, setAttributes, fillUndefinedData, extractDefaultData]
-				);
-
-				return (
-					<CP.Bem prefix="wp-block-catpow">
-						<div className={className}>
-							<select className="_select is-select-maintype" value={mainType} onChange={(e) => setMainType(e.target.value)}>
-								{Object.keys(types)
-									.filter((type) => types[type].extends == null)
-									.map((type) => (
-										<option value={type} key={type}>
-											{types[type].label || types[type].name}
-										</option>
-									))}
-							</select>
-							<span className="_arrow"></span>
-							<select className="_select is-select-subtype" value={data["@type"]} onChange={(e) => updateType(e.target.value)}>
-								<option value="">─</option>
-								{Object.keys(types)
-									.filter((type) => getMainType(types[type]) === mainType)
-									.map((type) => (
-										<option value={type} key={type}>
-											{types[type].label || types[type].name}
-										</option>
-									))}
-							</select>
-						</div>
-					</CP.Bem>
-				);
-			},
-			[convertDefaultValue, extractDefaultData]
-		);
 		const typeLabel = useMemo(() => types && data["@type"] && (types[data["@type"]]?.label || data["@type"]), [types, data["@type"]]);
 
 		useEffect(() => {
@@ -324,6 +274,56 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 	},
 });
 
+const SelectType = (props) => {
+	const { className, types, formals, data, setAttributes } = props;
+	const cache = useRef({});
+	const currentType = types[data["@type"]];
+	const [mainType, setMainType] = useState(getMainType(currentType));
+
+	const updateType = useCallback(
+		(type) => {
+			const prevMainType = getMainType(types[data["@type"]]);
+			const newMainType = getMainType(types[type]);
+			cache.current[prevMainType] = JSON.parse(JSON.stringify(data));
+			if (cache.current[newMainType]) {
+				setAttributes({ data: { ...cache.current[newMainType], "@context": "https://schema.org", "@type": type } });
+			} else {
+				const data = extractDefaultData(types[type], type);
+				fillUndefinedData(data, types[type]);
+				Object.assign(data, { "@context": "https://schema.org", "@type": type });
+				setAttributes({ data });
+			}
+		},
+		[data, cache, setAttributes]
+	);
+
+	return (
+		<CP.Bem prefix="wp-block-catpow">
+			<div className={className}>
+				<select className="_select is-select-maintype" value={mainType} onChange={(e) => setMainType(e.target.value)}>
+					{Object.keys(types)
+						.filter((type) => types[type].extends == null)
+						.map((type) => (
+							<option value={type} key={type}>
+								{types[type].label || types[type].name}
+							</option>
+						))}
+				</select>
+				<span className="_arrow"></span>
+				<select className="_select is-select-subtype" value={data["@type"]} onChange={(e) => updateType(e.target.value)}>
+					<option value="">─</option>
+					{Object.keys(types)
+						.filter((type) => getMainType(types[type]) === mainType)
+						.map((type) => (
+							<option value={type} key={type}>
+								{types[type].label || types[type].name}
+							</option>
+						))}
+				</select>
+			</div>
+		</CP.Bem>
+	);
+};
 const Input = (props) => {
 	const { SelectBox, RadioButtons, CheckBoxes, Toggle, SelectMedia, InputDateTime } = Catpow;
 	const { className, data, name, index, conf, level } = props;
@@ -495,7 +495,7 @@ const InputItem = (props) => {
 					)}
 					{itemConf.multiple ? (
 						<div className="_group">
-							{data[name].map((item, index) => (
+							{data[name]?.map((item, index) => (
 								<div className="_item" key={index}>
 									<div className="_body">
 										<Input className="input_" data={data} name={name} index={index} conf={itemConf} level={level} />

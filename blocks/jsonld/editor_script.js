@@ -208,29 +208,6 @@
       const save = useCallback(() => {
         setAttributes({ data: { ...data } });
       }, [data, setAttributes]);
-      const SelectType = useCallback(
-        (props) => {
-          const { className: className2, types: types2, formals: formals2, data: data2, setAttributes: setAttributes2 } = props;
-          const cache = useRef({});
-          const currentType = types2[data2["@type"]];
-          const [mainType, setMainType] = useState(getMainType(currentType));
-          const updateType = useCallback(
-            (type) => {
-              cache.current[data2["@type"]] = JSON.parse(JSON.stringify(data2));
-              if (cache.current[type]) {
-                setAttributes2({ data: cache.current[type] });
-              } else {
-                const data3 = extractDefaultData(types2[type], type);
-                fillUndefinedData(data3, types2[type]);
-                setAttributes2({ data: data3 });
-              }
-            },
-            [data2, cache, setAttributes2, fillUndefinedData, extractDefaultData]
-          );
-          return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { className: className2 }, /* @__PURE__ */ wp.element.createElement("select", { className: "_select is-select-maintype", value: mainType, onChange: (e) => setMainType(e.target.value) }, Object.keys(types2).filter((type) => types2[type].extends == null).map((type) => /* @__PURE__ */ wp.element.createElement("option", { value: type, key: type }, types2[type].label || types2[type].name))), /* @__PURE__ */ wp.element.createElement("span", { className: "_arrow" }), /* @__PURE__ */ wp.element.createElement("select", { className: "_select is-select-subtype", value: data2["@type"], onChange: (e) => updateType(e.target.value) }, /* @__PURE__ */ wp.element.createElement("option", { value: "" }, "\u2500"), Object.keys(types2).filter((type) => getMainType(types2[type]) === mainType).map((type) => /* @__PURE__ */ wp.element.createElement("option", { value: type, key: type }, types2[type].label || types2[type].name)))));
-        },
-        [convertDefaultValue, extractDefaultData]
-      );
       const typeLabel = useMemo(() => types && data["@type"] && (types[data["@type"]]?.label || data["@type"]), [types, data["@type"]]);
       useEffect(() => {
         wp.apiFetch({ path: "/cp/v1/blocks/config/jsonld/types" }).then((res) => {
@@ -270,6 +247,29 @@
       return /* @__PURE__ */ wp.element.createElement("script", { type: "application/ld+json" }, attributes.json);
     }
   });
+  var SelectType = (props) => {
+    const { className, types, formals, data, setAttributes } = props;
+    const cache = useRef({});
+    const currentType = types[data["@type"]];
+    const [mainType, setMainType] = useState(getMainType(currentType));
+    const updateType = useCallback(
+      (type) => {
+        const prevMainType = getMainType(types[data["@type"]]);
+        const newMainType = getMainType(types[type]);
+        cache.current[prevMainType] = JSON.parse(JSON.stringify(data));
+        if (cache.current[newMainType]) {
+          setAttributes({ data: { ...cache.current[newMainType], "@context": "https://schema.org", "@type": type } });
+        } else {
+          const data2 = extractDefaultData(types[type], type);
+          fillUndefinedData(data2, types[type]);
+          Object.assign(data2, { "@context": "https://schema.org", "@type": type });
+          setAttributes({ data: data2 });
+        }
+      },
+      [data, cache, setAttributes]
+    );
+    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("select", { className: "_select is-select-maintype", value: mainType, onChange: (e) => setMainType(e.target.value) }, Object.keys(types).filter((type) => types[type].extends == null).map((type) => /* @__PURE__ */ wp.element.createElement("option", { value: type, key: type }, types[type].label || types[type].name))), /* @__PURE__ */ wp.element.createElement("span", { className: "_arrow" }), /* @__PURE__ */ wp.element.createElement("select", { className: "_select is-select-subtype", value: data["@type"], onChange: (e) => updateType(e.target.value) }, /* @__PURE__ */ wp.element.createElement("option", { value: "" }, "\u2500"), Object.keys(types).filter((type) => getMainType(types[type]) === mainType).map((type) => /* @__PURE__ */ wp.element.createElement("option", { value: type, key: type }, types[type].label || types[type].name)))));
+  };
   var Input = (props) => {
     const { SelectBox, RadioButtons, CheckBoxes, Toggle, SelectMedia, InputDateTime } = Catpow;
     const { className, data, name, index, conf, level } = props;
@@ -411,6 +411,6 @@
       },
       [data, name, save]
     );
-    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default(className, "is-level-" + level) }, /* @__PURE__ */ wp.element.createElement("div", { className: "_label" }, conf.label || conf.name, conf.url && /* @__PURE__ */ wp.element.createElement("a", { className: "_label", href: conf.url, target: "_blank", rel: "noopener noreferer" })), /* @__PURE__ */ wp.element.createElement("div", { className: "_inputs" }, conf.isDynamicType && /* @__PURE__ */ wp.element.createElement("select", { className: "_selecttype", value: value["@type"], onChange: onChangeType }, conf["@type"].map((type) => /* @__PURE__ */ wp.element.createElement("option", { value: type, key: type }, conf.confs[type].label || type))), itemConf.multiple ? /* @__PURE__ */ wp.element.createElement("div", { className: "_group" }, data[name].map((item, index) => /* @__PURE__ */ wp.element.createElement("div", { className: "_item", key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body" }, /* @__PURE__ */ wp.element.createElement(Input, { className: "input_", data, name, index, conf: itemConf, level })), /* @__PURE__ */ wp.element.createElement("div", { className: "_control" }, data[name].length > 1 && /* @__PURE__ */ wp.element.createElement("div", { className: "_decrease", onClick: () => removeItem(index) }), /* @__PURE__ */ wp.element.createElement("div", { className: "_increase", onClick: () => cloneItem(index) }))))) : /* @__PURE__ */ wp.element.createElement(Input, { className: "input_", data, name, conf: itemConf, level }))));
+    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default(className, "is-level-" + level) }, /* @__PURE__ */ wp.element.createElement("div", { className: "_label" }, conf.label || conf.name, conf.url && /* @__PURE__ */ wp.element.createElement("a", { className: "_label", href: conf.url, target: "_blank", rel: "noopener noreferer" })), /* @__PURE__ */ wp.element.createElement("div", { className: "_inputs" }, conf.isDynamicType && /* @__PURE__ */ wp.element.createElement("select", { className: "_selecttype", value: value["@type"], onChange: onChangeType }, conf["@type"].map((type) => /* @__PURE__ */ wp.element.createElement("option", { value: type, key: type }, conf.confs[type].label || type))), itemConf.multiple ? /* @__PURE__ */ wp.element.createElement("div", { className: "_group" }, data[name]?.map((item, index) => /* @__PURE__ */ wp.element.createElement("div", { className: "_item", key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body" }, /* @__PURE__ */ wp.element.createElement(Input, { className: "input_", data, name, index, conf: itemConf, level })), /* @__PURE__ */ wp.element.createElement("div", { className: "_control" }, data[name].length > 1 && /* @__PURE__ */ wp.element.createElement("div", { className: "_decrease", onClick: () => removeItem(index) }), /* @__PURE__ */ wp.element.createElement("div", { className: "_increase", onClick: () => cloneItem(index) }))))) : /* @__PURE__ */ wp.element.createElement(Input, { className: "input_", data, name, conf: itemConf, level }))));
   };
 })();

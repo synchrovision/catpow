@@ -4,13 +4,13 @@
 	"label": "組織",
 	"url": "https://developers.google.com/search/docs/appearance/structured-data/organization",
 	"items": [
-		{ "name": "address", "label": "住所", "@type": "PostalAddress", "required": true, "multiple": true },
-		{ "name": "alternateName", "label": "名称", "input": "text" },
-		{ "name": "contactPoint", "label": "連絡先", "@type": "ContactPoint" },
+		{ "name": "name", "label": "名称", "input": "text" },
 		{ "name": "description", "label": "詳細説明", "input": "textarea" },
+		{ "name": "url", "label": "URL", "input": "url" },
 		{ "name": "email", "label": "メール", "input": "email" },
 		{ "name": "telephone", "label": "電話番号", "input": "tel" },
-		{ "name": "foundingDate", "label": "設立日", "input": "datetime" },
-		{ "name": "url", "label": "URL", "input": "url" }
+		{ "name": "address", "label": "住所", "@type": "PostalAddress", "required": true, "multiple": true },
+		{ "name": "contactPoint", "label": "連絡先", "@type": "ContactPoint" },
+		{ "name": "foundingDate", "label": "設立日", "input": "date" }
 	]
 }
