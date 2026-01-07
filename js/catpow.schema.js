@@ -5,7 +5,7 @@
       __defProp(target, name, { get: all[name], enumerable: true });
   };
 
-  // modules/src/schema/functions/createAgent.js
+  // node_modules-included/catpow/src/schema/functions/createAgent.js
   var createAgent = (matrix, ref, key2, value, parent, params) => {
     const agent = { matrix, ref, key: key2, value, parent };
     for (let functionName in matrix.curries) {
@@ -55,7 +55,7 @@
     return agent;
   };
 
-  // modules/src/schema/methods/index.js
+  // node_modules-included/catpow/src/schema/methods/index.js
   var methods_exports = {};
   __export(methods_exports, {
     extractDependencies: () => extractDependencies,
@@ -76,7 +76,7 @@
     test: () => test
   });
 
-  // modules/src/schema/methods/getErrorMessageFormat.js
+  // node_modules-included/catpow/src/schema/methods/getErrorMessageFormat.js
   var getErrorMessageFormat = (params) => {
     const { invalidBy, schema: schema2 } = params;
     if (schema2.message != null) {
@@ -130,7 +130,7 @@
     return null;
   };
 
-  // modules/src/schema/methods/getErrorMessage.js
+  // node_modules-included/catpow/src/schema/methods/getErrorMessage.js
   var getErrorMessage = (params) => {
     const format = getErrorMessageFormat(params);
     if (format == null) {
@@ -148,7 +148,7 @@
     });
   };
 
-  // modules/src/schema/methods/extractDependencies.js
+  // node_modules-included/catpow/src/schema/methods/extractDependencies.js
   var extractDependencies = (schema2) => {
     if (schema2.dependencies != null) {
       if (Array.isArray(Object.values(schema2.dependencies)[0])) {
@@ -162,7 +162,7 @@
     }
   };
 
-  // modules/src/schema/methods/getSubSchema.js
+  // node_modules-included/catpow/src/schema/methods/getSubSchema.js
   var getSubSchema = (path, schema2, rootSchema) => {
     let keys = path.split("/");
     if (keys[0] === "#") {
@@ -180,7 +180,7 @@
     return schema2;
   };
 
-  // modules/src/schema/methods/find.js
+  // node_modules-included/catpow/src/schema/methods/find.js
   var find = (callback, schema2, rootSchema, params = {}) => {
     if (schema2 == null) {
       return null;
@@ -250,7 +250,7 @@
     return null;
   };
 
-  // modules/src/schema/methods/getType.js
+  // node_modules-included/catpow/src/schema/methods/getType.js
   var getType = (schema2, rootSchema) => {
     return find(
       (schema3) => {
@@ -263,7 +263,7 @@
         if (schema3.items != null || schema3.prefixItems != null) {
           return "array";
         }
-        if (schema3.minimum != null || schema3.maximam != null || schema3.multipleOf != null) {
+        if (schema3.minimum != null || schema3.maximam != null || schema3.multipleOf != null || schema3.steps != null) {
           return "number";
         }
         if (schema3.pattern != null || schema3.minLength != null || schema3.maxLength != null) {
@@ -287,7 +287,7 @@
     );
   };
 
-  // modules/src/schema/methods/getResolvedSchema.js
+  // node_modules-included/catpow/src/schema/methods/getResolvedSchema.js
   var cache = /* @__PURE__ */ new WeakMap();
   var getResolvedSchema = (schema2, rootSchema) => {
     if (schema2 == null) {
@@ -332,7 +332,7 @@
     return resolvedSchema;
   };
 
-  // modules/src/schema/methods/test.js
+  // node_modules-included/catpow/src/schema/methods/test.js
   var test = (value, schema2, rootSchema, params = {}) => {
     const type = getType(schema2, rootSchema);
     schema2 = getResolvedSchema(schema2, rootSchema);
@@ -527,12 +527,12 @@
     return true;
   };
 
-  // modules/src/schema/methods/getMatchedSchemas.js
+  // node_modules-included/catpow/src/schema/methods/getMatchedSchemas.js
   var getMatchedSchemas = (value, schemas, rootSchema, params) => {
     return schemas.filter((schema2) => test(value, schema2, rootSchema, params) === true);
   };
 
-  // modules/src/schema/methods/sanitize.js
+  // node_modules-included/catpow/src/schema/methods/sanitize.js
   var sanitize = (value, schema2, rootSchema) => {
     const type = getType(schema2, rootSchema);
     schema2 = getResolvedSchema(schema2, rootSchema);
@@ -608,7 +608,7 @@
     return value;
   };
 
-  // modules/src/schema/consts.js
+  // node_modules-included/catpow/src/schema/consts.js
   var consts_exports = {};
   __export(consts_exports, {
     conditionalSchemaKeys: () => conditionalSchemaKeys,
@@ -683,7 +683,7 @@
     dependentSchemas: true
   });
 
-  // modules/src/schema/methods/getMergedSchemaForValue.js
+  // node_modules-included/catpow/src/schema/methods/getMergedSchemaForValue.js
   var getMergedSchemaForValue = (value, schema2, rootSchema) => {
     if (rootSchema == null) {
       rootSchema = schema2;
@@ -700,7 +700,7 @@
     return mergedSchema;
   };
 
-  // modules/src/schema/methods/mergeSchema.js
+  // node_modules-included/catpow/src/schema/methods/mergeSchema.js
   var mergeSchema = (targetSchema, schema2, rootSchema, params = {}) => {
     const { extend = false, initialize = true, value = null } = params;
     const forValue = params.hasOwnProperty("value");
@@ -869,7 +869,7 @@
     return targetSchema;
   };
 
-  // modules/src/schema/methods/getMergedSchema.js
+  // node_modules-included/catpow/src/schema/methods/getMergedSchema.js
   var cache2 = /* @__PURE__ */ new WeakMap();
   var getMergedSchema = (schema2, rootSchema) => {
     if (rootSchema == null) {
@@ -891,7 +891,7 @@
     return mergedSchema;
   };
 
-  // modules/src/schema/methods/getPrimaryPropertyName.js
+  // node_modules-included/catpow/src/schema/methods/getPrimaryPropertyName.js
   var getPrimaryPropertyName = (schema2, rootSchema) => {
     if (getType(schema2, rootSchema) !== "object") {
       return null;
@@ -903,7 +903,7 @@
     return Object.keys(mergedSchema.properties).find((key2) => mergedSchema.properties[key2].enum != null);
   };
 
-  // modules/src/schema/methods/mergeSchemas.js
+  // node_modules-included/catpow/src/schema/methods/mergeSchemas.js
   var mergeSchemas = (schemas, rootSchema, params = {}) => {
     const mergedSchema = {};
     schemas.forEach((schema2) => mergeSchema(mergedSchema, schema2, rootSchema, params));
@@ -919,7 +919,7 @@
     return mergedSchema;
   };
 
-  // modules/src/schema/methods/getDefaultValue.js
+  // node_modules-included/catpow/src/schema/methods/getDefaultValue.js
   var getDefaultValue = (schema2, rootSchema) => {
     const type = getType(schema2, rootSchema);
     schema2 = getResolvedSchema(schema2, rootSchema);
@@ -960,14 +960,14 @@
     return null;
   };
 
-  // modules/src/schema/functions/getPossibleTypes.js
+  // node_modules-included/catpow/src/schema/functions/getPossibleTypes.js
   var getPossibleTypes = (schemas) => {
     const flags = {};
     schemas.forEach((schema2) => flags[schema2.type] = true);
     return flags;
   };
 
-  // modules/src/schema/functions/walkDescendantSchema.js
+  // node_modules-included/catpow/src/schema/functions/walkDescendantSchema.js
   var walkDescendantSchema = (agent, schema2, cb) => {
     agent.walkChildren((child) => {
       for (let subSchema of child.matrix.schemas) {
@@ -980,15 +980,15 @@
     });
   };
 
-  // modules/src/schema/functions/debugLog.js
-  var debugLog2 = (message, object) => {
+  // node_modules-included/catpow/src/schema/functions/debugLog.js
+  var debugLog = (message, object) => {
     console.groupCollapsed(message);
     console.debug(object);
     console.trace();
     console.groupEnd();
   };
 
-  // modules/src/schema/functions/createMatrix.js
+  // node_modules-included/catpow/src/schema/functions/createMatrix.js
   var updateHandles = /* @__PURE__ */ new WeakMap();
   var createMatrix = (schemas) => {
     const possibleTypes = getPossibleTypes(schemas);
@@ -1015,7 +1015,7 @@
             event = { type: event, bubbles: true };
           }
           if (agent.debug) {
-            debugLog2(`\u26A1 trigger event '${event.type}' on '${agent.key}'`, { event, agent });
+            debugLog(`\u26A1 trigger event '${event.type}' on '${agent.key}'`, { event, agent });
           }
           event.target = agent;
           const cb = (agent2) => {
@@ -1091,7 +1091,7 @@
           }
           agent.conditionalSchemaStatus.set(schema2, status);
           if (agent.debug) {
-            debugLog2(`\u{1F511} conditionalSchemaStatus of '${agent.key}' was changed`, { schema: schema2, status });
+            debugLog(`\u{1F511} conditionalSchemaStatus of '${agent.key}' was changed`, { schema: schema2, status });
           }
           agent.setSchemaStatus(schema2, (agent.parent == null ? 3 : agent.parent.getSchemaStatus(schema2.parent)) & status);
         };
@@ -1131,7 +1131,7 @@
           }
           agent.schemaStatus.set(schema2, status);
           if (agent.debug) {
-            debugLog2(`\u{1F511} schemaStatus of '${agent.key}' was changed`, { schema: schema2, status });
+            debugLog(`\u{1F511} schemaStatus of '${agent.key}' was changed`, { schema: schema2, status });
           }
           walkDescendantSchema(agent, schema2, (agent2, schema3) => {
             const currentStatus = agent2.schemaStatus.get(schema3);
@@ -1197,7 +1197,7 @@
           agent.value = value;
           agent.trigger({ type: "change", bubbles: true });
           if (agent.debug) {
-            debugLog2(`\u{1F4DD} change value for '${agent.key}'`, { value });
+            debugLog(`\u{1F4DD} change value for '${agent.key}'`, { value });
           }
         };
       },
@@ -1210,7 +1210,7 @@
       update: (agent) => {
         return () => {
           if (agent.debug) {
-            debugLog2(`\u2699\uFE0F update process for '${agent.key}' start`, { agent });
+            debugLog(`\u2699\uFE0F update process for '${agent.key}' start`, { agent });
           }
           if (agent.value == null) {
             delete agent.ref[agent.key];
@@ -1227,7 +1227,7 @@
           }
           agent.trigger({ type: "update", bubbles: false });
           if (agent.debug) {
-            debugLog2(`\u2699\uFE0F update process for '${agent.key}' end`, { agent });
+            debugLog(`\u2699\uFE0F update process for '${agent.key}' end`, { agent });
           }
         };
       },
@@ -1240,7 +1240,7 @@
               },
               onError: (params) => {
                 if (agent.debug) {
-                  debugLog2("\u26A0\uFE0F invalid value was found", params);
+                  debugLog("\u26A0\uFE0F invalid value was found", params);
                 }
                 agent.setMessage(getErrorMessage(params));
                 agent.trigger({ type: "error", bubble: false });
@@ -1336,7 +1336,7 @@
     return { possibleTypes, curries, schemas };
   };
 
-  // modules/src/schema/functions/getUnlimietedSchema.js
+  // node_modules-included/catpow/src/schema/functions/getUnlimietedSchema.js
   var getUnlimietedSchema = (schema2) => {
     const unlimitedSchema = Object.assign({}, schema2);
     delete unlimitedSchema.enum;
@@ -1349,7 +1349,7 @@
     return unlimitedSchema;
   };
 
-  // modules/src/schema/functions/getMatrix.js
+  // node_modules-included/catpow/src/schema/functions/getMatrix.js
   var getMatrix = (originalSchemas) => {
     const updateHandlesList = [];
     const schemas = originalSchemas.slice();
@@ -1488,7 +1488,7 @@
     return matrix;
   };
 
-  // modules/src/schema/functions/resolveSchema.js
+  // node_modules-included/catpow/src/schema/functions/resolveSchema.js
   var resolveSchema = (uri, schema2, rootSchema, param) => {
     const resolvedSchema = getResolvedSchema(schema2, rootSchema);
     Object.assign(resolvedSchema, param);
@@ -1537,13 +1537,13 @@
     return resolvedSchema;
   };
 
-  // modules/src/schema/main.js
+  // node_modules-included/catpow/src/schema/main.js
   var main = (originalRootSchema, matrixParams = {}) => {
     const { debug = false } = matrixParams;
     const rootSchema = JSON.parse(JSON.stringify(originalRootSchema));
     const resolvedRootSchema = resolveSchema("#", rootSchema, rootSchema, {});
     if (debug) {
-      debugLog2("\u2728 resolve rootSchema", { originalRootSchema, resolvedRootSchema });
+      debugLog("\u2728 resolve rootSchema", { originalRootSchema, resolvedRootSchema });
     }
     const rootMatrix = getMatrix([resolvedRootSchema]);
     rootMatrix.createAgent = (data, agentParams) => {
@@ -1551,17 +1551,17 @@
       const rootAgent = createAgent(rootMatrix, { data }, "data", data, null, agentParams);
       rootAgent.initialize();
       if (debug) {
-        debugLog2("\u2728 rootAgent was created", { rootAgent });
+        debugLog("\u2728 rootAgent was created", { rootAgent });
       }
       return rootAgent;
     };
     if (debug) {
-      debugLog2("\u2728 rootMatrix was created", { rootMatrix });
+      debugLog("\u2728 rootMatrix was created", { rootMatrix });
     }
     return rootMatrix;
   };
 
-  // modules/src/schema/index.js
+  // node_modules-included/catpow/src/schema/index.js
   var schema = Object.assign(main, consts_exports, methods_exports);
 
   // ../js/catpow.schema/index.js
