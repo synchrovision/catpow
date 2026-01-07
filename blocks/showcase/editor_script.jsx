@@ -44,7 +44,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 		const { useState, useMemo } = wp.element;
 		const { BlockControls, InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
-		const { items = [], classes, TitleTag, countPrefix, countSuffix, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { items = [], classes, vars, TitleTag, countPrefix, countSuffix, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 		const primaryClass = "wp-block-catpow-showcase";
 		var classArray = _.uniq((className + " " + classes).split(" "));
 
@@ -84,8 +84,11 @@ wp.blocks.registerBlockType("catpow/showcase", {
 					name: "size",
 					type: "buttons",
 					label: "サイズ",
-					values: ["small", "medium", "large"],
+					values: { isSizeSmall: "small", isSizeMedium: "medium", isSizeLarge: "large" },
 				},
+				"hasMargin",
+				"hasPadding",
+				"itemGap",
 				{ name: "link", label: "リンク", values: "hasLink" },
 				{
 					name: "template",
@@ -222,7 +225,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 			attributes.EditMode = false;
 		}
 
-		const blockProps = useBlockProps({ className: classes });
+		const blockProps = useBlockProps({ className: classes, style: vars });
 
 		return (
 			<>
@@ -301,7 +304,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 	},
 	save({ attributes, className }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { items = [], classes = "", TitleTag, countPrefix, countSuffix, doLoop } = attributes;
+		const { items = [], classes = "", vars, TitleTag, countPrefix, countSuffix, doLoop } = attributes;
 		var classArray = _.uniq(classes.split(" "));
 
 		const states = CP.classNamesToFlags(classes);
@@ -338,7 +341,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 		});
 		return (
 			<>
-				<ul {...useBlockProps.save({ className: classes })}>{rtn}</ul>
+				<ul {...useBlockProps.save({ className: classes, style: vars })}>{rtn}</ul>
 				{doLoop && (
 					<on-empty>
 						<InnerBlocks.Content />

@@ -1,6 +1,7 @@
 <?php
 $attributes=[
 	"classes"=>["source"=>'attribute',"selector"=>'.wp-block-catpow-showcase',"attribute"=>'class',"default"=>'wp-block-catpow-showcase　medium hasTitleCaption hasCounter hasLink'],
+	'vars'=>['type'=>'object'],
 	
 	'TitleTag'=>['type'=>'string','default'=>'h3'],
 	

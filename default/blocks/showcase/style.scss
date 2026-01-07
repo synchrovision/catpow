@@ -1,10 +1,11 @@
 @import "admin_style_config.scss";
 
 .wp-block-catpow-showcase{
-	@include bnd((w:a 1200,mg:a,pd:40 0));
+	@include bnd((w:a 1200,mgi:a));
+	@include flx((w:w,g:g));
 	@include txt((l:n,c:tx));
 	>.item{
-		@include bnd((pd:32 16));
+		@include bnd((pd:32 16,f:1 1 f));
 		>.image{
 			@include bnd((f:10 10 300,mgt:20));
 			@include bdr((s:s,w:8,c:b));
@@ -17,18 +18,19 @@
 			@include bnd((p:r,f:1 1 300,pd:32,z:1));
 			@include bg((c:bx));
 			@include bdr((r:20));
-			@include shd((b:8));
+			@include shd((b:4));
 			>.counter{
-				@include bnd((w:fit,h:1em,pd:.5em,mg:-2em a 1em));
-				@include bdr((s:s,w:3,r:2em));
-				@include bg((c:bx));
-				@include txt((a:c,p:2em,h:1em,c:mx,w:b,f:d,b:k));
-				@include shd((b:4));
+				@include bnd((w:fit,h:1em,pd:.5em 1em,mg:-2em a 1em));
+				@include bdr((r:2em));
+				@include bg((c:m));
+				@include txt((a:c,p:1.5em,h:1em,t:.05em,c:i,w:b,f:d,b:k));
+				@include shd((b:2));
 				>.number{
-					@include txt((p:1.5em));
+					@include txt((p:1.25em));
 				}
 			}
 			>.title{
+				@include bnd((mg:0,pd:0));
 				@include txt((p:2em,c:mx,b:k));
 			}
 			>.titleCaption{

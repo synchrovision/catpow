@@ -45,7 +45,7 @@
       const { useState, useMemo } = wp.element;
       const { BlockControls, InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
-      const { items = [], classes, TitleTag, countPrefix, countSuffix, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+      const { items = [], classes, vars, TitleTag, countPrefix, countSuffix, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
       const primaryClass = "wp-block-catpow-showcase";
       var classArray = _.uniq((className + " " + classes).split(" "));
       const states = CP.classNamesToFlags(classes);
@@ -83,8 +83,11 @@
             name: "size",
             type: "buttons",
             label: "\u30B5\u30A4\u30BA",
-            values: ["small", "medium", "large"]
+            values: { isSizeSmall: "small", isSizeMedium: "medium", isSizeLarge: "large" }
           },
+          "hasMargin",
+          "hasPadding",
+          "itemGap",
           { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" },
           {
             name: "template",
@@ -209,7 +212,7 @@
       if (attributes.EditMode === void 0) {
         attributes.EditMode = false;
       }
-      const blockProps = useBlockProps({ className: classes });
+      const blockProps = useBlockProps({ className: classes, style: vars });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
         ToolbarGroup,
         {
@@ -257,7 +260,7 @@
     },
     save({ attributes, className }) {
       const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-      const { items = [], classes = "", TitleTag, countPrefix, countSuffix, doLoop } = attributes;
+      const { items = [], classes = "", vars, TitleTag, countPrefix, countSuffix, doLoop } = attributes;
       var classArray = _.uniq(classes.split(" "));
       const states = CP.classNamesToFlags(classes);
       const { imageKeys, linkKeys } = CP.config.showcase;
@@ -267,7 +270,7 @@
           /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attr: attributes, keys: imageKeys.image, index, isTemplate: states.isTemplate })), /* @__PURE__ */ wp.element.createElement("div", { className: "texts" }, states.hasCounter && /* @__PURE__ */ wp.element.createElement("div", { className: "counter" }, countPrefix && /* @__PURE__ */ wp.element.createElement("span", { className: "prefix" }, countPrefix), /* @__PURE__ */ wp.element.createElement("span", { className: "number" }, index + 1), countSuffix && /* @__PURE__ */ wp.element.createElement("span", { className: "suffix" }, countSuffix)), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: TitleTag, className: "title", value: item.title }), states.hasTitleCaption && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "titleCaption", value: item.titleCaption }), /* @__PURE__ */ wp.element.createElement("div", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })), states.hasLink && /* @__PURE__ */ wp.element.createElement(CP.Link, { className: "link", attr: attributes, keys: linkKeys.link, index, ...CP.extractEventDispatcherAttributes("catpow/banners", item) }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.linkText }))))
         );
       });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { ...useBlockProps.save({ className: classes }) }, rtn), doLoop && /* @__PURE__ */ wp.element.createElement("on-empty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { ...useBlockProps.save({ className: classes, style: vars }) }, rtn), doLoop && /* @__PURE__ */ wp.element.createElement("on-empty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }
   });
 })();
