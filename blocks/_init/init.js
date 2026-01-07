@@ -75,6 +75,16 @@
     }
   });
 
+  // react-global:react-dom
+  var react_dom_default, createPortal, flushSync;
+  var init_react_dom = __esm({
+    "react-global:react-dom"() {
+      react_dom_default = window.wp.element;
+      createPortal = wp.element.createPortal;
+      flushSync = wp.element.flushSync;
+    }
+  });
+
   // node_modules/tslib/tslib.es6.js
   var tslib_es6_exports = {};
   __export(tslib_es6_exports, {
@@ -789,16 +799,6 @@
     }
   });
 
-  // react-global:react-dom
-  var react_dom_default, createPortal, flushSync;
-  var init_react_dom = __esm({
-    "react-global:react-dom"() {
-      react_dom_default = window.wp.element;
-      createPortal = wp.element.createPortal;
-      flushSync = wp.element.flushSync;
-    }
-  });
-
   // ../blocks/_init/init/CP/index.js
   var CP_exports = {};
   __export(CP_exports, {
@@ -1446,8 +1446,21 @@
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-doing-action": !!action }), style, ref, onMouseDown, onMouseMove, onMouseUp, onDoubleClick }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.controls() }, controls.map((props2, i) => /* @__PURE__ */ wp.element.createElement("span", { className: classes.controls.control(props2.className), "data-control-action": props2.action, "data-control-flags": props2.flags, key: i }))));
   };
 
-  // node_modules-included/catpow/src/component/Input/PositionInput.jsx
-  init_react();
+  // node_modules/clsx/dist/clsx.mjs
+  function r(e) {
+    var t, f, n = "";
+    if ("string" == typeof e || "number" == typeof e) n += e;
+    else if ("object" == typeof e) if (Array.isArray(e)) {
+      var o = e.length;
+      for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
+    } else for (f in e) e[f] && (n && (n += " "), n += f);
+    return n;
+  }
+  function clsx() {
+    for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
+    return n;
+  }
+  var clsx_default = clsx;
 
   // node_modules/react-use/esm/misc/util.js
   var noop = function() {
@@ -1599,6 +1612,9 @@
   };
   var useScratch_default = useScratch;
 
+  // node_modules-included/catpow/src/component/Input/PositionInput.jsx
+  init_react();
+
   // node_modules-included/catpow/src/component/Bem.jsx
   init_react();
   var applyBem = (component, { ...ctx }) => {
@@ -1733,22 +1749,6 @@
       grid > 0 && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, Array.from({ length: Math.floor(width / grid) }, (_2, i) => /* @__PURE__ */ wp.element.createElement("line", { key: i, stroke: "currentColor", strokeOpacity: 0.1, className: "_grid", x1: i * grid + margin, y1: margin, x2: i * grid + margin, y2: height + margin })), Array.from({ length: Math.floor(height / grid) }, (_2, i) => /* @__PURE__ */ wp.element.createElement("line", { key: i, stroke: "currentColor", strokeOpacity: 0.1, className: "_grid", x1: margin, y1: i * grid + margin, x2: width + margin, y2: i * grid + margin })), /* @__PURE__ */ wp.element.createElement("line", { stroke: "currentColor", strokeOpacity: 0.2, className: "_grid is-center", x1: width / 2 + margin, y1: margin, x2: width / 2 + margin, y2: height + margin }), /* @__PURE__ */ wp.element.createElement("line", { stroke: "currentColor", strokeOpacity: 0.2, className: "_grid is-center", x1: margin, y1: height / 2 + margin, x2: width + margin, y2: height / 2 + margin }))
     ));
   };
-
-  // node_modules/clsx/dist/clsx.mjs
-  function r(e) {
-    var t, f, n = "";
-    if ("string" == typeof e || "number" == typeof e) n += e;
-    else if ("object" == typeof e) if (Array.isArray(e)) {
-      var o = e.length;
-      for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
-    } else for (f in e) e[f] && (n && (n += " "), n += f);
-    return n;
-  }
-  function clsx() {
-    for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
-    return n;
-  }
-  var clsx_default = clsx;
 
   // node_modules-included/catpow/src/component/Portal.jsx
   init_react();
@@ -2391,6 +2391,9 @@
     baseGradientColor1: { minimum: 1, maximum: 12 },
     baseGradientColor2: { minimum: 1, maximum: 12 }
   };
+  var alphaParams = {
+    alpha: { steps: { 6: 1, 10: 2, 60: 5, 100: 10 } }
+  };
   var getBaseGradientCode = (params) => {
     const { useAccentColor = true, baseGradientRotate = 0, baseGradientColor1 = 6, baseGradientColor2 = 7 } = params;
     const colorKey = useAccentColor ? "sx" : "bx";
@@ -2461,7 +2464,7 @@
         r: { minimum: 0, maximum: 180, multipleOf: 5 },
         w1: { minimum: 1, maximum: 100 },
         w2: { minimum: 1, maximum: 100 },
-        alpha: { minimum: 0, maximum: 100, multipleOf: 10 }
+        ...alphaParams
       },
       getData(params = {}) {
         const { r: r2 = 0, w1 = 10, w2 = 10, alpha = 50 } = params;
@@ -2482,7 +2485,7 @@
         y: { minimum: -100, maximum: 200, multipleOf: 10 },
         w1: { minimum: 1, maximum: 100 },
         w2: { minimum: 1, maximum: 100 },
-        alpha: { minimum: 0, maximum: 100, multipleOf: 10 }
+        ...alphaParams
       },
       getData(params = {}) {
         const { x = 50, y = 50, w1 = 10, w2 = 10, alpha = 50 } = params;
@@ -2502,7 +2505,7 @@
         r1: { minimum: 0, maximum: 180, multipleOf: 5 },
         r2: { minimum: 0, maximum: 180, multipleOf: 5 },
         w: { minimum: 5, maximum: 200 },
-        alpha: { minimum: 0, maximum: 100, multipleOf: 10 }
+        ...alphaParams
       },
       getData(params = {}) {
         const { r1 = 45, r2 = 135, w = 20, alpha = 50 } = params;
@@ -2523,7 +2526,7 @@
         ...baseGradientParams,
         w: { minimum: 5, maximum: 200 },
         h: { minimum: 5, maximum: 200 },
-        alpha: { minimum: 0, maximum: 100, multipleOf: 10 }
+        ...alphaParams
       },
       getData(params = {}) {
         const { w = 50, h = 50, alpha = 25 } = params;
@@ -2545,7 +2548,7 @@
         ...baseGradientParams,
         a: { minimum: 1, maximum: 10 },
         w: { minimum: 5, maximum: 200 },
-        alpha: { minimum: 0, maximum: 100, multipleOf: 10 },
+        ...alphaParams,
         seed: { minimum: 1, maximum: 100 }
       },
       getData(params = {}) {
@@ -2570,7 +2573,7 @@
     wp.hooks.applyFilters("catpow.blocks.backgroundImageDataGenerators", BackgroundImageDataGenerators);
   });
   var InputBackgroundImage = (props) => {
-    const { title = "BackgroundImage", attr, set, keys = {}, prefix = "--cp-background-image" } = props;
+    const { title = "BackgroundImage", attr = {}, set, keys = {}, prefix = "--cp-background-image" } = props;
     fillValueKeys(keys, prefix);
     const [data, setData] = useState2(extractData(attr, keys));
     const schema = useMemo2(() => {

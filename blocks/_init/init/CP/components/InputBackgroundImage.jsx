@@ -55,6 +55,9 @@ const baseGradientParams = {
 	baseGradientColor1: { minimum: 1, maximum: 12 },
 	baseGradientColor2: { minimum: 1, maximum: 12 },
 };
+const alphaParams = {
+	alpha: { steps: { 6: 1, 10: 2, 60: 5, 100: 10 } },
+};
 const getBaseGradientCode = (params) => {
 	const { useAccentColor = true, baseGradientRotate = 0, baseGradientColor1 = 6, baseGradientColor2 = 7 } = params;
 	const colorKey = useAccentColor ? "sx" : "bx";
@@ -126,7 +129,7 @@ const BackgroundImageDataGenerators = {
 			r: { minimum: 0, maximum: 180, multipleOf: 5 },
 			w1: { minimum: 1, maximum: 100 },
 			w2: { minimum: 1, maximum: 100 },
-			alpha: { minimum: 0, maximum: 100, multipleOf: 10 },
+			...alphaParams,
 		},
 		getData(params = {}) {
 			const { r = 0, w1 = 10, w2 = 10, alpha = 50 } = params;
@@ -147,7 +150,7 @@ const BackgroundImageDataGenerators = {
 			y: { minimum: -100, maximum: 200, multipleOf: 10 },
 			w1: { minimum: 1, maximum: 100 },
 			w2: { minimum: 1, maximum: 100 },
-			alpha: { minimum: 0, maximum: 100, multipleOf: 10 },
+			...alphaParams,
 		},
 		getData(params = {}) {
 			const { x = 50, y = 50, w1 = 10, w2 = 10, alpha = 50 } = params;
@@ -167,7 +170,7 @@ const BackgroundImageDataGenerators = {
 			r1: { minimum: 0, maximum: 180, multipleOf: 5 },
 			r2: { minimum: 0, maximum: 180, multipleOf: 5 },
 			w: { minimum: 5, maximum: 200 },
-			alpha: { minimum: 0, maximum: 100, multipleOf: 10 },
+			...alphaParams,
 		},
 		getData(params = {}) {
 			const { r1 = 45, r2 = 135, w = 20, alpha = 50 } = params;
@@ -189,7 +192,7 @@ const BackgroundImageDataGenerators = {
 			...baseGradientParams,
 			w: { minimum: 5, maximum: 200 },
 			h: { minimum: 5, maximum: 200 },
-			alpha: { minimum: 0, maximum: 100, multipleOf: 10 },
+			...alphaParams,
 		},
 		getData(params = {}) {
 			const { w = 50, h = 50, alpha = 25 } = params;
@@ -213,7 +216,7 @@ const BackgroundImageDataGenerators = {
 			...baseGradientParams,
 			a: { minimum: 1, maximum: 10 },
 			w: { minimum: 5, maximum: 200 },
-			alpha: { minimum: 0, maximum: 100, multipleOf: 10 },
+			...alphaParams,
 			seed: { minimum: 1, maximum: 100 },
 		},
 		getData(params = {}) {
@@ -242,7 +245,7 @@ wp.domReady(() => {
 });
 
 export const InputBackgroundImage = (props) => {
-	const { title = "BackgroundImage", attr, set, keys = {}, prefix = "--cp-background-image" } = props;
+	const { title = "BackgroundImage", attr = {}, set, keys = {}, prefix = "--cp-background-image" } = props;
 	fillValueKeys(keys, prefix);
 	const [data, setData] = useState(extractData(attr, keys));
 
