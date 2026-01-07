@@ -110,6 +110,7 @@
 						],
 					},
 				},
+				"hasMargin",
 				"color",
 			];
 			wp.hooks.applyFilters("catpow.blocks.simpletable.selectiveClasses", CP.finderProxy(selectiveClasses));
