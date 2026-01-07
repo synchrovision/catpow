@@ -86,19 +86,6 @@ PlacedPictures.Edit = (props) => {
 		[currentItemIndexes, setCurrentItemIndexes]
 	);
 
-	const updatePictures = useCallback(
-		(pictures) => {
-			if (keys.items) {
-				const items = attr[keys.iteems];
-				items[index][keys.pictures] = [...pictures];
-				set({ [keys.items]: [...items] });
-			} else {
-				set({ [keys.pictures]: [...pictures] });
-			}
-		},
-		[attr, set, keys, index]
-	);
-
 	const save = useCallback(() => {
 		if (keys.items) {
 			items[index][keys.pictures] = JSON.parse(JSON.stringify(pictures));
@@ -107,6 +94,15 @@ PlacedPictures.Edit = (props) => {
 			set({ [keys.pictures]: JSON.parse(JSON.stringify(pictures)) });
 		}
 	}, [set, pictures]);
+
+	useEffect(() => {
+		set({
+			lock: {
+				move: editMode,
+				remove: false,
+			},
+		});
+	}, [editMode]);
 
 	return (
 		<div className={classes({ "is-edit-mode": editMode })} ref={setContainerNode}>

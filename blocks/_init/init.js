@@ -4648,18 +4648,6 @@
       },
       [currentItemIndexes, setCurrentItemIndexes]
     );
-    const updatePictures = useCallback3(
-      (pictures2) => {
-        if (keys.items) {
-          const items2 = attr[keys.iteems];
-          items2[index][keys.pictures] = [...pictures2];
-          set({ [keys.items]: [...items2] });
-        } else {
-          set({ [keys.pictures]: [...pictures2] });
-        }
-      },
-      [attr, set, keys, index]
-    );
     const save = useCallback3(() => {
       if (keys.items) {
         items[index][keys.pictures] = JSON.parse(JSON.stringify(pictures));
@@ -4668,6 +4656,14 @@
         set({ [keys.pictures]: JSON.parse(JSON.stringify(pictures)) });
       }
     }, [set, pictures]);
+    useEffect4(() => {
+      set({
+        lock: {
+          move: editMode,
+          remove: false
+        }
+      });
+    }, [editMode]);
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-edit-mode": editMode }), ref: setContainerNode }, /* @__PURE__ */ wp.element.createElement(BlockControls2, null, /* @__PURE__ */ wp.element.createElement(ToolbarButton, { icon: "images-alt", label: "edit decoration", isActive: editMode, onClick: () => setEditMode(!editMode) }), editMode && /* @__PURE__ */ wp.element.createElement(
       ToolbarButton,
       {
