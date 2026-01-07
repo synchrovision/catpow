@@ -333,6 +333,22 @@
   // ../components/JsonEditor/component/inputComponents/Range.jsx
   init_react();
 
+  // node_modules/clsx/dist/clsx.mjs
+  function r(e) {
+    var t, f, n = "";
+    if ("string" == typeof e || "number" == typeof e) n += e;
+    else if ("object" == typeof e) if (Array.isArray(e)) {
+      var o = e.length;
+      for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
+    } else for (f in e) e[f] && (n && (n += " "), n += f);
+    return n;
+  }
+  function clsx() {
+    for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
+    return n;
+  }
+  var clsx_default = clsx;
+
   // node_modules-included/catpow/src/component/Bem.jsx
   init_react();
   var applyBem = (component, { ...ctx }) => {
@@ -399,38 +415,28 @@
     }
   };
   var Bem = ({ prefix = "cp", block, element, children }) => {
+    if (element == null && block != null) {
+      element = block;
+    }
+    if (block == null && element != null) {
+      block = element.split("__")[0];
+    }
     const ctx = { prefix, block, element };
     applyBem(children, ctx);
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, children);
   };
 
-  // node_modules/clsx/dist/clsx.mjs
-  function r(e) {
-    var t, f, n = "";
-    if ("string" == typeof e || "number" == typeof e) n += e;
-    else if ("object" == typeof e) if (Array.isArray(e)) {
-      var o = e.length;
-      for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
-    } else for (f in e) e[f] && (n && (n += " "), n += f);
-    return n;
-  }
-  function clsx() {
-    for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
-    return n;
-  }
-  var clsx_default = clsx;
-
   // ../components/JsonEditor/component/inputComponents/Range.jsx
   var Range = (props) => {
     const { className = "cp-jsoneditor-input-range", agent, onChange, onUpdate } = props;
-    const { minimum: min, maximum: max, multipleOf: step } = agent.getMergedSchemaForInput();
-    const onUpdateHandle = useCallback(
-      (e) => {
-        onUpdate(parseFloat(e.currentTarget.value));
+    const { minimum: min, maximum: max, multipleOf: step = 1, steps } = agent.getMergedSchemaForInput();
+    const onChangeHandle = useCallback(
+      ({ value }) => {
+        onUpdate(value);
       },
       [onUpdate]
     );
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("input", { className: "_range", type: "range", value: agent.getValue(), min, max, step, onChange: onUpdateHandle }), /* @__PURE__ */ wp.element.createElement("input", { className: "_input", type: "number", value: agent.getValue(), min, max, step, onChange: onUpdateHandle })));
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement(Catpow.RangeInput, { value: agent.getValue(), steps: steps || { [min]: 0, [max]: step }, snap: true, onChange: onChangeHandle }));
   };
 
   // ../components/JsonEditor/component/inputComponents/Number.jsx
@@ -604,7 +610,7 @@
       return Textarea;
     }
     if (schema.type === "integer" || schema.type === "number") {
-      if (schema.hasOwnProperty("minimum") && schema.hasOwnProperty("maximum")) {
+      if (schema.hasOwnProperty("minimum") && schema.hasOwnProperty("maximum") || schema.hasOwnProperty("steps")) {
         return Range;
       }
       return Number;

@@ -62,7 +62,7 @@ export const getInputComponentForSchema = (schema, params) => {
 		return inputComponents.Textarea;
 	}
 	if (schema.type === "integer" || schema.type === "number") {
-		if (schema.hasOwnProperty("minimum") && schema.hasOwnProperty("maximum")) {
+		if ((schema.hasOwnProperty("minimum") && schema.hasOwnProperty("maximum")) || schema.hasOwnProperty("steps")) {
 			return inputComponents.Range;
 		}
 		return inputComponents.Number;

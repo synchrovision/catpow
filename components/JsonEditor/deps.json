@@ -8,6 +8,7 @@
 		"CheckBox",
 		"CheckBoxes",
 		"RadioButtons",
+		"RangeInput",
 		"SelectBox",
 		"SearchSelect",
 		"StepSelect",

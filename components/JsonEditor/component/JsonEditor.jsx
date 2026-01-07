@@ -1,4 +1,4 @@
-﻿import { useState, useCallback, useMemo, useEffect} from "react";
+﻿import { useState, useCallback, useMemo, useEffect } from "react";
 
 import { ObjectInput } from "./inputComponents/ObjectInput.jsx";
 import { Input } from "./inputComponents/Input.jsx";
