@@ -22,26 +22,7 @@ wp.blocks.registerBlockType("catpow/section", {
 		const { PanelBody, TextareaControl, TextControl } = wp.components;
 		const { attributes, setAttributes } = props;
 		const { useMemo, useState } = wp.element;
-		const {
-			SectionTag,
-			HeadingTag,
-			color,
-			anchor,
-			classes,
-			bodyClasses,
-			headerClasses,
-			titleClasses,
-			vars,
-			clipVars,
-			headerVars,
-			prefix,
-			title,
-			lead,
-			titleImageCode,
-			headerImageCode,
-			frameImageCss,
-			borderImageCss,
-		} = attributes;
+		const { SectionTag, HeadingTag, color, anchor, classes, bodyClasses, headerClasses, titleClasses, vars, clipVars, headerVars, prefix, title, lead, titleImageCode, headerImageCode } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, imageSizes } = CP.config.section;
@@ -153,13 +134,6 @@ wp.blocks.registerBlockType("catpow/section", {
 								label: __("メニューアイコン", "catpow"),
 								values: "hasNavIcon",
 								sub: [{ input: "image", label: __("アイコン", "catpow"), keys: imageKeys.navIcon, size: "thumbnail" }],
-							},
-							{ name: "frameImage", label: __("フレーム画像", "catpow"), values: "hasFrameImage", sub: [{ input: "frame", css: "frameImageCss", sel: ({ attr }) => `#${attr.anchor}`, color }] },
-							{
-								name: "borderImage",
-								label: __("ボーダー画像", "catpow"),
-								values: "hasBorderImage",
-								sub: [{ input: "border", css: "borderImageCss", sel: ({ attr }) => `#${attr.anchor} > .contents`, color }],
 							},
 							{ name: "decoration", label: __("デコレーション", "catpow"), values: "hasDecoration" },
 							{ preset: "clipPath", vars: "clipVars" },
@@ -294,8 +268,6 @@ wp.blocks.registerBlockType("catpow/section", {
 								<InnerBlocks />
 							</div>
 						</div>
-						{states.hasBorderImage && <style>{borderImageCss}</style>}
-						{states.hasFrameImage && <style>{frameImageCss}</style>}
 					</SectionTag>
 				</CP.Bem>
 				<InspectorControls>
@@ -320,26 +292,7 @@ wp.blocks.registerBlockType("catpow/section", {
 	},
 	save({ attributes }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const {
-			SectionTag,
-			HeadingTag,
-			anchor,
-			navIcon,
-			classes,
-			bodyClasses,
-			headerClasses,
-			titleClasses,
-			vars,
-			clipVars,
-			headerVars,
-			prefix,
-			title,
-			lead,
-			titleImageCode,
-			headerImageCode,
-			frameImageCss,
-			borderImageCss,
-		} = attributes;
+		const { SectionTag, HeadingTag, anchor, navIcon, classes, bodyClasses, headerClasses, titleClasses, vars, clipVars, headerVars, prefix, title, lead, titleImageCode, headerImageCode } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, imageSizes } = CP.config.section;
@@ -386,8 +339,6 @@ wp.blocks.registerBlockType("catpow/section", {
 							<InnerBlocks.Content />
 						</div>
 					</div>
-					{states.hasBorderImage && <style className="borderImageCss">{borderImageCss}</style>}
-					{states.hasFrameImage && <style className="frameImageCss">{frameImageCss}</style>}
 				</SectionTag>
 			</CP.Bem>
 		);
