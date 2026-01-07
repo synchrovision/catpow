@@ -2394,6 +2394,8 @@
   var alphaParams = {
     alpha: { steps: { 6: 1, 10: 2, 60: 5, 100: 10 } }
   };
+  var rParam = { minimum: 0, maximum: 180, multipleOf: 5 };
+  var wParam = { steps: { 1: 0, 10: 1, 20: 2, 50: 5, 100: 10, 200: 20 } };
   var getBaseGradientCode = (params) => {
     const { useAccentColor = true, baseGradientRotate = 0, baseGradientColor1 = 6, baseGradientColor2 = 7 } = params;
     const colorKey = useAccentColor ? "sx" : "bx";
@@ -2461,9 +2463,9 @@
       label: __("\u30B9\u30C8\u30E9\u30A4\u30D7", "catpow"),
       params: {
         ...baseGradientParams,
-        r: { minimum: 0, maximum: 180, multipleOf: 5 },
-        w1: { minimum: 1, maximum: 100 },
-        w2: { minimum: 1, maximum: 100 },
+        r: rParam,
+        w1: wParam,
+        w2: wParam,
         ...alphaParams
       },
       getData(params = {}) {
@@ -2483,8 +2485,8 @@
         ...baseGradientParams,
         x: { minimum: -100, maximum: 200, multipleOf: 10 },
         y: { minimum: -100, maximum: 200, multipleOf: 10 },
-        w1: { minimum: 1, maximum: 100 },
-        w2: { minimum: 1, maximum: 100 },
+        w1: wParam,
+        w2: wParam,
         ...alphaParams
       },
       getData(params = {}) {
@@ -2502,9 +2504,9 @@
       label: __("\u30C1\u30A7\u30C3\u30AF", "catpow"),
       params: {
         ...baseGradientParams,
-        r1: { minimum: 0, maximum: 180, multipleOf: 5 },
-        r2: { minimum: 0, maximum: 180, multipleOf: 5 },
-        w: { minimum: 5, maximum: 200 },
+        r1: rParam,
+        r2: rParam,
+        w: wParam,
         ...alphaParams
       },
       getData(params = {}) {
@@ -2524,8 +2526,8 @@
       label: __("\u30A8\u30A2", "catpow"),
       params: {
         ...baseGradientParams,
-        w: { minimum: 5, maximum: 200 },
-        h: { minimum: 5, maximum: 200 },
+        w: wParam,
+        h: wParam,
         ...alphaParams
       },
       getData(params = {}) {
@@ -2547,7 +2549,7 @@
       params: {
         ...baseGradientParams,
         a: { minimum: 1, maximum: 10 },
-        w: { minimum: 5, maximum: 200 },
+        w: wParam,
         ...alphaParams,
         seed: { minimum: 1, maximum: 100 }
       },

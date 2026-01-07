@@ -58,6 +58,8 @@ const baseGradientParams = {
 const alphaParams = {
 	alpha: { steps: { 6: 1, 10: 2, 60: 5, 100: 10 } },
 };
+const rParam = { minimum: 0, maximum: 180, multipleOf: 5 };
+const wParam = { steps: { 1: 0, 10: 1, 20: 2, 50: 5, 100: 10, 200: 20 } };
 const getBaseGradientCode = (params) => {
 	const { useAccentColor = true, baseGradientRotate = 0, baseGradientColor1 = 6, baseGradientColor2 = 7 } = params;
 	const colorKey = useAccentColor ? "sx" : "bx";
@@ -126,9 +128,9 @@ const BackgroundImageDataGenerators = {
 		label: __("ストライプ", "catpow"),
 		params: {
 			...baseGradientParams,
-			r: { minimum: 0, maximum: 180, multipleOf: 5 },
-			w1: { minimum: 1, maximum: 100 },
-			w2: { minimum: 1, maximum: 100 },
+			r: rParam,
+			w1: wParam,
+			w2: wParam,
 			...alphaParams,
 		},
 		getData(params = {}) {
@@ -148,8 +150,8 @@ const BackgroundImageDataGenerators = {
 			...baseGradientParams,
 			x: { minimum: -100, maximum: 200, multipleOf: 10 },
 			y: { minimum: -100, maximum: 200, multipleOf: 10 },
-			w1: { minimum: 1, maximum: 100 },
-			w2: { minimum: 1, maximum: 100 },
+			w1: wParam,
+			w2: wParam,
 			...alphaParams,
 		},
 		getData(params = {}) {
@@ -167,9 +169,9 @@ const BackgroundImageDataGenerators = {
 		label: __("チェック", "catpow"),
 		params: {
 			...baseGradientParams,
-			r1: { minimum: 0, maximum: 180, multipleOf: 5 },
-			r2: { minimum: 0, maximum: 180, multipleOf: 5 },
-			w: { minimum: 5, maximum: 200 },
+			r1: rParam,
+			r2: rParam,
+			w: wParam,
 			...alphaParams,
 		},
 		getData(params = {}) {
@@ -190,8 +192,8 @@ const BackgroundImageDataGenerators = {
 		label: __("エア", "catpow"),
 		params: {
 			...baseGradientParams,
-			w: { minimum: 5, maximum: 200 },
-			h: { minimum: 5, maximum: 200 },
+			w: wParam,
+			h: wParam,
 			...alphaParams,
 		},
 		getData(params = {}) {
@@ -215,7 +217,7 @@ const BackgroundImageDataGenerators = {
 		params: {
 			...baseGradientParams,
 			a: { minimum: 1, maximum: 10 },
-			w: { minimum: 5, maximum: 200 },
+			w: wParam,
 			...alphaParams,
 			seed: { minimum: 1, maximum: 100 },
 		},
