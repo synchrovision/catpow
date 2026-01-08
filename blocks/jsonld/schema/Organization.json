@@ -5,6 +5,7 @@
 	"url": "https://developers.google.com/search/docs/appearance/structured-data/organization",
 	"items": [
 		{ "name": "name", "label": "名称", "input": "text" },
+		{ "name": "logo", "label": "ロゴ", "input": "url" },
 		{ "name": "description", "label": "詳細説明", "input": "textarea" },
 		{ "name": "url", "label": "URL", "input": "url" },
 		{ "name": "email", "label": "メール", "input": "email" },
