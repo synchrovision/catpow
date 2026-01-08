@@ -29,7 +29,7 @@
       const selectiveClasses = useMemo(() => {
         const { devices: devices2, imageKeys: imageKeys2, imageSizes: imageSizes2 } = CP.config.section;
         const selectiveClasses2 = [
-          { name: "sectionTag", input: "buttons", key: "SectionTag", label: __("\u30BB\u30AF\u30B7\u30E7\u30F3\u30BF\u30B0", "catpow"), values: ["article", "section", "aside", "div"] },
+          { name: "sectionTag", input: "buttons", key: "SectionTag", label: __("\u30BB\u30AF\u30B7\u30E7\u30F3\u30BF\u30B0", "catpow"), values: ["article", "section", "aside", "div"], required: true },
           {
             name: "headingTag",
             input: "buttons",
@@ -46,13 +46,15 @@
                 states2["isLevel" + val[1]] = true;
               }
               set({ classes: CP.flagsToClassNames(states2) });
-            }
+            },
+            required: true
           },
           {
             name: "type",
             label: __("\u30BF\u30A4\u30D7", "catpow"),
             type: "gridbuttons",
             values: { isTypeScene: "scene", isTypeArticle: "aticle", isTypeColumn: "column" },
+            required: true,
             sub: {
               isTypeScene: [
                 {

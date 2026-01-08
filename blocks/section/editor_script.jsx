@@ -31,7 +31,7 @@ wp.blocks.registerBlockType("catpow/section", {
 		const selectiveClasses = useMemo(() => {
 			const { devices, imageKeys, imageSizes } = CP.config.section;
 			const selectiveClasses = [
-				{ name: "sectionTag", input: "buttons", key: "SectionTag", label: __("セクションタグ", "catpow"), values: ["article", "section", "aside", "div"] },
+				{ name: "sectionTag", input: "buttons", key: "SectionTag", label: __("セクションタグ", "catpow"), values: ["article", "section", "aside", "div"], required: true },
 				{
 					name: "headingTag",
 					input: "buttons",
@@ -49,12 +49,14 @@ wp.blocks.registerBlockType("catpow/section", {
 						}
 						set({ classes: CP.flagsToClassNames(states) });
 					},
+					required: true,
 				},
 				{
 					name: "type",
 					label: __("タイプ", "catpow"),
 					type: "gridbuttons",
 					values: { isTypeScene: "scene", isTypeArticle: "aticle", isTypeColumn: "column" },
+					required: true,
 					sub: {
 						isTypeScene: [
 							{
