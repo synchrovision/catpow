@@ -728,19 +728,19 @@ export const SelectClassPanelBlock = ({ prm }) => {
 
 				switch (prm.type) {
 					case "radio": {
-						rtn.push(<RadioControl label={prm.label} onChange={onChangeCB} selected={currentClass} options={options} />);
+						rtn.push(<RadioControl label={prm.label} onChange={onChangeCB} selected={currentClass} options={options} required={prm.required} />);
 						break;
 					}
 					case "buttons": {
-						rtn.push(<CP.SelectButtons label={prm.label} onChange={onChangeCB} selected={currentClass} options={options} />);
+						rtn.push(<CP.SelectButtons label={prm.label} onChange={onChangeCB} selected={currentClass} options={options} required={prm.required} />);
 						break;
 					}
 					case "gridbuttons": {
-						rtn.push(<CP.SelectGridButtons label={prm.label} onChange={onChangeCB} selected={currentClass} options={options} />);
+						rtn.push(<CP.SelectGridButtons label={prm.label} onChange={onChangeCB} selected={currentClass} options={options} required={prm.required} />);
 						break;
 					}
 					default: {
-						rtn.push(<SelectControl label={prm.label} onChange={onChangeCB} value={currentClass} options={options} />);
+						rtn.push(<SelectControl label={prm.label} onChange={onChangeCB} value={currentClass} options={options} required={prm.required} />);
 					}
 				}
 

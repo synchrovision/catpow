@@ -7,7 +7,12 @@
 					{props.options.map((option) => {
 						const [, icon, label] = option.label.match(/^(?::([\w\-]+):)?(.*)$/u);
 						return (
-							<Button icon={icon} onClick={() => props.onChange(option.value)} isPrimary={props.selected === option.value} key={option.value}>
+							<Button
+								icon={icon}
+								onClick={() => props.onChange(props.selected === option.value && !props.required ? null : option.value)}
+								isPrimary={props.selected === option.value}
+								key={option.value}
+							>
 								{label}
 							</Button>
 						);

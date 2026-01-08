@@ -13,16 +13,16 @@
 
 	switch (type) {
 		case "radio": {
-			return <RadioControl label={param.label || null} onChange={onChange} selected={value} options={options} />;
+			return <RadioControl label={param.label || null} onChange={onChange} selected={value} options={options} required={param.required} />;
 		}
 		case "select": {
-			return <SelectControl label={param.label || null} onChange={onChange} value={value} options={options} />;
+			return <SelectControl label={param.label || null} onChange={onChange} value={value} options={options} required={param.required} />;
 		}
 		case "buttons": {
-			return <CP.SelectButtons label={param.label || null} onChange={onChange} selected={value} options={options} />;
+			return <CP.SelectButtons label={param.label || null} onChange={onChange} selected={value} options={options} required={param.required} />;
 		}
 		case "gridbuttons": {
-			return <CP.SelectGridButtons label={param.label || null} onChange={onChange} selected={value} options={options} />;
+			return <CP.SelectGridButtons label={param.label || null} onChange={onChange} selected={value} options={options} required={param.required} />;
 		}
 		case "range": {
 			if (!param.coef) {
@@ -47,10 +47,10 @@
 			return <CP.DataInputTable label={param.label || null} cols={param.cols} value={value} onChange={onChange} />;
 		}
 		case "textarea": {
-			return <TextareaControl label={param.label || null} value={value} onChange={onChange} />;
+			return <TextareaControl label={param.label || null} value={value} onChange={onChange} required={param.required} />;
 		}
 		default: {
-			return <TextControl label={param.label || null} type={param.type} value={value} onChange={onChange} list={param.list && CP.getDataListId(param.list, param.values)} />;
+			return <TextControl label={param.label || null} type={param.type} value={value} onChange={onChange} list={param.list && CP.getDataListId(param.list, param.values)} required={param.required} />;
 		}
 	}
 };

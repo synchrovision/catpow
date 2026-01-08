@@ -122,6 +122,7 @@ export const selectiveClassesPresets = {
 		name: "textAlign",
 		type: "buttons",
 		label: __("テキスト揃え", "catpow"),
+		required: true,
 		values: {
 			hasTextAlignLeft: __("左揃え", "catpow"),
 			hasTextAlignCenter: __("中央", "catpow"),
@@ -132,6 +133,7 @@ export const selectiveClassesPresets = {
 		name: "verticalAlign",
 		type: "buttons",
 		label: __("垂直方向揃え", "catpow"),
+		required: true,
 		values: {
 			hasVerticalAlignTop: __("上揃え", "catpow"),
 			hasVerticalAlignMiddle: __("中央", "catpow"),
@@ -142,6 +144,7 @@ export const selectiveClassesPresets = {
 		name: "imagePosition",
 		type: "buttons",
 		label: __("画像位置", "catpow"),
+		required: true,
 		values: {
 			hasImageLeft: __("左", "catpow"),
 			hasImageRight: __("右", "catpow"),
@@ -359,6 +362,7 @@ export const selectiveClassesPresets = {
 		name: "headingType",
 		type: "buttons",
 		label: __("見出しタイプ", "catpow"),
+		required: true,
 		values: {
 			hasHeadingTypeHeader: __("ヘッダー", "catpow"),
 			hasHeadingTypeHeadline: __("ヘッドライン", "catpow"),
@@ -394,6 +398,7 @@ export const selectiveClassesPresets = {
 			name: "itemSize",
 			type: "buttons",
 			label: __("アイテムサイズ", "catpow"),
+			required: true,
 			values: {
 				hasItemSizeSmall: __("小", "catpow"),
 				hasItemSizeMedium: __("中", "catpow"),
@@ -452,7 +457,6 @@ export const selectiveClassesPresets = {
 		type: "buttons",
 		label: __("配色", "catpow"),
 		values: {
-			hasColorSchemeInherit: __("継承", "catpow"),
 			hasColorSchemeReverted: __("通常", "catpow"),
 			hasColorSchemeInverted: __("反転", "catpow"),
 		},
@@ -490,6 +494,7 @@ export const selectiveClassesPresets = {
 					name: "shape",
 					label: __("形状", "catpow"),
 					type: "buttons",
+					required: true,
 					values: {
 						hasClipShapeEllipse: __("楕円", "catpow"),
 						hasClipShapeSlope: __("傾斜", "catpow"),
@@ -501,6 +506,7 @@ export const selectiveClassesPresets = {
 							{
 								name: "direction",
 								type: "buttons",
+								required: true,
 								values: {
 									hasClipShapeBoth: __("両方", "catpow"),
 									hasClipShapeUpper: __("上", "catpow"),
@@ -521,6 +527,7 @@ export const selectiveClassesPresets = {
 							{
 								name: "uppper",
 								type: "buttons",
+								required: true,
 								values: {
 									hasClipShapeUpperNone: __("なし", "catpow"),
 									hasClipShapeUpperLeft: __("左", "catpow"),
@@ -530,6 +537,7 @@ export const selectiveClassesPresets = {
 							{
 								name: "below",
 								type: "buttons",
+								required: true,
 								values: {
 									hasClipShapeBelowNone: __("なし", "catpow"),
 									hasClipShapeBelowLeft: __("左", "catpow"),
@@ -559,6 +567,7 @@ export const selectiveClassesPresets = {
 							{
 								name: "uppper",
 								type: "buttons",
+								required: true,
 								values: {
 									hasClipShapeUpperNone: __("なし", "catpow"),
 									hasClipShapeUpperIn: __("内", "catpow"),
@@ -568,6 +577,7 @@ export const selectiveClassesPresets = {
 							{
 								name: "below",
 								type: "buttons",
+								required: true,
 								values: {
 									hasClipShapeBelowNone: __("なし", "catpow"),
 									hasClipShapeBelowIn: __("内", "catpow"),
@@ -597,6 +607,7 @@ export const selectiveClassesPresets = {
 							{
 								name: "uppper",
 								type: "buttons",
+								required: true,
 								values: {
 									hasClipShapeUpperNone: __("なし", "catpow"),
 									hasClipShapeUpperIn: __("内", "catpow"),
@@ -606,6 +617,7 @@ export const selectiveClassesPresets = {
 							{
 								name: "below",
 								type: "buttons",
+								required: true,
 								values: {
 									hasClipShapeBelowNone: __("なし", "catpow"),
 									hasClipShapeBelowIn: __("内", "catpow"),

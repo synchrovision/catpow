@@ -1938,7 +1938,16 @@
     const { BaseControl, Button, ButtonGroup } = wp.components;
     return /* @__PURE__ */ wp.element.createElement(BaseControl, { label: props.label, help: props.help, id: "cp-slectbuttons-" + wp.compose.useInstanceId(SelectButtons) }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-selectbuttons" }, /* @__PURE__ */ wp.element.createElement(ButtonGroup, null, props.options.map((option) => {
       const [, icon, label] = option.label.match(/^(?::([\w\-]+):)?(.*)$/u);
-      return /* @__PURE__ */ wp.element.createElement(Button, { icon, onClick: () => props.onChange(option.value), isPrimary: props.selected === option.value, key: option.value }, label);
+      return /* @__PURE__ */ wp.element.createElement(
+        Button,
+        {
+          icon,
+          onClick: () => props.onChange(props.selected === option.value && !props.required ? null : option.value),
+          isPrimary: props.selected === option.value,
+          key: option.value
+        },
+        label
+      );
     }))));
   };
 
@@ -1947,7 +1956,15 @@
     const { BaseControl } = wp.components;
     const maxStrlen = props.options.reduce((acc, cur) => Math.max(acc, cur.label.length + cur.label.replace(/[ -~]+/, "").length), 3);
     const colNum = Math.min(6, Math.floor(36 / (maxStrlen + 2)));
-    return /* @__PURE__ */ wp.element.createElement(BaseControl, { label: props.label, help: props.help, id: "cp-selectgridbuttons-" + wp.compose.useInstanceId(SelectGridButtons) }, /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectgridbuttons col" + colNum }, props.options.map((option) => /* @__PURE__ */ wp.element.createElement("li", { onClick: () => props.onChange(option.value), className: "item" + (props.selected === option.value ? " active" : ""), key: option.value }, option.label))));
+    return /* @__PURE__ */ wp.element.createElement(BaseControl, { label: props.label, help: props.help, id: "cp-selectgridbuttons-" + wp.compose.useInstanceId(SelectGridButtons) }, /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectgridbuttons col" + colNum }, props.options.map((option) => /* @__PURE__ */ wp.element.createElement(
+      "li",
+      {
+        onClick: () => props.onChange(props.selected === option.value && !props.required ? null : option.value),
+        className: "item" + (props.selected === option.value ? " active" : ""),
+        key: option.value
+      },
+      option.label
+    ))));
   };
 
   // ../blocks/_init/init/CP/components/SelectResponsiveImage.jsx
@@ -2741,16 +2758,16 @@
     }, [param.options, param.values]);
     switch (type) {
       case "radio": {
-        return /* @__PURE__ */ wp.element.createElement(RadioControl, { label: param.label || null, onChange, selected: value2, options: options3 });
+        return /* @__PURE__ */ wp.element.createElement(RadioControl, { label: param.label || null, onChange, selected: value2, options: options3, required: param.required });
       }
       case "select": {
-        return /* @__PURE__ */ wp.element.createElement(SelectControl, { label: param.label || null, onChange, value: value2, options: options3 });
+        return /* @__PURE__ */ wp.element.createElement(SelectControl, { label: param.label || null, onChange, value: value2, options: options3, required: param.required });
       }
       case "buttons": {
-        return /* @__PURE__ */ wp.element.createElement(CP.SelectButtons, { label: param.label || null, onChange, selected: value2, options: options3 });
+        return /* @__PURE__ */ wp.element.createElement(CP.SelectButtons, { label: param.label || null, onChange, selected: value2, options: options3, required: param.required });
       }
       case "gridbuttons": {
-        return /* @__PURE__ */ wp.element.createElement(CP.SelectGridButtons, { label: param.label || null, onChange, selected: value2, options: options3 });
+        return /* @__PURE__ */ wp.element.createElement(CP.SelectGridButtons, { label: param.label || null, onChange, selected: value2, options: options3, required: param.required });
       }
       case "range": {
         if (!param.coef) {
@@ -2776,10 +2793,10 @@
         return /* @__PURE__ */ wp.element.createElement(CP.DataInputTable, { label: param.label || null, cols: param.cols, value: value2, onChange });
       }
       case "textarea": {
-        return /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: param.label || null, value: value2, onChange });
+        return /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: param.label || null, value: value2, onChange, required: param.required });
       }
       default: {
-        return /* @__PURE__ */ wp.element.createElement(TextControl2, { label: param.label || null, type: param.type, value: value2, onChange, list: param.list && CP.getDataListId(param.list, param.values) });
+        return /* @__PURE__ */ wp.element.createElement(TextControl2, { label: param.label || null, type: param.type, value: value2, onChange, list: param.list && CP.getDataListId(param.list, param.values), required: param.required });
       }
     }
   };
@@ -3721,19 +3738,19 @@
           };
           switch (prm.type) {
             case "radio": {
-              rtn.push(/* @__PURE__ */ wp.element.createElement(RadioControl, { label: prm.label, onChange: onChangeCB, selected: currentClass2, options: options3 }));
+              rtn.push(/* @__PURE__ */ wp.element.createElement(RadioControl, { label: prm.label, onChange: onChangeCB, selected: currentClass2, options: options3, required: prm.required }));
               break;
             }
             case "buttons": {
-              rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectButtons, { label: prm.label, onChange: onChangeCB, selected: currentClass2, options: options3 }));
+              rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectButtons, { label: prm.label, onChange: onChangeCB, selected: currentClass2, options: options3, required: prm.required }));
               break;
             }
             case "gridbuttons": {
-              rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectGridButtons, { label: prm.label, onChange: onChangeCB, selected: currentClass2, options: options3 }));
+              rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectGridButtons, { label: prm.label, onChange: onChangeCB, selected: currentClass2, options: options3, required: prm.required }));
               break;
             }
             default: {
-              rtn.push(/* @__PURE__ */ wp.element.createElement(SelectControl, { label: prm.label, onChange: onChangeCB, value: currentClass2, options: options3 }));
+              rtn.push(/* @__PURE__ */ wp.element.createElement(SelectControl, { label: prm.label, onChange: onChangeCB, value: currentClass2, options: options3, required: prm.required }));
             }
           }
           if (prm.sub) {
@@ -5287,6 +5304,7 @@
       name: "textAlign",
       type: "buttons",
       label: __4("\u30C6\u30AD\u30B9\u30C8\u63C3\u3048", "catpow"),
+      required: true,
       values: {
         hasTextAlignLeft: __4("\u5DE6\u63C3\u3048", "catpow"),
         hasTextAlignCenter: __4("\u4E2D\u592E", "catpow"),
@@ -5297,6 +5315,7 @@
       name: "verticalAlign",
       type: "buttons",
       label: __4("\u5782\u76F4\u65B9\u5411\u63C3\u3048", "catpow"),
+      required: true,
       values: {
         hasVerticalAlignTop: __4("\u4E0A\u63C3\u3048", "catpow"),
         hasVerticalAlignMiddle: __4("\u4E2D\u592E", "catpow"),
@@ -5307,6 +5326,7 @@
       name: "imagePosition",
       type: "buttons",
       label: __4("\u753B\u50CF\u4F4D\u7F6E", "catpow"),
+      required: true,
       values: {
         hasImageLeft: __4("\u5DE6", "catpow"),
         hasImageRight: __4("\u53F3", "catpow")
@@ -5524,6 +5544,7 @@
       name: "headingType",
       type: "buttons",
       label: __4("\u898B\u51FA\u3057\u30BF\u30A4\u30D7", "catpow"),
+      required: true,
       values: {
         hasHeadingTypeHeader: __4("\u30D8\u30C3\u30C0\u30FC", "catpow"),
         hasHeadingTypeHeadline: __4("\u30D8\u30C3\u30C9\u30E9\u30A4\u30F3", "catpow"),
@@ -5559,6 +5580,7 @@
         name: "itemSize",
         type: "buttons",
         label: __4("\u30A2\u30A4\u30C6\u30E0\u30B5\u30A4\u30BA", "catpow"),
+        required: true,
         values: {
           hasItemSizeSmall: __4("\u5C0F", "catpow"),
           hasItemSizeMedium: __4("\u4E2D", "catpow"),
@@ -5617,7 +5639,6 @@
       type: "buttons",
       label: __4("\u914D\u8272", "catpow"),
       values: {
-        hasColorSchemeInherit: __4("\u7D99\u627F", "catpow"),
         hasColorSchemeReverted: __4("\u901A\u5E38", "catpow"),
         hasColorSchemeInverted: __4("\u53CD\u8EE2", "catpow")
       }
@@ -5655,6 +5676,7 @@
             name: "shape",
             label: __4("\u5F62\u72B6", "catpow"),
             type: "buttons",
+            required: true,
             values: {
               hasClipShapeEllipse: __4("\u6955\u5186", "catpow"),
               hasClipShapeSlope: __4("\u50BE\u659C", "catpow"),
@@ -5666,6 +5688,7 @@
                 {
                   name: "direction",
                   type: "buttons",
+                  required: true,
                   values: {
                     hasClipShapeBoth: __4("\u4E21\u65B9", "catpow"),
                     hasClipShapeUpper: __4("\u4E0A", "catpow"),
@@ -5686,6 +5709,7 @@
                 {
                   name: "uppper",
                   type: "buttons",
+                  required: true,
                   values: {
                     hasClipShapeUpperNone: __4("\u306A\u3057", "catpow"),
                     hasClipShapeUpperLeft: __4("\u5DE6", "catpow"),
@@ -5695,6 +5719,7 @@
                 {
                   name: "below",
                   type: "buttons",
+                  required: true,
                   values: {
                     hasClipShapeBelowNone: __4("\u306A\u3057", "catpow"),
                     hasClipShapeBelowLeft: __4("\u5DE6", "catpow"),
@@ -5724,6 +5749,7 @@
                 {
                   name: "uppper",
                   type: "buttons",
+                  required: true,
                   values: {
                     hasClipShapeUpperNone: __4("\u306A\u3057", "catpow"),
                     hasClipShapeUpperIn: __4("\u5185", "catpow"),
@@ -5733,6 +5759,7 @@
                 {
                   name: "below",
                   type: "buttons",
+                  required: true,
                   values: {
                     hasClipShapeBelowNone: __4("\u306A\u3057", "catpow"),
                     hasClipShapeBelowIn: __4("\u5185", "catpow"),
@@ -5762,6 +5789,7 @@
                 {
                   name: "uppper",
                   type: "buttons",
+                  required: true,
                   values: {
                     hasClipShapeUpperNone: __4("\u306A\u3057", "catpow"),
                     hasClipShapeUpperIn: __4("\u5185", "catpow"),
@@ -5771,6 +5799,7 @@
                 {
                   name: "below",
                   type: "buttons",
+                  required: true,
                   values: {
                     hasClipShapeBelowNone: __4("\u306A\u3057", "catpow"),
                     hasClipShapeBelowIn: __4("\u5185", "catpow"),
