@@ -5,7 +5,7 @@
 	@include flx((w:w,g:g));
 	@include txt((l:n,c:tx));
 	>.item{
-		@include bnd((pd:32 16,f:1 1 f));
+		@include bnd((pd:8 16,f:1 1 f));
 		>.image{
 			@include bnd((f:10 10 300,mgt:20));
 			@include bdr((s:s,w:8,c:b));
@@ -65,6 +65,11 @@
 					@include bnd((mgl:-40));
 				}
 			}
+		}
+	}
+	&.has-counter{
+		>.item{
+			@include bnd((pd:32 16,f:1 1 f));
 		}
 	}
 	&.large{}
