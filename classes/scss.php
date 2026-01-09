@@ -217,17 +217,6 @@ class scss{
 				$tone=apply_filters('cp_extract_color_tone',$tone,$args);
 				return self::create_map_data($tone);
 			});
-			$scssc->registerFunction('translate_font',function($args)use($scssc){
-				$args=array_map([$scssc,'compileValue'],$args);
-				$font=false;
-				$fonts=util\style_config::get_config_json('fonts');
-				if(isset($fonts[$args[0]])){
-					$font=sprintf('var(--cp-fonts-%s)',$args[0]);
-				}
-				$font=apply_filters('cp_translate_font',$font,$args);
-				if(empty($font)){return Compiler::$false;}
-				return [TYPE::T_KEYWORD,$font];
-			});
 			$scssc->registerFunction('translate_size',function($args)use($scssc){
 				$args=array_map([$scssc,'compileValue'],$args);
 				$size=false;
@@ -239,14 +228,36 @@ class scss{
 				if(empty($size)){return Compiler::$false;}
 				return [TYPE::T_KEYWORD,$size];
 			});
-			$scssc->registerFunction('translate_weight',function($args)use($scssc){
+			$scssc->registerFunction('translate_font',function($args)use($scssc){
+				$args=array_map([$scssc,'compileValue'],$args);
+				$font=false;
+				$fonts=util\style_config::get_config_json('fonts');
+				if(isset($fonts[$args[0]])){
+					$font=sprintf('var(--cp-fonts-%s)',$args[0]);
+				}
+				$font=apply_filters('cp_translate_font',$font,$args);
+				if(empty($font)){return Compiler::$false;}
+				return [TYPE::T_KEYWORD,$font];
+			});
+			$scssc->registerFunction('translate_font_size',function($args)use($scssc){
+				$args=array_map([$scssc,'compileValue'],$args);
+				$size=false;
+				$sizes=util\style_config::get_config_json('font-sizes');
+				if(isset($sizes[$args[0]])){
+					$size=sprintf('var(--cp-font-sizes-%s)',$args[0]);
+				}
+				$size=apply_filters('cp_translate_font_size',$size,$args);
+				if(empty($size)){return Compiler::$false;}
+				return [TYPE::T_KEYWORD,$size];
+			});
+			$scssc->registerFunction('translate_font_weight',function($args)use($scssc){
 				$args=array_map([$scssc,'compileValue'],$args);
 				$weight=false;
-				$weights=util\style_config::get_config_json('weights');
+				$weights=util\style_config::get_config_json('font-weights');
 				if(isset($weights[$args[0]])){
-					$weight=sprintf('var(--cp-weights-%s)',$args[0]);
+					$weight=sprintf('var(--cp-font-weights-%s)',$args[0]);
 				}
-				$weight=apply_filters('cp_translate_weight',$weight,$args);
+				$weight=apply_filters('cp_translate_font_weight',$weight,$args);
 				if(empty($weight)){return Compiler::$false;}
 				return [TYPE::T_KEYWORD,$weight];
 			});

@@ -13,8 +13,9 @@ class style_config{
 	protected static
 		$color_roles,
 		$font_roles,
-		$weight_roles,
 		$size_roles,
+		$font_weight_roles,
+		$font_size_roles,
 		$cache=[];
 	public static function get_color_roles(){
 		if(isset(static::$color_roles)){return static::$color_roles;}
@@ -33,6 +34,15 @@ class style_config{
 			'shadow'=>['label'=>'影','default'=>'hsla(0,0%,0%,0.3)','shorthand'=>'shd','alphaEnabled'=>true],
 		]);
 	}
+	public static function get_size_roles(){
+		if(isset(static::$content_size_roles)){return static::$content_size_roles;}
+		$base_size_roles=[
+			'contents'=>['label'=>'コンテンツ','default'=>'60rem','shorthand'=>'c'],
+		];
+		return static::$font_size_roles=apply_filters('cp_content_size_roles',array_merge(
+			$base_size_roles
+		));
+	}
 	public static function get_font_roles(){
 		if(isset(static::$font_roles)){return static::$font_roles;}
 		return static::$font_roles=apply_filters('cp_font_roles',[
@@ -44,9 +54,9 @@ class style_config{
 			'bold'=>['label'=>'太字','default'=>'sans-serif','shorthand'=>'b']
 		]);
 	}
-	public static function get_weight_roles(){
-		if(isset(static::$weight_roles)){return static::$weight_roles;}
-		return static::$weight_roles=apply_filters('cp_weight_roles',[
+	public static function get_font_weight_roles(){
+		if(isset(static::$font_weight_roles)){return static::$font_weight_roles;}
+		return static::$font_weight_roles=apply_filters('cp_font_weight_roles',[
 			'heading'=>['label'=>'見出し','default'=>'700','shorthand'=>'h'],
 			'text'=>['label'=>'本文','default'=>'400','shorthand'=>'t'],
 			'code'=>['label'=>'コード','default'=>'400','shorthand'=>'c'],
@@ -55,11 +65,8 @@ class style_config{
 			'bold'=>['label'=>'太字','default'=>'700','shorthand'=>'b']
 		]);
 	}
-	public static function get_size_roles(){
-		if(isset(static::$size_roles)){return static::$size_roles;}
-		$base_size_roles=[
-			'contents'=>['label'=>'コンテンツ','default'=>'60rem','shorthand'=>'c']
-		];
+	public static function get_font_size_roles(){
+		if(isset(static::$font_size_roles)){return static::$font_size_roles;}
 		$relative_size_roles=[
 			'large'=>['label'=>'大字','default'=>'1.1em','shorthand'=>'l','relative'=>true],			
 			'small'=>['label'=>'小字','default'=>'0.8em','shorthand'=>'s','relative'=>true]
@@ -82,7 +89,7 @@ class style_config{
 				'responsive'=>true
 			];
 		}
-		return static::$size_roles=apply_filters('cp_size_roles',array_merge(
+		return static::$font_size_roles=apply_filters('cp_font_size_roles',array_merge(
 			$base_size_roles,
 			$heading_size_roles,
 			$paragraph_size_roles,
@@ -164,9 +171,10 @@ class style_config{
 		$vars=apply_filters('cp_css_vars',[
 			'tones'=>self::get_config_json('tones'),
 			'colors'=>self::get_config_json('colors'),
-			'fonts'=>self::get_config_json('fonts'),
 			'sizes'=>self::get_config_json('sizes'),
-			'weights'=>self::get_config_json('weights')
+			'fonts'=>self::get_config_json('fonts'),
+			'font-weights'=>self::get_config_json('font-weights'),
+			'font-sizes'=>self::get_config_json('font-sizes'),
 		]);
 		$bps=array_values(self::get_breakpoints());
 		if(isset($vars['tones']['i'])){
@@ -260,13 +268,17 @@ class style_config{
 			array_column(static::get_font_roles(),'default','shorthand'),
 			static::get_config_json('fonts')
 		));
-		static::set_config_json('weight',array_merge(
-			array_column(static::get_weight_roles(),'default','shorthand'),
-			static::get_config_json('weight')
+		static::set_config_json('font-weights',array_merge(
+			array_column(static::get_font_weight_roles(),'default','shorthand'),
+			static::get_config_json('font-weights')
 		));
-		static::set_config_json('size',array_merge(
+		static::set_config_json('font-sizes',array_merge(
+			array_column(static::get_font_size_roles(),'default','shorthand'),
+			static::get_config_json('font-sizes')
+		));
+		static::set_config_json('sizes',array_merge(
 			array_column(static::get_size_roles(),'default','shorthand'),
-			static::get_config_json('size')
+			static::get_config_json('sizes')
 		));
 	}
 	public static function update_config_json($domain,$data){
