@@ -16,6 +16,18 @@ class style_config{
 		$size_roles,
 		$font_weight_roles,
 		$font_size_roles,
+		$size_variants_3=[
+			's'=>'small',
+			'm'=>'medium',
+			'l'=>'large',
+		],
+		$size_variants_5=[
+			'xs'=>'x-small',
+			's'=>'small',
+			'm'=>'medium',
+			'l'=>'large',
+			'xl'=>'x-large'
+		],
 		$cache=[];
 	public static function get_color_roles(){
 		if(isset(static::$color_roles)){return static::$color_roles;}
@@ -36,12 +48,19 @@ class style_config{
 	}
 	public static function get_size_roles(){
 		if(isset(static::$content_size_roles)){return static::$content_size_roles;}
-		$base_size_roles=[
-			'contents'=>['label'=>'コンテンツ','default'=>'60rem','shorthand'=>'c'],
-		];
-		return static::$font_size_roles=apply_filters('cp_content_size_roles',array_merge(
-			$base_size_roles
-		));
+		return static::$content_size_roles=apply_filters('cp_content_size_roles',[
+			'contents'=>['label'=>'コンテンツ','default'=>'60rem','shorthand'=>'c','var'=>'--cp-content-width','variants'=>[
+				'n'=>'narrow',
+				'c'=>'compact',
+				'r'=>'regular',
+				'w'=>'wide'
+			]],
+			'radius'=>['label'=>'アイテム','default'=>'20rem','shorthand'=>'r','var'=>'--cp-border-radius','variants'=>self::$size_variants_3],
+			'item'=>['label'=>'アイテム','default'=>'20rem','shorthand'=>'i','var'=>'--cp-item-size','variants'=>self::$size_variants_3],
+			'gap'=>['label'=>'間隔','default'=>'1rem','shorthand'=>'g','var'=>'--cp-item-gap','variants'=>self::$size_variants_3],
+			'margin'=>['label'=>'マージン','default'=>'1rem','shorthand'=>'mg','var'=>'--cp-margin','variants'=>self::$size_variants_5],
+			'padding'=>['label'=>'パディング','default'=>'1rem','shorthand'=>'pd','var'=>'--cp-padding','variants'=>self::$size_variants_5],
+		]);
 	}
 	public static function get_font_roles(){
 		if(isset(static::$font_roles)){return static::$font_roles;}
@@ -73,24 +92,33 @@ class style_config{
 		];
 		$heading_size_roles=[];
 		$paragraph_size_roles=[];
-		$get_size=function($min,$max,$p){
-			$size=$min+($max-$min)/5*$p;
-			return ($size/16).'rem';
-		};
+		$default_font_sizes=[];
+		foreach([
+			[2.00,	4.00,	1.50],
+			[1.75,	3.00,	1.25],
+			[1.50,	2.00,	1.125],
+			[1.25,	1.25,	1.00],
+			[1.125,	1.125,	1.00],
+			[1.00,	1.00,	1.00],
+		] as $s){
+			$default_font_sizes['h'][]=sprintf('min(%svw,%srem)',$s[0]*4,$s[1]);
+			$default_font_sizes['p'][]=sprintf('min(%svw,%srem)',$s[2]*4,$s[2]);
+		}
 		for($i=1;$i<=6;$i++){
 			$heading_size_roles["heading{$i}"]=[
 				'label'=>"見出し{$i}",
-				'default'=>[$get_size(12,52,6-$i),$get_size(12,22,6-$i)],'shorthand'=>"h{$i}",
+				'default'=>$default_font_sizes['h'][$i-1],
+				'shorthand'=>"h{$i}",
 				'responsive'=>true
 			];
 			$paragraph_size_roles["paragraph{$i}"]=[
 				'label'=>"段落{$i}",
-				'default'=>[$get_size(10,20,6-$i),$get_size(10,15,6-$i)],'shorthand'=>"p{$i}",
+				'default'=>$default_font_sizes['p'][$i-1],
+				'shorthand'=>"p{$i}",
 				'responsive'=>true
 			];
 		}
 		return static::$font_size_roles=apply_filters('cp_font_size_roles',array_merge(
-			$base_size_roles,
 			$heading_size_roles,
 			$paragraph_size_roles,
 			$relative_size_roles
