@@ -40,6 +40,8 @@ class scss{
 		$scssc->setSourceMap(Compiler::SOURCE_MAP_FILE);
 		$color_roles=util\style_config::get_color_roles();
 		$color_roles_by_shorthand=array_column($color_roles,null,'shorthand');
+		$size_roles=util\style_config::get_size_roles();
+		$size_roles_by_shorthand=array_column($size_roles,null,'shorthand');
 		$font_roles=util\style_config::get_font_roles();
 		$colors=get_theme_mod('colors');
 		$fonts=get_theme_mod('fonts');
@@ -217,12 +219,12 @@ class scss{
 				$tone=apply_filters('cp_extract_color_tone',$tone,$args);
 				return self::create_map_data($tone);
 			});
-			$scssc->registerFunction('translate_size',function($args)use($scssc){
+			$scssc->registerFunction('translate_size',function($args)use($size_roles_by_shorthand,$scssc){
 				$args=array_map([$scssc,'compileValue'],$args);
 				$size=false;
 				$sizes=util\style_config::get_config_json('sizes');
-				if(isset($sizes[$args[0]])){
-					$size=sprintf('var(--cp-sizes-%s)',$args[0]);
+				if(!empty($role=$size_roles_by_shorthand[$args[0]]??null)){
+					$size=empty($role['var'])?sprintf('var(--cp-sizes-%s)',$args[0]):$role['var'];
 				}
 				$size=apply_filters('cp_translate_size',$size,$args);
 				if(empty($size)){return Compiler::$false;}
