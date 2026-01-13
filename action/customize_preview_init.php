@@ -43,6 +43,13 @@ add_action('wp_head',function(){
 			});
 		});
 <?php endforeach; ?>
+		wp.customize('font_sizes',function(setting){
+			setting.bind(function(fontSizes){
+				Object.keys(fontSizes).forEach((role)=>{
+					rootStyle.setProperty('--cp-font-sizes-'+role,fontSizes[role]);
+				});
+			});
+		});
 	});
 </script>
 <?php
