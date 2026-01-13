@@ -47,8 +47,8 @@ class style_config{
 		]);
 	}
 	public static function get_size_roles(){
-		if(isset(static::$content_size_roles)){return static::$content_size_roles;}
-		return static::$content_size_roles=apply_filters('cp_content_size_roles',[
+		if(isset(static::$size_roles)){return static::$size_roles;}
+		return static::$size_roles=apply_filters('cp_size_roles',[
 			'contents'=>['label'=>'コンテンツ','default'=>'60rem','shorthand'=>'c','var'=>'--cp-content-width','variants'=>[
 				'n'=>'narrow',
 				'c'=>'compact',
@@ -201,8 +201,8 @@ class style_config{
 			'colors'=>self::get_config_json('colors'),
 			'sizes'=>self::get_config_json('sizes'),
 			'fonts'=>self::get_config_json('fonts'),
-			'font-weights'=>self::get_config_json('font-weights'),
-			'font-sizes'=>self::get_config_json('font-sizes'),
+			'font-weights'=>self::get_config_json('font_weights'),
+			'font-sizes'=>self::get_config_json('font_sizes'),
 		]);
 		$bps=array_values(self::get_breakpoints());
 		if(isset($vars['tones']['i'])){
@@ -296,13 +296,13 @@ class style_config{
 			array_column(static::get_font_roles(),'default','shorthand'),
 			static::get_config_json('fonts')
 		));
-		static::set_config_json('font-weights',array_merge(
+		static::set_config_json('font_weights',array_merge(
 			array_column(static::get_font_weight_roles(),'default','shorthand'),
-			static::get_config_json('font-weights')
+			static::get_config_json('font_weights')
 		));
-		static::set_config_json('font-sizes',array_merge(
+		static::set_config_json('font_sizes',array_merge(
 			array_column(static::get_font_size_roles(),'default','shorthand'),
-			static::get_config_json('font-sizes')
+			static::get_config_json('font_sizes')
 		));
 		static::set_config_json('sizes',array_merge(
 			array_column(static::get_size_roles(),'default','shorthand'),
