@@ -1,0 +1,57 @@
+@import 'admin_style_config.scss';
+
+.cp{
+	&-chartinput{
+		@include usr((c:p));
+	}
+	&-legend{
+		$block:&;
+		@include grd((tc:1fr 1fr,g:.5em));
+		&__item{
+			@include grd((tc:1em a,g:.25em,ai:c));
+			@include trn((t:.2s,o:1));
+			@include usr((c:p));
+			&-icon{
+				@include bnd((d:b,h:1em));
+				@include bg((c:var(--row-color)));
+			}
+			&-lable{
+				@include bnd((d:b));
+			}
+		}
+		&.has-focused{
+			#{$block}{
+				&__item:not(.is-focused){
+					@include trn((o:.6));
+				}
+			}
+		}
+	}
+	&-linechart{
+		&__chart{
+			&-grid{
+				&-line{
+				}
+			}
+			&-lines{
+				$lines:&;
+				&-line{
+					@include trn((t:.2s,o:1));
+					&-circle{
+					}
+					&-path{
+					}
+					&.is-focused{
+					}
+				}
+				&.has-focused{
+					#{$lines}{
+						&-line:not(.is-focused){
+							@include trn((o:.3));
+						}
+					}
+				}
+			}
+		}
+	}
+}

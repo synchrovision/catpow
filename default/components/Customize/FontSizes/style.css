@@ -1,0 +1,44 @@
+.cp-chartinput {
+  cursor: pointer;
+}
+.cp-legend {
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0.5em;
+}
+.cp-legend__item {
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1em auto;
+  grid-template-columns: 1em auto;
+  grid-gap: 0.25em;
+  align-items: center;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  opacity: 1;
+  cursor: pointer;
+}
+.cp-legend__item-icon {
+  display: block;
+  height: 1em;
+  background-color: var(--row-color);
+}
+.cp-legend__item-lable {
+  display: block;
+}
+.cp-legend.has-focused .cp-legend__item:not(.is-focused) {
+  opacity: 0.6;
+}
+.cp-linechart__chart-lines-line {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  opacity: 1;
+}
+.cp-linechart__chart-lines.has-focused .cp-linechart__chart-lines-line:not(.is-focused) {
+  opacity: 0.3;
+}
+/*# sourceMappingURL=./style.css.map */
