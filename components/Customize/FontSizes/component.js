@@ -880,7 +880,7 @@
   init_react();
   var DataSetContext = createContext(null);
   var DataSet = (props) => {
-    const { labels: labels2, colors: colors2, classNames: classNames2, values, steps: steps2 = { 100: 1 }, snap = true, onChange, children, ...otherProps } = props;
+    const { labels: labels2, colors: colors2, classNames: classNames2, translateToDisplayValue: translateToDisplayValue2, values, steps: steps2 = { 100: 1 }, snap = true, onChange, children, ...otherProps } = props;
     const [activeRow, setActiveRow] = useState(null);
     const [activeColumn, setActiveColumn] = useState(null);
     const [focusedRow, focusRow] = useState(null);
@@ -904,6 +904,21 @@
       },
       [values, onChange]
     );
+    const getDisplayValue = useCallback(
+      (r2, c) => {
+        if (translateToDisplayValue2 == null) {
+          return values[r2][c];
+        }
+        return translateToDisplayValue2(values[r2][c], {
+          r: r2,
+          c,
+          className: classNames2?.cells?.[r2]?.[c],
+          label: labels2?.cells?.[r2]?.[c],
+          color: colors2?.cells?.[r2]?.[c] || colors2?.columns?.[c] || colors2?.rows?.[r2]
+        });
+      },
+      [values, translateToDisplayValue2]
+    );
     const setActiveCellValue = useCallback(
       (value) => {
         setValue(activeRow, activeColumn, value);
@@ -917,6 +932,7 @@
         labels: labels2,
         colors: colors2,
         classNames: classNames2,
+        getDisplayValue,
         steps: converter,
         setValue,
         setActiveCellValue,
@@ -929,7 +945,24 @@
         selectCell,
         unselectCell
       }),
-      [values, labels2, colors2, classNames2, converter, setValue, setActiveCellValue, activeRow, setActiveRow, activeColumn, setActiveColumn, focusedRow, focusRow, selectCell, unselectCell]
+      [
+        values,
+        labels2,
+        colors2,
+        classNames2,
+        getDisplayValue,
+        converter,
+        setValue,
+        setActiveCellValue,
+        activeRow,
+        setActiveRow,
+        activeColumn,
+        setActiveColumn,
+        focusedRow,
+        focusRow,
+        selectCell,
+        unselectCell
+      ]
     );
     return /* @__PURE__ */ wp.element.createElement(DataSetContext.Provider, { value: DataSetContextValue }, children);
   };
@@ -937,8 +970,34 @@
   // node_modules-included/catpow/src/component/Chart/Chart.tsx
   var ChartContext = createContext(null);
   var Chart = (props) => {
-    const { width = 640, height = 480, margin = [4, 4, 4, 4], getValueWithProgressPoint, getCellWithProgressPoint, children, ...otherProps } = props;
+    const { width = 640, height = 480, margin: originalMargin = [4, 4, 4, 4], getValueWithProgressPoint, getCellWithProgressPoint, children, ...otherProps } = props;
     const { selectCell, focusedRow, setValue, activeRow, activeColumn } = useContext(DataSetContext);
+    const margin = useMemo(() => {
+      if (!Array.isArray(originalMargin)) {
+        return [...range(4)].fill(originalMargin);
+      }
+      const margin2 = [...originalMargin];
+      if (margin2[3] == null) {
+        if (margin2[2] == null) {
+          if (margin2[1] == null) {
+            margin2[1] = margin2[0];
+          }
+          margin2[2] = margin2[0];
+        }
+        margin2[3] = margin2[1];
+      }
+      return margin2;
+    }, [originalMargin]);
+    const sizeValues = useMemo(() => {
+      const top = margin[0];
+      const bottom = height - margin[2];
+      const left = margin[3];
+      const right = margin[0];
+      const innerHeight = height - margin[0] - margin[2];
+      const innerWidth = width - margin[1] - margin[3];
+      const center = { x: left + innerWidth / 2, y: top + innerHeight / 2 };
+      return { top, bottom, left, right, center, innerHeight, innerWidth };
+    }, [width, height, margin]);
     const selectCellWithProgressPoint = useCallback(
       (progressPoint) => {
         const { r: r2, c } = getCellWithProgressPoint(progressPoint, focusedRow);
@@ -966,17 +1025,15 @@
         width,
         height,
         margin,
+        ...sizeValues,
         selectCellWithProgressPoint,
         setValueWithProgressPoint,
         setActiveCellValueWithProgressPoint
       }),
-      [width, height, margin, selectCellWithProgressPoint, setValueWithProgressPoint, setActiveCellValueWithProgressPoint]
+      [width, height, margin, sizeValues, selectCellWithProgressPoint, setValueWithProgressPoint, setActiveCellValueWithProgressPoint]
     );
     return /* @__PURE__ */ wp.element.createElement(ChartContext.Provider, { value: chartContextValue }, children);
   };
-
-  // node_modules-included/catpow/src/component/Chart/Legend.tsx
-  init_react();
 
   // node_modules/clsx/dist/clsx.mjs
   function r(e) {
@@ -993,7 +1050,16 @@
     return n;
   }
 
+  // node_modules-included/catpow/src/component/Chart/DataTable.tsx
+  init_react();
+  var DataTable = (props) => {
+    const { className = "cp-datatabel", ...otherProps } = props;
+    const { labels: labels2, classNames: classNames2, colors: colors2, values, getDisplayValue } = useContext(DataSetContext);
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("table", null, labels2.columns && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, labels2.rows && /* @__PURE__ */ wp.element.createElement("td", null), labels2.columns.map((label) => /* @__PURE__ */ wp.element.createElement("th", null, label)))), /* @__PURE__ */ wp.element.createElement("tbody", null, values.map((row, r2) => /* @__PURE__ */ wp.element.createElement("tr", null, labels2.rows && /* @__PURE__ */ wp.element.createElement("th", null, labels2.rows[r2]), row.map((v, c) => /* @__PURE__ */ wp.element.createElement("td", null, getDisplayValue(r2, c)))))))));
+  };
+
   // node_modules-included/catpow/src/component/Chart/Legend.tsx
+  init_react();
   var Legend = (props) => {
     const { className = "cp-legend" } = props;
     const { labels: labels2, colors: colors2, classNames: classNames2, focusedRow, focusRow } = useContext(DataSetContext);
@@ -1020,7 +1086,7 @@
     S: ({ x: x1, y: y1 }, { x: x2, y: y2 }) => ` S ${x1},${y1} ${x2},${y2}`,
     Q: ({ x: x1, y: y1 }, { x: x2, y: y2 }) => ` Q ${x1},${y1} ${x2},${y2}`,
     T: ({ x, y }) => ` T ${x},${y}`,
-    A: ({ rx, ry, rotation = 0, large = 0, sweep = 1, x, y }) => ` A ${rx} ${ry} ${rotation} ${large} ${sweep} ${x},${y}`
+    A: ({ r: r2, rx, ry, rotation = 0, large = 0, sweep = 1, x, y }) => ` A ${rx ?? r2} ${ry ?? r2} ${rotation} ${large} ${sweep} ${x},${y}`
   };
   var shape = (points) => ({
     points,
@@ -1075,7 +1141,7 @@
       },
       [steps2, values]
     );
-    return /* @__PURE__ */ wp.element.createElement(Chart, { getValueWithProgressPoint, getCellWithProgressPoint, ...otherProps }, /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className, style: { position: "relative" } }, /* @__PURE__ */ wp.element.createElement(SVG, { className: "_chart", width, height, style: { width: "100%", height: "auto" } }, /* @__PURE__ */ wp.element.createElement(Lines, { className: "_lines" }), /* @__PURE__ */ wp.element.createElement(Grid, { className: "_grid" })), children)));
+    return /* @__PURE__ */ wp.element.createElement(Chart, { getValueWithProgressPoint, getCellWithProgressPoint, ...otherProps }, /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className, style: { position: "relative" } }, /* @__PURE__ */ wp.element.createElement(SVG2, { className: "_chart", width, height, style: { width: "100%", height: "auto" } }, /* @__PURE__ */ wp.element.createElement(Lines, { className: "_lines" }), /* @__PURE__ */ wp.element.createElement(Grid, { className: "_grid" })), children)));
   };
   var Grid = (props) => {
     const { className } = props;
@@ -1379,7 +1445,7 @@
   init_react();
   var SVGColorsContext = createContext({ h: 20, s: 80, l: 80 });
   var SVGScreenContext = createContext({ width: 1200, height: 400, flex: false });
-  var SVG = (props) => {
+  var SVG2 = (props) => {
     const { className = "cp-svg", width = 1200, height = 400, colors: colors2 = { h: 20, s: 80, l: 80 }, children, ...otherProps } = props;
     const ScreenValue = useMemo(() => ({ width, height, flex: false }), [width, height]);
     return /* @__PURE__ */ wp.element.createElement(SVGColorsContext.Provider, { value: colors2 }, /* @__PURE__ */ wp.element.createElement(SVGScreenContext.Provider, { value: ScreenValue }, /* @__PURE__ */ wp.element.createElement("svg", { className, width, height, viewBox: `0 0 ${width} ${height}`, xmlns: "http://www.w3.org/2000/svg", ...otherProps }, children)));
@@ -1388,13 +1454,20 @@
   // ../components/Customize/FontSizes/component.jsx
   var labels = {
     rows: ["\u898B\u51FA\u3057(vw)", "\u898B\u51FA\u3057(rem)", "\u672C\u6587(vw)", "\u672C\u6587(rem)"],
+    columns: [...range(1, 6)].map((i) => `${7 - i}`),
     cells: [[[...range(1, 6)].map((i) => `h${i}(vw)`), [...range(1, 6)].map((i) => `h${i}(rem)`), [...range(1, 6)].map((i) => `p${i}(vw)`), [...range(1, 6)].map((i) => `p${i}(rem)`)]]
   };
   var colors = {
-    rows: ["oklch(50% 40% 220)", "oklch(50% 80% 220)", "oklch(60% 10% 180)", "oklch(60% 20% 180)"]
+    rows: ["oklch(50% 40% 220)", "oklch(50% 80% 220)", "oklch(60% 5% 220)", "oklch(60% 10% 220)"]
   };
   var classNames = {
     rows: ["is-row-heading is-row-vw", "is-row-heading is-row-rem", "is-row-paragraph is-row-vw", "is-row-paragraph is-row-rem"]
+  };
+  var translateToDisplayValue = (value, { r: r2 }) => {
+    if (r2 % 2 === 0) {
+      return `${(value / 4).toFixed(2)}`;
+    }
+    return `${(value / 16).toFixed(2)}`;
   };
   var extractValuesFromSize = (size) => {
     const m = size.match(/min\((.+?)vw,(.+?)rem/);
@@ -1446,6 +1519,6 @@
       },
       [onChange, setValues]
     );
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement(DataSet, { values, labels, colors, classNames, steps, onChange: onChangeHandle }, /* @__PURE__ */ wp.element.createElement(Legend, null), /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 300, height: 600 })));
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement(DataSet, { values, labels, colors, classNames, steps, translateToDisplayValue, onChange: onChangeHandle }, /* @__PURE__ */ wp.element.createElement(Legend, null), /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 400, height: 600 }), /* @__PURE__ */ wp.element.createElement(DataTable, null)));
   };
 })();

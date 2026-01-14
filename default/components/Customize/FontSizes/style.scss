@@ -54,4 +54,52 @@
 			}
 		}
 	}
+	&-datatabel{
+		@include bnd((pd:1em 0));
+		&__table{
+			@include bnd((w:f));
+			@include tbl(());
+			@include txt((p:12));
+			&-thead,&-tbody{
+				&-tr{
+					&-td,&-th{
+						@include bnd((pd:.25em));
+						@include bdr((s:s,w:1,c:t 40));
+					}
+				}
+			}
+			&-thead{
+				&-tr{
+					&-th{
+						@include bg((c:#ccc));
+						@include txt((a:c));
+					}
+					&-td{
+					}
+				}
+			}
+			&-tbody{
+				&-tr{
+					$row:&;
+					&-th{
+						@include bg((c:#ddd));
+					}
+					&-td{
+						@include bg((c:#fff));
+						@include txt((a:r));
+					}
+					&:nth-child(odd){
+						#{$row}{
+							&-th{
+								@include bg((c:#ccc));
+							}
+							&-td{
+								@include bg((c:#eee));
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }

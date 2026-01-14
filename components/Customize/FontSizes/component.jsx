@@ -1,16 +1,23 @@
 ﻿import { useState, useCallback, useMemo } from "react";
-import { Bem, DataSet, LineChartInput, Legend } from "catpow/component";
+import { Bem, DataSet, LineChartInput, Legend, DataTable } from "catpow/component";
 import { range } from "catpow/util";
 
 const labels = {
 	rows: ["見出し(vw)", "見出し(rem)", "本文(vw)", "本文(rem)"],
+	columns: [...range(1, 6)].map((i) => `${7 - i}`),
 	cells: [[[...range(1, 6)].map((i) => `h${i}(vw)`), [...range(1, 6)].map((i) => `h${i}(rem)`), [...range(1, 6)].map((i) => `p${i}(vw)`), [...range(1, 6)].map((i) => `p${i}(rem)`)]],
 };
 const colors = {
-	rows: ["oklch(50% 40% 220)", "oklch(50% 80% 220)", "oklch(60% 10% 180)", "oklch(60% 20% 180)"],
+	rows: ["oklch(50% 40% 220)", "oklch(50% 80% 220)", "oklch(60% 5% 220)", "oklch(60% 10% 220)"],
 };
 const classNames = {
 	rows: ["is-row-heading is-row-vw", "is-row-heading is-row-rem", "is-row-paragraph is-row-vw", "is-row-paragraph is-row-rem"],
+};
+const translateToDisplayValue = (value, { r }) => {
+	if (r % 2 === 0) {
+		return `${(value / 4).toFixed(2)}`;
+	}
+	return `${(value / 16).toFixed(2)}`;
 };
 
 const extractValuesFromSize = (size) => {
@@ -72,9 +79,10 @@ Catpow.Customize.FontSizes = (props) => {
 
 	return (
 		<Bem>
-			<DataSet values={values} labels={labels} colors={colors} classNames={classNames} steps={steps} onChange={onChangeHandle}>
+			<DataSet values={values} labels={labels} colors={colors} classNames={classNames} steps={steps} translateToDisplayValue={translateToDisplayValue} onChange={onChangeHandle}>
 				<Legend />
-				<LineChartInput width={300} height={600} />
+				<LineChartInput width={400} height={600} />
+				<DataTable />
 			</DataSet>
 		</Bem>
 	);
