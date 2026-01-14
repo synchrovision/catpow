@@ -55,7 +55,7 @@ class style_config{
 				'r'=>'regular',
 				'w'=>'wide'
 			]],
-			'radius'=>['label'=>'アイテム','default'=>'20rem','shorthand'=>'r','var'=>'--cp-border-radius','variants'=>self::$size_variants_3],
+			'radius'=>['label'=>'角丸','default'=>'20rem','shorthand'=>'r','var'=>'--cp-border-radius','variants'=>self::$size_variants_3],
 			'item'=>['label'=>'アイテム','default'=>'20rem','shorthand'=>'i','var'=>'--cp-item-size','variants'=>self::$size_variants_3],
 			'gap'=>['label'=>'間隔','default'=>'1rem','shorthand'=>'g','var'=>'--cp-item-gap','variants'=>self::$size_variants_3],
 			'margin'=>['label'=>'マージン','default'=>'1rem','shorthand'=>'mg','var'=>'--cp-margin','variants'=>self::$size_variants_5],
