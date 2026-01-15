@@ -358,6 +358,25 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
+	headingTag: {
+		name: "headingTag",
+		input: "buttons",
+		key: "HeadingTag",
+		label: __("見出しタグ", "catpow"),
+		values: ["h1", "h2", "h3", "h4", "h5", "h6"],
+		effect: (val, states, { set }) => {
+			for (const key in states) {
+				if (key.slice(0, 7) === "isLevel") {
+					states[key] = false;
+				}
+			}
+			if (/^h\d$/.test(val)) {
+				states["isLevel" + val[1]] = true;
+			}
+			set({ classes: CP.flagsToClassNames(states) });
+		},
+		required: true,
+	},
 	headingType: {
 		name: "headingType",
 		type: "buttons",
