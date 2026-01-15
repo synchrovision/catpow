@@ -178,15 +178,10 @@ wp.blocks.registerBlockType("catpow/section", {
 						],
 					},
 					bind: {
-						isTypeScene: {
-							_: ["is-level2"],
-						},
 						isTypeArticle: {
-							_: ["is-level3"],
 							bodyClasses: ["hasContentWidth"],
 						},
 						isTypeColumn: {
-							_: ["is-level3"],
 							bodyClasses: ["hasContentWidth"],
 						},
 					},
