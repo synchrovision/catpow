@@ -30,25 +30,8 @@
         const { devices: devices2, imageKeys: imageKeys2, imageSizes: imageSizes2 } = CP.config.section;
         const selectiveClasses2 = [
           { name: "sectionTag", input: "buttons", key: "SectionTag", label: __("\u30BB\u30AF\u30B7\u30E7\u30F3\u30BF\u30B0", "catpow"), values: ["article", "section", "aside", "div"], required: true },
-          {
-            name: "headingTag",
-            input: "buttons",
-            key: "HeadingTag",
-            label: __("\u898B\u51FA\u3057\u30BF\u30B0", "catpow"),
-            values: ["h1", "h2", "h3", "h4"],
-            effect: (val, states2, { set }) => {
-              for (const key in states2) {
-                if (key.slice(0, 7) === "isLevel") {
-                  states2[key] = false;
-                }
-              }
-              if (/^h\d$/.test(val)) {
-                states2["isLevel" + val[1]] = true;
-              }
-              set({ classes: CP.flagsToClassNames(states2) });
-            },
-            required: true
-          },
+          "headingTag",
+          "level",
           {
             name: "type",
             label: __("\u30BF\u30A4\u30D7", "catpow"),
@@ -119,7 +102,6 @@
                 }
               ],
               isTypeArticle: [
-                { name: "level", type: "buttons", label: __("\u30EC\u30D9\u30EB", "catpow"), values: { isLevel1: "1", isLevel2: "2", isLevel3: "3", isLevel4: "4" } },
                 {
                   name: "headingType",
                   type: "gridbuttons",
