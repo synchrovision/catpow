@@ -29,6 +29,8 @@ class style_config{
 			'xl'=>'x-large'
 		],
 		$cache=[];
+
+	//roles
 	public static function get_color_roles(){
 		if(isset(static::$color_roles)){return static::$color_roles;}
 		return static::$color_roles=apply_filters('cp_color_roles',[
@@ -124,30 +126,9 @@ class style_config{
 			$relative_size_roles
 		));
 	}
-	public static function update($wp_customize_settings=null){
-		if(isset($wp_customize_settings)){
-			$id_data=$wp_customize_settings->id_data();
-			$domain=$id_data['base'];
-			$data=get_theme_mod($domain);
-			if(!empty($key=$id_data['keys'][0]??null)){
-				$data[$key]=$wp_customize_settings->post_value();
-			}
-			else{
-				$data=$wp_customize_settings->post_value();
-			}
-			static::update_config_json($domain,$data);
-		}
-	}
-	public static function translate_keys($domain,$data){
-		$get_roles_method='get_'.preg_replace('/s$/','',$domain).'_roles';
-		if(!method_exists(static::class,$get_roles_method)){return $data;}
-		$roles=static::{$get_roles_method}();
-		$rtn=[];
-		foreach($data as $key=>$val){
-			$rtn[$roles[$key]['shorthand']??$key]=$val;
-		}
-		return $rtn;
-	}
+
+
+	//css
 	public static function get_tones($colors){
 		$roles=static::get_color_roles();
 		$tones=[];
@@ -283,6 +264,32 @@ class style_config{
 			if(isset($vars[$matches[1]])){return $vars[$matches[1]];}
 			return $matches[0];
 		},$css_code);
+	}
+
+	//json
+	public static function update($wp_customize_settings=null){
+		if(isset($wp_customize_settings)){
+			$id_data=$wp_customize_settings->id_data();
+			$domain=$id_data['base'];
+			$data=get_theme_mod($domain);
+			if(!empty($key=$id_data['keys'][0]??null)){
+				$data[$key]=$wp_customize_settings->post_value();
+			}
+			else{
+				$data=$wp_customize_settings->post_value();
+			}
+			static::update_config_json($domain,$data);
+		}
+	}
+	public static function translate_keys($domain,$data){
+		$get_roles_method='get_'.preg_replace('/s$/','',$domain).'_roles';
+		if(!method_exists(static::class,$get_roles_method)){return $data;}
+		$roles=static::{$get_roles_method}();
+		$rtn=[];
+		foreach($data as $key=>$val){
+			$rtn[$roles[$key]['shorthand']??$key]=$val;
+		}
+		return $rtn;
 	}
 	public static function init_config_json(){
 		$colors=array_merge(
