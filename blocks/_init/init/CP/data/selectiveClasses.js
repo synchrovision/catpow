@@ -377,6 +377,7 @@ export const selectiveClassesPresets = {
 		},
 		required: true,
 	},
+	level: { name: "level", type: "buttons", label: __("レベル", "catpow"), values: { isLevel1: "1", isLevel2: "2", isLevel3: "3", isLevel4: "4", isLevel5: "5", isLevel6: "6" } },
 	headingType: {
 		name: "headingType",
 		type: "buttons",
