@@ -75,16 +75,6 @@
     }
   });
 
-  // react-global:react-dom
-  var react_dom_default, createPortal, flushSync;
-  var init_react_dom = __esm({
-    "react-global:react-dom"() {
-      react_dom_default = window.wp.element;
-      createPortal = wp.element.createPortal;
-      flushSync = wp.element.flushSync;
-    }
-  });
-
   // node_modules/tslib/tslib.es6.js
   var tslib_es6_exports = {};
   __export(tslib_es6_exports, {
@@ -796,6 +786,16 @@
       exports.createEnhancer = createEnhancer_1.default;
       var hookToRenderProp_1 = tslib_1.__importDefault(require_hookToRenderProp());
       exports.hookToRenderProp = hookToRenderProp_1.default;
+    }
+  });
+
+  // react-global:react-dom
+  var react_dom_default, createPortal, flushSync;
+  var init_react_dom = __esm({
+    "react-global:react-dom"() {
+      react_dom_default = window.wp.element;
+      createPortal = wp.element.createPortal;
+      flushSync = wp.element.flushSync;
     }
   });
 
@@ -5540,6 +5540,26 @@
         ...otherParams
       };
     },
+    headingTag: {
+      name: "headingTag",
+      input: "buttons",
+      key: "HeadingTag",
+      label: __4("\u898B\u51FA\u3057\u30BF\u30B0", "catpow"),
+      values: ["h1", "h2", "h3", "h4", "h5", "h6"],
+      effect: (val, states, { set }) => {
+        for (const key in states) {
+          if (key.slice(0, 7) === "isLevel") {
+            states[key] = false;
+          }
+        }
+        if (/^h\d$/.test(val)) {
+          states["isLevel" + val[1]] = true;
+        }
+        set({ classes: CP.flagsToClassNames(states) });
+      },
+      required: true
+    },
+    level: { name: "level", type: "buttons", label: __4("\u30EC\u30D9\u30EB", "catpow"), values: { isLevel1: "1", isLevel2: "2", isLevel3: "3", isLevel4: "4", isLevel5: "5", isLevel6: "6" } },
     headingType: {
       name: "headingType",
       type: "buttons",
