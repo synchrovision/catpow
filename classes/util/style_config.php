@@ -342,6 +342,10 @@ class style_config{
 			array_column(static::get_size_roles(),'default','shorthand'),
 			static::get_config_json('sizes')
 		));
+		static::set_config_json('line_height',array_merge(
+			array_column(static::get_line_height_roles(),'default','shorthand'),
+			static::get_config_json('line_height')
+		));
 	}
 	public static function update_config_json($domain,$data){
 		if($domain==='colors'){
