@@ -96,15 +96,17 @@ class style_config{
 		$paragraph_size_roles=[];
 		$default_font_sizes=[];
 		foreach([
-			[2.00,	4.00,	1.50],
-			[1.75,	3.00,	1.25],
-			[1.50,	2.00,	1.125],
-			[1.25,	1.25,	1.00],
-			[1.125,	1.125,	1.00],
-			[1.00,	1.00,	1.00],
+			[2.00,	4.00,	1.75,	1.50,	1.00],
+			[1.75,	3.00,	1.50,	1.25,	1.00],
+			[1.50,	2.00,	1.25,	1.125,	1.00],
+			[1.25,	1.25,	1.125,	1.00,	0.875],
+			[1.125,	1.125,	1.00,	1.00,	0.875],
+			[1.00,	1.00,	1.00,	1.00,	0.875],
 		] as $s){
 			$default_font_sizes['h'][]=sprintf('min(%svw,%srem)',$s[0]*4,$s[1]);
-			$default_font_sizes['p'][]=sprintf('min(%svw,%srem)',$s[2]*4,$s[2]);
+			$default_font_sizes['l'][]=sprintf('min(%svw,%srem)',$s[2]*4,$s[2]);
+			$default_font_sizes['p'][]=sprintf('min(%svw,%srem)',$s[3]*4,$s[3]);
+			$default_font_sizes['c'][]=sprintf('min(%svw,%srem)',$s[4]*4,$s[4]);
 		}
 		for($i=1;$i<=6;$i++){
 			$heading_size_roles["heading{$i}"]=[
@@ -113,16 +115,30 @@ class style_config{
 				'shorthand'=>"h{$i}",
 				'responsive'=>true
 			];
+			$lead_size_roles["lead{$i}"]=[
+				'label'=>"リード文{$i}",
+				'default'=>$default_font_sizes['l'][$i-1],
+				'shorthand'=>"l{$i}",
+				'responsive'=>true
+			];
 			$paragraph_size_roles["paragraph{$i}"]=[
 				'label'=>"段落{$i}",
 				'default'=>$default_font_sizes['p'][$i-1],
 				'shorthand'=>"p{$i}",
 				'responsive'=>true
 			];
+			$caption_size_roles["caption{$i}"]=[
+				'label'=>"注釈{$i}",
+				'default'=>$default_font_sizes['c'][$i-1],
+				'shorthand'=>"c{$i}",
+				'responsive'=>true
+			];
 		}
 		return static::$font_size_roles=apply_filters('cp_font_size_roles',array_merge(
 			$heading_size_roles,
+			$lead_size_roles,
 			$paragraph_size_roles,
+			$caption_size_roles,
 			$relative_size_roles
 		));
 	}
