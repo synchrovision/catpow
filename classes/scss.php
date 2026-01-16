@@ -270,7 +270,7 @@ class scss{
 			$scssc->registerFunction('translate_line_height',function($args)use($scssc){
 				$args=array_map([$scssc,'compileValue'],$args);
 				$height=false;
-				$height=util\style_config::get_config_json('line-height');
+				$height=util\style_config::get_config_json('line_height');
 				if(isset($weights[$args[0]])){
 					$height=sprintf('var(--cp-line-height-%s)',$args[0]);
 				}
