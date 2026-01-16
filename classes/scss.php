@@ -267,6 +267,17 @@ class scss{
 				if(empty($weight)){return Compiler::$false;}
 				return [TYPE::T_KEYWORD,$weight];
 			});
+			$scssc->registerFunction('translate_line_height',function($args)use($scssc){
+				$args=array_map([$scssc,'compileValue'],$args);
+				$height=false;
+				$height=util\style_config::get_config_json('line-height');
+				if(isset($weights[$args[0]])){
+					$height=sprintf('var(--cp-line-height-%s)',$args[0]);
+				}
+				$height=apply_filters('cp_translate_line_height',$height,$args);
+				if(empty($height)){return Compiler::$false;}
+				return [TYPE::T_KEYWORD,$height];
+			});
 		}
 		do_action('cp_scss_compiler_init',$scssc);
 		if($for_admin){

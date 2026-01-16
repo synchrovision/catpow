@@ -16,6 +16,7 @@ class style_config{
 		$size_roles,
 		$font_weight_roles,
 		$font_size_roles,
+		$line_height_roles,
 		$size_variants_3=[
 			's'=>'small',
 			'm'=>'medium',
@@ -142,6 +143,15 @@ class style_config{
 			$relative_size_roles
 		));
 	}
+	public static function get_line_height_roles(){
+		if(isset(static::$line_height_roles)){return static::$line_height_roles;}
+		return static::$line_height_roles=apply_filters('cp_line_height_roles',[
+			'heading'=>['label'=>'見出し','default'=>'150%','shorthand'=>'h'],
+			'lead'=>['label'=>'リード文','default'=>'150%','shorthand'=>'l'],
+			'text'=>['label'=>'本文','default'=>'150%','shorthand'=>'t'],
+			'caption'=>['label'=>'注釈','default'=>'150%','shorthand'=>'c'],
+		]);
+	}
 
 
 	//css
@@ -200,6 +210,7 @@ class style_config{
 			'fonts'=>self::get_config_json('fonts'),
 			'font-weights'=>self::get_config_json('font_weights'),
 			'font-sizes'=>self::get_config_json('font_sizes'),
+			'line-height'=>self::get_config_json('line_height'),
 		]);
 		$bps=array_values(self::get_breakpoints());
 		if(isset($vars['tones']['i'])){
