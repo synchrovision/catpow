@@ -244,7 +244,9 @@ class scss{
 			$scssc->registerFunction('translate_font_size',function($args)use($scssc){
 				$args=array_map([$scssc,'compileValue'],$args);
 				if($args[0]==='h'){return 'var(--cp-font-sizes-h)';}
+				if($args[0]==='l'){return 'var(--cp-font-sizes-l)';}
 				if($args[0]==='p'){return 'var(--cp-font-sizes-p)';}
+				if($args[0]==='c'){return 'var(--cp-font-sizes-c)';}
 				$size=false;
 				$sizes=util\style_config::get_config_json('font_sizes');
 				if(isset($sizes[$args[0]])){
