@@ -278,6 +278,17 @@ class scss{
 				if(empty($height)){return Compiler::$false;}
 				return [TYPE::T_KEYWORD,$height];
 			});
+			$scssc->registerFunction('translate_letter_spacing',function($args)use($scssc){
+				$args=array_map([$scssc,'compileValue'],$args);
+				$height=false;
+				$height=util\style_config::get_config_json('letter_spacing');
+				if(isset($weights[$args[0]])){
+					$height=sprintf('var(--cp-letter-spacing-%s)',$args[0]);
+				}
+				$height=apply_filters('cp_translate_letter_spacing',$height,$args);
+				if(empty($height)){return Compiler::$false;}
+				return [TYPE::T_KEYWORD,$height];
+			});
 		}
 		do_action('cp_scss_compiler_init',$scssc);
 		if($for_admin){

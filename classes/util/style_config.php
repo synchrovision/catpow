@@ -17,6 +17,7 @@ class style_config{
 		$font_weight_roles,
 		$font_size_roles,
 		$line_height_roles,
+		$letter_spacing_roles,
 		$size_variants_3=[
 			's'=>'small',
 			'm'=>'medium',
@@ -152,6 +153,15 @@ class style_config{
 			'caption'=>['label'=>'注釈','default'=>'150%','shorthand'=>'c'],
 		]);
 	}
+	public static function get_letter_spacing_roles(){
+		if(isset(static::$letter_spacing_roles)){return static::$letter_spacing_roles;}
+		return static::$letter_spacing_roles=apply_filters('cp_letter_spacing_roles',[
+			'heading'=>['label'=>'見出し','default'=>'normal','shorthand'=>'h'],
+			'lead'=>['label'=>'リード文','default'=>'normal','shorthand'=>'l'],
+			'text'=>['label'=>'本文','default'=>'normal','shorthand'=>'t'],
+			'caption'=>['label'=>'注釈','default'=>'normal','shorthand'=>'c'],
+		]);
+	}
 
 
 	//css
@@ -211,6 +221,7 @@ class style_config{
 			'font-weights'=>self::get_config_json('font_weights'),
 			'font-sizes'=>self::get_config_json('font_sizes'),
 			'line-height'=>self::get_config_json('line_height'),
+			'letter-spacing'=>self::get_config_json('letter_spacing'),
 		]);
 		$bps=array_values(self::get_breakpoints());
 		if(isset($vars['tones']['i'])){
@@ -345,6 +356,10 @@ class style_config{
 		static::set_config_json('line_height',array_merge(
 			array_column(static::get_line_height_roles(),'default','shorthand'),
 			static::get_config_json('line_height')
+		));
+		static::set_config_json('letter_spacing',array_merge(
+			array_column(static::get_letter_spacing_roles(),'default','shorthand'),
+			static::get_config_json('letter_spacing')
 		));
 	}
 	public static function update_config_json($domain,$data){
