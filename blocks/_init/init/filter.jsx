@@ -2,8 +2,9 @@
 wp.blocks.registerBlockStyle("core/heading", { name: "headline", label: "headline" });
 wp.blocks.registerBlockStyle("core/heading", { name: "catch", label: "catch" });
 
-wp.blocks.registerBlockStyle("core/paragraph", { name: "message", label: "message" });
-wp.blocks.registerBlockStyle("core/paragraph", { name: "caption", label: "caption" });
+wp.blocks.registerBlockStyle("core/paragraph", { name: "heading", label: "Heading" });
+wp.blocks.registerBlockStyle("core/paragraph", { name: "lead", label: "Lead" });
+wp.blocks.registerBlockStyle("core/paragraph", { name: "caption", label: "Caption" });
 
 wp.blocks.registerBlockStyle("core/list", { name: "annotation", label: "annotation" });
 wp.blocks.registerBlockStyle("core/list", { name: "circle", label: "circle" });
