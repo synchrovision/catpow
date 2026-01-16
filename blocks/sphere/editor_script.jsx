@@ -5,7 +5,7 @@
 };
 wp.blocks.registerBlockType("catpow/sphere", {
 	title: "🐾 Sphere",
-	description: "ログイン中のユーザーの情報を表示するためのコンテナです。",
+	description: "丸型のアイテムリストブロックです。",
 	icon: "image-filter",
 	category: "catpow",
 	transforms: {
