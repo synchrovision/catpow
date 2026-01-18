@@ -1,5 +1,5 @@
 (() => {
-  // components/Customize/component.jsx
+  // ../components/Customize/component.jsx
   Catpow.Customize = (props) => {
     const { useState, useCallback, useMemo, useEffect, useRef, useReducer } = wp.element;
     const { id, type = "Text", param } = props;
@@ -9,10 +9,13 @@
         setValue(setting.get());
       });
     }, [id]);
-    const onChange = useCallback((value2) => {
-      setValue(value2);
-      wp.customize.control(id).setting.set(value2);
-    }, [id]);
+    const onChange = useCallback(
+      (value2) => {
+        setValue(value2);
+        wp.customize.control(id).setting.set(value2);
+      },
+      [id]
+    );
     if (value === null) {
       return false;
     }
