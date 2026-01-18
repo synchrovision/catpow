@@ -40,8 +40,6 @@ class scss{
 		$scssc->setSourceMap(Compiler::SOURCE_MAP_FILE);
 		$color_roles=util\style_config::get_color_roles();
 		$color_roles_by_shorthand=array_column($color_roles,null,'shorthand');
-		$size_roles=util\style_config::get_size_roles();
-		$size_roles_by_shorthand=array_column($size_roles,null,'shorthand');
 		$font_roles=util\style_config::get_font_roles();
 		$colors=get_theme_mod('colors');
 		$fonts=get_theme_mod('fonts');
@@ -219,82 +217,33 @@ class scss{
 				$tone=apply_filters('cp_extract_color_tone',$tone,$args);
 				return self::create_map_data($tone);
 			});
-			$scssc->registerFunction('translate_size',function($args)use($size_roles_by_shorthand,$scssc){
-				$args=array_map([$scssc,'compileValue'],$args);
-				$size=false;
-				$sizes=util\style_config::get_config_json('sizes');
-				if(!empty($role=$size_roles_by_shorthand[$args[0]]??null)){
-					$size=empty($role['var'])?sprintf('var(--cp-sizes-%s)',$args[0]):$role['var'];
-				}
-				$size=apply_filters('cp_translate_size',$size,$args);
-				if(empty($size)){return Compiler::$false;}
-				return [TYPE::T_KEYWORD,$size];
-			});
-			$scssc->registerFunction('translate_font',function($args)use($scssc){
-				$args=array_map([$scssc,'compileValue'],$args);
-				$font=false;
-				$fonts=util\style_config::get_config_json('fonts');
-				if(isset($fonts[$args[0]])){
-					$font=sprintf('var(--cp-fonts-%s)',$args[0]);
-				}
-				$font=apply_filters('cp_translate_font',$font,$args);
-				if(empty($font)){return Compiler::$false;}
-				return [TYPE::T_KEYWORD,$font];
-			});
-			$scssc->registerFunction('translate_font_size',function($args)use($scssc){
-				$args=array_map([$scssc,'compileValue'],$args);
-				if($args[0]==='h'){return 'var(--cp-font-sizes-h)';}
-				if($args[0]==='l'){return 'var(--cp-font-sizes-l)';}
-				if($args[0]==='p'){return 'var(--cp-font-sizes-p)';}
-				if($args[0]==='c'){return 'var(--cp-font-sizes-c)';}
-				$size=false;
-				$sizes=util\style_config::get_config_json('font_sizes');
-				if(isset($sizes[$args[0]])){
-					$size=sprintf('var(--cp-font-sizes-%s)',$args[0]);
-				}
-				$size=apply_filters('cp_translate_font_size',$size,$args);
-				if(empty($size)){return Compiler::$false;}
-				return [TYPE::T_KEYWORD,$size];
-			});
-			$scssc->registerFunction('translate_font_weight',function($args)use($scssc){
-				$args=array_map([$scssc,'compileValue'],$args);
-				$weight=false;
-				$weights=util\style_config::get_config_json('font-weights');
-				if(isset($weights[$args[0]])){
-					$weight=sprintf('var(--cp-font-weights-%s)',$args[0]);
-				}
-				$weight=apply_filters('cp_translate_font_weight',$weight,$args);
-				if(empty($weight)){return Compiler::$false;}
-				return [TYPE::T_KEYWORD,$weight];
-			});
-			$scssc->registerFunction('translate_line_height',function($args)use($scssc){
-				$args=array_map([$scssc,'compileValue'],$args);
-				$height=false;
-				$height=util\style_config::get_config_json('line_height');
-				if(isset($weights[$args[0]])){
-					$height=sprintf('var(--cp-line-height-%s)',$args[0]);
-				}
-				$height=apply_filters('cp_translate_line_height',$height,$args);
-				if(empty($height)){return Compiler::$false;}
-				return [TYPE::T_KEYWORD,$height];
-			});
-			$scssc->registerFunction('translate_letter_spacing',function($args)use($scssc){
-				$args=array_map([$scssc,'compileValue'],$args);
-				$height=false;
-				$height=util\style_config::get_config_json('letter_spacing');
-				if(isset($weights[$args[0]])){
-					$height=sprintf('var(--cp-letter-spacing-%s)',$args[0]);
-				}
-				$height=apply_filters('cp_translate_letter_spacing',$height,$args);
-				if(empty($height)){return Compiler::$false;}
-				return [TYPE::T_KEYWORD,$height];
-			});
+			self::register_translation_for_role($scssc,'size');
+			self::register_translation_for_role($scssc,'font_family');
+			self::register_translation_for_role($scssc,'font_size');
+			//self::register_translation_for_role($scssc,'font_weight');
+			self::register_translation_for_role($scssc,'line_height');
+			self::register_translation_for_role($scssc,'letter_spacing');
 		}
 		do_action('cp_scss_compiler_init',$scssc);
 		if($for_admin){
 			return static::$admin_scssc=$scssc;
 		}
 		return static::$scssc=$scssc;
+	}
+	protected static function register_translation_for_role($scssc,$role_name){
+		$roles_by_shorthand=array_column(util\style_config::{'get_'.$role_name.'_roles'}(),null,'shorthand');
+		$scssc->registerFunction('translate_'.$role_name,function($args)use($scssc,$role_name,$roles_by_shorthand){
+			$args=array_map([$scssc,'compileValue'],$args);
+			$value=false;
+			if(isset($roles_by_shorthand[$args[0]])){
+				$value=empty($roles_by_shorthand[$args[0]]['var'])?
+					sprintf('var(--cp-%s-%s)',str_replace('_','-',$role_name),$args[0]):
+					sprintf('var(%s)',$roles_by_shorthand[$args[0]]['var']);
+			}
+			$value=apply_filters('cp_translate_'.$role_name,$value,$args);
+			if(empty($value)){return Compiler::$false;}
+			return [TYPE::T_KEYWORD,$value];
+		});
 	}
 	public static function compile($scss_names){
 		if(!current_user_can('edit_themes'))return;
