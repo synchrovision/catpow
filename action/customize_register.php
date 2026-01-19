@@ -73,7 +73,7 @@ $wp_customize->add_control(new Catpow\customize\control($wp_customize,'letter_sp
 		'roles'=>style_config::get_letter_spacing_roles()
 	]
 ]));
-add_action("customize_save_line_height",["Catpow\\util\\style_config",'update']);
+add_action("customize_save_letter_spacing",["Catpow\\util\\style_config",'update']);
 
 //Font Weight
 $wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'font_weight',[
