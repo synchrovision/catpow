@@ -40,7 +40,7 @@ class scss{
 		$scssc->setSourceMap(Compiler::SOURCE_MAP_FILE);
 		$color_roles=util\style_config::get_color_roles();
 		$color_roles_by_shorthand=array_column($color_roles,null,'shorthand');
-		$font_roles=util\style_config::get_font_roles();
+		$font_roles=util\style_config::get_font_family_roles();
 		$colors=get_theme_mod('colors');
 		$fonts=get_theme_mod('fonts');
 		$theme_customize_values=[
@@ -153,6 +153,7 @@ class scss{
 				return [TYPE::T_KEYWORD,$color];
 			});
 			$scssc->registerFunction('get_color_classes',function($args)use($color_roles_by_shorthand,$scssc){
+				//@todo: reduce code
 				$classes=[];
 				foreach($color_roles_by_shorthand as $key=>$color_role){
 					if(!empty($color_role['extend'])){
