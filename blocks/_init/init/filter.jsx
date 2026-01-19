@@ -4,6 +4,7 @@ wp.blocks.registerBlockStyle("core/heading", { name: "catch", label: "catch" });
 
 wp.blocks.registerBlockStyle("core/paragraph", { name: "heading", label: "Heading" });
 wp.blocks.registerBlockStyle("core/paragraph", { name: "lead", label: "Lead" });
+wp.blocks.registerBlockStyle("core/paragraph", { name: "paragraph", label: "Paragraph" });
 wp.blocks.registerBlockStyle("core/paragraph", { name: "caption", label: "Caption" });
 
 wp.blocks.registerBlockStyle("core/list", { name: "annotation", label: "annotation" });
@@ -72,5 +73,5 @@ wp.hooks.addFilter(
 
 			return <>{content}</>;
 		};
-	}, "allowColumnStyle")
+	}, "allowColumnStyle"),
 );
