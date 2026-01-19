@@ -54,6 +54,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 		const selectiveClasses = useMemo(() => {
 			const { imageKeys } = CP.config.showcase;
 			const selectiveClasses = [
+				"level",
 				"color",
 				"colorScheme",
 				{
@@ -217,7 +218,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 							</CP.Link.Edit>
 						)}
 					</div>
-				</CP.Item>
+				</CP.Item>,
 			);
 		});
 
@@ -336,7 +337,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 							</CP.Link>
 						)}
 					</div>
-				</li>
+				</li>,
 			);
 		});
 		return (

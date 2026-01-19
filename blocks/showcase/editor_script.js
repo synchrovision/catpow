@@ -53,6 +53,7 @@
       const selectiveClasses = useMemo(() => {
         const { imageKeys: imageKeys2 } = CP.config.showcase;
         const selectiveClasses2 = [
+          "level",
           "color",
           "colorScheme",
           {
