@@ -139,10 +139,11 @@ Catpow.Customize.FontSizes = (props) => {
 			>
 				<Legend />
 				<LineChartInput width={400} height={600} />
+				<DataTable showRowHeader={false} />
 			</DataSet>
 			<DataSet values={relativeSizeValues} labels={relativeSizeLabels} steps={relativeSizeSteps} translateToDisplayValue={translateRelativeValueToDisplayValue} onChange={onChangeRelativeValues}>
-				<DataTable />
 				<LineChartInput width={400} height={300} />
+				<DataTable />
 			</DataSet>
 		</Bem>
 	);

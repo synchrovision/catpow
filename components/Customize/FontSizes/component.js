@@ -1053,9 +1053,9 @@
   // node_modules-included/catpow/src/component/Chart/DataTable.tsx
   init_react();
   var DataTable = (props) => {
-    const { className = "cp-datatabel", ...otherProps } = props;
+    const { className = "cp-datatabel", showColumnHeader = true, showRowHeader = true, ...otherProps } = props;
     const { labels, classNames, colors, values, getDisplayValue } = useContext(DataSetContext);
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("table", null, labels.columns && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, labels.rows && /* @__PURE__ */ wp.element.createElement("td", null), labels.columns.map((label) => /* @__PURE__ */ wp.element.createElement("th", null, label)))), /* @__PURE__ */ wp.element.createElement("tbody", null, values.map((row, r2) => /* @__PURE__ */ wp.element.createElement("tr", null, labels.rows && /* @__PURE__ */ wp.element.createElement("th", null, labels.rows[r2]), row.map((v, c) => /* @__PURE__ */ wp.element.createElement("td", null, getDisplayValue(r2, c)))))))));
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("table", null, showColumnHeader && labels.columns && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, showRowHeader && labels.rows && /* @__PURE__ */ wp.element.createElement("td", null), labels.columns.map((label) => /* @__PURE__ */ wp.element.createElement("th", null, label)))), /* @__PURE__ */ wp.element.createElement("tbody", null, values.map((row, r2) => /* @__PURE__ */ wp.element.createElement("tr", null, showRowHeader && labels.rows && /* @__PURE__ */ wp.element.createElement("th", null, labels.rows[r2]), row.map((v, c) => /* @__PURE__ */ wp.element.createElement("td", null, getDisplayValue(r2, c)))))))));
   };
 
   // node_modules-included/catpow/src/component/Chart/Legend.tsx
@@ -1579,7 +1579,8 @@
         onChange: onChangeStaticValues
       },
       /* @__PURE__ */ wp.element.createElement(Legend, null),
-      /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 400, height: 600 })
-    ), /* @__PURE__ */ wp.element.createElement(DataSet, { values: relativeSizeValues, labels: relativeSizeLabels, steps: relativeSizeSteps, translateToDisplayValue: translateRelativeValueToDisplayValue, onChange: onChangeRelativeValues }, /* @__PURE__ */ wp.element.createElement(DataTable, null), /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 400, height: 300 })));
+      /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 400, height: 600 }),
+      /* @__PURE__ */ wp.element.createElement(DataTable, { showRowHeader: false })
+    ), /* @__PURE__ */ wp.element.createElement(DataSet, { values: relativeSizeValues, labels: relativeSizeLabels, steps: relativeSizeSteps, translateToDisplayValue: translateRelativeValueToDisplayValue, onChange: onChangeRelativeValues }, /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 400, height: 300 }), /* @__PURE__ */ wp.element.createElement(DataTable, null)));
   };
 })();
