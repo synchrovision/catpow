@@ -50,6 +50,20 @@ add_action('wp_head',function(){
 				});
 			});
 		});
+		wp.customize('line_height',function(setting){
+			setting.bind(function(lineHeights){
+				Object.keys(lineHeights).forEach((role)=>{
+					rootStyle.setProperty('--cp-line-height-'+role,lineHeights[role]);
+				});
+			});
+		});
+		wp.customize('font_weight',function(setting){
+			setting.bind(function(fontWeight){
+				Object.keys(fontWeight).forEach((role)=>{
+					rootStyle.setProperty('--cp-font-weight-'+role,fontWeight[role]);
+				});
+			});
+		});
 	});
 </script>
 <?php

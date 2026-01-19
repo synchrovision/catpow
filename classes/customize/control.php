@@ -11,6 +11,9 @@ class control extends \WP_Customize_Control{
 	}
 	protected function render_content(){
 		$id='cp_customize_component_'.$this->id;
+		if(!empty($this->label)){
+			printf('<h5 class="cp-customize__label">%s</h5>',$this->label);
+		}
 		?>
 		<div id="<?=$id?>"></div>
 		<script>

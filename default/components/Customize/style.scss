@@ -1,6 +1,14 @@
 @import 'admin_style_config.scss';
 
 .cp{
+	&-customize{
+		&__label{
+			@include bnd((mg:1em a .5em,pd:.5em 1em));
+			@include bdr((r:1em));
+			@include bg((c:t 1 .2));
+			@include txt((p:16,w:b));
+		}
+	}
 	&-chartinput{
 		@include usr((c:p));
 	}
@@ -58,7 +66,7 @@
 		@include bnd((pd:1em 0));
 		&__table{
 			@include bnd((w:f));
-			@include tbl(());
+			@include tbl((l:f));
 			@include txt((p:12));
 			&-thead,&-tbody{
 				&-tr{
@@ -75,6 +83,8 @@
 						@include txt((a:c));
 					}
 					&-td{
+						@include bdr((p:t l,s:n));
+						@include bg((c:n));
 					}
 				}
 			}
@@ -86,7 +96,7 @@
 					}
 					&-td{
 						@include bg((c:#fff));
-						@include txt((a:r));
+						@include txt((a:c));
 					}
 					&:nth-child(odd){
 						#{$row}{
@@ -100,6 +110,25 @@
 					}
 				}
 			}
+		}
+	}
+	&-tabpanel{
+		&__tabs{
+			@include flx((w:n));
+			&-tab{
+				@include bnd((d:b,pd:.4em 0,f:1 1 a));
+				@include bdr((s:s,w:1,r:.5em .5em 0 0));
+				@include usr((c:p));
+				@include txt((a:c));
+				@include bg((c:#0001));
+				&.is-active{
+					@include bdr((p:b,s:n));
+					@include bg((c:n));
+				}
+			}
+		}
+		&__contents{
+			@include bnd(());
 		}
 	}
 }
