@@ -36,17 +36,17 @@ add_action('wp_head',function(){
 				rootStyle.setProperty('--cp-tones-hs',colors.hueShift);
 			});
 		});
-<?php foreach(Catpow\util\style_config::get_font_roles() as $role=>$conf):$key=$conf['shorthand'];?>
-		wp.customize('fonts[<?=$role?>]',function(setting){
+<?php foreach(Catpow\util\style_config::get_font_family_roles() as $role=>$conf):$key=$conf['shorthand'];?>
+		wp.customize('font_family[<?=$role?>]',function(setting){
 			setting.bind(function(font){
-				rootStyle.setProperty('--cp-fonts-<?=$key?>',font);
+				rootStyle.setProperty('--cp-font-family-<?=$key?>',font);
 			});
 		});
 <?php endforeach; ?>
-		wp.customize('font_sizes',function(setting){
+		wp.customize('font_size',function(setting){
 			setting.bind(function(fontSizes){
 				Object.keys(fontSizes).forEach((role)=>{
-					rootStyle.setProperty('--cp-font-sizes-'+role,fontSizes[role]);
+					rootStyle.setProperty('--cp-font-size-'+role,fontSizes[role]);
 				});
 			});
 		});

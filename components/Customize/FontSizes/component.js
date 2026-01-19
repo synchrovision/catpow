@@ -793,10 +793,10 @@
   init_react();
 
   // node_modules-included/catpow/src/util/array/phasedRange.js
-  var phasedRange = function* (steps2) {
+  var phasedRange = function* (steps) {
     let i = 0;
-    for (let t of Object.keys(steps2).sort((a, b) => a - b)) {
-      let step = parseFloat(steps2[t]);
+    for (let t of Object.keys(steps).sort((a, b) => a - b)) {
+      let step = parseFloat(steps[t]);
       let end = parseFloat(t);
       if (step > 0) {
         for (; i < end; i += step) {
@@ -880,7 +880,7 @@
   init_react();
   var DataSetContext = createContext(null);
   var DataSet = (props) => {
-    const { labels: labels2, colors: colors2, classNames: classNames2, translateToDisplayValue: translateToDisplayValue2, values, steps: steps2 = { 100: 1 }, snap = true, onChange, children, ...otherProps } = props;
+    const { labels, colors, classNames, translateToDisplayValue, values, steps = { 100: 1 }, snap = true, onChange, children, ...otherProps } = props;
     const [activeRow, setActiveRow] = useState(null);
     const [activeColumn, setActiveColumn] = useState(null);
     const [focusedRow, focusRow] = useState(null);
@@ -906,18 +906,18 @@
     );
     const getDisplayValue = useCallback(
       (r2, c) => {
-        if (translateToDisplayValue2 == null) {
+        if (translateToDisplayValue == null) {
           return values[r2][c];
         }
-        return translateToDisplayValue2(values[r2][c], {
+        return translateToDisplayValue(values[r2][c], {
           r: r2,
           c,
-          className: classNames2?.cells?.[r2]?.[c],
-          label: labels2?.cells?.[r2]?.[c],
-          color: colors2?.cells?.[r2]?.[c] || colors2?.columns?.[c] || colors2?.rows?.[r2]
+          className: classNames?.cells?.[r2]?.[c],
+          label: labels?.cells?.[r2]?.[c],
+          color: colors?.cells?.[r2]?.[c] || colors?.columns?.[c] || colors?.rows?.[r2]
         });
       },
-      [values, translateToDisplayValue2]
+      [values, translateToDisplayValue]
     );
     const setActiveCellValue = useCallback(
       (value) => {
@@ -925,13 +925,13 @@
       },
       [activeRow, activeColumn, setValue]
     );
-    const converter = useMemo(() => steps2.hasOwnProperty("getValue") ? steps2 : rangeValueConverter(steps2, snap), [steps2, snap]);
+    const converter = useMemo(() => steps.hasOwnProperty("getValue") ? steps : rangeValueConverter(steps, snap), [steps, snap]);
     const DataSetContextValue = useMemo(
       () => ({
         values,
-        labels: labels2,
-        colors: colors2,
-        classNames: classNames2,
+        labels,
+        colors,
+        classNames,
         getDisplayValue,
         steps: converter,
         setValue,
@@ -947,9 +947,9 @@
       }),
       [
         values,
-        labels2,
-        colors2,
-        classNames2,
+        labels,
+        colors,
+        classNames,
         getDisplayValue,
         converter,
         setValue,
@@ -1054,21 +1054,21 @@
   init_react();
   var DataTable = (props) => {
     const { className = "cp-datatabel", ...otherProps } = props;
-    const { labels: labels2, classNames: classNames2, colors: colors2, values, getDisplayValue } = useContext(DataSetContext);
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("table", null, labels2.columns && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, labels2.rows && /* @__PURE__ */ wp.element.createElement("td", null), labels2.columns.map((label) => /* @__PURE__ */ wp.element.createElement("th", null, label)))), /* @__PURE__ */ wp.element.createElement("tbody", null, values.map((row, r2) => /* @__PURE__ */ wp.element.createElement("tr", null, labels2.rows && /* @__PURE__ */ wp.element.createElement("th", null, labels2.rows[r2]), row.map((v, c) => /* @__PURE__ */ wp.element.createElement("td", null, getDisplayValue(r2, c)))))))));
+    const { labels, classNames, colors, values, getDisplayValue } = useContext(DataSetContext);
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("table", null, labels.columns && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, labels.rows && /* @__PURE__ */ wp.element.createElement("td", null), labels.columns.map((label) => /* @__PURE__ */ wp.element.createElement("th", null, label)))), /* @__PURE__ */ wp.element.createElement("tbody", null, values.map((row, r2) => /* @__PURE__ */ wp.element.createElement("tr", null, labels.rows && /* @__PURE__ */ wp.element.createElement("th", null, labels.rows[r2]), row.map((v, c) => /* @__PURE__ */ wp.element.createElement("td", null, getDisplayValue(r2, c)))))))));
   };
 
   // node_modules-included/catpow/src/component/Chart/Legend.tsx
   init_react();
   var Legend = (props) => {
     const { className = "cp-legend" } = props;
-    const { labels: labels2, colors: colors2, classNames: classNames2, focusedRow, focusRow } = useContext(DataSetContext);
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, labels2.rows && /* @__PURE__ */ wp.element.createElement("ul", { className: clsx(className, { "has-focused": focusedRow != null }) }, labels2.rows.map((label, r2) => /* @__PURE__ */ wp.element.createElement(
+    const { labels, colors, classNames, focusedRow, focusRow } = useContext(DataSetContext);
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, labels.rows && /* @__PURE__ */ wp.element.createElement("ul", { className: clsx(className, { "has-focused": focusedRow != null }) }, labels.rows.map((label, r2) => /* @__PURE__ */ wp.element.createElement(
       "li",
       {
-        className: clsx("_item", classNames2?.rows?.[r2], { "is-focused": r2 === focusedRow }),
+        className: clsx("_item", classNames?.rows?.[r2], { "is-focused": r2 === focusedRow }),
         onClick: () => focusRow(r2 === focusedRow ? null : r2),
-        style: { "--row-color": colors2?.rows?.[r2] }
+        style: { "--row-color": colors?.rows?.[r2] }
       },
       /* @__PURE__ */ wp.element.createElement("span", { className: "_icon" }),
       /* @__PURE__ */ wp.element.createElement("span", { className: "_label" }, label)
@@ -1114,12 +1114,12 @@
   var LineChart = (props) => {
     const { className = "cp-linechart", children, ...otherProps } = props;
     const { width, height } = otherProps;
-    const { values, steps: steps2 } = useContext(DataSetContext);
+    const { values, steps } = useContext(DataSetContext);
     const getValueWithProgressPoint = useCallback(
       (r2, c, { py }) => {
-        return steps2.getValue(1 - py);
+        return steps.getValue(1 - py);
       },
-      [steps2]
+      [steps]
     );
     const getCellWithProgressPoint = useCallback(
       ({ px, py }, focusedRow) => {
@@ -1129,9 +1129,9 @@
         }
         let r2 = 0;
         let oy = 1 - py;
-        let minD = Math.abs(steps2.getProgress(values[0][c]) - oy);
+        let minD = Math.abs(steps.getProgress(values[0][c]) - oy);
         for (let i = 1; i < values.length; i++) {
-          const d = Math.abs(steps2.getProgress(values[i][c]) - oy);
+          const d = Math.abs(steps.getProgress(values[i][c]) - oy);
           if (d < minD) {
             minD = d;
             r2 = i;
@@ -1139,40 +1139,40 @@
         }
         return { r: r2, c };
       },
-      [steps2, values]
+      [steps, values]
     );
     return /* @__PURE__ */ wp.element.createElement(Chart, { getValueWithProgressPoint, getCellWithProgressPoint, ...otherProps }, /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className, style: { position: "relative" } }, /* @__PURE__ */ wp.element.createElement(SVG2, { className: "_chart", width, height, style: { width: "100%", height: "auto" } }, /* @__PURE__ */ wp.element.createElement(Lines, { className: "_lines" }), /* @__PURE__ */ wp.element.createElement(Grid, { className: "_grid" })), children)));
   };
   var Grid = (props) => {
     const { className } = props;
-    const { steps: steps2, values } = useContext(DataSetContext);
+    const { steps, values } = useContext(DataSetContext);
     const { width, height, margin } = useContext(ChartContext);
     const x1 = margin[3];
     const x2 = width - margin[3];
     const ux = (width - margin[1] - margin[3]) / values[0].length;
     const y1 = margin[0];
     const y2 = height - margin[0];
-    const uy = (height - margin[0] - margin[2]) / (steps2.length - 1);
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("g", { className }, [...range(steps2.length - 1)].map((i) => /* @__PURE__ */ wp.element.createElement("line", { x1, y1: margin[0] + uy * i, x2, y2: margin[0] + uy * i, fill: "transparent", stroke: "gray" })), [...range(values[0].length)].map((i) => /* @__PURE__ */ wp.element.createElement("line", { x1: margin[3] + ux * i, y1, x2: margin[3] + ux * i, y2, fill: "transparent", stroke: "gray" }))));
+    const uy = (height - margin[0] - margin[2]) / (steps.length - 1);
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("g", { className }, [...range(steps.length - 1)].map((i) => /* @__PURE__ */ wp.element.createElement("line", { x1, y1: margin[0] + uy * i, x2, y2: margin[0] + uy * i, fill: "transparent", stroke: "gray" })), [...range(values[0].length)].map((i) => /* @__PURE__ */ wp.element.createElement("line", { x1: margin[3] + ux * i, y1, x2: margin[3] + ux * i, y2, fill: "transparent", stroke: "gray" }))));
   };
   var Lines = (props) => {
     const { className } = props;
-    const { steps: steps2, values, colors: colors2, classNames: classNames2, activeRow, focusedRow, activeColumn } = useContext(DataSetContext);
+    const { steps, values, colors, classNames, activeRow, focusedRow, activeColumn } = useContext(DataSetContext);
     const { width, height, margin } = useContext(ChartContext);
     const x1 = margin[3];
     const w = width - margin[1] - margin[3];
     const ux = w / values[0].length;
     const y2 = height - margin[0];
     const h = height - margin[0] - margin[2];
-    const points = useMemo(() => values.map((row) => row.map((v, c) => ({ x: x1 + ux * (c + 0.5), y: y2 - steps2.getProgress(v) * h }))), [values]);
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("g", { className: clsx(className, { "has-focused": focusedRow != null }) }, points.map((row, r2) => /* @__PURE__ */ wp.element.createElement("g", { className: clsx("_line", classNames2?.rows?.[r2], { "is-active": activeRow === r2, "is-focused": focusedRow === r2 }), style: { "--row-color": colors2?.rows?.[r2] } }, /* @__PURE__ */ wp.element.createElement("path", { d: shape(row).d, fill: "transparent", stroke: colors2?.rows?.[r2] || "gray" }), row.map((p, c) => /* @__PURE__ */ wp.element.createElement(
+    const points = useMemo(() => values.map((row) => row.map((v, c) => ({ x: x1 + ux * (c + 0.5), y: y2 - steps.getProgress(v) * h }))), [values]);
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("g", { className: clsx(className, { "has-focused": focusedRow != null }) }, points.map((row, r2) => /* @__PURE__ */ wp.element.createElement("g", { className: clsx("_line", classNames?.rows?.[r2], { "is-active": activeRow === r2, "is-focused": focusedRow === r2 }), style: { "--row-color": colors?.rows?.[r2] } }, /* @__PURE__ */ wp.element.createElement("path", { d: shape(row).d, fill: "transparent", stroke: colors?.rows?.[r2] || "gray" }), row.map((p, c) => /* @__PURE__ */ wp.element.createElement(
       "circle",
       {
-        className: clsx("_circle", classNames2?.columns?.[c], classNames2?.cells?.[r2]?.[c], { "is-active": activeRow === r2 && activeColumn === c }),
+        className: clsx("_circle", classNames?.columns?.[c], classNames?.cells?.[r2]?.[c], { "is-active": activeRow === r2 && activeColumn === c }),
         cx: p.x,
         cy: p.y,
         r: 4,
-        fill: colors2?.rows?.[r2] || "gray"
+        fill: colors?.rows?.[r2] || "gray"
       }
     ))))));
   };
@@ -1446,63 +1446,97 @@
   var SVGColorsContext = createContext({ h: 20, s: 80, l: 80 });
   var SVGScreenContext = createContext({ width: 1200, height: 400, flex: false });
   var SVG2 = (props) => {
-    const { className = "cp-svg", width = 1200, height = 400, colors: colors2 = { h: 20, s: 80, l: 80 }, children, ...otherProps } = props;
+    const { className = "cp-svg", width = 1200, height = 400, colors = { h: 20, s: 80, l: 80 }, children, ...otherProps } = props;
     const ScreenValue = useMemo(() => ({ width, height, flex: false }), [width, height]);
-    return /* @__PURE__ */ wp.element.createElement(SVGColorsContext.Provider, { value: colors2 }, /* @__PURE__ */ wp.element.createElement(SVGScreenContext.Provider, { value: ScreenValue }, /* @__PURE__ */ wp.element.createElement("svg", { className, width, height, viewBox: `0 0 ${width} ${height}`, xmlns: "http://www.w3.org/2000/svg", ...otherProps }, children)));
+    return /* @__PURE__ */ wp.element.createElement(SVGColorsContext.Provider, { value: colors }, /* @__PURE__ */ wp.element.createElement(SVGScreenContext.Provider, { value: ScreenValue }, /* @__PURE__ */ wp.element.createElement("svg", { className, width, height, viewBox: `0 0 ${width} ${height}`, xmlns: "http://www.w3.org/2000/svg", ...otherProps }, children)));
   };
 
   // ../components/Customize/FontSizes/component.jsx
-  var labels = {
-    rows: ["\u898B\u51FA\u3057(vw)", "\u898B\u51FA\u3057(rem)", "\u672C\u6587(vw)", "\u672C\u6587(rem)"],
+  var staticSizeLabels = {
+    rows: ["\u898B\u51FA\u3057(vw)", "\u898B\u51FA\u3057(rem)", "\u30EA\u30FC\u30C9\u6587(vw)", "\u30EA\u30FC\u30C9\u6587(rem)", "\u672C\u6587(vw)", "\u672C\u6587(rem)", "\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3(vw)", "\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3(rem)"],
     columns: [...range(1, 6)].map((i) => `${7 - i}`),
     cells: [[[...range(1, 6)].map((i) => `h${i}(vw)`), [...range(1, 6)].map((i) => `h${i}(rem)`), [...range(1, 6)].map((i) => `p${i}(vw)`), [...range(1, 6)].map((i) => `p${i}(rem)`)]]
   };
-  var colors = {
-    rows: ["oklch(50% 40% 220)", "oklch(50% 80% 220)", "oklch(60% 5% 220)", "oklch(60% 10% 220)"]
+  var relativeSizeLabels = {
+    columns: ["\u6975\u5C0F", "\u5C0F", "\u5927", "\u6975\u5927"]
   };
-  var classNames = {
-    rows: ["is-row-heading is-row-vw", "is-row-heading is-row-rem", "is-row-paragraph is-row-vw", "is-row-paragraph is-row-rem"]
+  var staticSizeColors = {
+    rows: ["oklch(50% 40% 220)", "oklch(50% 80% 220)", "oklch(50% 40% 220)", "oklch(50% 80% 220)", "oklch(60% 5% 220)", "oklch(60% 10% 220)", "oklch(60% 5% 220)", "oklch(60% 10% 220)"]
   };
-  var translateToDisplayValue = (value, { r: r2 }) => {
+  var staticSizeClassNames = {
+    rows: [
+      "is-row-heading is-row-vw",
+      "is-row-heading is-row-rem",
+      "is-row-lead is-row-vw",
+      "is-row-lead is-row-rem",
+      "is-row-paragraph is-row-vw",
+      "is-row-paragraph is-row-rem",
+      "is-row-caption is-row-vw",
+      "is-row-caption is-row-rem"
+    ]
+  };
+  var translateStaticValueToDisplayValue = (value, { r: r2 }) => {
     if (r2 % 2 === 0) {
       return `${(value / 4).toFixed(2)}`;
     }
     return `${(value / 16).toFixed(2)}`;
   };
+  var translateRelativeValueToDisplayValue = (value, { r: r2 }) => {
+    return `${value}%`;
+  };
   var extractValuesFromSize = (size) => {
     const m = size.match(/min\((.+?)vw,(.+?)rem/);
     return [m[1] * 4, m[2] * 16];
   };
-  var sizesToValues = (sizes, rolesByShorthand) => {
-    const values = [[], [], [], []];
-    [...range(1, 6)].reverse().forEach((i) => {
-      const [hvw, hrem] = extractValuesFromSize(sizes[`h${i}`] || rolesByShorthand[`h${i}`].default);
-      const [pvw, prem] = extractValuesFromSize(sizes[`p${i}`] || rolesByShorthand[`p${i}`].default);
+  var extractStaticSizeValues = (sizes, rolesByShorthand) => {
+    const values = [[], [], [], [], [], [], [], []];
+    [...range(1, 6)].reverse().forEach((l) => {
+      const [hvw, hrem] = extractValuesFromSize(sizes[`h-${l}`] || rolesByShorthand.h.defaultValues[l - 1]);
+      const [lhw, lrem] = extractValuesFromSize(sizes[`l-${l}`] || rolesByShorthand.l.defaultValues[l - 1]);
+      const [pvw, prem] = extractValuesFromSize(sizes[`p-${l}`] || rolesByShorthand.p.defaultValues[l - 1]);
+      const [cvw, crem] = extractValuesFromSize(sizes[`c-${l}`] || rolesByShorthand.c.defaultValues[l - 1]);
       values[0].push(hvw);
       values[1].push(hrem);
-      values[2].push(pvw);
-      values[3].push(prem);
+      values[2].push(lhw);
+      values[3].push(lrem);
+      values[4].push(pvw);
+      values[5].push(prem);
+      values[6].push(cvw);
+      values[7].push(crem);
     });
     return values;
+  };
+  var extractRelativeSizeValues = (sizes, rolesByShorthand) => {
+    return [["xsm", "sm", "lg", "xlg"].map((key) => parseInt(sizes[key]) || parseInt(rolesByShorthand[key].default))];
   };
   var convertValuesToSizes = (vwValue, remValue) => {
     return `min(${vwValue * 0.25}vw,${remValue * 0.0625}rem)`;
   };
-  var valuesToSizes = (values) => {
+  var valuesToStaticSizes = (values) => {
     const sizes = {};
     [...range(1, 6)].reverse().forEach((i) => {
-      sizes[`h${i}`] = convertValuesToSizes(values[0][6 - i], values[1][6 - i]);
-      sizes[`p${i}`] = convertValuesToSizes(values[2][6 - i], values[3][6 - i]);
+      sizes[`h-${i}`] = convertValuesToSizes(values[0][6 - i], values[1][6 - i]);
+      sizes[`l-${i}`] = convertValuesToSizes(values[2][6 - i], values[3][6 - i]);
+      sizes[`p-${i}`] = convertValuesToSizes(values[4][6 - i], values[5][6 - i]);
+      sizes[`c-${i}`] = convertValuesToSizes(values[6][6 - i], values[7][6 - i]);
     });
     return sizes;
   };
-  var steps = {
+  var valuesToRelativeSizes = (values) => {
+    return ["xsm", "sm", "lg", "xlg"].reduce((p, c, i) => ({ ...p, [c]: `${values[0][i]}%` }), {});
+  };
+  var staticSizeSteps = {
     8: 0,
     24: 1,
     48: 2,
     96: 4,
     192: 8,
     400: 16
+  };
+  var relativeSizeSteps = {
+    20: 0,
+    125: 5,
+    400: 25
   };
   Catpow.Customize.FontSizes = (props) => {
     const {
@@ -1511,14 +1545,41 @@
       param: { roles }
     } = props;
     const rolesByShorthand = useMemo(() => Object.values(roles).reduce((p, c) => ({ ...p, [c.shorthand]: c }), {}), [roles]);
-    const [values, setValues] = useState(sizesToValues(sizes, rolesByShorthand));
-    const onChangeHandle = useCallback(
-      (values2) => {
-        setValues(values2);
-        onChange(valuesToSizes(values2));
+    const [staticSizeValues, setStaticSizeValues] = useState(extractStaticSizeValues(sizes, rolesByShorthand));
+    const [relativeSizeValues, setRelativeSizeValues] = useState(extractRelativeSizeValues(sizes, rolesByShorthand));
+    const onChangeStaticValues = useCallback(
+      (staticSizeValues2) => {
+        setStaticSizeValues(staticSizeValues2);
+        onChange({
+          ...valuesToStaticSizes(staticSizeValues2),
+          ...valuesToRelativeSizes(relativeSizeValues)
+        });
       },
-      [onChange, setValues]
+      [onChange, relativeSizeValues, setStaticSizeValues]
     );
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement(DataSet, { values, labels, colors, classNames, steps, translateToDisplayValue, onChange: onChangeHandle }, /* @__PURE__ */ wp.element.createElement(Legend, null), /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 400, height: 600 }), /* @__PURE__ */ wp.element.createElement(DataTable, null)));
+    const onChangeRelativeValues = useCallback(
+      (relativeSizeValues2) => {
+        setRelativeSizeValues(relativeSizeValues2);
+        onChange({
+          ...valuesToStaticSizes(staticSizeValues),
+          ...valuesToRelativeSizes(relativeSizeValues2)
+        });
+      },
+      [onChange, staticSizeValues, setRelativeSizeValues]
+    );
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement(
+      DataSet,
+      {
+        values: staticSizeValues,
+        labels: staticSizeLabels,
+        colors: staticSizeColors,
+        classNames: staticSizeClassNames,
+        steps: staticSizeSteps,
+        translateToDisplayValue: translateStaticValueToDisplayValue,
+        onChange: onChangeStaticValues
+      },
+      /* @__PURE__ */ wp.element.createElement(Legend, null),
+      /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 400, height: 600 })
+    ), /* @__PURE__ */ wp.element.createElement(DataSet, { values: relativeSizeValues, labels: relativeSizeLabels, steps: relativeSizeSteps, translateToDisplayValue: translateRelativeValueToDisplayValue, onChange: onChangeRelativeValues }, /* @__PURE__ */ wp.element.createElement(DataTable, null), /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 400, height: 300 })));
   };
 })();
