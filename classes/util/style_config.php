@@ -12,8 +12,9 @@ use Spatie\Color\Factory;
 class style_config{
 	protected static
 		$color_roles,
-		$font_roles,
 		$size_roles,
+		$font_roles,
+		$font_family_roles,
 		$font_weight_roles,
 		$font_size_roles,
 		$line_height_roles,
@@ -29,6 +30,14 @@ class style_config{
 			'm'=>'medium',
 			'l'=>'large',
 			'xl'=>'x-large'
+		],
+		$level_variants=[
+			1=>'Level1',
+			2=>'Level2',
+			3=>'Level3',
+			4=>'Level4',
+			5=>'Level5',
+			6=>'Level6',
 		],
 		$cache=[];
 
@@ -58,23 +67,41 @@ class style_config{
 				'c'=>'compact',
 				'r'=>'regular',
 				'w'=>'wide'
-			]],
-			'radius'=>['label'=>'角丸','default'=>'20rem','shorthand'=>'r','var'=>'--cp-border-radius','variants'=>self::$size_variants_3],
-			'item'=>['label'=>'アイテム','default'=>'20rem','shorthand'=>'i','var'=>'--cp-item-size','variants'=>self::$size_variants_3],
-			'gap'=>['label'=>'間隔','default'=>'1rem','shorthand'=>'g','var'=>'--cp-item-gap','variants'=>self::$size_variants_3],
-			'margin'=>['label'=>'マージン','default'=>'1rem','shorthand'=>'mg','var'=>'--cp-margin','variants'=>self::$size_variants_5],
-			'padding'=>['label'=>'パディング','default'=>'1rem','shorthand'=>'pd','var'=>'--cp-padding','variants'=>self::$size_variants_5],
+			],'type'=>'size'],
+			'radius'=>['label'=>'角丸','default'=>'20rem','shorthand'=>'r','var'=>'--cp-border-radius','variants'=>self::$size_variants_3,'type'=>'radius'],
+			'item'=>['label'=>'アイテム','default'=>'20rem','shorthand'=>'i','var'=>'--cp-item-size','variants'=>self::$size_variants_3,'type'=>'size'],
+			'margin'=>['label'=>'マージン','default'=>'1rem','shorthand'=>'mg','var'=>'--cp-margin','variants'=>self::$size_variants_5,'type'=>'margin'],
+			'padding'=>['label'=>'パディング','default'=>'1rem','shorthand'=>'pd','var'=>'--cp-padding','variants'=>self::$size_variants_5,'type'=>'padding'],
+			//level
+			'block_margin'=>['label'=>'ブロック間隔','default'=>'1rem','shorthand'=>'bmg','var'=>'--cp-block-margin','variants'=>self::$level_variants,'type'=>'margin'],
+			'block_padding'=>['label'=>'ブロック余白','default'=>'1rem','shorthand'=>'bpd','var'=>'--cp-block-padding','variants'=>self::$level_variants,'type'=>'padding'],
+			'header_margin'=>['label'=>'ヘッダー間隔','default'=>'1rem','shorthand'=>'hmg','var'=>'--cp-header-margin','variants'=>self::$level_variants,'type'=>'margin'],
+			'header_padding'=>['label'=>'ヘッダー余白','default'=>'1rem','shorthand'=>'hpd','var'=>'--cp-header-padding','variants'=>self::$level_variants,'type'=>'padding'],
+			'paragraph_margin'=>['label'=>'段落間隔','default'=>'1rem','shorthand'=>'pmg','var'=>'--cp-paragraph-margin','variants'=>self::$level_variants,'type'=>'margin'],
+			'item_gap'=>['label'=>'アイテム間隔','default'=>'1rem','shorthand'=>'g','var'=>'--cp-item-gap','variants'=>self::$level_variants,'type'=>'gap'],
+			'item_padding'=>['label'=>'アイテム余白','default'=>'1rem','shorthand'=>'ipd','var'=>'--cp-item-padding','variants'=>self::$level_variants,'type'=>'padding'],
 		]);
 	}
 	public static function get_font_roles(){
 		if(isset(static::$font_roles)){return static::$font_roles;}
 		return static::$font_roles=apply_filters('cp_font_roles',[
+			'heading'=>['label'=>'見出し','default'=>'150% 1.2em sans-serif','shorthand'=>'h'],
+			'text'=>['label'=>'本文','default'=>'150% 1em sans-serif','shorthand'=>'t'],
+			'code'=>['label'=>'コード','default'=>'150% 1em monospace','shorthand'=>'c'],
+			'decoration'=>['label'=>'装飾','default'=>'150% 1em fantasy','shorthand'=>'d'],
+			'script'=>['label'=>'手書き','default'=>'150% 1em cursive','shorthand'=>'s'],
+			'bold'=>['label'=>'強調','default'=>'150% 1em sans-serif','shorthand'=>'b']
+		]);
+	}
+	public static function get_font_family_roles(){
+		if(isset(static::$font_family_roles)){return static::$font_family_roles;}
+		return static::$font_family_roles=apply_filters('cp_font_family_roles',[
 			'heading'=>['label'=>'見出し','default'=>'sans-serif','shorthand'=>'h'],
 			'text'=>['label'=>'本文','default'=>'sans-serif','shorthand'=>'t'],
 			'code'=>['label'=>'コード','default'=>'monospace','shorthand'=>'c'],
 			'decoration'=>['label'=>'装飾','default'=>'fantasy','shorthand'=>'d'],
 			'script'=>['label'=>'手書き','default'=>'cursive','shorthand'=>'s'],
-			'bold'=>['label'=>'太字','default'=>'sans-serif','shorthand'=>'b']
+			'bold'=>['label'=>'強調','default'=>'sans-serif','shorthand'=>'b']
 		]);
 	}
 	public static function get_font_weight_roles(){
@@ -85,62 +112,53 @@ class style_config{
 			'code'=>['label'=>'コード','default'=>'400','shorthand'=>'c'],
 			'decoration'=>['label'=>'装飾','default'=>'700','shorthand'=>'d'],
 			'script'=>['label'=>'手書き','default'=>'cursive','shorthand'=>'s'],
-			'bold'=>['label'=>'太字','default'=>'700','shorthand'=>'b']
+			'bold'=>['label'=>'強調','default'=>'700','shorthand'=>'b']
 		]);
 	}
 	public static function get_font_size_roles(){
 		if(isset(static::$font_size_roles)){return static::$font_size_roles;}
-		$relative_size_roles=[
-			'large'=>['label'=>'大字','default'=>'1.1em','shorthand'=>'l','relative'=>true],			
-			'small'=>['label'=>'小字','default'=>'0.8em','shorthand'=>'s','relative'=>true]
+		$static_size_roles=[
+			"heading"=>['label'=>'見出し','shorthand'=>'h','variants'=>self::$level_variants,"defaultValues"=>[
+				"min(7vw,2.375rem)",
+				"min(6.5vw,1.75rem)",
+				"min(6vw,1.5rem)",
+				"min(5.75vw,1.4375rem)",
+				"min(5.5vw,1.375rem)",
+				"min(5.25vw,1.3125rem)"
+			]],
+			"lead"=>['label'=>'リード文','shorthand'=>'l','variants'=>self::$level_variants,"defaultValues"=>[
+				"min(5.75vw,1.4375rem)",
+				"min(5.5vw,1.375rem)",
+				"min(5.25vw,1.3125rem)",
+				"min(5vw,1.25rem)",
+				"min(4.75vw,1.1875rem)",
+				"min(4.5vw,1.125rem)"
+			]],
+			"paragraph"=>['label'=>'段落','shorthand'=>'p','variants'=>self::$level_variants,"defaultValues"=>[
+				"min(5.25vw,1.3125rem)",
+				"min(5vw,1.25rem)",
+				"min(4.75vw,1.1875rem)",
+				"min(4.5vw,1.125rem)",
+				"min(4.25vw,1.0625rem)",
+				"min(4vw,1rem)"
+			]],
+			"caption"=>['label'=>'注釈','shorthand'=>'c','variants'=>self::$level_variants,"defaultValues"=>[
+				"min(4.75vw,1.1875rem)",
+				"min(4.5vw,1.125rem)",
+				"min(4.25vw,1.0625rem)",
+				"min(4vw,1rem)",
+				"min(3.75vw,0.9375rem)",
+				"min(3.5vw,0.875rem)"
+			]],
 		];
-		$heading_size_roles=[];
-		$paragraph_size_roles=[];
-		$default_font_sizes=[];
-		foreach([
-			[2.00,	4.00,	1.75,	1.50,	1.00],
-			[1.75,	3.00,	1.50,	1.25,	1.00],
-			[1.50,	2.00,	1.25,	1.125,	1.00],
-			[1.25,	1.25,	1.125,	1.00,	0.875],
-			[1.125,	1.125,	1.00,	1.00,	0.875],
-			[1.00,	1.00,	1.00,	1.00,	0.875],
-		] as $s){
-			$default_font_sizes['h'][]=sprintf('min(%svw,%srem)',$s[0]*4,$s[1]);
-			$default_font_sizes['l'][]=sprintf('min(%svw,%srem)',$s[2]*4,$s[2]);
-			$default_font_sizes['p'][]=sprintf('min(%svw,%srem)',$s[3]*4,$s[3]);
-			$default_font_sizes['c'][]=sprintf('min(%svw,%srem)',$s[4]*4,$s[4]);
-		}
-		for($i=1;$i<=6;$i++){
-			$heading_size_roles["heading{$i}"]=[
-				'label'=>"見出し{$i}",
-				'default'=>$default_font_sizes['h'][$i-1],
-				'shorthand'=>"h{$i}",
-				'responsive'=>true
-			];
-			$lead_size_roles["lead{$i}"]=[
-				'label'=>"リード文{$i}",
-				'default'=>$default_font_sizes['l'][$i-1],
-				'shorthand'=>"l{$i}",
-				'responsive'=>true
-			];
-			$paragraph_size_roles["paragraph{$i}"]=[
-				'label'=>"段落{$i}",
-				'default'=>$default_font_sizes['p'][$i-1],
-				'shorthand'=>"p{$i}",
-				'responsive'=>true
-			];
-			$caption_size_roles["caption{$i}"]=[
-				'label'=>"注釈{$i}",
-				'default'=>$default_font_sizes['c'][$i-1],
-				'shorthand'=>"c{$i}",
-				'responsive'=>true
-			];
-		}
+		$relative_size_roles=[
+			'x-large'=>['label'=>'極大','default'=>'125%','shorthand'=>'xlg','relative'=>true],
+			'large'=>['label'=>'大','default'=>'110%','shorthand'=>'lg','relative'=>true],
+			'small'=>['label'=>'小','default'=>'90%','shorthand'=>'sm','relative'=>true],
+			'x-small'=>['label'=>'極小','default'=>'75%','shorthand'=>'xsm','relative'=>true],
+		];
 		return static::$font_size_roles=apply_filters('cp_font_size_roles',array_merge(
-			$heading_size_roles,
-			$lead_size_roles,
-			$paragraph_size_roles,
-			$caption_size_roles,
+			$static_size_roles,
 			$relative_size_roles
 		));
 	}
@@ -162,7 +180,6 @@ class style_config{
 			'caption'=>['label'=>'注釈','default'=>'normal','shorthand'=>'c'],
 		]);
 	}
-
 
 	//css
 	public static function get_tones($colors){
@@ -216,10 +233,11 @@ class style_config{
 		$vars=apply_filters('cp_css_vars',[
 			'tones'=>self::get_config_json('tones'),
 			'colors'=>self::get_config_json('colors'),
-			'sizes'=>self::get_config_json('sizes'),
-			'fonts'=>self::get_config_json('fonts'),
-			'font-weights'=>self::get_config_json('font_weights'),
-			'font-sizes'=>self::get_config_json('font_sizes'),
+			'size'=>self::get_config_json('size'),
+			'font'=>self::get_config_json('font'),
+			'font-family'=>self::get_config_json('font_family'),
+			'font-weight'=>self::get_config_json('font_weight'),
+			'font-size'=>self::get_config_json('font_size'),
 			'line-height'=>self::get_config_json('line_height'),
 			'letter-spacing'=>self::get_config_json('letter_spacing'),
 		]);
@@ -337,21 +355,25 @@ class style_config{
 		static::set_config_json('colors',$colors);
 		$tones=self::fill_tones_data(static::get_tones($colors));
 		static::set_config_json('tones',$tones);
-		static::set_config_json('fonts',array_merge(
+		static::set_config_json('font',array_merge(
 			array_column(static::get_font_roles(),'default','shorthand'),
-			static::get_config_json('fonts')
+			static::get_config_json('font')
 		));
-		static::set_config_json('font_weights',array_merge(
+		static::set_config_json('font_family',array_merge(
+			array_column(static::get_font_family_roles(),'default','shorthand'),
+			static::get_config_json('font_family')
+		));
+		static::set_config_json('font_weight',array_merge(
 			array_column(static::get_font_weight_roles(),'default','shorthand'),
 			static::get_config_json('font_weights')
 		));
-		static::set_config_json('font_sizes',array_merge(
+		static::set_config_json('font_size',array_merge(
 			array_column(static::get_font_size_roles(),'default','shorthand'),
-			static::get_config_json('font_sizes')
+			static::get_config_json('font_size')
 		));
-		static::set_config_json('sizes',array_merge(
+		static::set_config_json('size',array_merge(
 			array_column(static::get_size_roles(),'default','shorthand'),
-			static::get_config_json('sizes')
+			static::get_config_json('size')
 		));
 		static::set_config_json('line_height',array_merge(
 			array_column(static::get_line_height_roles(),'default','shorthand'),
