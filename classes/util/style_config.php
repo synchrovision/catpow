@@ -13,12 +13,17 @@ class style_config{
 	protected static
 		$color_roles,
 		$size_roles,
-		$font_roles,
 		$font_family_roles,
 		$font_weight_roles,
 		$font_size_roles,
 		$line_height_roles,
 		$letter_spacing_roles,
+		$text_block_roles=[
+			'heading'=>['label'=>'見出し','shorthand'=>'h'],
+			'lead'=>['label'=>'リード文','shorthand'=>'l'],
+			'paragraph'=>['label'=>'本文','shorthand'=>'p'],
+			'caption'=>['label'=>'注釈','shorthand'=>'c'],
+		],
 		$size_variants_3=[
 			's'=>'small',
 			'm'=>'medium',
@@ -82,17 +87,6 @@ class style_config{
 			'item_padding'=>['label'=>'アイテム余白','default'=>'1rem','shorthand'=>'ipd','var'=>'--cp-item-padding','variants'=>self::$level_variants,'type'=>'padding'],
 		]);
 	}
-	public static function get_font_roles(){
-		if(isset(static::$font_roles)){return static::$font_roles;}
-		return static::$font_roles=apply_filters('cp_font_roles',[
-			'heading'=>['label'=>'見出し','default'=>'150% 1.2em sans-serif','shorthand'=>'h'],
-			'text'=>['label'=>'本文','default'=>'150% 1em sans-serif','shorthand'=>'t'],
-			'code'=>['label'=>'コード','default'=>'150% 1em monospace','shorthand'=>'c'],
-			'decoration'=>['label'=>'装飾','default'=>'150% 1em fantasy','shorthand'=>'d'],
-			'script'=>['label'=>'手書き','default'=>'150% 1em cursive','shorthand'=>'s'],
-			'bold'=>['label'=>'強調','default'=>'150% 1em sans-serif','shorthand'=>'b']
-		]);
-	}
 	public static function get_font_family_roles(){
 		if(isset(static::$font_family_roles)){return static::$font_family_roles;}
 		return static::$font_family_roles=apply_filters('cp_font_family_roles',[
@@ -106,51 +100,44 @@ class style_config{
 	}
 	public static function get_font_weight_roles(){
 		if(isset(static::$font_weight_roles)){return static::$font_weight_roles;}
-		return static::$font_weight_roles=apply_filters('cp_font_weight_roles',[
-			'heading'=>['label'=>'見出し','default'=>'700','shorthand'=>'h'],
-			'text'=>['label'=>'本文','default'=>'400','shorthand'=>'t'],
-			'code'=>['label'=>'コード','default'=>'400','shorthand'=>'c'],
-			'decoration'=>['label'=>'装飾','default'=>'700','shorthand'=>'d'],
-			'script'=>['label'=>'手書き','default'=>'cursive','shorthand'=>'s'],
-			'bold'=>['label'=>'強調','default'=>'700','shorthand'=>'b']
-		]);
+		return static::$font_weight_roles=apply_filters('cp_font_weight_roles',self::generate_text_block_roles(['700','400','400','400']));
 	}
 	public static function get_font_size_roles(){
 		if(isset(static::$font_size_roles)){return static::$font_size_roles;}
-		$static_size_roles=[
-			"heading"=>['label'=>'見出し','shorthand'=>'h','variants'=>self::$level_variants,"defaultValues"=>[
+		$static_size_roles=self::generate_text_block_roles([
+			[
 				"min(7vw,2.375rem)",
 				"min(6.5vw,1.75rem)",
 				"min(6vw,1.5rem)",
 				"min(5.75vw,1.4375rem)",
 				"min(5.5vw,1.375rem)",
 				"min(5.25vw,1.3125rem)"
-			]],
-			"lead"=>['label'=>'リード文','shorthand'=>'l','variants'=>self::$level_variants,"defaultValues"=>[
+			],
+			[
 				"min(5.75vw,1.4375rem)",
 				"min(5.5vw,1.375rem)",
 				"min(5.25vw,1.3125rem)",
 				"min(5vw,1.25rem)",
 				"min(4.75vw,1.1875rem)",
 				"min(4.5vw,1.125rem)"
-			]],
-			"paragraph"=>['label'=>'段落','shorthand'=>'p','variants'=>self::$level_variants,"defaultValues"=>[
+			],
+			[
 				"min(5.25vw,1.3125rem)",
 				"min(5vw,1.25rem)",
 				"min(4.75vw,1.1875rem)",
 				"min(4.5vw,1.125rem)",
 				"min(4.25vw,1.0625rem)",
 				"min(4vw,1rem)"
-			]],
-			"caption"=>['label'=>'注釈','shorthand'=>'c','variants'=>self::$level_variants,"defaultValues"=>[
+			],
+			[
 				"min(4.75vw,1.1875rem)",
 				"min(4.5vw,1.125rem)",
 				"min(4.25vw,1.0625rem)",
 				"min(4vw,1rem)",
 				"min(3.75vw,0.9375rem)",
 				"min(3.5vw,0.875rem)"
-			]],
-		];
+			],
+		],true);
 		$relative_size_roles=[
 			'x-large'=>['label'=>'極大','default'=>'125%','shorthand'=>'xlg','relative'=>true],
 			'large'=>['label'=>'大','default'=>'110%','shorthand'=>'lg','relative'=>true],
@@ -164,21 +151,25 @@ class style_config{
 	}
 	public static function get_line_height_roles(){
 		if(isset(static::$line_height_roles)){return static::$line_height_roles;}
-		return static::$line_height_roles=apply_filters('cp_line_height_roles',[
-			'heading'=>['label'=>'見出し','default'=>'150%','shorthand'=>'h'],
-			'lead'=>['label'=>'リード文','default'=>'150%','shorthand'=>'l'],
-			'text'=>['label'=>'本文','default'=>'150%','shorthand'=>'t'],
-			'caption'=>['label'=>'注釈','default'=>'150%','shorthand'=>'c'],
-		]);
+		return static::$line_height_roles=apply_filters('cp_line_height_roles',self::generate_text_block_roles(['150%','150%','150%','150%']));
 	}
 	public static function get_letter_spacing_roles(){
 		if(isset(static::$letter_spacing_roles)){return static::$letter_spacing_roles;}
-		return static::$letter_spacing_roles=apply_filters('cp_letter_spacing_roles',[
-			'heading'=>['label'=>'見出し','default'=>'normal','shorthand'=>'h'],
-			'lead'=>['label'=>'リード文','default'=>'normal','shorthand'=>'l'],
-			'text'=>['label'=>'本文','default'=>'normal','shorthand'=>'t'],
-			'caption'=>['label'=>'注釈','default'=>'normal','shorthand'=>'c'],
-		]);
+		return static::$letter_spacing_roles=apply_filters('cp_letter_spacing_roles',self::generate_text_block_roles(['normal','normal','normal','normal']));
+	}
+
+	public static function generate_text_block_roles($default_values,$has_level=false){
+		$roles=self::$text_block_roles;
+		foreach(array_keys($roles) as $i=>$name){
+			if($has_level){
+				$roles[$name]['variants']=self::$level_variants;
+				$roles[$name]['defaultValues']=$default_values[$i];
+			}
+			else{
+				$roles[$name]['default']=$default_values[$i];
+			}
+		}
+		return $roles;
 	}
 
 	//css
@@ -355,10 +346,6 @@ class style_config{
 		static::set_config_json('colors',$colors);
 		$tones=self::fill_tones_data(static::get_tones($colors));
 		static::set_config_json('tones',$tones);
-		static::set_config_json('font',array_merge(
-			array_column(static::get_font_roles(),'default','shorthand'),
-			static::get_config_json('font')
-		));
 		static::set_config_json('font_family',array_merge(
 			array_column(static::get_font_family_roles(),'default','shorthand'),
 			static::get_config_json('font_family')
