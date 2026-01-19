@@ -234,11 +234,20 @@ class scss{
 		$roles_by_shorthand=array_column(util\style_config::{'get_'.$role_name.'_roles'}(),null,'shorthand');
 		$scssc->registerFunction('translate_'.$role_name,function($args)use($scssc,$role_name,$roles_by_shorthand){
 			$args=array_map([$scssc,'compileValue'],$args);
+			list($h,$v)=explode('-',$args[0]);
 			$value=false;
-			if(isset($roles_by_shorthand[$args[0]])){
-				$value=empty($roles_by_shorthand[$args[0]]['var'])?
-					sprintf('var(--cp-%s-%s)',str_replace('_','-',$role_name),$args[0]):
-					sprintf('var(%s)',$roles_by_shorthand[$args[0]]['var']);
+			if(isset($roles_by_shorthand[$h])){
+				$role=$roles_by_shorthand[$h];
+				if(empty($v) || empty($role['variants'][$v])){
+					$value=empty($role['var'])?
+						sprintf('var(--cp-%s-%s)',str_replace('_','-',$role_name),$h):
+						sprintf('var(%s)',$role['var']);
+				}
+				else{
+					$value=empty($role['var'])?
+						sprintf('var(--cp-%s-%s-%s)',str_replace('_','-',$role_name),$h,$v):
+						sprintf('var(%s-%s)',$role['var'],$v);
+				}
 			}
 			$value=apply_filters('cp_translate_'.$role_name,$value,$args);
 			if(empty($value)){return Compiler::$false;}
