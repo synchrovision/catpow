@@ -61,6 +61,20 @@ $wp_customize->add_control(new Catpow\customize\control($wp_customize,'line_heig
 ]));
 add_action("customize_save_line_height",["Catpow\\util\\style_config",'update']);
 
+//Letter Spacing
+$wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'letter_spacing',[
+	'transport'=>'postMessage'
+]));
+$wp_customize->add_control(new Catpow\customize\control($wp_customize,'letter_spacing',[
+	'type'=>'LetterSpacing',
+	'section'=>'font',
+	'label'=>'文字間隔',
+	'param'=>[
+		'roles'=>style_config::get_letter_spacing_roles()
+	]
+]));
+add_action("customize_save_line_height",["Catpow\\util\\style_config",'update']);
+
 //Font Weight
 $wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'font_weight',[
 	'transport'=>'postMessage'

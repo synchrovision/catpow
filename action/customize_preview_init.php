@@ -57,6 +57,13 @@ add_action('wp_head',function(){
 				});
 			});
 		});
+		wp.customize('letter_spacing',function(setting){
+			setting.bind(function(letterSpacing){
+				Object.keys(letterSpacing).forEach((role)=>{
+					rootStyle.setProperty('--cp-letter-spacing-'+role,letterSpacing[role]);
+				});
+			});
+		});
 		wp.customize('font_weight',function(setting){
 			setting.bind(function(fontWeight){
 				Object.keys(fontWeight).forEach((role)=>{
