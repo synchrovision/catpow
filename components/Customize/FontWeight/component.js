@@ -1136,7 +1136,7 @@
     const y1 = margin[0];
     const y2 = height - margin[0];
     const uy = (height - margin[0] - margin[2]) / (steps2.length - 1);
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("g", { className }, [...range(steps2.length - 1)].map((i) => /* @__PURE__ */ wp.element.createElement("line", { x1, y1: margin[0] + uy * i, x2, y2: margin[0] + uy * i, fill: "transparent", stroke: "gray" })), [...range(values[0].length)].map((i) => /* @__PURE__ */ wp.element.createElement("line", { x1: margin[3] + ux * i, y1, x2: margin[3] + ux * i, y2, fill: "transparent", stroke: "gray" }))));
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("g", { className }, [...range(steps2.length - 1)].map((i) => /* @__PURE__ */ wp.element.createElement("line", { x1, y1: margin[0] + uy * i, x2, y2: margin[0] + uy * i, fill: "transparent", stroke: "lightgray" })), [...range(values[0].length)].map((i) => /* @__PURE__ */ wp.element.createElement("line", { x1: margin[3] + ux * i, y1, x2: margin[3] + ux * i, y2, fill: "transparent", stroke: "lightgray" }))));
   };
   var Lines = (props) => {
     const { className } = props;
