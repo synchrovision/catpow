@@ -9,6 +9,20 @@
 			@include txt((p:16,w:b));
 		}
 	}
+	&-textinputs{
+		@include bnd((pd:.5em 0));
+		@include grd((tc:a 1fr,g:1em .5em,ai:c));
+		&__row{
+			@include bnd((d:c));
+			&-label{
+				@include bnd((mg:0,pd:0));
+			}
+			input{
+				@include bnd((f:1 1 a,pd:.25em));
+				@include bdr((s:s,w:1,c:t 40,r:.25em));
+			}
+		}
+	}
 	&-chartinput{
 		@include usr((c:p));
 	}

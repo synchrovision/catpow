@@ -89,14 +89,19 @@ class style_config{
 	}
 	public static function get_font_family_roles(){
 		if(isset(static::$font_family_roles)){return static::$font_family_roles;}
-		return static::$font_family_roles=apply_filters('cp_font_family_roles',[
-			'heading'=>['label'=>'見出し','default'=>'sans-serif','shorthand'=>'h'],
-			'text'=>['label'=>'本文','default'=>'sans-serif','shorthand'=>'t'],
-			'code'=>['label'=>'コード','default'=>'monospace','shorthand'=>'c'],
-			'decoration'=>['label'=>'装飾','default'=>'fantasy','shorthand'=>'d'],
-			'script'=>['label'=>'手書き','default'=>'cursive','shorthand'=>'s'],
-			'bold'=>['label'=>'強調','default'=>'sans-serif','shorthand'=>'b']
+		$block_font_family_roles=self::generate_text_block_roles([
+			'sans-serif','sans-serif','sans-serif','sans-serif'
 		]);
+		$format_font_family_roles=[
+			'code'=>['label'=>'コード','default'=>'monospace','shorthand'=>'cd'],
+			'decoration'=>['label'=>'装飾','default'=>'fantasy','shorthand'=>'dc'],
+			'script'=>['label'=>'手書き','default'=>'cursive','shorthand'=>'sc'],
+			'strong'=>['label'=>'強調','default'=>'sans-serif','shorthand'=>'st']
+		];
+		return static::$font_family_roles=apply_filters('cp_font_family_roles',array_merge(
+			$block_font_family_roles,
+			$format_font_family_roles
+		));
 	}
 	public static function get_font_weight_roles(){
 		if(isset(static::$font_weight_roles)){return static::$font_weight_roles;}

@@ -89,14 +89,16 @@ $wp_customize->add_control(new Catpow\customize\control($wp_customize,'font_weig
 ]));
 add_action("customize_save_font_weight",["Catpow\\util\\style_config",'update']);
 
-foreach(style_config::get_font_family_roles() as $role=>$font_setting){
-	$setting_id="fonts[{$role}]";
-	$wp_customize->add_setting($setting_id,['default'=>$font_setting['default'],'transport'=>'postMessage']);
-	$wp_customize->add_control($setting_id,[
-		'type'=>'text',
-		'label'=> $font_setting['label'],
-		'section'=>'font'
-	]);
-	
-}
-add_action("customize_save_fonts",["Catpow\\util\\style_config",'update']);
+//Font Family
+$wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'font_family',[
+	'transport'=>'postMessage'
+]));
+$wp_customize->add_control(new Catpow\customize\control($wp_customize,'font_family',[
+	'type'=>'FontFamily',
+	'section'=>'font',
+	'label'=>'フォント',
+	'param'=>[
+		'roles'=>style_config::get_font_family_roles()
+	]
+]));
+add_action("customize_save_font_family",["Catpow\\util\\style_config",'update']);

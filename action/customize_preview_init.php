@@ -36,13 +36,13 @@ add_action('wp_head',function(){
 				rootStyle.setProperty('--cp-tones-hs',colors.hueShift);
 			});
 		});
-<?php foreach(Catpow\util\style_config::get_font_family_roles() as $role=>$conf):$key=$conf['shorthand'];?>
-		wp.customize('font_family[<?=$role?>]',function(setting){
-			setting.bind(function(font){
-				rootStyle.setProperty('--cp-font-family-<?=$key?>',font);
+		wp.customize('font_family',function(setting){
+			setting.bind(function(FontFamilies){
+				Object.keys(FontFamilies).forEach((role)=>{
+					rootStyle.setProperty('--cp-font-family-'+role,FontFamilies[role]);
+				});
 			});
 		});
-<?php endforeach; ?>
 		wp.customize('font_size',function(setting){
 			setting.bind(function(fontSizes){
 				Object.keys(fontSizes).forEach((role)=>{
