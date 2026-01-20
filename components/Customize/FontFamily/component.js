@@ -118,7 +118,6 @@
     } = props;
     const rolesByShorthand = useMemo(() => Object.values(roles).reduce((p, c) => ({ ...p, [c.shorthand]: c }), {}), [roles]);
     const [values, setValues] = useState(extractDefaultValue(originalValue, rolesByShorthand));
-    console.log({ originalValue, values });
     const onChangeHandle = useCallback(
       (newValues) => {
         setValues(newValues);
