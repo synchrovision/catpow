@@ -2,29 +2,39 @@
 import { Bem, DataSet, LineChartInput, Legend, DataTable } from "catpow/component";
 import { range } from "catpow/util";
 
-const staticSizeLabels = {
-	rows: ["見出し(vw)", "見出し(rem)", "リード文(vw)", "リード文(rem)", "本文(vw)", "本文(rem)", "キャプション(vw)", "キャプション(rem)"],
+const extractStaticSizeLabels = (rolesByShorthand) => ({
+	rows: Object.keys(rolesByShorthand)
+		.filter((key) => !rolesByShorthand[key].relative)
+		.reduce((p, c) => {
+			p.push(`${rolesByShorthand[c].label}(vw)`);
+			p.push(`${rolesByShorthand[c].label}(rem)`);
+			return p;
+		}, []),
 	columns: [...range(1, 6)].map((i) => `${7 - i}`),
-	cells: [[[...range(1, 6)].map((i) => `h${i}(vw)`), [...range(1, 6)].map((i) => `h${i}(rem)`), [...range(1, 6)].map((i) => `p${i}(vw)`), [...range(1, 6)].map((i) => `p${i}(rem)`)]],
-};
-const relativeSizeLabels = {
-	columns: ["極小", "小", "大", "極大"],
-};
-const staticSizeColors = {
-	rows: ["oklch(50% 40% 220)", "oklch(50% 80% 220)", "oklch(50% 40% 220)", "oklch(50% 80% 220)", "oklch(60% 5% 220)", "oklch(60% 10% 220)", "oklch(60% 5% 220)", "oklch(60% 10% 220)"],
-};
-const staticSizeClassNames = {
-	rows: [
-		"is-row-heading is-row-vw",
-		"is-row-heading is-row-rem",
-		"is-row-lead is-row-vw",
-		"is-row-lead is-row-rem",
-		"is-row-paragraph is-row-vw",
-		"is-row-paragraph is-row-rem",
-		"is-row-caption is-row-vw",
-		"is-row-caption is-row-rem",
-	],
-};
+});
+const extractRelativeSizeLabels = (rolesByShorthand) => ({
+	columns: Object.keys(rolesByShorthand)
+		.filter((key) => rolesByShorthand[key].relative)
+		.map((key) => rolesByShorthand[key].label),
+});
+const getStaticSizeColors = (rolesByShorthand) => ({
+	rows: Object.keys(rolesByShorthand)
+		.filter((key) => !rolesByShorthand[key].relative)
+		.reduce((p, c, i) => {
+			p.push(`oklch(60% 20% ${i * 30 + 120})`);
+			p.push(`oklch(50% 80% ${i * 30 + 120})`);
+			return p;
+		}, []),
+});
+const getStaticSizeClassNames = (roles) => ({
+	rows: Object.keys(roles)
+		.filter((key) => !roles[key].relative)
+		.reduce((p, c) => {
+			p.push(`is-row-${c} is-row-vw`);
+			p.push(`is-row-${c} is-row-rem`);
+			return p;
+		}, []),
+});
 const translateStaticValueToDisplayValue = (value, { r }) => {
 	if (r % 2 === 0) {
 		return `${(value / 4).toFixed(2)}`;
@@ -40,43 +50,48 @@ const extractValuesFromSize = (size) => {
 	return [m[1] * 4, m[2] * 16];
 };
 const extractStaticSizeValues = (sizes, rolesByShorthand) => {
-	const values = [[], [], [], [], [], [], [], []];
-	[...range(1, 6)].reverse().forEach((l) => {
-		const [hvw, hrem] = extractValuesFromSize(sizes[`h-${l}`] || rolesByShorthand.h.defaultValues[l - 1]);
-		const [lhw, lrem] = extractValuesFromSize(sizes[`l-${l}`] || rolesByShorthand.l.defaultValues[l - 1]);
-		const [pvw, prem] = extractValuesFromSize(sizes[`p-${l}`] || rolesByShorthand.p.defaultValues[l - 1]);
-		const [cvw, crem] = extractValuesFromSize(sizes[`c-${l}`] || rolesByShorthand.c.defaultValues[l - 1]);
-		values[0].push(hvw);
-		values[1].push(hrem);
-		values[2].push(lhw);
-		values[3].push(lrem);
-		values[4].push(pvw);
-		values[5].push(prem);
-		values[6].push(cvw);
-		values[7].push(crem);
-	});
+	const keys = Object.keys(rolesByShorthand).filter((key) => !rolesByShorthand[key].relative);
+	const values = [];
+	for (let i = 0; i < keys.length; i++) {
+		const key = keys[i];
+		values.push([], []);
+		[...range(1, 6)].reverse().forEach((l) => {
+			const [vw, rem] = extractValuesFromSize(sizes[`${key}-${l}`] || rolesByShorthand[key].defaultValues[l - 1]);
+			values[i * 2].push(vw);
+			values[i * 2 + 1].push(rem);
+		});
+	}
 	return values;
 };
 const extractRelativeSizeValues = (sizes, rolesByShorthand) => {
-	return [["xsm", "sm", "lg", "xlg"].map((key) => parseInt(sizes[key]) || parseInt(rolesByShorthand[key].default))];
+	return [
+		Object.keys(rolesByShorthand)
+			.filter((key) => rolesByShorthand[key].relative)
+			.map((key) => parseInt(sizes[key]) || parseInt(rolesByShorthand[key].default)),
+	];
 };
 
 const convertValuesToSizes = (vwValue, remValue) => {
 	return `min(${vwValue * 0.25}vw,${remValue * 0.0625}rem)`;
 };
-const valuesToStaticSizes = (values) => {
+const valuesToStaticSizes = (values, rolesByShorthand) => {
 	const sizes = {};
-	[...range(1, 6)].reverse().forEach((i) => {
-		sizes[`h-${i}`] = convertValuesToSizes(values[0][6 - i], values[1][6 - i]);
-		sizes[`l-${i}`] = convertValuesToSizes(values[2][6 - i], values[3][6 - i]);
-		sizes[`p-${i}`] = convertValuesToSizes(values[4][6 - i], values[5][6 - i]);
-		sizes[`c-${i}`] = convertValuesToSizes(values[6][6 - i], values[7][6 - i]);
-	});
+	const keys = Object.keys(rolesByShorthand).filter((key) => !rolesByShorthand[key].relative);
+	for (let i = 0; i < keys.length; i++) {
+		const key = keys[i];
+		[...range(1, 6)].reverse().forEach((l) => {
+			sizes[`${key}-${l}`] = convertValuesToSizes(values[i * 2][6 - l], values[i * 2 + 1][6 - l]);
+		});
+	}
 	return sizes;
 };
 
-const valuesToRelativeSizes = (values) => {
-	return ["xsm", "sm", "lg", "xlg"].reduce((p, c, i) => ({ ...p, [c]: `${values[0][i]}%` }), {});
+const valuesToRelativeSizes = (values, rolesByShorthand) => {
+	return [
+		Object.keys(rolesByShorthand)
+			.filter((key) => rolesByShorthand[key].relative)
+			.reduce((p, c, i) => ({ ...p, [c]: `${values[0][i]}%` }), {}),
+	];
 };
 
 const staticSizeSteps = {
@@ -101,6 +116,11 @@ Catpow.Customize.FontSizes = (props) => {
 	} = props;
 
 	const rolesByShorthand = useMemo(() => Object.values(roles).reduce((p, c) => ({ ...p, [c.shorthand]: c }), {}), [roles]);
+	const staticSizeLabels = useMemo(() => extractStaticSizeLabels(rolesByShorthand), [rolesByShorthand]);
+	const relativeSizeLabels = useMemo(() => extractRelativeSizeLabels(rolesByShorthand), [rolesByShorthand]);
+
+	const staticSizeClassNames = useMemo(() => getStaticSizeClassNames(roles), [roles]);
+	const staticSizeColors = useMemo(() => getStaticSizeColors(rolesByShorthand), [rolesByShorthand]);
 
 	const [staticSizeValues, setStaticSizeValues] = useState(extractStaticSizeValues(sizes, rolesByShorthand));
 	const [relativeSizeValues, setRelativeSizeValues] = useState(extractRelativeSizeValues(sizes, rolesByShorthand));
@@ -109,21 +129,21 @@ Catpow.Customize.FontSizes = (props) => {
 		(staticSizeValues) => {
 			setStaticSizeValues(staticSizeValues);
 			onChange({
-				...valuesToStaticSizes(staticSizeValues),
-				...valuesToRelativeSizes(relativeSizeValues),
+				...valuesToStaticSizes(staticSizeValues, rolesByShorthand),
+				...valuesToRelativeSizes(relativeSizeValues, rolesByShorthand),
 			});
 		},
-		[onChange, relativeSizeValues, setStaticSizeValues],
+		[onChange, rolesByShorthand, relativeSizeValues, setStaticSizeValues],
 	);
 	const onChangeRelativeValues = useCallback(
 		(relativeSizeValues) => {
 			setRelativeSizeValues(relativeSizeValues);
 			onChange({
-				...valuesToStaticSizes(staticSizeValues),
-				...valuesToRelativeSizes(relativeSizeValues),
+				...valuesToStaticSizes(staticSizeValues, rolesByShorthand),
+				...valuesToRelativeSizes(relativeSizeValues, rolesByShorthand),
 			});
 		},
-		[onChange, staticSizeValues, setRelativeSizeValues],
+		[onChange, rolesByShorthand, staticSizeValues, setRelativeSizeValues],
 	);
 
 	return (

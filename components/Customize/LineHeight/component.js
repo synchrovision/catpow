@@ -880,7 +880,7 @@
   init_react();
   var DataSetContext = createContext(null);
   var DataSet = (props) => {
-    const { labels: labels2, colors, classNames, translateToDisplayValue: translateToDisplayValue2, values, steps: steps2 = { 100: 1 }, snap = true, onChange, children, ...otherProps } = props;
+    const { labels, colors, classNames, translateToDisplayValue: translateToDisplayValue2, values, steps: steps2 = { 100: 1 }, snap = true, onChange, children, ...otherProps } = props;
     const [activeRow, setActiveRow] = useState(null);
     const [activeColumn, setActiveColumn] = useState(null);
     const [focusedRow, focusRow] = useState(null);
@@ -913,7 +913,7 @@
           r: r2,
           c,
           className: classNames?.cells?.[r2]?.[c],
-          label: labels2?.cells?.[r2]?.[c],
+          label: labels?.cells?.[r2]?.[c],
           color: colors?.cells?.[r2]?.[c] || colors?.columns?.[c] || colors?.rows?.[r2]
         });
       },
@@ -929,7 +929,7 @@
     const DataSetContextValue = useMemo(
       () => ({
         values,
-        labels: labels2,
+        labels,
         colors,
         classNames,
         getDisplayValue,
@@ -947,7 +947,7 @@
       }),
       [
         values,
-        labels2,
+        labels,
         colors,
         classNames,
         getDisplayValue,
@@ -1054,8 +1054,8 @@
   init_react();
   var DataTable = (props) => {
     const { className = "cp-datatabel", showColumnHeader = true, showRowHeader = true, ...otherProps } = props;
-    const { labels: labels2, classNames, colors, values, getDisplayValue } = useContext(DataSetContext);
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("table", null, showColumnHeader && labels2.columns && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, showRowHeader && labels2.rows && /* @__PURE__ */ wp.element.createElement("td", null), labels2.columns.map((label) => /* @__PURE__ */ wp.element.createElement("th", null, label)))), /* @__PURE__ */ wp.element.createElement("tbody", null, values.map((row, r2) => /* @__PURE__ */ wp.element.createElement("tr", null, showRowHeader && labels2.rows && /* @__PURE__ */ wp.element.createElement("th", null, labels2.rows[r2]), row.map((v, c) => /* @__PURE__ */ wp.element.createElement("td", null, getDisplayValue(r2, c)))))))));
+    const { labels, classNames, colors, values, getDisplayValue } = useContext(DataSetContext);
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("table", null, showColumnHeader && labels.columns && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, showRowHeader && labels.rows && /* @__PURE__ */ wp.element.createElement("td", null), labels.columns.map((label) => /* @__PURE__ */ wp.element.createElement("th", null, label)))), /* @__PURE__ */ wp.element.createElement("tbody", null, values.map((row, r2) => /* @__PURE__ */ wp.element.createElement("tr", null, showRowHeader && labels.rows && /* @__PURE__ */ wp.element.createElement("th", null, labels.rows[r2]), row.map((v, c) => /* @__PURE__ */ wp.element.createElement("td", null, getDisplayValue(r2, c)))))))));
   };
 
   // node_modules-included/catpow/src/component/Chart/LineChart.tsx
@@ -1435,11 +1435,11 @@
   };
 
   // ../components/Customize/LineHeight/component.jsx
-  var labels = {
-    columns: ["\u898B\u51FA\u3057", "\u30EA\u30FC\u30C9\u6587", "\u672C\u6587", "\u6CE8\u91C8"]
-  };
+  var extractLabels = (rolesByShorthand) => ({
+    columns: Object.keys(rolesByShorthand).map((h) => rolesByShorthand[h].label)
+  });
   var extractValues = (vars, rolesByShorthand) => {
-    return [["h", "l", "p", "c"].map((h) => parseInt(vars[h]) || parseInt(rolesByShorthand[h].default))];
+    return [Object.keys(rolesByShorthand).map((h) => parseInt(vars[h]) || parseInt(rolesByShorthand[h].default))];
   };
   var convertToVars = (values, rolesByShorthand) => {
     return values[0].reduce((p, c, i) => ({ ...p, [Object.keys(rolesByShorthand)[i]]: c + "%" }), {});
@@ -1459,6 +1459,7 @@
       param: { roles }
     } = props;
     const rolesByShorthand = useMemo(() => Object.values(roles).reduce((p, c) => ({ ...p, [c.shorthand]: c }), {}), [roles]);
+    const labels = useMemo(() => extractLabels(rolesByShorthand), [rolesByShorthand]);
     const [values, setValues] = useState(extractValues(vars, rolesByShorthand));
     const onChangeValues = useCallback(
       (values2) => {

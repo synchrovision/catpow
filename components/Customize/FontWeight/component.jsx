@@ -1,12 +1,12 @@
 ﻿import { useState, useCallback, useMemo } from "react";
 import { Bem, TabPanel, DataSet, LineChartInput, Legend, DataTable } from "catpow/component";
 
-const labels = {
-	columns: ["見出し", "リード文", "本文", "注釈"],
-};
+const extractLabels = (rolesByShorthand) => ({
+	columns: Object.keys(rolesByShorthand).map((h) => rolesByShorthand[h].label),
+});
 
 const extractValues = (vars, rolesByShorthand) => {
-	return [["h", "l", "p", "c"].map((h) => parseInt(vars[h]) || parseInt(rolesByShorthand[h].default))];
+	return [Object.keys(rolesByShorthand).map((h) => parseInt(vars[h]) || parseInt(rolesByShorthand[h].default))];
 };
 const convertToVars = (values, rolesByShorthand) => {
 	return values[0].reduce((p, c, i) => ({ ...p, [Object.keys(rolesByShorthand)[i]]: c }), {});
@@ -25,6 +25,7 @@ Catpow.Customize.FontWeight = (props) => {
 	} = props;
 
 	const rolesByShorthand = useMemo(() => Object.values(roles).reduce((p, c) => ({ ...p, [c.shorthand]: c }), {}), [roles]);
+	const labels = useMemo(() => extractLabels(rolesByShorthand), [rolesByShorthand]);
 
 	const [values, setValues] = useState(extractValues(vars, rolesByShorthand));
 

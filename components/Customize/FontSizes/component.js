@@ -1452,29 +1452,31 @@
   };
 
   // ../components/Customize/FontSizes/component.jsx
-  var staticSizeLabels = {
-    rows: ["\u898B\u51FA\u3057(vw)", "\u898B\u51FA\u3057(rem)", "\u30EA\u30FC\u30C9\u6587(vw)", "\u30EA\u30FC\u30C9\u6587(rem)", "\u672C\u6587(vw)", "\u672C\u6587(rem)", "\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3(vw)", "\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3(rem)"],
-    columns: [...range(1, 6)].map((i) => `${7 - i}`),
-    cells: [[[...range(1, 6)].map((i) => `h${i}(vw)`), [...range(1, 6)].map((i) => `h${i}(rem)`), [...range(1, 6)].map((i) => `p${i}(vw)`), [...range(1, 6)].map((i) => `p${i}(rem)`)]]
-  };
-  var relativeSizeLabels = {
-    columns: ["\u6975\u5C0F", "\u5C0F", "\u5927", "\u6975\u5927"]
-  };
-  var staticSizeColors = {
-    rows: ["oklch(50% 40% 220)", "oklch(50% 80% 220)", "oklch(50% 40% 220)", "oklch(50% 80% 220)", "oklch(60% 5% 220)", "oklch(60% 10% 220)", "oklch(60% 5% 220)", "oklch(60% 10% 220)"]
-  };
-  var staticSizeClassNames = {
-    rows: [
-      "is-row-heading is-row-vw",
-      "is-row-heading is-row-rem",
-      "is-row-lead is-row-vw",
-      "is-row-lead is-row-rem",
-      "is-row-paragraph is-row-vw",
-      "is-row-paragraph is-row-rem",
-      "is-row-caption is-row-vw",
-      "is-row-caption is-row-rem"
-    ]
-  };
+  var extractStaticSizeLabels = (rolesByShorthand) => ({
+    rows: Object.keys(rolesByShorthand).filter((key) => !rolesByShorthand[key].relative).reduce((p, c) => {
+      p.push(`${rolesByShorthand[c].label}(vw)`);
+      p.push(`${rolesByShorthand[c].label}(rem)`);
+      return p;
+    }, []),
+    columns: [...range(1, 6)].map((i) => `${7 - i}`)
+  });
+  var extractRelativeSizeLabels = (rolesByShorthand) => ({
+    columns: Object.keys(rolesByShorthand).filter((key) => rolesByShorthand[key].relative).map((key) => rolesByShorthand[key].label)
+  });
+  var getStaticSizeColors = (rolesByShorthand) => ({
+    rows: Object.keys(rolesByShorthand).filter((key) => !rolesByShorthand[key].relative).reduce((p, c, i) => {
+      p.push(`oklch(60% 20% ${i * 30 + 120})`);
+      p.push(`oklch(50% 80% ${i * 30 + 120})`);
+      return p;
+    }, [])
+  });
+  var getStaticSizeClassNames = (roles) => ({
+    rows: Object.keys(roles).filter((key) => !roles[key].relative).reduce((p, c) => {
+      p.push(`is-row-${c} is-row-vw`);
+      p.push(`is-row-${c} is-row-rem`);
+      return p;
+    }, [])
+  });
   var translateStaticValueToDisplayValue = (value, { r: r2 }) => {
     if (r2 % 2 === 0) {
       return `${(value / 4).toFixed(2)}`;
@@ -1489,41 +1491,42 @@
     return [m[1] * 4, m[2] * 16];
   };
   var extractStaticSizeValues = (sizes, rolesByShorthand) => {
-    const values = [[], [], [], [], [], [], [], []];
-    [...range(1, 6)].reverse().forEach((l) => {
-      const [hvw, hrem] = extractValuesFromSize(sizes[`h-${l}`] || rolesByShorthand.h.defaultValues[l - 1]);
-      const [lhw, lrem] = extractValuesFromSize(sizes[`l-${l}`] || rolesByShorthand.l.defaultValues[l - 1]);
-      const [pvw, prem] = extractValuesFromSize(sizes[`p-${l}`] || rolesByShorthand.p.defaultValues[l - 1]);
-      const [cvw, crem] = extractValuesFromSize(sizes[`c-${l}`] || rolesByShorthand.c.defaultValues[l - 1]);
-      values[0].push(hvw);
-      values[1].push(hrem);
-      values[2].push(lhw);
-      values[3].push(lrem);
-      values[4].push(pvw);
-      values[5].push(prem);
-      values[6].push(cvw);
-      values[7].push(crem);
-    });
+    const keys = Object.keys(rolesByShorthand).filter((key) => !rolesByShorthand[key].relative);
+    const values = [];
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      values.push([], []);
+      [...range(1, 6)].reverse().forEach((l) => {
+        const [vw, rem] = extractValuesFromSize(sizes[`${key}-${l}`] || rolesByShorthand[key].defaultValues[l - 1]);
+        values[i * 2].push(vw);
+        values[i * 2 + 1].push(rem);
+      });
+    }
     return values;
   };
   var extractRelativeSizeValues = (sizes, rolesByShorthand) => {
-    return [["xsm", "sm", "lg", "xlg"].map((key) => parseInt(sizes[key]) || parseInt(rolesByShorthand[key].default))];
+    return [
+      Object.keys(rolesByShorthand).filter((key) => rolesByShorthand[key].relative).map((key) => parseInt(sizes[key]) || parseInt(rolesByShorthand[key].default))
+    ];
   };
   var convertValuesToSizes = (vwValue, remValue) => {
     return `min(${vwValue * 0.25}vw,${remValue * 0.0625}rem)`;
   };
-  var valuesToStaticSizes = (values) => {
+  var valuesToStaticSizes = (values, rolesByShorthand) => {
     const sizes = {};
-    [...range(1, 6)].reverse().forEach((i) => {
-      sizes[`h-${i}`] = convertValuesToSizes(values[0][6 - i], values[1][6 - i]);
-      sizes[`l-${i}`] = convertValuesToSizes(values[2][6 - i], values[3][6 - i]);
-      sizes[`p-${i}`] = convertValuesToSizes(values[4][6 - i], values[5][6 - i]);
-      sizes[`c-${i}`] = convertValuesToSizes(values[6][6 - i], values[7][6 - i]);
-    });
+    const keys = Object.keys(rolesByShorthand).filter((key) => !rolesByShorthand[key].relative);
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      [...range(1, 6)].reverse().forEach((l) => {
+        sizes[`${key}-${l}`] = convertValuesToSizes(values[i * 2][6 - l], values[i * 2 + 1][6 - l]);
+      });
+    }
     return sizes;
   };
-  var valuesToRelativeSizes = (values) => {
-    return ["xsm", "sm", "lg", "xlg"].reduce((p, c, i) => ({ ...p, [c]: `${values[0][i]}%` }), {});
+  var valuesToRelativeSizes = (values, rolesByShorthand) => {
+    return [
+      Object.keys(rolesByShorthand).filter((key) => rolesByShorthand[key].relative).reduce((p, c, i) => ({ ...p, [c]: `${values[0][i]}%` }), {})
+    ];
   };
   var staticSizeSteps = {
     8: 0,
@@ -1545,27 +1548,31 @@
       param: { roles }
     } = props;
     const rolesByShorthand = useMemo(() => Object.values(roles).reduce((p, c) => ({ ...p, [c.shorthand]: c }), {}), [roles]);
+    const staticSizeLabels = useMemo(() => extractStaticSizeLabels(rolesByShorthand), [rolesByShorthand]);
+    const relativeSizeLabels = useMemo(() => extractRelativeSizeLabels(rolesByShorthand), [rolesByShorthand]);
+    const staticSizeClassNames = useMemo(() => getStaticSizeClassNames(roles), [roles]);
+    const staticSizeColors = useMemo(() => getStaticSizeColors(rolesByShorthand), [rolesByShorthand]);
     const [staticSizeValues, setStaticSizeValues] = useState(extractStaticSizeValues(sizes, rolesByShorthand));
     const [relativeSizeValues, setRelativeSizeValues] = useState(extractRelativeSizeValues(sizes, rolesByShorthand));
     const onChangeStaticValues = useCallback(
       (staticSizeValues2) => {
         setStaticSizeValues(staticSizeValues2);
         onChange({
-          ...valuesToStaticSizes(staticSizeValues2),
-          ...valuesToRelativeSizes(relativeSizeValues)
+          ...valuesToStaticSizes(staticSizeValues2, rolesByShorthand),
+          ...valuesToRelativeSizes(relativeSizeValues, rolesByShorthand)
         });
       },
-      [onChange, relativeSizeValues, setStaticSizeValues]
+      [onChange, rolesByShorthand, relativeSizeValues, setStaticSizeValues]
     );
     const onChangeRelativeValues = useCallback(
       (relativeSizeValues2) => {
         setRelativeSizeValues(relativeSizeValues2);
         onChange({
-          ...valuesToStaticSizes(staticSizeValues),
-          ...valuesToRelativeSizes(relativeSizeValues2)
+          ...valuesToStaticSizes(staticSizeValues, rolesByShorthand),
+          ...valuesToRelativeSizes(relativeSizeValues2, rolesByShorthand)
         });
       },
-      [onChange, staticSizeValues, setRelativeSizeValues]
+      [onChange, rolesByShorthand, staticSizeValues, setRelativeSizeValues]
     );
     return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement(
       DataSet,
