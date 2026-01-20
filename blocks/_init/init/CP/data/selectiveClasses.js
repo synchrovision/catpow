@@ -963,10 +963,9 @@ export const selectiveClassesPresets = {
 			label: __("コンテンツ幅", "catpow"),
 			values: {
 				hasContentWidthFit: __("適", "catpow"),
-				hasContentWidthNarrow: __("狭", "catpow"),
-				hasContentWidthCompact: __("縮", "catpow"),
-				hasContentWidthRegular: __("中", "catpow"),
-				hasContentWidthWide: __("広", "catpow"),
+				hasContentWidthSmall: __("小", "catpow"),
+				hasContentWidthMedium: __("中", "catpow"),
+				hasContentWidthLarge: __("大", "catpow"),
 				hasContentWidthFull: __("全", "catpow"),
 				hasContentWidthCustom: ":admin-generic:",
 			},

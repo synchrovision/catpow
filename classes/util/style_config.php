@@ -67,13 +67,8 @@ class style_config{
 	}
 	public static function get_size_roles(){
 		if(isset(static::$size_roles)){return static::$size_roles;}
-		return static::$size_roles=apply_filters('cp_size_roles',[
-			'contents'=>['label'=>'コンテンツ','default'=>'60rem','shorthand'=>'c','var'=>'--cp-content-width','variants'=>[
-				'n'=>'narrow',
-				'c'=>'compact',
-				'r'=>'regular',
-				'w'=>'wide'
-			],'type'=>'size'],
+		$static_sizes=[
+			'contents'=>['label'=>'コンテンツ','default'=>'60rem','shorthand'=>'c','var'=>'--cp-content-width','variants'=>self::$size_variants_3,'type'=>'size'],
 			'radius'=>['label'=>'角丸','default'=>'20rem','shorthand'=>'r','var'=>'--cp-border-radius','variants'=>self::$size_variants_3,'type'=>'radius'],
 			'item'=>['label'=>'アイテム','default'=>'20rem','shorthand'=>'i','var'=>'--cp-item-size','variants'=>self::$size_variants_3,'type'=>'size'],
 			'margin'=>['label'=>'マージン','default'=>'1rem','shorthand'=>'mg','var'=>'--cp-margin','variants'=>self::$size_variants_5,'type'=>'margin'],

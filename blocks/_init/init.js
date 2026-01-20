@@ -6145,10 +6145,9 @@
         label: __4("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
         values: {
           hasContentWidthFit: __4("\u9069", "catpow"),
-          hasContentWidthNarrow: __4("\u72ED", "catpow"),
-          hasContentWidthCompact: __4("\u7E2E", "catpow"),
-          hasContentWidthRegular: __4("\u4E2D", "catpow"),
-          hasContentWidthWide: __4("\u5E83", "catpow"),
+          hasContentWidthSmall: __4("\u5C0F", "catpow"),
+          hasContentWidthMedium: __4("\u4E2D", "catpow"),
+          hasContentWidthLarge: __4("\u5927", "catpow"),
           hasContentWidthFull: __4("\u5168", "catpow"),
           hasContentWidthCustom: ":admin-generic:"
         },
