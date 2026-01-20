@@ -22,6 +22,7 @@ class style_config{
 			'heading'=>['label'=>'見出し','shorthand'=>'h'],
 			'lead'=>['label'=>'リード文','shorthand'=>'l'],
 			'paragraph'=>['label'=>'本文','shorthand'=>'p'],
+			'ui'=>['label'=>'UI','shorthand'=>'u'],
 			'caption'=>['label'=>'注釈','shorthand'=>'c'],
 		],
 		$size_variants_3=[
@@ -90,7 +91,7 @@ class style_config{
 	public static function get_font_family_roles(){
 		if(isset(static::$font_family_roles)){return static::$font_family_roles;}
 		$block_font_family_roles=self::generate_text_block_roles([
-			'sans-serif','sans-serif','sans-serif','sans-serif'
+			'sans-serif','sans-serif','sans-serif','sans-serif','sans-serif'
 		]);
 		$format_font_family_roles=[
 			'code'=>['label'=>'コード','default'=>'monospace','shorthand'=>'cd'],
@@ -105,7 +106,7 @@ class style_config{
 	}
 	public static function get_font_weight_roles(){
 		if(isset(static::$font_weight_roles)){return static::$font_weight_roles;}
-		return static::$font_weight_roles=apply_filters('cp_font_weight_roles',self::generate_text_block_roles(['700','400','400','400']));
+		return static::$font_weight_roles=apply_filters('cp_font_weight_roles',self::generate_text_block_roles(['700','400','400','400','400']));
 	}
 	public static function get_font_size_roles(){
 		if(isset(static::$font_size_roles)){return static::$font_size_roles;}
@@ -125,6 +126,14 @@ class style_config{
 				"min(5vw,1.25rem)",
 				"min(4.75vw,1.1875rem)",
 				"min(4.5vw,1.125rem)"
+			],
+			[
+				"min(5.25vw,1.3125rem)",
+				"min(5vw,1.25rem)",
+				"min(4.75vw,1.1875rem)",
+				"min(4.5vw,1.125rem)",
+				"min(4.25vw,1.0625rem)",
+				"min(4vw,1rem)"
 			],
 			[
 				"min(5.25vw,1.3125rem)",
@@ -156,11 +165,11 @@ class style_config{
 	}
 	public static function get_line_height_roles(){
 		if(isset(static::$line_height_roles)){return static::$line_height_roles;}
-		return static::$line_height_roles=apply_filters('cp_line_height_roles',self::generate_text_block_roles(['150%','150%','150%','150%']));
+		return static::$line_height_roles=apply_filters('cp_line_height_roles',self::generate_text_block_roles(['150%','150%','150%','150%','150%']));
 	}
 	public static function get_letter_spacing_roles(){
 		if(isset(static::$letter_spacing_roles)){return static::$letter_spacing_roles;}
-		return static::$letter_spacing_roles=apply_filters('cp_letter_spacing_roles',self::generate_text_block_roles(['normal','normal','normal','normal']));
+		return static::$letter_spacing_roles=apply_filters('cp_letter_spacing_roles',self::generate_text_block_roles(['normal','normal','normal','normal','normal']));
 	}
 
 	public static function generate_text_block_roles($default_values,$has_level=false){
