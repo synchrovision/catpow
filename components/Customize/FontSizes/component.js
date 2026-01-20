@@ -1524,9 +1524,7 @@
     return sizes;
   };
   var valuesToRelativeSizes = (values, rolesByShorthand) => {
-    return [
-      Object.keys(rolesByShorthand).filter((key) => rolesByShorthand[key].relative).reduce((p, c, i) => ({ ...p, [c]: `${values[0][i]}%` }), {})
-    ];
+    return Object.keys(rolesByShorthand).filter((key) => rolesByShorthand[key].relative).reduce((p, c, i) => ({ ...p, [c]: `${values[0][i]}%` }), {});
   };
   var staticSizeSteps = {
     8: 0,
