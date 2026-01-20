@@ -19,11 +19,11 @@ class style_config{
 		$line_height_roles,
 		$letter_spacing_roles,
 		$text_block_roles=[
-			'heading'=>['label'=>'見出し','shorthand'=>'h'],
-			'lead'=>['label'=>'リード文','shorthand'=>'l'],
-			'paragraph'=>['label'=>'本文','shorthand'=>'p'],
-			'ui'=>['label'=>'UI','shorthand'=>'u'],
-			'caption'=>['label'=>'注釈','shorthand'=>'c'],
+			'heading'=>['label'=>'見出し','shorthand'=>'h','sampleValues'=>[28,26,24,23,22,21]],
+			'lead'=>['label'=>'リード文','shorthand'=>'l','sampleValues'=>[21,20,19,18,17,16]],
+			'paragraph'=>['label'=>'本文','shorthand'=>'p','sampleValues'=>[20,19,18,17,16,15]],
+			'ui'=>['label'=>'UI','shorthand'=>'u','sampleValues'=>[22,21,20,19,18,17]],
+			'caption'=>['label'=>'注釈','shorthand'=>'c','sampleValues'=>[19,18,17,16,15,14]],
 		],
 		$size_variants_3=[
 			's'=>'small',
@@ -73,15 +73,34 @@ class style_config{
 			'item'=>['label'=>'アイテム','default'=>'20rem','shorthand'=>'i','var'=>'--cp-item-size','variants'=>self::$size_variants_3,'type'=>'size'],
 			'margin'=>['label'=>'マージン','default'=>'1rem','shorthand'=>'mg','var'=>'--cp-margin','variants'=>self::$size_variants_5,'type'=>'margin'],
 			'padding'=>['label'=>'パディング','default'=>'1rem','shorthand'=>'pd','var'=>'--cp-padding','variants'=>self::$size_variants_5,'type'=>'padding'],
-			//level
-			'block_margin'=>['label'=>'ブロック間隔','default'=>'1rem','shorthand'=>'bmg','var'=>'--cp-block-margin','variants'=>self::$level_variants,'type'=>'margin'],
-			'block_padding'=>['label'=>'ブロック余白','default'=>'1rem','shorthand'=>'bpd','var'=>'--cp-block-padding','variants'=>self::$level_variants,'type'=>'padding'],
-			'header_margin'=>['label'=>'ヘッダー間隔','default'=>'1rem','shorthand'=>'hmg','var'=>'--cp-header-margin','variants'=>self::$level_variants,'type'=>'margin'],
-			'header_padding'=>['label'=>'ヘッダー余白','default'=>'1rem','shorthand'=>'hpd','var'=>'--cp-header-padding','variants'=>self::$level_variants,'type'=>'padding'],
-			'paragraph_margin'=>['label'=>'段落間隔','default'=>'1rem','shorthand'=>'pmg','var'=>'--cp-paragraph-margin','variants'=>self::$level_variants,'type'=>'margin'],
-			'item_gap'=>['label'=>'アイテム間隔','default'=>'1rem','shorthand'=>'g','var'=>'--cp-item-gap','variants'=>self::$level_variants,'type'=>'gap'],
-			'item_padding'=>['label'=>'アイテム余白','default'=>'1rem','shorthand'=>'ipd','var'=>'--cp-item-padding','variants'=>self::$level_variants,'type'=>'padding'],
+		];
+		$text_block_margin_top_sizes=self::generate_text_block_roles(function($v){return sprintf("min(%svw,%srem)",$v/4,$v/16);},true,[
+			'name'=>'%s_margin_top',
+			'label'=>'%s 上マージン',
+			'shorthand'=>'%smgt',
+			'type'=>'size'
 		]);
+		$text_block_margin_bottom_sizes=self::generate_text_block_roles(function($v){return sprintf("min(%svw,%srem)",$v/4,$v/16);},true,[
+			'name'=>'%s_margin_bottom',
+			'label'=>'%s 下マージン',
+			'shorthand'=>'%smgb',
+			'type'=>'size'
+		]);
+		$contents_padding_sizes=[
+			'section_padding'=>['label'=>'セクション余白','default'=>'min(4vw,1rem) 0 min(4vw,1rem)','shorthand'=>'spd','var'=>'--cp-section-padding','variants'=>self::$level_variants,'type'=>'padding-vertical'],
+			'frame_padding'=>['label'=>'フレーム余白','default'=>'min(4vw,1rem) min(4vw,1rem)','shorthand'=>'fpd','var'=>'--cp-frame-padding','variants'=>self::$level_variants,'type'=>'padding'],
+			'item_padding'=>['label'=>'アイテム余白','default'=>'min(4vw,1rem) min(4vw,1rem)','shorthand'=>'ipd','var'=>'--cp-item-padding','variants'=>self::$level_variants,'type'=>'padding']
+		];
+		$gap_sizes=[
+			'item_gap'=>['label'=>'アイテム間隔','default'=>'1rem','shorthand'=>'g','var'=>'--cp-item-gap','variants'=>self::$level_variants,'type'=>'gap'],
+		];
+		return static::$size_roles=apply_filters('cp_size_roles',array_merge(
+			$static_sizes,
+			$text_block_margin_top_sizes,
+			$text_block_margin_bottom_sizes,
+			$contents_padding_sizes,
+			$gap_sizes
+		));
 	}
 	public static function get_font_family_roles(){
 		if(isset(static::$font_family_roles)){return static::$font_family_roles;}
@@ -101,52 +120,11 @@ class style_config{
 	}
 	public static function get_font_weight_roles(){
 		if(isset(static::$font_weight_roles)){return static::$font_weight_roles;}
-		return static::$font_weight_roles=apply_filters('cp_font_weight_roles',self::generate_text_block_roles(['700','400','400','400','400']));
+		return static::$font_weight_roles=apply_filters('cp_font_weight_roles',self::generate_text_block_roles(['700','400','400','700','400']));
 	}
 	public static function get_font_size_roles(){
 		if(isset(static::$font_size_roles)){return static::$font_size_roles;}
-		$static_size_roles=self::generate_text_block_roles([
-			[
-				"min(7vw,2.375rem)",
-				"min(6.5vw,1.75rem)",
-				"min(6vw,1.5rem)",
-				"min(5.75vw,1.4375rem)",
-				"min(5.5vw,1.375rem)",
-				"min(5.25vw,1.3125rem)"
-			],
-			[
-				"min(5.75vw,1.4375rem)",
-				"min(5.5vw,1.375rem)",
-				"min(5.25vw,1.3125rem)",
-				"min(5vw,1.25rem)",
-				"min(4.75vw,1.1875rem)",
-				"min(4.5vw,1.125rem)"
-			],
-			[
-				"min(5.25vw,1.3125rem)",
-				"min(5vw,1.25rem)",
-				"min(4.75vw,1.1875rem)",
-				"min(4.5vw,1.125rem)",
-				"min(4.25vw,1.0625rem)",
-				"min(4vw,1rem)"
-			],
-			[
-				"min(5.25vw,1.3125rem)",
-				"min(5vw,1.25rem)",
-				"min(4.75vw,1.1875rem)",
-				"min(4.5vw,1.125rem)",
-				"min(4.25vw,1.0625rem)",
-				"min(4vw,1rem)"
-			],
-			[
-				"min(4.75vw,1.1875rem)",
-				"min(4.5vw,1.125rem)",
-				"min(4.25vw,1.0625rem)",
-				"min(4vw,1rem)",
-				"min(3.75vw,0.9375rem)",
-				"min(3.5vw,0.875rem)"
-			],
-		],true);
+		$static_size_roles=self::generate_text_block_roles(function($v){return sprintf("min(%svw,%srem)",$v/4,$v/16);},true);
 		$relative_size_roles=[
 			'x-large'=>['label'=>'極大','default'=>'125%','shorthand'=>'xlg','relative'=>true],
 			'large'=>['label'=>'大','default'=>'110%','shorthand'=>'lg','relative'=>true],
@@ -160,23 +138,40 @@ class style_config{
 	}
 	public static function get_line_height_roles(){
 		if(isset(static::$line_height_roles)){return static::$line_height_roles;}
-		return static::$line_height_roles=apply_filters('cp_line_height_roles',self::generate_text_block_roles(['150%','150%','150%','150%','150%']));
+		return static::$line_height_roles=apply_filters('cp_line_height_roles',self::generate_text_block_roles("150%"));
 	}
 	public static function get_letter_spacing_roles(){
 		if(isset(static::$letter_spacing_roles)){return static::$letter_spacing_roles;}
-		return static::$letter_spacing_roles=apply_filters('cp_letter_spacing_roles',self::generate_text_block_roles(['normal','normal','normal','normal','normal']));
+		return static::$letter_spacing_roles=apply_filters('cp_letter_spacing_roles',self::generate_text_block_roles("normal"));
 	}
 
-	public static function generate_text_block_roles($default_values,$has_level=false){
-		$roles=self::$text_block_roles;
-		foreach(array_keys($roles) as $i=>$name){
+	public static function generate_text_block_roles($default_values,$has_level=false,$formats=null){
+		$roles=[];
+		foreach(array_keys(self::$text_block_roles) as $i=>$name){
+			$role=self::$text_block_roles[$name];
 			if($has_level){
-				$roles[$name]['variants']=self::$level_variants;
-				$roles[$name]['defaultValues']=$default_values[$i];
+				$role['variants']=self::$level_variants;
+				if(isset($default_values)){
+					if(is_callable($default_values)){
+						$role['defaultValues']=array_map($default_values,$role['sampleValues']);
+					}
+					else{
+						$role['defaultValues']=$default_values[$i];
+					}
+				}
 			}
 			else{
-				$roles[$name]['default']=$default_values[$i];
+				if(isset($default_values)){
+					$role['default']=is_array($default_values)?$default_values[$i]:$default_values;
+				}
 			}
+			foreach(['label','shorthand','var'] as $key){
+				if(!empty($formats[$key])){$role[$key]=sprintf($formats[$key],$role[$key]);}
+			}
+			foreach(['type'] as $key){
+				if(!empty($formats[$key])){$role[$key]=$formats[$key];}
+			}
+			$roles[empty($formats['name'])?$name:sprintf($formats['name'],$name)]=$role;
 		}
 		return $roles;
 	}
