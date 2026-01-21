@@ -69,7 +69,7 @@
 				&.has-focused{
 					#{$lines}{
 						&-line:not(.is-focused){
-							@include trn((o:.3));
+							@include trn((o:.1));
 						}
 					}
 				}
@@ -85,7 +85,7 @@
 			&-thead,&-tbody{
 				&-tr{
 					&-td,&-th{
-						@include bnd((pd:.25em));
+						@include bnd((pd:.1em));
 						@include bdr((s:s,w:1,c:t 40));
 					}
 				}

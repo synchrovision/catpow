@@ -75,7 +75,7 @@
   opacity: 1;
 }
 .cp-linechart__chart-lines.has-focused .cp-linechart__chart-lines-line:not(.is-focused) {
-  opacity: 0.3;
+  opacity: 0.1;
 }
 .cp-datatabel {
   padding: 1em 0rem;
@@ -88,7 +88,7 @@
   font-size: 0.75rem;
 }
 .cp-datatabel__table-thead-tr-td, .cp-datatabel__table-thead-tr-th, .cp-datatabel__table-tbody-tr-td, .cp-datatabel__table-tbody-tr-th {
-  padding: 0.25em;
+  padding: 0.1em;
   border-style: solid;
   border-width: 0.0625rem;
   border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 40),var(--cp-tones-t-a,1));
