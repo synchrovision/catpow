@@ -1454,6 +1454,7 @@
   // ../components/Customize/Sizes/component.jsx
   var init = ({ sizes, rolesByGroup }) => {
     return {
+      sizes,
       values: Object.keys(rolesByGroup).reduce((p, group) => ({ ...p, [group]: getValues(sizes, rolesByGroup[group]) }), {}),
       labels: Object.keys(rolesByGroup).reduce((p, group) => ({ ...p, [group]: getLabels(rolesByGroup[group]) }), {}),
       colors: Object.keys(rolesByGroup).reduce((p, group) => ({ ...p, [group]: getColors(rolesByGroup[group]) }), {}),
