@@ -78,6 +78,7 @@ class style_config{
 			'name'=>'%s_margin_top',
 			'label'=>'%s上',
 			'shorthand'=>'%smgt',
+			'var'=>'--cp-%s-margin-top',
 			'type'=>'spacing',
 			'group'=>'textBlockMarginTop'
 		]);
@@ -85,6 +86,7 @@ class style_config{
 			'name'=>'%s_margin_bottom',
 			'label'=>'%s下',
 			'shorthand'=>'%smgb',
+			'var'=>'--cp-%s-margin-bottom',
 			'type'=>'spacing',
 			'group'=>'textBlockMarginBottom'
 		]);
@@ -199,11 +201,11 @@ class style_config{
 					$role['default']=is_array($default_values)?$default_values[$i]:$default_values;
 				}
 			}
-			foreach(['label','shorthand','var'] as $key){
+			foreach(['label','shorthand'] as $key){
 				if(!empty($formats[$key])){$role[$key]=sprintf($formats[$key],$role[$key]);}
 			}
-			foreach(['type','group'] as $key){
-				if(!empty($formats[$key])){$role[$key]=$formats[$key];}
+			foreach(['type','group','var'] as $key){
+				if(!empty($formats[$key])){$role[$key]=sprintf($formats[$key],$name);}
 			}
 			$roles[empty($formats['name'])?$name:sprintf($formats['name'],$name)]=$role;
 		}
