@@ -1609,10 +1609,11 @@
     },
     gap: {
       steps: {
-        8: 2,
-        24: 4
+        40: 4,
+        80: 8,
+        160: 16
       },
-      height: 80,
+      height: 120,
       getRowLabels: (role) => ["\u7E26(vw)", "\u7E26(rem)", "\u6A2A(vw)", "\u6A2A(rem)"].map((suffix) => role.label + suffix),
       toValues: (size) => size.match(/min\((.+?)vw,(.+?)rem\) min\((.+?)vw,(.+?)rem\)/).slice(1).map((v, i) => i % 2 === 0 ? v * 4 : v * 16),
       toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`

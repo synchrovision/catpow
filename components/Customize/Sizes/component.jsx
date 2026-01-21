@@ -175,10 +175,11 @@ const valueSizeConverters = {
 	},
 	gap: {
 		steps: {
-			8: 2,
-			24: 4,
+			40: 4,
+			80: 8,
+			160: 16,
 		},
-		height: 80,
+		height: 120,
 		getRowLabels: (role) => ["縦(vw)", "縦(rem)", "横(vw)", "横(rem)"].map((suffix) => role.label + suffix),
 		toValues: (size) =>
 			size
