@@ -27,6 +27,14 @@ $wp_customize->add_section('layout',[
 $wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'size',[
 	'transport'=>'postMessage'
 ]));
+$wp_customize->add_control(new Catpow\customize\control($wp_customize,'size',[
+	'type'=>'Sizes',
+	'section'=>'layout',
+	'param'=>[
+		'roles'=>style_config::get_size_roles()
+	]
+]));
+add_action("customize_save_size",["Catpow\\util\\style_config",'update']);
 
 
 //Font Size
