@@ -71,6 +71,13 @@ add_action('wp_head',function(){
 				});
 			});
 		});
+		wp.customize('size',function(setting){
+			setting.bind(function(size){
+				Object.keys(size).forEach((role)=>{
+					rootStyle.setProperty('--cp-size-'+role,size[role]);
+				});
+			});
+		});
 	});
 </script>
 <?php
