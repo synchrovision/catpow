@@ -29,6 +29,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
+				"level",
 				"color",
 				"colorScheme",
 				{
@@ -256,7 +257,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 							value={item.info}
 						/>
 					</div>
-				</CP.Item>
+				</CP.Item>,
 			);
 		});
 		if (attributes.EditMode === undefined) {
@@ -355,7 +356,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 						{states.hasSite && <RichText.Content tagName="div" className="site" value={item.site} />}
 						<RichText.Content tagName="div" className="info" value={item.info} />
 					</div>
-				</div>
+				</div>,
 			);
 		});
 		return (

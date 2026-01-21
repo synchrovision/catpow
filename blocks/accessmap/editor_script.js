@@ -28,6 +28,7 @@
       var states = useMemo(() => CP.classNamesToFlags(classes), [classes]);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
+          "level",
           "color",
           "colorScheme",
           {
