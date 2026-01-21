@@ -1458,7 +1458,7 @@
       p.push(`${rolesByShorthand[c].label}(rem)`);
       return p;
     }, []),
-    columns: [...range(1, 6)].map((i) => `${7 - i}`)
+    columns: Object.values(Object.values(rolesByShorthand).find((role) => !role.relative).variants)
   });
   var extractRelativeSizeLabels = (rolesByShorthand) => ({
     columns: Object.keys(rolesByShorthand).filter((key) => rolesByShorthand[key].relative).map((key) => rolesByShorthand[key].label)
@@ -1496,8 +1496,8 @@
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
       values.push([], []);
-      [...range(1, 6)].reverse().forEach((l) => {
-        const [vw, rem] = extractValuesFromSize(sizes[`${key}-${l}`] || rolesByShorthand[key].defaultValues[l - 1]);
+      Object.keys(rolesByShorthand[key].variants).forEach((l, j) => {
+        const [vw, rem] = extractValuesFromSize(sizes[`${key}-${l}`] || rolesByShorthand[key].defaultValues[j]);
         values[i * 2].push(vw);
         values[i * 2 + 1].push(rem);
       });
@@ -1517,8 +1517,8 @@
     const keys = Object.keys(rolesByShorthand).filter((key) => !rolesByShorthand[key].relative);
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
-      [...range(1, 6)].reverse().forEach((l) => {
-        sizes[`${key}-${l}`] = convertValuesToSizes(values[i * 2][6 - l], values[i * 2 + 1][6 - l]);
+      Object.keys(rolesByShorthand[key].variants).forEach((l, j) => {
+        sizes[`${key}-${l}`] = convertValuesToSizes(values[i * 2][j], values[i * 2 + 1][j]);
       });
     }
     return sizes;
