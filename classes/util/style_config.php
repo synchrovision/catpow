@@ -19,11 +19,11 @@ class style_config{
 		$line_height_roles,
 		$letter_spacing_roles,
 		$text_block_roles=[
-			'heading'=>['label'=>'見出し','shorthand'=>'h','sampleValues'=>[21,22,24,26,28,32]],
-			'lead'=>['label'=>'リード文','shorthand'=>'l','sampleValues'=>[16,17,18,19,20,21]],
-			'paragraph'=>['label'=>'本文','shorthand'=>'p','sampleValues'=>[15,16,17,18,19,20]],
-			'ui'=>['label'=>'UI','shorthand'=>'u','sampleValues'=>[17,18,19,20,21,22]],
-			'caption'=>['label'=>'注釈','shorthand'=>'c','sampleValues'=>[14,15,16,17,18,19]],
+			'heading'=>['label'=>'見出し','shorthand'=>'h','sampleValues'=>[28,26,24,23,22,21]],
+			'lead'=>['label'=>'リード文','shorthand'=>'l','sampleValues'=>[21,20,19,18,17,16]],
+			'paragraph'=>['label'=>'本文','shorthand'=>'p','sampleValues'=>[20,19,18,17,16,15]],
+			'ui'=>['label'=>'UI','shorthand'=>'u','sampleValues'=>[22,21,20,19,18,17]],
+			'caption'=>['label'=>'注釈','shorthand'=>'c','sampleValues'=>[19,18,17,16,15,14]],
 		],
 		$size_variants_3=[
 			's'=>'small',
@@ -38,12 +38,12 @@ class style_config{
 			'xl'=>'x-large'
 		],
 		$level_variants=[
-			6=>'Level6',
-			5=>'Level5',
-			4=>'Level4',
-			3=>'Level3',
-			2=>'Level2',
 			1=>'Level1',
+			2=>'Level2',
+			3=>'Level3',
+			4=>'Level4',
+			5=>'Level5',
+			6=>'Level6',
 		],
 		$cache=[];
 
@@ -96,7 +96,7 @@ class style_config{
 				'variants'=>self::$level_variants,
 				'type'=>'paddingVertical',
 				'group'=>'contentsPadding',
-				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) 0 min(%1$svw,%2$srem)',$n,$n/4),range(1,6))
+				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) 0 min(%1$svw,%2$srem)',$n,$n/4),range(6,1))
 			],
 			'frame_padding'=>[
 				'label'=>'フレーム',
@@ -105,7 +105,7 @@ class style_config{
 				'variants'=>self::$level_variants,
 				'type'=>'padding',
 				'group'=>'contentsPadding',
-				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) min(%1$svw,%2$srem)',$n,$n/4),range(1,6))
+				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) min(%1$svw,%2$srem)',$n,$n/4),range(6,1))
 			],
 			'item_padding'=>[
 				'label'=>'アイテム',
@@ -114,7 +114,7 @@ class style_config{
 				'variants'=>self::$level_variants,
 				'type'=>'padding',
 				'group'=>'contentsPadding',
-				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) min(%1$svw,%2$srem)',$n,$n/4),range(1,6))
+				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) min(%1$svw,%2$srem)',$n,$n/4),range(6,1))
 			]
 		];
 		$gap_sizes=[
@@ -125,7 +125,7 @@ class style_config{
 				'variants'=>self::$level_variants,
 				'type'=>'gap',
 				'group'=>'Gap',
-				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) min(%1$svw,%2$srem)',$n,$n/4),range(1,6))
+				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) min(%1$svw,%2$srem)',$n,$n/4),range(6,1))
 			],
 		];
 		return static::$size_roles=apply_filters('cp_size_roles',array_merge(
