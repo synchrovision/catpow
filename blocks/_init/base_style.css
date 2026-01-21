@@ -31,7 +31,7 @@
   background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
   text-align: center;
   font-size: 0.625rem;
-  line-height: 0.625rem;
+  line-height: 1em;
   font-family: g;
   font-weight: 400;
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
@@ -56,7 +56,7 @@
   background-color: var(--wp-admin-theme-color);
   text-align: center;
   font-size: 0.75rem;
-  line-height: 0.625rem;
+  line-height: 1em;
   font-family: g;
   font-weight: 400;
   color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
@@ -149,7 +149,7 @@
   border-radius: 0.625rem;
   color: hsla(calc(var(--cp-tones-t-h) * 0.6 + var(--cp-tones-i-h) * 0.4),calc(var(--cp-tones-t-s) * 0.6 + var(--cp-tones-i-s) * 0.4),calc(var(--cp-tones-t-l) * 0.6 + var(--cp-tones-i-l) * 0.4),calc(var(--cp-tones-t-a) * 0.6 + var(--cp-tones-i-a) * 0.4));
   font-weight: bold;
-  font-family: var(--cp-fonts-t);
+  font-family: var(--cp-font-family-p);
   font-size: 1rem;
   line-height: 1.5em;
 }
@@ -503,7 +503,7 @@
   background-color: var(--wp-admin-theme-color);
   text-align: center;
   font-size: 0.75rem;
-  line-height: 0.625rem;
+  line-height: 1;
   font-family: g;
   font-weight: 400;
   color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
@@ -645,7 +645,7 @@
   height: fit-content;
   text-align: center;
   font-size: 0.75rem;
-  line-height: 0.625rem;
+  line-height: 1em;
   background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
   border-radius: 0.625rem;
   box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
@@ -669,7 +669,7 @@
   margin: 0.125rem;
   text-align: center;
   font-size: 0.75rem;
-  line-height: 0.625rem;
+  line-height: 1em;
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
   cursor: pointer;
   -webkit-transition: 0.5s;
