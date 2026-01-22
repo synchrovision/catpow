@@ -68,11 +68,41 @@ class style_config{
 	public static function get_size_roles(){
 		if(isset(static::$size_roles)){return static::$size_roles;}
 		$static_sizes=[
-			'contents'=>['label'=>'コンテンツ','shorthand'=>'c','var'=>'--cp-content-width','variants'=>self::$size_variants_3,'type'=>'size','group'=>'contentsSize','defaultValues'=>['min(90vw,40rem)','min(95vw,60rem)','min(98vw,80rem)']],
-			'item'=>['label'=>'アイテム','shorthand'=>'i','var'=>'--cp-item-size','variants'=>self::$size_variants_3,'type'=>'sizeRelative','group'=>'contentsSize','defaultValues'=>['10em','15em','20em']],
-			'radius'=>['label'=>'角丸','shorthand'=>'r','var'=>'--cp-border-radius','variants'=>self::$size_variants_3,'type'=>'radiusRelative','group'=>'borderRadius','defaultValues'=>['0em','0.5em','1em']],
-			'margin'=>['label'=>'マージン','shorthand'=>'mg','var'=>'--cp-margin','variants'=>self::$size_variants_5,'type'=>'spacingeRelative','group'=>'staticSpacing','defaultValues'=>['0.5em','1em','2em','4em','8em']],
-			'padding'=>['label'=>'パディング','shorthand'=>'pd','var'=>'--cp-padding','variants'=>self::$size_variants_5,'type'=>'spacingeRelative','group'=>'staticSpacing','defaultValues'=>['0.5em','1em','2em','4em','8em']],
+			'contents'=>['label'=>'コンテンツ',
+				'shorthand'=>'c',
+				'var'=>'--cp-content-width',
+				'variants'=>self::$size_variants_3,'type'=>'size',
+				'group'=>'contentsSize',
+				'defaultValues'=>['min(90vw,40rem)','min(95vw,60rem)','min(98vw,80rem)']
+			],
+			'item'=>['label'=>'アイテム',
+				'shorthand'=>'i',
+				'var'=>'--cp-item-size',
+				'variants'=>self::$size_variants_3,'type'=>'sizeRelative',
+				'group'=>'contentsSize',
+				'defaultValues'=>['10em','15em','20em']
+			],
+			'radius'=>['label'=>'角丸',
+				'shorthand'=>'r',
+				'var'=>'--cp-border-radius',
+				'variants'=>self::$size_variants_3,'type'=>'radiusRelative',
+				'group'=>'borderRadius',
+				'defaultValues'=>['0em','0.5em','1em']
+			],
+			'margin'=>['label'=>'マージン',
+				'shorthand'=>'mg',
+				'var'=>'--cp-margin',
+				'variants'=>self::$size_variants_5,'type'=>'spacingeRelative',
+				'group'=>'staticSpacing',
+				'defaultValues'=>['0.5em','1em','2em','4em','8em']
+			],
+			'padding'=>['label'=>'パディング',
+				'shorthand'=>'pd',
+				'var'=>'--cp-padding',
+				'variants'=>self::$size_variants_5,'type'=>'spacingeRelative',
+				'group'=>'staticSpacing',
+				'defaultValues'=>['0.5em','1em','2em','4em','8em']
+			],
 		];
 		$text_block_margin_top_sizes=self::generate_text_block_roles(function($v){return sprintf("min(%svw,%srem)",$v/4,$v/16);},true,[
 			'name'=>'%s_margin_top',
@@ -129,6 +159,15 @@ class style_config{
 				'group'=>'Gap',
 				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) min(%1$svw,%2$srem)',$n,$n/4),range(6,1))
 			],
+			'cell_padding'=>[
+				'label'=>'セル余白',
+				'shorthand'=>'cpd',
+				'var'=>'--cp-cell-padding',
+				'variants'=>self::$level_variants,
+				'type'=>'gap',
+				'group'=>'Gap',
+				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) min(%1$svw,%2$srem)',$n,$n/4),range(6,1))
+			],
 		];
 		return static::$size_roles=apply_filters('cp_size_roles',array_merge(
 			$static_sizes,
@@ -144,6 +183,9 @@ class style_config{
 			'sans-serif','sans-serif','sans-serif','sans-serif','sans-serif'
 		]);
 		$format_font_family_roles=[
+			'gothic'=>['label'=>'ゴシック','default'=>'sans-serif','shorthand'=>'g'],
+			'mincho'=>['label'=>'明朝','default'=>'serif','shorthand'=>'m'],
+			'english'=>['label'=>'英数','default'=>'sans-serif','shorthand'=>'e'],
 			'code'=>['label'=>'コード','default'=>'monospace','shorthand'=>'cd'],
 			'decoration'=>['label'=>'装飾','default'=>'fantasy','shorthand'=>'dc'],
 			'script'=>['label'=>'手書き','default'=>'cursive','shorthand'=>'sc'],
