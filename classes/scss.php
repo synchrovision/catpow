@@ -218,7 +218,7 @@ class scss{
 				$tone=apply_filters('cp_extract_color_tone',$tone,$args);
 				return self::create_map_data($tone);
 			});
-			self::register_translation_for_role($scssc,'size');
+			self::register_translation_for_role($scssc,'size',['ph'=>'var(--cp-page-content-height)','pt'=>'var(--cp-page-top-offset)','pb'=>'var(--cp-page-bottom-offset)']);
 			self::register_translation_for_role($scssc,'font_family');
 			self::register_translation_for_role($scssc,'font_size');
 			//self::register_translation_for_role($scssc,'font_weight');
@@ -231,23 +231,27 @@ class scss{
 		}
 		return static::$scssc=$scssc;
 	}
-	protected static function register_translation_for_role($scssc,$role_name){
+	protected static function register_translation_for_role($scssc,$role_name,$additional=[]){
 		$roles_by_shorthand=array_column(util\style_config::{'get_'.$role_name.'_roles'}(),null,'shorthand');
-		$scssc->registerFunction('translate_'.$role_name,function($args)use($scssc,$role_name,$roles_by_shorthand){
+		$scssc->registerFunction('translate_'.$role_name,function($args)use($scssc,$role_name,$roles_by_shorthand,$additional){
 			$args=array_map([$scssc,'compileValue'],$args);
-			list($h,$v)=explode('-',$args[0]);
-			$value=false;
-			if(isset($roles_by_shorthand[$h])){
-				$role=$roles_by_shorthand[$h];
-				if(empty($v) || empty($role['variants'][$v])){
-					$value=empty($role['var'])?
-						sprintf('var(--cp-%s-%s)',str_replace('_','-',$role_name),$h):
-						sprintf('var(%s)',$role['var']);
-				}
-				else{
-					$value=empty($role['var'])?
-						sprintf('var(--cp-%s-%s-%s)',str_replace('_','-',$role_name),$h,$v):
-						sprintf('var(%s-%s)',$role['var'],$v);
+			if(!empty($additional[$args[0]])){
+				$value= $additional[$args[0]];
+			}else{
+				list($h,$v)=explode('-',$args[0].'-');
+				$value=false;
+				if(isset($roles_by_shorthand[$h])){
+					$role=$roles_by_shorthand[$h];
+					if(empty($v) || empty($role['variants'][$v])){
+						$value=empty($role['var'])?
+							sprintf('var(--cp-%s-%s)',str_replace('_','-',$role_name),$h):
+							sprintf('var(%s)',$role['var']);
+					}
+					else{
+						$value=empty($role['var'])?
+							sprintf('var(--cp-%s-%s-%s)',str_replace('_','-',$role_name),$h,$v):
+							sprintf('var(%s-%s)',$role['var'],$v);
+					}
 				}
 			}
 			$value=apply_filters('cp_translate_'.$role_name,$value,$args);
