@@ -104,7 +104,7 @@ body.login .button.sns_login img {
   text-align: center;
   font-size: 0.9375rem;
   line-height: 1em;
-  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-family: var(--cp-font-family-g);
   font-weight: 500;
   color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
   cursor: pointer;
@@ -209,8 +209,8 @@ body.login .button.sns_login img {
   border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 30),var(--cp-tones-t-a,1));
   text-align: left;
   font-size: 0.75rem;
-  line-height: 0.75rem;
-  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  line-height: 1em;
+  font-family: var(--cp-font-family-g);
   font-weight: normal;
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 80),var(--cp-tones-t-a,1));
 }

@@ -146,7 +146,7 @@ body{
 							th,td{
 								@include bnd((pd:5 10));
 								@include bdr((s:s,w:1,c:t 30));
-								@include txt((a:l,p:12,h:12,f:g,s:r,c:t 80));
+								@include txt((a:l,p:12,h:1em,f:g,s:r,c:t 80));
 							}
 							th{
 								@include bg((c:m 1 .1));
