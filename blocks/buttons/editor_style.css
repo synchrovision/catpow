@@ -30,7 +30,7 @@
   padding: 0.1875rem;
   font-size: 0.6875rem;
   line-height: 1em;
-  letter-spacing: 0rem;
+  letter-spacing: 0;
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
   box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
 }

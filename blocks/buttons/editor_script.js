@@ -30,11 +30,10 @@
       const states = CP.classNamesToFlags(classes2);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          "fontSize",
+          "level",
           "borderRadius",
           "contentWidth",
           "itemSize",
-          "itemGap",
           { name: "microcopy", label: "\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", values: "hasMicroCopy" },
           { name: "caption", label: "\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "hasCaption" },
           "isTemplate"

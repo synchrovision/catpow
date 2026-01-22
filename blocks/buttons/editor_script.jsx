@@ -35,11 +35,10 @@ wp.blocks.registerBlockType("catpow/buttons", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"fontSize",
+				"level",
 				"borderRadius",
 				"contentWidth",
 				"itemSize",
-				"itemGap",
 				{ name: "microcopy", label: "マイクロコピー", values: "hasMicroCopy" },
 				{ name: "caption", label: "キャプション", values: "hasCaption" },
 				"isTemplate",
@@ -120,7 +119,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 							{item.caption}
 						</span>
 					)}
-				</CP.Item>
+				</CP.Item>,
 			);
 		});
 
@@ -212,7 +211,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 						<span className="_text">{item.text}</span>
 					</a>
 					{states.hasCaption && <span className="_caption">{item.caption}</span>}
-				</li>
+				</li>,
 			);
 		});
 		return (
@@ -249,7 +248,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 								)}
 								{item.text}
 							</a>
-						</li>
+						</li>,
 					);
 				});
 				return (

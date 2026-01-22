@@ -1,19 +1,21 @@
 @import 'admin_style_config.scss';
+@import "text-placeholders.scss";
 
 .wp-block-catpow-buttons{
+	@extend %ui-block;
 	$block:&;
 	@include flx((w:w,j:c,a:s,g:g));
-	@include bnd((w:c,pd:1em 0,mgi:a));
+	@include bnd((w:c,mgi:a));
 	&-button{
-		@include bnd((d:b,p:r,pd:1em 2em 1em 1.5em));
+		@extend %ui;
+		@include bnd((d:b,p:r,pd:ipd));
 		@include bg((c:n));
 		@include bdr((s:s,w:1,r:r));
-		@include txt((a:c,c:mx,f:t,td:n,b:k));
+		@include txt((a:c,c:mx,td:n,b:k));
 		@include trn((t:.2s));
 		@include usr((c:p));
 		&__text{
 			@include bnd((d:b,p:r,z:1));
-			@include txt((p:1em,w:b));
 		}
 		&:active{
 			@include shd((b:0 0 0 clr(mx 1 .2)));
@@ -26,8 +28,9 @@
 		}
 	}
 	&__item{
+		@extend %ui;
 		@include bnd((p:r,f:0 1 i,mg:0));
-		@include txt((l:n,a:c,c:mx,f:t,p:t));
+		@include txt((l:n,a:c,c:mx));
 		&-copy{
 			@include bnd((d:b,p:r,i:0,mg:a,mgb:-1em,pd:.5em 1em,w:fit,h:fit,z:1));
 			@include bg((c:m));
@@ -35,8 +38,10 @@
 			@include txt((p:.6em,h:1em,c:i));
 		}
 		&-caption{
-			@include bnd((d:b,pdl:1em,w:fit,mg:a,z:1));
-			@include txt((a:l,p:12,h:1.5em,c:t));
+			@extend %caption-block;
+			@extend %caption;
+			@include bnd((d:b,w:fit,mgi:a,z:1));
+			@include txt((a:l));
 		}
 		&.has-icon{
 			#{$block}{
