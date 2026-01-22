@@ -67,7 +67,7 @@
   display: block;
 }
 .cp-legend.has-focused .cp-legend__item:not(.is-focused) {
-  opacity: 0.6;
+  opacity: 0.4;
 }
 .cp-linechart__chart-lines-line {
   -webkit-transition: 0.2s;
@@ -114,6 +114,9 @@
 }
 .cp-datatabel__table-tbody-tr:nth-child(odd) .cp-datatabel__table-tbody-tr-td {
   background-color: #eee;
+}
+.cp-datatabel.has-focused .cp-datatabel__table-tbody-tr:not(.is-focused) {
+  opacity: 0.4;
 }
 .cp-tabpanel__tabs {
   display: -webkit-box;

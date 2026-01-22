@@ -70,6 +70,18 @@ const getColors = (roles) => {
 	});
 	return colors;
 };
+const translateToDisplayValue = (value, { r }, roles) => {
+	let n = r;
+	const role = roles.find((role) => {
+		const l = valueSizeConverters[role.type].toSizes.length;
+		if (n < l) {
+			return true;
+		}
+		n -= l;
+		return false;
+	});
+	return valueSizeConverters[role.type].getDisplayValue(value, n);
+};
 const valueSizeConverters = {
 	size: {
 		steps: {
@@ -87,6 +99,7 @@ const valueSizeConverters = {
 				.slice(1)
 				.map((v, i) => (i === 0 ? v * 4 : v * 16)),
 		toSizes: (vw, rem) => `min(${(vw / 4).toFixed(2)}vw,${(rem / 16).toFixed(2)}rem)`,
+		getDisplayValue: (val, n) => (n % 2 ? val / 16 : val / 4),
 	},
 	sizeRelative: {
 		steps: {
@@ -95,9 +108,10 @@ const valueSizeConverters = {
 			960: 40,
 		},
 		height: 400,
-		getRowLabels: (role) => [role.label],
+		getRowLabels: (role) => [role.label + "(em)"],
 		toValues: (size) => [parseFloat(size) * 16],
 		toSizes: (value) => `${value / 16}em`,
+		getDisplayValue: (val) => val / 16,
 	},
 	spacingeRelative: {
 		steps: {
@@ -108,9 +122,10 @@ const valueSizeConverters = {
 			320: 64,
 		},
 		height: 160,
-		getRowLabels: (role) => [role.label],
+		getRowLabels: (role) => [role.label + "(em)"],
 		toValues: (size) => [parseFloat(size) * 16],
 		toSizes: (value) => `${value / 16}em`,
+		getDisplayValue: (val) => val / 16,
 	},
 	radiusRelative: {
 		steps: {
@@ -118,9 +133,10 @@ const valueSizeConverters = {
 			24: 4,
 		},
 		height: 80,
-		getRowLabels: (role) => [role.label],
+		getRowLabels: (role) => [role.label + "(em)"],
 		toValues: (size) => [parseFloat(size) * 16],
 		toSizes: (value) => `${value / 16}em`,
+		getDisplayValue: (val) => val / 16,
 	},
 	spacing: {
 		steps: {
@@ -138,6 +154,7 @@ const valueSizeConverters = {
 				.slice(1)
 				.map((v, i) => (i === 0 ? v * 4 : v * 16)),
 		toSizes: (vw, rem) => `min(${(vw / 4).toFixed(2)}vw,${(rem / 16).toFixed(2)}rem)`,
+		getDisplayValue: (val, n) => (n % 2 ? val / 16 : val / 4),
 	},
 	padding: {
 		steps: {
@@ -155,6 +172,7 @@ const valueSizeConverters = {
 				.slice(1)
 				.map((v, i) => (i % 2 === 0 ? v * 4 : v * 16)),
 		toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`,
+		getDisplayValue: (val, n) => (n % 2 ? val / 16 : val / 4),
 	},
 	paddingVertical: {
 		steps: {
@@ -172,6 +190,7 @@ const valueSizeConverters = {
 				.slice(1)
 				.map((v, i) => (i % 2 === 0 ? v * 4 : v * 16)),
 		toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) 0 min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`,
+		getDisplayValue: (val, n) => (n % 2 ? val / 16 : val / 4),
 	},
 	gap: {
 		steps: {
@@ -187,6 +206,7 @@ const valueSizeConverters = {
 				.slice(1)
 				.map((v, i) => (i % 2 === 0 ? v * 4 : v * 16)),
 		toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`,
+		getDisplayValue: (val, n) => (n % 2 ? val / 16 : val / 4),
 	},
 };
 
@@ -219,7 +239,7 @@ Catpow.Customize.Sizes = (props) => {
 					labels={state.labels[groupKey]}
 					colors={state.colors[groupKey]}
 					steps={state.steps[groupKey]}
-					//translateToDisplayValue={state.translateToDisplayValue[groupKey]}
+					translateToDisplayValue={(value, ctx) => translateToDisplayValue(value, ctx, rolesByGroup[groupKey])}
 					onChange={(values) => {
 						dispatch({ type: "updateValues", group: groupKey, roles: rolesByGroup[groupKey], values });
 					}}

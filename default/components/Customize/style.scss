@@ -44,7 +44,7 @@
 		&.has-focused{
 			#{$block}{
 				&__item:not(.is-focused){
-					@include trn((o:.6));
+					@include trn((o:.4));
 				}
 			}
 		}
@@ -77,6 +77,7 @@
 		}
 	}
 	&-datatabel{
+		$block:&;
 		@include bnd((pd:1em 0));
 		&__table{
 			@include bnd((w:f));
@@ -120,6 +121,17 @@
 							&-td{
 								@include bg((c:#eee));
 							}
+						}
+					}
+				}
+			}
+		}
+		&.has-focused{
+			#{$block}{
+				&__table{
+					&-tbody{
+						&-tr:not(.is-focused){
+							@include trn((o:.4));
 						}
 					}
 				}

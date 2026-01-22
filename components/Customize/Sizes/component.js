@@ -880,7 +880,7 @@
   init_react();
   var DataSetContext = createContext(null);
   var DataSet = (props) => {
-    const { labels, colors, classNames, translateToDisplayValue, values, steps = { 100: 1 }, snap = true, onChange, children, ...otherProps } = props;
+    const { labels, colors, classNames, translateToDisplayValue: translateToDisplayValue2, values, steps = { 100: 1 }, snap = true, onChange, children, ...otherProps } = props;
     const [activeRow, setActiveRow] = useState(null);
     const [activeColumn, setActiveColumn] = useState(null);
     const [focusedRow, focusRow] = useState(null);
@@ -906,10 +906,10 @@
     );
     const getDisplayValue = useCallback(
       (r2, c) => {
-        if (translateToDisplayValue == null) {
+        if (translateToDisplayValue2 == null) {
           return values[r2][c];
         }
-        return translateToDisplayValue(values[r2][c], {
+        return translateToDisplayValue2(values[r2][c], {
           r: r2,
           c,
           className: classNames?.cells?.[r2]?.[c],
@@ -917,7 +917,7 @@
           color: colors?.cells?.[r2]?.[c] || colors?.columns?.[c] || colors?.rows?.[r2]
         });
       },
-      [values, translateToDisplayValue]
+      [values, translateToDisplayValue2]
     );
     const setActiveCellValue = useCallback(
       (value) => {
@@ -1054,8 +1054,8 @@
   init_react();
   var DataTable = (props) => {
     const { className = "cp-datatabel", showColumnHeader = true, showRowHeader = true, ...otherProps } = props;
-    const { labels, classNames, colors, values, getDisplayValue } = useContext(DataSetContext);
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("table", null, showColumnHeader && labels.columns && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, showRowHeader && labels.rows && /* @__PURE__ */ wp.element.createElement("td", null), labels.columns.map((label) => /* @__PURE__ */ wp.element.createElement("th", null, label)))), /* @__PURE__ */ wp.element.createElement("tbody", null, values.map((row, r2) => /* @__PURE__ */ wp.element.createElement("tr", null, showRowHeader && labels.rows && /* @__PURE__ */ wp.element.createElement("th", null, labels.rows[r2]), row.map((v, c) => /* @__PURE__ */ wp.element.createElement("td", null, getDisplayValue(r2, c)))))))));
+    const { labels, classNames, colors, values, focusedRow, getDisplayValue } = useContext(DataSetContext);
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className: clsx(className, { "has-focused": focusedRow != null }) }, /* @__PURE__ */ wp.element.createElement("table", null, showColumnHeader && labels.columns && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, showRowHeader && labels.rows && /* @__PURE__ */ wp.element.createElement("td", null), labels.columns.map((label) => /* @__PURE__ */ wp.element.createElement("th", null, label)))), /* @__PURE__ */ wp.element.createElement("tbody", null, values.map((row, r2) => /* @__PURE__ */ wp.element.createElement("tr", { className: clsx("_tr", classNames?.rows?.[r2], { "is-focused": r2 === focusedRow }) }, showRowHeader && labels.rows && /* @__PURE__ */ wp.element.createElement("th", null, labels.rows[r2]), row.map((v, c) => /* @__PURE__ */ wp.element.createElement("td", null, getDisplayValue(r2, c)))))))));
   };
 
   // node_modules-included/catpow/src/component/Chart/Legend.tsx
@@ -1520,6 +1520,18 @@
     });
     return colors;
   };
+  var translateToDisplayValue = (value, { r: r2 }, roles) => {
+    let n = r2;
+    const role = roles.find((role2) => {
+      const l = valueSizeConverters[role2.type].toSizes.length;
+      if (n < l) {
+        return true;
+      }
+      n -= l;
+      return false;
+    });
+    return valueSizeConverters[role.type].getDisplayValue(value, n);
+  };
   var valueSizeConverters = {
     size: {
       steps: {
@@ -1532,7 +1544,8 @@
       height: 600,
       getRowLabels: (role) => ["(vw)", "(rem)"].map((suffix) => role.label + suffix),
       toValues: (size) => size.match(/min\((.+?)vw,(.+?)rem\)/).slice(1).map((v, i) => i === 0 ? v * 4 : v * 16),
-      toSizes: (vw, rem) => `min(${(vw / 4).toFixed(2)}vw,${(rem / 16).toFixed(2)}rem)`
+      toSizes: (vw, rem) => `min(${(vw / 4).toFixed(2)}vw,${(rem / 16).toFixed(2)}rem)`,
+      getDisplayValue: (val, n) => n % 2 ? val / 16 : val / 4
     },
     sizeRelative: {
       steps: {
@@ -1541,9 +1554,10 @@
         960: 40
       },
       height: 400,
-      getRowLabels: (role) => [role.label],
+      getRowLabels: (role) => [role.label + "(em)"],
       toValues: (size) => [parseFloat(size) * 16],
-      toSizes: (value) => `${value / 16}em`
+      toSizes: (value) => `${value / 16}em`,
+      getDisplayValue: (val) => val / 16
     },
     spacingeRelative: {
       steps: {
@@ -1554,9 +1568,10 @@
         320: 64
       },
       height: 160,
-      getRowLabels: (role) => [role.label],
+      getRowLabels: (role) => [role.label + "(em)"],
       toValues: (size) => [parseFloat(size) * 16],
-      toSizes: (value) => `${value / 16}em`
+      toSizes: (value) => `${value / 16}em`,
+      getDisplayValue: (val) => val / 16
     },
     radiusRelative: {
       steps: {
@@ -1564,9 +1579,10 @@
         24: 4
       },
       height: 80,
-      getRowLabels: (role) => [role.label],
+      getRowLabels: (role) => [role.label + "(em)"],
       toValues: (size) => [parseFloat(size) * 16],
-      toSizes: (value) => `${value / 16}em`
+      toSizes: (value) => `${value / 16}em`,
+      getDisplayValue: (val) => val / 16
     },
     spacing: {
       steps: {
@@ -1579,7 +1595,8 @@
       height: 160,
       getRowLabels: (role) => ["(vw)", "(rem)"].map((suffix) => role.label + suffix),
       toValues: (size) => size.match(/min\((.+?)vw,(.+?)rem\)/).slice(1).map((v, i) => i === 0 ? v * 4 : v * 16),
-      toSizes: (vw, rem) => `min(${(vw / 4).toFixed(2)}vw,${(rem / 16).toFixed(2)}rem)`
+      toSizes: (vw, rem) => `min(${(vw / 4).toFixed(2)}vw,${(rem / 16).toFixed(2)}rem)`,
+      getDisplayValue: (val, n) => n % 2 ? val / 16 : val / 4
     },
     padding: {
       steps: {
@@ -1592,7 +1609,8 @@
       height: 160,
       getRowLabels: (role) => ["\u7E26(vw)", "\u7E26(rem)", "\u6A2A(vw)", "\u6A2A(rem)"].map((suffix) => role.label + suffix),
       toValues: (size) => size.match(/min\((.+?)vw,(.+?)rem\) min\((.+?)vw,(.+?)rem\)/).slice(1).map((v, i) => i % 2 === 0 ? v * 4 : v * 16),
-      toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`
+      toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`,
+      getDisplayValue: (val, n) => n % 2 ? val / 16 : val / 4
     },
     paddingVertical: {
       steps: {
@@ -1605,7 +1623,8 @@
       height: 160,
       getRowLabels: (role) => ["\u4E0A(vw)", "\u4E0A(rem)", "\u4E0B(vw)", "\u4E0B(rem)"].map((suffix) => role.label + suffix),
       toValues: (size) => size.match(/min\((.+?)vw,(.+?)rem\) 0 min\((.+?)vw,(.+?)rem\)/).slice(1).map((v, i) => i % 2 === 0 ? v * 4 : v * 16),
-      toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) 0 min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`
+      toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) 0 min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`,
+      getDisplayValue: (val, n) => n % 2 ? val / 16 : val / 4
     },
     gap: {
       steps: {
@@ -1616,7 +1635,8 @@
       height: 120,
       getRowLabels: (role) => ["\u7E26(vw)", "\u7E26(rem)", "\u6A2A(vw)", "\u6A2A(rem)"].map((suffix) => role.label + suffix),
       toValues: (size) => size.match(/min\((.+?)vw,(.+?)rem\) min\((.+?)vw,(.+?)rem\)/).slice(1).map((v, i) => i % 2 === 0 ? v * 4 : v * 16),
-      toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`
+      toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`,
+      getDisplayValue: (val, n) => n % 2 ? val / 16 : val / 4
     }
   };
   Catpow.Customize.Sizes = (props) => {
@@ -1644,6 +1664,7 @@
         labels: state.labels[groupKey],
         colors: state.colors[groupKey],
         steps: state.steps[groupKey],
+        translateToDisplayValue: (value, ctx) => translateToDisplayValue(value, ctx, rolesByGroup[groupKey]),
         onChange: (values) => {
           dispatch({ type: "updateValues", group: groupKey, roles: rolesByGroup[groupKey], values });
         }
