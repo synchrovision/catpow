@@ -1,21 +1,27 @@
 @import "admin_style_config.scss";
+@import "text-placeholders.scss";
 
 .wp-block-catpow-datatable{
+	@extend %ui-block;
 	@include tbl((l:f));
-	@include bnd((w:95% 720,mg:20 a));
+	@include bnd((w:f));
+	&__thead,&__tbody{
+		&-tr{
+			&-th,&-td{
+				@extend %paragraph;
+				@include bnd((pd:cpd));
+			}
+		}
+	}
 	&.spec{
 		thead{
 			th,td{
-				@include bnd((pd:10));
-				@include txt((a:c,p:12,h:1.5em,f:t));
 				@include bdr((p:b,s:s,w:1,c:t));
 			}
 		}
 		tbody{
 			tr{
 				th,td{
-					@include bnd((p:r,pd:10));
-					@include txt((a:c,p:12,h:1.5em,f:t));
 					@include bdr((p:b,s:s,w:1,c:t));
 				}
 			}
@@ -24,8 +30,7 @@
 	&.sheet{
 		thead{
 			th{
-				@include bnd((pd:10));
-				@include txt((a:c,p:12,h:1.5em,f:t));
+				@include txt((a:c));
 				@include bg((c:s));
 				@include bdr((s:s,w:1,c:t 50));
 				&.spacer{
@@ -37,8 +42,7 @@
 		tbody{
 			tr{
 				th,td{
-					@include bnd((p:r,pd:10));
-					@include txt((a:l,p:12,h:1.5em,f:t));
+					@include txt((a:l));
 					@include bdr((s:s,w:1,c:t 50));
 				}
 				th{
@@ -58,8 +62,7 @@
 	&.plan{
 		thead{
 			th{
-				@include bnd((pd:10));
-				@include txt((a:c,p:12,h:1.5em,f:t,c:i));
+				@include txt((a:c,c:i));
 				@include bg((c:m));
 				&.spacer{
 					@include bg((c:n));
@@ -69,8 +72,7 @@
 		tbody{
 			tr{
 				th,td{
-					@include bnd((p:r,pd:10));
-					@include txt((a:c,p:12,h:1.5em,f:t));
+					@include txt((a:c));
 				}
 				th{
 					@include bg((c:m));
@@ -78,9 +80,6 @@
 				}
 				td{
 					@include bg((c:b));
-					strong{
-						@include txt((p:1.25em,c:m));
-					}
 				}
 				&:nth-of-type(odd){
 					th{@include bg((c:m 95));}

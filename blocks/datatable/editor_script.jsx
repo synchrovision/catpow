@@ -96,6 +96,7 @@
 					label: "タイプ",
 					values: ["spec", "sheet", "plan"],
 				},
+				"level",
 				"color",
 				{
 					name: "loop",
@@ -171,84 +172,86 @@
 							<InnerBlocks />
 						</div>
 					) : (
-						<table className={classes}>
-							{states.hasHeaderRow && (
-								<thead>
-									<tr>
-										{rows[0].cells.map((cell, index) => {
-											if (index === 0) {
-												if (states.hasHeaderColumn && cell.text.length === 0) {
-													cell.classes = "spacer";
-												} else if (cell.classes == "spacer") {
-													cell.classes = "";
+						<CP.Bem prefix="wp-block-catpow">
+							<table className={classes}>
+								{states.hasHeaderRow && (
+									<thead>
+										<tr>
+											{rows[0].cells.map((cell, index) => {
+												if (index === 0) {
+													if (states.hasHeaderColumn && cell.text.length === 0) {
+														cell.classes = "spacer";
+													} else if (cell.classes == "spacer") {
+														cell.classes = "";
+													}
 												}
-											}
-											return (
-												<th className={cell.classes} key={index}>
-													<RichText
-														onChange={(text) => {
-															cell.text = text;
-															saveItems();
-														}}
-														value={cell.text}
-													/>
-												</th>
-											);
-										})}
-									</tr>
-								</thead>
-							)}
-							<tbody>
-								{rows.map((row, index) => {
-									if (states.hasHeaderRow && index == 0) {
-										return false;
-									}
-									return (
-										<tr key={index}>
-											{row.cells.map((cell, columnIndex) => {
-												var children = [
-													<RichText
-														onChange={(text) => {
-															cell.text = text;
-															saveItems();
-														}}
-														value={cell.text}
-														key="text"
-													/>,
-												];
-												if (isSelected && columnIndex == row.cells.length - 1) {
-													children.push(
-														<CP.ItemControl
-															className="is-control-row"
-															controls={{
-																up: () => downRow(index),
-																delete: () => deleteRow(index),
-																clone: () => addRow(index),
-																down: () => upRow(index),
+												return (
+													<th className={cell.classes} key={index}>
+														<RichText
+															onChange={(text) => {
+																cell.text = text;
+																saveItems();
 															}}
+															value={cell.text}
 														/>
-													);
-												}
-												if (isSelected && index == rows.length - 1) {
-													children.push(
-														<CP.ItemControl
-															className="is-control-column"
-															controls={{
-																left: () => downColumn(columnIndex),
-																delete: () => deleteColumn(columnIndex),
-																clone: () => addColumn(columnIndex),
-																right: () => upColumn(columnIndex),
-															}}
-														/>
-													);
-												}
-												return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? "th" : "td", { className: cell.classes, key: columnIndex }, children);
+													</th>
+												);
 											})}
 										</tr>
-									);
-								})}
-							</tbody>
-						</table>
+									</thead>
+								)}
+								<tbody>
+									{rows.map((row, index) => {
+										if (states.hasHeaderRow && index == 0) {
+											return false;
+										}
+										return (
+											<tr key={index}>
+												{row.cells.map((cell, columnIndex) => {
+													var children = [
+														<RichText
+															onChange={(text) => {
+																cell.text = text;
+																saveItems();
+															}}
+															value={cell.text}
+															key="text"
+														/>,
+													];
+													if (isSelected && columnIndex == row.cells.length - 1) {
+														children.push(
+															<CP.ItemControl
+																className="is-control-row"
+																controls={{
+																	up: () => downRow(index),
+																	delete: () => deleteRow(index),
+																	clone: () => addRow(index),
+																	down: () => upRow(index),
+																}}
+															/>,
+														);
+													}
+													if (isSelected && index == rows.length - 1) {
+														children.push(
+															<CP.ItemControl
+																className="is-control-column"
+																controls={{
+																	left: () => downColumn(columnIndex),
+																	delete: () => deleteColumn(columnIndex),
+																	clone: () => addColumn(columnIndex),
+																	right: () => upColumn(columnIndex),
+																}}
+															/>,
+														);
+													}
+													return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? "th" : "td", { className: cell.classes, key: columnIndex }, children);
+												})}
+											</tr>
+										);
+									})}
+								</tbody>
+							</table>
+						</CP.Bem>
 					)}
 				</>
 				<InspectorControls>
@@ -271,35 +274,37 @@
 
 		return (
 			<>
-				<table className={classes}>
-					{states.hasHeaderRow && (
-						<thead>
-							<tr>
-								{rows[0].cells.map((cell, index) => {
-									return (
-										<th className={cell.classes} key={index}>
-											<RichText.Content value={cell.text} />
-										</th>
-									);
-								})}
-							</tr>
-						</thead>
-					)}
-					<tbody>
-						{rows.map((row, index) => {
-							if (states.hasHeaderRow && index == 0) {
-								return false;
-							}
-							return (
-								<tr key={index}>
-									{row.cells.map((cell, columnIndex) => {
-										return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? "th" : "td", { className: cell.classes, key: columnIndex }, <RichText.Content value={cell.text} />);
+				<CP.Bem prefix="wp-block-catpow">
+					<table className={classes}>
+						{states.hasHeaderRow && (
+							<thead>
+								<tr>
+									{rows[0].cells.map((cell, index) => {
+										return (
+											<th className={cell.classes} key={index}>
+												<RichText.Content value={cell.text} />
+											</th>
+										);
 									})}
 								</tr>
-							);
-						})}
-					</tbody>
-				</table>
+							</thead>
+						)}
+						<tbody>
+							{rows.map((row, index) => {
+								if (states.hasHeaderRow && index == 0) {
+									return false;
+								}
+								return (
+									<tr key={index}>
+										{row.cells.map((cell, columnIndex) => {
+											return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? "th" : "td", { className: cell.classes, key: columnIndex }, <RichText.Content value={cell.text} />);
+										})}
+									</tr>
+								);
+							})}
+						</tbody>
+					</table>
+				</CP.Bem>
 				{doLoop && (
 					<on-empty>
 						<InnerBlocks.Content />
