@@ -45,6 +45,15 @@ class style_config{
 			5=>'Level5',
 			6=>'Level6',
 		],
+		$component_variants=[
+			'f'=>'Frame',
+			'h'=>'Header',
+			'c'=>'Card',
+			'b'=>'Button',
+			'l'=>'Label',
+			't'=>'Tab',
+			'i'=>'Input',
+		],
 		$cache=[];
 
 	//roles
@@ -68,35 +77,39 @@ class style_config{
 	public static function get_size_roles(){
 		if(isset(static::$size_roles)){return static::$size_roles;}
 		$static_sizes=[
-			'contents'=>['label'=>'コンテンツ',
+			'contents'=>[
+				'label'=>'コンテンツ',
 				'shorthand'=>'c',
 				'var'=>'--cp-content-width',
 				'variants'=>self::$size_variants_3,'type'=>'size',
 				'group'=>'contentsSize',
 				'defaultValues'=>['min(90vw,40rem)','min(95vw,60rem)','min(98vw,80rem)']
 			],
-			'item'=>['label'=>'アイテム',
+			'item'=>[
+				'label'=>'アイテム',
 				'shorthand'=>'i',
 				'var'=>'--cp-item-size',
 				'variants'=>self::$size_variants_3,'type'=>'sizeRelative',
 				'group'=>'contentsSize',
 				'defaultValues'=>['10em','15em','20em']
 			],
-			'radius'=>['label'=>'角丸',
+			'radius'=>[
+				'label'=>'角丸',
 				'shorthand'=>'r',
-				'var'=>'--cp-border-radius',
-				'variants'=>self::$size_variants_3,'type'=>'radiusRelative',
+				'variants'=>self::$component_variants,'type'=>'radiusRelative',
 				'group'=>'borderRadius',
-				'defaultValues'=>['0em','0.5em','1em']
+				'defaultValues'=>['1em','1em','1em','1em','1em','1em','1em']
 			],
-			'margin'=>['label'=>'マージン',
+			'margin'=>[
+				'label'=>'マージン',
 				'shorthand'=>'mg',
 				'var'=>'--cp-margin',
 				'variants'=>self::$size_variants_5,'type'=>'spacingeRelative',
 				'group'=>'staticSpacing',
 				'defaultValues'=>['0.5em','1em','2em','4em','8em']
 			],
-			'padding'=>['label'=>'パディング',
+			'padding'=>[
+				'label'=>'パディング',
 				'shorthand'=>'pd',
 				'var'=>'--cp-padding',
 				'variants'=>self::$size_variants_5,'type'=>'spacingeRelative',
