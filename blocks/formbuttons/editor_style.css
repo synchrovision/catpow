@@ -1,13 +1,4 @@
 @charset "UTF-8";
-.wp-block-catpow-formbuttons__item {
-  position: relative;
-  list-style: none;
-}
-.wp-block-catpow-formbuttons__item .itemControl {
-  position: absolute;
-  top: -1.25rem;
-  right: 0rem;
-}
 .wp-block-catpow-formbuttons-button__action {
   display: block;
   position: absolute;
@@ -29,5 +20,18 @@
   font-weight: 900;
   display: inline-block;
   margin-right: 0.5em;
+}
+.wp-block-catpow-formbuttons__item {
+  position: relative;
+  list-style: none;
+}
+.wp-block-catpow-formbuttons__item-copy:empty::before, .wp-block-catpow-formbuttons__item-caption:empty::before {
+  content: "Input Text";
+  opacity: 0.25;
+}
+.wp-block-catpow-formbuttons__item .itemControl {
+  position: absolute;
+  top: -1.25rem;
+  right: 0rem;
 }
 /*# sourceMappingURL=./editor_style.css.map */

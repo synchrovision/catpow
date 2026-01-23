@@ -36,7 +36,6 @@ wp.blocks.registerBlockType("catpow/buttons", {
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
 				"level",
-				"borderRadius",
 				"contentWidth",
 				"itemSize",
 				{ name: "microcopy", label: "マイクロコピー", values: "hasMicroCopy" },
@@ -89,7 +88,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 						</span>
 					)}
 					<CP.Link.Edit className="-button" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index} isSelected={isSelected}>
-						{itemStates.hasIcon && <CP.OutputIcon item={item} />}
+						{itemStates.hasIcon && <CP.OutputIcon className="_icon" item={item} />}
 						<span
 							className="_text"
 							onInput={(e) => {
@@ -207,7 +206,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 				<li className={item.classes} key={index}>
 					{states.hasMicroCopy && <span className="_copy">{item.copy}</span>}
 					<a href={item.url} className="-button" target={shouldOpenWithOtherWindow ? "_blank" : null} rel={shouldOpenWithOtherWindow ? "noopener" : null} {...eventDispatcherAttributes}>
-						{itemStates.hasIcon && <CP.OutputIcon item={item} />}
+						{itemStates.hasIcon && <CP.OutputIcon className="_icon" item={item} />}
 						<span className="_text">{item.text}</span>
 					</a>
 					{states.hasCaption && <span className="_caption">{item.caption}</span>}

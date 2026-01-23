@@ -31,7 +31,6 @@
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
           "level",
-          "borderRadius",
           "contentWidth",
           "itemSize",
           { name: "microcopy", label: "\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", values: "hasMicroCopy" },
@@ -77,7 +76,7 @@
               suppressContentEditableWarning: true
             },
             item.copy
-          ), /* @__PURE__ */ wp.element.createElement(CP.Link.Edit, { className: "-button", attr: attributes, set: setAttributes, keys: linkKeys.link, index, isSelected }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), /* @__PURE__ */ wp.element.createElement(
+          ), /* @__PURE__ */ wp.element.createElement(CP.Link.Edit, { className: "-button", attr: attributes, set: setAttributes, keys: linkKeys.link, index, isSelected }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon", item }), /* @__PURE__ */ wp.element.createElement(
             "span",
             {
               className: "_text",
@@ -149,7 +148,7 @@
         }
         const shouldOpenWithOtherWindow = /^\w+:\/\//.test(item.url);
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement("span", { className: "_copy" }, item.copy), /* @__PURE__ */ wp.element.createElement("a", { href: item.url, className: "-button", target: shouldOpenWithOtherWindow ? "_blank" : null, rel: shouldOpenWithOtherWindow ? "noopener" : null, ...eventDispatcherAttributes }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), /* @__PURE__ */ wp.element.createElement("span", { className: "_text" }, item.text)), states.hasCaption && /* @__PURE__ */ wp.element.createElement("span", { className: "_caption" }, item.caption))
+          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement("span", { className: "_copy" }, item.copy), /* @__PURE__ */ wp.element.createElement("a", { href: item.url, className: "-button", target: shouldOpenWithOtherWindow ? "_blank" : null, rel: shouldOpenWithOtherWindow ? "noopener" : null, ...eventDispatcherAttributes }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon", item }), /* @__PURE__ */ wp.element.createElement("span", { className: "_text" }, item.text)), states.hasCaption && /* @__PURE__ */ wp.element.createElement("span", { className: "_caption" }, item.caption))
         );
       });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes2, style: vars }, rtn)), doLoop && /* @__PURE__ */ wp.element.createElement("on-empty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));

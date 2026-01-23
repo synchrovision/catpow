@@ -2,13 +2,6 @@
 @import "fontawesome.scss";
 
 .wp-block-catpow-formbuttons{
-	&__item{
-		@include bnd((p:r));
-		@include txt((l:n));
-		.itemControl{
-			@include bnd((p:a,t:-20,r:0));
-		}
-	}
 	&-button{
 		&__action{
 			@include bnd((d:b,p:a,t:f,l:0,r:0,mg:a,pd:3,z:7));
@@ -18,6 +11,21 @@
 				@include ico('cog');
 				@include bnd((d:ib,mgr:.5em));
 			}
+		}
+	}
+	&__item{
+		@include bnd((p:r));
+		@include txt((l:n));
+		&-copy,&-caption{
+			&:empty{
+				&::before{
+					content:'Input Text';
+					@include trn((o:.25));
+				}
+			}
+		}
+		.itemControl{
+			@include bnd((p:a,t:-20,r:0));
 		}
 	}
 }

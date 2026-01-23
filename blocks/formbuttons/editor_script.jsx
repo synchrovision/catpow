@@ -18,7 +18,6 @@
 		const selectiveClasses = useMemo(() => {
 			var selectiveClasses = [
 				"level",
-				"borderRadius",
 				"contentWidth",
 				"itemSize",
 				{ name: "microcopy", label: "マイクロコピー", values: "hasMicroCopy" },
@@ -61,7 +60,7 @@
 							}
 							const itemStates = CP.classNamesToFlags(item.classes);
 							return (
-								<CP.Item className="_item" tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+								<CP.Item className={item.classes} tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
 									{states.hasMicroCopy && (
 										<span
 											className="_copy"

@@ -18,7 +18,6 @@
       const selectiveClasses = useMemo(() => {
         var selectiveClasses2 = [
           "level",
-          "borderRadius",
           "contentWidth",
           "itemSize",
           { name: "microcopy", label: "\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", values: "hasMicroCopy" },
@@ -53,7 +52,7 @@
           item.controlClasses = "control";
         }
         const itemStates = CP.classNamesToFlags(item.classes);
-        return /* @__PURE__ */ wp.element.createElement(CP.Item, { className: "_item", tag: "li", set: setAttributes, attr: attributes, items, index, isSelected, key: index }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement(
+        return /* @__PURE__ */ wp.element.createElement(CP.Item, { className: item.classes, tag: "li", set: setAttributes, attr: attributes, items, index, isSelected, key: index }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement(
           "span",
           {
             className: "_copy",
