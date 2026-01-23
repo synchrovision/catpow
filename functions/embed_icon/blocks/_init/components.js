@@ -13,7 +13,7 @@
           value: item.embedIconSrc,
           color: 0,
           onChange: (image) => {
-            fetch(image.url).then((res) => res.text()).then((text) => {
+            fetch(image.url.split("?")[0]).then((res) => res.text()).then((text) => {
               const el = parser.parseFromString(text, "image/svg+xml");
               if (el.querySelector("parsererror")) {
                 return;

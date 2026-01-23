@@ -10,7 +10,7 @@ CP.EmbedIcon = {
 				value={item.embedIconSrc}
 				color={0}
 				onChange={(image) => {
-					fetch(image.url)
+					fetch(image.url.split("?")[0])
 						.then((res) => res.text())
 						.then((text) => {
 							const el = parser.parseFromString(text, "image/svg+xml");
