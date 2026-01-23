@@ -131,8 +131,9 @@ const valueSizeConverters = {
 		steps: {
 			8: 2,
 			24: 4,
+			48: 8,
 		},
-		height: 80,
+		height: 120,
 		getRowLabels: (role) => [role.label + "(em)"],
 		toValues: (size) => [parseFloat(size) * 16],
 		toSizes: (value) => `${value / 16}em`,
