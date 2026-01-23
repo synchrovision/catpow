@@ -1,7 +1,10 @@
 @import 'admin_style_config.scss';
+@import "text-placeholders.scss";
 
 .wp-block-catpow-countdown{
+	@extend %ui-block;
 	&-body{
+		@extend %ui;
 		@include bnd((pd:1em 0));
 		@include flx((w:n,j:c,g:.5em));
 		@include txt((c:tx));
@@ -11,13 +14,13 @@
 				@include bnd((d:b,p:r,f:0 0 1ch,pd:.25em,w:1ch));
 				@include bg((c:tx 1 .1));
 				@include bdr((r:.25em));
-				@include txt((a:c,p:1.5em,h:1em,w:b,f:d));
+				@include txt((a:c,p:xlg,h:1em,w:b,f:dc));
 				&.is-leading-zero{
 				}
 			}
 			&::after{
 				@include bnd((d:b,f:0 0 a,pd:.25em));
-				@include txt((p:1em,h:1em,w:b,f:t));
+				@include txt((p:1em,h:1em));
 			}
 			&.is-days{
 				&::after{
@@ -47,15 +50,5 @@
 				}
 			}
 		}
-	}
-	&.is-size-small{
-		@include txt((p:12));
-	}
-	&.is-size-medium{
-		@include txt((p:16));
-		
-	}
-	&.is-size-large{
-		@include txt((p:24));
 	}
 }

@@ -16,10 +16,7 @@ wp.blocks.registerBlockType("catpow/countdown", {
 		const classes = useMemo(() => Catpow.util.bem(attributes.classes), [attributes.classes]);
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = [
-				{ name: "target", label: "目標日時", key: "target", input: "text", placeholder: "2099-12-31 23:59:59" },
-				{ name: "size", label: "サイズ", type: "buttons", values: { "is-size-small": "小", "is-size-medium": "中", "is-size-large": "大" } },
-			];
+			const selectiveClasses = ["level", { name: "target", label: "目標日時", key: "target", input: "text", placeholder: "2099-12-31 23:59:59" }];
 			wp.hooks.applyFilters("catpow.blocks.countdown.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);

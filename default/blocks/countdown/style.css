@@ -1,4 +1,15 @@
 @charset "UTF-8";
+.wp-block-catpow-countdown {
+  margin-top: var(--cp-ui-margin-top, 0);
+  margin-bottom: var(--cp-ui-margin-bottom, 0);
+}
+.wp-block-catpow-countdown-body {
+  font-family: var(--cp-font-family-u, inherit);
+  font-size: var(--cp-font-size-u, 2em);
+  font-weight: var(--cp-font-weight-u, regular);
+  line-height: var(--cp-line-height-u, 1.5);
+  letter-spacing: var(--cp-letter-spacing-u, normal);
+}
 .wp-block-catpow-countdown-body {
   padding: 1em 0rem;
   display: -webkit-box;
@@ -35,10 +46,10 @@
   background-color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),calc(var(--cp-tones-tx-a,1) * 0.1));
   border-radius: 0.25em;
   text-align: center;
-  font-size: 1.5em;
+  font-size: var(--cp-font-size-xlg);
   line-height: 1em;
   font-weight: 700;
-  font-family: var(--cp-fonts-d);
+  font-family: var(--cp-font-family-dc);
 }
 .wp-block-catpow-countdown-body-group::after {
   display: block;
@@ -49,8 +60,6 @@
   padding: 0.25em;
   font-size: 1em;
   line-height: 1em;
-  font-weight: 700;
-  font-family: var(--cp-fonts-t);
 }
 .wp-block-catpow-countdown-body-group.is-days::after {
   content: "日";
@@ -66,14 +75,5 @@
 }
 .wp-block-catpow-countdown-body-group.is-seconds::after {
   content: "秒";
-}
-.wp-block-catpow-countdown.is-size-small {
-  font-size: 0.75rem;
-}
-.wp-block-catpow-countdown.is-size-medium {
-  font-size: 1rem;
-}
-.wp-block-catpow-countdown.is-size-large {
-  font-size: 1.5rem;
 }
 /*# sourceMappingURL=./style.css.map */
