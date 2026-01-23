@@ -1,0 +1,100 @@
+@import 'admin_style_config.scss';
+@import "text-placeholders.scss";
+
+.wp-block-catpow-formbuttons{
+	@extend %ui-block;
+	$block:&;
+	@include flx((w:w,j:c,a:s,g:g));
+	@include bnd((w:c,mgi:a));
+	&-button{
+		@extend %ui;
+		@include bnd((d:b,p:r,pd:ipd));
+		@include bg((c:n));
+		@include bdr((s:s,w:1,r:r));
+		@include txt((a:c,c:mx,td:n,b:k));
+		@include trn((t:.2s));
+		@include usr((c:p));
+		&__icon{
+			@include bnd((p:a,w:1.8em,h:1.8em,t:0,b:0,l:1em,mg:a));
+			svg{
+				@include svg((f:mx));
+			}
+			img{
+				@include bnd((d:b,w:f,h:a));
+			}
+		}
+		&__text{
+			@include bnd((d:b,p:r,z:1));
+		}
+		&:active{
+			@include shd((b:0 0 0 clr(mx 1 .2)));
+		}
+		&::after{
+			content:'';
+			@include bnd((d:b,p:a,i:0,mg:a,mgr:1em,w:.8em,h:.8em));
+			@include bdr((p:r b,s:s,w:1));
+			@include trn((r:-45deg));
+		}
+	}
+	&__item{
+		@extend %ui;
+		@include bnd((p:r,f:0 1 i,mg:0));
+		@include txt((l:n,a:c,c:mx));
+		&-copy{
+			@include bnd((d:b,p:r,i:0,mg:a,mgb:-1em,pd:.5em 1em,w:fit,h:fit,z:1));
+			@include bg((c:m));
+			@include bdr((r:1em));
+			@include txt((p:.6em,h:1em,c:i));
+		}
+		&-caption{
+			@extend %caption-block;
+			@extend %caption;
+			@include bnd((d:b,w:fit,mgi:a,z:1));
+			@include txt((a:l));
+		}
+		&.has-icon{
+		}
+		&.is-rank-primary{
+			#{$block}{
+				&-button{
+					@include bnd((d:b,p:r,o:h));
+					@include txt((c:ix));
+					@include bg((c:mx 1 .75));
+					&::before{
+						content:'';
+						@include bnd((d:b,p:a,i:0,r:f));
+						@include bdr((r:r));
+						@include bg((c:mx));
+						@include trn((t:.3s));
+					}
+					&:hover{
+						&::before{
+							@include bnd((r:0));
+						}
+					}
+					.icon{
+						svg{
+							@include svg((f:bx));
+						}
+					}
+				}
+			}
+		}
+		&.is-rank-secondary{
+			
+		}
+		&.is-rank-tertiary{
+			
+		}
+		&.negative{
+			@include trn((gry:100%,o:.5));
+		}
+		&.secure{
+			.button{
+				&::before{
+					@include bdr((s:w,w:6));
+				}
+			}
+		}
+	}
+}

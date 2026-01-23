@@ -13,15 +13,16 @@
 		var classArray = _.uniq((className + " " + classes).split(" "));
 		var classNameArray = className.split(" ");
 
+		const states = CP.classNamesToFlags(classes);
+
 		const selectiveClasses = useMemo(() => {
 			var selectiveClasses = [
-				{
-					name: "size",
-					label: "サイズ",
-					filter: "size",
-					values: { l: "大", m: "中", s: "小", ss: "極小" },
-				},
-				{ name: "inline", label: "インライン", values: "i" },
+				"level",
+				"borderRadius",
+				"contentWidth",
+				"itemSize",
+				{ name: "microcopy", label: "マイクロコピー", values: "hasMicroCopy" },
+				{ name: "caption", label: "キャプション", values: "hasCaption" },
 			];
 			wp.hooks.applyFilters("catpow.blocks.formbuttons.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -29,13 +30,7 @@
 		const selectiveItemClasses = useMemo(() => {
 			const selectiveItemClasses = [
 				"color",
-				{
-					name: "rank",
-					type: "gridbuttons",
-					label: "属性",
-					filter: "rank",
-					values: ["default", "primary", "secondary", "negative", "danger", "secure"],
-				},
+				"rank",
 				{
 					name: "icon",
 					label: "アイコン",
@@ -52,50 +47,81 @@
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
-		let rtn = [];
-
-		items.map((item, index) => {
-			if (!item.controlClasses) {
-				item.controlClasses = "control";
-			}
-			const itemStates = CP.classNamesToFlags(item.classes);
-			rtn.push(
-				<CP.Item tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
-					<div className="button">
-						{itemStates.hasIcon && <CP.OutputIcon item={item} />}
-						<span
-							onInput={(e) => {
-								item.text = e.target.innerText;
-							}}
-							onBlur={saveItems}
-							contentEditable={true}
-							suppressContentEditableWarning={true}
-						>
-							{item.text}
-						</span>
-						<span
-							className="action"
-							onInput={(e) => {
-								item.action = e.target.innerText;
-							}}
-							onBlur={saveItems}
-							contentEditable={true}
-							suppressContentEditableWarning={true}
-						>
-							{item.action}
-						</span>
-					</div>
-				</CP.Item>
-			);
-		});
-
 		if (attributes.EditMode === undefined) {
 			attributes.EditMode = false;
 		}
 
 		return (
 			<>
-				<ul className={classes}>{rtn}</ul>
+				<CP.Bem prefix="wp-block-catpow">
+					<ul className={classes}>
+						{items.map((item, index) => {
+							if (!item.controlClasses) {
+								item.controlClasses = "control";
+							}
+							const itemStates = CP.classNamesToFlags(item.classes);
+							return (
+								<CP.Item className="_item" tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+									{states.hasMicroCopy && (
+										<span
+											className="_copy"
+											onInput={(e) => {
+												item.copy = e.target.innerText;
+											}}
+											onBlur={(e) => {
+												saveItems();
+											}}
+											contentEditable={true}
+											suppressContentEditableWarning={true}
+										>
+											{item.copy}
+										</span>
+									)}
+									<div className="-button" role="button">
+										{itemStates.hasIcon && <CP.OutputIcon className="_icon" item={item} />}
+										<span
+											className="_text"
+											onInput={(e) => {
+												item.text = e.target.innerText;
+											}}
+											onBlur={saveItems}
+											contentEditable={true}
+											suppressContentEditableWarning={true}
+										>
+											{item.text}
+										</span>
+										<span
+											className="_action"
+											onInput={(e) => {
+												item.action = e.target.innerText;
+											}}
+											onBlur={saveItems}
+											contentEditable={true}
+											suppressContentEditableWarning={true}
+										>
+											{item.action}
+										</span>
+									</div>
+									{states.hasCaption && (
+										<span
+											className="_caption"
+											onInput={(e) => {
+												item.caption = e.target.innerText;
+											}}
+											onBlur={(e) => {
+												saveItems();
+											}}
+											contentEditable={true}
+											suppressContentEditableWarning={true}
+										>
+											{item.caption}
+										</span>
+									)}
+								</CP.Item>
+							);
+						})}
+					</ul>
+				</CP.Bem>
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 					<CP.SelectClassPanel title="ボタン" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} selectiveClasses={selectiveItemClasses} />
@@ -112,28 +138,43 @@
 	},
 	save({ attributes, className }) {
 		const { items = [], classes = "" } = attributes;
-		var classArray = _.uniq(classes.split(" "));
 		const blockType = wp.data.select("core/blocks").getBlockType("catpow/formbuttons");
 
-		let rtn = [];
-		items.map((item, index) => {
-			const itemStates = CP.classNamesToFlags(item.classes);
-			const eventDispatcherAttributes = {};
-			if (blockType.attributes.items.eventDispatcherAttributes) {
-				blockType.attributes.items.eventDispatcherAttributes.map((attr_name) => {
-					eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute] = item[attr_name];
-				});
-			}
-			rtn.push(
-				<li className={item.classes} key={index}>
-					<div className="button" data-action={item.action} data-callback={item.callback} data-target={item.target} ignore-message={item.ignoreMessage} {...eventDispatcherAttributes}>
-						{itemStates.hasIcon && <CP.OutputIcon item={item} />}
-						{item.text}
-					</div>
-				</li>
-			);
-		});
-		return <ul className={classes}>{rtn}</ul>;
+		const states = CP.classNamesToFlags(classes);
+
+		return (
+			<CP.Bem prefix="wp-block-catpow">
+				<ul className={classes}>
+					{items.map((item, index) => {
+						const itemStates = CP.classNamesToFlags(item.classes);
+						const eventDispatcherAttributes = {};
+						if (blockType.attributes.items.eventDispatcherAttributes) {
+							blockType.attributes.items.eventDispatcherAttributes.map((attr_name) => {
+								eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute] = item[attr_name];
+							});
+						}
+						return (
+							<li className={item.classes} key={index}>
+								{states.hasMicroCopy && <span className="_copy">{item.copy}</span>}
+								<div
+									className="-button"
+									role="button"
+									data-action={item.action}
+									data-callback={item.callback}
+									data-target={item.target}
+									ignore-message={item.ignoreMessage}
+									{...eventDispatcherAttributes}
+								>
+									{itemStates.hasIcon && <CP.OutputIcon className="_icon" item={item} />}
+									<span className="_text">{item.text}</span>
+								</div>
+								{states.hasCaption && <span className="_caption">{item.caption}</span>}
+							</li>
+						);
+					})}
+				</ul>
+			</CP.Bem>
+		);
 	},
 	deprecated: [
 		{
@@ -165,7 +206,7 @@
 					rtn.push(
 						<li className={item.classes} data-event={item.event}>
 							{item.button}
-						</li>
+						</li>,
 					);
 				});
 				return <ul className={classes}>{rtn}</ul>;

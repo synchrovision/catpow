@@ -2,21 +2,21 @@
 @import "fontawesome.scss";
 
 .wp-block-catpow-formbuttons{
-	li.item{
+	&__item{
 		@include bnd((p:r));
 		@include txt((l:n));
 		.itemControl{
 			@include bnd((p:a,t:-20,r:0));
 		}
-		div.button{
-			.action{
-				@include bnd((d:b,p:a,t:f,l:0,r:0,mg:a,pd:3,z:7));
-				@include txt((p:11,h:1em,t:0,c:t));
-				@include shd((b:1));
-				&::before{
-					@include ico('cog');
-					@include bnd((d:ib,mgr:.5em));
-				}
+	}
+	&-button{
+		&__action{
+			@include bnd((d:b,p:a,t:f,l:0,r:0,mg:a,pd:3,z:7));
+			@include txt((p:11,h:1em,t:0,c:t));
+			@include shd((b:1));
+			&::before{
+				@include ico('cog');
+				@include bnd((d:ib,mgr:.5em));
 			}
 		}
 	}

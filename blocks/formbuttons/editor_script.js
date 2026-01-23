@@ -14,15 +14,15 @@
       const primaryClass = "wp-block-catpow-formbuttons";
       var classArray = _.uniq((className + " " + classes).split(" "));
       var classNameArray = className.split(" ");
+      const states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
         var selectiveClasses2 = [
-          {
-            name: "size",
-            label: "\u30B5\u30A4\u30BA",
-            filter: "size",
-            values: { l: "\u5927", m: "\u4E2D", s: "\u5C0F", ss: "\u6975\u5C0F" }
-          },
-          { name: "inline", label: "\u30A4\u30F3\u30E9\u30A4\u30F3", values: "i" }
+          "level",
+          "borderRadius",
+          "contentWidth",
+          "itemSize",
+          { name: "microcopy", label: "\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", values: "hasMicroCopy" },
+          { name: "caption", label: "\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "hasCaption" }
         ];
         wp.hooks.applyFilters("catpow.blocks.formbuttons.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
@@ -30,13 +30,7 @@
       const selectiveItemClasses = useMemo(() => {
         const selectiveItemClasses2 = [
           "color",
-          {
-            name: "rank",
-            type: "gridbuttons",
-            label: "\u5C5E\u6027",
-            filter: "rank",
-            values: ["default", "primary", "secondary", "negative", "danger", "secure"]
-          },
+          "rank",
           {
             name: "icon",
             label: "\u30A2\u30A4\u30B3\u30F3",
@@ -51,50 +45,74 @@
       const saveItems = () => {
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });
       };
-      let rtn = [];
-      items.map((item, index) => {
+      if (attributes.EditMode === void 0) {
+        attributes.EditMode = false;
+      }
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, items.map((item, index) => {
         if (!item.controlClasses) {
           item.controlClasses = "control";
         }
         const itemStates = CP.classNamesToFlags(item.classes);
-        rtn.push(
-          /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", set: setAttributes, attr: attributes, items, index, isSelected, key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "button" }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), /* @__PURE__ */ wp.element.createElement(
-            "span",
-            {
-              onInput: (e) => {
-                item.text = e.target.innerText;
-              },
-              onBlur: saveItems,
-              contentEditable: true,
-              suppressContentEditableWarning: true
+        return /* @__PURE__ */ wp.element.createElement(CP.Item, { className: "_item", tag: "li", set: setAttributes, attr: attributes, items, index, isSelected, key: index }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement(
+          "span",
+          {
+            className: "_copy",
+            onInput: (e) => {
+              item.copy = e.target.innerText;
             },
-            item.text
-          ), /* @__PURE__ */ wp.element.createElement(
-            "span",
-            {
-              className: "action",
-              onInput: (e) => {
-                item.action = e.target.innerText;
-              },
-              onBlur: saveItems,
-              contentEditable: true,
-              suppressContentEditableWarning: true
+            onBlur: (e) => {
+              saveItems();
             },
-            item.action
-          )))
-        );
-      });
-      if (attributes.EditMode === void 0) {
-        attributes.EditMode = false;
-      }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30DC\u30BF\u30F3", icon: "edit", set: setAttributes, attr: attributes, items, index: attributes.currentItemIndex, selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (clss) => setAttributes({ classes: clss }), value: classArray.join(" ") })), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })));
+            contentEditable: true,
+            suppressContentEditableWarning: true
+          },
+          item.copy
+        ), /* @__PURE__ */ wp.element.createElement("div", { className: "-button", role: "button" }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon", item }), /* @__PURE__ */ wp.element.createElement(
+          "span",
+          {
+            className: "_text",
+            onInput: (e) => {
+              item.text = e.target.innerText;
+            },
+            onBlur: saveItems,
+            contentEditable: true,
+            suppressContentEditableWarning: true
+          },
+          item.text
+        ), /* @__PURE__ */ wp.element.createElement(
+          "span",
+          {
+            className: "_action",
+            onInput: (e) => {
+              item.action = e.target.innerText;
+            },
+            onBlur: saveItems,
+            contentEditable: true,
+            suppressContentEditableWarning: true
+          },
+          item.action
+        )), states.hasCaption && /* @__PURE__ */ wp.element.createElement(
+          "span",
+          {
+            className: "_caption",
+            onInput: (e) => {
+              item.caption = e.target.innerText;
+            },
+            onBlur: (e) => {
+              saveItems();
+            },
+            contentEditable: true,
+            suppressContentEditableWarning: true
+          },
+          item.caption
+        ));
+      }))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30DC\u30BF\u30F3", icon: "edit", set: setAttributes, attr: attributes, items, index: attributes.currentItemIndex, selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (clss) => setAttributes({ classes: clss }), value: classArray.join(" ") })), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })));
     },
     save({ attributes, className }) {
       const { items = [], classes = "" } = attributes;
-      var classArray = _.uniq(classes.split(" "));
       const blockType = wp.data.select("core/blocks").getBlockType("catpow/formbuttons");
-      let rtn = [];
-      items.map((item, index) => {
+      const states = CP.classNamesToFlags(classes);
+      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, items.map((item, index) => {
         const itemStates = CP.classNamesToFlags(item.classes);
         const eventDispatcherAttributes = {};
         if (blockType.attributes.items.eventDispatcherAttributes) {
@@ -102,11 +120,21 @@
             eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute] = item[attr_name];
           });
         }
-        rtn.push(
-          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "button", "data-action": item.action, "data-callback": item.callback, "data-target": item.target, "ignore-message": item.ignoreMessage, ...eventDispatcherAttributes }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item }), item.text))
-        );
-      });
-      return /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, rtn);
+        return /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement("span", { className: "_copy" }, item.copy), /* @__PURE__ */ wp.element.createElement(
+          "div",
+          {
+            className: "-button",
+            role: "button",
+            "data-action": item.action,
+            "data-callback": item.callback,
+            "data-target": item.target,
+            "ignore-message": item.ignoreMessage,
+            ...eventDispatcherAttributes
+          },
+          itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon", item }),
+          /* @__PURE__ */ wp.element.createElement("span", { className: "_text" }, item.text)
+        ), states.hasCaption && /* @__PURE__ */ wp.element.createElement("span", { className: "_caption" }, item.caption));
+      })));
     },
     deprecated: [
       {

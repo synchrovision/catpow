@@ -1,14 +1,14 @@
 @charset "UTF-8";
-.wp-block-catpow-formbuttons li.item {
+.wp-block-catpow-formbuttons__item {
   position: relative;
   list-style: none;
 }
-.wp-block-catpow-formbuttons li.item .itemControl {
+.wp-block-catpow-formbuttons__item .itemControl {
   position: absolute;
   top: -1.25rem;
   right: 0rem;
 }
-.wp-block-catpow-formbuttons li.item div.button .action {
+.wp-block-catpow-formbuttons-button__action {
   display: block;
   position: absolute;
   top: 100%;
@@ -19,11 +19,11 @@
   z-index: 7;
   font-size: 0.6875rem;
   line-height: 1em;
-  letter-spacing: 0rem;
+  letter-spacing: 0;
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
   box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
 }
-.wp-block-catpow-formbuttons li.item div.button .action::before {
+.wp-block-catpow-formbuttons-button__action::before {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;

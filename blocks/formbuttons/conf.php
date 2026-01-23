@@ -1,23 +1,27 @@
 <?php
+$block_class='wp-block-catpow-formbuttons';
+$buttons_class='cp-buttons';
+$button_class='cp-button';
 $attributes=[
-	'className'=>['type'=>'string'],
-	'classes'=>['source'=>'attribute','selector'=>'ul','attribute'=>'class','default'=>'wp-block-catpow-formbuttons buttons m center'],
+	"classes"=>["source"=>'attribute',"selector"=>".{$block_class}","attribute"=>'class',"default"=>"{$block_class} {$buttons_class}"],
 	'items'=>[
 		'source'=>'query',
-		'selector'=>'li.item',
+		"selector"=>".{$block_class}__item",
 		'filters'=>[
-			'iconHolder'=>['selector'=>'.icon'],
-			'eventDispatcher'=>['selector'=>'.button']
+			'iconHolder'=>['selector'=>".{$block_class}-button__icon"],
+			'eventDispatcher'=>['selector'=>".{$block_class}-button"]
 		],
 		'query'=>[
 			'classes'=>['source'=>'attribute','attribute'=>'class'],
-			'action'=>['source'=>'attribute','selector'=>'.button','attribute'=>'data-action'],
-			'callback'=>['source'=>'attribute','selector'=>'.button','attribute'=>'data-callback'],
-			'target'=>['source'=>'attribute','selector'=>'.button','attribute'=>'data-target'],
-			'ignoreMessage'=>['source'=>'attribute','selector'=>'.button','attribute'=>'ignore-message'],
-			'text'=>['source'=>'text','selector'=>'.button'],
-			'iconSrc'=>['source'=>'attribute','selector'=>'.icon img','attribute'=>'src'],
-			'iconAlt'=>['source'=>'attribute','selector'=>'.icon img','attribute'=>'alt'],
+			'action'=>['source'=>'attribute','selector'=>".{$block_class}-button",'attribute'=>'data-action'],
+			'callback'=>['source'=>'attribute','selector'=>".{$block_class}-button",'attribute'=>'data-callback'],
+			'target'=>['source'=>'attribute','selector'=>".{$block_class}-button",'attribute'=>'data-target'],
+			'ignoreMessage'=>['source'=>'attribute','selector'=>".{$block_class}-button",'attribute'=>'ignore-message'],
+			"copy"=>["source"=>'html',"selector"=>".{$block_class}__item-copy"],
+			"text"=>["source"=>'html',"selector"=>".{$block_class}-button__text"],
+			"caption"=>["source"=>'html',"selector"=>".{$block_class}__item-caption"],
+			"iconSrc"=>["source"=>'attribute',"selector"=>".{$block_class}-button__icon-img","attribute"=>'src'],
+			"iconAlt"=>["source"=>'attribute',"selector"=>".{$block_class}-button__icon-img","attribute"=>'alt'],
 		],
 		'default'=>[
 			['classes'=>'item','action'=>'send','text'=>'送信']
