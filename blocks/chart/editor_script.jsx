@@ -62,7 +62,7 @@
 	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
-		const { useState, useMemo } = wp.element;
+		const { useState, useMemo, createElement: el } = wp.element;
 		const { BlockControls, InspectorControls } = wp.blockEditor;
 		const { PanelBody, TextareaControl, ToolbarGroup } = wp.components;
 		const { classes, graph, EditMode = false } = attributes;
@@ -200,6 +200,7 @@
 		);
 	},
 	save({ attributes, className }) {
+		const { createElement: el } = wp.element;
 		const { classes, graph } = attributes;
 		var classArray = _.uniq((attributes.classes || "").split(" "));
 
