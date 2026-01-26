@@ -36,6 +36,7 @@ wp.blocks.registerBlockType("catpow/accordion", {
 		const selectiveClasses = useMemo(() => {
 			const { devices, imageKeys, imageSizes } = CP.config.accordion;
 			const selectiveClasses = [
+				"level",
 				"color",
 				{ name: "image", label: "画像", values: "hasImage", sub: [{ input: "image", keys: imageKeys.image, size: imageSizes.image }] },
 				{ name: "exclusive", label: "他を閉じる", values: "exclusive" },

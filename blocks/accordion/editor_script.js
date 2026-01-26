@@ -33,6 +33,7 @@
       const selectiveClasses = useMemo(() => {
         const { devices: devices2, imageKeys: imageKeys2, imageSizes: imageSizes2 } = CP.config.accordion;
         const selectiveClasses2 = [
+          "level",
           "color",
           { name: "image", label: "\u753B\u50CF", values: "hasImage", sub: [{ input: "image", keys: imageKeys2.image, size: imageSizes2.image }] },
           { name: "exclusive", label: "\u4ED6\u3092\u9589\u3058\u308B", values: "exclusive" },
