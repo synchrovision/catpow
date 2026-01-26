@@ -188,7 +188,7 @@ $colors:(
 		}
 	}
 	&-link{
-		@include bnd((d:b,p:r));
+		@include bnd((p:r));
 		&-input{
 			@include bnd((d:b,p:a,w:1em fit,h:1em,pd:.25em 1em,b:-2em,l:-200,r:-200,mg:a));
 			@include bg((c:b));
