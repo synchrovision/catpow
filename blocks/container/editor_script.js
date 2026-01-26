@@ -30,14 +30,12 @@
       const { boxSizeVars, classes = "" } = attributes;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
+          "level",
           {
             name: "border",
             label: __("\u30DC\u30FC\u30C0\u30FC", "catpow"),
             values: "hasBorder",
-            sub: [
-              { name: "borderWidth", label: __("\u5E45", "catpow"), vars: "boxSizeVars", key: "--cp-border-width", input: "range", min: 0, max: 16, step: 1 },
-              { name: "borderRadius", label: __("\u89D2\u4E38", "catpow"), vars: "boxSizeVars", key: "--cp-border-radius", input: "range", min: 0, max: 80, step: 1 }
-            ]
+            sub: [{ name: "borderWidth", label: __("\u5E45", "catpow"), vars: "boxSizeVars", key: "--cp-border-width", input: "range", min: 0, max: 16, step: 1 }]
           },
           {
             name: "shadow",

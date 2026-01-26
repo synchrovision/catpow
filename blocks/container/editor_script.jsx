@@ -30,14 +30,12 @@ wp.blocks.registerBlockType("catpow/container", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
+				"level",
 				{
 					name: "border",
 					label: __("ボーダー", "catpow"),
 					values: "hasBorder",
-					sub: [
-						{ name: "borderWidth", label: __("幅", "catpow"), vars: "boxSizeVars", key: "--cp-border-width", input: "range", min: 0, max: 16, step: 1 },
-						{ name: "borderRadius", label: __("角丸", "catpow"), vars: "boxSizeVars", key: "--cp-border-radius", input: "range", min: 0, max: 80, step: 1 },
-					],
+					sub: [{ name: "borderWidth", label: __("幅", "catpow"), vars: "boxSizeVars", key: "--cp-border-width", input: "range", min: 0, max: 16, step: 1 }],
 				},
 				{
 					name: "shadow",

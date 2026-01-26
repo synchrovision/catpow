@@ -1,4 +1,5 @@
 @import 'admin_style_config.scss';
+@import 'component-placeholders.scss';
 
 .wp-block-catpow-container{
 	$block:&;
@@ -7,7 +8,8 @@
 		@include bdr((s:n));
 	}
 	&.has-border{
-		@include bdr((s:s,w:calc(var(--cp-border-width) * #{$sizeUnit}),c:t 1 .5,r:calc(var(--cp-border-radius) * #{$sizeUnit})));
+		@extend %frame-component;
+		@include bdr((s:s,w:calc(var(--cp-border-width) * #{$size-unit}),c:t 1 .5));
 	}
 	&.has-inset-shadow{
 		@include shd((b:-4));
@@ -27,11 +29,11 @@
 		}
 	}
 	&.has-margin{
-		@include bnd((mg:calc(var(--cp-margin-y) * #{$sizeUnit}) calc(var(--cp-margin-x) * #{$sizeUnit})));
+		@include bnd((mg:calc(var(--cp-margin-y) * #{$size-unit}) calc(var(--cp-margin-x) * #{$size-unit})));
 	}
 	&.has-padding{
 		#{$block}__body{
-			@include bnd((pd:calc(var(--cp-padding-y) * #{$sizeUnit}) calc(var(--cp-padding-x) * #{$sizeUnit})));
+			@include bnd((pd:calc(var(--cp-padding-y) * #{$size-unit}) calc(var(--cp-padding-x) * #{$size-unit})));
 		}
 	}
 }
