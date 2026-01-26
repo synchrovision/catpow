@@ -94,13 +94,13 @@
   vertical-align: bottom;
 }
 .wp-block-catpow-comparetable-table-thead-tr-td.has-font-size-large, .wp-block-catpow-comparetable-table-tbody-tr-td.has-font-size-large {
-  font-size: 1.25em;
+  font-size: var(--cp-font-size-l);
 }
 .wp-block-catpow-comparetable-table-thead-tr-td.has-font-size-medium, .wp-block-catpow-comparetable-table-tbody-tr-td.has-font-size-medium {
-  font-size: 1em;
+  font-size: var(--cp-font-size-p);
 }
 .wp-block-catpow-comparetable-table-thead-tr-td.has-font-size-small, .wp-block-catpow-comparetable-table-tbody-tr-td.has-font-size-small {
-  font-size: 0.8em;
+  font-size: var(--cp-font-size-c);
 }
 .wp-block-catpow-comparetable-table-thead-tr-td {
   box-sizing: border-box;

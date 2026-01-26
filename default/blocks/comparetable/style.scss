@@ -76,13 +76,13 @@
 				}
 				&-td{
 					&.has-font-size-large{
-						@include txt((p:1.25em));
+						@include txt((p:l));
 					}
 					&.has-font-size-medium{
-						@include txt((p:1em));
+						@include txt((p:p));
 					}
 					&.has-font-size-small{
-						@include txt((p:0.8em));
+						@include txt((p:c));
 					}
 				}
 			}
