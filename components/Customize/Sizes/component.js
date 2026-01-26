@@ -820,7 +820,11 @@
   };
 
   // node_modules-included/catpow/src/util/array/rangeValueConverter.ts
+  var RANGE_CONVERTER = Symbol.for("RangeValueConverterApp");
   var rangeValueConverter = function(rawValues, snap = false) {
+    if (isRangeValueConverterApp(rawValues)) {
+      return rawValues;
+    }
     let values;
     if (!Array.isArray(rawValues)) {
       values = [...(typeof rawValues === "number" ? range : phasedRange)(rawValues)];
@@ -830,6 +834,7 @@
     const len = values.length;
     const lastIndex = len - 1;
     return {
+      [RANGE_CONVERTER]: true,
       length: values.length,
       getValue(pos) {
         if (pos < 0) {
@@ -872,6 +877,7 @@
       }
     };
   };
+  var isRangeValueConverterApp = (maybeApp) => Boolean(maybeApp?.[RANGE_CONVERTER]);
 
   // node_modules-included/catpow/src/component/Chart/Chart.tsx
   init_react();
@@ -921,11 +927,12 @@
     );
     const setActiveCellValue = useCallback(
       (value) => {
+        if (activeRow == null || activeColumn == null) return;
         setValue(activeRow, activeColumn, value);
       },
       [activeRow, activeColumn, setValue]
     );
-    const converter = useMemo(() => steps.hasOwnProperty("getValue") ? steps : rangeValueConverter(steps, snap), [steps, snap]);
+    const converter = useMemo(() => rangeValueConverter(steps, snap), [steps, snap]);
     const DataSetContextValue = useMemo(
       () => ({
         values,
@@ -1583,6 +1590,18 @@
       getRowLabels: (role) => [role.label + "(em)"],
       toValues: (size) => [parseFloat(size) * 16],
       toSizes: (value) => `${value / 16}em`,
+      getDisplayValue: (val) => val / 16
+    },
+    paddingRelative: {
+      steps: {
+        8: 2,
+        24: 4,
+        48: 8
+      },
+      height: 120,
+      getRowLabels: (role) => [role.label + "\u7E26(em)", role.label + "\u6A2A(em)"],
+      toValues: (size) => size.match(/(.+?)em (.+?)em/).slice(1).map((v) => v * 16),
+      toSizes: (v, h) => `${v / 16}em ${h / 16}em`,
       getDisplayValue: (val) => val / 16
     },
     spacing: {

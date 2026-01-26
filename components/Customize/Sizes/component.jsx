@@ -139,6 +139,22 @@ const valueSizeConverters = {
 		toSizes: (value) => `${value / 16}em`,
 		getDisplayValue: (val) => val / 16,
 	},
+	paddingRelative: {
+		steps: {
+			8: 2,
+			24: 4,
+			48: 8,
+		},
+		height: 120,
+		getRowLabels: (role) => [role.label + "縦(em)", role.label + "横(em)"],
+		toValues: (size) =>
+			size
+				.match(/(.+?)em (.+?)em/)
+				.slice(1)
+				.map((v) => v * 16),
+		toSizes: (v, h) => `${v / 16}em ${h / 16}em`,
+		getDisplayValue: (val) => val / 16,
+	},
 	spacing: {
 		steps: {
 			20: 4,

@@ -100,6 +100,13 @@ class style_config{
 				'group'=>'borderRadius',
 				'defaultValues'=>['1em','1em','1em','1em','1em','1em','1em']
 			],
+			'spread'=>[
+				'label'=>'余白',
+				'shorthand'=>'sp',
+				'variants'=>self::$component_variants,'type'=>'paddingRelative',
+				'group'=>'spread',
+				'defaultValues'=>['0.5em 1em','0.5em 1em','0.5em 1em','0.5em 1em','0.5em 1em','0.5em 1em','0.5em 1em']
+			],
 			'margin'=>[
 				'label'=>'マージン',
 				'shorthand'=>'mg',
