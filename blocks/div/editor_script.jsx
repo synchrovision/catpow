@@ -31,6 +31,7 @@ wp.blocks.registerBlockType("catpow/div", {
 		const selectiveClasses = useMemo(() => {
 			const { devices, imageKeys } = CP.config.div;
 			const selectiveClasses = [
+				"level",
 				{
 					name: "type",
 					label: "タイプ",
@@ -47,7 +48,11 @@ wp.blocks.registerBlockType("catpow/div", {
 							"hasBoxShadow",
 							"hasTextShadow",
 						],
-						isTypeColumns: ["contentWidth", { preset: "clipPath", vars: "clipVars" }, { type: "buttons", label: "幅", values: { narrow: "狭い", regular: "普通", wide: "広い" } }],
+						isTypeColumns: [
+							"contentWidth",
+							{ preset: "clipPath", vars: "clipVars" },
+							{ type: "buttons", label: "幅", values: { hasColumnNarrow: "狭い", hasColumnRegular: "普通", hasColumnWide: "広い" } },
+						],
 					},
 					bind: {
 						isTypeFrame: ["hasContentWidth"],
@@ -67,7 +72,6 @@ wp.blocks.registerBlockType("catpow/div", {
 						hasBorderImage: [{ input: "border", css: "borderImageCss", sel: ({ attr }) => "#" + attr.anchor, color }],
 					},
 				},
-				"hasPadding",
 				"hasMargin",
 			];
 			wp.hooks.applyFilters("catpow.blocks.div.selectiveClasses", CP.finderProxy(selectiveClasses));

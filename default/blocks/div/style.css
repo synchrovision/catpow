@@ -1,3 +1,7 @@
+.wp-block-catpow-div.is-type-frame {
+  padding: var(--cp-size-sp-f);
+  border-radius: var(--cp-size-r-f, 0);
+}
 .wp-block-catpow-div {
   margin-inline: auto;
   position: relative;
@@ -5,20 +9,20 @@
   color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
 }
 .wp-block-catpow-div.is-type-frame {
-  width: min(var(--cp-content-width, 90vw), var(--cp-content-max-width, 60rem), 100%);
+  width: var(--cp-content-width);
   box-sizing: border-box;
   overflow: hidden;
   border-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 100),calc(var(--cp-tones-m-a,1) * 0.5));
 }
-.wp-block-catpow-div.is-type-columns.narrow {
+.wp-block-catpow-div.is-type-columns.has-column-narrow {
   column-width: 10rem;
   column-gap: 1.25rem;
 }
-.wp-block-catpow-div.is-type-columns.regular {
+.wp-block-catpow-div.is-type-columns.has-column-regular {
   column-width: 20rem;
   column-gap: 1.875rem;
 }
-.wp-block-catpow-div.is-type-columns.wide {
+.wp-block-catpow-div.is-type-columns.has-column-wide {
   column-width: 30rem;
   column-gap: 3.125rem;
   column-rule-style: dotted;

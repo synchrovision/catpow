@@ -1,4 +1,6 @@
 @import "admin_style_config.scss";
+@import 'text-placeholders.scss';
+@import 'component-placeholders.scss';
 
 .wp-block-catpow-div{
 	$block:&;
@@ -7,13 +9,14 @@
 	&.is-type-block{
 	}
 	&.is-type-frame{
+		@extend %frame-component;
 		@include bnd((w:c,bs:b,o:h));
 		@include bdr((c:m 1 .5));
 	}
 	&.is-type-columns{
-		&.narrow{@include col((w:160,g:20));}
-		&.regular{@include col((w:320,g:30));}
-		&.wide{@include col((w:480,g:50,rs:d,rw:1,rc:t));}
+		&.has-column-narrow{@include col((w:160,g:20));}
+		&.has-column-regular{@include col((w:320,g:30));}
+		&.has-column-wide{@include col((w:480,g:50,rs:d,rw:1,rc:t));}
 	}
 	&.has-icon{
 		&>.icon{

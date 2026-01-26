@@ -31,6 +31,7 @@
       const selectiveClasses = useMemo(() => {
         const { devices: devices2, imageKeys: imageKeys2 } = CP.config.div;
         const selectiveClasses2 = [
+          "level",
           {
             name: "type",
             label: "\u30BF\u30A4\u30D7",
@@ -47,7 +48,11 @@
                 "hasBoxShadow",
                 "hasTextShadow"
               ],
-              isTypeColumns: ["contentWidth", { preset: "clipPath", vars: "clipVars" }, { type: "buttons", label: "\u5E45", values: { narrow: "\u72ED\u3044", regular: "\u666E\u901A", wide: "\u5E83\u3044" } }]
+              isTypeColumns: [
+                "contentWidth",
+                { preset: "clipPath", vars: "clipVars" },
+                { type: "buttons", label: "\u5E45", values: { hasColumnNarrow: "\u72ED\u3044", hasColumnRegular: "\u666E\u901A", hasColumnWide: "\u5E83\u3044" } }
+              ]
             },
             bind: {
               isTypeFrame: ["hasContentWidth"]
@@ -67,7 +72,6 @@
               hasBorderImage: [{ input: "border", css: "borderImageCss", sel: ({ attr }) => "#" + attr.anchor, color }]
             }
           },
-          "hasPadding",
           "hasMargin"
         ];
         wp.hooks.applyFilters("catpow.blocks.div.selectiveClasses", CP.finderProxy(selectiveClasses2));
