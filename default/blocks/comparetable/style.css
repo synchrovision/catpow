@@ -1,3 +1,18 @@
+.wp-block-catpow-comparetable-table {
+  font-family: var(--cp-font-family-p, inherit);
+  font-size: var(--cp-font-size-p, 2em);
+  font-weight: var(--cp-font-weight-p, regular);
+  line-height: var(--cp-line-height-p, 1.5);
+  letter-spacing: var(--cp-letter-spacing-p, normal);
+}
+.wp-block-catpow-comparetable {
+  margin-top: var(--cp-ui-margin-top, 0);
+  margin-bottom: var(--cp-ui-margin-bottom, 0);
+}
+.wp-block-catpow-comparetable-tags-tag, .wp-block-catpow-comparetable-table-thead-tr-th-label, .wp-block-catpow-comparetable-table-tbody-tr-th-label, .wp-block-catpow-comparetable.is-style-plan .wp-block-catpow-comparetable-tags-tag {
+  padding: var(--cp-size-sp-l);
+  border-radius: var(--cp-size-r-l, 0);
+}
 .wp-block-catpow-comparetable-tags {
   margin-bottom: 1em;
   display: -webkit-box;
@@ -10,7 +25,7 @@
   justify-content: center;
   gap: 1em;
   list-style: none;
-  font-family: var(--cp-fonts-t);
+  font-family: var(--cp-font-family-p);
 }
 .wp-block-catpow-comparetable-tags-tag {
   -webkit-box-flex: 0;
@@ -39,8 +54,9 @@
   display: block;
   width: fit-content;
   height: fit-content;
-  padding: 0.5em 1em;
   background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
+  border-style: solid;
+  border-width: 0.0625rem;
   border-radius: 1em;
   text-align: center;
   font-size: 0.6em;
@@ -55,8 +71,9 @@
 }
 .wp-block-catpow-comparetable-table-thead-tr-th, .wp-block-catpow-comparetable-table-thead-tr-td, .wp-block-catpow-comparetable-table-tbody-tr-th, .wp-block-catpow-comparetable-table-tbody-tr-td {
   box-sizing: border-box;
+  padding: var(--cp-cell-padding);
   line-height: 1.5em;
-  font-family: var(--cp-fonts-t);
+  font-family: var(--cp-font-family-p);
 }
 .wp-block-catpow-comparetable-table-thead-tr-th.has-text-align-left, .wp-block-catpow-comparetable-table-thead-tr-td.has-text-align-left, .wp-block-catpow-comparetable-table-tbody-tr-th.has-text-align-left, .wp-block-catpow-comparetable-table-tbody-tr-td.has-text-align-left {
   text-align: left;
@@ -92,7 +109,6 @@
   position: relative;
   scroll-snap-align: center;
   box-sizing: border-box;
-  font-size: 0.875rem;
 }
 .wp-block-catpow-comparetable-table-thead-tr-th.is-spacer {
   position: sticky;
@@ -199,12 +215,10 @@
 }
 .wp-block-catpow-comparetable.do-transposition .wp-block-catpow-comparetable-table-thead-tr-th-label {
   position: absolute;
-  top: 0rem;
-  right: 0rem;
-  bottom: 0rem;
   left: 0rem;
-  inset: 0rem;
-  margin: -1.25em auto 0.5em;
+  right: 0rem;
+  bottom: 85%;
+  margin-inline: auto;
 }
 .wp-block-catpow-comparetable.do-transposition .wp-block-catpow-comparetable-table-tbody-tr-th {
   position: relative;
@@ -273,7 +287,6 @@
   text-underline-offset: 0.25em;
 }
 .wp-block-catpow-comparetable.is-style-spec .wp-block-catpow-comparetable-table-thead-tr-th, .wp-block-catpow-comparetable.is-style-spec .wp-block-catpow-comparetable-table-thead-tr-td {
-  padding: 0.625rem;
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
   border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
@@ -289,7 +302,6 @@
   color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),calc(var(--cp-tones-tx-a,1) * 0.6));
 }
 .wp-block-catpow-comparetable.is-style-spec .wp-block-catpow-comparetable-table-tbody-tr-th, .wp-block-catpow-comparetable.is-style-spec .wp-block-catpow-comparetable-table-tbody-tr-td {
-  padding: 0.625rem;
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
   border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
@@ -305,19 +317,16 @@
   color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),calc(var(--cp-tones-tx-a,1) * 0.6));
 }
 .wp-block-catpow-comparetable.is-style-spec.do-transposition .wp-block-catpow-comparetable-table-thead-tr-th, .wp-block-catpow-comparetable.is-style-spec.do-transposition .wp-block-catpow-comparetable-table-thead-tr-td {
-  padding: 0.625rem;
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
   border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
 }
 .wp-block-catpow-comparetable.is-style-spec.do-transposition .wp-block-catpow-comparetable-table-tbody-tr-th, .wp-block-catpow-comparetable.is-style-spec.do-transposition .wp-block-catpow-comparetable-table-tbody-tr-td {
-  padding: 0.625rem;
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
   border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
 }
 .wp-block-catpow-comparetable.is-style-spec.do-transposition .wp-block-catpow-comparetable-table-tbody-tr-th {
-  padding: 0.625rem;
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
   border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
@@ -348,8 +357,13 @@
   text-decoration-thickness: 0.0625rem;
   text-underline-offset: 0.25em;
 }
+.wp-block-catpow-comparetable.is-style-sheet .wp-block-catpow-comparetable-table {
+  padding: 0.0625rem;
+}
+.wp-block-catpow-comparetable.is-style-sheet .wp-block-catpow-comparetable-table-thead-tr-th, .wp-block-catpow-comparetable.is-style-sheet .wp-block-catpow-comparetable-table-thead-tr-td, .wp-block-catpow-comparetable.is-style-sheet .wp-block-catpow-comparetable-table-tbody-tr-th, .wp-block-catpow-comparetable.is-style-sheet .wp-block-catpow-comparetable-table-tbody-tr-td {
+  margin: -0.0625rem -0.0625rem 0rem 0rem;
+}
 .wp-block-catpow-comparetable.is-style-sheet .wp-block-catpow-comparetable-table-thead-tr-th {
-  padding: 0.625rem;
   background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
   border-style: solid;
   border-width: 0.0625rem;
@@ -370,7 +384,6 @@
   color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),calc(var(--cp-tones-tx-a,1) * 0.6));
 }
 .wp-block-catpow-comparetable.is-style-sheet .wp-block-catpow-comparetable-table-tbody-tr-th, .wp-block-catpow-comparetable.is-style-sheet .wp-block-catpow-comparetable-table-tbody-tr-td {
-  padding: 0.625rem;
   background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
   border-style: solid;
   border-width: 0.0625rem;
@@ -405,7 +418,6 @@
   background-color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 20),var(--cp-tones-tx-a,1));
 }
 .wp-block-catpow-comparetable.is-style-plan .wp-block-catpow-comparetable-tags-tag {
-  padding: 0.5em 1em;
   background-color: hsla(calc(var(--cp-tones-t-h) * 0.5 + var(--cp-tones-b-h) * 0.5),calc(var(--cp-tones-t-s) * 0.5 + var(--cp-tones-b-s) * 0.5),calc(var(--cp-tones-t-l) * 0.5 + var(--cp-tones-b-l) * 0.5),calc(var(--cp-tones-t-a) * 0.5 + var(--cp-tones-b-a) * 0.5));
   color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
   border-radius: 1em;
@@ -414,7 +426,6 @@
   background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
 }
 .wp-block-catpow-comparetable.is-style-plan .wp-block-catpow-comparetable-table-thead-tr-th {
-  padding: 0.625rem;
   background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 10),var(--cp-tones-m-a,1));
 }
 .wp-block-catpow-comparetable.is-style-plan .wp-block-catpow-comparetable-table-thead-tr-th.is-spacer {
@@ -423,9 +434,6 @@
 }
 .wp-block-catpow-comparetable.is-style-plan .wp-block-catpow-comparetable-table-thead-tr-th:nth-of-type(even) {
   background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 15),var(--cp-tones-m-a,1));
-}
-.wp-block-catpow-comparetable.is-style-plan .wp-block-catpow-comparetable-table-tbody-tr-th, .wp-block-catpow-comparetable.is-style-plan .wp-block-catpow-comparetable-table-tbody-tr-td {
-  padding: 0.625rem;
 }
 .wp-block-catpow-comparetable.is-style-plan .wp-block-catpow-comparetable-table-tbody-tr-th {
   background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 10),var(--cp-tones-m-a,1));

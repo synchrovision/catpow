@@ -90,22 +90,24 @@
       }
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
+          "level",
+          "color",
           {
             name: "type",
             type: "buttons",
             label: "\u30BF\u30A4\u30D7",
             values: {
-              "is-style-spec": "spec",
-              "is-style-sheet": "sheet",
-              "is-style-plan": "plan"
+              isStyleSpec: "spec",
+              isStyleSheet: "sheet",
+              isStylePlan: "plan"
             }
           },
-          { name: "transposiiton", label: "\u8EE2\u7F6E", values: "do-transposition" },
-          { name: "tags", label: "\u30BF\u30B0", values: "has-tags" },
+          { name: "transposiiton", label: "\u8EE2\u7F6E", values: "doTransposition" },
+          { name: "tags", label: "\u30BF\u30B0", values: "hasTags" },
           {
             name: "headerColumn",
             label: __("\u898B\u51FA\u3057\u5217", "catpow"),
-            values: "has-header-column",
+            values: "hasHeaderColumn",
             sub: [
               {
                 name: "width",
@@ -122,7 +124,7 @@
           {
             name: "columnWidth",
             label: __("\u5217\u5E45\u56FA\u5B9A", "catpow"),
-            values: "has-fixed-column-width",
+            values: "hasFixedColumnWidth",
             sub: [
               {
                 name: "width",
@@ -145,9 +147,8 @@
             min: 200,
             max: 3200,
             step: 10,
-            cond: (states2) => !states2["has-fixed-column-width"]
+            cond: (states2) => !states2.hasFixedColumnWidth
           },
-          "color",
           "isTemplate"
         ];
         wp.hooks.applyFilters("catpow.blocks.comparetable.selectiveClasses", CP.finderProxy(selectiveClasses2));
@@ -160,10 +161,10 @@
             type: "buttons",
             label: "\u30BF\u30A4\u30D7",
             values: {
-              "is-standard": "\u901A\u5E38",
-              "is-premium": "\u9AD8\u54C1\u8CEA",
-              "is-recommended": "\u63A8\u5968",
-              "is-deprecated": "\u975E\u63A8\u5968"
+              isStandard: "\u901A\u5E38",
+              isPremium: "\u9AD8\u54C1\u8CEA",
+              isRecommended: "\u63A8\u5968",
+              isDeprecated: "\u975E\u63A8\u5968"
             }
           }
         ];
@@ -192,9 +193,9 @@
             type: "buttons",
             label: "\u30BF\u30A4\u30D7",
             values: {
-              "is-equal": "\u7B49",
-              "is-positive": "\u6B63",
-              "is-negative": "\u8CA0"
+              isEqual: "\u7B49",
+              isPositive: "\u6B63",
+              isNegative: "\u8CA0"
             }
           }
         ];
@@ -220,9 +221,9 @@
             type: "buttons",
             label: "\u30BF\u30A4\u30D7",
             values: {
-              "is-spacer": "\u7A7A\u767D",
-              "is-label": "\u30E9\u30D9\u30EB",
-              "is-title": "\u30BF\u30A4\u30C8\u30EB"
+              isSpacer: "\u7A7A\u767D",
+              isLabel: "\u30E9\u30D9\u30EB",
+              isTitle: "\u30BF\u30A4\u30C8\u30EB"
             }
           }
         ];

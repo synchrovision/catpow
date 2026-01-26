@@ -1,12 +1,17 @@
 @import 'admin_style_config.scss';
+@import 'text-placeholders.scss';
+@import 'component-placeholders.scss';
+
 
 .wp-block-catpow-comparetable{
-	$this:&;
+	$block:&;
+	@extend %ui-block;
 	&-tags{
 		@include bnd((mgb:1em));
 		@include flx((w:w,j:c,g:1em));
-		@include txt((l:n,f:t));
+		@include txt((l:n,f:p));
 		&-tag{
+			@extend %label-component;
 			@include bnd((f:0 0 a));
 			@include usr((c:p));
 			&.is-active{
@@ -21,6 +26,7 @@
 		}
 	}
 	&-table{
+		@extend %paragraph;
 		@include tbl((l:f));
 		@include bnd((mg:20 a));
 		&-thead,&-tbody{
@@ -28,9 +34,10 @@
 				&-th{
 					$th:&;
 					&-label{
-						@include bnd((d:b,w:fit,h:fit,pd:.5em 1em));
+						@extend %label-component;
+						@include bnd((d:b,w:fit,h:fit));
 						@include bg((c:m));
-						@include bdr((r:1em));
+						@include bdr((s:s,w:1,r:1em));
 						@include txt((a:c,p:.6em,h:1em,c:i));
 					}
 					&.is-premium{
@@ -45,8 +52,8 @@
 					}
 				}
 				&-th,&-td{
-					@include bnd((bs:b));
-					@include txt((h:1.5em,f:t));
+					@include bnd((bs:b,pd:cpd));
+					@include txt((h:1.5em,f:p));
 					&.has-text-align-left{
 						@include txt((a:l));
 					}
@@ -87,7 +94,6 @@
 				}
 				&-th{
 					@include bnd((p:r,ssa:c,bs:b));
-					@include txt((p:14));
 					&.is-spacer{
 						@include bnd((p:s,l:0,z:1));
 						@include bg((c:b));
@@ -115,7 +121,7 @@
 		}
 	}
 	&:not(.do-transposition){
-		#{$this}-table{
+		#{$block}-table{
 			&-thead{
 				&-tr{
 					&-th{
@@ -138,11 +144,11 @@
 			}
 		}
 		&.has-header-column{
-			#{$this}-table{
+			#{$block}-table{
 				&-thead{
 					&-tr{
 						&-td{
-							@include bnd((w:calc(var(--cp-header-column-width) * #{$sizeUnit})));
+							@include bnd((w:calc(var(--cp-header-column-width) * #{$size-unit})));
 						}
 						&-th{
 							@include bnd((ssa:s));
@@ -152,18 +158,18 @@
 				&-tbody{
 					&-tr{
 						&-th{
-							@include bnd((w:calc(var(--cp-header-column-width) * #{$sizeUnit})));
+							@include bnd((w:calc(var(--cp-header-column-width) * #{$size-unit})));
 						}
 					}
 				}
 			}
 		}
 		&.has-fixed-column-width{
-			#{$this}-table{
+			#{$block}-table{
 				&-thead{
 					&-tr{
 						&-th{
-							@include bnd((w:calc(var(--cp-column-width) * #{$sizeUnit})));
+							@include bnd((w:calc(var(--cp-column-width) * #{$size-unit})));
 						}
 					}
 				}
@@ -171,8 +177,8 @@
 		}
 	}
 	&.do-transposition{
-		#{$this}-table{
-			@include grd((f:c,tr:repeat(var(--cp-column-count),auto),tc:repeat(auto-fill,calc(var(--cp-column-width) * #{$sizeUnit}))));
+		#{$block}-table{
+			@include grd((f:c,tr:repeat(var(--cp-column-count),auto),tc:repeat(auto-fill,calc(var(--cp-column-width) * #{$size-unit}))));
 			&-colgroup{
 				@include bnd((d:n));
 			}
@@ -202,7 +208,7 @@
 					&-th{
 						@include bnd((p:s,l:0,z:1,bs:b));
 						&-label{
-							@include bnd((p:a,i:0,mg:-1.25em a .5em));
+							@include bnd((p:a,l:0,r:0,b:85%,mgi:a));
 						}
 					}
 				}
@@ -219,12 +225,12 @@
 			}
 		}
 		&.has-header-column{
-			#{$this}-table{
-				@include grd((tc:calc(var(--cp-header-column-width) * #{$sizeUnit}) repeat(auto-fill,auto)));
+			#{$block}-table{
+				@include grd((tc:calc(var(--cp-header-column-width) * #{$size-unit}) repeat(auto-fill,auto)));
 				&-thead{
 					&-tr{
 						&-td,&-th{
-							@include bnd((p:s,l:0,z:1,w:calc(var(--cp-header-column-width) * #{$sizeUnit})));
+							@include bnd((p:s,l:0,z:1,w:calc(var(--cp-header-column-width) * #{$size-unit})));
 						}
 					}
 				}
@@ -238,30 +244,30 @@
 			}
 		}
 		&:not(.has-fixed-column-width){
-			#{$this}-table{
+			#{$block}-table{
 				@include grd((tc:repeat(auto-fit,1fr)));
 			}
 			&.has-header-column{
-				#{$this}-table{
+				#{$block}-table{
 					
 				}
 			}
 		}
 		&.has-fixed-column-width{
-			#{$this}-table{
+			#{$block}-table{
 				@include bnd((w:fit));
-				@include grd((tc:repeat(auto-fill,calc(var(--cp-column-width) * #{$sizeUnit}))));
+				@include grd((tc:repeat(auto-fill,calc(var(--cp-column-width) * #{$size-unit}))));
 				&-tbody{
 					&-tr{
 						&-th{
-							@include bnd((w:calc(var(--cp-column-width) * #{$sizeUnit})));
+							@include bnd((w:calc(var(--cp-column-width) * #{$size-unit})));
 						}
 					}
 				}
 			}
 			&.has-header-column{
-				#{$this}-table{
-					@include grd((tc:calc(var(--cp-header-column-width) * #{$sizeUnit}) repeat(auto-fill,calc(var(--cp-column-width) * #{$sizeUnit}))));
+				#{$block}-table{
+					@include grd((tc:calc(var(--cp-header-column-width) * #{$size-unit}) repeat(auto-fill,calc(var(--cp-column-width) * #{$size-unit}))));
 				}
 			}
 		}
@@ -269,39 +275,38 @@
 	
 	}
 	&:not(.has-fixed-column-width){
-		#{$this}-table{
-			@include bnd((w:calc(var(--cp-table-width) * #{$sizeUnit})));
+		#{$block}-table{
+			@include bnd((w:calc(var(--cp-table-width) * #{$size-unit})));
 		}
 	}
 	&.has-fixed-column-width{
-		#{$this}-table{
+		#{$block}-table{
 			&-tbody{
 				&-tr{
 					&-td{
-						@include bnd((w:calc(var(--cp-column-width) * #{$sizeUnit})));
+						@include bnd((w:calc(var(--cp-column-width) * #{$size-unit})));
 					}
 				}
 			}
 		}
 	}
 	&.has-header-column{
-		#{$this}-box{
-			@include bnd((spdl:calc(var(--cp-header-column-width) * #{$sizeUnit})));
+		#{$block}-box{
+			@include bnd((spdl:calc(var(--cp-header-column-width) * #{$size-unit})));
 		}
 	}
 	&.is-style-spec{
-		#{$this}-tags{
+		#{$block}-tags{
 			&-tag{
 				&.is-active{
 					@include txt((td:u m 1 .25em));
 				}
 			}
 		}
-		#{$this}-table{
+		#{$block}-table{
 			&-thead{
 				&-tr{
 					&-th,&-td{
-						@include bnd((pd:10));
 						@include bdr((p:b,s:s,w:1,c:t));
 						&.is-premium{
 							@include bg((c:mx 1 .2));
@@ -319,7 +324,6 @@
 			&-tbody{
 				&-tr{
 					&-th,&-td{
-						@include bnd((pd:10));
 						@include bdr((p:b,s:s,w:1,c:t));
 					}
 					&-td{
@@ -341,11 +345,10 @@
 			
 		}
 		&.do-transposition{
-			#{$this}-table{
+			#{$block}-table{
 				&-thead{
 					&-tr{
 						&-th,&-td{
-							@include bnd((pd:10));
 							@include bdr((p:b,s:s,w:1,c:t));
 						}
 					}
@@ -353,11 +356,9 @@
 				&-tbody{
 					&-tr{
 						&-th,&-td{
-							@include bnd((pd:10));
 							@include bdr((p:b,s:s,w:1,c:t));
 						}
 						&-th{
-							@include bnd((pd:10));
 							@include bdr((p:b,s:s,w:1,c:t));
 							&.is-premium{
 								@include bg((c:mx 1 .2));
@@ -389,18 +390,25 @@
 		}
 	}
 	&.is-style-sheet{
-		#{$this}-tags{
+		#{$block}-tags{
 			&-tag{
 				&.is-active{
 					@include txt((td:u m 1 .25em));
 				}
 			}
 		}
-		#{$this}-table{
+		#{$block}-table{
+			@include bnd((pd:1));
+			&-thead,&-tbody{
+				&-tr{
+					&-th,&-td{
+						@include bnd((mg:-1 -1 0 0));
+					}
+				}
+			}
 			&-thead{
 				&-tr{
 					&-th{
-						@include bnd((pd:10));
 						@include bg((c:b));
 						@include bdr((s:s,w:1,c:t));
 						&.is-spacer{
@@ -422,9 +430,8 @@
 			}
 			&-tbody{
 				&-tr{
-					$row:#{$this}-table-tbody-tr;
+					$row:#{$block}-table-tbody-tr;
 					&-th,&-td{
-						@include bnd((pd:10));
 						@include bg((c:b));
 						@include bdr((s:s,w:1,c:t));
 					}
@@ -465,9 +472,9 @@
 		}
 	}
 	&.is-style-plan{
-		#{$this}-tags{
+		#{$block}-tags{
 			&-tag{
-				@include bnd((pd:.5em 1em));
+				@extend %label-component;
 				@include bg((c:t-b 50));
 				@include txt((c:i));
 				@include bdr((r:1em));
@@ -476,11 +483,10 @@
 				}
 			}
 		}
-		#{$this}-table{
+		#{$block}-table{
 			&-thead{
 				&-tr{
 					&-th{
-						@include bnd((pd:10));
 						@include bg((c:m 10));
 						&.is-spacer{
 							@include bdr((s:n));
@@ -494,10 +500,7 @@
 			}
 			&-tbody{
 				&-tr{
-					$row:#{$this}-table-tbody-tr;
-					&-th,&-td{
-						@include bnd((pd:10));
-					}
+					$row:#{$block}-table-tbody-tr;
 					&-th{
 						@include bg((c:m 10));
 						@include txt((c:tx));
@@ -543,7 +546,7 @@
 			}
 		}
 		&:not(.do-transposition){
-			#{$this}-table{
+			#{$block}-table{
 				&-thead{
 					&-tr{
 						&-th{
@@ -553,7 +556,7 @@
 				}
 				&-tbody{
 					&-tr{
-						$row:#{$this}-table-tbody-tr;
+						$row:#{$block}-table-tbody-tr;
 						&-th{
 							@include bdr((r:1em 0 0 1em));
 						}
@@ -562,7 +565,7 @@
 			}
 		}
 		&.do-transposition{
-			#{$this}-table{
+			#{$block}-table{
 				&-thead{
 					&-tr{
 						&-th{
@@ -572,7 +575,7 @@
 				}
 				&-tbody{
 					&-tr{
-						$row:#{$this}-table-tbody-tr;
+						$row:#{$block}-table-tbody-tr;
 						&-th{
 							@include bdr((r:1em 1em 0 0));
 						}
@@ -582,25 +585,25 @@
 		}
 	}
 	&:not(.is-showing-tags){
-		#{$this}-tags{
+		#{$block}-tags{
 			@include bnd((d:n));
 		}
 	}
 	&.is-showing-tags{
-		#{$this}-box{
+		#{$block}-box{
 			&__body{
 				@include bnd((w:fit));
 			}
 		}
 		&.has-header-column{
-			#{$this}-box{
+			#{$block}-box{
 				&__body{
 					@include bnd((pdr:80vw));
 				}
 			}
 		}
 		&:not(.has-header-column){
-			#{$this}-box{
+			#{$block}-box{
 				&__body{
 					@include bnd((pdl:50vw,pdr:50vw));
 				}

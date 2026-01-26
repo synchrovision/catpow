@@ -46,6 +46,13 @@ $attributes=[
 				['text'=>['Medium'],'classes'=>''],
 				['text'=>['Small'],'classes'=>'']
 			]],
+			['classes'=>'is-standard','cells'=>[
+				['text'=>['Standard'],'classes'=>''],
+				['text'=>['Content'],'classes'=>''],
+				['text'=>['Content'],'classes'=>''],
+				['text'=>['Content'],'classes'=>''],
+				['text'=>['Content'],'classes'=>'']
+			]],
 			['classes'=>'is-premium','cells'=>[
 				['text'=>['Premium'],'classes'=>'has-label','label'=>'PREMIUM'],
 				['text'=>['Content'],'classes'=>''],
@@ -62,10 +69,10 @@ $attributes=[
 			]],
 			['classes'=>'is-deprecated','cells'=>[
 				['text'=>['Deprecated'],'classes'=>''],
-				['text'=>['Standard'],'classes'=>''],
-				['text'=>['Premium'],'classes'=>''],
-				['text'=>['Recommended'],'classes'=>''],
-				['text'=>['Deprecated'],'classes'=>'']
+				['text'=>['Content'],'classes'=>''],
+				['text'=>['Content'],'classes'=>''],
+				['text'=>['Content'],'classes'=>''],
+				['text'=>['Content'],'classes'=>'']
 			]]
 		]
 	],

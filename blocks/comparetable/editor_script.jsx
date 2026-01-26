@@ -90,22 +90,24 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
+				"level",
+				"color",
 				{
 					name: "type",
 					type: "buttons",
 					label: "タイプ",
 					values: {
-						"is-style-spec": "spec",
-						"is-style-sheet": "sheet",
-						"is-style-plan": "plan",
+						isStyleSpec: "spec",
+						isStyleSheet: "sheet",
+						isStylePlan: "plan",
 					},
 				},
-				{ name: "transposiiton", label: "転置", values: "do-transposition" },
-				{ name: "tags", label: "タグ", values: "has-tags" },
+				{ name: "transposiiton", label: "転置", values: "doTransposition" },
+				{ name: "tags", label: "タグ", values: "hasTags" },
 				{
 					name: "headerColumn",
 					label: __("見出し列", "catpow"),
-					values: "has-header-column",
+					values: "hasHeaderColumn",
 					sub: [
 						{
 							name: "width",
@@ -122,7 +124,7 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 				{
 					name: "columnWidth",
 					label: __("列幅固定", "catpow"),
-					values: "has-fixed-column-width",
+					values: "hasFixedColumnWidth",
 					sub: [
 						{
 							name: "width",
@@ -145,9 +147,8 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 					min: 200,
 					max: 3200,
 					step: 10,
-					cond: (states) => !states["has-fixed-column-width"],
+					cond: (states) => !states.hasFixedColumnWidth,
 				},
-				"color",
 				"isTemplate",
 			];
 			wp.hooks.applyFilters("catpow.blocks.comparetable.selectiveClasses", CP.finderProxy(selectiveClasses));
@@ -160,10 +161,10 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 					type: "buttons",
 					label: "タイプ",
 					values: {
-						"is-standard": "通常",
-						"is-premium": "高品質",
-						"is-recommended": "推奨",
-						"is-deprecated": "非推奨",
+						isStandard: "通常",
+						isPremium: "高品質",
+						isRecommended: "推奨",
+						isDeprecated: "非推奨",
 					},
 				},
 			];
@@ -192,9 +193,9 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 					type: "buttons",
 					label: "タイプ",
 					values: {
-						"is-equal": "等",
-						"is-positive": "正",
-						"is-negative": "負",
+						isEqual: "等",
+						isPositive: "正",
+						isNegative: "負",
 					},
 				},
 			];
@@ -220,9 +221,9 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 					type: "buttons",
 					label: "タイプ",
 					values: {
-						"is-spacer": "空白",
-						"is-label": "ラベル",
-						"is-title": "タイトル",
+						isSpacer: "空白",
+						isLabel: "ラベル",
+						isTitle: "タイトル",
 					},
 				},
 			];
@@ -417,7 +418,7 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 																			clone: () => addRow(rowIndex),
 																			down: () => downRow(rowIndex),
 																		}}
-																	/>
+																	/>,
 																);
 															}
 															if (isSelected && rowIndex == rows.length - 1) {
@@ -430,7 +431,7 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 																			clone: () => addColumn(columnIndex),
 																			right: () => upColumn(columnIndex),
 																		}}
-																	/>
+																	/>,
 																);
 															}
 															if (hasHeaderColumn && columnIndex == 0) {
