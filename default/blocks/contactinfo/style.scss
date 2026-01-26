@@ -1,16 +1,23 @@
 @import 'admin_style_config.scss';
+@import 'text-placeholders.scss';
+@import 'component-placeholders.scss';
 
 .wp-block-catpow-contactinfo{
-	@include bnd((w:fit 960,pd:1em,mg:1em a));
+	@extend %ui-block;
+	@extend %frame-component;
+	@include bnd((mgi:a));
 	@include txt((a:c));
 	@include shd((b:2));
 	&__title{
-		@include bnd((pdb:.25em,mgb:.5em));
+		@extend %heading-block;
+		@extend %heading;
+		@include bnd((pdb:.25em));
 		@include txt((p:1.5em,f:h));
 		@include bdr((p:b,s:s,w:1));
 	}
 	&__lead{
-		@include txt((p:1em));
+		@extend %lead-block;
+		@extend %lead;
 	}
 	&__items{
 		@include bnd((pd:2em 0));
@@ -34,6 +41,7 @@
 					@include bnd((f:0 0 1em));
 					>svg{
 						@include bnd((d:b,w:f,h:a));
+						@include svg((f:crr))
 					}
 				}
 			}
@@ -43,7 +51,7 @@
 		}
 	}
 	&__caption{
-		@include txt((p:.8em));
+		@extend %caption;
 	}
 	&.has-multiple-items &{
 		&__items{
@@ -56,14 +64,5 @@
 				}
 			}
 		}
-	}
-	&.is-size-small{
-		@include txt((p:16));
-	}
-	&.is-size-medium{
-		@include txt((p:20));
-	}
-	&.is-size-large{
-		@include txt((p:24));
 	}
 }

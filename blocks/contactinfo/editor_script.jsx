@@ -21,31 +21,23 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				{
-					name: "size",
-					label: "サイズ",
-					type: "buttons",
-					values: {
-						"is-size-small": "小",
-						"is-size-medium": "中",
-						"is-size-large": "大",
-					},
-				},
-				{ name: "title", label: "タイトル", values: "has-title" },
-				{ name: "lead", label: "リード", values: "has-lead" },
-				{ name: "caption", label: "キャプション", values: "has-caption" },
+				"level",
+				"color",
+				{ name: "title", label: "タイトル", values: "hasTitle" },
+				{ name: "lead", label: "リード", values: "hasLead" },
+				{ name: "caption", label: "キャプション", values: "hasCaption" },
 				{
 					name: "icon",
 					label: "アイコン",
-					values: "has-icon",
+					values: "hasIcon",
 					sub: [{ input: "icon" }],
 				},
-				{ name: "itemTitle", label: "個別タイトル", values: "has-item-title" },
-				{ name: "itemLead", label: "個別リード", values: "has-item-lead" },
+				{ name: "itemTitle", label: "個別タイトル", values: "hasItemTitle" },
+				{ name: "itemLead", label: "個別リード", values: "hasItemLead" },
 				{
 					name: "itemCaption",
 					label: "個別キャプション",
-					values: "has-item-caption",
+					values: "hasItemCaption",
 				},
 				"isTemplate",
 			];
@@ -53,7 +45,6 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 			return selectiveClasses;
 		}, []);
 		const selectiveItemClasses = useMemo(() => {
-			const { imageKeys } = CP.config.banners;
 			const selectiveItemClasses = ["color", "event"];
 			wp.hooks.applyFilters("catpow.blocks.contactinfo.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
@@ -80,6 +71,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 						<RichText
 							tagName="h4"
 							className={itemClasses.title()}
+							placeholder="Input Title"
 							onChange={(title) => {
 								item.title = title;
 								save();
@@ -91,6 +83,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 						<RichText
 							tagName="p"
 							className={itemClasses.lead()}
+							placeholder="Input Lead"
 							onChange={(lead) => {
 								item.lead = lead;
 								save();
@@ -103,6 +96,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 						<RichText
 							tagName="span"
 							className={itemClasses.link.text()}
+							placeholder="Input Link"
 							onChange={(link) => {
 								items[index].link = link;
 								save();
@@ -114,6 +108,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 						<RichText
 							tagName="small"
 							className={itemClasses.caption()}
+							placeholder="Input Caption"
 							onChange={(caption) => {
 								item.caption = caption;
 								save();
@@ -121,7 +116,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 							value={item.caption}
 						/>
 					)}
-				</CP.Item>
+				</CP.Item>,
 			);
 		});
 
@@ -176,6 +171,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 									<RichText
 										tagName="h3"
 										className={classes._title()}
+										placeholder="Input Title"
 										onChange={(title) => {
 											setAttributes({ title });
 										}}
@@ -186,6 +182,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 									<RichText
 										tagName="p"
 										className={classes._lead()}
+										placeholder="Input Lead"
 										onChange={(lead) => {
 											setAttributes({ lead });
 										}}
@@ -197,6 +194,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 									<RichText
 										tagName="small"
 										className={classes._caption()}
+										placeholder="Input Caption"
 										onChange={(caption) => {
 											setAttributes({ caption });
 										}}
@@ -230,7 +228,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 						<RichText.Content tagName="span" className={itemClasses.link.text()} value={item.link} />
 					</CP.Link>
 					{states.hasItemCaption && <RichText.Content tagName="small" className={itemClasses.caption()} value={item.caption} />}
-				</li>
+				</li>,
 			);
 		});
 

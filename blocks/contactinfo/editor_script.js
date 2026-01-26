@@ -19,31 +19,23 @@
       const { linkKeys } = CP.config.contactinfo;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          {
-            name: "size",
-            label: "\u30B5\u30A4\u30BA",
-            type: "buttons",
-            values: {
-              "is-size-small": "\u5C0F",
-              "is-size-medium": "\u4E2D",
-              "is-size-large": "\u5927"
-            }
-          },
-          { name: "title", label: "\u30BF\u30A4\u30C8\u30EB", values: "has-title" },
-          { name: "lead", label: "\u30EA\u30FC\u30C9", values: "has-lead" },
-          { name: "caption", label: "\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "has-caption" },
+          "level",
+          "color",
+          { name: "title", label: "\u30BF\u30A4\u30C8\u30EB", values: "hasTitle" },
+          { name: "lead", label: "\u30EA\u30FC\u30C9", values: "hasLead" },
+          { name: "caption", label: "\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "hasCaption" },
           {
             name: "icon",
             label: "\u30A2\u30A4\u30B3\u30F3",
-            values: "has-icon",
+            values: "hasIcon",
             sub: [{ input: "icon" }]
           },
-          { name: "itemTitle", label: "\u500B\u5225\u30BF\u30A4\u30C8\u30EB", values: "has-item-title" },
-          { name: "itemLead", label: "\u500B\u5225\u30EA\u30FC\u30C9", values: "has-item-lead" },
+          { name: "itemTitle", label: "\u500B\u5225\u30BF\u30A4\u30C8\u30EB", values: "hasItemTitle" },
+          { name: "itemLead", label: "\u500B\u5225\u30EA\u30FC\u30C9", values: "hasItemLead" },
           {
             name: "itemCaption",
             label: "\u500B\u5225\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3",
-            values: "has-item-caption"
+            values: "hasItemCaption"
           },
           "isTemplate"
         ];
@@ -51,7 +43,6 @@
         return selectiveClasses2;
       }, []);
       const selectiveItemClasses = useMemo(() => {
-        const { imageKeys: imageKeys2 } = CP.config.banners;
         const selectiveItemClasses2 = ["color", "event"];
         wp.hooks.applyFilters("catpow.blocks.contactinfo.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
         return selectiveItemClasses2;
@@ -75,6 +66,7 @@
             {
               tagName: "h4",
               className: itemClasses.title(),
+              placeholder: "Input Title",
               onChange: (title2) => {
                 item.title = title2;
                 save();
@@ -86,6 +78,7 @@
             {
               tagName: "p",
               className: itemClasses.lead(),
+              placeholder: "Input Lead",
               onChange: (lead2) => {
                 item.lead = lead2;
                 save();
@@ -97,6 +90,7 @@
             {
               tagName: "span",
               className: itemClasses.link.text(),
+              placeholder: "Input Link",
               onChange: (link) => {
                 items[index].link = link;
                 save();
@@ -108,6 +102,7 @@
             {
               tagName: "small",
               className: itemClasses.caption(),
+              placeholder: "Input Caption",
               onChange: (caption2) => {
                 item.caption = caption2;
                 save();
@@ -141,6 +136,7 @@
         {
           tagName: "h3",
           className: classes._title(),
+          placeholder: "Input Title",
           onChange: (title2) => {
             setAttributes({ title: title2 });
           },
@@ -151,6 +147,7 @@
         {
           tagName: "p",
           className: classes._lead(),
+          placeholder: "Input Lead",
           onChange: (lead2) => {
             setAttributes({ lead: lead2 });
           },
@@ -161,6 +158,7 @@
         {
           tagName: "small",
           className: classes._caption(),
+          placeholder: "Input Caption",
           onChange: (caption2) => {
             setAttributes({ caption: caption2 });
           },
