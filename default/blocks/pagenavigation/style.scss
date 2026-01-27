@@ -168,7 +168,7 @@
 					@include grd((tc:a 1fr a));
 					&-link{
 						@include grd((tc:.5em 1fr,g:.2em,ai:c));
-						@include txt((p:16,f:t,c:tx,td:n));
+						@include txt((p:16,f:p,c:tx,td:n));
 						&::before{
 							content:'';
 							@include bnd((d:b,w:.25em,h:.5em));
@@ -208,7 +208,7 @@
 				@include txt((l:n));
 				&__item{
 					&-link{
-						@include txt((p:14,f:t,c:tx,td:n));
+						@include txt((p:14,f:p,c:tx,td:n));
 					}
 					&.is-active{
 						#{$item}{
@@ -281,7 +281,7 @@
 					@include bnd((pdb:8));
 					&-link{
 						@include grd((tc:.5em 1fr,g:.2em,ai:c));
-						@include txt((p:16,f:t,c:tx,td:n));
+						@include txt((p:16,f:p,c:tx,td:n));
 						&::before{
 							content:'';
 							@include bnd((d:b,w:.25em,h:.5em));
@@ -304,7 +304,7 @@
 				&__item{
 					$item:&;
 					&-link{
-						@include txt((p:14,f:t,c:tx,td:n));
+						@include txt((p:14,f:p,c:tx,td:n));
 					}
 					&.is-active{
 					}
@@ -354,7 +354,7 @@
 					$item:&;
 					&-link{
 						@include grd((tc:.5em 1fr,g:.2em,ai:c));
-						@include txt((p:16,f:t,c:tx,td:n));
+						@include txt((p:16,f:p,c:tx,td:n));
 						&::before{
 							content:'';
 							@include bnd((d:b,w:.25em,h:.5em));
@@ -377,7 +377,7 @@
 				&__item{
 					$item:&;
 					&-link{
-						@include txt((p:14,f:t,c:tx,td:n));
+						@include txt((p:14,f:p,c:tx,td:n));
 					}
 					&.is-active{
 					}
@@ -425,7 +425,7 @@
 					@include bnd((bi:a,mgb:.5em));
 					&-link{
 						@include grd((tc:.5em 1fr,g:.2em,ai:c));
-						@include txt((p:14,f:t,c:i,td:n));
+						@include txt((p:14,f:p,c:i,td:n));
 						&::before{
 							content:'';
 							@include bnd((d:b,w:.25em,h:.5em));
@@ -448,7 +448,7 @@
 				&__item{
 					$item:&;
 					&-link{
-						@include txt((p:12,f:t,c:i,td:n));
+						@include txt((p:12,f:p,c:i,td:n));
 					}
 					&.is-active{
 					}
