@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .wp-block-catpow-jsonld {
-  font-family: var(--cp-fonts-t);
+  font-family: var(--cp-font-family-g);
 }
 .wp-block-catpow-jsonld__label {
   display: -webkit-box;

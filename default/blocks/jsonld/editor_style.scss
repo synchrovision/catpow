@@ -1,7 +1,7 @@
 @import "admin_style_config.scss";
 
 .wp-block-catpow-jsonld{
-	@include txt((f:t));
+	@include txt((f:g));
 	&__label{
 		@include flx((w:w,j:c,a:c));
 		@include bnd((mg:20,pd:20));
