@@ -1,24 +1,35 @@
-<?php namespace Catpow; ?>
-<header id="siteHeader" class="wp-block-catpow-siteheader">
-	<div class="contents">
-		<h1 class="logo">
+<?php
+namespace Catpow;
+$cls="wp-block-catpow-siteheader";
+?>
+<header id="siteHeader" class="<?=$cls?>">
+	<div class="<?=$cls?>__contents">
+		<h1 class="<?=$cls?>__contents-logo">
 			<?php the_custom_logo(); ?>
-			<small><?= bloginfo('description');?></small>
+			<small class="<?=$cls?>__contents-logo-catch"><?= bloginfo('description');?></small>
 		</h1>
 	</div>
-	<?php menu('primary'); ?>
-	<?php menu('header/nav_menu'); ?>
-
-	<div class="menu_button">
-		<div class="icon"> </div>
+	<div class="<?=$cls?>__menu has-color-scheme-inverted">
+		<?php menu('header/nav_menu'); ?>
 	</div>
-	<div class="back_to_top"></div>
+	<div class="<?=$cls?>__contact">
+		<?php menu('primary'); ?>
+	</div>
+
+	<button class="<?=$cls?>__button">
+		<span class="<?=$cls?>__button-icon"> </span>
+	</button>
+	<button class="<?=$cls?>__back"></button>
 	<script type="text/javascript">
 		document.addEventListener('DOMContentLoaded',function(){
-			var reseizeObserver=new ResizeObserver(function(entries){
-				document.documentElement.style.setProperty('--cp-visible-area-top',entries[0].target.getBoundingClientRect().bottom+'px');
+			const siteHeader=document.getElementById('siteHeader');
+			siteHeader.querySelector('.<?=$cls?>__button').addEventListener('click',()=>{
+				siteHeader.classList.toggle('is-open');
 			});
-			reseizeObserver.observe(document.getElementById('siteHeader'));
+			var reseizeObserver=new ResizeObserver(function(entries){
+				document.documentElement.style.setProperty('--cp-page-top-offset',siteHeader.getBoundingClientRect().bottom+'px');
+			});
+			reseizeObserver.observe(siteHeader);
 		});
 	</script>
 </header>
