@@ -207,7 +207,7 @@ function output($name=null,$prm=null,$format=null){
 		return $loop;
 	}
 	if(isset(\cp::$content->loop_id)){\cp::$content->output_item($prm,$format);}
-	else{\cp::$content->output($prm,$format);}
+	elseif(\cp::$content instanceof content\meta){\cp::$content->output($prm,$format);}
 }
 function input($name=null,$prm=null,$format=null){
 	if(empty(\cp::$content)){return;}
