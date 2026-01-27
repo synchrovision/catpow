@@ -1,9 +1,6 @@
 ﻿const { __ } = wp.i18n;
 CP.config.pageheader = {
 	devices: ["sp", "tb"],
-	imageKeys: {
-		backgroundImage: { src: "backgroundImageSrc", srcset: "backgroundImageSrcset", sources: "backgroundImageSources" },
-	},
 };
 wp.blocks.registerBlockType("catpow/pageheader", {
 	title: "🐾 PageHeader",
@@ -11,32 +8,21 @@ wp.blocks.registerBlockType("catpow/pageheader", {
 	icon: "welcome-widgets-menus",
 	category: "catpow-parts",
 	example: CP.example,
-	edit({ attributes, setAttributes, className, clientId }) {
-		const { vars, title, backgroundImageCode } = attributes;
+	edit({ attributes, setAttributes }) {
+		const { vars } = attributes;
 		const { useMemo } = wp.element;
-		const { BlockControls, InspectorControls, RichText } = wp.blockEditor;
-		const { serverSideRender: ServerSideRender } = wp;
-		const { content_path, query, config, EditMode = false } = attributes;
-		const { devices, imageKeys } = CP.config.pageheader;
-		const { bem } = Catpow.util;
+		const { InspectorControls, RichText } = wp.blockEditor;
 		const states = CP.classNamesToFlags(attributes.classes);
-		const classes = useMemo(() => bem(attributes.classes), []);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"color",
 				"size",
-				{
-					name: "backgroundImage",
-					label: __("背景画像", "catpow"),
-					values: "hasBackgroundImage",
-					sub: [
-						{ input: "picture", keys: imageKeys.backgroundImage, devices },
-						{ name: "blendmode", label: __("モード", "catpow"), vars: "vars", key: "--cp-image-blendmode", input: "blendmode" },
-						{ name: "opacity", label: __("不透明度", "catpow"), vars: "vars", key: "--cp-image-opacity", input: "range", min: 0, max: 1, step: 0.1 },
-					],
-				},
 				{ name: "breadcrumb", label: __("パンくずリスト", "catpow"), values: "hasBreadCrumnb" },
+				"color",
+				"colorScheme",
+				"backgroundColor",
+				"backgroundImage",
+				"backgroundPattern",
 				{
 					name: "template",
 					label: __("テンプレート", "catpow"),
@@ -61,54 +47,39 @@ wp.blocks.registerBlockType("catpow/pageheader", {
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
-				<div className={attributes.classes} style={vars}>
-					<div className={classes.body()}>
-						<RichText
-							tagName="h1"
-							className={classes.body.title()}
-							onChange={(title) => {
-								setAttributes({ title });
-							}}
-							value={attributes.title}
-						/>
-						{states.hasBreadCrumnb && <CP.ServerSideRenderPart.Preview name="breadcrumb" className={classes.body.breadcrumb()} container_class={classes.body.breadcrumb.body()} />}
+				<CP.Bem prefix="wp-block-catpow">
+					<div className={attributes.classes} style={vars}>
+						<div className="_body">
+							<RichText
+								tagName="h1"
+								className="_title"
+								onChange={(title) => {
+									setAttributes({ title });
+								}}
+								value={attributes.title}
+							/>
+							{states.hasBreadCrumnb && <CP.ServerSideRenderPart.Preview name="breadcrumb" className="_breadcrumb" container_class="wp-block-catpow-pageheader__body-breadcrumb-body" />}
+						</div>
 					</div>
-					<div className={classes.background()}>
-						{states.hasBackgroundImage && (
-							<>
-								{states.isTemplate && backgroundImageCode ? (
-									<CP.DummyImage text={backgroundImageCode} />
-								) : (
-									<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.backgroundImage} devices={devices} />
-								)}
-							</>
-						)}
-					</div>
-				</div>
+				</CP.Bem>
 			</>
 		);
 	},
 
-	save({ attributes, className, setAttributes }) {
-		const { vars, title, backgroundImageCode } = attributes;
-		const { devices, imageKeys } = CP.config.pageheader;
+	save({ attributes }) {
+		const { vars } = attributes;
 		const { RichText } = wp.blockEditor;
-		const { bem } = Catpow.util;
 		const states = CP.classNamesToFlags(attributes.classes);
-		const classes = bem(attributes.classes);
 
 		return (
-			<div className={classes()} style={vars}>
-				<div className={classes.body()}>
-					<RichText.Content tagName="h1" className={classes.body.title()} value={attributes.title} />
-					{states.hasBreadCrumnb && <CP.ServerSideRenderPart name="breadcrumb" className={classes.body.breadcrumb()} container_class={classes.body.breadcrumb.body()} />}
+			<CP.Bem prefix="wp-block-catpow">
+				<div className={attributes.classes} style={vars}>
+					<div className="_body">
+						<RichText.Content tagName="h1" className="_title" value={attributes.title} />
+						{states.hasBreadCrumnb && <CP.ServerSideRenderPart name="breadcrumb" className="_breadcrumb" container_class="wp-block-catpow-pageheader__body-breadcrumb-body" />}
+					</div>
 				</div>
-				<div className={classes.background()}>
-					{states.hasBackgroundImage && (
-						<>{states.isTemplate && backgroundImageCode ? backgroundImageCode : <CP.ResponsiveImage attr={attributes} keys={imageKeys.backgroundImage} devices={devices} />}</>
-					)}
-				</div>
-			</div>
+			</CP.Bem>
 		);
 	},
 });

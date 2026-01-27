@@ -2,16 +2,16 @@
 
 .wp-block-catpow-pageheader{
 	@include bnd((d:b,p:r,ssa:s));
-	@include bg((c:m));
-	&-body{
+	@include bg((c:bx));
+	&__body{
 		@include bnd((p:r,z:2));
 		&-title{
 			@include bnd((pd:80 20));
-			@include txt((a:c,f:h,p:32,h:1.5em,c:i));
+			@include txt((a:c,f:h,p:32,h:1.5em,c:tx));
 		}
 		&-breadcrumb{
 			@include bg((c:shd));
-			&-body{
+			&__body{
 				@include bnd((w:a c,mg:a));
 				&-items{
 					@include flx((w:w));
@@ -37,7 +37,7 @@
 			}
 		}
 	}
-	&-background{
+	&__background{
 		@include bnd((d:b,p:a,i:0,z:1,o:h));
 		&::before{
 			content:'';
@@ -49,27 +49,43 @@
 			@include bnd((d:b,w:f,h:f,op:c,of:c,z:1));
 		}
 	}
-	&.small &{
-		&-body{
+	&.is-size-xsmall &{
+		&__body{
+			&-title{
+				@include bnd((pd:20));
+				@include txt((p:18));
+			}
+		}
+	}
+	&.is-size-small &{
+		&__body{
 			&-title{
 				@include bnd((pd:40 20));
 				@include txt((p:24));
 			}
 		}
 	}
-	&.medium &{
-		&-body{
+	&.is-size-medium &{
+		&__body{
 			&-title{
 				@include bnd((pd:80 20));
 			}
 		}
 		
 	}
-	&.large &{
-		&-body{
+	&.is-size-large &{
+		&__body{
 			&-title{
 				@include bnd((pd:160 20));
 				@include txt((p:48));
+			}
+		}
+	}
+	&.is-size-xlarge &{
+		&__body{
+			&-title{
+				@include bnd((pd:240 20));
+				@include txt((p:min(8vw,4rem),h:2em,t:.1em));
 			}
 		}
 	}

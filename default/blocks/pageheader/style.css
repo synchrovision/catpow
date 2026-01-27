@@ -3,29 +3,29 @@
   display: block;
   position: relative;
   scroll-snap-align: start;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
+  background-color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),var(--cp-tones-bx-a,1));
 }
-.wp-block-catpow-pageheader-body {
+.wp-block-catpow-pageheader__body {
   position: relative;
   z-index: 2;
 }
-.wp-block-catpow-pageheader-body-title {
+.wp-block-catpow-pageheader__body-title {
   padding: 5rem 1.25rem;
   text-align: center;
-  font-family: var(--cp-fonts-h);
+  font-family: var(--cp-font-family-h);
   font-size: 2rem;
   line-height: 1.5em;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
 }
-.wp-block-catpow-pageheader-body-breadcrumb {
+.wp-block-catpow-pageheader__body-breadcrumb {
   background-color: hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
 }
-.wp-block-catpow-pageheader-body-breadcrumb-body {
-  max-width: 60rem;
+.wp-block-catpow-pageheader__body-breadcrumb__body {
+  max-width: var(--cp-content-width);
   width: auto;
   margin: auto;
 }
-.wp-block-catpow-pageheader-body-breadcrumb-body-items {
+.wp-block-catpow-pageheader__body-breadcrumb__body-items {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -34,25 +34,25 @@
   flex-wrap: wrap;
   list-style: none;
 }
-.wp-block-catpow-pageheader-body-breadcrumb-body-items-item {
+.wp-block-catpow-pageheader__body-breadcrumb__body-items-item {
   -webkit-box-flex: 0;
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: auto;
 }
-.wp-block-catpow-pageheader-body-breadcrumb-body-items-item-link {
+.wp-block-catpow-pageheader__body-breadcrumb__body-items-item-link {
   display: inline-block;
   padding: 0.5rem;
   font-size: 0.875rem;
   color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
   text-decoration: none;
 }
-.wp-block-catpow-pageheader-body-breadcrumb-body-items-item:not(:last-child) .wp-block-catpow-pageheader-body-breadcrumb-body-items-item-link:last-child::after {
+.wp-block-catpow-pageheader__body-breadcrumb__body-items-item:not(:last-child) .wp-block-catpow-pageheader__body-breadcrumb__body-items-item-link:last-child::after {
   content: "＞";
   display: inline-block;
   margin-left: 0.5em;
 }
-.wp-block-catpow-pageheader-background {
+.wp-block-catpow-pageheader__background {
   display: block;
   position: absolute;
   top: 0rem;
@@ -63,7 +63,7 @@
   z-index: 1;
   overflow: hidden;
 }
-.wp-block-catpow-pageheader-background::before {
+.wp-block-catpow-pageheader__background::before {
   content: "";
   display: block;
   position: absolute;
@@ -77,7 +77,7 @@
   opacity: var(--cp-image-opacity);
   mix-blend-mode: var(--cp-image-blendmode);
 }
-.wp-block-catpow-pageheader-background img {
+.wp-block-catpow-pageheader__background img {
   display: block;
   width: 100%;
   height: 100%;
@@ -85,15 +85,25 @@
   object-fit: cover;
   z-index: 1;
 }
-.wp-block-catpow-pageheader.small .wp-block-catpow-pageheader-body-title {
+.wp-block-catpow-pageheader.is-size-xsmall .wp-block-catpow-pageheader__body-title {
+  padding: 1.25rem;
+  font-size: 1.125rem;
+}
+.wp-block-catpow-pageheader.is-size-small .wp-block-catpow-pageheader__body-title {
   padding: 2.5rem 1.25rem;
   font-size: 1.5rem;
 }
-.wp-block-catpow-pageheader.medium .wp-block-catpow-pageheader-body-title {
+.wp-block-catpow-pageheader.is-size-medium .wp-block-catpow-pageheader__body-title {
   padding: 5rem 1.25rem;
 }
-.wp-block-catpow-pageheader.large .wp-block-catpow-pageheader-body-title {
+.wp-block-catpow-pageheader.is-size-large .wp-block-catpow-pageheader__body-title {
   padding: 10rem 1.25rem;
   font-size: 3rem;
+}
+.wp-block-catpow-pageheader.is-size-xlarge .wp-block-catpow-pageheader__body-title {
+  padding: 15rem 1.25rem;
+  font-size: min(8vw, 4rem);
+  line-height: 2em;
+  letter-spacing: 0.1em;
 }
 /*# sourceMappingURL=./style.css.map */
