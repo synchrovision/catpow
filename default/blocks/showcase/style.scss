@@ -20,6 +20,7 @@
 			@extend %card-component;
 			@include bnd((p:r,f:1 1 300,z:1));
 			@include bg((c:bx));
+			@include txt((c:tx));
 			@include shd((b:4));
 			&-counter{
 				@extend %ui;
@@ -41,7 +42,6 @@
 			&-caption{
 				@extend %lead-block;
 				@extend %lead;
-				@include txt((p:1.1em,w:b));
 			}
 			&-text{
 				@extend %paragraph-block;
@@ -53,7 +53,7 @@
 				@extend %button-component;
 				@extend %ui;
 				@include bnd((d:b,w:fit,mg:1em a 0));
-				@include bdr((s:s,w:2));
+				@include bdr((s:s,w:1));
 				@include txt((s:n,c:mx));
 			}
 		}
