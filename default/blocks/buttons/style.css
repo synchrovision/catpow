@@ -17,9 +17,11 @@
   letter-spacing: var(--cp-letter-spacing-c, normal);
 }
 .wp-block-catpow-buttons-button {
+  padding: var(--cp-size-sp-b);
   border-radius: var(--cp-size-r-b, 0);
 }
 .wp-block-catpow-buttons__item-copy {
+  padding: var(--cp-size-sp-l);
   border-radius: var(--cp-size-r-l, 0);
 }
 .wp-block-catpow-buttons {
