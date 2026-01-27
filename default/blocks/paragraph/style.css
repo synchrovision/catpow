@@ -1,16 +1,63 @@
-p {
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
+p.is-style-heading {
+  margin-top: var(--cp-heading-margin-top, 0);
+  margin-bottom: var(--cp-heading-margin-bottom, 0);
 }
-p.is-style-message {
-  padding: 1em;
-  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a,1));
-  font-family: s;
-  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+p.is-style-heading {
+  font-family: var(--cp-font-family-h, inherit);
+  font-size: var(--cp-font-size-h, 2em);
+  font-weight: var(--cp-font-weight-h, regular);
+  line-height: var(--cp-line-height-h, 1.5);
+  letter-spacing: var(--cp-letter-spacing-h, normal);
+}
+p.is-style-lead {
+  margin-top: var(--cp-lead-margin-top, 0);
+  margin-bottom: var(--cp-lead-margin-bottom, 0);
+}
+p.is-style-lead {
+  font-family: var(--cp-font-family-l, inherit);
+  font-size: var(--cp-font-size-l, 2em);
+  font-weight: var(--cp-font-weight-l, regular);
+  line-height: var(--cp-line-height-l, 1.5);
+  letter-spacing: var(--cp-letter-spacing-l, normal);
+}
+p.is-style-paragraph {
+  margin-top: var(--cp-paragraph-margin-top, 0);
+  margin-bottom: var(--cp-paragraph-margin-bottom, 0);
+}
+p.is-style-paragraph {
+  font-family: var(--cp-font-family-p, inherit);
+  font-size: var(--cp-font-size-p, 2em);
+  font-weight: var(--cp-font-weight-p, regular);
+  line-height: var(--cp-line-height-p, 1.5);
+  letter-spacing: var(--cp-letter-spacing-p, normal);
 }
 p.is-style-caption {
-  margin-top: 2em;
-  padding: 2em;
-  border-top-style: solid;
-  border-top-width: 0.0625rem;
+  margin-top: var(--cp-caption-margin-top, 0);
+  margin-bottom: var(--cp-caption-margin-bottom, 0);
+}
+p.is-style-caption {
+  font-family: var(--cp-font-family-c, inherit);
+  font-size: var(--cp-font-size-c, 2em);
+  font-weight: var(--cp-font-weight-c, regular);
+  line-height: var(--cp-line-height-c, 1.5);
+  letter-spacing: var(--cp-letter-spacing-c, normal);
+}
+p {
+  font-size: var(--cp-font-size-p);
+}
+p.has-regular-font-size, .editor-styles-wrapper p.has-regular-font-size {
+  font-size: var(--cp-font-size-p);
+}
+p.is-style-heading {
+  font-size: var(--cp-font-size-h);
+}
+p.is-style-lead {
+  font-size: var(--cp-font-size-l);
+}
+p.is-style-paragraph {
+  font-size: var(--cp-font-size-p);
+}
+p.is-style-caption {
+  font-size: var(--cp-font-size-c);
 }
 /*# sourceMappingURL=./style.css.map */

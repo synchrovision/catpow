@@ -1,15 +1,30 @@
-@import 'admin_style_config.scss';
+@import "config/style_config.scss";
+@import "text-placeholders.scss";
 
 p{
-	@include txt((c:tx));
-	&.is-style-message{
-		@include bnd((pd:1em));
-		@include bg((c:s));
-		@include txt((f:s));
-		@include shd((b:2));
+	@include txt((p:p));
+	&.has-regular-font-size,
+	.editor-styles-wrapper &.has-regular-font-size {
+		@include txt((p:p));
+	}
+	&.is-style-heading{
+		@extend %heading-block;
+		@extend %heading;
+		@include txt((p:h));
+	}
+	&.is-style-lead{
+		@extend %lead-block;
+		@extend %lead;
+		@include txt((p:l));
+	}
+	&.is-style-paragraph{
+		@extend %paragraph-block;
+		@extend %paragraph;
+		@include txt((p:p));
 	}
 	&.is-style-caption{
-		@include bnd((mgt:2em,pd:2em));
-		@include bdr((p:t,s:s,w:1));
+		@extend %caption-block;
+		@extend %caption;
+		@include txt((p:c));
 	}
 }
