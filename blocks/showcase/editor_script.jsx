@@ -19,7 +19,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 				type: "block",
 				blocks: CP.listedConvertibles,
 				transform: (attributes) => {
-					attributes.classes = "wp-block-catpow-showcase hasCounter";
+					attributes.classes = "wp-block-catpow-showcase has-counter";
 					return wp.blocks.createBlock("catpow/showcase", attributes);
 				},
 			},
@@ -31,7 +31,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 					return CP.isRowsConvertibleToItems(rows, block.attributes.items);
 				},
 				transform: (attributes) => {
-					attributes.classes = "wp-block-catpow-showcase hasCounter";
+					attributes.classes = "wp-block-catpow-showcase has-counter";
 					const block = wp.data.select("core/blocks").getBlockType("catpow/showcase");
 					attributes.items = CP.convertRowsToItems(attributes.rows, block.attributes.items);
 					return wp.blocks.createBlock("catpow/showcase", attributes);
@@ -160,21 +160,21 @@ wp.blocks.registerBlockType("catpow/showcase", {
 				item.controlClasses = "control";
 			}
 			rtn.push(
-				<CP.Item tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
-					<div className="image">
+				<CP.Item tag="li" className="_item" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+					<div className="_image">
 						<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="full" isTemplate={states.isTemplate} />
 					</div>
-					<div className="texts">
+					<div className="_texts">
 						{states.hasCounter && (
-							<div className="counter">
-								{countPrefix && <span className="prefix">{countPrefix}</span>}
-								<span className="number">{index + 1}</span>
-								{countSuffix && <span className="suffix">{countSuffix}</span>}
+							<div className="_counter">
+								{countPrefix && <span className="_prefix">{countPrefix}</span>}
+								<span className="_number">{index + 1}</span>
+								{countSuffix && <span className="_suffix">{countSuffix}</span>}
 							</div>
 						)}
 						<RichText
 							tagName={TitleTag}
-							className="title"
+							className="_title"
 							onChange={(text) => {
 								items[index].title = text;
 								save();
@@ -184,7 +184,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 						{states.hasTitleCaption && (
 							<RichText
 								tagName="p"
-								className="titleCaption"
+								className="_caption"
 								onChange={(text) => {
 									items[index].titleCaption = text;
 									save();
@@ -193,7 +193,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 							/>
 						)}
 						<div
-							className="text"
+							className="_text"
 							onFocus={() => {
 								attributes.blockState.enableBlockFormat = true;
 							}}
@@ -207,7 +207,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 							/>
 						</div>
 						{states.hasLink && (
-							<CP.Link.Edit className="link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index} isSelected={isSelected}>
+							<CP.Link.Edit className="_link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index} isSelected={isSelected}>
 								<RichText
 									onChange={(linkText) => {
 										items[index].linkText = linkText;
@@ -296,7 +296,9 @@ wp.blocks.registerBlockType("catpow/showcase", {
 								<InnerBlocks />
 							</div>
 						) : (
-							<ul {...blockProps}>{rtn}</ul>
+							<CP.Bem prefix="wp-block-catpow">
+								<ul {...blockProps}>{rtn}</ul>
+							</CP.Bem>
 						)}
 					</>
 				)}
@@ -315,24 +317,24 @@ wp.blocks.registerBlockType("catpow/showcase", {
 		items.forEach((item, index) => {
 			rtn.push(
 				<li className={item.classes} key={index}>
-					<div className="image">
+					<div className="_image">
 						<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
 					</div>
-					<div className="texts">
+					<div className="_texts">
 						{states.hasCounter && (
-							<div className="counter">
-								{countPrefix && <span className="prefix">{countPrefix}</span>}
-								<span className="number">{index + 1}</span>
-								{countSuffix && <span className="suffix">{countSuffix}</span>}
+							<div className="_counter">
+								{countPrefix && <span className="_prefix">{countPrefix}</span>}
+								<span className="_number">{index + 1}</span>
+								{countSuffix && <span className="_suffix">{countSuffix}</span>}
 							</div>
 						)}
-						<RichText.Content tagName={TitleTag} className="title" value={item.title} />
-						{states.hasTitleCaption && <RichText.Content tagName="p" className="titleCaption" value={item.titleCaption} />}
-						<div className="text">
+						<RichText.Content tagName={TitleTag} className="_title" value={item.title} />
+						{states.hasTitleCaption && <RichText.Content tagName="p" className="_caption" value={item.titleCaption} />}
+						<div className="_text">
 							<RichText.Content value={item.text} />
 						</div>
 						{states.hasLink && (
-							<CP.Link className="link" attr={attributes} keys={linkKeys.link} index={index} {...CP.extractEventDispatcherAttributes("catpow/banners", item)}>
+							<CP.Link className="_link" attr={attributes} keys={linkKeys.link} index={index} {...CP.extractEventDispatcherAttributes("catpow/banners", item)}>
 								<RichText.Content value={item.linkText} />
 							</CP.Link>
 						)}
@@ -342,7 +344,9 @@ wp.blocks.registerBlockType("catpow/showcase", {
 		});
 		return (
 			<>
-				<ul {...useBlockProps.save({ className: classes, style: vars })}>{rtn}</ul>
+				<CP.Bem prefix="wp-block-catpow">
+					<ul {...useBlockProps.save({ className: classes, style: vars })}>{rtn}</ul>
+				</CP.Bem>
 				{doLoop && (
 					<on-empty>
 						<InnerBlocks.Content />

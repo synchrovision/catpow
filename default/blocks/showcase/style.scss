@@ -1,12 +1,14 @@
 @import "admin_style_config.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
 
 .wp-block-catpow-showcase{
 	@include bnd((w:a 1200,mgi:a));
 	@include flx((w:w,g:g));
 	@include txt((l:n,c:tx));
-	>.item{
+	&__item{
 		@include bnd((pd:8 16,f:1 1 f));
-		>.image{
+		&-image{
 			@include bnd((f:10 10 300,mgt:20));
 			@include bdr((s:s,w:8,c:b));
 			@include shd((b:4));
@@ -14,61 +16,69 @@
 				@include bnd((d:b,w:f,h:a));
 			}
 		}
-		>.texts{
-			@include bnd((p:r,f:1 1 300,pd:32,z:1));
+		&-texts{
+			@extend %card-component;
+			@include bnd((p:r,f:1 1 300,z:1));
 			@include bg((c:bx));
-			@include bdr((r:20));
 			@include shd((b:4));
-			>.counter{
+			&-counter{
+				@extend %ui;
+				@extend %label-component;
 				@include bnd((w:fit,h:1em,pd:.5em 1em,mg:-2em a 1em));
-				@include bdr((r:2em));
 				@include bg((c:m));
 				@include txt((a:c,p:1.5em,h:1em,t:.05em,c:i,w:b,f:d,b:k));
 				@include shd((b:2));
-				>.number{
+				&-number{
 					@include txt((p:1.25em));
 				}
 			}
-			>.title{
+			&-title{
+				@extend %heading-block;
+				@extend %heading;
 				@include bnd((mg:0,pd:0));
-				@include txt((p:2em,c:mx,b:k));
+				@include txt((c:mx,b:k));
 			}
-			>.titleCaption{
-				@include bnd((mgt:.5em));
+			&-caption{
+				@extend %lead-block;
+				@extend %lead;
 				@include txt((p:1.1em,w:b));
 			}
-			>.text{
+			&-text{
+				@extend %paragraph-block;
+				@extend %paragraph;
 				@include bnd((mgt:1em));
 				@include txt((a:j));
 			}
-			>.link{
-				@include bnd((d:b,w:fit,mg:1em a 0,pd:.5em 1em));
-				@include bdr((s:s,w:2,r:1em));
-				@include txt((p:1.25em,h:1em,s:n,w:b,c:mx));
+			&-link{
+				@extend %button-component;
+				@extend %ui;
+				@include bnd((d:b,w:fit,mg:1em a 0));
+				@include bdr((s:s,w:2));
+				@include txt((s:n,c:mx));
 			}
 		}
 		@include bp(-960){
-			>.image{
+			&-image{
 				@include bnd((mgb:-40));
 			}
 		}
 		@include bp(960){
 			@include flx((w:w,a:s));
 			&:nth-child(odd){
-				>.image{
+				&-image{
 					@include bnd((mgr:-40));
 				}
 			}
 			&:nth-child(even){
 				@include flx((d:rr));
-				>.image{
+				&-image{
 					@include bnd((mgl:-40));
 				}
 			}
 		}
 	}
 	&.has-counter{
-		>.item{
+		&-item{
 			@include bnd((pd:32 16,f:1 1 f));
 		}
 	}
