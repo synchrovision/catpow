@@ -1,123 +1,350 @@
 @import "admin_style_config.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
 
 .wp-block-catpow-section{
 	$block:&;
-	@include bnd((d:b,mgi:a));
-	&__body{
-		@include bnd((mgi:a));
-	}
-	&.is-type-scene &{
-		@include bnd((p:r));
-		@include bg((c:bx));
-		&__body{
-			@include bnd((p:r,z:1));
-		}
-		&__header{
-			@include bnd((p:r));
-			&-image{
-				@include bnd((d:b));
-				@include txt((a:c));
-				&-img{
-					@include bnd((w:a,h:8rem,of:c,op:c));
+	$body:#{$block}__body;
+	$header:#{$block}__header;
+	$contents:#{$block}__contents;
+	@include bnd((d:b,p:r,mgi:a,pd:spd,bi:a));
+	&__header{
+		&-title{
+			@include bnd((mgi:a));
+			@include txt((p:h));
+			&-heading{
+				@extend %heading;
+				@include bnd((mgb:hmgb,pd:0));
+				@include txt((p:1em));
+			}
+			&-lead{
+				@extend %lead;
+				@include bnd((mgb:lmgb,pd:0));
+			}
+			&-titleimage{
+				picture{
+					@include bnd((d:b,mgi:a));
+					img{
+						@include bnd((d:b,w:f 1200,mgi:a));
+					}
 				}
 			}
-			&-title{
-				@include bnd((p:r,mgi:a));
-				&-heading{
-					@include bnd((pd:2rem 1rem,p:r));
-					@include txt((a:c,p:5rem,w:l,c:tx,b:k));
+		}
+	}
+	&.is-type-scene{
+		@include bnd((p:r,z:1));
+		> #{$body}{
+			@include bnd((p:r,z:1));
+			> #{$header}{
+				@include bnd((p:r,o:h,pd:20));
+				@include bp(720){
+					@include bnd((pd:40 20 20));
 				}
-				&-titleimage{
-					@include bnd((w:a c,pd:0,mg:0 a));
-					&-image{
-						&-img{
-							@include bnd((d:b,w:f,h:a));
+				#{$header}{
+					&-title{
+						@include bnd((p:r,z:1));
+						&-prefix{
+							@include txt((a:c,p:1.25em,h:1.5em,w:r,f:dc,c:mx));
+						}
+						&-image{
+							@include bnd((d:b));
+							@include txt((a:c));
+							img{
+								@include bnd((d:b,w:a,h:80,of:c,op:c));
+							}
+						}
+						&-heading{
+							@include bnd((pd:20 10,p:r));
+							@include txt((a:c,c:mx,b:k,f:h));
+							strong{
+								@include txt((p:1.5em,c:ax));
+							}
+						}
+						&-lead{
+							@include bnd((pd:20 10,p:r,w:fit f,mg:a));
+							@include txt((a:j,c:tx,w:t));
+							@include bp(-960){
+								@include bnd((w:fit 400));
+							}
 						}
 					}
 				}
-				&-lead{
-					@include bnd((pd:2rem 1rem,p:r));
-					@include txt((a:c,p:2rem,w:l,c:i));
+			}
+		}
+		&.has-prefix{
+			> #{$body}{
+				> #{$header}{
+					#{$header}{
+						&-title{
+							&-heading{
+								@include txt((p:.4em));
+							}
+						}
+					}
 				}
 			}
 		}
-		&__contents{
+		&.has-header-image{
+			> #{$body} > #{$header}{
+				#{$header}{
+					&-title{
+						&-image{
+							@include bnd((p:r,f:0 1 a,nth:1));
+							img{
+								@include bnd((d:b,w:a,h:6em,mgi:a));
+							}
+						}
+					}
+				}
+			}
+		}
+		@include bp(pc){
+			&.is-aligin-left > #{$body}{
+				@include flx((w:w));
+			}
+			&.is-aligin-right > #{$body}{
+				@include flx((w:w,d:rr));
+			}
+			&.is-aligin-left,&.is-aligin-right{
+				 > #{$body}{
+					> #{$header}{
+						@include bnd((f:0 0 400));
+					}
+					> #{$contents}{
+						@include bnd((f:1 1 400));
+					}
+				}
+			}
 		}
 	}
-	&.is-type-article &{
-		&__body{
-			@include bnd((p:r,z:1));
-		}
-		&__header{
-			&-title{
-				&-heading{
-					@include bnd((pd:1rem 0,p:r));
-					@include bdr((p:b,s:s,w:1));
-					@include txt((a:l,p:2rem,w:r,c:ax,b:k));
+	&.is-type-article{
+		> #{$body}{
+			@include bnd((p:r,mgi:a,bs:b,z:1));
+			> #{$header}{
+				#{$header}{
+					&-title{
+						@include bnd((p:r));
+						&-heading{
+							@include txt((c:tx));
+						}
+						&-lead{
+							@include txt((c:tx));
+						}
+					}
 				}
-				&-lead{
-					@include bnd((pd:1rem 2rem));
-					@include txt((a:j,p:1.4rem,w:r,c:tx));
+			}
+			> #{$contents}{
+				.gmap{
+					@include bnd((h:300 a));
 				}
 			}
 		}
-		&__contents{
+		&.has-header-image{
+			> #{$body} > #{$header}{
+				#{$header}{
+					&-title{
+						&-image{
+							@include bnd((p:r,f:0 1 a,nth:1));
+							img{
+								@include bnd((d:b,w:a,h:4em,mgi:a));
+							}
+						}
+					}
+				}
+			}
+			&.is-align-left,&.is-align-right{
+				> #{$body} > #{$header}{
+					#{$header}{
+						&-title{
+							@include flx((w:w,j:c,a:c,g:1.5em));
+							&-image{
+								@include bnd((p:r,f:0 1 a,nth:1));
+							}
+							&-heading{
+								@include bnd((f:1 1 a,nth:2));
+							}
+							&-lead{
+								@include bnd((f:1 1 f,nth:3));
+							}
+						}
+					}
+				}
+			}
+			&.is-align-right{
+				> #{$body} > #{$header}{
+					#{$header}{
+						&-title{
+							&-image{
+								@include bnd((nth:2));
+							}
+							&-heading{
+								@include bnd((nth:1));
+							}
+						}
+					}
+				}
+			}
+		}
+		&.has-heading-type-header{
+			> #{$body} > #{$header}{
+				#{$header}{
+					&-title{
+						@extend %header-component;
+						@include bg((c:mx));
+						@include txt((c:ix));
+					}
+				}
+			}
+		}
+		&.has-heading-type-headline{
+			> #{$body} > #{$header}{
+				#{$header}{
+					&-title{
+						&-heading{
+							@include bnd((p:r,pdb:.2em));
+							@include bdr((p:b,s:s,w:1));
+							&::after{
+								content:'';
+								@include bnd((d:b,p:a,b:-2,l:0,w:5em,h:3));
+								@include bg((c:mx));
+							}
+						}
+					}
+				}
+			}
+		}
+		&.has-heading-type-catch{
+			> #{$body} > #{$header}{
+				#{$header}{
+					&-title{
+						@include txt((c:tx));
+						&-heading{
+							@include bnd((p:r));
+							@include txt((c:tx,b:k));
+						}
+						&-lead{
+							@include bnd((p:r));
+						}
+					}
+				}
+			}
+		}
+		&.is-align-center{
+			> #{$body} > #{$header}{
+				@include bnd((mgi:a));
+				@include txt((a:c));
+			}
 		}
 	}
 	&.is-type-column{
-		@include bnd((mg:2rem a,o:h));
-		@include bg((c:bx));
-		@include bdr((s:s,w:1,c:m 30,r:10));
-		&__body{
-			@include bnd((pd:2rem,bs:b,p:r,z:1,mgi:a));
-		}
-		&__header{
-			@include bnd((pd:3rem a));
-			&-title{
-				&-heading{
-					@include bnd((pd:1rem 1rem,mgb:6rem,p:r));
-					@include bdr((p:b,s:s,w:1));
-					@include txt((a:c,p:2rem,w:l,c:ax,b:k));
+		> #{$body}{
+			@include bnd((bs:b,p:r,pd:2em,mgi:a,z:1));
+			> #{$header}{
+				@include bnd((pd:1em));
+				#{$header}{
+					&-title{
+						&-heading{
+							@include txt((b:k,c:tx,f:h));
+						}
+						&-lead{
+							@include txt((a:j,c:tx));
+						}
+					}
 				}
-					&-lead{
-					@include bnd((pd:3rem 1rem,p:r));
-					@include txt((a:c,p:1.5rem,w:l,c:tx));
+			}
+			> #{$block}__contents{
+				@include bnd((pd:1em));
+			}
+		}
+		&.is-align-left,&.is-align-right{
+			> #{$body}{
+				@include flx((w:w,a:f));
+				> #{$header}{
+					@include bnd((f:1 1 300));
+				}
+				> #{$block}__contents{
+					@include bnd((f:8 8 300));
 				}
 			}
 		}
-		&__contents{
-		}
-
-		&.has-thin-border{
-			#{$block}{
-				&__body{
-					@include bdr((s:s,w:1));
+		&.is-align-center{
+			> #{$body}{
+				> #{$header}{
+					#{$header}{
+					&-title{
+							@include txt((a:c));
+						}
+					}
 				}
+			}
+		}
+		&.has-thin-border{
+			> #{$body}{
+				@include bdr((s:s,w:1,c:mx));
 			}
 		}
 		&.has-bold-border{
-			#{$block}{
-				&__body{
-					@include bdr((s:s,w:3));
-				}
+			> #{$body}{
+				@include bdr((s:s,w:3,c:mx));
 			}
 		}
 		&.has-border-radius{
-			#{$block}{
-				&__body{
-					@include bdr((r:10));
-				}
+			> #{$body}{
+				@include bdr((r:10));
 			}
 		}
 		&.has-box-shadow{
-			#{$block}{
-				&__body{
-					&:not(.inset){
-						@include shd((b:3));
+			&:not(.has-box-shadow-inset) #{$block}{
+				> #{$body}{
+					@include shd((b:1em 2em 0 clr(mx 1 .25)));
+				}
+			}
+			&.has-box-shadow-inset #{$block}{
+				> #{$body}{
+					@include shd((b:-1em 2em 0 clr(mx 1 .25)));
+				}
+			}
+		}
+		&.has-icon{
+			> #{$body}{
+				> #{$header}{
+					#{$header}{
+						&-title{
+							&-icon{
+								@include bnd((p:a,t:-80,l:-80,w:240,h:240));
+								@include txt((a:c));
+								img,svg{
+									@include bnd((w:f,h:a));
+									@include svg((f:m 1 .1));
+								}
+							}
+						}
 					}
-					&.has-box-shadow-inset{
-						@include shd((b:-3));
+				}
+			}
+		}
+		&.has-border-image{
+			> #{$body}{
+				@include bdr((s:s,w:40,c:n));
+				> #{$header}{
+					@include bnd((pd:50 30 10));
+					@include bg((c:n));
+					&-title{
+						@include txt((c:mx));
 					}
+				}
+				> #{$block}__contents{
+					@include bnd((pd:20 30 30));
+				}
+			}
+		}
+	}
+	&__decoration{
+		@include bnd((p:a,i:0));
+		>.item{
+			>.picture{
+				>.img{
+					@include bnd((d:b,w:f,h:f,op:c,of:i));
 				}
 			}
 		}
