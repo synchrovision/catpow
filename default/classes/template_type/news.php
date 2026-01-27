@@ -11,15 +11,15 @@ class news extends template_type{
 	public static function fill_conf_data(&$conf_data){
 		if(empty($conf_data['taxonomies']['label'])){
 			$conf_data['taxonomies']['label']=[
-				'label'=>__('ラベル','catpow'),
+				'label'=>'ラベル',
 				'meta'=>[
-					'color'=>['label'=>__('色','catpow'),'type'=>'color']
+					'color'=>['label'=>'色','type'=>'color']
 				]
 			];
 		}
 		if(empty($conf_data['meta']['label'])){
 			$conf_data['meta']['label']=[
-				'label'=>__('ラベル','catpow'),
+				'label'=>'ラベル',
 				'type'=>'radio_terms',
 				'value'=>'label',
 				'show_in_loop'=>true
