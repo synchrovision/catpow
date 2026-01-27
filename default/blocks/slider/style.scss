@@ -33,7 +33,7 @@
 					}
 					>.text{
 						@include bnd((mg:0,pd:0,bs:b));
-						@include txt((p:15,h:1.5em,f:t,s:r,c:tx,b:k));
+						@include txt((p:15,h:1.5em,f:p,s:r,c:tx,b:k));
 						@include shd((tg:4 bx_0));
 					}
 					@include bp(960){
@@ -153,7 +153,7 @@
 					}
 					>.text{
 						@include bnd((mg:0,pd:0 20,bs:b));
-						@include txt((a:j,p:15,h:1.5em,f:t,s:r,c:tx));
+						@include txt((a:j,p:15,h:1.5em,f:p,s:r,c:tx));
 					}
 				}
 				>.link{
@@ -197,7 +197,7 @@
 					}
 					p{
 						@include bnd((mg:0));
-						@include txt((a:l,p:13,h:1.5em,f:t,w:r,c:t));
+						@include txt((a:l,p:13,h:1.5em,f:p,w:r,c:t));
 					}
 				}
 				>.background{
@@ -228,7 +228,7 @@
 	&.banners{
 		@include bnd((w:a,mg:a,ctn:banners i));
 		@include usr((s:n,c:p));
-		--slider-size:calc(var(--cp-item-size,300) * #{$sizeUnit});
+		--slider-size:calc(var(--cp-item-size,300) * #{$size-unit});
 		>.contents{
 			@include bnd((d:b,p:r,pd:0,mg:50 a,w:var(--slider-size,30rem) f));
 			>.item{
@@ -300,7 +300,7 @@
 					}
 					p{
 						@include bnd((mg:0));
-						@include txt((a:j,p:13,h:1.5em,f:t,w:l,c:t));
+						@include txt((a:j,p:13,h:1.5em,f:p,w:l,c:t));
 					}
 				}
 				a.link{

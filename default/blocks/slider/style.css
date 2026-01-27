@@ -75,7 +75,7 @@
   box-sizing: border-box;
   font-size: 2.5rem;
   line-height: 1.5em;
-  font-family: var(--cp-fonts-h);
+  font-family: var(--cp-font-family-h);
   font-weight: 800;
   font-weight: bold;
   color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
@@ -88,7 +88,7 @@
   box-sizing: border-box;
   font-size: 1.25rem;
   line-height: 1.5em;
-  font-family: var(--cp-fonts-h);
+  font-family: var(--cp-font-family-h);
   font-weight: bold;
   color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
   word-break: keep-all;
@@ -100,7 +100,7 @@
   box-sizing: border-box;
   font-size: 0.9375rem;
   line-height: 1.5em;
-  font-family: var(--cp-fonts-t);
+  font-family: var(--cp-font-family-p);
   font-weight: normal;
   color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
   word-break: keep-all;
@@ -327,7 +327,7 @@
   text-align: left;
   font-size: 2.5rem;
   line-height: 1.5em;
-  font-family: var(--cp-fonts-h);
+  font-family: var(--cp-font-family-h);
   font-weight: 700;
   color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
   word-break: keep-all;
@@ -339,7 +339,7 @@
   text-align: left;
   font-size: 1.25rem;
   line-height: 1.5em;
-  font-family: var(--cp-fonts-h);
+  font-family: var(--cp-font-family-h);
   color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
   word-break: keep-all;
 }
@@ -350,7 +350,7 @@
   text-align: justify;
   font-size: 0.9375rem;
   line-height: 1.5em;
-  font-family: var(--cp-fonts-t);
+  font-family: var(--cp-font-family-p);
   font-weight: normal;
   color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
 }
@@ -424,7 +424,7 @@
   text-align: left;
   font-size: 1.125rem;
   line-height: 1.5em;
-  font-family: var(--cp-fonts-h);
+  font-family: var(--cp-font-family-h);
   font-weight: 500;
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
 }
@@ -433,7 +433,7 @@
   text-align: left;
   font-size: 0.9375rem;
   line-height: 1.5em;
-  font-family: var(--cp-fonts-h);
+  font-family: var(--cp-font-family-h);
   font-weight: 400;
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
 }
@@ -442,7 +442,7 @@
   text-align: left;
   font-size: 0.8125rem;
   line-height: 1.5em;
-  font-family: var(--cp-fonts-t);
+  font-family: var(--cp-font-family-p);
   font-weight: 400;
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
 }
@@ -646,7 +646,7 @@
   text-align: left;
   font-size: 0.9375rem;
   line-height: 1.5em;
-  font-family: var(--cp-fonts-h);
+  font-family: var(--cp-font-family-h);
   font-weight: 400;
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
 }
@@ -660,7 +660,7 @@
   text-align: left;
   font-size: 0.875rem;
   line-height: 1.5em;
-  font-family: var(--cp-fonts-h);
+  font-family: var(--cp-font-family-h);
   font-weight: 400;
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
 }
@@ -669,7 +669,7 @@
   text-align: justify;
   font-size: 0.8125rem;
   line-height: 1.5em;
-  font-family: var(--cp-fonts-t);
+  font-family: var(--cp-font-family-p);
   font-weight: 300;
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
 }
