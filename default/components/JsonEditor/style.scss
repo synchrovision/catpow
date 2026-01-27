@@ -2,7 +2,7 @@
 
 .cp-jsoneditor{
 	@include bnd((ctn:i));
-	@include txt((p:14,f:t));
+	@include txt((p:14,f:p));
 	&-editor{
 		@include bnd((pd:4));
 		&__body{
@@ -20,7 +20,7 @@
 					&-save{
 						@include bnd((pd:8 12));
 						@include bg((c:m));
-						@include txt((a:c,p:14,h:1em,f:t,c:i));
+						@include txt((a:c,p:14,h:1em,f:p,c:i));
 						@include bdr((r:4));
 						&.is-active{
 							@include usr((c:p));
@@ -38,14 +38,14 @@
 		}
 	}
 	&-input{
-		@include txt((p:12,f:t));
+		@include txt((p:12,f:p));
 		&__body{
 			@include bnd((p:r,pd:8));
 			&-message{
 				@include bnd((p:a,b:f,pd:4 20,z:1));
 				@include bdr((r:20));
 				@include bg((c:m));
-				@include txt((p:12,f:t,h:1.5em,c:i));
+				@include txt((p:12,f:p,h:1.5em,c:i));
 				@include shd((b:2));
 				@include trn((t:.2s,o:1,y:0));
 				@include usr((e:n));

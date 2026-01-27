@@ -1,7 +1,7 @@
 .cp-jsoneditor {
   container-type: inline-size;
   font-size: 0.875rem;
-  font-family: var(--cp-fonts-t);
+  font-family: var(--cp-font-family-p);
 }
 .cp-jsoneditor-editor {
   padding: 0.25rem;
@@ -29,7 +29,7 @@
 }
 .cp-jsoneditor-editor__body-header-title {
   font-size: 1rem;
-  font-family: var(--cp-fonts-h);
+  font-family: var(--cp-font-family-h);
   font-weight: 700;
 }
 .cp-jsoneditor-editor__body-header-controls-save {
@@ -38,7 +38,7 @@
   text-align: center;
   font-size: 0.875rem;
   line-height: 1em;
-  font-family: var(--cp-fonts-t);
+  font-family: var(--cp-font-family-p);
   color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
   border-radius: 0.25rem;
 }
@@ -57,7 +57,7 @@
 }
 .cp-jsoneditor-input {
   font-size: 0.75rem;
-  font-family: var(--cp-fonts-t);
+  font-family: var(--cp-font-family-p);
 }
 .cp-jsoneditor-input__body {
   position: relative;
@@ -71,7 +71,7 @@
   border-radius: 1.25rem;
   background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
   font-size: 0.75rem;
-  font-family: var(--cp-fonts-t);
+  font-family: var(--cp-font-family-p);
   line-height: 1.5em;
   color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
   box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
