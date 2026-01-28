@@ -25,7 +25,7 @@
         source: "attribute",
         selector: "table",
         attribute: "class",
-        default: "wp-block-catpow-simpletable color0 spec"
+        default: "wp-block-catpow-simpletable spec"
       },
       rows: {
         source: "query",
@@ -76,15 +76,18 @@
       const { classes, rows } = attributes;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
+          "level",
           {
             name: "type",
+            type: "gridbuttons",
             label: "\u30BF\u30A4\u30D7",
             filter: "type",
-            values: ["spec", "info", "history", "inputs"],
+            values: { isTypeSpec: "Spec", isTypeInfo: "Information", isTypeHistory: "History", isTypeInputs: "Inputs" },
             item: {
-              spec: [
+              isTypeSpec: [
                 {
                   name: "type",
+                  type: "buttons",
                   label: "\u7A2E\u5225",
                   values: {
                     normal: "\u306A\u3057",
@@ -93,7 +96,7 @@
                   }
                 }
               ],
-              inputs: [
+              isTypeInputs: [
                 {
                   name: "type",
                   label: "\u7A2E\u5225",
@@ -110,7 +113,6 @@
               ]
             }
           },
-          "hasMargin",
           "color"
         ];
         wp.hooks.applyFilters("catpow.blocks.simpletable.selectiveClasses", CP.finderProxy(selectiveClasses2));
@@ -119,7 +121,7 @@
       const saveItems = () => {
         setAttributes({ rows: JSON.parse(JSON.stringify(rows)) });
       };
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u884C", icon: "edit", set: setAttributes, attr: attributes, items: rows, index: attributes.currentItemIndex, triggerClasses: selectiveClasses[0] }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement("table", { className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u884C", icon: "edit", set: setAttributes, attr: attributes, items: rows, index: attributes.currentItemIndex, triggerClasses: selectiveClasses[1] }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
         return /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "tr", set: setAttributes, attr: attributes, items: rows, itemskey: "rows", index, isSelected, key: index }, /* @__PURE__ */ wp.element.createElement("th", null, /* @__PURE__ */ wp.element.createElement(
           RichText,
           {
@@ -139,14 +141,14 @@
             value: row.cells[1].text
           }
         )));
-      }))));
+      })))));
     },
     save({ attributes, className }) {
       const { RichText } = wp.blockEditor;
       const { classes, rows } = attributes;
-      return /* @__PURE__ */ wp.element.createElement("table", { className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
+      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
         return /* @__PURE__ */ wp.element.createElement("tr", { className: row.classes, "data-refine-cond": row.cond, key: index }, /* @__PURE__ */ wp.element.createElement("th", { className: row.cells[0].classes }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: row.cells[0].text })), /* @__PURE__ */ wp.element.createElement("td", { className: row.cells[1].classes }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: row.cells[1].text })));
-      })));
+      }))));
     }
   });
 })();

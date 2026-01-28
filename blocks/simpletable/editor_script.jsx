@@ -24,7 +24,7 @@
 			source: "attribute",
 			selector: "table",
 			attribute: "class",
-			default: "wp-block-catpow-simpletable color0 spec",
+			default: "wp-block-catpow-simpletable spec",
 		},
 		rows: {
 			source: "query",
@@ -76,15 +76,18 @@
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
+				"level",
 				{
 					name: "type",
+					type: "gridbuttons",
 					label: "タイプ",
 					filter: "type",
-					values: ["spec", "info", "history", "inputs"],
+					values: { isTypeSpec: "Spec", isTypeInfo: "Information", isTypeHistory: "History", isTypeInputs: "Inputs" },
 					item: {
-						spec: [
+						isTypeSpec: [
 							{
 								name: "type",
+								type: "buttons",
 								label: "種別",
 								values: {
 									normal: "なし",
@@ -93,7 +96,7 @@
 								},
 							},
 						],
-						inputs: [
+						isTypeInputs: [
 							{
 								name: "type",
 								label: "種別",
@@ -110,7 +113,6 @@
 						],
 					},
 				},
-				"hasMargin",
 				"color",
 			];
 			wp.hooks.applyFilters("catpow.blocks.simpletable.selectiveClasses", CP.finderProxy(selectiveClasses));
@@ -124,37 +126,39 @@
 			<>
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="行" icon="edit" set={setAttributes} attr={attributes} items={rows} index={attributes.currentItemIndex} triggerClasses={selectiveClasses[0]} />
+					<CP.SelectClassPanel title="行" icon="edit" set={setAttributes} attr={attributes} items={rows} index={attributes.currentItemIndex} triggerClasses={selectiveClasses[1]} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
-				<table className={classes}>
-					<tbody>
-						{rows.map((row, index) => {
-							return (
-								<CP.Item tag="tr" set={setAttributes} attr={attributes} items={rows} itemskey="rows" index={index} isSelected={isSelected} key={index}>
-									<th>
-										<RichText
-											onChange={(text) => {
-												row.cells[0].text = text;
-												saveItems();
-											}}
-											value={row.cells[0].text}
-										/>
-									</th>
-									<td>
-										<RichText
-											onChange={(text) => {
-												row.cells[1].text = text;
-												saveItems();
-											}}
-											value={row.cells[1].text}
-										/>
-									</td>
-								</CP.Item>
-							);
-						})}
-					</tbody>
-				</table>
+				<CP.Bem prefix="wp-block-catpow">
+					<table className={classes}>
+						<tbody>
+							{rows.map((row, index) => {
+								return (
+									<CP.Item tag="tr" set={setAttributes} attr={attributes} items={rows} itemskey="rows" index={index} isSelected={isSelected} key={index}>
+										<th>
+											<RichText
+												onChange={(text) => {
+													row.cells[0].text = text;
+													saveItems();
+												}}
+												value={row.cells[0].text}
+											/>
+										</th>
+										<td>
+											<RichText
+												onChange={(text) => {
+													row.cells[1].text = text;
+													saveItems();
+												}}
+												value={row.cells[1].text}
+											/>
+										</td>
+									</CP.Item>
+								);
+							})}
+						</tbody>
+					</table>
+				</CP.Bem>
 			</>
 		);
 	},
@@ -163,22 +167,24 @@
 		const { RichText } = wp.blockEditor;
 		const { classes, rows } = attributes;
 		return (
-			<table className={classes}>
-				<tbody>
-					{rows.map((row, index) => {
-						return (
-							<tr className={row.classes} data-refine-cond={row.cond} key={index}>
-								<th className={row.cells[0].classes}>
-									<RichText.Content value={row.cells[0].text} />
-								</th>
-								<td className={row.cells[1].classes}>
-									<RichText.Content value={row.cells[1].text} />
-								</td>
-							</tr>
-						);
-					})}
-				</tbody>
-			</table>
+			<CP.Bem prefix="wp-block-catpow">
+				<table className={classes}>
+					<tbody>
+						{rows.map((row, index) => {
+							return (
+								<tr className={row.classes} data-refine-cond={row.cond} key={index}>
+									<th className={row.cells[0].classes}>
+										<RichText.Content value={row.cells[0].text} />
+									</th>
+									<td className={row.cells[1].classes}>
+										<RichText.Content value={row.cells[1].text} />
+									</td>
+								</tr>
+							);
+						})}
+					</tbody>
+				</table>
+			</CP.Bem>
 		);
 	},
 });

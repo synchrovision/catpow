@@ -1,10 +1,180 @@
-@import 'admin_style_config.scss';
+@import "admin_style_config.scss";
+@import "text-placeholders.scss";
 
-table.wp-block-catpow-simpletable{
-	tbody{
-		tr{
-			th,td{
-				white-space: pre-line;
+.wp-block-catpow-simpletable{
+	@extend %ui-block;
+	@include bnd((mgi:a,w:95% 960));
+	@include txt((f:p));
+	&>thead>tr,&>tbody>tr{
+		&>th,&>td{
+			@include bnd((pd:cpd));
+			@include txt((a:l,p:14,c:tx,v:m));
+		}
+		&>th{
+			@include bnd((p:r,w:160));
+			@include txt((h:2em));
+		}
+		&>td{
+			@include txt((h:2em));
+			&>img{
+				@include bnd((w:200,h:a));
+			}
+			span{
+				@include bnd((d:ib));
+			}
+		}
+	}
+	&.is-type-spec{
+		&>thead>tr,&>tbody>tr{
+			@include flx((w:w,ai:s));
+			@include bnd((mgb:10));
+			&>th,&>td{
+				@include bnd((d:b,pd:5 20,mg:10));
+				@include txt((a:l,c:tx));
+			}
+			&>th{
+				@include bnd((f:1 1 150,p:r,pdl:2em,o:h));
+				@include txt((a:j,v:t));
+				@include bg((c:tx 1 .1));
+				@include bdr((r:20));
+				&::before,&::after{
+					content:'';
+					@include bnd((d:b,p:a,t:-20,b:-20,w:30));
+					@include bg((c:mx));
+					@include trn((r:10deg));
+				}
+				&::before{
+					@include bnd((l:-20));
+				}
+				&::after{
+					@include bnd((r:-20));
+				}
+			}
+			&>td{
+				@include bnd((f:10 10 300));
+				@include txt((v:m));
+				&::after{
+					content:'';
+					@include bnd((d:b,w:f));
+				}
+				&>img{
+					@include bnd((w:240,h:a));
+				}
+				span{
+					@include bnd((d:ib));
+				}
+			}
+		}
+	}
+	&.is-type-info{
+		@include tbl(());
+		&>tbody tr{
+			&+tr{
+				th,td{
+					@include bdr((p:t,s:s,w:1,c:tx 1 .25));
+				}
+			}
+		}
+	}
+	&.is-type-history{
+		@include tbl(());
+		&>tbody>tr{
+			&>th{
+				@include bnd((p:r,w:120,pdr:2em));
+				@include bdr((p:r,s:s,w:1,c:mx 1 .25));
+				@include txt((a:r,v:t));
+				&::after{
+					content:'';
+					@include bnd((d:b,w:7,h:7,p:a,t:2em,r:-4));
+					@include bdr((r:7));
+					@include bg((c:mx));
+				}
+			}
+			&>td{
+				@include bnd((p:r,pdl:2em));
+			}
+		}
+	}
+	&.is-type-inputs{
+		@include tbl(());
+		@include bnd((mgi:a));
+		&>thead>tr,&>tbody>tr{
+			&>th,&>td{
+				@include bnd((pd:16 0));
+				@include txt((a:l,p:16,c:tx,v:m));
+				@include bdr((p:b,s:s,w:1,c:tx 1 .2));
+			}
+			&>th{
+				@include bnd((p:r,w:200));
+				@include txt((a:l,w:r));
+				i{
+					@include bnd((d:ib,w:15,mgr:15));
+					@include txt((a:c));
+				}
+			}
+			&>td{
+				textarea{
+					@include bnd((w:100%,bs:b,mg:0));
+				}
+				&>img{
+					@include bnd((w:200,h:a));
+				}
+				span{
+					@include bnd((d:ib));
+				}
+			}
+			&.disabled{
+				@include bnd((d:n));
+			}
+			&.required,&.recommended,&.optional,&.readonly{
+				&>th{
+					@include bnd((plr:40,p:r));
+					&::after{
+						@include bnd((d:ib,pd:.3em 1em,mgl:10,h:1em,bs:c));
+						@include txt((c:bx,p:10,h:1em,f:p,v:3));
+						@include bdr((r:1em));
+					}
+				}
+			}
+			&.required{
+				&>th::after{
+					content: '必須';
+					@include bg((c:1));
+				}
+			}
+			&.optional{
+				&>th::after{
+					content: '任意';
+					@include bg((c:8));
+				}
+			}
+			&.recommended{
+				&>th::after{
+					content: '推奨';
+					@include bg((c:4));
+				}
+			}
+			&.readonly{
+				&>th::after{
+					content: '固定';
+					@include bg((c:tx 50));
+				}
+			}
+		}
+		@include bp(-pc){
+			@include bnd((d:b));
+			&>thead,&>tbody{
+				@include bnd((d:b));
+				&>tr{
+					@include bnd((d:b));
+					&>th{
+						@include bnd((d:b,w:a,pdb:8,mg:0 a));
+						@include bdr((p:b,s:n));
+					}
+					&>td{
+						@include bnd((d:b,w:a,pdt:0,mg:0 a));
+					}
+				}
 			}
 		}
 	}
