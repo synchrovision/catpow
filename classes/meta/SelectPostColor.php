@@ -25,9 +25,7 @@ class SelectPostColor extends UI{
 			"AND (meta_value LIKE 'has-color%' OR meta_value LIKE 'has-tone%')",
 			$id
 		));
-		foreach($vals[0] as $val){
-			add_post_meta($id,'post_class',$val);
-		}
+		add_post_meta($id,'post_class',$vals[0]);
 	}
 	public static function output($meta,$prm){
 		$val=$meta->value;
