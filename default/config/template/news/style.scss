@@ -1,6 +1,9 @@
 @import "config/style_config.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
 
 .cp-news{
+	@extend %ui-block;
 	@include bnd((w:a 1000,mg:a,pd:20));
 	@include bp(sp){
 		@include bnd((pd:20 0));
@@ -27,16 +30,17 @@
 		>.items{
 			@include bnd((pd:20 0));
 			>.item{
-				@include bnd((pd:16 0));
+				@include bnd((pd:cpd,pdl:0,pdr:0));
 				@include flx((w:w,a:s,g:16));
 				@include bdr((p:b,s:s,w:1,c:t 1 .5));
 				>.label{
-					@include bnd((pd:6 3,mg:2 0,w:100));
+					@extend %label-component;
+					@include bnd((f:0 0 8em));
 					@include bg((c:var(--label-color)));
-					@include txt((a:c,p:12,h:1em,c:i));
+					@include txt((a:c,p:.8em,h:1em,c:i));
 				}
 				>.date{
-					@include bnd((f:0 0 120,pd:3 0));
+					@include bnd((f:0 0 8em,pd:3 0));
 					@include txt((p:.9em));
 				}
 				>.text{
