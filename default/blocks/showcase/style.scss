@@ -24,8 +24,8 @@
 			@include shd((b:4));
 			&-counter{
 				@extend %ui;
-				@extend %label-component;
-				@include bnd((w:fit,h:1em,pd:.5em 1em,mg:-2em a 1em));
+				@extend %header-component;
+				@include bnd((w:fit,h:1em,mg:-1em a .5em));
 				@include bg((c:m));
 				@include txt((a:c,p:1.5em,h:1em,t:.05em,c:i,w:b,f:d,b:k));
 				@include shd((b:2));
@@ -53,7 +53,7 @@
 				@extend %button-component;
 				@extend %ui;
 				@include bnd((d:b,w:fit,mg:1em a 0));
-				@include bdr((s:s,w:1));
+				@include bdr((s:s));
 				@include txt((s:n,c:mx));
 			}
 		}
