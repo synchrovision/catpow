@@ -16,6 +16,8 @@ class style_config{
 		$font_family_roles,
 		$font_weight_roles,
 		$font_size_roles,
+		$border_radius_roles,
+		$border_width_roles,
 		$line_height_roles,
 		$letter_spacing_roles,
 		$text_block_roles=[
@@ -92,13 +94,6 @@ class style_config{
 				'variants'=>self::$size_variants_3,'type'=>'sizeRelative',
 				'group'=>'contentsSize',
 				'defaultValues'=>['10em','15em','20em']
-			],
-			'radius'=>[
-				'label'=>'角丸',
-				'shorthand'=>'r',
-				'variants'=>self::$component_variants,'type'=>'radiusRelative',
-				'group'=>'borderRadius',
-				'defaultValues'=>['1em','1em','1em','1em','1em','1em','1em']
 			],
 			'spread'=>[
 				'label'=>'余白',
@@ -234,6 +229,28 @@ class style_config{
 			$relative_size_roles
 		));
 	}
+	public static function get_border_width_roles(){
+		if(isset(static::$border_width_roles)){return static::$border_width_roles;}
+		return static::$border_width_roles=apply_filters('cp_border_width_roles',[
+			'component'=>[
+				'label'=>'コンポーネント',
+				'shorthand'=>'c',
+				'variants'=>self::$component_variants,
+				'defaultValues'=>array_pad([],7,(1/8).'rem')
+			],
+		]);
+	}
+	public static function get_border_radius_roles(){
+		if(isset(static::$border_radius_roles)){return static::$border_radius_roles;}
+		return static::$border_radius_roles=apply_filters('cp_border_radius_roles',[
+			'component'=>[
+				'label'=>'コンポーネント',
+				'shorthand'=>'c',
+				'variants'=>self::$component_variants,
+				'defaultValues'=>['1em','1em','1em','1em','1em','1em','1em']
+			],
+		]);
+	}
 	public static function get_line_height_roles(){
 		if(isset(static::$line_height_roles)){return static::$line_height_roles;}
 		return static::$line_height_roles=apply_filters('cp_line_height_roles',self::generate_text_block_roles("150%"));
@@ -331,6 +348,8 @@ class style_config{
 			'font-family'=>self::get_config_json('font_family'),
 			'font-weight'=>self::get_config_json('font_weight'),
 			'font-size'=>self::get_config_json('font_size'),
+			'border-radius'=>self::get_config_json('border_radius'),
+			'border-width'=>self::get_config_json('border_width'),
 			'line-height'=>self::get_config_json('line_height'),
 			'letter-spacing'=>self::get_config_json('letter_spacing'),
 		]);
@@ -459,6 +478,14 @@ class style_config{
 		static::set_config_json('font_size',array_merge(
 			array_column(static::get_font_size_roles(),'default','shorthand'),
 			static::get_config_json('font_size')
+		));
+		static::set_config_json('border_radius',array_merge(
+			array_column(static::get_border_radius_roles(),'default','shorthand'),
+			static::get_config_json('border_radius')
+		));
+		static::set_config_json('border_width',array_merge(
+			array_column(static::get_border_width_roles(),'default','shorthand'),
+			static::get_config_json('border_width')
 		));
 		static::set_config_json('size',array_merge(
 			array_column(static::get_size_roles(),'default','shorthand'),

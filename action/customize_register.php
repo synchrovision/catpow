@@ -110,3 +110,36 @@ $wp_customize->add_control(new Catpow\customize\control($wp_customize,'font_fami
 	]
 ]));
 add_action("customize_save_font_family",["Catpow\\util\\style_config",'update']);
+
+
+//Border Radius
+$wp_customize->add_section('border',[
+	'title'=>__('線','catpow'),
+	'priority'=>40
+]);
+$wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'border_radius',[
+	'transport'=>'postMessage'
+]));
+$wp_customize->add_control(new Catpow\customize\control($wp_customize,'border_radius',[
+	'type'=>'BorderRadius',
+	'section'=>'border',
+	'label'=>'角丸',
+	'param'=>[
+		'roles'=>style_config::get_border_radius_roles()
+	]
+]));
+add_action("customize_save_border_radius",["Catpow\\util\\style_config",'update']);
+
+//Border Width
+$wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'border_width',[
+	'transport'=>'postMessage'
+]));
+$wp_customize->add_control(new Catpow\customize\control($wp_customize,'border_width',[
+	'type'=>'BorderWidth',
+	'section'=>'border',
+	'label'=>'線の太さ',
+	'param'=>[
+		'roles'=>style_config::get_border_width_roles()
+	]
+]));
+add_action("customize_save_border_width",["Catpow\\util\\style_config",'update']);

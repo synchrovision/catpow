@@ -50,6 +50,20 @@ add_action('wp_head',function(){
 				});
 			});
 		});
+		wp.customize('border_width',function(setting){
+			setting.bind(function(borderWidth){
+				Object.keys(borderWidth).forEach((role)=>{
+					rootStyle.setProperty('--cp-border-width-'+role,borderWidth[role]);
+				});
+			});
+		});
+		wp.customize('border_radius',function(setting){
+			setting.bind(function(borderRadius){
+				Object.keys(borderRadius).forEach((role)=>{
+					rootStyle.setProperty('--cp-border-radius-'+role,borderRadius[role]);
+				});
+			});
+		});
 		wp.customize('line_height',function(setting){
 			setting.bind(function(lineHeights){
 				Object.keys(lineHeights).forEach((role)=>{
