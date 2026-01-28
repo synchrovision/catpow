@@ -6,13 +6,8 @@
 @import "color-variants.scss";
 
 html{
-	@include txt((c:tx,f:t));
-	@include bp(-960){
-		@include txt((p:2vw));
-	}
-	@include bp(-720){
-		@include txt((p:3vw));
-	}
+	@include bnd((sb:s));
+	@include txt((c:tx,f:p));
 	@include bp(-480){
 		@include txt((p:4vw));
 	}
@@ -24,13 +19,13 @@ html{
 	&-message{
 		@include bnd((mg:10,pd:20));
 		@include bdr((c:tx 15,w:3,s:s,r:10));
-		@include txt((c:tx 15,a:c,s:b,p:18,h:18));
+		@include txt((c:tx 15,a:c,s:b,p:18,h:1em));
 	}
 	&-caution{
 		@include bnd((mg:10,pd:20));
 		@include bg((c:mx 50));
 		@include bdr((r:10));
-		@include txt((c:bx,a:c,s:b,p:15,h:15));
+		@include txt((c:bx,a:c,s:b,p:15,h:1em));
 	}
 	&-meta-item{
 		@include bnd((p:r));
@@ -149,7 +144,7 @@ html{
 		span{
 			&.checkbox,&.radio{
 				@include bnd((d:ib,pd:10));
-				@include txt((p:16,f:t,h:1em,c:tx 40));
+				@include txt((p:16,f:p,h:1em,c:tx 40));
 				@include usr((c:p));
 				&>.label{
 					@include bnd((d:b,pd:10));
@@ -342,7 +337,7 @@ table{
 						@include bnd((d:ib,pd:2 5,mgl:5));
 						@include bg((c:a));
 						@include bdr((r:3));
-						@include txt((c:b,p:10,h:10,f:t,s:b,v:3px));
+						@include txt((c:b,p:10,h:1em,f:p,s:b,v:3px));
 					}
 				}
 			}
@@ -489,10 +484,10 @@ del{
 		}
 	}
 	&-tel{
-		@include txt((p:1.5em,f:d,w:b,c:m));
+		@include txt((p:1.5em,f:dc,w:b,c:m));
 	}
 	&-mailto{
-		@include txt((p:1.5em,f:d,w:b,c:m));
+		@include txt((p:1.5em,f:dc,w:b,c:m));
 	}
 	&-listed{
 		@include grd((tc:a 1fr,g:.5em));
@@ -564,7 +559,7 @@ del{
 				@include bnd((d:b,p:a,t:.4em,l:0,w:.4em,h:.4em));
 				@include bdr((r:50%));
 				@include bg((c:mx));
-				@include txt((p:1.1em,w:b,f:d,c:mx));
+				@include txt((p:1.1em,w:b,f:dc,c:mx));
 			}
 		}
 		&.is-level-1{
@@ -587,7 +582,7 @@ del{
 			&::before{
 				@include cnt((i:rtf-ol,c:n '.'));
 				@include bnd((d:b,p:a,l:0,t:0));
-				@include txt((p:1.1em,w:b,f:d,c:mx));
+				@include txt((p:1.1em,w:b,f:dc,c:mx));
 			}
 		}
 	}
@@ -608,88 +603,5 @@ del{
 	}
 	&-strongest{
 		@include txt((p:1.5em,w:bx,c:a));
-	}
-}
-.buttons{
-	@include flx((w:w,j:c,a:c));
-	@include bnd((pd:1em 0));
-	.item{
-		@include bnd((f:0 0 12em,pd:.25em,mg:0));
-		@include txt((l:n));
-		.button{
-			@include bnd((d:b,p:r,pd:1em));
-			@include bdr((s:n,r:2em));
-			@include bg((c:m));
-			@include txt((a:c,c:m,f:t,w:b,s:n,p:1em,td:n));
-			@include shd((bvo:3,tbv:1));
-			&::before{
-				content:'';
-				@include bnd((d:b,p:a,t:.25em,b:.25em,l:.25em,r:.25em));
-				@include bdr((s:s,w:2,c:m,r:1.8em));
-			}
-		}
-		&.hasIcon .button{
-			@include bnd((pd:1em 1em 1em 3em));
-			.icon{
-				@include bnd((p:a,w:1.8em,h:1.8em,t:0,b:0,l:1em,mg:a));
-				svg{
-					@include svg((f:m));
-				}
-				img{
-					@include bnd((d:b,w:f,h:a));
-				}
-			}
-		}
-		&.primary{
-			.button{
-				@include txt((c:b));
-				&::before{
-					@include bdr((c:b));
-				}
-				.icon{
-					svg{
-						@include svg((f:b));
-					}
-				}
-			}
-		}
-		&.default,&.secondary{
-			.button{
-				@include bg((c:n));
-			}
-		}
-		&.negative{
-			@include trn((gry:100%,o:.5));
-			.button{
-				@include bg((c:n));
-			}
-		}
-		&.secure{
-			.button{
-				@include bg((c:n));
-				&::before{
-					@include bdr((s:w,w:6));
-				}
-			}
-		}
-		&.danger{
-			.button{
-				@include bg((c:n));
-				&::before{
-				}
-			}
-		}
-	}
-	&.l{
-		@include txt((p:24));
-	}
-	&.m{
-		@include txt((p:18));
-	}
-	&.s{
-		@include txt((p:12));
-	}
-	&.ss{
-		@include txt((p:10));
 	}
 }
