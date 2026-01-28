@@ -48,13 +48,13 @@ class style_config{
 			6=>'Level6',
 		],
 		$component_variants=[
-			'f'=>'Frame',
-			'h'=>'Header',
-			'c'=>'Card',
-			'b'=>'Button',
-			'l'=>'Label',
-			't'=>'Tab',
-			'i'=>'Input',
+			'f'=>'枠',
+			'h'=>'帯',
+			'c'=>'カード',
+			'b'=>'ボタン',
+			'l'=>'ラベル',
+			't'=>'タブ',
+			'i'=>'入力',
 		],
 		$cache=[];
 
