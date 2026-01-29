@@ -54,7 +54,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 									prm.effect(val, states, props);
 								}
 							}}
-						/>
+						/>,
 					);
 					break;
 				}
@@ -87,7 +87,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 							sizes={prm.sizes}
 							devices={prm.devices}
 							isTemplate={prm.isTemplate}
-						/>
+						/>,
 					);
 					break;
 				}
@@ -109,7 +109,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 								}}
 								checked={value & prm.values[key]}
 								key={key}
-							/>
+							/>,
 						);
 					});
 					break;
@@ -124,7 +124,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 							onChangeComplete={(value) => {
 								CP.setJsonValue(props, prm.json, prm.key, value.hex);
 							}}
-						/>
+						/>,
 					);
 					break;
 				}
@@ -143,7 +143,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 							onChange={(colors) => {
 								CP.setJsonValue(props, prm.json, prm.key, colors);
 							}}
-						/>
+						/>,
 					);
 					break;
 				}
@@ -156,7 +156,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 							onChange={(value) => {
 								console.log(CP.parseGradientStyleValue(value));
 							}}
-						/>
+						/>,
 					);
 					break;
 				}
@@ -200,7 +200,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 						CP.setJsonValue(props, prm.json, prm.key, val);
 					}}
 					options={options}
-				/>
+				/>,
 			);
 			if (prm.sub) {
 				let currentValue = CP.getJsonValue(props, prm.json, prm.key);
@@ -220,7 +220,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 						CP.switchJsonValue(props, prm.json, prm.key, prm.values);
 					}}
 					checked={CP.hasJsonValue(props, prm.json, prm.key, prm.values)}
-				/>
+				/>,
 			);
 			if (prm.sub) {
 				if (CP.getJsonValue(props, prm.json, prm.key)) {
@@ -239,7 +239,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					onChange={(val) => {
 						CP.setJsonValue(props, prm.json, prm.key, val);
 					}}
-				/>
+				/>,
 			);
 		}
 	} else if (prm.css) {
@@ -267,7 +267,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 								tgt.borderImage = "url(" + image.url + ") fill " + slice + " / " + width + " " + repeat;
 								saveCss(prm.css);
 							}}
-						/>
+						/>,
 					);
 					break;
 				case "pattern":
@@ -301,7 +301,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 								}
 								saveCss(prm.css);
 							}}
-						/>
+						/>,
 					);
 					break;
 				case "frame":
@@ -324,7 +324,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 								});
 								saveCss(prm.css);
 							}}
-						/>
+						/>,
 					);
 					break;
 			}
@@ -337,7 +337,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 						tgt[prm.attr] = val;
 						saveCss(prm.css);
 					}}
-				/>
+				/>,
 			);
 		}
 	} else if (prm.vars) {
@@ -373,7 +373,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 									},
 								});
 							}}
-						/>
+						/>,
 					);
 					break;
 				}
@@ -392,7 +392,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 								});
 								save({ [prm.vars]: newVars });
 							}}
-						/>
+						/>,
 					);
 					break;
 				}
@@ -409,7 +409,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 									},
 								});
 							}}
-						/>
+						/>,
 					);
 					break;
 				}
@@ -426,7 +426,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 								});
 							}}
 							keys={{ url: prm.key }}
-						/>
+						/>,
 					);
 					break;
 				}
@@ -444,7 +444,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 							}}
 							keys={prm.keys}
 							prefix={prm.prefix}
-						/>
+						/>,
 					);
 					break;
 				}
@@ -461,7 +461,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 									},
 								});
 							}}
-						/>
+						/>,
 					);
 					break;
 				}
@@ -478,7 +478,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 									},
 								});
 							}}
-						/>
+						/>,
 					);
 					break;
 				}
@@ -493,7 +493,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 							[prm.vars]: { ...props.attr[prm.vars], [prm.key]: `${val}` },
 						});
 					}}
-				/>
+				/>,
 			);
 		}
 	} else {
@@ -508,7 +508,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 						}
 						saveClasses();
 					}}
-				/>
+				/>,
 			);
 		} else if (prm === "pattern") {
 			/**
@@ -525,7 +525,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 						states[pattern] = true;
 						saveClasses();
 					}}
-				/>
+				/>,
 			);
 		} else if (prm === "cond") {
 			rtn.push(<TextareaControl label={__("表示条件", "catpow")} value={item["cond"]} onChange={(cond) => save({ cond })} />);
@@ -557,7 +557,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 									prm.effect(val, states, props);
 								}
 							}}
-						/>
+						/>,
 					);
 					break;
 				}
@@ -578,7 +578,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 									prm.effect(val, states, props);
 								}
 							}}
-						/>
+						/>,
 					);
 					break;
 				}
@@ -597,7 +597,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 							device={prm.device}
 							devices={prm.devices}
 							isTemplate={prm.isTemplate}
-						/>
+						/>,
 					);
 					break;
 				}
@@ -647,7 +647,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 									[prm.keys.alt]: image.alt,
 								});
 							}}
-						/>
+						/>,
 					);
 					break;
 				}
@@ -673,7 +673,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 									prm.effect(val, states, props);
 								}
 							}}
-						/>
+						/>,
 					);
 					break;
 				}
@@ -751,7 +751,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 							sub.push(
 								<Fragment key={index}>
 									<SelectClassPanelBlock prm={prm} />
-								</Fragment>
+								</Fragment>,
 							);
 						});
 						rtn.push(<div className="sub">{sub}</div>);
@@ -786,7 +786,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 							sub.push(
 								<Fragment key={index}>
 									<SelectClassPanelBlock prm={prm} />
-								</Fragment>
+								</Fragment>,
 							);
 						});
 						rtn.push(<div className="sub">{sub}</div>);
