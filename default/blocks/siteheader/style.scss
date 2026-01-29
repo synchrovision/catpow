@@ -11,6 +11,9 @@
 	@include bnd((p:s,t:var(--wp-admin--admin-bar--height,0),w:f,l:0,z:3000));
 	@include bg((c:b));
 	@include shd((b:5));
+	@include bp(-782){
+		@include bnd((t:0));
+	}
 	&__contents{
 		@include bg((c:b));
 		&-logo{
@@ -39,7 +42,7 @@
 		@include usr((c:p));
 		&::before{
 			content:'';
-			@include bnd((d:b,p:a,i:0,mg:a,w:20,h:16));
+			@include bnd((d:b,p:a,i:0,mg:a,w:12,h:8));
 			@include bg((c:i));
 			@include clp((c:t 30 20));
 		}
@@ -89,11 +92,33 @@
 		}
 		&__menu{
 			@include bnd((d:b,p:a,l:0,w:f,h:a 100vh,z:1));
-			@include trn((t:1s,o:0));
+			@include bg((c:b));
+			@include shd((b:8));
+			@include trn((t:.4s,o:0));
 			@include usr((e:n));
+			&-item{
+				@include bdr((p:b,s:s,w:1,c:shd));
+				&-link{
+					@extend %button-component;
+					@extend %ui;
+					@include bnd((d:b));
+					@include txt((p:18,c:t));
+				}
+			}
 		}
 		&__primary{
 			@include bnd((p:f,b:0,l:0));
+			@include flx((w:n,j:a,a:c));
+			@include txt((l:n));
+			&-item{
+				&-link{
+					@extend %button-component;
+					@extend %ui;
+					@include bdr((br:0));
+					@include bg((c:m));
+					@include txt((p:18,c:i));
+				}
+			}
 		}
 		&::after{
 			content: ' ';
@@ -121,16 +146,10 @@
 				&__menu{
 					@include trn((o:1));
 					@include usr((e:a));
-					ul.sub-menu{
-						@include usr((e:n));
-						&.active,&.ancestor{
-							@include usr((e:a));
-						}
-					}
 				}
 			}
 			&::after{
-				@include trn((o:.8));
+				@include trn((o:.6));
 			}
 		}
 	}
