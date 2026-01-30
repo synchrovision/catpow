@@ -6,7 +6,7 @@
 	$block:&;
 	$row:$block + '__tbody-tr';
 	@extend %ui-block;
-	@include bnd((mgi:a,w:f));
+	@include bnd((mgi:a));
 	&__thead,&__tbody{
 		&-tr{
 			&-th,&-td{
