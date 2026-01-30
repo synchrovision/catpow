@@ -90,9 +90,9 @@
 								type: "buttons",
 								label: "種別",
 								values: {
-									normal: "なし",
-									important: "重要",
-									caution: "注意",
+									isNormal: "なし",
+									isImportant: "重要",
+									isCaution: "注意",
 								},
 							},
 						],
@@ -102,11 +102,11 @@
 								label: "種別",
 								type: "buttons",
 								values: {
-									normal: "なし",
-									required: "必須",
-									recommended: "推奨",
-									optional: "任意",
-									readonly: "固定",
+									isNormal: "なし",
+									isRequired: "必須",
+									isRecommended: "推奨",
+									isOptional: "任意",
+									isReadonly: "固定",
 								},
 							},
 							"cond",
@@ -134,25 +134,25 @@
 						<tbody>
 							{rows.map((row, index) => {
 								return (
-									<CP.Item tag="tr" set={setAttributes} attr={attributes} items={rows} itemskey="rows" index={index} isSelected={isSelected} key={index}>
-										<th>
-											<RichText
-												onChange={(text) => {
-													row.cells[0].text = text;
-													saveItems();
-												}}
-												value={row.cells[0].text}
-											/>
-										</th>
-										<td>
-											<RichText
-												onChange={(text) => {
-													row.cells[1].text = text;
-													saveItems();
-												}}
-												value={row.cells[1].text}
-											/>
-										</td>
+									<CP.Item tag="tr" className={row.classes} set={setAttributes} attr={attributes} items={rows} itemskey="rows" index={index} isSelected={isSelected} key={index}>
+										<RichText
+											tagName="th"
+											className="_th"
+											onChange={(text) => {
+												row.cells[0].text = text;
+												saveItems();
+											}}
+											value={row.cells[0].text}
+										/>
+										<RichText
+											tagName="td"
+											className="_td"
+											onChange={(text) => {
+												row.cells[1].text = text;
+												saveItems();
+											}}
+											value={row.cells[1].text}
+										/>
 									</CP.Item>
 								);
 							})}
