@@ -9,15 +9,22 @@
 		@include bnd((pd:20 0));
 	}
 	>.tabs{
-		@include bnd((pd:0,mg:0));
+		@include bnd((pd:0,mg:0,o:h));
 		@include flx((w:n));
 		@include txt((l:n));
 		>.tab{
+			@extend %tab-component;
 			@include bnd((f:1 1 100,pd:8 0));
 			@include txt((a:c,p:16,h:1em,c:i));
 			@include trn((t:.25s));
 			@include bg((c:var(--label-color)));
 			@include usr((c:p));
+			&:not(:first-child){
+				@include bdr((lr:0));
+			}
+			&:not(:last-child){
+				@include bdr((rr:0));
+			}
 			&.is-tab-all{
 				--label-color:#{clr(a)};
 			}
@@ -30,14 +37,14 @@
 		>.items{
 			@include bnd((pd:20 0));
 			>.item{
-				@include bnd((pd:cpd,pdl:0,pdr:0));
+				@include bnd((pd:sp-c,pdi:0));
 				@include flx((w:w,a:s,g:16));
 				@include bdr((p:b,s:s,w:1,c:t 1 .5));
 				>.label{
 					@extend %label-component;
 					@include bnd((f:0 0 8em));
 					@include bg((c:var(--label-color)));
-					@include txt((a:c,p:.8em,h:1em,c:i));
+					@include txt((a:c,whs:nw,p:.8em,h:1em,c:i));
 				}
 				>.date{
 					@include bnd((f:0 0 8em,pd:3 0));
