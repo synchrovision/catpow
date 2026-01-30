@@ -160,7 +160,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 				item.controlClasses = "control";
 			}
 			rtn.push(
-				<CP.Item tag="li" className="_item" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+				<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
 					<div className="_image">
 						<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="full" isTemplate={states.isTemplate} />
 					</div>
