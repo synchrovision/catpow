@@ -10,7 +10,7 @@ $attributes=[
 		"source"=>"query",
 		"selector"=>".{$block_class}__item",
 		"filters"=>[
-			"eventDispatcher"=>["selector"=>".{$block_class}__item-link"]
+			"eventDispatcher"=>["selector"=>".{$block_class}__item-texts-link"]
 		],
 		"query"=>[
 			"classes"=>["source"=>"attribute","attribute"=>"class"],
