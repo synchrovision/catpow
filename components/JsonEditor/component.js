@@ -1503,6 +1503,58 @@
     })));
   };
 
+  // node_modules-included/catpow/src/component/Input/PositionInput.jsx
+  init_react();
+  var PositionInput = (props) => {
+    const {
+      className = "cp-positioninput",
+      width = 100,
+      height = 100,
+      margin = 10,
+      grid = 10,
+      snap = false,
+      value: { x = 50, y = 50 },
+      r: r2 = 6,
+      onChange,
+      ...otherProps
+    } = props;
+    const [ref, state] = useScratch_default();
+    const [pos, setPos] = useState({ x, y });
+    useThrottle(() => onChange({ x: pos.x, y: pos.y }), 50, [pos.x, pos.y]);
+    useEffect(() => {
+      if (!state.isScratching) {
+        return;
+      }
+      let x2 = parseInt(Math.max(0, Math.min(state.x + state.dx - margin, width)));
+      let y2 = parseInt(Math.max(0, Math.min(state.y + state.dy - margin, height)));
+      if (isNaN(x2) || isNaN(y2)) {
+        return;
+      }
+      if (snap) {
+        x2 = Math.round(x2 / grid) * grid;
+        y2 = Math.round(y2 / grid) * grid;
+      }
+      setPos({ x: x2, y: y2 });
+    }, [state.dx, state.dy]);
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement(
+      "svg",
+      {
+        className,
+        width: width + margin * 2,
+        height: height + margin * 2,
+        viewBox: `0 0 ${width + margin * 2} ${height + margin * 2}`,
+        xmlns: "http://www.w3.org/2000/svg",
+        ref,
+        style: { cursor: state.isScratching ? "grabbing" : "grab" },
+        ...otherProps
+      },
+      /* @__PURE__ */ wp.element.createElement("rect", { className: "_bg", x: margin, y: margin, width, height, fill: "none", stroke: "currentColor", strokeOpacity: 0.5 }),
+      /* @__PURE__ */ wp.element.createElement("circle", { fill: "none", stroke: "currentColor", strokeOpacity: 0.75, className: "_circle", cx: pos.x + margin, cy: pos.y + margin, r: r2 }),
+      /* @__PURE__ */ wp.element.createElement("circle", { fill: "currentColor", className: "_dot", cx: pos.x + margin, cy: pos.y + margin, r: 2 }),
+      grid > 0 && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, Array.from({ length: Math.floor(width / grid) }, (_, i2) => /* @__PURE__ */ wp.element.createElement("line", { key: i2, stroke: "currentColor", strokeOpacity: 0.1, className: "_grid", x1: i2 * grid + margin, y1: margin, x2: i2 * grid + margin, y2: height + margin })), Array.from({ length: Math.floor(height / grid) }, (_, i2) => /* @__PURE__ */ wp.element.createElement("line", { key: i2, stroke: "currentColor", strokeOpacity: 0.1, className: "_grid", x1: margin, y1: i2 * grid + margin, x2: width + margin, y2: i2 * grid + margin })), /* @__PURE__ */ wp.element.createElement("line", { stroke: "currentColor", strokeOpacity: 0.2, className: "_grid is-center", x1: width / 2 + margin, y1: margin, x2: width / 2 + margin, y2: height + margin }), /* @__PURE__ */ wp.element.createElement("line", { stroke: "currentColor", strokeOpacity: 0.2, className: "_grid is-center", x1: margin, y1: height / 2 + margin, x2: width + margin, y2: height / 2 + margin }))
+    ));
+  };
+
   // node_modules-included/catpow/src/component/Input/RadioButtons.jsx
   init_react();
   var RadioButtons = (props) => {
@@ -2060,6 +2112,7 @@
     None: () => None,
     Number: () => Number2,
     ObjectInput: () => ObjectInput,
+    Position: () => Position,
     Radio: () => Radio,
     Range: () => Range,
     ReadOnly: () => ReadOnly,
@@ -2349,6 +2402,13 @@
     const { className = "cp-jsoneditor-input-toggle", agent, onUpdate } = props;
     const { multipleOf: step = 15 } = agent.getMergedSchemaForInput();
     return /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement(AngleInput, { value: agent.getValue(), step, onChange: onUpdate }));
+  };
+
+  // node_modules-included/catpow/src/component/JsonEditor/inputComponents/Position.jsx
+  var Position = (props) => {
+    const { className = "cp-jsoneditor-input-toggle", agent, onUpdate } = props;
+    const { width = 100, height = 100, margin = 10, grid = 10, snap = true } = agent.getMergedSchemaForInput();
+    return /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement(PositionInput, { value: agent.getValue(), width, height, margin, grid, snap, onChange: onUpdate }));
   };
 
   // node_modules-included/catpow/src/component/JsonEditor/inputComponents/ArrayInput.jsx
@@ -4283,6 +4343,6 @@
   JsonEditor.Input = Input;
   JsonEditor.DataContext = DataContext;
 
-  // ../components/JsonEditor/component/index.jsx
+  // ../components/JsonEditor/component.jsx
   window.Catpow.JsonEditor = JsonEditor;
 })();
