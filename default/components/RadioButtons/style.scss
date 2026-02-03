@@ -1,7 +1,7 @@
 @import 'admin_style_config.scss';
 
 .cp-radiobuttons{
-	&-button{
+	&__button{
 		@include bnd((d:ib,p:r,pd:.5em 1em,mg:.5em,pdl:2.5em));
 		@include bdr((r:1em));
 		@include txt((h:1em,c:t 40));
