@@ -1,0 +1,134 @@
+@import "admin_style_config.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
+
+.wp-block-catpow-faq{
+	$block:&;
+	$item:$block + __item;
+	@include grd((tc:1fr,g:g));
+	@include txt((l:n,c:tx));
+	&__item{
+		@include bnd((p:r,bs:b));
+		&-header{
+			@extend %header-component;
+			@extend %heading;
+			@include bnd((p:r,pdi:0,pdt:0,bs:b));
+			@include flx((w:w,g:g));
+			@include bdr((p:b,s:s,w:c-h,r:0,c:tx 1 .5));
+			@include usr((c:p));
+			#{$block}:not(.has-counter) &{
+				&::before{
+					content: 'Q';
+					@include bnd((d:b));
+					@include txt((a:c,p:1.5em,h:1em,f:dc,c:mx));
+				}
+			}
+			&-counter{
+				@include txt((p:2em,f:dc,c:mx));
+				&-prefix,&-suffix{
+					@include bnd((d:ib));
+					@include txt((h:1em));
+				}
+				&-prefix{
+					@include bnd((mgr:5));
+				}
+				&-suffix{
+					@include bnd((mgl:5));
+				}
+				&-number{
+					
+				}
+			}
+			&-image{
+				@include bnd((f:0 0 3em));
+				img{
+					@include bnd((w:f,h:a));
+					@include txt((v:m));
+				}
+			}
+			&-text{
+				&-title{
+					@extend %heading;
+					@include bnd((mg:0));
+				}
+				&-caption{
+					@extend %caption-block;
+					@extend %caption;
+					@include bnd((mgb:0));
+				}
+			}
+		}
+		&-contents{
+			&-body{
+				@include bnd((p:r,pd:32 20 32 70));
+				&::before{
+					@extend %heading;
+					content: 'A';
+					@include txt((f:dc));
+					@include bnd((p:a,t:28,l:20));
+				}
+				&-image{
+					@include bnd((pd:10 20,bs:b,f:1 1 160));
+					img{@include bnd((w:f,h:a));}
+				}
+				&-subtitle{
+					@extend %lead-block;
+					@extend %lead;
+					@include bnd((mgt:0));
+				}
+				&-text{
+					@extend %paragraph;
+				}
+			}
+		}
+	}
+	&.is-accordion{
+		#{$block}{
+			&__item{
+				&-header{
+					&-button{
+						@include bnd((d:b,p:a,i:0,mg:a,mgr:0,h:1em,w:1em));
+						@include txt((p:xlg,h:1em,c:mx));
+						@include bg((c:n));
+						@include bdr((s:n));
+						@include usr((c:p));
+						&::before,&::after{
+							content: '';
+							@include bnd((d:b,p:a,i:0,mg:a,w:f,h:bw(c-b)));
+							@include bg((c:tx));
+							@include trn((t:.4s));
+						}
+						&::before{
+							@include trn((r:270deg));
+						}
+						&::after{
+							@include trn((r:180deg));
+						}
+					}
+				}
+				&-contents{
+					@include bnd((h:var(--contents-height,auto),o:h));
+					@include trn((t:.4s));
+				}
+				&:not(.is-open){
+					#{$item}{
+						&-contents{
+							@include bnd((h:0));
+						}
+					}
+				}
+				&.is-open{
+					#{$item}{
+						&-header{
+							&-button{
+								&::before,&:after{
+									@include trn((r:360deg));
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
