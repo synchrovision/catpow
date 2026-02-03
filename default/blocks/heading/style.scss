@@ -1,51 +1,53 @@
 @import "admin_style_config.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
 
-.wp-block-heading{
+h1,h2,h3,h4,h5,h6{
 	&.is-style-header{
-		@include bnd((pd:0,mg:1em a,w:a 960));
-		@include txt((c:tx,w:b,h:1.5em));
+		@extend %header-component;
 	}
 	&.is-style-headline{
-		@include bnd((mg:1.5em a,w:a 960));
-		@include txt((c:tx,w:l,h:1.5em));
+		@include bnd((pd:sp-h,pdi:0,pdt:0));
+		@include bdr((p:b,s:s,w:c-h,c:tx 1 .5));
+		@include txt((c:tx));
+		&::after{
+			content:'';
+			@include bnd((d:b,p:a,l:0,t:f,w:6em,h:bw(c-h)));
+			@include bg((c:a));
+		}
 	}
 	&.is-style-catch{
-		@include bnd((mg:1.5em a,w:a 960));
-		@include txt((c:mx,w:l,h:2em));
+		@include txt((c:mx));
 	}
-	&.is-style-header,&.is-style-headline,&.is-style-catch{
-		&:first-child{@include bnd((mgt:0));}
+	&.is-style-header,
+	&.is-style-headline,
+	&.is-style-catch{
+		@extend %heading-block;
+		@extend %heading;
+		@include bnd((p:r));
 	}
 }
-
-h1.is-style-header{
-	@include bnd((pd:10 0));
-	@include bdr((p:t b,s:s,w:2,c:mx));
+h1,h2,h3{
+	&.is-style-header{
+		@include bg((c:mx));
+		@include txt((c:ix));
+	}
 }
-h2.is-style-header{
-	@include bdr((p:b,s:s,w:2,c:mx));
-}
-h3.is-style-header{
-	@include bdr((p:b,s:d,w:3,c:mx));
-}
-h4.is-style-header{
-	@include bnd((pdl:1em));
-	@include bdr((p:l,s:s,w:.5em,c:mx));
-}
-h5.is-style-header{
-	@include bdr((p:b,s:s,w:1,c:tx 1 .5));
-}
-h6.is-style-header{
-	@include bdr((p:b,s:d,w:1,c:tx 1 .5));
+h4,h5,h6{
+	&.is-style-header{
+		@include bg((c:sx));
+		@include txt((c:tx));
+	}
 }
 
 @for $i from 1 through 6{
 	h#{$i}{
-		&.is-style-header,&.is-style-headline{
-			@include txt((p:10 + 72 / $i));
-		}
+		&.is-style-header,
+		&.is-style-headline,
 		&.is-style-catch{
-			@include txt((p:70 - 10 * $i));
+			--cp-heading-margin-top:var(--cp-size-hmgt-#{$i});
+			--cp-heading-margin-bottom:var(--cp-size-hmgb-#{$i});
+			@include txt((p:h- + $i));
 		}
 	}
 }
