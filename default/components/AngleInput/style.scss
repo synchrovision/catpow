@@ -1,0 +1,19 @@
+@import 'admin_style_config.scss';
+
+
+.cp-angleinput{
+	&__circle{
+		@include bnd((p:r,w:4em,h:4em,mgi:a,o:h));
+		@include bdr((r:50%));
+		@include bg((c:sh));
+		@include shd((b:-2));
+		@include usr((c:p));
+		&-handler{
+			@include bnd((d:b,p:a,t:0em,l:0,r:0,mgi:a,w:.5em,h:2em));
+			@include bg((c:b));
+			@include bdr((r:.25em));
+			@include trn((to:50% 100%,r:calc(var(--angle,0) * 1deg)));
+			@include shd((b:2));
+		}
+	}
+}
