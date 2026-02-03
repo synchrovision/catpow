@@ -138,6 +138,9 @@
 .wp-block-catpow-faq__item-contents-body-subtitle {
   margin-top: 0rem;
 }
+.wp-block-catpow-faq__item-contents-body-text:first-child {
+  margin-top: 0rem;
+}
 .wp-block-catpow-faq.is-accordion .wp-block-catpow-faq__item-header-button {
   display: block;
   position: absolute;

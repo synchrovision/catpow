@@ -78,6 +78,7 @@
 				}
 				&-text{
 					@extend %paragraph;
+					&:first-child{@include bnd((mgt:0));}
 				}
 			}
 		}
