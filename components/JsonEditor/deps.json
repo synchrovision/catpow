@@ -1,6 +1,7 @@
 {
 	"script": ["catpow.schema"],
 	"component": [
+		"AngleInput",
 		"InputDateTime",
 		"InputDuration",
 		"InputTextItems",

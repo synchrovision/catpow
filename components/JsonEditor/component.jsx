@@ -5,7 +5,6 @@
  * いくつかのCatpow独自の拡張を備えています
  */
 
-import { JsonEditor, DataContext } from "./JsonEditor.jsx";
+import { JsonEditor } from "catpow/component";
 
 window.Catpow.JsonEditor = JsonEditor;
-JsonEditor.DataContext = DataContext;
