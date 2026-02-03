@@ -1710,7 +1710,18 @@
   // node_modules-included/catpow/src/component/Input/PositionInput.jsx
   init_react();
   var PositionInput = (props) => {
-    const { className = "cp-positioninput", width = 100, height = 100, margin = 10, grid = 10, snap = false, x = 50, y = 50, r: r2 = 6, onChange, ...otherProps } = props;
+    const {
+      className = "cp-positioninput",
+      width = 100,
+      height = 100,
+      margin = 10,
+      grid = 10,
+      snap = false,
+      value: { x = 50, y = 50 },
+      r: r2 = 6,
+      onChange,
+      ...otherProps
+    } = props;
     const [ref, state] = useScratch_default();
     const [pos, setPos] = useState({ x, y });
     useThrottle(() => onChange({ x: pos.x, y: pos.y }), 50, [pos.x, pos.y]);
@@ -2486,9 +2497,14 @@
         ]
       },
       position: {
+        "@editor": "Position",
+        grid: 10,
+        width: 100,
+        height: 100,
+        margin: 10,
         properties: {
-          x: { minimum: 0, maximum: 100, multipleOf: 5, default: 50 },
-          y: { minimum: 0, maximum: 100, multipleOf: 5, default: 50 }
+          x: { default: 50 },
+          y: { default: 50 }
         }
       },
       repeat: {

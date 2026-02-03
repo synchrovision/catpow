@@ -23,9 +23,14 @@ export const custom = {
 			],
 		},
 		position: {
+			"@editor": "Position",
+			grid: 10,
+			width: 100,
+			height: 100,
+			margin: 10,
 			properties: {
-				x: { minimum: 0, maximum: 100, multipleOf: 5, default: 50 },
-				y: { minimum: 0, maximum: 100, multipleOf: 5, default: 50 },
+				x: { default: 50 },
+				y: { default: 50 },
 			},
 		},
 		repeat: {
