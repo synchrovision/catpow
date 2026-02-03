@@ -7,7 +7,7 @@
 	@include bg((c:b));
 	@include shd((b:-2));
 	@include usr((c:p));
-	&-handler{
+	&__handler{
 		@include bnd((d:b,p:r,w:4em,h:2em));
 		@include bg((c:wp));
 		@include bdr((r:1em));
@@ -20,8 +20,8 @@
 			@include shd((bvi:1));
 		}
 	}
-	&.is-active &{
-		&-handler{
+	&.is-selected &{
+		&__handler{
 			@include trn((x:0));
 		}
 	}
