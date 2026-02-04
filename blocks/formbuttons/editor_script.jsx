@@ -5,13 +5,11 @@
 	category: "catpow",
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
-		const { useState, useMemo } = wp.element;
+		const { useMemo } = wp.element;
 		const { BlockControls, InspectorControls } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
 		const { items = [], classes = "" } = attributes;
-		const primaryClass = "wp-block-catpow-formbuttons";
 		var classArray = _.uniq((className + " " + classes).split(" "));
-		var classNameArray = className.split(" ");
 
 		const states = CP.classNamesToFlags(classes);
 
@@ -135,7 +133,7 @@
 			</>
 		);
 	},
-	save({ attributes, className }) {
+	save({ attributes }) {
 		const { items = [], classes = "" } = attributes;
 		const blockType = wp.data.select("core/blocks").getBlockType("catpow/formbuttons");
 

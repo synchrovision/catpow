@@ -7,13 +7,11 @@
     category: "catpow",
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
-      const { useState, useMemo } = wp.element;
+      const { useMemo } = wp.element;
       const { BlockControls, InspectorControls } = wp.blockEditor;
       const { PanelBody, TextareaControl } = wp.components;
       const { items = [], classes = "" } = attributes;
-      const primaryClass = "wp-block-catpow-formbuttons";
       var classArray = _.uniq((className + " " + classes).split(" "));
-      var classNameArray = className.split(" ");
       const states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
         var selectiveClasses2 = [
@@ -107,7 +105,7 @@
         ));
       }))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30DC\u30BF\u30F3", icon: "edit", set: setAttributes, attr: attributes, items, index: attributes.currentItemIndex, selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (clss) => setAttributes({ classes: clss }), value: classArray.join(" ") })), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { set: setAttributes, attr: attributes })));
     },
-    save({ attributes, className }) {
+    save({ attributes }) {
       const { items = [], classes = "" } = attributes;
       const blockType = wp.data.select("core/blocks").getBlockType("catpow/formbuttons");
       const states = CP.classNamesToFlags(classes);
