@@ -1,11 +1,12 @@
-﻿import { baseGradientParams, alphaParams, rParam, wParam, getBaseGradientCode } from "./common";
+﻿import { baseGradientParams, alphaParams, rParams, wParam, getBaseGradientCode } from "./common";
 const { __ } = wp.i18n;
 
 export const stripe = {
 	label: __("ストライプ", "catpow"),
+	order: 2,
 	params: {
 		...baseGradientParams,
-		r: rParam,
+		...rParams,
 		w1: wParam,
 		w2: wParam,
 		...alphaParams,

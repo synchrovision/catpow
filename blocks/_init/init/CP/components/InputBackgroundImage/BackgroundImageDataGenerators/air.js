@@ -1,13 +1,14 @@
-﻿import { baseGradientParams, alphaParams, wParam, getBaseGradientCode } from "./common";
+﻿import { baseGradientParams, alphaParams, wParams, hParams, getBaseGradientCode } from "./common";
 import { pfloor } from "catpow/util";
 const { __ } = wp.i18n;
 
 export const air = {
 	label: __("エア", "catpow"),
+	order: 3,
 	params: {
 		...baseGradientParams,
-		w: wParam,
-		h: wParam,
+		...wParams,
+		...hParams,
 		...alphaParams,
 	},
 	getData(params = {}) {

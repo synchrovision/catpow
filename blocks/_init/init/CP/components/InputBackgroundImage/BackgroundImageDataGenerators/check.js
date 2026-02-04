@@ -1,13 +1,14 @@
-﻿import { baseGradientParams, alphaParams, rParam, wParam, getBaseGradientCode } from "./common";
+﻿import { baseGradientParams, alphaParams, rParam, wParams, getBaseGradientCode } from "./common";
 const { __ } = wp.i18n;
 
 export const check = {
 	label: __("チェック", "catpow"),
+	order: 2,
 	params: {
 		...baseGradientParams,
 		r1: rParam,
 		r2: rParam,
-		w: wParam,
+		...wParams,
 		...alphaParams,
 	},
 	getData(params = {}) {

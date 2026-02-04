@@ -65,13 +65,14 @@ export const InputBackgroundImage = (props) => {
 			},
 			oneOf: [],
 		};
-		for (const key in BackgroundImageDataGenerators) {
-			schema.properties.type.options[BackgroundImageDataGenerators[key].label] = key;
+		const gens = BackgroundImageDataGenerators;
+		for (const key of Object.keys(gens).sort((a, b) => (gens[a].order ?? 10) - (gens[b].order ?? 10))) {
+			schema.properties.type.options[gens[key].label] = key;
 			schema.oneOf.push({
 				properties: {
 					type: { const: key },
 					params: {
-						properties: BackgroundImageDataGenerators[key].params,
+						properties: gens[key].params,
 					},
 				},
 			});

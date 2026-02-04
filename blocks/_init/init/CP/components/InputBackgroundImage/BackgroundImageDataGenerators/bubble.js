@@ -1,15 +1,16 @@
-﻿import { baseGradientParams, alphaParams, wParam, getBaseGradientCode } from "./common";
+﻿import { baseGradientParams, alphaParams, aParams, wParams, seedParams, getBaseGradientCode } from "./common";
 import { srand } from "catpow/util";
 const { __ } = wp.i18n;
 
 export const bubble = {
 	label: __("バブル", "catpow"),
+	order: 3,
 	params: {
 		...baseGradientParams,
-		a: { minimum: 1, maximum: 10 },
-		w: wParam,
+		...aParams,
+		...wParams,
 		...alphaParams,
-		seed: { minimum: 1, maximum: 100 },
+		...seedParams,
 	},
 	getData(params = {}) {
 		const { a = 5, w = 50, alpha = 25, seed = 10 } = params;
