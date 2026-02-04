@@ -870,6 +870,7 @@
     colorToneValuePattern: () => colorToneValuePattern,
     colorToneValueToClasses: () => colorToneValueToClasses,
     config: () => config,
+    convertCssVarsForPreview: () => convertCssVarsForPreview,
     convertRowsToItems: () => convertRowsToItems,
     createBlocks: () => createBlocks,
     createGridItemStyleCode: () => createGridItemStyleCode,
@@ -7084,6 +7085,15 @@
         setAttributes(atts);
       }
     }, [anchor]);
+  };
+  var convertCssVarsForPreview = (vars) => {
+    const convertedVars = {};
+    for (const key in vars) {
+      if (typeof vars[key] === "string") {
+        convertedVars[key] = vars[key].replace(/url\('(\[.+)'\)/, `url('${wpinfo.plugins_url}/catpow/callee/dummy_image.php?text=$1')`);
+      }
+    }
+    return convertedVars;
   };
 
   // ../blocks/_init/init/CP/functions/flags.js

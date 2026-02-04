@@ -207,3 +207,13 @@ export const useManageStyleData = (props, csss) => {
 		}
 	}, [anchor]);
 };
+
+export const convertCssVarsForPreview = (vars) => {
+	const convertedVars = {};
+	for (const key in vars) {
+		if (typeof vars[key] === "string") {
+			convertedVars[key] = vars[key].replace(/url\('(\[.+)'\)/, `url('${wpinfo.plugins_url}/catpow/callee/dummy_image.php?text=$1')`);
+		}
+	}
+	return convertedVars;
+};
