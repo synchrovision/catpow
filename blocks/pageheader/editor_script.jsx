@@ -23,19 +23,6 @@ wp.blocks.registerBlockType("catpow/pageheader", {
 				"backgroundColor",
 				"backgroundImage",
 				"backgroundPattern",
-				{
-					name: "template",
-					label: __("テンプレート", "catpow"),
-					values: "isTemplate",
-					sub: [
-						{
-							input: "text",
-							label: __("背景画像コード", "catpow"),
-							key: "backgroundImageCode",
-							cond: "hasBackgroundImage",
-						},
-					],
-				},
 			];
 			wp.hooks.applyFilters("catpow.blocks.pageheader.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;

@@ -23,20 +23,7 @@
           "colorScheme",
           "backgroundColor",
           "backgroundImage",
-          "backgroundPattern",
-          {
-            name: "template",
-            label: __("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
-            values: "isTemplate",
-            sub: [
-              {
-                input: "text",
-                label: __("\u80CC\u666F\u753B\u50CF\u30B3\u30FC\u30C9", "catpow"),
-                key: "backgroundImageCode",
-                cond: "hasBackgroundImage"
-              }
-            ]
-          }
+          "backgroundPattern"
         ];
         wp.hooks.applyFilters("catpow.blocks.pageheader.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
