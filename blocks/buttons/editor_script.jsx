@@ -21,15 +21,13 @@ wp.blocks.registerBlockType("catpow/buttons", {
 	category: "catpow",
 	example: CP.example,
 	edit(props) {
-		const { useState, useMemo } = wp.element;
-		const { BlockControls, InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
+		const { useMemo } = wp.element;
+		const { BlockControls, InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
 		const { attributes, className, setAttributes, isSelected } = props;
 		const { items = [], classes, vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 		const { linkKeys } = blockConfig;
-		const primaryClass = "wp-block-catpow-buttons";
 		var classArray = _.uniq((className + " " + classes).split(" "));
-		var classNameArray = className.split(" ");
 
 		const states = CP.classNamesToFlags(classes);
 
@@ -131,6 +129,10 @@ wp.blocks.registerBlockType("catpow/buttons", {
 				rtn.push(rtn[rtn.length % len]);
 			}
 		}
+		const blockProps = useBlockProps({
+			className: classes,
+			style: vars,
+		});
 
 		return (
 			<>
@@ -175,9 +177,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 								</div>
 							) : (
 								<CP.Bem prefix="wp-block-catpow">
-									<ul className={classes} style={vars}>
-										{rtn}
-									</ul>
+									<ul {...blockProps}>{rtn}</ul>
 								</CP.Bem>
 							)}
 						</>
