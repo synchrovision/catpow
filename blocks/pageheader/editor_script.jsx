@@ -17,7 +17,7 @@ wp.blocks.registerBlockType("catpow/pageheader", {
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
 				"size",
-				{ name: "breadcrumb", label: __("パンくずリスト", "catpow"), values: "hasBreadCrumnb" },
+				{ name: "breadcrumb", label: __("パンくずリスト", "catpow"), values: "hasBreadcrumb" },
 				"color",
 				"colorScheme",
 				"backgroundColor",
@@ -58,7 +58,7 @@ wp.blocks.registerBlockType("catpow/pageheader", {
 								}}
 								value={attributes.title}
 							/>
-							{states.hasBreadCrumnb && <CP.ServerSideRenderPart.Preview name="breadcrumb" className="_breadcrumb" container_class="wp-block-catpow-pageheader__body-breadcrumb-body" />}
+							{states.hasBreadcrumb && <CP.ServerSideRenderPart.Preview name="breadcrumb" className="_breadcrumb" container_class="wp-block-catpow-pageheader__body-breadcrumb-body" />}
 						</div>
 					</div>
 				</CP.Bem>
@@ -76,7 +76,7 @@ wp.blocks.registerBlockType("catpow/pageheader", {
 				<div className={attributes.classes} style={vars}>
 					<div className="_body">
 						<RichText.Content tagName="h1" className="_title" value={attributes.title} />
-						{states.hasBreadCrumnb && <CP.ServerSideRenderPart name="breadcrumb" className="_breadcrumb" container_class="wp-block-catpow-pageheader__body-breadcrumb-body" />}
+						{states.hasBreadcrumb && <CP.ServerSideRenderPart name="breadcrumb" className="_breadcrumb" container_class="wp-block-catpow-pageheader__body-breadcrumb-body" />}
 					</div>
 				</div>
 			</CP.Bem>

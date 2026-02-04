@@ -18,7 +18,7 @@
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
           "size",
-          { name: "breadcrumb", label: __("\u30D1\u30F3\u304F\u305A\u30EA\u30B9\u30C8", "catpow"), values: "hasBreadCrumnb" },
+          { name: "breadcrumb", label: __("\u30D1\u30F3\u304F\u305A\u30EA\u30B9\u30C8", "catpow"), values: "hasBreadcrumb" },
           "color",
           "colorScheme",
           "backgroundColor",
@@ -51,13 +51,13 @@
           },
           value: attributes.title
         }
-      ), states.hasBreadCrumnb && /* @__PURE__ */ wp.element.createElement(CP.ServerSideRenderPart.Preview, { name: "breadcrumb", className: "_breadcrumb", container_class: "wp-block-catpow-pageheader__body-breadcrumb-body" })))));
+      ), states.hasBreadcrumb && /* @__PURE__ */ wp.element.createElement(CP.ServerSideRenderPart.Preview, { name: "breadcrumb", className: "_breadcrumb", container_class: "wp-block-catpow-pageheader__body-breadcrumb-body" })))));
     },
     save({ attributes }) {
       const { vars } = attributes;
       const { RichText } = wp.blockEditor;
       const states = CP.classNamesToFlags(attributes.classes);
-      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { className: attributes.classes, style: vars }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "h1", className: "_title", value: attributes.title }), states.hasBreadCrumnb && /* @__PURE__ */ wp.element.createElement(CP.ServerSideRenderPart, { name: "breadcrumb", className: "_breadcrumb", container_class: "wp-block-catpow-pageheader__body-breadcrumb-body" }))));
+      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { className: attributes.classes, style: vars }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "h1", className: "_title", value: attributes.title }), states.hasBreadcrumb && /* @__PURE__ */ wp.element.createElement(CP.ServerSideRenderPart, { name: "breadcrumb", className: "_breadcrumb", container_class: "wp-block-catpow-pageheader__body-breadcrumb-body" }))));
     }
   });
 })();
