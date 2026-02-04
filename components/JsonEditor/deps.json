@@ -1,5 +1,6 @@
 {
 	"script": ["catpow.schema"],
+	"style": ["materialicons"],
 	"component": [
 		"AngleInput",
 		"InputDateTime",
