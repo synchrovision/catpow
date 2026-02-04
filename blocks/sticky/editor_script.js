@@ -106,6 +106,7 @@
     ]
   });
   wp.blocks.registerBlockType("catpow/stickycontent", {
+    apiVersion: 3,
     title: "\u{1F43E} StickyContent",
     icon: "editor-code",
     category: "catpow",

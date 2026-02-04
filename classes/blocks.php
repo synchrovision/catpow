@@ -151,7 +151,7 @@ class blocks{
 				$editor_script=CP::get_file_url('blocks/'.$block_name.'/editor_script.js');
 				$is_core_block=empty($editor_script);
 				$block_type=($is_core_block?'core/':'catpow/').str_replace('_','-',$block_name);
-				$param=[];
+				$param=['api_version'=>3];
 				foreach([
 					'conf.php',
 					'editor_script.js',

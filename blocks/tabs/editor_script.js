@@ -65,6 +65,7 @@
     }
   });
   wp.blocks.registerBlockType("catpow/tabscontent", {
+    apiVersion: 3,
     title: "\u{1F43E} TabsContent",
     icon: "editor-code",
     category: "catpow",

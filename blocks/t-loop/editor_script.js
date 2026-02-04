@@ -49,6 +49,7 @@
     }
   });
   wp.blocks.registerBlockType("catpow/t-loopcontent", {
+    apiVersion: 3,
     title: "\u{1F43E} t-loopContent",
     icon: "editor-code",
     category: "catpow",

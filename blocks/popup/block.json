@@ -1,7 +1,8 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
 	"textdomain": "catpow",
-	"name":"catpow/popup",
+	"name": "catpow/popup",
 	"title": "🐾 Popup",
 	"description": "アンカーリンクで開くポップアップ",
 	"icon": "admin-comments",

@@ -49,7 +49,7 @@
 						}}
 						value={item.title}
 					/>
-				</CP.Item>
+				</CP.Item>,
 			);
 		});
 
@@ -72,7 +72,7 @@
 			rtn.push(
 				<li className="item" key={index}>
 					<RichText.Content tagName="h3" className="title" value={item.title} />
-				</li>
+				</li>,
 			);
 		});
 
@@ -88,6 +88,7 @@
 });
 
 wp.blocks.registerBlockType("catpow/tabscontent", {
+	apiVersion: 3,
 	title: "🐾 TabsContent",
 	icon: "editor-code",
 	category: "catpow",

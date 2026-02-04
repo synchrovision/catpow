@@ -1,6 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"name":"catpow/listed",
+	"apiVersion": 3,
+	"name": "catpow/listed",
 	"title": "🐾 Listed",
 	"icon": "editor-ul",
 	"category": "catpow",

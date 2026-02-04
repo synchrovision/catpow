@@ -1,13 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
 	"textdomain": "catpow",
 	"category": "catpow",
 	"title": "🐾 ArtFrame",
 	"description": "切り抜きと装飾アートのブロックです。",
 	"icon": "images-alt",
 	"name": "catpow/artframe",
-	"providesContext":{"catpow/color":"color"},
-	"usesContext":["catpow/color"],
+	"providesContext": { "catpow/color": "color" },
+	"usesContext": ["catpow/color"],
 	"supports": {
 		"anchor": true,
 		"className": false,

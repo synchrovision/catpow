@@ -90,6 +90,7 @@
     ]
   });
   wp.blocks.registerBlockType("catpow/loopcontent", {
+    apiVersion: 3,
     title: "\u{1F43E} LoopContent",
     icon: "editor-code",
     category: "catpow",

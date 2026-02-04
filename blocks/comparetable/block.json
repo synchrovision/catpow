@@ -1,7 +1,8 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
 	"textdomain": "catpow",
-	"name":"catpow/comparetable",
+	"name": "catpow/comparetable",
 	"title": "🐾 CompareTable",
 	"description": "比較情報のためのテーブルです",
 	"icon": "editor-table",
@@ -10,7 +11,7 @@
 		"anchor": true,
 		"className": false,
 		"color": false,
-		"interactivity":true,
+		"interactivity": true,
 		"spacing": {
 			"margin": true,
 			"padding": true

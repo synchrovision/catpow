@@ -43,6 +43,7 @@
 });
 
 wp.blocks.registerBlockType("catpow/sidecolumn", {
+	apiVersion: 3,
 	title: "🐾 SideColumn",
 	icon: "editor-code",
 	category: "catpow",
@@ -84,6 +85,7 @@ wp.blocks.registerBlockType("catpow/sidecolumn", {
 });
 
 wp.blocks.registerBlockType("catpow/maincolumn", {
+	apiVersion: 3,
 	title: "🐾 MainColumn",
 	icon: "editor-code",
 	category: "catpow",
@@ -110,6 +112,7 @@ wp.blocks.registerBlockType("catpow/maincolumn", {
 });
 
 wp.blocks.registerBlockType("catpow/articlenav", {
+	apiVersion: 3,
 	title: "🐾 ArticelNav",
 	icon: "editor-ul",
 	category: "catpow",

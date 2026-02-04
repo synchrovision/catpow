@@ -139,6 +139,7 @@
     }
   });
   wp.blocks.registerBlockType("catpow/switchercontent", {
+    apiVersion: 3,
     title: "\u{1F43E} SwitcherContent",
     icon: "editor-code",
     category: "catpow",

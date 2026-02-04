@@ -148,7 +148,7 @@ wp.blocks.registerBlockType("catpow/switcher", {
 									>
 										{cond}
 									</li>
-							  ))
+								))
 							: false}
 					</ul>
 					<div className="contents">
@@ -169,6 +169,7 @@ wp.blocks.registerBlockType("catpow/switcher", {
 });
 
 wp.blocks.registerBlockType("catpow/switchercontent", {
+	apiVersion: 3,
 	title: "🐾 SwitcherContent",
 	icon: "editor-code",
 	category: "catpow",

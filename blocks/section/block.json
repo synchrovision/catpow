@@ -1,13 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
 	"textdomain": "catpow",
-	"name":"catpow/section",
+	"name": "catpow/section",
 	"title": "🐾 Section",
 	"description": "見出しと内容のまとまりを表すセクションのブロックです。",
 	"icon": "id-alt",
 	"category": "catpow",
-	"providesContext":{"catpow/color":"color"},
-	"usesContext":["catpow/color"],
+	"providesContext": { "catpow/color": "color" },
+	"usesContext": ["catpow/color"],
 	"supports": {
 		"anchor": true,
 		"className": false,

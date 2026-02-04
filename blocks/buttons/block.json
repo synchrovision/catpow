@@ -1,4 +1,6 @@
 {
-	"name":"catpow/buttons",
-	"usesContext":["catpow/color"]
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"name": "catpow/buttons",
+	"apiVersion": 3,
+	"usesContext": ["catpow/color"]
 }
