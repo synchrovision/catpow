@@ -35,7 +35,7 @@ wp.blocks.registerBlockType("catpow/pageheader", {
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<CP.Bem prefix="wp-block-catpow">
-					<div className={attributes.classes} style={vars}>
+					<div className={attributes.classes} style={CP.convertCssVarsForPreview(vars)}>
 						<div className="_body">
 							<RichText
 								tagName="h1"
