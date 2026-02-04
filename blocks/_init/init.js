@@ -2634,17 +2634,18 @@
       ...baseGradientParams,
       ...aParams,
       ...hParams,
+      ...rParams,
       ...seedParams,
       ...alphaParams
     },
     getData(params = {}) {
-      const { a = 5, h = 50, seed = 10, alpha = 25 } = params;
+      const { a = 5, h = 50, r: r2 = 0, seed = 10, alpha = 25 } = params;
       const rand = srand(seed);
       const image = [];
       const blendmode = [];
       const dr = h / 10 * 9;
       for (let i = 0; i < a; i++) {
-        const d = rand(-dr, dr);
+        const d = r2 + rand(-dr, dr);
         const p = rand(10, 90);
         blendmode.push("overlay");
         image.push(`linear-gradient(${d}deg,${c(0)},${c(0)} ${p}%,${c(alpha)} ${p}%,${c(0)})`);
