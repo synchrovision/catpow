@@ -30,5 +30,5 @@
 	&>.contents{
 		@include bnd((mg:0,pd:0));
 	}
-	[data-type="catpow/switchercontent"]{@include bnd((d:n));}
+	.switcher-content{@include bnd((d:n));}
 }

@@ -147,14 +147,14 @@
     attributes: {
       cond: { source: "attribute", label: "\u6761\u4EF6", selector: "switcher-content", attribute: "cond", default: "content" }
     },
-    edit({ attributes, setAttributes }) {
+    edit({ attributes, setAttributes, clientId }) {
       const { InnerBlocks } = wp.blockEditor;
       const { cond } = attributes;
       const { useEffect } = wp.element;
       useEffect(() => {
         setAttributes({ anchor: cond });
       }, [cond]);
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "switcher-content" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph"]], templateLock: false }));
+      return /* @__PURE__ */ wp.element.createElement("div", { id: `block-${clientId}`, className: "switcher-content" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph"]], templateLock: false }));
     },
     save({ attributes }) {
       const { cond } = attributes;

@@ -177,7 +177,7 @@ wp.blocks.registerBlockType("catpow/switchercontent", {
 	attributes: {
 		cond: { source: "attribute", label: "条件", selector: "switcher-content", attribute: "cond", default: "content" },
 	},
-	edit({ attributes, setAttributes }) {
+	edit({ attributes, setAttributes, clientId }) {
 		const { InnerBlocks } = wp.blockEditor;
 		const { cond } = attributes;
 		const { useEffect } = wp.element;
@@ -187,7 +187,7 @@ wp.blocks.registerBlockType("catpow/switchercontent", {
 		}, [cond]);
 
 		return (
-			<div className={"switcher-content"}>
+			<div id={`block-${clientId}`} className={"switcher-content"}>
 				<InnerBlocks template={[["core/paragraph"]]} templateLock={false} />
 			</div>
 		);
