@@ -8,9 +8,9 @@
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useMemo } = wp.element;
-      const { BlockControls, InspectorControls } = wp.blockEditor;
-      const { PanelBody, TextareaControl } = wp.components;
-      const { items = [], classes = "" } = attributes;
+      const { BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
+      const { Icon, PanelBody, TextareaControl } = wp.components;
+      const { items = [], classes = "", EditMode = false } = attributes;
       var classArray = _.uniq((className + " " + classes).split(" "));
       const states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
@@ -42,10 +42,23 @@
       const saveItems = () => {
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });
       };
-      if (attributes.EditMode === void 0) {
-        attributes.EditMode = false;
-      }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, items.map((item, index) => {
+      const blockProps = useBlockProps({
+        className: classes
+      });
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+        CP.EditItemsTable,
+        {
+          set: setAttributes,
+          attr: attributes,
+          columns: [
+            { type: "text", key: "copy", cond: states.hasMicroCopy },
+            { type: "text", key: "text", cond: true },
+            { type: "text", key: "caption", cond: states.hasCaption },
+            { type: "text", key: "action", cond: true }
+          ],
+          isTemplate: states.isTemplate
+        }
+      )) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...blockProps }, items.map((item, index) => {
         if (!item.controlClasses) {
           item.controlClasses = "control";
         }

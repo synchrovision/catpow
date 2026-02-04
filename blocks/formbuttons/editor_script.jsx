@@ -6,9 +6,9 @@
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { useMemo } = wp.element;
-		const { BlockControls, InspectorControls } = wp.blockEditor;
-		const { PanelBody, TextareaControl } = wp.components;
-		const { items = [], classes = "" } = attributes;
+		const { BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
+		const { Icon, PanelBody, TextareaControl } = wp.components;
+		const { items = [], classes = "", EditMode = false } = attributes;
 		var classArray = _.uniq((className + " " + classes).split(" "));
 
 		const states = CP.classNamesToFlags(classes);
@@ -44,81 +44,101 @@
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
-		if (attributes.EditMode === undefined) {
-			attributes.EditMode = false;
-		}
+		const blockProps = useBlockProps({
+			className: classes,
+		});
 
 		return (
 			<>
-				<CP.Bem prefix="wp-block-catpow">
-					<ul className={classes}>
-						{items.map((item, index) => {
-							if (!item.controlClasses) {
-								item.controlClasses = "control";
-							}
-							const itemStates = CP.classNamesToFlags(item.classes);
-							return (
-								<CP.Item className={item.classes} tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
-									{states.hasMicroCopy && (
-										<span
-											className="_copy"
-											onInput={(e) => {
-												item.copy = e.target.innerText;
-											}}
-											onBlur={(e) => {
-												saveItems();
-											}}
-											contentEditable={true}
-											suppressContentEditableWarning={true}
-										>
-											{item.copy}
-										</span>
-									)}
-									<div className="-button" role="button">
-										{itemStates.hasIcon && <CP.OutputIcon className="_icon" item={item} />}
-										<span
-											className="_text"
-											onInput={(e) => {
-												item.text = e.target.innerText;
-											}}
-											onBlur={saveItems}
-											contentEditable={true}
-											suppressContentEditableWarning={true}
-										>
-											{item.text}
-										</span>
-										<span
-											className="_action"
-											onInput={(e) => {
-												item.action = e.target.innerText;
-											}}
-											onBlur={saveItems}
-											contentEditable={true}
-											suppressContentEditableWarning={true}
-										>
-											{item.action}
-										</span>
-									</div>
-									{states.hasCaption && (
-										<span
-											className="_caption"
-											onInput={(e) => {
-												item.caption = e.target.innerText;
-											}}
-											onBlur={(e) => {
-												saveItems();
-											}}
-											contentEditable={true}
-											suppressContentEditableWarning={true}
-										>
-											{item.caption}
-										</span>
-									)}
-								</CP.Item>
-							);
-						})}
-					</ul>
-				</CP.Bem>
+				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
+				{EditMode ? (
+					<div className="cp-altcontent">
+						<div className="label">
+							<Icon icon="edit" />
+						</div>
+						<CP.EditItemsTable
+							set={setAttributes}
+							attr={attributes}
+							columns={[
+								{ type: "text", key: "copy", cond: states.hasMicroCopy },
+								{ type: "text", key: "text", cond: true },
+								{ type: "text", key: "caption", cond: states.hasCaption },
+								{ type: "text", key: "action", cond: true },
+							]}
+							isTemplate={states.isTemplate}
+						/>
+					</div>
+				) : (
+					<CP.Bem prefix="wp-block-catpow">
+						<ul {...blockProps}>
+							{items.map((item, index) => {
+								if (!item.controlClasses) {
+									item.controlClasses = "control";
+								}
+								const itemStates = CP.classNamesToFlags(item.classes);
+								return (
+									<CP.Item className={item.classes} tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+										{states.hasMicroCopy && (
+											<span
+												className="_copy"
+												onInput={(e) => {
+													item.copy = e.target.innerText;
+												}}
+												onBlur={(e) => {
+													saveItems();
+												}}
+												contentEditable={true}
+												suppressContentEditableWarning={true}
+											>
+												{item.copy}
+											</span>
+										)}
+										<div className="-button" role="button">
+											{itemStates.hasIcon && <CP.OutputIcon className="_icon" item={item} />}
+											<span
+												className="_text"
+												onInput={(e) => {
+													item.text = e.target.innerText;
+												}}
+												onBlur={saveItems}
+												contentEditable={true}
+												suppressContentEditableWarning={true}
+											>
+												{item.text}
+											</span>
+											<span
+												className="_action"
+												onInput={(e) => {
+													item.action = e.target.innerText;
+												}}
+												onBlur={saveItems}
+												contentEditable={true}
+												suppressContentEditableWarning={true}
+											>
+												{item.action}
+											</span>
+										</div>
+										{states.hasCaption && (
+											<span
+												className="_caption"
+												onInput={(e) => {
+													item.caption = e.target.innerText;
+												}}
+												onBlur={(e) => {
+													saveItems();
+												}}
+												contentEditable={true}
+												suppressContentEditableWarning={true}
+											>
+												{item.caption}
+											</span>
+										)}
+									</CP.Item>
+								);
+							})}
+						</ul>
+					</CP.Bem>
+				)}
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 					<CP.SelectClassPanel title="ボタン" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} selectiveClasses={selectiveItemClasses} />
