@@ -32,7 +32,7 @@ export const custom = {
 	},
 	getData(params = {}) {
 		const {
-			image,
+			image = { url: "" },
 			size = "cover",
 			position: { x = 50, y = 50 },
 			repeat = "repeat",
