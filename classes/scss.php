@@ -219,7 +219,7 @@ class scss{
 				return self::create_map_data($tone);
 			});
 			self::register_translation_for_role($scssc,'size',['ph'=>'var(--cp-page-content-height)','pt'=>'var(--cp-page-top-offset)','pb'=>'var(--cp-page-bottom-offset)']);
-			self::register_translation_for_role($scssc,'font_family');
+			self::register_translation_for_role($scssc,'font_family',['mi'=>'Material Icons','di'=>'dashicons']);
 			self::register_translation_for_role($scssc,'font_size');
 			//self::register_translation_for_role($scssc,'font_weight');
 			self::register_translation_for_role($scssc,'border_radius');
