@@ -1,13 +1,19 @@
-﻿wp.blocks.registerBlockType("catpow/loopblock", {
+﻿import { clsx } from "clsx";
+
+wp.blocks.registerBlockType("catpow/loopblock", {
 	title: "🐾 Loopblock",
 	description: "クエリの投稿の情報を表示するためのコンテナです。",
 	icon: "editor-code",
 	category: "catpow-functional",
 	example: CP.example,
 	edit({ attributes, setAttributes, className }) {
-		const { InnerBlocks, BlockControls, InspectorControls } = wp.blockEditor;
-		const { PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
+		const { InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
+		const { Icon, PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
 		const { content_path, query, AltMode = false } = attributes;
+
+		const blockProps = useBlockProps({
+			className: clsx("loop-block", AltMode ? "cp-altcontent altMode" : "cp-embeddedcontent"),
+		});
 
 		return (
 			<>
@@ -23,7 +29,7 @@
 						]}
 					/>
 				</BlockControls>
-				<div className={"loop-block " + (AltMode ? "cp-altcontent altMode" : "cp-embeddedcontent")}>
+				<div {...blockProps}>
 					<div className="label">{AltMode ? <Icon icon="welcome-comments" /> : content_path}</div>
 					<InnerBlocks template={[["catpow/loopblockcontent"], ["catpow/loopblockcontent", { name: "on_empty" }]]} templateLock="all" />
 				</div>

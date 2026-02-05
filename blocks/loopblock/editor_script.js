@@ -1,4 +1,19 @@
 (() => {
+  // node_modules/clsx/dist/clsx.mjs
+  function r(e) {
+    var t, f, n = "";
+    if ("string" == typeof e || "number" == typeof e) n += e;
+    else if ("object" == typeof e) if (Array.isArray(e)) {
+      var o = e.length;
+      for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
+    } else for (f in e) e[f] && (n && (n += " "), n += f);
+    return n;
+  }
+  function clsx() {
+    for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
+    return n;
+  }
+
   // ../blocks/loopblock/editor_script.jsx
   wp.blocks.registerBlockType("catpow/loopblock", {
     title: "\u{1F43E} Loopblock",
@@ -7,9 +22,12 @@
     category: "catpow-functional",
     example: CP.example,
     edit({ attributes, setAttributes, className }) {
-      const { InnerBlocks, BlockControls, InspectorControls } = wp.blockEditor;
-      const { PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
+      const { InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
+      const { Icon, PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
       const { content_path, query, AltMode = false } = attributes;
+      const blockProps = useBlockProps({
+        className: clsx("loop-block", AltMode ? "cp-altcontent altMode" : "cp-embeddedcontent")
+      });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
         ToolbarGroup,
         {
@@ -22,7 +40,7 @@
             }
           ]
         }
-      )), /* @__PURE__ */ wp.element.createElement("div", { className: "loop-block " + (AltMode ? "cp-altcontent altMode" : "cp-embeddedcontent") }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, AltMode ? /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" }) : content_path), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/loopblockcontent"], ["catpow/loopblockcontent", { name: "on_empty" }]], templateLock: "all" })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
+      )), /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, AltMode ? /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" }) : content_path), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/loopblockcontent"], ["catpow/loopblockcontent", { name: "on_empty" }]], templateLock: "all" })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
           label: "content path",
