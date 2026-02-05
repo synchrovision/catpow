@@ -1,29 +1,14 @@
-﻿CP.config.accessmap = {
-	imageKeys: {
-		mapImage: {
-			src: "mapImageSrc",
-			alt: "mapImageAlt",
-			code: "mapImageCode",
-			items: "items",
-		},
-	},
-};
-
-wp.blocks.registerBlockType("catpow/accessmap", {
+﻿wp.blocks.registerBlockType("catpow/accessmap", {
 	title: "🐾 Access Map",
 	description: "地図とアクセス情報を表示",
 	icon: "location-alt",
 	category: "catpow",
 	example: CP.example,
-	edit({ attributes, className, setAttributes, isSelected }) {
-		const { useState, useMemo, useCallback, useEffect } = wp.element;
-		const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
-		const { Icon, PanelBody, TextControl, TextareaControl } = wp.components;
-		const { classes, TitleTag, items = [], z, t, hl, loopCount, doLoop } = attributes;
-		const primaryClassName = "wp-block-catpow-accessmap";
-		var classArray = _.uniq((className + " " + classes).split(" "));
-		var classNameArray = className.split(" ");
-		const { bem, classNamesToFlags, flagsToClassNames } = Catpow.util;
+	edit({ attributes, setAttributes, isSelected }) {
+		const { useMemo } = wp.element;
+		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
+		const { Icon, PanelBody, TextareaControl } = wp.components;
+		const { classes, TitleTag, items = [], z, t, hl, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 
 		var states = useMemo(() => CP.classNamesToFlags(classes), [classes]);
 
@@ -32,20 +17,15 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 				"level",
 				"color",
 				"colorScheme",
-				{
-					name: "size",
-					type: "buttons",
-					label: "サイズ",
-					values: ["small", "medium", "large"],
-				},
+				"itemSize",
 				{
 					name: "mapColor",
 					type: "buttons",
 					label: "地図の色",
 					values: {
-						mapColorNone: "通常",
-						mapColorGray: "グレー",
-						mapColorSync: "同色",
+						hasMapColorNone: "通常",
+						hasMapColorGray: "グレー",
+						hasMapColorSync: "同色",
 					},
 				},
 				{
@@ -86,29 +66,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 					label: "言語",
 					values: ["ja", "us", "zh-CN", "zh-TW"],
 				},
-				{
-					name: "template",
-					label: "テンプレート",
-					values: "isTemplate",
-					sub: [
-						{
-							input: "bool",
-							label: "ループ",
-							key: "doLoop",
-							sub: [
-								{ label: "content path", input: "text", key: "content_path" },
-								{ label: "query", input: "textarea", key: "query" },
-								{
-									label: "プレビューループ数",
-									input: "range",
-									key: "loopCount",
-									min: 1,
-									max: 16,
-								},
-							],
-						},
-					],
-				},
+				"isTemplate",
 			];
 			wp.hooks.applyFilters("catpow.blocks.accessmap.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -165,111 +123,13 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
-		let rtn = [];
-		const { imageKeys } = CP.config.accessmap;
-
-		[...Array(Math.max(items.length, loopCount)).keys()].forEach((i) => {
-			let url;
-			const index = i % items.length;
-			const item = items[index];
-			const itemState = CP.classNamesToFlags(item.classes);
-			if (itemState.useEmbedURL) {
-				url = item.src;
-			} else {
-				let q = item.q || item.address.replace(/<br\/?>|\n/, " ");
-				url = `https://www.google.com/maps?output=embed&z=${z}&t=${t}&hl=${hl}&q=${q}`;
-				if (!!item.ll) {
-					url += `&ll=${item.ll}`;
-				}
-			}
-
-			if (!item.controlClasses) {
-				item.controlClasses = "control";
-			}
-			rtn.push(
-				<CP.Item tag="div" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={i}>
-					<div className="map">
-						{states.isTemplate ? (
-							<CP.DummyImage className="gmap" text={item.q || item.address.replace(/<br\/?>|\n/, " ")} />
-						) : (
-							<iframe src={url} frameBorder="0" className="gmap" data-ll={item.ll || false} data-q={item.q || false}></iframe>
-						)}
-					</div>
-					<div className="access">
-						<RichText
-							tagName={TitleTag}
-							className="title"
-							onChange={(title) => {
-								item.title = title;
-								save();
-							}}
-							value={item.title}
-						/>
-						<RichText
-							tagName="div"
-							className="address"
-							onChange={(address) => {
-								item.address = address;
-								save();
-							}}
-							value={item.address}
-						/>
-						{states.hasTel && (
-							<RichText
-								tagName="div"
-								className="tel"
-								onChange={(tel) => {
-									item.tel = tel;
-									save();
-								}}
-								value={item.tel}
-							/>
-						)}
-						{states.hasMail && (
-							<RichText
-								tagName="div"
-								className="mail"
-								onChange={(mail) => {
-									item.mail = mail;
-									save();
-								}}
-								value={item.mail}
-							/>
-						)}
-						{states.hasSite && (
-							<RichText
-								tagName="div"
-								className="site"
-								onChange={(site) => {
-									item.site = site;
-									save();
-								}}
-								value={item.site}
-							/>
-						)}
-						<RichText
-							tagName="div"
-							className="info"
-							onChange={(info) => {
-								item.info = info;
-								save();
-							}}
-							value={item.info}
-						/>
-					</div>
-				</CP.Item>,
-			);
-		});
-		if (attributes.EditMode === undefined) {
-			attributes.EditMode = false;
-		}
 		return (
 			<>
 				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classArray.join(" ")} />
+						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 					<CP.SelectClassPanel title="リストアイテム" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} selectiveClasses={selectiveItemClasses} />
 					{states.isTemplate && (
@@ -285,7 +145,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 					)}
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
-				{attributes.EditMode ? (
+				{EditMode ? (
 					<div className="cp-altcontent">
 						<div className="label">
 							<Icon icon="edit" />
@@ -309,7 +169,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 					</div>
 				) : (
 					<>
-						{attributes.AltMode && doLoop ? (
+						{AltMode && doLoop ? (
 							<div className="cp-altcontent">
 								<div className="label">
 									<Icon icon="welcome-comments" />
@@ -317,51 +177,147 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 								<InnerBlocks />
 							</div>
 						) : (
-							<div className={classes}>{rtn}</div>
+							<CP.Bem prefix="wp-block-catpow">
+								<div {...useBlockProps({ className: classes })}>
+									{[...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
+										let url;
+										const index = i % items.length;
+										const item = items[index];
+										const itemState = CP.classNamesToFlags(item.classes);
+										if (itemState.useEmbedURL) {
+											url = item.src;
+										} else {
+											let q = item.q || item.address.replace(/<br\/?>|\n/, " ");
+											url = `https://www.google.com/maps?output=embed&z=${z}&t=${t}&hl=${hl}&q=${q}`;
+											if (!!item.ll) {
+												url += `&ll=${item.ll}`;
+											}
+										}
+
+										if (!item.controlClasses) {
+											item.controlClasses = "control";
+										}
+										return (
+											<CP.Item tag="div" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={i}>
+												<div className="_map">
+													{states.isTemplate ? (
+														<CP.DummyImage className="_gmap" text={item.q || item.address.replace(/<br\/?>|\n/, " ")} />
+													) : (
+														<iframe src={url} className="_gmap" data-ll={item.ll || false} data-q={item.q || false}></iframe>
+													)}
+												</div>
+												<div className="_access">
+													<RichText
+														tagName={TitleTag}
+														className="_title"
+														onChange={(title) => {
+															item.title = title;
+															save();
+														}}
+														value={item.title}
+													/>
+													<RichText
+														tagName="div"
+														className="_address"
+														onChange={(address) => {
+															item.address = address;
+															save();
+														}}
+														value={item.address}
+													/>
+													{states.hasTel && (
+														<RichText
+															tagName="div"
+															className="_tel"
+															onChange={(tel) => {
+																item.tel = tel;
+																save();
+															}}
+															value={item.tel}
+														/>
+													)}
+													{states.hasMail && (
+														<RichText
+															tagName="div"
+															className="_mail"
+															onChange={(mail) => {
+																item.mail = mail;
+																save();
+															}}
+															value={item.mail}
+														/>
+													)}
+													{states.hasSite && (
+														<RichText
+															tagName="div"
+															className="_site"
+															onChange={(site) => {
+																item.site = site;
+																save();
+															}}
+															value={item.site}
+														/>
+													)}
+													<RichText
+														tagName="div"
+														className="_info"
+														onChange={(info) => {
+															item.info = info;
+															save();
+														}}
+														value={item.info}
+													/>
+												</div>
+											</CP.Item>
+										);
+									})}
+								</div>
+							</CP.Bem>
 						)}
 					</>
 				)}
 			</>
 		);
 	},
-	save({ attributes, className }) {
+	save({ attributes }) {
 		const { InnerBlocks, RichText } = wp.blockEditor;
 		const { classes, TitleTag, items = [], z, t, hl, doLoop } = attributes;
 		const states = CP.classNamesToFlags(classes);
-		const { imageKeys } = CP.config.accessmap;
 
-		let rtn = [];
-		items.map((item, index) => {
-			let url;
-			const itemState = CP.classNamesToFlags(item.classes);
-			if (itemState.useEmbedURL) {
-				url = item.src;
-			} else {
-				let q = item.q || item.address.replace(/<br\/?>|\n/, " ");
-				url = `https://www.google.com/maps?output=embed&z=${z}&t=${t}&hl=${hl}&q=${q}`;
-				if (!!item.ll) {
-					url += `&ll=${item.ll}`;
-				}
-			}
-			rtn.push(
-				<div className={item.classes} key={index}>
-					<div className="map">
-						<iframe src={url} frameBorder="0" className="gmap" data-ll={item.ll} data-q={item.q}></iframe>
-					</div>
-					<div className="access">
-						<RichText.Content tagName={TitleTag} className="title" value={item.title} />
-						<RichText.Content tagName="div" className="address" value={item.address} />
-						{states.hasTel && <RichText.Content tagName="div" className="tel" value={item.tel} />}
-						{states.hasMail && <RichText.Content tagName="div" className="mail" value={item.mail} />}
-						{states.hasSite && <RichText.Content tagName="div" className="site" value={item.site} />}
-						<RichText.Content tagName="div" className="info" value={item.info} />
-					</div>
-				</div>,
-			);
-		});
 		return (
 			<>
-				<div className={classes}>{rtn}</div>
+				<CP.Bem prefix="wp-block-catpow">
+					<div className={classes}>
+						{items.map((item, index) => {
+							let url;
+							const itemState = CP.classNamesToFlags(item.classes);
+							if (itemState.useEmbedURL) {
+								url = item.src;
+							} else {
+								let q = item.q || item.address.replace(/<br\/?>|\n/, " ");
+								url = `https://www.google.com/maps?output=embed&z=${z}&t=${t}&hl=${hl}&q=${q}`;
+								if (!!item.ll) {
+									url += `&ll=${item.ll}`;
+								}
+							}
+							return (
+								<div className={item.classes} key={index}>
+									<div className="_map">
+										<iframe src={url} className="_gmap" data-ll={item.ll} data-q={item.q}></iframe>
+									</div>
+									<div className="_access">
+										<RichText.Content tagName={TitleTag} className="_title" value={item.title} />
+										<RichText.Content tagName="div" className="_address" value={item.address} />
+										{states.hasTel && <RichText.Content tagName="div" className="_tel" value={item.tel} />}
+										{states.hasMail && <RichText.Content tagName="div" className="_mail" value={item.mail} />}
+										{states.hasSite && <RichText.Content tagName="div" className="_site" value={item.site} />}
+										<RichText.Content tagName="div" className="_info" value={item.info} />
+									</div>
+								</div>
+							);
+						})}
+					</div>
+				</CP.Bem>
 				{doLoop && (
 					<on-empty>
 						<InnerBlocks.Content />
