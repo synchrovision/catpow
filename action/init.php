@@ -97,6 +97,7 @@ add_image_size('vga',640,480,1);
 add_filter('body_class',function($classes){
 	$path_data=cp::get_the_path_data();
 	return array_merge($classes,array(
+		'is-root-container',
 		$path_data['data_type'].'-type-'.$path_data['data_name'],
 		$path_data['data_type'].'-type-'.$path_data['data_name'].'-'.$path_data['tmp_name'],
 	));
