@@ -34,13 +34,15 @@ $colors:(
 		}
 	}
 	&-altcontent{
-		@include bnd((p:r,h:50 a,pdt:20,mg:0 a));
-		@include bdr((s:s,w:1,c:t 50));
+		@include bnd((p:r,h:50 a,pdt:20,mg:40 a));
+		@include bdr((s:s,w:1,c:lightgray));
+		@include bg((c:whitesmoke));
+		@include shd((b:-2));
 		&>.label{
 			@include bnd((p:a,r:0,t:0,pd:.25em,z:10));
 			@include bg((c:wp));
 			@include txt((a:c,p:12,h:1em,f:g,w:r,c:b));
-			@include shd((b:1));
+			@include shd((b:2));
 		}
 	}
 	&-collapsiblecontent{
@@ -190,7 +192,7 @@ $colors:(
 	&-link{
 		@include bnd((p:r));
 		&-input{
-			@include bnd((d:b,p:a,w:1em fit,h:1em,pd:.25em 1em,b:-2em,l:-200,r:-200,mg:a));
+			@include bnd((d:b,p:a,w:1em fit,h:1em,pd:.25em 1em,b:0,l:-200,r:-200,mg:a));
 			@include bg((c:b));
 			@include txt((p:12,h:1em,c:t));
 			@include shd((b:2));
@@ -367,37 +369,41 @@ $colors:(
 	&-edititemstable{
 		@include tbl(());
 		@include bnd((mg:20 a));
+		@include shd((b:2));
 		&-thead,&-tbody{
 			&-tr{
 				&-th,&-td{
 					@include bnd((p:r,pd:.5em,w:6em a 30em));
-					@include bdr((s:s,w:1,c:t 50));
-					@include txt((p:12,c:t));
+					@include bdr((s:s,w:1,c:lightgray));
+					@include txt((p:14,c:black));
 				}
 			}
 		}
 		&-thead{
 			&-tr{
 				&-th{
-					@include bg((c:s));
+					@include bg((c:wp));
+					@include txt((c:white));
 				}
 			}
 		}
 		&-tbody{
 			&-tr{
-				&-th{
-					@include bg((c:s));
-				}
-				&-td{
-					@include bg((c:b));
+				&-th,&-td{
+					@include bg((c:white));
 					&>img{
 						@include bnd((w:6em,h:a));
 					}
-					.itemControl{
-						@include bnd((p:s));
+					.cp-itemcontrol{
+						@include bnd((i:0,mg:a,w:fit,h:fit));
 					}
 					.SelectPictureSources{
 						@include bnd((w:100));
+					}
+				}
+				&:nth-child(odd) &{
+					&-th,&-td{
+						@include bg((c:aliceblue));
 					}
 				}
 			}
