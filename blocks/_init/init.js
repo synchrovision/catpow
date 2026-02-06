@@ -1711,18 +1711,7 @@
   // node_modules-included/catpow/src/component/Input/PositionInput.jsx
   init_react();
   var PositionInput = (props) => {
-    const {
-      className = "cp-positioninput",
-      width = 100,
-      height = 100,
-      margin = 10,
-      grid = 10,
-      snap = false,
-      value: { x = 50, y = 50 },
-      r: r2 = 6,
-      onChange,
-      ...otherProps
-    } = props;
+    const { className = "cp-positioninput", width = 100, height = 100, margin = 10, grid = 10, snap = false, x = 50, y = 50, r: r2 = 6, onChange, ...otherProps } = props;
     const [ref, state] = useScratch_default();
     const [pos, setPos] = useState({ x, y });
     useThrottle(() => onChange({ x: pos.x, y: pos.y }), 50, [pos.x, pos.y]);
@@ -3046,10 +3035,9 @@
           "is-position-absolute": float
         })
       },
-      Object.keys(controls).map((key) => {
-        return /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default("-button", "is-" + key), onClick: controls[key], key });
-      }),
-      children && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default("-button", "is-edit"), onClick: () => setOpen(!open) }), /* @__PURE__ */ wp.element.createElement("div", { className: "-inputs" }, children))
+      /* @__PURE__ */ wp.element.createElement("div", { className: "_body" }, Object.keys(controls).map((key) => {
+        return /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default("_button", "is-" + key), onClick: controls[key], key });
+      }), children && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default("_button", "is-edit"), onClick: () => setOpen(!open) }), /* @__PURE__ */ wp.element.createElement("div", { className: "_inputs" }, children)))
     ));
   };
 

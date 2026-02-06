@@ -638,6 +638,15 @@
   width: 6.25rem;
 }
 .cp-itemcontrol {
+  position: relative;
+}
+.cp-itemcontrol.is-position-absolute {
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  z-index: 1000;
+}
+.cp-itemcontrol__body {
   padding: 0.125rem 0.3125rem;
   position: relative;
   width: fit-content;
@@ -657,13 +666,7 @@
   -webkit-justify-content: space-around;
   justify-content: space-around;
 }
-.cp-itemcontrol.is-position-absolute {
-  position: absolute;
-  top: 0rem;
-  right: 0rem;
-  z-index: 1000;
-}
-.cp-itemcontrol-button {
+.cp-itemcontrol__body-button {
   display: inline-block;
   margin: 0.125rem;
   text-align: center;
@@ -675,45 +678,45 @@
   transition: 0.5s;
   opacity: 0.7;
 }
-.cp-itemcontrol-button.is-delete::before {
+.cp-itemcontrol__body-button.is-delete::before {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
-.cp-itemcontrol-button.is-clone::before {
+.cp-itemcontrol__body-button.is-clone::before {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
-.cp-itemcontrol-button.is-up::before {
+.cp-itemcontrol__body-button.is-up::before {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
-.cp-itemcontrol-button.is-down::before {
+.cp-itemcontrol__body-button.is-down::before {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
-.cp-itemcontrol-button.is-left::before {
+.cp-itemcontrol__body-button.is-left::before {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
-.cp-itemcontrol-button.is-right::before {
+.cp-itemcontrol__body-button.is-right::before {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
-.cp-itemcontrol-button.is-edit::before {
+.cp-itemcontrol__body-button.is-edit::before {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
-.cp-itemcontrol-button:hover {
+.cp-itemcontrol__body-button:hover {
   opacity: 1;
 }
-.cp-itemcontrol-inputs {
+.cp-itemcontrol__body-inputs {
   display: block;
   position: absolute;
   width: 12.5rem;
@@ -732,20 +735,20 @@
   transform: translateY(-0.625rem);
   pointer-events: none;
 }
-.cp-itemcontrol-inputs-sub {
+.cp-itemcontrol__body-inputs-sub {
   padding-left: 0.625rem;
   margin-bottom: 1.25rem;
   border-left-style: solid;
   border-left-width: 0.3125rem;
   border-left-color: #eee;
 }
-.cp-itemcontrol.is-open {
+.cp-itemcontrol.is-open .cp-itemcontrol {
   z-index: 1001;
 }
-.cp-itemcontrol.is-open .cp-itemcontrol-btn.is-edit {
+.cp-itemcontrol.is-open .cp-itemcontrol__body-button.is-edit {
   opacity: 1;
 }
-.cp-itemcontrol.is-open .cp-itemcontrol-inputs {
+.cp-itemcontrol.is-open .cp-itemcontrol__body-inputs {
   display: block;
   opacity: 0.8;
   transform: -webkit- translateY(0rem);

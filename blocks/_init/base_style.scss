@@ -405,67 +405,72 @@ $colors:(
 	}
 	&-itemcontrol{
 		$block:&;
-		@include bnd((pd:2 5,p:r,w:fit,h:fit));
-		@include txt((a:c,p:12,h:1em));
-		@include bg((c:b));
-		@include bdr((r:10));
-		@include shd((b:1));
-		@include flx((w:n,j:a));
+		@include bnd((p:r));
 		&.is-position-absolute{
 			@include bnd((p:a,t:0,r:0,z:1000));
 		}
-		&-button{
-			@include bnd((d:ib,mg:2));
-			@include txt((a:c,p:12,h:1em,c:t));
-			@include usr((c:p));
-			@include trn((t:.5s,o:.7));
-			&.is-delete::before{
-				@include ico('minus');
-			}
-			&.is-clone::before{
-				@include ico('plus');
-			}
-			&.is-up::before{
-				@include ico('chevron-circle-up');
-			}
-			&.is-down::before{
-				@include ico('chevron-circle-down');
-			}
-			&.is-left::before{
-				@include ico('chevron-circle-left');
-			}
-			&.is-right::before{
-				@include ico('chevron-circle-right');
-			}
-			&.is-edit::before{
-				@include ico('pen');
-			}
-			&:hover{
-				@include trn((o:1));
-			}
-		}
-		&-inputs{
-			@include bnd((d:b,p:a,w:200,pd:10,t:f,r:0,mg:0 a,z:1001));
+		&__body{
+			@include bnd((pd:2 5,p:r,w:fit,h:fit));
+			@include txt((a:c,p:12,h:1em));
 			@include bg((c:b));
-			@include bdr((r:5));
-			@include txt((a:l));
-			@include trn((t:.5s,o:0,y:-10));
-			@include usr((e:n));
-			&-sub{
-				@include bnd((pdl:10,mgb:20));
-				@include bdr((p:l,s:s,w:5,c:#eee));
+			@include bdr((r:10));
+			@include shd((b:1));
+			@include flx((w:n,j:a));
+			&-button{
+				@include bnd((d:ib,mg:2));
+				@include txt((a:c,p:12,h:1em,c:t));
+				@include usr((c:p));
+				@include trn((t:.5s,o:.7));
+				&.is-delete::before{
+					@include ico('minus');
+				}
+				&.is-clone::before{
+					@include ico('plus');
+				}
+				&.is-up::before{
+					@include ico('chevron-circle-up');
+				}
+				&.is-down::before{
+					@include ico('chevron-circle-down');
+				}
+				&.is-left::before{
+					@include ico('chevron-circle-left');
+				}
+				&.is-right::before{
+					@include ico('chevron-circle-right');
+				}
+				&.is-edit::before{
+					@include ico('pen');
+				}
+				&:hover{
+					@include trn((o:1));
+				}
+			}
+			&-inputs{
+				@include bnd((d:b,p:a,w:200,pd:10,t:f,r:0,mg:0 a,z:1001));
+				@include bg((c:b));
+				@include bdr((r:5));
+				@include txt((a:l));
+				@include trn((t:.5s,o:0,y:-10));
+				@include usr((e:n));
+				&-sub{
+					@include bnd((pdl:10,mgb:20));
+					@include bdr((p:l,s:s,w:5,c:#eee));
+				}
 			}
 		}
 		&.is-open{
-			@include bnd((z:1001));
 			#{$block}{
-				&-btn{
-					&.is-edit{@include trn((o:1));}
-				}
-				&-inputs{
-					@include bnd((d:b));
-					@include trn((o:.8,y:0));
-					@include usr((e:a));
+				@include bnd((z:1001));
+				&__body{
+					&-button{
+						&.is-edit{@include trn((o:1));}
+					}
+					&-inputs{
+						@include bnd((d:b));
+						@include trn((o:.8,y:0));
+						@include usr((e:a));
+					}
 				}
 			}
 		}

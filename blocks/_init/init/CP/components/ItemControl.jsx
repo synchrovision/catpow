@@ -15,15 +15,17 @@ export const ItemControl = (props) => {
 					"is-position-absolute": float,
 				})}
 			>
-				{Object.keys(controls).map((key) => {
-					return <div className={clsx("-button", "is-" + key)} onClick={controls[key]} key={key}></div>;
-				})}
-				{children && (
-					<>
-						<div className={clsx("-button", "is-edit")} onClick={() => setOpen(!open)}></div>
-						<div className="-inputs">{children}</div>
-					</>
-				)}
+				<div className="_body">
+					{Object.keys(controls).map((key) => {
+						return <div className={clsx("_button", "is-" + key)} onClick={controls[key]} key={key}></div>;
+					})}
+					{children && (
+						<>
+							<div className={clsx("_button", "is-edit")} onClick={() => setOpen(!open)}></div>
+							<div className="_inputs">{children}</div>
+						</>
+					)}
+				</div>
 			</Tag>
 		</CP.Bem>
 	);
