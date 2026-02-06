@@ -1,11 +1,5 @@
-table.wp-block-catpow-simpletable {
-  width: 100%;
-}
-table.wp-block-catpow-simpletable tbody tr {
-  position: relative;
-}
-table.wp-block-catpow-simpletable tbody tr .itemControl {
-  position: absolute;
-  right: 0.3125rem;
+table.wp-block-catpow-simpletable tbody tr .cp-itemcontrol {
+  width: 5rem;
+  padding-inline: 1em;
 }
 /*# sourceMappingURL=./editor_style.css.map */
