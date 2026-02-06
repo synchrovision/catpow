@@ -22,9 +22,6 @@
 				}
 			}
 		}
-		.itemControl{
-			@include bnd((p:a,t:-20,r:0));
-		}
 		div.button{
 			@include bnd((h:a a a));
 			.url{

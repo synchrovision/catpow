@@ -24,10 +24,9 @@ wp.blocks.registerBlockType("catpow/buttons", {
 		const { useMemo } = wp.element;
 		const { BlockControls, InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { attributes, className, setAttributes, isSelected } = props;
+		const { attributes, setAttributes, isSelected } = props;
 		const { items = [], classes, vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 		const { linkKeys } = blockConfig;
-		var classArray = _.uniq((className + " " + classes).split(" "));
 
 		const states = CP.classNamesToFlags(classes);
 
@@ -64,71 +63,6 @@ wp.blocks.registerBlockType("catpow/buttons", {
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
-		let rtn = [];
-
-		items.map((item, index) => {
-			const itemStates = CP.classNamesToFlags(item.classes);
-			rtn.push(
-				<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
-					{states.hasMicroCopy && (
-						<span
-							className="_copy"
-							onInput={(e) => {
-								item.copy = e.target.innerText;
-							}}
-							onBlur={(e) => {
-								saveItems();
-							}}
-							contentEditable={true}
-							suppressContentEditableWarning={true}
-						>
-							{item.copy}
-						</span>
-					)}
-					<CP.Link.Edit className="-button" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index} isSelected={isSelected}>
-						{itemStates.hasIcon && <CP.OutputIcon className="_icon" item={item} />}
-						<span
-							className="_text"
-							onInput={(e) => {
-								item.text = e.target.innerText;
-							}}
-							onBlur={(e) => {
-								saveItems();
-							}}
-							contentEditable={true}
-							suppressContentEditableWarning={true}
-						>
-							{item.text}
-						</span>
-					</CP.Link.Edit>
-					{states.hasCaption && (
-						<span
-							className="_caption"
-							onInput={(e) => {
-								item.caption = e.target.innerText;
-							}}
-							onBlur={(e) => {
-								saveItems();
-							}}
-							contentEditable={true}
-							suppressContentEditableWarning={true}
-						>
-							{item.caption}
-						</span>
-					)}
-				</CP.Item>,
-			);
-		});
-
-		if (attributes.EditMode === undefined) {
-			attributes.EditMode = false;
-		}
-		if (rtn.length < loopCount) {
-			let len = rtn.length;
-			while (rtn.length < loopCount) {
-				rtn.push(rtn[rtn.length % len]);
-			}
-		}
 		const blockProps = useBlockProps({
 			className: classes,
 			style: vars,
@@ -144,13 +78,13 @@ wp.blocks.registerBlockType("catpow/buttons", {
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 					<CP.SelectClassPanel title="ボタン" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} selectiveClasses={selectiveItemClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(clss) => setAttributes({ classes: clss })} value={classArray.join(" ")} />
+						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<>
 					{EditMode ? (
-						<div className="cp-altcontent">
+						<div {...blockProps} className="cp-altcontent">
 							<div className="label">
 								<Icon icon="edit" />
 							</div>
@@ -177,7 +111,63 @@ wp.blocks.registerBlockType("catpow/buttons", {
 								</div>
 							) : (
 								<CP.Bem prefix="wp-block-catpow">
-									<ul {...blockProps}>{rtn}</ul>
+									<ul {...blockProps}>
+										{[...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
+											const index = i % items.length;
+											const item = items[index];
+											const itemStates = CP.classNamesToFlags(item.classes);
+											return (
+												<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+													{states.hasMicroCopy && (
+														<span
+															className="_copy"
+															onInput={(e) => {
+																item.copy = e.target.innerText;
+															}}
+															onBlur={(e) => {
+																saveItems();
+															}}
+															contentEditable={true}
+															suppressContentEditableWarning={true}
+														>
+															{item.copy}
+														</span>
+													)}
+													<CP.Link.Edit className="-button" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index} isSelected={isSelected}>
+														{itemStates.hasIcon && <CP.OutputIcon className="_icon" item={item} />}
+														<span
+															className="_text"
+															onInput={(e) => {
+																item.text = e.target.innerText;
+															}}
+															onBlur={(e) => {
+																saveItems();
+															}}
+															contentEditable={true}
+															suppressContentEditableWarning={true}
+														>
+															{item.text}
+														</span>
+													</CP.Link.Edit>
+													{states.hasCaption && (
+														<span
+															className="_caption"
+															onInput={(e) => {
+																item.caption = e.target.innerText;
+															}}
+															onBlur={(e) => {
+																saveItems();
+															}}
+															contentEditable={true}
+															suppressContentEditableWarning={true}
+														>
+															{item.caption}
+														</span>
+													)}
+												</CP.Item>
+											);
+										})}
+									</ul>
 								</CP.Bem>
 							)}
 						</>
@@ -188,8 +178,8 @@ wp.blocks.registerBlockType("catpow/buttons", {
 	},
 	save(props) {
 		const { InnerBlocks } = wp.blockEditor;
-		const { attributes, className } = props;
-		const { items = [], classes, vars, loopParam, doLoop } = attributes;
+		const { attributes } = props;
+		const { items = [], classes, vars, doLoop } = attributes;
 		const states = CP.classNamesToFlags(classes);
 		const blockType = wp.data.select("core/blocks").getBlockType("catpow/buttons");
 		let rtn = [];

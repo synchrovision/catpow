@@ -52,7 +52,7 @@
 			<>
 				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
 				{EditMode ? (
-					<div className="cp-altcontent">
+					<div {...blockProps} className="cp-altcontent">
 						<div className="label">
 							<Icon icon="edit" />
 						</div>

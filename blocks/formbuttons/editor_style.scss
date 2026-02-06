@@ -4,8 +4,9 @@
 .wp-block-catpow-formbuttons{
 	&-button{
 		&__action{
-			@include bnd((d:b,p:a,t:f,l:0,r:0,mg:a,pd:3,z:7));
+			@include bnd((d:b,p:a,t:f,l:0,r:0,w:1em fit,mg:a,pd:3,z:7));
 			@include txt((p:11,h:1em,t:0,c:t));
+			@include bg((c:b));
 			@include shd((b:1));
 			&::before{
 				@include ico('cog');

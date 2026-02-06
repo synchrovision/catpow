@@ -10,11 +10,6 @@
   content: "Input Text";
   opacity: 0.25;
 }
-.wp-block-catpow-buttons__item .itemControl {
-  position: absolute;
-  top: -1.25rem;
-  right: 0rem;
-}
 .wp-block-catpow-buttons__item div.button {
   min-height: auto;
   max-height: auto;

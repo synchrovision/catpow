@@ -5,6 +5,8 @@
   top: 100%;
   left: 0rem;
   right: 0rem;
+  min-width: 1em;
+  width: fit-content;
   margin: auto;
   padding: 0.1875rem;
   z-index: 7;
@@ -12,6 +14,7 @@
   line-height: 1em;
   letter-spacing: 0;
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
   box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
 }
 .wp-block-catpow-formbuttons-button__action::before {
