@@ -141,6 +141,7 @@ wp.blocks.registerBlockType("catpow/accordion", {
 });
 
 wp.blocks.registerBlockType("catpow/accordiongroup", {
+	apiVersion: 3,
 	title: "🐾 AccordionGroup",
 	description: "同時に開かれるアコーディオンを制限するコンテナです。",
 	icon: "insert",

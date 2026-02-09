@@ -107,6 +107,7 @@
     }
   });
   wp.blocks.registerBlockType("catpow/accordiongroup", {
+    apiVersion: 3,
     title: "\u{1F43E} AccordionGroup",
     description: "\u540C\u6642\u306B\u958B\u304B\u308C\u308B\u30A2\u30B3\u30FC\u30C7\u30A3\u30AA\u30F3\u3092\u5236\u9650\u3059\u308B\u30B3\u30F3\u30C6\u30CA\u3067\u3059\u3002",
     icon: "insert",
