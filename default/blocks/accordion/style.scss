@@ -16,9 +16,10 @@
 			@include txt((a:l,c:ix));
 		}
 		&-icon{
+			@include bnd((d:b,p:a,i:0,mg:a,mgr:10,w:20,a:1));
 			&::before,&::after{
 				content:'';
-				@include bnd((d:b,p:a,w:20,h:1,t:0,b:0,r:10,mg:a));
+				@include bnd((d:b,p:a,i:0,w:20,h:1,mg:a));
 				@include bg((c:b));
 			}
 			&::before{
