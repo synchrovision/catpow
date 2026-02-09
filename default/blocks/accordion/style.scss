@@ -3,18 +3,19 @@
 @import 'component-placeholders.scss';
 
 .wp-block-catpow-accordion{
+	$block:&;
 	@extend %ui-block;
-	&>.header{
+	&__header{
 		@extend %header-component;
 		@include bnd((p:r,pdr:50));
 		@include bg((c:mx));
 		@include usr((c:p));
-		.title{
+		&-title{
 			@extend %heading;
 			@include bnd((pd:0,mg:0));
 			@include txt((a:l,c:ix));
 		}
-		.icon{
+		&-icon{
 			&::before,&::after{
 				content:'';
 				@include bnd((d:b,p:a,w:20,h:1,t:0,b:0,r:10,mg:a));
@@ -24,31 +25,46 @@
 				@include trn((t:.4s,r:180deg));
 			}
 			&::after{
-				@include trn((t:.4s,r:90deg));
+				@include trn((t:.4s,r:270deg));
 			}
 		}
 	}
-	&.hasImage>.header{
-		@include bnd((pdl:4em));
-		.image{
-			@include bnd((d:b,w:3em,h:3em,p:a,t:0,l:0));
-			img,picture,video{
-				@include bnd((d:b,w:f,h:f,op:c,of:c));
-			}
-		}
-	}
-	&.open>.header{
-		.icon{
-			&::after,&::before{
-				@include trn((r:0deg));
-			}
-		}
-	}
-	&>.container{
-		@include bnd((o:h));
+	&__contents{
+		@include bnd((h:0,o:h));
 		@include trn((t:.5s));
-		&>.contents{
+		&-body{
 			@include bnd((pd:cpd));
 		}
 	}
+	&.has-image{
+		#{$block}{
+			&__heder{
+				@include bnd((pdl:4em));
+				&-image{
+					@include bnd((d:b,w:3em,h:3em,p:a,t:0,l:0));
+					img,picture,video{
+						@include bnd((d:b,w:f,h:f,op:c,of:c));
+					}
+				}
+			}
+		}
+	}
+	&.is-open{
+		#{$block}{
+			&__header{
+				&-icon{
+					&::after,&::before{
+						@include trn((r:360deg));
+					}
+				}
+			}
+			&__contents{
+				@include bnd((h:var(--contents-height)));
+			}
+		}
+	}
+}
+
+.wp-block-catpow-accordiongroup{
+	@include bnd((d:c));
 }

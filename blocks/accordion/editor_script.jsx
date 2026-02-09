@@ -1,4 +1,6 @@
-﻿CP.config.accordion = {
+﻿import { clsx } from "clsx";
+
+CP.config.accordion = {
 	devices: ["sp", "tb"],
 	imageKeys: {
 		image: { mime: "imageMime", src: "imageSrc", alt: "imageAlt" },
@@ -14,32 +16,33 @@ wp.blocks.registerBlockType("catpow/accordion", {
 	icon: "insert",
 	category: "catpow",
 	attributes: {
-		classes: { source: "attribute", selector: ".wp-block-catpow-accordion", attribute: "class", default: "wp-block-catpow-accordion" },
+		classes: { source: "attribute", selector: ".wp-block-catpow-accordion", attribute: "class", default: "wp-block-catpow-accordion is-level3" },
+		HeadingTag: { type: "string", default: "h3" },
 
-		title: { source: "html", selector: ".title", default: "Title" },
+		title: { source: "html", selector: ".wp-block-catpow-accordion__header-title", default: "Title" },
 
-		imageMime: { source: "attribute", selector: ".image [src]", attribute: "data-mime" },
-		imageSrc: { source: "attribute", selector: ".image [src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy.jpg" },
-		imageAlt: { source: "attribute", selector: ".image [src]", attribute: "alt" },
-		imageCode: { source: "text", selector: ".image" },
+		imageMime: { source: "attribute", selector: ".wp-block-catpow-accordion__header-image [src]", attribute: "data-mime" },
+		imageSrc: { source: "attribute", selector: ".wp-block-catpow-accordion__header-image [src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy.jpg" },
+		imageAlt: { source: "attribute", selector: ".wp-block-catpow-accordion__header-image [src]", attribute: "alt" },
+		imageCode: { source: "text", selector: ".wp-block-catpow-accordion__header-image" },
 	},
 	example: CP.example,
-	edit({ attributes, className, setAttributes }) {
-		const { useState, useMemo } = wp.element;
-		const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
+	edit({ attributes, setAttributes }) {
+		const { useMemo } = wp.element;
+		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
-		const { classes, title, imageMime, imageSrc, imageAlt, imageCode } = attributes;
+		const { classes, HeadingTag, title, imageCode, isOpen = true } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
-		const { devices, imageKeys, imageSizes } = CP.config.accordion;
+		const { imageKeys, imageSizes } = CP.config.accordion;
 
 		const selectiveClasses = useMemo(() => {
-			const { devices, imageKeys, imageSizes } = CP.config.accordion;
+			const { imageKeys, imageSizes } = CP.config.accordion;
 			const selectiveClasses = [
+				"headingTag",
 				"level",
 				"color",
 				{ name: "image", label: "画像", values: "hasImage", sub: [{ input: "image", keys: imageKeys.image, size: imageSizes.image }] },
-				{ name: "exclusive", label: "他を閉じる", values: "exclusive" },
 				{
 					name: "template",
 					label: "テンプレート",
@@ -61,28 +64,28 @@ wp.blocks.registerBlockType("catpow/accordion", {
 
 		return (
 			<>
-				<div className={classes}>
-					<div className="header">
-						{states.hasImage && (
-							<div className="image">
-								{states.isTemplate && imageCode ? (
-									<CP.DummyImage text={imageCode} />
-								) : (
-									<CP.SelectResponsiveImage set={setAttributes} attr={attributes} keys={imageKeys.image} size={imageSizes.image} />
-								)}
+				<CP.Bem prefix="wp-block-catpow">
+					<div {...useBlockProps({ className: clsx(classes, { "is-open": isOpen }) })}>
+						<div className="_header" role="button">
+							{states.hasImage && (
+								<div className="_image">
+									{states.isTemplate && imageCode ? (
+										<CP.DummyImage text={imageCode} />
+									) : (
+										<CP.SelectResponsiveImage set={setAttributes} attr={attributes} keys={imageKeys.image} size={imageSizes.image} />
+									)}
+								</div>
+							)}
+							<RichText tagName={HeadingTag} className="_title" value={title} onChange={(title) => setAttributes({ title: title })} />
+							<span className="_icon" onClick={() => setAttributes({ isOpen: !isOpen })}></span>
+						</div>
+						<div className="_contents">
+							<div className="_body">
+								<InnerBlocks />
 							</div>
-						)}
-						<h3 className="title">
-							<RichText tagName="div" value={title} onChange={(title) => setAttributes({ title: title })} />
-						</h3>
-						<span className="icon"></span>
-					</div>
-					<div className="container">
-						<div className="contents">
-							<InnerBlocks />
 						</div>
 					</div>
-				</div>
+				</CP.Bem>
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
@@ -92,29 +95,100 @@ wp.blocks.registerBlockType("catpow/accordion", {
 			</>
 		);
 	},
-	save({ attributes, className, setAttributes }) {
-		const { classes, title, imageMime, imageSrc, imageAlt, imageCode } = attributes;
+	save({ attributes }) {
+		const { classes, HeadingTag, title, imageCode } = attributes;
 		const states = CP.classNamesToFlags(classes);
-		const { devices, imageKeys, imageSizes } = CP.config.accordion;
-		const { InnerBlocks, RichText } = wp.blockEditor;
+		const { imageKeys } = CP.config.accordion;
+		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
+
+		const blockProps = useBlockProps.save({
+			id: "{$uid}",
+			className: classes,
+			"data-wp-interactive": "catpow/accordion",
+			"data-wp-context": JSON.stringify({
+				accordionId: "{$uid}",
+			}),
+			"data-wp-init": "callbacks.initBlock",
+			"data-wp-class--is-open": "callbacks.isOpen",
+		});
 
 		return (
-			<>
-				<div className={classes}>
-					<div className="header">
-						{states.hasImage && <div className="image">{states.isTemplate && imageCode ? imageCode : <CP.ResponsiveImage attr={attributes} keys={imageKeys.image} size="medium_large" />}</div>}
-						<h3 className="title">
-							<RichText.Content value={title} />
-						</h3>
-						<span className="icon"></span>
+			<CP.Bem prefix="wp-block-catpow">
+				<div {...blockProps}>
+					<div
+						id="{$uid}-header"
+						className="_header"
+						role="button"
+						data-wp-on--click="actions.onClickToggle"
+						data-wp-bind--aria-expanded="callbacks.isOpen"
+						aria-controls="{$uid}-contents"
+						tabindex="0"
+					>
+						{states.hasImage && <div className="_image">{states.isTemplate && imageCode ? imageCode : <CP.ResponsiveImage attr={attributes} keys={imageKeys.image} size="medium_large" />}</div>}
+						<RichText.Content tagName={HeadingTag} className="_title" value={title} />
+						<span className="_icon"></span>
 					</div>
-					<div className="container">
-						<div className="contents">
+					<div id="{$uid}-contents" className="_contents" data-wp-bind--aria-hidden="!callbacks.isOpen">
+						<div className="_body">
 							<InnerBlocks.Content />
 						</div>
 					</div>
 				</div>
+			</CP.Bem>
+		);
+	},
+});
+
+wp.blocks.registerBlockType("catpow/accordiongroup", {
+	title: "🐾 AccordionGroup",
+	description: "同時に開かれるアコーディオンを制限するコンテナです。",
+	icon: "insert",
+	category: "catpow",
+	attributes: {
+		classes: { source: "attribute", selector: ".wp-block-catpow-accordiongourp", attribute: "class", default: "wp-block-catpow-accordiongroup" },
+		groupId: { type: "string", default: "accordionGroup" },
+	},
+	example: CP.example,
+	edit({ attributes, setAttributes }) {
+		const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
+		const { Icon, PanelBody, TextControl } = wp.components;
+		const { classes, groupId } = attributes;
+		return (
+			<>
+				<CP.Bem prefix="wp-block-catpow">
+					<div {...useBlockProps({ className: classes })}>
+						<div className="cp-label">
+							<Icon icon="excerpt-view" />
+							{groupId}
+						</div>
+						<InnerBlocks />
+					</div>
+				</CP.Bem>
+				<InspectorControls>
+					<PanelBody title="GroupId" icon="admin-generic" initialOpen={true}>
+						<TextControl onChange={(groupId) => setAttributes({ groupId })} value={groupId} />
+					</PanelBody>
+				</InspectorControls>
 			</>
+		);
+	},
+	save({ attributes }) {
+		const { InnerBlocks, useBlockProps } = wp.blockEditor;
+		const { classes, groupId } = attributes;
+		const blockProps = useBlockProps.save({
+			className: classes,
+			"data-wp-interactive": "catpow/accordion",
+			"data-wp-context": JSON.stringify({
+				groupId,
+			}),
+		});
+
+		return (
+			<CP.Bem prefix="wp-block-catpow">
+				<div {...blockProps}>
+					<InnerBlocks.Content />
+				</div>
+			</CP.Bem>
 		);
 	},
 });
