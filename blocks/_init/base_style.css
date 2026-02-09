@@ -13,6 +13,25 @@
   width: 6.25rem;
   height: auto;
 }
+.cp-label {
+  width: fit-content;
+  margin-left: auto;
+  padding: 0.25em;
+  align-content: center;
+  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: var(--cp-font-family-g);
+  font-weight: 400;
+  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
+  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+}
+.cp-label > .dashicon {
+  display: inline-block;
+  margin-right: 0.2em;
+  color: var(--wp-admin-theme-color);
+}
 .cp-selectbuttons {
   width: max-content;
 }
@@ -324,19 +343,38 @@
 .cp-link {
   position: relative;
 }
-.cp-link-input {
+.cp-link__portal {
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  pointer-events: none;
+}
+.cp-link__portal-box {
+  position: absolute;
+}
+.cp-link__portal-box-input {
   display: block;
   position: absolute;
   min-width: 1em;
   width: fit-content;
-  height: 1em;
+  height: 2em;
   padding: 0.25em 1em;
-  bottom: 0rem;
+  padding-left: 1.5em;
+  bottom: -2.5em;
   left: -12.5rem;
   right: -12.5rem;
   margin: auto;
+  box-sizing: border-box;
   background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
-  font-size: 0.75rem;
+  border-style: solid;
+  border-width: 0.125rem;
+  border-radius: 0.25rem;
+  border-color: var(--wp-admin-theme-color);
+  font-size: 0.875rem;
   line-height: 1em;
   color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
   box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
@@ -345,12 +383,37 @@
   opacity: 1;
   transform: -webkit- translateY(0rem);
   transform: translateY(0rem);
+  pointer-events: auto;
 }
-.cp-link-input:empty:before {
+.cp-link__portal-box-input::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -1em;
+  right: -1em;
+  bottom: -1em;
+  left: -1em;
+  inset: -1em;
+  margin: auto;
+  margin-left: 0rem;
+  width: 1.5em;
+  height: 1.5em;
+  padding: 0.25em;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background-color: var(--wp-admin-theme-color);
+  text-align: center;
+  font-size: 1.25em;
+  line-height: 1em;
+  font-family: dashicons;
+  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+}
+.cp-link__portal-box-input:empty:after {
   content: "Input URL";
   opacity: 0.5;
 }
-.cp-link:not(.is-selected) .cp-link-input {
+.cp-link__portal-box-input:not(.is-selected) {
   opacity: 0;
   transform: -webkit- translateY(-0.5em);
   transform: translateY(-0.5em);

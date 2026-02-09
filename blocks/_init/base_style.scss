@@ -21,6 +21,16 @@ $colors:(
 	}
 }
 .cp{
+	&-label{
+		@include bnd((w:fit,mgl:a,pd:.25em,ac:c));
+		@include bg((c:b));
+		@include txt((a:c,p:16,h:1em,f:g,w:r,c:t));
+		@include shd((b:2));
+		>.dashicon{
+			@include bnd((d:ib,mgr:.2em));
+			@include txt((c:wp));
+		}
+	}
 	&-selectbuttons{
 		@include bnd((w:max));
 	}
@@ -191,21 +201,36 @@ $colors:(
 	}
 	&-link{
 		@include bnd((p:r));
-		&-input{
-			@include bnd((d:b,p:a,w:1em fit,h:1em,pd:.25em 1em,b:0,l:-200,r:-200,mg:a));
-			@include bg((c:b));
-			@include txt((p:12,h:1em,c:t));
-			@include shd((b:2));
-			@include trn((t:.2s,o:1,y:0));
-			&:empty:before{
-				content:'Input URL';
-				@include trn((o:.5));
-			}
-		}
-		&:not(.is-selected) &{
-			&-input{
-				@include trn((o:0,y:-.5em));
-				@include usr((e:n));
+		&__portal{
+			@include bnd((d:b,p:a,i:0));
+			@include usr((e:n));
+			&-box{
+				@include bnd((p:a));
+				&-input{
+					@include bnd((d:b,p:a,w:1em fit,h:2em,pd:.25em 1em,pdl:1.5em,b:-2.5em,l:-200,r:-200,mg:a,bs:b));
+					@include bg((c:b));
+					@include bdr((s:s,w:2,r:4,c:wp));
+					@include txt((p:14,h:1em,c:t));
+					@include shd((b:2));
+					@include trn((t:.2s,o:1,y:0));
+					@include usr((e:a));
+					&::before{
+						content:"\f103";
+						@include bnd((d:b,p:a,i:-1em,mg:a,mgl:0,w:1.5em,h:1.5em,pd:.25em,bs:b));
+						@include bdr((r:50%));
+						@include bg((c:wp));
+						@include txt((a:c,p:1.25em,h:1em,f:di,c:i));
+						@include shd((b:1));
+					}
+					&:empty:after{
+						content:'Input URL';
+						@include trn((o:.5));
+					}
+					&:not(.is-selected){
+						@include trn((o:0,y:-.5em));
+						@include usr((e:n));
+					}
+				}
 			}
 		}
 	}

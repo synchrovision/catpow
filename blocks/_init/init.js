@@ -1054,6 +1054,23 @@
     );
   };
 
+  // node_modules-included/catpow/src/util/buffer/throttle.js
+  var throttle = (callback, interval) => {
+    let timer, hold = false;
+    return (e) => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+      if (hold) {
+        timer = setTimeout(callback, interval, e);
+      } else {
+        hold = true;
+        callback(e);
+        setTimeout(() => hold = false, interval);
+      }
+    };
+  };
+
   // node_modules-included/catpow/src/util/calc/round.js
   var pfloor = (n, p) => parseFloat(Math.floor(parseFloat(n + "e" + p)) + "e-" + p);
 
@@ -1772,7 +1789,11 @@
       if (props.className) {
         el2.className = props.className;
       }
-      document.body.appendChild(el2);
+      if (props.container) {
+        document.querySelector(props.container).appendChild(el2);
+      } else {
+        document.body.appendChild(el2);
+      }
       return el2;
     }, []);
     useEffect4(() => {
@@ -4893,52 +4914,61 @@
   };
   Link.Edit = (props) => {
     const { className, set, attr, keys, index, isSelected = "auto", ...otherProps } = props;
-    const { onChange } = props;
-    const { useMemo: useMemo7, useCallback: useCallback3, useEffect: useEffect4, useState: useState4 } = wp.element;
-    const classes = useMemo7(() => bem("cp-link " + className), [className]);
+    const { useMemo: useMemo7, useEffect: useEffect4, useState: useState4 } = wp.element;
     const item = useMemo7(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
-    const [hasCursor, setHasCursor] = useState4(false);
+    const [hasSelection, setHasSelection] = useState4(false);
     const [ref, setRef] = useState4(false);
+    const [portalBoxRef, setPortalBoxRef] = useState4(false);
     useEffect4(() => {
-      const cb = () => {
-        if (!ref) {
-          return;
+      if (!ref || !portalBoxRef) {
+        return;
+      }
+      let timer;
+      const updateHasSelection = () => {
+        if (ref.ownerDocument.getSelection().containsNode(ref, true)) {
+          tracePosition();
+          setHasSelection(true);
+          ref.ownerDocument.addEventListener("scroll", tracePosition);
+        } else {
+          setHasSelection(false);
+          ref.ownerDocument.removeEventListener("scroll", tracePosition);
         }
-        const selection = window.getSelection();
-        setHasCursor(selection.rangeCount > 0 && ref.contains(selection.getRangeAt(0).commonAncestorContainer));
       };
-      document.addEventListener("click", cb);
-      return () => document.removeEventListener("click", cb);
-    }, [ref, setHasCursor]);
-    return /* @__PURE__ */ wp.element.createElement(
-      "span",
+      const tracePosition = () => {
+        const bnd1 = ref.getBoundingClientRect();
+        portalBoxRef.style.setProperty("top", bnd1.top + "px");
+        portalBoxRef.style.setProperty("left", bnd1.left + "px");
+        portalBoxRef.style.setProperty("width", bnd1.width + "px");
+        portalBoxRef.style.setProperty("height", bnd1.height + "px");
+      };
+      const tracePositionThrottle = throttle(tracePosition, 100);
+      ref.ownerDocument.addEventListener("selectionchange", updateHasSelection);
+      portalBoxRef.ownerDocument.addEventListener("selectionchange", updateHasSelection);
+      return () => {
+        ref.ownerDocument.removeEventListener("selectionchange", updateHasSelection);
+        portalBoxRef.ownerDocument.removeEventListener("selectionchange", updateHasSelection);
+        clearTimeout(timer);
+      };
+    }, [ref, portalBoxRef, setHasSelection]);
+    const states = { "is-selected": isSelected === "auto" ? hasSelection : isSelected };
+    return /* @__PURE__ */ wp.element.createElement(CP.Bem, null, /* @__PURE__ */ wp.element.createElement("span", { className: clsx("cp-link", className, states), ...otherProps, ref: setRef }, props.children, /* @__PURE__ */ wp.element.createElement(Portal, { id: "cp-link", className: "_portal", container: ".editor-visual-editor" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_box", ref: setPortalBoxRef }, /* @__PURE__ */ wp.element.createElement(
+      "div",
       {
-        className: classes({
-          "is-selected": isSelected === "auto" ? hasCursor : isSelected
-        }),
-        ...otherProps,
-        ref: setRef
-      },
-      props.children,
-      /* @__PURE__ */ wp.element.createElement(
-        "span",
-        {
-          className: classes.input(),
-          contentEditable: true,
-          suppressContentEditableWarning: true,
-          onBlur: (e) => {
-            const href = e.target.textContent;
-            if (keys.items) {
-              Object.assign(attr[keys.items][index], { [keys.href]: href });
-              set({ [keys.items]: JSON.parse(JSON.stringify(attr[keys.items])) });
-            } else {
-              set({ [keys.href]: href });
-            }
+        className: clsx("_input", states),
+        contentEditable: "plaintext-only",
+        suppressContentEditableWarning: true,
+        onBlur: (e) => {
+          const href = e.target.textContent;
+          if (keys.items) {
+            Object.assign(attr[keys.items][index], { [keys.href]: href });
+            set({ [keys.items]: JSON.parse(JSON.stringify(attr[keys.items])) });
+          } else {
+            set({ [keys.href]: href });
           }
-        },
-        item[keys.href] || ""
-      )
-    );
+        }
+      },
+      item[keys.href] || ""
+    )))));
   };
 
   // ../blocks/_init/init/CP/components/RTF.jsx

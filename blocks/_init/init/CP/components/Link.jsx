@@ -1,4 +1,7 @@
-﻿import { bem } from "catpow/util";
+﻿import { clsx } from "clsx";
+import { Portal } from "catpow/component";
+import { throttle } from "catpow/util";
+import { useThrottle } from "catpow/hooks";
 
 export const Link = (props) => {
 	const { className, attr, keys, index, ...otherProps } = props;
@@ -15,52 +18,74 @@ export const Link = (props) => {
 };
 Link.Edit = (props) => {
 	const { className, set, attr, keys, index, isSelected = "auto", ...otherProps } = props;
-	const { onChange } = props;
-	const { useMemo, useCallback, useEffect, useState } = wp.element;
-	const classes = useMemo(() => bem("cp-link " + className), [className]);
+	const { useMemo, useEffect, useState } = wp.element;
 
 	const item = useMemo(() => (keys.items ? attr[keys.items][index] : attr), [attr, keys.items, index]);
 
-	const [hasCursor, setHasCursor] = useState(false);
+	const [hasSelection, setHasSelection] = useState(false);
 	const [ref, setRef] = useState(false);
+	const [portalBoxRef, setPortalBoxRef] = useState(false);
 
 	useEffect(() => {
-		const cb = () => {
-			if (!ref) {
-				return;
+		if (!ref || !portalBoxRef) {
+			return;
+		}
+		let timer;
+		const updateHasSelection = () => {
+			if (ref.ownerDocument.getSelection().containsNode(ref, true)) {
+				tracePosition();
+				setHasSelection(true);
+				ref.ownerDocument.addEventListener("scroll", tracePosition);
+			} else {
+				setHasSelection(false);
+				ref.ownerDocument.removeEventListener("scroll", tracePosition);
 			}
-			const selection = window.getSelection();
-			setHasCursor(selection.rangeCount > 0 && ref.contains(selection.getRangeAt(0).commonAncestorContainer));
 		};
-		document.addEventListener("click", cb);
-		return () => document.removeEventListener("click", cb);
-	}, [ref, setHasCursor]);
+		const tracePosition = () => {
+			const bnd1 = ref.getBoundingClientRect();
+			portalBoxRef.style.setProperty("top", bnd1.top + "px");
+			portalBoxRef.style.setProperty("left", bnd1.left + "px");
+			portalBoxRef.style.setProperty("width", bnd1.width + "px");
+			portalBoxRef.style.setProperty("height", bnd1.height + "px");
+		};
+		const tracePositionThrottle = throttle(tracePosition, 100);
+		ref.ownerDocument.addEventListener("selectionchange", updateHasSelection);
+		portalBoxRef.ownerDocument.addEventListener("selectionchange", updateHasSelection);
+
+		return () => {
+			ref.ownerDocument.removeEventListener("selectionchange", updateHasSelection);
+			portalBoxRef.ownerDocument.removeEventListener("selectionchange", updateHasSelection);
+			clearTimeout(timer);
+		};
+	}, [ref, portalBoxRef, setHasSelection]);
+
+	const states = { "is-selected": isSelected === "auto" ? hasSelection : isSelected };
 
 	return (
-		<span
-			className={classes({
-				"is-selected": isSelected === "auto" ? hasCursor : isSelected,
-			})}
-			{...otherProps}
-			ref={setRef}
-		>
-			{props.children}
-			<span
-				className={classes.input()}
-				contentEditable={true}
-				suppressContentEditableWarning={true}
-				onBlur={(e) => {
-					const href = e.target.textContent;
-					if (keys.items) {
-						Object.assign(attr[keys.items][index], { [keys.href]: href });
-						set({ [keys.items]: JSON.parse(JSON.stringify(attr[keys.items])) });
-					} else {
-						set({ [keys.href]: href });
-					}
-				}}
-			>
-				{item[keys.href] || ""}
+		<CP.Bem>
+			<span className={clsx("cp-link", className, states)} {...otherProps} ref={setRef}>
+				{props.children}
+				<Portal id="cp-link" className="_portal" container=".editor-visual-editor">
+					<div className="_box" ref={setPortalBoxRef}>
+						<div
+							className={clsx("_input", states)}
+							contentEditable="plaintext-only"
+							suppressContentEditableWarning={true}
+							onBlur={(e) => {
+								const href = e.target.textContent;
+								if (keys.items) {
+									Object.assign(attr[keys.items][index], { [keys.href]: href });
+									set({ [keys.items]: JSON.parse(JSON.stringify(attr[keys.items])) });
+								} else {
+									set({ [keys.href]: href });
+								}
+							}}
+						>
+							{item[keys.href] || ""}
+						</div>
+					</div>
+				</Portal>
 			</span>
-		</span>
+		</CP.Bem>
 	);
 };
