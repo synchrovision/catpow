@@ -1054,23 +1054,6 @@
     );
   };
 
-  // node_modules-included/catpow/src/util/buffer/throttle.js
-  var throttle = (callback, interval) => {
-    let timer, hold = false;
-    return (e) => {
-      if (timer) {
-        clearTimeout(timer);
-      }
-      if (hold) {
-        timer = setTimeout(callback, interval, e);
-      } else {
-        hold = true;
-        callback(e);
-        setTimeout(() => hold = false, interval);
-      }
-    };
-  };
-
   // node_modules-included/catpow/src/util/calc/round.js
   var pfloor = (n, p) => parseFloat(Math.floor(parseFloat(n + "e" + p)) + "e-" + p);
 
@@ -1728,7 +1711,18 @@
   // node_modules-included/catpow/src/component/Input/PositionInput.jsx
   init_react();
   var PositionInput = (props) => {
-    const { className = "cp-positioninput", width = 100, height = 100, margin = 10, grid = 10, snap = false, x = 50, y = 50, r: r2 = 6, onChange, ...otherProps } = props;
+    const {
+      className = "cp-positioninput",
+      width = 100,
+      height = 100,
+      margin = 10,
+      grid = 10,
+      snap = false,
+      value: { x = 50, y = 50 },
+      r: r2 = 6,
+      onChange,
+      ...otherProps
+    } = props;
     const [ref, state] = useScratch_default();
     const [pos, setPos] = useState({ x, y });
     useThrottle(() => onChange({ x: pos.x, y: pos.y }), 50, [pos.x, pos.y]);
@@ -4941,7 +4935,6 @@
         portalBoxRef.style.setProperty("width", bnd1.width + "px");
         portalBoxRef.style.setProperty("height", bnd1.height + "px");
       };
-      const tracePositionThrottle = throttle(tracePosition, 100);
       ref.ownerDocument.addEventListener("selectionchange", updateHasSelection);
       portalBoxRef.ownerDocument.addEventListener("selectionchange", updateHasSelection);
       return () => {

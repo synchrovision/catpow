@@ -1,7 +1,5 @@
 ﻿import { clsx } from "clsx";
 import { Portal } from "catpow/component";
-import { throttle } from "catpow/util";
-import { useThrottle } from "catpow/hooks";
 
 export const Link = (props) => {
 	const { className, attr, keys, index, ...otherProps } = props;
@@ -48,7 +46,6 @@ Link.Edit = (props) => {
 			portalBoxRef.style.setProperty("width", bnd1.width + "px");
 			portalBoxRef.style.setProperty("height", bnd1.height + "px");
 		};
-		const tracePositionThrottle = throttle(tracePosition, 100);
 		ref.ownerDocument.addEventListener("selectionchange", updateHasSelection);
 		portalBoxRef.ownerDocument.addEventListener("selectionchange", updateHasSelection);
 
