@@ -1,4 +1,11 @@
-﻿wp.blocks.registerBlockType("catpow/formbuttons", {
+﻿const blockConfig = {
+	linkKeys: {
+		link: { href: "action", items: "items" },
+	},
+};
+CP.config.formbuttons = blockConfig;
+
+wp.blocks.registerBlockType("catpow/formbuttons", {
 	title: "🐾 FormButtons",
 	description: "フォーム用のボタンです。",
 	icon: "upload",
@@ -9,7 +16,7 @@
 		const { BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
 		const { items = [], classes = "", EditMode = false } = attributes;
-		var classArray = _.uniq((className + " " + classes).split(" "));
+		const { linkKeys } = blockConfig;
 
 		const states = CP.classNamesToFlags(classes);
 
@@ -93,7 +100,7 @@
 												{item.copy}
 											</span>
 										)}
-										<div className="-button" role="button">
+										<CP.Link.Edit className="-button" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index}>
 											{itemStates.hasIcon && <CP.OutputIcon className="_icon" item={item} />}
 											<span
 												className="_text"
@@ -106,18 +113,7 @@
 											>
 												{item.text}
 											</span>
-											<span
-												className="_action"
-												onInput={(e) => {
-													item.action = e.target.innerText;
-												}}
-												onBlur={saveItems}
-												contentEditable={true}
-												suppressContentEditableWarning={true}
-											>
-												{item.action}
-											</span>
-										</div>
+										</CP.Link.Edit>
 										{states.hasCaption && (
 											<span
 												className="_caption"
@@ -143,7 +139,7 @@
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 					<CP.SelectClassPanel title="ボタン" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} selectiveClasses={selectiveItemClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(clss) => setAttributes({ classes: clss })} value={classArray.join(" ")} />
+						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>

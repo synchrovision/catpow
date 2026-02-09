@@ -1,30 +1,30 @@
 <?php
-$block_class='wp-block-catpow-formbuttons';
-$buttons_class='cp-buttons';
-$button_class='cp-button';
+$block_class="wp-block-catpow-formbuttons";
+$buttons_class="cp-buttons";
+$button_class="cp-button";
 $attributes=[
-	"classes"=>["source"=>'attribute',"selector"=>".{$block_class}","attribute"=>'class',"default"=>"{$block_class} {$buttons_class}"],
-	'items'=>[
-		'source'=>'query',
+	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} {$buttons_class}"],
+	"items"=>[
+		"source"=>"query",
 		"selector"=>".{$block_class}__item",
-		'filters'=>[
-			'iconHolder'=>['selector'=>".{$block_class}-button__icon"],
-			'eventDispatcher'=>['selector'=>".{$block_class}-button"]
+		"filters"=>[
+			"iconHolder"=>["selector"=>".{$block_class}-button__icon"],
+			"eventDispatcher"=>["selector"=>".{$block_class}-button"]
 		],
-		'query'=>[
-			'classes'=>['source'=>'attribute','attribute'=>'class'],
-			'action'=>['source'=>'attribute','selector'=>".{$block_class}-button",'attribute'=>'data-action'],
-			'callback'=>['source'=>'attribute','selector'=>".{$block_class}-button",'attribute'=>'data-callback'],
-			'target'=>['source'=>'attribute','selector'=>".{$block_class}-button",'attribute'=>'data-target'],
-			'ignoreMessage'=>['source'=>'attribute','selector'=>".{$block_class}-button",'attribute'=>'ignore-message'],
-			"copy"=>["source"=>'html',"selector"=>".{$block_class}__item-copy"],
-			"text"=>["source"=>'html',"selector"=>".{$block_class}-button__text"],
-			"caption"=>["source"=>'html',"selector"=>".{$block_class}__item-caption"],
-			"iconSrc"=>["source"=>'attribute',"selector"=>".{$block_class}-button__icon-img","attribute"=>'src'],
-			"iconAlt"=>["source"=>'attribute',"selector"=>".{$block_class}-button__icon-img","attribute"=>'alt'],
+		"query"=>[
+			"classes"=>["source"=>"attribute","attribute"=>"class"],
+			"action"=>["source"=>"attribute","selector"=>".{$block_class}-button","attribute"=>"data-action"],
+			"callback"=>["source"=>"attribute","selector"=>".{$block_class}-button","attribute"=>"data-callback"],
+			"target"=>["source"=>"attribute","selector"=>".{$block_class}-button","attribute"=>"data-target"],
+			"ignoreMessage"=>["source"=>"attribute","selector"=>".{$block_class}-button","attribute"=>"ignore-message"],
+			"copy"=>["source"=>"html","selector"=>".{$block_class}__item-copy"],
+			"text"=>["source"=>"html","selector"=>".{$block_class}-button__text"],
+			"caption"=>["source"=>"html","selector"=>".{$block_class}__item-caption"],
+			"iconSrc"=>["source"=>"attribute","selector"=>".{$block_class}-button__icon-img","attribute"=>"src"],
+			"iconAlt"=>["source"=>"attribute","selector"=>".{$block_class}-button__icon-img","attribute"=>"alt"],
 		],
-		'default'=>[
-			['classes'=>'item','action'=>'send','text'=>'送信']
+		"default"=>[
+			["classes"=>"{$block_class}__item","action"=>"send","text"=>"送信"]
 		]
 	]
 ];
