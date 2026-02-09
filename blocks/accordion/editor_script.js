@@ -52,6 +52,7 @@
           "headingTag",
           "level",
           "color",
+          "hasContentWidth",
           { name: "image", label: "\u753B\u50CF", values: "hasImage", sub: [{ input: "image", keys: imageKeys2.image, size: imageSizes2.image }] },
           {
             name: "template",

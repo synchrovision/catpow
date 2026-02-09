@@ -42,6 +42,7 @@ wp.blocks.registerBlockType("catpow/accordion", {
 				"headingTag",
 				"level",
 				"color",
+				"hasContentWidth",
 				{ name: "image", label: "画像", values: "hasImage", sub: [{ input: "image", keys: imageKeys.image, size: imageSizes.image }] },
 				{
 					name: "template",
