@@ -12,8 +12,8 @@
     edit({ attributes, setAttributes, className }) {
       const { content_path, props, options } = attributes;
       const { useEffect } = wp.element;
-      const { InspectorControls } = wp.blockEditor;
-      const { PanelBody, TreeSelect } = wp.components;
+      const { InspectorControls, useBlockProps } = wp.blockEditor;
+      const { Icon, PanelBody, TreeSelect } = wp.components;
       const { useSelect } = wp.data;
       if (!options && content_path) {
         const path = content_path.slice(0, content_path.lastIndexOf("/"));
@@ -39,12 +39,12 @@
           setAttributes({ options: options2, props: JSON.stringify(newProps) });
         });
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-embeddedcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, content_path), /* @__PURE__ */ wp.element.createElement(CP.ServerSideRender, { block: "catpow/app", attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: "wp-block-catpow-app" }) }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "admin-generic" }), content_path), /* @__PURE__ */ wp.element.createElement(CP.ServerSideRender, { block: "catpow/app", attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" }, /* @__PURE__ */ wp.element.createElement(
         TreeSelect,
         {
           label: "path",
           selectedId: content_path,
-          tree: Object.values(cpEmbeddablesTree.app),
+          tree: Object.values(cpEmbeddablesTree.app || {}),
           onChange: (content_path2) => {
             const path = content_path2.slice(0, content_path2.lastIndexOf("/"));
             setAttributes({
@@ -57,7 +57,7 @@
       )), options && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u8A2D\u5B9A", icon: "edit", set: setAttributes, attr: attributes, selectiveClasses: options, initialOpen: true })));
     },
     save({ attributes, className, setAttributes }) {
-      return "null";
+      return false;
     }
   });
 })();

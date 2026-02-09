@@ -1,9 +1,4 @@
-﻿/*
- * 現在の投稿を規定のテンプレートを用いて表示する
- * APIを用いて様々な操作を行うcomponentを表示する
- */
-
-wp.blocks.registerBlockType("catpow/app", {
+﻿wp.blocks.registerBlockType("catpow/app", {
 	title: "🐾 App",
 	description: "テーマに定義されたアプリを表示します。",
 	icon: "editor-code",
@@ -15,8 +10,8 @@ wp.blocks.registerBlockType("catpow/app", {
 	edit({ attributes, setAttributes, className }) {
 		const { content_path, props, options } = attributes;
 		const { useEffect } = wp.element;
-		const { InspectorControls } = wp.blockEditor;
-		const { PanelBody, TreeSelect } = wp.components;
+		const { InspectorControls, useBlockProps } = wp.blockEditor;
+		const { Icon, PanelBody, TreeSelect } = wp.components;
 		const { useSelect } = wp.data;
 
 		if (!options && content_path) {
@@ -48,8 +43,11 @@ wp.blocks.registerBlockType("catpow/app", {
 
 		return (
 			<>
-				<div className="cp-embeddedcontent">
-					<div className="label">{content_path}</div>
+				<div {...useBlockProps({ className: "wp-block-catpow-app" })}>
+					<div className="cp-label">
+						<Icon icon="admin-generic" />
+						{content_path}
+					</div>
 					<CP.ServerSideRender block="catpow/app" attributes={attributes} />
 				</div>
 				<InspectorControls>
@@ -57,7 +55,7 @@ wp.blocks.registerBlockType("catpow/app", {
 						<TreeSelect
 							label="path"
 							selectedId={content_path}
-							tree={Object.values(cpEmbeddablesTree.app)}
+							tree={Object.values(cpEmbeddablesTree.app || {})}
 							onChange={(content_path) => {
 								const path = content_path.slice(0, content_path.lastIndexOf("/"));
 								setAttributes({
@@ -75,6 +73,6 @@ wp.blocks.registerBlockType("catpow/app", {
 	},
 
 	save({ attributes, className, setAttributes }) {
-		return "null";
+		return false;
 	},
 });
