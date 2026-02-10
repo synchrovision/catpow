@@ -28,7 +28,6 @@ Link.Edit = (props) => {
 		if (!ref || !portalBoxRef) {
 			return;
 		}
-		let timer;
 		const updateHasSelection = () => {
 			if (ref.ownerDocument.getSelection().containsNode(ref, true)) {
 				tracePosition();
@@ -52,7 +51,6 @@ Link.Edit = (props) => {
 		return () => {
 			ref.ownerDocument.removeEventListener("selectionchange", updateHasSelection);
 			portalBoxRef.ownerDocument.removeEventListener("selectionchange", updateHasSelection);
-			clearTimeout(timer);
 		};
 	}, [ref, portalBoxRef, setHasSelection]);
 

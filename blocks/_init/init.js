@@ -4917,7 +4917,6 @@
       if (!ref || !portalBoxRef) {
         return;
       }
-      let timer;
       const updateHasSelection = () => {
         if (ref.ownerDocument.getSelection().containsNode(ref, true)) {
           tracePosition();
@@ -4940,7 +4939,6 @@
       return () => {
         ref.ownerDocument.removeEventListener("selectionchange", updateHasSelection);
         portalBoxRef.ownerDocument.removeEventListener("selectionchange", updateHasSelection);
-        clearTimeout(timer);
       };
     }, [ref, portalBoxRef, setHasSelection]);
     const states = { "is-selected": isSelected === "auto" ? hasSelection : isSelected };
