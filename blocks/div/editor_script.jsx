@@ -2,7 +2,6 @@
 	devices: ["sp", "tb"],
 	imageKeys: {
 		iconImage: { src: "iconImageSrc", alt: "iconImageAlt" },
-		backgroundImage: { src: "backgroundImageSrc", sources: "backgroundImageSources" },
 	},
 };
 wp.blocks.registerBlockType("catpow/div", {
@@ -61,18 +60,10 @@ wp.blocks.registerBlockType("catpow/div", {
 				"color",
 				"colorScheme",
 				"backgroundColor",
+				"backgroundImage",
 				"backgroundPattern",
-				{
-					name: "borderImage",
-					type: "buttons",
-					label: "ボーダー画像",
-					values: { noBorder: "なし", hasFrameImage: "フレーム", hasBorderImage: "ボーダー" },
-					sub: {
-						hasFrameImage: [{ input: "frame", css: "frameImageCss", sel: ({ attr }) => "#" + attr.anchor, color }],
-						hasBorderImage: [{ input: "border", css: "borderImageCss", sel: ({ attr }) => "#" + attr.anchor, color }],
-					},
-				},
 				"hasMargin",
+				"hasPadding",
 			];
 			wp.hooks.applyFilters("catpow.blocks.div.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -110,8 +101,6 @@ wp.blocks.registerBlockType("catpow/div", {
 			<div {...blockProps}>
 				{states.hasIcon && <CP.OutputIcon item={attributes} />}
 				<InnerBlocks.Content />
-				{states.hasBorderImage && <style className="borderImageCss">{borderImageCss}</style>}
-				{states.hasFrameImage && <style className="frameImageCss">{frameImageCss}</style>}
 			</div>
 		);
 	},

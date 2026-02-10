@@ -3,8 +3,7 @@
   CP.config.div = {
     devices: ["sp", "tb"],
     imageKeys: {
-      iconImage: { src: "iconImageSrc", alt: "iconImageAlt" },
-      backgroundImage: { src: "backgroundImageSrc", sources: "backgroundImageSources" }
+      iconImage: { src: "iconImageSrc", alt: "iconImageAlt" }
     }
   };
   wp.blocks.registerBlockType("catpow/div", {
@@ -61,18 +60,10 @@
           "color",
           "colorScheme",
           "backgroundColor",
+          "backgroundImage",
           "backgroundPattern",
-          {
-            name: "borderImage",
-            type: "buttons",
-            label: "\u30DC\u30FC\u30C0\u30FC\u753B\u50CF",
-            values: { noBorder: "\u306A\u3057", hasFrameImage: "\u30D5\u30EC\u30FC\u30E0", hasBorderImage: "\u30DC\u30FC\u30C0\u30FC" },
-            sub: {
-              hasFrameImage: [{ input: "frame", css: "frameImageCss", sel: ({ attr }) => "#" + attr.anchor, color }],
-              hasBorderImage: [{ input: "border", css: "borderImageCss", sel: ({ attr }) => "#" + attr.anchor, color }]
-            }
-          },
-          "hasMargin"
+          "hasMargin",
+          "hasPadding"
         ];
         wp.hooks.applyFilters("catpow.blocks.div.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
@@ -85,7 +76,7 @@
       const { classes = "", vars, clipVars, frameImageCss, borderImageCss } = attributes;
       const states = CP.classNamesToFlags(classes);
       const blockProps = useBlockProps.save({ className: classes, style: states.hasClipPath ? { ...vars, ...clipVars } : vars });
-      return /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null), states.hasBorderImage && /* @__PURE__ */ wp.element.createElement("style", { className: "borderImageCss" }, borderImageCss), states.hasFrameImage && /* @__PURE__ */ wp.element.createElement("style", { className: "frameImageCss" }, frameImageCss));
+      return /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null));
     }
   });
 })();
