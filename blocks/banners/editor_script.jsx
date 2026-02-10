@@ -44,7 +44,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 		const { devices, imageKeys, linkKeys } = CP.config.banners;
 
 		const selectiveClasses = useMemo(() => {
-			var selectiveClasses = ["itemSize", "itemGap", "hasContentWidth", "hasMargin", "hasPadding", { label: "タイトル", values: "hasTitle" }, "isTemplate"];
+			var selectiveClasses = ["headingTag", "level", "itemSize", "itemGap", "hasContentWidth", "hasMargin", "hasPadding", { label: "タイトル", values: "hasTitle" }, "isTemplate"];
 			wp.hooks.applyFilters("catpow.blocks.banners.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
@@ -67,53 +67,10 @@ wp.blocks.registerBlockType("catpow/banners", {
 		}, []);
 		const itemTemplateSelectiveClasses = [{ input: "text", label: "画像", key: "imageCode" }];
 
-		let rtn = [];
 		const save = () => {
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
-		items.map((item, index) => {
-			if (!item.controlClasses) {
-				item.controlClasses = "control";
-			}
-			rtn.push(
-				<CP.Item className="_item" tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
-					{states.hasTitle && (
-						<RichText
-							tagName="h3"
-							className="_title"
-							onChange={(title) => {
-								item.title = title;
-								save();
-							}}
-							value={item.title}
-						/>
-					)}
-					<CP.Link.Edit className="_link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index} isSelected={isSelected}>
-						<CP.SelectResponsiveImage
-							className="_image"
-							attr={attributes}
-							set={setAttributes}
-							keys={imageKeys.image}
-							index={index}
-							devices={devices}
-							device={device === "pc" ? null : device}
-							isTemplate={states.isTemplate}
-						/>
-					</CP.Link.Edit>
-				</CP.Item>
-			);
-		});
-
-		if (attributes.EditMode === undefined) {
-			attributes.EditMode = false;
-		}
-		if (rtn.length < loopCount) {
-			let len = rtn.length;
-			while (rtn.length < loopCount) {
-				rtn.push(rtn[rtn.length % len]);
-			}
-		}
 		const blockProps = useBlockProps({
 			className: classes,
 			style: vars,
@@ -145,7 +102,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 				</InspectorControls>
 
 				{EditMode ? (
-					<div className="cp-altcontent">
+					<div {...blockProps} className="cp-altcontent">
 						<div className="label">
 							<Icon icon="edit" />
 						</div>
@@ -171,7 +128,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 				) : (
 					<>
 						{AltMode && doLoop ? (
-							<div className="cp-altcontent">
+							<div {...blockProps} className="cp-altcontent">
 								<div className="label">
 									<Icon icon="welcome-comments" />
 								</div>
@@ -179,7 +136,42 @@ wp.blocks.registerBlockType("catpow/banners", {
 							</div>
 						) : (
 							<CP.Bem prefix="wp-block-catpow">
-								<ul {...blockProps}>{rtn}</ul>
+								<ul {...blockProps}>
+									{[...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
+										const index = i % items.length;
+										const item = items[index];
+										if (!item.controlClasses) {
+											item.controlClasses = "control";
+										}
+										return (
+											<CP.Item className="_item" tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+												{states.hasTitle && (
+													<RichText
+														tagName="h3"
+														className="_title"
+														onChange={(title) => {
+															item.title = title;
+															save();
+														}}
+														value={item.title}
+													/>
+												)}
+												<CP.Link.Edit className="_link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index}>
+													<CP.SelectResponsiveImage
+														className="_image"
+														attr={attributes}
+														set={setAttributes}
+														keys={imageKeys.image}
+														index={index}
+														devices={devices}
+														device={device === "pc" ? null : device}
+														isTemplate={states.isTemplate}
+													/>
+												</CP.Link.Edit>
+											</CP.Item>
+										);
+									})}
+								</ul>
 							</CP.Bem>
 						)}
 					</>

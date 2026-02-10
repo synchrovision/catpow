@@ -1,11 +1,25 @@
+.wp-block-catpow-banners.has-title .wp-block-catpow-banners__item-title {
+  font-family: var(--cp-font-family-p, inherit);
+  font-size: var(--cp-font-size-p, 2em);
+  font-weight: var(--cp-font-weight-p, regular);
+  line-height: var(--cp-line-height-p, 1.5);
+  letter-spacing: var(--cp-letter-spacing-p, normal);
+}
+.wp-block-catpow-banners.has-title .wp-block-catpow-banners__item-title {
+  padding: var(--cp-size-sp-l);
+  border-width: var(--cp-border-width-c-l, 0);
+  border-radius: var(--cp-border-radius-c-l, 0);
+}
 .wp-block-catpow-banners {
   margin-inline: auto;
   box-sizing: border-box;
   display: -webkit-grid;
   display: -ms-grid;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(var(--cp-item-size, 20rem), 100%), 1fr));
-  grid-gap: var(--cp-item-gap, 1rem);
+  -ms-grid-columns: repeat(auto-fill, min(var(--cp-item-size), 100%));
+  grid-template-columns: repeat(auto-fill, min(var(--cp-item-size), 100%));
+  justify-content: center;
+  grid-gap: var(--cp-item-gap);
   list-style: none;
 }
 .wp-block-catpow-banners__item {
@@ -34,6 +48,7 @@
 }
 .wp-block-catpow-banners.has-title .wp-block-catpow-banners__item {
   box-sizing: border-box;
+  padding-top: 1em;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   transform: -webkit- scale(1);
@@ -41,15 +56,14 @@
 }
 .wp-block-catpow-banners.has-title .wp-block-catpow-banners__item-title {
   position: relative;
-  padding: 0.5em 1em;
   min-width: 10em;
   width: fit-content;
-  margin: 0rem 0rem -1em -0.5em;
+  margin: 0rem 0rem -0.5em -0.5em;
   z-index: 1;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
+  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
   text-align: center;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
-  font-size: 0.75rem;
+  line-height: 1em;
+  color: hsla(var(--cp-tones-ix-h),var(--cp-tones-ix-s),var(--cp-tones-ix-l),var(--cp-tones-ix-a,1));
   box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
 }
 .wp-block-catpow-banners.has-title .wp-block-catpow-banners__item-link-image-img {

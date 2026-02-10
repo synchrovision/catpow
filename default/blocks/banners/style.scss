@@ -1,9 +1,11 @@
 @import 'admin_style_config.scss';
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
 
 .wp-block-catpow-banners{
 	$block:&;
 	@include bnd((mgi:a,bs:b));
-	@include grd((rc:var(--cp-item-size,20rem),g:var(--cp-item-gap,1rem)));
+	@include grd((tc:repeat(auto-fill, min(var(--cp-item-size),100%)),j:c,g:g));
 	@include txt((l:n));
 	&__item{
 		$item:&;
@@ -26,12 +28,14 @@
 	&.has-title &{
 		&__item{
 			$item:&;
-			@include bnd((bs:b));
+			@include bnd((bs:b,pdt:1em));
 			@include trn((t:.5s,s:1));
 			&-title{
-				@include bnd((p:r,pd:.5em 1em,w:10em fit,mg:0 0 -1em -.5em,z:1));
-				@include bg((c:m));
-				@include txt((a:c,c:i,p:12));
+				@extend %label-component;
+				@extend %paragraph;
+				@include bnd((p:r,w:10em fit,mg:0 0 -.5em -.5em,z:1));
+				@include bg((c:mx));
+				@include txt((a:c,h:1em,c:ix));
 				@include shd((b:2));
 			}
 			&-link{

@@ -41,7 +41,7 @@
       const states = CP.classNamesToFlags(classes2);
       const { devices, imageKeys, linkKeys } = CP.config.banners;
       const selectiveClasses = useMemo(() => {
-        var selectiveClasses2 = ["itemSize", "itemGap", "hasContentWidth", "hasMargin", "hasPadding", { label: "\u30BF\u30A4\u30C8\u30EB", values: "hasTitle" }, "isTemplate"];
+        var selectiveClasses2 = ["headingTag", "level", "itemSize", "itemGap", "hasContentWidth", "hasMargin", "hasPadding", { label: "\u30BF\u30A4\u30C8\u30EB", values: "hasTitle" }, "isTemplate"];
         wp.hooks.applyFilters("catpow.blocks.banners.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
@@ -63,50 +63,9 @@
         return selectiveItemClasses2;
       }, []);
       const itemTemplateSelectiveClasses = [{ input: "text", label: "\u753B\u50CF", key: "imageCode" }];
-      let rtn = [];
       const save = () => {
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });
       };
-      items.map((item, index) => {
-        if (!item.controlClasses) {
-          item.controlClasses = "control";
-        }
-        rtn.push(
-          /* @__PURE__ */ wp.element.createElement(CP.Item, { className: "_item", tag: "li", set: setAttributes, attr: attributes, items, index, isSelected, key: index }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(
-            RichText2,
-            {
-              tagName: "h3",
-              className: "_title",
-              onChange: (title) => {
-                item.title = title;
-                save();
-              },
-              value: item.title
-            }
-          ), /* @__PURE__ */ wp.element.createElement(CP.Link.Edit, { className: "_link", attr: attributes, set: setAttributes, keys: linkKeys.link, index, isSelected }, /* @__PURE__ */ wp.element.createElement(
-            CP.SelectResponsiveImage,
-            {
-              className: "_image",
-              attr: attributes,
-              set: setAttributes,
-              keys: imageKeys.image,
-              index,
-              devices,
-              device: device === "pc" ? null : device,
-              isTemplate: states.isTemplate
-            }
-          )))
-        );
-      });
-      if (attributes.EditMode === void 0) {
-        attributes.EditMode = false;
-      }
-      if (rtn.length < loopCount) {
-        let len = rtn.length;
-        while (rtn.length < loopCount) {
-          rtn.push(rtn[rtn.length % len]);
-        }
-      }
       const blockProps = useBlockProps({
         className: classes2,
         style: vars
@@ -122,7 +81,7 @@
           index: attributes.currentItemIndex,
           selectiveClasses: itemTemplateSelectiveClasses
         }
-      ) : /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30D0\u30CA\u30FC", icon: "edit", set: setAttributes, attr: attributes, items, index: attributes.currentItemIndex, selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+      ) : /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30D0\u30CA\u30FC", icon: "edit", set: setAttributes, attr: attributes, items, index: attributes.currentItemIndex, selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps, className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           set: setAttributes,
@@ -142,7 +101,37 @@
           ],
           isTemplate: states.isTemplate
         }
-      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...blockProps }, rtn))));
+      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps, className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...blockProps }, [...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
+        const index = i % items.length;
+        const item = items[index];
+        if (!item.controlClasses) {
+          item.controlClasses = "control";
+        }
+        return /* @__PURE__ */ wp.element.createElement(CP.Item, { className: "_item", tag: "li", set: setAttributes, attr: attributes, items, index, isSelected, key: index }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(
+          RichText2,
+          {
+            tagName: "h3",
+            className: "_title",
+            onChange: (title) => {
+              item.title = title;
+              save();
+            },
+            value: item.title
+          }
+        ), /* @__PURE__ */ wp.element.createElement(CP.Link.Edit, { className: "_link", attr: attributes, set: setAttributes, keys: linkKeys.link, index }, /* @__PURE__ */ wp.element.createElement(
+          CP.SelectResponsiveImage,
+          {
+            className: "_image",
+            attr: attributes,
+            set: setAttributes,
+            keys: imageKeys.image,
+            index,
+            devices,
+            device: device === "pc" ? null : device,
+            isTemplate: states.isTemplate
+          }
+        )));
+      })))));
     },
     save({ attributes }) {
       const { InnerBlocks, RichText: RichText2, useBlockProps } = wp.blockEditor;
