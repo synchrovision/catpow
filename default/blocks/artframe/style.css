@@ -4,6 +4,7 @@
 }
 .wp-block-catpow-artframe__contents-body {
   position: relative;
+  width: var(--cp-content-width);
   margin-inline: auto;
 }
 /*# sourceMappingURL=./style.css.map */

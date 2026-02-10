@@ -1,30 +1,4 @@
-// modules/src/util/dom.ts
-var el = (tag, props, children, namespace) => {
-  const el2 = namespace ? document.createElementNS(namespace, tag) : document.createElement(tag);
-  const appendChild = (child) => {
-    if (child == null) {
-      return;
-    }
-    if (child instanceof Node) {
-      el2.appendChild(child);
-    } else if (typeof child === "string") {
-      el2.appendChild(document.createTextNode(child));
-    } else if (Array.isArray(child)) {
-      child.forEach(appendChild);
-    } else {
-      console.error("can not append child : ", child);
-    }
-  };
-  if (props) {
-    Object.keys(props).forEach((key) => {
-      el2.setAttribute(key, props[key]);
-    });
-  }
-  appendChild(children);
-  return el2;
-};
-
-// modules/src/util/bem.jsx
+// node_modules-included/catpow/src/util/bem/applyBem.js
 var applyBem = (el2, { ...ctx }) => {
   if (Array.isArray(el2)) {
     el2.forEach((el3) => {
@@ -81,7 +55,7 @@ var applyBem = (el2, { ...ctx }) => {
   return el2;
 };
 
-// modules/src/util/calc.jsx
+// node_modules-included/catpow/src/util/calc/srand.js
 var srand = (w = 88675123) => {
   var x = 123456789, y = 362436069, z = 521288629;
   return function() {
@@ -100,7 +74,33 @@ var srand = (w = 88675123) => {
   };
 };
 
-// _b45uau48z:/Users/hatanokazuhiro/Documents/repos.nosync/mandai/mandai_cup/wp-content/plugins/catpow/elements/art-frame-cloud/element/style.css
+// node_modules-included/catpow/src/util/dom.ts
+var el = (tag, props, children, namespace) => {
+  const el2 = namespace ? document.createElementNS(namespace, tag) : document.createElement(tag);
+  const appendChild = (child) => {
+    if (child == null) {
+      return;
+    }
+    if (child instanceof Node) {
+      el2.appendChild(child);
+    } else if (typeof child === "string") {
+      el2.appendChild(document.createTextNode(child));
+    } else if (Array.isArray(child)) {
+      child.forEach(appendChild);
+    } else {
+      console.error("can not append child : ", child);
+    }
+  };
+  if (props) {
+    Object.keys(props).forEach((key) => {
+      el2.setAttribute(key, props[key]);
+    });
+  }
+  appendChild(children);
+  return el2;
+};
+
+// _5gdqsjuwm:/Users/hatanokazuhiro/repos/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-cloud/element/style.css
 var style_default = ".art-frame-cloud__body {\n  background-color: hsla(var(--cp-tones-sx-h),var(--cp-tones-sx-s),var(--cp-tones-sx-l),var(--cp-tones-sx-a,1));\n}\n/*# sourceMappingURL=./style.css.map */";
 
 // ../elements/art-frame-cloud/element/index.mjs.jsx

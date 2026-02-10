@@ -14,13 +14,15 @@ wp.blocks.registerBlockType("catpow/artframe", {
 	},
 	example: CP.example,
 	edit(props) {
-		const { useMemo } = wp.element;
+		const { useMemo, useState, useEffect } = wp.element;
 		const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { attributes, setAttributes } = props;
 		const { classes, contentsClasses, contentsBodyClasses, vars, params, element: Element = "div" } = attributes;
+		const [ref, setRef] = useState(null);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
+				"level",
 				"color",
 				"colorScheme",
 				"zIndex",
@@ -36,6 +38,19 @@ wp.blocks.registerBlockType("catpow/artframe", {
 			return selectiveClasses;
 		}, []);
 
+		useEffect(() => {
+			if (!Element || !ref) {
+				return;
+			}
+			const doc = ref.ownerDocument;
+			if (![...doc.scripts].find(({ src }) => src === artframeSelectiveClasses.mjs[Element])) {
+				const script = doc.createElement("script");
+				script.src = artframeSelectiveClasses.mjs[Element];
+				script.type = "module";
+				doc.head.appendChild(script);
+			}
+		}, [Element, ref]);
+
 		useChangeEffect(() => {
 			setAttributes({ params: { ...artframeSelectiveClasses.sub[Element][0].default, ...params } });
 		}, [Element]);
@@ -46,7 +61,7 @@ wp.blocks.registerBlockType("catpow/artframe", {
 			<>
 				<div {...blockProps}>
 					<Element {...params}>
-						<div className={contentsClasses}>
+						<div className={contentsClasses} ref={setRef}>
 							<div className={contentsBodyClasses}>
 								<InnerBlocks template={[["core/paragraph", { content: CP.dummyText.text }]]} templateLock={false} />
 							</div>

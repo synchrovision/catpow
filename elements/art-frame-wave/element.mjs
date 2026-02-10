@@ -1,30 +1,4 @@
-// modules/src/util/dom.ts
-var el = (tag, props, children, namespace) => {
-  const el2 = namespace ? document.createElementNS(namespace, tag) : document.createElement(tag);
-  const appendChild = (child) => {
-    if (child == null) {
-      return;
-    }
-    if (child instanceof Node) {
-      el2.appendChild(child);
-    } else if (typeof child === "string") {
-      el2.appendChild(document.createTextNode(child));
-    } else if (Array.isArray(child)) {
-      child.forEach(appendChild);
-    } else {
-      console.error("can not append child : ", child);
-    }
-  };
-  if (props) {
-    Object.keys(props).forEach((key) => {
-      el2.setAttribute(key, props[key]);
-    });
-  }
-  appendChild(children);
-  return el2;
-};
-
-// modules/src/util/bem.jsx
+// node_modules-included/catpow/src/util/bem/applyBem.js
 var applyBem = (el2, { ...ctx }) => {
   if (Array.isArray(el2)) {
     el2.forEach((el3) => {
@@ -81,7 +55,33 @@ var applyBem = (el2, { ...ctx }) => {
   return el2;
 };
 
-// _qq7hagfwp:/Users/hatanokazuhiro/Documents/repos.nosync/mandai/mandai_cup/wp-content/plugins/catpow/elements/art-frame-wave/element/style.css
+// node_modules-included/catpow/src/util/dom.ts
+var el = (tag, props, children, namespace) => {
+  const el2 = namespace ? document.createElementNS(namespace, tag) : document.createElement(tag);
+  const appendChild = (child) => {
+    if (child == null) {
+      return;
+    }
+    if (child instanceof Node) {
+      el2.appendChild(child);
+    } else if (typeof child === "string") {
+      el2.appendChild(document.createTextNode(child));
+    } else if (Array.isArray(child)) {
+      child.forEach(appendChild);
+    } else {
+      console.error("can not append child : ", child);
+    }
+  };
+  if (props) {
+    Object.keys(props).forEach((key) => {
+      el2.setAttribute(key, props[key]);
+    });
+  }
+  appendChild(children);
+  return el2;
+};
+
+// _otn7iy6y8:/Users/hatanokazuhiro/repos/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-wave/element/style.css
 var style_default = ".art-frame-wave__body {\n  background-color: hsla(var(--cp-tones-sx-h),var(--cp-tones-sx-s),var(--cp-tones-sx-l),var(--cp-tones-sx-a,1));\n}\n/*# sourceMappingURL=./style.css.map */";
 
 // ../elements/art-frame-wave/element/index.mjs.jsx

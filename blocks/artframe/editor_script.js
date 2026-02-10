@@ -44,12 +44,14 @@
     },
     example: CP.example,
     edit(props) {
-      const { useMemo: useMemo2 } = wp.element;
+      const { useMemo: useMemo2, useState: useState2, useEffect: useEffect2 } = wp.element;
       const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
       const { attributes, setAttributes } = props;
       const { classes, contentsClasses, contentsBodyClasses, vars, params, element: Element = "div" } = attributes;
+      const [ref, setRef] = useState2(null);
       const selectiveClasses = useMemo2(() => {
         const selectiveClasses2 = [
+          "level",
           "color",
           "colorScheme",
           "zIndex",
@@ -64,11 +66,23 @@
         wp.hooks.applyFilters("catpow.blocks.artframe.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
+      useEffect2(() => {
+        if (!Element || !ref) {
+          return;
+        }
+        const doc = ref.ownerDocument;
+        if (![...doc.scripts].find(({ src }) => src === artframeSelectiveClasses.mjs[Element])) {
+          const script = doc.createElement("script");
+          script.src = artframeSelectiveClasses.mjs[Element];
+          script.type = "module";
+          doc.head.appendChild(script);
+        }
+      }, [Element, ref]);
       useChangeEffect(() => {
         setAttributes({ params: { ...artframeSelectiveClasses.sub[Element][0].default, ...params } });
       }, [Element]);
       const blockProps = useBlockProps({ className: classes, style: vars });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(Element, { ...params }, /* @__PURE__ */ wp.element.createElement("div", { className: contentsClasses }, /* @__PURE__ */ wp.element.createElement("div", { className: contentsBodyClasses }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph", { content: CP.dummyText.text }]], templateLock: false }))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", initialOpen: true, icon: "art", set: setAttributes, attr: attributes, selectiveClasses })));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(Element, { ...params }, /* @__PURE__ */ wp.element.createElement("div", { className: contentsClasses, ref: setRef }, /* @__PURE__ */ wp.element.createElement("div", { className: contentsBodyClasses }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph", { content: CP.dummyText.text }]], templateLock: false }))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", initialOpen: true, icon: "art", set: setAttributes, attr: attributes, selectiveClasses })));
     },
     save({ attributes }) {
       const { InnerBlocks, useBlockProps } = wp.blockEditor;

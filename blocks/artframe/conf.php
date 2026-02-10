@@ -1,11 +1,11 @@
 <?php
-$block_class='wp-block-catpow-artframe';
+$block_class="wp-block-catpow-artframe";
 $attributes=[
-	'color'=>['type'=>'string','default'=>"0"],
-	'classes'=>['type'=>'string',"selector"=>'.wp-block-catpow-artframe',"attribute"=>'class','default'=>'wp-block-catpow-artframe'],
-	'contentsClasses'=>['type'=>'string',"selector"=>'.wp-block-catpow-artframe__contents',"attribute"=>'class','default'=>'wp-block-catpow-artframe__contents'],
-	'contentsBodyClasses'=>['type'=>'string',"selector"=>'.wp-block-catpow-artframe__contents-body',"attribute"=>'class','default'=>'wp-block-catpow-artframe__contents-body'],
-	'vars'=>['type'=>'object','default'=>[]],
+	"color"=>["type"=>"string","default"=>"0"],
+	"classes"=>["type"=>"string","selector"=>".{$block_class}","attribute"=>"class","default"=>$block_class],
+	"contentsClasses"=>["type"=>"string","selector"=>".{$block_class}__contents","attribute"=>"class","default"=>"{$block_class}__contents"],
+	"contentsBodyClasses"=>["type"=>"string","selector"=>".{$block_class}__contents-body","attribute"=>"class","default"=>"{$block_class}__contents-body"],
+	"vars"=>["type"=>"object","default"=>[]],
 	"element"=>["type"=>"string"],
-	'params'=>['type'=>'object','default'=>[]],
+	"params"=>["type"=>"object","default"=>[]],
 ];

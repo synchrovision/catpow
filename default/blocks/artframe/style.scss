@@ -4,7 +4,7 @@
 	@include bnd((p:r,z:var(--cp-z-index,1)));
 	&__contents{
 		&-body{
-			@include bnd((p:r,mgi:a));
+			@include bnd((p:r,w:c,mgi:a));
 		}
 	}
 }

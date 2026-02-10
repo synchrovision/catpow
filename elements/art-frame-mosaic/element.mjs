@@ -1,31 +1,4 @@
-// modules/src/util/dom.ts
-var el = (tag, props, children, namespace) => {
-  const el2 = namespace ? document.createElementNS(namespace, tag) : document.createElement(tag);
-  const appendChild = (child) => {
-    if (child == null) {
-      return;
-    }
-    if (child instanceof Node) {
-      el2.appendChild(child);
-    } else if (typeof child === "string") {
-      el2.appendChild(document.createTextNode(child));
-    } else if (Array.isArray(child)) {
-      child.forEach(appendChild);
-    } else {
-      console.error("can not append child : ", child);
-    }
-  };
-  if (props) {
-    Object.keys(props).forEach((key) => {
-      el2.setAttribute(key, props[key]);
-    });
-  }
-  appendChild(children);
-  return el2;
-};
-var svgEl = (tag, props, children) => el(tag, props, children, "http://www.w3.org/2000/svg");
-
-// modules/src/util/bem.jsx
+// node_modules-included/catpow/src/util/bem/applyBem.js
 var applyBem = (el2, { ...ctx }) => {
   if (Array.isArray(el2)) {
     el2.forEach((el3) => {
@@ -82,7 +55,7 @@ var applyBem = (el2, { ...ctx }) => {
   return el2;
 };
 
-// modules/src/util/calc.jsx
+// node_modules-included/catpow/src/util/calc/srand.js
 var srand = (w = 88675123) => {
   var x = 123456789, y = 362436069, z = 521288629;
   return function() {
@@ -101,7 +74,34 @@ var srand = (w = 88675123) => {
   };
 };
 
-// modules/src/scssc/settings.js
+// node_modules-included/catpow/src/util/dom.ts
+var el = (tag, props, children, namespace) => {
+  const el2 = namespace ? document.createElementNS(namespace, tag) : document.createElement(tag);
+  const appendChild = (child) => {
+    if (child == null) {
+      return;
+    }
+    if (child instanceof Node) {
+      el2.appendChild(child);
+    } else if (typeof child === "string") {
+      el2.appendChild(document.createTextNode(child));
+    } else if (Array.isArray(child)) {
+      child.forEach(appendChild);
+    } else {
+      console.error("can not append child : ", child);
+    }
+  };
+  if (props) {
+    Object.keys(props).forEach((key) => {
+      el2.setAttribute(key, props[key]);
+    });
+  }
+  appendChild(children);
+  return el2;
+};
+var svgEl = (tag, props, children) => el(tag, props, children, "http://www.w3.org/2000/svg");
+
+// node_modules-included/catpow/src/scssc/settings.js
 var colorRoles = {
   b: {
     name: "background",
@@ -177,7 +177,7 @@ var colorRoles = {
   }
 };
 
-// modules/src/scssc/translateColor.js
+// node_modules-included/catpow/src/scssc/translateColor.js
 var translateColor = (color, tint, alpha) => {
   const availableToneKeys = {};
   for (const key of Object.keys(colorRoles)) {
@@ -222,7 +222,7 @@ var translateColor = (color, tint, alpha) => {
   return color;
 };
 
-// _fd70ioiy9:/Users/hatanokazuhiro/Documents/repos.nosync/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-mosaic/element/style.css
+// _zsqzkcpxp:/Users/hatanokazuhiro/repos/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-mosaic/element/style.css
 var style_default = ".art-frame-mosaic {\n  position: relative;\n}\n.art-frame-mosaic__arts {\n  display: block;\n  position: absolute;\n  top: 0rem;\n  right: 0rem;\n  bottom: 0rem;\n  left: 0rem;\n  inset: 0rem;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n/*# sourceMappingURL=./style.css.map */";
 
 // ../elements/art-frame-mosaic/element/index.mjs.jsx
