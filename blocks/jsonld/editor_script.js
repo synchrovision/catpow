@@ -18,6 +18,7 @@
   // ../blocks/jsonld/editor_script.jsx
   var { __ } = wp.i18n;
   var { useState, useCallback, useMemo, useEffect, useContext, useRef } = wp.element;
+  var { useBlockProps } = wp.blockEditor;
   CP.JsonLdBlockContext = wp.element.createContext({});
   var getMainType = (conf) => conf.extends && (Array.isArray(conf.extends) ? conf.extends[0] : conf.extends) || conf.name;
   var consoleError = (message) => console.error("JsonLD Block : " + message);
@@ -238,10 +239,11 @@
         }, 1e3);
         return () => clearTimeout(timer);
       }, [data]);
+      const blockProps = useBlockProps({ className: "wp-block-catpow-jsonld" });
       if (!types || !data) {
         return false;
       }
-      return /* @__PURE__ */ wp.element.createElement(CP.JsonLdBlockContext.Provider, { value: { types, save } }, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { className: "wp-block-catpow-jsonld" }, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { attr: attributes, set: setAttributes }), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "-editor" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_type" }, /* @__PURE__ */ wp.element.createElement(SelectType, { className: "_selecttype", types, formals, data, setAttributes }), types[data["@type"]] && /* @__PURE__ */ wp.element.createElement("a", { className: "_help", href: types[data["@type"]].url, target: "_blank", rel: "noopener noreferer" })), /* @__PURE__ */ wp.element.createElement("div", { className: "_items" }, types[data["@type"]].items.map((conf) => /* @__PURE__ */ wp.element.createElement(InputItem, { className: "_item", conf, data, name: conf.name, level: 0, key: conf.name })))) : /* @__PURE__ */ wp.element.createElement("div", { className: "_label" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_icon" }, /* @__PURE__ */ wp.element.createElement(CP.ConfigIcon, { icon: "json" })), /* @__PURE__ */ wp.element.createElement("div", { className: "_text" }, "JSON-LD : ", typeLabel)))));
+      return /* @__PURE__ */ wp.element.createElement(CP.JsonLdBlockContext.Provider, { value: { types, save } }, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { attr: attributes, set: setAttributes }), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "-editor" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_type" }, /* @__PURE__ */ wp.element.createElement(SelectType, { className: "_selecttype", types, formals, data, setAttributes }), types[data["@type"]] && /* @__PURE__ */ wp.element.createElement("a", { className: "_help", href: types[data["@type"]].url, target: "_blank", rel: "noopener noreferer" })), /* @__PURE__ */ wp.element.createElement("div", { className: "_items" }, types[data["@type"]].items.map((conf) => /* @__PURE__ */ wp.element.createElement(InputItem, { className: "_item", conf, data, name: conf.name, level: 0, key: conf.name })))) : /* @__PURE__ */ wp.element.createElement("div", { className: "_label" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_icon" }, /* @__PURE__ */ wp.element.createElement(CP.ConfigIcon, { icon: "json" })), /* @__PURE__ */ wp.element.createElement("div", { className: "_text" }, "JSON-LD : ", typeLabel)))));
     },
     save({ attributes, className, setAttributes }) {
       return /* @__PURE__ */ wp.element.createElement("script", { type: "application/ld+json" }, attributes.json);

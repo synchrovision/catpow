@@ -34,7 +34,7 @@
 				@include flx((a:c,g:.5em));
 				&-select{
 					@include bnd((ap:n,d:b,p:r,pd:.5em,pdr:1.5em));
-					@include txt((p:20,h:1em));
+					@include txt((p:16,h:1em));
 				}
 				&-arrow{
 					@include bnd((d:b,f:0 0 .5em,h:1em));

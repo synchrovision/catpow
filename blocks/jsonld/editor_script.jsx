@@ -2,6 +2,7 @@
 
 import clsx from "clsx";
 const { useState, useCallback, useMemo, useEffect, useContext, useRef } = wp.element;
+const { useBlockProps } = wp.blockEditor;
 
 CP.JsonLdBlockContext = wp.element.createContext({});
 
@@ -28,7 +29,7 @@ const extractDefaultData = (conf, type = null) => {
 			: itemConf.items.reduce((p, c) => {
 					p[c.name] = extractDefaultData(c);
 					return p;
-			  }, {});
+				}, {});
 		if (type) {
 			data["@type"] = type;
 		} else if (itemConf["@type"]) {
@@ -235,13 +236,15 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 			return () => clearTimeout(timer);
 		}, [data]);
 
+		const blockProps = useBlockProps({ className: "wp-block-catpow-jsonld" });
+
 		if (!types || !data) {
 			return false;
 		}
 		return (
 			<CP.JsonLdBlockContext.Provider value={{ types, save }}>
 				<CP.Bem prefix="wp-block-catpow">
-					<div className="wp-block-catpow-jsonld">
+					<div {...blockProps}>
 						<CP.SelectModeToolbar attr={attributes} set={setAttributes} />
 						{EditMode ? (
 							<div className="-editor">
@@ -294,7 +297,7 @@ const SelectType = (props) => {
 				setAttributes({ data });
 			}
 		},
-		[data, cache, setAttributes]
+		[data, cache, setAttributes],
 	);
 
 	return (
@@ -344,7 +347,7 @@ const Input = (props) => {
 			}
 			save();
 		},
-		[data, name, index, save]
+		[data, name, index, save],
 	);
 
 	switch (conf.input) {
@@ -452,7 +455,7 @@ const InputItem = (props) => {
 			}
 			save();
 		},
-		[save, data]
+		[save, data],
 	);
 
 	const cloneItem = useCallback(
@@ -463,7 +466,7 @@ const InputItem = (props) => {
 			data[name].splice(index, 0, JSON.parse(JSON.stringify(data[name][index])));
 			save();
 		},
-		[data, name, save]
+		[data, name, save],
 	);
 	const removeItem = useCallback(
 		(index) => {
@@ -473,7 +476,7 @@ const InputItem = (props) => {
 			data[name].splice(index, 1);
 			save();
 		},
-		[data, name, save]
+		[data, name, save],
 	);
 
 	return (
