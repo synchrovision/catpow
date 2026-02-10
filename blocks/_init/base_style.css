@@ -525,6 +525,8 @@
 }
 .cp-selectresponsiveimage.is-video, .cp-selectresponsiveimage.is-img, .cp-selectresponsiveimage.is-picture, .cp-selectresponsiveimage-img {
   display: block;
+  width: 100%;
+  height: auto;
   object-position: center;
   object-fit: contain;
   box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
