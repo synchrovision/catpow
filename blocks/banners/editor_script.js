@@ -34,10 +34,10 @@
     },
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
-      const { useState, useMemo } = wp.element;
+      const { useMemo } = wp.element;
       const { InnerBlocks, InspectorControls, RichText: RichText2, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
-      const { classes: classes2, vars, items = [], loopCount, imageCode, doLoop, device, EditMode = false, AltMode = false } = attributes;
+      const { classes: classes2, HeadingTag, vars, items = [], loopCount, imageCode, doLoop, device, EditMode = false, AltMode = false } = attributes;
       const states = CP.classNamesToFlags(classes2);
       const { devices, imageKeys, linkKeys } = CP.config.banners;
       const selectiveClasses = useMemo(() => {
@@ -110,7 +110,7 @@
         return /* @__PURE__ */ wp.element.createElement(CP.Item, { className: "_item", tag: "li", set: setAttributes, attr: attributes, items, index, isSelected, key: index }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(
           RichText2,
           {
-            tagName: "h3",
+            tagName: HeadingTag,
             className: "_title",
             onChange: (title) => {
               item.title = title;
@@ -135,7 +135,7 @@
     },
     save({ attributes }) {
       const { InnerBlocks, RichText: RichText2, useBlockProps } = wp.blockEditor;
-      const { classes: classes2, vars, items = [], loopParam, doLoop } = attributes;
+      const { classes: classes2, HeadingTag, vars, items = [], loopParam, doLoop } = attributes;
       const states = CP.classNamesToFlags(classes2);
       const { devices, imageKeys, linkKeys } = CP.config.banners;
       const blockProps = useBlockProps.save({
@@ -143,7 +143,7 @@
         style: vars
       });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...blockProps }, items.map((item, index) => {
-        return /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText2.Content, { tagName: "h3", className: "_title", value: item.title }), /* @__PURE__ */ wp.element.createElement(CP.Link, { className: "_link", attr: attributes, keys: linkKeys.link, index, ...CP.extractEventDispatcherAttributes("catpow/banners", item) }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_image", size: "regular_banner", attr: attributes, keys: imageKeys.image, index, devices, isTemplate: states.isTemplate })));
+        return /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText2.Content, { tagName: HeadingTag, className: "_title", value: item.title }), /* @__PURE__ */ wp.element.createElement(CP.Link, { className: "_link", attr: attributes, keys: linkKeys.link, index, ...CP.extractEventDispatcherAttributes("catpow/banners", item) }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_image", size: "regular_banner", attr: attributes, keys: imageKeys.image, index, devices, isTemplate: states.isTemplate })));
       }))), doLoop && /* @__PURE__ */ wp.element.createElement("on-empty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     },
     deprecated: [

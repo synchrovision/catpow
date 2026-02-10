@@ -3,6 +3,7 @@ use Catpow\util\BlockConfig;
 $block_class='wp-block-catpow-banners';
 $attributes=[
 	'classes'=>["source"=>'attribute',"selector"=>".{$block_class}","attribute"=>'class','default'=>"{$block_class} has-content-width has-title"],
+	'HeadingTag'=>['type'=>'string','default'=>'h3'],
 	'vars'=>['type'=>'object','default'=>[]],
 	"items"=>[
 		"source"=>'query',

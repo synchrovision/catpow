@@ -35,10 +35,10 @@ wp.blocks.registerBlockType("catpow/banners", {
 	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
-		const { useState, useMemo } = wp.element;
+		const { useMemo } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { classes, vars, items = [], loopCount, imageCode, doLoop, device, EditMode = false, AltMode = false } = attributes;
+		const { classes, HeadingTag, vars, items = [], loopCount, imageCode, doLoop, device, EditMode = false, AltMode = false } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, linkKeys } = CP.config.banners;
@@ -147,7 +147,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 											<CP.Item className="_item" tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
 												{states.hasTitle && (
 													<RichText
-														tagName="h3"
+														tagName={HeadingTag}
 														className="_title"
 														onChange={(title) => {
 															item.title = title;
@@ -181,7 +181,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 	},
 	save({ attributes }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { classes, vars, items = [], loopParam, doLoop } = attributes;
+		const { classes, HeadingTag, vars, items = [], loopParam, doLoop } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, linkKeys } = CP.config.banners;
@@ -197,7 +197,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 						{items.map((item, index) => {
 							return (
 								<li className={item.classes} key={index}>
-									{states.hasTitle && <RichText.Content tagName="h3" className="_title" value={item.title} />}
+									{states.hasTitle && <RichText.Content tagName={HeadingTag} className="_title" value={item.title} />}
 
 									<CP.Link className="_link" attr={attributes} keys={linkKeys.link} index={index} {...CP.extractEventDispatcherAttributes("catpow/banners", item)}>
 										<CP.ResponsiveImage className="_image" size="regular_banner" attr={attributes} keys={imageKeys.image} index={index} devices={devices} isTemplate={states.isTemplate} />
