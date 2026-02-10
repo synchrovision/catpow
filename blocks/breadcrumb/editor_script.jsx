@@ -5,19 +5,18 @@ wp.blocks.registerBlockType("catpow/breadcrumb", {
 	description: __("パンくずリストを表示します。", "catpow"),
 	icon: "welcome-widgets-menus",
 	category: "catpow-parts",
-	example: CP.example,
-	edit({ attributes, setAttributes, className, clientId }) {
+	edit({ attributes }) {
 		const { serverSideRender: ServerSideRender } = wp;
-		const { content_path, query, config, EditMode = false } = attributes;
+		const { useBlockProps } = wp.blockEditor;
 
 		return (
-			<>
+			<div {...useBlockProps()}>
 				<ServerSideRender block="catpow/breadcrumb" attributes={attributes} />
-			</>
+			</div>
 		);
 	},
 
-	save({ attributes, className, setAttributes }) {
+	save({}) {
 		return null;
 	},
 });

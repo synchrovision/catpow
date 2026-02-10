@@ -3,19 +3,21 @@
 .wp-block-catpow-breadcrumb{
 	@include bnd((pd:18 8));
 	&-items{
-		@include bnd((pd:0 1em,mg:0 a,w:a 960));
+		@include bnd((pd:0 1em,mg:0 a,w:c-m));
 		@include flx((w:w));
 		@include txt((l:n,p:16,h:1em));
 		&-item{
-			@include bnd((f:0 0 a,pd:0 .25em));
+			@include bnd((p:r,f:0 0 a,pd:0 .25em,pdr:1.5em));
 			&-link{
 				@include bnd((d:ib,pd:.5em 0));
 				@include txt((s:n));
 			}
 			&:not(:last-child){
 				&::after{
-					content:'＞';
-					@include bnd((d:ib,mgl:.5em));
+					content:'';
+					@include bnd((d:b,p:a,i:0,mg:a,mgr:.4em,w:.5em,h:.75em));
+					@include bg((c:mx));
+					@include clp((c:r 30% 10%));
 				}
 			}
 			&.is-home{
