@@ -37,7 +37,7 @@
 						@extend %label-component;
 						@include bnd((d:b,w:fit,h:fit));
 						@include bg((c:m));
-						@include bdr((s:s,w:1,r:1em));
+						@include bdr((s:s));
 						@include txt((a:c,p:.6em,h:1em,c:i));
 					}
 					&.is-premium{
@@ -465,7 +465,6 @@
 				@extend %label-component;
 				@include bg((c:tx-bx 50));
 				@include txt((c:i));
-				@include bdr((r:1em));
 				&.is-active{
 					@include bg((c:mx));
 				}
