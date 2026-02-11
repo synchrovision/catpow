@@ -4,12 +4,15 @@
 .wp-block-catpow-container{
 	$block:&;
 	@include bnd((o:c));
+	@include bdr((r:c-f));
+	&__body{
+		@include bnd((pd:sp-f));
+	}
 	&:not(.has-border){
 		@include bdr((s:n));
 	}
 	&.has-border{
-		@extend %frame-component;
-		@include bdr((s:s,c:l));
+		@include bdr((s:s,w:c-f,c:l));
 	}
 	&.has-inset-shadow{
 		@include shd((b:-4));
@@ -18,14 +21,12 @@
 		@include shd((b:4));
 	}
 	&.has-scroll-x{
-		@include bnd((w:a f,ox:a));
+		@include bnd((mxw:f,ox:a));
 		#{$block}__body{
-			@include bnd((mg:a,w:calc(var(--cp-content-width) * 1px)));
+			@include bnd((mg:a,w:calc(var(--cp-inner-content-width) * 1px)));
 		}
 	}
 	&.has-scroll-y{
 		@include bnd((h:calc(var(--cp-container-height) * 1px),oy:a));
-		#{$block}__body{
-		}
 	}
 }

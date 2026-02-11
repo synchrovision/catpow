@@ -17,7 +17,7 @@ wp.blocks.registerBlockType("catpow/container", {
 		],
 	},
 	attributes: {
-		boxSizeVars: { type: "object", default: { "--cp-content-width": 960, "--cp-container-height": 400 } },
+		boxSizeVars: { type: "object", default: { "--cp-inner-content-width": 960, "--cp-container-height": 400 } },
 		classes: { source: "attribute", selector: ".wp-block-catpow-container", attribute: "class", default: "wp-block-catpow-container" },
 	},
 	example: CP.example,
@@ -31,6 +31,7 @@ wp.blocks.registerBlockType("catpow/container", {
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
 				"level",
+				"hasContentWidth",
 				{
 					name: "border",
 					label: __("ボーダー", "catpow"),
@@ -50,7 +51,7 @@ wp.blocks.registerBlockType("catpow/container", {
 					name: "scrollX",
 					label: __("スクロールX", "catpow"),
 					values: "hasScrollX",
-					sub: [{ name: "contentWidth", label: __("コンテンツの幅", "catpow"), vars: "boxSizeVars", key: "--cp-content-width", input: "range", min: 400, max: 2000, step: 10 }],
+					sub: [{ name: "contentWidth", label: __("コンテンツの幅", "catpow"), vars: "boxSizeVars", key: "--cp-inner-content-width", input: "range", min: 400, max: 2000, step: 10 }],
 				},
 				{
 					name: "scrollY",
