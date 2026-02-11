@@ -1,7 +1,10 @@
 @import "admin_style_config.scss";
 @import "text-placeholders.scss";
+@import "component-placeholders.scss";
 
 .wp-block-catpow-datatable{
+	$block:&;
+	$row:#{$block}__tbody-tr;
 	@extend %ui-block;
 	@include tbl((l:f));
 	@include bnd((w:f));
@@ -13,79 +16,99 @@
 			}
 		}
 	}
-	&.spec{
-		thead{
-			th,td{
-				@include bdr((p:b,s:s,w:1,c:t));
+	&.is-style-spec &{
+		&__thead{
+			&-tr{
+				&-th,&-td{
+					@include bdr((p:b,s:s,w:1,c:lx));
+				}
 			}
 		}
-		tbody{
-			tr{
-				th,td{
-					@include bdr((p:b,s:s,w:1,c:t));
+		&__tbody{
+			&-tr{
+				&-th,&-td{
+					@include bdr((p:b,s:s,w:1,c:lx));
 				}
 			}
 		}
 	}
-	&.sheet{
-		thead{
-			th{
-				@include txt((a:c));
-				@include bg((c:s));
-				@include bdr((s:s,w:1,c:t 50));
-				&.spacer{
-					@include bg((c:n));
-					@include bdr((s:n));
+	&.is-style-sheet &{
+		&__thead{
+			&-tr{
+				&-th{
+					@include txt((a:c));
+					@include bg((c:sx));
+					@include bdr((s:s,w:1,c:lx));
+					&.is-spacer{
+						@include bg((c:n));
+						@include bdr((s:n));
+					}
 				}
 			}
 		}
-		tbody{
-			tr{
-				th,td{
+		&__tbody{
+			&-tr{
+				&-th,&-td{
 					@include txt((a:l));
-					@include bdr((s:s,w:1,c:t 50));
+					@include bdr((s:s,w:1,c:lx));
 				}
-				th{
-					@include bg((c:s 1 .5));
+				&-th{
+					@include bg((c:sx));
 					@include txt((a:c));
 				}
-				td{
-					@include bg((c:b));
+				&-td{
+					@include bg((c:bx));
 				}
 				&:nth-of-type(odd){
-					th{@include bg((c:s 1 .75));}
-					td{@include bg((c:s 1 .25));}
-				}
-			}
-		}
-	}
-	&.plan{
-		thead{
-			th{
-				@include txt((a:c,c:i));
-				@include bg((c:m));
-				&.spacer{
-					@include bg((c:n));
-				}
-			}
-		}
-		tbody{
-			tr{
-				th,td{
-					@include txt((a:c));
-				}
-				th{
-					@include bg((c:m));
-					@include txt((c:i));
-				}
-				td{
-					@include bg((c:b));
-				}
-				&:nth-of-type(odd){
-					th{@include bg((c:m 95));}
+					#{$row}{
+						&-th{@include bg((c:sx-bx 75));}
+					}
 				}
 				&:nth-of-type(even){
-					td{@include bg((c:s));}
+					#{$row}{
+						&-td{@include bg((c:sx-bx 25));}
+					}
+				}
+			}
+		}
+	}
+	&.is-style-plan &{
+		&__thead{
+			&-tr{
+				&-th{
+					@extend %tab-component;
+					@include bdr((br:0));
+					@include txt((a:c,c:ix));
+					@include bg((c:mx));
+					&.is-spacer{
+						@include bg((c:n));
+					}
+				}
+			}
+		}
+		&__tbody{
+			&-tr{
+				&-th,&-td{
+					@include txt((a:c));
+				}
+				&-th{
+					@extend %tab-component;
+					@include bdr((rr:0));
+					@include bg((c:mx));
+					@include txt((c:ix));
+				}
+				&-td{
+					@include bg((c:bx));
+				}
+				&:nth-of-type(odd){
+					#{$row}{
+						&-th{@include bg((c:mx-bx 80));}
+					}
+				}
+				&:nth-of-type(even){
+					#{$row}{
+						&-td{@include bg((c:bx-mx 80));}
+					}
 				}
 			}
 		}

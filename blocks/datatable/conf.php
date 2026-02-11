@@ -1,6 +1,6 @@
 <?php
 $attributes=[
-	"classes"=>["source"=>'attribute',"selector"=>'table',"attribute"=>'class',"default"=>'wp-block-catpow-datatable spec hasHeaderRow hasHeaderColumn'],
+	"classes"=>["source"=>'attribute',"selector"=>'table',"attribute"=>'class',"default"=>'wp-block-catpow-datatable is-style-spec has-header-row has-header-column'],
 
 	"rows"=>[
 		"source"=>'query',
@@ -19,7 +19,7 @@ $attributes=[
 		],
 		"default"=>[
 			["classes"=>'',"cells"=>[
-				["text"=>[''],"classes"=>'spacer'],
+				["text"=>[''],"classes"=>'is-spacer'],
 				["text"=>['Title'],"classes"=>''],
 				["text"=>['Title'],"classes"=>'']
 			]],

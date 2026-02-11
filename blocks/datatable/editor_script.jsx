@@ -1,4 +1,6 @@
-﻿wp.blocks.registerBlockType("catpow/datatable", {
+﻿import { clsx } from "clsx";
+
+wp.blocks.registerBlockType("catpow/datatable", {
 	title: "🐾 DataTable",
 	description: "一行または１列の見出しを持つテーブルです。",
 	icon: "editor-table",
@@ -53,12 +55,9 @@
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { useState, useMemo } = wp.element;
-		const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
+		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
 		const { classes, rows = [], doLoop, AltMode = false } = attributes;
-		const primaryClass = "wp-block-catpow-datatable";
-		var classArray = _.uniq((className + " " + classes).split(" "));
-		var classNameArray = className.split(" ");
 
 		var states = CP.classNamesToFlags(classes);
 
@@ -94,7 +93,11 @@
 					name: "type",
 					type: "buttons",
 					label: "タイプ",
-					values: ["spec", "sheet", "plan"],
+					values: {
+						isStyleSpec: "spec",
+						isStyleSheet: "sheet",
+						isStylePlan: "plan",
+					},
 				},
 				"level",
 				"color",
@@ -160,12 +163,14 @@
 			saveItems();
 		};
 
+		const blockProps = useBlockProps({ className: classes });
+
 		return (
 			<>
 				<CP.SelectModeToolbar set={setAttributes} attr={attributes} modes={["AltMode"]} />
 				<>
 					{AltMode && doLoop ? (
-						<div className="cp-altcontent">
+						<div {...blockProps} className="cp-altcontent">
 							<div className="label">
 								<Icon icon="welcome-comments" />
 							</div>
@@ -173,20 +178,13 @@
 						</div>
 					) : (
 						<CP.Bem prefix="wp-block-catpow">
-							<table className={classes}>
+							<table {...blockProps}>
 								{states.hasHeaderRow && (
 									<thead>
 										<tr>
 											{rows[0].cells.map((cell, index) => {
-												if (index === 0) {
-													if (states.hasHeaderColumn && cell.text.length === 0) {
-														cell.classes = "spacer";
-													} else if (cell.classes == "spacer") {
-														cell.classes = "";
-													}
-												}
 												return (
-													<th className={cell.classes} key={index}>
+													<th className={clsx("_th", { "is-spacer": index === 0 && states.hasHeaderColumn && cell.text.length === 0 })} key={index}>
 														<RichText
 															onChange={(text) => {
 																cell.text = text;
@@ -258,7 +256,7 @@
 					<CP.SelectClassPanel title="表示設定" icon="admin-appearance" set={setAttributes} attr={attributes} selectiveClasses={statesClasses} />
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(clss) => setAttributes({ classes: clss })} value={classArray.join(" ")} />
+						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 				</InspectorControls>
 			</>
@@ -266,22 +264,21 @@
 	},
 
 	save({ attributes, className }) {
-		const { InnerBlocks, RichText } = wp.blockEditor;
+		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
 		const { classes = "", rows = [], loopParam, doLoop } = attributes;
-		var classArray = classes.split(" ");
 
 		var states = CP.classNamesToFlags(classes);
 
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<table className={classes}>
+					<table {...useBlockProps.save({ className: classes })}>
 						{states.hasHeaderRow && (
 							<thead>
 								<tr>
 									{rows[0].cells.map((cell, index) => {
 										return (
-											<th className={cell.classes} key={index}>
+											<th className={clsx("_th", { "is-spacer": index === 0 && states.hasHeaderColumn && cell.text.length === 0 })} key={index}>
 												<RichText.Content value={cell.text} />
 											</th>
 										);
@@ -317,7 +314,6 @@
 		{
 			save({ attributes, className }) {
 				const { classes = "", rows = [], loopParam } = attributes;
-				var classArray = classes.split(" ");
 
 				var states = CP.classNamesToFlags(classes);
 
