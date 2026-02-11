@@ -1,8 +1,9 @@
-﻿Catpow.CountDown = function (props) {
-	const { className = "wp-block-catpow-countdown-body" } = props;
-	const { useMemo, useEffect, useCallback, useReducer } = wp.element;
-	const { bem } = Catpow.util;
-	const classes = bem(className);
+﻿import { Bem } from "catpow/component";
+import { clsx } from "clsx";
+
+Catpow.CountDown = function (props) {
+	const { className = "wp-block-catpow-countdown__body" } = props;
+	const { useEffect, useCallback, useReducer } = wp.element;
 
 	const init = useCallback(() => {
 		const state = { isDone: true, days: "0000", hours: "00", minutes: "00", seconds: "00" };
@@ -62,25 +63,27 @@
 	}, []);
 
 	return (
-		<div className={classes()}>
-			<span className={classes.group("is-days")}>
-				<span className={classes.group.number({ "is-leading-zero": state.days[0] === "0" })}>{state.days[0]}</span>
-				<span className={classes.group.number({ "is-leading-zero": state.days.slice(0, 2) === "00" })}>{state.days[1]}</span>
-				<span className={classes.group.number({ "is-leading-zero": state.days.slice(0, 3) === "000" })}>{state.days[2]}</span>
-				<span className={classes.group.number()}>{state.days[3]}</span>
-			</span>
-			<span className={classes.group("is-hours")}>
-				<span className={classes.group.number({ "is-leading-zero": state.hours[0] === "0" })}>{state.hours[0]}</span>
-				<span className={classes.group.number()}>{state.hours[1]}</span>
-			</span>
-			<span className={classes.group("is-minutes")}>
-				<span className={classes.group.number({ "is-leading-zero": state.minutes[0] === "0" })}>{state.minutes[0]}</span>
-				<span className={classes.group.number()}>{state.minutes[1]}</span>
-			</span>
-			<span className={classes.group("is-seconds")}>
-				<span className={classes.group.number({ "is-leading-zero": state.seconds[0] === "0" })}>{state.seconds[0]}</span>
-				<span className={classes.group.number()}>{state.seconds[1]}</span>
-			</span>
-		</div>
+		<Bem prefix="wp-block-catpow">
+			<div className={className}>
+				<span className="_group  is-days">
+					<span className={clsx("_number", { "is-leading-zero": state.days[0] === "0" })}>{state.days[0]}</span>
+					<span className={clsx("_number", { "is-leading-zero": state.days.slice(0, 2) === "00" })}>{state.days[1]}</span>
+					<span className={clsx("_number", { "is-leading-zero": state.days.slice(0, 3) === "000" })}>{state.days[2]}</span>
+					<span className={clsx("_number")}>{state.days[3]}</span>
+				</span>
+				<span className="_group is-hours">
+					<span className={clsx("_number", { "is-leading-zero": state.hours[0] === "0" })}>{state.hours[0]}</span>
+					<span className={clsx("_number")}>{state.hours[1]}</span>
+				</span>
+				<span className="_group is-minutes">
+					<span className={clsx("_number", { "is-leading-zero": state.minutes[0] === "0" })}>{state.minutes[0]}</span>
+					<span className={clsx("_number")}>{state.minutes[1]}</span>
+				</span>
+				<span className="_group is-seconds">
+					<span className={clsx("_number", { "is-leading-zero": state.seconds[0] === "0" })}>{state.seconds[0]}</span>
+					<span className={clsx("_number")}>{state.seconds[1]}</span>
+				</span>
+			</div>
+		</Bem>
 	);
 };

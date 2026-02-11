@@ -10,19 +10,19 @@
     },
     edit({ attributes, setAttributes, className }) {
       const { useCallback, useMemo } = wp.element;
-      const { InspectorControls } = wp.blockEditor;
-      const { target } = attributes;
-      const classes = useMemo(() => Catpow.util.bem(attributes.classes), [attributes.classes]);
+      const { InspectorControls, useBlockProps } = wp.blockEditor;
+      const { classes, target } = attributes;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = ["level", { name: "target", label: "\u76EE\u6A19\u65E5\u6642", key: "target", input: "text", placeholder: "2099-12-31 23:59:59" }];
         wp.hooks.applyFilters("catpow.blocks.countdown.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes() }, /* @__PURE__ */ wp.element.createElement(Catpow.CountDown, { className: classes.body(), target })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, selectiveClasses && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u8A2D\u5B9A", icon: "edit", set: setAttributes, attr: attributes, selectiveClasses, initialOpen: true })));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: classes }) }, /* @__PURE__ */ wp.element.createElement(Catpow.CountDown, { target })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, selectiveClasses && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u8A2D\u5B9A", icon: "edit", set: setAttributes, attr: attributes, selectiveClasses, initialOpen: true })));
     },
     save({ attributes, className, setAttributes }) {
       const { classes = "", target } = attributes;
-      return /* @__PURE__ */ wp.element.createElement("div", { className: classes, "data-target": target });
+      const { useBlockProps } = wp.blockEditor;
+      return /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps.save({ className: classes, "data-target": target }) });
     }
   });
 })();
