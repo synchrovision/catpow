@@ -63,12 +63,10 @@
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { useState, useMemo, createElement: el } = wp.element;
-		const { BlockControls, InspectorControls } = wp.blockEditor;
+		const { BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl, ToolbarGroup } = wp.components;
 		const { classes, graph, EditMode = false } = attributes;
 		const primaryClass = "wp-block-catpow-chart";
-		var classArray = _.uniq((className + " " + classes).split(" "));
-		var classNameArray = className.split(" ");
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
@@ -175,6 +173,8 @@
 			);
 		};
 
+		const blockProps = useBlockProps({ className: classes });
+
 		return (
 			<>
 				<BlockControls>
@@ -192,17 +192,17 @@
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(clss) => setAttributes({ classes: clss })} value={classArray.join(" ")} />
+						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 				</InspectorControls>
-				{EditMode ? DataTable() : <div className={classes}>{Catpow[type + "Output"] ? el(Catpow[type + "Output"], { ...states, ...graph[0] }) : <div className="alert">Invalid Chart Type</div>}</div>}
+				{EditMode ? DataTable() : <div {...blockProps}>{Catpow[type + "Output"] ? el(Catpow[type + "Output"], { ...states, ...graph[0] }) : <div className="alert">Invalid Chart Type</div>}</div>}
 			</>
 		);
 	},
-	save({ attributes, className }) {
+	save({ attributes }) {
 		const { createElement: el } = wp.element;
+		const { useBlockProps } = wp.blockEditor;
 		const { classes, graph } = attributes;
-		var classArray = _.uniq((attributes.classes || "").split(" "));
 
 		var selectiveClasses = [
 			{
@@ -218,6 +218,6 @@
 		let type = CP.getSelectiveClass({ attr: attributes }, selectiveClasses[0].values);
 		const states = CP.classNamesToFlags(classes);
 
-		return <div className={classes}>{el(Catpow[type + "Output"], { ...states, ...graph[0] })}</div>;
+		return <div {...useBlockProps.save({ className: classes })}>{el(Catpow[type + "Output"], { ...states, ...graph[0] })}</div>;
 	},
 });
