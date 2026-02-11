@@ -1,13 +1,13 @@
 .wp-block-catpow-comparetable {
   width: 100%;
 }
-.wp-block-catpow-comparetable-box {
+.wp-block-catpow-comparetable__box {
   padding-bottom: 3.75rem;
 }
-.wp-block-catpow-comparetable-table-thead-tr-th .CP-ItemControl, .wp-block-catpow-comparetable-table-thead-tr-td .CP-ItemControl, .wp-block-catpow-comparetable-table-tbody-tr-th .CP-ItemControl, .wp-block-catpow-comparetable-table-tbody-tr-td .CP-ItemControl {
+.wp-block-catpow-comparetable__table-thead-tr-th .CP-ItemControl, .wp-block-catpow-comparetable__table-thead-tr-td .CP-ItemControl, .wp-block-catpow-comparetable__table-tbody-tr-th .CP-ItemControl, .wp-block-catpow-comparetable__table-tbody-tr-td .CP-ItemControl {
   width: 4.375rem;
 }
-.wp-block-catpow-comparetable:not(.do-transposition) .wp-block-catpow-comparetable-table-thead-tr-th .CP-ItemControl.is-control-column, .wp-block-catpow-comparetable.do-transposition .wp-block-catpow-comparetable-table-thead-tr-th .CP-ItemControl.is-control-row, .wp-block-catpow-comparetable:not(.do-transposition) .wp-block-catpow-comparetable-table-thead-tr-td .CP-ItemControl.is-control-column, .wp-block-catpow-comparetable.do-transposition .wp-block-catpow-comparetable-table-thead-tr-td .CP-ItemControl.is-control-row, .wp-block-catpow-comparetable:not(.do-transposition) .wp-block-catpow-comparetable-table-tbody-tr-th .CP-ItemControl.is-control-column, .wp-block-catpow-comparetable.do-transposition .wp-block-catpow-comparetable-table-tbody-tr-th .CP-ItemControl.is-control-row, .wp-block-catpow-comparetable:not(.do-transposition) .wp-block-catpow-comparetable-table-tbody-tr-td .CP-ItemControl.is-control-column, .wp-block-catpow-comparetable.do-transposition .wp-block-catpow-comparetable-table-tbody-tr-td .CP-ItemControl.is-control-row {
+.wp-block-catpow-comparetable:not(.do-transposition) .wp-block-catpow-comparetable__table-thead-tr-th .CP-ItemControl.is-control-column, .wp-block-catpow-comparetable.do-transposition .wp-block-catpow-comparetable__table-thead-tr-th .CP-ItemControl.is-control-row, .wp-block-catpow-comparetable:not(.do-transposition) .wp-block-catpow-comparetable__table-thead-tr-td .CP-ItemControl.is-control-column, .wp-block-catpow-comparetable.do-transposition .wp-block-catpow-comparetable__table-thead-tr-td .CP-ItemControl.is-control-row, .wp-block-catpow-comparetable:not(.do-transposition) .wp-block-catpow-comparetable__table-tbody-tr-th .CP-ItemControl.is-control-column, .wp-block-catpow-comparetable.do-transposition .wp-block-catpow-comparetable__table-tbody-tr-th .CP-ItemControl.is-control-row, .wp-block-catpow-comparetable:not(.do-transposition) .wp-block-catpow-comparetable__table-tbody-tr-td .CP-ItemControl.is-control-column, .wp-block-catpow-comparetable.do-transposition .wp-block-catpow-comparetable__table-tbody-tr-td .CP-ItemControl.is-control-row {
   position: absolute;
   top: 0rem;
   right: 0rem;
@@ -17,7 +17,7 @@
   margin: auto;
   margin-bottom: -1.25rem;
 }
-.wp-block-catpow-comparetable.do-transposition .wp-block-catpow-comparetable-table-thead-tr-th .CP-ItemControl.is-control-column, .wp-block-catpow-comparetable:not(.do-transposition) .wp-block-catpow-comparetable-table-thead-tr-th .CP-ItemControl.is-control-row, .wp-block-catpow-comparetable.do-transposition .wp-block-catpow-comparetable-table-thead-tr-td .CP-ItemControl.is-control-column, .wp-block-catpow-comparetable:not(.do-transposition) .wp-block-catpow-comparetable-table-thead-tr-td .CP-ItemControl.is-control-row, .wp-block-catpow-comparetable.do-transposition .wp-block-catpow-comparetable-table-tbody-tr-th .CP-ItemControl.is-control-column, .wp-block-catpow-comparetable:not(.do-transposition) .wp-block-catpow-comparetable-table-tbody-tr-th .CP-ItemControl.is-control-row, .wp-block-catpow-comparetable.do-transposition .wp-block-catpow-comparetable-table-tbody-tr-td .CP-ItemControl.is-control-column, .wp-block-catpow-comparetable:not(.do-transposition) .wp-block-catpow-comparetable-table-tbody-tr-td .CP-ItemControl.is-control-row {
+.wp-block-catpow-comparetable.do-transposition .wp-block-catpow-comparetable__table-thead-tr-th .CP-ItemControl.is-control-column, .wp-block-catpow-comparetable:not(.do-transposition) .wp-block-catpow-comparetable__table-thead-tr-th .CP-ItemControl.is-control-row, .wp-block-catpow-comparetable.do-transposition .wp-block-catpow-comparetable__table-thead-tr-td .CP-ItemControl.is-control-column, .wp-block-catpow-comparetable:not(.do-transposition) .wp-block-catpow-comparetable__table-thead-tr-td .CP-ItemControl.is-control-row, .wp-block-catpow-comparetable.do-transposition .wp-block-catpow-comparetable__table-tbody-tr-th .CP-ItemControl.is-control-column, .wp-block-catpow-comparetable:not(.do-transposition) .wp-block-catpow-comparetable__table-tbody-tr-th .CP-ItemControl.is-control-row, .wp-block-catpow-comparetable.do-transposition .wp-block-catpow-comparetable__table-tbody-tr-td .CP-ItemControl.is-control-column, .wp-block-catpow-comparetable:not(.do-transposition) .wp-block-catpow-comparetable__table-tbody-tr-td .CP-ItemControl.is-control-row {
   position: absolute;
   top: 0rem;
   right: 0rem;

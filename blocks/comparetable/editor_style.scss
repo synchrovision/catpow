@@ -3,13 +3,13 @@
 .wp-block-catpow-comparetable{
 	$block:&;
 	@include bnd((w:f));
-	&-box{
+	&__box{
 		@include bnd((pdb:60));
-		&__body{
+		&-body{
 			
 		}
 	}
-	&-table{
+	&__table{
 		&-thead,&-tbody{
 			&-tr{
 				&-th,&-td{

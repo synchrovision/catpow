@@ -1,4 +1,6 @@
-﻿const { __ } = wp.i18n;
+﻿import { clsx } from "clsx";
+
+const { __ } = wp.i18n;
 CP.config.comparetable = {
 	imageKeys: {
 		image: {
@@ -57,13 +59,12 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 		],
 	},
 	example: CP.example,
-	edit({ attributes, className, setAttributes, isSelected }) {
-		const { useState, useMemo, useCallback } = wp.element;
+	edit({ attributes, setAttributes, isSelected }) {
+		const { useMemo, useCallback } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
 		const { rows = [], cols = [], doLoop, AltMode = false, r = 0, c = 0, vars, headerColClasses, firstCellClasses } = attributes;
 		const { imageKeys } = CP.config.comparetable;
-		const classes = Catpow.util.bem("wp-block-catpow-comparetable");
 		var states = CP.classNamesToFlags(attributes.classes);
 
 		if (attributes.file) {
@@ -172,17 +173,17 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 			return selectiveRowClasses;
 		}, []);
 		const selectiveHeaderRowClasses = useMemo(() => {
-			const selectiveHeaderRowClasses = ["fontSize", "textAlign", "verticalAlign"];
+			const selectiveHeaderRowClasses = ["textRole", "textAlign", "verticalAlign"];
 			wp.hooks.applyFilters("catpow.blocks.comparetable.selectiveHeaderRowClasses", CP.finderProxy(selectiveHeaderRowClasses));
 			return selectiveHeaderRowClasses;
 		}, []);
 		const selectiveColClasses = useMemo(() => {
-			const selectiveColClasses = [{ name: "isImage", label: __("画像", "catpow"), values: "is-image" }, "fontSize", "textAlign", "verticalAlign"];
+			const selectiveColClasses = [{ name: "isImage", label: __("画像", "catpow"), values: "isImage" }, "textRole", "textAlign", "verticalAlign"];
 			wp.hooks.applyFilters("catpow.blocks.comparetable.selectiveColClasses", CP.finderProxy(selectiveColClasses));
 			return selectiveColClasses;
 		}, []);
 		const selectiveHeaderColClasses = useMemo(() => {
-			const selectiveHeaderColClasses = ["fontSize", "textAlign", "verticalAlign"];
+			const selectiveHeaderColClasses = ["textRole", "textAlign", "verticalAlign"];
 			wp.hooks.applyFilters("catpow.blocks.comparetable.selectiveHeaderColClasses", CP.finderProxy(selectiveHeaderColClasses));
 			return selectiveHeaderColClasses;
 		}, []);
@@ -208,7 +209,7 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 					name: "label",
 					type: "buttons",
 					label: "ラベル",
-					values: "has-label",
+					values: "hasLabel",
 				},
 			];
 			wp.hooks.applyFilters("catpow.blocks.comparetable.selectiveHeaderColCellClasses", CP.finderProxy(selectiveHeaderColCellClasses));
@@ -282,7 +283,7 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 		};
 
 		const blockProps = useBlockProps({
-			className: classes(attributes.classes),
+			className: attributes.classes,
 			style: vars,
 		});
 
@@ -303,141 +304,181 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 							<InnerBlocks />
 						</div>
 					) : (
-						<div {...blockProps}>
-							{states.hasTags && (
-								<ul className={classes.tags()}>
-									{tagCells.map((cell, tagIndex) => {
-										if (states.hasHeaderColumn && tagIndex === 0) {
-											return false;
-										}
-										return (
-											<li className={classes.tags.tag(cell.classes)} data-wp-on--click="actions.onClickTag" data-wp-class--is-active="callbacks.isTagActive" data-index={tagIndex} key={tagIndex}>
-												<RichText.Content value={cell.text} />
-											</li>
-										);
-									})}
-								</ul>
-							)}
-							<div className={classes.box()}>
-								<div className={classes.box._body()}>
-									<table
-										className={classes.table()}
-										style={{
-											"--cp-row-count": `${rows.length}`,
-											"--cp-column-count": `${rows[0].cells.length}`,
-										}}
-									>
-										<colgroup className={classes.table.colgroup()}>
-											{cols.map((col, index) => (
-												<col className={classes.table.colgroup.col(col.classes)} data-col-class={col.classes} key={index} />
-											))}
-										</colgroup>
-										{hasHeaderRow && (
-											<thead className={classes.table.thead()}>
-												<tr className={classes.table.thead.tr(rows[0].classes)} data-row-class={rows[0].classes}>
-													{rows[0].cells.map((cell, columnIndex) => {
-														const lineClass = ["is-even-line", "is-odd-line"][(states.doTransposition ? columnIndex : 0) % 2];
-														if (states.hasHeaderColumn && columnIndex == 0) {
-															const cellStates = CP.classNamesToFlags(firstCellClasses);
-															return (
-																<td
-																	className={classes.table.thead.tr.td(rows[0].classes, headerColClasses, firstCellClasses)}
-																	data-cell-class={cell.classes}
-																	onClick={() => setAttributes({ r: 0, c: columnIndex })}
-																	style={getCssVarsForCell(0, columnIndex)}
-																	key={columnIndex}
-																>
-																	{!cellStates.isSpacer && (
-																		<div data-role="contents">
+						<CP.Bem prefix="wp-block-catpow">
+							<div {...blockProps}>
+								{states.hasTags && (
+									<ul className="_tags">
+										{tagCells.map((cell, tagIndex) => {
+											if (states.hasHeaderColumn && tagIndex === 0) {
+												return false;
+											}
+											return (
+												<li className={clsx("_tag", cell.classes)} data-wp-on--click="actions.onClickTag" data-wp-class--is-active="callbacks.isTagActive" data-index={tagIndex} key={tagIndex}>
+													<RichText.Content value={cell.text} />
+												</li>
+											);
+										})}
+									</ul>
+								)}
+								<div className="_box">
+									<div className="_body">
+										<table
+											className="table_"
+											style={{
+												"--cp-row-count": `${rows.length}`,
+												"--cp-column-count": `${rows[0].cells.length}`,
+											}}
+										>
+											<colgroup className="_colgroup">
+												{cols.map((col, index) => (
+													<col className={clsx("_cold", col.classes)} data-col-class={col.classes} key={index} />
+												))}
+											</colgroup>
+											{hasHeaderRow && (
+												<thead className="_thead">
+													<tr className={clsx("_tr", rows[0].classes)} data-row-class={rows[0].classes}>
+														{rows[0].cells.map((cell, columnIndex) => {
+															const lineClass = ["is-even-line", "is-odd-line"][(states.doTransposition ? columnIndex : 0) % 2];
+															if (states.hasHeaderColumn && columnIndex == 0) {
+																const cellStates = CP.classNamesToFlags(firstCellClasses);
+																return (
+																	<td
+																		className={clsx("_td", rows[0].classes, headerColClasses, firstCellClasses)}
+																		data-cell-class={cell.classes}
+																		onClick={() => setAttributes({ r: 0, c: columnIndex })}
+																		style={getCssVarsForCell(0, columnIndex)}
+																		key={columnIndex}
+																	>
+																		{!cellStates.isSpacer && (
 																			<RichText
+																				className="_contents"
 																				onChange={(text) => {
 																					cell.text = text;
 																					saveItems();
 																				}}
 																				value={cell.text}
+																				data-role="contents"
 																			/>
-																		</div>
-																	)}
-																</td>
-															);
-														}
-														const cellStates = CP.classNamesToFlags(cell.classes);
-														return (
-															<th
-																className={classes.table.thead.tr.th(rows[0].classes, cell.classes, lineClass)}
-																data-cell-class={cell.classes}
-																onClick={() => setAttributes({ r: 0, c: columnIndex })}
-																style={getCssVarsForCell(0, columnIndex)}
-																key={columnIndex}
-															>
-																{cellStates.hasLabel && (
-																	<div className={classes.table.thead.tr.th.label()} data-role="label">
+																		)}
+																	</td>
+																);
+															}
+															const cellStates = CP.classNamesToFlags(cell.classes);
+															return (
+																<th
+																	className={clsx("_th", rows[0].classes, cell.classes, lineClass)}
+																	data-cell-class={cell.classes}
+																	onClick={() => setAttributes({ r: 0, c: columnIndex })}
+																	style={getCssVarsForCell(0, columnIndex)}
+																	key={columnIndex}
+																>
+																	{cellStates.hasLabel && (
 																		<RichText
+																			className="_label"
 																			onChange={(label) => {
 																				cell.label = label;
 																				saveItems();
 																			}}
 																			value={cell.label}
+																			placeholder="Label"
+																			data-role="label"
 																		/>
-																	</div>
-																)}
-																<div className={classes.table.thead.tr.th.contents()} data-role="contents">
+																	)}
 																	<RichText
+																		className="_contents"
 																		onChange={(text) => {
 																			cell.text = text;
 																			saveItems();
 																		}}
 																		value={cell.text}
+																		data-role="contents"
 																	/>
-																</div>
-															</th>
-														);
-													})}
-												</tr>
-											</thead>
-										)}
-										<tbody className={classes.table.tbody()}>
-											{rows.map((row, rowIndex) => {
-												if (hasHeaderRow && rowIndex === 0) {
-													return false;
-												}
-												return (
-													<tr className={classes.table.tbody.tr(row.classes)} data-row-class={row.classes} key={rowIndex}>
-														{row.cells.map((cell, columnIndex) => {
-															const colStates = CP.classNamesToFlags(cols[columnIndex]?.classes);
-															const cellStates = CP.classNamesToFlags(cell.classes);
-															const lineClass = ["is-even-line", "is-odd-line"][(states.doTransposition ? columnIndex : rowIndex) % 2];
-															var controles = [];
-															if (isSelected && columnIndex == row.cells.length - 1) {
-																controles.push(
-																	<CP.ItemControl
-																		className="is-control-row"
-																		controls={{
-																			up: () => upRow(rowIndex),
-																			delete: () => deleteRow(rowIndex),
-																			clone: () => addRow(rowIndex),
-																			down: () => downRow(rowIndex),
-																		}}
-																	/>,
-																);
-															}
-															if (isSelected && rowIndex == rows.length - 1) {
-																controles.push(
-																	<CP.ItemControl
-																		className="is-control-column"
-																		controls={{
-																			left: () => downColumn(columnIndex),
-																			delete: () => deleteColumn(columnIndex),
-																			clone: () => addColumn(columnIndex),
-																			right: () => upColumn(columnIndex),
-																		}}
-																	/>,
-																);
-															}
-															if (hasHeaderColumn && columnIndex == 0) {
+																</th>
+															);
+														})}
+													</tr>
+												</thead>
+											)}
+											<tbody className="_tbody">
+												{rows.map((row, rowIndex) => {
+													if (hasHeaderRow && rowIndex === 0) {
+														return false;
+													}
+													return (
+														<tr className={clsx("_tr", row.classes)} data-row-class={row.classes} key={rowIndex}>
+															{row.cells.map((cell, columnIndex) => {
+																const colStates = CP.classNamesToFlags(cols[columnIndex]?.classes);
+																const cellStates = CP.classNamesToFlags(cell.classes);
+																const lineClass = ["is-even-line", "is-odd-line"][(states.doTransposition ? columnIndex : rowIndex) % 2];
+																var controles = [];
+																if (isSelected && columnIndex == row.cells.length - 1) {
+																	controles.push(
+																		<CP.ItemControl
+																			className="is-control-row"
+																			controls={{
+																				up: () => upRow(rowIndex),
+																				delete: () => deleteRow(rowIndex),
+																				clone: () => addRow(rowIndex),
+																				down: () => downRow(rowIndex),
+																			}}
+																		/>,
+																	);
+																}
+																if (isSelected && rowIndex == rows.length - 1) {
+																	controles.push(
+																		<CP.ItemControl
+																			className="is-control-column"
+																			controls={{
+																				left: () => downColumn(columnIndex),
+																				delete: () => deleteColumn(columnIndex),
+																				clone: () => addColumn(columnIndex),
+																				right: () => upColumn(columnIndex),
+																			}}
+																		/>,
+																	);
+																}
+																if (hasHeaderColumn && columnIndex == 0) {
+																	return (
+																		<th
+																			className={clsx("_th", row.classes, headerColClasses, cell.classes, lineClass)}
+																			data-cell-class={cell.classes}
+																			onClick={() =>
+																				setAttributes({
+																					r: rowIndex,
+																					c: columnIndex,
+																				})
+																			}
+																			style={getCssVarsForCell(rowIndex, columnIndex)}
+																			key={columnIndex}
+																		>
+																			{cellStates.hasLabel && (
+																				<RichText
+																					className="_label"
+																					onChange={(label) => {
+																						cell.label = label;
+																						saveItems();
+																					}}
+																					value={cell.label}
+																					placeholder="Label"
+																					data-role="label"
+																				/>
+																			)}
+																			<RichText
+																				className="_contents"
+																				onChange={(text) => {
+																					cell.text = text;
+																					saveItems();
+																				}}
+																				value={cell.text}
+																				data-role="contents"
+																			/>
+																			{controles}
+																		</th>
+																	);
+																}
 																return (
-																	<th
-																		className={classes.table.tbody.tr.th(row.classes, headerColClasses, cell.classes, lineClass)}
+																	<td
+																		className={clsx("_td", row.classes, cols[columnIndex]?.classes, cell.classes, lineClass)}
 																		data-cell-class={cell.classes}
 																		onClick={() =>
 																			setAttributes({
@@ -449,88 +490,53 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 																		key={columnIndex}
 																	>
 																		{cellStates.hasLabel && (
-																			<div className={classes.table.tbody.tr.th.label()} data-role="label">
-																				<RichText
-																					onChange={(label) => {
-																						cell.label = label;
-																						saveItems();
-																					}}
-																					value={cell.label}
-																				/>
-																			</div>
-																		)}
-																		<div className={classes.table.tbody.tr.th.contents()} data-role="contents">
 																			<RichText
-																				onChange={(text) => {
-																					cell.text = text;
-																					saveItems();
-																				}}
-																				value={cell.text}
-																			/>
-																		</div>
-																		{controles}
-																	</th>
-																);
-															}
-															return (
-																<td
-																	className={classes.table.tbody.tr.td(row.classes, cols[columnIndex]?.classes, cell.classes, lineClass)}
-																	data-cell-class={cell.classes}
-																	onClick={() =>
-																		setAttributes({
-																			r: rowIndex,
-																			c: columnIndex,
-																		})
-																	}
-																	style={getCssVarsForCell(rowIndex, columnIndex)}
-																	key={columnIndex}
-																>
-																	{cellStates.hasLabel && (
-																		<div className={classes.table.tbody.tr.td.label()} data-role="label">
-																			<RichText
+																				className="_label"
 																				onChange={(label) => {
 																					cell.label = text;
 																					saveItems();
 																				}}
 																				value={cell.label}
+																				placeholder="Label"
+																				data-role="label"
 																			/>
-																		</div>
-																	)}
-																	{colStates.isImage ? (
-																		<div className={classes.table.tbody.tr.td.image()} data-role="image">
-																			<CP.SelectResponsiveImage
-																				className={classes.table.tbody.tr.td.image._img()}
-																				attr={attributes}
-																				set={setAttributes}
-																				keys={imageKeys.image}
-																				index={[rowIndex, columnIndex]}
-																				size="large"
-																				isTemplate={states.isTemplate}
-																			/>
-																		</div>
-																	) : (
-																		<div className={classes.table.tbody.tr.td.contents()} data-role="contents">
+																		)}
+																		{colStates.isImage ? (
+																			<div className="_image" data-role="image">
+																				<CP.SelectResponsiveImage
+																					className="_img"
+																					attr={attributes}
+																					set={setAttributes}
+																					keys={imageKeys.image}
+																					index={[rowIndex, columnIndex]}
+																					size="large"
+																					isTemplate={states.isTemplate}
+																				/>
+																			</div>
+																		) : (
 																			<RichText
+																				className="_contents"
 																				onChange={(text) => {
 																					cell.text = text;
 																					saveItems();
 																				}}
 																				value={cell.text}
+																				data-role="contents"
 																			/>
-																		</div>
-																	)}
-																	{controles}
-																</td>
-															);
-														})}
-													</tr>
-												);
-											})}
-										</tbody>
-									</table>
+																		)}
+																		{controles}
+																	</td>
+																);
+															})}
+														</tr>
+													);
+												})}
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
-						</div>
+						</CP.Bem>
 					)}
 				</>
 				<InspectorControls>
@@ -566,12 +572,10 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 		);
 	},
 
-	save({ attributes, className }) {
-		const { useState, useMemo, useCallback } = wp.element;
+	save({ attributes }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
 		const { rows = [], cols = [], loopParam, doLoop, vars, headerColClasses, firstCellClasses } = attributes;
 		const { imageKeys } = CP.config.comparetable;
-		const classes = Catpow.util.bem("wp-block-catpow-comparetable");
 
 		const getCssVarsForCell = (r, c) => {
 			return { "--cp-row-index": `${r + 1}`, "--cp-column-index": `${c + 1}` };
@@ -579,7 +583,7 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 
 		var states = CP.classNamesToFlags(attributes.classes);
 		const blockProps = useBlockProps.save({
-			className: classes(attributes.classes),
+			className: attributes.classes,
 			"data-wp-interactive": "comparetable",
 			"data-wp-context": JSON.stringify({
 				current: 0,
@@ -600,148 +604,122 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 
 		return (
 			<>
-				<div {...blockProps}>
-					{states.hasTags && (
-						<ul className={classes.tags()}>
-							{tagCells.map((cell, tagIndex) => {
-								if (states.hasHeaderColumn && tagIndex === 0) {
-									return false;
-								}
-								return (
-									<li className={classes.tags.tag(cell.classes)} data-wp-on--click="actions.onClickTag" data-wp-class--is-active="callbacks.isTagActive" data-index={tagIndex} key={tagIndex}>
-										<RichText.Content value={cell.text} />
-									</li>
-								);
-							})}
-						</ul>
-					)}
-					<div className={classes.box()}>
-						<div className={classes.box._body()}>
-							<table
-								className={classes.table()}
-								style={{
-									"--cp-row-count": `${rows.length}`,
-									"--cp-column-count": `${rows[0].cells.length}`,
-								}}
-							>
-								<colgroup className={classes.table.colgroup()}>
-									{cols.map((col, index) => (
-										<col className={classes.table.colgroup.col(col.classes)} data-col-class={col.classes} key={index} />
-									))}
-								</colgroup>
-								{hasHeaderRow && (
-									<thead className={classes.table.thead()}>
-										<tr className={classes.table.thead.tr(rows[0].classes)} data-row-class={rows[0].classes}>
-											{rows[0].cells.map((cell, columnIndex) => {
-												const lineClass = ["is-even-line", "is-odd-line"][states.doTransposition ? columnIndex % 2 : 0];
-												if (states.hasHeaderColumn && columnIndex == 0) {
-													const cellStates = CP.classNamesToFlags(firstCellClasses);
+				<CP.Bem prefix="wp-block-catpow">
+					<div {...blockProps}>
+						{states.hasTags && (
+							<ul className="_tags">
+								{tagCells.map((cell, tagIndex) => {
+									if (states.hasHeaderColumn && tagIndex === 0) {
+										return false;
+									}
+									return (
+										<li className={clsx("_tag", cell.classes)} data-wp-on--click="actions.onClickTag" data-wp-class--is-active="callbacks.isTagActive" data-index={tagIndex} key={tagIndex}>
+											<RichText.Content value={cell.text} />
+										</li>
+									);
+								})}
+							</ul>
+						)}
+						<div className="_box">
+							<div className="_body">
+								<table
+									className="table_"
+									style={{
+										"--cp-row-count": `${rows.length}`,
+										"--cp-column-count": `${rows[0].cells.length}`,
+									}}
+								>
+									<colgroup className="_colgroup">
+										{cols.map((col, index) => (
+											<col className={clsx("_col", col.classes)} data-col-class={col.classes} key={index} />
+										))}
+									</colgroup>
+									{hasHeaderRow && (
+										<thead className="_thead">
+											<tr className={clsx("_tr", rows[0].classes)} data-row-class={rows[0].classes}>
+												{rows[0].cells.map((cell, columnIndex) => {
+													const lineClass = ["is-even-line", "is-odd-line"][states.doTransposition ? columnIndex % 2 : 0];
+													if (states.hasHeaderColumn && columnIndex == 0) {
+														const cellStates = CP.classNamesToFlags(firstCellClasses);
+														return (
+															<td
+																className={clsx("_td", rows[0].classes, headerColClasses, firstCellClasses)}
+																data-cell-class={cell.classes}
+																style={getCssVarsForCell(0, columnIndex)}
+																key={columnIndex}
+															>
+																{!cellStates.isSpacer && <RichText.Content tagName="div" className="_contents" value={cell.text} data-role="contents" />}
+															</td>
+														);
+													}
+													const cellStates = CP.classNamesToFlags(cell.classes);
 													return (
-														<td
-															className={classes.table.thead.tr.td(rows[0].classes, headerColClasses, firstCellClasses)}
+														<th
+															className={clsx("_th", rows[0].classes, cell.classes, lineClass)}
 															data-cell-class={cell.classes}
+															data-index={columnIndex}
 															style={getCssVarsForCell(0, columnIndex)}
 															key={columnIndex}
 														>
-															{!cellStates.isSpacer && (
-																<div data-role="contents">
-																	<RichText.Content value={cell.text} />
-																</div>
-															)}
-														</td>
+															{cellStates.hasLabel && <RichText.Content tagName="div" className="_label" value={cell.label} data-role="label" />}
+															<RichText.Content tagName="div" className="_contents" value={cell.text} data-role="contents" />
+														</th>
 													);
-												}
-												const cellStates = CP.classNamesToFlags(cell.classes);
-												return (
-													<th
-														className={classes.table.thead.tr.th(rows[0].classes, cell.classes, lineClass)}
-														data-cell-class={cell.classes}
-														data-index={columnIndex}
-														style={getCssVarsForCell(0, columnIndex)}
-														key={columnIndex}
-													>
-														{cellStates.hasLabel && (
-															<div className={classes.table.thead.tr.th.label()} data-role="label">
-																<RichText.Content value={cell.label} />
-															</div>
-														)}
-														<div className={classes.table.thead.tr.th.contents()} data-role="contents">
-															<RichText.Content value={cell.text} />
-														</div>
-													</th>
-												);
-											})}
-										</tr>
-									</thead>
-								)}
-								<tbody className={classes.table.tbody()}>
-									{rows.map((row, rowIndex) => {
-										if (hasHeaderRow && rowIndex === 0) {
-											return false;
-										}
-										return (
-											<tr className={classes.table.tbody.tr()} data-row-class={row.classes} key={rowIndex}>
-												{row.cells.map((cell, columnIndex) => {
-													const colStates = CP.classNamesToFlags(cols[columnIndex]?.classes);
-													const cellStates = CP.classNamesToFlags(cell.classes);
-													const lineClass = ["is-even-line", "is-odd-line"][(states.doTransposition ? columnIndex : rowIndex) % 2];
-													if (hasHeaderColumn && columnIndex == 0) {
+												})}
+											</tr>
+										</thead>
+									)}
+									<tbody className="_tbody">
+										{rows.map((row, rowIndex) => {
+											if (hasHeaderRow && rowIndex === 0) {
+												return false;
+											}
+											return (
+												<tr className="_tr" data-row-class={row.classes} key={rowIndex}>
+													{row.cells.map((cell, columnIndex) => {
+														const colStates = CP.classNamesToFlags(cols[columnIndex]?.classes);
+														const cellStates = CP.classNamesToFlags(cell.classes);
+														const lineClass = ["is-even-line", "is-odd-line"][(states.doTransposition ? columnIndex : rowIndex) % 2];
+														if (hasHeaderColumn && columnIndex == 0) {
+															return (
+																<th
+																	className={clsx("_th", row.classes, headerColClasses, cell.classes, lineClass)}
+																	data-cell-class={cell.classes}
+																	style={getCssVarsForCell(rowIndex, columnIndex)}
+																	key={columnIndex}
+																>
+																	{cellStates.hasLabel && <RichText.Content tagName="div" className="_label" value={cell.label} data-role="label" />}
+																	<RichText.Content tagName="div" className="_contents" value={cell.text} data-role="contents" />
+																</th>
+															);
+														}
 														return (
-															<th
-																className={classes.table.tbody.tr.th(row.classes, headerColClasses, cell.classes, lineClass)}
+															<td
+																className={clsx("_td", row.classes, cols[columnIndex]?.classes, cell.classes, lineClass)}
 																data-cell-class={cell.classes}
 																style={getCssVarsForCell(rowIndex, columnIndex)}
 																key={columnIndex}
 															>
-																{cellStates.hasLabel && (
-																	<div className={classes.table.thead.tr.th.label()} data-role="label">
-																		<RichText.Content value={cell.label} />
+																{cellStates.hasLabel && <RichText.Content tagName="div" className="_label" value={cell.label} data-role="label" />}
+																{colStates.isImage ? (
+																	<div className="_image" data-role="image">
+																		<CP.ResponsiveImage className="_img" attr={attributes} keys={imageKeys.image} index={[rowIndex, columnIndex]} isTemplate={states.isTemplate} />
 																	</div>
+																) : (
+																	<RichText.Content tagName="div" className="_contents" value={cell.text} data-role="contents" />
 																)}
-																<div className={classes.table.thead.tr.th.contents()} data-role="contents">
-																	<RichText.Content value={cell.text} />
-																</div>
-															</th>
+															</td>
 														);
-													}
-													return (
-														<td
-															className={classes.table.tbody.tr.td(row.classes, cols[columnIndex]?.classes, cell.classes, lineClass)}
-															data-cell-class={cell.classes}
-															style={getCssVarsForCell(rowIndex, columnIndex)}
-															key={columnIndex}
-														>
-															{cellStates.hasLabel && (
-																<div className={classes.table.tbody.tr.td.label()} data-role="label">
-																	<RichText.Content value={cell.label} />
-																</div>
-															)}
-															{colStates.isImage ? (
-																<div className={classes.table.tbody.tr.td.image()} data-role="image">
-																	<CP.ResponsiveImage
-																		className={classes.table.tbody.tr.td.image._img()}
-																		attr={attributes}
-																		keys={imageKeys.image}
-																		index={[rowIndex, columnIndex]}
-																		isTemplate={states.isTemplate}
-																	/>
-																</div>
-															) : (
-																<div className={classes.table.tbody.tr.td.contents()} data-role="contents">
-																	<RichText.Content value={cell.text} />
-																</div>
-															)}
-														</td>
-													);
-												})}
-											</tr>
-										);
-									})}
-								</tbody>
-							</table>
+													})}
+												</tr>
+											);
+										})}
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
-				</div>
+				</CP.Bem>
 				{doLoop && (
 					<on-empty>
 						<InnerBlocks.Content />

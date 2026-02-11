@@ -6,7 +6,7 @@
 .wp-block-catpow-comparetable{
 	$block:&;
 	@extend %ui-block;
-	&-tags{
+	&__tags{
 		@include bnd((mgb:1em));
 		@include flx((w:w,j:c,g:1em));
 		@include txt((l:n,f:p));
@@ -18,14 +18,14 @@
 			}
 		}
 	}
-	&-box{
+	&__box{
 		@include bnd((sb:s,ox:a,sst:x m));
 		@include hide_scrollbar;
-		&__body{
+		&-body{
 			
 		}
 	}
-	&-table{
+	&__table{
 		@extend %paragraph;
 		@include tbl((l:f));
 		@include bnd((mg:20 a));
@@ -74,17 +74,6 @@
 						@include txt((v:b));
 					}
 				}
-				&-td{
-					&.has-font-size-large{
-						@include txt((p:l));
-					}
-					&.has-font-size-medium{
-						@include txt((p:p));
-					}
-					&.has-font-size-small{
-						@include txt((p:c));
-					}
-				}
 			}
 		}
 		&-thead{
@@ -112,7 +101,7 @@
 				&-td{
 					@include bnd((p:r));
 					&-image{
-						&__img{
+						&-img{
 							@include bnd((d:b,w:f,h:a));
 						}
 					}
@@ -121,7 +110,7 @@
 		}
 	}
 	&:not(.do-transposition){
-		#{$block}-table{
+		#{$block}__table{
 			&-thead{
 				&-tr{
 					&-th{
@@ -144,7 +133,7 @@
 			}
 		}
 		&.has-header-column{
-			#{$block}-table{
+			#{$block}__table{
 				&-thead{
 					&-tr{
 						&-td{
@@ -165,7 +154,7 @@
 			}
 		}
 		&.has-fixed-column-width{
-			#{$block}-table{
+			#{$block}__table{
 				&-thead{
 					&-tr{
 						&-th{
@@ -177,7 +166,7 @@
 		}
 	}
 	&.do-transposition{
-		#{$block}-table{
+		#{$block}__table{
 			@include grd((f:c,tr:repeat(var(--cp-column-count),auto),tc:repeat(auto-fill,calc(var(--cp-column-width) * #{$size-unit}))));
 			&-colgroup{
 				@include bnd((d:n));
@@ -225,7 +214,7 @@
 			}
 		}
 		&.has-header-column{
-			#{$block}-table{
+			#{$block}__table{
 				@include grd((tc:calc(var(--cp-header-column-width) * #{$size-unit}) repeat(auto-fill,auto)));
 				&-thead{
 					&-tr{
@@ -244,17 +233,17 @@
 			}
 		}
 		&:not(.has-fixed-column-width){
-			#{$block}-table{
+			#{$block}__table{
 				@include grd((tc:repeat(auto-fit,1fr)));
 			}
 			&.has-header-column{
-				#{$block}-table{
+				#{$block}__table{
 					
 				}
 			}
 		}
 		&.has-fixed-column-width{
-			#{$block}-table{
+			#{$block}__table{
 				@include bnd((w:fit));
 				@include grd((tc:repeat(auto-fill,calc(var(--cp-column-width) * #{$size-unit}))));
 				&-tbody{
@@ -266,7 +255,7 @@
 				}
 			}
 			&.has-header-column{
-				#{$block}-table{
+				#{$block}__table{
 					@include grd((tc:calc(var(--cp-header-column-width) * #{$size-unit}) repeat(auto-fill,calc(var(--cp-column-width) * #{$size-unit}))));
 				}
 			}
@@ -275,12 +264,12 @@
 	
 	}
 	&:not(.has-fixed-column-width){
-		#{$block}-table{
+		#{$block}__table{
 			@include bnd((w:calc(var(--cp-table-width) * #{$size-unit})));
 		}
 	}
 	&.has-fixed-column-width{
-		#{$block}-table{
+		#{$block}__table{
 			&-tbody{
 				&-tr{
 					&-td{
@@ -291,19 +280,19 @@
 		}
 	}
 	&.has-header-column{
-		#{$block}-box{
+		#{$block}__box{
 			@include bnd((spdl:calc(var(--cp-header-column-width) * #{$size-unit})));
 		}
 	}
 	&.is-style-spec{
-		#{$block}-tags{
+		#{$block}__tags{
 			&-tag{
 				&.is-active{
 					@include txt((td:u m 1 .25em));
 				}
 			}
 		}
-		#{$block}-table{
+		#{$block}__table{
 			&-thead{
 				&-tr{
 					&-th,&-td{
@@ -345,7 +334,7 @@
 			
 		}
 		&.do-transposition{
-			#{$block}-table{
+			#{$block}__table{
 				&-thead{
 					&-tr{
 						&-th,&-td{
@@ -390,14 +379,14 @@
 		}
 	}
 	&.is-style-sheet{
-		#{$block}-tags{
+		#{$block}__tags{
 			&-tag{
 				&.is-active{
 					@include txt((td:u m 1 .25em));
 				}
 			}
 		}
-		#{$block}-table{
+		#{$block}__table{
 			@include bnd((pd:1));
 			&-thead,&-tbody{
 				&-tr{
@@ -430,7 +419,7 @@
 			}
 			&-tbody{
 				&-tr{
-					$row:#{$block}-table-tbody-tr;
+					$row:#{$block}__table-tbody-tr;
 					&-th,&-td{
 						@include bg((c:b));
 						@include bdr((s:s,w:1,c:t));
@@ -472,7 +461,7 @@
 		}
 	}
 	&.is-style-plan{
-		#{$block}-tags{
+		#{$block}__tags{
 			&-tag{
 				@extend %label-component;
 				@include bg((c:t-b 50));
@@ -483,7 +472,7 @@
 				}
 			}
 		}
-		#{$block}-table{
+		#{$block}__table{
 			&-thead{
 				&-tr{
 					&-th{
@@ -500,7 +489,7 @@
 			}
 			&-tbody{
 				&-tr{
-					$row:#{$block}-table-tbody-tr;
+					$row:#{$block}__table-tbody-tr;
 					&-th{
 						@include bg((c:m 10));
 						@include txt((c:tx));
@@ -546,7 +535,7 @@
 			}
 		}
 		&:not(.do-transposition){
-			#{$block}-table{
+			#{$block}__table{
 				&-thead{
 					&-tr{
 						&-th{
@@ -556,7 +545,7 @@
 				}
 				&-tbody{
 					&-tr{
-						$row:#{$block}-table-tbody-tr;
+						$row:#{$block}__table-tbody-tr;
 						&-th{
 							@include bdr((r:1em 0 0 1em));
 						}
@@ -565,7 +554,7 @@
 			}
 		}
 		&.do-transposition{
-			#{$block}-table{
+			#{$block}__table{
 				&-thead{
 					&-tr{
 						&-th{
@@ -575,7 +564,7 @@
 				}
 				&-tbody{
 					&-tr{
-						$row:#{$block}-table-tbody-tr;
+						$row:#{$block}__table-tbody-tr;
 						&-th{
 							@include bdr((r:1em 1em 0 0));
 						}
@@ -585,26 +574,26 @@
 		}
 	}
 	&:not(.is-showing-tags){
-		#{$block}-tags{
+		#{$block}__tags{
 			@include bnd((d:n));
 		}
 	}
 	&.is-showing-tags{
-		#{$block}-box{
-			&__body{
+		#{$block}__box{
+			&-body{
 				@include bnd((w:fit));
 			}
 		}
 		&.has-header-column{
-			#{$block}-box{
-				&__body{
+			#{$block}__box{
+				&-body{
 					@include bnd((pdr:80vw));
 				}
 			}
 		}
 		&:not(.has-header-column){
-			#{$block}-box{
-				&__body{
+			#{$block}__box{
+				&-body{
 					@include bnd((pdl:50vw,pdr:50vw));
 				}
 			}
