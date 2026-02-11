@@ -10,12 +10,11 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 		const { useState, useMemo, useEffect } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { items = [], title, lead, caption, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { classes, HeadingTag = "h3", items = [], title, lead, caption, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 		const primaryClass = "wp-block-catpow-contactinfo";
 		const { bem, classNamesToFlags, flagsToClassNames } = Catpow.util;
 
-		const states = useMemo(() => classNamesToFlags(attributes.classes), [attributes.classes]);
-		const classes = useMemo(() => bem(attributes.classes), [attributes.classes]);
+		const states = useMemo(() => classNamesToFlags(classes), [classes]);
 
 		const { linkKeys } = CP.config.contactinfo;
 
@@ -54,78 +53,16 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
-		let rtn = [];
-		const { imageKeys } = CP.config.contactinfo;
 		const len = Math.max(items.length, loopCount);
-
-		[...Array(len).keys()].forEach((i) => {
-			const index = i % items.length;
-			const item = items[index];
-			const itemClasses = classes._items.item;
-			if (!item.controlClasses) {
-				item.controlClasses = "control";
-			}
-			rtn.push(
-				<CP.Item tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={i}>
-					{states.hasItemTitle && (
-						<RichText
-							tagName="h4"
-							className={itemClasses.title()}
-							placeholder="Input Title"
-							onChange={(title) => {
-								item.title = title;
-								save();
-							}}
-							value={item.title}
-						/>
-					)}
-					{states.hasItemLead && (
-						<RichText
-							tagName="p"
-							className={itemClasses.lead()}
-							placeholder="Input Lead"
-							onChange={(lead) => {
-								item.lead = lead;
-								save();
-							}}
-							value={item.lead}
-						/>
-					)}
-					<CP.Link.Edit className={itemClasses.link()} attr={attributes} set={setAttributes} keys={linkKeys.link} index={index}>
-						{states.hasIcon && <CP.OutputIcon className={itemClasses.link.icon()} item={attributes} />}
-						<RichText
-							tagName="span"
-							className={itemClasses.link.text()}
-							placeholder="Input Link"
-							onChange={(link) => {
-								items[index].link = link;
-								save();
-							}}
-							value={item.link}
-						/>
-					</CP.Link.Edit>
-					{states.hasItemCaption && (
-						<RichText
-							tagName="small"
-							className={itemClasses.caption()}
-							placeholder="Input Caption"
-							onChange={(caption) => {
-								item.caption = caption;
-								save();
-							}}
-							value={item.caption}
-						/>
-					)}
-				</CP.Item>,
-			);
-		});
 
 		useEffect(() => {
 			states.hasMultipleItems = len > 1;
 			setAttributes({ classes: flagsToClassNames(states) });
 		}, [len > 1]);
 
-		const blockProps = useBlockProps({ className: classes() });
+		const blockProps = useBlockProps({ className: classes });
+
+		console.log({ items });
 
 		return (
 			<>
@@ -133,13 +70,13 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={attributes.classes} />
+						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 					<CP.SelectClassPanel title="アイテム" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} selectiveClasses={selectiveItemClasses} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				{EditMode ? (
-					<div className="cp-altcontent">
+					<div {...blockProps} className="cp-altcontent">
 						<div className="label">
 							<Icon icon="edit" />
 						</div>
@@ -159,87 +96,148 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 				) : (
 					<>
 						{AltMode && doLoop ? (
-							<div className="cp-altcontent">
+							<div {...blockProps} className="cp-altcontent">
 								<div className="label">
 									<Icon icon="welcome-comments" />
 								</div>
 								<InnerBlocks />
 							</div>
 						) : (
-							<div {...blockProps}>
-								{states.hasTitle && (
-									<RichText
-										tagName="h3"
-										className={classes._title()}
-										placeholder="Input Title"
-										onChange={(title) => {
-											setAttributes({ title });
-										}}
-										value={title}
-									/>
-								)}
-								{states.hasLead && (
-									<RichText
-										tagName="p"
-										className={classes._lead()}
-										placeholder="Input Lead"
-										onChange={(lead) => {
-											setAttributes({ lead });
-										}}
-										value={lead}
-									/>
-								)}
-								<ul className={classes._items()}>{rtn}</ul>
-								{states.hasCaption && (
-									<RichText
-										tagName="small"
-										className={classes._caption()}
-										placeholder="Input Caption"
-										onChange={(caption) => {
-											setAttributes({ caption });
-										}}
-										value={caption}
-									/>
-								)}
-							</div>
+							<CP.Bem prefix="wp-block-catpow">
+								<div {...blockProps}>
+									{states.hasTitle && (
+										<RichText
+											tagName={HeadingTag}
+											className="_title"
+											placeholder="Input Title"
+											onChange={(title) => {
+												setAttributes({ title });
+											}}
+											value={title}
+										/>
+									)}
+									{states.hasLead && (
+										<RichText
+											tagName="p"
+											className="_lead"
+											placeholder="Input Lead"
+											onChange={(lead) => {
+												setAttributes({ lead });
+											}}
+											value={lead}
+										/>
+									)}
+									<ul className="_items">
+										{[...Array(len).keys()].map((i) => {
+											const index = i % items.length;
+											const item = items[index];
+											return (
+												<CP.Item className="_item" tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={i}>
+													{states.hasItemTitle && (
+														<RichText
+															tagName="h4"
+															className="_title"
+															placeholder="Input Title"
+															onChange={(title) => {
+																item.title = title;
+																save();
+															}}
+															value={item.title}
+														/>
+													)}
+													{states.hasItemLead && (
+														<RichText
+															tagName="p"
+															className="_lead"
+															placeholder="Input Lead"
+															onChange={(lead) => {
+																item.lead = lead;
+																save();
+															}}
+															value={item.lead}
+														/>
+													)}
+													<CP.Link.Edit className="_link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index}>
+														{states.hasIcon && <CP.OutputIcon className="_icon" item={attributes} />}
+														<RichText
+															tagName="span"
+															className="_text"
+															placeholder="Input Link"
+															onChange={(link) => {
+																items[index].link = link;
+																save();
+															}}
+															value={item.link}
+														/>
+													</CP.Link.Edit>
+													{states.hasItemCaption && (
+														<RichText
+															tagName="small"
+															className="_caption"
+															placeholder="Input Caption"
+															onChange={(caption) => {
+																item.caption = caption;
+																save();
+															}}
+															value={item.caption}
+														/>
+													)}
+												</CP.Item>
+											);
+										})}
+									</ul>
+									{states.hasCaption && (
+										<RichText
+											tagName="small"
+											className="_caption"
+											placeholder="Input Caption"
+											onChange={(caption) => {
+												setAttributes({ caption });
+											}}
+											value={caption}
+										/>
+									)}
+								</div>
+							</CP.Bem>
 						)}
 					</>
 				)}
 			</>
 		);
 	},
-	save({ attributes, className }) {
+	save({ attributes }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { items = [], title, lead, caption, doLoop, EditMode = false, AltMode = false } = attributes;
-		const states = Catpow.util.classNamesToFlags(attributes.classes);
-		const classes = Catpow.util.bem(attributes.classes);
+		const { classes, HeadingTag = "h3", items = [], title, lead, caption, doLoop } = attributes;
+		const states = Catpow.util.classNamesToFlags(classes);
 
 		const { linkKeys } = CP.config.contactinfo;
 
 		let rtn = [];
-		items.forEach((item, index) => {
-			const itemClasses = classes._items.item;
-			rtn.push(
-				<li className={itemClasses()} key={index}>
-					{states.hasItemTitle && <RichText.Content tagName="h4" className={itemClasses.title()} value={item.title} />}
-					{states.hasItemLead && <RichText.Content tagName="p" className={itemClasses.lead()} value={item.lead} />}
-					<CP.Link className={itemClasses.link()} attr={attributes} keys={linkKeys.link} index={index} {...CP.extractEventDispatcherAttributes("catpow/contactinfo", item)}>
-						{states.hasIcon && <CP.OutputIcon className={itemClasses.link.icon()} item={attributes} />}
-						<RichText.Content tagName="span" className={itemClasses.link.text()} value={item.link} />
-					</CP.Link>
-					{states.hasItemCaption && <RichText.Content tagName="small" className={itemClasses.caption()} value={item.caption} />}
-				</li>,
-			);
-		});
 
 		return (
 			<>
-				<div {...useBlockProps.save({ className: classes() })}>
-					{states.hasTitle && <RichText.Content tagName="h3" className={classes._title()} value={title} />}
-					{states.hasLead && <RichText.Content tagName="p" className={classes._lead()} value={lead} />}
-					<ul className={classes._items()}>{rtn}</ul>
-					{states.hasLead && <RichText.Content tagName="small" className={classes._caption()} value={caption} />}
-				</div>
+				<CP.Bem prefix="wp-block-catpow">
+					<div {...useBlockProps.save({ className: classes })}>
+						{states.hasTitle && <RichText.Content tagName={HeadingTag} className="_title" value={title} />}
+						{states.hasLead && <RichText.Content tagName="p" className="_lead" value={lead} />}
+						<ul className="_items">
+							{items.map((item, index) => {
+								return (
+									<li className="_item" key={index}>
+										{states.hasItemTitle && <RichText.Content tagName="h4" className="_title" value={item.title} />}
+										{states.hasItemLead && <RichText.Content tagName="p" className="_lead" value={item.lead} />}
+										<CP.Link className="_link" attr={attributes} keys={linkKeys.link} index={index} {...CP.extractEventDispatcherAttributes("catpow/contactinfo", item)}>
+											{states.hasIcon && <CP.OutputIcon className="_icon" item={attributes} />}
+											<RichText.Content tagName="span" className="_text" value={item.link} />
+										</CP.Link>
+										{states.hasItemCaption && <RichText.Content tagName="small" className="_caption" value={item.caption} />}
+									</li>
+								);
+							})}
+						</ul>
+						{states.hasLead && <RichText.Content tagName="small" className="_caption" value={caption} />}
+					</div>
+				</CP.Bem>
 				{doLoop && (
 					<on-empty>
 						<InnerBlocks.Content />
