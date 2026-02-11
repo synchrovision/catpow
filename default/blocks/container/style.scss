@@ -9,7 +9,7 @@
 	}
 	&.has-border{
 		@extend %frame-component;
-		@include bdr((s:s,w:calc(var(--cp-border-width) * #{$size-unit}),c:t 1 .5));
+		@include bdr((s:s,c:l));
 	}
 	&.has-inset-shadow{
 		@include shd((b:-4));
@@ -26,14 +26,6 @@
 	&.has-scroll-y{
 		@include bnd((h:calc(var(--cp-container-height) * 1px),oy:a));
 		#{$block}__body{
-		}
-	}
-	&.has-margin{
-		@include bnd((mg:calc(var(--cp-margin-y) * #{$size-unit}) calc(var(--cp-margin-x) * #{$size-unit})));
-	}
-	&.has-padding{
-		#{$block}__body{
-			@include bnd((pd:calc(var(--cp-padding-y) * #{$size-unit}) calc(var(--cp-padding-x) * #{$size-unit})));
 		}
 	}
 }

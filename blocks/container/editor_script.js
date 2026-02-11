@@ -34,8 +34,7 @@
           {
             name: "border",
             label: __("\u30DC\u30FC\u30C0\u30FC", "catpow"),
-            values: "hasBorder",
-            sub: [{ name: "borderWidth", label: __("\u5E45", "catpow"), vars: "boxSizeVars", key: "--cp-border-width", input: "range", min: 0, max: 16, step: 1 }]
+            values: "hasBorder"
           },
           {
             name: "shadow",
@@ -59,24 +58,7 @@
             values: "hasScrollY",
             sub: [{ name: "containerHeight", label: __("\u30B3\u30F3\u30C6\u30CA\u306E\u9AD8\u3055", "catpow"), vars: "boxSizeVars", key: "--cp-container-height", input: "range", min: 100, max: 1e3, step: 10 }]
           },
-          {
-            name: "margin",
-            label: __("\u9593\u9694", "catpow"),
-            values: "hasMargin",
-            sub: [
-              { name: "marginX", label: __("X\u9593\u9694", "catpow"), vars: "boxSizeVars", key: "--cp-margin-x", input: "range", min: 0, max: 40, step: 1 },
-              { name: "marginY", label: __("Y\u9593\u9694", "catpow"), vars: "boxSizeVars", key: "--cp-margin-y", input: "range", min: 0, max: 120, step: 1 }
-            ]
-          },
-          {
-            name: "padding",
-            label: __("\u4F59\u767D", "catpow"),
-            values: "hasPadding",
-            sub: [
-              { name: "paddingX", label: __("X\u4F59\u767D", "catpow"), vars: "boxSizeVars", key: "--cp-padding-x", input: "range", min: 0, max: 200, step: 5 },
-              { name: "paddingY", label: __("Y\u4F59\u767D", "catpow"), vars: "boxSizeVars", key: "--cp-padding-y", input: "range", min: 0, max: 200, step: 5 }
-            ]
-          }
+          "hasMargin"
         ];
         wp.hooks.applyFilters("catpow.blocks.container.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;

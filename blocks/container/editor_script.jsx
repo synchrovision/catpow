@@ -35,7 +35,6 @@ wp.blocks.registerBlockType("catpow/container", {
 					name: "border",
 					label: __("ボーダー", "catpow"),
 					values: "hasBorder",
-					sub: [{ name: "borderWidth", label: __("幅", "catpow"), vars: "boxSizeVars", key: "--cp-border-width", input: "range", min: 0, max: 16, step: 1 }],
 				},
 				{
 					name: "shadow",
@@ -59,24 +58,7 @@ wp.blocks.registerBlockType("catpow/container", {
 					values: "hasScrollY",
 					sub: [{ name: "containerHeight", label: __("コンテナの高さ", "catpow"), vars: "boxSizeVars", key: "--cp-container-height", input: "range", min: 100, max: 1000, step: 10 }],
 				},
-				{
-					name: "margin",
-					label: __("間隔", "catpow"),
-					values: "hasMargin",
-					sub: [
-						{ name: "marginX", label: __("X間隔", "catpow"), vars: "boxSizeVars", key: "--cp-margin-x", input: "range", min: 0, max: 40, step: 1 },
-						{ name: "marginY", label: __("Y間隔", "catpow"), vars: "boxSizeVars", key: "--cp-margin-y", input: "range", min: 0, max: 120, step: 1 },
-					],
-				},
-				{
-					name: "padding",
-					label: __("余白", "catpow"),
-					values: "hasPadding",
-					sub: [
-						{ name: "paddingX", label: __("X余白", "catpow"), vars: "boxSizeVars", key: "--cp-padding-x", input: "range", min: 0, max: 200, step: 5 },
-						{ name: "paddingY", label: __("Y余白", "catpow"), vars: "boxSizeVars", key: "--cp-padding-y", input: "range", min: 0, max: 200, step: 5 },
-					],
-				},
+				"hasMargin",
 			];
 			wp.hooks.applyFilters("catpow.blocks.container.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;

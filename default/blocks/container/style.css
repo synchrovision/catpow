@@ -1,6 +1,7 @@
 .wp-block-catpow-container.has-border {
   padding: var(--cp-size-sp-f);
-  border-radius: var(--cp-size-r-f, 0);
+  border-width: var(--cp-border-width-c-f, 0);
+  border-radius: var(--cp-border-radius-c-f, 0);
 }
 .wp-block-catpow-container {
   overflow: clip;
@@ -10,8 +11,7 @@
 }
 .wp-block-catpow-container.has-border {
   border-style: solid;
-  border-width: calc(var(--cp-border-width) * 0.0625rem);
-  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a,1) * 0.5));
+  border-color: hsla(var(--cp-tones-l-h),var(--cp-tones-l-s),var(--cp-tones-l-l),var(--cp-tones-l-a,1));
 }
 .wp-block-catpow-container.has-inset-shadow {
   box-shadow: 0 4px 9px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1)) inset;
@@ -31,11 +31,5 @@
 .wp-block-catpow-container.has-scroll-y {
   height: calc(var(--cp-container-height) * 1px);
   overflow-y: auto;
-}
-.wp-block-catpow-container.has-margin {
-  margin: calc(var(--cp-margin-y) * 0.0625rem) calc(var(--cp-margin-x) * 0.0625rem);
-}
-.wp-block-catpow-container.has-padding .wp-block-catpow-container__body {
-  padding: calc(var(--cp-padding-y) * 0.0625rem) calc(var(--cp-padding-x) * 0.0625rem);
 }
 /*# sourceMappingURL=./style.css.map */
