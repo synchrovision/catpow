@@ -46,7 +46,7 @@
 	}
 	&-palette{
 		@include bnd((w:f));
-		@include grd((tc:repeat(4,1fr)));
+		@include grd((tc:repeat(5,1fr)));
 		&__item{
 			@include bnd((p:r,a:1));
 			background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAAHnlligAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHJJREFUeNpi+P///4EDBxiAGMgCCCAGFB5AADGCRBgYDh48CCRZIJS9vT2QBAggFBkmBiSAogxFBiCAoHogAKIKAlBUYTELAiAmEtABEECk20G6BOmuIl0CIMBQ/IEMkO0myiSSraaaBhZcbkUOs0HuBwDplz5uFJ3Z4gAAAABJRU5ErkJggg==");
@@ -55,7 +55,7 @@
 				@include usr((c:p));
 				>.label{
 					@include bnd((pd:.5em));
-					@include txt((p:12,h:1.5em));
+					@include txt((p:10,h:1.5em));
 				}
 				&.is-dark{
 					>.label{

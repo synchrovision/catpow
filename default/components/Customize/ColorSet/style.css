@@ -89,8 +89,8 @@
   display: -webkit-grid;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: repeat(4, 1fr);
-  grid-template-columns: repeat(4, 1fr);
+  -ms-grid-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, 1fr);
 }
 .cp-colorset-palette__item {
   position: relative;
@@ -105,7 +105,7 @@
 }
 .cp-colorset-palette__item > .chip > .label {
   padding: 0.5em;
-  font-size: 0.75rem;
+  font-size: 0.625rem;
   line-height: 1.5em;
 }
 .cp-colorset-palette__item > .chip.is-dark > .label {
