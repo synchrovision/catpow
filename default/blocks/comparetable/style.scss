@@ -85,7 +85,7 @@
 					@include bnd((p:r,ssa:c,bs:b));
 					&.is-spacer{
 						@include bnd((p:s,l:0,z:1));
-						@include bg((c:b));
+						@include bg((c:bx));
 					}
 					&-contents{
 						
@@ -96,7 +96,7 @@
 		&-tbody{
 			&-tr{
 				&-th{
-					@include bg((c:b));
+					@include bg((c:bx));
 				}
 				&-td{
 					@include bnd((p:r));
@@ -296,7 +296,7 @@
 			&-thead{
 				&-tr{
 					&-th,&-td{
-						@include bdr((p:b,s:s,w:1,c:t));
+						@include bdr((p:b,s:s,w:1,c:lx));
 						&.is-premium{
 							@include bg((c:mx 1 .2));
 						}
@@ -313,7 +313,7 @@
 			&-tbody{
 				&-tr{
 					&-th,&-td{
-						@include bdr((p:b,s:s,w:1,c:t));
+						@include bdr((p:b,s:s,w:1,c:lx));
 					}
 					&-td{
 						&.is-premium{
@@ -338,17 +338,16 @@
 				&-thead{
 					&-tr{
 						&-th,&-td{
-							@include bdr((p:b,s:s,w:1,c:t));
+							@include bdr((p:b,s:s,w:1,c:lx));
 						}
 					}
 				}
 				&-tbody{
 					&-tr{
 						&-th,&-td{
-							@include bdr((p:b,s:s,w:1,c:t));
+							@include bdr((p:b,s:s,w:1,c:lx));
 						}
 						&-th{
-							@include bdr((p:b,s:s,w:1,c:t));
 							&.is-premium{
 								@include bg((c:mx 1 .2));
 							}
@@ -398,17 +397,17 @@
 			&-thead{
 				&-tr{
 					&-th{
-						@include bg((c:b));
-						@include bdr((s:s,w:1,c:t));
+						@include bg((c:bx));
+						@include bdr((s:s,w:1,c:lx));
 						&.is-spacer{
 							@include bdr((s:n));
-							@include bg((c:b));
+							@include bg((c:bx));
 						}
 						&.is-premium{
-							@include bg((c:s));
+							@include bg((c:sx));
 						}
 						&.is-recommended{
-							@include bg((c:s 1 .5));
+							@include bg((c:sx 1 .5));
 						}
 						&.is-deprecated{
 							@include bg((c:tx 1 .1));
@@ -421,8 +420,8 @@
 				&-tr{
 					$row:#{$block}__table-tbody-tr;
 					&-th,&-td{
-						@include bg((c:b));
-						@include bdr((s:s,w:1,c:t));
+						@include bg((c:bx));
+						@include bdr((s:s,w:1,c:lx));
 					}
 					&-th{
 						@include txt((a:c));
@@ -432,10 +431,10 @@
 							@include txt((a:c));
 						}
 						&.is-premium{
-							@include bg((c:s 80));
+							@include bg((c:sx));
 						}
 						&.is-recommended{
-							@include bg((c:s 50));
+							@include bg((c:sx-bx 50));
 						}
 						&.is-deprecated{
 							@include bg((c:tx 10));
@@ -446,13 +445,13 @@
 						#{$row}-td,#{$row}-th{
 							@include bg((c:s 20));
 							&.is-premium{
-								@include bg((c:s));
+								@include bg((c:sx));
 							}
 							&.is-recommended{
-								@include bg((c:s 75));
+								@include bg((c:sx-bx 75));
 							}
 							&.is-deprecated{
-								@include bg((c:tx 20));
+								@include bg((c:tx-bx 20));
 							}
 						}
 					}
@@ -464,11 +463,11 @@
 		#{$block}__tags{
 			&-tag{
 				@extend %label-component;
-				@include bg((c:t-b 50));
+				@include bg((c:tx-bx 50));
 				@include txt((c:i));
 				@include bdr((r:1em));
 				&.is-active{
-					@include bg((c:m));
+					@include bg((c:mx));
 				}
 			}
 		}
@@ -476,7 +475,7 @@
 			&-thead{
 				&-tr{
 					&-th{
-						@include bg((c:m 10));
+						@include bg((c:sx));
 						&.is-spacer{
 							@include bdr((s:n));
 							@include bg((c:n));
@@ -491,43 +490,43 @@
 				&-tr{
 					$row:#{$block}__table-tbody-tr;
 					&-th{
-						@include bg((c:m 10));
+						@include bg((c:sx));
 						@include txt((c:tx));
 						&.is-premium{
-							@include bg((c:m));
+							@include bg((c:mx));
 							@include txt((c:i));
 						}
 						&.is-recommended{
-							@include bg((c:m-b 60));
+							@include bg((c:mx-bx 60));
 							@include txt((c:ix));
 						}
 						&.is-deprecated{
-							@include bg((c:t-b 20));
-							@include txt((c:t-b 60));
+							@include bg((c:tx-bx 20));
+							@include txt((c:tx-bx 60));
 						}
 					}
 					&-td{
-						@include bg((c:b));
+						@include bg((c:bx));
 						&.is-premium{
-							@include bg((c:s-b 50));
+							@include bg((c:sx-bx 50));
 						}
 						&.is-recommended{
-							@include bg((c:s-b 20));
+							@include bg((c:sx-bx 20));
 						}
 						&.is-deprecated{
 							@include bg((c:tx-bx 10));
 							@include txt((c:tx-tx 60));
 						}
 						&:nth-of-type(even){
-							@include bg((c:s-b 40));
+							@include bg((c:sx-bx 40));
 							&.is-premium{
-								@include bg((c:s));
+								@include bg((c:sx));
 							}
 							&.is-recommended{
-								@include bg((c:s-b 60));
+								@include bg((c:sx-bx 60));
 							}
 							&.is-deprecated{
-								@include bg((c:t-b 20));
+								@include bg((c:tx-bx 20));
 							}
 						}
 					}
