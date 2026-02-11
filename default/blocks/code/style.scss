@@ -1,0 +1,14 @@
+@import "config/style_config.scss";
+@import "text-placeholders.scss";
+
+pre,div{
+	&.wp-block-code{
+		@extend %paragraph-block;
+		@include bnd((pd:ipd));
+		@include bg((c:black));
+		code{
+			@extend %paragraph;
+			@include txt((c:i,f:cd,whs:pw));
+		}
+	}
+}
