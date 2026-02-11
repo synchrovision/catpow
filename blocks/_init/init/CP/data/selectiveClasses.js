@@ -129,6 +129,19 @@ export const selectiveClassesPresets = {
 			hasTextAlignRight: __("右揃え", "catpow"),
 		},
 	},
+	textRole: {
+		name: "textRole",
+		type: "buttons",
+		label: __("テキスト形式", "catpow"),
+		required: true,
+		values: {
+			hasTextRoleHeading: __("見出し", "catpow"),
+			hasTextRoleLead: __("リード", "catpow"),
+			hasTextRoleParagraph: __("本文", "catpow"),
+			hasTextRoleUi: __("UI", "catpow"),
+			hasTextRoleCaption: __("注釈", "catpow"),
+		},
+	},
 	verticalAlign: {
 		name: "verticalAlign",
 		type: "buttons",

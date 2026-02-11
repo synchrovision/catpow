@@ -5441,6 +5441,19 @@
         hasTextAlignRight: __12("\u53F3\u63C3\u3048", "catpow")
       }
     },
+    textRole: {
+      name: "textRole",
+      type: "buttons",
+      label: __12("\u30C6\u30AD\u30B9\u30C8\u5F62\u5F0F", "catpow"),
+      required: true,
+      values: {
+        hasTextRoleHeading: __12("\u898B\u51FA\u3057", "catpow"),
+        hasTextRoleLead: __12("\u30EA\u30FC\u30C9", "catpow"),
+        hasTextRoleParagraph: __12("\u672C\u6587", "catpow"),
+        hasTextRoleUi: __12("UI", "catpow"),
+        hasTextRoleCaption: __12("\u6CE8\u91C8", "catpow")
+      }
+    },
     verticalAlign: {
       name: "verticalAlign",
       type: "buttons",
