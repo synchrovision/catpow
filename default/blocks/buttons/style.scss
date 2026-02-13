@@ -11,7 +11,7 @@
 		@extend %button-component;
 		@extend %ui;
 		@include bnd((d:b,p:r,pd:ipd));
-		@include bg((c:n));
+		@include bg((c:bx));
 		@include bdr((s:s,w:2));
 		@include txt((a:c,c:mx,td:n,b:k));
 		@include trn((t:.2s));
@@ -60,13 +60,14 @@
 			#{$block}{
 				&-button{
 					@include bnd((d:b,p:r,o:h));
-					@include txt((c:ix));
-					@include bg((c:mx));
+					@include txt((c:i));
+					@include bg((c:m));
+					@include shd((t:t-u clr(shd 1 .4)));
 					&::before{
 						content:'';
 						@include bnd((d:b,p:a,i:0,r:f));
 						@include bdr((r:calc(#{sz(r-b)} - #{sz(2)})));
-						@include bg((c:mx 90));
+						@include bg((c:m 90));
 						@include trn((t:.3s));
 					}
 					&:hover{
@@ -76,17 +77,32 @@
 					}
 					.icon{
 						svg{
-							@include svg((f:bx));
+							@include svg((f:i));
 						}
 					}
 				}
 			}
 		}
 		&.is-rank-secondary{
-			
+			#{$block}{
+				&-button{
+					@include shd((t:t-u clr(shd 1 .25)));
+				}
+			}
 		}
 		&.is-rank-tertiary{
-			
+			@include trn((o:.8));
+			#{$block}{
+				&__item{
+					&-copy{
+						@include shd((b:n));
+					}
+				}
+				&-button{
+					@include bg((c:n));
+					@include shd((b:n));
+				}
+			}
 		}
 		&.negative{
 			@include trn((gry:100%,o:.5));
