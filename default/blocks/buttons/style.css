@@ -149,7 +149,7 @@
   overflow: hidden;
   color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
   background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
-  text-shadow: var(--cp-shadow-t-u) hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),calc(100% - var(--cp-tones-shd-t) * 100),calc(var(--cp-tones-shd-a,1) * 0.4));
+  text-shadow: var(--cp-shadow-t-u) hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
 }
 .wp-block-catpow-buttons__item.is-rank-primary .wp-block-catpow-buttons-button::before {
   content: "";
@@ -173,7 +173,7 @@
   fill: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
 }
 .wp-block-catpow-buttons__item.is-rank-secondary .wp-block-catpow-buttons-button {
-  text-shadow: var(--cp-shadow-t-u) hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),calc(100% - var(--cp-tones-shd-t) * 100),calc(var(--cp-tones-shd-a,1) * 0.25));
+  text-shadow: var(--cp-shadow-t-u) hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),calc(100% - var(--cp-tones-shd-t) * 100),calc(var(--cp-tones-shd-a,1) * 0.4));
 }
 .wp-block-catpow-buttons__item.is-rank-tertiary {
   opacity: 0.8;

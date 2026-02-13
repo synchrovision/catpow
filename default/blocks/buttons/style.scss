@@ -62,7 +62,7 @@
 					@include bnd((d:b,p:r,o:h));
 					@include txt((c:i));
 					@include bg((c:m));
-					@include shd((t:t-u clr(shd 1 .4)));
+					@include shd((t:t-u));
 					&::before{
 						content:'';
 						@include bnd((d:b,p:a,i:0,r:f));
@@ -86,7 +86,7 @@
 		&.is-rank-secondary{
 			#{$block}{
 				&-button{
-					@include shd((t:t-u clr(shd 1 .25)));
+					@include shd((t:t-u clr(shd 1 .4)));
 				}
 			}
 		}
