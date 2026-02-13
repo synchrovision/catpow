@@ -232,7 +232,7 @@
               )
             );
           }
-          return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? "th" : "td", { className: cell.classes, key: columnIndex }, children);
+          return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? "th" : "td", { key: columnIndex }, children);
         }));
       }))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u8868\u793A\u8A2D\u5B9A", icon: "admin-appearance", set: setAttributes, attr: attributes, selectiveClasses: statesClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes3) => setAttributes({ classes: classes3 }), value: classes2 }))));
     },
@@ -247,7 +247,7 @@
           return false;
         }
         return /* @__PURE__ */ wp.element.createElement("tr", { key: index }, row.cells.map((cell, columnIndex) => {
-          return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? "th" : "td", { className: cell.classes, key: columnIndex }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: cell.text }));
+          return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? "th" : "td", { key: columnIndex }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: cell.text }));
         }));
       })))), doLoop && /* @__PURE__ */ wp.element.createElement("on-empty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     },

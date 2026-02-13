@@ -242,7 +242,7 @@ wp.blocks.registerBlockType("catpow/datatable", {
 															/>,
 														);
 													}
-													return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? "th" : "td", { className: cell.classes, key: columnIndex }, children);
+													return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? "th" : "td", { key: columnIndex }, children);
 												})}
 											</tr>
 										);
@@ -294,7 +294,7 @@ wp.blocks.registerBlockType("catpow/datatable", {
 								return (
 									<tr key={index}>
 										{row.cells.map((cell, columnIndex) => {
-											return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? "th" : "td", { className: cell.classes, key: columnIndex }, <RichText.Content value={cell.text} />);
+											return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? "th" : "td", { key: columnIndex }, <RichText.Content value={cell.text} />);
 										})}
 									</tr>
 								);
