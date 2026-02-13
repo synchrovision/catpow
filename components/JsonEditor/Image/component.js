@@ -124,7 +124,7 @@
   // ../components/JsonEditor/Image/component.jsx
   window.Catpow.JsonEditor.Image = (props) => {
     const { className = "cp-jsoneditor-input-image", agent, onUpdate, keys = ["url", "alt", "width", "height", "id", "mime"] } = props;
-    const [isCode, setIsCode] = useState(!!(agent.getValue() && agent.getValue().url.includes("[")));
+    const [isCode, setIsCode] = useState(!!agent.getValue()?.url?.includes("["));
     const onChangeHandle = useCallback(
       (originalValue) => {
         const value = keys.reduce((value2, key) => {

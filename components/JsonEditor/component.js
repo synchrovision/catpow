@@ -887,7 +887,7 @@
   var isRangeValueConverterApp = (maybeApp) => Boolean(maybeApp?.[RANGE_CONVERTER]);
 
   // node_modules-included/catpow/src/util/bem/bem.js
-  var bem2 = (className) => {
+  var bem = (className) => {
     const children = {};
     const firstClass = className.split(" ")[0];
     return new Proxy(
@@ -914,7 +914,7 @@
       {
         get: (target, prop) => {
           if (void 0 === children[prop]) {
-            children[prop] = bem2(firstClass + (prop[0] === "_" ? "_" : "-") + prop);
+            children[prop] = bem(firstClass + (prop[0] === "_" ? "_" : "-") + prop);
           }
           return children[prop];
         }
@@ -1909,16 +1909,65 @@
 
   // node_modules-included/catpow/src/component/Input/TableInput.jsx
   init_react();
+  init_react();
   var TableInput = (props) => {
-    const { className = "cp-tableinput", labels, items, onAddItem, onCopyItem, onMoveItem, onRemoveItem, onChange, children } = props;
-    const classes = useMemo(() => bem(className), [className]);
-    const Row = useMemo(() => {
-      return forwardRef((props2, ref) => {
-        const { className: className2, index, length, children: children2 } = props2;
-        return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("tr", { className: className2 }, children2.map((child, index2) => /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-input", key: index2 }, child)), /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-control", key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "_controls" }, index > 0 ? /* @__PURE__ */ wp.element.createElement("div", { className: "_button is-up", onClick: () => onMoveItem(index, index - 1) }) : /* @__PURE__ */ wp.element.createElement("div", { className: "_spacer" }), index < length - 1 ? /* @__PURE__ */ wp.element.createElement("div", { className: "_button is-down", onClick: () => onMoveItem(index, index + 1) }) : /* @__PURE__ */ wp.element.createElement("div", { className: "_spacer" }), length > 1 ? /* @__PURE__ */ wp.element.createElement("div", { className: "_buttonz is-remove", onClick: () => onRemoveItem(index) }) : /* @__PURE__ */ wp.element.createElement("div", { className: "_spacer" }), /* @__PURE__ */ wp.element.createElement("div", { className: "_button is-add", onClick: () => onAddItem(index + 1) })))));
-      });
-    }, [onAddItem, onCopyItem, onMoveItem, onRemoveItem, onChange]);
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("table", null, labels && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, labels.map((label, index) => /* @__PURE__ */ wp.element.createElement("th", { key: index }, label)), /* @__PURE__ */ wp.element.createElement("td", null))), /* @__PURE__ */ wp.element.createElement("tbody", null, children.map((child, index) => /* @__PURE__ */ wp.element.createElement(Row, { className: "_tr", index, length: children.length, key: index }, child))))));
+    const { className = "cp-tableinput", labels, showControls = true, onAddItem, onCopyItem, onMoveItem, onRemoveItem, onChange, children } = props;
+    const Row = (props2) => {
+      const { className: className2, index, length, children: children2 } = props2;
+      const [editMode, setEditMode] = useState(false);
+      const onKeyDown = useCallback(
+        (e) => {
+          if (editMode) {
+            if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+              e.preventDefault();
+              e.currentTarget.focus();
+              setEditMode(false);
+            }
+            return;
+          }
+          switch (e.key) {
+            case "Enter": {
+              const inputEl = e.currentTarget.querySelector("input,textarea,[contenteditable]");
+              if (inputEl) {
+                inputEl.focus();
+                setEditMode(true);
+                e.preventDefault();
+              }
+              break;
+            }
+            case "ArrowUp":
+            case "ArrowDown": {
+              e.preventDefault();
+              if (e.altKey) {
+                if (e.shiftKey) {
+                  onMoveItem(index, index + (e.key === "ArrowUp" ? -1 : 1));
+                } else {
+                  onCopyItem(index, index + (e.key === "ArrowUp" ? -1 : 1));
+                }
+                break;
+              }
+              const columnIndex = parseInt(e.currentTarget.dataset.index);
+              e.currentTarget.parentElement[e.key === "ArrowUp" ? "previousElementSibling" : "nextElementSibling"]?.children[columnIndex]?.focus();
+              break;
+            }
+            case "ArrowLeft":
+            case "ArrowRight": {
+              e.preventDefault();
+              e.currentTarget[e.key === "ArrowLeft" ? "previousElementSibling" : "nextElementSibling"]?.focus();
+              break;
+            }
+          }
+        },
+        [editMode, setEditMode, index, onMoveItem, onCopyItem]
+      );
+      const onBlur = useCallback((e) => {
+        if (!e.currentTarget.parentElement.contains(e.relatedTarget)) {
+          setEditMode(false);
+        }
+      }, []);
+      return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("tr", { className: className2, "data-index": index }, children2.map((child, columnIndex) => /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-input", onKeyDown, onBlur, "data-index": columnIndex, tabIndex: 0, key: columnIndex }, child)), showControls && /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-control", key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "_controls" }, index > 0 ? /* @__PURE__ */ wp.element.createElement("div", { className: "_button is-up", onClick: () => onMoveItem(index, index - 1) }) : /* @__PURE__ */ wp.element.createElement("div", { className: "_spacer" }), index < length - 1 ? /* @__PURE__ */ wp.element.createElement("div", { className: "_button is-down", onClick: () => onMoveItem(index, index + 1) }) : /* @__PURE__ */ wp.element.createElement("div", { className: "_spacer" }), length > 1 ? /* @__PURE__ */ wp.element.createElement("div", { className: "_buttonz is-remove", onClick: () => onRemoveItem(index) }) : /* @__PURE__ */ wp.element.createElement("div", { className: "_spacer" }), /* @__PURE__ */ wp.element.createElement("div", { className: "_button is-add", onClick: () => onAddItem(index + 1) })))));
+    };
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("table", null, labels && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, labels.map((label, index) => /* @__PURE__ */ wp.element.createElement("th", { key: index }, label)), showControls && /* @__PURE__ */ wp.element.createElement("td", null))), /* @__PURE__ */ wp.element.createElement("tbody", null, children.map && children.map((child, index) => /* @__PURE__ */ wp.element.createElement(Row, { className: "_tr", index, length: children.length, key: index }, child))))));
   };
 
   // node_modules-included/catpow/src/component/Input/Toggle.jsx
@@ -1970,7 +2019,7 @@
     const [state, setPopoverState] = useState("closed");
     const [positionX, setPositionX] = useState("");
     const [positionY, setPositionY] = useState("");
-    const classes = bem2(className);
+    const classes = bem(className);
     useEffect(() => setPopoverState(open ? "open" : state === "closed" ? "closed" : "close"), [open]);
     const ref = useRef({});
     const [contentRef, setContentRef] = useState();
@@ -2067,7 +2116,11 @@
       if (props.className) {
         el2.className = props.className;
       }
-      document.body.appendChild(el2);
+      if (props.container) {
+        document.querySelector(props.container).appendChild(el2);
+      } else {
+        document.body.appendChild(el2);
+      }
       return el2;
     }, []);
     useEffect3(() => {
