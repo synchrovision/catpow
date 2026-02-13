@@ -789,14 +789,14 @@
     }
   });
 
-  // ../components/Customize/BorderWidth/component.jsx
+  // ../components/Customize/Shadow/component.jsx
   init_react();
 
   // node_modules-included/catpow/src/util/array/phasedRange.js
-  var phasedRange = function* (steps2) {
+  var phasedRange = function* (steps) {
     let i = 0;
-    for (let t of Object.keys(steps2).sort((a, b) => a - b)) {
-      let step = parseFloat(steps2[t]);
+    for (let t of Object.keys(steps).sort((a, b) => a - b)) {
+      let step = parseFloat(steps[t]);
       let end = parseFloat(t);
       if (step > 0) {
         for (; i < end; i += step) {
@@ -886,7 +886,7 @@
   init_react();
   var DataSetContext = createContext(null);
   var DataSet = (props) => {
-    const { labels, colors, classNames, translateToDisplayValue, values, steps: steps2 = { 100: 1 }, snap = true, onChange, children, ...otherProps } = props;
+    const { labels, colors: colors2, classNames, translateToDisplayValue, values, steps = { 100: 1 }, snap = true, onChange, children, ...otherProps } = props;
     const [activeRow, setActiveRow] = useState(null);
     const [activeColumn, setActiveColumn] = useState(null);
     const [focusedRow, focusRow] = useState(null);
@@ -920,7 +920,7 @@
           c,
           className: classNames?.cells?.[r2]?.[c],
           label: labels?.cells?.[r2]?.[c],
-          color: colors?.cells?.[r2]?.[c] || colors?.columns?.[c] || colors?.rows?.[r2]
+          color: colors2?.cells?.[r2]?.[c] || colors2?.columns?.[c] || colors2?.rows?.[r2]
         });
       },
       [values, translateToDisplayValue]
@@ -932,12 +932,12 @@
       },
       [activeRow, activeColumn, setValue]
     );
-    const converter = useMemo(() => rangeValueConverter(steps2, snap), [steps2, snap]);
+    const converter = useMemo(() => rangeValueConverter(steps, snap), [steps, snap]);
     const DataSetContextValue = useMemo(
       () => ({
         values,
         labels,
-        colors,
+        colors: colors2,
         classNames,
         getDisplayValue,
         steps: converter,
@@ -955,7 +955,7 @@
       [
         values,
         labels,
-        colors,
+        colors2,
         classNames,
         getDisplayValue,
         converter,
@@ -1056,13 +1056,31 @@
     for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
     return n;
   }
+  var clsx_default = clsx;
 
   // node_modules-included/catpow/src/component/Chart/DataTable.tsx
   init_react();
   var DataTable = (props) => {
     const { className = "cp-datatabel", showColumnHeader = true, showRowHeader = true, ...otherProps } = props;
-    const { labels, classNames, colors, values, focusedRow, getDisplayValue } = useContext(DataSetContext);
+    const { labels, classNames, colors: colors2, values, focusedRow, getDisplayValue } = useContext(DataSetContext);
     return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className: clsx(className, { "has-focused": focusedRow != null }) }, /* @__PURE__ */ wp.element.createElement("table", null, showColumnHeader && labels.columns && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, showRowHeader && labels.rows && /* @__PURE__ */ wp.element.createElement("td", null), labels.columns.map((label) => /* @__PURE__ */ wp.element.createElement("th", null, label)))), /* @__PURE__ */ wp.element.createElement("tbody", null, values.map((row, r2) => /* @__PURE__ */ wp.element.createElement("tr", { className: clsx("_tr", classNames?.rows?.[r2], { "is-focused": r2 === focusedRow }) }, showRowHeader && labels.rows && /* @__PURE__ */ wp.element.createElement("th", null, labels.rows[r2]), row.map((v, c) => /* @__PURE__ */ wp.element.createElement("td", null, getDisplayValue(r2, c)))))))));
+  };
+
+  // node_modules-included/catpow/src/component/Chart/Legend.tsx
+  init_react();
+  var Legend = (props) => {
+    const { className = "cp-legend" } = props;
+    const { labels, colors: colors2, classNames, focusedRow, focusRow } = useContext(DataSetContext);
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, labels.rows && /* @__PURE__ */ wp.element.createElement("ul", { className: clsx(className, { "has-focused": focusedRow != null }) }, labels.rows.map((label, r2) => /* @__PURE__ */ wp.element.createElement(
+      "li",
+      {
+        className: clsx("_item", classNames?.rows?.[r2], { "is-focused": r2 === focusedRow }),
+        onClick: () => focusRow(r2 === focusedRow ? null : r2),
+        style: { "--row-color": colors2?.rows?.[r2] }
+      },
+      /* @__PURE__ */ wp.element.createElement("span", { className: "_icon" }),
+      /* @__PURE__ */ wp.element.createElement("span", { className: "_label" }, label)
+    ))));
   };
 
   // node_modules-included/catpow/src/component/Chart/LineChart.tsx
@@ -1104,12 +1122,12 @@
   var LineChart = (props) => {
     const { className = "cp-linechart", children, ...otherProps } = props;
     const { width, height } = otherProps;
-    const { values, steps: steps2 } = useContext(DataSetContext);
+    const { values, steps } = useContext(DataSetContext);
     const getValueWithProgressPoint = useCallback(
       (r2, c, { py }) => {
-        return steps2.getValue(1 - py);
+        return steps.getValue(1 - py);
       },
-      [steps2]
+      [steps]
     );
     const getCellWithProgressPoint = useCallback(
       ({ px, py }, focusedRow) => {
@@ -1119,9 +1137,9 @@
         }
         let r2 = 0;
         let oy = 1 - py;
-        let minD = Math.abs(steps2.getProgress(values[0][c]) - oy);
+        let minD = Math.abs(steps.getProgress(values[0][c]) - oy);
         for (let i = 1; i < values.length; i++) {
-          const d = Math.abs(steps2.getProgress(values[i][c]) - oy);
+          const d = Math.abs(steps.getProgress(values[i][c]) - oy);
           if (d < minD) {
             minD = d;
             r2 = i;
@@ -1129,43 +1147,78 @@
         }
         return { r: r2, c };
       },
-      [steps2, values]
+      [steps, values]
     );
     return /* @__PURE__ */ wp.element.createElement(Chart, { getValueWithProgressPoint, getCellWithProgressPoint, ...otherProps }, /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className, style: { position: "relative" } }, /* @__PURE__ */ wp.element.createElement(SVG2, { className: "_chart", width, height, style: { width: "100%", height: "auto" } }, /* @__PURE__ */ wp.element.createElement(Lines, { className: "_lines" }), /* @__PURE__ */ wp.element.createElement(Grid, { className: "_grid" })), children)));
   };
   var Grid = (props) => {
     const { className } = props;
-    const { steps: steps2, values } = useContext(DataSetContext);
+    const { steps, values } = useContext(DataSetContext);
     const { width, height, margin } = useContext(ChartContext);
     const x1 = margin[3];
     const x2 = width - margin[3];
     const ux = (width - margin[1] - margin[3]) / values[0].length;
     const y1 = margin[0];
     const y2 = height - margin[0];
-    const uy = (height - margin[0] - margin[2]) / (steps2.length - 1);
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("g", { className }, [...range(steps2.length - 1)].map((i) => /* @__PURE__ */ wp.element.createElement("line", { x1, y1: margin[0] + uy * i, x2, y2: margin[0] + uy * i, fill: "transparent", stroke: "lightgray" })), [...range(values[0].length)].map((i) => /* @__PURE__ */ wp.element.createElement("line", { x1: margin[3] + ux * i, y1, x2: margin[3] + ux * i, y2, fill: "transparent", stroke: "lightgray" }))));
+    const uy = (height - margin[0] - margin[2]) / (steps.length - 1);
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("g", { className }, [...range(steps.length - 1)].map((i) => /* @__PURE__ */ wp.element.createElement("line", { x1, y1: margin[0] + uy * i, x2, y2: margin[0] + uy * i, fill: "transparent", stroke: "lightgray" })), [...range(values[0].length)].map((i) => /* @__PURE__ */ wp.element.createElement("line", { x1: margin[3] + ux * i, y1, x2: margin[3] + ux * i, y2, fill: "transparent", stroke: "lightgray" }))));
   };
   var Lines = (props) => {
     const { className } = props;
-    const { steps: steps2, values, colors, classNames, activeRow, focusedRow, activeColumn } = useContext(DataSetContext);
+    const { steps, values, colors: colors2, classNames, activeRow, focusedRow, activeColumn } = useContext(DataSetContext);
     const { width, height, margin } = useContext(ChartContext);
     const x1 = margin[3];
     const w = width - margin[1] - margin[3];
     const ux = w / values[0].length;
     const y2 = height - margin[0];
     const h = height - margin[0] - margin[2];
-    const points = useMemo(() => values.map((row) => row.map((v, c) => ({ x: x1 + ux * (c + 0.5), y: y2 - steps2.getProgress(v) * h }))), [values]);
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("g", { className: clsx(className, { "has-focused": focusedRow != null }) }, points.map((row, r2) => /* @__PURE__ */ wp.element.createElement("g", { className: clsx("_line", classNames?.rows?.[r2], { "is-active": activeRow === r2, "is-focused": focusedRow === r2 }), style: { "--row-color": colors?.rows?.[r2] } }, /* @__PURE__ */ wp.element.createElement("path", { d: shape(row).d, fill: "transparent", stroke: colors?.rows?.[r2] || "gray" }), row.map((p, c) => /* @__PURE__ */ wp.element.createElement(
+    const points = useMemo(() => values.map((row) => row.map((v, c) => ({ x: x1 + ux * (c + 0.5), y: y2 - steps.getProgress(v) * h }))), [values]);
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("g", { className: clsx(className, { "has-focused": focusedRow != null }) }, points.map((row, r2) => /* @__PURE__ */ wp.element.createElement("g", { className: clsx("_line", classNames?.rows?.[r2], { "is-active": activeRow === r2, "is-focused": focusedRow === r2 }), style: { "--row-color": colors2?.rows?.[r2] } }, /* @__PURE__ */ wp.element.createElement("path", { d: shape(row).d, fill: "transparent", stroke: colors2?.rows?.[r2] || "gray" }), row.map((p, c) => /* @__PURE__ */ wp.element.createElement(
       "circle",
       {
         className: clsx("_circle", classNames?.columns?.[c], classNames?.cells?.[r2]?.[c], { "is-active": activeRow === r2 && activeColumn === c }),
         cx: p.x,
         cy: p.y,
         r: 4,
-        fill: colors?.rows?.[r2] || "gray"
+        fill: colors2?.rows?.[r2] || "gray"
       }
     ))))));
   };
+
+  // node_modules-included/catpow/src/component/Input/AngleInput.jsx
+  init_react();
+
+  // node_modules/react-use/esm/useMountedState.js
+  init_react();
+  function useMountedState() {
+    var mountedRef = useRef(false);
+    var get = useCallback(function() {
+      return mountedRef.current;
+    }, []);
+    useEffect(function() {
+      mountedRef.current = true;
+      return function() {
+        mountedRef.current = false;
+      };
+    }, []);
+    return get;
+  }
+
+  // node_modules/react-use/esm/useSetState.js
+  init_react();
+  var useSetState = function(initialState) {
+    if (initialState === void 0) {
+      initialState = {};
+    }
+    var _a = useState(initialState), state = _a[0], set = _a[1];
+    var setState = useCallback(function(patch) {
+      set(function(prevState) {
+        return Object.assign({}, prevState, patch instanceof Function ? patch(prevState) : patch);
+      });
+    }, []);
+    return [state, setState];
+  };
+  var useSetState_default = useSetState;
 
   // node_modules/react-use/esm/misc/util.js
   var noop = function() {
@@ -1188,6 +1241,7 @@
       obj.removeEventListener.apply(obj, args);
     }
   }
+  var isBrowser = typeof window !== "undefined";
 
   // node_modules/react-use/esm/useLatest.js
   init_react();
@@ -1317,6 +1371,132 @@
   };
   var useScratch_default = useScratch;
 
+  // node_modules/react-use/esm/useSlider.js
+  init_react();
+  var useSlider = function(ref, options) {
+    if (options === void 0) {
+      options = {};
+    }
+    var isMounted = useMountedState();
+    var isSliding = useRef(false);
+    var valueRef = useRef(0);
+    var frame = useRef(0);
+    var _a = useSetState_default({
+      isSliding: false,
+      value: 0
+    }), state = _a[0], setState = _a[1];
+    valueRef.current = state.value;
+    useEffect(function() {
+      if (isBrowser) {
+        var styles = options.styles === void 0 ? true : options.styles;
+        var reverse_1 = options.reverse === void 0 ? false : options.reverse;
+        if (ref.current && styles) {
+          ref.current.style.userSelect = "none";
+        }
+        var startScrubbing_1 = function() {
+          if (!isSliding.current && isMounted()) {
+            (options.onScrubStart || noop)();
+            isSliding.current = true;
+            setState({ isSliding: true });
+            bindEvents_1();
+          }
+        };
+        var stopScrubbing_1 = function() {
+          if (isSliding.current && isMounted()) {
+            (options.onScrubStop || noop)(valueRef.current);
+            isSliding.current = false;
+            setState({ isSliding: false });
+            unbindEvents_1();
+          }
+        };
+        var onMouseDown_1 = function(event) {
+          startScrubbing_1();
+          onMouseMove_1(event);
+        };
+        var onMouseMove_1 = options.vertical ? function(event) {
+          return onScrub_1(event.clientY);
+        } : function(event) {
+          return onScrub_1(event.clientX);
+        };
+        var onTouchStart_1 = function(event) {
+          startScrubbing_1();
+          onTouchMove_1(event);
+        };
+        var onTouchMove_1 = options.vertical ? function(event) {
+          return onScrub_1(event.changedTouches[0].clientY);
+        } : function(event) {
+          return onScrub_1(event.changedTouches[0].clientX);
+        };
+        var bindEvents_1 = function() {
+          on(document, "mousemove", onMouseMove_1);
+          on(document, "mouseup", stopScrubbing_1);
+          on(document, "touchmove", onTouchMove_1);
+          on(document, "touchend", stopScrubbing_1);
+        };
+        var unbindEvents_1 = function() {
+          off(document, "mousemove", onMouseMove_1);
+          off(document, "mouseup", stopScrubbing_1);
+          off(document, "touchmove", onTouchMove_1);
+          off(document, "touchend", stopScrubbing_1);
+        };
+        var onScrub_1 = function(clientXY) {
+          cancelAnimationFrame(frame.current);
+          frame.current = requestAnimationFrame(function() {
+            if (isMounted() && ref.current) {
+              var rect = ref.current.getBoundingClientRect();
+              var pos = options.vertical ? rect.top : rect.left;
+              var length_1 = options.vertical ? rect.height : rect.width;
+              if (!length_1) {
+                return;
+              }
+              var value = (clientXY - pos) / length_1;
+              if (value > 1) {
+                value = 1;
+              } else if (value < 0) {
+                value = 0;
+              }
+              if (reverse_1) {
+                value = 1 - value;
+              }
+              setState({
+                value
+              });
+              (options.onScrub || noop)(value);
+            }
+          });
+        };
+        on(ref.current, "mousedown", onMouseDown_1);
+        on(ref.current, "touchstart", onTouchStart_1);
+        return function() {
+          off(ref.current, "mousedown", onMouseDown_1);
+          off(ref.current, "touchstart", onTouchStart_1);
+        };
+      } else {
+        return void 0;
+      }
+    }, [ref, options.vertical]);
+    return state;
+  };
+  var useSlider_default = useSlider;
+
+  // node_modules-included/catpow/src/hooks/useThrottle.jsx
+  init_react();
+  var { useEffect: useEffect2, useRef: useRef2 } = react_default;
+  var useThrottle = (callback, interval, deps) => {
+    const ref = useRef2(false);
+    useEffect2(() => {
+      if (ref.current) {
+        const timer = setTimeout(callback, interval);
+        return () => clearTimeout(timer);
+      }
+      ref.current = true;
+      callback();
+      setTimeout(() => {
+        ref.current = false;
+      }, interval);
+    }, deps);
+  };
+
   // node_modules-included/catpow/src/component/Bem.jsx
   init_react();
   var applyBem = (component, { ...ctx }) => {
@@ -1394,6 +1574,29 @@
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, children);
   };
 
+  // node_modules-included/catpow/src/component/Input/AngleInput.jsx
+  var AngleInput = (props) => {
+    const { className = "cp-angleinput", step = 15, snap = false, showInputs = false, value: originalValue, order = [], onChange, children, ...otherProps } = props;
+    const [ref, state] = useScratch_default();
+    const [value, setValue] = useState(originalValue);
+    useEffect(() => {
+      const { x, y, dx, dy, elW, elH } = state;
+      if (isNaN(dx) || isNaN(dy)) {
+        return;
+      }
+      setValue(Math.round(Math.atan2(elW / 2 - (x + dx), y + dy - elH / 2) / Math.PI * 180 / step) * step + 180);
+    }, [state.dx, state.dy]);
+    useThrottle(
+      () => {
+        console.log({ originalValue, value });
+        onChange(value);
+      },
+      50,
+      [value]
+    );
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className, style: { "--angle": value } }, /* @__PURE__ */ wp.element.createElement("div", { className: "_circle", ref }, /* @__PURE__ */ wp.element.createElement("div", { className: "_handler" })), showInputs && /* @__PURE__ */ wp.element.createElement("div", { className: "_inputs" }, /* @__PURE__ */ wp.element.createElement("input", { type: "number", value, className: "_input", min: 0, max: 360, step, onChange: (e) => setValue(e.target.value) }))));
+  };
+
   // node_modules-included/catpow/src/component/Input/ChartInput.tsx
   init_react();
   var ChartInput = (props) => {
@@ -1429,51 +1632,276 @@
     return /* @__PURE__ */ wp.element.createElement(LineChart, { ...otherProps }, /* @__PURE__ */ wp.element.createElement(ChartInput, null), children);
   };
 
+  // node_modules-included/catpow/src/component/Input/RangeInput.jsx
+  init_react();
+  var RangeInputContext = createContext({});
+  var RangeInput = (props) => {
+    const { className = "cp-rangeinput", steps = { 100: 1 }, snap = false, showInputs = false, values = { value: props.value }, order = [], onChange, children, ...otherProps } = props;
+    const ref = useRef(null);
+    const { isSliding, value } = useSlider_default(ref);
+    const [isStart, setIsStart] = useState(false);
+    const [targetName, setTargetName] = useState(false);
+    const cnv = useMemo(() => rangeValueConverter(steps, snap), [steps]);
+    const { gt, lt } = useMemo(() => {
+      const orderMap = { gt: {}, lt: {} };
+      for (let i = 1; i < order.length; i++) {
+        orderMap.lt[order[i - 1]] = order[i];
+        orderMap.gt[order[i]] = order[i - 1];
+      }
+      return orderMap;
+    }, [order]);
+    const onChageCallback = useCallback(
+      (key, val) => {
+        if (gt[key] != null) {
+          val = Math.max(val, values[gt[key]]);
+        }
+        if (lt[key] != null) {
+          val = Math.min(val, values[lt[key]]);
+        }
+        onChange({ ...values, [key]: val });
+      },
+      [values, gt, lt, onChange]
+    );
+    useEffect(() => {
+      if (!isSliding) {
+        setTargetName(false);
+      }
+      setIsStart(isSliding);
+    }, [isSliding]);
+    useThrottle(
+      () => {
+        if (isStart) {
+          setTargetName(
+            Object.keys(values).reduce((p, c) => {
+              if (p === null || Math.abs(cnv.getProgress(values[c]) - value) < Math.abs(cnv.getProgress(values[p]) - value)) {
+                return c;
+              }
+              return p;
+            }, null)
+          );
+          setIsStart(false);
+        }
+        if (targetName && onChange) {
+          onChageCallback(targetName, cnv.getValue(value));
+        }
+      },
+      50,
+      [value]
+    );
+    return /* @__PURE__ */ wp.element.createElement(RangeInputContext.Provider, { value: { values } }, /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className, style: Object.keys(values).reduce((p, c) => ({ ...p, ["--pos-" + c]: cnv.getProgress(values[c]) }), {}) }, /* @__PURE__ */ wp.element.createElement("div", { className: "_bar" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body", ref }, Object.keys(values).map((name) => {
+      return /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default("_control", `is-control-${name}`), style: { "--pos": cnv.getProgress(values[name]) } }, /* @__PURE__ */ wp.element.createElement("div", { className: "_value" }, values[name]));
+    }))), showInputs && /* @__PURE__ */ wp.element.createElement("div", { className: "_inputs" }, Object.keys(values).map((name) => {
+      return /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default("_item", `is-input-${name}`) }, /* @__PURE__ */ wp.element.createElement("input", { type: "number", value: values[name], className: "_input", onChange: (e) => onChageCallback(name, e.target.value) }));
+    })))));
+  };
+
+  // node_modules-included/catpow/src/component/Input/Toggle.jsx
+  init_react();
+  var Toggle = (props) => {
+    const { className = "cp-toggle", onChange, threashold = 40 } = props;
+    const [value, setValue] = useState(props.value);
+    const [handler, setHandler] = useState(false);
+    useEffect(() => {
+      if (!handler) {
+        return;
+      }
+      const org = { x: 0 };
+      const handleTouchStart = (e) => {
+        org.x = e.targetTouches[0].clientX;
+      };
+      const handleTouchMove = (e) => {
+        setValue(e.targetTouches[0].clientX - org.x > threashold);
+      };
+      return () => {
+        handler.removeEventListener("touchstart", handleTouchStart);
+        handler.removeEventListener("touchmove", handleTouchMove);
+        handler.removeEventListener("mousedown", handleTouchStart);
+        handler.removeEventListener("mousemove", handleTouchMove);
+      };
+    }, [handler, setValue, threashold]);
+    useEffect(() => {
+      if (props.value !== value) {
+        onChange(value);
+      }
+    }, [props.value, value, onChange]);
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement(
+      "div",
+      {
+        className: clsx_default(className, { "is-selected": value }),
+        onClick: () => {
+          setValue(!value);
+        },
+        ref: setHandler
+      },
+      /* @__PURE__ */ wp.element.createElement("span", { className: "_handler" })
+    ));
+  };
+
   // node_modules-included/catpow/src/component/SVG/SVG.tsx
   init_react();
   var SVGColorsContext = createContext({ h: 20, s: 80, l: 80 });
   var SVGScreenContext = createContext({ width: 1200, height: 400, flex: false });
   var SVG2 = (props) => {
-    const { className = "cp-svg", width = 1200, height = 400, colors = { h: 20, s: 80, l: 80 }, children, ...otherProps } = props;
+    const { className = "cp-svg", width = 1200, height = 400, colors: colors2 = { h: 20, s: 80, l: 80 }, children, ...otherProps } = props;
     const ScreenValue = useMemo(() => ({ width, height, flex: false }), [width, height]);
-    return /* @__PURE__ */ wp.element.createElement(SVGColorsContext.Provider, { value: colors }, /* @__PURE__ */ wp.element.createElement(SVGScreenContext.Provider, { value: ScreenValue }, /* @__PURE__ */ wp.element.createElement("svg", { className, width, height, viewBox: `0 0 ${width} ${height}`, xmlns: "http://www.w3.org/2000/svg", ...otherProps }, children)));
+    return /* @__PURE__ */ wp.element.createElement(SVGColorsContext.Provider, { value: colors2 }, /* @__PURE__ */ wp.element.createElement(SVGScreenContext.Provider, { value: ScreenValue }, /* @__PURE__ */ wp.element.createElement("svg", { className, width, height, viewBox: `0 0 ${width} ${height}`, xmlns: "http://www.w3.org/2000/svg", ...otherProps }, children)));
   };
 
-  // ../components/Customize/BorderWidth/component.jsx
-  var extractLabels = (rolesByShorthand) => ({
-    columns: Object.values(Object.values(rolesByShorthand)[0].variants)
-  });
-  var extractValues = (vars, rolesByShorthand) => {
-    return Object.keys(rolesByShorthand).map((h) => Object.keys(rolesByShorthand[h].variants).map((v, c) => parseFloat(vars[`${h}-${v}`] || rolesByShorthand[h].defaultValues[c]) * 16));
-  };
-  var convertToVars = (values, rolesByShorthand) => {
+  // ../components/Customize/Shadow/component.jsx
+  var extractLabels = ({ rolesByShorthand }) => Object.keys(rolesByShorthand).reduce(
+    (p, c) => ({
+      ...p,
+      [c]: { columns: Object.values(rolesByShorthand[c].variants) }
+    }),
+    {}
+  );
+  var extractValues = ({ vars, rolesByShorthand }) => Object.keys(rolesByShorthand).reduce(
+    (p, h) => ({
+      ...p,
+      [h]: Object.keys(rolesByShorthand[h].variants).reduce(
+        (p2, v, c) => {
+          const matches = (vars[`${h}-${v}`] || rolesByShorthand[h].defaultValues[c]).match(
+            /^(inset )?calc\(sin\(\d+deg\) \* cos\(\d+deg\) \* \d+px\) calc\(cos\((\d+)deg\) \* cos\((\d+)deg\) \* (\d+)px\) calc\(\d+px \* ([\d\.]+)\) calc\(\d+px \* ([\d\.]+)\)/
+          );
+          if (matches) {
+            p2.angles.push(matches[2]);
+            p2.heights.push(matches[3]);
+            p2.offsetValues.push(matches[4] * (matches[1] ? -1 : 1));
+            p2.growBlurs.push(matches[5] * 10);
+            p2.growSpreads.push(matches[6] * 10);
+          } else {
+            p2.angles.push(0);
+            p2.heights.push(0);
+            p2.offsetValues.push(0);
+            p2.growBlurs.push(0);
+            p2.growSpreads.push(0);
+          }
+          return p2;
+        },
+        { angles: [], heights: [], offsetValues: [], growBlurs: [], growSpreads: [] }
+      )
+    }),
+    {}
+  );
+  var convertToVars = ({ values, rolesByShorthand }) => {
     return Object.keys(rolesByShorthand).reduce((p, h, r2) => {
+      const { angles, heights, offsetValues, growBlurs, growSpreads } = values[h];
       Object.keys(rolesByShorthand[h].variants).forEach((v, c) => {
-        p[`${h}-${v}`] = values[r2][c] / 16 + "rem";
+        const offset = offsetValues[c];
+        p[`${h}-${v}`] = offsetValues[c] !== 0 ? `${offset < 0 ? "inset " : ""}calc(sin(${angles[c] + 180}deg) * cos(${heights[c]}deg) * ${Math.abs(offset)}px) calc(cos(${angles[c]}deg) * cos(${heights[c]}deg) * ${Math.abs(offset)}px) calc(${Math.abs(offset)}px * ${growBlurs[c] / 10}) calc(${Math.abs(offset)}px * ${growSpreads[c] / 10})` : "none";
       });
       return p;
     }, {});
   };
-  var steps = {
-    8: 1,
-    16: 2
+  var angleSteps = {
+    360: 15
   };
-  Catpow.Customize.BorderWidth = (props) => {
+  var heightSteps = {
+    90: 5
+  };
+  var offsetSteps = {
+    [-64]: 0,
+    [-32]: 16,
+    [-16]: 8,
+    [-8]: 4,
+    [-4]: 2,
+    4: 1,
+    8: 2,
+    16: 4,
+    32: 8,
+    64: 16
+  };
+  var blurSteps = {
+    4: 1,
+    8: 2,
+    16: 4,
+    32: 8,
+    64: 16
+  };
+  var colors = {
+    rows: [`oklch(50% 20% 180)`, `oklch(60% 20% 240)`, `oklch(50% 20% 180)`, `oklch(60% 20% 240)`]
+  };
+  var init = ({ vars, rolesByShorthand }) => {
+    const labels = extractLabels({ rolesByShorthand });
+    const values = extractValues({ vars, rolesByShorthand });
+    const mergedLightValues = Object.values(values).reduce(
+      (p, c) => {
+        for (let i in c.offsetValues) {
+          if (c.offsetValues[i] === 0) {
+            continue;
+          }
+          Object.keys(p).forEach((key) => {
+            p[key].push(c[key][i]);
+          });
+        }
+        return p;
+      },
+      { angles: [], heights: [], growBlurs: [], growSpreads: [] }
+    );
+    const hasUnionLight = Object.values(mergedLightValues).every((vals) => new Set(vals).size < 2);
+    console.log({ values, mergedLightValues });
+    const unionValues = mergedLightValues.angles.length > 0 ? Object.keys(mergedLightValues).reduce((p, c) => ({ ...p, [c]: mergedLightValues[c][0] }), {}) : { angles: 0, heights: 0, growBlurs: 0, growSpreads: 0 };
+    return { vars, rolesByShorthand, hasUnionLight, unionValues, labels, values };
+  };
+  var reducer = (state, action) => {
+    const { values, hasUnionLight, unionValues } = action;
+    const newState = { ...state };
+    if (unionValues) {
+      newState.unionValues = { ...newState.unionValues, ...unionValues };
+      Object.keys(unionValues).forEach((key) => {
+        Object.values(newState.values).forEach((vals) => {
+          vals[key] = vals[key].map(() => unionValues[key]);
+        });
+      });
+      newState.vars = convertToVars(newState);
+    }
+    if (values) {
+      newState.values = Object.keys(values).reduce((p, c) => ({ ...p, [c]: { ...p[c], ...values[c] } }), newState.values);
+      newState.vars = convertToVars(newState);
+    }
+    if (hasUnionLight != null) {
+      newState.hasUnionLight = hasUnionLight;
+      if (newState.hasUnionLight) {
+        Object.keys(newState.unionValues).forEach((key) => {
+          Object.values(newState.values).forEach((vals) => {
+            vals[key] = vals[key].map(() => newState.unionValues[key]);
+          });
+        });
+      }
+    }
+    return newState;
+  };
+  Catpow.Customize.Shadow = (props) => {
     const {
       value: vars,
       onChange,
       param: { roles }
     } = props;
     const rolesByShorthand = useMemo(() => Object.values(roles).reduce((p, c) => ({ ...p, [c.shorthand]: c }), {}), [roles]);
-    const labels = useMemo(() => extractLabels(rolesByShorthand), [rolesByShorthand]);
-    const [values, setValues] = useState(extractValues(vars, rolesByShorthand));
-    const onChangeValues = useCallback(
-      (values2) => {
-        setValues(values2);
-        onChange(convertToVars(values2, rolesByShorthand));
-      },
-      [onChange, rolesByShorthand]
-    );
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement(DataSet, { values, labels, steps, onChange: onChangeValues }, /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 400, height: 120 }), /* @__PURE__ */ wp.element.createElement(DataTable, null)));
+    const [state, update] = useReducer(reducer, { vars, rolesByShorthand }, init);
+    useEffect(() => {
+      if (!state.vars || !onChange) {
+        return;
+      }
+      onChange(state.vars);
+    }, [state.vars]);
+    console.log({ state });
+    return /* @__PURE__ */ wp.element.createElement(Bem, { prefix: "cp-customize" }, /* @__PURE__ */ wp.element.createElement("dl", { className: "dl-" }, /* @__PURE__ */ wp.element.createElement("dt", null, "\u5149\u6E90\u7D71\u4E00"), /* @__PURE__ */ wp.element.createElement("dd", null, /* @__PURE__ */ wp.element.createElement(Toggle, { value: state.hasUnionLight, onChange: (hasUnionLight) => update({ hasUnionLight }) }))), state.hasUnionLight && /* @__PURE__ */ wp.element.createElement("dl", { className: "dl-" }, /* @__PURE__ */ wp.element.createElement("dt", null, "\u65B9\u5411"), /* @__PURE__ */ wp.element.createElement("dd", null, /* @__PURE__ */ wp.element.createElement(AngleInput, { value: state.unionValues.angles, steps: angleSteps, snap: true, onChange: (angles) => update({ unionValues: { angles } }) })), /* @__PURE__ */ wp.element.createElement("dt", null, "\u9AD8\u3055"), /* @__PURE__ */ wp.element.createElement("dd", null, /* @__PURE__ */ wp.element.createElement(RangeInput, { value: state.unionValues.heights, steps: heightSteps, snap: true, onChange: ({ value: heights }) => update({ unionValues: { heights } }) })), /* @__PURE__ */ wp.element.createElement("dt", null, "\u307C\u304B\u3057"), /* @__PURE__ */ wp.element.createElement("dd", null, /* @__PURE__ */ wp.element.createElement(RangeInput, { value: state.unionValues.growBlurs, steps: blurSteps, snap: true, onChange: ({ value: growBlurs }) => update({ unionValues: { growBlurs } }) })), /* @__PURE__ */ wp.element.createElement("dt", null, "\u62E1\u5927"), /* @__PURE__ */ wp.element.createElement("dd", null, /* @__PURE__ */ wp.element.createElement(RangeInput, { value: state.unionValues.growSpreads, steps: blurSteps, snap: true, onChange: ({ value: growSpreads }) => update({ unionValues: { growSpreads } }) }))), Object.keys(rolesByShorthand).map((h) => {
+      const labels = state.labels[h];
+      const { angles, heights, growBlurs, growSpreads, offsetValues } = state.values[h];
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("h5", { className: "cp-customize__label" }, rolesByShorthand[h].label), !state.hasUnionLight && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(DataSet, { values: [angles], labels, steps: angleSteps, onChange: ([angles2]) => update({ values: { [h]: { angles: angles2 } } }) }, /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 400, height: 200 }), /* @__PURE__ */ wp.element.createElement(DataTable, null)), /* @__PURE__ */ wp.element.createElement(DataSet, { values: [heights], labels, steps: heightSteps, onChange: ([heights2]) => update({ values: { [h]: { heights: heights2 } } }) }, /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 400, height: 200 }), /* @__PURE__ */ wp.element.createElement(DataTable, null)), /* @__PURE__ */ wp.element.createElement(
+        DataSet,
+        {
+          values: [growBlurs, growSpreads],
+          labels: { ...labels, rows: ["\u307C\u304B\u3057", "\u62E1\u5927"] },
+          colors,
+          steps: blurSteps,
+          onChange: ([growBlurs2, growSpreads2]) => update({ values: { [h]: { growBlurs: growBlurs2, growSpreads: growSpreads2 } } })
+        },
+        /* @__PURE__ */ wp.element.createElement(Legend, null),
+        /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 400, height: 120 }),
+        /* @__PURE__ */ wp.element.createElement(DataTable, { showRowHeader: false })
+      )), /* @__PURE__ */ wp.element.createElement(DataSet, { values: [offsetValues], labels, steps: offsetSteps, onChange: ([offsetValues2]) => update({ values: { [h]: { offsetValues: offsetValues2 } } }) }, /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 400, height: 200 }), /* @__PURE__ */ wp.element.createElement(DataTable, null)));
+    }));
   };
 })();

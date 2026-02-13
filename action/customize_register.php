@@ -143,3 +143,20 @@ $wp_customize->add_control(new Catpow\customize\control($wp_customize,'border_wi
 	]
 ]));
 add_action("customize_save_border_width",["Catpow\\util\\style_config",'update']);
+
+//Shadow
+$wp_customize->add_section('shadow',[
+	'title'=>__('影','catpow'),
+	'priority'=>40
+]);
+$wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'shadow',[
+	'transport'=>'postMessage'
+]));
+$wp_customize->add_control(new Catpow\customize\control($wp_customize,'shadow',[
+	'type'=>'Shadow',
+	'section'=>'shadow',
+	'param'=>[
+		'roles'=>style_config::get_shadow_roles()
+	]
+]));
+add_action("customize_save_shadow",["Catpow\\util\\style_config",'update']);

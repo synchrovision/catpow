@@ -92,6 +92,13 @@ add_action('wp_head',function(){
 				});
 			});
 		});
+		wp.customize('shadow',function(setting){
+			setting.bind(function(shadow){
+				Object.keys(shadow).forEach((role)=>{
+					rootStyle.setProperty('--cp-shadow-'+role,shadow[role]);
+				});
+			});
+		});
 	});
 </script>
 <?php

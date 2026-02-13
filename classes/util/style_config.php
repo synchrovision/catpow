@@ -20,6 +20,7 @@ class style_config{
 		$border_width_roles,
 		$line_height_roles,
 		$letter_spacing_roles,
+		$shadow_roles,
 		$text_block_roles=[
 			'heading'=>['label'=>'見出し','shorthand'=>'h','sampleValues'=>[28,26,24,23,22,21]],
 			'lead'=>['label'=>'リード文','shorthand'=>'l','sampleValues'=>[21,20,19,18,17,16]],
@@ -72,10 +73,10 @@ class style_config{
 			'inside'=>['label'=>'抜文字','default'=>'#ffffff','shorthand'=>'i','extend'=>true,'invert'=>'t'],
 			'emphasis'=>['label'=>'抜強調文字','default'=>'#FF3300','shorthand'=>'e','extend'=>true,'invert'=>'h'],
 			'rule'=>['label'=>'抜線','default'=>'#AAAAAA','shorthand'=>'r','extend'=>true,'invert'=>'l'],
-			'light'=>['label'=>'照明','default'=>'hsla(0,0%,100%,0.6)','shorthand'=>'lt','alphaEnabled'=>true],
-			'lust'=>['label'=>'光沢','default'=>'hsla(0,0%,100%,0.9)','shorthand'=>'lst','alphaEnabled'=>true],
-			'shade'=>['label'=>'陰','default'=>'hsla(0,0%,0%,0.2)','shorthand'=>'sh','alphaEnabled'=>true],
-			'shadow'=>['label'=>'影','default'=>'hsla(0,0%,0%,0.3)','shorthand'=>'shd','alphaEnabled'=>true],
+			'light'=>['label'=>'照明','default'=>'hsla(0,0%,100%,0.6)','shorthand'=>'lt','extend'=>true,'alphaEnabled'=>true],
+			'lust'=>['label'=>'光沢','default'=>'hsla(0,0%,100%,0.9)','shorthand'=>'lst','extend'=>true,'alphaEnabled'=>true],
+			'shade'=>['label'=>'陰','default'=>'hsla(0,0%,0%,0.2)','shorthand'=>'sh','extend'=>true,'alphaEnabled'=>true],
+			'shadow'=>['label'=>'影','default'=>'hsla(0,0%,0%,0.3)','shorthand'=>'shd','extend'=>true,'alphaEnabled'=>true],
 		]);
 	}
 	public static function get_size_roles(){
@@ -261,6 +262,30 @@ class style_config{
 		if(isset(static::$letter_spacing_roles)){return static::$letter_spacing_roles;}
 		return static::$letter_spacing_roles=apply_filters('cp_letter_spacing_roles',self::generate_text_block_roles("normal"));
 	}
+	public static function get_shadow_roles(){
+		if(isset(static::$shadow_roles)){return static::$shadow_roles;}
+		return static::$shadow_roles=apply_filters('cp_shadow_roles',[
+			'component'=>[
+				'label'=>'コンポーネント',
+				'shorthand'=>'c',
+				'variants'=>self::$component_variants,
+				'defaultValues'=>array_pad([],7,'none')
+			],
+			'specific'=>[
+				'label'=>'指定',
+				'shorthand'=>'s',
+				'variants'=>[
+					'il'=>'内大',
+					'im'=>'内中',
+					'is'=>'内小',
+					'os'=>'外小',
+					'om'=>'外中',
+					'ol'=>'外大',
+				],
+				'defaultValues'=>array_pad([],6,'none')
+			]
+		]);
+	}
 
 	public static function generate_text_block_roles($default_values,$has_level=false,$formats=null){
 		$roles=[];
@@ -354,6 +379,7 @@ class style_config{
 			'border-width'=>self::get_config_json('border_width'),
 			'line-height'=>self::get_config_json('line_height'),
 			'letter-spacing'=>self::get_config_json('letter_spacing'),
+			'shadow'=>self::get_config_json('shadow'),
 		]);
 		$bps=array_values(self::get_breakpoints());
 		if(isset($vars['tones']['i'])){

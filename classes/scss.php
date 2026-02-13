@@ -226,6 +226,7 @@ class scss{
 			self::register_translation_for_role($scssc,'border_width');
 			self::register_translation_for_role($scssc,'line_height');
 			self::register_translation_for_role($scssc,'letter_spacing');
+			self::register_translation_for_role($scssc,'shadow');
 		}
 		do_action('cp_scss_compiler_init',$scssc);
 		if($for_admin){
