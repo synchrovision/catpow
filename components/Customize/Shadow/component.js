@@ -1760,21 +1760,38 @@
       ...p,
       [h]: Object.keys(rolesByShorthand[h].variants).reduce(
         (p2, v, c) => {
-          const matches = (vars[`${h}-${v}`] || rolesByShorthand[h].defaultValues[c]).match(
-            /^(inset )?calc\(sin\(\d+deg\) \* cos\(\d+deg\) \* \d+px\) calc\(cos\((\d+)deg\) \* cos\((\d+)deg\) \* (\d+)px\) calc\(\d+px \* ([\d\.]+)\) calc\(\d+px \* ([\d\.]+)\)/
-          );
-          if (matches) {
-            p2.angles.push(matches[2]);
-            p2.heights.push(matches[3]);
-            p2.offsetValues.push(matches[4] * (matches[1] ? -1 : 1));
-            p2.growBlurs.push(matches[5] * 10);
-            p2.growSpreads.push(matches[6] * 10);
+          if (rolesByShorthand[h].isTextShadow) {
+            const matches = (vars[`${h}-${v}`] || rolesByShorthand[h].defaultValues[c]).match(
+              /^calc\(sin\(\d+deg\) \* cos\(\d+deg\) \* \-?[\.\d]+em\) calc\(cos\((\d+)deg\) \* cos\((\d+)deg\) \* (\-?[\.\d]+)em\) calc\(\-?[\.\d]+em \* ([\d\.]+)\)/
+            );
+            if (matches) {
+              p2.angles.push(parseInt(matches[1]));
+              p2.heights.push(parseInt(matches[2]));
+              p2.offsetValues.push(parseInt(matches[3] * 32));
+              p2.growBlurs.push(parseInt(matches[4] * 10));
+            } else {
+              p2.angles.push(0);
+              p2.heights.push(0);
+              p2.offsetValues.push(0);
+              p2.growBlurs.push(0);
+            }
           } else {
-            p2.angles.push(0);
-            p2.heights.push(0);
-            p2.offsetValues.push(0);
-            p2.growBlurs.push(0);
-            p2.growSpreads.push(0);
+            const matches = (vars[`${h}-${v}`] || rolesByShorthand[h].defaultValues[c]).match(
+              /^(inset )?calc\(sin\(\d+deg\) \* cos\(\d+deg\) \* \d+px\) calc\(cos\((\d+)deg\) \* cos\((\d+)deg\) \* (\d+)px\) calc\(\d+px \* ([\d\.]+)\) calc\(\d+px \* ([\d\.]+)\)/
+            );
+            if (matches) {
+              p2.angles.push(parseInt(matches[2]));
+              p2.heights.push(parseInt(matches[3]));
+              p2.offsetValues.push(parseInt(matches[4] * (matches[1] ? -1 : 1)));
+              p2.growBlurs.push(parseInt(matches[5] * 10));
+              p2.growSpreads.push(parseInt(matches[6] * 10));
+            } else {
+              p2.angles.push(0);
+              p2.heights.push(0);
+              p2.offsetValues.push(0);
+              p2.growBlurs.push(0);
+              p2.growSpreads.push(0);
+            }
           }
           return p2;
         },
@@ -1788,7 +1805,11 @@
       const { angles, heights, offsetValues, growBlurs, growSpreads } = values[h];
       Object.keys(rolesByShorthand[h].variants).forEach((v, c) => {
         const offset = offsetValues[c];
-        p[`${h}-${v}`] = offsetValues[c] !== 0 ? `${offset < 0 ? "inset " : ""}calc(sin(${angles[c] + 180}deg) * cos(${heights[c]}deg) * ${Math.abs(offset)}px) calc(cos(${angles[c]}deg) * cos(${heights[c]}deg) * ${Math.abs(offset)}px) calc(${Math.abs(offset)}px * ${growBlurs[c] / 10}) calc(${Math.abs(offset)}px * ${growSpreads[c] / 10})` : "none";
+        if (rolesByShorthand[h].isTextShadow) {
+          p[`${h}-${v}`] = offsetValues[c] !== 0 ? `calc(sin(${angles[c] + 180}deg) * cos(${heights[c]}deg) * ${offset / 32}em) calc(cos(${angles[c]}deg) * cos(${heights[c]}deg) * ${offset / 32}em) calc(${Math.abs(offset / 32)}em * ${growBlurs[c] / 10})` : "none";
+        } else {
+          p[`${h}-${v}`] = offsetValues[c] !== 0 ? `${offset < 0 ? "inset " : ""}calc(sin(${angles[c] + 180}deg) * cos(${heights[c]}deg) * ${Math.abs(offset)}px) calc(cos(${angles[c]}deg) * cos(${heights[c]}deg) * ${Math.abs(offset)}px) calc(${Math.abs(offset)}px * ${growBlurs[c] / 10}) calc(${Math.abs(offset)}px * ${growSpreads[c] / 10})` : "none";
+        }
       });
       return p;
     }, {});
@@ -1811,6 +1832,13 @@
     32: 8,
     64: 16
   };
+  var textOffsetSteps = {
+    [-4]: 0,
+    4: 1,
+    8: 2,
+    16: 4,
+    32: 8
+  };
   var blurSteps = {
     4: 1,
     8: 2,
@@ -1831,7 +1859,7 @@
             continue;
           }
           Object.keys(p).forEach((key) => {
-            p[key].push(c[key][i]);
+            if (c[key][i] != null) p[key].push(c[key][i]);
           });
         }
         return p;
@@ -1839,7 +1867,6 @@
       { angles: [], heights: [], growBlurs: [], growSpreads: [] }
     );
     const hasUnionLight = Object.values(mergedLightValues).every((vals) => new Set(vals).size < 2);
-    console.log({ values, mergedLightValues });
     const unionValues = mergedLightValues.angles.length > 0 ? Object.keys(mergedLightValues).reduce((p, c) => ({ ...p, [c]: mergedLightValues[c][0] }), {}) : { angles: 0, heights: 0, growBlurs: 0, growSpreads: 0 };
     return { vars, rolesByShorthand, hasUnionLight, unionValues, labels, values };
   };
@@ -1885,7 +1912,6 @@
       }
       onChange(state.vars);
     }, [state.vars]);
-    console.log({ state });
     return /* @__PURE__ */ wp.element.createElement(Bem, { prefix: "cp-customize" }, /* @__PURE__ */ wp.element.createElement("dl", { className: "dl-" }, /* @__PURE__ */ wp.element.createElement("dt", null, "\u5149\u6E90\u7D71\u4E00"), /* @__PURE__ */ wp.element.createElement("dd", null, /* @__PURE__ */ wp.element.createElement(Toggle, { value: state.hasUnionLight, onChange: (hasUnionLight) => update({ hasUnionLight }) }))), state.hasUnionLight && /* @__PURE__ */ wp.element.createElement("dl", { className: "dl-" }, /* @__PURE__ */ wp.element.createElement("dt", null, "\u65B9\u5411"), /* @__PURE__ */ wp.element.createElement("dd", null, /* @__PURE__ */ wp.element.createElement(AngleInput, { value: state.unionValues.angles, steps: angleSteps, snap: true, onChange: (angles) => update({ unionValues: { angles } }) })), /* @__PURE__ */ wp.element.createElement("dt", null, "\u9AD8\u3055"), /* @__PURE__ */ wp.element.createElement("dd", null, /* @__PURE__ */ wp.element.createElement(RangeInput, { value: state.unionValues.heights, steps: heightSteps, snap: true, onChange: ({ value: heights }) => update({ unionValues: { heights } }) })), /* @__PURE__ */ wp.element.createElement("dt", null, "\u307C\u304B\u3057"), /* @__PURE__ */ wp.element.createElement("dd", null, /* @__PURE__ */ wp.element.createElement(RangeInput, { value: state.unionValues.growBlurs, steps: blurSteps, snap: true, onChange: ({ value: growBlurs }) => update({ unionValues: { growBlurs } }) })), /* @__PURE__ */ wp.element.createElement("dt", null, "\u62E1\u5927"), /* @__PURE__ */ wp.element.createElement("dd", null, /* @__PURE__ */ wp.element.createElement(RangeInput, { value: state.unionValues.growSpreads, steps: blurSteps, snap: true, onChange: ({ value: growSpreads }) => update({ unionValues: { growSpreads } }) }))), Object.keys(rolesByShorthand).map((h) => {
       const labels = state.labels[h];
       const { angles, heights, growBlurs, growSpreads, offsetValues } = state.values[h];
@@ -1901,7 +1927,17 @@
         /* @__PURE__ */ wp.element.createElement(Legend, null),
         /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 400, height: 120 }),
         /* @__PURE__ */ wp.element.createElement(DataTable, { showRowHeader: false })
-      )), /* @__PURE__ */ wp.element.createElement(DataSet, { values: [offsetValues], labels, steps: offsetSteps, onChange: ([offsetValues2]) => update({ values: { [h]: { offsetValues: offsetValues2 } } }) }, /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 400, height: 200 }), /* @__PURE__ */ wp.element.createElement(DataTable, null)));
+      )), /* @__PURE__ */ wp.element.createElement(
+        DataSet,
+        {
+          values: [offsetValues],
+          labels,
+          steps: rolesByShorthand[h].isTextShadow ? textOffsetSteps : offsetSteps,
+          onChange: ([offsetValues2]) => update({ values: { [h]: { offsetValues: offsetValues2 } } })
+        },
+        /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 400, height: rolesByShorthand[h].isTextShadow ? 100 : 200 }),
+        /* @__PURE__ */ wp.element.createElement(DataTable, null)
+      ));
     }));
   };
 })();

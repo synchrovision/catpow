@@ -16,21 +16,38 @@ const extractValues = ({ vars, rolesByShorthand }) =>
 			...p,
 			[h]: Object.keys(rolesByShorthand[h].variants).reduce(
 				(p, v, c) => {
-					const matches = (vars[`${h}-${v}`] || rolesByShorthand[h].defaultValues[c]).match(
-						/^(inset )?calc\(sin\(\d+deg\) \* cos\(\d+deg\) \* \d+px\) calc\(cos\((\d+)deg\) \* cos\((\d+)deg\) \* (\d+)px\) calc\(\d+px \* ([\d\.]+)\) calc\(\d+px \* ([\d\.]+)\)/,
-					);
-					if (matches) {
-						p.angles.push(matches[2]);
-						p.heights.push(matches[3]);
-						p.offsetValues.push(matches[4] * (matches[1] ? -1 : 1));
-						p.growBlurs.push(matches[5] * 10);
-						p.growSpreads.push(matches[6] * 10);
+					if (rolesByShorthand[h].isTextShadow) {
+						const matches = (vars[`${h}-${v}`] || rolesByShorthand[h].defaultValues[c]).match(
+							/^calc\(sin\(\d+deg\) \* cos\(\d+deg\) \* \-?[\.\d]+em\) calc\(cos\((\d+)deg\) \* cos\((\d+)deg\) \* (\-?[\.\d]+)em\) calc\(\-?[\.\d]+em \* ([\d\.]+)\)/,
+						);
+						if (matches) {
+							p.angles.push(parseInt(matches[1]));
+							p.heights.push(parseInt(matches[2]));
+							p.offsetValues.push(parseInt(matches[3] * 32));
+							p.growBlurs.push(parseInt(matches[4] * 10));
+						} else {
+							p.angles.push(0);
+							p.heights.push(0);
+							p.offsetValues.push(0);
+							p.growBlurs.push(0);
+						}
 					} else {
-						p.angles.push(0);
-						p.heights.push(0);
-						p.offsetValues.push(0);
-						p.growBlurs.push(0);
-						p.growSpreads.push(0);
+						const matches = (vars[`${h}-${v}`] || rolesByShorthand[h].defaultValues[c]).match(
+							/^(inset )?calc\(sin\(\d+deg\) \* cos\(\d+deg\) \* \d+px\) calc\(cos\((\d+)deg\) \* cos\((\d+)deg\) \* (\d+)px\) calc\(\d+px \* ([\d\.]+)\) calc\(\d+px \* ([\d\.]+)\)/,
+						);
+						if (matches) {
+							p.angles.push(parseInt(matches[2]));
+							p.heights.push(parseInt(matches[3]));
+							p.offsetValues.push(parseInt(matches[4] * (matches[1] ? -1 : 1)));
+							p.growBlurs.push(parseInt(matches[5] * 10));
+							p.growSpreads.push(parseInt(matches[6] * 10));
+						} else {
+							p.angles.push(0);
+							p.heights.push(0);
+							p.offsetValues.push(0);
+							p.growBlurs.push(0);
+							p.growSpreads.push(0);
+						}
 					}
 					return p;
 				},
@@ -44,10 +61,17 @@ const convertToVars = ({ values, rolesByShorthand }) => {
 		const { angles, heights, offsetValues, growBlurs, growSpreads } = values[h];
 		Object.keys(rolesByShorthand[h].variants).forEach((v, c) => {
 			const offset = offsetValues[c];
-			p[`${h}-${v}`] =
-				offsetValues[c] !== 0
-					? `${offset < 0 ? "inset " : ""}calc(sin(${angles[c] + 180}deg) * cos(${heights[c]}deg) * ${Math.abs(offset)}px) calc(cos(${angles[c]}deg) * cos(${heights[c]}deg) * ${Math.abs(offset)}px) calc(${Math.abs(offset)}px * ${growBlurs[c] / 10}) calc(${Math.abs(offset)}px * ${growSpreads[c] / 10})`
-					: "none";
+			if (rolesByShorthand[h].isTextShadow) {
+				p[`${h}-${v}`] =
+					offsetValues[c] !== 0
+						? `calc(sin(${angles[c] + 180}deg) * cos(${heights[c]}deg) * ${offset / 32}em) calc(cos(${angles[c]}deg) * cos(${heights[c]}deg) * ${offset / 32}em) calc(${Math.abs(offset / 32)}em * ${growBlurs[c] / 10})`
+						: "none";
+			} else {
+				p[`${h}-${v}`] =
+					offsetValues[c] !== 0
+						? `${offset < 0 ? "inset " : ""}calc(sin(${angles[c] + 180}deg) * cos(${heights[c]}deg) * ${Math.abs(offset)}px) calc(cos(${angles[c]}deg) * cos(${heights[c]}deg) * ${Math.abs(offset)}px) calc(${Math.abs(offset)}px * ${growBlurs[c] / 10}) calc(${Math.abs(offset)}px * ${growSpreads[c] / 10})`
+						: "none";
+			}
 		});
 		return p;
 	}, {});
@@ -71,6 +95,13 @@ const offsetSteps = {
 	32: 8,
 	64: 16,
 };
+const textOffsetSteps = {
+	[-4]: 0,
+	4: 1,
+	8: 2,
+	16: 4,
+	32: 8,
+};
 const blurSteps = {
 	4: 1,
 	8: 2,
@@ -92,7 +123,7 @@ const init = ({ vars, rolesByShorthand }) => {
 					continue;
 				}
 				Object.keys(p).forEach((key) => {
-					p[key].push(c[key][i]);
+					if (c[key][i] != null) p[key].push(c[key][i]);
 				});
 			}
 			return p;
@@ -100,7 +131,6 @@ const init = ({ vars, rolesByShorthand }) => {
 		{ angles: [], heights: [], growBlurs: [], growSpreads: [] },
 	);
 	const hasUnionLight = Object.values(mergedLightValues).every((vals) => new Set(vals).size < 2);
-	console.log({ values, mergedLightValues });
 	const unionValues =
 		mergedLightValues.angles.length > 0 ? Object.keys(mergedLightValues).reduce((p, c) => ({ ...p, [c]: mergedLightValues[c][0] }), {}) : { angles: 0, heights: 0, growBlurs: 0, growSpreads: 0 };
 	return { vars, rolesByShorthand, hasUnionLight, unionValues, labels, values };
@@ -151,8 +181,6 @@ Catpow.Customize.Shadow = (props) => {
 		}
 		onChange(state.vars);
 	}, [state.vars]);
-
-	console.log({ state });
 
 	return (
 		<Bem prefix="cp-customize">
@@ -211,8 +239,13 @@ Catpow.Customize.Shadow = (props) => {
 								</DataSet>
 							</>
 						)}
-						<DataSet values={[offsetValues]} labels={labels} steps={offsetSteps} onChange={([offsetValues]) => update({ values: { [h]: { offsetValues } } })}>
-							<LineChartInput width={400} height={200} />
+						<DataSet
+							values={[offsetValues]}
+							labels={labels}
+							steps={rolesByShorthand[h].isTextShadow ? textOffsetSteps : offsetSteps}
+							onChange={([offsetValues]) => update({ values: { [h]: { offsetValues } } })}
+						>
+							<LineChartInput width={400} height={rolesByShorthand[h].isTextShadow ? 100 : 200} />
 							<DataTable />
 						</DataSet>
 					</>

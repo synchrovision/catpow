@@ -28,6 +28,13 @@ class style_config{
 			'ui'=>['label'=>'UI','shorthand'=>'u','sampleValues'=>[22,21,20,19,18,17]],
 			'caption'=>['label'=>'注釈','shorthand'=>'c','sampleValues'=>[19,18,17,16,15,14]],
 		],
+		$text_role_variants=[
+			'h'=>'見出し',
+			'l'=>'リード文',
+			'p'=>'本文',
+			'u'=>'UI',
+			'c'=>'注釈',
+		],
 		$size_variants_3=[
 			's'=>'small',
 			'm'=>'medium',
@@ -283,6 +290,13 @@ class style_config{
 					'ol'=>'外大',
 				],
 				'defaultValues'=>array_pad([],6,'none')
+			],
+			'text'=>[
+				'label'=>'テキスト',
+				'shorthand'=>'t',
+				'isTextShadow'=>true,
+				'variants'=>self::$text_role_variants,
+				'defaultValues'=>array_pad([],5,'none')
 			]
 		]);
 	}
