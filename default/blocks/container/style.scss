@@ -14,12 +14,6 @@
 	&.has-border{
 		@include bdr((s:s,w:c-f,c:l));
 	}
-	&.has-inset-shadow{
-		@include shd((b:-4));
-	}
-	&.has-outset-shadow{
-		@include shd((b:4));
-	}
 	&.has-scroll-x{
 		@include bnd((mxw:f,ox:a));
 		#{$block}__body{

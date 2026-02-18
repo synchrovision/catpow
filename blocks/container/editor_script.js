@@ -37,16 +37,7 @@
             label: __("\u30DC\u30FC\u30C0\u30FC", "catpow"),
             values: "hasBorder"
           },
-          {
-            name: "shadow",
-            type: "buttons",
-            label: __("\u5F71", "catpow"),
-            values: {
-              hasNoShadow: __("\u306A\u3057", "catpow"),
-              hasInsetShadow: __("\u5185\u5074", "catpow"),
-              hasOutsetShadow: __("\u5916\u5074", "catpow")
-            }
-          },
+          "boxShadow",
           {
             name: "scrollX",
             label: __("\u30B9\u30AF\u30ED\u30FC\u30EBX", "catpow"),

@@ -13,12 +13,6 @@
   border-width: var(--cp-border-width-c-f);
   border-color: hsla(var(--cp-tones-l-h),var(--cp-tones-l-s),var(--cp-tones-l-l),var(--cp-tones-l-a,1));
 }
-.wp-block-catpow-container.has-inset-shadow {
-  box-shadow: 0 4px 9px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1)) inset;
-}
-.wp-block-catpow-container.has-outset-shadow {
-  box-shadow: 0 4px 9px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
-}
 .wp-block-catpow-container.has-scroll-x {
   overflow-x: auto;
 }

@@ -37,16 +37,7 @@ wp.blocks.registerBlockType("catpow/container", {
 					label: __("ボーダー", "catpow"),
 					values: "hasBorder",
 				},
-				{
-					name: "shadow",
-					type: "buttons",
-					label: __("影", "catpow"),
-					values: {
-						hasNoShadow: __("なし", "catpow"),
-						hasInsetShadow: __("内側", "catpow"),
-						hasOutsetShadow: __("外側", "catpow"),
-					},
-				},
+				"boxShadow",
 				{
 					name: "scrollX",
 					label: __("スクロールX", "catpow"),
