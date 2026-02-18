@@ -7,12 +7,10 @@
 	@extend %frame-component;
 	@include bnd((mgi:a));
 	@include txt((a:c));
-	@include shd((b:2));
 	&__title{
 		@extend %heading-block;
 		@extend %heading;
 		@include bnd((pdb:.25em));
-		@include txt((p:1.5em,f:h));
 		@include bdr((p:b,s:s,w:1));
 	}
 	&__lead{
@@ -21,14 +19,16 @@
 	}
 	&__items{
 		@include bnd((pd:2em 0));
-		@include txt((p:.8em,l:n));
+		@include txt((l:n));
 		&-item{
 			&-title{
-				@include bnd((mgb:.5em));
-				@include txt((p:1.5em,f:h));
+				@extend %heading-block;
+				@extend %heading;
+				@include bnd((mgt:0));
 			}
 			&-lead{
-				@include txt((p:1em));
+				@extend %lead-block;
+				@extend %lead;
 			}
 			&-link{
 				@include bnd((mg:.25em a));
@@ -46,7 +46,7 @@
 				}
 			}
 			&-caption{
-				@include txt((p:.8em));
+				@extend %caption;
 			}
 		}
 	}

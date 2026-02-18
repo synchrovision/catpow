@@ -4,13 +4,15 @@
 	},
 };
 
+const getSubHeadingTag = (HeadingTag) => HeadingTag.replace(/h(\d)/, (m, num) => `h${Math.min(parseInt(num) + 1, 6)}`);
+
 wp.blocks.registerBlockType("catpow/contactinfo", {
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { useState, useMemo, useEffect } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { classes, HeadingTag = "h3", items = [], title, lead, caption, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { classes, HeadingTag = "h3", itemsClasses, items = [], title, lead, caption, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 		const primaryClass = "wp-block-catpow-contactinfo";
 		const { bem, classNamesToFlags, flagsToClassNames } = Catpow.util;
 
@@ -20,8 +22,10 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
+				"headingTag",
 				"level",
 				"color",
+				"hasContentWidth",
 				{ name: "title", label: "タイトル", values: "hasTitle" },
 				{ name: "lead", label: "リード", values: "hasLead" },
 				{ name: "caption", label: "キャプション", values: "hasCaption" },
@@ -31,7 +35,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 					values: "hasIcon",
 					sub: [{ input: "icon" }],
 				},
-				{ name: "itemTitle", label: "個別タイトル", values: "hasItemTitle" },
+				{ name: "itemTitle", label: "個別タイトル", values: "hasItemTitle", sub: [{ name: "itemsLevel", preset: "level", classKey: "itemsClasses" }] },
 				{ name: "itemLead", label: "個別リード", values: "hasItemLead" },
 				{
 					name: "itemCaption",
@@ -61,8 +65,6 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 		}, [len > 1]);
 
 		const blockProps = useBlockProps({ className: classes });
-
-		console.log({ items });
 
 		return (
 			<>
@@ -127,7 +129,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 											value={lead}
 										/>
 									)}
-									<ul className="_items">
+									<ul className={itemsClasses}>
 										{[...Array(len).keys()].map((i) => {
 											const index = i % items.length;
 											const item = items[index];
@@ -135,7 +137,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 												<CP.Item className="_item" tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={i}>
 													{states.hasItemTitle && (
 														<RichText
-															tagName="h4"
+															tagName={getSubHeadingTag(HeadingTag)}
 															className="_title"
 															placeholder="Input Title"
 															onChange={(title) => {
@@ -207,7 +209,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 	},
 	save({ attributes }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { classes, HeadingTag = "h3", items = [], title, lead, caption, doLoop } = attributes;
+		const { classes, HeadingTag = "h3", itemsClasses, items = [], title, lead, caption, doLoop } = attributes;
 		const states = Catpow.util.classNamesToFlags(classes);
 
 		const { linkKeys } = CP.config.contactinfo;
@@ -220,11 +222,11 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 					<div {...useBlockProps.save({ className: classes })}>
 						{states.hasTitle && <RichText.Content tagName={HeadingTag} className="_title" value={title} />}
 						{states.hasLead && <RichText.Content tagName="p" className="_lead" value={lead} />}
-						<ul className="_items">
+						<ul className={itemsClasses}>
 							{items.map((item, index) => {
 								return (
 									<li className="_item" key={index}>
-										{states.hasItemTitle && <RichText.Content tagName="h4" className="_title" value={item.title} />}
+										{states.hasItemTitle && <RichText.Content tagName={getSubHeadingTag(HeadingTag)} className="_title" value={item.title} />}
 										{states.hasItemLead && <RichText.Content tagName="p" className="_lead" value={item.lead} />}
 										<CP.Link className="_link" attr={attributes} keys={linkKeys.link} index={index} {...CP.extractEventDispatcherAttributes("catpow/contactinfo", item)}>
 											{states.hasIcon && <CP.OutputIcon className="_icon" item={attributes} />}

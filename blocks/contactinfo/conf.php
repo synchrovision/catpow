@@ -4,8 +4,11 @@ $filters=[
 	"iconHolder"=>["selector"=>".{$block_class}__items-item-link-icon"]
 ];
 $attributes=[
-	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} is-size-medium has-title has-lead has-caption"],
+	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} is-level3 is-size-medium has-title has-lead has-caption"],
 	'HeadingTag'=>['type'=>'string','default'=>'h3'],
+
+	"itemsClasses"=>["source"=>"attribute","selector"=>".{$block_class}__items","attribute"=>"class","default"=>"{$block_class}__items is-level4"],
+	'SubHeadingTag'=>['type'=>'string','default'=>'h4'],
 	
 	"title"=>["source"=>"html","selector"=>".{$block_class}__title","default"=>"Title"],
 	"lead"=>["source"=>"html","selector"=>".{$block_class}__lead","default"=>"Lead"],
