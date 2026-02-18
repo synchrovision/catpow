@@ -8,6 +8,7 @@
 	"dependencies": {
 		"@svgr/core": "*",
 		"clsx": "*",
+		"culori": "^4.0.2",
 		"esbuild": "*",
 		"esbuild-plugin-inline-import": "*",
 		"js-cookie": "*",
