@@ -13,8 +13,8 @@
 		&-thead,&-tbody{
 			&-tr{
 				&-th,&-td{
-					.CP-ItemControl{
-						@include bnd((w:70));
+					.cp-itemcontrol{
+						@include bnd((w:70,h:fit));
 						#{$block}:not(.do-transposition) &.is-control-column,
 						#{$block}.do-transposition &.is-control-row{
 							@include bnd((p:a,i:0,mg:a,mgb:-20));
