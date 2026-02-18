@@ -10,6 +10,19 @@ use Spatie\Color\Rgba;
 use Spatie\Color\Factory;
 
 class style_config{
+	public static 
+		$control_names=[
+			'color',
+			'size',
+			'font_family',
+			'font_weight',
+			'font_size',
+			'border_width',
+			'border_radius',
+			'line_height',
+			'letter_spacing',
+			'shadow'
+		];
 	protected static
 		$color_roles,
 		$size_roles,
@@ -94,7 +107,7 @@ class style_config{
 				'shorthand'=>'c',
 				'var'=>'--cp-content-width',
 				'variants'=>self::$size_variants_3,'type'=>'size',
-				'group'=>'contentsSize',
+				'group'=>'コンテンツサイズ',
 				'defaultValues'=>['min(90vw,40rem)','min(95vw,60rem)','min(98vw,80rem)']
 			],
 			'item'=>[
@@ -102,14 +115,14 @@ class style_config{
 				'shorthand'=>'i',
 				'var'=>'--cp-item-size',
 				'variants'=>self::$size_variants_3,'type'=>'sizeRelative',
-				'group'=>'contentsSize',
+				'group'=>'コンテンツサイズ',
 				'defaultValues'=>['10em','15em','20em']
 			],
 			'spread'=>[
 				'label'=>'余白',
 				'shorthand'=>'sp',
 				'variants'=>self::$component_variants,'type'=>'paddingRelative',
-				'group'=>'spread',
+				'group'=>'コンポーネント余白',
 				'defaultValues'=>['0.5em 1em','0.5em 1em','0.5em 1em','0.5em 1em','0.5em 1em','0.5em 1em','0.5em 1em']
 			],
 			'margin'=>[
@@ -117,7 +130,7 @@ class style_config{
 				'shorthand'=>'mg',
 				'var'=>'--cp-margin',
 				'variants'=>self::$size_variants_5,'type'=>'spacingeRelative',
-				'group'=>'staticSpacing',
+				'group'=>'指定間隔・余白',
 				'defaultValues'=>['0.5em','1em','2em','4em','8em']
 			],
 			'padding'=>[
@@ -125,7 +138,7 @@ class style_config{
 				'shorthand'=>'pd',
 				'var'=>'--cp-padding',
 				'variants'=>self::$size_variants_5,'type'=>'spacingeRelative',
-				'group'=>'staticSpacing',
+				'group'=>'指定間隔・余白',
 				'defaultValues'=>['0.5em','1em','2em','4em','8em']
 			],
 		];
@@ -135,7 +148,7 @@ class style_config{
 			'shorthand'=>'%smgt',
 			'var'=>'--cp-%s-margin-top',
 			'type'=>'spacing',
-			'group'=>'textBlockMarginTop'
+			'group'=>'テキスト上マージン'
 		]);
 		$text_block_margin_bottom_sizes=self::generate_text_block_roles(function($v){return sprintf("min(%svw,%srem)",$v/4,$v/16);},true,[
 			'name'=>'%s_margin_bottom',
@@ -143,7 +156,7 @@ class style_config{
 			'shorthand'=>'%smgb',
 			'var'=>'--cp-%s-margin-bottom',
 			'type'=>'spacing',
-			'group'=>'textBlockMarginBottom'
+			'group'=>'テキスト下マージン'
 		]);
 		$contents_padding_sizes=[
 			'section_padding'=>[
@@ -152,7 +165,7 @@ class style_config{
 				'var'=>'--cp-section-padding',
 				'variants'=>self::$level_variants,
 				'type'=>'paddingVertical',
-				'group'=>'contentsPadding',
+				'group'=>'コンテンツ余白',
 				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) 0 min(%1$svw,%2$srem)',$n,$n/4),range(6,1))
 			],
 			'frame_padding'=>[
@@ -161,7 +174,7 @@ class style_config{
 				'var'=>'--cp-frame-padding',
 				'variants'=>self::$level_variants,
 				'type'=>'padding',
-				'group'=>'contentsPadding',
+				'group'=>'コンテンツ余白',
 				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) min(%1$svw,%2$srem)',$n,$n/4),range(6,1))
 			],
 			'item_padding'=>[
@@ -170,7 +183,7 @@ class style_config{
 				'var'=>'--cp-item-padding',
 				'variants'=>self::$level_variants,
 				'type'=>'padding',
-				'group'=>'contentsPadding',
+				'group'=>'コンテンツ余白',
 				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) min(%1$svw,%2$srem)',$n,$n/4),range(6,1))
 			]
 		];
@@ -181,7 +194,7 @@ class style_config{
 				'var'=>'--cp-item-gap',
 				'variants'=>self::$level_variants,
 				'type'=>'gap',
-				'group'=>'Gap',
+				'group'=>'アイテム間隔・セル余白',
 				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) min(%1$svw,%2$srem)',$n,$n/4),range(6,1))
 			],
 			'cell_padding'=>[
@@ -190,7 +203,7 @@ class style_config{
 				'var'=>'--cp-cell-padding',
 				'variants'=>self::$level_variants,
 				'type'=>'gap',
-				'group'=>'Gap',
+				'group'=>'アイテム間隔・セル余白',
 				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) min(%1$svw,%2$srem)',$n,$n/4),range(6,1))
 			],
 		];
