@@ -224,41 +224,38 @@ export const selectiveClassesPresets = {
 		label: __("太字", "catpow"),
 		values: "hasFontWeightSafeBold",
 	},
-	hasBoxShadow({ preset, vars = "vars", ...otherParams }) {
-		return {
-			name: "hasBoxShadow",
-			label: __("影", "catpow"),
-			values: "hasBoxShadow",
-			sub: [
-				{ label: __("内側", "catpow"), values: "hasBoxShadowInset" },
-				{ preset: "boxShadow", vars, label: null },
-			],
-			...otherParams,
-		};
-	},
-	boxShadow(preset, vars = "vars", ...otherParams) {
-		return {
-			name: "boxShadow",
-			type: "buttons",
-			label: __("影", "catpow"),
-			values: {
-				hasBoxShadowSmall: __("小", "catpow"),
-				hasBoxShadowMedium: __("中", "catpow"),
-				hasBoxShadowLarge: __("大", "catpow"),
-				hasBoxShadowCustom: ":admin-generic:",
-			},
-			sub: {
-				hasBoxShadowCustom: [
-					{
-						name: "boxShadow",
-						input: "text",
-						vars,
-						key: "--cp-box-shadow-custom",
+	boxShadow: {
+		name: "boxShadow",
+		type: "buttons",
+		label: __("影", "catpow"),
+		values: {
+			hasBoxShadowInset: __("内", "catpow"),
+			hasBoxShadowOutset: __("外", "catpow"),
+		},
+		sub: {
+			hasBoxShadowInset: [
+				{
+					name: "boxShadowInset",
+					type: "buttons",
+					values: {
+						hasBoxShadowInsetSmall: __("小", "catpow"),
+						hasBoxShadowInsetMedium: __("中", "catpow"),
+						hasBoxShadowInsetLarge: __("大", "catpow"),
 					},
-				],
-			},
-			...otherParams,
-		};
+				},
+			],
+			hasBoxShadowOutset: [
+				{
+					name: "boxShadowOutset",
+					type: "buttons",
+					values: {
+						hasBoxShadowSmall: __("小", "catpow"),
+						hasBoxShadowMedium: __("中", "catpow"),
+						hasBoxShadowLarge: __("大", "catpow"),
+					},
+				},
+			],
+		},
 	},
 	hasTextShadow({ preset, vars = "vars", ...otherParams }) {
 		return {
