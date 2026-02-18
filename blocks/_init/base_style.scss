@@ -23,6 +23,7 @@ $colors:(
 .cp{
 	&-label{
 		@include bnd((w:fit,mgl:a,pd:.25em,ac:c));
+		@include flx((a:c));
 		@include bg((c:b));
 		@include txt((a:c,p:16,h:1em,f:g,w:r,c:t));
 		@include shd((b:2));

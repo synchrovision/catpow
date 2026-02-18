@@ -824,6 +824,7 @@
     Item: () => Item,
     ItemControl: () => ItemControl,
     ItemControlInfoPanel: () => ItemControlInfoPanel,
+    Label: () => Label,
     Link: () => Link,
     Loop: () => Loop,
     Message: () => Message,
@@ -5051,6 +5052,13 @@
         return /* @__PURE__ */ wp.element.createElement(Component, { ...otherProps, ...item, index, position: loop ? (index - current + l + h) % l - h : index - current, key: index });
       });
     })();
+  };
+
+  // ../blocks/_init/init/CP/components/Label.jsx
+  var Label = (props) => {
+    const { className = "cp-label", icon = "admin-generic", ...otherProps } = props;
+    const { Icon } = wp.components;
+    return /* @__PURE__ */ wp.element.createElement(CP.Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className, ...otherProps }, /* @__PURE__ */ wp.element.createElement(Icon, { icon }), /* @__PURE__ */ wp.element.createElement("span", { className: "_body" }, props.children)));
   };
 
   // ../blocks/_init/init/CP/components/CustomColorVars.jsx

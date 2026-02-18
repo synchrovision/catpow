@@ -18,6 +18,11 @@
   margin-left: auto;
   padding: 0.25em;
   align-content: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
   background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
   text-align: center;
   font-size: 1rem;

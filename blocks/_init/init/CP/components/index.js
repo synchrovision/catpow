@@ -47,6 +47,7 @@ export * from "./PlacedPictures.jsx";
 export * from "./Link.jsx";
 export * from "./RTF.jsx";
 export * from "./Loop.jsx";
+export * from "./Label.jsx";
 export * from "./CustomColorVars";
 export * from "./Message.jsx";
 export * from "./NavBar.jsx";
