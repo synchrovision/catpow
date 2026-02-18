@@ -44,10 +44,7 @@
 		return (
 			<>
 				<div {...useBlockProps({ className: "wp-block-catpow-app" })}>
-					<div className="cp-label">
-						<Icon icon="admin-generic" />
-						{content_path}
-					</div>
+					<CP.Label icon="admin-generic">{content_path}</CP.Label>
 					<CP.ServerSideRender block="catpow/app" attributes={attributes} />
 				</div>
 				<InspectorControls>

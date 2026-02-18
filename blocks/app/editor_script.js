@@ -39,7 +39,7 @@
           setAttributes({ options: options2, props: JSON.stringify(newProps) });
         });
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: "wp-block-catpow-app" }) }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "admin-generic" }), content_path), /* @__PURE__ */ wp.element.createElement(CP.ServerSideRender, { block: "catpow/app", attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: "wp-block-catpow-app" }) }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "admin-generic" }, content_path), /* @__PURE__ */ wp.element.createElement(CP.ServerSideRender, { block: "catpow/app", attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" }, /* @__PURE__ */ wp.element.createElement(
         TreeSelect,
         {
           label: "path",
