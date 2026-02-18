@@ -15,19 +15,19 @@
 		],
 	},
 	example: CP.example,
-	edit({ attributes, className, setAttributes }) {
-		const { InnerBlocks, InspectorControls } = wp.blockEditor;
-		const { PanelBody, SelectControl, TextareaControl } = wp.components;
+	edit({ attributes, setAttributes }) {
+		const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
+		const { Icon, PanelBody, SelectControl, TextareaControl } = wp.components;
 		return (
 			<>
-				<div className="cp-embeddedcontent">
-					<div className="label">
+				<div {...useBlockProps({ className: "wp-block-catpow-cond" })}>
+					<CP.Label icon="admin-generic">
 						表示条件：
 						{attributes.schedule}
 						{attributes.is_user_logged_in != 0 && "ログイン" + (attributes.is_user_logged_in == 1 ? "している" : "していない")}
 						{attributes.input_value}
 						{attributes.content_value}
-					</div>
+					</CP.Label>
 					<InnerBlocks />
 				</div>
 				<InspectorControls>
@@ -59,7 +59,7 @@
 		);
 	},
 
-	save({ attributes, className, setAttributes }) {
+	save({}) {
 		const { InnerBlocks } = wp.blockEditor;
 		return <InnerBlocks.Content />;
 	},
