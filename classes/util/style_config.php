@@ -483,7 +483,7 @@ class style_config{
 	}
 	public static function resolve_css_vars($css_code){
 		$vars=self::get_css_vars()['all'];
-		return preg_replace_callback('/var\((\-\-[\w\-]+)(,\w+)?\)/',function($matches)use($vars){
+		return preg_replace_callback('/var\((\-\-[\w\-]+)(,([^()]+|[^()]*\((?3)*\))+)?\)/',function($matches)use($vars){
 			if(isset($vars[$matches[1]])){return $vars[$matches[1]];}
 			return $matches[0];
 		},$css_code);
