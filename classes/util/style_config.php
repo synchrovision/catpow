@@ -24,16 +24,7 @@ class style_config{
 			'shadow'
 		];
 	protected static
-		$color_roles,
-		$size_roles,
-		$font_family_roles,
-		$font_weight_roles,
-		$font_size_roles,
-		$border_radius_roles,
-		$border_width_roles,
-		$line_height_roles,
-		$letter_spacing_roles,
-		$shadow_roles,
+		$roles=[],
 		$text_block_roles=[
 			'heading'=>['label'=>'見出し','shorthand'=>'h','sampleValues'=>[28,26,24,23,22,21]],
 			'lead'=>['label'=>'リード文','shorthand'=>'l','sampleValues'=>[21,20,19,18,17,16]],
@@ -81,8 +72,8 @@ class style_config{
 
 	//roles
 	public static function get_color_roles(){
-		if(isset(static::$color_roles)){return static::$color_roles;}
-		return static::$color_roles=apply_filters('cp_color_roles',[
+		if(isset(static::$roles['color'])){return static::$roles['color'];}
+		return static::$roles['color']=apply_filters('cp_color_roles',[
 			'background'=>['label'=>'背景','default'=>'#ffffff','shorthand'=>'b','extend'=>true,'invert'=>'m'],
 			'sheet'=>['label'=>'強調背景','default'=>'#F8F6F4','shorthand'=>'s','extend'=>true,'invert'=>'a'],
 			'text'=>['label'=>'文字','default'=>'#666666','shorthand'=>'t','extend'=>true,'invert'=>'i'],
@@ -100,7 +91,7 @@ class style_config{
 		]);
 	}
 	public static function get_size_roles(){
-		if(isset(static::$size_roles)){return static::$size_roles;}
+		if(isset(static::$roles['size'])){return static::$roles['size'];}
 		$static_sizes=[
 			'contents'=>[
 				'label'=>'コンテンツ',
@@ -207,7 +198,7 @@ class style_config{
 				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) min(%1$svw,%2$srem)',$n,$n/4),range(6,1))
 			],
 		];
-		return static::$size_roles=apply_filters('cp_size_roles',array_merge(
+		return static::$roles['size']=apply_filters('cp_size_roles',array_merge(
 			$static_sizes,
 			$text_block_margin_top_sizes,
 			$text_block_margin_bottom_sizes,
@@ -216,7 +207,7 @@ class style_config{
 		));
 	}
 	public static function get_font_family_roles(){
-		if(isset(static::$font_family_roles)){return static::$font_family_roles;}
+		if(isset(static::$roles['font_family'])){return static::$roles['font_family'];}
 		$block_font_family_roles=self::generate_text_block_roles([
 			'sans-serif','sans-serif','sans-serif','sans-serif','sans-serif'
 		]);
@@ -229,17 +220,17 @@ class style_config{
 			'script'=>['label'=>'手書き','default'=>'cursive','shorthand'=>'sc'],
 			'strong'=>['label'=>'強調','default'=>'sans-serif','shorthand'=>'st']
 		];
-		return static::$font_family_roles=apply_filters('cp_font_family_roles',array_merge(
+		return static::$roles['font_family']=apply_filters('cp_font_family_roles',array_merge(
 			$block_font_family_roles,
 			$format_font_family_roles
 		));
 	}
 	public static function get_font_weight_roles(){
-		if(isset(static::$font_weight_roles)){return static::$font_weight_roles;}
-		return static::$font_weight_roles=apply_filters('cp_font_weight_roles',self::generate_text_block_roles(['700','400','400','700','400']));
+		if(isset(static::$roles['font_weight'])){return static::$roles['font_weight'];}
+		return static::$roles['font_weight']=apply_filters('cp_font_weight_roles',self::generate_text_block_roles(['700','400','400','700','400']));
 	}
 	public static function get_font_size_roles(){
-		if(isset(static::$font_size_roles)){return static::$font_size_roles;}
+		if(isset(static::$roles['font_size'])){return static::$roles['font_size'];}
 		$static_size_roles=self::generate_text_block_roles(function($v){return sprintf("min(%svw,%srem)",$v/4,$v/16);},true);
 		$relative_size_roles=[
 			'x-small'=>['label'=>'極小','default'=>'75%','shorthand'=>'xsm','relative'=>true],
@@ -247,14 +238,14 @@ class style_config{
 			'large'=>['label'=>'大','default'=>'110%','shorthand'=>'lg','relative'=>true],
 			'x-large'=>['label'=>'極大','default'=>'125%','shorthand'=>'xlg','relative'=>true],
 		];
-		return static::$font_size_roles=apply_filters('cp_font_size_roles',array_merge(
+		return static::$roles['font_size']=apply_filters('cp_font_size_roles',array_merge(
 			$static_size_roles,
 			$relative_size_roles
 		));
 	}
 	public static function get_border_width_roles(){
-		if(isset(static::$border_width_roles)){return static::$border_width_roles;}
-		return static::$border_width_roles=apply_filters('cp_border_width_roles',[
+		if(isset(static::$roles['border_width'])){return static::$roles['border_width'];}
+		return static::$roles['border_width']=apply_filters('cp_border_width_roles',[
 			'component'=>[
 				'label'=>'コンポーネント',
 				'shorthand'=>'c',
@@ -264,8 +255,8 @@ class style_config{
 		]);
 	}
 	public static function get_border_radius_roles(){
-		if(isset(static::$border_radius_roles)){return static::$border_radius_roles;}
-		return static::$border_radius_roles=apply_filters('cp_border_radius_roles',[
+		if(isset(static::$roles['border_radius'])){return static::$roles['border_radius'];}
+		return static::$roles['border_radius']=apply_filters('cp_border_radius_roles',[
 			'component'=>[
 				'label'=>'コンポーネント',
 				'shorthand'=>'c',
@@ -275,16 +266,16 @@ class style_config{
 		]);
 	}
 	public static function get_line_height_roles(){
-		if(isset(static::$line_height_roles)){return static::$line_height_roles;}
-		return static::$line_height_roles=apply_filters('cp_line_height_roles',self::generate_text_block_roles("150%"));
+		if(isset(static::$roles['line_height'])){return static::$roles['line_height'];}
+		return static::$roles['line_height']=apply_filters('cp_line_height_roles',self::generate_text_block_roles("150%"));
 	}
 	public static function get_letter_spacing_roles(){
-		if(isset(static::$letter_spacing_roles)){return static::$letter_spacing_roles;}
-		return static::$letter_spacing_roles=apply_filters('cp_letter_spacing_roles',self::generate_text_block_roles("normal"));
+		if(isset(static::$roles['letter_spacing'])){return static::$roles['letter_spacing'];}
+		return static::$roles['letter_spacing']=apply_filters('cp_letter_spacing_roles',self::generate_text_block_roles("normal"));
 	}
 	public static function get_shadow_roles(){
-		if(isset(static::$shadow_roles)){return static::$shadow_roles;}
-		return static::$shadow_roles=apply_filters('cp_shadow_roles',[
+		if(isset(static::$roles['shadow'])){return static::$roles['shadow'];}
+		return static::$roles['shadow']=apply_filters('cp_shadow_roles',[
 			'component'=>[
 				'label'=>'コンポーネント',
 				'shorthand'=>'c',
