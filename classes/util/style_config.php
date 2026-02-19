@@ -515,45 +515,23 @@ class style_config{
 		return $rtn;
 	}
 	public static function init_config_json(){
-		$colors=array_merge(
-			array_column(static::get_color_roles(),'default','shorthand'),
-			static::get_config_json('colors')
-		);
-		static::set_config_json('colors',$colors);
-		$tones=self::fill_tones_data(static::get_tones($colors));
-		static::set_config_json('tones',$tones);
-		static::set_config_json('font_family',array_merge(
-			array_column(static::get_font_family_roles(),'default','shorthand'),
-			static::get_config_json('font_family')
-		));
-		static::set_config_json('font_weight',array_merge(
-			array_column(static::get_font_weight_roles(),'default','shorthand'),
-			static::get_config_json('font_weights')
-		));
-		static::set_config_json('font_size',array_merge(
-			array_column(static::get_font_size_roles(),'default','shorthand'),
-			static::get_config_json('font_size')
-		));
-		static::set_config_json('border_radius',array_merge(
-			array_column(static::get_border_radius_roles(),'default','shorthand'),
-			static::get_config_json('border_radius')
-		));
-		static::set_config_json('border_width',array_merge(
-			array_column(static::get_border_width_roles(),'default','shorthand'),
-			static::get_config_json('border_width')
-		));
-		static::set_config_json('size',array_merge(
-			array_column(static::get_size_roles(),'default','shorthand'),
-			static::get_config_json('size')
-		));
-		static::set_config_json('line_height',array_merge(
-			array_column(static::get_line_height_roles(),'default','shorthand'),
-			static::get_config_json('line_height')
-		));
-		static::set_config_json('letter_spacing',array_merge(
-			array_column(static::get_letter_spacing_roles(),'default','shorthand'),
-			static::get_config_json('letter_spacing')
-		));
+		foreach(self::$control_names as $control_name){
+			if($control_name==='color'){
+				$colors=array_merge(
+					array_column(static::get_color_roles(),'default','shorthand'),
+					static::get_config_json('colors')
+				);
+				static::set_config_json('colors',$colors);
+				$tones=self::fill_tones_data(static::get_tones($colors));
+				static::set_config_json('tones',$tones);
+			}
+			else{
+				static::set_config_json($control_name,array_merge(
+					array_column(static::{'get_'.$control_name.'_roles'}(),'default','shorthand'),
+					static::get_config_json($control_name)
+				));
+			}
+		}
 	}
 	public static function update_config_json($domain,$data){
 		if($domain==='colors'){
