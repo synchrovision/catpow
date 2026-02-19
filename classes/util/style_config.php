@@ -437,14 +437,7 @@ class style_config{
 		if(isset($code)){return $code;}
 		$code=':root{';
 		foreach(self::get_css_vars() as $key=>$val){
-			$code.='';
-			if(is_array($val)){
-				$code.=sprintf('%s:%s;',$key,$val[0]);
-				$altCode.=sprintf('%s:%s;',$key,$val[1]);
-			}
-			else{
-				$code.=sprintf('%s:%s;',$key,$val);
-			}
+			$code.=sprintf('%s:%s;',$key,$val);
 		}
 		$code.='}';
 		return $code;
