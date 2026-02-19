@@ -384,20 +384,12 @@ class style_config{
 		if(isset($css_vars)){return $css_vars;}
 		$roles=static::get_color_roles();
 		$css_vars=[];
-		$vars=apply_filters('cp_css_vars',[
-			'tones'=>self::get_config_json('tones'),
-			'colors'=>self::get_config_json('colors'),
-			'size'=>self::get_config_json('size'),
-			'font'=>self::get_config_json('font'),
-			'font-family'=>self::get_config_json('font_family'),
-			'font-weight'=>self::get_config_json('font_weight'),
-			'font-size'=>self::get_config_json('font_size'),
-			'border-radius'=>self::get_config_json('border_radius'),
-			'border-width'=>self::get_config_json('border_width'),
-			'line-height'=>self::get_config_json('line_height'),
-			'letter-spacing'=>self::get_config_json('letter_spacing'),
-			'shadow'=>self::get_config_json('shadow'),
-		]);
+		$vars=[];
+		foreach(self::$control_names as $control_name){
+			$vars[strtr($control_name,['_'=>'-'])]=self::get_config_json($control_name);
+		}
+		$vars['tones']=self::get_config_json('tones');
+		$vars==apply_filters('cp_css_vars',$vars);
 		if(isset($vars['tones']['i'])){
 			foreach($roles as $role){
 				if(!empty($role['invert'])){
