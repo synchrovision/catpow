@@ -43,57 +43,33 @@ class scss{
 		$font_roles=util\style_config::get_font_family_roles();
 		$colors=get_theme_mod('colors');
 		$fonts=get_theme_mod('fonts');
-		$theme_customize_values=[
-			'header_image'=>get_header_image(),
-			'background_image'=>get_background_image()
-		];
-		foreach($color_roles as $color_role=>$color_role_settings){
-			$theme_customize_values[$color_role.'_color']=$colors[$color_role]??$color_role_settings['default'];
-		}
-		foreach($font_roles as $font_role=>$font_role_settings){
-			$theme_customize_values[$font_role.'_font']=$fonts[$font_role]??$font_role_settings['default'];
-		}
-		$scssc->addVariables(array_map(function($val){return [TYPE::T_KEYWORD,$val];},$theme_customize_values));
 		$scssc->registerFunction('debug',function($args){
 			error_log(var_export($args,1));
 			return false;
 		});
-		$scssc->registerFunction('get_real_type',function($args){
+		$scssc->registerFunction('get-real-type',function($args){
 			return [TYPE::T_KEYWORD,$args[0][0]];
 		});
-		$scssc->registerFunction('embed_svg',function($args)use($scssc){
+		$scssc->registerFunction('embed-svg',function($args)use($scssc){
 			if($f=CP::get_file_path($args[0][2][0])){
 				return sprintf('data:image/svg+xml;base64,%s',base64_encode(file_get_contents($f)));
 			}
 			return false;
 		});
-		$scssc->registerFunction('embed_image',function($args)use($scssc){
+		$scssc->registerFunction('embed-image',function($args)use($scssc){
 			if($f=CP::get_file_path($args[0][2][0])){
 				return sprintf('data:%s;base64,%s',mime_content_type($f),base64_encode(file_get_contents($f)));
 			}
 			return false;
 		});
-		$scssc->registerFunction('export_colors',function($args){
+		$scssc->registerFunction('export-colors',function($args){
 			static::export_map_data('colors',$args);
 		});
-		$scssc->registerFunction('export_fonts',function($args){
+		$scssc->registerFunction('export-fonts',function($args){
 			static::export_map_data('fonts',$args);
 		});
-		$scssc->registerFunction('import_colors',function($args)use($scssc,$color_roles,$theme_customize_values){
-			foreach($color_roles as $color_role=>$color_role_settings){
-				$colors[$color_role_settings['shorthand']]=$theme_customize_values[$color_role.'_color'];
-			}
-			return self::create_map_data($colors);
-		});
-		$scssc->registerFunction('import_fonts',function($args)use($scssc,$font_roles,$theme_customize_values){
-			$fonts=[];
-			foreach($font_roles as $font_role=>$font_role_settings){
-				$fonts[$font_role_settings['shorthand']]=$theme_customize_values[$font_role.'_font'];
-			}
-			return self::create_map_data($fonts);
-		});
 		if($for_admin || apply_filters('cp_use_css_vars',true)){
-			$scssc->registerFunction('translate_color',function($args)use($color_roles_by_shorthand,$scssc){
+			$scssc->registerFunction('translate-color',function($args)use($color_roles_by_shorthand,$scssc){
 				$args=array_map([$scssc,'compileValue'],$args);
 				$color=false;
 				$available_tone_keys=[];
@@ -152,7 +128,7 @@ class scss{
 				if(empty($color)){return Compiler::$false;}
 				return [TYPE::T_KEYWORD,$color];
 			});
-			$scssc->registerFunction('get_color_classes',function($args)use($color_roles_by_shorthand,$scssc){
+			$scssc->registerFunction('get-color-classes',function($args)use($color_roles_by_shorthand,$scssc){
 				//@todo: reduce code
 				$classes=[];
 				foreach($color_roles_by_shorthand as $key=>$color_role){
@@ -197,7 +173,7 @@ class scss{
 				}
 				return self::create_map_data($classes);
 			});
-			$scssc->registerFunction('extract_color_tone',function($args)use($scssc){
+			$scssc->registerFunction('extract-color-tone',function($args)use($scssc){
 				$args=array_map([$scssc,'compileValue'],$args);
 				$tones=util\style_config::get_config_json('tones');
 				$tone=null;
@@ -218,15 +194,14 @@ class scss{
 				$tone=apply_filters('cp_extract_color_tone',$tone,$args);
 				return self::create_map_data($tone);
 			});
-			self::register_translation_for_role($scssc,'size',['ph'=>'var(--cp-page-content-height)','pt'=>'var(--cp-page-top-offset)','pb'=>'var(--cp-page-bottom-offset)']);
-			self::register_translation_for_role($scssc,'font_family',['mi'=>'Material Icons','di'=>'dashicons']);
-			self::register_translation_for_role($scssc,'font_size');
-			//self::register_translation_for_role($scssc,'font_weight');
-			self::register_translation_for_role($scssc,'border_radius');
-			self::register_translation_for_role($scssc,'border_width');
-			self::register_translation_for_role($scssc,'line_height');
-			self::register_translation_for_role($scssc,'letter_spacing');
-			self::register_translation_for_role($scssc,'shadow');
+			$additionals=[
+				'size'=>['ph'=>'var(--cp-page-content-height)','pt'=>'var(--cp-page-top-offset)','pb'=>'var(--cp-page-bottom-offset)'],
+				'font_family'=>['mi'=>'Material Icons','di'=>'dashicons']
+			];
+			foreach(util\style_config::$control_names as $control_name){
+				if($control_name==='color'){continue;}
+				self::register_translation_for_role($scssc,$control_name,$additionals[$control_name]??[]);
+			}
 		}
 		do_action('cp_scss_compiler_init',$scssc);
 		if($for_admin){
@@ -236,12 +211,30 @@ class scss{
 	}
 	protected static function register_translation_for_role($scssc,$role_name,$additional=[]){
 		$roles_by_shorthand=array_column(util\style_config::{'get_'.$role_name.'_roles'}(),null,'shorthand');
-		$scssc->registerFunction('translate_'.$role_name,function($args)use($scssc,$role_name,$roles_by_shorthand,$additional){
+		$primary_role=array_find($roles_by_shorthand,fn($role)=>!empty($role['primary']));
+		if(!empty($primary_role['variants'])){
+			foreach($primary_role['variants'] as $v=>$vl){
+				if(empty($primary_role['subVariants'])){
+					$additional[$v]=empty($primary_role['var'])?
+						sprintf('var(--cp-%s-%s-%s)',str_replace('_','-',$role_name),$primary_role['shorthand'],$v):
+						sprintf('var(%s-%s)',$primary_role['var'],$v);
+				}
+				else{
+					foreach($primary_role['subVariants'] as $sv=>$svl){
+						$additional[$v.'-'.$sv]=empty($primary_role['var'])?
+							sprintf('var(--cp-%s-%s-%s-%s)',str_replace('_','-',$role_name),$primary_role['shorthand'],$v,$sv):
+							sprintf('var(%s-%s-%s)',$role['var'],$v,$sv);
+					}
+				}
+			}
+		}
+		$scssc->registerFunction('translate-'.strtr($role_name,['_'=>'-']),function($args)use($scssc,$role_name,$roles_by_shorthand,$additional){
 			$args=array_map([$scssc,'compileValue'],$args);
 			if(!empty($additional[$args[0]])){
 				$value= $additional[$args[0]];
-			}else{
-				list($h,$v)=explode('-',$args[0].'-');
+			}
+			else{
+				list($h,$v,$sv)=explode('-',$args[0].'--');
 				$value=false;
 				if(isset($roles_by_shorthand[$h])){
 					$role=$roles_by_shorthand[$h];
@@ -250,10 +243,15 @@ class scss{
 							sprintf('var(--cp-%s-%s)',str_replace('_','-',$role_name),$h):
 							sprintf('var(%s)',$role['var']);
 					}
-					else{
+					elseif(empty($sv) || empty($role['subVariants'][$sv])){
 						$value=empty($role['var'])?
 							sprintf('var(--cp-%s-%s-%s)',str_replace('_','-',$role_name),$h,$v):
 							sprintf('var(%s-%s)',$role['var'],$v);
+					}
+					else{
+						$value=empty($role['var'])?
+							sprintf('var(--cp-%s-%s-%s-%s)',str_replace('_','-',$role_name),$h,$v,$sv):
+							sprintf('var(%s-%s-%s)',$role['var'],$v,$sv);
 					}
 				}
 			}
