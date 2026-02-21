@@ -19,9 +19,9 @@ $wp_customize->add_control(new Catpow\customize\control($wp_customize,'colors',[
 ]));
 add_action("customize_save_colors",["Catpow\\util\\style_config",'update']);
 
-//Layout
-$wp_customize->add_section('layout',[
-	'title'=>__('レイアウト','catpow'),
+//Size
+$wp_customize->add_section('size',[
+	'title'=>__('サイズ','catpow'),
 	'priority'=>40
 ]);
 $wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'size',[
@@ -29,12 +29,43 @@ $wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'size',[
 ]));
 $wp_customize->add_control(new Catpow\customize\control($wp_customize,'size',[
 	'type'=>'Sizes',
-	'section'=>'layout',
+	'section'=>'size',
 	'param'=>[
 		'roles'=>style_config::get_size_roles()
 	]
 ]));
 add_action("customize_save_size",["Catpow\\util\\style_config",'update']);
+
+//Spacing
+$wp_customize->add_section('spacing',[
+	'title'=>__('余白・間隔','catpow'),
+	'priority'=>40
+]);
+
+$wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'padding',[
+	'transport'=>'postMessage'
+]));
+$wp_customize->add_control(new Catpow\customize\control($wp_customize,'padding',[
+	'type'=>'Sizes',
+	'section'=>'spacing',
+	'param'=>[
+		'roles'=>style_config::get_padding_roles()
+	]
+]));
+add_action("customize_save_padding",["Catpow\\util\\style_config",'update']);
+
+$wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'margin',[
+	'transport'=>'postMessage'
+]));
+$wp_customize->add_control(new Catpow\customize\control($wp_customize,'margin',[
+	'type'=>'Sizes',
+	'section'=>'spacing',
+	'param'=>[
+		'roles'=>style_config::get_margin_roles()
+	]
+]));
+add_action("customize_save_margin",["Catpow\\util\\style_config",'update']);
+
 
 
 //Font Size
@@ -46,7 +77,7 @@ $wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'font_size
 	'transport'=>'postMessage'
 ]));
 $wp_customize->add_control(new Catpow\customize\control($wp_customize,'font_size',[
-	'type'=>'FontSizes',
+	'type'=>'Sizes',
 	'section'=>'font',
 	'label'=>'文字サイズ',
 	'param'=>[
@@ -54,13 +85,12 @@ $wp_customize->add_control(new Catpow\customize\control($wp_customize,'font_size
 	]
 ]));
 add_action("customize_save_font_size",["Catpow\\util\\style_config",'update']);
-
 //Line Height
 $wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'line_height',[
 	'transport'=>'postMessage'
 ]));
 $wp_customize->add_control(new Catpow\customize\control($wp_customize,'line_height',[
-	'type'=>'LineHeight',
+	'type'=>'Sizes',
 	'section'=>'font',
 	'label'=>'行送り',
 	'param'=>[
@@ -74,7 +104,7 @@ $wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'letter_sp
 	'transport'=>'postMessage'
 ]));
 $wp_customize->add_control(new Catpow\customize\control($wp_customize,'letter_spacing',[
-	'type'=>'LetterSpacing',
+	'type'=>'Sizes',
 	'section'=>'font',
 	'label'=>'文字間隔',
 	'param'=>[
@@ -88,7 +118,7 @@ $wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'font_weig
 	'transport'=>'postMessage'
 ]));
 $wp_customize->add_control(new Catpow\customize\control($wp_customize,'font_weight',[
-	'type'=>'FontWeight',
+	'type'=>'Sizes',
 	'section'=>'font',
 	'label'=>'文字の太さ',
 	'param'=>[
@@ -121,7 +151,7 @@ $wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'border_ra
 	'transport'=>'postMessage'
 ]));
 $wp_customize->add_control(new Catpow\customize\control($wp_customize,'border_radius',[
-	'type'=>'BorderRadius',
+	'type'=>'Sizes',
 	'section'=>'border',
 	'label'=>'角丸',
 	'param'=>[
@@ -135,7 +165,7 @@ $wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'border_wi
 	'transport'=>'postMessage'
 ]));
 $wp_customize->add_control(new Catpow\customize\control($wp_customize,'border_width',[
-	'type'=>'BorderWidth',
+	'type'=>'Sizes',
 	'section'=>'border',
 	'label'=>'線の太さ',
 	'param'=>[

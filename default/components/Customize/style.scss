@@ -15,24 +15,32 @@
 				
 			}
 		}
+		&__title{
+			@include bnd((mg:1em a .5em,pd:.5em 1em));
+			@include bdr((r:1em));
+			@include bg((c:t));
+			@include txt((p:16,w:b,c:white));
+		}
 		&__label{
 			@include bnd((mg:1em a .5em,pd:.5em 1em));
 			@include bdr((r:1em));
-			@include bg((c:t 1 .2));
+			@include bg((c:t 1 .1));
 			@include txt((p:16,w:b));
 		}
 	}
 	&-textinputs{
 		@include bnd((pd:.5em 0));
-		@include grd((tc:a 1fr,g:1em .5em,ai:c));
+		@include grd((tc:a 1fr,g:.5em,ai:c));
 		&__row{
 			@include bnd((d:c));
 			&-label{
 				@include bnd((mg:0,pd:0));
+				@include txt((p:12));
 			}
 			input{
 				@include bnd((f:1 1 a,pd:.25em));
 				@include bdr((s:s,w:1,c:t 40,r:.25em));
+				@include txt((p:12));
 			}
 		}
 	}

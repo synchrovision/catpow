@@ -63,12 +63,12 @@ class style_config{
 			'xl'=>'極大'
 		],
 		$level_variants=[
-			1=>'Level1',
-			2=>'Level2',
-			3=>'Level3',
-			4=>'Level4',
-			5=>'Level5',
-			6=>'Level6',
+			'1'=>'Level1',
+			'2'=>'Level2',
+			'3'=>'Level3',
+			'4'=>'Level4',
+			'5'=>'Level5',
+			'6'=>'Level6',
 		],
 		$block_variants=[
 			's'=>'セクション',
@@ -82,7 +82,7 @@ class style_config{
 			'c'=>'カード',
 			'b'=>'ボタン',
 			'l'=>'ラベル',
-			't'=>'タブ',
+			't'=>'表',
 			'i'=>'入力',
 		],
 		$cache=[];
@@ -112,6 +112,7 @@ class style_config{
 		return static::$roles['size']=apply_filters('cp_size_roles',[
 			'contents'=>[
 				'label'=>'コンテンツ',
+				'type'=>'responsiveSize',
 				'primary'=>true,
 				'shorthand'=>'c',
 				'variants'=>self::$size_variants_5,
@@ -119,12 +120,14 @@ class style_config{
 			],
 			'item'=>[
 				'label'=>'アイテム',
+				'type'=>'responsiveItemSize',
 				'shorthand'=>'i',
 				'variants'=>self::$size_variants_5,
 				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem)',40 + $n * 15,10 + $n * 5),range(0,4))
 			],
 			'space'=>[
 				'label'=>'余白・間隔',
+				'type'=>'responsiveSpaceSize',
 				'shorthand'=>'s',
 				'variants'=>self::$size_variants_5,
 				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem)',$n * ($n + 1),($n * ($n + 1))/2),range(0,4))
@@ -136,23 +139,24 @@ class style_config{
 		return static::$roles['padding']=apply_filters('cp_padding_roles',[
 			'block'=>[
 				'label'=>'ブロック',
+				'type'=>'responsiveVerticalPadding',
 				'shorthand'=>'b',
-				'variants'=>self::$block_variants,
-				'subVariants'=>self::$level_variants,
-				'defaultValues'=>array_pad([],5,array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) 0 min(%1$svw,%2$srem)',$n,$n/4),range(6,1)))
+				'variants'=>self::$level_variants,
+				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) 0 min(%1$svw,%2$srem)',$n,$n/4),range(6,1))
+			],
+			'frame'=>[
+				'label'=>'フレーム',
+				'type'=>'responsivePadding',
+				'shorthand'=>'f',
+				'variants'=>self::$level_variants,
+				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) min(%1$svw,%2$srem)',$n,$n/4),range(6,1))
 			],
 			'component'=>[
 				'label'=>'コンポーネント',
+				'type'=>'relativePadding',
 				'shorthand'=>'c',
 				'variants'=>self::$component_variants,
 				'defaultValues'=>array_pad([],7,'0.5em 1em')
-			],
-			'specific'=>[
-				'label'=>'規定サイズ',
-				'primary'=>true,
-				'shorthand'=>'s',
-				'variants'=>self::$size_variants_5,
-				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) 0 min(%1$svw,%2$srem)',$n,$n/4),range(1,5))
 			],
 		]);
 	}
@@ -161,20 +165,21 @@ class style_config{
 		return static::$roles['margin']=apply_filters('cp_margin_roles',[
 			'block'=>[
 				'label'=>'ブロック',
+				'type'=>'responsiveVerticalMargin',
 				'shorthand'=>'b',
-				'variants'=>self::$block_variants,
-				'subVariants'=>self::$level_variants,
-				'defaultValues'=>array_pad([],5,array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) 0 min(%1$svw,%2$srem)',$n,$n/4),range(6,1)))
+				'variants'=>self::$level_variants,
+				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) 0 min(%1$svw,%2$srem)',$n,$n/4),range(6,1))
 			],
-			'specific'=>[
-				'label'=>'規定サイズ',
-				'primary'=>true,
-				'shorthand'=>'s',
-				'variants'=>self::$size_variants_5,
-				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) 0 min(%1$svw,%2$srem)',$n,$n/4),range(1,5))
+			'frame'=>[
+				'label'=>'フレーム',
+				'type'=>'responsiveMargin',
+				'shorthand'=>'f',
+				'variants'=>self::$level_variants,
+				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) min(%1$svw,%2$srem)',$n,$n/4),range(6,1))
 			],
 			'text'=>[
 				'label'=>'テキスト',
+				'type'=>'responsiveVerticalMargin',
 				'shorthand'=>'t',
 				'variants'=>self::$text_role_variants,
 				'defaultValues'=>array_pad([],5,sprintf('min(%1$svw,%2$srem) 0 min(%1$svw,%2$srem)',4,1))
@@ -184,18 +189,18 @@ class style_config{
 	public static function get_font_family_roles(){
 		if(isset(static::$roles['font_family'])){return static::$roles['font_family'];}
 		return static::$roles['font_family']=apply_filters('cp_font_family_roles',[
-			'text'=>[
-				'label'=>'テキスト',
-				'shorthand'=>'t',
-				'variants'=>self::$text_role_variants,
-				'defaultValues'=>['sans-serif','sans-serif','sans-serif','sans-serif','sans-serif']
-			],
 			'format'=>[
 				'label'=>'フォーマット',
 				'primary'=>true,
 				'shorthand'=>'f',
 				'variants'=>self::$text_format_variants,
 				'defaultValues'=>['sans-serif','serif','sans-serif','monospace','fantasy','cursive','sans-serif']
+			],
+			'text'=>[
+				'label'=>'テキスト',
+				'shorthand'=>'t',
+				'variants'=>self::$text_role_variants,
+				'defaultValues'=>['sans-serif','sans-serif','sans-serif','sans-serif','sans-serif']
 			],
 		]);
 	}
@@ -204,6 +209,7 @@ class style_config{
 		return static::$roles['font_weight']=apply_filters('cp_font_weight_roles',[
 			'text'=>[
 				'label'=>'テキスト',
+				'type'=>'fontWeight',
 				'shorthand'=>'t',
 				'variants'=>self::$text_role_variants,
 				'defaultValues'=>array_pad([],5,400)
@@ -213,19 +219,21 @@ class style_config{
 	public static function get_font_size_roles(){
 		if(isset(static::$roles['font_size'])){return static::$roles['font_size'];}
 		return static::$roles['font_size']=apply_filters('cp_font_size_roles',[
-			'text'=>[
-				'label'=>'テキスト',
-				'shorthand'=>'t',
-				'variants'=>self::$text_role_variants,
-				'subVariants'=>self::$level_variants,
-				'defaultValues'=>array_map(fn($i)=>array_map(fn($j)=>sprintf('min(%1$svw,%2$srem)',$i*$j/10,$i*$j/40),range(10,5)),range(8,4))
-			],
 			'specific'=>[
 				'label'=>'規定サイズ',
+				'type'=>'fontSize',
 				'primary'=>true,
 				'shorthand'=>'s',
 				'variants'=>self::$size_variants_5,
 				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$dvw,%2$drem)',$n,$n/4),range(2,6))
+			],
+			'text'=>[
+				'label'=>'テキスト',
+				'type'=>'fontSize',
+				'shorthand'=>'t',
+				'variants'=>self::$text_role_variants,
+				'subVariants'=>self::$level_variants,
+				'defaultValues'=>array_map(fn($i)=>array_map(fn($j)=>sprintf('min(%1$svw,%2$srem)',$i*$j/10,$i*$j/40),range(10,5)),range(8,4))
 			]
 		]);
 	}
@@ -234,6 +242,7 @@ class style_config{
 		return static::$roles['border_width']=apply_filters('cp_border_width_roles',[
 			'component'=>[
 				'label'=>'コンポーネント',
+				'type'=>'relativeBorderWidth',
 				'shorthand'=>'c',
 				'variants'=>self::$component_variants,
 				'defaultValues'=>array_pad([],7,(1/8).'rem')
@@ -243,19 +252,21 @@ class style_config{
 	public static function get_border_radius_roles(){
 		if(isset(static::$roles['border_radius'])){return static::$roles['border_radius'];}
 		return static::$roles['border_radius']=apply_filters('cp_border_radius_roles',[
-			'component'=>[
-				'label'=>'コンポーネント',
-				'shorthand'=>'c',
-				'variants'=>self::$component_variants,
-				'defaultValues'=>array_pad([],7,'0.5em')
-			],
 			'specific'=>[
 				'label'=>'規定サイズ',
+				'type'=>'relativeBorderRadius',
 				'primary'=>true,
 				'shorthand'=>'s',
 				'variants'=>self::$size_variants_5,
 				'defaultValues'=>array_map(fn($n)=>sprintf('%sem',($n * $n)/4),range(0,4))
-			]
+			],
+			'component'=>[
+				'label'=>'コンポーネント',
+				'type'=>'relativeBorderRadius',
+				'shorthand'=>'c',
+				'variants'=>self::$component_variants,
+				'defaultValues'=>array_pad([],7,'0.5em')
+			],
 		]);
 	}
 	public static function get_line_height_roles(){
@@ -263,6 +274,7 @@ class style_config{
 		return static::$roles['line_height']=apply_filters('cp_line_height_roles',[
 			'text'=>[
 				'label'=>'テキスト',
+				'type'=>'lineHeight',
 				'primary'=>true,
 				'shorthand'=>'t',
 				'variants'=>self::$text_role_variants,
@@ -275,6 +287,7 @@ class style_config{
 		return static::$roles['letter_spacing']=apply_filters('cp_letter_spacing_roles',[
 			'text'=>[
 				'label'=>'テキスト',
+				'type'=>'letterSpacing',
 				'primary'=>true,
 				'shorthand'=>'t',
 				'variants'=>self::$text_role_variants,
@@ -285,12 +298,6 @@ class style_config{
 	public static function get_shadow_roles(){
 		if(isset(static::$roles['shadow'])){return static::$roles['shadow'];}
 		return static::$roles['shadow']=apply_filters('cp_shadow_roles',[
-			'component'=>[
-				'label'=>'コンポーネント',
-				'shorthand'=>'c',
-				'variants'=>self::$component_variants,
-				'defaultValues'=>array_pad([],7,'none')
-			],
 			'specific'=>[
 				'label'=>'指定',
 				'primary'=>true,
@@ -305,6 +312,12 @@ class style_config{
 				],
 				'defaultValues'=>array_pad([],6,'none')
 			],
+			'component'=>[
+				'label'=>'コンポーネント',
+				'shorthand'=>'c',
+				'variants'=>self::$component_variants,
+				'defaultValues'=>array_pad([],7,'none')
+			],
 			'text'=>[
 				'label'=>'テキスト',
 				'shorthand'=>'t',
@@ -314,38 +327,6 @@ class style_config{
 			]
 		]);
 	}
-
-	public static function generate_text_block_roles($default_values,$has_level=false,$formats=null){
-		$roles=[];
-		foreach(array_keys(self::$text_block_roles) as $i=>$name){
-			$role=self::$text_block_roles[$name];
-			if($has_level){
-				$role['variants']=self::$level_variants;
-				if(isset($default_values)){
-					if(is_callable($default_values)){
-						$role['defaultValues']=array_map($default_values,$role['sampleValues']);
-					}
-					else{
-						$role['defaultValues']=$default_values[$i];
-					}
-				}
-			}
-			else{
-				if(isset($default_values)){
-					$role['default']=is_array($default_values)?$default_values[$i]:$default_values;
-				}
-			}
-			foreach(['label','shorthand'] as $key){
-				if(!empty($formats[$key])){$role[$key]=sprintf($formats[$key],$role[$key]);}
-			}
-			foreach(['type','group','var'] as $key){
-				if(!empty($formats[$key])){$role[$key]=sprintf($formats[$key],$name);}
-			}
-			$roles[empty($formats['name'])?$name:sprintf($formats['name'],$name)]=$role;
-		}
-		return $roles;
-	}
-
 	//css
 	public static function get_tones($colors){
 		$roles=static::get_color_roles();

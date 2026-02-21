@@ -1,8 +1,14 @@
 ﻿import { useState, useCallback, useMemo } from "react";
 import { Bem } from "catpow/component";
 
-const extractDefaultValue = (originalValue, rolesByShorthand) => {
-	return Object.keys(rolesByShorthand).reduce((p, c) => ({ ...p, [c]: originalValue?.[c] || rolesByShorthand[c].default || "" }), {});
+const extractDefaultValues = (originalValue, rolesByShorthand) => {
+	const values = {};
+	Object.keys(rolesByShorthand).forEach((c) => {
+		Object.keys(rolesByShorthand[c].variants).forEach((variantKey, i) => {
+			values[c + "-" + variantKey] = originalValue?.[c + "-" + variantKey] || rolesByShorthand[c].defaultValues?.[i] || "";
+		});
+	});
+	return values;
 };
 
 Catpow.Customize.FontFamily = (props) => {
@@ -14,7 +20,7 @@ Catpow.Customize.FontFamily = (props) => {
 
 	const rolesByShorthand = useMemo(() => Object.values(roles).reduce((p, c) => ({ ...p, [c.shorthand]: c }), {}), [roles]);
 
-	const [values, setValues] = useState(extractDefaultValue(originalValue, rolesByShorthand));
+	const [values, setValues] = useState(extractDefaultValues(originalValue, rolesByShorthand));
 
 	const onChangeHandle = useCallback(
 		(newValues) => {
@@ -27,14 +33,16 @@ Catpow.Customize.FontFamily = (props) => {
 	return (
 		<Bem>
 			<div className="cp-textinputs">
-				{Object.keys(rolesByShorthand).map((role) => (
-					<div className="_row">
-						<h4 className="_label" key={role}>
-							{rolesByShorthand[role].label}
-						</h4>
-						<input type="text" onChange={(e) => onChangeHandle({ ...values, [role]: e.target.value })} value={values[role]} />
-					</div>
-				))}
+				{Object.keys(rolesByShorthand).map((role) =>
+					Object.keys(rolesByShorthand[role].variants).map((variantKey) => (
+						<div className="_row">
+							<h5 className="_label" key={role}>
+								{rolesByShorthand[role].variants[variantKey]}
+							</h5>
+							<input type="text" onChange={(e) => onChangeHandle({ ...values, [role + "-" + variantKey]: e.target.value })} value={values[role + "-" + variantKey]} />
+						</div>
+					)),
+				)}
 			</div>
 		</Bem>
 	);

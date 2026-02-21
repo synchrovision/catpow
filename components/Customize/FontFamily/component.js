@@ -107,8 +107,14 @@
   };
 
   // ../components/Customize/FontFamily/component.jsx
-  var extractDefaultValue = (originalValue, rolesByShorthand) => {
-    return Object.keys(rolesByShorthand).reduce((p, c) => ({ ...p, [c]: originalValue?.[c] || rolesByShorthand[c].default || "" }), {});
+  var extractDefaultValues = (originalValue, rolesByShorthand) => {
+    const values = {};
+    Object.keys(rolesByShorthand).forEach((c) => {
+      Object.keys(rolesByShorthand[c].variants).forEach((variantKey, i) => {
+        values[c + "-" + variantKey] = originalValue?.[c + "-" + variantKey] || rolesByShorthand[c].defaultValues?.[i] || "";
+      });
+    });
+    return values;
   };
   Catpow.Customize.FontFamily = (props) => {
     const {
@@ -117,7 +123,7 @@
       param: { roles }
     } = props;
     const rolesByShorthand = useMemo(() => Object.values(roles).reduce((p, c) => ({ ...p, [c.shorthand]: c }), {}), [roles]);
-    const [values, setValues] = useState(extractDefaultValue(originalValue, rolesByShorthand));
+    const [values, setValues] = useState(extractDefaultValues(originalValue, rolesByShorthand));
     const onChangeHandle = useCallback(
       (newValues) => {
         setValues(newValues);
@@ -125,6 +131,8 @@
       },
       [onChange]
     );
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-textinputs" }, Object.keys(rolesByShorthand).map((role) => /* @__PURE__ */ wp.element.createElement("div", { className: "_row" }, /* @__PURE__ */ wp.element.createElement("h4", { className: "_label", key: role }, rolesByShorthand[role].label), /* @__PURE__ */ wp.element.createElement("input", { type: "text", onChange: (e) => onChangeHandle({ ...values, [role]: e.target.value }), value: values[role] })))));
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-textinputs" }, Object.keys(rolesByShorthand).map(
+      (role) => Object.keys(rolesByShorthand[role].variants).map((variantKey) => /* @__PURE__ */ wp.element.createElement("div", { className: "_row" }, /* @__PURE__ */ wp.element.createElement("h5", { className: "_label", key: role }, rolesByShorthand[role].variants[variantKey]), /* @__PURE__ */ wp.element.createElement("input", { type: "text", onChange: (e) => onChangeHandle({ ...values, [role + "-" + variantKey]: e.target.value }), value: values[role + "-" + variantKey] })))
+    )));
   };
 })();

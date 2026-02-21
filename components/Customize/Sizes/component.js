@@ -1184,9 +1184,6 @@
     ))))));
   };
 
-  // node_modules-included/catpow/src/component/Input/ChartInput.tsx
-  init_react();
-
   // node_modules/react-use/esm/misc/util.js
   var noop = function() {
   };
@@ -1337,40 +1334,6 @@
   };
   var useScratch_default = useScratch;
 
-  // node_modules-included/catpow/src/component/Input/ChartInput.tsx
-  var ChartInput = (props) => {
-    const { className = "cp-chartinput", children, ...otherProps } = props;
-    const [ref, state] = useScratch_default();
-    const { unselectCell } = useContext(DataSetContext);
-    const { width, height, margin, selectCellWithProgressPoint, setActiveCellValueWithProgressPoint } = useContext(ChartContext);
-    const getProgressPoint = useCallback(
-      ({ x = 0, y = 0, dx = 0, dy = 0, elW = 100, elH = 100 }) => ({
-        px: Math.max(0, Math.min((x + dx) / elW * width / (width - margin[1] - margin[3]) - margin[3] / width, 1)),
-        py: Math.max(0, Math.min((y + dy) / elH * height / (height - margin[0] - margin[2]) - margin[0] / height, 1))
-      }),
-      [width, height, margin]
-    );
-    useEffect(() => {
-      if (state.isScratching) {
-        selectCellWithProgressPoint(getProgressPoint(state));
-      } else {
-        unselectCell();
-      }
-    }, [state.isScratching]);
-    useEffect(() => {
-      if (state.isScratching) {
-        setActiveCellValueWithProgressPoint(getProgressPoint(state));
-      }
-    }, [state]);
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className, style: { position: "absolute", inset: 0 }, ref }, children));
-  };
-
-  // node_modules-included/catpow/src/component/Input/LineChartInput.tsx
-  var LineChartInput = (props) => {
-    const { children, ...otherProps } = props;
-    return /* @__PURE__ */ wp.element.createElement(LineChart, { ...otherProps }, /* @__PURE__ */ wp.element.createElement(ChartInput, null), children);
-  };
-
   // node_modules-included/catpow/src/component/Bem.jsx
   init_react();
   var applyBem = (component, { ...ctx }) => {
@@ -1448,6 +1411,41 @@
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, children);
   };
 
+  // node_modules-included/catpow/src/component/Input/ChartInput.tsx
+  init_react();
+  var ChartInput = (props) => {
+    const { className = "cp-chartinput", children, ...otherProps } = props;
+    const [ref, state] = useScratch_default();
+    const { unselectCell } = useContext(DataSetContext);
+    const { width, height, margin, selectCellWithProgressPoint, setActiveCellValueWithProgressPoint } = useContext(ChartContext);
+    const getProgressPoint = useCallback(
+      ({ x = 0, y = 0, dx = 0, dy = 0, elW = 100, elH = 100 }) => ({
+        px: Math.max(0, Math.min((x + dx) / elW * width / (width - margin[1] - margin[3]) - margin[3] / width, 1)),
+        py: Math.max(0, Math.min((y + dy) / elH * height / (height - margin[0] - margin[2]) - margin[0] / height, 1))
+      }),
+      [width, height, margin]
+    );
+    useEffect(() => {
+      if (state.isScratching) {
+        selectCellWithProgressPoint(getProgressPoint(state));
+      } else {
+        unselectCell();
+      }
+    }, [state.isScratching]);
+    useEffect(() => {
+      if (state.isScratching) {
+        setActiveCellValueWithProgressPoint(getProgressPoint(state));
+      }
+    }, [state]);
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className, style: { position: "absolute", inset: 0 }, ref }, children));
+  };
+
+  // node_modules-included/catpow/src/component/Input/LineChartInput.tsx
+  var LineChartInput = (props) => {
+    const { children, ...otherProps } = props;
+    return /* @__PURE__ */ wp.element.createElement(LineChart, { ...otherProps }, /* @__PURE__ */ wp.element.createElement(ChartInput, null), children);
+  };
+
   // node_modules-included/catpow/src/component/SVG/SVG.tsx
   init_react();
   var SVGColorsContext = createContext({ h: 20, s: 80, l: 80 });
@@ -1458,15 +1456,214 @@
     return /* @__PURE__ */ wp.element.createElement(SVGColorsContext.Provider, { value: colors }, /* @__PURE__ */ wp.element.createElement(SVGScreenContext.Provider, { value: ScreenValue }, /* @__PURE__ */ wp.element.createElement("svg", { className, width, height, viewBox: `0 0 ${width} ${height}`, xmlns: "http://www.w3.org/2000/svg", ...otherProps }, children)));
   };
 
+  // ../components/Customize/converters.ts
+  var converters_exports = {};
+  __export(converters_exports, {
+    fontSizeConverter: () => fontSizeConverter,
+    fontWeightConverter: () => fontWeightConverter,
+    letterSpacingConverter: () => letterSpacingConverter,
+    lineHeightConverter: () => lineHeightConverter,
+    relativeBorderRadiusConverter: () => relativeBorderRadiusConverter,
+    relativeBorderWidthConverter: () => relativeBorderWidthConverter,
+    relativePaddingConverter: () => relativePaddingConverter,
+    relativeSizeConverter: () => relativeSizeConverter,
+    relativeSpacingConverter: () => relativeSpacingConverter,
+    responsiveGapConverter: () => responsiveGapConverter,
+    responsiveItemSizeConverter: () => responsiveItemSizeConverter,
+    responsiveMarginConverter: () => responsiveMarginConverter,
+    responsivePaddingConverter: () => responsivePaddingConverter,
+    responsiveSizeConverter: () => responsiveSizeConverter,
+    responsiveSpaceSizeConverter: () => responsiveSpaceSizeConverter,
+    responsiveVerticalMarginConverter: () => responsiveVerticalMarginConverter,
+    responsiveVerticalPaddingConverter: () => responsiveVerticalPaddingConverter
+  });
+  var contentSizeInputConfig = {
+    steps: {
+      80: 0,
+      480: 20,
+      960: 40,
+      1920: 80,
+      4e3: 160
+    },
+    height: 600
+  };
+  var itemSizeInputConfig = {
+    steps: {
+      80: 0,
+      480: 20,
+      960: 40
+    },
+    height: 320
+  };
+  var spaceSizeInputConfig = {
+    steps: {
+      20: 4,
+      40: 8,
+      80: 16,
+      160: 32,
+      320: 64
+    },
+    height: 160
+  };
+  var gapSizeInputConfig = {
+    steps: {
+      4: 1,
+      8: 2,
+      24: 4,
+      48: 8
+    },
+    height: 120
+  };
+  var letterSpacingConfig = {
+    steps: {
+      25: 5,
+      100: 25
+    },
+    height: 80
+  };
+  var lineHeightConfig = {
+    steps: {
+      100: 0,
+      125: 5,
+      300: 25
+    },
+    height: 100
+  };
+  var fontSizeConfig = {
+    steps: {
+      8: 0,
+      24: 1,
+      32: 2,
+      64: 4,
+      128: 8,
+      256: 16,
+      512: 32
+    },
+    height: 400
+  };
+  var fontWeightConfig = {
+    steps: {
+      100: 0,
+      900: 100
+    },
+    height: 80
+  };
+  var responsiveSizeConverter = {
+    ...contentSizeInputConfig,
+    getRowLabels: (label) => ["(vw)", "(rem)"].map((suffix) => label + suffix),
+    toValues: (size) => (size.match(/min\((.+?)vw,(.+?)rem\)/) || [, 0, 0]).slice(1).map((v, i) => i === 0 ? parseFloat(v) * 4 : parseFloat(v) * 16),
+    toSizes: (vw, rem) => `min(${(vw / 4).toFixed(2)}vw,${(rem / 16).toFixed(2)}rem)`,
+    getDisplayValue: (val, n) => n % 2 ? val / 16 : val / 4
+  };
+  var responsiveItemSizeConverter = {
+    ...responsiveSizeConverter,
+    ...itemSizeInputConfig
+  };
+  var responsiveSpaceSizeConverter = {
+    ...responsiveSizeConverter,
+    ...spaceSizeInputConfig
+  };
+  var responsiveGapConverter = {
+    ...spaceSizeInputConfig,
+    getRowLabels: (label) => ["\u7E26(vw)", "\u7E26(rem)", "\u6A2A(vw)", "\u6A2A(rem)"].map((suffix) => label + suffix),
+    toValues: (size) => (size.match(/min\((.+?)vw,(.+?)rem\) min\((.+?)vw,(.+?)rem\)/) || [, 0, 0, 0, 0]).slice(1).map((v, i) => i % 2 === 0 ? parseFloat(v) * 4 : parseFloat(v) * 16),
+    toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`,
+    getDisplayValue: (val, n) => n % 2 ? val / 16 : val / 4
+  };
+  var responsivePaddingConverter = {
+    ...spaceSizeInputConfig,
+    getRowLabels: (label) => ["\u7E26(vw)", "\u7E26(rem)", "\u6A2A(vw)", "\u6A2A(rem)"].map((suffix) => label + suffix),
+    toValues: (size) => (size.match(/min\((.+?)vw,(.+?)rem\) min\((.+?)vw,(.+?)rem\)/) || [, 0, 0, 0, 0]).slice(1).map((v, i) => i % 2 === 0 ? parseFloat(v) * 4 : parseFloat(v) * 16),
+    toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) 0 min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`,
+    getDisplayValue: (val, n) => n % 2 ? val / 16 : val / 4
+  };
+  var responsiveMarginConverter = {
+    ...responsivePaddingConverter
+  };
+  var responsiveVerticalPaddingConverter = {
+    ...spaceSizeInputConfig,
+    getRowLabels: (label) => ["\u4E0A(vw)", "\u4E0A(rem)", "\u4E0B(vw)", "\u4E0B(rem)"].map((suffix) => label + suffix),
+    toValues: (size) => (size.match(/min\((.+?)vw,(.+?)rem\) (?:0|auto) min\((.+?)vw,(.+?)rem\)/) || [, 0, 0, 0, 0]).slice(1).map((v, i) => i % 2 === 0 ? parseFloat(v) * 4 : parseFloat(v) * 16),
+    toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) 0 min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`,
+    getDisplayValue: (val, n) => n % 2 ? val / 16 : val / 4
+  };
+  var responsiveVerticalMarginConverter = {
+    ...responsiveVerticalPaddingConverter,
+    toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) auto min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`
+  };
+  var relativeSizeConverter = {
+    ...itemSizeInputConfig,
+    getRowLabels: (label) => [label + "(em)"],
+    toValues: (size) => [parseFloat(size) * 16],
+    toSizes: (value) => `${value / 16}em`,
+    getDisplayValue: (val) => val / 16
+  };
+  var relativeSpacingConverter = {
+    ...relativeSizeConverter,
+    ...spaceSizeInputConfig
+  };
+  var relativeBorderRadiusConverter = {
+    ...relativeSizeConverter,
+    ...gapSizeInputConfig
+  };
+  var relativeBorderWidthConverter = {
+    ...relativeSizeConverter,
+    ...gapSizeInputConfig
+  };
+  var relativePaddingConverter = {
+    ...gapSizeInputConfig,
+    getRowLabels: (label) => [label + "\u7E26(em)", label + "\u6A2A(em)"],
+    toValues: (size) => (size.match(/(.+?)em (.+?)em/) || [, 0, 0]).slice(1).map((v) => parseFloat(v) * 16),
+    toSizes: (v, h) => `${v / 16}em ${h / 16}em`,
+    getDisplayValue: (val) => val / 16
+  };
+  var letterSpacingConverter = {
+    ...letterSpacingConfig,
+    getRowLabels: (label) => [label + "(%)"],
+    toValues: (size) => [size === "normal" ? 0 : parseFloat(size)],
+    toSizes: (value) => value === 0 ? "normal" : `${value}%`,
+    getDisplayValue: (val) => val
+  };
+  var lineHeightConverter = {
+    ...letterSpacingConverter,
+    ...lineHeightConfig
+  };
+  var fontSizeConverter = {
+    ...responsiveSizeConverter,
+    ...fontSizeConfig
+  };
+  var fontWeightConverter = {
+    ...fontWeightConfig,
+    getRowLabels: (label) => [label],
+    toValues: (size) => [parseFloat(size)],
+    toSizes: (value) => `${value}`,
+    getDisplayValue: (val) => val
+  };
+
   // ../components/Customize/Sizes/component.jsx
-  var init = ({ sizes, rolesByGroup }) => {
+  var init = ({ sizes, rolesByShorthand }) => {
     return {
       sizes,
-      values: Object.keys(rolesByGroup).reduce((p, group) => ({ ...p, [group]: getValues(sizes, rolesByGroup[group]) }), {}),
-      labels: Object.keys(rolesByGroup).reduce((p, group) => ({ ...p, [group]: getLabels(rolesByGroup[group]) }), {}),
-      colors: Object.keys(rolesByGroup).reduce((p, group) => ({ ...p, [group]: getColors(rolesByGroup[group]) }), {}),
-      height: Object.keys(rolesByGroup).reduce((p, group) => ({ ...p, [group]: valueSizeConverters[rolesByGroup[group][0].type].height }), {}),
-      steps: Object.keys(rolesByGroup).reduce((p, group) => ({ ...p, [group]: valueSizeConverters[rolesByGroup[group][0].type].steps }), {})
+      values: Object.keys(rolesByShorthand).reduce((p, shorthand) => {
+        const role = rolesByShorthand[shorthand];
+        return { ...p, [shorthand]: getValues(sizes, [role]) };
+      }, {}),
+      labels: Object.keys(rolesByShorthand).reduce((p, shorthand) => {
+        const role = rolesByShorthand[shorthand];
+        return { ...p, [shorthand]: getLabels(role) };
+      }, {}),
+      colors: Object.keys(rolesByShorthand).reduce((p, shorthand) => {
+        const role = rolesByShorthand[shorthand];
+        return { ...p, [shorthand]: getColors([role]) };
+      }, {}),
+      height: Object.keys(rolesByShorthand).reduce((p, shorthand) => {
+        const role = rolesByShorthand[shorthand];
+        return { ...p, [shorthand]: getConverter(role).height };
+      }, {}),
+      steps: Object.keys(rolesByShorthand).reduce((p, shorthand) => {
+        const role = rolesByShorthand[shorthand];
+        return { ...p, [shorthand]: getConverter(role).steps };
+      }, {})
     };
   };
   var reducer = (state, action) => {
@@ -1478,17 +1675,29 @@
     }
     return state;
   };
+  var getConverter = (role) => converters_exports[role.type + "Converter"];
   var getValues = (sizes, roles) => {
     const values = [];
     let r2 = 0;
     roles.forEach((role) => {
-      const { toValues, toSizes } = valueSizeConverters[role.type];
-      Object.keys(role.variants).forEach((variantKey, i) => {
-        toValues(sizes[role.shorthand + "-" + variantKey] || role.defaultValues[i]).forEach((v, j) => {
-          (values[r2 + j] ||= []).push(v);
+      const { toValues, toSizes } = getConverter(role);
+      if (role.subVariants == null) {
+        Object.keys(role.variants).forEach((variantKey, i) => {
+          toValues(sizes[role.shorthand + "-" + variantKey] || role.defaultValues[i]).forEach((v, j) => {
+            (values[r2 + j] ||= []).push(v);
+          });
         });
-      });
-      r2 += toSizes.length;
+        r2 += toSizes.length;
+      } else {
+        Object.keys(role.variants).forEach((variantKey, i) => {
+          Object.keys(role.subVariants).forEach((subVariantKey, j) => {
+            toValues(sizes[role.shorthand + "-" + variantKey + "-" + subVariantKey] || role.defaultValues[i][j]).forEach((v, k) => {
+              (values[r2 + k] ||= []).push(v);
+            });
+          });
+          r2 += toSizes.length;
+        });
+      }
     });
     return values;
   };
@@ -1496,168 +1705,59 @@
     const sizes = {};
     let r2 = 0;
     roles.forEach((role, i) => {
-      const { toSizes } = valueSizeConverters[role.type];
-      Object.keys(role.variants).forEach((variantKey, j) => {
-        sizes[role.shorthand + "-" + variantKey] = toSizes.apply(
-          null,
-          values.slice(r2, r2 + toSizes.length).map((v) => v[j])
-        );
-      });
-      r2 += toSizes.length;
+      const { toSizes } = getConverter(role);
+      if (role.subVariants == null) {
+        Object.keys(role.variants).forEach((variantKey, j) => {
+          sizes[role.shorthand + "-" + variantKey] = toSizes.apply(
+            null,
+            values.slice(r2, r2 + toSizes.length).map((v) => v[j])
+          );
+        });
+        r2 += toSizes.length;
+      } else {
+        Object.keys(role.variants).forEach((variantKey, i2) => {
+          Object.keys(role.subVariants).forEach((subVariantKey, j) => {
+            sizes[role.shorthand + "-" + variantKey + "-" + subVariantKey] = toSizes.apply(
+              null,
+              values.slice(r2, r2 + toSizes.length).map((v) => v[j])
+            );
+          });
+          r2 += toSizes.length;
+        });
+      }
     });
     return sizes;
   };
-  var getLabels = (roles) => {
-    const labels = { rows: [], columns: Object.values(roles[0].variants) };
+  var getLabels = (role) => {
+    const labels = { rows: [], columns: role.subVariants ? Object.values(role.subVariants) : Object.values(role.variants) };
     let r2 = 0;
-    roles.forEach((role, i) => {
-      const { getRowLabels } = valueSizeConverters[role.type];
-      labels.rows.push(...getRowLabels(role));
-    });
+    const { getRowLabels } = getConverter(role);
+    if (role.subVariants != null) {
+      Object.keys(role.variants).forEach((variantKey) => {
+        labels.rows.push(...getRowLabels(role.variants[variantKey]));
+      });
+    } else {
+      labels.rows.push(...getRowLabels(role.label));
+    }
     return labels;
   };
   var getColors = (roles) => {
     const colors = { rows: [] };
     let r2 = 0;
     roles.forEach((role, i) => {
-      const rowCount = valueSizeConverters[role.type].toSizes.length;
+      let rowCount = getConverter(role).toSizes.length;
+      if (role.subVariants != null) {
+        rowCount *= Object.keys(role.variants).length;
+      }
       for (let j = 0; j < rowCount; j++) {
         colors.rows.push(`oklch(${60 - i * 10}% 20% ${(i * 40 + j * 20) % 360})`);
       }
     });
     return colors;
   };
-  var translateToDisplayValue = (value, { r: r2 }, roles) => {
-    let n = r2;
-    const role = roles.find((role2) => {
-      const l = valueSizeConverters[role2.type].toSizes.length;
-      if (n < l) {
-        return true;
-      }
-      n -= l;
-      return false;
-    });
-    return valueSizeConverters[role.type].getDisplayValue(value, n);
-  };
-  var valueSizeConverters = {
-    size: {
-      steps: {
-        80: 0,
-        480: 20,
-        960: 40,
-        1920: 80,
-        4e3: 160
-      },
-      height: 600,
-      getRowLabels: (role) => ["(vw)", "(rem)"].map((suffix) => role.label + suffix),
-      toValues: (size) => size.match(/min\((.+?)vw,(.+?)rem\)/).slice(1).map((v, i) => i === 0 ? v * 4 : v * 16),
-      toSizes: (vw, rem) => `min(${(vw / 4).toFixed(2)}vw,${(rem / 16).toFixed(2)}rem)`,
-      getDisplayValue: (val, n) => n % 2 ? val / 16 : val / 4
-    },
-    sizeRelative: {
-      steps: {
-        80: 0,
-        480: 20,
-        960: 40
-      },
-      height: 400,
-      getRowLabels: (role) => [role.label + "(em)"],
-      toValues: (size) => [parseFloat(size) * 16],
-      toSizes: (value) => `${value / 16}em`,
-      getDisplayValue: (val) => val / 16
-    },
-    spacingeRelative: {
-      steps: {
-        20: 4,
-        40: 8,
-        80: 16,
-        160: 32,
-        320: 64
-      },
-      height: 160,
-      getRowLabels: (role) => [role.label + "(em)"],
-      toValues: (size) => [parseFloat(size) * 16],
-      toSizes: (value) => `${value / 16}em`,
-      getDisplayValue: (val) => val / 16
-    },
-    radiusRelative: {
-      steps: {
-        8: 2,
-        24: 4,
-        48: 8
-      },
-      height: 120,
-      getRowLabels: (role) => [role.label + "(em)"],
-      toValues: (size) => [parseFloat(size) * 16],
-      toSizes: (value) => `${value / 16}em`,
-      getDisplayValue: (val) => val / 16
-    },
-    paddingRelative: {
-      steps: {
-        8: 2,
-        24: 4,
-        48: 8
-      },
-      height: 120,
-      getRowLabels: (role) => [role.label + "\u7E26(em)", role.label + "\u6A2A(em)"],
-      toValues: (size) => size.match(/(.+?)em (.+?)em/).slice(1).map((v) => v * 16),
-      toSizes: (v, h) => `${v / 16}em ${h / 16}em`,
-      getDisplayValue: (val) => val / 16
-    },
-    spacing: {
-      steps: {
-        20: 4,
-        40: 8,
-        80: 16,
-        160: 32,
-        320: 64
-      },
-      height: 160,
-      getRowLabels: (role) => ["(vw)", "(rem)"].map((suffix) => role.label + suffix),
-      toValues: (size) => size.match(/min\((.+?)vw,(.+?)rem\)/).slice(1).map((v, i) => i === 0 ? v * 4 : v * 16),
-      toSizes: (vw, rem) => `min(${(vw / 4).toFixed(2)}vw,${(rem / 16).toFixed(2)}rem)`,
-      getDisplayValue: (val, n) => n % 2 ? val / 16 : val / 4
-    },
-    padding: {
-      steps: {
-        20: 4,
-        40: 8,
-        80: 16,
-        160: 32,
-        320: 64
-      },
-      height: 160,
-      getRowLabels: (role) => ["\u7E26(vw)", "\u7E26(rem)", "\u6A2A(vw)", "\u6A2A(rem)"].map((suffix) => role.label + suffix),
-      toValues: (size) => size.match(/min\((.+?)vw,(.+?)rem\) min\((.+?)vw,(.+?)rem\)/).slice(1).map((v, i) => i % 2 === 0 ? v * 4 : v * 16),
-      toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`,
-      getDisplayValue: (val, n) => n % 2 ? val / 16 : val / 4
-    },
-    paddingVertical: {
-      steps: {
-        20: 4,
-        40: 8,
-        80: 16,
-        160: 32,
-        320: 64
-      },
-      height: 160,
-      getRowLabels: (role) => ["\u4E0A(vw)", "\u4E0A(rem)", "\u4E0B(vw)", "\u4E0B(rem)"].map((suffix) => role.label + suffix),
-      toValues: (size) => size.match(/min\((.+?)vw,(.+?)rem\) 0 min\((.+?)vw,(.+?)rem\)/).slice(1).map((v, i) => i % 2 === 0 ? v * 4 : v * 16),
-      toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) 0 min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`,
-      getDisplayValue: (val, n) => n % 2 ? val / 16 : val / 4
-    },
-    gap: {
-      steps: {
-        40: 4,
-        80: 8,
-        160: 16
-      },
-      height: 120,
-      getRowLabels: (role) => ["\u7E26(vw)", "\u7E26(rem)", "\u6A2A(vw)", "\u6A2A(rem)"].map((suffix) => role.label + suffix),
-      toValues: (size) => size.match(/min\((.+?)vw,(.+?)rem\) min\((.+?)vw,(.+?)rem\)/).slice(1).map((v, i) => i % 2 === 0 ? v * 4 : v * 16),
-      toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`,
-      getDisplayValue: (val, n) => n % 2 ? val / 16 : val / 4
-    }
+  var translateToDisplayValue = (value, { r: r2 }, role) => {
+    const cnv = getConverter(role);
+    return cnv.getDisplayValue(value, r2 % cnv.toSizes.length);
   };
   Catpow.Customize.Sizes = (props) => {
     const {
@@ -1666,32 +1766,25 @@
       param: { roles }
     } = props;
     const rolesByShorthand = useMemo(() => Object.values(roles).reduce((p, c) => ({ ...p, [c.shorthand]: c }), {}), [roles]);
-    const rolesByGroup = useMemo(() => {
-      const groups = {};
-      Object.values(roles).forEach((role) => {
-        (groups[role.group] ||= []).push(role);
-      });
-      return groups;
-    }, [roles]);
-    const [state, dispatch] = useReducer(reducer, { sizes, rolesByGroup }, init);
+    const [state, dispatch] = useReducer(reducer, { sizes, rolesByShorthand }, init);
     useEffect(() => {
       onChange(state.sizes);
     }, [state]);
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, Object.keys(rolesByGroup).map((groupKey) => /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, Object.keys(rolesByShorthand).map((h) => /* @__PURE__ */ wp.element.createElement(
       DataSet,
       {
-        values: state.values[groupKey],
-        labels: state.labels[groupKey],
-        colors: state.colors[groupKey],
-        steps: state.steps[groupKey],
-        translateToDisplayValue: (value, ctx) => translateToDisplayValue(value, ctx, rolesByGroup[groupKey]),
+        values: state.values[h],
+        labels: state.labels[h],
+        colors: state.colors[h],
+        steps: state.steps[h],
+        translateToDisplayValue: (value, ctx) => translateToDisplayValue(value, ctx, rolesByShorthand[h]),
         onChange: (values) => {
-          dispatch({ type: "updateValues", group: groupKey, roles: rolesByGroup[groupKey], values });
+          dispatch({ type: "updateValues", group: h, roles: [rolesByShorthand[h]], values });
         }
       },
-      /* @__PURE__ */ wp.element.createElement("h5", { className: "cp-customize__label" }, groupKey),
+      /* @__PURE__ */ wp.element.createElement("h5", { className: "cp-customize__label" }, rolesByShorthand[h].label),
       /* @__PURE__ */ wp.element.createElement(Legend, null),
-      /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 400, height: state.height[groupKey] }),
+      /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 400, height: state.height[h] }),
       /* @__PURE__ */ wp.element.createElement(DataTable, { showRowHeader: false })
     )));
   };
