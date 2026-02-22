@@ -4,10 +4,10 @@
   width: 100%;
 }
 .cp-finder-focused__items-item {
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 5),var(--cp-tones-t-a,1));
+  background-color: oklch(calc(100% - var(--cp-tones-t-t) * 5) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 .cp-finder-focused__items-item:nth-of-type(odd) {
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),var(--cp-tones-t-a,1));
+  background-color: oklch(calc(100% - var(--cp-tones-t-t) * 10) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 .cp-finder-focused__items-item-label {
   padding: 0.625rem;

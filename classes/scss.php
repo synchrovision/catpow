@@ -88,7 +88,9 @@ class scss{
 						$cf='var(--cp-container-tones-'.$key.'-%s)';
 						$rf='var(--cp-root-tones-'.$key.'-%s)';
 						$color=sprintf(
-							'hsla(%s,%s,%s,%s)',
+							'oklch(%s %s %s / %s)',
+							$args[1]==='false'?sprintf($f,'l'):sprintf('calc(1 - '.$f.' * %s)','t',$args[1]),
+							sprintf($f,'c'),
 							is_null($num)?
 							sprintf($f,'h'):
 							($staticHue?
@@ -98,8 +100,6 @@ class scss{
 								 	sprintf('calc('.($relativeHue?$cf:$rf).' + var(--cp-tones-hr) * %s + var(--cp-tones-hs))','h',(int)$num-6)
 								)
 							),
-							sprintf($f,'s'),
-							$args[1]==='false'?sprintf($f,'l'):sprintf('calc(100%% - '.$f.' * %s)','t',$args[1]),
 							$args[2]==='false'?'var(--cp-tones-'.$key.'-a,1)':'calc(var(--cp-tones-'.$key.'-a,1) * '.$args[2].')'
 						);
 					}
@@ -116,10 +116,10 @@ class scss{
 							$a=sprintf('calc(%s * %s)',$a,$args[2]);
 						}
 						$color=sprintf(
-							'hsla(%s,%s,%s,%s)',
-							sprintf($f,'h',$key1,$key2),
-							sprintf($f,'s',$key1,$key2),
+							'oklch(%s %s %s / %s)',
 							sprintf($f,'l',$key1,$key2),
+							sprintf($f,'c',$key1,$key2),
+							sprintf($f,'h',$key1,$key2),
 							$a
 						);
 					}
@@ -153,13 +153,13 @@ class scss{
 							}
 						}	
 						foreach(range(-2,2) as $n){
-							$classes['.has-tone-s'.$n]["--cp-tones-{$key}-s"]="calc(var(--cp-root-tones-{$key}-s) + var(--cp-tones-ss,20%) * {$n})";
-							$classes['.has-tone-l'.$n]["--cp-tones-{$key}-l"]="calc(var(--cp-root-tones-{$key}-l) + var(--cp-tones-ls,10%) * {$n})";
+							$classes['.has-tone-s'.$n]["--cp-tones-{$key}-c"]="calc(var(--cp-root-tones-{$key}-c) + var(--cp-tones-ss,0.1) * {$n})";
+							$classes['.has-tone-l'.$n]["--cp-tones-{$key}-l"]="calc(var(--cp-root-tones-{$key}-l) + var(--cp-tones-ls,0.1) * {$n})";
 						}
 					}
 					if(!empty($color_role['invert'])){
 						$ikey=$color_role['invert'];
-						foreach(['h','s','l','a','t','S','B'] as $k){
+						foreach(['l','c','h','a','t'] as $k){
 							$classes['.has-color-scheme-reverted']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";
 							$classes['.has-color-scheme-inverted']["--cp-tones-{$key}x-{$k}"]="var(--cp-tones-{$ikey}-{$k})";
 							$classes['.has-color-scheme-reverted']["--cp-container-tones-{$key}x-{$k}"]="var(--cp-tones-{$key}-{$k})";

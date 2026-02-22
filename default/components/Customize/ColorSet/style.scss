@@ -98,9 +98,14 @@
 	}
 	&-preview{
 		&__row{
-			@include flx((w:n));
-			&__item{
-				@include bnd((h:20,f:1 1 a));
+			@include grd((tc:repeat(12,1fr)));
+			&-item{
+				@include bnd((p:r,a:1));
+				&-icon{
+					@include bnd((p:a,i:0,mg:a,h:1em,pd:.1em));
+					@include bdr((p:t b,w:1,s:s));
+					@include txt((a:c,p:10,h:1em));
+				}
 			}
 		}
 	}

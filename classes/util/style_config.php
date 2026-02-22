@@ -492,10 +492,7 @@ class style_config{
 	public static function fill_tones_data($tones){
 		$inverts=array_column(self::get_color_roles(),'invert','shorthand');
 		foreach($tones as $key=>$tone){
-			foreach($tone as $k=>$v){
-				if($k!=='h' && $k!=='a')$tones[$key][$k].='%';
-			}
-			if($tone['s']==0 && $tone['h']==0 && isset($inverts[$key]) && isset($tones[$inverts[$key]])){
+			if($tone['c']==0 && $tone['h']==0 && isset($inverts[$key]) && isset($tones[$inverts[$key]])){
 				$tones[$key]['h']=$tones[$inverts[$key]]['h'];
 			}
 		}

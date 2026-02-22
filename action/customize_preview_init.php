@@ -21,11 +21,13 @@ add_action('wp_head',function(){
 					}
 				});
 				Object.keys(colors.tones).map((key)=>{
-					if(colors.tones[key].h==0 && colors.tones[key].s==0 && inverts[key]){
-						colors.tones[key].h=colors.tones[inverts[key]].h;
+					if(inverts[key]){
+						if(colors.tones[key].h==0 && colors.tones[key].c==0){
+							colors.tones[key].h=colors.tones[inverts[key]].h;
+						}
 					}
 					Object.keys(colors.tones[key]).map((k)=>{
-						rootStyle.setProperty('--cp-tones-'+key+'-'+k,colors.tones[key][k]+((k==='h' || k==='a')?'':'%'));
+						rootStyle.setProperty('--cp-tones-'+key+'-'+k,colors.tones[key][k]);
 						if(k==='h'){
 							rootStyle.setProperty('--cp-root-tones-'+key+'-'+k,colors.tones[key][k]);
 							rootStyle.setProperty('--cp-container-tones-'+key+'-'+k,colors.tones[key][k]);

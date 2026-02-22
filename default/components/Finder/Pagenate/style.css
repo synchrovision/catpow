@@ -23,15 +23,15 @@
   -webkit-transition: 0.5s;
   transition: 0.5s;
   line-height: 1em;
-  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
-  box-shadow: 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a,1)) inset, -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1)), -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1)) inset, 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a,1));
+  color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
+  box-shadow: 1px 1px 1px oklch(var(--cp-tones-lt-l) var(--cp-tones-lt-c) var(--cp-tones-lt-h) / var(--cp-tones-lt-a,1)) inset, -1px -1px 1px oklch(var(--cp-tones-sh-l) var(--cp-tones-sh-c) var(--cp-tones-sh-h) / var(--cp-tones-sh-a,1)), -1px -1px 1px oklch(var(--cp-tones-sh-l) var(--cp-tones-sh-c) var(--cp-tones-sh-h) / var(--cp-tones-sh-a,1)) inset, 1px 1px 1px oklch(var(--cp-tones-lt-l) var(--cp-tones-lt-c) var(--cp-tones-lt-h) / var(--cp-tones-lt-a,1));
 }
 .cp-finder-pagenate .button:hover {
   background-color: transparent;
 }
 .cp-finder-pagenate .button.disable {
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),var(--cp-tones-t-a,1));
-  box-shadow: 0px 0px 0px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1)) inset, -0px -0px 0px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a,1)), -0px -0px 0px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a,1)) inset, 0px 0px 0px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1));
+  color: oklch(calc(100% - var(--cp-tones-t-t) * 10) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+  box-shadow: 0px 0px 0px oklch(var(--cp-tones-sh-l) var(--cp-tones-sh-c) var(--cp-tones-sh-h) / var(--cp-tones-sh-a,1)) inset, -0px -0px 0px oklch(var(--cp-tones-lt-l) var(--cp-tones-lt-c) var(--cp-tones-lt-h) / var(--cp-tones-lt-a,1)), -0px -0px 0px oklch(var(--cp-tones-lt-l) var(--cp-tones-lt-c) var(--cp-tones-lt-h) / var(--cp-tones-lt-a,1)) inset, 0px 0px 0px oklch(var(--cp-tones-sh-l) var(--cp-tones-sh-c) var(--cp-tones-sh-h) / var(--cp-tones-sh-a,1));
 }
 .cp-finder-pagenate .items {
   position: relative;
@@ -57,14 +57,14 @@
   border-radius: 0.625rem;
   text-align: center;
   font-size: 0.9375rem;
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 30),var(--cp-tones-t-a,1));
-  box-shadow: 1px 1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1)) inset, -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1)), -1px -1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a,1)) inset, 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a,1));
+  color: oklch(calc(100% - var(--cp-tones-t-t) * 30) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+  box-shadow: 1px 1px 1px oklch(var(--cp-tones-sh-l) var(--cp-tones-sh-c) var(--cp-tones-sh-h) / var(--cp-tones-sh-a,1)) inset, -1px -1px 1px oklch(var(--cp-tones-sh-l) var(--cp-tones-sh-c) var(--cp-tones-sh-h) / var(--cp-tones-sh-a,1)), -1px -1px 1px oklch(var(--cp-tones-lt-l) var(--cp-tones-lt-c) var(--cp-tones-lt-h) / var(--cp-tones-lt-a,1)) inset, 1px 1px 1px oklch(var(--cp-tones-lt-l) var(--cp-tones-lt-c) var(--cp-tones-lt-h) / var(--cp-tones-lt-a,1));
   -webkit-transition: 0.5s;
   transition: 0.5s;
   cursor: pointer;
 }
 .cp-finder-pagenate .items .item.active {
-  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
-  box-shadow: 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a,1)) inset, -1px -1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a,1)), -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1)) inset, 1px 1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1));
+  color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
+  box-shadow: 1px 1px 1px oklch(var(--cp-tones-lt-l) var(--cp-tones-lt-c) var(--cp-tones-lt-h) / var(--cp-tones-lt-a,1)) inset, -1px -1px 1px oklch(var(--cp-tones-lt-l) var(--cp-tones-lt-c) var(--cp-tones-lt-h) / var(--cp-tones-lt-a,1)), -1px -1px 1px oklch(var(--cp-tones-sh-l) var(--cp-tones-sh-c) var(--cp-tones-sh-h) / var(--cp-tones-sh-a,1)) inset, 1px 1px 1px oklch(var(--cp-tones-sh-l) var(--cp-tones-sh-c) var(--cp-tones-sh-h) / var(--cp-tones-sh-a,1));
 }
 /*# sourceMappingURL=./style.css.map */
