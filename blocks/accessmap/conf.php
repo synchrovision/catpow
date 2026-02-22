@@ -26,7 +26,7 @@ $attributes=[
 			"src"=>["source"=>"attribute","selector"=>".{$block_class}__item-map-gmap","attribute"=>"src"],
 		],
 		"default"=>[[
-			"classes"=>"item useQuery",
+			"classes"=>"{$block_class}__item use-query",
 			"title"=>"Title",
 			"address"=>"Osaka city",
 			"tel"=>"00-0000-0000",
