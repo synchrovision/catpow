@@ -45,7 +45,7 @@ $colors:(
 		}
 	}
 	&-altcontent{
-		@include bnd((p:r,h:50 a,pdt:20,mg:40 a));
+		@include bnd((p:r,h:50 a,mg:40 a));
 		@include bdr((s:s,w:1,c:lightgray));
 		@include bg((c:whitesmoke));
 		@include shd((b:-2));
@@ -618,16 +618,20 @@ $colors:(
 	&-selectgridbuttons{
 		@include bnd((mg:0));
 		@for $c from 2 through 6{
-			&.col#{$c}{
+			&.has-columns-#{$c}{
 				@include flx((w:w,c:$c));
 			}
 		}
-		.item{
-			@include bnd((pd:10 5,mg:0 0 -1 -1,bs:b));
+		&__item{
+			@include bnd((pd:10 5,mg:0 0 -1 -1,bs:b,ac:c));
 			@include bdr((s:s,w:1,c:t));
 			@include txt((a:c,p:13,h:1em,c:t));
 			@include usr((c:p));
-			&.active{
+			>.dashicon{
+				@include bnd((w:1em,h:1em));
+				@include txt((p:1em,h:1em));
+			}
+			&.is-active{
 				@include bg((c:wp));
 				@include txt((c:i));
 			}
@@ -652,6 +656,9 @@ $colors:(
 				}
 			}
 		}
+	}
+	&-responsivesizeinput{
+		@include bnd((p:r,z:1));
 	}
 
 	&-datastructure{

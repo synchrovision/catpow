@@ -65,7 +65,6 @@
   position: relative;
   min-height: 3.125rem;
   height: auto;
-  padding-top: 1.25rem;
   margin: 2.5rem auto;
   border-style: solid;
   border-width: 0.0625rem;
@@ -157,13 +156,13 @@
   height: 1.25rem;
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: oklch(calc(100% - var(--cp-tones-t-t) * 20) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+  border-color: oklch(calc(1 - var(--cp-tones-t-t) * 20) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 .cp-selectposition__body-row-cell.is-active {
   background-color: var(--wp-admin-theme-color);
 }
 .cp-selectposition__body-row-cell.is-disabled {
-  background-color: oklch(calc(100% - var(--cp-tones-t-t) * 10) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+  background-color: oklch(calc(1 - var(--cp-tones-t-t) * 10) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 .cp-message {
   padding: 1.25rem;
@@ -264,7 +263,7 @@
 .cp-selectthemecolor-colors-icon, .cp-selectthemecolor-tones-icon {
   margin: 0rem;
   padding: 0rem 0.25rem;
-  color: oklch(calc(100% - var(--cp-tones-t-t) * 100) var(--cp-tones-t-c) var(--cp-tones-t-h) / calc(var(--cp-tones-t-a,1) * 0.2));
+  color: oklch(calc(1 - var(--cp-tones-t-t) * 100) var(--cp-tones-t-c) var(--cp-tones-t-h) / calc(var(--cp-tones-t-a,1) * 0.2));
 }
 .cp-selectthemecolor-colors-icon svg, .cp-selectthemecolor-tones-icon svg {
   width: 1.25rem;
@@ -318,7 +317,7 @@
   border-style: solid;
   border-width: 0.0625rem;
   border-color: var(--wp-admin-theme-color);
-  background-color: oklch(calc(100% - var(--cp-tones-b-t) * 100) var(--cp-tones-b-c) var(--cp-tones-b-h) / calc(var(--cp-tones-b-a,1) * 0.5));
+  background-color: oklch(calc(1 - var(--cp-tones-b-t) * 100) var(--cp-tones-b-c) var(--cp-tones-b-h) / calc(var(--cp-tones-b-a,1) * 0.5));
 }
 .cp-placedpictures.is-edit-mode::before, .cp-placedpictures.is-edit-mode::after {
   content: "";
@@ -849,7 +848,7 @@
   position: relative;
   height: 1.25rem;
   border-radius: 0.5rem;
-  background-color: oklch(calc(100% - var(--cp-tones-t-t) * 100) var(--cp-tones-t-c) var(--cp-tones-t-h) / calc(var(--cp-tones-t-a,1) * 0.25));
+  background-color: oklch(calc(1 - var(--cp-tones-t-t) * 100) var(--cp-tones-t-c) var(--cp-tones-t-h) / calc(var(--cp-tones-t-a,1) * 0.25));
 }
 .cp-datasetinput-row-button.is-button-append::before, .cp-datasetinput-row-button.is-button-append::after {
   content: "";
@@ -936,7 +935,7 @@
   flex-basis: 30%;
   padding-top: 30%;
   margin: 0rem;
-  background-color: oklch(calc(100% - var(--cp-tones-t-t) * 50) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+  background-color: oklch(calc(1 - var(--cp-tones-t-t) * 50) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
   background-size: 50% auto;
   cursor: pointer;
 }
@@ -950,10 +949,10 @@
   -webkit-box-lines: multiple;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  background-color: oklch(calc(100% - var(--cp-tones-t-t) * 20) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+  background-color: oklch(calc(1 - var(--cp-tones-t-t) * 20) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: oklch(calc(100% - var(--cp-tones-t-t) * 10) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+  border-color: oklch(calc(1 - var(--cp-tones-t-t) * 10) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 .cp-selectpreparedimage .item {
   -webkit-box-flex: 0;
@@ -977,10 +976,10 @@
   -webkit-box-lines: multiple;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  background-color: oklch(calc(100% - var(--cp-tones-t-t) * 20) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+  background-color: oklch(calc(1 - var(--cp-tones-t-t) * 20) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: oklch(calc(100% - var(--cp-tones-t-t) * 10) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+  border-color: oklch(calc(1 - var(--cp-tones-t-t) * 10) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 .cp-selectpreparedimageset .item {
   -webkit-box-flex: 0;
@@ -1000,7 +999,7 @@
 .cp-selectgridbuttons {
   margin: 0rem;
 }
-.cp-selectgridbuttons.col2 {
+.cp-selectgridbuttons.has-columns-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -1008,17 +1007,17 @@
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-.cp-selectgridbuttons.col2 > * {
+.cp-selectgridbuttons.has-columns-2 > * {
   flex-grow: 1;
   box-sizing: border-box;
 }
-.cp-selectgridbuttons.col2 > * {
+.cp-selectgridbuttons.has-columns-2 > * {
   flex-basis: 100%;
 }
-.cp-selectgridbuttons.col2 > *:first-child:nth-last-child(2n), .cp-selectgridbuttons.col2 > *:first-child:nth-last-child(2n) ~ * {
+.cp-selectgridbuttons.has-columns-2 > *:first-child:nth-last-child(2n), .cp-selectgridbuttons.has-columns-2 > *:first-child:nth-last-child(2n) ~ * {
   flex-basis: 50%;
 }
-.cp-selectgridbuttons.col3 {
+.cp-selectgridbuttons.has-columns-3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -1026,20 +1025,20 @@
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-.cp-selectgridbuttons.col3 > * {
+.cp-selectgridbuttons.has-columns-3 > * {
   flex-grow: 1;
   box-sizing: border-box;
 }
-.cp-selectgridbuttons.col3 > *:first-child:nth-last-child(1), .cp-selectgridbuttons.col3 > *:first-child:nth-last-child(1) ~ * {
+.cp-selectgridbuttons.has-columns-3 > *:first-child:nth-last-child(1), .cp-selectgridbuttons.has-columns-3 > *:first-child:nth-last-child(1) ~ * {
   flex-basis: 100%;
 }
-.cp-selectgridbuttons.col3 > *, .cp-selectgridbuttons.col3 > *:first-child:nth-last-child(2), .cp-selectgridbuttons.col3 > *:first-child:nth-last-child(2) ~ * {
+.cp-selectgridbuttons.has-columns-3 > *, .cp-selectgridbuttons.has-columns-3 > *:first-child:nth-last-child(2), .cp-selectgridbuttons.has-columns-3 > *:first-child:nth-last-child(2) ~ * {
   flex-basis: 50%;
 }
-.cp-selectgridbuttons.col3 > *:first-child:nth-last-child(3n), .cp-selectgridbuttons.col3 > *:first-child:nth-last-child(3n) ~ *, .cp-selectgridbuttons.col3 > *:nth-child(2n):nth-last-child(3n + 1) ~ * {
+.cp-selectgridbuttons.has-columns-3 > *:first-child:nth-last-child(3n), .cp-selectgridbuttons.has-columns-3 > *:first-child:nth-last-child(3n) ~ *, .cp-selectgridbuttons.has-columns-3 > *:nth-child(2n):nth-last-child(3n + 1) ~ * {
   flex-basis: 33%;
 }
-.cp-selectgridbuttons.col4 {
+.cp-selectgridbuttons.has-columns-4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -1047,20 +1046,20 @@
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-.cp-selectgridbuttons.col4 > * {
+.cp-selectgridbuttons.has-columns-4 > * {
   flex-grow: 1;
   box-sizing: border-box;
 }
-.cp-selectgridbuttons.col4 > *:first-child:nth-last-child(2), .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(2) ~ *, .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(5), .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(5) ~ * {
+.cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(2), .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(2) ~ *, .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(5), .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(5) ~ * {
   flex-basis: 50%;
 }
-.cp-selectgridbuttons.col4 > *, .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(3), .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(3) ~ *, .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(5) ~ *:nth-child(2n):nth-last-child(3n + 1) ~ * {
+.cp-selectgridbuttons.has-columns-4 > *, .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(3), .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(3) ~ *, .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(5) ~ *:nth-child(2n):nth-last-child(3n + 1) ~ * {
   flex-basis: 33%;
 }
-.cp-selectgridbuttons.col4 > *:first-child:nth-last-child(4n), .cp-selectgridbuttons.col4 > *:first-child:nth-last-child(4n) ~ *, .cp-selectgridbuttons.col4 > *:nth-child(3n):nth-last-child(4n + 1) ~ * {
+.cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(4n), .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(4n) ~ *, .cp-selectgridbuttons.has-columns-4 > *:nth-child(3n):nth-last-child(4n + 1) ~ * {
   flex-basis: 25%;
 }
-.cp-selectgridbuttons.col5 {
+.cp-selectgridbuttons.has-columns-5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -1068,23 +1067,23 @@
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-.cp-selectgridbuttons.col5 > * {
+.cp-selectgridbuttons.has-columns-5 > * {
   flex-grow: 1;
   box-sizing: border-box;
 }
-.cp-selectgridbuttons.col5 > *:first-child:nth-last-child(3), .cp-selectgridbuttons.col5 > *:first-child:nth-last-child(3) ~ *, .cp-selectgridbuttons.col5 > *:first-child:nth-last-child(7), .cp-selectgridbuttons.col5 > *:first-child:nth-last-child(7) ~ *, .cp-selectgridbuttons.col5 > *:first-child:nth-last-child(11), .cp-selectgridbuttons.col5 > *:first-child:nth-last-child(11) ~ * {
+.cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(3), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(3) ~ *, .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(7), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(7) ~ *, .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(11), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(11) ~ * {
   flex-basis: 33%;
 }
-.cp-selectgridbuttons.col5 > *, .cp-selectgridbuttons.col5 > *:first-child:nth-last-child(4), .cp-selectgridbuttons.col5 > *:first-child:nth-last-child(4) ~ *, .cp-selectgridbuttons.col5 > *:first-child:nth-last-child(7) ~ *:nth-child(3n):nth-last-child(4n + 1) ~ *, .cp-selectgridbuttons.col5 > *:first-child:nth-last-child(8), .cp-selectgridbuttons.col5 > *:first-child:nth-last-child(8) ~ *, .cp-selectgridbuttons.col5 > *:first-child:nth-last-child(11) ~ *:nth-child(3n):nth-last-child(4n + 1) ~ * {
+.cp-selectgridbuttons.has-columns-5 > *, .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(4), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(4) ~ *, .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(7) ~ *:nth-child(3n):nth-last-child(4n + 1) ~ *, .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(8), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(8) ~ *, .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(11) ~ *:nth-child(3n):nth-last-child(4n + 1) ~ * {
   flex-basis: 25%;
 }
-.cp-selectgridbuttons.col5 > *:first-child:nth-last-child(5n), .cp-selectgridbuttons.col5 > *:first-child:nth-last-child(5n) ~ *, .cp-selectgridbuttons.col5 > *:nth-child(4n):nth-last-child(5n + 1) ~ * {
+.cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(5n), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(5n) ~ *, .cp-selectgridbuttons.has-columns-5 > *:nth-child(4n):nth-last-child(5n + 1) ~ * {
   flex-basis: 20%;
 }
-.cp-selectgridbuttons.col5 > *:first-child:nth-last-child(6), .cp-selectgridbuttons.col5 > *:first-child:nth-last-child(6) ~ * {
+.cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(6), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(6) ~ * {
   flex-basis: 16%;
 }
-.cp-selectgridbuttons.col6 {
+.cp-selectgridbuttons.has-columns-6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -1092,29 +1091,30 @@
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-.cp-selectgridbuttons.col6 > * {
+.cp-selectgridbuttons.has-columns-6 > * {
   flex-grow: 1;
   box-sizing: border-box;
 }
-.cp-selectgridbuttons.col6 > *:first-child:nth-last-child(3), .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(3) ~ * {
+.cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(3), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(3) ~ * {
   flex-basis: 33%;
 }
-.cp-selectgridbuttons.col6 > *:first-child:nth-last-child(4), .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(4) ~ *, .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(8), .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(8) ~ *, .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(9), .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(9) ~ *, .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(14), .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(14) ~ *, .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(19), .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(19) ~ * {
+.cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(4), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(4) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(8), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(8) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(9), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(9) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(14), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(14) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(19), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(19) ~ * {
   flex-basis: 25%;
 }
-.cp-selectgridbuttons.col6 > *, .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(5), .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(5) ~ *, .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(9) ~ *:nth-child(4n):nth-last-child(5n + 1) ~ *, .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(10), .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(10) ~ *, .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(14) ~ *:nth-child(4n):nth-last-child(5n + 1) ~ *, .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(15), .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(15) ~ *, .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(19) ~ *:nth-child(4n):nth-last-child(5n + 1) ~ * {
+.cp-selectgridbuttons.has-columns-6 > *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(5), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(5) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(9) ~ *:nth-child(4n):nth-last-child(5n + 1) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(10), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(10) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(14) ~ *:nth-child(4n):nth-last-child(5n + 1) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(15), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(15) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(19) ~ *:nth-child(4n):nth-last-child(5n + 1) ~ * {
   flex-basis: 20%;
 }
-.cp-selectgridbuttons.col6 > *:first-child:nth-last-child(6n), .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(6n) ~ *, .cp-selectgridbuttons.col6 > *:nth-child(5n):nth-last-child(6n + 1) ~ *, .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(13), .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(13) ~ * {
+.cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(6n), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(6n) ~ *, .cp-selectgridbuttons.has-columns-6 > *:nth-child(5n):nth-last-child(6n + 1) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(13), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(13) ~ * {
   flex-basis: 16%;
 }
-.cp-selectgridbuttons.col6 > *:first-child:nth-last-child(7), .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(7) ~ *, .cp-selectgridbuttons.col6 > *:first-child:nth-last-child(13) ~ *:nth-child(6n):nth-last-child(7n + 1) ~ * {
+.cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(7), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(7) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(13) ~ *:nth-child(6n):nth-last-child(7n + 1) ~ * {
   flex-basis: 14%;
 }
-.cp-selectgridbuttons .item {
+.cp-selectgridbuttons__item {
   padding: 0.625rem 0.3125rem;
   margin: 0rem 0rem -0.0625rem -0.0625rem;
   box-sizing: border-box;
+  align-content: center;
   border-style: solid;
   border-width: 0.0625rem;
   border-color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
@@ -1124,7 +1124,13 @@
   color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
   cursor: pointer;
 }
-.cp-selectgridbuttons .item.active {
+.cp-selectgridbuttons__item > .dashicon {
+  width: 1em;
+  height: 1em;
+  font-size: 1em;
+  line-height: 1em;
+}
+.cp-selectgridbuttons__item.is-active {
   background-color: var(--wp-admin-theme-color);
   color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
 }
@@ -1135,11 +1141,15 @@
 .cp-datainputtable__head__row__cell {
   padding: 0.25rem;
   font-weight: 400;
-  background-color: oklch(calc(100% - var(--cp-tones-t-t) * 10) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+  background-color: oklch(calc(1 - var(--cp-tones-t-t) * 10) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 .cp-datainputtable__body__row__cell {
   padding: 0.25rem;
-  background-color: oklch(calc(100% - var(--cp-tones-t-t) * 5) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+  background-color: oklch(calc(1 - var(--cp-tones-t-t) * 5) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+}
+.cp-responsivesizeinput {
+  position: relative;
+  z-index: 1;
 }
 .cp-datastructure .item {
   padding: 0rem;
@@ -1158,7 +1168,7 @@
   display: inline-block;
   margin-left: 1em;
   font-size: 0.8em;
-  color: oklch(calc(100% - var(--cp-tones-t-t) * 50) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+  color: oklch(calc(1 - var(--cp-tones-t-t) * 50) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 .cp-datastructure .item.hasChildren > .title::before {
   content: "▶︎";
@@ -1169,7 +1179,7 @@
   left: 0rem;
   margin: auto;
   font-size: 0.7em;
-  color: oklch(calc(100% - var(--cp-tones-t-t) * 50) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+  color: oklch(calc(1 - var(--cp-tones-t-t) * 50) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 .cp-datastructure .item.hasChildren.open > .title::before {
   transform: -webkit- rotateZ(90deg);
