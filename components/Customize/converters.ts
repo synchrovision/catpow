@@ -73,6 +73,15 @@ const fontSizeConfig = {
 	},
 	height: 400,
 };
+const relativeFontSizeConfig = {
+	steps: {
+		4: 0,
+		16: 1,
+		32: 2,
+		64: 4,
+	},
+	height: 400,
+};
 const fontWeightConfig = {
 	steps: {
 		100: 0,
@@ -153,7 +162,9 @@ export const relativePaddingConverter: converter = {
 	toSizes: (v, h) => `${v / 16}em ${h / 16}em`,
 	getDisplayValue: (val) => val / 16,
 };
-
+export const relativeMarginConverter: converter = {
+	...relativePaddingConverter,
+};
 export const letterSpacingConverter: converter = {
 	...letterSpacingConfig,
 	getRowLabels: (label) => [label + "(%)"],
@@ -169,6 +180,10 @@ export const lineHeightConverter: converter = {
 export const fontSizeConverter: converter = {
 	...responsiveSizeConverter,
 	...fontSizeConfig,
+};
+export const relativeFontSizeConverter: converter = {
+	...relativeSizeConverter,
+	...relativeFontSizeConfig,
 };
 
 export const fontWeightConverter: converter = {

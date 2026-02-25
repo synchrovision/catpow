@@ -1465,6 +1465,8 @@
     lineHeightConverter: () => lineHeightConverter,
     relativeBorderRadiusConverter: () => relativeBorderRadiusConverter,
     relativeBorderWidthConverter: () => relativeBorderWidthConverter,
+    relativeFontSizeConverter: () => relativeFontSizeConverter,
+    relativeMarginConverter: () => relativeMarginConverter,
     relativePaddingConverter: () => relativePaddingConverter,
     relativeSizeConverter: () => relativeSizeConverter,
     relativeSpacingConverter: () => relativeSpacingConverter,
@@ -1538,6 +1540,15 @@
       128: 8,
       256: 16,
       512: 32
+    },
+    height: 400
+  };
+  var relativeFontSizeConfig = {
+    steps: {
+      4: 0,
+      16: 1,
+      32: 2,
+      64: 4
     },
     height: 400
   };
@@ -1617,6 +1628,9 @@
     toSizes: (v, h) => `${v / 16}em ${h / 16}em`,
     getDisplayValue: (val) => val / 16
   };
+  var relativeMarginConverter = {
+    ...relativePaddingConverter
+  };
   var letterSpacingConverter = {
     ...letterSpacingConfig,
     getRowLabels: (label) => [label + "(%)"],
@@ -1631,6 +1645,10 @@
   var fontSizeConverter = {
     ...responsiveSizeConverter,
     ...fontSizeConfig
+  };
+  var relativeFontSizeConverter = {
+    ...relativeSizeConverter,
+    ...relativeFontSizeConfig
   };
   var fontWeightConverter = {
     ...fontWeightConfig,
