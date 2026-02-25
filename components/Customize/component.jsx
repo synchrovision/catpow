@@ -18,7 +18,7 @@ Catpow.Customize = (props) => {
 			setValue(value);
 			wp.customize.control(id).setting.set(value);
 		},
-		[id]
+		[id],
 	);
 
 	if (value === null) {
