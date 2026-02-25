@@ -2428,13 +2428,12 @@
     const [sizes, setSizes] = useState(valueToSizes(value2));
     useThrottle(
       () => {
-        console.log(sizes);
         onChange(sizesToValue(sizes));
       },
       100,
       [sizes]
     );
-    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("div", { className: "responsivesizeinput-" }, /* @__PURE__ */ wp.element.createElement(RangeInput, { values: sizes, steps, order, snap, onChange: (size) => setSizes(size) })));
+    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("div", { className: "responsivesizeinput-" }, /* @__PURE__ */ wp.element.createElement(RangeInput, { values: sizes, steps, order, snap, onChange: (size) => setSizes(size) }), /* @__PURE__ */ wp.element.createElement("div", { className: "_previews", style: { "--rem": sizes.rem, "--vw": sizes.vw } }, /* @__PURE__ */ wp.element.createElement("div", { className: "-preview is-preview-pc is-preview-rem" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_label" }, /* @__PURE__ */ wp.element.createElement("output", { className: "_value" }, sizes.rem, "rem"))), sizes.rem * 4 < sizes.vw ? /* @__PURE__ */ wp.element.createElement("div", { className: "-preview is-preview-sp is-preview-rem" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_label" }, /* @__PURE__ */ wp.element.createElement("output", { className: "_value" }, sizes.rem, "rem"))) : /* @__PURE__ */ wp.element.createElement("div", { className: "-preview is-preview-sp is-preview-vw" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_label" }, /* @__PURE__ */ wp.element.createElement("output", { className: "_value" }, sizes.vw, "vw"))))));
   };
 
   // ../blocks/_init/init/CP/components/SelectPictureSources.jsx
@@ -2615,85 +2614,85 @@
   var colorRoles = {
     b: {
       name: "background",
-      default: { h: 0, s: 0, l: 100, a: 1 },
+      default: { h: 0, c: 0, l: 1, a: 1 },
       extend: true,
       invert: "m"
     },
-    s: {
+    c: {
       name: "sheet",
-      default: { h: 0, s: 0, l: 95, a: 1 },
+      default: { h: 0, c: 0, l: 0.95, a: 1 },
       extend: true,
       invert: "a"
     },
     t: {
       name: "text",
-      default: { h: 0, s: 0, l: 40, a: 1 },
+      default: { h: 0, c: 0, l: 0.4, a: 1 },
       extend: true,
       invert: "i"
     },
     h: {
       name: "highlight",
-      default: { h: 6, s: 100, l: 33, a: 1 },
+      default: { h: 6, c: 0.4, l: 0.33, a: 1 },
       extend: true,
       invert: "e"
     },
     m: {
       name: "main",
-      default: { h: 30, s: 33, l: 20, a: 1 },
+      default: { h: 30, c: 0.1, l: 0.2, a: 1 },
       extend: true,
       invert: "b"
     },
     a: {
       name: "accent",
-      default: { h: 32, s: 100, l: 50, a: 1 },
+      default: { h: 32, c: 0.4, l: 0.5, a: 1 },
       extend: true,
       invert: "s"
     },
     i: {
       name: "inside",
-      default: { h: 0, s: 0, l: 100, a: 1 },
+      default: { h: 0, c: 0, l: 1, a: 1 },
       extend: true,
       invert: "t"
     },
     e: {
       name: "emphasis",
-      default: { h: 12, s: 100, l: 50, a: 1 },
+      default: { h: 12, c: 0.4, l: 0.5, a: 1 },
       extend: true,
       invert: "h"
     },
     l: {
       name: "line",
-      default: { h: 0, s: 0, l: 40, a: 1 },
+      default: { h: 0, c: 0, l: 0.4, a: 1 },
       extend: true,
       invert: "r"
     },
     r: {
       name: "rule",
-      default: { h: 0, s: 0, l: 100, a: 1 },
+      default: { h: 0, c: 0, l: 1, a: 1 },
       extend: true,
       invert: "l"
     },
     lt: {
       name: "light",
-      default: { h: 0, s: 0, l: 100, a: 0.6 },
+      default: { h: 0, c: 0, l: 1, a: 0.6 },
       extend: false,
       invert: null
     },
     lst: {
       name: "lust",
-      default: { h: 0, s: 0, l: 100, a: 0.9 },
+      default: { h: 0, c: 0, l: 1, a: 0.9 },
       extend: false,
       invert: null
     },
     sh: {
       name: "shade",
-      default: { h: 0, s: 0, l: 0, a: 0.2 },
+      default: { h: 0, c: 0, l: 0, a: 0.2 },
       extend: false,
       invert: null
     },
     shd: {
       name: "shadow",
-      default: { h: 0, s: 0, l: 0, a: 0.3 },
+      default: { h: 0, c: 0, l: 0, a: 0.3 },
       extend: false,
       invert: null
     }

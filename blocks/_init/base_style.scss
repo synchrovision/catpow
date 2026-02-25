@@ -659,6 +659,53 @@ $colors:(
 	}
 	&-responsivesizeinput{
 		@include bnd((p:r,z:1));
+		&__previews{
+			@include bnd((mgt:16));
+			@include flx((j:c,g:8));
+		}
+		&-preview{
+			$block:&;
+			@include bnd((p:r));
+			@include bdr((s:s,w:4 4 8 4,r:4,c:wp));
+			&__label{
+				@include bnd((p:a,i:0,mg:a,h:fit));
+				@include bdr((p:b,s:s,w:1,c:wp));
+				@include txt((a:c,p:12,c:wp));
+				&::after{
+					content:'';
+					@include bnd((d:b,p:a,l:0,r:0,b:-4,w:f,h:8));
+					@include bdr((p:l r,s:s,w:1,c:wp));
+				}
+				&-value{
+					
+				}
+			}
+			&.is-preview-pc{
+				@include bnd((w:160,h:90));
+				#{$block}{
+					&__label{
+						@include bnd((w:calc(var(--rem) * 1%)));
+					}
+				}
+			}
+			&.is-preview-sp{
+				@include bnd((w:60,h:90));
+				&.is-preview-vw{
+					#{$block}{
+						&__label{
+							@include bnd((w:calc(var(--vw) * 1%)));
+						}
+					}
+				}
+				&.is-preview-rem{
+					#{$block}{
+						&__label{
+							@include bnd((w:calc(var(--rem) * 4%)));
+						}
+					}
+				}
+			}
+		}
 	}
 
 	&-datastructure{
