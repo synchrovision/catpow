@@ -9,6 +9,7 @@ export * from "./SelectButtons.jsx";
 export * from "./SelectGridButtons.jsx";
 export * from "./SelectResponsiveImage.jsx";
 export * from "./ResponsiveImage.jsx";
+export * from "./ResponsiveSizeInput.jsx";
 export * from "./SelectPictureSources.jsx";
 export * from "./SelectPreparedImage.jsx";
 export * from "./SelectPreparedImageSet.jsx";
