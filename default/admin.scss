@@ -167,7 +167,7 @@ body{
 		@include bg((c:b));
 	}
 	.cp-meta-item{
-		img,video{@include bnd((d:b,w:100,h:a));}
+		img,video{@include bnd((d:b,w:100,h:a));@include bg((c:lightgray));}
 	}
 	table{
 		&.manage{

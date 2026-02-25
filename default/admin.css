@@ -1,6 +1,6 @@
 @charset "UTF-8";
 body {
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
+  background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
 }
 body::after {
   content: "　";
@@ -48,7 +48,7 @@ body.login .button.sns_login img {
   vertical-align: middle;
 }
 #adminmenumain #adminmenuback {
-  box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  box-shadow: 0 3px 7px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 @media (max-width:959px) {
   #wpcontent {
@@ -56,36 +56,36 @@ body.login .button.sns_login img {
   }
 }
 #wpcontent #wpadminbar {
-  box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  box-shadow: 0 3px 7px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 #wpcontent #wpadminbar #wp-admin-bar-clone_post .ab-icon::before {
   content: "";
 }
 #wpcontent #editor {
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
+  background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
 }
 #wpcontent #editor .edit-post-header, #wpcontent #editor .edit-post-sidebar {
-  box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  box-shadow: 0 3px 7px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 #wpcontent #editor .editor-post-title__block .editor-post-title__input {
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
+  color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 #wpcontent #editor .edit-post-visual-editor {
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
+  background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
 }
 #wpcontent #editor .edit-post-visual-editor .editor-post-title__block, #wpcontent #editor .edit-post-visual-editor .editor-block-list__block {
   max-width: 60rem;
   width: auto;
 }
 #wpcontent #editor .edit-post-layout__metaboxes {
-  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a,1) * 0.5));
+  border-color: oklch(calc(1 - var(--cp-tones-t-t) * 100) var(--cp-tones-t-c) var(--cp-tones-t-h) / calc(var(--cp-tones-t-a,1) * 0.5));
 }
 #wpcontent #cpcf_custom_box {
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
+  background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
 }
 #wpcontent #cpcf_custom_box > h2 {
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
-  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a,1) * 0.3));
+  color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+  border-color: oklch(calc(1 - var(--cp-tones-t-t) * 100) var(--cp-tones-t-c) var(--cp-tones-t-h) / calc(var(--cp-tones-t-a,1) * 0.3));
 }
 #wpcontent #cpcf_custom_box .inside {
   padding: 1rem;
@@ -99,16 +99,16 @@ body.login .button.sns_login img {
   right: 0.5em;
   height: auto;
   padding: 1em;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
+  background-color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
   border-radius: 2em;
   text-align: center;
   font-size: 0.9375rem;
   line-height: 1em;
-  font-family: var(--cp-font-family-g);
+  font-family: var(--cp-font-family-f-g);
   font-weight: 500;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+  color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
   cursor: pointer;
-  box-shadow: 0 4px 9px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  box-shadow: 0 4px 9px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 #wpcontent #cp_search #cpcf_custom_box_button::before {
   content: "";
@@ -126,9 +126,9 @@ body.login .button.sns_login img {
   max-height: 80vh;
   height: auto;
   overflow-y: auto;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
+  background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
   border-radius: 0.625rem 0rem 0rem 0rem;
-  box-shadow: 0 5px 11px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  box-shadow: 0 5px 11px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
   pointer-events: none;
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -165,12 +165,12 @@ body.login .button.sns_login img {
   top: 2.5rem;
   left: -12.5rem;
   z-index: 10000;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
+  background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
+  border-color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
   border-radius: 0.625rem;
-  box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  box-shadow: 0 3px 7px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
   -webkit-transition: 0.5s;
   transition: 0.5s;
   opacity: 0;
@@ -189,7 +189,7 @@ body.login .button.sns_login img {
   border-style: solid;
   border-width: 0.625rem;
   border-color: transparent;
-  border-bottom-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
+  border-bottom-color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
 }
 #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs.active {
   opacity: 1;
@@ -206,16 +206,16 @@ body.login .button.sns_login img {
   padding: 0.3125rem 0.625rem;
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 30),var(--cp-tones-t-a,1));
+  border-color: oklch(calc(1 - var(--cp-tones-t-t) * 30) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
   text-align: left;
   font-size: 0.75rem;
   line-height: 1em;
-  font-family: var(--cp-font-family-g);
+  font-family: var(--cp-font-family-f-g);
   font-weight: normal;
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 80),var(--cp-tones-t-a,1));
+  color: oklch(calc(1 - var(--cp-tones-t-t) * 80) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs table.inputs th {
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 100),calc(var(--cp-tones-m-a,1) * 0.1));
+  background-color: oklch(calc(1 - var(--cp-tones-m-t) * 100) var(--cp-tones-m-c) var(--cp-tones-m-h) / calc(var(--cp-tones-m-a,1) * 0.1));
 }
 #wpcontent form#posts-filter div.tablenav.top .actions div.search_condition div.inputs table.inputs td label {
   display: inline-block;
@@ -223,12 +223,13 @@ body.login .button.sns_login img {
 }
 #wpcontent .cpform_section {
   padding: 0.625rem;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
+  background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
 }
 #wpcontent .cp-meta-item img, #wpcontent .cp-meta-item video {
   display: block;
   width: 6.25rem;
   height: auto;
+  background-color: lightgray;
 }
 #wpcontent table.manage {
   width: 100%;
@@ -239,7 +240,7 @@ body.login .button.sns_login img {
   padding: 1.25rem 0.3125rem;
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
-  border-bottom-color: hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  border-bottom-color: oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 #wpcontent table.manage > thead > tr > th.control, #wpcontent table.manage > thead > tr > td.control, #wpcontent table.manage > tbody > tr > th.control, #wpcontent table.manage > tbody > tr > td.control {
   width: 5rem;
@@ -248,14 +249,14 @@ body.login .button.sns_login img {
   width: 10rem;
   text-align: left;
   font-size: 0.75rem;
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
+  color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
   font-weight: bold;
 }
 #wpcontent table.manage > thead > tr > td, #wpcontent table.manage > tbody > tr > td {
-  background-color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),calc(100% - var(--cp-tones-bx-t) * 100),calc(var(--cp-tones-bx-a,1) * 0.5));
+  background-color: oklch(calc(1 - var(--cp-tones-bx-t) * 100) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / calc(var(--cp-tones-bx-a,1) * 0.5));
   text-align: left;
   font-size: 0.6875rem;
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
+  color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
   font-weight: normal;
 }
 #wpcontent table.manage > thead > tr > td textarea.full, #wpcontent table.manage > tbody > tr > td textarea.full {
