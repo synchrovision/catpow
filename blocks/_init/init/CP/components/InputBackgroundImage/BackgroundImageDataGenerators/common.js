@@ -46,5 +46,5 @@ export const seedParams = {
 export const getBaseGradientCode = (params) => {
 	const { useAccentColor = true, baseGradientRotate = 0, baseGradientColor1 = 6, baseGradientColor2 = 7 } = params;
 	const colorKey = useAccentColor ? "sx" : "bx";
-	return `linear-gradient(${baseGradientRotate}deg in hsl,${translateColor(colorKey + baseGradientColor1)},${translateColor(colorKey + baseGradientColor2)})`;
+	return `linear-gradient(${baseGradientRotate}deg in oklch,${translateColor(colorKey + baseGradientColor1)},${translateColor(colorKey + baseGradientColor2)})`;
 };

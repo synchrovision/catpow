@@ -2661,6 +2661,18 @@
       extend: true,
       invert: "h"
     },
+    l: {
+      name: "line",
+      default: { h: 0, s: 0, l: 40, a: 1 },
+      extend: true,
+      invert: "r"
+    },
+    r: {
+      name: "rule",
+      default: { h: 0, s: 0, l: 100, a: 1 },
+      extend: true,
+      invert: "l"
+    },
     lt: {
       name: "light",
       default: { h: 0, s: 0, l: 100, a: 0.6 },
@@ -2711,10 +2723,10 @@
         const cf = (p) => `var(--cp-container-tones-${key}-${p})`;
         const rf = (p) => `var(--cp-root-tones-${key}-${p})`;
         const h = num ? staticHue ? num : num === "0" || num === "6" ? f("h") : `calc(${relativeHue ? cf("h") : rf("h")} + var(--cp-tones-hr) * ${num - 6} + var(--cp-tones-hs))` : f("h");
-        const s = f("s");
-        const l = tint ? `calc(100% - ${f("l")} * ${tint})` : `${f("l")}`;
+        const c2 = f("c");
+        const l = tint ? `calc(1 - ${f("t")} * ${tint} / 100)` : `${f("l")}`;
         const a = alpha ? `calc(${f("a")} * ${alpha})` : f("a");
-        return `hsla(${h}, ${s}, ${l}, ${a})`;
+        return `oklch(${l} ${c2} ${h} / ${a})`;
       }
     } else {
       const matches2 = color.match(/^([a-z]+)\-([a-z]+)$/);
@@ -2725,7 +2737,7 @@
           const t2 = 1 - t1;
           const f = (p) => `calc(var(--cp-tones-${key1}-${p}) * ${t1} + var(--cp-tones-${key2}-${p}) * ${t2})`;
           const a = alpha ? `calc(${f("a")} * ${alpha})` : f("a");
-          return `hsla(${f("h")}, ${f("s")}, ${f("l")}, ${a})`;
+          return `oklch(${f("l")} ${f("c")} ${f("h")} / ${a})`;
         }
       }
     }
@@ -2777,7 +2789,7 @@
   var getBaseGradientCode = (params) => {
     const { useAccentColor = true, baseGradientRotate = 0, baseGradientColor1 = 6, baseGradientColor2 = 7 } = params;
     const colorKey = useAccentColor ? "sx" : "bx";
-    return `linear-gradient(${baseGradientRotate}deg in hsl,${translateColor(colorKey + baseGradientColor1)},${translateColor(colorKey + baseGradientColor2)})`;
+    return `linear-gradient(${baseGradientRotate}deg in oklch,${translateColor(colorKey + baseGradientColor1)},${translateColor(colorKey + baseGradientColor2)})`;
   };
 
   // ../blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/custom.js
