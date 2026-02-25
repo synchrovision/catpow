@@ -2,6 +2,7 @@
 $block_class="wp-block-catpow-accessmap";
 $attributes=[
 	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} has-item-size-medium"],
+	'vars'=>['type'=>'object'],
 	
 	"TitleTag"=>["type"=>"string","default"=>"h3"],
 	

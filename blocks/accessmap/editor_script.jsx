@@ -8,7 +8,7 @@
 		const { useMemo } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { classes, TitleTag, items = [], z, t, hl, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { classes, vars, TitleTag, items = [], z, t, hl, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 
 		var states = useMemo(() => CP.classNamesToFlags(classes), [classes]);
 
@@ -123,6 +123,8 @@
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
+		const blockProps = useBlockProps({ className: EditMode || (AltMode && doLoop) ? "cp-altcontent" : classes, style: vars });
+
 		return (
 			<>
 				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
@@ -146,10 +148,8 @@
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				{EditMode ? (
-					<div className="cp-altcontent">
-						<div className="label">
-							<Icon icon="edit" />
-						</div>
+					<div {...blockProps}>
+						<CP.Label icon="welcome-comments">アクセス情報</CP.Label>
 						<CP.EditItemsTable
 							set={setAttributes}
 							attr={attributes}
@@ -170,15 +170,13 @@
 				) : (
 					<>
 						{AltMode && doLoop ? (
-							<div className="cp-altcontent">
-								<div className="label">
-									<Icon icon="welcome-comments" />
-								</div>
+							<div {...blockProps}>
+								<CP.Label icon="welcome-comments">代替コンテンツ</CP.Label>
 								<InnerBlocks />
 							</div>
 						) : (
 							<CP.Bem prefix="wp-block-catpow">
-								<div {...useBlockProps({ className: classes })}>
+								<div {...blockProps}>
 									{[...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
 										let url;
 										const index = i % items.length;
@@ -281,13 +279,13 @@
 	},
 	save({ attributes }) {
 		const { InnerBlocks, RichText } = wp.blockEditor;
-		const { classes, TitleTag, items = [], z, t, hl, doLoop } = attributes;
+		const { classes, vars, TitleTag, items = [], z, t, hl, doLoop } = attributes;
 		const states = CP.classNamesToFlags(classes);
 
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<div className={classes}>
+					<div className={classes} style={vars}>
 						{items.map((item, index) => {
 							let url;
 							const itemState = CP.classNamesToFlags(item.classes);

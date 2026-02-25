@@ -1,20 +1,27 @@
 .wp-block-catpow-accessmap {
   padding: 0rem;
-  margin: 0rem;
+  margin-inline: auto;
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--cp-size-i), 100%), 1fr));
+  grid-gap: var(--cp-margin-c-c);
   list-style: none;
   font-feature-settings: "palt";
 }
 .wp-block-catpow-accessmap__item {
   padding: 0rem;
+  overflow: hidden;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
   -webkit-box-lines: multiple;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
+  border-radius: var(--cp-border-radius-c-c);
   background-color: oklch(var(--cp-tones-sx-l) var(--cp-tones-sx-c) var(--cp-tones-sx-h) / var(--cp-tones-sx-a,1));
   color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
-  box-shadow: 0 4px 9px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+  box-shadow: var(--cp-shadow-c-c) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 .wp-block-catpow-accessmap__item-map-gmap {
   display: block;
@@ -23,6 +30,9 @@
   object-position: center;
   object-fit: cover;
   border-style: none;
+}
+.wp-block-catpow-accessmap__item-access {
+  padding: var(--cp-padding-c-c);
 }
 .wp-block-catpow-accessmap__item-access-title {
   padding: 0rem;

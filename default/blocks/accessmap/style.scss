@@ -3,14 +3,16 @@
 .wp-block-catpow-accessmap{
 	$block:&;
 	$item:#{$block}__item;
-	@include bnd((pd:0,mg:0));
+	@include bnd((pd:0,mgi:a));
+	@include grd((rc:i,g:c-c));
 	@include txt((l:n,ffs:p));
 	&__item{
-		@include bnd((pd:0));
+		@include bnd((pd:0,o:h));
 		@include flx((w:w));
+		@include bdr((r:c-c));
 		@include bg((c:sx));
 		@include txt((c:tx));
-		@include shd((b:4));
+		@include shd((b:c-c));
 		&-map{
 			&-gmap{
 				@include bnd((d:b,w:f,h:f,op:c,of:c));
@@ -18,6 +20,7 @@
 			}
 		}
 		&-access{
+			@include bnd((pd:c-c));
 			&-title{
 				@include bnd((pd:0,mg:0,mgb:.5em));
 				@include txt((p:1.5em));
