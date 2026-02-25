@@ -38,69 +38,15 @@ add_action('wp_head',function(){
 				rootStyle.setProperty('--cp-tones-hs',colors.hueShift);
 			});
 		});
-		wp.customize('font_family',function(setting){
-			setting.bind(function(FontFamilies){
-				Object.keys(FontFamilies).forEach((role)=>{
-					rootStyle.setProperty('--cp-font-family-'+role,FontFamilies[role]);
+<?php foreach(Catpow\util\style_config::$control_names as $controle_name):if($controle_name==='color'){continue;} ?>
+		wp.customize('<?=$controle_name?>',function(setting){
+			setting.bind(function(vars){
+				Object.keys(vars).forEach((role)=>{
+					rootStyle.setProperty('--cp-<?=strtr($controle_name,['_'=>'-'])?>-'+role,vars[role]);
 				});
 			});
 		});
-		wp.customize('font_size',function(setting){
-			setting.bind(function(fontSizes){
-				Object.keys(fontSizes).forEach((role)=>{
-					rootStyle.setProperty('--cp-font-size-'+role,fontSizes[role]);
-				});
-			});
-		});
-		wp.customize('border_width',function(setting){
-			setting.bind(function(borderWidth){
-				Object.keys(borderWidth).forEach((role)=>{
-					rootStyle.setProperty('--cp-border-width-'+role,borderWidth[role]);
-				});
-			});
-		});
-		wp.customize('border_radius',function(setting){
-			setting.bind(function(borderRadius){
-				Object.keys(borderRadius).forEach((role)=>{
-					rootStyle.setProperty('--cp-border-radius-'+role,borderRadius[role]);
-				});
-			});
-		});
-		wp.customize('line_height',function(setting){
-			setting.bind(function(lineHeights){
-				Object.keys(lineHeights).forEach((role)=>{
-					rootStyle.setProperty('--cp-line-height-'+role,lineHeights[role]);
-				});
-			});
-		});
-		wp.customize('letter_spacing',function(setting){
-			setting.bind(function(letterSpacing){
-				Object.keys(letterSpacing).forEach((role)=>{
-					rootStyle.setProperty('--cp-letter-spacing-'+role,letterSpacing[role]);
-				});
-			});
-		});
-		wp.customize('font_weight',function(setting){
-			setting.bind(function(fontWeight){
-				Object.keys(fontWeight).forEach((role)=>{
-					rootStyle.setProperty('--cp-font-weight-'+role,fontWeight[role]);
-				});
-			});
-		});
-		wp.customize('size',function(setting){
-			setting.bind(function(size){
-				Object.keys(size).forEach((role)=>{
-					rootStyle.setProperty('--cp-size-'+role,size[role]);
-				});
-			});
-		});
-		wp.customize('shadow',function(setting){
-			setting.bind(function(shadow){
-				Object.keys(shadow).forEach((role)=>{
-					rootStyle.setProperty('--cp-shadow-'+role,shadow[role]);
-				});
-			});
-		});
+<?php endforeach; ?>
 	});
 </script>
 <?php
