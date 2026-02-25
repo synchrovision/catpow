@@ -28,6 +28,7 @@ add_action('wp_head',function(){
 					}
 					Object.keys(colors.tones[key]).map((k)=>{
 						rootStyle.setProperty('--cp-tones-'+key+'-'+k,colors.tones[key][k]);
+						rootStyle.setProperty('--cp-tones-'+key+'x-'+k,colors.tones[key][k]);
 						if(k==='h'){
 							rootStyle.setProperty('--cp-root-tones-'+key+'-'+k,colors.tones[key][k]);
 							rootStyle.setProperty('--cp-container-tones-'+key+'-'+k,colors.tones[key][k]);
