@@ -5,14 +5,14 @@
 .wp-block-catpow-buttons{
 	@extend %ui-block;
 	$block:&;
-	@include flx((w:w,j:c,a:s,g:g));
+	@include flx((w:w,j:c,a:s,g:c-b));
 	@include bnd((w:c,mgi:a));
 	&-button{
 		@extend %button-component;
 		@extend %ui;
 		@include bnd((d:b,p:r,pd:ipd));
 		@include bg((c:bx));
-		@include bdr((s:s,w:2));
+		@include bdr((s:s));
 		@include txt((a:c,c:mx,td:n,b:k));
 		@include trn((t:.2s));
 		@include usr((c:p));
