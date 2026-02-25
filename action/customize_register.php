@@ -48,6 +48,7 @@ $wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'padding',
 $wp_customize->add_control(new Catpow\customize\control($wp_customize,'padding',[
 	'type'=>'Sizes',
 	'section'=>'spacing',
+	'label'=>'パディング',
 	'param'=>[
 		'roles'=>style_config::get_padding_roles()
 	]
@@ -60,6 +61,7 @@ $wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'margin',[
 $wp_customize->add_control(new Catpow\customize\control($wp_customize,'margin',[
 	'type'=>'Sizes',
 	'section'=>'spacing',
+	'label'=>'マージン',
 	'param'=>[
 		'roles'=>style_config::get_margin_roles()
 	]
