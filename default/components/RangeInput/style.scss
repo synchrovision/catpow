@@ -10,15 +10,19 @@
 		@include usr((c:p));
 		&-body{
 			@include bnd((p:r));
+			&-range{
+				@include bnd((p:a,l:calc(var(--min-pos) * 100%),r:calc((1 - var(--max-pos)) * 100%),h:$u * 2));
+				@include bg((c:wp));
+			}
 			&-control{
-				@include bnd((p:a,t:0,l:calc(var(--pos-value) * 100%),w:$u * 2,h:$u * 2));
+				@include bnd((p:a,t:0,l:calc(var(--pos) * 100%),w:$u * 2,h:$u * 2));
 				@include bdr((r:50%));
 				@include bg((c:b));
 				@include shd((b:1));
 				@include trn((x:-50%));
 				&-value{
 					@include bnd((d:b,p:a,w:fit,h:fit,pd:.25em .5em,i:-2em -4em,mg:0 a a));
-					@include bg((c:m));
+					@include bg((c:#222));
 					@include bdr((r:.2em));
 					@include txt((a:c,p:12,h:1em,c:i));
 					@include usr((e:n));

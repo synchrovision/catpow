@@ -2,22 +2,29 @@
   height: 1.6em;
   padding: 0rem 0.8em;
   border-radius: 0.8em;
-  background-color: hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1));
-  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1)) inset;
+  background-color: oklch(var(--cp-tones-sh-l) var(--cp-tones-sh-c) var(--cp-tones-sh-h) / var(--cp-tones-sh-a,1));
+  box-shadow: 0 1px 3px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1)) inset;
   cursor: pointer;
 }
 .cp-rangeinput__bar-body {
   position: relative;
 }
+.cp-rangeinput__bar-body-range {
+  position: absolute;
+  left: calc(var(--min-pos) * 100%);
+  right: calc((1 - var(--max-pos)) * 100%);
+  height: 1.6em;
+  background-color: var(--wp-admin-theme-color);
+}
 .cp-rangeinput__bar-body-control {
   position: absolute;
   top: 0rem;
-  left: calc(var(--pos-value) * 100%);
+  left: calc(var(--pos) * 100%);
   width: 1.6em;
   height: 1.6em;
   border-radius: 50%;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
-  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
+  box-shadow: 0 1px 3px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
   transform: -webkit- translateX(-50%);
   transform: translateX(-50%);
 }
@@ -33,12 +40,12 @@
   left: -4em;
   inset: -2em -4em;
   margin: 0rem auto auto;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
+  background-color: #222;
   border-radius: 0.2em;
   text-align: center;
   font-size: 0.75rem;
   line-height: 1em;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+  color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
   pointer-events: none;
   -webkit-transition: 0.2s;
   transition: 0.2s;
