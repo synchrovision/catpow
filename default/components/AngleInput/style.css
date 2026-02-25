@@ -5,8 +5,8 @@
   margin-inline: auto;
   overflow: hidden;
   border-radius: 50%;
-  background-color: hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1));
-  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1)) inset;
+  background-color: oklch(var(--cp-tones-sh-l) var(--cp-tones-sh-c) var(--cp-tones-sh-h) / var(--cp-tones-sh-a,1));
+  box-shadow: 0 2px 5px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1)) inset;
   cursor: pointer;
 }
 .cp-angleinput__circle-handler {
@@ -18,12 +18,12 @@
   margin-inline: auto;
   width: 0.5em;
   height: 2em;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
+  background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
   border-radius: 0.25em;
   -webkit-transform-origin: 50% 100%;
   transform-origin: 50% 100%;
   transform: -webkit- rotateZ(calc(var(--angle,0) * 1deg));
   transform: rotateZ(calc(var(--angle,0) * 1deg));
-  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  box-shadow: 0 2px 5px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 /*# sourceMappingURL=./style.css.map */
