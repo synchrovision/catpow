@@ -118,7 +118,7 @@ const getTones = (color) => {
 		const lch = hexToOklch(color);
 		return {
 			...lch,
-			t: 1 - lch.l / 100,
+			t: (1 - lch.l) / 100,
 		};
 	}
 };
