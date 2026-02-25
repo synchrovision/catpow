@@ -31,7 +31,7 @@
   width: 1.875rem;
   margin: 0rem;
   margin-right: 0.625rem;
-  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1)) inset;
+  box-shadow: 0 1px 3px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1)) inset;
 }
 .cp-admin .checkbox.cp-meta-item-use_functions .cp-meta-unit label.checkbox .text {
   -webkit-box-flex: 1;
@@ -44,9 +44,9 @@
   margin: 0rem;
   text-align: left;
   font-size: 0.8125rem;
-  font-family: var(--cp-fonts-t);
+  font-family: var(--cp-font-family-t);
   font-weight: 500;
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
+  color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 .cp-admin .checkbox.cp-meta-item-use_functions .cp-meta-unit label.checkbox .text p {
   display: block;
@@ -57,13 +57,13 @@
   left: -10em;
   right: -10em;
   z-index: 1;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 90),var(--cp-tones-m-a,1));
+  background-color: oklch(calc(1 - var(--cp-tones-m-t) * 90) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
   border-radius: 1em;
   text-align: justify;
   font-size: 0.6875rem;
   font-weight: 400;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
-  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
+  box-shadow: 0 2px 5px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
   -webkit-transition: 0.5s;
   transition: 0.5s;
   opacity: 0;
@@ -81,7 +81,7 @@
   border-style: solid;
   border-width: 0.5em;
   border-color: transparent;
-  border-bottom-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),calc(100% - var(--cp-tones-m-t) * 90),var(--cp-tones-m-a,1));
+  border-bottom-color: oklch(calc(1 - var(--cp-tones-m-t) * 90) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
 }
 .cp-admin .checkbox.cp-meta-item-use_functions .cp-meta-unit label.checkbox:hover .text p {
   opacity: 1;
@@ -89,7 +89,7 @@
   transform: translateY(1.5em);
 }
 .cp-admin .checkbox.cp-meta-item-use_functions .cp-meta-unit label.checkbox:not(.active) .text h4 {
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 50),var(--cp-tones-t-a,1));
+  color: oklch(calc(1 - var(--cp-tones-t-t) * 50) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 .cp-admin-buttons {
   padding: 0rem;
@@ -118,7 +118,7 @@
   text-align: center;
   font-size: 1rem;
   line-height: 1em;
-  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
+  color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
   font-weight: 700;
   border-style: none;
 }
@@ -151,13 +151,13 @@
   font-size: 1.25rem;
   line-height: 1em;
   font-family: "Raleway";
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
+  color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 .cp-admin-functions > li .image, .cp-admin-functions > li > .cpform_section .image {
   margin: 0.3125rem;
   background-color: #fff;
   border-radius: 0.625rem;
-  box-shadow: 0 3px 7px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1)) inset;
+  box-shadow: 0 3px 7px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1)) inset;
 }
 .cp-admin-functions > li .desc, .cp-admin-functions > li > .cpform_section .desc {
   padding: 0.3125rem 0.625rem;
@@ -166,7 +166,7 @@
   line-height: 1.5em;
   font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   font-weight: normal;
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
+  color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 .cp-admin-functions > li .control, .cp-admin-functions > li > .cpform_section .control {
   margin: 0.625rem 1.25rem;
@@ -200,7 +200,7 @@
   padding-bottom: 0.625rem;
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
-  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 50),var(--cp-tones-t-a,1));
+  border-bottom-color: oklch(calc(1 - var(--cp-tones-t-t) * 50) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
   text-align: center;
   font-size: 1.5rem;
 }
@@ -241,8 +241,8 @@
   flex-basis: 12.5rem;
   padding: 1.25rem;
   overflow-y: auto;
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
-  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
+  background-color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+  color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
   font-size: 0.75rem;
 }
 .cp-admin-functions > li .cp-lightbox__content .button_close_panel {
@@ -257,11 +257,11 @@
   border-style: none;
   border-radius: 50%;
   background-color: var(--wp-admin-theme-color);
-  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  box-shadow: 0 2px 5px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
   text-align: center;
   font-size: 1.25rem;
   line-height: 1em;
-  color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
+  color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
 }
 .cp-admin-functions > li .cp-lightbox__content .button_close_panel .button::before {
   content: "";
