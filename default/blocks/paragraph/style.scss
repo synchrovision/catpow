@@ -2,29 +2,25 @@
 @import "text-placeholders.scss";
 
 p{
-	@include txt((p:p));
+	@include txt((p:t-p));
 	&.has-regular-font-size,
 	.editor-styles-wrapper &.has-regular-font-size {
-		@include txt((p:p));
+		@include txt((p:t-p));
 	}
 	&.is-style-heading{
 		@extend %heading-block;
 		@extend %heading;
-		@include txt((p:h));
 	}
 	&.is-style-lead{
 		@extend %lead-block;
 		@extend %lead;
-		@include txt((p:l));
 	}
 	&.is-style-paragraph{
 		@extend %paragraph-block;
 		@extend %paragraph;
-		@include txt((p:p));
 	}
 	&.is-style-caption{
 		@extend %caption-block;
 		@extend %caption;
-		@include txt((p:c));
 	}
 }
