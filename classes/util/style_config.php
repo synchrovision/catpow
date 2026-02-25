@@ -234,6 +234,13 @@ class style_config{
 				'variants'=>self::$size_variants_5,
 				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$dvw,%2$drem)',$n,$n/4),range(2,6))
 			],
+			'relative'=>[
+				'label'=>'相対サイズ',
+				'type'=>'relativeFontSize',
+				'shorthand'=>'r',
+				'variants'=>self::$size_variants_5,
+				'defaultValues'=>array_map(fn($n)=>sprintf('%sem',$n/4),range(2,6))
+			],
 			'text'=>[
 				'label'=>'テキスト',
 				'type'=>'fontSize',
