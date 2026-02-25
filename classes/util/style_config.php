@@ -177,6 +177,13 @@ class style_config{
 				'variants'=>self::$level_variants,
 				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem) min(%1$svw,%2$srem)',$n,$n/4),range(6,1))
 			],
+			'component'=>[
+				'label'=>'コンポーネント',
+				'type'=>'relativeMargin',
+				'shorthand'=>'c',
+				'variants'=>self::$component_variants,
+				'defaultValues'=>array_pad([],7,'.5em')
+			],
 			'text'=>[
 				'label'=>'テキスト',
 				'type'=>'responsiveVerticalMargin',
