@@ -189,6 +189,7 @@ class style_config{
 				'type'=>'responsiveVerticalMargin',
 				'shorthand'=>'t',
 				'variants'=>self::$text_role_variants,
+				'subVariants'=>self::$level_variants,
 				'defaultValues'=>array_pad([],5,sprintf('min(%1$svw,%2$srem) 0 min(%1$svw,%2$srem)',4,1))
 			],
 		]);
