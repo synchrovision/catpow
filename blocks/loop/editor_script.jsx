@@ -5,7 +5,7 @@
 	category: "catpow-embed",
 	example: CP.example,
 	edit({ attributes, setAttributes, className, clientId }) {
-		const { InnerBlocks, BlockControls, InspectorControls } = wp.blockEditor;
+		const { InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TreeSelect, TextareaControl, ToolbarGroup } = wp.components;
 		const { serverSideRender: ServerSideRender } = wp;
 		const { content_path, deps = {}, query, config, EditMode = false } = attributes;
@@ -39,6 +39,7 @@
 		} else {
 			configData = JSON.parse(config);
 		}
+		const blockProps = useBlockProps({ className: configData.template && EditMode ? "cp-altcontent loop-contents" : "cp-embeddedcontent" });
 
 		return (
 			<>
@@ -57,15 +58,13 @@
 					</BlockControls>
 				)}
 				{configData.template && EditMode ? (
-					<div className="cp-altcontent loop-contents">
-						<div className="label">
-							<Icon icon="edit" />
-						</div>
+					<div {...blockProps}>
+						<CP.Label icon="edit" />
 						<InnerBlocks allowedBlocks={["catpow/loopcontent"]} template={configData.template} templateLock={configData.templateLock || "ALL"} />
 					</div>
 				) : (
-					<div className="cp-embeddedcontent">
-						<div className="label">{content_path}</div>
+					<div {...blockProps}>
+						<CP.Label>{content_path}</CP.Label>
 						<ServerSideRender block="catpow/loop" attributes={attributes} />
 					</div>
 				)}

@@ -7,7 +7,7 @@
     category: "catpow-embed",
     example: CP.example,
     edit({ attributes, setAttributes, className, clientId }) {
-      const { InnerBlocks: InnerBlocks2, BlockControls, InspectorControls } = wp.blockEditor;
+      const { InnerBlocks: InnerBlocks2, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TreeSelect, TextareaControl, ToolbarGroup } = wp.components;
       const { serverSideRender: ServerSideRender } = wp;
       const { content_path, deps = {}, query, config, EditMode = false } = attributes;
@@ -37,6 +37,7 @@
       } else {
         configData = JSON.parse(config);
       }
+      const blockProps = useBlockProps({ className: configData.template && EditMode ? "cp-altcontent loop-contents" : "cp-embeddedcontent" });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, configData.template && /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
         ToolbarGroup,
         {
@@ -49,7 +50,7 @@
             }
           ]
         }
-      )), configData.template && EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent loop-contents" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks2, { allowedBlocks: ["catpow/loopcontent"], template: configData.template, templateLock: configData.templateLock || "ALL" })) : /* @__PURE__ */ wp.element.createElement("div", { className: "cp-embeddedcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/loop", attributes })), item?.deps?.css && /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: item.deps.css }), item?.deps?.js && /* @__PURE__ */ wp.element.createElement("script", { type: "text/javascript", src: item.deps.js }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
+      )), configData.template && EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(InnerBlocks2, { allowedBlocks: ["catpow/loopcontent"], template: configData.template, templateLock: configData.templateLock || "ALL" })) : /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, null, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/loop", attributes })), item?.deps?.css && /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: item.deps.css }), item?.deps?.js && /* @__PURE__ */ wp.element.createElement("script", { type: "text/javascript", src: item.deps.js }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
         TreeSelect,
         {
           label: "content path",
