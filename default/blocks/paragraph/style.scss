@@ -23,4 +23,11 @@ p{
 		@extend %caption-block;
 		@extend %caption;
 	}
+	&.is-style-heading,
+	&.is-style-lead,
+	&.is-style-paragraph,
+	&.is-style-caption{
+		&:first-child{@include bnd((mgt:0));}
+		&:last-child{@include bnd((mgb:0));}
+	}
 }

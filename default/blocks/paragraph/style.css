@@ -44,4 +44,10 @@ p {
 p.has-regular-font-size, .editor-styles-wrapper p.has-regular-font-size {
   font-size: var(--cp-font-size-t-p);
 }
+p.is-style-heading:first-child, p.is-style-lead:first-child, p.is-style-paragraph:first-child, p.is-style-caption:first-child {
+  margin-top: 0px;
+}
+p.is-style-heading:last-child, p.is-style-lead:last-child, p.is-style-paragraph:last-child, p.is-style-caption:last-child {
+  margin-bottom: 0px;
+}
 /*# sourceMappingURL=./style.css.map */
