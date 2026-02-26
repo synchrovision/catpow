@@ -28,8 +28,8 @@ wp.blocks.registerBlockStyle("core/video", { name: "medium", label: "medium" });
 wp.blocks.registerBlockStyle("core/video", { name: "large", label: "large" });
 wp.blocks.registerBlockStyle("core/video", { name: "cover", label: "cover" });
 
-wp.blocks.registerBlockStyle("core/media-text", { name: "snap", label: "snap" });
-wp.blocks.registerBlockStyle("core/media-text", { name: "panel", label: "panel" });
+wp.blocks.registerBlockStyle("core/media-text", { name: "card", label: "Card" });
+wp.blocks.registerBlockStyle("core/media-text", { name: "frame", label: "Frame" });
 
 wp.blocks.registerBlockStyle("core/code", { name: "js", label: "js" });
 wp.blocks.registerBlockStyle("core/code", { name: "css", label: "css" });

@@ -1,0 +1,111 @@
+@import "config/style_config.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
+
+.wp-block-media-text {
+	$block:&;
+	@include bnd((bs:b));
+	@include grd((tc:50% 1fr,tr:a,g:c-c));
+
+	&.has-media-on-the-right {
+		@include grd((tc:1fr 50%));
+	}
+
+	&.is-vertically-aligned-top &{
+		&__content, &__media {
+			align-self: start;
+		}
+	}
+
+	&__content,&__media {
+		align-self: center;
+	}
+
+	&.is-vertically-aligned-center &{
+		&__content, &__media {
+			align-self: center;
+		}
+	}
+
+	&.is-vertically-aligned-bottom &{
+		&__content, &__media {
+			align-self: end;
+		}
+	}
+	&__media{
+		@include bnd((gc:1,gr:1,mg:0));
+		img, video {
+			@include bnd((w:f,h:a));
+			max-width: unset;
+			@include txt((v:m));
+		}
+	}
+	&.is-image-fill-element{
+		#{$block}{
+			&__media{
+				@include bnd((p:r,h:250 f 100vh,));
+				@include bg((s:c));
+				> a {
+					@include bnd((d:b,h:f));
+				}
+
+				img,video {
+					@include bnd((p:a,i:0,h:f,w:f,o:h,o:c,of:c,pd:0));
+					@include bdr((s:n));
+				}
+			}
+		}
+	}
+
+	&.is-style-card{
+		#{$block}{
+			&__media{
+				img,video{
+					@extend %card-component;
+					@include bnd((mg:0));
+					@include bdr((s:s,c:bx));
+				}
+				
+			}
+		}
+	}
+	&.is-style-frame{
+		@extend %frame-component;
+		@include bnd((mg:f,pd:0,o:h,g:0));
+		#{$block}{
+			&__content{
+				@include bnd((pd:f));
+			}
+		}
+	}
+
+	&__content {
+		direction: ltr;
+		@include bnd((gc:2,gr:1,pd:0));
+		@include txt((b:b));
+	}
+
+	&.has-media-on-the-right &{
+		&__media {
+			@include bnd((gc:2,gr:1));
+		}
+
+		&__content {
+			@include bnd((gc:1,gr:1));
+		}
+	}
+	
+	@include bp(-600){
+		&.is-stacked-on-mobile {
+			grid-template-columns: 100% !important;
+		}
+		&.is-stacked-on-mobile &{
+			&__media {
+				@include bnd((gc:1,gr:1));
+			}
+			&__content {
+				@include bnd((gc:1,gr:2));
+			}
+		}
+	}
+}
