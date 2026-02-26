@@ -2617,7 +2617,7 @@
       extend: true,
       invert: "m"
     },
-    c: {
+    s: {
       name: "sheet",
       default: { h: 0, c: 0, l: 0.95, a: 1 },
       extend: true,
