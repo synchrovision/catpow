@@ -33,7 +33,8 @@ class post extends query{
 			'post_status',
 			'post_date',
 			'post_parent',
-			'menu_order'
+			'menu_order',
+			'page_template'
 		];
 	
 	public static function get($data_name,$data_id){
