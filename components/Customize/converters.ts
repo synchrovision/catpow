@@ -39,12 +39,12 @@ const spaceSizeInputConfig = {
 };
 const gapSizeInputConfig = {
 	steps: {
-		4: 1,
-		8: 2,
-		24: 4,
-		48: 8,
+		8: 1,
+		16: 2,
+		32: 4,
+		64: 8,
 	},
-	height: 120,
+	height: 160,
 };
 const letterSpacingConfig = {
 	steps: {
@@ -117,7 +117,7 @@ export const responsivePaddingConverter: converter = {
 	...spaceSizeInputConfig,
 	getRowLabels: (label) => ["縦(vw)", "縦(rem)", "横(vw)", "横(rem)"].map((suffix) => label + suffix),
 	toValues: (size) => (size.match(/min\((.+?)vw,(.+?)rem\) min\((.+?)vw,(.+?)rem\)/) || [, 0, 0, 0, 0]).slice(1).map((v, i) => (i % 2 === 0 ? parseFloat(v) * 4 : parseFloat(v) * 16)),
-	toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) 0 min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`,
+	toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`,
 	getDisplayValue: (val, n) => (n % 2 ? val / 16 : val / 4),
 };
 export const responsiveMarginConverter: converter = {

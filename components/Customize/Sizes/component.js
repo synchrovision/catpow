@@ -1509,12 +1509,12 @@
   };
   var gapSizeInputConfig = {
     steps: {
-      4: 1,
-      8: 2,
-      24: 4,
-      48: 8
+      8: 1,
+      16: 2,
+      32: 4,
+      64: 8
     },
-    height: 120
+    height: 160
   };
   var letterSpacingConfig = {
     steps: {
@@ -1585,7 +1585,7 @@
     ...spaceSizeInputConfig,
     getRowLabels: (label) => ["\u7E26(vw)", "\u7E26(rem)", "\u6A2A(vw)", "\u6A2A(rem)"].map((suffix) => label + suffix),
     toValues: (size) => (size.match(/min\((.+?)vw,(.+?)rem\) min\((.+?)vw,(.+?)rem\)/) || [, 0, 0, 0, 0]).slice(1).map((v, i) => i % 2 === 0 ? parseFloat(v) * 4 : parseFloat(v) * 16),
-    toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) 0 min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`,
+    toSizes: (vw1, rem1, vw2, rem2) => `min(${(vw1 / 4).toFixed(2)}vw,${(rem1 / 16).toFixed(2)}rem) min(${(vw2 / 4).toFixed(2)}vw,${(rem2 / 16).toFixed(2)}rem)`,
     getDisplayValue: (val, n) => n % 2 ? val / 16 : val / 4
   };
   var responsiveMarginConverter = {
