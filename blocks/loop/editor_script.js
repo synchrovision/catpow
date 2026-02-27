@@ -1,5 +1,7 @@
 (() => {
   // ../blocks/loop/editor_script.jsx
+  var { InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
+  var { Icon, PanelBody, TreeSelect, TextareaControl, ToolbarGroup } = wp.components;
   wp.blocks.registerBlockType("catpow/loop", {
     title: "\u{1F43E} Loop",
     description: "\u30C6\u30FC\u30DE\u306B\u5B9A\u7FA9\u3055\u308C\u305F\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u3067\u6295\u7A3F\u3092\u8868\u793A\u3057\u307E\u3059\u3002",
@@ -7,12 +9,9 @@
     category: "catpow-embed",
     example: CP.example,
     edit({ attributes, setAttributes, className, clientId }) {
-      const { InnerBlocks: InnerBlocks2, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
-      const { Icon, PanelBody, TreeSelect, TextareaControl, ToolbarGroup } = wp.components;
       const { serverSideRender: ServerSideRender } = wp;
       const { content_path, deps = {}, query, config, EditMode = false } = attributes;
-      const { useMemo } = wp.element;
-      let configData;
+      const { useMemo, useEffect } = wp.element;
       const itemMap = useMemo(() => {
         const map = {};
         Object.keys(cpEmbeddablesTree.loop).map((label) => {
@@ -23,22 +22,24 @@
         return map;
       }, []);
       const item = useMemo(() => content_path && itemMap[content_path], [itemMap, content_path]);
-      if (!config) {
+      useEffect(() => {
         if (content_path && itemMap[content_path].has_config) {
           const path = content_path.slice(0, content_path.lastIndexOf("/"));
           wp.apiFetch({ path: "/cp/v1/" + path + "/config" }).then((config2) => {
-            Object.keys(config2).map((key) => config2[key].json = "config");
-            setAttributes({ config: JSON.stringify(config2) });
+            if (config2.slots != null) {
+              config2.template = Object.keys(config2.slots).map((name) => ["catpow/loopcontent", { name }, config2.slots[name]]);
+            }
+            console.log({ config: config2 });
+            setAttributes({ config: config2 });
           }).catch((res) => {
-            setAttributes({ config: "{}" });
+            setAttributes({ props: {}, config: null });
           });
+        } else {
+          setAttributes({ props: {}, config: null });
         }
-        configData = {};
-      } else {
-        configData = JSON.parse(config);
-      }
-      const blockProps = useBlockProps({ className: configData.template && EditMode ? "cp-altcontent loop-contents" : "cp-embeddedcontent" });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, configData.template && /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
+      }, [content_path]);
+      const blockProps = useBlockProps({ className: config?.template && EditMode ? "cp-altcontent loop-contents" : "" });
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, config?.template && /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
         ToolbarGroup,
         {
           controls: [
@@ -50,7 +51,7 @@
             }
           ]
         }
-      )), configData.template && EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(InnerBlocks2, { allowedBlocks: ["catpow/loopcontent"], template: configData.template, templateLock: configData.templateLock || "ALL" })) : /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, null, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/loop", attributes })), item?.deps?.css && /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: item.deps.css }), item?.deps?.js && /* @__PURE__ */ wp.element.createElement("script", { type: "text/javascript", src: item.deps.js }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
+      )), config?.template && EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { allowedBlocks: ["catpow/loopcontent"], template: config.template, templateLock: "ALL" })) : /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, null, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/loop", attributes, httpMethod: "POST" })), item?.deps?.css && /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: item.deps.css }), item?.deps?.js && /* @__PURE__ */ wp.element.createElement("script", { type: "text/javascript", src: item.deps.js }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
         TreeSelect,
         {
           label: "content path",
@@ -76,11 +77,22 @@
             setAttributes({ query: query2 });
           }
         }
-      ))));
+      )), config?.schema && /* @__PURE__ */ wp.element.createElement(
+        Catpow.JsonEditor,
+        {
+          json: attributes.props,
+          debug: false,
+          schema: config.schema,
+          autoSave: 100,
+          showHeader: false,
+          onChange: (props) => {
+            setAttributes({ props: { ...props } });
+          }
+        }
+      )));
     },
-    save({ attributes, className, setAttributes }) {
-      const { InnerBlocks: InnerBlocks2 } = wp.blockEditor;
-      return /* @__PURE__ */ wp.element.createElement(InnerBlocks2.Content, null);
+    save() {
+      return /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null);
     },
     deprecated: [
       {
@@ -105,12 +117,12 @@
         default: "content"
       }
     },
-    edit({ attributes, className, setAttributes, clientId }) {
+    edit({ attributes }) {
       const { name } = attributes;
       const template = name == "on_empty" ? [["core/paragraph", { align: "center", content: "Not Found" }]] : [["catpow/section"]];
       return /* @__PURE__ */ wp.element.createElement("div", { className: "loop-content" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template, templateLock: false }));
     },
-    save({ attributes, className, setAttributes }) {
+    save({ attributes }) {
       const { name } = attributes;
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("loop-content", { name }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }

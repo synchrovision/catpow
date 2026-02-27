@@ -5,14 +5,13 @@ preg_match_all(
 	$matches,
 	PREG_SET_ORDER
 );
-$contents=array_column($matches,null,'name');
-
+$slots=array_column($matches,null,'name');
 $id=uniqid();
 $GLOBALS['loop_block_data'][$id]=[
 	'path'=>dirname($attr['content_path']),
 	'file'=>basename($attr['content_path']),
 	'query'=>$attr['query'],
-	'vars'=>['contents'=>$contents]
+	'vars'=>$attr['props']
 ];
 
 if($is_preview){

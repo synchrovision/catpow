@@ -1,16 +1,16 @@
-﻿wp.blocks.registerBlockType("catpow/loop", {
+﻿const { InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
+const { Icon, PanelBody, TreeSelect, TextareaControl, ToolbarGroup } = wp.components;
+
+wp.blocks.registerBlockType("catpow/loop", {
 	title: "🐾 Loop",
 	description: "テーマに定義されたテンプレートで投稿を表示します。",
 	icon: "editor-code",
 	category: "catpow-embed",
 	example: CP.example,
 	edit({ attributes, setAttributes, className, clientId }) {
-		const { InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
-		const { Icon, PanelBody, TreeSelect, TextareaControl, ToolbarGroup } = wp.components;
 		const { serverSideRender: ServerSideRender } = wp;
 		const { content_path, deps = {}, query, config, EditMode = false } = attributes;
-		const { useMemo } = wp.element;
-		let configData;
+		const { useMemo, useEffect } = wp.element;
 
 		const itemMap = useMemo(() => {
 			const map = {};
@@ -23,27 +23,30 @@
 		}, []);
 		const item = useMemo(() => content_path && itemMap[content_path], [itemMap, content_path]);
 
-		if (!config) {
+		useEffect(() => {
 			if (content_path && itemMap[content_path].has_config) {
 				const path = content_path.slice(0, content_path.lastIndexOf("/"));
 				wp.apiFetch({ path: "/cp/v1/" + path + "/config" })
 					.then((config) => {
-						Object.keys(config).map((key) => (config[key].json = "config"));
-						setAttributes({ config: JSON.stringify(config) });
+						if (config.slots != null) {
+							config.template = Object.keys(config.slots).map((name) => ["catpow/loopcontent", { name }, config.slots[name]]);
+						}
+						console.log({ config });
+						setAttributes({ config });
 					})
 					.catch((res) => {
-						setAttributes({ config: "{}" });
+						setAttributes({ props: {}, config: null });
 					});
+			} else {
+				setAttributes({ props: {}, config: null });
 			}
-			configData = {};
-		} else {
-			configData = JSON.parse(config);
-		}
-		const blockProps = useBlockProps({ className: configData.template && EditMode ? "cp-altcontent loop-contents" : "cp-embeddedcontent" });
+		}, [content_path]);
+
+		const blockProps = useBlockProps({ className: config?.template && EditMode ? "cp-altcontent loop-contents" : "" });
 
 		return (
 			<>
-				{configData.template && (
+				{config?.template && (
 					<BlockControls>
 						<ToolbarGroup
 							controls={[
@@ -57,15 +60,15 @@
 						/>
 					</BlockControls>
 				)}
-				{configData.template && EditMode ? (
+				{config?.template && EditMode ? (
 					<div {...blockProps}>
 						<CP.Label icon="edit" />
-						<InnerBlocks allowedBlocks={["catpow/loopcontent"]} template={configData.template} templateLock={configData.templateLock || "ALL"} />
+						<InnerBlocks allowedBlocks={["catpow/loopcontent"]} template={config.template} templateLock={"ALL"} />
 					</div>
 				) : (
 					<div {...blockProps}>
 						<CP.Label>{content_path}</CP.Label>
-						<ServerSideRender block="catpow/loop" attributes={attributes} />
+						<ServerSideRender block="catpow/loop" attributes={attributes} httpMethod="POST" />
 					</div>
 				)}
 				{item?.deps?.css && <link rel="stylesheet" href={item.deps.css} />}
@@ -97,13 +100,24 @@
 							/>
 						)}
 					</PanelBody>
+					{config?.schema && (
+						<Catpow.JsonEditor
+							json={attributes.props}
+							debug={false}
+							schema={config.schema}
+							autoSave={100}
+							showHeader={false}
+							onChange={(props) => {
+								setAttributes({ props: { ...props } });
+							}}
+						/>
+					)}
 				</InspectorControls>
 			</>
 		);
 	},
 
-	save({ attributes, className, setAttributes }) {
-		const { InnerBlocks } = wp.blockEditor;
+	save() {
 		return <InnerBlocks.Content />;
 	},
 
@@ -131,7 +145,7 @@ wp.blocks.registerBlockType("catpow/loopcontent", {
 			default: "content",
 		},
 	},
-	edit({ attributes, className, setAttributes, clientId }) {
+	edit({ attributes }) {
 		const { name } = attributes;
 
 		const template = name == "on_empty" ? [["core/paragraph", { align: "center", content: "Not Found" }]] : [["catpow/section"]];
@@ -142,7 +156,7 @@ wp.blocks.registerBlockType("catpow/loopcontent", {
 			</div>
 		);
 	},
-	save({ attributes, className, setAttributes }) {
+	save({ attributes }) {
 		const { name } = attributes;
 		return (
 			<>
