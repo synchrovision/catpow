@@ -1,7 +1,7 @@
 ﻿wp.plugins.registerPlugin("catpow-sidebar", {
 	render: (props) => {
 		const { useState, useMemo, useCallback } = wp.element;
-		const { PluginSidebarMoreMenuItem, PluginSidebar } = wp.editPost;
+		const { PluginSidebarMoreMenuItem, PluginSidebar } = wp.editor;
 		const { PanelBody } = wp.components;
 
 		const [structure, setStructure] = useState(false);
@@ -33,7 +33,7 @@
 					</DataStructure>
 				);
 			},
-			[props]
+			[props],
 		);
 		const RenderMetaValue = useCallback(
 			({ value }) => {
@@ -51,7 +51,7 @@
 					return <DataStructureItem title={key} name={value[key]} />;
 				});
 			},
-			[props]
+			[props],
 		);
 
 		return (

@@ -8301,7 +8301,7 @@
   wp.plugins.registerPlugin("catpow-sidebar", {
     render: (props) => {
       const { useState: useState4, useMemo: useMemo8, useCallback: useCallback3 } = wp.element;
-      const { PluginSidebarMoreMenuItem, PluginSidebar } = wp.editPost;
+      const { PluginSidebarMoreMenuItem, PluginSidebar } = wp.editor;
       const { PanelBody } = wp.components;
       const [structure, setStructure] = useState4(false);
       const { DataStructure: DataStructure2, DataStructureItem: DataStructureItem2 } = CP;
