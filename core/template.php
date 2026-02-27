@@ -209,6 +209,11 @@ function output($name=null,$prm=null,$format=null){
 	if(isset(\cp::$content->loop_id)){\cp::$content->output_item($prm,$format);}
 	elseif(\cp::$content instanceof content\meta){\cp::$content->output($prm,$format);}
 }
+function get_output($name=null,$prm=null,$format=null){
+	ob_start();
+	output($name,$prm,$format);
+	return ob_get_clean();
+}
 function input($name=null,$prm=null,$format=null){
 	if(empty(\cp::$content)){return;}
 	if(isset($name)){
