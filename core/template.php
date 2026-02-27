@@ -286,6 +286,13 @@ function loop($name=null,$prm=null,$vars=null){
 	}
 	else{return \cp::$content->loop();}
 }
+function loop_map($callback,$name=null,$prm=null,$vars=null){
+	$rtn=[];
+	foreach(loop($name,$prm,$vars) as $key=>$val){
+		$rtn[]=$callback($val,$key);
+	};
+	return $rtn;
+}
 function children(){
 	return \cp::$content->children();
 }
