@@ -11,6 +11,9 @@ export const baseGradientParams = {
 	baseGradientColor1: { minimum: 1, maximum: 12 },
 	baseGradientColor2: { minimum: 1, maximum: 12 },
 };
+export const contrastParams = {
+	contrast: { steps: { 6: 1, 10: 2, 60: 5, 100: 10 } },
+};
 export const alphaParams = {
 	alpha: { steps: { 6: 1, 10: 2, 60: 5, 100: 10 } },
 };

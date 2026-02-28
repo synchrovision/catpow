@@ -116,10 +116,10 @@
     if (typeof b !== "function" && b !== null)
       throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
     extendStatics(d, b);
-    function __14() {
+    function __15() {
       this.constructor = d;
     }
-    d.prototype = b === null ? Object.create(b) : (__14.prototype = b.prototype, new __14());
+    d.prototype = b === null ? Object.create(b) : (__15.prototype = b.prototype, new __15());
   }
   function __rest(s, e) {
     var t = {};
@@ -133,10 +133,10 @@
     return t;
   }
   function __decorate(decorators, target, key, desc) {
-    var c2 = arguments.length, r2 = c2 < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    var c3 = arguments.length, r2 = c3 < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r2 = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r2 = (c2 < 3 ? d(r2) : c2 > 3 ? d(target, key, r2) : d(target, key)) || r2;
-    return c2 > 3 && r2 && Object.defineProperty(target, key, r2), r2;
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r2 = (c3 < 3 ? d(r2) : c3 > 3 ? d(target, key, r2) : d(target, key)) || r2;
+    return c3 > 3 && r2 && Object.defineProperty(target, key, r2), r2;
   }
   function __param(paramIndex, decorator) {
     return function(target, key) {
@@ -1124,7 +1124,7 @@
               classes.push(arguments[i]);
               continue;
             }
-            classes.push.apply(classes, Array.isArray(arguments[i]) ? arguments[i] : Object.keys(arguments[i]).filter((c2) => arguments[i][c2]));
+            classes.push.apply(classes, Array.isArray(arguments[i]) ? arguments[i] : Object.keys(arguments[i]).filter((c3) => arguments[i][c3]));
           }
           if (classes.length > 0) {
             return (className + " " + classes.join(" ")).replace(" --", " " + firstClass + "--");
@@ -1209,8 +1209,8 @@
   var kebabToCamel = (str) => str.replace(/\-([a-z])/g, (m) => m[1].toUpperCase());
 
   // node_modules-included/catpow/src/util/string/classNamesToFlags.js
-  var classNamesToFlags = (classNames) => classNames && classNames.split(" ").map(kebabToCamel).reduce((p, c2) => {
-    p[c2] = true;
+  var classNamesToFlags = (classNames) => classNames && classNames.split(" ").map(kebabToCamel).reduce((p, c3) => {
+    p[c3] = true;
     return p;
   }, {}) || {};
 
@@ -1231,8 +1231,8 @@
   var flagsToWords = (flags) => flags && Object.keys(flags).filter((word) => flags[word]).join(" ");
 
   // node_modules-included/catpow/src/util/string/wordsToFlags.js
-  var wordsToFlags = (words) => words && words.split(" ").reduce((p, c2) => {
-    p[c2] = true;
+  var wordsToFlags = (words) => words && words.split(" ").reduce((p, c3) => {
+    p[c3] = true;
     return p;
   }, {});
 
@@ -1280,7 +1280,7 @@
     const classLevel = level > 0 ? ` is-level-${level}` : "";
     const h = "^" + (level > 0 ? `([\u3000\\t]{${level}})` : "()");
     const t = "(.+((\\n" + (level > 0 ? "\\1" : "") + "[\u3000\\t]).+)*)$";
-    const c2 = level > 0 ? ` is-level-${level}` : "";
+    const c3 = level > 0 ? ` is-level-${level}` : "";
     const l = level + 4;
     const p = "$2\n";
     const p2 = "$3\n";
@@ -1289,17 +1289,17 @@
     }
     text = text.replace(
       new RegExp(h + "\\^([^\\s\u3000].{0,20}?) [:\uFF1A] " + t, "gum"),
-      `<dl class="${pref}-notes${c2}"><dt class="${pref}-notes__dt">$2</dt><dd class="${pref}-notes__dd">${p2}</dd></dl><!--/notes-->`,
+      `<dl class="${pref}-notes${c3}"><dt class="${pref}-notes__dt">$2</dt><dd class="${pref}-notes__dd">${p2}</dd></dl><!--/notes-->`,
       text
     );
-    text = text.replace(new RegExp(h + "([^\\s\u3000].{0,20}?) [:\uFF1A] " + t, "gum"), `<dl class="${pref}-dl${c2}"><dt class="${pref}-dl__dt">$2</dt><dd class="${pref}-dl__dd">${p2}</dd></dl>`, text);
-    text = text.replace(new RegExp(h + "\u203B" + t, "gum"), `<span class="${pref}-annotation${c2}">${p}</span>`);
-    text = text.replace(new RegExp(h + "\u25A0 " + t, "gum"), `<h${l} class="${pref}-title${c2}">${p}</h${l}>`);
-    text = text.replace(new RegExp(h + "\u30FB " + t, "gum"), `<ul class="${pref}-ul${c2}"><li class="${pref}-ul__li">${p}</li></ul>`);
-    text = text.replace(new RegExp(h + "\\d{1,2}\\. " + t, "gum"), `<ol class="${pref}-ol${c2}"><li class="${pref}-ol__li">${p}</li></ol>`);
+    text = text.replace(new RegExp(h + "([^\\s\u3000].{0,20}?) [:\uFF1A] " + t, "gum"), `<dl class="${pref}-dl${c3}"><dt class="${pref}-dl__dt">$2</dt><dd class="${pref}-dl__dd">${p2}</dd></dl>`, text);
+    text = text.replace(new RegExp(h + "\u203B" + t, "gum"), `<span class="${pref}-annotation${c3}">${p}</span>`);
+    text = text.replace(new RegExp(h + "\u25A0 " + t, "gum"), `<h${l} class="${pref}-title${c3}">${p}</h${l}>`);
+    text = text.replace(new RegExp(h + "\u30FB " + t, "gum"), `<ul class="${pref}-ul${c3}"><li class="${pref}-ul__li">${p}</li></ul>`);
+    text = text.replace(new RegExp(h + "\\d{1,2}\\. " + t, "gum"), `<ol class="${pref}-ol${c3}"><li class="${pref}-ol__li">${p}</li></ol>`);
     text = text.replace(
       new RegExp(h + "([\u2460-\u2473]|[^\\s\u3000]\\.) " + t, "gum"),
-      `<dl class="${pref}-listed${c2}"><dt class="${pref}-listed__dt">$2</dt><dd class="${pref}-listed__dd">${p2}</dd></dl><!--/listed-->`
+      `<dl class="${pref}-listed${c3}"><dt class="${pref}-listed__dt">$2</dt><dd class="${pref}-listed__dd">${p2}</dd></dl><!--/listed-->`
     );
     if (level < 3) {
       return replaceBlockFormat(text, pref, level + 1);
@@ -2029,9 +2029,9 @@
       () => {
         if (isStart) {
           setTargetName(
-            Object.keys(values).reduce((p, c2) => {
-              if (p === null || Math.abs(cnv.getProgress(values[c2]) - value2) < Math.abs(cnv.getProgress(values[p]) - value2)) {
-                return c2;
+            Object.keys(values).reduce((p, c3) => {
+              if (p === null || Math.abs(cnv.getProgress(values[c3]) - value2) < Math.abs(cnv.getProgress(values[p]) - value2)) {
+                return c3;
               }
               return p;
             }, null)
@@ -2045,7 +2045,7 @@
       50,
       [value2]
     );
-    const positions = Object.keys(values).reduce((p, c2) => ({ ...p, ["--pos-" + c2]: cnv.getProgress(values[c2]) }), {});
+    const positions = Object.keys(values).reduce((p, c3) => ({ ...p, ["--pos-" + c3]: cnv.getProgress(values[c3]) }), {});
     positions["--min-pos"] = Math.min(...Object.values(positions));
     positions["--max-pos"] = Math.max(...Object.values(positions));
     return /* @__PURE__ */ wp.element.createElement(RangeInputContext.Provider, { value: { values } }, /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className, style: positions }, /* @__PURE__ */ wp.element.createElement("div", { className: "_bar" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body", ref }, /* @__PURE__ */ wp.element.createElement("div", { className: "_range" }), Object.keys(values).map((name) => {
@@ -2587,6 +2587,7 @@
     bubble: () => bubble,
     check: () => check,
     custom: () => custom,
+    dots: () => dots,
     ice: () => ice,
     prepared: () => prepared,
     ripple: () => ripple,
@@ -2721,10 +2722,10 @@
         const cf = (p) => `var(--cp-container-tones-${key}-${p})`;
         const rf = (p) => `var(--cp-root-tones-${key}-${p})`;
         const h = num ? staticHue ? num : num === "0" || num === "6" ? f("h") : `calc(${relativeHue ? cf("h") : rf("h")} + var(--cp-tones-hr) * ${num - 6} + var(--cp-tones-hs))` : f("h");
-        const c2 = f("c");
+        const c3 = f("c");
         const l = tint ? `calc(1 - ${f("t")} * ${tint} / 100)` : `${f("l")}`;
         const a = alpha ? `calc(${f("a")} * ${alpha})` : f("a");
-        return `oklch(${l} ${c2} ${h} / ${a})`;
+        return `oklch(${l} ${c3} ${h} / ${a})`;
       }
     } else {
       const matches2 = color.match(/^([a-z]+)\-([a-z]+)$/);
@@ -2752,6 +2753,9 @@
     baseGradientRotate: { "@editor": "Angle" },
     baseGradientColor1: { minimum: 1, maximum: 12 },
     baseGradientColor2: { minimum: 1, maximum: 12 }
+  };
+  var contrastParams = {
+    contrast: { steps: { 6: 1, 10: 2, 60: 5, 100: 10 } }
   };
   var alphaParams = {
     alpha: { steps: { 6: 1, 10: 2, 60: 5, 100: 10 } }
@@ -3009,9 +3013,40 @@
     }
   };
 
+  // ../blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/dots.js
+  var { __: __9 } = wp.i18n;
+  var c2 = (l = 100) => `rgb(${l},${l},${l})`;
+  var dots = {
+    label: __9("\u6C34\u7389", "catpow"),
+    order: 3,
+    params: {
+      ...baseGradientParams,
+      ...rParams,
+      w1: wParam,
+      w2: wParam,
+      ...contrastParams,
+      ...alphaParams
+    },
+    getData(params = {}) {
+      const { r: r2 = 0, w1 = 80, w2 = 80, contrast = 50, alpha = 25 } = params;
+      const l1 = c2(Math.floor(alpha / 100 * 255));
+      const l2 = c2(Math.floor(alpha * (100 - contrast) / 1e4 * 255));
+      const image = [];
+      image.push(getBaseGradientCode(params));
+      image.push(`radial-gradient(circle at center, #fff, #fff ${w1}%, #000 ${w1}%, #000)`);
+      image.push(`linear-gradient(${r2}deg,${l1},${l2},${l2},${l1}`);
+      return {
+        image,
+        size: ["cover", `${w2}px ${w2}px`, "cover"],
+        repeat: ["no-repeat", "repeat", "no-repeat"],
+        blendmode: ["screen", "multiply", "normal"]
+      };
+    }
+  };
+
   // ../blocks/_init/init/CP/components/InputBackgroundImage/InputBackgroundImage.jsx
   var { useState: useState2, useMemo: useMemo3 } = wp.element;
-  var { __: __9 } = wp.i18n;
+  var { __: __10 } = wp.i18n;
   var valueKeys = {
     type: "-type",
     params: "-params",
@@ -3153,34 +3188,34 @@
     const el = wp.element.createElement;
     const Row = useCallback3((props2) => {
       const { cols: cols2, value: value3, onChange: onChange2 } = props2;
-      return /* @__PURE__ */ wp.element.createElement("tr", { className: "cp-datainputtable__body__row" }, Object.keys(cols2).map((c2) => /* @__PURE__ */ wp.element.createElement("td", { className: "cp-datainputtable__body__row__cell", key: c2 }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("tr", { className: "cp-datainputtable__body__row" }, Object.keys(cols2).map((c3) => /* @__PURE__ */ wp.element.createElement("td", { className: "cp-datainputtable__body__row__cell", key: c3 }, /* @__PURE__ */ wp.element.createElement(
         CP.DynamicInput,
         {
-          value: value3[c2],
+          value: value3[c3],
           onChange: (val) => {
-            value3[c2] = val;
+            value3[c3] = val;
             onChange2(value3);
           },
-          param: cols2[c2]
+          param: cols2[c3]
         }
       ))));
     }, []);
     const defaultRowValues = useMemo8(() => {
       const rowValue = {};
-      Object.keys(cols).forEach((c2) => {
-        rowValue[c2] = cols[c2].default || "";
+      Object.keys(cols).forEach((c3) => {
+        rowValue[c3] = cols[c3].default || "";
       });
       return [rowValue];
     }, [cols]);
     const colsWithoutLabel = useMemo8(() => {
       const colsWithoutLabel2 = {};
-      Object.keys(cols).forEach((c2) => {
-        const { label, ...otherParams } = cols[c2];
-        colsWithoutLabel2[c2] = otherParams;
+      Object.keys(cols).forEach((c3) => {
+        const { label, ...otherParams } = cols[c3];
+        colsWithoutLabel2[c3] = otherParams;
       });
       return colsWithoutLabel2;
     }, [cols]);
-    return /* @__PURE__ */ wp.element.createElement("table", { className: "cp-datainputtable" }, /* @__PURE__ */ wp.element.createElement("thead", { className: "cp-datainputtable__head" }, /* @__PURE__ */ wp.element.createElement("tr", { className: "cp-datainputtable__head__row" }, Object.keys(cols).map((c2) => /* @__PURE__ */ wp.element.createElement("th", { className: "cp-datainputtable__head__row__cell", key: c2 }, cols[c2].label || c2)))), /* @__PURE__ */ wp.element.createElement("tbody", { className: "cp-datainputtable__body" }, (value2 || defaultRowValues).map((rowValue, index) => /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement("table", { className: "cp-datainputtable" }, /* @__PURE__ */ wp.element.createElement("thead", { className: "cp-datainputtable__head" }, /* @__PURE__ */ wp.element.createElement("tr", { className: "cp-datainputtable__head__row" }, Object.keys(cols).map((c3) => /* @__PURE__ */ wp.element.createElement("th", { className: "cp-datainputtable__head__row__cell", key: c3 }, cols[c3].label || c3)))), /* @__PURE__ */ wp.element.createElement("tbody", { className: "cp-datainputtable__body" }, (value2 || defaultRowValues).map((rowValue, index) => /* @__PURE__ */ wp.element.createElement(
       Row,
       {
         cols: colsWithoutLabel,
@@ -3408,7 +3443,7 @@
   };
 
   // ../blocks/_init/init/CP/components/SelectClassPanelBlock.jsx
-  var { __: __10 } = wp.i18n;
+  var { __: __11 } = wp.i18n;
   var SelectClassPanelBlock = ({ prm }) => {
     const { Fragment: Fragment2, useMemo: useMemo8, useContext: useContext2, createElement: el } = wp.element;
     const { CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl: TextControl2, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
@@ -3988,7 +4023,7 @@
           /* @__PURE__ */ wp.element.createElement(
             CP.SelectColorClass,
             {
-              label: __10("\u8272", "catpow"),
+              label: __11("\u8272", "catpow"),
               selected: states,
               onChange: (proxy) => {
                 if (!props.items) {
@@ -4004,7 +4039,7 @@
           /* @__PURE__ */ wp.element.createElement(
             CP.SelectPatternClass,
             {
-              label: __10("\u30D1\u30BF\u30FC\u30F3", "catpow"),
+              label: __11("\u30D1\u30BF\u30FC\u30F3", "catpow"),
               set: props.set,
               attr: props.attr,
               selected: Object.keys(states).find((key) => /^pattern\d+/.test(key)),
@@ -4017,7 +4052,7 @@
           )
         );
       } else if (prm === "cond") {
-        rtn.push(/* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __10("\u8868\u793A\u6761\u4EF6", "catpow"), value: item["cond"], onChange: (cond) => save({ cond }) }));
+        rtn.push(/* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __11("\u8868\u793A\u6761\u4EF6", "catpow"), value: item["cond"], onChange: (cond) => save({ cond }) }));
       } else if (prm === "event") {
         const EventInputs = useMemo8(() => wp.hooks.applyFilters("catpow.EventInputs", [], { item, save }), [item, save]);
         rtn.push(...EventInputs);
@@ -4293,7 +4328,7 @@
   };
 
   // ../blocks/_init/init/CP/components/SelectClassPanel.jsx
-  var { __: __11 } = wp.i18n;
+  var { __: __12 } = wp.i18n;
   var SelectClassPanelContext = wp.element.createContext({});
   var SelectClassPanel = (props) => {
     const { Fragment: Fragment2, useMemo: useMemo8, useCallback: useCallback3, createElement: el } = wp.element;
@@ -4726,7 +4761,7 @@
       return columns2;
     }, []);
     const columns = getActiveColumns(props);
-    return /* @__PURE__ */ wp.element.createElement("table", { className: classes() }, /* @__PURE__ */ wp.element.createElement("thead", { className: classes.thead() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.thead.tr() }, columns.map((col, c2) => /* @__PURE__ */ wp.element.createElement("th", { className: classes.thead.tr.th(), key: c2 }, col.label || col.key)), /* @__PURE__ */ wp.element.createElement("th", { className: classes.thead.tr.th() }))), /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.tbody() }, items2.map((item, index) => {
+    return /* @__PURE__ */ wp.element.createElement("table", { className: classes() }, /* @__PURE__ */ wp.element.createElement("thead", { className: classes.thead() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.thead.tr() }, columns.map((col, c3) => /* @__PURE__ */ wp.element.createElement("th", { className: classes.thead.tr.th(), key: c3 }, col.label || col.key)), /* @__PURE__ */ wp.element.createElement("th", { className: classes.thead.tr.th() }))), /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.tbody() }, items2.map((item, index) => {
       const propsForControl = { tag: "tr", set, itemsKey: itemsKey2, items: items2, index };
       return /* @__PURE__ */ wp.element.createElement(
         "tr",
@@ -4737,10 +4772,10 @@
           },
           key: index
         },
-        columns.map((col, c2) => {
+        columns.map((col, c3) => {
           switch (col.type) {
             case "text": {
-              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c2 }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c3 }, /* @__PURE__ */ wp.element.createElement(
                 RichText,
                 {
                   value: item[col.key],
@@ -4752,10 +4787,10 @@
               ));
             }
             case "image": {
-              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c2 }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { attr, set, keys: { items: itemsKey2, src: col.key, ...col.keys }, index, size: col.size || "vga", isTemplate }));
+              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c3 }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { attr, set, keys: { items: itemsKey2, src: col.key, ...col.keys }, index, size: col.size || "vga", isTemplate }));
             }
             case "picture": {
-              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c2 }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { index, attr, set, keys: { items: itemsKey2, ...col.keys }, sizes: col.sizes, devices: col.devices, isTemplate }));
+              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c3 }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { index, attr, set, keys: { items: itemsKey2, ...col.keys }, sizes: col.sizes, devices: col.devices, isTemplate }));
             }
             case "items": {
               col.columns.forEach((subCol) => {
@@ -4763,7 +4798,7 @@
                   subCol.keys.subItems = col.key;
                 }
               });
-              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c2 }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c3 }, /* @__PURE__ */ wp.element.createElement(
                 CP.EditItemsTable,
                 {
                   set: () => {
@@ -5011,7 +5046,7 @@
   // ../blocks/_init/init/CP/components/ServerSideRenderPart.jsx
   var ServerSideRenderPart = (props) => {
     const { className, ...otherProps } = props;
-    return /* @__PURE__ */ wp.element.createElement("div", { className }, "[ssr_parts" + Object.keys(otherProps).reduce((p, c2) => p += ` ${c2}=${otherProps[c2]}`, "") + "]");
+    return /* @__PURE__ */ wp.element.createElement("div", { className }, "[ssr_parts" + Object.keys(otherProps).reduce((p, c3) => p += ` ${c3}=${otherProps[c3]}`, "") + "]");
   };
   ServerSideRenderPart.Preview = (props) => {
     const { className, name, ...otherProps } = props;
@@ -5686,24 +5721,24 @@
   };
 
   // ../blocks/_init/init/CP/data/selectiveClasses.js
-  var { __: __12 } = wp.i18n;
+  var { __: __13 } = wp.i18n;
   var selectiveClassesPresets = {
     customColorVars: {
       name: "customColorVars",
       input: "customColorVars",
-      label: __12("\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", "catpow"),
+      label: __13("\u30AB\u30B9\u30BF\u30E0\u30AB\u30E9\u30FC", "catpow"),
       vars: "vars"
     },
     isTemplate: {
       name: "template",
       input: "bool",
       key: "isTemplate",
-      label: __12("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
+      label: __13("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
       sub: [
         {
           name: "loop",
           input: "bool",
-          label: __12("\u30EB\u30FC\u30D7", "catpow"),
+          label: __13("\u30EB\u30FC\u30D7", "catpow"),
           key: "doLoop",
           sub: [
             {
@@ -5715,7 +5750,7 @@
             { name: "query", label: "query", input: "textarea", key: "query" },
             {
               name: "loopCount",
-              label: __12("\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", "catpow"),
+              label: __13("\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", "catpow"),
               input: "range",
               key: "loopCount",
               min: 1,
@@ -5728,16 +5763,16 @@
     backgroundColor: {
       name: "backgroundColor",
       type: "buttons",
-      label: __12("\u80CC\u666F\u8272", "catpow"),
+      label: __13("\u80CC\u666F\u8272", "catpow"),
       values: {
-        hasBackgroundColorNone: __12("\u306A\u3057", "catpow"),
-        hasBackgroundColor: __12("\u901A\u5E38", "catpow"),
-        hasBackgroundColorAlt: __12("\u5F37\u8ABF", "catpow")
+        hasBackgroundColorNone: __13("\u306A\u3057", "catpow"),
+        hasBackgroundColor: __13("\u901A\u5E38", "catpow"),
+        hasBackgroundColorAlt: __13("\u5F37\u8ABF", "catpow")
       }
     },
     zIndex: {
       name: "zIndex",
-      label: __12("z-index", "catpow"),
+      label: __13("z-index", "catpow"),
       input: "range",
       vars: "vars",
       key: "--cp-z-index",
@@ -5747,26 +5782,26 @@
     backgroundImage({ preset, vars = "vars", classKey, ...otherParams }) {
       return {
         name: "backgroundImage",
-        label: __12("\u80CC\u666F\u753B\u50CF", "catpow"),
+        label: __13("\u80CC\u666F\u753B\u50CF", "catpow"),
         values: "hasBackgroundImage",
         classKey,
         sub: [
           {
             name: "fixed",
-            label: __12("\u56FA\u5B9A", "catpow"),
+            label: __13("\u56FA\u5B9A", "catpow"),
             classKey,
             values: "hasBackgroundImageFixed"
           },
           {
             name: "blendmode",
-            label: __12("\u30E2\u30FC\u30C9", "catpow"),
+            label: __13("\u30E2\u30FC\u30C9", "catpow"),
             vars,
             key: "--cp-background-image-blendmode",
             input: "blendmode"
           },
           {
             name: "opacity",
-            label: __12("\u4E0D\u900F\u660E\u5EA6", "catpow"),
+            label: __13("\u4E0D\u900F\u660E\u5EA6", "catpow"),
             vars,
             key: "--cp-background-image-opacity",
             input: "range",
@@ -5776,7 +5811,7 @@
           },
           {
             name: "backgroundimage",
-            label: __12("\u80CC\u666F\u753B\u50CF", "catpow"),
+            label: __13("\u80CC\u666F\u753B\u50CF", "catpow"),
             vars,
             prefix: "--cp-background-image",
             input: "backgroundimage"
@@ -5788,12 +5823,12 @@
     backgroundPattern({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "backgroundPattern",
-        label: __12("\u80CC\u666F\u30D1\u30BF\u30FC\u30F3", "catpow"),
+        label: __13("\u80CC\u666F\u30D1\u30BF\u30FC\u30F3", "catpow"),
         values: "hasBackgroundPattern",
         sub: [
           {
             name: "backgroundimage",
-            label: __12("\u80CC\u666F\u753B\u50CF", "catpow"),
+            label: __13("\u80CC\u666F\u753B\u50CF", "catpow"),
             vars,
             prefix: "--cp-background-pattern",
             input: "backgroundimage"
@@ -5805,66 +5840,66 @@
     textAlign: {
       name: "textAlign",
       type: "buttons",
-      label: __12("\u30C6\u30AD\u30B9\u30C8\u63C3\u3048", "catpow"),
+      label: __13("\u30C6\u30AD\u30B9\u30C8\u63C3\u3048", "catpow"),
       required: true,
       values: {
-        hasTextAlignLeft: __12("\u5DE6\u63C3\u3048", "catpow"),
-        hasTextAlignCenter: __12("\u4E2D\u592E", "catpow"),
-        hasTextAlignRight: __12("\u53F3\u63C3\u3048", "catpow")
+        hasTextAlignLeft: __13("\u5DE6\u63C3\u3048", "catpow"),
+        hasTextAlignCenter: __13("\u4E2D\u592E", "catpow"),
+        hasTextAlignRight: __13("\u53F3\u63C3\u3048", "catpow")
       }
     },
     textRole: {
       name: "textRole",
       type: "buttons",
-      label: __12("\u30C6\u30AD\u30B9\u30C8\u5F62\u5F0F", "catpow"),
+      label: __13("\u30C6\u30AD\u30B9\u30C8\u5F62\u5F0F", "catpow"),
       required: true,
       values: {
-        hasTextRoleHeading: __12("\u898B\u51FA\u3057", "catpow"),
-        hasTextRoleLead: __12("\u30EA\u30FC\u30C9", "catpow"),
-        hasTextRoleParagraph: __12("\u672C\u6587", "catpow"),
-        hasTextRoleUi: __12("UI", "catpow"),
-        hasTextRoleCaption: __12("\u6CE8\u91C8", "catpow")
+        hasTextRoleHeading: __13("\u898B\u51FA\u3057", "catpow"),
+        hasTextRoleLead: __13("\u30EA\u30FC\u30C9", "catpow"),
+        hasTextRoleParagraph: __13("\u672C\u6587", "catpow"),
+        hasTextRoleUi: __13("UI", "catpow"),
+        hasTextRoleCaption: __13("\u6CE8\u91C8", "catpow")
       }
     },
     verticalAlign: {
       name: "verticalAlign",
       type: "buttons",
-      label: __12("\u5782\u76F4\u65B9\u5411\u63C3\u3048", "catpow"),
+      label: __13("\u5782\u76F4\u65B9\u5411\u63C3\u3048", "catpow"),
       required: true,
       values: {
-        hasVerticalAlignTop: __12("\u4E0A\u63C3\u3048", "catpow"),
-        hasVerticalAlignMiddle: __12("\u4E2D\u592E", "catpow"),
-        hasVerticalAlignBottom: __12("\u4E0B\u63C3\u3048", "catpow")
+        hasVerticalAlignTop: __13("\u4E0A\u63C3\u3048", "catpow"),
+        hasVerticalAlignMiddle: __13("\u4E2D\u592E", "catpow"),
+        hasVerticalAlignBottom: __13("\u4E0B\u63C3\u3048", "catpow")
       }
     },
     imagePosition: {
       name: "imagePosition",
       type: "buttons",
-      label: __12("\u753B\u50CF\u4F4D\u7F6E", "catpow"),
+      label: __13("\u753B\u50CF\u4F4D\u7F6E", "catpow"),
       required: true,
       values: {
-        hasImageLeft: __12("\u5DE6", "catpow"),
-        hasImageRight: __12("\u53F3", "catpow")
+        hasImageLeft: __13("\u5DE6", "catpow"),
+        hasImageRight: __13("\u53F3", "catpow")
       }
     },
     fontSize({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "fontSize",
         type: "buttons",
-        label: __12("\u6587\u5B57\u30B5\u30A4\u30BA", "catpow"),
+        label: __13("\u6587\u5B57\u30B5\u30A4\u30BA", "catpow"),
         values: {
-          hasFontSizeXLarge: __12("\u6975\u5927", "catpow"),
-          hasFontSizeLarge: __12("\u5927", "catpow"),
-          hasFontSizeMedium: __12("\u4E2D", "catpow"),
-          hasFontSizeSmall: __12("\u5C0F", "catpow"),
-          hasFontSizeXSmall: __12("\u6975\u5C0F", "catpow"),
+          hasFontSizeXLarge: __13("\u6975\u5927", "catpow"),
+          hasFontSizeLarge: __13("\u5927", "catpow"),
+          hasFontSizeMedium: __13("\u4E2D", "catpow"),
+          hasFontSizeSmall: __13("\u5C0F", "catpow"),
+          hasFontSizeXSmall: __13("\u6975\u5C0F", "catpow"),
           hasFontSizeCustom: ":admin-generic:"
         },
         sub: {
           hasFontSizeCustom: [
             {
               name: "fontSize",
-              label: __12("\u6587\u5B57\u30B5\u30A4\u30BA", "catpow"),
+              label: __13("\u6587\u5B57\u30B5\u30A4\u30BA", "catpow"),
               input: "range",
               vars,
               key: "--cp-font-size-custom",
@@ -5881,7 +5916,7 @@
     fontWeight: {
       name: "fontWeight",
       type: "buttons",
-      label: __12("\u6587\u5B57\u30A6\u30A7\u30A4\u30C8", "catpow"),
+      label: __13("\u6587\u5B57\u30A6\u30A7\u30A4\u30C8", "catpow"),
       values: {
         hasFontWeightLight: "L",
         hasFontWeightRegular: "R",
@@ -5893,28 +5928,28 @@
     safeFontFamily: {
       name: "safeFontFamily",
       type: "buttons",
-      label: __12("\u30D5\u30A9\u30F3\u30C8", "catpow"),
+      label: __13("\u30D5\u30A9\u30F3\u30C8", "catpow"),
       values: {
-        hasFontSafeSerif: __12("\u30BB\u30EA\u30D5", "catpow"),
-        hasFontSafeSansSerif: __12("\u30B5\u30F3\u30BB\u30EA\u30D5", "catpow"),
-        hasFontSafeMonoSpaced: __12("\u7B49\u5E45", "catpow"),
-        hasFontSafeGothic: __12("\u30B4\u30B7\u30C3\u30AF", "catpow"),
-        hasFontSafeMincho: __12("\u660E\u671D", "catpow")
+        hasFontSafeSerif: __13("\u30BB\u30EA\u30D5", "catpow"),
+        hasFontSafeSansSerif: __13("\u30B5\u30F3\u30BB\u30EA\u30D5", "catpow"),
+        hasFontSafeMonoSpaced: __13("\u7B49\u5E45", "catpow"),
+        hasFontSafeGothic: __13("\u30B4\u30B7\u30C3\u30AF", "catpow"),
+        hasFontSafeMincho: __13("\u660E\u671D", "catpow")
       }
     },
     safeFontWeight: {
       name: "safeFontWeight",
       type: "buttons",
-      label: __12("\u592A\u5B57", "catpow"),
+      label: __13("\u592A\u5B57", "catpow"),
       values: "hasFontWeightSafeBold"
     },
     boxShadow: {
       name: "boxShadow",
       type: "buttons",
-      label: __12("\u5F71", "catpow"),
+      label: __13("\u5F71", "catpow"),
       values: {
-        hasBoxShadowInset: __12("\u5185", "catpow"),
-        hasBoxShadowOutset: __12("\u5916", "catpow")
+        hasBoxShadowInset: __13("\u5185", "catpow"),
+        hasBoxShadowOutset: __13("\u5916", "catpow")
       },
       sub: {
         hasBoxShadowInset: [
@@ -5922,9 +5957,9 @@
             name: "boxShadowInset",
             type: "buttons",
             values: {
-              hasBoxShadowInsetSmall: __12("\u5C0F", "catpow"),
-              hasBoxShadowInsetMedium: __12("\u4E2D", "catpow"),
-              hasBoxShadowInsetLarge: __12("\u5927", "catpow")
+              hasBoxShadowInsetSmall: __13("\u5C0F", "catpow"),
+              hasBoxShadowInsetMedium: __13("\u4E2D", "catpow"),
+              hasBoxShadowInsetLarge: __13("\u5927", "catpow")
             }
           }
         ],
@@ -5933,9 +5968,9 @@
             name: "boxShadowOutset",
             type: "buttons",
             values: {
-              hasBoxShadowSmall: __12("\u5C0F", "catpow"),
-              hasBoxShadowMedium: __12("\u4E2D", "catpow"),
-              hasBoxShadowLarge: __12("\u5927", "catpow")
+              hasBoxShadowSmall: __13("\u5C0F", "catpow"),
+              hasBoxShadowMedium: __13("\u4E2D", "catpow"),
+              hasBoxShadowLarge: __13("\u5927", "catpow")
             }
           }
         ]
@@ -5944,7 +5979,7 @@
     hasTextShadow({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "hasTextShadow",
-        label: __12("\u6587\u5B57\u5F71", "catpow"),
+        label: __13("\u6587\u5B57\u5F71", "catpow"),
         values: "hasTextShadow",
         sub: [{ preset: "textShadow", vars, label: null }],
         ...otherParams
@@ -5954,11 +5989,11 @@
       return {
         name: "textShadow",
         type: "buttons",
-        label: __12("\u6587\u5B57\u5F71", "catpow"),
+        label: __13("\u6587\u5B57\u5F71", "catpow"),
         values: {
-          hasTextShadowSmall: __12("\u5C0F", "catpow"),
-          hasTextShadowMedium: __12("\u4E2D", "catpow"),
-          hasTextShadowLarge: __12("\u5927", "catpow"),
+          hasTextShadowSmall: __13("\u5C0F", "catpow"),
+          hasTextShadowMedium: __13("\u4E2D", "catpow"),
+          hasTextShadowLarge: __13("\u5927", "catpow"),
           hasTextShadowCustom: ":admin-generic:"
         },
         sub: {
@@ -5977,7 +6012,7 @@
     hasBorder({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "hasBorder",
-        label: __12("\u67A0\u7DDA", "catpow"),
+        label: __13("\u67A0\u7DDA", "catpow"),
         values: "hasBorder",
         sub: [{ preset: "borderWidth", vars, label: null }],
         ...otherParams
@@ -5987,18 +6022,18 @@
       return {
         name: "borderWidth",
         type: "buttons",
-        label: __12("\u67A0\u7DDA", "catpow"),
+        label: __13("\u67A0\u7DDA", "catpow"),
         values: {
-          hasBorderWidthThin: __12("\u7D30", "catpow"),
-          hasBorderWidthMedium: __12("\u4E2D", "catpow"),
-          hasBorderWidthBold: __12("\u592A", "catpow"),
+          hasBorderWidthThin: __13("\u7D30", "catpow"),
+          hasBorderWidthMedium: __13("\u4E2D", "catpow"),
+          hasBorderWidthBold: __13("\u592A", "catpow"),
           hasBorderWidthCustom: ":admin-generic:"
         },
         sub: {
           hasBorderWidthCustom: [
             {
               name: "borderWidthCustom",
-              label: __12("\u67A0\u7DDA", "catpow"),
+              label: __13("\u67A0\u7DDA", "catpow"),
               input: "range",
               vars,
               key: "--cp-border-width-custom",
@@ -6016,7 +6051,7 @@
     hasBorderRadius({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "hasBorderRadius",
-        label: __12("\u89D2\u4E38", "catpow"),
+        label: __13("\u89D2\u4E38", "catpow"),
         values: "hasBorderRadius",
         sub: [{ preset: "borderRadius", vars, label: null }],
         ...otherParams
@@ -6026,18 +6061,18 @@
       return {
         name: "borderRadius",
         type: "buttons",
-        label: __12("\u89D2\u4E38", "catpow"),
+        label: __13("\u89D2\u4E38", "catpow"),
         values: {
-          hasBorderRadiusSmall: __12("\u5C0F", "catpow"),
-          hasBorderRadiusMedium: __12("\u4E2D", "catpow"),
-          hasBorderRadiusLarge: __12("\u5927", "catpow"),
+          hasBorderRadiusSmall: __13("\u5C0F", "catpow"),
+          hasBorderRadiusMedium: __13("\u4E2D", "catpow"),
+          hasBorderRadiusLarge: __13("\u5927", "catpow"),
           hasBorderRadiusCustom: ":admin-generic:"
         },
         sub: {
           hasBorderRadiusCustom: [
             {
               name: "borderRadius",
-              label: __12("\u89D2\u4E38", "catpow"),
+              label: __13("\u89D2\u4E38", "catpow"),
               input: "range",
               vars,
               key: "--cp-border-radius-custom",
@@ -6056,7 +6091,7 @@
       name: "headingTag",
       input: "buttons",
       key: "HeadingTag",
-      label: __12("\u898B\u51FA\u3057\u30BF\u30B0", "catpow"),
+      label: __13("\u898B\u51FA\u3057\u30BF\u30B0", "catpow"),
       values: ["h1", "h2", "h3", "h4", "h5", "h6"],
       effect: (val, states, { set }) => {
         for (const key in states) {
@@ -6071,59 +6106,59 @@
       },
       required: true
     },
-    level: { name: "level", type: "buttons", label: __12("\u30EC\u30D9\u30EB", "catpow"), values: { isLevel1: "1", isLevel2: "2", isLevel3: "3", isLevel4: "4", isLevel5: "5", isLevel6: "6" } },
+    level: { name: "level", type: "buttons", label: __13("\u30EC\u30D9\u30EB", "catpow"), values: { isLevel1: "1", isLevel2: "2", isLevel3: "3", isLevel4: "4", isLevel5: "5", isLevel6: "6" } },
     headingType: {
       name: "headingType",
       type: "buttons",
-      label: __12("\u898B\u51FA\u3057\u30BF\u30A4\u30D7", "catpow"),
+      label: __13("\u898B\u51FA\u3057\u30BF\u30A4\u30D7", "catpow"),
       required: true,
       values: {
-        hasHeadingTypeHeader: __12("\u30D8\u30C3\u30C0\u30FC", "catpow"),
-        hasHeadingTypeHeadline: __12("\u30D8\u30C3\u30C9\u30E9\u30A4\u30F3", "catpow"),
-        hasHeadingTypeCatch: __12("\u30AD\u30E3\u30C3\u30C1", "catpow")
+        hasHeadingTypeHeader: __13("\u30D8\u30C3\u30C0\u30FC", "catpow"),
+        hasHeadingTypeHeadline: __13("\u30D8\u30C3\u30C9\u30E9\u30A4\u30F3", "catpow"),
+        hasHeadingTypeCatch: __13("\u30AD\u30E3\u30C3\u30C1", "catpow")
       }
     },
     width: {
       name: "width",
       type: "buttons",
-      label: __12("\u5E45", "catpow"),
+      label: __13("\u5E45", "catpow"),
       values: {
-        hasWidthFull: __12("\u30D5\u30EB", "catpow"),
-        hasWidthWide: __12("\u30EF\u30A4\u30C9", "catpow"),
-        hasWidthRegular: __12("\u30EC\u30AE\u30E5\u30E9\u30FC", "catpow"),
-        hasWidthCompact: __12("\u30B3\u30F3\u30D1\u30AF\u30C8", "catpow"),
-        hasWidthNarrow: __12("\u30CA\u30ED\u30FC", "catpow")
+        hasWidthFull: __13("\u30D5\u30EB", "catpow"),
+        hasWidthWide: __13("\u30EF\u30A4\u30C9", "catpow"),
+        hasWidthRegular: __13("\u30EC\u30AE\u30E5\u30E9\u30FC", "catpow"),
+        hasWidthCompact: __13("\u30B3\u30F3\u30D1\u30AF\u30C8", "catpow"),
+        hasWidthNarrow: __13("\u30CA\u30ED\u30FC", "catpow")
       }
     },
     size: {
       name: "size",
       type: "buttons",
-      label: __12("\u30B5\u30A4\u30BA", "catpow"),
+      label: __13("\u30B5\u30A4\u30BA", "catpow"),
       values: {
-        isSizeXlarge: __12("\u6975\u5927", "catpow"),
-        isSizeLarge: __12("\u5927", "catpow"),
-        isSizeMedium: __12("\u4E2D", "catpow"),
-        isSizeSmall: __12("\u5C0F", "catpow"),
-        isSizeXsmall: __12("\u6975\u5C0F", "catpow")
+        isSizeXlarge: __13("\u6975\u5927", "catpow"),
+        isSizeLarge: __13("\u5927", "catpow"),
+        isSizeMedium: __13("\u4E2D", "catpow"),
+        isSizeSmall: __13("\u5C0F", "catpow"),
+        isSizeXsmall: __13("\u6975\u5C0F", "catpow")
       }
     },
     itemSize(preset, vars = "vars", ...otherParams) {
       return {
         name: "itemSize",
         type: "buttons",
-        label: __12("\u30A2\u30A4\u30C6\u30E0\u30B5\u30A4\u30BA", "catpow"),
+        label: __13("\u30A2\u30A4\u30C6\u30E0\u30B5\u30A4\u30BA", "catpow"),
         required: true,
         values: {
-          hasItemSizeSmall: __12("\u5C0F", "catpow"),
-          hasItemSizeMedium: __12("\u4E2D", "catpow"),
-          hasItemSizeLarge: __12("\u5927", "catpow"),
+          hasItemSizeSmall: __13("\u5C0F", "catpow"),
+          hasItemSizeMedium: __13("\u4E2D", "catpow"),
+          hasItemSizeLarge: __13("\u5927", "catpow"),
           hasItemSizeCustom: ":admin-generic:"
         },
         sub: {
           hasItemSizeCustom: [
             {
               name: "itemSize",
-              label: __12("\u30A2\u30A4\u30C6\u30E0\u30B5\u30A4\u30BA", "catpow"),
+              label: __13("\u30A2\u30A4\u30C6\u30E0\u30B5\u30A4\u30BA", "catpow"),
               vars: "vars",
               key: "--cp-size-i-custom",
               input: "responsiveSize"
@@ -6136,18 +6171,18 @@
       return {
         name: "itemGap",
         type: "buttons",
-        label: __12("\u30A2\u30A4\u30C6\u30E0\u9593\u9694", "catpow"),
+        label: __13("\u30A2\u30A4\u30C6\u30E0\u9593\u9694", "catpow"),
         values: {
-          hasItemGapSmall: __12("\u5C0F", "catpow"),
-          hasItemGapMedium: __12("\u4E2D", "catpow"),
-          hasItemGapLarge: __12("\u5927", "catpow"),
+          hasItemGapSmall: __13("\u5C0F", "catpow"),
+          hasItemGapMedium: __13("\u4E2D", "catpow"),
+          hasItemGapLarge: __13("\u5927", "catpow"),
           hasItemGapCustom: ":admin-generic:"
         },
         sub: {
           hasItemGapCustom: [
             {
               name: "itemSize",
-              label: __12("\u30A2\u30A4\u30C6\u30E0\u9593\u9694", "catpow"),
+              label: __13("\u30A2\u30A4\u30C6\u30E0\u9593\u9694", "catpow"),
               vars: "vars",
               key: "--cp-margin-gap-custom",
               input: "range",
@@ -6164,51 +6199,51 @@
     colorScheme: {
       name: "colorScheme",
       type: "buttons",
-      label: __12("\u914D\u8272", "catpow"),
+      label: __13("\u914D\u8272", "catpow"),
       values: {
-        hasColorSchemeReverted: __12("\u901A\u5E38", "catpow"),
-        hasColorSchemeInverted: __12("\u53CD\u8EE2", "catpow")
+        hasColorSchemeReverted: __13("\u901A\u5E38", "catpow"),
+        hasColorSchemeInverted: __13("\u53CD\u8EE2", "catpow")
       }
     },
     rank: {
       name: "rank",
       type: "gridbuttons",
-      label: __12("\u30E9\u30F3\u30AF", "catpow"),
+      label: __13("\u30E9\u30F3\u30AF", "catpow"),
       values: {
-        isRankPrimary: __12("\u512A\u5148", "catpow"),
-        isRankSecondary: __12("\u6A19\u6E96", "catpow"),
-        isRankTertiary: __12("\u526F\u6B21", "catpow")
+        isRankPrimary: __13("\u512A\u5148", "catpow"),
+        isRankSecondary: __13("\u6A19\u6E96", "catpow"),
+        isRankTertiary: __13("\u526F\u6B21", "catpow")
       }
     },
     rate: {
       name: "rate",
       type: "gridbuttons",
-      label: __12("\u30EC\u30FC\u30C8", "catpow"),
+      label: __13("\u30EC\u30FC\u30C8", "catpow"),
       values: {
-        isRateRecommended: __12("\u63A8\u5968", "catpow"),
-        isRateDefault: __12("\u6A19\u6E96", "catpow"),
-        isRateDeprecated: __12("\u975E\u63A8\u5968", "catpow"),
-        isRateSafe: __12("\u5B89\u5168", "catpow"),
-        isRateWarn: __12("\u6CE8\u610F", "catpow"),
-        isRateDanger: __12("\u5371\u967A", "catpow")
+        isRateRecommended: __13("\u63A8\u5968", "catpow"),
+        isRateDefault: __13("\u6A19\u6E96", "catpow"),
+        isRateDeprecated: __13("\u975E\u63A8\u5968", "catpow"),
+        isRateSafe: __13("\u5B89\u5168", "catpow"),
+        isRateWarn: __13("\u6CE8\u610F", "catpow"),
+        isRateDanger: __13("\u5371\u967A", "catpow")
       }
     },
     clipPath({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "clipPath",
-        label: __12("\u30AF\u30EA\u30C3\u30D7", "catpow"),
+        label: __13("\u30AF\u30EA\u30C3\u30D7", "catpow"),
         values: "hasClipPath",
         sub: [
           {
             name: "shape",
-            label: __12("\u5F62\u72B6", "catpow"),
+            label: __13("\u5F62\u72B6", "catpow"),
             type: "buttons",
             required: true,
             values: {
-              hasClipShapeEllipse: __12("\u6955\u5186", "catpow"),
-              hasClipShapeSlope: __12("\u50BE\u659C", "catpow"),
-              hasClipShapeArrow: __12("\u30A2\u30ED\u30FC", "catpow"),
-              hasClipShapeTail: __12("\u30D5\u30AD\u30C0\u30B7", "catpow")
+              hasClipShapeEllipse: __13("\u6955\u5186", "catpow"),
+              hasClipShapeSlope: __13("\u50BE\u659C", "catpow"),
+              hasClipShapeArrow: __13("\u30A2\u30ED\u30FC", "catpow"),
+              hasClipShapeTail: __13("\u30D5\u30AD\u30C0\u30B7", "catpow")
             },
             sub: {
               hasClipShapeEllipse: [
@@ -6217,14 +6252,14 @@
                   type: "buttons",
                   required: true,
                   values: {
-                    hasClipShapeBoth: __12("\u4E21\u65B9", "catpow"),
-                    hasClipShapeUpper: __12("\u4E0A", "catpow"),
-                    hasClipShapeBelow: __12("\u4E0B", "catpow")
+                    hasClipShapeBoth: __13("\u4E21\u65B9", "catpow"),
+                    hasClipShapeUpper: __13("\u4E0A", "catpow"),
+                    hasClipShapeBelow: __13("\u4E0B", "catpow")
                   }
                 },
                 {
                   name: "amount",
-                  label: __12("\u91CF", "catpow"),
+                  label: __13("\u91CF", "catpow"),
                   input: "range",
                   vars,
                   key: "--cp-clip-shape-amount",
@@ -6238,9 +6273,9 @@
                   type: "buttons",
                   required: true,
                   values: {
-                    hasClipShapeUpperNone: __12("\u306A\u3057", "catpow"),
-                    hasClipShapeUpperLeft: __12("\u5DE6", "catpow"),
-                    hasClipShapeUpperRight: __12("\u53F3", "catpow")
+                    hasClipShapeUpperNone: __13("\u306A\u3057", "catpow"),
+                    hasClipShapeUpperLeft: __13("\u5DE6", "catpow"),
+                    hasClipShapeUpperRight: __13("\u53F3", "catpow")
                   }
                 },
                 {
@@ -6248,14 +6283,14 @@
                   type: "buttons",
                   required: true,
                   values: {
-                    hasClipShapeBelowNone: __12("\u306A\u3057", "catpow"),
-                    hasClipShapeBelowLeft: __12("\u5DE6", "catpow"),
-                    hasClipShapeBelowRight: __12("\u53F3", "catpow")
+                    hasClipShapeBelowNone: __13("\u306A\u3057", "catpow"),
+                    hasClipShapeBelowLeft: __13("\u5DE6", "catpow"),
+                    hasClipShapeBelowRight: __13("\u53F3", "catpow")
                   }
                 },
                 {
                   name: "upperHeight",
-                  label: __12("\u4E0A\u9AD8\u3055", "catpow"),
+                  label: __13("\u4E0A\u9AD8\u3055", "catpow"),
                   input: "range",
                   vars,
                   key: "--cp-clip-shape-upper-height",
@@ -6264,7 +6299,7 @@
                 },
                 {
                   name: "belowHeight",
-                  label: __12("\u4E0B\u9AD8\u3055", "catpow"),
+                  label: __13("\u4E0B\u9AD8\u3055", "catpow"),
                   input: "range",
                   vars,
                   key: "--cp-clip-shape-below-height",
@@ -6278,9 +6313,9 @@
                   type: "buttons",
                   required: true,
                   values: {
-                    hasClipShapeUpperNone: __12("\u306A\u3057", "catpow"),
-                    hasClipShapeUpperIn: __12("\u5185", "catpow"),
-                    hasClipShapeUpperOut: __12("\u5916", "catpow")
+                    hasClipShapeUpperNone: __13("\u306A\u3057", "catpow"),
+                    hasClipShapeUpperIn: __13("\u5185", "catpow"),
+                    hasClipShapeUpperOut: __13("\u5916", "catpow")
                   }
                 },
                 {
@@ -6288,14 +6323,14 @@
                   type: "buttons",
                   required: true,
                   values: {
-                    hasClipShapeBelowNone: __12("\u306A\u3057", "catpow"),
-                    hasClipShapeBelowIn: __12("\u5185", "catpow"),
-                    hasClipShapeBelowOut: __12("\u5916", "catpow")
+                    hasClipShapeBelowNone: __13("\u306A\u3057", "catpow"),
+                    hasClipShapeBelowIn: __13("\u5185", "catpow"),
+                    hasClipShapeBelowOut: __13("\u5916", "catpow")
                   }
                 },
                 {
                   name: "upperHeight",
-                  label: __12("\u4E0A\u9AD8\u3055", "catpow"),
+                  label: __13("\u4E0A\u9AD8\u3055", "catpow"),
                   input: "range",
                   vars,
                   key: "--cp-clip-shape-upper-height",
@@ -6304,7 +6339,7 @@
                 },
                 {
                   name: "belowHeight",
-                  label: __12("\u4E0B\u9AD8\u3055", "catpow"),
+                  label: __13("\u4E0B\u9AD8\u3055", "catpow"),
                   input: "range",
                   vars,
                   key: "--cp-clip-shape-below-height",
@@ -6318,9 +6353,9 @@
                   type: "buttons",
                   required: true,
                   values: {
-                    hasClipShapeUpperNone: __12("\u306A\u3057", "catpow"),
-                    hasClipShapeUpperIn: __12("\u5185", "catpow"),
-                    hasClipShapeUpperOut: __12("\u5916", "catpow")
+                    hasClipShapeUpperNone: __13("\u306A\u3057", "catpow"),
+                    hasClipShapeUpperIn: __13("\u5185", "catpow"),
+                    hasClipShapeUpperOut: __13("\u5916", "catpow")
                   }
                 },
                 {
@@ -6328,14 +6363,14 @@
                   type: "buttons",
                   required: true,
                   values: {
-                    hasClipShapeBelowNone: __12("\u306A\u3057", "catpow"),
-                    hasClipShapeBelowIn: __12("\u5185", "catpow"),
-                    hasClipShapeBelowOut: __12("\u5916", "catpow")
+                    hasClipShapeBelowNone: __13("\u306A\u3057", "catpow"),
+                    hasClipShapeBelowIn: __13("\u5185", "catpow"),
+                    hasClipShapeBelowOut: __13("\u5916", "catpow")
                   }
                 },
                 {
                   name: "upperWidth",
-                  label: __12("\u4E0A\u5E45", "catpow"),
+                  label: __13("\u4E0A\u5E45", "catpow"),
                   input: "range",
                   vars,
                   key: "--cp-clip-shape-upper-width",
@@ -6344,7 +6379,7 @@
                 },
                 {
                   name: "upperHeight",
-                  label: __12("\u4E0A\u9AD8\u3055", "catpow"),
+                  label: __13("\u4E0A\u9AD8\u3055", "catpow"),
                   input: "range",
                   vars,
                   key: "--cp-clip-shape-upper-height",
@@ -6353,7 +6388,7 @@
                 },
                 {
                   name: "belowWidth",
-                  label: __12("\u4E0B\u5E45", "catpow"),
+                  label: __13("\u4E0B\u5E45", "catpow"),
                   input: "range",
                   vars,
                   key: "--cp-clip-shape-below-width",
@@ -6362,7 +6397,7 @@
                 },
                 {
                   name: "belowHeight",
-                  label: __12("\u4E0B\u9AD8\u3055", "catpow"),
+                  label: __13("\u4E0B\u9AD8\u3055", "catpow"),
                   input: "range",
                   vars,
                   key: "--cp-clip-shape-below-height",
@@ -6379,7 +6414,7 @@
     hasPadding({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "hasPadding",
-        label: __12("\u30D1\u30C7\u30A3\u30F3\u30B0", "catpow"),
+        label: __13("\u30D1\u30C7\u30A3\u30F3\u30B0", "catpow"),
         values: "hasPadding",
         sub: [
           { preset: "paddingTop", vars },
@@ -6393,13 +6428,13 @@
       return {
         name: "paddingTop",
         type: "buttons",
-        label: __12("\u4E0A\u30D1\u30C7\u30A3\u30F3\u30B0", "catpow"),
+        label: __13("\u4E0A\u30D1\u30C7\u30A3\u30F3\u30B0", "catpow"),
         values: {
-          hasPaddingTopXLarge: __12("\u6975\u5927", "catpow"),
-          hasPaddingTopLarge: __12("\u5927", "catpow"),
-          hasPaddingTopMedium: __12("\u4E2D", "catpow"),
-          hasPaddingTopSmall: __12("\u5C0F", "catpow"),
-          hasPaddingTopXSmall: __12("\u6975\u5C0F", "catpow"),
+          hasPaddingTopXLarge: __13("\u6975\u5927", "catpow"),
+          hasPaddingTopLarge: __13("\u5927", "catpow"),
+          hasPaddingTopMedium: __13("\u4E2D", "catpow"),
+          hasPaddingTopSmall: __13("\u5C0F", "catpow"),
+          hasPaddingTopXSmall: __13("\u6975\u5C0F", "catpow"),
           hasPaddingTopCustom: ":admin-generic:"
         },
         sub: {
@@ -6424,13 +6459,13 @@
       return {
         name: "paddingInline",
         type: "buttons",
-        label: __12("\u6A2A\u30D1\u30C7\u30A3\u30F3\u30B0", "catpow"),
+        label: __13("\u6A2A\u30D1\u30C7\u30A3\u30F3\u30B0", "catpow"),
         values: {
-          hasPaddingInlineXLarge: __12("\u6975\u5927", "catpow"),
-          hasPaddingInlineLarge: __12("\u5927", "catpow"),
-          hasPaddingInlineMedium: __12("\u4E2D", "catpow"),
-          hasPaddingInlineSmall: __12("\u5C0F", "catpow"),
-          hasPaddingInlineXSmall: __12("\u6975\u5C0F", "catpow"),
+          hasPaddingInlineXLarge: __13("\u6975\u5927", "catpow"),
+          hasPaddingInlineLarge: __13("\u5927", "catpow"),
+          hasPaddingInlineMedium: __13("\u4E2D", "catpow"),
+          hasPaddingInlineSmall: __13("\u5C0F", "catpow"),
+          hasPaddingInlineXSmall: __13("\u6975\u5C0F", "catpow"),
           hasPaddingInlineCustom: ":admin-generic:"
         },
         sub: {
@@ -6455,13 +6490,13 @@
       return {
         name: "paddingBottom",
         type: "buttons",
-        label: __12("\u4E0B\u30D1\u30C7\u30A3\u30F3\u30B0", "catpow"),
+        label: __13("\u4E0B\u30D1\u30C7\u30A3\u30F3\u30B0", "catpow"),
         values: {
-          hasPaddingBottomXLarge: __12("\u6975\u5927", "catpow"),
-          hasPaddingBottomLarge: __12("\u5927", "catpow"),
-          hasPaddingBottomMedium: __12("\u4E2D", "catpow"),
-          hasPaddingBottomSmall: __12("\u5C0F", "catpow"),
-          hasPaddingBottomXSmall: __12("\u6975\u5C0F", "catpow"),
+          hasPaddingBottomXLarge: __13("\u6975\u5927", "catpow"),
+          hasPaddingBottomLarge: __13("\u5927", "catpow"),
+          hasPaddingBottomMedium: __13("\u4E2D", "catpow"),
+          hasPaddingBottomSmall: __13("\u5C0F", "catpow"),
+          hasPaddingBottomXSmall: __13("\u6975\u5C0F", "catpow"),
           hasPaddingBottomCustom: ":admin-generic:"
         },
         sub: {
@@ -6485,12 +6520,12 @@
     customPadding({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "customPadding",
-        label: __12("\u4F59\u767D", "catpow"),
+        label: __13("\u4F59\u767D", "catpow"),
         values: "hasCustomPadding",
         sub: [
           {
             name: "paddingTop",
-            label: __12("\u4E0A\u4F59\u767D", "catpow"),
+            label: __13("\u4E0A\u4F59\u767D", "catpow"),
             input: "range",
             vars,
             key: "--cp-padding-top",
@@ -6502,7 +6537,7 @@
           },
           {
             name: "paddingBottom",
-            label: __12("\u4E0B\u4F59\u767D", "catpow"),
+            label: __13("\u4E0B\u4F59\u767D", "catpow"),
             input: "range",
             vars,
             key: "--cp-padding-bottom",
@@ -6514,7 +6549,7 @@
           },
           {
             name: "paddingInline",
-            label: __12("\u6A2A\u4F59\u767D", "catpow"),
+            label: __13("\u6A2A\u4F59\u767D", "catpow"),
             input: "range",
             vars,
             key: "--cp-padding-inline",
@@ -6531,7 +6566,7 @@
     hasMargin({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "hasMargin",
-        label: __12("\u30DE\u30FC\u30B8\u30F3", "catpow"),
+        label: __13("\u30DE\u30FC\u30B8\u30F3", "catpow"),
         values: "hasMargin",
         sub: [
           { preset: "marginTop", vars },
@@ -6544,13 +6579,13 @@
       return {
         name: "margin",
         type: "buttons",
-        label: __12("\u4E0A\u30DE\u30FC\u30B8\u30F3", "catpow"),
+        label: __13("\u4E0A\u30DE\u30FC\u30B8\u30F3", "catpow"),
         values: {
-          hasMarginTopXLarge: __12("\u6975\u5927", "catpow"),
-          hasMarginTopLarge: __12("\u5927", "catpow"),
-          hasMarginTopMedium: __12("\u4E2D", "catpow"),
-          hasMarginTopSmall: __12("\u5C0F", "catpow"),
-          hasMarginTopXSmall: __12("\u6975\u5C0F", "catpow"),
+          hasMarginTopXLarge: __13("\u6975\u5927", "catpow"),
+          hasMarginTopLarge: __13("\u5927", "catpow"),
+          hasMarginTopMedium: __13("\u4E2D", "catpow"),
+          hasMarginTopSmall: __13("\u5C0F", "catpow"),
+          hasMarginTopXSmall: __13("\u6975\u5C0F", "catpow"),
           hasMarginTopCustom: ":admin-generic:"
         },
         sub: {
@@ -6575,13 +6610,13 @@
       return {
         name: "margin",
         type: "buttons",
-        label: __12("\u4E0B\u30DE\u30FC\u30B8\u30F3", "catpow"),
+        label: __13("\u4E0B\u30DE\u30FC\u30B8\u30F3", "catpow"),
         values: {
-          hasMarginBottomXLarge: __12("\u6975\u5927", "catpow"),
-          hasMarginBottomLarge: __12("\u5927", "catpow"),
-          hasMarginBottomMedium: __12("\u4E2D", "catpow"),
-          hasMarginBottomSmall: __12("\u5C0F", "catpow"),
-          hasMarginBottomXSmall: __12("\u6975\u5C0F", "catpow"),
+          hasMarginBottomXLarge: __13("\u6975\u5927", "catpow"),
+          hasMarginBottomLarge: __13("\u5927", "catpow"),
+          hasMarginBottomMedium: __13("\u4E2D", "catpow"),
+          hasMarginBottomSmall: __13("\u5C0F", "catpow"),
+          hasMarginBottomXSmall: __13("\u6975\u5C0F", "catpow"),
           hasMarginBottomCustom: ":admin-generic:"
         },
         sub: {
@@ -6605,12 +6640,12 @@
     customMargin({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "customMargin",
-        label: __12("\u9593\u9694", "catpow"),
+        label: __13("\u9593\u9694", "catpow"),
         values: "hasCustomMargin",
         sub: [
           {
             name: "marginTop",
-            label: __12("\u4E0A\u9593\u9694", "catpow"),
+            label: __13("\u4E0A\u9593\u9694", "catpow"),
             input: "range",
             vars,
             key: "--cp-margin-top",
@@ -6622,7 +6657,7 @@
           },
           {
             name: "marginBottom",
-            label: __12("\u4E0B\u9593\u9694", "catpow"),
+            label: __13("\u4E0B\u9593\u9694", "catpow"),
             input: "range",
             vars,
             key: "--cp-margin-bottom",
@@ -6639,7 +6674,7 @@
     hasContentWidth({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "hasContentWidth",
-        label: __12("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
+        label: __13("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
         values: "hasContentWidth",
         sub: [{ preset: "contentWidth", vars, label: null }],
         ...otherParams
@@ -6649,22 +6684,22 @@
       return {
         name: "contentWidth",
         type: "gridbuttons",
-        label: __12("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
+        label: __13("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
         values: {
-          hasContentWidthFit: __12("\u9069", "catpow"),
-          hasContentWidthXSmall: __12("\u6975\u5C0F", "catpow"),
-          hasContentWidthSmall: __12("\u5C0F", "catpow"),
-          hasContentWidthMedium: __12("\u4E2D", "catpow"),
-          hasContentWidthLarge: __12("\u5927", "catpow"),
-          hasContentWidthXLarge: __12("\u6975\u5927", "catpow"),
-          hasContentWidthFull: __12("\u5168", "catpow"),
+          hasContentWidthFit: __13("\u9069", "catpow"),
+          hasContentWidthXSmall: __13("\u6975\u5C0F", "catpow"),
+          hasContentWidthSmall: __13("\u5C0F", "catpow"),
+          hasContentWidthMedium: __13("\u4E2D", "catpow"),
+          hasContentWidthLarge: __13("\u5927", "catpow"),
+          hasContentWidthXLarge: __13("\u6975\u5927", "catpow"),
+          hasContentWidthFull: __13("\u5168", "catpow"),
           hasContentWidthCustom: ":admin-generic:"
         },
         sub: {
           hasContentWidthCustom: [
             {
               name: "contentWidth",
-              label: __12("\u5E45", "catpow"),
+              label: __13("\u5E45", "catpow"),
               input: "responsiveSize",
               vars,
               key: "--cp-size-c-custom"
@@ -7141,11 +7176,11 @@
     set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
   };
   var getItemColor = ({ items: items2, index }) => {
-    let c2 = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 5) === "color");
-    if (!c2) {
+    let c3 = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 5) === "color");
+    if (!c3) {
       return 0;
     }
-    return parseInt(c2.slice(5));
+    return parseInt(c3.slice(5));
   };
   var switchItemPattern = ({ items: items2, index, set }, pattern, itemsKey2) => {
     if (itemsKey2 === void 0) {
@@ -7470,7 +7505,7 @@
 
   // ../blocks/_init/init/CP/functions/flags.js
   var testFlags = (cond, flags) => cond & flags === cond;
-  var filterArrayWithFlags = (array, flags) => array.filter((c2, i) => flags & 1 << i);
+  var filterArrayWithFlags = (array, flags) => array.filter((c3, i) => flags & 1 << i);
 
   // ../blocks/_init/init/CP/functions/transform.js
   var isRowsConvertibleToItems = (rows, itemsConf) => {
@@ -7551,8 +7586,8 @@
       classes = classes.split(" ");
     }
     const rtn = {};
-    classes.find((c2) => {
-      const matches = c2.match(colorToneClassPattern);
+    classes.find((c3) => {
+      const matches = c3.match(colorToneClassPattern);
       if (matches) {
         if (matches[1]) {
           rtn.h = matches[2];
@@ -7641,16 +7676,16 @@
           return CP.flagsToClassNames(state);
         }
         case "value": {
-          return extractColorToneValue(Object.keys(state).filter((c2) => state[c2]));
+          return extractColorToneValue(Object.keys(state).filter((c3) => state[c3]));
         }
         case "h": {
-          return Object.keys(state).find((c2) => colorStatePattern.test(c2));
+          return Object.keys(state).find((c3) => colorStatePattern.test(c3));
         }
         case "s":
         case "l": {
           const r2 = prop.toUpperCase();
-          return Object.keys(state).find((c2) => {
-            const match = c2.match(toneStatePattern);
+          return Object.keys(state).find((c3) => {
+            const match = c3.match(toneStatePattern);
             return match && match[2] === r2;
           });
         }
@@ -7666,11 +7701,11 @@
         case "s":
         case "l": {
           if (prop === "h") {
-            CP.filterFlags(state, (c2) => !colorStatePattern.test(c2));
+            CP.filterFlags(state, (c3) => !colorStatePattern.test(c3));
           } else {
             const r2 = prop.toUpperCase();
-            CP.filterFlags(state, (c2) => {
-              const match = c2.match(toneStatePattern);
+            CP.filterFlags(state, (c3) => {
+              const match = c3.match(toneStatePattern);
               return !(match && match[2] === r2);
             });
           }
@@ -7953,7 +7988,7 @@
   );
 
   // ../blocks/_init/init/format.jsx
-  var { __: __13 } = wp.i18n;
+  var { __: __14 } = wp.i18n;
   var { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
   var { Popover, BaseControle, TextControl, RangeControl, Card, CardBody, ToolbarGroup } = wp.components;
   var { useState: useState3, useMemo: useMemo7, useCallback: useCallback2, useReducer: useReducer2, useEffect: useEffect3 } = wp.element;
@@ -7968,10 +8003,10 @@
           return onChange(toggleFormat(value2, { type: "catpow/ruby" }));
         }
         if (wp.richText.isCollapsed(value2)) {
-          alert(__13("\u30EB\u30D3\u3092\u3064\u3051\u305F\u3044\u30C6\u30AD\u30B9\u30C8\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"));
+          alert(__14("\u30EB\u30D3\u3092\u3064\u3051\u305F\u3044\u30C6\u30AD\u30B9\u30C8\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"));
           return;
         }
-        let rt = prompt(__13("\u30EB\u30D3\u3092\u5165\u529B"));
+        let rt = prompt(__14("\u30EB\u30D3\u3092\u5165\u529B"));
         if (rt === null) {
           return;
         }
