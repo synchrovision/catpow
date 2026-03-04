@@ -58,6 +58,12 @@ wp.blocks.registerBlockType("catpow/showcase", {
 				"color",
 				"colorScheme",
 				{
+					name: "type",
+					type: "buttons",
+					label: "タイプ",
+					values: { isTypeFlat: "フラット", isTypeCard: "カード", isTypeFrame: "フーレム" },
+				},
+				{
 					name: "counter",
 					label: "番号",
 					values: "hasCounter",
@@ -81,14 +87,9 @@ wp.blocks.registerBlockType("catpow/showcase", {
 					label: "タイトルキャプション",
 					values: "hasTitleCaption",
 				},
-				{
-					name: "size",
-					type: "buttons",
-					label: "サイズ",
-					values: { isSizeSmall: "small", isSizeMedium: "medium", isSizeLarge: "large" },
-				},
 				"hasMargin",
 				"hasPadding",
+				"hasContentWidth",
 				"itemGap",
 				{ name: "link", label: "リンク", values: "hasLink" },
 				{

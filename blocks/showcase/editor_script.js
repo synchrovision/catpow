@@ -57,6 +57,12 @@
           "color",
           "colorScheme",
           {
+            name: "type",
+            type: "buttons",
+            label: "\u30BF\u30A4\u30D7",
+            values: { isTypeFlat: "\u30D5\u30E9\u30C3\u30C8", isTypeCard: "\u30AB\u30FC\u30C9", isTypeFrame: "\u30D5\u30FC\u30EC\u30E0" }
+          },
+          {
             name: "counter",
             label: "\u756A\u53F7",
             values: "hasCounter",
@@ -80,14 +86,9 @@
             label: "\u30BF\u30A4\u30C8\u30EB\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3",
             values: "hasTitleCaption"
           },
-          {
-            name: "size",
-            type: "buttons",
-            label: "\u30B5\u30A4\u30BA",
-            values: { isSizeSmall: "small", isSizeMedium: "medium", isSizeLarge: "large" }
-          },
           "hasMargin",
           "hasPadding",
+          "hasContentWidth",
           "itemGap",
           { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" },
           {
