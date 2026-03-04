@@ -1,0 +1,5 @@
+@import 'admin_style_config.scss';
+
+.wp-block-catpow-accordiongroup{
+	@include bnd((d:b));
+}
