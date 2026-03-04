@@ -5,6 +5,7 @@
 .wp-block-catpow-accordion{
 	$block:&;
 	@extend %ui-block;
+    @include bnd((p:r,mg:f));
 	&__header{
 		@extend %header-component;
 		@include bnd((p:r,pdr:50));
@@ -34,7 +35,7 @@
 		@include bnd((h:0,o:h));
 		@include trn((t:.5s));
 		&-body{
-			@include bnd((pd:cpd));
+			@include bnd((pd:f));
 		}
 	}
 	&.has-image{

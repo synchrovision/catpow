@@ -1,30 +1,34 @@
 .wp-block-catpow-accordion__header-title {
-  font-family: var(--cp-font-family-h, inherit);
-  font-size: var(--cp-font-size-h, 2em);
-  font-weight: var(--cp-font-weight-h, regular);
-  line-height: var(--cp-line-height-h, 1.5);
-  letter-spacing: var(--cp-letter-spacing-h, normal);
+  font-family: var(--cp-font-family-t-h, inherit);
+  font-size: var(--cp-font-size-t-h, 2em);
+  font-weight: var(--cp-font-weight-t-h, regular);
+  line-height: var(--cp-line-height-t-h, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-h, normal);
 }
 .wp-block-catpow-accordion {
-  margin-top: var(--cp-ui-margin-top, 0);
-  margin-bottom: var(--cp-ui-margin-bottom, 0);
+  margin: var(--cp-margin-t-u, 0);
 }
 .wp-block-catpow-accordion__header {
-  padding: var(--cp-size-sp-h);
+  padding: var(--cp-padding-c-h);
   border-width: var(--cp-border-width-c-h, 0);
   border-radius: var(--cp-border-radius-c-h, 0);
+  box-shadow: var(--cp-shadow-c-h) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+}
+.wp-block-catpow-accordion {
+  position: relative;
+  margin: var(--cp-margin-f);
 }
 .wp-block-catpow-accordion__header {
   position: relative;
   padding-right: 3.125rem;
-  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
+  background-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
   cursor: pointer;
 }
 .wp-block-catpow-accordion__header-title {
   padding: 0rem;
   margin: 0rem;
   text-align: left;
-  color: hsla(var(--cp-tones-ix-h),var(--cp-tones-ix-s),var(--cp-tones-ix-l),var(--cp-tones-ix-a,1));
+  color: oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1));
 }
 .wp-block-catpow-accordion__header-icon {
   display: block;
@@ -51,7 +55,7 @@
   width: 1.25rem;
   height: 0.0625rem;
   margin: auto;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
+  background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
 }
 .wp-block-catpow-accordion__header-icon::before {
   -webkit-transition: 0.4s;
@@ -72,7 +76,7 @@
   transition: 0.5s;
 }
 .wp-block-catpow-accordion__contents-body {
-  padding: var(--cp-cell-padding);
+  padding: var(--cp-padding-f);
 }
 .wp-block-catpow-accordion.has-image .wp-block-catpow-accordion__heder {
   padding-left: 4em;
