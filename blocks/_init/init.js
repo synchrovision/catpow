@@ -3017,7 +3017,7 @@
   var { __: __9 } = wp.i18n;
   var c2 = (l = 100) => `rgb(${l},${l},${l})`;
   var dots = {
-    label: __9("\u6C34\u7389", "catpow"),
+    label: __9("\u30C9\u30C3\u30C8", "catpow"),
     order: 3,
     params: {
       ...baseGradientParams,
@@ -3034,7 +3034,7 @@
       const image = [];
       image.push(getBaseGradientCode(params));
       image.push(`radial-gradient(circle at center, #fff, #fff ${w1}%, #000 ${w1}%, #000)`);
-      image.push(`linear-gradient(${r2}deg,${l1},${l2},${l2},${l1}`);
+      image.push(`linear-gradient(${r2}deg,${l1},${l2},${l2},${l1})`);
       return {
         image,
         size: ["cover", `${w2}px ${w2}px`, "cover"],

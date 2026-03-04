@@ -4,7 +4,7 @@ const { __ } = wp.i18n;
 const c = (l = 100) => `rgb(${l},${l},${l})`;
 
 export const dots = {
-	label: __("水玉", "catpow"),
+	label: __("ドット", "catpow"),
 	order: 3,
 	params: {
 		...baseGradientParams,
@@ -23,7 +23,7 @@ export const dots = {
 		const image = [];
 		image.push(getBaseGradientCode(params));
 		image.push(`radial-gradient(circle at center, #fff, #fff ${w1}%, #000 ${w1}%, #000)`);
-		image.push(`linear-gradient(${r}deg,${l1},${l2},${l2},${l1}`);
+		image.push(`linear-gradient(${r}deg,${l1},${l2},${l2},${l1})`);
 
 		return {
 			image,
