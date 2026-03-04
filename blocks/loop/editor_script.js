@@ -23,7 +23,7 @@
       }, []);
       const item = useMemo(() => content_path && itemMap[content_path], [itemMap, content_path]);
       useEffect(() => {
-        if (content_path && itemMap[content_path].has_config) {
+        if (content_path && itemMap[content_path]?.has_config) {
           const path = content_path.slice(0, content_path.lastIndexOf("/"));
           wp.apiFetch({ path: "/cp/v1/" + path + "/config" }).then((config2) => {
             if (config2.slots != null) {
