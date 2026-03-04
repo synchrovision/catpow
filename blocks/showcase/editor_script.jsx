@@ -90,7 +90,6 @@ wp.blocks.registerBlockType("catpow/showcase", {
 				"hasMargin",
 				"hasPadding",
 				"hasContentWidth",
-				"itemGap",
 				{ name: "link", label: "リンク", values: "hasLink" },
 				{
 					name: "template",
@@ -208,7 +207,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 							/>
 						</div>
 						{states.hasLink && (
-							<CP.Link.Edit className="_link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index} isSelected={isSelected}>
+							<CP.Link.Edit className="_link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index}>
 								<RichText
 									onChange={(linkText) => {
 										items[index].linkText = linkText;

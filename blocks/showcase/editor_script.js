@@ -89,7 +89,6 @@
           "hasMargin",
           "hasPadding",
           "hasContentWidth",
-          "itemGap",
           { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" },
           {
             name: "template",
@@ -199,7 +198,7 @@
                 value: item.text
               }
             )
-          ), states.hasLink && /* @__PURE__ */ wp.element.createElement(CP.Link.Edit, { className: "_link", attr: attributes, set: setAttributes, keys: linkKeys.link, index, isSelected }, /* @__PURE__ */ wp.element.createElement(
+          ), states.hasLink && /* @__PURE__ */ wp.element.createElement(CP.Link.Edit, { className: "_link", attr: attributes, set: setAttributes, keys: linkKeys.link, index }, /* @__PURE__ */ wp.element.createElement(
             RichText,
             {
               onChange: (linkText) => {
