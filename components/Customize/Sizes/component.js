@@ -1470,6 +1470,7 @@
     relativePaddingConverter: () => relativePaddingConverter,
     relativeSizeConverter: () => relativeSizeConverter,
     relativeSpacingConverter: () => relativeSpacingConverter,
+    responsiveContentSizeConverter: () => responsiveContentSizeConverter,
     responsiveGapConverter: () => responsiveGapConverter,
     responsiveItemSizeConverter: () => responsiveItemSizeConverter,
     responsiveMarginConverter: () => responsiveMarginConverter,
@@ -1565,6 +1566,11 @@
     toValues: (size) => (size.match(/min\((.+?)vw,(.+?)rem\)/) || [, 0, 0]).slice(1).map((v, i) => i === 0 ? parseFloat(v) * 4 : parseFloat(v) * 16),
     toSizes: (vw, rem) => `min(${(vw / 4).toFixed(2)}vw,${(rem / 16).toFixed(2)}rem)`,
     getDisplayValue: (val, n) => n % 2 ? val / 16 : val / 4
+  };
+  var responsiveContentSizeConverter = {
+    ...responsiveSizeConverter,
+    toValues: (size) => (size.match(/min\((.+?)vw,(.+?)rem,100%\)/) || [, 0, 0]).slice(1).map((v, i) => i === 0 ? parseFloat(v) * 4 : parseFloat(v) * 16),
+    toSizes: (vw, rem) => `min(${(vw / 4).toFixed(2)}vw,${(rem / 16).toFixed(2)}rem,100%)`
   };
   var responsiveItemSizeConverter = {
     ...responsiveSizeConverter,

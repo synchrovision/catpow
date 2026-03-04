@@ -112,11 +112,11 @@ class style_config{
 		return static::$roles['size']=apply_filters('cp_size_roles',[
 			'contents'=>[
 				'label'=>'コンテンツ',
-				'type'=>'responsiveSize',
+				'type'=>'responsiveContentSize',
 				'primary'=>true,
 				'shorthand'=>'c',
 				'variants'=>self::$size_variants_5,
-				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem)',80 + $n * 5,40 + $n * 10),range(0,4))
+				'defaultValues'=>array_map(fn($n)=>sprintf('min(%1$svw,%2$srem,100%%)',80 + $n * 5,40 + $n * 10),range(0,4))
 			],
 			'item'=>[
 				'label'=>'アイテム',
