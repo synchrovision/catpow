@@ -286,6 +286,8 @@
 .wp-block-catpow-showcase.is-type-card .wp-block-catpow-showcase__item-image > img {
   aspect-ratio: 1.3333333333;
   width: 100%;
+  object-position: center;
+  object-fit: cover;
 }
 .wp-block-catpow-showcase.is-type-card .wp-block-catpow-showcase__item-texts {
   position: relative;
@@ -410,6 +412,8 @@
 .wp-block-catpow-showcase.is-type-frame .wp-block-catpow-showcase__item-image > img {
   width: 100%;
   height: 100%;
+  object-position: center;
+  object-fit: cover;
 }
 .wp-block-catpow-showcase.is-type-frame .wp-block-catpow-showcase__item-texts {
   position: relative;

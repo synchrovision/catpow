@@ -3,41 +3,27 @@
 @import "component-placeholders.scss";
 
 .wp-block-catpow-showcase{
-	@include bnd((w:a 1200,mgi:a));
-	@include flx((w:w,g:g));
+    $block:&;
+    $item:#{$block}__item;
+	@include bnd((p:r,w:c,mgi:a,ctn:i,z:1,bs:b));
 	@include txt((l:n,c:tx));
 	&__item{
-		@include bnd((pd:8 16,f:1 1 f));
 		&-image{
-			@include bnd((f:10 10 300,mgt:20));
-			@include bdr((s:s,w:8,c:b));
-			@include shd((b:4));
 			>img{
-				@include bnd((d:b,w:f,h:a));
+				@include bnd((d:b,w:f,h:a,op:c,of:c));
 			}
 		}
 		&-texts{
-			@extend %card-component;
-			@include bnd((p:r,f:1 1 300,z:1));
-			@include bg((c:bx));
 			@include txt((c:tx));
-			@include shd((b:4));
 			&-counter{
 				@extend %ui;
 				@extend %header-component;
-				@include bnd((w:fit,h:1em,mg:-1em a .5em));
-				@include bg((c:m));
-				@include txt((a:c,p:1.5em,h:1em,t:.05em,c:i,w:b,f:d,b:k));
-				@include shd((b:2));
 				&-number{
-					@include txt((p:1.25em));
 				}
 			}
 			&-title{
 				@extend %heading-block;
 				@extend %heading;
-				@include bnd((mg:0,pd:0));
-				@include txt((c:mx,b:k));
 			}
 			&-caption{
 				@extend %lead-block;
@@ -46,34 +32,9 @@
 			&-text{
 				@extend %paragraph-block;
 				@extend %paragraph;
-				@include bnd((mgt:1em));
-				@include txt((a:j));
 			}
 			&-link{
-				@extend %button-component;
 				@extend %ui;
-				@include bnd((d:b,w:fit,mg:1em a 0));
-				@include bdr((s:s));
-				@include txt((s:n,c:mx));
-			}
-		}
-		@include bp(-960){
-			&-image{
-				@include bnd((mgb:-40));
-			}
-		}
-		@include bp(960){
-			@include flx((w:w,a:s));
-			&:nth-child(odd){
-				&-image{
-					@include bnd((mgr:-40));
-				}
-			}
-			&:nth-child(even){
-				@include flx((d:rr));
-				&-image{
-					@include bnd((mgl:-40));
-				}
 			}
 		}
 	}
@@ -82,7 +43,256 @@
 			@include bnd((pd:32 16,f:1 1 f));
 		}
 	}
-	&.large{}
-	&.medium{}
-	&.small{}
+	&.is-type-flat{
+        @include bnd((w:c,mgi:a));
+        @include flx((d:c,g:c-f));
+        @include txt((l:n));
+        #{$block}{
+            &__item{
+                @include bnd((p:r,f:1 1 f));
+                @include flx((w:w,a:s,g:c-c));
+                &-image{
+                    @include bnd((pd:0,f:2 2 300));
+                    >img{
+                        @include bnd((d:b,w:f,h:a,a:4 / 3,op:c,of:c));
+                        @include bdr((r:c-c));
+                    }
+                }
+                &-texts{
+                    @include bnd((f:1 1 300,z:1));
+                    @include txt((p:p,h:p));
+                    &-counter{
+                        @extend %heading;
+                        @include bnd((w:fit,w:4em,h:4em,ac:c));
+                        @include bg((c:mx));
+                        @include bdr((r:50%));
+                        @include txt((a:c,h:1em,c:ix,f:d,b:k));
+                        @include trn((o:.7));
+                        &-prefix{
+                            @include bnd((d:b,mgb:.25em));
+                            @include txt((p:max(1rem,.5em)));
+                        }
+                        &-number{
+                        }
+                        &-suffix{
+                            @include txt((p:.75em));
+                        }
+                    }
+                    &-title{
+                        @include bnd((mg:0,pd:0));
+                        @include txt((a:c,c:mx,b:k));
+                    }
+                    &-titlecaption{
+                        @include bnd((mgt:1em));
+                        @include txt((p:1.1em,c:tx));
+                    }
+                    &-text{
+                        @include bnd((mgt:2em));
+                        @include txt((a:j,c:tx));
+                    }
+                    &-link{
+                        @extend %ui;
+                        @include bnd((d:b,p:r,w:fit,mg:2em 2em 0 a,pdb:.5em,pdr:2em));
+                        @include txt((a:c,f:d,h:1em,td:n,c:mx));
+                        &:active{
+                            @include shd((b:0 0 0 clr(m 1 .3)));
+                        }
+                        &::before{
+                            content:'';
+                            @include bnd((d:b,p:a,h:1,t:f));
+                            @include bg((c:mx));
+                            @include trn((a:looper 3s i b));
+                        }
+                        &::after{
+                            content:'';
+                            @include bnd((d:b,p:a,r:-2em,t:-2em,b:-2em,mg:a,w:4em,h:4em,ac:c));
+                            @include bg((c:mx-bx 80,i:'./images/arrow.svg',s:2em 2em,p:c,r:n));
+                            @include txt((a:c,p:.6em,t:.1em,c:ix,f:dc));
+                            @include bdr((r:50%));
+                        }
+                    }
+                }
+                @include ctn(-720){
+                    &-texts{
+                        &-counter{
+                            @include bnd((p:a,t:0,l:-1em));
+                        }
+                    }
+                    &-image{
+                    }
+                }
+                @include ctn(720){
+                    &-texts{
+                        &-counter{
+                            @include bnd((p:a,t:0em));
+                        }
+                    }
+                    &:nth-child(even){
+                        @include flx((d:rr));
+                        #{$item}{
+                            &-texts{
+                                &-counter{
+                                    @include bnd((r:-1em));
+                                }
+                            }
+                        }
+                    }
+                    &:nth-child(odd){
+                        #{$item}{
+                            &-texts{
+                                &-counter{
+                                    @include bnd((l:-1em));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.has-counter{
+            #{$item}{
+                @include bnd((pdt:4em));
+            }
+        }
+    }
+	&.is-type-card{
+        @include flx((d:c,g:c-f));
+        #{$block}{
+            &__item{
+                &-image{
+                    @extend %card-component;
+                    @include bnd((f:2 2 300,pd:0,mgt:20,o:h));
+                    >img{
+                        @include bnd((a:4 / 3,w:f,op:c,of:c));
+                    }
+                }
+                &-texts{
+                    @extend %card-component;
+                    @include bnd((p:r,f:1 1 300,z:1));
+                    @include flx((d:c));
+                    @include bg((c:bx));
+                    @include txt((c:tx));
+                    @include shd((b:4));
+                    &-counter{
+                        @extend %label-component;
+                        @include bnd((d:b,w:fit,mgi:a,mgt:-2em,mgb:s-s));
+                        @include bg((c:m));
+                        @include txt((a:c,p:1.5em,h:1em,t:.05em,c:i,w:b,f:d,b:k));
+                        @include shd((b:c-l));
+                        &-number{
+                            @include txt((p:1.25em));
+                        }
+                    }
+                    &-title{
+                        @include bnd((mg:0,pd:0));
+                        @include txt((c:mx,b:k));
+                    }
+                    &-caption{
+                    }
+                    &-text{
+                        @include bnd((mgt:1em,f:1 1 a));
+                        @include txt((a:j));
+                    }
+                    &-link{
+				        @extend %button-component;
+                        @include bnd((d:b,w:fit,mg:1em a 0));
+                        @include bdr((s:s));
+                        @include txt((s:n,c:mx));
+                    }
+                }
+                @include ctn(-720){
+                    &-image{
+                        @include bnd((mgb:-20));
+                    }
+                }
+                @include ctn(720){
+                    @include flx((w:w,a:s));
+                    &-texts{
+                        @include bnd((mgt:40,a:4 / 3));
+                    }
+                    &:nth-child(odd){
+                        #{$item}{
+                            &-image{
+                                @include bnd((mgr:-20));
+                            }
+                        }
+                    }
+                    &:nth-child(even){
+                        @include flx((d:rr));
+                        #{$item}{
+                            &-image{
+                                @include bnd((mgl:-20));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+	&.is-type-frame{
+        @include flx((d:c,g:c-f));
+        #{$block}{
+            &__item{
+                @extend %frame-component;
+                @include bnd((pd:0,o:h));
+                @include bg((c:bx));
+                &-image{
+                    @include bnd((d:g,f:2 2 300,pd:0,o:h));
+                    >img{
+                        @include bnd((w:f,h:f,op:c,of:c));
+                    }
+                }
+                &-texts{
+                    @include bnd((p:r,f:1 1 300,pd:c-f,z:1));
+                    @include flx((d:c));
+                    @include txt((c:tx));
+                    &-counter{
+                        @extend %label-component;
+                        @include bnd((d:b,w:fit,mgb:s-s));
+                        @include bg((c:m));
+                        @include txt((a:c,t:.05em,c:i,w:b,f:d,b:k));
+                        @include shd((b:c-l));
+                        &-number{
+                            @include txt((p:1.25em));
+                        }
+                    }
+                    &-title{
+                        @include bnd((mg:0,pd:0));
+                        @include txt((c:mx,b:k));
+                    }
+                    &-caption{
+                    }
+                    &-text{
+                        @include bnd((mgt:1em,f:1 1 a));
+                        @include txt((a:j));
+                    }
+                    &-link{
+				        @extend %button-component;
+                        @include bnd((d:b,w:fit,mg:1em a 0));
+                        @include bdr((s:s));
+                        @include txt((s:n,c:mx));
+                    }
+                }
+                @include ctn(720){
+                    @include flx((w:w));
+                    &:nth-child(even){
+                        @include flx((d:rr));
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@keyframes looper{
+	0%{
+		@include bnd((l:0,r:100%));
+	}
+	50%{
+		@include bnd((l:0,r:0));
+	}
+	100%{
+		@include bnd((l:100%,r:0));
+	}
 }
