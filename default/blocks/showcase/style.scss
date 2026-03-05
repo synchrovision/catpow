@@ -5,7 +5,7 @@
 .wp-block-catpow-showcase{
     $block:&;
     $item:#{$block}__item;
-	@include bnd((p:r,w:c,mgi:a,ctn:i,z:1,bs:b));
+	@include bnd((p:r,w:c,mgi:a,pd:0,ctn:i,z:1,bs:b));
 	@include txt((l:n,c:tx));
 	&__item{
 		&-image{
@@ -17,7 +17,6 @@
 			@include txt((c:tx));
 			&-counter{
 				@extend %ui;
-				@extend %header-component;
 				&-number{
 				}
 			}
@@ -115,7 +114,7 @@
                 @include ctn(-720){
                     &-texts{
                         &-counter{
-                            @include bnd((p:a,t:0,l:-1em));
+                            @include bnd((p:a,t:0,l:-0.5em));
                         }
                     }
                     &-image{
@@ -177,7 +176,7 @@
                         @extend %label-component;
                         @include bnd((d:b,w:fit,mgi:a,mgt:-2em,mgb:s-s));
                         @include bg((c:m));
-                        @include txt((a:c,p:1.5em,h:1em,t:.05em,c:i,w:b,f:d,b:k));
+                        @include txt((a:c,p:1.5em,h:1em,c:i,w:b,f:d,b:k));
                         @include shd((b:c-l));
                         &-number{
                             @include txt((p:1.25em));
@@ -237,20 +236,20 @@
                 @include bnd((pd:0,o:h));
                 @include bg((c:bx));
                 &-image{
-                    @include bnd((d:g,f:2 2 300,pd:0,o:h));
+                    @include bnd((d:g,f:2 2 200,pd:0,o:h));
                     >img{
                         @include bnd((w:f,h:f,op:c,of:c));
                     }
                 }
                 &-texts{
-                    @include bnd((p:r,f:1 1 300,pd:c-f,z:1));
-                    @include flx((d:c));
+                    @include bnd((p:r,f:3 3 300,pd:c-f,z:1));
+                    @include flx((d:c,a:s));
                     @include txt((c:tx));
                     &-counter{
                         @extend %label-component;
                         @include bnd((d:b,w:fit,mgb:s-s));
                         @include bg((c:m));
-                        @include txt((a:c,t:.05em,c:i,w:b,f:d,b:k));
+                        @include txt((a:c,c:i,w:b,f:d,b:k));
                         @include shd((b:c-l));
                         &-number{
                             @include txt((p:1.25em));
@@ -261,6 +260,7 @@
                         @include txt((c:mx,b:k));
                     }
                     &-caption{
+                        @include bnd((mgi:0));
                     }
                     &-text{
                         @include bnd((mgt:1em,f:1 1 a));
