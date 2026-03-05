@@ -67,11 +67,15 @@
 				}
 				
 			}
+            &__content{
+                @include bg((c:bx));
+            }
 		}
 	}
 	&.is-style-frame{
 		@extend %frame-component;
 		@include bnd((mg:f,pd:0,o:h,g:0));
+        @include bg((c:bx));
 		#{$block}{
 			&__content{
 				@include bnd((pd:f));

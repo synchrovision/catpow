@@ -82,11 +82,15 @@
   border-style: solid;
   border-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
 }
+.wp-block-media-text.is-style-card .wp-block-media-text__content {
+  background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
+}
 .wp-block-media-text.is-style-frame {
   margin: var(--cp-margin-f);
   padding: 0px;
   overflow: hidden;
   gap: 0px;
+  background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
 }
 .wp-block-media-text.is-style-frame .wp-block-media-text__content {
   padding: var(--cp-padding-f);
