@@ -2905,12 +2905,7 @@
       ...alphaParams
     },
     getData(params = {}) {
-      const {
-        position: { x = 50, y = 50 },
-        w1 = 10,
-        w2 = 10,
-        alpha = 50
-      } = params;
+      const { position: { x = 50, y = 50 } = {}, w1 = 10, w2 = 10, alpha = 50 } = params;
       const gradient1 = `repeating-radial-gradient(circle at ${x}% ${y}%,#0000,#0000 ${w1}px,rgba(255,255,255,${alpha / 100}) ${w1}px,rgba(255,255,255,${alpha / 100}) ${w1 + w2}px)`;
       const gradient2 = getBaseGradientCode(params);
       return {
