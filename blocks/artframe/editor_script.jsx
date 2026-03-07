@@ -22,6 +22,7 @@ wp.blocks.registerBlockType("catpow/artframe", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
+				artframeSelectiveClasses,
 				"level",
 				"color",
 				"colorScheme",
@@ -32,7 +33,6 @@ wp.blocks.registerBlockType("catpow/artframe", {
 				{ preset: "contentWidth", classKey: "contentsBodyClasses" },
 				"hasMargin",
 				{ preset: "hasPadding", classKey: "contentsBodyClasses" },
-				artframeSelectiveClasses,
 			];
 			wp.hooks.applyFilters("catpow.blocks.artframe.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;

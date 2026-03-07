@@ -51,6 +51,7 @@
       const [ref, setRef] = useState2(null);
       const selectiveClasses = useMemo2(() => {
         const selectiveClasses2 = [
+          artframeSelectiveClasses,
           "level",
           "color",
           "colorScheme",
@@ -60,8 +61,7 @@
           { preset: "backgroundPattern", classKey: "contentsClasses" },
           { preset: "contentWidth", classKey: "contentsBodyClasses" },
           "hasMargin",
-          { preset: "hasPadding", classKey: "contentsBodyClasses" },
-          artframeSelectiveClasses
+          { preset: "hasPadding", classKey: "contentsBodyClasses" }
         ];
         wp.hooks.applyFilters("catpow.blocks.artframe.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
