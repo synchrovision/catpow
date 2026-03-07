@@ -1,4 +1,10 @@
-{
+{	"catpow-scss anm":{
+		"scope":"scss",
+		"prefix":"anm",
+		"body":[
+			"@include anm(($1));"
+		]
+	},
 	"catpow-scss bnd":{
 		"scope":"scss",
 		"prefix":"bnd",
@@ -76,11 +82,11 @@
 			"@include bp($1){","\t$2","}"
 		]
 	},
-	"catpow-scss ctn":{
+	"catpow-scss cq":{
 		"scope":"scss",
-		"prefix":"ctn",
+		"prefix":"cq",
 		"body":[
-			"@include ctn($1){","\t$2","}"
+			"@include cq($1){","\t$2","}"
 		]
 	}
 }
