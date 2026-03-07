@@ -61,7 +61,7 @@ class ArtFrameBomb extends HTMLElement {
 					const crrR = r + b * crrF;
 					const crrTopR = f > 0 ? r + bs + (b * (prevF + crrF)) / 2 : r + b;
 					const crrRad = uRad * i - rad / 2;
-					const crrTopRad = crrRad - uRad * (0.5 + ((prevF - crrF) * 50) / f);
+					const crrTopRad = crrRad - uRad * (0.5 + (f > 0 ? ((prevF - crrF) * 50) / f : 0));
 
 					const x1 = ox + crrTopR * Math.sin(crrTopRad);
 					const y1 = oy - crrTopR * Math.cos(crrTopRad);
@@ -87,7 +87,7 @@ class ArtFrameBomb extends HTMLElement {
 					const crrR = r + b * crrF;
 					const crrTopR = f > 0 ? r + bs + (b * (prevF + crrF)) / 2 : r + b;
 					const crrRad = uRad * i - rad / 2;
-					const crrTopRad = crrRad - uRad * (0.5 + ((prevF - crrF) * 50) / f);
+					const crrTopRad = crrRad - uRad * (0.5 + (f > 0 ? ((prevF - crrF) * 50) / f : 0));
 
 					const x1 = ox - crrTopR * Math.sin(crrTopRad);
 					const y1 = oy + crrTopR * Math.cos(crrTopRad);

@@ -100,7 +100,7 @@ var el = (tag, props, children, namespace) => {
   return el2;
 };
 
-// _sknynystl:/Users/hatanokazuhiro/repos/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-bomb/element/style.css
+// _hyz2ie1fi:/Users/hatanokazuhiro/repos/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-bomb/element/style.css
 var style_default = ".art-frame-bomb__body {\n  background-color: hsla(var(--cp-tones-sx-h),var(--cp-tones-sx-s),var(--cp-tones-sx-l),var(--cp-tones-sx-a,1));\n}\n/*# sourceMappingURL=./style.css.map */";
 
 // ../elements/art-frame-bomb/element/index.mjs.jsx
@@ -163,7 +163,7 @@ var ArtFrameBomb = class extends HTMLElement {
           const crrR = r + b * crrF;
           const crrTopR = f > 0 ? r + bs + b * (prevF + crrF) / 2 : r + b;
           const crrRad = uRad * i - rad / 2;
-          const crrTopRad = crrRad - uRad * (0.5 + (prevF - crrF) * 50 / f);
+          const crrTopRad = crrRad - uRad * (0.5 + (f > 0 ? (prevF - crrF) * 50 / f : 0));
           const x1 = ox + crrTopR * Math.sin(crrTopRad);
           const y1 = oy - crrTopR * Math.cos(crrTopRad);
           const x2 = ox + crrR * Math.sin(crrRad);
@@ -187,7 +187,7 @@ var ArtFrameBomb = class extends HTMLElement {
           const crrR = r + b * crrF;
           const crrTopR = f > 0 ? r + bs + b * (prevF + crrF) / 2 : r + b;
           const crrRad = uRad * i - rad / 2;
-          const crrTopRad = crrRad - uRad * (0.5 + (prevF - crrF) * 50 / f);
+          const crrTopRad = crrRad - uRad * (0.5 + (f > 0 ? (prevF - crrF) * 50 / f : 0));
           const x1 = ox - crrTopR * Math.sin(crrTopRad);
           const y1 = oy + crrTopR * Math.cos(crrTopRad);
           const x2 = ox - crrR * Math.sin(crrRad);
