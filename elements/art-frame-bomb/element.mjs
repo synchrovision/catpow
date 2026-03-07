@@ -100,7 +100,7 @@ var el = (tag, props, children, namespace) => {
   return el2;
 };
 
-// _ung7vxqs3:/Users/hatanokazuhiro/repos/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-bomb/element/style.css
+// _sknynystl:/Users/hatanokazuhiro/repos/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-bomb/element/style.css
 var style_default = ".art-frame-bomb__body {\n  background-color: hsla(var(--cp-tones-sx-h),var(--cp-tones-sx-s),var(--cp-tones-sx-l),var(--cp-tones-sx-a,1));\n}\n/*# sourceMappingURL=./style.css.map */";
 
 // ../elements/art-frame-bomb/element/index.mjs.jsx
@@ -140,56 +140,62 @@ var ArtFrameBomb = class extends HTMLElement {
     const body = el("div", { class: "_body" }, [el("slot")]);
     const resizeObserver = new ResizeObserver((entries) => {
       const { width, height } = entries[0].contentRect;
-      const { w, b, h, f, seed, direction } = params;
+      let { w, b, h, f, seed, direction } = params;
+      b *= 4;
       let d = "";
       const rnd = srand(seed);
-      const r1 = h / 2 + width * width / h / 8;
-      const rad = Math.asin(width / (2 * r1)) * 2;
-      const n = Math.ceil(rad / (Math.asin(w / 2 / r1) * 2));
+      const r = h / 2 + width * width / h / 8;
+      const rad = Math.asin(width / (2 * r)) * 2;
+      const n = Math.ceil(rad / (Math.asin(w / 8 / r) * 2));
       const uRad = rad / n;
-      const maxURad = uRad + uRad * f / 400;
-      const maxW = r1 * Math.sin(maxURad / 2) * 2;
-      const maxUh = maxW * (2 + b) / 10;
+      const sh = h + b;
+      const ox = width / 2;
+      const bf = b * f / 200;
+      const bs = b - bf;
       if (direction === "both" || direction === "top") {
-        d += ` M 0 ${h + maxUh}`;
-        let pRad = -rad / 2;
+        d += ` M 0 ${sh}`;
+        const oy = r + b;
+        let prevF = 0;
+        let prevR = r - b;
+        let prevRad = -rad / 2;
         for (let i = 0; i <= n; i++) {
+          const crrF = i < n ? rnd(0, f) / 200 : 0;
+          const crrR = r + b * crrF;
+          const crrTopR = f > 0 ? r + bs + b * (prevF + crrF) / 2 : r + b;
           const crrRad = uRad * i - rad / 2;
-          let tRad2 = crrRad;
-          if (i < n) {
-            tRad2 + uRad * rnd(-f, f) / 400;
-          }
-          const dRad = tRad2 - pRad;
-          const tRad1 = tRad2 - dRad / 2;
-          pRad = tRad2;
-          const er = r1 + r1 * Math.sin(dRad / 2) * 2 * (2 + b) / 10 * rnd(200 - f, 200) / 200;
-          const x1 = er * Math.sin(tRad1) + width / 2;
-          const y1 = r1 + maxUh - er * Math.cos(tRad1);
-          const x2 = r1 * Math.sin(tRad2) + width / 2;
-          const y2 = r1 + maxUh - r1 * Math.cos(tRad2);
+          const crrTopRad = crrRad - uRad * (0.5 + (prevF - crrF) * 50 / f);
+          const x1 = ox + crrTopR * Math.sin(crrTopRad);
+          const y1 = oy - crrTopR * Math.cos(crrTopRad);
+          const x2 = ox + crrR * Math.sin(crrRad);
+          const y2 = oy - crrR * Math.cos(crrRad);
           d += ` L ${x1} ${y1} ${x2} ${y2}`;
+          prevF = crrF;
+          prevR = crrR;
+          prevRad = crrRad;
         }
       } else {
         d += ` M 0 0 L ${width} 0`;
       }
       if (direction === "both" || direction === "bottom") {
-        d += ` L ${width} ${height - h - maxUh}`;
-        let pRad = -rad / 2;
+        d += ` L ${width} ${height - sh}`;
+        const oy = height - r - b;
+        let prevF = 0;
+        let prevR = r - b;
+        let prevRad = -rad / 2;
         for (let i = 0; i <= n; i++) {
+          const crrF = i < n ? rnd(0, f) / 200 : 0;
+          const crrR = r + b * crrF;
+          const crrTopR = f > 0 ? r + bs + b * (prevF + crrF) / 2 : r + b;
           const crrRad = uRad * i - rad / 2;
-          let tRad2 = crrRad;
-          if (i < n) {
-            tRad2 + uRad * rnd(-f, f) / 400;
-          }
-          const dRad = tRad2 - pRad;
-          const tRad1 = tRad2 - dRad / 2;
-          pRad = tRad2;
-          const er = r1 + r1 * Math.sin(dRad / 2) * 2 * (2 + b) / 10 * rnd(200 - f, 200) / 200;
-          const x1 = width / 2 - er * Math.sin(tRad1);
-          const y1 = height - maxUh - r1 + er * Math.cos(tRad1);
-          const x2 = width / 2 - r1 * Math.sin(tRad2);
-          const y2 = height - maxUh - r1 + r1 * Math.cos(tRad2);
+          const crrTopRad = crrRad - uRad * (0.5 + (prevF - crrF) * 50 / f);
+          const x1 = ox - crrTopR * Math.sin(crrTopRad);
+          const y1 = oy + crrTopR * Math.cos(crrTopRad);
+          const x2 = ox - crrR * Math.sin(crrRad);
+          const y2 = oy + crrR * Math.cos(crrRad);
           d += ` L ${x1} ${y1} ${x2} ${y2}`;
+          prevF = crrF;
+          prevR = crrR;
+          prevRad = crrRad;
         }
       } else {
         d += ` L ${width} ${height} L 0 ${height} Z`;
