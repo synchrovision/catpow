@@ -2916,11 +2916,42 @@
     }
   };
 
-  // ../blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/air.js
+  // ../blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/dots.js
   var { __: __6 } = wp.i18n;
-  var air = {
-    label: __6("\u30A8\u30A2", "catpow"),
+  var c = (l = 100) => `rgb(${l},${l},${l})`;
+  var dots = {
+    label: __6("\u30C9\u30C3\u30C8", "catpow"),
     order: 3,
+    params: {
+      ...baseGradientParams,
+      ...rParams,
+      w1: wParam,
+      w2: wParam,
+      ...contrastParams,
+      ...alphaParams
+    },
+    getData(params = {}) {
+      const { r: r2 = 0, w1 = 80, w2 = 80, contrast = 50, alpha = 25 } = params;
+      const l1 = c(Math.floor(alpha / 100 * 255));
+      const l2 = c(Math.floor(alpha * (100 - contrast) / 1e4 * 255));
+      const image = [];
+      image.push(getBaseGradientCode(params));
+      image.push(`radial-gradient(circle at center, #fff, #fff ${w1}%, #000 ${w1}%, #000)`);
+      image.push(`linear-gradient(${r2}deg,${l1},${l2},${l2},${l1})`);
+      return {
+        image,
+        size: ["cover", `${w2}px ${w2}px`, "cover"],
+        repeat: ["no-repeat", "repeat", "no-repeat"],
+        blendmode: ["screen", "multiply", "normal"]
+      };
+    }
+  };
+
+  // ../blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/air.js
+  var { __: __7 } = wp.i18n;
+  var air = {
+    label: __7("\u30A8\u30A2", "catpow"),
+    order: 4,
     params: {
       ...baseGradientParams,
       ...wParams,
@@ -2943,10 +2974,10 @@
   };
 
   // ../blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/bubble.js
-  var { __: __7 } = wp.i18n;
+  var { __: __8 } = wp.i18n;
   var bubble = {
-    label: __7("\u30D0\u30D6\u30EB", "catpow"),
-    order: 3,
+    label: __8("\u30D0\u30D6\u30EB", "catpow"),
+    order: 4,
     params: {
       ...baseGradientParams,
       ...aParams,
@@ -2973,11 +3004,11 @@
   };
 
   // ../blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/ice.js
-  var { __: __8 } = wp.i18n;
-  var c = (alpha = 100) => `rgba(255,255,255,${alpha / 100})`;
+  var { __: __9 } = wp.i18n;
+  var c2 = (alpha = 100) => `rgba(255,255,255,${alpha / 100})`;
   var ice = {
-    label: __8("\u30A2\u30A4\u30B9", "catpow"),
-    order: 3,
+    label: __9("\u30A2\u30A4\u30B9", "catpow"),
+    order: 4,
     params: {
       ...baseGradientParams,
       ...aParams,
@@ -2996,7 +3027,7 @@
         const d = r2 + rand(-dr, dr);
         const p = rand(10, 90);
         blendmode.push("overlay");
-        image.push(`linear-gradient(${d}deg,${c(0)},${c(0)} ${p}%,${c(alpha)} ${p}%,${c(0)})`);
+        image.push(`linear-gradient(${d}deg,${c2(0)},${c2(0)} ${p}%,${c2(alpha)} ${p}%,${c2(0)})`);
       }
       image.push(getBaseGradientCode(params));
       blendmode.push("normal");
@@ -3004,37 +3035,6 @@
         image,
         size: ["cover"],
         blendmode
-      };
-    }
-  };
-
-  // ../blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/dots.js
-  var { __: __9 } = wp.i18n;
-  var c2 = (l = 100) => `rgb(${l},${l},${l})`;
-  var dots = {
-    label: __9("\u30C9\u30C3\u30C8", "catpow"),
-    order: 3,
-    params: {
-      ...baseGradientParams,
-      ...rParams,
-      w1: wParam,
-      w2: wParam,
-      ...contrastParams,
-      ...alphaParams
-    },
-    getData(params = {}) {
-      const { r: r2 = 0, w1 = 80, w2 = 80, contrast = 50, alpha = 25 } = params;
-      const l1 = c2(Math.floor(alpha / 100 * 255));
-      const l2 = c2(Math.floor(alpha * (100 - contrast) / 1e4 * 255));
-      const image = [];
-      image.push(getBaseGradientCode(params));
-      image.push(`radial-gradient(circle at center, #fff, #fff ${w1}%, #000 ${w1}%, #000)`);
-      image.push(`linear-gradient(${r2}deg,${l1},${l2},${l2},${l1})`);
-      return {
-        image,
-        size: ["cover", `${w2}px ${w2}px`, "cover"],
-        repeat: ["no-repeat", "repeat", "no-repeat"],
-        blendmode: ["screen", "multiply", "normal"]
       };
     }
   };

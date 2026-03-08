@@ -4,7 +4,7 @@ const { __ } = wp.i18n;
 
 export const bubble = {
 	label: __("バブル", "catpow"),
-	order: 3,
+	order: 4,
 	params: {
 		...baseGradientParams,
 		...aParams,

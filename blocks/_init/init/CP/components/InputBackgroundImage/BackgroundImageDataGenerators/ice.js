@@ -6,7 +6,7 @@ const c = (alpha = 100) => `rgba(255,255,255,${alpha / 100})`;
 
 export const ice = {
 	label: __("アイス", "catpow"),
-	order: 3,
+	order: 4,
 	params: {
 		...baseGradientParams,
 		...aParams,

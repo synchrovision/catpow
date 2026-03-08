@@ -4,7 +4,7 @@ const { __ } = wp.i18n;
 
 export const air = {
 	label: __("エア", "catpow"),
-	order: 3,
+	order: 4,
 	params: {
 		...baseGradientParams,
 		...wParams,
