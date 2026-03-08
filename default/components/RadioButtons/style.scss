@@ -4,7 +4,7 @@
 	&__button{
 		@include bnd((d:ib,p:r,pd:.5em 1em,mg:.5em,pdl:2.5em));
 		@include bdr((r:1em));
-		@include txt((h:1em,c:t 40));
+		@include txt((a:c,h:1em,c:t 40));
 		@include trn((t:.5s));
 		@include usr((c:p));
 		@include shd((bv:-1));
@@ -40,5 +40,28 @@
 	}
 	&.is-size-large{
 		@include txt((p:18));
+	}
+	@include cq(-480){
+		@include bnd((o:h));
+		@include flx((w:n));
+		@include bdr((s:s,w:1,c:l,r:1em));
+		@include shd((bv:1));
+		&__button{
+			@include bnd((f:1 1 a,pd:.5em,mg:0));
+			@include bdr((r:0));
+			@include shd((b:n));
+			@include txt((c:t,p:12));
+			&:not(:first-child){
+				@include bdr((p:l,s:s,w:1,c:l));
+			}
+			&.is-selected{
+				@include txt((c:i));
+				@include bg((c:m));
+				@include shd((b:n));
+			}
+			&-icon{
+				@include bnd((d:n));
+			}
+		}
 	}
 }
