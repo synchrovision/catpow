@@ -105,73 +105,85 @@ var svgEl = (tag, props, children) => el(tag, props, children, "http://www.w3.or
 var colorRoles = {
   b: {
     name: "background",
-    default: { h: 0, s: 0, l: 100, a: 1 },
+    default: { h: 0, c: 0, l: 1, a: 1 },
     extend: true,
     invert: "m"
   },
   s: {
     name: "sheet",
-    default: { h: 0, s: 0, l: 95, a: 1 },
+    default: { h: 0, c: 0, l: 0.95, a: 1 },
     extend: true,
     invert: "a"
   },
   t: {
     name: "text",
-    default: { h: 0, s: 0, l: 40, a: 1 },
+    default: { h: 0, c: 0, l: 0.4, a: 1 },
     extend: true,
     invert: "i"
   },
   h: {
     name: "highlight",
-    default: { h: 6, s: 100, l: 33, a: 1 },
+    default: { h: 6, c: 0.4, l: 0.33, a: 1 },
     extend: true,
     invert: "e"
   },
   m: {
     name: "main",
-    default: { h: 30, s: 33, l: 20, a: 1 },
+    default: { h: 30, c: 0.1, l: 0.2, a: 1 },
     extend: true,
     invert: "b"
   },
   a: {
     name: "accent",
-    default: { h: 32, s: 100, l: 50, a: 1 },
+    default: { h: 32, c: 0.4, l: 0.5, a: 1 },
     extend: true,
     invert: "s"
   },
   i: {
     name: "inside",
-    default: { h: 0, s: 0, l: 100, a: 1 },
+    default: { h: 0, c: 0, l: 1, a: 1 },
     extend: true,
     invert: "t"
   },
   e: {
     name: "emphasis",
-    default: { h: 12, s: 100, l: 50, a: 1 },
+    default: { h: 12, c: 0.4, l: 0.5, a: 1 },
     extend: true,
     invert: "h"
   },
+  l: {
+    name: "line",
+    default: { h: 0, c: 0, l: 0.4, a: 1 },
+    extend: true,
+    invert: "r"
+  },
+  r: {
+    name: "rule",
+    default: { h: 0, c: 0, l: 1, a: 1 },
+    extend: true,
+    invert: "l"
+  },
   lt: {
     name: "light",
-    default: { h: 0, s: 0, l: 100, a: 0.6 },
+    default: { h: 0, c: 0, l: 1, a: 0.6 },
     extend: false,
     invert: null
   },
   lst: {
     name: "lust",
-    default: { h: 0, s: 0, l: 100, a: 0.9 },
+    default: { h: 0, c: 0, l: 1, a: 0.9 },
     extend: false,
     invert: null
   },
   sh: {
     name: "shade",
-    default: { h: 0, s: 0, l: 0, a: 0.2 },
+    default: { h: 0, c: 0, l: 0, a: 0.2 },
     extend: false,
     invert: null
   },
   shd: {
     name: "shadow",
-    default: { h: 0, s: 0, l: 0, a: 0.3 },
+    default: { h: 0, c: 0, l: 0, a: 0.3 },
     extend: false,
     invert: null
   }
@@ -201,10 +213,10 @@ var translateColor = (color, tint, alpha) => {
       const cf = (p) => `var(--cp-container-tones-${key}-${p})`;
       const rf = (p) => `var(--cp-root-tones-${key}-${p})`;
       const h = num ? staticHue ? num : num === "0" || num === "6" ? f("h") : `calc(${relativeHue ? cf("h") : rf("h")} + var(--cp-tones-hr) * ${num - 6} + var(--cp-tones-hs))` : f("h");
-      const s = f("s");
-      const l = tint ? `calc(100% - ${f("l")} * ${tint})` : `${f("l")}`;
+      const c = f("c");
+      const l = tint ? `calc(1 - ${f("t")} * ${tint} / 100)` : `${f("l")}`;
       const a = alpha ? `calc(${f("a")} * ${alpha})` : f("a");
-      return `hsla(${h}, ${s}, ${l}, ${a})`;
+      return `oklch(${l} ${c} ${h} / ${a})`;
     }
   } else {
     const matches2 = color.match(/^([a-z]+)\-([a-z]+)$/);
@@ -215,14 +227,14 @@ var translateColor = (color, tint, alpha) => {
         const t2 = 1 - t1;
         const f = (p) => `calc(var(--cp-tones-${key1}-${p}) * ${t1} + var(--cp-tones-${key2}-${p}) * ${t2})`;
         const a = alpha ? `calc(${f("a")} * ${alpha})` : f("a");
-        return `hsla(${f("h")}, ${f("s")}, ${f("l")}, ${a})`;
+        return `oklch(${f("l")} ${f("c")} ${f("h")} / ${a})`;
       }
     }
   }
   return color;
 };
 
-// _zsqzkcpxp:/Users/hatanokazuhiro/repos/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-mosaic/element/style.css
+// _whnfb89fo:/Users/hatanokazuhiro/repos/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-mosaic/element/style.css
 var style_default = ".art-frame-mosaic {\n  position: relative;\n}\n.art-frame-mosaic__arts {\n  display: block;\n  position: absolute;\n  top: 0rem;\n  right: 0rem;\n  bottom: 0rem;\n  left: 0rem;\n  inset: 0rem;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n/*# sourceMappingURL=./style.css.map */";
 
 // ../elements/art-frame-mosaic/element/index.mjs.jsx
@@ -260,8 +272,8 @@ var ArtFrameMosaic = class extends HTMLElement {
     }
     const style = el("style", {}, [style_default]);
     const body = el("div", { class: "_body" }, [el("slot")]);
-    const fills1 = svgEl("path", { class: "_fills is-fills-1", fill: translateColor("mx") }, []);
-    const fills2 = svgEl("path", { class: "_fills is-fills-2", fill: translateColor("ax") }, []);
+    const fills1 = svgEl("path", { class: "_fills is-fills-1", fill: translateColor("bx") }, []);
+    const fills2 = svgEl("path", { class: "_fills is-fills-2", fill: translateColor("sx") }, []);
     const arts = svgEl("svg", { xmlns: "http://www.w3.org/2000/svg", class: "_arts", style: "position:absolute;inset:0;width:100%" }, [fills1, fills2]);
     const resizeObserver = new ResizeObserver((entries) => {
       const { width, height } = entries[0].contentRect;

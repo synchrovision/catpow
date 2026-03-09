@@ -36,9 +36,9 @@ class ArtFrameMosaic extends HTMLElement {
 		}
 		const style = el("style", {}, [cssCode]);
 		const body = el("div", { class: "_body" }, [el("slot")]);
-		const fills1 = svgEl("path", { class: "_fills is-fills-1", fill: translateColor("mx") }, []);
-		const fills2 = svgEl("path", { class: "_fills is-fills-2", fill: translateColor("ax") }, []);
-		const arts = svgEl("svg", { xmlns: "http://www.w3.org/2000/svg", class: "_arts", style: "position:absolute;inset:0;width:100%" }, [fills1,fills2]);
+		const fills1 = svgEl("path", { class: "_fills is-fills-1", fill: translateColor("bx") }, []);
+		const fills2 = svgEl("path", { class: "_fills is-fills-2", fill: translateColor("sx") }, []);
+		const arts = svgEl("svg", { xmlns: "http://www.w3.org/2000/svg", class: "_arts", style: "position:absolute;inset:0;width:100%" }, [fills1, fills2]);
 		const resizeObserver = new ResizeObserver((entries) => {
 			const { width, height } = entries[0].contentRect;
 			const { w, h, fill, seed, direction } = params;
@@ -59,10 +59,9 @@ class ArtFrameMosaic extends HTMLElement {
 						const x = c * u;
 						const y = r * u;
 						if (fill > rnd(0, 100)) {
-							if(10 < rnd(0,100)){
+							if (10 < rnd(0, 100)) {
 								ad1 += ` M ${x} ${y} l ${u} 0 l 0 ${u} l ${-u} 0 z`;
-							}
-							else{
+							} else {
 								ad2 += ` M ${x} ${y} l ${u} 0 l 0 ${u} l ${-u} 0 z`;
 							}
 						} else {
@@ -81,10 +80,9 @@ class ArtFrameMosaic extends HTMLElement {
 						const x = c * u;
 						const y = height - (r + 1) * u;
 						if (fill > rnd(0, 100)) {
-							if(10 < rnd(0,100)){
+							if (10 < rnd(0, 100)) {
 								ad1 += ` M ${x} ${y} l ${u} 0 l 0 ${u} l ${-u} 0 z`;
-							}
-							else{
+							} else {
 								ad2 += ` M ${x} ${y} l ${u} 0 l 0 ${u} l ${-u} 0 z`;
 							}
 						} else {
