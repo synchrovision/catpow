@@ -1,10 +1,9 @@
 @import 'admin_style_config.scss';
 
 .cp-jsoneditor{
-	@include bnd((ctn:i));
-	@include txt((p:14,f:p));
 	&-editor{
-		@include bnd((pd:4));
+		@include bnd((pd:4,cnt:i));
+		@include txt((p:14,f:t-p));
 		&__body{
 			@include bnd((mg:a));
 			@include bg((c:b));
@@ -14,13 +13,13 @@
 				@include flx((w:w,j:b,a:c));
 				@include bdr((p:b,s:s,w:1,c:t 1 .5));
 				&-title{
-					@include txt((p:16,f:h,w:b));
+					@include txt((p:16,f:t-h,w:b));
 				}
 				&-controls{
 					&-save{
 						@include bnd((pd:8 12));
 						@include bg((c:m));
-						@include txt((a:c,p:14,h:1em,f:p,c:i));
+						@include txt((a:c,p:14,h:1em,f:t-p,c:i));
 						@include bdr((r:4));
 						&.is-active{
 							@include usr((c:p));
@@ -38,14 +37,14 @@
 		}
 	}
 	&-input{
-		@include txt((p:12,f:p));
+		@include txt((p:12,f:t-p));
 		&__body{
 			@include bnd((p:r,pd:8));
 			&-message{
 				@include bnd((p:a,b:f,pd:4 20,z:1));
 				@include bdr((r:20));
 				@include bg((c:m));
-				@include txt((p:12,f:p,h:1.5em,c:i));
+				@include txt((p:12,f:t-p,h:1.5em,c:i));
 				@include shd((b:2));
 				@include trn((t:.2s,o:1,y:0));
 				@include usr((e:n));

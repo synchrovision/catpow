@@ -1,15 +1,13 @@
-.cp-jsoneditor {
-  container-type: inline-size;
-  font-size: 0.875rem;
-  font-family: var(--cp-font-family-p);
-}
 .cp-jsoneditor-editor {
   padding: 0.25rem;
+  container-type: inline-size;
+  font-size: 0.875rem;
+  font-family: var(--cp-font-family-t-p);
 }
 .cp-jsoneditor-editor__body {
   margin: auto;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
-  box-shadow: 0 4px 9px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
+  box-shadow: 0 4px 9px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 .cp-jsoneditor-editor__body-header {
   padding: 0.75rem;
@@ -25,26 +23,26 @@
   align-items: center;
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
-  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a,1) * 0.5));
+  border-bottom-color: oklch(calc(1 - var(--cp-tones-t-t) * 100) var(--cp-tones-t-c) var(--cp-tones-t-h) / calc(var(--cp-tones-t-a,1) * 0.5));
 }
 .cp-jsoneditor-editor__body-header-title {
   font-size: 1rem;
-  font-family: var(--cp-font-family-h);
+  font-family: var(--cp-font-family-t-h);
   font-weight: 700;
 }
 .cp-jsoneditor-editor__body-header-controls-save {
   padding: 0.5rem 0.75rem;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
+  background-color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
   text-align: center;
   font-size: 0.875rem;
   line-height: 1em;
-  font-family: var(--cp-font-family-p);
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+  font-family: var(--cp-font-family-t-p);
+  color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
   border-radius: 0.25rem;
 }
 .cp-jsoneditor-editor__body-header-controls-save.is-active {
   cursor: pointer;
-  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  box-shadow: 0 1px 3px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 .cp-jsoneditor-editor__body-header-controls-save:not(.is-active) {
   opacity: 0.1;
@@ -57,7 +55,7 @@
 }
 .cp-jsoneditor-input {
   font-size: 0.75rem;
-  font-family: var(--cp-font-family-p);
+  font-family: var(--cp-font-family-t-p);
 }
 .cp-jsoneditor-input__body {
   position: relative;
@@ -69,12 +67,12 @@
   padding: 0.25rem 1.25rem;
   z-index: 1;
   border-radius: 1.25rem;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
+  background-color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
   font-size: 0.75rem;
-  font-family: var(--cp-font-family-p);
+  font-family: var(--cp-font-family-t-p);
   line-height: 1.5em;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
-  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
+  box-shadow: 0 2px 5px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
   -webkit-transition: 0.2s;
   transition: 0.2s;
   opacity: 1;
@@ -116,17 +114,17 @@
   grid-gap: 0.0625rem;
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  border-color: oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
   border-radius: 0.5rem;
-  background-color: hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
-  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  background-color: oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+  box-shadow: 0 1px 3px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 .cp-jsoneditor-input-image__buttons-button {
   display: block;
   position: relative;
   height: 1.25rem;
   border-style: none;
-  background-color: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
+  background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
   cursor: pointer;
 }
 .cp-jsoneditor-input-image__buttons-button::after {
@@ -154,26 +152,26 @@
 }
 .cp-jsoneditor-input-image__buttons-button.is-active {
   background-color: var(--wp-admin-theme-color);
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+  color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
 }
 .cp-jsoneditor-input-text-input, .wp-core-ui .cp-jsoneditor-input-text-input {
   padding: 0.25em 0.5em;
   border-style: none;
   border-radius: 0.25rem;
   font-size: inherit;
-  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1)) inset;
+  box-shadow: 0 1px 3px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1)) inset;
 }
 .cp-jsoneditor-input-textarea-textarea {
   padding: 0.25em 0.5em;
   border-style: none;
   border-radius: 0.25rem;
   font-size: inherit;
-  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1)) inset;
+  box-shadow: 0 1px 3px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1)) inset;
 }
 .cp-jsoneditor-input-objectinput-label {
   padding: 0.25em 1em;
   border-radius: 1em;
-  box-shadow: 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a,1)) inset, -1px -1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a,1)), -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1)) inset, 1px 1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1));
+  box-shadow: 1px 1px 1px oklch(var(--cp-tones-lt-l) var(--cp-tones-lt-c) var(--cp-tones-lt-h) / var(--cp-tones-lt-a,1)) inset, -1px -1px 1px oklch(var(--cp-tones-lt-l) var(--cp-tones-lt-c) var(--cp-tones-lt-h) / var(--cp-tones-lt-a,1)), -1px -1px 1px oklch(var(--cp-tones-sh-l) var(--cp-tones-sh-c) var(--cp-tones-sh-h) / var(--cp-tones-sh-a,1)) inset, 1px 1px 1px oklch(var(--cp-tones-sh-l) var(--cp-tones-sh-c) var(--cp-tones-sh-h) / var(--cp-tones-sh-a,1));
   cursor: pointer;
 }
 .cp-jsoneditor-input-objectinput-body {
@@ -191,15 +189,15 @@
   padding: 0.25em 1.25em;
   margin-bottom: 0.5em;
   border-radius: 1em;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
+  background-color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
   font-size: 1rem;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+  color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
 }
 .cp-jsoneditor-input-objectinput-block.is-level-1 > .cp-jsoneditor-input-objectinput-block-item > .cp-jsoneditor-input-objectinput-block-item-title {
   padding: 0.25em 1.25em;
   margin-bottom: 0.5em;
   border-radius: 1em;
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 10),var(--cp-tones-t-a,1));
+  background-color: oklch(calc(1 - var(--cp-tones-t-t) * 10) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
   font-size: 0.875rem;
 }
 .cp-jsoneditor-input-objectinput-block.is-level-2 > .cp-jsoneditor-input-objectinput-block-item > .cp-jsoneditor-input-objectinput-block-item-title {
@@ -208,6 +206,6 @@
   font-size: 0.875rem;
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
-  border-bottom-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a,1) * 0.5));
+  border-bottom-color: oklch(calc(1 - var(--cp-tones-t-t) * 100) var(--cp-tones-t-c) var(--cp-tones-t-h) / calc(var(--cp-tones-t-a,1) * 0.5));
 }
 /*# sourceMappingURL=./style.css.map */
