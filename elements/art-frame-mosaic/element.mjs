@@ -234,7 +234,7 @@ var translateColor = (color, tint, alpha) => {
   return color;
 };
 
-// _whnfb89fo:/Users/hatanokazuhiro/repos/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-mosaic/element/style.css
+// _pq2z3bkq7:/Users/hatanokazuhiro/repos/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-mosaic/element/style.css
 var style_default = ".art-frame-mosaic {\n  position: relative;\n}\n.art-frame-mosaic__arts {\n  display: block;\n  position: absolute;\n  top: 0rem;\n  right: 0rem;\n  bottom: 0rem;\n  left: 0rem;\n  inset: 0rem;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n/*# sourceMappingURL=./style.css.map */";
 
 // ../elements/art-frame-mosaic/element/index.mjs.jsx
@@ -278,6 +278,7 @@ var ArtFrameMosaic = class extends HTMLElement {
     const resizeObserver = new ResizeObserver((entries) => {
       const { width, height } = entries[0].contentRect;
       const { w, h, fill, seed, direction } = params;
+      let padding = "";
       let d = `M 0 0 l ${width} 0 l 0 ${height} l ${-width} 0 z`;
       let ad1 = ``;
       let ad2 = ``;
@@ -305,6 +306,9 @@ var ArtFrameMosaic = class extends HTMLElement {
             }
           }
         }
+        padding += `${h}px 0 `;
+      } else {
+        padding += "0 0 ";
       }
       if (direction === "both" || direction === "bottom") {
         for (let r = 0; r < rows; r++) {
@@ -326,11 +330,15 @@ var ArtFrameMosaic = class extends HTMLElement {
             }
           }
         }
+        padding += `${h}px`;
+      } else {
+        padding += "0";
       }
       arts.setAttribute("viewBox", `0 0 ${width} ${height}`);
       fills1.setAttribute("d", ad1);
       fills2.setAttribute("d", ad2);
       body.style.setProperty("clip-path", `path(evenodd,"${d}")`);
+      body.style.setProperty("--art-frame-padding", padding);
     });
     resizeObserver.observe(body);
     this.shadowRoot.replaceChildren(style, applyBem(el("div", { class: "mosaic-" }, [body, arts]), { prefix: "art-frame" }));

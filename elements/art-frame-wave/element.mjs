@@ -81,7 +81,7 @@ var el = (tag, props, children, namespace) => {
   return el2;
 };
 
-// _otn7iy6y8:/Users/hatanokazuhiro/repos/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-wave/element/style.css
+// _m446b6fni:/Users/hatanokazuhiro/repos/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-wave/element/style.css
 var style_default = ".art-frame-wave__body {\n  background-color: hsla(var(--cp-tones-sx-h),var(--cp-tones-sx-s),var(--cp-tones-sx-l),var(--cp-tones-sx-a,1));\n}\n/*# sourceMappingURL=./style.css.map */";
 
 // ../elements/art-frame-wave/element/index.mjs.jsx
@@ -113,6 +113,7 @@ var ArtFrameWave = class extends HTMLElement {
     const resizeObserver = new ResizeObserver((entries) => {
       const { width, height } = entries[0].contentRect;
       const { dx, dy, direction } = params;
+      let padding = "";
       const r = params.r * dx / 100;
       const ut = ` c ${r / 2} 0, ${dx - r / 2} ${dy}, ${dx} ${dy}, ${r / 2} 0, ${dx - r / 2} ${-dy}, ${dx} ${-dy}`;
       const ub = ` c ${-r / 2} 0, ${-dx + r / 2} ${-dy}, ${-dx} ${-dy}, ${-r / 2} 0, ${-dx + r / 2} ${dy}, ${-dx} ${dy}`;
@@ -121,17 +122,22 @@ var ArtFrameWave = class extends HTMLElement {
       let d = "M 0 0";
       if (direction === "both" || direction === "top") {
         d += ut.repeat(n);
+        padding += `${dy}px 0 `;
       } else {
         d += ` l ${w} 0`;
+        padding += `0 0 `;
       }
       d += ` l 0 ${height}`;
       if (direction === "both" || direction === "bottom") {
         d += ub.repeat(n);
+        padding += `${dy}px`;
       } else {
         d += ` l ${-w} 0`;
+        padding += `0`;
       }
       d += " z";
       body.style.setProperty("clip-path", `path("${d}")`);
+      body.style.setProperty("--art-frame-padding", padding);
     });
     resizeObserver.observe(body);
     this.shadowRoot.replaceChildren(style, applyBem(el("div", { class: "wave-" }, [body]), { prefix: "art-frame" }));

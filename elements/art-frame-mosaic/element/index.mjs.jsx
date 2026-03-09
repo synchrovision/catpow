@@ -42,6 +42,7 @@ class ArtFrameMosaic extends HTMLElement {
 		const resizeObserver = new ResizeObserver((entries) => {
 			const { width, height } = entries[0].contentRect;
 			const { w, h, fill, seed, direction } = params;
+			let padding = "";
 			let d = `M 0 0 l ${width} 0 l 0 ${height} l ${-width} 0 z`;
 			let ad1 = ``;
 			let ad2 = ``;
@@ -69,6 +70,9 @@ class ArtFrameMosaic extends HTMLElement {
 						}
 					}
 				}
+				padding += `${h}px 0 `;
+			} else {
+				padding += "0 0 ";
 			}
 			if (direction === "both" || direction === "bottom") {
 				for (let r = 0; r < rows; r++) {
@@ -90,11 +94,15 @@ class ArtFrameMosaic extends HTMLElement {
 						}
 					}
 				}
+				padding += `${h}px`;
+			} else {
+				padding += "0";
 			}
 			arts.setAttribute("viewBox", `0 0 ${width} ${height}`);
 			fills1.setAttribute("d", ad1);
 			fills2.setAttribute("d", ad2);
 			body.style.setProperty("clip-path", `path(evenodd,"${d}")`);
+			body.style.setProperty("--art-frame-padding", padding);
 		});
 		resizeObserver.observe(body);
 		this.shadowRoot.replaceChildren(style, applyBem(el("div", { class: "mosaic-" }, [body, arts]), { prefix: "art-frame" }));

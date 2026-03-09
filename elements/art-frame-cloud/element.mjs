@@ -100,7 +100,7 @@ var el = (tag, props, children, namespace) => {
   return el2;
 };
 
-// _5gdqsjuwm:/Users/hatanokazuhiro/repos/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-cloud/element/style.css
+// _gklb8ptqx:/Users/hatanokazuhiro/repos/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-cloud/element/style.css
 var style_default = ".art-frame-cloud__body {\n  background-color: hsla(var(--cp-tones-sx-h),var(--cp-tones-sx-s),var(--cp-tones-sx-l),var(--cp-tones-sx-a,1));\n}\n/*# sourceMappingURL=./style.css.map */";
 
 // ../elements/art-frame-cloud/element/index.mjs.jsx
@@ -141,6 +141,7 @@ var ArtFrameCloud = class extends HTMLElement {
     const resizeObserver = new ResizeObserver((entries) => {
       const { width, height } = entries[0].contentRect;
       const { w, b, h, f, seed, direction } = params;
+      let padding = "";
       let d = "";
       const rnd = srand(seed);
       const cr = h / 2 + width * width / h / 8;
@@ -166,8 +167,10 @@ var ArtFrameCloud = class extends HTMLElement {
         }
         const ur2 = w * urc;
         d += ` A ${ur2} ${ur2} 0 0 1 ${width} ${h + uah}`;
+        padding += `${h + uah / 2}px 0 `;
       } else {
         d += ` M 0 0 L ${width} 0`;
+        padding += "0 0 ";
       }
       if (direction === "both" || direction === "bottom") {
         d += ` L ${width} ${height - h - uah}`;
@@ -182,10 +185,13 @@ var ArtFrameCloud = class extends HTMLElement {
           d += ` A ${ur2} ${ur2} 0 0 1 ${x} ${y}`;
         }
         d += ` A ${ur} ${ur} 0 0 1 0 ${height - h - uah} Z`;
+        padding += `${h + uah / 2}px`;
       } else {
         d += ` L ${width} ${height} L 0 ${height} Z`;
+        padding += "0";
       }
       body.style.setProperty("clip-path", `path("${d}")`);
+      body.style.setProperty("--art-frame-padding", padding);
     });
     resizeObserver.observe(body);
     this.shadowRoot.replaceChildren(style, applyBem(el("div", { class: "cloud-" }, [body]), { prefix: "art-frame" }));
