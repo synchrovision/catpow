@@ -7,7 +7,7 @@
 		"seed": { "type": "integer", "minimum": 1, "maximum": 100, "default": 16 },
 		"direction": {
 			"type": "string",
-			"enum": ["top", "bottom", "both"],
+			"options": { "上": "top", "下": "bottom", "両方": "both" },
 			"default": "both"
 		}
 	}

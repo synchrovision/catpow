@@ -100,7 +100,7 @@ var el = (tag, props, children, namespace) => {
   return el2;
 };
 
-// _hyz2ie1fi:/Users/hatanokazuhiro/repos/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-bomb/element/style.css
+// _prpv6u1ni:/Users/hatanokazuhiro/repos/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-bomb/element/style.css
 var style_default = ".art-frame-bomb__body {\n  background-color: hsla(var(--cp-tones-sx-h),var(--cp-tones-sx-s),var(--cp-tones-sx-l),var(--cp-tones-sx-a,1));\n}\n/*# sourceMappingURL=./style.css.map */";
 
 // ../elements/art-frame-bomb/element/index.mjs.jsx
@@ -141,6 +141,7 @@ var ArtFrameBomb = class extends HTMLElement {
     const resizeObserver = new ResizeObserver((entries) => {
       const { width, height } = entries[0].contentRect;
       let { w, b, h, f, seed, direction } = params;
+      let padding = "";
       b *= 4;
       let d = "";
       const rnd = srand(seed);
@@ -173,8 +174,10 @@ var ArtFrameBomb = class extends HTMLElement {
           prevR = crrR;
           prevRad = crrRad;
         }
+        padding += `${b + h / 2}px 0 `;
       } else {
         d += ` M 0 0 L ${width} 0`;
+        padding += "0 0 ";
       }
       if (direction === "both" || direction === "bottom") {
         d += ` L ${width} ${height - sh}`;
@@ -197,10 +200,13 @@ var ArtFrameBomb = class extends HTMLElement {
           prevR = crrR;
           prevRad = crrRad;
         }
+        padding += `${b + h / 2}px`;
       } else {
         d += ` L ${width} ${height} L 0 ${height} Z`;
+        padding += "0";
       }
       body.style.setProperty("clip-path", `path("${d}")`);
+      body.style.setProperty("--art-frame-padding", padding);
     });
     resizeObserver.observe(body);
     this.shadowRoot.replaceChildren(style, applyBem(el("div", { class: "bomb-" }, [body]), { prefix: "art-frame" }));

@@ -38,6 +38,7 @@ class ArtFrameBomb extends HTMLElement {
 		const resizeObserver = new ResizeObserver((entries) => {
 			const { width, height } = entries[0].contentRect;
 			let { w, b, h, f, seed, direction } = params;
+			let padding = "";
 			b *= 4;
 			let d = "";
 			const rnd = srand(seed);
@@ -73,8 +74,10 @@ class ArtFrameBomb extends HTMLElement {
 					prevR = crrR;
 					prevRad = crrRad;
 				}
+				padding += `${b + h / 2}px 0 `;
 			} else {
 				d += ` M 0 0 L ${width} 0`;
+				padding += "0 0 ";
 			}
 			if (direction === "both" || direction === "bottom") {
 				d += ` L ${width} ${height - sh}`;
@@ -99,10 +102,13 @@ class ArtFrameBomb extends HTMLElement {
 					prevR = crrR;
 					prevRad = crrRad;
 				}
+				padding += `${b + h / 2}px`;
 			} else {
 				d += ` L ${width} ${height} L 0 ${height} Z`;
+				padding += "0";
 			}
 			body.style.setProperty("clip-path", `path("${d}")`);
+			body.style.setProperty("--art-frame-padding", padding);
 		});
 		resizeObserver.observe(body);
 		this.shadowRoot.replaceChildren(style, applyBem(el("div", { class: "bomb-" }, [body]), { prefix: "art-frame" }));
