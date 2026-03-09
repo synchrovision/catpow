@@ -2,6 +2,9 @@
   position: relative;
   z-index: var(--cp-z-index, 1);
 }
+.wp-block-catpow-artframe__contents {
+  padding: var(--art-frame-padding, 0);
+}
 .wp-block-catpow-artframe__contents-body {
   position: relative;
   width: var(--cp-size-c);
