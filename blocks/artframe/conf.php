@@ -7,5 +7,5 @@ $attributes=[
 	"contentsBodyClasses"=>["type"=>"string","selector"=>".{$block_class}__contents-body","attribute"=>"class","default"=>"{$block_class}__contents-body has-padding"],
 	"vars"=>["type"=>"object","default"=>[]],
 	"element"=>["type"=>"string","default"=>"art-frame-cloud"],
-	"params"=>["type"=>"object","default"=>["w"=>200,"b"=>50,"h"=>60,"f"=>50,"seed"=>16,"direction"=>"both"]],
+	"params"=>["type"=>"object","default"=>[]],
 ];
