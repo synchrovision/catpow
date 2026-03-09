@@ -5,7 +5,7 @@
 		"r": { "type": "integer", "minimum": 0, "maximum": 200, "multipleOf": 5, "default": 100 },
 		"direction": {
 			"type": "string",
-			"enum": ["top", "bottom", "both"],
+			"options": { "上": "top", "下": "bottom", "両方": "both" },
 			"default": "both"
 		}
 	}
