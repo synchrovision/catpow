@@ -1,21 +1,20 @@
-pre.wp-block-code, div.wp-block-code {
-  margin-top: var(--cp-paragraph-margin-top, 0);
-  margin-bottom: var(--cp-paragraph-margin-bottom, 0);
+.wp-block-code {
+  margin: var(--cp-margin-t-p, 0);
 }
-pre.wp-block-code code, div.wp-block-code code {
-  font-family: var(--cp-font-family-p, inherit);
-  font-size: var(--cp-font-size-p, 2em);
-  font-weight: var(--cp-font-weight-p, regular);
-  line-height: var(--cp-line-height-p, 1.5);
-  letter-spacing: var(--cp-letter-spacing-p, normal);
+.wp-block-code code {
+  font-family: var(--cp-font-family-t-p, inherit);
+  font-size: var(--cp-font-size-t-p, 2em);
+  font-weight: var(--cp-font-weight-t-p, regular);
+  line-height: var(--cp-line-height-t-p, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-p, normal);
 }
-pre.wp-block-code, div.wp-block-code {
-  padding: var(--cp-item-padding);
+.wp-block-code {
+  padding: ipd;
   background-color: black;
 }
-pre.wp-block-code code, div.wp-block-code code {
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
-  font-family: var(--cp-font-family-cd);
+.wp-block-code code {
+  color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
+  font-family: var(--cp-font-family-t-c);
   white-space: pre-wrap;
 }
 /*# sourceMappingURL=./style.css.map */
