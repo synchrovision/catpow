@@ -9,7 +9,7 @@
 	&__tags{
 		@include bnd((mgb:1em));
 		@include flx((w:w,j:c,g:1em));
-		@include txt((l:n,f:p));
+		@include txt((l:n,f:t-p));
 		&-tag{
 			@extend %label-component;
 			@include bnd((f:0 0 a));
@@ -52,8 +52,8 @@
 					}
 				}
 				&-th,&-td{
-					@include bnd((bs:b,pd:cpd));
-					@include txt((h:1.5em,f:p));
+					@include bnd((bs:b,pd:c-t));
+					@include txt((h:1.5em,f:t-p));
 					&.has-text-align-left{
 						@include txt((a:l));
 					}
