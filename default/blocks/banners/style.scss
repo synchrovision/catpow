@@ -5,8 +5,11 @@
 .wp-block-catpow-banners{
 	$block:&;
 	@include bnd((mgi:a,bs:b));
-	@include grd((tc:repeat(auto-fill, min(var(--cp-item-size),100%)),j:c,g:g));
+	@include grd((rc:i,j:c));
 	@include txt((l:n));
+	&:not(.has-item-gap){
+		@include bnd((g:c-c));
+	}
 	&__item{
 		$item:&;
 		@include bnd((bs:b));
