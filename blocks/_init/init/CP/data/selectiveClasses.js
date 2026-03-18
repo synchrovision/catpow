@@ -163,6 +163,15 @@ export const selectiveClassesPresets = {
 			hasImageRight: __("右", "catpow"),
 		},
 	},
+	hasFontSize({ preset, vars = "vars", ...otherParams }) {
+		return {
+			name: "hasFontSize",
+			label: __("文字サイズ", "catpow"),
+			values: "hasFontSize",
+			sub: [{ preset: "fontSize", vars, label: null }],
+			...otherParams,
+		};
+	},
 	fontSize({ preset, vars = "vars", ...otherParams }) {
 		return {
 			name: "fontSize",
@@ -192,6 +201,15 @@ export const selectiveClassesPresets = {
 					},
 				],
 			},
+		};
+	},
+	hasFontWeight({ preset, vars = "vars", ...otherParams }) {
+		return {
+			name: "hasFontWeight",
+			label: __("文字サイズ", "catpow"),
+			values: "hasFontWeight",
+			sub: [{ preset: "fontWeight", vars, label: null }],
+			...otherParams,
 		};
 	},
 	fontWeight: {

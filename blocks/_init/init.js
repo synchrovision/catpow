@@ -5877,6 +5877,15 @@
         hasImageRight: __13("\u53F3", "catpow")
       }
     },
+    hasFontSize({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "hasFontSize",
+        label: __13("\u6587\u5B57\u30B5\u30A4\u30BA", "catpow"),
+        values: "hasFontSize",
+        sub: [{ preset: "fontSize", vars, label: null }],
+        ...otherParams
+      };
+    },
     fontSize({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "fontSize",
@@ -5906,6 +5915,15 @@
             }
           ]
         }
+      };
+    },
+    hasFontWeight({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "hasFontWeight",
+        label: __13("\u6587\u5B57\u30B5\u30A4\u30BA", "catpow"),
+        values: "hasFontWeight",
+        sub: [{ preset: "fontWeight", vars, label: null }],
+        ...otherParams
       };
     },
     fontWeight: {
