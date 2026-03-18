@@ -41,7 +41,7 @@
       const states = CP.classNamesToFlags(classes2);
       const { devices, imageKeys, linkKeys } = CP.config.banners;
       const selectiveClasses = useMemo(() => {
-        var selectiveClasses2 = ["headingTag", "level", "itemSize", "itemGap", "hasContentWidth", "hasMargin", "hasPadding", { label: "\u30BF\u30A4\u30C8\u30EB", values: "hasTitle" }, "isTemplate"];
+        var selectiveClasses2 = ["headingTag", "level", "itemSize", "hasItemGap", "hasContentWidth", "hasMargin", "hasPadding", { label: "\u30BF\u30A4\u30C8\u30EB", values: "hasTitle" }, "isTemplate"];
         wp.hooks.applyFilters("catpow.blocks.banners.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);

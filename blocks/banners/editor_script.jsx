@@ -44,7 +44,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 		const { devices, imageKeys, linkKeys } = CP.config.banners;
 
 		const selectiveClasses = useMemo(() => {
-			var selectiveClasses = ["headingTag", "level", "itemSize", "itemGap", "hasContentWidth", "hasMargin", "hasPadding", { label: "タイトル", values: "hasTitle" }, "isTemplate"];
+			var selectiveClasses = ["headingTag", "level", "itemSize", "hasItemGap", "hasContentWidth", "hasMargin", "hasPadding", { label: "タイトル", values: "hasTitle" }, "isTemplate"];
 			wp.hooks.applyFilters("catpow.blocks.banners.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
