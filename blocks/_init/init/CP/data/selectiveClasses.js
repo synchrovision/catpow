@@ -448,33 +448,78 @@ export const selectiveClassesPresets = {
 			},
 		};
 	},
-	itemGap(preset, vars = "vars", ...otherParams) {
+	hasItemGap({ preset, vars = "vars", ...otherParams }) {
 		return {
-			name: "itemGap",
-			type: "buttons",
+			name: "hasItemGap",
 			label: __("アイテム間隔", "catpow"),
+			values: "hasItemGap",
+			sub: [
+				{ preset: "itemGapBlock", vars },
+				{ preset: "itemGapInline", vars },
+			],
+			...otherParams,
+		};
+	},
+	itemGapBlock({ preset, vars = "vars", ...otherParams }) {
+		return {
+			name: "itemGapBlock",
+			type: "buttons",
+			label: __("縦間隔", "catpow"),
 			values: {
-				hasItemGapSmall: __("小", "catpow"),
-				hasItemGapMedium: __("中", "catpow"),
-				hasItemGapLarge: __("大", "catpow"),
-				hasItemGapCustom: ":admin-generic:",
+				hasItemGapBlockXLarge: __("極大", "catpow"),
+				hasItemGapBlockLarge: __("大", "catpow"),
+				hasItemGapBlockMedium: __("中", "catpow"),
+				hasItemGapBlockSmall: __("小", "catpow"),
+				hasItemGapBlockXSmall: __("極小", "catpow"),
+				hasItemGapBlockCustom: ":admin-generic:",
 			},
 			sub: {
-				hasItemGapCustom: [
+				hasItemGapBlockCustom: [
 					{
-						name: "itemSize",
-						label: __("アイテム間隔", "catpow"),
-						vars: "vars",
-						key: "--cp-margin-gap-custom",
+						name: "itemGapBlockCustom",
 						input: "range",
+						vars,
+						key: "--cp-item-gap-block-custom",
 						min: 0,
-						max: 200,
-						step: 4,
+						max: 400,
+						step: 5,
 						coef: 0.0625,
 						unit: "rem",
 					},
 				],
 			},
+			...otherParams,
+		};
+	},
+	itemGapInline({ preset, vars = "vars", ...otherParams }) {
+		return {
+			name: "itemGapInline",
+			type: "buttons",
+			label: __("横間隔", "catpow"),
+			values: {
+				hasItemGapInlineXLarge: __("極大", "catpow"),
+				hasItemGapInlineLarge: __("大", "catpow"),
+				hasItemGapInlineMedium: __("中", "catpow"),
+				hasItemGapInlineSmall: __("小", "catpow"),
+				hasItemGapInlineXSmall: __("極小", "catpow"),
+				hasItemGapInlineCustom: ":admin-generic:",
+			},
+			sub: {
+				hasItemGapInlineCustom: [
+					{
+						name: "itemGapInlineCustom",
+						input: "range",
+						vars,
+						key: "--cp-item-gap-inline-custom",
+						min: 0,
+						max: 400,
+						step: 5,
+						coef: 0.0625,
+						unit: "rem",
+					},
+				],
+			},
+			...otherParams,
 		};
 	},
 	colorScheme: {

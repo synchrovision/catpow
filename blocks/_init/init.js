@@ -6162,33 +6162,78 @@
         }
       };
     },
-    itemGap(preset, vars = "vars", ...otherParams) {
+    hasItemGap({ preset, vars = "vars", ...otherParams }) {
       return {
-        name: "itemGap",
-        type: "buttons",
+        name: "hasItemGap",
         label: __13("\u30A2\u30A4\u30C6\u30E0\u9593\u9694", "catpow"),
+        values: "hasItemGap",
+        sub: [
+          { preset: "itemGapBlock", vars },
+          { preset: "itemGapInline", vars }
+        ],
+        ...otherParams
+      };
+    },
+    itemGapBlock({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "itemGapBlock",
+        type: "buttons",
+        label: __13("\u7E26\u9593\u9694", "catpow"),
         values: {
-          hasItemGapSmall: __13("\u5C0F", "catpow"),
-          hasItemGapMedium: __13("\u4E2D", "catpow"),
-          hasItemGapLarge: __13("\u5927", "catpow"),
-          hasItemGapCustom: ":admin-generic:"
+          hasItemGapBlockXLarge: __13("\u6975\u5927", "catpow"),
+          hasItemGapBlockLarge: __13("\u5927", "catpow"),
+          hasItemGapBlockMedium: __13("\u4E2D", "catpow"),
+          hasItemGapBlockSmall: __13("\u5C0F", "catpow"),
+          hasItemGapBlockXSmall: __13("\u6975\u5C0F", "catpow"),
+          hasItemGapBlockCustom: ":admin-generic:"
         },
         sub: {
-          hasItemGapCustom: [
+          hasItemGapBlockCustom: [
             {
-              name: "itemSize",
-              label: __13("\u30A2\u30A4\u30C6\u30E0\u9593\u9694", "catpow"),
-              vars: "vars",
-              key: "--cp-margin-gap-custom",
+              name: "itemGapBlockCustom",
               input: "range",
+              vars,
+              key: "--cp-item-gap-block-custom",
               min: 0,
-              max: 200,
-              step: 4,
+              max: 400,
+              step: 5,
               coef: 0.0625,
               unit: "rem"
             }
           ]
-        }
+        },
+        ...otherParams
+      };
+    },
+    itemGapInline({ preset, vars = "vars", ...otherParams }) {
+      return {
+        name: "itemGapInline",
+        type: "buttons",
+        label: __13("\u6A2A\u9593\u9694", "catpow"),
+        values: {
+          hasItemGapInlineXLarge: __13("\u6975\u5927", "catpow"),
+          hasItemGapInlineLarge: __13("\u5927", "catpow"),
+          hasItemGapInlineMedium: __13("\u4E2D", "catpow"),
+          hasItemGapInlineSmall: __13("\u5C0F", "catpow"),
+          hasItemGapInlineXSmall: __13("\u6975\u5C0F", "catpow"),
+          hasItemGapInlineCustom: ":admin-generic:"
+        },
+        sub: {
+          hasItemGapInlineCustom: [
+            {
+              name: "itemGapInlineCustom",
+              input: "range",
+              vars,
+              key: "--cp-item-gap-inline-custom",
+              min: 0,
+              max: 400,
+              step: 5,
+              coef: 0.0625,
+              unit: "rem"
+            }
+          ]
+        },
+        ...otherParams
       };
     },
     colorScheme: {
