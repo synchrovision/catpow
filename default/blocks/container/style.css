@@ -3,7 +3,7 @@
   border-radius: var(--cp-border-radius-c-f);
 }
 .wp-block-catpow-container__body {
-  padding: var(--cp-size-sp-f);
+  padding: var(--cp-padding-f);
 }
 .wp-block-catpow-container:not(.has-border) {
   border-style: none;
@@ -11,7 +11,7 @@
 .wp-block-catpow-container.has-border {
   border-style: solid;
   border-width: var(--cp-border-width-c-f);
-  border-color: hsla(var(--cp-tones-l-h),var(--cp-tones-l-s),var(--cp-tones-l-l),var(--cp-tones-l-a,1));
+  border-color: oklch(var(--cp-tones-l-l) var(--cp-tones-l-c) var(--cp-tones-l-h) / var(--cp-tones-l-a,1));
 }
 .wp-block-catpow-container.has-scroll-x {
   overflow-x: auto;

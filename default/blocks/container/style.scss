@@ -6,7 +6,7 @@
 	@include bnd((o:c));
 	@include bdr((r:c-f));
 	&__body{
-		@include bnd((pd:sp-f));
+		@include bnd((pd:f));
 	}
 	&:not(.has-border){
 		@include bdr((s:n));
