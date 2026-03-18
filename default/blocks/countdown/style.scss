@@ -3,8 +3,10 @@
 
 .wp-block-catpow-countdown{
 	@extend %ui-block;
-	&-body{
-		@extend %ui;
+	&:not(.has-font-size){
+		@include txt((p:t-u));
+	}
+	&__body{
 		@include bnd((pd:1em 0));
 		@include flx((w:n,j:c,g:.5em));
 		@include txt((c:tx));
@@ -14,7 +16,8 @@
 				@include bnd((d:b,p:r,f:0 0 1ch,pd:.25em,w:1ch));
 				@include bg((c:tx 1 .1));
 				@include bdr((r:.25em));
-				@include txt((a:c,p:xlg,h:1em,w:b,f:dc));
+				@include txt((a:c,p:r-xl,h:1em,w:b,f:d));
+				@include shd((b:c-t,t:t-u));
 				&.is-leading-zero{
 				}
 			}

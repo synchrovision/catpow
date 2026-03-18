@@ -1,16 +1,11 @@
 @charset "UTF-8";
 .wp-block-catpow-countdown {
-  margin-top: var(--cp-ui-margin-top, 0);
-  margin-bottom: var(--cp-ui-margin-bottom, 0);
+  margin: var(--cp-margin-t-u, 0);
 }
-.wp-block-catpow-countdown-body {
-  font-family: var(--cp-font-family-u, inherit);
-  font-size: var(--cp-font-size-u, 2em);
-  font-weight: var(--cp-font-weight-u, regular);
-  line-height: var(--cp-line-height-u, 1.5);
-  letter-spacing: var(--cp-letter-spacing-u, normal);
+.wp-block-catpow-countdown:not(.has-font-size) {
+  font-size: var(--cp-font-size-t-u);
 }
-.wp-block-catpow-countdown-body {
+.wp-block-catpow-countdown__body {
   padding: 1em 0rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -21,9 +16,9 @@
   -webkit-justify-content: center;
   justify-content: center;
   gap: 0.5em;
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
+  color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
 }
-.wp-block-catpow-countdown-body-group {
+.wp-block-catpow-countdown__body-group {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -34,7 +29,7 @@
   -webkit-align-items: flex-end;
   align-items: flex-end;
 }
-.wp-block-catpow-countdown-body-group-number {
+.wp-block-catpow-countdown__body-group-number {
   display: block;
   position: relative;
   -webkit-box-flex: 0;
@@ -43,15 +38,17 @@
   flex-basis: 1ch;
   padding: 0.25em;
   width: 1ch;
-  background-color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),calc(var(--cp-tones-tx-a,1) * 0.1));
+  background-color: oklch(calc(1 - var(--cp-tones-tx-t) * 100) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / calc(var(--cp-tones-tx-a,1) * 0.1));
   border-radius: 0.25em;
   text-align: center;
-  font-size: var(--cp-font-size-xlg);
+  font-size: var(--cp-font-size-r-xl);
   line-height: 1em;
   font-weight: 700;
-  font-family: var(--cp-font-family-dc);
+  font-family: var(--cp-font-family-f-d);
+  box-shadow: var(--cp-shadow-c-t) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+  text-shadow: var(--cp-shadow-t-u) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
-.wp-block-catpow-countdown-body-group::after {
+.wp-block-catpow-countdown__body-group::after {
   display: block;
   -webkit-box-flex: 0;
   flex-grow: 0;
@@ -61,19 +58,19 @@
   font-size: 1em;
   line-height: 1em;
 }
-.wp-block-catpow-countdown-body-group.is-days::after {
+.wp-block-catpow-countdown__body-group.is-days::after {
   content: "日";
 }
-.wp-block-catpow-countdown-body-group.is-days .wp-block-catpow-countdown-body-group-number.is-leading-zero {
+.wp-block-catpow-countdown__body-group.is-days .wp-block-catpow-countdown__body-group-number.is-leading-zero {
   display: none;
 }
-.wp-block-catpow-countdown-body-group.is-hours::after {
+.wp-block-catpow-countdown__body-group.is-hours::after {
   content: "時間";
 }
-.wp-block-catpow-countdown-body-group.is-minutes::after {
+.wp-block-catpow-countdown__body-group.is-minutes::after {
   content: "分";
 }
-.wp-block-catpow-countdown-body-group.is-seconds::after {
+.wp-block-catpow-countdown__body-group.is-seconds::after {
   content: "秒";
 }
 /*# sourceMappingURL=./style.css.map */
