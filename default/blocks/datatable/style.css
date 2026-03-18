@@ -1,44 +1,56 @@
-.wp-block-catpow-datatable__thead-tr-th, .wp-block-catpow-datatable__thead-tr-td, .wp-block-catpow-datatable__tbody-tr-th, .wp-block-catpow-datatable__tbody-tr-td {
-  font-family: var(--cp-font-family-p, inherit);
-  font-size: var(--cp-font-size-p, 2em);
-  font-weight: var(--cp-font-weight-p, regular);
-  line-height: var(--cp-line-height-p, 1.5);
-  letter-spacing: var(--cp-letter-spacing-p, normal);
+.wp-block-catpow-datatable__thead-tr-th:not(.is-spacer), .wp-block-catpow-datatable__thead-tr-td:not(.is-spacer), .wp-block-catpow-datatable__tbody-tr-th:not(.is-spacer), .wp-block-catpow-datatable__tbody-tr-td:not(.is-spacer) {
+  font-family: var(--cp-font-family-t-p, inherit);
+  font-size: var(--cp-font-size-t-p, 2em);
+  font-weight: var(--cp-font-weight-t-p, regular);
+  line-height: var(--cp-line-height-t-p, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-p, normal);
 }
 .wp-block-catpow-datatable {
-  margin-top: var(--cp-ui-margin-top, 0);
-  margin-bottom: var(--cp-ui-margin-bottom, 0);
+  margin: var(--cp-margin-t-u, 0);
 }
-.wp-block-catpow-datatable.is-style-plan .wp-block-catpow-datatable__thead-tr-th, .wp-block-catpow-datatable.is-style-plan .wp-block-catpow-datatable__tbody-tr-th {
-  padding: var(--cp-size-sp-t);
+.wp-block-catpow-datatable__thead-tr-th:not(.is-spacer), .wp-block-catpow-datatable__thead-tr-td:not(.is-spacer), .wp-block-catpow-datatable__tbody-tr-th:not(.is-spacer), .wp-block-catpow-datatable__tbody-tr-td:not(.is-spacer) {
+  padding: var(--cp-padding-c-t);
   border-width: var(--cp-border-width-c-t, 0);
   border-radius: var(--cp-border-radius-c-t, 0);
+  box-shadow: var(--cp-shadow-c-t) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 .wp-block-catpow-datatable {
+  width: 100%;
+}
+.wp-block-catpow-datatable.is-style-spec {
   table-layout: fixed;
   border-collapse: collapse;
   border-spacing: 0px;
-  width: 100%;
 }
-.wp-block-catpow-datatable__thead-tr-th, .wp-block-catpow-datatable__thead-tr-td, .wp-block-catpow-datatable__tbody-tr-th, .wp-block-catpow-datatable__tbody-tr-td {
-  padding: var(--cp-cell-padding);
+.wp-block-catpow-datatable.is-style-spec .wp-block-catpow-datatable__thead-tr-th, .wp-block-catpow-datatable.is-style-spec .wp-block-catpow-datatable__thead-tr-td, .wp-block-catpow-datatable.is-style-spec .wp-block-catpow-datatable__tbody-tr-th, .wp-block-catpow-datatable.is-style-spec .wp-block-catpow-datatable__tbody-tr-td {
+  border-radius: 0rem;
+  box-shadow: none;
 }
 .wp-block-catpow-datatable.is-style-spec .wp-block-catpow-datatable__thead-tr-th, .wp-block-catpow-datatable.is-style-spec .wp-block-catpow-datatable__thead-tr-td {
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
-  border-bottom-color: hsla(var(--cp-tones-lx-h),var(--cp-tones-lx-s),var(--cp-tones-lx-l),var(--cp-tones-lx-a,1));
+  border-bottom-color: oklch(var(--cp-tones-lx-l) var(--cp-tones-lx-c) var(--cp-tones-lx-h) / var(--cp-tones-lx-a,1));
 }
 .wp-block-catpow-datatable.is-style-spec .wp-block-catpow-datatable__tbody-tr-th, .wp-block-catpow-datatable.is-style-spec .wp-block-catpow-datatable__tbody-tr-td {
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
-  border-bottom-color: hsla(var(--cp-tones-lx-h),var(--cp-tones-lx-s),var(--cp-tones-lx-l),var(--cp-tones-lx-a,1));
+  border-bottom-color: oklch(var(--cp-tones-lx-l) var(--cp-tones-lx-c) var(--cp-tones-lx-h) / var(--cp-tones-lx-a,1));
+}
+.wp-block-catpow-datatable.is-style-sheet {
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+.wp-block-catpow-datatable.is-style-sheet .wp-block-catpow-datatable__thead-tr-th, .wp-block-catpow-datatable.is-style-sheet .wp-block-catpow-datatable__thead-tr-td, .wp-block-catpow-datatable.is-style-sheet .wp-block-catpow-datatable__tbody-tr-th, .wp-block-catpow-datatable.is-style-sheet .wp-block-catpow-datatable__tbody-tr-td {
+  border-radius: 0rem;
+  box-shadow: none;
 }
 .wp-block-catpow-datatable.is-style-sheet .wp-block-catpow-datatable__thead-tr-th {
   text-align: center;
-  background-color: hsla(var(--cp-tones-sx-h),var(--cp-tones-sx-s),var(--cp-tones-sx-l),var(--cp-tones-sx-a,1));
+  background-color: oklch(var(--cp-tones-sx-l) var(--cp-tones-sx-c) var(--cp-tones-sx-h) / var(--cp-tones-sx-a,1));
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: hsla(var(--cp-tones-lx-h),var(--cp-tones-lx-s),var(--cp-tones-lx-l),var(--cp-tones-lx-a,1));
+  border-color: oklch(var(--cp-tones-lx-l) var(--cp-tones-lx-c) var(--cp-tones-lx-h) / var(--cp-tones-lx-a,1));
 }
 .wp-block-catpow-datatable.is-style-sheet .wp-block-catpow-datatable__thead-tr-th.is-spacer {
   background-color: transparent;
@@ -48,27 +60,32 @@
   text-align: left;
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: hsla(var(--cp-tones-lx-h),var(--cp-tones-lx-s),var(--cp-tones-lx-l),var(--cp-tones-lx-a,1));
+  border-color: oklch(var(--cp-tones-lx-l) var(--cp-tones-lx-c) var(--cp-tones-lx-h) / var(--cp-tones-lx-a,1));
 }
 .wp-block-catpow-datatable.is-style-sheet .wp-block-catpow-datatable__tbody-tr-th {
-  background-color: hsla(var(--cp-tones-sx-h),var(--cp-tones-sx-s),var(--cp-tones-sx-l),var(--cp-tones-sx-a,1));
+  background-color: oklch(var(--cp-tones-sx-l) var(--cp-tones-sx-c) var(--cp-tones-sx-h) / var(--cp-tones-sx-a,1));
   text-align: center;
 }
 .wp-block-catpow-datatable.is-style-sheet .wp-block-catpow-datatable__tbody-tr-td {
-  background-color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),var(--cp-tones-bx-a,1));
+  background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
 }
 .wp-block-catpow-datatable.is-style-sheet .wp-block-catpow-datatable__tbody-tr:nth-of-type(odd) .wp-block-catpow-datatable__tbody-tr-th {
-  background-color: hsla(calc(var(--cp-tones-sx-h) * 0.75 + var(--cp-tones-bx-h) * 0.25),calc(var(--cp-tones-sx-s) * 0.75 + var(--cp-tones-bx-s) * 0.25),calc(var(--cp-tones-sx-l) * 0.75 + var(--cp-tones-bx-l) * 0.25),calc(var(--cp-tones-sx-a) * 0.75 + var(--cp-tones-bx-a) * 0.25));
+  background-color: oklch(calc(var(--cp-tones-sx-l) * 0.75 + var(--cp-tones-bx-l) * 0.25) calc(var(--cp-tones-sx-c) * 0.75 + var(--cp-tones-bx-c) * 0.25) calc(var(--cp-tones-sx-h) * 0.75 + var(--cp-tones-bx-h) * 0.25) / calc(var(--cp-tones-sx-a) * 0.75 + var(--cp-tones-bx-a) * 0.25));
 }
 .wp-block-catpow-datatable.is-style-sheet .wp-block-catpow-datatable__tbody-tr:nth-of-type(even) .wp-block-catpow-datatable__tbody-tr-td {
-  background-color: hsla(calc(var(--cp-tones-sx-h) * 0.25 + var(--cp-tones-bx-h) * 0.75),calc(var(--cp-tones-sx-s) * 0.25 + var(--cp-tones-bx-s) * 0.75),calc(var(--cp-tones-sx-l) * 0.25 + var(--cp-tones-bx-l) * 0.75),calc(var(--cp-tones-sx-a) * 0.25 + var(--cp-tones-bx-a) * 0.75));
+  background-color: oklch(calc(var(--cp-tones-sx-l) * 0.25 + var(--cp-tones-bx-l) * 0.75) calc(var(--cp-tones-sx-c) * 0.25 + var(--cp-tones-bx-c) * 0.75) calc(var(--cp-tones-sx-h) * 0.25 + var(--cp-tones-bx-h) * 0.75) / calc(var(--cp-tones-sx-a) * 0.25 + var(--cp-tones-bx-a) * 0.75));
+}
+.wp-block-catpow-datatable.is-style-plan {
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: var(--cp-margin-c-t);
 }
 .wp-block-catpow-datatable.is-style-plan .wp-block-catpow-datatable__thead-tr-th {
   border-bottom-left-radius: 0rem;
   border-bottom-right-radius: 0rem;
   text-align: center;
-  color: hsla(var(--cp-tones-ix-h),var(--cp-tones-ix-s),var(--cp-tones-ix-l),var(--cp-tones-ix-a,1));
-  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
+  color: oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1));
+  background-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
 }
 .wp-block-catpow-datatable.is-style-plan .wp-block-catpow-datatable__thead-tr-th.is-spacer {
   background-color: transparent;
@@ -79,16 +96,17 @@
 .wp-block-catpow-datatable.is-style-plan .wp-block-catpow-datatable__tbody-tr-th {
   border-top-right-radius: 0rem;
   border-bottom-right-radius: 0rem;
-  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
-  color: hsla(var(--cp-tones-ix-h),var(--cp-tones-ix-s),var(--cp-tones-ix-l),var(--cp-tones-ix-a,1));
+  background-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
+  color: oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1));
 }
 .wp-block-catpow-datatable.is-style-plan .wp-block-catpow-datatable__tbody-tr-td {
-  background-color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),var(--cp-tones-bx-a,1));
+  background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
+  border-radius: 0rem;
 }
 .wp-block-catpow-datatable.is-style-plan .wp-block-catpow-datatable__tbody-tr:nth-of-type(odd) .wp-block-catpow-datatable__tbody-tr-th {
-  background-color: hsla(calc(var(--cp-tones-mx-h) * 0.8 + var(--cp-tones-bx-h) * 0.2),calc(var(--cp-tones-mx-s) * 0.8 + var(--cp-tones-bx-s) * 0.2),calc(var(--cp-tones-mx-l) * 0.8 + var(--cp-tones-bx-l) * 0.2),calc(var(--cp-tones-mx-a) * 0.8 + var(--cp-tones-bx-a) * 0.2));
+  background-color: oklch(calc(var(--cp-tones-mx-l) * 0.8 + var(--cp-tones-bx-l) * 0.2) calc(var(--cp-tones-mx-c) * 0.8 + var(--cp-tones-bx-c) * 0.2) calc(var(--cp-tones-mx-h) * 0.8 + var(--cp-tones-bx-h) * 0.2) / calc(var(--cp-tones-mx-a) * 0.8 + var(--cp-tones-bx-a) * 0.2));
 }
 .wp-block-catpow-datatable.is-style-plan .wp-block-catpow-datatable__tbody-tr:nth-of-type(even) .wp-block-catpow-datatable__tbody-tr-td {
-  background-color: hsla(calc(var(--cp-tones-bx-h) * 0.8 + var(--cp-tones-mx-h) * 0.2),calc(var(--cp-tones-bx-s) * 0.8 + var(--cp-tones-mx-s) * 0.2),calc(var(--cp-tones-bx-l) * 0.8 + var(--cp-tones-mx-l) * 0.2),calc(var(--cp-tones-bx-a) * 0.8 + var(--cp-tones-mx-a) * 0.2));
+  background-color: oklch(calc(var(--cp-tones-bx-l) * 0.8 + var(--cp-tones-mx-l) * 0.2) calc(var(--cp-tones-bx-c) * 0.8 + var(--cp-tones-mx-c) * 0.2) calc(var(--cp-tones-bx-h) * 0.8 + var(--cp-tones-mx-h) * 0.2) / calc(var(--cp-tones-bx-a) * 0.8 + var(--cp-tones-mx-a) * 0.2));
 }
 /*# sourceMappingURL=./style.css.map */

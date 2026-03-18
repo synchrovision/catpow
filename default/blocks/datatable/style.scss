@@ -6,108 +6,133 @@
 	$block:&;
 	$row:#{$block}__tbody-tr;
 	@extend %ui-block;
-	@include tbl((l:f));
 	@include bnd((w:f));
 	&__thead,&__tbody{
 		&-tr{
 			&-th,&-td{
-				@extend %paragraph;
-				@include bnd((pd:cpd));
-			}
-		}
-	}
-	&.is-style-spec &{
-		&__thead{
-			&-tr{
-				&-th,&-td{
-					@include bdr((p:b,s:s,w:1,c:lx));
-				}
-			}
-		}
-		&__tbody{
-			&-tr{
-				&-th,&-td{
-					@include bdr((p:b,s:s,w:1,c:lx));
+				&:not(.is-spacer){
+					@extend %table-component;
+					@extend %paragraph;
 				}
 			}
 		}
 	}
-	&.is-style-sheet &{
-		&__thead{
-			&-tr{
-				&-th{
-					@include txt((a:c));
-					@include bg((c:sx));
-					@include bdr((s:s,w:1,c:lx));
-					&.is-spacer{
-						@include bg((c:n));
-						@include bdr((s:n));
+	&.is-style-spec{
+		@include tbl((l:f));
+		#{$block}{
+			&__thead,&__tbody{
+				&-tr{
+					&-th,&-td{
+						@include bdr((r:0));
+						@include shd((b:n));
 					}
 				}
 			}
-		}
-		&__tbody{
-			&-tr{
-				&-th,&-td{
-					@include txt((a:l));
-					@include bdr((s:s,w:1,c:lx));
-				}
-				&-th{
-					@include bg((c:sx));
-					@include txt((a:c));
-				}
-				&-td{
-					@include bg((c:bx));
-				}
-				&:nth-of-type(odd){
-					#{$row}{
-						&-th{@include bg((c:sx-bx 75));}
+			&__thead{
+				&-tr{
+					&-th,&-td{
+						@include bdr((p:b,s:s,w:1,c:lx));
 					}
 				}
-				&:nth-of-type(even){
-					#{$row}{
-						&-td{@include bg((c:sx-bx 25));}
+			}
+			&__tbody{
+				&-tr{
+					&-th,&-td{
+						@include bdr((p:b,s:s,w:1,c:lx));
 					}
 				}
 			}
 		}
 	}
-	&.is-style-plan &{
-		&__thead{
-			&-tr{
-				&-th{
-					@extend %tab-component;
-					@include bdr((br:0));
-					@include txt((a:c,c:ix));
-					@include bg((c:mx));
-					&.is-spacer{
-						@include bg((c:n));
+	&.is-style-sheet{
+		@include tbl((l:f));
+		#{$block}{
+			&__thead,&__tbody{
+				&-tr{
+					&-th,&-td{
+						@include bdr((r:0));
+						@include shd((b:n));
+					}
+				}
+			}
+			&__thead{
+				&-tr{
+					&-th{
+						@include txt((a:c));
+						@include bg((c:sx));
+						@include bdr((s:s,w:1,c:lx));
+						&.is-spacer{
+							@include bg((c:n));
+							@include bdr((s:n));
+						}
+					}
+				}
+			}
+			&__tbody{
+				&-tr{
+					&-th,&-td{
+						@include txt((a:l));
+						@include bdr((s:s,w:1,c:lx));
+					}
+					&-th{
+						@include bg((c:sx));
+						@include txt((a:c));
+					}
+					&-td{
+						@include bg((c:bx));
+					}
+					&:nth-of-type(odd){
+						#{$row}{
+							&-th{@include bg((c:sx-bx 75));}
+						}
+					}
+					&:nth-of-type(even){
+						#{$row}{
+							&-td{@include bg((c:sx-bx 25));}
+						}
 					}
 				}
 			}
 		}
-		&__tbody{
-			&-tr{
-				&-th,&-td{
-					@include txt((a:c));
-				}
-				&-th{
-					@extend %tab-component;
-					@include bdr((rr:0));
-					@include bg((c:mx));
-					@include txt((c:ix));
-				}
-				&-td{
-					@include bg((c:bx));
-				}
-				&:nth-of-type(odd){
-					#{$row}{
-						&-th{@include bg((c:mx-bx 80));}
+	}
+	&.is-style-plan{
+		@include tbl((l:f,s:c-t));
+		#{$block}{
+			&__thead{
+				&-tr{
+					&-th{
+						@include bdr((br:0));
+						@include txt((a:c,c:ix));
+						@include bg((c:mx));
+						&.is-spacer{
+							@include bg((c:n));
+						}
 					}
 				}
-				&:nth-of-type(even){
-					#{$row}{
-						&-td{@include bg((c:bx-mx 80));}
+			}
+			&__tbody{
+				&-tr{
+					&-th,&-td{
+						@include txt((a:c));
+					}
+					&-th{
+						@include bdr((rr:0));
+						@include bg((c:mx));
+						@include txt((c:ix));
+					}
+					&-td{
+						@include bg((c:bx));
+						@include bdr((r:0));
+					}
+					&:nth-of-type(odd){
+						#{$row}{
+							&-th{@include bg((c:mx-bx 80));}
+						}
+					}
+					&:nth-of-type(even){
+						#{$row}{
+							&-td{@include bg((c:bx-mx 80));}
+						}
 					}
 				}
 			}
