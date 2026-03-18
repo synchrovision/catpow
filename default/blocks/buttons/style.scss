@@ -44,7 +44,7 @@
 		@include txt((l:n,a:c,c:mx));
 		&-copy{
 			@extend %label-component;
-			@include bnd((d:b,p:r,i:0,mg:a,mgb:-1.25em,pd:.4em 1em,w:fit,h:fit,z:1));
+			@include bnd((d:b,p:r,i:0,mg:a,mgb:-.8em,pd:.4em 1em,w:fit,h:fit,z:1));
 			@include bg((c:bx));
 			@include bdr((s:s,w:2));
 			@include txt((p:.6em,h:1em,c:mx));
