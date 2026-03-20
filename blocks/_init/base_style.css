@@ -711,6 +711,9 @@
   width: fit-content;
   height: fit-content;
 }
+.cp-edititemstable-tbody-tr-th .cp-selectresponsiveimage, .cp-edititemstable-tbody-tr-td .cp-selectresponsiveimage {
+  width: 6.25rem;
+}
 .cp-edititemstable-tbody-tr-th .SelectPictureSources, .cp-edititemstable-tbody-tr-td .SelectPictureSources {
   width: 6.25rem;
 }

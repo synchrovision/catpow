@@ -423,6 +423,9 @@ $colors:(
 					.cp-itemcontrol{
 						@include bnd((i:0,mg:a,w:fit,h:fit));
 					}
+					.cp-selectresponsiveimage{
+						@include bnd((w:100));
+					}
 					.SelectPictureSources{
 						@include bnd((w:100));
 					}
