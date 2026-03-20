@@ -1,0 +1,66 @@
+@import "admin_style_config.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
+
+.wp-block-catpow-definition{
+	$block:&;
+	@extend %paragraph;
+	&__item{
+		@include bnd((p:r,mg:0,pd:0));
+		&-title,&-text{
+			@include bnd((pd:0,mg:0));
+		}
+	}
+	&.is-type-index{
+		#{$block}{
+			&__item{
+				@include flx((w:w,g:.5em));
+				&-title,&-text{
+					@include bnd((pdi:0));
+				}
+				&-title{
+					@include bnd((nth:1));
+				}
+				&-text{
+					@include bnd((nth:3));
+				}
+				&::before{
+					content:'';
+					@include bnd((d:b,f:1 1 a,h:.8em,nth:2));
+					@include bdr((p:b,s:d,w:2,c:l));
+				}
+
+			}
+		}
+	}
+	&.is-type-spec{
+		@include grd((tc:a 1fr,g:1em));
+		#{$block}{
+			&__item{
+				@include bnd((gc:span 2));
+				@include grd((tc:s));
+				@include bdr((p:b,s:s,w:c-t,c:l));
+				&-title,&-text{
+					@include bnd((pd:c-t,pdi:0));
+				}
+				&-title{}
+				&-text{}
+			}
+		}
+	}
+	&.is-type-info{
+		@include grd((tc:a 1fr,g:1em));
+		#{$block}{
+			&__item{
+				@include bnd((gc:span 2));
+				@include grd((tc:s));
+				&-title{
+					@extend %label-component;
+					@include bg((c:m));
+					@include txt((p:t-p,c:i));
+				}
+				&-text{}
+			}
+		}
+	}
+}

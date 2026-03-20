@@ -1,5 +1,6 @@
 (() => {
   // ../blocks/definition/editor_script.jsx
+  var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/definition", {
     title: "\u{1F43E} Definition",
     description: "\u5B9A\u7FA9\u30EA\u30B9\u30C8\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059",
@@ -18,51 +19,25 @@
       ]
     },
     example: CP.example,
-    edit({ attributes, className, setAttributes, isSelected }) {
-      const { useState, useMemo } = wp.element;
-      const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
-      const { Icon, PanelBody, TextareaControl } = wp.components;
+    edit({ attributes, setAttributes, isSelected }) {
+      const { useMemo } = wp.element;
+      const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
+      const { PanelBody, TextareaControl } = wp.components;
       const { items = [], classes = "", loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
-      const primaryClass = "wp-block-catpow-definition";
-      var classArray = _.uniq((className + " " + classes).split(" "));
       var states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
+          "level",
           {
-            name: "template",
-            label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
-            values: "isTemplate",
-            sub: [
-              {
-                name: "loop",
-                input: "bool",
-                label: "\u30EB\u30FC\u30D7",
-                key: "doLoop",
-                sub: [
-                  {
-                    name: "contentPath",
-                    label: "content path",
-                    input: "text",
-                    key: "content_path"
-                  },
-                  {
-                    name: "query",
-                    label: "query",
-                    input: "textarea",
-                    key: "query"
-                  },
-                  {
-                    name: "loopCount",
-                    label: "\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570",
-                    input: "range",
-                    key: "loopCount",
-                    min: 1,
-                    max: 16
-                  }
-                ]
-              }
-            ]
-          }
+            name: "type",
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
+            type: "gridbuttons",
+            values: { isTypeIndex: "index", isTypeSpec: "spec", isTypeInfo: "info" },
+            required: true
+          },
+          "hasContentWidth",
+          "hasMargin",
+          "isTemplate"
         ];
         wp.hooks.applyFilters("catpow.blocks.definition.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
@@ -70,40 +45,8 @@
       const save = () => {
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });
       };
-      let rtn = [];
-      items.map((item, index) => {
-        if (!item.controlClasses) {
-          item.controlClasses = "control";
-        }
-        rtn.push(
-          /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "dl", set: setAttributes, attr: attributes, items, index, isSelected, key: index }, /* @__PURE__ */ wp.element.createElement("dt", { className: "title" }, /* @__PURE__ */ wp.element.createElement(
-            RichText,
-            {
-              onChange: (title) => {
-                item.title = title;
-                save();
-              },
-              value: item.title
-            }
-          )), /* @__PURE__ */ wp.element.createElement("dd", { className: "text" }, /* @__PURE__ */ wp.element.createElement(
-            RichText,
-            {
-              onChange: (text) => {
-                item.text = text;
-                save();
-              },
-              value: item.text
-            }
-          )))
-        );
-      });
-      if (rtn.length < loopCount) {
-        let len = rtn.length;
-        while (rtn.length < loopCount) {
-          rtn.push(rtn[rtn.length % len]);
-        }
-      }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (clss) => setAttributes({ classes: clss }), value: classArray.join(" ") })), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+      const blockProps = useBlockProps({ className: EditMode || AltMode && doLoop ? "cp-altcontent" : classes });
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes })), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           set: setAttributes,
@@ -114,19 +57,41 @@
           ],
           isTemplate: states.isTemplate
         }
-      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement("div", { className: classes }, rtn)));
+      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "welcome-comments" }), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, [...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
+        const index = i % items.length;
+        const item = items[index];
+        if (!item.controlClasses) {
+          item.controlClasses = "control";
+        }
+        return /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "dl", className: "_item", set: setAttributes, attr: attributes, items, index, isSelected, key: index }, /* @__PURE__ */ wp.element.createElement(
+          RichText,
+          {
+            tagName: "dt",
+            className: "_title",
+            onChange: (title) => {
+              item.title = title;
+              save();
+            },
+            value: item.title
+          }
+        ), /* @__PURE__ */ wp.element.createElement(
+          RichText,
+          {
+            tagName: "dd",
+            className: "_text",
+            onChange: (text) => {
+              item.text = text;
+              save();
+            },
+            value: item.text
+          }
+        ));
+      })))));
     },
     save({ attributes, className }) {
-      const { InnerBlocks, RichText } = wp.blockEditor;
+      const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
       const { items = [], classes = "", loopCount, doLoop } = attributes;
-      const states = CP.classNamesToFlags(classes);
-      let rtn = [];
-      items.map((item, index) => {
-        rtn.push(
-          /* @__PURE__ */ wp.element.createElement("dl", { className: "item", key: index }, /* @__PURE__ */ wp.element.createElement("dt", { className: "title" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), /* @__PURE__ */ wp.element.createElement("dd", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })))
-        );
-      });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, rtn), doLoop && /* @__PURE__ */ wp.element.createElement("on-empty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps.save({ className: classes }) }, items.map((item, index) => /* @__PURE__ */ wp.element.createElement("dl", { className: "_item", key: index }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "dt", className: "_title", value: item.title }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "dd", className: "_text", value: item.text }))))), doLoop && /* @__PURE__ */ wp.element.createElement("on-empty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }
   });
 })();
