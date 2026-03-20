@@ -681,7 +681,9 @@ export const SelectClassPanelBlock = ({ prm }) => {
 							showHeader={false}
 							debug={prm.debug}
 							onChange={(val) => {
-								val = { ...val };
+								if (typeof val !== "string") {
+									val = { ...val };
+								}
 								if (prm.filter) {
 									val = prm.filter(val, states, props);
 								}
