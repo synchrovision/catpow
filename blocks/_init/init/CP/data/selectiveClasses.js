@@ -466,6 +466,15 @@ export const selectiveClassesPresets = {
 			},
 		};
 	},
+	itemAlign: {
+		name: "itemAlign",
+		type: "buttons",
+		label: __("アイテム位置", "catpow"),
+		values: {
+			hasItemAlignLeft: __("左", "catpow"),
+			hasItemAlignRight: __("右", "catpow"),
+		},
+	},
 	hasItemGap({ preset, vars = "vars", ...otherParams }) {
 		return {
 			name: "hasItemGap",

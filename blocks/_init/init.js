@@ -6182,6 +6182,15 @@
         }
       };
     },
+    itemAlign: {
+      name: "itemAlign",
+      type: "buttons",
+      label: __13("\u30A2\u30A4\u30C6\u30E0\u4F4D\u7F6E", "catpow"),
+      values: {
+        hasItemAlignLeft: __13("\u5DE6", "catpow"),
+        hasItemAlignRight: __13("\u53F3", "catpow")
+      }
+    },
     hasItemGap({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "hasItemGap",
