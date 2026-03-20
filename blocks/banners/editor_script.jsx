@@ -71,10 +71,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
-		const blockProps = useBlockProps({
-			className: classes,
-			style: vars,
-		});
+		const blockProps = useBlockProps({ className: EditMode || (AltMode && doLoop) ? "cp-altcontent" : classes, style: vars });
 
 		return (
 			<>
@@ -102,10 +99,8 @@ wp.blocks.registerBlockType("catpow/banners", {
 				</InspectorControls>
 
 				{EditMode ? (
-					<div {...blockProps} className="cp-altcontent">
-						<div className="label">
-							<Icon icon="edit" />
-						</div>
+					<div {...blockProps}>
+						<CP.Label icon="edit" />
 						<CP.EditItemsTable
 							set={setAttributes}
 							attr={attributes}
@@ -128,10 +123,8 @@ wp.blocks.registerBlockType("catpow/banners", {
 				) : (
 					<>
 						{AltMode && doLoop ? (
-							<div {...blockProps} className="cp-altcontent">
-								<div className="label">
-									<Icon icon="welcome-comments" />
-								</div>
+							<div {...blockProps}>
+								<CP.Label icon="welcome-comments" />
 								<InnerBlocks />
 							</div>
 						) : (
