@@ -1,5 +1,6 @@
 (() => {
   // ../blocks/accessmap/editor_script.jsx
+  var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/accessmap", {
     title: "\u{1F43E} Access Map",
     description: "\u5730\u56F3\u3068\u30A2\u30AF\u30BB\u30B9\u60C5\u5831\u3092\u8868\u793A",
