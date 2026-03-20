@@ -1688,8 +1688,11 @@
       50,
       [value]
     );
-    return /* @__PURE__ */ wp.element.createElement(RangeInputContext.Provider, { value: { values } }, /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className, style: Object.keys(values).reduce((p, c) => ({ ...p, ["--pos-" + c]: cnv.getProgress(values[c]) }), {}) }, /* @__PURE__ */ wp.element.createElement("div", { className: "_bar" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body", ref }, Object.keys(values).map((name) => {
-      return /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default("_control", `is-control-${name}`), style: { "--pos": cnv.getProgress(values[name]) } }, /* @__PURE__ */ wp.element.createElement("div", { className: "_value" }, values[name]));
+    const positions = Object.keys(values).reduce((p, c) => ({ ...p, ["--pos-" + c]: cnv.getProgress(values[c]) }), {});
+    positions["--min-pos"] = Math.min(...Object.values(positions));
+    positions["--max-pos"] = Math.max(...Object.values(positions));
+    return /* @__PURE__ */ wp.element.createElement(RangeInputContext.Provider, { value: { values } }, /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className, style: positions }, /* @__PURE__ */ wp.element.createElement("div", { className: "_bar" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body", ref }, /* @__PURE__ */ wp.element.createElement("div", { className: "_range" }), Object.keys(values).map((name) => {
+      return /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default("_control", `is-control-${name}`), style: { "--pos": positions["--pos-" + name] }, key: name }, /* @__PURE__ */ wp.element.createElement("div", { className: "_value" }, values[name]));
     }))), showInputs && /* @__PURE__ */ wp.element.createElement("div", { className: "_inputs" }, Object.keys(values).map((name) => {
       return /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default("_item", `is-input-${name}`) }, /* @__PURE__ */ wp.element.createElement("input", { type: "number", value: values[name], className: "_input", onChange: (e) => onChageCallback(name, e.target.value) }));
     })))));
@@ -1809,6 +1812,7 @@
           p[`${h}-${v}`] = offsetValues[c] !== 0 ? `calc(sin(${angles[c] + 180}deg) * cos(${heights[c]}deg) * ${offset / 32}em) calc(cos(${angles[c]}deg) * cos(${heights[c]}deg) * ${offset / 32}em) calc(${Math.abs(offset / 32)}em * ${growBlurs[c] / 10})` : "none";
         } else {
           p[`${h}-${v}`] = offsetValues[c] !== 0 ? `${offset < 0 ? "inset " : ""}calc(sin(${angles[c] + 180}deg) * cos(${heights[c]}deg) * ${Math.abs(offset)}px) calc(cos(${angles[c]}deg) * cos(${heights[c]}deg) * ${Math.abs(offset)}px) calc(${Math.abs(offset)}px * ${growBlurs[c] / 10}) calc(${Math.abs(offset)}px * ${growSpreads[c] / 10})` : "none";
+          p[`${h}-${v}-ns`] = offsetValues[c] !== 0 ? `${offset < 0 ? "inset " : ""}calc(sin(${angles[c] + 180}deg) * cos(${heights[c]}deg) * ${Math.abs(offset)}px) calc(cos(${angles[c]}deg) * cos(${heights[c]}deg) * ${Math.abs(offset)}px) calc(${Math.abs(offset)}px * ${growBlurs[c] / 10})` : "none";
         }
       });
       return p;

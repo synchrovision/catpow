@@ -325,12 +325,18 @@ class style_config{
 					'om'=>'外中',
 					'ol'=>'外大',
 				],
+				'subVariants'=>[
+					'ns'=>'スプレッドなし'
+				],
 				'defaultValues'=>array_pad([],6,'none')
 			],
 			'component'=>[
 				'label'=>'コンポーネント',
 				'shorthand'=>'c',
 				'variants'=>self::$component_variants,
+				'subVariants'=>[
+					'ns'=>'スプレッドなし'
+				],
 				'defaultValues'=>array_pad([],7,'none')
 			],
 			'text'=>[
