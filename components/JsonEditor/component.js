@@ -1506,27 +1506,18 @@
   // node_modules-included/catpow/src/component/Input/PositionInput.jsx
   init_react();
   var PositionInput = (props) => {
-    const {
-      className = "cp-positioninput",
-      width = 100,
-      height = 100,
-      margin = 10,
-      grid = 10,
-      snap = false,
-      value: { x = 50, y = 50 },
-      r: r2 = 6,
-      onChange,
-      ...otherProps
-    } = props;
+    const { className = "cp-positioninput", width = 100, height = 100, margin = 10, grid = 10, snap = false, r: r2 = 6, onChange, ...otherProps } = props;
+    const { x = 50, y = 50 } = props.value || {};
     const [ref, state] = useScratch_default();
     const [pos, setPos] = useState({ x, y });
     useThrottle(() => onChange({ x: pos.x, y: pos.y }), 50, [pos.x, pos.y]);
     useEffect(() => {
+      const { x: ox, y: oy, dx, dy, elW, elH } = state;
       if (!state.isScratching) {
         return;
       }
-      let x2 = parseInt(Math.max(0, Math.min(state.x + state.dx - margin, width)));
-      let y2 = parseInt(Math.max(0, Math.min(state.y + state.dy - margin, height)));
+      let x2 = parseInt(Math.max(0, Math.min((width + margin * 2) * (ox + dx) / elW - margin, width)));
+      let y2 = parseInt(Math.max(0, Math.min((height + margin * 2) * (oy + dy) / elH - margin, height)));
       if (isNaN(x2) || isNaN(y2)) {
         return;
       }
@@ -1536,23 +1527,21 @@
       }
       setPos({ x: x2, y: y2 });
     }, [state.dx, state.dy]);
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className, ref, ...otherProps }, /* @__PURE__ */ wp.element.createElement(
       "svg",
       {
-        className,
+        className: "_body",
         width: width + margin * 2,
         height: height + margin * 2,
         viewBox: `0 0 ${width + margin * 2} ${height + margin * 2}`,
         xmlns: "http://www.w3.org/2000/svg",
-        ref,
-        style: { cursor: state.isScratching ? "grabbing" : "grab" },
-        ...otherProps
+        style: { cursor: state.isScratching ? "grabbing" : "grab" }
       },
       /* @__PURE__ */ wp.element.createElement("rect", { className: "_bg", x: margin, y: margin, width, height, fill: "none", stroke: "currentColor", strokeOpacity: 0.5 }),
       /* @__PURE__ */ wp.element.createElement("circle", { fill: "none", stroke: "currentColor", strokeOpacity: 0.75, className: "_circle", cx: pos.x + margin, cy: pos.y + margin, r: r2 }),
       /* @__PURE__ */ wp.element.createElement("circle", { fill: "currentColor", className: "_dot", cx: pos.x + margin, cy: pos.y + margin, r: 2 }),
       grid > 0 && /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, Array.from({ length: Math.floor(width / grid) }, (_, i2) => /* @__PURE__ */ wp.element.createElement("line", { key: i2, stroke: "currentColor", strokeOpacity: 0.1, className: "_grid", x1: i2 * grid + margin, y1: margin, x2: i2 * grid + margin, y2: height + margin })), Array.from({ length: Math.floor(height / grid) }, (_, i2) => /* @__PURE__ */ wp.element.createElement("line", { key: i2, stroke: "currentColor", strokeOpacity: 0.1, className: "_grid", x1: margin, y1: i2 * grid + margin, x2: width + margin, y2: i2 * grid + margin })), /* @__PURE__ */ wp.element.createElement("line", { stroke: "currentColor", strokeOpacity: 0.2, className: "_grid is-center", x1: width / 2 + margin, y1: margin, x2: width / 2 + margin, y2: height + margin }), /* @__PURE__ */ wp.element.createElement("line", { stroke: "currentColor", strokeOpacity: 0.2, className: "_grid is-center", x1: margin, y1: height / 2 + margin, x2: width + margin, y2: height / 2 + margin }))
-    ));
+    )));
   };
 
   // node_modules-included/catpow/src/component/Input/RadioButtons.jsx
@@ -1649,8 +1638,11 @@
       50,
       [value]
     );
-    return /* @__PURE__ */ wp.element.createElement(RangeInputContext.Provider, { value: { values } }, /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className, style: Object.keys(values).reduce((p, c) => ({ ...p, ["--pos-" + c]: cnv.getProgress(values[c]) }), {}) }, /* @__PURE__ */ wp.element.createElement("div", { className: "_bar" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body", ref }, Object.keys(values).map((name) => {
-      return /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default("_control", `is-control-${name}`), style: { "--pos": cnv.getProgress(values[name]) } }, /* @__PURE__ */ wp.element.createElement("div", { className: "_value" }, values[name]));
+    const positions = Object.keys(values).reduce((p, c) => ({ ...p, ["--pos-" + c]: cnv.getProgress(values[c]) }), {});
+    positions["--min-pos"] = Math.min(...Object.values(positions));
+    positions["--max-pos"] = Math.max(...Object.values(positions));
+    return /* @__PURE__ */ wp.element.createElement(RangeInputContext.Provider, { value: { values } }, /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className, style: positions }, /* @__PURE__ */ wp.element.createElement("div", { className: "_bar" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body", ref }, /* @__PURE__ */ wp.element.createElement("div", { className: "_range" }), Object.keys(values).map((name) => {
+      return /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default("_control", `is-control-${name}`), style: { "--pos": positions["--pos-" + name] }, key: name }, /* @__PURE__ */ wp.element.createElement("div", { className: "_value" }, values[name]));
     }))), showInputs && /* @__PURE__ */ wp.element.createElement("div", { className: "_inputs" }, Object.keys(values).map((name) => {
       return /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default("_item", `is-input-${name}`) }, /* @__PURE__ */ wp.element.createElement("input", { type: "number", value: values[name], className: "_input", onChange: (e) => onChageCallback(name, e.target.value) }));
     })))));
@@ -1907,67 +1899,132 @@
     ))), /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default("_arrow", index < state.activeItems.length - 1 ? "is-shown" : "is-hidden") })))))))));
   };
 
-  // node_modules-included/catpow/src/component/Input/TableInput.jsx
+  // node_modules-included/catpow/src/component/Input/TableInput.tsx
   init_react();
-  init_react();
+  var getUpperCell = (cell) => {
+    const index = Array.from(cell.parentElement.children).indexOf(cell);
+    const prevRow = cell.parentElement.previousElementSibling;
+    if (prevRow) {
+      return prevRow.children.item(index);
+    }
+    const parentCell = cell.parentElement.closest("td");
+    if (parentCell) {
+      const rows = getUpperCell(parentCell)?.querySelector("table")?.querySelector("table > tbody").children;
+      return rows[rows.length - 1].children[index];
+    }
+    return null;
+  };
+  var getLowerCell = (cell) => {
+    const index = Array.from(cell.parentElement.children).indexOf(cell);
+    const nextRow = cell.parentElement.nextElementSibling;
+    if (nextRow) {
+      return nextRow.children.item(index);
+    }
+    const parentCell = cell.parentElement.closest("td");
+    if (parentCell) {
+      const rows = getLowerCell(parentCell)?.querySelector("table")?.querySelector("table > tbody").children;
+      return rows[0].children[index];
+    }
+    return null;
+  };
   var TableInput = (props) => {
-    const { className = "cp-tableinput", labels, showControls = true, onAddItem, onCopyItem, onMoveItem, onRemoveItem, onChange, children } = props;
-    const Row = (props2) => {
-      const { className: className2, index, length, children: children2 } = props2;
-      const [editMode, setEditMode] = useState(false);
-      const onKeyDown = useCallback(
-        (e) => {
-          if (editMode) {
-            if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
-              e.preventDefault();
-              e.currentTarget.focus();
-              setEditMode(false);
-            }
-            return;
+    const { className = "cp-tableinput", labels, showControls = true, children, ...otherProps } = props;
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("table", null, labels && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, labels.map((label, index) => /* @__PURE__ */ wp.element.createElement("th", { key: index }, label)), showControls && /* @__PURE__ */ wp.element.createElement("td", null))), /* @__PURE__ */ wp.element.createElement("tbody", null, children.map && children.map((child, index) => /* @__PURE__ */ wp.element.createElement(Row, { className: "_tr", index, length: children.length, showControls, ...otherProps, key: index }, child))))));
+  };
+  var Row = (props) => {
+    const { className, index, length, showControls, onAddItem, onCopyItem, onMoveItem, onRemoveItem, children } = props;
+    const [editMode, setEditMode] = useState(false);
+    const [trEl, setTrEl] = useState(null);
+    const onKeyDownGen = useCallback(
+      (r2, c) => (e) => {
+        const cell = trEl.children.item(c);
+        if (editMode) {
+          e.stopPropagation();
+          if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+            e.preventDefault();
+            setEditMode(false);
+            window.queueMicrotask(() => {
+              document.activeElement.blur();
+              cell.focus({ focusVisible: true });
+            });
           }
-          switch (e.key) {
-            case "Enter": {
-              const inputEl = e.currentTarget.querySelector("input,textarea,[contenteditable]");
-              if (inputEl) {
-                inputEl.focus();
-                setEditMode(true);
-                e.preventDefault();
+          return;
+        }
+        switch (e.key) {
+          case "Enter": {
+            e.stopPropagation();
+            const inputEl = cell.querySelector("input,textarea,[contenteditable]");
+            if (inputEl) {
+              e.preventDefault();
+              inputEl.focus();
+              setEditMode(true);
+            }
+            break;
+          }
+          case "ArrowUp":
+          case "ArrowDown": {
+            e.stopPropagation();
+            e.preventDefault();
+            if (e.altKey) {
+              if (e.shiftKey) {
+                onMoveItem(r2, r2 + (e.key === "ArrowUp" ? -1 : 1));
+              } else {
+                onCopyItem(r2, r2 + (e.key === "ArrowUp" ? 0 : 1));
               }
               break;
             }
-            case "ArrowUp":
-            case "ArrowDown": {
-              e.preventDefault();
-              if (e.altKey) {
-                if (e.shiftKey) {
-                  onMoveItem(index, index + (e.key === "ArrowUp" ? -1 : 1));
-                } else {
-                  onCopyItem(index, index + (e.key === "ArrowUp" ? -1 : 1));
-                }
-                break;
-              }
-              const columnIndex = parseInt(e.currentTarget.dataset.index);
-              e.currentTarget.parentElement[e.key === "ArrowUp" ? "previousElementSibling" : "nextElementSibling"]?.children[columnIndex]?.focus();
-              break;
+            if (e.key == "ArrowUp") {
+              getUpperCell(cell)?.focus();
+            } else {
+              getLowerCell(cell)?.focus();
             }
-            case "ArrowLeft":
-            case "ArrowRight": {
-              e.preventDefault();
-              e.currentTarget[e.key === "ArrowLeft" ? "previousElementSibling" : "nextElementSibling"]?.focus();
-              break;
-            }
+            break;
           }
-        },
-        [editMode, setEditMode, index, onMoveItem, onCopyItem]
-      );
-      const onBlur = useCallback((e) => {
-        if (!e.currentTarget.parentElement.contains(e.relatedTarget)) {
+          case "ArrowLeft":
+          case "ArrowRight": {
+            e.stopPropagation();
+            e.preventDefault();
+            cell[e.key === "ArrowLeft" ? "previousElementSibling" : "nextElementSibling"]?.focus();
+            break;
+          }
+        }
+      },
+      [editMode, setEditMode, index, onMoveItem, onCopyItem, trEl]
+    );
+    const onBlurGen = useCallback(
+      (r2, c) => (e) => {
+        const cell = trEl.children.item(c);
+        if (!cell.contains(e.relatedTarget)) {
           setEditMode(false);
         }
-      }, []);
-      return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("tr", { className: className2, "data-index": index }, children2.map((child, columnIndex) => /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-input", onKeyDown, onBlur, "data-index": columnIndex, tabIndex: 0, key: columnIndex }, child)), showControls && /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-control", key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "_controls" }, index > 0 ? /* @__PURE__ */ wp.element.createElement("div", { className: "_button is-up", onClick: () => onMoveItem(index, index - 1) }) : /* @__PURE__ */ wp.element.createElement("div", { className: "_spacer" }), index < length - 1 ? /* @__PURE__ */ wp.element.createElement("div", { className: "_button is-down", onClick: () => onMoveItem(index, index + 1) }) : /* @__PURE__ */ wp.element.createElement("div", { className: "_spacer" }), length > 1 ? /* @__PURE__ */ wp.element.createElement("div", { className: "_buttonz is-remove", onClick: () => onRemoveItem(index) }) : /* @__PURE__ */ wp.element.createElement("div", { className: "_spacer" }), /* @__PURE__ */ wp.element.createElement("div", { className: "_button is-add", onClick: () => onAddItem(index + 1) })))));
-    };
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("table", null, labels && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, labels.map((label, index) => /* @__PURE__ */ wp.element.createElement("th", { key: index }, label)), showControls && /* @__PURE__ */ wp.element.createElement("td", null))), /* @__PURE__ */ wp.element.createElement("tbody", null, children.map && children.map((child, index) => /* @__PURE__ */ wp.element.createElement(Row, { className: "_tr", index, length: children.length, key: index }, child))))));
+      },
+      [trEl]
+    );
+    useEffect(() => {
+      if (!trEl) {
+        return;
+      }
+      const doc = trEl.ownerDocument;
+      const cb = () => {
+        const selection = doc.getSelection();
+        setEditMode(selection.containsNode(trEl, true));
+      };
+      doc.addEventListener("selectionchange", cb);
+      return () => doc.removeEventListener("selectionchange", cb);
+    }, [trEl]);
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("tr", { className, "data-index": index, ref: setTrEl }, children.map((child, columnIndex) => /* @__PURE__ */ wp.element.createElement(
+      "td",
+      {
+        className: clsx("_td is-input", child.props.columnClassName, { "is-edit-mode": editMode }),
+        onKeyDown: onKeyDownGen(index, columnIndex),
+        onBlur: onBlurGen(index, columnIndex),
+        "data-index": columnIndex,
+        tabIndex: 0,
+        role: "gridcell",
+        key: columnIndex
+      },
+      child
+    )), showControls && /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-control", key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "_controls" }, index > 0 ? /* @__PURE__ */ wp.element.createElement("div", { className: "_button is-up", onClick: () => onMoveItem(index, index - 1) }) : /* @__PURE__ */ wp.element.createElement("div", { className: "_spacer" }), index < length - 1 ? /* @__PURE__ */ wp.element.createElement("div", { className: "_button is-down", onClick: () => onMoveItem(index, index + 1) }) : /* @__PURE__ */ wp.element.createElement("div", { className: "_spacer" }), length > 1 ? /* @__PURE__ */ wp.element.createElement("div", { className: "_buttonz is-remove", onClick: () => onRemoveItem(index) }) : /* @__PURE__ */ wp.element.createElement("div", { className: "_spacer" }), /* @__PURE__ */ wp.element.createElement("div", { className: "_button is-add", onClick: () => onAddItem(index + 1) })))));
   };
 
   // node_modules-included/catpow/src/component/Input/Toggle.jsx
@@ -4391,7 +4448,7 @@
       rootAgent.on("update", cb);
       return () => rootAgent.off("update", cb);
     }, [rootAgent, setHasChange, save]);
-    return /* @__PURE__ */ wp.element.createElement(DataContext.Provider, { value: data }, /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body" }, showHeader && /* @__PURE__ */ wp.element.createElement("div", { className: "_header" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_title" }, title), /* @__PURE__ */ wp.element.createElement("div", { className: "_controls" }, /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default("_save", { "is-active": hasChange }), onClick: () => save() }, "Save"))), /* @__PURE__ */ wp.element.createElement("div", { className: "_contents" }, /* @__PURE__ */ wp.element.createElement(ObjectInput, { agent: rootAgent }))))));
+    return /* @__PURE__ */ wp.element.createElement(DataContext.Provider, { value: data }, /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body" }, showHeader && /* @__PURE__ */ wp.element.createElement("div", { className: "_header" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_title" }, title), /* @__PURE__ */ wp.element.createElement("div", { className: "_controls" }, /* @__PURE__ */ wp.element.createElement("div", { className: clsx("_save", { "is-active": hasChange }), onClick: () => save() }, "Save"))), /* @__PURE__ */ wp.element.createElement("div", { className: "_contents" }, /* @__PURE__ */ wp.element.createElement(ObjectInput, { agent: rootAgent }))))));
   };
   JsonEditor.Input = Input;
   JsonEditor.DataContext = DataContext;
