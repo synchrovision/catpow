@@ -1,0 +1,135 @@
+.wp-block-catpow-dialog__item-header-text-heading, .wp-block-catpow-dialog__item-contents-text {
+  font-family: var(--cp-font-family-t-p, inherit);
+  font-size: var(--cp-font-size-t-p, 2em);
+  font-weight: var(--cp-font-weight-t-p, regular);
+  line-height: var(--cp-line-height-t-p, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-p, normal);
+}
+.wp-block-catpow-dialog {
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+  grid-template-columns: 1fr;
+  grid-gap: var(--cp-margin-c-c);
+  list-style: none;
+}
+.wp-block-catpow-dialog__item {
+  position: relative;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-filter: drop-shadow(oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1)) var(--cp-shadow-c-c-ns));
+  filter: drop-shadow(oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1)) var(--cp-shadow-c-c-ns));
+}
+.wp-block-catpow-dialog__item-header {
+  position: relative;
+  padding: 10px;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 100px;
+}
+.wp-block-catpow-dialog__item-header-image {
+  padding: 10px;
+  box-sizing: border-box;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 100px;
+}
+.wp-block-catpow-dialog__item-header-image-img {
+  width: 80px;
+  height: auto;
+  aspect-ratio: 1;
+  padding: 0px;
+  margin: 0px;
+  object-position: center;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.wp-block-catpow-dialog__item-header-text-heading {
+  display: inline-block;
+  width: 100px;
+  text-align: center;
+  color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
+}
+.wp-block-catpow-dialog__item-contents {
+  position: relative;
+  padding: var(--cp-padding-c-c);
+  box-sizing: border-box;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 150px;
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1frt;
+  grid-template-columns: 1frt;
+}
+.wp-block-catpow-dialog__item-contents-text {
+  position: relative;
+  margin: 0px;
+  padding: 0px 1em;
+  z-index: 2;
+  text-align: justify;
+  color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
+}
+.wp-block-catpow-dialog__item-contents::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  inset: 0px;
+  background-color: oklch(calc(1 - var(--cp-tones-mx-t) * 30) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
+}
+.wp-block-catpow-dialog__item:not(.has-item-align-right).is-type-talk .wp-block-catpow-dialog__item-contents::after {
+  clip-path: shape(nonzero from calc(1em + var(--cp-border-radius-c-c)) 0, hline to calc(100% - var(--cp-border-radius-c-c) - 1em), arc to calc(100% - var(--cp-border-radius-c-c)) var(--cp-border-radius-c-c) of var(--cp-border-radius-c-c) cw, vline to calc(100% - var(--cp-border-radius-c-c)), arc to calc(100% - var(--cp-border-radius-c-c) - 1em) 100% of var(--cp-border-radius-c-c) cw, hline to calc(1em + var(--cp-border-radius-c-c)), arc to 1em calc(100% - var(--cp-border-radius-c-c)) of var(--cp-border-radius-c-c) cw, vline to calc(var(--cp-border-radius-c-c) + 1em * 3), line to 0 calc(var(--cp-border-radius-c-c) + 1em * 2), line to 1em calc(var(--cp-border-radius-c-c) + 1em), vline to var(--cp-border-radius-c-c), arc to calc(var(--cp-border-radius-c-c) + 1em) 0 of var(--cp-border-radius-c-c) cw, close);
+}
+.wp-block-catpow-dialog__item:not(.has-item-align-right).is-type-think .wp-block-catpow-dialog__item-contents::after {
+  clip-path: shape(nonzero from calc(1em + var(--cp-border-radius-c-c)) 0, hline to calc(100% - var(--cp-border-radius-c-c) - 1em), arc to calc(100% - var(--cp-border-radius-c-c)) var(--cp-border-radius-c-c) of var(--cp-border-radius-c-c) cw, vline to calc(100% - var(--cp-border-radius-c-c)), arc to calc(100% - var(--cp-border-radius-c-c) - 1em) 100% of var(--cp-border-radius-c-c) cw, hline to calc(1em + var(--cp-border-radius-c-c)), arc to 1em calc(100% - var(--cp-border-radius-c-c)) of var(--cp-border-radius-c-c) cw, vline to calc(var(--cp-border-radius-c-c) + 1em * 3), arc to 1em calc(var(--cp-border-radius-c-c) + 1em) of 1.5em cw, vline to var(--cp-border-radius-c-c), arc to calc(var(--cp-border-radius-c-c) + 1em) 0 of var(--cp-border-radius-c-c) cw, close, move to 0 calc(var(--cp-border-radius-c-c) + 2em), arc to 0.6666666667em calc(var(--cp-border-radius-c-c) + 2em) of 0.3333333333em cw, arc to 0 calc(var(--cp-border-radius-c-c) + 2em) of 0.3333333333em cw, close);
+}
+.wp-block-catpow-dialog__item:not(.has-item-align-right).is-type-shout .wp-block-catpow-dialog__item-contents-text {
+  padding: 1em;
+}
+.wp-block-catpow-dialog__item:not(.has-item-align-right).is-type-shout .wp-block-catpow-dialog__item-contents::after {
+  clip-path: shape(nonzero from 0 0, line to 2em 1em, hline to calc(100% - 2em), line to 100% 0, line to calc(100% - 1em) 2em, vline to calc(100% - 2em), line to 100% 100%, line to calc(100% - 2em) calc(100% - 1em), hline to 2em, line to 0 100%, line to 1em calc(100% - 2em), vline to 4em, line by -1em -0.5em, line by 1em -0.5em, vline to 2em, close);
+}
+.wp-block-catpow-dialog__item.has-item-align-right {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-direction: reverse;
+  -webkit-box-orient: horizontal;
+  -webkit-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+.wp-block-catpow-dialog__item.has-item-align-right.is-type-talk .wp-block-catpow-dialog__item-contents::after {
+  clip-path: shape(nonzero from calc(1em + var(--cp-border-radius-c-c)) 0, hline to calc(100% - var(--cp-border-radius-c-c) - 1em), arc to calc(100% - var(--cp-border-radius-c-c)) var(--cp-border-radius-c-c) of var(--cp-border-radius-c-c) cw, vline to calc(var(--cp-border-radius-c-c) + 1em), line to 100% calc(var(--cp-border-radius-c-c) + 1em * 2), line to calc(100% - 1em) calc(var(--cp-border-radius-c-c) + 1em * 3), vline to calc(100% - var(--cp-border-radius-c-c)), arc to calc(100% - var(--cp-border-radius-c-c) - 1em) 100% of var(--cp-border-radius-c-c) cw, hline to calc(1em + var(--cp-border-radius-c-c)), arc to 1em calc(100% - var(--cp-border-radius-c-c)) of var(--cp-border-radius-c-c) cw, vline to var(--cp-border-radius-c-c), arc to calc(var(--cp-border-radius-c-c) + 1em) 0 of var(--cp-border-radius-c-c) cw, close);
+}
+.wp-block-catpow-dialog__item.has-item-align-right.is-type-think .wp-block-catpow-dialog__item-contents::after {
+  clip-path: shape(nonzero from calc(1em + var(--cp-border-radius-c-c)) 0, hline to calc(100% - var(--cp-border-radius-c-c) - 1em), arc to calc(100% - var(--cp-border-radius-c-c)) var(--cp-border-radius-c-c) of var(--cp-border-radius-c-c) cw, vline to calc(var(--cp-border-radius-c-c) + 1em), arc to calc(100% - 1em) calc(var(--cp-border-radius-c-c) + 1em * 3) of 1.5em cw, vline to calc(100% - var(--cp-border-radius-c-c)), arc to calc(100% - var(--cp-border-radius-c-c) - 1em) 100% of var(--cp-border-radius-c-c) cw, hline to calc(1em + var(--cp-border-radius-c-c)), arc to 1em calc(100% - var(--cp-border-radius-c-c)) of var(--cp-border-radius-c-c) cw, vline to var(--cp-border-radius-c-c), arc to calc(var(--cp-border-radius-c-c) + 1em) 0 of var(--cp-border-radius-c-c) cw, close, move to 100% calc(var(--cp-border-radius-c-c) + 2em), arc to calc(100% - 0.6666666667em) calc(var(--cp-border-radius-c-c) + 2em) of 0.3333333333em cw, arc to 100% calc(var(--cp-border-radius-c-c) + 2em) of 0.3333333333em cw, close);
+}
+.wp-block-catpow-dialog__item.has-item-align-right.is-type-shout .wp-block-catpow-dialog__item-contents-text {
+  padding: 1em;
+}
+.wp-block-catpow-dialog__item.has-item-align-right.is-type-shout .wp-block-catpow-dialog__item-contents::after {
+  clip-path: shape(nonzero from 0 0, line to 2em 1em, hline to calc(100% - 2em), line to 100% 0, line to calc(100% - 1em) 2em, vline by 1em, line by 1em 0.5em, line by -1em 0.5em, vline to calc(100% - 2em), line to 100% 100%, line to calc(100% - 2em) calc(100% - 1em), hline to 2em, line to 0 100%, line to 1em calc(100% - 2em), vline to 2em, close);
+}
+@media (min-width:960px) {
+  .wp-block-catpow-dialog__item:not(.has-item-align-right) .wp-block-catpow-dialog__item-contents {
+    margin-right: 130px;
+  }
+  .wp-block-catpow-dialog__item.has-item-align-right .wp-block-catpow-dialog__item-contents {
+    margin-left: 130px;
+  }
+}
+/*# sourceMappingURL=./style.css.map */

@@ -1,4 +1,6 @@
-﻿wp.blocks.registerBlockType("catpow/dialog", {
+﻿const { __ } = wp.i18n;
+
+wp.blocks.registerBlockType("catpow/dialog", {
 	title: "🐾 Dialog",
 	description: "フキダシで会話を表現するブロックです。",
 	icon: "format-chat",
@@ -17,81 +19,24 @@
 	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
-		const { useState, useMemo } = wp.element;
-		const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
-		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { items = [], classes = "", countPrefix, countSuffix, subCountPrefix, subCountSuffix, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
-		const primaryClass = "wp-block-catpow-dialog";
-		var classArray = _.uniq((className + " " + classes).split(" "));
-		var classNameArray = className.split(" ");
+		const { useState, useMemo, useEffect } = wp.element;
+		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
+		const { PanelBody, TextareaControl } = wp.components;
+		const { items = [], classes = "", loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = [
-				{
-					name: "template",
-					label: "テンプレート",
-					values: "isTemplate",
-					sub: [
-						{
-							name: "loop",
-							input: "bool",
-							label: "ループ",
-							key: "doLoop",
-							sub: [
-								{
-									name: "contentPath",
-									label: "content path",
-									input: "text",
-									key: "content_path",
-								},
-								{
-									name: "query",
-									label: "query",
-									input: "textarea",
-									key: "query",
-								},
-								{
-									name: "loopCount",
-									label: "プレビューループ数",
-									input: "range",
-									key: "loopCount",
-									min: 1,
-									max: 16,
-								},
-							],
-						},
-					],
-				},
-			];
+			const selectiveClasses = ["level", "hasContentWidth", "isTemplate"];
 			wp.hooks.applyFilters("catpow.blocks.dialog.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
 
 		const selectiveItemClasses = useMemo(() => {
-			const selectiveItemClasses = [
-				"color",
-				{
-					name: "position",
-					type: "buttons",
-					label: "position",
-					values: ["left", "right"],
-				},
-				{
-					name: "type",
-					type: "gridbuttons",
-					label: "type",
-					filter: "type",
-					values: ["say", "shout", "think", "whisper"],
-				},
-			];
+			const selectiveItemClasses = [{ name: "type", label: "タイプ", type: "buttons", values: { isTypeTalk: "talk", isTypeShout: "shout", isTypeThink: "think" } }, "itemAlign", "color"];
 			wp.hooks.applyFilters("catpow.blocks.dialog.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		}, []);
 
-		let itemsCopy = items.map((obj) => jQuery.extend(true, {}, obj));
-
-		let rtn = [];
 		const imageKeys = {
 			headerImage: {
 				src: "headerImageSrc",
@@ -101,67 +46,23 @@
 			},
 		};
 
-		itemsCopy.map((item, index) => {
-			if (!item.controlClasses) {
-				item.controlClasses = "control";
-			}
-			rtn.push(
-				<CP.Item tag="li" set={setAttributes} attr={attributes} items={itemsCopy} index={index} isSelected={isSelected} key={index}>
-					<header>
-						<div className="image">
-							<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.headerImage} index={index} size="thumbnail" isTemplate={states.isTemplate} />
-						</div>
-						<div className="text">
-							<h3>
-								<RichText
-									onChange={(text) => {
-										itemsCopy[index].title = text;
-										setAttributes({ items: itemsCopy });
-									}}
-									value={item.title}
-								/>
-							</h3>
-						</div>
-					</header>
-					<div className="contents">
-						<p>
-							<RichText
-								onChange={(text) => {
-									itemsCopy[index].text = text;
-									setAttributes({ items: itemsCopy });
-								}}
-								value={item.text}
-							/>
-						</p>
-					</div>
-				</CP.Item>
-			);
-		});
-
-		if (rtn.length < loopCount) {
-			let len = rtn.length;
-			while (rtn.length < loopCount) {
-				rtn.push(rtn[rtn.length % len]);
-			}
-		}
+		const blockProps = useBlockProps({ className: EditMode || (AltMode && doLoop) ? "cp-altcontent" : classes });
 
 		return (
 			<>
 				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
 				<InspectorControls>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(clss) => setAttributes({ classes: clss })} value={classArray.join(" ")} />
+						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="リストアイテム" icon="edit" set={setAttributes} attr={attributes} items={itemsCopy} index={attributes.currentItemIndex} selectiveClasses={selectiveItemClasses} />
+					<CP.SelectClassPanel title="リストアイテム" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} selectiveClasses={selectiveItemClasses} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<>
 					{EditMode ? (
-						<div className="cp-altcontent">
-							<div className="label">
-								<Icon icon="edit" />
-							</div>
+						<div {...blockProps}>
+							<CP.Label icon="edit" />
 							<CP.EditItemsTable
 								set={setAttributes}
 								attr={attributes}
@@ -186,14 +87,61 @@
 					) : (
 						<>
 							{AltMode && doLoop ? (
-								<div className="cp-altcontent">
-									<div className="label">
-										<Icon icon="welcome-comments" />
-									</div>
+								<div {...blockProps}>
+									<CP.Label icon="welcome-comments" />
 									<InnerBlocks />
 								</div>
 							) : (
-								<ul className={classes}>{rtn}</ul>
+								<CP.Bem prefix="wp-block-catpow">
+									<ul {...blockProps}>
+										{[...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
+											const index = i % items.length;
+											const item = items[index];
+											if (!item.controlClasses) {
+												item.controlClasses = "control";
+											}
+											return (
+												<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+													<header className="_header">
+														<div className="_image">
+															<CP.SelectResponsiveImage
+																className="_img"
+																attr={attributes}
+																set={setAttributes}
+																keys={imageKeys.headerImage}
+																index={index}
+																size="thumbnail"
+																isTemplate={states.isTemplate}
+															/>
+														</div>
+														<div className="_text">
+															<RichText
+																tagName="h3"
+																className="_heading"
+																onChange={(text) => {
+																	items[index].title = text;
+																	setAttributes({ items: [...items] });
+																}}
+																value={item.title}
+															/>
+														</div>
+													</header>
+													<div className="_contents">
+														<RichText
+															tagName="p"
+															className="_text"
+															onChange={(text) => {
+																items[index].text = text;
+																setAttributes({ items: [...items] });
+															}}
+															value={item.text}
+														/>
+													</div>
+												</CP.Item>
+											);
+										})}
+									</ul>
+								</CP.Bem>
 							)}
 						</>
 					)}
@@ -201,10 +149,9 @@
 			</>
 		);
 	},
-	save({ attributes, className }) {
-		const { InnerBlocks, RichText } = wp.blockEditor;
-		const { items = [], classes = "", countPrefix, countSuffix, subCountPrefix, subCountSuffix, linkUrl, linkText, loopParam, doLoop } = attributes;
-		var classArray = _.uniq(classes.split(" "));
+	save({ attributes }) {
+		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
+		const { items = [], classes = "", doLoop } = attributes;
 
 		var states = CP.classNamesToFlags(classes);
 		const imageKeys = {
@@ -217,30 +164,29 @@
 		};
 
 		let rtn = [];
-		items.map((item, index) => {
-			rtn.push(
-				<li className={item.classes} key={index}>
-					<header>
-						<div className="image">
-							<CP.ResponsiveImage attr={attributes} keys={imageKeys.headerImage} index={index} isTemplate={states.isTemplate} />
-						</div>
-						<div className="text">
-							<h3>
-								<RichText.Content value={item.title} />
-							</h3>
-						</div>
-					</header>
-					<div className="contents">
-						<p>
-							<RichText.Content value={item.text} />
-						</p>
-					</div>
-				</li>
-			);
-		});
 		return (
 			<>
-				<ul className={classes}>{rtn}</ul>
+				<CP.Bem prefix="wp-block-catpow">
+					<ul {...useBlockProps.save({ className: classes })}>
+						{items.map((item, index) => {
+							return (
+								<li className={item.classes} key={index}>
+									<header className="_header">
+										<div className="_image">
+											<CP.ResponsiveImage className="_img" attr={attributes} keys={imageKeys.headerImage} index={index} isTemplate={states.isTemplate} />
+										</div>
+										<div className="_text">
+											<RichText.Content tagName="h3" className="_heading" value={item.title} />
+										</div>
+									</header>
+									<div className="_contents">
+										<RichText.Content tagName="p" className="_text" value={item.text} />
+									</div>
+								</li>
+							);
+						})}
+					</ul>
+				</CP.Bem>
 				{doLoop && (
 					<on-empty>
 						<InnerBlocks.Content />
@@ -249,51 +195,4 @@
 			</>
 		);
 	},
-	deprecated: [
-		{
-			save({ attributes, className }) {
-				const { items = [], classes = "", countPrefix, countSuffix, subCountPrefix, subCountSuffix, linkUrl, linkText, loopParam } = attributes;
-				var classArray = _.uniq(classes.split(" "));
-
-				var states = CP.classNamesToFlags(classes);
-
-				let rtn = [];
-				items.map((item, index) => {
-					rtn.push(
-						<li className={item.classes}>
-							<header>
-								<div className="image">
-									<img src={item.headerImageSrc} alt={item.headerImageAlt} />
-								</div>
-								<div className="text">
-									<h3>
-										<RichText.Content value={item.title} />
-									</h3>
-								</div>
-							</header>
-							<div className="contents">
-								<p>
-									<RichText.Content value={item.text} />
-								</p>
-							</div>
-						</li>
-					);
-				});
-				return (
-					<ul className={classes}>
-						{states.doLoop && "[loop_template " + loopParam + "]"}
-						{rtn}
-						{states.doLoop && "[/loop_template]"}
-					</ul>
-				);
-			},
-			migrate(attributes) {
-				var states = CP.classNamesToFlags(classes);
-				attributes.content_path = attributes.loopParam.split(" ")[0];
-				attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
-				attributes.doLoop = states.doLoop;
-				return attributes;
-			},
-		},
-	],
 });

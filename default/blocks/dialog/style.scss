@@ -1,0 +1,225 @@
+@import "config/style_config.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
+
+.wp-block-catpow-dialog{
+	$block:&;
+	$r:var(--cp-border-radius-c-c);
+	$l:1em;
+	@include grd((tc:1fr,g:c-c));
+	@include txt((l:n));
+	&__item{
+		$item:&;
+		@include bnd((p:r,bs:b));
+		@include flx((w:w));
+		@include trn((shd:clr(shd) shd(c-c-ns)));
+		&-header{
+			@include bnd((p:r,pd:10,f:0 0 100));
+			&-image{
+				@include bnd((pd:10,bs:b,f:0 0 100));
+				&-img{
+					@include bnd((w:80,h:a,a:1,pd:0,mg:0,op:c,of:c));
+					@include bdr((r:50%));
+				}
+			}
+			&-text{
+				&-heading{
+					@extend %paragraph;
+					@include bnd((d:ib,w:100));
+					@include txt((a:c,c:tx));
+				}
+			}
+		}
+		&-contents{
+			@include bnd((p:r,pd:c-c,bs:b,f:1 1 150));
+			@include grd((tc:1frt));
+			&-text{
+				@extend %paragraph;
+				@include bnd((p:r,mg:0,pd:0 #{$l},z:2));
+				@include txt((a:j,c:tx));
+			}
+			&::after{
+				content:'';
+				@include bnd((d:b,p:a,i:0));
+				@include bg((c:mx 30));
+			}
+		}
+		&:not(.has-item-align-right){
+			&.is-type-talk{
+				#{$item}{
+					&-contents{
+						&::after{
+							clip-path:shape(
+								nonzero from calc(#{$l} + #{$r}) 0,
+								hline to calc(100% - #{$r} - #{$l}),
+								arc to calc(100% - #{$r}) #{$r} of #{$r} cw,
+								vline to calc(100% - #{$r}),
+								arc to calc(100% - #{$r} - #{$l}) 100% of #{$r} cw,
+								hline to calc(#{$l} + #{$r}),
+								arc to #{$l} calc(100% - #{$r}) of #{$r} cw,
+								vline to calc(#{$r} + #{$l} * 3),
+								line to 0 calc(#{$r} + #{$l} * 2),
+								line to #{$l} calc(#{$r} + #{$l}),
+								vline to #{$r},
+								arc to calc(#{$r} + #{$l}) 0 of #{$r} cw,
+								close
+							);
+						}
+					}
+				}
+			}
+			&.is-type-think{
+				#{$item}{
+					&-contents{
+						&::after{
+							clip-path:shape(
+								nonzero from calc(#{$l} + #{$r}) 0,
+								hline to calc(100% - #{$r} - #{$l}),
+								arc to calc(100% - #{$r}) #{$r} of #{$r} cw,
+								vline to calc(100% - #{$r}),
+								arc to calc(100% - #{$r} - #{$l}) 100% of #{$r} cw,
+								hline to calc(#{$l} + #{$r}),
+								arc to #{$l} calc(100% - #{$r}) of #{$r} cw,
+								vline to calc(#{$r} + #{$l} * 3),
+								arc to #{$l} calc(#{$r} + #{$l}) of #{$l * 1.5} cw,
+								vline to #{$r},
+								arc to calc(#{$r} + #{$l}) 0 of #{$r} cw,
+								close,
+								move to 0 calc(#{$r} + #{$l * 2}),
+								arc to #{$l * 2 / 3} calc(#{$r} + #{$l * 2}) of #{$l / 3} cw,
+								arc to 0 calc(#{$r} + #{$l * 2}) of  #{$l / 3} cw,
+								close
+							);
+						}
+					}
+				}
+			}
+			&.is-type-shout{
+				#{$item}{
+					&-contents{
+						&-text{
+							@include bnd((pd:#{$l}));
+						}
+						&::after{
+							clip-path:shape(
+								nonzero from 0 0,
+								line to #{$l * 2} #{$l},
+								hline to calc(100% - #{$l * 2}),
+								line to 100% 0,
+								line to calc(100% - #{$l}) #{$l * 2},
+								vline to calc(100% - #{$l * 2}),
+								line to 100% 100%,
+								line to calc(100% - #{$l * 2}) calc(100% - #{$l}),
+								hline to #{$l * 2},
+								line to 0 100%,
+								line to #{$l} calc(100% - #{$l * 2}),
+								vline to #{$l * 4},
+								line by -#{$l} -#{$l / 2}, 
+								line by #{$l} -#{$l / 2},
+								vline to #{$l * 2},
+								close
+							);
+						}
+					}
+				}
+			}
+		}
+		&.has-item-align-right{
+			@include flx((d:rr));
+			&.is-type-talk{
+				#{$item}{
+					&-contents{
+						&::after{
+							clip-path:shape(
+								nonzero from calc(#{$l} + #{$r}) 0,
+								hline to calc(100% - #{$r} - #{$l}),
+								arc to calc(100% - #{$r}) #{$r} of #{$r} cw,
+								vline to calc(#{$r} + #{$l}),
+								line to 100% calc(#{$r} + #{$l} * 2),
+								line to calc(100% - #{$l}) calc(#{$r} + #{$l} * 3),
+								vline to calc(100% - #{$r}),
+								arc to calc(100% - #{$r} - #{$l}) 100% of #{$r} cw,
+								hline to calc(#{$l} + #{$r}),
+								arc to #{$l} calc(100% - #{$r}) of #{$r} cw,
+								vline to #{$r},
+								arc to calc(#{$r} + #{$l}) 0 of #{$r} cw,
+								close
+							);
+						}
+					}
+				}
+			}
+			&.is-type-think{
+				#{$item}{
+					&-contents{
+						&::after{
+							clip-path:shape(
+								nonzero from calc(#{$l} + #{$r}) 0,
+								hline to calc(100% - #{$r} - #{$l}),
+								arc to calc(100% - #{$r}) #{$r} of #{$r} cw,
+								vline to calc(#{$r} + #{$l}),
+								arc to calc(100% - #{$l}) calc(#{$r} + #{$l} * 3) of #{$l * 1.5} cw,
+								vline to calc(100% - #{$r}),
+								arc to calc(100% - #{$r} - #{$l}) 100% of #{$r} cw,
+								hline to calc(#{$l} + #{$r}),
+								arc to #{$l} calc(100% - #{$r}) of #{$r} cw,
+								vline to #{$r},
+								arc to calc(#{$r} + #{$l}) 0 of #{$r} cw,
+								close,
+								move to 100% calc(#{$r} + #{$l * 2}),
+								arc to calc(100% - #{$l * 2 / 3}) calc(#{$r} + #{$l * 2}) of #{$l / 3} cw,
+								arc to 100% calc(#{$r} + #{$l * 2}) of  #{$l / 3} cw,
+								close
+							);
+						}
+					}
+				}
+			}
+			&.is-type-shout{
+				#{$item}{
+					&-contents{
+						&-text{
+							@include bnd((pd:#{$l}));
+						}
+						&::after{
+							clip-path:shape(
+								nonzero from 0 0,
+								line to #{$l * 2} #{$l},
+								hline to calc(100% - #{$l * 2}),
+								line to 100% 0,
+								line to calc(100% - #{$l}) #{$l * 2},
+								vline by #{$l},
+								line by #{$l} #{$l / 2}, 
+								line by -#{$l} #{$l / 2},
+								vline to calc(100% - #{$l * 2}),
+								line to 100% 100%,
+								line to calc(100% - #{$l * 2}) calc(100% - #{$l}),
+								hline to #{$l * 2},
+								line to 0 100%,
+								line to #{$l} calc(100% - #{$l * 2}),
+								vline to #{$l * 2},
+								close
+							);
+						}
+					}
+				}
+			}
+		}
+		@include bp(pc){
+			&:not(.has-item-align-right){
+				#{$item}{
+					&-contents{
+						@include bnd((mgr:130));
+					}
+				}
+			}
+			&.has-item-align-right{
+				#{$item}{
+					&-contents{
+						@include bnd((mgl:130));
+					}
+				}
+			}
+		}
+	}
+}
