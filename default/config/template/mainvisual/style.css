@@ -8,29 +8,39 @@
   justify-content: center;
   -webkit-align-items: center;
   align-items: center;
+  clip-path: inset(0px);
 }
-.cp-mainvisual > .contents {
+.cp-mainvisual__contents {
   position: relative;
   z-index: 2;
   padding-bottom: 100px;
 }
-.cp-mainvisual > .contents > .logo > .CP-ResponsiveImage, .cp-mainvisual > .contents > .logo > .CP-ResponsiveImage img {
+.cp-mainvisual__contents__logo > .cp-responsiveimage, .cp-mainvisual__contents__logo > .cp-responsiveimage img {
   display: block;
   min-width: 100px;
   max-width: 600px;
   width: 80vw;
   height: auto;
 }
-.cp-mainvisual > .bg {
+.cp-mainvisual__bg {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  inset: 0px;
   width: 100vw;
   height: 100vh;
-  left: 0px;
-  right: 0px;
-  top: 0px;
   z-index: 1;
 }
-.cp-mainvisual > .bg > .CP-ResponsiveImage {
+.cp-mainvisual__bg .cp-responsiveimage {
+  display: block;
   position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  inset: 0px;
   width: 100%;
   height: 100%;
   object-position: center;

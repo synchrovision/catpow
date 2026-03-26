@@ -3,20 +3,21 @@
 .cp-mainvisual{
 	@include bnd((p:r,h:100vh));
 	@include flx((j:c,a:c));
-	>.contents{
+	@include clp((i:0));
+	&__contents{
 		@include bnd((p:r,z:2,pdb:100));
-		>.logo{
-			>.CP-ResponsiveImage{
+		&__logo{
+			>.cp-responsiveimage{
 				&,img{
 					@include bnd((d:b,w:100 80vw 600,h:a));
 				}
 			}
 		}
 	}
-	>.bg{
-		@include bnd((w:100vw,h:100vh,l:0,r:0,t:0,z:1));
-		>.CP-ResponsiveImage{
-			@include bnd((p:a,w:f,h:f,op:c,of:c));
+	&__bg{
+		@include bnd((p:f,i:0,w:100vw,h:100vh,z:1));
+		.cp-responsiveimage{
+			@include bnd((d:b,p:a,i:0,w:f,h:f,op:c,of:c));
 		}
 	}
 }
