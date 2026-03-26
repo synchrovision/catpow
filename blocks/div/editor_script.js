@@ -38,17 +38,9 @@
             type: "buttons",
             values: { isTypeBlock: "block", isTypeFrame: "frame", isTypeColumns: "columns" },
             sub: {
-              isTypeBlock: ["contentWidth", { preset: "clipPath", vars: "clipVars" }],
-              isTypeFrame: [
-                "contentWidth",
-                { label: "\u30A2\u30A4\u30B3\u30F3", values: "hasIcon", sub: [{ input: "icon", label: "\u30A2\u30A4\u30B3\u30F3", color }] },
-                "hasBorder",
-                "hasBorderRadius",
-                "hasBoxShadow",
-                "hasTextShadow"
-              ],
+              isTypeBlock: [{ preset: "clipPath", vars: "clipVars" }],
+              isTypeFrame: [{ label: "\u30A2\u30A4\u30B3\u30F3", values: "hasIcon", sub: [{ input: "icon", label: "\u30A2\u30A4\u30B3\u30F3", color }] }, "hasBorder"],
               isTypeColumns: [
-                "contentWidth",
                 { preset: "clipPath", vars: "clipVars" },
                 { type: "buttons", label: "\u5E45", values: { hasColumnNarrow: "\u72ED\u3044", hasColumnRegular: "\u666E\u901A", hasColumnWide: "\u5E83\u3044" } }
               ]
@@ -57,6 +49,7 @@
               isTypeFrame: ["hasContentWidth"]
             }
           },
+          "contentWidth",
           "color",
           "colorScheme",
           "backgroundColor",
