@@ -8,7 +8,7 @@ wp.blocks.registerBlockType("catpow/embed", {
 	category: "catpow-embed",
 	example: CP.example,
 	edit({ attributes, setAttributes, className }) {
-		const { InspectorControls } = wp.blockEditor;
+		const { InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TreeSelect } = wp.components;
 		const { serverSideRender: ServerSideRender } = wp;
 		const { content_path, props, options = false } = attributes;
@@ -42,9 +42,9 @@ wp.blocks.registerBlockType("catpow/embed", {
 
 		return (
 			<>
-				<div className="cp-embeddedcontent">
-					<div className="label">{content_path}</div>
-					<ServerSideRender block="catpow/embed" attributes={attributes} />
+				<div {...useBlockProps({ className: "cp-embeddedcontent" })}>
+					<CP.Label icon="admin-generic">{content_path}</CP.Label>
+					<CP.ServerSideRender block="catpow/embed" attributes={attributes} />
 				</div>
 				<InspectorControls>
 					<PanelBody title="Path">
