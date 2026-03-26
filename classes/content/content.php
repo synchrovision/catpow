@@ -97,6 +97,7 @@ class content extends \stdClass{
 		elseif(!is_null($this->conf) && !empty($this->conf['meta'][$name])){$prm['conf']=$this->conf['meta'][$name];}
 		return new meta($prm);
 	}
+	public function loop(){if(false){yield;}}
 	public function loop_meta($query,$params=null){
 		foreach($this->conf['meta']??[] as $name=>$meta_conf){
 			$meta_class="Catpow\\meta\\".($meta_conf['type']??'text');
