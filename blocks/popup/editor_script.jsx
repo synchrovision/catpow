@@ -27,24 +27,19 @@ wp.blocks.registerBlockType("catpow/popup", {
 
 		return (
 			<>
-				<div className={"cp-collapsiblecontent " + (open ? "is-open" : "is-close")} onClick={selectThisBlock}>
-					<div className="cp-collapsiblecontent__label" onClick={() => setOpen(!open)}>
-						🐾 Popup #{attributes.anchor}
-					</div>
-					<div className="cp-collapsiblecontent__body">
-						<CP.Bem prefix="wp-block-catpow">
-							<div {...useBlockProps({ className: flagsToClassNames({ ...states, isHidden: false, isClose: false, isOpen: true }), style: vars })}>
-								<div className="_body">
-									<div className="_contents">
-										<InnerBlocks />
-									</div>
-									<div className="_close" onClick={() => setOpen(false)}></div>
+				<CP.Collapsible title={`🐾 Popup #${attributes.anchor}`} onClick={selectThisBlock}>
+					<CP.Bem prefix="wp-block-catpow">
+						<div {...useBlockProps({ className: flagsToClassNames({ ...states, isHidden: false, isClose: false, isOpen: true }), style: vars })}>
+							<div className="_body">
+								<div className="_contents">
+									<InnerBlocks />
 								</div>
-								<div className="_bg"></div>
+								<div className="_close" onClick={() => setOpen(false)}></div>
 							</div>
-						</CP.Bem>
-					</div>
-				</div>
+							<div className="_bg"></div>
+						</div>
+					</CP.Bem>
+				</CP.Collapsible>
 				<InspectorControls>
 					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
