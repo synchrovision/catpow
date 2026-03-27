@@ -1,4 +1,5 @@
 ﻿export * from "./AlignmentIcon.jsx";
+export * from "./Collapsible.jsx";
 export * from "./ConfigIcon.jsx";
 export * from "./BoundingBox.jsx";
 export * from "./Bem.jsx";

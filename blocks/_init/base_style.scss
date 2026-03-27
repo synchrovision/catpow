@@ -56,7 +56,7 @@ $colors:(
 			@include shd((b:2));
 		}
 	}
-	&-collapsiblecontent{
+	&-collapsible{
 		$block:&;
 		@include bnd((p:r));
 		@include grd((tr:80 a));

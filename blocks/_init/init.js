@@ -806,6 +806,7 @@
     AlignmentIcon: () => AlignmentIcon,
     Bem: () => Bem,
     BoundingBox: () => BoundingBox,
+    Collapsible: () => Collapsible,
     ColorVarTracer: () => ColorVarTracer,
     ConfigIcon: () => ConfigIcon,
     CustomColorVars: () => CustomColorVars,
@@ -1005,6 +1006,32 @@
       case "evenSpaceH":
         return /* @__PURE__ */ wp.element.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "4", width: "6", height: "13" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "11", y: "4", width: "7", height: "14" }), /* @__PURE__ */ wp.element.createElement("polygon", { points: "12 3 12 2 11 2 11 1 10 1 10 2 9 2 9 1 8 1 8 2 7 2 7 3 8 3 8 4 9 4 9 3 10 3 10 4 11 4 11 3 12 3" }));
     }
+  };
+
+  // ../blocks/_init/init/CP/components/Collapsible.jsx
+  init_react();
+
+  // node_modules/clsx/dist/clsx.mjs
+  function r(e) {
+    var t, f, n = "";
+    if ("string" == typeof e || "number" == typeof e) n += e;
+    else if ("object" == typeof e) if (Array.isArray(e)) {
+      var o = e.length;
+      for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
+    } else for (f in e) e[f] && (n && (n += " "), n += f);
+    return n;
+  }
+  function clsx() {
+    for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
+    return n;
+  }
+  var clsx_default = clsx;
+
+  // ../blocks/_init/init/CP/components/Collapsible.jsx
+  var Collapsible = (props) => {
+    const { className = "cp-collapsible", icon = "admin-generic", title = "", children, ...otherProps } = props;
+    const [isOpen, setIsOpen] = useState(false);
+    return /* @__PURE__ */ wp.element.createElement(CP.Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className: clsx(className, isOpen ? "is-open" : "is-close"), ...otherProps }, /* @__PURE__ */ wp.element.createElement("div", { className: "_label", onClick: () => setIsOpen(!isOpen) }, title), /* @__PURE__ */ wp.element.createElement("div", { className: "_body" }, children)));
   };
 
   // ../blocks/_init/init/CP/components/ConfigIcon.jsx
@@ -1536,22 +1563,6 @@
     return /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-doing-action": !!action }), style, ref, onMouseDown, onMouseMove, onMouseUp, onDoubleClick }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.controls() }, controls.map((props2, i) => /* @__PURE__ */ wp.element.createElement("span", { className: classes.controls.control(props2.className), "data-control-action": props2.action, "data-control-flags": props2.flags, key: i }))));
   };
 
-  // node_modules/clsx/dist/clsx.mjs
-  function r(e) {
-    var t, f, n = "";
-    if ("string" == typeof e || "number" == typeof e) n += e;
-    else if ("object" == typeof e) if (Array.isArray(e)) {
-      var o = e.length;
-      for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
-    } else for (f in e) e[f] && (n && (n += " "), n += f);
-    return n;
-  }
-  function clsx() {
-    for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
-    return n;
-  }
-  var clsx_default = clsx;
-
   // node_modules/react-use/esm/useMountedState.js
   init_react();
   function useMountedState() {
@@ -1941,18 +1952,8 @@
   // node_modules-included/catpow/src/component/Input/PositionInput.jsx
   init_react();
   var PositionInput = (props) => {
-    const {
-      className = "cp-positioninput",
-      width = 100,
-      height = 100,
-      margin = 10,
-      grid = 10,
-      snap = false,
-      value: { x = 50, y = 50 },
-      r: r2 = 6,
-      onChange,
-      ...otherProps
-    } = props;
+    const { className = "cp-positioninput", width = 100, height = 100, margin = 10, grid = 10, snap = false, r: r2 = 6, onChange, ...otherProps } = props;
+    const { x = 50, y = 50 } = props.value || {};
     const [ref, state] = useScratch_default();
     const [pos, setPos] = useState({ x, y });
     useThrottle(() => onChange({ x: pos.x, y: pos.y }), 50, [pos.x, pos.y]);
