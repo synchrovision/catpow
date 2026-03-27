@@ -8,14 +8,14 @@
 	&__bg{
 		@include bnd((d:b,p:a,i:0));
 		@include bg((c:black));
-		@include trn((t:.4s .4s,o:.3));
+		@include trn((t:.4s,o:.3));
 	}
 	&__body{
 		@include bnd((d:b,p:a,i:0,mg:a,w:c,h:fit,bs:b,z:1));
 		@include bdr((r:c-c));
 		@include bg((c:b));
 		@include shd((b:c-c));
-		@include trn((t:.4s,o:1,s:1));
+		@include trn((t:.4s .2s,o:1,s:1));
 		&-close{
 			@include bnd((d:b,p:a,t:-10,r:-10,w:30,h:30));
 			@include bdr((r:50%));
@@ -41,10 +41,10 @@
 		@include usr((e:n));
 		#{$block}{
 			&__bg{
-				@include trn((o:0));
+				@include trn((t:.4s .2s,o:0));
 			}
 			&__body{
-				@include trn((o:0,s:1.1));
+				@include trn((t:.4s,o:0,s:1.1));
 			}
 		}
 	}
