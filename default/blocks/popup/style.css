@@ -7,7 +7,6 @@
   left: 0rem;
   inset: 0rem;
   z-index: 10000;
-  visibility: visible;
 }
 .wp-block-catpow-popup__bg {
   display: block;
@@ -18,8 +17,8 @@
   left: 0rem;
   inset: 0rem;
   background-color: black;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
   opacity: 0.3;
 }
 .wp-block-catpow-popup__body {
@@ -35,10 +34,11 @@
   height: fit-content;
   box-sizing: border-box;
   z-index: 1;
+  border-radius: var(--cp-border-radius-c-c);
   background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
-  box-shadow: 0 5px 11px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+  box-shadow: var(--cp-shadow-c-c) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+  -webkit-transition: 0.4s 0.2s;
+  transition: 0.4s 0.2s;
   opacity: 1;
   transform: -webkit- scale(1);
   transform: scale(1);
@@ -50,7 +50,6 @@
   right: -0.625rem;
   width: 1.875rem;
   height: 1.875rem;
-  z-index: 2;
   border-radius: 50%;
   background-color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
   box-shadow: 0 2px 5px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
@@ -78,25 +77,25 @@
   transform: rotateZ(-45deg);
 }
 .wp-block-catpow-popup__body-contents {
-  position: relative;
-  min-height: 3.125rem;
+  min-height: 6.25rem;
   max-height: 80vh;
   height: auto;
+  padding: var(--cp-padding-c-c);
   overflow-y: auto;
-  z-index: 1;
 }
 .wp-block-catpow-popup:not(.is-open) {
-  visibility: hidden;
   pointer-events: none;
-  -webkit-transition: visibility 0s 1s;
-  transition: visibility 0s 1s;
+}
+.wp-block-catpow-popup:not(.is-open) .wp-block-catpow-popup__bg {
+  -webkit-transition: 0.4s 0.2s;
+  transition: 0.4s 0.2s;
+  opacity: 0;
 }
 .wp-block-catpow-popup:not(.is-open) .wp-block-catpow-popup__body {
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
   opacity: 0;
   transform: -webkit- scale(1.1);
   transform: scale(1.1);
-}
-.wp-block-catpow-popup:not(.is-open) .wp-block-catpow-popup__bg {
-  opacity: 0;
 }
 /*# sourceMappingURL=./style.css.map */

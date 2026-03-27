@@ -15,11 +15,7 @@
   // ../blocks/popup/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/popup", {
-    title: "\u{1F43E} Popup",
-    description: "\u30A2\u30F3\u30AB\u30FC\u30EA\u30F3\u30AF\u3067\u958B\u304F\u30DD\u30C3\u30D7\u30A2\u30C3\u30D7\u3002",
-    icon: "admin-comments",
-    category: "catpow",
-    edit({ attributes, className, setAttributes, clientId }) {
+    edit({ attributes, className, setAttributes }) {
       const { classes, anchor, vars } = attributes;
       const { useState, useMemo, useCallback } = wp.element;
       const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
@@ -30,10 +26,7 @@
         wp.hooks.applyFilters("catpow.blocks.popup.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      const selectThisBlock = useCallback(() => {
-        wp.data.dispatch("core/block-editor").selectBlock(clientId);
-      }, [clientId]);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Collapsible, { title: `\u{1F43E} Popup #${attributes.anchor}`, onClick: selectThisBlock }, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: flagsToClassNames({ ...states, isHidden: false, isClose: false, isOpen: true }), style: vars }) }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)), /* @__PURE__ */ wp.element.createElement("div", { className: "_close", onClick: () => setOpen(false) })), /* @__PURE__ */ wp.element.createElement("div", { className: "_bg" })))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", set: setAttributes, attr: attributes, selectiveClasses })));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Collapsible, { title: `\u{1F43E} Popup #${attributes.anchor}` }, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: flagsToClassNames({ ...states, isOpen: true }), style: vars }) }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)), /* @__PURE__ */ wp.element.createElement("div", { className: "_close", onClick: () => setOpen(false) })), /* @__PURE__ */ wp.element.createElement("div", { className: "_bg" })))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", set: setAttributes, attr: attributes, selectiveClasses })));
     },
     save({ attributes, className, setAttributes }) {
       const { classes, anchor, vars } = attributes;
@@ -50,7 +43,7 @@
         "data-wp-class--is-open": "callbacks.isOpen",
         "data-wp-bind--hidden": "!callbacks.isOpen"
       });
-      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)), /* @__PURE__ */ wp.element.createElement("div", { className: "_close" })), /* @__PURE__ */ wp.element.createElement("div", { className: "_bg", "data-wp-on--click": "actions.close" })));
+      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)), /* @__PURE__ */ wp.element.createElement("div", { className: "_close", "data-wp-on--click": "actions.close" })), /* @__PURE__ */ wp.element.createElement("div", { className: "_bg", "data-wp-on--click": "actions.close" })));
     }
   });
 })();
