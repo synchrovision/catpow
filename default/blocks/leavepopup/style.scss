@@ -1,19 +1,22 @@
 @import 'admin_style_config.scss';
+@import 'text-placeholders.scss';
+@import 'component-placeholders.scss';
 
 .wp-block-catpow-leavepopup{
-	@include bnd((p:f,i:0,z:10000));
-	>.bg{
+	$block:&;
+	@include bnd((d:b,p:f,i:0,z:10000));
+	&__bg{
 		@include bnd((d:b,p:a,i:0));
 		@include bg((c:black));
-		@include trn((o:.3));
+		@include trn((t:.4s,o:.3));
 	}
-	>.body{
-		@include bnd((d:b,p:a,i:0,mg:a,w:300 fit 90vw,h:fit,bs:b,z:1));
-		@include bdr((r:20));
+	&__body{
+		@include bnd((d:b,p:a,i:0,mg:a,w:c,h:fit,bs:b,z:1));
+		@include bdr((r:c-c));
 		@include bg((c:b));
-		@include shd((b:5));
-		@include trn((t:.5s,o:1,s:1));
-		>.close{
+		@include shd((b:c-c));
+		@include trn((t:.4s .2s,o:1,s:1));
+		&-close{
 			@include bnd((d:b,p:a,t:-10,r:-10,w:30,h:30));
 			@include bdr((r:50%));
 			@include bg((c:t));
@@ -30,18 +33,19 @@
 				@include trn((r:-45deg));
 			}
 		}
-		>.contents{
-			@include bnd((h:50 a 80vh,oy:a));
-			@include bdr((r:20));
+		&-contents{
+			@include bnd((h:100 a 80vh,pd:c-c,oy:a));
 		}
 	}
 	&:not(.is-open){
 		@include usr((e:n));
-		>.bg{
-			@include trn((o:0));
-		}
-		>.body{
-			@include trn((o:0,s:1.1));
+		#{$block}{
+			&__bg{
+				@include trn((t:.4s .2s,o:0));
+			}
+			&__body{
+				@include trn((t:.4s,o:0,s:1.1));
+			}
 		}
 	}
 }

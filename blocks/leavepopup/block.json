@@ -1,0 +1,15 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "catpow",
+	"name": "catpow/leavepopup",
+	"title": "🐾 LeavePopup",
+	"description": "サイト・ページ離脱に表示されるポップアップ。",
+	"icon": "admin-comments",
+	"category": "catpow",
+	"supports": {
+		"className": false,
+		"color": false,
+		"interactivity": true
+	}
+}

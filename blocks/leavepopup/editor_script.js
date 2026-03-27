@@ -1,28 +1,46 @@
 (() => {
+  // node_modules-included/catpow/src/util/string/case.js
+  var camelToKebab = (str) => str.replace(/(?=\w)([A-Z])/g, "-$1").toLowerCase();
+  var kebabToCamel = (str) => str.replace(/\-([a-z])/g, (m) => m[1].toUpperCase());
+
+  // node_modules-included/catpow/src/util/string/classNamesToFlags.js
+  var classNamesToFlags = (classNames) => classNames && classNames.split(" ").map(kebabToCamel).reduce((p, c) => {
+    p[c] = true;
+    return p;
+  }, {}) || {};
+
+  // node_modules-included/catpow/src/util/string/flagsToClassNames.js
+  var flagsToClassNames = (flags) => flags && Object.keys(flags).filter((f) => flags[f]).map(camelToKebab).join(" ");
+
   // ../blocks/leavepopup/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/leavepopup", {
-    title: "\u{1F43E} LeavePopup",
-    description: "\u30B5\u30A4\u30C8\u30FB\u30DA\u30FC\u30B8\u96E2\u8131\u306B\u8868\u793A\u3055\u308C\u308B\u30DD\u30C3\u30D7\u30A2\u30C3\u30D7\u3002",
-    icon: "admin-comments",
-    category: "catpow",
-    edit({ attributes, className, setAttributes, clientId }) {
-      const { useState, useMemo, useCallback } = wp.element;
-      const { InnerBlocks, InspectorControls } = wp.blockEditor;
-      const [open, setOpen] = useState(false);
+    edit({ attributes, setAttributes }) {
+      const { classes, vars } = attributes;
+      const { useMemo, useCallback } = wp.element;
+      const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
+      const states = classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
-        const selectiveClasses2 = [{ type: "buttons", name: "target", label: "\u8868\u793A\u6761\u4EF6", values: { isForSite: "\u30B5\u30A4\u30C8\u96E2\u8131\u6642", isForPage: "\u30DA\u30FC\u30B8\u96E2\u8131\u6642" } }];
-        wp.hooks.applyFilters("catpow.blocks.leavepopup.selectiveClasses", CP.finderProxy(selectiveClasses2));
+        const selectiveClasses2 = [{ input: "buttons", name: "target", label: "\u8868\u793A\u6761\u4EF6", values: { site: "\u30B5\u30A4\u30C8\u96E2\u8131\u6642", page: "\u30DA\u30FC\u30B8\u96E2\u8131\u6642" }, key: "target" }, "contentWidth"];
         return selectiveClasses2;
       }, []);
-      const selectThisBlock = useCallback(() => {
-        wp.data.dispatch("core/block-editor").selectBlock(clientId);
-      }, [clientId]);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Collapsible, { title: "\u{1F43E} LeavePopup", onClick: selectThisBlock }, /* @__PURE__ */ wp.element.createElement("div", { className: attributes.classes.replace("is-close", "is-open") }, /* @__PURE__ */ wp.element.createElement("div", { className: "body" }, /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)), /* @__PURE__ */ wp.element.createElement("div", { className: "close", onClick: () => setOpen(false) })), /* @__PURE__ */ wp.element.createElement("div", { className: "bg" }))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", set: setAttributes, attr: attributes, selectiveClasses })));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Collapsible, { title: "\u{1F43E} LeavePopup" }, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: flagsToClassNames({ ...states, isOpen: true }), style: vars }) }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)), /* @__PURE__ */ wp.element.createElement("div", { className: "_close", onClick: () => setOpen(false) })), /* @__PURE__ */ wp.element.createElement("div", { className: "_bg" })))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", set: setAttributes, attr: attributes, selectiveClasses })));
     },
-    save({ attributes, className, setAttributes }) {
-      const { InnerBlocks } = wp.blockEditor;
-      return /* @__PURE__ */ wp.element.createElement("div", { className: attributes.classes }, /* @__PURE__ */ wp.element.createElement("div", { className: "body" }, /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)), /* @__PURE__ */ wp.element.createElement("div", { className: "close" })), /* @__PURE__ */ wp.element.createElement("div", { className: "bg" }));
+    save({ attributes }) {
+      const { classes, vars } = attributes;
+      const { InnerBlocks, useBlockProps } = wp.blockEditor;
+      const blockProps = useBlockProps.save({
+        className: classes,
+        style: vars,
+        "data-wp-interactive": "catpow/leavepopup",
+        "data-wp-context": JSON.stringify({
+          isOpen: false
+        }),
+        "data-wp-init": "callbacks.initBlock",
+        "data-wp-class--is-open": "context.isOpen",
+        "data-wp-bind--hidden": "!context.isOpen"
+      });
+      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)), /* @__PURE__ */ wp.element.createElement("div", { className: "_close", "data-wp-on--click": "actions.close" })), /* @__PURE__ */ wp.element.createElement("div", { className: "_bg", "data-wp-on--click": "actions.close" })));
     }
   });
 })();
