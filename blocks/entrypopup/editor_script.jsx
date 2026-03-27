@@ -1,37 +1,35 @@
 ﻿const { __ } = wp.i18n;
+import { classNamesToFlags, flagsToClassNames } from "catpow/util";
 
 wp.blocks.registerBlockType("catpow/entrypopup", {
-	title: "🐾 EntryPopup",
-	description: "サイト・ページ訪問時に表示されるポップアップ。",
-	icon: "admin-comments",
-	category: "catpow",
 	edit({ attributes, className, setAttributes }) {
-		const { useState, useMemo } = wp.element;
-		const { InnerBlocks, InspectorControls } = wp.blockEditor;
-		const [open, setOpen] = useState(false);
+		const { classes, vars } = attributes;
+		const { useMemo, useCallback } = wp.element;
+		const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
+
+		const states = classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = [{ input: "buttons", name: "target", label: "表示条件", values: { site: "サイトで一回", page: "ページで一回", every: "毎回表示" }, key: "target" }];
+			const selectiveClasses = [{ input: "buttons", name: "target", label: "表示条件", values: { site: "サイトで一回", page: "ページで一回", every: "毎回表示" }, key: "target" }, "contentWidth"];
 			wp.hooks.applyFilters("catpow.blocks.entrypopup.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
 
 		return (
 			<>
-				<div className={"cp-collapsiblecontent " + (open ? "is-open" : "is-close")}>
-					<div className="cp-collapsiblecontent__label" onClick={() => setOpen(!open)}>
-						🐾 EntryPopup
-					</div>
-					<div className={attributes.classes}>
-						<div className="body">
-							<div className="contents">
-								<InnerBlocks />
+				<CP.Collapsible title="🐾 EntryPopup">
+					<CP.Bem prefix="wp-block-catpow">
+						<div {...useBlockProps({ className: flagsToClassNames({ ...states, isOpen: true }), style: vars })}>
+							<div className="_body">
+								<div className="_contents">
+									<InnerBlocks />
+								</div>
+								<div className="_close" onClick={() => setOpen(false)}></div>
 							</div>
-							<div className="close" onClick={() => setOpen(false)}></div>
+							<div className="_bg"></div>
 						</div>
-						<div className="bg"></div>
-					</div>
-				</div>
+					</CP.Bem>
+				</CP.Collapsible>
 				<InspectorControls>
 					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
@@ -40,17 +38,30 @@ wp.blocks.registerBlockType("catpow/entrypopup", {
 	},
 
 	save({ attributes, className, setAttributes }) {
-		const { InnerBlocks } = wp.blockEditor;
+		const { classes, vars } = attributes;
+		const { InnerBlocks, useBlockProps } = wp.blockEditor;
+		const blockProps = useBlockProps.save({
+			className: classes,
+			style: vars,
+			"data-wp-interactive": "catpow/entrypopup",
+			"data-wp-context": JSON.stringify({
+				isOpen: true,
+			}),
+			"data-wp-class--is-open": "context.isOpen",
+			"data-wp-bind--hidden": "!context.isOpen",
+		});
 		return (
-			<div className={attributes.classes}>
-				<div className="body">
-					<div className="contents">
-						<InnerBlocks.Content />
+			<CP.Bem prefix="wp-block-catpow">
+				<div {...blockProps}>
+					<div className="_body">
+						<div className="_contents">
+							<InnerBlocks.Content />
+						</div>
+						<div className="_close" data-wp-on--click="actions.close"></div>
 					</div>
-					<div className="close"></div>
+					<div className="_bg" data-wp-on--click="actions.close"></div>
 				</div>
-				<div className="bg"></div>
-			</div>
+			</CP.Bem>
 		);
 	},
 });
