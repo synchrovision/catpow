@@ -5,8 +5,8 @@ wp.blocks.registerBlockType("catpow/leavepopup", {
 	description: "サイト・ページ離脱に表示されるポップアップ。",
 	icon: "admin-comments",
 	category: "catpow",
-	edit({ attributes, className, setAttributes }) {
-		const { useState, useMemo } = wp.element;
+	edit({ attributes, className, setAttributes, clientId }) {
+		const { useState, useMemo, useCallback } = wp.element;
 		const { InnerBlocks, InspectorControls } = wp.blockEditor;
 		const [open, setOpen] = useState(false);
 
@@ -16,12 +16,13 @@ wp.blocks.registerBlockType("catpow/leavepopup", {
 			return selectiveClasses;
 		}, []);
 
+		const selectThisBlock = useCallback(() => {
+			wp.data.dispatch("core/block-editor").selectBlock(clientId);
+		}, [clientId]);
+
 		return (
 			<>
-				<div className={"cp-collapsiblecontent " + (open ? "is-open" : "is-close")}>
-					<div className="cp-collapsiblecontent__label" onClick={() => setOpen(!open)}>
-						🐾 leavePopup
-					</div>
+				<CP.Collapsible title="🐾 LeavePopup" onClick={selectThisBlock}>
 					<div className={attributes.classes.replace("is-close", "is-open")}>
 						<div className="body">
 							<div className="contents">
@@ -31,7 +32,7 @@ wp.blocks.registerBlockType("catpow/leavepopup", {
 						</div>
 						<div className="bg"></div>
 					</div>
-				</div>
+				</CP.Collapsible>
 				<InspectorControls>
 					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
