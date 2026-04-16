@@ -190,7 +190,7 @@ class style_config{
 				'shorthand'=>'t',
 				'variants'=>self::$text_role_variants,
 				'subVariants'=>self::$level_variants,
-				'defaultValues'=>array_pad([],5,sprintf('min(%1$svw,%2$srem) 0 min(%1$svw,%2$srem)',4,1))
+				'defaultValues'=>array_map(fn($i)=>array_map(fn($j)=>sprintf('min(%1$svw,%2$srem) 0 min(%3$svw,%4$srem)',$i*$j/10,$i*$j/40,$i*$j/20,$i*$j/80),range(10,5)),range(8,4))
 			],
 		]);
 	}
