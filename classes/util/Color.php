@@ -52,7 +52,7 @@ abstract class Color{
 			'h' => $H,     // 0–360
 		];
 	}
-	function oklch_to_hex(Array $lch): string {
+	public static function oklch_to_hex(Array $lch): string {
 		$L=$lch['l'];
 		$C=$lch['c'];
 		$H=$lch['h'];
@@ -101,5 +101,4 @@ abstract class Color{
 			(int) round($b * 255)
 		);
 	}
-
 }
