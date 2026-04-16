@@ -5,26 +5,27 @@
 .wp-block-catpow-faq{
 	$block:&;
 	$item:$block + __item;
-	@include grd((tc:1fr,g:g));
+	@include grd((tc:1fr,g:f));
 	@include txt((l:n,c:tx));
 	&__item{
 		@include bnd((p:r,bs:b));
 		&-header{
+			$header:&;
 			@extend %header-component;
 			@extend %heading;
-			@include bnd((p:r,pdi:0,pdt:0,bs:b));
-			@include flx((w:w,g:g));
-			@include bdr((p:b,s:s,w:c-h,r:0,c:tx 1 .5));
+			@include bnd((p:r,pd:c-l,pdi:0,bs:b));
+			@include flx((w:w,g:c-l));
+			@include bdr((p:b,s:s,w:c-h,r:0,c:lx));
 			@include usr((c:p));
 			#{$block}:not(.has-counter) &{
 				&::before{
 					content: 'Q';
 					@include bnd((d:b));
-					@include txt((a:c,p:1.5em,h:1em,f:dc,c:mx));
+					@include txt((a:c,p:1.5em,h:1em,f:d,c:mx));
 				}
 			}
 			&-counter{
-				@include txt((p:2em,f:dc,c:mx));
+				@include txt((p:2em,f:d,c:mx));
 				&-prefix,&-suffix{
 					@include bnd((d:ib));
 					@include txt((h:1em));

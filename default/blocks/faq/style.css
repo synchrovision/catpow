@@ -1,43 +1,42 @@
 .wp-block-catpow-faq__item-header, .wp-block-catpow-faq__item-header-text-title, .wp-block-catpow-faq__item-contents-body::before {
-  font-family: var(--cp-font-family-h, inherit);
-  font-size: var(--cp-font-size-h, 2em);
-  font-weight: var(--cp-font-weight-h, regular);
-  line-height: var(--cp-line-height-h, 1.5);
-  letter-spacing: var(--cp-letter-spacing-h, normal);
+  font-family: var(--cp-font-family-t-h, inherit);
+  font-size: var(--cp-font-size-t-h, 2em);
+  font-weight: var(--cp-font-weight-t-h, regular);
+  line-height: var(--cp-line-height-t-h, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-h, normal);
 }
 .wp-block-catpow-faq__item-contents-body-subtitle {
-  margin-top: var(--cp-lead-margin-top, 0);
-  margin-bottom: var(--cp-lead-margin-bottom, 0);
+  margin: var(--cp-margin-t-l, 0);
 }
 .wp-block-catpow-faq__item-contents-body-subtitle {
-  font-family: var(--cp-font-family-l, inherit);
-  font-size: var(--cp-font-size-l, 2em);
-  font-weight: var(--cp-font-weight-l, regular);
-  line-height: var(--cp-line-height-l, 1.5);
-  letter-spacing: var(--cp-letter-spacing-l, normal);
+  font-family: var(--cp-font-family-t-l, inherit);
+  font-size: var(--cp-font-size-t-l, 2em);
+  font-weight: var(--cp-font-weight-t-l, regular);
+  line-height: var(--cp-line-height-t-l, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-l, normal);
 }
 .wp-block-catpow-faq__item-contents-body-text {
-  font-family: var(--cp-font-family-p, inherit);
-  font-size: var(--cp-font-size-p, 2em);
-  font-weight: var(--cp-font-weight-p, regular);
-  line-height: var(--cp-line-height-p, 1.5);
-  letter-spacing: var(--cp-letter-spacing-p, normal);
+  font-family: var(--cp-font-family-t-p, inherit);
+  font-size: var(--cp-font-size-t-p, 2em);
+  font-weight: var(--cp-font-weight-t-p, regular);
+  line-height: var(--cp-line-height-t-p, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-p, normal);
 }
 .wp-block-catpow-faq__item-header-text-caption {
-  margin-top: var(--cp-caption-margin-top, 0);
-  margin-bottom: var(--cp-caption-margin-bottom, 0);
+  margin: var(--cp-margin-t-c, 0);
 }
 .wp-block-catpow-faq__item-header-text-caption {
-  font-family: var(--cp-font-family-c, inherit);
-  font-size: var(--cp-font-size-c, 2em);
-  font-weight: var(--cp-font-weight-c, regular);
-  line-height: var(--cp-line-height-c, 1.5);
-  letter-spacing: var(--cp-letter-spacing-c, normal);
+  font-family: var(--cp-font-family-t-c, inherit);
+  font-size: var(--cp-font-size-t-c, 2em);
+  font-weight: var(--cp-font-weight-t-c, regular);
+  line-height: var(--cp-line-height-t-c, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-c, normal);
 }
 .wp-block-catpow-faq__item-header {
-  padding: var(--cp-size-sp-h);
+  padding: var(--cp-padding-c-h);
   border-width: var(--cp-border-width-c-h, 0);
   border-radius: var(--cp-border-radius-c-h, 0);
+  box-shadow: var(--cp-shadow-c-h) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 .wp-block-catpow-faq {
   display: -webkit-grid;
@@ -45,9 +44,9 @@
   display: grid;
   -ms-grid-columns: 1fr;
   grid-template-columns: 1fr;
-  grid-gap: var(--cp-item-gap);
+  grid-gap: var(--cp-margin-f);
   list-style: none;
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
+  color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
 }
 .wp-block-catpow-faq__item {
   position: relative;
@@ -55,8 +54,8 @@
 }
 .wp-block-catpow-faq__item-header {
   position: relative;
+  padding: var(--cp-padding-c-l);
   padding-inline: 0rem;
-  padding-top: 0rem;
   box-sizing: border-box;
   display: -webkit-box;
   display: -webkit-flex;
@@ -64,11 +63,11 @@
   -webkit-box-lines: multiple;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  gap: var(--cp-item-gap);
+  gap: var(--cp-margin-c-l);
   border-bottom-style: solid;
   border-bottom-width: var(--cp-border-width-c-h);
   border-radius: 0rem;
-  border-bottom-color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),calc(100% - var(--cp-tones-tx-t) * 100),calc(var(--cp-tones-tx-a,1) * 0.5));
+  border-bottom-color: oklch(var(--cp-tones-lx-l) var(--cp-tones-lx-c) var(--cp-tones-lx-h) / var(--cp-tones-lx-a,1));
   cursor: pointer;
 }
 .wp-block-catpow-faq:not(.has-counter) .wp-block-catpow-faq__item-header::before {
@@ -77,13 +76,13 @@
   text-align: center;
   font-size: 1.5em;
   line-height: 1em;
-  font-family: var(--cp-font-family-dc);
-  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
+  font-family: var(--cp-font-family-f-d);
+  color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
 }
 .wp-block-catpow-faq__item-header-counter {
   font-size: 2em;
-  font-family: var(--cp-font-family-dc);
-  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
+  font-family: var(--cp-font-family-f-d);
+  color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
 }
 .wp-block-catpow-faq__item-header-counter-prefix, .wp-block-catpow-faq__item-header-counter-suffix {
   display: inline-block;
@@ -118,7 +117,7 @@
 }
 .wp-block-catpow-faq__item-contents-body::before {
   content: "A";
-  font-family: var(--cp-font-family-dc);
+  font-family: dc;
   position: absolute;
   top: 1.75rem;
   left: 1.25rem;
@@ -153,9 +152,9 @@
   margin-right: 0rem;
   height: 1em;
   width: 1em;
-  font-size: var(--cp-font-size-xlg);
+  font-size: xlg;
   line-height: 1em;
-  color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
+  color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
   background-color: transparent;
   border-style: none;
   cursor: pointer;
@@ -172,7 +171,7 @@
   margin: auto;
   width: 100%;
   height: var(--cp-border-width-c-b);
-  background-color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
+  background-color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }

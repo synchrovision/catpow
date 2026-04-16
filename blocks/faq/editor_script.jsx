@@ -63,6 +63,7 @@ wp.blocks.registerBlockType("catpow/faq", {
 			const selectiveClasses = [
 				"level",
 				"hasContentWidth",
+				"hasMargin",
 				{ name: "titleCaption", label: "Qにキャプション", values: "hasTitleCaption" },
 				{ name: "subTitle", label: "Aに見出し", values: "hasSubTitle" },
 				{ name: "hasImage", label: "画像", values: "hasImage" },
@@ -122,7 +123,7 @@ wp.blocks.registerBlockType("catpow/faq", {
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<CP.Bem prefix="wp-block-catpow">
-					<ul className={clsx(classes, { edit: attributes.EditMode })} style={vars}>
+					<ul {...useBlockProps({ className: clsx(classes, { edit: attributes.EditMode }), style: vars })}>
 						{items.map((item, index) => {
 							if (!item.controlClasses) {
 								item.controlClasses = "control";
