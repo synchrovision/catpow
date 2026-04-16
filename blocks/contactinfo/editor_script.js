@@ -9,12 +9,11 @@
   wp.blocks.registerBlockType("catpow/contactinfo", {
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
-      const { useState, useMemo, useEffect } = wp.element;
+      const { useMemo, useEffect } = wp.element;
       const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
       const { classes, HeadingTag = "h3", itemsClasses, items = [], title, lead, caption, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
-      const primaryClass = "wp-block-catpow-contactinfo";
-      const { bem, classNamesToFlags, flagsToClassNames } = Catpow.util;
+      const { classNamesToFlags, flagsToClassNames } = Catpow.util;
       const states = useMemo(() => classNamesToFlags(classes), [classes]);
       const { linkKeys } = CP.config.contactinfo;
       const selectiveClasses = useMemo(() => {
