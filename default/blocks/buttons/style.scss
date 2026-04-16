@@ -3,8 +3,10 @@
 @import "component-placeholders.scss";
 
 .wp-block-catpow-buttons{
-	@extend %ui-block;
 	$block:&;
+	&:not(.has-margin){
+		@extend %ui-block;
+	}
 	@include flx((w:w,j:c,a:s,g:c-b));
 	@include bnd((w:c,mgi:a));
 	&-button{

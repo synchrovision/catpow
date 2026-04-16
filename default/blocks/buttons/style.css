@@ -1,4 +1,4 @@
-.wp-block-catpow-buttons {
+.wp-block-catpow-buttons:not(.has-margin) {
   margin: var(--cp-margin-t-u, 0);
 }
 .wp-block-catpow-buttons-button, .wp-block-catpow-buttons__item {
