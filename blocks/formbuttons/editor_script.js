@@ -22,6 +22,7 @@
       const selectiveClasses = useMemo(() => {
         var selectiveClasses2 = [
           "level",
+          "hasMargin",
           "contentWidth",
           "itemSize",
           { name: "microcopy", label: "\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", values: "hasMicroCopy" },

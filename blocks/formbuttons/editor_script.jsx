@@ -23,6 +23,7 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 		const selectiveClasses = useMemo(() => {
 			var selectiveClasses = [
 				"level",
+				"hasMargin",
 				"contentWidth",
 				"itemSize",
 				{ name: "microcopy", label: "マイクロコピー", values: "hasMicroCopy" },
