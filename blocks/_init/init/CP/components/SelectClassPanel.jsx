@@ -99,25 +99,24 @@ export const SelectClassPanel = (props) => {
 				set(data);
 			}
 		},
-		[set, index, items, itemsKey]
+		[set, index, items, itemsKey],
 	);
 	const saveClasses = useCallback(
 		(classKey = primaryClassKey) => {
 			save({ [classKey]: CP.flagsToClassNames(allStates[classKey]) });
 		},
-		[primaryClassKey, save, allStates]
+		[primaryClassKey, save, allStates],
 	);
 	const saveCss = useCallback(
 		(cssKey) => {
 			set({ [cssKey]: CP.createStyleCodeWithMediaQuery(styleDatas[cssKey]) });
 		},
-		[set, styleDatas]
+		[set, styleDatas],
 	);
 
 	if (!item || !selectiveClasses) {
 		return false;
 	}
-
 	return (
 		<PanelBody title={props.title} initialOpen={props.initialOpen || false} icon={props.icon}>
 			<CP.SelectClassPanelContext.Provider value={{ props, item, states, allStates, set, save, saveClasses, styleDatas, saveCss, primaryClassKey }}>

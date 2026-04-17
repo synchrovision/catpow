@@ -3445,6 +3445,8 @@
     const { CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl: TextControl2, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
     const { props, item, states, allStates, set, save, saveClasses, styleDatas, saveCss, primaryClassKey } = useContext2(SelectClassPanelContext);
     const { subItemsKey } = props;
+    const { classKey = primaryClassKey } = prm;
+    const targetStates = allStates[classKey] || {};
     if (prm.hasOwnProperty("cond")) {
       if (prm.cond === false) {
         return false;
@@ -4237,8 +4239,6 @@
           }
         }
       } else {
-        const { classKey = primaryClassKey } = prm;
-        const targetStates = allStates[classKey] || {};
         const allClassFlags = CP.getAllClassFlags(prm, primaryClassKey);
         const classFlagsByValue = CP.getClassFlagsByValue(prm, primaryClassKey);
         const bindClasseFlagsByValue = CP.getBindClassFlagsByValue(prm, primaryClassKey);
@@ -6001,7 +6001,7 @@
         ...otherParams
       };
     },
-    textShadow(preset, vars = "vars", ...otherParams) {
+    textShadow({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "textShadow",
         type: "buttons",
@@ -6034,7 +6034,7 @@
         ...otherParams
       };
     },
-    borderWidth(preset, vars = "vars", ...otherParams) {
+    borderWidth({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "borderWidth",
         type: "buttons",
@@ -6073,7 +6073,7 @@
         ...otherParams
       };
     },
-    borderRadius(preset, vars = "vars", ...otherParams) {
+    borderRadius({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "borderRadius",
         type: "buttons",
@@ -6103,24 +6103,29 @@
         ...otherParams
       };
     },
-    headingTag: {
-      name: "headingTag",
-      input: "buttons",
-      key: "HeadingTag",
-      label: __13("\u898B\u51FA\u3057\u30BF\u30B0", "catpow"),
-      values: ["h1", "h2", "h3", "h4", "h5", "h6"],
-      effect: (val, states, { set }) => {
-        for (const key in states) {
-          if (key.slice(0, 7) === "isLevel") {
-            states[key] = false;
+    headingTag({ preset, name = "headingTag", label = "\u898B\u51FA\u3057\u30BF\u30B0", key = "HeadingTag", classKey = "classes", ...otherParams }) {
+      return {
+        name,
+        input: "buttons",
+        key,
+        label: __13(label, "catpow"),
+        values: ["h1", "h2", "h3", "h4", "h5", "h6"],
+        classKey,
+        effect: (val, states, { attr, set }) => {
+          const flags = CP.classNamesToFlags(attr[classKey]);
+          for (const key2 in flags) {
+            if (key2.slice(0, 7) === "isLevel") {
+              flags[key2] = false;
+            }
           }
-        }
-        if (/^h\d$/.test(val)) {
-          states["isLevel" + val[1]] = true;
-        }
-        set({ classes: CP.flagsToClassNames(states) });
-      },
-      required: true
+          if (/^h\d$/.test(val)) {
+            flags["isLevel" + val[1]] = true;
+          }
+          set({ [classKey]: CP.flagsToClassNames(flags) });
+        },
+        required: true,
+        ...otherParams
+      };
     },
     level: { name: "level", type: "buttons", label: __13("\u30EC\u30D9\u30EB", "catpow"), values: { isLevel1: "1", isLevel2: "2", isLevel3: "3", isLevel4: "4", isLevel5: "5", isLevel6: "6" } },
     headingType: {
@@ -6158,7 +6163,7 @@
         isSizeXsmall: __13("\u6975\u5C0F", "catpow")
       }
     },
-    itemSize(preset, vars = "vars", ...otherParams) {
+    itemSize({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "itemSize",
         type: "buttons",

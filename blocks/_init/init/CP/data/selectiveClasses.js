@@ -284,7 +284,7 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	textShadow(preset, vars = "vars", ...otherParams) {
+	textShadow({ preset, vars = "vars", ...otherParams }) {
 		return {
 			name: "textShadow",
 			type: "buttons",
@@ -317,7 +317,7 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	borderWidth(preset, vars = "vars", ...otherParams) {
+	borderWidth({ preset, vars = "vars", ...otherParams }) {
 		return {
 			name: "borderWidth",
 			type: "buttons",
@@ -356,7 +356,7 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	borderRadius(preset, vars = "vars", ...otherParams) {
+	borderRadius({ preset, vars = "vars", ...otherParams }) {
 		return {
 			name: "borderRadius",
 			type: "buttons",
@@ -386,24 +386,29 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	headingTag: {
-		name: "headingTag",
-		input: "buttons",
-		key: "HeadingTag",
-		label: __("見出しタグ", "catpow"),
-		values: ["h1", "h2", "h3", "h4", "h5", "h6"],
-		effect: (val, states, { set }) => {
-			for (const key in states) {
-				if (key.slice(0, 7) === "isLevel") {
-					states[key] = false;
+	headingTag({ preset, name = "headingTag", label = "見出しタグ", key = "HeadingTag", classKey = "classes", ...otherParams }) {
+		return {
+			name,
+			input: "buttons",
+			key,
+			label: __(label, "catpow"),
+			values: ["h1", "h2", "h3", "h4", "h5", "h6"],
+			classKey,
+			effect: (val, states, { attr, set }) => {
+				const flags = CP.classNamesToFlags(attr[classKey]);
+				for (const key in flags) {
+					if (key.slice(0, 7) === "isLevel") {
+						flags[key] = false;
+					}
 				}
-			}
-			if (/^h\d$/.test(val)) {
-				states["isLevel" + val[1]] = true;
-			}
-			set({ classes: CP.flagsToClassNames(states) });
-		},
-		required: true,
+				if (/^h\d$/.test(val)) {
+					flags["isLevel" + val[1]] = true;
+				}
+				set({ [classKey]: CP.flagsToClassNames(flags) });
+			},
+			required: true,
+			...otherParams,
+		};
 	},
 	level: { name: "level", type: "buttons", label: __("レベル", "catpow"), values: { isLevel1: "1", isLevel2: "2", isLevel3: "3", isLevel4: "4", isLevel5: "5", isLevel6: "6" } },
 	headingType: {
@@ -441,7 +446,7 @@ export const selectiveClassesPresets = {
 			isSizeXsmall: __("極小", "catpow"),
 		},
 	},
-	itemSize(preset, vars = "vars", ...otherParams) {
+	itemSize({ preset, vars = "vars", ...otherParams }) {
 		return {
 			name: "itemSize",
 			type: "buttons",

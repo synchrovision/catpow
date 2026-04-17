@@ -8,6 +8,8 @@ export const SelectClassPanelBlock = ({ prm }) => {
 	const { CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
 	const { props, item, states, allStates, set, save, saveClasses, styleDatas, saveCss, primaryClassKey } = useContext(SelectClassPanelContext);
 	const { subItemsKey } = props;
+	const { classKey = primaryClassKey } = prm;
+	const targetStates = allStates[classKey] || {};
 	if (prm.hasOwnProperty("cond")) {
 		if (prm.cond === false) {
 			return false;
@@ -722,8 +724,6 @@ export const SelectClassPanelBlock = ({ prm }) => {
 				}
 			}
 		} else {
-			const { classKey = primaryClassKey } = prm;
-			const targetStates = allStates[classKey] || {};
 			const allClassFlags = CP.getAllClassFlags(prm, primaryClassKey);
 			const classFlagsByValue = CP.getClassFlagsByValue(prm, primaryClassKey);
 			const bindClasseFlagsByValue = CP.getBindClassFlagsByValue(prm, primaryClassKey);
