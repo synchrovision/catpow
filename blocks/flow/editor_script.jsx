@@ -2,7 +2,11 @@
 	imageKeys: {
 		image: { src: "src", alt: "alt", items: "items" },
 	},
+	linkKeys: {
+		link: { href: "linkUrl", items: "items" },
+	},
 };
+
 wp.blocks.registerBlockType("catpow/flow", {
 	title: "🐾 Flow",
 	description: "手順や順番の一覧ブロックです。",
@@ -14,7 +18,7 @@ wp.blocks.registerBlockType("catpow/flow", {
 				type: "block",
 				blocks: CP.listedConvertibles,
 				transform: (attributes) => {
-					attributes.classes = "wp-block-catpow-flow medium hasCounter";
+					attributes.classes = "wp-block-catpow-flow is-size-medium has-counter is-level3";
 					if (!attributes.countPrefix) {
 						attributes.countPrefix = "Step.";
 					}
@@ -29,36 +33,39 @@ wp.blocks.registerBlockType("catpow/flow", {
 			source: "attribute",
 			selector: "ul",
 			attribute: "class",
-			default: "wp-block-catpow-flow medium hasCounter",
+			default: "wp-block-catpow-flow is-type-flat has-counter",
 		},
+		vars: { type: "object", default: {} },
+		HeadingTag: { type: "string", default: "h3" },
+		SubHeadingTag: { type: "string", default: "h4" },
 		items: {
 			source: "query",
-			selector: "li.item",
+			selector: ".wp-block-catpow-flow__item",
 			query: {
 				classes: { source: "attribute", attribute: "class" },
-				title: { source: "html", selector: "header .text h3" },
-				titleCaption: { source: "html", selector: "header .text p" },
+				title: { source: "html", selector: ".wp-block-catpow-flow__item-texts-header-text-title" },
+				titleCaption: { source: "html", selector: " .wp-block-catpow-flow__item-texts-header-text-caption" },
 				src: {
 					source: "attribute",
-					selector: "li>.image [src]",
+					selector: ".wp-block-catpow-flow__item-image [src]",
 					attribute: "src",
 				},
 				alt: {
 					source: "attribute",
-					selector: "li>.image [src]",
+					selector: ".wp-block-catpow-flow__item-image [src]",
 					attribute: "alt",
 				},
-				subTitle: { source: "html", selector: ".contents h4" },
-				text: { source: "html", selector: ".contents p,.contents .text" },
+				subTitle: { source: "html", selector: ".wp-block-catpow-flow__item-texts-contents-subtitle" },
+				text: { source: "html", selector: ".wp-block-catpow-flow__item-texts-contents-text" },
 				linkUrl: {
 					source: "attribute",
-					selector: ".link a",
+					selector: ".wp-block-catpow-flow__item-link",
 					attribute: "href",
 				},
 			},
 			default: [...Array(3)].map(() => {
 				return {
-					classes: "item",
+					classes: "wp-block-catpow-flow__item",
 					title: ["Title"],
 					titleCaption: ["Caption"],
 					subTitle: ["SubTitle"],
@@ -69,25 +76,35 @@ wp.blocks.registerBlockType("catpow/flow", {
 				};
 			}),
 		},
-		countPrefix: { source: "text", selector: ".counter .prefix", default: "" },
-		countSuffix: { source: "text", selector: ".counter .suffix", default: "" },
-		blockState: { type: "object", default: { enableBlockFormat: true } },
+		countPrefix: { source: "text", selector: ".wp-block-catpow-flow__item-texts-header-counter-prefix", default: "" },
+		countSuffix: { source: "text", selector: ".wp-block-catpow-flow__item-texts-header-counter-suffix", default: "" },
+		contentsClasses: { source: "attribute", selector: ".wp-block-catpow-flow__item-texts-contents", attribute: "class", default: "wp-block-catpow-flow__item-texts-contents is-level4" },
 	},
 	example: CP.example,
-	edit({ attributes, className, setAttributes, isSelected }) {
-		const { useState, useMemo } = wp.element;
-		const { BlockControls, InspectorControls, RichText } = wp.blockEditor;
-		const { Icon, PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
-		const { items = [], classes, countPrefix, countSuffix } = attributes;
-		const primaryClass = "wp-block-catpow-flow";
-		var classArray = _.uniq((className + " " + classes).split(" "));
+	edit({ attributes, setAttributes, isSelected }) {
+		const { useMemo } = wp.element;
+		const { BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
+		const { PanelBody, TextareaControl, ToolbarGroup } = wp.components;
+		const { HeadingTag, SubHeadingTag, items = [], classes, vars, contentsClasses, countPrefix, countSuffix, EditMode } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
-		const { imageKeys } = CP.config.flow;
+		const { imageKeys, linkKeys } = CP.config.flow;
 
 		const selectiveClasses = useMemo(() => {
-			const { imageKeys } = CP.config.flow;
 			const selectiveClasses = [
+				{
+					name: "type",
+					type: "buttons",
+					label: "タイプ",
+					values: { isTypeFlat: "フラット", isTypeCard: "カード", isTypeTimeline: "タイムライン" },
+				},
+				"hasContentWidth",
+				"hasMargin",
+				{ preset: "itemSize", cond: (states) => states.isTypeFlat || states.isTypeTimeline },
+				"headingTag",
+				{ name: "subHeadingTag", preset: "headingTag", key: "SubHeadingTag", label: "副見出しタグ", classKey: "contentsClasses", cond: "hasSubTitle" },
+				"level",
+				{ name: "contentsLevel", preset: "level", label: "コンテンツレベル", classKey: "contentsClasses" },
 				{
 					name: "counter",
 					label: "番号",
@@ -113,119 +130,21 @@ wp.blocks.registerBlockType("catpow/flow", {
 					label: "タイトルキャプション",
 					values: "hasTitleCaption",
 				},
-				{ name: "sbTitle", label: "サブタイトル", values: "hasSubTitle" },
-				{ name: "size", label: "サイズ", values: ["small", "medium", "large"] },
+				{ name: "subTitle", label: "サブタイトル", values: "hasSubTitle" },
 				{ name: "link", label: "リンク", values: "hasLink" },
 			];
 			wp.hooks.applyFilters("catpow.blocks.flow.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
 
-		let rtn = [];
 		const save = () => {
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
-		items.map((item, index) => {
-			if (!item.controlClasses) {
-				item.controlClasses = "control";
-			}
-			rtn.push(
-				<CP.Item tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
-					{states.hasImage && (
-						<div className="image">
-							<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="vga" />
-						</div>
-					)}
-					<header
-						onFocus={() => {
-							attributes.blockState.enableBlockFormat = false;
-						}}
-					>
-						{states.hasCounter && (
-							<div className="counter">
-								{countPrefix && <span className="prefix">{countPrefix}</span>}
-								<span className="number">{index + 1}</span>
-								{countSuffix && <span className="suffix">{countSuffix}</span>}
-							</div>
-						)}
-						<div className="text">
-							<h3>
-								<RichText
-									onChange={(text) => {
-										items[index].title = text;
-										save();
-									}}
-									value={item.title}
-								/>
-							</h3>
-							{states.hasTitleCaption && (
-								<p>
-									<RichText
-										onChange={(text) => {
-											items[index].titleCaption = text;
-											save();
-										}}
-										value={item.titleCaption}
-									/>
-								</p>
-							)}
-						</div>
-					</header>
-					<div className="contents">
-						{states.hasSubTitle && (
-							<h4
-								onFocus={() => {
-									attributes.blockState.enableBlockFormat = false;
-								}}
-							>
-								<RichText
-									onChange={(subTitle) => {
-										items[index].subTitle = subTitle;
-										save();
-									}}
-									value={item.subTitle}
-									placeholder="SubTitle"
-									onFocus={() => {
-										attributes.blockState.enableBlockFormat = false;
-									}}
-								/>
-							</h4>
-						)}
-						<div
-							className="text"
-							onFocus={() => {
-								attributes.blockState.enableBlockFormat = true;
-							}}
-						>
-							<RichText
-								onChange={(text) => {
-									items[index].text = text;
-									save();
-								}}
-								value={item.text}
-							/>
-						</div>
-					</div>
-					{states.hasLink && (
-						<div className="link">
-							<TextControl
-								onChange={(linkUrl) => {
-									items[index].linkUrl = linkUrl;
-									save();
-								}}
-								value={item.linkUrl}
-								placeholder="URLを入力"
-							/>
-						</div>
-					)}
-				</CP.Item>
-			);
-		});
-
 		if (attributes.EditMode === undefined) {
 			attributes.EditMode = false;
 		}
+		const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : classes, style: vars });
 
 		return (
 			<>
@@ -248,11 +167,9 @@ wp.blocks.registerBlockType("catpow/flow", {
 					</PanelBody>
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
-				{attributes.EditMode ? (
-					<div className="cp-altcontent">
-						<div className="label">
-							<Icon icon="edit" />
-						</div>
+				{EditMode ? (
+					<div {...blockProps}>
+						<CP.Label icon="edit" />
 						<CP.EditItemsTable
 							set={setAttributes}
 							attr={attributes}
@@ -277,190 +194,127 @@ wp.blocks.registerBlockType("catpow/flow", {
 						/>
 					</div>
 				) : (
-					<ul className={classes}>{rtn}</ul>
+					<CP.Bem prefix="wp-block-catpow">
+						<ul {...blockProps}>
+							{items.map((item, index) => {
+								if (!item.controlClasses) {
+									item.controlClasses = "control";
+								}
+								return (
+									<CP.Item tag="li" className="_item" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+										{states.hasImage && (
+											<div className="_image">
+												<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="vga" />
+											</div>
+										)}
+										<div className="_texts">
+											<header className="_header">
+												{states.hasCounter && (
+													<div className="_counter">
+														{countPrefix && <span className="_prefix">{countPrefix}</span>}
+														<span className="_number">{index + 1}</span>
+														{countSuffix && <span className="_suffix">{countSuffix}</span>}
+													</div>
+												)}
+												<div className="_text">
+													<RichText
+														className="_title"
+														tagName={HeadingTag}
+														onChange={(text) => {
+															items[index].title = text;
+															save();
+														}}
+														value={item.title}
+													/>
+													{states.hasTitleCaption && (
+														<RichText
+															className="_caption"
+															tagName="p"
+															onChange={(text) => {
+																items[index].titleCaption = text;
+																save();
+															}}
+															value={item.titleCaption}
+														/>
+													)}
+												</div>
+											</header>
+											<div className={contentsClasses}>
+												{states.hasSubTitle && (
+													<RichText
+														className="_subtitle"
+														tagName={SubHeadingTag}
+														onChange={(subTitle) => {
+															items[index].subTitle = subTitle;
+															save();
+														}}
+														value={item.subTitle}
+														placeholder="SubTitle"
+													/>
+												)}
+												<RichText
+													tagName="p"
+													className="_text"
+													onChange={(text) => {
+														items[index].text = text;
+														save();
+													}}
+													value={item.text}
+												/>
+											</div>
+											{states.hasLink && <CP.Link.Edit className="_link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index} />}
+										</div>
+									</CP.Item>
+								);
+							})}
+						</ul>
+					</CP.Bem>
 				)}
 			</>
 		);
 	},
-	save({ attributes, className }) {
-		const { RichText } = wp.blockEditor;
-		const { items = [], classes = "", countPrefix, countSuffix } = attributes;
-		var classArray = _.uniq(classes.split(" "));
+	save({ attributes }) {
+		const { RichText, useBlockProps } = wp.blockEditor;
+		const { HeadingTag, SubHeadingTag, items = [], classes = "", vars, contentsClasses = "", countPrefix, countSuffix } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
-		const { imageKeys } = CP.config.flow;
 
-		let rtn = [];
-		items.map((item, index) => {
-			rtn.push(
-				<li className={item.classes} key={index}>
-					{states.hasImage && (
-						<div className="image">
-							<img src={item.src} alt={item.alt} />
-						</div>
-					)}
-					<header>
-						{states.hasCounter && (
-							<div className="counter">
-								{countPrefix && <span className="prefix">{countPrefix}</span>}
-								<span className="number">{index + 1}</span>
-								{countSuffix && <span className="suffix">{countSuffix}</span>}
-							</div>
-						)}
-						<div className="text">
-							<h3>
-								<RichText.Content value={item.title} />
-							</h3>
-							{states.hasTitle && states.hasTitleCaption && (
-								<p>
-									<RichText.Content value={item.titleCaption} />
-								</p>
-							)}
-						</div>
-					</header>
-					<div className="contents">
-						{states.hasSubTitle && (
-							<h4>
-								<RichText.Content value={item.subTitle} />
-							</h4>
-						)}
-						<div className="text">
-							<RichText.Content value={item.text} />
-						</div>
-					</div>
-					{states.hasLink && item.linkUrl && (
-						<div className="link">
-							<a href={item.linkUrl}> </a>
-						</div>
-					)}
-				</li>
-			);
-		});
-		return <ul className={classes}>{rtn}</ul>;
-	},
-	deprecated: [
-		{
-			attributes: {
-				version: { type: "number", default: 0 },
-				classes: {
-					source: "attribute",
-					selector: "ul",
-					attribute: "class",
-					default: "wp-block-catpow-flow medium hasCounter",
-				},
-				items: {
-					source: "query",
-					selector: "li.item",
-					query: {
-						classes: { source: "attribute", attribute: "class" },
-						title: { source: "html", selector: "header .text h3" },
-						titleCaption: { source: "html", selector: "header .text p" },
-						src: {
-							source: "attribute",
-							selector: "li>.image [src]",
-							attribute: "src",
-						},
-						alt: {
-							source: "attribute",
-							selector: "li>.image [src]",
-							attribute: "alt",
-						},
-						subTitle: { source: "html", selector: ".contents h4" },
-						text: { source: "html", selector: ".contents p" },
-						linkUrl: {
-							source: "attribute",
-							selector: ".link a",
-							attribute: "href",
-						},
-					},
-					default: [...Array(3)].map(() => {
-						return {
-							classes: "item",
-							title: ["Title"],
-							titleCaption: ["Caption"],
-							subTitle: ["SubTitle"],
-							src: wpinfo.theme_url + "/images/dummy.jpg",
-							alt: "dummy",
-							text: ["Text"],
-							linkUrl: wpinfo.home_url,
-						};
-					}),
-				},
-				countPrefix: {
-					source: "text",
-					selector: ".counter .prefix",
-					default: "",
-				},
-				countSuffix: {
-					source: "text",
-					selector: ".counter .suffix",
-					default: "",
-				},
-			},
-			save({ attributes, className }) {
-				const { items = [], classes = "", countPrefix, countSuffix } = attributes;
-				var classArray = _.uniq(classes.split(" "));
-
-				var states = {
-					hasImage: false,
-					hasCounter: false,
-					hasTitleCaption: false,
-					hasSubTitle: false,
-					hasLink: false,
-				};
-				const hasClass = (cls) => classArray.indexOf(cls) !== -1;
-				Object.keys(states).forEach(function (key) {
-					this[key] = hasClass(key);
-				}, states);
-
-				let rtn = [];
-				items.map((item, index) => {
-					rtn.push(
-						<li className={item.classes}>
-							{states.hasImage && (
-								<div className="image">
-									<img src={item.src} alt={item.alt} />
-								</div>
-							)}
-							<header>
-								{states.hasCounter && (
-									<div className="counter">
-										{countPrefix && <span className="prefix">{countPrefix}</span>}
-										<span className="number">{index + 1}</span>
-										{countSuffix && <span className="suffix">{countSuffix}</span>}
+		return (
+			<CP.Bem prefix="wp-block-catpow">
+				<ul {...useBlockProps.save({ className: classes, style: vars })}>
+					{items.map((item, index) => {
+						return (
+							<li className={item.classes} key={index}>
+								{states.hasImage && (
+									<div className="_image">
+										<img src={item.src} alt={item.alt} />
 									</div>
 								)}
-								<div className="text">
-									<h3>
-										<RichText.Content value={item.title} />
-									</h3>
-									{states.hasTitle && states.hasTitleCaption && (
-										<p>
-											<RichText.Content value={item.titleCaption} />
-										</p>
-									)}
+								<div className="_texts">
+									<header className="_header">
+										{states.hasCounter && (
+											<div className="_counter">
+												{countPrefix && <span className="_prefix">{countPrefix}</span>}
+												<span className="_number">{index + 1}</span>
+												{countSuffix && <span className="_suffix">{countSuffix}</span>}
+											</div>
+										)}
+										<div className="_text">
+											<RichText.Content tagName={HeadingTag} className="_title" value={item.title} />
+											{states.hasTitleCaption && <RichText.Content tagName="p" className="_caption" value={item.titleCaption} />}
+										</div>
+									</header>
+									<div className={contentsClasses}>
+										{states.hasSubTitle && <RichText.Content tagName={SubHeadingTag} className="_subtitle" value={item.subTitle} />}
+										<RichText.Content tagName="p" className="_text" value={item.text} />
+									</div>
+									{states.hasLink && item.linkUrl && <CP.Link className="_link" attr={attributes} keys={linkKeys.link} index={index} />}
 								</div>
-							</header>
-							<div className="contents">
-								{states.hasSubTitle && (
-									<h4>
-										<RichText.Content value={item.subTitle} />
-									</h4>
-								)}
-								<p>
-									<RichText.Content value={item.text} />
-								</p>
-							</div>
-							{states.hasLink && item.linkUrl && (
-								<div className="link">
-									<a href={item.linkUrl}> </a>
-								</div>
-							)}
-						</li>
-					);
-				});
-				return <ul className={classes}>{rtn}</ul>;
-			},
-		},
-	],
+							</li>
+						);
+					})}
+				</ul>
+			</CP.Bem>
+		);
+	},
 });
