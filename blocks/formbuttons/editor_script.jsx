@@ -52,18 +52,14 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
-		const blockProps = useBlockProps({
-			className: classes,
-		});
+		const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : classes });
 
 		return (
 			<>
 				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
 				{EditMode ? (
-					<div {...blockProps} className="cp-altcontent">
-						<div className="label">
-							<Icon icon="edit" />
-						</div>
+					<div {...blockProps}>
+						<CP.Label icon="edit" />
 						<CP.EditItemsTable
 							set={setAttributes}
 							attr={attributes}
