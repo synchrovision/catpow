@@ -6,7 +6,7 @@
 	example: CP.example,
 	edit({ attributes, setAttributes, className }) {
 		const { content_path, post_data_path, inputs, data_id, values } = attributes;
-		const { InspectorControls } = wp.blockEditor;
+		const { InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TreeSelect, TextareaControl, TextControl } = wp.components;
 		const { serverSideRender: ServerSideRender } = wp;
 
@@ -37,9 +37,9 @@
 
 		return (
 			<>
-				<div className="cp-embeddedcontent">
-					<div className="label">{content_path}</div>
-					<ServerSideRender block="catpow/form" attributes={attributes} />
+				<div {...useBlockProps()}>
+					<CP.Label>{content_path}</CP.Label>
+					<ServerSideRender block="catpow/form" attributes={attributes} httpMethod="POST" />
 				</div>
 				<InspectorControls>
 					<PanelBody title="フォーム">
@@ -91,6 +91,6 @@
 	},
 
 	save({ attributes, className, setAttributes }) {
-		return "null";
+		return false;
 	},
 });
