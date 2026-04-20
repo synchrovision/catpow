@@ -1,6 +1,7 @@
 ﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/accessmap", {
+	apiVersion: 3,
 	title: "🐾 Access Map",
 	description: "地図とアクセス情報を表示",
 	icon: "location-alt",
