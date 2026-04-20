@@ -1,6 +1,6 @@
 <?php
 preg_match_all(
-	'|<formBlockContent name="(?P<name>\w+)"(?: action="(?P<action>.+?)")?>(?P<content>.*?)</formBlockContent>|s',
+	'|<form\-block\-content name="(?P<name>\w+)"(?: action="(?P<action>.+?)")?>(?P<content>.*?)</form\-block\-content>|s',
 	$content,
 	$matches,
 	PREG_SET_ORDER

@@ -3,7 +3,7 @@ $block_class="wp-block-catpow-formbuttons";
 $buttons_class="cp-buttons";
 $button_class="cp-button";
 $attributes=[
-	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} {$buttons_class}"],
+	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} {$buttons_class} is-level3 has-item-size-medium"],
 	"items"=>[
 		"source"=>"query",
 		"selector"=>".{$block_class}__item",

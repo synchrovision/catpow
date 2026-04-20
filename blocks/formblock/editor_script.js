@@ -7,10 +7,9 @@
     category: "catpow-embed",
     example: CP.example,
     edit({ attributes, setAttributes, className, isSelected, clientId }) {
-      const { InnerBlocks, BlockControls, InspectorControls } = wp.blockEditor;
-      const { PanelBody: PanelBody2, TreeSelect, TextareaControl, TextControl: TextControl2, ToolbarGroup } = wp.components;
+      const { InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
+      const { PanelBody, TreeSelect, TextareaControl, TextControl, ToolbarGroup } = wp.components;
       const { content_path, inputs, data_id, values, actions, EditMode = false } = attributes;
-      let postDataSelection = false;
       if (!actions && content_path) {
         const path = content_path.slice(0, content_path.lastIndexOf("/"));
         wp.apiFetch({ path: "cp/v1/" + path + "/actions" }).then((actions2) => {
@@ -30,12 +29,12 @@
             }
           ]
         }
-      )), /* @__PURE__ */ wp.element.createElement("div", { className: "formBlock cp-embeddedcontent" + (EditMode ? " editMode" : "") }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, content_path || "not selected"), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { allowedBlocks: ["catpow/formblockcontent"] })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody2, { title: "\u30D5\u30A9\u30FC\u30E0" }, /* @__PURE__ */ wp.element.createElement(
+      )), /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: "formBlock cp-embeddedcontent" + (EditMode ? " editMode" : "") }) }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "feedback" }, content_path || "not selected"), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { allowedBlocks: ["catpow/formblockcontent"] })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u30D5\u30A9\u30FC\u30E0" }, /* @__PURE__ */ wp.element.createElement(
         TreeSelect,
         {
           label: "path",
           selectedId: content_path,
-          tree: Object.values(cpEmbeddablesTree.formblock),
+          tree: Object.values(cpEmbeddablesTree.formblock || {}),
           onChange: (content_path2) => {
             const path = content_path2.slice(0, content_path2.lastIndexOf("/"));
             wp.apiFetch({ path: "cp/v1/" + path + "/template" }).then((template) => {
@@ -44,8 +43,8 @@
             setAttributes({ content_path: content_path2, actions: null });
           }
         }
-      )), /* @__PURE__ */ wp.element.createElement(PanelBody2, { title: "\u5165\u529B\u5024", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-        TextControl2,
+      )), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u5165\u529B\u5024", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+        TextControl,
         {
           label: "\u5165\u529B\u540D",
           value: inputs,
@@ -54,7 +53,7 @@
           }
         }
       ), /* @__PURE__ */ wp.element.createElement(
-        TextControl2,
+        TextControl,
         {
           label: "\u30C7\u30FC\u30BFID",
           value: data_id,
@@ -87,20 +86,21 @@
       name: {
         type: "attribute",
         label: "\u540D\u524D",
-        selector: "formBlockContent",
+        selector: "form-block-content",
         attribute: "name",
         default: "edit"
       },
       action: {
         type: "attribute",
         label: "\u30A2\u30AF\u30B7\u30E7\u30F3",
-        selector: "formBlockContent",
+        selector: "form-block-content",
         attribute: "action",
         default: "{}"
       }
     },
     edit({ attributes, className, setAttributes, clientId }) {
       const { InnerBlocks, InspectorControls } = wp.blockEditor;
+      const { PanelBody, TextControl } = wp.components;
       const { name } = attributes;
       const parentClientId = wp.data.select("core/block-editor").getBlockParentsByBlockName(clientId, "catpow/formblock")[0];
       const parentBlock = wp.data.select("core/block-editor").getBlock(parentClientId);
@@ -119,7 +119,7 @@
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks } = wp.blockEditor;
       const { name, action } = attributes;
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("formBlockContent", { name, action }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("form-block-content", { name, action }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }
   });
 })();

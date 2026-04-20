@@ -5,11 +5,9 @@
 	category: "catpow-embed",
 	example: CP.example,
 	edit({ attributes, setAttributes, className, isSelected, clientId }) {
-		const { InnerBlocks, BlockControls, InspectorControls } = wp.blockEditor;
+		const { InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TreeSelect, TextareaControl, TextControl, ToolbarGroup } = wp.components;
 		const { content_path, inputs, data_id, values, actions, EditMode = false } = attributes;
-
-		let postDataSelection = false;
 
 		if (!actions && content_path) {
 			const path = content_path.slice(0, content_path.lastIndexOf("/"));
@@ -33,8 +31,8 @@
 						]}
 					/>
 				</BlockControls>
-				<div className={"formBlock cp-embeddedcontent" + (EditMode ? " editMode" : "")}>
-					<div className="label">{content_path || "not selected"}</div>
+				<div {...useBlockProps({ className: "formBlock cp-embeddedcontent" + (EditMode ? " editMode" : "") })}>
+					<CP.Label icon="feedback">{content_path || "not selected"}</CP.Label>
 					<InnerBlocks allowedBlocks={["catpow/formblockcontent"]} />
 				</div>
 				<InspectorControls>
@@ -42,7 +40,7 @@
 						<TreeSelect
 							label="path"
 							selectedId={content_path}
-							tree={Object.values(cpEmbeddablesTree.formblock)}
+							tree={Object.values(cpEmbeddablesTree.formblock || {})}
 							onChange={(content_path) => {
 								const path = content_path.slice(0, content_path.lastIndexOf("/"));
 								wp.apiFetch({ path: "cp/v1/" + path + "/template" }).then((template) => {
@@ -95,20 +93,21 @@ wp.blocks.registerBlockType("catpow/formblockcontent", {
 		name: {
 			type: "attribute",
 			label: "名前",
-			selector: "formBlockContent",
+			selector: "form-block-content",
 			attribute: "name",
 			default: "edit",
 		},
 		action: {
 			type: "attribute",
 			label: "アクション",
-			selector: "formBlockContent",
+			selector: "form-block-content",
 			attribute: "action",
 			default: "{}",
 		},
 	},
 	edit({ attributes, className, setAttributes, clientId }) {
 		const { InnerBlocks, InspectorControls } = wp.blockEditor;
+		const { PanelBody, TextControl } = wp.components;
 		const { name } = attributes;
 
 		const parentClientId = wp.data.select("core/block-editor").getBlockParentsByBlockName(clientId, "catpow/formblock")[0];
@@ -141,9 +140,9 @@ wp.blocks.registerBlockType("catpow/formblockcontent", {
 		const { name, action } = attributes;
 		return (
 			<>
-				<formBlockContent name={name} action={action}>
+				<form-block-content name={name} action={action}>
 					<InnerBlocks.Content />
-				</formBlockContent>
+				</form-block-content>
 			</>
 		);
 	},
