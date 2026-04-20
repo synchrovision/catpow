@@ -1,4 +1,6 @@
-﻿CP.config.graphics = {
+﻿import { clsx } from "clsx";
+
+CP.config.graphics = {
 	devices: ["sp", "tb"],
 	devicesForCss: ["pc", "tb", "sp"],
 	imageKeys: {
@@ -39,6 +41,7 @@
 		return rtn;
 	},
 	renderCssDatas: (cssDatas) => {
+		console.log(cssDatas);
 		return CP.config.graphics.devicesForCss
 			.map((device) => {
 				if (device === "pc") {
@@ -65,10 +68,9 @@ wp.blocks.registerBlockType("catpow/graphics", {
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { __ } = wp.i18n;
 		const { useState, useMemo, useCallback, useEffect, useReducer, useRef } = wp.element;
-		const { BlockControls, InspectorControls, RichText } = wp.blockEditor;
-		const { BaseControl, Icon, PanelBody, RangeControl, TextareaControl, TextControl, Toolbar, ToolbarGroup, ToolbarButton, ToolbarDropdownMenu } = wp.components;
-		const { id, classes = "", src, srcset, alt, heights, items = [], device } = attributes;
-		const { bem } = Catpow.util;
+		const { BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
+		const { BaseControl, PanelBody, RangeControl, TextareaControl, TextControl, Toolbar, ToolbarGroup, ToolbarButton, ToolbarDropdownMenu } = wp.components;
+		const { id, classes = "", heights, items = [], device } = attributes;
 
 		const [currentItemNodes, setCurrentItemNodes] = useState([]);
 		const [currentItemIndexes, setCurrentItemIndexes] = useState([]);
@@ -84,7 +86,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 		const cssDatas = getCssDatas(attributes, states);
 
 		const selectiveClasses = useMemo(() => {
-			const { devices, devicesForCss, imageKeys, getCssDatas, renderCssDatas, parseRectAttr, getRectAttr } = CP.config.graphics;
+			const { devices, imageKeys } = CP.config.graphics;
 			const selectiveClasses = [
 				{
 					name: "baseImage",
@@ -110,14 +112,13 @@ wp.blocks.registerBlockType("catpow/graphics", {
 					name: "type",
 					type: "buttons",
 					label: "タイプ",
-					filter: "type",
 					values: { isImage: "画像", isText: "テキスト" },
 					sub: {
 						isImage: [
 							{
 								name: "type",
 								type: "buttons",
-								values: ["type1", "type2", "type3"],
+								values: ["isType1", "isType2", "isType3"],
 							},
 							{ name: "alt", input: "text", label: "代替テキスト", key: "alt" },
 							{ name: "link", input: "text", label: "リンク", key: "link" },
@@ -133,49 +134,30 @@ wp.blocks.registerBlockType("catpow/graphics", {
 							{
 								name: "type",
 								type: "buttons",
-								values: ["type1", "type2", "type3"],
+								values: ["isType1", "isType2", "isType3"],
 							},
+							"level",
 							"color",
-							{
-								name: "inverse",
-								label: "ヌキ文字",
-								values: "inverse",
-								sub: [
-									{
-										name: "hasBackground",
-										label: "背景色",
-										values: "hasBackground",
-									},
-								],
-							},
+							"colorScheme",
+							"backgroundColor",
 							{ name: "title", label: "見出し", values: "hasTitle" },
 							{ name: "lead", label: "リード", values: "hasLead" },
 							{ name: "text", label: "テキスト", values: "hasText" },
 						],
 					},
 				},
-				{
-					name: "hasBoxShadow",
-					label: "影（ボックス）",
-					values: "hasBoxShadow",
-				},
-				{
-					name: "hasTextShadow",
-					label: "影（テキスト）",
-					values: "hasTextShadow",
-				},
+				"boxShadow",
+				"hasTextShadow",
 				{ name: "isEllipse", label: "円形", values: "isEllipse" },
-				{ name: "fadeIn", label: "フェードイン", values: "fadeIn" },
-				{ name: "fadeIn", label: "フェードイン", values: "fadeIn" },
+				{ name: "isfadeIn", label: "フェードイン", values: "isfadeIn" },
 				{
-					name: "slideIn",
+					name: "isSlideIn",
 					label: "スライドイン",
-					values: "slideIn",
+					values: "isSlideIn",
 					sub: [
 						{
 							name: "direction",
 							type: "radio",
-							filter: "slideIn",
 							label: "方向",
 							values: {
 								slideInLeft: "左",
@@ -189,41 +171,39 @@ wp.blocks.registerBlockType("catpow/graphics", {
 					],
 				},
 				{
-					name: "roll",
+					name: "isRoll",
 					label: "回転",
-					filter: "roll",
-					values: "roll",
+					values: "isRoll",
 					sub: [
 						{
 							name: "direction",
 							type: "radio",
 							label: "方向",
-							values: { rollLeft: "左", rollRight: "右" },
+							values: { isRollLeft: "左", isRollRight: "右" },
 						},
 						{
 							name: "speed",
 							type: "radio",
 							label: "速度",
-							values: { rollSlow: "遅い", rollFast: "速い" },
+							values: { isRollSlow: "遅い", isRollFast: "速い" },
 						},
 					],
 				},
 				{
-					name: "hover",
+					name: "isHover",
 					label: "ホバー",
-					filter: "hover",
-					values: "hover",
+					values: "isHover",
 					sub: [
-						{ name: "fade", label: "フェード", values: "hoverFade" },
+						{ name: "fade", label: "フェード", values: "isHoverFade" },
 						{
 							name: "motion",
 							type: "radio",
 							label: "動き",
 							values: {
-								hoverNoMove: "なし",
-								hoverZoom: "ズーム",
-								hoverLift: "リフト",
-								hoverJump: "ジャンプ",
+								isHoverNoMove: "なし",
+								isHoverZoom: "ズーム",
+								isHoverLift: "リフト",
+								isHoverJump: "ジャンプ",
 							},
 						},
 					],
@@ -232,8 +212,6 @@ wp.blocks.registerBlockType("catpow/graphics", {
 			wp.hooks.applyFilters("catpow.blocks.graphics.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		}, []);
-
-		var tgtItem = false;
 
 		useEffect(() => {
 			if (!id || document.querySelectorAll("#" + id).length > 1) {
@@ -254,7 +232,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 					{ value: 200, label: "200" },
 					{ value: 400, label: "400" },
 				],
-				[]
+				[],
 			);
 
 			const devices = CP.config.graphics.devicesForCss;
@@ -323,7 +301,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 					setCurrentItemIndexes([index]);
 				}
 			},
-			[currentItemIndexes, setCurrentItemIndexes]
+			[currentItemIndexes, setCurrentItemIndexes],
 		);
 
 		const alignItems = useCallback(
@@ -388,8 +366,12 @@ wp.blocks.registerBlockType("catpow/graphics", {
 				});
 				save();
 			},
-			[save, device, currentItemIndexes, items]
+			[save, device, currentItemIndexes, items],
 		);
+
+		useEffect(() => {
+			setAttributes({ lock: { move: true, remove: false } });
+		}, []);
 
 		return (
 			<>
@@ -501,149 +483,138 @@ wp.blocks.registerBlockType("catpow/graphics", {
 						</ToolbarGroup>
 					)}
 				</BlockControls>
-				<div id={id} className={classes + (isSelected ? " cp-altcontent " + device : "")} ref={setContainerNode}>
-					{isSelected && (
-						<div className="label">
-							<Icon icon={CP.devices[device].icon} />
-						</div>
-					)}
-					<div className="base">{states.hasBaseImage && <CP.ResponsiveImage attr={attributes} keys={imageKeys.base} devices={devices} device={device === "pc" ? null : device} />}</div>
-					{isSelected && (
-						<CP.BoundingBox
-							targets={currentItemNodes}
-							container={containerNode}
-							onChange={() => {
-								const bnd = containerNode.getBoundingClientRect();
-								const deviceIndex = device ? devicesForCss.indexOf(device) : 0;
-								currentItemNodes.forEach((el) => {
-									const { index } = el.dataset;
-									const tgtBnd = el.getBoundingClientRect();
-									const rectDatas = parseRectAttr(items[index].rect);
-									rectDatas[deviceIndex] = [
-										Math.pround(((tgtBnd.left - bnd.left) / bnd.width) * 100, 2),
-										Math.pround(((tgtBnd.top - bnd.top) / bnd.height) * 100, 2),
-										Math.pround((tgtBnd.width / bnd.width) * 100, 2),
-										Math.pround((tgtBnd.height / bnd.height) * 100, 2),
-									];
-									items[index].rect = getRectAttr(rectDatas);
-								});
-								save();
-							}}
-							onDeselect={() => {
-								setCurrentItemIndexes([]);
-							}}
-							onDuplicate={() => {
-								items.push.apply(
-									items,
-									items.filter((item, index) => currentItemIndexes.includes(index))
-								);
-								save();
-							}}
-							onDelete={() => {
-								setAttributes({
-									items: items.filter((item, index) => !currentItemIndexes.includes(index)),
-								});
-							}}
-							viewMode={device}
-						/>
-					)}
-					{items.map((item, index) => {
-						var itemStates = CP.classNamesToFlags(item.classes);
-						var itemClasses = item.classes;
-						var itemSelected = currentItemIndexes.includes(index);
-						if (isSelected) {
-							itemClasses += " visible active actived";
-						}
-						if (itemSelected) {
-							itemClasses += " selected";
-						}
-
-						const itemBody = () => {
-							if (itemSelected && currentItemIndexes.length === 1) {
-								if (itemStates.isText) {
-									return (
-										<span className="body">
-											{itemStates.hasTitle && (
-												<RichText
-													tagName="h3"
-													className="title"
-													placeholder="Title"
-													onChange={(title) => {
-														console.log(title);
-														item.title = title;
-														save();
-													}}
-													value={item.title}
-												/>
-											)}
-											{itemStates.hasLead && (
-												<RichText
-													tagName="h4"
-													className="lead"
-													placeholder="Lead"
-													onChange={(lead) => {
-														item.lead = lead;
-														save();
-													}}
-													value={item.lead}
-												/>
-											)}
-											{itemStates.hasText && (
-												<RichText
-													tagName="p"
-													className="text"
-													placeholder="Text"
-													onChange={(text) => {
-														item.text = text;
-														save();
-													}}
-													value={item.text}
-												/>
-											)}
-										</span>
-									);
+				<div {...useBlockProps()}>
+					<CP.Bem prefix="wp-block-catpow">
+						<div id={id} className={clsx(classes, isSelected ? " cp-altcontent " + device : "")} ref={setContainerNode}>
+							{isSelected && <CP.Label icon={CP.devices[device].icon} />}
+							<div className="_base">{states.hasBaseImage && <CP.ResponsiveImage attr={attributes} keys={imageKeys.base} devices={devices} device={device === "pc" ? null : device} />}</div>
+							{isSelected && (
+								<CP.BoundingBox
+									targets={currentItemNodes}
+									container={containerNode}
+									onChange={() => {
+										const bnd = containerNode.getBoundingClientRect();
+										const deviceIndex = device ? devicesForCss.indexOf(device) : 0;
+										currentItemNodes.forEach((el) => {
+											const { index } = el.dataset;
+											const tgtBnd = el.getBoundingClientRect();
+											const rectDatas = parseRectAttr(items[index].rect);
+											rectDatas[deviceIndex] = [
+												Math.pround(((tgtBnd.left - bnd.left) / bnd.width) * 100, 2),
+												Math.pround(((tgtBnd.top - bnd.top) / bnd.height) * 100, 2),
+												Math.pround((tgtBnd.width / bnd.width) * 100, 2),
+												Math.pround((tgtBnd.height / bnd.height) * 100, 2),
+											];
+											items[index].rect = getRectAttr(rectDatas);
+										});
+										save();
+									}}
+									onDeselect={() => {
+										setCurrentItemIndexes([]);
+									}}
+									onDuplicate={() => {
+										items.push.apply(
+											items,
+											items.filter((item, index) => currentItemIndexes.includes(index)),
+										);
+										save();
+									}}
+									onDelete={() => {
+										setAttributes({
+											items: items.filter((item, index) => !currentItemIndexes.includes(index)),
+										});
+									}}
+									viewMode={device}
+								/>
+							)}
+							{items.map((item, index) => {
+								var itemStates = CP.classNamesToFlags(item.classes);
+								var itemClasses = item.classes;
+								var itemSelected = currentItemIndexes.includes(index);
+								if (isSelected) {
+									itemClasses += " visible active actived";
 								}
-								return <CP.SelectResponsiveImage attr={attributes} set={setAttributes} devices={devices} device={device === "pc" ? null : device} keys={imageKeys.image} index={index} />;
-							}
-							if (itemStates.isText) {
+								if (itemSelected) {
+									itemClasses += " selected";
+								}
+
+								const itemBody = () => {
+									if (itemSelected && currentItemIndexes.length === 1) {
+										if (itemStates.isText) {
+											return (
+												<span className="_body">
+													{itemStates.hasTitle && (
+														<RichText
+															tagName="h3"
+															className="_title"
+															placeholder="Title"
+															onChange={(title) => {
+																console.log(title);
+																item.title = title;
+																save();
+															}}
+															value={item.title}
+														/>
+													)}
+													{itemStates.hasLead && (
+														<RichText
+															tagName="h4"
+															className="_lead"
+															placeholder="Lead"
+															onChange={(lead) => {
+																item.lead = lead;
+																save();
+															}}
+															value={item.lead}
+														/>
+													)}
+													{itemStates.hasText && (
+														<RichText
+															tagName="p"
+															className="_text"
+															placeholder="Text"
+															onChange={(text) => {
+																item.text = text;
+																save();
+															}}
+															value={item.text}
+														/>
+													)}
+												</span>
+											);
+										}
+										return (
+											<CP.SelectResponsiveImage
+												className="_image"
+												attr={attributes}
+												set={setAttributes}
+												devices={devices}
+												device={device === "pc" ? null : device}
+												keys={imageKeys.image}
+												index={index}
+											/>
+										);
+									}
+									if (itemStates.isText) {
+										return (
+											<span className="_body">
+												{itemStates.hasTitle && <RichText.Content tagName="h3" className="_title" value={item.title} />}
+												{itemStates.hasLead && <RichText.Content tagName="h4" className="_lead" value={item.lead} />}
+												{itemStates.hasText && <RichText.Content tagName="p" className="_text" value={item.text} />}
+											</span>
+										);
+									}
+									return <CP.ResponsiveImage attr={attributes} keys={imageKeys.image} devices={devices} device={device === "pc" ? null : device} index={index} />;
+								};
 								return (
-									<span className="body">
-										{itemStates.hasTitle && (
-											<h3 className="title">
-												<RichText.Content value={item.title} />
-											</h3>
-										)}
-										{itemStates.hasLead && (
-											<h4 className="lead">
-												<RichText.Content value={item.lead} />
-											</h4>
-										)}
-										{itemStates.hasText && (
-											<p className="text">
-												<RichText.Content value={item.text} />
-											</p>
-										)}
+									<span id={id + "_item_" + index} className={itemClasses} data-index={index} data-rect={item.rect} ref={(el) => (targetRefs.current[index] = el)} onClick={onClickItem} key={index}>
+										{itemBody()}
 									</span>
 								);
-							}
-							return <CP.ResponsiveImage attr={attributes} keys={imageKeys.image} devices={devices} device={device === "pc" ? null : device} index={index} />;
-						};
-
-						return wp.element.createElement(
-							"span",
-							{
-								id: id + "_item_" + index,
-								className: itemClasses,
-								"data-index": index,
-								"data-rect": item.rect,
-								ref: (el) => (targetRefs.current[index] = el),
-								onClick: onClickItem,
-								key: index,
-							},
-							itemBody()
-						);
-					})}
-					<style>{device !== "pc" ? CP.createStyleCode(cssDatas[device]) : renderCssDatas(cssDatas)}</style>
+							})}
+							<style>{device !== "pc" ? CP.createStyleCode(cssDatas[device]) : renderCssDatas(cssDatas)}</style>
+						</div>
+					</CP.Bem>
 				</div>
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} initialOpen={true}>
@@ -692,10 +663,9 @@ wp.blocks.registerBlockType("catpow/graphics", {
 			</>
 		);
 	},
-	save({ attributes, className, setAttributes }) {
+	save({ attributes }) {
 		const { RichText } = wp.blockEditor;
 		const { id, classes, heights, items = [] } = attributes;
-		const { bem } = Catpow.util;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, getCssDatas, renderCssDatas } = CP.config.graphics;
@@ -703,49 +673,33 @@ wp.blocks.registerBlockType("catpow/graphics", {
 		const cssDatas = getCssDatas(attributes, states);
 
 		return (
-			<div id={id} className={classes} data-heights={heights}>
-				<div className="base">{states.hasBaseImage && <CP.ResponsiveImage attr={attributes} keys={imageKeys.base} devices={devices} />}</div>
-				{items.map((item, index) => {
-					var itemStates = CP.classNamesToFlags(item.classes);
-					const itemBody = () => {
-						if (itemStates.isText) {
-							return (
-								<span className="body">
-									{itemStates.hasTitle && (
-										<h3 className="title">
-											<RichText.Content value={item.title} />
-										</h3>
-									)}
-									{itemStates.hasLead && (
-										<h4 className="lead">
-											<RichText.Content value={item.lead} />
-										</h4>
-									)}
-									{itemStates.hasText && (
-										<p className="text">
-											<RichText.Content value={item.text} />
-										</p>
-									)}
-								</span>
-							);
-						}
-						return <CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} devices={devices} />;
-					};
-
-					return wp.element.createElement(
-						item.link ? "a" : "span",
-						{
-							id: id + "_item_" + index,
-							className: item.classes,
-							href: item.link,
-							"data-rect": item.rect,
-							key: index,
-						},
-						itemBody()
-					);
-				})}
-				<style>{renderCssDatas(cssDatas)}</style>
-			</div>
+			<CP.Bem prefix="wp-block-catpow">
+				<div id={id} className={classes} data-heights={heights}>
+					<div className="_base">{states.hasBaseImage && <CP.ResponsiveImage attr={attributes} keys={imageKeys.base} devices={devices} />}</div>
+					{items.map((item, index) => {
+						var itemStates = CP.classNamesToFlags(item.classes);
+						const itemBody = () => {
+							if (itemStates.isText) {
+								return (
+									<span className="_body">
+										{itemStates.hasTitle && <RichText.Content tagName="h3" className="_title" value={item.title} />}
+										{itemStates.hasLead && <RichText.Content tagName="h4" className="_lead" value={item.lead} />}
+										{itemStates.hasText && <RichText.Content tagName="p" className="_text" value={item.text} />}
+									</span>
+								);
+							}
+							return <CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} devices={devices} />;
+						};
+						const TagName = item.link ? "a" : "span";
+						return (
+							<TagName id={id + "_item_" + index} className={item.classes} href={item.link} data-rect={item.rect} key={index}>
+								{itemBody()}
+							</TagName>
+						);
+					})}
+					<style>{renderCssDatas(cssDatas)}</style>
+				</div>
+			</CP.Bem>
 		);
 	},
 });

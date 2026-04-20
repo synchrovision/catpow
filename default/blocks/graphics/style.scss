@@ -1,141 +1,133 @@
 @import "admin_style_config.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
 
 .wp-block-catpow-graphics{
 	@include bnd((p:r,mg:a));
-	@include txt((p:1.2vw));
-	@include bp(-1280){
-		@include txt((p:1.6vw));
-	}
-	@include bp(-640){
-		@include txt((p:3.2vw));
-	}
-	.item{
+	&__item{
+		$item:&;
 		@include bnd((d:b,p:a,bs:b));
-		&.fadeIn{
+		&-body{
+			@include txt((c:tx));
+			&-title{
+				@extend %heading-block;
+				@extend %heading;
+			}
+			&-lead{
+				@extend %lead-block;
+				@extend %lead;
+			}
+			&-text{
+				@extend %paragraph-block;
+				@extend %paragraph;
+			}
+		}
+		&.is-fade-in{
 			@include trn((t:1s,o:0));
 			&.visible{
 				@include trn((o:1));
 			}
 		}
-		&.slideIn{
-			&.slideInLeft{@include trn((x:40));}
-			&.slideInRight{@include trn((x:-40));}
-			&.slideInUp{@include trn((y:40));}
-			&.slideInDown{@include trn((y:-40));}
-			&.slideInFront{@include trn((s:.90));}
-			&.slideInBack{@include trn((s:1.1));}
+		&.is-slide-in{
+			&.is-slide-in-left{@include trn((x:40));}
+			&.is-slide-in-right{@include trn((x:-40));}
+			&.is-slide-in-up{@include trn((y:40));}
+			&.is-slide-in-down{@include trn((y:-40));}
+			&.is-slide-in-front{@include trn((s:.90));}
+			&.is-slide-in-back{@include trn((s:1.1));}
 			&.visible{
 				@include trn((t:1s,x:0,y:0));
 			}
 		}
-		&.roll{
-			&.rollLeft{
-				&.rollSlow img{@include trn((a:'rollLeft' 10s l i));}
-				&.rollFast img{@include trn((a:'rollLeft' 2s l i));}
+		&.is-roll{
+			&.is-roll-left{
+				&.is-roll-slow img{@include trn((a:'rollLeft' 10s l i));}
+				&.is-roll-fast img{@include trn((a:'rollLeft' 2s l i));}
 			}
-			&.rollRight{
-				&.rollSlow img{@include trn((a:'rollRight' 10s l i));}
-				&.rollFast img{@include trn((a:'rollRight' 2s l i));}
+			&.is-roll-right{
+				&.is-roll-slow img{@include trn((a:'rollRight' 10s l i));}
+				&.is-roll-fast img{@include trn((a:'rollRight' 2s l i));}
 			}
 		}
-		&.hoverFade{
+		&.is-hover-fade{
 			@include trn((t:.5s,o:1));
 			&:hover{
 				@include trn((o:.7));
 			}
 		}
-		&.hoverZoom{
+		&.is-hover-zoom{
 			@include trn((t:.5s,s:1));
 			&:hover{
 				@include trn((s:1.05));
 			}
 		}
-		&.hoverLift{
+		&.is-hover-lift{
 			@include trn((t:.5s,y:0));
 			&:hover{
 				@include trn((y:-10));
 			}
 		}
-		&.hoverJump{
+		&.is-hover-jump{
 			&:hover{
 				@include trn((a:'slideUpBit' 1s ease(j) b i));
 			}
 		}
-		
-		&.hasBackground{
-			@include bg((c:m));
-		}
-		&.hasBoxShadow{
+		&.has-box-shadow{
 			@include shd((b:5));
 		}
-		&.hasTextShadow{
+		&.has-text-shadow{
 			@include bg((t:2));
 		}
-		&.isEllipse{
+		&.is-ellipse{
 			@include bnd((o:h));
 			@include bdr((r:50%));
 		}
-		&.isText{
+		&.is-text{
+			@extend %card-component;
 			@include flx((w:n,a:c,j:c));
-			>.body{
-			}
-			&.type1{
-				@include bnd((pd:1em));
-				@include bg((c:b 1 .8));
-				.title{
-					@include bnd((pdb:.25em,mg:0 a .25em));
-					@include bdr((p:b,s:s,w:1));
-					@include txt((p:3em));
-				}
-				.lead{
-					@include txt((p:1em));
-				}
-				.text{
-					@include txt((p:.8em));
-				}
-			}
-			&.type2{
-				@include bnd((pd:1em));
-				@include bg((c:b 1 .8));
-				.title{
-					@include bnd((pdb:.25em,mg:0 a .25em));
-					@include bdr((p:b,s:s,w:1));
-					@include txt((p:3em));
-				}
-				.lead{
-					@include txt((p:1em));
-				}
-				.text{
-					@include txt((p:.8em));
-				}
-			}
-			&.type3{
-				@include bnd((pd:1em));
-				@include bg((c:b 1 .8));
-				.title{
-					@include bnd((pdb:.25em,mg:0 a .25em));
-					@include bdr((p:b,s:s,w:1));
-					@include txt((p:3em));
-				}
-				.lead{
-					@include txt((p:1em));
-				}
-				.text{
-					@include txt((p:.8em));
-				}
-			}
-			&.inverse{
-				@include txt((c:b));
-				&.type1{
-					@include bg((c:t 1 .8));
-					.title{
-						@include txt((c:b));
+			&.is-type1{
+				#{$item}{
+					&-body{
+						&-title{
+						}
+						&-lead{
+						}
+						&-text{
+						}
 					}
 				}
 			}
-			&.isEllipse{
-				@include bnd((pd:2em 1em));
-				@include txt((a:c));
+			&.is-type2{
+				#{$item}{
+					&-body{
+						&-title{
+						}
+						&-lead{
+						}
+						&-text{
+						}
+					}
+				}
+			}
+			&.is-type3{
+				#{$item}{
+					&-body{
+						&-title{
+						}
+						&-lead{
+						}
+						&-text{
+						}
+					}
+				}
+			}
+			&.is-ellipse{
+				#{$item}{
+					&-body{
+						@include bnd((ac:c));
+						@include txt((a:c));
+					}
+				}
 			}
 		}
 	}

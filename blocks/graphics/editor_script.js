@@ -1,4 +1,19 @@
 (() => {
+  // node_modules/clsx/dist/clsx.mjs
+  function r(e) {
+    var t, f, n = "";
+    if ("string" == typeof e || "number" == typeof e) n += e;
+    else if ("object" == typeof e) if (Array.isArray(e)) {
+      var o = e.length;
+      for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
+    } else for (f in e) e[f] && (n && (n += " "), n += f);
+    return n;
+  }
+  function clsx() {
+    for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
+    return n;
+  }
+
   // ../blocks/graphics/editor_script.jsx
   CP.config.graphics = {
     devices: ["sp", "tb"],
@@ -41,6 +56,7 @@
       return rtn;
     },
     renderCssDatas: (cssDatas) => {
+      console.log(cssDatas);
       return CP.config.graphics.devicesForCss.map((device) => {
         if (device === "pc") {
           return CP.createStyleCode(cssDatas[device]);
@@ -64,10 +80,9 @@
     edit({ attributes, className, setAttributes, isSelected }) {
       const { __ } = wp.i18n;
       const { useState, useMemo, useCallback, useEffect, useReducer, useRef } = wp.element;
-      const { BlockControls, InspectorControls, RichText } = wp.blockEditor;
-      const { BaseControl, Icon, PanelBody, RangeControl, TextareaControl, TextControl, Toolbar, ToolbarGroup, ToolbarButton, ToolbarDropdownMenu } = wp.components;
-      const { id, classes = "", src, srcset, alt, heights, items = [], device } = attributes;
-      const { bem } = Catpow.util;
+      const { BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
+      const { BaseControl, PanelBody, RangeControl, TextareaControl, TextControl, Toolbar, ToolbarGroup, ToolbarButton, ToolbarDropdownMenu } = wp.components;
+      const { id, classes = "", heights, items = [], device } = attributes;
       const [currentItemNodes, setCurrentItemNodes] = useState([]);
       const [currentItemIndexes, setCurrentItemIndexes] = useState([]);
       const [containerNode, setContainerNode] = useState(false);
@@ -79,7 +94,7 @@
       const { devices, devicesForCss, imageKeys, getCssDatas, renderCssDatas, parseRectAttr, getRectAttr } = CP.config.graphics;
       const cssDatas = getCssDatas(attributes, states);
       const selectiveClasses = useMemo(() => {
-        const { devices: devices2, devicesForCss: devicesForCss2, imageKeys: imageKeys2, getCssDatas: getCssDatas2, renderCssDatas: renderCssDatas2, parseRectAttr: parseRectAttr2, getRectAttr: getRectAttr2 } = CP.config.graphics;
+        const { devices: devices2, imageKeys: imageKeys2 } = CP.config.graphics;
         const selectiveClasses2 = [
           {
             name: "baseImage",
@@ -105,14 +120,13 @@
             name: "type",
             type: "buttons",
             label: "\u30BF\u30A4\u30D7",
-            filter: "type",
             values: { isImage: "\u753B\u50CF", isText: "\u30C6\u30AD\u30B9\u30C8" },
             sub: {
               isImage: [
                 {
                   name: "type",
                   type: "buttons",
-                  values: ["type1", "type2", "type3"]
+                  values: ["isType1", "isType2", "isType3"]
                 },
                 { name: "alt", input: "text", label: "\u4EE3\u66FF\u30C6\u30AD\u30B9\u30C8", key: "alt" },
                 { name: "link", input: "text", label: "\u30EA\u30F3\u30AF", key: "link" },
@@ -128,49 +142,30 @@
                 {
                   name: "type",
                   type: "buttons",
-                  values: ["type1", "type2", "type3"]
+                  values: ["isType1", "isType2", "isType3"]
                 },
+                "level",
                 "color",
-                {
-                  name: "inverse",
-                  label: "\u30CC\u30AD\u6587\u5B57",
-                  values: "inverse",
-                  sub: [
-                    {
-                      name: "hasBackground",
-                      label: "\u80CC\u666F\u8272",
-                      values: "hasBackground"
-                    }
-                  ]
-                },
+                "colorScheme",
+                "backgroundColor",
                 { name: "title", label: "\u898B\u51FA\u3057", values: "hasTitle" },
                 { name: "lead", label: "\u30EA\u30FC\u30C9", values: "hasLead" },
                 { name: "text", label: "\u30C6\u30AD\u30B9\u30C8", values: "hasText" }
               ]
             }
           },
-          {
-            name: "hasBoxShadow",
-            label: "\u5F71\uFF08\u30DC\u30C3\u30AF\u30B9\uFF09",
-            values: "hasBoxShadow"
-          },
-          {
-            name: "hasTextShadow",
-            label: "\u5F71\uFF08\u30C6\u30AD\u30B9\u30C8\uFF09",
-            values: "hasTextShadow"
-          },
+          "boxShadow",
+          "hasTextShadow",
           { name: "isEllipse", label: "\u5186\u5F62", values: "isEllipse" },
-          { name: "fadeIn", label: "\u30D5\u30A7\u30FC\u30C9\u30A4\u30F3", values: "fadeIn" },
-          { name: "fadeIn", label: "\u30D5\u30A7\u30FC\u30C9\u30A4\u30F3", values: "fadeIn" },
+          { name: "isfadeIn", label: "\u30D5\u30A7\u30FC\u30C9\u30A4\u30F3", values: "isfadeIn" },
           {
-            name: "slideIn",
+            name: "isSlideIn",
             label: "\u30B9\u30E9\u30A4\u30C9\u30A4\u30F3",
-            values: "slideIn",
+            values: "isSlideIn",
             sub: [
               {
                 name: "direction",
                 type: "radio",
-                filter: "slideIn",
                 label: "\u65B9\u5411",
                 values: {
                   slideInLeft: "\u5DE6",
@@ -184,41 +179,39 @@
             ]
           },
           {
-            name: "roll",
+            name: "isRoll",
             label: "\u56DE\u8EE2",
-            filter: "roll",
-            values: "roll",
+            values: "isRoll",
             sub: [
               {
                 name: "direction",
                 type: "radio",
                 label: "\u65B9\u5411",
-                values: { rollLeft: "\u5DE6", rollRight: "\u53F3" }
+                values: { isRollLeft: "\u5DE6", isRollRight: "\u53F3" }
               },
               {
                 name: "speed",
                 type: "radio",
                 label: "\u901F\u5EA6",
-                values: { rollSlow: "\u9045\u3044", rollFast: "\u901F\u3044" }
+                values: { isRollSlow: "\u9045\u3044", isRollFast: "\u901F\u3044" }
               }
             ]
           },
           {
-            name: "hover",
+            name: "isHover",
             label: "\u30DB\u30D0\u30FC",
-            filter: "hover",
-            values: "hover",
+            values: "isHover",
             sub: [
-              { name: "fade", label: "\u30D5\u30A7\u30FC\u30C9", values: "hoverFade" },
+              { name: "fade", label: "\u30D5\u30A7\u30FC\u30C9", values: "isHoverFade" },
               {
                 name: "motion",
                 type: "radio",
                 label: "\u52D5\u304D",
                 values: {
-                  hoverNoMove: "\u306A\u3057",
-                  hoverZoom: "\u30BA\u30FC\u30E0",
-                  hoverLift: "\u30EA\u30D5\u30C8",
-                  hoverJump: "\u30B8\u30E3\u30F3\u30D7"
+                  isHoverNoMove: "\u306A\u3057",
+                  isHoverZoom: "\u30BA\u30FC\u30E0",
+                  isHoverLift: "\u30EA\u30D5\u30C8",
+                  isHoverJump: "\u30B8\u30E3\u30F3\u30D7"
                 }
               }
             ]
@@ -227,7 +220,6 @@
         wp.hooks.applyFilters("catpow.blocks.graphics.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
         return selectiveItemClasses2;
       }, []);
-      var tgtItem = false;
       useEffect(() => {
         if (!id || document.querySelectorAll("#" + id).length > 1) {
           setAttributes({ id: "g" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
@@ -368,6 +360,9 @@
         },
         [save, device, currentItemIndexes, items]
       );
+      useEffect(() => {
+        setAttributes({ lock: { move: true, remove: false } });
+      }, []);
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices: CP.config.graphics.devicesForCss, defaultInput: "pc" }), /* @__PURE__ */ wp.element.createElement(BlockControls, null, device !== "pc" && /* @__PURE__ */ wp.element.createElement(ToolbarButton, { icon: "update", label: "update", onClick: copyFirstRect }), currentItemIndexes.length > 0 && /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { label: "control" }, currentItemIndexes.length === 1 && /* @__PURE__ */ wp.element.createElement(
         ToolbarButton,
         {
@@ -468,7 +463,7 @@
             }
           ]
         }
-      ))), /* @__PURE__ */ wp.element.createElement("div", { id, className: classes + (isSelected ? " cp-altcontent " + device : ""), ref: setContainerNode }, isSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement("div", { className: "base" }, states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attr: attributes, keys: imageKeys.base, devices, device: device === "pc" ? null : device })), isSelected && /* @__PURE__ */ wp.element.createElement(
+      ))), /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps() }, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { id, className: clsx(classes, isSelected ? " cp-altcontent " + device : ""), ref: setContainerNode }, isSelected && /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: CP.devices[device].icon }), /* @__PURE__ */ wp.element.createElement("div", { className: "_base" }, states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attr: attributes, keys: imageKeys.base, devices, device: device === "pc" ? null : device })), isSelected && /* @__PURE__ */ wp.element.createElement(
         CP.BoundingBox,
         {
           targets: currentItemNodes,
@@ -520,11 +515,11 @@
         const itemBody = () => {
           if (itemSelected && currentItemIndexes.length === 1) {
             if (itemStates.isText) {
-              return /* @__PURE__ */ wp.element.createElement("span", { className: "body" }, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("span", { className: "_body" }, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement(
                 RichText,
                 {
                   tagName: "h3",
-                  className: "title",
+                  className: "_title",
                   placeholder: "Title",
                   onChange: (title) => {
                     console.log(title);
@@ -537,7 +532,7 @@
                 RichText,
                 {
                   tagName: "h4",
-                  className: "lead",
+                  className: "_lead",
                   placeholder: "Lead",
                   onChange: (lead) => {
                     item.lead = lead;
@@ -549,7 +544,7 @@
                 RichText,
                 {
                   tagName: "p",
-                  className: "text",
+                  className: "_text",
                   placeholder: "Text",
                   onChange: (text) => {
                     item.text = text;
@@ -559,27 +554,26 @@
                 }
               ));
             }
-            return /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { attr: attributes, set: setAttributes, devices, device: device === "pc" ? null : device, keys: imageKeys.image, index });
+            return /* @__PURE__ */ wp.element.createElement(
+              CP.SelectResponsiveImage,
+              {
+                className: "_image",
+                attr: attributes,
+                set: setAttributes,
+                devices,
+                device: device === "pc" ? null : device,
+                keys: imageKeys.image,
+                index
+              }
+            );
           }
           if (itemStates.isText) {
-            return /* @__PURE__ */ wp.element.createElement("span", { className: "body" }, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", { className: "title" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), itemStates.hasLead && /* @__PURE__ */ wp.element.createElement("h4", { className: "lead" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.lead })), itemStates.hasText && /* @__PURE__ */ wp.element.createElement("p", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })));
+            return /* @__PURE__ */ wp.element.createElement("span", { className: "_body" }, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "h3", className: "_title", value: item.title }), itemStates.hasLead && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "h4", className: "_lead", value: item.lead }), itemStates.hasText && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_text", value: item.text }));
           }
           return /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attr: attributes, keys: imageKeys.image, devices, device: device === "pc" ? null : device, index });
         };
-        return wp.element.createElement(
-          "span",
-          {
-            id: id + "_item_" + index,
-            className: itemClasses,
-            "data-index": index,
-            "data-rect": item.rect,
-            ref: (el) => targetRefs.current[index] = el,
-            onClick: onClickItem,
-            key: index
-          },
-          itemBody()
-        );
-      }), /* @__PURE__ */ wp.element.createElement("style", null, device !== "pc" ? CP.createStyleCode(cssDatas[device]) : renderCssDatas(cssDatas))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses, initialOpen: true }, !states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(
+        return /* @__PURE__ */ wp.element.createElement("span", { id: id + "_item_" + index, className: itemClasses, "data-index": index, "data-rect": item.rect, ref: (el) => targetRefs.current[index] = el, onClick: onClickItem, key: index }, itemBody());
+      }), /* @__PURE__ */ wp.element.createElement("style", null, device !== "pc" ? CP.createStyleCode(cssDatas[device]) : renderCssDatas(cssDatas))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses, initialOpen: true }, !states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(
         InputHeights,
         {
           value: heights,
@@ -620,33 +614,23 @@
         }
       )), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)));
     },
-    save({ attributes, className, setAttributes }) {
+    save({ attributes }) {
       const { RichText } = wp.blockEditor;
       const { id, classes, heights, items = [] } = attributes;
-      const { bem } = Catpow.util;
       const states = CP.classNamesToFlags(classes);
       const { devices, imageKeys, getCssDatas, renderCssDatas } = CP.config.graphics;
       const cssDatas = getCssDatas(attributes, states);
-      return /* @__PURE__ */ wp.element.createElement("div", { id, className: classes, "data-heights": heights }, /* @__PURE__ */ wp.element.createElement("div", { className: "base" }, states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attr: attributes, keys: imageKeys.base, devices })), items.map((item, index) => {
+      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { id, className: classes, "data-heights": heights }, /* @__PURE__ */ wp.element.createElement("div", { className: "_base" }, states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attr: attributes, keys: imageKeys.base, devices })), items.map((item, index) => {
         var itemStates = CP.classNamesToFlags(item.classes);
         const itemBody = () => {
           if (itemStates.isText) {
-            return /* @__PURE__ */ wp.element.createElement("span", { className: "body" }, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", { className: "title" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), itemStates.hasLead && /* @__PURE__ */ wp.element.createElement("h4", { className: "lead" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.lead })), itemStates.hasText && /* @__PURE__ */ wp.element.createElement("p", { className: "text" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })));
+            return /* @__PURE__ */ wp.element.createElement("span", { className: "_body" }, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "h3", className: "_title", value: item.title }), itemStates.hasLead && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "h4", className: "_lead", value: item.lead }), itemStates.hasText && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_text", value: item.text }));
           }
           return /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attr: attributes, keys: imageKeys.image, index, devices });
         };
-        return wp.element.createElement(
-          item.link ? "a" : "span",
-          {
-            id: id + "_item_" + index,
-            className: item.classes,
-            href: item.link,
-            "data-rect": item.rect,
-            key: index
-          },
-          itemBody()
-        );
-      }), /* @__PURE__ */ wp.element.createElement("style", null, renderCssDatas(cssDatas)));
+        const TagName = item.link ? "a" : "span";
+        return /* @__PURE__ */ wp.element.createElement(TagName, { id: id + "_item_" + index, className: item.classes, href: item.link, "data-rect": item.rect, key: index }, itemBody());
+      }), /* @__PURE__ */ wp.element.createElement("style", null, renderCssDatas(cssDatas))));
     }
   });
 })();
