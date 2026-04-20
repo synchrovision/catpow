@@ -34,7 +34,7 @@
           setAttributes({ post_data_path: postDataSelection[0]["id"] });
         }
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps() }, /* @__PURE__ */ wp.element.createElement(CP.Label, null, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/form", attributes, httpMethod: "POST" })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u30D5\u30A9\u30FC\u30E0" }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps() }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "feedback" }, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/form", attributes, httpMethod: "POST" })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u30D5\u30A9\u30FC\u30E0" }, /* @__PURE__ */ wp.element.createElement(
         TreeSelect,
         {
           label: "path",

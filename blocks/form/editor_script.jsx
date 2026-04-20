@@ -38,7 +38,7 @@
 		return (
 			<>
 				<div {...useBlockProps()}>
-					<CP.Label>{content_path}</CP.Label>
+					<CP.Label icon="feedback">{content_path}</CP.Label>
 					<ServerSideRender block="catpow/form" attributes={attributes} httpMethod="POST" />
 				</div>
 				<InspectorControls>
