@@ -1,4 +1,5 @@
 ﻿wp.blocks.registerBlockType("catpow/formblock", {
+	apiVersion: 3,
 	title: "🐾 FormBlock",
 	description: "テーマに定義された編集可能なフォームを表示します。",
 	icon: "editor-code",
@@ -85,6 +86,7 @@
 });
 
 wp.blocks.registerBlockType("catpow/formblockcontent", {
+	apiVersion: 3,
 	title: "🐾 FormBlockContent",
 	icon: "editor-code",
 	category: "catpow",
