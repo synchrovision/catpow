@@ -56,7 +56,6 @@
       return rtn;
     },
     renderCssDatas: (cssDatas) => {
-      console.log(cssDatas);
       return CP.config.graphics.devicesForCss.map((device) => {
         if (device === "pc") {
           return CP.createStyleCode(cssDatas[device]);
@@ -522,7 +521,6 @@
                   className: "_title",
                   placeholder: "Title",
                   onChange: (title) => {
-                    console.log(title);
                     item.title = title;
                     save();
                   },
