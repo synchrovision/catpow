@@ -22,22 +22,23 @@ wp.blocks.registerBlockType("catpow/honeycomb", {
 	category: "catpow",
 	attributes: {
 		id: { source: "attribute", selector: ".wp-block-catpow-honeycomb", attribute: "id", default: "" },
-		classes: { source: "attribute", selector: ".wp-block-catpow-honeycomb", attribute: "class", default: "wp-block-catpow-honeycomb hasBaseImage" },
+		classes: { source: "attribute", selector: ".wp-block-catpow-honeycomb", attribute: "class", default: "wp-block-catpow-honeycomb" },
+		vars: { type: "object", default: {} },
 		breakpoints: { source: "attribute", selector: ".wp-block-catpow-honeycomb", attribute: "data-breakpoints", default: "480,960" },
 		grid: { source: "attribute", selector: ".wp-block-catpow-honeycomb", attribute: "data-grid", default: "4 6,6 4,8 3" },
 		items: {
 			source: "query",
-			selector: ".item",
+			selector: ".wp-block-catpow-honeycomb__item",
 			query: {
 				classes: { source: "attribute", attribute: "class" },
 				order: { source: "attribute", attribute: "data-order" },
-				src: { source: "attribute", selector: "svg image", attribute: "href" },
-				title: { source: "html", selector: ".title" },
-				text: { source: "html", selector: ".text" },
+				src: { source: "attribute", selector: ".wp-block-catpow-honeycomb__item-image", attribute: "src" },
+				title: { source: "html", selector: ".wp-block-catpow-honeycomb__item-contents-title" },
+				text: { source: "html", selector: ".wp-block-catpow-honeycomb__item-contents-text" },
 			},
 			default: [
 				{
-					classes: "item hasImage hasTitle hasText",
+					classes: "wp-block-catpow-honeycomb__item has-image has-title has-text",
 					order: "2 2 2 1,2 2 2 1,2 2 2 1",
 					src: wpinfo.theme_url + "/images/dummy.jpg",
 					title: ["Title"],
@@ -49,10 +50,10 @@ wp.blocks.registerBlockType("catpow/honeycomb", {
 	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
-		const { useState, useMemo } = wp.element;
-		const { BlockControls, InspectorControls, RichText } = wp.blockEditor;
-		const { PanelBody, TextareaControl, TextControl } = wp.components;
-		const { id, classes, items = [] } = attributes;
+		const { useMemo } = wp.element;
+		const { BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
+		const { Icon, PanelBody, TextareaControl, TextControl } = wp.components;
+		const { id, classes, vars, items = [] } = attributes;
 		let { breakpoints, grid } = attributes;
 
 		if (!id) {
@@ -79,17 +80,17 @@ wp.blocks.registerBlockType("catpow/honeycomb", {
 			};
 		});
 
-		var states = CP.classNamesToFlags(classes);
-
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = [];
+			const selectiveClasses = ["hasContentWidth", "hasMargin", "color", "colorScheme", "backgroundColor", "backgroundImage"];
 			wp.hooks.applyFilters("catpow.blocks.honeycomb.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
 		const selectiveItemClasses = useMemo(() => {
 			const { imageKeys } = CP.config.honeycomb;
 			const selectiveItemClasses = [
+				"level",
 				"color",
+				"colorScheme",
 				{ name: "image", label: "画像", values: "hasImage", sub: [{ input: "image", keys: imageKeys.image }] },
 				{ name: "title", label: "タイトル", values: "hasTitle" },
 				{ name: "text", label: "テキスト", values: "hasText" },
@@ -97,20 +98,6 @@ wp.blocks.registerBlockType("catpow/honeycomb", {
 			wp.hooks.applyFilters("catpow.blocks.honeycomb.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		}, []);
-
-		var tgtItem = false;
-
-		const itemHandler = [
-			<div className="handler move" data-drawaction="move">
-				<Icon icon="move" />
-			</div>,
-			<div className="handler clone" data-drawaction="clone">
-				<Icon icon="plus-alt" />
-			</div>,
-			<div className="handler delete" data-drawaction="delete">
-				<Icon icon="dismiss" />
-			</div>,
-		];
 
 		const save = () => {
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
@@ -121,92 +108,111 @@ wp.blocks.registerBlockType("catpow/honeycomb", {
 				<BlockControls>
 					<CP.SelectBreakPointToolbar breakpoints={breakpoints} value={attributes.bp} onChange={(bp) => setAttributes({ bp })} />
 				</BlockControls>
-				<Catpow.DrawArea
-					id={id}
-					className={classes}
-					onCatch={(e) => {
-						console.log("onCatch");
-					}}
-					onDraw={(e) => {
-						e.moveItem();
-					}}
-					onRelease={(e) => {
-						e.resetItem();
-						console.log(e);
-						if (e.action === "delete") {
-							items.splice(e.index, 1);
-							save();
-							return;
-						}
-						var order = items[e.index].order.split(",");
-						if (e.action === "clone") {
-							items.splice(e.index, 0, JSON.parse(JSON.stringify(items[e.index])));
-						}
-						order[bpIndex] =
-							Math.max(1, Math.min(currentGrid[0] - 1, Math.ceil((e.x / e.w) * currentGrid[0]))) + " " + Math.max(1, Math.min(currentGrid[1], Math.ceil((e.y / e.h) * currentGrid[1]))) + " 2 1";
-						items[e.index].order = order.join(",");
-						save();
-					}}
-					style={{
-						width: (attributes.bp == "0" ? breakpoints[1] : attributes.bp) + "px",
-						margin: "0 auto",
-						border: "solid 1px #888",
-					}}
-				>
-					{items.map((item, index) => {
-						var itemID = id + "_item_" + index;
-						var itemStates = CP.classNamesToFlags(item.classes);
-						var itemClasses = item.classes;
-						var itemSelected = attributes.currentItemIndex == index;
-						var order = item.order.split(",").map((val) => val.split(" "));
-						if (itemSelected) {
-							itemClasses += " selected";
-						}
-						breakpoints.map((bp, bpIndex) => {
-							cssDatas[bp] = cssDatas[bp] || {};
-							cssDatas[bp]["#" + itemID] = CP.createGridItemStyleCodeData(order[bpIndex]);
-						});
-						return (
-							<Catpow.Hexagon
-								id={itemID}
-								className={itemClasses}
-								data-index={index}
-								src={itemStates.hasImage ? item.src : false}
-								handler={itemHandler}
-								onClick={() => {
-									setAttributes({ currentItemIndex: index });
-								}}
-								key={index}
-							>
-								{itemStates.hasTitle && (
-									<h3>
-										<RichText
-											placeholder="Title"
-											onChange={(title) => {
-												item.title = title;
-												save();
-											}}
-											value={item.title}
-										/>
-									</h3>
-								)}
-								{itemStates.hasText && (
-									<p>
-										<RichText
-											placeholder="Text"
-											onChange={(text) => {
-												item.text = text;
-												save();
-											}}
-											value={item.text}
-										/>
-									</p>
-								)}
-							</Catpow.Hexagon>
-						);
-					})}
-					<style>{CP.createStyleCode(cssDatas[attributes.bp])}</style>
-				</Catpow.DrawArea>
+				<div {...useBlockProps({ style: vars })}>
+					<CP.Bem prefix="wp-block-catpow">
+						<Catpow.DrawArea
+							id={id}
+							className={classes}
+							onCatch={(e) => {
+								console.log("onCatch");
+							}}
+							onDraw={(e) => {
+								e.moveItem();
+							}}
+							onRelease={(e) => {
+								e.resetItem();
+								console.log(e);
+								if (e.action === "delete") {
+									items.splice(e.index, 1);
+									save();
+									return;
+								}
+								var order = items[e.index].order.split(",");
+								if (e.action === "clone") {
+									items.splice(e.index, 0, JSON.parse(JSON.stringify(items[e.index])));
+								}
+								order[bpIndex] =
+									Math.max(1, Math.min(currentGrid[0] - 1, Math.ceil((e.x / e.w) * currentGrid[0]))) + " " + Math.max(1, Math.min(currentGrid[1], Math.ceil((e.y / e.h) * currentGrid[1]))) + " 2 1";
+								items[e.index].order = order.join(",");
+								save();
+							}}
+							style={{
+								width: (attributes.bp == "0" ? breakpoints[1] : attributes.bp) + "px",
+								margin: "0 auto",
+								border: "solid 1px #888",
+							}}
+						>
+							{items.map((item, index) => {
+								var itemID = id + "_item_" + index;
+								var itemStates = CP.classNamesToFlags(item.classes);
+								var itemClasses = item.classes;
+								var itemSelected = attributes.currentItemIndex == index;
+								var order = item.order.split(",").map((val) => val.split(" "));
+								if (itemSelected) {
+									itemClasses += " selected";
+								}
+								breakpoints.map((bp, bpIndex) => {
+									cssDatas[bp] = cssDatas[bp] || {};
+									cssDatas[bp]["#" + itemID] = CP.createGridItemStyleCodeData(order[bpIndex]);
+								});
+								return (
+									<div
+										id={itemID}
+										className={itemClasses}
+										data-index={index}
+										data-drawitem={true}
+										onClick={() => {
+											setAttributes({ currentItemIndex: index });
+										}}
+										key={index}
+									>
+										<div className="_contents">
+											{itemStates.hasTitle && (
+												<RichText
+													tagName="h3"
+													className="_title"
+													placeholder="Title"
+													onChange={(title) => {
+														item.title = title;
+														save();
+													}}
+													value={item.title}
+												/>
+											)}
+											{itemStates.hasText && (
+												<RichText
+													tagName="p"
+													className="_text"
+													placeholder="Text"
+													onChange={(text) => {
+														item.text = text;
+														save();
+													}}
+													value={item.text}
+												/>
+											)}
+										</div>
+										{itemStates.hasImage && <img className="_image" src={item.src} alt="" />}
+										{isSelected && (
+											<div className="_handlers">
+												<div className="_handler is-move" data-drawaction="move">
+													<Icon icon="move" />
+												</div>
+												<div className="_handler is-clone" data-drawaction="clone">
+													<Icon icon="plus-alt" />
+												</div>
+												<div className="_handler is-delete" data-drawaction="delete">
+													<Icon icon="dismiss" />
+												</div>
+											</div>
+										)}
+									</div>
+								);
+							})}
+							<style>{CP.createStyleCode(cssDatas[attributes.bp])}</style>
+						</Catpow.DrawArea>
+					</CP.Bem>
+				</div>
 				<InspectorControls>
 					<PanelBody title="Grid" icon="admin-links" initialOpen={false}>
 						<TextControl
@@ -224,15 +230,6 @@ wp.blocks.registerBlockType("catpow/honeycomb", {
 							value={attributes.grid}
 						/>
 					</PanelBody>
-					<PanelBody title="ID" icon="admin-links" initialOpen={false}>
-						<TextControl
-							label="ID"
-							onChange={(id) => {
-								setAttributes({ id: id });
-							}}
-							value={id}
-						/>
-					</PanelBody>
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 					<CP.SelectClassPanel title="アイテム" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} selectiveClasses={selectiveItemClasses} />
 					{items[attributes.currentItemIndex] && (
@@ -248,13 +245,22 @@ wp.blocks.registerBlockType("catpow/honeycomb", {
 						</PanelBody>
 					)}
 					<CP.ItemControlInfoPanel />
+					<PanelBody title="ID" icon="admin-links" initialOpen={false}>
+						<TextControl
+							label="ID"
+							onChange={(id) => {
+								setAttributes({ id: id });
+							}}
+							value={id}
+						/>
+					</PanelBody>
 				</InspectorControls>
 			</>
 		);
 	},
-	save({ attributes, className, setAttributes }) {
+	save({ attributes }) {
 		const { RichText } = wp.blockEditor;
-		const { id, classes, items = [] } = attributes;
+		const { id, classes, vars, items = [] } = attributes;
 		let { breakpoints, grid } = attributes;
 
 		breakpoints = breakpoints.split(",");
@@ -269,44 +275,38 @@ wp.blocks.registerBlockType("catpow/honeycomb", {
 			};
 		});
 
-		var states = CP.classNamesToFlags(classes);
-		const { imageKeys } = CP.config.honeycomb;
-
 		return (
-			<div id={id} className={classes} data-breakpoints={breakpoints} data-grid={grid}>
-				{items.map((item, index) => {
-					var itemID = id + "_item_" + index;
-					var itemStates = CP.classNamesToFlags(item.classes);
-					item.order = item.order || "";
-					var order = item.order.split(",").map((val) => val.split(" "));
-					breakpoints.map((bp, bpIndex) => {
-						cssDatas[bp] = cssDatas[bp] || {};
-						cssDatas[bp]["#" + itemID] = CP.createGridItemStyleCodeData(order[bpIndex]);
-					});
-					return (
-						<Catpow.Hexagon id={itemID} className={item.classes} src={itemStates.hasImage ? item.src : false} data-order={item.order} key={index}>
-							{itemStates.hasTitle && (
-								<h3>
-									<RichText.Content value={item.title} />
-								</h3>
-							)}
-							{itemStates.hasText && (
-								<p>
-									<RichText.Content value={item.text} />
-								</p>
-							)}
-						</Catpow.Hexagon>
-					);
-				})}
-				<style>
-					{breakpoints.map((bp) => {
-						if ("0" == bp) {
-							return CP.createStyleCode(cssDatas[bp]);
-						}
-						return "@media(min-width:" + bp + "px){" + CP.createStyleCode(cssDatas[bp]) + "}";
+			<CP.Bem prefix="wp-block-catpow">
+				<div id={id} className={classes} style={vars} data-breakpoints={breakpoints} data-grid={grid}>
+					{items.map((item, index) => {
+						var itemID = id + "_item_" + index;
+						var itemStates = CP.classNamesToFlags(item.classes);
+						item.order = item.order || "";
+						var order = item.order.split(",").map((val) => val.split(" "));
+						breakpoints.map((bp, bpIndex) => {
+							cssDatas[bp] = cssDatas[bp] || {};
+							cssDatas[bp]["#" + itemID] = CP.createGridItemStyleCodeData(order[bpIndex]);
+						});
+						return (
+							<div id={itemID} className={item.classes} data-order={item.order} key={index}>
+								<div className="_contents">
+									{itemStates.hasTitle && <RichText.Content tagName="h3" className="_title" value={item.title} />}
+									{itemStates.hasText && <RichText.Content tagName="p" className="_text" value={item.text} />}
+								</div>
+								{itemStates.hasImage && <img className="_image" src={item.src} alt="" />}
+							</div>
+						);
 					})}
-				</style>
-			</div>
+					<style>
+						{breakpoints.map((bp) => {
+							if ("0" == bp) {
+								return CP.createStyleCode(cssDatas[bp]);
+							}
+							return "@media(min-width:" + bp + "px){" + CP.createStyleCode(cssDatas[bp]) + "}";
+						})}
+					</style>
+				</div>
+			</CP.Bem>
 		);
 	},
 });

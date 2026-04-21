@@ -1,13 +1,28 @@
-.wp-block-catpow-honeycomb .item .handlers {
+.wp-block-catpow-honeycomb__item-handlers {
   display: block;
   position: absolute;
-  top: -1.25rem;
+  width: fit-content;
+  top: 1.25rem;
   left: 0rem;
+  right: 0rem;
+  margin-inline: auto;
+  padding: 0.25rem;
   z-index: 100;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  gap: 0.25rem;
+  background-color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 5px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
-.wp-block-catpow-honeycomb .item .handlers .handler {
+.wp-block-catpow-honeycomb__item-handlers-handler {
   display: inline-block;
-  color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
+  font-size: 0.75rem;
+  line-height: 1em;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;

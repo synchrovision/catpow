@@ -17,22 +17,23 @@
     category: "catpow",
     attributes: {
       id: { source: "attribute", selector: ".wp-block-catpow-honeycomb", attribute: "id", default: "" },
-      classes: { source: "attribute", selector: ".wp-block-catpow-honeycomb", attribute: "class", default: "wp-block-catpow-honeycomb hasBaseImage" },
+      classes: { source: "attribute", selector: ".wp-block-catpow-honeycomb", attribute: "class", default: "wp-block-catpow-honeycomb" },
+      vars: { type: "object", default: {} },
       breakpoints: { source: "attribute", selector: ".wp-block-catpow-honeycomb", attribute: "data-breakpoints", default: "480,960" },
       grid: { source: "attribute", selector: ".wp-block-catpow-honeycomb", attribute: "data-grid", default: "4 6,6 4,8 3" },
       items: {
         source: "query",
-        selector: ".item",
+        selector: ".wp-block-catpow-honeycomb__item",
         query: {
           classes: { source: "attribute", attribute: "class" },
           order: { source: "attribute", attribute: "data-order" },
-          src: { source: "attribute", selector: "svg image", attribute: "href" },
-          title: { source: "html", selector: ".title" },
-          text: { source: "html", selector: ".text" }
+          src: { source: "attribute", selector: ".wp-block-catpow-honeycomb__item-image", attribute: "src" },
+          title: { source: "html", selector: ".wp-block-catpow-honeycomb__item-contents-title" },
+          text: { source: "html", selector: ".wp-block-catpow-honeycomb__item-contents-text" }
         },
         default: [
           {
-            classes: "item hasImage hasTitle hasText",
+            classes: "wp-block-catpow-honeycomb__item has-image has-title has-text",
             order: "2 2 2 1,2 2 2 1,2 2 2 1",
             src: wpinfo.theme_url + "/images/dummy.jpg",
             title: ["Title"],
@@ -44,10 +45,10 @@
     },
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
-      const { useState, useMemo } = wp.element;
-      const { BlockControls, InspectorControls, RichText } = wp.blockEditor;
-      const { PanelBody, TextareaControl, TextControl } = wp.components;
-      const { id, classes, items = [] } = attributes;
+      const { useMemo } = wp.element;
+      const { BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
+      const { Icon, PanelBody, TextareaControl, TextControl } = wp.components;
+      const { id, classes, vars, items = [] } = attributes;
       let { breakpoints, grid } = attributes;
       if (!id) {
         setAttributes({ id: "hnc" + (/* @__PURE__ */ new Date()).getTime().toString(16) });
@@ -69,16 +70,17 @@
           ["#" + id]: CP.createGridStyleCodeData(grid[bpIndex2])
         };
       });
-      var states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
-        const selectiveClasses2 = [];
+        const selectiveClasses2 = ["hasContentWidth", "hasMargin", "color", "colorScheme", "backgroundColor", "backgroundImage"];
         wp.hooks.applyFilters("catpow.blocks.honeycomb.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
       const selectiveItemClasses = useMemo(() => {
         const { imageKeys } = CP.config.honeycomb;
         const selectiveItemClasses2 = [
+          "level",
           "color",
+          "colorScheme",
           { name: "image", label: "\u753B\u50CF", values: "hasImage", sub: [{ input: "image", keys: imageKeys.image }] },
           { name: "title", label: "\u30BF\u30A4\u30C8\u30EB", values: "hasTitle" },
           { name: "text", label: "\u30C6\u30AD\u30B9\u30C8", values: "hasText" }
@@ -86,16 +88,10 @@
         wp.hooks.applyFilters("catpow.blocks.honeycomb.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
         return selectiveItemClasses2;
       }, []);
-      var tgtItem = false;
-      const itemHandler = [
-        /* @__PURE__ */ wp.element.createElement("div", { className: "handler move", "data-drawaction": "move" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "move" })),
-        /* @__PURE__ */ wp.element.createElement("div", { className: "handler clone", "data-drawaction": "clone" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "plus-alt" })),
-        /* @__PURE__ */ wp.element.createElement("div", { className: "handler delete", "data-drawaction": "delete" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "dismiss" }))
-      ];
       const save = () => {
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });
       };
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectBreakPointToolbar, { breakpoints, value: attributes.bp, onChange: (bp) => setAttributes({ bp }) })), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectBreakPointToolbar, { breakpoints, value: attributes.bp, onChange: (bp) => setAttributes({ bp }) })), /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ style: vars }) }, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement(
         Catpow.DrawArea,
         {
           id,
@@ -142,21 +138,22 @@
             cssDatas[bp]["#" + itemID] = CP.createGridItemStyleCodeData(order[bpIndex2]);
           });
           return /* @__PURE__ */ wp.element.createElement(
-            Catpow.Hexagon,
+            "div",
             {
               id: itemID,
               className: itemClasses,
               "data-index": index,
-              src: itemStates.hasImage ? item.src : false,
-              handler: itemHandler,
+              "data-drawitem": true,
               onClick: () => {
                 setAttributes({ currentItemIndex: index });
               },
               key: index
             },
-            itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(
+            /* @__PURE__ */ wp.element.createElement("div", { className: "_contents" }, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement(
               RichText,
               {
+                tagName: "h3",
+                className: "_title",
                 placeholder: "Title",
                 onChange: (title) => {
                   item.title = title;
@@ -164,10 +161,11 @@
                 },
                 value: item.title
               }
-            )),
-            itemStates.hasText && /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(
+            ), itemStates.hasText && /* @__PURE__ */ wp.element.createElement(
               RichText,
               {
+                tagName: "p",
+                className: "_text",
                 placeholder: "Text",
                 onChange: (text) => {
                   item.text = text;
@@ -175,11 +173,13 @@
                 },
                 value: item.text
               }
-            ))
+            )),
+            itemStates.hasImage && /* @__PURE__ */ wp.element.createElement("img", { className: "_image", src: item.src, alt: "" }),
+            isSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "_handlers" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_handler is-move", "data-drawaction": "move" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "move" })), /* @__PURE__ */ wp.element.createElement("div", { className: "_handler is-clone", "data-drawaction": "clone" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "plus-alt" })), /* @__PURE__ */ wp.element.createElement("div", { className: "_handler is-delete", "data-drawaction": "delete" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "dismiss" })))
           );
         }),
         /* @__PURE__ */ wp.element.createElement("style", null, CP.createStyleCode(cssDatas[attributes.bp]))
-      ), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Grid", icon: "admin-links", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+      ))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Grid", icon: "admin-links", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
           label: "BreakPoints",
@@ -197,15 +197,6 @@
           },
           value: attributes.grid
         }
-      )), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "ID", icon: "admin-links", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-        TextControl,
-        {
-          label: "ID",
-          onChange: (id2) => {
-            setAttributes({ id: id2 });
-          },
-          value: id
-        }
       )), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30A2\u30A4\u30C6\u30E0", icon: "edit", set: setAttributes, attr: attributes, items, index: attributes.currentItemIndex, selectiveClasses: selectiveItemClasses }), items[attributes.currentItemIndex] && /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "ITEM CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextareaControl,
         {
@@ -216,11 +207,20 @@
           },
           value: items[attributes.currentItemIndex].classes
         }
-      )), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)));
+      )), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "ID", icon: "admin-links", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+        TextControl,
+        {
+          label: "ID",
+          onChange: (id2) => {
+            setAttributes({ id: id2 });
+          },
+          value: id
+        }
+      ))));
     },
-    save({ attributes, className, setAttributes }) {
+    save({ attributes }) {
       const { RichText } = wp.blockEditor;
-      const { id, classes, items = [] } = attributes;
+      const { id, classes, vars, items = [] } = attributes;
       let { breakpoints, grid } = attributes;
       breakpoints = breakpoints.split(",");
       breakpoints.unshift("0");
@@ -231,9 +231,7 @@
           ["#" + id]: CP.createGridStyleCodeData(grid[bpIndex])
         };
       });
-      var states = CP.classNamesToFlags(classes);
-      const { imageKeys } = CP.config.honeycomb;
-      return /* @__PURE__ */ wp.element.createElement("div", { id, className: classes, "data-breakpoints": breakpoints, "data-grid": grid }, items.map((item, index) => {
+      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { id, className: classes, style: vars, "data-breakpoints": breakpoints, "data-grid": grid }, items.map((item, index) => {
         var itemID = id + "_item_" + index;
         var itemStates = CP.classNamesToFlags(item.classes);
         item.order = item.order || "";
@@ -242,13 +240,13 @@
           cssDatas[bp] = cssDatas[bp] || {};
           cssDatas[bp]["#" + itemID] = CP.createGridItemStyleCodeData(order[bpIndex]);
         });
-        return /* @__PURE__ */ wp.element.createElement(Catpow.Hexagon, { id: itemID, className: item.classes, src: itemStates.hasImage ? item.src : false, "data-order": item.order, key: index }, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement("h3", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.title })), itemStates.hasText && /* @__PURE__ */ wp.element.createElement("p", null, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.text })));
+        return /* @__PURE__ */ wp.element.createElement("div", { id: itemID, className: item.classes, "data-order": item.order, key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "_contents" }, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "h3", className: "_title", value: item.title }), itemStates.hasText && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_text", value: item.text })), itemStates.hasImage && /* @__PURE__ */ wp.element.createElement("img", { className: "_image", src: item.src, alt: "" }));
       }), /* @__PURE__ */ wp.element.createElement("style", null, breakpoints.map((bp) => {
         if ("0" == bp) {
           return CP.createStyleCode(cssDatas[bp]);
         }
         return "@media(min-width:" + bp + "px){" + CP.createStyleCode(cssDatas[bp]) + "}";
-      })));
+      }))));
     }
   });
 })();

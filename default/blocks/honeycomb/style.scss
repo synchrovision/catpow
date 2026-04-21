@@ -1,0 +1,33 @@
+@import "admin_style_config.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
+
+.wp-block-catpow-honeycomb{
+	&__item{
+		@include bnd((p:r,h:a,a:5/6,mgb:-30%));
+		@include flx((a:c,j:c));
+		@include bg((c:bx));
+		clip-path:polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+		&-contents{
+			@include bnd((p:r,z:2));
+			@include txt((a:c,c:tx));
+			&-title{
+				@extend %heading-block;
+				@extend %heading;
+			}
+			&-text{
+				@extend %paragraph-block;
+				@extend %paragraph;
+			}
+		}
+		&-image{
+			@include bnd((d:b,p:a,i:0,w:f,h:f,op:c,of:c,z:1));
+		}
+		&.has-image{
+		}
+		&.has-text{
+		}
+		&.has-title{
+		}
+	}
+}
