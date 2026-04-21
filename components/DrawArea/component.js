@@ -91,7 +91,7 @@
             event = false;
             return;
           }
-          initEventData(e.currentTarget, e.target.closest(".item"));
+          initEventData(e.currentTarget, e.target.closest("[data-drawitem]"));
           event.handler = handler;
           event.action = handler.dataset.drawaction;
           setEventData(e);
@@ -117,7 +117,7 @@
           if (index < 0) {
             return;
           }
-          initEventData(e.currentTarget, e.currentTarget.querySelector(`.item[data-index='${index}']`));
+          initEventData(e.currentTarget, e.currentTarget.querySelector(`[data-drawitem][data-index='${index}']`));
           switch (e.key) {
             case "Backspace":
               event.action = "delete";
