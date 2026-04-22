@@ -1,0 +1,58 @@
+.wp-block-catpow-icons {
+  display: block;
+  margin-inline: auto;
+  list-style: none;
+  font-size: var(--cp-font-size-t-u);
+  line-height: 1em;
+}
+.wp-block-catpow-icons.is-align-left {
+  text-align: left;
+}
+.wp-block-catpow-icons.is-align-center {
+  text-align: center;
+}
+.wp-block-catpow-icons.is-align-right {
+  text-align: right;
+}
+.wp-block-catpow-icons__item {
+  display: inline-block;
+  position: relative;
+  padding: 0.1em;
+  vertical-align: middle;
+}
+.wp-block-catpow-icons__item-link {
+  display: block;
+  position: relative;
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
+}
+.wp-block-catpow-icons__item-link-icon {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  object-fit: contain;
+}
+.wp-block-catpow-icons.is-filled .wp-block-catpow-icons__item-link {
+  background-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
+  border-radius: var(--cp-border-radius-c-l);
+  box-shadow: var(--cp-shadow-c-l) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+}
+.wp-block-catpow-icons.is-filled.is-shape-square .wp-block-catpow-icons__item-link {
+  border-radius: 0rem;
+}
+.wp-block-catpow-icons.is-filled.is-shape-circle .wp-block-catpow-icons__item-link {
+  border-radius: 1em;
+}
+.wp-block-catpow-icons.is-size-small .wp-block-catpow-icons__item {
+  font-size: 1em;
+}
+.wp-block-catpow-icons.is-size-medium .wp-block-catpow-icons__item {
+  font-size: 2em;
+}
+.wp-block-catpow-icons.is-size-large .wp-block-catpow-icons__item {
+  font-size: 4em;
+}
+/*# sourceMappingURL=./style.css.map */

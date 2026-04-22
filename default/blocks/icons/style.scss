@@ -1,0 +1,78 @@
+@import "admin_style_config.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
+
+.wp-block-catpow-icons{
+	$block:&;
+	@include bnd((d:b,mgi:a));
+	@include txt((l:n,p:t-u,h:1em));
+	&.is-align-left{
+		@include txt((a:l));
+	}
+	&.is-align-center{
+		@include txt((a:c));
+	}
+	&.is-align-right{
+		@include txt((a:r));
+	}
+	&__item{
+		@include bnd((d:ib,p:r,pd:.1em));
+		@include txt((v:m));
+		&-link{
+			@include bnd((d:b,p:r,w:1em,h:1em,o:h));
+			&-icon{
+				@include bnd((d:b,p:a,w:f,h:f,op:c,of:i));
+			}
+		}
+	}
+	&.is-filled{
+		#{$block}{
+			&__item{
+				&-link{
+					@include bg((c:mx));
+					@include bdr((r:c-l));
+					@include shd((b:c-l));
+				}
+			}
+		}
+		&.is-shape-square{
+			#{$block}{
+				&__item{
+					&-link{
+						@include bdr((r:0));
+					}
+				}
+			}
+		}
+		&.is-shape-circle{
+			#{$block}{
+				&__item{
+					&-link{
+						@include bdr((r:1em));
+					}
+				}
+			}
+		}
+	}
+	&.is-size-small{
+		#{$block}{
+			&__item{
+				@include txt((p:1em));
+			}
+		}
+	}
+	&.is-size-medium{
+		#{$block}{
+			&__item{
+				@include txt((p:2em));
+			}
+		}
+	}
+	&.is-size-large{
+		#{$block}{
+			&__item{
+				@include txt((p:4em));
+			}
+		}
+	}
+}

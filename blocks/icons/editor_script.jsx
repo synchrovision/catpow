@@ -20,7 +20,7 @@
 		classes: { source: "attribute", selector: "ul", attribute: "class", default: "wp-block-catpow-icons" },
 		items: {
 			source: "query",
-			selector: "li.item",
+			selector: ".wp-block-catpow-icons__item",
 			query: {
 				classes: { source: "attribute", attribute: "class" },
 				src: { source: "attribute", selector: "[src]", attribute: "src" },
@@ -29,7 +29,7 @@
 			},
 			default: [...Array(3)].map(() => {
 				return {
-					classes: "item",
+					classes: "wp-block-catpow-icons__item",
 					src: wpinfo.theme_url + "/images/dummy_icon.svg",
 					alt: "dummy",
 					href: wpinfo.home_url,
@@ -39,18 +39,19 @@
 	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
-		const { useState, useMemo } = wp.element;
-		const { BlockControls, InspectorControls } = wp.blockEditor;
-		const { PanelBody, TreeSelect, TextareaControl, ToolbarGroup } = wp.components;
-		const { items = [], classes, countPrefix, countSuffix } = attributes;
-		const primaryClass = "wp-block-catpow-icons";
-		var classArray = _.uniq((className + " " + classes).split(" "));
-		var classNameArray = className.split(" ");
+		const { useMemo } = wp.element;
+		const { BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
+		const { PanelBody, TextareaControl, ToolbarGroup } = wp.components;
+		const { items = [], classes, EditMode = false } = attributes;
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				{ name: "size", label: "サイズ", filter: "size", values: ["small", "medium", "large"] },
-				{ name: "filled", label: "塗り", values: "filled", sub: [{ name: "shape", label: "形状", filter: "shape", values: { circle: "丸", square: "四角" } }] },
+				"level",
+				"hasMargin",
+				"color",
+				"colorScheme",
+				{ name: "size", type: "buttons", label: "サイズ", values: { isSizeSmall: "小", isSizeMedium: "中", isSizeLarge: "大" } },
+				{ name: "filled", label: "塗り", values: "isFilled", sub: [{ name: "shape", type: "buttons", label: "形状", values: { isShapeCircle: "丸", isShapeSquare: "四角" } }] },
 			];
 			wp.hooks.applyFilters("catpow.blocks.icons.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -61,24 +62,7 @@
 			return selectiveItemClasses;
 		}, []);
 
-		let rtn = [];
-
-		items.map((item, index) => {
-			if (!item.controlClasses) {
-				item.controlClasses = "control";
-			}
-			rtn.push(
-				<CP.Item tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={attributes.currentItemIndex == index} key={index}>
-					<a>
-						<img src={item.src} alt={item.alt} />
-					</a>
-				</CP.Item>
-			);
-		});
-
-		if (attributes.EditMode === undefined) {
-			attributes.EditMode = false;
-		}
+		const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : classes });
 
 		return (
 			<>
@@ -89,7 +73,7 @@
 								icon: "edit",
 								title: "EditMode",
 								isActive: attributes.EditMode,
-								onClick: () => setAttributes({ EditMode: !attributes.EditMode }),
+								onClick: () => setAttributes({ EditMode: !EditMode }),
 							},
 						]}
 					/>
@@ -98,28 +82,61 @@
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(clss) => setAttributes({ classes: clss })} value={classArray.join(" ")} />
+						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 					<CP.SelectClassPanel title="アイテム" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} selectiveClasses={selectiveItemClasses} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
-				<ul className={attributes.EditMode ? primaryClass + " edit" : classes}>{rtn}</ul>
+				{EditMode ? (
+					<div {...blockProps}>
+						<CP.Label icon="edit" />
+						<CP.EditItemsTable
+							set={setAttributes}
+							attr={attributes}
+							columns={[
+								{ type: "image", key: "src" },
+								{ type: "text", key: "alt" },
+								{ type: "text", key: "href" },
+							]}
+						/>
+					</div>
+				) : (
+					<CP.Bem prefix="wp-block-catpow">
+						<ul {...blockProps}>
+							{items.map((item, index) => {
+								if (!item.controlClasses) {
+									item.controlClasses = "control";
+								}
+								return (
+									<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={attributes.currentItemIndex == index} key={index}>
+										<a className="_link">
+											<img className="_icon" src={item.src} alt={item.alt} />
+										</a>
+									</CP.Item>
+								);
+							})}
+						</ul>
+					</CP.Bem>
+				)}
 			</>
 		);
 	},
 	save({ attributes, className }) {
-		const { items = [], classes, countPrefix, countSuffix } = attributes;
+		const { useBlockProps } = wp.blockEditor;
+		const { items = [], classes } = attributes;
 
-		let rtn = [];
-		items.map((item, index) => {
-			rtn.push(
-				<li className={item.classes} key={index}>
-					<a href={item.href}>
-						<img src={item.src} alt={item.alt} />
-					</a>
-				</li>
-			);
-		});
-		return <ul className={classes}>{rtn}</ul>;
+		return (
+			<CP.Bem prefix="wp-block-catpow">
+				<ul {...useBlockProps.save({ className: classes })}>
+					{items.map((item, index) => (
+						<li className={item.classes} key={index}>
+							<a className="_link" href={item.href}>
+								<img className="_icon" src={item.src} alt={item.alt} />
+							</a>
+						</li>
+					))}
+				</ul>
+			</CP.Bem>
+		);
 	},
 });
