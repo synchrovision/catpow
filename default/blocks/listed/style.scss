@@ -139,7 +139,7 @@
 		}
 	}
 	&.is-type-index{
-		@include bnd((c:i,g:g));
+		@include bnd((c:i,g:c-c));
 		#{$block}{
 			&__item{
 				@include bnd((pd:0,mg:0,bs:b,bi:a));
@@ -170,7 +170,7 @@
 		}
 	}
 	&.is-type-menu{
-		@include grd((rc:i,g:g));
+		@include grd((rc:i,g:c-c));
 		#{$block}{
 			&__item{
 				@extend %card-component;
@@ -219,7 +219,7 @@
 			#{$block}{
 				&__item{
 					&-header{
-						@include grd((tc:1fr 4fr,g:g));
+						@include grd((tc:1fr 4fr,g:c-c));
 						&-image{
 							@include bnd((p:r));
 							img{
