@@ -3,7 +3,7 @@
   display: block;
   position: relative;
   scroll-snap-align: start;
-  background-color: hsla(var(--cp-tones-bx-h),var(--cp-tones-bx-s),var(--cp-tones-bx-l),var(--cp-tones-bx-a,1));
+  background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
 }
 .wp-block-catpow-pageheader__body {
   position: relative;
@@ -12,16 +12,16 @@
 .wp-block-catpow-pageheader__body-title {
   padding: 5rem 1.25rem;
   text-align: center;
-  font-family: var(--cp-font-family-h);
+  font-family: var(--cp-font-family-t-h);
   font-size: 2rem;
   line-height: 1.5em;
-  color: hsla(var(--cp-tones-tx-h),var(--cp-tones-tx-s),var(--cp-tones-tx-l),var(--cp-tones-tx-a,1));
+  color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
 }
 .wp-block-catpow-pageheader__body-breadcrumb {
-  background-color: hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  background-color: oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 .wp-block-catpow-pageheader__body-breadcrumb__body {
-  max-width: var(--cp-content-width);
+  max-width: var(--cp-size-c);
   width: auto;
   margin: auto;
 }
@@ -44,7 +44,7 @@
   display: inline-block;
   padding: 0.5rem;
   font-size: 0.875rem;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+  color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
   text-decoration: none;
 }
 .wp-block-catpow-pageheader__body-breadcrumb__body-items-item:not(:last-child) .wp-block-catpow-pageheader__body-breadcrumb__body-items-item-link:last-child::after {
@@ -73,7 +73,7 @@
   left: 0rem;
   inset: 0rem;
   z-index: 2;
-  background-color: hsla(var(--cp-tones-m-h),var(--cp-tones-m-s),var(--cp-tones-m-l),var(--cp-tones-m-a,1));
+  background-color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
   opacity: var(--cp-image-opacity);
   mix-blend-mode: var(--cp-image-blendmode);
 }

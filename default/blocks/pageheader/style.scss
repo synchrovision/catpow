@@ -7,7 +7,7 @@
 		@include bnd((p:r,z:2));
 		&-title{
 			@include bnd((pd:80 20));
-			@include txt((a:c,f:h,p:32,h:1.5em,c:tx));
+			@include txt((a:c,f:t-h,p:32,h:1.5em,c:tx));
 		}
 		&-breadcrumb{
 			@include bg((c:shd));
