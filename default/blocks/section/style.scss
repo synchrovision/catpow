@@ -7,7 +7,7 @@
 	$body:#{$block}__body;
 	$header:#{$block}__header;
 	$contents:#{$block}__contents;
-	@include bnd((d:b,p:r,mgi:a,bi:a));
+	@include bnd((d:b,p:r,mgi:a,pd:b,bi:a));
 	&__header{
 		&-title{
 			@include bnd((mgi:a));

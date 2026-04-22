@@ -28,6 +28,7 @@
   display: block;
   position: relative;
   margin-inline: auto;
+  padding: var(--cp-padding-b);
   break-inside: avoid;
 }
 .wp-block-catpow-section__header-title {
