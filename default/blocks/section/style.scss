@@ -7,19 +7,18 @@
 	$body:#{$block}__body;
 	$header:#{$block}__header;
 	$contents:#{$block}__contents;
-	@include bnd((d:b,p:r,mgi:a,pd:spd,bi:a));
+	@include bnd((d:b,p:r,mgi:a,bi:a));
 	&__header{
 		&-title{
 			@include bnd((mgi:a));
-			@include txt((p:h));
+			@include txt((p:t-h));
 			&-heading{
+				@extend %heading-block;
 				@extend %heading;
-				@include bnd((mgb:hmgb,pd:0));
-				@include txt((p:1em));
 			}
 			&-lead{
+				@extend %lead-block;
 				@extend %lead;
-				@include bnd((mgb:lmgb,pd:0));
 			}
 			&-titleimage{
 				picture{
