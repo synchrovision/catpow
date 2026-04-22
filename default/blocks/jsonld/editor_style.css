@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .wp-block-catpow-jsonld {
-  font-family: var(--cp-font-family-g);
+  font-family: var(--cp-font-family-f-g);
 }
 .wp-block-catpow-jsonld__label {
   display: -webkit-box;
@@ -19,7 +19,7 @@
   border-width: 0.0625rem;
   font-size: 1.25rem;
   line-height: 1em;
-  color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
+  color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 .wp-block-catpow-jsonld__label-icon {
   display: inline-block;
@@ -28,7 +28,7 @@
 .wp-block-catpow-jsonld__label-icon > svg {
   width: 1em;
   height: auto;
-  fill: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),var(--cp-tones-t-l),var(--cp-tones-t-a,1));
+  fill: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
   stroke-width: 0.0625rem;
 }
 .wp-block-catpow-jsonld__label-text {
@@ -42,7 +42,7 @@
   position: relative;
   margin: 1.25rem;
   border-radius: 0.5rem;
-  box-shadow: 0 4px 9px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  box-shadow: 0 4px 9px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 .wp-block-catpow-jsonld-editor__type {
   padding: 0.5rem;
@@ -53,10 +53,10 @@
   align-items: center;
   -webkit-justify-content: space-between;
   justify-content: space-between;
-  background-color: hsla(var(--cp-tones-s-h),var(--cp-tones-s-s),var(--cp-tones-s-l),var(--cp-tones-s-a,1));
+  background-color: oklch(var(--cp-tones-s-l) var(--cp-tones-s-c) var(--cp-tones-s-h) / var(--cp-tones-s-a,1));
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
-  border-bottom-color: hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  border-bottom-color: oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
   border-radius: 0.5rem 0.5rem 0rem 0rem;
 }
 .wp-block-catpow-jsonld-editor__type-icon {
@@ -91,7 +91,7 @@
   flex-shrink: 0;
   flex-basis: 0.5em;
   height: 1em;
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 100),calc(var(--cp-tones-t-a,1) * 0.5));
+  background-color: oklch(calc(1 - var(--cp-tones-t-t) * 100) var(--cp-tones-t-c) var(--cp-tones-t-h) / calc(var(--cp-tones-t-a,1) * 0.5));
   clip-path: polygon(0% 0%, calc(100% - 100%) 0%, 100% 50%, calc(100% - 100%) 100%, 0% 100%);
 }
 .wp-block-catpow-jsonld-editor__type-help {
@@ -106,12 +106,12 @@
   font-size: 0.75rem;
   line-height: 1em;
   text-decoration: none;
-  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  box-shadow: 0 1px 3px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 .wp-block-catpow-jsonld-editor__type-help::before {
   content: "？";
   text-align: center;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+  color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
 }
 .wp-block-catpow-jsonld-editor__items-item {
   padding: 1em 0.5em;
@@ -125,7 +125,7 @@
 .wp-block-catpow-jsonld-editor__items-item:not(:last-child) {
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
-  border-bottom-color: hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  border-bottom-color: oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 .wp-block-catpow-jsonld-editor__items-item-label {
   -webkit-box-flex: 1;
@@ -139,18 +139,18 @@
   height: 1em;
   padding: 0.25em;
   margin-left: 0.5em;
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 50),var(--cp-tones-t-a,1));
+  background-color: oklch(calc(1 - var(--cp-tones-t-t) * 50) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
   border-radius: 50%;
   font-size: 0.625rem;
   line-height: 1em;
   text-decoration: none;
   vertical-align: 0.5em;
-  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  box-shadow: 0 1px 3px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 .wp-block-catpow-jsonld-editor__items-item-label-help::before {
   content: "？";
   text-align: center;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+  color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
 }
 .wp-block-catpow-jsonld-editor__items-item-inputs {
   -webkit-box-flex: 10;
@@ -166,7 +166,7 @@
   position: relative;
   padding: 1rem;
   border-radius: 0.5rem;
-  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  box-shadow: 0 1px 3px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 .wp-block-catpow-jsonld-editor__items-item-inputs-group-item-control {
   display: block;
@@ -181,17 +181,17 @@
   height: 1em;
   padding: 0.25em;
   margin-left: 0.5em;
-  background-color: hsla(var(--cp-tones-t-h),var(--cp-tones-t-s),calc(100% - var(--cp-tones-t-t) * 50),var(--cp-tones-t-a,1));
+  background-color: oklch(calc(1 - var(--cp-tones-t-t) * 50) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
   border-radius: 50%;
   font-size: 0.625rem;
   line-height: 1em;
   text-decoration: none;
   vertical-align: 0.5em;
-  box-shadow: 0 1px 3px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  box-shadow: 0 1px 3px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 .wp-block-catpow-jsonld-editor__items-item-inputs-group-item-control-increase::before, .wp-block-catpow-jsonld-editor__items-item-inputs-group-item-control-decrease::before {
   text-align: center;
-  color: hsla(var(--cp-tones-i-h),var(--cp-tones-i-s),var(--cp-tones-i-l),var(--cp-tones-i-a,1));
+  color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
 }
 .wp-block-catpow-jsonld-editor__items-item-inputs-group-item-control-increase::before {
   content: "＋";
