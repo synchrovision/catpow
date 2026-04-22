@@ -4,7 +4,7 @@
 .wp-block-catpow-breadcrumb-items {
   padding: 0rem 1em;
   margin: 0rem auto;
-  width: var(--cp-content-width-m);
+  width: var(--cp-size-c-m);
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -42,7 +42,7 @@
   margin-right: 0.4em;
   width: 0.5em;
   height: 0.75em;
-  background-color: hsla(var(--cp-tones-mx-h),var(--cp-tones-mx-s),var(--cp-tones-mx-l),var(--cp-tones-mx-a,1));
+  background-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
   clip-path: polygon(0% 0%, 30% 0%, 100% 50%, 30% 100%, 0% 100%, calc(100% - 30%) 50%);
 }
 /*# sourceMappingURL=./style.css.map */
