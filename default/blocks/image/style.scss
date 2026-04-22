@@ -1,4 +1,6 @@
-@import 'admin_style_config.scss';
+@import "admin_style_config.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
 
 .wp-block-image{
 	@include bnd((w:fit,mg:0));
@@ -10,5 +12,22 @@
 	}
 	&.alignright{
 		@include bnd((mgl:a));
+	}
+	&.is-style-snap{
+		@extend %card-component;
+	}
+	&.is-style-circle{
+		img{
+			@include bnd((a:1,op:c,of:c));
+			@include bdr((r:50%));
+			@include shd((b:c-c));
+		}
+	}
+	&.is-style-cover{
+		@include bnd((w:f,h:100vh));
+		@include clp((i:0));
+		img{
+			@include bnd((d:b,p:f,i:0,w:100vw,h:100vh,op:c,of:c));
+		}
 	}
 }
