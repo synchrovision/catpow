@@ -662,7 +662,7 @@
 html {
   scroll-behavior: smooth;
   color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
-  font-family: p;
+  font-family: var(--cp-font-family-t-p);
 }
 @media (max-width:480px) {
   html {
@@ -3121,7 +3121,7 @@ html {
   display: inline-block;
   padding: 0.625rem;
   font-size: 1rem;
-  font-family: p;
+  font-family: var(--cp-font-family-t-p);
   line-height: 1em;
   color: oklch(calc(1 - var(--cp-tones-tx-t) * 40) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
   cursor: pointer;
@@ -3382,7 +3382,7 @@ table.inputs > thead > tr > th.required:after, table.inputs > tbody > tr > th.re
   color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
   font-size: 0.625rem;
   line-height: 1em;
-  font-family: p;
+  font-family: var(--cp-font-family-t-p);
   font-weight: bold;
   vertical-align: 3px;
 }
@@ -3461,7 +3461,7 @@ del {
 .rtf-title, #editor .rtf-title {
   display: block;
   position: relative;
-  font-family: h;
+  font-family: var(--cp-font-family-t-h);
   font-size: 1.25em;
 }
 .rtf-title:not(:first-child), #editor .rtf-title:not(:first-child) {
@@ -3563,13 +3563,13 @@ del {
 }
 .rtf-tel, #editor .rtf-tel {
   font-size: 1.5em;
-  font-family: dc;
+  font-family: var(--cp-font-family-f-e);
   font-weight: 700;
   color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
 }
 .rtf-mailto, #editor .rtf-mailto {
   font-size: 1.5em;
-  font-family: dc;
+  font-family: var(--cp-font-family-f-e);
   font-weight: 700;
   color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
 }
@@ -3669,7 +3669,7 @@ del {
   background-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
   font-size: 1.1em;
   font-weight: 700;
-  font-family: dc;
+  font-family: var(--cp-font-family-f-d);
   color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
 }
 .rtf-ul.is-level-1 > .rtf-ul__li::before, .rtf-ul.is-level-1 #editor .rtf-ul__li::before, #editor .rtf-ul.is-level-1 > .rtf-ul__li::before, #editor .rtf-ul.is-level-1 #editor .rtf-ul__li::before {

@@ -7,7 +7,7 @@
 
 html{
 	@include bnd((sb:s));
-	@include txt((c:tx,f:p));
+	@include txt((c:tx,f:t-p));
 	@include bp(-480){
 		@include txt((p:4vw));
 	}
@@ -144,7 +144,7 @@ html{
 		span{
 			&.checkbox,&.radio{
 				@include bnd((d:ib,pd:10));
-				@include txt((p:16,f:p,h:1em,c:tx 40));
+				@include txt((p:16,f:t-p,h:1em,c:tx 40));
 				@include usr((c:p));
 				&>.label{
 					@include bnd((d:b,pd:10));
@@ -337,7 +337,7 @@ table{
 						@include bnd((d:ib,pd:2 5,mgl:5));
 						@include bg((c:a));
 						@include bdr((r:3));
-						@include txt((c:b,p:10,h:1em,f:p,s:b,v:3px));
+						@include txt((c:b,p:10,h:1em,f:t-p,s:b,v:3px));
 					}
 				}
 			}
@@ -413,7 +413,7 @@ del{
 .rtf,#editor .rtf{
 	&-title{
 		@include bnd((d:b,p:r));
-		@include txt((f:h,p:1.25em));
+		@include txt((f:t-h,p:1.25em));
 		&:not(:first-child){
 			@include bnd((mgt:1em));
 		}
@@ -484,10 +484,10 @@ del{
 		}
 	}
 	&-tel{
-		@include txt((p:1.5em,f:dc,w:b,c:m));
+		@include txt((p:1.5em,f:e,w:b,c:m));
 	}
 	&-mailto{
-		@include txt((p:1.5em,f:dc,w:b,c:m));
+		@include txt((p:1.5em,f:e,w:b,c:m));
 	}
 	&-listed{
 		@include grd((tc:a 1fr,g:.5em));
@@ -559,7 +559,7 @@ del{
 				@include bnd((d:b,p:a,t:.4em,l:0,w:.4em,h:.4em));
 				@include bdr((r:50%));
 				@include bg((c:mx));
-				@include txt((p:1.1em,w:b,f:dc,c:mx));
+				@include txt((p:1.1em,w:b,f:d,c:mx));
 			}
 		}
 		&.is-level-1{
