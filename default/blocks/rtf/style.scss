@@ -2,6 +2,6 @@
 
 .wp-block-catpow-rtf{
 	&.has-custom-content-width{
-		@include bnd((w:a calc(var(--cp-content-width,960) * #{$sizeUnit}),mgi:a));
+		@include bnd((w:a c,mgi:a));
 	}
 }
