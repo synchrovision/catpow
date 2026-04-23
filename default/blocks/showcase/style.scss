@@ -5,7 +5,7 @@
 .wp-block-catpow-showcase{
     $block:&;
     $item:#{$block}__item;
-	@include bnd((p:r,w:c,mgi:a,pd:0,ctn:i,z:1,bs:b));
+	@include bnd((p:r,w:c,mgi:a,pd:0,cnt:i,z:1,bs:b));
 	@include txt((l:n,c:tx));
 	&__item{
 		&-image{
@@ -111,7 +111,7 @@
                         }
                     }
                 }
-                @include ctn(-720){
+                @include cq(-720){
                     &-texts{
                         &-counter{
                             @include bnd((p:a,t:0,l:-0.5em));
@@ -120,7 +120,7 @@
                     &-image{
                     }
                 }
-                @include ctn(720){
+                @include cq(720){
                     &-texts{
                         &-counter{
                             @include bnd((p:a,t:0em));
@@ -199,12 +199,12 @@
                         @include txt((s:n,c:mx));
                     }
                 }
-                @include ctn(-720){
+                @include cq(-720){
                     &-image{
                         @include bnd((mgb:-20));
                     }
                 }
-                @include ctn(720){
+                @include cq(720){
                     @include flx((w:w,a:s));
                     &-texts{
                         @include bnd((mgt:40,a:4 / 3));
@@ -243,37 +243,34 @@
                 }
                 &-texts{
                     @include bnd((p:r,f:3 3 300,pd:c-f,z:1));
-                    @include flx((d:c,a:s));
                     @include txt((c:tx));
                     &-counter{
                         @extend %label-component;
                         @include bnd((d:b,w:fit,mgb:s-s));
                         @include bg((c:m));
                         @include txt((a:c,c:i,w:b,f:d,b:k));
-                        @include shd((b:c-l));
                         &-number{
                             @include txt((p:1.25em));
                         }
                     }
                     &-title{
-                        @include bnd((mg:0,pd:0));
                         @include txt((c:mx,b:k));
                     }
                     &-caption{
                         @include bnd((mgi:0));
                     }
                     &-text{
-                        @include bnd((mgt:1em,f:1 1 a));
+                        @include bnd((f:1 1 a));
                         @include txt((a:j));
                     }
                     &-link{
 				        @extend %button-component;
                         @include bnd((d:b,w:fit,mg:1em a 0));
-                        @include bdr((s:s));
-                        @include txt((s:n,c:mx));
+                        @include bg((c:mx));
+                        @include txt((s:n,c:bx));
                     }
                 }
-                @include ctn(720){
+                @include cq(720){
                     @include flx((w:w));
                     &:nth-child(even){
                         @include flx((d:rr));
