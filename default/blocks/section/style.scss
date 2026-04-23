@@ -43,7 +43,7 @@
 					&-title{
 						@include bnd((p:r,z:1));
 						&-prefix{
-							@include txt((a:c,p:1.25em,h:1.5em,w:r,f:dc,c:mx));
+							@include txt((a:c,p:1.25em,h:1.5em,w:r,f:d,c:mx));
 						}
 						&-image{
 							@include bnd((d:b));
@@ -54,7 +54,7 @@
 						}
 						&-heading{
 							@include bnd((pd:20 10,p:r));
-							@include txt((a:c,c:mx,b:k,f:h));
+							@include txt((a:c,c:mx,b:k));
 							strong{
 								@include txt((p:1.5em,c:ax));
 							}
@@ -243,7 +243,7 @@
 				#{$header}{
 					&-title{
 						&-heading{
-							@include txt((b:k,c:tx,f:h));
+							@include txt((b:k,c:tx,f:t-h));
 						}
 						&-lead{
 							@include txt((a:j,c:tx));

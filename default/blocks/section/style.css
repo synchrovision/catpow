@@ -72,7 +72,7 @@
   font-size: 1.25em;
   line-height: 1.5em;
   font-weight: 400;
-  font-family: dc;
+  font-family: var(--cp-font-family-f-d);
   color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
 }
 .wp-block-catpow-section.is-type-scene > .wp-block-catpow-section__body > .wp-block-catpow-section__header .wp-block-catpow-section__header-title-image {
@@ -92,7 +92,6 @@
   text-align: center;
   color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
   word-break: keep-all;
-  font-family: h;
 }
 .wp-block-catpow-section.is-type-scene > .wp-block-catpow-section__body > .wp-block-catpow-section__header .wp-block-catpow-section__header-title-heading strong {
   font-size: 1.5em;
@@ -287,7 +286,7 @@
 .wp-block-catpow-section.is-type-column > .wp-block-catpow-section__body > .wp-block-catpow-section__header .wp-block-catpow-section__header-title-heading {
   word-break: keep-all;
   color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
-  font-family: h;
+  font-family: var(--cp-font-family-t-h);
 }
 .wp-block-catpow-section.is-type-column > .wp-block-catpow-section__body > .wp-block-catpow-section__header .wp-block-catpow-section__header-title-lead {
   text-align: justify;
