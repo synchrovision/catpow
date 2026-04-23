@@ -99,7 +99,6 @@
 			&-item{
 				@include bdr((p:b,s:s,w:1,c:shd));
 				&-link{
-					@extend %button-component;
 					@extend %ui;
 					@include bnd((d:b));
 					@include txt((p:18,c:t));
