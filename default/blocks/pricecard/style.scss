@@ -1,0 +1,90 @@
+@import 'admin_style_config.scss';
+@import 'text-placeholders.scss';
+@import 'component-placeholders.scss';
+
+.wp-block-catpow-pricecard{
+	$block:&;
+	@include bnd((pd:0,mgi:a));
+	@include grd((rc:i,g:c-c));
+	&__item{
+		$item:&;
+		@extend %card-component;
+		@include bnd((p:r,pd:0,o:h));
+		@include txt((l:n));
+		&-image{
+			img{
+				@include bnd((w:f,h:a));
+			}
+		}
+		&-header{
+			@include bnd((pd:c-c));
+			@include bg((c:bx));
+			@include txt((a:c,c:tx));
+			&-text{
+				&-title{
+					@extend %heading-block;
+					@extend %heading;
+				}
+				&-caption{
+					@extend %caption-block;
+					@extend %caption;
+				}
+				&-price{
+					@include bnd((d:ib));
+					@include txt((c:mx));
+					&-listprice{
+						@extend %caption;
+						@include bnd((d:b));
+					}
+					&-saleprice{
+						@extend %heading;
+						@include bnd((d:b));
+						@include txt((t:.05em));
+						&-number{
+							@include txt((p:1.5em,f:e));
+						}
+					}
+					&-caption{
+						@extend %caption;
+					}
+				}
+			}
+		}
+		&-contents{
+			@include bnd((pd:c-c));
+			@include bg((c:bx));
+			@include txt((c:tx));
+			&-subtitle{
+				@extend %heading-block;
+				@extend %heading;
+			}
+			&-text{
+				@extend %paragraph-block;
+				@extend %paragraph;
+			}
+			&-spec{
+				@extend %paragraph;
+				@include grd((tc:a 1fr));
+				&-label,&-value{
+					@include bnd((pd:c-t,mg:0,pdi:0));
+					&:not(:first-of-type){
+						@include bdr((p:t,s:s,w:1,c:lx));
+					}
+				}
+				&-label{
+				}
+				&-value{
+					@include bnd((pdl:1em));
+				}
+			}
+			&-link{
+				@extend %button-component;
+				@extend %ui-block;
+				@extend %ui;
+				@include bnd((d:b,p:r));
+				@include bg((c:mx));
+				@include txt((a:c,c:ix));
+			}
+		}
+	}
+}
