@@ -15,7 +15,21 @@
       const { Fragment, useMemo } = wp.element;
       const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
-      const { items = [], classes = "", contentsClasses = "", HeadingTag, SubHeadingTag, priceUnit, priceCaption, linkText, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+      const {
+        items = [],
+        classes = "",
+        headerClasses,
+        contentsClasses = "",
+        HeadingTag,
+        SubHeadingTag,
+        priceUnit,
+        priceCaption,
+        linkText,
+        loopCount,
+        doLoop,
+        EditMode = false,
+        AltMode = false
+      } = attributes;
       const { imageKeys } = CP.config.pricecard;
       const states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
@@ -28,7 +42,7 @@
           "hasMargin",
           "itemSize",
           "color",
-          "colorScheme",
+          { name: "headerColorScheme", preset: "colorScheme", label: "\u30D8\u30C3\u30C0\u914D\u8272", classKey: "headerClasses" },
           { name: "contentsColorScheme", preset: "colorScheme", label: "\u30B3\u30F3\u30C6\u30F3\u30C4\u914D\u8272", classKey: "contentsClasses" },
           { input: "text", label: "\u4FA1\u683C\u5358\u4F4D", key: "priceUnit" },
           {
@@ -101,7 +115,7 @@
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });
       };
       const blockProps = useBlockProps({ className: EditMode || AltMode && doLoop ? "cp-altcontent" : classes });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes })), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30A2\u30A4\u30C6\u30E0", icon: "edit", set: setAttributes, attr: attributes, items, index: attributes.currentItemIndex, selectiveClasses: itemSelectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30A2\u30A4\u30C6\u30E0", icon: "edit", set: setAttributes, attr: attributes, items, index: attributes.currentItemIndex, selectiveClasses: itemSelectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           set: setAttributes,
@@ -122,7 +136,7 @@
             { type: "text", key: "subTitle", cond: states.hasSubTitle },
             { type: "text", key: "text", cond: states.hasText },
             { type: "text", key: "listPrice", cond: true },
-            { type: "text", key: "price", cond: true },
+            { type: "text", key: "salePrice", cond: true },
             { type: "text", key: "linkUrl", cond: states.hasLink }
           ],
           isTemplate: states.isTemplate
@@ -134,7 +148,7 @@
           item.controlClasses = "control";
         }
         const itemStates = CP.classNamesToFlags(item.classes);
-        return /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", className: item.classes, set: setAttributes, attr: attributes, items, index, isSelected, key: index }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { attr: attributes, set: setAttributes, keys: imageKeys.image, index, size: "vga", isTemplate: states.isTemplate })), /* @__PURE__ */ wp.element.createElement("header", { className: "_header" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_text" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(
+        return /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", className: item.classes, set: setAttributes, attr: attributes, items, index, isSelected, key: index }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { attr: attributes, set: setAttributes, keys: imageKeys.image, index, size: "vga", isTemplate: states.isTemplate })), /* @__PURE__ */ wp.element.createElement("header", { className: headerClasses }, /* @__PURE__ */ wp.element.createElement("div", { className: "_text" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(
           RichText,
           {
             tagName: HeadingTag,
@@ -241,14 +255,14 @@
     save({ attributes, className }) {
       const { Fragment } = wp.element;
       const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-      const { items = [], classes = "", contentsClasses = "", HeadingTag, SubHeadingTag, priceUnit, priceCaption, linkText, loopCount, doLoop } = attributes;
+      const { items = [], classes = "", headerClasses, contentsClasses = "", HeadingTag, SubHeadingTag, priceUnit, priceCaption, linkText, loopCount, doLoop } = attributes;
       const { imageKeys } = CP.config.pricecard;
       const states = CP.classNamesToFlags(classes);
       console.log(items);
       return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...useBlockProps.save({ className: classes }) }, items.map((item, index) => {
         console.log(item);
         const itemStates = CP.classNamesToFlags(item.classes);
-        return /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attr: attributes, keys: imageKeys.image, index, size: "vga", isTemplate: states.isTemplate })), /* @__PURE__ */ wp.element.createElement("header", { className: "_header" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_text" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: HeadingTag, className: "_title", value: item.title }), states.hasTitle && states.hasTitleCaption && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_caption", value: item.titleCaption }), /* @__PURE__ */ wp.element.createElement("div", { className: "_price" }, itemStates.isDiscount && /* @__PURE__ */ wp.element.createElement("span", { className: "_listprice" }, states.hasUnitBefore && /* @__PURE__ */ wp.element.createElement("span", { className: "_unit" }, priceUnit), /* @__PURE__ */ wp.element.createElement("span", { className: "_number" }, item.listPrice), states.hasUnitAfter && /* @__PURE__ */ wp.element.createElement("span", { className: "_unit" }, priceUnit)), /* @__PURE__ */ wp.element.createElement("span", { className: "_saleprice" }, states.hasUnitBefore && /* @__PURE__ */ wp.element.createElement("span", { className: "_unit" }, priceUnit), /* @__PURE__ */ wp.element.createElement("span", { className: "_number" }, item.salePrice), states.hasUnitAfter && /* @__PURE__ */ wp.element.createElement("span", { className: "_unit" }, priceUnit)), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_caption", value: priceCaption })))), (states.hasSubTitle || states.hasText || states.hasSpec || states.hasLink) && /* @__PURE__ */ wp.element.createElement("div", { className: contentsClasses }, states.hasSubTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: SubHeadingTag, className: "_subtitle", value: item.subTitle }), states.hasText && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_text", value: item.text }), states.hasSpec && /* @__PURE__ */ wp.element.createElement("dl", { className: "_spec" }, item.specLabels.map((label, specIndex) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: specIndex }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "dt", className: "_label", value: items[index].specLabels[specIndex].text }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "dd", className: "_value", value: items[index].specValues[specIndex].text })))), states.hasLink && /* @__PURE__ */ wp.element.createElement(CP.Link, { className: "_link", attr: attributes, keys: { href: "linkUrl", items: "items" }, index }, linkText)));
+        return /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attr: attributes, keys: imageKeys.image, index, size: "vga", isTemplate: states.isTemplate })), /* @__PURE__ */ wp.element.createElement("header", { className: headerClasses }, /* @__PURE__ */ wp.element.createElement("div", { className: "_text" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: HeadingTag, className: "_title", value: item.title }), states.hasTitle && states.hasTitleCaption && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_caption", value: item.titleCaption }), /* @__PURE__ */ wp.element.createElement("div", { className: "_price" }, itemStates.isDiscount && /* @__PURE__ */ wp.element.createElement("span", { className: "_listprice" }, states.hasUnitBefore && /* @__PURE__ */ wp.element.createElement("span", { className: "_unit" }, priceUnit), /* @__PURE__ */ wp.element.createElement("span", { className: "_number" }, item.listPrice), states.hasUnitAfter && /* @__PURE__ */ wp.element.createElement("span", { className: "_unit" }, priceUnit)), /* @__PURE__ */ wp.element.createElement("span", { className: "_saleprice" }, states.hasUnitBefore && /* @__PURE__ */ wp.element.createElement("span", { className: "_unit" }, priceUnit), /* @__PURE__ */ wp.element.createElement("span", { className: "_number" }, item.salePrice), states.hasUnitAfter && /* @__PURE__ */ wp.element.createElement("span", { className: "_unit" }, priceUnit)), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_caption", value: priceCaption })))), (states.hasSubTitle || states.hasText || states.hasSpec || states.hasLink) && /* @__PURE__ */ wp.element.createElement("div", { className: contentsClasses }, states.hasSubTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: SubHeadingTag, className: "_subtitle", value: item.subTitle }), states.hasText && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_text", value: item.text }), states.hasSpec && /* @__PURE__ */ wp.element.createElement("dl", { className: "_spec" }, item.specLabels.map((label, specIndex) => /* @__PURE__ */ wp.element.createElement(Fragment, { key: specIndex }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "dt", className: "_label", value: items[index].specLabels[specIndex].text }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "dd", className: "_value", value: items[index].specValues[specIndex].text })))), states.hasLink && /* @__PURE__ */ wp.element.createElement(CP.Link, { className: "_link", attr: attributes, keys: { href: "linkUrl", items: "items" }, index }, linkText)));
       })));
     }
   });

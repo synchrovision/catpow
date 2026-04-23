@@ -2,6 +2,7 @@
 $block_class="wp-block-catpow-pricecard";
 $attributes=[
 	"classes"=>["source"=>"attribute","selector"=>"ul","attribute"=>"class","default"=>"{$block_class} has-image has-title has-spec has-unit-before"],
+	"headerClasses"=>["source"=>"attribute","selector"=>".{$block_class}__item-header","attribute"=>"class","default"=>"{$block_class}__item-header"],
 	"contentsClasses"=>["source"=>"attribute","selector"=>".{$block_class}__item-contents","attribute"=>"class","default"=>"{$block_class}__item-contents"],
 	"HeadingTag"=>["type"=>"string","default"=>"h3"],
 	"SubHeadingTag"=>["type"=>"string","default"=>"h4"],

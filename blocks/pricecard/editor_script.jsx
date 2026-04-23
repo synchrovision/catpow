@@ -14,7 +14,21 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 		const { Fragment, useMemo } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { items = [], classes = "", contentsClasses = "", HeadingTag, SubHeadingTag, priceUnit, priceCaption, linkText, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const {
+			items = [],
+			classes = "",
+			headerClasses,
+			contentsClasses = "",
+			HeadingTag,
+			SubHeadingTag,
+			priceUnit,
+			priceCaption,
+			linkText,
+			loopCount,
+			doLoop,
+			EditMode = false,
+			AltMode = false,
+		} = attributes;
 		const { imageKeys } = CP.config.pricecard;
 
 		const states = CP.classNamesToFlags(classes);
@@ -29,7 +43,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 				"hasMargin",
 				"itemSize",
 				"color",
-				"colorScheme",
+				{ name: "headerColorScheme", preset: "colorScheme", label: "ヘッダ配色", classKey: "headerClasses" },
 				{ name: "contentsColorScheme", preset: "colorScheme", label: "コンテンツ配色", classKey: "contentsClasses" },
 				{ input: "text", label: "価格単位", key: "priceUnit" },
 				{
@@ -110,11 +124,11 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="アイテム" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} selectiveClasses={itemSelectiveClasses} />
+					<CP.ItemControlInfoPanel />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
-					<CP.SelectClassPanel title="アイテム" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} selectiveClasses={itemSelectiveClasses} />
-					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				{attributes.EditMode ? (
 					<div {...blockProps}>
@@ -138,7 +152,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 								{ type: "text", key: "subTitle", cond: states.hasSubTitle },
 								{ type: "text", key: "text", cond: states.hasText },
 								{ type: "text", key: "listPrice", cond: true },
-								{ type: "text", key: "price", cond: true },
+								{ type: "text", key: "salePrice", cond: true },
 								{ type: "text", key: "linkUrl", cond: states.hasLink },
 							]}
 							isTemplate={states.isTemplate}
@@ -168,7 +182,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 														<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="vga" isTemplate={states.isTemplate} />
 													</div>
 												)}
-												<header className="_header">
+												<header className={headerClasses}>
 													<div className="_text">
 														{states.hasTitle && (
 															<RichText
@@ -306,7 +320,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 	save({ attributes, className }) {
 		const { Fragment } = wp.element;
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { items = [], classes = "", contentsClasses = "", HeadingTag, SubHeadingTag, priceUnit, priceCaption, linkText, loopCount, doLoop } = attributes;
+		const { items = [], classes = "", headerClasses, contentsClasses = "", HeadingTag, SubHeadingTag, priceUnit, priceCaption, linkText, loopCount, doLoop } = attributes;
 		const { imageKeys } = CP.config.pricecard;
 
 		const states = CP.classNamesToFlags(classes);
@@ -325,7 +339,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 										<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} size="vga" isTemplate={states.isTemplate} />
 									</div>
 								)}
-								<header className="_header">
+								<header className={headerClasses}>
 									<div className="_text">
 										{states.hasTitle && <RichText.Content tagName={HeadingTag} className="_title" value={item.title} />}
 										{states.hasTitle && states.hasTitleCaption && <RichText.Content tagName="p" className="_caption" value={item.titleCaption} />}
