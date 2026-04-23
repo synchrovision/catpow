@@ -119,7 +119,7 @@
   };
 
   // ../blocks/countdown/component.jsx
-  Catpow.CountDown = function(props) {
+  (window.Catpow ||= {}).CountDown = function(props) {
     const { className = "wp-block-catpow-countdown__body" } = props;
     const { useEffect: useEffect2, useCallback: useCallback2, useReducer: useReducer2 } = wp.element;
     const init = useCallback2(() => {

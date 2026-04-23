@@ -1,7 +1,7 @@
 ﻿import { Bem } from "catpow/component";
 import { clsx } from "clsx";
 
-Catpow.CountDown = function (props) {
+(window.Catpow ||= {}).CountDown = function (props) {
 	const { className = "wp-block-catpow-countdown__body" } = props;
 	const { useEffect, useCallback, useReducer } = wp.element;
 
