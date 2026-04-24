@@ -10,7 +10,14 @@
 		$item:&;
 		@extend %card-component;
 		@include bnd((p:r,pd:0,o:h));
+		@include grd((tr:s,g:0));
 		@include txt((l:n));
+		&:has(#{$item}-image),&:has(#{$item}-contents){
+			@include bnd((gr:span 2));
+		}
+		&:has(#{$item}-image):has(#{$item}-contents){
+			@include bnd((gr:span 3));
+		}
 		&-image{
 			img{
 				@include bnd((w:f,h:a));

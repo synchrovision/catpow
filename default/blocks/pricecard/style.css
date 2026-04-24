@@ -63,7 +63,19 @@
   position: relative;
   padding: 0rem;
   overflow: hidden;
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: subgrid;
+  grid-template-rows: subgrid;
+  grid-gap: 0rem;
   list-style: none;
+}
+.wp-block-catpow-pricecard__item:has(.wp-block-catpow-pricecard__item-image), .wp-block-catpow-pricecard__item:has(.wp-block-catpow-pricecard__item-contents) {
+  grid-row: span 2;
+}
+.wp-block-catpow-pricecard__item:has(.wp-block-catpow-pricecard__item-image):has(.wp-block-catpow-pricecard__item-contents) {
+  grid-row: span 3;
 }
 .wp-block-catpow-pricecard__item-image img {
   width: 100%;
