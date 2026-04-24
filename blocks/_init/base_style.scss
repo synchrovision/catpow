@@ -660,7 +660,7 @@ $colors:(
 			}
 		}
 	}
-	&-responsivesizeinput{
+	&-responsivesizeinput,&-responsiveitemsizeinput{
 		@include bnd((p:r,z:1));
 		&__previews{
 			@include bnd((mgt:16));

@@ -501,6 +501,23 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					);
 					break;
 				}
+				case "responsiveItemSize": {
+					rtn.push(
+						<CP.ResponsiveItemSizeInput
+							label={prm.label}
+							value={props.attr?.[prm.vars]?.[prm.key]}
+							onChange={(val) => {
+								save({
+									[prm.vars]: {
+										...props.attr[prm.vars],
+										[prm.key]: `${val}`,
+									},
+								});
+							}}
+						/>,
+					);
+					break;
+				}
 			}
 		} else {
 			rtn.push(

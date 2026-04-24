@@ -836,6 +836,7 @@
     RTF: () => RTF,
     ResponsiveImage: () => ResponsiveImage,
     ResponsiveImageBody: () => ResponsiveImageBody,
+    ResponsiveItemSizeInput: () => ResponsiveItemSizeInput,
     ResponsiveSizeInput: () => ResponsiveSizeInput,
     SelectBlendMode: () => SelectBlendMode,
     SelectBreakPointToolbar: () => SelectBreakPointToolbar,
@@ -2413,22 +2414,45 @@
     return /* @__PURE__ */ wp.element.createElement("img", { className: className + " is-img", src, alt: item[keys.alt], srcSet: item[keys.srcset], sizes, "data-mime": item[keys.mime], ...otherProps });
   };
 
-  // ../blocks/_init/init/CP/components/ResponsiveSizeInput.jsx
+  // ../blocks/_init/init/CP/components/ResponsiveItemSizeInput.jsx
   init_react();
   var valueToSizes = (val) => {
-    const [, vw, rem] = val && val.match(/^min\((\d+)vw,([\d\.]+)rem,100%\)$/) || [, 0, 0];
+    const [, vw, rem] = val && val.match(/^min\((\d+)vw,([\d\.]+)rem\)$/) || [, 0, 0];
     return { vw, rem };
   };
   var sizesToValue = (size) => {
     let { vw, rem } = size;
-    return `min(${vw}vw,${rem}rem,100%)`;
+    return `min(${vw}vw,${rem}rem)`;
   };
-  var ResponsiveSizeInput = (props) => {
+  var ResponsiveItemSizeInput = (props) => {
     const { value: value2, steps = { 10: 0, 100: 2 }, order = ["rem", "vw"], snap = true, onChange } = props;
     const [sizes, setSizes] = useState(valueToSizes(value2));
     useThrottle(
       () => {
         onChange(sizesToValue(sizes));
+      },
+      100,
+      [sizes]
+    );
+    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("div", { className: "responsiveitemsizeinput-" }, /* @__PURE__ */ wp.element.createElement(RangeInput, { values: sizes, steps, order, snap, onChange: (size) => setSizes(size) }), /* @__PURE__ */ wp.element.createElement("div", { className: "_previews", style: { "--rem": sizes.rem, "--vw": sizes.vw } }, /* @__PURE__ */ wp.element.createElement("div", { className: "-preview is-preview-pc is-preview-rem" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_label" }, /* @__PURE__ */ wp.element.createElement("output", { className: "_value" }, sizes.rem, "rem"))), sizes.rem * 4 < sizes.vw ? /* @__PURE__ */ wp.element.createElement("div", { className: "-preview is-preview-sp is-preview-rem" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_label" }, /* @__PURE__ */ wp.element.createElement("output", { className: "_value" }, sizes.rem, "rem"))) : /* @__PURE__ */ wp.element.createElement("div", { className: "-preview is-preview-sp is-preview-vw" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_label" }, /* @__PURE__ */ wp.element.createElement("output", { className: "_value" }, sizes.vw, "vw"))))));
+  };
+
+  // ../blocks/_init/init/CP/components/ResponsiveSizeInput.jsx
+  init_react();
+  var valueToSizes2 = (val) => {
+    const [, vw, rem] = val && val.match(/^min\((\d+)vw,([\d\.]+)rem,100%\)$/) || [, 0, 0];
+    return { vw, rem };
+  };
+  var sizesToValue2 = (size) => {
+    let { vw, rem } = size;
+    return `min(${vw}vw,${rem}rem,100%)`;
+  };
+  var ResponsiveSizeInput = (props) => {
+    const { value: value2, steps = { 10: 0, 100: 2 }, order = ["rem", "vw"], snap = true, onChange } = props;
+    const [sizes, setSizes] = useState(valueToSizes2(value2));
+    useThrottle(
+      () => {
+        onChange(sizesToValue2(sizes));
       },
       100,
       [sizes]
@@ -3982,6 +4006,26 @@
             rtn.push(
               /* @__PURE__ */ wp.element.createElement(
                 CP.ResponsiveSizeInput,
+                {
+                  label: prm.label,
+                  value: props.attr?.[prm.vars]?.[prm.key],
+                  onChange: (val) => {
+                    save({
+                      [prm.vars]: {
+                        ...props.attr[prm.vars],
+                        [prm.key]: `${val}`
+                      }
+                    });
+                  }
+                }
+              )
+            );
+            break;
+          }
+          case "responsiveItemSize": {
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement(
+                CP.ResponsiveItemSizeInput,
                 {
                   label: prm.label,
                   value: props.attr?.[prm.vars]?.[prm.key],
@@ -6182,7 +6226,7 @@
               label: __13("\u30A2\u30A4\u30C6\u30E0\u30B5\u30A4\u30BA", "catpow"),
               vars: "vars",
               key: "--cp-size-i-custom",
-              input: "responsiveSize"
+              input: "responsiveItemSize"
             }
           ]
         }

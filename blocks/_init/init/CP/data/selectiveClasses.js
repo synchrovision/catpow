@@ -465,7 +465,7 @@ export const selectiveClassesPresets = {
 						label: __("アイテムサイズ", "catpow"),
 						vars: "vars",
 						key: "--cp-size-i-custom",
-						input: "responsiveSize",
+						input: "responsiveItemSize",
 					},
 				],
 			},
