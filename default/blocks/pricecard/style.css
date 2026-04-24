@@ -75,6 +75,9 @@
   text-align: center;
   color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
 }
+.wp-block-catpow-pricecard__item-header-text-title {
+  margin-top: 0rem;
+}
 .wp-block-catpow-pricecard__item-header-text-price {
   display: inline-block;
   color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
