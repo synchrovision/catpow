@@ -1,26 +1,26 @@
 @import 'admin_style_config.scss';
+@import 'text-placeholders.scss';
+@import 'component-placeholders.scss';
 
 .wp-block-catpow-accessmap{
 	$block:&;
 	$item:#{$block}__item;
 	@include bnd((pd:0,mgi:a));
-	@include grd((rc:i,g:c-c));
 	@include txt((l:n,ffs:p));
 	&__item{
-		@include bnd((pd:0,o:h));
+		@include bnd((p:r,pd:0,o:h));
 		@include flx((w:w));
-		@include bdr((r:c-c));
 		@include bg((c:sx));
 		@include txt((c:tx));
-		@include shd((b:c-c));
 		&-map{
+			@include bnd((f:1 1 300));
 			&-gmap{
 				@include bnd((d:b,w:f,h:f,op:c,of:c));
 				@include bdr((s:n));
 			}
 		}
 		&-access{
-			@include bnd((pd:c-c));
+			@include bnd((f:2 2 300));
 			&-title{
 				@include bnd((pd:0,mg:0,mgb:.5em));
 				@include txt((p:1.5em));
@@ -45,36 +45,39 @@
 			}
 		}
 	}
-	&.has-item-size-large{
+	&.is-type-flat{
+		@include grd((tc:1fr));
 		#{$item}{
-			@include bnd((h:24em a,mg:20 a));
+			@include bnd((h:i a,pd:0));
 			&-map{
-				@include bnd((h:24em,f:4 4 20em));
 			}
 			&-access{
-				@include bnd((f:1 1 20em,pd:2em));
+				@include bnd((pd:c-f));
 			}
 		}
 	}
-	&.has-item-size-medium{
+	&.is-type-card{
+		@include grd((rc:i,g:c-c));
 		#{$item}{
-			@include bnd((f:1 1 40em,h:20em a));
+			@extend %card-component;
+			@include bnd((cnt:i,pd:0));
 			&-map{
-				@include bnd((h:20em,f:2 2 20em));
+				@include bnd((h:100 300 100cqw));
 			}
 			&-access{
-				@include bnd((f:1 1 20em,pd:2em));
+				@include bnd((pd:c-c));
 			}
 		}
 	}
-	&.has-item-size-small{
+	&.is-type-frame{
+		@include grd((tc:1fr,g:c-f));
 		#{$item}{
-			@include bnd((h:10em a));
+			@extend %frame-component;
+			@include bnd((h:i a,pd:0));
 			&-map{
-				@include bnd((f:1 1 10em));
 			}
 			&-access{
-				@include bnd((f:1 1 10em,pd:2em));
+				@include bnd((pd:c-f));
 			}
 		}
 	}

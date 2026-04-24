@@ -20,6 +20,15 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 				"level",
 				"color",
 				"colorScheme",
+				{
+					name: "type",
+					type: "buttons",
+					label: "タイプ",
+					values: { isTypeFlat: "フラット", isTypeCard: "カード", isTypeFrame: "フーレム" },
+				},
+				"hasMargin",
+				"hasPadding",
+				"hasContentWidth",
 				"itemSize",
 				{
 					name: "mapColor",
@@ -45,7 +54,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 					name: "t",
 					key: "t",
 					input: "select",
-					label: "タイプ",
+					label: "地図タイプ",
 					values: {
 						m: "地図",
 						k: "航空写真",

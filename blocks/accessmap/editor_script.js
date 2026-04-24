@@ -19,6 +19,15 @@
           "level",
           "color",
           "colorScheme",
+          {
+            name: "type",
+            type: "buttons",
+            label: "\u30BF\u30A4\u30D7",
+            values: { isTypeFlat: "\u30D5\u30E9\u30C3\u30C8", isTypeCard: "\u30AB\u30FC\u30C9", isTypeFrame: "\u30D5\u30FC\u30EC\u30E0" }
+          },
+          "hasMargin",
+          "hasPadding",
+          "hasContentWidth",
           "itemSize",
           {
             name: "mapColor",
@@ -44,7 +53,7 @@
             name: "t",
             key: "t",
             input: "select",
-            label: "\u30BF\u30A4\u30D7",
+            label: "\u5730\u56F3\u30BF\u30A4\u30D7",
             values: {
               m: "\u5730\u56F3",
               k: "\u822A\u7A7A\u5199\u771F",
