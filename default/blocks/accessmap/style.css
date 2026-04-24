@@ -26,7 +26,6 @@
   -webkit-box-lines: multiple;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  background-color: oklch(var(--cp-tones-sx-l) var(--cp-tones-sx-c) var(--cp-tones-sx-h) / var(--cp-tones-sx-a,1));
   color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
 }
 .wp-block-catpow-accessmap__item-map {
@@ -93,6 +92,10 @@
   min-height: var(--cp-size-i);
   height: auto;
   padding: 0rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  gap: var(--cp-margin-c-c);
 }
 .wp-block-catpow-accessmap.is-type-flat .wp-block-catpow-accessmap__item-access {
   padding: var(--cp-padding-c-f);

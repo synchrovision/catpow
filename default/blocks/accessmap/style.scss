@@ -10,7 +10,6 @@
 	&__item{
 		@include bnd((p:r,pd:0,o:h));
 		@include flx((w:w));
-		@include bg((c:sx));
 		@include txt((c:tx));
 		&-map{
 			@include bnd((f:1 1 300));
@@ -49,6 +48,7 @@
 		@include grd((tc:1fr));
 		#{$item}{
 			@include bnd((h:i a,pd:0));
+			@include flx((g:c-c));
 			&-map{
 			}
 			&-access{
