@@ -1,13 +1,13 @@
 @import "admin_style_config.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
 
 .wp-block-catpow-sitefooter{
-	@include bg((c:s));
-	>.contents{
-		@include bnd((pd:20,w:a 1000,mg:a));
+	&__contents{
 	}
-	>.copyright{
-		@include bnd((pd:5));
-		@include bg((c:m));
-		@include txt((a:c,p:16,c:i));
+	&__copyright{
+		@extend %label-component;
+		@extend %caption;
+		@include txt((a:c,c:tx));
 	}
 }
