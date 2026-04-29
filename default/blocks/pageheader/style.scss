@@ -56,7 +56,6 @@
 		&__body{
 			&-title{
 				@include bnd((pd:20));
-				@include txt((p:18));
 			}
 		}
 	}
@@ -64,7 +63,6 @@
 		&__body{
 			&-title{
 				@include bnd((pd:40 20));
-				@include txt((p:24));
 			}
 		}
 	}
@@ -80,7 +78,6 @@
 		&__body{
 			&-title{
 				@include bnd((pd:160 20));
-				@include txt((p:48));
 			}
 		}
 	}
@@ -88,7 +85,6 @@
 		&__body{
 			&-title{
 				@include bnd((pd:240 20));
-				@include txt((p:min(8vw,4rem),h:2em,t:.1em));
 			}
 		}
 	}
