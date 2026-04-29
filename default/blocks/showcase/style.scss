@@ -8,6 +8,7 @@
 	@include bnd((p:r,w:c,mgi:a,pd:0,cnt:i,z:1,bs:b));
 	@include txt((l:n,c:tx));
 	&__item{
+        @include bnd((p:r));
 		&-image{
 			>img{
 				@include bnd((d:b,w:f,h:a,op:c,of:c));
@@ -65,7 +66,7 @@
                         @include bnd((w:fit,w:4em,h:4em,ac:c));
                         @include bg((c:mx));
                         @include bdr((r:50%));
-                        @include txt((a:c,h:1em,c:ix,f:d,b:k));
+                        @include txt((a:c,h:1em,c:bx,f:d,b:k));
                         @include trn((o:.7));
                         &-prefix{
                             @include bnd((d:b,mgb:.25em));
@@ -175,8 +176,9 @@
                     &-counter{
                         @extend %label-component;
                         @include bnd((d:b,w:fit,mgi:a,mgt:-2em,mgb:s-s));
-                        @include bg((c:m));
-                        @include txt((a:c,p:1.5em,h:1em,c:i,w:b,f:d,b:k));
+                        @include bg((c:mx));
+                        @include bdr((s:s));
+                        @include txt((a:c,p:1.5em,h:1em,c:bx,w:b,f:d,b:k));
                         @include shd((b:c-l));
                         &-number{
                             @include txt((p:1.25em));
@@ -247,8 +249,8 @@
                     &-counter{
                         @extend %label-component;
                         @include bnd((d:b,w:fit,mgb:s-s));
-                        @include bg((c:m));
-                        @include txt((a:c,c:i,w:b,f:d,b:k));
+                        @include bg((c:mx));
+                        @include txt((a:c,c:bx,w:b,f:d,b:k));
                         &-number{
                             @include txt((p:1.25em));
                         }

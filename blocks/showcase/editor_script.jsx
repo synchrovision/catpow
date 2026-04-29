@@ -149,84 +149,11 @@ wp.blocks.registerBlockType("catpow/showcase", {
 			return selectiveItemTemplateClasses;
 		}, []);
 
-		let rtn = [];
 		const save = () => {
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
-		[...Array(Math.max(items.length, loopCount)).keys()].forEach((i) => {
-			const index = i % items.length;
-			const item = items[index];
-			if (!item.controlClasses) {
-				item.controlClasses = "control";
-			}
-			rtn.push(
-				<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
-					<div className="_image">
-						<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="full" isTemplate={states.isTemplate} />
-					</div>
-					<div className="_texts">
-						{states.hasCounter && (
-							<div className="_counter">
-								{countPrefix && <span className="_prefix">{countPrefix}</span>}
-								<span className="_number">{index + 1}</span>
-								{countSuffix && <span className="_suffix">{countSuffix}</span>}
-							</div>
-						)}
-						<RichText
-							tagName={TitleTag}
-							className="_title"
-							onChange={(text) => {
-								items[index].title = text;
-								save();
-							}}
-							value={item.title}
-						/>
-						{states.hasTitleCaption && (
-							<RichText
-								tagName="p"
-								className="_caption"
-								onChange={(text) => {
-									items[index].titleCaption = text;
-									save();
-								}}
-								value={item.titleCaption}
-							/>
-						)}
-						<div
-							className="_text"
-							onFocus={() => {
-								attributes.blockState.enableBlockFormat = true;
-							}}
-						>
-							<RichText
-								onChange={(text) => {
-									items[index].text = text;
-									save();
-								}}
-								value={item.text}
-							/>
-						</div>
-						{states.hasLink && (
-							<CP.Link.Edit className="_link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index}>
-								<RichText
-									onChange={(linkText) => {
-										items[index].linkText = linkText;
-										save();
-									}}
-									value={item.linkText}
-								/>
-							</CP.Link.Edit>
-						)}
-					</div>
-				</CP.Item>,
-			);
-		});
 
-		if (attributes.EditMode === undefined) {
-			attributes.EditMode = false;
-		}
-
-		const blockProps = useBlockProps({ className: classes, style: vars });
+		const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : classes, style: vars });
 
 		return (
 			<>
@@ -236,8 +163,8 @@ wp.blocks.registerBlockType("catpow/showcase", {
 							{
 								icon: "edit",
 								title: "EditMode",
-								isActive: attributes.EditMode,
-								onClick: () => setAttributes({ EditMode: !attributes.EditMode }),
+								isActive: EditMode,
+								onClick: () => setAttributes({ EditMode: !EditMode }),
 							},
 						]}
 					/>
@@ -262,11 +189,9 @@ wp.blocks.registerBlockType("catpow/showcase", {
 					)}
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
-				{attributes.EditMode ? (
+				{EditMode ? (
 					<div className="cp-altcontent">
-						<div className="label">
-							<Icon icon="edit" />
-						</div>
+						<CP.Label icon="edit" />
 						<CP.EditItemsTable
 							set={setAttributes}
 							attr={attributes}
@@ -289,7 +214,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 				) : (
 					<>
 						{AltMode && doLoop ? (
-							<div className="cp-altcontent">
+							<div {...blockProps}>
 								<div className="label">
 									<Icon icon="welcome-comments" />
 								</div>
@@ -297,7 +222,76 @@ wp.blocks.registerBlockType("catpow/showcase", {
 							</div>
 						) : (
 							<CP.Bem prefix="wp-block-catpow">
-								<ul {...blockProps}>{rtn}</ul>
+								<ul {...blockProps}>
+									{[...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
+										const index = i % items.length;
+										const item = items[index];
+										if (!item.controlClasses) {
+											item.controlClasses = "control";
+										}
+										return (
+											<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+												<div className="_image">
+													<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="full" isTemplate={states.isTemplate} />
+												</div>
+												<div className="_texts">
+													{states.hasCounter && (
+														<div className="_counter">
+															{countPrefix && <span className="_prefix">{countPrefix}</span>}
+															<span className="_number">{index + 1}</span>
+															{countSuffix && <span className="_suffix">{countSuffix}</span>}
+														</div>
+													)}
+													<RichText
+														tagName={TitleTag}
+														className="_title"
+														onChange={(text) => {
+															items[index].title = text;
+															save();
+														}}
+														value={item.title}
+													/>
+													{states.hasTitleCaption && (
+														<RichText
+															tagName="p"
+															className="_caption"
+															onChange={(text) => {
+																items[index].titleCaption = text;
+																save();
+															}}
+															value={item.titleCaption}
+														/>
+													)}
+													<div
+														className="_text"
+														onFocus={() => {
+															attributes.blockState.enableBlockFormat = true;
+														}}
+													>
+														<RichText
+															onChange={(text) => {
+																items[index].text = text;
+																save();
+															}}
+															value={item.text}
+														/>
+													</div>
+													{states.hasLink && (
+														<CP.Link.Edit className="_link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index}>
+															<RichText
+																onChange={(linkText) => {
+																	items[index].linkText = linkText;
+																	save();
+																}}
+																value={item.linkText}
+															/>
+														</CP.Link.Edit>
+													)}
+												</div>
+											</CP.Item>
+										);
+									})}
+								</ul>
 							</CP.Bem>
 						)}
 					</>
