@@ -1,9 +1,3 @@
 <!-- wp:catpow/t-box -->
-<table class="wp-block-catpow-t-box <?=$attr['classes']??'large'?>">
-	<tbody>
-		<tr>
-			<td><?=$children?></td>
-		</tr>
-	</tbody>
-</table>
+<div class="wp-block-catpow-t-box <?=$attr['classes']??''?>"><table width="600" style="width:600px" align="center" class="wp-block-catpow-t-box__table"><tbody class="wp-block-catpow-t-box__table-tbody"><tr class="wp-block-catpow-t-box__table-tbody-tr"><td class="wp-block-catpow-t-box__table-tbody-tr-td is-spacer-cell" style="height:1rem" colspan="3"></td></tr><tr class="wp-block-catpow-t-box__table-tbody-tr"><td class="wp-block-catpow-t-box__table-tbody-tr-td is-spacer-cell" style="width:1rem" width="1rem"></td><td class="wp-block-catpow-t-box__table-tbody-tr-td"><?=$children?></td><td class="wp-block-catpow-t-box__table-tbody-tr-td is-spacer-cell" style="width:1rem" width="1rem"></td></tr><tr class="wp-block-catpow-t-box__table-tbody-tr"><td class="wp-block-catpow-t-box__table-tbody-tr-td is-spacer-cell" style="height:1rem" colspan="3"></td></tr></tbody></table></div>
 <!-- /wp:catpow/t-box -->
