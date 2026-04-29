@@ -24,7 +24,7 @@
 			source: "attribute",
 			selector: "table",
 			attribute: "class",
-			default: "wp-block-catpow-simpletable spec",
+			default: "wp-block-catpow-simpletable is-level3 is-type-spec",
 		},
 		vars: {
 			type: "object",
@@ -47,21 +47,21 @@
 			},
 			default: [
 				{
-					classes: "",
+					classes: "wp-block-catpow-simpletable__tbody-tr",
 					cells: [
 						{ text: ["Title"], classes: "" },
 						{ text: ["Content"], classes: "" },
 					],
 				},
 				{
-					classes: "",
+					classes: "wp-block-catpow-simpletable__tbody-tr",
 					cells: [
 						{ text: ["Title"], classes: "" },
 						{ text: ["Content"], classes: "" },
 					],
 				},
 				{
-					classes: "",
+					classes: "wp-block-catpow-simpletable__tbody-tr",
 					cells: [
 						{ text: ["Title"], classes: "" },
 						{ text: ["Content"], classes: "" },
@@ -74,7 +74,7 @@
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { useState, useMemo } = wp.element;
-		const { InspectorControls, RichText } = wp.blockEditor;
+		const { InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { classes, vars, rows } = attributes;
 
 		const selectiveClasses = useMemo(() => {
@@ -134,7 +134,7 @@
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<CP.Bem prefix="wp-block-catpow">
-					<table className={classes} style={vars}>
+					<table {...useBlockProps({ className: classes, style: vars })}>
 						<tbody>
 							{rows.map((row, index) => {
 								return (
@@ -168,11 +168,11 @@
 	},
 
 	save({ attributes, className }) {
-		const { RichText } = wp.blockEditor;
+		const { RichText, useBlockProps } = wp.blockEditor;
 		const { classes, vars, rows } = attributes;
 		return (
 			<CP.Bem prefix="wp-block-catpow">
-				<table className={classes} style={vars}>
+				<table {...useBlockProps.save({ className: classes, style: vars })}>
 					<tbody>
 						{rows.map((row, index) => {
 							return (

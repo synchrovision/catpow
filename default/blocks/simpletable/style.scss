@@ -10,6 +10,7 @@
 	&__thead,&__tbody{
 		&-tr{
 			&-th,&-td{
+				@extend %table-component;
 				@extend %paragraph;
 				@include bnd((pd:cpd));
 				@include txt((a:l,c:tx,v:m));
@@ -95,7 +96,7 @@
 						@include txt((a:r,v:t));
 						&::after{
 							content:'';
-							@include bnd((d:b,w:7,h:7,p:a,t:2em,r:-4));
+							@include bnd((d:b,w:7,h:7,p:a,t:1em,r:-4));
 							@include bdr((r:7));
 							@include bg((c:tx 50));
 						}
@@ -153,19 +154,19 @@
 					&.is-required{
 						#{$row}-th::after{
 							content: '必須';
-							@include bg((c:1));
+							@include bg((c:a));
 						}
 					}
 					&.is-optional{
 						#{$row}-th::after{
 							content: '任意';
-							@include bg((c:8));
+							@include bg((c:tx 50));
 						}
 					}
 					&.is-recommended{
 						#{$row}-th::after{
 							content: '推奨';
-							@include bg((c:4));
+							@include bg((c:m));
 						}
 					}
 					&.is-readonly{

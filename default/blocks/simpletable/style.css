@@ -15,6 +15,12 @@
   border-radius: var(--cp-border-radius-c-l, 0);
   box-shadow: var(--cp-shadow-c-l) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
+.wp-block-catpow-simpletable__thead-tr-th, .wp-block-catpow-simpletable__thead-tr-td, .wp-block-catpow-simpletable__tbody-tr-th, .wp-block-catpow-simpletable__tbody-tr-td {
+  padding: var(--cp-padding-c-t);
+  border-width: var(--cp-border-width-c-t, 0);
+  border-radius: var(--cp-border-radius-c-t, 0);
+  box-shadow: var(--cp-shadow-c-t) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+}
 .wp-block-catpow-simpletable {
   margin-inline: auto;
 }
@@ -127,7 +133,7 @@
   width: 0.4375rem;
   height: 0.4375rem;
   position: absolute;
-  top: 2em;
+  top: 1em;
   right: -0.25rem;
   border-radius: 0.4375rem;
   background-color: oklch(calc(1 - var(--cp-tones-tx-t) * 50) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
@@ -192,15 +198,15 @@
 }
 .wp-block-catpow-simpletable.is-type-inputs .wp-block-catpow-simpletable__thead-tr.is-required .wp-block-catpow-simpletable__tbody-tr-th::after, .wp-block-catpow-simpletable.is-type-inputs .wp-block-catpow-simpletable__tbody-tr.is-required .wp-block-catpow-simpletable__tbody-tr-th::after {
   content: "必須";
-  background-color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -5 + var(--cp-tones-hs)) / var(--cp-tones-m-a,1));
+  background-color: oklch(var(--cp-tones-a-l) var(--cp-tones-a-c) var(--cp-tones-a-h) / var(--cp-tones-a-a,1));
 }
 .wp-block-catpow-simpletable.is-type-inputs .wp-block-catpow-simpletable__thead-tr.is-optional .wp-block-catpow-simpletable__tbody-tr-th::after, .wp-block-catpow-simpletable.is-type-inputs .wp-block-catpow-simpletable__tbody-tr.is-optional .wp-block-catpow-simpletable__tbody-tr-th::after {
   content: "任意";
-  background-color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * 2 + var(--cp-tones-hs)) / var(--cp-tones-m-a,1));
+  background-color: oklch(calc(1 - var(--cp-tones-tx-t) * 50) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
 }
 .wp-block-catpow-simpletable.is-type-inputs .wp-block-catpow-simpletable__thead-tr.is-recommended .wp-block-catpow-simpletable__tbody-tr-th::after, .wp-block-catpow-simpletable.is-type-inputs .wp-block-catpow-simpletable__tbody-tr.is-recommended .wp-block-catpow-simpletable__tbody-tr-th::after {
   content: "推奨";
-  background-color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) calc(var(--cp-root-tones-m-h) + var(--cp-tones-hr) * -2 + var(--cp-tones-hs)) / var(--cp-tones-m-a,1));
+  background-color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
 }
 .wp-block-catpow-simpletable.is-type-inputs .wp-block-catpow-simpletable__thead-tr.is-readonly .wp-block-catpow-simpletable__tbody-tr-th::after, .wp-block-catpow-simpletable.is-type-inputs .wp-block-catpow-simpletable__tbody-tr.is-readonly .wp-block-catpow-simpletable__tbody-tr-th::after {
   content: "固定";

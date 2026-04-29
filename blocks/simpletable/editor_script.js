@@ -25,7 +25,7 @@
         source: "attribute",
         selector: "table",
         attribute: "class",
-        default: "wp-block-catpow-simpletable spec"
+        default: "wp-block-catpow-simpletable is-level3 is-type-spec"
       },
       vars: {
         type: "object"
@@ -48,21 +48,21 @@
         },
         default: [
           {
-            classes: "",
+            classes: "wp-block-catpow-simpletable__tbody-tr",
             cells: [
               { text: ["Title"], classes: "" },
               { text: ["Content"], classes: "" }
             ]
           },
           {
-            classes: "",
+            classes: "wp-block-catpow-simpletable__tbody-tr",
             cells: [
               { text: ["Title"], classes: "" },
               { text: ["Content"], classes: "" }
             ]
           },
           {
-            classes: "",
+            classes: "wp-block-catpow-simpletable__tbody-tr",
             cells: [
               { text: ["Title"], classes: "" },
               { text: ["Content"], classes: "" }
@@ -75,7 +75,7 @@
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useState, useMemo } = wp.element;
-      const { InspectorControls, RichText } = wp.blockEditor;
+      const { InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { classes, vars, rows } = attributes;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
@@ -125,7 +125,7 @@
       const saveItems = () => {
         setAttributes({ rows: JSON.parse(JSON.stringify(rows)) });
       };
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u884C", icon: "edit", set: setAttributes, attr: attributes, items: rows, index: attributes.currentItemIndex, triggerClasses: selectiveClasses[2] }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { className: classes, style: vars }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u884C", icon: "edit", set: setAttributes, attr: attributes, items: rows, index: attributes.currentItemIndex, triggerClasses: selectiveClasses[2] }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { ...useBlockProps({ className: classes, style: vars }) }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
         return /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "tr", className: row.classes, set: setAttributes, attr: attributes, items: rows, itemskey: "rows", index, isSelected, key: index }, /* @__PURE__ */ wp.element.createElement(
           RichText,
           {
@@ -152,9 +152,9 @@
       })))));
     },
     save({ attributes, className }) {
-      const { RichText } = wp.blockEditor;
+      const { RichText, useBlockProps } = wp.blockEditor;
       const { classes, vars, rows } = attributes;
-      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { className: classes, style: vars }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
+      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { ...useBlockProps.save({ className: classes, style: vars }) }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
         return /* @__PURE__ */ wp.element.createElement("tr", { className: row.classes, "data-refine-cond": row.cond, key: index }, /* @__PURE__ */ wp.element.createElement("th", { className: row.cells[0].classes }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: row.cells[0].text })), /* @__PURE__ */ wp.element.createElement("td", { className: row.cells[1].classes }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: row.cells[1].text })));
       }))));
     }
