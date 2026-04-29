@@ -1,4 +1,6 @@
 @import "admin_style_config.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
 
 .wp-block-catpow-pageheader{
 	@include bnd((d:b,p:r,ssa:s));
@@ -6,8 +8,9 @@
 	&__body{
 		@include bnd((p:r,z:2));
 		&-title{
+			@extend %heading;
 			@include bnd((pd:80 20));
-			@include txt((a:c,f:t-h,p:32,h:1.5em,c:tx));
+			@include txt((a:c,c:tx));
 		}
 		&-breadcrumb{
 			@include bg((c:shd));
@@ -20,7 +23,7 @@
 						@include bnd((f:0 0 a));
 						&-link{
 							@include bnd((d:ib,pd:8));
-							@include txt((p:14,c:i,s:n));
+							@include txt((p:14,c:i,f:t-u,s:n));
 						}
 						&:not(:last-child) &{
 							&-link:last-child{

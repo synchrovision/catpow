@@ -1,4 +1,11 @@
 @charset "UTF-8";
+.wp-block-catpow-pageheader__body-title {
+  font-family: var(--cp-font-family-t-h, inherit);
+  font-size: var(--cp-font-size-t-h, 2em);
+  font-weight: var(--cp-font-weight-t-h, regular);
+  line-height: var(--cp-line-height-t-h, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-h, normal);
+}
 .wp-block-catpow-pageheader {
   display: block;
   position: relative;
@@ -12,9 +19,6 @@
 .wp-block-catpow-pageheader__body-title {
   padding: 5rem 1.25rem;
   text-align: center;
-  font-family: var(--cp-font-family-t-h);
-  font-size: 2rem;
-  line-height: 1.5em;
   color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
 }
 .wp-block-catpow-pageheader__body-breadcrumb {
@@ -45,6 +49,7 @@
   padding: 0.5rem;
   font-size: 0.875rem;
   color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
+  font-family: var(--cp-font-family-t-u);
   text-decoration: none;
 }
 .wp-block-catpow-pageheader__body-breadcrumb__body-items-item:not(:last-child) .wp-block-catpow-pageheader__body-breadcrumb__body-items-item-link:last-child::after {

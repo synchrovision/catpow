@@ -11,11 +11,12 @@ wp.blocks.registerBlockType("catpow/pageheader", {
 	edit({ attributes, setAttributes }) {
 		const { vars } = attributes;
 		const { useMemo } = wp.element;
-		const { InspectorControls, RichText } = wp.blockEditor;
+		const { InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const states = CP.classNamesToFlags(attributes.classes);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
+				"level",
 				"size",
 				{ name: "breadcrumb", label: __("パンくずリスト", "catpow"), values: "hasBreadcrumb" },
 				"color",
@@ -35,7 +36,7 @@ wp.blocks.registerBlockType("catpow/pageheader", {
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<CP.Bem prefix="wp-block-catpow">
-					<div className={attributes.classes} style={CP.convertCssVarsForPreview(vars)}>
+					<div {...useBlockProps({ className: attributes.classes, style: CP.convertCssVarsForPreview(vars) })}>
 						<div className="_body">
 							<RichText
 								tagName="h1"
@@ -55,12 +56,12 @@ wp.blocks.registerBlockType("catpow/pageheader", {
 
 	save({ attributes }) {
 		const { vars } = attributes;
-		const { RichText } = wp.blockEditor;
+		const { RichText, useBlockProps } = wp.blockEditor;
 		const states = CP.classNamesToFlags(attributes.classes);
 
 		return (
 			<CP.Bem prefix="wp-block-catpow">
-				<div className={attributes.classes} style={vars}>
+				<div {...useBlockProps.save({ className: attributes.classes, style: vars })}>
 					<div className="_body">
 						<RichText.Content tagName="h1" className="_title" value={attributes.title} />
 						{states.hasBreadcrumb && <CP.ServerSideRenderPart name="breadcrumb" className="_breadcrumb" container_class="wp-block-catpow-pageheader__body-breadcrumb-body" />}
