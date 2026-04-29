@@ -4066,7 +4066,7 @@
             CP.SelectColorClass,
             {
               label: __11("\u8272", "catpow"),
-              selected: states,
+              selected: targetStates,
               onChange: (proxy) => {
                 if (!props.items) {
                   set({ color: proxy.value });

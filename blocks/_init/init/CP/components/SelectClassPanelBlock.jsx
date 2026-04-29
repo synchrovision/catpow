@@ -537,7 +537,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 			rtn.push(
 				<CP.SelectColorClass
 					label={__("色", "catpow")}
-					selected={states}
+					selected={targetStates}
 					onChange={(proxy) => {
 						if (!props.items) {
 							set({ color: proxy.value });
