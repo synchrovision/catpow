@@ -172,7 +172,6 @@
                     @include flx((d:c));
                     @include bg((c:bx));
                     @include txt((c:tx));
-                    @include shd((b:4));
                     &-counter{
                         @extend %label-component;
                         @include bnd((d:b,w:fit,mgi:a,mgt:-2em,mgb:s-s));
