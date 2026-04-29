@@ -7,9 +7,9 @@ $post_data['meta']=[
 	'send_mail'=>[$mail_conf_post_type.'/notice',$mail_conf_post_type.'/thanks']
 ];
 $post_data['post_content']=cp::get_block_code('simpletable',[
-	'classes'=>'inputs',
+	'classes'=>'is-level3 is-type-inputs',
 	'rows'=>array_map(function($conf,$name){
-		return ['classes'=>empty($conf['required'])?'optional':'required','cells'=>[
+		return ['classes'=>empty($conf['required'])?'is-optional':'is-required','cells'=>[
 			['text'=>$conf['label']],
 			['text'=>"[output {$name}]"]
 		]];
