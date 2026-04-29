@@ -61,7 +61,7 @@
   flex-shrink: 0;
   flex-basis: auto;
   box-sizing: border-box;
-  border-radius: 1.5em;
+  border-radius: var(--cp-border-radius-c-c);
   background-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
   text-align: center;
   font-size: 1.2em;
@@ -400,7 +400,7 @@
   max-width: 12.5rem;
   width: 100%;
   height: auto;
-  border-radius: 1.25rem;
+  border-radius: var(--cp-border-radius-c-c);
 }
 @media (min-width:960px) {
   .wp-block-catpow-flow.is-type-timeline.has-image .wp-block-catpow-flow__item {

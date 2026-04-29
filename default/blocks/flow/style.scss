@@ -46,7 +46,7 @@
 					&-header{
 						&-counter{
 							@include bnd((p:a,w:2em a,t:-.5em,l:-.25em,pd:.25em,f:0 0 a,bs:b));
-							@include bdr((r:1.5em));
+							@include bdr((r:c-c));
 							@include bg((c:mx));
 							@include txt((a:c,p:1.2em,h:1em,s:b,c:ix));
 							&-prefix{
@@ -291,7 +291,7 @@
 						@include txt((a:c));
 						img{
 							@include bnd((w:f 200,h:a));
-							@include bdr((r:20));
+							@include bdr((r:c-c));
 						}
 					}
 					@include bp(pc){
