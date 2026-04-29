@@ -4,7 +4,7 @@ $attributes=[
 	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} is-size-medium has-title-caption has-counter has-link"],
 	"vars"=>["type"=>"object"],
 	
-	"TitleTag"=>["type"=>"string","default"=>"h3"],
+	"HeadingTag"=>["type"=>"string","default"=>"h3"],
 	
 	"items"=>[
 		"source"=>"query",

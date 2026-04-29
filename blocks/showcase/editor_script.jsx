@@ -44,7 +44,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 		const { useState, useMemo } = wp.element;
 		const { BlockControls, InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
-		const { items = [], classes, vars, TitleTag, countPrefix, countSuffix, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { items = [], classes, vars, HeadingTag, countPrefix, countSuffix, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 		const primaryClass = "wp-block-catpow-showcase";
 		var classArray = _.uniq((className + " " + classes).split(" "));
 
@@ -54,6 +54,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 		const selectiveClasses = useMemo(() => {
 			const { imageKeys } = CP.config.showcase;
 			const selectiveClasses = [
+				"headingTag",
 				"level",
 				"color",
 				"colorScheme",
@@ -243,7 +244,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 														</div>
 													)}
 													<RichText
-														tagName={TitleTag}
+														tagName={HeadingTag}
 														className="_title"
 														onChange={(text) => {
 															items[index].title = text;
@@ -301,7 +302,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 	},
 	save({ attributes, className }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { items = [], classes = "", vars, TitleTag, countPrefix, countSuffix, doLoop } = attributes;
+		const { items = [], classes = "", vars, HeadingTag, countPrefix, countSuffix, doLoop } = attributes;
 		var classArray = _.uniq(classes.split(" "));
 
 		const states = CP.classNamesToFlags(classes);
@@ -322,7 +323,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 								{countSuffix && <span className="_suffix">{countSuffix}</span>}
 							</div>
 						)}
-						<RichText.Content tagName={TitleTag} className="_title" value={item.title} />
+						<RichText.Content tagName={HeadingTag} className="_title" value={item.title} />
 						{states.hasTitleCaption && <RichText.Content tagName="p" className="_caption" value={item.titleCaption} />}
 						<div className="_text">
 							<RichText.Content value={item.text} />
