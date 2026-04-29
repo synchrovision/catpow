@@ -81,6 +81,7 @@
 			const selectiveClasses = [
 				"level",
 				"hasContentWidth",
+				"hasMargin",
 				{
 					name: "type",
 					type: "gridbuttons",
@@ -130,7 +131,7 @@
 			<>
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="行" icon="edit" set={setAttributes} attr={attributes} items={rows} index={attributes.currentItemIndex} triggerClasses={selectiveClasses[2]} />
+					<CP.SelectClassPanel title="行" icon="edit" set={setAttributes} attr={attributes} items={rows} index={attributes.currentItemIndex} triggerClasses={selectiveClasses[3]} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<CP.Bem prefix="wp-block-catpow">

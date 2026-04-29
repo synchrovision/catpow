@@ -81,6 +81,7 @@
         const selectiveClasses2 = [
           "level",
           "hasContentWidth",
+          "hasMargin",
           {
             name: "type",
             type: "gridbuttons",
@@ -125,7 +126,7 @@
       const saveItems = () => {
         setAttributes({ rows: JSON.parse(JSON.stringify(rows)) });
       };
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u884C", icon: "edit", set: setAttributes, attr: attributes, items: rows, index: attributes.currentItemIndex, triggerClasses: selectiveClasses[2] }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { ...useBlockProps({ className: classes, style: vars }) }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u884C", icon: "edit", set: setAttributes, attr: attributes, items: rows, index: attributes.currentItemIndex, triggerClasses: selectiveClasses[3] }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { ...useBlockProps({ className: classes, style: vars }) }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
         return /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "tr", className: row.classes, set: setAttributes, attr: attributes, items: rows, itemskey: "rows", index, isSelected, key: index }, /* @__PURE__ */ wp.element.createElement(
           RichText,
           {

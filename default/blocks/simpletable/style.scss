@@ -5,7 +5,6 @@
 .wp-block-catpow-simpletable{
 	$block:&;
 	$row:$block + '__tbody-tr';
-	@extend %ui-block;
 	@include bnd((mgi:a));
 	&__thead,&__tbody{
 		&-tr{
