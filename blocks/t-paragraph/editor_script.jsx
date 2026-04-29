@@ -34,7 +34,7 @@
 		};
 	},
 	attributes: {
-		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-paragraph medium" },
+		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-paragraph has-font-size-medium" },
 		marginTop: { type: "number", default: 0 },
 		marginBottom: { type: "number", default: 0.5 },
 		text: { source: "html", selector: ".is-text-cell", default: "text" },
@@ -42,7 +42,7 @@
 	example: CP.example,
 	edit({ attributes, className, setAttributes, onReplace, mergeBlocks }) {
 		const { useState, useMemo } = wp.element;
-		const { BlockControls, InspectorControls, RichText } = wp.blockEditor;
+		const { BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
 		const { classes, marginTop, marginBottom, text } = attributes;
 		const primaryClass = "wp-block-catpow-t-paragraph";
@@ -63,7 +63,7 @@
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<table width="100%" className={classes}>
+					<table {...useBlockProps({ width: "100%", className: classes })}>
 						<tbody>
 							{marginTop > 0 && (
 								<tr>

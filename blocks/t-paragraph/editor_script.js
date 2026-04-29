@@ -36,7 +36,7 @@
       };
     },
     attributes: {
-      classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-paragraph medium" },
+      classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-paragraph has-font-size-medium" },
       marginTop: { type: "number", default: 0 },
       marginBottom: { type: "number", default: 0.5 },
       text: { source: "html", selector: ".is-text-cell", default: "text" }
@@ -44,7 +44,7 @@
     example: CP.example,
     edit({ attributes, className, setAttributes, onReplace, mergeBlocks }) {
       const { useState, useMemo } = wp.element;
-      const { BlockControls, InspectorControls, RichText } = wp.blockEditor;
+      const { BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { PanelBody, TextareaControl } = wp.components;
       const { classes, marginTop, marginBottom, text } = attributes;
       const primaryClass = "wp-block-catpow-t-paragraph";
@@ -60,7 +60,7 @@
         wp.hooks.applyFilters("catpow.blocks.t-paragraph.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { width: "100%", className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, marginTop > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginTop}em` } })), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-text-cell" }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { ...useBlockProps({ width: "100%", className: classes }) }, /* @__PURE__ */ wp.element.createElement("tbody", null, marginTop > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginTop}em` } })), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-text-cell" }, /* @__PURE__ */ wp.element.createElement(
         RichText,
         {
           identifier: "content",
