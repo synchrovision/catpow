@@ -11,12 +11,13 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 		const { useMemo } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { classes, vars, TitleTag, items = [], z, t, hl, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { classes, vars, HeadingTag, items = [], z, t, hl, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 
 		var states = useMemo(() => CP.classNamesToFlags(classes), [classes]);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
+				"headingTag",
 				"level",
 				"color",
 				"colorScheme",
@@ -39,13 +40,6 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 						hasMapColorGray: "グレー",
 						hasMapColorSync: "同色",
 					},
-				},
-				{
-					name: "titleTag",
-					input: "buttons",
-					key: "TitleTag",
-					label: "タイトルタグ",
-					values: ["h2", "h3", "h4"],
 				},
 				{ name: "hasTel", values: "hasTel", label: "電話番号" },
 				{ name: "hasMail", values: "hasMail", label: "メール" },
@@ -218,7 +212,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 												</div>
 												<div className="_access">
 													<RichText
-														tagName={TitleTag}
+														tagName={HeadingTag}
 														className="_title"
 														onChange={(title) => {
 															item.title = title;
@@ -291,7 +285,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 	},
 	save({ attributes }) {
 		const { InnerBlocks, RichText } = wp.blockEditor;
-		const { classes, vars, TitleTag, items = [], z, t, hl, doLoop } = attributes;
+		const { classes, vars, HeadingTag, items = [], z, t, hl, doLoop } = attributes;
 		const states = CP.classNamesToFlags(classes);
 
 		return (
@@ -316,7 +310,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 										<iframe src={url} className="_gmap" data-ll={item.ll} data-q={item.q}></iframe>
 									</div>
 									<div className="_access">
-										<RichText.Content tagName={TitleTag} className="_title" value={item.title} />
+										<RichText.Content tagName={HeadingTag} className="_title" value={item.title} />
 										<RichText.Content tagName="div" className="_address" value={item.address} />
 										{states.hasTel && <RichText.Content tagName="div" className="_tel" value={item.tel} />}
 										{states.hasMail && <RichText.Content tagName="div" className="_mail" value={item.mail} />}

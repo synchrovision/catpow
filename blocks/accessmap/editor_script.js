@@ -12,10 +12,11 @@
       const { useMemo } = wp.element;
       const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
-      const { classes, vars, TitleTag, items = [], z, t, hl, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+      const { classes, vars, HeadingTag, items = [], z, t, hl, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
       var states = useMemo(() => CP.classNamesToFlags(classes), [classes]);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
+          "headingTag",
           "level",
           "color",
           "colorScheme",
@@ -38,13 +39,6 @@
               hasMapColorGray: "\u30B0\u30EC\u30FC",
               hasMapColorSync: "\u540C\u8272"
             }
-          },
-          {
-            name: "titleTag",
-            input: "buttons",
-            key: "TitleTag",
-            label: "\u30BF\u30A4\u30C8\u30EB\u30BF\u30B0",
-            values: ["h2", "h3", "h4"]
           },
           { name: "hasTel", values: "hasTel", label: "\u96FB\u8A71\u756A\u53F7" },
           { name: "hasMail", values: "hasMail", label: "\u30E1\u30FC\u30EB" },
@@ -182,7 +176,7 @@
         return /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "div", className: item.classes, set: setAttributes, attr: attributes, items, index, isSelected, key: i }, /* @__PURE__ */ wp.element.createElement("div", { className: "_map" }, states.isTemplate ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { className: "_gmap", text: item.q || item.address.replace(/<br\/?>|\n/, " ") }) : /* @__PURE__ */ wp.element.createElement("iframe", { src: url, className: "_gmap", "data-ll": item.ll || false, "data-q": item.q || false })), /* @__PURE__ */ wp.element.createElement("div", { className: "_access" }, /* @__PURE__ */ wp.element.createElement(
           RichText,
           {
-            tagName: TitleTag,
+            tagName: HeadingTag,
             className: "_title",
             onChange: (title) => {
               item.title = title;
@@ -250,7 +244,7 @@
     },
     save({ attributes }) {
       const { InnerBlocks, RichText } = wp.blockEditor;
-      const { classes, vars, TitleTag, items = [], z, t, hl, doLoop } = attributes;
+      const { classes, vars, HeadingTag, items = [], z, t, hl, doLoop } = attributes;
       const states = CP.classNamesToFlags(classes);
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { className: classes, style: vars }, items.map((item, index) => {
         let url;
@@ -264,7 +258,7 @@
             url += `&ll=${item.ll}`;
           }
         }
-        return /* @__PURE__ */ wp.element.createElement("div", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "_map" }, /* @__PURE__ */ wp.element.createElement("iframe", { src: url, className: "_gmap", "data-ll": item.ll, "data-q": item.q })), /* @__PURE__ */ wp.element.createElement("div", { className: "_access" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: TitleTag, className: "_title", value: item.title }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "_address", value: item.address }), states.hasTel && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "_tel", value: item.tel }), states.hasMail && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "_mail", value: item.mail }), states.hasSite && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "_site", value: item.site }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "_info", value: item.info })));
+        return /* @__PURE__ */ wp.element.createElement("div", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "_map" }, /* @__PURE__ */ wp.element.createElement("iframe", { src: url, className: "_gmap", "data-ll": item.ll, "data-q": item.q })), /* @__PURE__ */ wp.element.createElement("div", { className: "_access" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: HeadingTag, className: "_title", value: item.title }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "_address", value: item.address }), states.hasTel && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "_tel", value: item.tel }), states.hasMail && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "_mail", value: item.mail }), states.hasSite && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "_site", value: item.site }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "_info", value: item.info })));
       }))), doLoop && /* @__PURE__ */ wp.element.createElement("on-empty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }
   });
