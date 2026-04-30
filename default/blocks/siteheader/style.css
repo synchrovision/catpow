@@ -43,7 +43,7 @@
   align-items: end;
   font-size: 1.25rem;
   line-height: 1em;
-  font-family: var(--cp-font-family-f-m);
+  font-family: var(--cp-font-family-t-u);
   text-align: left;
   font-weight: bold;
 }
@@ -52,7 +52,7 @@
   text-align: left;
   font-size: 1.5625rem;
   line-height: 1em;
-  font-family: var(--cp-font-family-t);
+  font-family: var(--cp-font-family-t-u);
   font-weight: 900;
   color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
@@ -68,7 +68,7 @@
   color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
   font-size: 0.875rem;
   line-height: 1em;
-  font-family: p;
+  font-family: var(--cp-font-family-t-p);
   font-weight: normal;
 }
 .wp-block-catpow-siteheader__back {
@@ -87,7 +87,7 @@
   text-align: center;
   font-size: 1.25rem;
   line-height: 20;
-  font-family: var(--cp-font-family-t);
+  font-family: var(--cp-font-family-t-u);
   font-weight: normal;
   color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
   cursor: pointer;
