@@ -42,14 +42,14 @@ wp.blocks.registerBlockType("catpow/div", {
 						isTypeFrame: [{ label: "アイコン", values: "hasIcon", sub: [{ input: "icon", label: "アイコン", color }] }, "hasBorder"],
 						isTypeColumns: [
 							{ preset: "clipPath", vars: "clipVars" },
-							{ type: "buttons", label: "幅", values: { hasColumnNarrow: "狭い", hasColumnRegular: "普通", hasColumnWide: "広い" } },
+							{ preset: "itemSize", label: "カラム幅" },
 						],
 					},
 					bind: {
 						isTypeFrame: ["hasContentWidth"],
 					},
 				},
-				"contentWidth",
+				"hasContentWidth",
 				"color",
 				"colorScheme",
 				"backgroundColor",

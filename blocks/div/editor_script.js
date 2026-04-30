@@ -42,14 +42,14 @@
               isTypeFrame: [{ label: "\u30A2\u30A4\u30B3\u30F3", values: "hasIcon", sub: [{ input: "icon", label: "\u30A2\u30A4\u30B3\u30F3", color }] }, "hasBorder"],
               isTypeColumns: [
                 { preset: "clipPath", vars: "clipVars" },
-                { type: "buttons", label: "\u5E45", values: { hasColumnNarrow: "\u72ED\u3044", hasColumnRegular: "\u666E\u901A", hasColumnWide: "\u5E83\u3044" } }
+                { preset: "itemSize", label: "\u30AB\u30E9\u30E0\u5E45" }
               ]
             },
             bind: {
               isTypeFrame: ["hasContentWidth"]
             }
           },
-          "contentWidth",
+          "hasContentWidth",
           "color",
           "colorScheme",
           "backgroundColor",

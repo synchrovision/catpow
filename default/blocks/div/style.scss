@@ -4,7 +4,7 @@
 
 .wp-block-catpow-div{
 	$block:&;
-	@include bnd((mgi:a,p:r,z:1));
+	@include bnd((mgi:a,p:r,z:1,bs:b));
 	@include txt((c:tx));
 	&.is-type-block{
 	}
@@ -14,9 +14,7 @@
 		@include bdr((s:s,c:l));
 	}
 	&.is-type-columns{
-		&.has-column-narrow{@include col((w:160,g:20));}
-		&.has-column-regular{@include col((w:320,g:30));}
-		&.has-column-wide{@include col((w:480,g:50,rs:d,rw:1,rc:l));}
+		@include col((w:i,g:2em,rs:d,rw:1,rc:l));
 	}
 	&.has-icon{
 		&>.icon{
