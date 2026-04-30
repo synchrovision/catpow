@@ -6214,9 +6214,11 @@
         label: __13("\u30A2\u30A4\u30C6\u30E0\u30B5\u30A4\u30BA", "catpow"),
         required: true,
         values: {
+          hasItemSizeXSmall: __13("\u6975\u5C0F", "catpow"),
           hasItemSizeSmall: __13("\u5C0F", "catpow"),
           hasItemSizeMedium: __13("\u4E2D", "catpow"),
           hasItemSizeLarge: __13("\u5927", "catpow"),
+          hasItemSizeXLarge: __13("\u6975\u5927", "catpow"),
           hasItemSizeCustom: ":admin-generic:"
         },
         sub: {

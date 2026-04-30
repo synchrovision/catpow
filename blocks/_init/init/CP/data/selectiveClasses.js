@@ -453,9 +453,11 @@ export const selectiveClassesPresets = {
 			label: __("アイテムサイズ", "catpow"),
 			required: true,
 			values: {
+				hasItemSizeXSmall: __("極小", "catpow"),
 				hasItemSizeSmall: __("小", "catpow"),
 				hasItemSizeMedium: __("中", "catpow"),
 				hasItemSizeLarge: __("大", "catpow"),
+				hasItemSizeXLarge: __("極大", "catpow"),
 				hasItemSizeCustom: ":admin-generic:",
 			},
 			sub: {
