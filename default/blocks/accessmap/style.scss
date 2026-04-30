@@ -19,22 +19,23 @@
 			}
 		}
 		&-access{
+			@extend %paragraph;
 			@include bnd((f:2 2 300));
 			&-title{
+				@extend %heading;
 				@include bnd((pd:0,mg:0,mgb:.5em));
-				@include txt((p:1.5em));
 			}
 			&-tel{
 				@include bnd((d:b));
-				@include txt((p:1.5em,td:n,c:tx));
+				@include txt((p:r-xl,f:e,td:n,c:tx));
 			}
 			&-mail{
 				@include bnd((d:b));
-				@include txt((p:1.25em,td:n,c:tx));
+				@include txt((p:r-l,f:e,td:n,c:tx));
 			}
 			&-site{
 				@include bnd((d:b));
-				@include txt((p:1em,td:n,c:tx));
+				@include txt((f:e,td:n,c:tx));
 			}
 			&-address{
 				@include bnd((pd:0,mg:0,mgb:.5em));
