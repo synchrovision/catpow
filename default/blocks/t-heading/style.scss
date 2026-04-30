@@ -8,7 +8,7 @@
 		&-tr{
 			&-td{
 				@include bdr((s:n));
-				@include txt((f:h,h:1.5em,c:t));
+				@include txt((f:t-h,h:1.5em,c:t));
 				.has-color-scheme-inverted &{
 					@include txt((c:i));
 				}

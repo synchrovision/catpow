@@ -30,7 +30,7 @@
 		$element: &;
 		&-tr{
 			&-th{
-				@include txt((a:c,p:24px,f:t,w:b,c:m));
+				@include txt((a:wc,p:24px,f:t-h,w:b,c:m));
 				#{$element}.has-color-scheme-inverted &{
 					@include txt((c:i));
 				}
@@ -49,7 +49,7 @@
 		$element: &;
 		&-tr{
 			&-td{
-				@include txt((p:14px,f:t));
+				@include txt((a:wc,p:14px,f:t-p));
 				#{$element}.has-color-scheme-inverted &{
 					@include txt((c:i));
 				}

@@ -8,7 +8,7 @@
 		&-marker,&-text{
 			@include bnd((pdb:.5em));
 			@include bdr((s:n));
-			@include txt((f:t,h:2em,c:t,v:t));
+			@include txt((f:t-p,h:2em,c:t,v:t));
 			.has-color-scheme-inverted &{
 				@include txt((c:i));
 			}
