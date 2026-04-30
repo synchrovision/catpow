@@ -4,6 +4,8 @@
 @import "block-variants.scss";
 @import "text-variants.scss";
 @import "color-variants.scss";
+@import "component-placeholders.scss";
+@import "text-placeholders.scss";
 
 html{
 	@include bnd((sb:s));
@@ -412,27 +414,25 @@ del{
 
 .rtf,#editor .rtf{
 	&-title{
-		@include bnd((d:b,p:r));
-		@include txt((f:t-h,p:1.25em));
-		&:not(:first-child){
-			@include bnd((mgt:1em));
+		@include bnd((d:b,p:r,mg:1em 0 .5em));
+		@include txt((p:r-l,f:t-h,t:t-h));
+		&:first-child{
+			@include bnd((mgt:0));
 		}
-		&.iheader{
-			@include bnd((pdb:.25em,mgb:.5em));
-			@include bdr((p:b,s:s,w:1));
-		}
-		&.iheadline{
-			@include bnd((p:r,pd:0,pdl:1.5em,mgb:.5em));
-			@include txt((p:1.1em,h:1.5em));
-			&::before{
+		&.is-header{
+			@include bnd((p:r,pdb:.25em));
+			@include bdr((p:b,s:s,w:1,c:l));
+			&::after{
 				content:'';
-				@include bnd((d:b,p:a,t:.25em,l:0,w:1em,h:1em));
-				@include bg((c:m));
+				@include bnd((d:b,p:a,l:0,b:-2,w:4em,h:3));
+				@include bg((c:mx));
 			}
 		}
-		&.icatch{
-			@include bnd((mgb:.5em));
-			@include txt((p:1.25em));
+		&.is-headline{
+			@include bnd((pdl:.5em));
+			@include bdr((p:l,s:s,w:4,c:mx));
+		}
+		&.is-catch{
 		}
 		img{
 			@include bnd((d:ib,w:a,h:1em));
@@ -444,14 +444,15 @@ del{
 	}
 	&-large{
 		@include bnd((d:ib));
-		@include txt((p:1.5em,w:b,c:m));
+		@include txt((p:1.5em,w:b,c:hx));
 	}
 	&-u{
 		@include txt((td:u .05em .2em));
 	}
 	&-mark{
-		@include bg((p:0% -.25em));
-		@include stripe(clr(a 1 .15));
+		@include bg((c:n,p:0% -.25em));
+		@include txt((c:tx));
+		@include stripe(ex);
 	}
 	&-tag{
 		@include bnd((d:ib,pd:.2em 1em,mg:0 .2em));
@@ -593,15 +594,15 @@ del{
 		@include txt((p:.9em));
 	}
 	&-em{
-		@include txt((c:mx));
+		@include txt((c:hx));
 	}
 	&-strong{
 		@include txt((w:b));
 	}
 	&-stronger{
-		@include txt((p:1.2em,c:mx));
+		@include txt((p:1.2em,c:hx));
 	}
 	&-strongest{
-		@include txt((p:1.5em,w:bx,c:a));
+		@include txt((p:1.5em,w:hx,c:a));
 	}
 }

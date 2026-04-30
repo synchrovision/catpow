@@ -659,6 +659,41 @@
 .has-background-color-alt {
   background-color: oklch(var(--cp-tones-sx-l) var(--cp-tones-sx-c) var(--cp-tones-sx-h) / var(--cp-tones-sx-a,1));
 }
+.has-text-role-heading {
+  font-family: var(--cp-font-family-t-h, inherit);
+  font-size: var(--cp-font-size-t-h, 2em);
+  font-weight: var(--cp-font-weight-t-h, regular);
+  line-height: var(--cp-line-height-t-h, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-h, normal);
+}
+.has-text-role-lead {
+  font-family: var(--cp-font-family-t-l, inherit);
+  font-size: var(--cp-font-size-t-l, 2em);
+  font-weight: var(--cp-font-weight-t-l, regular);
+  line-height: var(--cp-line-height-t-l, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-l, normal);
+}
+.has-text-role-paragraph {
+  font-family: var(--cp-font-family-t-p, inherit);
+  font-size: var(--cp-font-size-t-p, 2em);
+  font-weight: var(--cp-font-weight-t-p, regular);
+  line-height: var(--cp-line-height-t-p, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-p, normal);
+}
+.has-text-role-ui {
+  font-family: var(--cp-font-family-t-u, inherit);
+  font-size: var(--cp-font-size-t-u, 2em);
+  font-weight: var(--cp-font-weight-t-u, regular);
+  line-height: var(--cp-line-height-t-u, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-u, normal);
+}
+.has-text-role-caption {
+  font-family: var(--cp-font-family-t-c, inherit);
+  font-size: var(--cp-font-size-t-c, 2em);
+  font-weight: var(--cp-font-weight-t-c, regular);
+  line-height: var(--cp-line-height-t-c, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-c, normal);
+}
 html {
   scroll-behavior: smooth;
   color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
@@ -3461,39 +3496,36 @@ del {
 .rtf-title, #editor .rtf-title {
   display: block;
   position: relative;
+  margin: 1em 0rem 0.5em;
+  font-size: var(--cp-font-size-r-l);
   font-family: var(--cp-font-family-t-h);
-  font-size: 1.25em;
+  letter-spacing: var(--cp-letter-spacing-t-h);
 }
-.rtf-title:not(:first-child), #editor .rtf-title:not(:first-child) {
-  margin-top: 1em;
+.rtf-title:first-child, #editor .rtf-title:first-child {
+  margin-top: 0rem;
 }
-.rtf-title.iheader, #editor .rtf-title.iheader {
+.rtf-title.is-header, #editor .rtf-title.is-header {
+  position: relative;
   padding-bottom: 0.25em;
-  margin-bottom: 0.5em;
   border-bottom-style: solid;
   border-bottom-width: 0.0625rem;
+  border-bottom-color: oklch(var(--cp-tones-l-l) var(--cp-tones-l-c) var(--cp-tones-l-h) / var(--cp-tones-l-a,1));
 }
-.rtf-title.iheadline, #editor .rtf-title.iheadline {
-  position: relative;
-  padding: 0rem;
-  padding-left: 1.5em;
-  margin-bottom: 0.5em;
-  font-size: 1.1em;
-  line-height: 1.5em;
-}
-.rtf-title.iheadline::before, #editor .rtf-title.iheadline::before {
+.rtf-title.is-header::after, #editor .rtf-title.is-header::after {
   content: "";
   display: block;
   position: absolute;
-  top: 0.25em;
   left: 0rem;
-  width: 1em;
-  height: 1em;
-  background-color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
+  bottom: -0.125rem;
+  width: 4em;
+  height: 0.1875rem;
+  background-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
 }
-.rtf-title.icatch, #editor .rtf-title.icatch {
-  margin-bottom: 0.5em;
-  font-size: 1.25em;
+.rtf-title.is-headline, #editor .rtf-title.is-headline {
+  padding-left: 0.5em;
+  border-left-style: solid;
+  border-left-width: 0.25rem;
+  border-left-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
 }
 .rtf-title img, #editor .rtf-title img {
   display: inline-block;
@@ -3510,7 +3542,7 @@ del {
   display: inline-block;
   font-size: 1.5em;
   font-weight: 700;
-  color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
+  color: oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1));
 }
 .rtf-u, #editor .rtf-u {
   text-decoration-line: underline;
@@ -3518,12 +3550,14 @@ del {
   text-underline-offset: 0.2em;
 }
 .rtf-mark, #editor .rtf-mark {
+  background-color: transparent;
   background-position: 0% -0.25em;
-  background-image: -webkit-linear-gradient(top, oklch(calc(1 - var(--cp-tones-a-t) * 100) var(--cp-tones-a-c) var(--cp-tones-a-h) / calc(var(--cp-tones-a-a,1) * 0.15)), oklch(calc(1 - var(--cp-tones-a-t) * 100) var(--cp-tones-a-c) var(--cp-tones-a-h) / calc(var(--cp-tones-a-a,1) * 0.15)) 50%, transparent 50.1%, transparent);
-  background-image: -moz-linear-gradient(top, oklch(calc(1 - var(--cp-tones-a-t) * 100) var(--cp-tones-a-c) var(--cp-tones-a-h) / calc(var(--cp-tones-a-a,1) * 0.15)), oklch(calc(1 - var(--cp-tones-a-t) * 100) var(--cp-tones-a-c) var(--cp-tones-a-h) / calc(var(--cp-tones-a-a,1) * 0.15)) 50%, transparent 50.1%, transparent);
-  background-image: -ms-linear-gradient(top, oklch(calc(1 - var(--cp-tones-a-t) * 100) var(--cp-tones-a-c) var(--cp-tones-a-h) / calc(var(--cp-tones-a-a,1) * 0.15)), oklch(calc(1 - var(--cp-tones-a-t) * 100) var(--cp-tones-a-c) var(--cp-tones-a-h) / calc(var(--cp-tones-a-a,1) * 0.15)) 50%, transparent 50.1%, transparent);
-  background-image: -o-linear-gradient(top, oklch(calc(1 - var(--cp-tones-a-t) * 100) var(--cp-tones-a-c) var(--cp-tones-a-h) / calc(var(--cp-tones-a-a,1) * 0.15)), oklch(calc(1 - var(--cp-tones-a-t) * 100) var(--cp-tones-a-c) var(--cp-tones-a-h) / calc(var(--cp-tones-a-a,1) * 0.15)) 50%, transparent 50.1%, transparent);
-  background-image: linear-gradient(0deg, oklch(calc(1 - var(--cp-tones-a-t) * 100) var(--cp-tones-a-c) var(--cp-tones-a-h) / calc(var(--cp-tones-a-a,1) * 0.15)), oklch(calc(1 - var(--cp-tones-a-t) * 100) var(--cp-tones-a-c) var(--cp-tones-a-h) / calc(var(--cp-tones-a-a,1) * 0.15)) 50%, transparent 50.1%, transparent);
+  color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
+  background-image: -webkit-linear-gradient(top, oklch(var(--cp-tones-ex-l) var(--cp-tones-ex-c) var(--cp-tones-ex-h) / var(--cp-tones-ex-a,1)), oklch(var(--cp-tones-ex-l) var(--cp-tones-ex-c) var(--cp-tones-ex-h) / var(--cp-tones-ex-a,1)) 50%, transparent 50.1%, transparent);
+  background-image: -moz-linear-gradient(top, oklch(var(--cp-tones-ex-l) var(--cp-tones-ex-c) var(--cp-tones-ex-h) / var(--cp-tones-ex-a,1)), oklch(var(--cp-tones-ex-l) var(--cp-tones-ex-c) var(--cp-tones-ex-h) / var(--cp-tones-ex-a,1)) 50%, transparent 50.1%, transparent);
+  background-image: -ms-linear-gradient(top, oklch(var(--cp-tones-ex-l) var(--cp-tones-ex-c) var(--cp-tones-ex-h) / var(--cp-tones-ex-a,1)), oklch(var(--cp-tones-ex-l) var(--cp-tones-ex-c) var(--cp-tones-ex-h) / var(--cp-tones-ex-a,1)) 50%, transparent 50.1%, transparent);
+  background-image: -o-linear-gradient(top, oklch(var(--cp-tones-ex-l) var(--cp-tones-ex-c) var(--cp-tones-ex-h) / var(--cp-tones-ex-a,1)), oklch(var(--cp-tones-ex-l) var(--cp-tones-ex-c) var(--cp-tones-ex-h) / var(--cp-tones-ex-a,1)) 50%, transparent 50.1%, transparent);
+  background-image: linear-gradient(0deg, oklch(var(--cp-tones-ex-l) var(--cp-tones-ex-c) var(--cp-tones-ex-h) / var(--cp-tones-ex-a,1)), oklch(var(--cp-tones-ex-l) var(--cp-tones-ex-c) var(--cp-tones-ex-h) / var(--cp-tones-ex-a,1)) 50%, transparent 50.1%, transparent);
 }
 .rtf-tag, #editor .rtf-tag {
   display: inline-block;
@@ -3706,18 +3740,18 @@ del {
   font-size: 0.9em;
 }
 .rtf-em, #editor .rtf-em {
-  color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
+  color: oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1));
 }
 .rtf-strong, #editor .rtf-strong {
   font-weight: 700;
 }
 .rtf-stronger, #editor .rtf-stronger {
   font-size: 1.2em;
-  color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
+  color: oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1));
 }
 .rtf-strongest, #editor .rtf-strongest {
   font-size: 1.5em;
-  font-weight: bx;
+  font-weight: hx;
   color: oklch(var(--cp-tones-a-l) var(--cp-tones-a-c) var(--cp-tones-a-h) / var(--cp-tones-a-a,1));
 }
 /*# sourceMappingURL=./content.css.map */
