@@ -57,7 +57,11 @@
 			return selectiveClasses;
 		}, []);
 		const selectiveItemClasses = useMemo(() => {
-			const selectiveItemClasses = [{ name: "image", input: "image", keys: { src: "src", alt: "alt" }, size: "thumbnail" }, { name: "link", input: "text", key: "href", label: "リンク" }, "color"];
+			const selectiveItemClasses = [
+				{ name: "image", input: "image", keys: { src: "src", alt: "alt", items: "items" }, size: "thumbnail" },
+				{ name: "link", input: "text", key: "href", label: "リンク" },
+				"color",
+			];
 			wp.hooks.applyFilters("catpow.blocks.icons.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		}, []);

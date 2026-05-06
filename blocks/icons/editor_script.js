@@ -58,7 +58,11 @@
         return selectiveClasses2;
       }, []);
       const selectiveItemClasses = useMemo(() => {
-        const selectiveItemClasses2 = [{ name: "image", input: "image", keys: { src: "src", alt: "alt" }, size: "thumbnail" }, { name: "link", input: "text", key: "href", label: "\u30EA\u30F3\u30AF" }, "color"];
+        const selectiveItemClasses2 = [
+          { name: "image", input: "image", keys: { src: "src", alt: "alt", items: "items" }, size: "thumbnail" },
+          { name: "link", input: "text", key: "href", label: "\u30EA\u30F3\u30AF" },
+          "color"
+        ];
         wp.hooks.applyFilters("catpow.blocks.icons.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
         return selectiveItemClasses2;
       }, []);
