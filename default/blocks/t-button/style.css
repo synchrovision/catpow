@@ -6,7 +6,7 @@
   background-color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
   border-style: none;
   border-radius: 0.25em;
-  text-align: center;
+  text-align: -webkit-center;
   font-family: var(--cp-font-family-t-u);
   box-shadow: 0 2px 5px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
