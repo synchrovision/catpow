@@ -89,6 +89,9 @@ wp.blocks.registerBlockType("catpow/datatable", {
 		];
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
+				"level",
+				"hasContentWidth",
+				"hasMargin",
 				{
 					name: "type",
 					type: "buttons",
@@ -99,7 +102,6 @@ wp.blocks.registerBlockType("catpow/datatable", {
 						isStylePlan: "plan",
 					},
 				},
-				"level",
 				"color",
 				{
 					name: "loop",

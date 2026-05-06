@@ -1,6 +1,3 @@
-.wp-block-catpow-datatable {
-  width: 100%;
-}
 .wp-block-catpow-datatable > thead > tr > th, .wp-block-catpow-datatable > thead > tr > td, .wp-block-catpow-datatable > tbody > tr > th, .wp-block-catpow-datatable > tbody > tr > td {
   position: relative;
 }

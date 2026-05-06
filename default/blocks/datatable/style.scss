@@ -5,8 +5,6 @@
 .wp-block-catpow-datatable{
 	$block:&;
 	$row:#{$block}__tbody-tr;
-	@extend %ui-block;
-	@include bnd((w:f));
 	&__thead,&__tbody{
 		&-tr{
 			&-th,&-td{
