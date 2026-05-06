@@ -10,7 +10,7 @@
       multiple: false
     },
     attributes: {
-      type: { type: "string", source: "meta", meta: "type", default: "plain" },
+      type: { type: "string", default: "plain" },
       isHtmlMail: { type: "boolean", default: false },
       classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-body has-header has-footer" },
       headerClasses: { source: "attribute", selector: "thead", attribute: "class", default: "wp-block-catpow-t-body__thead has-color-scheme-inverted has-background-color" },
@@ -26,9 +26,11 @@
     },
     example: CP.example,
     edit({ attributes, className, setAttributes }) {
-      const { useState, useMemo } = wp.element;
+      const { useState, useMemo, useEffect } = wp.element;
       const { InnerBlocks, BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { PanelBody, TextareaControl, ToolbarGroup } = wp.components;
+      const { useEntityProp } = wp.coreData;
+      const [meta, setMeta] = useEntityProp("postType", wp.data.select("core/editor").getCurrentPostType(), "meta");
       const {
         type,
         isHtmlMail,
@@ -102,6 +104,7 @@
               ]
             },
             effect: (val, states2, { set }) => {
+              setMeta({ ...meta, type: val });
               set({ isHtmlMail: val === "html" });
             }
           }
@@ -109,8 +112,14 @@
         wp.hooks.applyFilters("catpow.blocks.t-body.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      const blockProps = useBlockProps({ className: "cp-mail-body " + body_class });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, !isHtmlMail || TextMode ? /* @__PURE__ */ wp.element.createElement(TextareaControl, { value: textMail, onChange: (textMail2) => setAttributes({ textMail: textMail2 }), rows: 20 }) : /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { width: "100%", align: "center", valign: "top", className: classes }, states.hasHeader && /* @__PURE__ */ wp.element.createElement("thead", { className: headerClasses }, headerPaddingTop > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${headerPaddingTop}rem` } })), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", { className: "_th is-text-cell", align: "center" }, /* @__PURE__ */ wp.element.createElement(
+      useEffect(() => {
+        if (meta.type !== type) {
+          setAttributes({ type: meta.type });
+        }
+      }, []);
+      const showTextEdit = type === "plain" || TextMode;
+      const blockProps = useBlockProps({ className: showTextEdit ? "cp-altcontent" : "cp-mail-body " + body_class });
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, showTextEdit ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "email" }), /* @__PURE__ */ wp.element.createElement(TextareaControl, { className: "cp-textmail", value: textMail, onChange: (textMail2) => setAttributes({ textMail: textMail2 }), rows: 30 })) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { width: "100%", align: "center", valign: "top", className: classes }, states.hasHeader && /* @__PURE__ */ wp.element.createElement("thead", { className: headerClasses }, headerPaddingTop > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${headerPaddingTop}rem` } })), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", { className: "_th is-text-cell", align: "center" }, /* @__PURE__ */ wp.element.createElement(
         RichText,
         {
           onChange: (headerText2) => {

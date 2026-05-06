@@ -28,7 +28,7 @@
   display: inline;
 }
 .wp-block-catpow-t-body__thead, .wp-block-catpow-t-body__tfoot {
-  text-align: center;
+  text-align: -webkit-center;
   color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
   vertical-align: middle;
 }

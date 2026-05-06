@@ -3,3 +3,7 @@
 .mail_body{
 	@include bnd((pd:0));
 }
+.cp-textmail{
+	@include bnd((w:min(90%,600px),mg:40 a));
+	@include shd((b:4));
+}

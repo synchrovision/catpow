@@ -16,7 +16,7 @@
 		@include bnd((d:i));
 	}
 	&__thead,&__tfoot{
-		@include txt((a:c,c:t,v:m));
+		@include txt((a:wc,c:t,v:m));
 		&.has-bg-achromatic{@include bg((c:white));}
 		&.has-bg-normal{@include bg((c:b));}
 		&.has-bg-strong{@include bg((c:s));}

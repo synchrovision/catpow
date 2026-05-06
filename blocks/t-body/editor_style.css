@@ -1,4 +1,9 @@
 .mail_body {
   padding: 0rem;
 }
+.cp-textmail {
+  width: min(90%, 600px);
+  margin: 2.5rem auto;
+  box-shadow: 0 4px 9px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+}
 /*# sourceMappingURL=./editor_style.css.map */

@@ -9,7 +9,7 @@ wp.blocks.registerBlockType("catpow/t-body", {
 		multiple: false,
 	},
 	attributes: {
-		type: { type: "string", source: "meta", meta: "type", default: "plain" },
+		type: { type: "string", default: "plain" },
 		isHtmlMail: { type: "boolean", default: false },
 		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-body has-header has-footer" },
 		headerClasses: { source: "attribute", selector: "thead", attribute: "class", default: "wp-block-catpow-t-body__thead has-color-scheme-inverted has-background-color" },
@@ -25,9 +25,13 @@ wp.blocks.registerBlockType("catpow/t-body", {
 	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes }) {
-		const { useState, useMemo } = wp.element;
+		const { useState, useMemo, useEffect } = wp.element;
 		const { InnerBlocks, BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl, ToolbarGroup } = wp.components;
+		const { useEntityProp } = wp.coreData;
+
+		const [meta, setMeta] = useEntityProp("postType", wp.data.select("core/editor").getCurrentPostType(), "meta");
+
 		const {
 			type,
 			isHtmlMail,
@@ -102,6 +106,7 @@ wp.blocks.registerBlockType("catpow/t-body", {
 						],
 					},
 					effect: (val, states, { set }) => {
+						setMeta({ ...meta, type: val });
 						set({ isHtmlMail: val === "html" });
 					},
 				},
@@ -110,14 +115,24 @@ wp.blocks.registerBlockType("catpow/t-body", {
 			return selectiveClasses;
 		}, []);
 
-		const blockProps = useBlockProps({ className: "cp-mail-body " + body_class });
+		useEffect(() => {
+			if (meta.type !== type) {
+				setAttributes({ type: meta.type });
+			}
+		}, []);
+
+		const showTextEdit = type === "plain" || TextMode;
+		const blockProps = useBlockProps({ className: showTextEdit ? "cp-altcontent" : "cp-mail-body " + body_class });
 
 		return (
 			<>
-				{!isHtmlMail || TextMode ? (
-					<TextareaControl value={textMail} onChange={(textMail) => setAttributes({ textMail })} rows={20} />
-				) : (
-					<div {...blockProps}>
+				<div {...blockProps}>
+					{showTextEdit ? (
+						<>
+							<CP.Label icon="email" />
+							<TextareaControl className="cp-textmail" value={textMail} onChange={(textMail) => setAttributes({ textMail })} rows={30} />
+						</>
+					) : (
 						<CP.Bem prefix="wp-block-catpow">
 							<table width="100%" align="center" valign="top" className={classes}>
 								{states.hasHeader && (
@@ -179,8 +194,8 @@ wp.blocks.registerBlockType("catpow/t-body", {
 								)}
 							</table>
 						</CP.Bem>
-					</div>
-				)}
+					)}
+				</div>
 				<InspectorControls>
 					<BlockControls>
 						<ToolbarGroup
