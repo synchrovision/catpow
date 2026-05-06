@@ -40,7 +40,7 @@
 						}
 					}
 				},
-				{ keys: { src: "src" }, type, size: sizeData.media_size }
+				{ keys: { src: "src" }, type, size: sizeData.media_size },
 			);
 	} else {
 		onClick = (e) => {
@@ -53,7 +53,7 @@
 						set(data);
 					}
 				},
-				{ keys, type, size, devices }
+				{ keys, type, size, devices },
 			);
 		};
 	}
