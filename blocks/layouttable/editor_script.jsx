@@ -38,12 +38,11 @@ wp.blocks.registerBlockType("catpow/layouttable", {
 		],
 	},
 	attributes: {
-		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-layouttable spec" },
+		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-layouttable is-level3 is-style-spec" },
 		rows: {
 			source: "query",
-			selector: "table tr",
+			selector: "tr",
 			query: {
-				classes: { source: "attribute", attribute: "class" },
 				cells: {
 					source: "query",
 					selector: "th,td",
@@ -58,27 +57,24 @@ wp.blocks.registerBlockType("catpow/layouttable", {
 			},
 			default: [
 				{
-					classes: "",
 					cells: [
-						{ text: ["Title"], classes: "th" },
-						{ text: ["Title"], classes: "th" },
-						{ text: ["Title"], classes: "th" },
+						{ text: ["Title"], classes: "wp-block-catpow-layouttable__tbody-tr-th" },
+						{ text: ["Title"], classes: "wp-block-catpow-layouttable__tbody-tr-th" },
+						{ text: ["Title"], classes: "wp-block-catpow-layouttable__tbody-tr-th" },
 					],
 				},
 				{
-					classes: "",
 					cells: [
-						{ text: ["Content"], classes: "" },
-						{ text: ["Content"], classes: "" },
-						{ text: ["Content"], classes: "" },
+						{ text: ["Content"], classes: "wp-block-catpow-layouttable__tbody-tr-td" },
+						{ text: ["Content"], classes: "wp-block-catpow-layouttable__tbody-tr-td" },
+						{ text: ["Content"], classes: "wp-block-catpow-layouttable__tbody-tr-td" },
 					],
 				},
 				{
-					classes: "",
 					cells: [
-						{ text: ["Content"], classes: "" },
-						{ text: ["Content"], classes: "" },
-						{ text: ["Content"], classes: "" },
+						{ text: ["Content"], classes: "wp-block-catpow-layouttable__tbody-tr-td" },
+						{ text: ["Content"], classes: "wp-block-catpow-layouttable__tbody-tr-td" },
+						{ text: ["Content"], classes: "wp-block-catpow-layouttable__tbody-tr-td" },
 					],
 				},
 			],
@@ -89,10 +85,9 @@ wp.blocks.registerBlockType("catpow/layouttable", {
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { useState, useMemo, createElement: el } = wp.element;
-		const { AlignmentToolbar, InnerBlocks, BlockControls, InspectorControls, RichText } = wp.blockEditor;
+		const { AlignmentToolbar, InnerBlocks, BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { PanelBody, Button, SelectControl, TreeSelect, TextareaControl, TextControl } = wp.components;
 		const { classes = "", rows } = attributes;
-		const primaryClass = "wp-block-catpow-layouttable";
 
 		if (attributes.file) {
 			var reader = new FileReader();
@@ -117,7 +112,23 @@ wp.blocks.registerBlockType("catpow/layouttable", {
 		}
 
 		const selectiveClasses = useMemo(() => {
-			var selectiveClasses = [{ name: "type", label: "タイプ", filter: "type", values: ["spec", "sheet", "plan"] }, "color"];
+			var selectiveClasses = [
+				"level",
+				"hasContentWidth",
+				"hasMargin",
+				{
+					name: "type",
+					type: "gridbuttons",
+					label: "タイプ",
+					filter: "type",
+					values: {
+						isStyleSpec: "spec",
+						isStyleSheet: "sheet",
+						isStylePlan: "plan",
+					},
+				},
+				"color",
+			];
 			wp.hooks.applyFilters("catpow.blocks.layouttable.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
@@ -435,19 +446,9 @@ wp.blocks.registerBlockType("catpow/layouttable", {
 
 		const selectCellClasses = (prm) => {
 			var { label, values } = prm;
-			var options, value;
+			var value;
 
-			if (prm.filter && CP.filters.layouttable && CP.filters.layouttable[prm.filter]) {
-				CP.filters.layouttable[prm.filter](prm);
-			}
-			if (Array.isArray(values)) {
-				options = values.map((cls) => {
-					return { label: cls, value: cls };
-				});
-			} else {
-				options = Object.keys(values).map((cls) => {
-					return { label: values[cls], value: cls };
-				});
+			if (!Array.isArray(values)) {
 				values = Object.keys(values);
 			}
 			value = _.intersection(cellClasses, values).shift();
@@ -456,17 +457,22 @@ wp.blocks.registerBlockType("catpow/layouttable", {
 			}
 
 			return (
-				<SelectControl
-					label={label}
-					onChange={(input) => {
-						if (input == "default") {
+				<CP.DynamicInput
+					param={prm}
+					value={value}
+					onChange={(val) => {
+						if (prm.filter) {
+							val = prm.filter(val, states, props);
+						}
+						if (val == "default") {
 							removeCellClasses(values);
 						} else {
-							setCellClasses(values, input);
+							setCellClasses(values, val);
+						}
+						if (prm.effect) {
+							prm.effect(val, states, props);
 						}
 					}}
-					value={value}
-					options={options}
 				/>
 			);
 		};
@@ -488,91 +494,91 @@ wp.blocks.registerBlockType("catpow/layouttable", {
 						}}
 					/>
 				</BlockControls>
-				<table className={classes}>
-					<tbody>
-						{rowsCopy.map((row, r) => {
-							return (
-								<tr key={r}>
-									{row.cells.map((cell, c) => {
-										if (cell.mergedTo) {
-											return false;
-										}
-										if (cell.style instanceof String) {
-											cell.style = JSON.parse(cell.style);
-										}
-										return el(
-											cell.classes && cell.classes.split(" ").includes("th") ? "th" : "td",
-											{
-												className: cell.classes,
-												rowSpan: cell.rowspan,
-												colSpan: cell.colspan,
-												style: cell.style,
-												onClick: (e) => selectCells(e, r, c),
-												key: c,
-											},
-											<>
-												<RichText
-													onChange={(text) => {
-														cell.text = text;
-														saverows();
-													}}
-													value={cell.text}
-												/>
-												{isSelected && c == colLen - parseInt(cell.colspan ? cell.colspan : 1) && (
-													<div className="itemControl rowControl">
-														<div className="btn up" onClick={() => downRow(r)}></div>
-														<div className="btn delete" onClick={() => deleteRow(r)}></div>
-														<div className="btn clone" onClick={() => addRow(r)}></div>
-														<div className="btn down" onClick={() => upRow(r)}></div>
-													</div>
-												)}
-												{isSelected && r == rowLen - parseInt(cell.rowspan ? cell.rowspan : 1) && (
-													<div className="itemControl columnControl">
-														<div className="btn left" onClick={() => downColumn(c)}></div>
-														<div className="btn delete" onClick={() => deleteColumn(c)}></div>
-														<div className="btn clone" onClick={() => addColumn(c)}></div>
-														<div className="btn right" onClick={() => upColumn(c)}></div>
-													</div>
-												)}
-												{isSelected && cell.isSelected && <div className="selectBox"></div>}
-											</>
-										);
-									})}
-								</tr>
-							);
-						})}
-					</tbody>
-				</table>
+				<CP.Bem prefix="wp-block-catpow">
+					<table {...useBlockProps({ className: classes })}>
+						<tbody>
+							{rowsCopy.map((row, r) => {
+								return (
+									<tr key={r}>
+										{row.cells.map((cell, c) => {
+											if (cell.mergedTo) {
+												return false;
+											}
+											if (cell.style instanceof String) {
+												cell.style = JSON.parse(cell.style);
+											}
+											return el(
+												cell.classes && cell.classes.split(" ").includes("wp-block-catpow-layouttable__tbody-tr-th") ? "th" : "td",
+												{
+													className: cell.classes,
+													rowSpan: cell.rowspan,
+													colSpan: cell.colspan,
+													style: cell.style,
+													onClick: (e) => selectCells(e, r, c),
+													key: c,
+												},
+												<>
+													<RichText
+														onChange={(text) => {
+															cell.text = text;
+															saverows();
+														}}
+														value={cell.text}
+													/>
+													{isSelected && c == colLen - parseInt(cell.colspan ? cell.colspan : 1) && (
+														<div className="itemControl rowControl">
+															<div className="btn up" onClick={() => downRow(r)}></div>
+															<div className="btn delete" onClick={() => deleteRow(r)}></div>
+															<div className="btn clone" onClick={() => addRow(r)}></div>
+															<div className="btn down" onClick={() => upRow(r)}></div>
+														</div>
+													)}
+													{isSelected && r == rowLen - parseInt(cell.rowspan ? cell.rowspan : 1) && (
+														<div className="itemControl columnControl">
+															<div className="btn left" onClick={() => downColumn(c)}></div>
+															<div className="btn delete" onClick={() => deleteColumn(c)}></div>
+															<div className="btn clone" onClick={() => addColumn(c)}></div>
+															<div className="btn right" onClick={() => upColumn(c)}></div>
+														</div>
+													)}
+													{isSelected && cell.isSelected && <div className="selectBox"></div>}
+												</>,
+											);
+										})}
+									</tr>
+								);
+							})}
+						</tbody>
+					</table>
+				</CP.Bem>
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 					<PanelBody title="セル">
 						{selectCellClasses({
+							type: "gridbuttons",
+							label: "タグ",
+							values: {
+								"wp-block-catpow-layouttable__tbody-tr-th": "th",
+								"wp-block-catpow-layouttable__tbody-tr-td": "td",
+							},
+							required: true,
+						})}
+						{selectCellClasses({
+							type: "gridbuttons",
 							label: "タイプ",
-							filter: "role",
 							values: {
-								default: "通常",
-								th: "見出し",
-								spacer: "空白",
+								"is-cell-spacer": "空白",
+								"is-cell-primary": "推奨",
+								"is-cell-deprecated": "非推奨",
 							},
 						})}
 						{selectCellClasses({
-							label: "カラー",
-							filter: "color",
-							values: {
-								default: "なし",
-								pale: "薄色",
-								primary: "推奨",
-								deprecated: "非推奨",
-							},
-						})}
-						{selectCellClasses({
+							type: "gridbuttons",
 							label: "文字",
-							filter: "size",
 							values: {
-								default: "なし",
-								large: "大",
-								medium: "中",
-								small: "小",
+								"is-size-large": "大",
+								"is-size-medium": "中",
+								"is-size-small": "小",
 							},
 						})}
 						<TextControl
@@ -608,24 +614,26 @@ wp.blocks.registerBlockType("catpow/layouttable", {
 		const { classes, rows } = attributes;
 
 		return (
-			<table className={classes}>
-				<tbody>
-					{rows.map((row, r) => {
-						return (
-							<tr key={r}>
-								{row.cells.map((cell, c) => {
-									cell.style = CP.parseStyleString(cell.style);
-									return el(
-										cell.classes && cell.classes.split(" ").includes("th") ? "th" : "td",
-										{ className: cell.classes, rowSpan: cell.rowspan, colSpan: cell.colspan, style: cell.style, key: c },
-										<RichText.Content value={cell.text} />
-									);
-								})}
-							</tr>
-						);
-					})}
-				</tbody>
-			</table>
+			<CP.Bem prefix="wp-block-catpow">
+				<table className={classes}>
+					<tbody>
+						{rows.map((row, r) => {
+							return (
+								<tr key={r}>
+									{row.cells.map((cell, c) => {
+										cell.style = CP.parseStyleString(cell.style);
+										return el(
+											cell.classes && cell.classes.split(" ").includes("wp-block-catpow-layouttable__tbody-tr-th") ? "th" : "td",
+											{ className: cell.classes, rowSpan: cell.rowspan, colSpan: cell.colspan, style: cell.style, key: c },
+											<RichText.Content value={cell.text} />,
+										);
+									})}
+								</tr>
+							);
+						})}
+					</tbody>
+				</table>
+			</CP.Bem>
 		);
 	},
 });

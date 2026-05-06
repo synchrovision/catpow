@@ -36,12 +36,11 @@
       ]
     },
     attributes: {
-      classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-layouttable spec" },
+      classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-layouttable is-level3 is-style-spec" },
       rows: {
         source: "query",
-        selector: "table tr",
+        selector: "tr",
         query: {
-          classes: { source: "attribute", attribute: "class" },
           cells: {
             source: "query",
             selector: "th,td",
@@ -56,27 +55,24 @@
         },
         default: [
           {
-            classes: "",
             cells: [
-              { text: ["Title"], classes: "th" },
-              { text: ["Title"], classes: "th" },
-              { text: ["Title"], classes: "th" }
+              { text: ["Title"], classes: "wp-block-catpow-layouttable__tbody-tr-th" },
+              { text: ["Title"], classes: "wp-block-catpow-layouttable__tbody-tr-th" },
+              { text: ["Title"], classes: "wp-block-catpow-layouttable__tbody-tr-th" }
             ]
           },
           {
-            classes: "",
             cells: [
-              { text: ["Content"], classes: "" },
-              { text: ["Content"], classes: "" },
-              { text: ["Content"], classes: "" }
+              { text: ["Content"], classes: "wp-block-catpow-layouttable__tbody-tr-td" },
+              { text: ["Content"], classes: "wp-block-catpow-layouttable__tbody-tr-td" },
+              { text: ["Content"], classes: "wp-block-catpow-layouttable__tbody-tr-td" }
             ]
           },
           {
-            classes: "",
             cells: [
-              { text: ["Content"], classes: "" },
-              { text: ["Content"], classes: "" },
-              { text: ["Content"], classes: "" }
+              { text: ["Content"], classes: "wp-block-catpow-layouttable__tbody-tr-td" },
+              { text: ["Content"], classes: "wp-block-catpow-layouttable__tbody-tr-td" },
+              { text: ["Content"], classes: "wp-block-catpow-layouttable__tbody-tr-td" }
             ]
           }
         ]
@@ -87,10 +83,9 @@
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useState, useMemo, createElement: el } = wp.element;
-      const { AlignmentToolbar, InnerBlocks, BlockControls, InspectorControls, RichText } = wp.blockEditor;
+      const { AlignmentToolbar, InnerBlocks, BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { PanelBody, Button, SelectControl, TreeSelect, TextareaControl, TextControl } = wp.components;
       const { classes = "", rows } = attributes;
-      const primaryClass = "wp-block-catpow-layouttable";
       if (attributes.file) {
         var reader = new FileReader();
         reader.addEventListener("loadend", () => {
@@ -113,7 +108,23 @@
         reader.readAsText(attributes.file);
       }
       const selectiveClasses = useMemo(() => {
-        var selectiveClasses2 = [{ name: "type", label: "\u30BF\u30A4\u30D7", filter: "type", values: ["spec", "sheet", "plan"] }, "color"];
+        var selectiveClasses2 = [
+          "level",
+          "hasContentWidth",
+          "hasMargin",
+          {
+            name: "type",
+            type: "gridbuttons",
+            label: "\u30BF\u30A4\u30D7",
+            filter: "type",
+            values: {
+              isStyleSpec: "spec",
+              isStyleSheet: "sheet",
+              isStylePlan: "plan"
+            }
+          },
+          "color"
+        ];
         wp.hooks.applyFilters("catpow.blocks.layouttable.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
@@ -404,18 +415,8 @@
       var cellClasses = getCellClasses();
       const selectCellClasses = (prm) => {
         var { label, values } = prm;
-        var options, value;
-        if (prm.filter && CP.filters.layouttable && CP.filters.layouttable[prm.filter]) {
-          CP.filters.layouttable[prm.filter](prm);
-        }
-        if (Array.isArray(values)) {
-          options = values.map((cls) => {
-            return { label: cls, value: cls };
-          });
-        } else {
-          options = Object.keys(values).map((cls) => {
-            return { label: values[cls], value: cls };
-          });
+        var value;
+        if (!Array.isArray(values)) {
           values = Object.keys(values);
         }
         value = _.intersection(cellClasses, values).shift();
@@ -423,18 +424,23 @@
           value = "default";
         }
         return /* @__PURE__ */ wp.element.createElement(
-          SelectControl,
+          CP.DynamicInput,
           {
-            label,
-            onChange: (input) => {
-              if (input == "default") {
+            param: prm,
+            value,
+            onChange: (val) => {
+              if (prm.filter) {
+                val = prm.filter(val, states, props);
+              }
+              if (val == "default") {
                 removeCellClasses(values);
               } else {
-                setCellClasses(values, input);
+                setCellClasses(values, val);
               }
-            },
-            value,
-            options
+              if (prm.effect) {
+                prm.effect(val, states, props);
+              }
+            }
           }
         );
       };
@@ -452,7 +458,7 @@
             }
           }
         }
-      )), /* @__PURE__ */ wp.element.createElement("table", { className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, rowsCopy.map((row, r) => {
+      )), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { ...useBlockProps({ className: classes }) }, /* @__PURE__ */ wp.element.createElement("tbody", null, rowsCopy.map((row, r) => {
         return /* @__PURE__ */ wp.element.createElement("tr", { key: r }, row.cells.map((cell, c) => {
           if (cell.mergedTo) {
             return false;
@@ -461,7 +467,7 @@
             cell.style = JSON.parse(cell.style);
           }
           return el(
-            cell.classes && cell.classes.split(" ").includes("th") ? "th" : "td",
+            cell.classes && cell.classes.split(" ").includes("wp-block-catpow-layouttable__tbody-tr-th") ? "th" : "td",
             {
               className: cell.classes,
               rowSpan: cell.rowspan,
@@ -482,31 +488,29 @@
             ), isSelected && c == colLen - parseInt(cell.colspan ? cell.colspan : 1) && /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl rowControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn up", onClick: () => downRow(r) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteRow(r) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addRow(r) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn down", onClick: () => upRow(r) })), isSelected && r == rowLen - parseInt(cell.rowspan ? cell.rowspan : 1) && /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl columnControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn left", onClick: () => downColumn(c) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteColumn(c) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addColumn(c) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn right", onClick: () => upColumn(c) })), isSelected && cell.isSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "selectBox" }))
           );
         }));
-      }))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u30BB\u30EB" }, selectCellClasses({
+      })))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u30BB\u30EB" }, selectCellClasses({
+        type: "gridbuttons",
+        label: "\u30BF\u30B0",
+        values: {
+          "wp-block-catpow-layouttable__tbody-tr-th": "th",
+          "wp-block-catpow-layouttable__tbody-tr-td": "td"
+        },
+        required: true
+      }), selectCellClasses({
+        type: "gridbuttons",
         label: "\u30BF\u30A4\u30D7",
-        filter: "role",
         values: {
-          default: "\u901A\u5E38",
-          th: "\u898B\u51FA\u3057",
-          spacer: "\u7A7A\u767D"
+          "is-cell-spacer": "\u7A7A\u767D",
+          "is-cell-primary": "\u63A8\u5968",
+          "is-cell-deprecated": "\u975E\u63A8\u5968"
         }
       }), selectCellClasses({
-        label: "\u30AB\u30E9\u30FC",
-        filter: "color",
-        values: {
-          default: "\u306A\u3057",
-          pale: "\u8584\u8272",
-          primary: "\u63A8\u5968",
-          deprecated: "\u975E\u63A8\u5968"
-        }
-      }), selectCellClasses({
+        type: "gridbuttons",
         label: "\u6587\u5B57",
-        filter: "size",
         values: {
-          default: "\u306A\u3057",
-          large: "\u5927",
-          medium: "\u4E2D",
-          small: "\u5C0F"
+          "is-size-large": "\u5927",
+          "is-size-medium": "\u4E2D",
+          "is-size-small": "\u5C0F"
         }
       }), /* @__PURE__ */ wp.element.createElement(
         TextControl,
@@ -527,16 +531,16 @@
       const { createElement: el } = wp.element;
       const { RichText } = wp.blockEditor;
       const { classes, rows } = attributes;
-      return /* @__PURE__ */ wp.element.createElement("table", { className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, r) => {
+      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, r) => {
         return /* @__PURE__ */ wp.element.createElement("tr", { key: r }, row.cells.map((cell, c) => {
           cell.style = CP.parseStyleString(cell.style);
           return el(
-            cell.classes && cell.classes.split(" ").includes("th") ? "th" : "td",
+            cell.classes && cell.classes.split(" ").includes("wp-block-catpow-layouttable__tbody-tr-th") ? "th" : "td",
             { className: cell.classes, rowSpan: cell.rowspan, colSpan: cell.colspan, style: cell.style, key: c },
             /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: cell.text })
           );
         }));
-      })));
+      }))));
     }
   });
 })();

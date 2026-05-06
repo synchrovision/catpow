@@ -1,6 +1,3 @@
-body table.wp-block-catpow-layouttable {
-  width: 100%;
-}
 body table.wp-block-catpow-layouttable thead tr th, body table.wp-block-catpow-layouttable thead tr td, body table.wp-block-catpow-layouttable tbody tr th, body table.wp-block-catpow-layouttable tbody tr td {
   position: relative;
 }

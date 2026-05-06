@@ -1,0 +1,93 @@
+@import "admin_style_config.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
+
+.wp-block-catpow-layouttable{
+	$block:&;
+	$row:#{$block}__tbody-tr;
+	&__tbody{
+		&-tr{
+			&-th,&-td{
+				&:not(.is-spacer){
+					@extend %table-component;
+					@extend %paragraph;
+				}
+			}
+		}
+	}
+	&.is-style-spec{
+		@include tbl((l:f));
+		#{$block}{
+			&__tbody{
+				&-tr{
+					&-th,&-td{
+						@include bdr((p:b,s:s,w:1,c:lx,r:0));
+						@include shd((b:n));
+					}
+				}
+			}
+		}
+	}
+	&.is-style-sheet{
+		@include tbl((l:f));
+		#{$block}{
+			&__tbody{
+				&-tr{
+					&-th,&-td{
+						@include bdr((s:s,w:1,c:lx,r:0));
+						@include shd((b:n));
+						@include txt((a:l));
+					}
+					&-th{
+						@include bg((c:sx));
+						@include txt((a:c));
+					}
+					&-td{
+						@include bg((c:bx));
+					}
+					&:nth-of-type(odd){
+						#{$row}{
+							&-th{@include bg((c:sx-bx 75));}
+						}
+					}
+					&:nth-of-type(even){
+						#{$row}{
+							&-td{@include bg((c:sx-bx 25));}
+						}
+					}
+				}
+			}
+		}
+	}
+	&.is-style-plan{
+		@include tbl((l:f,s:c-t));
+		#{$block}{
+			&__tbody{
+				&-tr{
+					&-th,&-td{
+						@include txt((a:c));
+					}
+					&-th{
+						@include bdr((rr:0));
+						@include bg((c:mx));
+						@include txt((c:ix));
+					}
+					&-td{
+						@include bg((c:bx));
+						@include bdr((r:0));
+					}
+					&:nth-of-type(odd){
+						#{$row}{
+							&-th{@include bg((c:mx-bx 80));}
+						}
+					}
+					&:nth-of-type(even){
+						#{$row}{
+							&-td{@include bg((c:bx-mx 80));}
+						}
+					}
+				}
+			}
+		}
+	}
+}
