@@ -410,6 +410,17 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
+	subHeadingTag({ preset, name = "headingTag", label = "副見出しタグ", key = "SubHeadingTag", ...otherParams }) {
+		return {
+			name,
+			input: "buttons",
+			key,
+			label: __(label, "catpow"),
+			values: ["h1", "h2", "h3", "h4", "h5", "h6"],
+			required: true,
+			...otherParams,
+		};
+	},
 	level: { name: "level", type: "buttons", label: __("レベル", "catpow"), values: { isLevel1: "1", isLevel2: "2", isLevel3: "3", isLevel4: "4", isLevel5: "5", isLevel6: "6" } },
 	headingType: {
 		name: "headingType",
