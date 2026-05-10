@@ -1042,12 +1042,13 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	hasContentWidth({ preset, vars = "vars", ...otherParams }) {
+	hasContentWidth({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
 		return {
 			name: "hasContentWidth",
 			label: __("コンテンツ幅", "catpow"),
 			values: "hasContentWidth",
-			sub: [{ preset: "contentWidth", vars, label: null }],
+			classKey,
+			sub: [{ preset: "contentWidth", classKey, vars, label: null }],
 			...otherParams,
 		};
 	},

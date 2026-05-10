@@ -6803,12 +6803,13 @@
         ...otherParams
       };
     },
-    hasContentWidth({ preset, vars = "vars", ...otherParams }) {
+    hasContentWidth({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
       return {
         name: "hasContentWidth",
         label: __13("\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45", "catpow"),
         values: "hasContentWidth",
-        sub: [{ preset: "contentWidth", vars, label: null }],
+        classKey,
+        sub: [{ preset: "contentWidth", classKey, vars, label: null }],
         ...otherParams
       };
     },
