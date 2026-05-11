@@ -65,7 +65,7 @@ function is_mjs_former($fname){
 
 function get_entry_files(){
 	$entry_files=[];
-	foreach(glob(WP_CONTENT_DIR.'/{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{js,blocks/*,ui/*,components/*,elements/*,stores/*,*/*/*}/*/index{,.mjs}.{t,j}s{,x}',GLOB_BRACE) as $entry_file){
+	foreach(glob(WP_CONTENT_DIR.'/{plugins,themes}/catpow{,-*}{,/default,/functions/*}/{js,mjs,blocks/*,ui/*,components/*,elements/*,stores/*,*/*/*}/*/index{,.mjs}.{t,j}s{,x}',GLOB_BRACE) as $entry_file){
 		if(strpos($entry_file,'/node_modules/')!==false || strpos($entry_file,'/node_modules-included/')!==false){continue;}
 		$entry_files[dirname($entry_file)]=$entry_file;
 	}
