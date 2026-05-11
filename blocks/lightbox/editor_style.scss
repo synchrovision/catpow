@@ -73,10 +73,11 @@ ul.wp-block-catpow-lightbox{
 	}
 }
 
-div.lightbox_preview{
-	@include bnd((p:r,h:50vw,z:1));
-	#cp_lightbox.active{
-		@include bnd((p:r,w:160%,h:160%));
-		@include trn((s:.625,to:top left));
+.cp-lightbox-preview{
+	@include bnd((p:r,h:50vw,pd:min(4em,10vmin),z:1));
+	&::before{
+		content:'';
+		@include bnd((d:b,p:a,i:0));
+		@include bg((c:shd));
 	}
 }

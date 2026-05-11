@@ -1,0 +1,212 @@
+@import 'admin_style_config.scss';
+@import 'text-placeholders.scss';
+@import 'component-placeholders.scss';
+
+.wp-block-catpow-lightbox{
+	$block:&;
+	$item:#{$block}__items-item;
+	&__items{
+		@include bnd((pd:0,mg:0));
+		@include txt((l:n));
+		&-item{
+			@include bnd((p:r));
+			@include usr((c:p));
+			@include txt((c:tx));
+			&-image{
+				&-img{
+					@include bnd((d:b,w:f,h:a));
+				}
+			}
+			&-text{
+				&-title{
+					@extend %heading-block;
+					@extend %heading;
+				}
+				&-caption{
+					@extend %paragraph-block;
+					@extend %paragraph;
+				}
+			}
+		}
+	}
+	&.is-type-thumbnail{
+		#{$block}{
+			&__items{
+				@include grd((rc:8em));
+				@include txt((a:c,p:t-p));
+				&-item{
+					@include bg((c:bx));
+					&-image{
+						@include bnd((a:1,w:f,h:a,o:h));
+						&-img{
+							@include bnd((a:1,op:c,of:c));
+							@include trn((t:.8s,s:1,o:1));
+						}
+					}
+					&-text{
+						@include bnd((p:a,i:0,w:f,h:f,o:h,ac:c));
+						@include trn((t:.8s,o:0));
+						&-title{
+							@extend %lead;
+						}
+						&-caption{
+						}
+						&-title,&-caption{
+							&:first-child{@include bnd((mgt:0));}
+							&:last-child{@include bnd((mgb:0));}
+						}
+					}
+					&:hover{
+						#{$item}{
+							&-image{
+								&-img{
+									@include trn((s:1.05,o:.5));
+								}
+							}
+							&-text{
+								@include trn((o:1));
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	&.is-type-flat,&.is-type-card{
+		#{$block}{
+			&__items{
+				@include grd((rc:i,g:c-c));
+				&-item{
+					@extend %card-component;
+					@include bnd((pd:0,o:h));
+					&-image{
+					}
+					&-text{
+						@include bnd((pd:c-c));
+						&-title{
+						}
+						&-caption{
+						}
+						&-title,&-caption{
+							&:first-child{@include bnd((mgt:0));}
+							&:last-child{@include bnd((mgb:0));}
+						}
+					}
+				}
+			}
+		}
+	}
+	&.is-type-flat{
+		#{$block}{
+			&__items{
+				&-item{
+					@include shd((b:n));
+					&-image{
+					}
+					&-text{
+						@include bnd((pdi:0));
+						&-title{
+						}
+						&-caption{
+						}
+					}
+				}
+			}
+		}
+	}
+	&.is-type-card{
+		#{$block}{
+			&__items{
+				&-item{
+					@include bg((c:bx));
+					&-image{
+					}
+					&-text{
+						&-title{
+						}
+						&-caption{
+						}
+					}
+				}
+			}
+		}
+	}
+	&__contents{
+		&-title{
+			@extend %heading;
+			@include bnd((pd:c-h,mg:0));
+			@include bg((c:m));
+			@include txt((c:i));
+		}
+		&-image{
+			&-img{
+				@include bnd((d:b,w:f,h:a));
+			}
+		}
+		&-text{
+			@extend %paragraph;
+			@include bnd((pd:c-c));
+		}
+	}
+	&__slider{
+		@include bnd((p:a,i:0,w:c,h:fit 90vh,mg:a,oy:a));
+		@include bg((c:bx));
+		@include shd((b:c-f));
+		&-items{
+			@include bnd((p:r,mg:0,pd:0));
+			@include flx((w:n));
+			@include txt((l:n));
+			&-item{
+				@include bnd((f:0 0 f));
+				&:not(.is-active){
+					@include bnd((d:n));
+				}
+			}
+		}
+		&-control{
+			@include bnd((pd:1em));
+			@include flx((w:n,g:1em));
+			&-dots{
+				@include bnd((f:1 1 a));
+				@include flx((w:n,j:c,g:.5em));
+				@include txt((l:n));
+				&:not(.is-active){
+					@include bnd((d:n));
+				}
+				&-dot{
+					@include bnd((f:0 0 1em,h:1em));
+					@include bg((c:m 1 .1));
+					@include bdr((r:50%));
+					@include trn((t:.4s));
+					&.is-active{
+						@include bg((c:m));
+					}
+				}
+			}
+			&-next,&-prev{
+				@include bnd((p:r,f:0 0 1em,h:1em));
+				@include usr((c:p));
+				@include trn((t:.4s,o:1));
+				&:not(.is-active){
+					@include trn((o:.1));
+					@include usr((c:n));
+				}
+				&::before{
+					content:'';
+					@include bnd((d:b,p:a,i:0));
+					@include bg((c:tx));
+				}
+			}
+			&-next{
+				&::before{
+					@include clp((c:r 20%));
+				}
+			}
+			&-prev{
+				&::before{
+					@include clp((c:l 20%));
+				}
+			}
+		}
+	}
+}
