@@ -2368,14 +2368,14 @@
     const { className = "cp-responsiveimage", attr, set, keys, index, devices: devices2, device, isTemplate, item, size, ...otherProps } = props;
     let { sizes } = props;
     const primaryClassName = className.split(" ")[0];
-    if (item?.[keys.mime] == "application/pdf") {
-      return /* @__PURE__ */ wp.element.createElement("iframe", { className: className + " is-pdf", src: item[keys.src], "data-mime": item[keys.mime], ...otherProps });
+    if (item?.[keys?.mime] === "application/pdf") {
+      return /* @__PURE__ */ wp.element.createElement("iframe", { className: className + " is-pdf", src: item[keys?.src], "data-mime": item[keys?.mime], ...otherProps });
     }
-    const type = item[keys.mime] ? item[keys.mime].split("/")[0] : "image";
+    const type = item?.[keys?.mime] ? item[keys?.mime].split("/")[0] : "image";
     if (type == "audio") {
-      return /* @__PURE__ */ wp.element.createElement("audio", { className: className + " is-audio", src: item[keys.src], "data-mime": item[keys.mime], ...otherProps });
+      return /* @__PURE__ */ wp.element.createElement("audio", { className: className + " is-audio", src: item[keys?.src], "data-mime": item[keys?.mime], ...otherProps });
     }
-    if (item[keys.srcset] && !sizes) {
+    if (item[keys?.srcset] && !sizes) {
       if (device) {
         sizes = CP.devices[device].sizes_value;
       } else {
@@ -2390,7 +2390,7 @@
         playsinline: 1,
         muted: 1
       };
-      if (keys.sources) {
+      if (keys?.sources) {
         if (device) {
           const source = item[keys.sources] && item[keys.sources].find((source2) => source2.device === device) || {
             srcset: wpinfo.theme_url + "/images/dummy.mp4"
@@ -2402,7 +2402,7 @@
       return /* @__PURE__ */ wp.element.createElement("video", { className: className + " is-video", src: item[keys.src], ...videoAtts, ...otherProps });
     }
     var src = CP.imageSrcOrDummy(keys.src ? item[keys.src] : keys.url && item[keys.url] ? item[keys.url].slice(4, -1) : null, size);
-    if (keys.sources) {
+    if (keys?.sources) {
       if (device) {
         const source = item[keys.sources] && item[keys.sources].find((source2) => source2.device === device) || {
           srcset: wpinfo.theme_url + "/images/dummy.jpg"
