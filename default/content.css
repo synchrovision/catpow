@@ -3212,121 +3212,58 @@ html {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
-.cp-lightbox__container {
+.cp-lightbox {
   position: fixed;
   top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
   left: 0rem;
+  inset: 0rem;
   z-index: 100000;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
   opacity: 1;
 }
-.cp-lightbox__container:not(.active) {
-  pointer-events: none;
-  opacity: 0;
-}
-.cp-lightbox__content {
-  position: relative;
-  max-width: 50rem;
-  width: auto;
-  max-height: 80vh;
-  height: auto;
+.cp-lightbox__contents {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: auto;
-  background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
-  transform: -webkit- translateY(-50%) translateX(-50%);
-  transform: translateY(-50%) translateX(-50%);
-  box-shadow: 0 10px 21px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  z-index: 2;
+  -webkit-transition: 0.4s 0.2s;
+  transition: 0.4s 0.2s;
+  opacity: 1;
+  transform: -webkit- scale(1);
+  transform: scale(1);
+  pointer-events: none;
 }
-.cp-lightbox__content-body {
+.cp-lightbox__contents > .is-active {
+  pointer-events: auto;
+}
+.cp-lightbox__contents > :not(.is-active) {
+  display: none;
+}
+.cp-lightbox__bg {
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
   width: 100%;
   height: 100%;
-  overflow-y: auto;
+  z-index: 1;
+  background-color: oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
-.cp-lightbox__control .button {
-  margin: 0rem;
-  padding: 0rem;
-  border-style: none;
-  background-color: transparent;
-}
-.cp-lightbox__control .prev, .cp-lightbox__control .next {
-  display: none;
-  position: absolute;
-  bottom: -3.125rem;
-  height: 1.875rem;
-  margin: auto;
-  font-size: 1.25rem;
-  color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
-  opacity: 0.8;
-}
-.cp-lightbox__control .prev.active, .cp-lightbox__control .next.active {
-  display: block;
-}
-.cp-lightbox__control .prev {
-  left: 0.3125rem;
-}
-.cp-lightbox__control .prev::before {
-  content: "＜";
-}
-.cp-lightbox__control .next {
-  right: 0.3125rem;
-}
-.cp-lightbox__control .next::before {
-  content: "＞";
-}
-.cp-lightbox__control .close {
-  position: absolute;
-  width: 1.875rem;
-  height: 1.875rem;
-  top: -3.125rem;
-  right: 0.625rem;
-}
-.cp-lightbox__control .close::before, .cp-lightbox__control .close::after {
-  content: "";
-  position: absolute;
-  top: 0.9375rem;
-  width: 1.875rem;
-  height: 0.0625rem;
-  background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
-}
-.cp-lightbox__control .close::before {
-  transform: -webkit- rotateZ(45deg);
-  transform: rotateZ(45deg);
-}
-.cp-lightbox__control .close::after {
-  transform: -webkit- rotateZ(-45deg);
-  transform: rotateZ(-45deg);
-}
-.cp-lightbox__control ul.dots {
-  position: absolute;
-  bottom: -3.125rem;
-  left: 1.25rem;
-  right: 1.25rem;
-  text-align: center;
-}
-.cp-lightbox__control ul.dots li.dot {
-  display: inline-block;
-  margin: 0.3125rem;
-  width: 0.625rem;
-  height: 0.625rem;
-  border-style: solid;
-  border-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
-  border-width: 0.0625rem;
-  border-radius: 0.625rem;
-  background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
-  vertical-align: middle;
-  opacity: 0.2;
-}
-.cp-lightbox__control ul.dots li.dot.active {
-  opacity: 1;
-}
-.cp-lightbox__group:not(.active) {
-  display: none;
+.cp-lightbox:not(.is-open) {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 .cpform div.cpform_nav {
   display: block;

@@ -197,82 +197,28 @@ html{
 		}
 	}
 	&-lightbox{
-		&__container{
-			@include bnd((p:f,t:0,l:0,z:100000,w:100vw,h:100vh));
-			@include bg((c:#000 1 .6));
-			@include trn((t:.5s,o:1));
-			&:not(.active){
-				@include usr((e:n));
-				@include trn((o:0));
+		$block:&;
+		@include bnd((p:f,i:0,z:100000,w:100vw,h:100vh));
+		@include trn((t:.4s,o:1));
+		&__contents{
+			@include bnd((p:a,i:0,z:2));
+			@include trn((t:.4s .2s,s:1,o:1));
+			@include usr((e:n));
+			>.is-active{
+				@include usr((e:a));
 			}
-		}
-		&__content{
-			@include bnd((p:r,w:a 800,h:a 80vh,p:a,t:50%,l:50%,mg:a));
-			@include bg((c:bx));
-			@include trn((y:-50%,x:-50%));
-			@include shd((b:10));
-			&-body{
-				@include bnd((w:f,h:f,oy:a));
-			}
-		}
-		&__control{
-			.button{
-				@include bnd((mg:0,pd:0));
-				@include bdr((s:n));
-				@include bg((c:n));
-			}
-			.prev,.next{
-				@include bnd((d:n,p:a,b:-50,h:30,mg:a));
-				@include txt((p:20,c:bx));
-				@include trn((o:.8));
-				&.active{@include bnd((d:b));}
-			}
-			.prev{
-				@include bnd((l:5));
-				&::before{
-					content:'＜'
-				}
-			}
-			.next{
-				@include bnd((r:5));
-				&::before{
-					content:'＞'
-				}
-			}
-			.close{
-				@include bnd((p:a,w:30,h:30,t:-50,r:10));
-				&::before,&::after{
-					content:'';
-					@include bnd((p:a,t:15,w:30,h:1));
-					@include bg((c:bx));
-				}
-				&::before{
-					@include trn((r:45deg));
-				}
-				&::after{
-					@include trn((r:-45deg));
-				}
-			}
-			ul.dots{
-				@include bnd((p:a,b:-50,l:20,r:20));
-				@include txt((a:c));
-				li.dot{
-					@include bnd((d:ib,mg:5,w:10,h:10));
-					@include bdr((s:s,c:bx,w:1,r:10));
-					@include bg((c:bx));
-					@include txt((v:m));
-					@include trn((o:.2));
-					&.active{
-						@include trn((o:1));
-					}
-				}
-
-			}
-		}
-		&__group{
-			&:not(.active){
+			>:not(.is-active){
 				@include bnd((d:n));
 			}
+		}
+		&__bg{
+			@include bnd((d:b,p:a,i:0,w:f,h:f,z:1));
+			@include bg((c:shd));
+		}
+		&:not(.is-open){
+			@include bnd((v:h));
+			@include trn((o:0));
+			@include usr((e:n));
 		}
 	}
 }
