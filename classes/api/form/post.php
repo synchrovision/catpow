@@ -29,7 +29,7 @@ class post extends \Catpow\api{
 					$class_name::response($meta);
 				}
 				else{
-					if(!in_array($cpform_action,$form->allowed_actions)){
+					if(!in_array($cpform_action,$form->allowed_actions??[])){
 						error_log('not allowed form action : '.$cpform_action);
 						$form->error('不正なリクエストです','not allowed form action : '.$cpform_action);
 					}
