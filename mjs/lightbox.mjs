@@ -44,7 +44,6 @@ const { state, actions, callbacks } = store("@catpow/lightbox", {
 	},
 	callbacks: {
 		updateState() {
-			console.log(state.isOpen);
 			container.classList.toggle("is-open", state.isOpen);
 			[...contentsContainer.children].forEach((content) => {
 				content.classList.toggle("is-active", content.id === state.currentContentsId);
