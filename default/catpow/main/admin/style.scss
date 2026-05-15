@@ -77,80 +77,80 @@
 		@include txt((a:l));
 	}
 	&-functions{
-		@include grd((rc:200));
-		&>li{
+		@include grd((rc:200,g:20));
+		&__item{
 			@include bnd((mg:0));
 			@include trn((t:.5s));
-			&,&>.cpform_section{
+			&,&>.cpform-section{
 				&>.title{
 					@include bnd((d:b,p:r,pd:5,mg:10));
 					@include txt((a:c,p:20,h:1em,f:'Raleway',c:t));
 				}
 				.image{
-					@include bnd((mg:5));
 					@include bg((c:#fff));
 					@include bdr((r:10));
 					@include shd((b:-3));
 				}
 				.desc{
-					@include bnd((pd:5 10));
 					@include txt((a:j,p:12,h:1.5em,f:$gothic,s:r,c:t));
 				}
 				.control{
 					@include bnd((mg:10 20));
 				}
 			}
-			.cp-lightbox__content{
-				@include bnd((w:95% 1000));
-				@include flx((w:w));
-				.panel_body{
-					@include bnd((f:10 10 500,h:80vh 800,pd:20,bs:b,oy:a));
-					&>ul{
-						&>li{
-							@include bnd((pd:10 0));
-							h3{
-								@include bnd((mgb:10,pdb:10));
-								@include bdr((p:b,s:s,w:1,c:t 50));
-								@include txt((a:c,p:24));
-							}
-							p{
-								@include bnd((w:fit,mg:0 a,pd:1em));
-								@include txt((a:j,p:13));
-							}
-						}
+		}
+	}
+	&-lightbox{
+		@include bnd((p:a,i:0,mg:a,w:min(90vw,60rem),h:fit 90vh));
+		@include flx((w:w));
+		@include bg((c:b));
+		@include shd((b:10));
+		&__body{
+			@include bnd((f:10 10 500,h:80vh 800,pd:20,bs:b,oy:a));
+			&>ul{
+				&>li{
+					@include bnd((pd:10 0));
+					h3{
+						@include bnd((mgb:10,pdb:10));
+						@include bdr((p:b,s:s,w:1,c:t 50));
+						@include txt((a:c,p:24));
 					}
-					dl{
-						@include bnd((pd:5,w:fit,mgi:a));
-						@include grd((tc:a 1fr,g:8));
-						dt{
-							@include bnd((pd:8 0));
-							@include txt((p:15));
-							i.fa,i.fab,i.fas{
-								@include bnd((d:ib,mgr:.5em));
-							}
-						}
-						dd{
-							@include bnd((mg:0,pd:0));
-						}
+					p{
+						@include bnd((w:fit,mg:0 a,pd:1em));
+						@include txt((a:j,p:13));
 					}
 				}
-				.cpform_results{
-					@include bnd((f:1 1 200,pd:20,oy:a));
-					@include bg((c:t));
-					@include txt((c:b,p:12));
-				}
-				.button_close_panel{
-					@include bnd((p:a,t:-20,r:-20));
-					.button{
-						@include bnd((w:40,h:40,pd:10));
-						@include bdr((s:n,r:50%));
-						@include bg((c:wp));
-						@include shd((b:2));
-						@include txt((a:c,p:20,h:1em,c:b));
-						&::before{
-							@include ico('times');
-						}
+			}
+			dl{
+				@include bnd((pd:5,w:fit,mgi:a));
+				@include grd((tc:a 1fr,g:8));
+				dt{
+					@include bnd((pd:8 0));
+					@include txt((p:15));
+					i.fa,i.fab,i.fas{
+						@include bnd((d:ib,mgr:.5em));
 					}
+				}
+				dd{
+					@include bnd((mg:0,pd:0));
+				}
+			}
+		}
+		&__results{
+			@include bnd((f:1 1 200,pd:20,oy:a));
+			@include bg((c:t));
+			@include txt((c:b,p:12));
+		}
+		&__close{
+			@include bnd((p:a,t:-20,r:-20));
+			.button{
+				@include bnd((w:40,h:40,pd:10));
+				@include bdr((s:n,r:50%));
+				@include bg((c:wp));
+				@include shd((b:2));
+				@include txt((a:c,p:20,h:1em,c:b));
+				&::before{
+					@include ico('times');
 				}
 			}
 		}

@@ -1,6 +1,12 @@
 <?php namespace Catpow; ?>
-<div class="panel_body">
-<?php if($f=cp::get_file_path('functions/'.this()->data_name.'/panel.php')){include $f;}?>
+<div class="cp-admin-lightbox">
+    <div class="cp-admin-lightbox__body">
+        <?php if($f=cp::get_file_path('functions/'.this()->data_name.'/panel.php')){include $f;}?>
+    </div>
+    <div class="cp-admin-lightbox__results">
+        <?php §results(); ?>
+    </div>
+    <div class="cp-admin-lightbox__close">
+        <?php button('','close','lightbox_close'); ?>
+    </div>
 </div>
-<?php §results(); ?>
-<div class="button_close_panel"><?php button('','close','lightbox_close'); ?></div>

@@ -136,13 +136,14 @@
   display: -ms-grid;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(12.5rem, 100%), 1fr));
+  grid-gap: 1.25rem;
 }
-.cp-admin-functions > li {
+.cp-admin-functions__item {
   margin: 0rem;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
-.cp-admin-functions > li > .title, .cp-admin-functions > li > .cpform_section > .title {
+.cp-admin-functions__item > .title, .cp-admin-functions__item > .cpform-section > .title {
   display: block;
   position: relative;
   padding: 0.3125rem;
@@ -153,14 +154,12 @@
   font-family: "Raleway";
   color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
-.cp-admin-functions > li .image, .cp-admin-functions > li > .cpform_section .image {
-  margin: 0.3125rem;
+.cp-admin-functions__item .image, .cp-admin-functions__item > .cpform-section .image {
   background-color: #fff;
   border-radius: 0.625rem;
   box-shadow: 0 3px 7px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1)) inset;
 }
-.cp-admin-functions > li .desc, .cp-admin-functions > li > .cpform_section .desc {
-  padding: 0.3125rem 0.625rem;
+.cp-admin-functions__item .desc, .cp-admin-functions__item > .cpform-section .desc {
   text-align: justify;
   font-size: 0.75rem;
   line-height: 1.5em;
@@ -168,20 +167,30 @@
   font-weight: normal;
   color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
-.cp-admin-functions > li .control, .cp-admin-functions > li > .cpform_section .control {
+.cp-admin-functions__item .control, .cp-admin-functions__item > .cpform-section .control {
   margin: 0.625rem 1.25rem;
 }
-.cp-admin-functions > li .cp-lightbox__content {
-  max-width: 62.5rem;
-  width: 95%;
+.cp-admin-lightbox {
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  margin: auto;
+  width: min(90vw, 60rem);
+  max-height: 90vh;
+  height: fit-content;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
   -webkit-box-lines: multiple;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
+  background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
+  box-shadow: 0 10px 21px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
-.cp-admin-functions > li .cp-lightbox__content .panel_body {
+.cp-admin-lightbox__body {
   -webkit-box-flex: 10;
   flex-grow: 10;
   flex-shrink: 10;
@@ -192,10 +201,10 @@
   box-sizing: border-box;
   overflow-y: auto;
 }
-.cp-admin-functions > li .cp-lightbox__content .panel_body > ul > li {
+.cp-admin-lightbox__body > ul > li {
   padding: 0.625rem 0rem;
 }
-.cp-admin-functions > li .cp-lightbox__content .panel_body > ul > li h3 {
+.cp-admin-lightbox__body > ul > li h3 {
   margin-bottom: 0.625rem;
   padding-bottom: 0.625rem;
   border-bottom-style: solid;
@@ -204,14 +213,14 @@
   text-align: center;
   font-size: 1.5rem;
 }
-.cp-admin-functions > li .cp-lightbox__content .panel_body > ul > li p {
+.cp-admin-lightbox__body > ul > li p {
   width: fit-content;
   margin: 0rem auto;
   padding: 1em;
   text-align: justify;
   font-size: 0.8125rem;
 }
-.cp-admin-functions > li .cp-lightbox__content .panel_body dl {
+.cp-admin-lightbox__body dl {
   padding: 0.3125rem;
   width: fit-content;
   margin-inline: auto;
@@ -222,19 +231,19 @@
   grid-template-columns: auto 1fr;
   grid-gap: 0.5rem;
 }
-.cp-admin-functions > li .cp-lightbox__content .panel_body dl dt {
+.cp-admin-lightbox__body dl dt {
   padding: 0.5rem 0rem;
   font-size: 0.9375rem;
 }
-.cp-admin-functions > li .cp-lightbox__content .panel_body dl dt i.fa, .cp-admin-functions > li .cp-lightbox__content .panel_body dl dt i.fab, .cp-admin-functions > li .cp-lightbox__content .panel_body dl dt i.fas {
+.cp-admin-lightbox__body dl dt i.fa, .cp-admin-lightbox__body dl dt i.fab, .cp-admin-lightbox__body dl dt i.fas {
   display: inline-block;
   margin-right: 0.5em;
 }
-.cp-admin-functions > li .cp-lightbox__content .panel_body dl dd {
+.cp-admin-lightbox__body dl dd {
   margin: 0rem;
   padding: 0rem;
 }
-.cp-admin-functions > li .cp-lightbox__content .cpform_results {
+.cp-admin-lightbox__results {
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
@@ -245,12 +254,12 @@
   color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
   font-size: 0.75rem;
 }
-.cp-admin-functions > li .cp-lightbox__content .button_close_panel {
+.cp-admin-lightbox__close {
   position: absolute;
   top: -1.25rem;
   right: -1.25rem;
 }
-.cp-admin-functions > li .cp-lightbox__content .button_close_panel .button {
+.cp-admin-lightbox__close .button {
   width: 2.5rem;
   height: 2.5rem;
   padding: 0.625rem;
@@ -263,7 +272,7 @@
   line-height: 1em;
   color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
 }
-.cp-admin-functions > li .cp-lightbox__content .button_close_panel .button::before {
+.cp-admin-lightbox__close .button::before {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
