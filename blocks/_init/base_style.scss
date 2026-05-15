@@ -396,7 +396,7 @@ $colors:(
 		@include tbl(());
 		@include bnd((mg:20 a));
 		@include shd((b:2));
-		&-thead,&-tbody{
+		&__thead,&__tbody{
 			&-tr{
 				&-th,&-td{
 					@include bnd((p:r,pd:.5em,w:6em a 30em));
@@ -405,7 +405,7 @@ $colors:(
 				}
 			}
 		}
-		&-thead{
+		&__thead{
 			&-tr{
 				&-th{
 					@include bg((c:wp));
@@ -413,7 +413,7 @@ $colors:(
 				}
 			}
 		}
-		&-tbody{
+		&__tbody{
 			&-tr{
 				&-th,&-td{
 					@include bg((c:white));

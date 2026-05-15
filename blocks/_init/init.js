@@ -4806,12 +4806,11 @@
       return columns2;
     }, []);
     const columns = getActiveColumns(props);
-    return /* @__PURE__ */ wp.element.createElement("table", { className: classes() }, /* @__PURE__ */ wp.element.createElement("thead", { className: classes.thead() }, /* @__PURE__ */ wp.element.createElement("tr", { className: classes.thead.tr() }, columns.map((col, c3) => /* @__PURE__ */ wp.element.createElement("th", { className: classes.thead.tr.th(), key: c3 }, col.label || col.key)), /* @__PURE__ */ wp.element.createElement("th", { className: classes.thead.tr.th() }))), /* @__PURE__ */ wp.element.createElement("tbody", { className: classes.tbody() }, items2.map((item, index) => {
+    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("table", { className: "cp-edititemstable" }, /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, columns.map((col, c3) => /* @__PURE__ */ wp.element.createElement("th", { key: c3 }, col.label || col.key)), /* @__PURE__ */ wp.element.createElement("th", null))), /* @__PURE__ */ wp.element.createElement("tbody", null, items2.map((item, index) => {
       const propsForControl = { tag: "tr", set, itemsKey: itemsKey2, items: items2, index };
       return /* @__PURE__ */ wp.element.createElement(
         "tr",
         {
-          className: classes.tbody.tr(),
           onClick: (e) => {
             set({ currentItemIndex: index });
           },
@@ -4820,7 +4819,7 @@
         columns.map((col, c3) => {
           switch (col.type) {
             case "text": {
-              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c3 }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(
                 RichText,
                 {
                   value: item[col.key],
@@ -4832,10 +4831,10 @@
               ));
             }
             case "image": {
-              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c3 }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { attr, set, keys: { items: itemsKey2, src: col.key, ...col.keys }, index, size: col.size || "vga", isTemplate }));
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { attr, set, keys: { items: itemsKey2, src: col.key, ...col.keys }, index, size: col.size || "vga", isTemplate }));
             }
             case "picture": {
-              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c3 }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { index, attr, set, keys: { items: itemsKey2, ...col.keys }, sizes: col.sizes, devices: col.devices, isTemplate }));
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { index, attr, set, keys: { items: itemsKey2, ...col.keys }, sizes: col.sizes, devices: col.devices, isTemplate }));
             }
             case "items": {
               col.columns.forEach((subCol) => {
@@ -4843,7 +4842,7 @@
                   subCol.keys.subItems = col.key;
                 }
               });
-              return /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td(), key: c3 }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(
                 CP.EditItemsTable,
                 {
                   set: () => {
@@ -4856,9 +4855,12 @@
                 }
               ));
             }
+            default: {
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, item[col.key]);
+            }
           }
         }),
-        /* @__PURE__ */ wp.element.createElement("td", { className: classes.tbody.tr.td() }, /* @__PURE__ */ wp.element.createElement(
+        /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement(
           CP.ItemControl,
           {
             controls: {
@@ -4871,7 +4873,7 @@
           }
         ))
       );
-    })));
+    }))));
   };
 
   // ../blocks/_init/init/CP/components/DummyImage.jsx

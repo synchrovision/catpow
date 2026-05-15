@@ -678,7 +678,7 @@
   margin: 1.25rem auto;
   box-shadow: 0 2px 5px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
-.cp-edititemstable-thead-tr-th, .cp-edititemstable-thead-tr-td, .cp-edititemstable-tbody-tr-th, .cp-edititemstable-tbody-tr-td {
+.cp-edititemstable__thead-tr-th, .cp-edititemstable__thead-tr-td, .cp-edititemstable__tbody-tr-th, .cp-edititemstable__tbody-tr-td {
   position: relative;
   padding: 0.5em;
   min-width: 6em;
@@ -690,18 +690,18 @@
   font-size: 0.875rem;
   color: black;
 }
-.cp-edititemstable-thead-tr-th {
+.cp-edititemstable__thead-tr-th {
   background-color: var(--wp-admin-theme-color);
   color: white;
 }
-.cp-edititemstable-tbody-tr-th, .cp-edititemstable-tbody-tr-td {
+.cp-edititemstable__tbody-tr-th, .cp-edititemstable__tbody-tr-td {
   background-color: white;
 }
-.cp-edititemstable-tbody-tr-th > img, .cp-edititemstable-tbody-tr-td > img {
+.cp-edititemstable__tbody-tr-th > img, .cp-edititemstable__tbody-tr-td > img {
   width: 6em;
   height: auto;
 }
-.cp-edititemstable-tbody-tr-th .cp-itemcontrol, .cp-edititemstable-tbody-tr-td .cp-itemcontrol {
+.cp-edititemstable__tbody-tr-th .cp-itemcontrol, .cp-edititemstable__tbody-tr-td .cp-itemcontrol {
   top: 0rem;
   right: 0rem;
   bottom: 0rem;
@@ -711,13 +711,13 @@
   width: fit-content;
   height: fit-content;
 }
-.cp-edititemstable-tbody-tr-th .cp-selectresponsiveimage, .cp-edititemstable-tbody-tr-td .cp-selectresponsiveimage {
+.cp-edititemstable__tbody-tr-th .cp-selectresponsiveimage, .cp-edititemstable__tbody-tr-td .cp-selectresponsiveimage {
   width: 6.25rem;
 }
-.cp-edititemstable-tbody-tr-th .SelectPictureSources, .cp-edititemstable-tbody-tr-td .SelectPictureSources {
+.cp-edititemstable__tbody-tr-th .SelectPictureSources, .cp-edititemstable__tbody-tr-td .SelectPictureSources {
   width: 6.25rem;
 }
-.cp-edititemstable-tbody-tr:nth-child(odd) .cp-edititemstable-tbody-tr-th, .cp-edititemstable-tbody-tr:nth-child(odd) .cp-edititemstable-tbody-tr-td {
+.cp-edititemstable__tbody-tr:nth-child(odd) .cp-edititemstable__tbody-tr-th, .cp-edititemstable__tbody-tr:nth-child(odd) .cp-edititemstable__tbody-tr-td {
   background-color: aliceblue;
 }
 .cp-itemcontrol {
