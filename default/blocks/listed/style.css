@@ -28,9 +28,6 @@
   line-height: var(--cp-line-height-t-p, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-p, normal);
 }
-.wp-block-catpow-listed {
-  margin: var(--cp-margin-t-u, 0);
-}
 .wp-block-catpow-listed__item-header-text-titlecaption {
   margin: var(--cp-margin-t-c, 0);
 }
@@ -61,6 +58,7 @@
 }
 .wp-block-catpow-listed {
   padding: 0rem;
+  margin-inline: auto;
   list-style: none;
   color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
 }

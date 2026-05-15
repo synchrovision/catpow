@@ -5,8 +5,7 @@
 
 .wp-block-catpow-listed{
 	$block:&;
-	@extend %ui-block;
-	@include bnd((pd:0));
+	@include bnd((pd:0,mgi:a));
 	@include txt((l:n,c:tx));
 	&__item{
 		&-header{
