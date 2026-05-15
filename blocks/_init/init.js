@@ -4389,6 +4389,9 @@
     let { itemsKey: itemsKey2 = items2 ? "items" : null, itemClasses } = props;
     const selectiveClasses = useMemo8(() => {
       if (!triggerClasses || !triggerClasses.item) {
+        if (!props.selectiveClasses) {
+          return [];
+        }
         if (Array.isArray(props.selectiveClasses)) {
           return CP.resolveSelectiveClassesPresets(props.selectiveClasses);
         }

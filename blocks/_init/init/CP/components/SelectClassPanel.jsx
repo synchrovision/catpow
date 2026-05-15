@@ -20,6 +20,9 @@ export const SelectClassPanel = (props) => {
 	let { itemsKey = items ? "items" : null, itemClasses } = props;
 	const selectiveClasses = useMemo(() => {
 		if (!triggerClasses || !triggerClasses.item) {
+			if (!props.selectiveClasses) {
+				return [];
+			}
 			if (Array.isArray(props.selectiveClasses)) {
 				return CP.resolveSelectiveClassesPresets(props.selectiveClasses);
 			}
