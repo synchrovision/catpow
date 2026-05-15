@@ -5,23 +5,25 @@
 	category: "catpow-functional",
 	example: CP.example,
 	edit({ attributes, setAttributes, className }) {
-		const { InnerBlocks, InspectorControls } = wp.blockEditor;
+		const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody } = wp.components;
 		const { items, columns, EditMode = false } = attributes;
+
+		const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : "" });
+
+		console.log({ items, columns });
 
 		return (
 			<>
 				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
 				{EditMode ? (
-					<div className="cp-altcontent">
-						<div className="label">
-							<Icon icon="edit" />
-						</div>
-						<CP.EditItemsTable set={setAttributes} attr={attributes} columns={columns} />
+					<div {...blockProps}>
+						<CP.Label icon="edit">vars</CP.Label>
+						<CP.EditItemsTable set={setAttributes} attr={attributes} itemsKey="items" columns={columns} />
 					</div>
 				) : (
-					<div className={"embedded_content"}>
-						<div className="label">LoopVars</div>
+					<div {...blockProps}>
+						<CP.Label icon="admin-generic">LoopVars</CP.Label>
 						<InnerBlocks template={[["catpow/section", { title: "[var title]" }, [["core/paragraph", { content: "[var text]" }]]]]} />
 					</div>
 				)}
@@ -32,7 +34,16 @@
 							attr={attributes}
 							itemsKey="columns"
 							columns={[
-								{ type: "text", key: "type" },
+								{
+									type: "select",
+									key: "type",
+									options: [
+										{ label: "Text", value: "text" },
+										{ label: "Number", value: "number" },
+										{ label: "Color", value: "color" },
+										{ label: "Date", value: "date" },
+									],
+								},
 								{ type: "text", key: "key" },
 							]}
 						/>

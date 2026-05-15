@@ -7,17 +7,28 @@
     category: "catpow-functional",
     example: CP.example,
     edit({ attributes, setAttributes, className }) {
-      const { InnerBlocks, InspectorControls } = wp.blockEditor;
+      const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody } = wp.components;
       const { items, columns, EditMode = false } = attributes;
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(CP.EditItemsTable, { set: setAttributes, attr: attributes, columns })) : /* @__PURE__ */ wp.element.createElement("div", { className: "embedded_content" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, "LoopVars"), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/section", { title: "[var title]" }, [["core/paragraph", { content: "[var text]" }]]]] })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u5909\u6570" }, /* @__PURE__ */ wp.element.createElement(
+      const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : "" });
+      console.log({ items, columns });
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }, "vars"), /* @__PURE__ */ wp.element.createElement(CP.EditItemsTable, { set: setAttributes, attr: attributes, itemsKey: "items", columns })) : /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "admin-generic" }, "LoopVars"), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/section", { title: "[var title]" }, [["core/paragraph", { content: "[var text]" }]]]] })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u5909\u6570" }, /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           set: setAttributes,
           attr: attributes,
           itemsKey: "columns",
           columns: [
-            { type: "text", key: "type" },
+            {
+              type: "select",
+              key: "type",
+              options: [
+                { label: "Text", value: "text" },
+                { label: "Number", value: "number" },
+                { label: "Color", value: "color" },
+                { label: "Date", value: "date" }
+              ]
+            },
             { type: "text", key: "key" }
           ]
         }
