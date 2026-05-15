@@ -71,6 +71,7 @@ foreach(['wp_enqueue_scripts','admin_enqueue_scripts'] as $hook){
 	add_action($hook,function(){
 		wp_print_inline_script_tag(json_encode([
 			'imports'=>[
+				'@wordpress/interactivity'=>includes_url().'/js/dist/script-modules/interactivity/index.min.js',
 				'@catpow/'=>plugins_url().'/catpow/mjs/'
 			]
 		],0700),['type'=>'importmap','id'=>'cp-importmap']);
