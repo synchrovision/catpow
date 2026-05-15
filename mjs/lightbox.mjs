@@ -29,6 +29,10 @@ const { state, actions, callbacks } = store("@catpow/lightbox", {
 				return;
 			}
 			contentsContainer.appendChild(content);
+			return content;
+		},
+		get(id) {
+			return contentsContainer.querySelector(`#${id}`);
 		},
 		open(id) {
 			state.currentContentsId = id;
