@@ -12,7 +12,7 @@ class form_section extends form{
 	
 	public function render($slug=false,$vars=false){
 		?>
-		<<?=$this->tag?> class="cpform_section" data-role="cpform_section" data-section-id="<?= $this->form_id?>">
+		<<?=$this->tag?> class="cpform-section" data-role="cpform-section" data-section-id="<?= $this->form_id?>">
 			<?php $this->inc($slug,$vars); ?>
 		</<?=$this->tag?>>
 		<?php

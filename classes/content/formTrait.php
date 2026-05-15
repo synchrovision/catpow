@@ -71,13 +71,13 @@ trait formTrait{
 	
 	/*render*/
 	public function render($slug=false,$vars=false){
-		wp_enqueue_script('cpform');
+		\cp::enqueue_script_module('mjs/cpform.mjs');
 		wp_enqueue_script('cpform.nonce');
 		\Catpow\api::register_nonce('form/post');
 		?>
 		<form action="<?= home_url(); ?>" method="get" id="<?= $this->form_id ?>" class="cpform" enctype="multipart/form-data">
 			<input type="hidden" name="cpform_id" value="<?= $this->form_id ?>"/>
-			<div class="cpform_content" data-role="cpform_content" data-form-id="<?= $this->form_id ?>">
+			<div class="cpform-content" data-role="cpform-content" data-form-id="<?= $this->form_id ?>">
 				<?php $this->inc($slug,$vars); ?>
 			</div>
 		</form>
@@ -116,7 +116,7 @@ trait formTrait{
 		if(is_null($target)){$target=!empty($param)?'action':(is_a($this,form_section::class)?'section':'form');}
 		if(is_null($ignore_message)){$ignore_message=in_array($action,['close','cancel','back','prev','reset']);}
 		if(is_array($callback)){$callback=implode(',',$callback);}
-		$rtn=sprintf('data-role="cpform_submit_%s" data-callback="%s"',$target,$callback??'replace');
+		$rtn=sprintf('data-role="cpform-submit-%s" data-callback="%s"',$target,$callback??'replace');
 		if(!empty($action)){$this->allow_action($action);$rtn.=' data-action="'.$action.'"';}
 		if($ignore_message)$rtn.=' data-ignore-message=1';
 		if($param)$rtn.=sprintf(' data-param=\'%s\'',json_encode((array)$param));
@@ -131,7 +131,7 @@ trait formTrait{
 		echo '</ul>';
 	}
 	public function buttons_attr($action=false,$key='paged',$callback='replace'){
-		$rtn=sprintf('data-role="cpform_action_submit_group" data-param-key="%s" data-callback="%s"',$key,$callback);
+		$rtn=sprintf('data-role="cpform-action-submit-group" data-param-key="%s" data-callback="%s"',$key,$callback);
 		if(!empty($action)){$this->allow_action($action);$rtn.=' data-action="'.$action.'"';}
 		return $rtn;
 	}
@@ -151,7 +151,7 @@ trait formTrait{
 		return $this->div('navs',$content);
 	}
 	public function div($name,$content){
-		printf('<div class="cpform_%1$s" data-role="cpform_%1$s" data-form-id="%2$s">',$name,$this->form_id);
+		printf('<div class="cpform-%1$s" data-role="cpform-%1$s" data-form-id="%2$s">',$name,$this->form_id);
 		if(!empty($content)){
 			if(is_callable($content)){$content();}
 			elseif(!\cp::get_template_part($this->path.'/'.$this->path_data['file_name'].'-'.$content.'.php')){echo $content;}
