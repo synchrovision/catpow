@@ -17,7 +17,8 @@ class posts implements iSetup{
 			}
 		});
 		ksort($contents);
-		array_walk($contents,function($post_data,$path){
+		$count=0;
+		array_walk($contents,function($post_data,$path)use(&$count){
 			if(empty(\cp::get_post($path))){
 				$post_data=array_merge(\cp::get_default_post_data($path),$post_data);
 				$post_id=wp_insert_post($post_data);
@@ -38,7 +39,10 @@ class posts implements iSetup{
 					update_option('page_on_front',$post_id);
 				}
 				printf("page created : %s <br/>",$path);
+				$count++;
 			}
 		});
+		if($count<1){echo 'no posts created';}
+		else{printf("%d posts created",$count);}
 	}
 }
