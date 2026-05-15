@@ -12,7 +12,7 @@ wp.blocks.registerBlockType("catpow/loopblock", {
 		const { content_path, query, AltMode = false } = attributes;
 
 		const blockProps = useBlockProps({
-			className: clsx("loop-block", AltMode ? "cp-altcontent altMode" : "cp-embeddedcontent"),
+			className: clsx("loop-block", AltMode ? "cp-altcontent" : "cp-embeddedcontent"),
 		});
 
 		return (
@@ -30,7 +30,7 @@ wp.blocks.registerBlockType("catpow/loopblock", {
 					/>
 				</BlockControls>
 				<div {...blockProps}>
-					<div className="label">{AltMode ? <Icon icon="welcome-comments" /> : content_path}</div>
+					<CP.Label icon="welcome-comments">{content_path}</CP.Label>
 					<InnerBlocks template={[["catpow/loopblockcontent"], ["catpow/loopblockcontent", { name: "on_empty" }]]} templateLock="all" />
 				</div>
 				<InspectorControls>
