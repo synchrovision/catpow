@@ -55,12 +55,73 @@ export const EditItemsTable = (props) => {
 							>
 								{columns.map((col, c) => {
 									switch (col.type) {
+										case "select": {
+											return (
+												<td key={c}>
+													<select
+														value={item[col.key]}
+														onChange={(e) => {
+															item[col.key] = e.target.value;
+															save();
+														}}
+													>
+														{col.options.map((option, o) => (
+															<option key={o} value={option.value}>
+																{option.label}
+															</option>
+														))}
+													</select>
+												</td>
+											);
+										}
 										case "text": {
 											return (
 												<td key={c}>
 													<RichText
 														value={item[col.key]}
 														onChange={(value) => {
+															item[col.key] = value;
+															save();
+														}}
+													/>
+												</td>
+											);
+										}
+										case "number": {
+											return (
+												<td key={c}>
+													<input
+														type="number"
+														value={item[col.key]}
+														onChange={({ target: { value } }) => {
+															item[col.key] = value;
+															save();
+														}}
+													/>
+												</td>
+											);
+										}
+										case "color": {
+											return (
+												<td key={c}>
+													<input
+														type="color"
+														value={item[col.key]}
+														onChange={({ target: { value } }) => {
+															item[col.key] = value;
+															save();
+														}}
+													/>
+												</td>
+											);
+										}
+										case "date": {
+											return (
+												<td key={c}>
+													<input
+														type="date"
+														value={item[col.key]}
+														onChange={({ target: { value } }) => {
 															item[col.key] = value;
 															save();
 														}}

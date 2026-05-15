@@ -4818,12 +4818,64 @@
         },
         columns.map((col, c3) => {
           switch (col.type) {
+            case "select": {
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(
+                "select",
+                {
+                  value: item[col.key],
+                  onChange: (e) => {
+                    item[col.key] = e.target.value;
+                    save();
+                  }
+                },
+                col.options.map((option, o) => /* @__PURE__ */ wp.element.createElement("option", { key: o, value: option.value }, option.label))
+              ));
+            }
             case "text": {
               return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(
                 RichText,
                 {
                   value: item[col.key],
                   onChange: (value2) => {
+                    item[col.key] = value2;
+                    save();
+                  }
+                }
+              ));
+            }
+            case "number": {
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(
+                "input",
+                {
+                  type: "number",
+                  value: item[col.key],
+                  onChange: ({ target: { value: value2 } }) => {
+                    item[col.key] = value2;
+                    save();
+                  }
+                }
+              ));
+            }
+            case "color": {
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(
+                "input",
+                {
+                  type: "color",
+                  value: item[col.key],
+                  onChange: ({ target: { value: value2 } }) => {
+                    item[col.key] = value2;
+                    save();
+                  }
+                }
+              ));
+            }
+            case "date": {
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(
+                "input",
+                {
+                  type: "date",
+                  value: item[col.key],
+                  onChange: ({ target: { value: value2 } }) => {
                     item[col.key] = value2;
                     save();
                   }
