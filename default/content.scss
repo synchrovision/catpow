@@ -401,8 +401,8 @@ del{
 		@include stripe(ex);
 	}
 	&-tag{
-		@include bnd((d:ib,pd:.2em 1em,mg:0 .2em));
-		@include bdr((r:1em));
+		@extend %label-component;
+		@include bnd((d:ib));
 		@include bg((c:mx));
 		@include txt((c:bx,h:1em,s:n));
 		@include usr((c:p));
