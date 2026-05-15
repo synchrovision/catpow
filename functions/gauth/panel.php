@@ -7,20 +7,12 @@ use Catpow\gauth\cpgc;
 <dl>
 	<dt><i class="fab fa-google"></i>API key</dt>
 	<dd><?php input('api_key'); ?></dd>
-</dl>
-<dl>
 	<dt><i class="fab fa-google"></i>Application Name</dt>
 	<dd><?php input('application_name'); ?></dd>
-</dl>
-<dl>
 	<dt><i class="fab fa-google"></i>client ID</dt>
 	<dd><?php input('client_id'); ?></dd>
-</dl>
-<dl>
 	<dt><i class="fab fa-google"></i>client secret</dt>
 	<dd><?php input('client_secret'); ?></dd>
-</dl>
-<dl>
 	<dt><i class="fab fa-google"></i>scopes</dt>
 	<dd><?php input('scopes'); ?></dd>
 </dl>

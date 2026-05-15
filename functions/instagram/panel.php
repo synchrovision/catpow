@@ -2,26 +2,20 @@
 namespace Catpow;
 use Catpow\instagram\cpig;
 ?>
-<?php foreach(loop('instagram_conf') as $meta): ?>
 <dl>
+<?php foreach(loop('instagram_conf') as $meta): ?>
 	<dt><i class="fab fa-instagram"></i>App ID</dt>
 	<dd><?php input('app_id'); ?></dd>
-</dl>
-<dl>
 	<dt><i class="fab fa-instagram"></i>App Secret</dt>
 	<dd><?php input('app_secret'); ?></dd>
-</dl>
-<dl>
 	<dt><i class="fab fa-instagram"></i>scopes</dt>
 	<dd><?php input('scopes'); ?></dd>
-</dl>
 <?php if(!empty(cpig::get_users())): ?>
-<dl>
 	<dt><i class="fab fa-wordpress"></i>Primary User</dt>
 	<dd><?php input('primary_users'); ?></dd>
-</dl>
 <?php endif; ?>
 <?php endforeach; ?>
+</dl>
 <ul>
 	<li>
 		<p class="caption">

@@ -2,12 +2,8 @@
 <dl>
 	<dt><i class="fa fa-facebook-square"></i>app ID</dt>
 	<dd><?php input('fb_app_id'); ?></dd>
-</dl>
-<dl>
 	<dt><i class="fa fa-facebook-square"></i>app secret</dt>
 	<dd><?php input('fb_app_secret'); ?></dd>
-</dl>
-<dl>
 	<dt><i class="fa fa-facebook-square"></i>access token</dt>
 	<dd><?php input('fb_access_token'); ?></dd>
 </dl>
@@ -29,8 +25,6 @@
 	<dd>
 		<textarea cols="100" rows="1" readonly><?=facebook\cpfb::get_login_callback_url()?></textarea>
 	</dd>
-</dl>
-<dl>
 	<dt>ログアウト</dt>
 	<dd>
 		<textarea cols="100" rows="1" readonly><?=facebook\cpfb::get_logout_callback_url()?></textarea>

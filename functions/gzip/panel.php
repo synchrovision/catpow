@@ -1,5 +1,5 @@
 <?php namespace Catpow; ?>
-<ul>
+<ol>
     <li>
         <ul class="cp-admin-buttons">
             <li class="item refresh">
