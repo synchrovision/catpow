@@ -1,28 +1,18 @@
 @import 'admin_style_config.scss';
 
-.editor-styles-wrapper{
-	ul.wp-block-catpow-materials{
-		@include bnd((mg:0 a));
-		li.item.group{
-			@include bnd((p:r));
-			&>.itemControl{
-				@include bnd((p:a,t:0,l:-80));
-			}
-			li.item{
-				@include bnd((p:r));
-				&>.itemControl{
-					@include bnd((p:a,t:0,r:-80));
-				}
-			}
-			&>.link{
-				@include bnd((p:a,t:0,b:0,l:0,r:0,mgt:a,h:2em));
-				input{
-					@include bnd((mg:0 a));
-					@include txt((c:t));
-				}
-			}
+.wp-block-catpow-materials{
+	&__group{
+		@include bnd((p:r));
+		&>.cp-itemcontrol{
+			@include bnd((p:a,t:calc(0.5lh - 0.5em),l:-80));
 		}
-		&.edit{
+		&-items{
+			&-item{
+				@include bnd((p:r));
+				&>.cp-itemcontrol{
+					@include bnd((p:a,t:calc(0.5lh - 0.5em),r:-80));
+				}
+			}
 		}
 	}
 }

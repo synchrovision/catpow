@@ -1,0 +1,53 @@
+@import 'admin_style_config.scss';
+@import "fontawesome.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
+
+.wp-block-catpow-materials{
+	$block: &;
+	@extend %paragraph;
+	@include col((w:i,g:1.5lh));
+	@include txt((l:n));
+	&:not(.has-margin){
+		@include bnd((mg:0 a));
+	}
+	&__group{
+		$group:&;
+		@include bnd((p:r,bi:a,pdb:.5lh));
+		&.has-label{
+			#{$group}{
+				&-label{
+					@extend %heading;
+					@include bnd((mg:0 a));
+				}
+				&-items{
+					@include bnd((mgl:5,pdl:10));
+					@include bdr((p:l,s:s,w:1,c:l));
+				}
+			}
+		}
+		&-items{
+			@include bnd((mg:0,pd:0));
+			&-item{
+				@include bnd((p:r));
+				@include flx((w:w,ai:c));
+				@include txt((l:n));
+				&-title{
+					@extend %paragraph;
+					@include bnd((f:0 0 fit,mg:0 a));
+				}
+				&-line{
+					@include bnd((f:1 1 a,h:0,mg:0 .5em));
+					@include bdr((p:t,s:d,w:.1em,c:tx));
+				}
+				&-amount{
+					@include bnd((f:0 0 fit));
+				}
+				&-caption{
+					@extend %caption;
+					@include bnd((f:1 1 f));
+				}
+			}
+		}
+	}
+}
