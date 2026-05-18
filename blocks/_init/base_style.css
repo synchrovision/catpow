@@ -717,7 +717,7 @@
 .cp-edititemstable__tbody-tr-th .SelectPictureSources, .cp-edititemstable__tbody-tr-td .SelectPictureSources {
   width: 6.25rem;
 }
-.cp-edititemstable__tbody-tr:nth-child(odd) .cp-edititemstable__tbody-tr-th, .cp-edititemstable__tbody-tr:nth-child(odd) .cp-edititemstable__tbody-tr-td {
+.cp-edititemstable__tbody-tr:nth-child(odd) > .cp-edititemstable__tbody-tr-th, .cp-edititemstable__tbody-tr:nth-child(odd) > .cp-edititemstable__tbody-tr-td {
   background-color: aliceblue;
 }
 .cp-itemcontrol {

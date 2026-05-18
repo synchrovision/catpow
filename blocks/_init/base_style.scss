@@ -430,7 +430,7 @@ $colors:(
 						@include bnd((w:100));
 					}
 				}
-				&:nth-child(odd) &{
+				&:nth-child(odd) > &{
 					&-th,&-td{
 						@include bg((c:aliceblue));
 					}
